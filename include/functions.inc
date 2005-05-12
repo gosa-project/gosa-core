@@ -1505,7 +1505,7 @@ function get_gosa_version()
     return (sprintf(_("GOsa development snapshot (Rev %s)"), $revision));
   } else {
     $release= preg_replace('%^.*/([^/]+)/include/functions.inc.*$%', '\1', $svn_path);
-    return (sprintf(_("GOsa $release (Rev %s)"), $revision));
+    return (sprintf(_("GOsa $release"), $revision));
   }
 }
 
