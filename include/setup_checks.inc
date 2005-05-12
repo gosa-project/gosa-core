@@ -178,7 +178,7 @@ function schema_check($server, $admin, $password,$aff=0)
     $messages['kolab']= _("Support for <b>Kolab</b> disabled, no schema seems to be installed, setting mail-method to cyrus");
     $tmp = array_flip($_SESSION['ldapconf']['mail_methods']);
     $_SESSION['ldapconf']['mail']=$tmp['cyrus'];
-    $affich['kolab']=$messages['kolab']."<td class=\"check\"></td>";
+    $affich['kolab']=$messages['kolab']."<td class=\"check\">kolab2.schema</td>";
   }else{$affich['kolab']=_("Support for <b>Kolab</b> enabled<td class=\"check\">gofon.schema</td>");}
 
 
