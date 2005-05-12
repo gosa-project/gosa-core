@@ -1494,14 +1494,18 @@ function validate($string)
 function get_gosa_version()
 {
   /* Variables filled in by subversion */
-  $svn_path = "$HeadURL$";
-  $svn_revision = "$Revision$";
+  $svn_path = '$HeadURL$';
+  $svn_revision = '$Revision$';
+
+  /* Extract informations */
+  $revision= preg_replace('/^[^0-9]*([0-9]+)[^0-9]*$/', '\1', $svn_revision);
 
   /* Release or development? */
   if (preg_match('%/gosa/trunk/%', $svn_path)){
-    return ("Development snapshot (rev $svn_revision)");
+    return ("GOsa development snapshot (Rev $revision)");
   } else {
-    return ("Release $releaase (rev $svn_revision)");
+    $release= preg_replace('%^.*/([^/]+)/include/functions.inc.*$%', '\1', $svn_path);
+    return ("GOsa $release (Rev $revision)");
   }
 }
 
