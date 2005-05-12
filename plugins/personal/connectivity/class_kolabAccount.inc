@@ -11,26 +11,32 @@ class kolabAccount extends plugin
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* Kolab attributes */
-  var $kolabInvitationPolicy= "ACT_MANUAL";
+  var $kolabInvitationPolicy= array();
   var $kolabFreeBusyFuture= 60;
   var $unrestrictedMailSize= 0;
   var $calFBURL= "";
   var $kolabDelegate= array();
 
   /* attribute list for save action */
-  var $attributes= array( "kolabInvitationPolicy", "kolabFreeBusyFuture",
-                          "unrestrictedMailSize", "calFBURL");
+  var $attributes= array( "kolabFreeBusyFuture", "unrestrictedMailSize", "calFBURL");
   var $objectclasses= array();
 
   function kolabAccount ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
 
-    /* Pull delegation array */
-    if (isset($this->attrs["kolabDelegate"]["count"])){
-      for ($i= 0; $i<$this->attrs["kolabDelegate"]["count"]; $i++){
-        array_push($this->kolabDelegate, $this->attrs["kolabDelegate"][$i]);
+    /* Pull arrays */
+    foreach(array("kolabDelegate", "kolabInvitationPolicy") as $attr){
+      if (isset($this->attrs["$attr"]["count"])){
+        for ($i= 0; $i<$this->attrs["$attr"]["count"]; $i++){
+          array_push($this->$attr, $this->attrs["$attr"][$i]);
+        }
       }
+    }
+
+    /* If this one is empty, preset with ACT_MANUAL for anonymous users */
+    if (count ($this->kolabInvitationPolicy) == 0){
+       $this->kolabInvitationPolicy= array("ACT_MANUAL");
     }
 
   }
@@ -117,6 +123,47 @@ class kolabAccount extends plugin
     /* Transfer delegation list */
     $smarty->assign("kolabDelegate", $this->kolabDelegate);
 
+    /* Create InvitationPolicy table */
+    $invitation= "";
+    $nr= 0;
+    $acl= chkacl($this->acl, "kolabInvitationPolicy");
+    foreach ($this->kolabInvitationPolicy as $entry){
+      $invitation.= "<tr><td>";
+
+      /* The default entry does not have colons... */
+      if (!preg_match('/:/', $entry)){
+        $invitation.= _("Anonymous");
+        $mode= $entry;
+      } else {
+        $name= preg_replace('/:.*$/', '', $entry);
+        $mode= preg_replace('/^[^:]+: */', '', $entry);
+        $invitation.= "<input name=\"address$nr\" size=25 maxlength=60 $acl value=\"$name\">";
+      }
+      $invitation.= "</td>";
+
+      /* Add mode switch */
+      $invitation.= "<td><select size=\"1\" name=\"policy$nr\" $acl>";
+      foreach($policies as $key => $value){
+        if ($key == $mode){
+          $invitation.= "<option value=\"$key\" selected>$value</option>";
+        } else {
+          $invitation.= "<option value=\"$key\">$value</option>";
+        }
+      }
+      
+      /* Assign buttons */
+      $button= "";
+      if ($nr == count($this->kolabInvitationPolicy)-1){
+        $button= "[Add button]";
+      } elseif ($nr != 0) {
+        $button= "[Remove button]";
+      }
+      
+      $invitation.= "</select>&nbsp;$button</td></tr>\n";
+      $nr++;
+    }
+    $smarty->assign("invitation", $invitation);
+
     $display.= $smarty->fetch (get_template_path('kolab.tpl', TRUE, dirname(__FILE__)));
     return ($display);
   }
@@ -160,6 +207,22 @@ class kolabAccount extends plugin
     }
 
     plugin::save_object();
+
+    /* Save changes done in invitation policies */
+    $nr= 0;
+    $this->kolabInvitationPolicy= array();
+    while (isset($_POST["policy$nr"])){
+
+      /* Anonymous? */
+      if (!isset($_POST["address$nr"])){
+        $this->kolabInvitationPolicy[]= $_POST["policy$nr"];
+      } else {
+        $this->kolabInvitationPolicy[]= $_POST["address$nr"].": ".$_POST["policy$nr"];
+      }
+      
+      $nr++;
+    }
+    
   }
 
 

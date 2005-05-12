@@ -8,6 +8,8 @@ Things to fix in 2.3.9:
   - shared folders
   - server
   - setup
+    * check is present
+	* modify connectivity tab!
 
 * Make it "barrierefrei"
 

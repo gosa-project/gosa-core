@@ -18,18 +18,15 @@
         {$kolabDelegateACL}>&nbsp;
    <input type=submit value="{t}Delete{/t}" name="delete_delegation"
         {$kolabDelegateACL}>
+   <p>
+    <b>{t}Mail size{/t}</b><br>
+     &nbsp;<input type="checkbox" name="unrestrictedMailSize" value="1" {$unrestrictedMailSizeACL} {$unrestrictedMailSizeState}> {t}No mail size restriction for this account{/t}
+    </p>
   </td>
   <td rowspan=2 style="border-left:1px solid #A0A0A0">
    &nbsp;
   </td>
   <td style="vertical-align:top;">
-<p>
- <b>{t}Invitation{/t}</b><br>
- &nbsp;{t}Policy{/t} &nbsp; 
- <select size="1" name="kolabInvitationPolicy" {$kolabInvitationPolicyACL}>
-  {html_options options=$policies selected=$kolabInvitationPolicy}
- </select>
-</p>
 <p>
  <b>{t}Free Busy information{/t}</b><br>
  <table>
@@ -44,8 +41,10 @@
  </table>
 </p>
 <p>
- <b>{t}Misc{/t}</b><br>
- &nbsp;<input type="checkbox" name="unrestrictedMailSize" value="1" {$unrestrictedMailSizeACL} {$unrestrictedMailSizeState}> {t}No mail size restriction{/t}
+ <b>{t}Invitation policy{/t}</b><br>
+ <table>
+   {$invitation}
+ </table>
 </p>
   </td>
  </tr>
