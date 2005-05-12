@@ -228,9 +228,6 @@ $smarty->assign ("server_id", $selected);
 
 /* show login screen */
 $smarty->display (get_template_path('headers.tpl'));
-if (isset($_GET['version'])){
-  require_once("version.inc");
-}
 $smarty->assign ("PHPSESSID", session_id());
 if (isset($_SESSION['errors'])){
   $smarty->assign("errors", $_SESSION['errors']);

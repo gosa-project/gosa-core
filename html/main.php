@@ -27,7 +27,6 @@ function raiseError($errno, $errstr, $errfile, $errline)
 //set_error_handler('raiseError');
 /* This will be removed */
 
-
 /* Basic setup, remove eventually registered sessions */
 $timing= array();
 require_once ("../include/php_setup.inc");
@@ -231,9 +230,6 @@ if (isset($plug)){
   $smarty->assign ("plug", "");
 }
 $smarty->display(get_template_path('headers.tpl'));
-if (isset($_GET['version'])){
-  require_once("version.inc");
-}
 
 /* React on clicks */
 if ($_SERVER["REQUEST_METHOD"] == "POST"){

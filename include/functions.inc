@@ -1491,9 +1491,19 @@ function validate($string)
   return (strip_tags(preg_replace('/\0/', '', $string)));
 }
 
+function get_gosa_version()
+{
+  /* Variables filled in by subversion */
+  $svn_path = "$HeadURL$";
+  $svn_revision = "$Revision$";
 
-
-  
+  /* Release or development? */
+  if (preg_match('%/gosa/trunk/%', $svn_path)){
+    return ("Development snapshot (rev $svn_revision)");
+  } else {
+    return ("Release $releaase (rev $svn_revision)");
+  }
+}
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

@@ -26,4 +26,6 @@ if (!$remove_lock){
 	$display= $smarty->fetch(get_template_path('welcome.tpl', TRUE));
 }
 
+echo get_gosa_version();
+
 ?>
