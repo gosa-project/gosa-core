@@ -1502,10 +1502,10 @@ function get_gosa_version()
 
   /* Release or development? */
   if (preg_match('%/gosa/trunk/%', $svn_path)){
-    return ("GOsa development snapshot (Rev $revision)");
+    return (sprintf(_("GOsa development snapshot (Rev %s)"), $revision));
   } else {
     $release= preg_replace('%^.*/([^/]+)/include/functions.inc.*$%', '\1', $svn_path);
-    return ("GOsa $release (Rev $revision)");
+    return (sprintf(_("GOsa $release (Rev %s)"), $revision));
   }
 }
 
