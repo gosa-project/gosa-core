@@ -39,6 +39,7 @@ function view_schema_check($table)
 function schema_check($server, $admin, $password,$aff=0)
 {
   global $config;
+  
 
   $messages= array();
   $required_classes= array(
@@ -69,7 +70,8 @@ function schema_check($server, $admin, $password,$aff=0)
       "goCupsServer"          => array("version" => "2.1", "class" => array("posixAccount", "terminals"),),
       "goImapServer"          => array("version" => "2.1", "class" => array("mailAccount", "mailgroup"),"file" => "gosa+samba3.schema"),
       "goKrbServer"           => array("version" => "2.1"),
-      "goFaxServer"           => array("version" => "2.1", "class" => "gofaxAccount","file" => "gofax.schema")
+      "goFaxServer"           => array("version" => "2.1", "class" => "gofaxAccount","file" => "gofax.schema"),
+       
         );
 
   /* Build LDAP connection */
@@ -169,8 +171,21 @@ function schema_check($server, $admin, $password,$aff=0)
     $affich['phoneaccount']=$messages['phoneaccount']."<td class=\"check\">gofon.schema</td>";
   }else{$affich['phoneaccount']=_("Support for <b>gofon</b> enabled<td class=\"check\">gofon.schema</td>");}
 
+  
+  if(($_SESSION['ldapconf']['mail_methods'][$_SESSION['ldapconf']['mail']] == "kolab"))
+  if(!isset($objectclasses['kolabInetOrgPerson']))
+    {
+    $messages['kolab']= _("Support for <b>Kolab</b> disabled, no schema seems to be installed, setting mail-method to cyrus");
+    $tmp = array_flip($_SESSION['ldapconf']['mail_methods']);
+    $_SESSION['ldapconf']['mail']=$tmp['cyrus'];
+    $affich['kolab']=$messages['kolab']."<td class=\"check\"></td>";
+  }else{$affich['kolab']=_("Support for <b>Kolab</b> enabled<td class=\"check\">gofon.schema</td>");}
+
+
   if($aff==0)return ($messages);
   else return(array_merge($affich,$affich2));
+
+
 }
 
 
@@ -345,21 +360,6 @@ $msg.= check (  $faults, _("PHP.ini check -> expose_php"),
 $msg.= check (  $faults, _("PHP.ini check -> magic_quotes_gpc"),
       _("Security option, php will escape all quotes in strings ."),
         $magic_quotes_gpc['local_value'],0,false);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   return $msg;
 }
@@ -850,10 +850,11 @@ function show_setup_page4($withoutput = true)
   if(isset($_POST['check']))
   {
     $ldap= new LDAP($_SESSION['ldapconf']['admin'], $_SESSION['ldapconf']['password'], $_SESSION['ldapconf']['uri']);
-
+  
+    if($withoutput){
     $m= schema_check($_SESSION['ldapconf']['uri'], $_SESSION['ldapconf']['admin'], $_SESSION['ldapconf']['password']);
     $_SESSION['classes']= $m;
-
+    }
 
     if ($ldap->error != "Success")
     {
@@ -894,7 +895,6 @@ function show_setup_page4($withoutput = true)
 // and wants you to download the gosa.conf ....
 function show_setup_page5($withoutput=true)
 {
-
   // Get ldapconf
   $ldapconf= $_SESSION['ldapconf'];
 
@@ -909,7 +909,7 @@ function show_setup_page5($withoutput=true)
   $message = "";
   $message.="<table class=\"check\">";
   $m= schema_check($ldapconf['uri'], $ldapconf['admin'], $ldapconf['password'],1);
-
+  
   if($withoutput)
   {
     $smarty->assign ("schemas", view_schema_check($m));
