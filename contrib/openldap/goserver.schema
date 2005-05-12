@@ -1,0 +1,228 @@
+## 
+##
+## goserver.schema - Needed by the GONICUS System Administator
+##
+## Version 030403
+##
+##
+## Maintainer:		Lars Scheiter 	(scheiter@GONICUS.de)
+##			Cajus Pollmeier	(pollmeier@GONICUS.de)
+##
+##
+
+
+# Attributes for the Gonicus Terminal Server Class
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.1 NAME 'goXdmcpIsEnabled'
+	DESC 'Indicates if the server is enabled for XDMCP queries'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.2 NAME 'goFontPath'
+	DESC 'Fontserver Entry'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+
+# Attributes for common Gonicus Server Class
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.4 NAME 'goExportEntry'
+	DESC 'Provides a NFS export entry'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.9 NAME 'goSyslogSection'
+	DESC 'What sections wants the server for its syslog service? i.e. *.*'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.10 NAME 'goTimeSource'
+	DESC 'List of time sources'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.11 NAME 'goSpoolPath'
+	DESC 'Provides a spool path for printing services'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.12 NAME 'goLdapBase'
+	DESC 'Base to use for this LDAP server'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.13 NAME 'goImapName'
+	DESC 'Name of IMAP server appearing in GOsa'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.14 NAME 'goImapConnect'
+	DESC 'PHP connect string for IMAP server'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.15 NAME 'goImapAdmin'
+	DESC 'IMAP admin account'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.16 NAME 'goImapPassword'
+	DESC 'IMAP admin password'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.17 NAME 'goImapSieveServer'
+	DESC 'Cyrus sieve server address or name'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.18 NAME 'goImapSievePort'
+	DESC 'Cyrus sieve server port'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.19 NAME 'goKrbRealm'
+	DESC 'Default Kerberos realm to use for this server'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.20 NAME 'goKrbAdmin'
+	DESC 'Admin principal for kerberos server'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.21 NAME 'goKrbPassword'
+	DESC 'Admin password for kerberos server'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.22 NAME 'goFaxAdmin'
+	DESC 'Admin principal for fax server'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.23 NAME 'goFaxPassword'
+	DESC 'Admin password for fax server'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.24 NAME 'goLogAdmin'
+	DESC 'Admin principal for log server'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.25 NAME 'goLogPassword'
+	DESC 'Admin password for log server'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.26 NAME 'goFonAdmin'
+        DESC 'Admin principal for fon server'
+        EQUALITY caseExactIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+        SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.27 NAME 'goFonPassword'
+        DESC 'Admin password for fon server'
+        EQUALITY caseExactIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+        SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.28 NAME 'goFonAreaCode'
+        DESC 'Store area code'
+        EQUALITY caseExactIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+        SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.29 NAME 'goFonCountryCode'
+        DESC 'Store country code'
+        EQUALITY caseExactIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+        SINGLE-VALUE)
+
+##
+##		Objectclasses
+##
+
+# Terminal Server description 
+objectclass (1.3.6.1.4.1.10098.1.2.1.16 NAME 'goTerminalServer' SUP top AUXILIARY
+	DESC 'Terminal server description (v2.1)'
+	MUST ( cn $ goXdmcpIsEnabled $ goFontPath )
+	MAY  ( description ))
+
+# NFS Server description
+objectclass (1.3.6.1.4.1.10098.1.2.1.19 NAME 'goNfsServer' SUP top AUXILIARY
+	DESC 'NFS server description (v2.1)'
+	MUST ( cn )
+	MAY  ( goExportEntry $ description ))
+
+# Time Server description
+objectclass (1.3.6.1.4.1.10098.1.2.1.20 NAME 'goNtpServer' SUP top AUXILIARY
+	DESC 'Time server description (v2.1)'
+	MUST ( cn )
+        MAY  ( goTimeSource $ description ))
+
+# Syslog Server description
+objectclass (1.3.6.1.4.1.10098.1.2.1.21 NAME 'goSyslogServer' SUP top AUXILIARY
+	DESC 'Syslog server description (v2.1)'
+	MUST ( cn )
+	MAY  ( goSyslogSection $ description ))
+
+# LDAP Server description
+objectclass (1.3.6.1.4.1.10098.1.2.1.22 NAME 'goLdapServer' SUP top AUXILIARY
+	DESC 'LDAP server description (v2.1)'
+	MUST ( cn )
+	MAY  ( goLdapBase $ description ))
+
+# CUPS Server description
+objectclass (1.3.6.1.4.1.10098.1.2.1.23 NAME 'goCupsServer' SUP top AUXILIARY
+	DESC 'CUPS server description (v2.1)'
+	MUST ( cn )
+	MAY  ( description ))
+
+# IMAP Server description
+objectclass (1.3.6.1.4.1.10098.1.2.1.24 NAME 'goImapServer' SUP top AUXILIARY
+	DESC 'IMAP server description (v2.1)'
+	MUST ( cn $ goImapName $ goImapConnect $ goImapAdmin $ goImapPassword )
+	MAY  ( goImapSieveServer $ goImapSievePort $ description ))
+
+# Kerberos Server description
+objectclass (1.3.6.1.4.1.10098.1.2.1.25 NAME 'goKrbServer' SUP top AUXILIARY
+	DESC 'Kerberos server description (v2.1)'
+	MUST ( cn $ goKrbRealm $ goKrbAdmin $ goKrbPassword )
+	MAY  ( description ))
+
+# Fax Server description
+objectclass (1.3.6.1.4.1.10098.1.2.1.26 NAME 'goFaxServer' SUP top AUXILIARY
+	DESC 'Fax server description (v2.1)'
+	MUST ( cn $ goFaxAdmin $ goFaxPassword )
+	MAY  ( description ))
+
+# Common server class
+objectclass (1.3.6.1.4.1.10098.1.2.1.27 NAME 'goServer' SUP top STRUCTURAL
+	DESC 'Server description (v2.1)'
+	MUST ( cn )
+	MAY  ( description $ macAddress ))
+
+# LogDB Server description
+objectclass (1.3.6.1.4.1.10098.1.2.1.28 NAME 'goLogDBServer' SUP top AUXILIARY
+	DESC 'Log DB server description (v2.2)'
+	MUST ( cn $ goLogAdmin $ goLogPassword ))
+
+# Fon Server description
+objectclass (1.3.6.1.4.1.10098.1.2.1.29 NAME 'goFonServer' SUP top AUXILIARY
+        DESC 'Fon server description (v2.2)'
+        MUST ( cn $ goFonAdmin $ goFonPassword $ goFonAreaCode $ goFonCountryCode )
+        MAY  ( description ))
+

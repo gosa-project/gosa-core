@@ -1,0 +1,6 @@
+goSamba.pl - This script will help you populate your ldap tree with
+	     the correct attribute when using the smbldap-tools
+	     from idealx.
+
+Benoit Mortier <benoit.mortier@opensides.be>
+Guillaume Delecourt <guillaume.delecourt@opensides.be>

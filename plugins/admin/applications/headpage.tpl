@@ -1,0 +1,60 @@
+<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
+<tr>
+  <td style="vertical-align:top;">
+  <div class="contentboxh">
+    <p class="contentboxh">
+     {t}List of applications{/t} {$hint}
+    </p>
+  </div>
+  <div class="contentboxb">
+    <p class="contentboxb">
+     <select style="width:500px; height:450px;" name="applist" size=15 ondblclick="this.form.edit_helper.value='1'; this.form.submit()">
+      {html_options options=$applications}
+    </select>
+    <br>
+    <input type=submit value="{t}New{/t}..." name="new_app">&nbsp;
+    <input type=submit value="{t}Edit{/t}" name="select_app">&nbsp;
+    <input type=submit value="{t}Delete{/t}" name="delete_app">&nbsp;
+    <input type=hidden name="edit_helper">
+   </p>
+  </div>
+  </td>
+  <td style="vertical-align:top">
+   <div class="contentboxh">
+    <p class="contentboxh"><img src="{$infoimage}" align="right" alt="[i]">{t}Information{/t}</p>
+   </div>
+   <div class="contentboxb">
+   <p class="contentboxb">
+    {t}This menu allows to add, edit or remove selected applications. You may want to use the range selector on top of the application listbox, when working with a large number of applications.{/t}
+   </p>
+   <p class="contentboxb">
+    {t}-Edit- and -New application- will execute an assistant to aid you in editing properties. -Delete- will ask for confirmation before removing applications.{/t}
+   </p>
+   </div>
+   <br>
+   <div class="contentboxh">
+    <p class="contentboxh"><img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}</p>
+   </div>
+   <div class="contentboxb">
+    <p class="contentboxb" style="border-top:1px solid #B0B0B0;">
+     <table style="width:100%;">
+      {$alphabet}
+     </table>
+    </p>
+    <p class="contentboxb" style="border-top:1px solid #B0B0B0;">
+    <table width="100%"><tr><td><img src="{$tree_image}" align=center>&nbsp;{t}Display applications of department{/t}</td>
+    <td><select name="depselect" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
+      {html_options options=$deplist selected=$depselect}
+    </select></td></tr></table>
+    </p>
+    <p class="contentboxb" style="border-top:1px solid #B0B0B0">
+    <table width="100%"><tr><td><img src="{$search_image}" align=center>&nbsp;{t}Display applications matching{/t}</td>
+    <td><input type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching application names{/t}' onChange="mainform.submit()"></td></tr></table>
+    </p>
+    {$apply}
+   </div>
+  </td>
+</tr>
+</table>
+
+<input type="hidden" name="ignore">

@@ -1,0 +1,644 @@
+<?php
+class group extends plugin
+{
+  /* CLI vars */
+  var $cli_summary= "Handling of GOsa's base group object";
+  var $cli_description= "Some longer text\nfor help";
+  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
+
+  /* Group attributes */
+  var $cn= "";
+  var $description= "";
+  var $gidNumber= "";
+  var $memberUid= array();
+
+  /* Helpers */
+  var $base= "";
+  var $force_gid= FALSE;
+  var $fon_group= FALSE;
+  var $smbgroup= FALSE;
+  var $groupType= FALSE;
+  var $samba3= FALSE;
+  var $sambaSID= "";
+  var $sambaDomainName= "DEFAULT";
+  var $SID= "";
+  var $ridBase= 0;
+  var $members= array();
+  var $users= array();
+  var $allusers= array();
+  var $department= "";
+  var $saved_gidNumber= "";
+  var $oldgroupType= "";
+  var $orig_dn= "";
+  var $has_mailAccount= FALSE;
+  var $group_dialog= FALSE;
+
+  /* attribute list for save action */
+  var $attributes= array("cn", "description", "gidNumber");
+  var $objectclasses= array("top", "posixGroup");
+
+  function group ($config, $dn= NULL)
+  {
+    plugin::plugin ($config, $dn);
+
+    /* Load attributes depending on the samba version */
+    $this->samba3= ($config->current['SAMBAVERSION'] == 3);
+    $this->orig_dn= $dn;
+
+    /* Get member list */
+    if (isset($this->attrs['memberUid'][0])){
+      $tmp= array();
+      for ($i= 0; $i<$this->attrs['memberUid']['count']; $i++){
+        $tmp[]= $this->attrs['memberUid'][$i];
+      }
+      $this->memberUid= $tmp;
+      sort ($this->memberUid);
+    }
+
+    /* Save gidNumber for later use */
+    if (isset($this->attrs['gidNumber'])){
+      $this->saved_gidNumber= $this->attrs['gidNumber'][0];
+    }
+
+    /* Is a samba group? */
+    if (isset($this->attrs['objectClass'])){
+      if (array_search ('sambaGroupMapping', $this->attrs['objectClass']) == NULL ){
+        $this->smbgroup= FALSE;
+      } else {
+        $this->smbgroup= TRUE;
+        if (isset($this->attrs['sambaSID'])){
+          $this->sambaSID= $this->attrs['sambaSID'][0];
+        }
+      }
+      if (array_search ('goFonPickupGroup', $this->attrs['objectClass']) == NULL ){
+        $this->fon_group= FALSE;
+      } else {
+        $this->fon_group= TRUE;
+      }
+    }
+
+    /* Set mail flag */
+    if (isset($this->attrs['objectClass']) && in_array('gosaMailAccount', $this->attrs['objectClass'])){
+      $this->has_mailAccount= TRUE;
+    }
+
+    /* Get samba Domain in case of samba 3 */
+    if ($this->samba3 && $this->sambaSID != ""){
+      $this->SID= preg_replace ("/-[^-]+$/", "", $this->sambaSID);
+      $ldap= $this->config->get_ldap_link();
+      $ldap->cd($this->config->current['BASE']);
+      $ldap->search ("(&(objectClass=sambaDomain)(sambaSID=$this->SID))");
+      if ($ldap->count() != 0){
+        $attrs= $ldap->fetch();
+        $this->ridBase= $attrs['sambaAlgorithmicRidBase'][0];
+
+        /* Get domain name for SID */
+        $this->sambaDomainName= "DEFAULT";
+        foreach ($this->config->data['SERVERS']['SAMBA'] as $key => $val){
+          if ($val['SID'] == $this->SID){
+            $this->sambaDomainName= $key;
+            break;
+          }
+        }
+      } else {
+        if (isset($this->config->current['RIDBASE'])){
+          $this->sambaDomainName= "DEFAULT";
+          $this->ridBase= $this->config->current['RIDBASE'];
+          $this->SID= $this->config->current['SID'];
+        } else {
+          print_red(_("Can't find this groups SID in LDAP or in your configuration file!"));
+        }
+      }
+
+      /* Get group type */
+      $this->groupType= (int)substr(strrchr($this->sambaSID, "-"), 1);
+      if ($this->groupType < 500 || $this->groupType > 553){
+        $this->groupType= 0;
+      }
+      $this->oldgroupType= $this->groupType;
+    }
+
+    /* Get global filter config */
+    if (!is_global("gufilter")){
+      $ui= get_userinfo();
+      $base= get_base_from_people($ui->dn);
+      $gufilter= array( "dselect"       => $base,
+          "regex"           => "*");
+      register_global("gufilter", $gufilter);
+    }
+    $gufilter= get_global('gufilter');
+
+    /* This is always an account */
+    $this->is_account= TRUE;
+    $this->reload();
+  }
+
+  function execute()
+  {
+    /* Do we represent a valid group? */
+    if (!$this->is_account && $this->parent == NULL){
+      $display= "<img src=\"images/stop.png\" align=center>&nbsp;<b>".
+        _("This 'dn' is no group.")."</b>";
+      return ($display);
+    }
+
+    /* Delete user from group */
+    if (isset($_POST['del_users']) && isset($_POST['members'])){
+      foreach ($_POST['members'] as $value){
+        unset ($this->members["$value"]);
+        $this->removeUser($value);
+      }
+      $this->reload();
+    }
+
+    /* Add objects? */
+    if (isset($_POST["edit_membership"])){
+      $this->group_dialog= TRUE;
+      $this->dialog= TRUE;
+    }
+
+    /* Add objects finished? */
+    if (isset($_POST["add_users_finish"]) || isset($_POST["add_users_cancel"])){
+      $this->group_dialog= FALSE;
+      $this->dialog= FALSE;
+    }
+
+    /* Add user to group */
+    if (isset($_POST['add_users_finish']) && isset($_POST['users'])){
+      foreach ($_POST['users'] as $value){
+        $this->members["$value"]= $this->allusers[$value];
+        asort($this->members);
+        $this->addUser($value);
+      }
+      $this->reload();
+    }
+
+    /* Assign templating stuff */
+    $smarty= get_smarty();
+    if ($this->samba3){
+      $smarty->assign("samba3", "true");
+    } else {
+      $smarty->assign("samba3", "");
+    }
+
+    /* Manage object add dialog */
+    if ($this->group_dialog){
+
+      /* Save data */
+      $gufilter= get_global("gufilter");
+      foreach( array("dselect", "regex") as $type){
+        if (isset($_POST[$type])){
+          $gufilter[$type]= $_POST[$type];
+        }
+      }
+      if (isset($_GET['search'])){
+        $s= mb_substr($_GET['search'], 0, 1, "UTF8")."*";
+        if ($s == "**"){
+          $s= "*";
+        }
+        $gufilter['regex']= $s;
+      }
+      $regex= preg_replace('/[*]/', ".*", $gufilter['regex']);
+      register_global("gufilter", $gufilter);
+      $this->reload();
+
+      /* Show dialog */
+      $smarty->assign("search_image", get_template_path('images/search.png'));
+      $smarty->assign("launchimage", get_template_path('images/small_filter.png'));
+      $smarty->assign("tree_image", get_template_path('images/tree.png'));
+      $smarty->assign("deplist", $this->config->idepartments);
+      $smarty->assign("alphabet", generate_alphabet());
+      foreach( array("dselect", "regex") as $type){
+        $smarty->assign("$type", $gufilter[$type]);
+      }
+      $smarty->assign("hint", print_sizelimit_warning());
+
+      $users= array();
+      foreach ($this->allusers as $key => $value){
+        if (!array_key_exists($key, $this->members)){
+          if (preg_match("/^$regex/i", $key)){
+            $users[$key]= $value;
+          }
+        }
+      }
+      $smarty->assign("users", $users);
+      $display= $smarty->fetch (get_template_path('group_objects.tpl', TRUE, dirname(__FILE__)));
+      return ($display);
+    }
+
+    /* Bases / Departments */
+    if ($this->dn == "new"){
+      $ui= get_userinfo();
+      $this->base= dn2base($ui->dn);
+    } else {
+      if (isset($_POST['base'])){
+        $this->base= $_POST['base'];
+      } else {
+        $this->base= preg_replace ("/^[^,]+,[^,]+,/", "", $this->dn);
+      }
+    }
+
+    $smarty->assign("bases", $this->config->idepartments);
+    $smarty->assign("base_select", $this->base);
+    $smarty->assign("department", $this->department);
+
+    if ($this->samba3){
+      $domains= array();
+      foreach($this->config->data['SERVERS']['SAMBA'] as $name => $content){
+        $domains[$name]= $name;
+      }
+      $smarty->assign("sambaDomains", $domains);
+      $smarty->assign("sambaDomainName", $this->sambaDomainName);
+      $groupTypes= array(0 => _("Samba group"), 512 => _("Domain admins"), 513 => _("Domain users"),
+          514 => _("Domain guests"));
+
+      /* Don't loose special groups! If not key'ed above, add it to
+         the combo box... */	
+      if ($this->groupType >= 500 && $this->groupType <= 553 && !isset($groupTypes[$this->groupType])){
+        $groupTypes[$this->groupType]= sprintf(_("Special group (%d)"), $this->groupType);
+      }
+
+      $smarty->assign("groupTypes", $groupTypes);
+      $smarty->assign("groupType", $this->groupType);
+    }
+
+    /* Members and users */
+    $smarty->assign("members", $this->members);
+
+    /* Checkboxes */
+    foreach (array("force_gid", "smbgroup") as $val){
+      if ($this->$val == "1"){
+        $smarty->assign("$val", "checked");
+      } else {
+        $smarty->assign("$val", "");
+      }
+    }
+    if ($this->force_gid != "1"){
+      $smarty->assign("forceMode", "disabled");
+    }
+    $smarty->assign("force_gidACL", chkacl($this->acl, "gidNumber"));
+    $smarty->assign("sambaDomainNameACL", chkacl($this->acl, "sambaDomainName"));
+    if ($this->fon_group){
+      $smarty->assign("fon_group", "checked");
+    }
+    $smarty->assign("fon_groupACL", chkacl($this->acl, "fon_group"));
+
+    /* Fields */
+    foreach (array("cn", "description", "gidNumber") as $val){
+      $smarty->assign("$val", $this->$val);
+      $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
+    }
+
+    /* Show main page */
+    $smarty->assign("alphabet", generate_alphabet(10));
+    $smarty->assign("search_image", get_template_path('images/search.png'));
+    $smarty->assign("launchimage", get_template_path('images/small_filter.png'));
+    $smarty->assign("tree_image", get_template_path('images/tree.png'));
+    $smarty->assign("deplist", $this->config->idepartments);
+    return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
+  }
+
+  function addUser($uid)
+  {
+    $this->memberUid[]= $uid;
+    $this->memberUid= array_unique($this->memberUid);
+  }
+
+  function removeUser($uid)
+  {
+    $temp= array();
+    foreach ($this->memberUid as $value){
+      if ($value != $uid){
+        $temp[]= $value;
+      }
+    }
+    $this->memberUid= $temp;
+  }
+
+
+  /* Reload data */
+  function reload()
+  {
+    /* Generate userlists */
+    $this->last_sorting= "invalid";
+    $this->users= array();
+    $ldap= $this->config->get_ldap_link();
+    $gufilter= get_global("gufilter");
+    $ldap->cd ($gufilter['dselect']);
+    $ldap->search ("(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(!(uid=*$)))");
+    natcasesort ($this->users);
+    reset ($this->users);
+
+    $ldap->cd ($this->config->current['BASE']);
+    $ldap->search ("(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(!(uid=*$)))");
+    $this->allusers= array();
+    while ($attrs= $ldap->fetch()){
+      if (isset($attrs["givenName"][0]) && isset($attrs["sn"][0])){
+        $this->allusers[$attrs["uid"][0]]= $attrs["sn"][0].", ".
+          $attrs["givenName"][0].
+          " [".$attrs["uid"][0]."]";
+      } else {
+        $this->allusers[$attrs["uid"][0]]= $attrs['uid'][0];
+      }
+    }
+    natcasesort ($this->allusers);
+    reset ($this->allusers);
+
+    /* Fill memberlist */
+    $this->members= array();
+    foreach ($this->memberUid as $value){
+      if (isset($this->allusers[$value])){
+        $this->members[$value]= $this->allusers[$value];
+      } else {
+        $this->members[$value]= "[$value]";
+      }
+    }
+    asort($this->members);
+    reset($this->members);
+  }
+
+
+
+  function remove_from_parent()
+  {
+    plugin::remove_from_parent();
+
+    $ldap= $this->config->get_ldap_link();
+    $ldap->rmdir($this->dn);
+    show_ldap_error($ldap->get_error());
+
+    /* Delete references to object groups */
+    $ldap->cd ($this->config->current['BASE']);
+    $ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))", array("cn"));
+    while ($ldap->fetch()){
+      $og= new ogroup($this->config, $ldap->getDN());
+      unset($og->member[$this->dn]);
+      $og->save ();
+    }
+
+    /* Send signal to the world that we've done */
+    $this->handle_post_events("remove");
+  }
+
+
+  /* Save data to object */
+  function save_object()
+  {
+    /* Save additional values for possible next step */
+    if (isset($_POST['groupedit'])){
+      plugin::save_object();
+
+      $this->force_gid= 0;
+      $this->smbgroup= 0;
+      foreach (array("force_gid", "department", "base", "smbgroup") as $val) {
+        if (chkacl ($this->acl, "$val") == "" && isset($_POST["$val"])){
+          $this->$val= $_POST["$val"];
+        }
+      }
+
+      /* Save sambaDomain attribute */
+      if (chkacl ($this->acl, "sambaDomainName") == "" && $this->samba3 &&
+          isset ($_POST['sambaDomainName'])){
+
+        $this->sambaDomainName= $_POST['sambaDomainName'];
+        $this->groupType= $_POST['groupType'];
+      }
+
+      /* Save fon attribute */
+      if (chkacl ($this->acl, "fon_group") == ""){
+        if (isset ($_POST['fon_group'])){
+          $this->fon_group= TRUE;
+        } else {
+          $this->fon_group= FALSE;
+        }
+      }
+
+    }
+  }
+
+
+  /* Save to LDAP */
+  function save()
+  {
+    /* ID handling */
+    if ($this->force_gid == 0){
+      if ($this->saved_gidNumber != ""){
+        $this->gidNumber= $this->saved_gidNumber;
+      } else {
+        /* Calculate new, lock uids */
+        $wait= 10;
+        while (get_lock("uidnumber") != ""){
+          sleep (1);
+
+          /* timed out? */
+          if ($wait-- == 0){
+            break;
+          }
+        }
+        add_lock ("uidnumber", "gosa");
+        $this->gidNumber= $this->get_next_id("gidNumber");
+      }
+    }
+
+    plugin::save(); 
+
+    /* Remove objectClass for samba/phone support */
+    $tmp= array();
+    for ($i= 0; $i<count($this->attrs["objectClass"]); $i++){
+      if ($this->attrs['objectClass'][$i] != 'sambaGroupMapping' &&
+          $this->attrs['objectClass'][$i] != 'sambaIdmapEntry' &&
+          $this->attrs['objectClass'][$i] != 'goFonPickupGroup'){
+        $tmp[]= $this->attrs['objectClass'][$i];
+      }
+    }
+    $this->attrs['objectClass']= $tmp;
+    $ldap= $this->config->get_ldap_link();
+
+    /* Add samba group functionality */
+    if ($this->samba3 && $this->smbgroup){
+      $this->SID= $this->config->data['SERVERS']['SAMBA'][$this->sambaDomainName]['SID'];
+      $this->ridBase= $this->config->data['SERVERS']['SAMBA'][$this->sambaDomainName]['RIDBASE'];
+
+      $this->attrs['objectClass'][]= 'sambaGroupMapping';
+      $this->attrs['sambaGroupType']= "2";
+
+      /* Check if we need to create a special entry */
+      if ($this->groupType == 0){
+
+        if ($this->sambaSID == "" || $this->oldgroupType != $this->groupType){
+          $gidNumber= $this->gidNumber;
+          while(TRUE){
+            $sid= $this->SID."-".($gidNumber*2 + $this->ridBase+1);
+            $ldap->cd($this->config->current['BASE']);
+            $ldap->search("(sambaSID=$sid)");
+            if ($ldap->count() == 0){
+              break;
+            }
+            $gidNumber++;
+          }
+          $this->attrs['sambaSID']= $sid;
+          $this->sambaSID= $sid;
+        }
+
+      } else {
+        $this->attrs['sambaSID']=$this->SID."-".$this->groupType;
+      }
+
+      /* User wants me to fake the idMappings? This is useful for
+         making winbind resolve the group names in a reasonable amount
+         of time in combination with larger databases. */
+      if (isset($this->config->current['SAMBAIDMAPPING']) &&
+          preg_match('/true/i', $this->config->current['SAMBAIDMAPPING'])){
+        $this->attrs['objectClass'][]= "sambaIdmapEntry";
+      }
+
+    }
+
+    /* Add phone functionality */
+    if ($this->fon_group){
+      $this->attrs['objectClass'][]= "goFonPickupGroup";
+    }
+
+    /* Take members array */
+    if (count ($this->memberUid)){
+      $this->attrs['memberUid']= array_unique($this->memberUid);
+    }
+
+    /* New accounts need proper 'dn', propagate it to remaining objects */
+    if ($this->dn == 'new'){
+      $this->dn= 'cn='.$this->cn.','.get_groups_ou().$this->base;
+    }
+
+    /* Save data. Using 'modify' implies that the entry is already present, use 'add' for
+       new entries. So do a check first... */
+    $ldap->cat ($this->dn);
+    if ($ldap->fetch()){
+      /* Modify needs array() to remove values :-( */
+      if (!count ($this->memberUid)){
+        $this->attrs['memberUid']= array();
+      }
+      if ($this->samba3){
+        if (!$this->smbgroup){
+          $this->attrs['sambaGroupType']= array();
+          $this->attrs['sambaSID']= array();
+        }
+      }
+      $mode= "modify";
+    } else {
+      $mode= "add";
+      $ldap->cd($this->config->current['BASE']);
+      $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
+    }
+
+    /* Write back to ldap */
+    $ldap->cd($this->dn);
+    $ldap->$mode($this->attrs);
+
+    $ret= 0;
+    if (show_ldap_error($ldap->get_error())){
+      $ret= 1;
+    }
+
+    /* Remove uid lock */
+    del_lock ("uidnumber");
+
+    /* Post that we've done*/
+    $this->handle_post_events($mode);
+
+    return ($ret);
+  }
+
+  function check()
+  {
+    $message= array();
+
+    /* Permissions for that base? */
+    if ($this->base != ""){
+      $new_dn= 'cn='.$this->cn.','.get_groups_ou().$this->base;
+    } else {
+      $new_dn= $this->dn;
+    }
+
+    $ui= get_userinfo();
+    $acl= get_permissions ($new_dn, $ui->subtreeACL);
+    $acl= get_module_permission($acl, "group", $new_dn);
+    if (chkacl($acl, "create") != ""){
+      $message[]= _("You have no permissions to create a group on this 'Base'.");
+    }
+
+    /* must: cn */
+    if ($this->cn == "" && chkacl ($this->acl, "cn") == ""){
+      $message[]= "The required field 'Name' is not set.";
+    }
+
+    /* Check for valid input */
+    if (!is_uid($this->cn)){
+      $message[]= _("The field 'Name' contains invalid characters. Lowercase, numbers and dashes are allowed.");
+    }
+
+    /* Check for used 'cn' */
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(&(|(objectClass=gosaGroupOfNames)(objectClass=posixGroup))(cn=$this->cn))");
+    if ($ldap->count() != 0){
+
+      /* New entry? */
+      if ($this->dn == 'new'){
+        $message[]= _("Value specified as 'Name' is already used.");
+      }
+      
+      /* Moved? */
+      elseif ($new_dn != $this->orig_dn){
+        $ldap->fetch();
+        if ($ldap->getDN() != $this->orig_dn){
+          $message[]= _("Value specified as 'Name' is already used.");
+        }
+      }
+    }
+
+    /* Check ID */
+    if ($this->force_gid == "1"){
+      if (!is_id($this->gidNumber)){
+        $message[]= _("Value specified as 'GID' is not valid.");
+      } else {
+        if ($this->gidNumber < $this->config->current['MINID']){
+          $message[]= _("Value specified as 'GID' is too small.");
+        }
+
+      }
+    }
+
+    return ($message);
+  }
+
+  function get_next_id($attrib)
+  {
+    $ids= array();
+    $ldap= $this->config->get_ldap_link();
+
+    $ldap->cd ($this->config->current['BASE']);
+    $ldap->search ("($attrib=*)");
+
+    /* Get list of ids */
+    while ($attrs= $ldap->fetch()){
+      $ids[]= (int)$attrs["$attrib"][0];
+    }
+
+    /* Find out next free id near to UID_BASE */
+    for ($id= $this->config->current['UIDBASE']; $id++; $id<65000){
+      if (!in_array($id, $ids)){
+        return ($id);
+      }
+    }
+
+    /* Should not happen */
+    if ($id == 65000){
+      print_red(_("Too many users, can't allocate a free ID!"));
+      exit;
+    }
+  }
+
+}
+
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+?>

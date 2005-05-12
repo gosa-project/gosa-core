@@ -1,0 +1,343 @@
+<?php
+/*
+  This code is part of GOsa (https://gosa.gonicus.de)
+  Copyright (C) 2003  Cajus Pollmeier
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+require "tabs_application.inc";
+
+class applicationManagement extends plugin
+{
+  /* Definitions */
+  var $plHeadline= "Applications";
+  var $plDescription= "This does something";
+
+  /* Dialog attributes */
+  var $apptabs= NULL;
+  var $applications= array();
+  var $ui= NULL;
+  var $acl= "";
+
+  function applicationManagement ($config, $ui)
+  {
+	/* Save configuration for internal use */
+	$this->config= $config;
+	$this->ui= $ui;
+
+	/* Get global filter config */
+        if (!is_global("appfilter")){
+                $base= get_base_from_people($ui->dn);
+                $appfilter= array("depselect" => $base,
+                                  "regex" => "*");
+                register_global("appfilter", $appfilter);
+        }
+  }
+
+  function execute()
+  {
+        /* Save data */
+        $appfilter= get_global("appfilter");
+        foreach( array("depselect", "regex") as $type){
+                if (isset($_POST[$type])){
+                        $appfilter[$type]= $_POST[$type];
+                }
+        }
+        if (isset($_GET['search'])){
+		$s= mb_substr($_GET['search'], 0, 1, "UTF8")."*";
+                if ($s == "**"){
+                        $s= "*";
+                }
+                $appfilter['regex']= $s;
+        }
+        register_global("appfilter", $appfilter);
+
+        /* Check sorting variable */
+	if (!isset($this->apptabs) &&
+            !isset($_POST['new_app']) &&
+            !isset($_POST['delete_app']) &&
+            !isset($_POST['select_app'])){
+		$this->reload();
+	}
+	$smarty= get_smarty();
+
+        /* Check for exeeded sizelimit */
+        if (($message= check_sizelimit()) != ""){
+                return($message);
+        }
+
+	/* New application? */
+	if (isset($_POST['new_app'])){
+
+		/* By default we set 'dn' to 'new', all relevant plugins will
+		   react on this. */
+		$this->dn= "new";
+
+		/* Create new usertab object */
+		$this->apptabs= new apptabs($this->config,
+				$this->config->data['TABS']['APPSTABS'], $this->dn);
+		$this->apptabs->set_acl(array(':all'));
+	}
+
+	/* Cancel dialogs */
+	if (isset($_POST['edit_cancel']) || isset($_POST['password_cancel'])){
+		del_lock ($this->apptabs->dn);
+		unset ($this->apptabs);
+		$this->apptabs= NULL;
+		unset ($_SESSION['objectinfo']);
+	}
+
+	/* Finish apps edit is triggered by the tabulator dialog, so
+	   the user wants to save edited data. Check and save at this
+	   point. */
+	if (isset($_POST['edit_finish'])){
+
+		/* Check tabs, will feed message array */
+		$this->apptabs->last= $this->apptabs->current;
+		$this->apptabs->save_object();
+		$message= $this->apptabs->check();
+
+		/* Save, or display error message? */
+		if (count($message) == 0){
+
+			/* Save data data to ldap */
+			$this->apptabs->save();
+			gosa_log ("Application object'".$this->dn."' has been saved");
+
+			/* Application has been saved successfully, remove lock from
+			   LDAP. */
+			if ($this->dn != "new"){
+				del_lock ($this->dn);
+			}
+
+			/* There's no page reload so we have to read new apps at
+			   this point. */
+			$this->reload ();
+			unset ($this->apptabs);
+			$this->apptabs= NULL;
+			unset ($_SESSION['objectinfo']);
+		} else {
+			/* Ok. There seem to be errors regarding to the tab data,
+			   show message and continue as usual. */
+			show_errors($message);
+		}
+	}
+
+	/* User wants to edit data? */
+	if ((isset($_POST['select_app']) || (isset($_POST['edit_helper']) && $_POST['edit_helper'] == "1")) && isset($_POST['applist']) && $_POST['applist'] != ""){
+
+		/* Get 'dn' from posted 'applist', must be unique */
+		$this->dn= trim($_POST['applist']);
+
+		/* Check locking, save current plugin in 'back_plugin', so
+		   the dialog knows where to return. */
+		if (($user= get_lock($this->dn)) != ""){
+			return(gen_locked_message ($user, $this->dn));
+		}
+
+		/* Lock the current entry, so everyone will get the
+		   above dialog */
+		add_lock ($this->dn, $this->ui->dn);
+
+		/* Set up the users ACL's for this 'dn' */
+		$acl= get_permissions ($this->dn, $this->ui->subtreeACL);
+
+		/* Register apptabs to trigger edit dialog */
+		$this->apptabs= new apptabs($this->config,
+				$this->config->data['TABS']['APPSTABS'], $this->dn);
+		$this->apptabs->set_acl($acl);
+		$_SESSION['objectinfo']= $this->dn;
+	}
+
+	/* Remove user was requested */
+	if (isset($_POST['delete_app']) && isset($_POST['applist'])){
+
+		/* Get 'dn' from posted 'uid' */
+		$this->dn= trim($_POST['applist']);
+
+		/* Load permissions for selected 'dn' and check if
+		   we're allowed to remove this 'dn' */
+		$acl= get_permissions ($this->dn, $this->ui->subtreeACL);
+		$this->acl= get_module_permission($acl, "application", $this->dn);
+		if (chkacl($this->acl, "delete") == ""){
+
+			/* Check locking, save current plugin in 'back_plugin', so
+			   the dialog knows where to return. */
+			if (($user= get_lock($this->dn)) != ""){
+				return (gen_locked_message ($user, $this->dn));
+			}
+
+			/* Lock the current entry, so nobody will edit it during deletion */
+			add_lock ($this->dn, $this->ui->dn);
+			$smarty= get_smarty();
+			$smarty->assign("intro", sprintf(_("You're about to delete the application '%s'."), $this->dn));
+			return($smarty->fetch (get_template_path('remove.tpl', TRUE)));
+		} else {
+
+			/* Obviously the user isn't allowed to delete. Show message and
+			   clean session. */
+			print_red (_("You are not allowed to delete this application!"));
+		}
+	}
+
+	/* Confirmation for deletion has been passed. Group should be deleted. */
+	if (isset($_POST['delete_app_confirm'])){
+
+		/* Some nice guy may send this as POST, so we've to check
+		   for the permissions again. */
+		if (chkacl($this->acl, "delete") == ""){
+
+			/* Delete request is permitted, perform LDAP action */
+			$this->apptabs= new apptabs($this->config,
+					$this->config->data['TABS']['APPSTABS'], $this->dn);
+			$this->apptabs->set_acl(array($this->acl));
+			$this->apptabs->delete ();
+			gosa_log ("Application object'".$this->dn."' has been removed");
+			unset ($this->apptabs);
+			$this->apptabs= NULL;
+
+			/* Group list has changed, reload it. */
+			$this->reload ();
+		} else {
+
+			/* Normally this shouldn't be reached, send some extra
+			   logs to notify the administrator */
+			print_red (_("You are not allowed to delete this application!"));
+			gosa_log ("Warning: '".$this->ui->uid."' tried to trick group deletion.");
+		}
+
+		/* Remove lock file after successfull deletion */
+		del_lock ($this->dn);
+	}
+
+
+	/* Delete application canceled? */
+	if (isset($_POST['delete_cancel'])){
+		del_lock ($this->dn);
+		unset($_SESSION['objectinfo']);
+	}
+
+        /* Show tab dialog if object is present */
+        if ($this->apptabs){
+                $display= $this->apptabs->execute();
+
+                /* Don't show buttons if tab dialog requests this */
+                if (!$this->apptabs->by_object[$this->apptabs->current]->dialog){
+                        $display.= "<p style=\"text-align:right\">\n";
+                        $display.= "<input type=submit name=\"edit_finish\" value=\""._("Finish")."\">\n";
+                        $display.= "&nbsp;\n";
+                        $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
+                        $display.= "</p>";
+                }
+                return ($display);
+        }
+
+	/* Show main page */
+	$smarty->assign("applications", $this->applications);
+	$smarty->assign("search_image", get_template_path('images/search.png'));
+	$smarty->assign("tree_image", get_template_path('images/tree.png'));
+        $smarty->assign("infoimage", get_template_path('images/info.png'));
+        $smarty->assign("launchimage", get_template_path('images/launch.png'));
+	$smarty->assign("deplist", $this->config->idepartments);
+        foreach( array("depselect", "regex") as $type){
+                $smarty->assign("$type", $appfilter[$type]);
+        }
+	
+	/* Extend if we are not using javascript */
+        $smarty->assign("apply", apply_filter());
+        $smarty->assign("alphabet", generate_alphabet());
+	$smarty->assign("hint", print_sizelimit_warning());
+	
+        return($smarty->fetch(get_template_path('headpage.tpl', TRUE)));
+  }
+
+
+  function reload()
+  {
+        /* Get config */
+        $appfilter= get_global('appfilter');
+
+        /* Set base for all searches */
+        $base= $appfilter['depselect'];
+
+        /* Regex filter? */
+        if ($appfilter['regex'] != ""){
+                $regex= $appfilter['regex'];
+        } else {
+                $regex= "*";
+        }
+	
+	/* Generate application list */
+	$res= get_list($this->ui->subtreeACL, "(&(cn=$regex)(objectClass=gosaApplication))", TRUE, $base, array("cn", "description"), TRUE);
+	$this->applications= array();
+	foreach ($res as $value){
+		$this->applications[$value["dn"]]= $value["cn"][0];
+		if (isset($value["description"][0])){
+			$this->applications[$value["dn"]]= $value["cn"][0]." (".
+					$value["description"][0].")";
+		}
+	}
+	natcasesort ($this->applications);
+	reset ($this->applications);
+  }
+
+  function remove_from_parent()
+  {
+	/* Optionally execute a command after we're done */
+	$this->postremove();
+  }
+
+
+  /* Save data to object */
+  function save_object()
+  {
+  }
+
+
+  /* Check values */
+  function check()
+  {
+  }
+
+
+  /* Save to LDAP */
+  function save()
+  {
+	/* Optionally execute a command after we're done */
+	$this->postcreate();
+  }
+
+  function adapt_from_template($dn)
+  {
+  }
+
+  function password_change_needed()
+  {
+  }
+
+  function show_header($button_text, $text, $disabled= FALSE)
+  {
+  }
+
+  function remove_lock()
+  {
+	if (isset($this->apptabs->dn)){
+	        del_lock ($this->apptabs->dn);
+	}
+  }
+
+}
+
+?>

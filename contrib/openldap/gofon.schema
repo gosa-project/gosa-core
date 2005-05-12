@@ -1,0 +1,58 @@
+## 
+## Gonicus Attribute and Objectclass Definitions for GOfon
+##
+## Version: 20041022
+##
+##	Maintained by:	Lars Scheiter (scheiter@GONICUS.de)
+##
+
+# Attributes 
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.1 NAME 'goFonDeliveryMode'
+	DESC 'GOFon delivery mode is defined here'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.2 NAME 'goFonForwarding'
+	DESC 'defines which phone numbers get the next call'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.3 NAME 'goFonFormat'
+	DESC 'defines voicemail delivery format'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.4 NAME 'goFonHardware'
+	DESC 'defines voicemail delivery format'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.5 NAME 'goFonPIN'
+	DESC 'defines voicemail delivery format'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE )
+
+# objectclass 
+objectclass (1.3.6.1.4.1.10098.1.2.3.11 NAME 'goFonAccount' SUP top AUXILIARY
+	DESC 'GOFon Account objectclass (v1.0)'
+	MUST ( goFonDeliveryMode $ telephoneNumber $ uid )
+	MAY ( goFonFormat $ goFonForwarding $ goFonHardware $ goFonPIN ))
+
+objectclass (1.3.6.1.4.1.10098.1.2.3.12 NAME 'goFonHardware' SUP top STRUCTURAL
+	DESC 'defines a telephone (v1.0)'
+	MUST ( cn $ macAddress $ ipHostNumber )
+	MAY (description) )
+
+objectclass (1.3.6.1.4.1.10098.1.2.3.13 NAME 'goFonPickupGroup' SUP top AUXILIARY
+	DESC 'Additive for posixGroups (v1.0)'
+	MUST ( cn $ gidNumber ) )
+

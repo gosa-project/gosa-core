@@ -1,0 +1,240 @@
+GOsa2 changelog
+===============
+
+* gosa 2.3.1
+  - Override automatically detected user bases if they don't exist
+  - Don't shred samba group ID's if they are not present in the
+    combobox
+  - Updated smarty to version 2.6.9
+
+* gosa 2.3
+  - Updated smarty to version 2.6.7
+  - Added dutch translations (thanks to Niels Klomp)
+  - Added webdav and phpgroupware accounts
+  - Fixed french translation
+  - Fixed error in shadowExpire attribute
+  - Unified all filters in dialogs to use the internationalized choosers
+  - Added option to do non subtree searches with filters
+  - Fixed sample configuration files to be unproblematic when used in
+    conjunction with OpenLDAP 2.2
+  - Added experimental support for editing LDAP trees that contain referrals
+  - Updated Altlinux contributions, including themes and scripts
+  - Worked around a possible problem with sizelimit in php-ldap
+  - Improved big ldap support by size limits and non sub searches
+  - Various smaller fixes
+  - Added global TLS switch for LDAP connections
+  - Fixed SELECT queries to be mysql 3.x _and_ 4.x compatible
+  - Made departments movable
+
+* gosa 2.2
+  - Removed DHCP/DNS plugins, they will be replaced by
+    the terminal/server/workstation plugins.
+  - Added case sensitivity check for login names
+  - Made bases set to users "home" department when creating new objects
+  - Moved sieve-*.txt config files to /etc/gosa
+  - Told IMAP plugin to remove mail accounts when the user is deleted
+  - Interface cleanups
+  - Added simple log file viewer
+  - Added support for asterisk
+  - Included javascript magic to improve usability (doubleclicks in
+    lists, disabling of fields, warning messages, etc.)
+  - More filtering and sizelimits for speed optimizations
+  - Mail handling is now pluggable
+  - Added possibility to bundle objects to object groups
+  - Added a reference tab to track relation ships of different objects
+  - Improved samba 3 support (terminal server support)
+  - Updated translations and added a french one
+
+* gosa 2.1.3
+  - Fixed problem with initial password setting
+  - Increase number in version.inc
+  - Add a workaround to fix problem with groups not beeing displayed
+    with openldap. Here the server reacts with empty results if searching
+    for non existing objectClass "sambaGroupMapping" in case of using samba2
+  - Fix the homeDirectory check which is a bit too harsh with templates
+
+* gosa 2.1.2
+  - Fixed problem with uppercase login names
+  - Extensive speed increasements in ldap searches
+  - Fixed gettext problem on older installations
+  - Corrected sieve login which was broken due to a library switch
+  - Made in_array act case insensitive for is_account check
+  - Fixed location of DMODE and HASH in config file
+  - Fixed general problems with password hash generation if not
+    specified
+  - Complete move to unicode which removes all active encoding/decoding
+    of contents from GOsa itself
+  - Made GOsa run smooth on PHP 5
+  - Added complete russian translation contributed by Igor Muratov
+  - Migrated phone list to (global) addressbook
+  - Filtering fixes
+
+* gosa 2.1.1
+  - Enabled mail-account-less fax accounts
+  - Fixed upper/lower case problem in mail templates
+  - Fixed typo in generic plugin error message
+  - Made template dialog work again
+  - Fixed headpage for application management which tends to do no
+    proper display of used applications
+  - Added command line interface to use GOsa without web interface
+  - Updated debian control to be aware of apache2 based installations
+  - Transferd tab variables in group dialog, so the primary mail 
+    address can be checked
+  - Fixed possible case problem with is_account
+  - Made base selector contain newly added departments in department
+    dialog
+  
+* gosa 2.1
+  Bugfix release
+  - size of homeDirectory attribute increased
+  - FAQ/README/INSTALL updated
+  - spec file updated
+
+* gosa 2.1rc2
+  Bugfix release
+  - Made user dn configurable
+  - Fixed memory usage check
+  - Fixed size of alternate mail address field
+  - Fixed sorting of group in posix tab
+  - Made GOsa keep group membership even if user has no posix
+    account
+  - Fixed typo in blocklist spelling
+  - Fixed error message when trying to filter users without a
+    valid uid
+  - Made posix account visible, even if there are no shadow
+    attributes inside this entry
+  - Included setup
+  - Translation updates
+
+* gosa 2.1rc1
+  Bugfix release
+  - Fixed annoying ACL bug in template mode
+  - Fixed possible privilege escalation problem in password
+    routine (thanks to Henning Schmiedehausen)
+  - Removed password storage from user info class (thanks to
+    Rainer Herbst)
+  - Various interface cleanups
+  - Templatization finished
+  - Reworked user headpage
+  - Made GOsa more robust in detecting errors in config
+  - Added additional error messages reported by LDAP server
+  - Added schmemacheck hook
+  - Started with setup implementation
+
+* gosa 2.1beta3
+  Bugfix release
+  - Made template mode remember the templates primary group
+  - Templatized posix plugin
+  - Added option to disable strict checking of uid/gid names
+  - Massive samba3 updates
+  - Made ou=people and ou=groups configurable
+  - Fixed user/group lists to react on filter changes
+
+* gosa 2.1beta2
+  Bugfix and feature enhancement release.
+  - Made GOsa remove object locks when changing plugins during edit
+    process.
+  - Added DHCP plugin
+  - Gerneral speed tunig, reduced the number of unessasary ldap
+    accesses
+  - Added syslog output for actions "save" and "remove"
+  - Fixed handling for multiple ACL's per base
+  - Fixed listboxes to unify output / sort output
+  - Fixed annoying bug in tab_groups.inc when removing the mailtab
+  - Bases did not get set in template mode
+  - Fixed user part
+  - Templatized faxaccount/pureftpd/samba and mail plugins
+  - Included calendar.js functionality in samba plugin
+
+* gosa 2.1beta1
+  This release has some feature enhancements and contains many
+  bugfixes and design cleanups
+  - Fixed many HTML related things. Pages are now perfectly validated
+    as html 4.01 transitional.
+  - Added dn cleaner to getDN() in order to fix problems with
+    "broken" ldap databases.
+  - Added schemata for iplanet, checked if it works.
+  - Rewrote phonelist, added vcard export.
+  - Added filters to allmost all plugins.
+  - Added DNS plugin.
+  - Generic userinterface cleanups, everything is a template now and can be
+    redesigned/stripped.
+  - Improved translations, added missing ones.
+  - Added choosable templates for mail vacation messages.
+  - Improved templating stuff to generate user defined auto uids.
+  - Made user interface more comprehensive, so its important for you
+    to start with a clean gosa.conf from contrib.
+  - Added external password change hook, so that its possible to synchronize
+    with a non samba PDC via scripts. (Some organizations tend to keep a
+    readable copy of their users password which possible now, too.)
+  - Updated FAQ
+
+* gosa 2.0.1
+  This release doesn't have feature enhancements (nearly), only
+  bugfixes reported by users are incorporated.
+  - Fixed oblivious fields when changing to subdialogs. All
+    user dialogs were affected
+  - Made facsimileTelephoneNumber beeing saved without the
+    need of a fax account
+  - Fixed printer sorting which destroyed the array index
+  - Removed redundant fields in terminal configuration
+  - Made terminal plugin save the terminal hardware information
+  - Added missing </html> tags to index.php/main.php
+  - Fixed debian debconf script not to touch uidbase/ridbase
+    values in gosa.conf
+  - Fixed "Force ID", which creates a group for the posix
+    user with forced ID.
+  - Finetuning in login window behaviour
+  - Code cleanup and templatized two more plugins
+  - As requested by some users, you can now advise GOsa not to
+    create a group for the user, but take an existing group
+    as primary one.
+  - Added 'dn cleaner' for the acl list. So syntactically
+    problematic dn's with strange commata get fixed.
+
+* gosa 2.0 final
+  - Made samba3 support work
+  - Fixed several small bugs with the templating stuff
+  - Fixed problem with shared folders, added missing attribute
+    gosaSharedFolderTarget needed in some setups
+  - Updated icons
+  - Renamed icons to have more logical names
+
+* gosa 2.0rc2
+  - Corrected mistakenly copied ui object in functions.inc
+  - Fixed errors when activating new terminals
+  - Removed krb warnings in class_user.inc
+  - Plugins user, apps, groups and departments didn't check for
+    already present entries. Now they do.
+  - Removed problem in terminal dialog where checkboxes are not
+    saved
+  - Fixed ACL handling for users primary group
+  - Replaced own template class by smarty, since only two files
+    were affected by this
+  - Changed basic layout to seperate public readable files from
+    templates
+  - Added FAQ, update TODO for next versions
+  - Made accounts movable between departments
+  - Added partial spanish translations
+  - Fixed mail group handling
+
+* gosa 2.0rc1
+  - Switched to XML based gosa.conf
+  - Cleaned all plugins, moved to children of plugin.conf
+  - Moved back to gettext for translations
+  - Added hooks for pre-/post-install scripts
+  - Cleaned LDAP class
+  - Added workarounds for MS-IE (>5.5) to render transparent
+    PNGs in a correct way
+  - Redesigned login screen / some plugins
+  - Added hooks for eGOsa, which is a java applet based
+    browsing tool
+  - Switched from user based ACLs to group based ACLs,
+    removed standalone ACL plugin in favor of new group tab.
+  - Fixed samba2 rid generation (btw. still missing is sid
+    support for samba3. But this will go into the final.)
+  - Fixed many minor bugs
+  - Introduced simple theming support
+  - Added 'dn'-renaming for accounts
+
+Changelog starts with latest Beta 1.99.97

@@ -1,0 +1,75 @@
+<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
+<tr>
+  <td style="vertical-align:top;">
+  <div class="contentboxh">
+    <p class="contentboxh">
+     {t}List of users{/t} {$hint}
+    </p>
+  </div>
+  <div class="contentboxb">
+    <p class="contentboxb">
+      <select style="width:500px; height:450px;" name="userlist" size=15 ondblclick="this.form.edit_helper.value='1'; this.form.submit()">
+	{html_options options=$userlist}
+      </select>
+      <br>
+      <input type=submit value="{t}New{/t}..." name="new_user">&nbsp;
+      <input type=submit value="{t}New template{/t}" name="new_template">&nbsp;
+      <input type=submit value="{t}Edit{/t}" name="select_user">&nbsp;
+      <input type=submit value="{t}Delete{/t}" name="delete_user">&nbsp;
+      <input type=submit value="{t}Set password{/t}" name="setpass_user">
+      <input type=hidden name="edit_helper">
+    </p>
+  </div>
+  </td>
+  <td style="vertical-align:top;">
+   <div class="contentboxh">
+    <p class="contentboxh"><img src="{$infoimage}" align="right" alt="[i]">{t}Information{/t}</p>
+   </div>
+   <div class="contentboxb">
+   <p class="contentboxb">
+    {t}This menu provides the functionality to create, edit or delete selected users. Having a great number of users, you may want to use the range seletors on top of the user list.{/t}
+    </p>
+   <p class="contentboxb">
+   {t}-Edit- and -New user- execute an assistant to aid you in managing your account informations. -Delete- will ask for confirmation before deleting the users from the LDAP server.{/t}
+   </p>
+   </div>
+   <br>
+   <div class="contentboxh">
+    <p class="contentboxh"><img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}</p>
+   </div>
+   <div class="contentboxb">
+    <p class="contentboxb" style="border-top:1px solid #B0B0B0;">
+     <table style="width:100%;">
+      {$alphabet}
+     </table>
+    </p>
+    <p class="contentboxb" style="border-top:1px solid #B0B0B0;">
+    <input type=checkbox name="templates" value="1" {$templates} onClick="mainform.submit()" title="{t}Select to see template pseudo users{/t}">{t}Show templates{/t}<br>
+    <input type=checkbox name="functionalusers" value="1" {$functionalusers} onClick="mainform.submit()" title="{t}Select to see users that have only a GOsa object{/t}">{t}Show functional users{/t}<br>
+    <input type=checkbox name="unixusers" value="1" {$unixusers} onClick="mainform.submit()" title="{t}Select to see users that have posix settings{/t}">{t}Show unix users{/t}<br>
+    <input type=checkbox name="mailusers" value="1" {$mailusers} onClick="mainform.submit()" title="{t}Select to see users that have mail settings{/t}">{t}Show mail users{/t}<br>
+    <input type=checkbox name="sambausers" value="1" {$sambausers} onClick="mainform.submit()" title="{t}Select to see users that have samba settings{/t}">{t}Show samba users{/t}<br>
+    <input type=checkbox name="proxyusers" value="1" {$proxyusers} onClick="mainform.submit()" title="{t}Select to see users that have proxy settings{/t}">{t}Show proxy users{/t}<br>
+    <input type=checkbox name="ftpusers" value="1" {$ftpusers} onClick="mainform.submit()" title="{t}Select to see users that have ftp settings{/t}">{t}Show FTP users{/t}<br>
+    <input type=checkbox name="faxusers" value="1" {$faxusers} onClick="mainform.submit()" title="{t}Select to see users that have FAX settings{/t}">{t}Show FAX users{/t}<br>
+    </p>
+    <p class="contentboxb" style="border-top:1px solid #B0B0B0;">
+    <input type=checkbox name="subsearch" value="1" {$subsearch} onClick="mainform.submit()" title="{t}Dive into LDAP subtrees when searching{/t}">{t}Search in subtrees{/t}<br>
+    </p>
+    <p class="contentboxb" style="border-top:1px solid #B0B0B0;">
+    <table width="100%"><tr><td width="50%"><img src="{$tree_image}" align=center>&nbsp;{t}Display users of department{/t}</td>
+    <td><select name="depselect" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
+      {html_options options=$deplist selected=$depselect}
+    </select></td></tr></table>
+    </p>
+    <p class="contentboxb" style="border-top:1px solid #B0B0B0">
+    <table width="100%"><tr><td width="50%"><img src="{$search_image}" align=center>&nbsp;{t}Display users matching{/t}</td>
+    <td><input type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching user names{/t}' onChange="mainform.submit()"></td></tr></table>
+    </p>
+   {$apply}
+   </div>
+  </td>
+</tr>
+</table>
+
+<input type="hidden" name="ignore">

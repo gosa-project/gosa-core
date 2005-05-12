@@ -1,0 +1,92 @@
+#!/usr/bin/make -f
+# Made with the aid of dh_make, by Craig Small
+# Sample debian/rules that uses debhelper. GNU copyright 1997 by Joey Hess.
+# Some lines taken from debmake, by Cristoph Lameter.
+
+export DH_COMPAT=3
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+build: 
+	#**** Off we go... ****
+
+clean:
+	dh_testdir
+	rm -f install-stamp 
+	-rm -f debian/files
+	-rm -f debian/substvars
+	dh_clean
+
+install: install-stamp
+install-stamp: 
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+
+	for i in `cd gosa; ls | grep -v debian`; do \
+	  cp -R $$i debian/gosa/usr/share/gosa ; \
+	done
+	-find debian/gosa -type d -name "CVS" -exec rm -rf {} \;
+	-cp -R debian/gosa/usr/share/gosa/contrib/* debian/gosa/usr/share/doc/gosa/contrib/
+	-cp debian/gosa/usr/share/gosa/contrib/openldap/go*.schema debian/gosa-schema/etc/ldap/schema
+	-mkdir debian/gosa/usr/share/doc/gosa/manual
+	-mkdir -p debian/gosa-schema/usr/share/doc/gosa-schema
+	-cp -R debian/gosa/usr/share/gosa/doc/* debian/gosa/usr/share/doc/gosa/manual
+	-cp -R INSTALL debian/gosa/usr/share/doc/gosa/README.INSTALL
+	-gzip -c9 debian/changelog > debian/gosa/usr/share/doc/gosa/changelog.Debian.gz
+	-gzip -c9 debian/changelog > debian/gosa-schema/usr/share/doc/gosa-schema/changelog.Debian.gz
+	-gzip -c9 Changelog > debian/gosa/usr/share/doc/gosa/changelog.gz
+	-cp AUTHORS TODO README FAQ debian/gosa/usr/share/doc/gosa/
+	-rm debian/gosa/usr/share/gosa/README debian/gosa/usr/share/gosa/INSTALL
+	-rm debian/gosa/usr/share/gosa/AUTHORS debian/gosa/usr/share/gosa/Changelog
+	-rm debian/gosa/usr/share/gosa/COPYING debian/gosa/usr/share/gosa/TODO
+	-rm debian/gosa/usr/share/gosa/FAQ
+	-rm debian/gosa/usr/share/gosa/doxygen.conf
+	-mkdir -p debian/gosa/var/spool/gosa/compile
+	-mkdir -p debian/gosa/var/spool/gosa/config
+	-mkdir -p debian/gosa/var/spool/gosa/cache
+	-rm -rf debian/gosa/usr/share/gosa/compile
+	-cp -R debian/apache.conf debian/gosa/etc/gosa/apache.conf
+	-mkdir -p debian/gosa/etc/gosa/vacation
+	-mv plugins/personal/mail/sieve-*.txt debian/gosa/etc/gosa
+	-mv contrib/shells debian/gosa/etc/gosa
+	-rm -rf debian/gosa/usr/share/gosa/contrib
+	-rm -rf debian/gosa/usr/share/gosa/doc
+	-rm debian/gosa/usr/share/gosa/bin/gosa
+	-mkdir -p debian/gosa/usr/lib/gosa
+	-mv bin/* debian/gosa/usr/lib/gosa
+	-rm -rf debian/gosa/usr/share/gosa/gen_locale.sh
+	-rm -rf debian/gosa/usr/share/gosa/update.sh
+	-find debian/gosa -type f -exec chmod -x {} \;
+
+	touch install-stamp
+
+binary-indep: install
+	dh_testdir
+	dh_testroot
+	dh_installdocs 
+	dh_installcron
+	dh_installexamples
+#	dh_undocumented  
+	dh_installman
+	dh_link
+	dh_strip
+#	dh_compress
+	dh_fixperms 
+	dh_perl
+	dh_installdeb
+	dh_shlibdeps
+
+	cd debian/gosa && find ./etc -type f -print | sed -e 's#^./#/#' > DEBIAN/conffiles
+	chmod 644 debian/gosa/DEBIAN/conffiles
+
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+source diff:                                                                  
+	@echo >&2 'source and diff are obsolete - use dpkg-source -b'; false
+
+binary: binary-indep 
+.PHONY: build install clean binary-indep binary

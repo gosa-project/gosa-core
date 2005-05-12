@@ -1,0 +1,7 @@
+/etc/gosa/gosa.conf
+/etc/gosa/apache.conf
+/etc/gosa/sieve-discard.txt
+/etc/gosa/sieve-header.txt
+/etc/gosa/sieve-mailsize.txt
+/etc/gosa/sieve-spam.txt
+/etc/gosa/sieve-vacation.txt

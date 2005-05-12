@@ -1,0 +1,17 @@
+goQuota.pl - run this script via cron (each 5-10 min for examle). It makes
+             cache file (quota.db) with traffic usage and user info from LDAP
+
+goQuotaView.pl - read collected data from quota.db and print it to
+                 stdout in human readable format
+
+goSquid.pl - connect this script to squid
+             redirect_program /usr/local/sbin/goSquid
+
+goAgent.pl - one script to create home directories and mailboxes on
+             filesystem. run it via cron
+  
+mkHash.pl  - create hash file for black list
+
+At this time all scripts have no config file. Please, edit source to configure.
+
+Igor Muratov <migor@altlinux.org>

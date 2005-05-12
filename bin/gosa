@@ -1,0 +1,111 @@
+#!/usr/bin/php4 -q
+<?php
+/*
+  This code is part of GOsa (https://gosa.gonicus.de)
+  Copyright (C) 2003  Cajus Pollmeier
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+
+/* Need to set this currently. May change later. */
+$BASE_DIR= "/home/cajus/gosa";
+
+/* Prepare setup */
+error_reporting (E_ALL);
+$variables_order= "ES";
+ini_set("register_globals",0);
+ini_set("track_vars",1);
+ini_set("include_path",".:$BASE_DIR/include");
+
+/* Load required functions */
+require_once ("functions.inc");
+require_once ("functions_cli.inc");
+
+/* Find all class files and include them */
+get_dir_list("$BASE_DIR/plugins");
+
+if (!file_exists(CONFIG_DIR."/gosa.conf")){
+        echo "Can't find config file ".CONFIG_DIR."/gosa.conf. Aborting.\n";
+        exit(8);
+}
+
+/* Check if gosa.conf is accessable */
+if (!is_readable(CONFIG_DIR."/gosa.conf")){
+        echo sprintf("GOsa configuration %s/gosa.conf is not readable. Aborted.", CONFIG_DIR)."\n";
+        exit(8);
+}
+
+/* Authorized? This is not checked yet. I guess, having access to the config file
+   via UNIX rights is enough for now. Making this script setgid www-data has no
+   effect, of course. Thinking about a better way. */
+
+/* Parse configuration file */
+$config= new config(CONFIG_DIR."/gosa.conf", $BASE_DIR);
+
+if (count($argv)==1){
+	print_usage();
+	exit (1);
+}
+
+/* Check for wanted LDAP location */
+if (!isset($config->data["MAIN"]["DEFAULT"])){
+	echo "Error: need at least a defined default location in gosa.conf";
+	exit (1);
+}
+$location= $config->data["MAIN"]["DEFAULT"];
+for ($i= 1; $i<count($argv); $i++){
+	if (preg_match('/^--location=.*$/', $argv[$i])){
+		$location= preg_replace('/^--location=(.*)$/', "$1", $argv[$i]);
+	}
+}
+$config->set_current($location);
+
+/* Check for plugin list / help */
+for ($i= 1; $i<count($argv); $i++){
+	if (preg_match('/^--plugin=list$/', $argv[$i])){
+		show_plugin_list($config);
+		exit (1);
+	}
+	if (preg_match('/^--plugin=[^-]+-help$/', $argv[$i])){
+		$plugin= preg_replace('/--plugin=([^-]+)-help$/', '$1', $argv[$i]);
+		show_plugin_help($plugin);
+		exit (1);
+	}
+}
+
+/* Go for actions */
+switch ($argv[1]){
+	case 'create':
+		echo "create\n";
+		break;
+	case 'delete':
+		echo "delete\n";
+		break;
+	case 'list':
+		echo "list\n";
+		break;
+	case 'modify':
+		echo "modify\n";
+		break;
+	default:
+		echo "Error: Supplied command not known\n\n";
+		print_usage();
+		break;
+}
+
+#print_r ($config);
+exit (0);
+
+?>

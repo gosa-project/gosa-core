@@ -1,0 +1,82 @@
+\documentclass[a4paper,spanish,10pt]{book}
+
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[pdftex]{graphicx}
+\usepackage[spanish]{babel}
+\usepackage{times}
+\usepackage{multirow}
+\usepackage[latex2html,backref,pdftitle={GOsa}]{hyperref}
+\usepackage{html,color}
+\usepackage{latexsym}
+\usepackage{anysize}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{verbatim}
+
+\author{Alejandro Escanero Blanco}
+\title{Administración de Sistemas con GOsa }
+\date{28-03-05}
+
+\marginsize{3cm}{2cm}{2.5cm}{2.5cm}
+
+\begin{document}
+\renewcommand{\contentsname}{Índice General}
+\renewcommand{\listfigurename}{Lista de Figuras} 
+\renewcommand{\listtablename}{Lista de Tablas}
+\renewcommand{\bibname}{Bibliografía}
+\renewcommand{\indexname}{Índice Alfabético}
+\renewcommand{\figurename}{Figura}
+\renewcommand{\partname}{Parte}
+\renewcommand{\chaptername}{Capítulo}
+\renewcommand{\appendixname}{Apéndice}
+\renewcommand{\abstractname}{Resumen}
+\renewcommand{\tablename}{Tabla}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+
+\chapter*{Preámbulo}
+
+\htmladdnormallink{GOsa}{http://gosa.gonicus.de}, es un proyecto creado en el año 2001 por Cajus Pollmeier \htmladdnormallink{Cajus Pollmeier}{mailto://pollmeier@gonicus.de}
+
+En su versión 1.0 era un proyecto ambicioso, pero mal enfocado. Entre como desarrollador del proyecto en Junio del 2003 en las primeras versiones de la versión 1.99.xx.
+El código fue rehecho completamente y se creo una nueva versión modular y extensible (basada en plugins) y se optimizo enormemente su funcionamiento.
+
+La versión actual de GOsa (a la fecha de la versión de este documento) es la 2.3.
+Es capaz de gestionar gran cantidad de servicios como samba2/3, pureftpd, postfix, cyrus-imap, posix, etc.
+Y cuenta con un pequeño, pero muy activo grupo de desarrolladores dirigido por Cajus.
+
+\chapter{Introducción}
+La administración de sistemas puede llegar a ser una tarea realmente complicada, demasiados usuarios con servicios y permisos diferentes.
+\section{Copyright and Disclaimer}
+Copyright (c) 2005 Alejandro Escanero Blanco. Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.2 or any later version published by the Free Software Foundation; with no Invariant Sections, with no Front-Cover Texts and with no Back-Cover Texts. A copy of the license is included in the section entitled "GNU Free Documentation License".
+
+If you have questions, please visit the following url: http://www.gnu.org/licenses/fdl.txt\\ And contact at: \htmladdnormallink{blainett@yahoo.es}{mailto://blainett@yahoo.es}
+
+
+\include{manual_gosa_es_ldap}
+
+\include{manual_gosa_es_apache}
+
+\chapter{GOsa}
+
+\chapter{Los Servidores}
+\label{servidores}
+\section{Postfix}
+\section{Cyrus-IMAP}
+\section{Samba 2/3}
+\section{Pure-Ftpd}
+\section{Squid}
+\section{Egroupware}
+
+\bibliography{referencias_gosa}
+\bibliographystyle{unsrt}
+
+\end{document}

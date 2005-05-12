@@ -1,0 +1,132 @@
+gosa (2.3.1-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cajus Pollmeier <cajus@debian.org>  Thu,  3 Mar 2005 13:59:27 +0100
+
+gosa (2.3-1) unstable; urgency=low
+  * New upstream release
+  * Added array_uniq to remove double entries in uid selectbox
+    (Closes:#293444)
+  * Adjusted shadow attributes to be days since 1970, not
+    seconds. (Closes: #293148)
+  * Corrected option to allow user password changes from samba
+    clients (Closes: #284716)
+
+ -- Cajus Pollmeier <cajus@debian.org>  Tue,  1 Feb 2005 15:42:36 +0100
+
+gosa (2.2-1) unstable; urgency=low
+
+  * New upstream release (Indirectly closes: #281707)
+
+ -- Cajus Pollmeier <cajus@debian.org>  Mon, 22 Nov 2004 08:46:20 +0200
+
+gosa (2.1.3-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cajus Pollmeier <cajus@debian.org>  Fri, 23 Jul 2004 07:29:56 +0200
+
+gosa (2.1.2-1) unstable; urgency=low
+
+  * New upstream release
+  * Removed not required dependencies to base packages (Closes: #259404)
+
+ -- Cajus Pollmeier <cajus@debian.org>  Fri, 16 Jul 2004 09:57:30 +0200
+
+gosa (2.1.1-3) unstable; urgency=low
+
+  * Removed dependency to wwwconfig-common, added alternative dependency
+    apache2 php module to get rid of apache 1.x.x dependencies.
+    (Closes: #253851)
+  * Changed dependency from exim to exim4 (Closes: #255344)
+ -- Cajus Pollmeier <cajus@debian.org>  Sat,  3 Jul 2004 10:55:48 +0200
+
+gosa (2.1.1-2) unstable; urgency=low
+
+  * Solved problem with upper/lowercase uid's
+  * Merged CVS fix that does an incasesensitive check for is_account
+
+ -- Cajus Pollmeier <cajus@debian.org>  Wed, 19 May 2004 16:48:30 +0200
+
+gosa (2.1.1-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cajus Pollmeier <cajus@debian.org>  Sat, 24 Apr 2004 21:14:21 +0200
+
+gosa (2.1-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cajus Pollmeier <cajus@debian.org>  Sun, 11 Jan 2004 22:30:37 +0100
+
+gosa (2.0.1-2) unstable; urgency=low
+
+  * Added various fixes from CVS. See changelog.
+
+ -- Cajus Pollmeier <cajus@debian.org>  Tue, 23 Dec 2003 09:31:20 +0100
+
+gosa (2.0.1-1) unstable; urgency=low
+
+  * New upstream release
+  * Fixed debconf script which destroyed the uid/ridbase
+    values of gosa.conf
+
+ -- Cajus Pollmeier <cajus@debian.org>  Wed,  3 Dec 2003 21:16:02 +0100
+
+gosa (2.0-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cajus Pollmeier <cajus@debian.org>  Mon, 10 Nov 2003 09:51:16 +0100
+
+gosa (2.0rc2-1) unstable; urgency=low
+
+  * New upstream release which fixes many bugs
+
+ -- Cajus Pollmeier <cajus@debian.org>  Thu, 23 Oct 2003 15:15:53 +0200
+
+gosa (2.0rc1-2) unstable; urgency=low
+
+  * Minor fixes to GOsa:
+   - corrected mistakenly copied ui object in functions.inc
+   - fixed errors when activating new terminals
+   - removed krb warnings in class_user.inc
+  * Fixed installation of distribution files to /usr/share/gosa
+
+ -- Cajus Pollmeier <cajus@debian.org>  Thu, 16 Oct 2003 15:17:34 +0200
+
+gosa (2.0rc1-1) unstable; urgency=low
+
+  * New upstream release which fixes these issues
+   - Switched to XML based gosa.conf
+   - Cleaned all plugins, moved to children of plugin.conf
+   - Moved back to gettext for translations
+   - Added hooks for pre-/post-install scripts
+   - Cleaned LDAP class
+   - Added workarounds for MS-IE (>5.5) to render transparent
+     PNGs in a correct way
+   - Redesigned login screen / some plugins
+   - Added hooks for eGOsa, which is a java applet based
+     browsing tool
+   - Switched from user based ACLs to group based ACLs,
+     removed standalone ACL plugin in favor of new group tab.
+   - Fixed samba2 rid generation (btw. still missing is sid
+     support for samba3. But this will go into the final.)
+   - Fixed many minor bugs
+   - Introduced simple theming support
+   - Added 'dn'-renaming for accounts
+  * Changed suggests to requires
+
+ -- Cajus Pollmeier <cajus@debian.org>  Thu,  9 Oct 2003 08:09:59 +0200
+
+gosa (1.99.97-1) unstable; urgency=low
+
+  * Beta version packaging
+
+ -- Cajus Pollmeier <cajus@debian.org>  Fri, 16 May 2003 11:20:59 +0200
+
+Local variables:
+mode: debian-changelog
+End:

@@ -1,0 +1,9 @@
+DESC: Funny message
+I am currently out at a job interview and will reply to you if I fail
+to get the position. Be prepared for my mood. In urgent cases you can
+reach me on the cell phone via %mobile or write a snail mail to:
+
+%homePostalAddress
+
+Greetings,
+%givenName %sn

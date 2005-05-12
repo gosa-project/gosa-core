@@ -1,0 +1,54 @@
+<h2>{t}Kolab account{/t}</h2>
+
+{if $is_account ne 'true'}
+{t}The kolab account is currently disabled. It's features can be adjusted if you add a mail account.{/t}
+{else}
+
+<table style="width:100%">
+ <tr>
+  <td style="width:50%; vertical-align:top;">
+   <b>{t}Delegations{/t}</b><br>
+   <select style="width:350px; height:100px;" name="delegate_list[]" size=15 multiple>
+    {html_options values=$kolabDelegate output=$kolabDelegate}
+   </select>
+   <br>
+   <input name="delegate_address" size=30 align=center maxlength=60
+        {$kolabDelegateACL} value="">
+   <input type=submit value="{t}Add{/t}" name="add_delegation"
+        {$kolabDelegateACL}>&nbsp;
+   <input type=submit value="{t}Delete{/t}" name="delete_delegation"
+        {$kolabDelegateACL}>
+  </td>
+  <td rowspan=2 style="border-left:1px solid #A0A0A0">
+   &nbsp;
+  </td>
+  <td style="vertical-align:top;">
+<p>
+ <b>{t}Invitation{/t}</b><br>
+ &nbsp;{t}Policy{/t} &nbsp; 
+ <select size="1" name="kolabInvitationPolicy" {$kolabInvitationPolicyACL}>
+  {html_options options=$policies selected=$kolabInvitationPolicy}
+ </select>
+</p>
+<p>
+ <b>{t}Free Busy information{/t}</b><br>
+ <table>
+  <tr>
+   <td>{t}URL{/t}</td>
+   <td><input name="calFBURL" size=30 maxlength=60 {$calFBURLACL} value="{$calFBURL}"></td>
+  </tr>
+  <tr>
+   <td>{t}Future{/t}</td>
+   <td><input name="kolabFreeBusyFuture" size=5 maxlength=6 {$kolabFreeBusyFutureACL} value="{$kolabFreeBusyFuture}"> {t}days{/t}</td>
+  </tr>
+ </table>
+</p>
+<p>
+ <b>{t}Misc{/t}</b><br>
+ &nbsp;<input type="checkbox" name="unrestrictedMailSize" value="1" {$unrestrictedMailSizeACL} {$unrestrictedMailSizeState}> {t}No mail size restriction{/t}
+</p>
+  </td>
+ </tr>
+</table>
+
+{/if}

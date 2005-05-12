@@ -1,0 +1,17 @@
+GOsa 2.1 for DEBIAN (woody)
+----------------------------
+
+Add this lines to your sources.list:
+deb ftp://oss.gonicus.de/pub/gosa/debian ./
+
+Optionally, if you want to do a complete setup with
+cyrus etc., add this ones, too:
+deb http://people.debian.org/~hmh/woody/ hmh/cyrus/
+deb http://people.debian.org/~hmh/woody/ hmh/misc/
+
+Install gosa/gosa-schema via dselect, use the php4 packages
+provided by GONICUS. They are prepatched to have needed
+get_acl IMAP functionality.
+
+----
+Cajus Pollmeier <cajus@debian.org>  Fri 16 May 2003 11:26:51 +0200

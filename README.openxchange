@@ -1,0 +1,41 @@
+### Small tutorial for use GOsa with open-xchange ###
+
+Once installed open-xchange (http://www.open-xchange.org) and php4-pgsql 
+module we must do some changes to get open-xchange running with GOsa.
+
+- php.ini must have extension=pg_sql.so
+
+- The webserver must have access to the Postgresql server.
+
+- In the connectivity section of gosa.conf must have something like this:
+                <tab class="oxchangeAccount"
+                        pghost="server"
+                        pguser="openexchange"
+                        pgpasswd="test"
+                        pgdbname="openexchange"
+ 		/>
+
+- In the configuration of open-xchange we must make this changes to ldap.properties:
+com.openexchange.groupware.ldap.OXUserObjectAttributeimapServerName=imapServer
+TO:
+com.openexchange.groupware.ldap.OXUserObjectAttributeimapServerName=gosaMailServer
+
+com.openexchange.groupware.ldap.OXUserObjectAttributesmtpServerName=smtpServer
+TO:
+com.openexchange.groupware.ldap.OXUserObjectAttributesmtpServerName=gosaMailServer
+
+com.openexchange.groupware.ldap.OXUserObjectAttributeuserCountryName=userCountry
+TO:
+com.openexchange.groupware.ldap.OXUserObjectAttributeuserCountryName=st
+
+- And this changes to admintools.conf:
+
+USERS_BASEDN="ou=people,dc=example,dc=org"
+GROUP_BASEDN="ou=groups,dc=example,dc=org"
+
+We suppose that the GOsa Base is "dc=example,dc=org"
+
+
+
+This configuration is based in documentation gets from 
+http://www.open-xchange.org/oxwiki/OX_20with_20existing_20LDAP_20DIT

@@ -1,0 +1,3 @@
+#!/bin/sh
+perl -MCrypt::SmbHash -e "ntlmgen \"\$ARGV[0]\", \$lm, \$nt; print \"\${lm}:\${nt}\n\";" $1 
+exit 0

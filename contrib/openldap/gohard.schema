@@ -1,0 +1,82 @@
+##
+##
+## gohard.scheam - Used for Hardware describtions, normally used by GOto
+##
+## Version 030403
+##
+##
+## Maintainer:	Lars Scheiter	(scheiter@GONICUS.de>
+##		Cajus Pollmeier	(pollmeier@GONICUS.de)
+##
+##
+
+
+# Attributes for Hardware definitions
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.2.1 NAME 'ghCpuType'
+	DESC 'Hardware definitions, value cpuType'
+	EQUALITY caseIgnoreIA5Match
+	SUBSTR caseIgnoreIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.2.2 NAME 'ghMemSize'
+	DESC 'Hardware definitions, value memSize'
+	EQUALITY caseIgnoreIA5Match
+	SUBSTR caseIgnoreIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.2.3 NAME 'ghUsbSupport'
+	DESC 'Hardware definitions, value usbSupport'
+	EQUALITY caseIgnoreIA5Match
+	SUBSTR caseIgnoreIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.2.4 NAME 'ghIdeDev'
+	DESC 'Hardware definitions, value ideDev'
+	EQUALITY caseIgnoreIA5Match
+	SUBSTR caseIgnoreIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.2.5 NAME 'ghScsiDev'
+	DESC 'Hardware definitions, value scsiDev'
+	EQUALITY caseIgnoreIA5Match
+	SUBSTR caseIgnoreIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.2.7 NAME 'ghSoundAdapter'
+	DESC 'Hardware definitions, value soundAdapter'
+	EQUALITY caseIgnoreIA5Match
+	SUBSTR caseIgnoreIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.2.8 NAME 'ghNetNic'
+	DESC 'Hardware definitions, value Network Device'
+	EQUALITY caseIgnoreIA5Match
+	SUBSTR caseIgnoreIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.2.9 NAME 'ghGfxAdapter'
+	DESC 'Hardware definitions, value Grafikkarte'
+	EQUALITY caseIgnoreIA5Match
+	SUBSTR caseIgnoreIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.2.10 NAME 'ghInventoryNumber'
+	DESC 'Unique number for inclusion in an inventory'
+	EQUALITY caseIgnoreIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+
+# objectclass for Hardware definitions
+
+objectclass (1.3.6.1.4.1.10098.1.2.1.3 NAME 'GOhard'
+	DESC 'Gonicus Hardware definitions, objectclass (v2.1)' SUP top AUXILIARY
+	MUST ( cn )
+	MAY ( ghGfxAdapter $ ghNetNic $ ghSoundAdapter $ ghIdeDev $ ghScsiDev $
+              macAddress $ ghUsbSupport $ ghMemSize $ ghCpuType $ ghInventoryNumber ) )
+

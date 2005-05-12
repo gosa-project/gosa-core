@@ -1,0 +1,132 @@
+dn: dc=gonicus,dc=de
+objectClass: dcObject
+objectClass: organization
+description: Base object
+dc: gonicus
+o: GONICUS GmbH
+
+dn: cn=terminal-admin,dc=gonicus,dc=de
+objectClass: person
+cn: terminal-admin
+sn: Upload user
+description: GOto Upload Benutzer
+userPassword:: e2tlcmJlcm9zfXRlcm1pbmFsYWRtaW5AR09OSUNVUy5MT0NBTAo=
+
+dn: ou=systems,dc=gonicus,dc=de
+objectClass: organizationalUnit
+ou: systems
+
+dn: ou=terminals,ou=systems,dc=gonicus,dc=de
+objectClass: organizationalUnit
+ou: terminals
+
+dn: ou=servers,ou=systems,dc=gonicus,dc=de
+objectClass: organizationalUnit
+ou: servers
+
+dn: ou=people,dc=gonicus,dc=de
+objectClass: organizationalUnit
+ou: people
+
+dn: ou=groups,dc=gonicus,dc=de
+objectClass: organizationalUnit
+ou: groups
+
+dn: cn=default,ou=terminals,ou=systems,dc=gonicus,dc=de
+objectClass: gotoTerminal
+cn: default
+gotoMode: disabled
+gotoXMethod: query
+gotoRootPasswd: tyogUVSVZlEPs
+gotoXResolution: 1024x768
+gotoXColordepth: 16
+gotoXKbModel: pc104
+gotoXKbLayout: de
+gotoXKbVariant: nodeadkeys
+gotoSyslogServer: lts-1
+gotoSwapServer: lts-1:/export/swap
+gotoLpdServer: lts-1:/export/spool
+gotoNtpServer: lts-1
+gotoScannerClients: lts-1.gonicus.local
+gotoFontPath: inet/lts-1:7110
+gotoXdmcpServer: lts-1
+gotoFilesystem: afs-1:/export/home /home nfs exec,dev,suid,rw,hard,nolock,fg,rsize=8192 1 1
+
+dn: cn=admin,ou=people,dc=gonicus,dc=de
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: gosaAccount
+uid: admin
+cn: admin
+givenName: admin
+sn: GOsa main administrator
+sambaLMPassword: 10974C6EFC0AEE1917306D272A9441BB
+sambaNTPassword: 38F3951141D0F71A039CFA9D1EC06378
+userPassword:: dGVzdGVy
+
+dn: cn=administrators,ou=groups,dc=gonicus,dc=de
+objectClass: gosaObject
+objectClass: posixGroup
+objectClass: top
+gosaSubtreeACL: :all
+cn: administrators
+gidNumber: 999
+memberUid: admin
+
+dn: cn=lts-1,ou=servers,ou=systems,dc=gonicus,dc=de
+objectClass: goTerminalServer
+objectClass: goServer
+goXdmcpIsEnabled: true
+macAddress: 00:B0:D0:F0:DE:1D
+cn: lts-1
+goFontPath: inet/lts-1:7110
+
+dn: cn=afs-1,ou=servers,ou=systems,dc=gonicus,dc=de
+objectClass: goNfsServer
+objectClass: goNtpServer
+objectClass: goLdapServer
+objectClass: goSyslogServer
+objectClass: goCupsServer
+objectClass: goServer
+macAddress: 00:B0:D0:F0:DE:1C
+cn: afs-1
+goExportEntry: /export/terminals 10.3.64.0/255.255.252.0(ro,async,no_root_squash)
+goExportEntry: /export/spool 10.3.64.0/255.255.252.0(rw,sync,no_root_squash)
+goExportEntry: /export/swap 10.3.64.0/255.255.252.0(rw,sync,no_root_squash)
+goExportEntry: /export/home 10.3.64.0/255.255.252.0(rw,sync,no_root_squash)
+goLdapBase: dc=gonicus,dc=de
+
+dn: cn=vserver-02,ou=servers,ou=systems,dc=gonicus,dc=de
+objectClass: goImapServer
+objectClass: goServer
+macAddress: 00:B0:D0:F0:DE:1F
+cn: vserver-02
+goImapName: imap://vserver-02.gonicus.local
+goImapConnect: {vserver-02.gonicus.local:143}
+goImapAdmin: cyrus
+goImapPassword: secret
+goImapSieveServer: vserver-02.gonicus.local
+goImapSievePort: 2000
+
+dn: cn=kerberos,ou=servers,ou=systems,dc=gonicus,dc=de
+objectClass: goKrbServer
+objectClass: goServer
+macAddress: 00:B0:D0:F0:DE:1E
+cn: kerberos
+goKrbRealm: GONICUS.LOCAL
+goKrbAdmin: admin/admin
+goKrbPassword: secret
+
+dn: cn=fax,ou=servers,ou=systems,dc=gonicus,dc=de
+objectClass: goFaxServer
+objectClass: goServer
+macAddress: 00:B0:D0:F0:DE:10
+cn: fax
+goFaxAdmin: fax
+goFaxPassword: secret
+
+dn: ou=incoming,dc=gonicus,dc=de
+objectClass: organizationalUnit
+ou: incoming
+

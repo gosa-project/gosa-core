@@ -1,0 +1,5 @@
+etc/gosa
+usr/share/gosa
+usr/share/doc/gosa
+usr/share/doc/gosa/contrib
+var/spool/gosa

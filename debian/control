@@ -1,0 +1,27 @@
+Source: gosa
+Section: web
+Priority: optional
+Maintainer: Cajus Pollmeier <cajus@debian.org>
+Build-Depends-Indep: debhelper(>= 4.1.16)
+Standards-Version: 3.6.1.0
+
+Package: gosa
+Architecture: all
+Depends: php4 (>= 4.1.1-1) | libapache2-mod-php4, apache | apache-ssl | apache2-mpm-worker | apache2-mpm-threadpool | apache2-mpm-prefork | apache2-mpm-perchild, exim4 | mail-transport-agent, php4-cgi | libapache2-mod-php4, php4-gd, php4-imap, php4-ldap, php4-mcrypt, php4-mhash, php4-mysql, php4-imagick | imagemagick (>= 5.4.4.5-1), fping, libcrypt-smbhash-perl
+Suggests: cupsys-server, cyrus21-imapd (>= 2.1.11), postfix-ldap, php4-kadm5, php4-cups, etherwake, slapd, gosa-schema
+Description: Web Based LDAP Administration Program
+ Provided is access to posix, shadow, samba, proxy, fax, pureftp and
+ kerberos accounts. It is able to manage the postfix/cyrus server
+ combination and can write user adapted sieve scripts.
+ .
+ GOsa is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
+Package: gosa-schema
+Architecture: all
+Depends: slapd
+Description: LDAP schema for GOsa
+ This package includes the LDAP schema needed by GOsa.
+ .
+ GOsa is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.

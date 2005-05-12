@@ -1,0 +1,211 @@
+<?php
+
+class servdb extends plugin
+{
+  /* CLI vars */
+  var $cli_summary= "Manage server basic objects";
+  var $cli_description= "Some longer text\nfor help";
+  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
+
+  /* Object information */
+  var $goImapName= "";
+  var $goImapConnect= "";
+  var $goImapAdmin= "";
+  var $goImapPassword= "";
+  var $goImapSieveServer= "";
+  var $goImapSievePort= "";
+  var $goKrbRealm= "";
+  var $goKrbAdmin= "";
+  var $goKrbPassword= "";
+  var $goFaxAdmin= "";
+  var $goFaxPassword= "";
+  var $goLogAdmin= "";
+  var $goLogPassword= "";
+  var $goFonAdmin= "";
+  var $goFonPassword= "";
+  var $goFonAreaCode= "";
+  var $goFonCountryCode= "";
+
+  /* attribute list for save action */
+  var $attributes= array("goImapName", "goImapConnect", "goImapAdmin", "goImapPassword",
+                         "goImapSieveServer", "goImapSievePort", "goKrbRealm", 
+                         "goKrbAdmin", "goKrbPassword", "goFaxAdmin", "goFaxPassword",
+                         "goLogAdmin", "goLogPassword", "goFonAdmin", "goFonPassword",
+                         "goFonAreaCode", "goFonCountryCode");
+  var $objectclasses= array("top", "goServer");
+  var $additionaloc= array("goImapServer" => array("goImapName", "goImapConnect",
+                                                "goImapAdmin", "goImapPassword",
+                                                "goImapSieveServer", 
+                                                "goImapSievePort"),
+                          "goKrbServer" => array("goKrbRealm", "goKrbAdmin",
+                                                "goKrbPassword"),
+                          "goFaxServer" => array("goFaxAdmin", "goFaxPassword"),
+                          "goLogDBServer" => array("goLogAdmin", "goLogPassword"),
+                          "goFonServer" => array("goFonAdmin", "goFonPassword",
+                                                "goFonAreaCode", "goFonCountryCode"));
+
+  function servdb ($config, $dn= NULL)
+  {
+    plugin::plugin ($config, $dn);
+
+    /* Make dynamic list of objectClasses */
+    foreach ($this->additionaloc as $oc => $dummy){
+      if (isset($this->attrs['objectClass']) && in_array($oc, $this->attrs['objectClass'])){
+        $this->objectclasses[$oc]= $oc;
+      }
+    }
+
+    /* Always is account... */
+    $this->is_account= TRUE;
+  }
+
+  function execute()
+  {
+    /* Fill templating stuff */
+    $smarty= get_smarty();
+
+    /* Attributes... */
+    foreach ($this->attributes as $attr){
+      $smarty->assign("$attr", $this->$attr);
+      $smarty->assign("$attr"."ACL", chkacl($this->acl, $attr));
+    }
+
+    /* Classes... */
+    foreach ($this->additionaloc as $oc => $dummy){
+      if (isset($this->objectclasses[$oc])){
+        $smarty->assign("$oc", "checked");
+        $smarty->assign("$oc"."ACL", chkacl($this->acl, $oc));
+      } else {
+        $smarty->assign("$oc"."State", "disabled");
+      }
+    }
+
+    return($smarty->fetch (get_template_path('servdb.tpl', TRUE)));
+  }
+
+  function remove_from_parent()
+  {
+    /* This cannot be removed... */
+  }
+
+
+  /* Save data to object */
+  function save_object()
+  {
+    plugin::save_object();
+    
+    /* Save checkbox state */
+    foreach ($this->additionaloc as $oc => $dummy){
+      if (isset($_POST[$oc]) && $_POST[$oc] == '1'){
+        $this->objectclasses[$oc]= $oc;
+      } else {
+        unset($this->objectclasses[$oc]);
+      }
+    }
+  }
+
+
+  /* Check supplied data */
+  function check()
+  {
+    $message= array();
+
+    /* All fields are marked as *must* */
+    if (in_array("goImapServer", $this->objectclasses)){
+      foreach (array("goImapAdmin", "goImapName") as $attr){
+        if ($this->$attr == "" || preg_match("/ /", $this->$attr)){
+          $message[]= sprintf(_("The attribute '%s' is empty or contains invalid characters."), $attr);
+        }
+      }
+
+      /* Check connect string */
+      if (!preg_match('/^\{[^:]+:[0-9]+.*\}$/', $this->goImapConnect)){
+        $message[]= sprintf(_("The imap connect string needs to be in the form '%s'."),
+                    '{server-name:port/options}');
+      }
+      if (!preg_match('/^[0-9]+$/', $this->goImapSievePort)){
+        $message[]= _("The sieve port needs to be numeric.");
+      }
+    }
+    if (in_array("goKrbServer", $this->objectclasses)){
+      foreach (array("goKrbAdmin", "goKrbRealm") as $attr){
+        if ($this->$attr == "" || preg_match("/ /", $this->$attr)){
+          $message[]= sprintf(_("The attribute '%s' is empty or contains invalid characters."), $attr);
+        }
+      }
+    }
+    if (in_array("goFaxServer", $this->objectclasses)){
+      if ($this->goFaxAdmin == "" || preg_match("/ /", $this->goFaxAdmin)){
+        $message[]= sprintf(_("The attribute '%s' is empty or contains invalid characters."), "goFaxAdmin");
+      }
+    }
+    if (in_array("goLogServer", $this->objectclasses)){
+      if ($this->goLogAdmin == "" || preg_match("/ /", $this->goLogAdmin)){
+        $message[]= sprintf(_("The attribute '%s' is empty or contains invalid characters."), "goLogAdmin");
+      }
+    }
+    if (in_array("goFonServer", $this->objectclasses)){
+      foreach (array("goFonAdmin", "goFonAreaCode", "goFonCountryCode") as $attr){
+        if ($this->$attr == "" || preg_match("/ /", $this->$attr)){
+          $message[]= sprintf(_("The attribute '%s' is empty or contains invalid characters."), $attr);
+        }
+      }
+    }
+
+    return ($message);
+  }
+
+
+  /* Save to LDAP */
+  function save()
+  {
+    /* Normalize lazy objectclass arrays */
+    $objectclasses= array();
+    foreach($this->objectclasses as $oc){
+      $objectclasses[]= $oc;
+    }
+    $this->objectclasses= $objectclasses;
+    plugin::save();
+    
+    /* Remove objectclasses */
+    unset ($this->attrs['objectClass']);
+    foreach($this->objectclasses as $oc){
+      $this->attrs['objectClass'][]= $oc;
+    }
+
+    /* Adapt sieve server if needed */
+    if (in_array('goImapServer', $this->objectclasses)){
+      $this->attrs['goImapSieveServer']= preg_replace('/:.*$/', '',
+                                         preg_replace('/^{([^}]+)}$/', '\\1', 
+                                         $this->attrs['goImapConnect']));
+    }
+
+    /* Remove unneeded attributes */
+    foreach ($this->additionaloc as $oc => $attrs){
+      if (!in_array($oc, $this->objectclasses)){
+        foreach ($attrs as $attr){
+          $this->attrs[$attr]= array();
+        }
+      }
+    }
+
+    /* Write to LDAP */
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd($this->dn);
+    $ldap->modify($this->attrs);
+    show_ldap_error($ldap->get_error());
+
+    /* Optionally execute a command after we're done */
+    if ($this->initially_was_account == $this->is_account){
+      if ($this->is_modified){
+        $this->handle_post_events("mofify");
+      }
+    } else {
+      $this->handle_post_events("add");
+    }
+  }
+
+}
+
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+?>

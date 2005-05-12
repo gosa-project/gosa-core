@@ -1,0 +1,14 @@
+##
+## goforge.schema - used by goforge 
+##
+## Version: 030421
+##
+##	Maintained by: Lars Scheiter (scheiter@GONICUS.de)
+##
+
+
+# Objectclasses
+objectclass (1.3.6.1.4.1.10098.1.2.1.24 NAME 'goforgeAccount'
+        DESC 'users that have access to GOforge get this objectclass'
+        MUST ( cn $ mail $ uid ))
+

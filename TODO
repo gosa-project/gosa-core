@@ -1,0 +1,69 @@
+Things to fix in 2.3.9:
+=======================
+
+* Basic server support (misc is still missing)
+
+* Finish kolab integration
+  - mail groups
+  - shared folders
+  - server
+  - setup
+
+* Make it "barrierefrei"
+
+
+Target for 2.4:
+===============
+
+* Replace PHP IMAP module by self made module
+
+* Add possibility to add referrals in department dialog
+
+* Add sambaWorkingHours
+
+* Fine tuning in Kerberos support
+  Special kerberos attributes like ticket expiery and policies can't
+  be handeled with GOsa right now this has to be added in later releases.
+  
+* Server-/Workstation management
+  This has been removed because of inconsistencies. Will be back soon:
+  - support for dhcp
+  - attributes for ldap-, ntp-, nfs-, imap- and print-servers
+
+* SSL
+  User certificates are only shown as "absent" or "present", because the
+  SSL PHP module isn't buildable in the moment. I'll check this later on.
+    (Notes:
+     openssl x509 -outform DER -in incert.pem  -out outcert.der
+     ldif -b "usercertificate;binary" < outcert.der   > cert.ldif
+     print_r(openssl_x509_parse ($this->userCertificate));
+    )
+    
+* Rework ACL stuff, use experimental (native) LDAP ACLs / get ACLs from classes
+  The complete ACL dialog stinks. If every dialog is done by smarty, we could
+  use a shrinked version of each dialog with checkboxes, to let the admin decide
+  what fields could be edited.
+
+* Documentation
+  - End user documentation: online help
+  - Administrators documentation: how to install / contributed scripts, etc.
+  - Developer documentation: how to extend, own plugins, themes, etc.
+
+* amavis-new support
+
+* Automatic passwords?
+  Generate a password for a newly created user and display it.
+
+* Make IMAP namespace configurable
+
+* Try RDN style for unique names
+
+* Object Groups should have member tabs depending of the grouped object types
+
+
+Target > 2.3:
+=============
+
+* OpenAFS support
+  Still completely missing...
+  
