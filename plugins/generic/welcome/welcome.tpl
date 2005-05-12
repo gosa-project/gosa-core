@@ -12,7 +12,7 @@
 
 <br>
 
-<div class="copynotice">&copy; 2002-{$year} <a href="https://alioth.debian.org/projects/gosa/">{t}The GOsa team{/t}</a>
+<div class="copynotice">&copy; 2002-{$year} <a href="https://alioth.debian.org/projects/gosa/">{t}The GOsa team{/t}, {$revision}</a>
 </div>
 
 <input type="hidden" name="ignore">
