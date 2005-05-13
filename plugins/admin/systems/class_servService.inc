@@ -29,8 +29,8 @@ class servservice extends plugin
                           "goNtpServer"     => array("goTimeSource"),
                           "goLdapServer"    => array("goLdapBase"),
                           "goTerminalServer"=> array("goXdmcpIsEnabled", "goFontPath"),
-                          "goSyslogServer"  => array("goSyslogServer"),
-                          "goCupsServer"    => array("goCupsServer")                           
+                          "goSyslogServer"  => array(""),
+                          "goCupsServer"    => array("")                           
                           );
 
 

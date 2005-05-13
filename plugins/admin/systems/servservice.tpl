@@ -64,15 +64,7 @@
 
      <b>{t}LDAP Service{/t}</b>
 
-  <table>
-    <tr>
-     <td>{t}Base{/t}</td>
 		<input type="text"      value="enabled"         name="goLdapBase" {$goLdapServerState} id="goLdapBaseId">
-     <td>
-    </td>
-    </tr>
-   </table>
-
 
 	<p class="seperator">&nbsp;</p>
     <br>
