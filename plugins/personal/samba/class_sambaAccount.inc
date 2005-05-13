@@ -495,19 +495,20 @@ class sambaAccount extends plugin
       $smarty->assign("$val"."ACL", chkacl($this->acl,$val));
     }
 
-    /* Checkboxes */
-    foreach(array(  
-              "N" => "no_password_required",
-              "D" => "temporary_disable",
-              "L" => "automatically_disable") 
-          as $key => $val){
-      if (is_integer(strpos($this->sambaAcctFlags, "$key"))) {
-        $smarty->assign("flags$key", "checked");
-      } else {
-        $smarty->assign("flags$key", "");
-      }
-      $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
+    
+    /* 'sambaAcctFlags' checkboxes */
+    /* Check for 'lock-account'-flag: 'D' or 'L' */
+    if (is_integer(strpos($this->sambaAcctFlags, "D")) ||
+        is_integer(strpos($this->sambaAcctFlags, "L"))) {
+        $smarty->assign("flagsD", "checked");
     }
+    
+    /* Check for no_password_required flag 'N' */
+    if (is_integer(strpos($this->sambaAcctFlags, "N"))) {
+        $smarty->assign("flagsN", "checked");
+    }
+
+    /* 'normal' Checkboxes */
     if ($this->pwdCanChange=="1"){
       $smarty->assign("flagsP", "checked");
     }
@@ -526,6 +527,8 @@ class sambaAccount extends plugin
     
     $smarty->assign("allow_pwchangeACL", chkacl($this->acl, "allow_pwchange"));
     $smarty->assign("password_expiresACL", chkacl($this->acl, "password_expires"));
+    $smarty->assign("no_password_requiredACL", chkacl($this->acl, "no_password_required"));
+    $smarty->assign("temporary_disableACL", chkacl($this->acl, "temporary_disable"));
     $smarty->assign("sambaDomainNameACL", chkacl($this->acl, "sambaDomainName"));
     $smarty->assign("logon_time_setACL", chkacl($this->acl, "logon_time_set"));
     $smarty->assign("logoff_time_setACL", chkacl($this->acl, "logoff_time_set"));
@@ -654,7 +657,11 @@ class sambaAccount extends plugin
       }
       if (isset($_POST["temporary_disable"])){
         if ($_POST["temporary_disable"] == 1){
-          $tmp.= "D";
+          if (is_integer(strpos($this->sambaAcctFlags, "L"))) {
+            $tmp.= "L";
+          } else {
+            $tmp.= "D";
+          }
         }
       }
       if (isset($_POST["logon_time_set"])){
@@ -752,7 +759,6 @@ class sambaAccount extends plugin
         }
       }
     }
-
   }
 
 
@@ -863,7 +869,6 @@ class sambaAccount extends plugin
         # Set more useful default setting
         $this->attrs['sambaKickoffTime']= 2147483647;
       }
-      
     } else {
     /* Not samba3 */
       $this->attrs['rid']= $this->uidNumber*2 + 1000;

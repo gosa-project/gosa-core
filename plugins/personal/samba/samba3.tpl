@@ -219,9 +219,6 @@
    {t}Login from windows client requires no password{/t}
    <br>
    <input type=checkbox name="temporary_disable" value="1" {$flagsD} {$temporary_disableACL}>
-   {t}Temporary disable samba account{/t}
-   <br>
-	 <input type=checkbox name="automatically_disable" value="1" {$flagsL} {$automatically_disableACL}>
    {t}Lock samba account{/t}
    <br>
    <input type=checkbox name="password_expires" value="1" {$flagsC} {$password_expiresACL}>
