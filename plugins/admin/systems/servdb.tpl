@@ -1,7 +1,3 @@
-{t}This dialog keeps settings that are used and required by several components within GOsa and are used to find out more about your servers. These settings will be reloaded when you save this component.{/t}
-<p class="seperator">
-&nbsp;
-</p>
 <table style="width:100%">
  <tr>
  
