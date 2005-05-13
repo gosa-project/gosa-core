@@ -1,7 +1,3 @@
-{t}Useful lheadline here.{/t}
-<p class="seperator">
-&nbsp;
-</p>
 <table style="width:100%">
  <tr>
   <td style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;" width="50%">
@@ -15,13 +11,12 @@
 		<b>{t}Nfs Export{/t}</b>
    <table>
     <tr>
-     <td>{t}NFS Exports{/t}</td>
      <td>
 		<select style="width:350px;" id="goExportEntry" name="goExportEntry" {$goNfsServerState} size=4 multiple {$trustmodeACL} {$trusthide}>
     		{html_options values=$goExportEntry output=$goExportEntry}
 	    </select>
 	<br>	
-		<input type="text" 		value="enabled" 		name="NewNfsExport" {$goNfsServerState} id="NewNfsExportId"> 
+		<input type="text" 		name="NewNfsExport" {$goNfsServerState} id="NewNfsExportId"> 
 		<input type="submit" 	value="{t}Add{/t}"	 	name="NewNfsAdd" 	{$goNfsServerState} id="NewNfsAddId"> 
 		<input type="submit" 	value="{t}Delete{/t}"  	name="DelNfsEnt" 	{$goNfsServerState} id="DelNfsEntId">
 	</td>
@@ -41,13 +36,12 @@
         <b>{t}Time Service{/t}</b>
    <table>
     <tr>
-     <td>{t}NFS Exports{/t}</td>
      <td>
         <select style="width:350px;" id="goTimeEntry" name="goTimeSource" {$goNtpServerState} size=4 multiple {$trustmodeACL} {$trusthide}>
             {html_options values=$goTimeSource output=$goTimeSource}
         </select>
     <br>
-        <input type="text"      value="enabled"         name="NewNTPExport" {$goNtpServerState} id="NewNTPExportId">
+        <input type="text" name="NewNTPExport" {$goNtpServerState} id="NewNTPExportId">
         <input type="submit"    value="{t}Add{/t}"      name="NewNTPAdd"    {$goNtpServerState} id="NewNTPAddId">
         <input type="submit"    value="{t}Delete{/t}"   name="DelNTPEnt"    {$goNtpServerState} id="DelNTPEntId">
     </td>
@@ -64,7 +58,7 @@
 
      <b>{t}LDAP Service{/t}</b>
 
-		<input type="text"      value="enabled"         name="goLdapBase" {$goLdapServerState} id="goLdapBaseId">
+		<input type="text" name="goLdapBase" {$goLdapServerState} id="goLdapBaseId">
 
 	<p class="seperator">&nbsp;</p>
     <br>
@@ -78,7 +72,7 @@
   <table>
     <tr>
 	 <td> Font path </td>
-	 <td> <input type="text"      value="enabled"         name="goFontPath" {$goTerminalServerState} id="FontPathId"></td>
+	 <td> <input type="text" name="goFontPath" {$goTerminalServerState} id="FontPathId"></td>
 	</tr>
 	<tr>
 	 <td>Temporary disable login </td>
