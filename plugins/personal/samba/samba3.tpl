@@ -221,6 +221,9 @@
    <input type=checkbox name="temporary_disable" value="1" {$flagsD} {$temporary_disableACL}>
    {t}Temporary disable samba account{/t}
    <br>
+	 <input type=checkbox name="automatically_disable" value="1" {$flagsL} {$automatically_disableACL}>
+   {t}Lock samba account{/t}
+   <br>
    <input type=checkbox name="password_expires" value="1" {$flagsC} {$password_expiresACL}>
    {t}Password expires on{/t}
    <select name=day onChange="createResult(this.form,this.form.sambaPwdMustChange);" {$sambaPwdMustChangeACL}>
@@ -233,7 +236,7 @@
     {html_options values=$years output=$years selected=$year}
    </select>
    <br>
-   <input type=checkbox name="logon_time_set" value="1" {$flagsL} {$logon_time_setACL}>
+   <input type=checkbox name="logon_time_set" value="1" {$flagsT} {$logon_time_setACL}>
    {t}Limit Logon Time{/t}
    <select name=sambaLogonTime_day onChange="createResult_sambaLogonTime(this.form,this.form.sambaLogonTime);" {$sambaLogonTimeACL}>
    {html_options values=$sambaLogonTime_days output=$sambaLogonTime_days selected=$sambaLogonTime_day}
@@ -280,7 +283,7 @@
   <td style="vertical-align:top;">
    {t}Allow connection from these workstations only{/t}
    <br>
-   <select style="width:350px;" name="workstation_list[]" size=8 multiple {$sambaUserWorkstationACL}>
+   <select style="width:350px;" name="workstation_list[]" size=10 multiple {$sambaUserWorkstationACL}>
     {html_options values=$workstations output=$workstations}
    </select>
    <br>

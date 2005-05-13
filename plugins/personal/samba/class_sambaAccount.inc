@@ -496,8 +496,11 @@ class sambaAccount extends plugin
     }
 
     /* Checkboxes */
-    foreach(array(  "N" => "no_password_required",
-          "D" => "temporary_disable") as $key => $val){
+    foreach(array(  
+              "N" => "no_password_required",
+              "D" => "temporary_disable",
+              "L" => "automatically_disable") 
+          as $key => $val){
       if (is_integer(strpos($this->sambaAcctFlags, "$key"))) {
         $smarty->assign("flags$key", "checked");
       } else {
@@ -512,7 +515,7 @@ class sambaAccount extends plugin
       $smarty->assign("flagsC", "checked");
     }
     if ($this->logon_time_set=="1"){
-      $smarty->assign("flagsL", "checked");
+      $smarty->assign("flagsT", "checked");
     }
     if ($this->logoff_time_set=="1"){
       $smarty->assign("flagsO", "checked");
