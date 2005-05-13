@@ -168,7 +168,13 @@ class servdb extends plugin
     plugin::save();
     
     /* Remove objectclasses */
-    unset ($this->attrs['objectClass']);
+    foreach(array_merge($this->objectclasses, $this->additionaloc) as $oc){
+      foreach ($this->attrs['objectClass'] as $key => $value){
+        if ($value == $oc){
+          unset ($this->attrs['objectClass'][$key]);
+        }
+      }
+    }
     foreach($this->objectclasses as $oc){
       $this->attrs['objectClass'][]= $oc;
     }

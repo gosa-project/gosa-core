@@ -21,7 +21,7 @@ class servservice extends plugin
 
 
   /* attribute list for save action */
-  var $attributes       = array("goExportEntry","goTimeSource","goLdapBase","goXdmcpIsEnabled","goFontPath");
+  var $attributes       = array("goExportEntry","goTimeSource","goLdapBase","goXdmcpIsEnabled","goFontPath" );
   var $objectclasses    = array("top","goServer"); 
   var $additionaloc     = array(
                 
@@ -29,8 +29,8 @@ class servservice extends plugin
                           "goNtpServer"     => array("goTimeSource"),
                           "goLdapServer"    => array("goLdapBase"),
                           "goTerminalServer"=> array("goXdmcpIsEnabled", "goFontPath"),
-                          "goSyslogServer"  => array(""),
-                          "goCupsServer"    => array("")                           
+                          "goSyslogServer"  => array(),
+                          "goCupsServer"    => array()                           
                           );
 
 
@@ -44,8 +44,6 @@ class servservice extends plugin
   function servservice ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
-
-    /* Always is account... */
 
     foreach ($this->additionaloc as $oc => $dummy){
       if (isset($this->attrs['objectClass']) && in_array($oc, $this->attrs['objectClass'])){
@@ -201,10 +199,18 @@ class servservice extends plugin
     plugin::save();
 
     /* Remove objectclasses */
-    unset ($this->attrs['objectClass']);
+    foreach(array_merge($this->objectclasses, $this->additionaloc) as $oc){
+      foreach ($this->attrs['objectClass'] as $key => $value){
+        if ($value == $oc){
+          unset ($this->attrs['objectClass'][$key]);
+        }
+      }
+    }
+    $this->attrs['objectClass']=array();
     foreach($this->objectclasses as $oc){
       $this->attrs['objectClass'][]= $oc;
     }
+
 
     /* Adapt sieve server if needed */
     if (in_array('goImapServer', $this->objectclasses)){
@@ -221,7 +227,9 @@ class servservice extends plugin
         }
       }
     }
-
+      
+    print_a($this->attrs);
+    
     /* Write to LDAP */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
