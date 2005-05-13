@@ -58,7 +58,7 @@
 
      <b>{t}LDAP Service{/t}</b>
 
-		<input type="text" name="goLdapBase" {$goLdapServerState} id="goLdapBaseId">
+		<input type="text"      value="{$goLdapBase}"         name="goLdapBase" {$goLdapServerState} id="goLdapBaseId">
 
 	<p class="seperator">&nbsp;</p>
     <br>
@@ -72,11 +72,11 @@
   <table>
 	<tr>
 	 <td colspan=2>
-	  <input type="checkbox"  value="1" name="goXdmcpIsEnabled" {$goTerminalServerState} id="Temporariid"> {t}Temporary disable login{/t}</td>
+	  <input type="checkbox"  value="1" name="goXdmcpIsEnabled" {$goXdmcpIsEnabled}  {$goTerminalServerState} id="Temporariid"> {t}Temporary disable login{/t}</td>
     </tr>
     <tr>
 	 <td>{t}Font path{/t}</td>
-	 <td><input type="text" name="goFontPath" {$goTerminalServerState} id="FontPathId"></td>
+	 <td> <input type="text"      value="{$goFontPath}"         name="goFontPath" {$goTerminalServerState} id="FontPathId"></td>
 	</tr>
    </table>
 

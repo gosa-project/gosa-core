@@ -151,6 +151,10 @@ class servservice extends plugin
       }
     }
 
+
+  if(isset($this->attrs['goXdmcpIsEnabled'])&&($this->attrs['goXdmcpIsEnabled']))
+    $smarty->assign("goXdmcpIsEnabled","checked");
+
   return($smarty->fetch (get_template_path('servservice.tpl', TRUE)));
   }
 
@@ -228,8 +232,6 @@ class servservice extends plugin
       }
     }
       
-    print_a($this->attrs);
-    
     /* Write to LDAP */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
