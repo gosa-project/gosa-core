@@ -15,8 +15,6 @@ Things to fix in 2.3.9:
 
 * Unify filters (User -> Add local)
 
-* Check for iconv support in setup
-
 
 Target for 2.4:
 ===============

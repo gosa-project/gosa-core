@@ -231,6 +231,10 @@ function perform_php_checks(&$faults)
   $msg.= check (	$faults, _("Checking for gettext support"),
       _("Gettext support is required for internationalized GOsa."), function_exists('bindtextdomain'));
 
+  $msg.= check (	$faults, _("Checking for iconv support"),
+      _("This module is used by GOsa to convert samba munged dial informations and is therefore required."),
+      function_exists('iconv'));
+
   $msg.= check (	$faults, _("Checking for mhash module"),
       _("To use SSHA encryption, you'll need this module. If you are just using crypt or md5 encryption, ignore this message. GOsa will run without it."),
       function_exists('mhash'), FALSE);
