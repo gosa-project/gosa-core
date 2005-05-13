@@ -70,14 +70,14 @@
      <b>{t}Terminal Service{/t}</b>
 
   <table>
-    <tr>
-	 <td> Font path </td>
-	 <td> <input type="text" name="goFontPath" {$goTerminalServerState} id="FontPathId"></td>
-	</tr>
 	<tr>
-	 <td>Temporary disable login </td>
-	 <td><input type="checkbox"  value="1"         		name="goXdmcpIsEnabled" {$goTerminalServerState} id="Temporariid"> </td>
+	 <td colspan=2>
+	  <input type="checkbox"  value="1" name="goXdmcpIsEnabled" {$goTerminalServerState} id="Temporariid"> {t}Temporary disable login{/t}</td>
     </tr>
+    <tr>
+	 <td>{t}Font path{/t}</td>
+	 <td><input type="text" name="goFontPath" {$goTerminalServerState} id="FontPathId"></td>
+	</tr>
    </table>
 
 
@@ -96,7 +96,7 @@
 
      <input type=checkbox name="goCupsServer" value="1" {$goCupsServer} {$goCupsServerACL}>
 
-     <b>{t} Print Service{/t}</b>
+     <b>{t}Print Service{/t}</b>
 	</td>	
  </tr>
 </table>
