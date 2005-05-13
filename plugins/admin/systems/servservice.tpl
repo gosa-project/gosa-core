@@ -43,7 +43,7 @@
     <tr>
      <td>{t}NFS Exports{/t}</td>
      <td>
-        <select style="width:350px;" id="goTimeEntry" name="goTimeSource" {$goNTPServerState} size=4 multiple {$trustmodeACL} {$trusthide}>
+        <select style="width:350px;" id="goTimeEntry" name="goTimeSource" {$goNtpServerState} size=4 multiple {$trustmodeACL} {$trusthide}>
             {html_options values=$goTimeSource output=$goTimeSource}
         </select>
     <br>

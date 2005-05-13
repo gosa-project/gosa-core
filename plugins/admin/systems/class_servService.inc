@@ -11,7 +11,7 @@ class servservice extends plugin
   var $goExportEntry  = array();
   var $goTimeSource   = array();
   var $goLdapBase= "";
-  var $goXdmcPlsEnabled= "";
+  var $goXdmcpIsEnabled ="";
   var $goFontPath= "";
   var $goNTPServer="";
   var $goLdapServer="";
@@ -28,9 +28,9 @@ class servservice extends plugin
                           "goNfsServer"     => array("goExportEntry"),
                           "goNtpServer"     => array("goTimeSource"),
                           "goLdapServer"    => array("goLdapBase"),
-                          "goTerminalServer"=> array("goXdmcpIsEnabled", "goFontPath")
-//                          "goSyslogServer"  => array(""),
-//                          "goCupsServer"    => array("")                           
+                          "goTerminalServer"=> array("goXdmcpIsEnabled", "goFontPath"),
+                          "goSyslogServer"  => array("goSyslogServer"),
+                          "goCupsServer"    => array("goCupsServer")                           
                           );
 
 
@@ -63,6 +63,7 @@ class servservice extends plugin
     /* Fill templating stuff */
     $smarty= get_smarty();
 
+    
     /*  
     Handling for Nfs Export Entries
     */
@@ -72,8 +73,6 @@ class servservice extends plugin
       {
       $this->attrs['goExportEntry'][]=$_POST['NewNfsExport'];
       }
-    
-      
      
     /* Deleting an Entry, is a bit more complicated than adding one*/
     if(isset($_POST['DelNfsEnt']))
@@ -93,9 +92,11 @@ class servservice extends plugin
       }
 
     /* Set the entry which we want to show in the frontend */
-    $this->goExportEntry = ($this->attrs['goExportEntry']);
-    unset($this->goExportEntry['count']);
-   
+    if(isset($this->attrs['goExportEntry']))
+      {
+      $this->goExportEntry = ($this->attrs['goExportEntry']);
+      unset($this->goExportEntry['count']);
+      }
 
 
    /*
@@ -126,8 +127,11 @@ class servservice extends plugin
       }
 
     /* Set the entry which we want to show in the frontend */
-    $this->goTimeSource = ($this->attrs['goTimeSource']);
-    unset($this->goTimeSource['count']);
+    if(isset($this->attrs['goTimeSource']))
+      {
+      $this->goTimeSource = ($this->attrs['goTimeSource']);
+      unset($this->goTimeSource['count']);
+      }
 
 
 
