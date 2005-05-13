@@ -372,13 +372,6 @@ class groupManagement extends plugin
 	}
 
 	foreach ($res as $value){
-		/* Is primary group? Change description */
-		if (isset($primaries[$value['gidNumber'][0]])){
-			$dsc= _("Group of user")." ".$primaries[$value['gidNumber'][0]];
-			$this->grouplist[$value["dn"]]= $value["cn"][0]." [".$dsc."]";
-			continue;
-		}
-
 		if (isset($value["description"][0])){
 			$this->grouplist[$value["dn"]]= $value["cn"][0]." [".
 					$value["description"][0]."]";
