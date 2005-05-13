@@ -21,6 +21,9 @@ class kolabAccount extends plugin
   var $attributes= array( "kolabFreeBusyFuture", "unrestrictedMailSize", "calFBURL");
   var $objectclasses= array();
 
+  /* Helper */
+  var $imapping= array();
+
   function kolabAccount ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
@@ -53,6 +56,38 @@ class kolabAccount extends plugin
     foreach($this->attributes as $val){
       $smarty->assign("$val", $this->$val);
       $smarty->assign($val."ACL", chkacl($this->acl, "$val"));
+    }
+
+    /* Check for invitation action */
+    $nr= 0;
+    while (isset($_POST["policy$nr"])){
+      if (isset($_POST["add$nr"])){
+        $this->kolabInvitationPolicy[]= ": ACT_MANUAL";
+      }
+      if (isset($_POST["remove$nr"])){
+        $new= array();
+        foreach ($this->kolabInvitationPolicy as $entry){
+          if (!preg_match("/^".$this->imapping[$nr].":/", $entry)){
+            $new[]= $entry;
+          }
+        }
+        $this->kolabInvitationPolicy= $new;
+      }
+      $nr++;
+    }
+
+    /* Unify addresses */
+    $new= array();
+    foreach($this->kolabInvitationPolicy as $value){
+      if (preg_match('/^:/', $value)){
+        continue;
+      }
+      $address= preg_replace('/^([^:]+:).*$/', '\1', $value);
+      $new[$address]= $value;
+    }
+    $this->kolabInvitationPolicy= array();
+    foreach($new as $value){
+      $this->kolabInvitationPolicy[]= $value;
     }
 
     /* Add delegation */
@@ -125,6 +160,7 @@ class kolabAccount extends plugin
 
     /* Create InvitationPolicy table */
     $invitation= "";
+    $this->imapping= array();
     $nr= 0;
     $acl= chkacl($this->acl, "kolabInvitationPolicy");
     foreach ($this->kolabInvitationPolicy as $entry){
@@ -133,11 +169,12 @@ class kolabAccount extends plugin
       /* The default entry does not have colons... */
       if (!preg_match('/:/', $entry)){
         $invitation.= _("Anonymous");
+        $name= "";
         $mode= $entry;
       } else {
         $name= preg_replace('/:.*$/', '', $entry);
-        $mode= preg_replace('/^[^:]+: */', '', $entry);
-        $invitation.= "<input name=\"address$nr\" size=25 maxlength=60 $acl value=\"$name\">";
+        $mode= preg_replace('/^[^:]*: */', '', $entry);
+        $invitation.= "<input name=\"address$nr\" size=16 maxlength=60 $acl value=\"$name\">";
       }
       $invitation.= "</td>";
 
@@ -154,12 +191,14 @@ class kolabAccount extends plugin
       /* Assign buttons */
       $button= "";
       if ($nr == count($this->kolabInvitationPolicy)-1){
-        $button= "[Add button]";
-      } elseif ($nr != 0) {
-        $button= "[Remove button]";
+        $button= "<input type=submit name=\"add$nr\" value=\""._("Add")."\">";
+      }
+      if ($nr != 0) {
+        $button.= "<input type=submit name=\"remove$nr\" value=\""._("Remove")."\">";
       }
       
       $invitation.= "</select>&nbsp;$button</td></tr>\n";
+      $this->imapping[$nr]= $name;
       $nr++;
     }
     $smarty->assign("invitation", $invitation);
@@ -187,6 +226,32 @@ class kolabAccount extends plugin
     /* Check for URL scheme... */
     if ($this->calFBURL != "" && !preg_match('/^[^:/]+://[a-z0-9_/.+~-]+$/i', $this->calFBURL)){
       $message[]= _("The value specified as Free Busy Information URL is invalid.");
+    }
+
+    /* Check invitation policy for existing mail addresses */
+    foreach($this->kolabInvitationPolicy as $policy){
+      
+      /* Ignore anonymous string */
+      if (!preg_match('/:/', $policy)){
+        continue;
+      }
+      
+      $address= preg_replace('/^([^:]+).*$/', '\1', $policy);
+      if (!is_email($address)){
+        if (!is_email($address, TRUE)){
+          $message[]= sprintf(_("The invitation policy entry for address '%s' is not valid."), $address);
+        }
+      } else {
+
+        $ldap= $this->config->get_ldap_link();
+        $ldap->cd ($this->config->current['BASE']);
+        $ldap->search('(mail='.$address.')');
+        if ($ldap->count() == 0){
+          $message[]= sprintf(_("There's no mail user with address '%s' for your invitation policy!"), $address);
+        } else {
+          $valid= TRUE;
+        }
+      }
     }
 
     return ($message);
@@ -231,8 +296,9 @@ class kolabAccount extends plugin
   {
     plugin::save();
 
-    /* Transfer delegation array */
+    /* Transfer arrays */
     $this->attrs['kolabDelegate']= $this->kolabDelegate;
+    $this->attrs['kolabInvitationPolicy']= $this->kolabInvitationPolicy;
 
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();

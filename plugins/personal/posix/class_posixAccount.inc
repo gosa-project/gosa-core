@@ -751,7 +751,7 @@ class posixAccount extends plugin
       $ldap->search("(&(objectClass=posixGroup)(gidNumber=".$this->gidNumber."))", array("cn"));
 
       /* Create group if it doesn't exist */
-      if (!$ldap->count()){
+      if ($ldap->count() == 0){
         $groupdn= preg_replace ('/^'.$this->config->current['DNMODE'].'=[^,]+,'.get_people_ou().'/i', 'cn='.$this->uid.','.get_groups_ou(), $this->dn);
 
         $g= new group($this->config, $groupdn);
