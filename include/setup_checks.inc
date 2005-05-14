@@ -417,7 +417,7 @@ function parse_contrib_conf()
   $replacements['{LDAPBASE}']               =   $ldapconf['base'];
   $replacements['{LDAPADMIN}']              =   $ldapconf['admin'];
   $replacements['{DNMODE}']                 =   $ldapconf['peopledn'];
-  $replacements['{LOCALHOST}']              =   $ldapconf['uri'];
+  $replacements['{LDAPHOST}']               =   $ldapconf['uri'];
   $replacements['{PASSWORD}']               =   $ldapconf['password'];
   $replacements['{CRYPT}']                  =   $ldapconf['arr_cryptkeys'][$ldapconf['arr_crypts']];
   $replacements['{SID}']                    =   "";
