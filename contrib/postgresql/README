@@ -1,5 +1,5 @@
 
-in those directories you will find the databse for using the plugins
+in those directories you will find the databases definitions for the plugins
 gofax gofon glog with postgresql.
 
 Note that the plugins are not adapted to use postgresql for now.
