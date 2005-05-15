@@ -138,50 +138,50 @@ msgstr ""
 msgid "DHCP"
 msgstr ""
 
-#: contrib/gosa.conf:141 plugins/addons/ldapmanager/contentexport.tpl:19
+#: contrib/gosa.conf:144 plugins/addons/ldapmanager/contentexport.tpl:19
 #: plugins/addons/ldapmanager/contentexport.tpl:32
 #: plugins/addons/ldapmanager/contentexport.tpl:47
 #, fuzzy
 msgid "Export"
 msgstr "Importar"
 
-#: contrib/gosa.conf:142 plugins/personal/mail/generic.tpl:107
-#: plugins/addons/ldapmanager/contentimport.tpl:63
+#: contrib/gosa.conf:145 plugins/personal/mail/generic.tpl:107
+#: plugins/addons/ldapmanager/contentimport.tpl:56
+#: plugins/addons/ldapmanager/contentcsv.tpl:119
 #: plugins/addons/ldapmanager/contentcsv.tpl:122
-#: plugins/addons/ldapmanager/contentcsv.tpl:125
 msgid "Import"
 msgstr "Importar"
 
-#: contrib/gosa.conf:143
+#: contrib/gosa.conf:146
 #, fuzzy
 msgid "CSV Import"
 msgstr "Importar"
 
-#: contrib/gosa.conf:158
-msgid "GONICUS"
-msgstr "GONICUS"
+#: contrib/gosa.conf:161
+msgid "{LOCATIONNAME}"
+msgstr ""
 
-#: contrib/gosa.conf:176
+#: contrib/gosa.conf:179
 msgid "German"
 msgstr "Alemán"
 
-#: contrib/gosa.conf:177
+#: contrib/gosa.conf:180
 msgid "Russian"
 msgstr "Ruso"
 
-#: contrib/gosa.conf:178
+#: contrib/gosa.conf:181
 msgid "Spanish"
 msgstr "Español"
 
-#: contrib/gosa.conf:179
+#: contrib/gosa.conf:182
 msgid "French"
 msgstr "Francés"
 
-#: contrib/gosa.conf:180
+#: contrib/gosa.conf:183
 msgid "Dutch"
 msgstr "Holandés"
 
-#: contrib/gosa.conf:181
+#: contrib/gosa.conf:184
 msgid "English"
 msgstr "Inglés"
 
@@ -192,18 +192,20 @@ msgstr "Inglés"
 #: plugins/personal/generic/class_user.inc:17
 #: plugins/personal/connectivity/class_pureftpdAccount.inc:7
 #: plugins/personal/connectivity/class_phpgwAccount.inc:6
+#: plugins/personal/connectivity/class_kolabAccount.inc:6
 #: plugins/personal/connectivity/class_webdavAccount.inc:7
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:6
 #: plugins/personal/connectivity/class_connectivity.inc:16
 #: plugins/personal/connectivity/class_proxyAccount.inc:6
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:6
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:7
 #: plugins/gofax/reports/class_faxreport.inc:7
 #: plugins/addons/addressbook/class_addressbook.inc:7
-#: plugins/addons/logview/class_logview.inc:7
 #: plugins/addons/ldapmanager/class_csvimport.inc:7
 #: plugins/addons/ldapmanager/class_import.inc:7
 #: plugins/addons/ldapmanager/class_ldif.inc:8
 #: plugins/addons/ldapmanager/class_export.inc:8
+#: plugins/addons/logview/class_logview.inc:7
 #: plugins/admin/groups/class_groupManagement.inc:26
 #: plugins/admin/users/class_userManagement.inc:26
 #: plugins/admin/applications/class_applicationManagement.inc:26
@@ -221,20 +223,20 @@ msgstr "Esto hace algo"
 msgid "There is no mail method '%s' specified in your gosa.conf available."
 msgstr "No hay protocolo de correo %s configurado en su 'gosa.conf'."
 
-#: plugins/personal/mail/class_mailAccount.inc:158
+#: plugins/personal/mail/class_mailAccount.inc:163
 msgid "No DESC tag in vacation file:"
 msgstr "En el archivo de ausencia no existe la etiqueta 'DESC':"
 
-#: plugins/personal/mail/class_mailAccount.inc:184
+#: plugins/personal/mail/class_mailAccount.inc:189
 msgid "This account has no mail extensions."
 msgstr "Esta cuenta no tiene extensiones validas de correo."
 
-#: plugins/personal/mail/class_mailAccount.inc:192
+#: plugins/personal/mail/class_mailAccount.inc:197
 #: plugins/admin/groups/class_groupMail.inc:187
 msgid "Remove mail account"
 msgstr "Borrar cuenta de correo"
 
-#: plugins/personal/mail/class_mailAccount.inc:193
+#: plugins/personal/mail/class_mailAccount.inc:198
 #: plugins/admin/groups/class_groupMail.inc:188
 msgid ""
 "This account has mail features enabled. You can disable them by clicking "
@@ -243,12 +245,12 @@ msgstr ""
 "Esta cuenta tiene las características de correo activas. Puede desactivarlas "
 "apretando a continuación."
 
-#: plugins/personal/mail/class_mailAccount.inc:195
+#: plugins/personal/mail/class_mailAccount.inc:200
 #: plugins/admin/groups/class_groupMail.inc:190
 msgid "Create mail account"
 msgstr "Crear cuenta de correo"
 
-#: plugins/personal/mail/class_mailAccount.inc:196
+#: plugins/personal/mail/class_mailAccount.inc:201
 #: plugins/admin/groups/class_groupMail.inc:191
 msgid ""
 "This account has mail features disabled. You can enable them by clicking "
@@ -257,22 +259,22 @@ msgstr ""
 "Esta cuenta tiene las características de correo desactivadas.Puede "
 "activarlas pulsando aqui."
 
-#: plugins/personal/mail/class_mailAccount.inc:244
+#: plugins/personal/mail/class_mailAccount.inc:249
 msgid ""
 "You're trying to add an invalid email address to the list of forwarders."
 msgstr ""
 "Esta intentando añadir una dirección de correo no valida a la lista de "
 "reenvíos."
 
-#: plugins/personal/mail/class_mailAccount.inc:250
+#: plugins/personal/mail/class_mailAccount.inc:255
 #: plugins/admin/groups/class_groupMail.inc:250
 msgid "Adding your one of your own addresses to the forwarders makes no sense."
 msgstr ""
 "Añadir una de sus propias cuentas de correo a la lista de reenvío no tiene "
 "sentido."
 
-#: plugins/personal/mail/class_mailAccount.inc:285
 #: plugins/personal/mail/class_mailAccount.inc:290
+#: plugins/personal/mail/class_mailAccount.inc:295
 #: plugins/admin/groups/class_groupMail.inc:278
 msgid ""
 "You're trying to add an invalid email address to the list of alternate "
@@ -281,42 +283,42 @@ msgstr ""
 "Esta intentando añadir una dirección de correo no valida a la lista de "
 "direcciones alternativas"
 
-#: plugins/personal/mail/class_mailAccount.inc:300
+#: plugins/personal/mail/class_mailAccount.inc:305
 #: plugins/admin/groups/class_groupMail.inc:283
 msgid "The address you're trying to add is already used by user"
 msgstr ""
 "La dirección de correo que esta intentando añadir, ya esta usada por otro "
 "usuario"
 
-#: plugins/personal/mail/class_mailAccount.inc:631
+#: plugins/personal/mail/class_mailAccount.inc:653
 #: plugins/admin/groups/class_groupMail.inc:610
 msgid "The required field 'Primary address' is not set."
 msgstr " El campo requerido 'Cuenta Principal' no ha sido rellenado."
 
-#: plugins/personal/mail/class_mailAccount.inc:635
-#: plugins/personal/mail/class_mailAccount.inc:639
+#: plugins/personal/mail/class_mailAccount.inc:657
+#: plugins/personal/mail/class_mailAccount.inc:661
 #: plugins/addons/addressbook/class_addressbook.inc:529
 msgid "Please enter a valid email address in 'Primary address' field."
 msgstr ""
 "Por favor introduzca una dirección valida de correo electrónico en el campo "
 "'Cuenta Principal'."
 
-#: plugins/personal/mail/class_mailAccount.inc:646
+#: plugins/personal/mail/class_mailAccount.inc:668
 #: plugins/admin/groups/class_groupMail.inc:619
 msgid "The primary address you've entered is already in use."
 msgstr "La cuenta principal que ha introducido ya esta en uso."
 
-#: plugins/personal/mail/class_mailAccount.inc:652
+#: plugins/personal/mail/class_mailAccount.inc:674
 #: plugins/admin/groups/class_groupMail.inc:625
 msgid "Value in 'Quota size' is not valid."
 msgstr "El valor de 'Tamaño de Cola' no es valido."
 
-#: plugins/personal/mail/class_mailAccount.inc:661
+#: plugins/personal/mail/class_mailAccount.inc:683
 #: plugins/admin/groups/class_groupMail.inc:634
 msgid "Please specify a vaild mail size for mails to be rejected."
 msgstr "Por favor especifique un usuario valido."
 
-#: plugins/personal/mail/class_mailAccount.inc:671
+#: plugins/personal/mail/class_mailAccount.inc:693
 #: plugins/admin/groups/class_groupMail.inc:642
 msgid "You need to set the maximum mail size in order to reject anything."
 msgstr ""
@@ -363,8 +365,10 @@ msgstr "Lista de direcciones de correo alternativas."
 #: plugins/personal/posix/posix_groups.tpl:56
 #: plugins/personal/posix/generic.tpl:63
 #: plugins/personal/posix/generic.tpl:122
-#: plugins/personal/samba/samba3.tpl:247
+#: plugins/personal/samba/samba3.tpl:287
 #: plugins/personal/samba/samba3_workstations.tpl:45
+#: plugins/personal/connectivity/class_kolabAccount.inc:194
+#: plugins/personal/connectivity/kolab.tpl:17
 #: plugins/gofax/blocklists/generic.tpl:60
 #: plugins/gofax/faxaccount/generic.tpl:73
 #: plugins/gofax/faxaccount/locals.tpl:48
@@ -373,6 +377,8 @@ msgstr "Lista de direcciones de correo alternativas."
 #: plugins/admin/groups/class_groupMail.inc:404
 #: plugins/admin/groups/group_objects.tpl:45
 #: plugins/admin/groups/generic.tpl:87 plugins/admin/groups/mail_locals.tpl:49
+#: plugins/admin/systems/servservice.tpl:20
+#: plugins/admin/systems/servservice.tpl:45
 #: plugins/admin/systems/startup.tpl:59 plugins/admin/systems/startup.tpl:72
 #: plugins/admin/systems/startup.tpl:91
 #: plugins/admin/ogroups/ogroup_objects.tpl:56
@@ -385,7 +391,8 @@ msgstr "Añadir"
 #: plugins/personal/mail/generic.tpl:57 plugins/personal/mail/generic.tpl:125
 #: plugins/personal/posix/generic.tpl:64
 #: plugins/personal/posix/generic.tpl:124
-#: plugins/personal/samba/samba3.tpl:249
+#: plugins/personal/samba/samba3.tpl:289
+#: plugins/personal/connectivity/kolab.tpl:19
 #: plugins/gofax/blocklists/generic.tpl:61
 #: plugins/gofax/blocklists/remove.tpl:15
 #: plugins/gofax/blocklists/headpage.tpl:17
@@ -399,6 +406,8 @@ msgstr "Añadir"
 #: plugins/admin/applications/headpage.tpl:17
 #: plugins/admin/departments/remove.tpl:15
 #: plugins/admin/departments/headpage.tpl:17
+#: plugins/admin/systems/servservice.tpl:21
+#: plugins/admin/systems/servservice.tpl:46
 #: plugins/admin/systems/remove.tpl:15 plugins/admin/systems/headpage.tpl:17
 #: plugins/admin/systems/startup.tpl:60 plugins/admin/systems/startup.tpl:73
 #: plugins/admin/systems/startup.tpl:92 plugins/admin/ogroups/generic.tpl:39
@@ -501,7 +510,7 @@ msgstr "¡Desactivar todas las opciones de correo!"
 #: plugins/gofax/blocklists/generic.tpl:74
 #: plugins/gofax/faxaccount/main.inc:89
 #: plugins/admin/groups/class_groupManagement.inc:257
-#: plugins/admin/users/class_userManagement.inc:500
+#: plugins/admin/users/class_userManagement.inc:503
 #: plugins/admin/applications/class_applicationManagement.inc:239
 #: plugins/admin/departments/class_departmentManagement.inc:228
 #: plugins/admin/systems/class_systemManagement.inc:438
@@ -534,7 +543,7 @@ msgstr "Terminar"
 #: plugins/admin/groups/mail_admins.tpl:39
 #: plugins/admin/groups/mail_locals.tpl:51 plugins/admin/users/password.tpl:23
 #: plugins/admin/users/template.tpl:48
-#: plugins/admin/users/class_userManagement.inc:502
+#: plugins/admin/users/class_userManagement.inc:505
 #: plugins/admin/users/remove.tpl:17 plugins/admin/applications/remove.tpl:16
 #: plugins/admin/applications/class_applicationManagement.inc:241
 #: plugins/admin/departments/remove.tpl:17
@@ -629,12 +638,13 @@ msgid "User name of which addresses are shown"
 msgstr "Nombre de usuario de las direcciones mostradas"
 
 #: plugins/personal/password/class_password.inc:5
-#: plugins/admin/systems/servdb.tpl:22 plugins/admin/systems/servdb.tpl:38
-#: plugins/admin/systems/servdb.tpl:54 plugins/admin/systems/servdb.tpl:90
-#: plugins/admin/systems/servdb.tpl:113 ihtml/themes/altlinux/login.tpl:33
+#: plugins/admin/systems/servdb.tpl:18 plugins/admin/systems/servdb.tpl:34
+#: plugins/admin/systems/servdb.tpl:50 plugins/admin/systems/servdb.tpl:86
+#: plugins/admin/systems/servdb.tpl:109 ihtml/themes/altlinux/login.tpl:33
 #: ihtml/themes/altlinux/login.tpl:37 ihtml/themes/classic/login.tpl:32
 #: ihtml/themes/classic/login.tpl:36 ihtml/themes/default/login.tpl:33
 #: ihtml/themes/default/login.tpl:37
+#: ihtml/themes/default/setup_useradmin.tpl:30
 msgid "Password"
 msgstr "Contraseña"
 
@@ -699,9 +709,14 @@ msgstr ""
 
 #: plugins/personal/password/changed.tpl:12
 #: plugins/personal/generic/main.inc:167 plugins/gofax/reports/detail.tpl:68
-#: plugins/addons/ldapmanager/contentimport.tpl:58
-#: plugins/addons/ldapmanager/contentcsv.tpl:127
-#: plugins/addons/ldapmanager/contentexport.tpl:70 include/functions.inc:1342
+#: plugins/addons/ldapmanager/contentimport.tpl:51
+#: plugins/addons/ldapmanager/contentcsv.tpl:124
+#: plugins/addons/ldapmanager/contentexport.tpl:70 include/functions.inc:1199
+#: ihtml/themes/default/setup_useradmin.tpl:40
+#: ihtml/themes/default/setup_step2.tpl:12
+#: ihtml/themes/default/setup_step3.tpl:17
+#: ihtml/themes/default/setup_step4.tpl:94
+#: ihtml/themes/default/setup_finish.tpl:30
 msgid "Back"
 msgstr "Atras"
 
@@ -866,7 +881,7 @@ msgstr "La contraseña expira en"
 
 #: plugins/personal/posix/generic.tpl:7 plugins/personal/samba/samba3.tpl:13
 #: plugins/personal/samba/samba3.tpl:65
-#: plugins/personal/samba/class_sambaAccount.inc:464
+#: plugins/personal/samba/class_sambaAccount.inc:593
 msgid "Home directory"
 msgstr "Directorio Principal"
 
@@ -933,8 +948,7 @@ msgid "UNIX"
 msgstr "UNIX"
 
 #: plugins/personal/posix/class_posixAccount.inc:132
-#: plugins/personal/posix/class_posixAccount.inc:895
-#: plugins/admin/groups/class_groupManagement.inc:377
+#: plugins/personal/posix/class_posixAccount.inc:900
 msgid "Group of user"
 msgstr "Grupo de usuarios"
 
@@ -1009,103 +1023,139 @@ msgid "Warn user %s days before password expiery"
 msgstr "Avisar al usuario %s días antes de expirar la contraseña"
 
 #: plugins/personal/posix/class_posixAccount.inc:457
-#: plugins/personal/samba/class_sambaAccount.inc:303
+#: plugins/personal/samba/class_sambaAccount.inc:344
+#: plugins/personal/samba/class_sambaAccount.inc:362
+#: plugins/personal/samba/class_sambaAccount.inc:380
+#: plugins/personal/samba/class_sambaAccount.inc:398
 #: plugins/personal/generic/class_user.inc:210
 #: plugins/gofax/reports/class_faxreport.inc:272
-#: plugins/gofon/reports/class_fonreport.inc:205
+#: plugins/gofon/reports/class_fonreport.inc:208
 msgid "January"
 msgstr "Enero"
 
 #: plugins/personal/posix/class_posixAccount.inc:457
-#: plugins/personal/samba/class_sambaAccount.inc:303
+#: plugins/personal/samba/class_sambaAccount.inc:344
+#: plugins/personal/samba/class_sambaAccount.inc:362
+#: plugins/personal/samba/class_sambaAccount.inc:380
+#: plugins/personal/samba/class_sambaAccount.inc:398
 #: plugins/personal/generic/class_user.inc:210
 #: plugins/gofax/reports/class_faxreport.inc:272
-#: plugins/gofon/reports/class_fonreport.inc:205
+#: plugins/gofon/reports/class_fonreport.inc:208
 msgid "February"
 msgstr "Febrero"
 
 #: plugins/personal/posix/class_posixAccount.inc:457
-#: plugins/personal/samba/class_sambaAccount.inc:303
+#: plugins/personal/samba/class_sambaAccount.inc:344
+#: plugins/personal/samba/class_sambaAccount.inc:362
+#: plugins/personal/samba/class_sambaAccount.inc:380
+#: plugins/personal/samba/class_sambaAccount.inc:398
 #: plugins/personal/generic/class_user.inc:210
 #: plugins/gofax/reports/class_faxreport.inc:272
-#: plugins/gofon/reports/class_fonreport.inc:205
+#: plugins/gofon/reports/class_fonreport.inc:208
 msgid "March"
 msgstr "Marzo"
 
 #: plugins/personal/posix/class_posixAccount.inc:457
-#: plugins/personal/samba/class_sambaAccount.inc:303
+#: plugins/personal/samba/class_sambaAccount.inc:344
+#: plugins/personal/samba/class_sambaAccount.inc:362
+#: plugins/personal/samba/class_sambaAccount.inc:380
+#: plugins/personal/samba/class_sambaAccount.inc:398
 #: plugins/personal/generic/class_user.inc:210
 #: plugins/gofax/reports/class_faxreport.inc:272
-#: plugins/gofon/reports/class_fonreport.inc:205
+#: plugins/gofon/reports/class_fonreport.inc:208
 msgid "April"
 msgstr "Abril"
 
 #: plugins/personal/posix/class_posixAccount.inc:458
-#: plugins/personal/samba/class_sambaAccount.inc:304
+#: plugins/personal/samba/class_sambaAccount.inc:345
+#: plugins/personal/samba/class_sambaAccount.inc:363
+#: plugins/personal/samba/class_sambaAccount.inc:381
+#: plugins/personal/samba/class_sambaAccount.inc:399
 #: plugins/personal/generic/class_user.inc:211
 #: plugins/gofax/reports/class_faxreport.inc:273
-#: plugins/gofon/reports/class_fonreport.inc:206
+#: plugins/gofon/reports/class_fonreport.inc:209
 msgid "May"
 msgstr "Mayo"
 
 #: plugins/personal/posix/class_posixAccount.inc:458
-#: plugins/personal/samba/class_sambaAccount.inc:304
+#: plugins/personal/samba/class_sambaAccount.inc:345
+#: plugins/personal/samba/class_sambaAccount.inc:363
+#: plugins/personal/samba/class_sambaAccount.inc:381
+#: plugins/personal/samba/class_sambaAccount.inc:399
 #: plugins/personal/generic/class_user.inc:211
 #: plugins/gofax/reports/class_faxreport.inc:273
-#: plugins/gofon/reports/class_fonreport.inc:206
+#: plugins/gofon/reports/class_fonreport.inc:209
 msgid "June"
 msgstr "Junio"
 
 #: plugins/personal/posix/class_posixAccount.inc:458
-#: plugins/personal/samba/class_sambaAccount.inc:304
+#: plugins/personal/samba/class_sambaAccount.inc:345
+#: plugins/personal/samba/class_sambaAccount.inc:363
+#: plugins/personal/samba/class_sambaAccount.inc:381
+#: plugins/personal/samba/class_sambaAccount.inc:399
 #: plugins/personal/generic/class_user.inc:211
 #: plugins/gofax/reports/class_faxreport.inc:273
-#: plugins/gofon/reports/class_fonreport.inc:206
+#: plugins/gofon/reports/class_fonreport.inc:209
 msgid "July"
 msgstr "Julio"
 
 #: plugins/personal/posix/class_posixAccount.inc:458
-#: plugins/personal/samba/class_sambaAccount.inc:304
+#: plugins/personal/samba/class_sambaAccount.inc:345
+#: plugins/personal/samba/class_sambaAccount.inc:363
+#: plugins/personal/samba/class_sambaAccount.inc:381
+#: plugins/personal/samba/class_sambaAccount.inc:399
 #: plugins/personal/generic/class_user.inc:211
 #: plugins/gofax/reports/class_faxreport.inc:273
-#: plugins/gofon/reports/class_fonreport.inc:206
+#: plugins/gofon/reports/class_fonreport.inc:209
 msgid "August"
 msgstr "Agosto"
 
 #: plugins/personal/posix/class_posixAccount.inc:458
-#: plugins/personal/samba/class_sambaAccount.inc:304
+#: plugins/personal/samba/class_sambaAccount.inc:345
+#: plugins/personal/samba/class_sambaAccount.inc:363
+#: plugins/personal/samba/class_sambaAccount.inc:381
+#: plugins/personal/samba/class_sambaAccount.inc:399
 #: plugins/personal/generic/class_user.inc:211
 #: plugins/gofax/reports/class_faxreport.inc:274
-#: plugins/gofon/reports/class_fonreport.inc:207
+#: plugins/gofon/reports/class_fonreport.inc:210
 msgid "September"
 msgstr "Septiembre"
 
 #: plugins/personal/posix/class_posixAccount.inc:459
-#: plugins/personal/samba/class_sambaAccount.inc:305
+#: plugins/personal/samba/class_sambaAccount.inc:346
+#: plugins/personal/samba/class_sambaAccount.inc:364
+#: plugins/personal/samba/class_sambaAccount.inc:382
+#: plugins/personal/samba/class_sambaAccount.inc:400
 #: plugins/personal/generic/class_user.inc:212
 #: plugins/gofax/reports/class_faxreport.inc:274
-#: plugins/gofon/reports/class_fonreport.inc:207
+#: plugins/gofon/reports/class_fonreport.inc:210
 msgid "October"
 msgstr "Octubre"
 
 #: plugins/personal/posix/class_posixAccount.inc:459
-#: plugins/personal/samba/class_sambaAccount.inc:305
+#: plugins/personal/samba/class_sambaAccount.inc:346
+#: plugins/personal/samba/class_sambaAccount.inc:364
+#: plugins/personal/samba/class_sambaAccount.inc:382
+#: plugins/personal/samba/class_sambaAccount.inc:400
 #: plugins/personal/generic/class_user.inc:212
 #: plugins/gofax/reports/class_faxreport.inc:274
-#: plugins/gofon/reports/class_fonreport.inc:207
+#: plugins/gofon/reports/class_fonreport.inc:210
 msgid "November"
 msgstr "Noviembre"
 
 #: plugins/personal/posix/class_posixAccount.inc:459
-#: plugins/personal/samba/class_sambaAccount.inc:305
+#: plugins/personal/samba/class_sambaAccount.inc:346
+#: plugins/personal/samba/class_sambaAccount.inc:364
+#: plugins/personal/samba/class_sambaAccount.inc:382
+#: plugins/personal/samba/class_sambaAccount.inc:400
 #: plugins/personal/generic/class_user.inc:212
 #: plugins/gofax/reports/class_faxreport.inc:274
-#: plugins/gofon/reports/class_fonreport.inc:207
+#: plugins/gofon/reports/class_fonreport.inc:210
 msgid "December"
 msgstr "Diciembre"
 
 #: plugins/personal/posix/class_posixAccount.inc:509
-#: plugins/personal/samba/class_sambaAccount.inc:338
+#: plugins/personal/samba/class_sambaAccount.inc:439
 #: plugins/admin/systems/class_terminalGeneric.inc:61
 #: plugins/admin/systems/class_workstationGeneric.inc:70
 msgid "disabled"
@@ -1119,78 +1169,78 @@ msgstr "Acceso completo"
 msgid "allow access to these hosts"
 msgstr "Permitir el acceso a estos equipos"
 
-#: plugins/personal/posix/class_posixAccount.inc:662
+#: plugins/personal/posix/class_posixAccount.inc:667
 msgid "Failed: overriding lock"
 msgstr "Fallo: Sobrepasado bloqueo"
 
-#: plugins/personal/posix/class_posixAccount.inc:810
+#: plugins/personal/posix/class_posixAccount.inc:815
 msgid "The required field 'Home directory' is not set."
 msgstr "El campo requerido 'Directorio de usuario' no esta rellenado."
 
-#: plugins/personal/posix/class_posixAccount.inc:813
+#: plugins/personal/posix/class_posixAccount.inc:818
 msgid "Please enter a valid path in 'Home directory' field."
 msgstr ""
 "Por favor introduzca una ruta valida en el campo 'Directorio de usuario'"
 
-#: plugins/personal/posix/class_posixAccount.inc:821
+#: plugins/personal/posix/class_posixAccount.inc:826
 msgid "Value specified as 'UID' is not valid."
 msgstr "El valor especificado en 'UID' no es valido."
 
-#: plugins/personal/posix/class_posixAccount.inc:824
+#: plugins/personal/posix/class_posixAccount.inc:829
 msgid "Value specified as 'UID' is too small."
 msgstr "El valor especificado como 'UID' es demasiado pequeño."
 
-#: plugins/personal/posix/class_posixAccount.inc:828
-#: plugins/admin/groups/class_groupGeneric.inc:594
+#: plugins/personal/posix/class_posixAccount.inc:833
+#: plugins/admin/groups/class_groupGeneric.inc:602
 msgid "Value specified as 'GID' is not valid."
 msgstr "El valor especificado como 'GID' no es valido."
 
-#: plugins/personal/posix/class_posixAccount.inc:831
-#: plugins/admin/groups/class_groupGeneric.inc:597
+#: plugins/personal/posix/class_posixAccount.inc:836
+#: plugins/admin/groups/class_groupGeneric.inc:605
 msgid "Value specified as 'GID' is too small."
 msgstr "El valor especificado como 'GID' es muy pequeño."
 
-#: plugins/personal/posix/class_posixAccount.inc:840
+#: plugins/personal/posix/class_posixAccount.inc:845
 msgid "Value specified as 'shadowMin' is not valid."
 msgstr "El valor especificado en 'shadowMin' no es valido."
 
-#: plugins/personal/posix/class_posixAccount.inc:845
+#: plugins/personal/posix/class_posixAccount.inc:850
 msgid "Value specified as 'shadowMax' is not valid."
 msgstr "El valor especificado en 'shadowMax' no es valido."
 
-#: plugins/personal/posix/class_posixAccount.inc:850
+#: plugins/personal/posix/class_posixAccount.inc:855
 msgid "Value specified as 'shadowWarning' is not valid."
 msgstr "El valor especificado en 'shadowWarning' no es valido."
 
-#: plugins/personal/posix/class_posixAccount.inc:853
+#: plugins/personal/posix/class_posixAccount.inc:858
 msgid "'shadowWarning' without 'shadowMax' makes no sense."
 msgstr "'shadowWarning' sin 'shadowMax' no tiene sentido."
 
-#: plugins/personal/posix/class_posixAccount.inc:856
+#: plugins/personal/posix/class_posixAccount.inc:861
 msgid "Value specified as 'shadowWarning' should be smaller than 'shadowMax'."
 msgstr ""
 "El valor especificado como 'shadowWarning' debería ser menor que 'shadowMax'."
 
-#: plugins/personal/posix/class_posixAccount.inc:859
+#: plugins/personal/posix/class_posixAccount.inc:864
 msgid "Value specified as 'shadowWarning' should be greater than 'shadowMin'."
 msgstr ""
 "El valor especificado como 'shadowWarning' debería ser mayor que 'shadowMin'."
 
-#: plugins/personal/posix/class_posixAccount.inc:864
+#: plugins/personal/posix/class_posixAccount.inc:869
 msgid "Value specified as 'shadowInactive' is not valid."
 msgstr "El valor especificado en 'shadowInactive' no es valido."
 
-#: plugins/personal/posix/class_posixAccount.inc:867
+#: plugins/personal/posix/class_posixAccount.inc:872
 msgid "'shadowInactive' without 'shadowMax' makes no sense."
 msgstr "'shadowInactive' sin 'shadowMax' no tiene sentido."
 
-#: plugins/personal/posix/class_posixAccount.inc:872
+#: plugins/personal/posix/class_posixAccount.inc:877
 msgid "Value specified as 'shadowMin' should be smaller than 'shadowMax'."
 msgstr ""
 "El valor especificado como 'shadowMin' debería ser menor que 'shadowMax'."
 
-#: plugins/personal/posix/class_posixAccount.inc:974
-#: plugins/admin/groups/class_groupGeneric.inc:628
+#: plugins/personal/posix/class_posixAccount.inc:979
+#: plugins/admin/groups/class_groupGeneric.inc:636
 msgid "Too many users, can't allocate a free ID!"
 msgstr "¡Demasiados usuarios, no hay identificadores (ID) libres!"
 
@@ -1204,7 +1254,7 @@ msgstr "Ruta del Script"
 
 #: plugins/personal/samba/samba2.tpl:36 plugins/personal/samba/samba3.tpl:44
 #: plugins/personal/samba/samba3.tpl:75
-#: plugins/personal/samba/class_sambaAccount.inc:465
+#: plugins/personal/samba/class_sambaAccount.inc:594
 msgid "Profile path"
 msgstr "Ruta del Perfil"
 
@@ -1220,7 +1270,7 @@ msgstr "Permitir al usuario cambiar las opciones desde el cliente"
 msgid "Login from windows client requires no password"
 msgstr "El inicio de sesión en window no requiere contraseña"
 
-#: plugins/personal/samba/samba2.tpl:60 plugins/personal/samba/samba3.tpl:222
+#: plugins/personal/samba/samba2.tpl:60
 msgid "Temporary disable samba account"
 msgstr "Desactivar temporalmente la cuenta samba"
 
@@ -1253,17 +1303,17 @@ msgid "Timeout settings (in minutes)"
 msgstr "Características de tiempo de desconexión (en minutos)"
 
 #: plugins/personal/samba/samba3.tpl:116
-#: plugins/personal/samba/class_sambaAccount.inc:472
+#: plugins/personal/samba/class_sambaAccount.inc:601
 msgid "Connection"
 msgstr "Conexión"
 
 #: plugins/personal/samba/samba3.tpl:125
-#: plugins/personal/samba/class_sambaAccount.inc:473
+#: plugins/personal/samba/class_sambaAccount.inc:602
 msgid "Disconnection"
 msgstr "Desconexión"
 
 #: plugins/personal/samba/samba3.tpl:134
-#: plugins/personal/samba/class_sambaAccount.inc:474
+#: plugins/personal/samba/class_sambaAccount.inc:603
 msgid "IDLE"
 msgstr "IDLE"
 
@@ -1300,7 +1350,24 @@ msgstr "Desconexion"
 msgid "Reconnect if disconnected"
 msgstr "Reconexión si se ha desconectado"
 
-#: plugins/personal/samba/samba3.tpl:241
+#: plugins/personal/samba/samba3.tpl:222
+#, fuzzy
+msgid "Lock samba account"
+msgstr "Eliminar cuenta samba"
+
+#: plugins/personal/samba/samba3.tpl:237
+msgid "Limit Logon Time"
+msgstr ""
+
+#: plugins/personal/samba/samba3.tpl:249
+msgid "Limit Logoff Time"
+msgstr ""
+
+#: plugins/personal/samba/samba3.tpl:261
+msgid "Account expires after"
+msgstr ""
+
+#: plugins/personal/samba/samba3.tpl:281
 msgid "Allow connection from these workstations only"
 msgstr "Permitir la conexión solo desde estas estaciones de trabajo"
 
@@ -1320,15 +1387,15 @@ msgstr "Mostrar estaciones de trabajo de departamentos"
 msgid "Display workstations matching"
 msgstr "Mostrar estaciones de trabajo que concuerden con"
 
-#: plugins/personal/samba/class_sambaAccount.inc:170
+#: plugins/personal/samba/class_sambaAccount.inc:193
 msgid "This account has no samba extensions."
 msgstr "Esta cuenta no tiene extensión samba valida."
 
-#: plugins/personal/samba/class_sambaAccount.inc:179
+#: plugins/personal/samba/class_sambaAccount.inc:202
 msgid "Remove samba account"
 msgstr "Eliminar cuenta samba"
 
-#: plugins/personal/samba/class_sambaAccount.inc:180
+#: plugins/personal/samba/class_sambaAccount.inc:203
 msgid ""
 "This account has samba features enabled. You can disable them by clicking "
 "below."
@@ -1336,12 +1403,12 @@ msgstr ""
 "Esta cuenta tiene la extensión samba activada. Puede desactivarla pulsando "
 "aquí."
 
-#: plugins/personal/samba/class_sambaAccount.inc:190
-#: plugins/personal/samba/class_sambaAccount.inc:193
+#: plugins/personal/samba/class_sambaAccount.inc:213
+#: plugins/personal/samba/class_sambaAccount.inc:216
 msgid "Create samba account"
 msgstr "Crear cuenta samba"
 
-#: plugins/personal/samba/class_sambaAccount.inc:191
+#: plugins/personal/samba/class_sambaAccount.inc:214
 msgid ""
 "This account has samba features disabled. You can enable them by clicking "
 "below."
@@ -1349,7 +1416,7 @@ msgstr ""
 "Esta cuenta tiene la extensión samba desactivada. Puede activarla pulsando "
 "aquí."
 
-#: plugins/personal/samba/class_sambaAccount.inc:194
+#: plugins/personal/samba/class_sambaAccount.inc:217
 msgid ""
 "This account has samba features disabled. Posix features are needed for "
 "samba accounts, enable them first."
@@ -1358,44 +1425,44 @@ msgstr ""
 "características Posix son necesarias para las cuentas samba, activelas "
 "primero."
 
-#: plugins/personal/samba/class_sambaAccount.inc:339
+#: plugins/personal/samba/class_sambaAccount.inc:440
 msgid "input on, notify on"
 msgstr "Activación, Notificación"
 
-#: plugins/personal/samba/class_sambaAccount.inc:340
+#: plugins/personal/samba/class_sambaAccount.inc:441
 msgid "input on, notify off"
 msgstr "Activación, No notificación"
 
-#: plugins/personal/samba/class_sambaAccount.inc:341
+#: plugins/personal/samba/class_sambaAccount.inc:442
 msgid "input off, notify on"
 msgstr "Desactivación, Notificación"
 
-#: plugins/personal/samba/class_sambaAccount.inc:342
+#: plugins/personal/samba/class_sambaAccount.inc:443
 msgid "input off, nofify off"
 msgstr "Desactivación, No notificación"
 
-#: plugins/personal/samba/class_sambaAccount.inc:344
+#: plugins/personal/samba/class_sambaAccount.inc:445
 msgid "disconnect"
 msgstr "desconectar"
 
-#: plugins/personal/samba/class_sambaAccount.inc:345
+#: plugins/personal/samba/class_sambaAccount.inc:446
 msgid "reset"
 msgstr "Borrar"
 
-#: plugins/personal/samba/class_sambaAccount.inc:347
+#: plugins/personal/samba/class_sambaAccount.inc:448
 msgid "from any client"
 msgstr "Desde cualquier cliente"
 
-#: plugins/personal/samba/class_sambaAccount.inc:348
+#: plugins/personal/samba/class_sambaAccount.inc:449
 msgid "from previous client only"
 msgstr "solo desde el cliente anterior"
 
-#: plugins/personal/samba/class_sambaAccount.inc:467
+#: plugins/personal/samba/class_sambaAccount.inc:596
 #, php-format
 msgid "The value specified as '%s' contains invalid characters!"
 msgstr "¡El valor especificado como '%s' contiene caracteres no validos!"
 
-#: plugins/personal/samba/class_sambaAccount.inc:477
+#: plugins/personal/samba/class_sambaAccount.inc:606
 #, php-format
 msgid ""
 "The timeout property '%s' is checked and contains invalid or no characters!"
@@ -1403,7 +1470,7 @@ msgstr ""
 "¡La propiedad 'tiempo de desconexión' '%s' esta activada y contiene "
 "caracteres no validos o no caracteres!"
 
-#: plugins/personal/samba/class_sambaAccount.inc:483
+#: plugins/personal/samba/class_sambaAccount.inc:612
 msgid ""
 "The windows user manager only allows eight clients. You've specified more "
 "than eight."
@@ -1411,7 +1478,7 @@ msgstr ""
 "El gestor de usuarios de windows solo permite ocho clientes. Ha especificado "
 "mas de ocho."
 
-#: plugins/personal/samba/class_sambaAccount.inc:636
+#: plugins/personal/samba/class_sambaAccount.inc:789
 msgid ""
 "Warning: This account has an undefined samba SID assigned. The problem can "
 "not be fixed by GOsa!"
@@ -1419,7 +1486,7 @@ msgstr ""
 "Aviso: Esta cuenta tiene asignado un SID indefinido. ¡El problema no puede "
 "ser solucionado por GOsa!"
 
-#: plugins/personal/samba/class_sambaAccount.inc:661
+#: plugins/personal/samba/class_sambaAccount.inc:814
 msgid ""
 "Warning: Can't identify users primary group - no conversion to a samba group "
 "possible!"
@@ -1460,43 +1527,48 @@ msgstr "presente"
 msgid "absent"
 msgstr "ausente"
 
-#: plugins/personal/generic/class_user.inc:782
+#: plugins/personal/generic/class_user.inc:772
 msgid "Kerberos database communication failed"
 msgstr "La comunicación con la base de datos Kerberos ha fallado"
 
-#: plugins/personal/generic/class_user.inc:799
+#: plugins/personal/generic/class_user.inc:789
 msgid "Can't remove user from kerberos database."
 msgstr "No se puede eliminar el usuario de la base de datos Kerberos"
 
-#: plugins/personal/generic/class_user.inc:810
+#: plugins/personal/generic/class_user.inc:800
 msgid "Can't add user to kerberos database."
 msgstr "No se puede añadir el usuario de la base de datos Kerberos"
 
-#: plugins/personal/generic/class_user.inc:850
+#: plugins/personal/generic/class_user.inc:840
 msgid "You have no permissions to create a user on this 'Base'."
 msgstr "No tiene permisos para crear un usuario en esta 'Base'."
 
-#: plugins/personal/generic/class_user.inc:855
+#: plugins/personal/generic/class_user.inc:845
+#, fuzzy
+msgid "You have no permissions to move a user from the original 'Base'."
+msgstr "No tiene permisos para crear un usuario en esta 'Base'."
+
+#: plugins/personal/generic/class_user.inc:851
 #: plugins/addons/addressbook/class_addressbook.inc:486
-#: plugins/admin/users/class_userManagement.inc:419
+#: plugins/admin/users/class_userManagement.inc:422
 msgid "The required field 'Name' is not set."
 msgstr "El campo requerido 'Nombre' no ha sido rellenado."
 
-#: plugins/personal/generic/class_user.inc:864
+#: plugins/personal/generic/class_user.inc:860
 msgid "There's already a person with this 'Login' in the database."
 msgstr "Ya existe un usuario con este 'Login' en la base de datos."
 
-#: plugins/personal/generic/class_user.inc:870
+#: plugins/personal/generic/class_user.inc:866
 #: plugins/addons/addressbook/class_addressbook.inc:490
-#: plugins/admin/users/class_userManagement.inc:422
+#: plugins/admin/users/class_userManagement.inc:425
 msgid "The required field 'Given name' is not set."
 msgstr "El campo requerido 'Sobrenombre' no ha sido rellenado."
 
-#: plugins/personal/generic/class_user.inc:873
+#: plugins/personal/generic/class_user.inc:869
 msgid "The required field 'Login' is not set."
 msgstr " El campo requerido 'Login' no ha sido rellenado."
 
-#: plugins/personal/generic/class_user.inc:880
+#: plugins/personal/generic/class_user.inc:876
 msgid ""
 "There's already a person with this 'Name'/'Given name' combination in the "
 "database."
@@ -1504,7 +1576,7 @@ msgstr ""
 "Ya existe un usuario con la misma combinación 'Nombre' / 'Sobrenombre' en la "
 "base de datos."
 
-#: plugins/personal/generic/class_user.inc:887
+#: plugins/personal/generic/class_user.inc:883
 msgid ""
 "The field 'Login' contains invalid characters. Lowercase, numbers and dashes "
 "are allowed."
@@ -1512,45 +1584,45 @@ msgstr ""
 "El campo 'Login' contiene caracteres no validos. Solo minúsculas, números y "
 "guiones están permitidos."
 
-#: plugins/personal/generic/class_user.inc:890
+#: plugins/personal/generic/class_user.inc:886
 msgid "The field 'Homepage' contains an invalid URL definition."
 msgstr "El campo 'Pagina web principal' contiene un URL no valida"
 
-#: plugins/personal/generic/class_user.inc:893
-#: plugins/personal/generic/class_user.inc:921
+#: plugins/personal/generic/class_user.inc:889
+#: plugins/personal/generic/class_user.inc:917
 #: plugins/addons/addressbook/class_addressbook.inc:496
 #: plugins/addons/addressbook/class_addressbook.inc:524
 #: plugins/admin/departments/class_departmentGeneric.inc:153
 msgid "The field 'Name' contains invalid characters."
 msgstr "El campo 'Nombre' contiene caracteres no validos."
 
-#: plugins/personal/generic/class_user.inc:896
-#: plugins/personal/generic/class_user.inc:918
+#: plugins/personal/generic/class_user.inc:892
+#: plugins/personal/generic/class_user.inc:914
 #: plugins/addons/addressbook/class_addressbook.inc:499
 #: plugins/addons/addressbook/class_addressbook.inc:521
 msgid "The field 'Given name' contains invalid characters."
 msgstr "El campo 'Sobrenombre' contiene caracteres no validos"
 
-#: plugins/personal/generic/class_user.inc:901
-#: plugins/personal/generic/class_user.inc:904
+#: plugins/personal/generic/class_user.inc:897
+#: plugins/personal/generic/class_user.inc:900
 #: plugins/addons/addressbook/class_addressbook.inc:504
 #: plugins/addons/addressbook/class_addressbook.inc:507
 #: plugins/admin/departments/class_departmentGeneric.inc:156
 msgid "The field 'Phone' contains an invalid phone number."
 msgstr "El campo 'Teléfono' contiene un número de teléfono no valido."
 
-#: plugins/personal/generic/class_user.inc:907
+#: plugins/personal/generic/class_user.inc:903
 #: plugins/addons/addressbook/class_addressbook.inc:510
 #: plugins/admin/departments/class_departmentGeneric.inc:159
 msgid "The field 'Fax' contains an invalid phone number."
 msgstr "El campo 'Fax' contiene un número de teléfono no valido."
 
-#: plugins/personal/generic/class_user.inc:910
+#: plugins/personal/generic/class_user.inc:906
 #: plugins/addons/addressbook/class_addressbook.inc:513
 msgid "The field 'Mobile' contains an invalid phone number."
 msgstr "El campo 'Teléfono móvil' contiene un número de teléfono invalido."
 
-#: plugins/personal/generic/class_user.inc:913
+#: plugins/personal/generic/class_user.inc:909
 #: plugins/addons/addressbook/class_addressbook.inc:516
 msgid "The field 'Pager' contains an invalid phone number."
 msgstr ""
@@ -1630,9 +1702,8 @@ msgstr "Sexo"
 #: plugins/admin/systems/server.tpl:13 plugins/admin/systems/phone.tpl:13
 #: plugins/admin/systems/terminal.tpl:18 plugins/admin/systems/printer.tpl:21
 #: plugins/admin/systems/workstation.tpl:18
-#: plugins/admin/systems/component.tpl:13
 #: plugins/admin/systems/wingeneric.tpl:13
-#: plugins/admin/ogroups/generic.tpl:21
+#: plugins/admin/systems/component.tpl:13 plugins/admin/ogroups/generic.tpl:21
 msgid "Base"
 msgstr "Base"
 
@@ -1806,6 +1877,7 @@ msgstr "Certificado estandar"
 #: plugins/personal/generic/generic_certs.tpl:19
 #: plugins/personal/generic/generic_certs.tpl:30
 #: plugins/personal/generic/generic_certs.tpl:41
+#: plugins/personal/connectivity/class_kolabAccount.inc:197
 #: plugins/admin/groups/class_groupMail.inc:408
 #: plugins/admin/applications/class_applicationParameters.inc:94
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:205
@@ -1839,23 +1911,23 @@ msgstr "Información genérica del usuario"
 msgid "FTP"
 msgstr "FTP"
 
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:112
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:118
 msgid "Value specified as 'Upload bandwidth' is not valid."
 msgstr "El valor especificado en 'Ancho de Banda ascendente' no es válido"
 
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:115
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:121
 msgid "Value specified as 'Download bandwidth' is not valid."
 msgstr "El valor especificado en 'Ancho de Banda descendente' no es válido"
 
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:118
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:124
 msgid "Value specified as 'Files' is not valid."
 msgstr "El valor especificado como 'Archivos' no es válido"
 
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:121
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:127
 msgid "Value specified as 'Size' is not valid."
 msgstr "El valor especificado como 'Tamaño' no es válido"
 
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:124
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:130
 msgid "Value specified as 'Ratio' is not valid."
 msgstr "El valor especificado como 'relación' no es válido"
 
@@ -1883,6 +1955,72 @@ msgstr "Restringir el uso del proxy con cuota"
 msgid "per"
 msgstr "por"
 
+#: plugins/personal/connectivity/class_kolabAccount.inc:5
+msgid "Kolab"
+msgstr ""
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:102
+#, fuzzy
+msgid ""
+"You're trying to add an invalid email address to the list of delegations."
+msgstr ""
+"Esta intentando añadir una dirección de correo no valida a la lista de "
+"reenvíos."
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:110
+#, fuzzy
+msgid ""
+"The mail address you're trying to add is no primary mail address of an "
+"existing user."
+msgstr ""
+"La dirección de correo que esta intentando añadir, ya esta usada por otro "
+"usuario"
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:137
+msgid "Always accept"
+msgstr ""
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:138
+msgid "Always reject"
+msgstr ""
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:139
+#, fuzzy
+msgid "Reject if conflicts"
+msgstr "Reconexión si se ha desconectado"
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:140
+msgid "Manual if conflicts"
+msgstr ""
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:141
+#, fuzzy
+msgid "Manual"
+msgstr "Enero"
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:171
+msgid "Anonymous"
+msgstr ""
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:223
+msgid "The value specified as Free Busy future needs to be an integer."
+msgstr ""
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:228
+#, fuzzy
+msgid "The value specified as Free Busy Information URL is invalid."
+msgstr "El valor especificado como 'Archivos' no es válido"
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:242
+#, php-format
+msgid "The invitation policy entry for address '%s' is not valid."
+msgstr ""
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:250
+#, php-format
+msgid "There's no mail user with address '%s' for your invitation policy!"
+msgstr ""
+
 #: plugins/personal/connectivity/class_webdavAccount.inc:6
 msgid "WebDAV"
 msgstr "WebDAV"
@@ -1891,9 +2029,79 @@ msgstr "WebDAV"
 msgid "PHPGroupware account"
 msgstr "Cuenta PHPGroupware"
 
+#: plugins/personal/connectivity/kolab.tpl:1
+#, fuzzy
+msgid "Kolab account"
+msgstr "Mi cuenta"
+
+#: plugins/personal/connectivity/kolab.tpl:4
+msgid ""
+"The kolab account is currently disabled. It's features can be adjusted if "
+"you add a mail account."
+msgstr ""
+
+#: plugins/personal/connectivity/kolab.tpl:10
+#, fuzzy
+msgid "Delegations"
+msgstr "Destino"
+
+#: plugins/personal/connectivity/kolab.tpl:22
+#, fuzzy
+msgid "Mail size"
+msgstr "Tamaño de la Cola de correo"
+
+#: plugins/personal/connectivity/kolab.tpl:23
+msgid "No mail size restriction for this account"
+msgstr ""
+
+#: plugins/personal/connectivity/kolab.tpl:31
+#, fuzzy
+msgid "Free Busy information"
+msgstr "Información genérica del usuario"
+
+#: plugins/personal/connectivity/kolab.tpl:34
+msgid "URL"
+msgstr ""
+
+#: plugins/personal/connectivity/kolab.tpl:38
+msgid "Future"
+msgstr ""
+
+#: plugins/personal/connectivity/kolab.tpl:39
+#: plugins/personal/connectivity/oxchange.tpl:20
+#: plugins/personal/connectivity/oxchange.tpl:24
+#, fuzzy
+msgid "days"
+msgstr "día"
+
+#: plugins/personal/connectivity/kolab.tpl:44
+msgid "Invitation policy"
+msgstr ""
+
 #: plugins/personal/connectivity/webdav.tpl:1
 msgid "WebDAV account"
 msgstr "Cuenta WebDAV"
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:5
+msgid "Open-Xchange"
+msgstr ""
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:663
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:726
+#, fuzzy
+msgid "Couldn't Connect To Postgresql Database"
+msgstr "No puedo conectar al servidor de base de datos."
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:667
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:730
+msgid "Needed Parameters to openexchange connectivity plugin failed!"
+msgstr ""
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:671
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:734
+#, fuzzy
+msgid "PHP4 module for Postgresql Database Failed!"
+msgstr "¡Consulta a la base de datos de logs fallida!"
 
 #: plugins/personal/connectivity/pureftpd.tpl:1
 msgid "FTP account"
@@ -1943,6 +2151,41 @@ msgstr "Active para desactivar acceso FTP"
 #: plugins/personal/connectivity/pureftpd.tpl:67
 msgid "Temporary disable FTP access"
 msgstr "Acceso FTP desactivado temporalmente"
+
+#: plugins/personal/connectivity/oxchange.tpl:2
+msgid "Open-Xchange Account"
+msgstr ""
+
+#: plugins/personal/connectivity/oxchange.tpl:4
+msgid "Disabled by lack of Postgresql Support"
+msgstr ""
+
+#: plugins/personal/connectivity/oxchange.tpl:6
+#, fuzzy
+msgid "Open Xchange account"
+msgstr "Eliminar cuenta telefónica"
+
+#: plugins/personal/connectivity/oxchange.tpl:15
+#, fuzzy
+msgid "Remember"
+msgstr "Diciembre"
+
+#: plugins/personal/connectivity/oxchange.tpl:19
+msgid "Appointment Days"
+msgstr ""
+
+#: plugins/personal/connectivity/oxchange.tpl:23
+msgid "Task Days"
+msgstr ""
+
+#: plugins/personal/connectivity/oxchange.tpl:35
+#, fuzzy
+msgid "User Information"
+msgstr "Información"
+
+#: plugins/personal/connectivity/oxchange.tpl:39
+msgid "User Timezone"
+msgstr ""
 
 #: plugins/personal/connectivity/class_connectivity.inc:60
 msgid "This account has no connectivity extensions."
@@ -2002,9 +2245,9 @@ msgstr "Seleccione la manera de filtrar llamadas entrantes o salientes"
 #: plugins/admin/applications/generic.tpl:24
 #: plugins/admin/departments/generic.tpl:12
 #: plugins/admin/systems/server.tpl:24 plugins/admin/systems/phone.tpl:24
-#: plugins/admin/systems/printer.tpl:10 plugins/admin/systems/component.tpl:24
+#: plugins/admin/systems/printer.tpl:10
 #: plugins/admin/systems/wingeneric.tpl:24
-#: plugins/admin/ogroups/generic.tpl:13
+#: plugins/admin/systems/component.tpl:24 plugins/admin/ogroups/generic.tpl:13
 #: plugins/generic/references/contents.tpl:11
 msgid "Description"
 msgstr "Descripción"
@@ -2056,24 +2299,24 @@ msgstr "enviar"
 msgid "receive"
 msgstr "recibir"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:342
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:343
 msgid "You have no permissions to create a blocklist on this 'Base'."
 msgstr "No tiene permisos para crear una lista de bloqueo en esta 'Base'."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:348
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:349
 #: plugins/admin/departments/class_departmentGeneric.inc:141
 msgid "Required field 'Name' is not set."
 msgstr "El campo requerido 'Nombre' no ha sido rellenado."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:351
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:352
 msgid "Required field 'Name' contains invalid characters"
 msgstr "El campo requerido 'Nombre' contiene caracteres no validos"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:359
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:360
 msgid "Specified name is already used."
 msgstr "El nombre especificado ya esta siendo usado"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:366
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:367
 msgid "No permission to create a blocklist on this base."
 msgstr "No tiene permisos para crear una lista de bloqueos en esta base"
 
@@ -2282,7 +2525,7 @@ msgstr "Listas de listas de bloqueos predefinidas"
 
 #: plugins/gofax/faxaccount/lists.tpl:37
 #: plugins/admin/groups/application_options.tpl:8
-#: plugins/admin/groups/mail_admins.tpl:37 include/functions.inc:1333
+#: plugins/admin/groups/mail_admins.tpl:37 include/functions.inc:1190
 msgid "Apply"
 msgstr "Aplicar"
 
@@ -2329,19 +2572,19 @@ msgstr ""
 msgid "You're trying to add an invalid phone number."
 msgstr "Esta intentando añadir un número de teléfono no valido."
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:451
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:456
 msgid "The required field 'Fax' is not set."
 msgstr "No ha rellenado el campo requerido 'Fax'"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:455
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:460
 msgid "Please enter a valid telephone number in the 'Fax' field."
 msgstr "Por favor introduzca un numero de teléfono valido en el campo 'Fax'"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:463
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:468
 msgid "Mail delivery is checked, but no address has been specified."
 msgstr ""
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:465
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:470
 #, fuzzy
 msgid "The mail address you've entered is invalid."
 msgstr "La cuenta principal que ha introducido ya esta en uso."
@@ -2478,7 +2721,7 @@ msgstr ""
 
 #: plugins/gofax/reports/class_faxreport.inc:137
 #: plugins/gofax/reports/class_faxreport.inc:224
-#: plugins/gofon/reports/class_fonreport.inc:158
+#: plugins/gofon/reports/class_fonreport.inc:161
 msgid "Y-M-D"
 msgstr "Y-M-D"
 
@@ -2709,6 +2952,202 @@ msgstr ""
 "No tiene permisos para crear o modificar una entrada de libreta de "
 "direcciones global."
 
+#: plugins/addons/ldapmanager/class_csvimport.inc:6
+#: plugins/addons/ldapmanager/class_import.inc:6
+msgid "LDIF export"
+msgstr "Exportar a LDIF"
+
+#: plugins/addons/ldapmanager/class_csvimport.inc:93
+#, fuzzy
+msgid "You've no permission to do CSV imports."
+msgstr "No tiene permisos para eliminar este departamento."
+
+#: plugins/addons/ldapmanager/class_csvimport.inc:154
+msgid "Need 'sn','givenName' and 'uid' to create user"
+msgstr ""
+
+#: plugins/addons/ldapmanager/class_csvimport.inc:202
+#, fuzzy
+msgid "failed"
+msgstr "Fallado"
+
+#: plugins/addons/ldapmanager/class_csvimport.inc:206
+msgid "ok"
+msgstr ""
+
+#: plugins/addons/ldapmanager/class_csvimport.inc:263
+#, fuzzy
+msgid "status"
+msgstr "Estado"
+
+#: plugins/addons/ldapmanager/class_csvimport.inc:267
+#, php-format
+msgid "An Error Occured while inserting entry %s - process aborted"
+msgstr ""
+
+#: plugins/addons/ldapmanager/class_csvimport.inc:292
+msgid "Nothing to import !."
+msgstr ""
+
+#: plugins/addons/ldapmanager/class_csvimport.inc:301
+#: plugins/addons/ldapmanager/class_csvimport.inc:312
+#: plugins/addons/ldapmanager/class_csvimport.inc:317
+#: plugins/addons/ldapmanager/class_import.inc:58
+#: plugins/addons/ldapmanager/class_import.inc:66
+msgid "There is no file uploaded."
+msgstr ""
+
+#: plugins/addons/ldapmanager/class_csvimport.inc:306
+#: plugins/addons/ldapmanager/class_import.inc:51
+#, fuzzy
+msgid "The specified file is empty."
+msgstr "El valor especificado como 'Archivos' no es válido"
+
+#: plugins/addons/ldapmanager/class_csvimport.inc:444
+msgid "The selected file does not contain any CSV Data..."
+msgstr ""
+
+#: plugins/addons/ldapmanager/contentimport.tpl:3
+#, fuzzy
+msgid ""
+"The LDIF import plugin provides methods to upload a set of entries to your "
+"running LDAP directory as ldif. You may use this to add new or modify "
+"existing entries. Remember that GOsa will not check your ldifs for GOsa "
+"conformance."
+msgstr ""
+"La extensión exportar LDIF provee los metodos para descargar una copia "
+"espejo del directorio LDAP actual como un archivo LDIF. Puede grabar estos "
+"ficheros como copias de seguridad o para iniciar un nuevo servidor."
+
+#: plugins/addons/ldapmanager/contentimport.tpl:12
+msgid "Import LDIF File"
+msgstr ""
+
+#: plugins/addons/ldapmanager/contentimport.tpl:17
+#: plugins/addons/ldapmanager/contentcsv.tpl:15
+#, fuzzy
+msgid "Browse"
+msgstr "Base"
+
+#: plugins/addons/ldapmanager/contentimport.tpl:26
+msgid "Modify existing attributes"
+msgstr ""
+
+#: plugins/addons/ldapmanager/contentimport.tpl:39
+#, fuzzy
+msgid "Overwrite existing entry"
+msgstr "Editar entrada"
+
+#: plugins/addons/ldapmanager/contentimport.tpl:47
+msgid "Import successfull"
+msgstr ""
+
+#: plugins/addons/ldapmanager/contentcsv.tpl:2
+msgid ""
+"The CSV import plugin provides methods to generate user accounts from a file "
+"containing Comma Seperated Values. The administrator can decide which "
+"columns should be transfered to which attribute. Note that you must have at "
+"least the UID, GIVENNAME and SURENAME set."
+msgstr ""
+
+#: plugins/addons/ldapmanager/contentcsv.tpl:11
+msgid "Select CSV file to import"
+msgstr ""
+
+#: plugins/addons/ldapmanager/contentcsv.tpl:20
+#, fuzzy
+msgid "Select template"
+msgstr "Nueva plantilla"
+
+#: plugins/addons/ldapmanager/contentcsv.tpl:35
+msgid "All entries have been written to the LDAP database successfully."
+msgstr ""
+
+#: plugins/addons/ldapmanager/contentcsv.tpl:37
+msgid "Oups. There was an error during the import of your data."
+msgstr ""
+
+#: plugins/addons/ldapmanager/contentcsv.tpl:40
+msgid "Here is the status report for the import:"
+msgstr ""
+
+#: plugins/addons/ldapmanager/contentcsv.tpl:88
+#, fuzzy
+msgid "Selected Template"
+msgstr "Seleccionar modo de terminal"
+
+#: plugins/addons/ldapmanager/class_import.inc:38
+#, fuzzy
+msgid "You've no permission to do LDAP imports."
+msgstr "No tiene permisos para eliminar este departamento."
+
+#: plugins/addons/ldapmanager/class_import.inc:104
+msgid "Unknown Error"
+msgstr ""
+
+#: plugins/addons/ldapmanager/contentexport.tpl:3
+#, fuzzy
+msgid ""
+"The LDIF export plugin provides methods to download a complete snapshot of "
+"the running LDAP directory as ldif. You may save these files for backup "
+"purpose or when initializing a new server."
+msgstr ""
+"La extensión exportar LDIF provee los metodos para descargar una copia "
+"espejo del directorio LDAP actual como un archivo LDIF. Puede grabar estos "
+"ficheros como copias de seguridad o para iniciar un nuevo servidor."
+
+#: plugins/addons/ldapmanager/contentexport.tpl:13
+#, fuzzy
+msgid "Export single entry"
+msgstr "Editar entrada"
+
+#: plugins/addons/ldapmanager/contentexport.tpl:24
+msgid "Export complete LDIF for"
+msgstr ""
+
+#: plugins/addons/ldapmanager/contentexport.tpl:27
+#: plugins/addons/ldapmanager/contentexport.tpl:42
+#, fuzzy
+msgid "Choose the department you want to Export"
+msgstr "Elija un departamento para guardar la entrada"
+
+#: plugins/addons/ldapmanager/contentexport.tpl:39
+msgid "Export IVBB LDIF for"
+msgstr ""
+
+#: plugins/addons/ldapmanager/contentexport.tpl:59
+msgid "Export successfull"
+msgstr ""
+
+#: plugins/addons/ldapmanager/contentexport.tpl:63
+msgid "Click here to save the complete LDAP database to a file"
+msgstr "Pulse aquí para grabar la base de datos LDAP completa a un archivo"
+
+#: plugins/addons/ldapmanager/contentexport.tpl:63
+#, fuzzy
+msgid "Click here to save the LDAP Export "
+msgstr "Pulse aquí para grabar la base de datos LDAP completa a un archivo"
+
+#: plugins/addons/ldapmanager/class_ldif.inc:7
+#: plugins/addons/ldapmanager/main.inc:23
+#, fuzzy
+msgid "LDAP manager"
+msgstr "Exportar a LDIF"
+
+#: plugins/addons/ldapmanager/class_export.inc:7
+#, fuzzy
+msgid "LDIF CSV import"
+msgstr "Exportar a LDIF"
+
+#: plugins/addons/ldapmanager/class_export.inc:35
+#, fuzzy
+msgid "You've no permission to do LDAP exports."
+msgstr "No tiene permisos para eliminar este departamento."
+
+#: plugins/addons/ldapmanager/class_export.inc:76
+msgid "Error while exporting the requested entries!"
+msgstr ""
+
 #: plugins/addons/logview/class_logview.inc:6
 msgid "System logs"
 msgstr "Registro del sistema"
@@ -2805,187 +3244,6 @@ msgstr "Mensaje"
 msgid "System log view"
 msgstr "Ver registro del sistema"
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:6
-#: plugins/addons/ldapmanager/class_import.inc:6
-msgid "LDIF export"
-msgstr "Exportar a LDIF"
-
-#: plugins/addons/ldapmanager/class_csvimport.inc:137
-msgid "Need 'sn','givenName' and 'uid' to create user"
-msgstr ""
-
-#: plugins/addons/ldapmanager/class_csvimport.inc:170
-#, fuzzy
-msgid "failed"
-msgstr "Fallado"
-
-#: plugins/addons/ldapmanager/class_csvimport.inc:174
-msgid "ok"
-msgstr ""
-
-#: plugins/addons/ldapmanager/class_csvimport.inc:230
-#, fuzzy
-msgid "status"
-msgstr "Estado"
-
-#: plugins/addons/ldapmanager/class_csvimport.inc:234
-#, php-format
-msgid "An Error Occured while inserting entry %s - process aborted"
-msgstr ""
-
-#: plugins/addons/ldapmanager/class_csvimport.inc:259
-msgid "Nothing to import !."
-msgstr ""
-
-#: plugins/addons/ldapmanager/class_csvimport.inc:268
-#: plugins/addons/ldapmanager/class_csvimport.inc:279
-#: plugins/addons/ldapmanager/class_csvimport.inc:284
-#: plugins/addons/ldapmanager/class_import.inc:49
-#: plugins/addons/ldapmanager/class_import.inc:57
-msgid "There is no file uploaded."
-msgstr ""
-
-#: plugins/addons/ldapmanager/class_csvimport.inc:273
-#: plugins/addons/ldapmanager/class_import.inc:42
-#, fuzzy
-msgid "The specified file is empty."
-msgstr "El valor especificado como 'Archivos' no es válido"
-
-#: plugins/addons/ldapmanager/class_csvimport.inc:401
-msgid "The selected file does not contain any CSV Data..."
-msgstr ""
-
-#: plugins/addons/ldapmanager/contentimport.tpl:3
-#, fuzzy
-msgid ""
-"The LDIF import plugin provides methods to upload a set of entries to your "
-"running LDAP directory as ldif. You may use this to add new or modify "
-"existing entries. Remember that GOsa will not check your ldifs for GOsa "
-"conformance."
-msgstr ""
-"La extensión exportar LDIF provee los metodos para descargar una copia "
-"espejo del directorio LDAP actual como un archivo LDIF. Puede grabar estos "
-"ficheros como copias de seguridad o para iniciar un nuevo servidor."
-
-#: plugins/addons/ldapmanager/contentimport.tpl:13
-msgid "Import LDIF File"
-msgstr ""
-
-#: plugins/addons/ldapmanager/contentimport.tpl:18
-#: plugins/addons/ldapmanager/contentcsv.tpl:15
-#, fuzzy
-msgid "Browse"
-msgstr "Base"
-
-#: plugins/addons/ldapmanager/contentimport.tpl:31
-msgid "Modify existing attributes"
-msgstr ""
-
-#: plugins/addons/ldapmanager/contentimport.tpl:44
-#, fuzzy
-msgid "Overwrite existing entry"
-msgstr "Editar entrada"
-
-#: plugins/addons/ldapmanager/contentimport.tpl:54
-msgid "Import successfull"
-msgstr ""
-
-#: plugins/addons/ldapmanager/contentcsv.tpl:2
-msgid ""
-"The CSV import plugin provides methods to generate user accounts from a file "
-"containing Comma Seperated Values. The administrator can decide which "
-"columns should be transfered to which attribute. Note that you must have at "
-"least the UID, GIVENNAME and SURENAME set."
-msgstr ""
-
-#: plugins/addons/ldapmanager/contentcsv.tpl:11
-msgid "Select CSV file to import"
-msgstr ""
-
-#: plugins/addons/ldapmanager/contentcsv.tpl:23
-#, fuzzy
-msgid "Select template"
-msgstr "Nueva plantilla"
-
-#: plugins/addons/ldapmanager/contentcsv.tpl:38
-msgid "All entries have been written to the LDAP database successfully."
-msgstr ""
-
-#: plugins/addons/ldapmanager/contentcsv.tpl:40
-msgid "Oups. There was an error during the import of your data."
-msgstr ""
-
-#: plugins/addons/ldapmanager/contentcsv.tpl:43
-msgid "Here is the status report for the import:"
-msgstr ""
-
-#: plugins/addons/ldapmanager/contentcsv.tpl:91
-#, fuzzy
-msgid "Selected Template"
-msgstr "Seleccionar modo de terminal"
-
-#: plugins/addons/ldapmanager/class_import.inc:95
-msgid "Unknown Error"
-msgstr ""
-
-#: plugins/addons/ldapmanager/contentexport.tpl:3
-#, fuzzy
-msgid ""
-"The LDIF export plugin provides methods to download a complete snapshot of "
-"the running LDAP directory as ldif. You may save these files for backup "
-"purpose or when initializing a new server."
-msgstr ""
-"La extensión exportar LDIF provee los metodos para descargar una copia "
-"espejo del directorio LDAP actual como un archivo LDIF. Puede grabar estos "
-"ficheros como copias de seguridad o para iniciar un nuevo servidor."
-
-#: plugins/addons/ldapmanager/contentexport.tpl:13
-#, fuzzy
-msgid "Export single entry"
-msgstr "Editar entrada"
-
-#: plugins/addons/ldapmanager/contentexport.tpl:24
-msgid "Export complete LDIF for"
-msgstr ""
-
-#: plugins/addons/ldapmanager/contentexport.tpl:27
-#: plugins/addons/ldapmanager/contentexport.tpl:42
-#, fuzzy
-msgid "Choose the department you want to Export"
-msgstr "Elija un departamento para guardar la entrada"
-
-#: plugins/addons/ldapmanager/contentexport.tpl:39
-msgid "Export IVBB LDIF for"
-msgstr ""
-
-#: plugins/addons/ldapmanager/contentexport.tpl:59
-msgid "Export successfull"
-msgstr ""
-
-#: plugins/addons/ldapmanager/contentexport.tpl:63
-msgid "Click here to save the complete LDAP database to a file"
-msgstr "Pulse aquí para grabar la base de datos LDAP completa a un archivo"
-
-#: plugins/addons/ldapmanager/contentexport.tpl:63
-#, fuzzy
-msgid "Click here to save the LDAP Export "
-msgstr "Pulse aquí para grabar la base de datos LDAP completa a un archivo"
-
-#: plugins/addons/ldapmanager/class_ldif.inc:7
-#: plugins/addons/ldapmanager/main.inc:23
-#, fuzzy
-msgid "LDAP manager"
-msgstr "Exportar a LDIF"
-
-#: plugins/addons/ldapmanager/class_export.inc:7
-#, fuzzy
-msgid "LDIF CSV import"
-msgstr "Exportar a LDIF"
-
-#: plugins/addons/ldapmanager/class_export.inc:72
-msgid "Error while exporting the requested entries!"
-msgstr ""
-
 #: plugins/admin/groups/class_groupGeneric.inc:109
 msgid "Can't find this groups SID in LDAP or in your configuration file!"
 msgstr ""
@@ -3017,12 +3275,12 @@ msgstr "Invitados del dominio"
 msgid "Special group (%d)"
 msgstr ""
 
-#: plugins/admin/groups/class_groupGeneric.inc:570
+#: plugins/admin/groups/class_groupGeneric.inc:566
 #: plugins/admin/ogroups/class_ogroup.inc:484
 msgid "You have no permissions to create a group on this 'Base'."
 msgstr "No tiene permisos para crear un grupo en esta 'Base'."
 
-#: plugins/admin/groups/class_groupGeneric.inc:580
+#: plugins/admin/groups/class_groupGeneric.inc:576
 msgid ""
 "The field 'Name' contains invalid characters. Lowercase, numbers and dashes "
 "are allowed."
@@ -3030,7 +3288,8 @@ msgstr ""
 "El campo 'Nombre' contiene caracteres no validos. Puede utilizar minúsculas, "
 "numeros y guiones."
 
-#: plugins/admin/groups/class_groupGeneric.inc:588
+#: plugins/admin/groups/class_groupGeneric.inc:587
+#: plugins/admin/groups/class_groupGeneric.inc:594
 msgid "Value specified as 'Name' is already used."
 msgstr "El valor especificado como 'Nombre' esta siendo utilizado."
 
@@ -3322,7 +3581,7 @@ msgstr ""
 "<b>ninguno</b> para saltarse el uso de plantillas."
 
 #: plugins/admin/users/template.tpl:11
-#: plugins/admin/users/class_userManagement.inc:614
+#: plugins/admin/users/class_userManagement.inc:617
 msgid "Template"
 msgstr "Plantilla"
 
@@ -3330,9 +3589,10 @@ msgstr "Plantilla"
 #: ihtml/themes/altlinux/setup_introduction.tpl:10
 #: ihtml/themes/altlinux/setup_step2.tpl:16
 #: ihtml/themes/altlinux/setup_step3.tpl:12
-#: ihtml/themes/default/setup_introduction.tpl:10
-#: ihtml/themes/default/setup_step2.tpl:16
-#: ihtml/themes/default/setup_step3.tpl:12
+#: ihtml/themes/default/setup_introduction.tpl:12
+#: ihtml/themes/default/setup_useradmin.tpl:41
+#: ihtml/themes/default/setup_step2.tpl:13
+#: ihtml/themes/default/setup_step3.tpl:18
 msgid "Continue"
 msgstr "Continuar"
 
@@ -3359,12 +3619,12 @@ msgstr "Esta a punto de borrar el usuario %s"
 msgid "You are not allowed to delete this user!"
 msgstr "No le es permitido borrar este usuario"
 
-#: plugins/admin/users/class_userManagement.inc:365
+#: plugins/admin/users/class_userManagement.inc:368
 #: plugins/admin/ogroups/class_ogroup.inc:202
 msgid "none"
 msgstr "ninguno"
 
-#: plugins/admin/users/class_userManagement.inc:431
+#: plugins/admin/users/class_userManagement.inc:434
 msgid "A person with the choosen name is already used in this tree."
 msgstr "Una persona con el nombre elegido ya existe en el árbol"
 
@@ -3626,23 +3886,23 @@ msgstr "¡No tiene permisos para eliminar esta aplicación!"
 msgid "This 'dn' is no application."
 msgstr "Este 'dn' no es una aplicación"
 
-#: plugins/admin/applications/class_applicationGeneric.inc:148
+#: plugins/admin/applications/class_applicationGeneric.inc:149
 msgid "The specified picture has not been uploaded correctly."
 msgstr "La foto indicada no ha sido subida correctamente."
 
-#: plugins/admin/applications/class_applicationGeneric.inc:180
+#: plugins/admin/applications/class_applicationGeneric.inc:202
 msgid "You have no permissions to create a application on this 'Base'."
 msgstr "No tiene permisos para crear una aplicación en esta 'Base'."
 
-#: plugins/admin/applications/class_applicationGeneric.inc:185
+#: plugins/admin/applications/class_applicationGeneric.inc:207
 msgid "Required field 'Name' is not filled."
 msgstr "El campo requerido 'Nombre' no ha sido llenado."
 
-#: plugins/admin/applications/class_applicationGeneric.inc:188
+#: plugins/admin/applications/class_applicationGeneric.inc:210
 msgid "Required field 'Execute' is not filled."
 msgstr "El campo requerido 'Ejecutar' no ha sido llenado."
 
-#: plugins/admin/applications/class_applicationGeneric.inc:197
+#: plugins/admin/applications/class_applicationGeneric.inc:219
 msgid "There's already an application with this 'Name'."
 msgstr "Ya existe una aplicación con este 'Nombre'."
 
@@ -3791,51 +4051,12 @@ msgstr "El campo 'Nombre' contiene la palabra reservada 'incoming'."
 msgid " Please choose another name."
 msgstr "Por favor elija otro nombre."
 
-#: plugins/admin/systems/class_terminalService.inc:82
-msgid "default"
-msgstr "por defecto"
-
-#: plugins/admin/systems/class_terminalService.inc:83
-msgid "show chooser"
-msgstr "mostrar elegidos"
-
-#: plugins/admin/systems/class_terminalService.inc:84
-msgid "direct"
-msgstr "Directo"
-
-#: plugins/admin/systems/class_terminalService.inc:87
-msgid "load balanced"
-msgstr "balanceo de carga"
-
-#: plugins/admin/systems/class_terminalService.inc:90
-msgid "Windows RDP"
-msgstr "Windows RDP"
-
-#: plugins/admin/systems/class_terminalService.inc:91
-msgid "ICA client"
-msgstr "Cliente ICA"
-
-#: plugins/admin/systems/class_terminalService.inc:135
 #: plugins/admin/systems/class_terminalInfo.inc:61
+#: plugins/admin/systems/class_terminalService.inc:135
 #: plugins/admin/systems/class_terminalStartup.inc:75
 #: plugins/admin/systems/class_terminalGeneric.inc:126
 msgid "This 'dn' has no terminal features."
 msgstr "Esta 'dn' no tiene características de terminal."
-
-#: plugins/admin/systems/class_terminalService.inc:182
-#, fuzzy
-msgid "Choose the phone located at the current terminal"
-msgstr "Elija un departamento para guardar la entrada"
-
-#: plugins/admin/systems/class_terminalService.inc:244
-#: plugins/admin/systems/class_terminalService.inc:249
-msgid "Please specify a valid VSync range."
-msgstr "Por favor especifique un rango VSync valido"
-
-#: plugins/admin/systems/class_terminalService.inc:259
-#: plugins/admin/systems/class_terminalService.inc:264
-msgid "Please specify a valid HSync range."
-msgstr "Por favor especifique un rango HSync valido"
 
 #: plugins/admin/systems/class_terminalInfo.inc:68
 msgid "This is a virtual terminal which has no properties to show here."
@@ -3874,29 +4095,28 @@ msgstr "Dirección IP"
 msgid "MAC-address"
 msgstr "Dirección MAC"
 
-#: plugins/admin/systems/server.tpl:6
+#: plugins/admin/systems/class_winGeneric.inc:85
+#: plugins/admin/systems/class_componentGeneric.inc:47
 #, fuzzy
-msgid "Server name"
-msgstr "Servidor"
+msgid "This 'dn' has no network features."
+msgstr "Esta 'dn' no tiene características de impresora."
 
-#: plugins/admin/systems/server.tpl:15 plugins/admin/systems/phone.tpl:15
-#: plugins/admin/systems/terminal.tpl:20 plugins/admin/systems/printer.tpl:23
-#: plugins/admin/systems/workstation.tpl:20
-#: plugins/admin/systems/component.tpl:15
-#: plugins/admin/systems/wingeneric.tpl:15
-msgid "Choose subtree to place terminal in"
-msgstr "Elija un subárbol donde colocar el terminal"
-
-#: plugins/admin/systems/server.tpl:38 plugins/admin/systems/terminal.tpl:99
-#: plugins/admin/systems/workstation.tpl:99
-#: plugins/admin/ogroups/termgroup.tpl:3
-msgid "Action"
-msgstr "Acción"
-
-#: plugins/admin/systems/server.tpl:42
+#: plugins/admin/systems/class_winGeneric.inc:156
+#: plugins/admin/systems/class_componentGeneric.inc:116
 #, fuzzy
-msgid "Select action to execute for this server"
-msgstr "Seleccione una acción que se ejecutara en este terminal"
+msgid "You have no permissions to create a component on this 'Base'."
+msgstr "No tiene permisos para crear un teléfono en esta 'Base'."
+
+#: plugins/admin/systems/class_winGeneric.inc:166
+#: plugins/admin/systems/class_terminalGeneric.inc:233
+#: plugins/admin/systems/class_servGeneric.inc:178
+#: plugins/admin/systems/class_workstationGeneric.inc:240
+#: plugins/admin/systems/class_printGeneric.inc:132
+#: plugins/admin/systems/class_componentGeneric.inc:126
+#: plugins/admin/systems/class_phoneGeneric.inc:129
+#, php-format
+msgid "There is already an entry '%s' in the base choosen by you"
+msgstr "Ya hay una entrada '%s' en la base elegida"
 
 #: plugins/admin/systems/info.tpl:1
 msgid "System information"
@@ -3999,6 +4219,196 @@ msgstr "GUI"
 msgid "System management"
 msgstr "Gestión del sistema"
 
+#: plugins/admin/systems/servservice.tpl:11
+#, fuzzy
+msgid "Nfs Export"
+msgstr "Importar"
+
+#: plugins/admin/systems/servservice.tpl:36
+#, fuzzy
+msgid "Time Service"
+msgstr "Servicios"
+
+#: plugins/admin/systems/servservice.tpl:59
+#, fuzzy
+msgid "LDAP Service"
+msgstr "Servidor LDAP"
+
+#: plugins/admin/systems/servservice.tpl:70
+#, fuzzy
+msgid "Terminal Service"
+msgstr "Servidor de terminal"
+
+#: plugins/admin/systems/servservice.tpl:75
+#, fuzzy
+msgid "Temporary disable login"
+msgstr "Desactivación temporal del uso del fax"
+
+#: plugins/admin/systems/servservice.tpl:78
+#, fuzzy
+msgid "Font path"
+msgstr "Contacto"
+
+#: plugins/admin/systems/servservice.tpl:91
+#, fuzzy
+msgid "Syslog Service"
+msgstr "Servidor de Logs"
+
+#: plugins/admin/systems/servservice.tpl:99
+#, fuzzy
+msgid "Print Service"
+msgstr "Servicio de impresión"
+
+#: plugins/admin/systems/class_terminalService.inc:82
+msgid "default"
+msgstr "por defecto"
+
+#: plugins/admin/systems/class_terminalService.inc:83
+msgid "show chooser"
+msgstr "mostrar elegidos"
+
+#: plugins/admin/systems/class_terminalService.inc:84
+msgid "direct"
+msgstr "Directo"
+
+#: plugins/admin/systems/class_terminalService.inc:87
+msgid "load balanced"
+msgstr "balanceo de carga"
+
+#: plugins/admin/systems/class_terminalService.inc:90
+msgid "Windows RDP"
+msgstr "Windows RDP"
+
+#: plugins/admin/systems/class_terminalService.inc:91
+msgid "ICA client"
+msgstr "Cliente ICA"
+
+#: plugins/admin/systems/class_terminalService.inc:182
+#, fuzzy
+msgid "Choose the phone located at the current terminal"
+msgstr "Elija un departamento para guardar la entrada"
+
+#: plugins/admin/systems/class_terminalService.inc:245
+#: plugins/admin/systems/class_terminalService.inc:250
+msgid "Please specify a valid VSync range."
+msgstr "Por favor especifique un rango VSync valido"
+
+#: plugins/admin/systems/class_terminalService.inc:260
+#: plugins/admin/systems/class_terminalService.inc:265
+msgid "Please specify a valid HSync range."
+msgstr "Por favor especifique un rango HSync valido"
+
+#: plugins/admin/systems/class_servDB.inc:117
+#: plugins/admin/systems/class_servDB.inc:133
+#: plugins/admin/systems/class_servDB.inc:139
+#: plugins/admin/systems/class_servDB.inc:144
+#: plugins/admin/systems/class_servDB.inc:150
+#, fuzzy, php-format
+msgid "The attribute '%s' is empty or contains invalid characters."
+msgstr "¡El tiempo de expiración '%s' contiene caracteres no validos!"
+
+#: plugins/admin/systems/class_servDB.inc:123
+#, php-format
+msgid "The imap connect string needs to be in the form '%s'."
+msgstr ""
+
+#: plugins/admin/systems/class_servDB.inc:127
+msgid "The sieve port needs to be numeric."
+msgstr ""
+
+#: plugins/admin/systems/server.tpl:6
+#, fuzzy
+msgid "Server name"
+msgstr "Servidor"
+
+#: plugins/admin/systems/server.tpl:15 plugins/admin/systems/phone.tpl:15
+#: plugins/admin/systems/terminal.tpl:20 plugins/admin/systems/printer.tpl:23
+#: plugins/admin/systems/workstation.tpl:20
+#: plugins/admin/systems/wingeneric.tpl:15
+#: plugins/admin/systems/component.tpl:15
+msgid "Choose subtree to place terminal in"
+msgstr "Elija un subárbol donde colocar el terminal"
+
+#: plugins/admin/systems/server.tpl:38 plugins/admin/systems/terminal.tpl:99
+#: plugins/admin/systems/workstation.tpl:99
+#: plugins/admin/ogroups/termgroup.tpl:3
+msgid "Action"
+msgstr "Acción"
+
+#: plugins/admin/systems/server.tpl:42
+#, fuzzy
+msgid "Select action to execute for this server"
+msgstr "Seleccione una acción que se ejecutara en este terminal"
+
+#: plugins/admin/systems/phone.tpl:6
+msgid "Phone name"
+msgstr "Número de teléfono"
+
+#: plugins/admin/systems/terminal.tpl:9
+msgid "Terminal template"
+msgstr "Plantilla de terminal"
+
+#: plugins/admin/systems/terminal.tpl:11
+msgid "Terminal name"
+msgstr "Nombre de terminal"
+
+#: plugins/admin/systems/terminal.tpl:36
+#: plugins/admin/systems/workstation.tpl:36
+msgid "Mode"
+msgstr "Modo"
+
+#: plugins/admin/systems/terminal.tpl:38
+#: plugins/admin/systems/workstation.tpl:38
+msgid "Select terminal mode"
+msgstr "Seleccionar modo de terminal"
+
+#: plugins/admin/systems/terminal.tpl:52
+#: plugins/admin/systems/workstation.tpl:52
+msgid "Root server"
+msgstr "Servidor Raíz"
+
+#: plugins/admin/systems/terminal.tpl:54
+#: plugins/admin/systems/workstation.tpl:54
+msgid "Select NFS root filesystem to use"
+msgstr "Seleccione sistema de archivos raíz 'NFS' que se usará"
+
+#: plugins/admin/systems/terminal.tpl:60
+#: plugins/admin/systems/workstation.tpl:60
+msgid "Swap server"
+msgstr "Servidor de Intercambio"
+
+#: plugins/admin/systems/terminal.tpl:62
+#: plugins/admin/systems/workstation.tpl:62
+msgid "Choose NFS filesystem to place swap files on"
+msgstr ""
+"Seleccione sistema de archivos 'NFS' donde estarán los archivos de "
+"intercambio"
+
+#: plugins/admin/systems/terminal.tpl:74
+#: plugins/admin/systems/workstation.tpl:74
+msgid "Syslog server"
+msgstr "Servidor de Logs"
+
+#: plugins/admin/systems/terminal.tpl:76
+#: plugins/admin/systems/workstation.tpl:76
+msgid "Choose server to use for logging"
+msgstr "Elija un servidor que será usado para registro"
+
+#: plugins/admin/systems/terminal.tpl:82
+#: plugins/admin/systems/workstation.tpl:82
+msgid "NTP server"
+msgstr "Servidor NTP"
+
+#: plugins/admin/systems/terminal.tpl:84
+#: plugins/admin/systems/workstation.tpl:84
+msgid "Choose server to use for synchronizing time"
+msgstr "Elija un servidor que será usado para sincronización horaria"
+
+#: plugins/admin/systems/terminal.tpl:103
+#: plugins/admin/systems/workstation.tpl:103
+msgid "Select action to execute for this terminal"
+msgstr "Seleccione una acción que se ejecutara en este terminal"
+
 #: plugins/admin/systems/class_terminalGeneric.inc:62
 #: plugins/admin/systems/class_workstationGeneric.inc:71
 msgid "text"
@@ -4067,28 +4477,13 @@ msgstr "Reiniciar"
 msgid "Wake up"
 msgstr "Despertar"
 
-#: plugins/admin/systems/class_terminalGeneric.inc:213
+#: plugins/admin/systems/class_terminalGeneric.inc:216
 msgid "You have no permissions to create a terminal on this 'Base'."
 msgstr "No tiene permisos para crear un terminal en esta 'Base'."
 
-#: plugins/admin/systems/class_terminalGeneric.inc:217
+#: plugins/admin/systems/class_terminalGeneric.inc:220
 msgid "The required field 'Terminal name' is not set."
 msgstr " El campo requerido 'Nombre del terminal' no ha sido rellenado."
-
-#: plugins/admin/systems/class_terminalGeneric.inc:230
-#: plugins/admin/systems/class_servGeneric.inc:178
-#: plugins/admin/systems/class_workstationGeneric.inc:237
-#: plugins/admin/systems/class_printGeneric.inc:131
-#: plugins/admin/systems/class_phoneGeneric.inc:128
-#: plugins/admin/systems/class_componentGeneric.inc:125
-#: plugins/admin/systems/class_wingeneric.inc:165
-#, php-format
-msgid "There is already an entry '%s' in the base choosen by you"
-msgstr "Ya hay una entrada '%s' en la base elegida"
-
-#: plugins/admin/systems/phone.tpl:6
-msgid "Phone name"
-msgstr "Número de teléfono"
 
 #: plugins/admin/systems/class_servGeneric.inc:48
 #, fuzzy
@@ -4099,71 +4494,6 @@ msgstr "Esta 'dn' no tiene características de impresora."
 #, fuzzy
 msgid "You have no permissions to create a server on this 'Base'."
 msgstr "No tiene permisos para crear un usuario en esta 'Base'."
-
-#: plugins/admin/systems/terminal.tpl:9
-msgid "Terminal template"
-msgstr "Plantilla de terminal"
-
-#: plugins/admin/systems/terminal.tpl:11
-msgid "Terminal name"
-msgstr "Nombre de terminal"
-
-#: plugins/admin/systems/terminal.tpl:36
-#: plugins/admin/systems/workstation.tpl:36
-msgid "Mode"
-msgstr "Modo"
-
-#: plugins/admin/systems/terminal.tpl:38
-#: plugins/admin/systems/workstation.tpl:38
-msgid "Select terminal mode"
-msgstr "Seleccionar modo de terminal"
-
-#: plugins/admin/systems/terminal.tpl:52
-#: plugins/admin/systems/workstation.tpl:52
-msgid "Root server"
-msgstr "Servidor Raíz"
-
-#: plugins/admin/systems/terminal.tpl:54
-#: plugins/admin/systems/workstation.tpl:54
-msgid "Select NFS root filesystem to use"
-msgstr "Seleccione sistema de archivos raíz 'NFS' que se usará"
-
-#: plugins/admin/systems/terminal.tpl:60
-#: plugins/admin/systems/workstation.tpl:60
-msgid "Swap server"
-msgstr "Servidor de Intercambio"
-
-#: plugins/admin/systems/terminal.tpl:62
-#: plugins/admin/systems/workstation.tpl:62
-msgid "Choose NFS filesystem to place swap files on"
-msgstr ""
-"Seleccione sistema de archivos 'NFS' donde estarán los archivos de "
-"intercambio"
-
-#: plugins/admin/systems/terminal.tpl:74
-#: plugins/admin/systems/workstation.tpl:74
-msgid "Syslog server"
-msgstr "Servidor de Logs"
-
-#: plugins/admin/systems/terminal.tpl:76
-#: plugins/admin/systems/workstation.tpl:76
-msgid "Choose server to use for logging"
-msgstr "Elija un servidor que será usado para registro"
-
-#: plugins/admin/systems/terminal.tpl:82
-#: plugins/admin/systems/workstation.tpl:82
-msgid "NTP server"
-msgstr "Servidor NTP"
-
-#: plugins/admin/systems/terminal.tpl:84
-#: plugins/admin/systems/workstation.tpl:84
-msgid "Choose server to use for synchronizing time"
-msgstr "Elija un servidor que será usado para sincronización horaria"
-
-#: plugins/admin/systems/terminal.tpl:103
-#: plugins/admin/systems/workstation.tpl:103
-msgid "Select action to execute for this terminal"
-msgstr "Seleccione una acción que se ejecutara en este terminal"
 
 #: plugins/admin/systems/class_servDHCP.inc:32
 #, fuzzy
@@ -4192,6 +4522,18 @@ msgid ""
 msgstr ""
 "Esta cuenta tiene la extensión de fax desactivada. Puede activarla pulsando "
 "aquí."
+
+#: plugins/admin/systems/printer.tpl:6
+msgid "Printer name"
+msgstr "Nombre de la impresora"
+
+#: plugins/admin/systems/printer.tpl:32
+msgid "Printer URL"
+msgstr "URL de la impresora"
+
+#: plugins/admin/systems/printer.tpl:36
+msgid "Path to PPD"
+msgstr "Ruta al 'PPD'"
 
 #: plugins/admin/systems/class_systemManagement.inc:32
 msgid "Systems"
@@ -4240,26 +4582,22 @@ msgstr "Plantilla de estación de trabajo para"
 msgid "This 'dn' has no workstation features."
 msgstr "Esta 'dn' no tiene características de estación de trabajo."
 
-#: plugins/admin/systems/class_workstationGeneric.inc:220
+#: plugins/admin/systems/class_workstationGeneric.inc:223
 msgid "You have no permissions to create a workstation on this 'Base'."
 msgstr "No tiene permisos para crear una estación de trabajo en esta 'Base'."
 
-#: plugins/admin/systems/class_workstationGeneric.inc:224
+#: plugins/admin/systems/class_workstationGeneric.inc:227
 msgid "The required field 'Workstation name' is not set."
 msgstr ""
 " El campo requerido 'Nombre de la estación de trabajo' no ha sido rellenado."
 
-#: plugins/admin/systems/printer.tpl:6
-msgid "Printer name"
-msgstr "Nombre de la impresora"
+#: plugins/admin/systems/class_printGeneric.inc:56
+msgid "This 'dn' has no printer features."
+msgstr "Esta 'dn' no tiene características de impresora."
 
-#: plugins/admin/systems/printer.tpl:32
-msgid "Printer URL"
-msgstr "URL de la impresora"
-
-#: plugins/admin/systems/printer.tpl:36
-msgid "Path to PPD"
-msgstr "Ruta al 'PPD'"
+#: plugins/admin/systems/class_printGeneric.inc:122
+msgid "You have no permissions to create a printer on this 'Base'."
+msgstr "No tiene permisos para crear una impresora en esta 'Base'."
 
 #: plugins/admin/systems/class_servDNS.inc:32
 #, fuzzy
@@ -4287,24 +4625,6 @@ msgstr ""
 "Esta cuenta tiene la extensión de fax desactivada. Puede activarla pulsando "
 "aquí."
 
-#: plugins/admin/systems/class_servDB.inc:117
-#: plugins/admin/systems/class_servDB.inc:133
-#: plugins/admin/systems/class_servDB.inc:139
-#: plugins/admin/systems/class_servDB.inc:144
-#: plugins/admin/systems/class_servDB.inc:150
-#, fuzzy, php-format
-msgid "The attribute '%s' is empty or contains invalid characters."
-msgstr "¡El tiempo de expiración '%s' contiene caracteres no validos!"
-
-#: plugins/admin/systems/class_servDB.inc:123
-#, php-format
-msgid "The imap connect string needs to be in the form '%s'."
-msgstr ""
-
-#: plugins/admin/systems/class_servDB.inc:127
-msgid "The sieve port needs to be numeric."
-msgstr ""
-
 #: plugins/admin/systems/workstation.tpl:9
 msgid "Workstation template"
 msgstr "Plantilla de estación de trabajo"
@@ -4313,89 +4633,79 @@ msgstr "Plantilla de estación de trabajo"
 msgid "Workstation name"
 msgstr "Nombre de la estación de trabajo"
 
-#: plugins/admin/systems/servdb.tpl:1
-msgid ""
-"This dialog keeps settings that are used and required by several components "
-"within GOsa and are used to find out more about your servers. These settings "
-"will be reloaded when you save this component."
-msgstr ""
-
-#: plugins/admin/systems/servdb.tpl:10
+#: plugins/admin/systems/servdb.tpl:6
 msgid "Kerberos kadmin access"
 msgstr ""
 
-#: plugins/admin/systems/servdb.tpl:14
+#: plugins/admin/systems/servdb.tpl:10
 #, fuzzy
 msgid "Kerberos Realm"
 msgstr "Kerberos"
 
-#: plugins/admin/systems/servdb.tpl:18 plugins/admin/systems/servdb.tpl:86
+#: plugins/admin/systems/servdb.tpl:14 plugins/admin/systems/servdb.tpl:82
 #, fuzzy
 msgid "Admin user"
 msgstr "Usuarios del dominio"
 
-#: plugins/admin/systems/servdb.tpl:30
+#: plugins/admin/systems/servdb.tpl:26
 #, fuzzy
 msgid "FAX database"
 msgstr "Fecha"
 
-#: plugins/admin/systems/servdb.tpl:34
+#: plugins/admin/systems/servdb.tpl:30
 #, fuzzy
 msgid "FAX DB user"
 msgstr "Mostrar los usuarios de FAX"
 
-#: plugins/admin/systems/servdb.tpl:46
+#: plugins/admin/systems/servdb.tpl:42
 #, fuzzy
 msgid "Asterisk management"
 msgstr "Gestión del sistema"
 
-#: plugins/admin/systems/servdb.tpl:50
+#: plugins/admin/systems/servdb.tpl:46
 msgid "Asterisk DB user"
 msgstr ""
 
-#: plugins/admin/systems/servdb.tpl:58
+#: plugins/admin/systems/servdb.tpl:54
 msgid "Country dial prefix"
 msgstr ""
 
-#: plugins/admin/systems/servdb.tpl:62
+#: plugins/admin/systems/servdb.tpl:58
 msgid "Local dial prefix"
 msgstr ""
 
-#: plugins/admin/systems/servdb.tpl:74
+#: plugins/admin/systems/servdb.tpl:70
 msgid "IMAP admin access"
 msgstr ""
 
-#: plugins/admin/systems/servdb.tpl:78
+#: plugins/admin/systems/servdb.tpl:74
 #, fuzzy
 msgid "Server identifier"
 msgstr "Tipo de Vía"
 
-#: plugins/admin/systems/servdb.tpl:82
+#: plugins/admin/systems/servdb.tpl:78
 #, fuzzy
 msgid "Connect URL"
 msgstr "Conexión"
 
-#: plugins/admin/systems/servdb.tpl:95
+#: plugins/admin/systems/servdb.tpl:91
 #, fuzzy
 msgid "Sieve port"
 msgstr "Servidor"
 
-#: plugins/admin/systems/servdb.tpl:104
+#: plugins/admin/systems/servdb.tpl:100
 #, fuzzy
 msgid "Logging database"
 msgstr "bases de datos de organizaciones de usuarios"
 
-#: plugins/admin/systems/servdb.tpl:108
+#: plugins/admin/systems/servdb.tpl:104
 msgid "Logging DB user"
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:56
-msgid "This 'dn' has no printer features."
-msgstr "Esta 'dn' no tiene características de impresora."
-
-#: plugins/admin/systems/class_printGeneric.inc:121
-msgid "You have no permissions to create a printer on this 'Base'."
-msgstr "No tiene permisos para crear una impresora en esta 'Base'."
+#: plugins/admin/systems/wingeneric.tpl:6
+#, fuzzy
+msgid "Machine name"
+msgstr "Número de teléfono"
 
 #: plugins/admin/systems/remove.tpl:7
 msgid ""
@@ -4770,6 +5080,11 @@ msgstr ""
 msgid "Changing the password impinges on authentification only."
 msgstr "Cambiar la contraseña afecta solamente a la autenticación."
 
+#: plugins/admin/systems/component.tpl:6
+#, fuzzy
+msgid "Device name"
+msgstr "Servidor"
+
 #: plugins/admin/systems/chooser.tpl:1
 msgid "Choose the kind of system component you want to create"
 msgstr "Elija el tipo de componente del sistema que desea crear"
@@ -4823,31 +5138,9 @@ msgstr "Crear"
 msgid "This 'dn' has no phone features."
 msgstr "Esta 'dn' no tiene características de teléfono."
 
-#: plugins/admin/systems/class_phoneGeneric.inc:118
+#: plugins/admin/systems/class_phoneGeneric.inc:119
 msgid "You have no permissions to create a phone on this 'Base'."
 msgstr "No tiene permisos para crear un teléfono en esta 'Base'."
-
-#: plugins/admin/systems/class_componentGeneric.inc:47
-#: plugins/admin/systems/class_wingeneric.inc:85
-#, fuzzy
-msgid "This 'dn' has no network features."
-msgstr "Esta 'dn' no tiene características de impresora."
-
-#: plugins/admin/systems/class_componentGeneric.inc:115
-#: plugins/admin/systems/class_wingeneric.inc:155
-#, fuzzy
-msgid "You have no permissions to create a component on this 'Base'."
-msgstr "No tiene permisos para crear un teléfono en esta 'Base'."
-
-#: plugins/admin/systems/component.tpl:6
-#, fuzzy
-msgid "Device name"
-msgstr "Servidor"
-
-#: plugins/admin/systems/wingeneric.tpl:6
-#, fuzzy
-msgid "Machine name"
-msgstr "Número de teléfono"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:19
 #, fuzzy
@@ -5166,19 +5459,19 @@ msgstr "Tiempo(s) excedido(s)"
 msgid "Phone Reports"
 msgstr "Informes telefónicos"
 
-#: plugins/gofon/reports/class_fonreport.inc:138
+#: plugins/gofon/reports/class_fonreport.inc:141
 msgid "Can't connect to phone database, no reports can be shown!"
 msgstr ""
 "No puedo conectar a la base de datos telefónica, ¡No se pueden mostrar "
 "informes!"
 
-#: plugins/gofon/reports/class_fonreport.inc:142
+#: plugins/gofon/reports/class_fonreport.inc:145
 msgid "Can't select phone database for report generation!"
 msgstr ""
 "¡No puedo seleccionar la base de datos telefónica para la generación de "
 "informes!"
 
-#: plugins/gofon/reports/class_fonreport.inc:151
+#: plugins/gofon/reports/class_fonreport.inc:154
 msgid "Query for phone database failed!"
 msgstr "¡La consulta a la base de datos de teléfonos ha fallado!"
 
@@ -5258,25 +5551,25 @@ msgstr "El equipo de GOsa"
 msgid "Welcome %s!"
 msgstr "¡Bienvenido %s!"
 
-#: include/functions.inc:266
+#: include/functions.inc:267
 #, php-format
 msgid "Error when connecting the LDAP. Server said '%s'."
 msgstr ""
 "Hay un error trantando de conectarse al servidor LDAP. El error del servidor "
 "es: '%s'"
 
-#: include/functions.inc:287
+#: include/functions.inc:288
 #, php-format
 msgid "User login failed. LDAP server said '%s'."
 msgstr "Autenticación del usuario fallida. El servidor LDAP contesto '%s'."
 
-#: include/functions.inc:307
+#: include/functions.inc:308
 msgid "Username / UID is not unique. Please check your LDAP database."
 msgstr ""
 "Nombre de usuario o UID no son únicos. Por favor, compruebe su base de datos "
 "LDAP."
 
-#: include/functions.inc:345
+#: include/functions.inc:346
 msgid ""
 "Error while adding a lock. Parameters are not set correctly, please check "
 "the source!"
@@ -5284,7 +5577,7 @@ msgstr ""
 "Error al tratar de agregar un bloqueo. Los parámetros no son correctos, por "
 "favor, compruebe el código fuente."
 
-#: include/functions.inc:355
+#: include/functions.inc:356
 #, php-format
 msgid ""
 "Can't set locking information in LDAP database. Please check the 'config' "
@@ -5293,17 +5586,17 @@ msgstr ""
 "No se pudo generar el bloqueo a la base de datos LDAP. Por favor, compruebe "
 "la entrada 'config' en gosa.conf. El servidor LDAP contesto '%s'."
 
-#: include/functions.inc:370
+#: include/functions.inc:371
 #, php-format
 msgid "Adding a lock failed. LDAP server says '%s'."
 msgstr "Fallo al tratar de agregar un bloqueo. El servidor LDAP contesto '%s'."
 
-#: include/functions.inc:396
+#: include/functions.inc:397
 #, php-format
 msgid "Removing a lock failed. LDAP server says '%s'."
 msgstr "Fallo al tratar de agregar un bloqueo. El servidor LDAP contesto '%s'."
 
-#: include/functions.inc:426
+#: include/functions.inc:427
 msgid ""
 "Getting the lock from LDAP failed. Parameters are not sed correctly, please "
 "check the source!"
@@ -5311,7 +5604,7 @@ msgstr ""
 "Fallo al tratar de obtener un bloqueo del LDAP. Los parámetros no fueron "
 "correctamente configurados, por favor, compruebe el código."
 
-#: include/functions.inc:436
+#: include/functions.inc:437
 msgid ""
 "Can't get locking information in LDAP database. Please check the 'config' "
 "entry in gosa.conf!"
@@ -5319,7 +5612,7 @@ msgstr ""
 "No puedo bloquear la información en la base de datos LDAP. Por favor, "
 "compruebe la entrada 'config' en el archivos gosa.conf."
 
-#: include/functions.inc:444
+#: include/functions.inc:445
 msgid ""
 "Found multiple locks for object to be locked. This should not be possible - "
 "cleaning up multiple references."
@@ -5327,12 +5620,12 @@ msgstr ""
 "Se encontraron varios bloqueos para el objeto a bloquear. Esto no debería "
 "ser posible, eliminando referencias múltiples."
 
-#: include/functions.inc:516
+#: include/functions.inc:517
 #, php-format
 msgid "The size limit of %d entries is exceed!"
 msgstr "¡Ha excedido el tamaño máximo de %d entradas!"
 
-#: include/functions.inc:518
+#: include/functions.inc:519
 #, php-format
 msgid ""
 "Set the new size limit to %s and show me this message if the limit still "
@@ -5341,15 +5634,15 @@ msgstr ""
 "Indique el nuevo tamaño limite a %s y enséñame este mensaje si el tamaño "
 "limite es todavía superado"
 
-#: include/functions.inc:530
+#: include/functions.inc:531
 msgid "Configure"
 msgstr "Configurar"
 
-#: include/functions.inc:535
+#: include/functions.inc:536
 msgid "incomplete"
 msgstr "incompleto"
 
-#: include/functions.inc:918
+#: include/functions.inc:919
 #, php-format
 msgid ""
 "You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
@@ -5358,49 +5651,18 @@ msgstr ""
 "Va ha editar la entrada LDAP '%s' que parece estar siendo usada por '%s'. "
 "Por favor, contacte con esta persona para clarificar los procedimientos."
 
-#: include/functions.inc:1017
+#: include/functions.inc:1018
 msgid "LDAP error:"
 msgstr "Error LDAP:"
 
-#: include/functions.inc:1110
-msgid ""
-"Warning: Can't set kerberos password. Your PHP version has no kerberos "
-"support, password has not been changed."
-msgstr ""
-"Aviso: No se puede poner la contraseña Kerberos. Su versión de PHP no tiene "
-"soporte Kerberos, la contraseña no ha sido cambiada."
-
-#: include/functions.inc:1117
-msgid "Kerberos database communication failed!"
-msgstr "¡La comunicación con la base de datos Kerberos fallo!."
-
-#: include/functions.inc:1123
-msgid "Changing password in kerberos database failed!"
-msgstr ""
-"¡Fallo al tratar de cambiar la contraseña en la base de datos de kerberos!."
-
-#: include/functions.inc:1132
-msgid "Unsupported password hash detected. Can't generate compatible password."
-msgstr ""
-"Se ha detectado una encriptación de contraseña no soportada. No se puede "
-"generar una contraseña compatible."
-
-#: include/functions.inc:1172
-msgid ""
-"Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
-msgstr ""
-"La configuración para SMBHASH en /etc/gosa/gosa.conf es incorrecta. No se "
-"pueden cambiar las contraseñas de SAMBA."
-
-#: include/functions.inc:1190
-#, php-format
-msgid "Setting the password failed. LDAP server says '%s'."
-msgstr ""
-"Fallo al tratar de configurar la contraseña. El servidor LDAP contesto '%s'."
-
-#: include/functions.inc:1603
+#: include/functions.inc:1460
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+
+#: include/functions.inc:1505
+#, php-format
+msgid "GOsa development snapshot (Rev %s)"
+msgstr ""
 
 #: include/class_mail-methods-cyrus.inc:44
 msgid ""
@@ -5482,19 +5744,19 @@ msgstr ""
 "Esta actualmente editando una entrada de la base de datos. ?Quiere quitar "
 "los cambios?"
 
-#: include/setup_checks.inc:78
+#: include/setup_checks.inc:80
 msgid "Can't bind to LDAP. No schema check possible!"
 msgstr ""
 "No se pudo establecer la conexión al servidor LDAP. ¡No se pudo comprobar el "
 "esquema.!"
 
-#: include/setup_checks.inc:87 include/setup_checks.inc:96
+#: include/setup_checks.inc:89 include/setup_checks.inc:98
 msgid "Can't get schema information from server. No schema check possible!"
 msgstr ""
 "No se pudo obtener la información del esquema del servidor. No se pudo "
 "comprobar el esquema."
 
-#: include/setup_checks.inc:116
+#: include/setup_checks.inc:118
 #, php-format
 msgid ""
 "Optional objectclass '%s' required by plugin '%s' is not present in LDAP "
@@ -5503,7 +5765,7 @@ msgstr ""
 "El objeto de clase (objectclass) opcional '%s' requerido por la extensión '%"
 "s' no esta disponible en configuración de LDAP."
 
-#: include/setup_checks.inc:119
+#: include/setup_checks.inc:121
 #, php-format
 msgid ""
 "Optional objectclass '%s' required by plugin '%s' does not have version %s"
@@ -5511,66 +5773,66 @@ msgstr ""
 "El objeto de clase (objectclass) opcional '%s' requerido por la extensión '%"
 "s' no tiene la versión %s"
 
-#: include/setup_checks.inc:131
+#: include/setup_checks.inc:133
 #, php-format
 msgid "Required objectclass '%s' is not present in LDAP setup"
 msgstr ""
 "No se encuentra el objeto de clase (object class) requerido '%s' en la "
 "configuración del servidor LDAP."
 
-#: include/setup_checks.inc:134
+#: include/setup_checks.inc:136
 #, php-format
 msgid "Required objectclass '%s' does not have version %s"
 msgstr "El objeto de clase (objectclass) requerido '%s' no tiene la versión %s"
 
-#: include/setup_checks.inc:142
+#: include/setup_checks.inc:144
 #, fuzzy
 msgid "<b>SAMBA 3</b> support disabled, no schema seems to be installed"
 msgstr ""
 "El soporte de SAMBA 3 se encuentra desactivado, no parece haber esquemas "
 "instalados"
 
-#: include/setup_checks.inc:144
+#: include/setup_checks.inc:146
 msgid ""
 "<b>SAMBA 3</b> support enabled<td class=\"check\">gosa+samba3.schema</td>"
 msgstr ""
 
-#: include/setup_checks.inc:147
+#: include/setup_checks.inc:149
 #, fuzzy
 msgid "<b>SAMBA 2</b> support disabled, no schema seems to be installed"
 msgstr ""
 "El soporte de SAMBA 2 se encuentra desactivado, no parece haber esquemas "
 "instalados"
 
-#: include/setup_checks.inc:149
+#: include/setup_checks.inc:151
 msgid "<b>SAMBA 2</b> support enabled<td class=\"check\">samba.schema</td>"
 msgstr ""
 
-#: include/setup_checks.inc:153
+#: include/setup_checks.inc:155
 #, fuzzy
 msgid "Support for <b>pureftp</b> disabled, no schema seems to be installed"
 msgstr ""
 "El soporte para pureftp se encuentra desactivado, no parece haber esquemas "
 "instalados"
 
-#: include/setup_checks.inc:155
+#: include/setup_checks.inc:157
 msgid ""
 "Support for <b>pureftp</b> enabled<td class=\"check\">pureftpd.schema</td>"
 msgstr ""
 
-#: include/setup_checks.inc:158
+#: include/setup_checks.inc:160
 #, fuzzy
 msgid "Support for <b>WebDAV</b> disabled, no schema seems to be installed"
 msgstr ""
 "El soporte para pureftp se encuentra desactivado, no parece haber esquemas "
 "instalados"
 
-#: include/setup_checks.inc:160
+#: include/setup_checks.inc:162
 msgid ""
 "Support for <b>WebDAV</b> enabled<td class=\"check\">gosa+samba3.schema</td>"
 msgstr ""
 
-#: include/setup_checks.inc:163
+#: include/setup_checks.inc:165
 #, fuzzy
 msgid ""
 "Support for <b>phpgroupware</b> disabled, no schema seems to be installed"
@@ -5578,44 +5840,57 @@ msgstr ""
 "El soporte para pureftp se encuentra desactivado, no parece haber esquemas "
 "instalados"
 
-#: include/setup_checks.inc:165
+#: include/setup_checks.inc:167
 msgid ""
 "Support for <b>phpgroupware</b> enabled<td class=\"check\">phpgwaccount."
 "schema</td>"
 msgstr ""
 
-#: include/setup_checks.inc:168
+#: include/setup_checks.inc:170
 #, fuzzy
 msgid "Support for <b>gofon</b> disabled, no schema seems to be installed"
 msgstr ""
 "El soporte para pureftp se encuentra desactivado, no parece haber esquemas "
 "instalados"
 
-#: include/setup_checks.inc:170
+#: include/setup_checks.inc:172
 msgid "Support for <b>gofon</b> enabled<td class=\"check\">gofon.schema</td>"
 msgstr ""
 
+#: include/setup_checks.inc:178
+#, fuzzy
+msgid ""
+"Support for <b>Kolab</b> disabled, no schema seems to be installed, setting "
+"mail-method to cyrus"
+msgstr ""
+"El soporte para pureftp se encuentra desactivado, no parece haber esquemas "
+"instalados"
+
 #: include/setup_checks.inc:182
+msgid "Support for <b>Kolab</b> enabled<td class=\"check\">gofon.schema</td>"
+msgstr ""
+
+#: include/setup_checks.inc:197
 msgid "OK"
 msgstr "Perfecto"
 
-#: include/setup_checks.inc:185
+#: include/setup_checks.inc:200
 msgid "Ignored"
 msgstr "Ignorado"
 
-#: include/setup_checks.inc:187
+#: include/setup_checks.inc:202
 msgid "Failed"
 msgstr "Fallado"
 
-#: include/setup_checks.inc:203
+#: include/setup_checks.inc:218
 msgid "PHP setup inspection"
 msgstr "Comprobación configuración PHP"
 
-#: include/setup_checks.inc:204
+#: include/setup_checks.inc:219
 msgid "Checking for PHP version (>=4.1.0)"
 msgstr "Comprobando la versión de PHP (>=4.1.0)"
 
-#: include/setup_checks.inc:205
+#: include/setup_checks.inc:220
 msgid ""
 "PHP must be of version 4.1.0 or above for some functions and known bugs in "
 "PHP language."
@@ -5623,13 +5898,13 @@ msgstr ""
 "Debe tener una versión de PHP 4.1.0 o superior para el correcto "
 "funcionamiento de GOsa."
 
-#: include/setup_checks.inc:208
+#: include/setup_checks.inc:223
 msgid "Checking if register_globals is set to 'off'"
 msgstr ""
 "Comprobando si el registro de variables globales (register_globals) esta "
 "desactivado."
 
-#: include/setup_checks.inc:209
+#: include/setup_checks.inc:224
 msgid ""
 "register_globals is a PHP mechanism to register all global varibales to be "
 "accessible from scripts without changing the scope. This may be a security "
@@ -5639,28 +5914,39 @@ msgstr ""
 "que permite acceder a variables globales sin cambiar el ambito. Esto puede "
 "ser un problema de seguridad. GOsa funcionará en los dos modos."
 
-#: include/setup_checks.inc:212
+#: include/setup_checks.inc:227
 msgid "Checking for ldap module"
 msgstr "Comprobando los módulos de ldap"
 
-#: include/setup_checks.inc:213
+#: include/setup_checks.inc:228
 msgid "This is the main module used by GOsa and therefore really required."
 msgstr "Este es el módulo más usado por GOsa, es realmente requerido."
 
-#: include/setup_checks.inc:216
+#: include/setup_checks.inc:231
 msgid "Checking for gettext support"
 msgstr "Comprobando el soporte de gettext"
 
-#: include/setup_checks.inc:217
+#: include/setup_checks.inc:232
 msgid "Gettext support is required for internationalized GOsa."
 msgstr ""
 "El soporte de gettext es requerido para la intenacionalización de GOsa."
 
-#: include/setup_checks.inc:219
+#: include/setup_checks.inc:234
+#, fuzzy
+msgid "Checking for iconv support"
+msgstr "Comprobando el soporte de gettext"
+
+#: include/setup_checks.inc:235
+msgid ""
+"This module is used by GOsa to convert samba munged dial informations and is "
+"therefore required."
+msgstr ""
+
+#: include/setup_checks.inc:238
 msgid "Checking for mhash module"
 msgstr "Comprobando por el módulo de mhash"
 
-#: include/setup_checks.inc:220
+#: include/setup_checks.inc:239
 msgid ""
 "To use SSHA encryption, you'll need this module. If you are just using crypt "
 "or md5 encryption, ignore this message. GOsa will run without it."
@@ -5668,23 +5954,11 @@ msgstr ""
 "Necesitará este módulo para usar crifrado SSHA. Si usted solo usa crypt o "
 "md5, ignore este mensaje. GOsa correra si él."
 
-#: include/setup_checks.inc:223
-msgid "Checking for gd module"
-msgstr "Comprobando el módulo gd"
-
-#: include/setup_checks.inc:224
-msgid ""
-"GOsa needs this module for recalculating image sizes provided for users as "
-"jpegPhoto."
-msgstr ""
-"Gosa necesita de este módulo para recalcular los tamaños de las imagenes que "
-"los usuarios provean como jpegPhoto."
-
-#: include/setup_checks.inc:226
+#: include/setup_checks.inc:242
 msgid "Checking for imap module"
 msgstr "Comprobando el módulo de imap"
 
-#: include/setup_checks.inc:227
+#: include/setup_checks.inc:243
 msgid ""
 "The IMAP module is needed to communicate with the IMAP server. It gets "
 "status informations, creates and deletes mail users."
@@ -5692,11 +5966,11 @@ msgstr ""
 "El módulo de IMAP es necesario para comunicarse con el servidor IMAP. "
 "Obtiene el estado, crea y borra usuarios del correo."
 
-#: include/setup_checks.inc:229
+#: include/setup_checks.inc:245
 msgid "Checking for getacl in imap"
 msgstr "Comprobando por getacl en imap"
 
-#: include/setup_checks.inc:230
+#: include/setup_checks.inc:246
 msgid ""
 "The getacl support is needed for shared folder permissions. The standard "
 "IMAP module is not capable of reading acl's. You need a recend PHP version "
@@ -5706,21 +5980,21 @@ msgstr ""
 "módulo IAMP estandar no es capaz de leer acls. Necesitará una versión "
 "reciente de PHP para obtener está caracteristica. "
 
-#: include/setup_checks.inc:232
+#: include/setup_checks.inc:248
 msgid "Checking for mysql module"
 msgstr "Comprobando el módulo de mysql"
 
-#: include/setup_checks.inc:233
+#: include/setup_checks.inc:249
 msgid "MySQL support is needed for reading GOfax reports from databases."
 msgstr ""
 "El soporte de MySQL es necesario para leer los repotes de GOfax de la base "
 "de datos."
 
-#: include/setup_checks.inc:235
+#: include/setup_checks.inc:251
 msgid "Checking for cups module"
 msgstr "Comprobando el módulo de cups"
 
-#: include/setup_checks.inc:236
+#: include/setup_checks.inc:252
 msgid ""
 "In order to read available printers from IPP protocol instead of printcap "
 "files, you've to install the CUPS module."
@@ -5728,11 +6002,11 @@ msgstr ""
 "Para poder leer las impresoras disponibles a través del protocolo IPP, en "
 "vez de los archivos printcap, tiene que tener instalado el módulo de CUPS."
 
-#: include/setup_checks.inc:238
+#: include/setup_checks.inc:254
 msgid "Checking for kadm5 module"
 msgstr "Comprobando el módulo kadm5"
 
-#: include/setup_checks.inc:239
+#: include/setup_checks.inc:255
 msgid ""
 "Managing users in kerberos requires the kadm5 module which is downloadable "
 "via PEAR network."
@@ -5740,15 +6014,15 @@ msgstr ""
 "Manejando usuarios en kerberos requiere el módulo kadm5 que esta disponible "
 "en la red PEAR."
 
-#: include/setup_checks.inc:248
+#: include/setup_checks.inc:264
 msgid "Checking for some additional programms"
 msgstr "Comprobando programas adicionales"
 
-#: include/setup_checks.inc:257
+#: include/setup_checks.inc:273
 msgid "Checking for ImageMagick (>=5.4.0)"
 msgstr "Comprobando por ImageMagick (>=5.4.0)"
 
-#: include/setup_checks.inc:258
+#: include/setup_checks.inc:274
 msgid ""
 "ImageMagick is used to convert user supplied images to fit the suggested "
 "size and the unified JPEG format."
@@ -5756,12 +6030,12 @@ msgstr ""
 "ImageMagick se usa para convertir las imagenes de los usuarios para que "
 "encajen en el tamaño sugerido y el formato JPEG."
 
-#: include/setup_checks.inc:261
+#: include/setup_checks.inc:277
 #, fuzzy
 msgid "Checking imagick module for PHP"
 msgstr "Comprobando el módulo de imap"
 
-#: include/setup_checks.inc:262
+#: include/setup_checks.inc:278
 #, fuzzy
 msgid ""
 "Imagick is used to convert user supplied images to fit the suggested size "
@@ -5770,11 +6044,11 @@ msgstr ""
 "ImageMagick se usa para convertir las imagenes de los usuarios para que "
 "encajen en el tamaño sugerido y el formato JPEG."
 
-#: include/setup_checks.inc:269
+#: include/setup_checks.inc:285
 msgid "Checking for fping utility"
 msgstr "Comprobando la herramienta fping"
 
-#: include/setup_checks.inc:270
+#: include/setup_checks.inc:286
 msgid ""
 "The fping utility is only used if you've got a thin client based terminal "
 "environment running."
@@ -5782,17 +6056,122 @@ msgstr ""
 "La herramienta fping solo se usa si tiene un entorno de terminales clientes "
 "delgados (thinclient)."
 
-#: include/setup_checks.inc:285
+#: include/setup_checks.inc:301
 msgid "Checking for a way to generate LM/NT password hashes"
 msgstr "Buscando una manera de generar hashes de contraseñas LM/NT"
 
-#: include/setup_checks.inc:286
+#: include/setup_checks.inc:302
 msgid ""
 "In order to use SAMBA 2/3, you've to install some additional packages to "
 "generate password hashes."
 msgstr ""
 "Para poder usar SAMBA 2/3, tiene que instalar algunos paquetes adicionales "
 "para generar los hashes de contraseñas."
+
+#: include/setup_checks.inc:333
+msgid "PHP.ini check -> session.auto_register"
+msgstr ""
+
+#: include/setup_checks.inc:334
+msgid ""
+"In Order to use GOsa without any trouble, the session.auto_register option "
+"in your php.ini musst be 'Off'."
+msgstr ""
+
+#: include/setup_checks.inc:340
+msgid "PHP.ini check -> implicit_flush"
+msgstr ""
+
+#: include/setup_checks.inc:341
+msgid ""
+"This Option defines the Ouput handling, turn this Option off, to increase "
+"performance."
+msgstr ""
+
+#: include/setup_checks.inc:347
+msgid "PHP.ini check -> max_execution_time"
+msgstr ""
+
+#: include/setup_checks.inc:348
+msgid ""
+"The Execution time, should be 30 seconds minimun, cause some actions will "
+"need huge ammount of time ."
+msgstr ""
+
+#: include/setup_checks.inc:354
+msgid "PHP.ini check -> memory_limit"
+msgstr ""
+
+#: include/setup_checks.inc:355
+msgid ""
+"GOsa need at least 8M of memory, less will cause unpredictable errors, "
+"sometimes without error message!. Best would be 32 M here."
+msgstr ""
+
+#: include/setup_checks.inc:359
+msgid "PHP.ini check -> expose_php"
+msgstr ""
+
+#: include/setup_checks.inc:360
+msgid ""
+"PHP won't send any Information about the Server you are running, should be a "
+"security fact."
+msgstr ""
+
+#: include/setup_checks.inc:364
+msgid "PHP.ini check -> magic_quotes_gpc"
+msgstr ""
+
+#: include/setup_checks.inc:365
+msgid "Security option, php will escape all quotes in strings ."
+msgstr ""
+
+#: include/setup_checks.inc:656
+msgid "You've to specify an ldap server before continuing!"
+msgstr "Tiene que especificar un servidor ldap antes de continuar."
+
+#: include/setup_checks.inc:666
+msgid ""
+"Can't connect to the specified LDAP server! Please make sure that is "
+"reachable for GOsa."
+msgstr ""
+"No se pudo conectar al servidor LDAP especificado. Por favor, asegure que "
+"este accesible para GOsa."
+
+#: include/setup_checks.inc:683
+msgid ""
+"Can't bind to the specified LDAP server! Please make sure that is reachable "
+"for GOsa."
+msgstr ""
+"No se pudo autentificar con el servidor LDAP especificado. Por favor, "
+"asegure que este accesible para GOsa."
+
+#: include/setup_checks.inc:789
+msgid ""
+"Bind to server successfull, but the server seems to be completly empty, "
+"please check all informations twice"
+msgstr ""
+
+#: include/setup_checks.inc:828
+#, php-format
+msgid ""
+"You're missing the required attribute '%s' from this formular. Please "
+"complete!"
+msgstr ""
+"Falta el atributo requerido '%s' de este formulario. Por favor, complételo."
+
+#: include/setup_checks.inc:867
+#, php-format
+msgid "Can't log into LDAP server. Reason was: %s."
+msgstr "No se puede conectar al servidor LDAP. El motivo fue: %s."
+
+#: include/setup_checks.inc:989 include/setup_checks.inc:1007
+#: html/index.php:156 ihtml/themes/default/setup_useradmin.tpl:6
+msgid ""
+"You're missing an administrative account for GOsa, you'll not be able to "
+"administrate anything!"
+msgstr ""
+"No tiene una cuenta administrativa para GOsa, no podrá administrar nada."
 
 #: include/class_plugin.inc:180
 msgid "This 'dn' has no account extensions."
@@ -5802,7 +6181,7 @@ msgstr "Este 'dn' no tiene extensiones de cuenta."
 msgid "This is an empty plugin."
 msgstr "Esta es un extensión vacía."
 
-#: include/class_plugin.inc:384
+#: include/class_plugin.inc:386
 #, php-format
 msgid ""
 "Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
@@ -5810,7 +6189,7 @@ msgstr ""
 "El comando '%s', especificado como 'POSTCREATE' para la extensión '%s' no "
 "parece existir."
 
-#: include/class_plugin.inc:410
+#: include/class_plugin.inc:412
 #, fuzzy, php-format
 msgid ""
 "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
@@ -5818,18 +6197,13 @@ msgstr ""
 "El comando '%s', especificado como POSTREMOVE para la extensión '%s' no "
 "parece existir."
 
-#: include/class_plugin.inc:436
+#: include/class_plugin.inc:438
 #, php-format
 msgid ""
 "Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
 msgstr ""
 "El comando '%s', especificado como POSTREMOVE para la extensión '%s' no "
 "parece existir."
-
-#: include/version.inc:15
-#, php-format
-msgid "You are currently using GOsa version %s (CVS checkout from %s)"
-msgstr "Está corriendo la versión %s de GOsa (CVS checkout de %s)"
 
 #: include/class_config.inc:69
 #, php-format
@@ -5846,7 +6220,45 @@ msgstr ""
 msgid "SID and/or RIDBASE missing in your configuration!"
 msgstr "SID y/o RIDBASE no se encuentran en su configuración."
 
-#: include/class_ldap.inc:429
+#: include/class_password-methods-ssha.inc:51
+msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
+msgstr ""
+
+#: include/class_password-methods.inc:169
+#, php-format
+msgid "Setting the password failed. LDAP server says '%s'."
+msgstr ""
+"Fallo al tratar de configurar la contraseña. El servidor LDAP contesto '%s'."
+
+#: include/class_password-methods.inc:188
+msgid ""
+"Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
+msgstr ""
+"La configuración para SMBHASH en /etc/gosa/gosa.conf es incorrecta. No se "
+"pueden cambiar las contraseñas de SAMBA."
+
+#: include/class_password-methods-kerberos.inc:43
+msgid ""
+"Warning: Can't set kerberos password. Your PHP version has no kerberos "
+"support, password has not been changed."
+msgstr ""
+"Aviso: No se puede poner la contraseña Kerberos. Su versión de PHP no tiene "
+"soporte Kerberos, la contraseña no ha sido cambiada."
+
+#: include/class_password-methods-kerberos.inc:52
+msgid "Kerberos database communication failed!"
+msgstr "¡La comunicación con la base de datos Kerberos fallo!."
+
+#: include/class_password-methods-kerberos.inc:59
+msgid "Changing password in kerberos database failed!"
+msgstr ""
+"¡Fallo al tratar de cambiar la contraseña en la base de datos de kerberos!."
+
+#: include/class_password-methods-sha.inc:50
+msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
+msgstr ""
+
+#: include/class_ldap.inc:398
 #, php-format
 msgid ""
 "Autocreation of type '%s' is currently not supported. Please report to the "
@@ -5855,19 +6267,19 @@ msgstr ""
 "Actualmente no esta soportada la creación automática del tipo '%s'. Por "
 "favor, informe de esto al equipo de desarrollo de GOsa."
 
-#: include/class_ldap.inc:664
+#: include/class_ldap.inc:630
 #, php-format
 msgid ""
 "This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
 "in line %s"
 msgstr ""
 
-#: include/class_ldap.inc:680
+#: include/class_ldap.inc:646
 #, php-format
 msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
 msgstr ""
 
-#: include/class_ldap.inc:695
+#: include/class_ldap.inc:661
 #, php-format
 msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
 msgstr ""
@@ -5888,61 +6300,16 @@ msgstr "La consulta a la base de datos ha fallado."
 msgid "Error: getcvard.php needs a parameter to export a vcard!"
 msgstr "Error: getcvard.php necesita un parametro para exportar a vcard."
 
-#: html/setup.php:141 html/index.php:75
-#, php-format
-msgid "Directory '%s' specified as compile directory is not accessable!"
+#: html/setup.php:67
+#, fuzzy, php-format
+msgid ""
+"Directory '%s' specified as smarty compile directory is not accessable, "
+"check existence and rigths of this directory!"
 msgstr ""
 "El directorio '%s' especificado como directorio de compilación no es "
 "accesible."
 
-#: html/setup.php:207
-msgid "You've to specify an ldap server before continuing!"
-msgstr "Tiene que especificar un servidor ldap antes de continuar."
-
-#: html/setup.php:216
-msgid ""
-"Can't connect to the specified LDAP server! Please make sure that is "
-"reachable for GOsa."
-msgstr ""
-"No se pudo conectar al servidor LDAP especificado. Por favor, asegure que "
-"este accesible para GOsa."
-
-#: html/setup.php:224
-msgid ""
-"Can't bind to the specified LDAP server! Please make sure that is reachable "
-"for GOsa."
-msgstr ""
-"No se pudo autentificar con el servidor LDAP especificado. Por favor, "
-"asegure que este accesible para GOsa."
-
-#: html/setup.php:268
-#, php-format
-msgid ""
-"You're missing the required attribute '%s' from this formular. Please "
-"complete!"
-msgstr ""
-"Falta el atributo requerido '%s' de este formulario. Por favor, complételo."
-
-#: html/setup.php:284
-#, php-format
-msgid "Can't log into LDAP server. Reason was: %s."
-msgstr "No se puede conectar al servidor LDAP. El motivo fue: %s."
-
-#: html/setup.php:328
-msgid ""
-"No configuration found! Please save the generated one and place it in the "
-"suggested directory."
-msgstr ""
-"No se encontró el archivo de configuración. Por favor, guarde el archivo "
-"generado y colóquelo en el directorio sugerido."
-
-#: html/setup.php:337
-msgid "Config file found, but permissions are not secure. Please fix!"
-msgstr ""
-"El archivo de configuración se encontró, pero los permisos de acceso no son "
-"seguros. Por favor, corríjalo."
-
-#: html/main.php:96
+#: html/main.php:106
 msgid ""
 "Register globals is on. GOsa will refuse to login unless this is fixed by an "
 "administrator."
@@ -5950,12 +6317,12 @@ msgstr ""
 "'Register globals' está activado. No se permitirá ninguna entrada hasta que "
 "esto sea solucionado por un administrador."
 
-#: html/main.php:139
+#: html/main.php:149
 msgid "Warning: memory is getting low - please increase the memory_limit!"
 msgstr ""
 "Advertencia: Poca memoria disponible -  por favor aumente 'memory_limit'"
 
-#: html/main.php:257
+#: html/main.php:267
 #, php-format
 msgid "Can't find any plugin definitions for plugin '%s'!"
 msgstr "No se pudo encontrar ninguna definición de extensión para '%s'"
@@ -5967,12 +6334,12 @@ msgstr ""
 "No se puede leer la configuración de GOsa (%s/gosa.conf). Se ha abortado la "
 "operación."
 
-#: html/index.php:156
-msgid ""
-"You're missing an administrative account for GOsa, you'll not be able to "
-"administrate anything!"
+#: html/index.php:75
+#, php-format
+msgid "Directory '%s' specified as compile directory is not accessable!"
 msgstr ""
-"No tiene una cuenta administrativa para GOsa, no podrá administrar nada."
+"El directorio '%s' especificado como directorio de compilación no es "
+"accesible."
 
 #: html/index.php:164
 msgid "Please specify a valid username!"
@@ -6066,6 +6433,7 @@ msgstr ""
 #: ihtml/themes/altlinux/login.tpl:24 ihtml/themes/altlinux/login.tpl:28
 #: ihtml/themes/classic/login.tpl:23 ihtml/themes/classic/login.tpl:27
 #: ihtml/themes/default/login.tpl:24 ihtml/themes/default/login.tpl:28
+#: ihtml/themes/default/setup_useradmin.tpl:22
 msgid "Username"
 msgstr "Nombre de Usuario"
 
@@ -6077,7 +6445,7 @@ msgstr "Directorio"
 
 #: ihtml/themes/altlinux/login.tpl:53
 #: ihtml/themes/altlinux/setup_finish.tpl:24 ihtml/themes/classic/login.tpl:52
-#: ihtml/themes/default/login.tpl:53 ihtml/themes/default/setup_finish.tpl:28
+#: ihtml/themes/default/login.tpl:53
 msgid "Sign in"
 msgstr "Entrando"
 
@@ -6147,7 +6515,6 @@ msgstr ""
 "comprueba si tienen al menos la mínima versión necesaria."
 
 #: ihtml/themes/altlinux/setup_step2.tpl:11
-#: ihtml/themes/default/setup_step2.tpl:11
 msgid ""
 "We've inspected the webserver side now. Your setup seems to fit GOsa's "
 "needs. Lets go for the GOsa configuration part now..."
@@ -6187,22 +6554,20 @@ msgstr ""
 "preguntados más adelante."
 
 #: ihtml/themes/altlinux/setup_step3.tpl:7
-#: ihtml/themes/default/setup_step3.tpl:7
 msgid "Please enter the server URI"
 msgstr "Por favor especifique una dirección de servidor - URI - válida."
 
 #: ihtml/themes/altlinux/setup_step4.tpl:4
-#: ihtml/themes/default/setup_step4.tpl:3
+#: ihtml/themes/default/setup_step4.tpl:7
 msgid "Enter a description for the location you're configuring here"
 msgstr "Ingrese una descripción para la ubicación que está configurando"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:8
-#: ihtml/themes/default/setup_step4.tpl:7
+#: ihtml/themes/default/setup_step4.tpl:11
 msgid "Location name"
 msgstr "Nombre de la localización"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:14
-#: ihtml/themes/default/setup_step4.tpl:13
 msgid ""
 "Finally, you need to specify parameters to access the LDAP server. GOsa "
 "always acts as admin and manages access rights internally. This is a "
@@ -6216,17 +6581,17 @@ msgstr ""
 "necesitamos el DN del administrador y la contraseña correspondiente."
 
 #: ihtml/themes/altlinux/setup_step4.tpl:19
-#: ihtml/themes/default/setup_step4.tpl:18
+#: ihtml/themes/default/setup_step4.tpl:23
 msgid "Admin DN"
 msgstr "DN del administrador"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:23
-#: ihtml/themes/default/setup_step4.tpl:22
+#: ihtml/themes/default/setup_step4.tpl:27
 msgid "Admin password"
 msgstr "Nueva contraseña"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:29
-#: ihtml/themes/default/setup_step4.tpl:28
+#: ihtml/themes/default/setup_step4.tpl:34
 msgid ""
 "Some basic LDAP parameters are tunable and affect the locations where GOsa "
 "saves people and groups, including the way accounts get created. Check the "
@@ -6238,27 +6603,27 @@ msgstr ""
 "continuación si se ajustan a sus necesidades."
 
 #: ihtml/themes/altlinux/setup_step4.tpl:34
-#: ihtml/themes/default/setup_step4.tpl:33
+#: ihtml/themes/default/setup_step4.tpl:39
 msgid "People storage ou"
 msgstr "Carpeta de almacenamiento - ou - para los usuarios"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:38
-#: ihtml/themes/default/setup_step4.tpl:37
+#: ihtml/themes/default/setup_step4.tpl:43
 msgid "People dn attribute"
 msgstr "Atributo 'dn' de los usuarios"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:46
-#: ihtml/themes/default/setup_step4.tpl:45
+#: ihtml/themes/default/setup_step4.tpl:51
 msgid "Group storage ou"
 msgstr "Carpeta de almacenamiento - ou - para los grupos"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:50
-#: ihtml/themes/default/setup_step4.tpl:49
+#: ihtml/themes/default/setup_step4.tpl:55
 msgid "ID base for users/groups"
 msgstr "Identificador base - ID -, para usuarios y grupos"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:56
-#: ihtml/themes/default/setup_step4.tpl:74
+#: ihtml/themes/default/setup_step4.tpl:95
 msgid "Check"
 msgstr "Comprobación"
 
@@ -6268,7 +6633,7 @@ msgid "Setup finished"
 msgstr "Configuración finalizada"
 
 #: ihtml/themes/altlinux/setup_finish.tpl:4
-#: ihtml/themes/default/setup_finish.tpl:8
+#: ihtml/themes/default/setup_finish.tpl:14
 msgid ""
 "GOsa setup has collected all data needed to create an initial configuration "
 "file. Save the the link below as your gosa.conf and place that file in /etc/"
@@ -6279,7 +6644,7 @@ msgstr ""
 "'/etc/gosa/'. Modifíquela tanto como sea necesario"
 
 #: ihtml/themes/altlinux/setup_finish.tpl:12
-#: ihtml/themes/default/setup_finish.tpl:16
+#: ihtml/themes/default/setup_finish.tpl:20
 msgid ""
 "After placing the file under /etc/gosa, place make sure that the webserver "
 "user is able to read gosa.conf, while other users shouldn't. You may want to "
@@ -6290,7 +6655,7 @@ msgstr ""
 "Para cumplir con este requerimiento puede ejecutar estos comandos:"
 
 #: ihtml/themes/altlinux/setup_finish.tpl:22
-#: ihtml/themes/default/setup_finish.tpl:26
+#: ihtml/themes/default/setup_finish.tpl:31
 msgid "Retry"
 msgstr "Reintentar"
 
@@ -6304,32 +6669,124 @@ msgstr ""
 "mientras estaba editando. Puede borrar el archivo de bloqueo en ese caso, "
 "pulsando en el botón <i>Eliminar</i>."
 
-#: ihtml/themes/default/setup_step4.tpl:55
-msgid "Some parameters about Referral (optionnal)."
+#: ihtml/themes/default/setup_useradmin.tpl:3
+msgid "You already have an Administrative Account and a Group."
 msgstr ""
 
-#: ihtml/themes/default/setup_step4.tpl:60
-msgid "Referral URL"
+#: ihtml/themes/default/setup_useradmin.tpl:10
+msgid ""
+"To provide full administrative access to GOsa, you need to create a special "
+"group which contains the administrative user. The setup program can assist "
+"you with this task. Enter the desired username and the password below to "
+"create the missing entries."
 msgstr ""
 
-#: ihtml/themes/default/setup_step4.tpl:64
-msgid "Referral Admin"
+#: ihtml/themes/default/setup_step3.tpl:10
+msgid ""
+"Please enter the server URI to allow the setup to connect your LDAP server "
+"<i>(Example: ldap://your.server:389).</i>"
+msgstr ""
+
+#: ihtml/themes/default/setup_step4.tpl:2
+msgid ""
+"The following fields allow the basic configuration of GOsa's behaviour and "
+"affect various properties in your main configuration."
+msgstr ""
+
+#: ihtml/themes/default/setup_step4.tpl:18
+#, fuzzy
+msgid ""
+"GOsa always acts as admin and manages access rights internally. This is a "
+"workaround till OpenLDAP's in directory ACI's are fully implemented. For "
+"this to work, we need the admin DN and the corresponding password."
+msgstr ""
+"Finalmente, necesita especificar parámetros para acceder al servidor LDAP. "
+"GOsa siempre actúa como administrador y maneja los derechos de acceso "
+"internamente. Este comportamiento cambiará cuando el manejo de derechos de "
+"acceso de OpenLDAP este completamente implementado. Para que esto funcione, "
+"necesitamos el DN del administrador y la contraseña correspondiente."
+
+#: ihtml/themes/default/setup_step4.tpl:63
+msgid ""
+"GOsa supports several encryption types for your passwords. Normally this is "
+"adjustable via user templates, but you can specify a default method to be "
+"used here, too."
 msgstr ""
 
 #: ihtml/themes/default/setup_step4.tpl:68
+msgid "Encryption algorithm"
+msgstr ""
+
+#: ihtml/themes/default/setup_step4.tpl:79
+msgid ""
+"GOsa has modular support for several mail methods. These methods provide "
+"interfaces to users mailboxes and general handling for quotas. You can "
+"choose the dummy plugin to leave all your mail settings untouched."
+msgstr ""
+
+#: ihtml/themes/default/setup_step4.tpl:84
 #, fuzzy
-msgid "Referral Password"
-msgstr "Repetir la nueva contraseña"
+msgid "Mail method"
+msgstr "Opciones de correo"
 
 #: ihtml/themes/default/setup_finish.tpl:3
+msgid ""
+"Basically the setup is finished. You can check the result of the schema "
+"check here and download the autogenerated gosa.conf below."
+msgstr ""
+
+#: ihtml/themes/default/setup_finish.tpl:7
 #, fuzzy
 msgid "Schema Configuration"
 msgstr "Información de sistema"
 
-#: ihtml/themes/default/setup_finish.tpl:6
+#: ihtml/themes/default/setup_finish.tpl:12
 #, fuzzy
 msgid "Configuration File"
 msgstr "Configurar"
+
+#: ihtml/themes/default/setup_finish.tpl:17
+#, fuzzy
+msgid "Download configuration"
+msgstr "Información de sistema"
+
+#~ msgid "GONICUS"
+#~ msgstr "GONICUS"
+
+#~ msgid ""
+#~ "Unsupported password hash detected. Can't generate compatible password."
+#~ msgstr ""
+#~ "Se ha detectado una encriptación de contraseña no soportada. No se puede "
+#~ "generar una contraseña compatible."
+
+#~ msgid "Checking for gd module"
+#~ msgstr "Comprobando el módulo gd"
+
+#~ msgid ""
+#~ "GOsa needs this module for recalculating image sizes provided for users "
+#~ "as jpegPhoto."
+#~ msgstr ""
+#~ "Gosa necesita de este módulo para recalcular los tamaños de las imagenes "
+#~ "que los usuarios provean como jpegPhoto."
+
+#~ msgid "You are currently using GOsa version %s (CVS checkout from %s)"
+#~ msgstr "Está corriendo la versión %s de GOsa (CVS checkout de %s)"
+
+#~ msgid ""
+#~ "No configuration found! Please save the generated one and place it in the "
+#~ "suggested directory."
+#~ msgstr ""
+#~ "No se encontró el archivo de configuración. Por favor, guarde el archivo "
+#~ "generado y colóquelo en el directorio sugerido."
+
+#~ msgid "Config file found, but permissions are not secure. Please fix!"
+#~ msgstr ""
+#~ "El archivo de configuración se encontró, pero los permisos de acceso no "
+#~ "son seguros. Por favor, corríjalo."
+
+#, fuzzy
+#~ msgid "Referral Password"
+#~ msgstr "Repetir la nueva contraseña"
 
 #, fuzzy
 #~ msgid ""
