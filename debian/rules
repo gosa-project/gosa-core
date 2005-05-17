@@ -56,9 +56,12 @@ install-stamp:
 	-rm debian/gosa/usr/share/gosa/bin/gosa
 	-mkdir -p debian/gosa/usr/lib/gosa
 	-mv bin/* debian/gosa/usr/lib/gosa
+	-chmod +x debian/gosa/user/lib/gosa/*
 	-rm -rf debian/gosa/usr/share/gosa/gen_locale.sh
 	-rm -rf debian/gosa/usr/share/gosa/update.sh
 	-find debian/gosa -type f -exec chmod -x {} \;
+	-sed 's/"CONFIG_TEMPLATE_DIR", "../contrib/"/"CONFIG_TEMPLATE_DIR", "/usr/share/doc/gosa/contrib/"/g' debian/gosa/usr/share/gosa/include/functions.inc > debian/  gosa/usr/share/gosa/include/functions.inc.new
+	-mv debian/gosa/usr/share/gosa/include/functions.inc.new gosa/usr/share/gosa/include/functions.inc
 
 	touch install-stamp
 
