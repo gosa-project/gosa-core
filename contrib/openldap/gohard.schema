@@ -75,7 +75,7 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.2.10 NAME 'ghInventoryNumber'
 # objectclass for Hardware definitions
 
 objectclass (1.3.6.1.4.1.10098.1.2.1.3 NAME 'GOhard'
-	DESC 'Gonicus Hardware definitions, objectclass (v2.1)' SUP top AUXILIARY
+	DESC 'Gonicus Hardware definitions, objectclass (v2.4)' SUP top AUXILIARY
 	MUST ( cn )
 	MAY ( ghGfxAdapter $ ghNetNic $ ghSoundAdapter $ ghIdeDev $ ghScsiDev $
               macAddress $ ghUsbSupport $ ghMemSize $ ghCpuType $ ghInventoryNumber ) )
