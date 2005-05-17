@@ -1,22 +1,17 @@
-Things to fix in 2.3.9:
-=======================
-
-* Basic server support (misc is still missing)
+Things to fix before 2.4:
+=========================
 
 * Finish kolab integration
   - mail groups
   - shared folders
   - server
-  - setup
-    * check is present
-	* modify connectivity tab!
 
 * Make it "barrierefrei"
 
 * Unify filters (User -> Add local)
 
 
-Target for 2.4:
+Target for 2.5:
 ===============
 
 * Replace PHP IMAP module by self made module
