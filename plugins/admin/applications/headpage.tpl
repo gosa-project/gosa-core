@@ -25,10 +25,10 @@
    </div>
    <div class="contentboxb">
    <p class="contentboxb">
-    {t}This menu allows to add, edit or remove selected applications. You may want to use the range selector on top of the application listbox, when working with a large number of applications.{/t}
+    {t}This menu allows you to add, edit and remove selected applications. You may want to use the range selector on top of the application listbox, when working with a large number of applications.{/t}
    </p>
    <p class="contentboxb">
-    {t}-Edit- and -New application- will execute an assistant to aid you in editing properties. -Delete- will ask for confirmation before removing applications.{/t}
+    {t}-Edit- and -New...- will execute an assistant to aid you in editing properties. -Delete- will ask for confirmation before removing applications.{/t}
    </p>
    </div>
    <br>

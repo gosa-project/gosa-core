@@ -27,10 +27,10 @@
    </div>
    <div class="contentboxb">
    <p class="contentboxb">
-    {t}This menu provides the functionality to create, edit or delete selected users. Having a great number of users, you may want to use the range seletors on top of the user list.{/t}
+    {t}This menu allows you to create, edit and delete selected users. Having a great number of users, you may want to use the range selectors on top of the user list.{/t}
     </p>
    <p class="contentboxb">
-   {t}-Edit- and -New user- execute an assistant to aid you in managing your account informations. -Delete- will ask for confirmation before deleting the users from the LDAP server.{/t}
+   {t}-Edit- and -New...- execute an assistant to aid you in managing your account informations. -Delete- will ask for confirmation before deleting users.{/t}
    </p>
    </div>
    <br>

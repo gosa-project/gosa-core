@@ -26,10 +26,10 @@
    </div>
    <div class="contentboxb">
    <p class="contentboxb">
-    {t}Using this menu you can add, remove and change the properties of specific systems. You can only add systems which have already been started once.{/t}
+    {t}This menu allows you to add, remove and change the properties of specific systems. You can only add systems which have already been started once.{/t}
    </p>
    <p>
-    {t}-Edit- will execute an assistant to aid you in changing the system properties. -Delete- will ask before really deleting things from your LDAP.{/t}
+    {t}-Edit- will execute an assistant to aid you in changing the system properties. -Delete- will ask for confirmation before deleting systems.{/t}
    </p>
    </div>
    <br>

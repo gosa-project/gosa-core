@@ -3,7 +3,7 @@
 </p>
 
 <p>
- {t}Changing the password impinges on your authentification on mail, proxy, samba and unix services.{/t}
+ {t}Changing the password affects your authentification on mail, proxy, samba and unix services.{/t}
 </p>
 
 <table style="vertical-align:top; text-align:left;" cellpadding=4 border=0>

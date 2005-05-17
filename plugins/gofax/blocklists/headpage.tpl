@@ -25,10 +25,10 @@
    </div>
    <div class="contentboxb">
    <p class="contentboxb">
-    {t}This menu allows to create, delete and edit selected blocklists. Having a large size of lists, you might prefer the range selectors on top of the select box.{/t}
+    {t}This menu allows you to create, delete and edit selected blocklists. Having a large size of lists, you might prefer the range selectors on top of the select box.{/t}
    </p>
    <p class="contentboxb">
-    {t}-Edit- and -New blocklist- will provide an assistant to aid you when performing changes on your blocklist. -Delete- will ask you for confirmation before really deleting anything.{/t}
+    {t}-Edit- and -New...- will execute an assistant to aid you when performing changes on your blocklist. -Delete- will ask you for confirmation before really deleting anything.{/t}
    </p>
    </div>
    <br>

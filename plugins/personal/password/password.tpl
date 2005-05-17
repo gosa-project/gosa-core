@@ -3,11 +3,11 @@
 </div>
 
 <p>
-  {t}To change your personal password use the fields below. The changes take effect immediately. Please memorize the new password, because you would't be able to login without it.{/t}
+  {t}To change your personal password use the fields below. The changes take effect immediately. Please memorize the new password, because you wouldn't be able to login without it.{/t}
 </p>
 
 <p>
-  {t}Changing the password impinges on your authentification on mail, proxy, samba and unix services.{/t}
+  {t}Changing the password affects your authentification on mail, proxy, samba and unix services.{/t}
 </p>
 
 <table style="vertical-align:top; text-align:left;" cellpadding=4 border=0>

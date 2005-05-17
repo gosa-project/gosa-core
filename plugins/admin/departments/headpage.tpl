@@ -25,10 +25,10 @@
    </div>
    <div class="contentboxb">
    <p class="contentboxb">
-     {t}This menu allows to create, delete and edit selected departments. Having a large size of departments, you might prefer the range selectors on top of the department list.{/t}
+     {t}This menu allows you to create, delete and edit selected departments. Having a large size of departments, you might prefer the range selectors on top of the department list.{/t}
    </p>
    <p class="contentboxb">
-     {t}-Edit- and -New department- will provide an assistant to aid you when performing changes on your departments. -Delete- will ask you for confirmation before really deleting anything.{/t}
+     {t}-Edit- and -New...- will provide an assistant to aid you when performing changes on your departments. -Delete- will ask for confirmation before deleting departments.{/t}
    </p>
    </div>
    <br>
