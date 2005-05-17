@@ -762,24 +762,24 @@ function show_setup_page4($withoutput = true)
   // This values also represent out default values 
 
 # first try to get $base 
-  if(!$ds = ldap_connect (validate($uri)))    
+  if(!$ds = @ldap_connect (validate($uri)))    
   {
     $fault = true;
   }
-  elseif(!ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3))    
+  elseif(!@ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3))    
   {
     $fault = true;
   }
-  elseif(! $r =  ldap_bind ($ds))    
+  elseif(! $r =  @ldap_bind ($ds))    
   {
     $fault = true;
   }
   else
   {
-    $sr=      ldap_search ($ds, "", "objectClass=*", array("namingContexts"));
+    $sr=      @ldap_search ($ds, "", "objectClass=*", array("namingContexts"));
 
 
-    $attr=    ldap_get_entries($ds,$sr);
+    $attr=    @ldap_get_entries($ds,$sr);
     if((empty($attr)))
     {
       $base= "dc=example,dc=net";
@@ -855,10 +855,8 @@ function show_setup_page4($withoutput = true)
   {
     $ldap= new LDAP($_SESSION['ldapconf']['admin'], $_SESSION['ldapconf']['password'], $_SESSION['ldapconf']['uri']);
   
-    if($withoutput){
     $m= schema_check($_SESSION['ldapconf']['uri'], $_SESSION['ldapconf']['admin'], $_SESSION['ldapconf']['password']);
     $_SESSION['classes']= $m;
-    }
 
     if ($ldap->error != "Success")
     {
@@ -905,7 +903,8 @@ function show_setup_page5($withoutput=true)
   // get smarty
   $smarty = get_smarty();
 
-  $classes = $_SESSION['classes'];
+  if(isset($_SESSION['classes']))
+    $classes = $_SESSION['classes'];
 
   $info= posix_getgrgid(posix_getgid());
   $smarty->assign ("webgroup", $info['name']);
@@ -958,7 +957,10 @@ function create_user_for_setup($withoutput=true)
   $ldapconf = $_SESSION['ldapconf'];
   $smarty = get_smarty();
 
-  $classes= $_SESSION['classes'];
+
+  
+  if(isset($_SESSION['classes']))
+    $classes= $_SESSION['classes'];
 
   // Everything runns perfect ...
   // So we do a last test on this page
