@@ -426,7 +426,7 @@ function parse_contrib_conf()
   $replacements['{SMBHASH}']                =   $pwdhash;
   $replacements['{GOVERNMENTMODE}']         =   "false"; 
   $replacements['{kolabAccount}']           =   "";
-
+  $replacements['{servKolab}']              =   "";
 
 
   // This array contains all preg_replace syntax to delete all unused plugins
@@ -479,6 +479,7 @@ function parse_contrib_conf()
     if($ldapconf['mail_methods'][$ldapconf['mail']]=="kolab")
       {
       $replacements['{kolabAccount}']  ="<tab class=\"kolabAccount\" />";
+      $replacements['{servKolab}']     ="<tab class=\"servkolab\" name=\"Kolab\" />";
       }
       
 

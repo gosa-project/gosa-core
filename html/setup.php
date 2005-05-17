@@ -47,7 +47,15 @@ if (!file_exists(CONFIG_TEMPLATE_DIR."/gosa.conf")){
 $_SESSION['errors']= "";
 
 // Print out gosa.conf 
-if ((isset($_SESSION['classes']) &&  isset($_SESSION['ldapconf']) && (isset($_POST['getconf']) || isset($_GET['getconfig']) ))){
+//if(isset($_SESSION['classes'])) print "\$_SESSION['classes']=ok";
+//if(isset($_SESSION['ldapconf'])) print "\$_SESSION['ldapconf']=ok";
+//if(isset($_POST['getconf']))  print "\$_POST['getconf']=ok";
+
+if ((
+    isset($_SESSION['classes']) &&  
+    isset($_SESSION['ldapconf']) && 
+      (
+      isset($_POST['getconf']) || isset($_GET['getconfig']) ))){
   echo parse_contrib_conf();
   exit;
 }
