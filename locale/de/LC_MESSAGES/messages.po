@@ -1,30 +1,3 @@
-# translation of messages.po to 
-# translation of messages.po to
-# translation of messages.po to
-# translation of messages.po to
-# translation of messages.po to
-# translation of messages.po to
-# GOsa2 Translations
-# Copyright (C) 2003 GONICUS GmbH, Germany
-# This file is distributed under the same license as the GOsa2 package.
-# Alfred Schroeder <schroeder@GONICUS.de>, 2004.
-# Cajus Pollmeier <pollmeier@gonicus.de>, 2004, 2005.
-# Jan Wenzel <jan.wenzel@gonicus.de>, 2004.
-# Cajus Pollmeier <c.pollmeier@gmx.net>, 2005.
-#
-msgid ""
-msgstr ""
-"Project-Id-Version: messages\n"
-"Report-Msgid-Bugs-To: Alfred Schröder <schroeder@gonicus.de>\n"
-"POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-03-17 16:20+0100\n"
-"Last-Translator: \n"
-"Language-Team:  <en@li.org>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-15\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
-
 #: contrib/gosa.conf:4
 msgid "My account"
 msgstr "Mein Konto"
@@ -38,9 +11,9 @@ msgid "Addons"
 msgstr "Zusätzliches"
 
 #: contrib/gosa.conf:55 contrib/gosa.conf:66 contrib/gosa.conf:74
-#: contrib/gosa.conf:80 contrib/gosa.conf:88 contrib/gosa.conf:98
-#: contrib/gosa.conf:106 contrib/gosa.conf:111 contrib/gosa.conf:116
-#: contrib/gosa.conf:121 contrib/gosa.conf:126 contrib/gosa.conf:131
+#: contrib/gosa.conf:80 contrib/gosa.conf:88 contrib/gosa.conf:99
+#: contrib/gosa.conf:107 contrib/gosa.conf:112 contrib/gosa.conf:117
+#: contrib/gosa.conf:122 contrib/gosa.conf:127 contrib/gosa.conf:132
 #: plugins/personal/mail/generic.tpl:4 plugins/personal/posix/generic.tpl:4
 #: plugins/personal/samba/samba2.tpl:6 plugins/personal/samba/samba3.tpl:6
 #: plugins/personal/generic/class_user.inc:16
@@ -95,9 +68,9 @@ msgid "Phone"
 msgstr "Telefon"
 
 #: contrib/gosa.conf:62 contrib/gosa.conf:70 contrib/gosa.conf:76
-#: contrib/gosa.conf:84 contrib/gosa.conf:94 contrib/gosa.conf:102
-#: contrib/gosa.conf:107 contrib/gosa.conf:112 contrib/gosa.conf:117
-#: contrib/gosa.conf:122 contrib/gosa.conf:127 contrib/gosa.conf:132
+#: contrib/gosa.conf:84 contrib/gosa.conf:95 contrib/gosa.conf:103
+#: contrib/gosa.conf:108 contrib/gosa.conf:113 contrib/gosa.conf:118
+#: contrib/gosa.conf:123 contrib/gosa.conf:128 contrib/gosa.conf:133
 msgid "References"
 msgstr "Referenzen"
 
@@ -115,15 +88,15 @@ msgstr "Zugriffsregeln"
 msgid "Options"
 msgstr "Optionen"
 
-#: contrib/gosa.conf:81 contrib/gosa.conf:99
+#: contrib/gosa.conf:81 contrib/gosa.conf:100
 msgid "Devices"
 msgstr "Geräte"
 
-#: contrib/gosa.conf:82 contrib/gosa.conf:100
+#: contrib/gosa.conf:82 contrib/gosa.conf:101
 msgid "Startup"
 msgstr "Starten"
 
-#: contrib/gosa.conf:83 contrib/gosa.conf:93 contrib/gosa.conf:101
+#: contrib/gosa.conf:83 contrib/gosa.conf:93 contrib/gosa.conf:102
 msgid "Monitoring"
 msgstr "Überwachung"
 
@@ -132,7 +105,7 @@ msgstr "Überwachung"
 msgid "Databases"
 msgstr "Datum"
 
-#: contrib/gosa.conf:90
+#: contrib/gosa.conf:90 plugins/admin/systems/servkolab.tpl:7
 #, fuzzy
 msgid "Services"
 msgstr "Geräte"
@@ -145,26 +118,26 @@ msgstr ""
 msgid "DHCP"
 msgstr ""
 
-#: contrib/gosa.conf:144 plugins/addons/ldapmanager/contentexport.tpl:19
+#: contrib/gosa.conf:145 plugins/addons/ldapmanager/contentexport.tpl:19
 #: plugins/addons/ldapmanager/contentexport.tpl:32
 #: plugins/addons/ldapmanager/contentexport.tpl:47
 #, fuzzy
 msgid "Export"
 msgstr "Importieren"
 
-#: contrib/gosa.conf:145 plugins/personal/mail/generic.tpl:107
+#: contrib/gosa.conf:146 plugins/personal/mail/generic.tpl:107
 #: plugins/addons/ldapmanager/contentimport.tpl:56
 #: plugins/addons/ldapmanager/contentcsv.tpl:119
 #: plugins/addons/ldapmanager/contentcsv.tpl:122
 msgid "Import"
 msgstr "Importieren"
 
-#: contrib/gosa.conf:146
+#: contrib/gosa.conf:147
 #, fuzzy
 msgid "CSV Import"
 msgstr "Importieren"
 
-#: contrib/gosa.conf:161
+#: contrib/gosa.conf:162
 msgid "{LOCATIONNAME}"
 msgstr ""
 
@@ -387,7 +360,7 @@ msgstr "Liste von Alternative Mail-Adressen"
 #: plugins/admin/systems/servservice.tpl:20
 #: plugins/admin/systems/servservice.tpl:45
 #: plugins/admin/systems/startup.tpl:59 plugins/admin/systems/startup.tpl:72
-#: plugins/admin/systems/startup.tpl:91
+#: plugins/admin/systems/startup.tpl:91 plugins/admin/systems/servkolab.tpl:95
 #: plugins/admin/ogroups/ogroup_objects.tpl:56
 #: plugins/admin/ogroups/generic.tpl:38
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:203
@@ -417,8 +390,9 @@ msgstr "Hinzufügen"
 #: plugins/admin/systems/servservice.tpl:46
 #: plugins/admin/systems/remove.tpl:15 plugins/admin/systems/headpage.tpl:17
 #: plugins/admin/systems/startup.tpl:60 plugins/admin/systems/startup.tpl:73
-#: plugins/admin/systems/startup.tpl:92 plugins/admin/ogroups/generic.tpl:39
-#: plugins/admin/ogroups/remove.tpl:15 plugins/admin/ogroups/headpage.tpl:17
+#: plugins/admin/systems/startup.tpl:92 plugins/admin/systems/servkolab.tpl:96
+#: plugins/admin/ogroups/generic.tpl:39 plugins/admin/ogroups/remove.tpl:15
+#: plugins/admin/ogroups/headpage.tpl:17
 #: plugins/gofon/phoneaccount/generic.tpl:47
 msgid "Delete"
 msgstr "Löschen"
@@ -661,10 +635,11 @@ msgid "Change password"
 msgstr "Passwort ändern"
 
 #: plugins/personal/password/password.tpl:6
+#, fuzzy
 msgid ""
 "To change your personal password use the fields below. The changes take "
-"effect immediately. Please memorize the new password, because you would't be "
-"able to login without it."
+"effect immediately. Please memorize the new password, because you wouldn't "
+"be able to login without it."
 msgstr ""
 "Um das Passwort zu ändern, benutzen Sie das Feld unten. Die Änderung wird "
 "sofort wirksam. Bitte merken Sie sich das neue Passwort, da Sie sich ohne "
@@ -672,9 +647,10 @@ msgstr ""
 
 #: plugins/personal/password/password.tpl:10
 #: plugins/admin/users/password.tpl:6
+#, fuzzy
 msgid ""
-"Changing the password impinges on your authentification on mail, proxy, "
-"samba and unix services."
+"Changing the password affects your authentification on mail, proxy, samba "
+"and unix services."
 msgstr ""
 "Das Ändern des Passwortes wirkt sich auf ihre Authentifizierung bei Mail-, "
 "Proxy-, Samba- und Unix-Diensten aus."
@@ -2381,9 +2357,10 @@ msgid "New"
 msgstr "Neu"
 
 #: plugins/gofax/blocklists/headpage.tpl:28
+#, fuzzy
 msgid ""
-"This menu allows to create, delete and edit selected blocklists. Having a "
-"large size of lists, you might prefer the range selectors on top of the "
+"This menu allows you to create, delete and edit selected blocklists. Having "
+"a large size of lists, you might prefer the range selectors on top of the "
 "select box."
 msgstr ""
 "Dieses Menü erlaubt neue Sperrlisten hinzuzufügen, Sperrlisten zu editieren "
@@ -2391,10 +2368,11 @@ msgstr ""
 "Bereichswahl oberhalb der Liste an."
 
 #: plugins/gofax/blocklists/headpage.tpl:31
+#, fuzzy
 msgid ""
-"-Edit- and -New blocklist- will provide an assistant to aid you when "
-"performing changes on your blocklist. -Delete- will ask you for confirmation "
-"before really deleting anything."
+"-Edit- and -New...- will execute an assistant to aid you when performing "
+"changes on your blocklist. -Delete- will ask you for confirmation before "
+"really deleting anything."
 msgstr ""
 "Editieren- und -Neue Sperrliste- starten einen Assistenten, um Ihnen bei der "
 "Durchführung der enstprechenden Schritte zu helfen. - Löschen- führt eine "
@@ -3342,20 +3320,22 @@ msgstr "Weiterleiten der Nachrichten an nicht Gruppenmitglieder"
 msgid "List of groups"
 msgstr "Liste der Gruppen"
 
-#: plugins/admin/groups/headpage.tpl:29 plugins/admin/ogroups/headpage.tpl:29
+#: plugins/admin/groups/headpage.tpl:29
+#, fuzzy
 msgid ""
-"This menu allows to add, edit or remove selected groups. You may want to use "
-"the range selector on top of the group listbox, when working with a large "
-"number of groups."
+"This menu allows you to add, edit and remove selected groups. You may want "
+"to use the range selector on top of the group listbox, when working with a "
+"large number of groups."
 msgstr ""
 "Dieses Menü erlaubt es Ihnen, ausgewählte Gruppen hinzuzufügen, zu editieren "
 "oder zu entfernen. Bei einer Vielzahl von Gruppen bietet sich die Verwendung "
 "der Bereichsauswahl oben an."
 
 #: plugins/admin/groups/headpage.tpl:32 plugins/admin/ogroups/headpage.tpl:32
+#, fuzzy
 msgid ""
-"-Edit- and -New group- will execute an assistant to aid you in editing group "
-"properties.-Delete- will ask for confirmation before removing groups."
+"-Edit- and -New...- will execute an assistant to aid you in editing group "
+"properties. -Delete- will ask for confirmation before removing groups."
 msgstr ""
 "Bearbeiten- und -Neue Gruppe- führen einen Assistenten aus, der Sie bei der "
 "Bearbeitung der Gruppen-Eigenschaften unterstützt. - Löschen- führt eine "
@@ -3667,10 +3647,11 @@ msgid "New template"
 msgstr "Neue Vorlage"
 
 #: plugins/admin/users/headpage.tpl:30
+#, fuzzy
 msgid ""
-"This menu provides the functionality to create, edit or delete selected "
-"users. Having a great number of users, you may want to use the range "
-"seletors on top of the user list."
+"This menu allows you to create, edit and delete selected users. Having a "
+"great number of users, you may want to use the range selectors on top of the "
+"user list."
 msgstr ""
 "Dieses Menü bietet die Möglichkeit Benutzer neu anzulegen, diese zu "
 "bearbeiten oder zu löschen. Wenn Sie eine grosse Anzahl an Benutzern "
@@ -3678,10 +3659,10 @@ msgstr ""
 "Liste an."
 
 #: plugins/admin/users/headpage.tpl:33
+#, fuzzy
 msgid ""
-"-Edit- and -New user- execute an assistant to aid you in managing your "
-"account informations. -Delete- will ask for confirmation before deleting the "
-"users from the LDAP server."
+"-Edit- and -New...- execute an assistant to aid you in managing your account "
+"informations. -Delete- will ask for confirmation before deleting users."
 msgstr ""
 "-Bearbeiten- und -Neuer Benutzer- starten einen Assistenten, der Sie bei der "
 "Bearbeitung der Eigenschaften unterstützt. -Löschen- führt eine "
@@ -3859,18 +3840,20 @@ msgid "List of applications"
 msgstr "Liste der Anwendungen"
 
 #: plugins/admin/applications/headpage.tpl:28
+#, fuzzy
 msgid ""
-"This menu allows to add, edit or remove selected applications. You may want "
-"to use the range selector on top of the application listbox, when working "
-"with a large number of applications."
+"This menu allows you to add, edit and remove selected applications. You may "
+"want to use the range selector on top of the application listbox, when "
+"working with a large number of applications."
 msgstr ""
 "Dieses Menü erlaubt ausgewählte Anwendungen hinzuzufügen, die Einträge zu "
 "editieren oder zu löschen. Beim Arbeiten mit einer Vielzahl von Anwendungen "
 "bietet sich die Benutzung der Bereichs-Auswahl oberhalb der Listen-Box an."
 
 #: plugins/admin/applications/headpage.tpl:31
+#, fuzzy
 msgid ""
-"-Edit- and -New application- will execute an assistant to aid you in editing "
+"-Edit- and -New...- will execute an assistant to aid you in editing "
 "properties. -Delete- will ask for confirmation before removing applications."
 msgstr ""
 "Editieren- und -Neue Anwendungen- rufen einen Assistenten auf, der Ihnen bei "
@@ -4004,9 +3987,10 @@ msgid "List of departments"
 msgstr "Liste der Abteilungen"
 
 #: plugins/admin/departments/headpage.tpl:28
+#, fuzzy
 msgid ""
-"This menu allows to create, delete and edit selected departments. Having a "
-"large size of departments, you might prefer the range selectors on top of "
+"This menu allows you to create, delete and edit selected departments. Having "
+"a large size of departments, you might prefer the range selectors on top of "
 "the department list."
 msgstr ""
 "Dieses Menü erlaubt es, neue Abteilungen hinzuzufügen, Abteilungen zu "
@@ -4014,10 +3998,11 @@ msgstr ""
 "der Bereichswahl oberhalb der Liste an."
 
 #: plugins/admin/departments/headpage.tpl:31
+#, fuzzy
 msgid ""
-"-Edit- and -New department- will provide an assistant to aid you when "
-"performing changes on your departments. -Delete- will ask you for "
-"confirmation before really deleting anything."
+"-Edit- and -New...- will provide an assistant to aid you when performing "
+"changes on your departments. -Delete- will ask for confirmation before "
+"deleting departments."
 msgstr ""
 "Editieren- und -Neue Abteilung- starten einen Assistenten, um Ihnen bei der "
 "Durchführung der entsprechenden Schritte zu helfen. - Löschen- führt eine "
@@ -4759,8 +4744,9 @@ msgid "List of systems"
 msgstr "Liste der Systeme"
 
 #: plugins/admin/systems/headpage.tpl:29
+#, fuzzy
 msgid ""
-"Using this menu you can add, remove and change the properties of specific "
+"This menu allows you to add, remove and change the properties of specific "
 "systems. You can only add systems which have already been started once."
 msgstr ""
 "Mit diesem Menü können Sie Systeme hinzufügen, diese löschen oder die "
@@ -4768,9 +4754,10 @@ msgstr ""
 "hinzufügen, die bereits einmal im Netz gestartet wurden."
 
 #: plugins/admin/systems/headpage.tpl:32
+#, fuzzy
 msgid ""
 "-Edit- will execute an assistant to aid you in changing the system "
-"properties. -Delete- will ask before really deleting things from your LDAP."
+"properties. -Delete- will ask for confirmation before deleting systems."
 msgstr ""
 "Berarbeiten- startet einen Assistenten, der Sie bei der Änderung der "
 "Eigenschaften eines Systems unterstützt. -Löschen- führt eine "
@@ -5183,6 +5170,89 @@ msgid "You have no permissions to create a phone on this 'Base'."
 msgstr ""
 "Sie haben keine Berechtigung, ein Telefon unterhalb dieser 'Basis' anzulegen."
 
+#: plugins/admin/systems/class_servKolab.inc:32
+#, fuzzy
+msgid "Remove Kolab extension"
+msgstr "Optionen entfernen"
+
+#: plugins/admin/systems/class_servKolab.inc:33
+#, fuzzy
+msgid ""
+"This server has kolab features enabled. You can disable them by clicking "
+"below."
+msgstr ""
+"Dieses Konto hat die Fax-Funtionen aktiviert. Sie können diese durch einen "
+"Klick auf die untere Schaltfläche deaktivieren."
+
+#: plugins/admin/systems/class_servKolab.inc:35
+#, fuzzy
+msgid "Add Kolab service"
+msgstr "SSH-Dienst"
+
+#: plugins/admin/systems/class_servKolab.inc:36
+#, fuzzy
+msgid ""
+"This server has kolab features disabled. You can enable them by clicking "
+"below."
+msgstr ""
+"Aktuell hat dieses Konto keine Fax-Funktionen aktiviert. Sie können diese "
+"durch einen Klick auf die Schaltfläche unten aktivieren."
+
+#: plugins/admin/systems/servkolab.tpl:85
+#, fuzzy
+msgid "Kolab Hosts"
+msgstr "Mein Konto"
+
+#: plugins/admin/systems/servkolab.tpl:109
+#, fuzzy
+msgid "Quota settings"
+msgstr "Samba-Einstellungen"
+
+#: plugins/admin/systems/servkolab.tpl:130
+#, fuzzy
+msgid "Free/Busy settings"
+msgstr "FAX-Einstellungen"
+
+#: plugins/admin/systems/servkolab.tpl:160
+msgid "Privileged Networks"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:181
+msgid "SMTP "
+msgstr ""
+
+# translation of messages.po to 
+# translation of messages.po to
+# translation of messages.po to
+# translation of messages.po to
+# translation of messages.po to
+# translation of messages.po to
+# GOsa2 Translations
+# Copyright (C) 2003 GONICUS GmbH, Germany
+# This file is distributed under the same license as the GOsa2 package.
+# Alfred Schroeder <schroeder@GONICUS.de>, 2004.
+# Cajus Pollmeier <pollmeier@gonicus.de>, 2004, 2005.
+# Jan Wenzel <jan.wenzel@gonicus.de>, 2004.
+# Cajus Pollmeier <c.pollmeier@gmx.net>, 2005.
+#
+#: plugins/admin/systems/servkolab.tpl:181
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: Alfred Schröder <schroeder@gonicus.de>\n"
+"POT-Creation-Date: 2003-09-19 13:41+0200\n"
+"PO-Revision-Date: 2005-03-17 16:20+0100\n"
+"Last-Translator: \n"
+"Language-Team:  <en@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
+
+#: plugins/admin/systems/servkolab.tpl:203
+msgid "Accept Internet Mai"
+msgstr ""
+
 #: plugins/admin/ogroups/tabs_ogroups.inc:19
 #, fuzzy
 msgid "Terminals"
@@ -5381,6 +5451,17 @@ msgstr ""
 "Bitte überprüfen Sie genau was Sie tun, weil GOsa keine Chance hat die Daten "
 "wiederherzustellen."
 
+#: plugins/admin/ogroups/headpage.tpl:29
+#, fuzzy
+msgid ""
+"This menu allows you to add, edit or remove selected groups. You may want to "
+"use the range selector on top of the group listbox, when working with a "
+"large number of groups."
+msgstr ""
+"Dieses Menü erlaubt es Ihnen, ausgewählte Gruppen hinzuzufügen, zu editieren "
+"oder zu entfernen. Bei einer Vielzahl von Gruppen bietet sich die Verwendung "
+"der Bereichsauswahl oben an."
+
 #: plugins/admin/ogroups/headpage.tpl:46
 msgid "Show empty groups"
 msgstr "Zeige leere Gruppen"
@@ -5567,10 +5648,11 @@ msgid "This object has no relationship to other objects."
 msgstr "Dieses Objekt hat keine Referenzen zu anderen Objekten."
 
 #: plugins/generic/welcome/welcome.tpl:4
+#, fuzzy
 msgid ""
 "This is the GOsa main screen. You can select your tasks from the menu on the "
-"left, or by choosing one of the pictogramms below. All changes apply "
-"directly to your companies LDAP-Server."
+"left, or by choosing one of the pictograms below. All changes apply directly "
+"to your companies LDAP server."
 msgstr ""
 "Dies ist die Hauptseite von GOsa. Wählen Sie die gewünschte Option aus dem "
 "Menü zur linken oder durch die Auswahl eines Piktogrammes unten. Alle "
@@ -5592,119 +5674,6 @@ msgstr "Das GOsa Team"
 #, php-format
 msgid "Welcome %s!"
 msgstr "Willkommen %s!"
-
-#: include/functions.inc:267
-#, php-format
-msgid "Error when connecting the LDAP. Server said '%s'."
-msgstr "Fehler beim Verbinden mit dem LDAP-Server. Die Meldung lautet '%s'."
-
-#: include/functions.inc:288
-#, php-format
-msgid "User login failed. LDAP server said '%s'."
-msgstr "Anmeldung des Nutzers ist fehlgeschlagen. Die Meldung war '%s'."
-
-#: include/functions.inc:308
-msgid "Username / UID is not unique. Please check your LDAP database."
-msgstr "Die Kennung ist nicht eindeutig. Bitte prüfen Sie die LDAP-Datenbank."
-
-#: include/functions.inc:346
-msgid ""
-"Error while adding a lock. Parameters are not set correctly, please check "
-"the source!"
-msgstr ""
-"Fehler beim Anlegen eines Locks. Die Parameter sind nicht korrekt gesetzt!"
-
-#: include/functions.inc:356
-#, php-format
-msgid ""
-"Can't set locking information in LDAP database. Please check the 'config' "
-"entry in gosa.conf! LDAP server says '%s'."
-msgstr ""
-"Die Sperr-Information in der LDAP-Datenbank kann nicht gesetzt werden. Bitte "
-"überprüfen Sie den \"Config\" Eintrag in gosa.conf! Der LDAP-Server meldete "
-"'%s'."
-
-#: include/functions.inc:371
-#, php-format
-msgid "Adding a lock failed. LDAP server says '%s'."
-msgstr ""
-"Kann keine Sperr-Information anlegen. Die Meldung des LDAP-Servers war '%s'."
-
-#: include/functions.inc:397
-#, php-format
-msgid "Removing a lock failed. LDAP server says '%s'."
-msgstr ""
-"Kann die Sperr-Information nicht entfernen. Die Meldung des LDAP-Servers war "
-"'%s'."
-
-#: include/functions.inc:427
-msgid ""
-"Getting the lock from LDAP failed. Parameters are not sed correctly, please "
-"check the source!"
-msgstr ""
-"Es kann nicht geprüft werden, ob das Objekt gesperrt ist. Die Parameter sind "
-"nicht korrekt!"
-
-#: include/functions.inc:437
-msgid ""
-"Can't get locking information in LDAP database. Please check the 'config' "
-"entry in gosa.conf!"
-msgstr ""
-"Die Sperr-Information kann nicht aus der LDAP-Datenbank ausgelesen werden. "
-"Bitte prüfen Sie den \"Config\"-Eintrag in der gosa.conf!"
-
-#: include/functions.inc:445
-msgid ""
-"Found multiple locks for object to be locked. This should not be possible - "
-"cleaning up multiple references."
-msgstr ""
-"Mehrere Sperrungen für ein Objekt gefunden. Dies sollte nicht möglich sein, "
-"bitte entfernen Sie mehrfache Referenzen."
-
-#: include/functions.inc:517
-#, php-format
-msgid "The size limit of %d entries is exceed!"
-msgstr "Die Größenbeschränkung von %d Einträgen ist überschritten!"
-
-#: include/functions.inc:519
-#, php-format
-msgid ""
-"Set the new size limit to %s and show me this message if the limit still "
-"exceeds"
-msgstr ""
-"Verwende eine neue Größenbeschränkung von %s Einträgen und zeige diese "
-"Meldung bei Überschreitung wieder an"
-
-#: include/functions.inc:531
-msgid "Configure"
-msgstr "Einstellen"
-
-#: include/functions.inc:536
-msgid "incomplete"
-msgstr "unvollständig"
-
-#: include/functions.inc:919
-#, php-format
-msgid ""
-"You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
-"Please contact the person in order to clarify proceedings."
-msgstr ""
-"Sie versuchen den LDAP-Eintrag '%s' zu bearbeiten. Dieser Eintrag wird "
-"gerade von '%s' benutzt. Bitte kontaktieren Sie diese Person, um das weitere "
-"Vorgehen abzuklären."
-
-#: include/functions.inc:1018
-msgid "LDAP error:"
-msgstr "LDAP Fehler:"
-
-#: include/functions.inc:1460
-msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-
-#: include/functions.inc:1505
-#, php-format
-msgid "GOsa development snapshot (Rev %s)"
-msgstr ""
 
 #: include/class_mail-methods-cyrus.inc:44
 msgid ""
@@ -6159,11 +6128,11 @@ msgstr ""
 msgid "Security option, php will escape all quotes in strings ."
 msgstr ""
 
-#: include/setup_checks.inc:656
+#: include/setup_checks.inc:667
 msgid "You've to specify an ldap server before continuing!"
 msgstr "Sie müssen einen LDAP-Server angeben um fortzufahren!"
 
-#: include/setup_checks.inc:666
+#: include/setup_checks.inc:677
 msgid ""
 "Can't connect to the specified LDAP server! Please make sure that is "
 "reachable for GOsa."
@@ -6171,7 +6140,7 @@ msgstr ""
 "Kann den angegebenen LDAP-Server nicht erreichen! Bitte stellen Sie sicher, "
 "dass er für GOsa erreichbar ist."
 
-#: include/setup_checks.inc:683
+#: include/setup_checks.inc:694
 msgid ""
 "Can't bind to the specified LDAP server! Please make sure that is reachable "
 "for GOsa."
@@ -6179,13 +6148,13 @@ msgstr ""
 "Die Anmeldung am LDAP-Server ist fehlgeschlagen. Bitte stellen Sie sicher, "
 "dass der Server für GOsa erreichbar ist."
 
-#: include/setup_checks.inc:789
+#: include/setup_checks.inc:800
 msgid ""
 "Bind to server successfull, but the server seems to be completly empty, "
 "please check all informations twice"
 msgstr ""
 
-#: include/setup_checks.inc:828
+#: include/setup_checks.inc:839
 #, php-format
 msgid ""
 "You're missing the required attribute '%s' from this formular. Please "
@@ -6194,12 +6163,12 @@ msgstr ""
 "Das Attribut '%s' ist in diesem Formular nicht angegeben. Bitte "
 "vervollständigen Sie Ihre Eingaben!"
 
-#: include/setup_checks.inc:867
+#: include/setup_checks.inc:876
 #, php-format
 msgid "Can't log into LDAP server. Reason was: %s."
 msgstr "Die Anmeldung am LDAP-Server ist fehlgeschlagen. Die Meldung war '%s'."
 
-#: include/setup_checks.inc:989 include/setup_checks.inc:1007
+#: include/setup_checks.inc:1002 include/setup_checks.inc:1020
 #: html/index.php:156 ihtml/themes/default/setup_useradmin.tpl:6
 msgid ""
 "You're missing an administrative account for GOsa, you'll not be able to "
@@ -6294,6 +6263,119 @@ msgstr ""
 msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
 msgstr ""
 
+#: include/functions.inc:267
+#, php-format
+msgid "Error when connecting the LDAP. Server said '%s'."
+msgstr "Fehler beim Verbinden mit dem LDAP-Server. Die Meldung lautet '%s'."
+
+#: include/functions.inc:288
+#, php-format
+msgid "User login failed. LDAP server said '%s'."
+msgstr "Anmeldung des Nutzers ist fehlgeschlagen. Die Meldung war '%s'."
+
+#: include/functions.inc:308
+msgid "Username / UID is not unique. Please check your LDAP database."
+msgstr "Die Kennung ist nicht eindeutig. Bitte prüfen Sie die LDAP-Datenbank."
+
+#: include/functions.inc:346
+msgid ""
+"Error while adding a lock. Parameters are not set correctly, please check "
+"the source!"
+msgstr ""
+"Fehler beim Anlegen eines Locks. Die Parameter sind nicht korrekt gesetzt!"
+
+#: include/functions.inc:356
+#, php-format
+msgid ""
+"Can't set locking information in LDAP database. Please check the 'config' "
+"entry in gosa.conf! LDAP server says '%s'."
+msgstr ""
+"Die Sperr-Information in der LDAP-Datenbank kann nicht gesetzt werden. Bitte "
+"überprüfen Sie den \"Config\" Eintrag in gosa.conf! Der LDAP-Server meldete "
+"'%s'."
+
+#: include/functions.inc:371
+#, php-format
+msgid "Adding a lock failed. LDAP server says '%s'."
+msgstr ""
+"Kann keine Sperr-Information anlegen. Die Meldung des LDAP-Servers war '%s'."
+
+#: include/functions.inc:397
+#, php-format
+msgid "Removing a lock failed. LDAP server says '%s'."
+msgstr ""
+"Kann die Sperr-Information nicht entfernen. Die Meldung des LDAP-Servers war "
+"'%s'."
+
+#: include/functions.inc:427
+msgid ""
+"Getting the lock from LDAP failed. Parameters are not sed correctly, please "
+"check the source!"
+msgstr ""
+"Es kann nicht geprüft werden, ob das Objekt gesperrt ist. Die Parameter sind "
+"nicht korrekt!"
+
+#: include/functions.inc:437
+msgid ""
+"Can't get locking information in LDAP database. Please check the 'config' "
+"entry in gosa.conf!"
+msgstr ""
+"Die Sperr-Information kann nicht aus der LDAP-Datenbank ausgelesen werden. "
+"Bitte prüfen Sie den \"Config\"-Eintrag in der gosa.conf!"
+
+#: include/functions.inc:445
+msgid ""
+"Found multiple locks for object to be locked. This should not be possible - "
+"cleaning up multiple references."
+msgstr ""
+"Mehrere Sperrungen für ein Objekt gefunden. Dies sollte nicht möglich sein, "
+"bitte entfernen Sie mehrfache Referenzen."
+
+#: include/functions.inc:517
+#, php-format
+msgid "The size limit of %d entries is exceed!"
+msgstr "Die Größenbeschränkung von %d Einträgen ist überschritten!"
+
+#: include/functions.inc:519
+#, php-format
+msgid ""
+"Set the new size limit to %s and show me this message if the limit still "
+"exceeds"
+msgstr ""
+"Verwende eine neue Größenbeschränkung von %s Einträgen und zeige diese "
+"Meldung bei Überschreitung wieder an"
+
+#: include/functions.inc:531
+msgid "Configure"
+msgstr "Einstellen"
+
+#: include/functions.inc:536
+msgid "incomplete"
+msgstr "unvollständig"
+
+#: include/functions.inc:919
+#, php-format
+msgid ""
+"You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
+"Please contact the person in order to clarify proceedings."
+msgstr ""
+"Sie versuchen den LDAP-Eintrag '%s' zu bearbeiten. Dieser Eintrag wird "
+"gerade von '%s' benutzt. Bitte kontaktieren Sie diese Person, um das weitere "
+"Vorgehen abzuklären."
+
+#: include/functions.inc:1018
+msgid "LDAP error:"
+msgstr "LDAP Fehler:"
+
+#: include/functions.inc:1460
+msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+
+#: include/functions.inc:1505
+#, php-format
+msgid "GOsa development snapshot (Rev %s)"
+msgstr ""
+
 #: include/class_ldap.inc:398
 #, php-format
 msgid ""
@@ -6337,7 +6419,7 @@ msgid "Error: getcvard.php needs a parameter to export a vcard!"
 msgstr ""
 "Fehler: getvcard.php benötigt einen Parameter um eine vcard zu exportieren!"
 
-#: html/setup.php:67
+#: html/setup.php:75
 #, fuzzy, php-format
 msgid ""
 "Directory '%s' specified as smarty compile directory is not accessable, "

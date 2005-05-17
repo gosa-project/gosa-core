@@ -11,9 +11,9 @@ msgid "Addons"
 msgstr ""
 
 #: contrib/gosa.conf:55 contrib/gosa.conf:66 contrib/gosa.conf:74
-#: contrib/gosa.conf:80 contrib/gosa.conf:88 contrib/gosa.conf:98
-#: contrib/gosa.conf:106 contrib/gosa.conf:111 contrib/gosa.conf:116
-#: contrib/gosa.conf:121 contrib/gosa.conf:126 contrib/gosa.conf:131
+#: contrib/gosa.conf:80 contrib/gosa.conf:88 contrib/gosa.conf:99
+#: contrib/gosa.conf:107 contrib/gosa.conf:112 contrib/gosa.conf:117
+#: contrib/gosa.conf:122 contrib/gosa.conf:127 contrib/gosa.conf:132
 #: plugins/personal/mail/generic.tpl:4 plugins/personal/posix/generic.tpl:4
 #: plugins/personal/samba/samba2.tpl:6 plugins/personal/samba/samba3.tpl:6
 #: plugins/personal/generic/class_user.inc:16
@@ -68,9 +68,9 @@ msgid "Phone"
 msgstr ""
 
 #: contrib/gosa.conf:62 contrib/gosa.conf:70 contrib/gosa.conf:76
-#: contrib/gosa.conf:84 contrib/gosa.conf:94 contrib/gosa.conf:102
-#: contrib/gosa.conf:107 contrib/gosa.conf:112 contrib/gosa.conf:117
-#: contrib/gosa.conf:122 contrib/gosa.conf:127 contrib/gosa.conf:132
+#: contrib/gosa.conf:84 contrib/gosa.conf:95 contrib/gosa.conf:103
+#: contrib/gosa.conf:108 contrib/gosa.conf:113 contrib/gosa.conf:118
+#: contrib/gosa.conf:123 contrib/gosa.conf:128 contrib/gosa.conf:133
 msgid "References"
 msgstr ""
 
@@ -88,15 +88,15 @@ msgstr ""
 msgid "Options"
 msgstr ""
 
-#: contrib/gosa.conf:81 contrib/gosa.conf:99
+#: contrib/gosa.conf:81 contrib/gosa.conf:100
 msgid "Devices"
 msgstr ""
 
-#: contrib/gosa.conf:82 contrib/gosa.conf:100
+#: contrib/gosa.conf:82 contrib/gosa.conf:101
 msgid "Startup"
 msgstr ""
 
-#: contrib/gosa.conf:83 contrib/gosa.conf:93 contrib/gosa.conf:101
+#: contrib/gosa.conf:83 contrib/gosa.conf:93 contrib/gosa.conf:102
 msgid "Monitoring"
 msgstr ""
 
@@ -104,7 +104,7 @@ msgstr ""
 msgid "Databases"
 msgstr ""
 
-#: contrib/gosa.conf:90
+#: contrib/gosa.conf:90 plugins/admin/systems/servkolab.tpl:7
 msgid "Services"
 msgstr ""
 
@@ -116,24 +116,24 @@ msgstr ""
 msgid "DHCP"
 msgstr ""
 
-#: contrib/gosa.conf:144 plugins/addons/ldapmanager/contentexport.tpl:19
+#: contrib/gosa.conf:145 plugins/addons/ldapmanager/contentexport.tpl:19
 #: plugins/addons/ldapmanager/contentexport.tpl:32
 #: plugins/addons/ldapmanager/contentexport.tpl:47
 msgid "Export"
 msgstr ""
 
-#: contrib/gosa.conf:145 plugins/personal/mail/generic.tpl:107
+#: contrib/gosa.conf:146 plugins/personal/mail/generic.tpl:107
 #: plugins/addons/ldapmanager/contentimport.tpl:56
 #: plugins/addons/ldapmanager/contentcsv.tpl:119
 #: plugins/addons/ldapmanager/contentcsv.tpl:122
 msgid "Import"
 msgstr ""
 
-#: contrib/gosa.conf:146
+#: contrib/gosa.conf:147
 msgid "CSV Import"
 msgstr ""
 
-#: contrib/gosa.conf:161
+#: contrib/gosa.conf:162
 msgid "{LOCATIONNAME}"
 msgstr ""
 
@@ -340,7 +340,7 @@ msgstr ""
 #: plugins/admin/systems/servservice.tpl:20
 #: plugins/admin/systems/servservice.tpl:45
 #: plugins/admin/systems/startup.tpl:59 plugins/admin/systems/startup.tpl:72
-#: plugins/admin/systems/startup.tpl:91
+#: plugins/admin/systems/startup.tpl:91 plugins/admin/systems/servkolab.tpl:95
 #: plugins/admin/ogroups/ogroup_objects.tpl:56
 #: plugins/admin/ogroups/generic.tpl:38
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:203
@@ -370,8 +370,9 @@ msgstr ""
 #: plugins/admin/systems/servservice.tpl:46
 #: plugins/admin/systems/remove.tpl:15 plugins/admin/systems/headpage.tpl:17
 #: plugins/admin/systems/startup.tpl:60 plugins/admin/systems/startup.tpl:73
-#: plugins/admin/systems/startup.tpl:92 plugins/admin/ogroups/generic.tpl:39
-#: plugins/admin/ogroups/remove.tpl:15 plugins/admin/ogroups/headpage.tpl:17
+#: plugins/admin/systems/startup.tpl:92 plugins/admin/systems/servkolab.tpl:96
+#: plugins/admin/ogroups/generic.tpl:39 plugins/admin/ogroups/remove.tpl:15
+#: plugins/admin/ogroups/headpage.tpl:17
 #: plugins/gofon/phoneaccount/generic.tpl:47
 msgid "Delete"
 msgstr ""
@@ -609,15 +610,15 @@ msgstr ""
 #: plugins/personal/password/password.tpl:6
 msgid ""
 "To change your personal password use the fields below. The changes take "
-"effect immediately. Please memorize the new password, because you would't be "
-"able to login without it."
+"effect immediately. Please memorize the new password, because you wouldn't "
+"be able to login without it."
 msgstr ""
 
 #: plugins/personal/password/password.tpl:10
 #: plugins/admin/users/password.tpl:6
 msgid ""
-"Changing the password impinges on your authentification on mail, proxy, "
-"samba and unix services."
+"Changing the password affects your authentification on mail, proxy, samba "
+"and unix services."
 msgstr ""
 
 #: plugins/personal/password/password.tpl:15
@@ -2244,16 +2245,16 @@ msgstr ""
 
 #: plugins/gofax/blocklists/headpage.tpl:28
 msgid ""
-"This menu allows to create, delete and edit selected blocklists. Having a "
-"large size of lists, you might prefer the range selectors on top of the "
+"This menu allows you to create, delete and edit selected blocklists. Having "
+"a large size of lists, you might prefer the range selectors on top of the "
 "select box."
 msgstr ""
 
 #: plugins/gofax/blocklists/headpage.tpl:31
 msgid ""
-"-Edit- and -New blocklist- will provide an assistant to aid you when "
-"performing changes on your blocklist. -Delete- will ask you for confirmation "
-"before really deleting anything."
+"-Edit- and -New...- will execute an assistant to aid you when performing "
+"changes on your blocklist. -Delete- will ask you for confirmation before "
+"really deleting anything."
 msgstr ""
 
 #: plugins/gofax/blocklists/headpage.tpl:45
@@ -3139,17 +3140,17 @@ msgstr ""
 msgid "List of groups"
 msgstr ""
 
-#: plugins/admin/groups/headpage.tpl:29 plugins/admin/ogroups/headpage.tpl:29
+#: plugins/admin/groups/headpage.tpl:29
 msgid ""
-"This menu allows to add, edit or remove selected groups. You may want to use "
-"the range selector on top of the group listbox, when working with a large "
-"number of groups."
+"This menu allows you to add, edit and remove selected groups. You may want "
+"to use the range selector on top of the group listbox, when working with a "
+"large number of groups."
 msgstr ""
 
 #: plugins/admin/groups/headpage.tpl:32 plugins/admin/ogroups/headpage.tpl:32
 msgid ""
-"-Edit- and -New group- will execute an assistant to aid you in editing group "
-"properties.-Delete- will ask for confirmation before removing groups."
+"-Edit- and -New...- will execute an assistant to aid you in editing group "
+"properties. -Delete- will ask for confirmation before removing groups."
 msgstr ""
 
 #: plugins/admin/groups/headpage.tpl:53 plugins/admin/users/headpage.tpl:57
@@ -3439,16 +3440,15 @@ msgstr ""
 
 #: plugins/admin/users/headpage.tpl:30
 msgid ""
-"This menu provides the functionality to create, edit or delete selected "
-"users. Having a great number of users, you may want to use the range "
-"seletors on top of the user list."
+"This menu allows you to create, edit and delete selected users. Having a "
+"great number of users, you may want to use the range selectors on top of the "
+"user list."
 msgstr ""
 
 #: plugins/admin/users/headpage.tpl:33
 msgid ""
-"-Edit- and -New user- execute an assistant to aid you in managing your "
-"account informations. -Delete- will ask for confirmation before deleting the "
-"users from the LDAP server."
+"-Edit- and -New...- execute an assistant to aid you in managing your account "
+"informations. -Delete- will ask for confirmation before deleting users."
 msgstr ""
 
 #: plugins/admin/users/headpage.tpl:47
@@ -3617,14 +3617,14 @@ msgstr ""
 
 #: plugins/admin/applications/headpage.tpl:28
 msgid ""
-"This menu allows to add, edit or remove selected applications. You may want "
-"to use the range selector on top of the application listbox, when working "
-"with a large number of applications."
+"This menu allows you to add, edit and remove selected applications. You may "
+"want to use the range selector on top of the application listbox, when "
+"working with a large number of applications."
 msgstr ""
 
 #: plugins/admin/applications/headpage.tpl:31
 msgid ""
-"-Edit- and -New application- will execute an assistant to aid you in editing "
+"-Edit- and -New...- will execute an assistant to aid you in editing "
 "properties. -Delete- will ask for confirmation before removing applications."
 msgstr ""
 
@@ -3749,16 +3749,16 @@ msgstr ""
 
 #: plugins/admin/departments/headpage.tpl:28
 msgid ""
-"This menu allows to create, delete and edit selected departments. Having a "
-"large size of departments, you might prefer the range selectors on top of "
+"This menu allows you to create, delete and edit selected departments. Having "
+"a large size of departments, you might prefer the range selectors on top of "
 "the department list."
 msgstr ""
 
 #: plugins/admin/departments/headpage.tpl:31
 msgid ""
-"-Edit- and -New department- will provide an assistant to aid you when "
-"performing changes on your departments. -Delete- will ask you for "
-"confirmation before really deleting anything."
+"-Edit- and -New...- will provide an assistant to aid you when performing "
+"changes on your departments. -Delete- will ask for confirmation before "
+"deleting departments."
 msgstr ""
 
 #: plugins/admin/departments/headpage.tpl:45
@@ -4434,14 +4434,14 @@ msgstr ""
 
 #: plugins/admin/systems/headpage.tpl:29
 msgid ""
-"Using this menu you can add, remove and change the properties of specific "
+"This menu allows you to add, remove and change the properties of specific "
 "systems. You can only add systems which have already been started once."
 msgstr ""
 
 #: plugins/admin/systems/headpage.tpl:32
 msgid ""
 "-Edit- will execute an assistant to aid you in changing the system "
-"properties. -Delete- will ask before really deleting things from your LDAP."
+"properties. -Delete- will ask for confirmation before deleting systems."
 msgstr ""
 
 #: plugins/admin/systems/headpage.tpl:46
@@ -4823,6 +4823,54 @@ msgstr ""
 msgid "You have no permissions to create a phone on this 'Base'."
 msgstr ""
 
+#: plugins/admin/systems/class_servKolab.inc:32
+msgid "Remove Kolab extension"
+msgstr ""
+
+#: plugins/admin/systems/class_servKolab.inc:33
+msgid ""
+"This server has kolab features enabled. You can disable them by clicking "
+"below."
+msgstr ""
+
+#: plugins/admin/systems/class_servKolab.inc:35
+msgid "Add Kolab service"
+msgstr ""
+
+#: plugins/admin/systems/class_servKolab.inc:36
+msgid ""
+"This server has kolab features disabled. You can enable them by clicking "
+"below."
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:85
+msgid "Kolab Hosts"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:109
+msgid "Quota settings"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:130
+msgid "Free/Busy settings"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:160
+msgid "Privileged Networks"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:181
+msgid "SMTP "
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:181
+msgid ""
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:203
+msgid "Accept Internet Mai"
+msgstr ""
+
 #: plugins/admin/ogroups/tabs_ogroups.inc:19
 msgid "Terminals"
 msgstr ""
@@ -5016,6 +5064,13 @@ msgid ""
 "GOsa to get your data back."
 msgstr ""
 
+#: plugins/admin/ogroups/headpage.tpl:29
+msgid ""
+"This menu allows you to add, edit or remove selected groups. You may want to "
+"use the range selector on top of the group listbox, when working with a "
+"large number of groups."
+msgstr ""
+
 #: plugins/admin/ogroups/headpage.tpl:46
 msgid "Show empty groups"
 msgstr ""
@@ -5196,8 +5251,8 @@ msgstr ""
 #: plugins/generic/welcome/welcome.tpl:4
 msgid ""
 "This is the GOsa main screen. You can select your tasks from the menu on the "
-"left, or by choosing one of the pictogramms below. All changes apply "
-"directly to your companies LDAP-Server."
+"left, or by choosing one of the pictograms below. All changes apply directly "
+"to your companies LDAP server."
 msgstr ""
 
 #: plugins/generic/welcome/welcome.tpl:8
@@ -5213,101 +5268,6 @@ msgstr ""
 #: plugins/generic/welcome/main.inc:24
 #, php-format
 msgid "Welcome %s!"
-msgstr ""
-
-#: include/functions.inc:267
-#, php-format
-msgid "Error when connecting the LDAP. Server said '%s'."
-msgstr ""
-
-#: include/functions.inc:288
-#, php-format
-msgid "User login failed. LDAP server said '%s'."
-msgstr ""
-
-#: include/functions.inc:308
-msgid "Username / UID is not unique. Please check your LDAP database."
-msgstr ""
-
-#: include/functions.inc:346
-msgid ""
-"Error while adding a lock. Parameters are not set correctly, please check "
-"the source!"
-msgstr ""
-
-#: include/functions.inc:356
-#, php-format
-msgid ""
-"Can't set locking information in LDAP database. Please check the 'config' "
-"entry in gosa.conf! LDAP server says '%s'."
-msgstr ""
-
-#: include/functions.inc:371
-#, php-format
-msgid "Adding a lock failed. LDAP server says '%s'."
-msgstr ""
-
-#: include/functions.inc:397
-#, php-format
-msgid "Removing a lock failed. LDAP server says '%s'."
-msgstr ""
-
-#: include/functions.inc:427
-msgid ""
-"Getting the lock from LDAP failed. Parameters are not sed correctly, please "
-"check the source!"
-msgstr ""
-
-#: include/functions.inc:437
-msgid ""
-"Can't get locking information in LDAP database. Please check the 'config' "
-"entry in gosa.conf!"
-msgstr ""
-
-#: include/functions.inc:445
-msgid ""
-"Found multiple locks for object to be locked. This should not be possible - "
-"cleaning up multiple references."
-msgstr ""
-
-#: include/functions.inc:517
-#, php-format
-msgid "The size limit of %d entries is exceed!"
-msgstr ""
-
-#: include/functions.inc:519
-#, php-format
-msgid ""
-"Set the new size limit to %s and show me this message if the limit still "
-"exceeds"
-msgstr ""
-
-#: include/functions.inc:531
-msgid "Configure"
-msgstr ""
-
-#: include/functions.inc:536
-msgid "incomplete"
-msgstr ""
-
-#: include/functions.inc:919
-#, php-format
-msgid ""
-"You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
-"Please contact the person in order to clarify proceedings."
-msgstr ""
-
-#: include/functions.inc:1018
-msgid "LDAP error:"
-msgstr ""
-
-#: include/functions.inc:1460
-msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-msgstr ""
-
-#: include/functions.inc:1505
-#, php-format
-msgid "GOsa development snapshot (Rev %s)"
 msgstr ""
 
 #: include/class_mail-methods-cyrus.inc:44
@@ -5693,41 +5653,41 @@ msgstr ""
 msgid "Security option, php will escape all quotes in strings ."
 msgstr ""
 
-#: include/setup_checks.inc:656
+#: include/setup_checks.inc:667
 msgid "You've to specify an ldap server before continuing!"
 msgstr ""
 
-#: include/setup_checks.inc:666
+#: include/setup_checks.inc:677
 msgid ""
 "Can't connect to the specified LDAP server! Please make sure that is "
 "reachable for GOsa."
 msgstr ""
 
-#: include/setup_checks.inc:683
+#: include/setup_checks.inc:694
 msgid ""
 "Can't bind to the specified LDAP server! Please make sure that is reachable "
 "for GOsa."
 msgstr ""
 
-#: include/setup_checks.inc:789
+#: include/setup_checks.inc:800
 msgid ""
 "Bind to server successfull, but the server seems to be completly empty, "
 "please check all informations twice"
 msgstr ""
 
-#: include/setup_checks.inc:828
+#: include/setup_checks.inc:839
 #, php-format
 msgid ""
 "You're missing the required attribute '%s' from this formular. Please "
 "complete!"
 msgstr ""
 
-#: include/setup_checks.inc:867
+#: include/setup_checks.inc:876
 #, php-format
 msgid "Can't log into LDAP server. Reason was: %s."
 msgstr ""
 
-#: include/setup_checks.inc:989 include/setup_checks.inc:1007
+#: include/setup_checks.inc:1002 include/setup_checks.inc:1020
 #: html/index.php:156 ihtml/themes/default/setup_useradmin.tpl:6
 msgid ""
 "You're missing an administrative account for GOsa, you'll not be able to "
@@ -5805,6 +5765,101 @@ msgstr ""
 msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
 msgstr ""
 
+#: include/functions.inc:267
+#, php-format
+msgid "Error when connecting the LDAP. Server said '%s'."
+msgstr ""
+
+#: include/functions.inc:288
+#, php-format
+msgid "User login failed. LDAP server said '%s'."
+msgstr ""
+
+#: include/functions.inc:308
+msgid "Username / UID is not unique. Please check your LDAP database."
+msgstr ""
+
+#: include/functions.inc:346
+msgid ""
+"Error while adding a lock. Parameters are not set correctly, please check "
+"the source!"
+msgstr ""
+
+#: include/functions.inc:356
+#, php-format
+msgid ""
+"Can't set locking information in LDAP database. Please check the 'config' "
+"entry in gosa.conf! LDAP server says '%s'."
+msgstr ""
+
+#: include/functions.inc:371
+#, php-format
+msgid "Adding a lock failed. LDAP server says '%s'."
+msgstr ""
+
+#: include/functions.inc:397
+#, php-format
+msgid "Removing a lock failed. LDAP server says '%s'."
+msgstr ""
+
+#: include/functions.inc:427
+msgid ""
+"Getting the lock from LDAP failed. Parameters are not sed correctly, please "
+"check the source!"
+msgstr ""
+
+#: include/functions.inc:437
+msgid ""
+"Can't get locking information in LDAP database. Please check the 'config' "
+"entry in gosa.conf!"
+msgstr ""
+
+#: include/functions.inc:445
+msgid ""
+"Found multiple locks for object to be locked. This should not be possible - "
+"cleaning up multiple references."
+msgstr ""
+
+#: include/functions.inc:517
+#, php-format
+msgid "The size limit of %d entries is exceed!"
+msgstr ""
+
+#: include/functions.inc:519
+#, php-format
+msgid ""
+"Set the new size limit to %s and show me this message if the limit still "
+"exceeds"
+msgstr ""
+
+#: include/functions.inc:531
+msgid "Configure"
+msgstr ""
+
+#: include/functions.inc:536
+msgid "incomplete"
+msgstr ""
+
+#: include/functions.inc:919
+#, php-format
+msgid ""
+"You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
+"Please contact the person in order to clarify proceedings."
+msgstr ""
+
+#: include/functions.inc:1018
+msgid "LDAP error:"
+msgstr ""
+
+#: include/functions.inc:1460
+msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+msgstr ""
+
+#: include/functions.inc:1505
+#, php-format
+msgid "GOsa development snapshot (Rev %s)"
+msgstr ""
+
 #: include/class_ldap.inc:398
 #, php-format
 msgid ""
@@ -5845,7 +5900,7 @@ msgstr ""
 msgid "Error: getcvard.php needs a parameter to export a vcard!"
 msgstr ""
 
-#: html/setup.php:67
+#: html/setup.php:75
 #, php-format
 msgid ""
 "Directory '%s' specified as smarty compile directory is not accessable, "
