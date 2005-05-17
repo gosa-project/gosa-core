@@ -5,29 +5,38 @@ This is the alphabetical list of all people that have
 contributed to the GOsa project, beeing code, translations,
 documentation and additional help.
 
-* Alessandro Amici <lists@b-open-solutions.it>
-  Italian translations
-
 * Markus Amersdorfer <der.plusch@subnet.at>
   Wiki setup, Testing, hints, proposals
 
-* Craig Chang <craig0310@gmail.com>
-  Fixes for magic_quotes_qpc
-
-* Alejandro Escanero Blanco <alex@ofmin.com>
-  Fixes, improvements, translation, Guide and some extensions
+* Alessandro Amici <lists@b-open-solutions.it>
+  Italian translation
 
 * Holger Burbach <burbach@gonicus.de>
   Kerberos PHP module
 
+* Craig Chang <craig0310@gmail.com>
+  Fixes for magic_quotes_qpc
+
+* Guillaume Delecourt <guillaume.delecourt@opensides.be>
+  Setup fixes
+
 * Dan Ellis <danellis@rushmore.com>
   Sieve lib is taken from him
+
+* Alejandro Escanero Blanco <alex@ofmin.com>
+  Fixes, improvements, translation, Guide and some extensions
 
 * Fabian Hickert <hickert@gonicus.de>
   Improvements for setup, various fixes and plugins
 
 * Eric Kilfoil <eric@ipass.net>
   ldap.inc is taken from him
+
+* Niels Klomp <nk@careworks.nl>
+  Dutch translation
+  
+* Benoit Mortier <benoit.mortier@opensides.be>
+  French translation
 
 * Igor Muratov <migor@altlinux.org>
   Various fixes and speed enhancements
@@ -41,19 +50,15 @@ documentation and additional help.
 * Henning Schmiedehausen <hps@intermeta.de>
   Various fixes, support for user defined people/group base
 
-* Alfred Schröder <schroeder@gonicus.de>
+* Alfred SchrÃ¶der <schroeder@gonicus.de>
   German translation
 
-* Thomas Schüßler <tulpe@atomar.de>
+* Thomas SchÃÃŸler <tulpe@atomar.de>
   debuglib.inc is taken from him
 
 * Jan Wenzel <jan.wenzel@gonicus.de>
   Implementation and research for samba munged dial support,
   fixing of "Fiptehlers"(TM) in the german translations.
 
-* Benoit Mortier <benoit.mortier@opensides.be>
-  French Translation
 
-* Guillaume Delecourt <guillaume.delecourt@opensides.be>
-  Setup fixes
 
