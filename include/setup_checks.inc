@@ -425,7 +425,7 @@ function parse_contrib_conf()
   $replacements['{MAILMETHOD}']             =   $ldapconf['mail_methods'][$ldapconf['mail']];
   $replacements['{SMBHASH}']                =   $pwdhash;
   $replacements['{GOVERNMENTMODE}']         =   "false"; 
-
+  $replacements['{kolabAccount}']           =   "";
 
 
 
@@ -473,6 +473,16 @@ function parse_contrib_conf()
     {
       $str.= fread($fp,512);
     }
+
+
+    
+    if($ldapconf['mail_methods'][$ldapconf['mail']]=="kolab")
+      {
+      $replacements['{kolabAccount}']  ="<tab class=\"kolabAccount\" />";
+      }
+      
+
+
 
 
     // Lets check which samba version we will use
@@ -546,7 +556,7 @@ function parse_contrib_conf()
 
   }// else -->  !$fp=fopen("../contrib/gosa.conf","r")
 
-  return ( $str);
+  return ((($str)));
 }
 
 
