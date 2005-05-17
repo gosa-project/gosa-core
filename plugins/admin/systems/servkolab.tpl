@@ -8,7 +8,7 @@
 	</tr>
 	<tr>
 		<td>
-			<input name="" value="1" type="checkbox" >
+			<input name="cyrus-pop3" value="1" type="checkbox" >
 		</td>
 		<td>
 			POP3 Service  	
@@ -16,7 +16,7 @@
 	</tr>
 	<tr>
         <td>
-            <input name="" value="1" type="checkbox" >
+            <input name="cyrus-pop3s" value="1" type="checkbox" >
         </td>
 		<td>
 			POP3/SSL service (TCP port 995) 	
@@ -24,7 +24,7 @@
     </tr>
     <tr>
         <td>
-            <input name="" value="1" type="checkbox" >
+            <input name="cyrus-imap" value="1" type="checkbox" >
         </td>
         <td>
 			IMAP Service 	
@@ -32,7 +32,7 @@
     </tr>
     <tr>
         <td>
-            <input name="" value="1" type="checkbox" >
+            <input name="cyrus-imaps" value="1" type="checkbox" >
         </td>
         <td>
 			IMAP/SSL Service (TCP port 993) 	
@@ -40,7 +40,7 @@
     </tr>
     <tr>
         <td>
-            <input name="" value="1" type="checkbox" >
+            <input name="cyrus-sieve" value="1" type="checkbox" >
         </td>
         <td>
 			Sieve service (TCP port 2000) 	
@@ -48,7 +48,7 @@
     </tr>
     <tr>
         <td>
-            <input name="" value="1" type="checkbox" >
+            <input name="proftpd-ftp" value="1" type="checkbox" >
         </td>
         <td>
 			FTP FreeBusy Service (Legacy, not interoperable with Kolab2 FreeBusy) 	
