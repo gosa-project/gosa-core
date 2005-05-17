@@ -105,11 +105,13 @@ class department extends plugin
   /* Save data to object */
   function save_object()
   {
-	plugin::save_object();
+	if (isset($_POST['base'])){
+		plugin::save_object();
 
-	/* Save base, since this is no LDAP attribute */
-	if (isset($_POST['base']) && chkacl($this->acl, "create") == ""){
-		$this->base= $_POST['base'];
+		/* Save base, since this is no LDAP attribute */
+		if (chkacl($this->acl, "create") == ""){
+			$this->base= $_POST['base'];
+		}
 	}
   }
 
@@ -137,25 +139,25 @@ class department extends plugin
 	}
 
 	/* All required fields are set? */
-	if ($_POST["ou"] == ""){
+	if ($this->ou == ""){
 		$message[]= _("Required field 'Name' is not set.");
 	}
-	if ($_POST["description"] == ""){
+	if ($this->description == ""){
 		$message[]= _("Required field 'Description' is not set.");
 	}
 
 	/* Validate and modify - or: spaghetti rules! */
-	if ($_POST['ou'] == "incoming"){
+	if ($this->ou == "incoming"){
 		$message[]= _("The field 'Name' contains the reserved word 'incoming'.".
 				" Please choose another name.");
 	}
-	if (preg_match ('/[,#+:=>\\\\]/', $_POST['ou'])){
+	if (preg_match ('/[,#+:=>\\\\]/', $this->ou)){
 		$message[]= _("The field 'Name' contains invalid characters.");
 	}
-	if (!is_phone_nr($_POST['telephoneNumber'])){
+	if (!is_phone_nr($this->telephoneNumber)){
 		$message[]= _("The field 'Phone' contains an invalid phone number.");
 	}
-	if (!is_phone_nr($_POST['facsimileTelephoneNumber'])){
+	if (!is_phone_nr($this->facsimileTelephoneNumber)){
 		$message[]= _("The field 'Fax' contains an invalid phone number.");
 	}
 
