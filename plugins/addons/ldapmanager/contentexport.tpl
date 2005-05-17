@@ -56,7 +56,7 @@
 
 
 <br>
-	<h1>{t}Export successfull{/t}</h1>
+	<h1>{t}Export successful{/t}</h1>
 <br>
 	<div>
 		<img border="0" align=center src="images/filesaveas.png">

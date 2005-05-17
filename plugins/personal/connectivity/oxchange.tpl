@@ -3,7 +3,7 @@
 <BR>
 {t}Disabled by lack of Postgresql Support{/t}</h2>
 {else}
-<h2>{if $tabbed eq 1}<input type="checkbox" name="oxchange" value="B" {$oxchangeState} {$oxchangeAccount} onCLick="changeState('OXAppointmentDays');changeState('OXTaskDays');changeState('OXTimeZone');" >{/if}{t}Open Xchange account{/t}</h2>
+<h2>{if $tabbed eq 1}<input type="checkbox" name="oxchange" value="B" {$oxchangeState} {$oxchangeAccount} onCLick="changeState('OXAppointmentDays');changeState('OXTaskDays');changeState('OXTimeZone');" >{/if}{t}Open-Xchange account{/t}</h2>
 <table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
 
  <!-- Headline container -->
