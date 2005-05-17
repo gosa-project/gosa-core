@@ -1,11 +1,27 @@
 GOsa2 changelog
 ===============
 
-* gosa 2.3.1
+* gosa 2.4beta1
   - Override automatically detected user bases if they don't exist
   - Don't shred samba group ID's if they are not present in the
     combobox
   - Updated smarty to version 2.6.9
+  - Updated GOfon support to handle new features
+  - Replacement of most external programm calls
+  - Samba3 bugfixes for munged dial handling
+  - Updated LDIF export
+  - Improved setup checks to find more possible errors
+  - Fixed index ruler for long lists
+  - Completed system creation for servers, phones and misc components
+  - Added support for kolab users and kolab server settings
+  - Added server settings
+  - Added LDIF import
+  - Added CSV import
+  - Added italien translations (thanks to Alessandro Amici)
+  - Added subtree search checkbox in lists with potential higher
+    usage
+  - Added version indicator to make support more easy
+  - Added sample databases for fax, phone and system logging
 
 * gosa 2.3
   - Updated smarty to version 2.6.7

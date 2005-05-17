@@ -58,28 +58,27 @@ class application extends plugin
 		 return ($display);
 	}
   
-        /* Fill templating stuff */
-        $smarty= get_smarty();
-        $smarty->assign("cn", $this->cn);
-        $smarty->assign("bases", $this->config->idepartments);
+	/* Fill templating stuff */
+	$smarty= get_smarty();
+	$smarty->assign("cn", $this->cn);
+	$smarty->assign("bases", $this->config->idepartments);
 	if ($this->dn == "new"){
-                $smarty->assign("selectmode", "");
-                $smarty->assign("namemode", "");
-        } else {
-                $smarty->assign("namemode", "readonly");
-                $smarty->assign("selectmode", "disabled");
-        }
+		$smarty->assign("selectmode", "");
+		$smarty->assign("namemode", "");
+	} else {
+		$smarty->assign("namemode", "readonly");
+		$smarty->assign("selectmode", "disabled");
+	}
 
 	/* Get random number for pictures */
-        srand((double)microtime()*1000000);
+	srand((double)microtime()*1000000);
 	$smarty->assign("rand", rand(0, 10000));
 
-        /* Variables */
-        foreach(array("description", "gosaApplicationExecute", "gosaApplicationName") as $val){
-
-                $smarty->assign($val, $this->$val);
-                $smarty->assign($val."ACL", chkacl($this->acl, $val));
-        }
+	/* Variables */
+	foreach(array("description", "gosaApplicationExecute", "gosaApplicationName") as $val){
+		$smarty->assign($val, $this->$val);
+		$smarty->assign($val."ACL", chkacl($this->acl, $val));
+	}
 
 	/* Checkboxes */
 	foreach (array("G" => "exec_for_groupmembers", "O" => "overwrite_config",
@@ -142,33 +141,59 @@ class application extends plugin
 		}
 
 		/* Check for picture upload */
-
-
 		if (isset($_FILES['picture_file']['name']) && $_FILES['picture_file']['name'] != ""){
 			if (!is_uploaded_file($_FILES['picture_file']['tmp_name'])) {
 				print_red (_("The specified picture has not been uploaded correctly."));
 			}
 	
-			/* Load the new uploaded Photo */
-			if(!$handle  =  imagick_ReadImage($_FILES['picture_file']['tmp_name']))  {
-			  gosa_log("Can't Load image");
-			}
+			if (!function_exists("imagick_blob2image")){
+				/* Get temporary file name for conversation */
+				$fname = tempnam ("/tmp", "GOsa");
 
-			/* Resizing image to 147x200 and blur */
-			if(!imagick_resize($handle,48,48,IMAGICK_FILTER_GAUSSIAN,0)){
-			  gosa_log("imagick_resize failed");
-			}
+				/* Open file and write out photoData */
+				$fp = fopen ($fname, "w");
+				fwrite ($fp, $_FILES['picture_file']['tmp_name']);
+				fclose ($fp);
 
-			/* Converting image to JPEG */
-			if(!imagick_convert($handle,"PNG")) {
-			  gosa_log("Can't Convert to PNG");
-			}
+				/* Build conversation query. Filename is generated automatically, so
+				   we do not need any special security checks. Exec command and save
+				   output. For PHP safe mode, you'll need a configuration which respects
+				   image magick as executable... */
+				$query= "convert -size 48x48 $fname -resize 48x48 +profile \"*\" -";
+				@DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $query, "Execute");
 
-			if(imagick_writeimage($handle,$_FILES['picture_file']['tmp_name'])){
-			  gosa_log("can't write to specified folder");
+				/* Read data written by convert */
+				$output= "";
+				$sh= popen($query, 'r');
+				while (!feof($sh)){
+					$output.= fread($sh, 4096);
+				}
+				pclose($sh);
+
+				unlink($fname);	
+			} else {
+
+				/* Load the new uploaded Photo */
+				if(!$handle  =  imagick_ReadImage($_FILES['picture_file']['tmp_name'])){
+				  gosa_log("Can't Load image");
+				}
+
+				/* Resizing image to 147x200 and blur */
+				if(!imagick_resize($handle,48,48,IMAGICK_FILTER_GAUSSIAN,0)){
+				  gosa_log("imagick_resize failed");
+				}
+
+				/* Converting image to JPEG */
+				if(!imagick_convert($handle,"PNG")) {
+				  gosa_log("Can't Convert to PNG");
+				}
+
+				if(imagick_writeimage($handle,$_FILES['picture_file']['tmp_name'])){
+				  gosa_log("can't write to specified folder");
+				}
+				
+				imagick_free($handle);
 			}
-			
-			imagick_free($handle);
 
 			/* Activate new picture */
 			$this->set_picture($_FILES['picture_file']['tmp_name']);
