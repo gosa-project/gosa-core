@@ -1,4 +1,6 @@
-<?php class servkolab extends plugin {
+<?php
+
+class servkolab extends plugin {
   /* CLI vars */
   var $cli_summary = "Manage server basic objects";
   var $cli_description = "Some longer text\nfor help";
@@ -209,8 +211,6 @@
 
     /* Load Template */
     $display.=$smarty->fetch(get_template_path('servkolab.tpl', TRUE));
-  
-    print_a($this);
   
     return ($display);
   }
