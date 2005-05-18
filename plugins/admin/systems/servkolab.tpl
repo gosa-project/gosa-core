@@ -8,7 +8,7 @@
 	</tr>
 	<tr>
 		<td>
-			<input name="cyrus-pop3" value="1" type="checkbox" >
+			<input name="cyrus_pop3" value="1" type="checkbox" {$cyrus_pop3Check}>
 		</td>
 		<td>
 			POP3 Service  	
@@ -16,7 +16,7 @@
 	</tr>
 	<tr>
         <td>
-            <input name="cyrus-pop3s" value="1" type="checkbox" >
+            <input name="cyrus_pop3s" value="1" type="checkbox" {$cyrus_pop3sCheck}>
         </td>
 		<td>
 			POP3/SSL service (TCP port 995) 	
@@ -24,7 +24,7 @@
     </tr>
     <tr>
         <td>
-            <input name="cyrus-imap" value="1" type="checkbox" >
+            <input name="cyrus_imap" value="1" type="checkbox" {$cyrus_imapCheck}>
         </td>
         <td>
 			IMAP Service 	
@@ -32,7 +32,7 @@
     </tr>
     <tr>
         <td>
-            <input name="cyrus-imaps" value="1" type="checkbox" >
+            <input name="cyrus_imaps" value="1" type="checkbox" {$cyrus_imapsCheck}>
         </td>
         <td>
 			IMAP/SSL Service (TCP port 993) 	
@@ -40,7 +40,7 @@
     </tr>
     <tr>
         <td>
-            <input name="cyrus-sieve" value="1" type="checkbox" >
+            <input name="cyrus_sieve" value="1" type="checkbox" {$cyrus_sieveCheck}>
         </td>
         <td>
 			Sieve service (TCP port 2000) 	
@@ -48,15 +48,15 @@
     </tr>
     <tr>
         <td>
-            <input name="proftpd-ftp" value="1" type="checkbox" >
-        </td>
+            <input name="proftpd_ftp" value="1" type="checkbox" {$proftpd_ftpCheck}>
+        </td>	
         <td>
 			FTP FreeBusy Service (Legacy, not interoperable with Kolab2 FreeBusy) 	
         </td>
     </tr>
     <tr>
         <td>
-            <input name="" value="1" type="checkbox" >
+            <input name="apache_http" value="1" type="checkbox" {$apache_httpCheck}>
         </td>
         <td>
 			HTTP FreeBusy Service (Legacy) 	
@@ -64,7 +64,7 @@
     </tr>
     <tr>
         <td>
-            <input name="" value="1" type="checkbox" >
+            <input name="postfix_enable_virus_scan" value="1" type="checkbox" {$postfix_enable_virus_scanCheck}>
         </td>
         <td>
 			Amavis Email Scanning (Virus/Spam)
@@ -87,13 +87,13 @@
 	</tr>
     <tr>
      <td>
-        <select style="width:350px;" id="goExportEntry" name="goExportEntry" {$goNfsServerState} size=6 multiple {$trustmodeACL} {$trusthide}>
-            {html_options values=$goExportEntry output=$goExportEntry}
+        <select style="width:350px;" size="6"  name="kolabHost">
+            {html_options values=$kolabHost output=$kolabHost}
         </select>
     <br>
-        <input type="text"      name="NewNfsExport" {$goNfsServerState} id="NewNfsExportId">
-        <input type="submit"    value="{t}Add{/t}"      name="NewNfsAdd"    {$goNfsServerState} id="NewNfsAddId">
-        <input type="submit"    value="{t}Delete{/t}"   name="DelNfsEnt"    {$goNfsServerState} id="DelNfsEntId">
+        <input type="text"      name="NewkolabHost">
+        <input type="submit"    value="{t}Add{/t}"      name="NewHost">
+        <input type="submit"    value="{t}Delete{/t}"   name="DelHost">
     </td>
 	</tr>
 	</table>	
@@ -111,7 +111,7 @@
 	</tr>
 	<tr>
 		<td>
-			<input name="" value="" type="text" maxlength="2" size="3">%
+			<input name="cyrus_quotawarn" value="{$cyrus_quotawarn}" type="text" maxlength="2" size="3">%
 		</td>
 		<td>
 			Percentage to warn users
@@ -132,7 +132,7 @@
     </tr>
     <tr>
         <td>
-            <input name="" value="1" type="checkbox">
+            <input name="apache_allow_unauthenticated_fb" value="1" type="checkbox" {$apache_allow_unauthenticated_fbCheck}>
         </td>
         <td>
             Allow unauthenticated downloading of Free/Busy information 
@@ -162,7 +162,7 @@
     </tr>
     <tr>
         <td>
-            <input name="" value="" type="text">
+            <input name="postfix_mynetworks" value="{$postfix_mynetworks}" type="text">
         </td>
         <td>
 			Networks allowed to relay and send mail through unauthenticated SMTP connections to the Kolab server (comma separated networks in x.x.x.x/y format)
@@ -181,12 +181,19 @@
         	<b>{t}SMTP "smarthost/relayhost"{/t}</b>
 		</td>
     </tr>
+	<tr>	
+		<td>
+			<input name="postfix_relayhost" value="{$postfix_relayhost}" type="text">
+		</td>
+		<td>
+			Smarthost to use to send outgoing mail (host.domain.tld). Leave empty for no relayhost.
+		</td>
+	</tr>
     <tr>
         <td>
             <input name="" value="1" type="checkbox" >
         </td>
         <td>
-        	Smarthost to use to send outgoing mail (host.domain.tld). Leave empty for no relayhost.
 			Enable MX lookup for relayhost (if in doubt, leave it off)
 		</td>
      </tr>
@@ -200,7 +207,7 @@
    <table>
     <tr>
         <td colspan="2">
-        	<b>{t}Accept Internet Mai{/t}</b>
+        	<b>{t}Accept Internet Mail{/t}</b>
 		</td>
     </tr>
     <tr>
