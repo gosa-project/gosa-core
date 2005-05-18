@@ -24,7 +24,7 @@ function raiseError($errno, $errstr, $errfile, $errline)
   gosa_log ("PHP error: $errstr ($errfile, line $errline)");
 }
 
-//set_error_handler('raiseError');
+#set_error_handler('raiseError');
 /* This will be removed */
 
 /* Basic setup, remove eventually registered sessions */
@@ -40,7 +40,6 @@ get_dir_list("$BASE_DIR/plugins");
 $domain = 'messages';
 bindtextdomain($domain, "$BASE_DIR/locale");
 textdomain($domain);
-
 
 /* Remember everything we did after the last click */
 session_start ();
