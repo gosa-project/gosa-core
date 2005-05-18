@@ -1,3 +1,7 @@
+# translation of messages.po to Italian
+# Copyright (c) 2005 B-Open Solutions srl
+# Copyright (c) 2005 Alessandro Amici <a.amici@bopen.it>
+
 #: contrib/gosa.conf:4
 msgid "My account"
 msgstr "La mia identità"
