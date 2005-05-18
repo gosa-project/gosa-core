@@ -137,11 +137,15 @@ class tabs
 
 		/* Paint tab */
 		$display.= "<td style=\"vertical-align:bottom; width:100px;\">";
+		$title= _($name);
+		if (mb_strlen($title) > 14){
+			$title= mb_substr($title,0, 11, 'UTF-8')."...";
+		}
 		if ($_SESSION['js']==FALSE){	
 			$display.= "<div class=\"$style[$index]\"><input type=\"submit\" name=\"$class\"".
-		                   " class=\"$style[$index]\" value=\""._($name)."\"";
+		                   " class=\"$style[$index]\" value=\"$title\"";
 		} else {			 
-			$display.= "<div class=\"$style[$index]\"><a class=\"$style[$index]\" onclick=\"return true;\" href=\"javascript:document.mainform.arg.value='$class';document.mainform.submit();\">"._($name)."</a";
+			$display.= "<div class=\"$style[$index]\"><a class=\"$style[$index]\" onclick=\"return true;\" href=\"javascript:document.mainform.arg.value='$class';document.mainform.submit();\">$title</a";
 		}
 		$display.= "></div></td>";
 	}
