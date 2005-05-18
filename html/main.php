@@ -83,9 +83,6 @@ setlocale(LC_ALL, $lang);
 $GLOBALS['t_language']= $lang;
 $GLOBALS['t_gettext_message_dir'] = $BASE_DIR.'/locale/';
 
-/* Dummy */
-trigger_error("I'm a fake error. Please ignore me.", E_USER_NOTICE);
-
 /* Set the text domain as 'messages' */
 $domain = 'messages';
 bindtextdomain($domain, "$BASE_DIR/locale");

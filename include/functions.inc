@@ -1513,8 +1513,60 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
 {
   global $error_collector;
 
-  $error_collector.= sprintf(_("File %s, line %s: %s"), $errfile, $errline, $errstr)."<br>";
-#debug_backtrace();
+  /* FIXME: workaround for buggy imap_open */
+  if (preg_match('/imap_open/', $errstr)){
+    return;
+  }
+
+  /* Extract traceback data */
+  $trace= debug_backtrace();
+  
+  /* Create error header */
+  $error_collector.= "<table width=100% cellspacing=0 style='background-color:#804010;color:white;border:2px solid #F09000'><tr><td colspan=3><b>"._("Error").":</b> $errstr</td></tr>";
+  
+  /* Generate trace history */
+  for ($index= 1; $index<count($trace); $index++){
+    $ct= $trace[$index];
+    $loc= "";
+    if (isset($ct['class'])){
+      $loc.= _("class")." ".$ct['class'];
+      if (isset($ct['function'])){
+        $loc.= " / ";
+      }
+    }
+    if (isset($ct['function'])){
+      $loc.= _("function")." ".$ct['function'];
+    }
+    if (isset($ct['type'])){
+      switch ($ct['type']){
+        case "::":
+                $type= _("static");
+                break;
+
+        case "->":
+                $type= _("method");
+                break;
+      }
+    } else {
+      $type= "-";
+    }
+    $args= "";
+    foreach ($ct['args'] as $arg){
+      $args.= "\"$arg\", ";
+    }
+    $args= preg_replace("/, $/", "", $args);
+    $file= $ct['file'];
+    $line= $ct['line'];
+    $color= ($index&1)?'#905020':'703000';
+    $error_collector.= "<tr style='background-color:$color'><td style='padding-left:20px' width=30%>"._("Trace")."[$index]: $loc</td>";
+    $error_collector.= "<td>"._("File").": $file ("._('Line')." $line)</td><td width=10%>"._("Type").": $type</td></tr>";
+    $error_collector.= "<tr style='background-color:$color'><td colspan=3 style='padding-left:20px;'>"._("Arguments").": $args</td></tr>";
+  }
+
+  /* Close error table */
+  $error_collector.= "</table>";
+
+  /* Write to syslog */
   gosa_log ("PHP error: $errstr ($errfile, line $errline)");
 }
 
