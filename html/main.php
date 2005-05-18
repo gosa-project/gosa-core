@@ -18,20 +18,15 @@
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/* This will be removed... */
-function raiseError($errno, $errstr, $errfile, $errline)
-{
-  gosa_log ("PHP error: $errstr ($errfile, line $errline)");
-}
-
-#set_error_handler('raiseError');
-/* This will be removed */
-
 /* Basic setup, remove eventually registered sessions */
 $timing= array();
 require_once ("../include/php_setup.inc");
 require_once ("functions.inc");
 header("Content-type: text/html; charset=UTF-8");
+
+/* Reset error handler */
+$error_collector= "";
+set_error_handler('gosaRaiseError');
 
 /* Find all class files and include them */
 get_dir_list("$BASE_DIR/plugins");
@@ -87,6 +82,9 @@ putenv("LANG=$lang");
 setlocale(LC_ALL, $lang);
 $GLOBALS['t_language']= $lang;
 $GLOBALS['t_gettext_message_dir'] = $BASE_DIR.'/locale/';
+
+/* Dummy */
+trigger_error("I'm a fake error. Please ignore me.", E_USER_NOTICE);
 
 /* Set the text domain as 'messages' */
 $domain = 'messages';
@@ -273,6 +271,7 @@ $smarty->assign("contents", $display);
 if (isset($_SESSION['errors'])){
   $smarty->assign("errors", $_SESSION['errors']);
 }
+$smarty->assign("php_errors", $error_collector);
 $smarty->display(get_template_path('framework.tpl'));
 $_SESSION['plist']= $plist;
 

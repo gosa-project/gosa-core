@@ -27,7 +27,7 @@ $variables_order= "ES";
 ini_set("register_globals",0);
 ini_set("track_vars",1);
 ini_set("include_path",".:$BASE_DIR/include");
-#ini_set("display_errors",0);
+ini_set("display_errors",0);
 
 /* Do smarty setup */
 require("smarty/Smarty.class.php");

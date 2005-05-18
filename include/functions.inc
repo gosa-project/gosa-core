@@ -1509,5 +1509,14 @@ function get_gosa_version()
   }
 }
 
+function gosaRaiseError($errno, $errstr, $errfile, $errline)
+{
+  global $error_collector;
+
+  $error_collector.= "PHP error: $errstr ($errfile, line $errline)<br>";
+  $error_collector.= sprintf(_("File %s, line %s: %s"), $errfile, $errline, $errstr)."<br>";
+  gosa_log ("PHP error: $errstr ($errfile, line $errline)");
+}
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

@@ -18,10 +18,6 @@
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-function fake_handler($log_level, $log_text, $error_file, $error_line)
-{
-}
-
 class mailMethodCyrus extends mailMethod
 {
   var $mbox= "-";
@@ -40,9 +36,7 @@ class mailMethodCyrus extends mailMethod
     $cfg= $this->config[$gosaMailServer];
 
     /* For some reason, hiding errors with @ does not wor here... */
-    $tmp= set_error_handler('fake_handler');
     $this->mbox = @imap_open($cfg['connect'], $cfg['admin'], $cfg['password'], OP_HALFOPEN);
-    set_error_handler($tmp);
 
     /* Mailbox reachable? */
     if ($this->mbox === FALSE){

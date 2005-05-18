@@ -1,5 +1,6 @@
 <!-- Headline -->
 <body>
+{$php_errors}
 <form action='main.php{$plug}' name='mainform' method='post' enctype='multipart/form-data'>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" cellpadding="3" bgcolor="#CDF6BD" height=100%>
   <tr>
