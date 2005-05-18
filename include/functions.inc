@@ -1513,8 +1513,8 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
 {
   global $error_collector;
 
-  $error_collector.= "PHP error: $errstr ($errfile, line $errline)<br>";
   $error_collector.= sprintf(_("File %s, line %s: %s"), $errfile, $errline, $errstr)."<br>";
+#debug_backtrace();
   gosa_log ("PHP error: $errstr ($errfile, line $errline)");
 }
 
