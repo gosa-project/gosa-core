@@ -1,4 +1,5 @@
 <!-- Headline -->
+{$php_errors}
 <form action='main.php{$plug}' name='mainform' method='post' enctype='multipart/form-data'>
 <script language="JavaScript" type="text/javascript">
   <!--

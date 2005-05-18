@@ -23,6 +23,10 @@ require_once ("../include/php_setup.inc");
 require_once ("functions.inc");
 header("Content-type: text/html; charset=UTF-8");
 
+/* Reset error handler */
+$error_collector= "";
+set_error_handler('gosaRaiseError');
+
 /* Set error handler to own one, initialize time calculation
    and start session. */
 session_start ();
@@ -232,6 +236,7 @@ $smarty->assign ("PHPSESSID", session_id());
 if (isset($_SESSION['errors'])){
   $smarty->assign("errors", $_SESSION['errors']);
 }
+$smarty->assign("php_error", $error_collector);
 $smarty->display (get_template_path('login.tpl'));
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

@@ -2,6 +2,7 @@
 
 <!-- Spacer for some browsers -->
 {$errors}
+{$php_errors}
 <div class='gosaLoginSpacer'></div>
 
 <table class='gosaLoginMask' align='center'>

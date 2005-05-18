@@ -1529,7 +1529,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
   $trace= debug_backtrace();
   
   /* Create error header */
-  $error_collector.= "<table width=100% cellspacing=0 style='background-color:#804010;color:white;border:2px solid #F09000'><tr><td colspan=3><b>"._("Error").":</b> $errstr</td></tr>";
+  $error_collector.= "<table width=100% cellspacing=0 style='background-color:#402005;color:white;border:2px solid red'><tr><td colspan=3><b>"._("PHP error")."</b> \"$errstr\"</td></tr>";
   
   /* Generate trace history */
   for ($index= 1; $index<count($trace); $index++){
@@ -1559,12 +1559,12 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
     }
     $args= "";
     foreach ($ct['args'] as $arg){
-      $args.= "\"$arg\", ";
+      $args.= htmlentities("\"$arg\", ");
     }
     $args= preg_replace("/, $/", "", $args);
     $file= $ct['file'];
     $line= $ct['line'];
-    $color= ($index&1)?'#905020':'703000';
+    $color= ($index&1)?'#452510':'351500';
     $error_collector.= "<tr style='background-color:$color'><td style='padding-left:20px' width=30%>"._("Trace")."[$index]: $loc</td>";
     $error_collector.= "<td>"._("File").": $file ("._('Line')." $line)</td><td width=10%>"._("Type").": $type</td></tr>";
     $error_collector.= "<tr style='background-color:$color'><td colspan=3 style='padding-left:20px;'>"._("Arguments").": $args</td></tr>";

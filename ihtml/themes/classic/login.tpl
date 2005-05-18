@@ -1,4 +1,6 @@
 {* GOsa login - smarty template *}
+{$php_errors}
+{$errors}
 
 <!-- Spacer for some browsers -->
 <div class='gosaLoginSpacer'></div>
