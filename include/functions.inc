@@ -1513,6 +1513,13 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
 {
   global $error_collector;
 
+  $svn_path = '$HeadURL$';
+
+  if (!preg_match('%/gosa/trunk/%', $svn_path)){
+    gosa_log ("PHP error: $errstr ($errfile, line $errline)");
+    return;
+  }
+  
   /* FIXME: workaround for buggy imap_open */
   if (preg_match('/imap_open/', $errstr)){
     return;
