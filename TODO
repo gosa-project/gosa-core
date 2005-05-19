@@ -9,6 +9,8 @@ Things to fix before 2.4:
 
 * Make it "barrierefrei"
 
+* Check PHP5 compliance of the error handler. It seems to break things...
+
 
 Target for 2.5:
 ===============
