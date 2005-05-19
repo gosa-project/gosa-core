@@ -11,6 +11,7 @@ class servkolab extends plugin {
   var $postfix_mynetworks               = "127.0.0.1/8";//ok
   var $postfix_enable_virus_scan        = "TRUE";//ok
   var $cyrus_quotawarn                  = "999";//ok
+  var $kolabFreeBusyFuture              = "1";// ok 
   var $cyrus_admins                     = "TRUE";//<<<<<<<<<<<<<<<<
   var $cyrus_imap                       = "TRUE";//ok
   var $cyrus_pop3                       = "TRUE";//ok
@@ -25,7 +26,7 @@ class servkolab extends plugin {
   var $remove                           = false;
   var $attributes =  array("postfix_mydomain", "postfix_mydestination",
         "postfix_mynetworks", "postfix_enable_virus_scan",
-         "cyrus_admins", "cyrus_imap",
+         "cyrus_admins", "cyrus_imap","kolabFreeBusyFuture",
         "cyrus_pop3", "cyrus_imaps", "cyrus_pop3s", "cyrus_sieve",
         "apache_allow_unauthenticated_fb", "proftpd_ftp",
         "apache_http", "cyrus_quotawarn", "kolabHost");
