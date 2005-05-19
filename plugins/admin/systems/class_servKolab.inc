@@ -12,20 +12,20 @@ class servkolab extends plugin {
   var $postfix_mynetworks               = "";
   var $postfix_enable_virus_scan        = "";
   var $cyrus_autocreatequota            = "";
-  var $cyrus_quotawarn                  = "";
+  var $cyrus_quotawarn                  = "";//ok
   var $cyrus_admins                     = "";
-  var $cyrus_imap                       = "";
-  var $cyrus_pop3                       = "";
-  var $cyrus_imaps                      = "";
-  var $cyrus_pop3s                      = "";
-  var $cyrus_sieve                      = "";
-  var $apache_allow_unauthenticated_fb  = "";
+  var $cyrus_imap                       = "";//ok
+  var $cyrus_pop3                       = "";//ok
+  var $cyrus_imaps                      = "";//ok
+  var $cyrus_pop3s                      = "";//ok
+  var $cyrus_sieve                      = "";//ok
+  var $apache_allow_unauthenticated_fb  = "";//doing now
   var $proftpd_ftp                      = "";
   var $apache_http                      = "";
   var $kolabHost                        = array("");
-
+  var $postfix_relayhost                = "";
   var $attributes =  array("postfix_mydomain", "postfix_mydestination",
-        "postfix_mynetworks", "postfix_enable_virus_scan",
+        "postfix_mynetworks", "postfix_enable_virus_scan","postfix_relayhost",
         "cyrus_autocreatequota", "cyrus_admins", "cyrus_imap",
         "cyrus_pop3", "cyrus_imaps", "cyrus_pop3s", "cyrus_sieve",
         "apache_allow_unauthenticated_fb", "proftpd_ftp",
@@ -166,17 +166,38 @@ class servkolab extends plugin {
 
     /* There a new Host submitted */
     if (isset($_POST['NewHost'])) {
-      $this->attrs['kolabHost'][] = $_POST['NewkolabHost'];
-      gosa_log("Adding Host");
+      
+      $abort= false;
+      if(empty($_POST['NewkolabHost']))
+        {
+          //print_red(_("The given Hostname ist empty."))
+          $abort = true;
+        }
+      else
+        {
+        foreach($this->attrs['kolabHost'] as $host)
+          {
+          if(strtolower($host) ==strtolower($_POST['NewkolabHost']))
+            {
+            $abort = true;
+            //print_red(_("The given Host already exists"));
+            }
+          }
+        }
+      if(!$abort)
+        {
+        $this->attrs['kolabHost'][] = $_POST['NewkolabHost'];
+        }
     }
 
     /* We need to delete a Host */
     if (isset($_POST['DelHost'])) {
       foreach($this->attrs['kolabHost'] as $key => $host) {
-        if ($host == $_POST['kolabHost'])
+        if(isset($_POST['kolabHost'])){
+          if ($host == $_POST['kolabHost'])
           unset($this->attrs['kolabHost'][$key]);
+        }
       }
-      gosa_log("Removing Host".$this->attrs['kolabHost'][$key]);
     }
 
 
@@ -197,6 +218,8 @@ class servkolab extends plugin {
       $smarty->assign($val, $this->$val);
       if (($this->$val != "FALSE") && (!empty($this->$val)))
         $smarty->assign($val."Check", "checked");
+      else
+        $smarty->assign($val."Check", "");
 
     }
 
@@ -263,6 +286,12 @@ class servkolab extends plugin {
       $newattrs[$key2] = $this->$key;
     }
 
+
+
+
+
+
+
     /* Set bool vars */
     if ($newattrs['postfix-enable-virus-scan'] == 0)
       $newattrs['postfix-enable-virus-scan'] = "FALSE";
@@ -302,6 +331,8 @@ class servkolab extends plugin {
       $newattrs['apache-allow-unauthenticated-fb'] = "TRUE";
 
 
+    if(empty($newattrs['postfix-relayhost'])) unset( $newattrs['postfix-relayhost']);
+
     /* Reorder Host array, to get constant increasing index */
     $newattrs['kolabHost'] = array();
     foreach($this->attrs['kolabHost'] as $key=>$val) {
@@ -316,19 +347,32 @@ class servkolab extends plugin {
     /* If we already have an object like this one,
        we only need to modify the entry
      */
+
+
+
     if ($ldap->dn_exists($this->dn)) {
       gosa_log("Modifying");
+      
+      /* unset all attributes we won't change*/
+      unset($newattrs['cyrus-admins']);
+      unset($newattrs['postfix-mydomain']);
+      unset($newattrs['postfix-mydestination']);
+      //print_a($newattrs); 
+    
+
+
       $ldap->cd($this->dn);
       $ldap->modify($newattrs);
     } else {
       /* We must create a new Entry */
-      gosa_log("Adding");
       $newattrs['k'] = "kolab";
       $newattrs['uid'] = "freebusy";
       $newattrs['postfix-mydomain'] = "gonicus.de";
       $newattrs['postfix-mydestination'] = "\$mydomain";
       $newattrs['userPassword'] = "tester";
       $newattrs['objectClass'] = $this->objectclasses;
+
+      gosa_log("Adding");
       $ldap->cd($this->dn);
       $ldap->add($newattrs);
     }

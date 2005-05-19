@@ -164,36 +164,43 @@ class servdb extends plugin
     foreach($this->objectclasses as $oc){
       $objectclasses[]= $oc;
     }
-    $this->objectclasses= $objectclasses;
+  
     plugin::save();
-    
-    /* Remove objectclasses */
-    foreach(array_merge($this->objectclasses, $this->additionaloc) as $oc){
-      foreach ($this->attrs['objectClass'] as $key => $value){
-        if ($value == $oc){
-          unset ($this->attrs['objectClass'][$key]);
+  
+
+
+    $test = $this->objectclasses;
+    $tmp = array_flip($this->attrs['objectClass']);
+
+    foreach($this->additionaloc as $key=>$val) {
+      unset($tmp[$key]);
+      }
+
+    foreach($tmp as $val){
+      if(in_array($val,$test)){
+        $tmp[$val];
         }
       }
-    }
-    foreach($this->objectclasses as $oc){
-      $this->attrs['objectClass'][]= $oc;
+
+    $classes = (array_flip(array_merge(array_flip($test),$tmp)));
+
+    unset($this->attrs['objectClass']);
+
+    foreach($classes as $class){
+      $this->attrs['objectClass'][]=$class;
     }
 
-    /* Adapt sieve server if needed */
-    if (in_array('goImapServer', $this->objectclasses)){
-      $this->attrs['goImapSieveServer']= preg_replace('/:.*$/', '',
-                                         preg_replace('/^{([^}]+)}$/', '\\1', 
-                                         $this->attrs['goImapConnect']));
-    }
 
     /* Remove unneeded attributes */
     foreach ($this->additionaloc as $oc => $attrs){
-      if (!in_array($oc, $this->objectclasses)){
+      if (!in_array($oc, $this->attrs['objectClass'])){
         foreach ($attrs as $attr){
           $this->attrs[$attr]= array();
         }
       }
     }
+    $this->attrs = array_reverse($this->attrs);
+
 
     /* Write to LDAP */
     $ldap= $this->config->get_ldap_link();
