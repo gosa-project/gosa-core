@@ -6,26 +6,25 @@ class servkolab extends plugin {
   var $cli_description = "Some longer text\nfor help";
   var $cli_parameters = array("eins"=>"Eins ist toll", "zwei"=>"Zwei ist noch besser");
 
-  var $postfix_mydomain                 = "\$domain";
-  var $postfix_mydestination            = "\$domain";
-  var $postfix_mynetworks               = "127.0.0.1/8";
-  var $postfix_enable_virus_scan        = "TRUE";
+  var $postfix_mydomain                 = "\$domain";//<<<<<<<<<<<<<
+  var $postfix_mydestination            = "\$domain";//<<<<<<<<<<<<<
+  var $postfix_mynetworks               = "127.0.0.1/8";//ok
+  var $postfix_enable_virus_scan        = "TRUE";//ok
   var $cyrus_quotawarn                  = "999";//ok
-  var $cyrus_admins                     = "TRUE";
+  var $cyrus_admins                     = "TRUE";//<<<<<<<<<<<<<<<<
   var $cyrus_imap                       = "TRUE";//ok
   var $cyrus_pop3                       = "TRUE";//ok
   var $cyrus_imaps                      = "TRUE";//ok
   var $cyrus_pop3s                      = "TRUE";//ok
   var $cyrus_sieve                      = "TRUE";//ok
-  var $apache_allow_unauthenticated_fb  = "TRUE";//doing now
-  var $proftpd_ftp                      = "TRUE";
-  var $apache_http                      = "TRUE";
+  var $apache_allow_unauthenticated_fb  = "TRUE";//<<<<<<<<<<<<
+  var $proftpd_ftp                      = "TRUE";//pk
+  var $apache_http                      = "TRUE";//ok
   var $kolabHost                        = array();
-  var $postfix_relayhost                = "";
   var $added                            = false; 
   var $remove                           = false;
   var $attributes =  array("postfix_mydomain", "postfix_mydestination",
-        "postfix_mynetworks", "postfix_enable_virus_scan","postfix_relayhost",
+        "postfix_mynetworks", "postfix_enable_virus_scan",
          "cyrus_admins", "cyrus_imap",
         "cyrus_pop3", "cyrus_imaps", "cyrus_pop3s", "cyrus_sieve",
         "apache_allow_unauthenticated_fb", "proftpd_ftp",
@@ -35,9 +34,13 @@ class servkolab extends plugin {
 
   function servkolab($config, $dn = NULL) 
   {
+
+
+    /* Setting the hostname and tell this Plugin that we are the kolab extension*/
     $this->hostname= preg_replace('/^cn=([^,]+),.*$/', '\1', $dn);
     $this->dn = "k=kolab,".$config->current['BASE'];
     
+    /* Load variables, if given*/
     plugin::plugin($config, $this->dn);
 
     /* Copy needed attributes */
@@ -47,16 +50,13 @@ class servkolab extends plugin {
         $this->$val = $this->attrs["$name"][0];
       }
     }
-    
-    if(in_array($this->hostname,$this->attrs['kolabHost']))
-    {
+  
+    /* Is this Server a member of the Kolab extension or not ?*/ 
+    if(in_array($this->hostname,$this->attrs['kolabHost'])) {
       $this->is_account=true;
+    }    else    {   
+      $this->is_account=false;    } 
     }
-    else
-    {   
-      $this->is_account=false;
-    } 
-  }
 
 
   function execute() 
@@ -65,50 +65,64 @@ class servkolab extends plugin {
     $smarty = get_smarty();
     $display = "";
 
-
-    unset($this->attrs['kolabHost']['count']);
-    $this->kolabHost = $this->attrs['kolabHost'];
-
-
+    /* Lets get all Host that are member of the Kolab extension, but don't catch count */
+    if(is_array($this->attrs['kolabHost']))
+      {
+      unset($this->attrs['kolabHost']['count']);
+      $this->kolabHost = $this->attrs['kolabHost'];
+      }
+    else
+      {
+      $this->attrs['kolabHost']=array();
+      $this->kolabHost = $this->attrs['kolabHost'];
+      }    
+    
     /* Tell the script the dn, we are using */
     $this->kolabdn = "k=kolab,".$this->config->current['BASE'];
 
+    /* The Ldap link is needed to ask ldap some questions */
     $ldap = $this->config->get_ldap_link();
-    
+
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])) {
       $this->is_account = !$this->is_account;
       
+
+      /*if we flip to true, we'll have to create a new account, so lets do that*/
       if($this->is_account==true)
       {
+        /* Only add the given Hostname to the existing hosts*/
         $this->kolabHost[]=$this->hostname;
         $this->attrs['kolabHost'][]=$this->hostname;
       }      
       else
       {
+        /* First we have to find the Host we want to delete, take the index and delete em*/
         foreach($this->kolabHost as $key=>$host) 
         {
+          /* Delete only if the Host is the in the array*/
           if($host == $this->hostname)
           {
             unset($this->kolabHost[$key]);
             unset($this->attrs['kolabHost'][$key]);
           }
         }
+      /* We deletet an Entry so we must reorder the index of the array */ 
       $tmp = $this->kolabHost;
       $this->kolabHost=array();
       $this->attrs['kolabHost']=array();
+      
+      /* reorder  reorder ...*/
       foreach($tmp as $host){
         $this->kolabHost[]=$host;
         $this->attrs['kolabHost'][]=$host;
       }
+      /* Tell Save that we want to delete someone*/
       $this->remove = true;
       }
 
     }
 
-
-    print_a($this);
-    
     /* Show tab dialog headers */
     if ($this->is_account) {
       /* call Add Acoount to add account */
@@ -179,10 +193,12 @@ class servkolab extends plugin {
   {
     /* Set ldap connection */
     $ldap = $this->config->get_ldap_link();
+    
+    /* Open current dn*/
     $ldap->cd($this->dn);
 
   
-  /* Setup Attributes to save */
+    /* Setup Attributes to save */
     $newattrs = array();
 
     /* Set vars with correct - _ - */
@@ -232,36 +248,39 @@ class servkolab extends plugin {
       $newattrs['apache-allow-unauthenticated-fb'] = "TRUE";
 
 
-    if(empty($newattrs['postfix-relayhost'])) unset( $newattrs['postfix-relayhost']);
-
     /* Reorder Host array, to get constant increasing index */
     $newattrs['kolabHost'] = array();
 
+    /* If we want to add someone or do only changes on the settings ...*/
     if(!$this->remove)
     {
+      /* Get all Host known, that are member of the Kolab extension */
       $this->kolabHost = $this->attrs['kolabHost'];
       
+      /* So, the Host is already member of the extension, so get all and do nothing */
       if(in_array($this->hostname,$this->kolabHost))
         {
         $newattrs['kolabHost']=$this->kolabHost;
         }
+      /* So this is the first entry */
       elseif(empty($this->kolabHost))
         {
-        print "empty";
+        /* Create an array an add the Host */  
         $newattrs['kolabHost']=array();
         $newattrs['kolabHost'][]=$this->hostname;
         }
+      /* Theres already an entry, but only in a string, */
       elseif(is_string($this->kolabHost))
         {
-        print "string";
         $tmp = $this->kolabHost;
         $newattrs['kolabHost']=array();
         $newattrs['kolabHost'][]=$tmp;
         $newattrs['kolabHost'][]=$this->hostname;
         }
+      /* Here we have already some entries */
       elseif(is_array($newattrs['kolabHost']))
         {
-        print "array";
+        /* Insert the new one*/
         foreach($this->kolabHost as $key=>$val) {
           if (is_int($key)) {
             $newattrs['kolabHost'][] = $val;
@@ -272,6 +291,7 @@ class servkolab extends plugin {
       }
       else
       {
+      /* Here we want to delete an entry*/
       $newattrs['kolabHost']= $this->attrs['kolabHost'];
       }
     /* Save as following object ! */
@@ -281,13 +301,15 @@ class servkolab extends plugin {
        we only need to modify the entry
      */
 
+    /* is this an empty extension, no host defined for it, than delet it */
     if(count($newattrs['kolabHost'])==0)
     {
-    $ldap->cd ("k=kolab,".$this->config->current['BASE']);
-    print "Deleting";
-    $ldap->rmdir("k=kolab,".$this->config->current['BASE']);
+      /* Delete the entry*/
+      $ldap->cd ("k=kolab,".$this->config->current['BASE']);
+      $ldap->rmdir("k=kolab,".$this->config->current['BASE']);
 
     }elseif ($ldap->dn_exists($this->kolabdn)) {
+    /* Ok there is already an extension, so we only need to add the changes and the new Host, (if it was a new host)*/
       gosa_log("Modifying");
       
       /* unset all attributes we won't change*/
@@ -295,7 +317,7 @@ class servkolab extends plugin {
       unset($newattrs['postfix-mydomain']);
       unset($newattrs['postfix-mydestination']);
     
-
+      /* Update changes */
       $ldap->cd($this->kolabdn);
       $ldap->modify($newattrs);
     } else {
@@ -308,15 +330,13 @@ class servkolab extends plugin {
       $newattrs['userPassword'] = "tester";
       $newattrs['objectClass'] = $this->objectclasses;
 
-      gosa_log("Adding");
-      
+      /* For better reading / Objectclass was added at last */ 
       $newattrs = array_reverse ($newattrs);  
-    
+      
+      /* And add the entry*/
       $ldap->cd($this->kolabdn);
       $ldap->add($newattrs);
     }
-    
-    print_a($newattrs);
     /* show any errors */
     show_ldap_error($ldap->get_error());
     
