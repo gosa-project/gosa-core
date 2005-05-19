@@ -141,45 +141,59 @@ function schema_check($server, $admin, $password,$aff=0)
 
   /* Check for correct samba parameters */
   if (!isset($objectclasses['sambaSamAccount'])){
-    $messages['samba3']= _("<b>SAMBA 3</b> support disabled, no schema seems to be installed");
+    $messages['samba3']= _("SAMBA 3 support disabled, no schema seems to be installed");
     $affich['samba3']= $messages['samba3']."<td class=\"check\">gosa+samba3.schema</td>";
-  }else{$affich['samba3']=_("<b>SAMBA 3</b> support enabled<td class=\"check\">gosa+samba3.schema</td>");}
+  }else{
+    $affich['samba3']=_("SAMBA 3 support enabled")."<td class=\"check\">gosa+samba3.schema</td>";
+  }
 
   if (!isset($objectclasses['sambaAccount'])){
-    $messages['samba2']= _("<b>SAMBA 2</b> support disabled, no schema seems to be installed");
+    $messages['samba2']= _("SAMBA 2 support disabled, no schema seems to be installed");
     $affich['samba2']=$messages['samba2']."<td class=\"check\">samba.schema</td>";
-  }else{$affich['samba2']=_("<b>SAMBA 2</b> support enabled<td class=\"check\">samba.schema</td>");}
+  }else{
+    $affich['samba2']=_("SAMBA 2 support enabled")."<td class=\"check\">samba.schema</td>";
+  }
 
   /* Check pureftp/dns/ */
   if (!isset($objectclasses['PureFTPdUser'])){
-    $messages['pureftp']= _("Support for <b>pureftp</b> disabled, no schema seems to be installed");
+    $messages['pureftp']= _("Support for pureftp disabled, no schema seems to be installed");
     $affich['pureftp']= $messages['pureftp']."<td class=\"check\">pureftpd.schema</td>";
-  }else{$affich['pureftp']=_("Support for <b>pureftp</b> enabled<td class=\"check\">pureftpd.schema</td>");}
+  }else{
+    $affich['pureftp']=_("Support for pureftp enabled")."<td class=\"check\">pureftpd.schema</td>";
+  }
 
   if (!isset($objectclasses['gosaWebdavAccount'])){
-    $messages['webdav']= _("Support for <b>WebDAV</b> disabled, no schema seems to be installed");
+    $messages['webdav']= _("Support for WebDAV disabled, no schema seems to be installed");
     $affich['webdav']=$messages['webdav']."<td class=\"check\"></td>";
-  }else{$affich['webdav']=_("Support for <b>WebDAV</b> enabled<td class=\"check\">gosa+samba3.schema</td>");}
+  }else{
+    $affich['webdav']=_("Support for WebDAV enabled")."<td class=\"check\">gosa+samba3.schema</td>";
+  }
 
   if (!isset($objectclasses['phpgwAccount'])){
-    $messages['phpgroupware']= _("Support for <b>phpgroupware</b> disabled, no schema seems to be installed");
+    $messages['phpgroupware']= _("Support for phpgroupware disabled, no schema seems to be installed");
     $affich['phpgroupware']=$messages['phpgroupware']."<td class=\"check\">phpgwaccount.schema</td>";
-  }else{$affich['phpgroupware']=_("Support for <b>phpgroupware</b> enabled<td class=\"check\">phpgwaccount.schema</td>");}
+  }else{
+    $affich['phpgroupware']=_("Support for phpgroupware enabled")."<td class=\"check\">phpgwaccount.schema</td>";
+  }
 
   if (!isset($objectclasses['goFonAccount'])){
-    $messages['phoneaccount']= _("Support for <b>gofon</b> disabled, no schema seems to be installed");
+    $messages['phoneaccount']= _("Support for gofon disabled, no schema seems to be installed");
     $affich['phoneaccount']=$messages['phoneaccount']."<td class=\"check\">gofon.schema</td>";
-  }else{$affich['phoneaccount']=_("Support for <b>gofon</b> enabled<td class=\"check\">gofon.schema</td>");}
+  }else{
+    $affich['phoneaccount']=_("Support for gofon enabled")."<td class=\"check\">gofon.schema</td>";
+  }
 
   
   if(($_SESSION['ldapconf']['mail_methods'][$_SESSION['ldapconf']['mail']] == "kolab"))
   if(!isset($objectclasses['kolabInetOrgPerson']))
     {
-    $messages['kolab']= _("Support for <b>Kolab</b> disabled, no schema seems to be installed, setting mail-method to cyrus");
+    $messages['kolab']= _("Support for Kolab disabled, no schema seems to be installed, setting mail-method to cyrus");
     $tmp = array_flip($_SESSION['ldapconf']['mail_methods']);
     $_SESSION['ldapconf']['mail']=$tmp['cyrus'];
     $affich['kolab']=$messages['kolab']."<td class=\"check\">kolab2.schema</td>";
-  }else{$affich['kolab']=_("Support for <b>Kolab</b> enabled<td class=\"check\">gofon.schema</td>");}
+  }else{
+    $affich['kolab']=_("Support for Kolab enabled")."<td class=\"check\">gofon.schema</td>";
+  }
 
 
   if($aff==0)return ($messages);

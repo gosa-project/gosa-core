@@ -151,7 +151,7 @@ class csvimport extends plugin
 
             /* Output Error */
             
-            print_red (_("Need 'sn','givenName' and 'uid' to create user"));
+            print_red (_("Need 'sn','givenName' and 'uid' to create user."));
           } else {
 
             /* Register usertab to trigger edit dialog */
@@ -289,7 +289,7 @@ class csvimport extends plugin
 
 
         $smarty->assign("tpl",$arrtemplates[$tplid]);
-        print_red (_("Nothing to import !."));
+        print_red (_("Nothing to import!"));
       }
 
       /* If theres a File uploaded */

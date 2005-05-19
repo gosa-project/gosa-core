@@ -10,13 +10,12 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schröder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-03-17 16:20+0100\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2005-05-19 11:26+0200\n"
+"Last-Translator:  <(null)>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: contrib/gosa.conf:4
 msgid "My account"
@@ -122,14 +121,12 @@ msgid "Monitoring"
 msgstr "Überwachung"
 
 #: contrib/gosa.conf:89
-#, fuzzy
 msgid "Databases"
-msgstr "Datum"
+msgstr "Datenbanken"
 
 #: contrib/gosa.conf:90 plugins/admin/systems/servkolab.tpl:7
-#, fuzzy
 msgid "Services"
-msgstr "Geräte"
+msgstr "Dienste"
 
 #: contrib/gosa.conf:91
 msgid "DNS"
@@ -142,9 +139,8 @@ msgstr ""
 #: contrib/gosa.conf:145 plugins/addons/ldapmanager/contentexport.tpl:19
 #: plugins/addons/ldapmanager/contentexport.tpl:32
 #: plugins/addons/ldapmanager/contentexport.tpl:47
-#, fuzzy
 msgid "Export"
-msgstr "Importieren"
+msgstr "Export"
 
 #: contrib/gosa.conf:146 plugins/personal/mail/generic.tpl:107
 #: plugins/addons/ldapmanager/contentimport.tpl:56
@@ -154,9 +150,8 @@ msgid "Import"
 msgstr "Importieren"
 
 #: contrib/gosa.conf:147
-#, fuzzy
 msgid "CSV Import"
-msgstr "Importieren"
+msgstr "CSV Import"
 
 #: contrib/gosa.conf:162
 msgid "{LOCATIONNAME}"
@@ -6920,7 +6915,7 @@ msgstr "System-Information"
 #~ msgid ""
 #~ "Unsupported password hash detected. Can't generate compatible password."
 #~ msgstr ""
-#~ "Es wurde ein nicht-unterstützter Passwort-Hash entdeckt. Es kann kein "
+#~ "Es wurde ein nicht-unterstÃ¼tzter Passwort-Hash entdeckt. Es kann kein "
 #~ "passendes Passwort generiert werden."
 
 #~ msgid "Checking for gd module"
@@ -6930,8 +6925,8 @@ msgstr "System-Information"
 #~ "GOsa needs this module for recalculating image sizes provided for users "
 #~ "as jpegPhoto."
 #~ msgstr ""
-#~ "GOsa benötigt dieses Modul um Größenveränderungen bei Bildern "
-#~ "durchzuführen."
+#~ "GOsa benÃ¶tigt dieses Modul um GrÃ¶ÃŸenverÃ¤nderungen bei Bildern "
+#~ "durchzufÃ¼hren."
 
 #~ msgid "You are currently using GOsa version %s (CVS checkout from %s)"
 #~ msgstr "Sie nutzen momentan GOsa in der Version %s (CVS-Abzug vom %s)"
@@ -6950,7 +6945,7 @@ msgstr "System-Information"
 
 #, fuzzy
 #~ msgid "Referral Password"
-#~ msgstr "Neues Passwort bestätigen"
+#~ msgstr "Neues Passwort bestÃ¤tigen"
 
 #, fuzzy
 #~ msgid ""
@@ -6958,8 +6953,8 @@ msgstr "System-Information"
 #~ "complete snapshot of the running LDAP directory as ldif. You may save "
 #~ "these files for backup purpose or when initializing a new server."
 #~ msgstr ""
-#~ "Dieses Modul ermöglicht Ihnen den Download der kompletten LDAP-Datenbank, "
-#~ "die momentan in Verwendung ist. Die übertragenen Dateien können "
+#~ "Dieses Modul ermÃ¶glicht Ihnen den Download der kompletten LDAP-Datenbank, "
+#~ "die momentan in Verwendung ist. Die Ã¼bertragenen Dateien kÃ¶nnen "
 #~ "einerseits zur Datensicherung und andererseits zur Einrichtung eines "
 #~ "neuen Servers benutzt werden."
 
@@ -6968,7 +6963,7 @@ msgstr "System-Information"
 #~ msgstr "schreiben"
 
 #~ msgid "You are not allowed to delete this terminal!"
-#~ msgstr "Es Ihnen nicht erlaubt, dieses Terminal zu löschen!"
+#~ msgstr "Es Ihnen nicht erlaubt, dieses Terminal zu lÃ¶schen!"
 
 #~ msgid "Administrators"
 #~ msgstr "Administratoren"
@@ -6988,6 +6983,6 @@ msgstr "System-Information"
 #~ "Warning: Please check the SIZELIMIT option set on your LDAP server. You "
 #~ "may not get all entries, if this value is to low!"
 #~ msgstr ""
-#~ "Warnung: Bitte prüfen Sie die SIZELIMIT Option Ihres LDAP-Servers. Unter "
-#~ "Umständen bekommen Sie nicht alle Einträge, wenn dieser Eintrag zu "
+#~ "Warnung: Bitte prÃ¼fen Sie die SIZELIMIT Option Ihres LDAP-Servers. Unter "
+#~ "UmstÃ¤nden bekommen Sie nicht alle EintrÃ¤ge, wenn dieser Eintrag zu "
 #~ "niedrig ist!"
