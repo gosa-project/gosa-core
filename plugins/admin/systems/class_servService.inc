@@ -138,15 +138,23 @@ class servservice extends plugin
     foreach ($this->attributes as $attr){
       $smarty->assign("$attr", $this->$attr);
       $smarty->assign("$attr"."ACL", chkacl($this->acl, $attr));
+      if($this->$attr)
+        $smarty->assign($attr."State","");
+      else
+        $smarty->assign($attr."State","disabled");
     }
 
 
     /* Classes... */
-    foreach ($this->additionaloc as $oc => $dummy){
+foreach ($this->additionaloc as $oc => $dummy){
       if (isset($this->objectclasses[$oc])){
         $smarty->assign("$oc", "checked");
+        $smarty->assign("$oc"."State", "");
         $smarty->assign("$oc"."ACL", chkacl($this->acl, $oc));
+
       } else {
+        $smarty->assign("$oc", "");
+        $smarty->assign("$oc"."ACL", "");
         $smarty->assign("$oc"."State", "disabled");
       }
     }
@@ -203,17 +211,14 @@ class servservice extends plugin
  
     $test = $this->objectclasses;
     $tmp = array_flip($this->attrs['objectClass']);
+   
     
+ 
     foreach($this->additionaloc as $key=>$val) {
       unset($tmp[$key]);
       }
-    
-    foreach($tmp as $val){
-      if(in_array($val,$test)){
-        $tmp[$val];
-        }
-      }
-    
+   
+
     $classes = (array_flip(array_merge(array_flip($test),$tmp)));
 
     unset($this->attrs['objectClass']);
@@ -233,9 +238,8 @@ class servservice extends plugin
     }
     $this->attrs = array_reverse($this->attrs);
     
- 
-
-      
+//    print_a($this->attrs);
+     
     /* Write to LDAP */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);

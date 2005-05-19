@@ -74,8 +74,12 @@ class servdb extends plugin
     foreach ($this->additionaloc as $oc => $dummy){
       if (isset($this->objectclasses[$oc])){
         $smarty->assign("$oc", "checked");
+        $smarty->assign("$oc"."State", "");
         $smarty->assign("$oc"."ACL", chkacl($this->acl, $oc));
+        
       } else {
+        $smarty->assign("$oc", "");
+        $smarty->assign("$oc"."ACL", "");
         $smarty->assign("$oc"."State", "disabled");
       }
     }
@@ -176,12 +180,6 @@ class servdb extends plugin
       unset($tmp[$key]);
       }
 
-    foreach($tmp as $val){
-      if(in_array($val,$test)){
-        $tmp[$val];
-        }
-      }
-
     $classes = (array_flip(array_merge(array_flip($test),$tmp)));
 
     unset($this->attrs['objectClass']);
@@ -205,6 +203,7 @@ class servdb extends plugin
     /* Write to LDAP */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
+ //   print_a($this->attrs);
     $ldap->modify($this->attrs);
     show_ldap_error($ldap->get_error());
 

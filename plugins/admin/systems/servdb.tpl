@@ -28,7 +28,7 @@
    <table>
     <tr>
 	 <td>{t}FAX DB user{/t}</td>
-	 <td><input name="goFaxAdmin" size=30 maxlength=60 {$goFaxACL} id="goFaxAdmin" value="{$goFaxAdmin}" {$goFaxServerState}></td>
+	 <td><input name="goFaxAdmin" size=30 maxlength=60 {$goFaxAdminACL} id="goFaxAdmin" value="{$goFaxAdmin}" {$goFaxServerState}></td>
 	</tr>
     <tr>
 	 <td>{t}Password{/t}</td>
@@ -44,7 +44,7 @@
    <table>
     <tr>
 	 <td>{t}Asterisk DB user{/t}</td>
-	 <td><input name="goFonAdmin" size=30 maxlength=60 id="goFonAdmin" {$goFonACL} value="{$goFonAdmin}" {$goFonServerState}></td>
+	 <td><input name="goFonAdmin" size=30 maxlength=60 id="goFonAdmin" {$goFonServerACL} value="{$goFonAdmin}" {$goFonServerState}></td>
 	</tr>
     <tr>
 	 <td>{t}Password{/t}</td>

@@ -12,7 +12,7 @@
    <table>
     <tr>
      <td>
-		<select style="width:350px;" id="goExportEntry" name="goExportEntry" {$goNfsServerState} size=4 multiple {$trustmodeACL} {$trusthide}>
+		<select style="width:350px;" id="goExportEntry" name="goExportEntry" {$goNfsServerState} size=4 multiple >
     		{html_options values=$goExportEntry output=$goExportEntry}
 	    </select>
 	<br>	
@@ -37,7 +37,7 @@
    <table>
     <tr>
      <td>
-        <select style="width:350px;" id="goTimeEntry" name="goTimeSource" {$goNtpServerState} size=4 multiple {$trustmodeACL} {$trusthide}>
+        <select style="width:350px;" id="goTimeEntry" name="goTimeSource" {$goNtpServerState} size=4 multiple>
             {html_options values=$goTimeSource output=$goTimeSource}
         </select>
     <br>
