@@ -24,6 +24,10 @@ class servkolab extends plugin {
   var $apache_http                      = "";
   var $kolabHost                        = array("");
   var $postfix_relayhost                = "";
+  var $templ                            = ""; // This variable saves the whole plugin, before loading any Kolab settings,
+                                              // So we can rereate this class again at the end of this script
+                                              // This is needed because some scripts won's save their settings correct
+
   var $attributes =  array("postfix_mydomain", "postfix_mydestination",
         "postfix_mynetworks", "postfix_enable_virus_scan","postfix_relayhost",
         "cyrus_autocreatequota", "cyrus_admins", "cyrus_imap",
@@ -35,7 +39,11 @@ class servkolab extends plugin {
 
   function servkolab($config, $dn = NULL) 
   {
-    echo "DN korrigieren<br>";
+    plugin::plugin($config,$dn);
+    $templ = false;
+    $this->dn = $dn;
+    $templ = $this; 
+    $this->templ = $templ;
     $this->dn = "k=kolab,".$config->current['BASE'];
     
     plugin::plugin($config, $this->dn);
@@ -357,12 +365,12 @@ class servkolab extends plugin {
       unset($newattrs['cyrus-admins']);
       unset($newattrs['postfix-mydomain']);
       unset($newattrs['postfix-mydestination']);
-      //print_a($newattrs); 
     
 
-
+      print ($this->dn);
       $ldap->cd($this->dn);
-      $ldap->modify($newattrs);
+      print_a($newattrs);
+      //$ldap->modify($newattrs);
     } else {
       /* We must create a new Entry */
       $newattrs['k'] = "kolab";
@@ -376,10 +384,14 @@ class servkolab extends plugin {
       $ldap->cd($this->dn);
       $ldap->add($newattrs);
     }
-
+    
+    $templ = "";
+    $templ = $this->templ;
+    $this = $templ;  
+  
     /* show any errors */
     show_ldap_error($ldap->get_error());
-
+    
     /* Optionally execute a command after we're done */
     if ($this->initially_was_account == $this->is_account) {
       if ($this->is_modified) {
