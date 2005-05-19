@@ -448,30 +448,45 @@ class mailAccount extends plugin
     /* Fill checkboxes */
     if (!preg_match("/L/", $this->gosaMailDeliveryMode)) {
       $smarty->assign("drop_own_mails", "checked");
+    } else {
+      $smarty->assign("drop_own_mails", "");
     }
     if (preg_match("/V/", $this->gosaMailDeliveryMode)) {
       $smarty->assign("use_vacation", "checked");
+    } else {
+      $smarty->assign("use_vacation", "");
     }
     if (preg_match("/S/", $this->gosaMailDeliveryMode)) {
       $smarty->assign("use_spam_filter", "checked");
+    } else {
+      $smarty->assign("use_spam_filter", "");
     }
     if (preg_match("/R/", $this->gosaMailDeliveryMode)) {
       $smarty->assign("use_mailsize_limit", "checked");
+    } else {
+      $smarty->assign("use_mailsize_limit", "");
     }
     if (preg_match("/I/", $this->gosaMailDeliveryMode)) {
       $smarty->assign("only_local", "checked");
+    } else {
+      $smarty->assign("only_local", "");
     }
     if (preg_match("/C/", $this->gosaMailDeliveryMode)) {
       $smarty->assign("own_script", "checked");
+    } else {
+      $smarty->assign("own_script", "");
     }
 
     /* Have vacation templates? */
+    $smarty->assign("template", "");
     if (count($this->vacation)){
       $smarty->assign("show_templates", "true");
       $smarty->assign("vacationtemplates", $this->vacation);
       if (isset($_POST['vacation_template'])){
         $smarty->assign("template", $_POST['vacation_template']);
       }
+    } else {
+      $smarty->assign("show_templates", "false");
     }
 
     /* Fill spam selector */

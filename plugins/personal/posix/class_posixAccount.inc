@@ -438,8 +438,10 @@ class posixAccount extends plugin
             "use_shadowWarning") as $val){
         if ($this->$val == 1){
           $smarty->assign("$val", "checked");
-          $smarty->assign("$val"."ACL", chkacl($this->acl, $val));
+        } else {
+          $smarty->assign("$val", "");
         }
+        $smarty->assign("$val"."ACL", chkacl($this->acl, $val));
       }
     }
 
@@ -471,6 +473,8 @@ class posixAccount extends plugin
     $smarty->assign("groupMembership", $this->groupMembership);
     if (count($this->groupMembership) > 16){
       $smarty->assign("groups", "too_many_for_nfs");
+    } else {
+      $smarty->assign("groups", "");
     }
     $smarty->assign("printerList", $this->printerList);
     $smarty->assign("languages", $this->config->data['MAIN']['LANGUAGES']);
@@ -482,6 +486,7 @@ class posixAccount extends plugin
       if ($_SESSION["js"]){
         $smarty->assign("forceMode", "disabled");
       }
+      $smarty->assign("force_ids", "");
     }
     $smarty->assign("force_idsACL", chkacl($this->acl, "force_ids"));
 
@@ -491,7 +496,7 @@ class posixAccount extends plugin
       $smarty->assign("$val"."ACL", chkacl($this->acl,$val));
     }
     $smarty->assign("groupMembershipACL", chkacl($this->acl, "groupMembership"));
-    $smarty->assign("must_change_password", chkacl($this->acl, "must_change_password"));
+    $smarty->assign("status", $this->status);
 
     /* Work on trust modes */
     $smarty->assign("trustmodeACL", chkacl($this->acl, "trustmode"));

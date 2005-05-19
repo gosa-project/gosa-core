@@ -40,12 +40,15 @@ class phpgwAccount extends plugin
     if ($this->is_account){
       $smarty->assign("phpgwState", "checked");
     } else {
+      $smarty->assign("phpgwState", "");
       $smarty->assign("fstate", "disabled");
     }
 
     if ($this->parent != NULL){
       $smarty->assign("tabbed", 1);
     }
+
+    $smarty->assign('phpgwAccountACL', chkacl($this->acl, 'phpgwAccount'));
 
     $display.= $smarty->fetch (get_template_path('phpgw.tpl', TRUE, dirname(__FILE__)));
     return ($display);

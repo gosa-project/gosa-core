@@ -78,6 +78,7 @@ class user extends plugin
   /* variables to trigger password changes */
   var $pw_storage= "crypt";
   var $last_pw_storage= "unset";
+  var $had_userCertificate= FALSE;
 
   /* attribute list for save action */
   var $attributes= array("sn", "givenName", "uid", "personalTitle", "academicTitle",
@@ -158,8 +159,11 @@ class user extends plugin
       }
 
       /* Load extra attributes: certificate and picture */
-      $this->load_cert();
       $this->load_picture();
+      $this->load_cert();
+      if ($this->userCertificate != ""){
+        $this->had_userCertificate= TRUE;
+      }
     }
 
     /* Reset password storage indicator, used by password_change_needed() */
@@ -451,6 +455,8 @@ class user extends plugin
       } else {
         $smarty->assign("has_phoneaccount", "false");
       }
+    } else {
+        $smarty->assign("has_phoneaccount", "false");
     }
 
     return($smarty->fetch (get_template_path('generic.tpl', TRUE, dirname(__FILE__))));
@@ -728,7 +734,7 @@ class user extends plugin
     /* Remove cert? 
        For some reason, the 'ldap' class doesn't want to remove binary entries, so I need
        to work around myself. */
-    if ($remove_userCertificate == true && !$this->new){
+    if ($remove_userCertificate == true && !$this->new && $this->had_userCertificate){
 
       /* Reset array, assemble new, this should be reworked */
       $this->attrs= array();
@@ -752,9 +758,8 @@ class user extends plugin
       }
 
       /* Modify using attrs */
-      @ldap_mod_del($ds,$this->dn,$this->attrs);
+      ldap_mod_del($ds,$this->dn,$this->attrs);
       ldap_close($ds);
-
     }
 
     /* Kerberos server defined? */

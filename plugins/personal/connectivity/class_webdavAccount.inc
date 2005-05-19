@@ -31,12 +31,15 @@ class webdavAccount extends plugin
     if ($this->is_account){
       $smarty->assign("webdavState", "checked");
     } else {
+      $smarty->assign("webdavState", "");
       $smarty->assign("wstate", "disabled");
     }
 
     if ($this->parent != NULL){
       $smarty->assign("tabbed", 1);
     }
+
+    $smarty->assign('gosaWebdavACL', chkacl($this->acl, 'gosaWebdav'));
 
     $display.= $smarty->fetch (get_template_path('webdav.tpl', TRUE, dirname(__FILE__)));
     return ($display);

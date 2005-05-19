@@ -48,6 +48,7 @@ class pureftpdAccount extends plugin
     if ($this->is_account){
       $smarty->assign("pureftpdState", "checked");
     } else {
+      $smarty->assign("pureftpdState", "");
       $smarty->assign("fstate", "disabled");
     }
     $smarty->assign("use_FTPStatus", ($this->FTPStatus == "disabled") ? "checked" : "");
@@ -55,6 +56,7 @@ class pureftpdAccount extends plugin
     if ($this->parent != NULL){
       $smarty->assign("tabbed", 1);
     }
+    $smarty->assign("pureftpdACL", chkacl($this->acl, 'pureftpd'));
 
     $display.= $smarty->fetch (get_template_path('pureftpd.tpl', TRUE, dirname(__FILE__)));
     return ($display);

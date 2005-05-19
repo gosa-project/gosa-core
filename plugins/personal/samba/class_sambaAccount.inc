@@ -431,6 +431,8 @@ class sambaAccount extends plugin
               $smarty->assign("$attr", "");
             }
           }
+        } else {
+          $smarty->assign("$attr", "");
         }
         $smarty->assign("$attr"."ACL", chkacl($this->acl, $attr));
       }
@@ -501,28 +503,42 @@ class sambaAccount extends plugin
     if (is_integer(strpos($this->sambaAcctFlags, "D")) ||
         is_integer(strpos($this->sambaAcctFlags, "L"))) {
         $smarty->assign("flagsD", "checked");
+    } else {
+        $smarty->assign("flagsD", "");
     }
     
     /* Check for no_password_required flag 'N' */
     if (is_integer(strpos($this->sambaAcctFlags, "N"))) {
         $smarty->assign("flagsN", "checked");
+    } else {
+        $smarty->assign("flagsN", "");
     }
 
     /* 'normal' Checkboxes */
     if ($this->pwdCanChange=="1"){
       $smarty->assign("flagsP", "checked");
+    } else {
+      $smarty->assign("flagsP", "");
     }
     if ($this->password_expires=="1"){
       $smarty->assign("flagsC", "checked");
+    } else {
+      $smarty->assign("flagsC", "");
     }
     if ($this->logon_time_set=="1"){
       $smarty->assign("flagsT", "checked");
+    } else {
+      $smarty->assign("flagsT", "");
     }
     if ($this->logoff_time_set=="1"){
       $smarty->assign("flagsO", "checked");
+    } else {
+      $smarty->assign("flagsO", "");
     }
     if ($this->kickoff_time_set=="1"){
       $smarty->assign("flagsK", "checked");
+    } else {
+      $smarty->assign("flagsK", "");
     }
     
     $smarty->assign("allow_pwchangeACL", chkacl($this->acl, "allow_pwchange"));

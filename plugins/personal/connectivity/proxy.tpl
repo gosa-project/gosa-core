@@ -1,4 +1,4 @@
-<h2>{if $tabbed eq 1}<input type="checkbox" name="proxy" value="B" {$proxyState} {$gosaProxyACL} onclick="changeState('filterF'); changeState('filterT'); changeState('startHour'); changeState('startMinute'); changeState('stopHour'); changeState('stopMinute'); changeState('filterB'); changeState('quota_size'); changeState('quota_unit'); changeState('gosaProxyQuotaPeriod');">{/if}{t}Proxy account{/t}</h2>
+<h2>{if $tabbed eq 1}<input type="checkbox" name="proxy" value="B" {$proxyState} {$gosaProxyAcctFlagsACL} onclick="changeState('filterF'); changeState('filterT'); changeState('startHour'); changeState('startMinute'); changeState('stopHour'); changeState('stopMinute'); changeState('filterB'); changeState('quota_size'); changeState('quota_unit'); changeState('gosaProxyQuotaPeriod');">{/if}{t}Proxy account{/t}</h2>
 <table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
    <td>

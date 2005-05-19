@@ -73,6 +73,8 @@ class proxyAccount extends plugin
     $smarty->assign("quota_u", preg_replace("/^[0-9]+/", "", $this->gosaProxyQuota));
     if ($this->is_account){
       $smarty->assign("proxyState", "checked");
+    } else {
+      $smarty->assign("proxyState", "");
     }
 
     /* Prepare correct state */

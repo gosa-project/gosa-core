@@ -5,6 +5,7 @@ Things to fix before 2.4:
   - mail groups
   - shared folders
   - server
+    + ACLs
 
 * Make it "barrierefrei"
 

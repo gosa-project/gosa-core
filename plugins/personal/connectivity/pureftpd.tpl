@@ -1,4 +1,4 @@
-<h2>{if $tabbed eq 1}<input type="checkbox" name="pureftpd" value="B" {$pureftpdState} {$gosaPureftpdACL} onclick="changeState('FTPUploadBandwidth'); changeState('FTPDownloadBandwidth'); changeState('FTPQuotaFiles'); changeState('FTPQuotaMBytes'); changeState('FTPUploadRatio'); changeState('FTPDownloadRatio'); changeState('FTPStatus');" {$pureftpdACL}>{/if}{t}FTP account{/t}</h2>
+<h2>{if $tabbed eq 1}<input type="checkbox" name="pureftpd" value="B" {$pureftpdState} {$pureftpdACL} onclick="changeState('FTPUploadBandwidth'); changeState('FTPDownloadBandwidth'); changeState('FTPQuotaFiles'); changeState('FTPQuotaMBytes'); changeState('FTPUploadRatio'); changeState('FTPDownloadRatio'); changeState('FTPStatus');" {$pureftpdACL}>{/if}{t}FTP account{/t}</h2>
 
 <table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
 
