@@ -797,7 +797,7 @@ function show_setup_page4($withoutput = true)
   {
     $fault = true;
     if($withoutput)
-      print_red (_("Can't bind to the specified LDAP server! Please make sure that is reachable for GOsa."));
+      print_red (_("Can't bind to the specified LDAP server!. Please make sure that is reachable for GOsa."));
   }
   elseif(! $r =  @ldap_bind ($ds))    
   {
