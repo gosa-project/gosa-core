@@ -44,11 +44,15 @@ class ldifexport extends plugin
         $smarty->assign("depselectfull",$_POST['selfull']);
         $smarty->assign("type","full");
         $dn = $_POST['selfull'];
+      } else {
+        $smarty->assign("depselectfull", "");
       }
       if((isset($_POST['selivbb']))&&(isset($_POST['sfrmgetivbb']))){
         $smarty->assign("depselectivbb",$_POST['selivbb']);
         $smarty->assign("type","ivbb");
         $dn = $_POST['selivbb'];
+      } else {
+        $smarty->assign("depselectivbb", "");
       }
     }
 
