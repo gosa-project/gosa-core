@@ -1587,5 +1587,9 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
   gosa_log ("PHP error: $errstr ($errfile, line $errline)");
 }
 
+function dummy_error_handler()
+{
+}
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

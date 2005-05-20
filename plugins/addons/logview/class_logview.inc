@@ -13,7 +13,7 @@ class logview extends plugin
   var $sort= 2;
   var $sort_direction= "down";
   var $hostlist= array();
-  var $levellist= array();
+  var $loglevellist= array();
   var $tilist= array();
   var $fields= array("log_level", "host", "time_stamp", "message");
 
@@ -38,9 +38,10 @@ class logview extends plugin
 	}
 	
 	$cfg= $this->config->data['SERVERS']['LOG'];
+	$tmp= set_error_handler('dummy_error_handler');
 	$link = @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
+	set_error_handler($tmp);
 	if ($link === FALSE){
-		print_red(_("Can't connect to log database, no logs can be shown!"));
 		return;
 	}
 	if (! @mysql_select_db("gomon")){
@@ -125,106 +126,108 @@ class logview extends plugin
         }
 
 	/* Query stuff */
+	$res= "";
 	$cfg= $this->config->data['SERVERS']['LOG'];
+	$tmp= set_error_handler('dummy_error_handler');
 	$link = @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
+	set_error_handler($tmp);
 	if ($link === FALSE){
 		print_red(_("Can't connect to log database, no logs can be shown!"));
-		return;
-	}
-	if (! @mysql_select_db("gomon")){
-		print_red(_("Can't select log database for log generation!"));
-		return;
-	}
-
-	/* Get number of entries */
-	$query= "SELECT COUNT(*) FROM golog;";
-	$result = @mysql_query($query);
-	$line= mysql_fetch_array($result, MYSQL_ASSOC);
-	$count= $line['COUNT(*)'];
-	if ($count > 25){
-                $smarty->assign("range_selector", range_selector($count, $this->start, 25));
-        }
-
-	/* Assemble time query */
-	switch ($logfilter['time']){
-		case '0':
-			$start= date ("YmdHis", time() - 3600);
-			break;
-			;;
-		case '1':
-			$start= date ("YmdHis", time() - 21600);
-			break;
-			;;
-		case '2':
-			$start= date ("YmdHis", time() - 43200);
-			break;
-			;;
-		case '3':
-			$start= date ("YmdHis", time() - 86400);
-			break;
-			;;
-		case '4':
-			$start= date ("YmdHis", time() - 172800);
-			break;
-			;;
-		case '5':
-			$start= date ("YmdHis", time() - 604800);
-			break;
-			;;
-		case '6':
-			$start= date ("YmdHis", time() - 1209600);
-			break;
-			;;
-		case '7':
-			$start= date ("YmdHis", time() - 2419200);
-			break;
-			;;
-	}
-
-	/* Assemble log level query */
-	if ($logfilter['log_level'] == '!All'){
-		$ll= "";
 	} else {
-		$ll= "AND log_level='".$logfilter['log_level']."'";
-	}
-	if ($logfilter['host'] == '!All'){
-		$hf= "";
-	} else {
-		$hf= "AND host='".$logfilter['host']."'";
-	}
+		if (! @mysql_select_db("gomon")){
+			print_red(_("Can't select log database for log generation!"));
+		} else {
 
-	/* Order setting */
-        if ($this->sort_direction == "down"){
-                $desc= "DESC";
-        } else {
-                $desc= "";
-        }
+			/* Get number of entries */
+			$query= "SELECT COUNT(*) FROM golog;";
+			$result = @mysql_query($query);
+			$line= mysql_fetch_array($result, MYSQL_ASSOC);
+			$count= $line['COUNT(*)'];
+			if ($count > 25){
+				$smarty->assign("range_selector", range_selector($count, $this->start, 25));
+			}
 
-	$end= date ("YmdHis");
-	$query= "SELECT * FROM golog WHERE message like '".$logfilter['regex']."' $ll $hf AND time_stamp <= $end AND time_stamp >= $start ORDER BY ".$this->fields[$this->sort]." $desc LIMIT ".$this->start.",25;";
-	@DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__, $query, "Database query");
-	$result = @mysql_query($query);
-	if ($result === false){
-		print_red(_("Query for log database failed!"));
-		return;
+			/* Assemble time query */
+			switch ($logfilter['time']){
+				case '0':
+					$start= date ("YmdHis", time() - 3600);
+					break;
+					;;
+				case '1':
+					$start= date ("YmdHis", time() - 21600);
+					break;
+					;;
+				case '2':
+					$start= date ("YmdHis", time() - 43200);
+					break;
+					;;
+				case '3':
+					$start= date ("YmdHis", time() - 86400);
+					break;
+					;;
+				case '4':
+					$start= date ("YmdHis", time() - 172800);
+					break;
+					;;
+				case '5':
+					$start= date ("YmdHis", time() - 604800);
+					break;
+					;;
+				case '6':
+					$start= date ("YmdHis", time() - 1209600);
+					break;
+					;;
+				case '7':
+					$start= date ("YmdHis", time() - 2419200);
+					break;
+					;;
+			}
+
+			/* Assemble log level query */
+			if ($logfilter['log_level'] == '!All'){
+				$ll= "";
+			} else {
+				$ll= "AND log_level='".$logfilter['log_level']."'";
+			}
+			if ($logfilter['host'] == '!All'){
+				$hf= "";
+			} else {
+				$hf= "AND host='".$logfilter['host']."'";
+			}
+
+			/* Order setting */
+			if ($this->sort_direction == "down"){
+				$desc= "DESC";
+			} else {
+				$desc= "";
+			}
+
+			$end= date ("YmdHis");
+			$query= "SELECT * FROM golog WHERE message like '".$logfilter['regex']."' $ll $hf AND time_stamp <= $end AND time_stamp >= $start ORDER BY ".$this->fields[$this->sort]." $desc LIMIT ".$this->start.",25;";
+			@DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__, $query, "Database query");
+			$result = @mysql_query($query);
+			if ($result === false){
+				print_red(_("Query for log database failed!"));
+				return;
+			}
+
+			/* Display results */
+			$mod= 0;
+			while ($line = mysql_fetch_array($result, MYSQL_ASSOC)){
+				if ( ($mod++) & 1){
+					$col= "background-color: #ECECEC;";
+				} else {
+					$col= "background-color: #F5F5F5;";
+				}
+
+				$res.="<tr style=\"$col\">\n";
+				$res.="<td style=\"text-align:center\"><img src=\"".get_template_path('images/log_'.strtolower($line['log_level'])).".png\" title=\"Log level is '".$line['log_level']."'\"></td><td>".$line['host']."</td>";
+				$res.="<td>".$line['time_stamp']."</td><td width=100%>".$line['message']."</td>";
+				$res.="</tr>\n";
+			}
+			mysql_close($link);
+		}
 	}
-
-	/* Display results */
-	$res= "";
-	$mod= 0;
-	while ($line = mysql_fetch_array($result, MYSQL_ASSOC)){
-		if ( ($mod++) & 1){
-                        $col= "background-color: #ECECEC;";
-                } else {
-                        $col= "background-color: #F5F5F5;";
-                }
-
-		$res.="<tr style=\"$col\">\n";
-		$res.="<td style=\"text-align:center\"><img src=\"".get_template_path('images/log_'.strtolower($line['log_level'])).".png\" title=\"Log level is '".$line['log_level']."'\"></td><td>".$line['host']."</td>";
-		$res.="<td>".$line['time_stamp']."</td><td width=100%>".$line['message']."</td>";
-		$res.="</tr>\n";
-	}
-	mysql_close($link);
 
 	/* Show main page */
 	$smarty->assign("search_result", $res);

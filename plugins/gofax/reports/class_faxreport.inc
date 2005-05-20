@@ -130,7 +130,7 @@ class faxreport extends plugin
 		}
 		$queuing_time= $line['queuing_time'];
 
-		$_SESSION['userfilter']= $this->userfilter;
+		$_SESSION['fuserfilter']= $this->userfilter;
 	        $smarty->assign("plug", validate($_GET['plug']));
 	        $smarty->assign("detail", validate($_GET['detail']));
 
@@ -295,6 +295,9 @@ class faxreport extends plugin
         $smarty->assign("plug", validate($_GET['plug']));
 	$smarty->assign("launchimage", get_template_path('images/launch.png'));
 	$smarty->assign("search_image", get_template_path('images/search.png'));
+	for($i= 0; $i<7; $i++){
+		$smarty->assign("mode$i", "");
+	}
 	$smarty->assign("mode".$this->sort, "<img src=\"images/sort_".$this->sort_direction.
 			".png\" border=0 align=center>");
         return($smarty->fetch(get_template_path('contents.tpl', TRUE)));

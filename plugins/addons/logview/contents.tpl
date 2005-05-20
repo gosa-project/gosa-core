@@ -57,7 +57,7 @@
      <tr>
       <td><img align="center" border=0 src="{$ruleset_image}">&nbsp;{t}Ruleset{/t}</td>
       <td width=100%>
-       <input name="edit_rules" type="submit" value="{t}Edit{/t}">
+       <input name="edit_rules" type="submit" value="{t}Edit{/t}" disabled>
       </td>
      </tr>
      <tr>

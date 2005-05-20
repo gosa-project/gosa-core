@@ -33,7 +33,7 @@ if (!isset($_SESSION['ui'])){
 $ui= $_SESSION["ui"];
 
 /* User object present? */
-if (!isset($_SESSION['userfilter'])){
+if (!isset($_SESSION['fuserfilter'])){
   gosa_log ("Error: getfax.php called without propper session data");
   header ("Location: ../index.php");
   exit;
@@ -59,7 +59,7 @@ mysql_select_db("gofax") or die(_("Could not select database!"));
 $query = "SELECT id,uid FROM faxlog WHERE id = '".validate(stripcslashes($_GET['id']))."'";
 $result = mysql_query($query) or die(_("Database query failed!"));
 $line = mysql_fetch_array($result, MYSQL_ASSOC);
-if (!preg_match ("/'".$line["uid"]."'/", $_SESSION['userfilter'])){
+if (!preg_match ("/'".$line["uid"]."'/", $_SESSION['fuserfilter'])){
   die ("No permissions to view fax!");
 }
 
