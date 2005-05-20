@@ -128,10 +128,6 @@ class servkolab extends plugin {
 
     }
     /* Check Relayhost and if we have MX lookup enabled*/
-    if((isset($_POST['NewHost'])) || (isset($_POST['DelHost'])))    
-      {
-      $this->postfix_mxrelayenabled = $_POST['RelayMxSupport'] ;
-      }
     if($this->postfix_relayhost[0]=="[")
       {
       $this->postfix_mxrelayenabled=false;
@@ -156,18 +152,7 @@ class servkolab extends plugin {
     /* Initialize all attributes, that were submitted */
     foreach($this->attributes as $val) 
     {
-      /* If theres a button pressed, we need to check all attributes */
-      if ((isset($_POST['NewHost'])) || (isset($_POST['DelHost']))) 
-      {
-        /* Set var to value or to zero */
-        if (isset($_POST[$val])) 
-        {
-
-          $this->$val = $_POST[$val];
-        } else {
-          $this->$val = 0;
-        }
-      }
+      $smarty->assign($val."ACL",$this->acl,str_replace("_","-",$val));
       /* Tell smarty which variables we are useing */
       $smarty->assign($val, $this->$val);
       if (($this->$val != "FALSE") && (!empty($this->$val)))
