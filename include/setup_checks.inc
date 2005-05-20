@@ -1,6 +1,32 @@
 <?php
 
+
+
+
 function minimum_version($vercheck)
+{
+  $needver = split("\.",$vercheck);
+  $curver  = split("\.",phpversion());
+  
+  $c1 = count($needver);
+  $c2 = count($curver);
+
+  if($c2 >= $c1) $c1 = $c2;
+
+  for($i=0; $i < $c1 ; $i++)
+  {
+  if($needver[$i] > $curver[$i])
+    {
+    return(false);
+    }
+  if($needver[$i] < $curver[$i])
+    {
+    return(true);
+    }
+  } 
+}
+
+function minimum_versioni2($vercheck)
 {
   $minver = (int)str_replace('.', '', $vercheck);
   $curver = (int)str_replace('.', '', phpversion());
@@ -233,6 +259,11 @@ function perform_php_checks(&$faults)
   $msg.= check (	$faults, _("Checking for PHP version (>=4.1.0)"),
       _("PHP must be of version 4.1.0 or above for some functions and known bugs in PHP language."),
       minimum_version('4.1.0'));
+
+  $msg.= check (  $faults, _("Checking for PHP version (<=5)"),
+      _("PHP must be below version 5."),
+      !minimum_version('5'));
+
 
   $msg.= check (	$faults, _("Checking if register_globals is set to 'off'"),
       _("register_globals is a PHP mechanism to register all global varibales to be accessible from scripts without changing the scope. This may be a security risk. GOsa will run in both modes."),
