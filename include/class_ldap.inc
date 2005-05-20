@@ -152,7 +152,7 @@ class LDAP{
       if ($basedn == "")
         $basedn = $this->basedn;
       $this->sr = @ldap_list($this->cid, $basedn, $filter);
-      $ldap->error = @ldap_error($this->cid);
+      $this->error = @ldap_error($this->cid);
       $this->resetResult();
       $this->hasres=true;
       return($this->sr);
@@ -208,7 +208,7 @@ class LDAP{
           $att= @ldap_get_attributes($this->cid, $this->re);
           $att['dn']= @ldap_get_dn($this->cid, $this->re);
         }
-        $ldap->error = @ldap_error($this->cid);
+        $this->error = @ldap_error($this->cid);
         if (!isset($att)){
           $att= array();
         }
@@ -249,7 +249,7 @@ class LDAP{
           {
           $rv = @ldap_get_dn($this->cid, $this->re);
         
-          $ldap->error = @ldap_error($this->cid);
+          $this->error = @ldap_error($this->cid);
           $rv= preg_replace("/[ ]*,[ ]*/", ",", $rv);
           return($rv);
            }
@@ -268,7 +268,7 @@ class LDAP{
     if($this->hascon){
       if($this->hasres){
         $rv = @ldap_count_entries($this->cid, $this->sr);
-        $ldap->error = @ldap_error($this->cid);
+        $this->error = @ldap_error($this->cid);
         return($rv);
       }else{
         $this->error = "Perform a Fetch with no Search";
@@ -288,7 +288,7 @@ class LDAP{
         $dn = $this->basedn;
 
       $r = @ldap_mod_del($this->cid, $dn, $attrs);
-      $ldap->error = @ldap_error($this->cid);
+      $this->error = @ldap_error($this->cid);
       return($r);
     }else{
       $this->error = "Could not connect to LDAP server";
@@ -304,7 +304,7 @@ class LDAP{
         $dn = $this->basedn;
 
       $r = @ldap_mod_replace($this->cid, $dn, $attrs);
-      $ldap->error = @ldap_error($this->cid);
+      $this->error = @ldap_error($this->cid);
       return($r);
     }else{
       $this->error = "Could not connect to LDAP server";

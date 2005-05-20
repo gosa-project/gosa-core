@@ -1515,21 +1515,27 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
 
   $svn_path = '$HeadURL$';
 
-  if (!preg_match('%/gosa/trunk/%', $svn_path)){
-    gosa_log ("PHP error: $errstr ($errfile, line $errline)");
-    return;
-  }
-  
   /* FIXME: workaround for buggy imap_open */
   if (preg_match('/imap_open/', $errstr)){
     return;
   }
 
+  /* FIXME: workaround for PHP5 */
+  if (preg_match('/var: Deprecated./', $errstr)){
+    return;
+  }
+
+
+  if (!preg_match('%/gosa/trunk/%', $svn_path)){
+    gosa_log ("PHP error: $errstr ($errfile, line $errline)");
+    return;
+  }
+  
   /* Extract traceback data */
   $trace= debug_backtrace();
   
   /* Create error header */
-  $error_collector.= "<table width=100% cellspacing=0 style='background-color:#402005;color:white;border:2px solid red'><tr><td colspan=3><h1>"._("PHP error")."</h1> \"$errstr\"</td></tr>";
+  $error_collector.= "<table width=100% cellspacing=0 style='background-color:#402005;color:white;border:2px solid red'><tr><td colspan=3><h1 style='color:white'>"._("PHP error")." \"$errstr\"</h1></td></tr>";
   
   /* Generate trace history */
   for ($index= 1; $index<count($trace); $index++){
