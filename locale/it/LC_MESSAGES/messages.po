@@ -429,7 +429,7 @@ msgstr ""
 
 #: plugins/personal/mail/class_mailAccount.inc:672
 #: plugins/personal/mail/class_mailAccount.inc:676
-#: plugins/addons/addressbook/class_addressbook.inc:550
+#: plugins/addons/addressbook/class_addressbook.inc:551
 msgid "Please enter a valid email address in 'Primary address' field."
 msgstr ""
 
@@ -1438,7 +1438,7 @@ msgstr ""
 #: plugins/personal/generic/generic.tpl:24
 #: plugins/addons/addressbook/address_edit.tpl:20
 #: plugins/addons/addressbook/contents.tpl:14
-#: plugins/addons/addressbook/class_addressbook.inc:484
+#: plugins/addons/addressbook/class_addressbook.inc:485
 #: plugins/addons/addressbook/address_info.tpl:16
 #: plugins/admin/users/template.tpl:19
 msgid "Name"
@@ -1446,7 +1446,7 @@ msgstr "Cognome"
 
 #: plugins/personal/generic/generic.tpl:30
 #: plugins/addons/addressbook/address_edit.tpl:20
-#: plugins/addons/addressbook/class_addressbook.inc:484
+#: plugins/addons/addressbook/class_addressbook.inc:485
 #: plugins/admin/users/template.tpl:23
 msgid "Given name"
 msgstr "Nome"
@@ -1726,7 +1726,7 @@ msgid "You have no permissions to move a user from the original 'Base'."
 msgstr ""
 
 #: plugins/personal/generic/class_user.inc:856
-#: plugins/addons/addressbook/class_addressbook.inc:507
+#: plugins/addons/addressbook/class_addressbook.inc:508
 #: plugins/admin/users/class_userManagement.inc:422
 msgid "The required field 'Name' is not set."
 msgstr ""
@@ -1736,7 +1736,7 @@ msgid "There's already a person with this 'Login' in the database."
 msgstr ""
 
 #: plugins/personal/generic/class_user.inc:871
-#: plugins/addons/addressbook/class_addressbook.inc:511
+#: plugins/addons/addressbook/class_addressbook.inc:512
 #: plugins/admin/users/class_userManagement.inc:425
 msgid "The required field 'Given name' is not set."
 msgstr ""
@@ -1763,40 +1763,40 @@ msgstr ""
 
 #: plugins/personal/generic/class_user.inc:894
 #: plugins/personal/generic/class_user.inc:922
-#: plugins/addons/addressbook/class_addressbook.inc:517
-#: plugins/addons/addressbook/class_addressbook.inc:545
+#: plugins/addons/addressbook/class_addressbook.inc:518
+#: plugins/addons/addressbook/class_addressbook.inc:546
 #: plugins/admin/departments/class_departmentGeneric.inc:155
 msgid "The field 'Name' contains invalid characters."
 msgstr ""
 
 #: plugins/personal/generic/class_user.inc:897
 #: plugins/personal/generic/class_user.inc:919
-#: plugins/addons/addressbook/class_addressbook.inc:520
-#: plugins/addons/addressbook/class_addressbook.inc:542
+#: plugins/addons/addressbook/class_addressbook.inc:521
+#: plugins/addons/addressbook/class_addressbook.inc:543
 msgid "The field 'Given name' contains invalid characters."
 msgstr ""
 
 #: plugins/personal/generic/class_user.inc:902
 #: plugins/personal/generic/class_user.inc:905
-#: plugins/addons/addressbook/class_addressbook.inc:525
-#: plugins/addons/addressbook/class_addressbook.inc:528
+#: plugins/addons/addressbook/class_addressbook.inc:526
+#: plugins/addons/addressbook/class_addressbook.inc:529
 #: plugins/admin/departments/class_departmentGeneric.inc:158
 msgid "The field 'Phone' contains an invalid phone number."
 msgstr ""
 
 #: plugins/personal/generic/class_user.inc:908
-#: plugins/addons/addressbook/class_addressbook.inc:531
+#: plugins/addons/addressbook/class_addressbook.inc:532
 #: plugins/admin/departments/class_departmentGeneric.inc:161
 msgid "The field 'Fax' contains an invalid phone number."
 msgstr ""
 
 #: plugins/personal/generic/class_user.inc:911
-#: plugins/addons/addressbook/class_addressbook.inc:534
+#: plugins/addons/addressbook/class_addressbook.inc:535
 msgid "The field 'Mobile' contains an invalid phone number."
 msgstr ""
 
 #: plugins/personal/generic/class_user.inc:914
-#: plugins/addons/addressbook/class_addressbook.inc:537
+#: plugins/addons/addressbook/class_addressbook.inc:538
 msgid "The field 'Pager' contains an invalid phone number."
 msgstr ""
 
@@ -2764,47 +2764,47 @@ msgstr ""
 msgid "global addressbook"
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:449
+#: plugins/addons/addressbook/class_addressbook.inc:450
 msgid "organizations user database"
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:453
+#: plugins/addons/addressbook/class_addressbook.inc:454
 #, php-format
 msgid "Contact stored in %s"
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:455
+#: plugins/addons/addressbook/class_addressbook.inc:456
 msgid "Creating new entry in"
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:484
+#: plugins/addons/addressbook/class_addressbook.inc:485
 #: plugins/addons/logview/class_logview.inc:62
 #: plugins/addons/logview/class_logview.inc:76
 msgid "All"
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:485
+#: plugins/addons/addressbook/class_addressbook.inc:486
 msgid "Work phone"
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:485
+#: plugins/addons/addressbook/class_addressbook.inc:486
 msgid "Cell phone"
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:486
+#: plugins/addons/addressbook/class_addressbook.inc:487
 msgid "Home phone"
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:486
+#: plugins/addons/addressbook/class_addressbook.inc:487
 msgid "User ID"
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:558
+#: plugins/addons/addressbook/class_addressbook.inc:559
 msgid ""
 "Cannot create a unique DN for your entry. Please fill more formular fields."
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:570
+#: plugins/addons/addressbook/class_addressbook.inc:571
 msgid ""
 "You have no permissions to create or modify a global address book entry."
 msgstr ""
@@ -3874,9 +3874,9 @@ msgid "You have no permissions to create a component on this 'Base'."
 msgstr ""
 
 #: plugins/admin/systems/class_winGeneric.inc:166
-#: plugins/admin/systems/class_terminalGeneric.inc:233
+#: plugins/admin/systems/class_terminalGeneric.inc:234
 #: plugins/admin/systems/class_servGeneric.inc:178
-#: plugins/admin/systems/class_workstationGeneric.inc:240
+#: plugins/admin/systems/class_workstationGeneric.inc:241
 #: plugins/admin/systems/class_printGeneric.inc:132
 #: plugins/admin/systems/class_componentGeneric.inc:126
 #: plugins/admin/systems/class_phoneGeneric.inc:129
@@ -4008,13 +4008,13 @@ msgstr ""
 msgid "Choose the phone located at the current terminal"
 msgstr ""
 
-#: plugins/admin/systems/class_terminalService.inc:245
-#: plugins/admin/systems/class_terminalService.inc:250
+#: plugins/admin/systems/class_terminalService.inc:246
+#: plugins/admin/systems/class_terminalService.inc:251
 msgid "Please specify a valid VSync range."
 msgstr ""
 
-#: plugins/admin/systems/class_terminalService.inc:260
-#: plugins/admin/systems/class_terminalService.inc:265
+#: plugins/admin/systems/class_terminalService.inc:261
+#: plugins/admin/systems/class_terminalService.inc:266
 msgid "Please specify a valid HSync range."
 msgstr ""
 
@@ -4149,11 +4149,11 @@ msgstr ""
 msgid "Wake up"
 msgstr ""
 
-#: plugins/admin/systems/class_terminalGeneric.inc:216
+#: plugins/admin/systems/class_terminalGeneric.inc:217
 msgid "You have no permissions to create a terminal on this 'Base'."
 msgstr ""
 
-#: plugins/admin/systems/class_terminalGeneric.inc:220
+#: plugins/admin/systems/class_terminalGeneric.inc:221
 msgid "The required field 'Terminal name' is not set."
 msgstr ""
 
@@ -4298,11 +4298,11 @@ msgstr ""
 msgid "This 'dn' has no workstation features."
 msgstr ""
 
-#: plugins/admin/systems/class_workstationGeneric.inc:223
+#: plugins/admin/systems/class_workstationGeneric.inc:224
 msgid "You have no permissions to create a workstation on this 'Base'."
 msgstr ""
 
-#: plugins/admin/systems/class_workstationGeneric.inc:227
+#: plugins/admin/systems/class_workstationGeneric.inc:228
 msgid "The required field 'Workstation name' is not set."
 msgstr ""
 
@@ -5416,7 +5416,7 @@ msgstr ""
 
 #: include/functions.inc:427
 msgid ""
-"Getting the lock from LDAP failed. Parameters are not sed correctly, please "
+"Getting the lock from LDAP failed. Parameters are not set correctly, please "
 "check the source!"
 msgstr ""
 
@@ -6012,14 +6012,14 @@ msgstr ""
 
 #: include/setup_checks.inc:744 include/setup_checks.inc:842
 msgid ""
-"Can't bind to the specified LDAP server! Please make sure that is reachable "
-"for GOsa."
+"Can't bind to the specified LDAP server! Please make sure that it is "
+"reachable for GOsa."
 msgstr ""
 
 #: include/setup_checks.inc:836
 msgid ""
-"Can't bind to the specified LDAP server!. Please make sure that is reachable "
-"for GOsa."
+"Can't bind to the specified LDAP server!. Please make sure that it is "
+"reachable for GOsa."
 msgstr ""
 
 #: include/setup_checks.inc:856

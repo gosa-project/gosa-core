@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schr�der <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-05-20 18:01+0200\n"
+"PO-Revision-Date: 2005-05-20 18:53+0200\n"
 "Last-Translator:  <(null)>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -188,7 +188,7 @@ msgstr "W�hlen Sie den Mail-Server, auf dem dieses Konto verwaltet werden soll"
 
 #: plugins/personal/mail/generic.tpl:21 plugins/admin/groups/mail.tpl:24
 msgid "Quota usage"
-msgstr "Postfach-Nutzung"
+msgstr "Kontingent-Nutzung"
 
 #: plugins/personal/mail/generic.tpl:28 plugins/admin/groups/mail.tpl:31
 #: plugins/admin/systems/class_terminalInfo.inc:136
@@ -197,7 +197,7 @@ msgstr "nicht definiert"
 
 #: plugins/personal/mail/generic.tpl:33 plugins/admin/groups/mail.tpl:36
 msgid "Quota size"
-msgstr "Max. Postfach-Gr��e"
+msgstr "Kontingent-Gr��e"
 
 #: plugins/personal/mail/generic.tpl:47 plugins/admin/groups/mail.tpl:46
 msgid "Alternative addresses"
@@ -461,7 +461,7 @@ msgstr "Das ben�tigte Feld 'Prim�re Adresse' ist nicht gesetzt."
 
 #: plugins/personal/mail/class_mailAccount.inc:672
 #: plugins/personal/mail/class_mailAccount.inc:676
-#: plugins/addons/addressbook/class_addressbook.inc:550
+#: plugins/addons/addressbook/class_addressbook.inc:551
 msgid "Please enter a valid email address in 'Primary address' field."
 msgstr ""
 "Bitte geben Sie eine g�ltige E-Mail-Adresse in das Feld 'Prim�re Adresse' "
@@ -476,7 +476,7 @@ msgstr ""
 #: plugins/personal/mail/class_mailAccount.inc:689
 #: plugins/admin/groups/class_groupMail.inc:625
 msgid "Value in 'Quota size' is not valid."
-msgstr "Das Feld 'Quota-Gr��e' enth�lt eine ung�ltige Eingabe."
+msgstr "Das Feld 'Kontingent-Gr��e' enth�lt einen ung�ltigen Wert."
 
 #: plugins/personal/mail/class_mailAccount.inc:698
 #: plugins/admin/groups/class_groupMail.inc:634
@@ -870,7 +870,7 @@ msgstr "Zeige die Systeme der Abteilung"
 #: plugins/personal/posix/trust_machines.tpl:35
 #: plugins/admin/systems/headpage.tpl:61
 msgid "Display systems matching"
-msgstr "Zeige die Systeme, auf die das folgendes passt"
+msgstr "Zeige die Systeme, auf die das Folgende passt"
 
 #: plugins/personal/posix/generic.tpl:7 plugins/personal/samba/samba3.tpl:13
 #: plugins/personal/samba/samba3.tpl:65
@@ -1490,10 +1490,10 @@ msgid ""
 "For that reason you've to enter your password at this point again. GOsa will "
 "then encode it with the selected method."
 msgstr ""
-"Sie haben die Methode mit der ihr Passwort in der LDAP-Datenbank gespeichert "
-"wird ge�ndert. Aus diesem Grunde m�ssen Sie das Passwort an dieser Stelle "
-"noch einmal eingeben damit es von GOsa in der gew�nschten "
-"Verschl�sselungsart abgelegt werden kann."
+"Sie haben die Verschl�sselungsart, mit der Ihr Passwort in der LDAP-"
+"Datenbank gespeichert wird, ge�ndert. Aus diesem Grund m�ssen Sie das "
+"Passwort an dieser Stelle noch einmal eingeben, damit es von GOsa in der "
+"gew�nschten Verschl�sselung abgelegt werden kann."
 
 #: plugins/personal/generic/generic_picture.tpl:6
 #: plugins/personal/generic/generic.tpl:15
@@ -1520,7 +1520,7 @@ msgstr "Bild �ndern"
 #: plugins/personal/generic/generic.tpl:24
 #: plugins/addons/addressbook/address_edit.tpl:20
 #: plugins/addons/addressbook/contents.tpl:14
-#: plugins/addons/addressbook/class_addressbook.inc:484
+#: plugins/addons/addressbook/class_addressbook.inc:485
 #: plugins/addons/addressbook/address_info.tpl:16
 #: plugins/admin/users/template.tpl:19
 msgid "Name"
@@ -1528,7 +1528,7 @@ msgstr "Name"
 
 #: plugins/personal/generic/generic.tpl:30
 #: plugins/addons/addressbook/address_edit.tpl:20
-#: plugins/addons/addressbook/class_addressbook.inc:484
+#: plugins/addons/addressbook/class_addressbook.inc:485
 #: plugins/admin/users/template.tpl:23
 msgid "Given name"
 msgstr "Vorname"
@@ -1814,7 +1814,7 @@ msgstr ""
 "zu verschieben."
 
 #: plugins/personal/generic/class_user.inc:856
-#: plugins/addons/addressbook/class_addressbook.inc:507
+#: plugins/addons/addressbook/class_addressbook.inc:508
 #: plugins/admin/users/class_userManagement.inc:422
 msgid "The required field 'Name' is not set."
 msgstr "Das ben�tigte Feld 'Name' ist nicht gesetzt."
@@ -1824,7 +1824,7 @@ msgid "There's already a person with this 'Login' in the database."
 msgstr "Die von Ihnen angegebene 'Kennung' ist bereits vergeben."
 
 #: plugins/personal/generic/class_user.inc:871
-#: plugins/addons/addressbook/class_addressbook.inc:511
+#: plugins/addons/addressbook/class_addressbook.inc:512
 #: plugins/admin/users/class_userManagement.inc:425
 msgid "The required field 'Given name' is not set."
 msgstr "Das ben�tigte Feld 'Vorname' ist nicht gesetzt."
@@ -1855,40 +1855,40 @@ msgstr "Das Feld 'Homepage' enth�lt eine ung�ltige Internetadresse."
 
 #: plugins/personal/generic/class_user.inc:894
 #: plugins/personal/generic/class_user.inc:922
-#: plugins/addons/addressbook/class_addressbook.inc:517
-#: plugins/addons/addressbook/class_addressbook.inc:545
+#: plugins/addons/addressbook/class_addressbook.inc:518
+#: plugins/addons/addressbook/class_addressbook.inc:546
 #: plugins/admin/departments/class_departmentGeneric.inc:155
 msgid "The field 'Name' contains invalid characters."
 msgstr "Das Feld 'Name' enth�lt ung�ltige Zeichen."
 
 #: plugins/personal/generic/class_user.inc:897
 #: plugins/personal/generic/class_user.inc:919
-#: plugins/addons/addressbook/class_addressbook.inc:520
-#: plugins/addons/addressbook/class_addressbook.inc:542
+#: plugins/addons/addressbook/class_addressbook.inc:521
+#: plugins/addons/addressbook/class_addressbook.inc:543
 msgid "The field 'Given name' contains invalid characters."
 msgstr "Das Feld 'Vorname' enth�lt ung�ltige Zeichen."
 
 #: plugins/personal/generic/class_user.inc:902
 #: plugins/personal/generic/class_user.inc:905
-#: plugins/addons/addressbook/class_addressbook.inc:525
-#: plugins/addons/addressbook/class_addressbook.inc:528
+#: plugins/addons/addressbook/class_addressbook.inc:526
+#: plugins/addons/addressbook/class_addressbook.inc:529
 #: plugins/admin/departments/class_departmentGeneric.inc:158
 msgid "The field 'Phone' contains an invalid phone number."
 msgstr "Das Feld 'Telefon' enth�lt eine ung�ltige Telefonnummer."
 
 #: plugins/personal/generic/class_user.inc:908
-#: plugins/addons/addressbook/class_addressbook.inc:531
+#: plugins/addons/addressbook/class_addressbook.inc:532
 #: plugins/admin/departments/class_departmentGeneric.inc:161
 msgid "The field 'Fax' contains an invalid phone number."
 msgstr "Das Feld 'Fax' enth�lt eine ung�ltige Telefonnummer."
 
 #: plugins/personal/generic/class_user.inc:911
-#: plugins/addons/addressbook/class_addressbook.inc:534
+#: plugins/addons/addressbook/class_addressbook.inc:535
 msgid "The field 'Mobile' contains an invalid phone number."
 msgstr "Das Feld 'Mobil' enth�lt eine ung�ltige Telefonnummer"
 
 #: plugins/personal/generic/class_user.inc:914
-#: plugins/addons/addressbook/class_addressbook.inc:537
+#: plugins/addons/addressbook/class_addressbook.inc:538
 msgid "The field 'Pager' contains an invalid phone number."
 msgstr "Das Feld 'Pager' enth�lt eine ung�ltige Telefonnummer."
 
@@ -1920,7 +1920,7 @@ msgstr "Inhaltsfilterung nur w�hrend der Arbeitszeit"
 
 #: plugins/personal/connectivity/proxy.tpl:42
 msgid "Restrict proxy usage by quota"
-msgstr "Proxynutzung durch Quotas einschr�nken"
+msgstr "Proxynutzung durch Kontingent einschr�nken"
 
 #: plugins/personal/connectivity/proxy.tpl:52
 msgid "per"
@@ -1971,11 +1971,11 @@ msgstr "Anonym"
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:224
 msgid "The value specified as Free Busy future needs to be an integer."
-msgstr "Der Wert f�r Frei/Gebucht Zukunft mu� eine Ganzzahl sein."
+msgstr "Der Wert f�r Intervall mu� eine Ganzzahl sein."
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:229
 msgid "The value specified as Free Busy Information URL is invalid."
-msgstr "Der Wert f�r Frei/Gebucht Information URL is ung�ltig."
+msgstr "Der Wert f�r Information URL is ung�ltig."
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:243
 #, php-format
@@ -2116,7 +2116,7 @@ msgstr "Download-Bandbreite"
 
 #: plugins/personal/connectivity/pureftpd.tpl:31
 msgid "Quota"
-msgstr "Quota"
+msgstr "Kontingent"
 
 #: plugins/personal/connectivity/pureftpd.tpl:35
 msgid "Files"
@@ -2890,49 +2890,49 @@ msgstr "Sende eine Mail an %s"
 msgid "global addressbook"
 msgstr "dem globalen Adressbuch"
 
-#: plugins/addons/addressbook/class_addressbook.inc:449
+#: plugins/addons/addressbook/class_addressbook.inc:450
 msgid "organizations user database"
 msgstr "Nutzerdatenbank der Organisation"
 
-#: plugins/addons/addressbook/class_addressbook.inc:453
+#: plugins/addons/addressbook/class_addressbook.inc:454
 #, php-format
 msgid "Contact stored in %s"
 msgstr "Kontakt ist in %s abgelegt"
 
-#: plugins/addons/addressbook/class_addressbook.inc:455
+#: plugins/addons/addressbook/class_addressbook.inc:456
 msgid "Creating new entry in"
 msgstr "Erzeugen eines neuen Eintrag in"
 
-#: plugins/addons/addressbook/class_addressbook.inc:484
+#: plugins/addons/addressbook/class_addressbook.inc:485
 #: plugins/addons/logview/class_logview.inc:62
 #: plugins/addons/logview/class_logview.inc:76
 msgid "All"
 msgstr "Alle"
 
-#: plugins/addons/addressbook/class_addressbook.inc:485
+#: plugins/addons/addressbook/class_addressbook.inc:486
 msgid "Work phone"
 msgstr "Telefon (Arbeit)"
 
-#: plugins/addons/addressbook/class_addressbook.inc:485
+#: plugins/addons/addressbook/class_addressbook.inc:486
 msgid "Cell phone"
 msgstr "Mobiltelefon"
 
-#: plugins/addons/addressbook/class_addressbook.inc:486
+#: plugins/addons/addressbook/class_addressbook.inc:487
 msgid "Home phone"
 msgstr "Telefon (zu Hause)"
 
-#: plugins/addons/addressbook/class_addressbook.inc:486
+#: plugins/addons/addressbook/class_addressbook.inc:487
 msgid "User ID"
 msgstr "Benutzer ID"
 
-#: plugins/addons/addressbook/class_addressbook.inc:558
+#: plugins/addons/addressbook/class_addressbook.inc:559
 msgid ""
 "Cannot create a unique DN for your entry. Please fill more formular fields."
 msgstr ""
-"Es kann keine eindeutige DN f�r diesen Eintrag erzeugt werden. F�llen Sie "
+"Es kann kein eindeutiger DN f�r diesen Eintrag erzeugt werden. F�llen Sie "
 "zus�tzliche Felder aus."
 
-#: plugins/addons/addressbook/class_addressbook.inc:570
+#: plugins/addons/addressbook/class_addressbook.inc:571
 msgid ""
 "You have no permissions to create or modify a global address book entry."
 msgstr ""
@@ -3000,9 +3000,10 @@ msgid ""
 "conformance."
 msgstr ""
 "Dieses Modul erm�glicht es Ihnen, einen Satz von Eintr�gen als LDIF in Ihre "
-"laufende LDAP Datenbank zu importieren. Sie k�nnen diese Funktionzum "
-"hinzuf�gen oder aktualisieren existierender Eintr�ge nutzen. BeachtenSie "
-"bitte, dass GOsa die LDIF Datei nicht auf Konformit�t pr�ft."
+"laufende LDAP-Datenbank zu importieren. Sie k�nnen diese Funktion "
+"beispielsweise zum Hinzuf�gen oder Aktualisieren existierender Eintr�ge "
+"nutzen. Beachten Sie dabei bitte, dass GOsa die LDIF-Datei nicht auf "
+"Konformit�t pr�ft."
 
 #: plugins/addons/ldapmanager/contentimport.tpl:12
 msgid "Import LDIF File"
@@ -3063,7 +3064,8 @@ msgstr "Gew�hlte Vorlage"
 
 #: plugins/addons/ldapmanager/class_import.inc:38
 msgid "You've no permission to do LDAP imports."
-msgstr "Sie haben keine Berechtigung um LDAP Daten zu importieren."
+msgstr ""
+"Sie haben keine Berechtigung um Daten in die LDAP-Datenbank zu importieren."
 
 #: plugins/addons/ldapmanager/class_import.inc:104
 msgid "Unknown Error"
@@ -3075,9 +3077,9 @@ msgid ""
 "the running LDAP directory as ldif. You may save these files for backup "
 "purpose or when initializing a new server."
 msgstr ""
-"Dieses Modul erm�glicht Ihnen den Download der kompletten LDAP Datenbank, "
-"die momentan in Verwendung ist. Die �bertragenen Dateien k�nnen einerseits "
-"zur Datensicherung und andererseits zur Einrichtung eines neuen Servers "
+"Dieses Modul erm�glicht Ihnen den Download der kompletten LDAP-Datenbank, "
+"die momentan in Verwendung ist. Die �bertragenen Dateien k�nnen "
+"beispielsweise zur Datensicherung oder zur Einrichtung eines neuen Servers "
 "benutzt werden."
 
 #: plugins/addons/ldapmanager/contentexport.tpl:13
@@ -3108,13 +3110,12 @@ msgstr ""
 
 #: plugins/addons/ldapmanager/contentexport.tpl:63
 msgid "Click here to save the LDAP Export "
-msgstr ""
-"Hier klicken, um die gesamte LDAP Datenbank in eine Datei zu exportieren"
+msgstr "Hier klicken, um die exportierten Daten in eine Datei zu speichern"
 
 #: plugins/addons/ldapmanager/class_ldif.inc:7
 #: plugins/addons/ldapmanager/main.inc:23
 msgid "LDAP manager"
-msgstr "LDAP Manager"
+msgstr "LDAP-Manager"
 
 #: plugins/addons/ldapmanager/class_export.inc:7
 msgid "CSV import"
@@ -3122,7 +3123,8 @@ msgstr "CSV Import"
 
 #: plugins/addons/ldapmanager/class_export.inc:35
 msgid "You've no permission to do LDAP exports."
-msgstr "Sie haben keine Berechtigung um LDAP Daten zu exportieren."
+msgstr ""
+"Sie haben keine Berechtigung um Daten aus der LDAP-Datenbank zu exportieren."
 
 #: plugins/addons/ldapmanager/class_export.inc:76
 msgid "Error while exporting the requested entries!"
@@ -3266,7 +3268,7 @@ msgstr "Es ist Ihnen nicht erlaubt, diese Gruppe zu l�schen!"
 #: plugins/admin/groups/class_groupGeneric.inc:109
 msgid "Can't find this groups SID in LDAP or in your configuration file!"
 msgstr ""
-"Die SID dieser Gruppe kann weder im LDAP noch in der Configurationsdatei "
+"Die SID dieser Gruppe kann weder im LDAP noch in der Konfigurationsdatei "
 "gefunden werden!"
 
 #: plugins/admin/groups/class_groupGeneric.inc:141
@@ -3378,7 +3380,7 @@ msgstr "schreiben"
 
 #: plugins/admin/groups/class_groupMail.inc:179
 msgid "This 'dn' has no valid mail extensions."
-msgstr "Diese 'dn' hat keine Mail-Erweiterungen."
+msgstr "Dieser 'DN' hat keine Mail-Erweiterungen."
 
 #: plugins/admin/groups/class_groupMail.inc:244
 msgid "You're trying to add an invalid email address "
@@ -3582,7 +3584,7 @@ msgstr "Vorlage"
 
 #: plugins/admin/users/template.tpl:2
 msgid "Creating a new user using templates"
-msgstr "Erzeugen eines neuen Benutzer �ber Vorlagen"
+msgstr "Erzeugen eines neuen Benutzer aus einer Vorlage"
 
 #: plugins/admin/users/template.tpl:6
 msgid ""
@@ -3794,7 +3796,7 @@ msgstr "Nur ausf�hrbar f�r Gruppen-Mitglieder"
 
 #: plugins/admin/applications/generic.tpl:63
 msgid "Replace user configuration on startup"
-msgstr "Konfiguration bei jedem Start austauschen"
+msgstr "Konfiguration bei jedem Start ersetzen"
 
 #: plugins/admin/applications/generic.tpl:67
 msgid "Place icon on members desktop"
@@ -3833,7 +3835,7 @@ msgid ""
 "-Edit- and -New...- will execute an assistant to aid you in editing "
 "properties. -Delete- will ask for confirmation before removing applications."
 msgstr ""
-"Editieren- und -Neu...- rufen einen Assistenten auf, der Ihnen bei der "
+"Bearbeiten- und -Neu...- rufen einen Assistenten auf, der Ihnen bei der "
 "Bearbeitung der Eigenschaften hilft. -L�schen- f�hrt eine "
 "Sicherheitsabfragedurch bevor der Anwendungseintrag gel�scht wird."
 
@@ -3856,7 +3858,7 @@ msgstr "Anwendungsverwaltung"
 
 #: plugins/admin/applications/class_applicationGeneric.inc:57
 msgid "This 'dn' is no application."
-msgstr "Diese 'dn' ist keine Anwendung."
+msgstr "Dieser 'DN' ist keine Anwendung."
 
 #: plugins/admin/applications/class_applicationGeneric.inc:146
 msgid "The specified picture has not been uploaded correctly."
@@ -3864,8 +3866,7 @@ msgstr "Das angegebene Bild wurde nicht korrekt �bertragen."
 
 #: plugins/admin/applications/class_applicationGeneric.inc:227
 msgid "You have no permissions to create a application on this 'Base'."
-msgstr ""
-"Sie haben keine Berechtigung eine Anwendung unter dieser 'Basis' anzulegen."
+msgstr "Sie haben keine Berechtigung eine Anwendung unterhalb dieser 'Basis' anzulegen."
 
 #: plugins/admin/applications/class_applicationGeneric.inc:232
 msgid "Required field 'Name' is not filled."
@@ -3955,9 +3956,9 @@ msgid ""
 "contents of your LDAP tree in a file. So - if you've done so - press "
 "<i>Delete</i> to continue or <i>Cancel</i> to abort."
 msgstr ""
-"Eine Sicherung der Daten des LDAP-Baums bietet sich an. Wenn Sie soweit sind "
-"dr�cken Sie <i>Beenden</i> um Fortzufahren oder <i>Abbrechen</i> um "
-"Abzubrechen."
+"Eine Sicherung der LDAP-Datenbank bietet sich an. Wenn Sie bereit "
+"sind, dr�cken Sie <i>Beenden</i> um Fortzufahren oder <i>Abbrechen</i>, um "
+"den Vorgang zu beenden."
 
 #: plugins/admin/departments/headpage.tpl:6
 msgid "List of departments"
@@ -4001,8 +4002,7 @@ msgstr "Abteilungsverwaltung"
 
 #: plugins/admin/departments/class_departmentGeneric.inc:129
 msgid "You have no permissions to create a department on this 'Base'."
-msgstr ""
-"Sie haben keine Berechtigung eine Abteilung unterhalb dieser 'Basis' "
+msgstr "Sie haben keine Berechtigung eine Abteilung unterhalb dieser 'Basis' "
 "anzulegen."
 
 #: plugins/admin/departments/class_departmentGeneric.inc:136
@@ -4030,8 +4030,7 @@ msgstr "Abteilungen"
 #: plugins/admin/departments/class_departmentManagement.inc:130
 #, php-format
 msgid "You're about to delete the whole LDAP subtree placed under '%s'."
-msgstr ""
-"Sie sind dabei, einen gesamten LDAP-Zweig unterhalb von '%s' zu l�schen."
+msgstr "Sie sind dabei, einen gesamten LDAP-Baum unterhalb von '%s' zu l�schen."
 
 #: plugins/admin/departments/class_departmentManagement.inc:145
 msgid "You have no permission to remove this department."
@@ -4042,12 +4041,11 @@ msgstr "Sie haben keine Berechtigung diese Abteilung zu entfernen."
 #: plugins/admin/systems/class_terminalStartup.inc:75
 #: plugins/admin/systems/class_terminalGeneric.inc:126
 msgid "This 'dn' has no terminal features."
-msgstr "Diese 'dn' hat keine Terminal-Erweiterungen."
+msgstr "Dieser 'DN' hat keine Terminal-Erweiterungen."
 
 #: plugins/admin/systems/class_terminalInfo.inc:68
 msgid "This is a virtual terminal which has no properties to show here."
-msgstr ""
-"Dies ist ein virtuelles Terminal, deshalb k�nnen an dieser Stelle keine "
+msgstr "Dies ist ein virtuelles Terminal, deshalb k�nnen an dieser Stelle keine "
 "Informationen angezeigt werden."
 
 #: plugins/admin/systems/class_terminalInfo.inc:80
@@ -4090,21 +4088,19 @@ msgstr "Diese 'dn' hat keine Netzwerk-Erweiterungen."
 #: plugins/admin/systems/class_winGeneric.inc:156
 #: plugins/admin/systems/class_componentGeneric.inc:116
 msgid "You have no permissions to create a component on this 'Base'."
-msgstr ""
-"Sie haben keine Berechtigung, eine Komponente innerhalb dieser 'Basis' "
+msgstr "Sie haben keine Berechtigung, eine Komponente unterhalb dieser 'Basis' "
 "anzulegen."
 
 #: plugins/admin/systems/class_winGeneric.inc:166
-#: plugins/admin/systems/class_terminalGeneric.inc:233
+#: plugins/admin/systems/class_terminalGeneric.inc:234
 #: plugins/admin/systems/class_servGeneric.inc:178
-#: plugins/admin/systems/class_workstationGeneric.inc:240
+#: plugins/admin/systems/class_workstationGeneric.inc:241
 #: plugins/admin/systems/class_printGeneric.inc:132
 #: plugins/admin/systems/class_componentGeneric.inc:126
 #: plugins/admin/systems/class_phoneGeneric.inc:129
 #, php-format
 msgid "There is already an entry '%s' in the base choosen by you"
-msgstr ""
-"Der Eintrag '%s' ist in der von Ihnen ausgew�hlten Basis bereits vorhanden"
+msgstr "Der Eintrag '%s' ist in der von Ihnen ausgew�hlten Basis bereits vorhanden"
 
 #: plugins/admin/systems/info.tpl:1
 msgid "System information"
@@ -4230,13 +4226,13 @@ msgstr "Citrix Metaframe"
 msgid "Choose the phone located at the current terminal"
 msgstr "W�hlen Sie das Telefon, das sich am momentanen Arbeitsplatz befindet."
 
-#: plugins/admin/systems/class_terminalService.inc:245
-#: plugins/admin/systems/class_terminalService.inc:250
+#: plugins/admin/systems/class_terminalService.inc:246
+#: plugins/admin/systems/class_terminalService.inc:251
 msgid "Please specify a valid VSync range."
 msgstr "Bitte geben Sie einen g�ltigen VSync-Bereich an."
 
-#: plugins/admin/systems/class_terminalService.inc:260
-#: plugins/admin/systems/class_terminalService.inc:265
+#: plugins/admin/systems/class_terminalService.inc:261
+#: plugins/admin/systems/class_terminalService.inc:266
 msgid "Please specify a valid HSync range."
 msgstr "Bitte geben Sie einen g�ltigen HSync-Bereich an."
 
@@ -4266,7 +4262,7 @@ msgstr "Anmeldung sperren (tempor�r)"
 
 #: plugins/admin/systems/servservice.tpl:78
 msgid "Font path"
-msgstr "Pfad zu den Schriften"
+msgstr "Schrift-Suchpfad"
 
 #: plugins/admin/systems/servservice.tpl:91
 msgid "Syslog Service"
@@ -4286,7 +4282,7 @@ msgstr "Server-Name"
 #: plugins/admin/systems/wingeneric.tpl:15
 #: plugins/admin/systems/component.tpl:15
 msgid "Choose subtree to place terminal in"
-msgstr "W�hlen Sie den Unterbaum, in den das Terminal eingepflegt werden soll"
+msgstr "W�hlen Sie die Abteilung, in die das Terminal eingepflegt werden soll"
 
 #: plugins/admin/systems/server.tpl:38 plugins/admin/systems/terminal.tpl:99
 #: plugins/admin/systems/workstation.tpl:99
@@ -4366,12 +4362,11 @@ msgstr "Neustarten"
 msgid "Wake up"
 msgstr "Aufwecken"
 
-#: plugins/admin/systems/class_terminalGeneric.inc:216
+#: plugins/admin/systems/class_terminalGeneric.inc:217
 msgid "You have no permissions to create a terminal on this 'Base'."
-msgstr ""
-"Sie haben keine Berechtigung ein Terminal innerhalb dieser 'Basis' anzulegen."
+msgstr "Sie haben keine Berechtigung ein Terminal unterhalb dieser 'Basis' anzulegen."
 
-#: plugins/admin/systems/class_terminalGeneric.inc:220
+#: plugins/admin/systems/class_terminalGeneric.inc:221
 msgid "The required field 'Terminal name' is not set."
 msgstr "Das ben�tigte Feld 'Terminal-Name' ist nicht gesetzt."
 
@@ -4385,8 +4380,7 @@ msgstr "Diese 'dn' hat keine Server-Erweiterungen."
 
 #: plugins/admin/systems/class_servGeneric.inc:168
 msgid "You have no permissions to create a server on this 'Base'."
-msgstr ""
-"Sie haben keine Berechtigung, einen Server unterhalb dieser 'Basis' "
+msgstr "Sie haben keine Berechtigung, einen Server unterhalb dieser 'Basis' "
 "anzulegen."
 
 #: plugins/admin/systems/terminal.tpl:9
@@ -4425,8 +4419,7 @@ msgstr "Auslagerungs-Server"
 #: plugins/admin/systems/terminal.tpl:62
 #: plugins/admin/systems/workstation.tpl:62
 msgid "Choose NFS filesystem to place swap files on"
-msgstr ""
-"W�hlen Sie das NFS-Dateisystem, in dem die Auslagerungsdateien abgelegt "
+msgstr "W�hlen Sie das NFS-Dateisystem, in dem die Auslagerungsdateien abgelegt "
 "werden sollen"
 
 #: plugins/admin/systems/terminal.tpl:74
@@ -4447,8 +4440,7 @@ msgstr "Zeit-Server"
 #: plugins/admin/systems/terminal.tpl:84
 #: plugins/admin/systems/workstation.tpl:84
 msgid "Choose server to use for synchronizing time"
-msgstr ""
-"W�hlen Sie den Server, der zur Zeit-Synchronisation genutzt werden soll"
+msgstr "W�hlen Sie den Server, der zur Zeit-Synchronisation genutzt werden soll"
 
 #: plugins/admin/systems/terminal.tpl:103
 #: plugins/admin/systems/workstation.tpl:103
@@ -4526,15 +4518,15 @@ msgstr "Arbeitsstations-Vorlage f�r"
 
 #: plugins/admin/systems/class_workstationGeneric.inc:136
 msgid "This 'dn' has no workstation features."
-msgstr "Diese 'dn' hat keine Arbeitsstationen-Erweiterungen."
+msgstr "Dieser 'DN' hat keine Arbeitsstations-Erweiterungen."
 
-#: plugins/admin/systems/class_workstationGeneric.inc:223
+#: plugins/admin/systems/class_workstationGeneric.inc:224
 msgid "You have no permissions to create a workstation on this 'Base'."
 msgstr ""
 "Sie haben keine Berechtigung eine Arbeitsstation unter dieser 'Basis' "
 "anzulegen."
 
-#: plugins/admin/systems/class_workstationGeneric.inc:227
+#: plugins/admin/systems/class_workstationGeneric.inc:228
 msgid "The required field 'Workstation name' is not set."
 msgstr "Das ben�tigte Feld 'Arbeiststationsname' ist nicht gesetzt."
 
@@ -4552,24 +4544,24 @@ msgstr "Pfad zum PPD"
 
 #: plugins/admin/systems/class_servDNS.inc:32
 msgid "Remove DNS service"
-msgstr "DNS Dienst entfernen"
+msgstr "DNS-Dienst entfernen"
 
 #: plugins/admin/systems/class_servDNS.inc:33
 msgid ""
 "This server has DNS features enabled. You can disable them by clicking below."
 msgstr ""
-"Dieser Server hat die DNS Funtionen aktiviert. Sie k�nnen diese durch einen "
+"Dieser Server hat die DNS-Funktionen aktiviert. Sie k�nnen diese durch einen "
 "Klick auf die untere Schaltfl�che deaktivieren."
 
 #: plugins/admin/systems/class_servDNS.inc:35
 msgid "Add DNS service"
-msgstr "DNS Dienst hinzuf�gen"
+msgstr "DNS-Dienst hinzuf�gen"
 
 #: plugins/admin/systems/class_servDNS.inc:36
 msgid ""
 "This server has DNS features disabled. You can enable them by clicking below."
 msgstr ""
-"Aktuell hat dieser Server keine DNS Funktionen aktiviert. Sie k�nnen diese "
+"Aktuell hat dieser Server keine DNS-Funktionen aktiviert. Sie k�nnen diese "
 "durch einen Klick auf die Schaltfl�che unten aktivieren."
 
 #: plugins/admin/systems/class_servDB.inc:121
@@ -4588,15 +4580,15 @@ msgstr "Der IMAP-Verbindungsstring muss in der Form '%s' sein."
 
 #: plugins/admin/systems/class_servDB.inc:131
 msgid "The sieve port needs to be numeric."
-msgstr "Der sieve Port muss numerisch sein."
+msgstr "Der Sieve-Port muss numerisch sein."
 
 #: plugins/admin/systems/workstation.tpl:9
 msgid "Workstation template"
-msgstr "Arbeitsstations-Vorlage"
+msgstr "Vorlage f�r Arbeitsstation"
 
 #: plugins/admin/systems/workstation.tpl:11
 msgid "Workstation name"
-msgstr "Arbeitsstationsname"
+msgstr "Name der Arbeitsstation"
 
 #: plugins/admin/systems/servdb.tpl:6
 msgid "Kerberos kadmin access"
@@ -4612,11 +4604,11 @@ msgstr "Administrator"
 
 #: plugins/admin/systems/servdb.tpl:26
 msgid "FAX database"
-msgstr "FAX Datenbank"
+msgstr "FAX-Datenbank"
 
 #: plugins/admin/systems/servdb.tpl:30
 msgid "FAX DB user"
-msgstr "FAX DB Benutzer"
+msgstr "FAX-DB Benutzer"
 
 #: plugins/admin/systems/servdb.tpl:42
 msgid "Asterisk management"
@@ -4636,7 +4628,7 @@ msgstr "Ortsvorwahl"
 
 #: plugins/admin/systems/servdb.tpl:70
 msgid "IMAP admin access"
-msgstr "IMAP Administrationszugang"
+msgstr "IMAP-Administrationszugang"
 
 #: plugins/admin/systems/servdb.tpl:74
 msgid "Server identifier"
@@ -4644,23 +4636,23 @@ msgstr "Serverbezeichnung"
 
 #: plugins/admin/systems/servdb.tpl:78
 msgid "Connect URL"
-msgstr "Verbindungs URL"
+msgstr "Verbindungs-URL"
 
 #: plugins/admin/systems/servdb.tpl:91
 msgid "Sieve port"
-msgstr "Sieve Port"
+msgstr "Sieve-Port"
 
 #: plugins/admin/systems/servdb.tpl:100
 msgid "Logging database"
-msgstr "Protokoll Datenbank"
+msgstr "Protokoll-Datenbank"
 
 #: plugins/admin/systems/servdb.tpl:104
 msgid "Logging DB user"
-msgstr "Logging DB Benutzer"
+msgstr "Protokoll-DB Benutzer"
 
 #: plugins/admin/systems/class_printGeneric.inc:56
 msgid "This 'dn' has no printer features."
-msgstr "Diese 'dn' hat keine Drucker-Erweiterungen."
+msgstr "Dieser 'DN' hat keine Drucker-Erweiterungen."
 
 #: plugins/admin/systems/class_printGeneric.inc:122
 msgid "You have no permissions to create a printer on this 'Base'."
@@ -4670,7 +4662,7 @@ msgstr ""
 
 #: plugins/admin/systems/wingeneric.tpl:6
 msgid "Machine name"
-msgstr "Name des Rechners"
+msgstr "Name des Systems"
 
 #: plugins/admin/systems/remove.tpl:7
 msgid ""
@@ -4706,7 +4698,7 @@ msgstr ""
 #: plugins/admin/systems/headpage.tpl:46
 #: plugins/admin/ogroups/ogroup_objects.tpl:33
 msgid "Select to see servers"
-msgstr "W�hlen Sie dies um Server anzuzeigen"
+msgstr "W�hlen um Server anzuzeigen"
 
 #: plugins/admin/systems/headpage.tpl:46
 #: plugins/admin/ogroups/ogroup_objects.tpl:33
@@ -4715,7 +4707,7 @@ msgstr "Zeige Server"
 
 #: plugins/admin/systems/headpage.tpl:47
 msgid "Select to see Linux terminals"
-msgstr "W�hlen, um die Linux Terminals zu sehen"
+msgstr "W�hlen, um Linux Terminals zu sehen"
 
 #: plugins/admin/systems/headpage.tpl:47
 #: plugins/admin/ogroups/ogroup_objects.tpl:35
@@ -4724,7 +4716,7 @@ msgstr "Zeige Terminals"
 
 #: plugins/admin/systems/headpage.tpl:48
 msgid "Select to see Linux workstations"
-msgstr "W�hlen, um die Linux Arbeitsstationen zu sehen"
+msgstr "W�hlen, um Linux Arbeitsstationen zu sehen"
 
 #: plugins/admin/systems/headpage.tpl:48
 #: plugins/admin/ogroups/ogroup_objects.tpl:34
@@ -4733,7 +4725,7 @@ msgstr "Zeige Arbeitsstationen"
 
 #: plugins/admin/systems/headpage.tpl:49
 msgid "Select to see MicroSoft Windows based workstations"
-msgstr "Ausw�hlen um MicroSoft Windows Arbeitsstationen zu sehen"
+msgstr "Ausw�hlen um Microsoft Windows Arbeitsstationen zu sehen"
 
 #: plugins/admin/systems/headpage.tpl:49
 msgid "Show windows based workstations"
@@ -4741,7 +4733,7 @@ msgstr "Zeige Windows basierte Arbeitsstationen"
 
 #: plugins/admin/systems/headpage.tpl:50
 msgid "Select to see network printers"
-msgstr "W�hlen, um die 'Netzwerkdrucker' zu sehen"
+msgstr "W�hlen, um die 'Netzwerk-Drucker' zu sehen"
 
 #: plugins/admin/systems/headpage.tpl:50
 msgid "Show network printers"
@@ -4749,7 +4741,7 @@ msgstr "Zeige Netzwerk-Drucker"
 
 #: plugins/admin/systems/headpage.tpl:51
 msgid "Select to see VOIP phones"
-msgstr "W�hlen, um die 'VOIP Telefone' zu sehen"
+msgstr "W�hlen, um 'VoIP-Telefone' zu sehen"
 
 #: plugins/admin/systems/headpage.tpl:51
 #: plugins/admin/ogroups/ogroup_objects.tpl:37
@@ -4758,15 +4750,15 @@ msgstr "Zeige Telefone"
 
 #: plugins/admin/systems/headpage.tpl:52
 msgid "Select to see network devices"
-msgstr "W�hlen, um die Netzwerkger�te zu sehen"
+msgstr "W�hlen, um Netzwerk-Ger�te zu sehen"
 
 #: plugins/admin/systems/headpage.tpl:52
 msgid "Show network devices"
-msgstr "Zeige Netzwerk Ger�te"
+msgstr "Zeige Netzwerk-Ger�te"
 
 #: plugins/admin/systems/headpage.tpl:62
 msgid "Regular expression for matching system names"
-msgstr "Regul�rer Ausdruck zum Abgleich mit System-Namen"
+msgstr "Regul�rer Ausdruck f�r System-Namen"
 
 #: plugins/admin/systems/headpage.tpl:65
 msgid "Display terminal(s) of user"
@@ -4823,7 +4815,7 @@ msgstr "W�hlen Sie den Maus-Port"
 #: plugins/admin/systems/service.tpl:66
 #: plugins/gofon/phoneaccount/generic.tpl:5
 msgid "Telephone hardware"
-msgstr "Telefon Hardware"
+msgstr "Telefon-Hardware"
 
 #: plugins/admin/systems/service.tpl:69
 #: plugins/gofon/phoneaccount/generic.tpl:9
@@ -4836,8 +4828,7 @@ msgstr "Treiber"
 
 #: plugins/admin/systems/service.tpl:88
 msgid "Choose graphic driver that is needed by the installed graphic board"
-msgstr ""
-"W�hlen Sie den Treiber, der von der installierten Grafikkarte ben�tigt wird."
+msgstr "W�hlen Sie den Treiber, der von der installierten Grafikkarte ben�tigt wird."
 
 #: plugins/admin/systems/service.tpl:94
 msgid "Resolution"
@@ -4877,7 +4868,7 @@ msgstr "Vertikale Wiederholrate f�r den installierten Monitor"
 
 #: plugins/admin/systems/service.tpl:141
 msgid "Remote desktop"
-msgstr "Entfernte Arbeitsfl�chen"
+msgstr "Entfernte Arbeitsfl�che"
 
 #: plugins/admin/systems/service.tpl:145
 msgid "Connect method"
@@ -4885,7 +4876,7 @@ msgstr "Verbindungsmethode"
 
 #: plugins/admin/systems/service.tpl:147
 msgid "Choose method to connect to terminal server"
-msgstr "W�hlen Sie die Methoder der Anbindung an den Terminalserver"
+msgstr "W�hlen Sie die Methode der Anbindung an den Terminal-Server"
 
 #: plugins/admin/systems/service.tpl:154
 msgid "Terminal server"
@@ -4893,7 +4884,7 @@ msgstr "Terminal-Server"
 
 #: plugins/admin/systems/service.tpl:156
 msgid "Select specific terminal server to use"
-msgstr "W�hlen Sie einen bestimmten Terminserver"
+msgstr "W�hlen Sie einen bestimmten Terminal-Server"
 
 #: plugins/admin/systems/service.tpl:163
 msgid "Font server"
@@ -4909,7 +4900,7 @@ msgstr "Drucker"
 
 #: plugins/admin/systems/service.tpl:182
 msgid "Select to start IPP based printing service on terminal"
-msgstr "Ausw�hlen, um auf dem Terminal IPP basierte Druckdienste zu starten"
+msgstr "Ausw�hlen, um auf dem Terminal IPP-basierte Druckdienste zu starten"
 
 #: plugins/admin/systems/service.tpl:183
 msgid "Provide print services"
@@ -4921,8 +4912,7 @@ msgstr "Spool-Server"
 
 #: plugins/admin/systems/service.tpl:191
 msgid "Select NFS filesystem to place spool files on"
-msgstr ""
-"W�hlen Sie das NFS-Dateisystem, in dem die Spool-Dateien abgelegt werden"
+msgstr "W�hlen Sie das NFS-Dateisystem, in dem die Spool-Dateien abgelegt werden"
 
 #: plugins/admin/systems/service.tpl:203
 msgid "Scan device"
@@ -5133,7 +5123,7 @@ msgstr ""
 #, php-format
 msgid "Include data from %s days in the past when creating free/busy lists"
 msgstr ""
-"Ber�cksichte %s Tage in der Vergangenheit beim Erstellen von Frei/Belegt "
+"Ber�cksichtige %s Tage in der Vergangenheit beim Erstellen von Frei/Belegt-"
 "Listen"
 
 #: plugins/admin/systems/class_servKolab.inc:173
@@ -5143,15 +5133,15 @@ msgstr "Warne Benutzer, wenn sie mehr als %s%% ihres Mail-Kontigentes benutzen"
 
 #: plugins/admin/systems/class_servKolab.inc:197
 msgid "Free/Busy settings -> Future days must be set."
-msgstr "Frei/Belegt Einstellungen -> Intervall mu� gesetzt sein."
+msgstr "Frei/Belegt-Einstellungen -> Intervall mu� gesetzt sein."
 
 #: plugins/admin/systems/class_servKolab.inc:199
 msgid "Free/Busy settings -> Future days must be a positive value."
-msgstr "Frei/Belegt Einstellungen -> Intervall mu� ein positiver Wert sein."
+msgstr "Frei/Belegt-Einstellungen -> Intervall mu� ein positiver Wert sein."
 
 #: plugins/admin/systems/class_servKolab.inc:201
 msgid "Free/Busy settings -> Future days must be a value."
-msgstr "Frei/Belegt Einstellungen -> Intervall mu� einen Wert besitzen."
+msgstr "Frei/Belegt-Einstellungen -> Intervall mu� einen Wert besitzen."
 
 #: plugins/admin/systems/class_servKolab.inc:205
 msgid ""
@@ -5201,11 +5191,11 @@ msgstr "Sieve Dienst"
 
 #: plugins/admin/systems/servkolab.tpl:54
 msgid "FTP FreeBusy service (legacy, not interoperable with Kolab2 FreeBusy)"
-msgstr "FTP Frei/Gebucht Dienst (alt, nicht kompatibel mit Kolab2)"
+msgstr "FTP Frei/Belegt-Dienst (alt, inkompatibel mit Kolab 2)"
 
 #: plugins/admin/systems/servkolab.tpl:62
 msgid "HTTP FreeBusy service (legacy)"
-msgstr "HTTP Frei/Gebucht Dienst (alt)"
+msgstr "HTTP Frei/Belegt-Dienst (alt)"
 
 #: plugins/admin/systems/servkolab.tpl:70
 msgid "Amavis email scanning (virus/spam)"
@@ -5213,16 +5203,16 @@ msgstr "Email Scannen (Virus/Spam)"
 
 #: plugins/admin/systems/servkolab.tpl:81
 msgid "Quota settings"
-msgstr "Quota Einstellungen"
+msgstr "Kontingent-Einstellungen"
 
 #: plugins/admin/systems/servkolab.tpl:97
 msgid "Free/Busy settings"
-msgstr "Frei/Gebucht Einstellungen"
+msgstr "Frei/Belegt-Einstellungen"
 
 #: plugins/admin/systems/servkolab.tpl:102
 msgid "Allow unauthenticated downloading of Free/Busy information"
 msgstr ""
-"Erlaube nicht-authentifiziertes Herunterladen von Frei/Gebucht Informationen"
+"Erlaube nicht-authentifiziertes Herunterladen von Frei/Belegt-Informationen"
 
 #: plugins/admin/systems/servkolab.tpl:117
 msgid "SMTP privileged networks"
@@ -5654,7 +5644,7 @@ msgid ""
 msgstr ""
 "Dies ist die Hauptseite von GOsa. W�hlen Sie die gew�nschte Option aus dem "
 "Men� links oder durch die Auswahl eines Piktogrammes unten. Alle �nderungen "
-"werden direkt in den LDAP Server Ihres Unternehmens eingepflegt."
+"werden direkt in den LDAP-Server Ihres Unternehmens eingepflegt."
 
 #: plugins/generic/welcome/welcome.tpl:8
 msgid ""
@@ -5676,7 +5666,7 @@ msgstr "Willkommen %s!"
 #: include/functions.inc:267
 #, php-format
 msgid "Error when connecting the LDAP. Server said '%s'."
-msgstr "Fehler beim Verbinden mit dem LDAP Server. Die Meldung lautet '%s'."
+msgstr "Fehler beim Verbinden mit dem LDAP-Server. Die Meldung lautet '%s'."
 
 #: include/functions.inc:288
 #, php-format
@@ -5685,7 +5675,7 @@ msgstr "Anmeldung des Nutzers ist fehlgeschlagen. Die Meldung war '%s'."
 
 #: include/functions.inc:308
 msgid "Username / UID is not unique. Please check your LDAP database."
-msgstr "Die Kennung ist nicht eindeutig. Bitte pr�fen Sie die LDAP Datenbank."
+msgstr "Die Kennung ist nicht eindeutig. Bitte pr�fen Sie die LDAP-Datenbank."
 
 #: include/functions.inc:346
 msgid ""
@@ -5700,26 +5690,26 @@ msgid ""
 "Can't set locking information in LDAP database. Please check the 'config' "
 "entry in gosa.conf! LDAP server says '%s'."
 msgstr ""
-"Die Sperr-Information in der LDAP Datenbank kann nicht gesetzt werden. Bitte "
-"�berpr�fen Sie den \"Config\" Eintrag in gosa.conf! Der LDAP-Server meldete "
-"'%s'."
+"Der Zugriffsschutz f�r die LDAP-Datenbank kann nicht gesetzt werden. Bitte "
+"�berpr�fen Sie den \"Config\" Eintrag in der Datei gosa.conf! Der LDAP-"
+"Server meldete '%s'."
 
 #: include/functions.inc:371
 #, php-format
 msgid "Adding a lock failed. LDAP server says '%s'."
 msgstr ""
-"Kann keine Sperr-Information anlegen. Die Meldung des LDAP Servers war '%s'."
+"Kann keinen Zugriffsschutz anlegen. Die Meldung des LDAP-Servers war '%s'."
 
 #: include/functions.inc:397
 #, php-format
 msgid "Removing a lock failed. LDAP server says '%s'."
 msgstr ""
-"Kann die Sperr-Information nicht entfernen. Die Meldung des LDAP Servers war "
-"'%s'."
+"Kann den Zugriffsschutz nicht entfernen. Die Meldung des LDAP-Servers war '%"
+"s'."
 
 #: include/functions.inc:427
 msgid ""
-"Getting the lock from LDAP failed. Parameters are not sed correctly, please "
+"Getting the lock from LDAP failed. Parameters are not set correctly, please "
 "check the source!"
 msgstr ""
 "Es kann nicht gepr�ft werden, ob das Objekt gesperrt ist. Die Parameter sind "
@@ -5730,8 +5720,8 @@ msgid ""
 "Can't get locking information in LDAP database. Please check the 'config' "
 "entry in gosa.conf!"
 msgstr ""
-"Die Sperr-Information kann nicht aus der LDAP Datenbank ausgelesen werden. "
-"Bitte pr�fen Sie den \"Config\"-Eintrag in der gosa.conf!"
+"Die Information �ber den Zugriffsschutz kann nicht aus der LDAP-Datenbank "
+"gelesen werden. Bitte pr�fen Sie den \"Config\"-Eintrag in der gosa.conf!"
 
 #: include/functions.inc:445
 msgid ""
@@ -5775,7 +5765,7 @@ msgstr ""
 
 #: include/functions.inc:1018
 msgid "LDAP error:"
-msgstr "LDAP Fehler:"
+msgstr "LDAP-Fehler:"
 
 #: include/functions.inc:1460
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -5848,7 +5838,8 @@ msgstr "Kann das IMAP-Postfach nicht anlegen. Der Server meldet '%s'."
 #: include/class_mail-methods-cyrus.inc:122
 #, php-format
 msgid "Can't write IMAP quota. Server says '%s'."
-msgstr "Kann die Quota-Einstellungen nicht sichern. Der Server meldete '%s'."
+msgstr ""
+"Kann die Kontingent-Einstellungen nicht sichern. Der Server meldete '%s'."
 
 #: include/class_mail-methods-cyrus.inc:133
 msgid ""
@@ -5948,7 +5939,7 @@ msgstr ""
 #, php-format
 msgid "Setting the password failed. LDAP server says '%s'."
 msgstr ""
-"Das Setzen des Passwortes ist fehlgeschlagen. Die Meldung vom LDAP Server "
+"Das Setzen des Passwortes ist fehlgeschlagen. Die Meldung vom LDAP-Server "
 "war '%s'."
 
 #: include/class_password-methods.inc:188
@@ -6027,7 +6018,7 @@ msgstr ""
 #: include/setup_checks.inc:110
 msgid "Can't bind to LDAP. No schema check possible!"
 msgstr ""
-"Kann den LDAP Server nicht erreichen: keine �berpr�fung der Schemata m�glich!"
+"Kann den LDAP-Server nicht erreichen: keine �berpr�fung der Schemata m�glich!"
 
 #: include/setup_checks.inc:119 include/setup_checks.inc:128
 msgid "Can't get schema information from server. No schema check possible!"
@@ -6055,7 +6046,7 @@ msgstr ""
 #: include/setup_checks.inc:163
 #, php-format
 msgid "Required objectclass '%s' is not present in LDAP setup"
-msgstr "Die ben�tigte Objektklasse '%s' ist nicht in LDAP vorhanden"
+msgstr "Die ben�tigte Objektklasse '%s' ist nicht im LDAP vorhanden"
 
 #: include/setup_checks.inc:166
 #, php-format
@@ -6413,7 +6404,7 @@ msgstr ""
 
 #: include/setup_checks.inc:717
 msgid "You've to specify an ldap server before continuing!"
-msgstr "Sie m�ssen einen LDAP Server angeben um fortzufahren!"
+msgstr "Sie m�ssen einen LDAP-Server angeben um fortzufahren!"
 
 #: include/setup_checks.inc:727 include/setup_checks.inc:830
 msgid ""
@@ -6425,18 +6416,18 @@ msgstr ""
 
 #: include/setup_checks.inc:744 include/setup_checks.inc:842
 msgid ""
-"Can't bind to the specified LDAP server! Please make sure that is reachable "
-"for GOsa."
+"Can't bind to the specified LDAP server! Please make sure that it is "
+"reachable for GOsa."
 msgstr ""
 "Die Anmeldung am LDAP-Server ist fehlgeschlagen. Bitte stellen Sie sicher, "
 "dass der Server f�r GOsa erreichbar ist."
 
 #: include/setup_checks.inc:836
 msgid ""
-"Can't bind to the specified LDAP server!. Please make sure that is reachable "
-"for GOsa."
+"Can't bind to the specified LDAP server!. Please make sure that it is "
+"reachable for GOsa."
 msgstr ""
-"Die Anmeldung am LDAP Server ist fehlgeschlagen. Bitte stellen Sie sicher, "
+"Die Anmeldung am LDAP-Server ist fehlgeschlagen. Bitte stellen Sie sicher, "
 "dass der Server f�r GOsa erreichbar ist."
 
 #: include/setup_checks.inc:856
@@ -6459,7 +6450,7 @@ msgstr ""
 #: include/setup_checks.inc:932
 #, php-format
 msgid "Can't log into LDAP server. Reason was: %s."
-msgstr "Die Anmeldung am LDAP Server ist fehlgeschlagen. Die Meldung war '%s'."
+msgstr "Die Anmeldung am LDAP-Server ist fehlgeschlagen. Die Meldung war '%s'."
 
 #: include/setup_checks.inc:1058 include/setup_checks.inc:1076
 #: html/index.php:160 ihtml/themes/default/setup_useradmin.tpl:6
@@ -6597,7 +6588,7 @@ msgid ""
 "connectivity, we're going to check your LDAP setup."
 msgstr ""
 "Scheinbar rufen Sie GOsa zum ersten Mal auf - es wurde keine Konfiguration "
-"gefunden. Dieses Setup-Skript wird Sie dabei unterst�tzen, eine initiale, "
+"gefunden. Diese Einrichtung wird Sie dabei unterst�tzen, eine initiale aber "
 "lauff�hige Konfiguration zu erzeugen, indem es Sie durch drei grundlegende "
 "Schritte f�hrt: Zun�chst wird versucht, die PHP-Installation auf m�gliche "
 "Fehler zu untersuchen, dann wird die Verf�gbarkeit einiger optionaler "
@@ -6642,7 +6633,7 @@ msgid ""
 "filters to get the entries you are looking for."
 msgstr ""
 "Die Gr��enbeschr�nkung sorgt daf�r, da� die LDAP-Operationen schneller "
-"durchgef�hrt werden k�nnen und beschr�nken die Last auf dem LDAP-Server. Der "
+"durchgef�hrt werden k�nnen und verringern die Last auf dem LDAP-Server. Der "
 "einfachste Weg gro�e Datenbanken ohne gro�e Zeit�berschreitungen zu "
 "bearbeiten ist es Filter zu verwenden und die Gr��enbeschr�nkungen auf einen "
 "sinnvollen Wert einzustellen."
@@ -6766,9 +6757,9 @@ msgid ""
 msgstr ""
 "Abschlie�end ben�tigt GOsa Zugriffsparameter f�r den angegebenen LDAP-"
 "Server. GOsa arbeitet dabei immer als Administrator und verwaltet die Rechte "
-"intern. Solange die in OpenLDAP implementierten ACIs nicht vollst�ndig "
-"implementiert sind, wird dieser Workaround bestehen bleiben. Damit dies "
-"funktioniert, wird an dieser Stelle die DN des LDAP-Administrators und das "
+"intern (solange die in OpenLDAP implementierten ACIs nicht vollst�ndig "
+"unterst�tzt werden, wird dieser Workaround bestehen bleiben). Damit dies "
+"funktioniert, wird an dieser Stelle der DN des LDAP-Administrators und das "
 "dazugeh�rige Passwort ben�tigt."
 
 #: ihtml/themes/altlinux/setup_step4.tpl:19
@@ -6800,7 +6791,7 @@ msgstr "Ablage-ou f�r Benutzer"
 #: ihtml/themes/altlinux/setup_step4.tpl:38
 #: ihtml/themes/default/setup_step4.tpl:43
 msgid "People dn attribute"
-msgstr "dn-Attribut f�r Benutzer"
+msgstr "DN-Attribut f�r Benutzer"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:46
 #: ihtml/themes/default/setup_step4.tpl:51
@@ -6884,8 +6875,8 @@ msgid ""
 "Please enter the server URI to allow the setup to connect your LDAP server "
 "<i>(Example: ldap://your.server:389).</i>"
 msgstr ""
-"Bitte geben Sie die Server URI an, damit das setup sich zu Ihrem LDAP Server "
-"verbinden kann<i>(Beispiel: ldap://ihr.server:389) </i>"
+"Bitte geben Sie die Server-URI an, damit das setup sich zu Ihrem LDAP-Server "
+"verbinden kann<i>(Beispiel: ldap://ihr.server:389)</i>"
 
 #: ihtml/themes/default/setup_step4.tpl:2
 msgid ""
@@ -6901,10 +6892,10 @@ msgid ""
 "workaround till OpenLDAP's in directory ACI's are fully implemented. For "
 "this to work, we need the admin DN and the corresponding password."
 msgstr ""
-"GOsa arbeitet immer als Administrator und verwaltet die Rechte intern. "
-"Solange die in OpenLDAP implementierten ACIs nicht vollst�ndig implementiert "
-"sind, wird dieser Workaround bestehen bleiben. Damit dies funktioniert, wird "
-"an dieser Stelle die DN des LDAP-Administrators und das dazugeh�rige "
+"GOsa arbeitet immer als Administrator und verwaltet die Rechte intern "
+"(solange die in OpenLDAP implementierten ACIs nicht vollst�ndig unterst�tzt "
+"werden, wird dieser Workaround bestehen bleiben). Damit dies funktioniert, "
+"wird an dieser Stelle der DN des LDAP-Administrators und das dazugeh�rige "
 "Passwort ben�tigt."
 
 #: ihtml/themes/default/setup_step4.tpl:63
@@ -6928,9 +6919,9 @@ msgid ""
 "choose the dummy plugin to leave all your mail settings untouched."
 msgstr ""
 "GOsa unterst�tzt verschiedene Zustellungs-Methoden. Diese Methoden stellen "
-"Schnittstellen f�r Benutzer-Postf�cher und den generellen Betrieb f�r "
-"Kontingente bereit.Sie k�nnen die 'dummy'-Methode w�hlen um all Ihre Mail-"
-"Einstellungen unber�hrt zu lassen."
+"Schnittstellen f�r Benutzer-Postf�cher und die Verwaltung von Kontingenten "
+"bereit.Sie k�nnen die 'dummy'-Methode w�hlen um all Ihre Mail-Einstellungen "
+"unber�hrt zu lassen."
 
 #: ihtml/themes/default/setup_step4.tpl:84
 msgid "Mail method"
@@ -6982,11 +6973,15 @@ msgstr "Konfiguration herunterladen"
 #~ msgid ""
 #~ "<b>SAMBA 3</b> support enabled<td class=\"check\">gosa+samba3.schema</td>"
 #~ msgstr ""
-#~ "<b>SAMBA 3</b> UnterstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂtzung aktiviert<td class=\"check\">gosa+samba3.schema</td>"
+#~ "<b>SAMBA 3</b> "
+#~ "UnterstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂtzung "
+#~ "aktiviert<td class=\"check\">gosa+samba3.schema</td>"
 
 #~ msgid "<b>SAMBA 2</b> support enabled<td class=\"check\">samba.schema</td>"
 #~ msgstr ""
-#~ "<b>SAMBA 2</b>UnterstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂtzung aktiviert<td class=\"check\">samba.schema</td>"
+#~ "<b>SAMBA 2</"
+#~ "b>UnterstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂtzung "
+#~ "aktiviert<td class=\"check\">samba.schema</td>"
 
 #~ msgid "GONICUS"
 #~ msgstr "GONICUS"
@@ -6995,7 +6990,7 @@ msgstr "Konfiguration herunterladen"
 #~ "Unsupported password hash detected. Can't generate compatible password."
 #~ msgstr ""
 #~ "Es wurde ein nicht-"
-#~ "unterstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂtzter "
+#~ "unterstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂtzter "
 #~ "Passwort-Hash entdeckt. Es kann kein passendes Passwort generiert werden."
 
 #~ msgid "Checking for gd module"
@@ -7006,13 +7001,13 @@ msgstr "Konfiguration herunterladen"
 #~ "as jpegPhoto."
 #~ msgstr ""
 #~ "GOsa "
-#~ "benÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶tigt "
+#~ "benÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶tigt "
 #~ "dieses Modul um "
-#~ "GrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂenverÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ"
+#~ "GrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂenverÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ"
 #~ "¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬nderungen "
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬nderungen "
 #~ "bei Bildern "
-#~ "durchzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂhren."
+#~ "durchzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂhren."
 
 #~ msgid "You are currently using GOsa version %s (CVS checkout from %s)"
 #~ msgstr "Sie nutzen momentan GOsa in der Version %s (CVS-Abzug vom %s)"
@@ -7033,9 +7028,9 @@ msgstr "Konfiguration herunterladen"
 #~ msgid "Referral Password"
 #~ msgstr ""
 #~ "Neues Passwort "
-#~ "bestÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ"
+#~ "bestÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ"
 #~ "¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬tigen"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬tigen"
 
 #, fuzzy
 #~ msgid ""
@@ -7044,12 +7039,12 @@ msgstr "Konfiguration herunterladen"
 #~ "these files for backup purpose or when initializing a new server."
 #~ msgstr ""
 #~ "Dieses Modul "
-#~ "ermÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶glicht "
+#~ "ermÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶glicht "
 #~ "Ihnen den Download der kompletten LDAP-Datenbank, die momentan in "
 #~ "Verwendung ist. Die "
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂbertragenen "
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂbertragenen "
 #~ "Dateien "
-#~ "kÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶nnen "
+#~ "kÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶nnen "
 #~ "einerseits zur Datensicherung und andererseits zur Einrichtung eines "
 #~ "neuen Servers benutzt werden."
 
@@ -7060,7 +7055,7 @@ msgstr "Konfiguration herunterladen"
 #~ msgid "You are not allowed to delete this terminal!"
 #~ msgstr ""
 #~ "Es Ihnen nicht erlaubt, dieses Terminal zu "
-#~ "lÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶schen!"
+#~ "lÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶schen!"
 
 #~ msgid "Administrators"
 #~ msgstr "Administratoren"
@@ -7081,13 +7076,13 @@ msgstr "Konfiguration herunterladen"
 #~ "may not get all entries, if this value is to low!"
 #~ msgstr ""
 #~ "Warnung: Bitte "
-#~ "prÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂfen Sie "
-#~ "die SIZELIMIT Option Ihres LDAP-Servers. Unter "
-#~ "UmstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ"
+#~ "prÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂfen "
+#~ "Sie die SIZELIMIT Option Ihres LDAP-Servers. Unter "
+#~ "UmstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ"
 #~ "¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬nden "
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬nden "
 #~ "bekommen Sie nicht alle "
-#~ "EintrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ"
+#~ "EintrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ"
 #~ "¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ge, "
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ge, "
 #~ "wenn dieser Eintrag zu niedrig ist!"
