@@ -11,6 +11,8 @@ Things to fix before 2.4:
 
 * Check PHP5 compliance of the error handler. It seems to break things...
 
+* Group plugin looses base
+
 
 Target for 2.5:
 ===============

@@ -203,7 +203,6 @@ class servdb extends plugin
     /* Write to LDAP */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
- //   print_a($this->attrs);
     $ldap->modify($this->attrs);
     show_ldap_error($ldap->get_error());
 
