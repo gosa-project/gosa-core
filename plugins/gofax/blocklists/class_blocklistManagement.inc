@@ -236,6 +236,11 @@ class blocklist extends plugin
 		$smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
 	}
 
+	/* Lock blocklist type for non new entries */
+	if ($this->dn != "new"){
+		$smarty->assign('typeACL', "disabled");
+	}
+
 	/* Show main page */
 	return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }

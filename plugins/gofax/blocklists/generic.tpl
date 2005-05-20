@@ -53,7 +53,7 @@
    <td>
      <h2><img align="center" src="images/false.png"> {t}Blocked numbers{/t}</h2>
      <select style="width:400px; height:200px;" name="numbers[]" size=15 multiple>
-      {html_options values=$goFaxBlocklist output=$goFaxBlocklist selected=$type_select}
+      {html_options values=$goFaxBlocklist output=$goFaxBlocklist}
      </select>
      <br>
      <input name="number" size=25 maxlength=60 {$goFaxBlocklistACL}>&nbsp;
