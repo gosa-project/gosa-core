@@ -70,6 +70,10 @@ class addressbook extends plugin
   {
 	$smarty= get_smarty();
 
+	#! Hickert
+	/*prevent empty variables for smarty*/
+	foreach($this->attributes as $atr) $smarty->assign($atr,"");
+
 	/* Save formular information */
         $phonefilter= get_global("phonefilter");
         foreach( array("search_for", "search_base", "object_type") as $type){
@@ -322,8 +326,21 @@ class addressbook extends plugin
 		   first is too much overhead. */
 		error_reporting(0);
 
+
+	
+
 		/* Walk through LDAP results */
 		while ($attrs= $ldap->fetch()){
+
+		#! hickert  
+		/* prevent empty vaiables */
+        foreach($this->attributes as $atr)          {
+            if(!isset($attrs[$atr][0])) {
+				$attrs[$atr][0] = "";
+				}
+            }
+			if(!isset($_GET['start'])) $_GET['start']="";
+
 
 			/* Only show lines that have set any mail or phone informations */
 			if (isset($attrs['telephoneNumber'][0]) ||

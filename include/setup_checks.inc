@@ -15,15 +15,19 @@ function minimum_version($vercheck)
 
   for($i=0; $i < $c1 ; $i++)
   {
+  // no success
   if($needver[$i] > $curver[$i])
     {
     return(false);
     }
+  // current ist higher
   if($needver[$i] < $curver[$i])
     {
     return(true);
     }
+  // Number is Equal
   } 
+  return (true);
 }
 
 function minimum_versioni2($vercheck)
