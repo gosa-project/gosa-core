@@ -285,7 +285,12 @@ class faxreport extends plugin
 	if (isset($fax_users) && count($fax_users)){
 		$smarty->assign("search_result", $output);
         	$smarty->assign("range_selector", range_selector(count($this->report_list), $this->start, 20));
+	}else{
+	#! hickert // avoiding PHP error "Undefined index: search_result"
+		$smarty->assign("search_result", "");
 	}
+
+	
 
 	/* Show main page */
         $smarty->assign("plug", validate($_GET['plug']));
