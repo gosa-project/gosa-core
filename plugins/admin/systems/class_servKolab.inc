@@ -196,7 +196,7 @@ class servkolab extends plugin {
     if(($this->kolabFreeBusyFuture==""))    {
       $message[] = _("Free/Busy settings -> Future days must be set.");
     }elseif((($this->kolabFreeBusyFuture=="")<0)){
-      $message[] = _("Free/Busy settings -> Future days must be a positiv value.");
+      $message[] = _("Free/Busy settings -> Future days must be a positive value.");
     }elseif(strcasecmp($this->kolabFreeBusyFuture,(int)$this->kolabFreeBusyFuture)){
       $message[] = _("Free/Busy settings -> Future days must be a value.");
     }
