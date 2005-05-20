@@ -445,6 +445,7 @@ class addressbook extends plugin
 		}
 		if (preg_match("/,dc=addressbook,/", $_SESSION['show_info'])){
 			$storage= _("global addressbook");
+			$smarty->assign("internal", 0);
 		} else {
 			$storage= _("organizations user database");
 			$smarty->assign("internal", 1);
