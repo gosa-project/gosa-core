@@ -22,6 +22,7 @@ GOsa2 changelog
     usage
   - Added version indicator to make support more easy
   - Added sample databases for fax, phone and system logging
+  - Added error handler for normal PHP errors
 
 * gosa 2.3
   - Updated smarty to version 2.6.7

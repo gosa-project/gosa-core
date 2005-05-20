@@ -424,7 +424,7 @@ function get_lock ($object)
 
   /* Sanity check */
   if ($object == ""){
-    print_red(_("Getting the lock from LDAP failed. Parameters are not sed correctly, please check the source!"));
+    print_red(_("Getting the lock from LDAP failed. Parameters are not set correctly, please check the source!"));
     return("");
   }
 
