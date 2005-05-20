@@ -222,6 +222,7 @@ class group extends plugin
         }
       }
       $smarty->assign("users", $users);
+      $smarty->assign("apply", apply_filter());
       $display= $smarty->fetch (get_template_path('group_objects.tpl', TRUE, dirname(__FILE__)));
       return ($display);
     }
@@ -280,12 +281,19 @@ class group extends plugin
     $smarty->assign("sambaDomainNameACL", chkacl($this->acl, "sambaDomainName"));
     if ($this->fon_group){
       $smarty->assign("fon_group", "checked");
+    } else {
+      $smarty->assign("fon_group", "");
     }
     $smarty->assign("fon_groupACL", chkacl($this->acl, "fon_group"));
 
     /* Fields */
     foreach (array("cn", "description", "gidNumber") as $val){
       $smarty->assign("$val", $this->$val);
+      $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
+    }
+
+    /* Missing ACL's */
+    foreach (array("base", "smbgroup", "members") as $val){
       $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
     }
 

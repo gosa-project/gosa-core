@@ -352,7 +352,7 @@ class mailgroup extends plugin
       }
       error_reporting (E_ALL);
       natcasesort ($mailusers);
-      reset ($maiusers);
+      reset ($mailusers);
 
       /* Show dialog */
       $smarty->assign("search_image", get_template_path('images/search.png'));
