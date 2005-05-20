@@ -395,6 +395,10 @@ class addressbook extends plugin
 	/* Build list output */
 	$output= "";
 	$mod= 0;
+	
+	#! hickert
+	if(!isset($_SESSION['show_info'])) 	$smarty->assign("show_info", "");;
+
 	if (isset($_SESSION['show_info'])){
 		$range= 4;
 		$smarty->assign("show_info", "1");
