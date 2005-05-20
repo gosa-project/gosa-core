@@ -77,17 +77,13 @@
 
    <table>
     <tr>
-		<td colspan="2"> 
+		<td> 
 			<b>{t}Quota settings{/t}</b>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<input name="cyrus_quotawarn" value="{$cyrus_quotawarn}" type="text" maxlength="3" size="4" {$cyrus_quotawarnACL}>%
-
-		</td>
-		<td>
-			Percentage to warn users
+			{$quotastr}
 		</td>
 	</tr>
    </table>
@@ -108,9 +104,8 @@
 	 </tr>
 	 <tr>
         <td>
-        	<input name="kolabFreeBusyFuture" value="{$kolabFreeBusyFuture}" {$kolabFreeBusyFutureACL} type="text" maxlength="3" size="4">
-			When creating free/busy lists, include data from x days in the past
-		</td>
+		{$fbfuture}
+	</td>
      </tr>
    </table>
 
