@@ -212,7 +212,7 @@ msgstr ""
 #: plugins/admin/systems/startup.tpl:91
 #: plugins/admin/ogroups/ogroup_objects.tpl:56
 #: plugins/admin/ogroups/generic.tpl:38
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:203
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:207
 #: plugins/gofon/phoneaccount/generic.tpl:45
 msgid "Add"
 msgstr ""
@@ -480,7 +480,7 @@ msgstr ""
 #: plugins/gofax/blocklists/generic.tpl:76
 #: plugins/gofax/blocklists/remove.tpl:17
 #: plugins/gofax/faxaccount/locals.tpl:50
-#: plugins/gofax/faxaccount/lists.tpl:39 plugins/gofax/faxaccount/main.inc:91
+#: plugins/gofax/faxaccount/lists.tpl:37 plugins/gofax/faxaccount/main.inc:91
 #: plugins/addons/addressbook/dial.tpl:11
 #: plugins/addons/addressbook/address_edit.tpl:108
 #: plugins/addons/addressbook/remove.tpl:17
@@ -880,7 +880,7 @@ msgid "UNIX"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:132
-#: plugins/personal/posix/class_posixAccount.inc:905
+#: plugins/personal/posix/class_posixAccount.inc:908
 msgid "Group of user"
 msgstr ""
 
@@ -925,27 +925,27 @@ msgid ""
 "below."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:429
+#: plugins/personal/posix/class_posixAccount.inc:431
 #, php-format
 msgid "Password can't be changed up to %s days after last change"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:431
+#: plugins/personal/posix/class_posixAccount.inc:433
 #, php-format
 msgid "Password must be changed after %s days"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:433
+#: plugins/personal/posix/class_posixAccount.inc:435
 #, php-format
 msgid "Disable account after %s days of inactivity after password expiery"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:435
+#: plugins/personal/posix/class_posixAccount.inc:437
 #, php-format
 msgid "Warn user %s days before password expiery"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:459
+#: plugins/personal/posix/class_posixAccount.inc:461
 #: plugins/personal/samba/class_sambaAccount.inc:344
 #: plugins/personal/samba/class_sambaAccount.inc:362
 #: plugins/personal/samba/class_sambaAccount.inc:380
@@ -956,7 +956,7 @@ msgstr ""
 msgid "January"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:459
+#: plugins/personal/posix/class_posixAccount.inc:461
 #: plugins/personal/samba/class_sambaAccount.inc:344
 #: plugins/personal/samba/class_sambaAccount.inc:362
 #: plugins/personal/samba/class_sambaAccount.inc:380
@@ -967,7 +967,7 @@ msgstr ""
 msgid "February"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:459
+#: plugins/personal/posix/class_posixAccount.inc:461
 #: plugins/personal/samba/class_sambaAccount.inc:344
 #: plugins/personal/samba/class_sambaAccount.inc:362
 #: plugins/personal/samba/class_sambaAccount.inc:380
@@ -978,7 +978,7 @@ msgstr ""
 msgid "March"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:459
+#: plugins/personal/posix/class_posixAccount.inc:461
 #: plugins/personal/samba/class_sambaAccount.inc:344
 #: plugins/personal/samba/class_sambaAccount.inc:362
 #: plugins/personal/samba/class_sambaAccount.inc:380
@@ -989,7 +989,7 @@ msgstr ""
 msgid "April"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:460
+#: plugins/personal/posix/class_posixAccount.inc:462
 #: plugins/personal/samba/class_sambaAccount.inc:345
 #: plugins/personal/samba/class_sambaAccount.inc:363
 #: plugins/personal/samba/class_sambaAccount.inc:381
@@ -1000,7 +1000,7 @@ msgstr ""
 msgid "May"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:460
+#: plugins/personal/posix/class_posixAccount.inc:462
 #: plugins/personal/samba/class_sambaAccount.inc:345
 #: plugins/personal/samba/class_sambaAccount.inc:363
 #: plugins/personal/samba/class_sambaAccount.inc:381
@@ -1011,7 +1011,7 @@ msgstr ""
 msgid "June"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:460
+#: plugins/personal/posix/class_posixAccount.inc:462
 #: plugins/personal/samba/class_sambaAccount.inc:345
 #: plugins/personal/samba/class_sambaAccount.inc:363
 #: plugins/personal/samba/class_sambaAccount.inc:381
@@ -1022,7 +1022,7 @@ msgstr ""
 msgid "July"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:460
+#: plugins/personal/posix/class_posixAccount.inc:462
 #: plugins/personal/samba/class_sambaAccount.inc:345
 #: plugins/personal/samba/class_sambaAccount.inc:363
 #: plugins/personal/samba/class_sambaAccount.inc:381
@@ -1033,7 +1033,7 @@ msgstr ""
 msgid "August"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:460
+#: plugins/personal/posix/class_posixAccount.inc:462
 #: plugins/personal/samba/class_sambaAccount.inc:345
 #: plugins/personal/samba/class_sambaAccount.inc:363
 #: plugins/personal/samba/class_sambaAccount.inc:381
@@ -1044,7 +1044,7 @@ msgstr ""
 msgid "September"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:461
+#: plugins/personal/posix/class_posixAccount.inc:463
 #: plugins/personal/samba/class_sambaAccount.inc:346
 #: plugins/personal/samba/class_sambaAccount.inc:364
 #: plugins/personal/samba/class_sambaAccount.inc:382
@@ -1055,7 +1055,7 @@ msgstr ""
 msgid "October"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:461
+#: plugins/personal/posix/class_posixAccount.inc:463
 #: plugins/personal/samba/class_sambaAccount.inc:346
 #: plugins/personal/samba/class_sambaAccount.inc:364
 #: plugins/personal/samba/class_sambaAccount.inc:382
@@ -1066,7 +1066,7 @@ msgstr ""
 msgid "November"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:461
+#: plugins/personal/posix/class_posixAccount.inc:463
 #: plugins/personal/samba/class_sambaAccount.inc:346
 #: plugins/personal/samba/class_sambaAccount.inc:364
 #: plugins/personal/samba/class_sambaAccount.inc:382
@@ -1077,88 +1077,88 @@ msgstr ""
 msgid "December"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:514
+#: plugins/personal/posix/class_posixAccount.inc:516
 #: plugins/personal/samba/class_sambaAccount.inc:441
 #: plugins/admin/systems/class_terminalGeneric.inc:61
 #: plugins/admin/systems/class_workstationGeneric.inc:70
 msgid "disabled"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:514
+#: plugins/personal/posix/class_posixAccount.inc:516
 msgid "full access"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:515
+#: plugins/personal/posix/class_posixAccount.inc:517
 msgid "allow access to these hosts"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:672
+#: plugins/personal/posix/class_posixAccount.inc:675
 msgid "Failed: overriding lock"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:820
+#: plugins/personal/posix/class_posixAccount.inc:823
 msgid "The required field 'Home directory' is not set."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:823
+#: plugins/personal/posix/class_posixAccount.inc:826
 msgid "Please enter a valid path in 'Home directory' field."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:831
+#: plugins/personal/posix/class_posixAccount.inc:834
 msgid "Value specified as 'UID' is not valid."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:834
+#: plugins/personal/posix/class_posixAccount.inc:837
 msgid "Value specified as 'UID' is too small."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:838
+#: plugins/personal/posix/class_posixAccount.inc:841
 #: plugins/admin/groups/class_groupGeneric.inc:602
 msgid "Value specified as 'GID' is not valid."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:841
+#: plugins/personal/posix/class_posixAccount.inc:844
 #: plugins/admin/groups/class_groupGeneric.inc:605
 msgid "Value specified as 'GID' is too small."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:850
+#: plugins/personal/posix/class_posixAccount.inc:853
 msgid "Value specified as 'shadowMin' is not valid."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:855
+#: plugins/personal/posix/class_posixAccount.inc:858
 msgid "Value specified as 'shadowMax' is not valid."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:860
+#: plugins/personal/posix/class_posixAccount.inc:863
 msgid "Value specified as 'shadowWarning' is not valid."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:863
+#: plugins/personal/posix/class_posixAccount.inc:866
 msgid "'shadowWarning' without 'shadowMax' makes no sense."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:866
+#: plugins/personal/posix/class_posixAccount.inc:869
 msgid "Value specified as 'shadowWarning' should be smaller than 'shadowMax'."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:869
+#: plugins/personal/posix/class_posixAccount.inc:872
 msgid "Value specified as 'shadowWarning' should be greater than 'shadowMin'."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:874
+#: plugins/personal/posix/class_posixAccount.inc:877
 msgid "Value specified as 'shadowInactive' is not valid."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:877
+#: plugins/personal/posix/class_posixAccount.inc:880
 msgid "'shadowInactive' without 'shadowMax' makes no sense."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:882
+#: plugins/personal/posix/class_posixAccount.inc:885
 msgid "Value specified as 'shadowMin' should be smaller than 'shadowMax'."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:984
+#: plugins/personal/posix/class_posixAccount.inc:987
 #: plugins/admin/groups/class_groupGeneric.inc:636
 msgid "Too many users, can't allocate a free ID!"
 msgstr ""
@@ -1650,7 +1650,7 @@ msgstr ""
 #: plugins/personal/connectivity/class_kolabAccount.inc:198
 #: plugins/admin/groups/class_groupMail.inc:408
 #: plugins/admin/applications/class_applicationParameters.inc:94
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:205
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:209
 #: ihtml/themes/altlinux/islocked.tpl:13 ihtml/themes/classic/islocked.tpl:13
 #: ihtml/themes/default/islocked.tpl:13
 msgid "Remove"
@@ -2158,7 +2158,7 @@ msgstr ""
 
 #: plugins/gofax/blocklists/generic.tpl:31
 #: plugins/admin/systems/service.tpl:42 plugins/admin/systems/service.tpl:120
-#: include/functions.inc:1575
+#: include/functions.inc:1572
 msgid "Type"
 msgstr ""
 
@@ -2380,16 +2380,16 @@ msgstr ""
 msgid "Select a specific department"
 msgstr ""
 
-#: plugins/gofax/faxaccount/lists.tpl:25 plugins/admin/groups/acl.tpl:12
+#: plugins/gofax/faxaccount/lists.tpl:24 plugins/admin/groups/acl.tpl:12
 #: plugins/admin/groups/mail_admins.tpl:30
 msgid "Choose"
 msgstr ""
 
-#: plugins/gofax/faxaccount/lists.tpl:28
+#: plugins/gofax/faxaccount/lists.tpl:26
 msgid "List of predefined blocklists"
 msgstr ""
 
-#: plugins/gofax/faxaccount/lists.tpl:37
+#: plugins/gofax/faxaccount/lists.tpl:35
 #: plugins/admin/groups/mail_admins.tpl:37
 #: plugins/admin/groups/application_options.tpl:8 include/functions.inc:1190
 msgid "Apply"
@@ -2406,47 +2406,47 @@ msgstr ""
 msgid "FAX"
 msgstr ""
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:109
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:111
 msgid "This account has no fax extensions."
 msgstr ""
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:118
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:120
 msgid "Remove fax account"
 msgstr ""
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:119
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:121
 msgid ""
 "This account has fax features enabled. You can disable them by clicking "
 "below."
 msgstr ""
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:121
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:123
 msgid "Create fax account"
 msgstr ""
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:122
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:124
 msgid ""
 "This account has fax features disabled. You can enable them by clicking "
 "below."
 msgstr ""
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:190
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:192
 msgid "You're trying to add an invalid phone number."
 msgstr ""
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:456
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:462
 msgid "The required field 'Fax' is not set."
 msgstr ""
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:460
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:466
 msgid "Please enter a valid telephone number in the 'Fax' field."
 msgstr ""
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:468
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:474
 msgid "Mail delivery is checked, but no address has been specified."
 msgstr ""
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:470
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:476
 msgid "The mail address you've entered is invalid."
 msgstr ""
 
@@ -2958,7 +2958,7 @@ msgid "LDAP manager"
 msgstr ""
 
 #: plugins/addons/ldapmanager/class_export.inc:7
-msgid "LDIF CSV import"
+msgid "CSV import"
 msgstr ""
 
 #: plugins/addons/ldapmanager/class_export.inc:35
@@ -3895,7 +3895,7 @@ msgid "System status"
 msgstr ""
 
 #: plugins/admin/systems/info.tpl:23
-msgid "Inventary number"
+msgid "Inventory number"
 msgstr ""
 
 #: plugins/admin/systems/info.tpl:27
@@ -4837,38 +4837,48 @@ msgid ""
 "below."
 msgstr ""
 
-#: plugins/admin/systems/class_servKolab.inc:185
+#: plugins/admin/systems/class_servKolab.inc:167
+#, php-format
+msgid "Include data from %s days in the past when creating free/busy lists"
+msgstr ""
+
+#: plugins/admin/systems/class_servKolab.inc:173
+#, php-format
+msgid "Warn users when using more than %s%% of their mail quota"
+msgstr ""
+
+#: plugins/admin/systems/class_servKolab.inc:197
 msgid "Free/Busy settings -> Future days must be set."
 msgstr ""
 
-#: plugins/admin/systems/class_servKolab.inc:187
-msgid "Free/Busy settings -> Future days must be a positiv value."
+#: plugins/admin/systems/class_servKolab.inc:199
+msgid "Free/Busy settings -> Future days must be a positive value."
 msgstr ""
 
-#: plugins/admin/systems/class_servKolab.inc:189
+#: plugins/admin/systems/class_servKolab.inc:201
 msgid "Free/Busy settings -> Future days must be a value."
 msgstr ""
 
-#: plugins/admin/systems/class_servKolab.inc:193
+#: plugins/admin/systems/class_servKolab.inc:205
 msgid ""
 "Cyrus Quota settings -> The given Quota settings value must be a number."
 msgstr ""
 
-#: plugins/admin/systems/class_servKolab.inc:195
+#: plugins/admin/systems/class_servKolab.inc:207
 msgid ""
 "Cyrus Quota settings -> Please choose a value between 1 and 100 for Quota "
 "settings."
 msgstr ""
 
-#: plugins/admin/systems/class_servKolab.inc:197
+#: plugins/admin/systems/class_servKolab.inc:209
 msgid "Cyrus Quota settings -> Future days must be a value."
 msgstr ""
 
-#: plugins/admin/systems/class_servKolab.inc:202
+#: plugins/admin/systems/class_servKolab.inc:214
 msgid "SMTP privileged networks -> No value is given."
 msgstr ""
 
-#: plugins/admin/systems/class_servKolab.inc:207
+#: plugins/admin/systems/class_servKolab.inc:219
 msgid "SMTP smarthost/relayhost -> No value is given."
 msgstr ""
 
@@ -4908,39 +4918,39 @@ msgstr ""
 msgid "Quota settings"
 msgstr ""
 
-#: plugins/admin/systems/servkolab.tpl:101
+#: plugins/admin/systems/servkolab.tpl:97
 msgid "Free/Busy settings"
 msgstr ""
 
-#: plugins/admin/systems/servkolab.tpl:106
+#: plugins/admin/systems/servkolab.tpl:102
 msgid "Allow unauthenticated downloading of Free/Busy information"
 msgstr ""
 
-#: plugins/admin/systems/servkolab.tpl:122
+#: plugins/admin/systems/servkolab.tpl:117
 msgid "SMTP privileged networks"
 msgstr ""
 
-#: plugins/admin/systems/servkolab.tpl:127
+#: plugins/admin/systems/servkolab.tpl:122
 msgid "Hosts/networks allowed to relay"
 msgstr ""
 
-#: plugins/admin/systems/servkolab.tpl:141
+#: plugins/admin/systems/servkolab.tpl:136
 msgid "SMTP smarthost/relayhost"
 msgstr ""
 
-#: plugins/admin/systems/servkolab.tpl:147
+#: plugins/admin/systems/servkolab.tpl:142
 msgid "Enable MX lookup for relayhost"
 msgstr ""
 
-#: plugins/admin/systems/servkolab.tpl:152
+#: plugins/admin/systems/servkolab.tpl:147
 msgid "Host used to relay mails"
 msgstr ""
 
-#: plugins/admin/systems/servkolab.tpl:166
+#: plugins/admin/systems/servkolab.tpl:161
 msgid "Accept Internet Mail"
 msgstr ""
 
-#: plugins/admin/systems/servkolab.tpl:172
+#: plugins/admin/systems/servkolab.tpl:167
 msgid "Accept mail from other domains over non-authenticated SMTP"
 msgstr ""
 
@@ -5212,17 +5222,17 @@ msgstr ""
 msgid "Choose your private phone"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:281
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:287
 #, php-format
 msgid "You need to specify at least one phone number!"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:295
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:301
 #, php-format
 msgid "The number '%s' is no valid phone number!"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:298
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:304
 #, php-format
 msgid "The timeout '%s' contains invalid characters!"
 msgstr ""
@@ -5438,39 +5448,51 @@ msgstr ""
 msgid "GOsa development snapshot (Rev %s)"
 msgstr ""
 
-#: include/functions.inc:1538
+#: include/functions.inc:1528
+msgid "Generating this page caused the PHP interpreter to rise some errors!"
+msgstr ""
+
+#: include/functions.inc:1528
+msgid "Send report"
+msgstr ""
+
+#: include/functions.inc:1528
+msgid "Toggle information"
+msgstr ""
+
+#: include/functions.inc:1535
 msgid "PHP error"
 msgstr ""
 
-#: include/functions.inc:1545
+#: include/functions.inc:1542
 msgid "class"
 msgstr ""
 
-#: include/functions.inc:1551
+#: include/functions.inc:1548
 msgid "function"
 msgstr ""
 
-#: include/functions.inc:1556
+#: include/functions.inc:1553
 msgid "static"
 msgstr ""
 
-#: include/functions.inc:1560
+#: include/functions.inc:1557
 msgid "method"
 msgstr ""
 
-#: include/functions.inc:1574
+#: include/functions.inc:1571
 msgid "Trace"
 msgstr ""
 
-#: include/functions.inc:1575
+#: include/functions.inc:1572
 msgid "File"
 msgstr ""
 
-#: include/functions.inc:1575
+#: include/functions.inc:1572
 msgid "Line"
 msgstr ""
 
-#: include/functions.inc:1576
+#: include/functions.inc:1573
 msgid "Arguments"
 msgstr ""
 
@@ -5633,360 +5655,368 @@ msgstr ""
 msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
 msgstr ""
 
-#: include/setup_checks.inc:80
+#: include/setup_checks.inc:106
 msgid "Can't bind to LDAP. No schema check possible!"
 msgstr ""
 
-#: include/setup_checks.inc:89 include/setup_checks.inc:98
+#: include/setup_checks.inc:115 include/setup_checks.inc:124
 msgid "Can't get schema information from server. No schema check possible!"
 msgstr ""
 
-#: include/setup_checks.inc:118
+#: include/setup_checks.inc:144
 #, php-format
 msgid ""
 "Optional objectclass '%s' required by plugin '%s' is not present in LDAP "
 "setup"
 msgstr ""
 
-#: include/setup_checks.inc:121
+#: include/setup_checks.inc:147
 #, php-format
 msgid ""
 "Optional objectclass '%s' required by plugin '%s' does not have version %s"
 msgstr ""
 
-#: include/setup_checks.inc:133
+#: include/setup_checks.inc:159
 #, php-format
 msgid "Required objectclass '%s' is not present in LDAP setup"
 msgstr ""
 
-#: include/setup_checks.inc:136
+#: include/setup_checks.inc:162
 #, php-format
 msgid "Required objectclass '%s' does not have version %s"
 msgstr ""
 
-#: include/setup_checks.inc:144
+#: include/setup_checks.inc:170
 msgid "SAMBA 3 support disabled, no schema seems to be installed"
 msgstr ""
 
-#: include/setup_checks.inc:147
+#: include/setup_checks.inc:173
 msgid "SAMBA 3 support enabled"
 msgstr ""
 
-#: include/setup_checks.inc:151
+#: include/setup_checks.inc:177
 msgid "SAMBA 2 support disabled, no schema seems to be installed"
 msgstr ""
 
-#: include/setup_checks.inc:154
+#: include/setup_checks.inc:180
 msgid "SAMBA 2 support enabled"
 msgstr ""
 
-#: include/setup_checks.inc:159
+#: include/setup_checks.inc:185
 msgid "Support for pureftp disabled, no schema seems to be installed"
 msgstr ""
 
-#: include/setup_checks.inc:162
+#: include/setup_checks.inc:188
 msgid "Support for pureftp enabled"
 msgstr ""
 
-#: include/setup_checks.inc:166
+#: include/setup_checks.inc:192
 msgid "Support for WebDAV disabled, no schema seems to be installed"
 msgstr ""
 
-#: include/setup_checks.inc:169
+#: include/setup_checks.inc:195
 msgid "Support for WebDAV enabled"
 msgstr ""
 
-#: include/setup_checks.inc:173
+#: include/setup_checks.inc:199
 msgid "Support for phpgroupware disabled, no schema seems to be installed"
 msgstr ""
 
-#: include/setup_checks.inc:176
+#: include/setup_checks.inc:202
 msgid "Support for phpgroupware enabled"
 msgstr ""
 
-#: include/setup_checks.inc:180
+#: include/setup_checks.inc:206
 msgid "Support for gofon disabled, no schema seems to be installed"
 msgstr ""
 
-#: include/setup_checks.inc:183
+#: include/setup_checks.inc:209
 msgid "Support for gofon enabled"
 msgstr ""
 
-#: include/setup_checks.inc:190
+#: include/setup_checks.inc:216
 msgid ""
 "Support for Kolab disabled, no schema seems to be installed, setting mail-"
 "method to cyrus"
 msgstr ""
 
-#: include/setup_checks.inc:195
+#: include/setup_checks.inc:221
 msgid "Support for Kolab enabled"
 msgstr ""
 
-#: include/setup_checks.inc:211
+#: include/setup_checks.inc:237
 msgid "OK"
 msgstr ""
 
-#: include/setup_checks.inc:214
+#: include/setup_checks.inc:240
 msgid "Ignored"
 msgstr ""
 
-#: include/setup_checks.inc:216
+#: include/setup_checks.inc:242
 msgid "Failed"
 msgstr ""
 
-#: include/setup_checks.inc:232
+#: include/setup_checks.inc:258
 msgid "PHP setup inspection"
 msgstr ""
 
-#: include/setup_checks.inc:233
+#: include/setup_checks.inc:259
 msgid "Checking for PHP version (>=4.1.0)"
 msgstr ""
 
-#: include/setup_checks.inc:234
+#: include/setup_checks.inc:260
 msgid ""
 "PHP must be of version 4.1.0 or above for some functions and known bugs in "
 "PHP language."
 msgstr ""
 
-#: include/setup_checks.inc:237
+#: include/setup_checks.inc:263
+msgid "Checking for PHP version (<=5)"
+msgstr ""
+
+#: include/setup_checks.inc:264
+msgid "PHP must be below version 5."
+msgstr ""
+
+#: include/setup_checks.inc:268
 msgid "Checking if register_globals is set to 'off'"
 msgstr ""
 
-#: include/setup_checks.inc:238
+#: include/setup_checks.inc:269
 msgid ""
 "register_globals is a PHP mechanism to register all global varibales to be "
 "accessible from scripts without changing the scope. This may be a security "
 "risk. GOsa will run in both modes."
 msgstr ""
 
-#: include/setup_checks.inc:241
+#: include/setup_checks.inc:272
 msgid "Checking for ldap module"
 msgstr ""
 
-#: include/setup_checks.inc:242
+#: include/setup_checks.inc:273
 msgid "This is the main module used by GOsa and therefore really required."
 msgstr ""
 
-#: include/setup_checks.inc:245
+#: include/setup_checks.inc:276
 msgid "Checking for gettext support"
 msgstr ""
 
-#: include/setup_checks.inc:246
+#: include/setup_checks.inc:277
 msgid "Gettext support is required for internationalized GOsa."
 msgstr ""
 
-#: include/setup_checks.inc:248
+#: include/setup_checks.inc:279
 msgid "Checking for iconv support"
 msgstr ""
 
-#: include/setup_checks.inc:249
+#: include/setup_checks.inc:280
 msgid ""
 "This module is used by GOsa to convert samba munged dial informations and is "
 "therefore required."
 msgstr ""
 
-#: include/setup_checks.inc:252
+#: include/setup_checks.inc:283
 msgid "Checking for mhash module"
 msgstr ""
 
-#: include/setup_checks.inc:253
+#: include/setup_checks.inc:284
 msgid ""
 "To use SSHA encryption, you'll need this module. If you are just using crypt "
 "or md5 encryption, ignore this message. GOsa will run without it."
 msgstr ""
 
-#: include/setup_checks.inc:256
+#: include/setup_checks.inc:287
 msgid "Checking for imap module"
 msgstr ""
 
-#: include/setup_checks.inc:257
+#: include/setup_checks.inc:288
 msgid ""
 "The IMAP module is needed to communicate with the IMAP server. It gets "
 "status informations, creates and deletes mail users."
 msgstr ""
 
-#: include/setup_checks.inc:259
+#: include/setup_checks.inc:290
 msgid "Checking for getacl in imap"
 msgstr ""
 
-#: include/setup_checks.inc:260
+#: include/setup_checks.inc:291
 msgid ""
 "The getacl support is needed for shared folder permissions. The standard "
 "IMAP module is not capable of reading acl's. You need a recend PHP version "
 "for this feature."
 msgstr ""
 
-#: include/setup_checks.inc:262
+#: include/setup_checks.inc:293
 msgid "Checking for mysql module"
 msgstr ""
 
-#: include/setup_checks.inc:263
+#: include/setup_checks.inc:294
 msgid "MySQL support is needed for reading GOfax reports from databases."
 msgstr ""
 
-#: include/setup_checks.inc:265
+#: include/setup_checks.inc:296
 msgid "Checking for cups module"
 msgstr ""
 
-#: include/setup_checks.inc:266
+#: include/setup_checks.inc:297
 msgid ""
 "In order to read available printers from IPP protocol instead of printcap "
 "files, you've to install the CUPS module."
 msgstr ""
 
-#: include/setup_checks.inc:268
+#: include/setup_checks.inc:299
 msgid "Checking for kadm5 module"
 msgstr ""
 
-#: include/setup_checks.inc:269
+#: include/setup_checks.inc:300
 msgid ""
 "Managing users in kerberos requires the kadm5 module which is downloadable "
 "via PEAR network."
 msgstr ""
 
-#: include/setup_checks.inc:278
+#: include/setup_checks.inc:309
 msgid "Checking for some additional programms"
 msgstr ""
 
-#: include/setup_checks.inc:287
+#: include/setup_checks.inc:318
 msgid "Checking for ImageMagick (>=5.4.0)"
 msgstr ""
 
-#: include/setup_checks.inc:288
+#: include/setup_checks.inc:319
 msgid ""
 "ImageMagick is used to convert user supplied images to fit the suggested "
 "size and the unified JPEG format."
 msgstr ""
 
-#: include/setup_checks.inc:291
+#: include/setup_checks.inc:322
 msgid "Checking imagick module for PHP"
 msgstr ""
 
-#: include/setup_checks.inc:292
+#: include/setup_checks.inc:323
 msgid ""
 "Imagick is used to convert user supplied images to fit the suggested size "
 "and the unified JPEG format from PHP script."
 msgstr ""
 
-#: include/setup_checks.inc:299
+#: include/setup_checks.inc:330
 msgid "Checking for fping utility"
 msgstr ""
 
-#: include/setup_checks.inc:300
+#: include/setup_checks.inc:331
 msgid ""
 "The fping utility is only used if you've got a thin client based terminal "
 "environment running."
 msgstr ""
 
-#: include/setup_checks.inc:315
+#: include/setup_checks.inc:346
 msgid "Checking for a way to generate LM/NT password hashes"
 msgstr ""
 
-#: include/setup_checks.inc:316
+#: include/setup_checks.inc:347
 msgid ""
 "In order to use SAMBA 2/3, you've to install some additional packages to "
 "generate password hashes."
 msgstr ""
 
-#: include/setup_checks.inc:347
+#: include/setup_checks.inc:378
 msgid "PHP.ini check -> session.auto_register"
 msgstr ""
 
-#: include/setup_checks.inc:348
+#: include/setup_checks.inc:379
 msgid ""
 "In Order to use GOsa without any trouble, the session.auto_register option "
 "in your php.ini musst be 'Off'."
 msgstr ""
 
-#: include/setup_checks.inc:354
+#: include/setup_checks.inc:385
 msgid "PHP.ini check -> implicit_flush"
 msgstr ""
 
-#: include/setup_checks.inc:355
+#: include/setup_checks.inc:386
 msgid ""
 "This Option defines the Ouput handling, turn this Option off, to increase "
 "performance."
 msgstr ""
 
-#: include/setup_checks.inc:361
+#: include/setup_checks.inc:392
 msgid "PHP.ini check -> max_execution_time"
 msgstr ""
 
-#: include/setup_checks.inc:362
+#: include/setup_checks.inc:393
 msgid ""
 "The Execution time, should be 30 seconds minimun, cause some actions will "
 "need huge ammount of time ."
 msgstr ""
 
-#: include/setup_checks.inc:368
+#: include/setup_checks.inc:399
 msgid "PHP.ini check -> memory_limit"
 msgstr ""
 
-#: include/setup_checks.inc:369
+#: include/setup_checks.inc:400
 msgid ""
 "GOsa need at least 8M of memory, less will cause unpredictable errors, "
 "sometimes without error message!. Best would be 32 M here."
 msgstr ""
 
-#: include/setup_checks.inc:373
+#: include/setup_checks.inc:404
 msgid "PHP.ini check -> expose_php"
 msgstr ""
 
-#: include/setup_checks.inc:374
+#: include/setup_checks.inc:405
 msgid ""
 "PHP won't send any Information about the Server you are running, should be a "
 "security fact."
 msgstr ""
 
-#: include/setup_checks.inc:378
+#: include/setup_checks.inc:409
 msgid "PHP.ini check -> magic_quotes_gpc"
 msgstr ""
 
-#: include/setup_checks.inc:379
+#: include/setup_checks.inc:410
 msgid "Security option, php will escape all quotes in strings ."
 msgstr ""
 
-#: include/setup_checks.inc:681
+#: include/setup_checks.inc:712
 msgid "You've to specify an ldap server before continuing!"
 msgstr ""
 
-#: include/setup_checks.inc:691 include/setup_checks.inc:794
+#: include/setup_checks.inc:722 include/setup_checks.inc:825
 msgid ""
 "Can't connect to the specified LDAP server! Please make sure that is "
 "reachable for GOsa."
 msgstr ""
 
-#: include/setup_checks.inc:708 include/setup_checks.inc:806
+#: include/setup_checks.inc:739 include/setup_checks.inc:837
 msgid ""
 "Can't bind to the specified LDAP server! Please make sure that is reachable "
 "for GOsa."
 msgstr ""
 
-#: include/setup_checks.inc:800
+#: include/setup_checks.inc:831
 msgid ""
 "Can't bind to the specified LDAP server!. Please make sure that is reachable "
 "for GOsa."
 msgstr ""
 
-#: include/setup_checks.inc:820
+#: include/setup_checks.inc:851
 msgid ""
 "Bind to server successful, but the server seems to be completly empty, "
 "please check all informations twice"
 msgstr ""
 
-#: include/setup_checks.inc:859
+#: include/setup_checks.inc:890
 #, php-format
 msgid ""
 "You're missing the required attribute '%s' from this formular. Please "
 "complete!"
 msgstr ""
 
-#: include/setup_checks.inc:896
+#: include/setup_checks.inc:927
 #, php-format
 msgid "Can't log into LDAP server. Reason was: %s."
 msgstr ""
 
-#: include/setup_checks.inc:1022 include/setup_checks.inc:1040
+#: include/setup_checks.inc:1053 include/setup_checks.inc:1071
 #: html/index.php:160 ihtml/themes/default/setup_useradmin.tpl:6
 msgid ""
 "You're missing an administrative account for GOsa, you'll not be able to "

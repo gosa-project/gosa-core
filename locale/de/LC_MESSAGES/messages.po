@@ -15,7 +15,7 @@ msgstr ""
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: contrib/gosa.conf:4
 msgid "My account"
@@ -2271,7 +2271,7 @@ msgstr "W�hlen Sie den Teilbaum, in den die Sperrliste plaziert werden soll."
 
 #: plugins/gofax/blocklists/generic.tpl:31
 #: plugins/admin/systems/service.tpl:42 plugins/admin/systems/service.tpl:120
-#: include/functions.inc:1575
+#: include/functions.inc:1572
 msgid "Type"
 msgstr "Typ"
 
@@ -3000,10 +3000,10 @@ msgid ""
 "existing entries. Remember that GOsa will not check your ldifs for GOsa "
 "conformance."
 msgstr ""
-"Dieses Modul erm�glicht es Ihnen, einen Satz von Eintr�gen als LDIF in "
-"Ihre laufende LDAP Datenbank zu importieren. Sie k�nnen diese Funktion"
-"zum hinzuf�gen oder aktualisieren existierender Eintr�ge nutzen. Beachten"
-"Sie bitte, dass GOsa die LDIF Datei nicht auf Konformit�t pr�ft."
+"Dieses Modul erm�glicht es Ihnen, einen Satz von Eintr�gen als LDIF in Ihre "
+"laufende LDAP Datenbank zu importieren. Sie k�nnen diese Funktionzum "
+"hinzuf�gen oder aktualisieren existierender Eintr�ge nutzen. BeachtenSie "
+"bitte, dass GOsa die LDIF Datei nicht auf Konformit�t pr�ft."
 
 #: plugins/addons/ldapmanager/contentimport.tpl:12
 msgid "Import LDIF File"
@@ -4473,8 +4473,8 @@ msgid ""
 "This server has DHCP features enabled. You can disable them by clicking "
 "below."
 msgstr ""
-"Dieser Server hat die DHCP Funktionen aktiviert. Sie k�nnen diese durch einen "
-"Klick auf die untere Schaltfl�che deaktivieren."
+"Dieser Server hat die DHCP Funktionen aktiviert. Sie k�nnen diese durch "
+"einen Klick auf die untere Schaltfl�che deaktivieren."
 
 #: plugins/admin/systems/class_servDHCP.inc:35
 msgid "Add DHCP service"
@@ -4509,7 +4509,8 @@ msgstr "Es Ihnen nicht erlaubt das Passwort f�r dieses Systems zu setzen!"
 #: plugins/admin/systems/class_systemManagement.inc:319
 #, php-format
 msgid "You're about to delete all information about the component at '%s'."
-msgstr "Sie sind dabei, alle Informationen �ber die Komponente auf '%s' zu l�schen."
+msgstr ""
+"Sie sind dabei, alle Informationen �ber die Komponente auf '%s' zu l�schen."
 
 #: plugins/admin/systems/class_systemManagement.inc:325
 #: plugins/admin/systems/class_systemManagement.inc:378
@@ -5152,7 +5153,7 @@ msgid "Free/Busy settings -> Future days must be set."
 msgstr ""
 
 #: plugins/admin/systems/class_servKolab.inc:199
-msgid "Free/Busy settings -> Future days must be a positiv value."
+msgid "Free/Busy settings -> Future days must be a positive value."
 msgstr ""
 
 #: plugins/admin/systems/class_servKolab.inc:201
@@ -5786,39 +5787,53 @@ msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "GOsa Entwicklerversion (Rev %s)"
 
-#: include/functions.inc:1538
+#: include/functions.inc:1528
+msgid "Generating this page caused the PHP interpreter to rise some errors!"
+msgstr ""
+
+#: include/functions.inc:1528
+#, fuzzy
+msgid "Send report"
+msgstr "Absender"
+
+#: include/functions.inc:1528
+#, fuzzy
+msgid "Toggle information"
+msgstr "Pers�nliche Informationen"
+
+#: include/functions.inc:1535
 msgid "PHP error"
 msgstr "PHP Fehler"
 
-#: include/functions.inc:1545
+#: include/functions.inc:1542
 msgid "class"
 msgstr "Klasse"
 
-#: include/functions.inc:1551
+#: include/functions.inc:1548
 msgid "function"
 msgstr "Funktion"
 
-#: include/functions.inc:1556
+#: include/functions.inc:1553
 msgid "static"
 msgstr "statisch"
 
-#: include/functions.inc:1560
+#: include/functions.inc:1557
 msgid "method"
 msgstr "Methode"
 
-#: include/functions.inc:1574
+#: include/functions.inc:1571
 msgid "Trace"
 msgstr "Verfolgen"
 
-#: include/functions.inc:1575
+#: include/functions.inc:1572
 msgid "File"
 msgstr "Datei"
 
-#: include/functions.inc:1575
+#: include/functions.inc:1572
 msgid "Line"
 msgstr "Zeile"
 
-#: include/functions.inc:1576
+#: include/functions.inc:1573
 msgid "Arguments"
 msgstr "Argumente"
 
@@ -6100,7 +6115,8 @@ msgstr "Unterst�tzung f�r PHPGroupware aktiviert"
 
 #: include/setup_checks.inc:206
 msgid "Support for gofon disabled, no schema seems to be installed"
-msgstr "Die Unterst�tzung f�r goFon wurde deaktiviert, das passende Schema ist nicht "
+msgstr ""
+"Die Unterst�tzung f�r goFon wurde deaktiviert, das passende Schema ist nicht "
 "installiert."
 
 #: include/setup_checks.inc:209
@@ -6876,11 +6892,11 @@ msgid ""
 "workaround till OpenLDAP's in directory ACI's are fully implemented. For "
 "this to work, we need the admin DN and the corresponding password."
 msgstr ""
-"GOsa arbeitet immer als Administrator und verwaltet die Rechte "
-"intern. Solange die in OpenLDAP implementierten ACIs nicht vollst�ndig "
-"implementiert sind, wird dieser Workaround bestehen bleiben. Damit dies "
-"funktioniert, wird an dieser Stelle die DN des LDAP-Administrators und das "
-"dazugeh�rige Passwort ben�tigt."
+"GOsa arbeitet immer als Administrator und verwaltet die Rechte intern. "
+"Solange die in OpenLDAP implementierten ACIs nicht vollst�ndig implementiert "
+"sind, wird dieser Workaround bestehen bleiben. Damit dies funktioniert, wird "
+"an dieser Stelle die DN des LDAP-Administrators und das dazugeh�rige "
+"Passwort ben�tigt."
 
 #: ihtml/themes/default/setup_step4.tpl:63
 msgid ""
@@ -6969,8 +6985,8 @@ msgstr "Herunterladen der Konfiguration"
 #~ "as jpegPhoto."
 #~ msgstr ""
 #~ "GOsa benÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶tigt dieses Modul um "
-#~ "GrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂenverÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ¬nderungen "
-#~ "bei Bildern durchzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂhren."
+#~ "GrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂenverÃÂÃÂÃÂÃÂÃÂÃÂ�"
+#~ "�ÃÂÃÂÃÂÃÂ¬nderungen bei Bildern durchzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂhren."
 
 #~ msgid "You are currently using GOsa version %s (CVS checkout from %s)"
 #~ msgstr "Sie nutzen momentan GOsa in der Version %s (CVS-Abzug vom %s)"
@@ -6997,17 +7013,20 @@ msgstr "Herunterladen der Konfiguration"
 #~ "complete snapshot of the running LDAP directory as ldif. You may save "
 #~ "these files for backup purpose or when initializing a new server."
 #~ msgstr ""
-#~ "Dieses Modul ermÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶glicht Ihnen den Download der kompletten "
-#~ "LDAP-Datenbank, die momentan in Verwendung ist. Die ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂbertragenen Dateien kÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶nnen einerseits zur "
-#~ "Datensicherung und andererseits zur Einrichtung eines neuen Servers "
-#~ "benutzt werden."
+#~ "Dieses Modul ermÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶glicht Ihnen den "
+#~ "Download der kompletten LDAP-Datenbank, die momentan in Verwendung ist. "
+#~ "Die ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂbertragenen Dateien kÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶nnen "
+#~ "einerseits zur Datensicherung und andererseits zur Einrichtung eines "
+#~ "neuen Servers benutzt werden."
 
 #, fuzzy
 #~ msgid "Overwrite"
 #~ msgstr "schreiben"
 
 #~ msgid "You are not allowed to delete this terminal!"
-#~ msgstr "Es Ihnen nicht erlaubt, dieses Terminal zu lÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶schen!"
+#~ msgstr ""
+#~ "Es Ihnen nicht erlaubt, dieses Terminal zu "
+#~ "lÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶schen!"
 
 #~ msgid "Administrators"
 #~ msgstr "Administratoren"
@@ -7028,5 +7047,6 @@ msgstr "Herunterladen der Konfiguration"
 #~ "may not get all entries, if this value is to low!"
 #~ msgstr ""
 #~ "Warnung: Bitte prÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂfen Sie die SIZELIMIT Option Ihres LDAP-Servers. Unter "
-#~ "UmstÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ¬nden bekommen Sie nicht alle EintrÃÂÃÂÃÂÃÂÃÂÃÂ¢"
-#~ "ÃÂÃÂÃÂÃÂ¬ge, wenn dieser Eintrag zu niedrig ist!"
+#~ "UmstÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ¬nden bekommen Sie nicht "
+#~ "alle EintrÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ¬ge, wenn dieser "
+#~ "Eintrag zu niedrig ist!"
