@@ -1525,7 +1525,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
 
   /* Create header as needed */
   if ($error_collector == ""){
-    $error_collector= "<table style='width:100%;background-color:#F0F0F0'><tr><td'><h1><img align=center src='".get_template_path('images/warning.png')."'>&nbsp;"._("Generating this page caused the PHP interpreter to rise some errors!")."</h1></td><td align=right>["._("Send report")."] ["._("Toggle information")."]</td></tr></table>";
+    $error_collector= "<table style='width:100%;background-color:#F0F0F0;border-bottom:1px solid black'><tr><td'><h1><img align=center src='".get_template_path('images/warning.png')."'>&nbsp;"._("Generating this page caused the PHP interpreter to rise some errors!")."</h1></td><td align=right><button onClick='toggle(\"errorbox\")'>"._("Toggle information")."</button></td></tr></table><div id='errorbox' style='position:absolute; z-index:1; visibility: hidden'>";
   }
  
   /* Extract traceback data */

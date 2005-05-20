@@ -140,8 +140,8 @@ class tabs
 
 		/* Shorten string if its too long for the tab headers*/
 		$title= _($name);
-		if (mb_strlen($title, 'UTF-8') > 13){
-			$title= mb_substr($title,0, 11, 'UTF-8')."...";
+		if (mb_strlen($title, 'UTF-8') > 14){
+			$title= mb_substr($title,0, 12, 'UTF-8')."...";
 		}
 		
 		if ($_SESSION['js']==FALSE){	

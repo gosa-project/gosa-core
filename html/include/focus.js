@@ -1,3 +1,9 @@
+var browserType;
+
+if (document.layers) {browserType = "nn4"}
+if (document.all) {browserType = "ie"}
+if (window.navigator.userAgent.toLowerCase().match("gecko")) {browserType= "gecko"}
+
 netscape = "";
 ver= navigator.appVersion; len = ver.length;
 
@@ -36,5 +42,40 @@ function changeSelectState(triggerField, myField) {
 document.onkeydown= keyDown; // work together to analyze keystrokes
 if (netscape){
   document.captureEvents(Event.KEYDOWN|Event.KEYUP);
+}
+
+function hide(element) {
+  if (browserType == "gecko" )
+     document.poppedLayer = document.getElementById(element);
+  else if (browserType == "ie")
+     document.poppedLayer = document.all[element];
+  else
+     document.poppedLayer = document.layers[element];
+  document.poppedLayer.style.visibility = "hidden";
+}
+
+function show(element) {
+  if (browserType == "gecko" )
+     document.poppedLayer = document.getElementById(element);
+  else if (browserType == "ie")
+     document.poppedLayer = document.all[element];
+  else
+     document.poppedLayer = document.layers[element];
+  document.poppedLayer.style.visibility = "visible";
+}
+
+function toggle(element) {
+  if (browserType == "gecko" )
+     document.poppedLayer = document.getElementById(element);
+  else if (browserType == "ie")
+     document.poppedLayer = document.all[element];
+  else
+     document.poppedLayer = document.layers[element];
+
+  if (document.poppedLayer.style.visibility == "visible")
+	  hide (element);
+  else
+	  show (element);
+
 }
 
