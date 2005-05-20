@@ -1513,8 +1513,6 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
 {
   global $error_collector;
 
-  $svn_path = '$HeadURL$';
-
   /* FIXME: workaround for buggy imap_open */
   if (preg_match('/imap_open/', $errstr)){
     return;
@@ -1525,12 +1523,11 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
     return;
   }
 
-
-  if (!preg_match('%/gosa/trunk/%', $svn_path)){
-    gosa_log ("PHP error: $errstr ($errfile, line $errline)");
-    return;
+  /* Create header as needed */
+  if ($error_collector == ""){
+    $error_collector= "<table style='width:100%;background-color:#F0F0F0'><tr><td'><h1><img align=center src='".get_template_path('images/warning.png')."'>&nbsp;"._("Generating this page caused the PHP interpreter to rise some errors!")."</h1></td><td align=right>["._("Send report")."] ["._("Toggle information")."]</td></tr></table>";
   }
-  
+ 
   /* Extract traceback data */
   $trace= debug_backtrace();
   
