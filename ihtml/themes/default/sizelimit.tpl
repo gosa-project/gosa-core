@@ -7,7 +7,7 @@
 </p>
 
 <input type="radio" name="action" value="ignore">{t}ignore this error and show all entries the LDAP server returns{/t}<br>
-<input type="radio" name="action" value="limited" checked>{t}ignore this error and show all entries that fit int the defined sizelimit and let me use filters instead{/t}<br>
+<input type="radio" name="action" value="limited" checked>{t}ignore this error and show all entries that fit into the defined sizelimit and let me use filters instead{/t}<br>
 <input type="radio" name="action" value="newlimit">{$limit_message}
 
 <p class="plugbottom">

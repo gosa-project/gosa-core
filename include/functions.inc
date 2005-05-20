@@ -1528,7 +1528,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
     if ($_SESSION['js']==FALSE){
       $error_collector= "<div>";
     } else {
-      $error_collector= "<table style='width:100%;background-color:#E0E0E0;border-bottom:1px solid black'><tr><td><img align=center src='".get_template_path('images/warning.png')."'>&nbsp;<font style='font-size:14px;font-weight:bold'>"._("Generating this page caused the PHP interpreter to rise some errors!")."</font></td><td align=right><button onClick='toggle(\"errorbox\")'>"._("Toggle information")."</button></td></tr></table><div id='errorbox' style='position:absolute; z-index:1; visibility: hidden'>";
+      $error_collector= "<table style='width:100%;background-color:#E0E0E0;border-bottom:1px solid black'><tr><td><img align=center src='".get_template_path('images/warning.png')."'>&nbsp;<font style='font-size:14px;font-weight:bold'>"._("Generating this page caused the PHP interpreter to rise some errors!")."</font></td><td align=right><button onClick='toggle(\"errorbox\")'>"._("Toggle information")."</button></td></tr></table><div id='errorbox' style='position:absolute; z-index:0; visibility: hidden'>";
     }
   }
  
@@ -1569,6 +1569,9 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
       $args.= htmlentities("\"$arg\", ");
     }
     $args= preg_replace("/, $/", "", $args);
+    if ($args == ""){
+      $args= "-";
+    }
     $file= $ct['file'];
     $line= $ct['line'];
     $color= ($index&1)?'#404040':'606060';

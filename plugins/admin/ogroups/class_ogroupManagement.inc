@@ -295,6 +295,7 @@ class ogroupManagement extends plugin
 
     $smarty->assign("hint", print_sizelimit_warning());
     $smarty->assign("apply", apply_filter());
+    $smarty->assign("alphabet", generate_alphabet());
     return ($smarty->fetch (get_template_path('headpage.tpl', TRUE)));
   }
 
