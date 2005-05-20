@@ -4,14 +4,10 @@ Things to fix before 2.4:
 * Finish kolab integration
   - mail groups
   - shared folders
-  - server
-    + ACLs
 
 * Make it "barrierefrei"
 
 * Check PHP5 compliance of the error handler. It seems to break things...
-
-* Group plugin looses base
 
 
 Target for 2.5:
