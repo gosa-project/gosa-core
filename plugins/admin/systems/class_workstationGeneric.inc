@@ -167,6 +167,7 @@ class workgeneric extends plugin
     }
     $smarty->assign("ipHostNumber", $this->ipHostNumber);
     $smarty->assign("macAddress", $this->macAddress);
+    $smarty->assign("actionACL", chkacl($this->acl, 'action'));
 
     /* Show main page */
     $smarty->assign("netconfig", dirname(__FILE__)."/network.tpl");

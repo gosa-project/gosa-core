@@ -7,7 +7,7 @@
 <input type="radio" name="system" value="terminal" checked>{t}Linux thin client template{/t}<br>
 <input type="radio" name="system" value="workstation">{t}Linux workstation template{/t}<br>
 <input type="radio" name="system" value="server">{t}Linux Server{/t}<br>
-<input type="radio" name="system" value="machineaccount">{t}Windows workstation{/t}<br>
+<!--<input type="radio" name="system" value="machineaccount">{t}Windows workstation{/t}<br>-->
 <input type="radio" name="system" value="printer">{t}Network printer{/t}<br>
 <input type="radio" name="system" value="phone">{t}Phone{/t}<br>
 <input type="radio" name="system" value="component">{t}Other network component{/t}<br>

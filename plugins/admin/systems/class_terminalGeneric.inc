@@ -161,6 +161,7 @@ class termgeneric extends plugin
 
     /* Show main page */
     $smarty->assign("netconfig", dirname(__FILE__)."/network.tpl");
+    $smarty->assign("actionACL", chkacl($this->acl, 'action'));
     return($smarty->fetch (get_template_path('terminal.tpl', TRUE)));
   }
 

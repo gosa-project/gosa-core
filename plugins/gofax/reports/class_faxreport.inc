@@ -45,14 +45,14 @@ class faxreport extends plugin
 	$this->search_base= $sb;
 
         /* Get global filter config */
-        if (!is_global("faxfilter")){
+        if (!is_global("faxreportfilter")){
                 $ui= get_userinfo();
                 $base= get_base_from_people($ui->dn);
                 $faxfilter= array("year" => date("Y"),
                                 "month" => date("m"),
 				"search_base" => $base,
 				"search_for" => "*");
-                register_global("faxfilter", $faxfilter);
+                register_global("faxreportfilter", $faxfilter);
         }
   }
 
@@ -60,14 +60,14 @@ class faxreport extends plugin
   {
 	/* Get template engine */
 	$smarty= get_smarty();
-	$faxfilter= get_global("faxfilter");
+	$faxfilter= get_global("faxreportfilter");
         foreach( array("year", "month", "search_for", "search_base") as $type){
                 if (isset($_POST[$type])){
                         $faxfilter[$type]= $_POST[$type];
                 }
 		$this->$type= $faxfilter[$type];
         }
-	register_global("faxfilter", $faxfilter);
+	register_global("faxreportfilter", $faxfilter);
   
 	/* Adapt sorting */
 	if (isset($_GET['sort'])){
@@ -286,7 +286,6 @@ class faxreport extends plugin
 		$smarty->assign("search_result", $output);
         	$smarty->assign("range_selector", range_selector(count($this->report_list), $this->start, 20));
 	}else{
-	#! hickert // avoiding PHP error "Undefined index: search_result"
 		$smarty->assign("search_result", "");
 	}
 

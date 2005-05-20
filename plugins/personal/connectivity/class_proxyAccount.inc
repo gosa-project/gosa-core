@@ -80,6 +80,8 @@ class proxyAccount extends plugin
     /* Prepare correct state */
     if (!$this->is_account){
       $smarty->assign("pstate", "disabled");
+    } else {
+      $smarty->assign("pstate", "");
     }
 
     /* Show main page */

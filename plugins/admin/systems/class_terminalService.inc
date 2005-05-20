@@ -196,6 +196,7 @@ class termservice extends plugin
     }
     $hl.= "</select>\n";
     $smarty->assign ("hardware_list", $hl);
+    $smarty->assign ("gotoXMonitor", $this->gotoXMonitor);
 
     /* Show main page */
     return($smarty->fetch (get_template_path('service.tpl', TRUE)));

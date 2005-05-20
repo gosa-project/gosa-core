@@ -151,7 +151,11 @@ class termstartup extends plugin
     } else {
       $smarty->assign("debugbootup", "");
     }
-    $smarty->assign("gotoKernelParameters", chkacl($this->acl, "gotoKernelParameters"));
+
+    /* ACL's */
+    foreach (array("gotoKernelParameters", "gotoModules", "gotoFilesystem") as $value){
+      $smarty->assign($value."ACL", chkacl($this->acl, "$value"));
+    }
 
     /* Show main page */
     return($smarty->fetch (get_template_path('startup.tpl', TRUE)));
