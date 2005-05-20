@@ -227,12 +227,12 @@ class group extends plugin
     }
 
     /* Bases / Departments */
-    if ($this->dn == "new"){
-      $ui= get_userinfo();
-      $this->base= dn2base($ui->dn);
+    if (isset($_POST['base'])){
+      $this->base= $_POST['base'];
     } else {
-      if (isset($_POST['base'])){
-        $this->base= $_POST['base'];
+      if ($this->dn == "new"){
+        $ui= get_userinfo();
+        $this->base= dn2base($ui->dn);
       } else {
         $this->base= preg_replace ("/^[^,]+,[^,]+,/", "", $this->dn);
       }
