@@ -817,7 +817,7 @@ function show_setup_page4($withoutput = true)
 
 
       if($withoutput)
-        print_red(_("Bind to server successfull, but the server seems to be completly empty, please check all informations twice"));
+        print_red(_("Bind to server successful, but the server seems to be completly empty, please check all informations twice"));
 
     }
     else
