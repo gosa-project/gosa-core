@@ -358,6 +358,7 @@ class posixAccount extends plugin
       }
       $smarty->assign("hint", print_sizelimit_warning());
       $smarty->assign("wslist", $wslist);
+      $smarty->assign("apply", apply_filter());
       $display= $smarty->fetch (get_template_path('trust_machines.tpl', TRUE, dirname(__FILE__)));
       return ($display);
     }
@@ -415,6 +416,7 @@ class posixAccount extends plugin
       }
       $smarty->assign("hint", print_sizelimit_warning());
 
+      $smarty->assign("apply", apply_filter());
       $display.= $smarty->fetch (get_template_path('posix_groups.tpl', TRUE, dirname(__FILE__)));
       return ($display);
     }
@@ -515,6 +517,7 @@ class posixAccount extends plugin
           2 => _("allow access to these hosts")));
     $smarty->assign("workstations", $this->accessTo);
 
+    $smarty->assign("apply", apply_filter());
     $display.= $smarty->fetch (get_template_path('generic.tpl', TRUE, dirname(__FILE__)));
     return($display);
   }
