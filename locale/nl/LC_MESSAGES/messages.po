@@ -202,7 +202,8 @@ msgid "Quota size"
 msgstr "Quota grootte"
 
 #: plugins/personal/mail/generic.tpl:47 plugins/admin/groups/mail.tpl:46
-msgid "Alternate addresses"
+#, fuzzy
+msgid "Alternative addresses"
 msgstr "Alternatieve adressen"
 
 #: plugins/personal/mail/generic.tpl:49 plugins/admin/groups/mail.tpl:47
@@ -291,7 +292,8 @@ msgid "Activate vacation message"
 msgstr "Activeer afwezigheidsbericht"
 
 #: plugins/personal/mail/generic.tpl:80
-msgid "Select if you want to filter this mails thru spamassassin"
+#, fuzzy
+msgid "Select if you want to filter this mails through spamassassin"
 msgstr "Selecteer indien u mail wilt filteren door spamassassin"
 
 #: plugins/personal/mail/generic.tpl:80
@@ -2222,25 +2224,25 @@ msgstr "verzenden"
 msgid "receive"
 msgstr "ontvangen"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:343
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:348
 msgid "You have no permissions to create a blocklist on this 'Base'."
 msgstr ""
 "U heeft geen toestemming een blokkeerlijst aan te maken onder deze 'basis'."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:349
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:354
 #: plugins/admin/departments/class_departmentGeneric.inc:143
 msgid "Required field 'Name' is not set."
 msgstr "Vereist veld 'Naam' is leeg."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:352
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:357
 msgid "Required field 'Name' contains invalid characters"
 msgstr "Vereist veld 'Naam' bevat ongeldige karakters"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:360
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:365
 msgid "Specified name is already used."
 msgstr "De opgegeven naam wordt al gebruikt."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:367
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:372
 msgid "No permission to create a blocklist on this base."
 msgstr "Geen toestemming om een blokkeerlijst aan te maken onder deze basis."
 
@@ -3278,7 +3280,7 @@ msgid "Special group (%d)"
 msgstr "Speciale groep (%d)"
 
 #: plugins/admin/groups/class_groupGeneric.inc:574
-#: plugins/admin/ogroups/class_ogroup.inc:484
+#: plugins/admin/ogroups/class_ogroup.inc:490
 msgid "You have no permissions to create a group on this 'Base'."
 msgstr "U heeft geen toestemming een groep aan te maken onder deze 'Basis'."
 
@@ -3517,9 +3519,10 @@ msgid "The selected application has no options."
 msgstr "Het geselecteerde programma heeft geen opties."
 
 #: plugins/admin/users/password.tpl:2
+#, fuzzy
 msgid ""
 "To change the user password use the fields below. The changes take effect "
-"immediately. Please memorize the new password, because the user would't be "
+"immediately. Please memorize the new password, because the user wouldn't be "
 "able to login without it."
 msgstr ""
 "Gebruik de velden hieronder om het gebruikers wachtwoord te veranderen. De "
@@ -3547,7 +3550,7 @@ msgid "You are not allowed to delete this user!"
 msgstr "U heeft geen toestemming om deze gebruiker te verwijderen!"
 
 #: plugins/admin/users/class_userManagement.inc:368
-#: plugins/admin/ogroups/class_ogroup.inc:202
+#: plugins/admin/ogroups/class_ogroup.inc:203
 msgid "none"
 msgstr "geen"
 
@@ -5347,59 +5350,59 @@ msgstr "U heeft geen toestemming deze objectgroep te verwijderen!"
 msgid "This 'dn' is no object group."
 msgstr "Deze 'dn' is geen objectgroep."
 
-#: plugins/admin/ogroups/class_ogroup.inc:204
+#: plugins/admin/ogroups/class_ogroup.inc:205
 msgid "too many different objects!"
 msgstr "te veel verschillende objecten!"
 
-#: plugins/admin/ogroups/class_ogroup.inc:206
+#: plugins/admin/ogroups/class_ogroup.inc:207
 msgid "users"
 msgstr "gebruikers"
 
-#: plugins/admin/ogroups/class_ogroup.inc:207
+#: plugins/admin/ogroups/class_ogroup.inc:208
 msgid "groups"
 msgstr "groepen"
 
-#: plugins/admin/ogroups/class_ogroup.inc:208
+#: plugins/admin/ogroups/class_ogroup.inc:209
 msgid "applications"
 msgstr "programma's"
 
-#: plugins/admin/ogroups/class_ogroup.inc:209
+#: plugins/admin/ogroups/class_ogroup.inc:210
 msgid "departments"
 msgstr "afdelingen"
 
-#: plugins/admin/ogroups/class_ogroup.inc:210
+#: plugins/admin/ogroups/class_ogroup.inc:211
 msgid "servers"
 msgstr "servers"
 
-#: plugins/admin/ogroups/class_ogroup.inc:211
+#: plugins/admin/ogroups/class_ogroup.inc:212
 msgid "workstations"
 msgstr "werkstations"
 
-#: plugins/admin/ogroups/class_ogroup.inc:212
+#: plugins/admin/ogroups/class_ogroup.inc:213
 msgid "terminals"
 msgstr "terminals"
 
-#: plugins/admin/ogroups/class_ogroup.inc:213
+#: plugins/admin/ogroups/class_ogroup.inc:214
 msgid "phones"
 msgstr "telefoons"
 
-#: plugins/admin/ogroups/class_ogroup.inc:214
+#: plugins/admin/ogroups/class_ogroup.inc:215
 msgid "printers"
 msgstr "printers"
 
-#: plugins/admin/ogroups/class_ogroup.inc:221
+#: plugins/admin/ogroups/class_ogroup.inc:222
 msgid "and"
 msgstr "en"
 
-#: plugins/admin/ogroups/class_ogroup.inc:363
+#: plugins/admin/ogroups/class_ogroup.inc:369
 msgid "Non existing dn: "
 msgstr "Niet bestaande dn: "
 
-#: plugins/admin/ogroups/class_ogroup.inc:494
+#: plugins/admin/ogroups/class_ogroup.inc:500
 msgid "Object groups need at least one member!"
 msgstr "Objectgroepen hebben ten minste een groepslid nodig!"
 
-#: plugins/admin/ogroups/class_ogroup.inc:499
+#: plugins/admin/ogroups/class_ogroup.inc:505
 msgid "You can combine two different object types at maximum only!"
 msgstr "U kunt maximaal twee verschillende object types tegelijk combineren!"
 
@@ -5750,7 +5753,7 @@ msgid "GOsa development snapshot (Rev %s)"
 msgstr "GOsa ontwikkelversie (Revisie %s)"
 
 #: include/functions.inc:1531
-msgid "Generating this page caused the PHP interpreter to rise some errors!"
+msgid "Generating this page caused the PHP interpreter to raise some errors!"
 msgstr ""
 
 #: include/functions.inc:1531
@@ -6321,79 +6324,92 @@ msgstr ""
 "installeren om wachtwoord hashes te genereren"
 
 #: include/setup_checks.inc:382
-msgid "PHP.ini check -> session.auto_register"
+#, fuzzy
+msgid "php.ini check -> session.auto_register"
 msgstr "PHP.ini controle -> session.auto_register"
 
 #: include/setup_checks.inc:383
+#, fuzzy
 msgid ""
 "In Order to use GOsa without any trouble, the session.auto_register option "
-"in your php.ini musst be 'Off'."
+"in your php.ini must be set to 'Off'."
 msgstr ""
 "Om GOsa zonder problemen te gebruiken, moet de session.auto_register optie "
 "in uw php.ini ingesteld zijn op 'Off'."
 
-#: include/setup_checks.inc:389
-msgid "PHP.ini check -> implicit_flush"
+#: include/setup_checks.inc:388
+#, fuzzy
+msgid "php.ini check -> implicit_flush"
 msgstr "PHP.ini controle -> implicit_flush"
 
-#: include/setup_checks.inc:390
+#: include/setup_checks.inc:389
+#, fuzzy
 msgid ""
-"This Option defines the Ouput handling, turn this Option off, to increase "
-"performance."
+"This option influences the Output handling. Turn this Option off, to "
+"increase performance."
 msgstr ""
 "Deze Optie definieert Uitvoer afhandeling. Zet deze Optie uit om "
 "snelheiswinst te behalen"
 
 #: include/setup_checks.inc:396
-msgid "PHP.ini check -> max_execution_time"
+#, fuzzy
+msgid "php.ini check -> max_execution_time"
 msgstr "PHP.ini controle -> max_execution_time"
 
 #: include/setup_checks.inc:397
+#, fuzzy
 msgid ""
-"The Execution time, should be 30 seconds minimun, cause some actions will "
-"need huge ammount of time ."
+"The Execution time should be at least 30 seconds, because some actions may "
+"consume more time."
 msgstr ""
 "De uitvoer tijd moet minimaal 30 seconden zijn, omdat sommige acties erg "
 "lang kunnen duren."
 
-#: include/setup_checks.inc:403
-msgid "PHP.ini check -> memory_limit"
+#: include/setup_checks.inc:404
+#, fuzzy
+msgid "php.ini check -> memory_limit"
 msgstr "PHP.ini controle -> memory_limit"
 
-#: include/setup_checks.inc:404
+#: include/setup_checks.inc:405
+#, fuzzy
 msgid ""
-"GOsa need at least 8M of memory, less will cause unpredictable errors, "
-"sometimes without error message!. Best would be 32 M here."
+"GOsa needs at least 8MB of memory, less will cause unpredictable errors! An "
+"optimal setting would be 16MB, increase it for larger setups."
 msgstr ""
 "GOsa heeft tenminste 8MB geheugen nodig. Minder geheugen kan allerlei "
 "onvoorspelbare fouten opleveren, soms zelfs zonder foutmeldingen!. Het zou "
 "het beste zijn om 32M hiervoor te gebruiken."
 
-#: include/setup_checks.inc:408
-msgid "PHP.ini check -> expose_php"
+#: include/setup_checks.inc:409
+#, fuzzy
+msgid "php.ini check -> expose_php"
 msgstr "PHP.ini controle -> expose_php"
 
-#: include/setup_checks.inc:409
+#: include/setup_checks.inc:410
+#, fuzzy
 msgid ""
-"PHP won't send any Information about the Server you are running, should be a "
-"security fact."
+"Increase the server security by setting expose_php to 'off'. PHP won't send "
+"any Information about the server you are running in this case."
 msgstr ""
 "PHP zal geen enkele informatie over de Server die u gebruikt weergeven. Zal "
 "hoogstwaarschijnlijk een veiligheids verhogende oorzaak hebben."
 
-#: include/setup_checks.inc:413
-msgid "PHP.ini check -> magic_quotes_gpc"
+#: include/setup_checks.inc:414
+#, fuzzy
+msgid "php.ini check -> magic_quotes_gpc"
 msgstr "PHP.ini check -> magic_quotes_gpc"
 
-#: include/setup_checks.inc:414
-msgid "Security option, php will escape all quotes in strings ."
-msgstr "Veligheids optie; php zal alle aanhalingstekens in strings omzetten"
+#: include/setup_checks.inc:415
+msgid ""
+"Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
+"escape all quotes in strings in this case."
+msgstr ""
 
-#: include/setup_checks.inc:716
+#: include/setup_checks.inc:717
 msgid "You've to specify an ldap server before continuing!"
 msgstr "U moet een LDAP server specificeren voordat u verder gaat!"
 
-#: include/setup_checks.inc:726 include/setup_checks.inc:829
+#: include/setup_checks.inc:727 include/setup_checks.inc:830
 msgid ""
 "Can't connect to the specified LDAP server! Please make sure that is "
 "reachable for GOsa."
@@ -6401,7 +6417,7 @@ msgstr ""
 "Kan niet met de opgegeven LDAP server verbinden! Verzeker a.u.b. dat deze "
 "bereikbaar is voor GOsa."
 
-#: include/setup_checks.inc:743 include/setup_checks.inc:841
+#: include/setup_checks.inc:744 include/setup_checks.inc:842
 msgid ""
 "Can't bind to the specified LDAP server! Please make sure that is reachable "
 "for GOsa."
@@ -6409,7 +6425,7 @@ msgstr ""
 "De aanmelding op de LDAP server is mislukt. Controleer a.u.b. dat deze "
 "bereikbaar is voor GOsa."
 
-#: include/setup_checks.inc:835
+#: include/setup_checks.inc:836
 #, fuzzy
 msgid ""
 "Can't bind to the specified LDAP server!. Please make sure that is reachable "
@@ -6418,7 +6434,7 @@ msgstr ""
 "De aanmelding op de LDAP server is mislukt. Controleer a.u.b. dat deze "
 "bereikbaar is voor GOsa."
 
-#: include/setup_checks.inc:855
+#: include/setup_checks.inc:856
 #, fuzzy
 msgid ""
 "Bind to server successful, but the server seems to be completly empty, "
@@ -6427,7 +6443,7 @@ msgstr ""
 "Verbinding met de server is succesvol uitgevoerd, maar deze lijkt geen "
 "informatie te bevatten. Controleer alle informatie a.u.b. nogmaals."
 
-#: include/setup_checks.inc:894
+#: include/setup_checks.inc:895
 #, php-format
 msgid ""
 "You're missing the required attribute '%s' from this formular. Please "
@@ -6436,12 +6452,12 @@ msgstr ""
 "Het vereiste atribuut '%s' uit dit formulier ontbreekt. Maak a.u.b. uw "
 "invoer af!"
 
-#: include/setup_checks.inc:931
+#: include/setup_checks.inc:932
 #, php-format
 msgid "Can't log into LDAP server. Reason was: %s."
 msgstr "De aanmelding op de LDAP server is mislukt. De reden was: '%s'."
 
-#: include/setup_checks.inc:1057 include/setup_checks.inc:1075
+#: include/setup_checks.inc:1058 include/setup_checks.inc:1076
 #: html/index.php:160 ihtml/themes/default/setup_useradmin.tpl:6
 msgid ""
 "You're missing an administrative account for GOsa, you'll not be able to "
@@ -6930,6 +6946,9 @@ msgstr "Configuratie bestand"
 #: ihtml/themes/default/setup_finish.tpl:17
 msgid "Download configuration"
 msgstr "Systeem configuratie"
+
+#~ msgid "Security option, php will escape all quotes in strings ."
+#~ msgstr "Veligheids optie; php zal alle aanhalingstekens in strings omzetten"
 
 #, fuzzy
 #~ msgid "Send report"

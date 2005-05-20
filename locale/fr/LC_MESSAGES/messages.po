@@ -199,7 +199,8 @@ msgid "Quota size"
 msgstr "Taille des Quota"
 
 #: plugins/personal/mail/generic.tpl:47 plugins/admin/groups/mail.tpl:46
-msgid "Alternate addresses"
+#, fuzzy
+msgid "Alternative addresses"
 msgstr "Adresses alternatives"
 
 #: plugins/personal/mail/generic.tpl:49 plugins/admin/groups/mail.tpl:47
@@ -289,7 +290,8 @@ msgid "Activate vacation message"
 msgstr "Activer la notification d'absence"
 
 #: plugins/personal/mail/generic.tpl:80
-msgid "Select if you want to filter this mails thru spamassassin"
+#, fuzzy
+msgid "Select if you want to filter this mails through spamassassin"
 msgstr "Sélectionnez si vous voulez que spamassassin filtre les mails"
 
 #: plugins/personal/mail/generic.tpl:80
@@ -2238,25 +2240,25 @@ msgstr "envoyer"
 msgid "receive"
 msgstr "recevoir"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:343
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:348
 msgid "You have no permissions to create a blocklist on this 'Base'."
 msgstr ""
 "Vous n'avez pas l'autorisation de créer une liste rouge sur cette 'Base'."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:349
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:354
 #: plugins/admin/departments/class_departmentGeneric.inc:143
 msgid "Required field 'Name' is not set."
 msgstr "Le champ obligatoire 'Name' n'est pas rempli."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:352
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:357
 msgid "Required field 'Name' contains invalid characters"
 msgstr "Le champ obligatoire 'Name' contient des caractères invalides"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:360
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:365
 msgid "Specified name is already used."
 msgstr "Le nom spécifié est déjà utilisé."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:367
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:372
 msgid "No permission to create a blocklist on this base."
 msgstr ""
 "Vous n'avez pas l'autorisation de créer des listes rouge sur cette base."
@@ -3313,7 +3315,7 @@ msgid "Special group (%d)"
 msgstr "Groupe spécial (%d)"
 
 #: plugins/admin/groups/class_groupGeneric.inc:574
-#: plugins/admin/ogroups/class_ogroup.inc:484
+#: plugins/admin/ogroups/class_ogroup.inc:490
 msgid "You have no permissions to create a group on this 'Base'."
 msgstr "Vous n'avez pas l'autorisation de créer un groupe dans cette 'Base'."
 
@@ -3555,9 +3557,10 @@ msgid "The selected application has no options."
 msgstr "L'application sélectionnée n'a pas d'options."
 
 #: plugins/admin/users/password.tpl:2
+#, fuzzy
 msgid ""
 "To change the user password use the fields below. The changes take effect "
-"immediately. Please memorize the new password, because the user would't be "
+"immediately. Please memorize the new password, because the user wouldn't be "
 "able to login without it."
 msgstr ""
 "Pour changer le mot de passe des utilisateurs, utilisez le champ ci-dessous. "
@@ -3585,7 +3588,7 @@ msgid "You are not allowed to delete this user!"
 msgstr "Vous n'êtes pas autorisé à supprimer cette utilisateur!"
 
 #: plugins/admin/users/class_userManagement.inc:368
-#: plugins/admin/ogroups/class_ogroup.inc:202
+#: plugins/admin/ogroups/class_ogroup.inc:203
 msgid "none"
 msgstr "aucun"
 
@@ -5398,59 +5401,59 @@ msgstr "Vous n'êtes pas autorisé à supprimer le groupe objet!"
 msgid "This 'dn' is no object group."
 msgstr "Ce 'dn' n'est pas un groupe objet."
 
-#: plugins/admin/ogroups/class_ogroup.inc:204
+#: plugins/admin/ogroups/class_ogroup.inc:205
 msgid "too many different objects!"
 msgstr "nombre d'objets différents trop important!"
 
-#: plugins/admin/ogroups/class_ogroup.inc:206
+#: plugins/admin/ogroups/class_ogroup.inc:207
 msgid "users"
 msgstr "utilisateurs"
 
-#: plugins/admin/ogroups/class_ogroup.inc:207
+#: plugins/admin/ogroups/class_ogroup.inc:208
 msgid "groups"
 msgstr "groupes"
 
-#: plugins/admin/ogroups/class_ogroup.inc:208
+#: plugins/admin/ogroups/class_ogroup.inc:209
 msgid "applications"
 msgstr "applications"
 
-#: plugins/admin/ogroups/class_ogroup.inc:209
+#: plugins/admin/ogroups/class_ogroup.inc:210
 msgid "departments"
 msgstr "départements"
 
-#: plugins/admin/ogroups/class_ogroup.inc:210
+#: plugins/admin/ogroups/class_ogroup.inc:211
 msgid "servers"
 msgstr "serveurs"
 
-#: plugins/admin/ogroups/class_ogroup.inc:211
+#: plugins/admin/ogroups/class_ogroup.inc:212
 msgid "workstations"
 msgstr "stations de travail"
 
-#: plugins/admin/ogroups/class_ogroup.inc:212
+#: plugins/admin/ogroups/class_ogroup.inc:213
 msgid "terminals"
 msgstr "terminaux"
 
-#: plugins/admin/ogroups/class_ogroup.inc:213
+#: plugins/admin/ogroups/class_ogroup.inc:214
 msgid "phones"
 msgstr "téléphones"
 
-#: plugins/admin/ogroups/class_ogroup.inc:214
+#: plugins/admin/ogroups/class_ogroup.inc:215
 msgid "printers"
 msgstr "imprimantes"
 
-#: plugins/admin/ogroups/class_ogroup.inc:221
+#: plugins/admin/ogroups/class_ogroup.inc:222
 msgid "and"
 msgstr "et"
 
-#: plugins/admin/ogroups/class_ogroup.inc:363
+#: plugins/admin/ogroups/class_ogroup.inc:369
 msgid "Non existing dn: "
 msgstr "le dn suivant n'existe pas : "
 
-#: plugins/admin/ogroups/class_ogroup.inc:494
+#: plugins/admin/ogroups/class_ogroup.inc:500
 msgid "Object groups need at least one member!"
 msgstr "Les groupes objets doivent avoir au minimum un membre!"
 
-#: plugins/admin/ogroups/class_ogroup.inc:499
+#: plugins/admin/ogroups/class_ogroup.inc:505
 msgid "You can combine two different object types at maximum only!"
 msgstr "Vous pouvez combiner au maximum deux objets différents !"
 
@@ -5810,7 +5813,7 @@ msgid "GOsa development snapshot (Rev %s)"
 msgstr "Version de développement de GOsa (Rev %s)"
 
 #: include/functions.inc:1531
-msgid "Generating this page caused the PHP interpreter to rise some errors!"
+msgid "Generating this page caused the PHP interpreter to raise some errors!"
 msgstr ""
 
 #: include/functions.inc:1531
@@ -6377,80 +6380,91 @@ msgstr ""
 "prenant en charge le cryptage des mots de passe."
 
 #: include/setup_checks.inc:382
-msgid "PHP.ini check -> session.auto_register"
+#, fuzzy
+msgid "php.ini check -> session.auto_register"
 msgstr "Vérification de PHP.ini pour la variable session.auto_register"
 
 #: include/setup_checks.inc:383
+#, fuzzy
 msgid ""
 "In Order to use GOsa without any trouble, the session.auto_register option "
-"in your php.ini musst be 'Off'."
+"in your php.ini must be set to 'Off'."
 msgstr ""
 "Pour pouvoir utiliser GOSa sans problèmes, la variable session.auto_register "
 "doit être a off dans votre php.ini."
 
-#: include/setup_checks.inc:389
-msgid "PHP.ini check -> implicit_flush"
+#: include/setup_checks.inc:388
+#, fuzzy
+msgid "php.ini check -> implicit_flush"
 msgstr "Vérification de votre PHP.ini pour la variable implicit_flush"
 
-#: include/setup_checks.inc:390
+#: include/setup_checks.inc:389
+#, fuzzy
 msgid ""
-"This Option defines the Ouput handling, turn this Option off, to increase "
-"performance."
+"This option influences the Output handling. Turn this Option off, to "
+"increase performance."
 msgstr ""
 "Cette option défini le gestion des sorties, mettez cette option a off pour "
 "améliorer la performance."
 
 #: include/setup_checks.inc:396
-msgid "PHP.ini check -> max_execution_time"
+#, fuzzy
+msgid "php.ini check -> max_execution_time"
 msgstr "Verification de votre PHP.ini pour la variable max_execution_time"
 
 #: include/setup_checks.inc:397
+#, fuzzy
 msgid ""
-"The Execution time, should be 30 seconds minimun, cause some actions will "
-"need huge ammount of time ."
+"The Execution time should be at least 30 seconds, because some actions may "
+"consume more time."
 msgstr ""
 "Le temps d'exécution doit être au moins de 30 secondes minimum, parce que "
 "certaines actions vont prendre beaucoup de temps."
 
-#: include/setup_checks.inc:403
-msgid "PHP.ini check -> memory_limit"
+#: include/setup_checks.inc:404
+#, fuzzy
+msgid "php.ini check -> memory_limit"
 msgstr "Vérification de votre PHP.ini pour la variable memory_limit"
 
-#: include/setup_checks.inc:404
+#: include/setup_checks.inc:405
+#, fuzzy
 msgid ""
-"GOsa need at least 8M of memory, less will cause unpredictable errors, "
-"sometimes without error message!. Best would be 32 M here."
+"GOsa needs at least 8MB of memory, less will cause unpredictable errors! An "
+"optimal setting would be 16MB, increase it for larger setups."
 msgstr ""
 "GOsa a besoin au minimum de 8MB de mémoire, moins causera des erreurs "
 "imprévisibles, voir sans message d'erreurs! Le mieux sera 32MB de mémoire."
 
-#: include/setup_checks.inc:408
-msgid "PHP.ini check -> expose_php"
+#: include/setup_checks.inc:409
+#, fuzzy
+msgid "php.ini check -> expose_php"
 msgstr "Vérification de votre PHP.ini pour la variable expose.php"
 
-#: include/setup_checks.inc:409
+#: include/setup_checks.inc:410
+#, fuzzy
 msgid ""
-"PHP won't send any Information about the Server you are running, should be a "
-"security fact."
+"Increase the server security by setting expose_php to 'off'. PHP won't send "
+"any Information about the server you are running in this case."
 msgstr ""
 "PHP n'enverra pas d'information a propos du serveur qui fait tourner "
 "l'application, ceci peut être considèrer comme une mesure de sécurité."
 
-#: include/setup_checks.inc:413
-msgid "PHP.ini check -> magic_quotes_gpc"
+#: include/setup_checks.inc:414
+#, fuzzy
+msgid "php.ini check -> magic_quotes_gpc"
 msgstr "Vérification de votre PHP ini > variable magic_quotes_gpc"
 
-#: include/setup_checks.inc:414
-msgid "Security option, php will escape all quotes in strings ."
+#: include/setup_checks.inc:415
+msgid ""
+"Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
+"escape all quotes in strings in this case."
 msgstr ""
-"Option de sécurité, php supprimera tout les guillemets dans les chaînes de "
-"caractères ."
 
-#: include/setup_checks.inc:716
+#: include/setup_checks.inc:717
 msgid "You've to specify an ldap server before continuing!"
 msgstr "Vous devez spécifier un serveur LDAP afin de pouvoir continuer!"
 
-#: include/setup_checks.inc:726 include/setup_checks.inc:829
+#: include/setup_checks.inc:727 include/setup_checks.inc:830
 msgid ""
 "Can't connect to the specified LDAP server! Please make sure that is "
 "reachable for GOsa."
@@ -6458,7 +6472,7 @@ msgstr ""
 "Impossible de se connecter au serveur LDAP! Vérifiez que GOsa puisse le "
 "contacter."
 
-#: include/setup_checks.inc:743 include/setup_checks.inc:841
+#: include/setup_checks.inc:744 include/setup_checks.inc:842
 msgid ""
 "Can't bind to the specified LDAP server! Please make sure that is reachable "
 "for GOsa."
@@ -6466,7 +6480,7 @@ msgstr ""
 "Impossible de s'identifier sur l'annuaire LDAP! Veuillez vérifiez que GOsa "
 "puisse le contacter."
 
-#: include/setup_checks.inc:835
+#: include/setup_checks.inc:836
 #, fuzzy
 msgid ""
 "Can't bind to the specified LDAP server!. Please make sure that is reachable "
@@ -6475,7 +6489,7 @@ msgstr ""
 "Impossible de s'identifier sur l'annuaire LDAP! Veuillez vérifiez que GOsa "
 "puisse le contacter."
 
-#: include/setup_checks.inc:855
+#: include/setup_checks.inc:856
 #, fuzzy
 msgid ""
 "Bind to server successful, but the server seems to be completly empty, "
@@ -6484,7 +6498,7 @@ msgstr ""
 "Connection au serveur réussie, mais le serveur semble complètement vide, "
 "veuillez vérifier toutes informations un seconde fois"
 
-#: include/setup_checks.inc:894
+#: include/setup_checks.inc:895
 #, php-format
 msgid ""
 "You're missing the required attribute '%s' from this formular. Please "
@@ -6493,12 +6507,12 @@ msgstr ""
 "L'attribut obligatoire '%s' n'existe pas pour ce formulaire. Veuillez le "
 "compléter!"
 
-#: include/setup_checks.inc:931
+#: include/setup_checks.inc:932
 #, php-format
 msgid "Can't log into LDAP server. Reason was: %s."
 msgstr "Impossible de se connecter au serveur LDAP. Le serveur indique '%s'."
 
-#: include/setup_checks.inc:1057 include/setup_checks.inc:1075
+#: include/setup_checks.inc:1058 include/setup_checks.inc:1076
 #: html/index.php:160 ihtml/themes/default/setup_useradmin.tpl:6
 msgid ""
 "You're missing an administrative account for GOsa, you'll not be able to "
@@ -6991,6 +7005,11 @@ msgstr "Fichier de configuration"
 #: ihtml/themes/default/setup_finish.tpl:17
 msgid "Download configuration"
 msgstr "Télécharger la configuration"
+
+#~ msgid "Security option, php will escape all quotes in strings ."
+#~ msgstr ""
+#~ "Option de sécurité, php supprimera tout les guillemets dans les chaînes "
+#~ "de caractères ."
 
 #, fuzzy
 #~ msgid "Send report"

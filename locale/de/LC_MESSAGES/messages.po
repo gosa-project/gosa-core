@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schr�der <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-05-20 16:36+0200\n"
+"PO-Revision-Date: 2005-05-20 18:01+0200\n"
 "Last-Translator:  <(null)>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -147,7 +147,7 @@ msgstr "CSV Import"
 
 #: contrib/gosa.conf:160
 msgid "{LOCATIONNAME}"
-msgstr ""
+msgstr "{LOCATIONNAME}"
 
 #: contrib/gosa.conf:177
 msgid "German"
@@ -188,7 +188,7 @@ msgstr "W�hlen Sie den Mail-Server, auf dem dieses Konto verwaltet werden soll"
 
 #: plugins/personal/mail/generic.tpl:21 plugins/admin/groups/mail.tpl:24
 msgid "Quota usage"
-msgstr "Mailbox-Nutzung"
+msgstr "Postfach-Nutzung"
 
 #: plugins/personal/mail/generic.tpl:28 plugins/admin/groups/mail.tpl:31
 #: plugins/admin/systems/class_terminalInfo.inc:136
@@ -197,15 +197,15 @@ msgstr "nicht definiert"
 
 #: plugins/personal/mail/generic.tpl:33 plugins/admin/groups/mail.tpl:36
 msgid "Quota size"
-msgstr "Max. Mailbox-Gr��e"
+msgstr "Max. Postfach-Gr��e"
 
 #: plugins/personal/mail/generic.tpl:47 plugins/admin/groups/mail.tpl:46
-msgid "Alternate addresses"
+msgid "Alternative addresses"
 msgstr "Alternative Adressen"
 
 #: plugins/personal/mail/generic.tpl:49 plugins/admin/groups/mail.tpl:47
 msgid "List of alternative mail addresses"
-msgstr "Liste von Alternative Mail-Adressen"
+msgstr "Liste alternativer Mail-Adressen"
 
 #: plugins/personal/mail/generic.tpl:55 plugins/personal/mail/generic.tpl:121
 #: plugins/personal/mail/mail_locals.tpl:49
@@ -262,21 +262,21 @@ msgstr "Hinzuf�gen"
 #: plugins/admin/ogroups/remove.tpl:15 plugins/admin/ogroups/headpage.tpl:17
 #: plugins/gofon/phoneaccount/generic.tpl:47
 msgid "Delete"
-msgstr "L�schen"
+msgstr "Entfernen"
 
 #: plugins/personal/mail/generic.tpl:65
 msgid "Mail options"
-msgstr "Mail-Optionen"
+msgstr "Mail-Einstellungen"
 
 #: plugins/personal/mail/generic.tpl:70
 msgid "Select if you want to forward mails without getting own copies of them"
 msgstr ""
 "W�hlen Sie dies wenn Mails nur weitergeleitet werden sollen, ohne eine "
-"Lokale Kopie zu speichern"
+"lokale Kopie zu speichern"
 
 #: plugins/personal/mail/generic.tpl:70
 msgid "No delivery to own mailbox"
-msgstr "Keine Auslieferung in eigene Mailbox"
+msgstr "Keine Zustellung in eigenes Postfach"
 
 #: plugins/personal/mail/generic.tpl:73
 msgid ""
@@ -288,17 +288,17 @@ msgid "Activate vacation message"
 msgstr "Urlaubsbenachrichtigung aktivieren"
 
 #: plugins/personal/mail/generic.tpl:80
-msgid "Select if you want to filter this mails thru spamassassin"
+msgid "Select if you want to filter this mails through spamassassin"
 msgstr "W�hlen Sie dies um Mails von Spamassassin filtern zu lassen"
 
 #: plugins/personal/mail/generic.tpl:80
 msgid "Move mails tagged with spam level greater than"
-msgstr "Mails mit einem Spam-Level gr��er als"
+msgstr "Verschiebe Mails mit einem SPAM-Level gr��er als"
 
 #: plugins/personal/mail/generic.tpl:81
 msgid "Choose spam level - smaller values are more sensitive"
 msgstr ""
-"W�hlen sie den SPAM-Level - kleinere Werte reagieren empfindlicher auf SPAM"
+"W�hlen sie den 'SPAM'-Level - kleinere Werte reagieren empfindlicher auf SPAM"
 
 #: plugins/personal/mail/generic.tpl:84
 msgid "to folder"
@@ -306,7 +306,7 @@ msgstr "in den Ordner"
 
 #: plugins/personal/mail/generic.tpl:90
 msgid "Reject mails bigger than"
-msgstr "Mails abweisen die gr��er als"
+msgstr "Mails abweisen die gr��er sind als"
 
 #: plugins/personal/mail/generic.tpl:92
 #: plugins/personal/connectivity/pureftpd.tpl:40
@@ -329,12 +329,12 @@ msgstr "Lokale hinzuf�gen"
 
 #: plugins/personal/mail/generic.tpl:133
 msgid "Advanced mail options"
-msgstr "Erweiterte Mail-Optionen"
+msgstr "Erweiterte Mail-Einstellungen"
 
 #: plugins/personal/mail/generic.tpl:138
 msgid "Select if user can only send and receive inside his own domain"
 msgstr ""
-"W�hlen Sie dies wenn der Benutzer Mails nur innerhalb seiner Domains senden "
+"W�hlen Sie dies wenn der Benutzer Mails nur innerhalb seiner Dom�ne senden "
 "und empfangen darf"
 
 #: plugins/personal/mail/generic.tpl:139
@@ -347,7 +347,7 @@ msgstr "Eigenes Sieve-Skript verwenden"
 
 #: plugins/personal/mail/generic.tpl:146
 msgid "disables all Mail options!"
-msgstr "schaltet alle �brigen Mail-Optionen aus!"
+msgstr "schaltet alle �brigen Mail-Einstellungen aus!"
 
 #: plugins/personal/mail/class_mailAccount.inc:23
 #: plugins/personal/password/class_password.inc:6
@@ -386,7 +386,8 @@ msgstr "Dies tut etwas"
 #, php-format
 msgid "There is no mail method '%s' specified in your gosa.conf available."
 msgstr ""
-"Die in ihrer gosa.conf angegebene Mail-Methode '%s' ist nicht verf�gbar."
+"Die in ihrer gosa.conf angegebene Zustellungs-Methode '%s' ist nicht "
+"verf�gbar."
 
 #: plugins/personal/mail/class_mailAccount.inc:163
 msgid "No DESC tag in vacation file:"
@@ -952,19 +953,19 @@ msgstr "automatisch"
 
 #: plugins/personal/posix/class_posixAccount.inc:218
 msgid "This account has no unix extensions."
-msgstr "Dieses Konto hat keine POSIX-Erweiterungen."
+msgstr "Dieses Konto hat keine UNIX-Erweiterungen."
 
 #: plugins/personal/posix/class_posixAccount.inc:238
 #: plugins/personal/posix/class_posixAccount.inc:241
 msgid "Remove posix account"
-msgstr "POSIX-Konto entfernen"
+msgstr "UNIX-Konto entfernen"
 
 #: plugins/personal/posix/class_posixAccount.inc:239
 msgid ""
 "This account has unix features enabled. To disable them, you'll need to "
 "remove the samba account first."
 msgstr ""
-"Dieses Konto hat POSIX-Erweiterungen aktiviert. Um sie zu deaktivieren, "
+"Dieses Konto hat UNIX-Erweiterungen aktiviert. Um sie zu deaktivieren, "
 "m�ssen Sie zun�chst das Samba-Konto deaktivieren."
 
 #: plugins/personal/posix/class_posixAccount.inc:242
@@ -972,19 +973,19 @@ msgid ""
 "This account has posix features enabled. You can disable them by clicking "
 "below."
 msgstr ""
-"Dieser Benutzer hat die POSIX-Eigenschaften aktiviert. Sie k�nnen diese "
-"durch einen Klick auf die untere Schaltfl�che deaktivieren."
+"Dieser Benutzer hat die UNIX-Eigenschaften aktiviert. Sie k�nnen diese durch "
+"einen Klick auf die untere Schaltfl�che deaktivieren."
 
 #: plugins/personal/posix/class_posixAccount.inc:245
 msgid "Create posix account"
-msgstr "POSIX-Konto erstellen"
+msgstr "UNIX-Konto erstellen"
 
 #: plugins/personal/posix/class_posixAccount.inc:246
 msgid ""
 "This account has posix features disabled. You can enable them by clicking "
 "below."
 msgstr ""
-"Dieses Konto hat keine g�ltigen POSIX-Erweiterungen. Sie k�nnen diese durch "
+"Dieses Konto hat keine g�ltigen UNIX-Erweiterungen. Sie k�nnen diese durch "
 "einen Klick auf die untere Schaltfl�che aktivieren."
 
 #: plugins/personal/posix/class_posixAccount.inc:431
@@ -1985,6 +1986,8 @@ msgstr "Die Einladungs-Richtlinie f�r die Adresse '%s' ist ung�ltig."
 #, php-format
 msgid "There's no mail user with address '%s' for your invitation policy!"
 msgstr ""
+"Es gibt keinen Mail Benutzer mit der Adresse %s f�r Ihre Einladungs-"
+"Richtlinie!"
 
 #: plugins/personal/connectivity/class_webdavAccount.inc:6
 msgid "WebDAV"
@@ -2032,6 +2035,8 @@ msgstr "Die PostgreSQL-Datenbank kann nicht erreicht werden"
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:730
 msgid "Needed Parameters to openexchange connectivity plugin failed!"
 msgstr ""
+"Ben�tigte Parameter f�r Open-Xchange Konnektivit�tserweiterung "
+"fehlgeschlagen!"
 
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:671
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:734
@@ -2047,6 +2052,8 @@ msgid ""
 "The kolab account is currently disabled. It's features can be adjusted if "
 "you add a mail account."
 msgstr ""
+"Das Kolab-Konto ist gerade deaktiviert. Die Einstellungen k�nnen angepasst "
+"werden, wenn Sie ein Postfach hinzuf�gen."
 
 #: plugins/personal/connectivity/kolab.tpl:10
 msgid "Delegations"
@@ -2080,7 +2087,7 @@ msgstr "Tage"
 
 #: plugins/personal/connectivity/kolab.tpl:44
 msgid "Invitation policy"
-msgstr ""
+msgstr "Einladungs-Richtlinie"
 
 #: plugins/personal/connectivity/webdav.tpl:1
 msgid "WebDAV account"
@@ -2141,24 +2148,23 @@ msgstr "Open-Xchange Konto"
 
 #: plugins/personal/connectivity/oxchange.tpl:2
 msgid "disabled, no Postgresql support detected"
-msgstr ""
+msgstr "deaktiviert, keine PostgreSQL-Unterst�tzung erkannt"
 
 #: plugins/personal/connectivity/oxchange.tpl:4
 msgid "Open-Xchange account"
 msgstr "Open-Xchange Konto"
 
 #: plugins/personal/connectivity/oxchange.tpl:13
-#, fuzzy
 msgid "Remember"
-msgstr "Dezember"
+msgstr "Erinnern"
 
 #: plugins/personal/connectivity/oxchange.tpl:17
 msgid "Appointment Days"
-msgstr ""
+msgstr "Tage f�r Termin"
 
 #: plugins/personal/connectivity/oxchange.tpl:21
 msgid "Task Days"
-msgstr ""
+msgstr "Tage f�r Aufgabe"
 
 #: plugins/personal/connectivity/oxchange.tpl:33
 msgid "User Information"
@@ -2226,25 +2232,25 @@ msgstr "senden"
 msgid "receive"
 msgstr "empfangen"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:343
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:348
 msgid "You have no permissions to create a blocklist on this 'Base'."
 msgstr ""
 "Sie haben keine Berechtigung, eine Blocklist unter dieser 'Basis' anzulegen."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:349
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:354
 #: plugins/admin/departments/class_departmentGeneric.inc:143
 msgid "Required field 'Name' is not set."
 msgstr "Das ben�tigte Feld 'Name' ist nicht ausgef�llt."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:352
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:357
 msgid "Required field 'Name' contains invalid characters"
 msgstr "Das ben�tigte Feld 'Name' enth�lt ung�ltige Zeichen"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:360
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:365
 msgid "Specified name is already used."
 msgstr "Der angegebene Name wird bereits verwendet."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:367
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:372
 msgid "No permission to create a blocklist on this base."
 msgstr ""
 "Sie haben keine Berechtigung, eine Sperrliste unterhalb dieser Basis "
@@ -2565,6 +2571,7 @@ msgstr "Bitte geben Sie eine g�ltige Telefonnummer im Feld 'Fax' an."
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:474
 msgid "Mail delivery is checked, but no address has been specified."
 msgstr ""
+"Die Zustellung von Mail ist aktiviert, aber es wurde keine Adresse angegeben."
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:476
 msgid "The mail address you've entered is invalid."
@@ -2974,7 +2981,7 @@ msgstr "Nichts zu importieren!"
 #: plugins/addons/ldapmanager/class_import.inc:58
 #: plugins/addons/ldapmanager/class_import.inc:66
 msgid "There is no file uploaded."
-msgstr ""
+msgstr "Es wurden keine Datei hochgeladen."
 
 #: plugins/addons/ldapmanager/class_csvimport.inc:306
 #: plugins/addons/ldapmanager/class_import.inc:51
@@ -3040,11 +3047,11 @@ msgstr "W�hle Vorlage"
 
 #: plugins/addons/ldapmanager/contentcsv.tpl:35
 msgid "All entries have been written to the LDAP database successfully."
-msgstr ""
+msgstr "Alle Eintr�ge wurden erfolgreich in die LDAP-Datenbank geschrieben."
 
 #: plugins/addons/ldapmanager/contentcsv.tpl:37
 msgid "Oups. There was an error during the import of your data."
-msgstr ""
+msgstr "Es gab einen Fehler w�hrend des Importvorgangs Ihrer Daten."
 
 #: plugins/addons/ldapmanager/contentcsv.tpl:40
 msgid "Here is the status report for the import:"
@@ -3088,7 +3095,7 @@ msgstr "W�hlen Sie die Abteilung, die exportiert werden soll"
 
 #: plugins/addons/ldapmanager/contentexport.tpl:39
 msgid "Export IVBB LDIF for"
-msgstr ""
+msgstr "Exportiere IVBB LDIF f�r"
 
 #: plugins/addons/ldapmanager/contentexport.tpl:59
 msgid "Export successful"
@@ -3288,7 +3295,7 @@ msgid "Special group (%d)"
 msgstr "Spezielle Gruppe (%d)"
 
 #: plugins/admin/groups/class_groupGeneric.inc:574
-#: plugins/admin/ogroups/class_ogroup.inc:484
+#: plugins/admin/ogroups/class_ogroup.inc:490
 msgid "You have no permissions to create a group on this 'Base'."
 msgstr ""
 "Sie haben keine Berechtigung, eine Gruppe unterhalb dieser 'Basis' anzulegen."
@@ -3337,7 +3344,7 @@ msgid ""
 "-Edit- and -New...- will execute an assistant to aid you in editing group "
 "properties. -Delete- will ask for confirmation before removing groups."
 msgstr ""
-"Bearbeiten- und -Neue Gruppe- f�hren einen Assistenten aus, der Sie bei der "
+"Bearbeiten- und -Neu...- f�hren einen Assistenten aus, der Sie bei der "
 "Bearbeitung der Gruppen-Eigenschaften unterst�tzt. - L�schen- f�hrt eine "
 "Sicherheitsabfrage durch bevor der endg�ltige L�schvorgang erfolgt."
 
@@ -3444,7 +3451,7 @@ msgstr "Gruppenname"
 
 #: plugins/admin/groups/generic.tpl:9
 msgid "Posix name of the group"
-msgstr "POSIX Name der Gruppe"
+msgstr "UNIX Name der Gruppe"
 
 #: plugins/admin/groups/generic.tpl:14 plugins/admin/ogroups/generic.tpl:14
 msgid "Descriptive text for this group"
@@ -3493,11 +3500,11 @@ msgstr "Anwendungsoptionen"
 
 #: plugins/admin/groups/class_groupApplication.inc:61
 msgid "This 'dn' is no appgroup."
-msgstr "Diese 'dn' hat keine Applikations-Informationen"
+msgstr "Diese 'dn' hat keine Anwendungs-Informationen"
 
 #: plugins/admin/groups/class_groupApplication.inc:69
 msgid "Remove applications"
-msgstr "Anwendungen deaktivieren"
+msgstr "Anwendungen entfernen"
 
 #: plugins/admin/groups/class_groupApplication.inc:70
 msgid ""
@@ -3509,7 +3516,7 @@ msgstr ""
 
 #: plugins/admin/groups/class_groupApplication.inc:72
 msgid "Create applications"
-msgstr "Anwendungen aktivieren"
+msgstr "Anwendungen erstellen"
 
 #: plugins/admin/groups/class_groupApplication.inc:73
 msgid ""
@@ -3522,7 +3529,8 @@ msgstr ""
 #: plugins/admin/groups/class_groupApplication.inc:107
 msgid "The selected application name is not uniq. Please check your LDAP."
 msgstr ""
-"Der gew�hlte Anwendungsname ist nicht eindeutig. Bitte pr�fen Sie den LDAP."
+"Der gew�hlte Anwendungsname ist nicht eindeutig. Bitte �berpr�fen Sie Ihr "
+"LDAP-Verzeichnis."
 
 #: plugins/admin/groups/class_groupApplication.inc:143
 msgid "The selected application has no options."
@@ -3531,12 +3539,12 @@ msgstr "Die gew�hlte Anwendung hat keine Optionen."
 #: plugins/admin/users/password.tpl:2
 msgid ""
 "To change the user password use the fields below. The changes take effect "
-"immediately. Please memorize the new password, because the user would't be "
+"immediately. Please memorize the new password, because the user wouldn't be "
 "able to login without it."
 msgstr ""
 "Um das Benutzer-Passwort zu �ndern, nutzen Sie die Felder unten. Die "
 "�nderungen werden sofort wirksam. Merken Sie sich das Passwort, da sich der "
-"Benutzer nicht mehr ohne dieses Passwort anmelden kann."
+"Benutzer ohne dieses Passwort nicht anmelden kann."
 
 #: plugins/admin/users/class_userManagement.inc:25
 msgid "Users"
@@ -3558,7 +3566,7 @@ msgid "You are not allowed to delete this user!"
 msgstr "Es ist Ihnen nicht erlaubt, diesen Benutzer zu l�schen!"
 
 #: plugins/admin/users/class_userManagement.inc:368
-#: plugins/admin/ogroups/class_ogroup.inc:202
+#: plugins/admin/ogroups/class_ogroup.inc:203
 msgid "none"
 msgstr "keine"
 
@@ -3605,7 +3613,7 @@ msgid ""
 msgstr ""
 "Dies umfasst alle Konto-Informationen, Zugriffsregeln, IMAP-Einstellungen, "
 "etc. dieses Benutzers. Bitte pr�fen Sie genau, da es keine M�glichkeit f�r "
-"GOsa gibt, die Daten zu restaurieren. "
+"GOsa gibt, die Daten wiederherzustellen. "
 
 #: plugins/admin/users/headpage.tpl:6
 msgid "List of users"
@@ -3621,10 +3629,9 @@ msgid ""
 "great number of users, you may want to use the range selectors on top of the "
 "user list."
 msgstr ""
-"Dieses Men� bietet die M�glichkeit Benutzer neu anzulegen, diese zu "
-"bearbeiten oder zu l�schen. Wenn Sie eine grosse Anzahl an Benutzern "
-"verwalten m�ssen, bietet sich die Verwendung der Bereichsauswahl �ber der "
-"Liste an."
+"Dieses Men� erm�glicht Ihnen neue Benutzer anzulegen, diese zu bearbeiten "
+"oder zu l�schen. Wenn Sie eine gro�e Anzahl an Benutzern verwalten m�ssen, "
+"bietet sich die Verwendung der Bereichsauswahl �ber der Liste an."
 
 #: plugins/admin/users/headpage.tpl:33
 msgid ""
@@ -3637,7 +3644,7 @@ msgstr ""
 
 #: plugins/admin/users/headpage.tpl:47
 msgid "Select to see template pseudo users"
-msgstr "W�hlen Sie dies um Vorlagen anzuzeigen"
+msgstr "W�hlen Sie dies um Vorlagen f�r Benutzer anzuzeigen"
 
 #: plugins/admin/users/headpage.tpl:47
 msgid "Show templates"
@@ -3649,11 +3656,11 @@ msgstr "Ausw�hlen, um die Benutzer anzuzeigen, die nur ein GOsa-Objekt haben"
 
 #: plugins/admin/users/headpage.tpl:48
 msgid "Show functional users"
-msgstr "Zeige funktionelle Benutzer"
+msgstr "Zeige zweckbezogene Benutzer"
 
 #: plugins/admin/users/headpage.tpl:49
 msgid "Select to see users that have posix settings"
-msgstr "Ausw�hlen, um die Benutzer mit POSIX-Konto zu sehen"
+msgstr "Ausw�hlen, um die Benutzer mit UNIX-Konto zu sehen"
 
 #: plugins/admin/users/headpage.tpl:49
 msgid "Show unix users"
@@ -3661,11 +3668,11 @@ msgstr "Zeige UNIX-Benutzer"
 
 #: plugins/admin/users/headpage.tpl:50
 msgid "Select to see users that have mail settings"
-msgstr "Ausw�hlen, um die Benutzer zu sehen die ein Mail-Konto besitzen"
+msgstr "Ausw�hlen, um die Benutzer zu sehen die eine Mail-Erweiterung besitzen"
 
 #: plugins/admin/users/headpage.tpl:50
 msgid "Show mail users"
-msgstr "Zeige E-Mail-Benutzer"
+msgstr "Zeige Mail-Benutzer"
 
 #: plugins/admin/users/headpage.tpl:51
 msgid "Select to see users that have samba settings"
@@ -3744,7 +3751,7 @@ msgstr "Der von Ihnen angegebene Optionsname '%s' ist ung�ltig."
 #: plugins/admin/applications/generic.tpl:7
 #: plugins/admin/applications/generic.tpl:8
 msgid "Application name"
-msgstr "Anwendungsname"
+msgstr "Name der Anwendung"
 
 #: plugins/admin/applications/generic.tpl:12
 #: plugins/admin/systems/server.tpl:48 plugins/admin/systems/terminal.tpl:109
@@ -3763,7 +3770,7 @@ msgstr "Angezeigter Name"
 
 #: plugins/admin/applications/generic.tpl:20
 msgid "Application name to be displayed (i.e. below icons)"
-msgstr "Angezeigter Anwendungsname (z. B. unter Icons)"
+msgstr "Angezeigter Name der Anwendung (z.B. unter Symbole)"
 
 #: plugins/admin/applications/generic.tpl:35
 msgid "Choose subtree to place application in"
@@ -4577,7 +4584,7 @@ msgstr "Das Attribut '%s' ist leer oder enth�lt ung�ltige Zeichen."
 #: plugins/admin/systems/class_servDB.inc:127
 #, php-format
 msgid "The imap connect string needs to be in the form '%s'."
-msgstr ""
+msgstr "Der IMAP-Verbindungsstring muss in der Form '%s' sein."
 
 #: plugins/admin/systems/class_servDB.inc:131
 msgid "The sieve port needs to be numeric."
@@ -4617,7 +4624,7 @@ msgstr "Asterisk Verwaltung"
 
 #: plugins/admin/systems/servdb.tpl:46
 msgid "Asterisk DB user"
-msgstr ""
+msgstr "Asterisk-DB Benutzer"
 
 #: plugins/admin/systems/servdb.tpl:54
 msgid "Country dial prefix"
@@ -5126,38 +5133,43 @@ msgstr ""
 #, php-format
 msgid "Include data from %s days in the past when creating free/busy lists"
 msgstr ""
+"Ber�cksichte %s Tage in der Vergangenheit beim Erstellen von Frei/Belegt "
+"Listen"
 
 #: plugins/admin/systems/class_servKolab.inc:173
 #, php-format
 msgid "Warn users when using more than %s%% of their mail quota"
-msgstr ""
+msgstr "Warne Benutzer, wenn sie mehr als %s%% ihres Mail-Kontigentes benutzen"
 
 #: plugins/admin/systems/class_servKolab.inc:197
 msgid "Free/Busy settings -> Future days must be set."
-msgstr ""
+msgstr "Frei/Belegt Einstellungen -> Intervall mu� gesetzt sein."
 
 #: plugins/admin/systems/class_servKolab.inc:199
 msgid "Free/Busy settings -> Future days must be a positive value."
-msgstr ""
+msgstr "Frei/Belegt Einstellungen -> Intervall mu� ein positiver Wert sein."
 
 #: plugins/admin/systems/class_servKolab.inc:201
 msgid "Free/Busy settings -> Future days must be a value."
-msgstr ""
+msgstr "Frei/Belegt Einstellungen -> Intervall mu� einen Wert besitzen."
 
 #: plugins/admin/systems/class_servKolab.inc:205
 msgid ""
 "Cyrus Quota settings -> The given Quota settings value must be a number."
 msgstr ""
+"Cyrus Kontingent-Einstellungen -> Der angegebene Wert mu� numerisch sein."
 
 #: plugins/admin/systems/class_servKolab.inc:207
 msgid ""
 "Cyrus Quota settings -> Please choose a value between 1 and 100 for Quota "
 "settings."
 msgstr ""
+"Cyrus Kontingent-Einstellungen -> Bitte w�hlen Sie einen Wert zwischen 1 und "
+"100."
 
 #: plugins/admin/systems/class_servKolab.inc:209
 msgid "Cyrus Quota settings -> Future days must be a value."
-msgstr ""
+msgstr "Cyrus Kontingent-Einstellungen -> Intervall mu� einen Wert besitzen."
 
 #: plugins/admin/systems/class_servKolab.inc:214
 msgid "SMTP privileged networks -> No value is given."
@@ -5318,6 +5330,9 @@ msgid ""
 "group. Be aware that rebooting machines may not make people happy who are "
 "currently working at these machines."
 msgstr ""
+"Die gew�hlten Aktionen beeinflussen <b>alle</b> Systeme in dieser "
+"Objektgruppe. Seien Sie sich bewusst, dass das Neustarten von Systemen, auf "
+"denen gearbeitet wird, nicht gerade Freude verbreitet."
 
 #: plugins/admin/ogroups/termgroup.tpl:7
 msgid "Select action to execute for this   group of terminals"
@@ -5363,59 +5378,59 @@ msgstr "Es ist Ihnen nicht erlaubt, diese Objektgruppe zu l�schen!"
 msgid "This 'dn' is no object group."
 msgstr "Diese 'dn' hat keine Objektgruppenerweiterungen."
 
-#: plugins/admin/ogroups/class_ogroup.inc:204
+#: plugins/admin/ogroups/class_ogroup.inc:205
 msgid "too many different objects!"
 msgstr "zu viele unterschiedliche Objekte!"
 
-#: plugins/admin/ogroups/class_ogroup.inc:206
+#: plugins/admin/ogroups/class_ogroup.inc:207
 msgid "users"
 msgstr "Benutzer"
 
-#: plugins/admin/ogroups/class_ogroup.inc:207
+#: plugins/admin/ogroups/class_ogroup.inc:208
 msgid "groups"
 msgstr "Gruppen"
 
-#: plugins/admin/ogroups/class_ogroup.inc:208
+#: plugins/admin/ogroups/class_ogroup.inc:209
 msgid "applications"
 msgstr "Anwendungen"
 
-#: plugins/admin/ogroups/class_ogroup.inc:209
+#: plugins/admin/ogroups/class_ogroup.inc:210
 msgid "departments"
 msgstr "Abteilungen"
 
-#: plugins/admin/ogroups/class_ogroup.inc:210
+#: plugins/admin/ogroups/class_ogroup.inc:211
 msgid "servers"
 msgstr "Server"
 
-#: plugins/admin/ogroups/class_ogroup.inc:211
+#: plugins/admin/ogroups/class_ogroup.inc:212
 msgid "workstations"
 msgstr "Arbeitsstationen"
 
-#: plugins/admin/ogroups/class_ogroup.inc:212
+#: plugins/admin/ogroups/class_ogroup.inc:213
 msgid "terminals"
 msgstr "Terminals"
 
-#: plugins/admin/ogroups/class_ogroup.inc:213
+#: plugins/admin/ogroups/class_ogroup.inc:214
 msgid "phones"
 msgstr "Telefone"
 
-#: plugins/admin/ogroups/class_ogroup.inc:214
+#: plugins/admin/ogroups/class_ogroup.inc:215
 msgid "printers"
 msgstr "Drucker"
 
-#: plugins/admin/ogroups/class_ogroup.inc:221
+#: plugins/admin/ogroups/class_ogroup.inc:222
 msgid "and"
 msgstr "und"
 
-#: plugins/admin/ogroups/class_ogroup.inc:363
+#: plugins/admin/ogroups/class_ogroup.inc:369
 msgid "Non existing dn: "
 msgstr "Unbekannte dn: "
 
-#: plugins/admin/ogroups/class_ogroup.inc:494
+#: plugins/admin/ogroups/class_ogroup.inc:500
 msgid "Object groups need at least one member!"
 msgstr "Objektgruppen sollten mindestens ein Mitglied haben!"
 
-#: plugins/admin/ogroups/class_ogroup.inc:499
+#: plugins/admin/ogroups/class_ogroup.inc:505
 msgid "You can combine two different object types at maximum only!"
 msgstr ""
 "Sie k�nnen maximal zwei verschiedene Objekttypen miteinander kombinieren!"
@@ -5772,8 +5787,10 @@ msgid "GOsa development snapshot (Rev %s)"
 msgstr "GOsa Entwicklerversion (Rev %s)"
 
 #: include/functions.inc:1531
-msgid "Generating this page caused the PHP interpreter to rise some errors!"
+msgid "Generating this page caused the PHP interpreter to raise some errors!"
 msgstr ""
+"Der PHP-Interpreter verursachte einen oder mehrere Fehler beim Erzeugen "
+"dieser Seite!"
 
 #: include/functions.inc:1531
 msgid "Toggle information"
@@ -5998,12 +6015,14 @@ msgstr ""
 #: include/class_ldap.inc:646
 #, php-format
 msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
-msgstr ""
+msgstr "Der DN: '%s' (aus Zeile %s) existiert bereits in der LDAP-Datenbank."
 
 #: include/class_ldap.inc:661
 #, php-format
 msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
 msgstr ""
+"Fehler beim Importieren von dn: '%s', bitte �berpr�fen Sie die LDIF-Datei ab "
+"Zeile %s!"
 
 #: include/setup_checks.inc:110
 msgid "Can't bind to LDAP. No schema check possible!"
@@ -6148,7 +6167,7 @@ msgstr "Pr�fe auf eine PHP-Version (<=5)"
 
 #: include/setup_checks.inc:268
 msgid "PHP must be below version 5."
-msgstr ""
+msgstr "PHP-Version mu� kleiner als 5 sein."
 
 #: include/setup_checks.inc:272
 msgid "Checking if register_globals is set to 'off'"
@@ -6319,72 +6338,84 @@ msgstr ""
 "Programm ben�tigt, welches die Passwort-Hashes generieren kann."
 
 #: include/setup_checks.inc:382
-msgid "PHP.ini check -> session.auto_register"
-msgstr "PHP.ini �berpr�fung -> session.auto_register"
+msgid "php.ini check -> session.auto_register"
+msgstr "php.ini �berpr�fung -> session.auto_register"
 
 #: include/setup_checks.inc:383
 msgid ""
 "In Order to use GOsa without any trouble, the session.auto_register option "
-"in your php.ini musst be 'Off'."
+"in your php.ini must be set to 'Off'."
 msgstr ""
+"UM GOsa fehlerfrei benutzen zu k�nnen, mu� die Option session.auto_register "
+"in Ihrer php.ini auf 'off' stehen."
+
+#: include/setup_checks.inc:388
+msgid "php.ini check -> implicit_flush"
+msgstr "php.ini �berpr�fung -> implicit_flush"
 
 #: include/setup_checks.inc:389
-msgid "PHP.ini check -> implicit_flush"
-msgstr "PHP.ini �berpr�fung -> implicit_flush"
-
-#: include/setup_checks.inc:390
 msgid ""
-"This Option defines the Ouput handling, turn this Option off, to increase "
-"performance."
+"This option influences the Output handling. Turn this Option off, to "
+"increase performance."
 msgstr ""
+"Diese Einstellung beeinflusst die Verarbeitung der Ausgabe. Stellen Siediese "
+"auf 'off', um die Leistung zu erh�hen."
 
 #: include/setup_checks.inc:396
-msgid "PHP.ini check -> max_execution_time"
-msgstr "PHP.ini �berpr�fung -> max_execution_time"
+msgid "php.ini check -> max_execution_time"
+msgstr "php.ini �berpr�fung -> max_execution_time"
 
 #: include/setup_checks.inc:397
 msgid ""
-"The Execution time, should be 30 seconds minimun, cause some actions will "
-"need huge ammount of time ."
+"The Execution time should be at least 30 seconds, because some actions may "
+"consume more time."
 msgstr ""
-
-#: include/setup_checks.inc:403
-msgid "PHP.ini check -> memory_limit"
-msgstr "PHP.ini �berpr�fung -> memory_limit"
+"Die Ausf�hrungszeit sollte mindestens 30 Sekunden betragen, da einige "
+"Aktionen viel Zeit in Anspruch nehmen."
 
 #: include/setup_checks.inc:404
-msgid ""
-"GOsa need at least 8M of memory, less will cause unpredictable errors, "
-"sometimes without error message!. Best would be 32 M here."
-msgstr ""
-"GOsa ben�tigt mindestens 8M Speicher, weniger Speicher w�rde unvorhersehbare "
-"Problemeverursachen (auch ohne Fehlermeldung)! Optimal sind hier 32M."
+msgid "php.ini check -> memory_limit"
+msgstr "php.ini �berpr�fung -> memory_limit"
 
-#: include/setup_checks.inc:408
-msgid "PHP.ini check -> expose_php"
-msgstr "PHP.ini �berpr�fung -> expose_php"
+#: include/setup_checks.inc:405
+msgid ""
+"GOsa needs at least 8MB of memory, less will cause unpredictable errors! An "
+"optimal setting would be 16MB, increase it for larger setups."
+msgstr ""
+"GOsa ben�tigt mindestens 8MB Speicher, weniger Speicher w�rde "
+"unvorhersehbare Probleme verursachen! Optimal f�r den Betrieb sind 16MB, "
+"Erweiterung je nach Bedarf (bei gr��eren Installationen)."
 
 #: include/setup_checks.inc:409
-msgid ""
-"PHP won't send any Information about the Server you are running, should be a "
-"security fact."
-msgstr ""
-"PHP wird keine Informationen �ber Ihren Server senden, dieses sollte "
-"ausSicherheitsgr�nden klar sein."
+msgid "php.ini check -> expose_php"
+msgstr "php.ini �berpr�fung -> expose_php"
 
-#: include/setup_checks.inc:413
-msgid "PHP.ini check -> magic_quotes_gpc"
-msgstr "PHP.ini �berpr�fung -> magic_quotes_gpc"
+#: include/setup_checks.inc:410
+msgid ""
+"Increase the server security by setting expose_php to 'off'. PHP won't send "
+"any Information about the server you are running in this case."
+msgstr ""
+"Erzielen Sie eine h�here Sicherheit Ihres Servers, indem Sie expose_php auf "
+"'off' setzen. PHP wird in dieser Einstellung keine Informationen �ber Ihren "
+"laufenden Server senden."
 
 #: include/setup_checks.inc:414
-msgid "Security option, php will escape all quotes in strings ."
-msgstr "Sicherheitsoption, PHP wird alle 'quotes' in 'strings' umwandeln."
+msgid "php.ini check -> magic_quotes_gpc"
+msgstr "php.ini �berpr�fung -> magic_quotes_gpc"
 
-#: include/setup_checks.inc:716
+#: include/setup_checks.inc:415
+msgid ""
+"Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
+"escape all quotes in strings in this case."
+msgstr ""
+"Erh�hen Sie die Sicherheit des Server, indem sie magic_quotes_gpc auf 'on' "
+"stellen. PHP wird in dieser Einstellung alle 'quotes' in 'strings' umwandeln."
+
+#: include/setup_checks.inc:717
 msgid "You've to specify an ldap server before continuing!"
 msgstr "Sie m�ssen einen LDAP Server angeben um fortzufahren!"
 
-#: include/setup_checks.inc:726 include/setup_checks.inc:829
+#: include/setup_checks.inc:727 include/setup_checks.inc:830
 msgid ""
 "Can't connect to the specified LDAP server! Please make sure that is "
 "reachable for GOsa."
@@ -6392,7 +6423,7 @@ msgstr ""
 "Kann den angegebenen LDAP-Server nicht erreichen! Bitte stellen Sie sicher, "
 "dass er f�r GOsa erreichbar ist."
 
-#: include/setup_checks.inc:743 include/setup_checks.inc:841
+#: include/setup_checks.inc:744 include/setup_checks.inc:842
 msgid ""
 "Can't bind to the specified LDAP server! Please make sure that is reachable "
 "for GOsa."
@@ -6400,7 +6431,7 @@ msgstr ""
 "Die Anmeldung am LDAP-Server ist fehlgeschlagen. Bitte stellen Sie sicher, "
 "dass der Server f�r GOsa erreichbar ist."
 
-#: include/setup_checks.inc:835
+#: include/setup_checks.inc:836
 msgid ""
 "Can't bind to the specified LDAP server!. Please make sure that is reachable "
 "for GOsa."
@@ -6408,7 +6439,7 @@ msgstr ""
 "Die Anmeldung am LDAP Server ist fehlgeschlagen. Bitte stellen Sie sicher, "
 "dass der Server f�r GOsa erreichbar ist."
 
-#: include/setup_checks.inc:855
+#: include/setup_checks.inc:856
 msgid ""
 "Bind to server successful, but the server seems to be completly empty, "
 "please check all informations twice"
@@ -6416,7 +6447,7 @@ msgstr ""
 "Die Verbindung zum Server war erfolgreich, dieser scheint jedoch leer zu "
 "sein.Bitte �berpr�fen Sie nochmals Ihre Angaben."
 
-#: include/setup_checks.inc:894
+#: include/setup_checks.inc:895
 #, php-format
 msgid ""
 "You're missing the required attribute '%s' from this formular. Please "
@@ -6425,12 +6456,12 @@ msgstr ""
 "Das Attribut '%s' ist in diesem Formular nicht angegeben. Bitte "
 "vervollst�ndigen Sie Ihre Eingaben!"
 
-#: include/setup_checks.inc:931
+#: include/setup_checks.inc:932
 #, php-format
 msgid "Can't log into LDAP server. Reason was: %s."
 msgstr "Die Anmeldung am LDAP Server ist fehlgeschlagen. Die Meldung war '%s'."
 
-#: include/setup_checks.inc:1057 include/setup_checks.inc:1075
+#: include/setup_checks.inc:1058 include/setup_checks.inc:1076
 #: html/index.php:160 ihtml/themes/default/setup_useradmin.tpl:6
 msgid ""
 "You're missing an administrative account for GOsa, you'll not be able to "
@@ -6926,6 +6957,9 @@ msgstr "Konfigurationsdatei"
 msgid "Download configuration"
 msgstr "Konfiguration herunterladen"
 
+#~ msgid "Security option, php will escape all quotes in strings ."
+#~ msgstr "Sicherheitsoption, PHP wird alle 'quotes' in 'strings' umwandeln."
+
 #~ msgid "Send report"
 #~ msgstr "Sende Bericht"
 
@@ -6947,10 +6981,12 @@ msgstr "Konfiguration herunterladen"
 
 #~ msgid ""
 #~ "<b>SAMBA 3</b> support enabled<td class=\"check\">gosa+samba3.schema</td>"
-#~ msgstr "<b>SAMBA 3</b> UnterstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂtzung aktiviert<td class=\"check\">gosa+samba3.schema</td>"
+#~ msgstr ""
+#~ "<b>SAMBA 3</b> UnterstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂtzung aktiviert<td class=\"check\">gosa+samba3.schema</td>"
 
 #~ msgid "<b>SAMBA 2</b> support enabled<td class=\"check\">samba.schema</td>"
-#~ msgstr "<b>SAMBA 2</b>UnterstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂtzung aktiviert<td class=\"check\">samba.schema</td>"
+#~ msgstr ""
+#~ "<b>SAMBA 2</b>UnterstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂtzung aktiviert<td class=\"check\">samba.schema</td>"
 
 #~ msgid "GONICUS"
 #~ msgstr "GONICUS"
@@ -6958,8 +6994,9 @@ msgstr "Konfiguration herunterladen"
 #~ msgid ""
 #~ "Unsupported password hash detected. Can't generate compatible password."
 #~ msgstr ""
-#~ "Es wurde ein nicht-unterstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂtzter Passwort-Hash entdeckt. Es kann kein passendes "
-#~ "Passwort generiert werden."
+#~ "Es wurde ein nicht-"
+#~ "unterstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂtzter "
+#~ "Passwort-Hash entdeckt. Es kann kein passendes Passwort generiert werden."
 
 #~ msgid "Checking for gd module"
 #~ msgstr "Suche gd-Modul"
@@ -6969,11 +7006,13 @@ msgstr "Konfiguration herunterladen"
 #~ "as jpegPhoto."
 #~ msgstr ""
 #~ "GOsa "
-#~ "benÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶tigt "
+#~ "benÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶tigt "
 #~ "dieses Modul um "
-#~ "GrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂenverÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ"
-#~ "¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬nderungen bei Bildern "
-#~ "durchzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂhren."
+#~ "GrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂenverÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ"
+#~ "¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬nderungen "
+#~ "bei Bildern "
+#~ "durchzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂhren."
 
 #~ msgid "You are currently using GOsa version %s (CVS checkout from %s)"
 #~ msgstr "Sie nutzen momentan GOsa in der Version %s (CVS-Abzug vom %s)"
@@ -6993,8 +7032,10 @@ msgstr "Konfiguration herunterladen"
 #, fuzzy
 #~ msgid "Referral Password"
 #~ msgstr ""
-#~ "Neues Passwort bestÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬tigen"
+#~ "Neues Passwort "
+#~ "bestÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ"
+#~ "¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬tigen"
 
 #, fuzzy
 #~ msgid ""
@@ -7003,10 +7044,12 @@ msgstr "Konfiguration herunterladen"
 #~ "these files for backup purpose or when initializing a new server."
 #~ msgstr ""
 #~ "Dieses Modul "
-#~ "ermÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶glicht "
+#~ "ermÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶glicht "
 #~ "Ihnen den Download der kompletten LDAP-Datenbank, die momentan in "
-#~ "Verwendung ist. Die ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂbertragenen Dateien "
-#~ "kÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶nnen "
+#~ "Verwendung ist. Die "
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂbertragenen "
+#~ "Dateien "
+#~ "kÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶nnen "
 #~ "einerseits zur Datensicherung und andererseits zur Einrichtung eines "
 #~ "neuen Servers benutzt werden."
 
@@ -7017,7 +7060,7 @@ msgstr "Konfiguration herunterladen"
 #~ msgid "You are not allowed to delete this terminal!"
 #~ msgstr ""
 #~ "Es Ihnen nicht erlaubt, dieses Terminal zu "
-#~ "lÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶schen!"
+#~ "lÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶schen!"
 
 #~ msgid "Administrators"
 #~ msgstr "Administratoren"
@@ -7037,8 +7080,14 @@ msgstr "Konfiguration herunterladen"
 #~ "Warning: Please check the SIZELIMIT option set on your LDAP server. You "
 #~ "may not get all entries, if this value is to low!"
 #~ msgstr ""
-#~ "Warnung: Bitte prÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂfen Sie die SIZELIMIT Option Ihres LDAP-Servers. Unter "
-#~ "UmstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬nden bekommen Sie nicht alle "
-#~ "EintrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ge, wenn dieser Eintrag zu niedrig ist!"
+#~ "Warnung: Bitte "
+#~ "prÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂfen Sie "
+#~ "die SIZELIMIT Option Ihres LDAP-Servers. Unter "
+#~ "UmstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ"
+#~ "¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬nden "
+#~ "bekommen Sie nicht alle "
+#~ "EintrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ"
+#~ "¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ge, "
+#~ "wenn dieser Eintrag zu niedrig ist!"
