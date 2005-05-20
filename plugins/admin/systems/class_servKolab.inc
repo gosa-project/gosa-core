@@ -128,7 +128,7 @@ class servkolab extends plugin {
 
     }
     /* Check Relayhost and if we have MX lookup enabled*/
-    if($this->postfix_relayhost[0]=="[")
+    if(isset($this->postfix_relayhost[0]) && $this->postfix_relayhost[0]=="[")
       {
       $this->postfix_mxrelayenabled=false;
       $this->postfix_relayhost = str_replace("[","",$this->postfix_relayhost);
@@ -161,6 +161,18 @@ class servkolab extends plugin {
         $smarty->assign($val."Check", "");
     }
 
+    /* Assemble free/busy string */
+    $edit= sprintf('<input name="kolabFreeBusyFuture" value="%s" %s type="text" maxlength="3" size="4">',
+            $this->kolabFreeBusyFuture, chkacl($this->acl, 'kolabFreeBusyFuture'));
+    $fbfuture= sprintf(_("Include data from %s days in the past when creating free/busy lists"), $edit);
+    $smarty->assign("fbfuture", $fbfuture);
+
+    /* Assemble quota string */
+    $edit= sprintf('<input name="cyrus_quotawarn" value="%s" type="text" maxlength="3" size="4" %s>',
+          $this->cyrus_quotawarn, chkacl($this->acl, 'cyrus_quotawarn'));
+    $quotastr= sprintf(_("Warn users when using more than %s%% of their mail quota"), $edit);
+    $smarty->assign("quotastr", $quotastr);
+
     /* Load Template */
     $display.=$smarty->fetch(get_template_path('servkolab.tpl', TRUE));
     return ($display);
@@ -188,7 +200,7 @@ class servkolab extends plugin {
     }elseif(strcasecmp($this->kolabFreeBusyFuture,(int)$this->kolabFreeBusyFuture)){
       $message[] = _("Free/Busy settings -> Future days must be a value.");
     }
-  
+
     if(!is_int((int)($this->cyrus_quotawarn))) {
       $message[] = _("Cyrus Quota settings -> The given Quota settings value must be a number.");
     }elseif(!(($this->cyrus_quotawarn<=100)&&($this->cyrus_quotawarn>=0))){
@@ -197,14 +209,14 @@ class servkolab extends plugin {
       $message[] = _("Cyrus Quota settings -> Future days must be a value.");
     }
 
-   if(empty($this->postfix_mynetworks))
+    if(empty($this->postfix_mynetworks))
     { 
-      ;//$message[] = _("SMTP privileged networks -> No value is given.");
+      $message[] = _("SMTP privileged networks -> No value is given.");
     }
-    
-  if(empty($this->postfix_relayhost))
+
+    if(empty($this->postfix_relayhost))
     {
-      ;//$message[] = _("SMTP smarthost/relayhost -> No value is given.");
+      $message[] = _("SMTP smarthost/relayhost -> No value is given.");
     }
 
 
