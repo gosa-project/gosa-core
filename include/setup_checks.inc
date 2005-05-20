@@ -790,14 +790,20 @@ function show_setup_page4($withoutput = true)
   if(!$ds = @ldap_connect (validate($uri)))    
   {
     $fault = true;
+    if($withoutput)
+      print_red (_("Can't connect to the specified LDAP server! Please make sure that is reachable for GOsa."));
   }
   elseif(!@ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3))    
   {
     $fault = true;
+    if($withoutput)
+      print_red (_("Can't bind to the specified LDAP server! Please make sure that is reachable for GOsa."));
   }
   elseif(! $r =  @ldap_bind ($ds))    
   {
     $fault = true;
+    if($withoutput)
+      print_red (_("Can't bind to the specified LDAP server! Please make sure that is reachable for GOsa."));
   }
   else
   {
