@@ -83,7 +83,7 @@
 	</tr>
 	<tr>
 		<td>
-			<input name="cyrus_quotawarn" value="{$cyrus_quotawarn}" type="text" maxlength="2" size="3">%
+			<input name="cyrus_quotawarn" value="{$cyrus_quotawarn}" type="text" maxlength="3" size="4">%
 		</td>
 		<td>
 			Percentage to warn users
@@ -107,7 +107,7 @@
 	 </tr>
 	 <tr>
         <td>
-        	<input name="kolabFreeBusyFuture" value="{$kolabFreeBusyFuture}" type="text" maxlength="2" size="3">
+        	<input name="kolabFreeBusyFuture" value="{$kolabFreeBusyFuture}" type="text" maxlength="3" size="4">
 			When creating free/busy lists, include data from x days in the past
 		</td>
      </tr>
@@ -142,7 +142,7 @@
     </tr>
     <tr>
         <td>
-            <input name="" value="1" type="checkbox" >
+            <input name="RelayMxSupport" value="1" type="checkbox" {$RelayMxSupportCheck}>
 			{t}Enable MX lookup for relayhost{/t}
 		</td>
      </tr>
@@ -167,7 +167,7 @@
     </tr>
     <tr>
         <td>
-            <input name="" value="1" type="checkbox" >
+            <input name="postfix_allow_unauthenticated" value="1" type="checkbox" {$postfix_allow_unauthenticatedCheck}>
         	{t}Accept mail from other domains over non-authenticated SMTP{/t}
 		</td>
      </tr>

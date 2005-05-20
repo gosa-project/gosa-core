@@ -10,7 +10,10 @@ class servkolab extends plugin {
   var $postfix_mydestination            = "\$domain";//<<<<<<<<<<<<<
   var $postfix_mynetworks               = "127.0.0.1/8";//ok
   var $postfix_enable_virus_scan        = "TRUE";//ok
-  var $cyrus_quotawarn                  = "999";//ok
+  var $postfix_relayhost                = "";
+  var $postfix_mxrelayenabled           =  true;
+  var $postfix_allow_unauthenticated     = "false";
+  var $cyrus_quotawarn                  = "80";//ok
   var $kolabFreeBusyFuture              = "1";// ok 
   var $cyrus_admins                     = "TRUE";//<<<<<<<<<<<<<<<<
   var $cyrus_imap                       = "TRUE";//ok
@@ -25,7 +28,7 @@ class servkolab extends plugin {
   var $added                            = false; 
   var $remove                           = false;
   var $attributes =  array("postfix_mydomain", "postfix_mydestination",
-        "postfix_mynetworks", "postfix_enable_virus_scan",
+        "postfix_mynetworks", "postfix_enable_virus_scan","postfix_relayhost","postfix_allow_unauthenticated",
          "cyrus_admins", "cyrus_imap","kolabFreeBusyFuture",
         "cyrus_pop3", "cyrus_imaps", "cyrus_pop3s", "cyrus_sieve",
         "apache_allow_unauthenticated_fb", "proftpd_ftp",
@@ -62,6 +65,7 @@ class servkolab extends plugin {
 
   function execute() 
   {
+
     /* Fill templating stuff */
     $smarty = get_smarty();
     $display = "";
@@ -123,7 +127,22 @@ class servkolab extends plugin {
       }
 
     }
-
+    /* Check Relayhost and if we have MX lookup enabled*/
+    if((isset($_POST['NewHost'])) || (isset($_POST['DelHost'])))    
+      {
+      $this->postfix_mxrelayenabled = $_POST['RelayMxSupport'] ;
+      }
+    if($this->postfix_relayhost[0]=="[")
+      {
+      $this->postfix_mxrelayenabled=false;
+      $this->postfix_relayhost = str_replace("[","",$this->postfix_relayhost);
+      $this->postfix_relayhost = str_replace("]","",$this->postfix_relayhost);
+      }
+    if($this->postfix_mxrelayenabled)    {
+      $smarty->assign("RelayMxSupportCheck"," checked ");
+      }      else      {
+      $smarty->assign("RelayMxSupportCheck","");
+      }
     /* Show tab dialog headers */
     if ($this->is_account) {
       /* call Add Acoount to add account */
@@ -175,15 +194,34 @@ class servkolab extends plugin {
 
   function check() 
   {
+    error_reporting(E_ALL);
     $message = array();
-
-
+    if(($this->kolabFreeBusyFuture==""))    {
+      $message[] = "Free/Busy settings -> Future days must be set.";
+    }elseif((($this->kolabFreeBusyFuture=="")<0)){
+      $message[] = "Free/Busy settings -> Future days must be a positiv value.";
+    }elseif(strcasecmp($this->kolabFreeBusyFuture,(int)$this->kolabFreeBusyFuture)){
+      $message[] = "Free/Busy settings -> Future days must be a value.";
+    }
+  
     if(!is_int((int)($this->cyrus_quotawarn))) {
-      $message[] = "The given Quota settings value must be a number";
-    }elseif(!(($this->cyrus_quotawarn<=100)&&($this->cyrus_quotawarn>=1))){
-      $message[] = "Please choose a value between 1 and 100 for Quota settings";
+      $message[] = "Cyrus Quota settings -> The given Quota settings value must be a number.";
+    }elseif(!(($this->cyrus_quotawarn<=100)&&($this->cyrus_quotawarn>=0))){
+      $message[] = "Cyrus Quota settings -> Please choose a value between 1 and 100 for Quota settings.";
+    }elseif(strcasecmp($this->cyrus_quotawarn,(int)$this->cyrus_quotawarn)){
+      $message[] = "Cyrus Quota settings -> Future days must be a value.";
+    }
+
+   if(empty($this->postfix_mynetworks))
+    { 
+      $message[] = "SMTP privileged networks -> No value is given.";
     }
     
+  if(empty($this->postfix_relayhost))
+    {
+      $message[] = "SMTP smarthost/relayhost -> No value is given.";
+    }
+
 
     return ($message);
   }
@@ -243,6 +281,10 @@ class servkolab extends plugin {
       $newattrs['apache-http'] = "FALSE";
     else
       $newattrs['apache-http'] = "TRUE";
+    if ($newattrs['postfix-allow-unauthenticated'] == 0)
+      $newattrs['postfix-allow-unauthenticated'] = "FALSE";
+    else
+      $newattrs['postfix-allow-unauthenticated'] = "TRUE";
     if ($newattrs['apache-allow-unauthenticated-fb'] == 0)
       $newattrs['apache-allow-unauthenticated-fb'] = "FALSE";
     else
@@ -251,6 +293,16 @@ class servkolab extends plugin {
 
     /* Reorder Host array, to get constant increasing index */
     $newattrs['kolabHost'] = array();
+
+    /* Check Relayhost and if we have MX lookup enabled*/
+    if(isset($_POST['RelayMxSupport']))
+      $this->postfix_mxrelayenabled = true ;
+    else
+      $this->postfix_mxrelayenabled = false;
+    if(!$this->postfix_mxrelayenabled)
+      {
+      $newattrs['postfix-relayhost']="[".$this->postfix_relayhost."]";
+      }
 
     /* If we want to add someone or do only changes on the settings ...*/
     if(!$this->remove)
@@ -308,6 +360,7 @@ class servkolab extends plugin {
       /* Delete the entry*/
       $ldap->cd ("k=kolab,".$this->config->current['BASE']);
       $ldap->rmdir("k=kolab,".$this->config->current['BASE']);
+
 
     }elseif ($ldap->dn_exists($this->kolabdn)) {
     /* Ok there is already an extension, so we only need to add the changes and the new Host, (if it was a new host)*/
