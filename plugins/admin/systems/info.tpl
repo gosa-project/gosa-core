@@ -20,7 +20,7 @@
      <td>{$status}</td>
     </tr>
     <tr>
-     <td><b>{t}Inventary number{/t}</b></td>
+     <td><b>{t}Inventory number{/t}</b></td>
      <td>{$ghInventoryNumber}</td>
     </tr>
     <tr>
