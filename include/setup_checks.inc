@@ -741,7 +741,7 @@ function show_setup_page3($withoutput = true)
         // Output the Error
         if($withoutput)      
         {
-          print_red (_("Can't bind to the specified LDAP server! Please make sure that is reachable for GOsa."));
+          print_red (_("Can't bind to the specified LDAP server! Please make sure that it is reachable for GOsa."));
           $smarty->assign ("content", get_template_path('setup_step3.tpl'));
           $smarty->assign ("uri", validate($uri));
         }
@@ -833,13 +833,13 @@ function show_setup_page4($withoutput = true)
   {
     $fault = true;
     if($withoutput)
-      print_red (_("Can't bind to the specified LDAP server!. Please make sure that is reachable for GOsa."));
+      print_red (_("Can't bind to the specified LDAP server!. Please make sure that it is reachable for GOsa."));
   }
   elseif(! $r =  @ldap_bind ($ds))    
   {
     $fault = true;
     if($withoutput)
-      print_red (_("Can't bind to the specified LDAP server! Please make sure that is reachable for GOsa."));
+      print_red (_("Can't bind to the specified LDAP server! Please make sure that it is reachable for GOsa."));
   }
   else
   {
