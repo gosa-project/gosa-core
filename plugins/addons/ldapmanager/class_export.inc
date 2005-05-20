@@ -4,7 +4,7 @@
 class ldifexport extends plugin
 {
   /* Definitions */
-  var $plHeadline= "LDIF CSV import";
+  var $plHeadline= "CSV import";
   var $plDescription= "This does something";
   var $access= "";
 
