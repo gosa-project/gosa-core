@@ -1,5 +1,5 @@
 <p>
- {t}To change the user password use the fields below. The changes take effect immediately. Please memorize the new password, because the user would't be able to login without it.{/t}
+ {t}To change the user password use the fields below. The changes take effect immediately. Please memorize the new password, because the user wouldn't be able to login without it.{/t}
 </p>
 
 <p>
