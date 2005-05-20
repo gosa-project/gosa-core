@@ -201,7 +201,7 @@ class servkolab extends plugin {
     }elseif((($this->kolabFreeBusyFuture=="")<0)){
       $message[] = _("Free/Busy settings -> Future days must be a positiv value.");
     }elseif(strcasecmp($this->kolabFreeBusyFuture,(int)$this->kolabFreeBusyFuture)){
-      $message[] = _("Free/Busy settings -> Future days must be a value.)";
+      $message[] = _("Free/Busy settings -> Future days must be a value.");
     }
   
     if(!is_int((int)($this->cyrus_quotawarn))) {
@@ -209,7 +209,7 @@ class servkolab extends plugin {
     }elseif(!(($this->cyrus_quotawarn<=100)&&($this->cyrus_quotawarn>=0))){
       $message[] = _("Cyrus Quota settings -> Please choose a value between 1 and 100 for Quota settings.");
     }elseif(strcasecmp($this->cyrus_quotawarn,(int)$this->cyrus_quotawarn)){
-      $message[] = _("Cyrus Quota settings -> Future days must be a value.)";
+      $message[] = _("Cyrus Quota settings -> Future days must be a value.");
     }
 
    if(empty($this->postfix_mynetworks))
