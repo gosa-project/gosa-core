@@ -289,6 +289,11 @@ class kolabAccount extends plugin
       $nr++;
     }
     
+    /* If this one is empty, preset with ACT_MANUAL for anonymous users */
+    if (count ($this->kolabInvitationPolicy) == 0){
+      $this->kolabInvitationPolicy= array("ACT_MANUAL");
+    }
+
   }
 
 
