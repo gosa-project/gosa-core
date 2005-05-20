@@ -51,7 +51,7 @@ class servgeneric extends plugin
 
     /* Check for action */
     if (isset($_POST['action'])){
-      switch($_POST['saction']){
+      switch($_POST['action']){
         case 'wake':
           $cmd= $this->search($this->config->data['TABS'], "servgeneric", "WAKECMD");
           if ($cmd == ""){

@@ -108,7 +108,7 @@
 	 </tr>
 	 <tr>
         <td>
-        	<input name="kolabFreeBusyFuture" value="{$kolabFreeBusyFuture}" {$kolabFreeBusyACL} type="text" maxlength="3" size="4">
+        	<input name="kolabFreeBusyFuture" value="{$kolabFreeBusyFuture}" {$kolabFreeBusyFutureACL} type="text" maxlength="3" size="4">
 			When creating free/busy lists, include data from x days in the past
 		</td>
      </tr>

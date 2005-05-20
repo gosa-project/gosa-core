@@ -39,7 +39,7 @@
 <table>
  <tr>
   <td>
-   <select size="1" name="saction" {$actionACL} title="{t}Select action to execute for this server{/t}">
+   <select size="1" name="action" title="{t}Select action to execute for this server{/t}">
     <option></option>
     {html_options options=$actions}
    </select>
