@@ -43,7 +43,7 @@
    &nbsp;
   </td>
   <td style="vertical-align:top">
-   <h2><img align="center" src="images/alternatemail.png"> {t}Alternate addresses{/t}</h2>
+   <h2><img align="center" src="images/alternatemail.png"> {t}Alternative addresses{/t}</h2>
    <select style="width:350px; height:100px;" name="alternates_list[]" size=15 multiple title="{t}List of alternative mail addresses{/t}">
     {html_options values=$gosaMailAlternateAddress output=$gosaMailAlternateAddress}
    </select>
