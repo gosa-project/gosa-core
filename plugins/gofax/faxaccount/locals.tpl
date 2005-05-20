@@ -18,7 +18,7 @@
    <div class="contentboxh" style="height:20px;">
     <p class="contentboxh" style="font-size:12px"><img src="{$launchimage}" align="right" alt="[F]"><b>{t}Filters{/t}</b></p>
    </div>
-   <div class="contentboxb">
+   <div class="contentboxb"  style="background-color:#F8F8F8">
     <p class="contentboxb" style="border-top:1px solid #B0B0B0; background-color:#F8F8F8">
      <table style="width:100%;">
       {$alphabet}

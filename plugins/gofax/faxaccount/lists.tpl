@@ -7,7 +7,7 @@
     {html_options values=$cblocklist output=$cblocklist}
    </select>
    <br>
-   <input name="block_number" size=30 align=center maxlength=30 {$goFaxBlockListACL} value="">
+   <input name="block_number" size=25 align=center maxlength=30 {$goFaxBlockListACL} value="">
    <input type=submit value="{t}Add{/t}" name="add_blocklist_number" {$goFaxBlockListACL}>&nbsp;
    <input type=submit value="{t}Delete{/t}" name="delete_blocklist_number" {$goFaxBlockListACL}>
   </td>
@@ -21,9 +21,7 @@
    </select>
    <br>
    <br>
-   {if $have_js ne ""}
    <input type=submit name="goButton" value="{t}Choose{/t}">
-   {/if}
 
    <b>{t}List of predefined blocklists{/t}</b>
    <select style="width:350px; height:250px;" name="predefined_list[]" size=15 multiple>

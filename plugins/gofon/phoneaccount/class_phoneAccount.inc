@@ -194,7 +194,11 @@ class phoneAccount extends plugin
     $forwarder_list="";
     $acl= chkacl($this->acl, "goFonForwaring");
     foreach ($this->forwarders as $nr => $fw){
-      @list($number, $timeout)= split(";", $fw);
+      if ($fw == ""){
+        $number= ""; $timeout= "";
+      } else {
+        list($number, $timeout)= split(";", $fw);
+      }
       $forwarder_list.= "<tr><td>";
       $forwarder_list.= "<input name=\"fwn$nr\" size=25 align=center maxlength=60 value=\"$number\" $acl>";
       $forwarder_list.= "</td><td>";
@@ -225,6 +229,8 @@ class phoneAccount extends plugin
     } elseif ( !$this->parent->by_object['mailAccount']->is_account){
       $smarty->assign("has_mailaccount", "false");
       $this->has_mailAccount= false;
+    } else {
+      $smarty->assign("has_mailaccount", "true");
     }
 
     /* Show main page */

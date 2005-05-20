@@ -96,6 +96,8 @@ class gofaxAccount extends plugin
     } elseif ( !$this->parent->by_object['mailAccount']->is_account){
       $smarty->assign("has_mailaccount", "false");
       $this->has_mailAccount= false;
+    } else {
+      $smarty->assign("has_mailaccount", "true");
     }
 
     /* Do we need to flip is_account state? */
@@ -347,6 +349,8 @@ class gofaxAccount extends plugin
       $smarty->assign("list", $list);
       if (isset($_POST['department'])){
         $smarty->assign("department", $_POST['department']);
+      } else {
+        $smarty->assign("department", "");
       }
       $display.= $smarty->fetch (get_template_path('lists.tpl', TRUE, dirname(__FILE__)));
       return ($display);
@@ -371,6 +375,8 @@ class gofaxAccount extends plugin
       $smarty->assign("list", $list);
       if (isset($_POST['department'])){
         $smarty->assign("department", $_POST['department']);
+      } else {
+        $smarty->assign("department", "");
       }
       $display.= $smarty->fetch (get_template_path('lists.tpl', TRUE, dirname(__FILE__)));
       return ($display);
