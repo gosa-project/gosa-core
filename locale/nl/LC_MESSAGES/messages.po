@@ -461,7 +461,7 @@ msgstr "Het vereiste veld 'Primair adres' is leeg."
 
 #: plugins/personal/mail/class_mailAccount.inc:672
 #: plugins/personal/mail/class_mailAccount.inc:676
-#: plugins/addons/addressbook/class_addressbook.inc:529
+#: plugins/addons/addressbook/class_addressbook.inc:550
 msgid "Please enter a valid email address in 'Primary address' field."
 msgstr "Geef a.u.b. een geldig e-mail adres voor het 'Primair adres' op."
 
@@ -1176,12 +1176,12 @@ msgid "Value specified as 'UID' is too small."
 msgstr "De opgegeven 'UID' waarde is te klein."
 
 #: plugins/personal/posix/class_posixAccount.inc:841
-#: plugins/admin/groups/class_groupGeneric.inc:602
+#: plugins/admin/groups/class_groupGeneric.inc:610
 msgid "Value specified as 'GID' is not valid."
 msgstr "De opgegeven 'GID' waarde is niet geldig."
 
 #: plugins/personal/posix/class_posixAccount.inc:844
-#: plugins/admin/groups/class_groupGeneric.inc:605
+#: plugins/admin/groups/class_groupGeneric.inc:613
 msgid "Value specified as 'GID' is too small."
 msgstr "De opgegeven 'GID' waarde is te klein."
 
@@ -1225,7 +1225,7 @@ msgstr ""
 "De waarde opgegeven voor 'shadowMin' moet kleiner zijn dan 'shadowMax'."
 
 #: plugins/personal/posix/class_posixAccount.inc:987
-#: plugins/admin/groups/class_groupGeneric.inc:636
+#: plugins/admin/groups/class_groupGeneric.inc:644
 msgid "Too many users, can't allocate a free ID!"
 msgstr ""
 "Er zitten te veel gebruikers in de database. Kan geen vrij ID toewijzen!"
@@ -1516,7 +1516,7 @@ msgstr "Verander plaatje"
 #: plugins/personal/generic/generic.tpl:24
 #: plugins/addons/addressbook/address_edit.tpl:20
 #: plugins/addons/addressbook/contents.tpl:14
-#: plugins/addons/addressbook/class_addressbook.inc:463
+#: plugins/addons/addressbook/class_addressbook.inc:484
 #: plugins/addons/addressbook/address_info.tpl:16
 #: plugins/admin/users/template.tpl:19
 msgid "Name"
@@ -1524,7 +1524,7 @@ msgstr "Achternaam"
 
 #: plugins/personal/generic/generic.tpl:30
 #: plugins/addons/addressbook/address_edit.tpl:20
-#: plugins/addons/addressbook/class_addressbook.inc:463
+#: plugins/addons/addressbook/class_addressbook.inc:484
 #: plugins/admin/users/template.tpl:23
 msgid "Given name"
 msgstr "Voornaam"
@@ -1808,7 +1808,7 @@ msgstr ""
 "'Basis'."
 
 #: plugins/personal/generic/class_user.inc:856
-#: plugins/addons/addressbook/class_addressbook.inc:486
+#: plugins/addons/addressbook/class_addressbook.inc:507
 #: plugins/admin/users/class_userManagement.inc:422
 msgid "The required field 'Name' is not set."
 msgstr "Het vereiste veld 'Achternaam' is leeg."
@@ -1818,7 +1818,7 @@ msgid "There's already a person with this 'Login' in the database."
 msgstr "Er bestaat al een account met deze 'Inlog naam' in de database."
 
 #: plugins/personal/generic/class_user.inc:871
-#: plugins/addons/addressbook/class_addressbook.inc:490
+#: plugins/addons/addressbook/class_addressbook.inc:511
 #: plugins/admin/users/class_userManagement.inc:425
 msgid "The required field 'Given name' is not set."
 msgstr "Het vereiste veld 'Voornaam' is leeg."
@@ -1849,40 +1849,40 @@ msgstr "Het veld 'Website' bevat een ongeldige URL."
 
 #: plugins/personal/generic/class_user.inc:894
 #: plugins/personal/generic/class_user.inc:922
-#: plugins/addons/addressbook/class_addressbook.inc:496
-#: plugins/addons/addressbook/class_addressbook.inc:524
+#: plugins/addons/addressbook/class_addressbook.inc:517
+#: plugins/addons/addressbook/class_addressbook.inc:545
 #: plugins/admin/departments/class_departmentGeneric.inc:155
 msgid "The field 'Name' contains invalid characters."
 msgstr "Het veld 'Naam' bevat ongeldige karakters."
 
 #: plugins/personal/generic/class_user.inc:897
 #: plugins/personal/generic/class_user.inc:919
-#: plugins/addons/addressbook/class_addressbook.inc:499
-#: plugins/addons/addressbook/class_addressbook.inc:521
+#: plugins/addons/addressbook/class_addressbook.inc:520
+#: plugins/addons/addressbook/class_addressbook.inc:542
 msgid "The field 'Given name' contains invalid characters."
 msgstr "Het veld 'Voornaam' bevat ongeldige karakters."
 
 #: plugins/personal/generic/class_user.inc:902
 #: plugins/personal/generic/class_user.inc:905
-#: plugins/addons/addressbook/class_addressbook.inc:504
-#: plugins/addons/addressbook/class_addressbook.inc:507
+#: plugins/addons/addressbook/class_addressbook.inc:525
+#: plugins/addons/addressbook/class_addressbook.inc:528
 #: plugins/admin/departments/class_departmentGeneric.inc:158
 msgid "The field 'Phone' contains an invalid phone number."
 msgstr "Het veld 'Telefoonnummer' bevat een ongeldig telefoonnummer."
 
 #: plugins/personal/generic/class_user.inc:908
-#: plugins/addons/addressbook/class_addressbook.inc:510
+#: plugins/addons/addressbook/class_addressbook.inc:531
 #: plugins/admin/departments/class_departmentGeneric.inc:161
 msgid "The field 'Fax' contains an invalid phone number."
 msgstr "Het veld 'Fax' bevat een ongeldig faxnummer."
 
 #: plugins/personal/generic/class_user.inc:911
-#: plugins/addons/addressbook/class_addressbook.inc:513
+#: plugins/addons/addressbook/class_addressbook.inc:534
 msgid "The field 'Mobile' contains an invalid phone number."
 msgstr "Het veld 'GSM nummer' bevat een ongeldig telefoonnummer"
 
 #: plugins/personal/generic/class_user.inc:914
-#: plugins/addons/addressbook/class_addressbook.inc:516
+#: plugins/addons/addressbook/class_addressbook.inc:537
 msgid "The field 'Pager' contains an invalid phone number."
 msgstr "Het veld 'Pieper nummer' bevat een ongeldig telefoonnummer."
 
@@ -2258,7 +2258,7 @@ msgstr "Selecteer de subtree waaronder de blokkeerlijst geplaatst wordt"
 
 #: plugins/gofax/blocklists/generic.tpl:31
 #: plugins/admin/systems/service.tpl:42 plugins/admin/systems/service.tpl:120
-#: include/functions.inc:1572
+#: include/functions.inc:1579
 msgid "Type"
 msgstr "Type"
 
@@ -2705,10 +2705,10 @@ msgid "Dial connection..."
 msgstr "Bel..."
 
 #: plugins/addons/addressbook/dial.tpl:11
-#: plugins/addons/addressbook/class_addressbook.inc:337
-#: plugins/addons/addressbook/class_addressbook.inc:339
-#: plugins/addons/addressbook/class_addressbook.inc:340
-#: plugins/addons/addressbook/class_addressbook.inc:414
+#: plugins/addons/addressbook/class_addressbook.inc:354
+#: plugins/addons/addressbook/class_addressbook.inc:356
+#: plugins/addons/addressbook/class_addressbook.inc:357
+#: plugins/addons/addressbook/class_addressbook.inc:435
 msgid "Dial"
 msgstr "Kies"
 
@@ -2838,12 +2838,12 @@ msgstr "Adresboek"
 msgid "Addressbook"
 msgstr "Adresboek"
 
-#: plugins/addons/addressbook/class_addressbook.inc:143
+#: plugins/addons/addressbook/class_addressbook.inc:147
 #, php-format
 msgid "Dial from %s to %s now?"
 msgstr "Nu van %s naar %s bellen?"
 
-#: plugins/addons/addressbook/class_addressbook.inc:147
+#: plugins/addons/addressbook/class_addressbook.inc:151
 msgid ""
 "You have no personal phone number set. Please change that in order to "
 "perform direct dials."
@@ -2851,73 +2851,73 @@ msgstr ""
 "U heeft geen priv� telefoonnummer opgegeven. Verander dit a.u.b. om direkt "
 "te kunnen kiezen"
 
-#: plugins/addons/addressbook/class_addressbook.inc:176
-#: plugins/addons/addressbook/class_addressbook.inc:280
+#: plugins/addons/addressbook/class_addressbook.inc:180
+#: plugins/addons/addressbook/class_addressbook.inc:284
 msgid "You are not allowed to delete this entry!"
 msgstr "U heeft geen toestemming om deze gegevens te verwijderen!"
 
-#: plugins/addons/addressbook/class_addressbook.inc:274
+#: plugins/addons/addressbook/class_addressbook.inc:278
 #, php-format
 msgid "You're about to delete the entry %s."
 msgstr "U staat op het punt de invoer %s te verwijderen."
 
-#: plugins/addons/addressbook/class_addressbook.inc:343
+#: plugins/addons/addressbook/class_addressbook.inc:360
 #, php-format
 msgid "Save contact for %s as vcard"
 msgstr "Sla contact voor %s op als vcard"
 
-#: plugins/addons/addressbook/class_addressbook.inc:346
+#: plugins/addons/addressbook/class_addressbook.inc:363
 #, php-format
 msgid "Send mail to %s"
 msgstr "Stuur mail naar %s"
 
-#: plugins/addons/addressbook/class_addressbook.inc:426
+#: plugins/addons/addressbook/class_addressbook.inc:447
 msgid "global addressbook"
 msgstr "globaal adresboek"
 
-#: plugins/addons/addressbook/class_addressbook.inc:428
+#: plugins/addons/addressbook/class_addressbook.inc:449
 msgid "organizations user database"
 msgstr "gebruikersbestand van de organisatie"
 
-#: plugins/addons/addressbook/class_addressbook.inc:432
+#: plugins/addons/addressbook/class_addressbook.inc:453
 #, php-format
 msgid "Contact stored in %s"
 msgstr "Contact opgeslagen in %s"
 
-#: plugins/addons/addressbook/class_addressbook.inc:434
+#: plugins/addons/addressbook/class_addressbook.inc:455
 msgid "Creating new entry in"
 msgstr "Aanmaken van de invoer in"
 
-#: plugins/addons/addressbook/class_addressbook.inc:463
+#: plugins/addons/addressbook/class_addressbook.inc:484
 #: plugins/addons/logview/class_logview.inc:62
 #: plugins/addons/logview/class_logview.inc:76
 msgid "All"
 msgstr "Alle"
 
-#: plugins/addons/addressbook/class_addressbook.inc:464
+#: plugins/addons/addressbook/class_addressbook.inc:485
 msgid "Work phone"
 msgstr "Telefoonnummer (Werk)"
 
-#: plugins/addons/addressbook/class_addressbook.inc:464
+#: plugins/addons/addressbook/class_addressbook.inc:485
 msgid "Cell phone"
 msgstr "GSM nummer"
 
-#: plugins/addons/addressbook/class_addressbook.inc:465
+#: plugins/addons/addressbook/class_addressbook.inc:486
 msgid "Home phone"
 msgstr "Telefoonnumer (Thuis)"
 
-#: plugins/addons/addressbook/class_addressbook.inc:465
+#: plugins/addons/addressbook/class_addressbook.inc:486
 msgid "User ID"
 msgstr "Gebruikers ID"
 
-#: plugins/addons/addressbook/class_addressbook.inc:537
+#: plugins/addons/addressbook/class_addressbook.inc:558
 msgid ""
 "Cannot create a unique DN for your entry. Please fill more formular fields."
 msgstr ""
 "Kan geen unieke DN aanmaken voor uw invoer. Vul a.u.b. meer formulier velden "
 "in."
 
-#: plugins/addons/addressbook/class_addressbook.inc:549
+#: plugins/addons/addressbook/class_addressbook.inc:570
 msgid ""
 "You have no permissions to create or modify a global address book entry."
 msgstr ""
@@ -3256,33 +3256,33 @@ msgstr ""
 msgid "This 'dn' is no group."
 msgstr "Deze 'dn' is geen groep."
 
-#: plugins/admin/groups/class_groupGeneric.inc:252
+#: plugins/admin/groups/class_groupGeneric.inc:253
 msgid "Samba group"
 msgstr "Samba groep"
 
-#: plugins/admin/groups/class_groupGeneric.inc:252
+#: plugins/admin/groups/class_groupGeneric.inc:253
 msgid "Domain admins"
 msgstr "Windows beheerders"
 
-#: plugins/admin/groups/class_groupGeneric.inc:252
+#: plugins/admin/groups/class_groupGeneric.inc:253
 msgid "Domain users"
 msgstr "Windows gebruikers"
 
-#: plugins/admin/groups/class_groupGeneric.inc:253
+#: plugins/admin/groups/class_groupGeneric.inc:254
 msgid "Domain guests"
 msgstr "Windows gasten"
 
-#: plugins/admin/groups/class_groupGeneric.inc:258
+#: plugins/admin/groups/class_groupGeneric.inc:259
 #, php-format
 msgid "Special group (%d)"
 msgstr "Speciale groep (%d)"
 
-#: plugins/admin/groups/class_groupGeneric.inc:566
+#: plugins/admin/groups/class_groupGeneric.inc:574
 #: plugins/admin/ogroups/class_ogroup.inc:484
 msgid "You have no permissions to create a group on this 'Base'."
 msgstr "U heeft geen toestemming een groep aan te maken onder deze 'Basis'."
 
-#: plugins/admin/groups/class_groupGeneric.inc:576
+#: plugins/admin/groups/class_groupGeneric.inc:584
 msgid ""
 "The field 'Name' contains invalid characters. Lowercase, numbers and dashes "
 "are allowed."
@@ -3290,8 +3290,8 @@ msgstr ""
 "Het veld 'Naam' bevat ongeldige karakters. Kleine letters, cijfers en "
 "liggende streepjes zijn toegestaan."
 
-#: plugins/admin/groups/class_groupGeneric.inc:587
-#: plugins/admin/groups/class_groupGeneric.inc:594
+#: plugins/admin/groups/class_groupGeneric.inc:595
+#: plugins/admin/groups/class_groupGeneric.inc:602
 msgid "Value specified as 'Name' is already used."
 msgstr "De waarde die opgegeven is voor de naam wordt al gebruikt."
 
@@ -5749,59 +5749,54 @@ msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "GOsa ontwikkelversie (Revisie %s)"
 
-#: include/functions.inc:1528
+#: include/functions.inc:1531
 msgid "Generating this page caused the PHP interpreter to rise some errors!"
 msgstr ""
 
-#: include/functions.inc:1528
-#, fuzzy
-msgid "Send report"
-msgstr "Afzender"
-
-#: include/functions.inc:1528
+#: include/functions.inc:1531
 #, fuzzy
 msgid "Toggle information"
 msgstr "Persoonlijke informatie"
 
-#: include/functions.inc:1535
+#: include/functions.inc:1539
 #, fuzzy
 msgid "PHP error"
 msgstr "LDAP fout:"
 
-#: include/functions.inc:1542
+#: include/functions.inc:1546
 msgid "class"
 msgstr ""
 
-#: include/functions.inc:1548
+#: include/functions.inc:1552
 #, fuzzy
 msgid "function"
 msgstr "Actie"
 
-#: include/functions.inc:1553
+#: include/functions.inc:1557
 #, fuzzy
 msgid "static"
 msgstr "status"
 
-#: include/functions.inc:1557
+#: include/functions.inc:1561
 #, fuzzy
 msgid "method"
 msgstr "Mail methode"
 
-#: include/functions.inc:1571
+#: include/functions.inc:1578
 msgid "Trace"
 msgstr ""
 
-#: include/functions.inc:1572
+#: include/functions.inc:1579
 #, fuzzy
 msgid "File"
 msgstr "Bestanden"
 
-#: include/functions.inc:1572
+#: include/functions.inc:1579
 #, fuzzy
 msgid "Line"
 msgstr "in"
 
-#: include/functions.inc:1573
+#: include/functions.inc:1580
 #, fuzzy
 msgid "Arguments"
 msgstr "afdelingen"
@@ -5998,17 +5993,17 @@ msgstr ""
 "Fout bij het importeren van dn: '%s', controleer uw LDIF bestand a.u.b. "
 "vanaf regel %s!"
 
-#: include/setup_checks.inc:106
+#: include/setup_checks.inc:110
 msgid "Can't bind to LDAP. No schema check possible!"
 msgstr "Kan niet verbinden met de LDAP server. Schema controle is onmogelijk!"
 
-#: include/setup_checks.inc:115 include/setup_checks.inc:124
+#: include/setup_checks.inc:119 include/setup_checks.inc:128
 msgid "Can't get schema information from server. No schema check possible!"
 msgstr ""
 "Kan de schema informatie niet ophalen van de server. Schema controle is "
 "onmogelijk!"
 
-#: include/setup_checks.inc:144
+#: include/setup_checks.inc:148
 #, php-format
 msgid ""
 "Optional objectclass '%s' required by plugin '%s' is not present in LDAP "
@@ -6017,7 +6012,7 @@ msgstr ""
 "De optionele objectklasse '%s' die benodigd is door module '%s' is niet "
 "aanwezig in de LDAP configuratie"
 
-#: include/setup_checks.inc:147
+#: include/setup_checks.inc:151
 #, php-format
 msgid ""
 "Optional objectclass '%s' required by plugin '%s' does not have version %s"
@@ -6025,86 +6020,86 @@ msgstr ""
 "De optionele objectklasse '%s' die benodigd is door module '%s' heeft niet "
 "versienummer %s"
 
-#: include/setup_checks.inc:159
+#: include/setup_checks.inc:163
 #, php-format
 msgid "Required objectclass '%s' is not present in LDAP setup"
 msgstr "Vereiste objectklasse '%s' is niet voorhanden in de LDAP configuratie"
 
-#: include/setup_checks.inc:162
+#: include/setup_checks.inc:166
 #, php-format
 msgid "Required objectclass '%s' does not have version %s"
 msgstr "Vereiste objectklasse '%s' heeft niet versienummer %s"
 
-#: include/setup_checks.inc:170
+#: include/setup_checks.inc:174
 #, fuzzy
 msgid "SAMBA 3 support disabled, no schema seems to be installed"
 msgstr ""
 "<b>SAMBA 3</b> ondersteuning is uitgeschakeld. Het LDAP schema is niet "
 "geïnstalleerd."
 
-#: include/setup_checks.inc:173
+#: include/setup_checks.inc:177
 msgid "SAMBA 3 support enabled"
 msgstr ""
 
-#: include/setup_checks.inc:177
+#: include/setup_checks.inc:181
 #, fuzzy
 msgid "SAMBA 2 support disabled, no schema seems to be installed"
 msgstr ""
 "<b>SAMBA 2</b> ondersteuning is uitgeschakeld. Het LDAP schema is niet "
 "geïnstalleerd."
 
-#: include/setup_checks.inc:180
+#: include/setup_checks.inc:184
 msgid "SAMBA 2 support enabled"
 msgstr ""
 
-#: include/setup_checks.inc:185
+#: include/setup_checks.inc:189
 #, fuzzy
 msgid "Support for pureftp disabled, no schema seems to be installed"
 msgstr ""
 "Ondersteuning voor <b>PureFtp</b> is uitgeschakeld. Het LDAP schema is niet "
 "geïnstalleedn"
 
-#: include/setup_checks.inc:188
+#: include/setup_checks.inc:192
 msgid "Support for pureftp enabled"
 msgstr ""
 
-#: include/setup_checks.inc:192
+#: include/setup_checks.inc:196
 #, fuzzy
 msgid "Support for WebDAV disabled, no schema seems to be installed"
 msgstr ""
 "Ondersteuning voor <b>WebDAV</b> is uitgeschakeld. Het LDAP schema is niet "
 "geïnstalleerd"
 
-#: include/setup_checks.inc:195
+#: include/setup_checks.inc:199
 msgid "Support for WebDAV enabled"
 msgstr ""
 
-#: include/setup_checks.inc:199
+#: include/setup_checks.inc:203
 #, fuzzy
 msgid "Support for phpgroupware disabled, no schema seems to be installed"
 msgstr ""
 "Ondersteuning voor <b>phpgroupware</b> is uitgeschakeld. Het LDAP schema is "
 "niet geïnstalleerd."
 
-#: include/setup_checks.inc:202
+#: include/setup_checks.inc:206
 #, fuzzy
 msgid "Support for phpgroupware enabled"
 msgstr ""
 "Ondersteuning voor <b>phpgroupware</b> is uitgeschakeld. Het LDAP schema is "
 "niet geïnstalleerd."
 
-#: include/setup_checks.inc:206
+#: include/setup_checks.inc:210
 #, fuzzy
 msgid "Support for gofon disabled, no schema seems to be installed"
 msgstr ""
 "Ondersteuning voor <b>gofon</b> is uitgeschakeld. Het LDAP schema is niet "
 "geïnstalleerd."
 
-#: include/setup_checks.inc:209
+#: include/setup_checks.inc:213
 msgid "Support for gofon enabled"
 msgstr ""
 
-#: include/setup_checks.inc:216
+#: include/setup_checks.inc:220
 #, fuzzy
 msgid ""
 "Support for Kolab disabled, no schema seems to be installed, setting mail-"
@@ -6113,31 +6108,31 @@ msgstr ""
 "Ondersteuning voor <b>Kolab</b> is uitgeschakeld. Aangezien het LDAP schema "
 "niet geïnstalleer is, zal de mail methode op Cyrus ingesteld worden."
 
-#: include/setup_checks.inc:221
+#: include/setup_checks.inc:225
 msgid "Support for Kolab enabled"
 msgstr ""
 
-#: include/setup_checks.inc:237
+#: include/setup_checks.inc:241
 msgid "OK"
 msgstr "OK"
 
-#: include/setup_checks.inc:240
+#: include/setup_checks.inc:244
 msgid "Ignored"
 msgstr "Genegeerd"
 
-#: include/setup_checks.inc:242
+#: include/setup_checks.inc:246
 msgid "Failed"
 msgstr "Mislukt"
 
-#: include/setup_checks.inc:258
+#: include/setup_checks.inc:262
 msgid "PHP setup inspection"
 msgstr "PHP configuratie inspectie"
 
-#: include/setup_checks.inc:259
+#: include/setup_checks.inc:263
 msgid "Checking for PHP version (>=4.1.0)"
 msgstr "Controle op PHP versie (>=4.1.0)"
 
-#: include/setup_checks.inc:260
+#: include/setup_checks.inc:264
 msgid ""
 "PHP must be of version 4.1.0 or above for some functions and known bugs in "
 "PHP language."
@@ -6146,20 +6141,20 @@ msgstr ""
 "functionaliteit die in voorgaande versies niet goed of helemaal niet "
 "voorhanden is."
 
-#: include/setup_checks.inc:263
+#: include/setup_checks.inc:267
 #, fuzzy
 msgid "Checking for PHP version (<=5)"
 msgstr "Controle op PHP versie (>=4.1.0)"
 
-#: include/setup_checks.inc:264
+#: include/setup_checks.inc:268
 msgid "PHP must be below version 5."
 msgstr ""
 
-#: include/setup_checks.inc:268
+#: include/setup_checks.inc:272
 msgid "Checking if register_globals is set to 'off'"
 msgstr "Controle of 'register_globals' uitstaat"
 
-#: include/setup_checks.inc:269
+#: include/setup_checks.inc:273
 msgid ""
 "register_globals is a PHP mechanism to register all global varibales to be "
 "accessible from scripts without changing the scope. This may be a security "
@@ -6170,29 +6165,29 @@ msgstr ""
 "veranderd hoeft te worden. Dit is een veiligheidsrisico. GOsa zal in beide "
 "modi draaien."
 
-#: include/setup_checks.inc:272
+#: include/setup_checks.inc:276
 msgid "Checking for ldap module"
 msgstr "Zoeken naar de LDAP module"
 
-#: include/setup_checks.inc:273
+#: include/setup_checks.inc:277
 msgid "This is the main module used by GOsa and therefore really required."
 msgstr "Dit is hoofd module die GOsa nodig heeft en is daarom noodzakelijk."
 
-#: include/setup_checks.inc:276
+#: include/setup_checks.inc:280
 msgid "Checking for gettext support"
 msgstr "Zoeken naar gettext ondersteuning"
 
-#: include/setup_checks.inc:277
+#: include/setup_checks.inc:281
 msgid "Gettext support is required for internationalized GOsa."
 msgstr ""
 "Gettext ondersteuning is vereist voor ondersteuning van meerdere talen in "
 "GOsa."
 
-#: include/setup_checks.inc:279
+#: include/setup_checks.inc:283
 msgid "Checking for iconv support"
 msgstr "Zoeken naar iconv ondersteuning"
 
-#: include/setup_checks.inc:280
+#: include/setup_checks.inc:284
 msgid ""
 "This module is used by GOsa to convert samba munged dial informations and is "
 "therefore required."
@@ -6200,11 +6195,11 @@ msgstr ""
 "Deze module wordt gebruikt door GOsa om samba munged dial informatie "
 "(terminal server) te converteren en is daarom vereist."
 
-#: include/setup_checks.inc:283
+#: include/setup_checks.inc:287
 msgid "Checking for mhash module"
 msgstr "Zoeken naar de mhash module"
 
-#: include/setup_checks.inc:284
+#: include/setup_checks.inc:288
 msgid ""
 "To use SSHA encryption, you'll need this module. If you are just using crypt "
 "or md5 encryption, ignore this message. GOsa will run without it."
@@ -6212,11 +6207,11 @@ msgstr ""
 "Om SSHA encryptie te gebruiken heeft u deze module nodig. U kunt deze "
 "melding negeren indien u gewoon crypt of md5 encryptie gebruikt."
 
-#: include/setup_checks.inc:287
+#: include/setup_checks.inc:291
 msgid "Checking for imap module"
 msgstr "Zoeken naar de IMAP module"
 
-#: include/setup_checks.inc:288
+#: include/setup_checks.inc:292
 msgid ""
 "The IMAP module is needed to communicate with the IMAP server. It gets "
 "status informations, creates and deletes mail users."
@@ -6225,11 +6220,11 @@ msgstr ""
 "ontvangt status informatie, maakt mail gebruikers aan en verwijdert mail "
 "gebruikers."
 
-#: include/setup_checks.inc:290
+#: include/setup_checks.inc:294
 msgid "Checking for getacl in imap"
 msgstr "Controle op getacl in imap"
 
-#: include/setup_checks.inc:291
+#: include/setup_checks.inc:295
 msgid ""
 "The getacl support is needed for shared folder permissions. The standard "
 "IMAP module is not capable of reading acl's. You need a recend PHP version "
@@ -6239,21 +6234,21 @@ msgstr ""
 "IMAP module is niet in staat om acl's te lezen. U heeft een recente PHP "
 "versie nodig voor deze mogelijkheid."
 
-#: include/setup_checks.inc:293
+#: include/setup_checks.inc:297
 msgid "Checking for mysql module"
 msgstr "Zoeken naar MySQL module"
 
-#: include/setup_checks.inc:294
+#: include/setup_checks.inc:298
 msgid "MySQL support is needed for reading GOfax reports from databases."
 msgstr ""
 "MySQL ondersteuning is nodig voor het lezen van GOfax rapporten uit "
 "databases."
 
-#: include/setup_checks.inc:296
+#: include/setup_checks.inc:300
 msgid "Checking for cups module"
 msgstr "Zoeken naar CUPS module"
 
-#: include/setup_checks.inc:297
+#: include/setup_checks.inc:301
 msgid ""
 "In order to read available printers from IPP protocol instead of printcap "
 "files, you've to install the CUPS module."
@@ -6261,11 +6256,11 @@ msgstr ""
 "U moet de CUPS module installeren om beschikbare printers via het IPP "
 "protocol te kunnen aflezen i.p.v. via printcap bestanden."
 
-#: include/setup_checks.inc:299
+#: include/setup_checks.inc:303
 msgid "Checking for kadm5 module"
 msgstr "Zoeken naar kadm5 module"
 
-#: include/setup_checks.inc:300
+#: include/setup_checks.inc:304
 msgid ""
 "Managing users in kerberos requires the kadm5 module which is downloadable "
 "via PEAR network."
@@ -6273,15 +6268,15 @@ msgstr ""
 "Het beheren van gebruikers in kerberos vereist de kadm5 module welke via het "
 "PEAR netwerk te downloaden is."
 
-#: include/setup_checks.inc:309
+#: include/setup_checks.inc:313
 msgid "Checking for some additional programms"
 msgstr "Zoeken naar enkele additionele programma's"
 
-#: include/setup_checks.inc:318
+#: include/setup_checks.inc:322
 msgid "Checking for ImageMagick (>=5.4.0)"
 msgstr "Zoeken naar ImageMagick (>=5.4.0)"
 
-#: include/setup_checks.inc:319
+#: include/setup_checks.inc:323
 msgid ""
 "ImageMagick is used to convert user supplied images to fit the suggested "
 "size and the unified JPEG format."
@@ -6289,11 +6284,11 @@ msgstr ""
 "ImageMagick wordt gebruikt om gebruikers aangeleverde plaatjes te laten "
 "passen binnen de voorgestelde grootte en het uniforme JPEG formaat."
 
-#: include/setup_checks.inc:322
+#: include/setup_checks.inc:326
 msgid "Checking imagick module for PHP"
 msgstr "Zoeken naar de imagick module voor PHP"
 
-#: include/setup_checks.inc:323
+#: include/setup_checks.inc:327
 msgid ""
 "Imagick is used to convert user supplied images to fit the suggested size "
 "and the unified JPEG format from PHP script."
@@ -6301,11 +6296,11 @@ msgstr ""
 "Imagick wordt gebruikt om gebruikers aangeleverde plaatjes te laten passen "
 "binnen de voorgestelde grootte en het uniforme JPEG formaat."
 
-#: include/setup_checks.inc:330
+#: include/setup_checks.inc:334
 msgid "Checking for fping utility"
 msgstr "Zoeken naar het fping programma"
 
-#: include/setup_checks.inc:331
+#: include/setup_checks.inc:335
 msgid ""
 "The fping utility is only used if you've got a thin client based terminal "
 "environment running."
@@ -6313,11 +6308,11 @@ msgstr ""
 "Het fping programma wordt alleen gebruikt indien u een thin client "
 "gebaseerde terminal omgeving heeft draaien."
 
-#: include/setup_checks.inc:346
+#: include/setup_checks.inc:350
 msgid "Checking for a way to generate LM/NT password hashes"
 msgstr "Zoeken naar een manier om LM/NT wachtwoord hashes te genereren"
 
-#: include/setup_checks.inc:347
+#: include/setup_checks.inc:351
 msgid ""
 "In order to use SAMBA 2/3, you've to install some additional packages to "
 "generate password hashes."
@@ -6325,11 +6320,11 @@ msgstr ""
 "Om Samba 2.x/3.x te gebruiken moet u enkele additionele pakketten "
 "installeren om wachtwoord hashes te genereren"
 
-#: include/setup_checks.inc:378
+#: include/setup_checks.inc:382
 msgid "PHP.ini check -> session.auto_register"
 msgstr "PHP.ini controle -> session.auto_register"
 
-#: include/setup_checks.inc:379
+#: include/setup_checks.inc:383
 msgid ""
 "In Order to use GOsa without any trouble, the session.auto_register option "
 "in your php.ini musst be 'Off'."
@@ -6337,11 +6332,11 @@ msgstr ""
 "Om GOsa zonder problemen te gebruiken, moet de session.auto_register optie "
 "in uw php.ini ingesteld zijn op 'Off'."
 
-#: include/setup_checks.inc:385
+#: include/setup_checks.inc:389
 msgid "PHP.ini check -> implicit_flush"
 msgstr "PHP.ini controle -> implicit_flush"
 
-#: include/setup_checks.inc:386
+#: include/setup_checks.inc:390
 msgid ""
 "This Option defines the Ouput handling, turn this Option off, to increase "
 "performance."
@@ -6349,11 +6344,11 @@ msgstr ""
 "Deze Optie definieert Uitvoer afhandeling. Zet deze Optie uit om "
 "snelheiswinst te behalen"
 
-#: include/setup_checks.inc:392
+#: include/setup_checks.inc:396
 msgid "PHP.ini check -> max_execution_time"
 msgstr "PHP.ini controle -> max_execution_time"
 
-#: include/setup_checks.inc:393
+#: include/setup_checks.inc:397
 msgid ""
 "The Execution time, should be 30 seconds minimun, cause some actions will "
 "need huge ammount of time ."
@@ -6361,11 +6356,11 @@ msgstr ""
 "De uitvoer tijd moet minimaal 30 seconden zijn, omdat sommige acties erg "
 "lang kunnen duren."
 
-#: include/setup_checks.inc:399
+#: include/setup_checks.inc:403
 msgid "PHP.ini check -> memory_limit"
 msgstr "PHP.ini controle -> memory_limit"
 
-#: include/setup_checks.inc:400
+#: include/setup_checks.inc:404
 msgid ""
 "GOsa need at least 8M of memory, less will cause unpredictable errors, "
 "sometimes without error message!. Best would be 32 M here."
@@ -6374,11 +6369,11 @@ msgstr ""
 "onvoorspelbare fouten opleveren, soms zelfs zonder foutmeldingen!. Het zou "
 "het beste zijn om 32M hiervoor te gebruiken."
 
-#: include/setup_checks.inc:404
+#: include/setup_checks.inc:408
 msgid "PHP.ini check -> expose_php"
 msgstr "PHP.ini controle -> expose_php"
 
-#: include/setup_checks.inc:405
+#: include/setup_checks.inc:409
 msgid ""
 "PHP won't send any Information about the Server you are running, should be a "
 "security fact."
@@ -6386,19 +6381,19 @@ msgstr ""
 "PHP zal geen enkele informatie over de Server die u gebruikt weergeven. Zal "
 "hoogstwaarschijnlijk een veiligheids verhogende oorzaak hebben."
 
-#: include/setup_checks.inc:409
+#: include/setup_checks.inc:413
 msgid "PHP.ini check -> magic_quotes_gpc"
 msgstr "PHP.ini check -> magic_quotes_gpc"
 
-#: include/setup_checks.inc:410
+#: include/setup_checks.inc:414
 msgid "Security option, php will escape all quotes in strings ."
 msgstr "Veligheids optie; php zal alle aanhalingstekens in strings omzetten"
 
-#: include/setup_checks.inc:712
+#: include/setup_checks.inc:716
 msgid "You've to specify an ldap server before continuing!"
 msgstr "U moet een LDAP server specificeren voordat u verder gaat!"
 
-#: include/setup_checks.inc:722 include/setup_checks.inc:825
+#: include/setup_checks.inc:726 include/setup_checks.inc:829
 msgid ""
 "Can't connect to the specified LDAP server! Please make sure that is "
 "reachable for GOsa."
@@ -6406,7 +6401,7 @@ msgstr ""
 "Kan niet met de opgegeven LDAP server verbinden! Verzeker a.u.b. dat deze "
 "bereikbaar is voor GOsa."
 
-#: include/setup_checks.inc:739 include/setup_checks.inc:837
+#: include/setup_checks.inc:743 include/setup_checks.inc:841
 msgid ""
 "Can't bind to the specified LDAP server! Please make sure that is reachable "
 "for GOsa."
@@ -6414,7 +6409,7 @@ msgstr ""
 "De aanmelding op de LDAP server is mislukt. Controleer a.u.b. dat deze "
 "bereikbaar is voor GOsa."
 
-#: include/setup_checks.inc:831
+#: include/setup_checks.inc:835
 #, fuzzy
 msgid ""
 "Can't bind to the specified LDAP server!. Please make sure that is reachable "
@@ -6423,7 +6418,7 @@ msgstr ""
 "De aanmelding op de LDAP server is mislukt. Controleer a.u.b. dat deze "
 "bereikbaar is voor GOsa."
 
-#: include/setup_checks.inc:851
+#: include/setup_checks.inc:855
 #, fuzzy
 msgid ""
 "Bind to server successful, but the server seems to be completly empty, "
@@ -6432,7 +6427,7 @@ msgstr ""
 "Verbinding met de server is succesvol uitgevoerd, maar deze lijkt geen "
 "informatie te bevatten. Controleer alle informatie a.u.b. nogmaals."
 
-#: include/setup_checks.inc:890
+#: include/setup_checks.inc:894
 #, php-format
 msgid ""
 "You're missing the required attribute '%s' from this formular. Please "
@@ -6441,12 +6436,12 @@ msgstr ""
 "Het vereiste atribuut '%s' uit dit formulier ontbreekt. Maak a.u.b. uw "
 "invoer af!"
 
-#: include/setup_checks.inc:927
+#: include/setup_checks.inc:931
 #, php-format
 msgid "Can't log into LDAP server. Reason was: %s."
 msgstr "De aanmelding op de LDAP server is mislukt. De reden was: '%s'."
 
-#: include/setup_checks.inc:1053 include/setup_checks.inc:1071
+#: include/setup_checks.inc:1057 include/setup_checks.inc:1075
 #: html/index.php:160 ihtml/themes/default/setup_useradmin.tpl:6
 msgid ""
 "You're missing an administrative account for GOsa, you'll not be able to "
@@ -6640,8 +6635,9 @@ msgstr "Negeer deze fout en toon alle gegevens die de LDAP server teruggeeft"
 
 #: ihtml/themes/altlinux/sizelimit.tpl:10
 #: ihtml/themes/default/sizelimit.tpl:10
+#, fuzzy
 msgid ""
-"ignore this error and show all entries that fit int the defined sizelimit "
+"ignore this error and show all entries that fit into the defined sizelimit "
 "and let me use filters instead"
 msgstr ""
 "Negeer deze fout en toon alle gegevens die passen binnen de gedefinieerde "
@@ -6934,6 +6930,10 @@ msgstr "Configuratie bestand"
 #: ihtml/themes/default/setup_finish.tpl:17
 msgid "Download configuration"
 msgstr "Systeem configuratie"
+
+#, fuzzy
+#~ msgid "Send report"
+#~ msgstr "Afzender"
 
 #~ msgid "LDIF CSV import"
 #~ msgstr "LDIF CSV import"

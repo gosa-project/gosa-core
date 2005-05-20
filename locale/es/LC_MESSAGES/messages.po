@@ -460,7 +460,7 @@ msgstr " El campo requerido 'Cuenta Principal' no ha sido rellenado."
 
 #: plugins/personal/mail/class_mailAccount.inc:672
 #: plugins/personal/mail/class_mailAccount.inc:676
-#: plugins/addons/addressbook/class_addressbook.inc:529
+#: plugins/addons/addressbook/class_addressbook.inc:550
 msgid "Please enter a valid email address in 'Primary address' field."
 msgstr ""
 "Por favor introduzca una dirección valida de correo electrónico en el campo "
@@ -1176,12 +1176,12 @@ msgid "Value specified as 'UID' is too small."
 msgstr "El valor especificado como 'UID' es demasiado pequeño."
 
 #: plugins/personal/posix/class_posixAccount.inc:841
-#: plugins/admin/groups/class_groupGeneric.inc:602
+#: plugins/admin/groups/class_groupGeneric.inc:610
 msgid "Value specified as 'GID' is not valid."
 msgstr "El valor especificado como 'GID' no es valido."
 
 #: plugins/personal/posix/class_posixAccount.inc:844
-#: plugins/admin/groups/class_groupGeneric.inc:605
+#: plugins/admin/groups/class_groupGeneric.inc:613
 msgid "Value specified as 'GID' is too small."
 msgstr "El valor especificado como 'GID' es muy pequeño."
 
@@ -1225,7 +1225,7 @@ msgstr ""
 "El valor especificado como 'shadowMin' debería ser menor que 'shadowMax'."
 
 #: plugins/personal/posix/class_posixAccount.inc:987
-#: plugins/admin/groups/class_groupGeneric.inc:636
+#: plugins/admin/groups/class_groupGeneric.inc:644
 msgid "Too many users, can't allocate a free ID!"
 msgstr "¡Demasiados usuarios, no hay identificadores (ID) libres!"
 
@@ -1518,7 +1518,7 @@ msgstr "Cambiar foto"
 #: plugins/personal/generic/generic.tpl:24
 #: plugins/addons/addressbook/address_edit.tpl:20
 #: plugins/addons/addressbook/contents.tpl:14
-#: plugins/addons/addressbook/class_addressbook.inc:463
+#: plugins/addons/addressbook/class_addressbook.inc:484
 #: plugins/addons/addressbook/address_info.tpl:16
 #: plugins/admin/users/template.tpl:19
 msgid "Name"
@@ -1526,7 +1526,7 @@ msgstr "Nombre"
 
 #: plugins/personal/generic/generic.tpl:30
 #: plugins/addons/addressbook/address_edit.tpl:20
-#: plugins/addons/addressbook/class_addressbook.inc:463
+#: plugins/addons/addressbook/class_addressbook.inc:484
 #: plugins/admin/users/template.tpl:23
 msgid "Given name"
 msgstr "Nombre"
@@ -1808,7 +1808,7 @@ msgid "You have no permissions to move a user from the original 'Base'."
 msgstr "No tiene permisos para crear un usuario en esta 'Base'."
 
 #: plugins/personal/generic/class_user.inc:856
-#: plugins/addons/addressbook/class_addressbook.inc:486
+#: plugins/addons/addressbook/class_addressbook.inc:507
 #: plugins/admin/users/class_userManagement.inc:422
 msgid "The required field 'Name' is not set."
 msgstr "El campo requerido 'Nombre' no ha sido rellenado."
@@ -1818,7 +1818,7 @@ msgid "There's already a person with this 'Login' in the database."
 msgstr "Ya existe un usuario con este 'Login' en la base de datos."
 
 #: plugins/personal/generic/class_user.inc:871
-#: plugins/addons/addressbook/class_addressbook.inc:490
+#: plugins/addons/addressbook/class_addressbook.inc:511
 #: plugins/admin/users/class_userManagement.inc:425
 msgid "The required field 'Given name' is not set."
 msgstr "El campo requerido 'Sobrenombre' no ha sido rellenado."
@@ -1849,40 +1849,40 @@ msgstr "El campo 'Pagina web principal' contiene un URL no valida"
 
 #: plugins/personal/generic/class_user.inc:894
 #: plugins/personal/generic/class_user.inc:922
-#: plugins/addons/addressbook/class_addressbook.inc:496
-#: plugins/addons/addressbook/class_addressbook.inc:524
+#: plugins/addons/addressbook/class_addressbook.inc:517
+#: plugins/addons/addressbook/class_addressbook.inc:545
 #: plugins/admin/departments/class_departmentGeneric.inc:155
 msgid "The field 'Name' contains invalid characters."
 msgstr "El campo 'Nombre' contiene caracteres no validos."
 
 #: plugins/personal/generic/class_user.inc:897
 #: plugins/personal/generic/class_user.inc:919
-#: plugins/addons/addressbook/class_addressbook.inc:499
-#: plugins/addons/addressbook/class_addressbook.inc:521
+#: plugins/addons/addressbook/class_addressbook.inc:520
+#: plugins/addons/addressbook/class_addressbook.inc:542
 msgid "The field 'Given name' contains invalid characters."
 msgstr "El campo 'Sobrenombre' contiene caracteres no validos"
 
 #: plugins/personal/generic/class_user.inc:902
 #: plugins/personal/generic/class_user.inc:905
-#: plugins/addons/addressbook/class_addressbook.inc:504
-#: plugins/addons/addressbook/class_addressbook.inc:507
+#: plugins/addons/addressbook/class_addressbook.inc:525
+#: plugins/addons/addressbook/class_addressbook.inc:528
 #: plugins/admin/departments/class_departmentGeneric.inc:158
 msgid "The field 'Phone' contains an invalid phone number."
 msgstr "El campo 'Teléfono' contiene un número de teléfono no valido."
 
 #: plugins/personal/generic/class_user.inc:908
-#: plugins/addons/addressbook/class_addressbook.inc:510
+#: plugins/addons/addressbook/class_addressbook.inc:531
 #: plugins/admin/departments/class_departmentGeneric.inc:161
 msgid "The field 'Fax' contains an invalid phone number."
 msgstr "El campo 'Fax' contiene un número de teléfono no valido."
 
 #: plugins/personal/generic/class_user.inc:911
-#: plugins/addons/addressbook/class_addressbook.inc:513
+#: plugins/addons/addressbook/class_addressbook.inc:534
 msgid "The field 'Mobile' contains an invalid phone number."
 msgstr "El campo 'Teléfono móvil' contiene un número de teléfono invalido."
 
 #: plugins/personal/generic/class_user.inc:914
-#: plugins/addons/addressbook/class_addressbook.inc:516
+#: plugins/addons/addressbook/class_addressbook.inc:537
 msgid "The field 'Pager' contains an invalid phone number."
 msgstr ""
 "El campo 'Dispositivo de Busqueda' contiene un número de teléfono invalido."
@@ -2269,7 +2269,7 @@ msgstr "Seleccione un subárbol para colocar la lista de bloqueos"
 
 #: plugins/gofax/blocklists/generic.tpl:31
 #: plugins/admin/systems/service.tpl:42 plugins/admin/systems/service.tpl:120
-#: include/functions.inc:1572
+#: include/functions.inc:1579
 msgid "Type"
 msgstr "Tipo"
 
@@ -2726,10 +2726,10 @@ msgid "Dial connection..."
 msgstr "Marcando conexión"
 
 #: plugins/addons/addressbook/dial.tpl:11
-#: plugins/addons/addressbook/class_addressbook.inc:337
-#: plugins/addons/addressbook/class_addressbook.inc:339
-#: plugins/addons/addressbook/class_addressbook.inc:340
-#: plugins/addons/addressbook/class_addressbook.inc:414
+#: plugins/addons/addressbook/class_addressbook.inc:354
+#: plugins/addons/addressbook/class_addressbook.inc:356
+#: plugins/addons/addressbook/class_addressbook.inc:357
+#: plugins/addons/addressbook/class_addressbook.inc:435
 msgid "Dial"
 msgstr "Llamar"
 
@@ -2858,12 +2858,12 @@ msgstr "Libreta de direcciones"
 msgid "Addressbook"
 msgstr "Libreta de direcciones"
 
-#: plugins/addons/addressbook/class_addressbook.inc:143
+#: plugins/addons/addressbook/class_addressbook.inc:147
 #, php-format
 msgid "Dial from %s to %s now?"
 msgstr "¿Llamar desde %s a %s ahora?"
 
-#: plugins/addons/addressbook/class_addressbook.inc:147
+#: plugins/addons/addressbook/class_addressbook.inc:151
 msgid ""
 "You have no personal phone number set. Please change that in order to "
 "perform direct dials."
@@ -2871,73 +2871,73 @@ msgstr ""
 "No tiene configurado un numero de teléfono personal. Por favor cambie esto "
 "para permitir llamadas directas."
 
-#: plugins/addons/addressbook/class_addressbook.inc:176
-#: plugins/addons/addressbook/class_addressbook.inc:280
+#: plugins/addons/addressbook/class_addressbook.inc:180
+#: plugins/addons/addressbook/class_addressbook.inc:284
 msgid "You are not allowed to delete this entry!"
 msgstr "¡No tiene permisos para eliminar esta entrada!"
 
-#: plugins/addons/addressbook/class_addressbook.inc:274
+#: plugins/addons/addressbook/class_addressbook.inc:278
 #, php-format
 msgid "You're about to delete the entry %s."
 msgstr "Has decidido eliminar la entrada %s"
 
-#: plugins/addons/addressbook/class_addressbook.inc:343
+#: plugins/addons/addressbook/class_addressbook.inc:360
 #, php-format
 msgid "Save contact for %s as vcard"
 msgstr "Salvar el contacto %s como una vcard"
 
-#: plugins/addons/addressbook/class_addressbook.inc:346
+#: plugins/addons/addressbook/class_addressbook.inc:363
 #, php-format
 msgid "Send mail to %s"
 msgstr "Enviar correo a %s"
 
-#: plugins/addons/addressbook/class_addressbook.inc:426
+#: plugins/addons/addressbook/class_addressbook.inc:447
 msgid "global addressbook"
 msgstr "Directorio de contactos global"
 
-#: plugins/addons/addressbook/class_addressbook.inc:428
+#: plugins/addons/addressbook/class_addressbook.inc:449
 msgid "organizations user database"
 msgstr "bases de datos de organizaciones de usuarios"
 
-#: plugins/addons/addressbook/class_addressbook.inc:432
+#: plugins/addons/addressbook/class_addressbook.inc:453
 #, php-format
 msgid "Contact stored in %s"
 msgstr "Contacto guardado en %s"
 
-#: plugins/addons/addressbook/class_addressbook.inc:434
+#: plugins/addons/addressbook/class_addressbook.inc:455
 msgid "Creating new entry in"
 msgstr "Crear una nueva entrada en"
 
-#: plugins/addons/addressbook/class_addressbook.inc:463
+#: plugins/addons/addressbook/class_addressbook.inc:484
 #: plugins/addons/logview/class_logview.inc:62
 #: plugins/addons/logview/class_logview.inc:76
 msgid "All"
 msgstr "Todo"
 
-#: plugins/addons/addressbook/class_addressbook.inc:464
+#: plugins/addons/addressbook/class_addressbook.inc:485
 msgid "Work phone"
 msgstr "Teléfono del trabajo"
 
-#: plugins/addons/addressbook/class_addressbook.inc:464
+#: plugins/addons/addressbook/class_addressbook.inc:485
 msgid "Cell phone"
 msgstr "Móvil"
 
-#: plugins/addons/addressbook/class_addressbook.inc:465
+#: plugins/addons/addressbook/class_addressbook.inc:486
 msgid "Home phone"
 msgstr "Teléfono particular"
 
-#: plugins/addons/addressbook/class_addressbook.inc:465
+#: plugins/addons/addressbook/class_addressbook.inc:486
 msgid "User ID"
 msgstr "Identificador (ID) de usuario"
 
-#: plugins/addons/addressbook/class_addressbook.inc:537
+#: plugins/addons/addressbook/class_addressbook.inc:558
 msgid ""
 "Cannot create a unique DN for your entry. Please fill more formular fields."
 msgstr ""
 "No se puede crear un 'DN' único para esta entrada. Por favor rellene los "
 "campos del formulario."
 
-#: plugins/addons/addressbook/class_addressbook.inc:549
+#: plugins/addons/addressbook/class_addressbook.inc:570
 msgid ""
 "You have no permissions to create or modify a global address book entry."
 msgstr ""
@@ -3285,33 +3285,33 @@ msgstr ""
 msgid "This 'dn' is no group."
 msgstr "Este 'dn' no es un grupo."
 
-#: plugins/admin/groups/class_groupGeneric.inc:252
+#: plugins/admin/groups/class_groupGeneric.inc:253
 msgid "Samba group"
 msgstr "Grupo de samba"
 
-#: plugins/admin/groups/class_groupGeneric.inc:252
+#: plugins/admin/groups/class_groupGeneric.inc:253
 msgid "Domain admins"
 msgstr "Administradores del dominio"
 
-#: plugins/admin/groups/class_groupGeneric.inc:252
+#: plugins/admin/groups/class_groupGeneric.inc:253
 msgid "Domain users"
 msgstr "Usuarios del dominio"
 
-#: plugins/admin/groups/class_groupGeneric.inc:253
+#: plugins/admin/groups/class_groupGeneric.inc:254
 msgid "Domain guests"
 msgstr "Invitados del dominio"
 
-#: plugins/admin/groups/class_groupGeneric.inc:258
+#: plugins/admin/groups/class_groupGeneric.inc:259
 #, php-format
 msgid "Special group (%d)"
 msgstr ""
 
-#: plugins/admin/groups/class_groupGeneric.inc:566
+#: plugins/admin/groups/class_groupGeneric.inc:574
 #: plugins/admin/ogroups/class_ogroup.inc:484
 msgid "You have no permissions to create a group on this 'Base'."
 msgstr "No tiene permisos para crear un grupo en esta 'Base'."
 
-#: plugins/admin/groups/class_groupGeneric.inc:576
+#: plugins/admin/groups/class_groupGeneric.inc:584
 msgid ""
 "The field 'Name' contains invalid characters. Lowercase, numbers and dashes "
 "are allowed."
@@ -3319,8 +3319,8 @@ msgstr ""
 "El campo 'Nombre' contiene caracteres no validos. Puede utilizar minúsculas, "
 "numeros y guiones."
 
-#: plugins/admin/groups/class_groupGeneric.inc:587
-#: plugins/admin/groups/class_groupGeneric.inc:594
+#: plugins/admin/groups/class_groupGeneric.inc:595
+#: plugins/admin/groups/class_groupGeneric.inc:602
 msgid "Value specified as 'Name' is already used."
 msgstr "El valor especificado como 'Nombre' esta siendo utilizado."
 
@@ -5829,59 +5829,54 @@ msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgid "GOsa development snapshot (Rev %s)"
 msgstr ""
 
-#: include/functions.inc:1528
+#: include/functions.inc:1531
 msgid "Generating this page caused the PHP interpreter to rise some errors!"
 msgstr ""
 
-#: include/functions.inc:1528
-#, fuzzy
-msgid "Send report"
-msgstr "Remitente"
-
-#: include/functions.inc:1528
+#: include/functions.inc:1531
 #, fuzzy
 msgid "Toggle information"
 msgstr "Información personal"
 
-#: include/functions.inc:1535
+#: include/functions.inc:1539
 #, fuzzy
 msgid "PHP error"
 msgstr "Error LDAP:"
 
-#: include/functions.inc:1542
+#: include/functions.inc:1546
 msgid "class"
 msgstr ""
 
-#: include/functions.inc:1548
+#: include/functions.inc:1552
 #, fuzzy
 msgid "function"
 msgstr "Acción"
 
-#: include/functions.inc:1553
+#: include/functions.inc:1557
 #, fuzzy
 msgid "static"
 msgstr "Estado"
 
-#: include/functions.inc:1557
+#: include/functions.inc:1561
 #, fuzzy
 msgid "method"
 msgstr "Opciones de correo"
 
-#: include/functions.inc:1571
+#: include/functions.inc:1578
 msgid "Trace"
 msgstr ""
 
-#: include/functions.inc:1572
+#: include/functions.inc:1579
 #, fuzzy
 msgid "File"
 msgstr "Archivos"
 
-#: include/functions.inc:1572
+#: include/functions.inc:1579
 #, fuzzy
 msgid "Line"
 msgstr "en"
 
-#: include/functions.inc:1573
+#: include/functions.inc:1580
 #, fuzzy
 msgid "Arguments"
 msgstr "departamentos"
@@ -6077,19 +6072,19 @@ msgstr ""
 msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
 msgstr ""
 
-#: include/setup_checks.inc:106
+#: include/setup_checks.inc:110
 msgid "Can't bind to LDAP. No schema check possible!"
 msgstr ""
 "No se pudo establecer la conexión al servidor LDAP. ¡No se pudo comprobar el "
 "esquema.!"
 
-#: include/setup_checks.inc:115 include/setup_checks.inc:124
+#: include/setup_checks.inc:119 include/setup_checks.inc:128
 msgid "Can't get schema information from server. No schema check possible!"
 msgstr ""
 "No se pudo obtener la información del esquema del servidor. No se pudo "
 "comprobar el esquema."
 
-#: include/setup_checks.inc:144
+#: include/setup_checks.inc:148
 #, php-format
 msgid ""
 "Optional objectclass '%s' required by plugin '%s' is not present in LDAP "
@@ -6098,7 +6093,7 @@ msgstr ""
 "El objeto de clase (objectclass) opcional '%s' requerido por la extensión '%"
 "s' no esta disponible en configuración de LDAP."
 
-#: include/setup_checks.inc:147
+#: include/setup_checks.inc:151
 #, php-format
 msgid ""
 "Optional objectclass '%s' required by plugin '%s' does not have version %s"
@@ -6106,88 +6101,88 @@ msgstr ""
 "El objeto de clase (objectclass) opcional '%s' requerido por la extensión '%"
 "s' no tiene la versión %s"
 
-#: include/setup_checks.inc:159
+#: include/setup_checks.inc:163
 #, php-format
 msgid "Required objectclass '%s' is not present in LDAP setup"
 msgstr ""
 "No se encuentra el objeto de clase (object class) requerido '%s' en la "
 "configuración del servidor LDAP."
 
-#: include/setup_checks.inc:162
+#: include/setup_checks.inc:166
 #, php-format
 msgid "Required objectclass '%s' does not have version %s"
 msgstr "El objeto de clase (objectclass) requerido '%s' no tiene la versión %s"
 
-#: include/setup_checks.inc:170
+#: include/setup_checks.inc:174
 #, fuzzy
 msgid "SAMBA 3 support disabled, no schema seems to be installed"
 msgstr ""
 "El soporte de SAMBA 3 se encuentra desactivado, no parece haber esquemas "
 "instalados"
 
-#: include/setup_checks.inc:173
+#: include/setup_checks.inc:177
 msgid "SAMBA 3 support enabled"
 msgstr ""
 
-#: include/setup_checks.inc:177
+#: include/setup_checks.inc:181
 #, fuzzy
 msgid "SAMBA 2 support disabled, no schema seems to be installed"
 msgstr ""
 "El soporte de SAMBA 2 se encuentra desactivado, no parece haber esquemas "
 "instalados"
 
-#: include/setup_checks.inc:180
+#: include/setup_checks.inc:184
 msgid "SAMBA 2 support enabled"
 msgstr ""
 
-#: include/setup_checks.inc:185
+#: include/setup_checks.inc:189
 #, fuzzy
 msgid "Support for pureftp disabled, no schema seems to be installed"
 msgstr ""
 "El soporte para pureftp se encuentra desactivado, no parece haber esquemas "
 "instalados"
 
-#: include/setup_checks.inc:188
+#: include/setup_checks.inc:192
 msgid "Support for pureftp enabled"
 msgstr ""
 
-#: include/setup_checks.inc:192
+#: include/setup_checks.inc:196
 #, fuzzy
 msgid "Support for WebDAV disabled, no schema seems to be installed"
 msgstr ""
 "El soporte para pureftp se encuentra desactivado, no parece haber esquemas "
 "instalados"
 
-#: include/setup_checks.inc:195
+#: include/setup_checks.inc:199
 msgid "Support for WebDAV enabled"
 msgstr ""
 
-#: include/setup_checks.inc:199
+#: include/setup_checks.inc:203
 #, fuzzy
 msgid "Support for phpgroupware disabled, no schema seems to be installed"
 msgstr ""
 "El soporte para pureftp se encuentra desactivado, no parece haber esquemas "
 "instalados"
 
-#: include/setup_checks.inc:202
+#: include/setup_checks.inc:206
 #, fuzzy
 msgid "Support for phpgroupware enabled"
 msgstr ""
 "El soporte para pureftp se encuentra desactivado, no parece haber esquemas "
 "instalados"
 
-#: include/setup_checks.inc:206
+#: include/setup_checks.inc:210
 #, fuzzy
 msgid "Support for gofon disabled, no schema seems to be installed"
 msgstr ""
 "El soporte para pureftp se encuentra desactivado, no parece haber esquemas "
 "instalados"
 
-#: include/setup_checks.inc:209
+#: include/setup_checks.inc:213
 msgid "Support for gofon enabled"
 msgstr ""
 
-#: include/setup_checks.inc:216
+#: include/setup_checks.inc:220
 #, fuzzy
 msgid ""
 "Support for Kolab disabled, no schema seems to be installed, setting mail-"
@@ -6196,31 +6191,31 @@ msgstr ""
 "El soporte para pureftp se encuentra desactivado, no parece haber esquemas "
 "instalados"
 
-#: include/setup_checks.inc:221
+#: include/setup_checks.inc:225
 msgid "Support for Kolab enabled"
 msgstr ""
 
-#: include/setup_checks.inc:237
+#: include/setup_checks.inc:241
 msgid "OK"
 msgstr "Perfecto"
 
-#: include/setup_checks.inc:240
+#: include/setup_checks.inc:244
 msgid "Ignored"
 msgstr "Ignorado"
 
-#: include/setup_checks.inc:242
+#: include/setup_checks.inc:246
 msgid "Failed"
 msgstr "Fallado"
 
-#: include/setup_checks.inc:258
+#: include/setup_checks.inc:262
 msgid "PHP setup inspection"
 msgstr "Comprobación configuración PHP"
 
-#: include/setup_checks.inc:259
+#: include/setup_checks.inc:263
 msgid "Checking for PHP version (>=4.1.0)"
 msgstr "Comprobando la versión de PHP (>=4.1.0)"
 
-#: include/setup_checks.inc:260
+#: include/setup_checks.inc:264
 msgid ""
 "PHP must be of version 4.1.0 or above for some functions and known bugs in "
 "PHP language."
@@ -6228,22 +6223,22 @@ msgstr ""
 "Debe tener una versión de PHP 4.1.0 o superior para el correcto "
 "funcionamiento de GOsa."
 
-#: include/setup_checks.inc:263
+#: include/setup_checks.inc:267
 #, fuzzy
 msgid "Checking for PHP version (<=5)"
 msgstr "Comprobando la versión de PHP (>=4.1.0)"
 
-#: include/setup_checks.inc:264
+#: include/setup_checks.inc:268
 msgid "PHP must be below version 5."
 msgstr ""
 
-#: include/setup_checks.inc:268
+#: include/setup_checks.inc:272
 msgid "Checking if register_globals is set to 'off'"
 msgstr ""
 "Comprobando si el registro de variables globales (register_globals) esta "
 "desactivado."
 
-#: include/setup_checks.inc:269
+#: include/setup_checks.inc:273
 msgid ""
 "register_globals is a PHP mechanism to register all global varibales to be "
 "accessible from scripts without changing the scope. This may be a security "
@@ -6253,39 +6248,39 @@ msgstr ""
 "que permite acceder a variables globales sin cambiar el ambito. Esto puede "
 "ser un problema de seguridad. GOsa funcionará en los dos modos."
 
-#: include/setup_checks.inc:272
+#: include/setup_checks.inc:276
 msgid "Checking for ldap module"
 msgstr "Comprobando los módulos de ldap"
 
-#: include/setup_checks.inc:273
+#: include/setup_checks.inc:277
 msgid "This is the main module used by GOsa and therefore really required."
 msgstr "Este es el módulo más usado por GOsa, es realmente requerido."
 
-#: include/setup_checks.inc:276
+#: include/setup_checks.inc:280
 msgid "Checking for gettext support"
 msgstr "Comprobando el soporte de gettext"
 
-#: include/setup_checks.inc:277
+#: include/setup_checks.inc:281
 msgid "Gettext support is required for internationalized GOsa."
 msgstr ""
 "El soporte de gettext es requerido para la intenacionalización de GOsa."
 
-#: include/setup_checks.inc:279
+#: include/setup_checks.inc:283
 #, fuzzy
 msgid "Checking for iconv support"
 msgstr "Comprobando el soporte de gettext"
 
-#: include/setup_checks.inc:280
+#: include/setup_checks.inc:284
 msgid ""
 "This module is used by GOsa to convert samba munged dial informations and is "
 "therefore required."
 msgstr ""
 
-#: include/setup_checks.inc:283
+#: include/setup_checks.inc:287
 msgid "Checking for mhash module"
 msgstr "Comprobando por el módulo de mhash"
 
-#: include/setup_checks.inc:284
+#: include/setup_checks.inc:288
 msgid ""
 "To use SSHA encryption, you'll need this module. If you are just using crypt "
 "or md5 encryption, ignore this message. GOsa will run without it."
@@ -6293,11 +6288,11 @@ msgstr ""
 "Necesitará este módulo para usar crifrado SSHA. Si usted solo usa crypt o "
 "md5, ignore este mensaje. GOsa correra si él."
 
-#: include/setup_checks.inc:287
+#: include/setup_checks.inc:291
 msgid "Checking for imap module"
 msgstr "Comprobando el módulo de imap"
 
-#: include/setup_checks.inc:288
+#: include/setup_checks.inc:292
 msgid ""
 "The IMAP module is needed to communicate with the IMAP server. It gets "
 "status informations, creates and deletes mail users."
@@ -6305,11 +6300,11 @@ msgstr ""
 "El módulo de IMAP es necesario para comunicarse con el servidor IMAP. "
 "Obtiene el estado, crea y borra usuarios del correo."
 
-#: include/setup_checks.inc:290
+#: include/setup_checks.inc:294
 msgid "Checking for getacl in imap"
 msgstr "Comprobando por getacl en imap"
 
-#: include/setup_checks.inc:291
+#: include/setup_checks.inc:295
 msgid ""
 "The getacl support is needed for shared folder permissions. The standard "
 "IMAP module is not capable of reading acl's. You need a recend PHP version "
@@ -6319,21 +6314,21 @@ msgstr ""
 "módulo IAMP estandar no es capaz de leer acls. Necesitará una versión "
 "reciente de PHP para obtener está caracteristica. "
 
-#: include/setup_checks.inc:293
+#: include/setup_checks.inc:297
 msgid "Checking for mysql module"
 msgstr "Comprobando el módulo de mysql"
 
-#: include/setup_checks.inc:294
+#: include/setup_checks.inc:298
 msgid "MySQL support is needed for reading GOfax reports from databases."
 msgstr ""
 "El soporte de MySQL es necesario para leer los repotes de GOfax de la base "
 "de datos."
 
-#: include/setup_checks.inc:296
+#: include/setup_checks.inc:300
 msgid "Checking for cups module"
 msgstr "Comprobando el módulo de cups"
 
-#: include/setup_checks.inc:297
+#: include/setup_checks.inc:301
 msgid ""
 "In order to read available printers from IPP protocol instead of printcap "
 "files, you've to install the CUPS module."
@@ -6341,11 +6336,11 @@ msgstr ""
 "Para poder leer las impresoras disponibles a través del protocolo IPP, en "
 "vez de los archivos printcap, tiene que tener instalado el módulo de CUPS."
 
-#: include/setup_checks.inc:299
+#: include/setup_checks.inc:303
 msgid "Checking for kadm5 module"
 msgstr "Comprobando el módulo kadm5"
 
-#: include/setup_checks.inc:300
+#: include/setup_checks.inc:304
 msgid ""
 "Managing users in kerberos requires the kadm5 module which is downloadable "
 "via PEAR network."
@@ -6353,15 +6348,15 @@ msgstr ""
 "Manejando usuarios en kerberos requiere el módulo kadm5 que esta disponible "
 "en la red PEAR."
 
-#: include/setup_checks.inc:309
+#: include/setup_checks.inc:313
 msgid "Checking for some additional programms"
 msgstr "Comprobando programas adicionales"
 
-#: include/setup_checks.inc:318
+#: include/setup_checks.inc:322
 msgid "Checking for ImageMagick (>=5.4.0)"
 msgstr "Comprobando por ImageMagick (>=5.4.0)"
 
-#: include/setup_checks.inc:319
+#: include/setup_checks.inc:323
 msgid ""
 "ImageMagick is used to convert user supplied images to fit the suggested "
 "size and the unified JPEG format."
@@ -6369,12 +6364,12 @@ msgstr ""
 "ImageMagick se usa para convertir las imagenes de los usuarios para que "
 "encajen en el tamaño sugerido y el formato JPEG."
 
-#: include/setup_checks.inc:322
+#: include/setup_checks.inc:326
 #, fuzzy
 msgid "Checking imagick module for PHP"
 msgstr "Comprobando el módulo de imap"
 
-#: include/setup_checks.inc:323
+#: include/setup_checks.inc:327
 #, fuzzy
 msgid ""
 "Imagick is used to convert user supplied images to fit the suggested size "
@@ -6383,11 +6378,11 @@ msgstr ""
 "ImageMagick se usa para convertir las imagenes de los usuarios para que "
 "encajen en el tamaño sugerido y el formato JPEG."
 
-#: include/setup_checks.inc:330
+#: include/setup_checks.inc:334
 msgid "Checking for fping utility"
 msgstr "Comprobando la herramienta fping"
 
-#: include/setup_checks.inc:331
+#: include/setup_checks.inc:335
 msgid ""
 "The fping utility is only used if you've got a thin client based terminal "
 "environment running."
@@ -6395,11 +6390,11 @@ msgstr ""
 "La herramienta fping solo se usa si tiene un entorno de terminales clientes "
 "delgados (thinclient)."
 
-#: include/setup_checks.inc:346
+#: include/setup_checks.inc:350
 msgid "Checking for a way to generate LM/NT password hashes"
 msgstr "Buscando una manera de generar hashes de contraseñas LM/NT"
 
-#: include/setup_checks.inc:347
+#: include/setup_checks.inc:351
 msgid ""
 "In order to use SAMBA 2/3, you've to install some additional packages to "
 "generate password hashes."
@@ -6407,69 +6402,69 @@ msgstr ""
 "Para poder usar SAMBA 2/3, tiene que instalar algunos paquetes adicionales "
 "para generar los hashes de contraseñas."
 
-#: include/setup_checks.inc:378
+#: include/setup_checks.inc:382
 msgid "PHP.ini check -> session.auto_register"
 msgstr ""
 
-#: include/setup_checks.inc:379
+#: include/setup_checks.inc:383
 msgid ""
 "In Order to use GOsa without any trouble, the session.auto_register option "
 "in your php.ini musst be 'Off'."
 msgstr ""
 
-#: include/setup_checks.inc:385
+#: include/setup_checks.inc:389
 msgid "PHP.ini check -> implicit_flush"
 msgstr ""
 
-#: include/setup_checks.inc:386
+#: include/setup_checks.inc:390
 msgid ""
 "This Option defines the Ouput handling, turn this Option off, to increase "
 "performance."
 msgstr ""
 
-#: include/setup_checks.inc:392
+#: include/setup_checks.inc:396
 msgid "PHP.ini check -> max_execution_time"
 msgstr ""
 
-#: include/setup_checks.inc:393
+#: include/setup_checks.inc:397
 msgid ""
 "The Execution time, should be 30 seconds minimun, cause some actions will "
 "need huge ammount of time ."
 msgstr ""
 
-#: include/setup_checks.inc:399
+#: include/setup_checks.inc:403
 msgid "PHP.ini check -> memory_limit"
 msgstr ""
 
-#: include/setup_checks.inc:400
+#: include/setup_checks.inc:404
 msgid ""
 "GOsa need at least 8M of memory, less will cause unpredictable errors, "
 "sometimes without error message!. Best would be 32 M here."
 msgstr ""
 
-#: include/setup_checks.inc:404
+#: include/setup_checks.inc:408
 msgid "PHP.ini check -> expose_php"
 msgstr ""
 
-#: include/setup_checks.inc:405
+#: include/setup_checks.inc:409
 msgid ""
 "PHP won't send any Information about the Server you are running, should be a "
 "security fact."
 msgstr ""
 
-#: include/setup_checks.inc:409
+#: include/setup_checks.inc:413
 msgid "PHP.ini check -> magic_quotes_gpc"
 msgstr ""
 
-#: include/setup_checks.inc:410
+#: include/setup_checks.inc:414
 msgid "Security option, php will escape all quotes in strings ."
 msgstr ""
 
-#: include/setup_checks.inc:712
+#: include/setup_checks.inc:716
 msgid "You've to specify an ldap server before continuing!"
 msgstr "Tiene que especificar un servidor ldap antes de continuar."
 
-#: include/setup_checks.inc:722 include/setup_checks.inc:825
+#: include/setup_checks.inc:726 include/setup_checks.inc:829
 msgid ""
 "Can't connect to the specified LDAP server! Please make sure that is "
 "reachable for GOsa."
@@ -6477,7 +6472,7 @@ msgstr ""
 "No se pudo conectar al servidor LDAP especificado. Por favor, asegure que "
 "este accesible para GOsa."
 
-#: include/setup_checks.inc:739 include/setup_checks.inc:837
+#: include/setup_checks.inc:743 include/setup_checks.inc:841
 msgid ""
 "Can't bind to the specified LDAP server! Please make sure that is reachable "
 "for GOsa."
@@ -6485,7 +6480,7 @@ msgstr ""
 "No se pudo autentificar con el servidor LDAP especificado. Por favor, "
 "asegure que este accesible para GOsa."
 
-#: include/setup_checks.inc:831
+#: include/setup_checks.inc:835
 #, fuzzy
 msgid ""
 "Can't bind to the specified LDAP server!. Please make sure that is reachable "
@@ -6494,13 +6489,13 @@ msgstr ""
 "No se pudo autentificar con el servidor LDAP especificado. Por favor, "
 "asegure que este accesible para GOsa."
 
-#: include/setup_checks.inc:851
+#: include/setup_checks.inc:855
 msgid ""
 "Bind to server successful, but the server seems to be completly empty, "
 "please check all informations twice"
 msgstr ""
 
-#: include/setup_checks.inc:890
+#: include/setup_checks.inc:894
 #, php-format
 msgid ""
 "You're missing the required attribute '%s' from this formular. Please "
@@ -6508,12 +6503,12 @@ msgid ""
 msgstr ""
 "Falta el atributo requerido '%s' de este formulario. Por favor, complételo."
 
-#: include/setup_checks.inc:927
+#: include/setup_checks.inc:931
 #, php-format
 msgid "Can't log into LDAP server. Reason was: %s."
 msgstr "No se puede conectar al servidor LDAP. El motivo fue: %s."
 
-#: include/setup_checks.inc:1053 include/setup_checks.inc:1071
+#: include/setup_checks.inc:1057 include/setup_checks.inc:1075
 #: html/index.php:160 ihtml/themes/default/setup_useradmin.tpl:6
 msgid ""
 "You're missing an administrative account for GOsa, you'll not be able to "
@@ -6706,8 +6701,9 @@ msgstr ""
 
 #: ihtml/themes/altlinux/sizelimit.tpl:10
 #: ihtml/themes/default/sizelimit.tpl:10
+#, fuzzy
 msgid ""
-"ignore this error and show all entries that fit int the defined sizelimit "
+"ignore this error and show all entries that fit into the defined sizelimit "
 "and let me use filters instead"
 msgstr ""
 "ignore este error y enseñe todas las entradas que concuerdan con el 'tamaño "
@@ -6986,6 +6982,10 @@ msgstr "Configurar"
 #, fuzzy
 msgid "Download configuration"
 msgstr "Información de sistema"
+
+#, fuzzy
+#~ msgid "Send report"
+#~ msgstr "Remitente"
 
 #, fuzzy
 #~ msgid "LDIF CSV import"

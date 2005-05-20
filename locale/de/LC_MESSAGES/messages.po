@@ -10,12 +10,12 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schr�der <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-05-20 15:14+0200\n"
+"PO-Revision-Date: 2005-05-20 16:36+0200\n"
 "Last-Translator:  <(null)>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: contrib/gosa.conf:4
 msgid "My account"
@@ -460,7 +460,7 @@ msgstr "Das ben�tigte Feld 'Prim�re Adresse' ist nicht gesetzt."
 
 #: plugins/personal/mail/class_mailAccount.inc:672
 #: plugins/personal/mail/class_mailAccount.inc:676
-#: plugins/addons/addressbook/class_addressbook.inc:529
+#: plugins/addons/addressbook/class_addressbook.inc:550
 msgid "Please enter a valid email address in 'Primary address' field."
 msgstr ""
 "Bitte geben Sie eine g�ltige E-Mail-Adresse in das Feld 'Prim�re Adresse' "
@@ -952,19 +952,19 @@ msgstr "automatisch"
 
 #: plugins/personal/posix/class_posixAccount.inc:218
 msgid "This account has no unix extensions."
-msgstr "Dieses Konto hat keine UNIX-Erweiterungen."
+msgstr "Dieses Konto hat keine POSIX-Erweiterungen."
 
 #: plugins/personal/posix/class_posixAccount.inc:238
 #: plugins/personal/posix/class_posixAccount.inc:241
 msgid "Remove posix account"
-msgstr "UNIX-Konto entfernen"
+msgstr "POSIX-Konto entfernen"
 
 #: plugins/personal/posix/class_posixAccount.inc:239
 msgid ""
 "This account has unix features enabled. To disable them, you'll need to "
 "remove the samba account first."
 msgstr ""
-"Dieses Konto hat UNIX-Erweiterungen aktiviert. Um sie zu deaktivieren, "
+"Dieses Konto hat POSIX-Erweiterungen aktiviert. Um sie zu deaktivieren, "
 "m�ssen Sie zun�chst das Samba-Konto deaktivieren."
 
 #: plugins/personal/posix/class_posixAccount.inc:242
@@ -972,19 +972,19 @@ msgid ""
 "This account has posix features enabled. You can disable them by clicking "
 "below."
 msgstr ""
-"Dieser Benutzer hat die Posix-Eigenschaften aktiviert. Sie k�nnen diese "
+"Dieser Benutzer hat die POSIX-Eigenschaften aktiviert. Sie k�nnen diese "
 "durch einen Klick auf die untere Schaltfl�che deaktivieren."
 
 #: plugins/personal/posix/class_posixAccount.inc:245
 msgid "Create posix account"
-msgstr "UNIX-Konto erstellen"
+msgstr "POSIX-Konto erstellen"
 
 #: plugins/personal/posix/class_posixAccount.inc:246
 msgid ""
 "This account has posix features disabled. You can enable them by clicking "
 "below."
 msgstr ""
-"Dieses Konto hat keine g�ltigen UNIX-Erweiterungen. Sie k�nnen diese durch "
+"Dieses Konto hat keine g�ltigen POSIX-Erweiterungen. Sie k�nnen diese durch "
 "einen Klick auf die untere Schaltfl�che aktivieren."
 
 #: plugins/personal/posix/class_posixAccount.inc:431
@@ -1176,12 +1176,12 @@ msgid "Value specified as 'UID' is too small."
 msgstr "Die von ihnen angebene 'UID' ist zu klein."
 
 #: plugins/personal/posix/class_posixAccount.inc:841
-#: plugins/admin/groups/class_groupGeneric.inc:602
+#: plugins/admin/groups/class_groupGeneric.inc:610
 msgid "Value specified as 'GID' is not valid."
 msgstr "Die von ihnen angebene 'GID' ist nicht korrekt."
 
 #: plugins/personal/posix/class_posixAccount.inc:844
-#: plugins/admin/groups/class_groupGeneric.inc:605
+#: plugins/admin/groups/class_groupGeneric.inc:613
 msgid "Value specified as 'GID' is too small."
 msgstr "Die von ihnen angebene 'GID' ist zu klein."
 
@@ -1225,7 +1225,7 @@ msgid "Value specified as 'shadowMin' should be smaller than 'shadowMax'."
 msgstr "Der angegebene Wert 'shadowMin' sollte kleiner als 'shadowMax' sein."
 
 #: plugins/personal/posix/class_posixAccount.inc:987
-#: plugins/admin/groups/class_groupGeneric.inc:636
+#: plugins/admin/groups/class_groupGeneric.inc:644
 msgid "Too many users, can't allocate a free ID!"
 msgstr ""
 "Es sind zu viele Benutzer in der Datenbank. Es kann keine freie ID "
@@ -1519,7 +1519,7 @@ msgstr "Bild �ndern"
 #: plugins/personal/generic/generic.tpl:24
 #: plugins/addons/addressbook/address_edit.tpl:20
 #: plugins/addons/addressbook/contents.tpl:14
-#: plugins/addons/addressbook/class_addressbook.inc:463
+#: plugins/addons/addressbook/class_addressbook.inc:484
 #: plugins/addons/addressbook/address_info.tpl:16
 #: plugins/admin/users/template.tpl:19
 msgid "Name"
@@ -1527,7 +1527,7 @@ msgstr "Name"
 
 #: plugins/personal/generic/generic.tpl:30
 #: plugins/addons/addressbook/address_edit.tpl:20
-#: plugins/addons/addressbook/class_addressbook.inc:463
+#: plugins/addons/addressbook/class_addressbook.inc:484
 #: plugins/admin/users/template.tpl:23
 msgid "Given name"
 msgstr "Vorname"
@@ -1813,7 +1813,7 @@ msgstr ""
 "zu verschieben."
 
 #: plugins/personal/generic/class_user.inc:856
-#: plugins/addons/addressbook/class_addressbook.inc:486
+#: plugins/addons/addressbook/class_addressbook.inc:507
 #: plugins/admin/users/class_userManagement.inc:422
 msgid "The required field 'Name' is not set."
 msgstr "Das ben�tigte Feld 'Name' ist nicht gesetzt."
@@ -1823,7 +1823,7 @@ msgid "There's already a person with this 'Login' in the database."
 msgstr "Die von Ihnen angegebene 'Kennung' ist bereits vergeben."
 
 #: plugins/personal/generic/class_user.inc:871
-#: plugins/addons/addressbook/class_addressbook.inc:490
+#: plugins/addons/addressbook/class_addressbook.inc:511
 #: plugins/admin/users/class_userManagement.inc:425
 msgid "The required field 'Given name' is not set."
 msgstr "Das ben�tigte Feld 'Vorname' ist nicht gesetzt."
@@ -1854,40 +1854,40 @@ msgstr "Das Feld 'Homepage' enth�lt eine ung�ltige Internetadresse."
 
 #: plugins/personal/generic/class_user.inc:894
 #: plugins/personal/generic/class_user.inc:922
-#: plugins/addons/addressbook/class_addressbook.inc:496
-#: plugins/addons/addressbook/class_addressbook.inc:524
+#: plugins/addons/addressbook/class_addressbook.inc:517
+#: plugins/addons/addressbook/class_addressbook.inc:545
 #: plugins/admin/departments/class_departmentGeneric.inc:155
 msgid "The field 'Name' contains invalid characters."
 msgstr "Das Feld 'Name' enth�lt ung�ltige Zeichen."
 
 #: plugins/personal/generic/class_user.inc:897
 #: plugins/personal/generic/class_user.inc:919
-#: plugins/addons/addressbook/class_addressbook.inc:499
-#: plugins/addons/addressbook/class_addressbook.inc:521
+#: plugins/addons/addressbook/class_addressbook.inc:520
+#: plugins/addons/addressbook/class_addressbook.inc:542
 msgid "The field 'Given name' contains invalid characters."
 msgstr "Das Feld 'Vorname' enth�lt ung�ltige Zeichen."
 
 #: plugins/personal/generic/class_user.inc:902
 #: plugins/personal/generic/class_user.inc:905
-#: plugins/addons/addressbook/class_addressbook.inc:504
-#: plugins/addons/addressbook/class_addressbook.inc:507
+#: plugins/addons/addressbook/class_addressbook.inc:525
+#: plugins/addons/addressbook/class_addressbook.inc:528
 #: plugins/admin/departments/class_departmentGeneric.inc:158
 msgid "The field 'Phone' contains an invalid phone number."
 msgstr "Das Feld 'Telefon' enth�lt eine ung�ltige Telefonnummer."
 
 #: plugins/personal/generic/class_user.inc:908
-#: plugins/addons/addressbook/class_addressbook.inc:510
+#: plugins/addons/addressbook/class_addressbook.inc:531
 #: plugins/admin/departments/class_departmentGeneric.inc:161
 msgid "The field 'Fax' contains an invalid phone number."
 msgstr "Das Feld 'Fax' enth�lt eine ung�ltige Telefonnummer."
 
 #: plugins/personal/generic/class_user.inc:911
-#: plugins/addons/addressbook/class_addressbook.inc:513
+#: plugins/addons/addressbook/class_addressbook.inc:534
 msgid "The field 'Mobile' contains an invalid phone number."
 msgstr "Das Feld 'Mobil' enth�lt eine ung�ltige Telefonnummer"
 
 #: plugins/personal/generic/class_user.inc:914
-#: plugins/addons/addressbook/class_addressbook.inc:516
+#: plugins/addons/addressbook/class_addressbook.inc:537
 msgid "The field 'Pager' contains an invalid phone number."
 msgstr "Das Feld 'Pager' enth�lt eine ung�ltige Telefonnummer."
 
@@ -1930,21 +1930,19 @@ msgid "Kolab"
 msgstr "Kolab"
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:102
-#, fuzzy
 msgid ""
 "You're trying to add an invalid email address to the list of delegations."
 msgstr ""
-"Sie versuchen, eine ung�ltige Mail-Adresse in die Liste der Weiterleitungen "
+"Sie versuchen, eine ung�ltige Mail-Adresse in die Liste der Stellvertreter "
 "aufzunehmen."
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:110
-#, fuzzy
 msgid ""
 "The mail address you're trying to add is no primary mail address of an "
 "existing user."
 msgstr ""
-"Die Adresse, die Sie gerade hinzuf�gen m�chten, wird bereits von einem "
-"anderen Benutzer verwendet"
+"Die Adresse, die Sie gerade hinzuf�gen m�chten, ist keine prim�re Mail-"
+"Adresse eines bestehenden Benutzers"
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:137
 msgid "Always accept"
@@ -1955,13 +1953,12 @@ msgid "Always reject"
 msgstr "Immer ablehnen"
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:139
-#, fuzzy
 msgid "Reject if conflicts"
-msgstr "Wiederherstellen falls unterbrochen"
+msgstr "Im Konfliktfall ablehnen"
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:140
 msgid "Manual if conflicts"
-msgstr ""
+msgstr "Im Konfliktfall manuell bearbeiten"
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:141
 msgid "Manual"
@@ -1973,17 +1970,16 @@ msgstr "Anonym"
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:224
 msgid "The value specified as Free Busy future needs to be an integer."
-msgstr ""
+msgstr "Der Wert f�r Frei/Gebucht Zukunft mu� eine Ganzzahl sein."
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:229
-#, fuzzy
 msgid "The value specified as Free Busy Information URL is invalid."
-msgstr "Das Feld 'Dateien' enth�lt eine ung�ltige Eingabe."
+msgstr "Der Wert f�r Frei/Gebucht Information URL is ung�ltig."
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:243
 #, php-format
 msgid "The invitation policy entry for address '%s' is not valid."
-msgstr ""
+msgstr "Die Einladungs-Richtlinie f�r die Adresse '%s' ist ung�ltig."
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:251
 #, php-format
@@ -2039,9 +2035,8 @@ msgstr ""
 
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:671
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:734
-#, fuzzy
 msgid "PHP4 module for Postgresql Database Failed!"
-msgstr "Die Anfrage zur LOG-Datenbank ist fehlgeschlagen!"
+msgstr "PHP4-Erweiterung f�r PostgreSQL Datenbank fehlgeschlagen!"
 
 #: plugins/personal/connectivity/kolab.tpl:1
 msgid "Kolab account"
@@ -2054,9 +2049,8 @@ msgid ""
 msgstr ""
 
 #: plugins/personal/connectivity/kolab.tpl:10
-#, fuzzy
 msgid "Delegations"
-msgstr "Ziel"
+msgstr "Stellvertreter"
 
 #: plugins/personal/connectivity/kolab.tpl:22
 msgid "Mail size"
@@ -2067,9 +2061,8 @@ msgid "No mail size restriction for this account"
 msgstr "Keine Beschr�nkung der Mail Gr��e f�r dieses Konto"
 
 #: plugins/personal/connectivity/kolab.tpl:31
-#, fuzzy
 msgid "Free Busy information"
-msgstr "Generische Benutzer-Information"
+msgstr "Frei/Belegt-Information"
 
 #: plugins/personal/connectivity/kolab.tpl:34
 msgid "URL"
@@ -2271,7 +2264,7 @@ msgstr "W�hlen Sie den Teilbaum, in den die Sperrliste plaziert werden soll."
 
 #: plugins/gofax/blocklists/generic.tpl:31
 #: plugins/admin/systems/service.tpl:42 plugins/admin/systems/service.tpl:120
-#: include/functions.inc:1572
+#: include/functions.inc:1579
 msgid "Type"
 msgstr "Typ"
 
@@ -2355,15 +2348,14 @@ msgid "New"
 msgstr "Neu"
 
 #: plugins/gofax/blocklists/headpage.tpl:28
-#, fuzzy
 msgid ""
 "This menu allows you to create, delete and edit selected blocklists. Having "
 "a large size of lists, you might prefer the range selectors on top of the "
 "select box."
 msgstr ""
-"Dieses Men� erlaubt neue Sperrlisten hinzuzuf�gen, Sperrlisten zu editieren "
-"oder zu l�schen. Bei vielen Sperrlisten bietet sich die Benutzung der "
-"Bereichswahl oberhalb der Liste an."
+"Dieses Men� erm�glicht es Ihnen neue Sperrlisten hinzuzuf�gen, Sperrlisten "
+"zu editieren und zu l�schen. Bei vielen Sperrlisten bietet sich die "
+"Benutzung der Bereichswahl oberhalb der Liste an."
 
 #: plugins/gofax/blocklists/headpage.tpl:31
 msgid ""
@@ -2722,10 +2714,10 @@ msgid "Dial connection..."
 msgstr "W�hle Verbindung..."
 
 #: plugins/addons/addressbook/dial.tpl:11
-#: plugins/addons/addressbook/class_addressbook.inc:337
-#: plugins/addons/addressbook/class_addressbook.inc:339
-#: plugins/addons/addressbook/class_addressbook.inc:340
-#: plugins/addons/addressbook/class_addressbook.inc:414
+#: plugins/addons/addressbook/class_addressbook.inc:354
+#: plugins/addons/addressbook/class_addressbook.inc:356
+#: plugins/addons/addressbook/class_addressbook.inc:357
+#: plugins/addons/addressbook/class_addressbook.inc:435
 msgid "Dial"
 msgstr "W�hle"
 
@@ -2854,12 +2846,12 @@ msgstr "Adressbuch"
 msgid "Addressbook"
 msgstr "Adressbuch"
 
-#: plugins/addons/addressbook/class_addressbook.inc:143
+#: plugins/addons/addressbook/class_addressbook.inc:147
 #, php-format
 msgid "Dial from %s to %s now?"
 msgstr "Soll nun von %s nach %s gew�hlt werden?"
 
-#: plugins/addons/addressbook/class_addressbook.inc:147
+#: plugins/addons/addressbook/class_addressbook.inc:151
 msgid ""
 "You have no personal phone number set. Please change that in order to "
 "perform direct dials."
@@ -2867,73 +2859,73 @@ msgstr ""
 "Sie haben keine Telefonnummer. Um direkt w�hlen zu k�nnen m�ssen Sie eine "
 "einstellen."
 
-#: plugins/addons/addressbook/class_addressbook.inc:176
-#: plugins/addons/addressbook/class_addressbook.inc:280
+#: plugins/addons/addressbook/class_addressbook.inc:180
+#: plugins/addons/addressbook/class_addressbook.inc:284
 msgid "You are not allowed to delete this entry!"
 msgstr "Es ist Ihnen nicht erlaubt, diesen Eintrag zu l�schen!"
 
-#: plugins/addons/addressbook/class_addressbook.inc:274
+#: plugins/addons/addressbook/class_addressbook.inc:278
 #, php-format
 msgid "You're about to delete the entry %s."
 msgstr "Sie l�schen gerade den Eintrag %s."
 
-#: plugins/addons/addressbook/class_addressbook.inc:343
+#: plugins/addons/addressbook/class_addressbook.inc:360
 #, php-format
 msgid "Save contact for %s as vcard"
 msgstr "Sichere Kontakt f�r %s als vcard"
 
-#: plugins/addons/addressbook/class_addressbook.inc:346
+#: plugins/addons/addressbook/class_addressbook.inc:363
 #, php-format
 msgid "Send mail to %s"
 msgstr "Sende eine Mail an %s"
 
-#: plugins/addons/addressbook/class_addressbook.inc:426
+#: plugins/addons/addressbook/class_addressbook.inc:447
 msgid "global addressbook"
 msgstr "dem globalen Adressbuch"
 
-#: plugins/addons/addressbook/class_addressbook.inc:428
+#: plugins/addons/addressbook/class_addressbook.inc:449
 msgid "organizations user database"
 msgstr "Nutzerdatenbank der Organisation"
 
-#: plugins/addons/addressbook/class_addressbook.inc:432
+#: plugins/addons/addressbook/class_addressbook.inc:453
 #, php-format
 msgid "Contact stored in %s"
 msgstr "Kontakt ist in %s abgelegt"
 
-#: plugins/addons/addressbook/class_addressbook.inc:434
+#: plugins/addons/addressbook/class_addressbook.inc:455
 msgid "Creating new entry in"
 msgstr "Erzeugen eines neuen Eintrag in"
 
-#: plugins/addons/addressbook/class_addressbook.inc:463
+#: plugins/addons/addressbook/class_addressbook.inc:484
 #: plugins/addons/logview/class_logview.inc:62
 #: plugins/addons/logview/class_logview.inc:76
 msgid "All"
 msgstr "Alle"
 
-#: plugins/addons/addressbook/class_addressbook.inc:464
+#: plugins/addons/addressbook/class_addressbook.inc:485
 msgid "Work phone"
 msgstr "Telefon (Arbeit)"
 
-#: plugins/addons/addressbook/class_addressbook.inc:464
+#: plugins/addons/addressbook/class_addressbook.inc:485
 msgid "Cell phone"
 msgstr "Mobiltelefon"
 
-#: plugins/addons/addressbook/class_addressbook.inc:465
+#: plugins/addons/addressbook/class_addressbook.inc:486
 msgid "Home phone"
 msgstr "Telefon (zu Hause)"
 
-#: plugins/addons/addressbook/class_addressbook.inc:465
+#: plugins/addons/addressbook/class_addressbook.inc:486
 msgid "User ID"
 msgstr "Benutzer ID"
 
-#: plugins/addons/addressbook/class_addressbook.inc:537
+#: plugins/addons/addressbook/class_addressbook.inc:558
 msgid ""
 "Cannot create a unique DN for your entry. Please fill more formular fields."
 msgstr ""
 "Es kann keine eindeutige DN f�r diesen Eintrag erzeugt werden. F�llen Sie "
 "zus�tzliche Felder aus."
 
-#: plugins/addons/addressbook/class_addressbook.inc:549
+#: plugins/addons/addressbook/class_addressbook.inc:570
 msgid ""
 "You have no permissions to create or modify a global address book entry."
 msgstr ""
@@ -3274,34 +3266,34 @@ msgstr ""
 msgid "This 'dn' is no group."
 msgstr "Diese 'dn' hat keine Gruppenerweiterungen."
 
-#: plugins/admin/groups/class_groupGeneric.inc:252
+#: plugins/admin/groups/class_groupGeneric.inc:253
 msgid "Samba group"
 msgstr "Samba-Gruppe"
 
-#: plugins/admin/groups/class_groupGeneric.inc:252
+#: plugins/admin/groups/class_groupGeneric.inc:253
 msgid "Domain admins"
 msgstr "Dom�nen-Administratoren"
 
-#: plugins/admin/groups/class_groupGeneric.inc:252
+#: plugins/admin/groups/class_groupGeneric.inc:253
 msgid "Domain users"
 msgstr "Dom�nen-Benutzer"
 
-#: plugins/admin/groups/class_groupGeneric.inc:253
+#: plugins/admin/groups/class_groupGeneric.inc:254
 msgid "Domain guests"
 msgstr "Dom�nen-G�ste"
 
-#: plugins/admin/groups/class_groupGeneric.inc:258
+#: plugins/admin/groups/class_groupGeneric.inc:259
 #, php-format
 msgid "Special group (%d)"
 msgstr "Spezielle Gruppe (%d)"
 
-#: plugins/admin/groups/class_groupGeneric.inc:566
+#: plugins/admin/groups/class_groupGeneric.inc:574
 #: plugins/admin/ogroups/class_ogroup.inc:484
 msgid "You have no permissions to create a group on this 'Base'."
 msgstr ""
 "Sie haben keine Berechtigung, eine Gruppe unterhalb dieser 'Basis' anzulegen."
 
-#: plugins/admin/groups/class_groupGeneric.inc:576
+#: plugins/admin/groups/class_groupGeneric.inc:584
 msgid ""
 "The field 'Name' contains invalid characters. Lowercase, numbers and dashes "
 "are allowed."
@@ -3309,8 +3301,8 @@ msgstr ""
 "Das Feld 'Name' enth�lt ung�ltige Zeichen. Kleinbuchstaben, Zahlen und "
 "Bindestriche sind erlaubt."
 
-#: plugins/admin/groups/class_groupGeneric.inc:587
-#: plugins/admin/groups/class_groupGeneric.inc:594
+#: plugins/admin/groups/class_groupGeneric.inc:595
+#: plugins/admin/groups/class_groupGeneric.inc:602
 msgid "Value specified as 'Name' is already used."
 msgstr "Eine Gruppe mit diesem Namen existiert bereits."
 
@@ -3639,7 +3631,7 @@ msgid ""
 "-Edit- and -New...- execute an assistant to aid you in managing your account "
 "informations. -Delete- will ask for confirmation before deleting users."
 msgstr ""
-"-Bearbeiten- und -Neuer Benutzer- starten einen Assistenten, der Sie bei der "
+"-Bearbeiten- und -Neu...- starten einen Assistenten, der Sie bei der "
 "Bearbeitung der Eigenschaften unterst�tzt. -L�schen- f�hrt eine "
 "Sicherheitsabfrage durch bevor der endg�ltige L�schvorgang erfolgt."
 
@@ -3738,7 +3730,7 @@ msgstr "Variable"
 
 #: plugins/admin/applications/class_applicationParameters.inc:87
 msgid "Default value"
-msgstr "Standard-Wert"
+msgstr "Standardwert"
 
 #: plugins/admin/applications/class_applicationParameters.inc:98
 msgid "Add option"
@@ -3783,11 +3775,11 @@ msgstr "Symbol"
 
 #: plugins/admin/applications/generic.tpl:51
 msgid "Update"
-msgstr "Aktualisieren"
+msgstr "Anwenden"
 
 #: plugins/admin/applications/generic.tpl:51
 msgid "Reload picture from LDAP"
-msgstr "Bild aus dem LDAP neu laden"
+msgstr "Bild neu laden"
 
 #: plugins/admin/applications/generic.tpl:61
 msgid "Only executable for members"
@@ -3799,11 +3791,11 @@ msgstr "Konfiguration bei jedem Start austauschen"
 
 #: plugins/admin/applications/generic.tpl:67
 msgid "Place icon on members desktop"
-msgstr "Plaziere das Symbol auf dem Gruppen-Mitglieds-Desktop"
+msgstr "Platziere das Symbol auf dem Desktop der Gruppenmitglieder"
 
 #: plugins/admin/applications/generic.tpl:70
 msgid "Place entry in members startmenu"
-msgstr "Plaziere einen Eintrag im Startmen� des Gruppen-Mitglieds"
+msgstr "Platziere einen Eintrag im Startmen� der Gruppenmitglieder"
 
 #: plugins/admin/applications/remove.tpl:7
 msgid ""
@@ -3811,7 +3803,7 @@ msgid ""
 "to do this since there is no way for GOsa to get your data back."
 msgstr ""
 "Dieser Eintrag wird unter Umst�nden von verschiedenen Gruppen genutzt. Bitte "
-"�berpr�fen Sie genau was Sie tun,da GOsa keine M�glichkeit hat, die Daten "
+"�berpr�fen Sie genau was Sie tun, da GOsa keine M�glichkeit hat, die Daten "
 "wiederherzustellen."
 
 #: plugins/admin/applications/headpage.tpl:6
@@ -3834,8 +3826,8 @@ msgid ""
 "-Edit- and -New...- will execute an assistant to aid you in editing "
 "properties. -Delete- will ask for confirmation before removing applications."
 msgstr ""
-"Editieren- und -Neue Anwendungen- rufen einen Assistenten auf, der Ihnen bei "
-"der Bearbeitung der Eigenschaften hilft. -L�schen- f�hrt eine "
+"Editieren- und -Neu...- rufen einen Assistenten auf, der Ihnen bei der "
+"Bearbeitung der Eigenschaften hilft. -L�schen- f�hrt eine "
 "Sicherheitsabfragedurch bevor der Anwendungseintrag gel�scht wird."
 
 #: plugins/admin/applications/headpage.tpl:45
@@ -3848,7 +3840,7 @@ msgstr "Zeige die Anwendungen, auf die das Folgende passt"
 
 #: plugins/admin/applications/headpage.tpl:52
 msgid "Regular expression for matching application names"
-msgstr "Regul�rer Ausdruck zum Abgleich mit Anwendungs-Namen"
+msgstr "Regul�rer Ausdruck zum Abgleich mit Anwendungsnamen"
 
 #: plugins/admin/applications/main.inc:38
 #: plugins/admin/applications/main.inc:40
@@ -3980,7 +3972,7 @@ msgid ""
 "changes on your departments. -Delete- will ask for confirmation before "
 "deleting departments."
 msgstr ""
-"Editieren- und -Neue Abteilung- starten einen Assistenten, um Ihnen bei der "
+"Editieren- und -Neu...- starten einen Assistenten, um Ihnen bei der "
 "Durchf�hrung der entsprechenden Schritte zu helfen. - L�schen- f�hrt eine "
 "Sicherheitsabfrage durch bevor der endg�ltige L�schvorgang erfolgt."
 
@@ -4069,7 +4061,7 @@ msgstr "unbekannter Status"
 
 #: plugins/admin/systems/class_terminalInfo.inc:159
 msgid "offline"
-msgstr "nicht aktiv"
+msgstr "inaktiv"
 
 #: plugins/admin/systems/network.tpl:1
 msgid "Network settings"
@@ -4085,9 +4077,8 @@ msgstr "MAC-Adresse"
 
 #: plugins/admin/systems/class_winGeneric.inc:85
 #: plugins/admin/systems/class_componentGeneric.inc:47
-#, fuzzy
 msgid "This 'dn' has no network features."
-msgstr "Diese 'dn' hat keine Drucker-Erweiterungen."
+msgstr "Diese 'dn' hat keine Netzwerk-Erweiterungen."
 
 #: plugins/admin/systems/class_winGeneric.inc:156
 #: plugins/admin/systems/class_componentGeneric.inc:116
@@ -4122,20 +4113,19 @@ msgstr "Speicher"
 
 #: plugins/admin/systems/info.tpl:13
 msgid "Boot MAC"
-msgstr "Hardware Adresse"
+msgstr "MAC-Adresse"
 
 #: plugins/admin/systems/info.tpl:16
 msgid "USB support"
-msgstr "USB Unterst�tzung"
+msgstr "USB-Unterst�tzung"
 
 #: plugins/admin/systems/info.tpl:19 plugins/admin/systems/info.tpl:87
 msgid "System status"
 msgstr "System-Status"
 
 #: plugins/admin/systems/info.tpl:23
-#, fuzzy
 msgid "Inventory number"
-msgstr "Telefonnummer"
+msgstr "Inventarnummer"
 
 #: plugins/admin/systems/info.tpl:27
 msgid "Last login"
@@ -4183,7 +4173,7 @@ msgstr "Speicher-Nutzung"
 
 #: plugins/admin/systems/info.tpl:102
 msgid "Swap usage"
-msgstr "Auslagerungs-Nutzung"
+msgstr "Virt. Speicher-Nutzung"
 
 #: plugins/admin/systems/info.tpl:116
 msgid "SSH service"
@@ -4249,42 +4239,39 @@ msgstr "Systemverwaltung"
 
 #: plugins/admin/systems/servservice.tpl:11
 msgid "Nfs Export"
-msgstr "NFS Freigabe"
+msgstr "NFS-Freigabe"
 
 #: plugins/admin/systems/servservice.tpl:36
 msgid "Time Service"
-msgstr "Zeit Dienst"
+msgstr "Zeit-Dienst"
 
 #: plugins/admin/systems/servservice.tpl:59
 msgid "LDAP Service"
-msgstr "LDAP Dienst"
+msgstr "LDAP-Dienst"
 
 #: plugins/admin/systems/servservice.tpl:70
-#, fuzzy
 msgid "Terminal Service"
-msgstr "Terminal-Server"
+msgstr "Terminal-Dienst"
 
 #: plugins/admin/systems/servservice.tpl:75
-#, fuzzy
 msgid "Temporary disable login"
-msgstr "Tempor�res Abschalten der FAX-Benutzung"
+msgstr "Anmeldung sperren (tempor�r)"
 
 #: plugins/admin/systems/servservice.tpl:78
-#, fuzzy
 msgid "Font path"
-msgstr "Kontakt"
+msgstr "Pfad zu den Schriften"
 
 #: plugins/admin/systems/servservice.tpl:91
 msgid "Syslog Service"
-msgstr "Syslog Dienst"
+msgstr "Protokoll-Dienst"
 
 #: plugins/admin/systems/servservice.tpl:99
 msgid "Print Service"
-msgstr "Druck Dienst"
+msgstr "Druck-Dienst"
 
 #: plugins/admin/systems/server.tpl:6
 msgid "Server name"
-msgstr "Server Name"
+msgstr "Server-Name"
 
 #: plugins/admin/systems/server.tpl:15 plugins/admin/systems/phone.tpl:15
 #: plugins/admin/systems/terminal.tpl:20 plugins/admin/systems/printer.tpl:23
@@ -4301,9 +4288,8 @@ msgid "Action"
 msgstr "Aktion"
 
 #: plugins/admin/systems/server.tpl:42
-#, fuzzy
 msgid "Select action to execute for this server"
-msgstr "W�hlen Sie die auszuf�hrende Aktion f�r dieses Terminal"
+msgstr "W�hlen Sie die auszuf�hrende Aktion f�r diesen Server"
 
 #: plugins/admin/systems/class_terminalGeneric.inc:62
 #: plugins/admin/systems/class_workstationGeneric.inc:71
@@ -4376,26 +4362,24 @@ msgstr "Aufwecken"
 #: plugins/admin/systems/class_terminalGeneric.inc:216
 msgid "You have no permissions to create a terminal on this 'Base'."
 msgstr ""
-"Sie haben keine Berechtigung ein Terminal unterhalb dieser 'Basis' anzulegen."
+"Sie haben keine Berechtigung ein Terminal innerhalb dieser 'Basis' anzulegen."
 
 #: plugins/admin/systems/class_terminalGeneric.inc:220
 msgid "The required field 'Terminal name' is not set."
-msgstr "Das ben�tigte Feld 'Terminalname' ist nicht gesetzt."
+msgstr "Das ben�tigte Feld 'Terminal-Name' ist nicht gesetzt."
 
 #: plugins/admin/systems/phone.tpl:6
 msgid "Phone name"
-msgstr "Telefon Name"
+msgstr "Telefon-Name"
 
 #: plugins/admin/systems/class_servGeneric.inc:48
-#, fuzzy
 msgid "This 'dn' has no server features."
-msgstr "Diese 'dn' hat keine Drucker-Erweiterungen."
+msgstr "Diese 'dn' hat keine Server-Erweiterungen."
 
 #: plugins/admin/systems/class_servGeneric.inc:168
-#, fuzzy
 msgid "You have no permissions to create a server on this 'Base'."
 msgstr ""
-"Sie haben keine Berechtigung, einen Benutzer unterhalb dieser 'Basis' "
+"Sie haben keine Berechtigung, einen Server unterhalb dieser 'Basis' "
 "anzulegen."
 
 #: plugins/admin/systems/terminal.tpl:9
@@ -4404,7 +4388,7 @@ msgstr "Terminal-Vorlage"
 
 #: plugins/admin/systems/terminal.tpl:11
 msgid "Terminal name"
-msgstr "Terminalname"
+msgstr "Terminal-Name"
 
 #: plugins/admin/systems/terminal.tpl:36
 #: plugins/admin/systems/workstation.tpl:36
@@ -4435,13 +4419,13 @@ msgstr "Auslagerungs-Server"
 #: plugins/admin/systems/workstation.tpl:62
 msgid "Choose NFS filesystem to place swap files on"
 msgstr ""
-"W�hlen Sie das NFS-Dateisystem, in dem die Swap-Dateien abgelegt werden "
-"sollen"
+"W�hlen Sie das NFS-Dateisystem, in dem die Auslagerungsdateien abgelegt "
+"werden sollen"
 
 #: plugins/admin/systems/terminal.tpl:74
 #: plugins/admin/systems/workstation.tpl:74
 msgid "Syslog server"
-msgstr "Syslog-Server"
+msgstr "Protokoll-Server"
 
 #: plugins/admin/systems/terminal.tpl:76
 #: plugins/admin/systems/workstation.tpl:76
@@ -4466,14 +4450,14 @@ msgstr "W�hlen Sie die auszuf�hrende Aktion f�r dieses Terminal"
 
 #: plugins/admin/systems/class_servDHCP.inc:32
 msgid "Remove DHCP service"
-msgstr "DHCP Dienst entfernen"
+msgstr "DHCP-Dienst entfernen"
 
 #: plugins/admin/systems/class_servDHCP.inc:33
 msgid ""
 "This server has DHCP features enabled. You can disable them by clicking "
 "below."
 msgstr ""
-"Dieser Server hat die DHCP Funktionen aktiviert. Sie k�nnen diese durch "
+"Dieser Server hat die DHCP-Funktionen aktiviert. Sie k�nnen diese durch "
 "einen Klick auf die untere Schaltfl�che deaktivieren."
 
 #: plugins/admin/systems/class_servDHCP.inc:35
@@ -4485,7 +4469,7 @@ msgid ""
 "This server has DHCP features disabled. You can enable them by clicking "
 "below."
 msgstr ""
-"Aktuell hat dieser Server keine DHCP Funktionen aktiviert. Sie k�nnen diese "
+"Aktuell hat dieser Server keine DHCP-Funktionen aktiviert. Sie k�nnen diese "
 "durch einen Klick auf die Schaltfl�che unten aktivieren."
 
 #: plugins/admin/systems/class_systemManagement.inc:32
@@ -5787,53 +5771,47 @@ msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "GOsa Entwicklerversion (Rev %s)"
 
-#: include/functions.inc:1528
+#: include/functions.inc:1531
 msgid "Generating this page caused the PHP interpreter to rise some errors!"
 msgstr ""
 
-#: include/functions.inc:1528
-#, fuzzy
-msgid "Send report"
-msgstr "Absender"
-
-#: include/functions.inc:1528
-#, fuzzy
+#: include/functions.inc:1531
 msgid "Toggle information"
-msgstr "Pers�nliche Informationen"
+msgstr "Zeige/Verstecke Informationen"
 
-#: include/functions.inc:1535
+#: include/functions.inc:1539
 msgid "PHP error"
 msgstr "PHP Fehler"
 
-#: include/functions.inc:1542
+#: include/functions.inc:1546
 msgid "class"
 msgstr "Klasse"
 
-#: include/functions.inc:1548
+#: include/functions.inc:1552
 msgid "function"
 msgstr "Funktion"
 
-#: include/functions.inc:1553
+#: include/functions.inc:1557
 msgid "static"
 msgstr "statisch"
 
-#: include/functions.inc:1557
+#: include/functions.inc:1561
 msgid "method"
 msgstr "Methode"
 
-#: include/functions.inc:1571
+#: include/functions.inc:1578
 msgid "Trace"
 msgstr "Verfolgen"
 
-#: include/functions.inc:1572
+#: include/functions.inc:1579
 msgid "File"
 msgstr "Datei"
 
-#: include/functions.inc:1572
+#: include/functions.inc:1579
 msgid "Line"
 msgstr "Zeile"
 
-#: include/functions.inc:1573
+#: include/functions.inc:1580
 msgid "Arguments"
 msgstr "Argumente"
 
@@ -6027,18 +6005,18 @@ msgstr ""
 msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
 msgstr ""
 
-#: include/setup_checks.inc:106
+#: include/setup_checks.inc:110
 msgid "Can't bind to LDAP. No schema check possible!"
 msgstr ""
 "Kann den LDAP Server nicht erreichen: keine �berpr�fung der Schemata m�glich!"
 
-#: include/setup_checks.inc:115 include/setup_checks.inc:124
+#: include/setup_checks.inc:119 include/setup_checks.inc:128
 msgid "Can't get schema information from server. No schema check possible!"
 msgstr ""
 "Kann die Schema-Informationen nicht vom Server beziehen: Keine �berpr�fung "
 "m�glich!"
 
-#: include/setup_checks.inc:144
+#: include/setup_checks.inc:148
 #, php-format
 msgid ""
 "Optional objectclass '%s' required by plugin '%s' is not present in LDAP "
@@ -6047,7 +6025,7 @@ msgstr ""
 "Die optionale Objektklasse '%s' (ben�tigt vom Modul '%s') ist nicht in den "
 "LDAP eingebunden"
 
-#: include/setup_checks.inc:147
+#: include/setup_checks.inc:151
 #, php-format
 msgid ""
 "Optional objectclass '%s' required by plugin '%s' does not have version %s"
@@ -6055,75 +6033,75 @@ msgstr ""
 "Die optionale Objektklasse '%s' (ben�tigt vom Modul '%s') hat nicht die "
 "Versionsnummer %s"
 
-#: include/setup_checks.inc:159
+#: include/setup_checks.inc:163
 #, php-format
 msgid "Required objectclass '%s' is not present in LDAP setup"
 msgstr "Die ben�tigte Objektklasse '%s' ist nicht in LDAP vorhanden"
 
-#: include/setup_checks.inc:162
+#: include/setup_checks.inc:166
 #, php-format
 msgid "Required objectclass '%s' does not have version %s"
 msgstr "Die ben�tigte Objektklasse '%s' hat nicht die Version %s"
 
-#: include/setup_checks.inc:170
+#: include/setup_checks.inc:174
 msgid "SAMBA 3 support disabled, no schema seems to be installed"
 msgstr ""
 "SAMBA 3.x Unterst�tzung wurde deaktiviert, kein passendes Schema installiert"
 
-#: include/setup_checks.inc:173
+#: include/setup_checks.inc:177
 msgid "SAMBA 3 support enabled"
 msgstr "SAMBA 3 Unterst�tzung aktiviert"
 
-#: include/setup_checks.inc:177
+#: include/setup_checks.inc:181
 msgid "SAMBA 2 support disabled, no schema seems to be installed"
 msgstr ""
 "SAMBA 2.x Unterst�tzung wurde deaktiviert, kein passendes Schema installiert"
 
-#: include/setup_checks.inc:180
+#: include/setup_checks.inc:184
 msgid "SAMBA 2 support enabled"
 msgstr "SAMBA 2 Unterst�tzung aktiviert"
 
-#: include/setup_checks.inc:185
+#: include/setup_checks.inc:189
 msgid "Support for pureftp disabled, no schema seems to be installed"
 msgstr ""
 "Die Unterst�tzung f�r PureFTPd wurde deaktiviert, das passende Schema ist "
 "nicht installiert"
 
-#: include/setup_checks.inc:188
+#: include/setup_checks.inc:192
 msgid "Support for pureftp enabled"
 msgstr "Unterst�tzung f�r PureFTPd aktiviert"
 
-#: include/setup_checks.inc:192
+#: include/setup_checks.inc:196
 msgid "Support for WebDAV disabled, no schema seems to be installed"
 msgstr ""
 "Die Unterst�tzung f�r WebDAV wurde deaktiviert, das passende Schema ist "
 "nicht installiert."
 
-#: include/setup_checks.inc:195
+#: include/setup_checks.inc:199
 msgid "Support for WebDAV enabled"
 msgstr "Unterst�tzung f�r WebDAV aktiviert"
 
-#: include/setup_checks.inc:199
+#: include/setup_checks.inc:203
 msgid "Support for phpgroupware disabled, no schema seems to be installed"
 msgstr ""
 "Die Unterst�tzung f�r PHPGroupware wurde deaktiviert, das passende Schema "
 "ist nicht installiert."
 
-#: include/setup_checks.inc:202
+#: include/setup_checks.inc:206
 msgid "Support for phpgroupware enabled"
 msgstr "Unterst�tzung f�r PHPGroupware aktiviert"
 
-#: include/setup_checks.inc:206
+#: include/setup_checks.inc:210
 msgid "Support for gofon disabled, no schema seems to be installed"
 msgstr ""
 "Die Unterst�tzung f�r goFon wurde deaktiviert, das passende Schema ist nicht "
 "installiert."
 
-#: include/setup_checks.inc:209
+#: include/setup_checks.inc:213
 msgid "Support for gofon enabled"
 msgstr "Unterst�tzung f�r GOfon aktiviert"
 
-#: include/setup_checks.inc:216
+#: include/setup_checks.inc:220
 msgid ""
 "Support for Kolab disabled, no schema seems to be installed, setting mail-"
 "method to cyrus"
@@ -6131,31 +6109,31 @@ msgstr ""
 "Die Unterst�tzung f�r Kolab wurde deaktiviert, das passende Schema ist nicht "
 "installiert. Setze Mail Methode auf cyrus."
 
-#: include/setup_checks.inc:221
+#: include/setup_checks.inc:225
 msgid "Support for Kolab enabled"
 msgstr "Unterst�tzung f�r Kolab aktiviert"
 
-#: include/setup_checks.inc:237
+#: include/setup_checks.inc:241
 msgid "OK"
 msgstr "OK"
 
-#: include/setup_checks.inc:240
+#: include/setup_checks.inc:244
 msgid "Ignored"
 msgstr "Ignoriert"
 
-#: include/setup_checks.inc:242
+#: include/setup_checks.inc:246
 msgid "Failed"
 msgstr "Fehlgeschlagen"
 
-#: include/setup_checks.inc:258
+#: include/setup_checks.inc:262
 msgid "PHP setup inspection"
 msgstr "�berpr�fung des PHP-Setups"
 
-#: include/setup_checks.inc:259
+#: include/setup_checks.inc:263
 msgid "Checking for PHP version (>=4.1.0)"
 msgstr "Pr�fe auf eine PHP-Version (>=4.1.0)"
 
-#: include/setup_checks.inc:260
+#: include/setup_checks.inc:264
 msgid ""
 "PHP must be of version 4.1.0 or above for some functions and known bugs in "
 "PHP language."
@@ -6164,19 +6142,19 @@ msgstr ""
 "Funktionen, die in fr�heren Versionen fehlerhaft oder gar nicht "
 "implementiert waren."
 
-#: include/setup_checks.inc:263
+#: include/setup_checks.inc:267
 msgid "Checking for PHP version (<=5)"
 msgstr "Pr�fe auf eine PHP-Version (<=5)"
 
-#: include/setup_checks.inc:264
+#: include/setup_checks.inc:268
 msgid "PHP must be below version 5."
 msgstr ""
 
-#: include/setup_checks.inc:268
+#: include/setup_checks.inc:272
 msgid "Checking if register_globals is set to 'off'"
 msgstr "Pr�fe ob register_globals ausgeschaltet ist"
 
-#: include/setup_checks.inc:269
+#: include/setup_checks.inc:273
 msgid ""
 "register_globals is a PHP mechanism to register all global varibales to be "
 "accessible from scripts without changing the scope. This may be a security "
@@ -6186,31 +6164,31 @@ msgstr ""
 "f�r Skripte direkt zug�nglich macht. Dies kann ein Sicherheitsrisiko sein. "
 "GOsa funktioniert mit beiden m�glichen Einstellungen."
 
-#: include/setup_checks.inc:272
+#: include/setup_checks.inc:276
 msgid "Checking for ldap module"
 msgstr "Suche LDAP-Modul"
 
-#: include/setup_checks.inc:273
+#: include/setup_checks.inc:277
 msgid "This is the main module used by GOsa and therefore really required."
 msgstr ""
 "GOsa ben�tigt dieses Modul f�r LDAP-Zugriffe, daher ist es unabk�mmlich."
 
-#: include/setup_checks.inc:276
+#: include/setup_checks.inc:280
 msgid "Checking for gettext support"
 msgstr "Pr�fe auf gettext-Erweiterung"
 
-#: include/setup_checks.inc:277
+#: include/setup_checks.inc:281
 msgid "Gettext support is required for internationalized GOsa."
 msgstr ""
 "Gettext-Unterst�tzung wird f�r �bersetzungen ben�tigt (Anmerkung des "
 "�bersetzers: Da Sie diese Meldung in deutsch lesen k�nnen, ist davon "
 "auszugehen, da� ihr PHP gettext-f�hig ist)."
 
-#: include/setup_checks.inc:279
+#: include/setup_checks.inc:283
 msgid "Checking for iconv support"
 msgstr "Pr�fe auf iconv Erweiterung"
 
-#: include/setup_checks.inc:280
+#: include/setup_checks.inc:284
 msgid ""
 "This module is used by GOsa to convert samba munged dial informations and is "
 "therefore required."
@@ -6218,11 +6196,11 @@ msgstr ""
 "Dieses Modul wird von GOsa benutzt, um sambaMungedDial Informationen "
 "zukonvertieren und wird daher ben�tigt."
 
-#: include/setup_checks.inc:283
+#: include/setup_checks.inc:287
 msgid "Checking for mhash module"
 msgstr "Suche mhash-Modul"
 
-#: include/setup_checks.inc:284
+#: include/setup_checks.inc:288
 msgid ""
 "To use SSHA encryption, you'll need this module. If you are just using crypt "
 "or md5 encryption, ignore this message. GOsa will run without it."
@@ -6230,11 +6208,11 @@ msgstr ""
 "Bei der Verwendung von speziellen Passwort-Verschl�sselungen (wie z.B. SSHA) "
 "wird dieses Modul ben�tigt. GOsa funktioniert auch ohne dieses Modul."
 
-#: include/setup_checks.inc:287
+#: include/setup_checks.inc:291
 msgid "Checking for imap module"
 msgstr "Suche IMAP-Modul"
 
-#: include/setup_checks.inc:288
+#: include/setup_checks.inc:292
 msgid ""
 "The IMAP module is needed to communicate with the IMAP server. It gets "
 "status informations, creates and deletes mail users."
@@ -6242,11 +6220,11 @@ msgstr ""
 "Das IMAP-Modul wird f�r die Kommunikation mit ihrem IMAP-Server ben�tigt. "
 "Dort k�nnen Benutzer verwaltet und Statusinformationen bezogen werden."
 
-#: include/setup_checks.inc:290
+#: include/setup_checks.inc:294
 msgid "Checking for getacl in imap"
 msgstr "Pr�fe auf getacl im IMAP-Modul"
 
-#: include/setup_checks.inc:291
+#: include/setup_checks.inc:295
 msgid ""
 "The getacl support is needed for shared folder permissions. The standard "
 "IMAP module is not capable of reading acl's. You need a recend PHP version "
@@ -6257,20 +6235,20 @@ msgstr ""
 "Zugriffsregeln nicht. Sie ben�tigen entweder ein angepasstes oder ein recht "
 "aktuelles PHP um diese Funktion nutzen zu k�nnen."
 
-#: include/setup_checks.inc:293
+#: include/setup_checks.inc:297
 msgid "Checking for mysql module"
 msgstr "Suche MySQL-Modul"
 
-#: include/setup_checks.inc:294
+#: include/setup_checks.inc:298
 msgid "MySQL support is needed for reading GOfax reports from databases."
 msgstr ""
 "Das MySQL-Modul wird ben�tigt um FAX-Berichte anzuzeigen und auszuwerten."
 
-#: include/setup_checks.inc:296
+#: include/setup_checks.inc:300
 msgid "Checking for cups module"
 msgstr "Suche CUPS-Modul"
 
-#: include/setup_checks.inc:297
+#: include/setup_checks.inc:301
 msgid ""
 "In order to read available printers from IPP protocol instead of printcap "
 "files, you've to install the CUPS module."
@@ -6278,11 +6256,11 @@ msgstr ""
 "Falls Sie eine Liste der verf�gbaren Drucker �ber IPP auslesen m�chten, "
 "ben�tigen Sie dieses Modul. Anderenfalls wird die printcap-Datei ausgewertet."
 
-#: include/setup_checks.inc:299
+#: include/setup_checks.inc:303
 msgid "Checking for kadm5 module"
 msgstr "Suche kadm5-Modul"
 
-#: include/setup_checks.inc:300
+#: include/setup_checks.inc:304
 msgid ""
 "Managing users in kerberos requires the kadm5 module which is downloadable "
 "via PEAR network."
@@ -6290,37 +6268,37 @@ msgstr ""
 "Um Benutzer auch im Kerberos verwalten zu k�nnen, mu� das kadm5-Modul "
 "installiert sein. Sie k�nnen es �ber das PEAR-Netzwerk beziehen."
 
-#: include/setup_checks.inc:309
+#: include/setup_checks.inc:313
 msgid "Checking for some additional programms"
 msgstr "Suche einige zus�tzliche Programme"
 
-#: include/setup_checks.inc:318
+#: include/setup_checks.inc:322
 msgid "Checking for ImageMagick (>=5.4.0)"
 msgstr "Suche nach ImageMagick (>=5.4.0)"
 
-#: include/setup_checks.inc:319
+#: include/setup_checks.inc:323
 msgid ""
 "ImageMagick is used to convert user supplied images to fit the suggested "
 "size and the unified JPEG format."
 msgstr ""
 "ImageMagick wird f�r die Konvertierung von hochgeladenen Bildern verwendet."
 
-#: include/setup_checks.inc:322
+#: include/setup_checks.inc:326
 msgid "Checking imagick module for PHP"
 msgstr "Pr�fe auf imagick Erweiterung"
 
-#: include/setup_checks.inc:323
+#: include/setup_checks.inc:327
 msgid ""
 "Imagick is used to convert user supplied images to fit the suggested size "
 "and the unified JPEG format from PHP script."
 msgstr ""
 "ImageMagick wird f�r die Konvertierung von hochgeladenen Bildern verwendet."
 
-#: include/setup_checks.inc:330
+#: include/setup_checks.inc:334
 msgid "Checking for fping utility"
 msgstr "Suche fping-Programm"
 
-#: include/setup_checks.inc:331
+#: include/setup_checks.inc:335
 msgid ""
 "The fping utility is only used if you've got a thin client based terminal "
 "environment running."
@@ -6328,11 +6306,11 @@ msgstr ""
 "Fping wird ben�tigt, um den Status von Thin-Client basierenden Terminal zu "
 "�berwachen."
 
-#: include/setup_checks.inc:346
+#: include/setup_checks.inc:350
 msgid "Checking for a way to generate LM/NT password hashes"
 msgstr "Suche einen Weg um LM/NT Passwort-Hashes zu generieren"
 
-#: include/setup_checks.inc:347
+#: include/setup_checks.inc:351
 msgid ""
 "In order to use SAMBA 2/3, you've to install some additional packages to "
 "generate password hashes."
@@ -6340,41 +6318,41 @@ msgstr ""
 "Um SAMBA 2.x/3.x in Verbindung mit LDAP nutzen zu k�nnen, wird ein externes "
 "Programm ben�tigt, welches die Passwort-Hashes generieren kann."
 
-#: include/setup_checks.inc:378
+#: include/setup_checks.inc:382
 msgid "PHP.ini check -> session.auto_register"
 msgstr "PHP.ini �berpr�fung -> session.auto_register"
 
-#: include/setup_checks.inc:379
+#: include/setup_checks.inc:383
 msgid ""
 "In Order to use GOsa without any trouble, the session.auto_register option "
 "in your php.ini musst be 'Off'."
 msgstr ""
 
-#: include/setup_checks.inc:385
+#: include/setup_checks.inc:389
 msgid "PHP.ini check -> implicit_flush"
 msgstr "PHP.ini �berpr�fung -> implicit_flush"
 
-#: include/setup_checks.inc:386
+#: include/setup_checks.inc:390
 msgid ""
 "This Option defines the Ouput handling, turn this Option off, to increase "
 "performance."
 msgstr ""
 
-#: include/setup_checks.inc:392
+#: include/setup_checks.inc:396
 msgid "PHP.ini check -> max_execution_time"
 msgstr "PHP.ini �berpr�fung -> max_execution_time"
 
-#: include/setup_checks.inc:393
+#: include/setup_checks.inc:397
 msgid ""
 "The Execution time, should be 30 seconds minimun, cause some actions will "
 "need huge ammount of time ."
 msgstr ""
 
-#: include/setup_checks.inc:399
+#: include/setup_checks.inc:403
 msgid "PHP.ini check -> memory_limit"
 msgstr "PHP.ini �berpr�fung -> memory_limit"
 
-#: include/setup_checks.inc:400
+#: include/setup_checks.inc:404
 msgid ""
 "GOsa need at least 8M of memory, less will cause unpredictable errors, "
 "sometimes without error message!. Best would be 32 M here."
@@ -6382,11 +6360,11 @@ msgstr ""
 "GOsa ben�tigt mindestens 8M Speicher, weniger Speicher w�rde unvorhersehbare "
 "Problemeverursachen (auch ohne Fehlermeldung)! Optimal sind hier 32M."
 
-#: include/setup_checks.inc:404
+#: include/setup_checks.inc:408
 msgid "PHP.ini check -> expose_php"
 msgstr "PHP.ini �berpr�fung -> expose_php"
 
-#: include/setup_checks.inc:405
+#: include/setup_checks.inc:409
 msgid ""
 "PHP won't send any Information about the Server you are running, should be a "
 "security fact."
@@ -6394,19 +6372,19 @@ msgstr ""
 "PHP wird keine Informationen �ber Ihren Server senden, dieses sollte "
 "ausSicherheitsgr�nden klar sein."
 
-#: include/setup_checks.inc:409
+#: include/setup_checks.inc:413
 msgid "PHP.ini check -> magic_quotes_gpc"
 msgstr "PHP.ini �berpr�fung -> magic_quotes_gpc"
 
-#: include/setup_checks.inc:410
+#: include/setup_checks.inc:414
 msgid "Security option, php will escape all quotes in strings ."
 msgstr "Sicherheitsoption, PHP wird alle 'quotes' in 'strings' umwandeln."
 
-#: include/setup_checks.inc:712
+#: include/setup_checks.inc:716
 msgid "You've to specify an ldap server before continuing!"
 msgstr "Sie m�ssen einen LDAP Server angeben um fortzufahren!"
 
-#: include/setup_checks.inc:722 include/setup_checks.inc:825
+#: include/setup_checks.inc:726 include/setup_checks.inc:829
 msgid ""
 "Can't connect to the specified LDAP server! Please make sure that is "
 "reachable for GOsa."
@@ -6414,7 +6392,7 @@ msgstr ""
 "Kann den angegebenen LDAP-Server nicht erreichen! Bitte stellen Sie sicher, "
 "dass er f�r GOsa erreichbar ist."
 
-#: include/setup_checks.inc:739 include/setup_checks.inc:837
+#: include/setup_checks.inc:743 include/setup_checks.inc:841
 msgid ""
 "Can't bind to the specified LDAP server! Please make sure that is reachable "
 "for GOsa."
@@ -6422,7 +6400,7 @@ msgstr ""
 "Die Anmeldung am LDAP-Server ist fehlgeschlagen. Bitte stellen Sie sicher, "
 "dass der Server f�r GOsa erreichbar ist."
 
-#: include/setup_checks.inc:831
+#: include/setup_checks.inc:835
 msgid ""
 "Can't bind to the specified LDAP server!. Please make sure that is reachable "
 "for GOsa."
@@ -6430,7 +6408,7 @@ msgstr ""
 "Die Anmeldung am LDAP Server ist fehlgeschlagen. Bitte stellen Sie sicher, "
 "dass der Server f�r GOsa erreichbar ist."
 
-#: include/setup_checks.inc:851
+#: include/setup_checks.inc:855
 msgid ""
 "Bind to server successful, but the server seems to be completly empty, "
 "please check all informations twice"
@@ -6438,7 +6416,7 @@ msgstr ""
 "Die Verbindung zum Server war erfolgreich, dieser scheint jedoch leer zu "
 "sein.Bitte �berpr�fen Sie nochmals Ihre Angaben."
 
-#: include/setup_checks.inc:890
+#: include/setup_checks.inc:894
 #, php-format
 msgid ""
 "You're missing the required attribute '%s' from this formular. Please "
@@ -6447,12 +6425,12 @@ msgstr ""
 "Das Attribut '%s' ist in diesem Formular nicht angegeben. Bitte "
 "vervollst�ndigen Sie Ihre Eingaben!"
 
-#: include/setup_checks.inc:927
+#: include/setup_checks.inc:931
 #, php-format
 msgid "Can't log into LDAP server. Reason was: %s."
 msgstr "Die Anmeldung am LDAP Server ist fehlgeschlagen. Die Meldung war '%s'."
 
-#: include/setup_checks.inc:1053 include/setup_checks.inc:1071
+#: include/setup_checks.inc:1057 include/setup_checks.inc:1075
 #: html/index.php:160 ihtml/themes/default/setup_useradmin.tpl:6
 msgid ""
 "You're missing an administrative account for GOsa, you'll not be able to "
@@ -6650,7 +6628,7 @@ msgstr ""
 #: ihtml/themes/altlinux/sizelimit.tpl:10
 #: ihtml/themes/default/sizelimit.tpl:10
 msgid ""
-"ignore this error and show all entries that fit int the defined sizelimit "
+"ignore this error and show all entries that fit into the defined sizelimit "
 "and let me use filters instead"
 msgstr ""
 "Ignoriere diesen Fehler und zeige alle Eintr�ge die innerhalb der "
@@ -6699,7 +6677,7 @@ msgstr ""
 #: ihtml/themes/default/setup_step3.tpl:1
 #: ihtml/themes/default/setup_step4.tpl:1
 msgid "Setup continued..."
-msgstr "Setup fortgesetzt..."
+msgstr "Einrichtung fortgesetzt..."
 
 #: ihtml/themes/altlinux/setup_step2.tpl:4
 #: ihtml/themes/default/setup_step2.tpl:4
@@ -6732,7 +6710,7 @@ msgstr ""
 "haben, wird in einem kurzen Test �berpr�ft, ob die notwendigen Schemata "
 "installiert sind. Die verwendete Samba-Version wird auf Basis der "
 "installierten Objektklassen automatisch erkannt. Eine genauere Konfiguration "
-"des LDAP-Handlings erfolgt sp�ter."
+"der Verzeichnisstruktur erfolgt sp�ter."
 
 #: ihtml/themes/altlinux/setup_step3.tpl:7
 msgid "Please enter the server URI"
@@ -6741,12 +6719,12 @@ msgstr "Bitte geben Sie die URI Ihres Servers ein"
 #: ihtml/themes/altlinux/setup_step4.tpl:4
 #: ihtml/themes/default/setup_step4.tpl:7
 msgid "Enter a description for the location you're configuring here"
-msgstr "Geben Sie eine Beschreibung der hier konfigurierten Location ein"
+msgstr "Geben Sie eine Beschreibung des hier konfigurierten Standortes ein"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:8
 #: ihtml/themes/default/setup_step4.tpl:11
 msgid "Location name"
-msgstr "Name der Location"
+msgstr "Name des Standortes"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:14
 msgid ""
@@ -6811,7 +6789,7 @@ msgstr "Pr�fen"
 #: ihtml/themes/altlinux/setup_finish.tpl:1
 #: ihtml/themes/default/setup_finish.tpl:1
 msgid "Setup finished"
-msgstr "Setup abgeschlossen"
+msgstr "Einrichtung abgeschlossen"
 
 #: ihtml/themes/altlinux/setup_finish.tpl:4
 #: ihtml/themes/default/setup_finish.tpl:14
@@ -6820,7 +6798,7 @@ msgid ""
 "file. Save the the link below as your gosa.conf and place that file in /etc/"
 "gosa. Change it as needed."
 msgstr ""
-"GOsa Setup besitzt nun gen�gend Informationen, um eine initiale "
+"GOsa Einrichtung besitzt nun gen�gend Informationen, um eine initiale "
 "Konfiguration zu erstellen. Speichern Sie den untenstehenden Link als gosa."
 "conf und nehmen Sie gegebenenfalls Anpassungen vor. Verschieben Sie diese "
 "Datei in das Verzeichnis /etc/gosa."
@@ -6855,7 +6833,7 @@ msgstr ""
 
 #: ihtml/themes/default/setup_useradmin.tpl:3
 msgid "You already have an Administrative Account and a Group."
-msgstr "Sie haben bereits ein administratives Konto und eine Gruppe."
+msgstr "Sie haben bereits ein administratives Konto und eine passende Gruppe."
 
 #: ihtml/themes/default/setup_useradmin.tpl:10
 msgid ""
@@ -6864,18 +6842,18 @@ msgid ""
 "you with this task. Enter the desired username and the password below to "
 "create the missing entries."
 msgstr ""
-"Um GOsa einen uneingeschr�nkten Zugang zu erm�glichen, m�ssen Sieeine "
+"Um GOsa einen uneingeschr�nkten Zugang zu erm�glichen, m�ssen Sie eine "
 "spezielle Gruppe anlegen, die den administrativen Benutzer enth�lt.Das "
-"'setup' Programm kann Sie dabei unterst�tzen: Geben Sie den "
-"gew�nschtenBenutzernamen und das zugeh�rige Passwort in das untere Feld ein, "
-"um diefehlenden Eintr�ge zu erstellen."
+"Einrichtungs-Programm kann Sie dabei unterst�tzen: Geben Sie den gew�nschten "
+"Benutzernamen und das zugeh�rige Passwort in das untere Feld ein, um die "
+"fehlenden Eintr�ge zu erstellen."
 
 #: ihtml/themes/default/setup_step3.tpl:10
 msgid ""
 "Please enter the server URI to allow the setup to connect your LDAP server "
 "<i>(Example: ldap://your.server:389).</i>"
 msgstr ""
-"Bitte geben Sie die server URI an, damit das setup sich zu Ihrem LDAP Server "
+"Bitte geben Sie die Server URI an, damit das setup sich zu Ihrem LDAP Server "
 "verbinden kann<i>(Beispiel: ldap://ihr.server:389) </i>"
 
 #: ihtml/themes/default/setup_step4.tpl:2
@@ -6883,7 +6861,7 @@ msgid ""
 "The following fields allow the basic configuration of GOsa's behaviour and "
 "affect various properties in your main configuration."
 msgstr ""
-"Die folgenden Eingabefelder erm�glichen die Grundkonfiguration von GOsaund "
+"Die folgenden Eingabefelder erm�glichen die Grundkonfiguration von GOsa und "
 "beeinflussen verschiedene Eigenschaften der Hauptkonfiguration."
 
 #: ihtml/themes/default/setup_step4.tpl:18
@@ -6905,8 +6883,8 @@ msgid ""
 "used here, too."
 msgstr ""
 "GOsa unterst�tzt zahlreiche Verschl�sselungsarten f�r Ihre Passw�rter. "
-"�blicherweisewird die Auswahl �ber Vorlagen verwaltet, Sie k�nnen jedoch "
-"eine Standardmethodefestlegen, die benutzt werden soll."
+"�blicherweise wird die Auswahl �ber Vorlagen verwaltet, Sie k�nnen aber auch "
+"eine Standardmethode festlegen, die benutzt werden soll."
 
 #: ihtml/themes/default/setup_step4.tpl:68
 msgid "Encryption algorithm"
@@ -6918,20 +6896,23 @@ msgid ""
 "interfaces to users mailboxes and general handling for quotas. You can "
 "choose the dummy plugin to leave all your mail settings untouched."
 msgstr ""
-"GOsa unterst�tzt verschiedene Mail Methoden. Diese Methoden stellen "
-"Schnittstellen bereit f�r"
+"GOsa unterst�tzt verschiedene Zustellungs-Methoden. Diese Methoden stellen "
+"Schnittstellen f�r Benutzer-Postf�cher und den generellen Betrieb f�r "
+"Kontingente bereit.Sie k�nnen die 'dummy'-Methode w�hlen um all Ihre Mail-"
+"Einstellungen unber�hrt zu lassen."
 
 #: ihtml/themes/default/setup_step4.tpl:84
 msgid "Mail method"
-msgstr "Mail Methode"
+msgstr "Zustellungs-Methode"
 
 #: ihtml/themes/default/setup_finish.tpl:3
 msgid ""
 "Basically the setup is finished. You can check the result of the schema "
 "check here and download the autogenerated gosa.conf below."
 msgstr ""
-"Das setup ist nun abgeschlossen. Sie k�nnen das Ergebnis des schemaCheck "
-"hier �berpr�fen und die automatisch erzeugte gosa.conf herunterladen."
+"Die Einrichtung ist nun abgeschlossen. Sie k�nnen das Ergebnis der schema-"
+"�berpr�fung hier kontrollieren und die automatisch erzeugte gosa.conf "
+"herunterladen."
 
 #: ihtml/themes/default/setup_finish.tpl:7
 msgid "Schema Configuration"
@@ -6943,7 +6924,10 @@ msgstr "Konfigurationsdatei"
 
 #: ihtml/themes/default/setup_finish.tpl:17
 msgid "Download configuration"
-msgstr "Herunterladen der Konfiguration"
+msgstr "Konfiguration herunterladen"
+
+#~ msgid "Send report"
+#~ msgstr "Sende Bericht"
 
 #~ msgid "LDIF CSV import"
 #~ msgstr "CSV importieren"
@@ -6963,10 +6947,10 @@ msgstr "Herunterladen der Konfiguration"
 
 #~ msgid ""
 #~ "<b>SAMBA 3</b> support enabled<td class=\"check\">gosa+samba3.schema</td>"
-#~ msgstr "<b>SAMBA 3</b> UnterstÃÂÃÂtzung aktiviert<td class=\"check\">gosa+samba3.schema</td>"
+#~ msgstr "<b>SAMBA 3</b> UnterstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂtzung aktiviert<td class=\"check\">gosa+samba3.schema</td>"
 
 #~ msgid "<b>SAMBA 2</b> support enabled<td class=\"check\">samba.schema</td>"
-#~ msgstr "<b>SAMBA 2</b>UnterstÃÂÃÂtzung aktiviert<td class=\"check\">samba.schema</td>"
+#~ msgstr "<b>SAMBA 2</b>UnterstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂtzung aktiviert<td class=\"check\">samba.schema</td>"
 
 #~ msgid "GONICUS"
 #~ msgstr "GONICUS"
@@ -6974,8 +6958,8 @@ msgstr "Herunterladen der Konfiguration"
 #~ msgid ""
 #~ "Unsupported password hash detected. Can't generate compatible password."
 #~ msgstr ""
-#~ "Es wurde ein nicht-unterstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂtzter Passwort-Hash entdeckt. Es kann kein passendes Passwort "
-#~ "generiert werden."
+#~ "Es wurde ein nicht-unterstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂtzter Passwort-Hash entdeckt. Es kann kein passendes "
+#~ "Passwort generiert werden."
 
 #~ msgid "Checking for gd module"
 #~ msgstr "Suche gd-Modul"
@@ -6984,9 +6968,12 @@ msgstr "Herunterladen der Konfiguration"
 #~ "GOsa needs this module for recalculating image sizes provided for users "
 #~ "as jpegPhoto."
 #~ msgstr ""
-#~ "GOsa benÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶tigt dieses Modul um "
-#~ "GrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂenverÃÂÃÂÃÂÃÂÃÂÃÂ�"
-#~ "�ÃÂÃÂÃÂÃÂ¬nderungen bei Bildern durchzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂhren."
+#~ "GOsa "
+#~ "benÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶tigt "
+#~ "dieses Modul um "
+#~ "GrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂenverÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ"
+#~ "¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬nderungen bei Bildern "
+#~ "durchzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂhren."
 
 #~ msgid "You are currently using GOsa version %s (CVS checkout from %s)"
 #~ msgstr "Sie nutzen momentan GOsa in der Version %s (CVS-Abzug vom %s)"
@@ -7005,7 +6992,9 @@ msgstr "Herunterladen der Konfiguration"
 
 #, fuzzy
 #~ msgid "Referral Password"
-#~ msgstr "Neues Passwort bestÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ¬tigen"
+#~ msgstr ""
+#~ "Neues Passwort bestÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬tigen"
 
 #, fuzzy
 #~ msgid ""
@@ -7013,9 +7002,11 @@ msgstr "Herunterladen der Konfiguration"
 #~ "complete snapshot of the running LDAP directory as ldif. You may save "
 #~ "these files for backup purpose or when initializing a new server."
 #~ msgstr ""
-#~ "Dieses Modul ermÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶glicht Ihnen den "
-#~ "Download der kompletten LDAP-Datenbank, die momentan in Verwendung ist. "
-#~ "Die ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂbertragenen Dateien kÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶nnen "
+#~ "Dieses Modul "
+#~ "ermÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶glicht "
+#~ "Ihnen den Download der kompletten LDAP-Datenbank, die momentan in "
+#~ "Verwendung ist. Die ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂbertragenen Dateien "
+#~ "kÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶nnen "
 #~ "einerseits zur Datensicherung und andererseits zur Einrichtung eines "
 #~ "neuen Servers benutzt werden."
 
@@ -7026,7 +7017,7 @@ msgstr "Herunterladen der Konfiguration"
 #~ msgid "You are not allowed to delete this terminal!"
 #~ msgstr ""
 #~ "Es Ihnen nicht erlaubt, dieses Terminal zu "
-#~ "lÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶schen!"
+#~ "lÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¶schen!"
 
 #~ msgid "Administrators"
 #~ msgstr "Administratoren"
@@ -7046,7 +7037,8 @@ msgstr "Herunterladen der Konfiguration"
 #~ "Warning: Please check the SIZELIMIT option set on your LDAP server. You "
 #~ "may not get all entries, if this value is to low!"
 #~ msgstr ""
-#~ "Warnung: Bitte prÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂfen Sie die SIZELIMIT Option Ihres LDAP-Servers. Unter "
-#~ "UmstÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ¬nden bekommen Sie nicht "
-#~ "alle EintrÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ¬ge, wenn dieser "
-#~ "Eintrag zu niedrig ist!"
+#~ "Warnung: Bitte prÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂfen Sie die SIZELIMIT Option Ihres LDAP-Servers. Unter "
+#~ "UmstÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬nden bekommen Sie nicht alle "
+#~ "EintrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ge, wenn dieser Eintrag zu niedrig ist!"
