@@ -20,7 +20,7 @@
     <tr>
      <td>{t}Base{/t}{$must}</td>
      <td>
-      <select size="1" name="base" {$selectmode} title="{t}Choose subtree to place group in{/t}">
+      <select size="1" name="base" {$baseACL} title="{t}Choose subtree to place group in{/t}">
        {html_options options=$bases selected=$base_select}
       </select>
      </td>

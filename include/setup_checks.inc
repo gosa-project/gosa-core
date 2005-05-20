@@ -379,42 +379,43 @@ $register_globals =       ($arra['register_globals']);
 
 
 // auto_register
-$msg.= check (  $faults, _("PHP.ini check -> session.auto_register"),
-      _("In Order to use GOsa without any trouble, the session.auto_register option in your php.ini musst be 'Off'."),
-      (!$session_auto_start['local_value']));
+$msg.= check (  $faults, _("php.ini check -> session.auto_register"),
+    _("In Order to use GOsa without any trouble, the session.auto_register option in your php.ini must be set to 'Off'."), (!$session_auto_start['local_value']));
 
 
 
 //implicit_flush
-$msg.= check (  $faults, _("PHP.ini check -> implicit_flush"),
-      _("This Option defines the Ouput handling, turn this Option off, to increase performance."),
-        !$implicit_flush['local_value'],0,false);
+$msg.= check (  $faults, _("php.ini check -> implicit_flush"),
+    _("This option influences the Output handling. Turn this Option off, to increase performance."),
+    !$implicit_flush['local_value'],0,false);
 
 //max_execution_time
-if($max_execution_time['local_value'] < 30 )
+if($max_execution_time['local_value'] < 30 ){
   $max_execution_time['local_value']=false;
-$msg.= check (  $faults, _("PHP.ini check -> max_execution_time"),
-      _("The Execution time, should be 30 seconds minimun, cause some actions will need huge ammount of time ."),
-        $max_execution_time['local_value'],0,false);
+}
+$msg.= check (  $faults, _("php.ini check -> max_execution_time"),
+    _("The Execution time should be at least 30 seconds, because some actions may consume more time."),
+    $max_execution_time['local_value'],0,false);
 
 //memory_limit
-if($memory_limit['local_value'] < 8 )
+if($memory_limit['local_value'] < 8 ){
   $memory_limit['local_value']=false;
-$msg.= check (  $faults, _("PHP.ini check -> memory_limit"),
-      _("GOsa need at least 8M of memory, less will cause unpredictable errors, sometimes without error message!. Best would be 32 M here."),
-        !$implicit_flush['local_value'],0,false);
+}
+$msg.= check (  $faults, _("php.ini check -> memory_limit"),
+    _("GOsa needs at least 8MB of memory, less will cause unpredictable errors! An optimal setting would be 16MB, increase it for larger setups."),
+    !$implicit_flush['local_value'],0,false);
 
 //expose_php
-$msg.= check (  $faults, _("PHP.ini check -> expose_php"),
-      _("PHP won't send any Information about the Server you are running, should be a security fact."),
-        !$implicit_flush['local_value'],0,false);
+$msg.= check (  $faults, _("php.ini check -> expose_php"),
+    _("Increase the server security by setting expose_php to 'off'. PHP won't send any Information about the server you are running in this case."),
+    !$implicit_flush['local_value'],0,false);
 
 //magic_quotes_gpc
-$msg.= check (  $faults, _("PHP.ini check -> magic_quotes_gpc"),
-      _("Security option, php will escape all quotes in strings ."),
-        $magic_quotes_gpc['local_value'],0,false);
+$msg.= check (  $faults, _("php.ini check -> magic_quotes_gpc"),
+    _("Increase your server security by setting magic_quotes_gpc to 'on'. PHP will escape all quotes in strings in this case."),
+    $magic_quotes_gpc['local_value'],0,false);
 
-  return $msg;
+return $msg;
 }
 
 

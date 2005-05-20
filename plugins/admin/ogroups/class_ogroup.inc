@@ -180,6 +180,7 @@ class ogroup extends plugin
         $smarty->assign("$type", $ogfilter[$type]);
       }
       $smarty->assign("hint", print_sizelimit_warning());
+      $smarty->assign("apply", apply_filter());
 
       $display= $smarty->fetch (get_template_path('ogroup_objects.tpl', TRUE, dirname(__FILE__)));
       return ($display);
@@ -237,6 +238,11 @@ class ogroup extends plugin
     /* Fields */
     foreach ($this->attributes as $val){
       $smarty->assign("$val", $this->$val);
+      $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
+    }
+
+    /* Assign ACL's */
+    foreach (array("base", "members") as $val){
       $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
     }
 

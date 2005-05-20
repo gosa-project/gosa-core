@@ -89,6 +89,7 @@ class termgroup extends plugin
     $smarty= get_smarty();
 
     $smarty->assign("actions", array("wake" => _("Wake up"), "halt" => _("Switch off"), "reboot" => _("Reboot")));
+    $smarty->assign("actionACL", chkacl($this->acl, 'action'));
 
     /* Show main page */
     return ($smarty->fetch (get_template_path('termgroup.tpl', TRUE)));
