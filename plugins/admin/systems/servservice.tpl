@@ -12,13 +12,13 @@
    <table>
     <tr>
      <td>
-		<select style="width:350px;" id="goExportEntry" name="goExportEntry" {$goNfsServerState} size=4 multiple >
+		<select style="width:350px;" id="goExportEntry" name="goExportEntry" {$goExportEntryACL} size=4 multiple >
     		{html_options values=$goExportEntry output=$goExportEntry}
 	    </select>
 	<br>	
 		<input type="text" 		name="NewNfsExport" {$goNfsServerState} id="NewNfsExportId"> 
-		<input type="submit" 	value="{t}Add{/t}"	 	name="NewNfsAdd" 	{$goNfsServerState} id="NewNfsAddId"> 
-		<input type="submit" 	value="{t}Delete{/t}"  	name="DelNfsEnt" 	{$goNfsServerState} id="DelNfsEntId">
+		<input type="submit" 	value="{t}Add{/t}"	 	name="NewNfsAdd" {$goNfsServer} {$goExportEntryACL}	{$goNfsServerState} id="NewNfsAddId"> 
+		<input type="submit" 	value="{t}Delete{/t}"  	name="DelNfsEnt" {$goNfsServer} {$goExportEntryACL}	{$goNfsServerState} id="DelNfsEntId">
 	</td>
 	</tr>
    </table>
@@ -37,13 +37,13 @@
    <table>
     <tr>
      <td>
-        <select style="width:350px;" id="goTimeEntry" name="goTimeSource" {$goNtpServerState} size=4 multiple>
+        <select style="width:350px;" id="goTimeEntry" name="goTimeSource" {$goNtpServerState} {$goTimeSourceACL}  size=4 multiple>
             {html_options values=$goTimeSource output=$goTimeSource}
         </select>
     <br>
         <input type="text" name="NewNTPExport" {$goNtpServerState} id="NewNTPExportId">
-        <input type="submit"    value="{t}Add{/t}"      name="NewNTPAdd"    {$goNtpServerState} id="NewNTPAddId">
-        <input type="submit"    value="{t}Delete{/t}"   name="DelNTPEnt"    {$goNtpServerState} id="DelNTPEntId">
+        <input type="submit"    value="{t}Add{/t}"      name="NewNTPAdd"    {$goNtpServerState} {$goTimeSourceACL} id="NewNTPAddId">
+        <input type="submit"    value="{t}Delete{/t}"   name="DelNTPEnt"    {$goNtpServerState} {$goTimeSourceACL} id="DelNTPEntId">
     </td>
 	</tr>
    </table>
@@ -58,7 +58,7 @@
 
      <b>{t}LDAP Service{/t}</b>
 
-		<input type="text"      value="{$goLdapBase}"         name="goLdapBase" {$goLdapServerState} id="goLdapBaseId">
+		<input type="text"      value="{$goLdapBase}"     {$goLdapBaseACL}    name="goLdapBase" {$goLdapServerState} id="goLdapBaseId">
 
 	<p class="seperator">&nbsp;</p>
     <br>
@@ -72,11 +72,11 @@
   <table>
 	<tr>
 	 <td colspan=2>
-	  <input type="checkbox"  value="1" name="goXdmcpIsEnabled" {$goXdmcpIsEnabled}  {$goTerminalServerState} id="Temporariid"> {t}Temporary disable login{/t}</td>
+	  <input type="checkbox"  value="1" name="goXdmcpIsEnabled" {$goXdmcpIsEnabled}  {$goTerminalServerState} {$goXdmcpIsEnabledACL} id="Temporariid"> {t}Temporary disable login{/t}</td>
     </tr>
     <tr>
 	 <td>{t}Font path{/t}</td>
-	 <td> <input type="text"      value="{$goFontPath}"         name="goFontPath" {$goTerminalServerState} id="FontPathId"></td>
+	 <td> <input type="text"      value="{$goFontPath}"         name="goFontPath" {$goTerminalServerState} {$goXdmcpIsEnabledACL}  id="FontPathId"></td>
 	</tr>
    </table>
 

@@ -199,12 +199,12 @@ class servkolab extends plugin {
 
    if(empty($this->postfix_mynetworks))
     { 
-      $message[] = _("SMTP privileged networks -> No value is given.");
+      ;//$message[] = _("SMTP privileged networks -> No value is given.");
     }
     
   if(empty($this->postfix_relayhost))
     {
-      $message[] = _("SMTP smarthost/relayhost -> No value is given.");
+      ;//$message[] = _("SMTP smarthost/relayhost -> No value is given.");
     }
 
 

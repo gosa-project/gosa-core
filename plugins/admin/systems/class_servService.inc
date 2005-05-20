@@ -138,10 +138,7 @@ class servservice extends plugin
     foreach ($this->attributes as $attr){
       $smarty->assign("$attr", $this->$attr);
       $smarty->assign("$attr"."ACL", chkacl($this->acl, $attr));
-      if($this->$attr)
-        $smarty->assign($attr."State","");
-      else
-        $smarty->assign($attr."State","disabled");
+      $smarty->assign($attr."State","");
     }
 
 
@@ -154,7 +151,7 @@ foreach ($this->additionaloc as $oc => $dummy){
 
       } else {
         $smarty->assign("$oc", "");
-        $smarty->assign("$oc"."ACL", "");
+        $smarty->assign("$oc"."ACL", chkacl($this->acl, $oc));
         $smarty->assign("$oc"."State", "disabled");
       }
     }
@@ -237,9 +234,21 @@ foreach ($this->additionaloc as $oc => $dummy){
       }
     }
     $this->attrs = array_reverse($this->attrs);
+
+    /* Check if we are able to set these attributes */
+#fixme : It Would be better to check ObjectClass rights to, but what is to do if there are insuficient rights 
+    foreach($this->additionaloc as $oc => $attrs)
+    {
+      foreach($attrs as $val)
+      {
+      if(chkacl($this->acl,$val)=="")
+        {
+        unset($this->attrs[$val]);
+        unset($this->$val);
+        }
+      }
+    }
     
-//    print_a($this->attrs);
-     
     /* Write to LDAP */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
@@ -253,7 +262,6 @@ foreach ($this->additionaloc as $oc => $dummy){
     } else {
       $this->handle_post_events("add");
     }
-
   }
 
 }

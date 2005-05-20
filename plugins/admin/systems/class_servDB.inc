@@ -79,7 +79,7 @@ class servdb extends plugin
         
       } else {
         $smarty->assign("$oc", "");
-        $smarty->assign("$oc"."ACL", "");
+        $smarty->assign("$oc"."ACL", chkacl($this->acl, $oc));
         $smarty->assign("$oc"."State", "disabled");
       }
     }
@@ -198,6 +198,7 @@ class servdb extends plugin
       }
     }
     $this->attrs = array_reverse($this->attrs);
+
 
 
     /* Write to LDAP */
