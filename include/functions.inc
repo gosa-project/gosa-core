@@ -1513,13 +1513,22 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
 {
   global $error_collector;
 
-  /* FIXME: workaround for buggy imap_open */
+  /* Workaround for buggy imap_open error outputs */
   if (preg_match('/imap_open/', $errstr)){
     return;
   }
 
-  /* FIXME: workaround for PHP5 */
+  /* FIXME: Workaround for PHP5 error message flooding. The new OOM
+     code want's us to use public/protected/private instead of flat
+     var declarations. For now I can't workaround this - let's ignore
+     the messages till the next major release which may drop support
+     for PHP4. */
   if (preg_match('/var: Deprecated./', $errstr)){
+    return;
+  }
+
+  /* FIXME: Same as above. Compatibility does error flooding.*/
+  if (preg_match('/zend.ze1_compatibility_mode/', $errstr)){
     return;
   }
 
