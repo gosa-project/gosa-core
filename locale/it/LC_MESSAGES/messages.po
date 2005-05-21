@@ -5917,7 +5917,7 @@ msgstr ""
 
 #: include/setup_checks.inc:313
 msgid "Checking for some additional programms"
-msgstr "Controllo la presenza di programmi addizionali"
+msgstr "Controllo la presenza di alcuni programmi addizionali"
 
 #: include/setup_checks.inc:322
 msgid "Checking for ImageMagick (>=5.4.0)"
@@ -5928,8 +5928,8 @@ msgid ""
 "ImageMagick is used to convert user supplied images to fit the suggested "
 "size and the unified JPEG format."
 msgstr ""
-"ImageMagick serve a convertire le immagini fornite dagli utenti nelle "
-"dimensioni e nel formato di default."
+"Il programma ImageMagick serve a convertire le immagini fornite dagli "
+"utenti nelle dimensioni e nel formato di default."
 
 #: include/setup_checks.inc:326
 msgid "Checking imagick module for PHP"
@@ -5943,83 +5943,101 @@ msgstr ""
 
 #: include/setup_checks.inc:334
 msgid "Checking for fping utility"
-msgstr ""
+msgstr "Controllo il supporto per fping"
 
 #: include/setup_checks.inc:335
 msgid ""
 "The fping utility is only used if you've got a thin client based terminal "
 "environment running."
 msgstr ""
+"Il programma fping è usato solo nel caso di ambienti basati su terminali "
+"'thin client'."
 
 #: include/setup_checks.inc:350
 msgid "Checking for a way to generate LM/NT password hashes"
-msgstr ""
+msgstr "Controllo la possibilità di generare password con algoritmo LM/NT"
 
 #: include/setup_checks.inc:351
 msgid ""
 "In order to use SAMBA 2/3, you've to install some additional packages to "
 "generate password hashes."
 msgstr ""
+"Un programma in grado di generare password con algoritmo LM/NT è necessario "
+"per poter usare Samba 2 o 3."
 
 #: include/setup_checks.inc:382
 msgid "php.ini check -> session.auto_register"
-msgstr ""
+msgstr "Controllo php.ini per session.auto_register"
 
 #: include/setup_checks.inc:383
 msgid ""
 "In Order to use GOsa without any trouble, the session.auto_register option "
 "in your php.ini must be set to 'Off'."
 msgstr ""
+"Per non avere problemi con GOsa è necessario impostare l'opzione "
+"session.auto_register su 'off' nel file php.ini"
 
 #: include/setup_checks.inc:388
 msgid "php.ini check -> implicit_flush"
-msgstr ""
+msgstr "Controllo php.ini per implicit_flush"
 
 #: include/setup_checks.inc:389
 msgid ""
 "This option influences the Output handling. Turn this Option off, to "
 "increase performance."
 msgstr ""
+"Per motivi di performance è consigliato di impostare l'opzione "
+"implicit_flush su 'off' nel file php.ini."
+
 
 #: include/setup_checks.inc:396
 msgid "php.ini check -> max_execution_time"
-msgstr ""
+msgstr "Controllo php.ini per max_execution_time"
 
 #: include/setup_checks.inc:397
 msgid ""
 "The Execution time should be at least 30 seconds, because some actions may "
 "consume more time."
 msgstr ""
+"Per non avere problemi con GOsa è necessario impostare l'opzione "
+"max_execution_time a 30 secondi o più nel file php.ini"
 
 #: include/setup_checks.inc:404
 msgid "php.ini check -> memory_limit"
-msgstr ""
+msgstr "Controllo php.ini per memory_limit"
 
 #: include/setup_checks.inc:405
 msgid ""
 "GOsa needs at least 8MB of memory, less will cause unpredictable errors! An "
 "optimal setting would be 16MB, increase it for larger setups."
 msgstr ""
+"Per non avere problemi con GOsa è necessario impostare l'opzione "
+"memory_limit a 16MB o più nel file php.ini"
+
 
 #: include/setup_checks.inc:409
 msgid "php.ini check -> expose_php"
-msgstr ""
+msgstr "Controllo php.ini per expose_php"
 
 #: include/setup_checks.inc:410
 msgid ""
 "Increase the server security by setting expose_php to 'off'. PHP won't send "
 "any Information about the server you are running in this case."
 msgstr ""
+"Per motivi di sicurezza è consigliato di impostare l'opzione "
+"expose_php su 'off' nel file php.ini."
 
 #: include/setup_checks.inc:414
 msgid "php.ini check -> magic_quotes_gpc"
-msgstr ""
+msgstr "Controllo php.ini per magic_quotes_gpc"
 
 #: include/setup_checks.inc:415
 msgid ""
 "Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
 "escape all quotes in strings in this case."
 msgstr ""
+"Per motivi di sicurezza è consigliato di impostare l'opzione "
+"magic_quotes_gpc su 'on' nel file php.ini."
 
 #: include/setup_checks.inc:717
 msgid "You've to specify an ldap server before continuing!"
@@ -6275,7 +6293,7 @@ msgstr ""
 #: ihtml/themes/default/setup_step3.tpl:1
 #: ihtml/themes/default/setup_step4.tpl:1
 msgid "Setup continued..."
-msgstr ""
+msgstr "Configurazione continua..."
 
 #: ihtml/themes/altlinux/setup_step2.tpl:4
 #: ihtml/themes/default/setup_step2.tpl:4
@@ -6283,6 +6301,7 @@ msgid ""
 "Step two looks for a set of helper programms and checks if they have the "
 "correct minimum version."
 msgstr ""
+"In questo secondo passo cercheremo i programmi necessari e opzionali."
 
 #: ihtml/themes/altlinux/setup_step2.tpl:11
 msgid ""
