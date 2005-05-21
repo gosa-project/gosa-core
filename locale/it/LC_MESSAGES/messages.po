@@ -1,9 +1,10 @@
 # translation of messages.po to Italian
-# Copyright (c) 2005 B-Open Solutions srl
+# Copyright (c) 2005 B-Open Solutions srl - http://www.bopen.it/
 # Copyright (c) 2005 Alessandro Amici <a.amici@bopen.it>
+
 #: contrib/gosa.conf:4
 msgid "My account"
-msgstr "La mia identit"
+msgstr "La mia identità"
 
 #: contrib/gosa.conf:23
 msgid "Administration"
@@ -28,25 +29,25 @@ msgstr "Generico"
 
 #: contrib/gosa.conf:56
 msgid "Unix"
-msgstr ""
+msgstr "Unix"
 
 #: contrib/gosa.conf:57 contrib/gosa.conf:68
 #: plugins/personal/mail/class_mailAccount.inc:22
 #: plugins/generic/references/class_reference.inc:24
 msgid "Mail"
-msgstr ""
+msgstr "Posta"
 
 #: contrib/gosa.conf:58 plugins/personal/samba/class_sambaAccount.inc:24
 #: plugins/generic/references/class_reference.inc:26
 #: plugins/generic/references/class_reference.inc:28
 msgid "Samba"
-msgstr ""
+msgstr "Samba"
 
 #: contrib/gosa.conf:59
 #: plugins/personal/connectivity/class_connectivity.inc:15
 #: plugins/personal/connectivity/main.inc:136
 msgid "Connectivity"
-msgstr "Connettivit"
+msgstr "Connettività"
 
 #: contrib/gosa.conf:60 plugins/personal/generic/generic.tpl:231
 #: plugins/personal/generic/generic.tpl:362
@@ -54,7 +55,7 @@ msgstr "Connettivit"
 #: plugins/addons/addressbook/contents.tpl:14
 #: plugins/admin/departments/generic.tpl:62
 msgid "Fax"
-msgstr ""
+msgstr "Fax"
 
 #: contrib/gosa.conf:61 plugins/personal/generic/generic.tpl:214
 #: plugins/personal/generic/generic.tpl:352
@@ -76,7 +77,7 @@ msgstr "Telefono"
 #: contrib/gosa.conf:106 contrib/gosa.conf:111 contrib/gosa.conf:116
 #: contrib/gosa.conf:121 contrib/gosa.conf:126 contrib/gosa.conf:131
 msgid "References"
-msgstr "Referenze"
+msgstr "Riferimenti"
 
 #: contrib/gosa.conf:67
 #: plugins/admin/applications/class_applicationManagement.inc:25
@@ -86,7 +87,7 @@ msgstr "Applicazioni"
 
 #: contrib/gosa.conf:69
 msgid "ACL"
-msgstr ""
+msgstr "ACL"
 
 #: contrib/gosa.conf:75
 msgid "Options"
@@ -102,11 +103,11 @@ msgstr "Avvio"
 
 #: contrib/gosa.conf:83 contrib/gosa.conf:92 contrib/gosa.conf:100
 msgid "Monitoring"
-msgstr ""
+msgstr "Monitoraggio"
 
 #: contrib/gosa.conf:89
 msgid "Databases"
-msgstr ""
+msgstr "Database"
 
 #: contrib/gosa.conf:90 plugins/admin/systems/servkolab.tpl:7
 msgid "Services"
@@ -127,7 +128,7 @@ msgstr "Importa"
 
 #: contrib/gosa.conf:145
 msgid "CSV Import"
-msgstr "Importa da formato CSV"
+msgstr "Importa da CSV"
 
 #: contrib/gosa.conf:160
 msgid "{LOCATIONNAME}"
@@ -159,20 +160,20 @@ msgstr "Inglese"
 
 #: plugins/personal/mail/generic.tpl:7 plugins/admin/groups/mail.tpl:10
 msgid "Primary address"
-msgstr "Indirizzo primario"
+msgstr "Indirizzo principale"
 
 #: plugins/personal/mail/generic.tpl:11 plugins/admin/groups/mail.tpl:14
 #: plugins/generic/references/class_reference.inc:44
 msgid "Server"
-msgstr ""
+msgstr "Server"
 
 #: plugins/personal/mail/generic.tpl:13
 msgid "Specify the mail server where the user will be hosted on"
-msgstr ""
+msgstr "Specifica il server di posta per l'utente"
 
 #: plugins/personal/mail/generic.tpl:21 plugins/admin/groups/mail.tpl:24
 msgid "Quota usage"
-msgstr "Utilizzo della quota"
+msgstr "Utilizzo quota"
 
 #: plugins/personal/mail/generic.tpl:28 plugins/admin/groups/mail.tpl:31
 #: plugins/admin/systems/class_terminalInfo.inc:136
@@ -181,7 +182,7 @@ msgstr "non definito"
 
 #: plugins/personal/mail/generic.tpl:33 plugins/admin/groups/mail.tpl:36
 msgid "Quota size"
-msgstr "Quota"
+msgstr "Dimensione Quota"
 
 #: plugins/personal/mail/generic.tpl:47 plugins/admin/groups/mail.tpl:46
 #, fuzzy
@@ -268,7 +269,7 @@ msgstr ""
 
 #: plugins/personal/mail/generic.tpl:73
 msgid "Activate vacation message"
-msgstr ""
+msgstr "Attiva la risposta automatica"
 
 #: plugins/personal/mail/generic.tpl:80
 msgid "Select if you want to filter this mails through spamassassin"
@@ -284,17 +285,17 @@ msgstr ""
 
 #: plugins/personal/mail/generic.tpl:84
 msgid "to folder"
-msgstr "nella cartella (?)"
+msgstr "nella cartella"
 
 #: plugins/personal/mail/generic.tpl:90
 msgid "Reject mails bigger than"
-msgstr ""
+msgstr "Rifiuta mail più grandi di"
 
 #: plugins/personal/mail/generic.tpl:92
 #: plugins/personal/connectivity/pureftpd.tpl:40
 #: plugins/personal/connectivity/class_proxyAccount.inc:69
 msgid "MB"
-msgstr ""
+msgstr "Mb"
 
 #: plugins/personal/mail/generic.tpl:98
 msgid "Vacation message"
@@ -311,7 +312,7 @@ msgstr "Aggiungi localmente"
 
 #: plugins/personal/mail/generic.tpl:133
 msgid "Advanced mail options"
-msgstr ""
+msgstr "Opzioni di posta avanzate"
 
 #: plugins/personal/mail/generic.tpl:138
 msgid "Select if user can only send and receive inside his own domain"
@@ -323,11 +324,11 @@ msgstr ""
 
 #: plugins/personal/mail/generic.tpl:146
 msgid "Use custom sieve script"
-msgstr ""
+msgstr "Usa uno script di sieve personalizzato"
 
 #: plugins/personal/mail/generic.tpl:146
 msgid "disables all Mail options!"
-msgstr ""
+msgstr "disabilita tutte le opzioni di posta!"
 
 #: plugins/personal/mail/class_mailAccount.inc:23
 #: plugins/personal/password/class_password.inc:6
@@ -359,7 +360,7 @@ msgstr ""
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:7
 #: plugins/gofon/reports/class_fonreport.inc:7
 msgid "This does something"
-msgstr "Questo fa qualcosa (?)"
+msgstr "Questo fa qualcosa"
 
 #: plugins/personal/mail/class_mailAccount.inc:79
 #: plugins/admin/groups/class_groupMail.inc:59
@@ -373,7 +374,7 @@ msgstr ""
 
 #: plugins/personal/mail/class_mailAccount.inc:189
 msgid "This account has no mail extensions."
-msgstr "Questa identit non ha le estenzioni per la posta"
+msgstr "Questa identità non ha le estenzioni per la posta"
 
 #: plugins/personal/mail/class_mailAccount.inc:197
 #: plugins/admin/groups/class_groupMail.inc:187
@@ -425,13 +426,13 @@ msgstr "L'indirizzo che stai cercando di aggiungere  gi in uso"
 #: plugins/personal/mail/class_mailAccount.inc:668
 #: plugins/admin/groups/class_groupMail.inc:610
 msgid "The required field 'Primary address' is not set."
-msgstr ""
+msgstr "Il campo 'Indirizzo principale' non è stao inserito"
 
 #: plugins/personal/mail/class_mailAccount.inc:672
 #: plugins/personal/mail/class_mailAccount.inc:676
 #: plugins/addons/addressbook/class_addressbook.inc:551
 msgid "Please enter a valid email address in 'Primary address' field."
-msgstr ""
+msgstr "Inserire un indirizzo di posta valido nel campo 'Indirizzo principale'."
 
 #: plugins/personal/mail/class_mailAccount.inc:683
 #: plugins/admin/groups/class_groupMail.inc:619
@@ -517,7 +518,7 @@ msgstr "Annulla"
 #: plugins/gofax/faxaccount/main.inc:96
 #: plugins/gofon/phoneaccount/main.inc:111
 msgid "Click the 'Edit' button below to change informations in this dialog"
-msgstr ""
+msgstr "Click sul bottone 'Modifica' qui sotto per cambiare le informazioni in questo dialogo"
 
 #: plugins/personal/mail/main.inc:115 plugins/personal/posix/main.inc:122
 #: plugins/personal/samba/main.inc:115 plugins/personal/generic/main.inc:170
@@ -536,7 +537,7 @@ msgstr "Modifica"
 
 #: plugins/personal/mail/main.inc:124
 msgid "User mail settings"
-msgstr ""
+msgstr "Opzioni di posta dell'identità"
 
 #: plugins/personal/mail/mail_locals.tpl:6
 #: plugins/admin/groups/mail_locals.tpl:6
@@ -546,7 +547,7 @@ msgstr "Seleziona gli indirizzi da aggiungere"
 #: plugins/personal/mail/mail_locals.tpl:29
 #: plugins/admin/groups/mail_locals.tpl:29
 msgid "Display addresses of department"
-msgstr ""
+msgstr "Mostra l'indirizzo del dipartimento"
 
 #: plugins/personal/mail/mail_locals.tpl:30
 #: plugins/personal/posix/posix_groups.tpl:37
@@ -564,12 +565,12 @@ msgstr ""
 #: plugins/admin/ogroups/ogroup_objects.tpl:41
 #: plugins/admin/ogroups/headpage.tpl:58
 msgid "Choose the department the search will be based on"
-msgstr ""
+msgstr "Scegli il dipartimento di base per la ricerca"
 
 #: plugins/personal/mail/mail_locals.tpl:35
 #: plugins/admin/groups/mail_locals.tpl:35
 msgid "Display addresses matching"
-msgstr ""
+msgstr "Mostra gli indirizzi che corrispondono"
 
 #: plugins/personal/mail/mail_locals.tpl:36
 #: plugins/personal/posix/trust_machines.tpl:36
@@ -581,7 +582,7 @@ msgstr ""
 #: plugins/personal/mail/mail_locals.tpl:39
 #: plugins/admin/groups/mail_locals.tpl:39
 msgid "Display addresses of user"
-msgstr ""
+msgstr "Mostra l'indirizzo dell'utente"
 
 #: plugins/personal/mail/mail_locals.tpl:40
 #: plugins/admin/groups/mail_locals.tpl:40
@@ -1551,20 +1552,20 @@ msgstr "Dipartimento"
 
 #: plugins/personal/generic/generic.tpl:181
 msgid "Department No."
-msgstr ""
+msgstr "Dipartimento No."
 
 #: plugins/personal/generic/generic.tpl:187
 msgid "Employee No."
-msgstr ""
+msgstr "Matricola"
 
 #: plugins/personal/generic/generic.tpl:193
 msgid "Employee type"
-msgstr ""
+msgstr "Qualifica"
 
 #: plugins/personal/generic/generic.tpl:209
 #: plugins/personal/generic/generic.tpl:348
 msgid "Room No."
-msgstr ""
+msgstr "Stanza No."
 
 #: plugins/personal/generic/generic.tpl:221
 #: plugins/addons/addressbook/address_edit.tpl:44
@@ -1577,19 +1578,19 @@ msgstr "Cellulare"
 #: plugins/addons/addressbook/address_edit.tpl:95
 #: plugins/addons/addressbook/address_info.tpl:91
 msgid "Pager"
-msgstr ""
+msgstr "Pager"
 
 #: plugins/personal/generic/generic.tpl:247
 #: plugins/admin/departments/generic.tpl:42
 #: plugins/admin/departments/generic.tpl:50
 #: plugins/admin/systems/printer.tpl:14
 msgid "Location"
-msgstr ""
+msgstr "Località"
 
 #: plugins/personal/generic/generic.tpl:251
 #: plugins/admin/departments/generic.tpl:46
 msgid "State"
-msgstr ""
+msgstr "Stato"
 
 #: plugins/personal/generic/generic.tpl:269
 msgid "Vocation"
@@ -1597,7 +1598,7 @@ msgstr ""
 
 #: plugins/personal/generic/generic.tpl:273
 msgid "Unit description"
-msgstr ""
+msgstr "Descrizoione unità"
 
 #: plugins/personal/generic/generic.tpl:281
 msgid "Subject area"
@@ -1609,7 +1610,7 @@ msgstr ""
 
 #: plugins/personal/generic/generic.tpl:296
 msgid "Role"
-msgstr ""
+msgstr "Ruolo"
 
 #: plugins/personal/generic/generic.tpl:308
 msgid "Person locality"
@@ -1617,11 +1618,11 @@ msgstr ""
 
 #: plugins/personal/generic/generic.tpl:316
 msgid "Unit"
-msgstr ""
+msgstr "Unità"
 
 #: plugins/personal/generic/generic.tpl:323
 msgid "Street"
-msgstr ""
+msgstr "Strada"
 
 #: plugins/personal/generic/generic.tpl:329
 #: plugins/addons/addressbook/address_edit.tpl:74
@@ -1663,23 +1664,23 @@ msgstr "Rimuovi"
 
 #: plugins/personal/generic/generic_certs.tpl:25
 msgid "S/MIME certificate"
-msgstr ""
+msgstr "Certificato S/MIME"
 
 #: plugins/personal/generic/generic_certs.tpl:36
 msgid "PKCS12 certificate"
-msgstr ""
+msgstr "Certificato PKCS12"
 
 #: plugins/personal/generic/generic_certs.tpl:48
 msgid "Certificate serial number"
-msgstr ""
+msgstr "Numero seriale del certificato"
 
 #: plugins/personal/generic/class_user.inc:225
 msgid "female"
-msgstr ""
+msgstr "femmina"
 
 #: plugins/personal/generic/class_user.inc:225
 msgid "male"
-msgstr ""
+msgstr "maschio"
 
 #: plugins/personal/generic/class_user.inc:235
 msgid "This account has no valid GOsa extensions."
@@ -1871,7 +1872,7 @@ msgstr "Gennaio"
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:172
 msgid "Anonymous"
-msgstr ""
+msgstr "Anonimo"
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:224
 msgid "The value specified as Free Busy future needs to be an integer."
@@ -1893,12 +1894,12 @@ msgstr ""
 
 #: plugins/personal/connectivity/class_webdavAccount.inc:6
 msgid "WebDAV"
-msgstr ""
+msgstr "WebDAV"
 
 #: plugins/personal/connectivity/class_pureftpdAccount.inc:6
 #: plugins/generic/references/class_reference.inc:34
 msgid "FTP"
-msgstr ""
+msgstr "FTP"
 
 #: plugins/personal/connectivity/class_pureftpdAccount.inc:120
 msgid "Value specified as 'Upload bandwidth' is not valid."
@@ -1922,11 +1923,11 @@ msgstr ""
 
 #: plugins/personal/connectivity/phpgw.tpl:1
 msgid "PHPGroupware account"
-msgstr ""
+msgstr "Account PHPGroupware"
 
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:5
 msgid "Open-Xchange"
-msgstr ""
+msgstr "Open-Xchange"
 
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:663
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:726
@@ -1946,7 +1947,7 @@ msgstr ""
 #: plugins/personal/connectivity/kolab.tpl:1
 #, fuzzy
 msgid "Kolab account"
-msgstr "La mia identit"
+msgstr "Accunt Kolab"
 
 #: plugins/personal/connectivity/kolab.tpl:4
 msgid ""
@@ -1957,12 +1958,12 @@ msgstr ""
 #: plugins/personal/connectivity/kolab.tpl:10
 #, fuzzy
 msgid "Delegations"
-msgstr "Applicazioni"
+msgstr ""
 
 #: plugins/personal/connectivity/kolab.tpl:22
 #, fuzzy
 msgid "Mail size"
-msgstr "Quota"
+msgstr ""
 
 #: plugins/personal/connectivity/kolab.tpl:23
 msgid "No mail size restriction for this account"
@@ -1971,21 +1972,21 @@ msgstr ""
 #: plugins/personal/connectivity/kolab.tpl:31
 #, fuzzy
 msgid "Free Busy information"
-msgstr "Informazione"
+msgstr ""
 
 #: plugins/personal/connectivity/kolab.tpl:34
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: plugins/personal/connectivity/kolab.tpl:38
 msgid "Future"
-msgstr ""
+msgstr "Futuro"
 
 #: plugins/personal/connectivity/kolab.tpl:39
 #: plugins/personal/connectivity/oxchange.tpl:18
 #: plugins/personal/connectivity/oxchange.tpl:22
 msgid "days"
-msgstr ""
+msgstr "giorni"
 
 #: plugins/personal/connectivity/kolab.tpl:44
 msgid "Invitation policy"
@@ -1997,11 +1998,11 @@ msgstr ""
 
 #: plugins/personal/connectivity/pureftpd.tpl:1
 msgid "FTP account"
-msgstr ""
+msgstr "Account FTP"
 
 #: plugins/personal/connectivity/pureftpd.tpl:11
 msgid "Bandwidth"
-msgstr ""
+msgstr "Bandwidth"
 
 #: plugins/personal/connectivity/pureftpd.tpl:15
 msgid "Upload bandwidth"
@@ -2010,7 +2011,7 @@ msgstr ""
 #: plugins/personal/connectivity/pureftpd.tpl:16
 #: plugins/personal/connectivity/pureftpd.tpl:20
 msgid "kb/s"
-msgstr ""
+msgstr "kb/s"
 
 #: plugins/personal/connectivity/pureftpd.tpl:19
 msgid "Download bandwidth"
@@ -2018,7 +2019,7 @@ msgstr ""
 
 #: plugins/personal/connectivity/pureftpd.tpl:31
 msgid "Quota"
-msgstr ""
+msgstr "Quota"
 
 #: plugins/personal/connectivity/pureftpd.tpl:35
 msgid "Files"
@@ -2097,19 +2098,19 @@ msgstr ""
 
 #: plugins/personal/connectivity/class_proxyAccount.inc:70
 msgid "hour"
-msgstr ""
+msgstr "ora"
 
 #: plugins/personal/connectivity/class_proxyAccount.inc:70
 msgid "day"
-msgstr ""
+msgstr "giorno"
 
 #: plugins/personal/connectivity/class_proxyAccount.inc:70
 msgid "week"
-msgstr ""
+msgstr "settimana"
 
 #: plugins/personal/connectivity/class_proxyAccount.inc:70
 msgid "month"
-msgstr ""
+msgstr "mese"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:5
 msgid "FAX Blocklists"
@@ -2130,11 +2131,11 @@ msgstr ""
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:226
 msgid "send"
-msgstr ""
+msgstr "invia"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:226
 msgid "receive"
-msgstr ""
+msgstr "ricevi"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:348
 msgid "You have no permissions to create a blocklist on this 'Base'."
@@ -2173,7 +2174,7 @@ msgstr ""
 #: plugins/admin/systems/service.tpl:42 plugins/admin/systems/service.tpl:120
 #: include/functions.inc:1579
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #: plugins/gofax/blocklists/generic.tpl:33
 msgid "Select wether to filter incoming or outgoing calls"
