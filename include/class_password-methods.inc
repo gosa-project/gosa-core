@@ -66,18 +66,18 @@ class passwordMethod
   function get_available_methods()
   {
     $ret =false;
-    $all = (get_declared_classes());
+    $all = get_declared_classes();
     $i = 0;
     foreach($all as $one) {
-      if((strstr($one,"passwordmethod" ))&&($one  != "passwordmethod")){
-        $name = str_replace ("passwordmethod","",$one);
+      if(preg_match('/passwordMethod/i', $one) && !preg_match("/^passwordMethod$/i", $one)){
+        $name = preg_replace ("/passwordMethod/i", "", $one);
         $test = new $one(false);
         if($test->is_available()) {
-          $ret['name'][$i]=str_replace ("passwordmethod","",$one);
+          $ret['name'][$i]= preg_replace ("/passwordMethod/i","",$one);
           $ret['class'][$i]=$one;
-          $ret[$i]['name']=str_replace ("passwordmethod","",$one);
-          $ret[$i]['class']=$one;
-          $ret[str_replace ("passwordmethod","",$one)]=$one;                    
+          $ret[$i]['name']= preg_replace("/passwordMethod/i","",$one);
+          $ret[$i]['class']= $one;
+          $ret[preg_replace ("/passwordMethod/i","",$one)]=$one;                    
           $i++;
         }
       }
