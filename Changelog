@@ -17,7 +17,7 @@ GOsa2 changelog
   - Added server settings
   - Added LDIF import
   - Added CSV import
-  - Added italien translations (thanks to Alessandro Amici)
+  - Added italian translation (thanks to Alessandro Amici)
   - Added subtree search checkbox in lists with potential higher
     usage
   - Added version indicator to make support more easy

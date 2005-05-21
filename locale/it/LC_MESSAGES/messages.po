@@ -5376,7 +5376,7 @@ msgstr ""
 #: plugins/generic/welcome/main.inc:24
 #, php-format
 msgid "Welcome %s!"
-msgstr ""
+msgstr "Benvenuto %s!"
 
 #: include/functions.inc:267
 #, php-format
@@ -5769,41 +5769,42 @@ msgstr ""
 
 #: include/setup_checks.inc:241
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: include/setup_checks.inc:244
 msgid "Ignored"
-msgstr ""
+msgstr "Ignora"
 
 #: include/setup_checks.inc:246
 msgid "Failed"
-msgstr ""
+msgstr "Fallito"
 
 #: include/setup_checks.inc:262
 msgid "PHP setup inspection"
-msgstr ""
+msgstr "Ispezione della configurazione PHP"
 
 #: include/setup_checks.inc:263
 msgid "Checking for PHP version (>=4.1.0)"
-msgstr ""
+msgstr "Controllo della versione di PHP (>=4.1.0)"
 
 #: include/setup_checks.inc:264
 msgid ""
 "PHP must be of version 4.1.0 or above for some functions and known bugs in "
 "PHP language."
 msgstr ""
+"PHP deve essere la versione 4.1.0 o superiore."
 
 #: include/setup_checks.inc:267
 msgid "Checking for PHP version (<=5)"
-msgstr ""
+msgstr "Controllo della versione di PHP (<=5)"
 
 #: include/setup_checks.inc:268
 msgid "PHP must be below version 5."
-msgstr ""
+msgstr "PHP deve essere una versione inferiore a 5."
 
 #: include/setup_checks.inc:272
 msgid "Checking if register_globals is set to 'off'"
-msgstr ""
+msgstr "Controllo se register_globals e impostato su 'off'"
 
 #: include/setup_checks.inc:273
 msgid ""
@@ -5811,56 +5812,64 @@ msgid ""
 "accessible from scripts without changing the scope. This may be a security "
 "risk. GOsa will run in both modes."
 msgstr ""
+"register_globals è un meccanismo PHP che può comportare maggiori rischi "
+"per la sicurezza. GOsa funziona in entrambe le modalità"
 
 #: include/setup_checks.inc:276
 msgid "Checking for ldap module"
-msgstr ""
+msgstr "Controllo il modulo ldap"
 
 #: include/setup_checks.inc:277
 msgid "This is the main module used by GOsa and therefore really required."
-msgstr ""
+msgstr "Questo è il modulo più importante usato da GOsa ed è quindi necessario."
 
 #: include/setup_checks.inc:280
 msgid "Checking for gettext support"
-msgstr ""
+msgstr "Controllo il support per gettext"
 
 #: include/setup_checks.inc:281
 msgid "Gettext support is required for internationalized GOsa."
-msgstr ""
+msgstr "Gettext è necessario al supporto per le lingue."
 
 #: include/setup_checks.inc:283
 msgid "Checking for iconv support"
-msgstr ""
+msgstr "Controllo il supporto per iconv"
 
 #: include/setup_checks.inc:284
 msgid ""
 "This module is used by GOsa to convert samba munged dial informations and is "
 "therefore required."
 msgstr ""
+"Questo modulo è usato da GOsa per convertire alcune informazioni usate da "
+"samba ed è necessario."
 
 #: include/setup_checks.inc:287
 msgid "Checking for mhash module"
-msgstr ""
+msgstr "Controllo il module mhash"
 
 #: include/setup_checks.inc:288
 msgid ""
 "To use SSHA encryption, you'll need this module. If you are just using crypt "
 "or md5 encryption, ignore this message. GOsa will run without it."
 msgstr ""
+"Questo modulo fornisce lo schema SSHA di criptaggio delle password. Se usi "
+"gli schemi classici 'crypt' e 'md5' ignora queso messaggio. "
+"GOsa funziona correttamente anche senza."
 
 #: include/setup_checks.inc:291
 msgid "Checking for imap module"
-msgstr ""
+msgstr "Controllo il modulo imap"
 
 #: include/setup_checks.inc:292
 msgid ""
 "The IMAP module is needed to communicate with the IMAP server. It gets "
 "status informations, creates and deletes mail users."
 msgstr ""
+"Questo modulo è necessario per comunicare con il server di posta."
 
 #: include/setup_checks.inc:294
 msgid "Checking for getacl in imap"
-msgstr ""
+msgstr "Controllo il supporto per getacl"
 
 #: include/setup_checks.inc:295
 msgid ""
@@ -5868,48 +5877,59 @@ msgid ""
 "IMAP module is not capable of reading acl's. You need a recend PHP version "
 "for this feature."
 msgstr ""
+"Il support per getacl serve a ottenere i permessi di accesso delle cartelle di "
+"posta sul server. "
+"GOsa funziona correttamente anche senza."
 
 #: include/setup_checks.inc:297
 msgid "Checking for mysql module"
-msgstr ""
+msgstr "Controllo il modulo mysql"
 
 #: include/setup_checks.inc:298
 msgid "MySQL support is needed for reading GOfax reports from databases."
 msgstr ""
+"Queso modulo serve a leggere i report di GOfax dal database."
+"GOsa funziona correttamente anche senza."
 
 #: include/setup_checks.inc:300
 msgid "Checking for cups module"
-msgstr ""
+msgstr "Controllo il modulo cups"
 
 #: include/setup_checks.inc:301
 msgid ""
 "In order to read available printers from IPP protocol instead of printcap "
 "files, you've to install the CUPS module."
 msgstr ""
+"Questo modulo serve a ottenere le informazioni sulle stampanti di rete. "
+"GOsa funziona correttamente anche senza."
 
 #: include/setup_checks.inc:303
 msgid "Checking for kadm5 module"
-msgstr ""
+msgstr "Controllo il modulo kadm5"
 
 #: include/setup_checks.inc:304
 msgid ""
 "Managing users in kerberos requires the kadm5 module which is downloadable "
 "via PEAR network."
 msgstr ""
+"Questo modulo serve ad amministrare gli utenti in un dominio Kerberos. "
+"GOsa funziona correttamente anche senza."
 
 #: include/setup_checks.inc:313
 msgid "Checking for some additional programms"
-msgstr ""
+msgstr "Controllo la presenza di programmi addizionali"
 
 #: include/setup_checks.inc:322
 msgid "Checking for ImageMagick (>=5.4.0)"
-msgstr ""
+msgstr "Controllo per ImageMagick (>=5.4.0)"
 
 #: include/setup_checks.inc:323
 msgid ""
 "ImageMagick is used to convert user supplied images to fit the suggested "
 "size and the unified JPEG format."
 msgstr ""
+"ImageMagick serve a convertire le immagini fornite dagli utenti nelle "
+"dimensioni e nel formato di default."
 
 #: include/setup_checks.inc:326
 msgid "Checking imagick module for PHP"
@@ -6145,7 +6165,7 @@ msgstr ""
 #: ihtml/themes/altlinux/setup_introduction.tpl:1
 #: ihtml/themes/default/setup_introduction.tpl:1
 msgid "Welcome to the GOsa setup!"
-msgstr ""
+msgstr "Benvenuto nel setup di GOsa!"
 
 #: ihtml/themes/altlinux/setup_introduction.tpl:4
 #: ihtml/themes/default/setup_introduction.tpl:4
@@ -6157,24 +6177,30 @@ msgid ""
 "needed programms and after you've provided basic informations for your LDAP "
 "connectivity, we're going to check your LDAP setup."
 msgstr ""
+"Il file di configurazione di GOsa non è stato trovato - questo è normale se "
+"è la prima volta che ti connetti. Questa procedura di setup cercherà di "
+"guidarti nella creazione della configurazione in tre passaggi: "
+"per prima cosa controlleremo l'installazione dei moduli PHP necessari, "
+"poi cercheremo i programmi necessari e opzionali, e in fine passeremo "
+"alle impostazioni del server LDAP."
 
 #: ihtml/themes/altlinux/login.tpl:14 ihtml/themes/classic/login.tpl:14
 #: ihtml/themes/default/login.tpl:14
 msgid "Please use your <i>username</i> and <i>password</i> to log in"
-msgstr ""
+msgstr "Usa il tuo <i>nome utente</i> e <i>password</i> per connetterti"
 
 #: ihtml/themes/altlinux/login.tpl:25 ihtml/themes/altlinux/login.tpl:29
 #: ihtml/themes/classic/login.tpl:25 ihtml/themes/classic/login.tpl:29
 #: ihtml/themes/default/setup_useradmin.tpl:22
 #: ihtml/themes/default/login.tpl:25 ihtml/themes/default/login.tpl:29
 msgid "Username"
-msgstr ""
+msgstr "Nome utente"
 
 #: ihtml/themes/altlinux/login.tpl:43 ihtml/themes/altlinux/login.tpl:46
 #: ihtml/themes/classic/login.tpl:43 ihtml/themes/classic/login.tpl:46
 #: ihtml/themes/default/login.tpl:43 ihtml/themes/default/login.tpl:46
 msgid "Directory"
-msgstr ""
+msgstr "Directory"
 
 #: ihtml/themes/altlinux/login.tpl:54
 #: ihtml/themes/altlinux/setup_finish.tpl:24 ihtml/themes/classic/login.tpl:54
@@ -6185,7 +6211,7 @@ msgstr "Entra"
 #: ihtml/themes/altlinux/login.tpl:55 ihtml/themes/classic/login.tpl:55
 #: ihtml/themes/default/login.tpl:55
 msgid "Click here to log in"
-msgstr ""
+msgstr "Click qui per connetterti"
 
 #: ihtml/themes/altlinux/sizelimit.tpl:3 ihtml/themes/default/sizelimit.tpl:3
 msgid ""
@@ -6213,17 +6239,17 @@ msgstr ""
 #: ihtml/themes/altlinux/framework.tpl:15
 #: ihtml/themes/classic/framework.tpl:14 ihtml/themes/default/framework.tpl:15
 msgid "Main"
-msgstr ""
+msgstr "Principale"
 
 #: ihtml/themes/altlinux/framework.tpl:20
 #: ihtml/themes/classic/framework.tpl:16 ihtml/themes/default/framework.tpl:20
 msgid "Help"
-msgstr ""
+msgstr "Aiuto"
 
 #: ihtml/themes/altlinux/framework.tpl:25
 #: ihtml/themes/classic/framework.tpl:18 ihtml/themes/default/framework.tpl:25
 msgid "Sign out"
-msgstr ""
+msgstr "Termina la connessione"
 
 #: ihtml/themes/altlinux/framework.tpl:33
 #: ihtml/themes/classic/framework.tpl:23 ihtml/themes/default/framework.tpl:33
