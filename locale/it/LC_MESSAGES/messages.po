@@ -2411,14 +2411,14 @@ msgstr ""
 
 #: plugins/gofax/faxaccount/main.inc:105
 msgid "FAX settings"
-msgstr ""
+msgstr "Impostazioni FAX"
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:6
 #: plugins/addons/addressbook/address_edit.tpl:92
 #: plugins/addons/addressbook/address_info.tpl:88
 #: plugins/generic/references/class_reference.inc:30
 msgid "FAX"
-msgstr ""
+msgstr "FAX"
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:111
 msgid "This account has no fax extensions."
@@ -5711,61 +5711,63 @@ msgstr ""
 
 #: include/setup_checks.inc:174
 msgid "SAMBA 3 support disabled, no schema seems to be installed"
-msgstr ""
+msgstr "Supporto per Samba 3 disabilitato. Manca il file di schema?"
 
 #: include/setup_checks.inc:177
 msgid "SAMBA 3 support enabled"
-msgstr ""
+msgstr "Support per Samba 3 abilitato."
 
 #: include/setup_checks.inc:181
 msgid "SAMBA 2 support disabled, no schema seems to be installed"
-msgstr ""
+msgstr "Supporto per Samba 2 disabilitato. Manca il file di schema?"
 
 #: include/setup_checks.inc:184
 msgid "SAMBA 2 support enabled"
-msgstr ""
+msgstr "Supporto per Samba 2 abilitato."
 
 #: include/setup_checks.inc:189
 msgid "Support for pureftp disabled, no schema seems to be installed"
-msgstr ""
+msgstr "Supporto per pureftp disabilitato. Manca il file di schema?"
 
 #: include/setup_checks.inc:192
 msgid "Support for pureftp enabled"
-msgstr ""
+msgstr "Supporto per pureftp abilitato."
 
 #: include/setup_checks.inc:196
 msgid "Support for WebDAV disabled, no schema seems to be installed"
-msgstr ""
+msgstr "Supporto per WebDAV disabilitato. Manca il file di schema?"
 
 #: include/setup_checks.inc:199
 msgid "Support for WebDAV enabled"
-msgstr ""
+msgstr "Supporto per WebDAV abilitato."
 
 #: include/setup_checks.inc:203
 msgid "Support for phpgroupware disabled, no schema seems to be installed"
-msgstr ""
+msgstr "Supporto per phpgroupware disabilitato. Manca il file di schema?"
 
 #: include/setup_checks.inc:206
 msgid "Support for phpgroupware enabled"
-msgstr ""
+msgstr "Supporto per phpgroupware abilitato."
 
 #: include/setup_checks.inc:210
 msgid "Support for gofon disabled, no schema seems to be installed"
-msgstr ""
+msgstr "Supporto per gofon disabilitato. Manca il file di schema?"
 
 #: include/setup_checks.inc:213
 msgid "Support for gofon enabled"
-msgstr ""
+msgstr "Supporto per gofon abilitato."
 
 #: include/setup_checks.inc:220
 msgid ""
 "Support for Kolab disabled, no schema seems to be installed, setting mail-"
 "method to cyrus"
 msgstr ""
+"Supporto per Kolab disabilitato. Manca il file di schema?"
+"Il metodo di amministrazine della posta è impostato su cyrus"
 
 #: include/setup_checks.inc:225
 msgid "Support for Kolab enabled"
-msgstr ""
+msgstr "Supporto per Kolab abilitato."
 
 #: include/setup_checks.inc:241
 msgid "OK"
@@ -6073,11 +6075,12 @@ msgid ""
 "You're missing the required attribute '%s' from this formular. Please "
 "complete!"
 msgstr ""
+"Manca il campo obbligatorio '%s'. Completarlo, prego. "
 
 #: include/setup_checks.inc:932
 #, php-format
 msgid "Can't log into LDAP server. Reason was: %s."
-msgstr ""
+msgstr "Accesso al server LDAP fallito. La ragione è: %s."
 
 #: include/setup_checks.inc:1058 include/setup_checks.inc:1076
 #: html/index.php:160 ihtml/themes/default/setup_useradmin.tpl:6
@@ -6318,20 +6321,25 @@ msgid ""
 "autodetected by the installed objectclasses. Details on how your LDAP tree "
 "is organized will be asked later on."
 msgstr ""
+"Adesso ci occuperemo del server LDAP e creeremo al configurazione iniziale. "
+"Dopo che avrai inserito la URI del server verrà eseguito un rapido controllo "
+"per verificare che tutti gli schemi necessari siano presenti. La versione "
+"di Samba verrà riconosciuta automaticamente. I dettagli sul DIT della "
+"tua organizzazione sarammo chiesti in seguito."
 
 #: ihtml/themes/altlinux/setup_step3.tpl:7
 msgid "Please enter the server URI"
-msgstr ""
+msgstr "Inserisci la URI del server LDAP"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:4
 #: ihtml/themes/default/setup_step4.tpl:7
 msgid "Enter a description for the location you're configuring here"
-msgstr ""
+msgstr "Inserisci una descrizione della locazione che vuoi configurare"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:8
 #: ihtml/themes/default/setup_step4.tpl:11
 msgid "Location name"
-msgstr ""
+msgstr "Nome locazione"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:14
 msgid ""
@@ -6344,12 +6352,12 @@ msgstr ""
 #: ihtml/themes/altlinux/setup_step4.tpl:19
 #: ihtml/themes/default/setup_step4.tpl:23
 msgid "Admin DN"
-msgstr ""
+msgstr "DN dell'amministratore"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:23
 #: ihtml/themes/default/setup_step4.tpl:27
 msgid "Admin password"
-msgstr ""
+msgstr "Password dell'amministratore"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:29
 #: ihtml/themes/default/setup_step4.tpl:34
@@ -6358,36 +6366,39 @@ msgid ""
 "saves people and groups, including the way accounts get created. Check the "
 "values below if the fit your needs."
 msgstr ""
+"Alcuni parametri di LDAP sono selezionabili e influenzano il posto in cui GOsa "
+"salva le identità e i gruppi. Controlla che i valori riportati corrispondano alle "
+"impostaioni del tuo DIT."
 
 #: ihtml/themes/altlinux/setup_step4.tpl:34
 #: ihtml/themes/default/setup_step4.tpl:39
 msgid "People storage ou"
-msgstr ""
+msgstr "Ou delle persone"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:38
 #: ihtml/themes/default/setup_step4.tpl:43
 msgid "People dn attribute"
-msgstr ""
+msgstr "Attributo DN delle persone"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:46
 #: ihtml/themes/default/setup_step4.tpl:51
 msgid "Group storage ou"
-msgstr ""
+msgstr "Ou dei gruppi"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:50
 #: ihtml/themes/default/setup_step4.tpl:55
 msgid "ID base for users/groups"
-msgstr ""
+msgstr "UID di base per utenti/gruppi"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:56
 #: ihtml/themes/default/setup_step4.tpl:95
 msgid "Check"
-msgstr ""
+msgstr "Continua"
 
 #: ihtml/themes/altlinux/setup_finish.tpl:1
 #: ihtml/themes/default/setup_finish.tpl:1
 msgid "Setup finished"
-msgstr ""
+msgstr "Setup completato"
 
 #: ihtml/themes/altlinux/setup_finish.tpl:4
 #: ihtml/themes/default/setup_finish.tpl:14
@@ -6396,6 +6407,9 @@ msgid ""
 "file. Save the the link below as your gosa.conf and place that file in /etc/"
 "gosa. Change it as needed."
 msgstr ""
+"La procedura di configurazione di GOsa ha raccoolto le informazioni necessarie "
+"a creare un file di configurazione iniziale. Scarica il file e salvalo dentro "
+"/etc/gosa/ col nome gosa.conf."
 
 #: ihtml/themes/altlinux/setup_finish.tpl:12
 #: ihtml/themes/default/setup_finish.tpl:20
@@ -6404,11 +6418,14 @@ msgid ""
 "user is able to read gosa.conf, while other users shouldn't. You may want to "
 "execute these commands to achieve this requirement:"
 msgstr ""
+"Dopo averlo scaricato dentro /etc/gosa/, assicurati che l'utente del webserver "
+"sia in grado di leggerlo mentre tutti gli altri utenti non possono. "
+"In molti casi è sufficiente eseguire i comandi seguenti."
 
 #: ihtml/themes/altlinux/setup_finish.tpl:22
 #: ihtml/themes/default/setup_finish.tpl:31
 msgid "Retry"
-msgstr ""
+msgstr "Riprova"
 
 #: ihtml/themes/classic/islocked.tpl:9
 msgid ""
@@ -6434,12 +6451,14 @@ msgid ""
 "Please enter the server URI to allow the setup to connect your LDAP server "
 "<i>(Example: ldap://your.server:389).</i>"
 msgstr ""
+"Inserisci la URI del server LDAP <i>(Per esempio: ldap://mio.server:389).</i>"
 
 #: ihtml/themes/default/setup_step4.tpl:2
 msgid ""
 "The following fields allow the basic configuration of GOsa's behaviour and "
 "affect various properties in your main configuration."
 msgstr ""
+"I campi seguenti permettono una configurazione base di GOsa."
 
 #: ihtml/themes/default/setup_step4.tpl:18
 msgid ""
@@ -6447,6 +6466,9 @@ msgid ""
 "workaround till OpenLDAP's in directory ACI's are fully implemented. For "
 "this to work, we need the admin DN and the corresponding password."
 msgstr ""
+"GOsa agisce sul DIT tramite l'utente di amministrazione e possiede uno "
+"schema di permessi interno. Questo è un workaround finché non sarà completato "
+"il supportp per le ACL all'interno del DIT in OpenLDAP."
 
 #: ihtml/themes/default/setup_step4.tpl:63
 msgid ""
@@ -6454,10 +6476,12 @@ msgid ""
 "adjustable via user templates, but you can specify a default method to be "
 "used here, too."
 msgstr ""
+"GOsa supporta numerosi algoritmi di criptaggio per le password. Imposta "
+"quello di default."
 
 #: ihtml/themes/default/setup_step4.tpl:68
 msgid "Encryption algorithm"
-msgstr ""
+msgstr "Algoritmo di criptaggio"
 
 #: ihtml/themes/default/setup_step4.tpl:79
 msgid ""
@@ -6465,26 +6489,32 @@ msgid ""
 "interfaces to users mailboxes and general handling for quotas. You can "
 "choose the dummy plugin to leave all your mail settings untouched."
 msgstr ""
+"GOsa supporta numerosi metodi per amministrare la posta. Questi metodi "
+"possiedono interfacce per impostare opzioni come ad esempio la quota. "
+"Puoi impostare il metodo 'dummy' per mantenere tutte le impostazioni."
 
 #: ihtml/themes/default/setup_step4.tpl:84
 #, fuzzy
 msgid "Mail method"
-msgstr "Opzioni della posta"
+msgstr "Metodo di amministrazione della posta"
 
 #: ihtml/themes/default/setup_finish.tpl:3
 msgid ""
 "Basically the setup is finished. You can check the result of the schema "
 "check here and download the autogenerated gosa.conf below."
 msgstr ""
+"La configurazione di GOsa è terminata. Puoi verificare il risultato del "
+"controllo degli schemi e scaricare il file di configurazione autogenerto."
 
 #: ihtml/themes/default/setup_finish.tpl:7
 msgid "Schema Configuration"
-msgstr ""
+msgstr "Configurazione delgi schemi"
 
 #: ihtml/themes/default/setup_finish.tpl:12
 msgid "Configuration File"
-msgstr ""
+msgstr "File di configurazione"
 
 #: ihtml/themes/default/setup_finish.tpl:17
 msgid "Download configuration"
-msgstr ""
+msgstr "Scarica il file di  configurazione"
+
