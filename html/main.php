@@ -139,7 +139,7 @@ eval_sizelimit();
 
 /* Check for memory */
 if (function_exists("memory_get_usage")){
-  if (memory_get_usage() > (to_byte(ini_get('memory_limit')) - 1024000 )){
+  if (memory_get_usage() > (to_byte(ini_get('memory_limit')) - 2048000 )){
     print_red(_("Warning: memory is getting low - please increase the memory_limit!"));
   }
 }
