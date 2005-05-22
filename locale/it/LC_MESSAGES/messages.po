@@ -4,7 +4,7 @@
 
 #: contrib/gosa.conf:4
 msgid "My account"
-msgstr "La mia identità"
+msgstr "Identità"
 
 #: contrib/gosa.conf:23
 msgid "Administration"
@@ -185,9 +185,8 @@ msgid "Quota size"
 msgstr "Dimensione Quota"
 
 #: plugins/personal/mail/generic.tpl:47 plugins/admin/groups/mail.tpl:46
-#, fuzzy
 msgid "Alternative addresses"
-msgstr "Indirizzi alternativo"
+msgstr "Indirizzi alternativi"
 
 #: plugins/personal/mail/generic.tpl:49 plugins/admin/groups/mail.tpl:47
 msgid "List of alternative mail addresses"
@@ -1279,9 +1278,8 @@ msgid "Reconnect if disconnected"
 msgstr ""
 
 #: plugins/personal/samba/samba3.tpl:222
-#, fuzzy
 msgid "Lock samba account"
-msgstr "Rimuovi l'account di posta"
+msgstr "Blocca l'account samba"
 
 #: plugins/personal/samba/samba3.tpl:237
 msgid "Limit Logon Time"
@@ -1541,7 +1539,7 @@ msgstr ""
 
 #: plugins/personal/generic/generic.tpl:173
 msgid "Organization"
-msgstr ""
+msgstr "Organizzazione"
 
 #: plugins/personal/generic/generic.tpl:177
 #: plugins/addons/addressbook/address_edit.tpl:68
@@ -1843,11 +1841,10 @@ msgid ""
 msgstr ""
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:110
-#, fuzzy
 msgid ""
 "The mail address you're trying to add is no primary mail address of an "
 "existing user."
-msgstr "L'indirizzo che stai cercando di aggiungere  gi in uso"
+msgstr "L'indirizzo che stai cercando di aggiungere è già in uso"
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:137
 msgid "Always accept"
@@ -1866,9 +1863,8 @@ msgid "Manual if conflicts"
 msgstr ""
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:141
-#, fuzzy
 msgid "Manual"
-msgstr "Gennaio"
+msgstr "Manuale"
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:172
 msgid "Anonymous"
@@ -1945,9 +1941,8 @@ msgid "PHP4 module for Postgresql Database Failed!"
 msgstr ""
 
 #: plugins/personal/connectivity/kolab.tpl:1
-#, fuzzy
 msgid "Kolab account"
-msgstr "Accunt Kolab"
+msgstr "Account Kolab"
 
 #: plugins/personal/connectivity/kolab.tpl:4
 msgid ""
@@ -1956,12 +1951,10 @@ msgid ""
 msgstr ""
 
 #: plugins/personal/connectivity/kolab.tpl:10
-#, fuzzy
 msgid "Delegations"
 msgstr ""
 
 #: plugins/personal/connectivity/kolab.tpl:22
-#, fuzzy
 msgid "Mail size"
 msgstr ""
 
@@ -1970,7 +1963,6 @@ msgid "No mail size restriction for this account"
 msgstr ""
 
 #: plugins/personal/connectivity/kolab.tpl:31
-#, fuzzy
 msgid "Free Busy information"
 msgstr ""
 
@@ -2058,9 +2050,8 @@ msgid "Open-Xchange account"
 msgstr ""
 
 #: plugins/personal/connectivity/oxchange.tpl:13
-#, fuzzy
 msgid "Remember"
-msgstr "Dicembre"
+msgstr ""
 
 #: plugins/personal/connectivity/oxchange.tpl:17
 msgid "Appointment Days"
@@ -2071,9 +2062,8 @@ msgid "Task Days"
 msgstr ""
 
 #: plugins/personal/connectivity/oxchange.tpl:33
-#, fuzzy
 msgid "User Information"
-msgstr "Informazione"
+msgstr ""
 
 #: plugins/personal/connectivity/oxchange.tpl:37
 msgid "User Timezone"
@@ -2114,7 +2104,7 @@ msgstr "mese"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:5
 msgid "FAX Blocklists"
-msgstr ""
+msgstr "Liste blocco FAX"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:121
 #, php-format
@@ -2514,7 +2504,7 @@ msgstr ""
 
 #: plugins/gofax/reports/class_faxreport.inc:6
 msgid "FAX Reports"
-msgstr ""
+msgstr "Rapporti FAX"
 
 #: plugins/gofax/reports/class_faxreport.inc:97
 #: plugins/gofax/reports/class_faxreport.inc:204
@@ -2724,11 +2714,11 @@ msgstr ""
 
 #: plugins/addons/addressbook/main.inc:23
 msgid "Address book"
-msgstr ""
+msgstr "Rubrica"
 
 #: plugins/addons/addressbook/class_addressbook.inc:6
 msgid "Addressbook"
-msgstr ""
+msgstr "Rubrica"
 
 #: plugins/addons/addressbook/class_addressbook.inc:147
 #, php-format
@@ -2969,10 +2959,9 @@ msgstr ""
 #: plugins/addons/ldapmanager/class_ldif.inc:7
 #: plugins/addons/ldapmanager/main.inc:23
 msgid "LDAP manager"
-msgstr ""
+msgstr "Amministrazione LDAP"
 
 #: plugins/addons/ldapmanager/class_export.inc:7
-#, fuzzy
 msgid "CSV import"
 msgstr "Importa da formato CSV"
 
@@ -2986,7 +2975,7 @@ msgstr ""
 
 #: plugins/addons/logview/class_logview.inc:6
 msgid "System logs"
-msgstr ""
+msgstr "Log di sitema"
 
 #: plugins/addons/logview/class_logview.inc:36
 msgid "No LOG servers defined!"
@@ -3103,7 +3092,7 @@ msgstr ""
 #: plugins/admin/groups/class_groupManagement.inc:25
 #: plugins/admin/ogroups/class_ogroupManagement.inc:42
 msgid "Groups"
-msgstr "Gruppi"
+msgstr "Gruppi di utenti"
 
 #: plugins/admin/groups/class_groupManagement.inc:202
 #, php-format
@@ -3810,7 +3799,7 @@ msgstr ""
 #: plugins/admin/departments/class_departmentManagement.inc:25
 #: plugins/admin/ogroups/class_ogroupManagement.inc:43
 msgid "Departments"
-msgstr ""
+msgstr "Dipartimenti"
 
 #: plugins/admin/departments/class_departmentManagement.inc:130
 #, php-format
@@ -4024,19 +4013,16 @@ msgid "System management"
 msgstr ""
 
 #: plugins/admin/systems/servservice.tpl:11
-#, fuzzy
 msgid "Nfs Export"
-msgstr "Esporta"
+msgstr ""
 
 #: plugins/admin/systems/servservice.tpl:36
-#, fuzzy
 msgid "Time Service"
-msgstr "Servizi"
+msgstr ""
 
 #: plugins/admin/systems/servservice.tpl:59
-#, fuzzy
 msgid "LDAP Service"
-msgstr "Servizi"
+msgstr ""
 
 #: plugins/admin/systems/servservice.tpl:70
 msgid "Terminal Service"
@@ -4051,14 +4037,12 @@ msgid "Font path"
 msgstr ""
 
 #: plugins/admin/systems/servservice.tpl:91
-#, fuzzy
 msgid "Syslog Service"
-msgstr "Servizi"
+msgstr ""
 
 #: plugins/admin/systems/servservice.tpl:99
-#, fuzzy
 msgid "Print Service"
-msgstr "Servizi"
+msgstr ""
 
 #: plugins/admin/systems/server.tpl:6
 msgid "Server name"
@@ -4255,7 +4239,7 @@ msgstr ""
 
 #: plugins/admin/systems/class_systemManagement.inc:32
 msgid "Systems"
-msgstr ""
+msgstr "Sistemi"
 
 #: plugins/admin/systems/class_systemManagement.inc:246
 msgid "You can't edit this object type yet!"
@@ -4903,28 +4887,24 @@ msgid "SMTP smarthost/relayhost -> No value is given."
 msgstr ""
 
 #: plugins/admin/systems/servkolab.tpl:14
-#, fuzzy
 msgid "POP3 service"
-msgstr "Servizi"
+msgstr ""
 
 #: plugins/admin/systems/servkolab.tpl:22
 msgid "POP3/SSL service"
 msgstr ""
 
 #: plugins/admin/systems/servkolab.tpl:30
-#, fuzzy
 msgid "IMAP service"
-msgstr "Servizi"
+msgstr ""
 
 #: plugins/admin/systems/servkolab.tpl:38
-#, fuzzy
 msgid "IMAP/SSL service"
-msgstr "Servizi"
+msgstr ""
 
 #: plugins/admin/systems/servkolab.tpl:46
-#, fuzzy
 msgid "Sieve service"
-msgstr "Servizi"
+msgstr ""
 
 #: plugins/admin/systems/servkolab.tpl:54
 msgid "FTP FreeBusy service (legacy, not interoperable with Kolab2 FreeBusy)"
@@ -4939,9 +4919,8 @@ msgid "Amavis email scanning (virus/spam)"
 msgstr ""
 
 #: plugins/admin/systems/servkolab.tpl:81
-#, fuzzy
 msgid "Quota settings"
-msgstr "Quota"
+msgstr ""
 
 #: plugins/admin/systems/servkolab.tpl:97
 msgid "Free/Busy settings"
@@ -5065,7 +5044,7 @@ msgstr ""
 #: plugins/admin/ogroups/class_ogroupManagement.inc:25
 #: plugins/admin/ogroups/main.inc:34 plugins/admin/ogroups/main.inc:39
 msgid "Object groups"
-msgstr ""
+msgstr "Gruppi di oggetti"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:41
 msgid "UNIX accounts"
@@ -5086,7 +5065,7 @@ msgstr ""
 #: plugins/admin/ogroups/class_ogroupManagement.inc:49
 #: plugins/generic/references/class_reference.inc:52
 msgid "Printer"
-msgstr ""
+msgstr "Stampante"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:153
 #, php-format
@@ -5293,7 +5272,7 @@ msgstr ""
 
 #: plugins/gofon/reports/class_fonreport.inc:6
 msgid "Phone Reports"
-msgstr ""
+msgstr "Rapporti telefono"
 
 #: plugins/gofon/reports/class_fonreport.inc:141
 msgid "Can't connect to phone database, no reports can be shown!"
@@ -5362,16 +5341,20 @@ msgid ""
 "left, or by choosing one of the pictograms below. All changes apply directly "
 "to your companies LDAP server."
 msgstr ""
+"Questa è la schermata principale di GOsa. Puoi selezionare le attività tramite "
+"il menù sulla sinitra o cliccando slle icone qui sotto. Tutti i cambiamenti sono "
+"applicati immediatamente al server LDAP."
 
 #: plugins/generic/welcome/welcome.tpl:8
 msgid ""
 "Use <b>Sign out</b> on the upper left to close the connection and <b>Main</"
 "b> to get back to the pictogram view."
-msgstr ""
+msgstr "Usa <b>Termina la sessione</b> in alto a sinistra per uscire e "
+"<b>Principale</b> per tornare alla schermata principale."
 
 #: plugins/generic/welcome/welcome.tpl:15
 msgid "The GOsa team"
-msgstr ""
+msgstr "Il team di GOsa"
 
 #: plugins/generic/welcome/main.inc:24
 #, php-format
@@ -5381,7 +5364,7 @@ msgstr "Benvenuto %s!"
 #: include/functions.inc:267
 #, php-format
 msgid "Error when connecting the LDAP. Server said '%s'."
-msgstr ""
+msgstr "Errore durante la connessione al server LDAP. Il server dice: '%s'"
 
 #: include/functions.inc:288
 #, php-format
@@ -5471,16 +5454,15 @@ msgstr ""
 #: include/functions.inc:1505
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
-msgstr ""
+msgstr "versione di sviluppo di GOsa (Rev %s)"
 
 #: include/functions.inc:1531
 msgid "Generating this page caused the PHP interpreter to raise some errors!"
 msgstr ""
 
 #: include/functions.inc:1531
-#, fuzzy
 msgid "Toggle information"
-msgstr "Informazione"
+msgstr ""
 
 #: include/functions.inc:1539
 msgid "PHP error"
@@ -5507,9 +5489,8 @@ msgid "Trace"
 msgstr ""
 
 #: include/functions.inc:1579
-#, fuzzy
 msgid "File"
-msgstr "Filtri"
+msgstr ""
 
 #: include/functions.inc:1579
 msgid "Line"
@@ -6232,7 +6213,7 @@ msgstr "Entra"
 #: ihtml/themes/altlinux/login.tpl:55 ihtml/themes/classic/login.tpl:55
 #: ihtml/themes/default/login.tpl:55
 msgid "Click here to log in"
-msgstr "Click qui per connetterti"
+msgstr "Clicca qui per connetterti"
 
 #: ihtml/themes/altlinux/sizelimit.tpl:3 ihtml/themes/default/sizelimit.tpl:3
 msgid ""
@@ -6270,12 +6251,12 @@ msgstr "Aiuto"
 #: ihtml/themes/altlinux/framework.tpl:25
 #: ihtml/themes/classic/framework.tpl:18 ihtml/themes/default/framework.tpl:25
 msgid "Sign out"
-msgstr "Termina la connessione"
+msgstr "Termina la sessione"
 
 #: ihtml/themes/altlinux/framework.tpl:33
 #: ihtml/themes/classic/framework.tpl:23 ihtml/themes/default/framework.tpl:33
 msgid "Signed in:"
-msgstr ""
+msgstr "Connesso:"
 
 #: ihtml/themes/altlinux/islocked.tpl:2 ihtml/themes/classic/islocked.tpl:2
 #: ihtml/themes/default/islocked.tpl:2
@@ -6494,7 +6475,6 @@ msgstr ""
 "Puoi impostare il metodo 'dummy' per mantenere tutte le impostazioni."
 
 #: ihtml/themes/default/setup_step4.tpl:84
-#, fuzzy
 msgid "Mail method"
 msgstr "Metodo di amministrazione della posta"
 
