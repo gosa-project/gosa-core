@@ -108,7 +108,7 @@ function schema_check($server, $admin, $password,$aff=0)
             $messages[$key]= sprintf(_("Optional objectclass '%s' required by plugin '%s' does not have version %s"), $key, $class, $value['version']);
           }else {
             if(!isset($affich2[$class])){
-              $affich2[$class]="Support for <b>$class</b> enabled <td class=\"check\"> ".$value['file']."</td>";
+              $affich2[$class]= sprintf(_("Support for '%s' enabled"), $class)."<td class=\"check\"> ".$value['file']."</td>";
             }
           }
         }
