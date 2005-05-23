@@ -396,7 +396,7 @@ msgstr "In questo secondo passo cercheremo i programmi necessari e opzionali."
 #: ihtml/themes/default/islocked.tpl:2 ihtml/themes/classic/islocked.tpl:2
 #: ihtml/themes/altlinux/islocked.tpl:2
 msgid "Locking conflict detected"
-msgstr "Rilevato un conflitto di locking"
+msgstr "Rilevato un conflitto di accesso"
 
 #: ihtml/themes/default/islocked.tpl:9 ihtml/themes/altlinux/islocked.tpl:9
 msgid ""
@@ -1346,6 +1346,8 @@ msgid ""
 "You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
 "Please contact the person in order to clarify proceedings."
 msgstr ""
+"Stai per modificare il record LDAP '%s' che sembra essere in uso da '%s'. "
+"Contatta la persona interessata."
 
 #: include/functions.inc:1018
 msgid "LDAP error:"
@@ -1520,7 +1522,7 @@ msgstr "Descrizione"
 
 #: plugins/generic/references/contents.tpl:18
 msgid "This object has no relationship to other objects."
-msgstr ""
+msgstr "Questo oggetto non ha relazioni con altri oggetti."
 
 #: plugins/gofon/reports/class_fonreport.inc:6
 msgid "Phone Reports"
@@ -1783,39 +1785,40 @@ msgstr "Rapporti telefono"
 #: plugins/admin/systems/class_terminalService.inc:121
 #: plugins/personal/posix/class_posixAccount.inc:190
 msgid "automatic"
-msgstr ""
+msgstr "automatico"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:114
 msgid "This account has no phone extensions."
-msgstr ""
+msgstr "Questa identità non possiede estenzioni telefoniche"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:124
 msgid "Remove phone account"
-msgstr ""
+msgstr "Elimina estenzioni telefoniche"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:125
 msgid ""
 "This account has phone features enabled. You can disable them by clicking "
 "below."
-msgstr ""
+msgstr "Questa identià possiede estenzioni telefoniche."
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:127
 msgid "Create phone account"
-msgstr ""
+msgstr "Crea estenzioni telefoniche"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:128
 msgid ""
 "This account has phone features disabled. You can enable them by clicking "
 "below."
 msgstr ""
+"Questa identità non possiede estenzioni telefoniche"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:140
 msgid "Please enter a valid phone number!"
-msgstr ""
+msgstr "Prego inserire un numero di telefono valido!"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:176
 msgid "Choose your private phone"
-msgstr ""
+msgstr "Scegli il tuo numero di telefono personale"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:207
 #: plugins/gofon/phoneaccount/generic.tpl:45
@@ -1864,7 +1867,7 @@ msgstr ""
 #: plugins/gofon/phoneaccount/generic.tpl:5
 #: plugins/admin/systems/service.tpl:66
 msgid "Telephone hardware"
-msgstr ""
+msgstr "Dispositivo telefonico"
 
 #: plugins/gofon/phoneaccount/generic.tpl:9
 #: plugins/admin/systems/service.tpl:69
@@ -1878,7 +1881,7 @@ msgstr "Segreteria telefonica"
 #: plugins/gofon/phoneaccount/generic.tpl:22
 #: plugins/gofon/phoneaccount/generic.tpl:25
 msgid "Deliver missed calls as mail"
-msgstr ""
+msgstr "Recapita le chiamate perse come mail"
 
 #: plugins/gofon/phoneaccount/generic.tpl:39
 msgid "Phone numbers"
@@ -1915,15 +1918,15 @@ msgstr "Rimuovi"
 
 #: plugins/gofon/phoneaccount/generic.tpl:55
 msgid "Forward calls to"
-msgstr ""
+msgstr "Inoltra chiamate a"
 
 #: plugins/gofon/phoneaccount/generic.tpl:59
 msgid "Phone number"
-msgstr ""
+msgstr "Numero di telefono"
 
 #: plugins/gofon/phoneaccount/generic.tpl:59
 msgid "Timeout (s)"
-msgstr ""
+msgstr "Timeout"
 
 #: plugins/gofon/phoneaccount/main.inc:104
 #: plugins/admin/ogroups/class_ogroupManagement.inc:274
@@ -2036,7 +2039,7 @@ msgstr ""
 #: plugins/admin/ogroups/class_ogroup.inc:203
 #: plugins/admin/users/class_userManagement.inc:368
 msgid "none"
-msgstr ""
+msgstr "nessuno"
 
 #: plugins/admin/ogroups/class_ogroup.inc:205
 msgid "too many different objects!"
@@ -2183,7 +2186,7 @@ msgstr "Mostra gruppi"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:32
 msgid "Select to see applications"
-msgstr ""
+msgstr "Seleziona per mostrare le applicazioni"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:32
 msgid "Show applications"
@@ -2274,7 +2277,7 @@ msgstr ""
 #: plugins/admin/systems/terminal.tpl:99
 #: plugins/admin/systems/workstation.tpl:99
 msgid "Action"
-msgstr ""
+msgstr "Azione"
 
 #: plugins/admin/ogroups/termgroup.tpl:7
 msgid "Select action to execute for this   group of terminals"
@@ -2289,7 +2292,7 @@ msgstr "Esegui"
 
 #: plugins/admin/ogroups/generic.tpl:7 plugins/admin/groups/generic.tpl:7
 msgid "Group name"
-msgstr ""
+msgstr "Nome gruppo"
 
 #: plugins/admin/ogroups/generic.tpl:9
 msgid "Name of the group"
@@ -2297,7 +2300,7 @@ msgstr "Nome del gruppo"
 
 #: plugins/admin/ogroups/generic.tpl:14 plugins/admin/groups/generic.tpl:14
 msgid "Descriptive text for this group"
-msgstr ""
+msgstr "Nome descrittivo del gruppo"
 
 #: plugins/admin/ogroups/generic.tpl:21 plugins/admin/systems/server.tpl:13
 #: plugins/admin/systems/phone.tpl:13 plugins/admin/systems/terminal.tpl:18
@@ -2314,7 +2317,7 @@ msgstr "Base"
 
 #: plugins/admin/ogroups/generic.tpl:23 plugins/admin/groups/generic.tpl:23
 msgid "Choose subtree to place group in"
-msgstr ""
+msgstr "Scegli il subtree dove mettere il gruppo"
 
 #: plugins/admin/ogroups/generic.tpl:32
 msgid "Member objects"
@@ -2337,7 +2340,7 @@ msgstr ""
 
 #: plugins/admin/ogroups/headpage.tpl:6 plugins/admin/groups/headpage.tpl:6
 msgid "List of groups"
-msgstr ""
+msgstr "Lista dei gruppi"
 
 #: plugins/admin/ogroups/headpage.tpl:15 plugins/admin/systems/headpage.tpl:15
 #: plugins/admin/departments/headpage.tpl:15
@@ -2363,58 +2366,65 @@ msgid ""
 "use the range selector on top of the group listbox, when working with a "
 "large number of groups."
 msgstr ""
+"Questo menù permette di creare, modificare e cancellare i gruppi selezionati. "
+"Avendo un gran numero di gruppi, puoi usare i selettori di intervalli in cima "
+"alla lista dei gruppi."
 
 #: plugins/admin/ogroups/headpage.tpl:32 plugins/admin/groups/headpage.tpl:32
 msgid ""
 "-Edit- and -New...- will execute an assistant to aid you in editing group "
 "properties. -Delete- will ask for confirmation before removing groups."
 msgstr ""
+"-Modifica- e -Nuovo...- esegue un wizard per aiutarti ad amministrare le "
+"informazioni sui tuoi gruppi. -Rimuovi- ti chiederà conferma prima di rimuovere "
+"effettivamente il gruppo."
+
 
 #: plugins/admin/ogroups/headpage.tpl:46
 msgid "Show empty groups"
-msgstr ""
+msgstr "Mostra gruppi vuoti"
 
 #: plugins/admin/ogroups/headpage.tpl:47
 msgid "Show groups containing users"
-msgstr ""
+msgstr "Mostra gruppi che contengono utenti"
 
 #: plugins/admin/ogroups/headpage.tpl:48
 msgid "Show groups containing groups"
-msgstr ""
+msgstr "Mostra gruppi che contengono gruppi"
 
 #: plugins/admin/ogroups/headpage.tpl:49
 msgid "Show groups containing applications"
-msgstr ""
+msgstr "Mostra gruppi che contengono applicazioni"
 
 #: plugins/admin/ogroups/headpage.tpl:50
 msgid "Show groups containing departments"
-msgstr ""
+msgstr "Mostra gruppi che contengono dipartimenti"
 
 #: plugins/admin/ogroups/headpage.tpl:51
 msgid "Show groups containing servers"
-msgstr ""
+msgstr "Mostra gruppi che contengono server"
 
 #: plugins/admin/ogroups/headpage.tpl:52
 msgid "Show groups containing workstations"
-msgstr ""
+msgstr "Mostra gruppi che contengono workstation"
 
 #: plugins/admin/ogroups/headpage.tpl:53
 msgid "Show groups containing terminals"
-msgstr ""
+msgstr "Mostra gruppi che contengono terminali"
 
 #: plugins/admin/ogroups/headpage.tpl:54
 msgid "Show groups containing printers"
-msgstr ""
+msgstr "Mostra gruppi che contengono stampanti"
 
 #: plugins/admin/ogroups/headpage.tpl:57 plugins/admin/groups/headpage.tpl:56
 #: plugins/personal/posix/posix_groups.tpl:36
 msgid "Display groups of department"
-msgstr ""
+msgstr "Mostra gruppi di dipartimenti"
 
 #: plugins/admin/ogroups/headpage.tpl:63 plugins/admin/groups/headpage.tpl:62
 #: plugins/personal/posix/posix_groups.tpl:42
 msgid "Display groups matching"
-msgstr ""
+msgstr "Mosra gruppi corrispondenti a"
 
 #: plugins/admin/ogroups/headpage.tpl:64 plugins/admin/groups/headpage.tpl:63
 #: plugins/personal/posix/posix_groups.tpl:43
@@ -2898,7 +2908,7 @@ msgstr ""
 #: plugins/admin/systems/wingeneric.tpl:15
 #: plugins/admin/systems/component.tpl:15
 msgid "Choose subtree to place terminal in"
-msgstr ""
+msgstr "Scegli il subtree dove mettere i terminali"
 
 #: plugins/admin/systems/server.tpl:42
 msgid "Select action to execute for this server"
@@ -3084,7 +3094,7 @@ msgstr ""
 
 #: plugins/admin/systems/headpage.tpl:6
 msgid "List of systems"
-msgstr ""
+msgstr "Lista dei sistemi"
 
 #: plugins/admin/systems/headpage.tpl:18 plugins/admin/systems/password.tpl:25
 #: plugins/admin/users/password.tpl:21 plugins/admin/users/headpage.tpl:19
@@ -3119,7 +3129,7 @@ msgstr ""
 
 #: plugins/admin/systems/headpage.tpl:49
 msgid "Show windows based workstations"
-msgstr ""
+msgstr "Mostra workstation Windows"
 
 #: plugins/admin/systems/headpage.tpl:50
 msgid "Select to see network printers"
@@ -3127,7 +3137,7 @@ msgstr ""
 
 #: plugins/admin/systems/headpage.tpl:50
 msgid "Show network printers"
-msgstr ""
+msgstr "Mostra stampanti di rete"
 
 #: plugins/admin/systems/headpage.tpl:51
 msgid "Select to see VOIP phones"
@@ -3139,7 +3149,7 @@ msgstr ""
 
 #: plugins/admin/systems/headpage.tpl:52
 msgid "Show network devices"
-msgstr ""
+msgstr "Mostra dispositiva di rete"
 
 #: plugins/admin/systems/headpage.tpl:55
 #: plugins/personal/posix/trust_machines.tpl:29
@@ -3445,7 +3455,7 @@ msgstr ""
 
 #: plugins/admin/systems/chooser.tpl:9
 msgid "Linux Server"
-msgstr ""
+msgstr "Server Linux"
 
 #: plugins/admin/systems/chooser.tpl:10
 msgid "Windows workstation"
@@ -3461,7 +3471,7 @@ msgstr ""
 
 #: plugins/admin/systems/chooser.tpl:16
 msgid "Create"
-msgstr ""
+msgstr "Creare"
 
 #: plugins/admin/systems/servkolab.tpl:14
 msgid "POP3 service"
@@ -3664,7 +3674,7 @@ msgstr ""
 
 #: plugins/admin/departments/headpage.tpl:6
 msgid "List of departments"
-msgstr ""
+msgstr "Lista dei dipartimenti"
 
 #: plugins/admin/departments/headpage.tpl:28
 msgid ""
@@ -3766,7 +3776,7 @@ msgstr ""
 #: plugins/admin/applications/generic.tpl:7
 #: plugins/admin/applications/generic.tpl:8
 msgid "Application name"
-msgstr ""
+msgstr "Nome applicazione"
 
 #: plugins/admin/applications/generic.tpl:14
 msgid "Path and/or binary name of application"
@@ -3820,7 +3830,7 @@ msgstr ""
 
 #: plugins/admin/applications/headpage.tpl:6
 msgid "List of applications"
-msgstr ""
+msgstr "Lista delle applicazioni"
 
 #: plugins/admin/applications/headpage.tpl:28
 msgid ""
@@ -3920,7 +3930,7 @@ msgstr ""
 
 #: plugins/admin/users/template.tpl:2
 msgid "Creating a new user using templates"
-msgstr ""
+msgstr "Crea un nuovo utente usando i template"
 
 #: plugins/admin/users/template.tpl:6
 msgid ""
@@ -3958,7 +3968,7 @@ msgstr ""
 
 #: plugins/admin/users/headpage.tpl:6
 msgid "List of users"
-msgstr "Elenca gli utenti"
+msgstr "Lista degli utenti"
 
 #: plugins/admin/users/headpage.tpl:16
 msgid "New template"
@@ -3970,16 +3980,22 @@ msgid ""
 "great number of users, you may want to use the range selectors on top of the "
 "user list."
 msgstr ""
+"Questo menù permette di creare, modificare e cancellare gli utenti selezionati. "
+"Avendo un gran numero di utenti, puoi usare i selettori di intervalli in cima "
+"alla lista degli utenti."
 
 #: plugins/admin/users/headpage.tpl:33
 msgid ""
 "-Edit- and -New...- execute an assistant to aid you in managing your account "
 "informations. -Delete- will ask for confirmation before deleting users."
 msgstr ""
+"-Modifica- e -Nuovo...- esegue un wizard per aiutarti ad amministrare le "
+"informazioni sui tuoi utenti. -Rimuovi- ti chiederà conferma prima di rimuovere "
+"effettivamente l'utente."
 
 #: plugins/admin/users/headpage.tpl:47
 msgid "Select to see template pseudo users"
-msgstr ""
+msgstr "Seleziona per vedere gli utenti template"
 
 #: plugins/admin/users/headpage.tpl:47
 msgid "Show templates"
@@ -3987,7 +4003,7 @@ msgstr "Mostra utenti template"
 
 #: plugins/admin/users/headpage.tpl:48
 msgid "Select to see users that have only a GOsa object"
-msgstr ""
+msgstr "Seleziona per vedere gli utenti funzionali"
 
 #: plugins/admin/users/headpage.tpl:48
 msgid "Show functional users"
@@ -3995,7 +4011,7 @@ msgstr "Mostra utenti funzionali"
 
 #: plugins/admin/users/headpage.tpl:49
 msgid "Select to see users that have posix settings"
-msgstr ""
+msgstr "Seleziona per vedere gli utenti Unix"
 
 #: plugins/admin/users/headpage.tpl:49
 msgid "Show unix users"
@@ -4003,7 +4019,7 @@ msgstr "Mostra utenti Unix"
 
 #: plugins/admin/users/headpage.tpl:50
 msgid "Select to see users that have mail settings"
-msgstr ""
+msgstr "Seleziona per vedere gli utenti di posta"
 
 #: plugins/admin/users/headpage.tpl:50
 msgid "Show mail users"
@@ -4011,7 +4027,7 @@ msgstr "Mostra utenti di posta"
 
 #: plugins/admin/users/headpage.tpl:51
 msgid "Select to see users that have samba settings"
-msgstr ""
+msgstr "Seleziona per vedere gli utenti Samba"
 
 #: plugins/admin/users/headpage.tpl:51
 msgid "Show samba users"
@@ -4019,7 +4035,7 @@ msgstr "Mostra utenti Samba"
 
 #: plugins/admin/users/headpage.tpl:52
 msgid "Select to see users that have proxy settings"
-msgstr ""
+msgstr "Seleziona per vedere gli utenti proxy"
 
 #: plugins/admin/users/headpage.tpl:52
 msgid "Show proxy users"
@@ -4027,7 +4043,7 @@ msgstr "Mostra utenti proxy"
 
 #: plugins/admin/users/headpage.tpl:53
 msgid "Select to see users that have ftp settings"
-msgstr ""
+msgstr "Seleziona per vedere gli utenti FTP"
 
 #: plugins/admin/users/headpage.tpl:53
 msgid "Show FTP users"
@@ -4035,7 +4051,7 @@ msgstr "Mostra utenti FTP"
 
 #: plugins/admin/users/headpage.tpl:54
 msgid "Select to see users that have FAX settings"
-msgstr ""
+msgstr "Seleziona per vedere gli utenti FAX"
 
 #: plugins/admin/users/headpage.tpl:54
 msgid "Show FAX users"
@@ -4043,7 +4059,7 @@ msgstr "Mostra utenti FAX"
 
 #: plugins/admin/users/headpage.tpl:57 plugins/admin/groups/headpage.tpl:53
 msgid "Dive into LDAP subtrees when searching"
-msgstr ""
+msgstr "Cerca nei subtree di LDAP"
 
 #: plugins/admin/users/headpage.tpl:57 plugins/admin/groups/headpage.tpl:53
 msgid "Search in subtrees"
@@ -4078,24 +4094,24 @@ msgstr ""
 
 #: plugins/admin/groups/class_groupGeneric.inc:253
 msgid "Samba group"
-msgstr ""
+msgstr "Gruppo Samba"
 
 #: plugins/admin/groups/class_groupGeneric.inc:253
 msgid "Domain admins"
-msgstr ""
+msgstr "Amministratori di Dominio"
 
 #: plugins/admin/groups/class_groupGeneric.inc:253
 msgid "Domain users"
-msgstr ""
+msgstr "Utenti di Dominio"
 
 #: plugins/admin/groups/class_groupGeneric.inc:254
 msgid "Domain guests"
-msgstr ""
+msgstr "Ospiti di Dominio"
 
 #: plugins/admin/groups/class_groupGeneric.inc:259
 #, php-format
 msgid "Special group (%d)"
-msgstr ""
+msgstr "Gruppo speciale (%d)"
 
 #: plugins/admin/groups/class_groupGeneric.inc:584
 msgid ""
@@ -4141,23 +4157,23 @@ msgstr ""
 
 #: plugins/admin/groups/class_groupMail.inc:153
 msgid "read"
-msgstr ""
+msgstr "leggere"
 
 #: plugins/admin/groups/class_groupMail.inc:154
 msgid "post"
-msgstr ""
+msgstr "spedire"
 
 #: plugins/admin/groups/class_groupMail.inc:155
 msgid "external post"
-msgstr ""
+msgstr "spedire esterno"
 
 #: plugins/admin/groups/class_groupMail.inc:156
 msgid "append"
-msgstr ""
+msgstr "appendere"
 
 #: plugins/admin/groups/class_groupMail.inc:157
 msgid "write"
-msgstr ""
+msgstr "scrivere"
 
 #: plugins/admin/groups/class_groupMail.inc:179
 msgid "This 'dn' has no valid mail extensions."
@@ -4166,7 +4182,7 @@ msgstr ""
 #: plugins/admin/groups/class_groupMail.inc:187
 #: plugins/personal/mail/class_mailAccount.inc:197
 msgid "Remove mail account"
-msgstr "Rimuovi l'account di posta"
+msgstr "Rimuovi le estenzioni di posta"
 
 #: plugins/admin/groups/class_groupMail.inc:188
 #: plugins/personal/mail/class_mailAccount.inc:198
@@ -4174,31 +4190,32 @@ msgid ""
 "This account has mail features enabled. You can disable them by clicking "
 "below."
 msgstr ""
+"Questa identià possiede estenzioni di posta."
 
 #: plugins/admin/groups/class_groupMail.inc:190
 #: plugins/personal/mail/class_mailAccount.inc:200
 msgid "Create mail account"
-msgstr "Crea l'account di posta"
+msgstr "Crea estenzioni di posta"
 
 #: plugins/admin/groups/class_groupMail.inc:191
 #: plugins/personal/mail/class_mailAccount.inc:201
 msgid ""
 "This account has mail features disabled. You can enable them by clicking "
 "below."
-msgstr ""
+msgstr "Questa identità non possiede estenzioni di posta."
 
 #: plugins/admin/groups/class_groupMail.inc:244
 msgid "You're trying to add an invalid email address "
-msgstr ""
+msgstr "Stai cercando di aggungere un indirizzo di posta non valido"
 
 #: plugins/admin/groups/class_groupMail.inc:245
 msgid "to the list of forwarders."
-msgstr ""
+msgstr "alla lista degli inoltri"
 
 #: plugins/admin/groups/class_groupMail.inc:250
 #: plugins/personal/mail/class_mailAccount.inc:255
 msgid "Adding your one of your own addresses to the forwarders makes no sense."
-msgstr ""
+msgstr "Aggiungere il tuo indirizzo alla lista delgi inoltri non ha senso."
 
 #: plugins/admin/groups/class_groupMail.inc:278
 #: plugins/personal/mail/class_mailAccount.inc:290
@@ -4207,6 +4224,8 @@ msgid ""
 "You're trying to add an invalid email address to the list of alternate "
 "addresses."
 msgstr ""
+"Stai cercando di aggungere un indirizzo di posta non valido alla lista "
+"degli indirizzi alternativi."
 
 #: plugins/admin/groups/class_groupMail.inc:283
 #: plugins/personal/mail/class_mailAccount.inc:305
@@ -4220,17 +4239,17 @@ msgstr "Il campo 'Indirizzo principale' non è stao inserito"
 
 #: plugins/admin/groups/class_groupMail.inc:613
 msgid "Please enter a valid email addres in 'Primary address' field."
-msgstr ""
+msgstr "Prego inserire un indirizzo email valido nel campo 'Indirizzo principale'"
 
 #: plugins/admin/groups/class_groupMail.inc:619
 #: plugins/personal/mail/class_mailAccount.inc:683
 msgid "The primary address you've entered is already in use."
-msgstr ""
+msgstr "L'indirizzo principale inserito è già in uso."
 
 #: plugins/admin/groups/class_groupMail.inc:625
 #: plugins/personal/mail/class_mailAccount.inc:689
 msgid "Value in 'Quota size' is not valid."
-msgstr ""
+msgstr "Il valore di 'Dimensione quota' non è valido"
 
 #: plugins/admin/groups/class_groupMail.inc:634
 #: plugins/personal/mail/class_mailAccount.inc:698
@@ -4248,7 +4267,7 @@ msgstr ""
 
 #: plugins/admin/groups/class_groupAcl.inc:199
 msgid "All fields are writeable"
-msgstr ""
+msgstr "Tutti i campi sono scrivibili"
 
 #: plugins/admin/groups/class_groupApplication.inc:61
 msgid "This 'dn' is no appgroup."
@@ -4256,23 +4275,23 @@ msgstr ""
 
 #: plugins/admin/groups/class_groupApplication.inc:69
 msgid "Remove applications"
-msgstr ""
+msgstr "Elimina estenzioni per le applicazioni"
 
 #: plugins/admin/groups/class_groupApplication.inc:70
 msgid ""
 "This group has application features enabled. You can disable them by "
 "clicking below."
-msgstr ""
+msgstr "Questo gruppo non possiede estenzioni per le applicazioni."
 
 #: plugins/admin/groups/class_groupApplication.inc:72
 msgid "Create applications"
-msgstr ""
+msgstr "Crea estenzioni per le applicazioni"
 
 #: plugins/admin/groups/class_groupApplication.inc:73
 msgid ""
 "This group has application features disabled. You can enable them by "
 "clicking below."
-msgstr ""
+msgstr "Questo gruppo non possiede estenzioni per le applicazioni."
 
 #: plugins/admin/groups/class_groupApplication.inc:107
 msgid "The selected application name is not uniq. Please check your LDAP."
@@ -4300,7 +4319,7 @@ msgstr "Utilizzo quota"
 
 #: plugins/admin/groups/mail.tpl:36 plugins/personal/mail/generic.tpl:33
 msgid "Quota size"
-msgstr "Dimensione Quota"
+msgstr "Dimensione quota"
 
 #: plugins/admin/groups/mail.tpl:46 plugins/personal/mail/generic.tpl:47
 msgid "Alternative addresses"
@@ -4312,19 +4331,19 @@ msgstr "Lista degli indirizzi alternativi"
 
 #: plugins/admin/groups/mail.tpl:64
 msgid "IMAP shared folders"
-msgstr ""
+msgstr "Cartelle condivise IMAP"
 
 #: plugins/admin/groups/mail.tpl:68
 msgid "Default permission"
-msgstr ""
+msgstr "Permessi predefiniti"
 
 #: plugins/admin/groups/mail.tpl:76
 msgid "Member permission"
-msgstr ""
+msgstr "Permessi dei membri"
 
 #: plugins/admin/groups/mail.tpl:91
 msgid "Forward messages to non group members"
-msgstr ""
+msgstr "Inoltra i messaggi ai membri esterni al gruppo"
 
 #: plugins/admin/groups/mail.tpl:98 plugins/gofax/faxaccount/generic.tpl:74
 #: plugins/personal/mail/generic.tpl:123
@@ -4337,6 +4356,9 @@ msgid ""
 "to use the range selector on top of the group listbox, when working with a "
 "large number of groups."
 msgstr ""
+"Questo menù permette di creare, modificare e cancellare i gruppi selezionati. "
+"Avendo un gran numero di gruppi, puoi usare i selettori di intervalli in cima "
+"alla lista dei gruppi."
 
 #: plugins/admin/groups/headpage.tpl:46
 #: plugins/personal/posix/posix_groups.tpl:29
@@ -4346,7 +4368,7 @@ msgstr ""
 #: plugins/admin/groups/headpage.tpl:46
 #: plugins/personal/posix/posix_groups.tpl:29
 msgid "Show primary groups"
-msgstr ""
+msgstr "Mostra gruppi principali"
 
 #: plugins/admin/groups/headpage.tpl:47
 #: plugins/personal/posix/posix_groups.tpl:30
@@ -4356,7 +4378,7 @@ msgstr ""
 #: plugins/admin/groups/headpage.tpl:47
 #: plugins/personal/posix/posix_groups.tpl:30
 msgid "Show samba groups"
-msgstr ""
+msgstr "Mostra gruppi samba"
 
 #: plugins/admin/groups/headpage.tpl:48
 #: plugins/personal/posix/posix_groups.tpl:31
@@ -4366,7 +4388,7 @@ msgstr ""
 #: plugins/admin/groups/headpage.tpl:48
 #: plugins/personal/posix/posix_groups.tpl:31
 msgid "Show application groups"
-msgstr ""
+msgstr "Mostra gruppi di applicazioni"
 
 #: plugins/admin/groups/headpage.tpl:49
 #: plugins/personal/posix/posix_groups.tpl:32
@@ -4376,7 +4398,7 @@ msgstr ""
 #: plugins/admin/groups/headpage.tpl:49
 #: plugins/personal/posix/posix_groups.tpl:32
 msgid "Show mail groups"
-msgstr ""
+msgstr "Mostra gruppi di posta"
 
 #: plugins/admin/groups/headpage.tpl:50
 #: plugins/personal/posix/posix_groups.tpl:33
@@ -4386,12 +4408,12 @@ msgstr ""
 #: plugins/admin/groups/headpage.tpl:50
 #: plugins/personal/posix/posix_groups.tpl:33
 msgid "Show functional groups"
-msgstr ""
+msgstr "Mostra gruppi funzionali"
 
 #: plugins/admin/groups/headpage.tpl:66
 #: plugins/personal/posix/posix_groups.tpl:46
 msgid "Display groups of user"
-msgstr ""
+msgstr "Mostra gruppi di utenti"
 
 #: plugins/admin/groups/headpage.tpl:67
 #: plugins/personal/posix/posix_groups.tpl:47
@@ -4406,81 +4428,82 @@ msgstr ""
 
 #: plugins/admin/groups/application_options.tpl:1
 msgid "Application options"
-msgstr ""
+msgstr "Opzioni applicazione"
 
 #: plugins/admin/groups/acl.tpl:4
 msgid "Object"
-msgstr ""
+msgstr "Oggetto"
 
 #: plugins/admin/groups/acl.tpl:12 plugins/admin/groups/mail_admins.tpl:30
 #: plugins/gofax/faxaccount/lists.tpl:24
 msgid "Choose"
-msgstr ""
+msgstr "Scegli"
 
 #: plugins/admin/groups/acl.tpl:17
 msgid "Apply this acl only for users own entries"
-msgstr ""
+msgstr "Applica questa ACL solo per i campi propri dell'utente"
 
 #: plugins/admin/groups/application.tpl:4
 msgid "Used applications"
-msgstr ""
+msgstr "Applicazioni in uso"
 
 #: plugins/admin/groups/application.tpl:10
 msgid "Edit parameters"
-msgstr ""
+msgstr "Modifica parametri"
 
 #: plugins/admin/groups/application.tpl:10
 msgid "Edit optional application parameters"
-msgstr ""
+msgstr "Modifica parametri opzionali delle applicazioni"
 
 #: plugins/admin/groups/application.tpl:20
 msgid "Available applications"
-msgstr ""
+msgstr "Applicazioni disponibili"
 
 #: plugins/admin/groups/group_objects.tpl:6
 msgid "Select users to add"
-msgstr ""
+msgstr "Selezioni utenti da aggiungere"
 
 #: plugins/admin/groups/generic.tpl:9
 msgid "Posix name of the group"
-msgstr ""
+msgstr "Nome Unix del gruppo"
 
 #: plugins/admin/groups/generic.tpl:36
 msgid "Normally IDs are autogenerated, select to specify manually"
-msgstr ""
+msgstr "Normalmente le ID sono autogenerate, selezionare per specificarelo "
+"manulamente"
 
 #: plugins/admin/groups/generic.tpl:36
 msgid "Force GID"
-msgstr ""
+msgstr "Forza GID"
 
 #: plugins/admin/groups/generic.tpl:38
 msgid "Forced ID number"
-msgstr ""
+msgstr "Forza numero ID"
 
 #: plugins/admin/groups/generic.tpl:45
 msgid "Select to create a samba conform group"
-msgstr ""
+msgstr "Seleziona per creare un gruppo conforme Samba"
 
 #: plugins/admin/groups/generic.tpl:50
 msgid "in domain"
-msgstr ""
+msgstr "nel dominio"
 
 #: plugins/admin/groups/generic.tpl:66
 msgid "Members are in a phone pickup group"
-msgstr ""
+msgstr "I membri sono in un gruppo di risposta telefonica"
 
 #: plugins/admin/groups/generic.tpl:81
 msgid "Group members"
-msgstr ""
+msgstr "Membri del gruppo"
 
 #: plugins/admin/groups/mail_admins.tpl:4
 msgid "Folder administrators"
-msgstr ""
+msgstr "Amministratori cartella"
 
 #: plugins/admin/groups/mail_admins.tpl:24
 #: plugins/gofax/faxaccount/lists.tpl:18
 msgid "Select a specific department"
-msgstr ""
+msgstr "Selezione un dipartimento"
 
 #: plugins/admin/groups/mail_locals.tpl:6
 #: plugins/personal/mail/mail_locals.tpl:6
@@ -4516,7 +4539,7 @@ msgstr ""
 
 #: plugins/admin/groups/main.inc:39 plugins/admin/groups/main.inc:43
 msgid "Group administration"
-msgstr ""
+msgstr "Amministrazione dei gruppi di utenti"
 
 #: plugins/addons/logview/class_logview.inc:6
 msgid "System logs"
@@ -4846,19 +4869,19 @@ msgstr ""
 
 #: plugins/addons/addressbook/class_addressbook.inc:456
 msgid "Creating new entry in"
-msgstr ""
+msgstr "Crea in"
 
 #: plugins/addons/addressbook/class_addressbook.inc:486
 msgid "Work phone"
-msgstr ""
+msgstr "Telefono del lavoro"
 
 #: plugins/addons/addressbook/class_addressbook.inc:486
 msgid "Cell phone"
-msgstr ""
+msgstr "Cellolare"
 
 #: plugins/addons/addressbook/class_addressbook.inc:487
 msgid "Home phone"
-msgstr ""
+msgstr "Telefono privato"
 
 #: plugins/addons/addressbook/class_addressbook.inc:487
 msgid "User ID"
@@ -4906,11 +4929,11 @@ msgstr "Cellulare"
 #: plugins/addons/addressbook/address_edit.tpl:33
 #: plugins/addons/addressbook/address_info.tpl:29
 msgid "Private"
-msgstr ""
+msgstr "Privato"
 
 #: plugins/addons/addressbook/contents.tpl:15
 msgid "Contact"
-msgstr ""
+msgstr "Contatto"
 
 #: plugins/addons/addressbook/contents.tpl:37
 msgid ""
@@ -4921,19 +4944,19 @@ msgstr ""
 
 #: plugins/addons/addressbook/contents.tpl:42
 msgid "Actions"
-msgstr ""
+msgstr "Azioni"
 
 #: plugins/addons/addressbook/contents.tpl:47
 msgid "Add entry"
-msgstr ""
+msgstr "Aggiungi contatto"
 
 #: plugins/addons/addressbook/contents.tpl:50
 msgid "Edit entry"
-msgstr ""
+msgstr "Modifica contatto"
 
 #: plugins/addons/addressbook/contents.tpl:52
 msgid "Remove entry"
-msgstr ""
+msgstr "Elimina contatto"
 
 #: plugins/addons/addressbook/contents.tpl:67
 msgid "Select to see regular users"
@@ -4941,7 +4964,7 @@ msgstr ""
 
 #: plugins/addons/addressbook/contents.tpl:67
 msgid "Show organizational entries"
-msgstr ""
+msgstr "Mostra contatti di organizzazioni"
 
 #: plugins/addons/addressbook/contents.tpl:68
 msgid "Select to see users in addressbook"
@@ -4949,19 +4972,19 @@ msgstr ""
 
 #: plugins/addons/addressbook/contents.tpl:68
 msgid "Show addressbook entries"
-msgstr ""
+msgstr "Mostra contatti della rubrica"
 
 #: plugins/addons/addressbook/contents.tpl:71
 msgid "Display results for department"
-msgstr ""
+msgstr "Mostra risultati per dipartimento"
 
 #: plugins/addons/addressbook/contents.tpl:78
 msgid "Search string"
-msgstr ""
+msgstr "Ricerca"
 
 #: plugins/addons/addressbook/contents.tpl:81
 msgid "Match object"
-msgstr ""
+msgstr "Oggetto corrispondente"
 
 #: plugins/addons/addressbook/contents.tpl:83
 msgid "Choose the object that will be searched in"
@@ -4978,12 +5001,12 @@ msgstr ""
 #: plugins/addons/addressbook/address_edit.tpl:16
 #: plugins/addons/addressbook/address_info.tpl:12
 msgid "Personal"
-msgstr ""
+msgstr "Personale"
 
 #: plugins/addons/addressbook/address_edit.tpl:23
 #: plugins/addons/addressbook/address_info.tpl:19
 msgid "Initials"
-msgstr ""
+msgstr "Iniziali"
 
 #: plugins/addons/addressbook/address_edit.tpl:26
 #: plugins/addons/addressbook/address_info.tpl:22
@@ -4994,22 +5017,22 @@ msgstr "Titolo onorifico"
 #: plugins/addons/addressbook/address_edit.tpl:47
 #: plugins/addons/addressbook/address_info.tpl:43
 msgid "Email"
-msgstr ""
+msgstr "Indirizzo email"
 
 #: plugins/addons/addressbook/address_edit.tpl:57
 #: plugins/addons/addressbook/address_info.tpl:53
 msgid "Organizational"
-msgstr ""
+msgstr "Organizzazione"
 
 #: plugins/addons/addressbook/address_edit.tpl:65
 #: plugins/addons/addressbook/address_info.tpl:61
 msgid "Company"
-msgstr ""
+msgstr "Azienda"
 
 #: plugins/addons/addressbook/address_edit.tpl:71
 #: plugins/addons/addressbook/address_info.tpl:67
 msgid "City"
-msgstr ""
+msgstr "Città"
 
 #: plugins/addons/addressbook/address_edit.tpl:74
 #: plugins/addons/addressbook/address_info.tpl:70
@@ -5020,7 +5043,7 @@ msgstr "CAP"
 #: plugins/addons/addressbook/address_edit.tpl:77
 #: plugins/addons/addressbook/address_info.tpl:73
 msgid "Country"
-msgstr ""
+msgstr "Paese"
 
 #: plugins/addons/addressbook/address_edit.tpl:95
 #: plugins/addons/addressbook/address_info.tpl:91
@@ -5129,27 +5152,27 @@ msgstr ""
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:111
 msgid "This account has no fax extensions."
-msgstr ""
+msgstr "Questa identità non possiede estenzioni FAX"
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:120
 msgid "Remove fax account"
-msgstr ""
+msgstr "Elimina estenzioni FAX"
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:121
 msgid ""
 "This account has fax features enabled. You can disable them by clicking "
 "below."
-msgstr ""
+msgstr "Questa identià possiede estenzioni FAX."
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:123
 msgid "Create fax account"
-msgstr ""
+msgstr "Crea estenzioni FAX"
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:124
 msgid ""
 "This account has fax features disabled. You can enable them by clicking "
 "below."
-msgstr ""
+msgstr "Questa identità non possiede estenzioni FAX"
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:192
 msgid "You're trying to add an invalid phone number."
@@ -5177,7 +5200,7 @@ msgstr ""
 
 #: plugins/gofax/faxaccount/generic.tpl:16
 msgid "Language"
-msgstr ""
+msgstr "Lingua"
 
 #: plugins/gofax/faxaccount/generic.tpl:18
 msgid "Specify the GOfax communication language for fax to mail gateway"
@@ -5185,7 +5208,7 @@ msgstr ""
 
 #: plugins/gofax/faxaccount/generic.tpl:24
 msgid "Delivery format"
-msgstr ""
+msgstr "Formato di recapito"
 
 #: plugins/gofax/faxaccount/generic.tpl:26
 msgid "Specify delivery format for fax to mail gateway"
@@ -5193,11 +5216,11 @@ msgstr ""
 
 #: plugins/gofax/faxaccount/generic.tpl:38
 msgid "Delivery methods"
-msgstr ""
+msgstr "Metodi di recapito"
 
 #: plugins/gofax/faxaccount/generic.tpl:41
 msgid "Temporary disable fax usage"
-msgstr ""
+msgstr "Disabilita temporaneamente l'uso del Fax"
 
 #: plugins/gofax/faxaccount/generic.tpl:45
 msgid "Deliver fax as mail to"
@@ -5205,31 +5228,31 @@ msgstr ""
 
 #: plugins/gofax/faxaccount/generic.tpl:49
 msgid "Deliver fax as mail"
-msgstr ""
+msgstr "Recapita Fax come mail"
 
 #: plugins/gofax/faxaccount/generic.tpl:54
 msgid "Deliver fax to printer"
-msgstr ""
+msgstr "Recapita Fax alla stampante"
 
 #: plugins/gofax/faxaccount/generic.tpl:68
 msgid "Alternate fax numbers"
-msgstr ""
+msgstr "Numeri di Fax alternativi"
 
 #: plugins/gofax/faxaccount/generic.tpl:83
 msgid "Blocklists"
-msgstr ""
+msgstr "Liste di blocco"
 
 #: plugins/gofax/faxaccount/generic.tpl:86
 msgid "Blocklists for incoming fax"
-msgstr ""
+msgstr "Liste di blocco per i Fax in arrivo"
 
 #: plugins/gofax/faxaccount/generic.tpl:92
 msgid "Blocklists for outgoing fax"
-msgstr ""
+msgstr "Liste di blocco per i Fax in partenza"
 
 #: plugins/gofax/faxaccount/locals.tpl:6
 msgid "Select numbers to add"
-msgstr ""
+msgstr "Seleziona il numero da aggiungere"
 
 #: plugins/gofax/faxaccount/locals.tpl:28
 msgid "Display numbers of department"
@@ -5253,11 +5276,11 @@ msgstr ""
 
 #: plugins/gofax/faxaccount/lists.tpl:4
 msgid "Blocked numbers/lists"
-msgstr ""
+msgstr "Numeri/liste bloccati"
 
 #: plugins/gofax/faxaccount/lists.tpl:26
 msgid "List of predefined blocklists"
-msgstr ""
+msgstr "Liste di blocco predefinite"
 
 #: plugins/gofax/faxaccount/main.inc:105
 msgid "FAX settings"
@@ -5340,7 +5363,7 @@ msgstr ""
 
 #: plugins/gofax/blocklists/headpage.tpl:6
 msgid "List of blocklists"
-msgstr ""
+msgstr "Lista delle liste di blocchi"
 
 #: plugins/gofax/blocklists/headpage.tpl:28
 msgid ""
@@ -5535,27 +5558,27 @@ msgstr "mese"
 
 #: plugins/personal/connectivity/proxy.tpl:1
 msgid "Proxy account"
-msgstr ""
+msgstr "Estenzioni Proxy Internet"
 
 #: plugins/personal/connectivity/proxy.tpl:8
 msgid "Filter unwanted content (i.e. pornographic or violence related)"
-msgstr ""
+msgstr "Filtra il contenuto non desiderato (p.e. pornografico o violento)"
 
 #: plugins/personal/connectivity/proxy.tpl:13
 msgid "Limit proxy access to working time"
-msgstr ""
+msgstr "Limita l'accesso a Internet alle ore lavorative"
 
 #: plugins/personal/connectivity/proxy.tpl:42
 msgid "Restrict proxy usage by quota"
-msgstr ""
+msgstr "Restringi la quota d'uso di Internet"
 
 #: plugins/personal/connectivity/proxy.tpl:52
 msgid "per"
-msgstr ""
+msgstr "per"
 
 #: plugins/personal/connectivity/phpgw.tpl:1
 msgid "PHPGroupware account"
-msgstr "Account PHPGroupware"
+msgstr "Estenzioni PHPGroupware"
 
 #: plugins/personal/connectivity/kolab.tpl:1
 msgid "Kolab account"
@@ -5603,19 +5626,19 @@ msgstr ""
 
 #: plugins/personal/connectivity/webdav.tpl:1
 msgid "WebDAV account"
-msgstr ""
+msgstr "Estenzioni WebDAV"
 
 #: plugins/personal/connectivity/pureftpd.tpl:1
 msgid "FTP account"
-msgstr "Account FTP"
+msgstr "Estenzioni FTP"
 
 #: plugins/personal/connectivity/pureftpd.tpl:11
 msgid "Bandwidth"
-msgstr "Bandwidth"
+msgstr "Banda"
 
 #: plugins/personal/connectivity/pureftpd.tpl:15
 msgid "Upload bandwidth"
-msgstr ""
+msgstr "Banda di upload"
 
 #: plugins/personal/connectivity/pureftpd.tpl:16
 #: plugins/personal/connectivity/pureftpd.tpl:20
@@ -5624,7 +5647,7 @@ msgstr "kb/s"
 
 #: plugins/personal/connectivity/pureftpd.tpl:19
 msgid "Download bandwidth"
-msgstr ""
+msgstr "Banda di download"
 
 #: plugins/personal/connectivity/pureftpd.tpl:31
 msgid "Quota"
@@ -5632,32 +5655,32 @@ msgstr "Quota"
 
 #: plugins/personal/connectivity/pureftpd.tpl:35
 msgid "Files"
-msgstr ""
+msgstr "File"
 
 #: plugins/personal/connectivity/pureftpd.tpl:39
 msgid "Size"
-msgstr ""
+msgstr "Dimensione"
 
 #: plugins/personal/connectivity/pureftpd.tpl:50
 msgid "Ratio"
-msgstr ""
+msgstr "Rapporto"
 
 #: plugins/personal/connectivity/pureftpd.tpl:54
 msgid "Uploaded / downloaded files"
-msgstr ""
+msgstr "File in upload / File in download"
 
 #: plugins/personal/connectivity/pureftpd.tpl:64
 #: plugins/personal/samba/samba3.tpl:174
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Misc"
 
 #: plugins/personal/connectivity/pureftpd.tpl:67
 msgid "Check to disable FTP Access"
-msgstr ""
+msgstr "Seleziona per disabilitale l'accesso FTP"
 
 #: plugins/personal/connectivity/pureftpd.tpl:67
 msgid "Temporary disable FTP access"
-msgstr ""
+msgstr "Disabilita temporaneamente l'accesso FTP"
 
 #: plugins/personal/connectivity/oxchange.tpl:2
 msgid "Open-Xchange Account"
@@ -5827,7 +5850,7 @@ msgstr "Modifica proprietà"
 
 #: plugins/personal/generic/generic.tpl:161
 msgid "Organizational information"
-msgstr "Informazioni dell'organizzaizone"
+msgstr "Informazioni organizzazione"
 
 #: plugins/personal/generic/generic.tpl:173
 msgid "Organization"
@@ -5928,34 +5951,35 @@ msgstr ""
 
 #: plugins/personal/samba/class_sambaAccount.inc:193
 msgid "This account has no samba extensions."
-msgstr ""
+msgstr "Questa identità non possiede estenzioni Samba."
 
 #: plugins/personal/samba/class_sambaAccount.inc:202
 msgid "Remove samba account"
-msgstr ""
+msgstr "Elimina estenzioni Samba"
 
 #: plugins/personal/samba/class_sambaAccount.inc:203
 msgid ""
 "This account has samba features enabled. You can disable them by clicking "
 "below."
-msgstr ""
+msgstr "Questa identià possiede estenzioni Samba."
 
 #: plugins/personal/samba/class_sambaAccount.inc:213
 #: plugins/personal/samba/class_sambaAccount.inc:216
 msgid "Create samba account"
-msgstr ""
+msgstr "Crea estenzioni Samba"
 
 #: plugins/personal/samba/class_sambaAccount.inc:214
 msgid ""
 "This account has samba features disabled. You can enable them by clicking "
 "below."
-msgstr ""
+msgstr "Questa identità non possiede estenzioni Samba."
 
 #: plugins/personal/samba/class_sambaAccount.inc:217
 msgid ""
 "This account has samba features disabled. Posix features are needed for "
 "samba accounts, enable them first."
-msgstr ""
+msgstr "Questa identità non possiede estenzioni Samba. Per poterle creare "
+"occorre creare prima le estenzioni Unix."
 
 #: plugins/personal/samba/class_sambaAccount.inc:442
 msgid "input on, notify on"
@@ -5993,13 +6017,13 @@ msgstr ""
 #: plugins/personal/samba/samba3.tpl:13 plugins/personal/samba/samba3.tpl:65
 #: plugins/personal/posix/generic.tpl:7
 msgid "Home directory"
-msgstr ""
+msgstr "Home directory"
 
 #: plugins/personal/samba/class_sambaAccount.inc:610
 #: plugins/personal/samba/samba2.tpl:36 plugins/personal/samba/samba3.tpl:44
 #: plugins/personal/samba/samba3.tpl:75
 msgid "Profile path"
-msgstr ""
+msgstr "Path del profilo"
 
 #: plugins/personal/samba/class_sambaAccount.inc:612
 #, php-format
@@ -6046,27 +6070,27 @@ msgstr ""
 
 #: plugins/personal/samba/samba2.tpl:13
 msgid "Samba home"
-msgstr ""
+msgstr "Home di Samba"
 
 #: plugins/personal/samba/samba2.tpl:30 plugins/personal/samba/samba3.tpl:38
 msgid "Script path"
-msgstr ""
+msgstr "Script path"
 
 #: plugins/personal/samba/samba2.tpl:48 plugins/personal/samba/samba3.tpl:210
 msgid "Access options"
-msgstr ""
+msgstr "Opzioni di accesso"
 
 #: plugins/personal/samba/samba2.tpl:54 plugins/personal/samba/samba3.tpl:216
 msgid "Allow user to change password from client"
-msgstr ""
+msgstr "Permetti all'utente di cambiare la propria password da un client"
 
 #: plugins/personal/samba/samba2.tpl:57 plugins/personal/samba/samba3.tpl:219
 msgid "Login from windows client requires no password"
-msgstr ""
+msgstr "L'accesso ai client Windows non richiede password"
 
 #: plugins/personal/samba/samba2.tpl:60
 msgid "Temporary disable samba account"
-msgstr ""
+msgstr "Disabilita temporaneament l'account Samba"
 
 #: plugins/personal/samba/samba2.tpl:68 plugins/personal/samba/samba3.tpl:225
 #: plugins/personal/posix/posix_shadow.tpl:19
@@ -6206,7 +6230,7 @@ msgstr "Crea estenzioni Unix"
 msgid ""
 "This account has posix features disabled. You can enable them by clicking "
 "below."
-msgstr ""
+msgstr "Questa identità non possiede estenzioni Unix"
 
 #: plugins/personal/posix/class_posixAccount.inc:431
 #, php-format
@@ -6426,7 +6450,7 @@ msgstr "Specifica il server di posta per l'utente"
 
 #: plugins/personal/mail/generic.tpl:65
 msgid "Mail options"
-msgstr "Opzioni della posta"
+msgstr "Opzioni di posta"
 
 #: plugins/personal/mail/generic.tpl:70
 msgid "Select if you want to forward mails without getting own copies of them"
@@ -6434,7 +6458,7 @@ msgstr ""
 
 #: plugins/personal/mail/generic.tpl:70
 msgid "No delivery to own mailbox"
-msgstr ""
+msgstr "Non recapitare nella propria mailbox"
 
 #: plugins/personal/mail/generic.tpl:73
 msgid "Select to automatically response with the vacation message defined below"
@@ -6450,11 +6474,11 @@ msgstr ""
 
 #: plugins/personal/mail/generic.tpl:80
 msgid "Move mails tagged with spam level greater than"
-msgstr ""
+msgstr "Muovi mail marcate con un livello di Spam superiore a"
 
 #: plugins/personal/mail/generic.tpl:81
 msgid "Choose spam level - smaller values are more sensitive"
-msgstr ""
+msgstr "Scegli il livello si Spam - valori più bassi indicano maggiore sensibilità"
 
 #: plugins/personal/mail/generic.tpl:84
 msgid "to folder"
@@ -6466,7 +6490,7 @@ msgstr "Rifiuta mail più grandi di"
 
 #: plugins/personal/mail/generic.tpl:98
 msgid "Vacation message"
-msgstr ""
+msgstr "Messaggio di vacanza"
 
 #: plugins/personal/mail/generic.tpl:113
 msgid "Forward messages to"
@@ -6482,7 +6506,7 @@ msgstr ""
 
 #: plugins/personal/mail/generic.tpl:139
 msgid "User is only allowed to send and receive local mails"
-msgstr ""
+msgstr "L'utente è abilitato a mandare e ricevere solo mail locali"
 
 #: plugins/personal/mail/generic.tpl:146
 msgid "Use custom sieve script"
