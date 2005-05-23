@@ -236,7 +236,11 @@ $smarty->assign ("PHPSESSID", session_id());
 if (isset($_SESSION['errors'])){
   $smarty->assign("errors", $_SESSION['errors']);
 }
-$smarty->assign("php_error", $error_collector."</div>");
+if ($error_collector != ""){
+  $smarty->assign("php_error", $error_collector."</div>");
+} else {
+  $smarty->assign("php_error", "");
+}
 $smarty->display (get_template_path('login.tpl'));
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
