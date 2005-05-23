@@ -191,7 +191,7 @@ function schema_check($server, $admin, $password,$aff=0)
     $affich['phoneaccount']['status']    = FALSE;
   }else{
     $affich['phoneaccount']['msg']       = _("Support for gofon enabled")."<td class=\"check\">gofon.schema</td>";
-    $affich['phoneaccount']['status']    = TRUE;
+    $affich['phoneaccount']['status']    = true;
   }
 
   
