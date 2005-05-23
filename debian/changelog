@@ -1,10 +1,13 @@
-gosa (2.4beta1-1) unstable; urgency=low
+gosa (2.4beta1-1) unstable; urgency=high
 
   * New upstream release
+  * This release fixes a bunch of errors that where in the
+    2.3-1 package, installation is recommended. I can't create
+	a final 2.4 release before sarge. Sorry.
   * Removed smarty from package and use debian contributed
     smarty releases
 
- -- Cajus Pollmeier <cajus@debian.org>  Thu,  3 Mar 2005 13:59:27 +0100
+ -- Cajus Pollmeier <cajus@debian.org>  Mon, 23 May 2005 13:59:27 +0100
 
 gosa (2.3-1) unstable; urgency=low
   * New upstream release
