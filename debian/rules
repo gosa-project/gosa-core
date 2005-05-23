@@ -57,7 +57,8 @@ install-stamp:
 	-rm -rf debian/gosa/usr/share/gosa/doc
 	-rm debian/gosa/usr/share/gosa/bin/gosa
 	-mkdir -p debian/gosa/usr/lib/gosa
-	-mv bin/* debian/gosa/usr/lib/gosa
+	-mv debian/gosa/usr/share/gosa/bin/* debian/gosa/usr/lib/gosa
+	-rm -rf debian/gosa/usr/share/gosa/bin
 	-chmod +x debian/gosa/usr/lib/gosa/*
 	-rm -rf debian/gosa/usr/share/gosa/gen_locale.sh
 	-rm -rf debian/gosa/usr/share/gosa/update.sh
