@@ -1,6 +1,8 @@
 gosa (2.4beta1-1) unstable; urgency=low
 
   * New upstream release
+  * Removed smarty from package and use debian contributed
+    smarty releases
 
  -- Cajus Pollmeier <cajus@debian.org>  Thu,  3 Mar 2005 13:59:27 +0100
 
