@@ -18,7 +18,7 @@
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="post-check=0, pre-check=0">
-  <meta http-equiv="Content-Type" content="text/html">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
   <link rel="stylesheet" type="text/css" href="themes/default/style.css">
   <link rel="shortcut icon" href="favicon.ico">
