@@ -194,8 +194,6 @@ class csvimport extends plugin
               $password = $rand_str;
             }
 
-            print_a($this->usertab);
-
             /* Insert in the LDAP tree */
             if(count($this->usertab->check())) {
               show_errors($this->usertab->check());

@@ -10,9 +10,10 @@ function check_schema_version($description, $version)
 function view_schema_check($table)
 {
   $message="<table class=\"check\">";
-  foreach ($table as $key => $msg){
+  foreach ($table as $key => $values){
+    $msg = $values['msg'];
     $message.= "<tr><td class=\"check\">$msg";
-    if(strstr($msg,"enabled")) {
+    if($values['status']) {
       $message.="</td><td style='text-align:center' ><img src=images/true.png alt='true' /></td></tr>";
     }
     else
@@ -102,13 +103,16 @@ function schema_check($server, $admin, $password,$aff=0)
       /* Check if we are using the class that requires */
       foreach($classes as $class){
         if (!isset($objectclasses[$key])){
-          $messages[$key]= sprintf(_("Optional objectclass '%s' required by plugin '%s' is not present in LDAP setup"), $key, $class);
+          $messages[$key]['msg']= sprintf(_("Optional objectclass '%s' required by plugin '%s' is not present in LDAP setup"), $key, $class);
+          $messages[$key]['status'] = FALSE;
         } else {
           if (!check_schema_version($objectclasses[$key], $value['version'])){
-            $messages[$key]= sprintf(_("Optional objectclass '%s' required by plugin '%s' does not have version %s"), $key, $class, $value['version']);
+            $messages[$key]['msg']= sprintf(_("Optional objectclass '%s' required by plugin '%s' does not have version %s"), $key, $class, $value['version']);
+            $messages[$key]['status'] =FALSE;
           }else {
             if(!isset($affich2[$class])){
-              $affich2[$class]= sprintf(_("Support for '%s' enabled"), $class)."<td class=\"check\"> ".$value['file']."</td>";
+              $affich2[$class]['msg']   = sprintf(_("Support for '%s' enabled"), $class)."<td class=\"check\"> ".$value['file']."</td>";
+              $affich2[$class]['status']= TRUE; 
             }
           }
         }
@@ -117,10 +121,12 @@ function schema_check($server, $admin, $password,$aff=0)
     } else {
       /* Required class */
       if (!isset($objectclasses[$key])){
-        $messages[$key]= sprintf(_("Required objectclass '%s' is not present in LDAP setup"), $key);
-      } else {
+        $messages[$key]['msg']= sprintf(_("Required objectclass '%s' is not present in LDAP setup"), $key);
+        $messages[$key]['status'] = FALSE;  
+    } else {
         if (!check_schema_version($objectclasses[$key], $value['version'])){
-          $messages[$key]= sprintf(_("Required objectclass '%s' does not have version %s"), $key, $value['version']);
+          $messages[$key]['msg']= sprintf(_("Required objectclass '%s' does not have version %s"), $key, $value['version']);
+          $messages[$key]['status'] = FALSE;  
         }
       }
     }
@@ -128,61 +134,83 @@ function schema_check($server, $admin, $password,$aff=0)
 
   /* Check for correct samba parameters */
   if (!isset($objectclasses['sambaSamAccount'])){
-    $messages['samba3']= _("SAMBA 3 support disabled, no schema seems to be installed");
-    $affich['samba3']= $messages['samba3']."<td class=\"check\">gosa+samba3.schema</td>";
+    $messages['samba3']['msg']        = _("SAMBA 3 support disabled, no schema seems to be installed");
+    $affich['samba3']['msg']          = $messages['samba3']['msg']."<td class=\"check\">gosa+samba3.schema</td>";
+    $messages['samba3']['status']     = FALSE;
+    $affich['samba3']['status']       = FALSE;
   }else{
-    $affich['samba3']=_("SAMBA 3 support enabled")."<td class=\"check\">gosa+samba3.schema</td>";
+    $affich['samba3']['msg']          = _("SAMBA 3 support enabled")."<td class=\"check\">gosa+samba3.schema</td>";
+    $affich['samba3']['status']       = TRUE;
   }
 
   if (!isset($objectclasses['sambaAccount'])){
-    $messages['samba2']= _("SAMBA 2 support disabled, no schema seems to be installed");
-    $affich['samba2']=$messages['samba2']."<td class=\"check\">samba.schema</td>";
+    $messages['samba2']['msg']        = _("SAMBA 2 support disabled, no schema seems to be installed");
+    $affich['samba2']['msg']          = $messages['samba2']['msg']."<td class=\"check\">samba.schema</td>";
+    $messages['samba2']['status']     = FALSE;
+    $affich['samba2']['status']       = FALSE;
   }else{
-    $affich['samba2']=_("SAMBA 2 support enabled")."<td class=\"check\">samba.schema</td>";
+    $affich['samba2']['msg']          = _("SAMBA 2 support enabled")."<td class=\"check\">samba.schema</td>";
+    $affich['samba2']['status']       = TRUE;
   }
 
   /* Check pureftp/dns/ */
   if (!isset($objectclasses['PureFTPdUser'])){
-    $messages['pureftp']= _("Support for pureftp disabled, no schema seems to be installed");
-    $affich['pureftp']= $messages['pureftp']."<td class=\"check\">pureftpd.schema</td>";
+    $messages['pureftp']['msg']       = _("Support for pureftp disabled, no schema seems to be installed");
+    $affich['pureftp']['msg']         = $messages['pureftp']['msg']."<td class=\"check\">pureftpd.schema</td>";
+    $messages['pureftp']['status']    = FALSE;
+    $affich['pureftp']['status']      = FALSE;
   }else{
-    $affich['pureftp']=_("Support for pureftp enabled")."<td class=\"check\">pureftpd.schema</td>";
+    $affich['pureftp']['msg']         = _("Support for pureftp enabled")."<td class=\"check\">pureftpd.schema</td>";
+    $affich['pureftp']['status']      = TRUE;
   }
 
   if (!isset($objectclasses['gosaWebdavAccount'])){
-    $messages['webdav']= _("Support for WebDAV disabled, no schema seems to be installed");
-    $affich['webdav']=$messages['webdav']."<td class=\"check\"></td>";
+    $messages['webdav']['msg']        = _("Support for WebDAV disabled, no schema seems to be installed");
+    $affich['webdav']['msg']          = $messages['webdav']['msg']."<td class=\"check\"></td>";
+    $messages['webdav']['status']     = FALSE;
+    $affich['webdav']['status']       = FALSE;
   }else{
-    $affich['webdav']=_("Support for WebDAV enabled")."<td class=\"check\">gosa+samba3.schema</td>";
+    $affich['webdav']['msg']=_("Support for WebDAV enabled")."<td class=\"check\">gosa+samba3.schema</td>";
+    $affich['webdav']['status']       = TRUE;
   }
 
   if (!isset($objectclasses['phpgwAccount'])){
-    $messages['phpgroupware']= _("Support for phpgroupware disabled, no schema seems to be installed");
-    $affich['phpgroupware']=$messages['phpgroupware']."<td class=\"check\">phpgwaccount.schema</td>";
+    $messages['phpgroupware']['msg']  = _("Support for phpgroupware disabled, no schema seems to be installed");
+    $affich['phpgroupware']['msg']=$messages['phpgroupware']['msg']."<td class=\"check\">phpgwaccount.schema</td>";
+    $messages['phpgroupware']['status']  = FALSE;
+    $affich['phpgroupware']['status']    = FALSE;
   }else{
-    $affich['phpgroupware']=_("Support for phpgroupware enabled")."<td class=\"check\">phpgwaccount.schema</td>";
+    $affich['phpgroupware']['msg']       = _("Support for phpgroupware enabled")."<td class=\"check\">phpgwaccount.schema</td>";
+    $affich['phpgroupware']['status']    = TRUE;
   }
 
   if (!isset($objectclasses['goFonAccount'])){
-    $messages['phoneaccount']= _("Support for gofon disabled, no schema seems to be installed");
-    $affich['phoneaccount']=$messages['phoneaccount']."<td class=\"check\">gofon.schema</td>";
+    $messages['phoneaccount']['msg']     = _("Support for gofon disabled, no schema seems to be installed");
+    $affich['phoneaccount']['msg']       = $messages['phoneaccount']['msg']."<td class=\"check\">gofon.schema</td>";
+    $messages['phoneaccount']['status']  = FALSE;
+    $affich['phoneaccount']['status']    = FALSE;
   }else{
-    $affich['phoneaccount']=_("Support for gofon enabled")."<td class=\"check\">gofon.schema</td>";
+    $affich['phoneaccount']['msg']       = _("Support for gofon enabled")."<td class=\"check\">gofon.schema</td>";
+    $affich['phoneaccount']['status']    = TRUE;
   }
 
   
-  if(($_SESSION['ldapconf']['mail_methods'][$_SESSION['ldapconf']['mail']] == "kolab"))
-  if(!isset($objectclasses['kolabInetOrgPerson']))
-    {
-    $messages['kolab']= _("Support for Kolab disabled, no schema seems to be installed, setting mail-method to cyrus");
-    $tmp = array_flip($_SESSION['ldapconf']['mail_methods']);
-    $_SESSION['ldapconf']['mail']=$tmp['cyrus'];
-    $affich['kolab']=$messages['kolab']."<td class=\"check\">kolab2.schema</td>";
-  }else{
-    $affich['kolab']=_("Support for Kolab enabled")."<td class=\"check\">gofon.schema</td>";
+  if(($_SESSION['ldapconf']['mail_methods'][$_SESSION['ldapconf']['mail']] == "kolab")){
+    if(!isset($objectclasses['kolabInetOrgPerson']))
+      {
+      $messages['kolab']['msg']          = _("Support for Kolab disabled, no schema seems to be installed, setting mail-method to cyrus");
+      $affich['kolab']['msg']            =$messages['kolab']['msg']."<td class=\"check\">kolab2.schema</td>";
+      
+      $tmp = array_flip($_SESSION['ldapconf']['mail_methods']);
+      $_SESSION['ldapconf']['mail']      =$tmp['cyrus'];
+    
+      $messages['kolab']['status']       = FALSE;
+      $affich['kolab']['status']         = FALSE;
+    }else{
+      $affich['kolab']['msg']            =_("Support for Kolab enabled")."<td class=\"check\">gofon.schema</td>";
+      $affich['kolab']['status']         = TRUE;
+    }
   }
-
-
   if($aff==0)return ($messages);
   else return(array_merge($affich,$affich2));
 
