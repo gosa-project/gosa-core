@@ -65,7 +65,7 @@ function schema_check($server, $admin, $password,$aff=0)
   /* Build LDAP connection */
   $ds= ldap_connect ($server);
   if (!$ds) {
-    return (array(_("Can't bind to LDAP. No schema check possible!")));
+    return (array(array("msg" => _("Can't bind to LDAP. No schema check possible!"), "status" => FALSE)));
   }
   ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
   $r= ldap_bind ($ds, $admin, $password);
@@ -74,7 +74,7 @@ function schema_check($server, $admin, $password,$aff=0)
   $sr  = @ldap_read ($ds, "", "objectClass=*", array("subschemaSubentry"));
   $attr= @ldap_get_entries($ds,$sr);
   if (!isset($attr[0]['subschemasubentry'][0])){
-    return (array(_("Can't get schema information from server. No schema check possible!")));
+    return (array(array("msg" => _("Can't get schema information from server. No schema check possible!"), "status" => FALSE)));
   }
 
   /* Get list of objectclasses */
@@ -83,7 +83,7 @@ function schema_check($server, $admin, $password,$aff=0)
   $sr= ldap_read ($ds, $nb, "objectClass=*", array("objectclasses"));
   $attrs= ldap_get_entries($ds,$sr);
   if (!isset($attrs[0])){
-    return (array(_("Can't get schema information from server. No schema check possible!")));
+    return (array(array("msg" => _("Can't get schema information from server. No schema check possible!"), "status" => FALSE)));
   }
   foreach ($attrs[0]['objectclasses'] as $val){
     $name= preg_replace("/^.* NAME\s+\(*\s*'([^']+)'\s*\)*.*$/", '\\1', $val);
