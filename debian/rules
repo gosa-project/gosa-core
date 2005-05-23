@@ -61,8 +61,8 @@ install-stamp:
 	-chmod +x debian/gosa/user/lib/gosa/*
 	-rm -rf debian/gosa/usr/share/gosa/gen_locale.sh
 	-rm -rf debian/gosa/usr/share/gosa/update.sh
-	-mkdir -p debian/gosa/usr/share/php/smarty/libs
-	-cp include/smarty/plugins/block.t.php debian/gosa/usr/share/php/smarty/libs
+	-mkdir -p debian/gosa/usr/share/php/smarty/libs/plugins
+	-cp include/smarty/plugins/block.t.php debian/gosa/usr/share/php/smarty/libs/plugins
 	-rm -rf debian/gosa/usr/share/gosa/include/smarty
 	-find debian/gosa -type f -exec chmod -x {} \;
 	-sed 's%"CONFIG_TEMPLATE_DIR", "../contrib/"%"CONFIG_TEMPLATE_DIR", "/usr/share/doc/gosa/contrib/"%g' debian/gosa/usr/share/gosa/include/functions.inc > debian/gosa/usr/share/gosa/include/functions.inc.new
