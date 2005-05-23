@@ -194,29 +194,27 @@ class servkolab extends plugin {
     error_reporting(E_ALL);
     $message = array();
     if(($this->kolabFreeBusyFuture==""))    {
-      $message[] = _("Free/Busy settings -> Future days must be set.");
-    }elseif((($this->kolabFreeBusyFuture=="")<0)){
-      $message[] = _("Free/Busy settings -> Future days must be a positive value.");
-    }elseif(strcasecmp($this->kolabFreeBusyFuture,(int)$this->kolabFreeBusyFuture)){
-      $message[] = _("Free/Busy settings -> Future days must be a value.");
+      $message[] = _("Future days in Free/Busy settings must be set.");
+    }elseif(!is_uid($this->kolabFreeBusyFuture) || $this->kolabFreeBusyFuture < 0){
+      $message[] = _("Future days in Free/Busy settings must be a positive value.");
     }
 
     if(!is_int((int)($this->cyrus_quotawarn))) {
-      $message[] = _("Cyrus Quota settings -> The given Quota settings value must be a number.");
+      $message[] = _("The given Quota settings value must be a number.");
     }elseif(!(($this->cyrus_quotawarn<=100)&&($this->cyrus_quotawarn>=0))){
-      $message[] = _("Cyrus Quota settings -> Please choose a value between 1 and 100 for Quota settings.");
+      $message[] = _("Please choose a value between 1 and 100 for Quota settings.");
     }elseif(strcasecmp($this->cyrus_quotawarn,(int)$this->cyrus_quotawarn)){
-      $message[] = _("Cyrus Quota settings -> Future days must be a value.");
+      $message[] = _("Future days must be a value.");
     }
 
     if(empty($this->postfix_mynetworks))
     { 
-      $message[] = _("SMTP privileged networks -> No value is given.");
+      $message[] = _("No SMTP privileged networks set.");
     }
 
     if(empty($this->postfix_relayhost))
     {
-      $message[] = _("SMTP smarthost/relayhost -> No value is given.");
+      $message[] = _("No SMTP smarthost/relayhost set.");
     }
 
 
