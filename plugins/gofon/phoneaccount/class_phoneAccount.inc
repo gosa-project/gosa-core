@@ -110,7 +110,7 @@ class phoneAccount extends plugin
 
     /* Do we represent a valid account? */
     if (!$this->is_account && $this->parent == NULL){
-      $display= "<img src=\"images/stop.png\" align=center>&nbsp;<b>".
+      $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
         _("This account has no phone extensions.")."</b>";
       $display.= back_to_main();
       return($display);
@@ -200,9 +200,9 @@ class phoneAccount extends plugin
         list($number, $timeout)= split(";", $fw);
       }
       $forwarder_list.= "<tr><td>";
-      $forwarder_list.= "<input name=\"fwn$nr\" size=25 align=center maxlength=60 value=\"$number\" $acl>";
+      $forwarder_list.= "<input name=\"fwn$nr\" size=25 align=\"middle\" maxlength=60 value=\"$number\" $acl>";
       $forwarder_list.= "</td><td>";
-      $forwarder_list.= "<input name=\"fwt$nr\" size=5 align=center maxlength=5 value=\"$timeout\" $acl>";
+      $forwarder_list.= "<input name=\"fwt$nr\" size=5 align=\"middle\" maxlength=5 value=\"$timeout\" $acl>";
       $forwarder_list.= "</td><td>";
       $forwarder_list.= "<input type=\"submit\" value=\""._("Add")."\" name=\"add_fw$nr\" $acl>";
       if (count($this->forwarders) > 1){
