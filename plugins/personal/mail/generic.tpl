@@ -11,7 +11,11 @@
      <td>{t}Server{/t}</td>
      <td>
       <select size="1" name="gosaMailServer" {$gosaMailServerACL} title="{t}Specify the mail server where the user will be hosted on{/t}">
-       {html_options values=$mailServers output=$mailServers selected=$gosaMailServer}
+		{if $mailServers ==""}
+		    {html_options values=$mailServers output=$mailServers selected=$gosaMailServer}
+		{else}
+			<option>
+		{/if}
       </select>
      </td>
     </tr>
@@ -47,7 +51,12 @@
    <h2><img alt="" align="middle" src="images/alternatemail.png"> {t}Alternative addresses{/t}</h2>
    <select style="width:350px; height:100px;" name="alternates_list[]" size=15
 	 multiple title="{t}List of alternative mail addresses{/t}">
-    {html_options values=$gosaMailAlternateAddress output=$gosaMailAlternateAddress}
+        {if $gosaMailAlternateAddress ==""}
+            {html_options values=$gosaMailAlternateAddress output=$gosaMailAlternateAddress}
+        {else}
+            <option>
+        {/if}
+    
    </select>
    <br>
    <input name="alternate_address" size=30 align="middle" maxlength="60"{$gosaMailAlternateAddressACL} value="">
@@ -78,11 +87,20 @@
    <input type=checkbox name="use_spam_filter" value="1" {$use_spam_filter}
 	{$gosaSpamSortLevelACL} title="{t}Select if you want to filter this mails through spamassassin{/t}"> {t}Move mails tagged with spam level greater than{/t}
    <select size="1" name="gosaSpamSortLevel" {$gosaSpamSortLevelACL} title="{t}Choose spam level - smaller values are more sensitive{/t}">
-    {html_options values=$spamlevel output=$spamlevel selected=$gosaSpamSortLevel}
+        {if $spamlevel ==""}
+            {html_options values=$spamlevel output=$spamlevel selected=$gosaSpamSortLevel}
+        {else}
+            <option>
+        {/if}
+ {html_options values=$spamlevel output=$spamlevel selected=$gosaSpamSortLevel}
    </select>
    {t}to folder{/t}
    <select size="1" name="gosaSpamMailbox" {$gosaSpamMailboxACL}>
-    {html_options values=$spambox output=$spambox selected=$gosaSpamMailbox}
+        {if $spambox ==""}
+        	{html_options values=$spambox output=$spambox selected=$gosaSpamMailbox}
+		{else}
+            <option>
+        {/if}
    </select>
    <br>
    <input type=checkbox name="use_mailsize_limit" value="1" {$use_mailsize_limit}
@@ -96,12 +114,17 @@
    <p style="margin-bottom:0px;">
     <b>{t}Vacation message{/t}</b>
    </p>
-   <textarea style="width:350px; height:100px;" name="gosaVacationMessage" rows="4"
+   <textarea style="width:350px; height:100px;" name="gosaVacationMessage" rows="4" cols="512"
 	{$gosaVacationMessageACL}>{$gosaVacationMessage}</textarea>
    <br>
    {if $show_templates eq "true"}
    <select name="vacation_template">
-    {html_options options=$vacationtemplates selected=$template}
+        {if $vacationtemplates ==""}
+        	{html_options options=$vacationtemplates selected=$template}
+		{else}
+            <option>
+        {/if}
+	{html_options options=$vacationtemplates selected=$template}
    </select>
    <input type="submit" value="{t}Import{/t}" name="import_vacation"
 	{$gosaVacationMessageACL}>
@@ -112,7 +135,11 @@
     <b>{t}Forward messages to{/t}</b>
    </p>
    <select style="width:350px; height:100px;" name="forwarder_list[]" size=15 multiple>
-    {html_options values=$gosaMailForwardingAddress output=$gosaMailForwardingAddress selected=$template}
+        {if $gosaMailForwardingAddress ==""}
+			{html_options values=$gosaMailForwardingAddress output=$gosaMailForwardingAddress selected=$template}        
+		{else}
+            <option>
+        {/if}
    </select>
    <br>
    <input name="forward_address" size=20 align="middle" maxlength=60

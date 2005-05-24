@@ -889,11 +889,11 @@ function print_red()
   /* If DEBUGLEVEL is set, we're in web mode, use textual output in
      the other case... */
   if (isset($_SESSION['DEBUGLEVEL'])){
-    $_SESSION['errors'].= "<div align=\"middle\" style=\"border-width:5px;".
+    $_SESSION['errors'].= "<div align=\"center\" style=\"border-width:5px;".
       "border-style:solid;border-color:red; background-color:black;".
       "margin-bottom:10px; padding:8px;\"><table><tr><td><img alt=\"\" src=\"".
       get_template_path('images/warning.png')."\"></td>".
-      "<td width=\"100%\" align=\"middle\"><font color=#FFFFFF>".
+      "<td width=\"100%\" align=\"center\"><font color=\"#FFFFFF\">".
       "<b style='font-size:16px;'>$string</b></font></td><td>".
       "<img alt=\"\"src=\"".get_template_path('images/warning.png').
       "\"></td></tr></table></div>\n";
