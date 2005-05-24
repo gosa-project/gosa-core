@@ -495,7 +495,11 @@ class posixAccount extends plugin
     /* Load attributes and acl's */
     foreach($this->attributes as $val){
       if(($_SESSION["js"])&&(($val=="uidNumber")||($val=="gidNumber")))
-        continue;
+        {
+          $smarty->assign("$val"."ACL","");
+          $smarty->assign("$val", $this->$val);
+          continue;
+        }
       $smarty->assign("$val", $this->$val);
       $smarty->assign("$val"."ACL", chkacl($this->acl,$val));
     }
