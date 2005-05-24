@@ -116,6 +116,9 @@
    </h2>
    <select style="width:350px;" id="wslist" name="workstation_list[]" size=4 multiple {$trustmodeACL} {$trusthide}>
     {html_options values=$workstations output=$workstations}
+	{if $emptyArrAccess}
+		<option>
+	{/if}
    </select>
    <br>
    <input type="submit" id="add_ws" value="{t}Add{/t}" name="add_ws"

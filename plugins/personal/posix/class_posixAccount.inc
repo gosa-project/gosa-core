@@ -512,7 +512,7 @@ class posixAccount extends plugin
       $trustmode= 1;
       // pervent double disable tag in html code, this will disturb our clean w3c html
     
-    if(chkacl($this->acl, "trustmode")!="disabled"){
+    if(chkacl($this->acl, "trustmode")==""){
           $smarty->assign("trusthide", "disabled");
       }else{
           $smarty->assign("trusthide", "");
@@ -533,6 +533,16 @@ class posixAccount extends plugin
     $smarty->assign("trustmode", $trustmode);
     $smarty->assign("trustmodes", array( 0 => _("disabled"), 1 => _("full access"),
           2 => _("allow access to these hosts")));
+
+
+
+    if((count($this->accessTo))==0)
+      $smarty->assign("emptyArrAccess",true);
+    else
+      $smarty->assign("emptyArrAccess",false);
+    
+
+
     $smarty->assign("workstations", $this->accessTo);
 
     $smarty->assign("apply", apply_filter());
