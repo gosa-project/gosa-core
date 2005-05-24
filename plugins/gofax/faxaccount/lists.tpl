@@ -4,10 +4,14 @@
    <b>{t}Blocked numbers/lists{/t}</b>
    <br> 
    <select style="width:350px; height:300px;" name="block_list[]" size=15 multiple>
-    {html_options values=$cblocklist output=$cblocklist}
+	{if $SELECT_cblocklist==true}
+	    {html_options values=$cblocklist output=$cblocklist}
+	{else}
+		<option disabled>
+	{/if}
    </select>
    <br>
-   <input name="block_number" size=25 align=center maxlength=30 {$goFaxBlockListACL} value="">
+   <input name="block_number" size=25 align="middle" maxlength=30 {$goFaxBlockListACL} value="">
    <input type=submit value="{t}Add{/t}" name="add_blocklist_number" {$goFaxBlockListACL}>&nbsp;
    <input type=submit value="{t}Delete{/t}" name="delete_blocklist_number" {$goFaxBlockListACL}>
   </td>
@@ -25,7 +29,11 @@
 
    <b>{t}List of predefined blocklists{/t}</b>
    <select style="width:350px; height:250px;" name="predefined_list[]" size=15 multiple>
-    {html_options options=$list}
+    {if $SELECT_list==true}
+        {html_options values=$list}
+    {else}
+        <option>
+    {/if}
    </select>
   </td>
  </tr>

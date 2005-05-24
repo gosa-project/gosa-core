@@ -2,13 +2,13 @@
 <table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
    <td>
-    <table width=100% cellpadding=0>
+    <table width="100%" cellpadding=0>
     <tr><td>
     <input type="checkbox" name="filterF" id="filterF" value="F" {$filterF} {$gosaProxyAcctFlagsACL} {$pstate}>
     {t}Filter unwanted content (i.e. pornographic or violence related){/t}
     </td></tr>
      <tr>
-      <td width=50%>
+      <td width="50%">
     <input type="checkbox" name="filterT" id="filterT" value="T" {$filterT} {$gosaProxyAcctFlagsACL} {$pstate}>
     {t}Limit proxy access to working time{/t}
     <br>

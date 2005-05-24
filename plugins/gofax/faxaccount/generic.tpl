@@ -3,7 +3,7 @@
  <!-- Headline container -->
  <tr>
    <td style="width:50%; vertical-align:top;">
-     <h2><img align="center" src="images/rightarrow.png"> {t}Generic{/t}</h2>
+     <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
 
      <table>
        <tr>
@@ -35,7 +35,7 @@
     &nbsp;
    </td>
    <td style="vertical-align:top; width:100%">
-     <h2><img align="center" src="images/printer.png"> {t}Delivery methods{/t}</h2>
+     <h2><img alt="" align="middle" src="images/printer.png"> {t}Delivery methods{/t}</h2>
 
      <input type=checkbox name="goFaxIsEnabled" value="1" {$goFaxIsEnabled} {$goFaxIsEnabledACL}>
      {t}Temporary disable fax usage{/t}<br>
@@ -65,11 +65,15 @@
 <table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
   <tr>
     <td style="width:50%;">
-    <h2><img align="center" src="images/fax_small.png"> {t}Alternate fax numbers{/t}</h2>
+    <h2><img alt="" align="middle" src="images/fax_small.png"> {t}Alternate fax numbers{/t}</h2>
      <select style="width:350px; height:100px;" name="alternate_list[]" size=15 multiple {$facsimileAlternateTelephoneNumberACL}>
-      {html_options values=$facsimileAlternateTelephoneNumber output=$facsimileAlternateTelephoneNumber}
+      	{if $SELECT_facsimileAlternateTelephoneNumber==true}
+			{html_options values=$facsimileAlternateTelephoneNumber output=$facsimileAlternateTelephoneNumber}
+		{else}
+			<option>
+        {/if}
      </select><br>
-     <input name="forward_address" size=20 align=center maxlength=60 {$facsimileAlternateTelephoneNumberACL} value="">
+     <input name="forward_address" size=20 align="middle" maxlength=60 {$facsimileAlternateTelephoneNumberACL} value="">
      <input type=submit value="{t}Add{/t}" name="add_alternate" {$facsimileAlternateTelephoneNumberACL}>&nbsp;
      <input type=submit value="{t}Add local{/t}" name="add_local_alternate" {$facsimileAlternateTelephoneNumberACL}>&nbsp;
      <input type=submit value="{t}Delete{/t}" name="delete_alternate" {$facsimileAlternateTelephoneNumberACL}>
@@ -80,7 +84,7 @@
     </td>
     
     <td style="vertical-align:top; width:100%">
-      <h2><img align="center" src="images/false.png"> {t}Blocklists{/t}</h2>
+      <h2><img alt="" align="middle" src="images/false.png"> {t}Blocklists{/t}</h2>
       <table>
         <tr>
           <td>{t}Blocklists for incoming fax{/t}</td>

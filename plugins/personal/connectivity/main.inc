@@ -109,20 +109,20 @@ if (!$remove_lock){
   foreach ($connectivity->plugin_name as $name){
     $in_edit_mode|= $connectivity->plugin[$name]->is_account;
   }
+  $display.= "<p class=\"plugbottom\">";
   if ($in_edit_mode){
-    $display.= "<p class=\"plugbottom\">";
 
     if (isset($_SESSION['edit'])){
       $display.= "<input type=submit name=\"edit_finish\" value=\""._("Finish")."\">\n";
       $display.= "&nbsp;";
       $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
-      $info= "<img align=\"middle\" src=\"".get_template_path('images/closedlock.png').
+      $info= "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png').
              "\"> ".$ui->dn."&nbsp;";
     } else {
-      $info= "<img align=\"middle\" src=\"".get_template_path('images/openlock.png').
+      $info= "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/openlock.png').
              "\"> ".$ui->dn."&nbsp;";
       if ($editacl != "#none#"){
-        $info.= "<img align=\"middle\" src=\"".get_template_path('images/lamp.png').
+        $info.= "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/lamp.png').
                 "\">"._("Click the 'Edit' button below to change informations in this dialog");
         $display.= "<input type=submit name=\"edit\" value=\""._("Edit")."\">\n";
       }

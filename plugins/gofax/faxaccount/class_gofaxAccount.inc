@@ -107,7 +107,7 @@ class gofaxAccount extends plugin
 
     /* Do we represent a valid account? */
     if (!$this->is_account && $this->parent == NULL){
-      $display= "<img src=\"images/stop.png\" align=center>&nbsp;<b>".
+      $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
         _("This account has no fax extensions.")."</b>";
       $display.= back_to_main();
       return ($display);
@@ -347,11 +347,28 @@ class gofaxAccount extends plugin
       $smarty->assign("goFaxBlockListACL", chkacl($this->acl, "goFaxBlockList"));
       $smarty->assign("departments", $this->config->idepartments);
       $smarty->assign("list", $list);
+      
       if (isset($_POST['department'])){
         $smarty->assign("department", $_POST['department']);
       } else {
         $smarty->assign("department", "");
       }
+
+      if(count($this->current_blocklist))   {
+        $smarty->assign("SELECT_cblocklist",true);
+      }else {
+        $smarty->assign("SELECT_cblocklist",false);
+      }
+
+      if(count($list))   {
+        $smarty->assign("SELECT_list",true);
+      }else {
+        $smarty->assign("SELECT_list",false);
+      }
+
+
+
+
       $display.= $smarty->fetch (get_template_path('lists.tpl', TRUE, dirname(__FILE__)));
       return ($display);
     }
@@ -416,6 +433,14 @@ class gofaxAccount extends plugin
     } else {
       $smarty->assign("fax_to_printer", "");
     }
+
+    if(count($this->facsimileAlternateTelephoneNumber))   {
+      $smarty->assign("SELECT_facsimileAlternateTelephoneNumber",true);
+    }else {
+      $smarty->assign("SELECT_facsimileAlternateTelephoneNumber",false);
+    }
+
+
     $display.= $smarty->fetch (get_template_path('generic.tpl', TRUE, dirname(__FILE__)));
     return ($display);
   }
