@@ -217,31 +217,31 @@ msgstr ""
 
 #: plugins/personal/mail/class_mailAccount.inc:189
 msgid "This account has no mail extensions."
-msgstr "Questa identità non ha le estenzioni per la posta"
+msgstr "Questa identità non ha le estensioni per la posta"
 
 #: plugins/personal/mail/class_mailAccount.inc:197
 #: plugins/admin/groups/class_groupMail.inc:187
 msgid "Remove mail account"
-msgstr "Rimuovi le estenzioni di posta"
+msgstr "Rimuovi le estensioni di posta"
 
 #: plugins/personal/mail/class_mailAccount.inc:198
 #: plugins/admin/groups/class_groupMail.inc:188
 msgid ""
 "This account has mail features enabled. You can disable them by clicking "
 "below."
-msgstr "Questa identià possiede estenzioni di posta."
+msgstr "Questa identià possiede estensioni di posta."
 
 #: plugins/personal/mail/class_mailAccount.inc:200
 #: plugins/admin/groups/class_groupMail.inc:190
 msgid "Create mail account"
-msgstr "Crea estenzioni di posta"
+msgstr "Crea estensioni di posta"
 
 #: plugins/personal/mail/class_mailAccount.inc:201
 #: plugins/admin/groups/class_groupMail.inc:191
 msgid ""
 "This account has mail features disabled. You can enable them by clicking "
 "below."
-msgstr "Questa identità non possiede estenzioni di posta."
+msgstr "Questa identità non possiede estensioni di posta."
 
 #: plugins/personal/mail/class_mailAccount.inc:249
 msgid ""
@@ -924,36 +924,36 @@ msgstr "automatico"
 
 #: plugins/personal/posix/class_posixAccount.inc:218
 msgid "This account has no unix extensions."
-msgstr "Questa identità non possiede estenzioni Unix"
+msgstr "Questa identità non possiede estensioni Unix"
 
 #: plugins/personal/posix/class_posixAccount.inc:238
 #: plugins/personal/posix/class_posixAccount.inc:241
 msgid "Remove posix account"
-msgstr "Elimina estenzioni Unix"
+msgstr "Elimina estensioni Unix"
 
 #: plugins/personal/posix/class_posixAccount.inc:239
 msgid ""
 "This account has unix features enabled. To disable them, you'll need to "
 "remove the samba account first."
 msgstr ""
-"Questa identià possiede estenzioni Unix. Per eliminarle devi eliminare prima "
-"le estenzioni Samba."
+"Questa identià possiede estensioni Unix. Per eliminarle devi eliminare prima "
+"le estensioni Samba."
 
 #: plugins/personal/posix/class_posixAccount.inc:242
 msgid ""
 "This account has posix features enabled. You can disable them by clicking "
 "below."
-msgstr "Questa identià possiede estenzioni Unix."
+msgstr "Questa identià possiede estensioni Unix."
 
 #: plugins/personal/posix/class_posixAccount.inc:245
 msgid "Create posix account"
-msgstr "Crea estenzioni Unix"
+msgstr "Crea estensioni Unix"
 
 #: plugins/personal/posix/class_posixAccount.inc:246
 msgid ""
 "This account has posix features disabled. You can enable them by clicking "
 "below."
-msgstr "Questa identità non possiede estenzioni Unix"
+msgstr "Questa identità non possiede estensioni Unix"
 
 #: plugins/personal/posix/class_posixAccount.inc:431
 #, php-format
@@ -1340,36 +1340,36 @@ msgstr ""
 
 #: plugins/personal/samba/class_sambaAccount.inc:193
 msgid "This account has no samba extensions."
-msgstr "Questa identità non possiede estenzioni Samba."
+msgstr "Questa identità non possiede estensioni Samba."
 
 #: plugins/personal/samba/class_sambaAccount.inc:202
 msgid "Remove samba account"
-msgstr "Elimina estenzioni Samba"
+msgstr "Elimina estensioni Samba"
 
 #: plugins/personal/samba/class_sambaAccount.inc:203
 msgid ""
 "This account has samba features enabled. You can disable them by clicking "
 "below."
-msgstr "Questa identià possiede estenzioni Samba."
+msgstr "Questa identià possiede estensioni Samba."
 
 #: plugins/personal/samba/class_sambaAccount.inc:213
 #: plugins/personal/samba/class_sambaAccount.inc:216
 msgid "Create samba account"
-msgstr "Crea estenzioni Samba"
+msgstr "Crea estensioni Samba"
 
 #: plugins/personal/samba/class_sambaAccount.inc:214
 msgid ""
 "This account has samba features disabled. You can enable them by clicking "
 "below."
-msgstr "Questa identità non possiede estenzioni Samba."
+msgstr "Questa identità non possiede estensioni Samba."
 
 #: plugins/personal/samba/class_sambaAccount.inc:217
 msgid ""
 "This account has samba features disabled. Posix features are needed for "
 "samba accounts, enable them first."
 msgstr ""
-"Questa identità non possiede estenzioni Samba. Per poterle creare occorre "
-"creare prima le estenzioni Unix."
+"Questa identità non possiede estensioni Samba. Per poterle creare occorre "
+"creare prima le estensioni Unix."
 
 #: plugins/personal/samba/class_sambaAccount.inc:442
 msgid "input on, notify on"
@@ -2439,27 +2439,27 @@ msgstr "FAX"
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:111
 msgid "This account has no fax extensions."
-msgstr "Questa identità non possiede estenzioni FAX"
+msgstr "Questa identità non possiede estensioni FAX"
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:120
 msgid "Remove fax account"
-msgstr "Elimina estenzioni FAX"
+msgstr "Elimina estensioni FAX"
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:121
 msgid ""
 "This account has fax features enabled. You can disable them by clicking "
 "below."
-msgstr "Questa identià possiede estenzioni FAX."
+msgstr "Questa identià possiede estensioni FAX."
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:123
 msgid "Create fax account"
-msgstr "Crea estenzioni FAX"
+msgstr "Crea estensioni FAX"
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:124
 msgid ""
 "This account has fax features disabled. You can enable them by clicking "
 "below."
-msgstr "Questa identità non possiede estenzioni FAX"
+msgstr "Questa identità non possiede estensioni FAX"
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:192
 msgid "You're trying to add an invalid phone number."
@@ -3364,23 +3364,23 @@ msgstr ""
 
 #: plugins/admin/groups/class_groupApplication.inc:69
 msgid "Remove applications"
-msgstr "Elimina estenzioni per le applicazioni"
+msgstr "Elimina estensioni per le applicazioni"
 
 #: plugins/admin/groups/class_groupApplication.inc:70
 msgid ""
 "This group has application features enabled. You can disable them by "
 "clicking below."
-msgstr "Questo gruppo non possiede estenzioni per le applicazioni."
+msgstr "Questo gruppo non possiede estensioni per le applicazioni."
 
 #: plugins/admin/groups/class_groupApplication.inc:72
 msgid "Create applications"
-msgstr "Crea estenzioni per le applicazioni"
+msgstr "Crea estensioni per le applicazioni"
 
 #: plugins/admin/groups/class_groupApplication.inc:73
 msgid ""
 "This group has application features disabled. You can enable them by "
 "clicking below."
-msgstr "Questo gruppo non possiede estenzioni per le applicazioni."
+msgstr "Questo gruppo non possiede estensioni per le applicazioni."
 
 #: plugins/admin/groups/class_groupApplication.inc:107
 msgid "The selected application name is not uniq. Please check your LDAP."
@@ -5237,27 +5237,27 @@ msgstr ""
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:114
 msgid "This account has no phone extensions."
-msgstr "Questa identità non possiede estenzioni telefoniche"
+msgstr "Questa identità non possiede estensioni telefoniche"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:124
 msgid "Remove phone account"
-msgstr "Elimina estenzioni telefoniche"
+msgstr "Elimina estensioni telefoniche"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:125
 msgid ""
 "This account has phone features enabled. You can disable them by clicking "
 "below."
-msgstr "Questa identià possiede estenzioni telefoniche."
+msgstr "Questa identià possiede estensioni telefoniche."
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:127
 msgid "Create phone account"
-msgstr "Crea estenzioni telefoniche"
+msgstr "Crea estensioni telefoniche"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:128
 msgid ""
 "This account has phone features disabled. You can enable them by clicking "
 "below."
-msgstr "Questa identità non possiede estenzioni telefoniche"
+msgstr "Questa identità non possiede estensioni telefoniche"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:140
 msgid "Please enter a valid phone number!"
