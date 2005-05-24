@@ -450,8 +450,8 @@ function parse_contrib_conf()
   $replacements['{LDAPHOST}']               =   $ldapconf['uri'];
   $replacements['{PASSWORD}']               =   $ldapconf['password'];
   $replacements['{CRYPT}']                  =   $ldapconf['arr_cryptkeys'][$ldapconf['arr_crypts']];
-  $replacements['{SID}']                    =   "";
-  $replacements['{RIDBASE}']                =   "";
+  $replacements['{SID}\n']                    =   "";
+  $replacements['{RIDBASE}\n']                =   "";
   $replacements['{MAILMETHOD}']             =   $ldapconf['mail_methods'][$ldapconf['mail']];
   $replacements['{SMBHASH}']                =   $pwdhash;
   $replacements['{GOVERNMENTMODE}']         =   "false"; 
@@ -471,7 +471,7 @@ function parse_contrib_conf()
 
   $possible_plugins['webdav'][]         ="'\n.*<tab.*webdav.*>.*\n'i";
 
-  $possible_plugins['phpgroupware'][]   ="'\n.*<tab.*phpgroupware.*>'i";
+  $possible_plugins['phpgroupware'][]   ="'\n.*<tab.*phpgroupware.*>.*\n'i";
 
 
   // Header information
@@ -508,7 +508,7 @@ function parse_contrib_conf()
     
     if($ldapconf['mail_methods'][$ldapconf['mail']]=="kolab")
       {
-      $replacements['{kolabAccount}']  ="<tab class=\"kolabAccount\" />";
+      $replacements['{kolabAccount}']  ="<tab class=\"kolabAccount\" />\n     ";
       $replacements['{servKolab}']     ="<tab class=\"servkolab\" name=\"Kolab\" />";
       }
       
@@ -868,6 +868,9 @@ function show_setup_page4($withoutput = true)
     // Check if all needed vars are submitted
     foreach($checkvars as $key)
     {
+    if($key == "peopleou")  continue;
+    if($key == "groupou")  continue;
+  
       if((isset($_POST[$key]))&&($_POST[$key]!=""))
       {
         $_SESSION['ldapconf'][$key] = $_POST[$key];
@@ -951,8 +954,6 @@ function show_setup_page5($withoutput=true)
 {
   // Get ldapconf
   $ldapconf= $_SESSION['ldapconf'];
-
-  print_a($_SESSION);
 
   // get smarty
   $smarty = get_smarty();
