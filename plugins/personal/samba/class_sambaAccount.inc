@@ -189,7 +189,7 @@ class sambaAccount extends plugin
     }
     /* Do we represent a valid account? */
     if (!$this->is_account && $this->parent == NULL){
-      $display= "<img src=\"images/stop.png\" align=center>&nbsp;<b>".
+      $display= "<img src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
         _("This account has no samba extensions.")."</b>";
       $display.= back_to_main();
       return ($display);
