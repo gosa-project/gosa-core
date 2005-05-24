@@ -3,7 +3,7 @@
  <!-- Headline container -->
  <tr>
   <td colspan=2 style="width:50%; vertical-align:top;">
-   <h2><img align="center" src="images/rightarrow.png"> {t}Generic{/t}</h2>
+   <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
   </td>
  </tr>
  <tr>
@@ -45,7 +45,7 @@
 
 <p class="seperator">&nbsp;</p>
 
-<h2><img align="center" src="images/certs.png"> {t}Access options{/t}</h2>
+<h2><img  alt="" align="middle" src="images/certs.png"> {t}Access options{/t}</h2>
 
 <table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
  <tr>
