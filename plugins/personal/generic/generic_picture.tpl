@@ -3,7 +3,7 @@
  <!-- Headline container -->
  <tr>
    <td colspan=2>
-     <h2><img align="center" src="images/head.png"> {t}Personal picture{/t}</h2>
+     <h2><img alt="" align="middle" src="images/head.png"> {t}Personal picture{/t}</h2>
    </td>
  </tr>
 

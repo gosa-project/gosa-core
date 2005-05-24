@@ -3,7 +3,7 @@
  <!-- Headline container -->
  <tr>
   <td colspan=4>
-   <h2><img align="center" src="images/head.png"> {t}Personal information{/t}</h2>
+   <h2><img alt="" align="middle" src="images/head.png"> {t}Personal information{/t}</h2>
   </td>
  </tr>
 
@@ -158,7 +158,7 @@
  <!-- Headline container -->
  <tr>
   <td colspan=3>
-   <h2><img align="center" src="images/house.png"> {t}Organizational information{/t}</h2>
+   <h2><img alt="" align="middle" src="images/house.png"> {t}Organizational information{/t}</h2>
   </td>
  </tr>
 
