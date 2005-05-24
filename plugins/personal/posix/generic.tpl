@@ -82,7 +82,6 @@
 </table>
 
 <p class="seperator">&nbsp;</p>
-</p>
 <table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td style="vertical-align:top; width:50%">
