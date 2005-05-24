@@ -278,10 +278,13 @@ if ($error_collector != ""){
 $display = $mtmp.$smarty->fetch(get_template_path('framework.tpl'));
 print $display;
 
-$fp = fopen("/tmp/current.html","w+");
-fwrite($fp,$display,strlen($display));
-$str = shell_exec( "curl -F uploaded_file=@/tmp/current.html http://127.0.0.1/w3c-markup-validator/check ");
-print $str;
+if(file_exists("dow3ccheck.chk"))
+  {
+  $fp = fopen("/tmp/current.html","w+");
+  fwrite($fp,$display,strlen($display));
+  $str = shell_exec( "curl -F uploaded_file=@/tmp/current.html http://127.0.0.1/w3c-markup-validator/check ");
+  print $str;
+  }
 
 $_SESSION['plist']= $plist;
 
