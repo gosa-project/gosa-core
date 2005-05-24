@@ -395,6 +395,19 @@ class gofaxAccount extends plugin
       } else {
         $smarty->assign("department", "");
       }
+ 
+      if(count($this->current_blocklist))   {
+        $smarty->assign("SELECT_cblocklist",true);
+      }else {
+        $smarty->assign("SELECT_cblocklist",false);
+      }
+
+      if(count($list))   {
+        $smarty->assign("SELECT_list",true);
+      }else {
+        $smarty->assign("SELECT_list",false);
+      }
+
       $display.= $smarty->fetch (get_template_path('lists.tpl', TRUE, dirname(__FILE__)));
       return ($display);
     }
