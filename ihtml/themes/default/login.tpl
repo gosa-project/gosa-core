@@ -1,13 +1,13 @@
 {* GOsa login - smarty template *}
-
-<!-- Spacer for some browsers -->
 {$php_errors}
 {$errors}
+
+<!-- Spacer for some browsers -->
 <div class='gosaLoginSpacer'></div>
 
 <table class='gosaLoginMask' align='center'>
  <tr>
-  <td class='gosaLoginBack'>
+  <td class='gosaLoginBack' width="606">
    <div class='gosaLoginBack'>
        
     <p class='gosaLoginHeader'>
