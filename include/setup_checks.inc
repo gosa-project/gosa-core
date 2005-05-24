@@ -764,6 +764,10 @@ function show_setup_page4($withoutput = true)
 {
 
 
+
+  if(!isset($_SESSION['ldapconf']['base']))           $_SESSION['ldapconf']['base']         = $base;
+
+  if(!isset($_SESSION['ldapconf']['base']))           $_SESSION['ldapconf']['base']         = $base;
   require_once("class_password-methods.inc");
 
   error_reporting(E_ALL);
@@ -777,7 +781,7 @@ function show_setup_page4($withoutput = true)
   $ldapconf     = $_SESSION['ldapconf'];        // The ldap Configuration informations, we collected while setup 
   $arr_crypts   = array();                      // array which includes contains all possible password crypting methods
   $temp         = "";                           // Temp
-  $checkvars    = array("location","admin","password","peopleou","peopledn","arr_crypts","mail","uidbase");
+  $checkvars    = array("location","admin","password","peopleou","peopledn","arr_crypts","mail","uidbase","base");
 
 
   if(!isset($_SESSION['ldapconf']['arr_cryptkeys']))
@@ -888,7 +892,8 @@ function show_setup_page4($withoutput = true)
 
   }
 
-
+  if(isset($_POST['base']))
+    $_SESSION['ldapconf']['base']= $_POST['base'];
 
   $smarty->assign("arr_cryptkeys",$_SESSION['ldapconf']['arr_cryptkeys']);
   $smarty->assign("mail_methods", $_SESSION['ldapconf']['mail_methods']);
@@ -946,6 +951,8 @@ function show_setup_page5($withoutput=true)
 {
   // Get ldapconf
   $ldapconf= $_SESSION['ldapconf'];
+
+  print_a($_SESSION);
 
   // get smarty
   $smarty = get_smarty();
