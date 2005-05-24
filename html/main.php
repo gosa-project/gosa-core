@@ -286,6 +286,12 @@ if(file_exists("dow3ccheck.chk"))
   $str = shell_exec( "curl -F uploaded_file=@/tmp/current.html http://127.0.0.1/w3c-markup-validator/check ");
   if(!preg_match("/This Page Is Valid/",$str ))
     print $str;
+  else
+    print '<p>
+      <a href="http://dyn-209/w3c-markup-validator/check?uri=referer"><img border="0"
+          src="http://dyn-209/w3c-markup-validator/images/vh401.png"
+          alt="Valid HTML 4.01!" height="31" width="88"></a>
+    </p>';
   }
 
 $_SESSION['plist']= $plist;
