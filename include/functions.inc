@@ -889,13 +889,13 @@ function print_red()
   /* If DEBUGLEVEL is set, we're in web mode, use textual output in
      the other case... */
   if (isset($_SESSION['DEBUGLEVEL'])){
-    $_SESSION['errors'].= "<div align=center style=\"border-width:5px;".
+    $_SESSION['errors'].= "<div align=\"middle\" style=\"border-width:5px;".
       "border-style:solid;border-color:red; background-color:black;".
-      "margin-bottom:10px; padding:8px;\"><table><tr><td><img src=\"".
+      "margin-bottom:10px; padding:8px;\"><table><tr><td><img alt=\"\" src=\"".
       get_template_path('images/warning.png')."\"></td>".
-      "<td width=100% align=center><font color=#FFFFFF>".
+      "<td width=\"100%\" align=\"middle\"><font color=#FFFFFF>".
       "<b style='font-size:16px;'>$string</b></font></td><td>".
-      "<img src=\"".get_template_path('images/warning.png').
+      "<img alt=\"\"src=\"".get_template_path('images/warning.png').
       "\"></td></tr></table></div>\n";
   } else {
     echo "Error: $string\n";
@@ -1155,7 +1155,7 @@ function range_selector($dcnt,$start,$range=25)
   if ($start > 0 ) {
     $output.="  <a href= \"main.php?plug=".validate($_GET['plug'])."&start=".
       (($start-$range))."\">".
-      "<img src=\"images/back.png\" border=0 align=\"center\"></a>";
+      "<img alt=\"\" src=\"images/back.png\" border=0 align=\"middle\"></a>";
   }
 
   /* Draw pages */
@@ -1174,7 +1174,7 @@ function range_selector($dcnt,$start,$range=25)
   if($start < ($dcnt-$range)) {
     $output.="  <a href= \"main.php?plug=".validate($_GET['plug'])."&start=".
       (($start+($range)))."\">".
-      "<img src=\"images/forward.png\" border=0 align=\"center\"></a>";
+      "<img alt=\"\" src=\"images/forward.png\" border=0 align=\"middle\"></a>";
   }
 
   return($output);
@@ -1537,7 +1537,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
     if ($_SESSION['js']==FALSE){
       $error_collector= "<div>";
     } else {
-      $error_collector= "<table style='width:100%;background-color:#E0E0E0;border-bottom:1px solid black'><tr><td><img align=center src='".get_template_path('images/warning.png')."'>&nbsp;<font style='font-size:14px;font-weight:bold'>"._("Generating this page caused the PHP interpreter to raise some errors!")."</font></td><td align=right><button onClick='toggle(\"errorbox\")'>"._("Toggle information")."</button></td></tr></table><div id='errorbox' style='position:absolute; z-index:0; visibility: hidden'>";
+      $error_collector= "<table width=\"100%\" style='background-color:#E0E0E0;border-bottom:1px solid black'><tr><td><img alt=\"\" align=\"middle\" src='".get_template_path('images/warning.png')."'>&nbsp;<font style='font-size:14px;font-weight:bold'>"._("Generating this page caused the PHP interpreter to raise some errors!")."</font></td><td align=right><button onClick='toggle(\"errorbox\")'>"._("Toggle information")."</button></td></tr></table><div id='errorbox' style='position:absolute; z-index:0; visibility: hidden'>";
     }
   }
  
@@ -1545,7 +1545,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
   $trace= debug_backtrace();
   
   /* Create error header */
-  $error_collector.= "<table width=100% cellspacing=0 style='background-color:#402005;color:white;border:2px solid red'><tr><td colspan=3><h1 style='color:white'>"._("PHP error")." \"$errstr\"</h1></td></tr>";
+  $error_collector.= "<table width=\"100%\" cellspacing=0 style='background-color:#402005;color:white;border:2px solid red'><tr><td colspan=3><h1 style='color:white'>"._("PHP error")." \"$errstr\"</h1></td></tr>";
   
   /* Generate trace history */
   for ($index= 1; $index<count($trace); $index++){
@@ -1584,8 +1584,8 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
     $file= $ct['file'];
     $line= $ct['line'];
     $color= ($index&1)?'#404040':'606060';
-    $error_collector.= "<tr style='background-color:$color'><td style='padding-left:20px' width=30%>"._("Trace")."[$index]: $loc</td>";
-    $error_collector.= "<td>"._("File").": $file ("._('Line')." $line)</td><td width=10%>"._("Type").": $type</td></tr>";
+    $error_collector.= "<tr style='background-color:$color'><td style='padding-left:20px' width=\"30%\">"._("Trace")."[$index]: $loc</td>";
+    $error_collector.= "<td>"._("File").": $file ("._('Line')." $line)</td><td width=\"10%\">"._("Type").": $type</td></tr>";
     $error_collector.= "<tr style='background-color:$color'><td colspan=3 style='padding-left:20px;'>"._("Arguments").": $args</td></tr>";
   }
 

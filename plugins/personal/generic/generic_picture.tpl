@@ -12,7 +12,7 @@
 
    <!-- Image container -->
    <td>
-     <img align="bottom" border="1" width="145" height="200" src="getpic.php?rand=$rand">
+     <img alt="" align="bottom" border="1" width="145" height="200" src="getpic.php?rand=$rand">
    </td>
 
    <!-- Name, ... -->
