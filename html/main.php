@@ -258,6 +258,7 @@ if (isset ($_SESSION['post_cnt'])){
 /* Load plugin */
 if (is_file("$plugin_dir/main.inc")){
   require_once ("$plugin_dir/main.inc");
+if(file_exists("dow3ccheck.chk"))
   print $plugin_dir."/main.inc";
 } else {
   print_red(sprintf(_("Can't find any plugin definitions for plugin '%s'!"), $plug));
