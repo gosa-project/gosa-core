@@ -196,8 +196,23 @@ class pluglist {
 				$index= $this->get_index($info['PATH']);
 
 				if ($this->check_access($info['ACL'])){
+				
+				/* Hm this looks doubled */
+   			 	$image= get_template_path('images/'.$info['ICON']);
+                    if ($col > 5){
+						$entries= $entries."</tr><tr>";
+						$col = 1;
+					}
+                    $entries= $entries."<td class=\"iconmenu\" style=\"width:20%;\" onClick='location.href=\"main.php?plug=$index&amp;reset=1\"'".
+                        "><a class=\"iconmenu\" href=\"main.php?plug=$index&amp;reset=1\">".
+                        "<img $isize border=0 align=middle src=\"$image".
+                        "\" alt=\"*\">&nbsp;".
+                        _($plHeadline)."</a></td>\n";
+                    $col++ ;
 
-					/* next row? */
+
+				/*
+					/ * next row? * /
 					$image= get_template_path('images/'.$info['ICON']);
 					if ($col % 5){
 						$entries= $entries."<td class=\"iconmenu\" style=\"width:20%;\" onClick='location.href=\"main.php?plug=$index&amp;reset=1\"'".
@@ -214,6 +229,7 @@ class pluglist {
 							_($plHeadline)."</a></td>\n</tr>\n<tr>\n";
 						$col= 1;
 					}
+				*/
 				}
 			}
 

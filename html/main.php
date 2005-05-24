@@ -257,6 +257,7 @@ if (isset ($_SESSION['post_cnt'])){
 /* Load plugin */
 if (is_file("$plugin_dir/main.inc")){
   require_once ("$plugin_dir/main.inc");
+  print $plugin_dir;
 } else {
   print_red(sprintf(_("Can't find any plugin definitions for plugin '%s'!"), $plug));
   echo $_SESSION['errors'];
