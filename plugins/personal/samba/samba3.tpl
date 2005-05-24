@@ -89,13 +89,13 @@
     <tr>
      <td>{t}Initial program{/t}</td>
      <td>
-      <input name="CtxInitialProgram" id="CtxInitialProgram" size=35 maxlength=60 {$CtxInitialProgramACL} value="{$CtxInitialProgram}" {$CtxInitialProgramMode}>
+      <input name="CtxInitialProgram" id="CtxInitialProgram" size=35 maxlength=60 {if $CtxInitialProgramACL==""}{$CtxInitialProgramMode}{/if} value="{$CtxInitialProgram}" {$CtxInitialProgramACL}>
      </td>
     </tr>
     <tr>
      <td>{t}Working directory{/t}</td>
      <td>
-      <input name="CtxWorkDirectory" id="CtxWorkDirectory" size=35 maxlength=60 {$CtxWorkDirectoryACL} value="{$CtxWorkDirectory}" {$CtxInitialProgramMode}>
+      <input name="CtxWorkDirectory" id="CtxWorkDirectory" size=35 maxlength=60 {if $CtxWorkDirectoryACL==""}{$CtxInitialProgramMode}{/if} value="{$CtxWorkDirectory}" {$CtxInitialProgramACL}>
      </td>
     </tr>
    </table>
@@ -116,7 +116,7 @@
       {t}Connection{/t}
      </td>
      <td>
-      <input name="CtxMaxConnectionTime" id="CtxMaxConnectionTime" size=5 maxlength=5 {$CtxMaxConnectionTimeACL} value="{$CtxMaxConnectionTime}" {$CtxMaxConnectionTimeMode}>
+      <input name="CtxMaxConnectionTime" id="CtxMaxConnectionTime" size=5 maxlength=5 {if $CtxMaxConnectionTimeACL==""}{$CtxMaxConnectionTimeMode}{/if} value="{$CtxMaxConnectionTime}" {$CtxMaxConnectionTimeACL}>
      </td>
     </tr>
     <tr>
@@ -125,7 +125,7 @@
       {t}Disconnection{/t}
      </td>
      <td>
-      <input name="CtxMaxDisconnectionTime" id="CtxMaxDisconnectionTime" size=5 maxlength=5 {$CtxMaxDisconnectionTimeACL} value="{$CtxMaxDisconnectionTime}" {$CtxMaxDisconnectionTimeMode}>
+      <input name="CtxMaxDisconnectionTime" id="CtxMaxDisconnectionTime" size=5 maxlength=5 {if $CtxMaxDisconnectionTimeACL ==""}{$CtxMaxDisconnectionTimeMode}{/if} value="{$CtxMaxDisconnectionTime}" {$CtxMaxDisconnectionTimeACL}>
      </td>
     </tr>
     <tr>
@@ -134,7 +134,7 @@
       {t}IDLE{/t}
      </td>
      <td>
-      <input name="CtxMaxIdleTime" id="CtxMaxIdleTime" size=5 maxlength=5 {$CtxMaxIdleTimeACL} value="{$CtxMaxIdleTime}" {$CtxMaxIdleTimeMode}>
+      <input name="CtxMaxIdleTime" id="CtxMaxIdleTime" size=5 maxlength=5 {if $CtxMaxIdleTimeACL==""}{$CtxMaxIdleTimeMode}{/if} value="{$CtxMaxIdleTime}" {$CtxMaxIdleTimeACL}>
      </td>
     </tr>
    </table>

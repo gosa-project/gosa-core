@@ -466,8 +466,11 @@ class sambaAccount extends plugin
       /* Set checkboxes to checked or unchecked state */
       $smarty->assign("tslogin", $this->mungedObject->getTsLogin()?"checked":"");
       $smarty->assign("tsloginACL", chkacl($this->acl,"tslogin"));
+
       $smarty->assign("inherit", $this->mungedObject->getInheritMode()?"checked":"");
       $smarty->assign("inheritACL", chkacl($this->acl,"inherit"));
+
+
       $smarty->assign("connectclientdrives",
                       $this->mungedObject->getConnectClientDrives()?"checked":"");
       $smarty->assign("connectclientdrivesACL", chkacl($this->acl,"connectclientdrives"));
