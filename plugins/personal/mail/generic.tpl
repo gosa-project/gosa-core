@@ -1,7 +1,7 @@
 <table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td style="width:50%; vertical-align:top;">
-   <h2><img align="center" src="images/rightarrow.png"> {t}Generic{/t}</h2>
+   <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
    <table>
     <tr>
      <td>{t}Primary address{/t}{$must}</td>
@@ -23,7 +23,7 @@
      <td>
       <br>
       {if $quotadefined eq "true"}
-      <img src="progress.php?x=100&amp;y=16&amp;p={$quotausage}" align="center">
+      <img alt="" src="progress.php?x=100&amp;y=16&amp;p={$quotausage}" align="middle">
       {else}
       {t}not defined{/t}
       {/if}
@@ -32,7 +32,7 @@
     <tr>
      <td>{t}Quota size{/t}</td>
      <td>
-      <input name="gosaMailQuota" size=6 align=center maxlength=30 {$gosaMailQuotaACL}
+      <input name="gosaMailQuota" size="6" align="middle" maxlength="30" {$gosaMailQuotaACL}
 		value="{$gosaMailQuota}"> KB
      </td>
     </tr>
@@ -44,14 +44,13 @@
   </td>
 
   <td style="vertical-align:top;">
-   <h2><img align="center" src="images/alternatemail.png"> {t}Alternative addresses{/t}</h2>
+   <h2><img alt="" align="middle" src="images/alternatemail.png"> {t}Alternative addresses{/t}</h2>
    <select style="width:350px; height:100px;" name="alternates_list[]" size=15
 	 multiple title="{t}List of alternative mail addresses{/t}">
     {html_options values=$gosaMailAlternateAddress output=$gosaMailAlternateAddress}
    </select>
    <br>
-   <input name="alternate_address" size=30 align=center maxlength=60
-	{$gosaMailAlternateAddressACL} value="">
+   <input name="alternate_address" size=30 align="middle" maxlength="60"{$gosaMailAlternateAddressACL} value="">
    <input type=submit value="{t}Add{/t}" name="add_alternate"
 	{$gosaMailAlternateAddressACL}>&nbsp;
    <input type=submit value="{t}Delete{/t}" name="delete_alternate"
@@ -62,7 +61,7 @@
 
 <p class="seperator">&nbsp;</p>
 
-<h2><img align="center" src="images/envelope.png"> {t}Mail options{/t}</h2>
+<h2><img alt="" align="middle" src="images/envelope.png"> {t}Mail options{/t}</h2>
 <table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
  <tr style="padding-bottom:0px;">
   <td style="width:45%">
@@ -88,7 +87,7 @@
    <br>
    <input type=checkbox name="use_mailsize_limit" value="1" {$use_mailsize_limit}
 	{$gosaMailMaxSizeACL}> {t}Reject mails bigger than{/t} 
-   <input name="gosaMailMaxSize" size=6 align=center maxlength=30 {$gosaMailMaxSizeACL}
+   <input name="gosaMailMaxSize" size=6 align="middle" maxlength="30" {$gosaMailMaxSizeACL}
 	value="{$gosaMailMaxSize}"> {t}MB{/t}
   </td>
  </tr>
@@ -116,7 +115,7 @@
     {html_options values=$gosaMailForwardingAddress output=$gosaMailForwardingAddress selected=$template}
    </select>
    <br>
-   <input name="forward_address" size=20 align=center maxlength=60
+   <input name="forward_address" size=20 align="middle" maxlength=60
 	{$gosaMailForwardingAddressACL} value="">
    <input type="submit" value="{t}Add{/t}" name="add_forwarder"
 	{$gosaMailForwardingAddressACL}>&nbsp;
@@ -130,7 +129,7 @@
 
 <p class="seperator">&nbsp;</p>
 
-<h2><img align="center" src="images/false.png"> {t}Advanced mail options{/t}</h2>
+<h2><img alt="" align="middle" src="images/false.png"> {t}Advanced mail options{/t}</h2>
 
 <table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
  <tr>
