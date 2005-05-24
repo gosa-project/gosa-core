@@ -2,7 +2,7 @@
 <body>
 {$php_errors}
 <form action='main.php{$plug}' name='mainform' method='post' enctype='multipart/form-data'>
-<table width="100%" border="0" cellspacing="0" cellpadding="0" cellpadding="3" bgcolor="#CDF6BD" height=100%>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#CDF6BD" heigth="100%">
   <tr>
     <td style="height:36px; width:140px; vertical-align:bottom; text-align:center">
      <a href="main.php?version=1" style="vertical-align:bottom;"><img src='{$go_logo}' border="0" alt="GOSA2" align="bottom"></a>
@@ -36,7 +36,7 @@
   </tr>
   <tr style="vertical-align:top;">
     <!-- Menu -->
-    <td style="background-color:#EEFFE6; vertical-align:top;">
+    <td style="background-color:#EEFFE6; vertical-align:top;" >
       <div style="background-color:#CDF6BD; height:12px; width:100%;">&nbsp;</div>
       {$menu}
       <div style="height:100px; width:140px;"></div>
@@ -54,4 +54,4 @@
      </table>
     </td>
   </tr>
-</table></form></body></html>
+</table><div bgcolor="#333333" heigth="100%"></div></form></body></html>

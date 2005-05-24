@@ -223,7 +223,7 @@ if (isset($plug)){
 } else {
   $smarty->assign ("plug", "");
 }
-$smarty->display(get_template_path('headers.tpl'));
+$mtmp= $smarty->fetch(get_template_path('headers.tpl'));
 
 /* React on clicks */
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -273,7 +273,14 @@ if ($error_collector != ""){
 } else {
   $smarty->assign("php_errors", "");
 }
-$smarty->display(get_template_path('framework.tpl'));
+$display = $mtmp.$smarty->fetch(get_template_path('framework.tpl'));
+print $display;
+
+$fp = fopen("/tmp/current.html","w+");
+fwrite($fp,$display,strlen($display));
+$str = shell_exec( "curl -F uploaded_file=@/tmp/current.html http://127.0.0.1/w3c-markup-validator/check ");
+print $str;
+
 $_SESSION['plist']= $plist;
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
