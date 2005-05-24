@@ -2811,41 +2811,41 @@ msgstr ""
 msgid "Need 'sn','givenName' and 'uid' to create user."
 msgstr ""
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:202
+#: plugins/addons/ldapmanager/class_csvimport.inc:200
 msgid "failed"
 msgstr ""
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:206
+#: plugins/addons/ldapmanager/class_csvimport.inc:204
 msgid "ok"
 msgstr ""
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:263
+#: plugins/addons/ldapmanager/class_csvimport.inc:261
 msgid "status"
 msgstr ""
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:267
+#: plugins/addons/ldapmanager/class_csvimport.inc:265
 #, php-format
 msgid "An Error Occured while inserting entry %s - process aborted"
 msgstr ""
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:292
+#: plugins/addons/ldapmanager/class_csvimport.inc:290
 msgid "Nothing to import!"
 msgstr ""
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:301
-#: plugins/addons/ldapmanager/class_csvimport.inc:312
-#: plugins/addons/ldapmanager/class_csvimport.inc:317
+#: plugins/addons/ldapmanager/class_csvimport.inc:299
+#: plugins/addons/ldapmanager/class_csvimport.inc:310
+#: plugins/addons/ldapmanager/class_csvimport.inc:315
 #: plugins/addons/ldapmanager/class_import.inc:58
 #: plugins/addons/ldapmanager/class_import.inc:66
 msgid "There is no file uploaded."
 msgstr ""
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:306
+#: plugins/addons/ldapmanager/class_csvimport.inc:304
 #: plugins/addons/ldapmanager/class_import.inc:51
 msgid "The specified file is empty."
 msgstr ""
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:444
+#: plugins/addons/ldapmanager/class_csvimport.inc:442
 msgid "The selected file does not contain any CSV Data..."
 msgstr ""
 
@@ -4412,136 +4412,6 @@ msgstr ""
 msgid "Logging DB user"
 msgstr ""
 
-#: plugins/admin/systems/class_servKolab.inc:145
-msgid "Remove Kolab extension"
-msgstr ""
-
-#: plugins/admin/systems/class_servKolab.inc:145
-msgid ""
-"This server has kolab features enabled. You can disable them by clicking "
-"below."
-msgstr ""
-
-#: plugins/admin/systems/class_servKolab.inc:148
-msgid "Add Kolab service"
-msgstr ""
-
-#: plugins/admin/systems/class_servKolab.inc:148
-msgid ""
-"This server has kolab features disabled. You can enable them by clicking "
-"below."
-msgstr ""
-
-#: plugins/admin/systems/class_servKolab.inc:167
-#, php-format
-msgid "Include data from %s days in the past when creating free/busy lists"
-msgstr ""
-
-#: plugins/admin/systems/class_servKolab.inc:173
-#, php-format
-msgid "Warn users when using more than %s%% of their mail quota"
-msgstr ""
-
-#: plugins/admin/systems/class_servKolab.inc:197
-msgid "Future days in Free/Busy settings must be set."
-msgstr ""
-
-#: plugins/admin/systems/class_servKolab.inc:199
-msgid "Future days in Free/Busy settings must be a positive value."
-msgstr ""
-
-#: plugins/admin/systems/class_servKolab.inc:203
-msgid "The given Quota settings value must be a number."
-msgstr ""
-
-#: plugins/admin/systems/class_servKolab.inc:205
-msgid "Please choose a value between 1 and 100 for Quota settings."
-msgstr ""
-
-#: plugins/admin/systems/class_servKolab.inc:207
-msgid "Future days must be a value."
-msgstr ""
-
-#: plugins/admin/systems/class_servKolab.inc:212
-msgid "No SMTP privileged networks set."
-msgstr ""
-
-#: plugins/admin/systems/class_servKolab.inc:217
-msgid "No SMTP smarthost/relayhost set."
-msgstr ""
-
-#: plugins/admin/systems/servkolab.tpl:14
-msgid "POP3 service"
-msgstr ""
-
-#: plugins/admin/systems/servkolab.tpl:22
-msgid "POP3/SSL service"
-msgstr ""
-
-#: plugins/admin/systems/servkolab.tpl:30
-msgid "IMAP service"
-msgstr ""
-
-#: plugins/admin/systems/servkolab.tpl:38
-msgid "IMAP/SSL service"
-msgstr ""
-
-#: plugins/admin/systems/servkolab.tpl:46
-msgid "Sieve service"
-msgstr ""
-
-#: plugins/admin/systems/servkolab.tpl:54
-msgid "FTP FreeBusy service (legacy, not interoperable with Kolab2 FreeBusy)"
-msgstr ""
-
-#: plugins/admin/systems/servkolab.tpl:62
-msgid "HTTP FreeBusy service (legacy)"
-msgstr ""
-
-#: plugins/admin/systems/servkolab.tpl:70
-msgid "Amavis email scanning (virus/spam)"
-msgstr ""
-
-#: plugins/admin/systems/servkolab.tpl:81
-msgid "Quota settings"
-msgstr ""
-
-#: plugins/admin/systems/servkolab.tpl:97
-msgid "Free/Busy settings"
-msgstr ""
-
-#: plugins/admin/systems/servkolab.tpl:102
-msgid "Allow unauthenticated downloading of Free/Busy information"
-msgstr ""
-
-#: plugins/admin/systems/servkolab.tpl:117
-msgid "SMTP privileged networks"
-msgstr ""
-
-#: plugins/admin/systems/servkolab.tpl:122
-msgid "Hosts/networks allowed to relay"
-msgstr ""
-
-#: plugins/admin/systems/servkolab.tpl:136
-msgid "SMTP smarthost/relayhost"
-msgstr ""
-
-#: plugins/admin/systems/servkolab.tpl:142
-msgid "Enable MX lookup for relayhost"
-msgstr ""
-
-#: plugins/admin/systems/servkolab.tpl:147
-msgid "Host used to relay mails"
-msgstr ""
-
-#: plugins/admin/systems/servkolab.tpl:161
-msgid "Accept Internet Mail"
-msgstr ""
-
-#: plugins/admin/systems/servkolab.tpl:167
-msgid "Accept mail from other domains over non-authenticated SMTP"
-msgstr ""
-
 #: plugins/admin/systems/wingeneric.tpl:6
 msgid "Machine name"
 msgstr ""
@@ -4948,6 +4818,136 @@ msgstr ""
 msgid "You have no permissions to create a phone on this 'Base'."
 msgstr ""
 
+#: plugins/admin/systems/class_servKolab.inc:145
+msgid "Remove Kolab extension"
+msgstr ""
+
+#: plugins/admin/systems/class_servKolab.inc:145
+msgid ""
+"This server has kolab features enabled. You can disable them by clicking "
+"below."
+msgstr ""
+
+#: plugins/admin/systems/class_servKolab.inc:148
+msgid "Add Kolab service"
+msgstr ""
+
+#: plugins/admin/systems/class_servKolab.inc:148
+msgid ""
+"This server has kolab features disabled. You can enable them by clicking "
+"below."
+msgstr ""
+
+#: plugins/admin/systems/class_servKolab.inc:167
+#, php-format
+msgid "Include data from %s days in the past when creating free/busy lists"
+msgstr ""
+
+#: plugins/admin/systems/class_servKolab.inc:173
+#, php-format
+msgid "Warn users when using more than %s%% of their mail quota"
+msgstr ""
+
+#: plugins/admin/systems/class_servKolab.inc:197
+msgid "Future days in Free/Busy settings must be set."
+msgstr ""
+
+#: plugins/admin/systems/class_servKolab.inc:199
+msgid "Future days in Free/Busy settings must be a positive value."
+msgstr ""
+
+#: plugins/admin/systems/class_servKolab.inc:203
+msgid "The given Quota settings value must be a number."
+msgstr ""
+
+#: plugins/admin/systems/class_servKolab.inc:205
+msgid "Please choose a value between 1 and 100 for Quota settings."
+msgstr ""
+
+#: plugins/admin/systems/class_servKolab.inc:207
+msgid "Future days must be a value."
+msgstr ""
+
+#: plugins/admin/systems/class_servKolab.inc:212
+msgid "No SMTP privileged networks set."
+msgstr ""
+
+#: plugins/admin/systems/class_servKolab.inc:217
+msgid "No SMTP smarthost/relayhost set."
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:14
+msgid "POP3 service"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:22
+msgid "POP3/SSL service"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:30
+msgid "IMAP service"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:38
+msgid "IMAP/SSL service"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:46
+msgid "Sieve service"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:54
+msgid "FTP FreeBusy service (legacy, not interoperable with Kolab2 FreeBusy)"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:62
+msgid "HTTP FreeBusy service (legacy)"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:70
+msgid "Amavis email scanning (virus/spam)"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:81
+msgid "Quota settings"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:97
+msgid "Free/Busy settings"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:102
+msgid "Allow unauthenticated downloading of Free/Busy information"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:117
+msgid "SMTP privileged networks"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:122
+msgid "Hosts/networks allowed to relay"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:136
+msgid "SMTP smarthost/relayhost"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:142
+msgid "Enable MX lookup for relayhost"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:147
+msgid "Host used to relay mails"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:161
+msgid "Accept Internet Mail"
+msgstr ""
+
+#: plugins/admin/systems/servkolab.tpl:167
+msgid "Accept mail from other domains over non-authenticated SMTP"
+msgstr ""
+
 #: plugins/admin/ogroups/tabs_ogroups.inc:19
 msgid "Terminals"
 msgstr ""
@@ -5347,503 +5347,6 @@ msgstr ""
 msgid "Welcome %s!"
 msgstr ""
 
-#: include/class_mail-methods-cyrus.inc:43
-msgid ""
-"Warning: IMAP Server cannot be reached! If you save this account, some mail "
-"settings will not be stored on your server!"
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:106
-#, php-format
-msgid "Can't create IMAP mailbox. Server says '%s'."
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:122
-#, php-format
-msgid "Can't write IMAP quota. Server says '%s'."
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:133
-msgid ""
-"Warning: imap_getacl is not implemented, wouldn't modify acl informations."
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:168
-msgid "Warning: imap_getacl is not available, can't get imap permissions!"
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:190
-#, php-format
-msgid "Can't remove IMAP mailbox. Server says '%s'."
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:218
-#, php-format
-msgid "Can't log into SIEVE server. Server says '%s'."
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:231
-#, php-format
-msgid "Can't get sieve script. Server says '%s'."
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:302
-#, php-format
-msgid "Can't send sieve script. Server says '%s'."
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:306
-#, php-format
-msgid "Can't activate GOsa sieve script. Server says '%s'."
-msgstr ""
-
-#: include/class_pluglist.inc:98
-msgid ""
-"Your gosa.conf information has changed partly. Please convert it using the "
-"contributed script fix_config.sh!"
-msgstr ""
-
-#: include/class_pluglist.inc:113 ihtml/themes/altlinux/framework.tpl:14
-#: ihtml/themes/altlinux/framework.tpl:24
-#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
-msgid ""
-"You are currently editing a database entry. Do you want to dismiss the "
-"changes?"
-msgstr ""
-
-#: include/setup_checks.inc:67
-msgid "Can't bind to LDAP. No schema check possible!"
-msgstr ""
-
-#: include/setup_checks.inc:76 include/setup_checks.inc:85
-msgid "Can't get schema information from server. No schema check possible!"
-msgstr ""
-
-#: include/setup_checks.inc:105
-#, php-format
-msgid ""
-"Optional objectclass '%s' required by plugin '%s' is not present in LDAP "
-"setup"
-msgstr ""
-
-#: include/setup_checks.inc:108
-#, php-format
-msgid ""
-"Optional objectclass '%s' required by plugin '%s' does not have version %s"
-msgstr ""
-
-#: include/setup_checks.inc:111
-#, php-format
-msgid "Support for '%s' enabled"
-msgstr ""
-
-#: include/setup_checks.inc:120
-#, php-format
-msgid "Required objectclass '%s' is not present in LDAP setup"
-msgstr ""
-
-#: include/setup_checks.inc:123
-#, php-format
-msgid "Required objectclass '%s' does not have version %s"
-msgstr ""
-
-#: include/setup_checks.inc:131
-msgid "SAMBA 3 support disabled, no schema seems to be installed"
-msgstr ""
-
-#: include/setup_checks.inc:134
-msgid "SAMBA 3 support enabled"
-msgstr ""
-
-#: include/setup_checks.inc:138
-msgid "SAMBA 2 support disabled, no schema seems to be installed"
-msgstr ""
-
-#: include/setup_checks.inc:141
-msgid "SAMBA 2 support enabled"
-msgstr ""
-
-#: include/setup_checks.inc:146
-msgid "Support for pureftp disabled, no schema seems to be installed"
-msgstr ""
-
-#: include/setup_checks.inc:149
-msgid "Support for pureftp enabled"
-msgstr ""
-
-#: include/setup_checks.inc:153
-msgid "Support for WebDAV disabled, no schema seems to be installed"
-msgstr ""
-
-#: include/setup_checks.inc:156
-msgid "Support for WebDAV enabled"
-msgstr ""
-
-#: include/setup_checks.inc:160
-msgid "Support for phpgroupware disabled, no schema seems to be installed"
-msgstr ""
-
-#: include/setup_checks.inc:163
-msgid "Support for phpgroupware enabled"
-msgstr ""
-
-#: include/setup_checks.inc:167
-msgid "Support for gofon disabled, no schema seems to be installed"
-msgstr ""
-
-#: include/setup_checks.inc:170
-msgid "Support for gofon enabled"
-msgstr ""
-
-#: include/setup_checks.inc:177
-msgid ""
-"Support for Kolab disabled, no schema seems to be installed, setting mail-"
-"method to cyrus"
-msgstr ""
-
-#: include/setup_checks.inc:182
-msgid "Support for Kolab enabled"
-msgstr ""
-
-#: include/setup_checks.inc:198
-msgid "OK"
-msgstr ""
-
-#: include/setup_checks.inc:201
-msgid "Ignored"
-msgstr ""
-
-#: include/setup_checks.inc:203
-msgid "Failed"
-msgstr ""
-
-#: include/setup_checks.inc:219
-msgid "PHP setup inspection"
-msgstr ""
-
-#: include/setup_checks.inc:220
-msgid "Checking for PHP version (>=4.1.0)"
-msgstr ""
-
-#: include/setup_checks.inc:221
-msgid ""
-"PHP must be of version 4.1.0 or above for some functions and known bugs in "
-"PHP language."
-msgstr ""
-
-#: include/setup_checks.inc:224
-msgid "Checking if register_globals is set to 'off'"
-msgstr ""
-
-#: include/setup_checks.inc:225
-msgid ""
-"register_globals is a PHP mechanism to register all global varibales to be "
-"accessible from scripts without changing the scope. This may be a security "
-"risk. GOsa will run in both modes."
-msgstr ""
-
-#: include/setup_checks.inc:228
-msgid "Checking for ldap module"
-msgstr ""
-
-#: include/setup_checks.inc:229
-msgid "This is the main module used by GOsa and therefore really required."
-msgstr ""
-
-#: include/setup_checks.inc:232
-msgid "Checking for gettext support"
-msgstr ""
-
-#: include/setup_checks.inc:233
-msgid "Gettext support is required for internationalized GOsa."
-msgstr ""
-
-#: include/setup_checks.inc:235
-msgid "Checking for iconv support"
-msgstr ""
-
-#: include/setup_checks.inc:236
-msgid ""
-"This module is used by GOsa to convert samba munged dial informations and is "
-"therefore required."
-msgstr ""
-
-#: include/setup_checks.inc:239
-msgid "Checking for mhash module"
-msgstr ""
-
-#: include/setup_checks.inc:240
-msgid ""
-"To use SSHA encryption, you'll need this module. If you are just using crypt "
-"or md5 encryption, ignore this message. GOsa will run without it."
-msgstr ""
-
-#: include/setup_checks.inc:243
-msgid "Checking for imap module"
-msgstr ""
-
-#: include/setup_checks.inc:244
-msgid ""
-"The IMAP module is needed to communicate with the IMAP server. It gets "
-"status informations, creates and deletes mail users."
-msgstr ""
-
-#: include/setup_checks.inc:246
-msgid "Checking for getacl in imap"
-msgstr ""
-
-#: include/setup_checks.inc:247
-msgid ""
-"The getacl support is needed for shared folder permissions. The standard "
-"IMAP module is not capable of reading acl's. You need a recend PHP version "
-"for this feature."
-msgstr ""
-
-#: include/setup_checks.inc:249
-msgid "Checking for mysql module"
-msgstr ""
-
-#: include/setup_checks.inc:250
-msgid "MySQL support is needed for reading GOfax reports from databases."
-msgstr ""
-
-#: include/setup_checks.inc:252
-msgid "Checking for cups module"
-msgstr ""
-
-#: include/setup_checks.inc:253
-msgid ""
-"In order to read available printers from IPP protocol instead of printcap "
-"files, you've to install the CUPS module."
-msgstr ""
-
-#: include/setup_checks.inc:255
-msgid "Checking for kadm5 module"
-msgstr ""
-
-#: include/setup_checks.inc:256
-msgid ""
-"Managing users in kerberos requires the kadm5 module which is downloadable "
-"via PEAR network."
-msgstr ""
-
-#: include/setup_checks.inc:265
-msgid "Checking for some additional programms"
-msgstr ""
-
-#: include/setup_checks.inc:274
-msgid "Checking for ImageMagick (>=5.4.0)"
-msgstr ""
-
-#: include/setup_checks.inc:275
-msgid ""
-"ImageMagick is used to convert user supplied images to fit the suggested "
-"size and the unified JPEG format."
-msgstr ""
-
-#: include/setup_checks.inc:278
-msgid "Checking imagick module for PHP"
-msgstr ""
-
-#: include/setup_checks.inc:279
-msgid ""
-"Imagick is used to convert user supplied images to fit the suggested size "
-"and the unified JPEG format from PHP script."
-msgstr ""
-
-#: include/setup_checks.inc:286
-msgid "Checking for fping utility"
-msgstr ""
-
-#: include/setup_checks.inc:287
-msgid ""
-"The fping utility is only used if you've got a thin client based terminal "
-"environment running."
-msgstr ""
-
-#: include/setup_checks.inc:302
-msgid "Checking for a way to generate LM/NT password hashes"
-msgstr ""
-
-#: include/setup_checks.inc:303
-msgid ""
-"In order to use SAMBA 2/3, you've to install some additional packages to "
-"generate password hashes."
-msgstr ""
-
-#: include/setup_checks.inc:334
-msgid "php.ini check -> session.auto_register"
-msgstr ""
-
-#: include/setup_checks.inc:335
-msgid ""
-"In Order to use GOsa without any trouble, the session.auto_register option "
-"in your php.ini must be set to 'Off'."
-msgstr ""
-
-#: include/setup_checks.inc:340
-msgid "php.ini check -> implicit_flush"
-msgstr ""
-
-#: include/setup_checks.inc:341
-msgid ""
-"This option influences the Output handling. Turn this Option off, to "
-"increase performance."
-msgstr ""
-
-#: include/setup_checks.inc:348
-msgid "php.ini check -> max_execution_time"
-msgstr ""
-
-#: include/setup_checks.inc:349
-msgid ""
-"The Execution time should be at least 30 seconds, because some actions may "
-"consume more time."
-msgstr ""
-
-#: include/setup_checks.inc:356
-msgid "php.ini check -> memory_limit"
-msgstr ""
-
-#: include/setup_checks.inc:357
-msgid ""
-"GOsa needs at least 8MB of memory, less will cause unpredictable errors! An "
-"optimal setting would be 16MB, increase it for larger setups."
-msgstr ""
-
-#: include/setup_checks.inc:361
-msgid "php.ini check -> expose_php"
-msgstr ""
-
-#: include/setup_checks.inc:362
-msgid ""
-"Increase the server security by setting expose_php to 'off'. PHP won't send "
-"any Information about the server you are running in this case."
-msgstr ""
-
-#: include/setup_checks.inc:366
-msgid "php.ini check -> magic_quotes_gpc"
-msgstr ""
-
-#: include/setup_checks.inc:367
-msgid ""
-"Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
-"escape all quotes in strings in this case."
-msgstr ""
-
-#: include/setup_checks.inc:669
-msgid "You've to specify an ldap server before continuing!"
-msgstr ""
-
-#: include/setup_checks.inc:679 include/setup_checks.inc:782
-msgid ""
-"Can't connect to the specified LDAP server! Please make sure that is "
-"reachable for GOsa."
-msgstr ""
-
-#: include/setup_checks.inc:696 include/setup_checks.inc:788
-#: include/setup_checks.inc:794
-msgid ""
-"Can't bind to the specified LDAP server! Please make sure that it is "
-"reachable for GOsa."
-msgstr ""
-
-#: include/setup_checks.inc:808
-msgid ""
-"Bind to server successful, but the server seems to be completly empty, "
-"please check all informations twice"
-msgstr ""
-
-#: include/setup_checks.inc:847
-#, php-format
-msgid ""
-"You're missing the required attribute '%s' from this formular. Please "
-"complete!"
-msgstr ""
-
-#: include/setup_checks.inc:884
-#, php-format
-msgid "Can't log into LDAP server. Reason was: %s."
-msgstr ""
-
-#: include/setup_checks.inc:1010 include/setup_checks.inc:1028
-#: html/index.php:160 ihtml/themes/default/setup_useradmin.tpl:6
-msgid ""
-"You're missing an administrative account for GOsa, you'll not be able to "
-"administrate anything!"
-msgstr ""
-
-#: include/class_plugin.inc:180
-msgid "This 'dn' has no account extensions."
-msgstr ""
-
-#: include/class_plugin.inc:185
-msgid "This is an empty plugin."
-msgstr ""
-
-#: include/class_plugin.inc:386
-#, php-format
-msgid ""
-"Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
-msgstr ""
-
-#: include/class_plugin.inc:412
-#, php-format
-msgid ""
-"Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
-msgstr ""
-
-#: include/class_plugin.inc:438
-#, php-format
-msgid ""
-"Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
-msgstr ""
-
-#: include/class_config.inc:69
-#, php-format
-msgid "XML error in gosa.conf: %s at line %d"
-msgstr ""
-
-#: include/class_config.inc:195 html/index.php:142
-msgid "Can't bind to LDAP. Please contact the system administrator."
-msgstr ""
-
-#: include/class_config.inc:426
-msgid "SID and/or RIDBASE missing in your configuration!"
-msgstr ""
-
-#: include/class_password-methods-ssha.inc:51
-msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
-msgstr ""
-
-#: include/class_password-methods.inc:169
-#, php-format
-msgid "Setting the password failed. LDAP server says '%s'."
-msgstr ""
-
-#: include/class_password-methods.inc:188
-msgid ""
-"Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
-msgstr ""
-
-#: include/class_password-methods-kerberos.inc:43
-msgid ""
-"Warning: Can't set kerberos password. Your PHP version has no kerberos "
-"support, password has not been changed."
-msgstr ""
-
-#: include/class_password-methods-kerberos.inc:52
-msgid "Kerberos database communication failed!"
-msgstr ""
-
-#: include/class_password-methods-kerberos.inc:59
-msgid "Changing password in kerberos database failed!"
-msgstr ""
-
-#: include/class_password-methods-sha.inc:50
-msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
-msgstr ""
-
 #: include/functions.inc:267
 #, php-format
 msgid "Error when connecting the LDAP. Server said '%s'."
@@ -5983,6 +5486,503 @@ msgstr ""
 msgid "Arguments"
 msgstr ""
 
+#: include/class_mail-methods-cyrus.inc:43
+msgid ""
+"Warning: IMAP Server cannot be reached! If you save this account, some mail "
+"settings will not be stored on your server!"
+msgstr ""
+
+#: include/class_mail-methods-cyrus.inc:106
+#, php-format
+msgid "Can't create IMAP mailbox. Server says '%s'."
+msgstr ""
+
+#: include/class_mail-methods-cyrus.inc:122
+#, php-format
+msgid "Can't write IMAP quota. Server says '%s'."
+msgstr ""
+
+#: include/class_mail-methods-cyrus.inc:133
+msgid ""
+"Warning: imap_getacl is not implemented, wouldn't modify acl informations."
+msgstr ""
+
+#: include/class_mail-methods-cyrus.inc:168
+msgid "Warning: imap_getacl is not available, can't get imap permissions!"
+msgstr ""
+
+#: include/class_mail-methods-cyrus.inc:190
+#, php-format
+msgid "Can't remove IMAP mailbox. Server says '%s'."
+msgstr ""
+
+#: include/class_mail-methods-cyrus.inc:218
+#, php-format
+msgid "Can't log into SIEVE server. Server says '%s'."
+msgstr ""
+
+#: include/class_mail-methods-cyrus.inc:231
+#, php-format
+msgid "Can't get sieve script. Server says '%s'."
+msgstr ""
+
+#: include/class_mail-methods-cyrus.inc:302
+#, php-format
+msgid "Can't send sieve script. Server says '%s'."
+msgstr ""
+
+#: include/class_mail-methods-cyrus.inc:306
+#, php-format
+msgid "Can't activate GOsa sieve script. Server says '%s'."
+msgstr ""
+
+#: include/class_pluglist.inc:98
+msgid ""
+"Your gosa.conf information has changed partly. Please convert it using the "
+"contributed script fix_config.sh!"
+msgstr ""
+
+#: include/class_pluglist.inc:113 ihtml/themes/altlinux/framework.tpl:14
+#: ihtml/themes/altlinux/framework.tpl:24
+#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
+msgid ""
+"You are currently editing a database entry. Do you want to dismiss the "
+"changes?"
+msgstr ""
+
+#: include/setup_checks.inc:68
+msgid "Can't bind to LDAP. No schema check possible!"
+msgstr ""
+
+#: include/setup_checks.inc:77 include/setup_checks.inc:86
+msgid "Can't get schema information from server. No schema check possible!"
+msgstr ""
+
+#: include/setup_checks.inc:106
+#, php-format
+msgid ""
+"Optional objectclass '%s' required by plugin '%s' is not present in LDAP "
+"setup"
+msgstr ""
+
+#: include/setup_checks.inc:110
+#, php-format
+msgid ""
+"Optional objectclass '%s' required by plugin '%s' does not have version %s"
+msgstr ""
+
+#: include/setup_checks.inc:114
+#, php-format
+msgid "Support for '%s' enabled"
+msgstr ""
+
+#: include/setup_checks.inc:124
+#, php-format
+msgid "Required objectclass '%s' is not present in LDAP setup"
+msgstr ""
+
+#: include/setup_checks.inc:128
+#, php-format
+msgid "Required objectclass '%s' does not have version %s"
+msgstr ""
+
+#: include/setup_checks.inc:137
+msgid "SAMBA 3 support disabled, no schema seems to be installed"
+msgstr ""
+
+#: include/setup_checks.inc:142
+msgid "SAMBA 3 support enabled"
+msgstr ""
+
+#: include/setup_checks.inc:147
+msgid "SAMBA 2 support disabled, no schema seems to be installed"
+msgstr ""
+
+#: include/setup_checks.inc:152
+msgid "SAMBA 2 support enabled"
+msgstr ""
+
+#: include/setup_checks.inc:158
+msgid "Support for pureftp disabled, no schema seems to be installed"
+msgstr ""
+
+#: include/setup_checks.inc:163
+msgid "Support for pureftp enabled"
+msgstr ""
+
+#: include/setup_checks.inc:168
+msgid "Support for WebDAV disabled, no schema seems to be installed"
+msgstr ""
+
+#: include/setup_checks.inc:173
+msgid "Support for WebDAV enabled"
+msgstr ""
+
+#: include/setup_checks.inc:178
+msgid "Support for phpgroupware disabled, no schema seems to be installed"
+msgstr ""
+
+#: include/setup_checks.inc:183
+msgid "Support for phpgroupware enabled"
+msgstr ""
+
+#: include/setup_checks.inc:188
+msgid "Support for gofon disabled, no schema seems to be installed"
+msgstr ""
+
+#: include/setup_checks.inc:193
+msgid "Support for gofon enabled"
+msgstr ""
+
+#: include/setup_checks.inc:201
+msgid ""
+"Support for Kolab disabled, no schema seems to be installed, setting mail-"
+"method to cyrus"
+msgstr ""
+
+#: include/setup_checks.inc:210
+msgid "Support for Kolab enabled"
+msgstr ""
+
+#: include/setup_checks.inc:226
+msgid "OK"
+msgstr ""
+
+#: include/setup_checks.inc:229
+msgid "Ignored"
+msgstr ""
+
+#: include/setup_checks.inc:231
+msgid "Failed"
+msgstr ""
+
+#: include/setup_checks.inc:247
+msgid "PHP setup inspection"
+msgstr ""
+
+#: include/setup_checks.inc:248
+msgid "Checking for PHP version (>=4.1.0)"
+msgstr ""
+
+#: include/setup_checks.inc:249
+msgid ""
+"PHP must be of version 4.1.0 or above for some functions and known bugs in "
+"PHP language."
+msgstr ""
+
+#: include/setup_checks.inc:252
+msgid "Checking if register_globals is set to 'off'"
+msgstr ""
+
+#: include/setup_checks.inc:253
+msgid ""
+"register_globals is a PHP mechanism to register all global varibales to be "
+"accessible from scripts without changing the scope. This may be a security "
+"risk. GOsa will run in both modes."
+msgstr ""
+
+#: include/setup_checks.inc:256
+msgid "Checking for ldap module"
+msgstr ""
+
+#: include/setup_checks.inc:257
+msgid "This is the main module used by GOsa and therefore really required."
+msgstr ""
+
+#: include/setup_checks.inc:260
+msgid "Checking for gettext support"
+msgstr ""
+
+#: include/setup_checks.inc:261
+msgid "Gettext support is required for internationalized GOsa."
+msgstr ""
+
+#: include/setup_checks.inc:263
+msgid "Checking for iconv support"
+msgstr ""
+
+#: include/setup_checks.inc:264
+msgid ""
+"This module is used by GOsa to convert samba munged dial informations and is "
+"therefore required."
+msgstr ""
+
+#: include/setup_checks.inc:267
+msgid "Checking for mhash module"
+msgstr ""
+
+#: include/setup_checks.inc:268
+msgid ""
+"To use SSHA encryption, you'll need this module. If you are just using crypt "
+"or md5 encryption, ignore this message. GOsa will run without it."
+msgstr ""
+
+#: include/setup_checks.inc:271
+msgid "Checking for imap module"
+msgstr ""
+
+#: include/setup_checks.inc:272
+msgid ""
+"The IMAP module is needed to communicate with the IMAP server. It gets "
+"status informations, creates and deletes mail users."
+msgstr ""
+
+#: include/setup_checks.inc:274
+msgid "Checking for getacl in imap"
+msgstr ""
+
+#: include/setup_checks.inc:275
+msgid ""
+"The getacl support is needed for shared folder permissions. The standard "
+"IMAP module is not capable of reading acl's. You need a recend PHP version "
+"for this feature."
+msgstr ""
+
+#: include/setup_checks.inc:277
+msgid "Checking for mysql module"
+msgstr ""
+
+#: include/setup_checks.inc:278
+msgid "MySQL support is needed for reading GOfax reports from databases."
+msgstr ""
+
+#: include/setup_checks.inc:280
+msgid "Checking for cups module"
+msgstr ""
+
+#: include/setup_checks.inc:281
+msgid ""
+"In order to read available printers from IPP protocol instead of printcap "
+"files, you've to install the CUPS module."
+msgstr ""
+
+#: include/setup_checks.inc:283
+msgid "Checking for kadm5 module"
+msgstr ""
+
+#: include/setup_checks.inc:284
+msgid ""
+"Managing users in kerberos requires the kadm5 module which is downloadable "
+"via PEAR network."
+msgstr ""
+
+#: include/setup_checks.inc:293
+msgid "Checking for some additional programms"
+msgstr ""
+
+#: include/setup_checks.inc:302
+msgid "Checking for ImageMagick (>=5.4.0)"
+msgstr ""
+
+#: include/setup_checks.inc:303
+msgid ""
+"ImageMagick is used to convert user supplied images to fit the suggested "
+"size and the unified JPEG format."
+msgstr ""
+
+#: include/setup_checks.inc:306
+msgid "Checking imagick module for PHP"
+msgstr ""
+
+#: include/setup_checks.inc:307
+msgid ""
+"Imagick is used to convert user supplied images to fit the suggested size "
+"and the unified JPEG format from PHP script."
+msgstr ""
+
+#: include/setup_checks.inc:314
+msgid "Checking for fping utility"
+msgstr ""
+
+#: include/setup_checks.inc:315
+msgid ""
+"The fping utility is only used if you've got a thin client based terminal "
+"environment running."
+msgstr ""
+
+#: include/setup_checks.inc:330
+msgid "Checking for a way to generate LM/NT password hashes"
+msgstr ""
+
+#: include/setup_checks.inc:331
+msgid ""
+"In order to use SAMBA 2/3, you've to install some additional packages to "
+"generate password hashes."
+msgstr ""
+
+#: include/setup_checks.inc:362
+msgid "php.ini check -> session.auto_register"
+msgstr ""
+
+#: include/setup_checks.inc:363
+msgid ""
+"In Order to use GOsa without any trouble, the session.auto_register option "
+"in your php.ini must be set to 'Off'."
+msgstr ""
+
+#: include/setup_checks.inc:368
+msgid "php.ini check -> implicit_flush"
+msgstr ""
+
+#: include/setup_checks.inc:369
+msgid ""
+"This option influences the Output handling. Turn this Option off, to "
+"increase performance."
+msgstr ""
+
+#: include/setup_checks.inc:376
+msgid "php.ini check -> max_execution_time"
+msgstr ""
+
+#: include/setup_checks.inc:377
+msgid ""
+"The Execution time should be at least 30 seconds, because some actions may "
+"consume more time."
+msgstr ""
+
+#: include/setup_checks.inc:384
+msgid "php.ini check -> memory_limit"
+msgstr ""
+
+#: include/setup_checks.inc:385
+msgid ""
+"GOsa needs at least 8MB of memory, less will cause unpredictable errors! An "
+"optimal setting would be 16MB, increase it for larger setups."
+msgstr ""
+
+#: include/setup_checks.inc:389
+msgid "php.ini check -> expose_php"
+msgstr ""
+
+#: include/setup_checks.inc:390
+msgid ""
+"Increase the server security by setting expose_php to 'off'. PHP won't send "
+"any Information about the server you are running in this case."
+msgstr ""
+
+#: include/setup_checks.inc:394
+msgid "php.ini check -> magic_quotes_gpc"
+msgstr ""
+
+#: include/setup_checks.inc:395
+msgid ""
+"Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
+"escape all quotes in strings in this case."
+msgstr ""
+
+#: include/setup_checks.inc:697
+msgid "You've to specify an ldap server before continuing!"
+msgstr ""
+
+#: include/setup_checks.inc:707 include/setup_checks.inc:810
+msgid ""
+"Can't connect to the specified LDAP server! Please make sure that is "
+"reachable for GOsa."
+msgstr ""
+
+#: include/setup_checks.inc:724 include/setup_checks.inc:816
+#: include/setup_checks.inc:822
+msgid ""
+"Can't bind to the specified LDAP server! Please make sure that it is "
+"reachable for GOsa."
+msgstr ""
+
+#: include/setup_checks.inc:836
+msgid ""
+"Bind to server successful, but the server seems to be completly empty, "
+"please check all informations twice"
+msgstr ""
+
+#: include/setup_checks.inc:875
+#, php-format
+msgid ""
+"You're missing the required attribute '%s' from this formular. Please "
+"complete!"
+msgstr ""
+
+#: include/setup_checks.inc:912
+#, php-format
+msgid "Can't log into LDAP server. Reason was: %s."
+msgstr ""
+
+#: include/setup_checks.inc:1038 include/setup_checks.inc:1056
+#: html/index.php:160 ihtml/themes/default/setup_useradmin.tpl:6
+msgid ""
+"You're missing an administrative account for GOsa, you'll not be able to "
+"administrate anything!"
+msgstr ""
+
+#: include/class_plugin.inc:180
+msgid "This 'dn' has no account extensions."
+msgstr ""
+
+#: include/class_plugin.inc:185
+msgid "This is an empty plugin."
+msgstr ""
+
+#: include/class_plugin.inc:386
+#, php-format
+msgid ""
+"Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
+msgstr ""
+
+#: include/class_plugin.inc:412
+#, php-format
+msgid ""
+"Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
+msgstr ""
+
+#: include/class_plugin.inc:438
+#, php-format
+msgid ""
+"Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
+msgstr ""
+
+#: include/class_config.inc:69
+#, php-format
+msgid "XML error in gosa.conf: %s at line %d"
+msgstr ""
+
+#: include/class_config.inc:195 html/index.php:142
+msgid "Can't bind to LDAP. Please contact the system administrator."
+msgstr ""
+
+#: include/class_config.inc:426
+msgid "SID and/or RIDBASE missing in your configuration!"
+msgstr ""
+
+#: include/class_password-methods-ssha.inc:51
+msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
+msgstr ""
+
+#: include/class_password-methods.inc:169
+#, php-format
+msgid "Setting the password failed. LDAP server says '%s'."
+msgstr ""
+
+#: include/class_password-methods.inc:188
+msgid ""
+"Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
+msgstr ""
+
+#: include/class_password-methods-kerberos.inc:43
+msgid ""
+"Warning: Can't set kerberos password. Your PHP version has no kerberos "
+"support, password has not been changed."
+msgstr ""
+
+#: include/class_password-methods-kerberos.inc:52
+msgid "Kerberos database communication failed!"
+msgstr ""
+
+#: include/class_password-methods-kerberos.inc:59
+msgid "Changing password in kerberos database failed!"
+msgstr ""
+
+#: include/class_password-methods-sha.inc:50
+msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
+msgstr ""
+
 #: include/class_ldap.inc:398
 #, php-format
 msgid ""
@@ -6040,7 +6040,7 @@ msgstr ""
 msgid "Warning: memory is getting low - please increase the memory_limit!"
 msgstr ""
 
-#: html/main.php:261
+#: html/main.php:262
 #, php-format
 msgid "Can't find any plugin definitions for plugin '%s'!"
 msgstr ""
