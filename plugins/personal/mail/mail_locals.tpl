@@ -9,11 +9,7 @@
    <div class="contentboxb">
     <p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
      <select style="width:500px; margin-top:4px; height:450px;" name="local_list[]" size=15" multiple>
-        {if $mailusers ==""}
         	{html_options options=$mailusers}
-		{else}
-            <option>
-        {/if}
      </select>
     </p>
    </div>
@@ -32,11 +28,7 @@ t}Filters{/t}</b></p>
     <p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
     <table width="100%"><tr><td width="50%"><img src="{$tree_image}" align=center>&nbsp;{t}Display addresses of department{/t}</td>
     <td><select name="depselect" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
-        {if $deplist ==""}
         	{html_options options=$deplist selected=$depselect}
-		{else}
-            <option>
-        {/if}
     </select></td></tr></table>
     </p>
     <p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">

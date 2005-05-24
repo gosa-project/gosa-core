@@ -11,7 +11,7 @@
      <td>{t}Server{/t}</td>
      <td>
       <select size="1" name="gosaMailServer" {$gosaMailServerACL} title="{t}Specify the mail server where the user will be hosted on{/t}">
-		{if $mailServers ==""}
+		{if $SELECT_mailServers}
 		    {html_options values=$mailServers output=$mailServers selected=$gosaMailServer}
 		{else}
 			<option>
@@ -51,7 +51,7 @@
    <h2><img alt="" align="middle" src="images/alternatemail.png"> {t}Alternative addresses{/t}</h2>
    <select style="width:350px; height:100px;" name="alternates_list[]" size=15
 	 multiple title="{t}List of alternative mail addresses{/t}">
-        {if $gosaMailAlternateAddress ==""}
+        {if $SELECT_gosaMailAlternateAddress}
             {html_options values=$gosaMailAlternateAddress output=$gosaMailAlternateAddress}
         {else}
             <option>
@@ -87,16 +87,15 @@
    <input type=checkbox name="use_spam_filter" value="1" {$use_spam_filter}
 	{$gosaSpamSortLevelACL} title="{t}Select if you want to filter this mails through spamassassin{/t}"> {t}Move mails tagged with spam level greater than{/t}
    <select size="1" name="gosaSpamSortLevel" {$gosaSpamSortLevelACL} title="{t}Choose spam level - smaller values are more sensitive{/t}">
-        {if $spamlevel ==""}
+        {if $SELECT_spamlevel}
             {html_options values=$spamlevel output=$spamlevel selected=$gosaSpamSortLevel}
         {else}
             <option>
         {/if}
- {html_options values=$spamlevel output=$spamlevel selected=$gosaSpamSortLevel}
    </select>
    {t}to folder{/t}
    <select size="1" name="gosaSpamMailbox" {$gosaSpamMailboxACL}>
-        {if $spambox ==""}
+        {if $SELECT_spambox}
         	{html_options values=$spambox output=$spambox selected=$gosaSpamMailbox}
 		{else}
             <option>
@@ -119,7 +118,7 @@
    <br>
    {if $show_templates eq "true"}
    <select name="vacation_template">
-        {if $vacationtemplates ==""}
+        {if $SELECT_vacationtemplates }
         	{html_options options=$vacationtemplates selected=$template}
 		{else}
             <option>
@@ -135,7 +134,7 @@
     <b>{t}Forward messages to{/t}</b>
    </p>
    <select style="width:350px; height:100px;" name="forwarder_list[]" size=15 multiple>
-        {if $gosaMailForwardingAddress ==""}
+        {if $SELECT_gosaMailForwardingAddress}
 			{html_options values=$gosaMailForwardingAddress output=$gosaMailForwardingAddress selected=$template}        
 		{else}
             <option>

@@ -429,9 +429,16 @@ class mailAccount extends plugin
           "gosaMailAlternateAddress", "gosaMailForwardingAddress",
           "gosaVacationMessage", "gosaMailDeliveryMode",
           "gosaMailMaxSize", "gosaSpamSortLevel", "gosaSpamMailbox") as $val){
+
       $smarty->assign("$val", $this->$val);
       $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
+  
+        
     }
+
+
+
+
     if (is_numeric($this->gosaMailQuota) && $this->gosaMailQuota != 0){
       $smarty->assign("quotausage", $this->quotaUsage * 100 / $this->gosaMailQuota);
       $smarty->assign("quotadefined", "true");
@@ -498,6 +505,44 @@ class mailAccount extends plugin
     $smarty->assign("spambox", $this->mailboxList);
     $smarty->assign("custom_sieveACL", chkacl($this->acl, "custom_sieve"));	
     $smarty->assign("only_localACL", chkacl($this->acl, "only_local"));	
+
+  if(isset($this->gosaMailAlternateAddress)&&($this->gosaMailAlternateAddress))  
+      $smarty->assign("SELECT_gosaMailAlternateAddress",true);
+  else 
+      $smarty->assign("SELECT_gosaMailAlternateAddress",false);
+
+  if(isset($this->spamlevel)&&($this->spamlevel))
+      $smarty->assign("SELECT_spamlevel",true);
+  else
+      $smarty->assign("SELECT_spamlevel",false);
+
+  if(isset($this->spambox)&&($this->spambox))
+      $smarty->assign("SELECT_spambox",true);
+  else
+      $smarty->assign("SELECT_spambox",false);
+
+  if(isset($this->vacationtemplates)&&($this->vacationtemplates))
+      $smarty->assign("SELECT_vacationtemplates",true);
+  else
+      $smarty->assign("SELECT_vacationtemplates",false);
+
+  if(isset($this->gosaMailForwardingAddress)&&($this->gosaMailForwardingAddress))
+      $smarty->assign("SELECT_gosaMailForwardingAddress",true);
+  else
+      $smarty->assign("SELECT_gosaMailForwardingAddress",false);
+
+  if(isset($this->mailServers)&&($this->mailServers))
+      $smarty->assign("SELECT_mailServers",true);
+  else
+      $smarty->assign("SELECT_mailServers",false);
+
+
+
+
+
+
+
+
 
     $display.= $smarty->fetch (get_template_path('generic.tpl', TRUE, dirname(__FILE__)));
     return ($display);
