@@ -510,12 +510,24 @@ class posixAccount extends plugin
     $smarty->assign("trustmodeACL", chkacl($this->acl, "trustmode"));
     if ($this->trustModel == "fullaccess"){
       $trustmode= 1;
-      $smarty->assign("trusthide", "disabled");
+      // pervent double disable tag in html code, this will disturb our clean w3c html
+    
+    if(chkacl($this->acl, "trustmode")!="disabled"){
+          $smarty->assign("trusthide", "disabled");
+      }else{
+          $smarty->assign("trusthide", "");
+      }
+
     } elseif ($this->trustModel == "byhost"){
       $trustmode= 2;
       $smarty->assign("trusthide", "");
     } else {
-      $smarty->assign("trusthide", "disabled");
+      // pervent double disable tag in html code, this will disturb our clean w3c html
+      if(chkacl($this->acl, "trustmode")==""){
+          $smarty->assign("trusthide", "disabled");
+      }else{
+          $smarty->assign("trusthide", "");
+      }
       $trustmode= 0;
     }
     $smarty->assign("trustmode", $trustmode);
