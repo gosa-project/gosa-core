@@ -1,7 +1,7 @@
 <table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td style="width:50%; vertical-align:top;">
-   <h2><img align="center" src="images/rightarrow.png"> {t}Generic{/t}</h2>
+   <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
    <table>
     <tr>
      <td>{t}Home directory{/t}{$must}</td>
@@ -51,7 +51,7 @@
     &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <h2><img align="center" src="images/members.png"> {t}Group membership{/t}</h2>
+   <h2><img alt="" align="middle" src="images/members.png"> {t}Group membership{/t}</h2>
    {if $groups eq "too_many_for_nfs"}
     <b style="color:red">{t}(Warning: more than 16 groups are not supported by NFS!){/t}</b>
     <br>
@@ -71,7 +71,7 @@
 <table style="width:100% ; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td>
-   <h2><img align="center" src="images/terminal_small.png"> {t}Account{/t}</h2>
+   <h2><img alt="" align="middle" src="images/terminal_small.png"> {t}Account{/t}</h2>
   </td>
  </tr>
  <tr>
@@ -86,7 +86,7 @@
 <table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td style="vertical-align:top; width:50%">
-   <h2><img align="center" src="images/display.png"> {t}Environment{/t}</h2>
+   <h2><img alt="" align="middle" src="images/display.png"> {t}Environment{/t}</h2>
    <table>
     <tr>
      <td>{t}Default printer{/t}</td>
@@ -110,7 +110,7 @@
     &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <h2><img align="center" src="images/closedlock.png" style="margin-bottom:10px;"> {t}System trust{/t}&nbsp;
+   <h2><img alt="" align="middle" src="images/closedlock.png" style="margin-bottom:10px;"> {t}System trust{/t}&nbsp;
     <select name="trustmode" id="trustmode" size=1 onchange="changeSelectState('trustmode', 'wslist'); changeSelectState('trustmode', 'add_ws'); changeSelectState('trustmode', 'del_ws');" {$trustmodeACL}>
       {html_options options=$trustmodes selected=$trustmode}
     </select>
