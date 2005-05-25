@@ -1,4 +1,4 @@
-<h2><img align="center" src="images/rightarrow.png"> {t}Properties{/t}</h2>
+<h2><img align="middle" src="images/rightarrow.png"> {t}Properties{/t}</h2>
 <table style="width:100%;">
  <tr>
   <td style="width:50%; vertical-align:top;">
@@ -96,7 +96,7 @@
 {include file="$netconfig"}
 
 <p class="plugbottom" style="margin-bottom:0px; padding:0px;">&nbsp;</p>
-<h2><img align="center" src="images/rocket.png"> {t}Action{/t}</h2>
+<h2><img align="middle" src="images/rocket.png"> {t}Action{/t}</h2>
 <table>
  <tr>
   <td>

@@ -43,7 +43,7 @@
     <td><input type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching group names{/t}' onChange="mainform.submit()"></td></tr></table>
     </p>
     <p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-    <table width="100%"><tr><td width="50%"><img src="{$search_image}" align=center>&nbsp;{t}Display groups of user{/t}</td>
+    <table width="100%"><tr><td width="50%"><img src="{$search_image}" align=middle>&nbsp;{t}Display groups of user{/t}</td>
     <td><input type='text' name='guser' maxlength='20' value='{$guser}' title='{t}User name of which groups are shown{/t}' onChange="mainform.submit()"></td></tr></table>
    </p>
    {$apply}
