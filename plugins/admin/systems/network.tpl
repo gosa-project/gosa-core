@@ -1,4 +1,4 @@
-<h2><img align="center" src="images/network.png"> {t}Network settings{/t}</h2>
+<h2><img align="middle" src="images/network.png"> {t}Network settings{/t}</h2>
 
 <table width="100%">
  <tr>

@@ -35,7 +35,7 @@
 
 <p class="plugbottom" style="margin-bottom:0px; padding:0px;">&nbsp;</p>
 
-<h2><img align="center" src="images/rocket.png"> {t}Action{/t}</h2>
+<h2><img align="middle" src="images/rocket.png"> {t}Action{/t}</h2>
 <table>
  <tr>
   <td>
