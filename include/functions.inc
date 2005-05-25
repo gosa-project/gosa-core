@@ -1185,9 +1185,9 @@ function apply_filter()
 {
   $apply= "";
 
-  $apply= '<p class="contentboxb" style="border-top:1px solid #B0B0B0">'.
+  $apply= '<div class="contentboxb" style="border-top:1px solid #B0B0B0;">'.
     '<table width="100%"><tr><td width="100%" align="right">'.
-    '<input type="submit" name="apply" value="'._("Apply").'"></td></tr></table></p>';
+    '<input type="submit" name="apply" value="'._("Apply").'"></td></tr></table></div>';
 
   return ($apply);
 }
