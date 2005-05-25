@@ -44,7 +44,7 @@ class servgeneric extends plugin
   {
     /* Do we represent a valid server? */
     if (!$this->is_account && $this->parent == NULL){
-      $display= "<img src=\"images/stop.png\" align=center>&nbsp;<b>".
+      $display= "<img src=\"images/stop.png\" align=middle>&nbsp;<b>".
         _("This 'dn' has no server features.")."</b>";
       return($display);
     }
