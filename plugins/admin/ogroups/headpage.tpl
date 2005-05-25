@@ -54,13 +54,13 @@
     <input type=checkbox name="prtgroups" value="1" {$prtgroups} onClick="mainform.submit()">{t}Show groups containing printers{/t}<br>
     </p>
     <p class="contentboxb" style="border-top:1px solid #B0B0B0;">
-    <table width="100%"><tr><td width="50%"><img src="{$tree_image}" align=middle>&nbsp;{t}Display groups of department{/t}</td>
+    <table width="100%"><tr><td width="50%"><img alt="" src="{$tree_image}" align=middle>&nbsp;{t}Display groups of department{/t}</td>
     <td><select name="depselect" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
       {html_options options=$deplist selected=$depselect}
     </select></td></tr></table>
     </p>
     <p class="contentboxb" style="border-top:1px solid #B0B0B0">
-    <table width="100%"><tr><td width="50%"><img src="{$search_image}" align=middle>&nbsp;{t}Display groups matching{/t}</td>
+    <table width="100%"><tr><td width="50%"><img alt="" src="{$search_image}" align=middle>&nbsp;{t}Display groups matching{/t}</td>
     <td><input type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching group names{/t}' onChange="mainform.submit()"></td></tr></table>
     </p>
    {$apply}
