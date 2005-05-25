@@ -96,14 +96,16 @@ class servdb extends plugin
   /* Save data to object */
   function save_object()
   {
-    plugin::save_object();
-    
-    /* Save checkbox state */
-    foreach ($this->additionaloc as $oc => $dummy){
-      if (isset($_POST[$oc]) && $_POST[$oc] == '1'){
-        $this->objectclasses[$oc]= $oc;
-      } else {
-        unset($this->objectclasses[$oc]);
+    if (isset($_POST['dbtab'])){
+      plugin::save_object();
+      
+      /* Save checkbox state */
+      foreach ($this->additionaloc as $oc => $dummy){
+        if (isset($_POST[$oc]) && $_POST[$oc] == '1'){
+          $this->objectclasses[$oc]= $oc;
+        } else {
+          unset($this->objectclasses[$oc]);
+        }
       }
     }
   }

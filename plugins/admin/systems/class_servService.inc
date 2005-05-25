@@ -172,14 +172,16 @@ foreach ($this->additionaloc as $oc => $dummy){
   /* Save data to object */
   function save_object()
   {
-     plugin::save_object();
+    if (isset($_POST['servicetab'])){
+      plugin::save_object();
 
-    /* Save checkbox state */
-    foreach ($this->additionaloc as $oc => $dummy){
-      if (isset($_POST[$oc]) && $_POST[$oc] == '1'){
-        $this->objectclasses[$oc]= $oc;
-      } else {
-        unset($this->objectclasses[$oc]);
+      /* Save checkbox state */
+      foreach ($this->additionaloc as $oc => $dummy){
+        if (isset($_POST[$oc]) && $_POST[$oc] == '1'){
+          $this->objectclasses[$oc]= $oc;
+        } else {
+          unset($this->objectclasses[$oc]);
+        }
       }
     }
  
