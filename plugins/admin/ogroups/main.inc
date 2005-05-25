@@ -32,7 +32,7 @@ if (!$remove_lock){
   if (isset($_SESSION['objectinfo'])){
     $display= print_header(get_template_path('images/ogroup.png'),
                           _("Object groups"),
-                          "<img align=\"center\" src=\"".
+                          "<img align=\"middle\" src=\"".
                           get_template_path('images/closedlock.png').
                           "\"> ".$_SESSION['objectinfo']);
   } else {

@@ -87,7 +87,7 @@ class ogroup extends plugin
   {
     /* Do we represent a valid group? */
     if (!$this->is_account){
-      $display= "<img src=\"images/stop.png\" align=center>&nbsp;<b>".
+      $display= "<img src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
         _("This 'dn' is no object group.")."</b>";
       return ($display);
     }
