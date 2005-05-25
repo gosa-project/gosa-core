@@ -432,12 +432,7 @@ class mailAccount extends plugin
 
       $smarty->assign("$val", $this->$val);
       $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
-  
-        
     }
-
-
-
 
     if (is_numeric($this->gosaMailQuota) && $this->gosaMailQuota != 0){
       $smarty->assign("quotausage", $this->quotaUsage * 100 / $this->gosaMailQuota);
@@ -506,43 +501,41 @@ class mailAccount extends plugin
     $smarty->assign("custom_sieveACL", chkacl($this->acl, "custom_sieve"));	
     $smarty->assign("only_localACL", chkacl($this->acl, "only_local"));	
 
-  if(isset($this->gosaMailAlternateAddress)&&($this->gosaMailAlternateAddress))  
+    if(isset($this->gosaMailAlternateAddress)&&($this->gosaMailAlternateAddress)){ 
       $smarty->assign("SELECT_gosaMailAlternateAddress",true);
-  else 
+    } else { 
       $smarty->assign("SELECT_gosaMailAlternateAddress",false);
+    }
 
-  if(isset($this->spamlevel)&&($this->spamlevel))
+    if(isset($this->spamlevel)&&($this->spamlevel)){
       $smarty->assign("SELECT_spamlevel",true);
-  else
+    } else {
       $smarty->assign("SELECT_spamlevel",false);
+    }
 
-  if(isset($this->spambox)&&($this->spambox))
+    if(isset($this->spambox)&&($this->spambox)){
       $smarty->assign("SELECT_spambox",true);
-  else
+    } else {
       $smarty->assign("SELECT_spambox",false);
+    }
 
-  if(isset($this->vacationtemplates)&&($this->vacationtemplates))
+    if(isset($this->vacationtemplates)&&($this->vacationtemplates)) {
       $smarty->assign("SELECT_vacationtemplates",true);
-  else
+    } else {
       $smarty->assign("SELECT_vacationtemplates",false);
+    }
 
-  if(isset($this->gosaMailForwardingAddress)&&($this->gosaMailForwardingAddress))
+    if(isset($this->gosaMailForwardingAddress)&&($this->gosaMailForwardingAddress)){
       $smarty->assign("SELECT_gosaMailForwardingAddress",true);
-  else
+    } else {
       $smarty->assign("SELECT_gosaMailForwardingAddress",false);
+    }
 
-  if(isset($this->mailServers)&&($this->mailServers))
+    if(count($mailserver)){
       $smarty->assign("SELECT_mailServers",true);
-  else
+    } else {
       $smarty->assign("SELECT_mailServers",false);
-
-
-
-
-
-
-
-
+    }
 
     $display.= $smarty->fetch (get_template_path('generic.tpl', TRUE, dirname(__FILE__)));
     return ($display);
