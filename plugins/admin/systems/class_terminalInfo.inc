@@ -57,7 +57,7 @@ class terminfo extends plugin
   {
     /* Do we represent a valid terminal? */
     if (!$this->is_account && $this->parent == NULL){
-      echo "<img src=\"images/stop.png\" align=middle>&nbsp;<b>".
+      echo "<img alt=\"\" src=\"images/stop.png\" align=middle>&nbsp;<b>".
         _("This 'dn' has no terminal features.")."</b>";
       return;
     }
@@ -127,10 +127,10 @@ class terminfo extends plugin
             }
             switch ($eflag){
               case 0:
-                $smarty->assign("$pname", "<img alt=\""._("running")."\" src=\"images/true.png\">");
+                $smarty->assign("$pname", "<img alt=\"\" alt=\""._("running")."\" src=\"images/true.png\">");
                 break;
               case 1:
-                $smarty->assign("$pname", "<img alt=\""._("not running")."\" src=\"images/false.png\">");
+                $smarty->assign("$pname", "<img alt=\"\" alt=\""._("not running")."\" src=\"images/false.png\">");
                 break;
               default:
                 $smarty->assign("$pname", _("not defined"));
@@ -152,7 +152,7 @@ class terminfo extends plugin
           $device= preg_replace('/^STRING: */', '', $device);
           $usage= @snmpget($host, $community, "UCD-SNMP-MIB::dskPercent.$n");
           $usage= preg_replace('/^INTEGER: */', '', $usage);
-          $partitions.= "<tr><td><b>$device</b></td><td><img src=\"progress.php?x=100&amp;y=16&amp;p=$usage\" align=\"middle\"></td></tr>\n";
+          $partitions.= "<tr><td><b>$device</b></td><td><img alt=\"\" src=\"progress.php?x=100&amp;y=16&amp;p=$usage\" align=\"middle\"></td></tr>\n";
         }
         $smarty->assign("partitions", $partitions);
       } else {
