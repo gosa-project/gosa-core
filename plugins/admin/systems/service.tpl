@@ -1,7 +1,7 @@
 <table style="width:100%;">
  <tr>
   <td style="width:33%; vertical-align:top;">
-   <h2><img align="center" src="images/keyboard.png"> {t}Keyboard{/t}</h2>
+   <h2><img align="middle" src="images/keyboard.png"> {t}Keyboard{/t}</h2>
    <table>
     <tr>
      <td>{t}Model{/t}</td>
@@ -36,7 +36,7 @@
   </td>
   
   <td style="vertical-align:top;width:32%">
-   <h2><img align="center" src="images/mouse.png"> {t}Mouse{/t}</h2>
+   <h2><img align="middle" src="images/mouse.png"> {t}Mouse{/t}</h2>
    <table>
     <tr>
      <td>{t}Type{/t}</td>
@@ -63,7 +63,7 @@
   </td>
   
   <td style="vertical-align:top;width:33%">
-   <h2><img align="center" src="images/select_phone.png"> {t}Telephone hardware{/t}</h2>
+   <h2><img align="middle" src="images/select_phone.png"> {t}Telephone hardware{/t}</h2>
    <table style="width:100%" border=0>
     <tr>
      <td>{t}Telephone{/t}&nbsp;
@@ -80,7 +80,7 @@
  <tr><td colspan=5><p class="plugbottom" style="text-align:left;"></p></td></tr>
  <tr>
    <td style="width:33%;vertical-align:top;">
-   <h2><img align="center" src="images/hardware.png"> {t}Graphic device{/t}</h2>
+   <h2><img align="middle" src="images/hardware.png"> {t}Graphic device{/t}</h2>
    <table>
     <tr>
      <td>{t}Driver{/t}</td>
@@ -114,7 +114,7 @@
   </td>
 
    <td style="width:32%; vertical-align:top;">
-   <h2><img align="center" src="images/display.png"> {t}Display device{/t}</h2>
+   <h2><img align="middle" src="images/display.png"> {t}Display device{/t}</h2>
    <table>
     <tr>
      <td>{t}Type{/t}</td>
@@ -138,7 +138,7 @@
   </td>
 
   <td style="width:33%; vertical-align:top;">
-   <h2><img align="center" src="images/server.png"> {t}Remote desktop{/t}</h2>
+   <h2><img align="middle" src="images/server.png"> {t}Remote desktop{/t}</h2>
    <table>
     <tr>
      <td></td>
@@ -178,7 +178,7 @@
 
  <tr>
   <td style="width:50%; vertical-align:top;">
-   <h2><img align="center" src="images/printer.png"> {t}Print device{/t}</h2>
+   <h2><img align="middle" src="images/printer.png"> {t}Print device{/t}</h2>
    <input type=checkbox name="gotoLpdEnable" value="1" {$gotoLpdEnable} {$gotoLpdEnableACL} title="{t}Select to start IPP based printing service on terminal{/t}">
    {t}Provide print services{/t}
    <br>
@@ -200,7 +200,7 @@
   </td>
 
   <td style="vertical-align:top;">
-   <h2><img align="center" src="images/scanner.png"> {t}Scan device{/t}</h2>
+   <h2><img align="middle" src="images/scanner.png"> {t}Scan device{/t}</h2>
    <input type=checkbox name="gotoScannerEnable" value="1" title="{t}Select to start SANE scan service on terminal{/t}" {$gotoScannerEnable} {$gotoScannerEnableACL}>
    {t}Provide scan services{/t}
    <br>
