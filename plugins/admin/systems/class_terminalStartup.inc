@@ -244,6 +244,7 @@ class termstartup extends plugin
     /* Add missing arrays */
     foreach (array("gotoFilesystem", "gotoAutoFs", "gotoModules") as $val){
       if (isset ($this->$val) && count ($this->$val) != 0){
+    
         $this->attrs["$val"]= array_unique($this->$val);
       }
     }

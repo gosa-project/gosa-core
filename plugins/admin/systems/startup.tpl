@@ -64,13 +64,13 @@
    <h2>
     <img alt="" align="middle" src="images/zip.png"> {t}Automount devices (format: complete autofs entry){/t}
    </h2>
-   <select style="width:100%; height:100px;" name="autofs_list[]" size=15 multiple title="{t}Add additional automount entries{/t}">
+   <select style="width:100%; height:100px;" name="autofs_list[]" size=15 multiple title='{t}Add additional automount entries{/t}'>
     {html_options values=$gotoAutoFs output=$gotoAutoFs}
    </select>
    <br>
-   <input name="autofs" size=30 align=middle maxlength=80 {$gotoAutoFs}>
-   <input type=submit value="{t}Add{/t}" name="add_autofs" {$gotoAutoFs}>&nbsp;
-   <input type=submit value="{t}Delete{/t}" name="delete_autofs" {$gotoAutoFs}>
+   <input name="autofs" size=30 align=middle maxlength=80>
+   <input type=submit value="{t}Add{/t}" name="add_autofs">&nbsp;
+   <input type=submit value="{t}Delete{/t}" name="delete_autofs">
   </td>
  </tr>
 </table>

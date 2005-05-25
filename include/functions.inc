@@ -1153,7 +1153,7 @@ function range_selector($dcnt,$start,$range=25)
 
   /* Draw decrement */
   if ($start > 0 ) {
-    $output.="  <a href= \"main.php?plug=".validate($_GET['plug'])."&start=".
+    $output.="  <a href= \"main.php?plug=".validate($_GET['plug'])."&amp;start=".
       (($start-$range))."\">".
       "<img alt=\"\" src=\"images/back.png\" border=0 align=\"middle\"></a>";
   }
@@ -1162,17 +1162,17 @@ function range_selector($dcnt,$start,$range=25)
   for ($i= $begin; $i < $end; $i++) {
     if ($ppage == $i){
       $output.= "<a style=\"background-color:#D0D0D0;\" href=\"main.php?plug=".
-        validate($_GET['plug'])."&start=".
+        validate($_GET['plug'])."&amp;start=".
         ($i*$range)."\">&nbsp;".($i+1)."&nbsp;</a>";
     } else {
       $output.= "<a href=\"main.php?plug=".validate($_GET['plug']).
-        "&start=".($i*$range)."\">&nbsp;".($i+1)."&nbsp;</a>";
+        "&amp;start=".($i*$range)."\">&nbsp;".($i+1)."&nbsp;</a>";
     }
   }
 
   /* Draw increment */
   if($start < ($dcnt-$range)) {
-    $output.="  <a href= \"main.php?plug=".validate($_GET['plug'])."&start=".
+    $output.="  <a href= \"main.php?plug=".validate($_GET['plug'])."&amp;start=".
       (($start+($range)))."\">".
       "<img alt=\"\" src=\"images/forward.png\" border=0 align=\"middle\"></a>";
   }

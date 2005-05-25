@@ -349,21 +349,36 @@ class addressbook extends plugin
 				isset($attrs['homePhone'][0]) ||
 				isset($attrs['mail'][0])){
 
-				$this->telephone_list[$attrs['sn'][0].$attrs['dn']]=
-					"<td class=\"phonelist\" title=\"".$attrs['sn'][0].", ".$attrs['givenName'][0]."\" onClick='location.href=\"main.php?plug=".validate($_GET['plug'])."&amp;start=".validate($_GET['start'])."&amp;show=".base64_encode($attrs['dn'])."\"'><a href=main.php?plug=".validate($_GET['plug'])."&amp;start=".validate($_GET['start'])."&amp;show=".base64_encode($attrs['dn']).">".$attrs['sn'][0].", ".$attrs['givenName'][0]."</a></td>".
-					"<td title=\""._("Dial")." ".$attrs['telephoneNumber'][0]."\"><a href=main.php?plug=".validate($_GET['plug'])."&amp;dial=telephoneNumber&amp;start=".validate($_GET['start'])."&amp;target=".base64_encode($attrs['dn']).">".$attrs['telephoneNumber'][0]."</a></td>".
-					"<td title=\"".$attrs['facsimileTelephoneNumber'][0]."\">".$attrs['facsimileTelephoneNumber'][0]."</td>".
-					"<td title=\""._("Dial")." ".$attrs['mobile'][0]."\"><a href=main.php?plug=".validate($_GET['plug'])."&amp;dial=mobile&amp;start=".validate($_GET['start'])."&amp;target=".base64_encode($attrs['dn']).">".$attrs['mobile'][0]."</a></td>".
-					"<td title=\""._("Dial")." ".$attrs['homePhone'][0]."\"><a href=main.php?plug=".validate($_GET['plug'])."&amp;dial=homePhone&amp;start=".validate($_GET['start'])."&amp;target=".base64_encode($attrs['dn']).">".$attrs['homePhone'][0]."</a></td><td>".
-					"<a href=\"getvcard.php?dn=".base64_encode($attrs['dn'])."\">".
-					"<img alt=\"\" align=\"top\" border=0 src=\"images/save.png\"".
-					"alt=\"vcf\" title=\"".sprintf(_("Save contact for %s as vcard"), $attrs['givenName'][0]." ".$attrs['sn'][0])."\"></a>";
+$this->telephone_list[$attrs['sn'][0].$attrs['dn']]=
+
+"<td class=\"phonelist\" title=\"".$attrs['sn'][0].", ".$attrs['givenName'][0]."\" onClick='location.href=\"main.php?plug=".validate($_GET['plug'])."&amp;start=".validate($_GET['start'])."&amp;show=".base64_encode($attrs['dn'])."\"'><a href=\"main.php?plug=".validate($_GET['plug'])."&amp;start=".validate($_GET['start'])."&amp;show=".base64_encode($attrs['dn'])."\">".$attrs['sn'][0].", ".$attrs['givenName'][0].
+	"</a>
+</td>
+<td title=\""._("Dial")." ".$attrs['telephoneNumber'][0]."\">
+	<a href=\"main.php?plug=".validate($_GET['plug'])."&amp;dial=telephoneNumber&amp;start=".validate($_GET['start'])."&amp;target=".base64_encode($attrs['dn'])."\">".$attrs['telephoneNumber'][0]."
+	</a>
+</td>
+<td title=\"".$attrs['facsimileTelephoneNumber'][0]."\">
+	".$attrs['facsimileTelephoneNumber'][0]."
+</td>
+<td title=\""._("Dial")." ".$attrs['mobile'][0]."\">
+	<a href=\"main.php?plug=".validate($_GET['plug'])."&amp;dial=mobile&amp;start=".validate($_GET['start'])."&amp;target=".base64_encode($attrs['dn'])."\">".$attrs['mobile'][0]."
+	</a>
+</td>
+<td title=\""._("Dial")." ".$attrs['homePhone'][0]."\">
+	<a href=\"main.php?plug=".validate($_GET['plug'])."&amp;dial=homePhone&amp;start=".validate($_GET['start'])."&amp;target=".base64_encode($attrs['dn'])."\">".$attrs['homePhone'][0]."
+	</a>
+</td>
+<td>
+	<a href=\"getvcard.php?dn=".base64_encode($attrs['dn'])."\">
+	<img align=\"top\" border=0 src=\"images/save.png\" alt=\"vcf\" title=\"".sprintf(_("Save contact for %s as vcard"), $attrs['givenName'][0]." ".$attrs['sn'][0])."\">
+	</a>";
 
 				if (isset($attrs['mail'])){
 					$dest= sprintf(_("Send mail to %s"), $attrs['mail'][0]);
 					$this->telephone_list[$attrs['sn'][0].$attrs['dn']].=
 						"<a href=\"mailto:".$attrs['givenName'][0]." ".$attrs['sn'][0]." <".$attrs['mail'][0].">\">".
-						"<img alt=\"\" align=\"top\" border=0 src=\"images/mailto.png\"".
+						"<img  align=\"top\" border=0 src=\"images/mailto.png\"".
 						"alt=\"vcf\" title=\"$dest\"></a>";
 				}
 				$this->telephone_list[$attrs['sn'][0].$attrs['dn']].= "</td>";
@@ -432,7 +447,7 @@ class addressbook extends plugin
                                     $name == "homePhone" ||
                                     $name == "telephoneNumber"){
                                         $smarty->assign("info_$name",
-                                                "<a title=\""._("Dial")." ".$info["$name"][0]."\" href=main.php?plug=".validate($_GET['plug'])."&amp;dial=$name&amp;start=".validate($_GET['start'])."&amp;target=".base64_encode($_SESSION['show_info']).">".$info["$name"][0]."</a>");
+                                                "<a title=\""._("Dial")." ".$info["$name"][0]."\" href=\"main.php?plug=".validate($_GET['plug'])."&amp;dial=$name&amp;start=".validate($_GET['start'])."&amp;target=".base64_encode($_SESSION['show_info'])."\">".$info["$name"][0]."</a>");
                                 } else {
 					$smarty->assign("info_$name", preg_replace("/\n/", "<br>", $info["$name"][0]));
                                 }
@@ -476,7 +491,7 @@ class addressbook extends plugin
 		} else {
 			$col= "style=\"background-color: #F5F5F5;\"";
 		}
-		$output.= "<tr $col>$val</tr>";
+		$output.= "<tr $col>\n$val</tr>\n";
 	}
 	$smarty->assign("search_result", $output);
 	$smarty->assign("apply", apply_filter());
