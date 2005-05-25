@@ -59,7 +59,7 @@
 	<h1>{t}Export successful{/t}</h1>
 <br>
 	<div>
-		<img border="0" align=middle src="images/filesaveas.png">
+		<img alt="" border="0" align=middle src="images/filesaveas.png">
 		<a href = "getldif.php{$para}" title="{t}Click here to save the complete LDAP database to a file{/t} ">{t}Click here to save the LDAP Export {/t}</a>
 
 

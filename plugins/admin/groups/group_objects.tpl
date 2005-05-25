@@ -26,13 +26,13 @@
      </table>
     </p>
     <p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-    <table width="100%"><tr><td width="50%"><img src="{$tree_image}" align=middle>&nbsp;{t}Display users of department{/t}</td>
+    <table width="100%"><tr><td width="50%"><img alt="" src="{$tree_image}" align=middle>&nbsp;{t}Display users of department{/t}</td>
     <td><select name="dselect" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
       {html_options options=$deplist selected=$dselect}
     </select></td></tr></table>
     </p>
     <p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-    <table width="100%"><tr><td width="50%"><img src="{$search_image}" align=middle>&nbsp;{t}Display users matching{/t}</td>
+    <table width="100%"><tr><td width="50%"><img alt="" src="{$search_image}" align=middle>&nbsp;{t}Display users matching{/t}</td>
     <td><input type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching user names{/t}' onChange="mainform.submit()"></td></tr></table>
     </p>
    {$apply}
