@@ -42,13 +42,13 @@
      </table>
     </p>
     <p class="contentboxb" style="border-top:1px solid #B0B0B0;">
-    <table width="100%"><tr><td><img src="{$tree_image}" align=middle>&nbsp;{t}Display applications of department{/t}</td>
+    <table width="100%"><tr><td><img alt="" src="{$tree_image}" align=middle>&nbsp;{t}Display applications of department{/t}</td>
     <td><select name="depselect" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
       {html_options options=$deplist selected=$depselect}
     </select></td></tr></table>
     </p>
     <p class="contentboxb" style="border-top:1px solid #B0B0B0">
-    <table width="100%"><tr><td><img src="{$search_image}" align=middle>&nbsp;{t}Display applications matching{/t}</td>
+    <table width="100%"><tr><td><img alt="" src="{$search_image}" align=middle>&nbsp;{t}Display applications matching{/t}</td>
     <td><input type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching application names{/t}' onChange="mainform.submit()"></td></tr></table>
     </p>
     {$apply}
