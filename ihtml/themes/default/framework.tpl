@@ -40,6 +40,8 @@
     <td style="background-color:#EEFFE6; vertical-align:top;" >
       <div style="background-color:#CDF6BD; height:12px; width:100%;">&nbsp;</div>
       {$menu}
+	  <br>
+	  <center>{$w3c}</center>
       <div style="height:100px; width:140px;"></div>
     </td>
     <!-- Plugin window -->
