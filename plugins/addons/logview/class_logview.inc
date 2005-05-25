@@ -222,7 +222,7 @@ class logview extends plugin
 
 				$res.="<tr style=\"$col\">\n";
 				$res.="<td style=\"text-align:center\">
-						<img src=\"".get_template_path('images/log_'.strtolower($line['log_level'])).".png\" title=\"Log level is '".$line['log_level']."'\"></td><td>".$line['host']."</td>";
+						<img alt=\"\" src=\"".get_template_path('images/log_'.strtolower($line['log_level'])).".png\" title=\"Log level is '".$line['log_level']."'\"></td><td>".$line['host']."</td>";
 				$res.="<td>".$line['time_stamp']."</td><td width=\"100%\">".$line['message']."</td>";
 				$res.="</tr>\n";
 			}
@@ -246,7 +246,7 @@ class logview extends plugin
 	foreach( array("host", "log_level", "time", "regex") as $type){
                 $smarty->assign("$type", $logfilter[$type]);
         }
-	$smarty->assign("mode".$this->sort, "<img src=\"images/sort_".$this->sort_direction.
+	$smarty->assign("mode".$this->sort, "<img alt=\"\" src=\"images/sort_".$this->sort_direction.
                         ".png\" border=0 align=middle>");
 	return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
   }
