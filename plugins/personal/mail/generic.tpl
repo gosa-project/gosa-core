@@ -87,11 +87,7 @@
    <input type=checkbox name="use_spam_filter" value="1" {$use_spam_filter}
 	{$gosaSpamSortLevelACL} title="{t}Select if you want to filter this mails through spamassassin{/t}"> {t}Move mails tagged with spam level greater than{/t}
    <select size="1" name="gosaSpamSortLevel" {$gosaSpamSortLevelACL} title="{t}Choose spam level - smaller values are more sensitive{/t}">
-        {if $SELECT_spamlevel}
-            {html_options values=$spamlevel output=$spamlevel selected=$gosaSpamSortLevel}
-        {else}
-            <option>
-        {/if}
+        {html_options values=$spamlevel output=$spamlevel selected=$gosaSpamSortLevel}
    </select>
    {t}to folder{/t}
    <select size="1" name="gosaSpamMailbox" {$gosaSpamMailboxACL}>
