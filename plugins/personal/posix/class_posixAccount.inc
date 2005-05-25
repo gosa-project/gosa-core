@@ -214,7 +214,7 @@ class posixAccount extends plugin
 
     /* Do we represent a valid posixAccount? */
     if (!$this->is_account && $this->parent == NULL ){
-      $display= "<img src=\"images/stop.png\" align=center>&nbsp;<b>".
+      $display= "<img src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
         _("This account has no unix extensions.")."</b>";
       $display.= back_to_main();
       return ($display);

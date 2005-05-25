@@ -185,7 +185,7 @@ class mailAccount extends plugin
 
     /* Do we represent a valid account? */
     if (!$this->is_account && $this->parent == NULL){
-      $display= "<img src=\"images/stop.png\" align=center>&nbsp;<b>".
+      $display= "<img src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
         _("This account has no mail extensions.")."</b>";
       $display.= back_to_main();
       return ($display);
