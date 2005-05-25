@@ -58,33 +58,56 @@
     <p class="contentboxh"><img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}</p>
    </div>
    <div class="contentboxb">
-    <p class="contentboxb" style="border-top:1px solid #B0B0B0;">
-    <table style="width:100%;">
+    <table style="width:100%;border-top:1px solid #B0B0B0;">
      {$alphabet}
     </table>
-    </p>
-    <p class="contentboxb" style="border-top:1px solid #B0B0B0;">
-    <input type=checkbox name="organizational" value="1" {$organizational} onClick="mainform.submit()" title="{t}Select to see regular users{/t}">{t}Show organizational entries{/t}<br>
+    
+<table  style="width:100%;border-top:1px solid #B0B0B0;">
+	<tr>
+		<td>
+<input type=checkbox name="organizational" value="1" {$organizational} onClick="mainform.submit()" title="{t}Select to see regular users{/t}">{t}Show organizational entries{/t}<br>
     <input type=checkbox name="global" value="1" {$global} onClick="mainform.submit()" title="{t}Select to see users in addressbook{/t}">{t}Show addressbook entries{/t}<br>
-    </p>
-    <p class="contentboxb" style="border-top:1px solid #B0B0B0;">
-    <table style="width:100%;"><tr><td><img alt="" src="{$tree_image}" align=middle>&nbsp;{t}Display results for department{/t}</td>
-    <td><select name="search_base" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
-      {html_options options=$deplist selected=$depselect}
-    </select></td></tr></table>
-    </p>
-    <p class="contentboxb" style="border-top:1px solid #B0B0B0">
-    <table style="width:100%;"><tr><td width="50%"><img alt="" src="{$search_image}" align=middle>&nbsp;{t}Search for{/t}</td>
-    <td><input type='text' name='search_for' maxlength='20' value='{$search_for}' title='{t}Search string{/t}' onChange="mainform.submit()"></td></tr></table>
-   </p>
-    <p class="contentboxb" style="border-top:1px solid #B0B0B0">
-    <table style="width:100%;"><tr><td width="50%"><img alt="" src="{$search_image}" align=middle>&nbsp;{t}Match object{/t}</td>
-     <td>
-      <select name="object_type" size=1 onChange="mainform.submit()" title="{t}Choose the object that will be searched in{/t}">
-       {html_options options=$objlist selected=$object_type}
-      </select>
-     </td></tr></table>
-    </p>
+		</td>
+	</tr>
+</table>
+
+<table style="width:100%;border-top:1px solid #B0B0B0;">
+	<tr>
+		<td>
+			<img alt="" src="{$tree_image}" align=middle>
+			&nbsp;{t}Display results for department{/t}
+		</td>
+    	<td>
+			<select name="search_base" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
+		      	{html_options options=$deplist selected=$depselect}
+    		</select>
+		</td>
+	</tr>
+</table>
+
+<table style="width:100%;border-top:1px solid #B0B0B0;">
+	<tr>
+		<td width="50%"><img alt="" src="{$search_image}" align=middle>
+			&nbsp;{t}Search for{/t}
+		</td>
+	    <td>
+			<input type='text' name='search_for' maxlength='20' value='{$search_for}' title='{t}Search string{/t}' onChange="mainform.submit()">
+		</td>
+	</tr>
+</table>
+
+<table style="width:100%;border-top:1px solid #B0B0B0;">
+	<tr>
+		<td width="50%">
+			<img alt="" src="{$search_image}" align=middle>&nbsp;{t}Match object{/t}
+		</td>
+	    <td>
+	      	<select name="object_type" size=1 onChange="mainform.submit()" title="{t}Choose the object that will be searched in{/t}">
+    	   		{html_options options=$objlist selected=$object_type}
+	      	</select>
+	    </td>
+	</tr>
+</table>
    {$apply}
    </div>
   </td>
