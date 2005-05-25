@@ -55,7 +55,7 @@
      {html_options values=$gotoModules output=$gotoModules}
     </select>
     <br>
-    <input name="module" size=30 align=center maxlength=30 {$gotoModulesACL}>
+    <input name="module" size=30 align=middle maxlength=30 {$gotoModulesACL}>
     <input type=submit value="{t}Add{/t}" name="add_module" {$gotoModulesACL}>&nbsp;
     <input type=submit value="{t}Delete{/t}" name="delete_module" {$gotoModulesACL}>
   </td>
@@ -68,7 +68,7 @@
     {html_options values=$gotoAutoFs output=$gotoAutoFs}
    </select>
    <br>
-   <input name="autofs" size=30 align=center maxlength=80 {$gotoAutoFs}>
+   <input name="autofs" size=30 align=middle maxlength=80 {$gotoAutoFs}>
    <input type=submit value="{t}Add{/t}" name="add_autofs" {$gotoAutoFs}>&nbsp;
    <input type=submit value="{t}Delete{/t}" name="delete_autofs" {$gotoAutoFs}>
   </td>
@@ -87,7 +87,7 @@
     {html_options values=$gotoFilesystem output=$gotoFilesystem}
    </select>
    <br>
-   <input name="fstab" size=80 align=center maxlength=200 {$gotoFilesystemACL}>
+   <input name="fstab" size=80 align=middle maxlength=200 {$gotoFilesystemACL}>
    <input type=submit value="{t}Add{/t}" name="add_fs" {$gotoFilesystemACL}>&nbsp;
    <input type=submit value="{t}Delete{/t}" name="delete_fs" {$gotoFilesystemACL}>
   </td>

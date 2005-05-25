@@ -12,7 +12,7 @@
     {html_options values=$kolabDelegate output=$kolabDelegate}
    </select>
    <br>
-   <input name="delegate_address" size=30 align=center maxlength=60
+   <input name="delegate_address" size=30 align=middle maxlength=60
         {$kolabDelegateACL} value="">
    <input type=submit value="{t}Add{/t}" name="add_delegation"
         {$kolabDelegateACL}>&nbsp;
