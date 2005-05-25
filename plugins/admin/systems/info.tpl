@@ -1,4 +1,4 @@
-<h2><img align="middle" src="images/info_small.png"> {t}System information{/t}</h2>
+<h2><img alt="" align="middle" src="images/info_small.png"> {t}System information{/t}</h2>
 <table style="width:100%;">
  <tr>
   <td style="vertical-align:top; width:50%">
@@ -84,7 +84,7 @@
 
 {if $active eq "true"}
 <br>
-<h2 style="border-top:1px solid #A0A0A0; padding-top:5px;"><img align="middle" src="images/lamp.png"> {t}System status{/t}</h2>
+<h2 style="border-top:1px solid #A0A0A0; padding-top:5px;"><img alt="" align="middle" src="images/lamp.png"> {t}System status{/t}</h2>
 <table style="width:100%">
  <tr>
   <td style="vertical-align:top; width:50%">
@@ -93,13 +93,13 @@
      <td><b>{t}Up since{/t}</b></td><td>{$uptime}</td>
     </tr>
     <tr>
-     <td><b>{t}CPU load{/t}</b></td><td><img src="progress.php?x=100&amp;y=16&amp;p={$load}" align="middle"></td>
+     <td><b>{t}CPU load{/t}</b></td><td><img alt="" src="progress.php?x=100&amp;y=16&amp;p={$load}" align="middle"></td>
     </tr>
     <tr>
-     <td><b>{t}Memory usage{/t}</b></td><td><img src="progress.php?x=100&amp;y=16&amp;p={$mem}" align="middle"></td>
+     <td><b>{t}Memory usage{/t}</b></td><td><img alt="" src="progress.php?x=100&amp;y=16&amp;p={$mem}" align="middle"></td>
     </tr>
     <tr>
-     <td><b>{t}Swap usage{/t}</b></td><td><img src="progress.php?x=100&amp;y=16&amp;p={$swap}" align="middle"></td>
+     <td><b>{t}Swap usage{/t}</b></td><td><img alt="" src="progress.php?x=100&amp;y=16&amp;p={$swap}" align="middle"></td>
     </tr>
     <tr>
      <td colspan=2>&nbsp;</td>

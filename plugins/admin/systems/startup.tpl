@@ -1,4 +1,4 @@
-<h2><img align="middle" src="images/penguin.png"> {t}Boot parameters{/t}</h2>
+<h2><img alt="" align="middle" src="images/penguin.png"> {t}Boot parameters{/t}</h2>
 <table style="width:100%;">
  <tr>
   <td style="width:50%; vertical-align:top;">
@@ -49,7 +49,7 @@
  <tr>
   <td style="width:50%; vertical-align:top;">
    <h2>
-    <img align="middle" src="images/hardware.png"> {t}Kernel modules (format: name parameters){/t}
+    <img alt="" align="middle" src="images/hardware.png"> {t}Kernel modules (format: name parameters){/t}
    </h2>
     <select style="width:100%; height:100px;" name="modules_list[]" size=15 multiple title="{t}Add additional modules to load on startup{/t}">
      {html_options values=$gotoModules output=$gotoModules}
@@ -62,7 +62,7 @@
 
   <td style="vertical-align:top;">
    <h2>
-    <img align="middle" src="images/zip.png"> {t}Automount devices (format: complete autofs entry){/t}
+    <img alt="" align="middle" src="images/zip.png"> {t}Automount devices (format: complete autofs entry){/t}
    </h2>
    <select style="width:100%; height:100px;" name="autofs_list[]" size=15 multiple title="{t}Add additional automount entries{/t}">
     {html_options values=$gotoAutoFs output=$gotoAutoFs}
@@ -81,7 +81,7 @@
  <tr>
   <td style="width:50%; vertical-align:top;">
    <h2>
-    <img align="middle" src="images/folder.png"> {t}Additional fstab entries{/t}
+    <img alt="" align="middle" src="images/folder.png"> {t}Additional fstab entries{/t}
    </h2>
    <select style="width:100%; height:100px;" name="fstab_list[]" size=15 multiple title="{t}Add additional filesystems to be mounted during startup{/t}">
     {html_options values=$gotoFilesystem output=$gotoFilesystem}
