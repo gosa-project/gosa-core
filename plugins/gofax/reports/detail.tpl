@@ -2,7 +2,7 @@
  <tr>
   <td> 
    <a href="getfax.php?id={$detail}&amp;download=1">
-     <img align="bottom" border="1" width="420" height="594" src="getfax.php?id={$detail}"
+     <img alt="" align="bottom" border="1" width="420" height="594" src="getfax.php?id={$detail}"
           alt="{t}FAX preview - please wait{/t}" border=1>
    </a>
    <p style="margin-top-width:0px; text-align:center;">

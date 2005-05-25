@@ -3,7 +3,7 @@
 </div>
 <div class="contentboxb">
  <p class="contentboxb" style="border-top:1px solid #B0B0B0; padding-top:5px;">
- <img align="middle" border=0 src="{$search_image}">&nbsp;{t}Search for{/t}
+ <img alt="" align="middle" border=0 src="{$search_image}">&nbsp;{t}Search for{/t}
  <input name="search_for" size=25 maxlength=60 value="{$search_for}" title="{t}Enter user name to search for{/t}" onChange="mainform.submit()">
  {t}in{/t}
  <select size="1" name="search_base" title="{t}Select subtree to base search on{/t}" onChange="mainform.submit()">
