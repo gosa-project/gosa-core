@@ -23,7 +23,6 @@
     <td><b>{t}Given name{/t}</b></td>
     <td><input name="givenName" size="30" maxlength="40" value="{$givenName}"></td>
   </tr>
-
   {if $got_uid eq "true"}
   <tr>
     <td><b>{t}Login{/t}</b></td>
@@ -38,7 +37,6 @@
     </td>
   </tr>
   {/if}
-  
 </table>
 
 <br>
@@ -48,7 +46,7 @@
   <input type=submit name="edit_cancel" value="{t}Cancel{/t}">
 </p>
 
-</form>
+
 
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
