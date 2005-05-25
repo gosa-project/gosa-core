@@ -176,7 +176,7 @@ class plugin
   {
     /* Do we represent a valid account? */
     if (!$this->is_account){
-      echo "<img alt=\"\" src=\"images/stop.png\" align=center>&nbsp;<b>".
+      echo "<img alt=\"\" src=\"images/stop.png\" align=middle>&nbsp;<b>".
         _("This 'dn' has no account extensions.")."</b>";
       return;
     }

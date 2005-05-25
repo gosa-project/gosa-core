@@ -12,17 +12,17 @@
        <tr>
         <td valign="middle">
 	 <a class=maintitlebar href='main.php?reset=1' onClick='return question("{t}You are currently editing a database entry. Do you want to dismiss the changes?{/t}", "main.php?reset=1");' style="vertical-align:middle;">
-	  <img src='{$go_home}' align="center" border="0" alt="GOSA2">&nbsp;{t}Main{/t}
+	  <img src='{$go_home}' align="middle" border="0" alt="GOSA2">&nbsp;{t}Main{/t}
 	 </a>
 	</td>
         <td>
 	 <a class=maintitlebar style="margin-left:35px; vertical-align:middle;">
-          <img src='{$go_help}' align="center" border="0" alt="GOSA2">&nbsp;{t}Help{/t}
+          <img src='{$go_help}' align="middle" border="0" alt="GOSA2">&nbsp;{t}Help{/t}
          </a>
 	</td>
 	<td>
 	 <a class=maintitlebar href='logout.php' onClick='return question("{t}You are currently editing a database entry. Do you want to dismiss the changes?{/t}", "logout.php");' style="margin-left:35px; vertical-align:middle;">
-          <img src='{$go_out}' align="center" border="0" alt="GOSA2">&nbsp;{t}Sign out{/t}
+          <img src='{$go_out}' align="middle" border="0" alt="GOSA2">&nbsp;{t}Sign out{/t}
          </a>
 	</td>
        </tr>

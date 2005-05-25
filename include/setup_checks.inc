@@ -14,11 +14,13 @@ function view_schema_check($table)
     $msg = $values['msg'];
     $message.= "<tr><td class=\"check\">$msg";
     if($values['status']) {
-      $message.="</td><td style='text-align:center' ><img src=images/true.png alt='true' /></td></tr>";
+      $message.="</td><td style='text-align:center' >
+                <img src=images/true.png alt='true' /></td></tr>";
     }
     else
     {
-      $message.="</td><td style='text-align:center' ><img src=images/button_cancel.png alt='false' /></td></tr>";}
+      $message.="</td><td style='text-align:center' >
+                <img src=images/button_cancel.png alt='false' /></td></tr>";}
   }
   $message.="</table>";
   return $message;
@@ -221,7 +223,8 @@ function schema_check($server, $admin, $password,$aff=0)
 
 function check(&$faults, $message, $description, $test, $required= TRUE)
 {
-  $msg= "<table class='check'><tr><td class='check' style='font-size:14px;'>$message</td><td rowspan=2 style='vertical-align:middle; text-align:center;width:45px;'>";
+  $msg= "<table class='check'><tr><td class='check' style='font-size:14px;'>$message</td>
+                              <td rowspan=2 style='vertical-align:middle; text-align:center;width:45px;'>";
   if ($test){
     $msg.= _("OK")."<br>";
   } else {
