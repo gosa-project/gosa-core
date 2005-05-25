@@ -223,7 +223,7 @@ if (isset($plug)){
 } else {
   $smarty->assign ("plug", "");
 }
-$mtmp="<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
+$header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
 
 
 /* React on clicks */
@@ -276,24 +276,29 @@ if ($error_collector != ""){
 } else {
   $smarty->assign("php_errors", "");
 }
-$display = $mtmp.$smarty->fetch(get_template_path('framework.tpl'));
-print $display;
+$smarty->assign("w3c", "");
+$display= $header.$smarty->fetch(get_template_path('framework.tpl'));
 
-if(file_exists("dow3ccheck.chk"))
-  {
-  $fp = fopen("/tmp/current.html","w+");
-  fwrite($fp,$display,strlen($display));
-  $str = shell_exec( "curl -F uploaded_file=@/tmp/current.html http://127.0.0.1/w3c-markup-validator/check ");
-  if(!preg_match("/This Page Is Valid/",$str ))
-    print $str;
-  else
-    print '<p>
-      <a href="http://dyn-209/w3c-markup-validator/check?uri=referer"><img alt=\"\" border="0"
-          src="http://dyn-209/w3c-markup-validator/images/vh401.png"
-          alt="Valid HTML 4.01!" height="31" width="88"></a>
-    </p>';
+/* For development, perform a W3C conformance check if specified in gosa.conf */
+if (isset($config->data['MAIN']['W3CTEST'])) {
+  $fp = fopen("/tmp/gosa.html","w+");
+  fwrite($fp, $display, strlen($display));
+  $url= $config->data['MAIN']['W3CTEST'];
+  $str = shell_exec( "curl -F uploaded_file=@/tmp/gosa.html $url/check");
+  if(!preg_match("/This Page Is Valid/i",$str )){
+    /* Show errors */
+    echo $str;
+  } else {
+    /* Re-render page with W3C logo */
+    $smarty->assign("w3c", "<a href=\"$url/check?uri=referer\"><img alt=\"\" border=\"0\" src=\"$url/images/vh401.png\" alt=\"Valid HTML 4.01!\" height=\"31\" width=\"88\"></a>");
+    $display= $header.$smarty->fetch(get_template_path('framework.tpl'));
   }
+}
 
+/* Show page... */
+echo $display;
+
+/* Save plist */
 $_SESSION['plist']= $plist;
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
