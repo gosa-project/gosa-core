@@ -228,7 +228,7 @@ class faxreport extends plugin
 
 
 			$report_list[]= "<td class=\"phonelist\"><a href=\"main.php?plug=".validate($_GET['plug'])."&amp;detail=".
-				$line["id"]."\"><img align=\"middle\" border=0 src=\"".get_template_path('images/info_small.png')."\">&nbsp;".$line["uid"]."</a></td>".
+				$line["id"]."\"><img alt=\"\" align=\"middle\" border=0 src=\"".get_template_path('images/info_small.png')."\">&nbsp;".$line["uid"]."</a></td>".
 				"<td>$date $hour:$minute</td>".
 				"<td>".$this->status[$line["status"]]."</td>".
 				"<td>".$line["sender_id"]."</td>".
@@ -298,7 +298,7 @@ class faxreport extends plugin
 	for($i= 0; $i<7; $i++){
 		$smarty->assign("mode$i", "");
 	}
-	$smarty->assign("mode".$this->sort, "<img src=\"images/sort_".$this->sort_direction.
+	$smarty->assign("mode".$this->sort, "<img alt=\"\" src=\"images/sort_".$this->sort_direction.
 			".png\" border=0 align=middle>");
         return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
   }

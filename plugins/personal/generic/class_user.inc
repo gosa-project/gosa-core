@@ -231,7 +231,7 @@ class user extends plugin
 
     /* Do we represent a valid gosaAccount? */
     if (!$this->is_account){
-      echo "<img src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
+      echo "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
         _("This account has no valid GOsa extensions.")."</b>";
       return;
     }
