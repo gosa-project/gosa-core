@@ -9,7 +9,11 @@
   <div class="contentboxb">
     <p class="contentboxb">
       <select style="width:500px; height:450px;" name="userlist" size=15 ondblclick="this.form.edit_helper.value='1'; this.form.submit()">
-	{html_options options=$userlist}
+		{if $SELECT_userlist==true}	
+			{html_options options=$userlist}
+		{else}
+			<option disabled></option>
+		{/if}
       </select>
       <br>
       <input type=submit value="{t}New{/t}..." name="new_user">&nbsp;
