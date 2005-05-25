@@ -327,6 +327,7 @@ class sambaAccount extends plugin
       }
       $smarty->assign("hint", print_sizelimit_warning());
       $smarty->assign("wslist", $wslist);
+      $smarty->assign("apply", apply_filter());
       $display= $smarty->fetch (get_template_path('samba3_workstations.tpl', TRUE,
                                 dirname(__FILE__)));
       return ($display);
