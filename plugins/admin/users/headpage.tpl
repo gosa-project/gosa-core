@@ -38,34 +38,31 @@
     <p class="contentboxh"><img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}</p>
    </div>
    <div class="contentboxb">
-    <div class="contentboxb" style="border-top:1px solid #B0B0B0;">&nbsp;
-     <table style="width:100%;">
+     <table style="width:100%;border-top:1px solid #B0B0B0;">
       {$alphabet}
      </table>
-    </div>
-    <div class="contentboxb" style="border-top:1px solid #B0B0B0;">
-    <input type=checkbox name="templates" value="1" {$templates} onClick="mainform.submit()" title="{t}Select to see template pseudo users{/t}">{t}Show templates{/t}<br>
-    <input type=checkbox name="functionalusers" value="1" {$functionalusers} onClick="mainform.submit()" title="{t}Select to see users that have only a GOsa object{/t}">{t}Show functional users{/t}<br>
-    <input type=checkbox name="unixusers" value="1" {$unixusers} onClick="mainform.submit()" title="{t}Select to see users that have posix settings{/t}">{t}Show unix users{/t}<br>
-    <input type=checkbox name="mailusers" value="1" {$mailusers} onClick="mainform.submit()" title="{t}Select to see users that have mail settings{/t}">{t}Show mail users{/t}<br>
-    <input type=checkbox name="sambausers" value="1" {$sambausers} onClick="mainform.submit()" title="{t}Select to see users that have samba settings{/t}">{t}Show samba users{/t}<br>
-    <input type=checkbox name="proxyusers" value="1" {$proxyusers} onClick="mainform.submit()" title="{t}Select to see users that have proxy settings{/t}">{t}Show proxy users{/t}<br>
-    <input type=checkbox name="ftpusers" value="1" {$ftpusers} onClick="mainform.submit()" title="{t}Select to see users that have ftp settings{/t}">{t}Show FTP users{/t}<br>
-    <input type=checkbox name="faxusers" value="1" {$faxusers} onClick="mainform.submit()" title="{t}Select to see users that have FAX settings{/t}">{t}Show FAX users{/t}<br>
-    </div>
-    <div class="contentboxb" style="border-top:1px solid #B0B0B0;">
-    <input type=checkbox name="subsearch" value="1" {$subsearch} onClick="mainform.submit()" title="{t}Dive into LDAP subtrees when searching{/t}">{t}Search in subtrees{/t}<br>
-    </div>
-    <div class="contentboxb" style="border-top:1px solid #B0B0B0;">
-    <table width="100%"><tr><td width="50%"><img alt="" src="{$tree_image}" align="middle">&nbsp;{t}Display users of department{/t}</td>
+	<table style="border-top:1px solid #B0B0B0;" width="100%">
+		<tr>
+			<td>
+				<input type=checkbox name="templates" value="1" {$templates} onClick="mainform.submit()" title="{t}Select to see template pseudo users{/t}">{t}Show templates{/t}<br>
+				<input type=checkbox name="functionalusers" value="1" {$functionalusers} onClick="mainform.submit()" title="{t}Select to see users that have only a GOsa object{/t}">{t}Show functional users{/t}<br>
+				<input type=checkbox name="unixusers" value="1" {$unixusers} onClick="mainform.submit()" title="{t}Select to see users that have posix settings{/t}">{t}Show unix users{/t}<br>
+				<input type=checkbox name="mailusers" value="1" {$mailusers} onClick="mainform.submit()" title="{t}Select to see users that have mail settings{/t}">{t}Show mail users{/t}<br>
+				<input type=checkbox name="sambausers" value="1" {$sambausers} onClick="mainform.submit()" title="{t}Select to see users that have samba settings{/t}">{t}Show samba users{/t}<br>
+				<input type=checkbox name="proxyusers" value="1" {$proxyusers} onClick="mainform.submit()" title="{t}Select to see users that have proxy settings{/t}">{t}Show proxy users{/t}<br>
+				<input type=checkbox name="ftpusers" value="1" {$ftpusers} onClick="mainform.submit()" title="{t}Select to see users that have ftp settings{/t}">{t}Show FTP users{/t}<br>
+				<input type=checkbox name="faxusers" value="1" {$faxusers} onClick="mainform.submit()" title="{t}Select to see users that have FAX settings{/t}">{t}Show FAX users{/t}<br>
+				<input type=checkbox name="subsearch" value="1" {$subsearch} onClick="mainform.submit()" title="{t}Dive into LDAP subtrees when searching{/t}">{t}Search in subtrees{/t}<br>
+			</td>
+		</tr>
+	</table>	
+
+			<table width="100%" style="border-top:1px solid #B0B0B0;"><tr><td width="50%"><img alt="" src="{$tree_image}" align="middle">&nbsp;{t}Display users of department{/t}</td>
     <td><select name="depselect" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
       {html_options options=$deplist selected=$depselect}
     </select></td></tr></table>
-    </div>
-    <div class="contentboxb" style="border-top:1px solid #B0B0B0;">
-    <table width="100%"><tr><td width="50%"><img alt="" src="{$search_image}" align="middle">&nbsp;{t}Display users matching{/t}</td>
+    <table width="100%" style="border-top:1px solid #B0B0B0;"><tr><td width="50%"><img alt="" src="{$search_image}" align="middle">&nbsp;{t}Display users matching{/t}</td>
     <td><input type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching user names{/t}' onChange="mainform.submit()"></td></tr></table>
-    </div>
    {$apply}
    </div>
   </td>
