@@ -116,3 +116,5 @@ value="{$goLogPassword}" {$goLogDBServerState}></td>
   
  </tr>
 </table>
+
+<input type="hidden" name="dbtab">
