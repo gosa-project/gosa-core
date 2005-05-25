@@ -329,7 +329,7 @@ class ogroupManagement extends plugin
       }
 
       /* Generate output */
-      $temp= "<option value=\"$key\" class=\"select\" style=\"background-image:url('combine.php?image1=$p1&image2=$p2');padding-left:35px;\">".$value['text']."</option>\n".$temp;
+      $temp= "<option value=\"$key\" class=\"select\" style=\"background-image:url('combine.php?image1=$p1&amp;image2=$p2');padding-left:35px;\">".$value['text']."</option>\n".$temp;
     }
 
     return ($temp);

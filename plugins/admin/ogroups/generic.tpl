@@ -15,7 +15,7 @@
      </td>
     </tr>
     <tr>
-     <td colspan=2><div style="height:20px;"></td>
+     <td colspan=2></td>
     </tr>
     <tr>
      <td>{t}Base{/t}{$must}</td>
