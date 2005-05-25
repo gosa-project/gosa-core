@@ -10,7 +10,7 @@
 <table cellspacing=0 cellpadding=0 style="width:100%;height:100%;">
   <tr style="background-color:#CDF6C5">
     <td style="border-bottom:1px solid black; height:50px;">
-      <img src="themes/default/images/go_logo.png">
+      <img alt="" src="themes/default/images/go_logo.png">
     </td>
     <td style="text-align:right; vertical-align:top; border-bottom:1px solid black">
       setup.php

@@ -31,14 +31,14 @@
   <tr style="vertical-align:top;">
     <!-- Menu -->
     <td style="background-color:#EEFFE6; vertical-align:top;">
-      <a href="main.php?version=1"><img src='{$go_logo}' border="0" alt="GOSA2"></a>
+      <a href="main.php?version=1"><img alt="" src='{$go_logo}' border="0" alt="GOSA2"></a>
       {$menu}
       <div style="height:100px;"></div>
     </td>
 
     <!-- Spacer with shadow -->
     <td style="background:url({$go_left}); vertical-align:top; height:100%;">
-      <img src="{$go_corner}" border="0" ALT="*">
+      <img alt="" src="{$go_corner}" border="0" ALT="*">
       <div style="height:1px;">
     </td>
 
