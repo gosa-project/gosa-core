@@ -1,5 +1,5 @@
 <div style="font-size:18px;">
- <img src="images/button_cancel.png" align=top>&nbsp;{t}Warning{/t}
+ <img alt="" src="images/button_cancel.png" align=top>&nbsp;{t}Warning{/t}
 </div>
 
 <p>

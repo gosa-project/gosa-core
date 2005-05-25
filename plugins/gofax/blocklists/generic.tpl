@@ -1,4 +1,4 @@
-<h2><img align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
+<h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
 <table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
 
  <tr>
@@ -51,7 +51,7 @@
 <table>
  <tr>
    <td>
-     <h2><img align="middle" src="images/false.png"> {t}Blocked numbers{/t}</h2>
+     <h2><img alt="" align="middle" src="images/false.png"> {t}Blocked numbers{/t}</h2>
      <select style="width:400px; height:200px;" name="numbers[]" size=15 multiple>
       {html_options values=$goFaxBlocklist output=$goFaxBlocklist}
      </select>
@@ -61,7 +61,7 @@
      <input type=submit value="{t}Delete{/t}" {$goFaxBlocklistACL} name="delete_number">
    </td>
    <td style="vertical-align:top;">
-     <h2><img align="middle" src="images/info_small.png"> {t}Information{/t}</h2>
+     <h2><img alt="" align="middle" src="images/info_small.png"> {t}Information{/t}</h2>
      <p>
       {t}Numbers can also contain wild cards.{/t}
      </p>
