@@ -163,7 +163,7 @@ class fonreport extends plugin
 		$date= preg_replace("/M/", substr($line["calldate"], 5, 2), $date);
 		$date= preg_replace("/D/", substr($line["calldate"], 8, 2), $date);
 
-		$report_list[]= "<td>$date $hour:$minute</a></td>".
+		$report_list[]= "<td>$date $hour:$minute</td>".
 			"<td>".$line["src"]."</td>".
 			"<td>".$line["dst"]."</td>".
 			"<td>".$line["channel"]."</td>".
@@ -231,7 +231,7 @@ class fonreport extends plugin
                 $smarty->assign("mode$i", "");
         }
 	$smarty->assign("mode".$this->sort, "<img alt=\"\" src=\"images/sort_".$this->sort_direction.
-			".png\" border=0 align=center>");
+			".png\" border=0 align=middle>");
 	return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
   }
 
