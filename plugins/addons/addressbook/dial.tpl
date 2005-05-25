@@ -6,7 +6,7 @@
 <tr style="background-color: white">
 <td colspan=2 style="text-align:center;">
  <div style="height:50px;">&nbsp;</div>
- <a style="font-size:22px"><img src="{$phone_image}" align=middle>{$dial_info}</a>
+ <a style="font-size:22px"><img alt="" src="{$phone_image}" align=middle>{$dial_info}</a>
  <div style="height:60px;">&nbsp;</div>
  <input type='submit' name='dial' value='{t}Dial{/t}'>&nbsp;<input type='submit' name='cancel' value='{t}Cancel{/t}'>
 
