@@ -66,7 +66,7 @@
       <input type=checkbox name="place_on_desktop" value="1" {$gosaApplicationFlagsACL} {$place_on_desktop}>
       {t}Place icon on members desktop{/t}
       <br>
-      <input type=checkbox name="place_in_startmenu" value="1" $gosaApplicationFlagsACL} {$place_in_startmenu}>
+      <input type=checkbox name="place_in_startmenu" value="1" {$gosaApplicationFlagsACL} {$place_in_startmenu}>
       {t}Place entry in members startmenu{/t}
     </td>
   </tr>
