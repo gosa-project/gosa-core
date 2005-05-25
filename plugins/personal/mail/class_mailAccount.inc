@@ -507,12 +507,6 @@ class mailAccount extends plugin
       $smarty->assign("SELECT_gosaMailAlternateAddress",false);
     }
 
-    if(isset($this->spamlevel)&&($this->spamlevel)){
-      $smarty->assign("SELECT_spamlevel",true);
-    } else {
-      $smarty->assign("SELECT_spamlevel",false);
-    }
-
     if(isset($this->spambox)&&($this->spambox)){
       $smarty->assign("SELECT_spambox",true);
     } else {
