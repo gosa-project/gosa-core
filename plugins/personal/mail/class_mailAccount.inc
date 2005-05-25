@@ -501,25 +501,25 @@ class mailAccount extends plugin
     $smarty->assign("custom_sieveACL", chkacl($this->acl, "custom_sieve"));	
     $smarty->assign("only_localACL", chkacl($this->acl, "only_local"));	
 
-    if(isset($this->gosaMailAlternateAddress)&&($this->gosaMailAlternateAddress)){ 
+    if(count($this->gosaMailAlternateAddress)){ 
       $smarty->assign("SELECT_gosaMailAlternateAddress",true);
     } else { 
       $smarty->assign("SELECT_gosaMailAlternateAddress",false);
     }
 
-    if(isset($this->spambox)&&($this->spambox)){
+    if(count($this->spambox)){
       $smarty->assign("SELECT_spambox",true);
     } else {
       $smarty->assign("SELECT_spambox",false);
     }
 
-    if(isset($this->vacationtemplates)&&($this->vacationtemplates)) {
+    if(count($this->vacation)) {
       $smarty->assign("SELECT_vacationtemplates",true);
     } else {
       $smarty->assign("SELECT_vacationtemplates",false);
     }
 
-    if(isset($this->gosaMailForwardingAddress)&&($this->gosaMailForwardingAddress)){
+    if(count($this->gosaMailForwardingAddress)){
       $smarty->assign("SELECT_gosaMailForwardingAddress",true);
     } else {
       $smarty->assign("SELECT_gosaMailForwardingAddress",false);
