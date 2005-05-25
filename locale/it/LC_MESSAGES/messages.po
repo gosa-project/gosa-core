@@ -630,6 +630,9 @@ msgid ""
 "effect immediately. Please memorize the new password, because you wouldn't "
 "be able to login without it."
 msgstr ""
+"Per cambiare la tua password usa i campi qui sotto. I cambiamenti avrenno "
+"effetto immediatamente. Memorizza la nuova password perché non sarai in "
+"grado di connetterti senza di essa."
 
 #: plugins/personal/password/password.tpl:10
 #: plugins/admin/users/password.tpl:6
@@ -637,6 +640,8 @@ msgid ""
 "Changing the password affects your authentification on mail, proxy, samba "
 "and unix services."
 msgstr ""
+"Cambiare la passord influisce sull'autenticazione su posta, proxu Internet, "
+"Samba e Unix."
 
 #: plugins/personal/password/password.tpl:15
 msgid "Current password"
@@ -670,6 +675,8 @@ msgid ""
 "You've successfully changed your password. Remember to change all programms "
 "configured to use it as well."
 msgstr ""
+"Hai cambiato con successo la tua password. Ricorda di cambiare tutto i "
+"programmmi configurati per usarla."
 
 #: plugins/personal/password/changed.tpl:12
 #: plugins/personal/generic/main.inc:167 plugins/gofax/reports/detail.tpl:68
@@ -688,11 +695,11 @@ msgstr "Indietro"
 msgid ""
 "The password you've entered as your current password doesn't match the real "
 "one."
-msgstr ""
+msgstr "La password immessa come 'Password attuale' è errata"
 
 #: plugins/personal/password/main.inc:43
 msgid "You need to specify your current password in order to proceed."
-msgstr ""
+msgstr "Devi specificare la tua 'Password attuale' per procedere."
 
 #: plugins/personal/password/main.inc:48 plugins/personal/generic/main.inc:84
 #: plugins/admin/users/class_userManagement.inc:174
@@ -700,23 +707,24 @@ msgid ""
 "The passwords you've entered as 'New password' and 'Repeated new password' "
 "do not match."
 msgstr ""
+"Le password nuova e ripetuta non corrispondono"
 
 #: plugins/personal/password/main.inc:51 plugins/personal/generic/main.inc:89
 #: plugins/admin/users/class_userManagement.inc:179
 msgid "The password you've entered as 'New password' is empty."
-msgstr ""
+msgstr "La password immessa come 'Nuova password' è vuota"
 
 #: plugins/personal/password/main.inc:59
 msgid "The password used as new and current are too similar."
-msgstr ""
+msgstr "La password immessa come 'Nuova password' è troppo simile a quella attuale."
 
 #: plugins/personal/password/main.inc:64
 msgid "The password used as new is to short."
-msgstr ""
+msgstr "La 'Nuova password' immessa è troppo corta."
 
 #: plugins/personal/password/main.inc:71
 msgid "You have no permissions to change your password."
-msgstr ""
+msgstr "Non hai il permesso di cambiare la tua password."
 
 #: plugins/personal/password/main.inc:89
 msgid "External password changer reported a problem: "
@@ -1828,11 +1836,11 @@ msgstr "Numero seriale del certificato"
 
 #: plugins/personal/generic/main.inc:107
 msgid "You are not allowed to set your password!"
-msgstr ""
+msgstr "Non hai il permesso di cambiare la tua password."
 
 #: plugins/personal/generic/main.inc:187
 msgid "Generic user information"
-msgstr ""
+msgstr "Informazioni generiche"
 
 #: plugins/personal/connectivity/class_pureftpdAccount.inc:6
 #: plugins/generic/references/class_reference.inc:34
@@ -2098,7 +2106,7 @@ msgstr ""
 
 #: plugins/personal/connectivity/class_connectivity.inc:60
 msgid "This account has no connectivity extensions."
-msgstr ""
+msgstr "Questa identità non possiede estensioni di connettività"
 
 #: plugins/personal/connectivity/class_proxyAccount.inc:5
 #: plugins/generic/references/class_reference.inc:32
@@ -2614,7 +2622,7 @@ msgstr ""
 
 #: plugins/gofax/reports/main.inc:5
 msgid "FAX reports"
-msgstr ""
+msgstr "Rapporti FAX"
 
 #: plugins/addons/addressbook/contents.tpl:15
 #: plugins/addons/addressbook/address_edit.tpl:33
@@ -2632,6 +2640,9 @@ msgid ""
 "in your site. You may want to specify the asterisk [*] like in 'Go*us' to "
 "find 'Gonicus'. Use the filters below to narrow down your search."
 msgstr ""
+"Il plugin della lista telefonica permette di cercare le persone nel sito. "
+"Puoi utilizzare l'asterisco [*] come carattere jolly. Usa i filtri sotto per "
+"caratterizzaze la ricerca."
 
 #: plugins/addons/addressbook/contents.tpl:42
 msgid "Actions"
@@ -2830,7 +2841,7 @@ msgstr ""
 #: plugins/addons/ldapmanager/class_csvimport.inc:6
 #: plugins/addons/ldapmanager/class_import.inc:6
 msgid "LDIF export"
-msgstr ""
+msgstr "Esporta in LDIF"
 
 #: plugins/addons/ldapmanager/class_csvimport.inc:93
 msgid "You've no permission to do CSV imports."
