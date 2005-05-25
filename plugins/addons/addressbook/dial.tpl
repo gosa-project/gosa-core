@@ -1,6 +1,6 @@
 <table style="width:100%; vertical-align:top; text-align:left; border:1px solid #B0B0B0;" cellpadding=4 cellspacing=0 border=0>
 <tr style="background-color: #E8E8E8; height:26px;font-weight:bold;">
-<td align=left width=100%>{t}Dial connection...{/t}</td>
+<td align=left width="100%">{t}Dial connection...{/t}</td>
 <td><a href="{$url}">X</a></td>
 </tr>
 <tr style="background-color: white">

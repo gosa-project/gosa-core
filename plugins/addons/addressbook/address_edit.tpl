@@ -1,6 +1,6 @@
 <table style="width:100%; vertical-align:top; text-align:left; border:1px solid #B0B0B0;" cellpadding=4 cellspacing=0 border=0>
 <tr style="background-color: #E8E8E8; height:26px;font-weight:bold;">
-<td align=left width=100%>{$storage_info}
+<td align=left width="100%">{$storage_info}
  <select name="storage_base" size=1" title="{t}Choose the department to store entry in{/t}">
   {html_options options=$deplist selected=$storage_base}
  </select>
@@ -10,12 +10,12 @@
 <tr style="background-color: white">
 <td colspan=2>
 
-<table width=100% cellspacing=2 cellpadding=4>
+<table width="100%" cellspacing=2 cellpadding=4>
 <tr>
 <td style="width:50%; vertical-align:top; background-color: #F0F0F0">
  <h2><img src="{$personal_image}" align=center>&nbsp;{t}Personal{/t}</h2>
  
- <table width=100%>
+ <table width="100%">
   <tr>
    <td>{t}Name{/t}{$must}, {t}Given name{/t}{$must}</td><td><input name="sn" size=10 maxlength=60 value="{$info_sn}">, <input name="givenName" size=10 maxlength=60 value="{$info_givenName}"><td>
   </tr>
@@ -32,7 +32,7 @@
 <td style="width:50%; vertical-align:top; background-color: #E8E8E8">
  <h2><img src="{$home_image}" align=center>&nbsp;{t}Private{/t}</h2>
 
- <table width=100%>
+ <table width="100%">
   <tr>
    <td>{t}Address{/t}<br><br></td>
    <td style="vertical-align:top;"><textarea name="homePostalAddress" rows=1 cols=20>{$info_homePostalAddress}</textarea></td>
@@ -56,11 +56,11 @@
 <td style="width:100%; vertical-align:top; background-color: #E4E4E4" colspan=2>
  <h2><img src="{$company_image}" align=center>&nbsp;{t}Organizational{/t}</h2>
 
- <table width=100%>
+ <table width="100%">
   <tr>
    <td>
   
-    <table width=100%>
+    <table width="100%">
      <tr>
       <td>{t}Company{/t}</td><td><input name="o" size=15 maxlength=60 value="{$info_o}"></td>
      </tr>
@@ -81,7 +81,7 @@
  
    <td style="vertical-align:top">
 
-    <table width=100%>
+    <table width="100%">
      <tr>
       <td>{t}Address{/t}<br><br></td><td style="vertical-align:top;"><textarea name="postalAddress" rows=1 cols=20>{$info_postalAddress}</textarea></td>
      </tr>

@@ -36,7 +36,7 @@ if ($remove_lock){
   /* Page header*/
   if (isset($_SESSION['objectinfo'])){
     $display= print_header(get_template_path('images/group.png'),
-                           _("Group administration"), "<img align=\"center\" src=\"".
+                           _("Group administration"), "<img alt=\"\" align=\"middle\" src=\"".
                             get_template_path('images/closedlock.png')."\"> ".
                             $_SESSION['objectinfo']);
   } else {

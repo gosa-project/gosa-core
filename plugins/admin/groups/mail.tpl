@@ -4,7 +4,7 @@
  <!-- Headline container -->
  <tr>
   <td style="width:50%; vertical-align:top;">
-   <h2><img align="center" src="images/rightarrow.png"> {t}Generic{/t}</h2>
+   <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
    <table>
     <tr>
      <td>{t}Primary address{/t}{$must}</td>
@@ -26,7 +26,7 @@
      <td>
       <br>
       {if $quotadefined eq "true"}
-      <img src="progress.php?x=100&amp;y=16&amp;p={$quotausage}" align="center">
+      <img alt="" src="progress.php?x=100&amp;y=16&amp;p={$quotausage}" align="middle">
       {else}
       {t}not defined{/t}
       {/if}
@@ -34,7 +34,7 @@
     </tr>
     <tr>
      <td>{t}Quota size{/t}</td>
-     <td><input name="gosaMailQuota" size=6 align=center maxlength=30 {$gosaMailQuota} value="{$gosaMailQuota}"> KB</td>
+     <td><input name="gosaMailQuota" size=6 align=middle maxlength=30 {$gosaMailQuota} value="{$gosaMailQuota}"> KB</td>
     </tr>
    </table>
      
@@ -43,12 +43,12 @@
    &nbsp;
   </td>
   <td style="vertical-align:top">
-   <h2><img align="center" src="images/alternatemail.png"> {t}Alternative addresses{/t}</h2>
+   <h2><img alt="" align="middle" src="images/alternatemail.png"> {t}Alternative addresses{/t}</h2>
    <select style="width:350px; height:100px;" name="alternates_list[]" size=15 multiple title="{t}List of alternative mail addresses{/t}">
     {html_options values=$gosaMailAlternateAddress output=$gosaMailAlternateAddress}
    </select>
    <br>
-   <input name="alternate_address" size=30 align=center maxlength=30 {$gosaMailAlternateAddressACL} value="">
+   <input name="alternate_address" size=30 align=middle maxlength=30 {$gosaMailAlternateAddressACL} value="">
    <input type=submit value="{t}Add{/t}" name="add_alternate" {$gosaMailAlternateAddressACL}>&nbsp;
    <input type=submit value="{t}Delete{/t}" name="delete_alternate" {$gosaMailAlternateAddressACL}>
   </td>
@@ -61,7 +61,7 @@
 <table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
  <tr>
   <td style="width:50%; vertical-align:top;">
-   <h2><img align="center" src="images/members.png"> {t}IMAP shared folders{/t}</h2>
+   <h2><img alt="" align="middle" src="images/members.png"> {t}IMAP shared folders{/t}</h2>
 
    <table cellpadding=0 border=0>
     <tr>
@@ -88,12 +88,12 @@
 	&nbsp;
   </td>
   <td style="vertical-align:top">
-   <h2><img align="center" src="images/envelope.png"> {t}Forward messages to non group members{/t}</h2>
+   <h2><img alt="" align="middle" src="images/envelope.png"> {t}Forward messages to non group members{/t}</h2>
    <select style="width:350px; height:100px;" name="forwarder_list[]" size=15 multiple>
     {html_options values=$gosaMailForwardingAddress output=$gosaMailForwardingAddress}
    </select>
    <br>
-   <input name="forward_address" size=20 align=center maxlength=60 {$gosaMailForwardingAddressACL} value="">
+   <input name="forward_address" size=20 align=middle maxlength=60 {$gosaMailForwardingAddressACL} value="">
    <input type=submit value="{t}Add{/t}" name="add_forwarder" {$gosaMailForwardingAddressACL}>&nbsp;
    <input type=submit value="{t}Add local{/t}" name="add_local_forwarder" {$gosaMailForwardingAddressACL}>&nbsp;
    <input type=submit value="{t}Delete{/t}" name="delete_forwarder" {$gosaMailForwardingAddressACL}>

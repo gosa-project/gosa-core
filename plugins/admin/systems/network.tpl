@@ -1,6 +1,6 @@
 <h2><img align="center" src="images/network.png"> {t}Network settings{/t}</h2>
 
-<table width=100%>
+<table width="100%">
  <tr>
   <td>
    <table>

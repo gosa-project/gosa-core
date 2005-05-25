@@ -222,7 +222,7 @@ class logview extends plugin
 
 				$res.="<tr style=\"$col\">\n";
 				$res.="<td style=\"text-align:center\"><img src=\"".get_template_path('images/log_'.strtolower($line['log_level'])).".png\" title=\"Log level is '".$line['log_level']."'\"></td><td>".$line['host']."</td>";
-				$res.="<td>".$line['time_stamp']."</td><td width=100%>".$line['message']."</td>";
+				$res.="<td>".$line['time_stamp']."</td><td width=\"100%\">".$line['message']."</td>";
 				$res.="</tr>\n";
 			}
 			mysql_close($link);

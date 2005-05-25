@@ -1,4 +1,4 @@
-<table width=100%>
+<table width="100%">
  <tr>
   <td style="vertical-align:top; width:50%;">
 	<table>
