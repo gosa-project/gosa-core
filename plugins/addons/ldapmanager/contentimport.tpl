@@ -4,8 +4,6 @@
 </p>
 
 <p class="seperator">&nbsp;</p>
-<div>
-<form enctype="multipart/form-data" action="" method="post">
 <table>
 <tr>
     <td width="30%">
@@ -27,7 +25,7 @@
 	</td>
 </tr>
 <tr>
-	<td heigth="20">
+	<td height="20">
 	</td>
 </tr>
 <tr>
@@ -40,7 +38,6 @@
 	</td>
 </tr>
 </table>
-</div>
 {else}
 
 <br>
@@ -54,6 +51,5 @@
 {/if}
 <p class="plugbottom">
 <input type="submit" value="{t}Import{/t}" name="fileup" >
-</form>
 </p>
 <input type="hidden" name="ignore">

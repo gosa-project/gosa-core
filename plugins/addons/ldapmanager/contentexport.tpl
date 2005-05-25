@@ -5,9 +5,6 @@
 <p class="seperator">&nbsp;</p>
 
 <table style="width:100%;">
-<div>
-
-<table>
 <tr>
 	<td width="30%">
 		{t}Export single entry{/t}
@@ -49,7 +46,6 @@
 </tr>
 {/if}
 </table> 
-</div>
 
 
 {else}

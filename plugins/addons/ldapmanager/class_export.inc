@@ -84,15 +84,15 @@ class ldifexport extends plugin
     // Export a single LDAP entry
     if(isset($_POST['sfrmgetsingle']))
     {
-      $smarty->assign("para","?ivbb=2&dn=".base64_encode($_POST['single']));
+      $smarty->assign("para","?ivbb=2&amp;dn=".base64_encode($_POST['single']));
     }
     elseif(isset($_POST['sfrmgetfull']))
     {
-      $smarty->assign("para","?ivbb=3&dn=".base64_encode($_POST['selfull']));
+      $smarty->assign("para","?ivbb=3&amp;dn=".base64_encode($_POST['selfull']));
     }
     elseif(isset($_POST['sfrmgetivbb']))
     {
-      $smarty->assign("para","?ivbb=4&dn=".base64_encode($_POST['selivbb']));
+      $smarty->assign("para","?ivbb=4&amp;dn=".base64_encode($_POST['selivbb']));
     }
 
 

@@ -4,7 +4,6 @@
 <p class="seperator">&nbsp;</p>
 
 {if $fileup != TRUE}
-<form enctype="multipart/form-data" action="" method="POST">
 <table>
 	<tr>
 		<td>
@@ -88,7 +87,6 @@
 <br><b>{t}Selected Template{/t}:</b> {$tpl}
 <br>
 <br>
-<form action="" method="POST" name="sorting">
 	<table cellspacing="1" border=0 cellpadding="4" bgcolor="#FEFEFE">
 		<tr>
 			{section name=attr loop=$anz}
@@ -126,4 +124,3 @@
 {/if}
 </p>
 <input type="hidden" name="ignore">
-</form>
