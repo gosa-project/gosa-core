@@ -205,7 +205,7 @@ class pluglist {
 					}
                     $entries= $entries."<td class=\"iconmenu\" style=\"width:20%;\" onClick='location.href=\"main.php?plug=$index&amp;reset=1\"'".
                         "><a class=\"iconmenu\" href=\"main.php?plug=$index&amp;reset=1\">".
-                        "<img alt=\"\" $isize border=0 align=middle src=\"$image".
+                        "<img $isize border=0 align=middle src=\"$image".
                         "\" alt=\"*\">&nbsp;".
                         _($plHeadline)."</a></td>\n";
                     $col++ ;
