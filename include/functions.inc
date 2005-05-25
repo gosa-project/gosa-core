@@ -916,7 +916,7 @@ function gen_locked_message($user, $dn)
   /* Prepare and show template */
   $smarty= get_smarty();
   $smarty->assign ("dn", $dn);
-  $smarty->assign ("message", sprintf(_("You're going to edit the LDAP entry '%s' which appears to be used by '%s'. Please contact the person in order to clarify proceedings."), $dn, "<a href=main.php?plug=0&viewid=$uid>$uid</a>"));
+  $smarty->assign ("message", sprintf(_("You're going to edit the LDAP entry '%s' which appears to be used by '%s'. Please contact the person in order to clarify proceedings."), $dn, "<a href=\"main.php?plug=0&amp;viewid=$uid\">$uid</a>"));
 
   return ($smarty->fetch (get_template_path('islocked.tpl')));
 }
