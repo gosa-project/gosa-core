@@ -1,6 +1,6 @@
 {t}All actions you choose here influence <b>all</b> machines in this object group. Be aware that rebooting machines may not make people happy who are currently working at these machines.{/t}
 <p class="plugbottom" style="margin-bottom:0px; padding:0px;">&nbsp;</p>
-<h2><img align="center" src="images/rocket.png"> {t}Action{/t}</h2>
+<h2><img align="middle" src="images/rocket.png"> {t}Action{/t}</h2>
 <table>
  <tr>
   <td>

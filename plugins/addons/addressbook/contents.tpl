@@ -43,12 +43,12 @@
    </div>
    <div class="contentboxb">
     <p class="contentboxb">
-     <img src="{$add_image}" align=center>&nbsp;
+     <img src="{$add_image}" align=middle>&nbsp;
      <a href="main.php{$plug}&amp;global=add">{t}Add entry{/t}</a><br>
      {if $internal eq 0}
-     <img src="{$edit_image}" align=center>&nbsp;
+     <img src="{$edit_image}" align=middle>&nbsp;
      <a href="main.php{$plug}&amp;global=edit">{t}Edit entry{/t}</a><br>
-     <img src="{$delete_image}" align=center>&nbsp;
+     <img src="{$delete_image}" align=middle>&nbsp;
      <a href="main.php{$plug}&amp;global=remove">{t}Remove entry{/t}</a><br>
      {/if}
     </p>
@@ -68,17 +68,17 @@
     <input type=checkbox name="global" value="1" {$global} onClick="mainform.submit()" title="{t}Select to see users in addressbook{/t}">{t}Show addressbook entries{/t}<br>
     </p>
     <p class="contentboxb" style="border-top:1px solid #B0B0B0;">
-    <table style="width:100%;"><tr><td><img src="{$tree_image}" align=center>&nbsp;{t}Display results for department{/t}</td>
+    <table style="width:100%;"><tr><td><img src="{$tree_image}" align=middle>&nbsp;{t}Display results for department{/t}</td>
     <td><select name="search_base" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
       {html_options options=$deplist selected=$depselect}
     </select></td></tr></table>
     </p>
     <p class="contentboxb" style="border-top:1px solid #B0B0B0">
-    <table style="width:100%;"><tr><td width="50%"><img src="{$search_image}" align=center>&nbsp;{t}Search for{/t}</td>
+    <table style="width:100%;"><tr><td width="50%"><img src="{$search_image}" align=middle>&nbsp;{t}Search for{/t}</td>
     <td><input type='text' name='search_for' maxlength='20' value='{$search_for}' title='{t}Search string{/t}' onChange="mainform.submit()"></td></tr></table>
    </p>
     <p class="contentboxb" style="border-top:1px solid #B0B0B0">
-    <table style="width:100%;"><tr><td width="50%"><img src="{$search_image}" align=center>&nbsp;{t}Match object{/t}</td>
+    <table style="width:100%;"><tr><td width="50%"><img src="{$search_image}" align=middle>&nbsp;{t}Match object{/t}</td>
      <td>
       <select name="object_type" size=1 onChange="mainform.submit()" title="{t}Choose the object that will be searched in{/t}">
        {html_options options=$objlist selected=$object_type}
