@@ -239,9 +239,32 @@ class logview extends plugin
 	$smarty->assign("log_image", get_template_path('images/log_warning.png'));
 	$smarty->assign("ruleset_image", get_template_path('images/edit.png'));
 	$smarty->assign("launchimage", get_template_path('images/launch.png'));
+
+
 	$smarty->assign("hostlist", $this->hostlist);
+
+	if(count ($this->hostlist)){
+		$smarty->assign("SELECT_hostlist",TRUE);
+	}else{
+		$smarty->assign("SELECT_hostlist",FALSE);
+	}	
+
 	$smarty->assign("loglevellist", $this->loglevellist);
+	
+    if(count ($this->loglevellist)){
+        $smarty->assign("SELECT_loglevellist",TRUE);
+    }else{
+        $smarty->assign("SELECT_loglevellist",FALSE);
+    }
+
 	$smarty->assign("tilist", $this->tilist);
+	
+    if(count ($this->tilist)){
+        $smarty->assign("SELECT_tilist",TRUE);
+    }else{
+        $smarty->assign("SELECT_tilist",FALSE);
+    }	
+
 	$logfilter['regex']= preg_replace('/\%/', '*', $logfilter['regex']);
 	foreach( array("host", "log_level", "time", "regex") as $type){
                 $smarty->assign("$type", $logfilter[$type]);
