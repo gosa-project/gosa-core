@@ -176,7 +176,7 @@ class plugin
   {
     /* Do we represent a valid account? */
     if (!$this->is_account){
-      echo "<img src=\"images/stop.png\" align=center>&nbsp;<b>".
+      echo "<img alt=\"\" src=\"images/stop.png\" align=center>&nbsp;<b>".
         _("This 'dn' has no account extensions.")."</b>";
       return;
     }
@@ -355,7 +355,7 @@ class plugin
     } else {
       $state= "";
     }
-    $display= "<table width=100%><tr>\n<td colspan=2><p><b>$text</b></p>\n";
+    $display= "<table width=\"100%\"><tr>\n<td colspan=2><p><b>$text</b></p>\n";
     $display.= "<input type=submit value=\"$button_text\" name=\"modify_state\" ".
       chkacl($this->acl, "all")." ".$state.
       "><p class=\"seperator\">&nbsp;</p></td></tr></table>";
