@@ -8,7 +8,7 @@
    <table>
     <tr>
      <td>{t}Primary address{/t}{$must}</td>
-     <td><input name="mail" size=25 maxlength=60 {$mailACL} value="{$mail}" title="{t}Primary mail address for this shared folder{/t}"></td>
+     <td><input name="mail" size=25 maxlength=65 {$mailACL} value="{$mail}" title="{t}Primary mail address for this shared folder{/t}"></td>
     </tr>
     <tr>
      <td>{t}Server{/t}</td>
@@ -93,7 +93,7 @@
     {html_options values=$gosaMailForwardingAddress output=$gosaMailForwardingAddress}
    </select>
    <br>
-   <input name="forward_address" size=20 align=middle maxlength=60 {$gosaMailForwardingAddressACL} value="">
+   <input name="forward_address" size=20 align=middle maxlength=65 {$gosaMailForwardingAddressACL} value="">
    <input type=submit value="{t}Add{/t}" name="add_forwarder" {$gosaMailForwardingAddressACL}>&nbsp;
    <input type=submit value="{t}Add local{/t}" name="add_local_forwarder" {$gosaMailForwardingAddressACL}>&nbsp;
    <input type=submit value="{t}Delete{/t}" name="delete_forwarder" {$gosaMailForwardingAddressACL}>

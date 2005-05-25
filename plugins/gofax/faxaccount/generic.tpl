@@ -9,7 +9,7 @@
        <tr>
          <td>{t}Fax{/t}{$must}</td>
          <td>
-           <input name="facsimileTelephoneNumber" size=20 maxlength=60 {$facsimileTelephoneNumberACL} value="{$facsimileTelephoneNumber}" title="{t}Fax number for GOfax to trigger on{/t}">
+           <input name="facsimileTelephoneNumber" size=20 maxlength=65 {$facsimileTelephoneNumberACL} value="{$facsimileTelephoneNumber}" title="{t}Fax number for GOfax to trigger on{/t}">
          </td>
        </tr>
        <tr>
@@ -43,7 +43,7 @@
      {if $has_mailaccount eq "false"}
      <input type=checkbox name="fax_to_mail" value="1" {$fax_to_mail} {$goFaxDeliveryModeACL}>
       {t}Deliver fax as mail to{/t}&nbsp;
-      <input name="mail" size=25 maxlength=60 {$goFaxDeliveryModeACL} value="{$mail}">
+      <input name="mail" size=25 maxlength=65 {$goFaxDeliveryModeACL} value="{$mail}">
      {else}
      <input type=checkbox name="fax_to_mail" value="1" {$fax_to_mail} {$goFaxDeliveryModeACL}>
       {t}Deliver fax as mail{/t}
@@ -73,7 +73,7 @@
 			<option>
         {/if}
      </select><br>
-     <input name="forward_address" size=20 align="middle" maxlength=60 {$facsimileAlternateTelephoneNumberACL} value="">
+     <input name="forward_address" size=20 align="middle" maxlength=65 {$facsimileAlternateTelephoneNumberACL} value="">
      <input type=submit value="{t}Add{/t}" name="add_alternate" {$facsimileAlternateTelephoneNumberACL}>&nbsp;
      <input type=submit value="{t}Add local{/t}" name="add_local_alternate" {$facsimileAlternateTelephoneNumberACL}>&nbsp;
      <input type=submit value="{t}Delete{/t}" name="delete_alternate" {$facsimileAlternateTelephoneNumberACL}>
