@@ -52,7 +52,7 @@ class printgeneric extends plugin
 
     /* Do we represent a valid printer? */
     if (!$this->is_account && $this->parent == NULL){
-      $display= "<img src=\"images/stop.png\" align=middle>&nbsp;<b>".
+      $display= "<img alt=\"\" src=\"images/stop.png\" align=middle>&nbsp;<b>".
         _("This 'dn' has no printer features.")."</b>";
       return($display);
     }
