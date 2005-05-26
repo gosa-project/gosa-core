@@ -627,74 +627,71 @@ class LDAP{
 
       /* Every block must begin with a dn */
       if($dn != "dn") {
-        $error= sprintf(_("This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' in line %s"),
-                        $line, $current_line);
+        $error= sprintf(_("This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' in line %s"), $line, $current_line);
         return -2;  
       }
-      
 
-      // Should we use Modify instead of Add
-      $usemodify = false;
+      /* Should we use Modify instead of Add */
+      $usemodify= false;
 
-      // Delete before insert
-      $usermdir = false;
-    
-
+      /* Delete before insert */
+      $usermdir= false;
     
       /* The dn address already exists! */
       if (($this->dn_exists($value))&&((!$overwrite)&&(!$cleanup))) {
+
         $error= sprintf(_("The dn: '%s' (from line %s) already exists in the LDAP database."), $line, $current_line);
         return ALREADY_EXISTING_ENTRY;   
-      }
-      elseif(($this->dn_exists($value))&&($cleanup)){
-        ;//Delete first, then add
+
+      } elseif(($this->dn_exists($value))&&($cleanup)){
+
+        /* Delete first, then add */
         $usermdir = true;        
-      }
-      elseif(($this->dn_exists($value))&&($overwrite)) {
-        ;//Modify instead of Add  
+
+      } elseif(($this->dn_exists($value))&&($overwrite)) {
+        
+        /* Modify instead of Add */
         $usemodify = true;
       }
-
      
       /* If we can't Import, return with a file error */
       if(!$this->import_single_entry($single,$usemodify,$usermdir) ) {
         $error= sprintf(_("Error while importing dn: '%s', please check your LDIF from line %s on!"), $line,
                         $current_line);
         return UNKNOWN_TOKEN_IN_LDIF_FILE;      }
-
     }
+
     return (INSERT_OK);
   }
+
 
   /* Imports a single entry */
   function import_single_entry($str_attr,$modify,$delete)
   {
-
-  
-       
     if($this->reconnect) $this->connect();
 
     $ret = false;
+    $rows= split("\n",$str_attr);
+    $data= false;
 
-    $rows = split("\n",$str_attr);
-    $data = false;
     foreach($rows as $row) {
       
       /* Check if we use Linenumbers (when import_complete_ldif is called we use
          Linenumbers) Linenumbers are use like this 123#attribute : value */
       if(!empty($row)) {
         if((strpos($row,"#")!=FALSE)&&(strpos($row,"#")<strpos($row,":"))) {
+
           /* We are using line numbers 
              Because there is a # before a : */
-          $tmp1 = split("#",$row);
-          $current_line = $tmp1[0];
-          $row = $tmp1[1];
+          $tmp1= split("#",$row);
+          $current_line= $tmp1[0];
+          $row= $tmp1[1];
         }
 
         /* Split the line into  attribute  and value */
-        $attr = split(":", $row);
-        $attr[0] = trim($attr[0]);  /* attribute */
-        $attr[1] = trim($attr[1]);  /* value */
+        $attr   = split(":", $row);
+        $attr[0]= trim($attr[0]);  /* attribute */
+        $attr[1]= trim($attr[1]);  /* value */
 
         /* Check for attributes that are used more than once */
         if(!isset($data[$attr[0]])) {
@@ -723,22 +720,20 @@ class LDAP{
       $this->cd($data['dn']);
 
       /* Delete existing entry */
-      if($delete)
-         $this->rmdir($data['dn']);
-
+      if($delete){
+        $this->rmdir($data['dn']);
+      }
       
       /* Create missing trees */
       $this->create_missing_trees($data['dn']);
       unset($data['dn']);
       
       /* If entry exists use modify */
-      if(!$modify)
+      if(!$modify){
         $ret = $this->add($data);
-      else
+      } else {
         $ret = $this->modify($data);
-      
-      
-      
+      }
     }
 
     return($ret);
@@ -751,17 +746,15 @@ class LDAP{
     foreach($lines as $line)
     {
       /* continue if theres a comment */
-      if(substr(trim($line),0,1)=="#")
-        continue; 
+      if(substr(trim($line),0,1)=="#"){
+        continue;
+      }
 
       $line= str_replace ("\t\t","\t",$line);
       $line= str_replace ("\t"  ,"," ,$line);
-      print $line;
-
-
+      echo $line;
 
       $cells = split(",",$line )  ;
-      #print_a($cells);
       $linet= str_replace ("\t\t",",",$line);
       $cells = split("\t",$line);
       $count = count($cells);  
