@@ -439,9 +439,7 @@ function parse_contrib_conf()
   elseif (preg_match("/^Usage: mkntpwd /", shell_exec ("mkntpwd 2>&1")))    {
     $pwdhash= "mkntpwd";
   } else {
-    
     $pwdhash=('perl -MCrypt::SmbHash -e "ntlmgen \"\$ARGV[0]\", \$lm, \$nt; print \"\${lm}:\${nt}\n\";" $1');
-    //    $pwdhash= 'perl -MCrypt::SmbHash -e \"ntlmgen \\"\\$ARGV[0]\\", \\$lm, \\$nt; print \\"\\${lm}:\\${nt}\\\";\"'; 
   }
 
 
