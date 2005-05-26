@@ -11,7 +11,7 @@
 #
 Summary: 		Web Based LDAP Administration Program 
 Name:			gosa
-Version: 		2.3
+Version: 		2.4
 Release:		1
 License: 		GPL
 Source: 		ftp://oss.GONICUS.de/pub/gosa/beta/%{sourcename}.tar.bz2
@@ -31,10 +31,12 @@ BuildArch:		noarch
 %define confdir 	/etc/%{name}
 
 %if %{suse}
+	%{echo:Building SuSE rpm}
 	%define apacheuser wwwrun
 	%define apachegroup root
 	%define webconf	/etc/apache2/conf.d/
 %else
+	%{echo:Building other rpm}
 	%define apacheuser apache 
 	%define apachegroup apache 
 	%define webconf	/etc/httpd/conf.d/	
@@ -60,11 +62,13 @@ Obsoletes:		gosa-ldap
 %description schema
 Contains the Schema definition files for the GOSA admin package.
 
+
 %prep
 %setup -q -n %{sourcename}
 find . -depth -name CVS -type d | xargs rm -rf
 
 %build
+
 
 %install
 # Create buildroot
@@ -95,27 +99,46 @@ EOF
 
 mkdir -p %{buildroot}/etc/openldap/schema/gosa
 mv contrib/openldap/*.schema %{buildroot}/etc/openldap/schema/gosa
+sed 's%"CONFIG_TEMPLATE_DIR", "../contrib/"%"CONFIG_TEMPLATE_DIR", "/usr/share/doc/gosa-%{version}/"%g' %{buildroot}/usr/share/gosa/include/functions.inc > %{buildroot}/usr/share/gosa/include/functions.inc.new
+mv -f %{buildroot}/usr/share/gosa/include/functions.inc.new %{buildroot}/usr/share/gosa/include/functions.inc
+mv -f doc manual
+mkdir -p %{buildroot}/etc/gosa/vacation
+mv plugins/personal/mail/sieve-*.txt %{buildroot}/etc/gosa
+mkdir -p %{buildroot}/usr/share/doc/gosa-%{version}
+rm -rf %{buildroot}/usr/share/gosa/contrib
+rm -rf %{buildroot}/usr/share/gosa/doc
 #rmdir contrib/openldap
 
 %clean
 rm -rf %{buildroot}
 
+%post
+# Add shells file to /etc/gosa 
+/bin/cp /etc/shells /etc/gosa
+
 %files
 %defattr(-,%{apacheuser},%{apachegroup})
-%doc %attr(-,root,root) AUTHORS TODO README Changelog COPYING INSTALL FAQ
-%doc %attr(-,root,root) contrib/gosa.conf contrib/scripts contrib/patches
-%doc %attr(-,root,root) contrib/fix_config.sh contrib/vacation_example.txt
+%doc %attr(-,root,root) AUTHORS TODO README README.openxchange README.safemode Changelog COPYING INSTALL FAQ
+%doc %attr(-,root,root) manual 
+%doc %attr(-,root,root) contrib/altlinux contrib/fix_config.sh contrib/gosa.conf contrib/mysql contrib/opensides
+%doc %attr(-,root,root) contrib/patches contrib/postgresql contrib/scripts contrib/vacation_example.txt
 
-%config(noreplace) %attr(0640,%{apacheuser},%{apachegroup}) %{webconf}/gosa_include.conf
-%dir %attr(0750, %{apacheuser}, %{apachegroup}) /var/spool/gosa
-%attr(-, %{apacheuser}, %{apachegroup}) /usr/share/gosa
+%config(noreplace) %attr(0600,%{apacheuser},%{apachegroup}) %{webconf}/gosa_include.conf
+%config(noreplace) %attr(0700,%{apacheuser},%{apachegroup}) /etc/gosa
+%dir %attr(0700, %{apacheuser}, %{apachegroup}) /var/spool/gosa
+%attr(0744, %{apacheuser}, %{apachegroup}) /usr/share/gosa
 
 %files schema
 %defattr(-,root,root)
-%doc COPYING AUTHORS README contrib/iplanet contrib/demo.ldif contrib/openldap/slapd.conf
+%doc COPYING AUTHORS README contrib/iplanet contrib/demo.ldif contrib/openldap
 /etc/openldap/schema/gosa
 
 %changelog
+* Mon May 24 2005 Lars Scheiter <lars.scheiter@GONICUS.de> 2.4
+- New upstream version
+- Added gosa.conf to contrib dir
+- Rearranged documentation stuff
+
 * Mon Feb 21 2005 Lars Scheiter <lars.scheiter@GONICUS.de> 2.3
 - Update version to 2.3 (upstream)
 
