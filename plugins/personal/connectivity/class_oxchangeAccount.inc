@@ -622,38 +622,38 @@ class oxchangeAccount extends plugin
   function remove_from_parent()
   {
 	$sqldeluser=array(
-	"delete from prg_notes where (user_right like '".$this->attrs['uid'][0]."') and (group_right like 's')",
-	"delete from prg_documents_read where (user_right like '".$this->attrs['uid'][0]."')",
-	"delete from prg_documents_mod where (user_right like '".$this->attrs['uid'][0]."')",
-	"delete from prg_docufolders_read where (user_right like '".$this->attrs['uid'][0]."')",
-	"delete from prg_docufolders_mod where (user_right like '".$this->attrs['uid'][0]."')",
-	"delete from prg_date_rights where (user_right like '".$this->attrs['uid'][0]."')",
-	"delete from prg_date_notification where (member_uid like '".$this->attrs['uid'][0]."')",
-	"delete from prg_dates_members where (member_uid like '".$this->attrs['uid'][0]."')",
-	"delete from prg_knowledge_read where (user_right like '".$this->attrs['uid'][0]."')",
-	"delete from prg_knowledge_mod where (user_right like '".$this->attrs['uid'][0]."')",
-	"delete from prg_knowledge_folder_read where (user_right like '".$this->attrs['uid'][0]."')",
-	"delete from prg_knowledge_folder_mod where (user_right like '".$this->attrs['uid'][0]."')",
-	"delete from prg_pin_board_read where (user_right like '".$this->attrs['uid'][0]."')",
-	"delete from prg_pin_board_mod where (user_right like '".$this->attrs['uid'][0]."')",
-	"delete from prg_bookmarks_read where (user_right like '".$this->attrs['uid'][0]."')",
-	"delete from prg_bookmarks_mod where (user_right like '".$this->attrs['uid'][0]."')",
-	"delete from prg_bookmarks_folder_read where (user_right like '".$this->attrs['uid'][0]."')",
-	"delete from prg_bookmarks_folder_mod where (user_right like '".$this->attrs['uid'][0]."')",
-	"delete from prg_tasks_rights where (user_right like '".$this->attrs['uid'][0]."')",
-	"delete from prg_tasks_notification where (member_uid like '".$this->attrs['uid'][0]."')",
-	"delete from prg_tasks_members where (member_uid like '".$this->attrs['uid'][0]."')",
-	"delete from prg_projects_rights where (user_right like '".$this->attrs['uid'][0]."')",
-	"delete from prg_projects_notification where (member_uid like '".$this->attrs['uid'][0]."')",
-	"delete	from prg_projects_members where (member_uid like '".$this->attrs['uid'][0]."')",
-	"delete from oxfolder_permissions where (entity like '".$this->attrs['uid'][0]."') AND ((role = 256) OR (role = 1024))",
-	"delete from oxfolder_standardfolders where owner like '".$this->attrs['uid'][0]."'",
-	"delete from prg_forum_read where user_right = '".$this->attrs['uid'][0]."'",
-	"delete from prg_forum_mod where user_right = '".$this->attrs['uid'][0]."'",
-	"delete from prg_forum_abo where user_right = '".$this->attrs['uid'][0]."'",
-	"delete from prg_forum_seen where username = '".$this->attrs['uid'][0]."'",
-	"delete from sys_holiday where (userid like '".$this->attrs['uid'][0]."')",
-	"delete from usr_holiday where (userid like '".$this->attrs['uid'][0]."')");
+	"delete from prg_notes where (user_right like '".$this->attrs['cn'][0]."') and (group_right like 's')",
+	"delete from prg_documents_read where (user_right like '".$this->attrs['cn'][0]."')",
+	"delete from prg_documents_mod where (user_right like '".$this->attrs['cn'][0]."')",
+	"delete from prg_docufolders_read where (user_right like '".$this->attrs['cn'][0]."')",
+	"delete from prg_docufolders_mod where (user_right like '".$this->attrs['cn'][0]."')",
+	"delete from prg_date_rights where (user_right like '".$this->attrs['cn'][0]."')",
+	"delete from prg_date_notification where (member_uid like '".$this->attrs['cn'][0]."')",
+	"delete from prg_dates_members where (member_uid like '".$this->attrs['cn'][0]."')",
+	"delete from prg_knowledge_read where (user_right like '".$this->attrs['cn'][0]."')",
+	"delete from prg_knowledge_mod where (user_right like '".$this->attrs['cn'][0]."')",
+	"delete from prg_knowledge_folder_read where (user_right like '".$this->attrs['cn'][0]."')",
+	"delete from prg_knowledge_folder_mod where (user_right like '".$this->attrs['cn'][0]."')",
+	"delete from prg_pin_board_read where (user_right like '".$this->attrs['cn'][0]."')",
+	"delete from prg_pin_board_mod where (user_right like '".$this->attrs['cn'][0]."')",
+	"delete from prg_bookmarks_read where (user_right like '".$this->attrs['cn'][0]."')",
+	"delete from prg_bookmarks_mod where (user_right like '".$this->attrs['cn'][0]."')",
+	"delete from prg_bookmarks_folder_read where (user_right like '".$this->attrs['cn'][0]."')",
+	"delete from prg_bookmarks_folder_mod where (user_right like '".$this->attrs['cn'][0]."')",
+	"delete from prg_tasks_rights where (user_right like '".$this->attrs['cn'][0]."')",
+	"delete from prg_tasks_notification where (member_uid like '".$this->attrs['cn'][0]."')",
+	"delete from prg_tasks_members where (member_uid like '".$this->attrs['cn'][0]."')",
+	"delete from prg_projects_rights where (user_right like '".$this->attrs['cn'][0]."')",
+	"delete from prg_projects_notification where (member_uid like '".$this->attrs['cn'][0]."')",
+	"delete	from prg_projects_members where (member_uid like '".$this->attrs['cn'][0]."')",
+	"delete from oxfolder_permissions where (entity like '".$this->attrs['cn'][0]."') AND ((role = 256) OR (role = 1024))",
+	"delete from oxfolder_standardfolders where owner like '".$this->attrs['cn'][0]."'",
+	"delete from prg_forum_read where user_right = '".$this->attrs['cn'][0]."'",
+	"delete from prg_forum_mod where user_right = '".$this->attrs['cn'][0]."'",
+	"delete from prg_forum_abo where user_right = '".$this->attrs['cn'][0]."'",
+	"delete from prg_forum_seen where username = '".$this->attrs['cn'][0]."'",
+	"delete from sys_holiday where (userid like '".$this->attrs['cn'][0]."')",
+	"delete from usr_holiday where (userid like '".$this->attrs['cn'][0]."')");
 
 	/* Trying to open a Postgresql Database Server */
 	if (function_exists("pg_connect")){
@@ -735,7 +735,7 @@ class oxchangeAccount extends plugin
 		return;
 	}
 	
-	$uid=$this->attrs['uid'][0];
+	$uid=$this->attrs['cn'][0];
 	
 	plugin::save();
 
