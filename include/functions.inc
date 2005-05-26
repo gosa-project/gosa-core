@@ -1532,6 +1532,13 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
     return;
   }
 
+  /* FIXME: Hide ldap size limit messages */
+  if (preg_match('/ldap_error/', $errstr)){
+    if (preg_match('/sizelimit/', $errstr)){
+      return;
+    }
+  }
+
   /* Create header as needed */
   if ($error_collector == ""){
     if ($_SESSION['js']==FALSE){
