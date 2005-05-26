@@ -4,7 +4,7 @@
 <form action='main.php{$plug}' name='mainform' method='post' enctype='multipart/form-data'>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#CDF6BD" >
   <tr>
-    <td style="height:36px; width:140px; vertical-align:bottom; text-align:middle">
+    <td style="height:36px; width:140px; vertical-align:bottom; text-align:center">
      <a href="main.php?version=1" style="vertical-align:bottom;"><img src='{$go_logo}' border="0" alt="GOSA2" align="bottom"></a>
     </td>
     <td>
