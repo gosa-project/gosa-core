@@ -48,8 +48,10 @@ class proxyAccount extends plugin
     foreach (array("F", "T", "B", "N") as $val){
       if (is_integer(strpos($this->gosaProxyAcctFlags, "$val"))) {
         $smarty->assign("filter$val", "checked");
+        $smarty->assign($val."state", "");
       } else {
         $smarty->assign("filter$val", "");
+        $smarty->assign($val."state", "disabled");
       }
     }
 
@@ -154,10 +156,14 @@ class proxyAccount extends plugin
       /* Save quota values */
       if (chkacl ($this->acl, "gosaProxyQuota") == ""){
         $old= $this->gosaProxyQuota;
-        $this->gosaProxyQuota= $_POST["quota_size"].$_POST["quota_unit"];
+        if(isset($_POST["quota_size"]) && isset($_POST["quota_unit"])){
+          $this->gosaProxyQuota= $_POST["quota_size"].$_POST["quota_unit"];
+        }
         $this->is_modified= ($old != $this->gosaProxyQuota)?TRUE:$this->is_modified;
         $old= $this->gosaProxyQuotaPeriod;
-        $this->gosaProxyQuotaPeriod = $_POST["gosaProxyQuotaPeriod"];
+        if(isset($_POST["gosaProxyQuotaPeriod"])){
+          $this->gosaProxyQuotaPeriod = $_POST["gosaProxyQuotaPeriod"];
+        }
         $this->is_modified= ($old != $this->gosaProxyQuotaPeriod)?TRUE:$this->is_modified;
       }
     }
