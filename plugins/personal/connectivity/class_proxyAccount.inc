@@ -125,10 +125,10 @@ class proxyAccount extends plugin
     if ($this->is_account){
       if (isset($_POST["quota_size"])){
         if ($_POST["quota_size"] == ""){
-          $message[]= _("Value specified as 'Quota Size' is empty.");
+          $message[]= _("Numerical value for Quota Setting is empty.");
         }
         else if ($_POST["quota_size"] <= 0){
-          $message[]= _("Value specified as 'Quota Size' is not valid.");
+          $message[]= _("Numerical value for Quota Setting is not valid.");
         }
       }
     }
