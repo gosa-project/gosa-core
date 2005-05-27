@@ -73,11 +73,12 @@ class passwordMethod
         $name = preg_replace ("/passwordMethod/i", "", $one);
         $test = new $one(false);
         if($test->is_available()) {
-          $ret['name'][$i]= preg_replace ("/passwordMethod/i","",$one);
+          $plugname= strtolower(preg_replace ("/passwordMethod/i","",$one));
+          $ret['name'][$i]= $plugname;
           $ret['class'][$i]=$one;
-          $ret[$i]['name']= preg_replace("/passwordMethod/i","",$one);
+          $ret[$i]['name']= $plugname;
           $ret[$i]['class']= $one;
-          $ret[preg_replace ("/passwordMethod/i","",$one)]=$one;                    
+          $ret[$plugname]=$one;                    
           $i++;
         }
       }
