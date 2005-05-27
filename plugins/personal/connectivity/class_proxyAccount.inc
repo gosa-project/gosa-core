@@ -116,6 +116,26 @@ class proxyAccount extends plugin
   }
 
 
+  /* Check values */
+  function check()
+  {
+    $message= array();
+    
+    /* We've got only one value to check for positive integer or emtpy field */
+    if ($this->is_account){
+      if (isset($_POST["quota_size"])){
+        if ($_POST["quota_size"] == ""){
+          $message[]= _("Value specified as 'Quota Size' is empty.");
+        }
+        else if ($_POST["quota_size"] <= 0){
+          $message[]= _("Value specified as 'Quota Size' is not valid.");
+        }
+      }
+    }
+    
+    return $message;
+  }
+  
   /* Save data to object */
   function save_object()
   {
@@ -171,7 +191,6 @@ class proxyAccount extends plugin
         $this->is_modified= ($old != $this->gosaProxyQuotaPeriod)?TRUE:$this->is_modified;
       }
     }
-
   }
 
 
