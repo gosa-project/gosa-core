@@ -47,6 +47,16 @@ function changeSubselectState(triggerField, myField) {
   }
 }
 
+function changeTripleSelectState(firstTriggerField, secondTriggerField, myField) {
+  if (
+  	document.getElementById(firstTriggerField).checked == true &&
+	document.getElementById(secondTriggerField).checked == true){
+	  document.getElementById(myField).disabled= false;
+  } else {
+	  document.getElementById(myField).disabled= true;
+  }
+}
+
 document.onkeydown= keyDown; // work together to analyze keystrokes
 if (netscape){
   document.captureEvents(Event.KEYDOWN|Event.KEYUP);
