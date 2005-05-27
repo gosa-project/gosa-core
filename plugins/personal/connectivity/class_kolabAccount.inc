@@ -156,7 +156,11 @@ class kolabAccount extends plugin
     }
 
     /* Transfer delegation list */
-    $smarty->assign("kolabDelegate", $this->kolabDelegate);
+    if (!count($this->kolabDelegate)){
+      $smarty->assign("kolabDelegate", array(""));
+    } else {
+      $smarty->assign("kolabDelegate", $this->kolabDelegate);
+    }
     $smarty->assign("kolabDelegateACL", chkacl($this->acl, $this->kolabDelegate));
 
     /* Create InvitationPolicy table */
