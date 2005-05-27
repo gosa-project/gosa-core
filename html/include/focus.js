@@ -39,6 +39,14 @@ function changeSelectState(triggerField, myField) {
   }
 }
 
+function changeSubselectState(triggerField, myField) {
+  if (document.getElementById(triggerField).checked == true){
+	  document.getElementById(myField).disabled= false;
+  } else {
+	  document.getElementById(myField).disabled= true;
+  }
+}
+
 document.onkeydown= keyDown; // work together to analyze keystrokes
 if (netscape){
   document.captureEvents(Event.KEYDOWN|Event.KEYUP);
