@@ -48,14 +48,8 @@ class proxyAccount extends plugin
     foreach (array("F", "T", "B", "N") as $val){
       if (is_integer(strpos($this->gosaProxyAcctFlags, "$val"))) {
         $smarty->assign("filter$val", "checked");
-
-        // Create state variable for checkbox (Used in proxy.tpl)
-        $smarty->assign($val."state", "");
       } else {
         $smarty->assign("filter$val", "");
-        
-        // Create state variable for checkbox (Used in proxy.tpl)
-        $smarty->assign($val."state", "disabled");
       }
     }
 
@@ -116,26 +110,6 @@ class proxyAccount extends plugin
   }
 
 
-  /* Check values */
-  function check()
-  {
-    $message= array();
-    
-    /* We've got only one value to check for positive integer or emtpy field */
-    if ($this->is_account){
-      if (isset($_POST["quota_size"])){
-        if ($_POST["quota_size"] == ""){
-          $message[]= _("Numerical value for Quota Setting is empty.");
-        }
-        else if ($_POST["quota_size"] <= 0){
-          $message[]= _("Numerical value for Quota Setting is not valid.");
-        }
-      }
-    }
-    
-    return $message;
-  }
-  
   /* Save data to object */
   function save_object()
   {
@@ -180,17 +154,14 @@ class proxyAccount extends plugin
       /* Save quota values */
       if (chkacl ($this->acl, "gosaProxyQuota") == ""){
         $old= $this->gosaProxyQuota;
-        if(isset($_POST["quota_size"]) && isset($_POST["quota_unit"])){
-          $this->gosaProxyQuota= $_POST["quota_size"].$_POST["quota_unit"];
-        }
+        $this->gosaProxyQuota= $_POST["quota_size"].$_POST["quota_unit"];
         $this->is_modified= ($old != $this->gosaProxyQuota)?TRUE:$this->is_modified;
         $old= $this->gosaProxyQuotaPeriod;
-        if(isset($_POST["gosaProxyQuotaPeriod"])){
-          $this->gosaProxyQuotaPeriod = $_POST["gosaProxyQuotaPeriod"];
-        }
+        $this->gosaProxyQuotaPeriod = $_POST["gosaProxyQuotaPeriod"];
         $this->is_modified= ($old != $this->gosaProxyQuotaPeriod)?TRUE:$this->is_modified;
       }
     }
+
   }
 
 
