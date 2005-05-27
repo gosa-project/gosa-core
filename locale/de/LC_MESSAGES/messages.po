@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schröder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-05-27 11:17+0200\n"
+"PO-Revision-Date: 2005-05-27 11:52+0200\n"
 "Last-Translator:  <(null)>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1448,7 +1448,7 @@ msgstr "Der als '%s' angegebene Wert enhält ungültige Zeichen!"
 msgid ""
 "The timeout property '%s' is checked and contains invalid or no characters!"
 msgstr ""
-"Die Zeitlimit Option '%s' ist ausgewählz, das entsprechende Feld enthält "
+"Die Zeitlimit Option '%s' ist ausgewählt, das entsprechende Feld enthält "
 "ungültige oder keine Zeichen!"
 
 #: plugins/personal/samba/class_sambaAccount.inc:632
@@ -1464,7 +1464,7 @@ msgid ""
 "Warning: This account has an undefined samba SID assigned. The problem can "
 "not be fixed by GOsa!"
 msgstr ""
-"Achtung: Diesem Konto ist eine unbekannte Samba SID zugeordnet. GOsa kann "
+"Achtung: Diesem Konto ist eine unbekannte Samba-SID zugeordnet. GOsa kann "
 "dieses Problem nicht beheben!"
 
 #: plugins/personal/samba/class_sambaAccount.inc:834
@@ -1489,8 +1489,7 @@ msgstr "Dieses Konto hat keine gültigen GOsa-Erweiterungen."
 
 #: plugins/personal/generic/class_user.inc:264
 msgid "The specified file has not been uploaded via HTTP POST! Aborted."
-msgstr ""
-"Die angegebene Datei wurde nicht über HTTP POST übertragen! Aktion "
+msgstr "Die angegebene Datei wurde nicht über HTTP POST übertragen! Aktion "
 "abgebrochen."
 
 #: plugins/personal/generic/class_user.inc:358
@@ -1523,14 +1522,12 @@ msgstr "Benutzer kann nicht zur Kerberos-Datenbank hinzugefügt werden."
 
 #: plugins/personal/generic/class_user.inc:845
 msgid "You have no permissions to create a user on this 'Base'."
-msgstr ""
-"Sie haben keine Berechtigung, einen Benutzer unterhalb dieser 'Basis' "
+msgstr "Sie haben keine Berechtigung, einen Benutzer innerhalb dieser 'Basis' "
 "anzulegen."
 
 #: plugins/personal/generic/class_user.inc:850
 msgid "You have no permissions to move a user from the original 'Base'."
-msgstr ""
-"Sie haben keine Berechtigung, einen Benutzer aus der ursprünglichen 'Basis' "
+msgstr "Sie haben keine Berechtigung, einen Benutzer aus der ursprünglichen 'Basis' "
 "zu verschieben."
 
 #: plugins/personal/generic/class_user.inc:856
@@ -1630,7 +1627,7 @@ msgstr "Persönliche Informationen"
 #: plugins/personal/generic/generic.tpl:15
 #: plugins/personal/generic/generic_picture.tpl:6
 msgid "Personal picture"
-msgstr "Persöliches Bild"
+msgstr "Bild"
 
 #: plugins/personal/generic/generic.tpl:17
 msgid "Change picture"
@@ -1898,11 +1895,11 @@ msgstr "FTP"
 
 #: plugins/personal/connectivity/class_pureftpdAccount.inc:120
 msgid "Value specified as 'Upload bandwidth' is not valid."
-msgstr "Die von ihnen angegebene 'Upload-Bandbreite' ist nicht gültig."
+msgstr "Die von Ihnen angegebene 'Upload-Bandbreite' ist nicht gültig."
 
 #: plugins/personal/connectivity/class_pureftpdAccount.inc:123
 msgid "Value specified as 'Download bandwidth' is not valid."
-msgstr "Die von ihnen angegebene 'Download-Bandbreite' ist nicht gültig."
+msgstr "Die von Ihnen angegebene 'Download-Bandbreite' ist nicht gültig."
 
 #: plugins/personal/connectivity/class_pureftpdAccount.inc:126
 msgid "Value specified as 'Files' is not valid."
@@ -1926,8 +1923,7 @@ msgstr "Proxy Konto"
 
 #: plugins/personal/connectivity/proxy.tpl:8
 msgid "Filter unwanted content (i.e. pornographic or violence related)"
-msgstr ""
-"Filtern von ungewollten Inhalten (z.B. pornografische oder gewalttätige "
+msgstr "Filtern von ungewollten Inhalten (z.B. pornografische oder gewalttätige "
 "Inhalte)"
 
 #: plugins/personal/connectivity/proxy.tpl:13
@@ -5801,7 +5797,7 @@ msgstr "Methode"
 
 #: include/functions.inc:1587
 msgid "Trace"
-msgstr "Verfolgen"
+msgstr "Ablaufverfolgung"
 
 #: include/functions.inc:1588
 msgid "File"
