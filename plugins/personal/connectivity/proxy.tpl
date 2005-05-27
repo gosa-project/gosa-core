@@ -49,7 +49,7 @@
        <select size="1" name="quota_unit" id="quota_unit" {$pstate} {$gosaProxyQuotaACL}>
 	{html_options options=$quota_unit selected=$quota_u}
        </select>
-       {t}per{/t} {$pstate}
+       {t}per{/t} <!-- {$pstate} -->
        <select size="1" name="gosaProxyQuotaPeriod" id="gosaProxyQuotaPeriod" {$pstate} {$gosaProxyQuotaACL}>
         {html_options options=$quota_time selected=$gosaProxyQuotaPeriod}
        </select>
