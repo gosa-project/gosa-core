@@ -27,7 +27,7 @@
    &nbsp;
   </td>
   <td style="vertical-align:top;">
-<p>
+
  <b>{t}Free Busy information{/t}</b><br>
  <table>
   <tr>
@@ -39,13 +39,13 @@
    <td><input name="kolabFreeBusyFuture" size=5 maxlength=6 {$kolabFreeBusyFutureACL} value="{$kolabFreeBusyFuture}"> {t}days{/t}</td>
   </tr>
  </table>
-</p>
-<p>
+
+
  <b>{t}Invitation policy{/t}</b><br>
  <table>
    {$invitation}
  </table>
-</p>
+
   </td>
  </tr>
 </table>
