@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schröder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-05-27 12:04+0200\n"
+"PO-Revision-Date: 2005-05-27 16:07+0200\n"
 "Last-Translator:  <(null)>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -314,7 +314,7 @@ msgstr "Mails abweisen die größer sind als"
 
 #: plugins/personal/mail/generic.tpl:104
 #: plugins/personal/connectivity/pureftpd.tpl:40
-#: plugins/personal/connectivity/class_proxyAccount.inc:69
+#: plugins/personal/connectivity/class_proxyAccount.inc:71
 msgid "MB"
 msgstr "MB"
 
@@ -1906,25 +1906,25 @@ msgstr "Generische Benutzer-Information"
 msgid "PHPGroupware"
 msgstr "PHPGroupware"
 
-#: plugins/personal/connectivity/proxy.tpl:1
+#: plugins/personal/connectivity/proxy.tpl:14
 msgid "Proxy account"
 msgstr "Proxy Konto"
 
-#: plugins/personal/connectivity/proxy.tpl:8
+#: plugins/personal/connectivity/proxy.tpl:22
 msgid "Filter unwanted content (i.e. pornographic or violence related)"
 msgstr ""
 "Filtern von ungewollten Inhalten (z.B. pornografische oder gewalttätige "
 "Inhalte)"
 
-#: plugins/personal/connectivity/proxy.tpl:13
+#: plugins/personal/connectivity/proxy.tpl:33
 msgid "Limit proxy access to working time"
 msgstr "Inhaltsfilterung nur während der Arbeitszeit"
 
-#: plugins/personal/connectivity/proxy.tpl:42
+#: plugins/personal/connectivity/proxy.tpl:67
 msgid "Restrict proxy usage by quota"
 msgstr "Proxynutzung durch Kontingent einschränken"
 
-#: plugins/personal/connectivity/proxy.tpl:52
+#: plugins/personal/connectivity/proxy.tpl:77
 msgid "per"
 msgstr "pro"
 
@@ -2185,27 +2185,27 @@ msgstr "Dieses Konto hat keine Konnektivitäts-Erweiterungen."
 msgid "Proxy"
 msgstr "Proxy"
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:69
+#: plugins/personal/connectivity/class_proxyAccount.inc:71
 msgid "KB"
 msgstr "KB"
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:69
+#: plugins/personal/connectivity/class_proxyAccount.inc:71
 msgid "GB"
 msgstr "GB"
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:70
+#: plugins/personal/connectivity/class_proxyAccount.inc:72
 msgid "hour"
 msgstr "Stunde"
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:70
+#: plugins/personal/connectivity/class_proxyAccount.inc:72
 msgid "day"
 msgstr "Tag"
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:70
+#: plugins/personal/connectivity/class_proxyAccount.inc:72
 msgid "week"
 msgstr "Woche"
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:70
+#: plugins/personal/connectivity/class_proxyAccount.inc:72
 msgid "month"
 msgstr "Monat"
 
@@ -4482,6 +4482,20 @@ msgstr ""
 "Aktuell hat dieser Server keine DHCP-Funktionen aktiviert. Sie können diese "
 "durch einen Klick auf die Schaltfläche unten aktivieren."
 
+#: plugins/admin/systems/class_workstationGeneric.inc:136
+msgid "This 'dn' has no workstation features."
+msgstr "Dieser 'DN' hat keine Arbeitsstations-Erweiterungen."
+
+#: plugins/admin/systems/class_workstationGeneric.inc:224
+msgid "You have no permissions to create a workstation on this 'Base'."
+msgstr ""
+"Sie haben keine Berechtigung eine Arbeitsstation unter dieser 'Basis' "
+"anzulegen."
+
+#: plugins/admin/systems/class_workstationGeneric.inc:228
+msgid "The required field 'Workstation name' is not set."
+msgstr "Das benötigte Feld 'Arbeiststationsname' ist nicht gesetzt."
+
 #: plugins/admin/systems/class_systemManagement.inc:32
 msgid "Systems"
 msgstr "Systeme"
@@ -4526,20 +4540,6 @@ msgstr "Thin-Client-Vorlage für"
 #: plugins/admin/systems/class_systemManagement.inc:673
 msgid "Workstation template for"
 msgstr "Arbeitsstations-Vorlage für"
-
-#: plugins/admin/systems/class_workstationGeneric.inc:136
-msgid "This 'dn' has no workstation features."
-msgstr "Dieser 'DN' hat keine Arbeitsstations-Erweiterungen."
-
-#: plugins/admin/systems/class_workstationGeneric.inc:224
-msgid "You have no permissions to create a workstation on this 'Base'."
-msgstr ""
-"Sie haben keine Berechtigung eine Arbeitsstation unter dieser 'Basis' "
-"anzulegen."
-
-#: plugins/admin/systems/class_workstationGeneric.inc:228
-msgid "The required field 'Workstation name' is not set."
-msgstr "Das benötigte Feld 'Arbeiststationsname' ist nicht gesetzt."
 
 #: plugins/admin/systems/printer.tpl:6
 msgid "Printer name"
@@ -4660,6 +4660,143 @@ msgstr "Protokoll-Datenbank"
 #: plugins/admin/systems/servdb.tpl:104
 msgid "Logging DB user"
 msgstr "Protokoll-DB Benutzer"
+
+#: plugins/admin/systems/class_servKolab.inc:145
+msgid "Remove Kolab extension"
+msgstr "Kolab Erweiterung entfernen"
+
+#: plugins/admin/systems/class_servKolab.inc:145
+msgid ""
+"This server has kolab features enabled. You can disable them by clicking "
+"below."
+msgstr ""
+"Dieser Server hat die Kolab-Funtionen aktiviert. Sie können diese durch "
+"einen Klick auf die Schaltfläche unten deaktivieren."
+
+#: plugins/admin/systems/class_servKolab.inc:148
+msgid "Add Kolab service"
+msgstr "Kolab Dienst hinzufügen"
+
+#: plugins/admin/systems/class_servKolab.inc:148
+msgid ""
+"This server has kolab features disabled. You can enable them by clicking "
+"below."
+msgstr ""
+"Aktuell hat dieser Server keine Kolab-Funktionen aktiviert. Sie können diese "
+"durch einen Klick auf die Schaltfläche unten aktivieren."
+
+#: plugins/admin/systems/class_servKolab.inc:167
+#, php-format
+msgid "Include data from %s days in the past when creating free/busy lists"
+msgstr ""
+"Berücksichtige %s Tage in der Vergangenheit beim Erstellen von Frei/Belegt-"
+"Listen"
+
+#: plugins/admin/systems/class_servKolab.inc:173
+#, php-format
+msgid "Warn users when using more than %s%% of their mail quota"
+msgstr "Warne Benutzer, wenn sie mehr als %s%% ihres Mail-Kontigentes benutzen"
+
+#: plugins/admin/systems/class_servKolab.inc:197
+msgid "Future days in Free/Busy settings must be set."
+msgstr "Intervall für Frei/Belegt-Informationen muß gesetzt sein."
+
+#: plugins/admin/systems/class_servKolab.inc:199
+msgid "Future days in Free/Busy settings must be a positive value."
+msgstr "Intervall für Frei/Belegt-Informationen muß ein positiver Wert sein."
+
+#: plugins/admin/systems/class_servKolab.inc:203
+msgid "The given Quota settings value must be a number."
+msgstr "Der angegebene Kontingent-Wert muß numerisch sein."
+
+#: plugins/admin/systems/class_servKolab.inc:205
+msgid "Please choose a value between 1 and 100 for Quota settings."
+msgstr "Bitte wählen Sie einen Kontingent-Wert zwischen 1 und 100."
+
+#: plugins/admin/systems/class_servKolab.inc:207
+msgid "Future days must be a value."
+msgstr "Frei/Belegt-Intervall muß einen Wert besitzen."
+
+#: plugins/admin/systems/class_servKolab.inc:212
+msgid "No SMTP privileged networks set."
+msgstr "Es sind keine SMTP privilegierte Netzwerke vorhanden."
+
+#: plugins/admin/systems/class_servKolab.inc:217
+msgid "No SMTP smarthost/relayhost set."
+msgstr "Es ist kein SMTP smarthost/relayhost gesetzt."
+
+#: plugins/admin/systems/servkolab.tpl:14
+msgid "POP3 service"
+msgstr "POP3 Dienst"
+
+#: plugins/admin/systems/servkolab.tpl:22
+msgid "POP3/SSL service"
+msgstr "POP3/SSL Dienst"
+
+#: plugins/admin/systems/servkolab.tpl:30
+msgid "IMAP service"
+msgstr "IMAP Dienst"
+
+#: plugins/admin/systems/servkolab.tpl:38
+msgid "IMAP/SSL service"
+msgstr "IMAP/SSL Dienst"
+
+#: plugins/admin/systems/servkolab.tpl:46
+msgid "Sieve service"
+msgstr "Sieve Dienst"
+
+#: plugins/admin/systems/servkolab.tpl:54
+msgid "FTP FreeBusy service (legacy, not interoperable with Kolab2 FreeBusy)"
+msgstr "FTP Frei/Belegt-Dienst (alt, inkompatibel mit Kolab 2)"
+
+#: plugins/admin/systems/servkolab.tpl:62
+msgid "HTTP FreeBusy service (legacy)"
+msgstr "HTTP Frei/Belegt-Dienst (alt)"
+
+#: plugins/admin/systems/servkolab.tpl:70
+msgid "Amavis email scanning (virus/spam)"
+msgstr "Email Scannen (Virus/Spam)"
+
+#: plugins/admin/systems/servkolab.tpl:81
+msgid "Quota settings"
+msgstr "Kontingent-Einstellungen"
+
+#: plugins/admin/systems/servkolab.tpl:97
+msgid "Free/Busy settings"
+msgstr "Frei/Belegt-Einstellungen"
+
+#: plugins/admin/systems/servkolab.tpl:102
+msgid "Allow unauthenticated downloading of Free/Busy information"
+msgstr ""
+"Erlaube nicht-authentifiziertes Herunterladen von Frei/Belegt-Informationen"
+
+#: plugins/admin/systems/servkolab.tpl:117
+msgid "SMTP privileged networks"
+msgstr "SMTP privilegierte Netzwerke"
+
+#: plugins/admin/systems/servkolab.tpl:122
+msgid "Hosts/networks allowed to relay"
+msgstr "Rechner/Netzwerke denen Weiterleitung erlaubt ist"
+
+#: plugins/admin/systems/servkolab.tpl:136
+msgid "SMTP smarthost/relayhost"
+msgstr "SMTP smarthost/relayhost"
+
+#: plugins/admin/systems/servkolab.tpl:142
+msgid "Enable MX lookup for relayhost"
+msgstr "Aktiviere MX lookup für relayhost"
+
+#: plugins/admin/systems/servkolab.tpl:147
+msgid "Host used to relay mails"
+msgstr "Host für Mail Relay"
+
+#: plugins/admin/systems/servkolab.tpl:161
+msgid "Accept Internet Mail"
+msgstr "Akzeptiere Internet Mail"
+
+#: plugins/admin/systems/servkolab.tpl:167
+msgid "Accept mail from other domains over non-authenticated SMTP"
+msgstr "Akzeptiere Mails von anderen Domänen über nicht-authentifiziertes SMTP"
 
 #: plugins/admin/systems/class_printGeneric.inc:56
 msgid "This 'dn' has no printer features."
@@ -4943,6 +5080,77 @@ msgstr "Bilderfassungsdienste bereitstellen"
 msgid "Select scanner driver to use"
 msgstr "Wählen Sie den Scanner-Treiber, der benutzt werden soll"
 
+#: plugins/admin/systems/password.tpl:2
+msgid ""
+"To change the terminal root password use the fields below. The changes take "
+"effect during next reboot. Please memorize the new password, because the you "
+"would't be able to log in. <b>Leave fields blank for password inheritance "
+"from default entries.</b>"
+msgstr ""
+"Um das Terminal Verwalter-Passwort zu ändern, benutzen Sie die unteren "
+"Felder. Die Veränderungen werden während des nächsten Starts des Terminals "
+"wirksam. Bitte merken Sie sich dieses Passwort, da Sie sonst nicht in der "
+"Lage sein werden, sich am entsprechenden System anzumelden. <b>Lassen Sie "
+"das Feld leer, um das Passwort von den Standard-Einstellungen zu übernehmen."
+"</b>"
+
+#: plugins/admin/systems/password.tpl:6
+msgid "Changing the password impinges on authentification only."
+msgstr ""
+"Das Ändern des Passwortes wirkt sich nur auf die Authentifizierung aus."
+
+#: plugins/admin/systems/component.tpl:6
+msgid "Device name"
+msgstr "Gerätename"
+
+#: plugins/admin/systems/chooser.tpl:1
+msgid "Choose the kind of system component you want to create"
+msgstr "Wählen Sie die Art der System-Komponente die Sie anlegen möchten"
+
+#: plugins/admin/systems/chooser.tpl:4
+msgid ""
+"Linux terminals and workstations are autocreated on bootup. For this reason "
+"you're only be able to create templates for a specific tree. Servers are "
+"normally automatically added too, but in some special cases you may need to "
+"create a faked server entry to provide GOsa with some informations. Other "
+"network components may be used for Nagios setups to create component "
+"dependencies."
+msgstr ""
+"Linux Terminals und Arbeitsstationen werden beim Systemstart automatisch "
+"hinzugefügt. Aus diesem Grund können Sie für diese Systemtypen nur Vorlagen "
+"für einen Unterbaum anelgen. Server werden ebenfalls automatisch "
+"hinzugefügt, in einigen Fällen benötigen Sie Pseudo-Einträge um GOsa mit "
+"benötigten Informationen zu versorgen. Weitere Netzwerk-Komponenten können z."
+"B. für Nagios Umgebungen genutzt werden um die Abhängigkeiten aufzulösen."
+
+#: plugins/admin/systems/chooser.tpl:7
+msgid "Linux thin client template"
+msgstr "Linux Thin-Client Vorlage"
+
+#: plugins/admin/systems/chooser.tpl:8
+msgid "Linux workstation template"
+msgstr "Linux Arbeitsstations-Vorlage"
+
+#: plugins/admin/systems/chooser.tpl:9
+msgid "Linux Server"
+msgstr "Linux Server"
+
+#: plugins/admin/systems/chooser.tpl:10
+msgid "Windows workstation"
+msgstr "Windows Arbeitsstation"
+
+#: plugins/admin/systems/chooser.tpl:11
+msgid "Network printer"
+msgstr "Netzwerk-Drucker"
+
+#: plugins/admin/systems/chooser.tpl:13
+msgid "Other network component"
+msgstr "Andere Netzwerk-Komponente"
+
+#: plugins/admin/systems/chooser.tpl:16
+msgid "Create"
+msgstr "Anlegen"
+
 #: plugins/admin/systems/startup.tpl:1
 msgid "Boot parameters"
 msgstr "Boot-Parameter"
@@ -5028,77 +5236,6 @@ msgid "Add additional filesystems to be mounted during startup"
 msgstr ""
 "Zusätzliche Dateisysteme hinzufügen, die während des Starts gemountet werden"
 
-#: plugins/admin/systems/password.tpl:2
-msgid ""
-"To change the terminal root password use the fields below. The changes take "
-"effect during next reboot. Please memorize the new password, because the you "
-"would't be able to log in. <b>Leave fields blank for password inheritance "
-"from default entries.</b>"
-msgstr ""
-"Um das Terminal Verwalter-Passwort zu ändern, benutzen Sie die unteren "
-"Felder. Die Veränderungen werden während des nächsten Starts des Terminals "
-"wirksam. Bitte merken Sie sich dieses Passwort, da Sie sonst nicht in der "
-"Lage sein werden, sich am entsprechenden System anzumelden. <b>Lassen Sie "
-"das Feld leer, um das Passwort von den Standard-Einstellungen zu übernehmen."
-"</b>"
-
-#: plugins/admin/systems/password.tpl:6
-msgid "Changing the password impinges on authentification only."
-msgstr ""
-"Das Ändern des Passwortes wirkt sich nur auf die Authentifizierung aus."
-
-#: plugins/admin/systems/component.tpl:6
-msgid "Device name"
-msgstr "Gerätename"
-
-#: plugins/admin/systems/chooser.tpl:1
-msgid "Choose the kind of system component you want to create"
-msgstr "Wählen Sie die Art der System-Komponente die Sie anlegen möchten"
-
-#: plugins/admin/systems/chooser.tpl:4
-msgid ""
-"Linux terminals and workstations are autocreated on bootup. For this reason "
-"you're only be able to create templates for a specific tree. Servers are "
-"normally automatically added too, but in some special cases you may need to "
-"create a faked server entry to provide GOsa with some informations. Other "
-"network components may be used for Nagios setups to create component "
-"dependencies."
-msgstr ""
-"Linux Terminals und Arbeitsstationen werden beim Systemstart automatisch "
-"hinzugefügt. Aus diesem Grund können Sie für diese Systemtypen nur Vorlagen "
-"für einen Unterbaum anelgen. Server werden ebenfalls automatisch "
-"hinzugefügt, in einigen Fällen benötigen Sie Pseudo-Einträge um GOsa mit "
-"benötigten Informationen zu versorgen. Weitere Netzwerk-Komponenten können z."
-"B. für Nagios Umgebungen genutzt werden um die Abhängigkeiten aufzulösen."
-
-#: plugins/admin/systems/chooser.tpl:7
-msgid "Linux thin client template"
-msgstr "Linux Thin-Client Vorlage"
-
-#: plugins/admin/systems/chooser.tpl:8
-msgid "Linux workstation template"
-msgstr "Linux Arbeitsstations-Vorlage"
-
-#: plugins/admin/systems/chooser.tpl:9
-msgid "Linux Server"
-msgstr "Linux Server"
-
-#: plugins/admin/systems/chooser.tpl:10
-msgid "Windows workstation"
-msgstr "Windows Arbeitsstation"
-
-#: plugins/admin/systems/chooser.tpl:11
-msgid "Network printer"
-msgstr "Netzwerk-Drucker"
-
-#: plugins/admin/systems/chooser.tpl:13
-msgid "Other network component"
-msgstr "Andere Netzwerk-Komponente"
-
-#: plugins/admin/systems/chooser.tpl:16
-msgid "Create"
-msgstr "Anlegen"
-
 #: plugins/admin/systems/class_phoneGeneric.inc:47
 msgid "This 'dn' has no phone features."
 msgstr "Diese 'dn' hat keine Telefon-Erweiterungen."
@@ -5107,143 +5244,6 @@ msgstr "Diese 'dn' hat keine Telefon-Erweiterungen."
 msgid "You have no permissions to create a phone on this 'Base'."
 msgstr ""
 "Sie haben keine Berechtigung, ein Telefon unterhalb dieser 'Basis' anzulegen."
-
-#: plugins/admin/systems/class_servKolab.inc:145
-msgid "Remove Kolab extension"
-msgstr "Kolab Erweiterung entfernen"
-
-#: plugins/admin/systems/class_servKolab.inc:145
-msgid ""
-"This server has kolab features enabled. You can disable them by clicking "
-"below."
-msgstr ""
-"Dieser Server hat die Kolab-Funtionen aktiviert. Sie können diese durch "
-"einen Klick auf die Schaltfläche unten deaktivieren."
-
-#: plugins/admin/systems/class_servKolab.inc:148
-msgid "Add Kolab service"
-msgstr "Kolab Dienst hinzufügen"
-
-#: plugins/admin/systems/class_servKolab.inc:148
-msgid ""
-"This server has kolab features disabled. You can enable them by clicking "
-"below."
-msgstr ""
-"Aktuell hat dieser Server keine Kolab-Funktionen aktiviert. Sie können diese "
-"durch einen Klick auf die Schaltfläche unten aktivieren."
-
-#: plugins/admin/systems/class_servKolab.inc:167
-#, php-format
-msgid "Include data from %s days in the past when creating free/busy lists"
-msgstr ""
-"Berücksichtige %s Tage in der Vergangenheit beim Erstellen von Frei/Belegt-"
-"Listen"
-
-#: plugins/admin/systems/class_servKolab.inc:173
-#, php-format
-msgid "Warn users when using more than %s%% of their mail quota"
-msgstr "Warne Benutzer, wenn sie mehr als %s%% ihres Mail-Kontigentes benutzen"
-
-#: plugins/admin/systems/class_servKolab.inc:197
-msgid "Future days in Free/Busy settings must be set."
-msgstr "Intervall für Frei/Belegt-Informationen muß gesetzt sein."
-
-#: plugins/admin/systems/class_servKolab.inc:199
-msgid "Future days in Free/Busy settings must be a positive value."
-msgstr "Intervall für Frei/Belegt-Informationen muß ein positiver Wert sein."
-
-#: plugins/admin/systems/class_servKolab.inc:203
-msgid "The given Quota settings value must be a number."
-msgstr "Der angegebene Kontingent-Wert muß numerisch sein."
-
-#: plugins/admin/systems/class_servKolab.inc:205
-msgid "Please choose a value between 1 and 100 for Quota settings."
-msgstr "Bitte wählen Sie einen Kontingent-Wert zwischen 1 und 100."
-
-#: plugins/admin/systems/class_servKolab.inc:207
-msgid "Future days must be a value."
-msgstr "Frei/Belegt-Intervall muß einen Wert besitzen."
-
-#: plugins/admin/systems/class_servKolab.inc:212
-msgid "No SMTP privileged networks set."
-msgstr "Es sind keine SMTP privilegierte Netzwerke vorhanden."
-
-#: plugins/admin/systems/class_servKolab.inc:217
-msgid "No SMTP smarthost/relayhost set."
-msgstr "Es ist kein SMTP smarthost/relayhost gesetzt."
-
-#: plugins/admin/systems/servkolab.tpl:14
-msgid "POP3 service"
-msgstr "POP3 Dienst"
-
-#: plugins/admin/systems/servkolab.tpl:22
-msgid "POP3/SSL service"
-msgstr "POP3/SSL Dienst"
-
-#: plugins/admin/systems/servkolab.tpl:30
-msgid "IMAP service"
-msgstr "IMAP Dienst"
-
-#: plugins/admin/systems/servkolab.tpl:38
-msgid "IMAP/SSL service"
-msgstr "IMAP/SSL Dienst"
-
-#: plugins/admin/systems/servkolab.tpl:46
-msgid "Sieve service"
-msgstr "Sieve Dienst"
-
-#: plugins/admin/systems/servkolab.tpl:54
-msgid "FTP FreeBusy service (legacy, not interoperable with Kolab2 FreeBusy)"
-msgstr "FTP Frei/Belegt-Dienst (alt, inkompatibel mit Kolab 2)"
-
-#: plugins/admin/systems/servkolab.tpl:62
-msgid "HTTP FreeBusy service (legacy)"
-msgstr "HTTP Frei/Belegt-Dienst (alt)"
-
-#: plugins/admin/systems/servkolab.tpl:70
-msgid "Amavis email scanning (virus/spam)"
-msgstr "Email Scannen (Virus/Spam)"
-
-#: plugins/admin/systems/servkolab.tpl:81
-msgid "Quota settings"
-msgstr "Kontingent-Einstellungen"
-
-#: plugins/admin/systems/servkolab.tpl:97
-msgid "Free/Busy settings"
-msgstr "Frei/Belegt-Einstellungen"
-
-#: plugins/admin/systems/servkolab.tpl:102
-msgid "Allow unauthenticated downloading of Free/Busy information"
-msgstr ""
-"Erlaube nicht-authentifiziertes Herunterladen von Frei/Belegt-Informationen"
-
-#: plugins/admin/systems/servkolab.tpl:117
-msgid "SMTP privileged networks"
-msgstr "SMTP privilegierte Netzwerke"
-
-#: plugins/admin/systems/servkolab.tpl:122
-msgid "Hosts/networks allowed to relay"
-msgstr "Rechner/Netzwerke denen Weiterleitung erlaubt ist"
-
-#: plugins/admin/systems/servkolab.tpl:136
-msgid "SMTP smarthost/relayhost"
-msgstr "SMTP smarthost/relayhost"
-
-#: plugins/admin/systems/servkolab.tpl:142
-msgid "Enable MX lookup for relayhost"
-msgstr "Aktiviere MX lookup für relayhost"
-
-#: plugins/admin/systems/servkolab.tpl:147
-msgid "Host used to relay mails"
-msgstr "Host für Mail Relay"
-
-#: plugins/admin/systems/servkolab.tpl:161
-msgid "Accept Internet Mail"
-msgstr "Akzeptiere Internet Mail"
-
-#: plugins/admin/systems/servkolab.tpl:167
-msgid "Accept mail from other domains over non-authenticated SMTP"
-msgstr "Akzeptiere Mails von anderen Domänen über nicht-authentifiziertes SMTP"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:19
 msgid "Terminals"
@@ -5884,140 +5884,6 @@ msgstr "Kann das SIEVE-Skript nicht übertragen. Die Meldung war '%s'."
 msgid "Can't activate GOsa sieve script. Server says '%s'."
 msgstr "Kann das GOsa SIEVE-Skript nicht aktivieren. Die Meldung war '%s'."
 
-#: include/class_plugin.inc:180
-msgid "This 'dn' has no account extensions."
-msgstr "Diese 'dn' hat keine Nutzerkonten Erweiterungen."
-
-#: include/class_plugin.inc:185
-msgid "This is an empty plugin."
-msgstr "Dies ist ein leeres Modul."
-
-#: include/class_plugin.inc:386
-#, php-format
-msgid ""
-"Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
-msgstr ""
-"Das in POSTCREATE angegebene Kommando '%s' (Modul '%s') scheint nicht zu "
-"existieren."
-
-#: include/class_plugin.inc:412
-#, php-format
-msgid ""
-"Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
-msgstr ""
-"Das in POSTMODIFY angegebene Kommando '%s' (Modul '%s') scheint nicht zu "
-"existieren."
-
-#: include/class_plugin.inc:438
-#, php-format
-msgid ""
-"Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
-msgstr ""
-"Das in POSTREMOVE angegebene Kommando '%s' (Modul '%s') scheint nicht zu "
-"existieren."
-
-#: include/class_password-methods-ssha.inc:51
-msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
-msgstr "Kann SSHA nicht benutzen (Fehlende Funktion mhash / sha1)"
-
-#: include/class_pluglist.inc:98
-msgid ""
-"Your gosa.conf information has changed partly. Please convert it using the "
-"contributed script fix_config.sh!"
-msgstr ""
-"Die Konfigurationsdatei gosa.conf hat sich teilweise geändert. Bitte "
-"konvertieren Sie diese mit dem beigefügten Skript fix_config.sh!"
-
-#: include/class_pluglist.inc:113 ihtml/themes/altlinux/framework.tpl:14
-#: ihtml/themes/altlinux/framework.tpl:24
-#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
-msgid ""
-"You are currently editing a database entry. Do you want to dismiss the "
-"changes?"
-msgstr ""
-"Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen "
-"werden?"
-
-#: include/class_password-methods.inc:169
-#, php-format
-msgid "Setting the password failed. LDAP server says '%s'."
-msgstr ""
-"Das Setzen des Passwortes ist fehlgeschlagen. Die Meldung vom LDAP-Server "
-"war '%s'."
-
-#: include/class_password-methods.inc:188
-msgid ""
-"Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
-msgstr ""
-"Die Einstellung 'SMBHASH' in /etc/gosa/gosa.conf ist nicht korrekt! Das "
-"Samba-Passwort kann nicht geändert werden."
-
-#: include/class_config.inc:69
-#, php-format
-msgid "XML error in gosa.conf: %s at line %d"
-msgstr "XML-Fehler in der Datei gosa.conf: %s in Zeile %d"
-
-#: include/class_config.inc:195 html/index.php:142
-msgid "Can't bind to LDAP. Please contact the system administrator."
-msgstr ""
-"Kann den LDAP-Server nicht erreichen. Bitte benachrichtigen Sie den "
-"Administrator."
-
-#: include/class_config.inc:426
-msgid "SID and/or RIDBASE missing in your configuration!"
-msgstr "SID und/oder RIDBASE fehlen in der Konfiguration!"
-
-#: include/class_password-methods-sha.inc:50
-msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
-msgstr "Kann SHA nicht benutzen (fehlende Funktion mhash / sha1 / crypt)"
-
-#: include/class_password-methods-kerberos.inc:43
-msgid ""
-"Warning: Can't set kerberos password. Your PHP version has no kerberos "
-"support, password has not been changed."
-msgstr ""
-"Achtung: Das Kerberos-Passwort kann nicht gesetzt werden. Die von Ihnen "
-"verwendete PHP-Version hat keine Unterstützung für Kerberos."
-
-#: include/class_password-methods-kerberos.inc:52
-msgid "Kerberos database communication failed!"
-msgstr "Die Kommunikation mit der Kerberos-Datenbank ist fehlgeschlagen!"
-
-#: include/class_password-methods-kerberos.inc:59
-msgid "Changing password in kerberos database failed!"
-msgstr ""
-"Die Änderung des Passworts in der Kerberos-Datenbank ist fehlgeschlagen!"
-
-#: include/class_ldap.inc:398
-#, php-format
-msgid ""
-"Autocreation of type '%s' is currently not supported. Please report to the "
-"GOsa team."
-msgstr ""
-"Das automatische Erzeugen des Objekt-Typs '%s' wird momentan nicht "
-"unterstützt. Bitte melden Sie dies an das Entwicklerteam."
-
-#: include/class_ldap.inc:630
-#, php-format
-msgid ""
-"This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
-"in line %s"
-msgstr ""
-"Dies ist keine valide DN: '%s'.  Ein Block für den Import sollte mit "
-"'dn:...' beginnen in Zeile %s"
-
-#: include/class_ldap.inc:643
-#, php-format
-msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
-msgstr "Der DN: '%s' (aus Zeile %s) existiert bereits in der LDAP-Datenbank."
-
-#: include/class_ldap.inc:659
-#, php-format
-msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
-msgstr ""
-"Fehler beim Importieren von dn: '%s', bitte überprüfen Sie die LDIF-Datei ab "
-"Zeile %s!"
-
 #: include/setup_checks.inc:72
 msgid "Can't bind to LDAP. No schema check possible!"
 msgstr ""
@@ -6453,6 +6319,140 @@ msgid ""
 msgstr ""
 "In ihrem Setup fehlt ein administratives Konto für GOsa, Sie sind deshalb "
 "nicht in der Lage irgendetwas einzustellen!"
+
+#: include/class_plugin.inc:180
+msgid "This 'dn' has no account extensions."
+msgstr "Diese 'dn' hat keine Nutzerkonten Erweiterungen."
+
+#: include/class_plugin.inc:185
+msgid "This is an empty plugin."
+msgstr "Dies ist ein leeres Modul."
+
+#: include/class_plugin.inc:386
+#, php-format
+msgid ""
+"Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
+msgstr ""
+"Das in POSTCREATE angegebene Kommando '%s' (Modul '%s') scheint nicht zu "
+"existieren."
+
+#: include/class_plugin.inc:412
+#, php-format
+msgid ""
+"Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
+msgstr ""
+"Das in POSTMODIFY angegebene Kommando '%s' (Modul '%s') scheint nicht zu "
+"existieren."
+
+#: include/class_plugin.inc:438
+#, php-format
+msgid ""
+"Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
+msgstr ""
+"Das in POSTREMOVE angegebene Kommando '%s' (Modul '%s') scheint nicht zu "
+"existieren."
+
+#: include/class_password-methods-ssha.inc:51
+msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
+msgstr "Kann SSHA nicht benutzen (Fehlende Funktion mhash / sha1)"
+
+#: include/class_pluglist.inc:98
+msgid ""
+"Your gosa.conf information has changed partly. Please convert it using the "
+"contributed script fix_config.sh!"
+msgstr ""
+"Die Konfigurationsdatei gosa.conf hat sich teilweise geändert. Bitte "
+"konvertieren Sie diese mit dem beigefügten Skript fix_config.sh!"
+
+#: include/class_pluglist.inc:113 ihtml/themes/altlinux/framework.tpl:14
+#: ihtml/themes/altlinux/framework.tpl:24
+#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
+msgid ""
+"You are currently editing a database entry. Do you want to dismiss the "
+"changes?"
+msgstr ""
+"Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen "
+"werden?"
+
+#: include/class_password-methods.inc:170
+#, php-format
+msgid "Setting the password failed. LDAP server says '%s'."
+msgstr ""
+"Das Setzen des Passwortes ist fehlgeschlagen. Die Meldung vom LDAP-Server "
+"war '%s'."
+
+#: include/class_password-methods.inc:189
+msgid ""
+"Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
+msgstr ""
+"Die Einstellung 'SMBHASH' in /etc/gosa/gosa.conf ist nicht korrekt! Das "
+"Samba-Passwort kann nicht geändert werden."
+
+#: include/class_config.inc:69
+#, php-format
+msgid "XML error in gosa.conf: %s at line %d"
+msgstr "XML-Fehler in der Datei gosa.conf: %s in Zeile %d"
+
+#: include/class_config.inc:195 html/index.php:142
+msgid "Can't bind to LDAP. Please contact the system administrator."
+msgstr ""
+"Kann den LDAP-Server nicht erreichen. Bitte benachrichtigen Sie den "
+"Administrator."
+
+#: include/class_config.inc:426
+msgid "SID and/or RIDBASE missing in your configuration!"
+msgstr "SID und/oder RIDBASE fehlen in der Konfiguration!"
+
+#: include/class_password-methods-sha.inc:50
+msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
+msgstr "Kann SHA nicht benutzen (fehlende Funktion mhash / sha1 / crypt)"
+
+#: include/class_password-methods-kerberos.inc:43
+msgid ""
+"Warning: Can't set kerberos password. Your PHP version has no kerberos "
+"support, password has not been changed."
+msgstr ""
+"Achtung: Das Kerberos-Passwort kann nicht gesetzt werden. Die von Ihnen "
+"verwendete PHP-Version hat keine Unterstützung für Kerberos."
+
+#: include/class_password-methods-kerberos.inc:52
+msgid "Kerberos database communication failed!"
+msgstr "Die Kommunikation mit der Kerberos-Datenbank ist fehlgeschlagen!"
+
+#: include/class_password-methods-kerberos.inc:59
+msgid "Changing password in kerberos database failed!"
+msgstr ""
+"Die Änderung des Passworts in der Kerberos-Datenbank ist fehlgeschlagen!"
+
+#: include/class_ldap.inc:398
+#, php-format
+msgid ""
+"Autocreation of type '%s' is currently not supported. Please report to the "
+"GOsa team."
+msgstr ""
+"Das automatische Erzeugen des Objekt-Typs '%s' wird momentan nicht "
+"unterstützt. Bitte melden Sie dies an das Entwicklerteam."
+
+#: include/class_ldap.inc:630
+#, php-format
+msgid ""
+"This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
+"in line %s"
+msgstr ""
+"Dies ist keine valide DN: '%s'.  Ein Block für den Import sollte mit "
+"'dn:...' beginnen in Zeile %s"
+
+#: include/class_ldap.inc:643
+#, php-format
+msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
+msgstr "Der DN: '%s' (aus Zeile %s) existiert bereits in der LDAP-Datenbank."
+
+#: include/class_ldap.inc:659
+#, php-format
+msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
+msgstr ""
+"Fehler beim Importieren von dn: '%s', bitte überprüfen Sie die LDIF-Datei ab "
+"Zeile %s!"
 
 #: html/getfax.php:53
 msgid "Could not connect to database server!"
@@ -6924,18 +6924,20 @@ msgstr "Konfigurationsdatei"
 msgid "Download configuration"
 msgstr "Konfiguration herunterladen"
 
+#, fuzzy
 #~ msgid ""
 #~ "If this is lock detection is false, the other person has obviously closed "
 #~ "the webbrowser during the edit operation. You may delete the lockfile in "
 #~ "this case by pressing the <i>Remove</i> button."
 #~ msgstr ""
 #~ "Wenn diese Anzeige eines Zugriffskonflikts fehlerhaft ist, hat eine "
-#~ "andere Person offenbar wÃ¤hrend der Bearbeitung eines Eintrages einfach "
-#~ "den Webbrowser geschlossen. In einem solchen Fall kÃ¶nnen Sie den Konflikt "
-#~ "durch einen Klick auf <i>Entfernen</i> beseitigen."
+#~ "andere Person offenbar wÃƒâ‚¬hrend der Bearbeitung eines Eintrages einfach "
+#~ "den Webbrowser geschlossen. In einem solchen Fall kÃƒÂ¶nnen Sie den "
+#~ "Konflikt durch einen Klick auf <i>Entfernen</i> beseitigen."
 
-msgid "Cyrus Quota settings -> Future days must be a value."
-msgstr "Cyrus Kontingent-Einstellungen -> Intervall muß einen Wert besitzen."
+#~ msgid "Cyrus Quota settings -> Future days must be a value."
+#~ msgstr ""
+#~ "Cyrus Kontingent-Einstellungen -> Intervall muÃŸ einen Wert besitzen."
 
 #~ msgid "SMTP privileged networks -> No value is given."
 #~ msgstr "SMTP privilegierte Netzwerke -> Kein Wert eingetragen"
@@ -6948,13 +6950,13 @@ msgstr "Cyrus Kontingent-Einstellungen -> Intervall muß einen Wert besitzen."
 #~ "reachable for GOsa."
 #~ msgstr ""
 #~ "Die Anmeldung am LDAP-Server ist fehlgeschlagen. Bitte stellen Sie "
-#~ "sicher, dass der Server für GOsa erreichbar ist."
+#~ "sicher, dass der Server fÃ¼r GOsa erreichbar ist."
 
 #~ msgid "Checking for PHP version (<=5)"
-#~ msgstr "Prüfe auf eine PHP-Version (<=5)"
+#~ msgstr "PrÃ¼fe auf eine PHP-Version (<=5)"
 
 #~ msgid "PHP must be below version 5."
-#~ msgstr "PHP-Version muß kleiner als 5 sein."
+#~ msgstr "PHP-Version muÃŸ kleiner als 5 sein."
 
 #~ msgid "Security option, php will escape all quotes in strings ."
 #~ msgstr "Sicherheitsoption, PHP wird alle 'quotes' in 'strings' umwandeln."
@@ -6981,13 +6983,13 @@ msgstr "Cyrus Kontingent-Einstellungen -> Intervall muß einen Wert besitzen."
 #~ msgid ""
 #~ "<b>SAMBA 3</b> support enabled<td class=\"check\">gosa+samba3.schema</td>"
 #~ msgstr ""
-#~ "<b>SAMBA 3</b>-Unterstützung "
-#~ "aktiviert<td class=\"check\">gosa+samba3.schema</td>"
+#~ "<b>SAMBA 3</b>-UnterstÃ¼tzung aktiviert<td class=\"check\">gosa+samba3."
+#~ "schema</td>"
 
 #~ msgid "<b>SAMBA 2</b> support enabled<td class=\"check\">samba.schema</td>"
 #~ msgstr ""
-#~ "<b>SAMBA 2</b>-Unterstützung "
-#~ "aktiviert<td class=\"check\">samba.schema</td>"
+#~ "<b>SAMBA 2</b>-UnterstÃ¼tzung aktiviert<td class=\"check\">samba.schema</"
+#~ "td>"
 
 #~ msgid "GONICUS"
 #~ msgstr "GONICUS"
@@ -6995,8 +6997,8 @@ msgstr "Cyrus Kontingent-Einstellungen -> Intervall muß einen Wert besitzen."
 #~ msgid ""
 #~ "Unsupported password hash detected. Can't generate compatible password."
 #~ msgstr ""
-#~ "Es wurde ein nicht unterstützter "
-#~ "Passwort-Hash entdeckt. Es kann kein passendes Passwort generiert werden."
+#~ "Es wurde ein nicht unterstÃ¼tzter Passwort-Hash entdeckt. Es kann kein "
+#~ "passendes Passwort generiert werden."
 
 #~ msgid "Checking for gd module"
 #~ msgstr "Suche gd-Modul"
@@ -7005,10 +7007,7 @@ msgstr "Cyrus Kontingent-Einstellungen -> Intervall muß einen Wert besitzen."
 #~ "GOsa needs this module for recalculating image sizes provided for users "
 #~ "as jpegPhoto."
 #~ msgstr ""
-#~ "GOsa benötigt "
-#~ "dieses Modul um "
-#~ "Größenänderungen "
-#~ "bei Bildern durchzuführen."
+#~ "GOsa benÃ¶tigt dieses Modul um GrÃ¶ÃŸenÃ¤nderungen bei Bildern durchzufÃ¼hren."
 
 #~ msgid "You are currently using GOsa version %s (CVS checkout from %s)"
 #~ msgstr "Sie nutzen momentan GOsa in der Version %s (CVS-Abzug vom %s)"
@@ -7035,17 +7034,17 @@ msgstr "Cyrus Kontingent-Einstellungen -> Intervall muß einen Wert besitzen."
 #~ "complete snapshot of the running LDAP directory as ldif. You may save "
 #~ "these files for backup purpose or when initializing a new server."
 #~ msgstr ""
-#~ "Dieses Modul ermöglicht Ihnen den Download der kompletten LDAP-Datenbank, "
-#~ "die momentan in Verwendung ist. Die Dateien können "
-#~ "einerseits zur Datensicherung und andererseits zur Einrichtung eines "
-#~ "neuen Servers benutzt werden."
+#~ "Dieses Modul ermÃ¶glicht Ihnen den Download der kompletten LDAP-Datenbank, "
+#~ "die momentan in Verwendung ist. Die Dateien kÃ¶nnen einerseits zur "
+#~ "Datensicherung und andererseits zur Einrichtung eines neuen Servers "
+#~ "benutzt werden."
 
 #, fuzzy
 #~ msgid "Overwrite"
 #~ msgstr "schreiben"
 
 #~ msgid "You are not allowed to delete this terminal!"
-#~ msgstr "Es Ihnen nicht erlaubt, dieses Terminal zu löschen"
+#~ msgstr "Es Ihnen nicht erlaubt, dieses Terminal zu lÃ¶schen"
 
 #~ msgid "Administrators"
 #~ msgstr "Administratoren"
@@ -7054,7 +7053,8 @@ msgstr "Cyrus Kontingent-Einstellungen -> Intervall muß einen Wert besitzen."
 #~ msgstr "Herunterladen eines <b>kompletten LDIFs</b>"
 
 #~ msgid "Click here to save a IVBB conform LDAP snapshot to a file"
-#~ msgstr "Hier klicken, um eine IVBB-konforme Momentaufahme der LDAP-Datenbank in "
+#~ msgstr ""
+#~ "Hier klicken, um eine IVBB-konforme Momentaufahme der LDAP-Datenbank in "
 #~ "eine Datei zu exportieren."
 
 #~ msgid "Download <b>adapted IVBB ldif</b>"
@@ -7064,9 +7064,6 @@ msgstr "Cyrus Kontingent-Einstellungen -> Intervall muß einen Wert besitzen."
 #~ "Warning: Please check the SIZELIMIT option set on your LDAP server. You "
 #~ "may not get all entries, if this value is to low!"
 #~ msgstr ""
-#~ "Warnung: Bitte überprüfen "
-#~ "Sie die SIZELIMIT Option Ihres LDAP-Servers. Unter "
-#~ "Umständen "
-#~ "bekommen Sie nicht alle "
-#~ "Einträge "
-#~ "wenn dieser Eintrag zu niedrig ist!"
+#~ "Warnung: Bitte Ã¼berprÃ¼fen Sie die SIZELIMIT Option Ihres LDAP-Servers. "
+#~ "Unter UmstÃ¤nden bekommen Sie nicht alle EintrÃ¤ge wenn dieser Eintrag zu "
+#~ "niedrig ist!"
