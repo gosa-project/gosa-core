@@ -39,9 +39,8 @@ msgstr ""
 msgid "Samba"
 msgstr ""
 
-#: contrib/gosa.conf:59
+#: contrib/gosa.conf:59 plugins/personal/connectivity/main.inc:136
 #: plugins/personal/connectivity/class_connectivity.inc:15
-#: plugins/personal/connectivity/main.inc:136
 msgid "Connectivity"
 msgstr ""
 
@@ -55,9 +54,9 @@ msgstr ""
 
 #: contrib/gosa.conf:61 plugins/personal/generic/generic.tpl:214
 #: plugins/personal/generic/generic.tpl:352
+#: plugins/addons/addressbook/contents.tpl:14
 #: plugins/addons/addressbook/address_edit.tpl:41
 #: plugins/addons/addressbook/address_edit.tpl:89
-#: plugins/addons/addressbook/contents.tpl:14
 #: plugins/addons/addressbook/address_info.tpl:37
 #: plugins/addons/addressbook/address_info.tpl:85
 #: plugins/admin/departments/generic.tpl:58
@@ -158,186 +157,15 @@ msgstr ""
 msgid "Italian"
 msgstr ""
 
-#: plugins/personal/mail/generic.tpl:7 plugins/admin/groups/mail.tpl:10
-msgid "Primary address"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:11 plugins/admin/groups/mail.tpl:14
-#: plugins/generic/references/class_reference.inc:44
-msgid "Server"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:13
-msgid "Specify the mail server where the user will be hosted on"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:25 plugins/admin/groups/mail.tpl:24
-msgid "Quota usage"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:32 plugins/admin/groups/mail.tpl:31
-#: plugins/admin/systems/class_terminalInfo.inc:136
-msgid "not defined"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:37 plugins/admin/groups/mail.tpl:36
-msgid "Quota size"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:51 plugins/admin/groups/mail.tpl:46
-msgid "Alternative addresses"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:53 plugins/admin/groups/mail.tpl:47
-msgid "List of alternative mail addresses"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:63 plugins/personal/mail/generic.tpl:142
-#: plugins/personal/mail/mail_locals.tpl:49
-#: plugins/personal/posix/posix_groups.tpl:56
-#: plugins/personal/posix/trust_machines.tpl:45
-#: plugins/personal/posix/generic.tpl:63
-#: plugins/personal/posix/generic.tpl:124
-#: plugins/personal/samba/samba3.tpl:287
-#: plugins/personal/samba/samba3_workstations.tpl:45
-#: plugins/personal/connectivity/class_kolabAccount.inc:195
-#: plugins/personal/connectivity/kolab.tpl:17
-#: plugins/gofax/blocklists/generic.tpl:60
-#: plugins/gofax/faxaccount/generic.tpl:77
-#: plugins/gofax/faxaccount/locals.tpl:48
-#: plugins/gofax/faxaccount/lists.tpl:15 plugins/gofax/faxaccount/lists.tpl:19
-#: plugins/admin/groups/mail.tpl:52 plugins/admin/groups/mail.tpl:97
-#: plugins/admin/groups/class_groupMail.inc:404
-#: plugins/admin/groups/group_objects.tpl:45
-#: plugins/admin/groups/generic.tpl:87 plugins/admin/groups/mail_locals.tpl:49
-#: plugins/admin/systems/servservice.tpl:20
-#: plugins/admin/systems/servservice.tpl:45
-#: plugins/admin/systems/startup.tpl:59 plugins/admin/systems/startup.tpl:72
-#: plugins/admin/systems/startup.tpl:91
-#: plugins/admin/ogroups/ogroup_objects.tpl:56
-#: plugins/admin/ogroups/generic.tpl:38
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:207
-#: plugins/gofon/phoneaccount/generic.tpl:45
-msgid "Add"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:65 plugins/personal/mail/generic.tpl:146
-#: plugins/personal/posix/generic.tpl:64
-#: plugins/personal/posix/generic.tpl:126
-#: plugins/personal/samba/samba3.tpl:289
-#: plugins/personal/connectivity/kolab.tpl:19
-#: plugins/gofax/blocklists/generic.tpl:61
-#: plugins/gofax/blocklists/remove.tpl:15
-#: plugins/gofax/blocklists/headpage.tpl:17
-#: plugins/gofax/faxaccount/generic.tpl:79
-#: plugins/gofax/faxaccount/lists.tpl:16
-#: plugins/addons/addressbook/remove.tpl:15 plugins/admin/groups/mail.tpl:53
-#: plugins/admin/groups/mail.tpl:99 plugins/admin/groups/remove.tpl:15
-#: plugins/admin/groups/headpage.tpl:17 plugins/admin/groups/generic.tpl:89
-#: plugins/admin/users/remove.tpl:15 plugins/admin/users/headpage.tpl:22
-#: plugins/admin/applications/remove.tpl:14
-#: plugins/admin/applications/headpage.tpl:17
-#: plugins/admin/departments/remove.tpl:15
-#: plugins/admin/departments/headpage.tpl:17
-#: plugins/admin/systems/servservice.tpl:21
-#: plugins/admin/systems/servservice.tpl:46
-#: plugins/admin/systems/remove.tpl:15 plugins/admin/systems/headpage.tpl:17
-#: plugins/admin/systems/startup.tpl:60 plugins/admin/systems/startup.tpl:73
-#: plugins/admin/systems/startup.tpl:92 plugins/admin/ogroups/generic.tpl:39
-#: plugins/admin/ogroups/remove.tpl:15 plugins/admin/ogroups/headpage.tpl:17
-#: plugins/gofon/phoneaccount/generic.tpl:47
-msgid "Delete"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:73
-msgid "Mail options"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:78
-msgid "Select if you want to forward mails without getting own copies of them"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:78
-msgid "No delivery to own mailbox"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:81
-msgid ""
-"Select to automatically response with the vacation message defined below"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:81
-msgid "Activate vacation message"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:88
-msgid "Select if you want to filter this mails through spamassassin"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:88
-msgid "Move mails tagged with spam level greater than"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:89
-msgid "Choose spam level - smaller values are more sensitive"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:92
-msgid "to folder"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:102
-msgid "Reject mails bigger than"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:104
-#: plugins/personal/connectivity/pureftpd.tpl:40
-#: plugins/personal/connectivity/class_proxyAccount.inc:69
-msgid "MB"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:110
-msgid "Vacation message"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:130
-msgid "Forward messages to"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:144
-#: plugins/gofax/faxaccount/generic.tpl:78 plugins/admin/groups/mail.tpl:98
-msgid "Add local"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:154
-msgid "Advanced mail options"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:159
-msgid "Select if user can only send and receive inside his own domain"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:160
-msgid "User is only allowed to send and receive local mails"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:167
-msgid "Use custom sieve script"
-msgstr ""
-
-#: plugins/personal/mail/generic.tpl:167
-msgid "disables all Mail options!"
-msgstr ""
-
 #: plugins/personal/mail/class_mailAccount.inc:23
 #: plugins/personal/password/class_password.inc:6
 #: plugins/personal/posix/class_posixAccount.inc:17
 #: plugins/personal/samba/class_sambaAccount.inc:25
 #: plugins/personal/generic/class_user.inc:17
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:7
 #: plugins/personal/connectivity/class_phpgwAccount.inc:6
 #: plugins/personal/connectivity/class_kolabAccount.inc:6
 #: plugins/personal/connectivity/class_webdavAccount.inc:7
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:7
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:6
 #: plugins/personal/connectivity/class_connectivity.inc:16
 #: plugins/personal/connectivity/class_proxyAccount.inc:6
@@ -453,6 +281,177 @@ msgstr ""
 msgid "You need to set the maximum mail size in order to reject anything."
 msgstr ""
 
+#: plugins/personal/mail/generic.tpl:7 plugins/admin/groups/mail.tpl:10
+msgid "Primary address"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:11 plugins/admin/groups/mail.tpl:14
+#: plugins/generic/references/class_reference.inc:44
+msgid "Server"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:13
+msgid "Specify the mail server where the user will be hosted on"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:25 plugins/admin/groups/mail.tpl:24
+msgid "Quota usage"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:32 plugins/admin/groups/mail.tpl:31
+#: plugins/admin/systems/class_terminalInfo.inc:136
+msgid "not defined"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:37 plugins/admin/groups/mail.tpl:36
+msgid "Quota size"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:51 plugins/admin/groups/mail.tpl:46
+msgid "Alternative addresses"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:53 plugins/admin/groups/mail.tpl:47
+msgid "List of alternative mail addresses"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:63 plugins/personal/mail/generic.tpl:142
+#: plugins/personal/mail/mail_locals.tpl:49
+#: plugins/personal/posix/trust_machines.tpl:45
+#: plugins/personal/posix/posix_groups.tpl:56
+#: plugins/personal/posix/generic.tpl:63
+#: plugins/personal/posix/generic.tpl:124
+#: plugins/personal/samba/samba3.tpl:287
+#: plugins/personal/samba/samba3_workstations.tpl:45
+#: plugins/personal/connectivity/class_kolabAccount.inc:195
+#: plugins/personal/connectivity/kolab.tpl:17
+#: plugins/gofax/blocklists/generic.tpl:60
+#: plugins/gofax/faxaccount/generic.tpl:77
+#: plugins/gofax/faxaccount/locals.tpl:48
+#: plugins/gofax/faxaccount/lists.tpl:15 plugins/gofax/faxaccount/lists.tpl:19
+#: plugins/admin/groups/mail.tpl:52 plugins/admin/groups/mail.tpl:97
+#: plugins/admin/groups/class_groupMail.inc:404
+#: plugins/admin/groups/group_objects.tpl:45
+#: plugins/admin/groups/generic.tpl:87 plugins/admin/groups/mail_locals.tpl:49
+#: plugins/admin/systems/servservice.tpl:20
+#: plugins/admin/systems/servservice.tpl:45
+#: plugins/admin/systems/startup.tpl:59 plugins/admin/systems/startup.tpl:72
+#: plugins/admin/systems/startup.tpl:91
+#: plugins/admin/ogroups/ogroup_objects.tpl:56
+#: plugins/admin/ogroups/generic.tpl:38
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:207
+#: plugins/gofon/phoneaccount/generic.tpl:45
+msgid "Add"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:65 plugins/personal/mail/generic.tpl:146
+#: plugins/personal/posix/generic.tpl:64
+#: plugins/personal/posix/generic.tpl:126
+#: plugins/personal/samba/samba3.tpl:289
+#: plugins/personal/connectivity/kolab.tpl:19
+#: plugins/gofax/blocklists/generic.tpl:61
+#: plugins/gofax/blocklists/remove.tpl:15
+#: plugins/gofax/blocklists/headpage.tpl:17
+#: plugins/gofax/faxaccount/generic.tpl:79
+#: plugins/gofax/faxaccount/lists.tpl:16
+#: plugins/addons/addressbook/remove.tpl:15 plugins/admin/groups/mail.tpl:53
+#: plugins/admin/groups/mail.tpl:99 plugins/admin/groups/headpage.tpl:17
+#: plugins/admin/groups/remove.tpl:15 plugins/admin/groups/generic.tpl:89
+#: plugins/admin/users/remove.tpl:15 plugins/admin/users/headpage.tpl:22
+#: plugins/admin/applications/remove.tpl:14
+#: plugins/admin/applications/headpage.tpl:17
+#: plugins/admin/departments/remove.tpl:15
+#: plugins/admin/departments/headpage.tpl:17
+#: plugins/admin/systems/servservice.tpl:21
+#: plugins/admin/systems/servservice.tpl:46
+#: plugins/admin/systems/remove.tpl:15 plugins/admin/systems/headpage.tpl:17
+#: plugins/admin/systems/startup.tpl:60 plugins/admin/systems/startup.tpl:73
+#: plugins/admin/systems/startup.tpl:92 plugins/admin/ogroups/generic.tpl:39
+#: plugins/admin/ogroups/remove.tpl:15 plugins/admin/ogroups/headpage.tpl:17
+#: plugins/gofon/phoneaccount/generic.tpl:47
+msgid "Delete"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:73
+msgid "Mail options"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:78
+msgid "Select if you want to forward mails without getting own copies of them"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:78
+msgid "No delivery to own mailbox"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:81
+msgid ""
+"Select to automatically response with the vacation message defined below"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:81
+msgid "Activate vacation message"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:88
+msgid "Select if you want to filter this mails through spamassassin"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:88
+msgid "Move mails tagged with spam level greater than"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:89
+msgid "Choose spam level - smaller values are more sensitive"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:92
+msgid "to folder"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:102
+msgid "Reject mails bigger than"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:104
+#: plugins/personal/connectivity/pureftpd.tpl:40
+#: plugins/personal/connectivity/class_proxyAccount.inc:75
+msgid "MB"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:110
+msgid "Vacation message"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:130
+msgid "Forward messages to"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:144
+#: plugins/gofax/faxaccount/generic.tpl:78 plugins/admin/groups/mail.tpl:98
+msgid "Add local"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:154
+msgid "Advanced mail options"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:159
+msgid "Select if user can only send and receive inside his own domain"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:160
+msgid "User is only allowed to send and receive local mails"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:167
+msgid "Use custom sieve script"
+msgstr ""
+
+#: plugins/personal/mail/generic.tpl:167
+msgid "disables all Mail options!"
+msgstr ""
+
 #: plugins/personal/mail/main.inc:104 plugins/personal/posix/main.inc:110
 #: plugins/personal/samba/main.inc:104
 #: plugins/personal/generic/generic_certs.tpl:60
@@ -471,11 +470,10 @@ msgid "Finish"
 msgstr ""
 
 #: plugins/personal/mail/main.inc:106 plugins/personal/mail/mail_locals.tpl:51
-#: plugins/personal/posix/posix_groups.tpl:58
 #: plugins/personal/posix/trust_machines.tpl:47
-#: plugins/personal/posix/main.inc:112
+#: plugins/personal/posix/posix_groups.tpl:58
+#: plugins/personal/posix/main.inc:112 plugins/personal/samba/main.inc:106
 #: plugins/personal/samba/samba3_workstations.tpl:47
-#: plugins/personal/samba/main.inc:106
 #: plugins/personal/generic/password.tpl:19
 #: plugins/personal/generic/generic_picture.tpl:31
 #: plugins/personal/generic/generic_certs.tpl:62
@@ -490,13 +488,13 @@ msgstr ""
 #: plugins/addons/addressbook/remove.tpl:17
 #: plugins/admin/groups/class_groupManagement.inc:259
 #: plugins/admin/groups/remove.tpl:17
+#: plugins/admin/groups/application_options.tpl:10
 #: plugins/admin/groups/group_objects.tpl:47
 #: plugins/admin/groups/mail_admins.tpl:39
-#: plugins/admin/groups/application_options.tpl:10
 #: plugins/admin/groups/mail_locals.tpl:51 plugins/admin/users/password.tpl:23
+#: plugins/admin/users/template.tpl:46
 #: plugins/admin/users/class_userManagement.inc:505
-#: plugins/admin/users/template.tpl:46 plugins/admin/users/remove.tpl:17
-#: plugins/admin/applications/remove.tpl:16
+#: plugins/admin/users/remove.tpl:17 plugins/admin/applications/remove.tpl:16
 #: plugins/admin/applications/class_applicationManagement.inc:241
 #: plugins/admin/departments/remove.tpl:17
 #: plugins/admin/departments/class_departmentManagement.inc:230
@@ -548,8 +546,8 @@ msgid "Display addresses of department"
 msgstr ""
 
 #: plugins/personal/mail/mail_locals.tpl:30
-#: plugins/personal/posix/posix_groups.tpl:37
 #: plugins/personal/posix/trust_machines.tpl:30
+#: plugins/personal/posix/posix_groups.tpl:37
 #: plugins/personal/samba/samba3_workstations.tpl:30
 #: plugins/gofax/blocklists/headpage.tpl:57
 #: plugins/gofax/faxaccount/locals.tpl:29
@@ -591,9 +589,9 @@ msgstr ""
 #: plugins/admin/systems/servdb.tpl:18 plugins/admin/systems/servdb.tpl:34
 #: plugins/admin/systems/servdb.tpl:50 plugins/admin/systems/servdb.tpl:86
 #: plugins/admin/systems/servdb.tpl:109 ihtml/themes/altlinux/login.tpl:34
-#: ihtml/themes/altlinux/login.tpl:38
+#: ihtml/themes/altlinux/login.tpl:38 ihtml/themes/default/login.tpl:34
+#: ihtml/themes/default/login.tpl:38
 #: ihtml/themes/default/setup_useradmin.tpl:30
-#: ihtml/themes/default/login.tpl:34 ihtml/themes/default/login.tpl:38
 msgid "Password"
 msgstr ""
 
@@ -700,6 +698,20 @@ msgstr ""
 msgid "External password changer reported a problem: "
 msgstr ""
 
+#: plugins/personal/posix/trust_machines.tpl:6
+msgid "Select systems to add"
+msgstr ""
+
+#: plugins/personal/posix/trust_machines.tpl:29
+#: plugins/admin/systems/headpage.tpl:59
+msgid "Display systems of department"
+msgstr ""
+
+#: plugins/personal/posix/trust_machines.tpl:35
+#: plugins/admin/systems/headpage.tpl:71
+msgid "Display systems matching"
+msgstr ""
+
 #: plugins/personal/posix/posix_groups.tpl:6
 msgid "Select groups to add"
 msgstr ""
@@ -803,20 +815,6 @@ msgstr ""
 msgid "Password expires on"
 msgstr ""
 
-#: plugins/personal/posix/trust_machines.tpl:6
-msgid "Select systems to add"
-msgstr ""
-
-#: plugins/personal/posix/trust_machines.tpl:29
-#: plugins/admin/systems/headpage.tpl:59
-msgid "Display systems of department"
-msgstr ""
-
-#: plugins/personal/posix/trust_machines.tpl:35
-#: plugins/admin/systems/headpage.tpl:71
-msgid "Display systems matching"
-msgstr ""
-
 #: plugins/personal/posix/generic.tpl:7 plugins/personal/samba/samba3.tpl:13
 #: plugins/personal/samba/samba3.tpl:65
 #: plugins/personal/samba/class_sambaAccount.inc:613
@@ -874,6 +872,10 @@ msgstr ""
 
 #: plugins/personal/posix/generic.tpl:112
 msgid "System trust"
+msgstr ""
+
+#: plugins/personal/posix/main.inc:131
+msgid "Unix settings"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:16
@@ -1165,10 +1167,6 @@ msgstr ""
 msgid "Too many users, can't allocate a free ID!"
 msgstr ""
 
-#: plugins/personal/posix/main.inc:131
-msgid "Unix settings"
-msgstr ""
-
 #: plugins/personal/samba/samba2.tpl:13
 msgid "Samba home"
 msgstr ""
@@ -1295,6 +1293,10 @@ msgstr ""
 msgid "Allow connection from these workstations only"
 msgstr ""
 
+#: plugins/personal/samba/main.inc:123
+msgid "Samba settings"
+msgstr ""
+
 #: plugins/personal/samba/samba3_workstations.tpl:6
 msgid "Select workstations to add"
 msgstr ""
@@ -1305,10 +1307,6 @@ msgstr ""
 
 #: plugins/personal/samba/samba3_workstations.tpl:35
 msgid "Display workstations matching"
-msgstr ""
-
-#: plugins/personal/samba/main.inc:123
-msgid "Samba settings"
 msgstr ""
 
 #: plugins/personal/samba/class_sambaAccount.inc:193
@@ -1401,272 +1399,6 @@ msgstr ""
 msgid ""
 "Warning: Can't identify users primary group - no conversion to a samba group "
 "possible!"
-msgstr ""
-
-#: plugins/personal/generic/password.tpl:2
-msgid ""
-"You have changed the method your password is stored in the ldap database. "
-"For that reason you've to enter your password at this point again. GOsa will "
-"then encode it with the selected method."
-msgstr ""
-
-#: plugins/personal/generic/generic_picture.tpl:6
-#: plugins/personal/generic/generic.tpl:15
-msgid "Personal picture"
-msgstr ""
-
-#: plugins/personal/generic/generic_picture.tpl:23
-msgid "Remove picture"
-msgstr ""
-
-#: plugins/personal/generic/generic_picture.tpl:29
-#: plugins/addons/addressbook/address_edit.tpl:107
-msgid "Save"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:6
-msgid "Personal information"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:17
-msgid "Change picture"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:24
-#: plugins/addons/addressbook/address_edit.tpl:20
-#: plugins/addons/addressbook/contents.tpl:14
-#: plugins/addons/addressbook/class_addressbook.inc:500
-#: plugins/addons/addressbook/address_info.tpl:16
-#: plugins/admin/users/template.tpl:19
-msgid "Name"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:30
-#: plugins/addons/addressbook/address_edit.tpl:20
-#: plugins/addons/addressbook/class_addressbook.inc:500
-#: plugins/admin/users/template.tpl:23
-msgid "Given name"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:34 plugins/admin/users/template.tpl:28
-msgid "Login"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:42
-#: plugins/addons/addressbook/address_edit.tpl:26
-#: plugins/addons/addressbook/address_info.tpl:22
-msgid "Personal title"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:50
-msgid "Academic title"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:58
-msgid "Date of birth"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:75
-#: ihtml/themes/altlinux/sizelimit.tpl:14
-#: ihtml/themes/default/sizelimit.tpl:14
-msgid "Set"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:81
-msgid "Sex"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:92
-#: plugins/gofax/blocklists/generic.tpl:14 plugins/admin/groups/generic.tpl:21
-#: plugins/admin/applications/generic.tpl:33
-#: plugins/admin/departments/generic.tpl:27
-#: plugins/admin/systems/server.tpl:13 plugins/admin/systems/phone.tpl:13
-#: plugins/admin/systems/terminal.tpl:18 plugins/admin/systems/printer.tpl:21
-#: plugins/admin/systems/workstation.tpl:18
-#: plugins/admin/systems/wingeneric.tpl:13
-#: plugins/admin/systems/component.tpl:13 plugins/admin/ogroups/generic.tpl:21
-msgid "Base"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:96
-msgid "Choose subtree to place user in"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:111
-#: plugins/personal/generic/generic.tpl:255
-#: plugins/addons/addressbook/address_edit.tpl:37
-#: plugins/addons/addressbook/address_edit.tpl:86
-#: plugins/addons/addressbook/address_info.tpl:33
-#: plugins/addons/addressbook/address_info.tpl:82
-#: plugins/admin/departments/generic.tpl:54
-msgid "Address"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:115
-msgid "Private phone"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:119
-msgid "Homepage"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:128
-msgid "Password storage"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:138
-#: plugins/personal/generic/generic_certs.tpl:7
-msgid "Certificates"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:140
-msgid "Edit certificates"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:144
-msgid "Kerberos"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:145
-msgid "Edit properties"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:161
-msgid "Organizational information"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:173
-msgid "Organization"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:177
-#: plugins/addons/addressbook/address_edit.tpl:68
-#: plugins/addons/addressbook/address_info.tpl:64
-#: plugins/generic/references/class_reference.inc:38
-msgid "Department"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:181
-msgid "Department No."
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:187
-msgid "Employee No."
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:193
-msgid "Employee type"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:209
-#: plugins/personal/generic/generic.tpl:348
-msgid "Room No."
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:221
-#: plugins/addons/addressbook/address_edit.tpl:44
-#: plugins/addons/addressbook/contents.tpl:15
-#: plugins/addons/addressbook/address_info.tpl:40
-msgid "Mobile"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:225
-#: plugins/addons/addressbook/address_edit.tpl:95
-#: plugins/addons/addressbook/address_info.tpl:91
-msgid "Pager"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:247
-#: plugins/admin/departments/generic.tpl:42
-#: plugins/admin/departments/generic.tpl:50
-#: plugins/admin/systems/printer.tpl:14
-msgid "Location"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:251
-#: plugins/admin/departments/generic.tpl:46
-msgid "State"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:269
-msgid "Vocation"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:273
-msgid "Unit description"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:281
-msgid "Subject area"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:289
-msgid "Functional title"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:296
-msgid "Role"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:308
-msgid "Person locality"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:316
-msgid "Unit"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:323
-msgid "Street"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:329
-#: plugins/addons/addressbook/address_edit.tpl:74
-#: plugins/addons/addressbook/address_info.tpl:70
-msgid "Postal code"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:335
-msgid "House identifier"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:357
-msgid "Please use the phone tab"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:370
-msgid "Last delivery"
-msgstr ""
-
-#: plugins/personal/generic/generic.tpl:378
-msgid "Public visible"
-msgstr ""
-
-#: plugins/personal/generic/generic_certs.tpl:14
-msgid "Standard certificate"
-msgstr ""
-
-#: plugins/personal/generic/generic_certs.tpl:19
-#: plugins/personal/generic/generic_certs.tpl:30
-#: plugins/personal/generic/generic_certs.tpl:41
-#: plugins/personal/connectivity/class_kolabAccount.inc:198
-#: plugins/admin/groups/class_groupMail.inc:408
-#: plugins/admin/applications/class_applicationParameters.inc:94
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:209
-#: ihtml/themes/altlinux/islocked.tpl:13 ihtml/themes/default/islocked.tpl:13
-msgid "Remove"
-msgstr ""
-
-#: plugins/personal/generic/generic_certs.tpl:25
-msgid "S/MIME certificate"
-msgstr ""
-
-#: plugins/personal/generic/generic_certs.tpl:36
-msgid "PKCS12 certificate"
-msgstr ""
-
-#: plugins/personal/generic/generic_certs.tpl:48
-msgid "Certificate serial number"
 msgstr ""
 
 #: plugins/personal/generic/class_user.inc:225
@@ -1796,6 +1528,272 @@ msgstr ""
 msgid "The field 'Pager' contains an invalid phone number."
 msgstr ""
 
+#: plugins/personal/generic/password.tpl:2
+msgid ""
+"You have changed the method your password is stored in the ldap database. "
+"For that reason you've to enter your password at this point again. GOsa will "
+"then encode it with the selected method."
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:6
+msgid "Personal information"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:15
+#: plugins/personal/generic/generic_picture.tpl:6
+msgid "Personal picture"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:17
+msgid "Change picture"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:24
+#: plugins/addons/addressbook/contents.tpl:14
+#: plugins/addons/addressbook/address_edit.tpl:20
+#: plugins/addons/addressbook/address_info.tpl:16
+#: plugins/addons/addressbook/class_addressbook.inc:500
+#: plugins/admin/users/template.tpl:19
+msgid "Name"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:30
+#: plugins/addons/addressbook/address_edit.tpl:20
+#: plugins/addons/addressbook/class_addressbook.inc:500
+#: plugins/admin/users/template.tpl:23
+msgid "Given name"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:34 plugins/admin/users/template.tpl:28
+msgid "Login"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:42
+#: plugins/addons/addressbook/address_edit.tpl:26
+#: plugins/addons/addressbook/address_info.tpl:22
+msgid "Personal title"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:50
+msgid "Academic title"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:58
+msgid "Date of birth"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:75
+#: ihtml/themes/altlinux/sizelimit.tpl:14
+#: ihtml/themes/default/sizelimit.tpl:14
+msgid "Set"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:81
+msgid "Sex"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:92
+#: plugins/gofax/blocklists/generic.tpl:14 plugins/admin/groups/generic.tpl:21
+#: plugins/admin/applications/generic.tpl:33
+#: plugins/admin/departments/generic.tpl:27
+#: plugins/admin/systems/server.tpl:13 plugins/admin/systems/phone.tpl:13
+#: plugins/admin/systems/terminal.tpl:18 plugins/admin/systems/printer.tpl:21
+#: plugins/admin/systems/workstation.tpl:18
+#: plugins/admin/systems/wingeneric.tpl:13
+#: plugins/admin/systems/component.tpl:13 plugins/admin/ogroups/generic.tpl:21
+msgid "Base"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:96
+msgid "Choose subtree to place user in"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:111
+#: plugins/personal/generic/generic.tpl:255
+#: plugins/addons/addressbook/address_edit.tpl:37
+#: plugins/addons/addressbook/address_edit.tpl:86
+#: plugins/addons/addressbook/address_info.tpl:33
+#: plugins/addons/addressbook/address_info.tpl:82
+#: plugins/admin/departments/generic.tpl:54
+msgid "Address"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:115
+msgid "Private phone"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:119
+msgid "Homepage"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:128
+msgid "Password storage"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:138
+#: plugins/personal/generic/generic_certs.tpl:7
+msgid "Certificates"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:140
+msgid "Edit certificates"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:144
+msgid "Kerberos"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:145
+msgid "Edit properties"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:161
+msgid "Organizational information"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:173
+msgid "Organization"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:177
+#: plugins/addons/addressbook/address_edit.tpl:68
+#: plugins/addons/addressbook/address_info.tpl:64
+#: plugins/generic/references/class_reference.inc:38
+msgid "Department"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:181
+msgid "Department No."
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:187
+msgid "Employee No."
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:193
+msgid "Employee type"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:209
+#: plugins/personal/generic/generic.tpl:348
+msgid "Room No."
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:221
+#: plugins/addons/addressbook/contents.tpl:15
+#: plugins/addons/addressbook/address_edit.tpl:44
+#: plugins/addons/addressbook/address_info.tpl:40
+msgid "Mobile"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:225
+#: plugins/addons/addressbook/address_edit.tpl:95
+#: plugins/addons/addressbook/address_info.tpl:91
+msgid "Pager"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:247
+#: plugins/admin/departments/generic.tpl:42
+#: plugins/admin/departments/generic.tpl:50
+#: plugins/admin/systems/printer.tpl:14
+msgid "Location"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:251
+#: plugins/admin/departments/generic.tpl:46
+msgid "State"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:269
+msgid "Vocation"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:273
+msgid "Unit description"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:281
+msgid "Subject area"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:289
+msgid "Functional title"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:296
+msgid "Role"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:308
+msgid "Person locality"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:316
+msgid "Unit"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:323
+msgid "Street"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:329
+#: plugins/addons/addressbook/address_edit.tpl:74
+#: plugins/addons/addressbook/address_info.tpl:70
+msgid "Postal code"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:335
+msgid "House identifier"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:357
+msgid "Please use the phone tab"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:370
+msgid "Last delivery"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:378
+msgid "Public visible"
+msgstr ""
+
+#: plugins/personal/generic/generic_picture.tpl:23
+msgid "Remove picture"
+msgstr ""
+
+#: plugins/personal/generic/generic_picture.tpl:29
+#: plugins/addons/addressbook/address_edit.tpl:107
+msgid "Save"
+msgstr ""
+
+#: plugins/personal/generic/generic_certs.tpl:14
+msgid "Standard certificate"
+msgstr ""
+
+#: plugins/personal/generic/generic_certs.tpl:19
+#: plugins/personal/generic/generic_certs.tpl:30
+#: plugins/personal/generic/generic_certs.tpl:41
+#: plugins/personal/connectivity/class_kolabAccount.inc:198
+#: plugins/admin/groups/class_groupMail.inc:408
+#: plugins/admin/applications/class_applicationParameters.inc:94
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:209
+#: ihtml/themes/altlinux/islocked.tpl:13 ihtml/themes/default/islocked.tpl:13
+msgid "Remove"
+msgstr ""
+
+#: plugins/personal/generic/generic_certs.tpl:25
+msgid "S/MIME certificate"
+msgstr ""
+
+#: plugins/personal/generic/generic_certs.tpl:36
+msgid "PKCS12 certificate"
+msgstr ""
+
+#: plugins/personal/generic/generic_certs.tpl:48
+msgid "Certificate serial number"
+msgstr ""
+
 #: plugins/personal/generic/main.inc:107
 msgid "You are not allowed to set your password!"
 msgstr ""
@@ -1804,27 +1802,52 @@ msgstr ""
 msgid "Generic user information"
 msgstr ""
 
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:6
+#: plugins/generic/references/class_reference.inc:34
+msgid "FTP"
+msgstr ""
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:120
+msgid "Value specified as 'Upload bandwidth' is not valid."
+msgstr ""
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:123
+msgid "Value specified as 'Download bandwidth' is not valid."
+msgstr ""
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:126
+msgid "Value specified as 'Files' is not valid."
+msgstr ""
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:129
+msgid "Value specified as 'Size' is not valid."
+msgstr ""
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:132
+msgid "Value specified as 'Ratio' is not valid."
+msgstr ""
+
 #: plugins/personal/connectivity/class_phpgwAccount.inc:5
 msgid "PHPGroupware"
 msgstr ""
 
-#: plugins/personal/connectivity/proxy.tpl:1
+#: plugins/personal/connectivity/proxy.tpl:14
 msgid "Proxy account"
 msgstr ""
 
-#: plugins/personal/connectivity/proxy.tpl:8
+#: plugins/personal/connectivity/proxy.tpl:22
 msgid "Filter unwanted content (i.e. pornographic or violence related)"
 msgstr ""
 
-#: plugins/personal/connectivity/proxy.tpl:13
+#: plugins/personal/connectivity/proxy.tpl:33
 msgid "Limit proxy access to working time"
 msgstr ""
 
-#: plugins/personal/connectivity/proxy.tpl:42
+#: plugins/personal/connectivity/proxy.tpl:67
 msgid "Restrict proxy usage by quota"
 msgstr ""
 
-#: plugins/personal/connectivity/proxy.tpl:52
+#: plugins/personal/connectivity/proxy.tpl:77
 msgid "per"
 msgstr ""
 
@@ -1889,52 +1912,8 @@ msgstr ""
 msgid "WebDAV"
 msgstr ""
 
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:6
-#: plugins/generic/references/class_reference.inc:34
-msgid "FTP"
-msgstr ""
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:120
-msgid "Value specified as 'Upload bandwidth' is not valid."
-msgstr ""
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:123
-msgid "Value specified as 'Download bandwidth' is not valid."
-msgstr ""
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:126
-msgid "Value specified as 'Files' is not valid."
-msgstr ""
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:129
-msgid "Value specified as 'Size' is not valid."
-msgstr ""
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:132
-msgid "Value specified as 'Ratio' is not valid."
-msgstr ""
-
 #: plugins/personal/connectivity/phpgw.tpl:1
 msgid "PHPGroupware account"
-msgstr ""
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:5
-msgid "Open-Xchange"
-msgstr ""
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:663
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:726
-msgid "Couldn't Connect To Postgresql Database"
-msgstr ""
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:667
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:730
-msgid "Needed Parameters to openexchange connectivity plugin failed!"
-msgstr ""
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:671
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:734
-msgid "PHP4 module for Postgresql Database Failed!"
 msgstr ""
 
 #: plugins/personal/connectivity/kolab.tpl:1
@@ -1983,6 +1962,25 @@ msgstr ""
 
 #: plugins/personal/connectivity/webdav.tpl:1
 msgid "WebDAV account"
+msgstr ""
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:5
+msgid "Open-Xchange"
+msgstr ""
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:663
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:726
+msgid "Couldn't Connect To Postgresql Database"
+msgstr ""
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:667
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:730
+msgid "Needed Parameters to openexchange connectivity plugin failed!"
+msgstr ""
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:671
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:734
+msgid "PHP4 module for Postgresql Database Failed!"
 msgstr ""
 
 #: plugins/personal/connectivity/pureftpd.tpl:1
@@ -2075,74 +2073,28 @@ msgstr ""
 msgid "Proxy"
 msgstr ""
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:69
+#: plugins/personal/connectivity/class_proxyAccount.inc:75
 msgid "KB"
 msgstr ""
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:69
+#: plugins/personal/connectivity/class_proxyAccount.inc:75
 msgid "GB"
 msgstr ""
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:70
+#: plugins/personal/connectivity/class_proxyAccount.inc:76
 msgid "hour"
 msgstr ""
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:70
+#: plugins/personal/connectivity/class_proxyAccount.inc:76
 msgid "day"
 msgstr ""
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:70
+#: plugins/personal/connectivity/class_proxyAccount.inc:76
 msgid "week"
 msgstr ""
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:70
+#: plugins/personal/connectivity/class_proxyAccount.inc:76
 msgid "month"
-msgstr ""
-
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:5
-msgid "FAX Blocklists"
-msgstr ""
-
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:121
-#, php-format
-msgid "You're about to delete the blocklist '%s'."
-msgstr ""
-
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:135
-msgid "You have no permission to remove this blocklist."
-msgstr ""
-
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:153
-msgid "Please specify a valid phone number."
-msgstr ""
-
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:226
-msgid "send"
-msgstr ""
-
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:226
-msgid "receive"
-msgstr ""
-
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:348
-msgid "You have no permissions to create a blocklist on this 'Base'."
-msgstr ""
-
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:354
-#: plugins/admin/departments/class_departmentGeneric.inc:143
-msgid "Required field 'Name' is not set."
-msgstr ""
-
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:357
-msgid "Required field 'Name' contains invalid characters"
-msgstr ""
-
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:365
-msgid "Specified name is already used."
-msgstr ""
-
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:372
-msgid "No permission to create a blocklist on this base."
 msgstr ""
 
 #: plugins/gofax/blocklists/generic.tpl:8
@@ -2198,6 +2150,52 @@ msgstr ""
 
 #: plugins/gofax/blocklists/generic.tpl:66
 msgid "Numbers can also contain wild cards."
+msgstr ""
+
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:5
+msgid "FAX Blocklists"
+msgstr ""
+
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:121
+#, php-format
+msgid "You're about to delete the blocklist '%s'."
+msgstr ""
+
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:135
+msgid "You have no permission to remove this blocklist."
+msgstr ""
+
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:153
+msgid "Please specify a valid phone number."
+msgstr ""
+
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:226
+msgid "send"
+msgstr ""
+
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:226
+msgid "receive"
+msgstr ""
+
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:348
+msgid "You have no permissions to create a blocklist on this 'Base'."
+msgstr ""
+
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:354
+#: plugins/admin/departments/class_departmentGeneric.inc:143
+msgid "Required field 'Name' is not set."
+msgstr ""
+
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:357
+msgid "Required field 'Name' contains invalid characters"
+msgstr ""
+
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:365
+msgid "Specified name is already used."
+msgstr ""
+
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:372
+msgid "No permission to create a blocklist on this base."
 msgstr ""
 
 #: plugins/gofax/blocklists/remove.tpl:2
@@ -2390,8 +2388,8 @@ msgid "List of predefined blocklists"
 msgstr ""
 
 #: plugins/gofax/faxaccount/lists.tpl:43
-#: plugins/admin/groups/mail_admins.tpl:37
-#: plugins/admin/groups/application_options.tpl:8 include/functions.inc:1190
+#: plugins/admin/groups/application_options.tpl:8
+#: plugins/admin/groups/mail_admins.tpl:37 include/functions.inc:1190
 msgid "Apply"
 msgstr ""
 
@@ -2498,35 +2496,6 @@ msgstr ""
 msgid "# pages"
 msgstr ""
 
-#: plugins/gofax/reports/class_faxreport.inc:6
-msgid "FAX Reports"
-msgstr ""
-
-#: plugins/gofax/reports/class_faxreport.inc:97
-#: plugins/gofax/reports/class_faxreport.inc:204
-msgid "Can't connect to fax database, no reports can be shown!"
-msgstr ""
-
-#: plugins/gofax/reports/class_faxreport.inc:101
-#: plugins/gofax/reports/class_faxreport.inc:208
-msgid "Can't select fax database for report generation!"
-msgstr ""
-
-#: plugins/gofax/reports/class_faxreport.inc:109
-#: plugins/gofax/reports/class_faxreport.inc:216
-msgid "Query for fax database failed!"
-msgstr ""
-
-#: plugins/gofax/reports/class_faxreport.inc:117
-msgid "You have no permission to retrieve informations about this fax id!"
-msgstr ""
-
-#: plugins/gofax/reports/class_faxreport.inc:137
-#: plugins/gofax/reports/class_faxreport.inc:224
-#: plugins/gofon/reports/class_fonreport.inc:161
-msgid "Y-M-D"
-msgstr ""
-
 #: plugins/gofax/reports/contents.tpl:2 plugins/addons/logview/contents.tpl:2
 #: plugins/gofon/reports/contents.tpl:2
 msgid "Filter"
@@ -2581,65 +2550,43 @@ msgstr ""
 msgid "Search returned no results..."
 msgstr ""
 
+#: plugins/gofax/reports/class_faxreport.inc:6
+msgid "FAX Reports"
+msgstr ""
+
+#: plugins/gofax/reports/class_faxreport.inc:97
+#: plugins/gofax/reports/class_faxreport.inc:204
+msgid "Can't connect to fax database, no reports can be shown!"
+msgstr ""
+
+#: plugins/gofax/reports/class_faxreport.inc:101
+#: plugins/gofax/reports/class_faxreport.inc:208
+msgid "Can't select fax database for report generation!"
+msgstr ""
+
+#: plugins/gofax/reports/class_faxreport.inc:109
+#: plugins/gofax/reports/class_faxreport.inc:216
+msgid "Query for fax database failed!"
+msgstr ""
+
+#: plugins/gofax/reports/class_faxreport.inc:117
+msgid "You have no permission to retrieve informations about this fax id!"
+msgstr ""
+
+#: plugins/gofax/reports/class_faxreport.inc:137
+#: plugins/gofax/reports/class_faxreport.inc:224
+#: plugins/gofon/reports/class_fonreport.inc:161
+msgid "Y-M-D"
+msgstr ""
+
 #: plugins/gofax/reports/main.inc:5
 msgid "FAX reports"
 msgstr ""
 
-#: plugins/addons/addressbook/dial.tpl:3
-msgid "Dial connection..."
-msgstr ""
-
-#: plugins/addons/addressbook/dial.tpl:11
-#: plugins/addons/addressbook/class_addressbook.inc:357
-#: plugins/addons/addressbook/class_addressbook.inc:364
-#: plugins/addons/addressbook/class_addressbook.inc:368
-#: plugins/addons/addressbook/class_addressbook.inc:450
-msgid "Dial"
-msgstr ""
-
-#: plugins/addons/addressbook/address_edit.tpl:4
-msgid "Choose the department to store entry in"
-msgstr ""
-
-#: plugins/addons/addressbook/address_edit.tpl:16
-#: plugins/addons/addressbook/address_info.tpl:12
-msgid "Personal"
-msgstr ""
-
-#: plugins/addons/addressbook/address_edit.tpl:23
-#: plugins/addons/addressbook/address_info.tpl:19
-msgid "Initials"
-msgstr ""
-
-#: plugins/addons/addressbook/address_edit.tpl:33
 #: plugins/addons/addressbook/contents.tpl:15
+#: plugins/addons/addressbook/address_edit.tpl:33
 #: plugins/addons/addressbook/address_info.tpl:29
 msgid "Private"
-msgstr ""
-
-#: plugins/addons/addressbook/address_edit.tpl:47
-#: plugins/addons/addressbook/address_info.tpl:43
-msgid "Email"
-msgstr ""
-
-#: plugins/addons/addressbook/address_edit.tpl:57
-#: plugins/addons/addressbook/address_info.tpl:53
-msgid "Organizational"
-msgstr ""
-
-#: plugins/addons/addressbook/address_edit.tpl:65
-#: plugins/addons/addressbook/address_info.tpl:61
-msgid "Company"
-msgstr ""
-
-#: plugins/addons/addressbook/address_edit.tpl:71
-#: plugins/addons/addressbook/address_info.tpl:67
-msgid "City"
-msgstr ""
-
-#: plugins/addons/addressbook/address_edit.tpl:77
-#: plugins/addons/addressbook/address_info.tpl:73
-msgid "Country"
 msgstr ""
 
 #: plugins/addons/addressbook/contents.tpl:15
@@ -2699,6 +2646,57 @@ msgstr ""
 
 #: plugins/addons/addressbook/contents.tpl:105
 msgid "Choose the object that will be searched in"
+msgstr ""
+
+#: plugins/addons/addressbook/dial.tpl:3
+msgid "Dial connection..."
+msgstr ""
+
+#: plugins/addons/addressbook/dial.tpl:11
+#: plugins/addons/addressbook/class_addressbook.inc:357
+#: plugins/addons/addressbook/class_addressbook.inc:364
+#: plugins/addons/addressbook/class_addressbook.inc:368
+#: plugins/addons/addressbook/class_addressbook.inc:450
+msgid "Dial"
+msgstr ""
+
+#: plugins/addons/addressbook/address_edit.tpl:4
+msgid "Choose the department to store entry in"
+msgstr ""
+
+#: plugins/addons/addressbook/address_edit.tpl:16
+#: plugins/addons/addressbook/address_info.tpl:12
+msgid "Personal"
+msgstr ""
+
+#: plugins/addons/addressbook/address_edit.tpl:23
+#: plugins/addons/addressbook/address_info.tpl:19
+msgid "Initials"
+msgstr ""
+
+#: plugins/addons/addressbook/address_edit.tpl:47
+#: plugins/addons/addressbook/address_info.tpl:43
+msgid "Email"
+msgstr ""
+
+#: plugins/addons/addressbook/address_edit.tpl:57
+#: plugins/addons/addressbook/address_info.tpl:53
+msgid "Organizational"
+msgstr ""
+
+#: plugins/addons/addressbook/address_edit.tpl:65
+#: plugins/addons/addressbook/address_info.tpl:61
+msgid "Company"
+msgstr ""
+
+#: plugins/addons/addressbook/address_edit.tpl:71
+#: plugins/addons/addressbook/address_info.tpl:67
+msgid "City"
+msgstr ""
+
+#: plugins/addons/addressbook/address_edit.tpl:77
+#: plugins/addons/addressbook/address_info.tpl:73
+msgid "Country"
 msgstr ""
 
 #: plugins/addons/addressbook/remove.tpl:7
@@ -3060,45 +3058,6 @@ msgstr ""
 msgid "System log view"
 msgstr ""
 
-#: plugins/admin/groups/mail.tpl:11
-msgid "Primary mail address for this shared folder"
-msgstr ""
-
-#: plugins/admin/groups/mail.tpl:16
-msgid "Select mail server to place user on"
-msgstr ""
-
-#: plugins/admin/groups/mail.tpl:64
-msgid "IMAP shared folders"
-msgstr ""
-
-#: plugins/admin/groups/mail.tpl:68
-msgid "Default permission"
-msgstr ""
-
-#: plugins/admin/groups/mail.tpl:76
-msgid "Member permission"
-msgstr ""
-
-#: plugins/admin/groups/mail.tpl:91
-msgid "Forward messages to non group members"
-msgstr ""
-
-#: plugins/admin/groups/class_groupManagement.inc:25
-#: plugins/admin/ogroups/class_ogroupManagement.inc:42
-msgid "Groups"
-msgstr ""
-
-#: plugins/admin/groups/class_groupManagement.inc:202
-#, php-format
-msgid "You're about to delete the group '%s'."
-msgstr ""
-
-#: plugins/admin/groups/class_groupManagement.inc:208
-#: plugins/admin/groups/class_groupManagement.inc:234
-msgid "You are not allowed to delete this group!"
-msgstr ""
-
 #: plugins/admin/groups/class_groupGeneric.inc:109
 msgid "Can't find this groups SID in LDAP or in your configuration file!"
 msgstr ""
@@ -3144,14 +3103,28 @@ msgstr ""
 msgid "Value specified as 'Name' is already used."
 msgstr ""
 
-#: plugins/admin/groups/remove.tpl:7
-msgid ""
-"This may be a primary user group. Please double check if you really want to "
-"do this since there is no way for GOsa to get your data back."
+#: plugins/admin/groups/mail.tpl:11
+msgid "Primary mail address for this shared folder"
 msgstr ""
 
-#: plugins/admin/groups/main.inc:39 plugins/admin/groups/main.inc:43
-msgid "Group administration"
+#: plugins/admin/groups/mail.tpl:16
+msgid "Select mail server to place user on"
+msgstr ""
+
+#: plugins/admin/groups/mail.tpl:64
+msgid "IMAP shared folders"
+msgstr ""
+
+#: plugins/admin/groups/mail.tpl:68
+msgid "Default permission"
+msgstr ""
+
+#: plugins/admin/groups/mail.tpl:76
+msgid "Member permission"
+msgstr ""
+
+#: plugins/admin/groups/mail.tpl:91
+msgid "Forward messages to non group members"
 msgstr ""
 
 #: plugins/admin/groups/headpage.tpl:6 plugins/admin/ogroups/headpage.tpl:6
@@ -3177,6 +3150,35 @@ msgstr ""
 
 #: plugins/admin/groups/headpage.tpl:51 plugins/admin/users/headpage.tpl:59
 msgid "Search in subtrees"
+msgstr ""
+
+#: plugins/admin/groups/main.inc:39 plugins/admin/groups/main.inc:43
+msgid "Group administration"
+msgstr ""
+
+#: plugins/admin/groups/class_groupManagement.inc:25
+#: plugins/admin/ogroups/class_ogroupManagement.inc:42
+msgid "Groups"
+msgstr ""
+
+#: plugins/admin/groups/class_groupManagement.inc:202
+#, php-format
+msgid "You're about to delete the group '%s'."
+msgstr ""
+
+#: plugins/admin/groups/class_groupManagement.inc:208
+#: plugins/admin/groups/class_groupManagement.inc:234
+msgid "You are not allowed to delete this group!"
+msgstr ""
+
+#: plugins/admin/groups/remove.tpl:7
+msgid ""
+"This may be a primary user group. Please double check if you really want to "
+"do this since there is no way for GOsa to get your data back."
+msgstr ""
+
+#: plugins/admin/groups/application_options.tpl:1
+msgid "Application options"
 msgstr ""
 
 #: plugins/admin/groups/class_groupMail.inc:153
@@ -3314,10 +3316,6 @@ msgstr ""
 msgid "Folder administrators"
 msgstr ""
 
-#: plugins/admin/groups/application_options.tpl:1
-msgid "Application options"
-msgstr ""
-
 #: plugins/admin/groups/class_groupApplication.inc:61
 msgid "This 'dn' is no appgroup."
 msgstr ""
@@ -3357,6 +3355,37 @@ msgid ""
 "able to login without it."
 msgstr ""
 
+#: plugins/admin/users/template.tpl:2
+msgid "Creating a new user using templates"
+msgstr ""
+
+#: plugins/admin/users/template.tpl:6
+msgid ""
+"Creating a new user can be assisted by using templates. Many database "
+"records will be filled automatically. Choose <b>none</b> to skip the usage "
+"of templates."
+msgstr ""
+
+#: plugins/admin/users/template.tpl:11
+#: plugins/admin/users/class_userManagement.inc:622
+msgid "Template"
+msgstr ""
+
+#: plugins/admin/users/template.tpl:44
+#: ihtml/themes/altlinux/setup_introduction.tpl:10
+#: ihtml/themes/altlinux/setup_step2.tpl:16
+#: ihtml/themes/altlinux/setup_step3.tpl:12
+#: ihtml/themes/default/setup_introduction.tpl:12
+#: ihtml/themes/default/setup_useradmin.tpl:41
+#: ihtml/themes/default/setup_step2.tpl:13
+#: ihtml/themes/default/setup_step3.tpl:18
+msgid "Continue"
+msgstr ""
+
+#: plugins/admin/users/main.inc:40 plugins/admin/users/main.inc:46
+msgid "User administration"
+msgstr ""
+
 #: plugins/admin/users/class_userManagement.inc:25
 msgid "Users"
 msgstr ""
@@ -3383,33 +3412,6 @@ msgstr ""
 
 #: plugins/admin/users/class_userManagement.inc:434
 msgid "A person with the choosen name is already used in this tree."
-msgstr ""
-
-#: plugins/admin/users/class_userManagement.inc:622
-#: plugins/admin/users/template.tpl:11
-msgid "Template"
-msgstr ""
-
-#: plugins/admin/users/template.tpl:2
-msgid "Creating a new user using templates"
-msgstr ""
-
-#: plugins/admin/users/template.tpl:6
-msgid ""
-"Creating a new user can be assisted by using templates. Many database "
-"records will be filled automatically. Choose <b>none</b> to skip the usage "
-"of templates."
-msgstr ""
-
-#: plugins/admin/users/template.tpl:44
-#: ihtml/themes/altlinux/setup_introduction.tpl:10
-#: ihtml/themes/altlinux/setup_step2.tpl:16
-#: ihtml/themes/altlinux/setup_step3.tpl:12
-#: ihtml/themes/default/setup_introduction.tpl:12
-#: ihtml/themes/default/setup_useradmin.tpl:41
-#: ihtml/themes/default/setup_step2.tpl:13
-#: ihtml/themes/default/setup_step3.tpl:18
-msgid "Continue"
 msgstr ""
 
 #: plugins/admin/users/remove.tpl:7
@@ -3504,44 +3506,6 @@ msgstr ""
 msgid "Show FAX users"
 msgstr ""
 
-#: plugins/admin/users/main.inc:40 plugins/admin/users/main.inc:46
-msgid "User administration"
-msgstr ""
-
-#: plugins/admin/applications/class_applicationParameters.inc:47
-msgid "Remove options"
-msgstr ""
-
-#: plugins/admin/applications/class_applicationParameters.inc:48
-msgid "This application has options. You can disable them by clicking below."
-msgstr ""
-
-#: plugins/admin/applications/class_applicationParameters.inc:50
-msgid "Create options"
-msgstr ""
-
-#: plugins/admin/applications/class_applicationParameters.inc:51
-msgid ""
-"This application has options disabled. You can enable them by clicking below."
-msgstr ""
-
-#: plugins/admin/applications/class_applicationParameters.inc:87
-msgid "Variable"
-msgstr ""
-
-#: plugins/admin/applications/class_applicationParameters.inc:87
-msgid "Default value"
-msgstr ""
-
-#: plugins/admin/applications/class_applicationParameters.inc:98
-msgid "Add option"
-msgstr ""
-
-#: plugins/admin/applications/class_applicationParameters.inc:149
-#, php-format
-msgid "Value '%s' specified as option name is not valid."
-msgstr ""
-
 #: plugins/admin/applications/generic.tpl:7
 #: plugins/admin/applications/generic.tpl:8
 msgid "Application name"
@@ -3598,6 +3562,40 @@ msgstr ""
 msgid "Place entry in members startmenu"
 msgstr ""
 
+#: plugins/admin/applications/class_applicationParameters.inc:47
+msgid "Remove options"
+msgstr ""
+
+#: plugins/admin/applications/class_applicationParameters.inc:48
+msgid "This application has options. You can disable them by clicking below."
+msgstr ""
+
+#: plugins/admin/applications/class_applicationParameters.inc:50
+msgid "Create options"
+msgstr ""
+
+#: plugins/admin/applications/class_applicationParameters.inc:51
+msgid ""
+"This application has options disabled. You can enable them by clicking below."
+msgstr ""
+
+#: plugins/admin/applications/class_applicationParameters.inc:87
+msgid "Variable"
+msgstr ""
+
+#: plugins/admin/applications/class_applicationParameters.inc:87
+msgid "Default value"
+msgstr ""
+
+#: plugins/admin/applications/class_applicationParameters.inc:98
+msgid "Add option"
+msgstr ""
+
+#: plugins/admin/applications/class_applicationParameters.inc:149
+#, php-format
+msgid "Value '%s' specified as option name is not valid."
+msgstr ""
+
 #: plugins/admin/applications/remove.tpl:7
 msgid ""
 "This may be used by several groups. Please double check if your really want "
@@ -3638,6 +3636,16 @@ msgstr ""
 msgid "Application management"
 msgstr ""
 
+#: plugins/admin/applications/class_applicationManagement.inc:185
+#, php-format
+msgid "You're about to delete the application '%s'."
+msgstr ""
+
+#: plugins/admin/applications/class_applicationManagement.inc:191
+#: plugins/admin/applications/class_applicationManagement.inc:217
+msgid "You are not allowed to delete this application!"
+msgstr ""
+
 #: plugins/admin/applications/class_applicationGeneric.inc:57
 msgid "This 'dn' is no application."
 msgstr ""
@@ -3660,16 +3668,6 @@ msgstr ""
 
 #: plugins/admin/applications/class_applicationGeneric.inc:244
 msgid "There's already an application with this 'Name'."
-msgstr ""
-
-#: plugins/admin/applications/class_applicationManagement.inc:185
-#, php-format
-msgid "You're about to delete the application '%s'."
-msgstr ""
-
-#: plugins/admin/applications/class_applicationManagement.inc:191
-#: plugins/admin/applications/class_applicationManagement.inc:217
-msgid "You are not allowed to delete this application!"
 msgstr ""
 
 #: plugins/admin/departments/generic.tpl:4
@@ -3770,6 +3768,20 @@ msgstr ""
 msgid "Department management"
 msgstr ""
 
+#: plugins/admin/departments/class_departmentManagement.inc:25
+#: plugins/admin/ogroups/class_ogroupManagement.inc:43
+msgid "Departments"
+msgstr ""
+
+#: plugins/admin/departments/class_departmentManagement.inc:130
+#, php-format
+msgid "You're about to delete the whole LDAP subtree placed under '%s'."
+msgstr ""
+
+#: plugins/admin/departments/class_departmentManagement.inc:145
+msgid "You have no permission to remove this department."
+msgstr ""
+
 #: plugins/admin/departments/class_departmentGeneric.inc:129
 msgid "You have no permissions to create a department on this 'Base'."
 msgstr ""
@@ -3789,20 +3801,6 @@ msgstr ""
 
 #: plugins/admin/departments/class_departmentGeneric.inc:152
 msgid " Please choose another name."
-msgstr ""
-
-#: plugins/admin/departments/class_departmentManagement.inc:25
-#: plugins/admin/ogroups/class_ogroupManagement.inc:43
-msgid "Departments"
-msgstr ""
-
-#: plugins/admin/departments/class_departmentManagement.inc:130
-#, php-format
-msgid "You're about to delete the whole LDAP subtree placed under '%s'."
-msgstr ""
-
-#: plugins/admin/departments/class_departmentManagement.inc:145
-msgid "You have no permission to remove this department."
 msgstr ""
 
 #: plugins/admin/systems/class_terminalInfo.inc:61
@@ -3965,6 +3963,42 @@ msgstr ""
 msgid "GUI"
 msgstr ""
 
+#: plugins/admin/systems/main.inc:45 plugins/admin/systems/main.inc:47
+msgid "System management"
+msgstr ""
+
+#: plugins/admin/systems/servservice.tpl:11
+msgid "Nfs Export"
+msgstr ""
+
+#: plugins/admin/systems/servservice.tpl:36
+msgid "Time Service"
+msgstr ""
+
+#: plugins/admin/systems/servservice.tpl:59
+msgid "LDAP Service"
+msgstr ""
+
+#: plugins/admin/systems/servservice.tpl:70
+msgid "Terminal Service"
+msgstr ""
+
+#: plugins/admin/systems/servservice.tpl:75
+msgid "Temporary disable login"
+msgstr ""
+
+#: plugins/admin/systems/servservice.tpl:78
+msgid "Font path"
+msgstr ""
+
+#: plugins/admin/systems/servservice.tpl:91
+msgid "Syslog Service"
+msgstr ""
+
+#: plugins/admin/systems/servservice.tpl:99
+msgid "Print Service"
+msgstr ""
+
 #: plugins/admin/systems/class_terminalService.inc:82
 msgid "default"
 msgstr ""
@@ -4003,40 +4037,22 @@ msgstr ""
 msgid "Please specify a valid HSync range."
 msgstr ""
 
-#: plugins/admin/systems/main.inc:45 plugins/admin/systems/main.inc:47
-msgid "System management"
+#: plugins/admin/systems/class_servDB.inc:123
+#: plugins/admin/systems/class_servDB.inc:139
+#: plugins/admin/systems/class_servDB.inc:145
+#: plugins/admin/systems/class_servDB.inc:150
+#: plugins/admin/systems/class_servDB.inc:156
+#, php-format
+msgid "The attribute '%s' is empty or contains invalid characters."
 msgstr ""
 
-#: plugins/admin/systems/servservice.tpl:11
-msgid "Nfs Export"
+#: plugins/admin/systems/class_servDB.inc:129
+#, php-format
+msgid "The imap connect string needs to be in the form '%s'."
 msgstr ""
 
-#: plugins/admin/systems/servservice.tpl:36
-msgid "Time Service"
-msgstr ""
-
-#: plugins/admin/systems/servservice.tpl:59
-msgid "LDAP Service"
-msgstr ""
-
-#: plugins/admin/systems/servservice.tpl:70
-msgid "Terminal Service"
-msgstr ""
-
-#: plugins/admin/systems/servservice.tpl:75
-msgid "Temporary disable login"
-msgstr ""
-
-#: plugins/admin/systems/servservice.tpl:78
-msgid "Font path"
-msgstr ""
-
-#: plugins/admin/systems/servservice.tpl:91
-msgid "Syslog Service"
-msgstr ""
-
-#: plugins/admin/systems/servservice.tpl:99
-msgid "Print Service"
+#: plugins/admin/systems/class_servDB.inc:133
+msgid "The sieve port needs to be numeric."
 msgstr ""
 
 #: plugins/admin/systems/server.tpl:6
@@ -4059,6 +4075,73 @@ msgstr ""
 
 #: plugins/admin/systems/server.tpl:42
 msgid "Select action to execute for this server"
+msgstr ""
+
+#: plugins/admin/systems/phone.tpl:6
+msgid "Phone name"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:9
+msgid "Terminal template"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:11
+msgid "Terminal name"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:36
+#: plugins/admin/systems/workstation.tpl:36
+msgid "Mode"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:38
+#: plugins/admin/systems/workstation.tpl:38
+msgid "Select terminal mode"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:52
+#: plugins/admin/systems/workstation.tpl:52
+msgid "Root server"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:54
+#: plugins/admin/systems/workstation.tpl:54
+msgid "Select NFS root filesystem to use"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:60
+#: plugins/admin/systems/workstation.tpl:60
+msgid "Swap server"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:62
+#: plugins/admin/systems/workstation.tpl:62
+msgid "Choose NFS filesystem to place swap files on"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:74
+#: plugins/admin/systems/workstation.tpl:74
+msgid "Syslog server"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:76
+#: plugins/admin/systems/workstation.tpl:76
+msgid "Choose server to use for logging"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:82
+#: plugins/admin/systems/workstation.tpl:82
+msgid "NTP server"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:84
+#: plugins/admin/systems/workstation.tpl:84
+msgid "Choose server to use for synchronizing time"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:103
+#: plugins/admin/systems/workstation.tpl:103
+msgid "Select action to execute for this terminal"
 msgstr ""
 
 #: plugins/admin/systems/class_terminalGeneric.inc:62
@@ -4137,79 +4220,12 @@ msgstr ""
 msgid "The required field 'Terminal name' is not set."
 msgstr ""
 
-#: plugins/admin/systems/phone.tpl:6
-msgid "Phone name"
-msgstr ""
-
 #: plugins/admin/systems/class_servGeneric.inc:48
 msgid "This 'dn' has no server features."
 msgstr ""
 
 #: plugins/admin/systems/class_servGeneric.inc:168
 msgid "You have no permissions to create a server on this 'Base'."
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:9
-msgid "Terminal template"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:11
-msgid "Terminal name"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:36
-#: plugins/admin/systems/workstation.tpl:36
-msgid "Mode"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:38
-#: plugins/admin/systems/workstation.tpl:38
-msgid "Select terminal mode"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:52
-#: plugins/admin/systems/workstation.tpl:52
-msgid "Root server"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:54
-#: plugins/admin/systems/workstation.tpl:54
-msgid "Select NFS root filesystem to use"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:60
-#: plugins/admin/systems/workstation.tpl:60
-msgid "Swap server"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:62
-#: plugins/admin/systems/workstation.tpl:62
-msgid "Choose NFS filesystem to place swap files on"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:74
-#: plugins/admin/systems/workstation.tpl:74
-msgid "Syslog server"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:76
-#: plugins/admin/systems/workstation.tpl:76
-msgid "Choose server to use for logging"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:82
-#: plugins/admin/systems/workstation.tpl:82
-msgid "NTP server"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:84
-#: plugins/admin/systems/workstation.tpl:84
-msgid "Choose server to use for synchronizing time"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:103
-#: plugins/admin/systems/workstation.tpl:103
-msgid "Select action to execute for this terminal"
 msgstr ""
 
 #: plugins/admin/systems/class_servDHCP.inc:32
@@ -4230,6 +4246,18 @@ msgstr ""
 msgid ""
 "This server has DHCP features disabled. You can enable them by clicking "
 "below."
+msgstr ""
+
+#: plugins/admin/systems/printer.tpl:6
+msgid "Printer name"
+msgstr ""
+
+#: plugins/admin/systems/printer.tpl:32
+msgid "Printer URL"
+msgstr ""
+
+#: plugins/admin/systems/printer.tpl:36
+msgid "Path to PPD"
 msgstr ""
 
 #: plugins/admin/systems/class_systemManagement.inc:32
@@ -4286,16 +4314,12 @@ msgstr ""
 msgid "The required field 'Workstation name' is not set."
 msgstr ""
 
-#: plugins/admin/systems/printer.tpl:6
-msgid "Printer name"
+#: plugins/admin/systems/class_printGeneric.inc:56
+msgid "This 'dn' has no printer features."
 msgstr ""
 
-#: plugins/admin/systems/printer.tpl:32
-msgid "Printer URL"
-msgstr ""
-
-#: plugins/admin/systems/printer.tpl:36
-msgid "Path to PPD"
+#: plugins/admin/systems/class_printGeneric.inc:122
+msgid "You have no permissions to create a printer on this 'Base'."
 msgstr ""
 
 #: plugins/admin/systems/class_servDNS.inc:32
@@ -4314,24 +4338,6 @@ msgstr ""
 #: plugins/admin/systems/class_servDNS.inc:36
 msgid ""
 "This server has DNS features disabled. You can enable them by clicking below."
-msgstr ""
-
-#: plugins/admin/systems/class_servDB.inc:123
-#: plugins/admin/systems/class_servDB.inc:139
-#: plugins/admin/systems/class_servDB.inc:145
-#: plugins/admin/systems/class_servDB.inc:150
-#: plugins/admin/systems/class_servDB.inc:156
-#, php-format
-msgid "The attribute '%s' is empty or contains invalid characters."
-msgstr ""
-
-#: plugins/admin/systems/class_servDB.inc:129
-#, php-format
-msgid "The imap connect string needs to be in the form '%s'."
-msgstr ""
-
-#: plugins/admin/systems/class_servDB.inc:133
-msgid "The sieve port needs to be numeric."
 msgstr ""
 
 #: plugins/admin/systems/workstation.tpl:9
@@ -4400,14 +4406,6 @@ msgstr ""
 
 #: plugins/admin/systems/servdb.tpl:104
 msgid "Logging DB user"
-msgstr ""
-
-#: plugins/admin/systems/class_printGeneric.inc:56
-msgid "This 'dn' has no printer features."
-msgstr ""
-
-#: plugins/admin/systems/class_printGeneric.inc:122
-msgid "You have no permissions to create a printer on this 'Base'."
 msgstr ""
 
 #: plugins/admin/systems/wingeneric.tpl:6
@@ -5029,42 +5027,6 @@ msgstr ""
 msgid "Select action to execute for this   group of terminals"
 msgstr ""
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:25
-#: plugins/admin/ogroups/main.inc:34 plugins/admin/ogroups/main.inc:39
-msgid "Object groups"
-msgstr ""
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:41
-msgid "UNIX accounts"
-msgstr ""
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:45
-msgid "Servers"
-msgstr ""
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:46
-msgid "Thin Clients"
-msgstr ""
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:47
-msgid "Workstations"
-msgstr ""
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:49
-#: plugins/generic/references/class_reference.inc:52
-msgid "Printer"
-msgstr ""
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:153
-#, php-format
-msgid "You're about to delete the object group '%s'."
-msgstr ""
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:159
-#: plugins/admin/ogroups/class_ogroupManagement.inc:185
-msgid "You are not allowed to delete this object group!"
-msgstr ""
-
 #: plugins/admin/ogroups/class_ogroup.inc:91
 msgid "This 'dn' is no object group."
 msgstr ""
@@ -5125,6 +5087,42 @@ msgstr ""
 msgid "You can combine two different object types at maximum only!"
 msgstr ""
 
+#: plugins/admin/ogroups/main.inc:34 plugins/admin/ogroups/main.inc:39
+#: plugins/admin/ogroups/class_ogroupManagement.inc:25
+msgid "Object groups"
+msgstr ""
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:41
+msgid "UNIX accounts"
+msgstr ""
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:45
+msgid "Servers"
+msgstr ""
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:46
+msgid "Thin Clients"
+msgstr ""
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:47
+msgid "Workstations"
+msgstr ""
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:49
+#: plugins/generic/references/class_reference.inc:52
+msgid "Printer"
+msgstr ""
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:153
+#, php-format
+msgid "You're about to delete the object group '%s'."
+msgstr ""
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:159
+#: plugins/admin/ogroups/class_ogroupManagement.inc:185
+msgid "You are not allowed to delete this object group!"
+msgstr ""
+
 #: plugins/admin/ogroups/generic.tpl:9
 msgid "Name of the group"
 msgstr ""
@@ -5180,6 +5178,10 @@ msgstr ""
 
 #: plugins/admin/ogroups/headpage.tpl:55
 msgid "Show groups containing printers"
+msgstr ""
+
+#: plugins/gofon/phoneaccount/main.inc:120
+msgid "Phone settings"
 msgstr ""
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:114
@@ -5252,10 +5254,6 @@ msgstr ""
 
 #: plugins/gofon/phoneaccount/generic.tpl:60
 msgid "Timeout (s)"
-msgstr ""
-
-#: plugins/gofon/phoneaccount/main.inc:120
-msgid "Phone settings"
 msgstr ""
 
 #: plugins/gofon/reports/class_fonreport.inc:6
@@ -5534,36 +5532,6 @@ msgstr ""
 msgid "Can't activate GOsa sieve script. Server says '%s'."
 msgstr ""
 
-#: include/class_plugin.inc:180
-msgid "This 'dn' has no account extensions."
-msgstr ""
-
-#: include/class_plugin.inc:185
-msgid "This is an empty plugin."
-msgstr ""
-
-#: include/class_plugin.inc:386
-#, php-format
-msgid ""
-"Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
-msgstr ""
-
-#: include/class_plugin.inc:412
-#, php-format
-msgid ""
-"Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
-msgstr ""
-
-#: include/class_plugin.inc:438
-#, php-format
-msgid ""
-"Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
-msgstr ""
-
-#: include/class_password-methods-ssha.inc:51
-msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
-msgstr ""
-
 #: include/class_pluglist.inc:98
 msgid ""
 "Your gosa.conf information has changed partly. Please convert it using the "
@@ -5576,71 +5544,6 @@ msgstr ""
 msgid ""
 "You are currently editing a database entry. Do you want to dismiss the "
 "changes?"
-msgstr ""
-
-#: include/class_password-methods.inc:169
-#, php-format
-msgid "Setting the password failed. LDAP server says '%s'."
-msgstr ""
-
-#: include/class_password-methods.inc:188
-msgid ""
-"Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
-msgstr ""
-
-#: include/class_config.inc:69
-#, php-format
-msgid "XML error in gosa.conf: %s at line %d"
-msgstr ""
-
-#: include/class_config.inc:195 html/index.php:142
-msgid "Can't bind to LDAP. Please contact the system administrator."
-msgstr ""
-
-#: include/class_config.inc:426
-msgid "SID and/or RIDBASE missing in your configuration!"
-msgstr ""
-
-#: include/class_password-methods-sha.inc:50
-msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
-msgstr ""
-
-#: include/class_password-methods-kerberos.inc:43
-msgid ""
-"Warning: Can't set kerberos password. Your PHP version has no kerberos "
-"support, password has not been changed."
-msgstr ""
-
-#: include/class_password-methods-kerberos.inc:52
-msgid "Kerberos database communication failed!"
-msgstr ""
-
-#: include/class_password-methods-kerberos.inc:59
-msgid "Changing password in kerberos database failed!"
-msgstr ""
-
-#: include/class_ldap.inc:398
-#, php-format
-msgid ""
-"Autocreation of type '%s' is currently not supported. Please report to the "
-"GOsa team."
-msgstr ""
-
-#: include/class_ldap.inc:630
-#, php-format
-msgid ""
-"This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
-"in line %s"
-msgstr ""
-
-#: include/class_ldap.inc:643
-#, php-format
-msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
-msgstr ""
-
-#: include/class_ldap.inc:659
-#, php-format
-msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
 msgstr ""
 
 #: include/setup_checks.inc:72
@@ -6005,6 +5908,101 @@ msgid ""
 "administrate anything!"
 msgstr ""
 
+#: include/class_plugin.inc:180
+msgid "This 'dn' has no account extensions."
+msgstr ""
+
+#: include/class_plugin.inc:185
+msgid "This is an empty plugin."
+msgstr ""
+
+#: include/class_plugin.inc:386
+#, php-format
+msgid ""
+"Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
+msgstr ""
+
+#: include/class_plugin.inc:412
+#, php-format
+msgid ""
+"Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
+msgstr ""
+
+#: include/class_plugin.inc:438
+#, php-format
+msgid ""
+"Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
+msgstr ""
+
+#: include/class_config.inc:69
+#, php-format
+msgid "XML error in gosa.conf: %s at line %d"
+msgstr ""
+
+#: include/class_config.inc:195 html/index.php:142
+msgid "Can't bind to LDAP. Please contact the system administrator."
+msgstr ""
+
+#: include/class_config.inc:426
+msgid "SID and/or RIDBASE missing in your configuration!"
+msgstr ""
+
+#: include/class_password-methods-ssha.inc:51
+msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
+msgstr ""
+
+#: include/class_password-methods.inc:170
+#, php-format
+msgid "Setting the password failed. LDAP server says '%s'."
+msgstr ""
+
+#: include/class_password-methods.inc:189
+msgid ""
+"Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
+msgstr ""
+
+#: include/class_password-methods-kerberos.inc:43
+msgid ""
+"Warning: Can't set kerberos password. Your PHP version has no kerberos "
+"support, password has not been changed."
+msgstr ""
+
+#: include/class_password-methods-kerberos.inc:52
+msgid "Kerberos database communication failed!"
+msgstr ""
+
+#: include/class_password-methods-kerberos.inc:59
+msgid "Changing password in kerberos database failed!"
+msgstr ""
+
+#: include/class_password-methods-sha.inc:50
+msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
+msgstr ""
+
+#: include/class_ldap.inc:398
+#, php-format
+msgid ""
+"Autocreation of type '%s' is currently not supported. Please report to the "
+"GOsa team."
+msgstr ""
+
+#: include/class_ldap.inc:630
+#, php-format
+msgid ""
+"This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
+"in line %s"
+msgstr ""
+
+#: include/class_ldap.inc:643
+#, php-format
+msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
+msgstr ""
+
+#: include/class_ldap.inc:659
+#, php-format
+msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
+msgstr ""
+
 #: html/getfax.php:53
 msgid "Could not connect to database server!"
 msgstr ""
@@ -6073,68 +6071,6 @@ msgstr ""
 msgid "Enter SSL session"
 msgstr ""
 
-#: ihtml/themes/altlinux/conflict.tpl:2 ihtml/themes/default/conflict.tpl:2
-msgid "Session conflict detected"
-msgstr ""
-
-#: ihtml/themes/altlinux/conflict.tpl:6 ihtml/themes/default/conflict.tpl:6
-msgid ""
-"Probably there's another active instance of your session. Multiple window "
-"operation is technical not possible and heavily depends on the browser "
-"you're using. Usage of different browsers at a time (i.e. IE and Mozilla) is "
-"possible. Pressing the <b>Logout</b> button will close this session."
-msgstr ""
-
-#: ihtml/themes/altlinux/conflict.tpl:10 ihtml/themes/default/conflict.tpl:10
-msgid ""
-"Ignoring this message will change/destroy the data you're currently editing, "
-"so please close multiple windows and log in again."
-msgstr ""
-
-#: ihtml/themes/altlinux/conflict.tpl:14 ihtml/themes/default/conflict.tpl:14
-msgid "Logout"
-msgstr ""
-
-#: ihtml/themes/altlinux/setup_introduction.tpl:1
-#: ihtml/themes/default/setup_introduction.tpl:1
-msgid "Welcome to the GOsa setup!"
-msgstr ""
-
-#: ihtml/themes/altlinux/setup_introduction.tpl:4
-#: ihtml/themes/default/setup_introduction.tpl:4
-msgid ""
-"It looks like you're calling GOsa for the first time - no configuration was "
-"found. This setup like script will try to aid you in creating a working "
-"configuration by performing three major steps: first we'll check the PHP "
-"installation for required modules, than we're going to check for optional/"
-"needed programms and after you've provided basic informations for your LDAP "
-"connectivity, we're going to check your LDAP setup."
-msgstr ""
-
-#: ihtml/themes/altlinux/login.tpl:14 ihtml/themes/default/login.tpl:14
-msgid "Please use your <i>username</i> and <i>password</i> to log in"
-msgstr ""
-
-#: ihtml/themes/altlinux/login.tpl:25 ihtml/themes/altlinux/login.tpl:29
-#: ihtml/themes/default/setup_useradmin.tpl:22
-#: ihtml/themes/default/login.tpl:25 ihtml/themes/default/login.tpl:29
-msgid "Username"
-msgstr ""
-
-#: ihtml/themes/altlinux/login.tpl:43 ihtml/themes/altlinux/login.tpl:46
-#: ihtml/themes/default/login.tpl:43 ihtml/themes/default/login.tpl:46
-msgid "Directory"
-msgstr ""
-
-#: ihtml/themes/altlinux/login.tpl:54
-#: ihtml/themes/altlinux/setup_finish.tpl:24 ihtml/themes/default/login.tpl:54
-msgid "Sign in"
-msgstr ""
-
-#: ihtml/themes/altlinux/login.tpl:55 ihtml/themes/default/login.tpl:55
-msgid "Click here to log in"
-msgstr ""
-
 #: ihtml/themes/altlinux/sizelimit.tpl:3 ihtml/themes/default/sizelimit.tpl:3
 msgid ""
 "The size limit option makes LDAP operations faster and saves the LDAP server "
@@ -6158,6 +6094,68 @@ msgid ""
 "and let me use filters instead"
 msgstr ""
 
+#: ihtml/themes/altlinux/conflict.tpl:2 ihtml/themes/default/conflict.tpl:2
+msgid "Session conflict detected"
+msgstr ""
+
+#: ihtml/themes/altlinux/conflict.tpl:6 ihtml/themes/default/conflict.tpl:6
+msgid ""
+"Probably there's another active instance of your session. Multiple window "
+"operation is technical not possible and heavily depends on the browser "
+"you're using. Usage of different browsers at a time (i.e. IE and Mozilla) is "
+"possible. Pressing the <b>Logout</b> button will close this session."
+msgstr ""
+
+#: ihtml/themes/altlinux/conflict.tpl:10 ihtml/themes/default/conflict.tpl:10
+msgid ""
+"Ignoring this message will change/destroy the data you're currently editing, "
+"so please close multiple windows and log in again."
+msgstr ""
+
+#: ihtml/themes/altlinux/conflict.tpl:14 ihtml/themes/default/conflict.tpl:14
+msgid "Logout"
+msgstr ""
+
+#: ihtml/themes/altlinux/login.tpl:14 ihtml/themes/default/login.tpl:14
+msgid "Please use your <i>username</i> and <i>password</i> to log in"
+msgstr ""
+
+#: ihtml/themes/altlinux/login.tpl:25 ihtml/themes/altlinux/login.tpl:29
+#: ihtml/themes/default/login.tpl:25 ihtml/themes/default/login.tpl:29
+#: ihtml/themes/default/setup_useradmin.tpl:22
+msgid "Username"
+msgstr ""
+
+#: ihtml/themes/altlinux/login.tpl:43 ihtml/themes/altlinux/login.tpl:46
+#: ihtml/themes/default/login.tpl:43 ihtml/themes/default/login.tpl:46
+msgid "Directory"
+msgstr ""
+
+#: ihtml/themes/altlinux/login.tpl:54
+#: ihtml/themes/altlinux/setup_finish.tpl:24 ihtml/themes/default/login.tpl:54
+msgid "Sign in"
+msgstr ""
+
+#: ihtml/themes/altlinux/login.tpl:55 ihtml/themes/default/login.tpl:55
+msgid "Click here to log in"
+msgstr ""
+
+#: ihtml/themes/altlinux/setup_introduction.tpl:1
+#: ihtml/themes/default/setup_introduction.tpl:1
+msgid "Welcome to the GOsa setup!"
+msgstr ""
+
+#: ihtml/themes/altlinux/setup_introduction.tpl:4
+#: ihtml/themes/default/setup_introduction.tpl:4
+msgid ""
+"It looks like you're calling GOsa for the first time - no configuration was "
+"found. This setup like script will try to aid you in creating a working "
+"configuration by performing three major steps: first we'll check the PHP "
+"installation for required modules, than we're going to check for optional/"
+"needed programms and after you've provided basic informations for your LDAP "
+"connectivity, we're going to check your LDAP setup."
+msgstr ""
+
 #: ihtml/themes/altlinux/framework.tpl:15
 #: ihtml/themes/default/framework.tpl:15
 msgid "Main"
@@ -6176,17 +6174,6 @@ msgstr ""
 #: ihtml/themes/altlinux/framework.tpl:33
 #: ihtml/themes/default/framework.tpl:33
 msgid "Signed in:"
-msgstr ""
-
-#: ihtml/themes/altlinux/islocked.tpl:2 ihtml/themes/default/islocked.tpl:2
-msgid "Locking conflict detected"
-msgstr ""
-
-#: ihtml/themes/altlinux/islocked.tpl:9 ihtml/themes/default/islocked.tpl:9
-msgid ""
-"If this lock detection is false, the other person has obviously closed the "
-"webbrowser during the edit operation. You may delete the lockfile in this "
-"case by pressing the <i>Remove</i> button."
 msgstr ""
 
 #: ihtml/themes/altlinux/setup_step2.tpl:1
@@ -6209,6 +6196,17 @@ msgstr ""
 msgid ""
 "We've inspected the webserver side now. Your setup seems to fit GOsa's "
 "needs. Lets go for the GOsa configuration part now..."
+msgstr ""
+
+#: ihtml/themes/altlinux/islocked.tpl:2 ihtml/themes/default/islocked.tpl:2
+msgid "Locking conflict detected"
+msgstr ""
+
+#: ihtml/themes/altlinux/islocked.tpl:9 ihtml/themes/default/islocked.tpl:9
+msgid ""
+"If this lock detection is false, the other person has obviously closed the "
+"webbrowser during the edit operation. You may delete the lockfile in this "
+"case by pressing the <i>Remove</i> button."
 msgstr ""
 
 #: ihtml/themes/altlinux/setup_step3.tpl:4
