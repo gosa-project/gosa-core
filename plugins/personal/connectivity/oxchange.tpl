@@ -1,7 +1,7 @@
 { if !$pg }
 <h2>{t}Open-Xchange Account{/t} - {t}disabled, no Postgresql support detected{/t}</h2>
 {else}
-<h2>{if $tabbed eq 1}<input type="checkbox" name="oxchange" value="B" {$oxchangeState} {$oxchangeAccount} onCLick="changeState('OXAppointmentDays');changeState('OXTaskDays');changeState('OXTimeZone');" >{/if}{t}Open-Xchange account{/t}</h2>
+<h2>{if $tabbed eq 1}<input type="checkbox" name="oxchange" value="B" {$oxchangeState} {$oxchangeAccountACL} onCLick="changeState('OXAppointmentDays');changeState('OXTaskDays');changeState('OXTimeZone');" >{/if}{t}Open-Xchange account{/t}</h2>
 <table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
 
  <!-- Headline container -->
@@ -35,7 +35,7 @@
        </tr>
        <tr>
          <td>{t}User Timezone{/t}</td>
-	 <td><select size="1" name="OXTimeZone" id="OXTimeZone" {$OXTimeZoneAcl} {$fstate}> 
+	 <td><select size="1" name="OXTimeZone" id="OXTimeZone" {$OXTimeZoneACL} {$fstate}> 
 	 {html_options values=$timezones output=$timezones selected=$OXTimeZone}
 	 </select>
 	 </td>
