@@ -364,11 +364,11 @@ function perform_additional_checks(&$faults)
       $max_execution_time['local_value'],0,false);
 
   /* memory_limit */
-  if($memory_limit['local_value'] < 8 ){
+  if($memory_limit['local_value'] < 16 ){
     $memory_limit['local_value']=false;
   }
   $msg.= check (  $faults, _("php.ini check -> memory_limit"),
-      _("GOsa needs at least 8MB of memory, less will cause unpredictable errors! An optimal setting would be 16MB, increase it for larger setups."),
+      _("GOsa needs at least 16MB of memory, less will cause unpredictable errors! Increase it for larger setups."),
       !$implicit_flush['local_value'],0,false);
 
   /* expose_php */
