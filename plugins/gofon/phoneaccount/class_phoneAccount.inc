@@ -171,7 +171,11 @@ class phoneAccount extends plugin
 
     /* Fill arrays */
     $smarty->assign ("goFonHardware", $this->goFonHardware);
-    $smarty->assign ("phoneNumbers", $this->phoneNumbers);
+    if (!count($this->phoneNumbers)){
+      $smarty->assign ("phoneNumbers", array(""));
+    } else {
+      $smarty->assign ("phoneNumbers", $this->phoneNumbers);
+    }
     $hl= "<select size=\"1\" name=\"goFonHardware\" title=\"".
          _("Choose your private phone")."\" ".chkacl($this->acl, "goFonHardware").">\n";
     foreach ($this->hardware_list as $cn => $description){
