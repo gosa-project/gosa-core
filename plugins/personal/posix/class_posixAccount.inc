@@ -472,7 +472,11 @@ class posixAccount extends plugin
     $smarty->assign("shells", $this->loginShellList);
     $smarty->assign("secondaryGroups", $this->secondaryGroups);
     $smarty->assign("primaryGroup", $this->primaryGroup);
-    $smarty->assign("groupMembership", $this->groupMembership);
+    if (!count($this->groupMembership)){
+      $smarty->assign("groupMembership", array(""));
+    } else {
+      $smarty->assign("groupMembership", $this->groupMembership);
+    }
     if (count($this->groupMembership) > 16){
       $smarty->assign("groups", "too_many_for_nfs");
     } else {
