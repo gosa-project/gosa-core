@@ -26,7 +26,7 @@
    <td rowspan=2 style="border-left:1px solid #A0A0A0">
      &nbsp;
    </td>
-   <td>
+   <td style="vertical-align:top;">
      <table>
        <tr>
          <td colspan=2 style="vertical-align:top;">
