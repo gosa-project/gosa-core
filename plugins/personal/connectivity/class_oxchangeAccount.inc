@@ -14,11 +14,10 @@ class oxchangeAccount extends plugin
   var $OXAppointmentDays="500";
   var $OXTaskDays="5";
   var $OXTimeZone="GMT";
-  var $writeGlobalAddressBook="FALSE";
   var $mailEnabled="OK";
 
   /* attribute list for save action */
-  var $attributes= array("OXAppointmentDays", "OXTaskDays", "OXTimeZone","writeGlobalAddressBook","mailEnabled");
+  var $attributes= array("OXAppointmentDays", "OXTaskDays", "OXTimeZone","mailEnabled");
   var $objectclasses= array("OXUserObject");
 
 

@@ -22,8 +22,22 @@ GROUP_BASEDN="ou=groups,dc=example,dc=org"
 
 We suppose that the Base is "dc=example,dc=org"
 
+- If you are using as rdn "uid=..", You must change in ldap.properties:
+com.openexchange.groupware.ldap.OXUserObjectAttributeuserCountryName=userCountry
+ to
+com.openexchange.groupware.ldap.OXUserObjectAttributeuserCountryName=st
 
-- The ldap.prperties configuration of open-xchange must be like this:
+com.openexchange.groupware.ldap.OXUserObjectAttributeimapServerName=imapServer
+ to
+com.openexchange.groupware.ldap.OXUserObjectAttributeimapServerName=gosaMailServer
+
+com.openexchange.groupware.ldap.OXUserObjectAttributesmtpServerName=smtpServer
+ to 
+com.openexchange.groupware.ldap.OXUserObjectAttributesmtpServerName=gosaMailServer
+
+
+
+- If you are using as rdn "cn=..", the ldap.properties configuration of open-xchange must be like this:
 com.openexchange.groupware.ldap.inetOrgPersonAttributebusinessCategoryName=businessCategory
 
 com.openexchange.groupware.ldap.inetOrgPersonAttributecnName=cn
@@ -372,12 +386,6 @@ com.openexchange.groupware.ldap.OXUserObjectAttributeDayViewStartTimeName=OXDayV
 com.openexchange.groupware.ldap.OXUserObjectAttributeDayViewIntervalName=OXDayViewInterval
 
 !com.openexchange.groupware.ldap.LocalDomainsSearchScope=1
-
-
-
-
-
-
 
 
 
