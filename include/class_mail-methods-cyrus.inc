@@ -33,7 +33,11 @@ class mailMethodCyrus extends mailMethod
   {
     /* Connect to IMAP server. I don't want to see these warning here... */
     $this->gosaMailServer= $gosaMailServer;
-    $cfg= $this->config[$gosaMailServer];
+    if (!isset($this->config[$gosaMailServer])){
+      print_red(_("Warning: Account has an invalid mailserver string! Please check the mail server settings in the mail tab."));
+    } else {
+      $cfg= $this->config[$gosaMailServer];
+    }
 
     /* For some reason, hiding errors with @ does not wor here... */
     $this->mbox = @imap_open($cfg['connect'], $cfg['admin'], $cfg['password'], OP_HALFOPEN);
