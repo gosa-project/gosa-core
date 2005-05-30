@@ -27,6 +27,7 @@ class servkolab extends plugin {
   var $kolabHost                        = array();
   var $added                            = false; 
   var $remove                           = false;
+  var $changed                          = false;
   var $attributes =  array("postfix_mydomain", "postfix_mydestination",
         "postfix_mynetworks", "postfix_enable_virus_scan","postfix_relayhost","postfix_allow_unauthenticated",
          "cyrus_admins", "cyrus_imap","kolabFreeBusyFuture",
@@ -59,16 +60,18 @@ class servkolab extends plugin {
     if(in_array($this->hostname,$this->attrs['kolabHost'])) {
       $this->is_account=true;
     }    else    {   
-      $this->is_account=false;    } 
-    }
+      $this->is_account=false;    
+    } 
+  }
 
 
   function execute() 
   {
-
     /* Fill templating stuff */
     $smarty = get_smarty();
     $display = "";
+
+    $this->changed =true;
 
     /* Lets get all Host that are member of the Kolab extension, but don't catch count */
     if(is_array($this->attrs['kolabHost']))
@@ -152,7 +155,7 @@ class servkolab extends plugin {
     /* Initialize all attributes, that were submitted */
     foreach($this->attributes as $val) 
     {
-      $smarty->assign($val."ACL",$this->acl,str_replace("_","-",$val));
+      $smarty->assign($val."ACL",chkacl($this->acl,str_replace("_","-",$val)));
       /* Tell smarty which variables we are useing */
       $smarty->assign($val, $this->$val);
       if (($this->$val != "FALSE") && (!empty($this->$val)))
@@ -225,6 +228,8 @@ class servkolab extends plugin {
   /* Save to LDAP */
   function save() 
   {
+    if(!$this->changed) return;
+
     /* Set ldap connection */
     $ldap = $this->config->get_ldap_link();
     
