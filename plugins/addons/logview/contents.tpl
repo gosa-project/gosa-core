@@ -11,11 +11,8 @@
       <td><img alt="" align="middle" border=0 src="{$server_image}">&nbsp;{t}Show hosts{/t}</td>
       <td>
        <select name="host" size=1 onChange="mainform.submit()">
-		{if $SELECT_hostlist=="true"}
 		       {html_options options=$hostlist selected=$host}
-		{else}
 			   <option disabled></option>
-		{/if}
        </select>
       </td>
      </tr>
@@ -23,11 +20,8 @@
       <td><img alt="" align="middle" border=0 src="{$log_image}">&nbsp;{t}Log level{/t}</td>
       <td>
        <select name="log_level" size=1 onChange="mainform.submit()">
-	    {if $SELECT_loglevellist=="true"}
         	{html_options options=$loglevellist selected=$log_level}
-        {else}
             <option disabled></option>
-        {/if}
        </select>
       </td>
      </tr>
@@ -44,11 +38,8 @@
       <td><img alt="" align="middle" border=0 src="{$time_image}">&nbsp;{t}Time interval{/t}</td>
       <td>
        <select name="time" size=1 onChange="mainform.submit()">
-        {if $SELECT_tilist=="true"}
         	{html_options options=$tilist selected=$time}
-		{else}
             <option disabled></option>
-        {/if}
        </select>
       </td>
      </tr>
