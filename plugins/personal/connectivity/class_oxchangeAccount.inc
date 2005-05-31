@@ -564,6 +564,8 @@ class oxchangeAccount extends plugin
         );
 
 
+  var $dnmode="cn";
+
 
   function oxchangeAccount ($config, $dn= NULL)
   {
@@ -575,6 +577,8 @@ class oxchangeAccount extends plugin
         break;
       }
     }
+	if (isset($this->config->current['DNMODE']))
+		$this->dnmode=$this->config->current['DNMODE'];
   }
 
   function execute()
@@ -623,38 +627,38 @@ class oxchangeAccount extends plugin
   function remove_from_parent()
   {
     $sqldeluser=array(
-        "delete from prg_notes where (user_right like '".$this->attrs['cn'][0]."') and (group_right like 's')",
-        "delete from prg_documents_read where (user_right like '".$this->attrs['cn'][0]."')",
-        "delete from prg_documents_mod where (user_right like '".$this->attrs['cn'][0]."')",
-        "delete from prg_docufolders_read where (user_right like '".$this->attrs['cn'][0]."')",
-        "delete from prg_docufolders_mod where (user_right like '".$this->attrs['cn'][0]."')",
-        "delete from prg_date_rights where (user_right like '".$this->attrs['cn'][0]."')",
-        "delete from prg_date_notification where (member_uid like '".$this->attrs['cn'][0]."')",
-        "delete from prg_dates_members where (member_uid like '".$this->attrs['cn'][0]."')",
-        "delete from prg_knowledge_read where (user_right like '".$this->attrs['cn'][0]."')",
-        "delete from prg_knowledge_mod where (user_right like '".$this->attrs['cn'][0]."')",
-        "delete from prg_knowledge_folder_read where (user_right like '".$this->attrs['cn'][0]."')",
-        "delete from prg_knowledge_folder_mod where (user_right like '".$this->attrs['cn'][0]."')",
-        "delete from prg_pin_board_read where (user_right like '".$this->attrs['cn'][0]."')",
-        "delete from prg_pin_board_mod where (user_right like '".$this->attrs['cn'][0]."')",
-        "delete from prg_bookmarks_read where (user_right like '".$this->attrs['cn'][0]."')",
-        "delete from prg_bookmarks_mod where (user_right like '".$this->attrs['cn'][0]."')",
-        "delete from prg_bookmarks_folder_read where (user_right like '".$this->attrs['cn'][0]."')",
-        "delete from prg_bookmarks_folder_mod where (user_right like '".$this->attrs['cn'][0]."')",
-        "delete from prg_tasks_rights where (user_right like '".$this->attrs['cn'][0]."')",
-        "delete from prg_tasks_notification where (member_uid like '".$this->attrs['cn'][0]."')",
-        "delete from prg_tasks_members where (member_uid like '".$this->attrs['cn'][0]."')",
-        "delete from prg_projects_rights where (user_right like '".$this->attrs['cn'][0]."')",
-        "delete from prg_projects_notification where (member_uid like '".$this->attrs['cn'][0]."')",
-        "delete	from prg_projects_members where (member_uid like '".$this->attrs['cn'][0]."')",
-        "delete from oxfolder_permissions where (entity like '".$this->attrs['cn'][0]."') AND ((role = 256) OR (role = 1024))",
-        "delete from oxfolder_standardfolders where owner like '".$this->attrs['cn'][0]."'",
-        "delete from prg_forum_read where user_right = '".$this->attrs['cn'][0]."'",
-        "delete from prg_forum_mod where user_right = '".$this->attrs['cn'][0]."'",
-        "delete from prg_forum_abo where user_right = '".$this->attrs['cn'][0]."'",
-        "delete from prg_forum_seen where username = '".$this->attrs['cn'][0]."'",
-        "delete from sys_holiday where (userid like '".$this->attrs['cn'][0]."')",
-        "delete from usr_holiday where (userid like '".$this->attrs['cn'][0]."')");
+        "delete from prg_notes where (user_right like '".$this->attrs[$this->dnmode][0]."') and (group_right like 's')",
+        "delete from prg_documents_read where (user_right like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_documents_mod where (user_right like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_docufolders_read where (user_right like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_docufolders_mod where (user_right like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_date_rights where (user_right like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_date_notification where (member_uid like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_dates_members where (member_uid like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_knowledge_read where (user_right like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_knowledge_mod where (user_right like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_knowledge_folder_read where (user_right like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_knowledge_folder_mod where (user_right like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_pin_board_read where (user_right like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_pin_board_mod where (user_right like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_bookmarks_read where (user_right like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_bookmarks_mod where (user_right like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_bookmarks_folder_read where (user_right like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_bookmarks_folder_mod where (user_right like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_tasks_rights where (user_right like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_tasks_notification where (member_uid like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_tasks_members where (member_uid like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_projects_rights where (user_right like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from prg_projects_notification where (member_uid like '".$this->attrs[$this->dnmode][0]."')",
+        "delete	from prg_projects_members where (member_uid like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from oxfolder_permissions where (entity like '".$this->attrs[$this->dnmode][0]."') AND ((role = 256) OR (role = 1024))",
+        "delete from oxfolder_standardfolders where owner like '".$this->attrs[$this->dnmode][0]."'",
+        "delete from prg_forum_read where user_right = '".$this->attrs[$this->dnmode][0]."'",
+        "delete from prg_forum_mod where user_right = '".$this->attrs[$this->dnmode][0]."'",
+        "delete from prg_forum_abo where user_right = '".$this->attrs[$this->dnmode][0]."'",
+        "delete from prg_forum_seen where username = '".$this->attrs[$this->dnmode][0]."'",
+        "delete from sys_holiday where (userid like '".$this->attrs[$this->dnmode][0]."')",
+        "delete from usr_holiday where (userid like '".$this->attrs[$this->dnmode][0]."')");
 
     /* Trying to open a Postgresql Database Server */
     if (function_exists("pg_connect")){
@@ -719,24 +723,33 @@ class oxchangeAccount extends plugin
   function save()
   {
 
-    /* Trying to open a Postgresql Database Server */
-    if (function_exists("pg_connect")){
-      if(isset($this->oxconf["PGUSER"]) and isset($this->oxconf["PGHOST"]) and isset($this->oxconf["PGDBNAME"]) and isset($this->oxconf["PGPASSWD"])){
-        $pgcon = pg_connect("host=".$this->oxconf["PGHOST"]." user=".$this->oxconf["PGUSER"]." password=".$this->oxconf["PGPASSWD"]." dbname=".$this->oxconf["PGDBNAME"]);
-        if (! $pgcon){
-          print_red(_("Couldn't Connect To Postgresql Database"));
-          return;
-        }
-      }else{
-        print_red(_("Needed Parameters to openexchange connectivity plugin failed!"));
-        return;
-      }
-    }else{
-      print_red(_("PHP4 module for Postgresql Database Failed!"));
-      return;
+	$needupdate=TRUE;
+
+	/*First at all, we must check if this is new or is updated */
+	for ($i=0;$i<$this->attrs['objectClass']['count'];$i++){
+		if($this->attrs['objectClass'][$i]=="OXUserObject") $needupdate=FALSE;
+	}
+
+    if($needupdate){
+	    /* Trying to open a Postgresql Database Server */
+	    if (function_exists("pg_connect")){
+	      if(isset($this->oxconf["PGUSER"]) and isset($this->oxconf["PGHOST"]) and isset($this->oxconf["PGDBNAME"]) and isset($this->oxconf["PGPASSWD"])){
+	        $pgcon = pg_connect("host=".$this->oxconf["PGHOST"]." user=".$this->oxconf["PGUSER"]." password=".$this->oxconf["PGPASSWD"]." dbname=".$this->oxconf["PGDBNAME"]);
+	        if (! $pgcon){
+	          print_red(_("Couldn't Connect To Postgresql Database"));
+	          return;
+	        }
+	      }else{
+	        print_red(_("Needed Parameters to openexchange connectivity plugin failed!"));
+	        return;
+	      }
+	    }else{
+	      print_red(_("PHP4 module for Postgresql Database Failed!"));
+	      return;
+	    }
     }
 
-    $uid=$this->attrs['cn'][0];
+    $uid=$this->attrs[$this->dnmode][0];
 
     plugin::save();
 
@@ -749,39 +762,40 @@ class oxchangeAccount extends plugin
     /* Optionally execute a command after we're done */
     $this->postcreate();
 
-    /* Finally save data to postgresql server */
-    pg_set_client_encoding ("UNICODE");
-    $nv = "SELECT nextval ('serial_id')";
-    $ot = "insert into oxfolder_tree (fuid, parent, fname, module, type, owner, creator, creating_date, created_from, changing_date, changed_from) VALUES (%d, 1, '%s', '%s', 'private', '%s', '%s', 'now', 'System', 'now', 'System')";
-    $op = "INSERT INTO oxfolder_permissions (puid, pid, role, entity, sealed, fp, orp, owp, odp) VALUES (%d, %d, 32768,  '%s', 0, 128, 128, 128, 128)";
-    $os = "insert into oxfolder_standardfolders (owner,module_calendar,module_contact,module_task) VALUES ('%s',%d,%d,%d)";
-    $ugr= "INSERT INTO usr_general_rights SELECT creating_date, created_from, changing_date, changed_from,text('%s'),  addr_u, addr_r, addr_d, cont_u, cont_r, cont_d, data_u, data_r, data_d, serie_u, serie_r, serie_d, task_u, task_r, task_d,  refer, proj_u, proj_r, proj_d, dfolder_u, dfolder_r, dfolder_d, doc_u, doc_r, doc_d, knowl_u, knowl_r, knowl_d, bfolder_u,  bfolder_r, bfolder_d, bookm_u, bookm_r, bookm_d, pin_u, pin_r, pin_d, forum_n, fentrie_n, setup, pin_public, internal,  int_groups, kfolder_u, kfolder_r, kfolder_d, webmail FROM sys_gen_rights_template WHERE login LIKE 'default_template'";
+    if($needupdate){
+	    /* Finally save data to postgresql server */
+	    pg_set_client_encoding ("UNICODE");
+	    $nv = "SELECT nextval ('serial_id')";
+	    $ot = "insert into oxfolder_tree (fuid, parent, fname, module, type, owner, creator, creating_date, created_from, changing_date, changed_from) VALUES (%d, 1, '%s', '%s', 'private', '%s', '%s', 'now', 'System', 'now', 'System')";
+	    $op = "INSERT INTO oxfolder_permissions (puid, pid, role, entity, sealed, fp, orp, owp, odp) VALUES (%d, %d, 32768,  '%s', 0, 128, 128, 128, 128)";
+	    $os = "insert into oxfolder_standardfolders (owner,module_calendar,module_contact,module_task) VALUES ('%s',%d,%d,%d)";
+	    $ugr= "INSERT INTO usr_general_rights SELECT creating_date, created_from, changing_date, changed_from,text('%s'),  addr_u, addr_r, addr_d, cont_u, cont_r, cont_d, data_u, data_r, data_d, serie_u, serie_r, serie_d, task_u, task_r, task_d,  refer, proj_u, proj_r, proj_d, dfolder_u, dfolder_r, dfolder_d, doc_u, doc_r, doc_d, knowl_u, knowl_r, knowl_d, bfolder_u,  bfolder_r, bfolder_d, bookm_u, bookm_r, bookm_d, pin_u, pin_r, pin_d, forum_n, fentrie_n, setup, pin_public, internal,  int_groups, kfolder_u, kfolder_r, kfolder_d, webmail FROM sys_gen_rights_template WHERE login LIKE 'default_template'";
 
-    $res=pg_exec($pgcon,$nv); $calendarid=pg_fetch_row($res); pg_freeresult($res);
-    $q=sprintf($ot,$calendarid[0],'My Appointments','calendar',$uid,$uid);
-    pg_exec($pgcon,$q);
-    $res=pg_exec($pgcon,$nv); $nid=pg_fetch_row($res); pg_freeresult($res);
-    $q=sprintf($op,$nid[0],$calendarid[0],$uid);
-    pg_exec($pgcon,$q);
-    $res=pg_exec($pgcon,$nv); $contactsid=pg_fetch_row($res); pg_freeresult($res);
-    $q=sprintf($ot,$contactsid[0],'My Contacts','contact',$uid,$uid);
-    pg_exec($pgcon,$q);
-    $res=pg_exec($pgcon,$nv); $nid=pg_fetch_row($res); pg_freeresult($res);
-    $q=sprintf($op,$nid[0],$contactsid[0],$uid);
-    pg_exec($pgcon,$q);
-    $res=pg_exec($pgcon,$nv); $tasksid=pg_fetch_row($res); pg_freeresult($res);
-    $q=sprintf($ot,$tasksid[0],'My Tasks','task',$uid,$uid);
-    pg_exec($pgcon,$q);
-    $res=pg_exec($pgcon,$nv); $nid=pg_fetch_row($res); pg_freeresult($res);
-    $q=sprintf($op,$nid[0],$tasksid[0],$uid);
-    pg_exec($pgcon,$q);
-    $q=sprintf($os,$uid,$calendarid[0],$contactsid[0],$tasksid[0]);
-    pg_exec($pgcon,$q);
-    $q=sprintf($ugr,$uid);
-    pg_exec($pgcon,$q);
-    pg_close($pgcon);
-  }
+	    $res=pg_exec($pgcon,$nv); $calendarid=pg_fetch_row($res); pg_freeresult($res);
+	    $q=sprintf($ot,$calendarid[0],'My Appointments','calendar',$uid,$uid);
+	    pg_exec($pgcon,$q);
+	    $res=pg_exec($pgcon,$nv); $nid=pg_fetch_row($res); pg_freeresult($res);
+	    $q=sprintf($op,$nid[0],$calendarid[0],$uid);
+	    pg_exec($pgcon,$q);
+	    $res=pg_exec($pgcon,$nv); $contactsid=pg_fetch_row($res); pg_freeresult($res);
+	    $q=sprintf($ot,$contactsid[0],'My Contacts','contact',$uid,$uid);
+	    pg_exec($pgcon,$q);
+	    $res=pg_exec($pgcon,$nv); $nid=pg_fetch_row($res); pg_freeresult($res);
+	    $q=sprintf($op,$nid[0],$contactsid[0],$uid);
+	    pg_exec($pgcon,$q);
+	    $res=pg_exec($pgcon,$nv); $tasksid=pg_fetch_row($res); pg_freeresult($res);
+	    $q=sprintf($ot,$tasksid[0],'My Tasks','task',$uid,$uid);
+	    pg_exec($pgcon,$q);
+	    $res=pg_exec($pgcon,$nv); $nid=pg_fetch_row($res); pg_freeresult($res);
+	    $q=sprintf($op,$nid[0],$tasksid[0],$uid);
+	    pg_exec($pgcon,$q);
+	    $q=sprintf($os,$uid,$calendarid[0],$contactsid[0],$tasksid[0]);
+	    pg_exec($pgcon,$q);
+	    $q=sprintf($ugr,$uid);
+	    pg_exec($pgcon,$q);
+	    pg_close($pgcon);
+	  }
+    }
 }
 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
