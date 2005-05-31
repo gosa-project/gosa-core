@@ -430,11 +430,9 @@ function parse_contrib_conf()
   $replacements['{CRYPT}']         = $ldapconf['arr_cryptkeys'][$ldapconf['arr_crypts']];
   $replacements['{SID}\n']         = "";
   $replacements['{RIDBASE}\n']     = "";
-  if($ldapconf['mail'] == "disabled")
-    $replacements['{MAILMETHOD}']    = "";
-  else
+  if($ldapconf['mail'] != "disabled"){
     $replacements['{MAILMETHOD}']    = $ldapconf['mail_methods'][$ldapconf['mail']];
-  if($ldapconf['mail'] == "disabled") 
+  }   
   $replacements['{SMBHASH}']       = $pwdhash;
   $replacements['{GOVERNMENTMODE}']= "false"; 
   $replacements['{kolabAccount}']  = "";
@@ -442,6 +440,7 @@ function parse_contrib_conf()
 
   /* This array contains all preg_replace syntax to delete all unused plugins
      THE kEY MUST BE THE CLASSNAME so we can check it with $ldapconf['classes'] */
+
   $possible_plugins['fonreport'][]   = "'\n.*<plugin.*fonreport+.*\n.*>.*\n'i";
   $possible_plugins['phoneaccount'][]= "'\n.*<tab.*phoneAccount.*>.*\n'i";
   $possible_plugins['logview'][]     = "'\n.*<plugin.*logview+.*\n.*>.*\n'i";
@@ -515,6 +514,11 @@ function parse_contrib_conf()
     foreach($replacements as $key => $val) {
       $str = preg_replace("/".$key."/",$val,$str);
     }    
+
+    if($ldapconf['mail'] == "disabled"){
+      $str = str_replace("mailMethod=\"{MAILMETHOD}\"","",$str);
+    }
+
 
     /* Remove all unused plugins */
     foreach($possible_plugins as $plugin) {
