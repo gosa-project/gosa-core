@@ -390,6 +390,7 @@ function perform_additional_checks(&$faults)
 
 function parse_contrib_conf()
 {
+
   $str                = "";
   $used_samba_version = 0;
   $query              = ""; 
@@ -429,7 +430,11 @@ function parse_contrib_conf()
   $replacements['{CRYPT}']         = $ldapconf['arr_cryptkeys'][$ldapconf['arr_crypts']];
   $replacements['{SID}\n']         = "";
   $replacements['{RIDBASE}\n']     = "";
-  $replacements['{MAILMETHOD}']    = $ldapconf['mail_methods'][$ldapconf['mail']];
+  if($ldapconf['mail'] == "disabled")
+    $replacements['{MAILMETHOD}']    = "";
+  else
+    $replacements['{MAILMETHOD}']    = $ldapconf['mail_methods'][$ldapconf['mail']];
+  if($ldapconf['mail'] == "disabled") 
   $replacements['{SMBHASH}']       = $pwdhash;
   $replacements['{GOVERNMENTMODE}']= "false"; 
   $replacements['{kolabAccount}']  = "";

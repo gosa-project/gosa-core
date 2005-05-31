@@ -88,7 +88,8 @@
   <td>{t}Mail method{/t}</td>
   <td>
      <select name="mail" size="1" title="">
-        {html_options options=$mail_methods selected=$mail}
+        <option name="mail" value="disabled">{t}disabled{/t}</option>
+		{html_options options=$mail_methods selected=$mail}
      </select>
  </tr>
 </table>
