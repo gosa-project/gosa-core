@@ -109,6 +109,25 @@ class proxyAccount extends plugin
     $this->handle_post_events("remove");
   }
 
+  /* Check values */
+  function check()
+  {
+    $message= array();
+    
+    /* We've got only one value to check for positive integer or emtpy field */
+    if ($this->is_account){
+      if (isset($_POST["quota_size"])){
+        if ($_POST["quota_size"] == ""){
+          $message[]= _("Numerical value for Quota Setting is empty.");
+        }
+        else if ($_POST["quota_size"] <= 0){
+          $message[]= _("Numerical value for Quota Setting is not valid.");
+        }
+      }
+    }
+
+    return $message;
+  }
 
   /* Save data to object */
   function save_object()
