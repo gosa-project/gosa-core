@@ -501,36 +501,6 @@ class mailAccount extends plugin
     $smarty->assign("custom_sieveACL", chkacl($this->acl, "custom_sieve"));	
     $smarty->assign("only_localACL", chkacl($this->acl, "only_local"));	
 
-    if(count($this->gosaMailAlternateAddress)){ 
-      $smarty->assign("SELECT_gosaMailAlternateAddress",true);
-    } else { 
-      $smarty->assign("SELECT_gosaMailAlternateAddress",false);
-    }
-
-    if(count($this->mailboxList)){
-      $smarty->assign("SELECT_spambox",true);
-    } else {
-      $smarty->assign("SELECT_spambox",false);
-    }
-
-    if(count($this->vacation)) {
-      $smarty->assign("SELECT_vacationtemplates",true);
-    } else {
-      $smarty->assign("SELECT_vacationtemplates",false);
-    }
-
-    if(count($this->gosaMailForwardingAddress)){
-      $smarty->assign("SELECT_gosaMailForwardingAddress",true);
-    } else {
-      $smarty->assign("SELECT_gosaMailForwardingAddress",false);
-    }
-
-    if(count($mailserver)){
-      $smarty->assign("SELECT_mailServers",true);
-    } else {
-      $smarty->assign("SELECT_mailServers",false);
-    }
-
     $display.= $smarty->fetch (get_template_path('generic.tpl', TRUE, dirname(__FILE__)));
     return ($display);
   }
