@@ -49,7 +49,15 @@
     <input type=checkbox name="appgroups" value="1" {$appgroups} onClick="mainform.submit()" title="{t}Select to see groups that have applications configured{/t}">{t}Show application groups{/t}<br>
     <input type=checkbox name="mailgroups" value="1" {$mailgroups} onClick="mainform.submit()" title="{t}Select to see groups that have mail settings{/t}">{t}Show mail groups{/t}<br>
     <input type=checkbox name="functionalgroups" value="1" {$functionalgroups} onClick="mainform.submit()" title='{t}Select to see normal groups that have only functional aspects{/t}'>{t}Show functional groups{/t}<br>
-    <input type=checkbox name="subsearch" value="1" {$subsearch} onClick="mainform.submit()" title="{t}Dive into LDAP subtrees when searching{/t}">{t}Search in subtrees{/t}<br>
+            </td>
+        </tr>
+    </table>
+
+    
+    <table style="width:100%;border-top:1px solid #B0B0B0;">
+        <tr>
+            <td>
+		<input type=checkbox name="subsearch" value="1" {$subsearch} onClick="mainform.submit()" title="{t}Dive into LDAP subtrees when searching{/t}">{t}Search in subtrees{/t}<br>
 			</td>
 		</tr>
 	</table>

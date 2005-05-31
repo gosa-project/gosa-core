@@ -53,6 +53,14 @@
 				<input type=checkbox name="proxyusers" value="1" {$proxyusers} onClick="mainform.submit()" title="{t}Select to see users that have proxy settings{/t}">{t}Show proxy users{/t}<br>
 				<input type=checkbox name="ftpusers" value="1" {$ftpusers} onClick="mainform.submit()" title="{t}Select to see users that have ftp settings{/t}">{t}Show FTP users{/t}<br>
 				<input type=checkbox name="faxusers" value="1" {$faxusers} onClick="mainform.submit()" title="{t}Select to see users that have FAX settings{/t}">{t}Show FAX users{/t}<br>
+
+            </td>
+        </tr>
+    </table>
+    <table style="border-top:1px solid #B0B0B0;" width="100%">
+        <tr>
+            <td>
+
 				<input type=checkbox name="subsearch" value="1" {$subsearch} onClick="mainform.submit()" title="{t}Dive into LDAP subtrees when searching{/t}">{t}Search in subtrees{/t}<br>
 			</td>
 		</tr>
