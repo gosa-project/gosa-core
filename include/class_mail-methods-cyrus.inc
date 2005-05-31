@@ -31,6 +31,7 @@ class mailMethodCyrus extends mailMethod
 
   function connect($gosaMailServer)
   {
+    $cfg=array();
     /* Connect to IMAP server. I don't want to see these warning here... */
     $this->gosaMailServer= $gosaMailServer;
     if (!isset($this->config[$gosaMailServer])){
@@ -38,8 +39,11 @@ class mailMethodCyrus extends mailMethod
     } else {
       $cfg= $this->config[$gosaMailServer];
     }
-
     /* For some reason, hiding errors with @ does not wor here... */
+    if(!isset($cfg['connect']))   $cfg['connect']="";
+    if(!isset($cfg['admin']))     $cfg['admin']="";
+    if(!isset($cfg['password']))  $cfg['password']="";
+
     $this->mbox = @imap_open($cfg['connect'], $cfg['admin'], $cfg['password'], OP_HALFOPEN);
 
     /* Mailbox reachable? */
@@ -68,7 +72,7 @@ class mailMethodCyrus extends mailMethod
         $result['quotaUsage']=    $quota_value["STORAGE"]['usage'];
         $result['gosaMailQuota']= $quota_value["STORAGE"]['limit'];
       } else {
-        /* backward compatible */
+        /* backward icompatible */
         $result['quotaUsage']=    $quota_value['usage'];
         $result['gosaMailQuota']= $quota_value['limit'];
       }
