@@ -8,7 +8,7 @@
    </div>
    <div class="contentboxb">
     <p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-     <select style="width:500px; margin-top:4px; height:450px;" name="local_list[]" size=15" multiple>
+     <select style="width:500px; margin-top:4px; height:450px;" name="local_list[]" size="15" multiple>
     	{html_options options=$list}
      </select>
     </p>
@@ -28,7 +28,7 @@
 				<img alt="" src="{$tree_image}" align="middle">&nbsp;{t}Display numbers of department{/t}
 			</td>
     		<td>
-				<select name="depselect" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
+				<select name="depselect" size="1" onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
 			      {html_options options=$deplist selected=$depselect}
 			    </select>
 			</td>
