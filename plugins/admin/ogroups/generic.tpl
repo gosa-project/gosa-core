@@ -31,7 +31,7 @@
   <td style="border-left:1px solid #A0A0A0; padding-left:10px;">
    <b>{t}Member objects{/t}</b>&nbsp;({$combinedObjects})
    <br>
-   <select style="width:400px; height:300px;" name="members[]" size=15 multiple>
+   <select style="width:400px; height:300px;" name="members[]" size="15" multiple>
     {$members}
    </select>
    <br>
