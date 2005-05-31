@@ -389,6 +389,7 @@ class user extends plugin
           $smarty->assign("$cert"."_state", _("absent"));
         }
       }
+      $smarty->assign("governmentmode", "false");
       return($smarty->fetch (get_template_path('generic_certs.tpl', TRUE, dirname(__FILE__))));
     }
 
