@@ -110,7 +110,7 @@ class componentGeneric extends plugin
       $message[]= _("The required field 'MAC-address' is not set.");
     }
     if ($this->ipHostNumber == "" && chkacl ($this->acl, "ipHostNumber") == ""){
-      $message[]= _("The required field 'IP-address' is not set.";
+      $message[]= _("The required field 'IP-address' is not set.");
     }
 
     $ui= get_userinfo();
