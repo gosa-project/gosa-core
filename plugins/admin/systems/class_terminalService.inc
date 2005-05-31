@@ -31,6 +31,7 @@ class termservice extends plugin
   var $goFonHardware= "automatic";
 
   /* Needed values and lists */
+  var $ignore_account= TRUE;
   var $base= "";
   var $cn= "";
   var $orig_dn= "";

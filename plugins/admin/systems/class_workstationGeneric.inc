@@ -28,7 +28,6 @@ class workgeneric extends plugin
   var $ghSoundAdapter= "-";
   var $gotoLastUser= "-";
 
-
   /* Needed values and lists */
   var $base= "";
   var $cn= "";
@@ -38,6 +37,7 @@ class workgeneric extends plugin
   var $modes= array();
 
   /* attribute list for save action */
+  var $ignore_account= TRUE;
   var $attributes= array("gotoMode", "gotoTerminalPath", "macAddress",
       "gotoSwapServer", "gotoSyslogServer", "gotoNtpServer",
       "gotoFloppyEnable", "gotoCdromEnable", "cn", "gotoSndModule",

@@ -7,7 +7,6 @@ class servservice extends plugin
   var $cli_description= "Some longer text\nfor help";
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
-
   var $goExportEntry  = array();
   var $goTimeSource   = array();
   var $goLdapBase= "";
@@ -19,8 +18,8 @@ class servservice extends plugin
   var $goSyslogServer="";
   var $goCupsServer="";
 
-
   /* attribute list for save action */
+  var $ignore_account= TRUE;
   var $attributes       = array("goExportEntry","goTimeSource","goLdapBase","goXdmcpIsEnabled","goFontPath" );
   var $objectclasses    = array("top","goServer"); 
   var $additionaloc     = array(

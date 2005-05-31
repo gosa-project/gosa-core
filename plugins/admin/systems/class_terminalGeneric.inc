@@ -37,6 +37,7 @@ class termgeneric extends plugin
   var $modes= array();
 
   /* attribute list for save action */
+  var $ignore_account= TRUE;
   var $attributes= array("gotoMode", "gotoTerminalPath", "macAddress",
       "gotoSwapServer", "gotoSyslogServer", "gotoNtpServer",
       "gotoFloppyEnable", "gotoCdromEnable", "cn", "gotoSndModule",

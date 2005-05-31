@@ -390,7 +390,7 @@ class systems extends plugin
     if (isset($_POST['edit_finish'])){
 
       /* Check tabs, will feed message array */
-      $message= $this->systab->check(TRUE);
+      $message= $this->systab->check();
 
       /* Save, or display error message? */
       if (count($message) == 0){

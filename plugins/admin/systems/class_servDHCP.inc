@@ -8,6 +8,7 @@ class servdhcp extends plugin
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* attribute list for save action */
+  var $ignore_account= TRUE;
   var $attributes= array();
   var $objectclasses= array("whatever");
 

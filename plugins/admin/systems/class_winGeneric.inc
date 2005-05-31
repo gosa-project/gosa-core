@@ -37,27 +37,15 @@ class wingeneric extends plugin
   var $sambaNTPassword="";
   var $sambaPwdLastSet="";
   var $sambaAcctFlags="";
-                                                                                                                  
-
-
-
-
-
-
 
   /* attribute list for save action */
+  var $ignore_account= TRUE;
   var $attributes   = array("cn", "description", "macAddress", "ipHostNumber","shadowLastChange",
                             "uidNumber","gidNumber","loginShell","gecos","shadowMin","shadowWarning",
                             "shadowInactive","uid","cn","sn","givenName","homeDirectory","sambaSID",
                             "sambaPrimaryGroupSID","displayName", "sambaPwdCanChange2","sambaPwdMustChange",
                             "sambaNTPassword","sambaPwdLastSet","sambaAcctFlags");
   var $objectclasses= array("posixAccount","person","organizationalPerson","inetOrgPerson","gosaAccount","shadowAccount","sambaSamAccount","top", "device", "ipHost", "ieee802Device");
-
-
-// These are insertet !!!
-//"posixAccount","person","organizationalPerson","inetOrgPerson","gosaAccount","shadowAccount","sambaSamAccount"
-
-//$attrs2("shadowLastChange","uidNumber","gidNumber","loginShell","gecos","shadowMin","shadowWarning","shadowInactive","uid","cn","sn","givenName","homeDirectory","sambaSID","sambaPrimaryGroupSID","displayName","sambaPwdCanChange2","sambaPwdMustChange","sambaNTPassword","sambaPwdLastSet","sambaAcctFlags");
 
 
   function wingeneric ($config, $dn= NULL)

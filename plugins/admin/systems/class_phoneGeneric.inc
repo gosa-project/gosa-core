@@ -9,6 +9,7 @@ class phoneGeneric extends plugin
 
   /* Generic terminal attributes */
   var $interfaces= array();
+  var $ignore_account= TRUE;
 
   /* Needed values and lists */
   var $base= "";

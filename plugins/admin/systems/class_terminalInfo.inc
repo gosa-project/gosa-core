@@ -26,6 +26,7 @@ class terminfo extends plugin
   var $cn= "";
 
   /* attribute list for save action */
+  var $ignore_account= TRUE;
   var $attributes= array("cn", "gotoMode", "gotoTerminalPath", "gotoFloppyEnable",
       "gotoCdromEnable", "ghInventoryNumber",
       "gotoSwapServer", "gotoSyslogServer", "gotoNtpServer",

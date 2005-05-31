@@ -23,9 +23,10 @@ class servtabs extends tabs
 
     foreach ($this->by_object as $key => $obj){
       $this->by_object[$key]->dn= $this->dn;
+      $this->by_object[$key]->cn= $baseobject->cn;
     }
 
-    tabs::save(TRUE);
+    tabs::save(FALSE);
 
     /* Reload server settings after saving */
     $config= $_SESSION['config'];

@@ -173,3 +173,5 @@
   </td>
  </tr>
 </table>
+
+<input type="hidden" name="kolabtab">

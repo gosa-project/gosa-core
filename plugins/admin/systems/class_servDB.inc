@@ -25,6 +25,7 @@ class servdb extends plugin
   var $goFonPassword= "";
   var $goFonAreaCode= "";
   var $goFonCountryCode= "";
+  var $ignore_account= TRUE;
 
   /* attribute list for save action */
   var $attributes= array("goImapName", "goImapConnect", "goImapAdmin", "goImapPassword",

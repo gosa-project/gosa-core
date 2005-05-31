@@ -8,6 +8,7 @@ class servgeneric extends plugin
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* Generic terminal attributes */
+  var $ignore_account= TRUE;
   var $interfaces= array();
 
   /* Needed values and lists */

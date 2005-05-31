@@ -24,7 +24,7 @@ class termstartup extends plugin
   /* Helper */
   var $customParameters= "";
   var $orig_dn= "";
-
+  var $ignore_account= TRUE;
 
   function termstartup ($config, $dn= NULL)
   {
