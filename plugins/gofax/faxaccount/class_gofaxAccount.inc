@@ -354,19 +354,6 @@ class gofaxAccount extends plugin
         $smarty->assign("department", "");
       }
 
-      if(count($this->current_blocklist))   {
-        $smarty->assign("SELECT_cblocklist",true);
-      }else {
-        $smarty->assign("SELECT_cblocklist",false);
-      }
-
-      if(count($list))   {
-        $smarty->assign("SELECT_list",true);
-      }else {
-        $smarty->assign("SELECT_list",false);
-      }
-
-
 
 
       $display.= $smarty->fetch (get_template_path('lists.tpl', TRUE, dirname(__FILE__)));
@@ -396,17 +383,6 @@ class gofaxAccount extends plugin
         $smarty->assign("department", "");
       }
  
-      if(count($this->current_blocklist))   {
-        $smarty->assign("SELECT_cblocklist",true);
-      }else {
-        $smarty->assign("SELECT_cblocklist",false);
-      }
-
-      if(count($list))   {
-        $smarty->assign("SELECT_list",true);
-      }else {
-        $smarty->assign("SELECT_list",false);
-      }
 
       $display.= $smarty->fetch (get_template_path('lists.tpl', TRUE, dirname(__FILE__)));
       return ($display);
@@ -445,12 +421,6 @@ class gofaxAccount extends plugin
       $smarty->assign("fax_to_printer", "checked");
     } else {
       $smarty->assign("fax_to_printer", "");
-    }
-
-    if(count($this->facsimileAlternateTelephoneNumber))   {
-      $smarty->assign("SELECT_facsimileAlternateTelephoneNumber",true);
-    }else {
-      $smarty->assign("SELECT_facsimileAlternateTelephoneNumber",false);
     }
 
 
