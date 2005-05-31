@@ -15,6 +15,7 @@
      <td>
       <select size="1" name="gosaMailServer" {$gosaMailServerACL} title="{t}Select mail server to place user on{/t}">
        {html_options values=$mailServers output=$mailServers selected=$gosaMailServer}
+	   <option disabled></option>
       </select>
      </td>
     </tr>
@@ -34,7 +35,7 @@
     </tr>
     <tr>
      <td>{t}Quota size{/t}</td>
-     <td><input name="gosaMailQuota" size=6 align=middle maxlength=30 {$gosaMailQuota} value="{$gosaMailQuota}"> KB</td>
+     <td><input name="gosaMailQuota" size=6 align=middle maxlength=30 {$gosaMailQuotaACL} value="{$gosaMailQuota}"> KB</td>
     </tr>
    </table>
      
@@ -46,6 +47,7 @@
    <h2><img alt="" align="middle" src="images/alternatemail.png"> {t}Alternative addresses{/t}</h2>
    <select style="width:350px; height:100px;" name="alternates_list[]" size=15 multiple title="{t}List of alternative mail addresses{/t}">
     {html_options values=$gosaMailAlternateAddress output=$gosaMailAlternateAddress}
+	<option disabled></option>
    </select>
    <br>
    <input name="alternate_address" size=30 align=middle maxlength=30 {$gosaMailAlternateAddressACL} value="">
@@ -69,6 +71,7 @@
      <td>
       <select size="1" name="default_permissions" {$permissionsACL}>
        {html_options options=$perms selected=$default_permissions}
+	   <option disabled></option>
       </select>
      </td>
     </tr>
@@ -91,6 +94,7 @@
    <h2><img alt="" align="middle" src="images/envelope.png"> {t}Forward messages to non group members{/t}</h2>
    <select style="width:350px; height:100px;" name="forwarder_list[]" size=15 multiple>
     {html_options values=$gosaMailForwardingAddress output=$gosaMailForwardingAddress}
+	<option disabled></option>
    </select>
    <br>
    <input name="forward_address" size=20 align=middle maxlength=65 {$gosaMailForwardingAddressACL} value="">

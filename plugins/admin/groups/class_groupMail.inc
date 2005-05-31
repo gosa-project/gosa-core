@@ -382,7 +382,7 @@ class mailgroup extends plugin
     }
 
     /* Assemble extra attributes */
-    $acl= chkacl($this->acl, "permissions");
+    $perm= chkacl($this->acl, "permissions");
     $tmp= "";
     $nr= 0;
     $count= count($this->imapacl);
@@ -391,7 +391,7 @@ class mailgroup extends plugin
     foreach($this->imapacl as $user => $acl){
       if ($user != "anyone" && $user != "%members%"){
         $tmp.= "<tr><td><input name=\"user_$nr\" size=20 maxlength=60 ".
-               "value=\"$user\" $acl></td><td><select size=\"1\" name=\"perm_$nr\" $acl>";
+               "value=\"$user\" $perm></td><td><select size=\"1\" name=\"perm_$nr\" $perm>";
         foreach ($this->perms as $key => $value){
           if ($acl == $key){
             $tmp.= "<option value=$key selected>$value</option>";
@@ -402,11 +402,11 @@ class mailgroup extends plugin
         $tmp.= "</select>&nbsp;";
         if ($nr == $count - 1){
           $tmp.= "<input type=submit value=\""._("Add")."\" ".
-                 "name=\"add_$nr\" $acl>";
+                 "name=\"add_$nr\" $perm>";
         }
         if ($count > 3){
           $tmp.= "<input type=submit value=\""._("Remove")."\" ".
-                 "name=\"del_$nr\" $acl></td></tr>";
+                 "name=\"del_$nr\" $perm></td></tr>";
         }
       }
       $this->indexed_user[$nr]= $user;
