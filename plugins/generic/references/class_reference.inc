@@ -119,7 +119,7 @@ class reference extends plugin
 		} else {
 			$img= "images/sort_down.png";
 		}
-		$this->objectlist.= '<tr style="background-color:'.$cycle[$id&1].';"><td class="phonelist" title="'.$attrs['cn'][0].'"><a href=main.php?plug='.$_GET['plug'].'&amp;start=&amp;show='.base64_encode($attrs['dn']).'><img alt=\"\" src="'.$img.'" border=0>&nbsp;'.$attrs['cn'][0].'</a></td><td>'.$description.'</td><td>'.$content.'</td> </tr>'.$addon;
+		$this->objectlist.= '<tr style="background-color:'.$cycle[$id&1].';"><td class="phonelist" title="'.$attrs['cn'][0].'"><a href="main.php?plug='.$_GET['plug'].'&amp;start=&amp;show='.base64_encode($attrs['dn']).'"><img alt="" src="'.$img.'" border=0>&nbsp;'.$attrs['cn'][0].'</a></td><td>'.$description.'</td><td>'.$content.'</td> </tr>'.$addon;
 
 		$id++;
 	}

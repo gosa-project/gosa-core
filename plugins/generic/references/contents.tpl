@@ -8,7 +8,7 @@
  </colgroup>
 
  <tr style="background-color: #E8E8E8; height:26px;font-weight:bold;">
-  <td>{t}Object name{/t}</td><td>{t}Description{/t}</td><td>Contents</td>
+  <td>{t}Object name{/t}</td><td>{t}Description{/t}</td><td>{t}Contents{/t}</td>
  </tr>
 
  {$objectList}
