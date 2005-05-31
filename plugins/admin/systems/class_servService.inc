@@ -61,6 +61,8 @@ class servservice extends plugin
     $smarty= get_smarty();
 
     
+    $smarty->assign("staticAddress", "");
+      
     /*  
     Handling for Nfs Export Entries
     */

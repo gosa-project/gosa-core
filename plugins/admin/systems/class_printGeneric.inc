@@ -69,6 +69,9 @@ class printgeneric extends plugin
     }
     $smarty->assign("base_select", $this->base);
 
+    /* Don't show Asterisk for non-required attribute ipHostNumber and macAddress */
+    $smarty->assign("staticAddress", "");
+    
     /* Show main page */
     $smarty->assign("netconfig", dirname(__FILE__)."/network.tpl");
     return($smarty->fetch (get_template_path('printer.tpl', TRUE)));

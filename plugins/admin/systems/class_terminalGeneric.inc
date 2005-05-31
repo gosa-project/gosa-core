@@ -131,6 +131,7 @@ class termgeneric extends plugin
     /* Fill templating stuff */
     $smarty= get_smarty();
     $smarty->assign("cn", $this->cn);
+    $smarty->assign("staticAddress", "");
 
     $smarty->assign("bases", $this->config->idepartments);
 

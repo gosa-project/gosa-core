@@ -73,6 +73,8 @@ class terminfo extends plugin
       $smarty= get_smarty();
       $display= "";
 
+      $smarty->assign("staticAddress", "");
+   
       /* Check if terminal is online */
       $query= "fping -q -r 1 -t 500 ".$this->cn;
       exec ($query, $dummy, $retval);

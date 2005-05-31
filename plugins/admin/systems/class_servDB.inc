@@ -71,6 +71,9 @@ class servdb extends plugin
       $smarty->assign("$attr"."ACL", chkacl($this->acl, $attr));
     }
 
+    /* Don't show Asterisk for non-required attribute ipHostNumber and macAddress */
+    $smarty->assign("staticAddress", "");
+
     /* Classes... */
     foreach ($this->additionaloc as $oc => $dummy){
       if (isset($this->objectclasses[$oc])){

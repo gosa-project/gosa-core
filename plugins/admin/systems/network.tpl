@@ -5,7 +5,7 @@
   <td>
    <table>
     <tr>
-     <td>{t}IP-address{/t}</td>
+     <td>{t}IP-address{/t}{$staticAddress}</td>
      <td><input name="ipHostNumber" size=25 maxlength=80 value="{$ipHostNumber}"></td>
     </tr>
    </table>
@@ -13,7 +13,7 @@
   <td>
    <table>
     <tr>
-     <td>{t}MAC-address{/t}</td>
+     <td>{t}MAC-address{/t}{$staticAddress}</td>
      <td><input name="macAddress" size=25 maxlength=80 value="{$macAddress}"></td>
     </tr>
    </table>

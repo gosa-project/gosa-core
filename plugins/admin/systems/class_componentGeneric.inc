@@ -60,6 +60,9 @@ class componentGeneric extends plugin
     }
     $smarty->assign("base_select", $this->base);
 
+    /* Show Asterisk for required attribute ipHostNumber and macAddress */
+    $smarty->assign("staticAddress", "<font class=\"must\">*</font>");
+    
     /* Show main page */
     $smarty->assign("netconfig", dirname(__FILE__)."/network.tpl");
     return($smarty->fetch (get_template_path('component.tpl', TRUE)));

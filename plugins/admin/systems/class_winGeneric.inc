@@ -84,6 +84,8 @@ class wingeneric extends plugin
       $smarty->assign("$attr", $this->$attr);
     }
     
+    /* Show Asterisk for required attribute ipHostNumber and macAddress */
+    $smarty->assign("staticAddress", "<font class=\"must\">*</font>");
     
     $smarty->assign("base_select", $this->base);
 

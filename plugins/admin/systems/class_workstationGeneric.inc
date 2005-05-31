@@ -141,7 +141,8 @@ class workgeneric extends plugin
     $smarty= get_smarty();
     $smarty->assign("cn", $this->cn);
     $smarty->assign("bases", $this->config->idepartments);
-
+    $smarty->assign("staticAddress", "");
+        
     /* Check if workstation is online */
     $query= "fping -q -r 1 -t 500 ".$this->cn;
     exec ($query, $dummy, $retval);

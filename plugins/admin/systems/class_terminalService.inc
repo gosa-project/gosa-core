@@ -166,6 +166,7 @@ class termservice extends plugin
       $smarty->assign($val, $this->$val);
       $smarty->assign($val."ACL", chkacl($this->acl, $val));
     }
+    $smarty->assign("staticAddress", "");
 
     /* Checkboxes */
     foreach(array("gotoLpdEnable", "gotoScannerEnable") as $val){
