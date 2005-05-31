@@ -47,6 +47,7 @@ class pureftpdAccount extends plugin
     }
     if ($this->is_account){
       $smarty->assign("pureftpdState", "checked");
+      $smarty->assign("fstate", "");
     } else {
       $smarty->assign("pureftpdState", "");
       $smarty->assign("fstate", "disabled");
