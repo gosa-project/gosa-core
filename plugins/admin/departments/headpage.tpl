@@ -10,7 +10,8 @@
     <p class="contentboxb">
      <select style="width:500px; height:450px;" name="deplist" size=15 ondblclick="this.form.edit_helper.value='1'; this.form.submit()">
       {html_options options=$departments}
-     </select>
+    	<option disabled></option> 
+	</select>
     <br>
     <input type=submit value="{t}New{/t}..." name="new_department">&nbsp;
     <input type=submit value="{t}Edit{/t}" name="select_department">&nbsp;
