@@ -9,6 +9,7 @@
      <td>
       <select name="gotoLdapServer" title="{t}Choose LDAP server to use for accounts and terminal management{/t}" {$gotoLdapServerACL}>
        {html_options values=$ldapservers output=$ldapservers selected=$gotoLdapServer_select}
+	   <option disabled></option>
       </select>
      </td>
     </tr>
@@ -53,6 +54,7 @@
    </h2>
     <select style="width:100%; height:100px;" name="modules_list[]" size=15 multiple title="{t}Add additional modules to load on startup{/t}">
      {html_options values=$gotoModules output=$gotoModules}
+	 <option disabled></option>
     </select>
     <br>
     <input name="module" size=30 align=middle maxlength=30 {$gotoModulesACL}>
@@ -66,6 +68,7 @@
    </h2>
    <select style="width:100%; height:100px;" name="autofs_list[]" size=15 multiple title='{t}Add additional automount entries{/t}'>
     {html_options values=$gotoAutoFs output=$gotoAutoFs}
+	<option disabled></option>
    </select>
    <br>
    <input name="autofs" size=30 align=middle maxlength=80>
@@ -85,6 +88,7 @@
    </h2>
    <select style="width:100%; height:100px;" name="fstab_list[]" size=15 multiple title="{t}Add additional filesystems to be mounted during startup{/t}">
     {html_options values=$gotoFilesystem output=$gotoFilesystem}
+	<option disabled></option>
    </select>
    <br>
    <input name="fstab" size=80 align=middle maxlength=200 {$gotoFilesystemACL}>
