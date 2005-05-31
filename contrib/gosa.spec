@@ -11,11 +11,11 @@
 #
 Summary: 		Web Based LDAP Administration Program 
 Name:			gosa
-Version: 		2.4beta
+Version: 		2.4beta1
 Release:		1
 License: 		GPL
 Source: 		ftp://oss.GONICUS.de/pub/gosa/beta/%{sourcename}.tar.bz2
-URL: 			http://oss.gonicus.de/project/?group_id=6
+URL: 			http://oss.GONICUS.de/project/?group_id=6
 Group: 			System/Administration
 Vendor:			GONICUS GmbH
 Packager:		Lars Scheiter <lars.scheiter@GONICUS.de>
@@ -23,7 +23,7 @@ Buildarch: 		noarch
 %if %{suse}
 Requires:		apache2,php4,php4-gd,php4-ldap,php4-mcrypt,php4-imap,php4-iconv,ImageMagick,perl-Crypt-SmbHash
 %else
-Requires: 		php,php-ldap,perl-Crypt-SmbHash >= 0.02,ImageMagick
+Requires: 		httpd,php,php-ldap,php-imap,perl-Crypt-SmbHash >= 0.02,ImageMagick
 %endif
 BuildRoot: 		%{_tmppath}/%{name}-%{version}-root
 BuildArch:		noarch
@@ -55,7 +55,7 @@ Summary: 		Schema Definitions for the GOSA package
 %if %{suse}
 Requires:		openldap2 >= 2.2.6
 %else
-Requires:		openldap >= 2.0.27
+Requires:		openldap-servers >= 2.2.0
 %endif
 Obsoletes:		gosa-ldap
 
@@ -108,6 +108,7 @@ mkdir -p %{buildroot}/usr/share/doc/gosa-%{version}
 rm -rf %{buildroot}/usr/share/gosa/contrib
 rm -rf %{buildroot}/usr/share/gosa/doc
 #rmdir contrib/openldap
+bzip2 -9 contrib/opensides/goSamba.pl
 
 %clean
 rm -rf %{buildroot}
@@ -134,10 +135,11 @@ rm -rf %{buildroot}
 /etc/openldap/schema/gosa
 
 %changelog
-* Mon May 24 2005 Lars Scheiter <lars.scheiter@GONICUS.de> 2.4
+* Mon May 24 2005 Lars Scheiter <lars.scheiter@GONICUS.de> 2.4beta1
 - New upstream version
 - Added gosa.conf to contrib dir
 - Rearranged documentation stuff
+- Updated dependencies
 
 * Mon Feb 21 2005 Lars Scheiter <lars.scheiter@GONICUS.de> 2.3
 - Update version to 2.3 (upstream)
