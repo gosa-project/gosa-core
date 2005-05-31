@@ -1445,6 +1445,10 @@ function to_byte($value) {
 
 function in_array_ics($value, $items)
 {
+  if (!is_array($items)){
+    return (FALSE);
+  }
+  
   foreach ($items as $item){
     if (strtolower($item) == strtolower($value)) {
       return (TRUE);

@@ -6,24 +6,24 @@ class servkolab extends plugin {
   var $cli_description = "Some longer text\nfor help";
   var $cli_parameters = array("eins"=>"Eins ist toll", "zwei"=>"Zwei ist noch besser");
 
-  var $postfix_mydomain                 = "\$domain";//<<<<<<<<<<<<<
-  var $postfix_mydestination            = "\$domain";//<<<<<<<<<<<<<
-  var $postfix_mynetworks               = "127.0.0.1/8";//ok
-  var $postfix_enable_virus_scan        = "TRUE";//ok
+  var $postfix_mydomain                 = "\$domain";
+  var $postfix_mydestination            = "\$domain";
+  var $postfix_mynetworks               = "127.0.0.1/8";
+  var $postfix_enable_virus_scan        = "TRUE";
   var $postfix_relayhost                = "";
   var $postfix_mxrelayenabled           =  true;
   var $postfix_allow_unauthenticated     = "false";
-  var $cyrus_quotawarn                  = "80";//ok
-  var $kolabFreeBusyFuture              = "1";// ok 
-  var $cyrus_admins                     = "TRUE";//<<<<<<<<<<<<<<<<
-  var $cyrus_imap                       = "TRUE";//ok
-  var $cyrus_pop3                       = "TRUE";//ok
-  var $cyrus_imaps                      = "TRUE";//ok
-  var $cyrus_pop3s                      = "TRUE";//ok
-  var $cyrus_sieve                      = "TRUE";//ok
-  var $apache_allow_unauthenticated_fb  = "TRUE";//<<<<<<<<<<<<
-  var $proftpd_ftp                      = "TRUE";//pk
-  var $apache_http                      = "TRUE";//ok
+  var $cyrus_quotawarn                  = "80";
+  var $kolabFreeBusyFuture              = "1";
+  var $cyrus_admins                     = "TRUE";
+  var $cyrus_imap                       = "TRUE";
+  var $cyrus_pop3                       = "TRUE";
+  var $cyrus_imaps                      = "TRUE";
+  var $cyrus_pop3s                      = "TRUE";
+  var $cyrus_sieve                      = "TRUE";
+  var $apache_allow_unauthenticated_fb  = "TRUE";
+  var $proftpd_ftp                      = "TRUE";
+  var $apache_http                      = "TRUE";
   var $kolabHost                        = array();
   var $added                            = false; 
   var $remove                           = false;
@@ -57,7 +57,7 @@ class servkolab extends plugin {
     }
   
     /* Is this Server a member of the Kolab extension or not ?*/ 
-    if(in_array($this->hostname,$this->attrs['kolabHost'])) {
+    if(isset($this->attrs['kolabHost']) && in_array($this->hostname, $this->attrs['kolabHost'])) {
       $this->is_account=true;
     }    else    {   
       $this->is_account=false;    
