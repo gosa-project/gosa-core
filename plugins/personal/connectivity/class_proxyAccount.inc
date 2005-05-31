@@ -48,8 +48,15 @@ class proxyAccount extends plugin
     foreach (array("F", "T", "B", "N") as $val){
       if (is_integer(strpos($this->gosaProxyAcctFlags, "$val"))) {
         $smarty->assign("filter$val", "checked");
+
+        /* Add state variables for on-the-fly state-changing of checkboxes */
+        $smarty->assign($val."state", "");
+        
       } else {
         $smarty->assign("filter$val", "");
+
+        /* Same as above */
+        $smarty->assign($val."state", "disabled");
       }
     }
 

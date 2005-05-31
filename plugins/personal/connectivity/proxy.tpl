@@ -1,17 +1,17 @@
 <h2>
 	{if $tabbed eq 1}
-		<input type="checkbox" name="proxy" value="B" {$proxyState} {$gosaProxyAcctFlagsACL} 
-			onclick="
+		<input type="checkbox" id="proxy" name="proxy" value="B" {$proxyState} {$gosaProxyAcctFlagsACL} 
+			onClick="
 				changeState('filterF'); 
 				changeState('filterT'); 
-				changeState('startHour'); 
-				changeState('startMinute'); 
-				changeState('stopHour'); 
-				changeState('stopMinute'); 
-				changeState('filterB'); 
-				changeState('quota_size'); 
-				changeState('quota_unit'); 
-				changeState('gosaProxyQuotaPeriod');
+				changeState('filterB');
+				changeTripleSelectState('proxy', 'filterT', 'startHour'); 
+				changeTripleSelectState('proxy', 'filterT', 'startMinute'); 
+				changeTripleSelectState('proxy', 'filterT', 'stopHour'); 
+				changeTripleSelectState('proxy', 'filterT', 'stopMinute'); 
+				changeTripleSelectState('proxy', 'filterB', 'quota_size'); 
+				changeTripleSelectState('proxy', 'filterB', 'quota_unit'); 
+				changeTripleSelectState('proxy', 'filterB', 'gosaProxyQuotaPeriod');
 			">
 	{/if}{t}Proxy account{/t}</h2>
 
@@ -25,25 +25,31 @@
     </td></tr>
      <tr>
       <td width="50%">
-    <input type="checkbox" name="filterT" id="filterT" value="T" {$filterT} {$gosaProxyAcctFlagsACL} {$pstate}>
+    <input type="checkbox" name="filterT" id="filterT" value="T" {$filterT} {$gosaProxyAcctFlagsACL} {$pstate}
+    	onClick="
+		changeSubselectState('filterT', 'startHour');
+		changeSubselectState('filterT', 'startMinute');
+		changeSubselectState('filterT', 'stopHour');
+		changeSubselectState('filterT', 'stopMinute');
+	">
     {t}Limit proxy access to working time{/t}
     <br>
     <table style="margin-left:20px;">
      <tr>
       <td>
-        <select size="1" id="startHour" name="startHour" {$gosaProxyWorkingStartACL} {$pstate}>
+        <select size="1" id="startHour" name="startHour" {$gosaProxyWorkingStartACL} {$Tstate}>
          {html_options values=$hours output=$hours selected=$starthour}
         </select>
         &nbsp;:&nbsp;
-        <select size="1" id="startMinute" name="startMinute" {$gosaProxyWorkingStartACL} {$pstate}>
+        <select size="1" id="startMinute" name="startMinute" {$gosaProxyWorkingStartACL} {$Tstate}>
          {html_options values=$minutes output=$minutes selected=$startminute}
         </select>
         &nbsp;-&nbsp;
-        <select size="1" id="stopHour" name="stopHour" {$gosaProxyWorkingStopACL} {$pstate}>
+        <select size="1" id="stopHour" name="stopHour" {$gosaProxyWorkingStopACL} {$Tstate}>
          {html_options values=$hours output=$hours selected=$stophour}
         </select>
         &nbsp;:&nbsp;
-        <select size="1" id="stopMinute" name="stopMinute" {$gosaProxyWorkingStopACL} {$pstate}>
+        <select size="1" id="stopMinute" name="stopMinute" {$gosaProxyWorkingStopACL} {$Tstate}>
          {html_options values=$minutes output=$minutes selected=$stopminute}
         </select>
       </td>
@@ -54,19 +60,24 @@
      &nbsp;
    </td>
       <td>
-    <input type="checkbox" id="filterB" name="filterB" value="B" {$filterB} {$pstate} {$gosaProxyAcctFlagsACL}>
+    <input type="checkbox" id="filterB" name="filterB" value="B" {$filterB} {$pstate} {$gosaProxyAcctFlagsACL}
+    	onClick="
+		changeSubselectState('filterB', 'quota_size');
+		changeSubselectState('filterB', 'quota_unit');
+		changeSubselectState('filterB', 'gosaProxyQuotaPeriod');
+	">
     {t}Restrict proxy usage by quota{/t}
     <br>
     <table style="margin-left:20px;">
      <tr>
       <td>
-       <input name="quota_size" id="quota_size" size=7 maxlength=10 {$pstate} {$gosaProxyQuotaACL} value="{$quota_size}">
+       <input name="quota_size" id="quota_size" size=7 maxlength=10 {$Bstate} {$gosaProxyQuotaACL} value="{$quota_size}">
        &nbsp;
-       <select size="1" name="quota_unit" id="quota_unit" {$pstate} {$gosaProxyQuotaACL}>
+       <select size="1" name="quota_unit" id="quota_unit" {$Bstate} {$gosaProxyQuotaACL}>
 	{html_options options=$quota_unit selected=$quota_u}
        </select>
        {t}per{/t}
-       <select size="1" name="gosaProxyQuotaPeriod" id="gosaProxyQuotaPeriod" {$pstate} {$gosaProxyQuotaACL}>
+       <select size="1" name="gosaProxyQuotaPeriod" id="gosaProxyQuotaPeriod" {$Bstate} {$gosaProxyQuotaACL}>
         {html_options options=$quota_time selected=$gosaProxyQuotaPeriod}
        </select>
       </td>
