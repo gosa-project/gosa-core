@@ -287,10 +287,9 @@ function perform_php_checks(&$faults)
   $msg.= check (	$faults, _("Checking for kadm5 module"),
       _("Managing users in kerberos requires the kadm5 module which is downloadable via PEAR network."),
       function_exists('kadm5_init_with_password'), FALSE);
-  $msg.= check (  $faults, _("Checking for snmp module"),
+  $msg.= check (  $faults, _("Checking for snmp Module"),
       _("Simple Network Management Protocol (SNMP) is required for client monitoring."),
       function_exists('snmpgetnext'), FALSE);
-
   return ($msg);
 }
 
