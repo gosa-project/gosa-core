@@ -124,8 +124,10 @@ class userManagement extends plugin
 
     /* Reset requested? */
     if (isset($_POST['edit_cancel']) || isset($_POST['password_cancel'])){
-      del_lock ($this->usertab->dn);
-      unset ($this->usertab);
+      if (isset($this->usertab)){
+        del_lock ($this->usertab->dn);
+        unset ($this->usertab);
+      }
       $this->usertab= NULL;
       $this->lognames= array();;
       $this->sn= "";

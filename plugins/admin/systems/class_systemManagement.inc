@@ -422,8 +422,10 @@ class systems extends plugin
 
     /* Cancel dialogs */
     if (isset($_POST['edit_cancel']) || isset($_POST['password_cancel'])){
-      del_lock ($this->systab->dn);
-      unset ($this->systab);
+      if (isset($this->systab)){
+        del_lock ($this->systab->dn);
+        unset ($this->systab);
+      }
       $this->systab= NULL;
       unset($_SESSION['objectinfo']);
     }

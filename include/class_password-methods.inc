@@ -95,10 +95,8 @@ function change_password ($dn, $password, $mode=0, $hash= "")
   global $config;
   $newpass= "";
 
-
   // Get all available encryption Methods 
   $available = passwordMethod::get_available_methods();
-
 
   // read current password entry for $dn, to detect the encryption Method
   $ldap       = $config->get_ldap_link();
@@ -109,8 +107,6 @@ function change_password ($dn, $password, $mode=0, $hash= "")
   if (isset($attrs['userPassword'][0]) && preg_match('/^[^{}]+$/', $attrs['userPassword'][0]) && $hash == ""){
     $hash= "clear";
   }
-
-
 
   // Detect the encryption Method
   if ( (isset($attrs['userPassword'][0]) &&  preg_match ("/^{([^}]+)}(.+)/", $attrs['userPassword'][0], $matches)) ||  $hash != ""){
