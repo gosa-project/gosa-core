@@ -527,10 +527,6 @@ class userManagement extends plugin
 
     /* Show main page */
     $smarty->assign("userlist", $this->userlist);
-    if(count($this->userlist)) {
-      $smarty->assign("SELECT_userlist",true);
-    } else {
-      $smarty->assign("SELECT_userlist",false);
     }
     $smarty->assign("search_image", get_template_path('images/search.png'));
     $smarty->assign("tree_image", get_template_path('images/tree.png'));
