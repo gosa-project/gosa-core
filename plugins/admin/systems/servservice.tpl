@@ -72,7 +72,7 @@
   <table>
 	<tr>
 	 <td colspan=2>
-	  <input type="checkbox"  value="1" name="goXdmcpIsEnabled" {$goXdmcpIsEnabled}  {$goTerminalServerState} {$goXdmcpIsEnabledACL} id="Temporariid"> {t}Temporary disable login{/t}</td>
+	  <input type="checkbox"  value="1" name="goXdmcpIsEnabled" {$goTerminalServerState} {$goXdmcpIsEnabledACL} id="Temporariid"> {t}Temporary disable login{/t}</td>
     </tr>
     <tr>
 	 <td>{t}Font path{/t}</td>
