@@ -135,6 +135,10 @@ class servkolab extends plugin {
     $ldap= $this->config->get_ldap_link();
     $this->dn = "k=kolab,".$this->config->current['BASE'];
 
+    if (count($this->kolabHost) == 0){
+      return;
+    }
+
     /* Are we alone? Remove complete entry... */
     if (count($this->kolabHost) == 1){
 
