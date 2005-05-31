@@ -15,14 +15,41 @@ module we must do some changes to get open-xchange running with GOsa.
                         pgdbname="openexchange"
  		/>
 
--Make this changes to admintools.conf:
 
-USERS_BASEDN="ou=people,dc=example,dc=org"
-GROUP_BASEDN="ou=groups,dc=example,dc=org"
 
-We suppose that the Base is "dc=example,dc=org"
+We suppose that openxchage is installed in /usr/local/openxchange, 
+and the base for GOsa ldap tree is dc=example,dc=org
 
-- If you are using as rdn "uid=..", You must change in ldap.properties:
+
+- Make changes to admintools.conf (/usr/local/openxchange/etc/admintools.conf):
+
+OXBASE="dc=example,dc=org"
+OX_LEAF="$OXBASE"
+# Where are the OX Users
+USER_BASEDN="ou=people,$OX_LEAF"
+# Where are the OX Groups
+GROUP_BASEDN="ou=groups,$OX_LEAF"
+# Where are the OX Resources
+RESOURCES_BASEDN="ou=Resources,ou=ResourceObjects,ou=OxObjects,$OX_LEAF"
+# Where are the OX Resource Groups
+RESOURCE_GROUPS_BASEDN="ou=ResourceGroups,ou=ResourceObjects,ou=OxObjects,$OX_LEAF"
+# Where is the Global Adressbook
+GLOBAL_ADDRESSBOOKDN="o=AddressBook,ou=OxObjects,$OX_LEAF"
+# where are the adressbook admins
+GLOBAL_ADDRESSBOOK_ADMINSDN="cn=AddressAdmins,ou=OxObjects,$GLOBAL_ADDRESSBOOKDN"
+
+- Make changes in login.pm (usually in /usr/lib/cgi-bin/login.pm):
+my $ldap_userBase = 'ou=Users,ou=OxObjects,';
+to
+my $ldap_userBase = 'ou=people,';
+
+- Put the Base in ldap.conf (/usr/local/openxchange/etc/groupware/ldap.conf)
+BASE    dc=example,dc=org
+
+- If you are using as GOsa dnmode "uid", You must change in ldap.properties 
+(/usr/local/openxchange/etc/groupware/ldap.properties):
+
+
 com.openexchange.groupware.ldap.OXUserObjectAttributeuserCountryName=userCountry
  to
 com.openexchange.groupware.ldap.OXUserObjectAttributeuserCountryName=st
@@ -35,9 +62,16 @@ com.openexchange.groupware.ldap.OXUserObjectAttributesmtpServerName=smtpServer
  to 
 com.openexchange.groupware.ldap.OXUserObjectAttributesmtpServerName=gosaMailServer
 
+com.openexchange.groupware.ldap.userBaseDN=ou\u003DUsers,ou\u003DOxObjects
+to
+com.openexchange.groupware.ldap.userBaseDN=ou\u003Dpeople
 
 
-- If you are using as rdn "cn=..", the ldap.properties configuration of open-xchange must be like this:
+
+- If you are using as GOsa dnmode "cn", the ldap.properties  
+(/usr/local/openxchange/etc/groupware/ldap.properties) 
+configuration of open-xchange must be like this:
+
 com.openexchange.groupware.ldap.inetOrgPersonAttributebusinessCategoryName=businessCategory
 
 com.openexchange.groupware.ldap.inetOrgPersonAttributecnName=cn
@@ -392,6 +426,12 @@ com.openexchange.groupware.ldap.OXUserObjectAttributeDayViewIntervalName=OXDayVi
 
 
 
-
 This configuration is based in documentation gets from 
-http://www.open-xchange.org/oxwiki/OX_20with_20existing_20LDAP_20DIT
+http://www.open-xchange.org/oxwiki/
+
+TODO:
+- more testing
+- check cn configuration
+- check addressbook
+- subtree support
+
