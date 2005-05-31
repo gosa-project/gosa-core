@@ -102,12 +102,15 @@ class componentGeneric extends plugin
     $message= array();
     $this->dn= "cn=".$this->cn.",ou=netdevices,ou=systems,".$this->base;
 
-    /* must: cn, macAddress */
+    /* must: cn, macAddress, ipHostNumber */
     if ($this->cn == "" && chkacl ($this->acl, "cn") == ""){
       $message[]= "The required field 'Component name' is not set.";
     }
-    if ($this->macAddress == "" && chkacl ($this->acl, "macAddresscn") == ""){
+    if ($this->macAddress == "" && chkacl ($this->acl, "macAddress") == ""){
       $message[]= "The required field 'MAC-address' is not set.";
+    }
+    if ($this->ipHostNumber == "" && chkacl ($this->acl, "ipHostNumber") == ""){
+      $message[]= "The required field 'IP-Address' is not set.";
     }
 
     $ui= get_userinfo();

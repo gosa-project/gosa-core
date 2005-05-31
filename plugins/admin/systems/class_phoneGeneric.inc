@@ -102,15 +102,18 @@ class phoneGeneric extends plugin
     $message= array();
     $this->dn= "cn=".$this->cn.",ou=phones,ou=systems,".$this->base;
 
-    /* must: cn, macAddress */
+    /* must: cn, macAddress, ipHostNumber */
     if ($this->cn == "" && chkacl ($this->acl, "cn") == ""){
       $message[]= "The required field 'Phone name' is not set.";
     }
     if ($this->cn == "0" && chkacl ($this->acl, "cn") == ""){
       $message[]= "The 'Phone name' '0' is reserved and cannot be used.";
     }
-    if ($this->macAddress == "" && chkacl ($this->acl, "macAddresscn") == ""){
-      $message[]= "The required field 'MAC-address' is not set.";
+    if ($this->macAddress == "" && chkacl ($this->acl, "macAddress") == ""){
+      $message[]= "The required field 'MAC-Address' is not set.";
+    }
+    if ($this->ipHostNumber == "" && chkacl ($this->acl, "ipHostNumber") == ""){
+      $message[]= "The required field 'IP-Address' is not set.";
     }
 
     $ui= get_userinfo();
