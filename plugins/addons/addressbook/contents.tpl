@@ -78,8 +78,9 @@
 			&nbsp;{t}Display results for department{/t}
 		</td>
     	<td>
-			<select name="search_base" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
+			<select name="search_base" size="1" onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
 		      	{html_options options=$deplist selected=$depselect}
+				<option disabled></option>
     		</select>
 		</td>
 	</tr>
@@ -102,8 +103,9 @@
 			<img alt="" src="{$search_image}" align=middle>&nbsp;{t}Match object{/t}
 		</td>
 	    <td>
-	      	<select name="object_type" size=1 onChange="mainform.submit()" title="{t}Choose the object that will be searched in{/t}">
+	      	<select name="object_type" size="1" onChange="mainform.submit()" title="{t}Choose the object that will be searched in{/t}">
     	   		{html_options options=$objlist selected=$object_type}
+				<option disabled></option>
 	      	</select>
 	    </td>
 	</tr>

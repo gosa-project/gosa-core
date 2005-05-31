@@ -452,7 +452,7 @@ $this->telephone_list[$attrs['sn'][0].$attrs['dn']]=
 					$smarty->assign("info_$name", preg_replace("/\n/", "<br>", $info["$name"][0]));
                                 }
 				error_reporting(E_ALL);
-			} elseif ($_SESSION['show_info'] == "ADD") {
+			} elseif ($_SESSION['show_info'] == "ADD" && isset($this->$name)) {
 				$smarty->assign("info_$name", $this->$name);
 			} else {
 				$smarty->assign("info_$name", "-");

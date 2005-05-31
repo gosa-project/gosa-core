@@ -31,7 +31,9 @@ class application extends plugin
 
 	/* Load icon */
 	$ldap= $config->get_ldap_link();
-	$this->iconData= $ldap->get_attribute($dn, "gosaApplicationIcon");
+	if ($dn != 'new'){
+		$this->iconData= $ldap->get_attribute($dn, "gosaApplicationIcon");
+	}
 	if ($this->iconData == ""){
 		$this->set_picture("");
 	}
@@ -41,12 +43,12 @@ class application extends plugin
 	/* This is always an account */
 	$this->is_account= TRUE;
 
-        if ($this->dn == "new"){
+	if ($this->dn == "new"){
 		$ui= get_userinfo();
 		$this->base= dn2base($ui->dn);
 	} else {
-                $this->base= preg_replace ("/^[^,]+,[^,]+,/", "", $this->dn);
-        }
+		$this->base= preg_replace ("/^[^,]+,[^,]+,/", "", $this->dn);
+	}
   }
 
   function execute()
