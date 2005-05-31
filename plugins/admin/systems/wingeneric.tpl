@@ -24,11 +24,6 @@
 	  <td>{t}Description{/t}</td>
 	  <td><input name="description" size=25 maxlength=80 value="{$description}"></td>
 	 </tr>
-	 <tr>
-	 	<td>
-			as{$uidNumber}
-		</td>
-	 </tr>
 	</table>
   </td>
  </tr>
