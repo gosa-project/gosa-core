@@ -53,9 +53,13 @@ class pureftpdAccount extends plugin
     }
     $smarty->assign("use_FTPStatus", ($this->FTPStatus == "disabled") ? "checked" : "");
 
+    # Hickert, Added Else. Smarty have to know the variable in both cases
     if ($this->parent != NULL){
       $smarty->assign("tabbed", 1);
+    }else {
+      $smarty->assign("tabbed", 0);
     }
+    
     $smarty->assign("pureftpdACL", chkacl($this->acl, 'pureftpd'));
 
     $display.= $smarty->fetch (get_template_path('pureftpd.tpl', TRUE, dirname(__FILE__)));
