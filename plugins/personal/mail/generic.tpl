@@ -11,11 +11,8 @@
      <td>{t}Server{/t}</td>
      <td>
       <select size="1" name="gosaMailServer" {$gosaMailServerACL} title="{t}Specify the mail server where the user will be hosted on{/t}">
-		{if $SELECT_mailServers}
 		    {html_options values=$mailServers output=$mailServers selected=$gosaMailServer}
-		{else}
-			<option>
-		{/if}
+			<option disabled></option>
       </select>
      </td>
     </tr>
@@ -51,12 +48,8 @@
    <h2><img alt="" align="middle" src="images/alternatemail.png"> {t}Alternative addresses{/t}</h2>
    <select style="width:350px; height:100px;" name="alternates_list[]" size=15
 	 multiple title="{t}List of alternative mail addresses{/t}">
-        {if $SELECT_gosaMailAlternateAddress}
             {html_options values=$gosaMailAlternateAddress output=$gosaMailAlternateAddress}
-        {else}
-            <option>
-        {/if}
-    
+			<option disabled></option>
    </select>
    <br>
    <input name="alternate_address" size=30 align="middle" maxlength="65" {$gosaMailAlternateAddressACL} value="">
@@ -91,11 +84,8 @@
    </select>
    {t}to folder{/t}
    <select size="1" name="gosaSpamMailbox" {$gosaSpamMailboxACL}>
-        {if $SELECT_spambox}
         	{html_options values=$spambox output=$spambox selected=$gosaSpamMailbox}
-		{else}
-            <option>
-        {/if}
+			<option disabled></option>
    </select>
    <br>
    <input type=checkbox name="use_mailsize_limit" value="1" {$use_mailsize_limit}
@@ -114,11 +104,8 @@
    <br>
    {if $show_templates eq "true"}
    <select name="vacation_template">
-        {if $SELECT_vacationtemplates }
         	{html_options options=$vacationtemplates selected=$template}
-		{else}
-            <option>
-        {/if}
+			<option disabled></option>
 	{html_options options=$vacationtemplates selected=$template}
    </select>
    <input type="submit" value="{t}Import{/t}" name="import_vacation"
@@ -130,11 +117,8 @@
     <b>{t}Forward messages to{/t}</b>
    </p>
    <select style="width:350px; height:100px;" name="forwarder_list[]" size=15 multiple>
-        {if $SELECT_gosaMailForwardingAddress}
 			{html_options values=$gosaMailForwardingAddress output=$gosaMailForwardingAddress selected=$template}        
-		{else}
-            <option>
-        {/if}
+			<option disabled></option>
    </select>
    <br>
    <input name="forward_address" size=20 align="middle" maxlength=65
