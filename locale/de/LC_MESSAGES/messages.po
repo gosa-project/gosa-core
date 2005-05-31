@@ -5789,7 +5789,7 @@ msgstr "GOsa Entwicklerversion (Rev %s)"
 #: include/functions.inc:1547
 msgid "Generating this page caused the PHP interpreter to raise some errors!"
 msgstr ""
-"Der PHP-Interpreter verursachte einen oder mehrere Fehler beim Erzeugen "
+"Der PHP-Interpreter meldete einen oder mehrere Fehler beim Erzeugen "
 "dieser Seite!"
 
 #: include/functions.inc:1547
