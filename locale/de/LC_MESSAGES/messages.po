@@ -6029,7 +6029,7 @@ msgid ""
 "PHP must be of version 4.1.0 or above for some functions and known bugs in "
 "PHP language."
 msgstr ""
-"PHP muß mindestens die Version 4.1.0 haben. GOsa verwendet einige "
+"PHP muß mindestens in der Version 4.1.0 vorliegen. GOsa verwendet einige "
 "Funktionen, die in früheren Versionen fehlerhaft oder gar nicht "
 "implementiert waren."
 
@@ -6069,15 +6069,15 @@ msgstr ""
 
 #: include/setup_checks.inc:267
 msgid "Checking for iconv support"
-msgstr "Prüfe auf iconv Erweiterung"
+msgstr "Prüfe auf iconv-Erweiterung"
 
 #: include/setup_checks.inc:268
 msgid ""
 "This module is used by GOsa to convert samba munged dial informations and is "
 "therefore required."
 msgstr ""
-"Dieses Modul wird von GOsa benutzt, um sambaMungedDial Informationen zu "
-"konvertieren und wird daher benötigt."
+"Dieses Modul wird von GOsa benutzt, um Informationen der samba-Erweiterung zu "
+"verarbeiten und wird daher benötigt."
 
 #: include/setup_checks.inc:271
 msgid "Checking for mhash module"
@@ -6198,7 +6198,7 @@ msgid ""
 "In order to use SAMBA 2/3, you've to install some additional packages to "
 "generate password hashes."
 msgstr ""
-"Um SAMBA 2.x/3.x in Verbindung mit LDAP nutzen zu können, wird ein externes "
+"Um Samba 2.x/3.x in Verbindung mit LDAP nutzen zu können, wird ein externes "
 "Programm benötigt, welches die Passwort-Hashes generieren kann."
 
 #: include/setup_checks.inc:350
@@ -6259,7 +6259,7 @@ msgid ""
 "Increase the server security by setting expose_php to 'off'. PHP won't send "
 "any Information about the server you are running in this case."
 msgstr ""
-"Erzielen Sie eine höhere Sicherheit Ihres Servers, indem Sie expose_php auf "
+"Erhöhen Sie die Sicherheit Ihres Servers, indem Sie expose_php auf "
 "'off' setzen. PHP wird in dieser Einstellung keine Informationen über Ihren "
 "laufenden Server senden."
 
@@ -6583,7 +6583,7 @@ msgid ""
 "needed programms and after you've provided basic informations for your LDAP "
 "connectivity, we're going to check your LDAP setup."
 msgstr ""
-"Scheinbar rufen Sie GOsa zum ersten Mal auf - es wurde keine Konfiguration "
+"Scheinbar rufen Sie GOsa zum ersten Mal auf, denn es wurde keine Konfiguration "
 "gefunden. Diese Einrichtung wird Sie dabei unterstützen, eine initiale aber "
 "lauffähige Konfiguration zu erzeugen, indem es Sie durch drei grundlegende "
 "Schritte führt: Zunächst wird versucht, die PHP-Installation auf mögliche "
@@ -6736,7 +6736,7 @@ msgstr "Geben Sie eine Beschreibung des hier konfigurierten Standortes ein"
 #: ihtml/themes/altlinux/setup_step4.tpl:8
 #: ihtml/themes/default/setup_step4.tpl:11
 msgid "Location name"
-msgstr "Name des Standortes"
+msgstr "Name des Standortes:"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:14
 msgid ""
@@ -6755,12 +6755,12 @@ msgstr ""
 #: ihtml/themes/altlinux/setup_step4.tpl:19
 #: ihtml/themes/default/setup_step4.tpl:23
 msgid "Admin DN"
-msgstr "Administrator DN"
+msgstr "Administrator-DN:"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:23
 #: ihtml/themes/default/setup_step4.tpl:27
 msgid "Admin password"
-msgstr "Administrator Passwort"
+msgstr "Administrator-Passwort:"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:29
 #: ihtml/themes/default/setup_step4.tpl:34
@@ -6776,22 +6776,22 @@ msgstr ""
 #: ihtml/themes/altlinux/setup_step4.tpl:34
 #: ihtml/themes/default/setup_step4.tpl:43
 msgid "People storage ou"
-msgstr "Ablage-ou für Benutzer"
+msgstr "Ablage-OU für Benutzer:"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:38
 #: ihtml/themes/default/setup_step4.tpl:47
 msgid "People dn attribute"
-msgstr "DN-Attribut für Benutzer"
+msgstr "DN-Attribut für Benutzer:"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:46
 #: ihtml/themes/default/setup_step4.tpl:55
 msgid "Group storage ou"
-msgstr "Ablage-ou für Gruppen"
+msgstr "Ablage-OU für Gruppen:"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:50
 #: ihtml/themes/default/setup_step4.tpl:59
 msgid "ID base for users/groups"
-msgstr "ID-Basis für Benutzer/Gruppen"
+msgstr "ID-Basis für Benutzer/Gruppen:"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:56
 #: ihtml/themes/default/setup_step4.tpl:99
@@ -6854,7 +6854,7 @@ msgid ""
 "Please enter the server URI to allow the setup to connect your LDAP server "
 "<i>(Example: ldap://your.server:389).</i>"
 msgstr ""
-"Bitte geben Sie die Server-URI an, damit das setup sich zu Ihrem LDAP-Server "
+"Bitte geben Sie die Server-URI an, damit die Einrichtung sich zu Ihrem LDAP-Server "
 "verbinden kann<i>(Beispiel: ldap://ihr.server:389)</i>"
 
 #: ihtml/themes/default/setup_step4.tpl:2
@@ -6879,7 +6879,7 @@ msgstr ""
 
 #: ihtml/themes/default/setup_step4.tpl:39
 msgid "Base "
-msgstr "Basis"
+msgstr "Basis:"
 
 #: ihtml/themes/default/setup_step4.tpl:67
 msgid ""
