@@ -223,12 +223,11 @@ class sambaAccount extends plugin
     /* Prepare templating */
     $smarty= get_smarty();
 
-/* Set this on top, can't find position where it must be set */
 /* PHP Fehler "Undefined index: sambaPwdMustChangeACL" */
     #hickert test
-//    $smarty->assign("sambaPwdMustChangeACL", chkacl($this->acl, "sambaPwdMustChangeACL"));
+    $smarty->assign("sambaPwdMustChangeACL", chkacl($this->acl, "sambaPwdMustChangeACL"));
     #hickert test
-//    $smarty->assign("sambaPwdMustChange",$this->sambaPwdMustChange);
+    $smarty->assign("sambaPwdMustChange",$this->sambaPwdMustChange);
 
     if ($this->sambaPwdMustChange=="0"){
       $date= getdate();
