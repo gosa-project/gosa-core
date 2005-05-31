@@ -289,7 +289,7 @@ function perform_php_checks(&$faults)
       function_exists('kadm5_init_with_password'), FALSE);
   $msg.= check (  $faults, _("Checking for snmp Module"),
       _("Simple Network Management Protocol (SNMP) is required for client monitoring."),
-      function_exists('snmpgetnext'), FALSE);
+      function_exists('snmpget'), FALSE);
   return ($msg);
 }
 
