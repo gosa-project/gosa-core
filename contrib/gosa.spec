@@ -11,7 +11,7 @@
 #
 Summary: 		Web Based LDAP Administration Program 
 Name:			gosa
-Version: 		2.4
+Version: 		2.4beta
 Release:		1
 License: 		GPL
 Source: 		ftp://oss.GONICUS.de/pub/gosa/beta/%{sourcename}.tar.bz2
@@ -21,7 +21,7 @@ Vendor:			GONICUS GmbH
 Packager:		Lars Scheiter <lars.scheiter@GONICUS.de>
 Buildarch: 		noarch
 %if %{suse}
-Requires:		apache2,php4,php4-gd,php4-ldap,php4-mcrypt,php4-imap,ImageMagick,perl-Crypt-SmbHash
+Requires:		apache2,php4,php4-gd,php4-ldap,php4-mcrypt,php4-imap,php4-iconv,ImageMagick,perl-Crypt-SmbHash
 %else
 Requires: 		php,php-ldap,perl-Crypt-SmbHash >= 0.02,ImageMagick
 %endif
@@ -53,7 +53,7 @@ and can write user adapted sieve scripts.
 Group: 			System/Administration
 Summary: 		Schema Definitions for the GOSA package
 %if %{suse}
-Requires:		openldap2 >= 2.0.27
+Requires:		openldap2 >= 2.2.6
 %else
 Requires:		openldap >= 2.0.27
 %endif
@@ -118,7 +118,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,%{apacheuser},%{apachegroup})
-%doc %attr(-,root,root) AUTHORS TODO README README.openxchange README.safemode Changelog COPYING INSTALL FAQ
+%doc %attr(-,root,root) AUTHORS TODO README manual/README.openxchange README.safemode Changelog COPYING INSTALL FAQ
 %doc %attr(-,root,root) manual 
 %doc %attr(-,root,root) contrib/altlinux contrib/fix_config.sh contrib/gosa.conf contrib/mysql contrib/opensides
 %doc %attr(-,root,root) contrib/patches contrib/postgresql contrib/scripts contrib/vacation_example.txt
