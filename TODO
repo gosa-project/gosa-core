@@ -6,7 +6,7 @@ Things to fix before 2.4:
   - shared folders
   - Kolab disabled -> check. Check is_account!
 
-* Make it "barrierefrei"
+* Found bug with session filter of group dialog
 
 
 Target for 2.5:
