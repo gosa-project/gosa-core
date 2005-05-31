@@ -130,10 +130,10 @@ class terminfo extends plugin
             }
             switch ($eflag){
               case 0:
-                $smarty->assign("$pname", "<img alt=\"\" alt=\""._("running")."\" src=\"images/true.png\">");
+                $smarty->assign("$pname", "<img alt=\""._("running")."\" src=\"images/true.png\">");
                 break;
               case 1:
-                $smarty->assign("$pname", "<img alt=\"\" alt=\""._("not running")."\" src=\"images/false.png\">");
+                $smarty->assign("$pname", "<img alt=\""._("not running")."\" src=\"images/false.png\">");
                 break;
               default:
                 $smarty->assign("$pname", _("not defined"));
