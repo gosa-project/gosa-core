@@ -159,7 +159,7 @@ class servgeneric extends plugin
 
     /* must: cn */
     if ($this->cn == "" && chkacl ($this->acl, "cn") == ""){
-      $message[]= "The required field 'Server name' is not set.";
+      $message[]= _("The required field 'Server name' is not set.");
     }
 
     $ui= get_userinfo();

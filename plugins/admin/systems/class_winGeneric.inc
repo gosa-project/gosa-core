@@ -131,13 +131,13 @@ class wingeneric extends plugin
 
     /* must: cn, macAddress */
     if ($this->cn == "" && chkacl ($this->acl, "cn") == ""){
-      $message[]= "The required field 'Component name' is not set.";
+      $message[]= _("The required field 'Component name' is not set.");
     }
     if ($this->macAddress == "" && chkacl ($this->acl, "macAddress") == ""){
-      $message[]= "The required field 'MAC-Address' is not set.";
+      $message[]= _("The required field 'MAC-address' is not set.");
     }
     if ($this->ipHostNumber == "" && chkacl ($this->acl, "ipHostNumber") == ""){
-      $message[]= "The required field 'IP-Address' is not set.";
+      $message[]= _("The required field 'IP-address' is not set.");
     }
 
     $ui= get_userinfo();
