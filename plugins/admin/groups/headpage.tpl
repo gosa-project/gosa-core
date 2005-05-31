@@ -10,6 +10,7 @@
     <p class="contentboxb">
      <select style="width:500px; height:450px;" name="grouplist" size=15 ondblclick="this.form.edit_helper.value='1'; this.form.submit()">
       {html_options options=$grouplist}
+		<option disabled></option>
     </select>
     <br>
     <input type=submit value="{t}New{/t}..." name="new_group">&nbsp;
