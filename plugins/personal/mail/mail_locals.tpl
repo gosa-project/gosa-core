@@ -8,7 +8,7 @@
    </div>
    <div class="contentboxb">
     <p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-     <select style="width:500px; margin-top:4px; height:450px;" name="local_list[]" size=15" multiple>
+     <select style="width:500px; margin-top:4px; height:450px;" name="local_list[]" size="15" multiple>
         	{html_options options=$mailusers}
      </select>
     </p>
