@@ -135,11 +135,12 @@ rm -rf %{buildroot}
 /etc/openldap/schema/gosa
 
 %changelog
-* Mon May 24 2005 Lars Scheiter <lars.scheiter@GONICUS.de> 2.4beta1
+* Wed Jun 01 2005 Lars Scheiter <lars.scheiter@GONICUS.de> 2.4beta1
 - New upstream version
 - Added gosa.conf to contrib dir
 - Rearranged documentation stuff
 - Updated dependencies
+- compress some files
 
 * Mon Feb 21 2005 Lars Scheiter <lars.scheiter@GONICUS.de> 2.3
 - Update version to 2.3 (upstream)
