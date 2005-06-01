@@ -304,7 +304,7 @@ function perform_additional_checks(&$faults)
   $output= shell_exec ($query);
   if ($output != ""){
     $lines= split ("\n", $output);
-    $version= preg_replace ("/^Version:[^I]+ImageMagick ([^\s]+).*/", "\\1", $lines[0]);
+    $version= preg_replace ("/^Version:.+Magick ([^\s]+).*/", "\\1", $lines[0]);
     list($major, $minor)= split("\.", $version);
     $msg.= check (	$faults, _("Checking for ImageMagick (>=5.4.0)"),
         _("ImageMagick is used to convert user supplied images to fit the suggested size and the unified JPEG format."),
