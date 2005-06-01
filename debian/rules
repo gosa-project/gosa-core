@@ -59,13 +59,13 @@ install-stamp:
 	-mkdir -p debian/gosa/usr/lib/gosa
 	-mv debian/gosa/usr/share/gosa/bin/* debian/gosa/usr/lib/gosa
 	-rm -rf debian/gosa/usr/share/gosa/bin
+	-find debian/gosa -type f -exec chmod -x {} \;
 	-chmod +x debian/gosa/usr/lib/gosa/*
 	-rm -rf debian/gosa/usr/share/gosa/gen_locale.sh
 	-rm -rf debian/gosa/usr/share/gosa/update.sh
 	-mkdir -p debian/gosa/usr/share/php/smarty/libs/plugins
 	-cp include/smarty/plugins/block.t.php debian/gosa/usr/share/php/smarty/libs/plugins
 	-rm -rf debian/gosa/usr/share/gosa/include/smarty
-	-find debian/gosa -type f -exec chmod -x {} \;
 	-sed 's%"CONFIG_TEMPLATE_DIR", "../contrib/"%"CONFIG_TEMPLATE_DIR", "/usr/share/doc/gosa/contrib/"%g' debian/gosa/usr/share/gosa/include/functions.inc > debian/gosa/usr/share/gosa/include/functions.inc.new
 	-mv debian/gosa/usr/share/gosa/include/functions.inc.new debian/gosa/usr/share/gosa/include/functions.inc
 	-sed 's%require("smarty/Smarty.class.php");%require("/usr/share/php/smarty/libs/Smarty.class.php");%g' debian/gosa/usr/share/gosa/include/php_setup.inc > debian/gosa/usr/share/gosa/include/php_setup.inc.new
