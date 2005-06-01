@@ -339,15 +339,13 @@ function perform_additional_checks(&$faults)
       ($have_mkntpwd || $alt));
 
   /* seesio.auto_start should be off, in order to without trouble*/
-  $arra = ini_get_all();
-
-  $session_auto_start = $arra['session.auto_start'];
-  $implicit_flush     = $arra['implicit_flush'];
-  $max_execution_time = $arra['max_execution_time'];
-  $memory_limit       = $arra['memory_limit'];
-  $expose_php         = $arra['expose_php'];
-  $magic_quotes_gpc   = $arra['magic_quotes_gpc'];
-  $register_globals   = $arra['register_globals'];
+  $session_auto_start = ini_get('session.auto_start');
+  $implicit_flush     = ini_get('implicit_flush');
+  $max_execution_time = ini_get('max_execution_time');
+  $memory_limit       = ini_get('memory_limit');
+  $expose_php         = ini_get('expose_php');
+  $magic_quotes_gpc   = ini_get('magic_quotes_gpc');
+  $register_globals   = ini_get('register_globals');
 
   /* auto_register */
   $msg.= check (  $faults, _("php.ini check -> session.auto_register"),
