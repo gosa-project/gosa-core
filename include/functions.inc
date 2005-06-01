@@ -1517,6 +1517,11 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
 {
   global $error_collector;
 
+  /* Return if error reporting is set to zero */
+  if (error_reporting() == 0){
+    return;
+  }
+
   /* Workaround for buggy imap_open error outputs */
   if (preg_match('/imap_open/', $errstr)){
     return;
