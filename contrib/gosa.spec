@@ -35,11 +35,13 @@ BuildArch:		noarch
 	%define apacheuser wwwrun
 	%define apachegroup root
 	%define webconf	/etc/apache2/conf.d/
+	%define docdir /usr/share/doc/packages/gosa
 %else
 	%{echo:Building other rpm}
 	%define apacheuser apache 
 	%define apachegroup apache 
 	%define webconf	/etc/httpd/conf.d/	
+	%define docdir /usr/share/doc/gosa-%{version}
 %endif
 
 %description
@@ -99,7 +101,7 @@ EOF
 
 mkdir -p %{buildroot}/etc/openldap/schema/gosa
 mv contrib/openldap/*.schema %{buildroot}/etc/openldap/schema/gosa
-sed 's§"CONFIG_TEMPLATE_DIR", "../contrib/"§"CONFIG_TEMPLATE_DIR", "/usr/share/doc/gosa-%{version}/"§g' %{buildroot}/usr/share/gosa/include/functions.inc > %{buildroot}/usr/share/gosa/include/functions.inc.new
+sed 's§"CONFIG_TEMPLATE_DIR", "../contrib/"§"CONFIG_TEMPLATE_DIR", "%{docdir}/"§g' %{buildroot}/usr/share/gosa/include/functions.inc > %{buildroot}/usr/share/gosa/include/functions.inc.new
 mv -f %{buildroot}/usr/share/gosa/include/functions.inc.new %{buildroot}/usr/share/gosa/include/functions.inc
 mv -f doc manual
 mkdir -p %{buildroot}/etc/gosa/vacation
