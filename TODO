@@ -6,13 +6,12 @@ Things to fix before 2.4:
   - shared folders
   - Kolab disabled -> check. Check is_account!
 
-* Found bug with session filter of group dialog
-
-
 Target for 2.5:
 ===============
 
 * Complete PHP5 compliance
+
+* Remove smarty from SVN. It has an own repository.
 
 * Replace PHP IMAP module by self made module
 

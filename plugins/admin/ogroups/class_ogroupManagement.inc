@@ -75,11 +75,8 @@ class ogroupManagement extends plugin
     $smarty= get_smarty();
 
     /* Save data */
-    if (is_global("ogroupfilter")){
-      $ogroupfilter= get_global("ogroupfilter");
-    } else {
-      $ogroupfilter= array();
-    }
+    $ogroupfilter= get_global("ogroupfilter");
+
     foreach( array("depselect", "regex") as $type){
       if (isset($_POST[$type])){
         $ogroupfilter[$type]= $_POST[$type];

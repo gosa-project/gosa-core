@@ -129,13 +129,13 @@ class mailgroup extends plugin
     }
 
     /* Get global filter config */
-    if (!is_global("mailfilter")){
+    if (!is_global("gmailfilter")){
       $ui= get_userinfo();
       $base= get_base_from_people($ui->dn);
-      $mailfilter= array( "depselect"       => $base,
+      $gmailfilter= array( "depselect"       => $base,
           "muser"            => "",
           "regex"           => "*");
-      register_global("mailfilter", $mailfilter);
+      register_global("gmailfilter", $gmailfilter);
     }
 
     /* Load permissions */
@@ -300,10 +300,10 @@ class mailgroup extends plugin
       $ldap= $this->config->get_ldap_link();
 
       /* Save data */
-      $mailfilter= get_global("mailfilter");
+      $gmailfilter= get_global("gmailfilter");
       foreach( array("depselect", "muser", "regex") as $type){
         if (isset($_POST[$type])){
-          $mailfilter[$type]= $_POST[$type];
+          $gmailfilter[$type]= $_POST[$type];
         }
       }
       if (isset($_GET['search'])){
@@ -311,20 +311,20 @@ class mailgroup extends plugin
         if ($s == "**"){
           $s= "*";
         }
-        $mailfilter['regex']= $s;
+        $gmailfilter['regex']= $s;
       }
-      register_global("mailfilter", $mailfilter);
+      register_global("gmailfilter", $gmailfilter);
 
       /* Get actual list */
       $mailusers= array ();
-      if ($mailfilter['regex'] != '*' && $mailfilter['regex'] != ""){
-        $regex= $mailfilter['regex'];
+      if ($gmailfilter['regex'] != '*' && $gmailfilter['regex'] != ""){
+        $regex= $gmailfilter['regex'];
         $filter= "(|(mail=$regex)(gosaMailAlternateAddress=$regex))";
       } else {
         $filter= "";
       }
-      if ($mailfilter['muser'] != ""){
-        $user= $mailfilter['muser'];
+      if ($gmailfilter['muser'] != ""){
+        $user= $gmailfilter['muser'];
         $filter= "$filter(|(uid=$user)(cn=$user)(givenName=$user)(sn=$user))";
       }
 
@@ -338,8 +338,8 @@ class mailgroup extends plugin
       }
 
       $acl= array($this->config->current['BASE'] => ":all");
-      $res= get_list($acl, "(&(objectClass=gosaMailAccount)$filter)", TRUE, $mailfilter['depselect'], array("sn", "mail", "givenName"), TRUE);
-      $ldap->cd($mailfilter['depselect']);
+      $res= get_list($acl, "(&(objectClass=gosaMailAccount)$filter)", TRUE, $gmailfilter['depselect'], array("sn", "mail", "givenName"), TRUE);
+      $ldap->cd($gmailfilter['depselect']);
       $ldap->search ("(&(objectClass=gosaMailAccount)$filter)", array("sn", "mail", "givenName"));
       error_reporting (0);
       while ($attrs= $ldap->fetch()){
@@ -365,7 +365,7 @@ class mailgroup extends plugin
       $smarty->assign("alphabet", generate_alphabet());
       $smarty->assign("hint", print_sizelimit_warning());
       foreach( array("depselect", "muser", "regex") as $type){
-        $smarty->assign("$type", $mailfilter[$type]);
+        $smarty->assign("$type", $gmailfilter[$type]);
       }
       $smarty->assign("hint", print_sizelimit_warning());
       $display.= $smarty->fetch (get_template_path('mail_locals.tpl', TRUE));
