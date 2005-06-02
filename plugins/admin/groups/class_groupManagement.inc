@@ -57,7 +57,7 @@ class groupManagement extends plugin
   {
     /* Save data */
     $groupfilter= get_global("groupfilter");
-    if (isset($_POST['ignore'])){
+    if (!isset($this->grouptab)){
       foreach( array("depselect", "guser", "regex") as $type){
         if (isset($_POST[$type])){
           $groupfilter[$type]= $_POST[$type];
