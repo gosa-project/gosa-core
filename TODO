@@ -6,8 +6,6 @@ Things to fix before 2.4:
   - shared folders
   - Kolab disabled -> check. Check is_account!
 
-* set_error_handler seems not to work for PHP 4.1! 
-
 Target for 2.5:
 ===============
 

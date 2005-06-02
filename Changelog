@@ -1,5 +1,11 @@
 GOsa2 changelog
 ===============
+* gosa 2.4
+  - Fixed error handler to be PHP 4.x compatible
+  - Fixed PHP compatibility problem in setup.php, using ini_get()
+    instead of ini_get_all()
+  - Removed grey bar on top of the windows when no using 100% of
+    the browser window
 
 * gosa 2.4beta1
   - Override automatically detected user bases if they don't exist
