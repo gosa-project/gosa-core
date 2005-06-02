@@ -1557,52 +1557,54 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
     }
   }
  
-  /* Extract traceback data */
-  $trace= debug_backtrace();
-  
   /* Create error header */
   $error_collector.= "<table width=\"100%\" cellspacing=0 style='background-color:#402005;color:white;border:2px solid red'><tr><td colspan=3><h1 style='color:white'>"._("PHP error")." \"$errstr\"</h1></td></tr>";
   
-  /* Generate trace history */
-  for ($index= 1; $index<count($trace); $index++){
-    $ct= $trace[$index];
-    $loc= "";
-    if (isset($ct['class'])){
-      $loc.= _("class")." ".$ct['class'];
-      if (isset($ct['function'])){
-        $loc.= " / ";
-      }
-    }
-    if (isset($ct['function'])){
-      $loc.= _("function")." ".$ct['function'];
-    }
-    if (isset($ct['type'])){
-      switch ($ct['type']){
-        case "::":
-                $type= _("static");
-                break;
+  /* Extract traceback data - if available */
+  if (function_exists('debug_backtrace')){
+    $trace= debug_backtrace();
 
-        case "->":
-                $type= _("method");
-                break;
+    /* Generate trace history */
+    for ($index= 1; $index<count($trace); $index++){
+      $ct= $trace[$index];
+      $loc= "";
+      if (isset($ct['class'])){
+        $loc.= _("class")." ".$ct['class'];
+        if (isset($ct['function'])){
+          $loc.= " / ";
+        }
       }
-    } else {
-      $type= "-";
+      if (isset($ct['function'])){
+        $loc.= _("function")." ".$ct['function'];
+      }
+      if (isset($ct['type'])){
+        switch ($ct['type']){
+          case "::":
+            $type= _("static");
+          break;
+
+          case "->":
+            $type= _("method");
+          break;
+        }
+      } else {
+        $type= "-";
+      }
+      $args= "";
+      foreach ($ct['args'] as $arg){
+        $args.= htmlentities("\"$arg\", ");
+      }
+      $args= preg_replace("/, $/", "", $args);
+      if ($args == ""){
+        $args= "-";
+      }
+      $file= $ct['file'];
+      $line= $ct['line'];
+      $color= ($index&1)?'#404040':'606060';
+      $error_collector.= "<tr style='background-color:$color'><td style='padding-left:20px' width=\"30%\">"._("Trace")."[$index]: $loc</td>";
+      $error_collector.= "<td>"._("File").": $file ("._('Line')." $line)</td><td width=\"10%\">"._("Type").": $type</td></tr>";
+      $error_collector.= "<tr style='background-color:$color'><td colspan=3 style='padding-left:20px;'>"._("Arguments").": $args</td></tr>";
     }
-    $args= "";
-    foreach ($ct['args'] as $arg){
-      $args.= htmlentities("\"$arg\", ");
-    }
-    $args= preg_replace("/, $/", "", $args);
-    if ($args == ""){
-      $args= "-";
-    }
-    $file= $ct['file'];
-    $line= $ct['line'];
-    $color= ($index&1)?'#404040':'606060';
-    $error_collector.= "<tr style='background-color:$color'><td style='padding-left:20px' width=\"30%\">"._("Trace")."[$index]: $loc</td>";
-    $error_collector.= "<td>"._("File").": $file ("._('Line')." $line)</td><td width=\"10%\">"._("Type").": $type</td></tr>";
-    $error_collector.= "<tr style='background-color:$color'><td colspan=3 style='padding-left:20px;'>"._("Arguments").": $args</td></tr>";
   }
 
   /* Close error table */
