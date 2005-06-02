@@ -1,3 +1,4 @@
+<body style="background-color: #8B858B;background-image:none;">
 {* GOsa login - smarty template *}
 {$php_errors}
 {$errors}
@@ -76,3 +77,4 @@
 
 <!-- Spacer for some browsers -->
 <div class='gosaLoginSpacer'></div>
+</body>
