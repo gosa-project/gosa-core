@@ -82,6 +82,8 @@ if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))){
   exit();
 }
 
+/* Check for old files in compile directory */
+clean_smarty_compile_dir($smarty->compile_dir);
 
 /* Language setup */
 if ($config->data['MAIN']['LANG'] == ""){

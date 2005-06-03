@@ -22,6 +22,10 @@
 define ("CONFIG_DIR", "/etc/gosa");
 define ("CONFIG_TEMPLATE_DIR", "../contrib/");
 
+/* Define globals for revision comparing */
+$svn_path = '$HeadURL$';
+$svn_revision = '$Revision$';
+
 /* Include required files */
 require_once ("class_ldap.inc");
 require_once ("class_config.inc");
@@ -1497,9 +1501,7 @@ function validate($string)
 
 function get_gosa_version()
 {
-  /* Variables filled in by subversion */
-  $svn_path = '$HeadURL$';
-  $svn_revision = '$Revision$';
+  global $svn_revision, $svn_path;
 
   /* Extract informations */
   $revision= preg_replace('/^[^0-9]*([0-9]+)[^0-9]*$/', '\1', $svn_revision);
@@ -1622,22 +1624,92 @@ function dummy_error_handler()
 
 function clean_smarty_compile_dir($directory)
 {
-  $svn_revision = '$Revision$';
+  global $svn_revision;
 
-  /* Is there a stamp containing the current revision? */
-  # check for "$config->...['CONFIG']/revision" and the
-  # contents should match the revision number
+  if(is_dir($directory) && is_readable($directory)) {
+    // Set revision filename to REVISION
+    $revision_file= $directory."/REVISION";
 
+    /* Is there a stamp containing the current revision? */
+    if(!file_exists($revision_file)) {
+      // create revision file
+      create_revision($revision_file, $svn_revision);
+    } else {
+      # check for "$config->...['CONFIG']/revision" and the
+      # contents should match the revision number
+      if(!compare_revision($revision_file, $svn_revision)){
+        // If revision differs, clean compile directory
+        foreach(scandir($directory) as $file) {
+          if(!is_link($file) && is_writable($file)) {
+            // delete file
+            if(!unlink($file)) {
+              // This should never be reached
+            }
+          }
+        }
+      }
+    }
+  }
+
+  
   /* No, the revision has changed - and possibly the templates/translations.
      Drop the contents of $directory now... */
-  if (true){
+  //if (true){
+
+    // foreach($files as $file) {
+    //   if(!is_link($file) && is_writable($file)) {
+    //     // Delete File
+    //     if(!unlink($file)){
+    //       // File could not be deleted
+    //     }
+    //   }
+    // }
     # Recursively delete contents "$config->...['CONFIG']". and create
     #  new revision file. NO folow symlinks!!!
-    ;
-  }
+  //  ;
+  //}
   
 }
 
+function create_revision($revision_file, $revision)
+{
+  $result= false;
+  
+  if(is_dir(dirname($revision_file)) && is_writable(dirname($revision_file))) {
+    if($fh= fopen($revision_file, "w")) {
+      if(fwrite($fh, $revision)) {
+        $result= true;
+      }
+    }
+    fclose($fh);
+  } else {
+    // Can not write to file
+  }
+
+  return $result;
+}
+
+function compare_revision($revision_file, $revision)
+{
+  // false means revision differs
+  $result= false;
+  
+  if(file_exists($revision_file) && is_readable($revision_file)) {
+    // Open file
+    if($fh= fopen($revision_file, "r")) {
+      // Compare File contents with current revision
+      if($revision == fread($fh, filesize($revision_file))) {
+        $result= true;
+      }
+    } else {
+      print_red("Can not open revision file");
+    }
+    // Close file
+    fclose($fh);
+  }
+
+  return $result;
+}
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
