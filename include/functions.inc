@@ -1621,6 +1621,18 @@ function dummy_error_handler()
 {
 }
 
+function rmdirRecursive($path, $followLinks=false) {
+  $dir= opendir($path);
+  while($entry= readdir($dir)) {
+    if(is_file($path."/".$entry) || ((!$followLinks) && is_link($path."/".$entry))) {
+      unlink($path."/".$entry);
+    } elseif (is_dir($path."/".$entry) && $entry!='.' && $entry!='..') {
+      rmdirRecursive($path."/".$entry);
+    }
+  }
+  closedir($dir);
+  return rmdir($path);
+}
 
 function clean_smarty_compile_dir($directory)
 {
@@ -1646,8 +1658,14 @@ function clean_smarty_compile_dir($directory)
               if(!unlink($directory."/".$file)) {
                 // This should never be reached
               }
+          } elseif(is_dir($directory."/".$file) &&
+                    is_writable($directory."/".$file)) {
+                    // Just recursively delete it
+             rmdirRecursive($directory."/".$file);
           }
         }
+        // We should now create a fresh revision file
+        clean_smarty_compile_dir($directory);
       } else {
         // Revision matches, nothing to do
       }
