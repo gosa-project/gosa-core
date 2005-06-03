@@ -1614,9 +1614,30 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
   gosa_log ("PHP error: $errstr ($errfile, line $errline)");
 }
 
+
 function dummy_error_handler()
 {
 }
+
+
+function clean_smarty_compile_dir($directory)
+{
+  $svn_revision = '$Revision$';
+
+  /* Is there a stamp containing the current revision? */
+  # check for "$config->...['CONFIG']/revision" and the
+  # contents should match the revision number
+
+  /* No, the revision has changed - and possibly the templates/translations.
+     Drop the contents of $directory now... */
+  if (true){
+    # Recursively delete contents "$config->...['CONFIG']". and create
+    #  new revision file. NO folow symlinks!!!
+    ;
+  }
+  
+}
+
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
