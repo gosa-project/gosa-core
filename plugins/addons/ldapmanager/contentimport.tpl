@@ -25,10 +25,6 @@
 	</td>
 </tr>
 <tr>
-	<td height="20">
-	</td>
-</tr>
-<tr>
    	<td>
 		&nbsp;
    	</td>
