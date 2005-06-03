@@ -1640,35 +1640,22 @@ function clean_smarty_compile_dir($directory)
       if(!compare_revision($revision_file, $svn_revision)){
         // If revision differs, clean compile directory
         foreach(scandir($directory) as $file) {
-          if(!is_link($file) && is_writable($file)) {
-            // delete file
-            if(!unlink($file)) {
-              // This should never be reached
-            }
+          if( is_file($directory."/".$file) &&
+              is_writable($directory."/".$file)) {
+              // delete file
+              if(!unlink($directory."/".$file)) {
+                // This should never be reached
+              }
           }
         }
+      } else {
+        // Revision matches, nothing to do
       }
     }
+  } else {
+    // Smarty compile dir is not accessible
+    // (Smarty will warn about this)
   }
-
-  
-  /* No, the revision has changed - and possibly the templates/translations.
-     Drop the contents of $directory now... */
-  //if (true){
-
-    // foreach($files as $file) {
-    //   if(!is_link($file) && is_writable($file)) {
-    //     // Delete File
-    //     if(!unlink($file)){
-    //       // File could not be deleted
-    //     }
-    //   }
-    // }
-    # Recursively delete contents "$config->...['CONFIG']". and create
-    #  new revision file. NO folow symlinks!!!
-  //  ;
-  //}
-  
 }
 
 function create_revision($revision_file, $revision)
