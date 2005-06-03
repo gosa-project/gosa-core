@@ -15,7 +15,7 @@ msgstr ""
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: contrib/gosa.conf:4
 msgid "My account"
@@ -500,12 +500,12 @@ msgstr "schaltet alle übrigen Mail-Einstellungen aus!"
 #: plugins/personal/connectivity/main.inc:116
 #: plugins/gofax/blocklists/generic.tpl:74
 #: plugins/gofax/faxaccount/main.inc:89
-#: plugins/admin/groups/class_groupManagement.inc:257
+#: plugins/admin/groups/class_groupManagement.inc:259
 #: plugins/admin/users/class_userManagement.inc:505
 #: plugins/admin/applications/class_applicationManagement.inc:239
 #: plugins/admin/departments/class_departmentManagement.inc:228
 #: plugins/admin/systems/class_systemManagement.inc:440
-#: plugins/admin/ogroups/class_ogroupManagement.inc:274
+#: plugins/admin/ogroups/class_ogroupManagement.inc:271
 #: plugins/gofon/phoneaccount/main.inc:104
 msgid "Finish"
 msgstr "Speichern"
@@ -527,7 +527,7 @@ msgstr "Speichern"
 #: plugins/addons/addressbook/dial.tpl:10
 #: plugins/addons/addressbook/address_edit.tpl:108
 #: plugins/addons/addressbook/remove.tpl:17
-#: plugins/admin/groups/class_groupManagement.inc:259
+#: plugins/admin/groups/class_groupManagement.inc:261
 #: plugins/admin/groups/remove.tpl:17
 #: plugins/admin/groups/application_options.tpl:10
 #: plugins/admin/groups/group_objects.tpl:41
@@ -543,7 +543,7 @@ msgstr "Speichern"
 #: plugins/admin/systems/remove.tpl:17 plugins/admin/systems/password.tpl:27
 #: plugins/admin/systems/chooser.tpl:18
 #: plugins/admin/ogroups/ogroup_objects.tpl:52
-#: plugins/admin/ogroups/class_ogroupManagement.inc:276
+#: plugins/admin/ogroups/class_ogroupManagement.inc:273
 #: plugins/admin/ogroups/remove.tpl:17 plugins/gofon/phoneaccount/main.inc:106
 #: ihtml/themes/altlinux/islocked.tpl:15 ihtml/themes/default/islocked.tpl:15
 msgid "Cancel"
@@ -631,9 +631,9 @@ msgstr "Benutzername, dessen Adressen angezeigt werden"
 #: plugins/personal/password/class_password.inc:5
 #: plugins/admin/systems/servdb.tpl:18 plugins/admin/systems/servdb.tpl:34
 #: plugins/admin/systems/servdb.tpl:50 plugins/admin/systems/servdb.tpl:86
-#: plugins/admin/systems/servdb.tpl:109 ihtml/themes/altlinux/login.tpl:34
-#: ihtml/themes/altlinux/login.tpl:38 ihtml/themes/default/login.tpl:34
-#: ihtml/themes/default/login.tpl:38
+#: plugins/admin/systems/servdb.tpl:109 ihtml/themes/altlinux/login.tpl:35
+#: ihtml/themes/altlinux/login.tpl:39 ihtml/themes/default/login.tpl:35
+#: ihtml/themes/default/login.tpl:39
 #: ihtml/themes/default/setup_useradmin.tpl:30
 msgid "Password"
 msgstr "Passwort"
@@ -2231,7 +2231,7 @@ msgstr "Wählen Sie den Teilbaum, in den die Sperrliste plaziert werden soll."
 
 #: plugins/gofax/blocklists/generic.tpl:31
 #: plugins/admin/systems/service.tpl:42 plugins/admin/systems/service.tpl:120
-#: include/functions.inc:1599
+#: include/functions.inc:1605
 msgid "Type"
 msgstr "Typ"
 
@@ -3348,13 +3348,13 @@ msgstr "Gruppenverwaltung"
 msgid "Groups"
 msgstr "Gruppen"
 
-#: plugins/admin/groups/class_groupManagement.inc:202
+#: plugins/admin/groups/class_groupManagement.inc:204
 #, php-format
 msgid "You're about to delete the group '%s'."
 msgstr "Sie sind dabei die Gruppe '%s' zu löschen."
 
-#: plugins/admin/groups/class_groupManagement.inc:208
-#: plugins/admin/groups/class_groupManagement.inc:234
+#: plugins/admin/groups/class_groupManagement.inc:210
+#: plugins/admin/groups/class_groupManagement.inc:236
 msgid "You are not allowed to delete this group!"
 msgstr "Es ist Ihnen nicht erlaubt, diese Gruppe zu löschen!"
 
@@ -4541,6 +4541,20 @@ msgstr "Drucker URL"
 msgid "Path to PPD"
 msgstr "Pfad zum PPD"
 
+#: plugins/admin/systems/class_workstationGeneric.inc:136
+msgid "This 'dn' has no workstation features."
+msgstr "Dieser 'DN' hat keine Arbeitsstations-Erweiterungen."
+
+#: plugins/admin/systems/class_workstationGeneric.inc:225
+msgid "You have no permissions to create a workstation on this 'Base'."
+msgstr ""
+"Sie haben keine Berechtigung eine Arbeitsstation unter dieser 'Basis' "
+"anzulegen."
+
+#: plugins/admin/systems/class_workstationGeneric.inc:229
+msgid "The required field 'Workstation name' is not set."
+msgstr "Das benötigte Feld 'Arbeiststationsname' ist nicht gesetzt."
+
 #: plugins/admin/systems/class_systemManagement.inc:32
 msgid "Systems"
 msgstr "Systeme"
@@ -4585,20 +4599,6 @@ msgstr "Thin-Client-Vorlage für"
 #: plugins/admin/systems/class_systemManagement.inc:675
 msgid "Workstation template for"
 msgstr "Arbeitsstations-Vorlage für"
-
-#: plugins/admin/systems/class_workstationGeneric.inc:136
-msgid "This 'dn' has no workstation features."
-msgstr "Dieser 'DN' hat keine Arbeitsstations-Erweiterungen."
-
-#: plugins/admin/systems/class_workstationGeneric.inc:225
-msgid "You have no permissions to create a workstation on this 'Base'."
-msgstr ""
-"Sie haben keine Berechtigung eine Arbeitsstation unter dieser 'Basis' "
-"anzulegen."
-
-#: plugins/admin/systems/class_workstationGeneric.inc:229
-msgid "The required field 'Workstation name' is not set."
-msgstr "Das benötigte Feld 'Arbeiststationsname' ist nicht gesetzt."
 
 #: plugins/admin/systems/class_printGeneric.inc:57
 msgid "This 'dn' has no printer features."
@@ -4699,6 +4699,143 @@ msgstr "Protokoll-Datenbank"
 #: plugins/admin/systems/servdb.tpl:104
 msgid "Logging DB user"
 msgstr "Protokoll-DB Benutzer"
+
+#: plugins/admin/systems/class_servKolab.inc:88
+msgid "Remove Kolab extension"
+msgstr "Kolab Erweiterung entfernen"
+
+#: plugins/admin/systems/class_servKolab.inc:88
+msgid ""
+"This server has kolab features enabled. You can disable them by clicking "
+"below."
+msgstr ""
+"Dieser Server hat die Kolab-Funtionen aktiviert. Sie können diese durch "
+"einen Klick auf die Schaltfläche unten deaktivieren."
+
+#: plugins/admin/systems/class_servKolab.inc:91
+msgid "Add Kolab service"
+msgstr "Kolab Dienst hinzufügen"
+
+#: plugins/admin/systems/class_servKolab.inc:91
+msgid ""
+"This server has kolab features disabled. You can enable them by clicking "
+"below."
+msgstr ""
+"Aktuell hat dieser Server keine Kolab-Funktionen aktiviert. Sie können diese "
+"durch einen Klick auf die Schaltfläche unten aktivieren."
+
+#: plugins/admin/systems/class_servKolab.inc:119
+#, php-format
+msgid "Include data from %s days in the past when creating free/busy lists"
+msgstr ""
+"Berücksichtige %s Tage in der Vergangenheit beim Erstellen von Frei/Belegt-"
+"Listen"
+
+#: plugins/admin/systems/class_servKolab.inc:125
+#, php-format
+msgid "Warn users when using more than %s%% of their mail quota"
+msgstr "Warne Benutzer, wenn sie mehr als %s%% ihres Mail-Kontigentes benutzen"
+
+#: plugins/admin/systems/class_servKolab.inc:197
+msgid "Future days in Free/Busy settings must be set."
+msgstr "Intervall für Frei/Belegt-Informationen muß gesetzt sein."
+
+#: plugins/admin/systems/class_servKolab.inc:199
+msgid "Future days in Free/Busy settings must be a positive value."
+msgstr "Intervall für Frei/Belegt-Informationen muß ein positiver Wert sein."
+
+#: plugins/admin/systems/class_servKolab.inc:203
+msgid "The given Quota settings value must be a number."
+msgstr "Der angegebene Kontingent-Wert muß numerisch sein."
+
+#: plugins/admin/systems/class_servKolab.inc:205
+msgid "Please choose a value between 1 and 100 for Quota settings."
+msgstr "Bitte wählen Sie einen Kontingent-Wert zwischen 1 und 100."
+
+#: plugins/admin/systems/class_servKolab.inc:207
+msgid "Future days must be a value."
+msgstr "Frei/Belegt-Intervall muß einen Wert besitzen."
+
+#: plugins/admin/systems/class_servKolab.inc:211
+msgid "No SMTP privileged networks set."
+msgstr "Es sind keine SMTP privilegierte Netzwerke vorhanden."
+
+#: plugins/admin/systems/class_servKolab.inc:215
+msgid "No SMTP smarthost/relayhost set."
+msgstr "Es ist kein SMTP smarthost/relayhost gesetzt."
+
+#: plugins/admin/systems/servkolab.tpl:14
+msgid "POP3 service"
+msgstr "POP3 Dienst"
+
+#: plugins/admin/systems/servkolab.tpl:22
+msgid "POP3/SSL service"
+msgstr "POP3/SSL Dienst"
+
+#: plugins/admin/systems/servkolab.tpl:30
+msgid "IMAP service"
+msgstr "IMAP Dienst"
+
+#: plugins/admin/systems/servkolab.tpl:38
+msgid "IMAP/SSL service"
+msgstr "IMAP/SSL Dienst"
+
+#: plugins/admin/systems/servkolab.tpl:46
+msgid "Sieve service"
+msgstr "Sieve Dienst"
+
+#: plugins/admin/systems/servkolab.tpl:54
+msgid "FTP FreeBusy service (legacy, not interoperable with Kolab2 FreeBusy)"
+msgstr "FTP Frei/Belegt-Dienst (alt, inkompatibel mit Kolab 2)"
+
+#: plugins/admin/systems/servkolab.tpl:62
+msgid "HTTP FreeBusy service (legacy)"
+msgstr "HTTP Frei/Belegt-Dienst (alt)"
+
+#: plugins/admin/systems/servkolab.tpl:70
+msgid "Amavis email scanning (virus/spam)"
+msgstr "Email Scannen (Virus/Spam)"
+
+#: plugins/admin/systems/servkolab.tpl:81
+msgid "Quota settings"
+msgstr "Kontingent-Einstellungen"
+
+#: plugins/admin/systems/servkolab.tpl:97
+msgid "Free/Busy settings"
+msgstr "Frei/Belegt-Einstellungen"
+
+#: plugins/admin/systems/servkolab.tpl:102
+msgid "Allow unauthenticated downloading of Free/Busy information"
+msgstr ""
+"Erlaube nicht-authentifiziertes Herunterladen von Frei/Belegt-Informationen"
+
+#: plugins/admin/systems/servkolab.tpl:117
+msgid "SMTP privileged networks"
+msgstr "SMTP privilegierte Netzwerke"
+
+#: plugins/admin/systems/servkolab.tpl:122
+msgid "Hosts/networks allowed to relay"
+msgstr "Rechner/Netzwerke denen Weiterleitung erlaubt ist"
+
+#: plugins/admin/systems/servkolab.tpl:136
+msgid "SMTP smarthost/relayhost"
+msgstr "SMTP smarthost/relayhost"
+
+#: plugins/admin/systems/servkolab.tpl:142
+msgid "Enable MX lookup for relayhost"
+msgstr "Aktiviere MX lookup für relayhost"
+
+#: plugins/admin/systems/servkolab.tpl:147
+msgid "Host used to relay mails"
+msgstr "Host für Mail Relay"
+
+#: plugins/admin/systems/servkolab.tpl:161
+msgid "Accept Internet Mail"
+msgstr "Akzeptiere Internet Mail"
+
+#: plugins/admin/systems/servkolab.tpl:167
+msgid "Accept mail from other domains over non-authenticated SMTP"
+msgstr "Akzeptiere Mails von anderen Domänen über nicht-authentifiziertes SMTP"
 
 #: plugins/admin/systems/wingeneric.tpl:6
 msgid "Machine name"
@@ -4972,6 +5109,77 @@ msgstr "Bilderfassungsdienste bereitstellen"
 msgid "Select scanner driver to use"
 msgstr "Wählen Sie den Scanner-Treiber, der benutzt werden soll"
 
+#: plugins/admin/systems/password.tpl:2
+msgid ""
+"To change the terminal root password use the fields below. The changes take "
+"effect during next reboot. Please memorize the new password, because the you "
+"would't be able to log in. <b>Leave fields blank for password inheritance "
+"from default entries.</b>"
+msgstr ""
+"Um das Terminal Verwalter-Passwort zu ändern, benutzen Sie die unteren "
+"Felder. Die Veränderungen werden während des nächsten Starts des Terminals "
+"wirksam. Bitte merken Sie sich dieses Passwort, da Sie sonst nicht in der "
+"Lage sein werden, sich am entsprechenden System anzumelden. <b>Lassen Sie "
+"das Feld leer, um das Passwort von den Standard-Einstellungen zu übernehmen."
+"</b>"
+
+#: plugins/admin/systems/password.tpl:6
+msgid "Changing the password impinges on authentification only."
+msgstr ""
+"Das Ändern des Passwortes wirkt sich nur auf die Authentifizierung aus."
+
+#: plugins/admin/systems/component.tpl:6
+msgid "Device name"
+msgstr "Gerätename"
+
+#: plugins/admin/systems/chooser.tpl:1
+msgid "Choose the kind of system component you want to create"
+msgstr "Wählen Sie die Art der System-Komponente die Sie anlegen möchten"
+
+#: plugins/admin/systems/chooser.tpl:4
+msgid ""
+"Linux terminals and workstations are autocreated on bootup. For this reason "
+"you're only be able to create templates for a specific tree. Servers are "
+"normally automatically added too, but in some special cases you may need to "
+"create a faked server entry to provide GOsa with some informations. Other "
+"network components may be used for Nagios setups to create component "
+"dependencies."
+msgstr ""
+"Linux Terminals und Arbeitsstationen werden beim Systemstart automatisch "
+"hinzugefügt. Aus diesem Grund können Sie für diese Systemtypen nur Vorlagen "
+"für einen Unterbaum anelgen. Server werden ebenfalls automatisch "
+"hinzugefügt, in einigen Fällen benötigen Sie Pseudo-Einträge um GOsa mit "
+"benötigten Informationen zu versorgen. Weitere Netzwerk-Komponenten können z."
+"B. für Nagios Umgebungen genutzt werden um die Abhängigkeiten aufzulösen."
+
+#: plugins/admin/systems/chooser.tpl:7
+msgid "Linux thin client template"
+msgstr "Linux Thin-Client Vorlage"
+
+#: plugins/admin/systems/chooser.tpl:8
+msgid "Linux workstation template"
+msgstr "Linux Arbeitsstations-Vorlage"
+
+#: plugins/admin/systems/chooser.tpl:9
+msgid "Linux Server"
+msgstr "Linux Server"
+
+#: plugins/admin/systems/chooser.tpl:10
+msgid "Windows workstation"
+msgstr "Windows Arbeitsstation"
+
+#: plugins/admin/systems/chooser.tpl:11
+msgid "Network printer"
+msgstr "Netzwerk-Drucker"
+
+#: plugins/admin/systems/chooser.tpl:13
+msgid "Other network component"
+msgstr "Andere Netzwerk-Komponente"
+
+#: plugins/admin/systems/chooser.tpl:16
+msgid "Create"
+msgstr "Anlegen"
+
 #: plugins/admin/systems/startup.tpl:1
 msgid "Boot parameters"
 msgstr "Boot-Parameter"
@@ -5057,77 +5265,6 @@ msgid "Add additional filesystems to be mounted during startup"
 msgstr ""
 "Zusätzliche Dateisysteme hinzufügen, die während des Starts gemountet werden"
 
-#: plugins/admin/systems/password.tpl:2
-msgid ""
-"To change the terminal root password use the fields below. The changes take "
-"effect during next reboot. Please memorize the new password, because the you "
-"would't be able to log in. <b>Leave fields blank for password inheritance "
-"from default entries.</b>"
-msgstr ""
-"Um das Terminal Verwalter-Passwort zu ändern, benutzen Sie die unteren "
-"Felder. Die Veränderungen werden während des nächsten Starts des Terminals "
-"wirksam. Bitte merken Sie sich dieses Passwort, da Sie sonst nicht in der "
-"Lage sein werden, sich am entsprechenden System anzumelden. <b>Lassen Sie "
-"das Feld leer, um das Passwort von den Standard-Einstellungen zu übernehmen."
-"</b>"
-
-#: plugins/admin/systems/password.tpl:6
-msgid "Changing the password impinges on authentification only."
-msgstr ""
-"Das Ändern des Passwortes wirkt sich nur auf die Authentifizierung aus."
-
-#: plugins/admin/systems/component.tpl:6
-msgid "Device name"
-msgstr "Gerätename"
-
-#: plugins/admin/systems/chooser.tpl:1
-msgid "Choose the kind of system component you want to create"
-msgstr "Wählen Sie die Art der System-Komponente die Sie anlegen möchten"
-
-#: plugins/admin/systems/chooser.tpl:4
-msgid ""
-"Linux terminals and workstations are autocreated on bootup. For this reason "
-"you're only be able to create templates for a specific tree. Servers are "
-"normally automatically added too, but in some special cases you may need to "
-"create a faked server entry to provide GOsa with some informations. Other "
-"network components may be used for Nagios setups to create component "
-"dependencies."
-msgstr ""
-"Linux Terminals und Arbeitsstationen werden beim Systemstart automatisch "
-"hinzugefügt. Aus diesem Grund können Sie für diese Systemtypen nur Vorlagen "
-"für einen Unterbaum anelgen. Server werden ebenfalls automatisch "
-"hinzugefügt, in einigen Fällen benötigen Sie Pseudo-Einträge um GOsa mit "
-"benötigten Informationen zu versorgen. Weitere Netzwerk-Komponenten können z."
-"B. für Nagios Umgebungen genutzt werden um die Abhängigkeiten aufzulösen."
-
-#: plugins/admin/systems/chooser.tpl:7
-msgid "Linux thin client template"
-msgstr "Linux Thin-Client Vorlage"
-
-#: plugins/admin/systems/chooser.tpl:8
-msgid "Linux workstation template"
-msgstr "Linux Arbeitsstations-Vorlage"
-
-#: plugins/admin/systems/chooser.tpl:9
-msgid "Linux Server"
-msgstr "Linux Server"
-
-#: plugins/admin/systems/chooser.tpl:10
-msgid "Windows workstation"
-msgstr "Windows Arbeitsstation"
-
-#: plugins/admin/systems/chooser.tpl:11
-msgid "Network printer"
-msgstr "Netzwerk-Drucker"
-
-#: plugins/admin/systems/chooser.tpl:13
-msgid "Other network component"
-msgstr "Andere Netzwerk-Komponente"
-
-#: plugins/admin/systems/chooser.tpl:16
-msgid "Create"
-msgstr "Anlegen"
-
 #: plugins/admin/systems/class_phoneGeneric.inc:48
 msgid "This 'dn' has no phone features."
 msgstr "Diese 'dn' hat keine Telefon-Erweiterungen."
@@ -5144,143 +5281,6 @@ msgstr "Der Telefon-Name '0' ist reserviert und kann nicht verwendet werden."
 msgid "You have no permissions to create a phone on this 'Base'."
 msgstr ""
 "Sie haben keine Berechtigung, ein Telefon unterhalb dieser 'Basis' anzulegen."
-
-#: plugins/admin/systems/class_servKolab.inc:88
-msgid "Remove Kolab extension"
-msgstr "Kolab Erweiterung entfernen"
-
-#: plugins/admin/systems/class_servKolab.inc:88
-msgid ""
-"This server has kolab features enabled. You can disable them by clicking "
-"below."
-msgstr ""
-"Dieser Server hat die Kolab-Funtionen aktiviert. Sie können diese durch "
-"einen Klick auf die Schaltfläche unten deaktivieren."
-
-#: plugins/admin/systems/class_servKolab.inc:91
-msgid "Add Kolab service"
-msgstr "Kolab Dienst hinzufügen"
-
-#: plugins/admin/systems/class_servKolab.inc:91
-msgid ""
-"This server has kolab features disabled. You can enable them by clicking "
-"below."
-msgstr ""
-"Aktuell hat dieser Server keine Kolab-Funktionen aktiviert. Sie können diese "
-"durch einen Klick auf die Schaltfläche unten aktivieren."
-
-#: plugins/admin/systems/class_servKolab.inc:119
-#, php-format
-msgid "Include data from %s days in the past when creating free/busy lists"
-msgstr ""
-"Berücksichtige %s Tage in der Vergangenheit beim Erstellen von Frei/Belegt-"
-"Listen"
-
-#: plugins/admin/systems/class_servKolab.inc:125
-#, php-format
-msgid "Warn users when using more than %s%% of their mail quota"
-msgstr "Warne Benutzer, wenn sie mehr als %s%% ihres Mail-Kontigentes benutzen"
-
-#: plugins/admin/systems/class_servKolab.inc:197
-msgid "Future days in Free/Busy settings must be set."
-msgstr "Intervall für Frei/Belegt-Informationen muß gesetzt sein."
-
-#: plugins/admin/systems/class_servKolab.inc:199
-msgid "Future days in Free/Busy settings must be a positive value."
-msgstr "Intervall für Frei/Belegt-Informationen muß ein positiver Wert sein."
-
-#: plugins/admin/systems/class_servKolab.inc:203
-msgid "The given Quota settings value must be a number."
-msgstr "Der angegebene Kontingent-Wert muß numerisch sein."
-
-#: plugins/admin/systems/class_servKolab.inc:205
-msgid "Please choose a value between 1 and 100 for Quota settings."
-msgstr "Bitte wählen Sie einen Kontingent-Wert zwischen 1 und 100."
-
-#: plugins/admin/systems/class_servKolab.inc:207
-msgid "Future days must be a value."
-msgstr "Frei/Belegt-Intervall muß einen Wert besitzen."
-
-#: plugins/admin/systems/class_servKolab.inc:211
-msgid "No SMTP privileged networks set."
-msgstr "Es sind keine SMTP privilegierte Netzwerke vorhanden."
-
-#: plugins/admin/systems/class_servKolab.inc:215
-msgid "No SMTP smarthost/relayhost set."
-msgstr "Es ist kein SMTP smarthost/relayhost gesetzt."
-
-#: plugins/admin/systems/servkolab.tpl:14
-msgid "POP3 service"
-msgstr "POP3 Dienst"
-
-#: plugins/admin/systems/servkolab.tpl:22
-msgid "POP3/SSL service"
-msgstr "POP3/SSL Dienst"
-
-#: plugins/admin/systems/servkolab.tpl:30
-msgid "IMAP service"
-msgstr "IMAP Dienst"
-
-#: plugins/admin/systems/servkolab.tpl:38
-msgid "IMAP/SSL service"
-msgstr "IMAP/SSL Dienst"
-
-#: plugins/admin/systems/servkolab.tpl:46
-msgid "Sieve service"
-msgstr "Sieve Dienst"
-
-#: plugins/admin/systems/servkolab.tpl:54
-msgid "FTP FreeBusy service (legacy, not interoperable with Kolab2 FreeBusy)"
-msgstr "FTP Frei/Belegt-Dienst (alt, inkompatibel mit Kolab 2)"
-
-#: plugins/admin/systems/servkolab.tpl:62
-msgid "HTTP FreeBusy service (legacy)"
-msgstr "HTTP Frei/Belegt-Dienst (alt)"
-
-#: plugins/admin/systems/servkolab.tpl:70
-msgid "Amavis email scanning (virus/spam)"
-msgstr "Email Scannen (Virus/Spam)"
-
-#: plugins/admin/systems/servkolab.tpl:81
-msgid "Quota settings"
-msgstr "Kontingent-Einstellungen"
-
-#: plugins/admin/systems/servkolab.tpl:97
-msgid "Free/Busy settings"
-msgstr "Frei/Belegt-Einstellungen"
-
-#: plugins/admin/systems/servkolab.tpl:102
-msgid "Allow unauthenticated downloading of Free/Busy information"
-msgstr ""
-"Erlaube nicht-authentifiziertes Herunterladen von Frei/Belegt-Informationen"
-
-#: plugins/admin/systems/servkolab.tpl:117
-msgid "SMTP privileged networks"
-msgstr "SMTP privilegierte Netzwerke"
-
-#: plugins/admin/systems/servkolab.tpl:122
-msgid "Hosts/networks allowed to relay"
-msgstr "Rechner/Netzwerke denen Weiterleitung erlaubt ist"
-
-#: plugins/admin/systems/servkolab.tpl:136
-msgid "SMTP smarthost/relayhost"
-msgstr "SMTP smarthost/relayhost"
-
-#: plugins/admin/systems/servkolab.tpl:142
-msgid "Enable MX lookup for relayhost"
-msgstr "Aktiviere MX lookup für relayhost"
-
-#: plugins/admin/systems/servkolab.tpl:147
-msgid "Host used to relay mails"
-msgstr "Host für Mail Relay"
-
-#: plugins/admin/systems/servkolab.tpl:161
-msgid "Accept Internet Mail"
-msgstr "Akzeptiere Internet Mail"
-
-#: plugins/admin/systems/servkolab.tpl:167
-msgid "Accept mail from other domains over non-authenticated SMTP"
-msgstr "Akzeptiere Mails von anderen Domänen über nicht-authentifiziertes SMTP"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:19
 msgid "Terminals"
@@ -5455,13 +5455,13 @@ msgstr "Workstations"
 msgid "Printer"
 msgstr "Drucker"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:153
+#: plugins/admin/ogroups/class_ogroupManagement.inc:150
 #, php-format
 msgid "You're about to delete the object group '%s'."
 msgstr "Sie sind dabei die Objektgruppe '%s' zu löschen."
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:159
-#: plugins/admin/ogroups/class_ogroupManagement.inc:185
+#: plugins/admin/ogroups/class_ogroupManagement.inc:156
+#: plugins/admin/ogroups/class_ogroupManagement.inc:182
 msgid "You are not allowed to delete this object group!"
 msgstr "Es ist Ihnen nicht erlaubt, diese Objektgruppe zu löschen!"
 
@@ -5820,49 +5820,49 @@ msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "GOsa Entwicklerversion (Rev %s)"
 
-#: include/functions.inc:1551
+#: include/functions.inc:1556
 msgid "Generating this page caused the PHP interpreter to raise some errors!"
 msgstr ""
 "Der PHP-Interpreter meldete einen oder mehrere Fehler beim Erzeugen dieser "
 "Seite!"
 
-#: include/functions.inc:1551
+#: include/functions.inc:1556
 msgid "Toggle information"
 msgstr "Zeige/Verstecke Informationen"
 
-#: include/functions.inc:1559
+#: include/functions.inc:1561
 msgid "PHP error"
 msgstr "PHP Fehler"
 
-#: include/functions.inc:1566
+#: include/functions.inc:1572
 msgid "class"
 msgstr "Klasse"
 
-#: include/functions.inc:1572
+#: include/functions.inc:1578
 msgid "function"
 msgstr "Funktion"
 
-#: include/functions.inc:1577
+#: include/functions.inc:1583
 msgid "static"
 msgstr "statisch"
 
-#: include/functions.inc:1581
+#: include/functions.inc:1587
 msgid "method"
 msgstr "Methode"
 
-#: include/functions.inc:1598
+#: include/functions.inc:1604
 msgid "Trace"
 msgstr "Ablaufverfolgung"
 
-#: include/functions.inc:1599
+#: include/functions.inc:1605
 msgid "File"
 msgstr "Datei"
 
-#: include/functions.inc:1599
+#: include/functions.inc:1605
 msgid "Line"
 msgstr "Zeile"
 
-#: include/functions.inc:1600
+#: include/functions.inc:1606
 msgid "Arguments"
 msgstr "Argumente"
 
@@ -6117,21 +6117,30 @@ msgstr ""
 "GOsa benötigt dieses Modul für LDAP-Zugriffe, daher ist es unabkömmlich."
 
 #: include/setup_checks.inc:264
+#, fuzzy
+msgid "Checking for XML functions"
+msgstr "Prüfe auf iconv-Erweiterung"
+
+#: include/setup_checks.inc:265
+msgid "XML functions are required to parse the configuration file."
+msgstr ""
+
+#: include/setup_checks.inc:268
 msgid "Checking for gettext support"
 msgstr "Prüfe auf gettext-Erweiterung"
 
-#: include/setup_checks.inc:265
+#: include/setup_checks.inc:269
 msgid "Gettext support is required for internationalized GOsa."
 msgstr ""
 "Gettext-Unterstützung wird für Übersetzungen benötigt (Anmerkung des "
 "Übersetzers: Da Sie diese Meldung in deutsch lesen können, ist davon "
 "auszugehen, daß ihr PHP gettext-fähig ist)."
 
-#: include/setup_checks.inc:267
+#: include/setup_checks.inc:271
 msgid "Checking for iconv support"
 msgstr "Prüfe auf iconv-Erweiterung"
 
-#: include/setup_checks.inc:268
+#: include/setup_checks.inc:272
 msgid ""
 "This module is used by GOsa to convert samba munged dial informations and is "
 "therefore required."
@@ -6139,11 +6148,11 @@ msgstr ""
 "Dieses Modul wird von GOsa benutzt, um Informationen der samba-Erweiterung "
 "zu verarbeiten und wird daher benötigt."
 
-#: include/setup_checks.inc:271
+#: include/setup_checks.inc:275
 msgid "Checking for mhash module"
 msgstr "Suche mhash-Modul"
 
-#: include/setup_checks.inc:272
+#: include/setup_checks.inc:276
 msgid ""
 "To use SSHA encryption, you'll need this module. If you are just using crypt "
 "or md5 encryption, ignore this message. GOsa will run without it."
@@ -6151,11 +6160,11 @@ msgstr ""
 "Bei der Verwendung von speziellen Passwort-Verschlüsselungen (wie z.B. SSHA) "
 "wird dieses Modul benötigt. GOsa funktioniert auch ohne dieses Modul."
 
-#: include/setup_checks.inc:275
+#: include/setup_checks.inc:279
 msgid "Checking for imap module"
 msgstr "Suche IMAP-Modul"
 
-#: include/setup_checks.inc:276
+#: include/setup_checks.inc:280
 msgid ""
 "The IMAP module is needed to communicate with the IMAP server. It gets "
 "status informations, creates and deletes mail users."
@@ -6163,11 +6172,11 @@ msgstr ""
 "Das IMAP-Modul wird für die Kommunikation mit ihrem IMAP-Server benötigt. "
 "Dort können Benutzer verwaltet und Statusinformationen bezogen werden."
 
-#: include/setup_checks.inc:278
+#: include/setup_checks.inc:283
 msgid "Checking for getacl in imap"
 msgstr "Prüfe auf getacl im IMAP-Modul"
 
-#: include/setup_checks.inc:279
+#: include/setup_checks.inc:284
 msgid ""
 "The getacl support is needed for shared folder permissions. The standard "
 "IMAP module is not capable of reading acl's. You need a recend PHP version "
@@ -6178,20 +6187,20 @@ msgstr ""
 "Zugriffsregeln nicht. Sie benötigen entweder ein angepasstes oder ein recht "
 "aktuelles PHP um diese Funktion nutzen zu können."
 
-#: include/setup_checks.inc:281
+#: include/setup_checks.inc:287
 msgid "Checking for mysql module"
 msgstr "Suche MySQL-Modul"
 
-#: include/setup_checks.inc:282
+#: include/setup_checks.inc:288
 msgid "MySQL support is needed for reading GOfax reports from databases."
 msgstr ""
 "Das MySQL-Modul wird benötigt um FAX-Berichte anzuzeigen und auszuwerten."
 
-#: include/setup_checks.inc:284
+#: include/setup_checks.inc:291
 msgid "Checking for cups module"
 msgstr "Suche CUPS-Modul"
 
-#: include/setup_checks.inc:285
+#: include/setup_checks.inc:292
 msgid ""
 "In order to read available printers from IPP protocol instead of printcap "
 "files, you've to install the CUPS module."
@@ -6199,11 +6208,11 @@ msgstr ""
 "Falls Sie eine Liste der verfügbaren Drucker über IPP auslesen möchten, "
 "benötigen Sie dieses Modul. Anderenfalls wird die printcap-Datei ausgewertet."
 
-#: include/setup_checks.inc:287
+#: include/setup_checks.inc:295
 msgid "Checking for kadm5 module"
 msgstr "Suche kadm5-Modul"
 
-#: include/setup_checks.inc:288
+#: include/setup_checks.inc:296
 msgid ""
 "Managing users in kerberos requires the kadm5 module which is downloadable "
 "via PEAR network."
@@ -6211,48 +6220,48 @@ msgstr ""
 "Um Benutzer auch im Kerberos verwalten zu können, muß das kadm5-Modul "
 "installiert sein. Sie können es über das PEAR-Netzwerk beziehen."
 
-#: include/setup_checks.inc:290
+#: include/setup_checks.inc:299
 msgid "Checking for snmp Module"
 msgstr "Suche SNMP-Modul"
 
-#: include/setup_checks.inc:291
+#: include/setup_checks.inc:300
 msgid ""
 "Simple Network Management Protocol (SNMP) is required for client monitoring."
 msgstr ""
 "Simple Network Management Protocol (SNMP) wird zur Client-Überwachung "
 "benötigt."
 
-#: include/setup_checks.inc:300
+#: include/setup_checks.inc:309
 msgid "Checking for some additional programms"
 msgstr "Suche einige zusätzliche Programme"
 
-#: include/setup_checks.inc:309
+#: include/setup_checks.inc:318
 msgid "Checking for ImageMagick (>=5.4.0)"
 msgstr "Suche nach ImageMagick (>=5.4.0)"
 
-#: include/setup_checks.inc:310
+#: include/setup_checks.inc:319
 msgid ""
 "ImageMagick is used to convert user supplied images to fit the suggested "
 "size and the unified JPEG format."
 msgstr ""
 "ImageMagick wird für die Konvertierung von hochgeladenen Bildern verwendet."
 
-#: include/setup_checks.inc:313
+#: include/setup_checks.inc:322
 msgid "Checking imagick module for PHP"
 msgstr "Prüfe auf imagick Erweiterung"
 
-#: include/setup_checks.inc:314
+#: include/setup_checks.inc:323
 msgid ""
 "Imagick is used to convert user supplied images to fit the suggested size "
 "and the unified JPEG format from PHP script."
 msgstr ""
 "ImageMagick wird für die Konvertierung von hochgeladenen Bildern verwendet."
 
-#: include/setup_checks.inc:321
+#: include/setup_checks.inc:330
 msgid "Checking for fping utility"
 msgstr "Suche fping-Programm"
 
-#: include/setup_checks.inc:322
+#: include/setup_checks.inc:331
 msgid ""
 "The fping utility is only used if you've got a thin client based terminal "
 "environment running."
@@ -6260,11 +6269,11 @@ msgstr ""
 "Fping wird benötigt, um den Status von Thin-Client basierenden Terminal zu "
 "überwachen."
 
-#: include/setup_checks.inc:337
+#: include/setup_checks.inc:346
 msgid "Checking for a way to generate LM/NT password hashes"
 msgstr "Suche einen Weg um LM/NT Passwort-Hashes zu generieren"
 
-#: include/setup_checks.inc:338
+#: include/setup_checks.inc:347
 msgid ""
 "In order to use SAMBA 2/3, you've to install some additional packages to "
 "generate password hashes."
@@ -6272,11 +6281,11 @@ msgstr ""
 "Um Samba 2.x/3.x in Verbindung mit LDAP nutzen zu können, wird ein externes "
 "Programm benötigt, welches die Passwort-Hashes generieren kann."
 
-#: include/setup_checks.inc:353
+#: include/setup_checks.inc:360
 msgid "php.ini check -> session.auto_register"
 msgstr "php.ini Überprüfung -> session.auto_register"
 
-#: include/setup_checks.inc:354
+#: include/setup_checks.inc:361
 msgid ""
 "In Order to use GOsa without any trouble, the session.auto_register option "
 "in your php.ini must be set to 'Off'."
@@ -6284,11 +6293,11 @@ msgstr ""
 "Um GOsa fehlerfrei benutzen zu können, muß die Option session.auto_register "
 "in Ihrer php.ini auf 'off' stehen."
 
-#: include/setup_checks.inc:357
+#: include/setup_checks.inc:364
 msgid "php.ini check -> implicit_flush"
 msgstr "php.ini Überprüfung -> implicit_flush"
 
-#: include/setup_checks.inc:358
+#: include/setup_checks.inc:365
 msgid ""
 "This option influences the Output handling. Turn this Option off, to "
 "increase performance."
@@ -6296,11 +6305,11 @@ msgstr ""
 "Diese Einstellung beeinflusst die Verarbeitung der Ausgabe. Stellen Sie "
 "diese auf 'off', um die Leistung zu erhöhen."
 
-#: include/setup_checks.inc:365
+#: include/setup_checks.inc:372
 msgid "php.ini check -> max_execution_time"
 msgstr "php.ini Überprüfung -> max_execution_time"
 
-#: include/setup_checks.inc:366
+#: include/setup_checks.inc:373
 msgid ""
 "The Execution time should be at least 30 seconds, because some actions may "
 "consume more time."
@@ -6308,11 +6317,11 @@ msgstr ""
 "Die Ausführungszeit sollte mindestens 30 Sekunden betragen, da einige "
 "Aktionen viel Zeit in Anspruch nehmen."
 
-#: include/setup_checks.inc:373
+#: include/setup_checks.inc:380
 msgid "php.ini check -> memory_limit"
 msgstr "php.ini Überprüfung -> memory_limit"
 
-#: include/setup_checks.inc:374
+#: include/setup_checks.inc:381
 msgid ""
 "GOsa needs at least 16MB of memory, less will cause unpredictable errors! "
 "Increase it for larger setups."
@@ -6321,11 +6330,11 @@ msgstr ""
 "unvorhersehbare Probleme verursachen! Bei größeren Installationen sollte "
 "dieser Wert noch erweitert werden."
 
-#: include/setup_checks.inc:378
+#: include/setup_checks.inc:385
 msgid "php.ini check -> expose_php"
 msgstr "php.ini Überprüfung -> expose_php"
 
-#: include/setup_checks.inc:379
+#: include/setup_checks.inc:386
 msgid ""
 "Increase the server security by setting expose_php to 'off'. PHP won't send "
 "any Information about the server you are running in this case."
@@ -6334,11 +6343,11 @@ msgstr ""
 "setzen. PHP wird in dieser Einstellung keine Informationen über Ihren "
 "laufenden Server senden."
 
-#: include/setup_checks.inc:383
+#: include/setup_checks.inc:390
 msgid "php.ini check -> magic_quotes_gpc"
 msgstr "php.ini Überprüfung -> magic_quotes_gpc"
 
-#: include/setup_checks.inc:384
+#: include/setup_checks.inc:391
 msgid ""
 "Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
 "escape all quotes in strings in this case."
@@ -6346,11 +6355,11 @@ msgstr ""
 "Erhöhen Sie die Sicherheit des Server, indem sie magic_quotes_gpc auf 'on' "
 "stellen. PHP wird in dieser Einstellung alle 'quotes' in 'strings' umwandeln."
 
-#: include/setup_checks.inc:622
+#: include/setup_checks.inc:629
 msgid "You've to specify an ldap server before continuing!"
 msgstr "Sie müssen einen LDAP-Server angeben um fortzufahren!"
 
-#: include/setup_checks.inc:631 include/setup_checks.inc:713
+#: include/setup_checks.inc:638 include/setup_checks.inc:720
 msgid ""
 "Can't connect to the specified LDAP server! Please make sure that is "
 "reachable for GOsa."
@@ -6358,8 +6367,8 @@ msgstr ""
 "Kann den angegebenen LDAP-Server nicht erreichen! Bitte stellen Sie sicher, "
 "dass er für GOsa erreichbar ist."
 
-#: include/setup_checks.inc:645 include/setup_checks.inc:718
-#: include/setup_checks.inc:723
+#: include/setup_checks.inc:652 include/setup_checks.inc:725
+#: include/setup_checks.inc:730
 msgid ""
 "Can't bind to the specified LDAP server! Please make sure that it is "
 "reachable for GOsa."
@@ -6367,7 +6376,7 @@ msgstr ""
 "Die Anmeldung am LDAP-Server ist fehlgeschlagen. Bitte stellen Sie sicher, "
 "dass der Server für GOsa erreichbar ist."
 
-#: include/setup_checks.inc:733
+#: include/setup_checks.inc:740
 msgid ""
 "Bind to server successful, but the server seems to be completly empty, "
 "please check all informations twice"
@@ -6375,7 +6384,7 @@ msgstr ""
 "Die Verbindung zum Server war erfolgreich, dieser scheint jedoch leer zu "
 "sein.Bitte überprüfen Sie nochmals Ihre Angaben."
 
-#: include/setup_checks.inc:789
+#: include/setup_checks.inc:796
 #, php-format
 msgid ""
 "You're missing the required attribute '%s' from this formular. Please "
@@ -6384,12 +6393,12 @@ msgstr ""
 "Das Attribut '%s' ist in diesem Formular nicht angegeben. Bitte "
 "vervollständigen Sie Ihre Eingaben!"
 
-#: include/setup_checks.inc:820
+#: include/setup_checks.inc:827
 #, php-format
 msgid "Can't log into LDAP server. Reason was: %s."
 msgstr "Die Anmeldung am LDAP-Server ist fehlgeschlagen. Die Meldung war '%s'."
 
-#: include/setup_checks.inc:917 include/setup_checks.inc:932
+#: include/setup_checks.inc:924 include/setup_checks.inc:939
 #: html/index.php:160 ihtml/themes/default/setup_useradmin.tpl:6
 msgid ""
 "You're missing an administrative account for GOsa, you'll not be able to "
@@ -6652,29 +6661,29 @@ msgstr ""
 msgid "Logout"
 msgstr "Abmelden"
 
-#: ihtml/themes/altlinux/login.tpl:14 ihtml/themes/default/login.tpl:14
+#: ihtml/themes/altlinux/login.tpl:15 ihtml/themes/default/login.tpl:15
 msgid "Please use your <i>username</i> and <i>password</i> to log in"
 msgstr ""
 "Melden Sie sich bitte mit Ihrem <i>Benutzernamen</i> und Ihrem <i>Passwort</"
 "i> an"
 
-#: ihtml/themes/altlinux/login.tpl:25 ihtml/themes/altlinux/login.tpl:29
-#: ihtml/themes/default/login.tpl:25 ihtml/themes/default/login.tpl:29
+#: ihtml/themes/altlinux/login.tpl:26 ihtml/themes/altlinux/login.tpl:30
+#: ihtml/themes/default/login.tpl:26 ihtml/themes/default/login.tpl:30
 #: ihtml/themes/default/setup_useradmin.tpl:22
 msgid "Username"
 msgstr "Benutzername"
 
-#: ihtml/themes/altlinux/login.tpl:43 ihtml/themes/altlinux/login.tpl:46
-#: ihtml/themes/default/login.tpl:43 ihtml/themes/default/login.tpl:46
+#: ihtml/themes/altlinux/login.tpl:44 ihtml/themes/altlinux/login.tpl:47
+#: ihtml/themes/default/login.tpl:44 ihtml/themes/default/login.tpl:47
 msgid "Directory"
 msgstr "Verzeichnis"
 
-#: ihtml/themes/altlinux/login.tpl:54
-#: ihtml/themes/altlinux/setup_finish.tpl:24 ihtml/themes/default/login.tpl:54
+#: ihtml/themes/altlinux/login.tpl:55
+#: ihtml/themes/altlinux/setup_finish.tpl:24 ihtml/themes/default/login.tpl:55
 msgid "Sign in"
 msgstr "Anmelden"
 
-#: ihtml/themes/altlinux/login.tpl:55 ihtml/themes/default/login.tpl:55
+#: ihtml/themes/altlinux/login.tpl:56 ihtml/themes/default/login.tpl:56
 msgid "Click here to log in"
 msgstr "Hier klicken zum Anmelden"
 
@@ -7000,15 +7009,13 @@ msgstr "Konfiguration herunterladen"
 #~ "this case by pressing the <i>Remove</i> button."
 #~ msgstr ""
 #~ "Wenn diese Anzeige eines Zugriffskonflikts fehlerhaft ist, hat eine "
-#~ "andere Person offenbar während der Bearbeitung eines "
-#~ "Eintrages einfach den Webbrowser geschlossen. In einem solchen Fall "
-#~ "können Sie den Konflikt durch einen Klick auf "
-#~ "<i>Entfernen</i> beseitigen."
+#~ "andere Person offenbar während der Bearbeitung eines Eintrages einfach "
+#~ "den Webbrowser geschlossen. In einem solchen Fall können Sie den Konflikt "
+#~ "durch einen Klick auf <i>Entfernen</i> beseitigen."
 
 #~ msgid "Cyrus Quota settings -> Future days must be a value."
 #~ msgstr ""
-#~ "Cyrus Kontingent-Einstellungen -> Intervall muß einen Wert "
-#~ "besitzen."
+#~ "Cyrus Kontingent-Einstellungen -> Intervall muß einen Wert besitzen."
 
 #~ msgid "SMTP privileged networks -> No value is given."
 #~ msgstr "SMTP privilegierte Netzwerke -> Kein Wert eingetragen"
@@ -7053,10 +7060,14 @@ msgstr "Konfiguration herunterladen"
 
 #~ msgid ""
 #~ "<b>SAMBA 3</b> support enabled<td class=\"check\">gosa+samba3.schema</td>"
-#~ msgstr "<b>SAMBA 3</b>-Unterstützung aktiviert<td class=\"check\">gosa+samba3.schema</td>"
+#~ msgstr ""
+#~ "<b>SAMBA 3</b>-Unterstützung aktiviert<td class=\"check\">gosa+samba3."
+#~ "schema</td>"
 
 #~ msgid "<b>SAMBA 2</b> support enabled<td class=\"check\">samba.schema</td>"
-#~ msgstr "<b>SAMBA 2</b>-Unterstützung aktiviert<td class=\"check\">samba.schema</td>"
+#~ msgstr ""
+#~ "<b>SAMBA 2</b>-Unterstützung aktiviert<td class=\"check\">samba.schema</"
+#~ "td>"
 
 #~ msgid "GONICUS"
 #~ msgstr "GONICUS"
@@ -7064,8 +7075,8 @@ msgstr "Konfiguration herunterladen"
 #~ msgid ""
 #~ "Unsupported password hash detected. Can't generate compatible password."
 #~ msgstr ""
-#~ "Es wurde ein nicht unterstützter Passwort-Hash entdeckt. Es kann kein passendes Passwort generiert "
-#~ "werden."
+#~ "Es wurde ein nicht unterstützter Passwort-Hash entdeckt. Es kann kein "
+#~ "passendes Passwort generiert werden."
 
 #~ msgid "Checking for gd module"
 #~ msgstr "Suche gd-Modul"
@@ -7074,8 +7085,7 @@ msgstr "Konfiguration herunterladen"
 #~ "GOsa needs this module for recalculating image sizes provided for users "
 #~ "as jpegPhoto."
 #~ msgstr ""
-#~ "GOsa benötigt dieses Modul um Grö"
-#~ "ßenänderungen bei Bildern durchzuführen."
+#~ "GOsa benötigt dieses Modul um Größenänderungen bei Bildern durchzuführen."
 
 #~ msgid "You are currently using GOsa version %s (CVS checkout from %s)"
 #~ msgstr "Sie nutzen momentan GOsa in der Version %s (CVS-Abzug vom %s)"
@@ -7102,10 +7112,10 @@ msgstr "Konfiguration herunterladen"
 #~ "complete snapshot of the running LDAP directory as ldif. You may save "
 #~ "these files for backup purpose or when initializing a new server."
 #~ msgstr ""
-#~ "Dieses Modul ermöglicht Ihnen den Download der kompletten LDAP-"
-#~ "Datenbank, die momentan in Verwendung ist. Die Dateien können "
-#~ "einerseits zur Datensicherung und andererseits zur Einrichtung eines "
-#~ "neuen Servers benutzt werden."
+#~ "Dieses Modul ermöglicht Ihnen den Download der kompletten LDAP-Datenbank, "
+#~ "die momentan in Verwendung ist. Die Dateien können einerseits zur "
+#~ "Datensicherung und andererseits zur Einrichtung eines neuen Servers "
+#~ "benutzt werden."
 
 #, fuzzy
 #~ msgid "Overwrite"
@@ -7132,6 +7142,6 @@ msgstr "Konfiguration herunterladen"
 #~ "Warning: Please check the SIZELIMIT option set on your LDAP server. You "
 #~ "may not get all entries, if this value is to low!"
 #~ msgstr ""
-#~ "Warnung: Bitte überprüfen Sie die SIZELIMIT Option Ihres LDAP-Servers. Unter Umst"
-#~ "änden bekommen Sie nicht alle Einträge wenn dieser Eintrag "
-#~ "zu niedrig ist!"
+#~ "Warnung: Bitte überprüfen Sie die SIZELIMIT Option Ihres LDAP-Servers. "
+#~ "Unter Umständen bekommen Sie nicht alle Einträge wenn dieser Eintrag zu "
+#~ "niedrig ist!"

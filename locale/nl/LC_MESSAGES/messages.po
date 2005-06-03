@@ -496,12 +496,12 @@ msgstr "schakelt alle E-mail opties uit!"
 #: plugins/personal/connectivity/main.inc:116
 #: plugins/gofax/blocklists/generic.tpl:74
 #: plugins/gofax/faxaccount/main.inc:89
-#: plugins/admin/groups/class_groupManagement.inc:257
+#: plugins/admin/groups/class_groupManagement.inc:259
 #: plugins/admin/users/class_userManagement.inc:505
 #: plugins/admin/applications/class_applicationManagement.inc:239
 #: plugins/admin/departments/class_departmentManagement.inc:228
 #: plugins/admin/systems/class_systemManagement.inc:440
-#: plugins/admin/ogroups/class_ogroupManagement.inc:274
+#: plugins/admin/ogroups/class_ogroupManagement.inc:271
 #: plugins/gofon/phoneaccount/main.inc:104
 msgid "Finish"
 msgstr "Opslaan"
@@ -523,7 +523,7 @@ msgstr "Opslaan"
 #: plugins/addons/addressbook/dial.tpl:10
 #: plugins/addons/addressbook/address_edit.tpl:108
 #: plugins/addons/addressbook/remove.tpl:17
-#: plugins/admin/groups/class_groupManagement.inc:259
+#: plugins/admin/groups/class_groupManagement.inc:261
 #: plugins/admin/groups/remove.tpl:17
 #: plugins/admin/groups/application_options.tpl:10
 #: plugins/admin/groups/group_objects.tpl:41
@@ -539,7 +539,7 @@ msgstr "Opslaan"
 #: plugins/admin/systems/remove.tpl:17 plugins/admin/systems/password.tpl:27
 #: plugins/admin/systems/chooser.tpl:18
 #: plugins/admin/ogroups/ogroup_objects.tpl:52
-#: plugins/admin/ogroups/class_ogroupManagement.inc:276
+#: plugins/admin/ogroups/class_ogroupManagement.inc:273
 #: plugins/admin/ogroups/remove.tpl:17 plugins/gofon/phoneaccount/main.inc:106
 #: ihtml/themes/altlinux/islocked.tpl:15 ihtml/themes/default/islocked.tpl:15
 msgid "Cancel"
@@ -627,9 +627,9 @@ msgstr "Gebruikersnaam van wie de adressen getoond worden"
 #: plugins/personal/password/class_password.inc:5
 #: plugins/admin/systems/servdb.tpl:18 plugins/admin/systems/servdb.tpl:34
 #: plugins/admin/systems/servdb.tpl:50 plugins/admin/systems/servdb.tpl:86
-#: plugins/admin/systems/servdb.tpl:109 ihtml/themes/altlinux/login.tpl:34
-#: ihtml/themes/altlinux/login.tpl:38 ihtml/themes/default/login.tpl:34
-#: ihtml/themes/default/login.tpl:38
+#: plugins/admin/systems/servdb.tpl:109 ihtml/themes/altlinux/login.tpl:35
+#: ihtml/themes/altlinux/login.tpl:39 ihtml/themes/default/login.tpl:35
+#: ihtml/themes/default/login.tpl:39
 #: ihtml/themes/default/setup_useradmin.tpl:30
 msgid "Password"
 msgstr "Wachtwoord"
@@ -2220,7 +2220,7 @@ msgstr "Selecteer de subtree waaronder de blokkeerlijst geplaatst wordt"
 
 #: plugins/gofax/blocklists/generic.tpl:31
 #: plugins/admin/systems/service.tpl:42 plugins/admin/systems/service.tpl:120
-#: include/functions.inc:1599
+#: include/functions.inc:1605
 msgid "Type"
 msgstr "Type"
 
@@ -3324,13 +3324,13 @@ msgstr "Groepen beheer"
 msgid "Groups"
 msgstr "Groepen"
 
-#: plugins/admin/groups/class_groupManagement.inc:202
+#: plugins/admin/groups/class_groupManagement.inc:204
 #, php-format
 msgid "You're about to delete the group '%s'."
 msgstr "U staat op het punt de groep '%s' te verwijderen."
 
-#: plugins/admin/groups/class_groupManagement.inc:208
-#: plugins/admin/groups/class_groupManagement.inc:234
+#: plugins/admin/groups/class_groupManagement.inc:210
+#: plugins/admin/groups/class_groupManagement.inc:236
 msgid "You are not allowed to delete this group!"
 msgstr "U heeft geen toestemming om deze groep te verwijderen!"
 
@@ -4506,6 +4506,19 @@ msgstr "Printer URL"
 msgid "Path to PPD"
 msgstr "Directory van PPD"
 
+#: plugins/admin/systems/class_workstationGeneric.inc:136
+msgid "This 'dn' has no workstation features."
+msgstr "Deze 'dn' heeft geen werkstation mogelijkheden."
+
+#: plugins/admin/systems/class_workstationGeneric.inc:225
+msgid "You have no permissions to create a workstation on this 'Base'."
+msgstr ""
+"U heeft geen toestemming om een werkstation aan te maken onder deze 'basis'"
+
+#: plugins/admin/systems/class_workstationGeneric.inc:229
+msgid "The required field 'Workstation name' is not set."
+msgstr "Het vereiste veld 'Werkstation naam' is leeg."
+
 #: plugins/admin/systems/class_systemManagement.inc:32
 msgid "Systems"
 msgstr "Systemen"
@@ -4552,19 +4565,6 @@ msgstr "Thin client sjabloon voor"
 #: plugins/admin/systems/class_systemManagement.inc:675
 msgid "Workstation template for"
 msgstr "Werkstation sjabloon voor"
-
-#: plugins/admin/systems/class_workstationGeneric.inc:136
-msgid "This 'dn' has no workstation features."
-msgstr "Deze 'dn' heeft geen werkstation mogelijkheden."
-
-#: plugins/admin/systems/class_workstationGeneric.inc:225
-msgid "You have no permissions to create a workstation on this 'Base'."
-msgstr ""
-"U heeft geen toestemming om een werkstation aan te maken onder deze 'basis'"
-
-#: plugins/admin/systems/class_workstationGeneric.inc:229
-msgid "The required field 'Workstation name' is not set."
-msgstr "Het vereiste veld 'Werkstation naam' is leeg."
 
 #: plugins/admin/systems/class_printGeneric.inc:57
 msgid "This 'dn' has no printer features."
@@ -4664,6 +4664,146 @@ msgstr "Log database"
 #: plugins/admin/systems/servdb.tpl:104
 msgid "Logging DB user"
 msgstr "Log DB gebruiker"
+
+#: plugins/admin/systems/class_servKolab.inc:88
+msgid "Remove Kolab extension"
+msgstr "Verwijder Kolab mogelijkheden"
+
+#: plugins/admin/systems/class_servKolab.inc:88
+msgid ""
+"This server has kolab features enabled. You can disable them by clicking "
+"below."
+msgstr ""
+"Deze server heeft Kolab mogelijkheden ingeschakeld. U kunt deze uitschakelen "
+"door de knop hieronder te gebruiken."
+
+#: plugins/admin/systems/class_servKolab.inc:91
+msgid "Add Kolab service"
+msgstr "Voeg Kolab service toe"
+
+#: plugins/admin/systems/class_servKolab.inc:91
+msgid ""
+"This server has kolab features disabled. You can enable them by clicking "
+"below."
+msgstr ""
+"Deze server heeft Kolab mogelijkheden uitgeschakeld. U kunt deze inschakelen "
+"door de knop hieronder te gebruiken."
+
+#: plugins/admin/systems/class_servKolab.inc:119
+#, php-format
+msgid "Include data from %s days in the past when creating free/busy lists"
+msgstr ""
+"Gebruik data van %s dagen geleden wanneer free/busy lijsten worden aangemaakt"
+
+#: plugins/admin/systems/class_servKolab.inc:125
+#, php-format
+msgid "Warn users when using more than %s%% of their mail quota"
+msgstr ""
+"Waarschuw gebruikers wanneer meer dan %s%% van hun E-mail quota gebruikt "
+"wordt"
+
+#: plugins/admin/systems/class_servKolab.inc:197
+msgid "Future days in Free/Busy settings must be set."
+msgstr "Toekomstige dagen moet ingesteld zijn in de Free/Busy instellingen."
+
+#: plugins/admin/systems/class_servKolab.inc:199
+msgid "Future days in Free/Busy settings must be a positive value."
+msgstr ""
+"Toekomstige dagen moet een positieve waarde bevatten in de Free/Busy "
+"instellingen."
+
+#: plugins/admin/systems/class_servKolab.inc:203
+msgid "The given Quota settings value must be a number."
+msgstr "De opgegeven Quota instellingen moeten nummeriek zijn."
+
+#: plugins/admin/systems/class_servKolab.inc:205
+msgid "Please choose a value between 1 and 100 for Quota settings."
+msgstr "Kies a.u.b. een waarde tussen 1 en 100 voor de Quota instellingen."
+
+#: plugins/admin/systems/class_servKolab.inc:207
+msgid "Future days must be a value."
+msgstr "Toekomstige dagen moet een waarde bevatten."
+
+#: plugins/admin/systems/class_servKolab.inc:211
+msgid "No SMTP privileged networks set."
+msgstr "Er zijn geen netwerken met SMTP privileges ingesteld"
+
+#: plugins/admin/systems/class_servKolab.inc:215
+msgid "No SMTP smarthost/relayhost set."
+msgstr "Er is geen SMTP smarthost/relayhost ingesteld"
+
+#: plugins/admin/systems/servkolab.tpl:14
+msgid "POP3 service"
+msgstr "POP3 service"
+
+#: plugins/admin/systems/servkolab.tpl:22
+msgid "POP3/SSL service"
+msgstr "POP3/SSL service"
+
+#: plugins/admin/systems/servkolab.tpl:30
+msgid "IMAP service"
+msgstr "IMAP Service"
+
+#: plugins/admin/systems/servkolab.tpl:38
+msgid "IMAP/SSL service"
+msgstr "IMAP/SSL service"
+
+#: plugins/admin/systems/servkolab.tpl:46
+msgid "Sieve service"
+msgstr "Sieve service"
+
+#: plugins/admin/systems/servkolab.tpl:54
+msgid "FTP FreeBusy service (legacy, not interoperable with Kolab2 FreeBusy)"
+msgstr ""
+"FTP Free/Busy service (vervallen, niet compatibel met Kolab2 Free/Busy)"
+
+#: plugins/admin/systems/servkolab.tpl:62
+msgid "HTTP FreeBusy service (legacy)"
+msgstr "HTTP Free/Busy service (vervallen)"
+
+#: plugins/admin/systems/servkolab.tpl:70
+msgid "Amavis email scanning (virus/spam)"
+msgstr "Amavis email scannen (virus/anti-spam)"
+
+#: plugins/admin/systems/servkolab.tpl:81
+msgid "Quota settings"
+msgstr "Quota instellingen"
+
+#: plugins/admin/systems/servkolab.tpl:97
+msgid "Free/Busy settings"
+msgstr "Free/Busy instellingen"
+
+#: plugins/admin/systems/servkolab.tpl:102
+msgid "Allow unauthenticated downloading of Free/Busy information"
+msgstr "Sta ongeauthoriseerd downloaden van Free/Busy informatie toe"
+
+#: plugins/admin/systems/servkolab.tpl:117
+msgid "SMTP privileged networks"
+msgstr "SMTP toegestane netwerken"
+
+#: plugins/admin/systems/servkolab.tpl:122
+msgid "Hosts/networks allowed to relay"
+msgstr "Hosts/netwerken die E-mail mogen ralayen"
+
+#: plugins/admin/systems/servkolab.tpl:136
+msgid "SMTP smarthost/relayhost"
+msgstr "SMTP smarthost/relayhost"
+
+#: plugins/admin/systems/servkolab.tpl:142
+msgid "Enable MX lookup for relayhost"
+msgstr "Sta MX record opzoeken voor relayhost toe"
+
+#: plugins/admin/systems/servkolab.tpl:147
+msgid "Host used to relay mails"
+msgstr "Host die gebruikt wordt om E-mails te relayen"
+
+#: plugins/admin/systems/servkolab.tpl:161
+msgid "Accept Internet Mail"
+msgstr "Accepteer Internet E-mail"
+
+#: plugins/admin/systems/servkolab.tpl:167
+msgid "Accept mail from other domains over non-authenticated SMTP"
+msgstr "Accepteer E-mail van andere domeinen over niet geauthenticeerde SMTP"
 
 #: plugins/admin/systems/wingeneric.tpl:6
 msgid "Machine name"
@@ -4937,6 +5077,76 @@ msgstr "Lever scan diensten"
 msgid "Select scanner driver to use"
 msgstr "Selecteer de te gebruiken scanner driver"
 
+#: plugins/admin/systems/password.tpl:2
+msgid ""
+"To change the terminal root password use the fields below. The changes take "
+"effect during next reboot. Please memorize the new password, because the you "
+"would't be able to log in. <b>Leave fields blank for password inheritance "
+"from default entries.</b>"
+msgstr ""
+"Om het terminal root wachtwoord te veranderen moet u de velden hieronder "
+"gebruiken. De veranderingen zullen vanaf de volgende herstart effectief "
+"zijn. Onthoud het nieuwe wachtwoord a.u.b. anders kunt u niet inloggen. "
+"<b>Laat de velden leeg om het standaard wachtwoord te gebruiken.</b>"
+
+#: plugins/admin/systems/password.tpl:6
+msgid "Changing the password impinges on authentification only."
+msgstr ""
+"Het veranderen van het wachtwoord is alleen van toepassing op authenticatie."
+
+#: plugins/admin/systems/component.tpl:6
+msgid "Device name"
+msgstr "Apparaat naam"
+
+#: plugins/admin/systems/chooser.tpl:1
+msgid "Choose the kind of system component you want to create"
+msgstr "Kies het type systeem component dat u wenst aan te maken"
+
+#: plugins/admin/systems/chooser.tpl:4
+msgid ""
+"Linux terminals and workstations are autocreated on bootup. For this reason "
+"you're only be able to create templates for a specific tree. Servers are "
+"normally automatically added too, but in some special cases you may need to "
+"create a faked server entry to provide GOsa with some informations. Other "
+"network components may be used for Nagios setups to create component "
+"dependencies."
+msgstr ""
+"Linux terminals en werkstations worden automatisch aangemaakt bij het "
+"opstarten. Om deze reden kunt u alleen sjablonen voor een specifieke tree "
+"aanmaken. Servers worden normaliter ook automatisch toegevoegd, maar in "
+"sommige speciale gevallen moet u nep server informatie invoeren zodat GOsa "
+"met de server informatie kan werken. Andere netwerk componenten kunnen "
+"gebruikt worden binnen Nagios omgevingen om component afhankelijkheden te "
+"kunnen creëren."
+
+#: plugins/admin/systems/chooser.tpl:7
+msgid "Linux thin client template"
+msgstr "Linux thin client sjabloon"
+
+#: plugins/admin/systems/chooser.tpl:8
+msgid "Linux workstation template"
+msgstr "Linux werkstation sjabloon"
+
+#: plugins/admin/systems/chooser.tpl:9
+msgid "Linux Server"
+msgstr "Linux server"
+
+#: plugins/admin/systems/chooser.tpl:10
+msgid "Windows workstation"
+msgstr "Windows werkstation"
+
+#: plugins/admin/systems/chooser.tpl:11
+msgid "Network printer"
+msgstr "Netwerk printer"
+
+#: plugins/admin/systems/chooser.tpl:13
+msgid "Other network component"
+msgstr "Ander netwerk component"
+
+#: plugins/admin/systems/chooser.tpl:16
+msgid "Create"
+msgstr "Aanmaken"
+
 #: plugins/admin/systems/startup.tpl:1
 msgid "Boot parameters"
 msgstr "Opstart parameters"
@@ -5020,76 +5230,6 @@ msgid "Add additional filesystems to be mounted during startup"
 msgstr ""
 "Voeg additionele bestandssystemen toe die gemount worden bij het opstarten"
 
-#: plugins/admin/systems/password.tpl:2
-msgid ""
-"To change the terminal root password use the fields below. The changes take "
-"effect during next reboot. Please memorize the new password, because the you "
-"would't be able to log in. <b>Leave fields blank for password inheritance "
-"from default entries.</b>"
-msgstr ""
-"Om het terminal root wachtwoord te veranderen moet u de velden hieronder "
-"gebruiken. De veranderingen zullen vanaf de volgende herstart effectief "
-"zijn. Onthoud het nieuwe wachtwoord a.u.b. anders kunt u niet inloggen. "
-"<b>Laat de velden leeg om het standaard wachtwoord te gebruiken.</b>"
-
-#: plugins/admin/systems/password.tpl:6
-msgid "Changing the password impinges on authentification only."
-msgstr ""
-"Het veranderen van het wachtwoord is alleen van toepassing op authenticatie."
-
-#: plugins/admin/systems/component.tpl:6
-msgid "Device name"
-msgstr "Apparaat naam"
-
-#: plugins/admin/systems/chooser.tpl:1
-msgid "Choose the kind of system component you want to create"
-msgstr "Kies het type systeem component dat u wenst aan te maken"
-
-#: plugins/admin/systems/chooser.tpl:4
-msgid ""
-"Linux terminals and workstations are autocreated on bootup. For this reason "
-"you're only be able to create templates for a specific tree. Servers are "
-"normally automatically added too, but in some special cases you may need to "
-"create a faked server entry to provide GOsa with some informations. Other "
-"network components may be used for Nagios setups to create component "
-"dependencies."
-msgstr ""
-"Linux terminals en werkstations worden automatisch aangemaakt bij het "
-"opstarten. Om deze reden kunt u alleen sjablonen voor een specifieke tree "
-"aanmaken. Servers worden normaliter ook automatisch toegevoegd, maar in "
-"sommige speciale gevallen moet u nep server informatie invoeren zodat GOsa "
-"met de server informatie kan werken. Andere netwerk componenten kunnen "
-"gebruikt worden binnen Nagios omgevingen om component afhankelijkheden te "
-"kunnen creëren."
-
-#: plugins/admin/systems/chooser.tpl:7
-msgid "Linux thin client template"
-msgstr "Linux thin client sjabloon"
-
-#: plugins/admin/systems/chooser.tpl:8
-msgid "Linux workstation template"
-msgstr "Linux werkstation sjabloon"
-
-#: plugins/admin/systems/chooser.tpl:9
-msgid "Linux Server"
-msgstr "Linux server"
-
-#: plugins/admin/systems/chooser.tpl:10
-msgid "Windows workstation"
-msgstr "Windows werkstation"
-
-#: plugins/admin/systems/chooser.tpl:11
-msgid "Network printer"
-msgstr "Netwerk printer"
-
-#: plugins/admin/systems/chooser.tpl:13
-msgid "Other network component"
-msgstr "Ander netwerk component"
-
-#: plugins/admin/systems/chooser.tpl:16
-msgid "Create"
-msgstr "Aanmaken"
-
 #: plugins/admin/systems/class_phoneGeneric.inc:48
 msgid "This 'dn' has no phone features."
 msgstr "Deze 'dn' heeft geen telefoon mogelijkheden."
@@ -5106,146 +5246,6 @@ msgstr "De 'Telefoonnaam' '0' is gereserveerd en kan niet gebruikt worden."
 msgid "You have no permissions to create a phone on this 'Base'."
 msgstr ""
 "U heeft geen toestemming om een telefoon aan te maken onder deze 'Basis'."
-
-#: plugins/admin/systems/class_servKolab.inc:88
-msgid "Remove Kolab extension"
-msgstr "Verwijder Kolab mogelijkheden"
-
-#: plugins/admin/systems/class_servKolab.inc:88
-msgid ""
-"This server has kolab features enabled. You can disable them by clicking "
-"below."
-msgstr ""
-"Deze server heeft Kolab mogelijkheden ingeschakeld. U kunt deze uitschakelen "
-"door de knop hieronder te gebruiken."
-
-#: plugins/admin/systems/class_servKolab.inc:91
-msgid "Add Kolab service"
-msgstr "Voeg Kolab service toe"
-
-#: plugins/admin/systems/class_servKolab.inc:91
-msgid ""
-"This server has kolab features disabled. You can enable them by clicking "
-"below."
-msgstr ""
-"Deze server heeft Kolab mogelijkheden uitgeschakeld. U kunt deze inschakelen "
-"door de knop hieronder te gebruiken."
-
-#: plugins/admin/systems/class_servKolab.inc:119
-#, php-format
-msgid "Include data from %s days in the past when creating free/busy lists"
-msgstr ""
-"Gebruik data van %s dagen geleden wanneer free/busy lijsten worden aangemaakt"
-
-#: plugins/admin/systems/class_servKolab.inc:125
-#, php-format
-msgid "Warn users when using more than %s%% of their mail quota"
-msgstr ""
-"Waarschuw gebruikers wanneer meer dan %s%% van hun E-mail quota gebruikt "
-"wordt"
-
-#: plugins/admin/systems/class_servKolab.inc:197
-msgid "Future days in Free/Busy settings must be set."
-msgstr "Toekomstige dagen moet ingesteld zijn in de Free/Busy instellingen."
-
-#: plugins/admin/systems/class_servKolab.inc:199
-msgid "Future days in Free/Busy settings must be a positive value."
-msgstr ""
-"Toekomstige dagen moet een positieve waarde bevatten in de Free/Busy "
-"instellingen."
-
-#: plugins/admin/systems/class_servKolab.inc:203
-msgid "The given Quota settings value must be a number."
-msgstr "De opgegeven Quota instellingen moeten nummeriek zijn."
-
-#: plugins/admin/systems/class_servKolab.inc:205
-msgid "Please choose a value between 1 and 100 for Quota settings."
-msgstr "Kies a.u.b. een waarde tussen 1 en 100 voor de Quota instellingen."
-
-#: plugins/admin/systems/class_servKolab.inc:207
-msgid "Future days must be a value."
-msgstr "Toekomstige dagen moet een waarde bevatten."
-
-#: plugins/admin/systems/class_servKolab.inc:211
-msgid "No SMTP privileged networks set."
-msgstr "Er zijn geen netwerken met SMTP privileges ingesteld"
-
-#: plugins/admin/systems/class_servKolab.inc:215
-msgid "No SMTP smarthost/relayhost set."
-msgstr "Er is geen SMTP smarthost/relayhost ingesteld"
-
-#: plugins/admin/systems/servkolab.tpl:14
-msgid "POP3 service"
-msgstr "POP3 service"
-
-#: plugins/admin/systems/servkolab.tpl:22
-msgid "POP3/SSL service"
-msgstr "POP3/SSL service"
-
-#: plugins/admin/systems/servkolab.tpl:30
-msgid "IMAP service"
-msgstr "IMAP Service"
-
-#: plugins/admin/systems/servkolab.tpl:38
-msgid "IMAP/SSL service"
-msgstr "IMAP/SSL service"
-
-#: plugins/admin/systems/servkolab.tpl:46
-msgid "Sieve service"
-msgstr "Sieve service"
-
-#: plugins/admin/systems/servkolab.tpl:54
-msgid "FTP FreeBusy service (legacy, not interoperable with Kolab2 FreeBusy)"
-msgstr ""
-"FTP Free/Busy service (vervallen, niet compatibel met Kolab2 Free/Busy)"
-
-#: plugins/admin/systems/servkolab.tpl:62
-msgid "HTTP FreeBusy service (legacy)"
-msgstr "HTTP Free/Busy service (vervallen)"
-
-#: plugins/admin/systems/servkolab.tpl:70
-msgid "Amavis email scanning (virus/spam)"
-msgstr "Amavis email scannen (virus/anti-spam)"
-
-#: plugins/admin/systems/servkolab.tpl:81
-msgid "Quota settings"
-msgstr "Quota instellingen"
-
-#: plugins/admin/systems/servkolab.tpl:97
-msgid "Free/Busy settings"
-msgstr "Free/Busy instellingen"
-
-#: plugins/admin/systems/servkolab.tpl:102
-msgid "Allow unauthenticated downloading of Free/Busy information"
-msgstr "Sta ongeauthoriseerd downloaden van Free/Busy informatie toe"
-
-#: plugins/admin/systems/servkolab.tpl:117
-msgid "SMTP privileged networks"
-msgstr "SMTP toegestane netwerken"
-
-#: plugins/admin/systems/servkolab.tpl:122
-msgid "Hosts/networks allowed to relay"
-msgstr "Hosts/netwerken die E-mail mogen ralayen"
-
-#: plugins/admin/systems/servkolab.tpl:136
-msgid "SMTP smarthost/relayhost"
-msgstr "SMTP smarthost/relayhost"
-
-#: plugins/admin/systems/servkolab.tpl:142
-msgid "Enable MX lookup for relayhost"
-msgstr "Sta MX record opzoeken voor relayhost toe"
-
-#: plugins/admin/systems/servkolab.tpl:147
-msgid "Host used to relay mails"
-msgstr "Host die gebruikt wordt om E-mails te relayen"
-
-#: plugins/admin/systems/servkolab.tpl:161
-msgid "Accept Internet Mail"
-msgstr "Accepteer Internet E-mail"
-
-#: plugins/admin/systems/servkolab.tpl:167
-msgid "Accept mail from other domains over non-authenticated SMTP"
-msgstr "Accepteer E-mail van andere domeinen over niet geauthenticeerde SMTP"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:19
 msgid "Terminals"
@@ -5419,13 +5419,13 @@ msgstr "Werkstations"
 msgid "Printer"
 msgstr "Printer"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:153
+#: plugins/admin/ogroups/class_ogroupManagement.inc:150
 #, php-format
 msgid "You're about to delete the object group '%s'."
 msgstr "U staat op het punt de objectgroep '%s' te verwijderen."
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:159
-#: plugins/admin/ogroups/class_ogroupManagement.inc:185
+#: plugins/admin/ogroups/class_ogroupManagement.inc:156
+#: plugins/admin/ogroups/class_ogroupManagement.inc:182
 msgid "You are not allowed to delete this object group!"
 msgstr "U heeft geen toestemming deze objectgroep te verwijderen!"
 
@@ -5781,48 +5781,48 @@ msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "GOsa ontwikkelversie (Revisie %s)"
 
-#: include/functions.inc:1551
+#: include/functions.inc:1556
 msgid "Generating this page caused the PHP interpreter to raise some errors!"
 msgstr ""
 "Er is minimaal één PHP fout opgetreden bij het genereren van deze pagina!"
 
-#: include/functions.inc:1551
+#: include/functions.inc:1556
 msgid "Toggle information"
 msgstr "Informatie weergeven/verbergen"
 
-#: include/functions.inc:1559
+#: include/functions.inc:1561
 msgid "PHP error"
 msgstr "PHP fout"
 
-#: include/functions.inc:1566
+#: include/functions.inc:1572
 msgid "class"
 msgstr "klasse"
 
-#: include/functions.inc:1572
+#: include/functions.inc:1578
 msgid "function"
 msgstr "functie"
 
-#: include/functions.inc:1577
+#: include/functions.inc:1583
 msgid "static"
 msgstr "statisch"
 
-#: include/functions.inc:1581
+#: include/functions.inc:1587
 msgid "method"
 msgstr "methode"
 
-#: include/functions.inc:1598
+#: include/functions.inc:1604
 msgid "Trace"
 msgstr "Trace"
 
-#: include/functions.inc:1599
+#: include/functions.inc:1605
 msgid "File"
 msgstr "Bestand"
 
-#: include/functions.inc:1599
+#: include/functions.inc:1605
 msgid "Line"
 msgstr "Regel"
 
-#: include/functions.inc:1600
+#: include/functions.inc:1606
 msgid "Arguments"
 msgstr "Argumenten"
 
@@ -6074,20 +6074,29 @@ msgid "This is the main module used by GOsa and therefore really required."
 msgstr "Dit is hoofd module die GOsa nodig heeft en is daarom noodzakelijk."
 
 #: include/setup_checks.inc:264
+#, fuzzy
+msgid "Checking for XML functions"
+msgstr "Zoeken naar iconv ondersteuning"
+
+#: include/setup_checks.inc:265
+msgid "XML functions are required to parse the configuration file."
+msgstr ""
+
+#: include/setup_checks.inc:268
 msgid "Checking for gettext support"
 msgstr "Zoeken naar gettext ondersteuning"
 
-#: include/setup_checks.inc:265
+#: include/setup_checks.inc:269
 msgid "Gettext support is required for internationalized GOsa."
 msgstr ""
 "Gettext ondersteuning is vereist voor ondersteuning van meerdere talen in "
 "GOsa."
 
-#: include/setup_checks.inc:267
+#: include/setup_checks.inc:271
 msgid "Checking for iconv support"
 msgstr "Zoeken naar iconv ondersteuning"
 
-#: include/setup_checks.inc:268
+#: include/setup_checks.inc:272
 msgid ""
 "This module is used by GOsa to convert samba munged dial informations and is "
 "therefore required."
@@ -6095,11 +6104,11 @@ msgstr ""
 "Deze module wordt gebruikt door GOsa om samba munged dial informatie "
 "(terminal server) te converteren en is daarom vereist."
 
-#: include/setup_checks.inc:271
+#: include/setup_checks.inc:275
 msgid "Checking for mhash module"
 msgstr "Zoeken naar de mhash module"
 
-#: include/setup_checks.inc:272
+#: include/setup_checks.inc:276
 msgid ""
 "To use SSHA encryption, you'll need this module. If you are just using crypt "
 "or md5 encryption, ignore this message. GOsa will run without it."
@@ -6107,11 +6116,11 @@ msgstr ""
 "Om SSHA encryptie te gebruiken heeft u deze module nodig. U kunt deze "
 "melding negeren indien u gewoon crypt of md5 encryptie gebruikt."
 
-#: include/setup_checks.inc:275
+#: include/setup_checks.inc:279
 msgid "Checking for imap module"
 msgstr "Zoeken naar de IMAP module"
 
-#: include/setup_checks.inc:276
+#: include/setup_checks.inc:280
 msgid ""
 "The IMAP module is needed to communicate with the IMAP server. It gets "
 "status informations, creates and deletes mail users."
@@ -6120,11 +6129,11 @@ msgstr ""
 "ontvangt status informatie, maakt E-mail gebruikers aan en verwijdert E-mail "
 "gebruikers."
 
-#: include/setup_checks.inc:278
+#: include/setup_checks.inc:283
 msgid "Checking for getacl in imap"
 msgstr "Controle op getacl in imap"
 
-#: include/setup_checks.inc:279
+#: include/setup_checks.inc:284
 msgid ""
 "The getacl support is needed for shared folder permissions. The standard "
 "IMAP module is not capable of reading acl's. You need a recend PHP version "
@@ -6134,21 +6143,21 @@ msgstr ""
 "IMAP module is niet in staat om acl's te lezen. U heeft een recente PHP "
 "versie nodig voor deze mogelijkheid."
 
-#: include/setup_checks.inc:281
+#: include/setup_checks.inc:287
 msgid "Checking for mysql module"
 msgstr "Zoeken naar MySQL module"
 
-#: include/setup_checks.inc:282
+#: include/setup_checks.inc:288
 msgid "MySQL support is needed for reading GOfax reports from databases."
 msgstr ""
 "MySQL ondersteuning is nodig voor het lezen van GOfax rapporten uit "
 "databases."
 
-#: include/setup_checks.inc:284
+#: include/setup_checks.inc:291
 msgid "Checking for cups module"
 msgstr "Zoeken naar CUPS module"
 
-#: include/setup_checks.inc:285
+#: include/setup_checks.inc:292
 msgid ""
 "In order to read available printers from IPP protocol instead of printcap "
 "files, you've to install the CUPS module."
@@ -6156,11 +6165,11 @@ msgstr ""
 "U moet de CUPS module installeren om beschikbare printers via het IPP "
 "protocol te kunnen aflezen i.p.v. via printcap bestanden."
 
-#: include/setup_checks.inc:287
+#: include/setup_checks.inc:295
 msgid "Checking for kadm5 module"
 msgstr "Zoeken naar kadm5 module"
 
-#: include/setup_checks.inc:288
+#: include/setup_checks.inc:296
 msgid ""
 "Managing users in kerberos requires the kadm5 module which is downloadable "
 "via PEAR network."
@@ -6168,26 +6177,26 @@ msgstr ""
 "Het beheren van gebruikers in kerberos vereist de kadm5 module welke via het "
 "PEAR netwerk te downloaden is."
 
-#: include/setup_checks.inc:290
+#: include/setup_checks.inc:299
 msgid "Checking for snmp Module"
 msgstr "Zoeken naar de SNMP module"
 
-#: include/setup_checks.inc:291
+#: include/setup_checks.inc:300
 msgid ""
 "Simple Network Management Protocol (SNMP) is required for client monitoring."
 msgstr ""
 "Het Simple Network Management Protocol (SNMP) is vereist voor werkstation "
 "monitoring."
 
-#: include/setup_checks.inc:300
+#: include/setup_checks.inc:309
 msgid "Checking for some additional programms"
 msgstr "Zoeken naar enkele additionele programma's"
 
-#: include/setup_checks.inc:309
+#: include/setup_checks.inc:318
 msgid "Checking for ImageMagick (>=5.4.0)"
 msgstr "Zoeken naar ImageMagick (>=5.4.0)"
 
-#: include/setup_checks.inc:310
+#: include/setup_checks.inc:319
 msgid ""
 "ImageMagick is used to convert user supplied images to fit the suggested "
 "size and the unified JPEG format."
@@ -6195,11 +6204,11 @@ msgstr ""
 "ImageMagick wordt gebruikt om gebruikers aangeleverde plaatjes te laten "
 "passen binnen de voorgestelde grootte en het uniforme JPEG formaat."
 
-#: include/setup_checks.inc:313
+#: include/setup_checks.inc:322
 msgid "Checking imagick module for PHP"
 msgstr "Zoeken naar de imagick module voor PHP"
 
-#: include/setup_checks.inc:314
+#: include/setup_checks.inc:323
 msgid ""
 "Imagick is used to convert user supplied images to fit the suggested size "
 "and the unified JPEG format from PHP script."
@@ -6207,11 +6216,11 @@ msgstr ""
 "Imagick wordt gebruikt om gebruikers aangeleverde plaatjes te laten passen "
 "binnen de voorgestelde grootte en het uniforme JPEG formaat."
 
-#: include/setup_checks.inc:321
+#: include/setup_checks.inc:330
 msgid "Checking for fping utility"
 msgstr "Zoeken naar het fping programma"
 
-#: include/setup_checks.inc:322
+#: include/setup_checks.inc:331
 msgid ""
 "The fping utility is only used if you've got a thin client based terminal "
 "environment running."
@@ -6219,11 +6228,11 @@ msgstr ""
 "Het fping programma wordt alleen gebruikt indien u een thin client "
 "gebaseerde terminal omgeving heeft draaien."
 
-#: include/setup_checks.inc:337
+#: include/setup_checks.inc:346
 msgid "Checking for a way to generate LM/NT password hashes"
 msgstr "Zoeken naar een manier om LM/NT wachtwoord hashes te genereren"
 
-#: include/setup_checks.inc:338
+#: include/setup_checks.inc:347
 msgid ""
 "In order to use SAMBA 2/3, you've to install some additional packages to "
 "generate password hashes."
@@ -6231,11 +6240,11 @@ msgstr ""
 "Om Samba 2.x/3.x te gebruiken moet u enkele additionele pakketten "
 "installeren om wachtwoord hashes te genereren"
 
-#: include/setup_checks.inc:353
+#: include/setup_checks.inc:360
 msgid "php.ini check -> session.auto_register"
 msgstr "php.ini controle -> session.auto_register"
 
-#: include/setup_checks.inc:354
+#: include/setup_checks.inc:361
 msgid ""
 "In Order to use GOsa without any trouble, the session.auto_register option "
 "in your php.ini must be set to 'Off'."
@@ -6243,11 +6252,11 @@ msgstr ""
 "Om GOsa zonder problemen te gebruiken, moet de session.auto_register optie "
 "in uw php.ini ingesteld zijn op 'Off'."
 
-#: include/setup_checks.inc:357
+#: include/setup_checks.inc:364
 msgid "php.ini check -> implicit_flush"
 msgstr "php.ini controle -> implicit_flush"
 
-#: include/setup_checks.inc:358
+#: include/setup_checks.inc:365
 msgid ""
 "This option influences the Output handling. Turn this Option off, to "
 "increase performance."
@@ -6255,11 +6264,11 @@ msgstr ""
 "Deze Optie definieert Uitvoer afhandeling. Zet deze Optie uit om "
 "snelheiswinst te behalen"
 
-#: include/setup_checks.inc:365
+#: include/setup_checks.inc:372
 msgid "php.ini check -> max_execution_time"
 msgstr "php.ini controle -> max_execution_time"
 
-#: include/setup_checks.inc:366
+#: include/setup_checks.inc:373
 msgid ""
 "The Execution time should be at least 30 seconds, because some actions may "
 "consume more time."
@@ -6267,11 +6276,11 @@ msgstr ""
 "De uitvoer tijd moet minimaal 30 seconden zijn, omdat sommige acties lang "
 "kunnen duren."
 
-#: include/setup_checks.inc:373
+#: include/setup_checks.inc:380
 msgid "php.ini check -> memory_limit"
 msgstr "php.ini controle -> memory_limit"
 
-#: include/setup_checks.inc:374
+#: include/setup_checks.inc:381
 msgid ""
 "GOsa needs at least 16MB of memory, less will cause unpredictable errors! "
 "Increase it for larger setups."
@@ -6280,11 +6289,11 @@ msgstr ""
 "onvoorspelbare fouten opleveren!.Verhoog deze waarde nog verder voor zeer "
 "grote omgevingen."
 
-#: include/setup_checks.inc:378
+#: include/setup_checks.inc:385
 msgid "php.ini check -> expose_php"
 msgstr "php.ini controle -> expose_php"
 
-#: include/setup_checks.inc:379
+#: include/setup_checks.inc:386
 msgid ""
 "Increase the server security by setting expose_php to 'off'. PHP won't send "
 "any Information about the server you are running in this case."
@@ -6292,11 +6301,11 @@ msgstr ""
 "Verhoog de server veiligheid door 'expose_php' op 'Off' in te stellen. PHP "
 "zal dan geen enkele informatie over de Server die u gebruikt weergeven."
 
-#: include/setup_checks.inc:383
+#: include/setup_checks.inc:390
 msgid "php.ini check -> magic_quotes_gpc"
 msgstr "php.ini check -> magic_quotes_gpc"
 
-#: include/setup_checks.inc:384
+#: include/setup_checks.inc:391
 msgid ""
 "Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
 "escape all quotes in strings in this case."
@@ -6304,11 +6313,11 @@ msgstr ""
 "Verhoog de server veiligheid door 'magic_quotes_gpc op 'On' in te stellen."
 "PHP zal dan alle aanhalingstekens in strings omzetten."
 
-#: include/setup_checks.inc:622
+#: include/setup_checks.inc:629
 msgid "You've to specify an ldap server before continuing!"
 msgstr "U moet een LDAP server specificeren voordat u verder gaat!"
 
-#: include/setup_checks.inc:631 include/setup_checks.inc:713
+#: include/setup_checks.inc:638 include/setup_checks.inc:720
 msgid ""
 "Can't connect to the specified LDAP server! Please make sure that is "
 "reachable for GOsa."
@@ -6316,8 +6325,8 @@ msgstr ""
 "Kan niet met de opgegeven LDAP server verbinden! Controleer a.u.b. dat deze "
 "bereikbaar is voor GOsa."
 
-#: include/setup_checks.inc:645 include/setup_checks.inc:718
-#: include/setup_checks.inc:723
+#: include/setup_checks.inc:652 include/setup_checks.inc:725
+#: include/setup_checks.inc:730
 msgid ""
 "Can't bind to the specified LDAP server! Please make sure that it is "
 "reachable for GOsa."
@@ -6325,7 +6334,7 @@ msgstr ""
 "De aanmelding op de LDAP server is mislukt! Controleer a.u.b. dat deze "
 "bereikbaar is voor GOsa."
 
-#: include/setup_checks.inc:733
+#: include/setup_checks.inc:740
 msgid ""
 "Bind to server successful, but the server seems to be completly empty, "
 "please check all informations twice"
@@ -6333,7 +6342,7 @@ msgstr ""
 "Verbinding met de server is succesvol uitgevoerd, maar de server lijkt geen "
 "informatie te bevatten. Controleer alle informatie a.u.b. nogmaals."
 
-#: include/setup_checks.inc:789
+#: include/setup_checks.inc:796
 #, php-format
 msgid ""
 "You're missing the required attribute '%s' from this formular. Please "
@@ -6342,12 +6351,12 @@ msgstr ""
 "Het vereiste atribuut '%s' uit dit formulier ontbreekt. Maak a.u.b. uw "
 "invoer af!"
 
-#: include/setup_checks.inc:820
+#: include/setup_checks.inc:827
 #, php-format
 msgid "Can't log into LDAP server. Reason was: %s."
 msgstr "De aanmelding op de LDAP server is mislukt. De reden was: '%s'."
 
-#: include/setup_checks.inc:917 include/setup_checks.inc:932
+#: include/setup_checks.inc:924 include/setup_checks.inc:939
 #: html/index.php:160 ihtml/themes/default/setup_useradmin.tpl:6
 msgid ""
 "You're missing an administrative account for GOsa, you'll not be able to "
@@ -6608,27 +6617,27 @@ msgstr ""
 msgid "Logout"
 msgstr "Uitloggen"
 
-#: ihtml/themes/altlinux/login.tpl:14 ihtml/themes/default/login.tpl:14
+#: ihtml/themes/altlinux/login.tpl:15 ihtml/themes/default/login.tpl:15
 msgid "Please use your <i>username</i> and <i>password</i> to log in"
 msgstr "Voer uw <i>gebruikersnaam</i> en <i>wachtwoord</i> in"
 
-#: ihtml/themes/altlinux/login.tpl:25 ihtml/themes/altlinux/login.tpl:29
-#: ihtml/themes/default/login.tpl:25 ihtml/themes/default/login.tpl:29
+#: ihtml/themes/altlinux/login.tpl:26 ihtml/themes/altlinux/login.tpl:30
+#: ihtml/themes/default/login.tpl:26 ihtml/themes/default/login.tpl:30
 #: ihtml/themes/default/setup_useradmin.tpl:22
 msgid "Username"
 msgstr "Gebruikersnaam"
 
-#: ihtml/themes/altlinux/login.tpl:43 ihtml/themes/altlinux/login.tpl:46
-#: ihtml/themes/default/login.tpl:43 ihtml/themes/default/login.tpl:46
+#: ihtml/themes/altlinux/login.tpl:44 ihtml/themes/altlinux/login.tpl:47
+#: ihtml/themes/default/login.tpl:44 ihtml/themes/default/login.tpl:47
 msgid "Directory"
 msgstr "Directory"
 
-#: ihtml/themes/altlinux/login.tpl:54
-#: ihtml/themes/altlinux/setup_finish.tpl:24 ihtml/themes/default/login.tpl:54
+#: ihtml/themes/altlinux/login.tpl:55
+#: ihtml/themes/altlinux/setup_finish.tpl:24 ihtml/themes/default/login.tpl:55
 msgid "Sign in"
 msgstr "Inloggen"
 
-#: ihtml/themes/altlinux/login.tpl:55 ihtml/themes/default/login.tpl:55
+#: ihtml/themes/altlinux/login.tpl:56 ihtml/themes/default/login.tpl:56
 msgid "Click here to log in"
 msgstr "Klik hier om in te loggen"
 

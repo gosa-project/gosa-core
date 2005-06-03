@@ -261,6 +261,10 @@ function perform_php_checks(&$faults)
       _("This is the main module used by GOsa and therefore really required."),
       function_exists('ldap_bind'));
 
+  $msg.= check (  $faults, _("Checking for XML functions"),
+      _("XML functions are required to parse the configuration file."),
+      function_exists('xml_parser_create'));
+
   $msg.= check (	$faults, _("Checking for gettext support"),
       _("Gettext support is required for internationalized GOsa."), function_exists('bindtextdomain'));
 
@@ -275,18 +279,23 @@ function perform_php_checks(&$faults)
   $msg.= check (	$faults, _("Checking for imap module"),
       _("The IMAP module is needed to communicate with the IMAP server. It gets status informations, creates and deletes mail users."),
       function_exists('imap_open'));
+      
   $msg.= check (	$faults, _("Checking for getacl in imap"),
       _("The getacl support is needed for shared folder permissions. The standard IMAP module is not capable of reading acl's. You need a recend PHP version for this feature."),
       function_exists('imap_getacl'), FALSE);
+      
   $msg.= check (	$faults, _("Checking for mysql module"),
       _("MySQL support is needed for reading GOfax reports from databases."),
       function_exists('mysql_query'), FALSE);
+      
   $msg.= check (	$faults, _("Checking for cups module"),
       _("In order to read available printers from IPP protocol instead of printcap files, you've to install the CUPS module."),
       function_exists('cups_get_dest_list'), FALSE);
+      
   $msg.= check (	$faults, _("Checking for kadm5 module"),
       _("Managing users in kerberos requires the kadm5 module which is downloadable via PEAR network."),
       function_exists('kadm5_init_with_password'), FALSE);
+
   $msg.= check (  $faults, _("Checking for snmp Module"),
       _("Simple Network Management Protocol (SNMP) is required for client monitoring."),
       function_exists('snmpget'), FALSE);
