@@ -1656,6 +1656,7 @@ function clean_smarty_compile_dir($directory)
               is_writable($directory."/".$file)) {
               // delete file
               if(!unlink($directory."/".$file)) {
+                print_red("File ".$directory."/".$file." could not be deleted.");
                 // This should never be reached
               }
           } elseif(is_dir($directory."/".$file) &&
@@ -1688,7 +1689,7 @@ function create_revision($revision_file, $revision)
     }
     fclose($fh);
   } else {
-    // Can not write to file
+    print_red("Can not write to revision file");
   }
 
   return $result;
