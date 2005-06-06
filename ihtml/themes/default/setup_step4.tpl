@@ -37,7 +37,7 @@
 <table>
  <tr>
   <td>{t}Base {/t}</td>
-  <td><input type='text' name='base' maxlength='40' size='20' value='{$base}'></td>
+  <td><input type='text' name='base' maxlength='80' size='40' value='{$base}'></td>
  </tr>
  <tr>
   <td>{t}People storage ou{/t}</td>
