@@ -15,6 +15,7 @@
       <td>
        <select size="1" name="base" {$selectmode} title="{t}Select subtree to place blocklist in{/t}">
         {html_options options=$bases selected=$base_select}
+		<option disabled></option>
        </select>
       </td>
      </tr>
@@ -31,7 +32,8 @@
        <td>{t}Type{/t}</td>
        <td>
         <select size="1" name="type" {$typeACL} title="{t}Select wether to filter incoming or outgoing calls{/t}">
-         {html_options options=$types selected=$type}
+        {html_options options=$types selected=$type}
+		<option disabled></option>
         </select>
         </td>
       </tr>
@@ -54,6 +56,7 @@
      <h2><img alt="" align="middle" src="images/false.png"> {t}Blocked numbers{/t}</h2>
      <select style="width:400px; height:200px;" name="numbers[]" size=15 multiple>
       {html_options values=$goFaxBlocklist output=$goFaxBlocklist}
+	  <option disabled></option>
      </select>
      <br>
      <input name="number" size=25 maxlength=60 {$goFaxBlocklistACL}>&nbsp;
