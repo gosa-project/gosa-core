@@ -50,6 +50,8 @@ class addressbook extends plugin
 	/* Include config object */
 	$this->config= $config;
 
+	print $dn;
+
 	#FIXME: ACL is set to default for testing
 	$this->acl= "#all#";
 
@@ -258,7 +260,7 @@ class addressbook extends plugin
 				break;
 			case "remove":
 				$this->dn= $_SESSION['show_info']; 
-
+				$this->load();
 		                /* Load permissions for selected 'dn' and check if
 		                   we're allowed to remove this 'dn' */
 				$ui= get_userinfo();
