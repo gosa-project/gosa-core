@@ -213,7 +213,7 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.26 NAME 'goFaxServer' SUP top AUXILIARY
 objectclass (1.3.6.1.4.1.10098.1.2.1.27 NAME 'goServer' SUP top STRUCTURAL
 	DESC 'Server description (v2.4)'
 	MUST ( cn )
-	MAY  ( description $ macAddress ))
+	MAY  ( description $ macAddress $ ipHostNumber ))
 
 # LogDB Server description
 objectclass (1.3.6.1.4.1.10098.1.2.1.28 NAME 'goLogDBServer' SUP top AUXILIARY
