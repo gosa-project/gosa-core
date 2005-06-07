@@ -5,7 +5,7 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#CDF6BD" >
   <tr>
     <td style="height:36px; width:140px; vertical-align:bottom; text-align:center">
-     <a href="main.php?version=1" style="vertical-align:bottom;"><img src='{$go_logo}' border="0" alt="GOSA2" align="bottom"></a>
+     <a href="main.php" style="vertical-align:bottom;"><img src='{$go_logo}' border="0" alt="GOSA2" align="bottom"></a>
     </td>
     <td>
       <table style="margin-left:20px;" border=0>
