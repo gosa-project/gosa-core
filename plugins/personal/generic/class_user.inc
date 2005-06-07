@@ -385,7 +385,17 @@ class user extends plugin
       foreach(array("userCertificate", "userSMIMECertificate", "userPKCS12") as $cert){
         if ($this->$cert != ""){
           $smarty->assign("$cert"."_state", _("present"));
+          /* import certificate */
+          $certificate = new certificate;
+          $certificate->import($this->$cert);
+      
+          /* Read out data*/
+          $timeto   = ($certificate->getvalidto_date());
+          $timefrom = ($certificate->getvalidfrom_date());
+          $str = _("This Certificate is valid till ").date('d M Y',$timeto)." - ".str_replace("/"," , ",$certificate->getCN());
+          $smarty->assign($cert."info",$str);
         } else {
+          $smarty->assign($cert."info","");
           $smarty->assign("$cert"."_state", _("absent"));
         }
       }

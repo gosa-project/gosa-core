@@ -19,6 +19,7 @@ class certificate
     $this->data= "";
     $this->type= false;
     $this->error="";  
+    $this->info = array();
   } 
 
   /* Reads specified Certfile/string and convert it to PEM*/
@@ -80,22 +81,60 @@ class certificate
       /* Reset*/
       return(false);
     }
+  
+    $this->info(false);
+  
     /* Loaded a readable cert */
     return(true);
   }
 
   /* Returns Array with all containing data */
-  function info()
+  function info($ret = true)
   {
     if($this->type != PEM){
       $this->error = _("The Format must be PEM, to output certificate informations");
       return(false);
     } else {
     /* return an array with all given information */
-    return(openssl_x509_parse($this->data));
+    $this->info=openssl_x509_parse($this->data);
+    
+    if($ret)
+      return($this->info);
     }
   }
 
+  /* Return Functions */
+  function getvalidto_date()
+  {
+    return($this->info['validTo_time_t']);
+  } 
+
+  function getvalidfrom_date()
+  {
+    return($this->info['validFrom_time_t']);
+  }
+
+  function getname()
+  {
+    return($this->info['name']);
+  }
+
+  function getCN()
+  {
+    return($this->info['subject']['CN']);
+  }
+
+  function getO()
+  {
+    return($this->info['subject']['O']);
+  }
+
+  function getOU()
+  {
+    return($this->info['subject']['OU']);
+  }
+
+  
 
   /* Export Certificate to specified file, with specified method*/
   function export($type,$filename="temp")
