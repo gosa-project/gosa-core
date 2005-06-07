@@ -384,7 +384,6 @@ class user extends plugin
     if ($this->cert_dialog){
       foreach(array("userCertificate", "userSMIMECertificate", "userPKCS12") as $cert){
         if ($this->$cert != ""){
-          $smarty->assign("$cert"."_state", _("present"));
           /* import certificate */
           $certificate = new certificate;
           $certificate->import($this->$cert);
@@ -392,11 +391,12 @@ class user extends plugin
           /* Read out data*/
           $timeto   = ($certificate->getvalidto_date());
           $timefrom = ($certificate->getvalidfrom_date());
-          $str = _("This Certificate is valid till ").date('d M Y',$timeto)." - ".str_replace("/"," , ",$certificate->getCN());
+          $str = $certificate->getname()."<br>".
+                  _("Valid from")." ".date('d M Y',$timefrom)." "._("to")." ".date('d M Y',$timeto)." - "._("Serialnumber")." : ".$certificate->getSerialNumber()."<br>".
+                  _("This certificate is")." <b>".$certificate->isvalid(true)."</b>";
           $smarty->assign($cert."info",$str);
         } else {
-          $smarty->assign($cert."info","");
-          $smarty->assign("$cert"."_state", _("absent"));
+          $smarty->assign($cert."info",_("No certificate present"));
         }
       }
       $smarty->assign("governmentmode", "false");

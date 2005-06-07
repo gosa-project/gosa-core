@@ -9,7 +9,7 @@
  </tr>
  <tr>
    <td width="250">
-      {t}Standard certificate{/t} (<i>{$userCertificate_state}</i>)
+      {t}Standard certificate{/t}
    </td>
    <td>
      <input name="userCertificate_file" type="file" size="20" maxlength="255" accept="text/*.*">
@@ -35,7 +35,7 @@
  <table style="vertical-align:top; text-align:left;border-top: 1px solid rgb(176,176,176);" width="100%" cellpadding=4 border=0>
  <tr>
    <td width="250">
-      {t}S/MIME certificate{/t} (<i>{$userSMIMECertificate_state}</i>)
+      {t}S/MIME certificate{/t} 
    </td>
    <td >
      <input name="userSMIMECertificate_file" type="file" size="20" maxlength="255" accept="text/*.*">
@@ -58,7 +58,7 @@
 <table style="vertical-align:top; text-align:left;border-top: 1px solid rgb(176,176,176);" width="100%" cellpadding=4 border=0> 
  <tr>
    <td width="250">
-      {t}PKCS12 certificate{/t} (<i>{$userPKCS12_state}</i>)
+      {t}PKCS12 certificate{/t} 
    </td>
    <td>
      <input name="userPKCS12_file" type="file" size="20" maxlength="255" accept="text/*.*">
