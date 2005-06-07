@@ -1,4 +1,4 @@
-<body style='background-color:#A0A0A0'>
+<body style='background-color:#A0A0A0;background-image:none'>
 <form action="setup.php?check_globals=42" method="post" enctype="multipart/form-data">
 
 <script language="JavaScript" type="text/javascript">
