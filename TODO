@@ -6,6 +6,8 @@ Things to fix before 2.4:
   - shared folders
   - Kolab disabled -> check. Check is_account!
 
+* Fix certificate display
+
 Target for 2.5:
 ===============
 
