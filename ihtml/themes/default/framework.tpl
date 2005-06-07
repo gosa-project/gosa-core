@@ -16,7 +16,7 @@
 	 </a>
 	</td>
         <td>
-	 <a class=maintitlebar style="margin-left:35px; vertical-align:middle;">
+	 <a class=maintitlebar style="margin-left:35px; vertical-align:middle;" {$help_method}>
           <img src='{$go_help}' align="middle" border="0" alt="GOSA2">&nbsp;{t}Help{/t}
          </a>
 	</td>

@@ -202,10 +202,17 @@ if(isset($_SESSION['POST'])){
 /* show web frontend */
 $smarty->assign ("date", date("l, dS F Y H:i:s O"));
 $smarty->assign ("must", "<font class=\"must\">*</font>");
+if (isset($plug)){
+  $plug= "?plug=$plug";
+} else {
+  $plug= "";
+}
 if ($_SESSION['js']==FALSE){
   $smarty->assign("javascript", "false");
+  $smarty->assign("help_method", "href='helpviewer.php$plug' target='_new'");
 } else {
   $smarty->assign("javascript", "true");
+  $smarty->assign("help_method", "href='' onClick=\"window.open('helpviewer.php$plug','{t}GOsa help{/t}','width=600,height=700')\"");
 }
 $smarty->assign ("username", $ui->username);
 $smarty->assign ("go_logo", get_template_path('images/go_logo.png'));
@@ -218,11 +225,8 @@ $smarty->assign ("go_left", get_template_path('images/go_left.png'));
 $smarty->assign ("go_help", get_template_path('images/help.png'));
 $plist->gen_menu();
 $smarty->assign ("menu", $plist->menu);
-if (isset($plug)){
-  $smarty->assign ("plug", "?plug=$plug");
-} else {
-  $smarty->assign ("plug", "");
-}
+$smarty->assign ("plug", "$plug");
+
 $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
 
 
