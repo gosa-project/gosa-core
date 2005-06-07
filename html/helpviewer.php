@@ -61,7 +61,10 @@ textdomain($domain);
 /* Get plugin list */
 $plist= $_SESSION['plist'];
 
-echo "Help...";
+/* Fill page */
+$header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
+$display= $header.$smarty->fetch(get_template_path('help.tpl'));
+echo $display;
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

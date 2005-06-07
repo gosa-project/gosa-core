@@ -212,7 +212,7 @@ if ($_SESSION['js']==FALSE){
   $smarty->assign("help_method", "href='helpviewer.php$plug' target='_new'");
 } else {
   $smarty->assign("javascript", "true");
-  $smarty->assign("help_method", "href='' onClick=\"window.open('helpviewer.php$plug','{t}GOsa help{/t}','width=600,height=700')\"");
+  $smarty->assign("help_method", "href='' onClick=\"window.open('helpviewer.php$plug','{t}GOsa help{/t}','width=600,height=700,location=no,toolbar=no,directories=no,menubar=no,status=no')\"");
 }
 $smarty->assign ("username", $ui->username);
 $smarty->assign ("go_logo", get_template_path('images/go_logo.png'));
