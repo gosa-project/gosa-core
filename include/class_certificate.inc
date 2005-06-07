@@ -81,9 +81,9 @@ class certificate
       /* Reset*/
       return(false);
     }
-  
+
     $this->info(false);
-  
+
     /* Loaded a readable cert */
     return(true);
   }
@@ -95,11 +95,11 @@ class certificate
       $this->error = _("The Format must be PEM, to output certificate informations");
       return(false);
     } else {
-    /* return an array with all given information */
-    $this->info=openssl_x509_parse($this->data);
-    
-    if($ret)
-      return($this->info);
+      /* return an array with all given information */
+      $this->info=openssl_x509_parse($this->data);
+
+      if($ret)
+        return($this->info);
     }
   }
 
@@ -132,6 +132,30 @@ class certificate
   function getOU()
   {
     return($this->info['subject']['OU']);
+  }
+
+  function getSerialNumber()
+  {
+    return($this->info['serialNumber']);
+  }
+
+  function isvalid($returnstr = false)
+  {
+  if(($this->type != false)&&(count($this->info)>1))
+    {
+     if($returnstr){
+        return(_("valid"));
+      }else{
+        return(true);
+      }
+    }else{
+      if($returnstr){
+        return(_("invalid"));
+      }else{
+        return(false);
+      }
+
+    }
   }
 
   

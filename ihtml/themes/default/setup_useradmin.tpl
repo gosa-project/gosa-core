@@ -34,7 +34,7 @@
 		</td>
 	</tr>
 </table>
-
+{$str_there}
 <p class="plugbottom">
 <input type="hidden" name="next" value="6">
 <input type='submit' name='back' value='{t}Back{/t}' >

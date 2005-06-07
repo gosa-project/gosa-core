@@ -25,7 +25,7 @@ function view_schema_check($table)
     }
   }
   $message.="</table>";
-  
+
   return $message;
 }
 
@@ -236,7 +236,7 @@ function check(&$faults, $message, $description, $test, $required= TRUE)
     }
   }
   $msg.= "</td></tr><tr><td class='check' style='padding-left:20px;".
-         "background-color:#F0F0F0;'>$description</td></tr></table><br>";
+    "background-color:#F0F0F0;'>$description</td></tr></table><br>";
 
   return $msg;
 }
@@ -279,19 +279,19 @@ function perform_php_checks(&$faults)
   $msg.= check (	$faults, _("Checking for imap module"),
       _("The IMAP module is needed to communicate with the IMAP server. It gets status informations, creates and deletes mail users."),
       function_exists('imap_open'));
-      
+
   $msg.= check (	$faults, _("Checking for getacl in imap"),
       _("The getacl support is needed for shared folder permissions. The standard IMAP module is not capable of reading acl's. You need a recend PHP version for this feature."),
       function_exists('imap_getacl'), FALSE);
-      
+
   $msg.= check (	$faults, _("Checking for mysql module"),
       _("MySQL support is needed for reading GOfax reports from databases."),
       function_exists('mysql_query'), FALSE);
-      
+
   $msg.= check (	$faults, _("Checking for cups module"),
       _("In order to read available printers from IPP protocol instead of printcap files, you've to install the CUPS module."),
       function_exists('cups_get_dest_list'), FALSE);
-      
+
   $msg.= check (	$faults, _("Checking for kadm5 module"),
       _("Managing users in kerberos requires the kadm5 module which is downloadable via PEAR network."),
       function_exists('kadm5_init_with_password'), FALSE);
@@ -623,7 +623,7 @@ function show_setup_page3($withoutput = true)
   if(isset($_POST['continue3'])){
     if(!isset($uri)) {
       $fault = true;
-      
+
       /* Output the Error */
       if($withoutput) {
         print_red (_("You've to specify an ldap server before continuing!"));
@@ -632,7 +632,7 @@ function show_setup_page3($withoutput = true)
     }
   } elseif (!$ds = @ldap_connect (validate($uri))) {
     $fault =true;
-    
+
     /* Output the Error */
     if($withoutput) {
       print_red (_("Can't connect to the specified LDAP server! Please make sure that is reachable for GOsa."));
@@ -646,7 +646,7 @@ function show_setup_page3($withoutput = true)
     /* if we can't bind , print error */
     if (!$r  =  @ldap_bind ($ds)) {
       $fault = true;
-    
+
       /* Output the Error */
       if($withoutput) {
         print_red (_("Can't bind to the specified LDAP server! Please make sure that it is reachable for GOsa."));
@@ -698,7 +698,7 @@ function show_setup_page4($withoutput = true)
   $arr_crypts= array();
   $temp      = "";
   $checkvars = array("location", "admin", "password", "peopleou", "base",
-                     "peopledn", "arr_crypts", "mail", "uidbase");
+      "peopledn", "arr_crypts", "mail", "uidbase");
 
   if(!isset($_SESSION['ldapconf']['arr_cryptkeys'])) {
     require_once("class_password-methods.inc");
@@ -739,7 +739,7 @@ function show_setup_page4($withoutput = true)
       if($withoutput){
         print_red(_("Bind to server successful, but the server seems to be completly empty, please check all informations twice"));
       }
-      
+
     } else {
       $base= $attr[0]['dn'];
     }
@@ -814,12 +814,12 @@ function show_setup_page4($withoutput = true)
 
   if(isset($_POST['check'])) {
     $ldap= new LDAP($_SESSION['ldapconf']['admin'],
-                    $_SESSION['ldapconf']['password'],
-                    $_SESSION['ldapconf']['uri']);
+        $_SESSION['ldapconf']['password'],
+        $_SESSION['ldapconf']['uri']);
 
     $m= schema_check($_SESSION['ldapconf']['uri'],
-                    $_SESSION['ldapconf']['admin'],
-                    $_SESSION['ldapconf']['password']);
+        $_SESSION['ldapconf']['admin'],
+        $_SESSION['ldapconf']['password']);
     $_SESSION['classes']= $m;
 
     if ($ldap->error != "Success") {
@@ -869,7 +869,7 @@ function show_setup_page5($withoutput=true)
     $smarty->assign ("schemas", view_schema_check($m));
     $smarty->assign ("content", get_template_path('setup_finish.tpl'));
   }
-  
+
   /* Output templates... */
   if($withoutput){
     $smarty->display (get_template_path('headers.tpl'));
@@ -880,7 +880,7 @@ function show_setup_page5($withoutput=true)
   if($withoutput){
     $smarty->display (get_template_path('setup.tpl'));
   }
-  
+
   return(true);
 }
 
@@ -891,6 +891,11 @@ function create_user_for_setup($withoutput=true)
 
   $ldapconf = $_SESSION['ldapconf'];
   $smarty = get_smarty();
+  
+  $need_to_create_group = false;
+  $need_to_create_user  = false;
+
+  $str_there="";
 
   if(isset($_SESSION['classes'])){
     $classes= $_SESSION['classes'];
@@ -900,54 +905,81 @@ function create_user_for_setup($withoutput=true)
      So we do a last test on this page
      is there a user with ACLs :all which will be able to adminsitrate GOsa
      We check that, if this user or group is missing we ask for creating them */
-  $ldap= new LDAP($_SESSION['ldapconf']['admin'],
-                  $_SESSION['ldapconf']['password'],
-                  $_SESSION['ldapconf']['uri']);
+  $ldap= new LDAP($_SESSION['ldapconf']['admin'],    $_SESSION['ldapconf']['password'],   $_SESSION['ldapconf']['uri']);
 
-  /* Now we are testing for a group, with the rights :all */
+  /* 
+  Now we are testing for a group, with the rights :all 
+  */
+  
   $ldap->cd($ldapconf['base']);
   $ldap->search("(&(objectClass=gosaObject)(gosaSubtreeACL=:all))");
 
   $group_cnt  = $ldap->count();
   $data       = $ldap->fetch();
-  $create_user= false;
 
-  /* We need to create administrative user and group
-     because theres no group found */
+//  $str_there  = "Searching for Aminitrative users <br><br>";
+
+  /* 
+  We need to create administrative user and group  because theres no group found 
+  */
   if($group_cnt < 1) {
     
-    /* Set var to create user */
-    $create_user=   true;
+    /* 
+    Set var to create user 
+    */
+//    $str_there  =   "no group found<br>";
+
+    $need_to_create_group = true;
+    $need_to_create_user  = true;
+
 
     /* Output error */
     if(($withoutput)&&(!isset($_POST['new_admin']))){
       print_red(_("You're missing an administrative account for GOsa, you'll not be able to administrate anything!"));
     }
-
   } else {
+    
+//    $str_there = "Group found <br>".$data['dn'];    
 
+    $need_to_create_group = false;
+ 
+    $ldap->clearResult();
+   
     /* We found an Administrative Group, is there a user, too */
     if(isset($data['memberUid'][0])) {
-      $ldap->search("(&(objectClass=gosaAccount)(objectClass=person))",array("uid=".$data['memberUid'][0]));
+      $str = "uid=".$data['memberUid']['0'];
+      $ldap->search("(&(objectClass=gosaAccount)(objectClass=person)(".$str."))");
       $data2   = $ldap->fetch();
-    }
-
-    /* We must create a user */
-    if (($ldap->count() < 1)||(!isset($data2))) {
-      $create_user = true;
-      if(($withoutput)&&(!isset($_POST['new_admin']))){
-        print_red(_("You're missing an administrative account for GOsa, you'll not be able to administrate anything!"));
+  
+      /* We must create a user */
+      if (($ldap->count() < 1)||(!isset($data2))) {
+//        $str_there.="Missing user";
+        
+        $need_to_create_user = true;
+      
+        if(($withoutput)&&(!isset($_POST['new_admin']))){
+          print_red(_("You're missing an administrative account for GOsa, you'll not be able to administrate anything!"));
+        }
+      }else {
+//        $str_there.="<br>User found <br>".$data2['dn'];
+        $need_to_create_user = false;
       }
     } else {
-      /* We don't need to add a user */
-      return(true);
+      $need_to_create_user=true;
+      if(($withoutput)&&(!isset($_POST['new_admin']))){
+          print_red(_("You're missing an administrative account for GOsa, you'll not be able to administrate anything!"));
+        }   
+//      $str_there.="<br>No User found <br>";
     }
-
   }
+
+  if(!($need_to_create_user&&$need_to_create_group))
+    return(true);
 
   /* We need to create a new user with group */
   if(isset($_POST['new_admin']))
   {
+  
     /* Adjust password attributes according to the samba version */
     if (isset($classes['samba3'])) {
       $samba= "2";
@@ -960,53 +992,60 @@ function create_user_for_setup($withoutput=true)
     }
 
     /* Nothing submitted */
-    if(( (empty($_POST['admin_name']))||(empty($_POST['admin_pass'])) )&&(!$create_user)) {
+    if(((empty($_POST['admin_name']))||(empty($_POST['admin_pass'])))) {
       return(true);
     }
 
-    /* We have the order to create on Admin ^^
-       Detect Samba version to define the Attribute names shown below */
-    $ldap->cd($ldapconf['base']);
+    if($need_to_create_user) {
+      /* We have the order to create an Admin */
+      /* Define the user we are going to create */
+      $dn= "cn=".$_POST['admin_name'].",".$ldapconf['peopleou'].",".$ldapconf['base'];
+      $arr['objectClass'][0] ="person";
+      $arr['objectClass'][1] ="organizationalPerson";
+      $arr['objectClass'][2] ="inetOrgPerson";
+      $arr['objectClass'][3] ="gosaAccount";
+      $arr['uid']            = $_POST['admin_name'];
+      $arr['cn']             = $_POST['admin_name'];
+      $arr['sn']             = $_POST['admin_name'];
+      $arr['givenName']      = "GOsa main administrator";
+      $arr[$lmPassword]      = "10974C6EFC0AEE1917306D272A9441BB";
+      $arr[$ntPassword]      = "38F3951141D0F71A039CFA9D1EC06378";
+      $arr['userPassword']   = crypt_single($_POST['admin_pass'],"md5");
+    
 
-    /* Define the user we are going to create */
-    $dn= "cn=".$_POST['admin_name'].",".$ldapconf['peopleou'].",".$ldapconf['base'];
-    $arr['objectClass'][0] ="person";
-    $arr['objectClass'][1] ="organizationalPerson";
-    $arr['objectClass'][2] ="inetOrgPerson";
-    $arr['objectClass'][3] ="gosaAccount";
-    $arr['uid']            = $_POST['admin_name'];
-    $arr['cn']             = $_POST['admin_name'];
-    $arr['sn']             = $_POST['admin_name'];
-    $arr['givenName']      = "GOsa main administrator";
-    $arr[$lmPassword]      = "10974C6EFC0AEE1917306D272A9441BB";
-    $arr[$ntPassword]      = "38F3951141D0F71A039CFA9D1EC06378";
-    $arr['userPassword']   = crypt_single($_POST['admin_pass'],"md5");
-
-    if( !$ldap->dn_exists ( $dn )){ 
-      $ldap->cd($dn); 
-      $ldap->create_missing_trees($dn);
-      $ldap->add($arr);
-      if($ldap->error!="Success"){
-        print_red("Can't create user, and / or Group, possibly this problem  depends on an empty LDAP server. Check your configuration and try again!");
-      }
+      if(!$ldap->dn_exists($dn)){ 
+        $ldap->cd($dn); 
+        $ldap->create_missing_trees($dn);
+        $ldap->cd($dn);
+        $ldap->add($arr);
+        if($ldap->error!="Success"){
+          print_red($ldap->error);
+          print_red("Can't create user, and / or Group, possibly this problem  depends on an empty LDAP server. Check your configuration and try again!");
+        }
+      }    
     }
 
     /* There's already a group for administrator, so we only need to add the user */
-    if($group_cnt) {
-
+    if(!$need_to_create_group) {
       if(!isset($data['memberUid'])) {
         $arrr['memberUid']= $_POST['admin_name'];
       } else {
         $data['memberUid'][$data['memberUid']['count']]=$_POST['admin_name'];
         $arrr['memberUid'] = $data['memberUid'];
         unset($arrr['memberUid']['count']);
+  
+        $tmp = array_reverse($arrr['memberUid']);    
+        foreach($tmp as $tt){
+          $tmp2[]=$tt;
+        }
+        $arrr['memberUid']= $tmp2;
+//        $str_there="Group found<br>".$data['dn'];
       }
 
       $ldap->cd($data['dn']);
       $ldap->modify($arrr);
 
     } else {
-      
       $dn                    = "cn=administrators,".$ldapconf['groupou'].",".$ldapconf['base'];
       $arrr['objectClass'][0]= "gosaObject";
       $arrr['objectClass'][1]= "posixGroup";
@@ -1014,10 +1053,13 @@ function create_user_for_setup($withoutput=true)
       $arrr['cn']            = "administrators";
       $arrr['gidNumber']     = "999";
       $arrr['memberUid']     = $_POST['admin_name'];
+
       $ldap->cd($dn);
+      $ldap->create_missing_trees($dn);
+      $ldap->cd($dn);
+
       $ldap->add($arrr);
     }
-
     return(true);
   } else {
 
@@ -1038,10 +1080,10 @@ function create_user_for_setup($withoutput=true)
   if (isset($_SESSION['errors'])) {
     $smarty->assign("errors", $_SESSION['errors']);
   }
+  $smarty->assign("str_there",$str_there);
   if($withoutput){
     $smarty->display (get_template_path('setup.tpl'));
   }
-
   return(false);
 }
 
@@ -1069,7 +1111,7 @@ function get_available_mail_classes()
     }
 
   }
-  
+
   return($methods);
 }
 
