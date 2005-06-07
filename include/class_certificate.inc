@@ -25,8 +25,7 @@ class certificate
   function import($data,$type=false)
   {
     /* if is file read from file, else use string as it is*/
-    if(is_file($data))
-    {
+    if(is_file($data))  {
       $fp = fopen($data,"r+");
       $str = "";
 
@@ -131,8 +130,7 @@ class certificate
   function derTOpem()
   {
     /* if type is DER start convert */
-    if($this->type == DER)
-    {
+    if($this->type == DER)    {
       /* converting */
       $this->type= PEM; 
       $str = base64_encode($this->data);
@@ -140,8 +138,7 @@ class certificate
 
       $end = "";
 
-      while($len > 0 )
-      {
+      while($len > 0 )      {
         $len = $len - 64;
         $str1 = substr($str,0,64)."\n";
         $str  = substr($str,64,$len);
@@ -160,8 +157,7 @@ class certificate
   /*Convert pem to der Certificate */
   function pemTOder()
   {
-    if($this->type == PEM)
-    {
+    if($this->type == PEM)    {
       $this->type= DER;
 
       $str = $this->data;
@@ -178,8 +174,6 @@ class certificate
   }
 
 }
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
-
-
-
