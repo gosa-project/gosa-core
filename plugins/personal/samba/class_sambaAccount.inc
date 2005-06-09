@@ -406,7 +406,8 @@ class sambaAccount extends plugin
     $sambaKickoffTime_months= array(_("January"), _("February"), _("March"), _("April"),
         _("May"), _("June"), _("July"), _("August"), _("September"),
         _("October"), _("November"), _("December"));
-    $smarty->assign("sambaKickoffTime_day", $sambaKickoffTime_date["mday"]-1);
+    //$smarty->assign("sambaKickoffTime_day", $sambaKickoffTime_date["mday"]-1);
+    $smarty->assign("sambaKickoffTime_day", $sambaKickoffTime_date["mday"]); // hickert
     $smarty->assign("sambaKickoffTime_days", $sambaKickoffTime_days);
     $smarty->assign("sambaKickoffTime_months", $sambaKickoffTime_months);
     $smarty->assign("sambaKickoffTime_month", $sambaKickoffTime_date["mon"]-1);
@@ -890,7 +891,8 @@ class sambaAccount extends plugin
       }
       if ($this->kickoff_time_set == "1"){
         # Add one day in unixtime format to be compatible with usrmgr
-        $this->attrs['sambaKickoffTime']= $this->sambaKickoffTime + 86400;
+        //$this->attrs['sambaKickoffTime']= $this->sambaKickoffTime + 86400; 
+        $this->attrs['sambaKickoffTime']= $this->sambaKickoffTime; //hickert 
       } else {
         # $this->attrs['sambaKickoffTime']= array();
         # Set more useful default setting
