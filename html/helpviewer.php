@@ -24,7 +24,7 @@
 /* Basic setup, remove eventually registered sessions */
 require_once ("../include/php_setup.inc");
 require_once ("../include/functions.inc");
-require_once ("helpviewer_func.inc");
+require_once ("../include/functions_helpviewer.inc");
 session_start ();
 error_reporting(E_ALL);
 /* Logged in? Simple security check */
@@ -197,14 +197,13 @@ if(isset($_POST['search'])){
   $help_contents=readfiles($helpdir,$prefix,$suffix,false,$page);
 
   /* Mark last searched words */
-  if($_GET['mark']){
+  if(isset($_GET['mark'])){
     $marks = ($_SESSION['lastresults']) ; 
     $help_contents = markup_page($help_contents[$page]['content'],$marks[$page]);
     $help_contents=remove_unwanted_tags($help_contents,$replacements);  
   }else{
     $help_contents=remove_unwanted_tags($help_contents[$page]['content'],$replacements);
   }
-
 
   $smarty->assign("help_contents",$help_contents);
 
@@ -218,4 +217,6 @@ if(isset($_POST['search'])){
   $display= $header.$smarty->fetch(get_template_path('help.tpl'));
   echo $display;
 }
+
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
