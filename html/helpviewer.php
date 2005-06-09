@@ -71,7 +71,7 @@ My PART ^^
 ##################
  */
 
-//set_error_handler("myone");
+set_error_handler("myone");
 $helpdir                      = "../doc/guide/admin/en/manual_gosa_en/"; // Folder to use for help files
 $defaultpage                  = "index.html";                            // alternative file, shown on error, or on first call
 $prefix                       = "node";                                  // Prefix of the generated help files 
@@ -156,6 +156,11 @@ if(isset($_POST['search'])){
 }else{
 
   /* present last searched word(s)*/
+  if(!isset($_SESSION['search_string'])){
+    $_SESSION['search_string']="";
+  }
+    
+
   $smarty->assign("search_string",$_SESSION['search_string']);
 
   /* Read all files, prepare to serach */
@@ -164,6 +169,8 @@ if(isset($_POST['search'])){
   /* Get transmitted page */
   if(isset($_GET['pg'])){
     $page = $_GET['pg'];
+  }else{
+    $page = $defaultpage;
   }
 
   /* test if this page exists, in our array of files */
