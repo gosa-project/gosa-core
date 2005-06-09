@@ -111,7 +111,7 @@ $replacements['range'][$i]['to']      = "";
 $i++;
 /* Bsp . : Replace  Table Head to specified tableheader */ 
 $replacements['range'][$i]['from']  = "'<TABLE.*>'";
-$replacements['range'][$i]['to']    = "<table border=0 cellspacing=1 bgcolor=\"#999999\" width=\"95%\" align=\"center\" >" ;
+$replacements['range'][$i]['to']    = "<table border=1 cellspacing=0 bgcolor=\"#E0E0E0\" width=\"95%\" align=\"center\" cellpadding=\"3\">" ;
 
 /* Default pages */
 $backward =$defaultpage;
