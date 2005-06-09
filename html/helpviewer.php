@@ -71,12 +71,15 @@ My PART ^^
  */
 
 //set_error_handler("myone");
-$helpdir      = "../doc/guide/admin/en/manual_gosa_en/";
-$defaultpage  = "index.html";
-$prefix       = "node";
-$suffix       = ".html";
-$maxresults   = 10;
-$minwordlength= 3;
+$helpdir                      = "../doc/guide/admin/en/manual_gosa_en/"; // Folder to use for help files
+$defaultpage                  = "index.html";                            // alternative file, shown on error, or on first call
+$prefix                       = "node";                                  // Prefix of the generated help files 
+$suffix                       = ".html";                                 // Suffix of the generated helpfiles
+$maxresults                   = 10;                                      // max number of results shown in result list
+$minwordlength                = 3;                                       // Word less than 3 chars will be dropped in search
+$allowed_chars_in_searchword  = "'[^a-z0-9 %_-]'i";                      // Remove all chars that would disturb our search like < or > ...
+$pre_mark                     = "<b><u><i>" ;  // Sign words with this
+$suf_mark                     = "</i></u></b>";                   //  and this
 
 // Only for testing delete this if everything works fine
 function myone($par1,$par2,$par3,$par3)
@@ -329,7 +332,7 @@ function getcontents($file)
 /*Remove tags */
 function remove_unwanted_tags($str,$replacements)
 {
-#fixme This solution is ....
+#fixme This solution is ... ARRG
   $str=str_replace("\n","||WasBr||",$str);
   foreach($replacements['range'] as $var)
   {
@@ -350,7 +353,7 @@ function linkwrapper($str,$link)
 /* Search content */
 function search($arr,$word)
 {
-  global $minwordlength;
+  global $minwordlength,$allowed_chars_in_searchword;
   /* Prepare Vars */ 
   $result                     =array(); // Search result, filename, + hits + hits per word + matches 
   $words                      =array(); // Temporary searchword handling
@@ -364,7 +367,7 @@ function search($arr,$word)
   $word   = trim($word);
 
   /* Filter all unusable chars */
-  $word   = preg_replace("[^a-z0-9_+% ]","",$word);
+  $word   = preg_replace($allowed_chars_in_searchword,"",$word);
   $words  = split(" ",str_replace("+"," ",$word));
 
   /* Check all wordlengths */
@@ -455,7 +458,7 @@ function searchlist($arr,$res,$maxresults)
   }
 
   /* appending footer message for resultlist */
-  $ret.= "<br> ".count($topten)." - "._("Results for your search with the keyword")." <b>".$_SESSION['search_string']."</b>"._(" interpreted as ")."<b>".$_SESSION['parsed_search_keyword']."</b>";
+  $ret.= "<br> ".count($topten)." - "._("Results for your search with the keyword")." <b>".htmlentities($_SESSION['search_string'])."</b>"._(" interpreted as ")."<b>".$_SESSION['parsed_search_keyword']."</b>";
 
   return($ret);
 }
@@ -463,9 +466,8 @@ function searchlist($arr,$res,$maxresults)
 /* This function marks a string with the given search result for this string*/
 function markup_page($arr,$res)
 {
+global $pre_mark,$suf_mark;
   $ret    = "";             // return value
-  $pre    = "<b><u><i>" ;
-  $suf    = "</i></u></b>"; 
   $repl   = array();
   $posadd = 0;
 
@@ -479,7 +481,7 @@ function markup_page($arr,$res)
 
   foreach($repl as $position=>$word)  {
     $pos1 = strlen($arr);
-    $arr= markword($arr,($position+$posadd),$word,$pre,$suf);
+    $arr= markword($arr,($position+$posadd),$word,$pre_mark,$suf_mark);
     $pos2 = strlen($arr);
     $posadd =$posadd + ($pos2 - $pos1);
   }
