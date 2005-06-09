@@ -23,6 +23,7 @@
   Only function definition will follow here
 /*******************************************
 
+
 /* Reads all files in specified directory with contents an some inforations about the file */
 /* Read all files with contents*/
 /*                 |Folder="/var/ww...",
