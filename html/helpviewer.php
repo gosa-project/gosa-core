@@ -1,7 +1,7 @@
 <?php
 /*
    This code is part of GOsa (https://gosa.gonicus.de)
-   Copyright (C) 2003  Cajus Pollmeier
+   Copyright (C) 2003  Cajus Pollmeier, Fabian Hickert
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -17,6 +17,9 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+
+
+
 
 /* Basic setup, remove eventually registered sessions */
 require_once ("../include/php_setup.inc");
@@ -65,8 +68,8 @@ $plist= $_SESSION['plist'];
 ##################
 My PART ^^
 ##################
-
  */
+
 //set_error_handler("myone");
 $helpdir      = "../doc/guide/admin/en/manual_gosa_en/";
 $defaultpage  = "index.html";
@@ -75,13 +78,14 @@ $suffix       = ".html";
 $maxresults   = 10;
 $minwordlength= 3;
 
-
+// Only for testing delete this if everything works fine
 function myone($par1,$par2,$par3,$par3)
 {
   print "<br>Seite : ".$par1."<br>Name : ".$par2."<br>Seite : ".$par3."<br>Zeile : ".$par3;
 }
 
 /* Define which tags musst be delete, header, navigation, banner */
+#fixme Theres a better method to handle replacment , preg_replace can handle arrays , this, would be little easier
 $i=0;
 $replacements=array();
 $replacements['range'][$i]['from']    = "/<!DOC.*<BODY >/";
@@ -117,7 +121,7 @@ if(isset($_POST['search'])){
 
   /* Get Keyword */
   $keyword = $_POST['search_string'];  
-  
+
   /* Save Keyword to be able to show last searched word in template */
   $_SESSION['search_string']= $keyword;
 
@@ -142,15 +146,15 @@ if(isset($_POST['search'])){
 
   /* Create result list */
   $smarty->assign("help_contents",searchlist($arr,$res,$maxresults));
-  
+
   /* Output html ...*/
   $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
   $display= $header.$smarty->fetch(get_template_path('help.tpl'));
   echo $display;
 
-/*
-  Don't search, only show selected page
-*/
+  /*
+     Don't search, only show selected page
+   */
 }else{
 
   /* present last searched word(s)*/
@@ -163,11 +167,11 @@ if(isset($_POST['search'])){
   if(isset($_GET['pg'])){
     $page = $_GET['pg'];
   }
-  
+
   /* test if this page exists, in our array of files */
   if((!isset($helppages[$page]))&&($page!=$defaultpage))
   {
-    print "Requested helppage is unknown, redirekted to index";
+    //print "Requested helppage is unknown, redirekted to index"; // For debugging only
     $page = $defaultpage;
   }
 
@@ -217,17 +221,14 @@ if(isset($_POST['search'])){
   echo $display;
 }
 
-
-
-/* 
-   Only function definition will follow here
-/*
-
-
+/******************************************* 
+  Only function definition will follow here
+#fixme   Exclude function to seperate file
+/*******************************************
 
 /* Reads all files in specified directory with contents an some inforations about the file */
-  /* Read all files with contents*/
-  /*               |Folder="/var/ww...",
+/* Read all files with contents*/
+/*                 |Folder="/var/ww...",
                    |        |Fileprefix="node"
                    |        |       |Filesuffix=".html"
                    |        |       |       |WithoutContent=false(This means : read content)
@@ -253,15 +254,15 @@ function readfiles($basedir,$prefix,$suffix,$onlyIndex,$singlepage=false)
 
     /* While theres is an unreaded file in our resource */
     while (($file = readdir($dir)) !== false) {
-      
+
       /* Filter all files which arn't intressting */
       if((strstr($file,$suffix))&&($file!=".")&&($file!="..")&&(strstr($file,$prefix))){
-       
+
         /* Collect informations */
         $str[$file]=array();
         $str[$file]['name']   = $file;
         $str[$file]['size']   = filesize($basedir.$file);
-      
+
         /* Readfile conent too ? */
         if(!$onlyIndex){
           $str[$file]['content']= remove_unwanted_tags(linkwrapper(getcontents($basedir.$file),""),$replacements);
@@ -273,7 +274,7 @@ function readfiles($basedir,$prefix,$suffix,$onlyIndex,$singlepage=false)
       }
     }
 
-  /* Only get on file*/
+    /* Only get on file*/
   }else{
     /* Pages read = 1 */       
     $cnt = 1;
@@ -283,12 +284,12 @@ function readfiles($basedir,$prefix,$suffix,$onlyIndex,$singlepage=false)
     $str[$file]           = array();
     $str[$file]['name']   = $file;
     $str[$file]['size']   = filesize($basedir.$file);
-  
+
     /* If onlyIndex == true skip reading content */
     if(!$onlyIndex){
       $str[$file]['content']= remove_unwanted_tags(linkwrapper(getcontents($basedir.$file),""),$replacements);
     }
-    
+
     /* Include file status, for debugging, not used in script yet */
     $str[$file]['stat']   = stat($basedir.$file);
   }
@@ -311,7 +312,7 @@ function getcontents($file)
 {
   $str = "" ;   // Temporary variable for file contents 
   $tmp = "" ;   // Temporary varibale for partitial file contents
-  
+
   /* open file and read*/
   $fp = fopen($file,"r");
   if($fp) {
@@ -328,7 +329,7 @@ function getcontents($file)
 /*Remove tags */
 function remove_unwanted_tags($str,$replacements)
 {
-  #fixme This solution is ....
+#fixme This solution is ....
   $str=str_replace("\n","||WasBr||",$str);
   foreach($replacements['range'] as $var)
   {
@@ -346,8 +347,7 @@ function linkwrapper($str,$link)
   return($str);
 }
 
-
-
+/* Search content */
 function search($arr,$word)
 {
   global $minwordlength;
@@ -367,8 +367,6 @@ function search($arr,$word)
   $word   = preg_replace("[^a-z0-9_+% ]","",$word);
   $words  = split(" ",str_replace("+"," ",$word));
 
-  
-
   /* Check all wordlengths */
   foreach($words as $tryword){
     $tryword = trim($tryword);
@@ -380,14 +378,12 @@ function search($arr,$word)
     }
   }
 
-  
-
   /* Use words to search the content */
   foreach($arr as $key=>$val)
   {
     /* overallhits counts hits per page */
     $overallhits=0;
-  
+
     /* Search all words */
     foreach($useablewords as $word)
     {
@@ -396,6 +392,15 @@ function search($arr,$word)
       {
         /* Get all hits for the word in $matches*/
         preg_match_all("/".$word."/i",$arr[$key]['content'], $matches,PREG_OFFSET_CAPTURE);
+
+        /* Filter in Tag results*/
+        if(count($matches[0])){
+          foreach($matches[0] as $num=>$hit){
+            if(is_in_tag($arr[$key]['content'],$hit[1]))  {
+              unset($matches[0][$num]);    
+            }    
+          }
+        }
 
         /* Count matches */
         $overallhits=$overallhits + count($matches[0]);    
@@ -408,14 +413,14 @@ function search($arr,$word)
         if($overallhits > $result['global']['maxhit']){
           $result['global']['maxhit']=$overallhits;  
         }
-  
+
         /* Add results for word to return value*/
         $result[$key]['match'][$word]=array();
         $result[$key]['match'][$word]=$matches[0];
       }
     }
   }
-  
+
   /* Save result in Session, so we can mark words later, or go back to search, without searching again*/
   $_SESSION['lastresults'] = $result;
   return($result);
@@ -431,7 +436,7 @@ function searchlist($arr,$res,$maxresults)
 
   /* Detect 10 best Sites */
   foreach($res as $key=>$val){
-    
+
     /* Skip results with no hits */
     if($val['hits']['overall']>0){
       $topten[$key] = $val['hits']['overall']; 
@@ -448,10 +453,10 @@ function searchlist($arr,$res,$maxresults)
   foreach($topten as $name => $hits)  {
     $ret.= createResultEntry($arr[$name],$res[$name],$name,$global['maxhit']);    
   }
-  
+
   /* appending footer message for resultlist */
-  $ret.= "<br> ".count($topten)." Results for your search with the keyword <b>".$_SESSION['search_string']."</b> it is interpreted as <b>".$_SESSION['parsed_search_keyword']."</b>";
-  
+  $ret.= "<br> ".count($topten)." - "._("Results for your search with the keyword")." <b>".$_SESSION['search_string']."</b>"._(" interpreted as ")."<b>".$_SESSION['parsed_search_keyword']."</b>";
+
   return($ret);
 }
 
@@ -497,14 +502,27 @@ function markword($string,$position,$word,$prefix,$suffix)
 /* Creates HTML output for a single search result entry */
 function createResultEntry($entry,$res,$name,$max)
 {
-
   $percentage = (int)(($res['hits']['overall'] / $max) * 100) ;
 
-  $str =  "<b><a href=\"?pg=".$name."&mark=1\">With ".$percentage."% hit in file ".$name."</a></b><br>" ;
+  $str =  "<b><a href=\"?pg=".$name."&mark=1\">".$percentage."% "._("hit rate in following file ").$name."</a></b><br>" ;
   $str.=  substr(strip_tags($entry['content']),0,200);
   $str.=  "<hr>";
 
   return($str);
 }
+
+/*Simple function to detect if we prepare to change a tag or visible text */
+function is_in_tag($string,$pos)
+{
+  $pos1 = strpos($string,"<",$pos);
+  $pos2 = strpos($string,">",$pos);
+
+  if ($pos1 > $pos2)  {
+    return(true);
+  }else{
+    return(false);
+  }
+}
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
