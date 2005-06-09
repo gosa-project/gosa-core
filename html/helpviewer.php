@@ -73,6 +73,8 @@ $defaultpage  = "index.html";
 $prefix       = "node";
 $suffix       = ".html";
 $maxresults   = 10;
+$minwordlength= 3;
+
 
 function myone($par1,$par2,$par3,$par3)
 {
@@ -103,49 +105,67 @@ $replacements['range'][$i]['from']  = "@<TABLE[^>]*?>.*?>@si";
 $replacements['range'][$i]['to']    = "<table border=0 cellspacing=1 bgcolor=\"#999999\" width=\"95%\" align=\"center\" >" ;
 
 /* Default pages */
-$backward ="index.html";
-$index    ="index.html";
+$backward =$defaultpage;
+$index    =$defaultpage;
 $forward  ="node1.html";
 
 /*
    Here it begins, the real function, above only definitions
  */
-
-$smarty->assign("search_string","");
-
-
+/* We prepare to search, all Document for the given keyword */
 if(isset($_POST['search'])){
 
+  /* Get Keyword */
   $keyword = $_POST['search_string'];  
+  
+  /* Save Keyword to be able to show last searched word in template */
+  $_SESSION['search_string']= $keyword;
 
+  /* Read all files with contents*/
+  /*               |Folder="/var/ww...", 
+                   |        |Fileprefix="node"
+                   |        |       |Filesuffix=".html"
+                   |        |       |       |WithoutContent=false(This means : read content)
+                   |        |       |       |     |Singlepage=false(Means read all, if w want to read single, specify its filename)"*/
   $arr = readfiles($helpdir,$prefix,$suffix,false,$singlepage=false);
 
+  /* Create Searchresult for our Keyword(s) */
   $res = search($arr,$keyword); 
 
+  /* Tell smarty which pages to use for backward forwa.. */
   $smarty->assign("backward",$backward);
   $smarty->assign("index"   ,$index);
   $smarty->assign("forward" ,$forward);
 
-
+  /* Tell smarty the Keyword, to show it in the input field again */
   $smarty->assign("search_string",$keyword);
 
+  /* Create result list */
   $smarty->assign("help_contents",searchlist($arr,$res,$maxresults));
-
+  
+  /* Output html ...*/
   $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
   $display= $header.$smarty->fetch(get_template_path('help.tpl'));
   echo $display;
 
-
+/*
+  Don't search, only show selected page
+*/
 }else{
 
-  /* Read all files, prepare to serach */
-  $helppages = readfiles("../doc/guide/admin/en/manual_gosa_en/",$prefix,true,$suffix);
+  /* present last searched word(s)*/
+  $smarty->assign("search_string",$_SESSION['search_string']);
 
+  /* Read all files, prepare to serach */
+  $helppages = readfiles("../doc/guide/admin/en/manual_gosa_en/",$prefix,$suffix,true);
+
+  /* Get transmitted page */
   if(isset($_GET['pg'])){
     $page = $_GET['pg'];
   }
-
-  if((!isset($helppages[$page]))&&($page!="index.html"))
+  
+  /* test if this page exists, in our array of files */
+  if((!isset($helppages[$page]))&&($page!=$defaultpage))
   {
     print "Requested helppage is unknown, redirekted to index";
     $page = $defaultpage;
@@ -206,6 +226,12 @@ if(isset($_POST['search'])){
 
 
 /* Reads all files in specified directory with contents an some inforations about the file */
+  /* Read all files with contents*/
+  /*               |Folder="/var/ww...",
+                   |        |Fileprefix="node"
+                   |        |       |Filesuffix=".html"
+                   |        |       |       |WithoutContent=false(This means : read content)
+                   |        |       |       |          |Singlepage=false(Means read all, if w want to read single, specify its filename)"*/
 function readfiles($basedir,$prefix,$suffix,$onlyIndex,$singlepage=false)
 {
   global $replacements;
@@ -221,35 +247,60 @@ function readfiles($basedir,$prefix,$suffix,$onlyIndex,$singlepage=false)
 
   /* Startime for Benchmark */ 
   $start =   (time()+microtime());
+
+  /* if singlepage == false -> Get all pages, */
   if(!$singlepage) {
+
+    /* While theres is an unreaded file in our resource */
     while (($file = readdir($dir)) !== false) {
-      if((strstr($file,".html"))&&($file!=".")&&($file!="..")&&(strstr($file,$prefix))){
+      
+      /* Filter all files which arn't intressting */
+      if((strstr($file,$suffix))&&($file!=".")&&($file!="..")&&(strstr($file,$prefix))){
+       
+        /* Collect informations */
         $str[$file]=array();
         $str[$file]['name']   = $file;
         $str[$file]['size']   = filesize($basedir.$file);
+      
+        /* Readfile conent too ? */
         if(!$onlyIndex){
           $str[$file]['content']= remove_unwanted_tags(linkwrapper(getcontents($basedir.$file),""),$replacements);
         }
+
+        /* Include file status, for debugging, not used in script yet */
         $str[$file]['stat']   = stat($basedir.$file);
         $cnt++;
       }
     }
+
+  /* Only get on file*/
   }else{
-    $file = $singlepage;
-    $str[$file]=array();
+    /* Pages read = 1 */       
+    $cnt = 1;
+
+    /* Prepare result*/
+    $file                 = $singlepage;
+    $str[$file]           = array();
     $str[$file]['name']   = $file;
     $str[$file]['size']   = filesize($basedir.$file);
+  
+    /* If onlyIndex == true skip reading content */
     if(!$onlyIndex){
       $str[$file]['content']= remove_unwanted_tags(linkwrapper(getcontents($basedir.$file),""),$replacements);
     }
+    
+    /* Include file status, for debugging, not used in script yet */
     $str[$file]['stat']   = stat($basedir.$file);
   }
 
-  /* Create right order */
+  /* Sort to  right order */
   asort($str);
+
   /* Endtime for Benchmark*/
   $end = (time()+microtime());
   $str['global']['cmptime'] = $end-$start;
+
+  /* Number of pages readed */
   $str['global']['numpages']= $cnt;
   closedir($dir);
   return($str);
@@ -260,6 +311,8 @@ function getcontents($file)
 {
   $str = "" ;   // Temporary variable for file contents 
   $tmp = "" ;   // Temporary varibale for partitial file contents
+  
+  /* open file and read*/
   $fp = fopen($file,"r");
   if($fp) {
     while($tmp = fread($fp,512))
@@ -272,8 +325,10 @@ function getcontents($file)
   return($str);
 }
 
+/*Remove tags */
 function remove_unwanted_tags($str,$replacements)
 {
+  #fixme This solution is ....
   $str=str_replace("\n","||WasBr||",$str);
   foreach($replacements['range'] as $var)
   {
@@ -295,6 +350,7 @@ function linkwrapper($str,$link)
 
 function search($arr,$word)
 {
+  global $minwordlength;
   /* Prepare Vars */ 
   $result                     =array(); // Search result, filename, + hits + hits per word + matches 
   $words                      =array(); // Temporary searchword handling
@@ -302,6 +358,7 @@ function search($arr,$word)
   $tryword                    = "";     // Temporary searchword handling
   $result['global']['maxhit'] = 0;
   unset($_SESSION['lastresults']);
+  unset($_SESSION['parsed_search_keyword']);
 
   /* prepare searchwords */
   $word   = trim($word);
@@ -310,38 +367,56 @@ function search($arr,$word)
   $word   = preg_replace("[^a-z0-9_+% ]","",$word);
   $words  = split(" ",str_replace("+"," ",$word));
 
+  
+
   /* Check all wordlengths */
   foreach($words as $tryword){
     $tryword = trim($tryword);
 
-    if(strlen($tryword)>=3) {
+    /* Filter words smaler than 3 chars */
+    if(strlen($tryword)>=$minwordlength) {
+      $_SESSION['parsed_search_keyword'].=$tryword." ";
       $useablewords[]=$tryword;
     }
   }
 
+  
+
   /* Use words to search the content */
   foreach($arr as $key=>$val)
   {
+    /* overallhits counts hits per page */
     $overallhits=0;
+  
+    /* Search all words */
     foreach($useablewords as $word)
     {
+      /* Skip key global, it contains no file data - it is a summary info*/
       if($key!="global")
       {
+        /* Get all hits for the word in $matches*/
         preg_match_all("/".$word."/i",$arr[$key]['content'], $matches,PREG_OFFSET_CAPTURE);
+
+        /* Count matches */
         $overallhits=$overallhits + count($matches[0]);    
 
+        /* Save collected data */
         $result[$key]['hits'][$word]    = count($matches[0]); 
         $result[$key]['hits']['overall']= $overallhits;  
 
+        /* Save max hits for page */
         if($overallhits > $result['global']['maxhit']){
           $result['global']['maxhit']=$overallhits;  
         }
-
+  
+        /* Add results for word to return value*/
         $result[$key]['match'][$word]=array();
         $result[$key]['match'][$word]=$matches[0];
       }
     }
   }
+  
+  /* Save result in Session, so we can mark words later, or go back to search, without searching again*/
   $_SESSION['lastresults'] = $result;
   return($result);
 }
@@ -356,20 +431,27 @@ function searchlist($arr,$res,$maxresults)
 
   /* Detect 10 best Sites */
   foreach($res as $key=>$val){
-    $topten[$key] = $val['hits']['overall']; 
+    
+    /* Skip results with no hits */
+    if($val['hits']['overall']>0){
+      $topten[$key] = $val['hits']['overall']; 
+    }
   }
 
+  /* Sort by hit position in content, to easier mark words */
   asort($topten);
   $topten = array_reverse($topten);
   $topten = (array_slice($topten,0,$maxresults));
 
-  /* We have a result, an array with all content, an array with hits and position of hits and we have the 10 best hits */
-
+  /* We have a result, an array with all content, an array with hits and position and we have the 10 best hits */
   /* Foreach */  
-  foreach($topten as $name => $hits)
-  {
+  foreach($topten as $name => $hits)  {
     $ret.= createResultEntry($arr[$name],$res[$name],$name,$global['maxhit']);    
-  }  
+  }
+  
+  /* appending footer message for resultlist */
+  $ret.= "<br> ".count($topten)." Results for your search with the keyword <b>".$_SESSION['search_string']."</b> it is interpreted as <b>".$_SESSION['parsed_search_keyword']."</b>";
+  
   return($ret);
 }
 
