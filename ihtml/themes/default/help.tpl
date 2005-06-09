@@ -1,6 +1,6 @@
 <body style='background-color:white;background-image:none'>
+<div style='background-color:#CDF6BD;width:100%;padding:6px;border-bottom:1px solid #909090'>
 <form action='helpviewer.php' name='mainform' method='post' enctype='multipart/form-data'>
- <div style='background-color:#CDF6BD;width:100%;padding:6px;border-bottom:1px solid #909090'>
   <table width="99%">
    <tr>
     <td width="33%">
@@ -14,10 +14,13 @@
 	</td>
    </tr>
   </table>
- </div>
 </form>
-
-<div>
+</div>
+<div style="height: 645px;
+			   width: 100%;
+			   overflow: auto;
+			   margin: 0 ;
+			   background-color: #F1F1F1;">
 {$help_contents}
 </div>
 
