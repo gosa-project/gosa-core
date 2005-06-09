@@ -91,10 +91,13 @@ function myone($par1,$par2,$par3,$par3)
 #fixme Theres a better method to handle replacment , preg_replace can handle arrays , this, would be little easier
 $i=0;
 $replacements=array();
-$replacements['range'][$i]['from']    = "/<!DOC.*<BODY >/";
+$replacements['range'][$i]['from']    = "@<!DOC.*<BODY >@si";
 $replacements['range'][$i]['to']      = "";
 $i++;
 $replacements['range'][$i]['from']  = "@<DIV[^>]*?>.*?DIV>@si";
+$replacements['range'][$i]['to']      = "";
+$i++;
+$replacements['range'][$i]['from']  = "'<code.*code>'";
 $replacements['range'][$i]['to']      = "";
 $i++;
 $replacements['range'][$i]['from']  = "/<HR>/";
@@ -103,12 +106,11 @@ $i++;
 $replacements['range'][$i]['from']  = "@<ADDRESS[^>]*?>.*?ADDRESS>@si";
 $replacements['range'][$i]['to']      = "";
 $i++;
-$replacements['range'][$i]['from']  = "/<\/BODY.*>/";
+$replacements['range'][$i]['from']  = "@<\/BODY[^>]*?>.*?HTML>@si";
 $replacements['range'][$i]['to']      = "";
 $i++;
-
 /* Bsp . : Replace  Table Head to specified tableheader */ 
-$replacements['range'][$i]['from']  = "@<TABLE[^>]*?>.*?>@si";
+$replacements['range'][$i]['from']  = "'<TABLE.*>'";
 $replacements['range'][$i]['to']    = "<table border=0 cellspacing=1 bgcolor=\"#999999\" width=\"95%\" align=\"center\" >" ;
 
 /* Default pages */
@@ -333,13 +335,10 @@ function getcontents($file)
 function remove_unwanted_tags($str,$replacements)
 {
 #fixme This solution is ... ARRG
-  $str=str_replace("\n","||WasBr||",$str);
   foreach($replacements['range'] as $var)
   {
     $str=preg_replace($var['from'],$var['to'],$str);
   }
-
-  $str=str_replace("||WasBr||","\n",$str);
   return($str);
 }
 
