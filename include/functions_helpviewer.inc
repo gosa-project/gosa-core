@@ -1,7 +1,7 @@
 <?php
 /*
    This code is part of GOsa (https://gosa.gonicus.de)
-   Copyright (C) 2003  Cajus Pollmeier, Fabian Hickert
+   Copyright (C) 2005, Fabian Hickert
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -105,6 +105,7 @@ function readfiles($basedir,$prefix,$suffix,$onlyIndex,$singlepage=false)
   return($str);
 }
 
+
 /* Read filecontent */
 function getcontents($file)
 {
@@ -124,6 +125,7 @@ function getcontents($file)
   return($str);
 }
 
+
 /*Remove tags */
 function remove_unwanted_tags($str,$replacements)
 {
@@ -131,12 +133,14 @@ function remove_unwanted_tags($str,$replacements)
   return($str);
 }
 
+
 /*Converts the all links to specified path, is needed to get simple navigation */
 function linkwrapper($str,$link)
 {
   $str=str_replace("HREF=\"","href=\"".$link."?pg=",$str);  
   return($str);
 }
+
 
 /* Search content */
 function search($arr,$word)
@@ -218,6 +222,7 @@ function search($arr,$word)
   return($result);
 }
 
+
 /* Detect 10 Best result entries, sort and call createResultEntry to create HTML output for  complete list */
 function searchlist($arr,$res,$maxresults)
 {
@@ -252,10 +257,12 @@ function searchlist($arr,$res,$maxresults)
   return($ret);
 }
 
+
 /* This function marks a string with the given search result for this string*/
 function markup_page($arr,$res)
 {
-global $pre_mark,$suf_mark;
+  global $pre_mark,$suf_mark;
+  
   $ret    = "";             // return value
   $repl   = array();
   $posadd = 0;
@@ -276,6 +283,7 @@ global $pre_mark,$suf_mark;
   }
   return($arr); 
 }
+
 
 /* This function marks a single word with the specified prefix and suffix */
 function markword($string,$position,$word,$prefix,$suffix)
@@ -301,6 +309,7 @@ function createResultEntry($entry,$res,$name,$max)
 
   return($str);
 }
+
 
 /*Simple function to detect if we prepare to change a tag or visible text */
 function is_in_tag($string,$pos)
