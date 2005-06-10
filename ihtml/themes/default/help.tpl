@@ -1,5 +1,5 @@
 <body style='background-color:white;background-image:none'>
-<div style='background-color:#CDF6BD;width:100%;padding:6px;border-bottom:1px solid #909090'>
+<div style='background-color:#CDF6BD;width:100%;padding-top:10px;border-bottom:1px solid #909090'>
 <form action='helpviewer.php' name='mainform' method='post' enctype='multipart/form-data'>
   <table width="99%">
    <tr>
