@@ -64,6 +64,7 @@ function readfiles($basedir,$prefix,$suffix,$onlyIndex,$singlepage=false)
         /* Readfile conent too ? */
         if(!$onlyIndex){
           $str[$file]['content']= remove_unwanted_tags(linkwrapper(getcontents($basedir.$file),""),$replacements);
+          $str[$file]['headline'] = getheader_from_content($str[$file]['content']);
         }
 
         /* Include file status, for debugging, not used in script yet */
@@ -86,6 +87,7 @@ function readfiles($basedir,$prefix,$suffix,$onlyIndex,$singlepage=false)
     /* If onlyIndex == true skip reading content */
     if(!$onlyIndex){
       $str[$file]['content']= remove_unwanted_tags(linkwrapper(getcontents($basedir.$file),""),$replacements);
+      $str[$file]['headline'] = getheader_from_content($str[$file]['content']);
     }
 
     /* Include file status, for debugging, not used in script yet */
@@ -304,8 +306,8 @@ function markword($string,$position,$word,$prefix,$suffix)
 function createResultEntry($entry,$res,$name,$max)
 {
   $percentage = (int)(($res['hits']['overall'] / $max) * 100) ;
-
-  $str =  "<b><a href=\"?pg=".$name."&mark=1\">".sprintf(_("%s%% hit rate in file %s"),$percentage,$name)."</a></b><br>" ;
+  $str =  "<b>".$entry['headline']."</b><br>";
+  $str.=  "<b><a href=\"?pg=".$name."&mark=1\">".sprintf(_("%s%% hit rate in file %s"),$percentage,$name)."</a></b><br>" ;
   $str.=  substr(strip_tags($entry['content']),0,200);
   $str.=  "<hr>";
 
@@ -323,6 +325,19 @@ function is_in_tag($string,$pos)
     return(true);
   }else{
     return(false);
+  }
+}
+
+/*Returns frist line of readable text, it should be the headline */
+function getheader_from_content($str)
+{
+  $str = strip_tags($str);
+  $pos = 0;
+  $arr = split("\n",$str);
+  foreach($arr as $possibleheadline){
+    if(strlen($possibleheadline)>=3){
+      return $possibleheadline; 
+    }
   }
 }
 
