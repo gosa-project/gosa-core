@@ -157,9 +157,9 @@ if(!file_exists(HELP_BASEDIR."/en/manual_gosa_en/")){
     $res = search($arr,$keyword); 
 
     /* Tell smarty which pages to use for backward forwa.. */
-    $smarty->assign("backward",$backward);
+    $smarty->assign("backward","");
     $smarty->assign("index"   ,$index);
-    $smarty->assign("forward" ,$forward);
+    $smarty->assign("forward" ,"");
 
     /* Tell smarty the Keyword, to show it in the input field again */
     $smarty->assign("search_string",$keyword);

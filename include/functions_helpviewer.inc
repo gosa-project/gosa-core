@@ -137,6 +137,7 @@ function remove_unwanted_tags($str,$replacements)
 /*Converts the all links to specified path, is needed to get simple navigation */
 function linkwrapper($str,$link)
 {
+//  $str = preg_replace("'<HREF.*>'","href=\"".$link."?pg=",$str);
   $str=str_replace("HREF=\"","href=\"".$link."?pg=",$str);  
   return($str);
 }
