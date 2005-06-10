@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schröder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-06-10 12:58+0200\n"
+"PO-Revision-Date: 2005-06-10 13:56+0200\n"
 "Last-Translator:  <(null)>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1776,15 +1776,15 @@ msgstr ""
 "Die angegebene Datei wurde nicht über HTTP POST übertragen! Aktion "
 "abgebrochen."
 
-#: plugins/personal/generic/class_user.inc:358
+#: plugins/personal/generic/class_user.inc:359
 msgid "Please enter a valid serial number"
 msgstr "Bitte geben Sie eine gültige Seriennummer ein"
 
-#: plugins/personal/generic/class_user.inc:395
+#: plugins/personal/generic/class_user.inc:396
 msgid "Serial"
 msgstr "Seriennummer"
 
-#: plugins/personal/generic/class_user.inc:396
+#: plugins/personal/generic/class_user.inc:397
 #, php-format
 msgid ""
 "Certificate is valid from <b>%s</b> to <b>%s</b> and is currently <b>%s</b>."
@@ -1792,63 +1792,63 @@ msgstr ""
 "Zertifkat ist gültig im Zeitraum von <b>%s</b> bis <b>%s</b> (momentan: <b>%"
 "s</b>)."
 
-#: plugins/personal/generic/class_user.inc:396
+#: plugins/personal/generic/class_user.inc:397
 msgid "valid"
 msgstr "gültig"
 
-#: plugins/personal/generic/class_user.inc:396
+#: plugins/personal/generic/class_user.inc:397
 msgid "invalid"
 msgstr "ungültig"
 
-#: plugins/personal/generic/class_user.inc:400
+#: plugins/personal/generic/class_user.inc:401
 msgid "No certificate installed"
 msgstr "Kein Zertifikat eingerichtet"
 
-#: plugins/personal/generic/class_user.inc:790
+#: plugins/personal/generic/class_user.inc:791
 msgid "Kerberos database communication failed"
 msgstr "Die Kommunikation mit der Kerberos-Datenbank ist fehlgeschlagen"
 
-#: plugins/personal/generic/class_user.inc:807
+#: plugins/personal/generic/class_user.inc:808
 msgid "Can't remove user from kerberos database."
 msgstr "Benutzer kann nicht aus der Kerberos-Datenbank entfernt werden."
 
-#: plugins/personal/generic/class_user.inc:818
+#: plugins/personal/generic/class_user.inc:819
 msgid "Can't add user to kerberos database."
 msgstr "Benutzer kann nicht zur Kerberos-Datenbank hinzugefügt werden."
 
-#: plugins/personal/generic/class_user.inc:858
+#: plugins/personal/generic/class_user.inc:859
 msgid "You have no permissions to create a user on this 'Base'."
 msgstr ""
 "Sie haben keine Berechtigung, einen Benutzer innerhalb dieser 'Basis' "
 "anzulegen."
 
-#: plugins/personal/generic/class_user.inc:863
+#: plugins/personal/generic/class_user.inc:864
 msgid "You have no permissions to move a user from the original 'Base'."
 msgstr ""
 "Sie haben keine Berechtigung, einen Benutzer aus der ursprünglichen 'Basis' "
 "zu verschieben."
 
-#: plugins/personal/generic/class_user.inc:869
+#: plugins/personal/generic/class_user.inc:870
 #: plugins/addons/addressbook/class_addressbook.inc:525
 #: plugins/admin/users/class_userManagement.inc:424
 msgid "The required field 'Name' is not set."
 msgstr "Das benötigte Feld 'Name' ist nicht gesetzt."
 
-#: plugins/personal/generic/class_user.inc:878
+#: plugins/personal/generic/class_user.inc:879
 msgid "There's already a person with this 'Login' in the database."
 msgstr "Die von Ihnen angegebene 'Kennung' ist bereits vergeben."
 
-#: plugins/personal/generic/class_user.inc:884
+#: plugins/personal/generic/class_user.inc:885
 #: plugins/addons/addressbook/class_addressbook.inc:529
 #: plugins/admin/users/class_userManagement.inc:427
 msgid "The required field 'Given name' is not set."
 msgstr "Das benötigte Feld 'Vorname' ist nicht gesetzt."
 
-#: plugins/personal/generic/class_user.inc:887
+#: plugins/personal/generic/class_user.inc:888
 msgid "The required field 'Login' is not set."
 msgstr "Das benötigte Feld 'Kennung' ist nicht gesetzt."
 
-#: plugins/personal/generic/class_user.inc:894
+#: plugins/personal/generic/class_user.inc:895
 msgid ""
 "There's already a person with this 'Name'/'Given name' combination in the "
 "database."
@@ -1856,7 +1856,7 @@ msgstr ""
 "Die von Ihnen angegebene Kombination aus 'Name'/'Vorname' ist bereits in der "
 "Datenbank vorhanden."
 
-#: plugins/personal/generic/class_user.inc:901
+#: plugins/personal/generic/class_user.inc:902
 msgid ""
 "The field 'Login' contains invalid characters. Lowercase, numbers and dashes "
 "are allowed."
@@ -1864,48 +1864,52 @@ msgstr ""
 "Das Feld 'Kennung' enthält ungültige Zeichen. Kleinbuchstaben, Zahlen und "
 "Bindestriche sind erlaubt."
 
-#: plugins/personal/generic/class_user.inc:904
+#: plugins/personal/generic/class_user.inc:905
 msgid "The field 'Homepage' contains an invalid URL definition."
 msgstr "Das Feld 'Homepage' enthält eine ungültige Internetadresse."
 
-#: plugins/personal/generic/class_user.inc:907
-#: plugins/personal/generic/class_user.inc:935
+#: plugins/personal/generic/class_user.inc:908
+#: plugins/personal/generic/class_user.inc:936
 #: plugins/addons/addressbook/class_addressbook.inc:535
 #: plugins/addons/addressbook/class_addressbook.inc:563
 #: plugins/admin/departments/class_departmentGeneric.inc:155
 msgid "The field 'Name' contains invalid characters."
 msgstr "Das Feld 'Name' enthält ungültige Zeichen."
 
-#: plugins/personal/generic/class_user.inc:910
-#: plugins/personal/generic/class_user.inc:932
+#: plugins/personal/generic/class_user.inc:911
+#: plugins/personal/generic/class_user.inc:933
 #: plugins/addons/addressbook/class_addressbook.inc:538
 #: plugins/addons/addressbook/class_addressbook.inc:560
 msgid "The field 'Given name' contains invalid characters."
 msgstr "Das Feld 'Vorname' enthält ungültige Zeichen."
 
-#: plugins/personal/generic/class_user.inc:915
-#: plugins/personal/generic/class_user.inc:918
+#: plugins/personal/generic/class_user.inc:916
+#: plugins/personal/generic/class_user.inc:919
 #: plugins/addons/addressbook/class_addressbook.inc:543
 #: plugins/addons/addressbook/class_addressbook.inc:546
 #: plugins/admin/departments/class_departmentGeneric.inc:158
 msgid "The field 'Phone' contains an invalid phone number."
 msgstr "Das Feld 'Telefon' enthält eine ungültige Telefonnummer."
 
-#: plugins/personal/generic/class_user.inc:921
+#: plugins/personal/generic/class_user.inc:922
 #: plugins/addons/addressbook/class_addressbook.inc:549
 #: plugins/admin/departments/class_departmentGeneric.inc:161
 msgid "The field 'Fax' contains an invalid phone number."
 msgstr "Das Feld 'Fax' enthält eine ungültige Telefonnummer."
 
-#: plugins/personal/generic/class_user.inc:924
+#: plugins/personal/generic/class_user.inc:925
 #: plugins/addons/addressbook/class_addressbook.inc:552
 msgid "The field 'Mobile' contains an invalid phone number."
 msgstr "Das Feld 'Mobil' enthält eine ungültige Telefonnummer"
 
-#: plugins/personal/generic/class_user.inc:927
+#: plugins/personal/generic/class_user.inc:928
 #: plugins/addons/addressbook/class_addressbook.inc:555
 msgid "The field 'Pager' contains an invalid phone number."
 msgstr "Das Feld 'Pager' enthält eine ungültige Telefonnummer."
+
+#: plugins/personal/generic/class_user.inc:1053
+msgid "Could not open specified certificate!"
+msgstr "Die angegebene Datei konnte nicht geöffnet werden!"
 
 #: plugins/personal/generic/main.inc:107
 msgid "You are not allowed to set your password!"
@@ -6573,12 +6577,12 @@ msgstr ""
 "In ihrem Setup fehlt ein administratives Konto für GOsa, Sie sind deshalb "
 "nicht in der Lage irgendetwas einzustellen!"
 
-#: include/functions_helpviewer.inc:256
+#: include/functions_helpviewer.inc:257
 #, php-format
 msgid "%s results for your search with the keyword %s interpreted as %s"
 msgstr "%s Ergebnisse für Ihre Suche nach %s (effektiv gesucht nach: %s)"
 
-#: include/functions_helpviewer.inc:307
+#: include/functions_helpviewer.inc:308
 #, php-format
 msgid "%s%% hit rate in file %s"
 msgstr "%s%% Trefferquote in Datei %s"

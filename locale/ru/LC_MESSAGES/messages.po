@@ -1761,77 +1761,77 @@ msgstr ""
 "Указанный файл не был загружен на сервер (метод HTTP POST)! Операция "
 "прервана."
 
-#: plugins/personal/generic/class_user.inc:358
+#: plugins/personal/generic/class_user.inc:359
 msgid "Please enter a valid serial number"
 msgstr "Введите корректный серийный номер"
 
-#: plugins/personal/generic/class_user.inc:395
+#: plugins/personal/generic/class_user.inc:396
 #, fuzzy
 msgid "Serial"
 msgstr "терминалы"
 
-#: plugins/personal/generic/class_user.inc:396
+#: plugins/personal/generic/class_user.inc:397
 #, php-format
 msgid ""
 "Certificate is valid from <b>%s</b> to <b>%s</b> and is currently <b>%s</b>."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:396
+#: plugins/personal/generic/class_user.inc:397
 msgid "valid"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:396
+#: plugins/personal/generic/class_user.inc:397
 msgid "invalid"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:400
+#: plugins/personal/generic/class_user.inc:401
 #, fuzzy
 msgid "No certificate installed"
 msgstr "Изменить сертификаты"
 
-#: plugins/personal/generic/class_user.inc:790
+#: plugins/personal/generic/class_user.inc:791
 msgid "Kerberos database communication failed"
 msgstr "Ошибка соединения с базой данных Kerberos"
 
-#: plugins/personal/generic/class_user.inc:807
+#: plugins/personal/generic/class_user.inc:808
 msgid "Can't remove user from kerberos database."
 msgstr "Не удается удалить пользователя из базы данных Kerberos."
 
-#: plugins/personal/generic/class_user.inc:818
+#: plugins/personal/generic/class_user.inc:819
 msgid "Can't add user to kerberos database."
 msgstr "Не удается добавить пользователя в базу данных Kerberos."
 
-#: plugins/personal/generic/class_user.inc:858
+#: plugins/personal/generic/class_user.inc:859
 msgid "You have no permissions to create a user on this 'Base'."
 msgstr "У вас недостаточно прав для создания пользователя в этой ветке."
 
-#: plugins/personal/generic/class_user.inc:863
+#: plugins/personal/generic/class_user.inc:864
 #, fuzzy
 msgid "You have no permissions to move a user from the original 'Base'."
 msgstr "У вас недостаточно прав для создания пользователя в этой ветке."
 
-#: plugins/personal/generic/class_user.inc:869
+#: plugins/personal/generic/class_user.inc:870
 #: plugins/addons/addressbook/class_addressbook.inc:525
 #: plugins/admin/users/class_userManagement.inc:424
 msgid "The required field 'Name' is not set."
 msgstr "Обязательное поле \"Имя\" не заполнено."
 
-#: plugins/personal/generic/class_user.inc:878
+#: plugins/personal/generic/class_user.inc:879
 msgid "There's already a person with this 'Login' in the database."
 msgstr ""
 "Пользователь с таким регистрационным именем в базе данных уже существует."
 
-#: plugins/personal/generic/class_user.inc:884
+#: plugins/personal/generic/class_user.inc:885
 #: plugins/addons/addressbook/class_addressbook.inc:529
 #: plugins/admin/users/class_userManagement.inc:427
 msgid "The required field 'Given name' is not set."
 msgstr "Обязательное поле \"Личное имя\" не заполнено."
 
-#: plugins/personal/generic/class_user.inc:887
+#: plugins/personal/generic/class_user.inc:888
 msgid "The required field 'Login' is not set."
 msgstr "Обязательное поле \"Регистрационное имя\" не заполнено."
 
-#: plugins/personal/generic/class_user.inc:894
+#: plugins/personal/generic/class_user.inc:895
 msgid ""
 "There's already a person with this 'Name'/'Given name' combination in the "
 "database."
@@ -1839,7 +1839,7 @@ msgstr ""
 "Пользователь с такой комбинацией имени и личного имени в базе данных уже "
 "существует."
 
-#: plugins/personal/generic/class_user.inc:901
+#: plugins/personal/generic/class_user.inc:902
 msgid ""
 "The field 'Login' contains invalid characters. Lowercase, numbers and dashes "
 "are allowed."
@@ -1847,48 +1847,53 @@ msgstr ""
 "Значение поля \"Регистрационное имя\" содержит недопустимые символы. "
 "Допустимыми являются буквы в нижнем регистре, цифры и дефисы."
 
-#: plugins/personal/generic/class_user.inc:904
+#: plugins/personal/generic/class_user.inc:905
 msgid "The field 'Homepage' contains an invalid URL definition."
 msgstr "Значение поля \"Домашняя страница\" содержит некорректный URL."
 
-#: plugins/personal/generic/class_user.inc:907
-#: plugins/personal/generic/class_user.inc:935
+#: plugins/personal/generic/class_user.inc:908
+#: plugins/personal/generic/class_user.inc:936
 #: plugins/addons/addressbook/class_addressbook.inc:535
 #: plugins/addons/addressbook/class_addressbook.inc:563
 #: plugins/admin/departments/class_departmentGeneric.inc:155
 msgid "The field 'Name' contains invalid characters."
 msgstr "Значение поля \"Имя\" содержит недопустимые символы."
 
-#: plugins/personal/generic/class_user.inc:910
-#: plugins/personal/generic/class_user.inc:932
+#: plugins/personal/generic/class_user.inc:911
+#: plugins/personal/generic/class_user.inc:933
 #: plugins/addons/addressbook/class_addressbook.inc:538
 #: plugins/addons/addressbook/class_addressbook.inc:560
 msgid "The field 'Given name' contains invalid characters."
 msgstr "Значение поля \"Личное имя\" содержит недопустимые символы."
 
-#: plugins/personal/generic/class_user.inc:915
-#: plugins/personal/generic/class_user.inc:918
+#: plugins/personal/generic/class_user.inc:916
+#: plugins/personal/generic/class_user.inc:919
 #: plugins/addons/addressbook/class_addressbook.inc:543
 #: plugins/addons/addressbook/class_addressbook.inc:546
 #: plugins/admin/departments/class_departmentGeneric.inc:158
 msgid "The field 'Phone' contains an invalid phone number."
 msgstr "Значение поля \"Телефон\" содержит недопустимый номер телефона."
 
-#: plugins/personal/generic/class_user.inc:921
+#: plugins/personal/generic/class_user.inc:922
 #: plugins/addons/addressbook/class_addressbook.inc:549
 #: plugins/admin/departments/class_departmentGeneric.inc:161
 msgid "The field 'Fax' contains an invalid phone number."
 msgstr "Значение поля \"Факс\" содержит недопустимый номер телефона."
 
-#: plugins/personal/generic/class_user.inc:924
+#: plugins/personal/generic/class_user.inc:925
 #: plugins/addons/addressbook/class_addressbook.inc:552
 msgid "The field 'Mobile' contains an invalid phone number."
 msgstr "Значение поля \"Мобильный\" содержит некорректный номер телефона."
 
-#: plugins/personal/generic/class_user.inc:927
+#: plugins/personal/generic/class_user.inc:928
 #: plugins/addons/addressbook/class_addressbook.inc:555
 msgid "The field 'Pager' contains an invalid phone number."
 msgstr "Значение поля \"Пейджер\" содержит некорректный номер телефона."
+
+#: plugins/personal/generic/class_user.inc:1053
+#, fuzzy
+msgid "Could not open specified certificate!"
+msgstr "Невозможно выбрать базу данных!"
 
 #: plugins/personal/generic/main.inc:107
 msgid "You are not allowed to set your password!"
@@ -6540,12 +6545,12 @@ msgstr ""
 "У вас нет учетной записи администратора для GOsa, так что вы не сможете что-"
 "либо администрировать!"
 
-#: include/functions_helpviewer.inc:256
+#: include/functions_helpviewer.inc:257
 #, php-format
 msgid "%s results for your search with the keyword %s interpreted as %s"
 msgstr ""
 
-#: include/functions_helpviewer.inc:307
+#: include/functions_helpviewer.inc:308
 #, php-format
 msgid "%s%% hit rate in file %s"
 msgstr ""
