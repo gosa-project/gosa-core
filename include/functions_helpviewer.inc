@@ -253,7 +253,7 @@ function searchlist($arr,$res,$maxresults)
   }
 
   /* appending footer message for resultlist */
-  $ret.= "<br> ".count($topten)." - "._("Results for your search with the keyword")." <b>".htmlentities($_SESSION['search_string'])."</b>"._(" interpreted as ")."<b>".$_SESSION['parsed_search_keyword']."</b>";
+  $ret.= "<br> ".sprintf(_("%s results for your search with the keyword %s interpreted as %s"), "<b>".count($topten)."</b>", "<b>".htmlentities($_SESSION['search_string'])."</b>", "<b>".$_SESSION['parsed_search_keyword']."</b>");
 
   return($ret);
 }
