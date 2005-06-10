@@ -1,4 +1,5 @@
 <body style='background-color:white;background-image:none'>
+{$php_errors}
 <form action='helpviewer.php' name='mainform' method='post' enctype='multipart/form-data'>
 <div style='background-color:#CDF6BD;width:100%;border-bottom:1px solid #909090'>
   <table width="99%">

@@ -70,7 +70,6 @@ My PART ^^
 ##################
  */
 
-set_error_handler("myone");
 $helpdir                      = HELP_BASEDIR."/en/manual_gosa_en/"; // Folder to use for help files
 $defaultpage                  = "index.html";                       // alternative file, shown on error, or on first call
 $prefix                       = "node";                             // Prefix of the generated help files 
@@ -81,31 +80,27 @@ $allowed_chars_in_searchword  = "'[^a-z0-9 %_-]'i";                 // Remove al
 $pre_mark                     = "<b><u><i>" ;                       // Sign words with this
 $suf_mark                     = "</i></u></b>";                     //  and this
 
-// Only for testing delete this if everything works fine
-function myone($par1,$par2,$par3,$par3)
-{
-  print "<br>Seite : ".$par1."<br>Name : ".$par2."<br>Seite : ".$par3."<br>Zeile : ".$par3;
-}
-
+$error_collector= "";
+set_error_handler('gosaRaiseError');
 
 /* Define which tags musst be delete, header, navigation, banner */
 $replacements=array();
 $replacements['from']=array("@<!DOC.*<BODY >@si",
-                            "@<DIV[^>]*?>.*?DIV>@si",
-                            "'<code.*code>'",
-                            "/<HR>/",
-                            "@<ADDRESS[^>]*?>.*?ADDRESS>@si",
-                            "@<\/BODY[^>]*?>.*?HTML>@si",
-                            "'<TABLE.*>'",
-                            "/<H1 ALIGN=\"CENTER\">/");
+    "@<DIV[^>]*?>.*?DIV>@si",
+    "'<code.*code>'",
+    "/<HR>/",
+    "@<ADDRESS[^>]*?>.*?ADDRESS>@si",
+    "@<\/BODY[^>]*?>.*?HTML>@si",
+    "'<TABLE.*>'",
+    "/<H1 ALIGN=\"CENTER\">/");
 $replacements['to']=array("",
-                          "",
-                          "",
-                          "",
-                          "",
-                          "",
-                          "<table border=1 cellspacing=0 bgcolor=\"#E0E0E0\" width=\"95%\" align=\"center\" cellpadding=\"3\">",
-                          "<H1>");
+    "",
+    "",
+    "",
+    "",
+    "",
+    "<table border=1 cellspacing=0 bgcolor=\"#E0E0E0\" width=\"95%\" align=\"center\" cellpadding=\"3\">",
+    "<H1>");
 
 
 /* Default pages */
@@ -124,15 +119,14 @@ if(!file_exists(HELP_BASEDIR."/en/manual_gosa_en/")){
   $smarty->assign("forward" ,"");
   $smarty->assign("search_string","");
   $smarty->assign("help_contents","<br>".sprintf(_("Can't read any helpfiles from ' %s ', possibly there is no help available."),HELP_BASEDIR."/en/manual_gosa_en/"));
-  
+
   /* Output html ...*/
   $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
   $display= $header.$smarty->fetch(get_template_path('help.tpl'));
   echo $display;
 
-
 }else{  
-    
+
   /* We prepare to search, all Document for the given keyword */
   if(isset($_POST['search'])){
 
@@ -164,6 +158,16 @@ if(!file_exists(HELP_BASEDIR."/en/manual_gosa_en/")){
     /* Create result list */
     $smarty->assign("help_contents",searchlist($arr,$res,$maxresults));
 
+    /* show some errors */
+    if (isset($_SESSION['errors'])){
+      $smarty->assign("errors", $_SESSION['errors']);
+    }
+    if ($error_collector != ""){
+      $smarty->assign("php_errors", $error_collector."</div>");
+    } else {
+      $smarty->assign("php_errors", "");
+    }
+
     /* Output html ...*/
     $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
     $display= $header.$smarty->fetch(get_template_path('help.tpl'));
@@ -178,7 +182,7 @@ if(!file_exists(HELP_BASEDIR."/en/manual_gosa_en/")){
     if(!isset($_SESSION['search_string'])){
       $_SESSION['search_string']="";
     }
-      
+
 
     $smarty->assign("search_string",$_SESSION['search_string']);
 
@@ -237,6 +241,16 @@ if(!file_exists(HELP_BASEDIR."/en/manual_gosa_en/")){
     $smarty->assign("backward",$backward);
     $smarty->assign("index"   ,$index);
     $smarty->assign("forward" ,$forward);
+
+    /* show some errors */
+    if (isset($_SESSION['errors'])){
+      $smarty->assign("errors", $_SESSION['errors']);
+    }
+    if ($error_collector != ""){
+      $smarty->assign("php_errors", $error_collector."</div>");
+    } else {
+      $smarty->assign("php_errors", "");
+    }
 
     /* Fill page */
     $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
