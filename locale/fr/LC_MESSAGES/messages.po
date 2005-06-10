@@ -4653,23 +4653,28 @@ msgstr ""
 "Ce serveur à l'option DNS désactivé. Vous pouvez l'activer en cliquant sur "
 "le bouton ci-dessous."
 
-#: plugins/admin/systems/class_servDB.inc:127
-#: plugins/admin/systems/class_servDB.inc:143
-#: plugins/admin/systems/class_servDB.inc:149
-#: plugins/admin/systems/class_servDB.inc:154
-#: plugins/admin/systems/class_servDB.inc:160
+#: plugins/admin/systems/class_servDB.inc:131
+#: plugins/admin/systems/class_servDB.inc:147
+#: plugins/admin/systems/class_servDB.inc:153
+#: plugins/admin/systems/class_servDB.inc:158
+#: plugins/admin/systems/class_servDB.inc:164
 #, php-format
 msgid "The attribute '%s' is empty or contains invalid characters."
 msgstr "La valeur '%s' est vide ou contient des caractères invalides."
 
-#: plugins/admin/systems/class_servDB.inc:133
+#: plugins/admin/systems/class_servDB.inc:137
 #, php-format
 msgid "The imap connect string needs to be in the form '%s'."
 msgstr "La chaîne de connexion imap doit être de la forme '%s'."
 
-#: plugins/admin/systems/class_servDB.inc:137
+#: plugins/admin/systems/class_servDB.inc:141
 msgid "The sieve port needs to be numeric."
 msgstr "Le port sieve doit être numérique."
+
+#: plugins/admin/systems/class_servDB.inc:172
+#, fuzzy, php-format
+msgid "The imap name string needs to be a hostname or an IP-address."
+msgstr "La chaîne de connexion imap doit être de la forme '%s'."
 
 #: plugins/admin/systems/workstation.tpl:9
 msgid "Workstation template"
@@ -6602,12 +6607,12 @@ msgstr ""
 "Le compte administrateur de GOsa n'existe pas, vous ne pourrez rien "
 "administrer!"
 
-#: include/functions_helpviewer.inc:257
+#: include/functions_helpviewer.inc:259
 #, php-format
 msgid "%s results for your search with the keyword %s interpreted as %s"
 msgstr ""
 
-#: include/functions_helpviewer.inc:308
+#: include/functions_helpviewer.inc:310
 #, php-format
 msgid "%s%% hit rate in file %s"
 msgstr ""

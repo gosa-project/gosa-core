@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schröder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-06-10 13:56+0200\n"
+"PO-Revision-Date: 2005-06-10 15:05+0200\n"
 "Last-Translator:  <(null)>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -4627,23 +4627,28 @@ msgstr ""
 "Aktuell hat dieser Server keine DNS-Funktionen aktiviert. Sie können diese "
 "durch einen Klick auf die Schaltfläche unten aktivieren."
 
-#: plugins/admin/systems/class_servDB.inc:127
-#: plugins/admin/systems/class_servDB.inc:143
-#: plugins/admin/systems/class_servDB.inc:149
-#: plugins/admin/systems/class_servDB.inc:154
-#: plugins/admin/systems/class_servDB.inc:160
+#: plugins/admin/systems/class_servDB.inc:131
+#: plugins/admin/systems/class_servDB.inc:147
+#: plugins/admin/systems/class_servDB.inc:153
+#: plugins/admin/systems/class_servDB.inc:158
+#: plugins/admin/systems/class_servDB.inc:164
 #, php-format
 msgid "The attribute '%s' is empty or contains invalid characters."
 msgstr "Das Attribut '%s' ist leer oder enthält ungültige Zeichen."
 
-#: plugins/admin/systems/class_servDB.inc:133
+#: plugins/admin/systems/class_servDB.inc:137
 #, php-format
 msgid "The imap connect string needs to be in the form '%s'."
 msgstr "Der IMAP-Verbindungsstring muss in der Form '%s' sein."
 
-#: plugins/admin/systems/class_servDB.inc:137
+#: plugins/admin/systems/class_servDB.inc:141
 msgid "The sieve port needs to be numeric."
 msgstr "Der Sieve-Port muss numerisch sein."
+
+#: plugins/admin/systems/class_servDB.inc:172
+#, php-format
+msgid "The imap name string needs to be a hostname or an IP-address."
+msgstr "Das Feld 'Serverbezeichnung' muss entweder ein Hostname oder eine IP-Adresse sein."
 
 #: plugins/admin/systems/workstation.tpl:9
 msgid "Workstation template"
@@ -6577,12 +6582,12 @@ msgstr ""
 "In ihrem Setup fehlt ein administratives Konto für GOsa, Sie sind deshalb "
 "nicht in der Lage irgendetwas einzustellen!"
 
-#: include/functions_helpviewer.inc:257
+#: include/functions_helpviewer.inc:259
 #, php-format
 msgid "%s results for your search with the keyword %s interpreted as %s"
 msgstr "%s Ergebnisse für Ihre Suche nach %s (effektiv gesucht nach: %s)"
 
-#: include/functions_helpviewer.inc:308
+#: include/functions_helpviewer.inc:310
 #, php-format
 msgid "%s%% hit rate in file %s"
 msgstr "%s%% Trefferquote in Datei %s"
