@@ -341,9 +341,10 @@ class user extends plugin
       /* for all certificates do */
       foreach (array ("userCertificate", "userSMIMECertificate", "userPKCS12")
           as $val){
-
+      
         /* Check for clean upload */
-        if ($_FILES[$val."_file"]['name'] != "" && 
+        if (defined($val) && $val != '' &&
+            preg_match('/\s+/', $_FILES[$val."_file"]['name']) && 
             is_uploaded_file($_FILES[$val."_file"]['tmp_name'])) {
 
           $this->set_cert("$val", $_FILES[$val."_file"]['tmp_name']);
@@ -930,12 +931,12 @@ class user extends plugin
     /* Check for reserved characers */
     if (preg_match ('/[,+"<>;]/', $this->givenName)){
       $message[]= _("The field 'Given name' contains invalid characters.");
-  }
-  if (preg_match ('/[,+"<>;]/', $this->sn)){
-    $message[]= _("The field 'Name' contains invalid characters.");
-  }
+    }
+    if (preg_match ('/[,+"<>;]/', $this->sn)){
+      $message[]= _("The field 'Name' contains invalid characters.");
+    }
 
-  return $message;
+    return $message;
   }
 
 
@@ -1043,10 +1044,13 @@ class user extends plugin
   /* Load certificate from file to object */
   function set_cert($cert, $filename)
   {
-    $fd = fopen ($filename, "rb");
-    $this->$cert= fread ($fd, filesize ($filename));
-    fclose ($fd);
-    $this->is_modified= TRUE;
+    if($fd = fopen ($filename, "rb")) {
+      $this->$cert= fread ($fd, filesize ($filename));
+      fclose ($fd);
+      $this->is_modified= TRUE;
+    } else {
+      print_red(_("Cannot open the specified file!"));
+    }
   }
 
   /* Adapt from given 'dn' */
