@@ -25,7 +25,7 @@ $_SESSION['DEBUGLEVEL']= 1;
 /* Load required includes */
 require_once ("../include/php_setup.inc");
 require_once ("functions.inc");
-require_once ("setup_checks.inc");
+require_once ("functions_setup.inc");
 
 // Save the Post Data (back and forward button)
 foreach ($_POST as $key => $val){

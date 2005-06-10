@@ -35,7 +35,7 @@ require_once ("class_pluglist.inc");
 require_once ("class_tabs.inc");
 require_once ("class_mail-methods.inc");
 require_once("class_password-methods.inc");
-require_once ("debuglib.inc");
+require_once ("functions_debug.inc");
 
 /* Define constants for debugging */
 define ("DEBUG_TRACE",   1);
