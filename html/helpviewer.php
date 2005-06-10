@@ -19,21 +19,20 @@
  */
 
 
-
-
 /* Basic setup, remove eventually registered sessions */
 require_once ("../include/php_setup.inc");
-require_once ("../include/functions.inc");
-require_once ("../include/functions_helpviewer.inc");
+require_once ("functions.inc");
+require_once ("functions_helpviewer.inc");
+
 session_start ();
 error_reporting(E_ALL);
+
 /* Logged in? Simple security check */
 if (!isset($_SESSION['ui'])){
   gosa_log ("Error: helpviewer.php called without session");
   echo "<b>"._("Help is not available if you are not logged in.")."</b>";
   exit;
 }
-
 
 /* Set template compile directory */
 $config= $_SESSION['config'];
@@ -72,15 +71,15 @@ My PART ^^
  */
 
 set_error_handler("myone");
-$helpdir                      = "../doc/guide/admin/en/manual_gosa_en/"; // Folder to use for help files
-$defaultpage                  = "index.html";                            // alternative file, shown on error, or on first call
-$prefix                       = "node";                                  // Prefix of the generated help files 
-$suffix                       = ".html";                                 // Suffix of the generated helpfiles
-$maxresults                   = 10;                                      // max number of results shown in result list
-$minwordlength                = 3;                                       // Word less than 3 chars will be dropped in search
-$allowed_chars_in_searchword  = "'[^a-z0-9 %_-]'i";                      // Remove all chars that would disturb our search like < or > ...
-$pre_mark                     = "<b><u><i>" ;  // Sign words with this
-$suf_mark                     = "</i></u></b>";                   //  and this
+$helpdir                      = HELP_BASEDIR."/en/manual_gosa_en/"; // Folder to use for help files
+$defaultpage                  = "index.html";                       // alternative file, shown on error, or on first call
+$prefix                       = "node";                             // Prefix of the generated help files 
+$suffix                       = ".html";                            // Suffix of the generated helpfiles
+$maxresults                   = 10;                                 // max number of results shown in result list
+$minwordlength                = 3;                                  // Word less than 3 chars will be dropped in search
+$allowed_chars_in_searchword  = "'[^a-z0-9 %_-]'i";                 // Remove all chars that would disturb our search like < or > ...
+$pre_mark                     = "<b><u><i>" ;                       // Sign words with this
+$suf_mark                     = "</i></u></b>";                     //  and this
 
 // Only for testing delete this if everything works fine
 function myone($par1,$par2,$par3,$par3)
