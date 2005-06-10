@@ -303,7 +303,7 @@ function createResultEntry($entry,$res,$name,$max)
 {
   $percentage = (int)(($res['hits']['overall'] / $max) * 100) ;
 
-  $str =  "<b><a href=\"?pg=".$name."&mark=1\">".$percentage."% "._("hit rate in following file ").$name."</a></b><br>" ;
+  $str =  "<b><a href=\"?pg=".$name."&mark=1\">".sprintf(_("%s%% hit rate in file %s"),$percentage,$name)."</a></b><br>" ;
   $str.=  substr(strip_tags($entry['content']),0,200);
   $str.=  "<hr>";
 
