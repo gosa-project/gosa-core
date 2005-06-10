@@ -9,15 +9,15 @@
      <b>{t}GOsa help viewer{/t}</b>
 	</td>
     <td width="33%" style="text-align:center">
-		<a href="?pg={$backward}">
+		<a href="?pg={$backward}"  class="maintitlebar">
 			<img src='images/back.png' align="middle" alt="&lt; {t}previous{/t}" border="0">
 		</a>
 		&nbsp;&nbsp;
-		<a href="?pg={$index}">
+		<a href="?pg={$index}"  class="maintitlebar">
 			{t}Index{/t}
 		</a>
 		&nbsp;&nbsp;
-		<a href="?pg={$forward}"> 
+		<a href="?pg={$forward}" class="maintitlebar">
 			<img src='images/forward.png' align="middle" alt="{t}next{/t}" border="0">
 		</a>
 	</td>

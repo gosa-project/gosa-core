@@ -92,6 +92,7 @@ $replacements['from']=array("@<!DOC.*<BODY >@si",
     "@<ADDRESS[^>]*?>.*?ADDRESS>@si",
     "@<\/BODY[^>]*?>.*?HTML>@si",
     "'<TABLE.*>'",
+    "/src.*icons/i",
     "/<H1 ALIGN=\"CENTER\">/");
 $replacements['to']=array("",
     "",
@@ -100,6 +101,7 @@ $replacements['to']=array("",
     "",
     "",
     "<table border=1 cellspacing=0 bgcolor=\"#E0E0E0\" width=\"95%\" align=\"center\" cellpadding=\"3\">",
+    "src=\"images",
     "<H1>");
 
 
