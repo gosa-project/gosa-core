@@ -7,7 +7,17 @@
      <b>{t}GOsa help viewer{/t}</b>
 	</td>
     <td width="33%" style="text-align:center">
-	 <img src='images/back.png' align="center" alt="&lt; {t}previous{/t}">&nbsp;&nbsp;{t}Index{/t}&nbsp;&nbsp;<img src='images/forward.png' align="center" alt="{t}next{/t} &gt;">
+		<a href="?pg={$backward}">
+			<img src='images/back.png' align="middle" alt="&lt; {t}previous{/t}" border="0">
+		</a>
+		&nbsp;&nbsp;
+		<a href="?pg={$index}">
+			{t}Index{/t}
+		</a>
+		&nbsp;&nbsp;
+		<a href="?pg={$forward}"> 
+			<img src='images/forward.png' align="middle" alt="{t}next{/t}" border="0">
+		</a>
 	</td>
 	<td style="text-align:right">
 	 <input name="search_string" size="15" value="{$search_string}" maxlength="50">&nbsp;<input type=submit name="search" value="{t}Search{/t}">
