@@ -9,17 +9,13 @@
      <b>{t}GOsa help viewer{/t}</b>
 	</td>
     <td width="33%" style="text-align:center">
-		<a href="?pg={$backward}"  class="maintitlebar">
-			<img src='images/back.png' align="middle" alt="&lt; {t}previous{/t}" border="0">
-		</a>
+		{$backward}
 		&nbsp;&nbsp;
 		<a href="?pg={$index}"  class="maintitlebar">
 			{t}Index{/t}
 		</a>
 		&nbsp;&nbsp;
-		<a href="?pg={$forward}" class="maintitlebar">
-			<img src='images/forward.png' align="middle" alt="{t}next{/t}" border="0">
-		</a>
+		{$forward}
 	</td>
 	<td style="text-align:right">
 	 <input name="search_string" size="15" value="{$search_string}" maxlength="50">&nbsp;<input type=submit name="search" value="{t}Search{/t}">

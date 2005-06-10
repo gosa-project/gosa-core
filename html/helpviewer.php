@@ -79,6 +79,13 @@ $minwordlength                = 3;                                  // Word less
 $allowed_chars_in_searchword  = "'[^a-z0-9 %_-]'i";                 // Remove all chars that would disturb our search like < or > ...
 $pre_mark                     = "<b><u><i>" ;                       // Sign words with this
 $suf_mark                     = "</i></u></b>";                     //  and this
+$backwardlink                 = "<a href=\"?pg=%s\"  class=\"maintitlebar\">
+                                  <img src='images/back.png' align=\"middle\" alt=\""._("previous")."\" border=\"0\">
+                                 </a>";
+
+$forwardlink                 = "<a href=\"?pg=%s\"  class=\"maintitlebar\">
+                                  <img src='images/forward.png' align=\"middle\" alt=\""._("next")."\" border=\"0\">
+                                 </a>";
 
 $error_collector= "";
 set_error_handler('gosaRaiseError');
@@ -197,7 +204,7 @@ if(!file_exists(HELP_BASEDIR."/en/manual_gosa_en/")){
     }else{
       $page = $defaultpage;
     }
-
+    
     /* test if this page exists, in our array of files */
     if((!isset($helppages[$page]))&&($page!=$defaultpage))
     {
@@ -220,10 +227,7 @@ if(!file_exists(HELP_BASEDIR."/en/manual_gosa_en/")){
         $backward = $bck;
       }
 
-      /* forward exists ?*/
-      if((isset($helppages[$fck])))  {
-        $forward  = $fck;
-      }
+      $forward  = $fck;
     }
 
     $help_contents=readfiles($helpdir,$prefix,$suffix,false,$page);
@@ -240,9 +244,18 @@ if(!file_exists(HELP_BASEDIR."/en/manual_gosa_en/")){
     $smarty->assign("help_contents",$help_contents);
 
     /* Define our own navigation pages */
-    $smarty->assign("backward",$backward);
+    if($page == $defaultpage){
+      $smarty->assign("backward","");
+    }else{
+      $smarty->assign("backward",sprintf($backwardlink,$backward));
+    }
     $smarty->assign("index"   ,$index);
-    $smarty->assign("forward" ,$forward);
+  
+    if(!(isset($helppages[$forward]))){
+      $smarty->assign("forward","");
+    }else{
+      $smarty->assign("forward",sprintf($forwardlink,$forward));
+    }
 
     /* show some errors */
     if (isset($_SESSION['errors'])){
