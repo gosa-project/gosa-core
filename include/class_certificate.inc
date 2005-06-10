@@ -168,25 +168,10 @@ class certificate
     }
   }
 
-  function isvalid($returnstr = false)
+  function isvalid()
   {
-  if(($this->type != false)&&(count($this->info)>1))
-    {
-     if($returnstr){
-        return(_("valid"));
-      }else{
-        return(true);
-      }
-    }else{
-      if($returnstr){
-        return(_("invalid"));
-      }else{
-        return(false);
-      }
-
-    }
+    return (($this->type != false)&&(count($this->info)>1));
   }
-
   
 
   /* Export Certificate to specified file, with specified method*/
