@@ -359,9 +359,9 @@ class user extends plugin
 
           foreach(array("userCertificate", "userSMIMECertificate", "userPKCS12") as $cert){
             if ($this->$cert != ""){
-              $smarty->assign("$cert"."_state", _("present"));
+              $smarty->assign("$cert"."_state", "true");
             } else {
-              $smarty->assign("$cert"."_state", _("absent"));
+              $smarty->assign("$cert"."_state", "");
             }
           }
           return ($smarty->fetch (get_template_path('generic_certs.tpl', TRUE, dirname(__FILE__))));
@@ -389,14 +389,16 @@ class user extends plugin
           $certificate->import($this->$cert);
       
           /* Read out data*/
-          $timeto   = ($certificate->getvalidto_date());
-          $timefrom = ($certificate->getvalidfrom_date());
+          $timeto   = $certificate->getvalidto_date();
+          $timefrom = $certificate->getvalidfrom_date();
           $str = $certificate->getname()."<br>".
-                  _("Valid from")." ".date('d M Y',$timefrom)." "._("to")." ".date('d M Y',$timeto)." - "._("Serialnumber")." : ".$certificate->getSerialNumber()."<br>".
-                  _("This certificate is")." <b>".$certificate->isvalid(true)."</b>";
+                  _("Serialnumber")." : ".$certificate->getSerialNumber()."<br>".
+                  sprintf(_("Certificate is valid from <b>%s</b> to <b>%s</b> and is currently <b>%s</b>."), date('d M Y',$timefrom),date('d M Y',$timeto), $certificate->isvalid()?_("valid"):_("invalid"));
           $smarty->assign($cert."info",$str);
+          $smarty->assign($cert."_state","true");
         } else {
-          $smarty->assign($cert."info",_("No certificate present"));
+          $smarty->assign($cert."info", "<i>"._("No certificate installed")."</i>");
+          $smarty->assign($cert."_state","");
         }
       }
       $smarty->assign("governmentmode", "false");
