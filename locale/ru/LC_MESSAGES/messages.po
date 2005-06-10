@@ -55,8 +55,9 @@ msgstr "Почта"
 msgid "Samba"
 msgstr "Samba"
 
-#: contrib/gosa.conf:59 plugins/personal/connectivity/main.inc:136
+#: contrib/gosa.conf:59
 #: plugins/personal/connectivity/class_connectivity.inc:15
+#: plugins/personal/connectivity/main.inc:136
 msgid "Connectivity"
 msgstr "Подключение"
 
@@ -70,9 +71,9 @@ msgstr "Факс"
 
 #: contrib/gosa.conf:61 plugins/personal/generic/generic.tpl:214
 #: plugins/personal/generic/generic.tpl:352
-#: plugins/addons/addressbook/contents.tpl:14
 #: plugins/addons/addressbook/address_edit.tpl:41
 #: plugins/addons/addressbook/address_edit.tpl:89
+#: plugins/addons/addressbook/contents.tpl:14
 #: plugins/addons/addressbook/address_info.tpl:37
 #: plugins/addons/addressbook/address_info.tpl:85
 #: plugins/admin/departments/generic.tpl:58
@@ -131,7 +132,7 @@ msgid "Export"
 msgstr "Экспорт"
 
 #: contrib/gosa.conf:143 plugins/personal/mail/generic.tpl:111
-#: plugins/addons/ldapmanager/contentimport.tpl:53
+#: plugins/addons/ldapmanager/contentimport.tpl:49
 #: plugins/addons/ldapmanager/contentcsv.tpl:117
 #: plugins/addons/ldapmanager/contentcsv.tpl:120
 msgid "Import"
@@ -174,15 +175,191 @@ msgstr "Английский"
 msgid "Italian"
 msgstr ""
 
+#: plugins/personal/mail/generic.tpl:7 plugins/admin/groups/mail.tpl:10
+msgid "Primary address"
+msgstr "Основной адрес"
+
+#: plugins/personal/mail/generic.tpl:11 plugins/admin/groups/mail.tpl:14
+#: plugins/generic/references/class_reference.inc:44
+msgid "Server"
+msgstr "Сервер"
+
+#: plugins/personal/mail/generic.tpl:13
+msgid "Specify the mail server where the user will be hosted on"
+msgstr "Выберите почтовый сервер для учетной записи пользователя"
+
+#: plugins/personal/mail/generic.tpl:22 plugins/admin/groups/mail.tpl:25
+msgid "Quota usage"
+msgstr "Использование квоты"
+
+#: plugins/personal/mail/generic.tpl:29 plugins/admin/groups/mail.tpl:32
+#: plugins/admin/systems/class_terminalInfo.inc:139
+msgid "not defined"
+msgstr "не определена"
+
+#: plugins/personal/mail/generic.tpl:34 plugins/admin/groups/mail.tpl:37
+msgid "Quota size"
+msgstr "Размер квоты"
+
+#: plugins/personal/mail/generic.tpl:48 plugins/admin/groups/mail.tpl:47
+#, fuzzy
+msgid "Alternative addresses"
+msgstr "Альтернативные адреса"
+
+#: plugins/personal/mail/generic.tpl:50 plugins/admin/groups/mail.tpl:48
+msgid "List of alternative mail addresses"
+msgstr "Список альтернативных адресов эл. почты"
+
+#: plugins/personal/mail/generic.tpl:56 plugins/personal/mail/generic.tpl:126
+#: plugins/personal/mail/mail_locals.tpl:41
+#: plugins/personal/posix/posix_groups.tpl:72
+#: plugins/personal/posix/trust_machines.tpl:39
+#: plugins/personal/posix/generic.tpl:63
+#: plugins/personal/posix/generic.tpl:125
+#: plugins/personal/samba/samba3.tpl:287
+#: plugins/personal/samba/samba3_workstations.tpl:39
+#: plugins/personal/connectivity/class_kolabAccount.inc:199
+#: plugins/personal/connectivity/kolab.tpl:17
+#: plugins/gofax/blocklists/generic.tpl:63
+#: plugins/gofax/faxaccount/generic.tpl:75
+#: plugins/gofax/faxaccount/locals.tpl:62
+#: plugins/gofax/faxaccount/lists.tpl:12 plugins/gofax/faxaccount/lists.tpl:16
+#: plugins/admin/groups/mail.tpl:54 plugins/admin/groups/mail.tpl:101
+#: plugins/admin/groups/class_groupMail.inc:404
+#: plugins/admin/groups/group_objects.tpl:39
+#: plugins/admin/groups/generic.tpl:88 plugins/admin/groups/mail_locals.tpl:66
+#: plugins/admin/systems/servservice.tpl:21
+#: plugins/admin/systems/servservice.tpl:47
+#: plugins/admin/systems/startup.tpl:61 plugins/admin/systems/startup.tpl:75
+#: plugins/admin/systems/startup.tpl:95
+#: plugins/admin/ogroups/ogroup_objects.tpl:50
+#: plugins/admin/ogroups/generic.tpl:38
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:211
+#: plugins/gofon/phoneaccount/generic.tpl:45
+msgid "Add"
+msgstr "Добавить"
+
+#: plugins/personal/mail/generic.tpl:58 plugins/personal/mail/generic.tpl:130
+#: plugins/personal/posix/generic.tpl:64
+#: plugins/personal/posix/generic.tpl:127
+#: plugins/personal/samba/samba3.tpl:289
+#: plugins/personal/connectivity/kolab.tpl:19
+#: plugins/gofax/blocklists/generic.tpl:64
+#: plugins/gofax/blocklists/remove.tpl:15
+#: plugins/gofax/blocklists/headpage.tpl:18
+#: plugins/gofax/faxaccount/generic.tpl:77
+#: plugins/gofax/faxaccount/lists.tpl:13
+#: plugins/addons/addressbook/remove.tpl:15 plugins/admin/groups/mail.tpl:55
+#: plugins/admin/groups/mail.tpl:103 plugins/admin/groups/remove.tpl:15
+#: plugins/admin/groups/headpage.tpl:18 plugins/admin/groups/generic.tpl:90
+#: plugins/admin/users/remove.tpl:15 plugins/admin/users/headpage.tpl:19
+#: plugins/admin/applications/remove.tpl:14
+#: plugins/admin/applications/headpage.tpl:18
+#: plugins/admin/departments/remove.tpl:15
+#: plugins/admin/departments/headpage.tpl:18
+#: plugins/admin/systems/servservice.tpl:22
+#: plugins/admin/systems/servservice.tpl:48
+#: plugins/admin/systems/remove.tpl:15 plugins/admin/systems/headpage.tpl:17
+#: plugins/admin/systems/startup.tpl:62 plugins/admin/systems/startup.tpl:76
+#: plugins/admin/systems/startup.tpl:96 plugins/admin/ogroups/generic.tpl:39
+#: plugins/admin/ogroups/remove.tpl:15 plugins/admin/ogroups/headpage.tpl:18
+#: plugins/gofon/phoneaccount/generic.tpl:47
+msgid "Delete"
+msgstr "Удалить"
+
+#: plugins/personal/mail/generic.tpl:66
+msgid "Mail options"
+msgstr "Почтовые настройки"
+
+#: plugins/personal/mail/generic.tpl:71
+msgid "Select if you want to forward mails without getting own copies of them"
+msgstr "Выберите, нужно ли оставлять копии перенаправляемых сообщений"
+
+#: plugins/personal/mail/generic.tpl:71
+msgid "No delivery to own mailbox"
+msgstr "Не оставлять копии в своем почтовом ящике"
+
+#: plugins/personal/mail/generic.tpl:74
+msgid ""
+"Select to automatically response with the vacation message defined below"
+msgstr "Выберите, чтобы включить автоответчик с сообщением, указанным ниже"
+
+#: plugins/personal/mail/generic.tpl:74
+msgid "Activate vacation message"
+msgstr "Включить автоответчик"
+
+#: plugins/personal/mail/generic.tpl:81
+#, fuzzy
+msgid "Select if you want to filter this mails through spamassassin"
+msgstr "Выберите, нужно ли фильтровать сообщения с помощью SpamAssassin"
+
+#: plugins/personal/mail/generic.tpl:81
+msgid "Move mails tagged with spam level greater than"
+msgstr "Перемещать сообщения с меткой рекламы больше"
+
+#: plugins/personal/mail/generic.tpl:82
+msgid "Choose spam level - smaller values are more sensitive"
+msgstr ""
+"Выберите метку рекламы - чем меньше значение, тем чувствительнее фильтр"
+
+#: plugins/personal/mail/generic.tpl:85
+msgid "to folder"
+msgstr "в папку"
+
+#: plugins/personal/mail/generic.tpl:92
+msgid "Reject mails bigger than"
+msgstr "Отклонять сообщения размером больше"
+
+#: plugins/personal/mail/generic.tpl:94
+#: plugins/personal/connectivity/pureftpd.tpl:40
+#: plugins/personal/connectivity/class_proxyAccount.inc:76
+msgid "MB"
+msgstr "Мб"
+
+#: plugins/personal/mail/generic.tpl:100
+msgid "Vacation message"
+msgstr "Сообщение автоответчика"
+
+#: plugins/personal/mail/generic.tpl:117
+msgid "Forward messages to"
+msgstr "Перенаправлять сообщения"
+
+#: plugins/personal/mail/generic.tpl:128
+#: plugins/gofax/faxaccount/generic.tpl:76 plugins/admin/groups/mail.tpl:102
+msgid "Add local"
+msgstr "Добавить локально"
+
+#: plugins/personal/mail/generic.tpl:138
+msgid "Advanced mail options"
+msgstr "Дополнительные почтовые настройки"
+
+#: plugins/personal/mail/generic.tpl:143
+msgid "Select if user can only send and receive inside his own domain"
+msgstr ""
+"Выберите, может ли пользователь отправлять и получать сообщения только "
+"внутри своего домена"
+
+#: plugins/personal/mail/generic.tpl:144
+msgid "User is only allowed to send and receive local mails"
+msgstr "Пользователь может отправлять и получать почту только локально"
+
+#: plugins/personal/mail/generic.tpl:151
+msgid "Use custom sieve script"
+msgstr "Использовать другой сценарий SIEVE"
+
+#: plugins/personal/mail/generic.tpl:151
+msgid "disables all Mail options!"
+msgstr "отключает все почтовые настройки!"
+
 #: plugins/personal/mail/class_mailAccount.inc:23
 #: plugins/personal/password/class_password.inc:6
 #: plugins/personal/posix/class_posixAccount.inc:17
 #: plugins/personal/samba/class_sambaAccount.inc:25
 #: plugins/personal/generic/class_user.inc:17
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:7
 #: plugins/personal/connectivity/class_phpgwAccount.inc:6
 #: plugins/personal/connectivity/class_kolabAccount.inc:6
 #: plugins/personal/connectivity/class_webdavAccount.inc:7
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:7
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:7
 #: plugins/personal/connectivity/class_connectivity.inc:16
 #: plugins/personal/connectivity/class_proxyAccount.inc:6
@@ -283,7 +460,7 @@ msgstr "Обязательное поле \"Основной адрес\" не �
 
 #: plugins/personal/mail/class_mailAccount.inc:674
 #: plugins/personal/mail/class_mailAccount.inc:678
-#: plugins/addons/addressbook/class_addressbook.inc:566
+#: plugins/addons/addressbook/class_addressbook.inc:568
 msgid "Please enter a valid email address in 'Primary address' field."
 msgstr "Введите корректное значение в поле \"Основной адрес\"."
 
@@ -307,188 +484,12 @@ msgstr "Укажите корректный размер сообщений, к�
 msgid "You need to set the maximum mail size in order to reject anything."
 msgstr "Помните, что указывать нужно максимальный допустимый размер сообщений."
 
-#: plugins/personal/mail/generic.tpl:7 plugins/admin/groups/mail.tpl:10
-msgid "Primary address"
-msgstr "Основной адрес"
-
-#: plugins/personal/mail/generic.tpl:11 plugins/admin/groups/mail.tpl:14
-#: plugins/generic/references/class_reference.inc:44
-msgid "Server"
-msgstr "Сервер"
-
-#: plugins/personal/mail/generic.tpl:13
-msgid "Specify the mail server where the user will be hosted on"
-msgstr "Выберите почтовый сервер для учетной записи пользователя"
-
-#: plugins/personal/mail/generic.tpl:22 plugins/admin/groups/mail.tpl:25
-msgid "Quota usage"
-msgstr "Использование квоты"
-
-#: plugins/personal/mail/generic.tpl:29 plugins/admin/groups/mail.tpl:32
-#: plugins/admin/systems/class_terminalInfo.inc:139
-msgid "not defined"
-msgstr "не определена"
-
-#: plugins/personal/mail/generic.tpl:34 plugins/admin/groups/mail.tpl:37
-msgid "Quota size"
-msgstr "Размер квоты"
-
-#: plugins/personal/mail/generic.tpl:48 plugins/admin/groups/mail.tpl:47
-#, fuzzy
-msgid "Alternative addresses"
-msgstr "Альтернативные адреса"
-
-#: plugins/personal/mail/generic.tpl:50 plugins/admin/groups/mail.tpl:48
-msgid "List of alternative mail addresses"
-msgstr "Список альтернативных адресов эл. почты"
-
-#: plugins/personal/mail/generic.tpl:56 plugins/personal/mail/generic.tpl:126
-#: plugins/personal/mail/mail_locals.tpl:41
-#: plugins/personal/posix/trust_machines.tpl:39
-#: plugins/personal/posix/posix_groups.tpl:72
-#: plugins/personal/posix/generic.tpl:63
-#: plugins/personal/posix/generic.tpl:125
-#: plugins/personal/samba/samba3.tpl:287
-#: plugins/personal/samba/samba3_workstations.tpl:39
-#: plugins/personal/connectivity/class_kolabAccount.inc:199
-#: plugins/personal/connectivity/kolab.tpl:17
-#: plugins/gofax/blocklists/generic.tpl:60
-#: plugins/gofax/faxaccount/generic.tpl:75
-#: plugins/gofax/faxaccount/locals.tpl:62
-#: plugins/gofax/faxaccount/lists.tpl:12 plugins/gofax/faxaccount/lists.tpl:16
-#: plugins/admin/groups/mail.tpl:54 plugins/admin/groups/mail.tpl:101
-#: plugins/admin/groups/class_groupMail.inc:404
-#: plugins/admin/groups/group_objects.tpl:39
-#: plugins/admin/groups/generic.tpl:88 plugins/admin/groups/mail_locals.tpl:66
-#: plugins/admin/systems/servservice.tpl:21
-#: plugins/admin/systems/servservice.tpl:47
-#: plugins/admin/systems/startup.tpl:61 plugins/admin/systems/startup.tpl:75
-#: plugins/admin/systems/startup.tpl:95
-#: plugins/admin/ogroups/ogroup_objects.tpl:50
-#: plugins/admin/ogroups/generic.tpl:38
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:211
-#: plugins/gofon/phoneaccount/generic.tpl:45
-msgid "Add"
-msgstr "Добавить"
-
-#: plugins/personal/mail/generic.tpl:58 plugins/personal/mail/generic.tpl:130
-#: plugins/personal/posix/generic.tpl:64
-#: plugins/personal/posix/generic.tpl:127
-#: plugins/personal/samba/samba3.tpl:289
-#: plugins/personal/connectivity/kolab.tpl:19
-#: plugins/gofax/blocklists/generic.tpl:61
-#: plugins/gofax/blocklists/remove.tpl:15
-#: plugins/gofax/blocklists/headpage.tpl:17
-#: plugins/gofax/faxaccount/generic.tpl:77
-#: plugins/gofax/faxaccount/lists.tpl:13
-#: plugins/addons/addressbook/remove.tpl:15 plugins/admin/groups/mail.tpl:55
-#: plugins/admin/groups/mail.tpl:103 plugins/admin/groups/headpage.tpl:18
-#: plugins/admin/groups/remove.tpl:15 plugins/admin/groups/generic.tpl:90
-#: plugins/admin/users/remove.tpl:15 plugins/admin/users/headpage.tpl:19
-#: plugins/admin/applications/remove.tpl:14
-#: plugins/admin/applications/headpage.tpl:18
-#: plugins/admin/departments/remove.tpl:15
-#: plugins/admin/departments/headpage.tpl:18
-#: plugins/admin/systems/servservice.tpl:22
-#: plugins/admin/systems/servservice.tpl:48
-#: plugins/admin/systems/remove.tpl:15 plugins/admin/systems/headpage.tpl:17
-#: plugins/admin/systems/startup.tpl:62 plugins/admin/systems/startup.tpl:76
-#: plugins/admin/systems/startup.tpl:96 plugins/admin/ogroups/generic.tpl:39
-#: plugins/admin/ogroups/remove.tpl:15 plugins/admin/ogroups/headpage.tpl:18
-#: plugins/gofon/phoneaccount/generic.tpl:47
-msgid "Delete"
-msgstr "Удалить"
-
-#: plugins/personal/mail/generic.tpl:66
-msgid "Mail options"
-msgstr "Почтовые настройки"
-
-#: plugins/personal/mail/generic.tpl:71
-msgid "Select if you want to forward mails without getting own copies of them"
-msgstr "Выберите, нужно ли оставлять копии перенаправляемых сообщений"
-
-#: plugins/personal/mail/generic.tpl:71
-msgid "No delivery to own mailbox"
-msgstr "Не оставлять копии в своем почтовом ящике"
-
-#: plugins/personal/mail/generic.tpl:74
-msgid ""
-"Select to automatically response with the vacation message defined below"
-msgstr "Выберите, чтобы включить автоответчик с сообщением, указанным ниже"
-
-#: plugins/personal/mail/generic.tpl:74
-msgid "Activate vacation message"
-msgstr "Включить автоответчик"
-
-#: plugins/personal/mail/generic.tpl:81
-#, fuzzy
-msgid "Select if you want to filter this mails through spamassassin"
-msgstr "Выберите, нужно ли фильтровать сообщения с помощью SpamAssassin"
-
-#: plugins/personal/mail/generic.tpl:81
-msgid "Move mails tagged with spam level greater than"
-msgstr "Перемещать сообщения с меткой рекламы больше"
-
-#: plugins/personal/mail/generic.tpl:82
-msgid "Choose spam level - smaller values are more sensitive"
-msgstr ""
-"Выберите метку рекламы - чем меньше значение, тем чувствительнее фильтр"
-
-#: plugins/personal/mail/generic.tpl:85
-msgid "to folder"
-msgstr "в папку"
-
-#: plugins/personal/mail/generic.tpl:92
-msgid "Reject mails bigger than"
-msgstr "Отклонять сообщения размером больше"
-
-#: plugins/personal/mail/generic.tpl:94
-#: plugins/personal/connectivity/pureftpd.tpl:40
-#: plugins/personal/connectivity/class_proxyAccount.inc:76
-msgid "MB"
-msgstr "Мб"
-
-#: plugins/personal/mail/generic.tpl:100
-msgid "Vacation message"
-msgstr "Сообщение автоответчика"
-
-#: plugins/personal/mail/generic.tpl:117
-msgid "Forward messages to"
-msgstr "Перенаправлять сообщения"
-
-#: plugins/personal/mail/generic.tpl:128
-#: plugins/gofax/faxaccount/generic.tpl:76 plugins/admin/groups/mail.tpl:102
-msgid "Add local"
-msgstr "Добавить локально"
-
-#: plugins/personal/mail/generic.tpl:138
-msgid "Advanced mail options"
-msgstr "Дополнительные почтовые настройки"
-
-#: plugins/personal/mail/generic.tpl:143
-msgid "Select if user can only send and receive inside his own domain"
-msgstr ""
-"Выберите, может ли пользователь отправлять и получать сообщения только "
-"внутри своего домена"
-
-#: plugins/personal/mail/generic.tpl:144
-msgid "User is only allowed to send and receive local mails"
-msgstr "Пользователь может отправлять и получать почту только локально"
-
-#: plugins/personal/mail/generic.tpl:151
-msgid "Use custom sieve script"
-msgstr "Использовать другой сценарий SIEVE"
-
-#: plugins/personal/mail/generic.tpl:151
-msgid "disables all Mail options!"
-msgstr "отключает все почтовые настройки!"
-
 #: plugins/personal/mail/main.inc:104 plugins/personal/posix/main.inc:110
 #: plugins/personal/samba/main.inc:104
-#: plugins/personal/generic/generic_certs.tpl:60
+#: plugins/personal/generic/generic_certs.tpl:76
 #: plugins/personal/generic/main.inc:158
 #: plugins/personal/connectivity/main.inc:116
-#: plugins/gofax/blocklists/generic.tpl:74
+#: plugins/gofax/blocklists/generic.tpl:77
 #: plugins/gofax/faxaccount/main.inc:89
 #: plugins/admin/groups/class_groupManagement.inc:259
 #: plugins/admin/users/class_userManagement.inc:505
@@ -501,16 +502,17 @@ msgid "Finish"
 msgstr "Готово"
 
 #: plugins/personal/mail/main.inc:106 plugins/personal/mail/mail_locals.tpl:43
-#: plugins/personal/posix/trust_machines.tpl:41
 #: plugins/personal/posix/posix_groups.tpl:74
-#: plugins/personal/posix/main.inc:112 plugins/personal/samba/main.inc:106
+#: plugins/personal/posix/trust_machines.tpl:41
+#: plugins/personal/posix/main.inc:112
 #: plugins/personal/samba/samba3_workstations.tpl:41
+#: plugins/personal/samba/main.inc:106
 #: plugins/personal/generic/password.tpl:19
 #: plugins/personal/generic/generic_picture.tpl:31
-#: plugins/personal/generic/generic_certs.tpl:62
+#: plugins/personal/generic/generic_certs.tpl:78
 #: plugins/personal/generic/main.inc:160
 #: plugins/personal/connectivity/main.inc:118
-#: plugins/gofax/blocklists/generic.tpl:76
+#: plugins/gofax/blocklists/generic.tpl:79
 #: plugins/gofax/blocklists/remove.tpl:17
 #: plugins/gofax/faxaccount/locals.tpl:64
 #: plugins/gofax/faxaccount/lists.tpl:39 plugins/gofax/faxaccount/main.inc:91
@@ -519,13 +521,13 @@ msgstr "Готово"
 #: plugins/addons/addressbook/remove.tpl:17
 #: plugins/admin/groups/class_groupManagement.inc:261
 #: plugins/admin/groups/remove.tpl:17
-#: plugins/admin/groups/application_options.tpl:10
 #: plugins/admin/groups/group_objects.tpl:41
 #: plugins/admin/groups/mail_admins.tpl:39
+#: plugins/admin/groups/application_options.tpl:10
 #: plugins/admin/groups/mail_locals.tpl:68 plugins/admin/users/password.tpl:23
-#: plugins/admin/users/template.tpl:46
 #: plugins/admin/users/class_userManagement.inc:507
-#: plugins/admin/users/remove.tpl:17 plugins/admin/applications/remove.tpl:16
+#: plugins/admin/users/template.tpl:46 plugins/admin/users/remove.tpl:17
+#: plugins/admin/applications/remove.tpl:16
 #: plugins/admin/applications/class_applicationManagement.inc:241
 #: plugins/admin/departments/remove.tpl:17
 #: plugins/admin/departments/class_departmentManagement.inc:230
@@ -550,7 +552,7 @@ msgstr "Нажмите 'Изменить' чтобы отредактирова�
 #: plugins/personal/mail/main.inc:115 plugins/personal/posix/main.inc:122
 #: plugins/personal/samba/main.inc:115 plugins/personal/generic/main.inc:170
 #: plugins/personal/connectivity/main.inc:127
-#: plugins/gofax/blocklists/headpage.tpl:16
+#: plugins/gofax/blocklists/headpage.tpl:17
 #: plugins/gofax/faxaccount/generic.tpl:90
 #: plugins/gofax/faxaccount/generic.tpl:96
 #: plugins/gofax/faxaccount/main.inc:97 plugins/addons/logview/contents.tpl:62
@@ -577,10 +579,10 @@ msgid "Display addresses of department"
 msgstr "Показать адреса подразделения"
 
 #: plugins/personal/mail/mail_locals.tpl:27
-#: plugins/personal/posix/trust_machines.tpl:27
 #: plugins/personal/posix/posix_groups.tpl:39
+#: plugins/personal/posix/trust_machines.tpl:27
 #: plugins/personal/samba/samba3_workstations.tpl:27
-#: plugins/gofax/blocklists/headpage.tpl:57
+#: plugins/gofax/blocklists/headpage.tpl:58
 #: plugins/gofax/faxaccount/locals.tpl:31
 #: plugins/addons/addressbook/contents.tpl:81
 #: plugins/admin/groups/headpage.tpl:66
@@ -620,9 +622,9 @@ msgstr "Имя пользователя, адрес которого показ�
 #: plugins/admin/systems/servdb.tpl:18 plugins/admin/systems/servdb.tpl:34
 #: plugins/admin/systems/servdb.tpl:50 plugins/admin/systems/servdb.tpl:86
 #: plugins/admin/systems/servdb.tpl:109 ihtml/themes/altlinux/login.tpl:35
-#: ihtml/themes/altlinux/login.tpl:39 ihtml/themes/default/login.tpl:35
-#: ihtml/themes/default/login.tpl:39
+#: ihtml/themes/altlinux/login.tpl:39
 #: ihtml/themes/default/setup_useradmin.tpl:30
+#: ihtml/themes/default/login.tpl:35 ihtml/themes/default/login.tpl:39
 msgid "Password"
 msgstr "Пароль"
 
@@ -689,9 +691,9 @@ msgstr ""
 
 #: plugins/personal/password/changed.tpl:12
 #: plugins/personal/generic/main.inc:167 plugins/gofax/reports/detail.tpl:68
-#: plugins/addons/ldapmanager/contentimport.tpl:48
+#: plugins/addons/ldapmanager/contentimport.tpl:44
 #: plugins/addons/ldapmanager/contentcsv.tpl:122
-#: plugins/addons/ldapmanager/contentexport.tpl:66 include/functions.inc:1199
+#: plugins/addons/ldapmanager/contentexport.tpl:66 include/functions.inc:1204
 #: ihtml/themes/default/setup_useradmin.tpl:40
 #: ihtml/themes/default/setup_step2.tpl:12
 #: ihtml/themes/default/setup_step3.tpl:17
@@ -738,26 +740,12 @@ msgstr "У вас недостаточно прав для смены своег
 msgid "External password changer reported a problem: "
 msgstr "При попытке сменить пароль извне возникла проблема: "
 
-#: plugins/personal/posix/trust_machines.tpl:6
-msgid "Select systems to add"
-msgstr "Выберите системы для добавления"
-
-#: plugins/personal/posix/trust_machines.tpl:26
-#: plugins/admin/systems/headpage.tpl:59
-msgid "Display systems of department"
-msgstr "Показать системы в подразделении"
-
-#: plugins/personal/posix/trust_machines.tpl:30
-#: plugins/admin/systems/headpage.tpl:71
-msgid "Display systems matching"
-msgstr "Показать подходяшие системы"
-
 #: plugins/personal/posix/posix_groups.tpl:6
 msgid "Select groups to add"
 msgstr "Выберите группы для добавления"
 
 #: plugins/personal/posix/posix_groups.tpl:20
-#: plugins/gofax/blocklists/headpage.tpl:36
+#: plugins/gofax/blocklists/headpage.tpl:37
 #: plugins/gofax/faxaccount/locals.tpl:19
 #: plugins/addons/addressbook/contents.tpl:58
 #: plugins/admin/groups/headpage.tpl:38
@@ -856,9 +844,23 @@ msgstr "Пользователь должен сменить пароль при
 msgid "Password expires on"
 msgstr "Срок действия пароля истекает"
 
+#: plugins/personal/posix/trust_machines.tpl:6
+msgid "Select systems to add"
+msgstr "Выберите системы для добавления"
+
+#: plugins/personal/posix/trust_machines.tpl:26
+#: plugins/admin/systems/headpage.tpl:59
+msgid "Display systems of department"
+msgstr "Показать системы в подразделении"
+
+#: plugins/personal/posix/trust_machines.tpl:30
+#: plugins/admin/systems/headpage.tpl:71
+msgid "Display systems matching"
+msgstr "Показать подходяшие системы"
+
 #: plugins/personal/posix/generic.tpl:7 plugins/personal/samba/samba3.tpl:13
 #: plugins/personal/samba/samba3.tpl:65
-#: plugins/personal/samba/class_sambaAccount.inc:620
+#: plugins/personal/samba/class_sambaAccount.inc:621
 msgid "Home directory"
 msgstr "Домашний каталог"
 
@@ -915,10 +917,6 @@ msgstr "Язык по умолчанию"
 #: plugins/personal/posix/generic.tpl:113
 msgid "System trust"
 msgstr "Системные доверия"
-
-#: plugins/personal/posix/main.inc:131
-msgid "Unix settings"
-msgstr "Атрибуты UNIX"
 
 #: plugins/personal/posix/class_posixAccount.inc:16
 #: plugins/generic/references/class_reference.inc:22
@@ -1134,7 +1132,7 @@ msgid "December"
 msgstr "Декабрь"
 
 #: plugins/personal/posix/class_posixAccount.inc:538
-#: plugins/personal/samba/class_sambaAccount.inc:449
+#: plugins/personal/samba/class_sambaAccount.inc:450
 #: plugins/admin/systems/class_terminalGeneric.inc:62
 #: plugins/admin/systems/class_workstationGeneric.inc:70
 #: ihtml/themes/default/setup_step4.tpl:91
@@ -1225,6 +1223,10 @@ msgstr ""
 msgid "Too many users, can't allocate a free ID!"
 msgstr "Слишком много пользователей, невозможно создать идентификатор!"
 
+#: plugins/personal/posix/main.inc:131
+msgid "Unix settings"
+msgstr "Атрибуты UNIX"
+
 #: plugins/personal/samba/samba2.tpl:13
 msgid "Samba home"
 msgstr "Домашний каталог Samba"
@@ -1235,7 +1237,7 @@ msgstr "Путь к сценариям"
 
 #: plugins/personal/samba/samba2.tpl:36 plugins/personal/samba/samba3.tpl:44
 #: plugins/personal/samba/samba3.tpl:75
-#: plugins/personal/samba/class_sambaAccount.inc:621
+#: plugins/personal/samba/class_sambaAccount.inc:622
 msgid "Profile path"
 msgstr "Путь к профилю"
 
@@ -1284,17 +1286,17 @@ msgid "Timeout settings (in minutes)"
 msgstr "Настройки таймаута (в минутах)"
 
 #: plugins/personal/samba/samba3.tpl:116
-#: plugins/personal/samba/class_sambaAccount.inc:628
+#: plugins/personal/samba/class_sambaAccount.inc:629
 msgid "Connection"
 msgstr "Подключение"
 
 #: plugins/personal/samba/samba3.tpl:125
-#: plugins/personal/samba/class_sambaAccount.inc:629
+#: plugins/personal/samba/class_sambaAccount.inc:630
 msgid "Disconnection"
 msgstr "Отключение"
 
 #: plugins/personal/samba/samba3.tpl:134
-#: plugins/personal/samba/class_sambaAccount.inc:630
+#: plugins/personal/samba/class_sambaAccount.inc:631
 msgid "IDLE"
 msgstr "Простой"
 
@@ -1352,10 +1354,6 @@ msgstr ""
 msgid "Allow connection from these workstations only"
 msgstr "Разрешить подключения только от этой рабочей станции"
 
-#: plugins/personal/samba/main.inc:123
-msgid "Samba settings"
-msgstr "Настройки Samba"
-
 #: plugins/personal/samba/samba3_workstations.tpl:6
 msgid "Select workstations to add"
 msgstr "Выберите рабочие станции для добавления"
@@ -1367,6 +1365,10 @@ msgstr "Показать рабочие станции подразделени�
 #: plugins/personal/samba/samba3_workstations.tpl:30
 msgid "Display workstations matching"
 msgstr "Показать соответствующие рабочие станции"
+
+#: plugins/personal/samba/main.inc:123
+msgid "Samba settings"
+msgstr "Настройки Samba"
 
 #: plugins/personal/samba/class_sambaAccount.inc:193
 msgid "This account has no samba extensions."
@@ -1405,50 +1407,50 @@ msgstr ""
 "В этой учетной записи нет настроек Samba. Для учетных записей Samba нужны "
 "атрибуты POSIX, включите сначала их использование."
 
-#: plugins/personal/samba/class_sambaAccount.inc:450
+#: plugins/personal/samba/class_sambaAccount.inc:451
 msgid "input on, notify on"
 msgstr "входящие вкл, оповещение вкл"
 
-#: plugins/personal/samba/class_sambaAccount.inc:451
+#: plugins/personal/samba/class_sambaAccount.inc:452
 msgid "input on, notify off"
 msgstr "входящие вкл, оповещение выкл"
 
-#: plugins/personal/samba/class_sambaAccount.inc:452
+#: plugins/personal/samba/class_sambaAccount.inc:453
 msgid "input off, notify on"
 msgstr "входящие выкл, оповещение вкл"
 
-#: plugins/personal/samba/class_sambaAccount.inc:453
+#: plugins/personal/samba/class_sambaAccount.inc:454
 msgid "input off, nofify off"
 msgstr "входящие выкл, оповещение выкл"
 
-#: plugins/personal/samba/class_sambaAccount.inc:455
+#: plugins/personal/samba/class_sambaAccount.inc:456
 msgid "disconnect"
 msgstr "отключиться"
 
-#: plugins/personal/samba/class_sambaAccount.inc:456
+#: plugins/personal/samba/class_sambaAccount.inc:457
 msgid "reset"
 msgstr "сброс"
 
-#: plugins/personal/samba/class_sambaAccount.inc:458
+#: plugins/personal/samba/class_sambaAccount.inc:459
 msgid "from any client"
 msgstr "от любого клиента"
 
-#: plugins/personal/samba/class_sambaAccount.inc:459
+#: plugins/personal/samba/class_sambaAccount.inc:460
 msgid "from previous client only"
 msgstr "только от предыдущего клиента"
 
-#: plugins/personal/samba/class_sambaAccount.inc:623
+#: plugins/personal/samba/class_sambaAccount.inc:624
 #, php-format
 msgid "The value specified as '%s' contains invalid characters!"
 msgstr "Значение '%s' содержит недопустимые символы."
 
-#: plugins/personal/samba/class_sambaAccount.inc:633
+#: plugins/personal/samba/class_sambaAccount.inc:634
 #, php-format
 msgid ""
 "The timeout property '%s' is checked and contains invalid or no characters!"
 msgstr "Значение таймаута '%s' пустое или содержит недопустимые символы."
 
-#: plugins/personal/samba/class_sambaAccount.inc:639
+#: plugins/personal/samba/class_sambaAccount.inc:640
 msgid ""
 "The windows user manager only allows eight clients. You've specified more "
 "than eight."
@@ -1456,7 +1458,7 @@ msgstr ""
 "Менеджер пользователей Windows допускает подключение только восми клиентов. "
 "Вы указали больше чем восем."
 
-#: plugins/personal/samba/class_sambaAccount.inc:816
+#: plugins/personal/samba/class_sambaAccount.inc:817
 msgid ""
 "Warning: This account has an undefined samba SID assigned. The problem can "
 "not be fixed by GOsa!"
@@ -1464,148 +1466,13 @@ msgstr ""
 "Внимание: этот аккаунт имеет неправильный SID. Это нельзя исправить "
 "средствами GOsa."
 
-#: plugins/personal/samba/class_sambaAccount.inc:841
+#: plugins/personal/samba/class_sambaAccount.inc:842
 msgid ""
 "Warning: Can't identify users primary group - no conversion to a samba group "
 "possible!"
 msgstr ""
 "Предупреждение: не удается идентифицировать основную группу, преобразование "
 "в группу Samba невозможно!"
-
-#: plugins/personal/generic/class_user.inc:225
-msgid "female"
-msgstr "женский"
-
-#: plugins/personal/generic/class_user.inc:225
-msgid "male"
-msgstr "мужской"
-
-#: plugins/personal/generic/class_user.inc:235
-msgid "This account has no valid GOsa extensions."
-msgstr "Для этой учетной записи нет корректных расширений GOsa."
-
-#: plugins/personal/generic/class_user.inc:264
-msgid "The specified file has not been uploaded via HTTP POST! Aborted."
-msgstr ""
-"Указанный файл не был загружен на сервер (метод HTTP POST)! Операция "
-"прервана."
-
-#: plugins/personal/generic/class_user.inc:358
-msgid "Please enter a valid serial number"
-msgstr "Введите корректный серийный номер"
-
-#: plugins/personal/generic/class_user.inc:362
-#: plugins/personal/generic/class_user.inc:387
-#: plugins/admin/systems/class_terminalInfo.inc:53
-#: plugins/admin/systems/class_terminalInfo.inc:170
-msgid "present"
-msgstr "присутствует"
-
-#: plugins/personal/generic/class_user.inc:364
-#: plugins/personal/generic/class_user.inc:389
-msgid "absent"
-msgstr "отсутствует"
-
-#: plugins/personal/generic/class_user.inc:778
-msgid "Kerberos database communication failed"
-msgstr "Ошибка соединения с базой данных Kerberos"
-
-#: plugins/personal/generic/class_user.inc:795
-msgid "Can't remove user from kerberos database."
-msgstr "Не удается удалить пользователя из базы данных Kerberos."
-
-#: plugins/personal/generic/class_user.inc:806
-msgid "Can't add user to kerberos database."
-msgstr "Не удается добавить пользователя в базу данных Kerberos."
-
-#: plugins/personal/generic/class_user.inc:846
-msgid "You have no permissions to create a user on this 'Base'."
-msgstr "У вас недостаточно прав для создания пользователя в этой ветке."
-
-#: plugins/personal/generic/class_user.inc:851
-#, fuzzy
-msgid "You have no permissions to move a user from the original 'Base'."
-msgstr "У вас недостаточно прав для создания пользователя в этой ветке."
-
-#: plugins/personal/generic/class_user.inc:857
-#: plugins/addons/addressbook/class_addressbook.inc:523
-#: plugins/admin/users/class_userManagement.inc:424
-msgid "The required field 'Name' is not set."
-msgstr "Обязательное поле \"Имя\" не заполнено."
-
-#: plugins/personal/generic/class_user.inc:866
-msgid "There's already a person with this 'Login' in the database."
-msgstr ""
-"Пользователь с таким регистрационным именем в базе данных уже существует."
-
-#: plugins/personal/generic/class_user.inc:872
-#: plugins/addons/addressbook/class_addressbook.inc:527
-#: plugins/admin/users/class_userManagement.inc:427
-msgid "The required field 'Given name' is not set."
-msgstr "Обязательное поле \"Личное имя\" не заполнено."
-
-#: plugins/personal/generic/class_user.inc:875
-msgid "The required field 'Login' is not set."
-msgstr "Обязательное поле \"Регистрационное имя\" не заполнено."
-
-#: plugins/personal/generic/class_user.inc:882
-msgid ""
-"There's already a person with this 'Name'/'Given name' combination in the "
-"database."
-msgstr ""
-"Пользователь с такой комбинацией имени и личного имени в базе данных уже "
-"существует."
-
-#: plugins/personal/generic/class_user.inc:889
-msgid ""
-"The field 'Login' contains invalid characters. Lowercase, numbers and dashes "
-"are allowed."
-msgstr ""
-"Значение поля \"Регистрационное имя\" содержит недопустимые символы. "
-"Допустимыми являются буквы в нижнем регистре, цифры и дефисы."
-
-#: plugins/personal/generic/class_user.inc:892
-msgid "The field 'Homepage' contains an invalid URL definition."
-msgstr "Значение поля \"Домашняя страница\" содержит некорректный URL."
-
-#: plugins/personal/generic/class_user.inc:895
-#: plugins/personal/generic/class_user.inc:923
-#: plugins/addons/addressbook/class_addressbook.inc:533
-#: plugins/addons/addressbook/class_addressbook.inc:561
-#: plugins/admin/departments/class_departmentGeneric.inc:155
-msgid "The field 'Name' contains invalid characters."
-msgstr "Значение поля \"Имя\" содержит недопустимые символы."
-
-#: plugins/personal/generic/class_user.inc:898
-#: plugins/personal/generic/class_user.inc:920
-#: plugins/addons/addressbook/class_addressbook.inc:536
-#: plugins/addons/addressbook/class_addressbook.inc:558
-msgid "The field 'Given name' contains invalid characters."
-msgstr "Значение поля \"Личное имя\" содержит недопустимые символы."
-
-#: plugins/personal/generic/class_user.inc:903
-#: plugins/personal/generic/class_user.inc:906
-#: plugins/addons/addressbook/class_addressbook.inc:541
-#: plugins/addons/addressbook/class_addressbook.inc:544
-#: plugins/admin/departments/class_departmentGeneric.inc:158
-msgid "The field 'Phone' contains an invalid phone number."
-msgstr "Значение поля \"Телефон\" содержит недопустимый номер телефона."
-
-#: plugins/personal/generic/class_user.inc:909
-#: plugins/addons/addressbook/class_addressbook.inc:547
-#: plugins/admin/departments/class_departmentGeneric.inc:161
-msgid "The field 'Fax' contains an invalid phone number."
-msgstr "Значение поля \"Факс\" содержит недопустимый номер телефона."
-
-#: plugins/personal/generic/class_user.inc:912
-#: plugins/addons/addressbook/class_addressbook.inc:550
-msgid "The field 'Mobile' contains an invalid phone number."
-msgstr "Значение поля \"Мобильный\" содержит некорректный номер телефона."
-
-#: plugins/personal/generic/class_user.inc:915
-#: plugins/addons/addressbook/class_addressbook.inc:553
-msgid "The field 'Pager' contains an invalid phone number."
-msgstr "Значение поля \"Пейджер\" содержит некорректный номер телефона."
 
 #: plugins/personal/generic/password.tpl:2
 msgid ""
@@ -1617,31 +1484,40 @@ msgstr ""
 "свой пароль снова. GOsa произведет шифрование в соответствии с выбраной "
 "схемой."
 
+#: plugins/personal/generic/generic_picture.tpl:6
+#: plugins/personal/generic/generic.tpl:15
+msgid "Personal picture"
+msgstr "Изображение"
+
+#: plugins/personal/generic/generic_picture.tpl:23
+msgid "Remove picture"
+msgstr "Удалить изображение"
+
+#: plugins/personal/generic/generic_picture.tpl:29
+#: plugins/addons/addressbook/address_edit.tpl:107
+msgid "Save"
+msgstr "Сохранить"
+
 #: plugins/personal/generic/generic.tpl:6
 msgid "Personal information"
 msgstr "Личная информация"
-
-#: plugins/personal/generic/generic.tpl:15
-#: plugins/personal/generic/generic_picture.tpl:6
-msgid "Personal picture"
-msgstr "Изображение"
 
 #: plugins/personal/generic/generic.tpl:17
 msgid "Change picture"
 msgstr "Сменить изображение"
 
 #: plugins/personal/generic/generic.tpl:24
-#: plugins/addons/addressbook/contents.tpl:14
 #: plugins/addons/addressbook/address_edit.tpl:20
+#: plugins/addons/addressbook/contents.tpl:14
+#: plugins/addons/addressbook/class_addressbook.inc:502
 #: plugins/addons/addressbook/address_info.tpl:16
-#: plugins/addons/addressbook/class_addressbook.inc:500
 #: plugins/admin/users/template.tpl:19
 msgid "Name"
 msgstr "Фамилия"
 
 #: plugins/personal/generic/generic.tpl:30
 #: plugins/addons/addressbook/address_edit.tpl:20
-#: plugins/addons/addressbook/class_addressbook.inc:500
+#: plugins/addons/addressbook/class_addressbook.inc:502
 #: plugins/admin/users/template.tpl:23
 msgid "Given name"
 msgstr "Имя"
@@ -1713,7 +1589,7 @@ msgid "Password storage"
 msgstr "Хэширование паролей"
 
 #: plugins/personal/generic/generic.tpl:138
-#: plugins/personal/generic/generic_certs.tpl:7
+#: plugins/personal/generic/generic_certs.tpl:3
 msgid "Certificates"
 msgstr "Сертификаты"
 
@@ -1762,8 +1638,8 @@ msgid "Room No."
 msgstr "Номер комнаты"
 
 #: plugins/personal/generic/generic.tpl:221
-#: plugins/addons/addressbook/contents.tpl:15
 #: plugins/addons/addressbook/address_edit.tpl:44
+#: plugins/addons/addressbook/contents.tpl:15
 #: plugins/addons/addressbook/address_info.tpl:40
 msgid "Mobile"
 msgstr "Мобильный"
@@ -1840,22 +1716,13 @@ msgstr "Последняя доставка"
 msgid "Public visible"
 msgstr "Видимый всем"
 
-#: plugins/personal/generic/generic_picture.tpl:23
-msgid "Remove picture"
-msgstr "Удалить изображение"
-
-#: plugins/personal/generic/generic_picture.tpl:29
-#: plugins/addons/addressbook/address_edit.tpl:107
-msgid "Save"
-msgstr "Сохранить"
-
-#: plugins/personal/generic/generic_certs.tpl:14
+#: plugins/personal/generic/generic_certs.tpl:8
 msgid "Standard certificate"
 msgstr "Стандартный сертификат"
 
-#: plugins/personal/generic/generic_certs.tpl:19
-#: plugins/personal/generic/generic_certs.tpl:30
-#: plugins/personal/generic/generic_certs.tpl:41
+#: plugins/personal/generic/generic_certs.tpl:17
+#: plugins/personal/generic/generic_certs.tpl:37
+#: plugins/personal/generic/generic_certs.tpl:57
 #: plugins/personal/connectivity/class_kolabAccount.inc:202
 #: plugins/admin/groups/class_groupMail.inc:408
 #: plugins/admin/applications/class_applicationParameters.inc:94
@@ -1864,17 +1731,164 @@ msgstr "Стандартный сертификат"
 msgid "Remove"
 msgstr "Удалить"
 
-#: plugins/personal/generic/generic_certs.tpl:25
+#: plugins/personal/generic/generic_certs.tpl:28
 msgid "S/MIME certificate"
 msgstr "Сертификат S/MIME"
 
-#: plugins/personal/generic/generic_certs.tpl:36
+#: plugins/personal/generic/generic_certs.tpl:48
 msgid "PKCS12 certificate"
 msgstr "Сертификат PKCS12"
 
-#: plugins/personal/generic/generic_certs.tpl:48
+#: plugins/personal/generic/generic_certs.tpl:65
 msgid "Certificate serial number"
 msgstr "Серийный номер сертификата"
+
+#: plugins/personal/generic/class_user.inc:225
+msgid "female"
+msgstr "женский"
+
+#: plugins/personal/generic/class_user.inc:225
+msgid "male"
+msgstr "мужской"
+
+#: plugins/personal/generic/class_user.inc:235
+msgid "This account has no valid GOsa extensions."
+msgstr "Для этой учетной записи нет корректных расширений GOsa."
+
+#: plugins/personal/generic/class_user.inc:264
+msgid "The specified file has not been uploaded via HTTP POST! Aborted."
+msgstr ""
+"Указанный файл не был загружен на сервер (метод HTTP POST)! Операция "
+"прервана."
+
+#: plugins/personal/generic/class_user.inc:358
+msgid "Please enter a valid serial number"
+msgstr "Введите корректный серийный номер"
+
+#: plugins/personal/generic/class_user.inc:395
+#, fuzzy
+msgid "Serial"
+msgstr "терминалы"
+
+#: plugins/personal/generic/class_user.inc:396
+#, php-format
+msgid ""
+"Certificate is valid from <b>%s</b> to <b>%s</b> and is currently <b>%s</b>."
+msgstr ""
+
+#: plugins/personal/generic/class_user.inc:396
+msgid "valid"
+msgstr ""
+
+#: plugins/personal/generic/class_user.inc:396
+msgid "invalid"
+msgstr ""
+
+#: plugins/personal/generic/class_user.inc:400
+#, fuzzy
+msgid "No certificate installed"
+msgstr "Изменить сертификаты"
+
+#: plugins/personal/generic/class_user.inc:790
+msgid "Kerberos database communication failed"
+msgstr "Ошибка соединения с базой данных Kerberos"
+
+#: plugins/personal/generic/class_user.inc:807
+msgid "Can't remove user from kerberos database."
+msgstr "Не удается удалить пользователя из базы данных Kerberos."
+
+#: plugins/personal/generic/class_user.inc:818
+msgid "Can't add user to kerberos database."
+msgstr "Не удается добавить пользователя в базу данных Kerberos."
+
+#: plugins/personal/generic/class_user.inc:858
+msgid "You have no permissions to create a user on this 'Base'."
+msgstr "У вас недостаточно прав для создания пользователя в этой ветке."
+
+#: plugins/personal/generic/class_user.inc:863
+#, fuzzy
+msgid "You have no permissions to move a user from the original 'Base'."
+msgstr "У вас недостаточно прав для создания пользователя в этой ветке."
+
+#: plugins/personal/generic/class_user.inc:869
+#: plugins/addons/addressbook/class_addressbook.inc:525
+#: plugins/admin/users/class_userManagement.inc:424
+msgid "The required field 'Name' is not set."
+msgstr "Обязательное поле \"Имя\" не заполнено."
+
+#: plugins/personal/generic/class_user.inc:878
+msgid "There's already a person with this 'Login' in the database."
+msgstr ""
+"Пользователь с таким регистрационным именем в базе данных уже существует."
+
+#: plugins/personal/generic/class_user.inc:884
+#: plugins/addons/addressbook/class_addressbook.inc:529
+#: plugins/admin/users/class_userManagement.inc:427
+msgid "The required field 'Given name' is not set."
+msgstr "Обязательное поле \"Личное имя\" не заполнено."
+
+#: plugins/personal/generic/class_user.inc:887
+msgid "The required field 'Login' is not set."
+msgstr "Обязательное поле \"Регистрационное имя\" не заполнено."
+
+#: plugins/personal/generic/class_user.inc:894
+msgid ""
+"There's already a person with this 'Name'/'Given name' combination in the "
+"database."
+msgstr ""
+"Пользователь с такой комбинацией имени и личного имени в базе данных уже "
+"существует."
+
+#: plugins/personal/generic/class_user.inc:901
+msgid ""
+"The field 'Login' contains invalid characters. Lowercase, numbers and dashes "
+"are allowed."
+msgstr ""
+"Значение поля \"Регистрационное имя\" содержит недопустимые символы. "
+"Допустимыми являются буквы в нижнем регистре, цифры и дефисы."
+
+#: plugins/personal/generic/class_user.inc:904
+msgid "The field 'Homepage' contains an invalid URL definition."
+msgstr "Значение поля \"Домашняя страница\" содержит некорректный URL."
+
+#: plugins/personal/generic/class_user.inc:907
+#: plugins/personal/generic/class_user.inc:935
+#: plugins/addons/addressbook/class_addressbook.inc:535
+#: plugins/addons/addressbook/class_addressbook.inc:563
+#: plugins/admin/departments/class_departmentGeneric.inc:155
+msgid "The field 'Name' contains invalid characters."
+msgstr "Значение поля \"Имя\" содержит недопустимые символы."
+
+#: plugins/personal/generic/class_user.inc:910
+#: plugins/personal/generic/class_user.inc:932
+#: plugins/addons/addressbook/class_addressbook.inc:538
+#: plugins/addons/addressbook/class_addressbook.inc:560
+msgid "The field 'Given name' contains invalid characters."
+msgstr "Значение поля \"Личное имя\" содержит недопустимые символы."
+
+#: plugins/personal/generic/class_user.inc:915
+#: plugins/personal/generic/class_user.inc:918
+#: plugins/addons/addressbook/class_addressbook.inc:543
+#: plugins/addons/addressbook/class_addressbook.inc:546
+#: plugins/admin/departments/class_departmentGeneric.inc:158
+msgid "The field 'Phone' contains an invalid phone number."
+msgstr "Значение поля \"Телефон\" содержит недопустимый номер телефона."
+
+#: plugins/personal/generic/class_user.inc:921
+#: plugins/addons/addressbook/class_addressbook.inc:549
+#: plugins/admin/departments/class_departmentGeneric.inc:161
+msgid "The field 'Fax' contains an invalid phone number."
+msgstr "Значение поля \"Факс\" содержит недопустимый номер телефона."
+
+#: plugins/personal/generic/class_user.inc:924
+#: plugins/addons/addressbook/class_addressbook.inc:552
+msgid "The field 'Mobile' contains an invalid phone number."
+msgstr "Значение поля \"Мобильный\" содержит некорректный номер телефона."
+
+#: plugins/personal/generic/class_user.inc:927
+#: plugins/addons/addressbook/class_addressbook.inc:555
+msgid "The field 'Pager' contains an invalid phone number."
+msgstr "Значение поля \"Пейджер\" содержит некорректный номер телефона."
 
 #: plugins/personal/generic/main.inc:107
 msgid "You are not allowed to set your password!"
@@ -1883,31 +1897,6 @@ msgstr "Вам не разрешено менять пароль."
 #: plugins/personal/generic/main.inc:187
 msgid "Generic user information"
 msgstr "Общая информация о пользователе"
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:6
-#: plugins/generic/references/class_reference.inc:34
-msgid "FTP"
-msgstr "FTP"
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:125
-msgid "Value specified as 'Upload bandwidth' is not valid."
-msgstr "Значение поля \"Пропускная способность (на сервер)\" некорректно."
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:128
-msgid "Value specified as 'Download bandwidth' is not valid."
-msgstr "Значение поля \"Пропускная способность (с сервера)\" некорректно."
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:131
-msgid "Value specified as 'Files' is not valid."
-msgstr "Значение поля \"Файлы\" некорректно."
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:134
-msgid "Value specified as 'Size' is not valid."
-msgstr "Значение поля \"Размер\" некорректно."
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:137
-msgid "Value specified as 'Ratio' is not valid."
-msgstr "Значение поля \"Отношение\" некорректно."
 
 #: plugins/personal/connectivity/class_phpgwAccount.inc:5
 msgid "PHPGroupware"
@@ -2003,9 +1992,55 @@ msgstr ""
 msgid "WebDAV"
 msgstr "WebDAV"
 
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:6
+#: plugins/generic/references/class_reference.inc:34
+msgid "FTP"
+msgstr "FTP"
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:125
+msgid "Value specified as 'Upload bandwidth' is not valid."
+msgstr "Значение поля \"Пропускная способность (на сервер)\" некорректно."
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:128
+msgid "Value specified as 'Download bandwidth' is not valid."
+msgstr "Значение поля \"Пропускная способность (с сервера)\" некорректно."
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:131
+msgid "Value specified as 'Files' is not valid."
+msgstr "Значение поля \"Файлы\" некорректно."
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:134
+msgid "Value specified as 'Size' is not valid."
+msgstr "Значение поля \"Размер\" некорректно."
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:137
+msgid "Value specified as 'Ratio' is not valid."
+msgstr "Значение поля \"Отношение\" некорректно."
+
 #: plugins/personal/connectivity/phpgw.tpl:1
 msgid "PHPGroupware account"
 msgstr "Учетная запись Groupware"
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:6
+msgid "Open-Xchange"
+msgstr ""
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:664
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:735
+#, fuzzy
+msgid "Couldn't Connect To Postgresql Database"
+msgstr "Невозможно подключиться к серверу базы данных!"
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:668
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:739
+msgid "Needed Parameters to openexchange connectivity plugin failed!"
+msgstr ""
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:672
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:743
+#, fuzzy
+msgid "PHP4 module for Postgresql Database Failed!"
+msgstr "Невозможно выполнить запрос к базе данных журналов!"
 
 #: plugins/personal/connectivity/kolab.tpl:1
 #, fuzzy
@@ -2059,27 +2094,6 @@ msgstr ""
 #: plugins/personal/connectivity/webdav.tpl:1
 msgid "WebDAV account"
 msgstr "Учетная запись WebDAV"
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:6
-msgid "Open-Xchange"
-msgstr ""
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:664
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:735
-#, fuzzy
-msgid "Couldn't Connect To Postgresql Database"
-msgstr "Невозможно подключиться к серверу базы данных!"
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:668
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:739
-msgid "Needed Parameters to openexchange connectivity plugin failed!"
-msgstr ""
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:672
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:743
-#, fuzzy
-msgid "PHP4 module for Postgresql Database Failed!"
-msgstr "Невозможно выполнить запрос к базе данных журналов!"
 
 #: plugins/personal/connectivity/pureftpd.tpl:1
 msgid "FTP account"
@@ -2207,61 +2221,6 @@ msgstr ""
 msgid "Numerical value for Quota Setting is not valid."
 msgstr "Значение поля \"Квота\" некорректно."
 
-#: plugins/gofax/blocklists/generic.tpl:8
-msgid "List name"
-msgstr "Список"
-
-#: plugins/gofax/blocklists/generic.tpl:10
-msgid "Name of blocklist"
-msgstr "Имя стоп-листа"
-
-#: plugins/gofax/blocklists/generic.tpl:16
-msgid "Select subtree to place blocklist in"
-msgstr "Выберите ветку стоп-листа"
-
-#: plugins/gofax/blocklists/generic.tpl:31
-#: plugins/admin/systems/service.tpl:42 plugins/admin/systems/service.tpl:120
-#: include/functions.inc:1605
-msgid "Type"
-msgstr "Тип"
-
-#: plugins/gofax/blocklists/generic.tpl:33
-msgid "Select wether to filter incoming or outgoing calls"
-msgstr "Выберите, нужно ли фильтровать входящие или исходящие звонки"
-
-#: plugins/gofax/blocklists/generic.tpl:39 plugins/admin/groups/generic.tpl:13
-#: plugins/admin/applications/generic.tpl:24
-#: plugins/admin/departments/generic.tpl:12
-#: plugins/admin/systems/server.tpl:24 plugins/admin/systems/phone.tpl:24
-#: plugins/admin/systems/printer.tpl:10
-#: plugins/admin/systems/wingeneric.tpl:24
-#: plugins/admin/systems/component.tpl:24 plugins/admin/ogroups/generic.tpl:13
-#: plugins/generic/references/contents.tpl:11
-msgid "Description"
-msgstr "Описание"
-
-#: plugins/gofax/blocklists/generic.tpl:41
-msgid "Descriptive text for this blocklist"
-msgstr "Описание стоп-листа"
-
-#: plugins/gofax/blocklists/generic.tpl:54
-msgid "Blocked numbers"
-msgstr "Блокируемые номера"
-
-#: plugins/gofax/blocklists/generic.tpl:64
-#: plugins/gofax/blocklists/headpage.tpl:24
-#: plugins/addons/addressbook/contents.tpl:33
-#: plugins/admin/groups/headpage.tpl:26 plugins/admin/users/headpage.tpl:27
-#: plugins/admin/applications/headpage.tpl:25
-#: plugins/admin/departments/headpage.tpl:25
-#: plugins/admin/systems/headpage.tpl:25 plugins/admin/ogroups/headpage.tpl:26
-msgid "Information"
-msgstr "Информация"
-
-#: plugins/gofax/blocklists/generic.tpl:66
-msgid "Numbers can also contain wild cards."
-msgstr "Вместо точных номеров можно использовать шаблоны."
-
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:5
 msgid "FAX Blocklists"
 msgstr "Стоп-лист номеров (факсы)"
@@ -2308,11 +2267,66 @@ msgstr "Указанное имя уже используется."
 msgid "No permission to create a blocklist on this base."
 msgstr "Недостаточно прав для создания стоп-листа в этой ветке."
 
+#: plugins/gofax/blocklists/generic.tpl:8
+msgid "List name"
+msgstr "Список"
+
+#: plugins/gofax/blocklists/generic.tpl:10
+msgid "Name of blocklist"
+msgstr "Имя стоп-листа"
+
+#: plugins/gofax/blocklists/generic.tpl:16
+msgid "Select subtree to place blocklist in"
+msgstr "Выберите ветку стоп-листа"
+
+#: plugins/gofax/blocklists/generic.tpl:32
+#: plugins/admin/systems/service.tpl:42 plugins/admin/systems/service.tpl:120
+#: include/functions.inc:1608
+msgid "Type"
+msgstr "Тип"
+
+#: plugins/gofax/blocklists/generic.tpl:34
+msgid "Select wether to filter incoming or outgoing calls"
+msgstr "Выберите, нужно ли фильтровать входящие или исходящие звонки"
+
+#: plugins/gofax/blocklists/generic.tpl:41 plugins/admin/groups/generic.tpl:13
+#: plugins/admin/applications/generic.tpl:24
+#: plugins/admin/departments/generic.tpl:12
+#: plugins/admin/systems/server.tpl:24 plugins/admin/systems/phone.tpl:24
+#: plugins/admin/systems/printer.tpl:10
+#: plugins/admin/systems/wingeneric.tpl:24
+#: plugins/admin/systems/component.tpl:24 plugins/admin/ogroups/generic.tpl:13
+#: plugins/generic/references/contents.tpl:11
+msgid "Description"
+msgstr "Описание"
+
+#: plugins/gofax/blocklists/generic.tpl:43
+msgid "Descriptive text for this blocklist"
+msgstr "Описание стоп-листа"
+
+#: plugins/gofax/blocklists/generic.tpl:56
+msgid "Blocked numbers"
+msgstr "Блокируемые номера"
+
+#: plugins/gofax/blocklists/generic.tpl:67
+#: plugins/gofax/blocklists/headpage.tpl:25
+#: plugins/addons/addressbook/contents.tpl:33
+#: plugins/admin/groups/headpage.tpl:26 plugins/admin/users/headpage.tpl:27
+#: plugins/admin/applications/headpage.tpl:25
+#: plugins/admin/departments/headpage.tpl:25
+#: plugins/admin/systems/headpage.tpl:25 plugins/admin/ogroups/headpage.tpl:26
+msgid "Information"
+msgstr "Информация"
+
+#: plugins/gofax/blocklists/generic.tpl:69
+msgid "Numbers can also contain wild cards."
+msgstr "Вместо точных номеров можно использовать шаблоны."
+
 #: plugins/gofax/blocklists/remove.tpl:2
 #: plugins/addons/addressbook/remove.tpl:2 plugins/admin/groups/remove.tpl:2
 #: plugins/admin/users/remove.tpl:2 plugins/admin/applications/remove.tpl:2
 #: plugins/admin/departments/remove.tpl:2 plugins/admin/systems/remove.tpl:2
-#: plugins/admin/ogroups/remove.tpl:2 html/index.php:215
+#: plugins/admin/ogroups/remove.tpl:2 html/index.php:217
 #: ihtml/themes/altlinux/conflict.tpl:6 ihtml/themes/altlinux/islocked.tpl:6
 #: ihtml/themes/default/conflict.tpl:6 ihtml/themes/default/islocked.tpl:6
 msgid "Warning"
@@ -2341,7 +2355,7 @@ msgstr ""
 msgid "List of blocklists"
 msgstr "Стоп-листы"
 
-#: plugins/gofax/blocklists/headpage.tpl:15
+#: plugins/gofax/blocklists/headpage.tpl:16
 #: plugins/admin/groups/headpage.tpl:16 plugins/admin/users/headpage.tpl:16
 #: plugins/admin/applications/headpage.tpl:16
 #: plugins/admin/departments/headpage.tpl:16
@@ -2349,7 +2363,7 @@ msgstr "Стоп-листы"
 msgid "New"
 msgstr "Создать"
 
-#: plugins/gofax/blocklists/headpage.tpl:28
+#: plugins/gofax/blocklists/headpage.tpl:29
 #, fuzzy
 msgid ""
 "This menu allows you to create, delete and edit selected blocklists. Having "
@@ -2360,7 +2374,7 @@ msgstr ""
 "листы. Если у вас достаточно большое количество списков, вы можете "
 "использовать групповое выделение."
 
-#: plugins/gofax/blocklists/headpage.tpl:31
+#: plugins/gofax/blocklists/headpage.tpl:32
 #, fuzzy
 msgid ""
 "-Edit- and -New...- will execute an assistant to aid you when performing "
@@ -2371,39 +2385,39 @@ msgstr ""
 "редактирования их свойств. Перед удалением списка вам нужно будет "
 "подтвердить свое решение."
 
-#: plugins/gofax/blocklists/headpage.tpl:45
+#: plugins/gofax/blocklists/headpage.tpl:46
 msgid "Select to see send blocklists"
 msgstr "Выберите, чтобы просмотреть стоп-листы (отправка)"
 
-#: plugins/gofax/blocklists/headpage.tpl:45
+#: plugins/gofax/blocklists/headpage.tpl:46
 msgid "Show send blocklists"
 msgstr "Показать стоп-листы отправки"
 
-#: plugins/gofax/blocklists/headpage.tpl:46
+#: plugins/gofax/blocklists/headpage.tpl:47
 msgid "Select to see receive blocklists"
 msgstr "Выберите, чтобы просмотреть стоп-листы (получение)"
 
-#: plugins/gofax/blocklists/headpage.tpl:46
+#: plugins/gofax/blocklists/headpage.tpl:47
 msgid "Show receive blocklists"
 msgstr "Показать стоп-листы получения"
 
-#: plugins/gofax/blocklists/headpage.tpl:54
+#: plugins/gofax/blocklists/headpage.tpl:55
 msgid "Display lists of department"
 msgstr "Стоп-листы в подразделении"
 
-#: plugins/gofax/blocklists/headpage.tpl:67
+#: plugins/gofax/blocklists/headpage.tpl:69
 msgid "Display lists matching"
 msgstr "Шаблон для стоп-листов"
 
-#: plugins/gofax/blocklists/headpage.tpl:70
+#: plugins/gofax/blocklists/headpage.tpl:72
 msgid "Regular expression for matching list names"
 msgstr "Регулярное выражение, соответствующее именам списков"
 
-#: plugins/gofax/blocklists/headpage.tpl:78
+#: plugins/gofax/blocklists/headpage.tpl:80
 msgid "Display lists containing"
 msgstr "Шаблон для содержимого стоп-листов"
 
-#: plugins/gofax/blocklists/headpage.tpl:81
+#: plugins/gofax/blocklists/headpage.tpl:83
 msgid "Show lists containing entered numbers"
 msgstr "Показать \"черные списки\", содержащие введенные номера"
 
@@ -2512,8 +2526,8 @@ msgid "List of predefined blocklists"
 msgstr "Готовые \"черные списки\""
 
 #: plugins/gofax/faxaccount/lists.tpl:37
-#: plugins/admin/groups/application_options.tpl:8
-#: plugins/admin/groups/mail_admins.tpl:37 include/functions.inc:1190
+#: plugins/admin/groups/mail_admins.tpl:37
+#: plugins/admin/groups/application_options.tpl:8 include/functions.inc:1195
 msgid "Apply"
 msgstr "Применить"
 
@@ -2625,60 +2639,6 @@ msgstr "Время передачи"
 msgid "# pages"
 msgstr "Число страниц"
 
-#: plugins/gofax/reports/contents.tpl:2 plugins/addons/logview/contents.tpl:2
-#: plugins/gofon/reports/contents.tpl:2
-msgid "Filter"
-msgstr "Фильтр"
-
-#: plugins/gofax/reports/contents.tpl:6
-#: plugins/addons/addressbook/contents.tpl:92
-#: plugins/addons/logview/contents.tpl:47 plugins/gofon/reports/contents.tpl:6
-msgid "Search for"
-msgstr "Поиск"
-
-#: plugins/gofax/reports/contents.tpl:7 plugins/gofon/reports/contents.tpl:7
-msgid "Enter user name to search for"
-msgstr "Введите искомое имя пользователя"
-
-#: plugins/gofax/reports/contents.tpl:8 plugins/gofax/reports/contents.tpl:16
-#: plugins/gofon/reports/contents.tpl:8 plugins/gofon/reports/contents.tpl:16
-msgid "in"
-msgstr "в"
-
-#: plugins/gofax/reports/contents.tpl:9 plugins/gofon/reports/contents.tpl:9
-msgid "Select subtree to base search on"
-msgstr "Выберите ветку для поиска"
-
-#: plugins/gofax/reports/contents.tpl:12 plugins/gofon/reports/contents.tpl:12
-msgid "during"
-msgstr "в течение"
-
-#: plugins/gofax/reports/contents.tpl:21
-#: plugins/addons/logview/contents.tpl:67
-#: plugins/gofon/reports/contents.tpl:21
-msgid "Search"
-msgstr "Поиск"
-
-#: plugins/gofax/reports/contents.tpl:31
-#: plugins/addons/logview/contents.tpl:84
-#: plugins/gofon/reports/contents.tpl:30
-msgid "Date"
-msgstr "Дата"
-
-#: plugins/gofax/reports/contents.tpl:33
-msgid "Sender"
-msgstr "Отправитель"
-
-#: plugins/gofax/reports/contents.tpl:34
-msgid "Receiver"
-msgstr "Получатель"
-
-#: plugins/gofax/reports/contents.tpl:47
-#: plugins/addons/logview/contents.tpl:97
-#: plugins/gofon/reports/contents.tpl:48
-msgid "Search returned no results..."
-msgstr "Не найдено..."
-
 #: plugins/gofax/reports/class_faxreport.inc:6
 msgid "FAX Reports"
 msgstr "Отчеты о факсах"
@@ -2709,15 +2669,120 @@ msgstr "У вас недостаточно прав для получения и
 msgid "Y-M-D"
 msgstr "Г-М-Д"
 
+#: plugins/gofax/reports/contents.tpl:2 plugins/addons/logview/contents.tpl:2
+#: plugins/gofon/reports/contents.tpl:2
+msgid "Filter"
+msgstr "Фильтр"
+
+#: plugins/gofax/reports/contents.tpl:6
+#: plugins/addons/addressbook/contents.tpl:92
+#: plugins/addons/logview/contents.tpl:47 plugins/gofon/reports/contents.tpl:6
+msgid "Search for"
+msgstr "Поиск"
+
+#: plugins/gofax/reports/contents.tpl:7 plugins/gofon/reports/contents.tpl:7
+msgid "Enter user name to search for"
+msgstr "Введите искомое имя пользователя"
+
+#: plugins/gofax/reports/contents.tpl:8 plugins/gofax/reports/contents.tpl:16
+#: plugins/gofon/reports/contents.tpl:8 plugins/gofon/reports/contents.tpl:16
+msgid "in"
+msgstr "в"
+
+#: plugins/gofax/reports/contents.tpl:9 plugins/gofon/reports/contents.tpl:9
+msgid "Select subtree to base search on"
+msgstr "Выберите ветку для поиска"
+
+#: plugins/gofax/reports/contents.tpl:12 plugins/gofon/reports/contents.tpl:12
+msgid "during"
+msgstr "в течение"
+
+#: plugins/gofax/reports/contents.tpl:21
+#: plugins/addons/logview/contents.tpl:67
+#: plugins/gofon/reports/contents.tpl:21 ihtml/themes/default/help.tpl:21
+msgid "Search"
+msgstr "Поиск"
+
+#: plugins/gofax/reports/contents.tpl:31
+#: plugins/addons/logview/contents.tpl:84
+#: plugins/gofon/reports/contents.tpl:30
+msgid "Date"
+msgstr "Дата"
+
+#: plugins/gofax/reports/contents.tpl:33
+msgid "Sender"
+msgstr "Отправитель"
+
+#: plugins/gofax/reports/contents.tpl:34
+msgid "Receiver"
+msgstr "Получатель"
+
+#: plugins/gofax/reports/contents.tpl:47
+#: plugins/addons/logview/contents.tpl:97
+#: plugins/gofon/reports/contents.tpl:48
+msgid "Search returned no results..."
+msgstr "Не найдено..."
+
 #: plugins/gofax/reports/main.inc:5
 msgid "FAX reports"
 msgstr "Отчеты о факсах"
 
-#: plugins/addons/addressbook/contents.tpl:15
+#: plugins/addons/addressbook/dial.tpl:3
+msgid "Dial connection..."
+msgstr "Соединение..."
+
+#: plugins/addons/addressbook/dial.tpl:10
+#: plugins/addons/addressbook/class_addressbook.inc:359
+#: plugins/addons/addressbook/class_addressbook.inc:366
+#: plugins/addons/addressbook/class_addressbook.inc:370
+#: plugins/addons/addressbook/class_addressbook.inc:452
+msgid "Dial"
+msgstr "Звонок"
+
+#: plugins/addons/addressbook/address_edit.tpl:4
+msgid "Choose the department to store entry in"
+msgstr "Выбрать раздел, для хранения объекта"
+
+#: plugins/addons/addressbook/address_edit.tpl:16
+#: plugins/addons/addressbook/address_info.tpl:12
+msgid "Personal"
+msgstr "Контакт"
+
+#: plugins/addons/addressbook/address_edit.tpl:23
+#: plugins/addons/addressbook/address_info.tpl:19
+msgid "Initials"
+msgstr "Отчество"
+
 #: plugins/addons/addressbook/address_edit.tpl:33
+#: plugins/addons/addressbook/contents.tpl:15
 #: plugins/addons/addressbook/address_info.tpl:29
 msgid "Private"
 msgstr "Личный"
+
+#: plugins/addons/addressbook/address_edit.tpl:47
+#: plugins/addons/addressbook/address_info.tpl:43
+msgid "Email"
+msgstr "Email"
+
+#: plugins/addons/addressbook/address_edit.tpl:57
+#: plugins/addons/addressbook/address_info.tpl:53
+msgid "Organizational"
+msgstr "Организация"
+
+#: plugins/addons/addressbook/address_edit.tpl:65
+#: plugins/addons/addressbook/address_info.tpl:61
+msgid "Company"
+msgstr "Компания"
+
+#: plugins/addons/addressbook/address_edit.tpl:71
+#: plugins/addons/addressbook/address_info.tpl:67
+msgid "City"
+msgstr "Город"
+
+#: plugins/addons/addressbook/address_edit.tpl:77
+#: plugins/addons/addressbook/address_info.tpl:73
+msgid "Country"
+msgstr "Страна"
 
 #: plugins/addons/addressbook/contents.tpl:15
 msgid "Contact"
@@ -2782,57 +2847,6 @@ msgstr "Соответствующий объект"
 msgid "Choose the object that will be searched in"
 msgstr "Выберите объект, в котором будет осуществлен поиск"
 
-#: plugins/addons/addressbook/dial.tpl:3
-msgid "Dial connection..."
-msgstr "Соединение..."
-
-#: plugins/addons/addressbook/dial.tpl:10
-#: plugins/addons/addressbook/class_addressbook.inc:357
-#: plugins/addons/addressbook/class_addressbook.inc:364
-#: plugins/addons/addressbook/class_addressbook.inc:368
-#: plugins/addons/addressbook/class_addressbook.inc:450
-msgid "Dial"
-msgstr "Звонок"
-
-#: plugins/addons/addressbook/address_edit.tpl:4
-msgid "Choose the department to store entry in"
-msgstr "Выбрать раздел, для хранения объекта"
-
-#: plugins/addons/addressbook/address_edit.tpl:16
-#: plugins/addons/addressbook/address_info.tpl:12
-msgid "Personal"
-msgstr "Контакт"
-
-#: plugins/addons/addressbook/address_edit.tpl:23
-#: plugins/addons/addressbook/address_info.tpl:19
-msgid "Initials"
-msgstr "Отчество"
-
-#: plugins/addons/addressbook/address_edit.tpl:47
-#: plugins/addons/addressbook/address_info.tpl:43
-msgid "Email"
-msgstr "Email"
-
-#: plugins/addons/addressbook/address_edit.tpl:57
-#: plugins/addons/addressbook/address_info.tpl:53
-msgid "Organizational"
-msgstr "Организация"
-
-#: plugins/addons/addressbook/address_edit.tpl:65
-#: plugins/addons/addressbook/address_info.tpl:61
-msgid "Company"
-msgstr "Компания"
-
-#: plugins/addons/addressbook/address_edit.tpl:71
-#: plugins/addons/addressbook/address_info.tpl:67
-msgid "City"
-msgstr "Город"
-
-#: plugins/addons/addressbook/address_edit.tpl:77
-#: plugins/addons/addressbook/address_info.tpl:73
-msgid "Country"
-msgstr "Страна"
-
 #: plugins/addons/addressbook/remove.tpl:7
 msgid ""
 "This includes all addressbook data in this entry. Please double check if "
@@ -2850,84 +2864,84 @@ msgstr "Адресная книга"
 msgid "Addressbook"
 msgstr "Адресная книга"
 
-#: plugins/addons/addressbook/class_addressbook.inc:147
+#: plugins/addons/addressbook/class_addressbook.inc:149
 #, php-format
 msgid "Dial from %s to %s now?"
 msgstr "Звоним с %s на %s?"
 
-#: plugins/addons/addressbook/class_addressbook.inc:151
+#: plugins/addons/addressbook/class_addressbook.inc:153
 msgid ""
 "You have no personal phone number set. Please change that in order to "
 "perform direct dials."
 msgstr ""
 "У вас нет персонального набора телефонов. Настройте это прежде чем звонить."
 
-#: plugins/addons/addressbook/class_addressbook.inc:180
-#: plugins/addons/addressbook/class_addressbook.inc:284
+#: plugins/addons/addressbook/class_addressbook.inc:182
+#: plugins/addons/addressbook/class_addressbook.inc:286
 msgid "You are not allowed to delete this entry!"
 msgstr "У вас недостаточно прав для удаления этого объекта!"
 
-#: plugins/addons/addressbook/class_addressbook.inc:278
+#: plugins/addons/addressbook/class_addressbook.inc:280
 #, php-format
 msgid "You're about to delete the entry %s."
 msgstr "Вы собираетесь удалить объект %s."
 
-#: plugins/addons/addressbook/class_addressbook.inc:374
+#: plugins/addons/addressbook/class_addressbook.inc:376
 #, php-format
 msgid "Save contact for %s as vcard"
 msgstr "Сохранить контактную информацию %s в формате vcard"
 
-#: plugins/addons/addressbook/class_addressbook.inc:378
+#: plugins/addons/addressbook/class_addressbook.inc:380
 #, php-format
 msgid "Send mail to %s"
 msgstr "Отправить %s сообщение по эл. почте"
 
-#: plugins/addons/addressbook/class_addressbook.inc:462
+#: plugins/addons/addressbook/class_addressbook.inc:464
 msgid "global addressbook"
 msgstr "общая адресная книга"
 
-#: plugins/addons/addressbook/class_addressbook.inc:465
+#: plugins/addons/addressbook/class_addressbook.inc:467
 msgid "organizations user database"
 msgstr "база пользователя"
 
-#: plugins/addons/addressbook/class_addressbook.inc:469
+#: plugins/addons/addressbook/class_addressbook.inc:471
 #, php-format
 msgid "Contact stored in %s"
 msgstr "Контакт сохранен в %s"
 
-#: plugins/addons/addressbook/class_addressbook.inc:471
+#: plugins/addons/addressbook/class_addressbook.inc:473
 msgid "Creating new entry in"
 msgstr "Создание нового объекта в"
 
-#: plugins/addons/addressbook/class_addressbook.inc:500
+#: plugins/addons/addressbook/class_addressbook.inc:502
 #: plugins/addons/logview/class_logview.inc:63
 #: plugins/addons/logview/class_logview.inc:77
 msgid "All"
 msgstr "Все"
 
-#: plugins/addons/addressbook/class_addressbook.inc:501
+#: plugins/addons/addressbook/class_addressbook.inc:503
 msgid "Work phone"
 msgstr "Рабочий телефон"
 
-#: plugins/addons/addressbook/class_addressbook.inc:501
+#: plugins/addons/addressbook/class_addressbook.inc:503
 msgid "Cell phone"
 msgstr "Сотовый телефон"
 
-#: plugins/addons/addressbook/class_addressbook.inc:502
+#: plugins/addons/addressbook/class_addressbook.inc:504
 msgid "Home phone"
 msgstr "Домашний телефон"
 
-#: plugins/addons/addressbook/class_addressbook.inc:502
+#: plugins/addons/addressbook/class_addressbook.inc:504
 msgid "User ID"
 msgstr "Идентификатор пользователя"
 
-#: plugins/addons/addressbook/class_addressbook.inc:574
+#: plugins/addons/addressbook/class_addressbook.inc:576
 msgid ""
 "Cannot create a unique DN for your entry. Please fill more formular fields."
 msgstr ""
 "Невозможно создать уникальный DN для объекта. Заполните все поля формы."
 
-#: plugins/addons/addressbook/class_addressbook.inc:586
+#: plugins/addons/addressbook/class_addressbook.inc:588
 msgid ""
 "You have no permissions to create or modify a global address book entry."
 msgstr ""
@@ -3015,12 +3029,12 @@ msgstr "Просмотр"
 msgid "Modify existing attributes"
 msgstr ""
 
-#: plugins/addons/ldapmanager/contentimport.tpl:37
+#: plugins/addons/ldapmanager/contentimport.tpl:33
 #, fuzzy
 msgid "Overwrite existing entry"
 msgstr "Экспорт объекта"
 
-#: plugins/addons/ldapmanager/contentimport.tpl:44
+#: plugins/addons/ldapmanager/contentimport.tpl:40
 #, fuzzy
 msgid "Import successful"
 msgstr "Импорт успешен."
@@ -3220,6 +3234,45 @@ msgstr "Сообщение"
 msgid "System log view"
 msgstr "Просмотр системного журнала"
 
+#: plugins/admin/groups/mail.tpl:11
+msgid "Primary mail address for this shared folder"
+msgstr "Основной адрес эл. почты для этой общей папки"
+
+#: plugins/admin/groups/mail.tpl:16
+msgid "Select mail server to place user on"
+msgstr "Выберите почтовый сервер для пользователя"
+
+#: plugins/admin/groups/mail.tpl:66
+msgid "IMAP shared folders"
+msgstr "Общие папки IMAP"
+
+#: plugins/admin/groups/mail.tpl:70
+msgid "Default permission"
+msgstr "Права по умолчанию"
+
+#: plugins/admin/groups/mail.tpl:79
+msgid "Member permission"
+msgstr "Права для членов группы"
+
+#: plugins/admin/groups/mail.tpl:94
+msgid "Forward messages to non group members"
+msgstr "Пересылать сообщения не членам группы"
+
+#: plugins/admin/groups/class_groupManagement.inc:25
+#: plugins/admin/ogroups/class_ogroupManagement.inc:42
+msgid "Groups"
+msgstr "Группы"
+
+#: plugins/admin/groups/class_groupManagement.inc:204
+#, php-format
+msgid "You're about to delete the group '%s'."
+msgstr "Вы собираетесь удалить группу \"%s\"."
+
+#: plugins/admin/groups/class_groupManagement.inc:210
+#: plugins/admin/groups/class_groupManagement.inc:236
+msgid "You are not allowed to delete this group!"
+msgstr "У вас недостаточно прав для удаления этой группы!"
+
 #: plugins/admin/groups/class_groupGeneric.inc:109
 msgid "Can't find this groups SID in LDAP or in your configuration file!"
 msgstr "Не могу найти SID в базе LDAP или в сонфигурационном файле!"
@@ -3267,29 +3320,18 @@ msgstr ""
 msgid "Value specified as 'Name' is already used."
 msgstr "Группа с таким именем уже существует."
 
-#: plugins/admin/groups/mail.tpl:11
-msgid "Primary mail address for this shared folder"
-msgstr "Основной адрес эл. почты для этой общей папки"
+#: plugins/admin/groups/remove.tpl:7
+msgid ""
+"This may be a primary user group. Please double check if you really want to "
+"do this since there is no way for GOsa to get your data back."
+msgstr ""
+"Возможно, это основная группа пользователей. Еще раз проверте что Вы "
+"действительно хотите удалить ее, так как GOsa не сможет отменить результаты "
+"этой операции."
 
-#: plugins/admin/groups/mail.tpl:16
-msgid "Select mail server to place user on"
-msgstr "Выберите почтовый сервер для пользователя"
-
-#: plugins/admin/groups/mail.tpl:66
-msgid "IMAP shared folders"
-msgstr "Общие папки IMAP"
-
-#: plugins/admin/groups/mail.tpl:70
-msgid "Default permission"
-msgstr "Права по умолчанию"
-
-#: plugins/admin/groups/mail.tpl:79
-msgid "Member permission"
-msgstr "Права для членов группы"
-
-#: plugins/admin/groups/mail.tpl:94
-msgid "Forward messages to non group members"
-msgstr "Пересылать сообщения не членам группы"
+#: plugins/admin/groups/main.inc:39 plugins/admin/groups/main.inc:43
+msgid "Group administration"
+msgstr "Управление группами"
 
 #: plugins/admin/groups/headpage.tpl:6 plugins/admin/ogroups/headpage.tpl:6
 msgid "List of groups"
@@ -3323,38 +3365,6 @@ msgstr "Искать в поддеревьях LDAP"
 #: plugins/admin/groups/headpage.tpl:60 plugins/admin/users/headpage.tpl:64
 msgid "Search in subtrees"
 msgstr "Искать в поддеревьях"
-
-#: plugins/admin/groups/main.inc:39 plugins/admin/groups/main.inc:43
-msgid "Group administration"
-msgstr "Управление группами"
-
-#: plugins/admin/groups/class_groupManagement.inc:25
-#: plugins/admin/ogroups/class_ogroupManagement.inc:42
-msgid "Groups"
-msgstr "Группы"
-
-#: plugins/admin/groups/class_groupManagement.inc:204
-#, php-format
-msgid "You're about to delete the group '%s'."
-msgstr "Вы собираетесь удалить группу \"%s\"."
-
-#: plugins/admin/groups/class_groupManagement.inc:210
-#: plugins/admin/groups/class_groupManagement.inc:236
-msgid "You are not allowed to delete this group!"
-msgstr "У вас недостаточно прав для удаления этой группы!"
-
-#: plugins/admin/groups/remove.tpl:7
-msgid ""
-"This may be a primary user group. Please double check if you really want to "
-"do this since there is no way for GOsa to get your data back."
-msgstr ""
-"Возможно, это основная группа пользователей. Еще раз проверте что Вы "
-"действительно хотите удалить ее, так как GOsa не сможет отменить результаты "
-"этой операции."
-
-#: plugins/admin/groups/application_options.tpl:1
-msgid "Application options"
-msgstr "Параметры приложения"
 
 #: plugins/admin/groups/class_groupMail.inc:153
 msgid "read"
@@ -3493,6 +3503,10 @@ msgstr "Члены группы"
 msgid "Folder administrators"
 msgstr "Администраторы папки"
 
+#: plugins/admin/groups/application_options.tpl:1
+msgid "Application options"
+msgstr "Параметры приложения"
+
 #: plugins/admin/groups/class_groupApplication.inc:61
 msgid "This 'dn' is no appgroup."
 msgstr "Это DN соответствует не группе приложений."
@@ -3541,40 +3555,6 @@ msgstr ""
 "вступят в силу немедленно. Пожалуйста, запомните новый пароль, так как иначе "
 "пользователь не сможет войти в систему."
 
-#: plugins/admin/users/template.tpl:2
-msgid "Creating a new user using templates"
-msgstr "Создание пользователя на основе шаблона"
-
-#: plugins/admin/users/template.tpl:6
-msgid ""
-"Creating a new user can be assisted by using templates. Many database "
-"records will be filled automatically. Choose <b>none</b> to skip the usage "
-"of templates."
-msgstr ""
-"Можно создавать пользователей на основе шаблонов. При этом многие поля в "
-"базе данных будут заполнены автоматически. Выберите <b>нет</b>, чтобы не "
-"использовать шаблоны."
-
-#: plugins/admin/users/template.tpl:11
-#: plugins/admin/users/class_userManagement.inc:619
-msgid "Template"
-msgstr "Шаблон"
-
-#: plugins/admin/users/template.tpl:44
-#: ihtml/themes/altlinux/setup_introduction.tpl:10
-#: ihtml/themes/altlinux/setup_step2.tpl:16
-#: ihtml/themes/altlinux/setup_step3.tpl:12
-#: ihtml/themes/default/setup_introduction.tpl:12
-#: ihtml/themes/default/setup_useradmin.tpl:41
-#: ihtml/themes/default/setup_step2.tpl:13
-#: ihtml/themes/default/setup_step3.tpl:18
-msgid "Continue"
-msgstr "Продолжить"
-
-#: plugins/admin/users/main.inc:40 plugins/admin/users/main.inc:46
-msgid "User administration"
-msgstr "Управление пользователями"
-
 #: plugins/admin/users/class_userManagement.inc:25
 msgid "Users"
 msgstr "Пользователи"
@@ -3602,6 +3582,36 @@ msgstr "нет"
 #: plugins/admin/users/class_userManagement.inc:436
 msgid "A person with the choosen name is already used in this tree."
 msgstr "Пользователь с таким именем уже есть в этой ветке."
+
+#: plugins/admin/users/class_userManagement.inc:619
+#: plugins/admin/users/template.tpl:11
+msgid "Template"
+msgstr "Шаблон"
+
+#: plugins/admin/users/template.tpl:2
+msgid "Creating a new user using templates"
+msgstr "Создание пользователя на основе шаблона"
+
+#: plugins/admin/users/template.tpl:6
+msgid ""
+"Creating a new user can be assisted by using templates. Many database "
+"records will be filled automatically. Choose <b>none</b> to skip the usage "
+"of templates."
+msgstr ""
+"Можно создавать пользователей на основе шаблонов. При этом многие поля в "
+"базе данных будут заполнены автоматически. Выберите <b>нет</b>, чтобы не "
+"использовать шаблоны."
+
+#: plugins/admin/users/template.tpl:44
+#: ihtml/themes/altlinux/setup_introduction.tpl:10
+#: ihtml/themes/altlinux/setup_step2.tpl:16
+#: ihtml/themes/altlinux/setup_step3.tpl:12
+#: ihtml/themes/default/setup_introduction.tpl:12
+#: ihtml/themes/default/setup_useradmin.tpl:41
+#: ihtml/themes/default/setup_step2.tpl:13
+#: ihtml/themes/default/setup_step3.tpl:18
+msgid "Continue"
+msgstr "Продолжить"
 
 #: plugins/admin/users/remove.tpl:7
 msgid ""
@@ -3709,6 +3719,48 @@ msgstr "Выберите, чтобы просмотреть пользовате
 msgid "Show FAX users"
 msgstr "Показать пользователей факсов"
 
+#: plugins/admin/users/main.inc:40 plugins/admin/users/main.inc:46
+msgid "User administration"
+msgstr "Управление пользователями"
+
+#: plugins/admin/applications/class_applicationParameters.inc:47
+msgid "Remove options"
+msgstr "Удалить параметры"
+
+#: plugins/admin/applications/class_applicationParameters.inc:48
+msgid "This application has options. You can disable them by clicking below."
+msgstr ""
+"Для этого приложения указаны параметры. Вы можете отключить их "
+"использование, щелкнув ниже."
+
+#: plugins/admin/applications/class_applicationParameters.inc:50
+msgid "Create options"
+msgstr "Создать параметры"
+
+#: plugins/admin/applications/class_applicationParameters.inc:51
+msgid ""
+"This application has options disabled. You can enable them by clicking below."
+msgstr ""
+"Для этого приложения отключено использование параметров. Вы можете включить "
+"его, щелкнув ниже."
+
+#: plugins/admin/applications/class_applicationParameters.inc:87
+msgid "Variable"
+msgstr "Переменная"
+
+#: plugins/admin/applications/class_applicationParameters.inc:87
+msgid "Default value"
+msgstr "По умолчанию"
+
+#: plugins/admin/applications/class_applicationParameters.inc:98
+msgid "Add option"
+msgstr "Добавить параметр"
+
+#: plugins/admin/applications/class_applicationParameters.inc:149
+#, php-format
+msgid "Value '%s' specified as option name is not valid."
+msgstr "Значение \"%s\", указанное как имя параметра, некорректно."
+
 #: plugins/admin/applications/generic.tpl:7
 #: plugins/admin/applications/generic.tpl:8
 msgid "Application name"
@@ -3767,44 +3819,6 @@ msgstr "Помещать пиктограмму на рабочие столы �
 msgid "Place entry in members startmenu"
 msgstr "Помещать членам группы соответствующий элемент в меню запуска"
 
-#: plugins/admin/applications/class_applicationParameters.inc:47
-msgid "Remove options"
-msgstr "Удалить параметры"
-
-#: plugins/admin/applications/class_applicationParameters.inc:48
-msgid "This application has options. You can disable them by clicking below."
-msgstr ""
-"Для этого приложения указаны параметры. Вы можете отключить их "
-"использование, щелкнув ниже."
-
-#: plugins/admin/applications/class_applicationParameters.inc:50
-msgid "Create options"
-msgstr "Создать параметры"
-
-#: plugins/admin/applications/class_applicationParameters.inc:51
-msgid ""
-"This application has options disabled. You can enable them by clicking below."
-msgstr ""
-"Для этого приложения отключено использование параметров. Вы можете включить "
-"его, щелкнув ниже."
-
-#: plugins/admin/applications/class_applicationParameters.inc:87
-msgid "Variable"
-msgstr "Переменная"
-
-#: plugins/admin/applications/class_applicationParameters.inc:87
-msgid "Default value"
-msgstr "По умолчанию"
-
-#: plugins/admin/applications/class_applicationParameters.inc:98
-msgid "Add option"
-msgstr "Добавить параметр"
-
-#: plugins/admin/applications/class_applicationParameters.inc:149
-#, php-format
-msgid "Value '%s' specified as option name is not valid."
-msgstr "Значение \"%s\", указанное как имя параметра, некорректно."
-
 #: plugins/admin/applications/remove.tpl:7
 msgid ""
 "This may be used by several groups. Please double check if your really want "
@@ -3856,16 +3870,6 @@ msgstr "Регулярное выражение, соответствующее 
 msgid "Application management"
 msgstr "Управление приложениями"
 
-#: plugins/admin/applications/class_applicationManagement.inc:185
-#, php-format
-msgid "You're about to delete the application '%s'."
-msgstr "Вы собираетесь удалить приложение \"%s\"."
-
-#: plugins/admin/applications/class_applicationManagement.inc:191
-#: plugins/admin/applications/class_applicationManagement.inc:217
-msgid "You are not allowed to delete this application!"
-msgstr "У вас недостаточно прав для удаления этого приложения!"
-
 #: plugins/admin/applications/class_applicationGeneric.inc:59
 msgid "This 'dn' is no application."
 msgstr "Это DN соответствует не приложению."
@@ -3889,6 +3893,16 @@ msgstr "Обязательное поле \"Выполнить\" не запол
 #: plugins/admin/applications/class_applicationGeneric.inc:246
 msgid "There's already an application with this 'Name'."
 msgstr "Приложение с таким именем уже существует."
+
+#: plugins/admin/applications/class_applicationManagement.inc:185
+#, php-format
+msgid "You're about to delete the application '%s'."
+msgstr "Вы собираетесь удалить приложение \"%s\"."
+
+#: plugins/admin/applications/class_applicationManagement.inc:191
+#: plugins/admin/applications/class_applicationManagement.inc:217
+msgid "You are not allowed to delete this application!"
+msgstr "У вас недостаточно прав для удаления этого приложения!"
 
 #: plugins/admin/departments/generic.tpl:4
 #: plugins/admin/systems/terminal.tpl:1
@@ -4002,20 +4016,6 @@ msgstr "Регулярное выражение, соответствующее 
 msgid "Department management"
 msgstr "Управление подразделениями"
 
-#: plugins/admin/departments/class_departmentManagement.inc:25
-#: plugins/admin/ogroups/class_ogroupManagement.inc:43
-msgid "Departments"
-msgstr "Подразделения"
-
-#: plugins/admin/departments/class_departmentManagement.inc:130
-#, php-format
-msgid "You're about to delete the whole LDAP subtree placed under '%s'."
-msgstr "Вы собираетесь удалить целую ветку LDAP с корнем в \"%s\"."
-
-#: plugins/admin/departments/class_departmentManagement.inc:145
-msgid "You have no permission to remove this department."
-msgstr "У вас недостаточно прав для удаления этого подразделения."
-
 #: plugins/admin/departments/class_departmentGeneric.inc:129
 msgid "You have no permissions to create a department on this 'Base'."
 msgstr "У вас недостаточно прав для создания подразделения в этой ветке."
@@ -4036,6 +4036,25 @@ msgstr "Значение поля \"Имя\" содержит служебное
 #: plugins/admin/departments/class_departmentGeneric.inc:152
 msgid " Please choose another name."
 msgstr " Введите другое имя."
+
+#: plugins/admin/departments/class_departmentManagement.inc:25
+#: plugins/admin/ogroups/class_ogroupManagement.inc:43
+msgid "Departments"
+msgstr "Подразделения"
+
+#: plugins/admin/departments/class_departmentManagement.inc:130
+#, php-format
+msgid "You're about to delete the whole LDAP subtree placed under '%s'."
+msgstr "Вы собираетесь удалить целую ветку LDAP с корнем в \"%s\"."
+
+#: plugins/admin/departments/class_departmentManagement.inc:145
+msgid "You have no permission to remove this department."
+msgstr "У вас недостаточно прав для удаления этого подразделения."
+
+#: plugins/admin/systems/class_terminalInfo.inc:53
+#: plugins/admin/systems/class_terminalInfo.inc:170
+msgid "present"
+msgstr "присутствует"
 
 #: plugins/admin/systems/class_terminalInfo.inc:62
 #: plugins/admin/systems/class_terminalService.inc:136
@@ -4220,6 +4239,45 @@ msgstr "Звук"
 msgid "GUI"
 msgstr "Графический интерфейс"
 
+#: plugins/admin/systems/class_terminalService.inc:83
+msgid "default"
+msgstr "по умолчанию"
+
+#: plugins/admin/systems/class_terminalService.inc:84
+msgid "show chooser"
+msgstr "показать окно входа в систему"
+
+#: plugins/admin/systems/class_terminalService.inc:85
+msgid "direct"
+msgstr "напрямую"
+
+#: plugins/admin/systems/class_terminalService.inc:88
+msgid "load balanced"
+msgstr "с выравниваем нагрузки"
+
+#: plugins/admin/systems/class_terminalService.inc:91
+msgid "Windows RDP"
+msgstr "Windows RDP"
+
+#: plugins/admin/systems/class_terminalService.inc:92
+msgid "ICA client"
+msgstr "Клиент ICA"
+
+#: plugins/admin/systems/class_terminalService.inc:184
+#, fuzzy
+msgid "Choose the phone located at the current terminal"
+msgstr "Выбрать раздел, для хранения объекта"
+
+#: plugins/admin/systems/class_terminalService.inc:248
+#: plugins/admin/systems/class_terminalService.inc:253
+msgid "Please specify a valid VSync range."
+msgstr "Пожалуйста, укажите корректную кадровую синхронизацию."
+
+#: plugins/admin/systems/class_terminalService.inc:263
+#: plugins/admin/systems/class_terminalService.inc:268
+msgid "Please specify a valid HSync range."
+msgstr "Пожалуйста, укажите корректную строчную синхронзацию."
+
 #: plugins/admin/systems/main.inc:45 plugins/admin/systems/main.inc:47
 msgid "System management"
 msgstr "Управление системами"
@@ -4264,63 +4322,6 @@ msgstr "Сервер системных журналов"
 msgid "Print Service"
 msgstr "Служба печати"
 
-#: plugins/admin/systems/class_terminalService.inc:83
-msgid "default"
-msgstr "по умолчанию"
-
-#: plugins/admin/systems/class_terminalService.inc:84
-msgid "show chooser"
-msgstr "показать окно входа в систему"
-
-#: plugins/admin/systems/class_terminalService.inc:85
-msgid "direct"
-msgstr "напрямую"
-
-#: plugins/admin/systems/class_terminalService.inc:88
-msgid "load balanced"
-msgstr "с выравниваем нагрузки"
-
-#: plugins/admin/systems/class_terminalService.inc:91
-msgid "Windows RDP"
-msgstr "Windows RDP"
-
-#: plugins/admin/systems/class_terminalService.inc:92
-msgid "ICA client"
-msgstr "Клиент ICA"
-
-#: plugins/admin/systems/class_terminalService.inc:184
-#, fuzzy
-msgid "Choose the phone located at the current terminal"
-msgstr "Выбрать раздел, для хранения объекта"
-
-#: plugins/admin/systems/class_terminalService.inc:248
-#: plugins/admin/systems/class_terminalService.inc:253
-msgid "Please specify a valid VSync range."
-msgstr "Пожалуйста, укажите корректную кадровую синхронизацию."
-
-#: plugins/admin/systems/class_terminalService.inc:263
-#: plugins/admin/systems/class_terminalService.inc:268
-msgid "Please specify a valid HSync range."
-msgstr "Пожалуйста, укажите корректную строчную синхронзацию."
-
-#: plugins/admin/systems/class_servDB.inc:127
-#: plugins/admin/systems/class_servDB.inc:143
-#: plugins/admin/systems/class_servDB.inc:149
-#: plugins/admin/systems/class_servDB.inc:154
-#: plugins/admin/systems/class_servDB.inc:160
-#, fuzzy, php-format
-msgid "The attribute '%s' is empty or contains invalid characters."
-msgstr "Неправильное указание таймаута '%s'"
-
-#: plugins/admin/systems/class_servDB.inc:133
-#, php-format
-msgid "The imap connect string needs to be in the form '%s'."
-msgstr ""
-
-#: plugins/admin/systems/class_servDB.inc:137
-msgid "The sieve port needs to be numeric."
-msgstr ""
-
 #: plugins/admin/systems/server.tpl:6
 msgid "Server name"
 msgstr "Имя сервера"
@@ -4342,73 +4343,6 @@ msgstr "Действие"
 #: plugins/admin/systems/server.tpl:42
 #, fuzzy
 msgid "Select action to execute for this server"
-msgstr "Выберите действие, которое нужно выполнить на этом терминале"
-
-#: plugins/admin/systems/phone.tpl:6
-msgid "Phone name"
-msgstr "Название"
-
-#: plugins/admin/systems/terminal.tpl:9
-msgid "Terminal template"
-msgstr "Шаблон терминала"
-
-#: plugins/admin/systems/terminal.tpl:11
-msgid "Terminal name"
-msgstr "Терминал"
-
-#: plugins/admin/systems/terminal.tpl:36
-#: plugins/admin/systems/workstation.tpl:36
-msgid "Mode"
-msgstr "Режим"
-
-#: plugins/admin/systems/terminal.tpl:38
-#: plugins/admin/systems/workstation.tpl:38
-msgid "Select terminal mode"
-msgstr "Выберите режим терминала"
-
-#: plugins/admin/systems/terminal.tpl:52
-#: plugins/admin/systems/workstation.tpl:52
-msgid "Root server"
-msgstr "Основной сервер"
-
-#: plugins/admin/systems/terminal.tpl:54
-#: plugins/admin/systems/workstation.tpl:54
-msgid "Select NFS root filesystem to use"
-msgstr "Выберите корневую файловую систему NFS"
-
-#: plugins/admin/systems/terminal.tpl:60
-#: plugins/admin/systems/workstation.tpl:60
-msgid "Swap server"
-msgstr "Сервер подкачки"
-
-#: plugins/admin/systems/terminal.tpl:62
-#: plugins/admin/systems/workstation.tpl:62
-msgid "Choose NFS filesystem to place swap files on"
-msgstr "Выберите файловую систему NFS для файлов подкачки"
-
-#: plugins/admin/systems/terminal.tpl:74
-#: plugins/admin/systems/workstation.tpl:74
-msgid "Syslog server"
-msgstr "Сервер системных журналов"
-
-#: plugins/admin/systems/terminal.tpl:76
-#: plugins/admin/systems/workstation.tpl:76
-msgid "Choose server to use for logging"
-msgstr "Выберите сервер для ведения системных журналов"
-
-#: plugins/admin/systems/terminal.tpl:82
-#: plugins/admin/systems/workstation.tpl:82
-msgid "NTP server"
-msgstr "Сервер NTP"
-
-#: plugins/admin/systems/terminal.tpl:84
-#: plugins/admin/systems/workstation.tpl:84
-msgid "Choose server to use for synchronizing time"
-msgstr "Выберите сервер для синхронизации времени"
-
-#: plugins/admin/systems/terminal.tpl:103
-#: plugins/admin/systems/workstation.tpl:103
-msgid "Select action to execute for this terminal"
 msgstr "Выберите действие, которое нужно выполнить на этом терминале"
 
 #: plugins/admin/systems/class_terminalGeneric.inc:63
@@ -4487,6 +4421,10 @@ msgstr "У вас недостаточно прав для создания те
 msgid "The required field 'Terminal name' is not set."
 msgstr "Обязательное поле 'Название терминала' не заполнено."
 
+#: plugins/admin/systems/phone.tpl:6
+msgid "Phone name"
+msgstr "Название"
+
 #: plugins/admin/systems/class_servGeneric.inc:49
 #, fuzzy
 msgid "This 'dn' has no server features."
@@ -4501,6 +4439,69 @@ msgstr "Обязательное поле \"Личное имя\" не запо�
 #, fuzzy
 msgid "You have no permissions to create a server on this 'Base'."
 msgstr "У вас недостаточно прав для создания пользователя в этой ветке."
+
+#: plugins/admin/systems/terminal.tpl:9
+msgid "Terminal template"
+msgstr "Шаблон терминала"
+
+#: plugins/admin/systems/terminal.tpl:11
+msgid "Terminal name"
+msgstr "Терминал"
+
+#: plugins/admin/systems/terminal.tpl:36
+#: plugins/admin/systems/workstation.tpl:36
+msgid "Mode"
+msgstr "Режим"
+
+#: plugins/admin/systems/terminal.tpl:38
+#: plugins/admin/systems/workstation.tpl:38
+msgid "Select terminal mode"
+msgstr "Выберите режим терминала"
+
+#: plugins/admin/systems/terminal.tpl:52
+#: plugins/admin/systems/workstation.tpl:52
+msgid "Root server"
+msgstr "Основной сервер"
+
+#: plugins/admin/systems/terminal.tpl:54
+#: plugins/admin/systems/workstation.tpl:54
+msgid "Select NFS root filesystem to use"
+msgstr "Выберите корневую файловую систему NFS"
+
+#: plugins/admin/systems/terminal.tpl:60
+#: plugins/admin/systems/workstation.tpl:60
+msgid "Swap server"
+msgstr "Сервер подкачки"
+
+#: plugins/admin/systems/terminal.tpl:62
+#: plugins/admin/systems/workstation.tpl:62
+msgid "Choose NFS filesystem to place swap files on"
+msgstr "Выберите файловую систему NFS для файлов подкачки"
+
+#: plugins/admin/systems/terminal.tpl:74
+#: plugins/admin/systems/workstation.tpl:74
+msgid "Syslog server"
+msgstr "Сервер системных журналов"
+
+#: plugins/admin/systems/terminal.tpl:76
+#: plugins/admin/systems/workstation.tpl:76
+msgid "Choose server to use for logging"
+msgstr "Выберите сервер для ведения системных журналов"
+
+#: plugins/admin/systems/terminal.tpl:82
+#: plugins/admin/systems/workstation.tpl:82
+msgid "NTP server"
+msgstr "Сервер NTP"
+
+#: plugins/admin/systems/terminal.tpl:84
+#: plugins/admin/systems/workstation.tpl:84
+msgid "Choose server to use for synchronizing time"
+msgstr "Выберите сервер для синхронизации времени"
+
+#: plugins/admin/systems/terminal.tpl:103
+#: plugins/admin/systems/workstation.tpl:103
+msgid "Select action to execute for this terminal"
+msgstr "Выберите действие, которое нужно выполнить на этом терминале"
 
 #: plugins/admin/systems/class_servDHCP.inc:33
 msgid "Remove DHCP service"
@@ -4527,18 +4528,6 @@ msgid ""
 msgstr ""
 "В этой учетной записи нет настроек факса. Вы можете добавить их, щелкнув "
 "ниже."
-
-#: plugins/admin/systems/printer.tpl:6
-msgid "Printer name"
-msgstr "Имя принтера"
-
-#: plugins/admin/systems/printer.tpl:32
-msgid "Printer URL"
-msgstr "URL принтера"
-
-#: plugins/admin/systems/printer.tpl:36
-msgid "Path to PPD"
-msgstr "Путь к PPD"
 
 #: plugins/admin/systems/class_workstationGeneric.inc:136
 msgid "This 'dn' has no workstation features."
@@ -4595,13 +4584,17 @@ msgstr "Шаблон тонкого клиента для"
 msgid "Workstation template for"
 msgstr "Шаблон рабочей станции для"
 
-#: plugins/admin/systems/class_printGeneric.inc:57
-msgid "This 'dn' has no printer features."
-msgstr "Этот DN не имеет свойств принтера."
+#: plugins/admin/systems/printer.tpl:6
+msgid "Printer name"
+msgstr "Имя принтера"
 
-#: plugins/admin/systems/class_printGeneric.inc:126
-msgid "You have no permissions to create a printer on this 'Base'."
-msgstr "У вас недостаточно прав для создания принтера в этой ветке."
+#: plugins/admin/systems/printer.tpl:32
+msgid "Printer URL"
+msgstr "URL принтера"
+
+#: plugins/admin/systems/printer.tpl:36
+msgid "Path to PPD"
+msgstr "Путь к PPD"
 
 #: plugins/admin/systems/class_servDNS.inc:33
 msgid "Remove DNS service"
@@ -4626,6 +4619,24 @@ msgid ""
 msgstr ""
 "В этой учетной записи нет настроек факса. Вы можете добавить их, щелкнув "
 "ниже."
+
+#: plugins/admin/systems/class_servDB.inc:127
+#: plugins/admin/systems/class_servDB.inc:143
+#: plugins/admin/systems/class_servDB.inc:149
+#: plugins/admin/systems/class_servDB.inc:154
+#: plugins/admin/systems/class_servDB.inc:160
+#, fuzzy, php-format
+msgid "The attribute '%s' is empty or contains invalid characters."
+msgstr "Неправильное указание таймаута '%s'"
+
+#: plugins/admin/systems/class_servDB.inc:133
+#, php-format
+msgid "The imap connect string needs to be in the form '%s'."
+msgstr ""
+
+#: plugins/admin/systems/class_servDB.inc:137
+msgid "The sieve port needs to be numeric."
+msgstr ""
 
 #: plugins/admin/systems/workstation.tpl:9
 msgid "Workstation template"
@@ -4848,6 +4859,14 @@ msgstr ""
 #: plugins/admin/systems/servkolab.tpl:167
 msgid "Accept mail from other domains over non-authenticated SMTP"
 msgstr ""
+
+#: plugins/admin/systems/class_printGeneric.inc:57
+msgid "This 'dn' has no printer features."
+msgstr "Этот DN не имеет свойств принтера."
+
+#: plugins/admin/systems/class_printGeneric.inc:126
+msgid "You have no permissions to create a printer on this 'Base'."
+msgstr "У вас недостаточно прав для создания принтера в этой ветке."
 
 #: plugins/admin/systems/wingeneric.tpl:6
 #, fuzzy
@@ -5382,6 +5401,42 @@ msgstr ""
 msgid "Select action to execute for this   group of terminals"
 msgstr "Выберите действие, которое нужно выполнить на этом терминале"
 
+#: plugins/admin/ogroups/class_ogroupManagement.inc:25
+#: plugins/admin/ogroups/main.inc:34 plugins/admin/ogroups/main.inc:39
+msgid "Object groups"
+msgstr "Объединения"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:41
+msgid "UNIX accounts"
+msgstr "UNIX аккаунт"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:45
+msgid "Servers"
+msgstr "Серверы"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:46
+msgid "Thin Clients"
+msgstr "Тонкие клиенты"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:47
+msgid "Workstations"
+msgstr "Рабочие станции"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:49
+#: plugins/generic/references/class_reference.inc:52
+msgid "Printer"
+msgstr "Принтер"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:150
+#, php-format
+msgid "You're about to delete the object group '%s'."
+msgstr "Вы собираетесь удалить групповой объект \"%s\"."
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:156
+#: plugins/admin/ogroups/class_ogroupManagement.inc:182
+msgid "You are not allowed to delete this object group!"
+msgstr "У вас недостаточно прав для удаления этого группового объекта!"
+
 #: plugins/admin/ogroups/class_ogroup.inc:91
 msgid "This 'dn' is no object group."
 msgstr "Этот объект не является группой."
@@ -5442,42 +5497,6 @@ msgstr "В группе должно быть не менее одного уч�
 msgid "You can combine two different object types at maximum only!"
 msgstr ""
 "Вы можете комбинировать не более двух различных классов в одном объекте!"
-
-#: plugins/admin/ogroups/main.inc:34 plugins/admin/ogroups/main.inc:39
-#: plugins/admin/ogroups/class_ogroupManagement.inc:25
-msgid "Object groups"
-msgstr "Объединения"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:41
-msgid "UNIX accounts"
-msgstr "UNIX аккаунт"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:45
-msgid "Servers"
-msgstr "Серверы"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:46
-msgid "Thin Clients"
-msgstr "Тонкие клиенты"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:47
-msgid "Workstations"
-msgstr "Рабочие станции"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:49
-#: plugins/generic/references/class_reference.inc:52
-msgid "Printer"
-msgstr "Принтер"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:150
-#, php-format
-msgid "You're about to delete the object group '%s'."
-msgstr "Вы собираетесь удалить групповой объект \"%s\"."
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:156
-#: plugins/admin/ogroups/class_ogroupManagement.inc:182
-msgid "You are not allowed to delete this object group!"
-msgstr "У вас недостаточно прав для удаления этого группового объекта!"
 
 #: plugins/admin/ogroups/generic.tpl:9
 msgid "Name of the group"
@@ -5541,10 +5560,6 @@ msgstr "Показать группы с терминалами"
 #: plugins/admin/ogroups/headpage.tpl:56
 msgid "Show groups containing printers"
 msgstr "Показать группы с принтерами"
-
-#: plugins/gofon/phoneaccount/main.inc:120
-msgid "Phone settings"
-msgstr "Настройки телефона"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:114
 msgid "This account has no phone extensions."
@@ -5621,6 +5636,10 @@ msgstr "Номер телефона"
 #: plugins/gofon/phoneaccount/generic.tpl:60
 msgid "Timeout (s)"
 msgstr "Таймаут (с)"
+
+#: plugins/gofon/phoneaccount/main.inc:120
+msgid "Phone settings"
+msgstr "Настройки телефона"
 
 #: plugins/gofon/reports/class_fonreport.inc:6
 msgid "Phone Reports"
@@ -5720,28 +5739,28 @@ msgstr "Команда разработчиков GOsa"
 msgid "Welcome %s!"
 msgstr "Добро пожаловать %s!"
 
-#: include/functions.inc:267
+#: include/functions.inc:272
 #, php-format
 msgid "Error when connecting the LDAP. Server said '%s'."
 msgstr "Ошибка при подключении к LDAP-серверу. Ответ сервера: \"%s\"."
 
-#: include/functions.inc:288
+#: include/functions.inc:293
 #, php-format
 msgid "User login failed. LDAP server said '%s'."
 msgstr "Ошибка при регистрации. Ответ сервера: \"%s\"."
 
-#: include/functions.inc:308
+#: include/functions.inc:313
 msgid "Username / UID is not unique. Please check your LDAP database."
 msgstr ""
 "Имя/идентификатор пользователя не уникальны. Проверьте свою базу данных LDAP."
 
-#: include/functions.inc:346
+#: include/functions.inc:351
 msgid ""
 "Error while adding a lock. Parameters are not set correctly, please check "
 "the source!"
 msgstr "Ошибка при создании блокировки. Заданные параметры некорректны."
 
-#: include/functions.inc:356
+#: include/functions.inc:361
 #, php-format
 msgid ""
 "Can't set locking information in LDAP database. Please check the 'config' "
@@ -5750,24 +5769,24 @@ msgstr ""
 "Не удается создать блокировку в базе данных LDAP. Проверьте, раздел config в "
 "файле gosa.conf! Ответ сервера: %s"
 
-#: include/functions.inc:371
+#: include/functions.inc:376
 #, php-format
 msgid "Adding a lock failed. LDAP server says '%s'."
 msgstr "Ошибка при создании блокировки. Ответ сервера: \"%s\"."
 
-#: include/functions.inc:397
+#: include/functions.inc:402
 #, php-format
 msgid "Removing a lock failed. LDAP server says '%s'."
 msgstr "Ошибка при удалении блокировки. Ответ сервера: \"%s\"."
 
-#: include/functions.inc:427
+#: include/functions.inc:432
 #, fuzzy
 msgid ""
 "Getting the lock from LDAP failed. Parameters are not set correctly, please "
 "check the source!"
 msgstr "Ошибка при чтении блокировки. Заданные параметры некорректны."
 
-#: include/functions.inc:437
+#: include/functions.inc:442
 msgid ""
 "Can't get locking information in LDAP database. Please check the 'config' "
 "entry in gosa.conf!"
@@ -5775,7 +5794,7 @@ msgstr ""
 "Не удается считать блокировку в базе данных LDAP. Проверьте, раздел \"config"
 "\" в файле gosa.conf!"
 
-#: include/functions.inc:445
+#: include/functions.inc:450
 msgid ""
 "Found multiple locks for object to be locked. This should not be possible - "
 "cleaning up multiple references."
@@ -5783,12 +5802,12 @@ msgstr ""
 "Для блокируемого объекта обнаружено несколько блокировок. Этого быть не "
 "должно, проверьте работу LDAP."
 
-#: include/functions.inc:517
+#: include/functions.inc:522
 #, php-format
 msgid "The size limit of %d entries is exceed!"
 msgstr "Найдено более %d объектов."
 
-#: include/functions.inc:519
+#: include/functions.inc:524
 #, php-format
 msgid ""
 "Set the new size limit to %s and show me this message if the limit still "
@@ -5797,15 +5816,15 @@ msgstr ""
 "Установить новое значение лимита в %s и показать мне это сообщение если "
 "лимит будет исчерпан."
 
-#: include/functions.inc:531
+#: include/functions.inc:536
 msgid "Configure"
 msgstr "Настроить"
 
-#: include/functions.inc:536
+#: include/functions.inc:541
 msgid "incomplete"
 msgstr "не полный"
 
-#: include/functions.inc:919
+#: include/functions.inc:924
 #, php-format
 msgid ""
 "You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
@@ -5814,67 +5833,67 @@ msgstr ""
 "Вы собираетесь редактировать запись LDAP \"%s\", которая используется \"%s"
 "\". Пожалуйста, обратитесь к пользователю и уточните отношения."
 
-#: include/functions.inc:1018
+#: include/functions.inc:1023
 msgid "LDAP error:"
 msgstr "Ошибка LDAP:"
 
-#: include/functions.inc:1464
+#: include/functions.inc:1469
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ0123456789"
 
-#: include/functions.inc:1509
+#: include/functions.inc:1512
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr ""
 
-#: include/functions.inc:1556
+#: include/functions.inc:1559
 msgid "Generating this page caused the PHP interpreter to raise some errors!"
 msgstr ""
 
-#: include/functions.inc:1556
+#: include/functions.inc:1559
 #, fuzzy
 msgid "Toggle information"
 msgstr "Личная информация"
 
-#: include/functions.inc:1561
+#: include/functions.inc:1564
 #, fuzzy
 msgid "PHP error"
 msgstr "Ошибка LDAP:"
 
-#: include/functions.inc:1572
+#: include/functions.inc:1575
 msgid "class"
 msgstr ""
 
-#: include/functions.inc:1578
+#: include/functions.inc:1581
 #, fuzzy
 msgid "function"
 msgstr "Действие"
 
-#: include/functions.inc:1583
+#: include/functions.inc:1586
 #, fuzzy
 msgid "static"
 msgstr "Состояние"
 
-#: include/functions.inc:1587
+#: include/functions.inc:1590
 #, fuzzy
 msgid "method"
 msgstr "Почтовые настройки"
 
-#: include/functions.inc:1604
+#: include/functions.inc:1607
 msgid "Trace"
 msgstr ""
 
-#: include/functions.inc:1605
+#: include/functions.inc:1608
 #, fuzzy
 msgid "File"
 msgstr "Файлы"
 
-#: include/functions.inc:1605
+#: include/functions.inc:1608
 #, fuzzy
 msgid "Line"
 msgstr "в"
 
-#: include/functions.inc:1606
+#: include/functions.inc:1609
 #, fuzzy
 msgid "Arguments"
 msgstr "подразделения"
@@ -5941,455 +5960,6 @@ msgstr "Невозможно отправить сценарий SIEVE. Отве
 msgid "Can't activate GOsa sieve script. Server says '%s'."
 msgstr "Невозможно активировать сценарий  GOsa SIEVE. Ответ сервера: \"%s\"."
 
-#: include/class_pluglist.inc:98
-msgid ""
-"Your gosa.conf information has changed partly. Please convert it using the "
-"contributed script fix_config.sh!"
-msgstr ""
-"Ваш конфигурационный файл gosa.conf был частично изменен. Пожалуйста, "
-"сконвертиуйте его используя скрипт fix_config.sh"
-
-#: include/class_pluglist.inc:113 ihtml/themes/altlinux/framework.tpl:14
-#: ihtml/themes/altlinux/framework.tpl:24
-#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
-msgid ""
-"You are currently editing a database entry. Do you want to dismiss the "
-"changes?"
-msgstr ""
-"Вы сейчас редактируете объект базы данных. Хотите отказаться от изменений?"
-
-#: include/setup_checks.inc:72
-msgid "Can't bind to LDAP. No schema check possible!"
-msgstr "Не удается начать сеанс на LDAP-сервере. Проверка схем невозможна!"
-
-#: include/setup_checks.inc:81 include/setup_checks.inc:90
-msgid "Can't get schema information from server. No schema check possible!"
-msgstr "Не удается получить информацию о схемах. Проверка схем невозможна!"
-
-#: include/setup_checks.inc:110
-#, php-format
-msgid ""
-"Optional objectclass '%s' required by plugin '%s' is not present in LDAP "
-"setup"
-msgstr ""
-"Необязательный класс объектов \"%s\", нужный для модуля \"%s\", отсутствует "
-"в установке LDAP."
-
-#: include/setup_checks.inc:114
-#, php-format
-msgid ""
-"Optional objectclass '%s' required by plugin '%s' does not have version %s"
-msgstr ""
-"У необязательного класса объектов \"%s\", нужного для модуля \"%s\", версия "
-"не %s"
-
-#: include/setup_checks.inc:118
-#, fuzzy, php-format
-msgid "Support for '%s' enabled"
-msgstr "Поддержка phpgroupware отключена, не все схемы установлены!"
-
-#: include/setup_checks.inc:128
-#, php-format
-msgid "Required objectclass '%s' is not present in LDAP setup"
-msgstr "Обязательный класс объектов \"%s\" отсутствует в установке LDAP."
-
-#: include/setup_checks.inc:132
-#, php-format
-msgid "Required objectclass '%s' does not have version %s"
-msgstr "У обязательного класса объектов \"%s\" версия не %s"
-
-#: include/setup_checks.inc:141
-#, fuzzy
-msgid "SAMBA 3 support disabled, no schema seems to be installed"
-msgstr "Поддержка Samba 3 отключена, не все схемы установлены!"
-
-#: include/setup_checks.inc:146
-msgid "SAMBA 3 support enabled"
-msgstr ""
-
-#: include/setup_checks.inc:151
-#, fuzzy
-msgid "SAMBA 2 support disabled, no schema seems to be installed"
-msgstr "Поддержка Samba 2 отключена, не все схемы установлены!"
-
-#: include/setup_checks.inc:156
-msgid "SAMBA 2 support enabled"
-msgstr ""
-
-#: include/setup_checks.inc:162
-#, fuzzy
-msgid "Support for pureftp disabled, no schema seems to be installed"
-msgstr "Поддержка PureFTP отключена, не все схемы установлены!"
-
-#: include/setup_checks.inc:167
-msgid "Support for pureftp enabled"
-msgstr ""
-
-#: include/setup_checks.inc:172
-#, fuzzy
-msgid "Support for WebDAV disabled, no schema seems to be installed"
-msgstr "Поддержка WebDAV отключена, не все схемы установлены!"
-
-#: include/setup_checks.inc:177
-msgid "Support for WebDAV enabled"
-msgstr ""
-
-#: include/setup_checks.inc:182
-#, fuzzy
-msgid "Support for phpgroupware disabled, no schema seems to be installed"
-msgstr "Поддержка phpgroupware отключена, не все схемы установлены!"
-
-#: include/setup_checks.inc:187
-#, fuzzy
-msgid "Support for phpgroupware enabled"
-msgstr "Поддержка phpgroupware отключена, не все схемы установлены!"
-
-#: include/setup_checks.inc:192
-#, fuzzy
-msgid "Support for gofon disabled, no schema seems to be installed"
-msgstr "Поддержка Gofon отключена, не все схемы установлены!"
-
-#: include/setup_checks.inc:197
-msgid "Support for gofon enabled"
-msgstr ""
-
-#: include/setup_checks.inc:204
-#, fuzzy
-msgid ""
-"Support for Kolab disabled, no schema seems to be installed, setting mail-"
-"method to cyrus"
-msgstr "Поддержка Gofon отключена, не все схемы установлены!"
-
-#: include/setup_checks.inc:212
-msgid "Support for Kolab enabled"
-msgstr ""
-
-#: include/setup_checks.inc:229
-msgid "OK"
-msgstr "OK"
-
-#: include/setup_checks.inc:232
-msgid "Ignored"
-msgstr "Пропуск"
-
-#: include/setup_checks.inc:234
-msgid "Failed"
-msgstr "Ошибка"
-
-#: include/setup_checks.inc:251
-msgid "PHP setup inspection"
-msgstr "Проверка конфигурации PHP"
-
-#: include/setup_checks.inc:252
-msgid "Checking for PHP version (>=4.1.0)"
-msgstr "Проверка версии PHP (>=4.1.0)"
-
-#: include/setup_checks.inc:253
-msgid ""
-"PHP must be of version 4.1.0 or above for some functions and known bugs in "
-"PHP language."
-msgstr ""
-"У вас должна быть установка PHP версии не ниже 4.1.0, так как в ней "
-"реализованы некоторые новые функции и исправлены некоторые ошибки."
-
-#: include/setup_checks.inc:256
-msgid "Checking if register_globals is set to 'off'"
-msgstr "Проверка значения параметра register_globals (должно быть: off)"
-
-#: include/setup_checks.inc:257
-msgid ""
-"register_globals is a PHP mechanism to register all global varibales to be "
-"accessible from scripts without changing the scope. This may be a security "
-"risk. GOsa will run in both modes."
-msgstr ""
-"register_globals - механизм PHP, позволяющий делать все глобальные "
-"переменные доступными из сценария без смены области действия. Это может быть "
-"нарушением безопасности. Тем не менее, GOsa будет работать в любом случае."
-
-#: include/setup_checks.inc:260
-msgid "Checking for ldap module"
-msgstr "Проверка модуля ldap"
-
-#: include/setup_checks.inc:261
-msgid "This is the main module used by GOsa and therefore really required."
-msgstr "Основной модуль, используемый GOsa, и поэтому обязательный."
-
-#: include/setup_checks.inc:264
-#, fuzzy
-msgid "Checking for XML functions"
-msgstr "Проверка поддержки gettext"
-
-#: include/setup_checks.inc:265
-msgid "XML functions are required to parse the configuration file."
-msgstr ""
-
-#: include/setup_checks.inc:268
-msgid "Checking for gettext support"
-msgstr "Проверка поддержки gettext"
-
-#: include/setup_checks.inc:269
-msgid "Gettext support is required for internationalized GOsa."
-msgstr "Необходима для локализованных версий GOsa."
-
-#: include/setup_checks.inc:271
-#, fuzzy
-msgid "Checking for iconv support"
-msgstr "Проверка поддержки gettext"
-
-#: include/setup_checks.inc:272
-msgid ""
-"This module is used by GOsa to convert samba munged dial informations and is "
-"therefore required."
-msgstr ""
-
-#: include/setup_checks.inc:275
-msgid "Checking for mhash module"
-msgstr "Проверка модуля mhash"
-
-#: include/setup_checks.inc:276
-msgid ""
-"To use SSHA encryption, you'll need this module. If you are just using crypt "
-"or md5 encryption, ignore this message. GOsa will run without it."
-msgstr ""
-"Этот модуль нужен для использования алгоритма шифрования SSHA. Если вы "
-"используете только алгоритмы crypt или MD5, не обращайте внимания на "
-"результат проверки. GOsa будет работать и без этого модуля."
-
-#: include/setup_checks.inc:279
-msgid "Checking for imap module"
-msgstr "Проверка модуля IMAP"
-
-#: include/setup_checks.inc:280
-msgid ""
-"The IMAP module is needed to communicate with the IMAP server. It gets "
-"status informations, creates and deletes mail users."
-msgstr ""
-"Этот модуль нужен для работы с сервером IMAP. С его помощью можно получать "
-"информацию о состоянии учетной записи, создавать и удалять пользователей."
-
-#: include/setup_checks.inc:283
-msgid "Checking for getacl in imap"
-msgstr "Проверка использования getacl в IMAP"
-
-#: include/setup_checks.inc:284
-msgid ""
-"The getacl support is needed for shared folder permissions. The standard "
-"IMAP module is not capable of reading acl's. You need a recend PHP version "
-"for this feature."
-msgstr ""
-"Поддержка getacl в IMAP нужна для выставления прав на общие папки. "
-"Стандартный модуль IMAP не может обрабатывать acl. Для использования этой "
-"функции вам нужна последняя версия PHP."
-
-#: include/setup_checks.inc:287
-msgid "Checking for mysql module"
-msgstr "Проверка модуля mysql"
-
-#: include/setup_checks.inc:288
-msgid "MySQL support is needed for reading GOfax reports from databases."
-msgstr ""
-"Необходим для чтения отчетов о полученных факсимильных сообщениях из базы "
-"данных."
-
-#: include/setup_checks.inc:291
-msgid "Checking for cups module"
-msgstr "Проверка модуля cups"
-
-#: include/setup_checks.inc:292
-msgid ""
-"In order to read available printers from IPP protocol instead of printcap "
-"files, you've to install the CUPS module."
-msgstr ""
-"Чтобы получать информацию о доступных принтерах по протоколу IPP вместо "
-"чтения файлов printcap, вам нужно установить модуль CUPS."
-
-#: include/setup_checks.inc:295
-msgid "Checking for kadm5 module"
-msgstr "Проверка модуля kadm5"
-
-#: include/setup_checks.inc:296
-msgid ""
-"Managing users in kerberos requires the kadm5 module which is downloadable "
-"via PEAR network."
-msgstr ""
-"Чтобы управлять пользователями с помощью Kerberos, необходим модуль kadm5, "
-"который можно загрузить из сети PEAR."
-
-#: include/setup_checks.inc:299
-#, fuzzy
-msgid "Checking for snmp Module"
-msgstr "Проверка модуля IMAP"
-
-#: include/setup_checks.inc:300
-msgid ""
-"Simple Network Management Protocol (SNMP) is required for client monitoring."
-msgstr ""
-
-#: include/setup_checks.inc:309
-msgid "Checking for some additional programms"
-msgstr "Проверка дополнительных программ"
-
-#: include/setup_checks.inc:318
-msgid "Checking for ImageMagick (>=5.4.0)"
-msgstr "Проверка ImageMagick (>=5.4.0)"
-
-#: include/setup_checks.inc:319
-msgid ""
-"ImageMagick is used to convert user supplied images to fit the suggested "
-"size and the unified JPEG format."
-msgstr ""
-"ImageMagick используется для приведения изображений, полученных от "
-"пользователей, к заданным размерам и формату JPEG."
-
-#: include/setup_checks.inc:322
-#, fuzzy
-msgid "Checking imagick module for PHP"
-msgstr "Проверка модуля IMAP"
-
-#: include/setup_checks.inc:323
-#, fuzzy
-msgid ""
-"Imagick is used to convert user supplied images to fit the suggested size "
-"and the unified JPEG format from PHP script."
-msgstr ""
-"ImageMagick используется для приведения изображений, полученных от "
-"пользователей, к заданным размерам и формату JPEG."
-
-#: include/setup_checks.inc:330
-msgid "Checking for fping utility"
-msgstr "Проверка утилиты fping"
-
-#: include/setup_checks.inc:331
-msgid ""
-"The fping utility is only used if you've got a thin client based terminal "
-"environment running."
-msgstr ""
-"Эта программа используется, только если вы работате с бездисковыми "
-"терминалами."
-
-#: include/setup_checks.inc:346
-msgid "Checking for a way to generate LM/NT password hashes"
-msgstr "Проверка возможности создания хэшей LM/NT для паролей"
-
-#: include/setup_checks.inc:347
-msgid ""
-"In order to use SAMBA 2/3, you've to install some additional packages to "
-"generate password hashes."
-msgstr ""
-"Чтобы пользоваться Samba 2/3, вам нужно установить некоторые дополнительные "
-"программы для создания хэшей паролей."
-
-#: include/setup_checks.inc:360
-msgid "php.ini check -> session.auto_register"
-msgstr ""
-
-#: include/setup_checks.inc:361
-msgid ""
-"In Order to use GOsa without any trouble, the session.auto_register option "
-"in your php.ini must be set to 'Off'."
-msgstr ""
-
-#: include/setup_checks.inc:364
-msgid "php.ini check -> implicit_flush"
-msgstr ""
-
-#: include/setup_checks.inc:365
-msgid ""
-"This option influences the Output handling. Turn this Option off, to "
-"increase performance."
-msgstr ""
-
-#: include/setup_checks.inc:372
-msgid "php.ini check -> max_execution_time"
-msgstr ""
-
-#: include/setup_checks.inc:373
-msgid ""
-"The Execution time should be at least 30 seconds, because some actions may "
-"consume more time."
-msgstr ""
-
-#: include/setup_checks.inc:380
-msgid "php.ini check -> memory_limit"
-msgstr ""
-
-#: include/setup_checks.inc:381
-msgid ""
-"GOsa needs at least 16MB of memory, less will cause unpredictable errors! "
-"Increase it for larger setups."
-msgstr ""
-
-#: include/setup_checks.inc:385
-msgid "php.ini check -> expose_php"
-msgstr ""
-
-#: include/setup_checks.inc:386
-msgid ""
-"Increase the server security by setting expose_php to 'off'. PHP won't send "
-"any Information about the server you are running in this case."
-msgstr ""
-
-#: include/setup_checks.inc:390
-msgid "php.ini check -> magic_quotes_gpc"
-msgstr ""
-
-#: include/setup_checks.inc:391
-msgid ""
-"Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
-"escape all quotes in strings in this case."
-msgstr ""
-
-#: include/setup_checks.inc:629
-msgid "You've to specify an ldap server before continuing!"
-msgstr "Для продолжения укажите LDAP-сервер!"
-
-#: include/setup_checks.inc:638 include/setup_checks.inc:720
-msgid ""
-"Can't connect to the specified LDAP server! Please make sure that is "
-"reachable for GOsa."
-msgstr ""
-"Не удается подключиться к указанному LDAP-серверу! Убедитесь, что он "
-"доступен GOsa."
-
-#: include/setup_checks.inc:652 include/setup_checks.inc:725
-#: include/setup_checks.inc:730
-#, fuzzy
-msgid ""
-"Can't bind to the specified LDAP server! Please make sure that it is "
-"reachable for GOsa."
-msgstr ""
-"Не удается начать сеанс на указанном LDAP-сервере! Убедитесь, что он "
-"доступен GOsa."
-
-#: include/setup_checks.inc:740
-msgid ""
-"Bind to server successful, but the server seems to be completly empty, "
-"please check all informations twice"
-msgstr ""
-
-#: include/setup_checks.inc:796
-#, php-format
-msgid ""
-"You're missing the required attribute '%s' from this formular. Please "
-"complete!"
-msgstr ""
-"Вы не заполнили обязательное поле \"%s\". Пожалуйста, заполните форму "
-"целиком."
-
-#: include/setup_checks.inc:827
-#, php-format
-msgid "Can't log into LDAP server. Reason was: %s."
-msgstr "Невозможно зарегистрироваться на LDAP-сервере. Причина: %s."
-
-#: include/setup_checks.inc:924 include/setup_checks.inc:939
-#: html/index.php:160 ihtml/themes/default/setup_useradmin.tpl:6
-msgid ""
-"You're missing an administrative account for GOsa, you'll not be able to "
-"administrate anything!"
-msgstr ""
-"У вас нет учетной записи администратора для GOsa, так что вы не сможете что-"
-"либо администрировать!"
-
 #: include/class_plugin.inc:180
 msgid "This 'dn' has no account extensions."
 msgstr "Для этого DN нет расширений учетной записи."
@@ -6419,24 +5989,26 @@ msgid ""
 msgstr ""
 "Не удается найти команду \"%s\", указанную в поле POSTREMOVE модуля \"%s\"."
 
-#: include/class_config.inc:69
-#, php-format
-msgid "XML error in gosa.conf: %s at line %d"
-msgstr "Ошибка XML в gosa.conf: %s в строке %d"
-
-#: include/class_config.inc:195 html/index.php:142
-msgid "Can't bind to LDAP. Please contact the system administrator."
-msgstr ""
-"Не удается начать сеанс на LDAP-сервере. Обратитесь к системному "
-"администратору."
-
-#: include/class_config.inc:426
-msgid "SID and/or RIDBASE missing in your configuration!"
-msgstr "В вашем файле настройки отсутствуют значения SID и/или RIDBASE!"
-
 #: include/class_password-methods-ssha.inc:51
 msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
 msgstr ""
+
+#: include/class_pluglist.inc:98
+msgid ""
+"Your gosa.conf information has changed partly. Please convert it using the "
+"contributed script fix_config.sh!"
+msgstr ""
+"Ваш конфигурационный файл gosa.conf был частично изменен. Пожалуйста, "
+"сконвертиуйте его используя скрипт fix_config.sh"
+
+#: include/class_pluglist.inc:113 ihtml/themes/altlinux/framework.tpl:14
+#: ihtml/themes/altlinux/framework.tpl:24
+#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
+msgid ""
+"You are currently editing a database entry. Do you want to dismiss the "
+"changes?"
+msgstr ""
+"Вы сейчас редактируете объект базы данных. Хотите отказаться от изменений?"
 
 #: include/class_password-methods.inc:166
 #, php-format
@@ -6448,6 +6020,25 @@ msgid ""
 "Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
 msgstr ""
 "Параметр SMBHASH в gosa.conf некорректен! Не удается сменить пароль Samba."
+
+#: include/class_config.inc:69
+#, php-format
+msgid "XML error in gosa.conf: %s at line %d"
+msgstr "Ошибка XML в gosa.conf: %s в строке %d"
+
+#: include/class_config.inc:195 html/index.php:144
+msgid "Can't bind to LDAP. Please contact the system administrator."
+msgstr ""
+"Не удается начать сеанс на LDAP-сервере. Обратитесь к системному "
+"администратору."
+
+#: include/class_config.inc:426
+msgid "SID and/or RIDBASE missing in your configuration!"
+msgstr "В вашем файле настройки отсутствуют значения SID и/или RIDBASE!"
+
+#: include/class_password-methods-sha.inc:50
+msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
+msgstr ""
 
 #: include/class_password-methods-kerberos.inc:43
 msgid ""
@@ -6464,10 +6055,6 @@ msgstr "Ошибка подключения к базе данных Kerberos!"
 #: include/class_password-methods-kerberos.inc:59
 msgid "Changing password in kerberos database failed!"
 msgstr "Ошибка смены пароля в базе данных Kerberos!"
-
-#: include/class_password-methods-sha.inc:50
-msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
-msgstr ""
 
 #: include/class_ldap.inc:398
 #, php-format
@@ -6493,6 +6080,477 @@ msgstr ""
 #: include/class_ldap.inc:659
 #, php-format
 msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
+msgstr ""
+
+#: include/class_certificate.inc:35
+msgid "Can't open specified file, check accessibility and or existence"
+msgstr ""
+
+#: include/class_certificate.inc:53
+msgid "Can't read specified certificate / or empty string given"
+msgstr ""
+
+#: include/class_certificate.inc:80
+msgid "Can't load certificate, possibly unsupported format (use PEM/DER) "
+msgstr ""
+
+#: include/class_certificate.inc:95
+msgid "The Format must be PEM, to output certificate informations"
+msgstr ""
+
+#: include/class_certificate.inc:192
+#, fuzzy
+msgid "Can't create/open File"
+msgstr "Невозможно импортиовать пустой файл"
+
+#: include/class_certificate.inc:199
+msgid "No valid certificate loaded"
+msgstr ""
+
+#: include/functions_setup.inc:72
+msgid "Can't bind to LDAP. No schema check possible!"
+msgstr "Не удается начать сеанс на LDAP-сервере. Проверка схем невозможна!"
+
+#: include/functions_setup.inc:81 include/functions_setup.inc:90
+msgid "Can't get schema information from server. No schema check possible!"
+msgstr "Не удается получить информацию о схемах. Проверка схем невозможна!"
+
+#: include/functions_setup.inc:110
+#, php-format
+msgid ""
+"Optional objectclass '%s' required by plugin '%s' is not present in LDAP "
+"setup"
+msgstr ""
+"Необязательный класс объектов \"%s\", нужный для модуля \"%s\", отсутствует "
+"в установке LDAP."
+
+#: include/functions_setup.inc:114
+#, php-format
+msgid ""
+"Optional objectclass '%s' required by plugin '%s' does not have version %s"
+msgstr ""
+"У необязательного класса объектов \"%s\", нужного для модуля \"%s\", версия "
+"не %s"
+
+#: include/functions_setup.inc:118
+#, fuzzy, php-format
+msgid "Support for '%s' enabled"
+msgstr "Поддержка phpgroupware отключена, не все схемы установлены!"
+
+#: include/functions_setup.inc:128
+#, php-format
+msgid "Required objectclass '%s' is not present in LDAP setup"
+msgstr "Обязательный класс объектов \"%s\" отсутствует в установке LDAP."
+
+#: include/functions_setup.inc:132
+#, php-format
+msgid "Required objectclass '%s' does not have version %s"
+msgstr "У обязательного класса объектов \"%s\" версия не %s"
+
+#: include/functions_setup.inc:141
+#, fuzzy
+msgid "SAMBA 3 support disabled, no schema seems to be installed"
+msgstr "Поддержка Samba 3 отключена, не все схемы установлены!"
+
+#: include/functions_setup.inc:146
+msgid "SAMBA 3 support enabled"
+msgstr ""
+
+#: include/functions_setup.inc:151
+#, fuzzy
+msgid "SAMBA 2 support disabled, no schema seems to be installed"
+msgstr "Поддержка Samba 2 отключена, не все схемы установлены!"
+
+#: include/functions_setup.inc:156
+msgid "SAMBA 2 support enabled"
+msgstr ""
+
+#: include/functions_setup.inc:162
+#, fuzzy
+msgid "Support for pureftp disabled, no schema seems to be installed"
+msgstr "Поддержка PureFTP отключена, не все схемы установлены!"
+
+#: include/functions_setup.inc:167
+msgid "Support for pureftp enabled"
+msgstr ""
+
+#: include/functions_setup.inc:172
+#, fuzzy
+msgid "Support for WebDAV disabled, no schema seems to be installed"
+msgstr "Поддержка WebDAV отключена, не все схемы установлены!"
+
+#: include/functions_setup.inc:177
+msgid "Support for WebDAV enabled"
+msgstr ""
+
+#: include/functions_setup.inc:182
+#, fuzzy
+msgid "Support for phpgroupware disabled, no schema seems to be installed"
+msgstr "Поддержка phpgroupware отключена, не все схемы установлены!"
+
+#: include/functions_setup.inc:187
+#, fuzzy
+msgid "Support for phpgroupware enabled"
+msgstr "Поддержка phpgroupware отключена, не все схемы установлены!"
+
+#: include/functions_setup.inc:192
+#, fuzzy
+msgid "Support for gofon disabled, no schema seems to be installed"
+msgstr "Поддержка Gofon отключена, не все схемы установлены!"
+
+#: include/functions_setup.inc:197
+msgid "Support for gofon enabled"
+msgstr ""
+
+#: include/functions_setup.inc:204
+#, fuzzy
+msgid ""
+"Support for Kolab disabled, no schema seems to be installed, setting mail-"
+"method to cyrus"
+msgstr "Поддержка Gofon отключена, не все схемы установлены!"
+
+#: include/functions_setup.inc:212
+msgid "Support for Kolab enabled"
+msgstr ""
+
+#: include/functions_setup.inc:229
+msgid "OK"
+msgstr "OK"
+
+#: include/functions_setup.inc:232
+msgid "Ignored"
+msgstr "Пропуск"
+
+#: include/functions_setup.inc:234
+msgid "Failed"
+msgstr "Ошибка"
+
+#: include/functions_setup.inc:251
+msgid "PHP setup inspection"
+msgstr "Проверка конфигурации PHP"
+
+#: include/functions_setup.inc:252
+msgid "Checking for PHP version (>=4.1.0)"
+msgstr "Проверка версии PHP (>=4.1.0)"
+
+#: include/functions_setup.inc:253
+msgid ""
+"PHP must be of version 4.1.0 or above for some functions and known bugs in "
+"PHP language."
+msgstr ""
+"У вас должна быть установка PHP версии не ниже 4.1.0, так как в ней "
+"реализованы некоторые новые функции и исправлены некоторые ошибки."
+
+#: include/functions_setup.inc:256
+msgid "Checking if register_globals is set to 'off'"
+msgstr "Проверка значения параметра register_globals (должно быть: off)"
+
+#: include/functions_setup.inc:257
+msgid ""
+"register_globals is a PHP mechanism to register all global varibales to be "
+"accessible from scripts without changing the scope. This may be a security "
+"risk. GOsa will run in both modes."
+msgstr ""
+"register_globals - механизм PHP, позволяющий делать все глобальные "
+"переменные доступными из сценария без смены области действия. Это может быть "
+"нарушением безопасности. Тем не менее, GOsa будет работать в любом случае."
+
+#: include/functions_setup.inc:260
+msgid "Checking for ldap module"
+msgstr "Проверка модуля ldap"
+
+#: include/functions_setup.inc:261
+msgid "This is the main module used by GOsa and therefore really required."
+msgstr "Основной модуль, используемый GOsa, и поэтому обязательный."
+
+#: include/functions_setup.inc:264
+#, fuzzy
+msgid "Checking for XML functions"
+msgstr "Проверка поддержки gettext"
+
+#: include/functions_setup.inc:265
+msgid "XML functions are required to parse the configuration file."
+msgstr ""
+
+#: include/functions_setup.inc:268
+msgid "Checking for gettext support"
+msgstr "Проверка поддержки gettext"
+
+#: include/functions_setup.inc:269
+msgid "Gettext support is required for internationalized GOsa."
+msgstr "Необходима для локализованных версий GOsa."
+
+#: include/functions_setup.inc:271
+#, fuzzy
+msgid "Checking for iconv support"
+msgstr "Проверка поддержки gettext"
+
+#: include/functions_setup.inc:272
+msgid ""
+"This module is used by GOsa to convert samba munged dial informations and is "
+"therefore required."
+msgstr ""
+
+#: include/functions_setup.inc:275
+msgid "Checking for mhash module"
+msgstr "Проверка модуля mhash"
+
+#: include/functions_setup.inc:276
+msgid ""
+"To use SSHA encryption, you'll need this module. If you are just using crypt "
+"or md5 encryption, ignore this message. GOsa will run without it."
+msgstr ""
+"Этот модуль нужен для использования алгоритма шифрования SSHA. Если вы "
+"используете только алгоритмы crypt или MD5, не обращайте внимания на "
+"результат проверки. GOsa будет работать и без этого модуля."
+
+#: include/functions_setup.inc:279
+msgid "Checking for imap module"
+msgstr "Проверка модуля IMAP"
+
+#: include/functions_setup.inc:280
+msgid ""
+"The IMAP module is needed to communicate with the IMAP server. It gets "
+"status informations, creates and deletes mail users."
+msgstr ""
+"Этот модуль нужен для работы с сервером IMAP. С его помощью можно получать "
+"информацию о состоянии учетной записи, создавать и удалять пользователей."
+
+#: include/functions_setup.inc:283
+msgid "Checking for getacl in imap"
+msgstr "Проверка использования getacl в IMAP"
+
+#: include/functions_setup.inc:284
+msgid ""
+"The getacl support is needed for shared folder permissions. The standard "
+"IMAP module is not capable of reading acl's. You need a recend PHP version "
+"for this feature."
+msgstr ""
+"Поддержка getacl в IMAP нужна для выставления прав на общие папки. "
+"Стандартный модуль IMAP не может обрабатывать acl. Для использования этой "
+"функции вам нужна последняя версия PHP."
+
+#: include/functions_setup.inc:287
+msgid "Checking for mysql module"
+msgstr "Проверка модуля mysql"
+
+#: include/functions_setup.inc:288
+msgid "MySQL support is needed for reading GOfax reports from databases."
+msgstr ""
+"Необходим для чтения отчетов о полученных факсимильных сообщениях из базы "
+"данных."
+
+#: include/functions_setup.inc:291
+msgid "Checking for cups module"
+msgstr "Проверка модуля cups"
+
+#: include/functions_setup.inc:292
+msgid ""
+"In order to read available printers from IPP protocol instead of printcap "
+"files, you've to install the CUPS module."
+msgstr ""
+"Чтобы получать информацию о доступных принтерах по протоколу IPP вместо "
+"чтения файлов printcap, вам нужно установить модуль CUPS."
+
+#: include/functions_setup.inc:295
+msgid "Checking for kadm5 module"
+msgstr "Проверка модуля kadm5"
+
+#: include/functions_setup.inc:296
+msgid ""
+"Managing users in kerberos requires the kadm5 module which is downloadable "
+"via PEAR network."
+msgstr ""
+"Чтобы управлять пользователями с помощью Kerberos, необходим модуль kadm5, "
+"который можно загрузить из сети PEAR."
+
+#: include/functions_setup.inc:299
+#, fuzzy
+msgid "Checking for snmp Module"
+msgstr "Проверка модуля IMAP"
+
+#: include/functions_setup.inc:300
+msgid ""
+"Simple Network Management Protocol (SNMP) is required for client monitoring."
+msgstr ""
+
+#: include/functions_setup.inc:309
+msgid "Checking for some additional programms"
+msgstr "Проверка дополнительных программ"
+
+#: include/functions_setup.inc:318
+msgid "Checking for ImageMagick (>=5.4.0)"
+msgstr "Проверка ImageMagick (>=5.4.0)"
+
+#: include/functions_setup.inc:319
+msgid ""
+"ImageMagick is used to convert user supplied images to fit the suggested "
+"size and the unified JPEG format."
+msgstr ""
+"ImageMagick используется для приведения изображений, полученных от "
+"пользователей, к заданным размерам и формату JPEG."
+
+#: include/functions_setup.inc:322
+#, fuzzy
+msgid "Checking imagick module for PHP"
+msgstr "Проверка модуля IMAP"
+
+#: include/functions_setup.inc:323
+#, fuzzy
+msgid ""
+"Imagick is used to convert user supplied images to fit the suggested size "
+"and the unified JPEG format from PHP script."
+msgstr ""
+"ImageMagick используется для приведения изображений, полученных от "
+"пользователей, к заданным размерам и формату JPEG."
+
+#: include/functions_setup.inc:330
+msgid "Checking for fping utility"
+msgstr "Проверка утилиты fping"
+
+#: include/functions_setup.inc:331
+msgid ""
+"The fping utility is only used if you've got a thin client based terminal "
+"environment running."
+msgstr ""
+"Эта программа используется, только если вы работате с бездисковыми "
+"терминалами."
+
+#: include/functions_setup.inc:346
+msgid "Checking for a way to generate LM/NT password hashes"
+msgstr "Проверка возможности создания хэшей LM/NT для паролей"
+
+#: include/functions_setup.inc:347
+msgid ""
+"In order to use SAMBA 2/3, you've to install some additional packages to "
+"generate password hashes."
+msgstr ""
+"Чтобы пользоваться Samba 2/3, вам нужно установить некоторые дополнительные "
+"программы для создания хэшей паролей."
+
+#: include/functions_setup.inc:360
+msgid "php.ini check -> session.auto_register"
+msgstr ""
+
+#: include/functions_setup.inc:361
+msgid ""
+"In Order to use GOsa without any trouble, the session.auto_register option "
+"in your php.ini must be set to 'Off'."
+msgstr ""
+
+#: include/functions_setup.inc:364
+msgid "php.ini check -> implicit_flush"
+msgstr ""
+
+#: include/functions_setup.inc:365
+msgid ""
+"This option influences the Output handling. Turn this Option off, to "
+"increase performance."
+msgstr ""
+
+#: include/functions_setup.inc:372
+msgid "php.ini check -> max_execution_time"
+msgstr ""
+
+#: include/functions_setup.inc:373
+msgid ""
+"The Execution time should be at least 30 seconds, because some actions may "
+"consume more time."
+msgstr ""
+
+#: include/functions_setup.inc:380
+msgid "php.ini check -> memory_limit"
+msgstr ""
+
+#: include/functions_setup.inc:381
+msgid ""
+"GOsa needs at least 16MB of memory, less will cause unpredictable errors! "
+"Increase it for larger setups."
+msgstr ""
+
+#: include/functions_setup.inc:385
+msgid "php.ini check -> expose_php"
+msgstr ""
+
+#: include/functions_setup.inc:386
+msgid ""
+"Increase the server security by setting expose_php to 'off'. PHP won't send "
+"any Information about the server you are running in this case."
+msgstr ""
+
+#: include/functions_setup.inc:390
+msgid "php.ini check -> magic_quotes_gpc"
+msgstr ""
+
+#: include/functions_setup.inc:391
+msgid ""
+"Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
+"escape all quotes in strings in this case."
+msgstr ""
+
+#: include/functions_setup.inc:629
+msgid "You've to specify an ldap server before continuing!"
+msgstr "Для продолжения укажите LDAP-сервер!"
+
+#: include/functions_setup.inc:638 include/functions_setup.inc:720
+msgid ""
+"Can't connect to the specified LDAP server! Please make sure that is "
+"reachable for GOsa."
+msgstr ""
+"Не удается подключиться к указанному LDAP-серверу! Убедитесь, что он "
+"доступен GOsa."
+
+#: include/functions_setup.inc:652 include/functions_setup.inc:725
+#: include/functions_setup.inc:730
+#, fuzzy
+msgid ""
+"Can't bind to the specified LDAP server! Please make sure that it is "
+"reachable for GOsa."
+msgstr ""
+"Не удается начать сеанс на указанном LDAP-сервере! Убедитесь, что он "
+"доступен GOsa."
+
+#: include/functions_setup.inc:740
+msgid ""
+"Bind to server successful, but the server seems to be completly empty, "
+"please check all informations twice"
+msgstr ""
+
+#: include/functions_setup.inc:796
+#, php-format
+msgid ""
+"You're missing the required attribute '%s' from this formular. Please "
+"complete!"
+msgstr ""
+"Вы не заполнили обязательное поле \"%s\". Пожалуйста, заполните форму "
+"целиком."
+
+#: include/functions_setup.inc:827
+#, php-format
+msgid "Can't log into LDAP server. Reason was: %s."
+msgstr "Невозможно зарегистрироваться на LDAP-сервере. Причина: %s."
+
+#: include/functions_setup.inc:938 include/functions_setup.inc:961
+#: include/functions_setup.inc:970 html/index.php:162
+#: ihtml/themes/default/setup_useradmin.tpl:6
+msgid ""
+"You're missing an administrative account for GOsa, you'll not be able to "
+"administrate anything!"
+msgstr ""
+"У вас нет учетной записи администратора для GOsa, так что вы не сможете что-"
+"либо администрировать!"
+
+#: include/functions_helpviewer.inc:255
+msgid "Results for your search with the keyword"
+msgstr ""
+
+#: include/functions_helpviewer.inc:255
+msgid " interpreted as "
+msgstr ""
+
+#: include/functions_helpviewer.inc:306
+#, php-format
+msgid "%s%% hit rate in file %s"
 msgstr ""
 
 #: html/getfax.php:53
@@ -6532,7 +6590,7 @@ msgstr ""
 msgid "Warning: memory is getting low - please increase the memory_limit!"
 msgstr "Предупреждение: нехватка памяти, увеличьте значение memory_limit!"
 
-#: html/main.php:264
+#: html/main.php:269
 #, php-format
 msgid "Can't find any plugin definitions for plugin '%s'!"
 msgstr "Не удается найти определение для модуля \"%s\"!"
@@ -6548,25 +6606,120 @@ msgstr ""
 msgid "Directory '%s' specified as compile directory is not accessable!"
 msgstr "Недоступен каталог \"%s\", указанный как каталог компиляции!"
 
-#: html/index.php:168
+#: html/index.php:170
 msgid "Please specify a valid username!"
 msgstr "Введите корректное имя пользователя!"
 
-#: html/index.php:170
+#: html/index.php:172
 msgid "Please specify your password!"
 msgstr "Введите свой пароль!"
 
-#: html/index.php:177
+#: html/index.php:179
 msgid "Please check the username/password combination."
 msgstr "Проверьте, правильно ли вы ввели имя пользователя и пароль."
 
-#: html/index.php:215
+#: html/index.php:217
 msgid "Session will not be encrypted."
 msgstr "Данные, передаваемые в течение этого сеанса, не будут зашифрованы."
 
-#: html/index.php:215
+#: html/index.php:217
 msgid "Enter SSL session"
 msgstr "Использовать шифрование SSL"
+
+#: html/helpviewer.php:33
+msgid "Help is not available if you are not logged in."
+msgstr ""
+
+#: html/helpviewer.php:83
+msgid "previous"
+msgstr ""
+
+#: html/helpviewer.php:87
+#, fuzzy
+msgid "next"
+msgstr "текст"
+
+#: html/helpviewer.php:130
+#, php-format
+msgid ""
+"Can't read any helpfiles from ' %s ', possibly there is no help available."
+msgstr ""
+
+#: ihtml/themes/altlinux/conflict.tpl:2 ihtml/themes/default/conflict.tpl:2
+msgid "Session conflict detected"
+msgstr "Конфликт сеансов"
+
+#: ihtml/themes/altlinux/conflict.tpl:6 ihtml/themes/default/conflict.tpl:6
+msgid ""
+"Probably there's another active instance of your session. Multiple window "
+"operation is technical not possible and heavily depends on the browser "
+"you're using. Usage of different browsers at a time (i.e. IE and Mozilla) is "
+"possible. Pressing the <b>Logout</b> button will close this session."
+msgstr ""
+"Возможно, есть еще один экземпляр вашего сеанса. Работа с несколькими окнами "
+"одновременно технически невозможна и в значительной мере зависит от "
+"используемого браузера. Использование разных браузеров одновременно "
+"(например, IE и Mozilla) возможно. Нажав на кнопку <b>Выход</b>, вы "
+"завершите текущий сеанс."
+
+#: ihtml/themes/altlinux/conflict.tpl:10 ihtml/themes/default/conflict.tpl:10
+msgid ""
+"Ignoring this message will change/destroy the data you're currently editing, "
+"so please close multiple windows and log in again."
+msgstr ""
+"Если вы ничего не предпримете, редактируемые вами данные не будут сохранены, "
+"поэтому закройте все окна, кроме одного, и начните сеанс заново."
+
+#: ihtml/themes/altlinux/conflict.tpl:14 ihtml/themes/default/conflict.tpl:14
+msgid "Logout"
+msgstr "Выход"
+
+#: ihtml/themes/altlinux/setup_introduction.tpl:1
+#: ihtml/themes/default/setup_introduction.tpl:1
+msgid "Welcome to the GOsa setup!"
+msgstr "Добро пожаловать в раздел настройки GOsa!"
+
+#: ihtml/themes/altlinux/setup_introduction.tpl:4
+#: ihtml/themes/default/setup_introduction.tpl:4
+msgid ""
+"It looks like you're calling GOsa for the first time - no configuration was "
+"found. This setup like script will try to aid you in creating a working "
+"configuration by performing three major steps: first we'll check the PHP "
+"installation for required modules, than we're going to check for optional/"
+"needed programms and after you've provided basic informations for your LDAP "
+"connectivity, we're going to check your LDAP setup."
+msgstr ""
+"Судя по всему, вы запустили GOsa впервые: файл настройки не найден. Этот "
+"сценарий поможет вам создать рабочую конфигурацию. Настройка делится на три "
+"основные стадии: сначала проверим, установлены ли необходимые модули PHP, "
+"затем - установлены ли дополнительные/необходимые программы, а потом вы "
+"укажете параметры работы с LDAP-сервером, и мы проверим его настройку."
+
+#: ihtml/themes/altlinux/login.tpl:15 ihtml/themes/default/login.tpl:15
+msgid "Please use your <i>username</i> and <i>password</i> to log in"
+msgstr ""
+"Чтобы войти в систему<br> введите свои <i>имя пользователя</i> и <i>пароль</"
+"i>."
+
+#: ihtml/themes/altlinux/login.tpl:26 ihtml/themes/altlinux/login.tpl:30
+#: ihtml/themes/default/setup_useradmin.tpl:22
+#: ihtml/themes/default/login.tpl:26 ihtml/themes/default/login.tpl:30
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: ihtml/themes/altlinux/login.tpl:44 ihtml/themes/altlinux/login.tpl:47
+#: ihtml/themes/default/login.tpl:44 ihtml/themes/default/login.tpl:47
+msgid "Directory"
+msgstr "Каталог"
+
+#: ihtml/themes/altlinux/login.tpl:55
+#: ihtml/themes/altlinux/setup_finish.tpl:24 ihtml/themes/default/login.tpl:55
+msgid "Sign in"
+msgstr "Войти"
+
+#: ihtml/themes/altlinux/login.tpl:56 ihtml/themes/default/login.tpl:56
+msgid "Click here to log in"
+msgstr "Нажмите на эту кнопку, чтобы войти в систему"
 
 #: ihtml/themes/altlinux/sizelimit.tpl:3 ihtml/themes/default/sizelimit.tpl:3
 msgid ""
@@ -6599,82 +6752,6 @@ msgstr ""
 "Игнорировать ошибку и показать все возвращаемые объекты в пределах лимита и "
 "позволить использовать фильтры"
 
-#: ihtml/themes/altlinux/conflict.tpl:2 ihtml/themes/default/conflict.tpl:2
-msgid "Session conflict detected"
-msgstr "Конфликт сеансов"
-
-#: ihtml/themes/altlinux/conflict.tpl:6 ihtml/themes/default/conflict.tpl:6
-msgid ""
-"Probably there's another active instance of your session. Multiple window "
-"operation is technical not possible and heavily depends on the browser "
-"you're using. Usage of different browsers at a time (i.e. IE and Mozilla) is "
-"possible. Pressing the <b>Logout</b> button will close this session."
-msgstr ""
-"Возможно, есть еще один экземпляр вашего сеанса. Работа с несколькими окнами "
-"одновременно технически невозможна и в значительной мере зависит от "
-"используемого браузера. Использование разных браузеров одновременно "
-"(например, IE и Mozilla) возможно. Нажав на кнопку <b>Выход</b>, вы "
-"завершите текущий сеанс."
-
-#: ihtml/themes/altlinux/conflict.tpl:10 ihtml/themes/default/conflict.tpl:10
-msgid ""
-"Ignoring this message will change/destroy the data you're currently editing, "
-"so please close multiple windows and log in again."
-msgstr ""
-"Если вы ничего не предпримете, редактируемые вами данные не будут сохранены, "
-"поэтому закройте все окна, кроме одного, и начните сеанс заново."
-
-#: ihtml/themes/altlinux/conflict.tpl:14 ihtml/themes/default/conflict.tpl:14
-msgid "Logout"
-msgstr "Выход"
-
-#: ihtml/themes/altlinux/login.tpl:15 ihtml/themes/default/login.tpl:15
-msgid "Please use your <i>username</i> and <i>password</i> to log in"
-msgstr ""
-"Чтобы войти в систему<br> введите свои <i>имя пользователя</i> и <i>пароль</"
-"i>."
-
-#: ihtml/themes/altlinux/login.tpl:26 ihtml/themes/altlinux/login.tpl:30
-#: ihtml/themes/default/login.tpl:26 ihtml/themes/default/login.tpl:30
-#: ihtml/themes/default/setup_useradmin.tpl:22
-msgid "Username"
-msgstr "Имя пользователя"
-
-#: ihtml/themes/altlinux/login.tpl:44 ihtml/themes/altlinux/login.tpl:47
-#: ihtml/themes/default/login.tpl:44 ihtml/themes/default/login.tpl:47
-msgid "Directory"
-msgstr "Каталог"
-
-#: ihtml/themes/altlinux/login.tpl:55
-#: ihtml/themes/altlinux/setup_finish.tpl:24 ihtml/themes/default/login.tpl:55
-msgid "Sign in"
-msgstr "Войти"
-
-#: ihtml/themes/altlinux/login.tpl:56 ihtml/themes/default/login.tpl:56
-msgid "Click here to log in"
-msgstr "Нажмите на эту кнопку, чтобы войти в систему"
-
-#: ihtml/themes/altlinux/setup_introduction.tpl:1
-#: ihtml/themes/default/setup_introduction.tpl:1
-msgid "Welcome to the GOsa setup!"
-msgstr "Добро пожаловать в раздел настройки GOsa!"
-
-#: ihtml/themes/altlinux/setup_introduction.tpl:4
-#: ihtml/themes/default/setup_introduction.tpl:4
-msgid ""
-"It looks like you're calling GOsa for the first time - no configuration was "
-"found. This setup like script will try to aid you in creating a working "
-"configuration by performing three major steps: first we'll check the PHP "
-"installation for required modules, than we're going to check for optional/"
-"needed programms and after you've provided basic informations for your LDAP "
-"connectivity, we're going to check your LDAP setup."
-msgstr ""
-"Судя по всему, вы запустили GOsa впервые: файл настройки не найден. Этот "
-"сценарий поможет вам создать рабочую конфигурацию. Настройка делится на три "
-"основные стадии: сначала проверим, установлены ли необходимые модули PHP, "
-"затем - установлены ли дополнительные/необходимые программы, а потом вы "
-"укажете параметры работы с LDAP-сервером, и мы проверим его настройку."
-
 #: ihtml/themes/altlinux/framework.tpl:15
 #: ihtml/themes/default/framework.tpl:15
 msgid "Main"
@@ -6694,6 +6771,20 @@ msgstr "Выход"
 #: ihtml/themes/default/framework.tpl:33
 msgid "Signed in:"
 msgstr "Пользователь:"
+
+#: ihtml/themes/altlinux/islocked.tpl:2 ihtml/themes/default/islocked.tpl:2
+msgid "Locking conflict detected"
+msgstr "Конфликт блокировок"
+
+#: ihtml/themes/altlinux/islocked.tpl:9 ihtml/themes/default/islocked.tpl:9
+msgid ""
+"If this lock detection is false, the other person has obviously closed the "
+"webbrowser during the edit operation. You may delete the lockfile in this "
+"case by pressing the <i>Remove</i> button."
+msgstr ""
+"Если результат этой проверки блокировки - ложь, очевидно, другой человек "
+"закрыл браузер во время редактирования данных. Вы можете удалить файл "
+"блокировки, нажав на кнопку <i>Удалить</i>."
 
 #: ihtml/themes/altlinux/setup_step2.tpl:1
 #: ihtml/themes/altlinux/setup_step3.tpl:1
@@ -6720,20 +6811,6 @@ msgid ""
 msgstr ""
 "Ваш веб-сервер проверен. Его параметры подходят для работы с GOsa. Перейдите "
 "к настройке GOsa."
-
-#: ihtml/themes/altlinux/islocked.tpl:2 ihtml/themes/default/islocked.tpl:2
-msgid "Locking conflict detected"
-msgstr "Конфликт блокировок"
-
-#: ihtml/themes/altlinux/islocked.tpl:9 ihtml/themes/default/islocked.tpl:9
-msgid ""
-"If this lock detection is false, the other person has obviously closed the "
-"webbrowser during the edit operation. You may delete the lockfile in this "
-"case by pressing the <i>Remove</i> button."
-msgstr ""
-"Если результат этой проверки блокировки - ложь, очевидно, другой человек "
-"закрыл браузер во время редактирования данных. Вы можете удалить файл "
-"блокировки, нажав на кнопку <i>Удалить</i>."
 
 #: ihtml/themes/altlinux/setup_step3.tpl:4
 #: ihtml/themes/default/setup_step3.tpl:4
@@ -6942,6 +7019,17 @@ msgstr "Настроить"
 msgid "Download configuration"
 msgstr "Системная информация"
 
+#: ihtml/themes/default/help.tpl:9
+msgid "GOsa help viewer"
+msgstr ""
+
+#: ihtml/themes/default/help.tpl:15
+msgid "Index"
+msgstr ""
+
+#~ msgid "absent"
+#~ msgstr "отсутствует"
+
 #, fuzzy
 #~ msgid "Value specified as 'Quota Size' is empty."
 #~ msgstr "Значение поля \"Размер\" некорректно."
@@ -7036,9 +7124,6 @@ msgstr "Системная информация"
 #~ "Модуль экспорта в LDIF позволяет получать полный образ текущего каталога "
 #~ "LDAPв формате ldif. Эти образы можно сохранять как резервные копии или "
 #~ "использовать при инициализации нового сервера."
-
-#~ msgid "Can't import an empty File"
-#~ msgstr "Невозможно импортиовать пустой файл"
 
 #~ msgid "Cant open file on server."
 #~ msgstr "Не могу открыть файл на сервере."

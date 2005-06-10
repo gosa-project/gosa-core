@@ -60,8 +60,9 @@ msgstr "E-mail"
 msgid "Samba"
 msgstr "Samba"
 
-#: contrib/gosa.conf:59 plugins/personal/connectivity/main.inc:136
+#: contrib/gosa.conf:59
 #: plugins/personal/connectivity/class_connectivity.inc:15
+#: plugins/personal/connectivity/main.inc:136
 msgid "Connectivity"
 msgstr "Verbindingen"
 
@@ -75,9 +76,9 @@ msgstr "Fax"
 
 #: contrib/gosa.conf:61 plugins/personal/generic/generic.tpl:214
 #: plugins/personal/generic/generic.tpl:352
-#: plugins/addons/addressbook/contents.tpl:14
 #: plugins/addons/addressbook/address_edit.tpl:41
 #: plugins/addons/addressbook/address_edit.tpl:89
+#: plugins/addons/addressbook/contents.tpl:14
 #: plugins/addons/addressbook/address_info.tpl:37
 #: plugins/addons/addressbook/address_info.tpl:85
 #: plugins/admin/departments/generic.tpl:58
@@ -136,7 +137,7 @@ msgid "Export"
 msgstr "Exporteer"
 
 #: contrib/gosa.conf:143 plugins/personal/mail/generic.tpl:111
-#: plugins/addons/ldapmanager/contentimport.tpl:53
+#: plugins/addons/ldapmanager/contentimport.tpl:49
 #: plugins/addons/ldapmanager/contentcsv.tpl:117
 #: plugins/addons/ldapmanager/contentcsv.tpl:120
 msgid "Import"
@@ -178,15 +179,190 @@ msgstr "Engels"
 msgid "Italian"
 msgstr "Italiaans"
 
+#: plugins/personal/mail/generic.tpl:7 plugins/admin/groups/mail.tpl:10
+msgid "Primary address"
+msgstr "Primair adres"
+
+#: plugins/personal/mail/generic.tpl:11 plugins/admin/groups/mail.tpl:14
+#: plugins/generic/references/class_reference.inc:44
+msgid "Server"
+msgstr "Server"
+
+#: plugins/personal/mail/generic.tpl:13
+msgid "Specify the mail server where the user will be hosted on"
+msgstr "Specificeer de mailserver waarop het account opgeslagen wordt"
+
+#: plugins/personal/mail/generic.tpl:22 plugins/admin/groups/mail.tpl:25
+msgid "Quota usage"
+msgstr "Quota gebruik"
+
+#: plugins/personal/mail/generic.tpl:29 plugins/admin/groups/mail.tpl:32
+#: plugins/admin/systems/class_terminalInfo.inc:139
+msgid "not defined"
+msgstr "niet gedefiniëerd"
+
+#: plugins/personal/mail/generic.tpl:34 plugins/admin/groups/mail.tpl:37
+msgid "Quota size"
+msgstr "Quota grootte"
+
+#: plugins/personal/mail/generic.tpl:48 plugins/admin/groups/mail.tpl:47
+msgid "Alternative addresses"
+msgstr "Alternatieve adressen"
+
+#: plugins/personal/mail/generic.tpl:50 plugins/admin/groups/mail.tpl:48
+msgid "List of alternative mail addresses"
+msgstr "Lijst met alternatieve E-mail adressen"
+
+#: plugins/personal/mail/generic.tpl:56 plugins/personal/mail/generic.tpl:126
+#: plugins/personal/mail/mail_locals.tpl:41
+#: plugins/personal/posix/posix_groups.tpl:72
+#: plugins/personal/posix/trust_machines.tpl:39
+#: plugins/personal/posix/generic.tpl:63
+#: plugins/personal/posix/generic.tpl:125
+#: plugins/personal/samba/samba3.tpl:287
+#: plugins/personal/samba/samba3_workstations.tpl:39
+#: plugins/personal/connectivity/class_kolabAccount.inc:199
+#: plugins/personal/connectivity/kolab.tpl:17
+#: plugins/gofax/blocklists/generic.tpl:63
+#: plugins/gofax/faxaccount/generic.tpl:75
+#: plugins/gofax/faxaccount/locals.tpl:62
+#: plugins/gofax/faxaccount/lists.tpl:12 plugins/gofax/faxaccount/lists.tpl:16
+#: plugins/admin/groups/mail.tpl:54 plugins/admin/groups/mail.tpl:101
+#: plugins/admin/groups/class_groupMail.inc:404
+#: plugins/admin/groups/group_objects.tpl:39
+#: plugins/admin/groups/generic.tpl:88 plugins/admin/groups/mail_locals.tpl:66
+#: plugins/admin/systems/servservice.tpl:21
+#: plugins/admin/systems/servservice.tpl:47
+#: plugins/admin/systems/startup.tpl:61 plugins/admin/systems/startup.tpl:75
+#: plugins/admin/systems/startup.tpl:95
+#: plugins/admin/ogroups/ogroup_objects.tpl:50
+#: plugins/admin/ogroups/generic.tpl:38
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:211
+#: plugins/gofon/phoneaccount/generic.tpl:45
+msgid "Add"
+msgstr "Toevoegen"
+
+#: plugins/personal/mail/generic.tpl:58 plugins/personal/mail/generic.tpl:130
+#: plugins/personal/posix/generic.tpl:64
+#: plugins/personal/posix/generic.tpl:127
+#: plugins/personal/samba/samba3.tpl:289
+#: plugins/personal/connectivity/kolab.tpl:19
+#: plugins/gofax/blocklists/generic.tpl:64
+#: plugins/gofax/blocklists/remove.tpl:15
+#: plugins/gofax/blocklists/headpage.tpl:18
+#: plugins/gofax/faxaccount/generic.tpl:77
+#: plugins/gofax/faxaccount/lists.tpl:13
+#: plugins/addons/addressbook/remove.tpl:15 plugins/admin/groups/mail.tpl:55
+#: plugins/admin/groups/mail.tpl:103 plugins/admin/groups/remove.tpl:15
+#: plugins/admin/groups/headpage.tpl:18 plugins/admin/groups/generic.tpl:90
+#: plugins/admin/users/remove.tpl:15 plugins/admin/users/headpage.tpl:19
+#: plugins/admin/applications/remove.tpl:14
+#: plugins/admin/applications/headpage.tpl:18
+#: plugins/admin/departments/remove.tpl:15
+#: plugins/admin/departments/headpage.tpl:18
+#: plugins/admin/systems/servservice.tpl:22
+#: plugins/admin/systems/servservice.tpl:48
+#: plugins/admin/systems/remove.tpl:15 plugins/admin/systems/headpage.tpl:17
+#: plugins/admin/systems/startup.tpl:62 plugins/admin/systems/startup.tpl:76
+#: plugins/admin/systems/startup.tpl:96 plugins/admin/ogroups/generic.tpl:39
+#: plugins/admin/ogroups/remove.tpl:15 plugins/admin/ogroups/headpage.tpl:18
+#: plugins/gofon/phoneaccount/generic.tpl:47
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: plugins/personal/mail/generic.tpl:66
+msgid "Mail options"
+msgstr "E-mail opties"
+
+#: plugins/personal/mail/generic.tpl:71
+msgid "Select if you want to forward mails without getting own copies of them"
+msgstr ""
+"Selecteer indien u E-mail door wil sturen zonder zelf kopieën te ontvangen"
+
+#: plugins/personal/mail/generic.tpl:71
+msgid "No delivery to own mailbox"
+msgstr "Geen aflevering in eigen mailbox"
+
+#: plugins/personal/mail/generic.tpl:74
+msgid ""
+"Select to automatically response with the vacation message defined below"
+msgstr ""
+"Selecteer om automatisch te reageren met het onderstaande afwezigheidsbericht"
+
+#: plugins/personal/mail/generic.tpl:74
+msgid "Activate vacation message"
+msgstr "Activeer afwezigheidsbericht"
+
+#: plugins/personal/mail/generic.tpl:81
+msgid "Select if you want to filter this mails through spamassassin"
+msgstr "Selecteer indien u E-mail berichten wilt filteren m.b.v. spamassassin"
+
+#: plugins/personal/mail/generic.tpl:81
+msgid "Move mails tagged with spam level greater than"
+msgstr "Verplaats E-mails met een spam nivo groter dan"
+
+#: plugins/personal/mail/generic.tpl:82
+msgid "Choose spam level - smaller values are more sensitive"
+msgstr "Selecteer een spam nivo - kleinere waardes zijn gevoeliger"
+
+#: plugins/personal/mail/generic.tpl:85
+msgid "to folder"
+msgstr "naar IMAP directory"
+
+#: plugins/personal/mail/generic.tpl:92
+msgid "Reject mails bigger than"
+msgstr "Afwijzing van E-mails groter dan"
+
+#: plugins/personal/mail/generic.tpl:94
+#: plugins/personal/connectivity/pureftpd.tpl:40
+#: plugins/personal/connectivity/class_proxyAccount.inc:76
+msgid "MB"
+msgstr "MB"
+
+#: plugins/personal/mail/generic.tpl:100
+msgid "Vacation message"
+msgstr "Afwezigheidsbericht"
+
+#: plugins/personal/mail/generic.tpl:117
+msgid "Forward messages to"
+msgstr "Stuur berichten door naar"
+
+#: plugins/personal/mail/generic.tpl:128
+#: plugins/gofax/faxaccount/generic.tpl:76 plugins/admin/groups/mail.tpl:102
+msgid "Add local"
+msgstr "Lokaal toevoegen"
+
+#: plugins/personal/mail/generic.tpl:138
+msgid "Advanced mail options"
+msgstr "Geavanceerde E-mail opties"
+
+#: plugins/personal/mail/generic.tpl:143
+msgid "Select if user can only send and receive inside his own domain"
+msgstr ""
+"Selecteer om alleen binnen het eigen domein E-mail te laten ontvangen en "
+"versturen"
+
+#: plugins/personal/mail/generic.tpl:144
+msgid "User is only allowed to send and receive local mails"
+msgstr "De gebruiker mag alleen lokaal E-mails versturen en ontvangen"
+
+#: plugins/personal/mail/generic.tpl:151
+msgid "Use custom sieve script"
+msgstr "Gebruik een eigen sieve script"
+
+#: plugins/personal/mail/generic.tpl:151
+msgid "disables all Mail options!"
+msgstr "schakelt alle E-mail opties uit!"
+
 #: plugins/personal/mail/class_mailAccount.inc:23
 #: plugins/personal/password/class_password.inc:6
 #: plugins/personal/posix/class_posixAccount.inc:17
 #: plugins/personal/samba/class_sambaAccount.inc:25
 #: plugins/personal/generic/class_user.inc:17
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:7
 #: plugins/personal/connectivity/class_phpgwAccount.inc:6
 #: plugins/personal/connectivity/class_kolabAccount.inc:6
 #: plugins/personal/connectivity/class_webdavAccount.inc:7
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:7
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:7
 #: plugins/personal/connectivity/class_connectivity.inc:16
 #: plugins/personal/connectivity/class_proxyAccount.inc:6
@@ -288,7 +464,7 @@ msgstr "Het vereiste veld 'Primair adres' is leeg."
 
 #: plugins/personal/mail/class_mailAccount.inc:674
 #: plugins/personal/mail/class_mailAccount.inc:678
-#: plugins/addons/addressbook/class_addressbook.inc:566
+#: plugins/addons/addressbook/class_addressbook.inc:568
 msgid "Please enter a valid email address in 'Primary address' field."
 msgstr "Geef a.u.b. een geldig E-mail adres voor het 'Primair adres' op."
 
@@ -314,187 +490,12 @@ msgstr ""
 "U moet de maximale E-mail grootte instellen om uberhaupt iets af te kunnen "
 "afwijzen."
 
-#: plugins/personal/mail/generic.tpl:7 plugins/admin/groups/mail.tpl:10
-msgid "Primary address"
-msgstr "Primair adres"
-
-#: plugins/personal/mail/generic.tpl:11 plugins/admin/groups/mail.tpl:14
-#: plugins/generic/references/class_reference.inc:44
-msgid "Server"
-msgstr "Server"
-
-#: plugins/personal/mail/generic.tpl:13
-msgid "Specify the mail server where the user will be hosted on"
-msgstr "Specificeer de mailserver waarop het account opgeslagen wordt"
-
-#: plugins/personal/mail/generic.tpl:22 plugins/admin/groups/mail.tpl:25
-msgid "Quota usage"
-msgstr "Quota gebruik"
-
-#: plugins/personal/mail/generic.tpl:29 plugins/admin/groups/mail.tpl:32
-#: plugins/admin/systems/class_terminalInfo.inc:139
-msgid "not defined"
-msgstr "niet gedefiniëerd"
-
-#: plugins/personal/mail/generic.tpl:34 plugins/admin/groups/mail.tpl:37
-msgid "Quota size"
-msgstr "Quota grootte"
-
-#: plugins/personal/mail/generic.tpl:48 plugins/admin/groups/mail.tpl:47
-msgid "Alternative addresses"
-msgstr "Alternatieve adressen"
-
-#: plugins/personal/mail/generic.tpl:50 plugins/admin/groups/mail.tpl:48
-msgid "List of alternative mail addresses"
-msgstr "Lijst met alternatieve E-mail adressen"
-
-#: plugins/personal/mail/generic.tpl:56 plugins/personal/mail/generic.tpl:126
-#: plugins/personal/mail/mail_locals.tpl:41
-#: plugins/personal/posix/trust_machines.tpl:39
-#: plugins/personal/posix/posix_groups.tpl:72
-#: plugins/personal/posix/generic.tpl:63
-#: plugins/personal/posix/generic.tpl:125
-#: plugins/personal/samba/samba3.tpl:287
-#: plugins/personal/samba/samba3_workstations.tpl:39
-#: plugins/personal/connectivity/class_kolabAccount.inc:199
-#: plugins/personal/connectivity/kolab.tpl:17
-#: plugins/gofax/blocklists/generic.tpl:60
-#: plugins/gofax/faxaccount/generic.tpl:75
-#: plugins/gofax/faxaccount/locals.tpl:62
-#: plugins/gofax/faxaccount/lists.tpl:12 plugins/gofax/faxaccount/lists.tpl:16
-#: plugins/admin/groups/mail.tpl:54 plugins/admin/groups/mail.tpl:101
-#: plugins/admin/groups/class_groupMail.inc:404
-#: plugins/admin/groups/group_objects.tpl:39
-#: plugins/admin/groups/generic.tpl:88 plugins/admin/groups/mail_locals.tpl:66
-#: plugins/admin/systems/servservice.tpl:21
-#: plugins/admin/systems/servservice.tpl:47
-#: plugins/admin/systems/startup.tpl:61 plugins/admin/systems/startup.tpl:75
-#: plugins/admin/systems/startup.tpl:95
-#: plugins/admin/ogroups/ogroup_objects.tpl:50
-#: plugins/admin/ogroups/generic.tpl:38
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:211
-#: plugins/gofon/phoneaccount/generic.tpl:45
-msgid "Add"
-msgstr "Toevoegen"
-
-#: plugins/personal/mail/generic.tpl:58 plugins/personal/mail/generic.tpl:130
-#: plugins/personal/posix/generic.tpl:64
-#: plugins/personal/posix/generic.tpl:127
-#: plugins/personal/samba/samba3.tpl:289
-#: plugins/personal/connectivity/kolab.tpl:19
-#: plugins/gofax/blocklists/generic.tpl:61
-#: plugins/gofax/blocklists/remove.tpl:15
-#: plugins/gofax/blocklists/headpage.tpl:17
-#: plugins/gofax/faxaccount/generic.tpl:77
-#: plugins/gofax/faxaccount/lists.tpl:13
-#: plugins/addons/addressbook/remove.tpl:15 plugins/admin/groups/mail.tpl:55
-#: plugins/admin/groups/mail.tpl:103 plugins/admin/groups/headpage.tpl:18
-#: plugins/admin/groups/remove.tpl:15 plugins/admin/groups/generic.tpl:90
-#: plugins/admin/users/remove.tpl:15 plugins/admin/users/headpage.tpl:19
-#: plugins/admin/applications/remove.tpl:14
-#: plugins/admin/applications/headpage.tpl:18
-#: plugins/admin/departments/remove.tpl:15
-#: plugins/admin/departments/headpage.tpl:18
-#: plugins/admin/systems/servservice.tpl:22
-#: plugins/admin/systems/servservice.tpl:48
-#: plugins/admin/systems/remove.tpl:15 plugins/admin/systems/headpage.tpl:17
-#: plugins/admin/systems/startup.tpl:62 plugins/admin/systems/startup.tpl:76
-#: plugins/admin/systems/startup.tpl:96 plugins/admin/ogroups/generic.tpl:39
-#: plugins/admin/ogroups/remove.tpl:15 plugins/admin/ogroups/headpage.tpl:18
-#: plugins/gofon/phoneaccount/generic.tpl:47
-msgid "Delete"
-msgstr "Verwijderen"
-
-#: plugins/personal/mail/generic.tpl:66
-msgid "Mail options"
-msgstr "E-mail opties"
-
-#: plugins/personal/mail/generic.tpl:71
-msgid "Select if you want to forward mails without getting own copies of them"
-msgstr ""
-"Selecteer indien u E-mail door wil sturen zonder zelf kopieën te ontvangen"
-
-#: plugins/personal/mail/generic.tpl:71
-msgid "No delivery to own mailbox"
-msgstr "Geen aflevering in eigen mailbox"
-
-#: plugins/personal/mail/generic.tpl:74
-msgid ""
-"Select to automatically response with the vacation message defined below"
-msgstr ""
-"Selecteer om automatisch te reageren met het onderstaande afwezigheidsbericht"
-
-#: plugins/personal/mail/generic.tpl:74
-msgid "Activate vacation message"
-msgstr "Activeer afwezigheidsbericht"
-
-#: plugins/personal/mail/generic.tpl:81
-msgid "Select if you want to filter this mails through spamassassin"
-msgstr "Selecteer indien u E-mail berichten wilt filteren m.b.v. spamassassin"
-
-#: plugins/personal/mail/generic.tpl:81
-msgid "Move mails tagged with spam level greater than"
-msgstr "Verplaats E-mails met een spam nivo groter dan"
-
-#: plugins/personal/mail/generic.tpl:82
-msgid "Choose spam level - smaller values are more sensitive"
-msgstr "Selecteer een spam nivo - kleinere waardes zijn gevoeliger"
-
-#: plugins/personal/mail/generic.tpl:85
-msgid "to folder"
-msgstr "naar IMAP directory"
-
-#: plugins/personal/mail/generic.tpl:92
-msgid "Reject mails bigger than"
-msgstr "Afwijzing van E-mails groter dan"
-
-#: plugins/personal/mail/generic.tpl:94
-#: plugins/personal/connectivity/pureftpd.tpl:40
-#: plugins/personal/connectivity/class_proxyAccount.inc:76
-msgid "MB"
-msgstr "MB"
-
-#: plugins/personal/mail/generic.tpl:100
-msgid "Vacation message"
-msgstr "Afwezigheidsbericht"
-
-#: plugins/personal/mail/generic.tpl:117
-msgid "Forward messages to"
-msgstr "Stuur berichten door naar"
-
-#: plugins/personal/mail/generic.tpl:128
-#: plugins/gofax/faxaccount/generic.tpl:76 plugins/admin/groups/mail.tpl:102
-msgid "Add local"
-msgstr "Lokaal toevoegen"
-
-#: plugins/personal/mail/generic.tpl:138
-msgid "Advanced mail options"
-msgstr "Geavanceerde E-mail opties"
-
-#: plugins/personal/mail/generic.tpl:143
-msgid "Select if user can only send and receive inside his own domain"
-msgstr ""
-"Selecteer om alleen binnen het eigen domein E-mail te laten ontvangen en "
-"versturen"
-
-#: plugins/personal/mail/generic.tpl:144
-msgid "User is only allowed to send and receive local mails"
-msgstr "De gebruiker mag alleen lokaal E-mails versturen en ontvangen"
-
-#: plugins/personal/mail/generic.tpl:151
-msgid "Use custom sieve script"
-msgstr "Gebruik een eigen sieve script"
-
-#: plugins/personal/mail/generic.tpl:151
-msgid "disables all Mail options!"
-msgstr "schakelt alle E-mail opties uit!"
-
 #: plugins/personal/mail/main.inc:104 plugins/personal/posix/main.inc:110
 #: plugins/personal/samba/main.inc:104
-#: plugins/personal/generic/generic_certs.tpl:60
+#: plugins/personal/generic/generic_certs.tpl:76
 #: plugins/personal/generic/main.inc:158
 #: plugins/personal/connectivity/main.inc:116
-#: plugins/gofax/blocklists/generic.tpl:74
+#: plugins/gofax/blocklists/generic.tpl:77
 #: plugins/gofax/faxaccount/main.inc:89
 #: plugins/admin/groups/class_groupManagement.inc:259
 #: plugins/admin/users/class_userManagement.inc:505
@@ -507,16 +508,17 @@ msgid "Finish"
 msgstr "Opslaan"
 
 #: plugins/personal/mail/main.inc:106 plugins/personal/mail/mail_locals.tpl:43
-#: plugins/personal/posix/trust_machines.tpl:41
 #: plugins/personal/posix/posix_groups.tpl:74
-#: plugins/personal/posix/main.inc:112 plugins/personal/samba/main.inc:106
+#: plugins/personal/posix/trust_machines.tpl:41
+#: plugins/personal/posix/main.inc:112
 #: plugins/personal/samba/samba3_workstations.tpl:41
+#: plugins/personal/samba/main.inc:106
 #: plugins/personal/generic/password.tpl:19
 #: plugins/personal/generic/generic_picture.tpl:31
-#: plugins/personal/generic/generic_certs.tpl:62
+#: plugins/personal/generic/generic_certs.tpl:78
 #: plugins/personal/generic/main.inc:160
 #: plugins/personal/connectivity/main.inc:118
-#: plugins/gofax/blocklists/generic.tpl:76
+#: plugins/gofax/blocklists/generic.tpl:79
 #: plugins/gofax/blocklists/remove.tpl:17
 #: plugins/gofax/faxaccount/locals.tpl:64
 #: plugins/gofax/faxaccount/lists.tpl:39 plugins/gofax/faxaccount/main.inc:91
@@ -525,13 +527,13 @@ msgstr "Opslaan"
 #: plugins/addons/addressbook/remove.tpl:17
 #: plugins/admin/groups/class_groupManagement.inc:261
 #: plugins/admin/groups/remove.tpl:17
-#: plugins/admin/groups/application_options.tpl:10
 #: plugins/admin/groups/group_objects.tpl:41
 #: plugins/admin/groups/mail_admins.tpl:39
+#: plugins/admin/groups/application_options.tpl:10
 #: plugins/admin/groups/mail_locals.tpl:68 plugins/admin/users/password.tpl:23
-#: plugins/admin/users/template.tpl:46
 #: plugins/admin/users/class_userManagement.inc:507
-#: plugins/admin/users/remove.tpl:17 plugins/admin/applications/remove.tpl:16
+#: plugins/admin/users/template.tpl:46 plugins/admin/users/remove.tpl:17
+#: plugins/admin/applications/remove.tpl:16
 #: plugins/admin/applications/class_applicationManagement.inc:241
 #: plugins/admin/departments/remove.tpl:17
 #: plugins/admin/departments/class_departmentManagement.inc:230
@@ -558,7 +560,7 @@ msgstr ""
 #: plugins/personal/mail/main.inc:115 plugins/personal/posix/main.inc:122
 #: plugins/personal/samba/main.inc:115 plugins/personal/generic/main.inc:170
 #: plugins/personal/connectivity/main.inc:127
-#: plugins/gofax/blocklists/headpage.tpl:16
+#: plugins/gofax/blocklists/headpage.tpl:17
 #: plugins/gofax/faxaccount/generic.tpl:90
 #: plugins/gofax/faxaccount/generic.tpl:96
 #: plugins/gofax/faxaccount/main.inc:97 plugins/addons/logview/contents.tpl:62
@@ -585,10 +587,10 @@ msgid "Display addresses of department"
 msgstr "Toon adressen van afdeling"
 
 #: plugins/personal/mail/mail_locals.tpl:27
-#: plugins/personal/posix/trust_machines.tpl:27
 #: plugins/personal/posix/posix_groups.tpl:39
+#: plugins/personal/posix/trust_machines.tpl:27
 #: plugins/personal/samba/samba3_workstations.tpl:27
-#: plugins/gofax/blocklists/headpage.tpl:57
+#: plugins/gofax/blocklists/headpage.tpl:58
 #: plugins/gofax/faxaccount/locals.tpl:31
 #: plugins/addons/addressbook/contents.tpl:81
 #: plugins/admin/groups/headpage.tpl:66
@@ -628,9 +630,9 @@ msgstr "Gebruikersnaam van wie de adressen getoond worden"
 #: plugins/admin/systems/servdb.tpl:18 plugins/admin/systems/servdb.tpl:34
 #: plugins/admin/systems/servdb.tpl:50 plugins/admin/systems/servdb.tpl:86
 #: plugins/admin/systems/servdb.tpl:109 ihtml/themes/altlinux/login.tpl:35
-#: ihtml/themes/altlinux/login.tpl:39 ihtml/themes/default/login.tpl:35
-#: ihtml/themes/default/login.tpl:39
+#: ihtml/themes/altlinux/login.tpl:39
 #: ihtml/themes/default/setup_useradmin.tpl:30
+#: ihtml/themes/default/login.tpl:35 ihtml/themes/default/login.tpl:39
 msgid "Password"
 msgstr "Wachtwoord"
 
@@ -695,9 +697,9 @@ msgstr ""
 
 #: plugins/personal/password/changed.tpl:12
 #: plugins/personal/generic/main.inc:167 plugins/gofax/reports/detail.tpl:68
-#: plugins/addons/ldapmanager/contentimport.tpl:48
+#: plugins/addons/ldapmanager/contentimport.tpl:44
 #: plugins/addons/ldapmanager/contentcsv.tpl:122
-#: plugins/addons/ldapmanager/contentexport.tpl:66 include/functions.inc:1199
+#: plugins/addons/ldapmanager/contentexport.tpl:66 include/functions.inc:1204
 #: ihtml/themes/default/setup_useradmin.tpl:40
 #: ihtml/themes/default/setup_step2.tpl:12
 #: ihtml/themes/default/setup_step3.tpl:17
@@ -749,26 +751,12 @@ msgstr "U heeft geen toestemming om uw wachtwoord te veranderen."
 msgid "External password changer reported a problem: "
 msgstr "Extern wachtwoord verander mechanisme rapporteerde een probleem:"
 
-#: plugins/personal/posix/trust_machines.tpl:6
-msgid "Select systems to add"
-msgstr "Selecteer de toe te voegen systemen"
-
-#: plugins/personal/posix/trust_machines.tpl:26
-#: plugins/admin/systems/headpage.tpl:59
-msgid "Display systems of department"
-msgstr "Toon systemen van afdeling"
-
-#: plugins/personal/posix/trust_machines.tpl:30
-#: plugins/admin/systems/headpage.tpl:71
-msgid "Display systems matching"
-msgstr "Toon de overeenkomende systemen"
-
 #: plugins/personal/posix/posix_groups.tpl:6
 msgid "Select groups to add"
 msgstr "Selecteer de toe te voegen groepen"
 
 #: plugins/personal/posix/posix_groups.tpl:20
-#: plugins/gofax/blocklists/headpage.tpl:36
+#: plugins/gofax/blocklists/headpage.tpl:37
 #: plugins/gofax/faxaccount/locals.tpl:19
 #: plugins/addons/addressbook/contents.tpl:58
 #: plugins/admin/groups/headpage.tpl:38
@@ -868,9 +856,23 @@ msgstr "Gebruiker moet het wachtwoord bij de eerste aanmelding veranderen"
 msgid "Password expires on"
 msgstr "Het wachtwoord verloopt op"
 
+#: plugins/personal/posix/trust_machines.tpl:6
+msgid "Select systems to add"
+msgstr "Selecteer de toe te voegen systemen"
+
+#: plugins/personal/posix/trust_machines.tpl:26
+#: plugins/admin/systems/headpage.tpl:59
+msgid "Display systems of department"
+msgstr "Toon systemen van afdeling"
+
+#: plugins/personal/posix/trust_machines.tpl:30
+#: plugins/admin/systems/headpage.tpl:71
+msgid "Display systems matching"
+msgstr "Toon de overeenkomende systemen"
+
 #: plugins/personal/posix/generic.tpl:7 plugins/personal/samba/samba3.tpl:13
 #: plugins/personal/samba/samba3.tpl:65
-#: plugins/personal/samba/class_sambaAccount.inc:620
+#: plugins/personal/samba/class_sambaAccount.inc:621
 msgid "Home directory"
 msgstr "Home directory"
 
@@ -926,10 +928,6 @@ msgstr "Standaard taal"
 #: plugins/personal/posix/generic.tpl:113
 msgid "System trust"
 msgstr "Systeem vertrouwen"
-
-#: plugins/personal/posix/main.inc:131
-msgid "Unix settings"
-msgstr "Unix instellingen"
 
 #: plugins/personal/posix/class_posixAccount.inc:16
 #: plugins/generic/references/class_reference.inc:22
@@ -1145,7 +1143,7 @@ msgid "December"
 msgstr "December"
 
 #: plugins/personal/posix/class_posixAccount.inc:538
-#: plugins/personal/samba/class_sambaAccount.inc:449
+#: plugins/personal/samba/class_sambaAccount.inc:450
 #: plugins/admin/systems/class_terminalGeneric.inc:62
 #: plugins/admin/systems/class_workstationGeneric.inc:70
 #: ihtml/themes/default/setup_step4.tpl:91
@@ -1235,6 +1233,10 @@ msgid "Too many users, can't allocate a free ID!"
 msgstr ""
 "Er zitten te veel gebruikers in de database. Kan geen vrij ID toewijzen!"
 
+#: plugins/personal/posix/main.inc:131
+msgid "Unix settings"
+msgstr "Unix instellingen"
+
 #: plugins/personal/samba/samba2.tpl:13
 msgid "Samba home"
 msgstr "Samba home"
@@ -1245,7 +1247,7 @@ msgstr "Script directory"
 
 #: plugins/personal/samba/samba2.tpl:36 plugins/personal/samba/samba3.tpl:44
 #: plugins/personal/samba/samba3.tpl:75
-#: plugins/personal/samba/class_sambaAccount.inc:621
+#: plugins/personal/samba/class_sambaAccount.inc:622
 msgid "Profile path"
 msgstr "Profiel directory"
 
@@ -1296,17 +1298,17 @@ msgid "Timeout settings (in minutes)"
 msgstr "Timeout instellingen (in minuten)"
 
 #: plugins/personal/samba/samba3.tpl:116
-#: plugins/personal/samba/class_sambaAccount.inc:628
+#: plugins/personal/samba/class_sambaAccount.inc:629
 msgid "Connection"
 msgstr "Verbinding"
 
 #: plugins/personal/samba/samba3.tpl:125
-#: plugins/personal/samba/class_sambaAccount.inc:629
+#: plugins/personal/samba/class_sambaAccount.inc:630
 msgid "Disconnection"
 msgstr "Verbreking"
 
 #: plugins/personal/samba/samba3.tpl:134
-#: plugins/personal/samba/class_sambaAccount.inc:630
+#: plugins/personal/samba/class_sambaAccount.inc:631
 msgid "IDLE"
 msgstr "IDLE"
 
@@ -1363,10 +1365,6 @@ msgstr "Het account verloopt na   "
 msgid "Allow connection from these workstations only"
 msgstr "Sta alleen verbindingen vanaf deze werkstations toe"
 
-#: plugins/personal/samba/main.inc:123
-msgid "Samba settings"
-msgstr "Samba Instellingen"
-
 #: plugins/personal/samba/samba3_workstations.tpl:6
 msgid "Select workstations to add"
 msgstr "Selecteer de toe te voegen werkstations"
@@ -1378,6 +1376,10 @@ msgstr "Toon werkstations van afdeling"
 #: plugins/personal/samba/samba3_workstations.tpl:30
 msgid "Display workstations matching"
 msgstr "Toon de overeenkomende werkstations"
+
+#: plugins/personal/samba/main.inc:123
+msgid "Samba settings"
+msgstr "Samba Instellingen"
 
 #: plugins/personal/samba/class_sambaAccount.inc:193
 msgid "This account has no samba extensions."
@@ -1416,51 +1418,51 @@ msgstr ""
 "De samba mogelijkheden zijn uitgeschakeld voor dit account. Posix "
 "mogelijkheden zijn noodzakelijk voor samba accounts. Schakel deze eerst in."
 
-#: plugins/personal/samba/class_sambaAccount.inc:450
+#: plugins/personal/samba/class_sambaAccount.inc:451
 msgid "input on, notify on"
 msgstr "invoer AAN, melden AAN"
 
-#: plugins/personal/samba/class_sambaAccount.inc:451
+#: plugins/personal/samba/class_sambaAccount.inc:452
 msgid "input on, notify off"
 msgstr "invoer AAN, Melden UIT"
 
-#: plugins/personal/samba/class_sambaAccount.inc:452
+#: plugins/personal/samba/class_sambaAccount.inc:453
 msgid "input off, notify on"
 msgstr "invoer UIT, Melden AAN"
 
-#: plugins/personal/samba/class_sambaAccount.inc:453
+#: plugins/personal/samba/class_sambaAccount.inc:454
 msgid "input off, nofify off"
 msgstr "invoer UIT, Melden UIT"
 
-#: plugins/personal/samba/class_sambaAccount.inc:455
+#: plugins/personal/samba/class_sambaAccount.inc:456
 msgid "disconnect"
 msgstr "verbreken"
 
-#: plugins/personal/samba/class_sambaAccount.inc:456
+#: plugins/personal/samba/class_sambaAccount.inc:457
 msgid "reset"
 msgstr "reset"
 
-#: plugins/personal/samba/class_sambaAccount.inc:458
+#: plugins/personal/samba/class_sambaAccount.inc:459
 msgid "from any client"
 msgstr "vanaf elke client"
 
-#: plugins/personal/samba/class_sambaAccount.inc:459
+#: plugins/personal/samba/class_sambaAccount.inc:460
 msgid "from previous client only"
 msgstr "alleen vanaf vorige client"
 
-#: plugins/personal/samba/class_sambaAccount.inc:623
+#: plugins/personal/samba/class_sambaAccount.inc:624
 #, php-format
 msgid "The value specified as '%s' contains invalid characters!"
 msgstr "De waarde gespecificeerd als '%s' bevat ongeldige karakters!"
 
-#: plugins/personal/samba/class_sambaAccount.inc:633
+#: plugins/personal/samba/class_sambaAccount.inc:634
 #, php-format
 msgid ""
 "The timeout property '%s' is checked and contains invalid or no characters!"
 msgstr ""
 "De timeout optie '%s' is geselecteerd en bevat geen of ongeldige karakters!"
 
-#: plugins/personal/samba/class_sambaAccount.inc:639
+#: plugins/personal/samba/class_sambaAccount.inc:640
 msgid ""
 "The windows user manager only allows eight clients. You've specified more "
 "than eight."
@@ -1468,7 +1470,7 @@ msgstr ""
 "Het Windows gebruikersbeheer programma staat slechts acht clients toe. U "
 "heeft er meer dan acht opgegeven."
 
-#: plugins/personal/samba/class_sambaAccount.inc:816
+#: plugins/personal/samba/class_sambaAccount.inc:817
 msgid ""
 "Warning: This account has an undefined samba SID assigned. The problem can "
 "not be fixed by GOsa!"
@@ -1476,148 +1478,13 @@ msgstr ""
 "Waarschuwing: Dit account heeft een ongedefiniëerd Samba SID toegewezen "
 "gekregen. Dit probleem kan niet door GOsa opgelost wordt"
 
-#: plugins/personal/samba/class_sambaAccount.inc:841
+#: plugins/personal/samba/class_sambaAccount.inc:842
 msgid ""
 "Warning: Can't identify users primary group - no conversion to a samba group "
 "possible!"
 msgstr ""
 "Waarschuwing: Kan de primaire groep van de gebruiker niet identificeren - Er "
 "is geen conversie naar een Samba groep mogelijk!"
-
-#: plugins/personal/generic/class_user.inc:225
-msgid "female"
-msgstr "vrouw"
-
-#: plugins/personal/generic/class_user.inc:225
-msgid "male"
-msgstr "man"
-
-#: plugins/personal/generic/class_user.inc:235
-msgid "This account has no valid GOsa extensions."
-msgstr "Dit account heeft geen geldige GOsa extensies."
-
-#: plugins/personal/generic/class_user.inc:264
-msgid "The specified file has not been uploaded via HTTP POST! Aborted."
-msgstr ""
-"Het opgegeven bestand is niet opgestuurd via HTTP POST! Aktie afgebroken."
-
-#: plugins/personal/generic/class_user.inc:358
-msgid "Please enter a valid serial number"
-msgstr "Geef a.u.b. een geldig serienummer op"
-
-#: plugins/personal/generic/class_user.inc:362
-#: plugins/personal/generic/class_user.inc:387
-#: plugins/admin/systems/class_terminalInfo.inc:53
-#: plugins/admin/systems/class_terminalInfo.inc:170
-msgid "present"
-msgstr "aanwezig"
-
-#: plugins/personal/generic/class_user.inc:364
-#: plugins/personal/generic/class_user.inc:389
-msgid "absent"
-msgstr "leeg"
-
-#: plugins/personal/generic/class_user.inc:778
-msgid "Kerberos database communication failed"
-msgstr "Kerberos database communicatie is mislukt"
-
-#: plugins/personal/generic/class_user.inc:795
-msgid "Can't remove user from kerberos database."
-msgstr "Kan de gebruiker niet verwijderen uit de kerberos database."
-
-#: plugins/personal/generic/class_user.inc:806
-msgid "Can't add user to kerberos database."
-msgstr "Kan de gebruiker niet toevoegen aan de kerberos database."
-
-#: plugins/personal/generic/class_user.inc:846
-msgid "You have no permissions to create a user on this 'Base'."
-msgstr ""
-"U heeft geen toestemming om een gebruiker aan te maken onder deze 'Basis'."
-
-#: plugins/personal/generic/class_user.inc:851
-msgid "You have no permissions to move a user from the original 'Base'."
-msgstr ""
-"U heeft geen toestemming om een gebruiker te verplaatsen vanuit de originale "
-"'Basis'."
-
-#: plugins/personal/generic/class_user.inc:857
-#: plugins/addons/addressbook/class_addressbook.inc:523
-#: plugins/admin/users/class_userManagement.inc:424
-msgid "The required field 'Name' is not set."
-msgstr "Het vereiste veld '(Achter)naam' is leeg."
-
-#: plugins/personal/generic/class_user.inc:866
-msgid "There's already a person with this 'Login' in the database."
-msgstr "Er bestaat al een account met deze 'Inlog naam' in de database."
-
-#: plugins/personal/generic/class_user.inc:872
-#: plugins/addons/addressbook/class_addressbook.inc:527
-#: plugins/admin/users/class_userManagement.inc:427
-msgid "The required field 'Given name' is not set."
-msgstr "Het vereiste veld 'Voornaam' is leeg."
-
-#: plugins/personal/generic/class_user.inc:875
-msgid "The required field 'Login' is not set."
-msgstr "Het vereiste veld 'Inlog naam' is leeg."
-
-#: plugins/personal/generic/class_user.inc:882
-msgid ""
-"There's already a person with this 'Name'/'Given name' combination in the "
-"database."
-msgstr ""
-"Er bestaat al een persoon met deze '(Achter)naam'/'Voornaam' combinatie in "
-"de database."
-
-#: plugins/personal/generic/class_user.inc:889
-msgid ""
-"The field 'Login' contains invalid characters. Lowercase, numbers and dashes "
-"are allowed."
-msgstr ""
-"Het veld 'Inlog naam' bevat ongeldige karakters. Kleine letters, nummers en "
-"liggende streepjes zijn toegestaan."
-
-#: plugins/personal/generic/class_user.inc:892
-msgid "The field 'Homepage' contains an invalid URL definition."
-msgstr "Het veld 'Website' bevat een ongeldige URL."
-
-#: plugins/personal/generic/class_user.inc:895
-#: plugins/personal/generic/class_user.inc:923
-#: plugins/addons/addressbook/class_addressbook.inc:533
-#: plugins/addons/addressbook/class_addressbook.inc:561
-#: plugins/admin/departments/class_departmentGeneric.inc:155
-msgid "The field 'Name' contains invalid characters."
-msgstr "Het veld 'Naam' bevat ongeldige karakters."
-
-#: plugins/personal/generic/class_user.inc:898
-#: plugins/personal/generic/class_user.inc:920
-#: plugins/addons/addressbook/class_addressbook.inc:536
-#: plugins/addons/addressbook/class_addressbook.inc:558
-msgid "The field 'Given name' contains invalid characters."
-msgstr "Het veld 'Voornaam' bevat ongeldige karakters."
-
-#: plugins/personal/generic/class_user.inc:903
-#: plugins/personal/generic/class_user.inc:906
-#: plugins/addons/addressbook/class_addressbook.inc:541
-#: plugins/addons/addressbook/class_addressbook.inc:544
-#: plugins/admin/departments/class_departmentGeneric.inc:158
-msgid "The field 'Phone' contains an invalid phone number."
-msgstr "Het veld 'Telefoon' bevat een ongeldig telefoonnummer."
-
-#: plugins/personal/generic/class_user.inc:909
-#: plugins/addons/addressbook/class_addressbook.inc:547
-#: plugins/admin/departments/class_departmentGeneric.inc:161
-msgid "The field 'Fax' contains an invalid phone number."
-msgstr "Het veld 'Fax' bevat een ongeldig Faxnummer."
-
-#: plugins/personal/generic/class_user.inc:912
-#: plugins/addons/addressbook/class_addressbook.inc:550
-msgid "The field 'Mobile' contains an invalid phone number."
-msgstr "Het veld 'GSM' bevat een ongeldig telefoonnummer"
-
-#: plugins/personal/generic/class_user.inc:915
-#: plugins/addons/addressbook/class_addressbook.inc:553
-msgid "The field 'Pager' contains an invalid phone number."
-msgstr "Het veld 'Pieper' bevat een ongeldig telefoonnummer."
 
 #: plugins/personal/generic/password.tpl:2
 msgid ""
@@ -1629,31 +1496,40 @@ msgstr ""
 "veranderd. Daarom moet u het wachtwoord op dit moment opnieuw invoeren. GOsa "
 "zal dan het wachtwoord versleutelen op de door u geselecteerde methode."
 
+#: plugins/personal/generic/generic_picture.tpl:6
+#: plugins/personal/generic/generic.tpl:15
+msgid "Personal picture"
+msgstr "Persoonlijk plaatje"
+
+#: plugins/personal/generic/generic_picture.tpl:23
+msgid "Remove picture"
+msgstr "Plaatje verwijderen"
+
+#: plugins/personal/generic/generic_picture.tpl:29
+#: plugins/addons/addressbook/address_edit.tpl:107
+msgid "Save"
+msgstr "Opslaan"
+
 #: plugins/personal/generic/generic.tpl:6
 msgid "Personal information"
 msgstr "Persoonlijke informatie"
-
-#: plugins/personal/generic/generic.tpl:15
-#: plugins/personal/generic/generic_picture.tpl:6
-msgid "Personal picture"
-msgstr "Persoonlijk plaatje"
 
 #: plugins/personal/generic/generic.tpl:17
 msgid "Change picture"
 msgstr "Verander plaatje"
 
 #: plugins/personal/generic/generic.tpl:24
-#: plugins/addons/addressbook/contents.tpl:14
 #: plugins/addons/addressbook/address_edit.tpl:20
+#: plugins/addons/addressbook/contents.tpl:14
+#: plugins/addons/addressbook/class_addressbook.inc:502
 #: plugins/addons/addressbook/address_info.tpl:16
-#: plugins/addons/addressbook/class_addressbook.inc:500
 #: plugins/admin/users/template.tpl:19
 msgid "Name"
 msgstr "(Achter)naam"
 
 #: plugins/personal/generic/generic.tpl:30
 #: plugins/addons/addressbook/address_edit.tpl:20
-#: plugins/addons/addressbook/class_addressbook.inc:500
+#: plugins/addons/addressbook/class_addressbook.inc:502
 #: plugins/admin/users/template.tpl:23
 msgid "Given name"
 msgstr "Voornaam"
@@ -1725,7 +1601,7 @@ msgid "Password storage"
 msgstr "Wachtwoord opslag"
 
 #: plugins/personal/generic/generic.tpl:138
-#: plugins/personal/generic/generic_certs.tpl:7
+#: plugins/personal/generic/generic_certs.tpl:3
 msgid "Certificates"
 msgstr "Certificaten"
 
@@ -1774,8 +1650,8 @@ msgid "Room No."
 msgstr "Kamer nr."
 
 #: plugins/personal/generic/generic.tpl:221
-#: plugins/addons/addressbook/contents.tpl:15
 #: plugins/addons/addressbook/address_edit.tpl:44
+#: plugins/addons/addressbook/contents.tpl:15
 #: plugins/addons/addressbook/address_info.tpl:40
 msgid "Mobile"
 msgstr "GSM"
@@ -1852,22 +1728,13 @@ msgstr "Laatste levering"
 msgid "Public visible"
 msgstr "Publiek zichtbaar"
 
-#: plugins/personal/generic/generic_picture.tpl:23
-msgid "Remove picture"
-msgstr "Plaatje verwijderen"
-
-#: plugins/personal/generic/generic_picture.tpl:29
-#: plugins/addons/addressbook/address_edit.tpl:107
-msgid "Save"
-msgstr "Opslaan"
-
-#: plugins/personal/generic/generic_certs.tpl:14
+#: plugins/personal/generic/generic_certs.tpl:8
 msgid "Standard certificate"
 msgstr "Standaard certificaat"
 
-#: plugins/personal/generic/generic_certs.tpl:19
-#: plugins/personal/generic/generic_certs.tpl:30
-#: plugins/personal/generic/generic_certs.tpl:41
+#: plugins/personal/generic/generic_certs.tpl:17
+#: plugins/personal/generic/generic_certs.tpl:37
+#: plugins/personal/generic/generic_certs.tpl:57
 #: plugins/personal/connectivity/class_kolabAccount.inc:202
 #: plugins/admin/groups/class_groupMail.inc:408
 #: plugins/admin/applications/class_applicationParameters.inc:94
@@ -1876,17 +1743,164 @@ msgstr "Standaard certificaat"
 msgid "Remove"
 msgstr "Verwijderen"
 
-#: plugins/personal/generic/generic_certs.tpl:25
+#: plugins/personal/generic/generic_certs.tpl:28
 msgid "S/MIME certificate"
 msgstr "S/MIME certificaat"
 
-#: plugins/personal/generic/generic_certs.tpl:36
+#: plugins/personal/generic/generic_certs.tpl:48
 msgid "PKCS12 certificate"
 msgstr "PKCS12 certificaat"
 
-#: plugins/personal/generic/generic_certs.tpl:48
+#: plugins/personal/generic/generic_certs.tpl:65
 msgid "Certificate serial number"
 msgstr "Certificaat serienummer"
+
+#: plugins/personal/generic/class_user.inc:225
+msgid "female"
+msgstr "vrouw"
+
+#: plugins/personal/generic/class_user.inc:225
+msgid "male"
+msgstr "man"
+
+#: plugins/personal/generic/class_user.inc:235
+msgid "This account has no valid GOsa extensions."
+msgstr "Dit account heeft geen geldige GOsa extensies."
+
+#: plugins/personal/generic/class_user.inc:264
+msgid "The specified file has not been uploaded via HTTP POST! Aborted."
+msgstr ""
+"Het opgegeven bestand is niet opgestuurd via HTTP POST! Aktie afgebroken."
+
+#: plugins/personal/generic/class_user.inc:358
+msgid "Please enter a valid serial number"
+msgstr "Geef a.u.b. een geldig serienummer op"
+
+#: plugins/personal/generic/class_user.inc:395
+#, fuzzy
+msgid "Serial"
+msgstr "terminals"
+
+#: plugins/personal/generic/class_user.inc:396
+#, php-format
+msgid ""
+"Certificate is valid from <b>%s</b> to <b>%s</b> and is currently <b>%s</b>."
+msgstr ""
+
+#: plugins/personal/generic/class_user.inc:396
+msgid "valid"
+msgstr ""
+
+#: plugins/personal/generic/class_user.inc:396
+msgid "invalid"
+msgstr ""
+
+#: plugins/personal/generic/class_user.inc:400
+#, fuzzy
+msgid "No certificate installed"
+msgstr "Certificaten bewerken"
+
+#: plugins/personal/generic/class_user.inc:790
+msgid "Kerberos database communication failed"
+msgstr "Kerberos database communicatie is mislukt"
+
+#: plugins/personal/generic/class_user.inc:807
+msgid "Can't remove user from kerberos database."
+msgstr "Kan de gebruiker niet verwijderen uit de kerberos database."
+
+#: plugins/personal/generic/class_user.inc:818
+msgid "Can't add user to kerberos database."
+msgstr "Kan de gebruiker niet toevoegen aan de kerberos database."
+
+#: plugins/personal/generic/class_user.inc:858
+msgid "You have no permissions to create a user on this 'Base'."
+msgstr ""
+"U heeft geen toestemming om een gebruiker aan te maken onder deze 'Basis'."
+
+#: plugins/personal/generic/class_user.inc:863
+msgid "You have no permissions to move a user from the original 'Base'."
+msgstr ""
+"U heeft geen toestemming om een gebruiker te verplaatsen vanuit de originale "
+"'Basis'."
+
+#: plugins/personal/generic/class_user.inc:869
+#: plugins/addons/addressbook/class_addressbook.inc:525
+#: plugins/admin/users/class_userManagement.inc:424
+msgid "The required field 'Name' is not set."
+msgstr "Het vereiste veld '(Achter)naam' is leeg."
+
+#: plugins/personal/generic/class_user.inc:878
+msgid "There's already a person with this 'Login' in the database."
+msgstr "Er bestaat al een account met deze 'Inlog naam' in de database."
+
+#: plugins/personal/generic/class_user.inc:884
+#: plugins/addons/addressbook/class_addressbook.inc:529
+#: plugins/admin/users/class_userManagement.inc:427
+msgid "The required field 'Given name' is not set."
+msgstr "Het vereiste veld 'Voornaam' is leeg."
+
+#: plugins/personal/generic/class_user.inc:887
+msgid "The required field 'Login' is not set."
+msgstr "Het vereiste veld 'Inlog naam' is leeg."
+
+#: plugins/personal/generic/class_user.inc:894
+msgid ""
+"There's already a person with this 'Name'/'Given name' combination in the "
+"database."
+msgstr ""
+"Er bestaat al een persoon met deze '(Achter)naam'/'Voornaam' combinatie in "
+"de database."
+
+#: plugins/personal/generic/class_user.inc:901
+msgid ""
+"The field 'Login' contains invalid characters. Lowercase, numbers and dashes "
+"are allowed."
+msgstr ""
+"Het veld 'Inlog naam' bevat ongeldige karakters. Kleine letters, nummers en "
+"liggende streepjes zijn toegestaan."
+
+#: plugins/personal/generic/class_user.inc:904
+msgid "The field 'Homepage' contains an invalid URL definition."
+msgstr "Het veld 'Website' bevat een ongeldige URL."
+
+#: plugins/personal/generic/class_user.inc:907
+#: plugins/personal/generic/class_user.inc:935
+#: plugins/addons/addressbook/class_addressbook.inc:535
+#: plugins/addons/addressbook/class_addressbook.inc:563
+#: plugins/admin/departments/class_departmentGeneric.inc:155
+msgid "The field 'Name' contains invalid characters."
+msgstr "Het veld 'Naam' bevat ongeldige karakters."
+
+#: plugins/personal/generic/class_user.inc:910
+#: plugins/personal/generic/class_user.inc:932
+#: plugins/addons/addressbook/class_addressbook.inc:538
+#: plugins/addons/addressbook/class_addressbook.inc:560
+msgid "The field 'Given name' contains invalid characters."
+msgstr "Het veld 'Voornaam' bevat ongeldige karakters."
+
+#: plugins/personal/generic/class_user.inc:915
+#: plugins/personal/generic/class_user.inc:918
+#: plugins/addons/addressbook/class_addressbook.inc:543
+#: plugins/addons/addressbook/class_addressbook.inc:546
+#: plugins/admin/departments/class_departmentGeneric.inc:158
+msgid "The field 'Phone' contains an invalid phone number."
+msgstr "Het veld 'Telefoon' bevat een ongeldig telefoonnummer."
+
+#: plugins/personal/generic/class_user.inc:921
+#: plugins/addons/addressbook/class_addressbook.inc:549
+#: plugins/admin/departments/class_departmentGeneric.inc:161
+msgid "The field 'Fax' contains an invalid phone number."
+msgstr "Het veld 'Fax' bevat een ongeldig Faxnummer."
+
+#: plugins/personal/generic/class_user.inc:924
+#: plugins/addons/addressbook/class_addressbook.inc:552
+msgid "The field 'Mobile' contains an invalid phone number."
+msgstr "Het veld 'GSM' bevat een ongeldig telefoonnummer"
+
+#: plugins/personal/generic/class_user.inc:927
+#: plugins/addons/addressbook/class_addressbook.inc:555
+msgid "The field 'Pager' contains an invalid phone number."
+msgstr "Het veld 'Pieper' bevat een ongeldig telefoonnummer."
 
 #: plugins/personal/generic/main.inc:107
 msgid "You are not allowed to set your password!"
@@ -1895,31 +1909,6 @@ msgstr "U heeft geen toestemming om uw wachtwoord te veranderen!"
 #: plugins/personal/generic/main.inc:187
 msgid "Generic user information"
 msgstr "Algemene gebruikersinformatie"
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:6
-#: plugins/generic/references/class_reference.inc:34
-msgid "FTP"
-msgstr "Ftp"
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:125
-msgid "Value specified as 'Upload bandwidth' is not valid."
-msgstr "De opgegeven waarde voor 'Verstuur Bandbreedte' is niet geldig."
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:128
-msgid "Value specified as 'Download bandwidth' is not valid."
-msgstr "De opgegeven waarde voor 'Ontvangst bandbreedte' is niet geldig."
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:131
-msgid "Value specified as 'Files' is not valid."
-msgstr "De opgegeven waarde voor 'Bestanden' is niet geldig."
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:134
-msgid "Value specified as 'Size' is not valid."
-msgstr "De opgegeven waarde voor 'Grootte' is niet geldig."
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:137
-msgid "Value specified as 'Ratio' is not valid."
-msgstr "De opgegeven waarde voor 'Verhouding' is niet geldig."
 
 #: plugins/personal/connectivity/class_phpgwAccount.inc:5
 msgid "PHPGroupware"
@@ -2011,9 +2000,53 @@ msgstr "Er is geen E-mail gebruiker met adres '%s' voor uw uitwisselingsbeleid"
 msgid "WebDAV"
 msgstr "WebDAV"
 
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:6
+#: plugins/generic/references/class_reference.inc:34
+msgid "FTP"
+msgstr "Ftp"
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:125
+msgid "Value specified as 'Upload bandwidth' is not valid."
+msgstr "De opgegeven waarde voor 'Verstuur Bandbreedte' is niet geldig."
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:128
+msgid "Value specified as 'Download bandwidth' is not valid."
+msgstr "De opgegeven waarde voor 'Ontvangst bandbreedte' is niet geldig."
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:131
+msgid "Value specified as 'Files' is not valid."
+msgstr "De opgegeven waarde voor 'Bestanden' is niet geldig."
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:134
+msgid "Value specified as 'Size' is not valid."
+msgstr "De opgegeven waarde voor 'Grootte' is niet geldig."
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:137
+msgid "Value specified as 'Ratio' is not valid."
+msgstr "De opgegeven waarde voor 'Verhouding' is niet geldig."
+
 #: plugins/personal/connectivity/phpgw.tpl:1
 msgid "PHPGroupware account"
 msgstr "PHPGroupware account"
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:6
+msgid "Open-Xchange"
+msgstr "Open-Xchange"
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:664
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:735
+msgid "Couldn't Connect To Postgresql Database"
+msgstr "Kan niet verbinden met de Postgresql Database"
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:668
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:739
+msgid "Needed Parameters to openexchange connectivity plugin failed!"
+msgstr "Vereiste parameters voor Open-Xchange verbindingsmodule ontbreken!"
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:672
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:743
+msgid "PHP4 module for Postgresql Database Failed!"
+msgstr "PHP4 module voor Postgresql Database ontbreekt!"
 
 #: plugins/personal/connectivity/kolab.tpl:1
 msgid "Kolab account"
@@ -2064,25 +2097,6 @@ msgstr "Uitnodigingsbeleid"
 #: plugins/personal/connectivity/webdav.tpl:1
 msgid "WebDAV account"
 msgstr "WebDAV Account"
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:6
-msgid "Open-Xchange"
-msgstr "Open-Xchange"
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:664
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:735
-msgid "Couldn't Connect To Postgresql Database"
-msgstr "Kan niet verbinden met de Postgresql Database"
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:668
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:739
-msgid "Needed Parameters to openexchange connectivity plugin failed!"
-msgstr "Vereiste parameters voor Open-Xchange verbindingsmodule ontbreken!"
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:672
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:743
-msgid "PHP4 module for Postgresql Database Failed!"
-msgstr "PHP4 module voor Postgresql Database ontbreekt!"
 
 #: plugins/personal/connectivity/pureftpd.tpl:1
 msgid "FTP account"
@@ -2206,61 +2220,6 @@ msgstr "De nummerieke waarde opgegeven voor Quota Instellingen is leeg."
 msgid "Numerical value for Quota Setting is not valid."
 msgstr "De nummerieke waarde opgegeven voor Quota Instellingen is niet geldig."
 
-#: plugins/gofax/blocklists/generic.tpl:8
-msgid "List name"
-msgstr "Lijstnaam"
-
-#: plugins/gofax/blocklists/generic.tpl:10
-msgid "Name of blocklist"
-msgstr "Naam van de blokkeerlijst"
-
-#: plugins/gofax/blocklists/generic.tpl:16
-msgid "Select subtree to place blocklist in"
-msgstr "Selecteer de subtree waaronder de blokkeerlijst geplaatst wordt"
-
-#: plugins/gofax/blocklists/generic.tpl:31
-#: plugins/admin/systems/service.tpl:42 plugins/admin/systems/service.tpl:120
-#: include/functions.inc:1605
-msgid "Type"
-msgstr "Type"
-
-#: plugins/gofax/blocklists/generic.tpl:33
-msgid "Select wether to filter incoming or outgoing calls"
-msgstr "Selecteer of inkomende en uitgaande gesprekken gefilterd moeten worden"
-
-#: plugins/gofax/blocklists/generic.tpl:39 plugins/admin/groups/generic.tpl:13
-#: plugins/admin/applications/generic.tpl:24
-#: plugins/admin/departments/generic.tpl:12
-#: plugins/admin/systems/server.tpl:24 plugins/admin/systems/phone.tpl:24
-#: plugins/admin/systems/printer.tpl:10
-#: plugins/admin/systems/wingeneric.tpl:24
-#: plugins/admin/systems/component.tpl:24 plugins/admin/ogroups/generic.tpl:13
-#: plugins/generic/references/contents.tpl:11
-msgid "Description"
-msgstr "Omschrijving"
-
-#: plugins/gofax/blocklists/generic.tpl:41
-msgid "Descriptive text for this blocklist"
-msgstr "Beschrijving van deze blokkeerlijst"
-
-#: plugins/gofax/blocklists/generic.tpl:54
-msgid "Blocked numbers"
-msgstr "Geblokkeerde nummers"
-
-#: plugins/gofax/blocklists/generic.tpl:64
-#: plugins/gofax/blocklists/headpage.tpl:24
-#: plugins/addons/addressbook/contents.tpl:33
-#: plugins/admin/groups/headpage.tpl:26 plugins/admin/users/headpage.tpl:27
-#: plugins/admin/applications/headpage.tpl:25
-#: plugins/admin/departments/headpage.tpl:25
-#: plugins/admin/systems/headpage.tpl:25 plugins/admin/ogroups/headpage.tpl:26
-msgid "Information"
-msgstr "Informatie"
-
-#: plugins/gofax/blocklists/generic.tpl:66
-msgid "Numbers can also contain wild cards."
-msgstr "Nummers kunnen ook wildcards (*?) bevatten."
-
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:5
 msgid "FAX Blocklists"
 msgstr "Fax blokkeerlijsten"
@@ -2308,11 +2267,66 @@ msgstr "De opgegeven naam wordt al gebruikt."
 msgid "No permission to create a blocklist on this base."
 msgstr "Geen toestemming om een blokkeerlijst aan te maken onder deze basis."
 
+#: plugins/gofax/blocklists/generic.tpl:8
+msgid "List name"
+msgstr "Lijstnaam"
+
+#: plugins/gofax/blocklists/generic.tpl:10
+msgid "Name of blocklist"
+msgstr "Naam van de blokkeerlijst"
+
+#: plugins/gofax/blocklists/generic.tpl:16
+msgid "Select subtree to place blocklist in"
+msgstr "Selecteer de subtree waaronder de blokkeerlijst geplaatst wordt"
+
+#: plugins/gofax/blocklists/generic.tpl:32
+#: plugins/admin/systems/service.tpl:42 plugins/admin/systems/service.tpl:120
+#: include/functions.inc:1608
+msgid "Type"
+msgstr "Type"
+
+#: plugins/gofax/blocklists/generic.tpl:34
+msgid "Select wether to filter incoming or outgoing calls"
+msgstr "Selecteer of inkomende en uitgaande gesprekken gefilterd moeten worden"
+
+#: plugins/gofax/blocklists/generic.tpl:41 plugins/admin/groups/generic.tpl:13
+#: plugins/admin/applications/generic.tpl:24
+#: plugins/admin/departments/generic.tpl:12
+#: plugins/admin/systems/server.tpl:24 plugins/admin/systems/phone.tpl:24
+#: plugins/admin/systems/printer.tpl:10
+#: plugins/admin/systems/wingeneric.tpl:24
+#: plugins/admin/systems/component.tpl:24 plugins/admin/ogroups/generic.tpl:13
+#: plugins/generic/references/contents.tpl:11
+msgid "Description"
+msgstr "Omschrijving"
+
+#: plugins/gofax/blocklists/generic.tpl:43
+msgid "Descriptive text for this blocklist"
+msgstr "Beschrijving van deze blokkeerlijst"
+
+#: plugins/gofax/blocklists/generic.tpl:56
+msgid "Blocked numbers"
+msgstr "Geblokkeerde nummers"
+
+#: plugins/gofax/blocklists/generic.tpl:67
+#: plugins/gofax/blocklists/headpage.tpl:25
+#: plugins/addons/addressbook/contents.tpl:33
+#: plugins/admin/groups/headpage.tpl:26 plugins/admin/users/headpage.tpl:27
+#: plugins/admin/applications/headpage.tpl:25
+#: plugins/admin/departments/headpage.tpl:25
+#: plugins/admin/systems/headpage.tpl:25 plugins/admin/ogroups/headpage.tpl:26
+msgid "Information"
+msgstr "Informatie"
+
+#: plugins/gofax/blocklists/generic.tpl:69
+msgid "Numbers can also contain wild cards."
+msgstr "Nummers kunnen ook wildcards (*?) bevatten."
+
 #: plugins/gofax/blocklists/remove.tpl:2
 #: plugins/addons/addressbook/remove.tpl:2 plugins/admin/groups/remove.tpl:2
 #: plugins/admin/users/remove.tpl:2 plugins/admin/applications/remove.tpl:2
 #: plugins/admin/departments/remove.tpl:2 plugins/admin/systems/remove.tpl:2
-#: plugins/admin/ogroups/remove.tpl:2 html/index.php:215
+#: plugins/admin/ogroups/remove.tpl:2 html/index.php:217
 #: ihtml/themes/altlinux/conflict.tpl:6 ihtml/themes/altlinux/islocked.tpl:6
 #: ihtml/themes/default/conflict.tpl:6 ihtml/themes/default/islocked.tpl:6
 msgid "Warning"
@@ -2341,7 +2355,7 @@ msgstr ""
 msgid "List of blocklists"
 msgstr "Lijst met blokkeerlijsten"
 
-#: plugins/gofax/blocklists/headpage.tpl:15
+#: plugins/gofax/blocklists/headpage.tpl:16
 #: plugins/admin/groups/headpage.tpl:16 plugins/admin/users/headpage.tpl:16
 #: plugins/admin/applications/headpage.tpl:16
 #: plugins/admin/departments/headpage.tpl:16
@@ -2349,7 +2363,7 @@ msgstr "Lijst met blokkeerlijsten"
 msgid "New"
 msgstr "Nieuw"
 
-#: plugins/gofax/blocklists/headpage.tpl:28
+#: plugins/gofax/blocklists/headpage.tpl:29
 msgid ""
 "This menu allows you to create, delete and edit selected blocklists. Having "
 "a large size of lists, you might prefer the range selectors on top of the "
@@ -2359,7 +2373,7 @@ msgstr ""
 "verwijderen. Indien u een grote lijst heeft is het aan te raden de selectie "
 "mogelijkheden te gebruiken."
 
-#: plugins/gofax/blocklists/headpage.tpl:31
+#: plugins/gofax/blocklists/headpage.tpl:32
 msgid ""
 "-Edit- and -New...- will execute an assistant to aid you when performing "
 "changes on your blocklist. -Delete- will ask you for confirmation before "
@@ -2369,39 +2383,39 @@ msgstr ""
 "van uw blokkeerlijst. -Verwijderen- zal om bevestiging vragen alvorens er "
 "gegevens verwijderd worden uit uw LDAP database."
 
-#: plugins/gofax/blocklists/headpage.tpl:45
+#: plugins/gofax/blocklists/headpage.tpl:46
 msgid "Select to see send blocklists"
 msgstr "Selecteer om de verstuur blokkeerlijsten te zien"
 
-#: plugins/gofax/blocklists/headpage.tpl:45
+#: plugins/gofax/blocklists/headpage.tpl:46
 msgid "Show send blocklists"
 msgstr "Toon verstuur blokkeerlijsten"
 
-#: plugins/gofax/blocklists/headpage.tpl:46
+#: plugins/gofax/blocklists/headpage.tpl:47
 msgid "Select to see receive blocklists"
 msgstr "Selecteer om de ontvangst blokkeerlijsten te zien"
 
-#: plugins/gofax/blocklists/headpage.tpl:46
+#: plugins/gofax/blocklists/headpage.tpl:47
 msgid "Show receive blocklists"
 msgstr "Toon ontvangst blokkeerlijsten"
 
-#: plugins/gofax/blocklists/headpage.tpl:54
+#: plugins/gofax/blocklists/headpage.tpl:55
 msgid "Display lists of department"
 msgstr "Toon blokkeerlijsten van de afdeling"
 
-#: plugins/gofax/blocklists/headpage.tpl:67
+#: plugins/gofax/blocklists/headpage.tpl:69
 msgid "Display lists matching"
 msgstr "Toon overeenkomende blokkeerlijsten"
 
-#: plugins/gofax/blocklists/headpage.tpl:70
+#: plugins/gofax/blocklists/headpage.tpl:72
 msgid "Regular expression for matching list names"
 msgstr "Reguliere expressie voor overeenkomende lijstnamen"
 
-#: plugins/gofax/blocklists/headpage.tpl:78
+#: plugins/gofax/blocklists/headpage.tpl:80
 msgid "Display lists containing"
 msgstr "Toon lijsten die het volgende bevatten"
 
-#: plugins/gofax/blocklists/headpage.tpl:81
+#: plugins/gofax/blocklists/headpage.tpl:83
 msgid "Show lists containing entered numbers"
 msgstr "Toon lijsten die de ingevoerde nummers bevatten"
 
@@ -2508,8 +2522,8 @@ msgid "List of predefined blocklists"
 msgstr "Lijst met voorgedefiniëerde blokkeerlijstn"
 
 #: plugins/gofax/faxaccount/lists.tpl:37
-#: plugins/admin/groups/application_options.tpl:8
-#: plugins/admin/groups/mail_admins.tpl:37 include/functions.inc:1190
+#: plugins/admin/groups/mail_admins.tpl:37
+#: plugins/admin/groups/application_options.tpl:8 include/functions.inc:1195
 msgid "Apply"
 msgstr "Toepassen"
 
@@ -2620,60 +2634,6 @@ msgstr "Overdrachtstijd"
 msgid "# pages"
 msgstr "# pagina's"
 
-#: plugins/gofax/reports/contents.tpl:2 plugins/addons/logview/contents.tpl:2
-#: plugins/gofon/reports/contents.tpl:2
-msgid "Filter"
-msgstr "Filter"
-
-#: plugins/gofax/reports/contents.tpl:6
-#: plugins/addons/addressbook/contents.tpl:92
-#: plugins/addons/logview/contents.tpl:47 plugins/gofon/reports/contents.tpl:6
-msgid "Search for"
-msgstr "Zoek naar"
-
-#: plugins/gofax/reports/contents.tpl:7 plugins/gofon/reports/contents.tpl:7
-msgid "Enter user name to search for"
-msgstr "Voer de te zoeken gebruikersnaam in"
-
-#: plugins/gofax/reports/contents.tpl:8 plugins/gofax/reports/contents.tpl:16
-#: plugins/gofon/reports/contents.tpl:8 plugins/gofon/reports/contents.tpl:16
-msgid "in"
-msgstr "in"
-
-#: plugins/gofax/reports/contents.tpl:9 plugins/gofon/reports/contents.tpl:9
-msgid "Select subtree to base search on"
-msgstr "Selecteer de subtree waarbinnen de zoekopdracht plaatsvindt"
-
-#: plugins/gofax/reports/contents.tpl:12 plugins/gofon/reports/contents.tpl:12
-msgid "during"
-msgstr "gedurende"
-
-#: plugins/gofax/reports/contents.tpl:21
-#: plugins/addons/logview/contents.tpl:67
-#: plugins/gofon/reports/contents.tpl:21
-msgid "Search"
-msgstr "Zoeken"
-
-#: plugins/gofax/reports/contents.tpl:31
-#: plugins/addons/logview/contents.tpl:84
-#: plugins/gofon/reports/contents.tpl:30
-msgid "Date"
-msgstr "Datum"
-
-#: plugins/gofax/reports/contents.tpl:33
-msgid "Sender"
-msgstr "Afzender"
-
-#: plugins/gofax/reports/contents.tpl:34
-msgid "Receiver"
-msgstr "Ontvanger"
-
-#: plugins/gofax/reports/contents.tpl:47
-#: plugins/addons/logview/contents.tpl:97
-#: plugins/gofon/reports/contents.tpl:48
-msgid "Search returned no results..."
-msgstr "De zoekopdracht gaf geen resultaten terug..."
-
 #: plugins/gofax/reports/class_faxreport.inc:6
 msgid "FAX Reports"
 msgstr "Fax rapporten"
@@ -2704,15 +2664,120 @@ msgstr "U heeft geen toestemming om informatie over dit Fax ID op te vragen!"
 msgid "Y-M-D"
 msgstr "J-M-D"
 
+#: plugins/gofax/reports/contents.tpl:2 plugins/addons/logview/contents.tpl:2
+#: plugins/gofon/reports/contents.tpl:2
+msgid "Filter"
+msgstr "Filter"
+
+#: plugins/gofax/reports/contents.tpl:6
+#: plugins/addons/addressbook/contents.tpl:92
+#: plugins/addons/logview/contents.tpl:47 plugins/gofon/reports/contents.tpl:6
+msgid "Search for"
+msgstr "Zoek naar"
+
+#: plugins/gofax/reports/contents.tpl:7 plugins/gofon/reports/contents.tpl:7
+msgid "Enter user name to search for"
+msgstr "Voer de te zoeken gebruikersnaam in"
+
+#: plugins/gofax/reports/contents.tpl:8 plugins/gofax/reports/contents.tpl:16
+#: plugins/gofon/reports/contents.tpl:8 plugins/gofon/reports/contents.tpl:16
+msgid "in"
+msgstr "in"
+
+#: plugins/gofax/reports/contents.tpl:9 plugins/gofon/reports/contents.tpl:9
+msgid "Select subtree to base search on"
+msgstr "Selecteer de subtree waarbinnen de zoekopdracht plaatsvindt"
+
+#: plugins/gofax/reports/contents.tpl:12 plugins/gofon/reports/contents.tpl:12
+msgid "during"
+msgstr "gedurende"
+
+#: plugins/gofax/reports/contents.tpl:21
+#: plugins/addons/logview/contents.tpl:67
+#: plugins/gofon/reports/contents.tpl:21 ihtml/themes/default/help.tpl:21
+msgid "Search"
+msgstr "Zoeken"
+
+#: plugins/gofax/reports/contents.tpl:31
+#: plugins/addons/logview/contents.tpl:84
+#: plugins/gofon/reports/contents.tpl:30
+msgid "Date"
+msgstr "Datum"
+
+#: plugins/gofax/reports/contents.tpl:33
+msgid "Sender"
+msgstr "Afzender"
+
+#: plugins/gofax/reports/contents.tpl:34
+msgid "Receiver"
+msgstr "Ontvanger"
+
+#: plugins/gofax/reports/contents.tpl:47
+#: plugins/addons/logview/contents.tpl:97
+#: plugins/gofon/reports/contents.tpl:48
+msgid "Search returned no results..."
+msgstr "De zoekopdracht gaf geen resultaten terug..."
+
 #: plugins/gofax/reports/main.inc:5
 msgid "FAX reports"
 msgstr "Fax rapporten"
 
-#: plugins/addons/addressbook/contents.tpl:15
+#: plugins/addons/addressbook/dial.tpl:3
+msgid "Dial connection..."
+msgstr "Bel..."
+
+#: plugins/addons/addressbook/dial.tpl:10
+#: plugins/addons/addressbook/class_addressbook.inc:359
+#: plugins/addons/addressbook/class_addressbook.inc:366
+#: plugins/addons/addressbook/class_addressbook.inc:370
+#: plugins/addons/addressbook/class_addressbook.inc:452
+msgid "Dial"
+msgstr "Kies"
+
+#: plugins/addons/addressbook/address_edit.tpl:4
+msgid "Choose the department to store entry in"
+msgstr "Selecteer de afdeling waarin de invoer bewaard wordt."
+
+#: plugins/addons/addressbook/address_edit.tpl:16
+#: plugins/addons/addressbook/address_info.tpl:12
+msgid "Personal"
+msgstr "Persoonlijk"
+
+#: plugins/addons/addressbook/address_edit.tpl:23
+#: plugins/addons/addressbook/address_info.tpl:19
+msgid "Initials"
+msgstr "Initialen"
+
 #: plugins/addons/addressbook/address_edit.tpl:33
+#: plugins/addons/addressbook/contents.tpl:15
 #: plugins/addons/addressbook/address_info.tpl:29
 msgid "Private"
 msgstr "Privé"
+
+#: plugins/addons/addressbook/address_edit.tpl:47
+#: plugins/addons/addressbook/address_info.tpl:43
+msgid "Email"
+msgstr "E-mail"
+
+#: plugins/addons/addressbook/address_edit.tpl:57
+#: plugins/addons/addressbook/address_info.tpl:53
+msgid "Organizational"
+msgstr "Bedrijfsmatig"
+
+#: plugins/addons/addressbook/address_edit.tpl:65
+#: plugins/addons/addressbook/address_info.tpl:61
+msgid "Company"
+msgstr "Bedrijf"
+
+#: plugins/addons/addressbook/address_edit.tpl:71
+#: plugins/addons/addressbook/address_info.tpl:67
+msgid "City"
+msgstr "Plaats"
+
+#: plugins/addons/addressbook/address_edit.tpl:77
+#: plugins/addons/addressbook/address_info.tpl:73
+msgid "Country"
+msgstr "Land"
 
 #: plugins/addons/addressbook/contents.tpl:15
 msgid "Contact"
@@ -2777,57 +2842,6 @@ msgstr "Zoek op"
 msgid "Choose the object that will be searched in"
 msgstr "Selecteer het object waarbinnen gezocht zal worden"
 
-#: plugins/addons/addressbook/dial.tpl:3
-msgid "Dial connection..."
-msgstr "Bel..."
-
-#: plugins/addons/addressbook/dial.tpl:10
-#: plugins/addons/addressbook/class_addressbook.inc:357
-#: plugins/addons/addressbook/class_addressbook.inc:364
-#: plugins/addons/addressbook/class_addressbook.inc:368
-#: plugins/addons/addressbook/class_addressbook.inc:450
-msgid "Dial"
-msgstr "Kies"
-
-#: plugins/addons/addressbook/address_edit.tpl:4
-msgid "Choose the department to store entry in"
-msgstr "Selecteer de afdeling waarin de invoer bewaard wordt."
-
-#: plugins/addons/addressbook/address_edit.tpl:16
-#: plugins/addons/addressbook/address_info.tpl:12
-msgid "Personal"
-msgstr "Persoonlijk"
-
-#: plugins/addons/addressbook/address_edit.tpl:23
-#: plugins/addons/addressbook/address_info.tpl:19
-msgid "Initials"
-msgstr "Initialen"
-
-#: plugins/addons/addressbook/address_edit.tpl:47
-#: plugins/addons/addressbook/address_info.tpl:43
-msgid "Email"
-msgstr "E-mail"
-
-#: plugins/addons/addressbook/address_edit.tpl:57
-#: plugins/addons/addressbook/address_info.tpl:53
-msgid "Organizational"
-msgstr "Bedrijfsmatig"
-
-#: plugins/addons/addressbook/address_edit.tpl:65
-#: plugins/addons/addressbook/address_info.tpl:61
-msgid "Company"
-msgstr "Bedrijf"
-
-#: plugins/addons/addressbook/address_edit.tpl:71
-#: plugins/addons/addressbook/address_info.tpl:67
-msgid "City"
-msgstr "Plaats"
-
-#: plugins/addons/addressbook/address_edit.tpl:77
-#: plugins/addons/addressbook/address_info.tpl:73
-msgid "Country"
-msgstr "Land"
-
 #: plugins/addons/addressbook/remove.tpl:7
 msgid ""
 "This includes all addressbook data in this entry. Please double check if "
@@ -2846,12 +2860,12 @@ msgstr "Adresboek"
 msgid "Addressbook"
 msgstr "Adresboek"
 
-#: plugins/addons/addressbook/class_addressbook.inc:147
+#: plugins/addons/addressbook/class_addressbook.inc:149
 #, php-format
 msgid "Dial from %s to %s now?"
 msgstr "Nu van %s naar %s bellen?"
 
-#: plugins/addons/addressbook/class_addressbook.inc:151
+#: plugins/addons/addressbook/class_addressbook.inc:153
 msgid ""
 "You have no personal phone number set. Please change that in order to "
 "perform direct dials."
@@ -2859,73 +2873,73 @@ msgstr ""
 "U heeft geen privé telefoonnummer opgegeven. Verander dit a.u.b. om direkt "
 "te kunnen kiezen"
 
-#: plugins/addons/addressbook/class_addressbook.inc:180
-#: plugins/addons/addressbook/class_addressbook.inc:284
+#: plugins/addons/addressbook/class_addressbook.inc:182
+#: plugins/addons/addressbook/class_addressbook.inc:286
 msgid "You are not allowed to delete this entry!"
 msgstr "U heeft geen toestemming om deze gegevens te verwijderen!"
 
-#: plugins/addons/addressbook/class_addressbook.inc:278
+#: plugins/addons/addressbook/class_addressbook.inc:280
 #, php-format
 msgid "You're about to delete the entry %s."
 msgstr "U staat op het punt de invoer %s te verwijderen."
 
-#: plugins/addons/addressbook/class_addressbook.inc:374
+#: plugins/addons/addressbook/class_addressbook.inc:376
 #, php-format
 msgid "Save contact for %s as vcard"
 msgstr "Sla contact voor %s op als vcard"
 
-#: plugins/addons/addressbook/class_addressbook.inc:378
+#: plugins/addons/addressbook/class_addressbook.inc:380
 #, php-format
 msgid "Send mail to %s"
 msgstr "Stuur E-mail naar %s"
 
-#: plugins/addons/addressbook/class_addressbook.inc:462
+#: plugins/addons/addressbook/class_addressbook.inc:464
 msgid "global addressbook"
 msgstr "globaal adresboek"
 
-#: plugins/addons/addressbook/class_addressbook.inc:465
+#: plugins/addons/addressbook/class_addressbook.inc:467
 msgid "organizations user database"
 msgstr "gebruikersbestand van de organisatie"
 
-#: plugins/addons/addressbook/class_addressbook.inc:469
+#: plugins/addons/addressbook/class_addressbook.inc:471
 #, php-format
 msgid "Contact stored in %s"
 msgstr "Contact opgeslagen in %s"
 
-#: plugins/addons/addressbook/class_addressbook.inc:471
+#: plugins/addons/addressbook/class_addressbook.inc:473
 msgid "Creating new entry in"
 msgstr "Maak record aan in"
 
-#: plugins/addons/addressbook/class_addressbook.inc:500
+#: plugins/addons/addressbook/class_addressbook.inc:502
 #: plugins/addons/logview/class_logview.inc:63
 #: plugins/addons/logview/class_logview.inc:77
 msgid "All"
 msgstr "Alle"
 
-#: plugins/addons/addressbook/class_addressbook.inc:501
+#: plugins/addons/addressbook/class_addressbook.inc:503
 msgid "Work phone"
 msgstr "Telefoon Werk"
 
-#: plugins/addons/addressbook/class_addressbook.inc:501
+#: plugins/addons/addressbook/class_addressbook.inc:503
 msgid "Cell phone"
 msgstr "GSM"
 
-#: plugins/addons/addressbook/class_addressbook.inc:502
+#: plugins/addons/addressbook/class_addressbook.inc:504
 msgid "Home phone"
 msgstr "Telefoon Privé"
 
-#: plugins/addons/addressbook/class_addressbook.inc:502
+#: plugins/addons/addressbook/class_addressbook.inc:504
 msgid "User ID"
 msgstr "Gebruikers ID"
 
-#: plugins/addons/addressbook/class_addressbook.inc:574
+#: plugins/addons/addressbook/class_addressbook.inc:576
 msgid ""
 "Cannot create a unique DN for your entry. Please fill more formular fields."
 msgstr ""
 "Kan geen unieke DN aanmaken voor uw invoer. Vul a.u.b. meer formulier velden "
 "in."
 
-#: plugins/addons/addressbook/class_addressbook.inc:586
+#: plugins/addons/addressbook/class_addressbook.inc:588
 msgid ""
 "You have no permissions to create or modify a global address book entry."
 msgstr ""
@@ -3010,11 +3024,11 @@ msgstr "Doorzoek"
 msgid "Modify existing attributes"
 msgstr "Verander bestaand atribuut"
 
-#: plugins/addons/ldapmanager/contentimport.tpl:37
+#: plugins/addons/ldapmanager/contentimport.tpl:33
 msgid "Overwrite existing entry"
 msgstr "Overschrijf bestaande gegevens"
 
-#: plugins/addons/ldapmanager/contentimport.tpl:44
+#: plugins/addons/ldapmanager/contentimport.tpl:40
 msgid "Import successful"
 msgstr "Import was succesvol"
 
@@ -3211,6 +3225,45 @@ msgstr "Bericht"
 msgid "System log view"
 msgstr "Systeem log weergave"
 
+#: plugins/admin/groups/mail.tpl:11
+msgid "Primary mail address for this shared folder"
+msgstr "Primair E-mail adres voor deze gedeelde map"
+
+#: plugins/admin/groups/mail.tpl:16
+msgid "Select mail server to place user on"
+msgstr "Selecteer de mail server waarop de gebruiker ondergebracht wordt"
+
+#: plugins/admin/groups/mail.tpl:66
+msgid "IMAP shared folders"
+msgstr "IMAP gedeelde mappen"
+
+#: plugins/admin/groups/mail.tpl:70
+msgid "Default permission"
+msgstr "Algemene rechten"
+
+#: plugins/admin/groups/mail.tpl:79
+msgid "Member permission"
+msgstr "Groepslid rechten"
+
+#: plugins/admin/groups/mail.tpl:94
+msgid "Forward messages to non group members"
+msgstr "Stuur berichten door naar niet groepsleden"
+
+#: plugins/admin/groups/class_groupManagement.inc:25
+#: plugins/admin/ogroups/class_ogroupManagement.inc:42
+msgid "Groups"
+msgstr "Groepen"
+
+#: plugins/admin/groups/class_groupManagement.inc:204
+#, php-format
+msgid "You're about to delete the group '%s'."
+msgstr "U staat op het punt de groep '%s' te verwijderen."
+
+#: plugins/admin/groups/class_groupManagement.inc:210
+#: plugins/admin/groups/class_groupManagement.inc:236
+msgid "You are not allowed to delete this group!"
+msgstr "U heeft geen toestemming om deze groep te verwijderen!"
+
 #: plugins/admin/groups/class_groupGeneric.inc:109
 msgid "Can't find this groups SID in LDAP or in your configuration file!"
 msgstr ""
@@ -3260,29 +3313,17 @@ msgstr ""
 msgid "Value specified as 'Name' is already used."
 msgstr "De waarde die opgegeven is voor de naam wordt al gebruikt."
 
-#: plugins/admin/groups/mail.tpl:11
-msgid "Primary mail address for this shared folder"
-msgstr "Primair E-mail adres voor deze gedeelde map"
+#: plugins/admin/groups/remove.tpl:7
+msgid ""
+"This may be a primary user group. Please double check if you really want to "
+"do this since there is no way for GOsa to get your data back."
+msgstr ""
+"Dit kan een primaire groep zijn. Verzeker uzelf ervan dat dit is wat u wilt, "
+"aangezien er geen mogelijkheid voor GOsa is om deze gegevens terug te halen."
 
-#: plugins/admin/groups/mail.tpl:16
-msgid "Select mail server to place user on"
-msgstr "Selecteer de mail server waarop de gebruiker ondergebracht wordt"
-
-#: plugins/admin/groups/mail.tpl:66
-msgid "IMAP shared folders"
-msgstr "IMAP gedeelde mappen"
-
-#: plugins/admin/groups/mail.tpl:70
-msgid "Default permission"
-msgstr "Algemene rechten"
-
-#: plugins/admin/groups/mail.tpl:79
-msgid "Member permission"
-msgstr "Groepslid rechten"
-
-#: plugins/admin/groups/mail.tpl:94
-msgid "Forward messages to non group members"
-msgstr "Stuur berichten door naar niet groepsleden"
+#: plugins/admin/groups/main.inc:39 plugins/admin/groups/main.inc:43
+msgid "Group administration"
+msgstr "Groepen beheer"
 
 #: plugins/admin/groups/headpage.tpl:6 plugins/admin/ogroups/headpage.tpl:6
 msgid "List of groups"
@@ -3314,37 +3355,6 @@ msgstr "Ga LDAP subtrees in bij het zoeken"
 #: plugins/admin/groups/headpage.tpl:60 plugins/admin/users/headpage.tpl:64
 msgid "Search in subtrees"
 msgstr "Zoek in subtrees"
-
-#: plugins/admin/groups/main.inc:39 plugins/admin/groups/main.inc:43
-msgid "Group administration"
-msgstr "Groepen beheer"
-
-#: plugins/admin/groups/class_groupManagement.inc:25
-#: plugins/admin/ogroups/class_ogroupManagement.inc:42
-msgid "Groups"
-msgstr "Groepen"
-
-#: plugins/admin/groups/class_groupManagement.inc:204
-#, php-format
-msgid "You're about to delete the group '%s'."
-msgstr "U staat op het punt de groep '%s' te verwijderen."
-
-#: plugins/admin/groups/class_groupManagement.inc:210
-#: plugins/admin/groups/class_groupManagement.inc:236
-msgid "You are not allowed to delete this group!"
-msgstr "U heeft geen toestemming om deze groep te verwijderen!"
-
-#: plugins/admin/groups/remove.tpl:7
-msgid ""
-"This may be a primary user group. Please double check if you really want to "
-"do this since there is no way for GOsa to get your data back."
-msgstr ""
-"Dit kan een primaire groep zijn. Verzeker uzelf ervan dat dit is wat u wilt, "
-"aangezien er geen mogelijkheid voor GOsa is om deze gegevens terug te halen."
-
-#: plugins/admin/groups/application_options.tpl:1
-msgid "Application options"
-msgstr "Programma opties"
 
 #: plugins/admin/groups/class_groupMail.inc:153
 msgid "read"
@@ -3483,6 +3493,10 @@ msgstr "Groepsleden"
 msgid "Folder administrators"
 msgstr "Map beheerders"
 
+#: plugins/admin/groups/application_options.tpl:1
+msgid "Application options"
+msgstr "Programma opties"
+
 #: plugins/admin/groups/class_groupApplication.inc:61
 msgid "This 'dn' is no appgroup."
 msgstr "Deze 'dn' bevat geen programma informatie"
@@ -3530,40 +3544,6 @@ msgstr ""
 "veranderingen worden onmiddelijk doorgevoerd. Onthoud het nieuwe wachtwoord "
 "a.u.b. aangezien de gebruiker niet in kan loggen zonder dit wachtwoord."
 
-#: plugins/admin/users/template.tpl:2
-msgid "Creating a new user using templates"
-msgstr "Een nieuwe gebruiker aanmaken m.b.v. een sjabloon"
-
-#: plugins/admin/users/template.tpl:6
-msgid ""
-"Creating a new user can be assisted by using templates. Many database "
-"records will be filled automatically. Choose <b>none</b> to skip the usage "
-"of templates."
-msgstr ""
-"Het aanmaken van een nieuwe gebruiker kan m.b.v. sjablonen gebeuren. Veel "
-"database records zullen dan automatisch gevuld worden. Kies <b>geen</b> om "
-"het gebruik van sjablonen over te slaan."
-
-#: plugins/admin/users/template.tpl:11
-#: plugins/admin/users/class_userManagement.inc:619
-msgid "Template"
-msgstr "Sjabloon"
-
-#: plugins/admin/users/template.tpl:44
-#: ihtml/themes/altlinux/setup_introduction.tpl:10
-#: ihtml/themes/altlinux/setup_step2.tpl:16
-#: ihtml/themes/altlinux/setup_step3.tpl:12
-#: ihtml/themes/default/setup_introduction.tpl:12
-#: ihtml/themes/default/setup_useradmin.tpl:41
-#: ihtml/themes/default/setup_step2.tpl:13
-#: ihtml/themes/default/setup_step3.tpl:18
-msgid "Continue"
-msgstr "Doorgaan"
-
-#: plugins/admin/users/main.inc:40 plugins/admin/users/main.inc:46
-msgid "User administration"
-msgstr "Gebruikersbeheer"
-
 #: plugins/admin/users/class_userManagement.inc:25
 msgid "Users"
 msgstr "Gebruikers"
@@ -3592,6 +3572,36 @@ msgstr "geen"
 #: plugins/admin/users/class_userManagement.inc:436
 msgid "A person with the choosen name is already used in this tree."
 msgstr "Er bestaat al een persoon met deze naam in deze tree."
+
+#: plugins/admin/users/class_userManagement.inc:619
+#: plugins/admin/users/template.tpl:11
+msgid "Template"
+msgstr "Sjabloon"
+
+#: plugins/admin/users/template.tpl:2
+msgid "Creating a new user using templates"
+msgstr "Een nieuwe gebruiker aanmaken m.b.v. een sjabloon"
+
+#: plugins/admin/users/template.tpl:6
+msgid ""
+"Creating a new user can be assisted by using templates. Many database "
+"records will be filled automatically. Choose <b>none</b> to skip the usage "
+"of templates."
+msgstr ""
+"Het aanmaken van een nieuwe gebruiker kan m.b.v. sjablonen gebeuren. Veel "
+"database records zullen dan automatisch gevuld worden. Kies <b>geen</b> om "
+"het gebruik van sjablonen over te slaan."
+
+#: plugins/admin/users/template.tpl:44
+#: ihtml/themes/altlinux/setup_introduction.tpl:10
+#: ihtml/themes/altlinux/setup_step2.tpl:16
+#: ihtml/themes/altlinux/setup_step3.tpl:12
+#: ihtml/themes/default/setup_introduction.tpl:12
+#: ihtml/themes/default/setup_useradmin.tpl:41
+#: ihtml/themes/default/setup_step2.tpl:13
+#: ihtml/themes/default/setup_step3.tpl:18
+msgid "Continue"
+msgstr "Doorgaan"
 
 #: plugins/admin/users/remove.tpl:7
 msgid ""
@@ -3694,6 +3704,48 @@ msgstr "Selecteer om gebruikers te zien die Fax instellingen hebben"
 msgid "Show FAX users"
 msgstr "Toon Fax gebruikers"
 
+#: plugins/admin/users/main.inc:40 plugins/admin/users/main.inc:46
+msgid "User administration"
+msgstr "Gebruikersbeheer"
+
+#: plugins/admin/applications/class_applicationParameters.inc:47
+msgid "Remove options"
+msgstr "Opties verwijderen"
+
+#: plugins/admin/applications/class_applicationParameters.inc:48
+msgid "This application has options. You can disable them by clicking below."
+msgstr ""
+"Dit programma heeft opties ingeschakeld. U kunt deze uitschakelen door de "
+"knop hieronder te gebruiken."
+
+#: plugins/admin/applications/class_applicationParameters.inc:50
+msgid "Create options"
+msgstr "Opties aanmaken"
+
+#: plugins/admin/applications/class_applicationParameters.inc:51
+msgid ""
+"This application has options disabled. You can enable them by clicking below."
+msgstr ""
+"Dit programma heeft opties uitgeschakeld. U kunt deze inschakelen door de "
+"knop hieronder te gebruiken."
+
+#: plugins/admin/applications/class_applicationParameters.inc:87
+msgid "Variable"
+msgstr "Variabele"
+
+#: plugins/admin/applications/class_applicationParameters.inc:87
+msgid "Default value"
+msgstr "Standaard waarde"
+
+#: plugins/admin/applications/class_applicationParameters.inc:98
+msgid "Add option"
+msgstr "Optie toevoegen"
+
+#: plugins/admin/applications/class_applicationParameters.inc:149
+#, php-format
+msgid "Value '%s' specified as option name is not valid."
+msgstr "Waarde '%s' die opgegeven is als optienaam is niet geldig."
+
 #: plugins/admin/applications/generic.tpl:7
 #: plugins/admin/applications/generic.tpl:8
 msgid "Application name"
@@ -3750,44 +3802,6 @@ msgstr "Plaats icoon op de desktop van groepsleden"
 msgid "Place entry in members startmenu"
 msgstr "Plaats programma in het startmenu van groepsleden"
 
-#: plugins/admin/applications/class_applicationParameters.inc:47
-msgid "Remove options"
-msgstr "Opties verwijderen"
-
-#: plugins/admin/applications/class_applicationParameters.inc:48
-msgid "This application has options. You can disable them by clicking below."
-msgstr ""
-"Dit programma heeft opties ingeschakeld. U kunt deze uitschakelen door de "
-"knop hieronder te gebruiken."
-
-#: plugins/admin/applications/class_applicationParameters.inc:50
-msgid "Create options"
-msgstr "Opties aanmaken"
-
-#: plugins/admin/applications/class_applicationParameters.inc:51
-msgid ""
-"This application has options disabled. You can enable them by clicking below."
-msgstr ""
-"Dit programma heeft opties uitgeschakeld. U kunt deze inschakelen door de "
-"knop hieronder te gebruiken."
-
-#: plugins/admin/applications/class_applicationParameters.inc:87
-msgid "Variable"
-msgstr "Variabele"
-
-#: plugins/admin/applications/class_applicationParameters.inc:87
-msgid "Default value"
-msgstr "Standaard waarde"
-
-#: plugins/admin/applications/class_applicationParameters.inc:98
-msgid "Add option"
-msgstr "Optie toevoegen"
-
-#: plugins/admin/applications/class_applicationParameters.inc:149
-#, php-format
-msgid "Value '%s' specified as option name is not valid."
-msgstr "Waarde '%s' die opgegeven is als optienaam is niet geldig."
-
 #: plugins/admin/applications/remove.tpl:7
 msgid ""
 "This may be used by several groups. Please double check if your really want "
@@ -3837,16 +3851,6 @@ msgstr "Reguliere expressie voor overeenkomende programma namen"
 msgid "Application management"
 msgstr "Programma beheer"
 
-#: plugins/admin/applications/class_applicationManagement.inc:185
-#, php-format
-msgid "You're about to delete the application '%s'."
-msgstr "U staat op het punt de programma '%s' te verwijderen."
-
-#: plugins/admin/applications/class_applicationManagement.inc:191
-#: plugins/admin/applications/class_applicationManagement.inc:217
-msgid "You are not allowed to delete this application!"
-msgstr "U heeft geen toestemming dit programma te verwijderen"
-
 #: plugins/admin/applications/class_applicationGeneric.inc:59
 msgid "This 'dn' is no application."
 msgstr "Deze 'dn' is geen programma."
@@ -3871,6 +3875,16 @@ msgstr "Vereist veld 'Uitvoeren' is leeg."
 #: plugins/admin/applications/class_applicationGeneric.inc:246
 msgid "There's already an application with this 'Name'."
 msgstr "Er is al een programma met deze 'Naam'."
+
+#: plugins/admin/applications/class_applicationManagement.inc:185
+#, php-format
+msgid "You're about to delete the application '%s'."
+msgstr "U staat op het punt de programma '%s' te verwijderen."
+
+#: plugins/admin/applications/class_applicationManagement.inc:191
+#: plugins/admin/applications/class_applicationManagement.inc:217
+msgid "You are not allowed to delete this application!"
+msgstr "U heeft geen toestemming dit programma te verwijderen"
 
 #: plugins/admin/departments/generic.tpl:4
 #: plugins/admin/systems/terminal.tpl:1
@@ -3982,20 +3996,6 @@ msgstr "Reguliere expressie voor overeenkomende afdelingen"
 msgid "Department management"
 msgstr "Afdeling beheer"
 
-#: plugins/admin/departments/class_departmentManagement.inc:25
-#: plugins/admin/ogroups/class_ogroupManagement.inc:43
-msgid "Departments"
-msgstr "Afdelingen"
-
-#: plugins/admin/departments/class_departmentManagement.inc:130
-#, php-format
-msgid "You're about to delete the whole LDAP subtree placed under '%s'."
-msgstr "U staat op het punt de hele LDAP subtree onder '%s' te verwijderen."
-
-#: plugins/admin/departments/class_departmentManagement.inc:145
-msgid "You have no permission to remove this department."
-msgstr "U heeft geen toestemming om deze afdeling te verwijderen."
-
 #: plugins/admin/departments/class_departmentGeneric.inc:129
 msgid "You have no permissions to create a department on this 'Base'."
 msgstr ""
@@ -4017,6 +4017,25 @@ msgstr "Het veld 'Naam' bevat het gereserveerde woord 'incoming'."
 #: plugins/admin/departments/class_departmentGeneric.inc:152
 msgid " Please choose another name."
 msgstr "Kies a.u.b. een andere naam."
+
+#: plugins/admin/departments/class_departmentManagement.inc:25
+#: plugins/admin/ogroups/class_ogroupManagement.inc:43
+msgid "Departments"
+msgstr "Afdelingen"
+
+#: plugins/admin/departments/class_departmentManagement.inc:130
+#, php-format
+msgid "You're about to delete the whole LDAP subtree placed under '%s'."
+msgstr "U staat op het punt de hele LDAP subtree onder '%s' te verwijderen."
+
+#: plugins/admin/departments/class_departmentManagement.inc:145
+msgid "You have no permission to remove this department."
+msgstr "U heeft geen toestemming om deze afdeling te verwijderen."
+
+#: plugins/admin/systems/class_terminalInfo.inc:53
+#: plugins/admin/systems/class_terminalInfo.inc:170
+msgid "present"
+msgstr "aanwezig"
 
 #: plugins/admin/systems/class_terminalInfo.inc:62
 #: plugins/admin/systems/class_terminalService.inc:136
@@ -4198,42 +4217,6 @@ msgstr "Audio service"
 msgid "GUI"
 msgstr "GUI"
 
-#: plugins/admin/systems/main.inc:45 plugins/admin/systems/main.inc:47
-msgid "System management"
-msgstr "Systeembeheer"
-
-#: plugins/admin/systems/servservice.tpl:11
-msgid "Nfs Export"
-msgstr "NFS Export"
-
-#: plugins/admin/systems/servservice.tpl:37
-msgid "Time Service"
-msgstr "Tijd Service"
-
-#: plugins/admin/systems/servservice.tpl:61
-msgid "LDAP Service"
-msgstr "LDAP Service"
-
-#: plugins/admin/systems/servservice.tpl:72
-msgid "Terminal Service"
-msgstr "Terminal Service"
-
-#: plugins/admin/systems/servservice.tpl:77
-msgid "Temporary disable login"
-msgstr "Schakel inlog mogelijkheid tijdelijk uit"
-
-#: plugins/admin/systems/servservice.tpl:80
-msgid "Font path"
-msgstr "Font path"
-
-#: plugins/admin/systems/servservice.tpl:93
-msgid "Syslog Service"
-msgstr "Syslog Service"
-
-#: plugins/admin/systems/servservice.tpl:101
-msgid "Print Service"
-msgstr "Print Service"
-
 #: plugins/admin/systems/class_terminalService.inc:83
 msgid "default"
 msgstr "standaard"
@@ -4272,23 +4255,41 @@ msgstr "Geef a.u.b. een geldig VSync bereik op."
 msgid "Please specify a valid HSync range."
 msgstr "Geef a.u.b. een geldig HSync bereik op."
 
-#: plugins/admin/systems/class_servDB.inc:127
-#: plugins/admin/systems/class_servDB.inc:143
-#: plugins/admin/systems/class_servDB.inc:149
-#: plugins/admin/systems/class_servDB.inc:154
-#: plugins/admin/systems/class_servDB.inc:160
-#, php-format
-msgid "The attribute '%s' is empty or contains invalid characters."
-msgstr "Het atribuut '%s' is leeg of bevat ongeldige karakters!"
+#: plugins/admin/systems/main.inc:45 plugins/admin/systems/main.inc:47
+msgid "System management"
+msgstr "Systeembeheer"
 
-#: plugins/admin/systems/class_servDB.inc:133
-#, php-format
-msgid "The imap connect string needs to be in the form '%s'."
-msgstr "De imap verbindings string dient in eruit te zien als '%s'."
+#: plugins/admin/systems/servservice.tpl:11
+msgid "Nfs Export"
+msgstr "NFS Export"
 
-#: plugins/admin/systems/class_servDB.inc:137
-msgid "The sieve port needs to be numeric."
-msgstr "De sieve poort dient nummeriek te zijn."
+#: plugins/admin/systems/servservice.tpl:37
+msgid "Time Service"
+msgstr "Tijd Service"
+
+#: plugins/admin/systems/servservice.tpl:61
+msgid "LDAP Service"
+msgstr "LDAP Service"
+
+#: plugins/admin/systems/servservice.tpl:72
+msgid "Terminal Service"
+msgstr "Terminal Service"
+
+#: plugins/admin/systems/servservice.tpl:77
+msgid "Temporary disable login"
+msgstr "Schakel inlog mogelijkheid tijdelijk uit"
+
+#: plugins/admin/systems/servservice.tpl:80
+msgid "Font path"
+msgstr "Font path"
+
+#: plugins/admin/systems/servservice.tpl:93
+msgid "Syslog Service"
+msgstr "Syslog Service"
+
+#: plugins/admin/systems/servservice.tpl:101
+msgid "Print Service"
+msgstr "Print Service"
 
 #: plugins/admin/systems/server.tpl:6
 msgid "Server name"
@@ -4311,73 +4312,6 @@ msgstr "Actie"
 #: plugins/admin/systems/server.tpl:42
 msgid "Select action to execute for this server"
 msgstr "Selecteer de voor deze server uit te voeren actie"
-
-#: plugins/admin/systems/phone.tpl:6
-msgid "Phone name"
-msgstr "Telefoon naam"
-
-#: plugins/admin/systems/terminal.tpl:9
-msgid "Terminal template"
-msgstr "Terminal sjabloon"
-
-#: plugins/admin/systems/terminal.tpl:11
-msgid "Terminal name"
-msgstr "Terminal naam"
-
-#: plugins/admin/systems/terminal.tpl:36
-#: plugins/admin/systems/workstation.tpl:36
-msgid "Mode"
-msgstr "Modus"
-
-#: plugins/admin/systems/terminal.tpl:38
-#: plugins/admin/systems/workstation.tpl:38
-msgid "Select terminal mode"
-msgstr "Selecteer terminal modus"
-
-#: plugins/admin/systems/terminal.tpl:52
-#: plugins/admin/systems/workstation.tpl:52
-msgid "Root server"
-msgstr "Root server"
-
-#: plugins/admin/systems/terminal.tpl:54
-#: plugins/admin/systems/workstation.tpl:54
-msgid "Select NFS root filesystem to use"
-msgstr "Selecteer het te gebruiken NFS root bestandssysteem"
-
-#: plugins/admin/systems/terminal.tpl:60
-#: plugins/admin/systems/workstation.tpl:60
-msgid "Swap server"
-msgstr "Swap server"
-
-#: plugins/admin/systems/terminal.tpl:62
-#: plugins/admin/systems/workstation.tpl:62
-msgid "Choose NFS filesystem to place swap files on"
-msgstr "Kies het NFS bestandssysteem waarop de swapbestanden geplaatst worden"
-
-#: plugins/admin/systems/terminal.tpl:74
-#: plugins/admin/systems/workstation.tpl:74
-msgid "Syslog server"
-msgstr "Syslog server"
-
-#: plugins/admin/systems/terminal.tpl:76
-#: plugins/admin/systems/workstation.tpl:76
-msgid "Choose server to use for logging"
-msgstr "Selecteer de server die gebruikt wordt voor log doeleinden"
-
-#: plugins/admin/systems/terminal.tpl:82
-#: plugins/admin/systems/workstation.tpl:82
-msgid "NTP server"
-msgstr "NTP tijdserver"
-
-#: plugins/admin/systems/terminal.tpl:84
-#: plugins/admin/systems/workstation.tpl:84
-msgid "Choose server to use for synchronizing time"
-msgstr "Selecteer de server die gebruikt wordt voor tijdsynchronisatie"
-
-#: plugins/admin/systems/terminal.tpl:103
-#: plugins/admin/systems/workstation.tpl:103
-msgid "Select action to execute for this terminal"
-msgstr "Selecteer de voor deze terminal uit te voeren actie"
 
 #: plugins/admin/systems/class_terminalGeneric.inc:63
 #: plugins/admin/systems/class_workstationGeneric.inc:71
@@ -4457,6 +4391,10 @@ msgstr ""
 msgid "The required field 'Terminal name' is not set."
 msgstr "Het vereiste veld 'Terminal naam' is leeg."
 
+#: plugins/admin/systems/phone.tpl:6
+msgid "Phone name"
+msgstr "Telefoon naam"
+
 #: plugins/admin/systems/class_servGeneric.inc:49
 msgid "This 'dn' has no server features."
 msgstr "Deze 'dn' heeft geen server mogelijkheden."
@@ -4469,6 +4407,69 @@ msgstr "Het vereiste veld 'Servernaam' is leeg."
 msgid "You have no permissions to create a server on this 'Base'."
 msgstr ""
 "U heeft geen toestemming om een server aan te maken onder deze 'Basis'."
+
+#: plugins/admin/systems/terminal.tpl:9
+msgid "Terminal template"
+msgstr "Terminal sjabloon"
+
+#: plugins/admin/systems/terminal.tpl:11
+msgid "Terminal name"
+msgstr "Terminal naam"
+
+#: plugins/admin/systems/terminal.tpl:36
+#: plugins/admin/systems/workstation.tpl:36
+msgid "Mode"
+msgstr "Modus"
+
+#: plugins/admin/systems/terminal.tpl:38
+#: plugins/admin/systems/workstation.tpl:38
+msgid "Select terminal mode"
+msgstr "Selecteer terminal modus"
+
+#: plugins/admin/systems/terminal.tpl:52
+#: plugins/admin/systems/workstation.tpl:52
+msgid "Root server"
+msgstr "Root server"
+
+#: plugins/admin/systems/terminal.tpl:54
+#: plugins/admin/systems/workstation.tpl:54
+msgid "Select NFS root filesystem to use"
+msgstr "Selecteer het te gebruiken NFS root bestandssysteem"
+
+#: plugins/admin/systems/terminal.tpl:60
+#: plugins/admin/systems/workstation.tpl:60
+msgid "Swap server"
+msgstr "Swap server"
+
+#: plugins/admin/systems/terminal.tpl:62
+#: plugins/admin/systems/workstation.tpl:62
+msgid "Choose NFS filesystem to place swap files on"
+msgstr "Kies het NFS bestandssysteem waarop de swapbestanden geplaatst worden"
+
+#: plugins/admin/systems/terminal.tpl:74
+#: plugins/admin/systems/workstation.tpl:74
+msgid "Syslog server"
+msgstr "Syslog server"
+
+#: plugins/admin/systems/terminal.tpl:76
+#: plugins/admin/systems/workstation.tpl:76
+msgid "Choose server to use for logging"
+msgstr "Selecteer de server die gebruikt wordt voor log doeleinden"
+
+#: plugins/admin/systems/terminal.tpl:82
+#: plugins/admin/systems/workstation.tpl:82
+msgid "NTP server"
+msgstr "NTP tijdserver"
+
+#: plugins/admin/systems/terminal.tpl:84
+#: plugins/admin/systems/workstation.tpl:84
+msgid "Choose server to use for synchronizing time"
+msgstr "Selecteer de server die gebruikt wordt voor tijdsynchronisatie"
+
+#: plugins/admin/systems/terminal.tpl:103
+#: plugins/admin/systems/workstation.tpl:103
+msgid "Select action to execute for this terminal"
+msgstr "Selecteer de voor deze terminal uit te voeren actie"
 
 #: plugins/admin/systems/class_servDHCP.inc:33
 msgid "Remove DHCP service"
@@ -4493,18 +4494,6 @@ msgid ""
 msgstr ""
 "Deze server heeft DHCP mogelijkheden uitgeschakeld. U kunt deze inschakelen "
 "door de knop hieronder te gebruiken."
-
-#: plugins/admin/systems/printer.tpl:6
-msgid "Printer name"
-msgstr "Printernaam"
-
-#: plugins/admin/systems/printer.tpl:32
-msgid "Printer URL"
-msgstr "Printer URL"
-
-#: plugins/admin/systems/printer.tpl:36
-msgid "Path to PPD"
-msgstr "Directory van PPD"
 
 #: plugins/admin/systems/class_workstationGeneric.inc:136
 msgid "This 'dn' has no workstation features."
@@ -4566,14 +4555,17 @@ msgstr "Thin client sjabloon voor"
 msgid "Workstation template for"
 msgstr "Werkstation sjabloon voor"
 
-#: plugins/admin/systems/class_printGeneric.inc:57
-msgid "This 'dn' has no printer features."
-msgstr "Deze 'dn' heeft geen printer mogelijkheden."
+#: plugins/admin/systems/printer.tpl:6
+msgid "Printer name"
+msgstr "Printernaam"
 
-#: plugins/admin/systems/class_printGeneric.inc:126
-msgid "You have no permissions to create a printer on this 'Base'."
-msgstr ""
-"U heeft geen toestemming om een printer aan te maken onder deze 'Basis'."
+#: plugins/admin/systems/printer.tpl:32
+msgid "Printer URL"
+msgstr "Printer URL"
+
+#: plugins/admin/systems/printer.tpl:36
+msgid "Path to PPD"
+msgstr "Directory van PPD"
 
 #: plugins/admin/systems/class_servDNS.inc:33
 msgid "Remove DNS service"
@@ -4596,6 +4588,24 @@ msgid ""
 msgstr ""
 "Deze server heeft DNS mogelijkheden uitgeschakeld. U kunt deze inschakelen "
 "door de knop hieronder te gebruiken."
+
+#: plugins/admin/systems/class_servDB.inc:127
+#: plugins/admin/systems/class_servDB.inc:143
+#: plugins/admin/systems/class_servDB.inc:149
+#: plugins/admin/systems/class_servDB.inc:154
+#: plugins/admin/systems/class_servDB.inc:160
+#, php-format
+msgid "The attribute '%s' is empty or contains invalid characters."
+msgstr "Het atribuut '%s' is leeg of bevat ongeldige karakters!"
+
+#: plugins/admin/systems/class_servDB.inc:133
+#, php-format
+msgid "The imap connect string needs to be in the form '%s'."
+msgstr "De imap verbindings string dient in eruit te zien als '%s'."
+
+#: plugins/admin/systems/class_servDB.inc:137
+msgid "The sieve port needs to be numeric."
+msgstr "De sieve poort dient nummeriek te zijn."
 
 #: plugins/admin/systems/workstation.tpl:9
 msgid "Workstation template"
@@ -4804,6 +4814,15 @@ msgstr "Accepteer Internet E-mail"
 #: plugins/admin/systems/servkolab.tpl:167
 msgid "Accept mail from other domains over non-authenticated SMTP"
 msgstr "Accepteer E-mail van andere domeinen over niet geauthenticeerde SMTP"
+
+#: plugins/admin/systems/class_printGeneric.inc:57
+msgid "This 'dn' has no printer features."
+msgstr "Deze 'dn' heeft geen printer mogelijkheden."
+
+#: plugins/admin/systems/class_printGeneric.inc:126
+msgid "You have no permissions to create a printer on this 'Base'."
+msgstr ""
+"U heeft geen toestemming om een printer aan te maken onder deze 'Basis'."
 
 #: plugins/admin/systems/wingeneric.tpl:6
 msgid "Machine name"
@@ -5333,6 +5352,42 @@ msgstr ""
 msgid "Select action to execute for this   group of terminals"
 msgstr "Selecteer de voor deze terminal-groep uit te voeren actie"
 
+#: plugins/admin/ogroups/class_ogroupManagement.inc:25
+#: plugins/admin/ogroups/main.inc:34 plugins/admin/ogroups/main.inc:39
+msgid "Object groups"
+msgstr "Objectgroepen"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:41
+msgid "UNIX accounts"
+msgstr "Unix accounts"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:45
+msgid "Servers"
+msgstr "Servers"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:46
+msgid "Thin Clients"
+msgstr "Thin Clients"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:47
+msgid "Workstations"
+msgstr "Werkstations"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:49
+#: plugins/generic/references/class_reference.inc:52
+msgid "Printer"
+msgstr "Printer"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:150
+#, php-format
+msgid "You're about to delete the object group '%s'."
+msgstr "U staat op het punt de objectgroep '%s' te verwijderen."
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:156
+#: plugins/admin/ogroups/class_ogroupManagement.inc:182
+msgid "You are not allowed to delete this object group!"
+msgstr "U heeft geen toestemming deze objectgroep te verwijderen!"
+
 #: plugins/admin/ogroups/class_ogroup.inc:91
 msgid "This 'dn' is no object group."
 msgstr "Deze 'dn' is geen objectgroep."
@@ -5392,42 +5447,6 @@ msgstr "Objectgroepen hebben ten minste een groepslid nodig!"
 #: plugins/admin/ogroups/class_ogroup.inc:505
 msgid "You can combine two different object types at maximum only!"
 msgstr "U kunt maximaal twee verschillende object types tegelijk combineren!"
-
-#: plugins/admin/ogroups/main.inc:34 plugins/admin/ogroups/main.inc:39
-#: plugins/admin/ogroups/class_ogroupManagement.inc:25
-msgid "Object groups"
-msgstr "Objectgroepen"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:41
-msgid "UNIX accounts"
-msgstr "Unix accounts"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:45
-msgid "Servers"
-msgstr "Servers"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:46
-msgid "Thin Clients"
-msgstr "Thin Clients"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:47
-msgid "Workstations"
-msgstr "Werkstations"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:49
-#: plugins/generic/references/class_reference.inc:52
-msgid "Printer"
-msgstr "Printer"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:150
-#, php-format
-msgid "You're about to delete the object group '%s'."
-msgstr "U staat op het punt de objectgroep '%s' te verwijderen."
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:156
-#: plugins/admin/ogroups/class_ogroupManagement.inc:182
-msgid "You are not allowed to delete this object group!"
-msgstr "U heeft geen toestemming deze objectgroep te verwijderen!"
 
 #: plugins/admin/ogroups/generic.tpl:9
 msgid "Name of the group"
@@ -5490,10 +5509,6 @@ msgstr "Toon groepen die terminals bevatten"
 #: plugins/admin/ogroups/headpage.tpl:56
 msgid "Show groups containing printers"
 msgstr "Toon groepen die printers bevatten"
-
-#: plugins/gofon/phoneaccount/main.inc:120
-msgid "Phone settings"
-msgstr "Telefoon instellingen"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:114
 msgid "This account has no phone extensions."
@@ -5570,6 +5585,10 @@ msgstr "Telefoonnummer"
 #: plugins/gofon/phoneaccount/generic.tpl:60
 msgid "Timeout (s)"
 msgstr "Timeout (s)"
+
+#: plugins/gofon/phoneaccount/main.inc:120
+msgid "Phone settings"
+msgstr "Telefoon instellingen"
 
 #: plugins/gofon/reports/class_fonreport.inc:6
 msgid "Phone Reports"
@@ -5671,21 +5690,21 @@ msgstr "Het GOsa team"
 msgid "Welcome %s!"
 msgstr "Welkom %s!"
 
-#: include/functions.inc:267
+#: include/functions.inc:272
 #, php-format
 msgid "Error when connecting the LDAP. Server said '%s'."
 msgstr "Fout bij het verbinden met de LDAP server. De server meldt: '%s'."
 
-#: include/functions.inc:288
+#: include/functions.inc:293
 #, php-format
 msgid "User login failed. LDAP server said '%s'."
 msgstr "Gebruikers inlog mislukt. De LDAP server meldt: '%s'."
 
-#: include/functions.inc:308
+#: include/functions.inc:313
 msgid "Username / UID is not unique. Please check your LDAP database."
 msgstr "Gebruikersnaam / UID is niet uniek. Controleer uw LDAP database a.u.b."
 
-#: include/functions.inc:346
+#: include/functions.inc:351
 msgid ""
 "Error while adding a lock. Parameters are not set correctly, please check "
 "the source!"
@@ -5693,7 +5712,7 @@ msgstr ""
 "Fout bij het plaatsen van een blokkade. Parameters zijn niet goed ingesteld. "
 "Controleer de bron!"
 
-#: include/functions.inc:356
+#: include/functions.inc:361
 #, php-format
 msgid ""
 "Can't set locking information in LDAP database. Please check the 'config' "
@@ -5702,17 +5721,17 @@ msgstr ""
 "Kan de blokkade informatie niet instellen in de LDAP database. Controleer a."
 "u.b. de 'config' regel in gosa.conf! De LDAP server meldt: '%s'."
 
-#: include/functions.inc:371
+#: include/functions.inc:376
 #, php-format
 msgid "Adding a lock failed. LDAP server says '%s'."
 msgstr "Plaatsen van een blokkade mislukt. De LDAP server meldt: '%s'."
 
-#: include/functions.inc:397
+#: include/functions.inc:402
 #, php-format
 msgid "Removing a lock failed. LDAP server says '%s'."
 msgstr "Verwijderen van een blokkade mislukt. De LDAP server meldt: '%s'."
 
-#: include/functions.inc:427
+#: include/functions.inc:432
 msgid ""
 "Getting the lock from LDAP failed. Parameters are not set correctly, please "
 "check the source!"
@@ -5720,7 +5739,7 @@ msgstr ""
 "Ophalen van de blokkade uit de LDAP database is mislukt. Parameters zijn "
 "niet goed ingesteld. Controleer de bron!"
 
-#: include/functions.inc:437
+#: include/functions.inc:442
 msgid ""
 "Can't get locking information in LDAP database. Please check the 'config' "
 "entry in gosa.conf!"
@@ -5728,7 +5747,7 @@ msgstr ""
 "Kan de blokkade informatie niet ophalen uit de LDAP database. Controleer a.u."
 "b. de 'config' regel in gosa.conf!"
 
-#: include/functions.inc:445
+#: include/functions.inc:450
 msgid ""
 "Found multiple locks for object to be locked. This should not be possible - "
 "cleaning up multiple references."
@@ -5736,12 +5755,12 @@ msgstr ""
 "Er zijn meerdere blokkades voor het te blokkeren object gevonden. Dat zou "
 "niet mogelijk moeten zijn. Meervoudige verwijzingen worden opgeschoond."
 
-#: include/functions.inc:517
+#: include/functions.inc:522
 #, php-format
 msgid "The size limit of %d entries is exceed!"
 msgstr "De hoeveelheidslimiet van %d invoeren is overschreden!"
 
-#: include/functions.inc:519
+#: include/functions.inc:524
 #, php-format
 msgid ""
 "Set the new size limit to %s and show me this message if the limit still "
@@ -5750,15 +5769,15 @@ msgstr ""
 "Stel de nieuwe hoeveelheidslimiet in op %s en toon me dit bericht indien de "
 "limiet nog steeds overschreden wordt."
 
-#: include/functions.inc:531
+#: include/functions.inc:536
 msgid "Configure"
 msgstr "Instellen"
 
-#: include/functions.inc:536
+#: include/functions.inc:541
 msgid "incomplete"
 msgstr "onvolledig"
 
-#: include/functions.inc:919
+#: include/functions.inc:924
 #, php-format
 msgid ""
 "You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
@@ -5768,61 +5787,61 @@ msgstr ""
 "gebruiker '%s'. Neem a.u.b. contact op met deze persoon om eea kort te "
 "sluiten."
 
-#: include/functions.inc:1018
+#: include/functions.inc:1023
 msgid "LDAP error:"
 msgstr "LDAP fout:"
 
-#: include/functions.inc:1464
+#: include/functions.inc:1469
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-#: include/functions.inc:1509
+#: include/functions.inc:1512
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "GOsa ontwikkelversie (Revisie %s)"
 
-#: include/functions.inc:1556
+#: include/functions.inc:1559
 msgid "Generating this page caused the PHP interpreter to raise some errors!"
 msgstr ""
 "Er is minimaal één PHP fout opgetreden bij het genereren van deze pagina!"
 
-#: include/functions.inc:1556
+#: include/functions.inc:1559
 msgid "Toggle information"
 msgstr "Informatie weergeven/verbergen"
 
-#: include/functions.inc:1561
+#: include/functions.inc:1564
 msgid "PHP error"
 msgstr "PHP fout"
 
-#: include/functions.inc:1572
+#: include/functions.inc:1575
 msgid "class"
 msgstr "klasse"
 
-#: include/functions.inc:1578
+#: include/functions.inc:1581
 msgid "function"
 msgstr "functie"
 
-#: include/functions.inc:1583
+#: include/functions.inc:1586
 msgid "static"
 msgstr "statisch"
 
-#: include/functions.inc:1587
+#: include/functions.inc:1590
 msgid "method"
 msgstr "methode"
 
-#: include/functions.inc:1604
+#: include/functions.inc:1607
 msgid "Trace"
 msgstr "Trace"
 
-#: include/functions.inc:1605
+#: include/functions.inc:1608
 msgid "File"
 msgstr "Bestand"
 
-#: include/functions.inc:1605
+#: include/functions.inc:1608
 msgid "Line"
 msgstr "Regel"
 
-#: include/functions.inc:1606
+#: include/functions.inc:1609
 msgid "Arguments"
 msgstr "Argumenten"
 
@@ -5892,479 +5911,6 @@ msgstr "Kan het SIEVE script niet versturen. De server meldt: '%s'."
 msgid "Can't activate GOsa sieve script. Server says '%s'."
 msgstr "Kan het GOsa SIEVE script niet activeren. De server meldt: '%s'."
 
-#: include/class_pluglist.inc:98
-msgid ""
-"Your gosa.conf information has changed partly. Please convert it using the "
-"contributed script fix_config.sh!"
-msgstr ""
-"Uw gosa.conf is gedeeltelijk veranderd. Converteer het a.u.b. met het "
-"meegeleverde script fix_config.sh!"
-
-#: include/class_pluglist.inc:113 ihtml/themes/altlinux/framework.tpl:14
-#: ihtml/themes/altlinux/framework.tpl:24
-#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
-msgid ""
-"You are currently editing a database entry. Do you want to dismiss the "
-"changes?"
-msgstr ""
-"U bent momenteel database gegevens aan het bewerken. Wilt u eventuele "
-"wijzigingen ongedaan maken?"
-
-#: include/setup_checks.inc:72
-msgid "Can't bind to LDAP. No schema check possible!"
-msgstr "Kan niet verbinden met de LDAP server. Schema controle is onmogelijk!"
-
-#: include/setup_checks.inc:81 include/setup_checks.inc:90
-msgid "Can't get schema information from server. No schema check possible!"
-msgstr ""
-"Kan de schema informatie niet ophalen van de server. Schema controle is "
-"onmogelijk!"
-
-#: include/setup_checks.inc:110
-#, php-format
-msgid ""
-"Optional objectclass '%s' required by plugin '%s' is not present in LDAP "
-"setup"
-msgstr ""
-"De optionele objectklasse '%s' die benodigd is door module '%s' is niet "
-"aanwezig in de LDAP configuratie"
-
-#: include/setup_checks.inc:114
-#, php-format
-msgid ""
-"Optional objectclass '%s' required by plugin '%s' does not have version %s"
-msgstr ""
-"De optionele objectklasse '%s' die benodigd is door module '%s' heeft niet "
-"versienummer %s"
-
-#: include/setup_checks.inc:118
-#, php-format
-msgid "Support for '%s' enabled"
-msgstr "Ondersteuning voor '%s' is ingeschakeld"
-
-#: include/setup_checks.inc:128
-#, php-format
-msgid "Required objectclass '%s' is not present in LDAP setup"
-msgstr "Vereiste objectklasse '%s' is niet voorhanden in de LDAP configuratie"
-
-#: include/setup_checks.inc:132
-#, php-format
-msgid "Required objectclass '%s' does not have version %s"
-msgstr "Vereiste objectklasse '%s' heeft niet versienummer %s"
-
-#: include/setup_checks.inc:141
-msgid "SAMBA 3 support disabled, no schema seems to be installed"
-msgstr ""
-"SAMBA 3 ondersteuning is uitgeschakeld. Het LDAP schema is niet "
-"geïnstalleerd."
-
-#: include/setup_checks.inc:146
-msgid "SAMBA 3 support enabled"
-msgstr "SAMBA 3 ondersteuning is ingeschakeld"
-
-#: include/setup_checks.inc:151
-msgid "SAMBA 2 support disabled, no schema seems to be installed"
-msgstr ""
-"SAMBA 2 ondersteuning is uitgeschakeld. Het LDAP schema is niet "
-"geïnstalleerd."
-
-#: include/setup_checks.inc:156
-msgid "SAMBA 2 support enabled"
-msgstr "SAMBA 2 ondersteuning is ingeschakeld"
-
-#: include/setup_checks.inc:162
-msgid "Support for pureftp disabled, no schema seems to be installed"
-msgstr ""
-"PureFtp ondersteuning is uitgeschakeld. Het LDAP schema is niet geïnstallerd."
-
-#: include/setup_checks.inc:167
-msgid "Support for pureftp enabled"
-msgstr "PureFtp ondersteuning is ingeschakeld"
-
-#: include/setup_checks.inc:172
-msgid "Support for WebDAV disabled, no schema seems to be installed"
-msgstr ""
-"WebDAV ondersteuning is uitgeschakeld. Het LDAP schema is niet geïnstalleer."
-
-#: include/setup_checks.inc:177
-msgid "Support for WebDAV enabled"
-msgstr "WebDAV ondersteuning is ingeschakeld"
-
-#: include/setup_checks.inc:182
-msgid "Support for phpgroupware disabled, no schema seems to be installed"
-msgstr ""
-"Phpgroupware ondersteuning is uitgeschakeld. Het LDAP schema is niet "
-"geïnstalleerd."
-
-#: include/setup_checks.inc:187
-msgid "Support for phpgroupware enabled"
-msgstr "Phpgroupware ondersteuning is ingeschakeld"
-
-#: include/setup_checks.inc:192
-msgid "Support for gofon disabled, no schema seems to be installed"
-msgstr ""
-"Gofon ondersteuning is uitgeschakeld. Het LDAP schema is niet geïnstalleerd."
-
-#: include/setup_checks.inc:197
-msgid "Support for gofon enabled"
-msgstr "Gofon ondersteuning is ingeschakeld"
-
-#: include/setup_checks.inc:204
-msgid ""
-"Support for Kolab disabled, no schema seems to be installed, setting mail-"
-"method to cyrus"
-msgstr ""
-"Kolab ondersteuning is uitgeschakeld. Aangezien het LDAP schema niet "
-"geïnstalleed is, zal deE-mail methode op Cyrus ingesteld worden."
-
-#: include/setup_checks.inc:212
-msgid "Support for Kolab enabled"
-msgstr "Kolab ondersteuning is ingeschakeld"
-
-#: include/setup_checks.inc:229
-msgid "OK"
-msgstr "OK"
-
-#: include/setup_checks.inc:232
-msgid "Ignored"
-msgstr "Genegeerd"
-
-#: include/setup_checks.inc:234
-msgid "Failed"
-msgstr "Mislukt"
-
-#: include/setup_checks.inc:251
-msgid "PHP setup inspection"
-msgstr "PHP configuratie inspectie"
-
-#: include/setup_checks.inc:252
-msgid "Checking for PHP version (>=4.1.0)"
-msgstr "Controle op PHP versie (>=4.1.0)"
-
-#: include/setup_checks.inc:253
-msgid ""
-"PHP must be of version 4.1.0 or above for some functions and known bugs in "
-"PHP language."
-msgstr ""
-"PHP moet minimaal versienummer 4.1.0 hebben. GOsa gebruikt bepaalde "
-"functionaliteit die in voorgaande versies niet goed of helemaal niet "
-"voorhanden is."
-
-#: include/setup_checks.inc:256
-msgid "Checking if register_globals is set to 'off'"
-msgstr "Controle of 'register_globals' ingesteld staat op 'off'"
-
-#: include/setup_checks.inc:257
-msgid ""
-"register_globals is a PHP mechanism to register all global varibales to be "
-"accessible from scripts without changing the scope. This may be a security "
-"risk. GOsa will run in both modes."
-msgstr ""
-"'register_globals' is een PHP mechanisme om alle globale variabelen te "
-"registreren zodat deze toegankelijk zijn voor scripts zonder dat de scope "
-"veranderd hoeft te worden. Dit is een veiligheidsrisico. GOsa zal in beide "
-"modi draaien."
-
-#: include/setup_checks.inc:260
-msgid "Checking for ldap module"
-msgstr "Zoeken naar de LDAP module"
-
-#: include/setup_checks.inc:261
-msgid "This is the main module used by GOsa and therefore really required."
-msgstr "Dit is hoofd module die GOsa nodig heeft en is daarom noodzakelijk."
-
-#: include/setup_checks.inc:264
-#, fuzzy
-msgid "Checking for XML functions"
-msgstr "Zoeken naar iconv ondersteuning"
-
-#: include/setup_checks.inc:265
-msgid "XML functions are required to parse the configuration file."
-msgstr ""
-
-#: include/setup_checks.inc:268
-msgid "Checking for gettext support"
-msgstr "Zoeken naar gettext ondersteuning"
-
-#: include/setup_checks.inc:269
-msgid "Gettext support is required for internationalized GOsa."
-msgstr ""
-"Gettext ondersteuning is vereist voor ondersteuning van meerdere talen in "
-"GOsa."
-
-#: include/setup_checks.inc:271
-msgid "Checking for iconv support"
-msgstr "Zoeken naar iconv ondersteuning"
-
-#: include/setup_checks.inc:272
-msgid ""
-"This module is used by GOsa to convert samba munged dial informations and is "
-"therefore required."
-msgstr ""
-"Deze module wordt gebruikt door GOsa om samba munged dial informatie "
-"(terminal server) te converteren en is daarom vereist."
-
-#: include/setup_checks.inc:275
-msgid "Checking for mhash module"
-msgstr "Zoeken naar de mhash module"
-
-#: include/setup_checks.inc:276
-msgid ""
-"To use SSHA encryption, you'll need this module. If you are just using crypt "
-"or md5 encryption, ignore this message. GOsa will run without it."
-msgstr ""
-"Om SSHA encryptie te gebruiken heeft u deze module nodig. U kunt deze "
-"melding negeren indien u gewoon crypt of md5 encryptie gebruikt."
-
-#: include/setup_checks.inc:279
-msgid "Checking for imap module"
-msgstr "Zoeken naar de IMAP module"
-
-#: include/setup_checks.inc:280
-msgid ""
-"The IMAP module is needed to communicate with the IMAP server. It gets "
-"status informations, creates and deletes mail users."
-msgstr ""
-"De IMAP module is benodigd om met de IMAP server te communiceren. Het "
-"ontvangt status informatie, maakt E-mail gebruikers aan en verwijdert E-mail "
-"gebruikers."
-
-#: include/setup_checks.inc:283
-msgid "Checking for getacl in imap"
-msgstr "Controle op getacl in imap"
-
-#: include/setup_checks.inc:284
-msgid ""
-"The getacl support is needed for shared folder permissions. The standard "
-"IMAP module is not capable of reading acl's. You need a recend PHP version "
-"for this feature."
-msgstr ""
-"De getacl ondersteuning is nodig voor gedeelde map permissies. De standaard "
-"IMAP module is niet in staat om acl's te lezen. U heeft een recente PHP "
-"versie nodig voor deze mogelijkheid."
-
-#: include/setup_checks.inc:287
-msgid "Checking for mysql module"
-msgstr "Zoeken naar MySQL module"
-
-#: include/setup_checks.inc:288
-msgid "MySQL support is needed for reading GOfax reports from databases."
-msgstr ""
-"MySQL ondersteuning is nodig voor het lezen van GOfax rapporten uit "
-"databases."
-
-#: include/setup_checks.inc:291
-msgid "Checking for cups module"
-msgstr "Zoeken naar CUPS module"
-
-#: include/setup_checks.inc:292
-msgid ""
-"In order to read available printers from IPP protocol instead of printcap "
-"files, you've to install the CUPS module."
-msgstr ""
-"U moet de CUPS module installeren om beschikbare printers via het IPP "
-"protocol te kunnen aflezen i.p.v. via printcap bestanden."
-
-#: include/setup_checks.inc:295
-msgid "Checking for kadm5 module"
-msgstr "Zoeken naar kadm5 module"
-
-#: include/setup_checks.inc:296
-msgid ""
-"Managing users in kerberos requires the kadm5 module which is downloadable "
-"via PEAR network."
-msgstr ""
-"Het beheren van gebruikers in kerberos vereist de kadm5 module welke via het "
-"PEAR netwerk te downloaden is."
-
-#: include/setup_checks.inc:299
-msgid "Checking for snmp Module"
-msgstr "Zoeken naar de SNMP module"
-
-#: include/setup_checks.inc:300
-msgid ""
-"Simple Network Management Protocol (SNMP) is required for client monitoring."
-msgstr ""
-"Het Simple Network Management Protocol (SNMP) is vereist voor werkstation "
-"monitoring."
-
-#: include/setup_checks.inc:309
-msgid "Checking for some additional programms"
-msgstr "Zoeken naar enkele additionele programma's"
-
-#: include/setup_checks.inc:318
-msgid "Checking for ImageMagick (>=5.4.0)"
-msgstr "Zoeken naar ImageMagick (>=5.4.0)"
-
-#: include/setup_checks.inc:319
-msgid ""
-"ImageMagick is used to convert user supplied images to fit the suggested "
-"size and the unified JPEG format."
-msgstr ""
-"ImageMagick wordt gebruikt om gebruikers aangeleverde plaatjes te laten "
-"passen binnen de voorgestelde grootte en het uniforme JPEG formaat."
-
-#: include/setup_checks.inc:322
-msgid "Checking imagick module for PHP"
-msgstr "Zoeken naar de imagick module voor PHP"
-
-#: include/setup_checks.inc:323
-msgid ""
-"Imagick is used to convert user supplied images to fit the suggested size "
-"and the unified JPEG format from PHP script."
-msgstr ""
-"Imagick wordt gebruikt om gebruikers aangeleverde plaatjes te laten passen "
-"binnen de voorgestelde grootte en het uniforme JPEG formaat."
-
-#: include/setup_checks.inc:330
-msgid "Checking for fping utility"
-msgstr "Zoeken naar het fping programma"
-
-#: include/setup_checks.inc:331
-msgid ""
-"The fping utility is only used if you've got a thin client based terminal "
-"environment running."
-msgstr ""
-"Het fping programma wordt alleen gebruikt indien u een thin client "
-"gebaseerde terminal omgeving heeft draaien."
-
-#: include/setup_checks.inc:346
-msgid "Checking for a way to generate LM/NT password hashes"
-msgstr "Zoeken naar een manier om LM/NT wachtwoord hashes te genereren"
-
-#: include/setup_checks.inc:347
-msgid ""
-"In order to use SAMBA 2/3, you've to install some additional packages to "
-"generate password hashes."
-msgstr ""
-"Om Samba 2.x/3.x te gebruiken moet u enkele additionele pakketten "
-"installeren om wachtwoord hashes te genereren"
-
-#: include/setup_checks.inc:360
-msgid "php.ini check -> session.auto_register"
-msgstr "php.ini controle -> session.auto_register"
-
-#: include/setup_checks.inc:361
-msgid ""
-"In Order to use GOsa without any trouble, the session.auto_register option "
-"in your php.ini must be set to 'Off'."
-msgstr ""
-"Om GOsa zonder problemen te gebruiken, moet de session.auto_register optie "
-"in uw php.ini ingesteld zijn op 'Off'."
-
-#: include/setup_checks.inc:364
-msgid "php.ini check -> implicit_flush"
-msgstr "php.ini controle -> implicit_flush"
-
-#: include/setup_checks.inc:365
-msgid ""
-"This option influences the Output handling. Turn this Option off, to "
-"increase performance."
-msgstr ""
-"Deze Optie definieert Uitvoer afhandeling. Zet deze Optie uit om "
-"snelheiswinst te behalen"
-
-#: include/setup_checks.inc:372
-msgid "php.ini check -> max_execution_time"
-msgstr "php.ini controle -> max_execution_time"
-
-#: include/setup_checks.inc:373
-msgid ""
-"The Execution time should be at least 30 seconds, because some actions may "
-"consume more time."
-msgstr ""
-"De uitvoer tijd moet minimaal 30 seconden zijn, omdat sommige acties lang "
-"kunnen duren."
-
-#: include/setup_checks.inc:380
-msgid "php.ini check -> memory_limit"
-msgstr "php.ini controle -> memory_limit"
-
-#: include/setup_checks.inc:381
-msgid ""
-"GOsa needs at least 16MB of memory, less will cause unpredictable errors! "
-"Increase it for larger setups."
-msgstr ""
-"GOsa heeft tenminste 16MB geheugen nodig. Minder geheugen kan diverse "
-"onvoorspelbare fouten opleveren!.Verhoog deze waarde nog verder voor zeer "
-"grote omgevingen."
-
-#: include/setup_checks.inc:385
-msgid "php.ini check -> expose_php"
-msgstr "php.ini controle -> expose_php"
-
-#: include/setup_checks.inc:386
-msgid ""
-"Increase the server security by setting expose_php to 'off'. PHP won't send "
-"any Information about the server you are running in this case."
-msgstr ""
-"Verhoog de server veiligheid door 'expose_php' op 'Off' in te stellen. PHP "
-"zal dan geen enkele informatie over de Server die u gebruikt weergeven."
-
-#: include/setup_checks.inc:390
-msgid "php.ini check -> magic_quotes_gpc"
-msgstr "php.ini check -> magic_quotes_gpc"
-
-#: include/setup_checks.inc:391
-msgid ""
-"Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
-"escape all quotes in strings in this case."
-msgstr ""
-"Verhoog de server veiligheid door 'magic_quotes_gpc op 'On' in te stellen."
-"PHP zal dan alle aanhalingstekens in strings omzetten."
-
-#: include/setup_checks.inc:629
-msgid "You've to specify an ldap server before continuing!"
-msgstr "U moet een LDAP server specificeren voordat u verder gaat!"
-
-#: include/setup_checks.inc:638 include/setup_checks.inc:720
-msgid ""
-"Can't connect to the specified LDAP server! Please make sure that is "
-"reachable for GOsa."
-msgstr ""
-"Kan niet met de opgegeven LDAP server verbinden! Controleer a.u.b. dat deze "
-"bereikbaar is voor GOsa."
-
-#: include/setup_checks.inc:652 include/setup_checks.inc:725
-#: include/setup_checks.inc:730
-msgid ""
-"Can't bind to the specified LDAP server! Please make sure that it is "
-"reachable for GOsa."
-msgstr ""
-"De aanmelding op de LDAP server is mislukt! Controleer a.u.b. dat deze "
-"bereikbaar is voor GOsa."
-
-#: include/setup_checks.inc:740
-msgid ""
-"Bind to server successful, but the server seems to be completly empty, "
-"please check all informations twice"
-msgstr ""
-"Verbinding met de server is succesvol uitgevoerd, maar de server lijkt geen "
-"informatie te bevatten. Controleer alle informatie a.u.b. nogmaals."
-
-#: include/setup_checks.inc:796
-#, php-format
-msgid ""
-"You're missing the required attribute '%s' from this formular. Please "
-"complete!"
-msgstr ""
-"Het vereiste atribuut '%s' uit dit formulier ontbreekt. Maak a.u.b. uw "
-"invoer af!"
-
-#: include/setup_checks.inc:827
-#, php-format
-msgid "Can't log into LDAP server. Reason was: %s."
-msgstr "De aanmelding op de LDAP server is mislukt. De reden was: '%s'."
-
-#: include/setup_checks.inc:924 include/setup_checks.inc:939
-#: html/index.php:160 ihtml/themes/default/setup_useradmin.tpl:6
-msgid ""
-"You're missing an administrative account for GOsa, you'll not be able to "
-"administrate anything!"
-msgstr ""
-"Er is geen beheerders account voor GOsa. U zal niets kunnen beheren op dit "
-"moment!"
-
 #: include/class_plugin.inc:180
 msgid "This 'dn' has no account extensions."
 msgstr "Deze 'dn' heeft geen account extensies."
@@ -6397,25 +5943,28 @@ msgstr ""
 "Het commando '%s' dat gespecificeerd is als POSTREMOVE voor module '%s' "
 "bestaat niet."
 
-#: include/class_config.inc:69
-#, php-format
-msgid "XML error in gosa.conf: %s at line %d"
-msgstr "XML fout in gosa.conf: %s op regel %d"
-
-#: include/class_config.inc:195 html/index.php:142
-msgid "Can't bind to LDAP. Please contact the system administrator."
-msgstr ""
-"Kan de LDAP server niet bereiken. Neem a.u.b. contact op met de "
-"systeembeheerder."
-
-#: include/class_config.inc:426
-msgid "SID and/or RIDBASE missing in your configuration!"
-msgstr "SID en/of RIDBASE ontbreken in uw configuratie!"
-
 #: include/class_password-methods-ssha.inc:51
 msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
 msgstr ""
 "Kan SSHA niet gebruiken voor encryptie. (Ontbrekende functie mhash / sha1)"
+
+#: include/class_pluglist.inc:98
+msgid ""
+"Your gosa.conf information has changed partly. Please convert it using the "
+"contributed script fix_config.sh!"
+msgstr ""
+"Uw gosa.conf is gedeeltelijk veranderd. Converteer het a.u.b. met het "
+"meegeleverde script fix_config.sh!"
+
+#: include/class_pluglist.inc:113 ihtml/themes/altlinux/framework.tpl:14
+#: ihtml/themes/altlinux/framework.tpl:24
+#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
+msgid ""
+"You are currently editing a database entry. Do you want to dismiss the "
+"changes?"
+msgstr ""
+"U bent momenteel database gegevens aan het bewerken. Wilt u eventuele "
+"wijzigingen ongedaan maken?"
 
 #: include/class_password-methods.inc:166
 #, php-format
@@ -6428,6 +5977,27 @@ msgid ""
 msgstr ""
 "De instelling voor 'SMBHASH' in /etc/gosa/gosa.conf is niet correct. Kan het "
 "samba wachtwoord niet veranderen."
+
+#: include/class_config.inc:69
+#, php-format
+msgid "XML error in gosa.conf: %s at line %d"
+msgstr "XML fout in gosa.conf: %s op regel %d"
+
+#: include/class_config.inc:195 html/index.php:144
+msgid "Can't bind to LDAP. Please contact the system administrator."
+msgstr ""
+"Kan de LDAP server niet bereiken. Neem a.u.b. contact op met de "
+"systeembeheerder."
+
+#: include/class_config.inc:426
+msgid "SID and/or RIDBASE missing in your configuration!"
+msgstr "SID en/of RIDBASE ontbreken in uw configuratie!"
+
+#: include/class_password-methods-sha.inc:50
+msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
+msgstr ""
+"Kan SHA niet gebruiken voor encryptie. Functie sha1 / mhash / crypt "
+"ontbreekt."
 
 #: include/class_password-methods-kerberos.inc:43
 msgid ""
@@ -6444,12 +6014,6 @@ msgstr "De kerberos database communicatie is mislukt!"
 #: include/class_password-methods-kerberos.inc:59
 msgid "Changing password in kerberos database failed!"
 msgstr "Het veranderen van het wachtwoord in de kerberos database is mislukt!"
-
-#: include/class_password-methods-sha.inc:50
-msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
-msgstr ""
-"Kan SHA niet gebruiken voor encryptie. Functie sha1 / mhash / crypt "
-"ontbreekt."
 
 #: include/class_ldap.inc:398
 #, php-format
@@ -6480,6 +6044,500 @@ msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
 msgstr ""
 "Fout bij het importeren van dn: '%s', controleer uw LDIF bestand a.u.b. "
 "vanaf regel %s!"
+
+#: include/class_certificate.inc:35
+msgid "Can't open specified file, check accessibility and or existence"
+msgstr ""
+
+#: include/class_certificate.inc:53
+msgid "Can't read specified certificate / or empty string given"
+msgstr ""
+
+#: include/class_certificate.inc:80
+msgid "Can't load certificate, possibly unsupported format (use PEM/DER) "
+msgstr ""
+
+#: include/class_certificate.inc:95
+msgid "The Format must be PEM, to output certificate informations"
+msgstr ""
+
+#: include/class_certificate.inc:192
+#, fuzzy
+msgid "Can't create/open File"
+msgstr "Configuratie bestand"
+
+#: include/class_certificate.inc:199
+msgid "No valid certificate loaded"
+msgstr ""
+
+#: include/functions_setup.inc:72
+msgid "Can't bind to LDAP. No schema check possible!"
+msgstr "Kan niet verbinden met de LDAP server. Schema controle is onmogelijk!"
+
+#: include/functions_setup.inc:81 include/functions_setup.inc:90
+msgid "Can't get schema information from server. No schema check possible!"
+msgstr ""
+"Kan de schema informatie niet ophalen van de server. Schema controle is "
+"onmogelijk!"
+
+#: include/functions_setup.inc:110
+#, php-format
+msgid ""
+"Optional objectclass '%s' required by plugin '%s' is not present in LDAP "
+"setup"
+msgstr ""
+"De optionele objectklasse '%s' die benodigd is door module '%s' is niet "
+"aanwezig in de LDAP configuratie"
+
+#: include/functions_setup.inc:114
+#, php-format
+msgid ""
+"Optional objectclass '%s' required by plugin '%s' does not have version %s"
+msgstr ""
+"De optionele objectklasse '%s' die benodigd is door module '%s' heeft niet "
+"versienummer %s"
+
+#: include/functions_setup.inc:118
+#, php-format
+msgid "Support for '%s' enabled"
+msgstr "Ondersteuning voor '%s' is ingeschakeld"
+
+#: include/functions_setup.inc:128
+#, php-format
+msgid "Required objectclass '%s' is not present in LDAP setup"
+msgstr "Vereiste objectklasse '%s' is niet voorhanden in de LDAP configuratie"
+
+#: include/functions_setup.inc:132
+#, php-format
+msgid "Required objectclass '%s' does not have version %s"
+msgstr "Vereiste objectklasse '%s' heeft niet versienummer %s"
+
+#: include/functions_setup.inc:141
+msgid "SAMBA 3 support disabled, no schema seems to be installed"
+msgstr ""
+"SAMBA 3 ondersteuning is uitgeschakeld. Het LDAP schema is niet "
+"geïnstalleerd."
+
+#: include/functions_setup.inc:146
+msgid "SAMBA 3 support enabled"
+msgstr "SAMBA 3 ondersteuning is ingeschakeld"
+
+#: include/functions_setup.inc:151
+msgid "SAMBA 2 support disabled, no schema seems to be installed"
+msgstr ""
+"SAMBA 2 ondersteuning is uitgeschakeld. Het LDAP schema is niet "
+"geïnstalleerd."
+
+#: include/functions_setup.inc:156
+msgid "SAMBA 2 support enabled"
+msgstr "SAMBA 2 ondersteuning is ingeschakeld"
+
+#: include/functions_setup.inc:162
+msgid "Support for pureftp disabled, no schema seems to be installed"
+msgstr ""
+"PureFtp ondersteuning is uitgeschakeld. Het LDAP schema is niet geïnstallerd."
+
+#: include/functions_setup.inc:167
+msgid "Support for pureftp enabled"
+msgstr "PureFtp ondersteuning is ingeschakeld"
+
+#: include/functions_setup.inc:172
+msgid "Support for WebDAV disabled, no schema seems to be installed"
+msgstr ""
+"WebDAV ondersteuning is uitgeschakeld. Het LDAP schema is niet geïnstalleer."
+
+#: include/functions_setup.inc:177
+msgid "Support for WebDAV enabled"
+msgstr "WebDAV ondersteuning is ingeschakeld"
+
+#: include/functions_setup.inc:182
+msgid "Support for phpgroupware disabled, no schema seems to be installed"
+msgstr ""
+"Phpgroupware ondersteuning is uitgeschakeld. Het LDAP schema is niet "
+"geïnstalleerd."
+
+#: include/functions_setup.inc:187
+msgid "Support for phpgroupware enabled"
+msgstr "Phpgroupware ondersteuning is ingeschakeld"
+
+#: include/functions_setup.inc:192
+msgid "Support for gofon disabled, no schema seems to be installed"
+msgstr ""
+"Gofon ondersteuning is uitgeschakeld. Het LDAP schema is niet geïnstalleerd."
+
+#: include/functions_setup.inc:197
+msgid "Support for gofon enabled"
+msgstr "Gofon ondersteuning is ingeschakeld"
+
+#: include/functions_setup.inc:204
+msgid ""
+"Support for Kolab disabled, no schema seems to be installed, setting mail-"
+"method to cyrus"
+msgstr ""
+"Kolab ondersteuning is uitgeschakeld. Aangezien het LDAP schema niet "
+"geïnstalleed is, zal deE-mail methode op Cyrus ingesteld worden."
+
+#: include/functions_setup.inc:212
+msgid "Support for Kolab enabled"
+msgstr "Kolab ondersteuning is ingeschakeld"
+
+#: include/functions_setup.inc:229
+msgid "OK"
+msgstr "OK"
+
+#: include/functions_setup.inc:232
+msgid "Ignored"
+msgstr "Genegeerd"
+
+#: include/functions_setup.inc:234
+msgid "Failed"
+msgstr "Mislukt"
+
+#: include/functions_setup.inc:251
+msgid "PHP setup inspection"
+msgstr "PHP configuratie inspectie"
+
+#: include/functions_setup.inc:252
+msgid "Checking for PHP version (>=4.1.0)"
+msgstr "Controle op PHP versie (>=4.1.0)"
+
+#: include/functions_setup.inc:253
+msgid ""
+"PHP must be of version 4.1.0 or above for some functions and known bugs in "
+"PHP language."
+msgstr ""
+"PHP moet minimaal versienummer 4.1.0 hebben. GOsa gebruikt bepaalde "
+"functionaliteit die in voorgaande versies niet goed of helemaal niet "
+"voorhanden is."
+
+#: include/functions_setup.inc:256
+msgid "Checking if register_globals is set to 'off'"
+msgstr "Controle of 'register_globals' ingesteld staat op 'off'"
+
+#: include/functions_setup.inc:257
+msgid ""
+"register_globals is a PHP mechanism to register all global varibales to be "
+"accessible from scripts without changing the scope. This may be a security "
+"risk. GOsa will run in both modes."
+msgstr ""
+"'register_globals' is een PHP mechanisme om alle globale variabelen te "
+"registreren zodat deze toegankelijk zijn voor scripts zonder dat de scope "
+"veranderd hoeft te worden. Dit is een veiligheidsrisico. GOsa zal in beide "
+"modi draaien."
+
+#: include/functions_setup.inc:260
+msgid "Checking for ldap module"
+msgstr "Zoeken naar de LDAP module"
+
+#: include/functions_setup.inc:261
+msgid "This is the main module used by GOsa and therefore really required."
+msgstr "Dit is hoofd module die GOsa nodig heeft en is daarom noodzakelijk."
+
+#: include/functions_setup.inc:264
+#, fuzzy
+msgid "Checking for XML functions"
+msgstr "Zoeken naar iconv ondersteuning"
+
+#: include/functions_setup.inc:265
+msgid "XML functions are required to parse the configuration file."
+msgstr ""
+
+#: include/functions_setup.inc:268
+msgid "Checking for gettext support"
+msgstr "Zoeken naar gettext ondersteuning"
+
+#: include/functions_setup.inc:269
+msgid "Gettext support is required for internationalized GOsa."
+msgstr ""
+"Gettext ondersteuning is vereist voor ondersteuning van meerdere talen in "
+"GOsa."
+
+#: include/functions_setup.inc:271
+msgid "Checking for iconv support"
+msgstr "Zoeken naar iconv ondersteuning"
+
+#: include/functions_setup.inc:272
+msgid ""
+"This module is used by GOsa to convert samba munged dial informations and is "
+"therefore required."
+msgstr ""
+"Deze module wordt gebruikt door GOsa om samba munged dial informatie "
+"(terminal server) te converteren en is daarom vereist."
+
+#: include/functions_setup.inc:275
+msgid "Checking for mhash module"
+msgstr "Zoeken naar de mhash module"
+
+#: include/functions_setup.inc:276
+msgid ""
+"To use SSHA encryption, you'll need this module. If you are just using crypt "
+"or md5 encryption, ignore this message. GOsa will run without it."
+msgstr ""
+"Om SSHA encryptie te gebruiken heeft u deze module nodig. U kunt deze "
+"melding negeren indien u gewoon crypt of md5 encryptie gebruikt."
+
+#: include/functions_setup.inc:279
+msgid "Checking for imap module"
+msgstr "Zoeken naar de IMAP module"
+
+#: include/functions_setup.inc:280
+msgid ""
+"The IMAP module is needed to communicate with the IMAP server. It gets "
+"status informations, creates and deletes mail users."
+msgstr ""
+"De IMAP module is benodigd om met de IMAP server te communiceren. Het "
+"ontvangt status informatie, maakt E-mail gebruikers aan en verwijdert E-mail "
+"gebruikers."
+
+#: include/functions_setup.inc:283
+msgid "Checking for getacl in imap"
+msgstr "Controle op getacl in imap"
+
+#: include/functions_setup.inc:284
+msgid ""
+"The getacl support is needed for shared folder permissions. The standard "
+"IMAP module is not capable of reading acl's. You need a recend PHP version "
+"for this feature."
+msgstr ""
+"De getacl ondersteuning is nodig voor gedeelde map permissies. De standaard "
+"IMAP module is niet in staat om acl's te lezen. U heeft een recente PHP "
+"versie nodig voor deze mogelijkheid."
+
+#: include/functions_setup.inc:287
+msgid "Checking for mysql module"
+msgstr "Zoeken naar MySQL module"
+
+#: include/functions_setup.inc:288
+msgid "MySQL support is needed for reading GOfax reports from databases."
+msgstr ""
+"MySQL ondersteuning is nodig voor het lezen van GOfax rapporten uit "
+"databases."
+
+#: include/functions_setup.inc:291
+msgid "Checking for cups module"
+msgstr "Zoeken naar CUPS module"
+
+#: include/functions_setup.inc:292
+msgid ""
+"In order to read available printers from IPP protocol instead of printcap "
+"files, you've to install the CUPS module."
+msgstr ""
+"U moet de CUPS module installeren om beschikbare printers via het IPP "
+"protocol te kunnen aflezen i.p.v. via printcap bestanden."
+
+#: include/functions_setup.inc:295
+msgid "Checking for kadm5 module"
+msgstr "Zoeken naar kadm5 module"
+
+#: include/functions_setup.inc:296
+msgid ""
+"Managing users in kerberos requires the kadm5 module which is downloadable "
+"via PEAR network."
+msgstr ""
+"Het beheren van gebruikers in kerberos vereist de kadm5 module welke via het "
+"PEAR netwerk te downloaden is."
+
+#: include/functions_setup.inc:299
+msgid "Checking for snmp Module"
+msgstr "Zoeken naar de SNMP module"
+
+#: include/functions_setup.inc:300
+msgid ""
+"Simple Network Management Protocol (SNMP) is required for client monitoring."
+msgstr ""
+"Het Simple Network Management Protocol (SNMP) is vereist voor werkstation "
+"monitoring."
+
+#: include/functions_setup.inc:309
+msgid "Checking for some additional programms"
+msgstr "Zoeken naar enkele additionele programma's"
+
+#: include/functions_setup.inc:318
+msgid "Checking for ImageMagick (>=5.4.0)"
+msgstr "Zoeken naar ImageMagick (>=5.4.0)"
+
+#: include/functions_setup.inc:319
+msgid ""
+"ImageMagick is used to convert user supplied images to fit the suggested "
+"size and the unified JPEG format."
+msgstr ""
+"ImageMagick wordt gebruikt om gebruikers aangeleverde plaatjes te laten "
+"passen binnen de voorgestelde grootte en het uniforme JPEG formaat."
+
+#: include/functions_setup.inc:322
+msgid "Checking imagick module for PHP"
+msgstr "Zoeken naar de imagick module voor PHP"
+
+#: include/functions_setup.inc:323
+msgid ""
+"Imagick is used to convert user supplied images to fit the suggested size "
+"and the unified JPEG format from PHP script."
+msgstr ""
+"Imagick wordt gebruikt om gebruikers aangeleverde plaatjes te laten passen "
+"binnen de voorgestelde grootte en het uniforme JPEG formaat."
+
+#: include/functions_setup.inc:330
+msgid "Checking for fping utility"
+msgstr "Zoeken naar het fping programma"
+
+#: include/functions_setup.inc:331
+msgid ""
+"The fping utility is only used if you've got a thin client based terminal "
+"environment running."
+msgstr ""
+"Het fping programma wordt alleen gebruikt indien u een thin client "
+"gebaseerde terminal omgeving heeft draaien."
+
+#: include/functions_setup.inc:346
+msgid "Checking for a way to generate LM/NT password hashes"
+msgstr "Zoeken naar een manier om LM/NT wachtwoord hashes te genereren"
+
+#: include/functions_setup.inc:347
+msgid ""
+"In order to use SAMBA 2/3, you've to install some additional packages to "
+"generate password hashes."
+msgstr ""
+"Om Samba 2.x/3.x te gebruiken moet u enkele additionele pakketten "
+"installeren om wachtwoord hashes te genereren"
+
+#: include/functions_setup.inc:360
+msgid "php.ini check -> session.auto_register"
+msgstr "php.ini controle -> session.auto_register"
+
+#: include/functions_setup.inc:361
+msgid ""
+"In Order to use GOsa without any trouble, the session.auto_register option "
+"in your php.ini must be set to 'Off'."
+msgstr ""
+"Om GOsa zonder problemen te gebruiken, moet de session.auto_register optie "
+"in uw php.ini ingesteld zijn op 'Off'."
+
+#: include/functions_setup.inc:364
+msgid "php.ini check -> implicit_flush"
+msgstr "php.ini controle -> implicit_flush"
+
+#: include/functions_setup.inc:365
+msgid ""
+"This option influences the Output handling. Turn this Option off, to "
+"increase performance."
+msgstr ""
+"Deze Optie definieert Uitvoer afhandeling. Zet deze Optie uit om "
+"snelheiswinst te behalen"
+
+#: include/functions_setup.inc:372
+msgid "php.ini check -> max_execution_time"
+msgstr "php.ini controle -> max_execution_time"
+
+#: include/functions_setup.inc:373
+msgid ""
+"The Execution time should be at least 30 seconds, because some actions may "
+"consume more time."
+msgstr ""
+"De uitvoer tijd moet minimaal 30 seconden zijn, omdat sommige acties lang "
+"kunnen duren."
+
+#: include/functions_setup.inc:380
+msgid "php.ini check -> memory_limit"
+msgstr "php.ini controle -> memory_limit"
+
+#: include/functions_setup.inc:381
+msgid ""
+"GOsa needs at least 16MB of memory, less will cause unpredictable errors! "
+"Increase it for larger setups."
+msgstr ""
+"GOsa heeft tenminste 16MB geheugen nodig. Minder geheugen kan diverse "
+"onvoorspelbare fouten opleveren!.Verhoog deze waarde nog verder voor zeer "
+"grote omgevingen."
+
+#: include/functions_setup.inc:385
+msgid "php.ini check -> expose_php"
+msgstr "php.ini controle -> expose_php"
+
+#: include/functions_setup.inc:386
+msgid ""
+"Increase the server security by setting expose_php to 'off'. PHP won't send "
+"any Information about the server you are running in this case."
+msgstr ""
+"Verhoog de server veiligheid door 'expose_php' op 'Off' in te stellen. PHP "
+"zal dan geen enkele informatie over de Server die u gebruikt weergeven."
+
+#: include/functions_setup.inc:390
+msgid "php.ini check -> magic_quotes_gpc"
+msgstr "php.ini check -> magic_quotes_gpc"
+
+#: include/functions_setup.inc:391
+msgid ""
+"Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
+"escape all quotes in strings in this case."
+msgstr ""
+"Verhoog de server veiligheid door 'magic_quotes_gpc op 'On' in te stellen."
+"PHP zal dan alle aanhalingstekens in strings omzetten."
+
+#: include/functions_setup.inc:629
+msgid "You've to specify an ldap server before continuing!"
+msgstr "U moet een LDAP server specificeren voordat u verder gaat!"
+
+#: include/functions_setup.inc:638 include/functions_setup.inc:720
+msgid ""
+"Can't connect to the specified LDAP server! Please make sure that is "
+"reachable for GOsa."
+msgstr ""
+"Kan niet met de opgegeven LDAP server verbinden! Controleer a.u.b. dat deze "
+"bereikbaar is voor GOsa."
+
+#: include/functions_setup.inc:652 include/functions_setup.inc:725
+#: include/functions_setup.inc:730
+msgid ""
+"Can't bind to the specified LDAP server! Please make sure that it is "
+"reachable for GOsa."
+msgstr ""
+"De aanmelding op de LDAP server is mislukt! Controleer a.u.b. dat deze "
+"bereikbaar is voor GOsa."
+
+#: include/functions_setup.inc:740
+msgid ""
+"Bind to server successful, but the server seems to be completly empty, "
+"please check all informations twice"
+msgstr ""
+"Verbinding met de server is succesvol uitgevoerd, maar de server lijkt geen "
+"informatie te bevatten. Controleer alle informatie a.u.b. nogmaals."
+
+#: include/functions_setup.inc:796
+#, php-format
+msgid ""
+"You're missing the required attribute '%s' from this formular. Please "
+"complete!"
+msgstr ""
+"Het vereiste atribuut '%s' uit dit formulier ontbreekt. Maak a.u.b. uw "
+"invoer af!"
+
+#: include/functions_setup.inc:827
+#, php-format
+msgid "Can't log into LDAP server. Reason was: %s."
+msgstr "De aanmelding op de LDAP server is mislukt. De reden was: '%s'."
+
+#: include/functions_setup.inc:938 include/functions_setup.inc:961
+#: include/functions_setup.inc:970 html/index.php:162
+#: ihtml/themes/default/setup_useradmin.tpl:6
+msgid ""
+"You're missing an administrative account for GOsa, you'll not be able to "
+"administrate anything!"
+msgstr ""
+"Er is geen beheerders account voor GOsa. U zal niets kunnen beheren op dit "
+"moment!"
+
+#: include/functions_helpviewer.inc:255
+msgid "Results for your search with the keyword"
+msgstr ""
+
+#: include/functions_helpviewer.inc:255
+msgid " interpreted as "
+msgstr ""
+
+#: include/functions_helpviewer.inc:306
+#, php-format
+msgid "%s%% hit rate in file %s"
+msgstr ""
 
 #: html/getfax.php:53
 msgid "Could not connect to database server!"
@@ -6522,7 +6580,7 @@ msgstr ""
 "Waarschuwing: Geheugengebruik is te hoog - verhoog a.u.b. de 'memory_limit' "
 "in PHP!"
 
-#: html/main.php:264
+#: html/main.php:269
 #, php-format
 msgid "Can't find any plugin definitions for plugin '%s'!"
 msgstr "Kan geen enkele module defenities vinden voor module '%s'!"
@@ -6538,54 +6596,44 @@ msgid "Directory '%s' specified as compile directory is not accessable!"
 msgstr ""
 "Directory '%s' die opgegeven is als compileer directory is niet toegankelijk!"
 
-#: html/index.php:168
+#: html/index.php:170
 msgid "Please specify a valid username!"
 msgstr "Geef a.u.b. een geldige gebruikersnaam op!"
 
-#: html/index.php:170
+#: html/index.php:172
 msgid "Please specify your password!"
 msgstr "Geef a.u.b. uw wachtwoord op!"
 
-#: html/index.php:177
+#: html/index.php:179
 msgid "Please check the username/password combination."
 msgstr "Controleer a.u.b. de gebruikersnaam/wachtwoord combinatie."
 
-#: html/index.php:215
+#: html/index.php:217
 msgid "Session will not be encrypted."
 msgstr "De sessie zal niet versleuteld zijn."
 
-#: html/index.php:215
+#: html/index.php:217
 msgid "Enter SSL session"
 msgstr "Gebruik een SSL sessie"
 
-#: ihtml/themes/altlinux/sizelimit.tpl:3 ihtml/themes/default/sizelimit.tpl:3
-msgid ""
-"The size limit option makes LDAP operations faster and saves the LDAP server "
-"from getting too much load. The easiest way to handle big databases without "
-"long timeouts would be to limit your search to smaller values and use "
-"filters to get the entries you are looking for."
+#: html/helpviewer.php:33
+msgid "Help is not available if you are not logged in."
 msgstr ""
-"De grootte limiet optie maakt LDAP bewerkingen sneller en behoedt de LDAP "
-"server voor een te grote werkdruk. De eenvoudigste manier om met grote "
-"databases te werken zonder lange timeouts is door zoekopdrachten in grootte "
-"te beperken en door filters te gebruiken voor de informatie die u zoekt."
 
-#: ihtml/themes/altlinux/sizelimit.tpl:6 ihtml/themes/default/sizelimit.tpl:6
-msgid "Please choose the way to react for this session"
-msgstr "Kies a.u.b. de manier waarop gereageerd moet worden voor deze sessie"
-
-#: ihtml/themes/altlinux/sizelimit.tpl:9 ihtml/themes/default/sizelimit.tpl:9
-msgid "ignore this error and show all entries the LDAP server returns"
-msgstr "Negeer deze fout en toon alle gegevens die de LDAP server teruggeeft"
-
-#: ihtml/themes/altlinux/sizelimit.tpl:10
-#: ihtml/themes/default/sizelimit.tpl:10
-msgid ""
-"ignore this error and show all entries that fit into the defined sizelimit "
-"and let me use filters instead"
+#: html/helpviewer.php:83
+msgid "previous"
 msgstr ""
-"Negeer deze fout en toon alle gegevens die passen binnen de gedefiniëerde "
-"grootte limiet en laat me daarvoor in de plaats filters gebruiken"
+
+#: html/helpviewer.php:87
+#, fuzzy
+msgid "next"
+msgstr "tekst"
+
+#: html/helpviewer.php:130
+#, php-format
+msgid ""
+"Can't read any helpfiles from ' %s ', possibly there is no help available."
+msgstr ""
 
 #: ihtml/themes/altlinux/conflict.tpl:2 ihtml/themes/default/conflict.tpl:2
 msgid "Session conflict detected"
@@ -6617,30 +6665,6 @@ msgstr ""
 msgid "Logout"
 msgstr "Uitloggen"
 
-#: ihtml/themes/altlinux/login.tpl:15 ihtml/themes/default/login.tpl:15
-msgid "Please use your <i>username</i> and <i>password</i> to log in"
-msgstr "Voer uw <i>gebruikersnaam</i> en <i>wachtwoord</i> in"
-
-#: ihtml/themes/altlinux/login.tpl:26 ihtml/themes/altlinux/login.tpl:30
-#: ihtml/themes/default/login.tpl:26 ihtml/themes/default/login.tpl:30
-#: ihtml/themes/default/setup_useradmin.tpl:22
-msgid "Username"
-msgstr "Gebruikersnaam"
-
-#: ihtml/themes/altlinux/login.tpl:44 ihtml/themes/altlinux/login.tpl:47
-#: ihtml/themes/default/login.tpl:44 ihtml/themes/default/login.tpl:47
-msgid "Directory"
-msgstr "Directory"
-
-#: ihtml/themes/altlinux/login.tpl:55
-#: ihtml/themes/altlinux/setup_finish.tpl:24 ihtml/themes/default/login.tpl:55
-msgid "Sign in"
-msgstr "Inloggen"
-
-#: ihtml/themes/altlinux/login.tpl:56 ihtml/themes/default/login.tpl:56
-msgid "Click here to log in"
-msgstr "Klik hier om in te loggen"
-
 #: ihtml/themes/altlinux/setup_introduction.tpl:1
 #: ihtml/themes/default/setup_introduction.tpl:1
 msgid "Welcome to the GOsa setup!"
@@ -6664,6 +6688,59 @@ msgstr ""
 "basis informatie verschaft heeft voor de LDAP verbinding zal de LDAP "
 "installatie gecontroleerd worden."
 
+#: ihtml/themes/altlinux/login.tpl:15 ihtml/themes/default/login.tpl:15
+msgid "Please use your <i>username</i> and <i>password</i> to log in"
+msgstr "Voer uw <i>gebruikersnaam</i> en <i>wachtwoord</i> in"
+
+#: ihtml/themes/altlinux/login.tpl:26 ihtml/themes/altlinux/login.tpl:30
+#: ihtml/themes/default/setup_useradmin.tpl:22
+#: ihtml/themes/default/login.tpl:26 ihtml/themes/default/login.tpl:30
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+#: ihtml/themes/altlinux/login.tpl:44 ihtml/themes/altlinux/login.tpl:47
+#: ihtml/themes/default/login.tpl:44 ihtml/themes/default/login.tpl:47
+msgid "Directory"
+msgstr "Directory"
+
+#: ihtml/themes/altlinux/login.tpl:55
+#: ihtml/themes/altlinux/setup_finish.tpl:24 ihtml/themes/default/login.tpl:55
+msgid "Sign in"
+msgstr "Inloggen"
+
+#: ihtml/themes/altlinux/login.tpl:56 ihtml/themes/default/login.tpl:56
+msgid "Click here to log in"
+msgstr "Klik hier om in te loggen"
+
+#: ihtml/themes/altlinux/sizelimit.tpl:3 ihtml/themes/default/sizelimit.tpl:3
+msgid ""
+"The size limit option makes LDAP operations faster and saves the LDAP server "
+"from getting too much load. The easiest way to handle big databases without "
+"long timeouts would be to limit your search to smaller values and use "
+"filters to get the entries you are looking for."
+msgstr ""
+"De grootte limiet optie maakt LDAP bewerkingen sneller en behoedt de LDAP "
+"server voor een te grote werkdruk. De eenvoudigste manier om met grote "
+"databases te werken zonder lange timeouts is door zoekopdrachten in grootte "
+"te beperken en door filters te gebruiken voor de informatie die u zoekt."
+
+#: ihtml/themes/altlinux/sizelimit.tpl:6 ihtml/themes/default/sizelimit.tpl:6
+msgid "Please choose the way to react for this session"
+msgstr "Kies a.u.b. de manier waarop gereageerd moet worden voor deze sessie"
+
+#: ihtml/themes/altlinux/sizelimit.tpl:9 ihtml/themes/default/sizelimit.tpl:9
+msgid "ignore this error and show all entries the LDAP server returns"
+msgstr "Negeer deze fout en toon alle gegevens die de LDAP server teruggeeft"
+
+#: ihtml/themes/altlinux/sizelimit.tpl:10
+#: ihtml/themes/default/sizelimit.tpl:10
+msgid ""
+"ignore this error and show all entries that fit into the defined sizelimit "
+"and let me use filters instead"
+msgstr ""
+"Negeer deze fout en toon alle gegevens die passen binnen de gedefiniëerde "
+"grootte limiet en laat me daarvoor in de plaats filters gebruiken"
+
 #: ihtml/themes/altlinux/framework.tpl:15
 #: ihtml/themes/default/framework.tpl:15
 msgid "Main"
@@ -6683,6 +6760,20 @@ msgstr "Uitloggen"
 #: ihtml/themes/default/framework.tpl:33
 msgid "Signed in:"
 msgstr "Aangemeld:"
+
+#: ihtml/themes/altlinux/islocked.tpl:2 ihtml/themes/default/islocked.tpl:2
+msgid "Locking conflict detected"
+msgstr "Er is een blokkade conflict gedetecteerd"
+
+#: ihtml/themes/altlinux/islocked.tpl:9 ihtml/themes/default/islocked.tpl:9
+msgid ""
+"If this lock detection is false, the other person has obviously closed the "
+"webbrowser during the edit operation. You may delete the lockfile in this "
+"case by pressing the <i>Remove</i> button."
+msgstr ""
+"Indien deze blokkade detectie foutief is dan heeft de andere persoon de "
+"webbrowser afgesloten tijdens de bewerking. U kunt de blokkade in dit geval "
+"verwijderen door de <i>Verwijderen</i> knop te gebruiken."
 
 #: ihtml/themes/altlinux/setup_step2.tpl:1
 #: ihtml/themes/altlinux/setup_step3.tpl:1
@@ -6709,20 +6800,6 @@ msgid ""
 msgstr ""
 "De webserver kant is nu gecontroleerd. Uw installatie is geschikt voor GOsa. "
 "Start van de GOsa configuratie..."
-
-#: ihtml/themes/altlinux/islocked.tpl:2 ihtml/themes/default/islocked.tpl:2
-msgid "Locking conflict detected"
-msgstr "Er is een blokkade conflict gedetecteerd"
-
-#: ihtml/themes/altlinux/islocked.tpl:9 ihtml/themes/default/islocked.tpl:9
-msgid ""
-"If this lock detection is false, the other person has obviously closed the "
-"webbrowser during the edit operation. You may delete the lockfile in this "
-"case by pressing the <i>Remove</i> button."
-msgstr ""
-"Indien deze blokkade detectie foutief is dan heeft de andere persoon de "
-"webbrowser afgesloten tijdens de bewerking. U kunt de blokkade in dit geval "
-"verwijderen door de <i>Verwijderen</i> knop te gebruiken."
 
 #: ihtml/themes/altlinux/setup_step3.tpl:4
 #: ihtml/themes/default/setup_step3.tpl:4
@@ -6944,3 +7021,14 @@ msgstr "Configuratie bestand"
 #: ihtml/themes/default/setup_finish.tpl:17
 msgid "Download configuration"
 msgstr "Systeem configuratie"
+
+#: ihtml/themes/default/help.tpl:9
+msgid "GOsa help viewer"
+msgstr ""
+
+#: ihtml/themes/default/help.tpl:15
+msgid "Index"
+msgstr ""
+
+#~ msgid "absent"
+#~ msgstr "leeg"
