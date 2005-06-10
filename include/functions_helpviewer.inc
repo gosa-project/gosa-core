@@ -63,7 +63,7 @@ function readfiles($basedir,$prefix,$suffix,$onlyIndex,$singlepage=false)
 
         /* Readfile conent too ? */
         if(!$onlyIndex){
-          $str[$file]['content']= remove_unwanted_tags(linkwrapper(getcontents($basedir.$file),""),$replacements);
+          $str[$file]['content']  = remove_unwanted_tags(linkwrapper(getcontents($basedir.$file),""),$replacements);
           $str[$file]['headline'] = getheader_from_content($str[$file]['content']);
         }
 
@@ -86,7 +86,7 @@ function readfiles($basedir,$prefix,$suffix,$onlyIndex,$singlepage=false)
 
     /* If onlyIndex == true skip reading content */
     if(!$onlyIndex){
-      $str[$file]['content']= remove_unwanted_tags(linkwrapper(getcontents($basedir.$file),""),$replacements);
+      $str[$file]['content']  = remove_unwanted_tags(linkwrapper(getcontents($basedir.$file),""),$replacements);
       $str[$file]['headline'] = getheader_from_content($str[$file]['content']);
     }
 

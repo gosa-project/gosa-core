@@ -93,23 +93,37 @@ set_error_handler('gosaRaiseError');
 /* Define which tags musst be delete, header, navigation, banner */
 $replacements=array();
 $replacements['from']=array("@<!DOC.*<BODY >@si",
+    "/border=\".*\"/i",
     "@<DIV[^>]*?>.*?DIV>@si",
     "'<code.*code>'",
+//    "/alt=\".*\"/i",
     "/<HR>/",
     "@<ADDRESS[^>]*?>.*?ADDRESS>@si",
     "@<\/BODY[^>]*?>.*?HTML>@si",
     "'<TABLE.*>'",
     "/src.*icons/i",
-    "/<H1 ALIGN=\"CENTER\">/");
+    "/src=\"/i",
+    "/<H1 ALIGN=\"CENTER\">/",
+ /* picture replacements */
+ //  "",
+    );
+
+
 $replacements['to']=array("",
+    " border=\"0\" ",
     "",
     "",
+  //  "",
     "",
     "",
     "",
     "<table border=1 cellspacing=0 bgcolor=\"#E0E0E0\" width=\"95%\" align=\"center\" cellpadding=\"3\">",
-    "src=\"images",
-    "<H1>");
+    "src=\"",
+    "src=\"images/",
+    "<H1>",
+ /* picture replacements */
+//    "",
+  );
 
 
 /* Default pages */
@@ -236,9 +250,9 @@ if(!file_exists(HELP_BASEDIR."/en/manual_gosa_en/")){
     if(isset($_GET['mark'])){
       $marks = ($_SESSION['lastresults']) ; 
       $help_contents = markup_page($help_contents[$page]['content'],$marks[$page]);
-      $help_contents=remove_unwanted_tags($help_contents,$replacements);  
+      $help_contents=$help_contents;  
     }else{
-      $help_contents=remove_unwanted_tags($help_contents[$page]['content'],$replacements);
+      $help_contents=$help_contents[$page]['content'];
     }
 
     $smarty->assign("help_contents",$help_contents);
