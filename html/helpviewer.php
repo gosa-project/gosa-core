@@ -94,7 +94,6 @@ set_error_handler('gosaRaiseError');
 $replacements=array();
 $replacements['from']=array("@<!DOC.*<BODY >@si",
     "/border=\".*\"/i",
-    "@<DIV[^>]*?>.*?DIV>@si",
     "'<code.*code>'",
 //    "/alt=\".*\"/i",
     "/<HR>/",
@@ -111,7 +110,6 @@ $replacements['from']=array("@<!DOC.*<BODY >@si",
 
 $replacements['to']=array("",
     " border=\"0\" ",
-    "",
     "",
   //  "",
     "",
