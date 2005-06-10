@@ -95,14 +95,16 @@ $replacements['from']=array("@<!DOC.*<BODY >@si",
                             "/<HR>/",
                             "@<ADDRESS[^>]*?>.*?ADDRESS>@si",
                             "@<\/BODY[^>]*?>.*?HTML>@si",
-                            "'<TABLE.*>'");
+                            "'<TABLE.*>'",
+                            "/<H1 ALIGN=\"CENTER\">/");
 $replacements['to']=array("",
                           "",
                           "",
                           "",
                           "",
                           "",
-                          "<table border=1 cellspacing=0 bgcolor=\"#E0E0E0\" width=\"95%\" align=\"center\" cellpadding=\"3\">");
+                          "<table border=1 cellspacing=0 bgcolor=\"#E0E0E0\" width=\"95%\" align=\"center\" cellpadding=\"3\">",
+                          "<H1>");
 
 
 /* Default pages */
@@ -163,7 +165,7 @@ if(isset($_POST['search'])){
   $smarty->assign("search_string",$_SESSION['search_string']);
 
   /* Read all files, prepare to serach */
-  $helppages = readfiles("../doc/guide/admin/en/manual_gosa_en/",$prefix,$suffix,true);
+  $helppages = readfiles($helpdir,$prefix,$suffix,true);
 
   /* Get transmitted page */
   if(isset($_GET['pg'])){
