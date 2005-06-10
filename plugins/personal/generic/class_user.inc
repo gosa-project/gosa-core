@@ -391,9 +391,9 @@ class user extends plugin
           /* Read out data*/
           $timeto   = $certificate->getvalidto_date();
           $timefrom = $certificate->getvalidfrom_date();
-          $str = $certificate->getname()."<br>".
-                  _("Serialnumber")." : ".$certificate->getSerialNumber()."<br>".
-                  sprintf(_("Certificate is valid from <b>%s</b> to <b>%s</b> and is currently <b>%s</b>."), date('d M Y',$timefrom),date('d M Y',$timeto), $certificate->isvalid()?_("valid"):_("invalid"));
+          $str = "<table border=0><tr><td style='vertical-align:top'>CN</td><td>".preg_replace("/ /", "&nbsp;", $certificate->getname())."</td></tr>".
+                  "<tr><td>"._("Serial")."</td><td>#".$certificate->getSerialNumber()."</td></tr></table><br>".
+                  sprintf(_("Certificate is valid from <b>%s</b> to <b>%s</b> and is currently <b>%s</b>."), date('d M Y',$timefrom),date('d M Y',$timeto), $certificate->isvalid()?"<font style='color:green'>"._("valid")."</font>":"<font style='color:red'>"._("invalid")."</font>");
           $smarty->assign($cert."info",$str);
           $smarty->assign($cert."_state","true");
         } else {
