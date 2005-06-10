@@ -149,7 +149,7 @@ class kolabAccount extends plugin
     }
 
     /* Transfer account states for this union */
-    if ($this->parent->by_object['mailAccount']->is_account){
+    if (isset($this->parent) && $this->parent->by_object['mailAccount']->is_account){
       $smarty->assign('is_account', 'true');
     } else {
       $smarty->assign('is_account', '');
