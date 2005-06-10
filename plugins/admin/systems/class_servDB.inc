@@ -9,6 +9,7 @@ class servdb extends plugin
 
   /* Object information */
   var $goImapName= "";
+  var $goImapName_old= "";
   var $goImapConnect= "";
   var $goImapAdmin= "";
   var $goImapPassword= "";
@@ -55,6 +56,9 @@ class servdb extends plugin
         $this->objectclasses[$oc]= $oc;
       }
     }
+
+    /* We need to save the historical state of goImapName for later checking */
+    $this->goImapName_old= $this->goImapName;
 
     /* Always is account... */
     $this->is_account= TRUE;
@@ -159,6 +163,13 @@ class servdb extends plugin
         if ($this->$attr == "" || preg_match("/ /", $this->$attr)){
           $message[]= sprintf(_("The attribute '%s' is empty or contains invalid characters."), $attr);
         }
+      }
+    }
+    if (in_array("goImapServer", $this->objectclasses) && 
+        $this->goImapName != $this->goImapName_old) {
+      // Attribute has changed
+      if(!preg_match("/^[a-z0-9\.]+$/", $this->goImapName)) {
+        $message[]= sprintf(_("The imap name string needs to be a hostname or an IP-address."));
       }
     }
 
