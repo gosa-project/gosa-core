@@ -87,6 +87,7 @@ function myone($par1,$par2,$par3,$par3)
   print "<br>Seite : ".$par1."<br>Name : ".$par2."<br>Seite : ".$par3."<br>Zeile : ".$par3;
 }
 
+
 /* Define which tags musst be delete, header, navigation, banner */
 $replacements=array();
 $replacements['from']=array("@<!DOC.*<BODY >@si",
@@ -115,116 +116,133 @@ $forward  ="node1.html";
 /*
    Here it begins, the real function, above only definitions
  */
-/* We prepare to search, all Document for the given keyword */
-if(isset($_POST['search'])){
 
-  /* Get Keyword */
-  $keyword = $_POST['search_string'];  
-
-  /* Save Keyword to be able to show last searched word in template */
-  $_SESSION['search_string']= $keyword;
-
-  /* Read all files with contents*/
-  /*               |Folder="/var/ww...", 
-                   |        |Fileprefix="node"
-                   |        |       |Filesuffix=".html"
-                   |        |       |       |WithoutContent=false(This means : read content)
-                   |        |       |       |     |Singlepage=false(Means read all, if w want to read single, specify its filename)"*/
-  $arr = readfiles($helpdir,$prefix,$suffix,false,$singlepage=false);
-
-  /* Create Searchresult for our Keyword(s) */
-  $res = search($arr,$keyword); 
-
-  /* Tell smarty which pages to use for backward forwa.. */
-  $smarty->assign("backward",$backward);
-  $smarty->assign("index"   ,$index);
-  $smarty->assign("forward" ,$forward);
-
-  /* Tell smarty the Keyword, to show it in the input field again */
-  $smarty->assign("search_string",$keyword);
-
-  /* Create result list */
-  $smarty->assign("help_contents",searchlist($arr,$res,$maxresults));
-
+if(!file_exists(HELP_BASEDIR."/en/manual_gosa_en/")){
+  /* prevent php warning missing value ... or so*/
+  $smarty->assign("backward","");
+  $smarty->assign("index"   ,"");
+  $smarty->assign("forward" ,"");
+  $smarty->assign("search_string","");
+  $smarty->assign("help_contents","<br>".sprintf(_("Can't read any helpfiles from ' %s ', possibly there is no help available."),HELP_BASEDIR."/en/manual_gosa_en/"));
+  
   /* Output html ...*/
   $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
   $display= $header.$smarty->fetch(get_template_path('help.tpl'));
   echo $display;
 
-  /*
-     Don't search, only show selected page
-   */
-}else{
 
-  /* present last searched word(s)*/
-  if(!isset($_SESSION['search_string'])){
-    $_SESSION['search_string']="";
-  }
+}else{  
     
+  /* We prepare to search, all Document for the given keyword */
+  if(isset($_POST['search'])){
 
-  $smarty->assign("search_string",$_SESSION['search_string']);
+    /* Get Keyword */
+    $keyword = $_POST['search_string'];  
 
-  /* Read all files, prepare to serach */
-  $helppages = readfiles($helpdir,$prefix,$suffix,true);
+    /* Save Keyword to be able to show last searched word in template */
+    $_SESSION['search_string']= $keyword;
 
-  /* Get transmitted page */
-  if(isset($_GET['pg'])){
-    $page = $_GET['pg'];
+    /* Read all files with contents*/
+    /*               |Folder="/var/ww...", 
+                     |        |Fileprefix="node"
+                     |        |       |Filesuffix=".html"
+                     |        |       |       |WithoutContent=false(This means : read content)
+                     |        |       |       |     |Singlepage=false(Means read all, if w want to read single, specify its filename)"*/
+    $arr = readfiles($helpdir,$prefix,$suffix,false,$singlepage=false);
+
+    /* Create Searchresult for our Keyword(s) */
+    $res = search($arr,$keyword); 
+
+    /* Tell smarty which pages to use for backward forwa.. */
+    $smarty->assign("backward",$backward);
+    $smarty->assign("index"   ,$index);
+    $smarty->assign("forward" ,$forward);
+
+    /* Tell smarty the Keyword, to show it in the input field again */
+    $smarty->assign("search_string",$keyword);
+
+    /* Create result list */
+    $smarty->assign("help_contents",searchlist($arr,$res,$maxresults));
+
+    /* Output html ...*/
+    $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
+    $display= $header.$smarty->fetch(get_template_path('help.tpl'));
+    echo $display;
+
+    /*
+       Don't search, only show selected page
+     */
   }else{
-    $page = $defaultpage;
-  }
 
-  /* test if this page exists, in our array of files */
-  if((!isset($helppages[$page]))&&($page!=$defaultpage))
-  {
-    //print "Requested helppage is unknown, redirekted to index"; // For debugging only
-    $page = $defaultpage;
-  }
+    /* present last searched word(s)*/
+    if(!isset($_SESSION['search_string'])){
+      $_SESSION['search_string']="";
+    }
+      
 
-  /* Check forward backward, funtionality*/
-  if($page != $defaultpage)
-  {
-    /* Extract Number of node page */
-    $number = str_replace($prefix,"",str_replace($suffix,"",$page));
+    $smarty->assign("search_string",$_SESSION['search_string']);
 
-    /* Check if we can switch forward and/or backward*/ 
-    $bck = $prefix.($number-1).$suffix;
-    $fck = $prefix.($number+1).$suffix;
+    /* Read all files, prepare to serach */
+    $helppages = readfiles($helpdir,$prefix,$suffix,true);
 
-    /* backward page exists ?, so allow it*/
-    if((isset($helppages[$bck]))) {
-      $backward = $bck;
+    /* Get transmitted page */
+    if(isset($_GET['pg'])){
+      $page = $_GET['pg'];
+    }else{
+      $page = $defaultpage;
     }
 
-    /* forward exists ?*/
-    if((isset($helppages[$fck])))  {
-      $forward  = $fck;
+    /* test if this page exists, in our array of files */
+    if((!isset($helppages[$page]))&&($page!=$defaultpage))
+    {
+      //print "Requested helppage is unknown, redirekted to index"; // For debugging only
+      $page = $defaultpage;
     }
+
+    /* Check forward backward, funtionality*/
+    if($page != $defaultpage)
+    {
+      /* Extract Number of node page */
+      $number = str_replace($prefix,"",str_replace($suffix,"",$page));
+
+      /* Check if we can switch forward and/or backward*/ 
+      $bck = $prefix.($number-1).$suffix;
+      $fck = $prefix.($number+1).$suffix;
+
+      /* backward page exists ?, so allow it*/
+      if((isset($helppages[$bck]))) {
+        $backward = $bck;
+      }
+
+      /* forward exists ?*/
+      if((isset($helppages[$fck])))  {
+        $forward  = $fck;
+      }
+    }
+
+    $help_contents=readfiles($helpdir,$prefix,$suffix,false,$page);
+
+    /* Mark last searched words */
+    if(isset($_GET['mark'])){
+      $marks = ($_SESSION['lastresults']) ; 
+      $help_contents = markup_page($help_contents[$page]['content'],$marks[$page]);
+      $help_contents=remove_unwanted_tags($help_contents,$replacements);  
+    }else{
+      $help_contents=remove_unwanted_tags($help_contents[$page]['content'],$replacements);
+    }
+
+    $smarty->assign("help_contents",$help_contents);
+
+    /* Define our own navigation pages */
+    $smarty->assign("backward",$backward);
+    $smarty->assign("index"   ,$index);
+    $smarty->assign("forward" ,$forward);
+
+    /* Fill page */
+    $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
+    $display= $header.$smarty->fetch(get_template_path('help.tpl'));
+    echo $display;
   }
-
-  $help_contents=readfiles($helpdir,$prefix,$suffix,false,$page);
-
-  /* Mark last searched words */
-  if(isset($_GET['mark'])){
-    $marks = ($_SESSION['lastresults']) ; 
-    $help_contents = markup_page($help_contents[$page]['content'],$marks[$page]);
-    $help_contents=remove_unwanted_tags($help_contents,$replacements);  
-  }else{
-    $help_contents=remove_unwanted_tags($help_contents[$page]['content'],$replacements);
-  }
-
-  $smarty->assign("help_contents",$help_contents);
-
-  /* Define our own navigation pages */
-  $smarty->assign("backward",$backward);
-  $smarty->assign("index"   ,$index);
-  $smarty->assign("forward" ,$forward);
-
-  /* Fill page */
-  $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
-  $display= $header.$smarty->fetch(get_template_path('help.tpl'));
-  echo $display;
 }
-
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
