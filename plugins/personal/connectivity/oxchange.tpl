@@ -15,11 +15,11 @@
        </tr>
        <tr>
          <td>{t}Appointment Days{/t}</td>
-	 <td><input name="OXAppointmentDays" id="OXAppointmentDays" size=7 maxlength=7 {$OXAppointmentDaysACL} value="{$OXAppointmentDays}" {$fstate}> {t}days{/t}</td>
+	 <td><input name="OXAppointmentDays" id="OXAppointmentDays" size=7 maxlength=7 {$OXAppointmentDaysACL} value="{$OXAppointmentDays}" > {t}days{/t}</td>
        </tr>
        <tr>
          <td>{t}Task Days{/t}</td>
-	 <td><input name="OXTaskDays" id="OXTaskDays" size=7 maxlength=7 {$OXTaskDaysACL} value="{$OXTaskDays}" {$fstate}> {t}days{/t}</td>
+	 <td><input name="OXTaskDays" id="OXTaskDays" size=7 maxlength=7 {$OXTaskDaysACL} value="{$OXTaskDays}" > {t}days{/t}</td>
        </tr>
      </table>
    </td>
@@ -35,7 +35,7 @@
        </tr>
        <tr>
          <td>{t}User Timezone{/t}</td>
-	 <td><select size="1" name="OXTimeZone" id="OXTimeZone" {$OXTimeZoneACL} {$fstate}> 
+	 <td><select size="1" name="OXTimeZone" id="OXTimeZone" {$OXTimeZoneACL} > 
 	 {html_options values=$timezones output=$timezones selected=$OXTimeZone}
 	 </select>
 	 </td>
