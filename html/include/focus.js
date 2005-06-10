@@ -97,3 +97,13 @@ function toggle(element) {
 
 }
 
+function popup(target, name) {
+	var mypopup= 
+		window.open(
+			target,
+			name,
+			"width=600,height=700,location=no,toolbar=no,directories=no,menubar=no,status=no,scrollbars=yes"
+		);
+	mypopup.focus();
+	return false;
+}
