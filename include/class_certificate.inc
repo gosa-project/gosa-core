@@ -106,37 +106,66 @@ class certificate
   /* Return Functions */
   function getvalidto_date()
   {
-    return($this->info['validTo_time_t']);
+    if(isset($this->info['validTo_time_t'])){
+      return($this->info['validTo_time_t']);
+    }else{
+      return(false);
+    }
   } 
 
   function getvalidfrom_date()
   {
-    return($this->info['validFrom_time_t']);
+    if(isset($this->info['validFrom_time_t'])){
+      return($this->info['validFrom_time_t']);
+    }else{
+      return(false);
+    }
+
   }
 
   function getname()
   {
-    return($this->info['name']);
+    if(isset($this->info['name'])){
+      return($this->info['name']);
+    }else{
+      return(false);
+    }
   }
 
   function getCN()
   {
-    return($this->info['subject']['CN']);
+    if(isset($this->info['subject']['CN'])){
+      return($this->info['subject']['CN']);
+    }else{
+      return(false);
+    }
   }
 
   function getO()
   {
-    return($this->info['subject']['O']);
+    if(isset($this->info['subject']['O'])){
+      return($this->info['subject']['O']);
+    }else{
+      return(false);
+    }
   }
 
   function getOU()
   {
-    return($this->info['subject']['OU']);
+    if(isset($this->info['subject']['OU'])){
+      return($this->info['subject']['OU']);
+    }else{
+      return(false);
+    }
   }
 
   function getSerialNumber()
   {
-    return($this->info['serialNumber']);
+    if(isset($this->info['serialNumber'])){
+      return($this->info['serialNumber']);
+    }else{
+      return(false);
+    }
   }
 
   function isvalid($returnstr = false)
