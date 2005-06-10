@@ -1,81 +1,64 @@
 <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
-<table style="vertical-align:top; text-align:left;" cellpadding=4 border=0 width="100%">
  <!-- Headline container -->
- <tr>
-   <td colspan=2>
-     <h2><img alt="" align="middle" src="images/certs.png"> {t}Certificates{/t}</h2>
-   </td>
+<h2><img alt="" align="middle" src="images/certs.png"> {t}Certificates{/t}</h2>
 
- </tr>
+<table style="vertical-align:top; text-align:left;border-top: 1px solid rgb(176,176,176);" width="100%" cellpadding=4 border=0>
  <tr>
-   <td width="250">
+   <td width="12%" style="vertical-align:top">
       {t}Standard certificate{/t}
    </td>
-   <td>
+   <td style="vertical-align:top">
+	 {$userCertificateinfo}
+	 </td>
+	 <td style="vertical-align:top;text-align:right">
+	 {if $userCertificate_state ne "true"}
      <input name="userCertificate_file" type="file" size="20" maxlength="255" accept="text/*.*">
-     &nbsp;
+     {else}
      <input type=submit name="remove_userCertificate" value="{t}Remove{/t}">
+	 {/if}
    </td>
- </tr>
- <tr>
-	<td>
-		{t}Status{/t}
-	</td>
-	<td>
-		{$userCertificateinfo}
-	</td>
  </tr>
  </table>
 
-
-
-
-
+<br>
 
  <table style="vertical-align:top; text-align:left;border-top: 1px solid rgb(176,176,176);" width="100%" cellpadding=4 border=0>
  <tr>
-   <td width="250">
+   <td width="12%" style="vertical-align:top">
       {t}S/MIME certificate{/t} 
    </td>
-   <td >
-     <input name="userSMIMECertificate_file" type="file" size="20" maxlength="255" accept="text/*.*">
-     &nbsp;
-     <input type=submit name="remove_userSMIMECertificate" value="{t}Remove{/t}">
+   <td style="vertical-align:top">
+     {$userSMIMECertificateinfo}
    </td>
- </tr>
- <tr>
-    <td>
-        {t}Status{/t}
-    </td>
-    <td>
-        {$userSMIMECertificateinfo}
-    </td>
+   <td style="vertical-align:top;text-align:right">
+	 {if $userSMIMECertificate_state ne "true"}
+     <input name="userSMIMECertificate_file" type="file" size="20" maxlength="255" accept="text/*.*">
+     {else}
+     <input type=submit name="remove_userSMIMECertificate" value="{t}Remove{/t}">
+	 {/if}
+   </td>
  </tr>
  </table>
 
-
+<br>
 
 <table style="vertical-align:top; text-align:left;border-top: 1px solid rgb(176,176,176);" width="100%" cellpadding=4 border=0> 
  <tr>
-   <td width="250">
+   <td width="12%" style="vertical-align:top">
       {t}PKCS12 certificate{/t} 
    </td>
-   <td>
+   <td style="vertical-align:top">
+     {$userPKCS12info}
+   </td>
+   <td style="vertical-align:top;text-align:right">
+	 {if $userPKCS12_state ne "true"}
      <input name="userPKCS12_file" type="file" size="20" maxlength="255" accept="text/*.*">
-     &nbsp;
+	 {else}
      <input type=submit name="remove_userPKCS12" value="{t}Remove{/t}">
+	 {/if}
    </td>
  </tr>
- <tr>
-    <td>
-        {t}Status{/t}
-    </td>
-    <td>
-        {$userSMIMECertificateinfo}
-    </td>
- </tr>
  
-
  {if $governmentmode eq "true"}
  <tr>
    <td>
@@ -89,7 +72,6 @@
  {/if}
 </table>
 
-<br>
 <p class="plugbottom">
   <input type=submit name="cert_edit_finish" value="{t}Finish{/t}">
   &nbsp;
