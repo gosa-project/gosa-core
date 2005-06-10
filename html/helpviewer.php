@@ -77,8 +77,8 @@ $suffix                       = ".html";                            // Suffix of
 $maxresults                   = 10;                                 // max number of results shown in result list
 $minwordlength                = 3;                                  // Word less than 3 chars will be dropped in search
 $allowed_chars_in_searchword  = "'[^a-z0-9 %_-]'i";                 // Remove all chars that would disturb our search like < or > ...
-$pre_mark                     = "<b><u><i>" ;                       // Sign words with this
-$suf_mark                     = "</i></u></b>";                     //  and this
+$pre_mark                     = "<span style=\"background-color: #FFFC35;\">" ;                       // Sign words with this
+$suf_mark                     = "</span>";                          //  and this
 $backwardlink                 = "<a href=\"?pg=%s\"  class=\"maintitlebar\">
                                   <img src='images/back.png' align=\"middle\" alt=\""._("previous")."\" border=\"0\">
                                  </a>";
