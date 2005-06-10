@@ -10,12 +10,12 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schröder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-06-10 12:26+0200\n"
+"PO-Revision-Date: 2005-06-10 12:58+0200\n"
 "Last-Translator:  <(null)>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: contrib/gosa.conf:4
 msgid "My account"
@@ -6573,15 +6573,12 @@ msgstr ""
 "In ihrem Setup fehlt ein administratives Konto für GOsa, Sie sind deshalb "
 "nicht in der Lage irgendetwas einzustellen!"
 
-#: include/functions_helpviewer.inc:255
-msgid "Results for your search with the keyword"
-msgstr "Ergebnisse für Ihre Suche nach "
+#: include/functions_helpviewer.inc:256
+#, php-format
+msgid "%s results for your search with the keyword %s interpreted as %s"
+msgstr "%s Ergebnisse für Ihre Suche nach %s (effektiv gesucht nach: %s)"
 
-#: include/functions_helpviewer.inc:255
-msgid " interpreted as "
-msgstr " verstanden als "
-
-#: include/functions_helpviewer.inc:306
+#: include/functions_helpviewer.inc:307
 #, php-format
 msgid "%s%% hit rate in file %s"
 msgstr "%s%% Trefferquote in Datei %s"
@@ -7083,4 +7080,7 @@ msgstr "GOsa Hilfe-Browser"
 
 #: ihtml/themes/default/help.tpl:15
 msgid "Index"
-msgstr "Inhalt"
+msgstr "Index"
+
+#~ msgid " interpreted as "
+#~ msgstr " verstanden als "

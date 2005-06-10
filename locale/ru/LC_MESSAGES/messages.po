@@ -6540,15 +6540,12 @@ msgstr ""
 "У вас нет учетной записи администратора для GOsa, так что вы не сможете что-"
 "либо администрировать!"
 
-#: include/functions_helpviewer.inc:255
-msgid "Results for your search with the keyword"
+#: include/functions_helpviewer.inc:256
+#, php-format
+msgid "%s results for your search with the keyword %s interpreted as %s"
 msgstr ""
 
-#: include/functions_helpviewer.inc:255
-msgid " interpreted as "
-msgstr ""
-
-#: include/functions_helpviewer.inc:306
+#: include/functions_helpviewer.inc:307
 #, php-format
 msgid "%s%% hit rate in file %s"
 msgstr ""
