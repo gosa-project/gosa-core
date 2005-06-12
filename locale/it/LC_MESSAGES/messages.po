@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alessandro Amici <a.amici@bopen.it>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-05-29 14:03+0200\n"
+"PO-Revision-Date: 2005-06-12 23:53+0200\n"
 "Last-Translator: Alessandro Amici <a.amici@bopen.it>\n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
@@ -272,16 +272,14 @@ msgstr "Opzioni di posta"
 
 #: plugins/personal/mail/generic.tpl:71
 msgid "Select if you want to forward mails without getting own copies of them"
-msgstr ""
-"Seleziona se intendi inoltrare le mail senza mantenerne una copia locale"
+msgstr "Seleziona se intendi inoltrare le mail senza mantenerne una copia locale"
 
 #: plugins/personal/mail/generic.tpl:71
 msgid "No delivery to own mailbox"
 msgstr "Non recapitare nella propria mailbox"
 
 #: plugins/personal/mail/generic.tpl:74
-msgid ""
-"Select to automatically response with the vacation message defined below"
+msgid "Select to automatically response with the vacation message defined below"
 msgstr "Seleziona per rispondere automaticamente con il messaggio seguente"
 
 #: plugins/personal/mail/generic.tpl:74
@@ -298,8 +296,7 @@ msgstr "Muovi mail marcate con un livello di Spam superiore a"
 
 #: plugins/personal/mail/generic.tpl:82
 msgid "Choose spam level - smaller values are more sensitive"
-msgstr ""
-"Scegli il livello si Spam - valori più bassi indicano maggiore sensibilità"
+msgstr "Scegli il livello si Spam - valori più bassi indicano maggiore sensibilità"
 
 #: plugins/personal/mail/generic.tpl:85
 msgid "to folder"
@@ -421,8 +418,7 @@ msgid ""
 msgstr "Questa identità non possiede estensioni di posta."
 
 #: plugins/personal/mail/class_mailAccount.inc:249
-msgid ""
-"You're trying to add an invalid email address to the list of forwarders."
+msgid "You're trying to add an invalid email address to the list of forwarders."
 msgstr ""
 "Stai tentandi di aggiungere un indirizzo di posta non valido alla lista "
 "degli inoltri"
@@ -456,8 +452,7 @@ msgstr "Il campo 'Indirizzo principale' non è stao inserito"
 #: plugins/personal/mail/class_mailAccount.inc:678
 #: plugins/addons/addressbook/class_addressbook.inc:568
 msgid "Please enter a valid email address in 'Primary address' field."
-msgstr ""
-"Inserire un indirizzo di posta valido nel campo 'Indirizzo principale'."
+msgstr "Inserire un indirizzo di posta valido nel campo 'Indirizzo principale'."
 
 #: plugins/personal/mail/class_mailAccount.inc:685
 #: plugins/admin/groups/class_groupMail.inc:619
@@ -721,8 +716,7 @@ msgstr "La password immessa come 'Nuova password' è vuota"
 
 #: plugins/personal/password/main.inc:59
 msgid "The password used as new and current are too similar."
-msgstr ""
-"La password immessa come 'Nuova password' è troppo simile a quella attuale."
+msgstr "La password immessa come 'Nuova password' è troppo simile a quella attuale."
 
 #: plugins/personal/password/main.inc:64
 msgid "The password used as new is to short."
@@ -778,8 +772,7 @@ msgstr "Mostra gruppi samba"
 #: plugins/personal/posix/posix_groups.tpl:29
 #: plugins/admin/groups/headpage.tpl:49
 msgid "Select to see groups that have applications configured"
-msgstr ""
-"Seleziona per mostrare i gruppi che hanno configurate delle applicazioni"
+msgstr "Seleziona per mostrare i gruppi che hanno configurate delle applicazioni"
 
 #: plugins/personal/posix/posix_groups.tpl:29
 #: plugins/admin/groups/headpage.tpl:49
@@ -969,8 +962,7 @@ msgstr "Questa identità non possiede estensioni Unix"
 #: plugins/personal/posix/class_posixAccount.inc:431
 #, php-format
 msgid "Password can't be changed up to %s days after last change"
-msgstr ""
-"La password non può essere cambiata per %s giorni dall'ultimo cambiamento"
+msgstr "La password non può essere cambiata per %s giorni dall'ultimo cambiamento"
 
 #: plugins/personal/posix/class_posixAccount.inc:433
 #, php-format
@@ -1169,19 +1161,19 @@ msgstr "Il valore specificato per il GID è troppo basso."
 
 #: plugins/personal/posix/class_posixAccount.inc:885
 msgid "Value specified as 'shadowMin' is not valid."
-msgstr ""
+msgstr "Il valore specificato come 'shadowMin' non è valido"
 
 #: plugins/personal/posix/class_posixAccount.inc:890
 msgid "Value specified as 'shadowMax' is not valid."
-msgstr ""
+msgstr "Il valore specificato come 'shadowMax' non è valido"
 
 #: plugins/personal/posix/class_posixAccount.inc:895
 msgid "Value specified as 'shadowWarning' is not valid."
-msgstr ""
+msgstr "Il valore specificato come 'shadowWarning' non è valido"
 
 #: plugins/personal/posix/class_posixAccount.inc:898
 msgid "'shadowWarning' without 'shadowMax' makes no sense."
-msgstr ""
+msgstr "'shadowWarning' senza 'shadowMax' non ha senso."
 
 #: plugins/personal/posix/class_posixAccount.inc:901
 msgid "Value specified as 'shadowWarning' should be smaller than 'shadowMax'."
@@ -1206,7 +1198,7 @@ msgstr ""
 #: plugins/personal/posix/class_posixAccount.inc:1019
 #: plugins/admin/groups/class_groupGeneric.inc:644
 msgid "Too many users, can't allocate a free ID!"
-msgstr ""
+msgstr "Troppi utenti non posso allocare un ID libero!"
 
 #: plugins/personal/posix/main.inc:131
 msgid "Unix settings"
@@ -1260,25 +1252,25 @@ msgstr "Eredita la configurazione del client"
 
 #: plugins/personal/samba/samba3.tpl:90
 msgid "Initial program"
-msgstr ""
+msgstr "Programma iniziale"
 
 #: plugins/personal/samba/samba3.tpl:96
 msgid "Working directory"
-msgstr ""
+msgstr "Cartella di lavoro"
 
 #: plugins/personal/samba/samba3.tpl:111
 msgid "Timeout settings (in minutes)"
-msgstr ""
+msgstr "Timeout (in minuti)"
 
 #: plugins/personal/samba/samba3.tpl:116
 #: plugins/personal/samba/class_sambaAccount.inc:629
 msgid "Connection"
-msgstr ""
+msgstr "Connessione"
 
 #: plugins/personal/samba/samba3.tpl:125
 #: plugins/personal/samba/class_sambaAccount.inc:630
 msgid "Disconnection"
-msgstr ""
+msgstr "Disconnessione "
 
 #: plugins/personal/samba/samba3.tpl:134
 #: plugins/personal/samba/class_sambaAccount.inc:631
@@ -1287,15 +1279,15 @@ msgstr ""
 
 #: plugins/personal/samba/samba3.tpl:147
 msgid "Client devices"
-msgstr ""
+msgstr "Dispositivi del client"
 
 #: plugins/personal/samba/samba3.tpl:152
 msgid "Connect client drives at logon"
-msgstr ""
+msgstr "Connetti i drive del client alla connessione"
 
 #: plugins/personal/samba/samba3.tpl:158
 msgid "Connect client printers at logon"
-msgstr ""
+msgstr "Connetti le stampanti del client alla connessione"
 
 #: plugins/personal/samba/samba3.tpl:164
 msgid "Default to main client printer"
@@ -1422,12 +1414,11 @@ msgstr "solo dal client precedente"
 #: plugins/personal/samba/class_sambaAccount.inc:624
 #, php-format
 msgid "The value specified as '%s' contains invalid characters!"
-msgstr ""
+msgstr "Il valore specificato come '%s' contiene dei caratteri invalidi!"
 
 #: plugins/personal/samba/class_sambaAccount.inc:634
 #, php-format
-msgid ""
-"The timeout property '%s' is checked and contains invalid or no characters!"
+msgid "The timeout property '%s' is checked and contains invalid or no characters!"
 msgstr ""
 
 #: plugins/personal/samba/class_sambaAccount.inc:640
@@ -1743,17 +1734,16 @@ msgstr "Terminali"
 
 #: plugins/personal/generic/class_user.inc:397
 #, php-format
-msgid ""
-"Certificate is valid from <b>%s</b> to <b>%s</b> and is currently <b>%s</b>."
+msgid "Certificate is valid from <b>%s</b> to <b>%s</b> and is currently <b>%s</b>."
 msgstr ""
 
 #: plugins/personal/generic/class_user.inc:397
 msgid "valid"
-msgstr ""
+msgstr "valido"
 
 #: plugins/personal/generic/class_user.inc:397
 msgid "invalid"
-msgstr ""
+msgstr "invalido"
 
 #: plugins/personal/generic/class_user.inc:401
 #, fuzzy
@@ -1897,8 +1887,7 @@ msgid "Kolab"
 msgstr ""
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:102
-msgid ""
-"You're trying to add an invalid email address to the list of delegations."
+msgid "You're trying to add an invalid email address to the list of delegations."
 msgstr ""
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:110
@@ -2296,7 +2285,7 @@ msgstr ""
 msgid ""
 "So - if you're sure - press <i>Delete</i> to continue or <i>Cancel</i> to "
 "abort."
-msgstr ""
+msgstr "Quindi - Se sei sicuro - premi <i>Rimuovi</i> per continuare o <i>Annulla</i> per abortire."
 
 #: plugins/gofax/blocklists/headpage.tpl:6
 msgid "List of blocklists"
@@ -2863,13 +2852,11 @@ msgid "User ID"
 msgstr ""
 
 #: plugins/addons/addressbook/class_addressbook.inc:576
-msgid ""
-"Cannot create a unique DN for your entry. Please fill more formular fields."
+msgid "Cannot create a unique DN for your entry. Please fill more formular fields."
 msgstr ""
 
 #: plugins/addons/addressbook/class_addressbook.inc:588
-msgid ""
-"You have no permissions to create or modify a global address book entry."
+msgid "You have no permissions to create or modify a global address book entry."
 msgstr ""
 
 #: plugins/addons/ldapmanager/class_csvimport.inc:6
@@ -3295,8 +3282,7 @@ msgstr "alla lista degli inoltri"
 
 #: plugins/admin/groups/class_groupMail.inc:613
 msgid "Please enter a valid email addres in 'Primary address' field."
-msgstr ""
-"Prego inserire un indirizzo email valido nel campo 'Indirizzo principale'"
+msgstr "Prego inserire un indirizzo email valido nel campo 'Indirizzo principale'"
 
 #: plugins/admin/groups/acl.tpl:4
 msgid "Object"
@@ -3612,8 +3598,7 @@ msgid "Create options"
 msgstr ""
 
 #: plugins/admin/applications/class_applicationParameters.inc:51
-msgid ""
-"This application has options disabled. You can enable them by clicking below."
+msgid "This application has options disabled. You can enable them by clicking below."
 msgstr ""
 
 #: plugins/admin/applications/class_applicationParameters.inc:87
@@ -4424,8 +4409,7 @@ msgid "Remove DNS service"
 msgstr ""
 
 #: plugins/admin/systems/class_servDNS.inc:34
-msgid ""
-"This server has DNS features enabled. You can disable them by clicking below."
+msgid "This server has DNS features enabled. You can disable them by clicking below."
 msgstr ""
 
 #: plugins/admin/systems/class_servDNS.inc:36
@@ -4433,8 +4417,7 @@ msgid "Add DNS service"
 msgstr ""
 
 #: plugins/admin/systems/class_servDNS.inc:37
-msgid ""
-"This server has DNS features disabled. You can enable them by clicking below."
+msgid "This server has DNS features disabled. You can enable them by clicking below."
 msgstr ""
 
 #: plugins/admin/systems/class_servDB.inc:131
@@ -5657,8 +5640,7 @@ msgid "Can't write IMAP quota. Server says '%s'."
 msgstr ""
 
 #: include/class_mail-methods-cyrus.inc:141
-msgid ""
-"Warning: imap_getacl is not implemented, wouldn't modify acl informations."
+msgid "Warning: imap_getacl is not implemented, wouldn't modify acl informations."
 msgstr ""
 
 #: include/class_mail-methods-cyrus.inc:176
@@ -5700,20 +5682,17 @@ msgstr ""
 
 #: include/class_plugin.inc:386
 #, php-format
-msgid ""
-"Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
 msgstr ""
 
 #: include/class_plugin.inc:412
 #, php-format
-msgid ""
-"Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
 msgstr ""
 
 #: include/class_plugin.inc:438
 #, php-format
-msgid ""
-"Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
 msgstr ""
 
 #: include/class_password-methods-ssha.inc:51
@@ -5732,8 +5711,7 @@ msgstr ""
 msgid ""
 "You are currently editing a database entry. Do you want to dismiss the "
 "changes?"
-msgstr ""
-"Stai modificando un campo del database. Vuoi abbandonare i cambiamenti?"
+msgstr "Stai modificando un campo del database. Vuoi abbandonare i cambiamenti?"
 
 #: include/class_password-methods.inc:166
 #, php-format
@@ -5741,8 +5719,7 @@ msgid "Setting the password failed. LDAP server says '%s'."
 msgstr ""
 
 #: include/class_password-methods.inc:185
-msgid ""
-"Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
+msgid "Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
 msgstr ""
 
 #: include/class_config.inc:69
@@ -5752,8 +5729,7 @@ msgstr ""
 
 #: include/class_config.inc:195 html/index.php:144
 msgid "Can't bind to LDAP. Please contact the system administrator."
-msgstr ""
-"Errore di connessione al server LDAP. Contatta l'amministratore del sistema."
+msgstr "Errore di connessione al server LDAP. Contatta l'amministratore del sistema."
 
 #: include/class_config.inc:426
 msgid "SID and/or RIDBASE missing in your configuration!"
@@ -5843,8 +5819,7 @@ msgstr ""
 
 #: include/functions_setup.inc:114
 #, php-format
-msgid ""
-"Optional objectclass '%s' required by plugin '%s' does not have version %s"
+msgid "Optional objectclass '%s' required by plugin '%s' does not have version %s"
 msgstr ""
 
 #: include/functions_setup.inc:118
@@ -5967,8 +5942,7 @@ msgstr "Controllo il modulo ldap"
 
 #: include/functions_setup.inc:261
 msgid "This is the main module used by GOsa and therefore really required."
-msgstr ""
-"Questo è il modulo più importante usato da GOsa ed è quindi necessario."
+msgstr "Questo è il modulo più importante usato da GOsa ed è quindi necessario."
 
 #: include/functions_setup.inc:264
 #, fuzzy
@@ -6075,8 +6049,7 @@ msgid "Checking for snmp Module"
 msgstr "Controllo il modulo imap"
 
 #: include/functions_setup.inc:300
-msgid ""
-"Simple Network Management Protocol (SNMP) is required for client monitoring."
+msgid "Simple Network Management Protocol (SNMP) is required for client monitoring."
 msgstr ""
 
 #: include/functions_setup.inc:309
@@ -6298,8 +6271,7 @@ msgstr ""
 #: html/index.php:57
 #, php-format
 msgid "GOsa configuration %s/gosa.conf is not readable. Aborted."
-msgstr ""
-"Il file di configurazione di GOsa %s/gosa.conf non è leggibile. Abortisco."
+msgstr "Il file di configurazione di GOsa %s/gosa.conf non è leggibile. Abortisco."
 
 #: html/index.php:79
 #, php-format
@@ -6340,8 +6312,7 @@ msgstr ""
 
 #: html/helpviewer.php:130
 #, php-format
-msgid ""
-"Can't read any helpfiles from ' %s ', possibly there is no help available."
+msgid "Can't read any helpfiles from ' %s ', possibly there is no help available."
 msgstr ""
 
 #: ihtml/themes/altlinux/conflict.tpl:2 ihtml/themes/default/conflict.tpl:2
@@ -6622,8 +6593,7 @@ msgstr ""
 msgid ""
 "Please enter the server URI to allow the setup to connect your LDAP server "
 "<i>(Example: ldap://your.server:389).</i>"
-msgstr ""
-"Inserisci la URI del server LDAP <i>(Per esempio: ldap://mio.server:389).</i>"
+msgstr "Inserisci la URI del server LDAP <i>(Per esempio: ldap://mio.server:389).</i>"
 
 #: ihtml/themes/default/setup_step4.tpl:2
 msgid ""
@@ -6701,5 +6671,3 @@ msgstr ""
 msgid "Index"
 msgstr ""
 
-#~ msgid "absent"
-#~ msgstr "assente"
