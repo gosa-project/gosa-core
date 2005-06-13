@@ -23,6 +23,7 @@
 require_once ("../include/php_setup.inc");
 require_once ("functions.inc");
 require_once ("functions_helpviewer.inc");
+header("Content-type: text/html; charset=UTF-8");
 
 session_start ();
 error_reporting(E_ALL);
