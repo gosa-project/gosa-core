@@ -162,7 +162,7 @@ class terminfo extends plugin
           $device= preg_replace('/^STRING: */', '', $device);
           $usage= @snmpget($host, $community, "UCD-SNMP-MIB::dskPercent.$n");
           $usage= preg_replace('/^INTEGER: */', '', $usage);
-          $partitions.= "<tr><td><b>$device</b></td><td><img alt=\"\" src=\"progress.php?x=100&amp;y=16&amp;p=$usage\" align=\"middle\"></td></tr>\n";
+          $partitions.= "<tr><td><b>$device</b></td><td>".progressbar($usage,100;16,true)."</td></tr>\n";
         }
         $smarty->assign("partitions", $partitions);
       } else {

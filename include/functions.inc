@@ -1746,7 +1746,7 @@ function progressbar($percentage,$width=100,$height=15,$showvalue=false)
                               background-color:#".$color2.$color2.$color."; \">";
 
 
-    if($height >10){
+    if(($height >10)&&($showvalue)){
       $str.=                 "<font style=\"font-size:".($height-2)."px;color:#FF5555;align:middle;padding-left:".((int)(($width*0.4)))."px;\">
                                <b>".$percentage."%</b>
                              </font>";

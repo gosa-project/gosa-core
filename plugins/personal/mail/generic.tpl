@@ -24,7 +24,7 @@
      <td>
       <br>
       {if $quotadefined eq "true"}
-      <img alt="" src="progress.php?x=100&amp;y=16&amp;p={$quotausage}" align="middle">
+      	{$quotausage}
       {else}
       {t}not defined{/t}
       {/if}
