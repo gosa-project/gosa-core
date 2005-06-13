@@ -21,7 +21,7 @@
 /* Configuration file location */
 define ("CONFIG_DIR", "/etc/gosa");
 define ("CONFIG_TEMPLATE_DIR", "../contrib/");
-define ("HELP_BASEDIR", "../doc/guide/admin/");
+define ("HELP_BASEDIR", "/home/cajus/");
 
 /* Define globals for revision comparing */
 $svn_path = '$HeadURL$';
@@ -1724,6 +1724,7 @@ function progressbar($percentage,$width=100,$height=15,$showvalue=false)
 
   $color  = dechex($percentage+150);
   $color2 = dechex(150 - $percentage);
+  $bgcolor= $showvalue?"FFFFFF":"DDDDDD";
 
   $progress = (int)(($percentage /100)*$width);
 
@@ -1738,7 +1739,7 @@ function progressbar($percentage,$width=100,$height=15,$showvalue=false)
                 padding:1px;\">
 
           <div style=\" width:".($width)."px;
-                        background-color:#DDDDDD;
+                        background-color:#$bgcolor;
                         height:".($height)."px;\">
 
                 <div style=\" width:".$progress."px;
@@ -1747,13 +1748,13 @@ function progressbar($percentage,$width=100,$height=15,$showvalue=false)
 
 
     if(($height >10)&&($showvalue)){
-      $str.=                 "<font style=\"font-size:".($height-2)."px;color:#FF5555;align:middle;padding-left:".((int)(($width*0.4)))."px;\">
+      $str.=                 "<font style=\"font-size:".($height-2)."px;color:#FF0000;align:middle;padding-left:".((int)(($width*0.4)))."px;\">
                                <b>".$percentage."%</b>
                              </font>";
    }
 
   $str.= "</div></div></div>";
-  
+
   return($str);
   }
 
