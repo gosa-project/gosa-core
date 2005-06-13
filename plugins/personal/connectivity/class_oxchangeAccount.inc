@@ -600,6 +600,23 @@ class oxchangeAccount extends plugin
 
     /* Show tab dialog headers */
     $display= "";
+    if ($this->parent != NULL){
+      if ($this->is_account){
+	$display="";
+      } else {
+        $obj= $this->parent->by_object['posixAccount'];
+	$obj2= $this->parent->by_object['mailAccount'];
+        if (! $obj->is_account){
+          $display= "<BR><BR><CENTER>"._("This account has <b>OpenXchange</b> features disabled. Posix features are needed for openXchange accounts, enable them first.")."</CENTER><BR><BR>";
+
+        } else {
+	  if (! $obj2->is_account){
+	    $display= "<BR><BR><CENTER>"._("This account has <b>OpenXchange</b> features disabled. Mail features are needed for openXchange accounts, enable them first.")."</CENTER><BR><BR>";
+            return ($display);
+	  }
+        }
+      }
+    }
 
     /* Show main page */
     $smarty= get_smarty();
@@ -735,8 +752,15 @@ class oxchangeAccount extends plugin
     $needupdate=TRUE;
 
     /*First at all, we must check if this is new or is updated */
-    foreach ($this->attrs['objectClass'] as $object){
-      if($object=="OXUserObject") $needupdate=FALSE;
+    if (isset($this->attrs['objectClass'])){
+      foreach ($this->attrs['objectClass'] as $object){
+        if($object=="OXUserObject") $needupdate=FALSE;
+      }
+	$uid=$this->attrs[$this->dnmode][0];
+    }else{
+
+	if($this->dnmode="uid") $uid=$this->parent->by_object['user']->uid;
+	else $uid=$this->parent->by_object['user']->sn." ".$this->parent->by_object['user']->givenName;
     }
 
     if($needupdate){
@@ -758,7 +782,7 @@ class oxchangeAccount extends plugin
       }
     }
 
-    $uid=$this->attrs[$this->dnmode][0];
+
 
     plugin::save();
 
