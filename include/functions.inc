@@ -1753,7 +1753,7 @@ function progressbar($percentage,$width=100,$height=15,$showvalue=false)
    }
 
   $str.= "</div></div></div>";
-
+  
   return($str);
   }
 

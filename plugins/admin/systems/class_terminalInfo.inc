@@ -109,7 +109,7 @@ class terminfo extends plugin
           $SwapTotal= preg_replace('/^.*[=:] ([0-9.]+)$/', '\\1', $SwapTotal);
           if ($SwapTotal != 0){
 #$smarty->assign("swap", (int)(($SwapTotal - $SwapFree)*100/$SwapTotal));
-            $smarty->assign("swap", porgressbar(0,100,15,true));
+            $smarty->assign("swap", progressbar(0,100,15,true));
           }
 
           /* Get system uptime */
@@ -120,7 +120,7 @@ class terminfo extends plugin
           $sysload= @snmpget($host, $community, "UCD-SNMP-MIB::laLoad.2");
           $sysload= preg_replace('/^.*[=:] ([0-9.]+)$/', '\\1', $sysload);
           
-          $smarty->assign("load", progressbar($sysload*100,100,20,true));
+          $smarty->assign("load", progressbar($sysload*100,100,15,true));
 
           /* Get status for key processes */
           $processes= @snmpwalk($host, $community, "UCD-SNMP-MIB::prNames");
