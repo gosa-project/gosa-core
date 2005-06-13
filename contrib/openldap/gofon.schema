@@ -41,6 +41,90 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.13.5 NAME 'goFonPIN'
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
 	SINGLE-VALUE )
 
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.6 NAME 'goFonType'
+	DESC 'sets the sip.conf type parameter'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.7 NAME 'goFonDmtfMode'
+	DESC 'sets the sip.conf dmtfmode parameter'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.8 NAME 'goFonHost'
+	DESC 'sets the sip.conf host parameter'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.9 NAME 'goFonDefaultIP'
+	DESC 'sets the sip.conf defaultip parameter'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.10 NAME 'goFonQualify'
+	DESC 'sets the sip.conf qualify parameter'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.11 NAME 'goFonAuth'
+	DESC 'sets the sip.conf auth parameter'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.12 NAME 'goFonSecret'
+	DESC 'sets the sip.conf secret parameter'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.13 NAME 'goFonInkeys'
+	DESC 'sets the sip.conf inkeys parameter'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.14 NAME 'goFonOutkey'
+	DESC 'sets the sip.conf outkey parameter'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.15 NAME 'goFonTrunk'
+	DESC 'sets the sip.conf trunk parameter'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.16 NAME 'goFonAccountCode'
+	DESC 'sets the sip.conf accountcode parameter'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.17 NAME 'goFonMSN'
+	DESC 'sets the sip.conf msn parameter'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE )
+
 # objectclass 
 objectclass (1.3.6.1.4.1.10098.1.2.3.11 NAME 'goFonAccount' SUP top AUXILIARY
 	DESC 'GOFon Account objectclass (v1.0)'
@@ -50,7 +134,9 @@ objectclass (1.3.6.1.4.1.10098.1.2.3.11 NAME 'goFonAccount' SUP top AUXILIARY
 objectclass (1.3.6.1.4.1.10098.1.2.3.12 NAME 'goFonHardware' SUP top STRUCTURAL
 	DESC 'defines a telephone (v1.0)'
 	MUST ( cn $ macAddress $ ipHostNumber )
-	MAY (description) )
+	MAY (description $ goFonType $ goFonDmtfMode $ goFonHost $ goFonDefaultIP $
+		 goFonQualify $ goFonAuth $ goFonSecret $ goFonInkeys $ goFonOutkey $
+		 goFonTrunk $ goFonAccountCode $ goFonMSN ) )
 
 objectclass (1.3.6.1.4.1.10098.1.2.3.13 NAME 'goFonPickupGroup' SUP top AUXILIARY
 	DESC 'Additive for posixGroups (v1.0)'
