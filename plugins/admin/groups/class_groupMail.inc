@@ -426,7 +426,7 @@ class mailgroup extends plugin
       $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
     }
     if (is_numeric($this->gosaMailQuota) && $this->gosaMailQuota != 0){
-      $smarty->assign("quotausage", $this->quotaUsage * 100 / $this->gosaMailQuota);
+      $smarty->assign("quotausage", progressbar(($this->quotaUsage * 100)/ $this->gosaMailQuota,100,15,true));
       $smarty->assign("quotadefined", "true");
     } else {
       $smarty->assign("quotadefined", "false");
