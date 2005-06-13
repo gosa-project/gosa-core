@@ -407,6 +407,8 @@ class userManagement extends plugin
         }
         if (isset($_POST['template'])){
           $smarty->assign("template", $_POST['template']);
+        } else {
+          $smarty->assign("template", "");
         }
         return($smarty->fetch(get_template_path('template.tpl', TRUE)));
       }
