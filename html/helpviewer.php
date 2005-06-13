@@ -27,21 +27,6 @@ require_once ("functions_helpviewer.inc");
 session_start ();
 error_reporting(E_ALL);
 
-/* Logged in? Simple security check */
-if (!isset($_SESSION['ui'])){
-  gosa_log ("Error: helpviewer.php called without session");
-  echo "<b>"._("Help is not available if you are not logged in.")."</b>";
-  exit;
-}
-
-/* Set template compile directory */
-$config= $_SESSION['config'];
-if (isset ($config->data['MAIN']['COMPILE'])){
-  $smarty->compile_dir= $config->data['MAIN']['COMPILE'];
-} else {
-  $smarty->compile_dir= '/var/spool/gosa/';
-}
-
 /* Language setup */
 if ($config->data['MAIN']['LANG'] == ""){
   $lang= get_browser_language();
@@ -60,6 +45,22 @@ $domain = 'messages';
 bindtextdomain($domain, "$BASE_DIR/locale");
 textdomain($domain);
 @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
+
+
+/* Logged in? Simple security check */
+if (!isset($_SESSION['ui'])){
+  gosa_log ("Error: helpviewer.php called without session");
+  echo "<b>"._("Help is not available if you are not logged in.")."</b>";
+  exit;
+}
+
+/* Set template compile directory */
+$config= $_SESSION['config'];
+if (isset ($config->data['MAIN']['COMPILE'])){
+  $smarty->compile_dir= $config->data['MAIN']['COMPILE'];
+} else {
+  $smarty->compile_dir= '/var/spool/gosa/';
+}
 
 /* Get plugin list */
 $plist= $_SESSION['plist'];
