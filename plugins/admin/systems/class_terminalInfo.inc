@@ -77,9 +77,9 @@ class terminfo extends plugin
  
 
       /* Prevent undefined variable .... */ 
-      $smarty->assign("load", progressbar(0,100,15));
-      $smarty->assign("mem", progressbar(0,100,15));
-      $smarty->assign("swap", progressbar(0,100,15));
+      $smarty->assign("load", progressbar(0,100,15,true));
+      $smarty->assign("mem", progressbar(0,100,15,true));
+      $smarty->assign("swap", progressbar(0,100,15,true));
  
       /* Check if terminal is online */
       $query= "fping -q -r 1 -t 500 ".$this->cn;
@@ -100,7 +100,8 @@ class terminfo extends plugin
           $MemTotal= @snmpget($host, $community, "UCD-SNMP-MIB::memory.memTotalReal.0");
           $MemTotal= preg_replace('/^.*[=:] ([0-9.]+)$/', '\\1', $MemTotal);
           if ($MemTotal != 0){
-            $smarty->assign("mem", (int)(($MemTotal - $MemFree)*100/$MemTotal));
+            $smarty->assign("mem",progressbar( (int)(($MemTotal - $MemFree)*100/$MemTotal),100,15,true));
+          ;
           }
           $SwapFree= @snmpget($host, $community, "UCD-SNMP-MIB::memory.memAvailSwap.0");
           $SwapFree= preg_replace('/^.*[=:] ([0-9.]+)$/', '\\1', $SwapFree);
@@ -108,7 +109,7 @@ class terminfo extends plugin
           $SwapTotal= preg_replace('/^.*[=:] ([0-9.]+)$/', '\\1', $SwapTotal);
           if ($SwapTotal != 0){
 #$smarty->assign("swap", (int)(($SwapTotal - $SwapFree)*100/$SwapTotal));
-            $smarty->assign("swap", 0);
+            $smarty->assign("swap", porgressbar(0,100,15,true));
           }
 
           /* Get system uptime */
@@ -119,7 +120,7 @@ class terminfo extends plugin
           $sysload= @snmpget($host, $community, "UCD-SNMP-MIB::laLoad.2");
           $sysload= preg_replace('/^.*[=:] ([0-9.]+)$/', '\\1', $sysload);
           
-          $smarty->assign("load", progressbar($sysload*100,100,20));
+          $smarty->assign("load", progressbar($sysload*100,100,20,true));
 
           /* Get status for key processes */
           $processes= @snmpwalk($host, $community, "UCD-SNMP-MIB::prNames");
@@ -162,7 +163,7 @@ class terminfo extends plugin
           $device= preg_replace('/^STRING: */', '', $device);
           $usage= @snmpget($host, $community, "UCD-SNMP-MIB::dskPercent.$n");
           $usage= preg_replace('/^INTEGER: */', '', $usage);
-          $partitions.= "<tr><td><b>$device</b></td><td>".progressbar($usage,100;16,true)."</td></tr>\n";
+          $partitions.= "<tr><td><b>$device</b></td><td>".progressbar($usage,100,16,true)."</td></tr>\n";
         }
         $smarty->assign("partitions", $partitions);
       } else {
