@@ -315,7 +315,7 @@ function createResultEntry($entry,$res,$name,$max)
   if(strlen($color)==1) $color = "0".$color;
 
   /* the object tag is needed for W3c */
-  $str =  "<a href=\"?pg=".$name."&amp;mark=1'\" title=\"".$percentage."% ".$entry['headline']."\">
+  $str =  "<a href=\"?pg=".$name."&amp;mark=1\" title=\"".$percentage."% ".$entry['headline']."\">
           <object>
           <table width=\"98%\" align=\"center\">
             <tr>
