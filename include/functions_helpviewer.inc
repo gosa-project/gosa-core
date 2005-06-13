@@ -320,7 +320,7 @@ function createResultEntry($entry,$res,$name,$max)
           <table width=\"98%\" align=\"center\">
             <tr>
               <td height=15>
-                <b>".$entry['headline']."</b> -".htmlentities( substr(strip_tags($entry['content']),0,150))."...
+                <b>".$entry['headline']."</b> -".htmlentities( substr(strip_tags($entry['content']),0,120))."...
               </td>
               <td width=110 valign=\"top\">
                 <div style=\"width:100px;background-color:#BBBBBB;\">
