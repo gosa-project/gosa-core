@@ -339,7 +339,7 @@ function createResultEntry($entry,$res,$name,$max)
           </table>
           </object></a>
           ";
-  $str.=  "<hr>";
+  $str.=  "<hr size=\"1\">";
 
   return($str);
 }
