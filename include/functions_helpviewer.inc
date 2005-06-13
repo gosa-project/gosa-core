@@ -256,8 +256,13 @@ function searchlist($arr,$res,$maxresults)
   }
 
   /* appending footer message for resultlist */
-  $ret.= "<br> ".sprintf(_("%s results for your search with the keyword %s interpreted as %s"), "<b>".count($topten)."</b>", "<b>".htmlentities($_SESSION['search_string'])."</b>", "<b>".$_SESSION['parsed_search_keyword']."</b>");
-
+  $ret.= "<br>
+              ".sprintf(htmlentities(_("%s results for your search with the keyword %s interpreted as %s")), 
+                            "<b>".count($topten)."</b>", 
+                            "<b>".($_SESSION['search_string'])."</b>", 
+                            "<b>".$_SESSION['parsed_search_keyword']."</b>");
+  $ret.="<br>
+        <br>";
   return($ret);
 }
 
@@ -301,14 +306,42 @@ function markword($string,$position,$word,$prefix,$suffix)
   return($first.$prefix.$word.$suffix.$last);
 } 
 
-
 /* Creates HTML output for a single search result entry */
 function createResultEntry($entry,$res,$name,$max)
 {
   $percentage = (int)(($res['hits']['overall'] / $max) * 100) ;
-  $str =  "<b>".$entry['headline']."</b><br>";
-  $str.=  "<b><a href=\"?pg=".$name."&mark=1\">".sprintf(_("%s%% hit rate in file %s"),$percentage,$name)."</a></b><br>" ;
-  $str.=  substr(strip_tags($entry['content']),0,200);
+  $color  = dechex($percentage+150);
+  $color2 = dechex(150 - $percentage);
+  if(strlen($color)==1) $color = "0".$color;
+
+  /* the object tag is needed for W3c */
+  $str =  "<a href=\"?pg=".$name."&amp;mark=1'\" title=\"".$percentage."% ".$entry['headline']."\">
+          <object>
+          <table width=\"98%\" align=\"center\">
+            <tr>
+              <td height=15>
+                <b>".$entry['headline']."</b> -".htmlentities( substr(strip_tags($entry['content']),0,150))."...
+              </td>
+              <td width=110 valign=\"top\">
+                <div style=\"width:100px;background-color:#BBBBBB;\">
+                  <div style=\"width:".$percentage."px; height:13px; background-color:#".$color2.$color2.$color."; \">
+                    <font style=\"color:#FFFFFF;font-size:12px;padding-left:40px;\">
+                      ".$percentage."%
+                    </font>
+                  </div>
+                </div>
+              </td>
+             </tr>
+             <tr>
+              <td colspan=2>
+                <b>
+                  ".htmlentities(sprintf(_("%s%% hit rate in file %s"),$percentage,$name))."
+                </b>
+              </td>
+            </tr>
+          </table>
+          </object></a>
+          ";
   $str.=  "<hr>";
 
   return($str);
