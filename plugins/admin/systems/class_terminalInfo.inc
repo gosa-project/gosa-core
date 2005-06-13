@@ -74,7 +74,13 @@ class terminfo extends plugin
       $display= "";
 
       $smarty->assign("staticAddress", "");
-   
+ 
+
+      /* Prevent undefined variable .... */ 
+      $smarty->assign("load", progressbar(0,100,15));
+      $smarty->assign("mem", progressbar(0,100,15));
+      $smarty->assign("swap", progressbar(0,100,15));
+ 
       /* Check if terminal is online */
       $query= "fping -q -r 1 -t 500 ".$this->cn;
       exec ($query, $dummy, $retval);
@@ -112,7 +118,8 @@ class terminfo extends plugin
           /* Get system load */
           $sysload= @snmpget($host, $community, "UCD-SNMP-MIB::laLoad.2");
           $sysload= preg_replace('/^.*[=:] ([0-9.]+)$/', '\\1', $sysload);
-          $smarty->assign("load", $sysload*100);
+          
+          $smarty->assign("load", progressbar($sysload*100,100,20));
 
           /* Get status for key processes */
           $processes= @snmpwalk($host, $community, "UCD-SNMP-MIB::prNames");
