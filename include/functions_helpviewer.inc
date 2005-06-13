@@ -327,12 +327,7 @@ function createResultEntry($entry,$res,$name,$max)
               <td height=15>
                 <b>".$entry['headline']."</b> -".htmlentities( substr(strip_tags($entry['content']),0,120))."...
               </td>
-              <td width=50 valign=\"top\">
-                <div style=\"width:50px;background-color:#DDDDDD;\">
-                  <div style=\"width:".((int)($percentage/2))."px; height:8px; background-color:#".$color2.$color2.$color."; \">
-                  </div>
-                </div>
-              </td>
+              <td width=50 valign=\"top\">".progressbar($percentage,50,8)."</td>
              </tr>
              <tr>
               <td colspan=2>

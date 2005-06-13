@@ -1718,5 +1718,47 @@ function compare_revision($revision_file, $revision)
   return $result;
 }
 
+function progressbar($percentage,$width=100,$height=15,$showvalue=false)
+  {
+  $str = ""; // Our return value will be saved in this var
+
+  $color  = dechex($percentage+150);
+  $color2 = dechex(150 - $percentage);
+
+  $progress = (int)(($percentage /100)*$width);
+
+  /* Abort printing out percentage, if divs are to small */
+
+
+  /* If theres a better solution for this, use it... */
+  $str = "
+  <div style=\" width:".($width)."px; 
+                height:".($height)."px;
+                background-color:#000000;
+                padding:1px;\">
+
+          <div style=\" border-style: solid;
+                        border-width: 0pt;
+                        width:".($width)."px;
+                        background-color:#DDDDDD;
+                        height:".($height)."px;\">
+
+                <div style=\" width:".$progress."px;
+                              height:".$height."px;
+                              background-color:#".$color2.$color2.$color."; \">";
+
+
+    if($height >10){
+      $str.=                 "<font style=\"font-size:".($height-2)."px;color:#FF5555;align:middle;padding-left:".((int)(($width*0.7)/2))."px;\">
+                               <b>".$percentage."%</b>
+                             </font>";
+   }
+
+  $str.= "</div></div></div>";
+
+  return($str);
+  }
+
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
