@@ -257,7 +257,7 @@ function searchlist($arr,$res,$maxresults)
 
   /* appending footer message for resultlist */
   $ret.= "<br>
-              ".sprintf(htmlentities(_("%s results for your search with the keyword %s interpreted as %s")), 
+              ".sprintf(_("%s results for your search with the keyword %s interpreted as %s"), 
                             "<b>".count($topten)."</b>", 
                             "<b>".($_SESSION['search_string'])."</b>", 
                             "<b>".$_SESSION['parsed_search_keyword']."</b>");
@@ -324,10 +324,7 @@ function createResultEntry($entry,$res,$name,$max)
               </td>
               <td width=110 valign=\"top\">
                 <div style=\"width:100px;background-color:#BBBBBB;\">
-                  <div style=\"width:".$percentage."px; height:13px; background-color:#".$color2.$color2.$color."; \">
-                    <font style=\"color:#FFFFFF;font-size:12px;padding-left:40px;\">
-                      ".$percentage."%
-                    </font>
+                  <div style=\"width:".$percentage."px; height:8px; background-color:#".$color2.$color2.$color."; \">
                   </div>
                 </div>
               </td>
