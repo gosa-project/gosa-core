@@ -599,7 +599,7 @@ class oxchangeAccount extends plugin
   {
 
     /* Show tab dialog headers */
-    $display= "";
+    $display="";
     if ($this->parent != NULL){
       if ($this->is_account){
 	$display="";
@@ -635,8 +635,10 @@ class oxchangeAccount extends plugin
     $smarty->assign("oxchangeAccountACL", chkacl($this->acl, "oxchangeAccount"));
     if ($this->is_account){
       $smarty->assign("oxchangeState", "checked");
+      $smarty->assign("oxState", "");
     } else {
       $smarty->assign("oxchangeState", "");
+      $smarty->assign("oxState", "disabled");
     }
 
     $smarty->assign("timezones", $this->timezones);
