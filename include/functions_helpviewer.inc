@@ -312,7 +312,12 @@ function createResultEntry($entry,$res,$name,$max)
   $percentage = (int)(($res['hits']['overall'] / $max) * 100) ;
   $color  = dechex($percentage+150);
   $color2 = dechex(150 - $percentage);
+
+  $entry['content'] = preg_replace("\"".$entry['headline']."\"","",$entry['content'],1);
+
   if(strlen($color)==1) $color = "0".$color;
+
+
 
   /* the object tag is needed for W3c */
   $str =  "<a href=\"?pg=".$name."&amp;mark=1\" title=\"".$percentage."% ".$entry['headline']."\">
@@ -322,9 +327,9 @@ function createResultEntry($entry,$res,$name,$max)
               <td height=15>
                 <b>".$entry['headline']."</b> -".htmlentities( substr(strip_tags($entry['content']),0,120))."...
               </td>
-              <td width=110 valign=\"top\">
-                <div style=\"width:100px;background-color:#BBBBBB;\">
-                  <div style=\"width:".$percentage."px; height:8px; background-color:#".$color2.$color2.$color."; \">
+              <td width=50 valign=\"top\">
+                <div style=\"width:50px;background-color:#DDDDDD;\">
+                  <div style=\"width:".((int)($percentage/2))."px; height:8px; background-color:#".$color2.$color2.$color."; \">
                   </div>
                 </div>
               </td>
