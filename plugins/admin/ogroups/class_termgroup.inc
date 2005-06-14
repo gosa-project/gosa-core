@@ -23,7 +23,11 @@ class termgroup extends plugin
         $attrs = $ldap->fetch();
         if (in_array("gotoTerminal", $attrs['objectClass']) ||
             in_array("gotoWorkstation", $attrs['objectClass'])){
-          $this->members[$attrs['cn'][0]]= $attrs['macAddress'][0];
+          if (isset($attrs['macAddress'])){
+            $this->members[$attrs['cn'][0]]= $attrs['macAddress'][0];
+          } else {
+            $this->members[$attrs['cn'][0]]= "";
+          }
         }
       }
     }

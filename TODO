@@ -6,7 +6,7 @@ Things to fix before 2.4:
   - shared folders
   - Kolab disabled -> check. Check is_account!
 
-* uid not defined when adding new posix users
+* Check why the group is doppelt belegt
 
 Target for 2.5:
 ===============
