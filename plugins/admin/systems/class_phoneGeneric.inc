@@ -12,15 +12,43 @@ class phoneGeneric extends plugin
   var $ignore_account= TRUE;
 
   /* Needed values and lists */
-  var $base= "";
-  var $cn= "";
-  var $macAddress= "";
-  var $ipHostNumber= "";
-  var $description= "";
-  var $orig_dn= "";
+  var $base             = "";
+  var $cn               = "";
+  var $macAddress       = "";
+  var $ipHostNumber     = "";
+  var $description      = "";
+  var $orig_dn          = "";
+  var $goFonType        = "";
+  var $goFonDmtfMode    = "";
+  var $goFonHost        = "";
+  var $goFonDefaultIP   = "";
+  var $goFonQualify     = "";
+  var $goFonAuth        = "";
+  var $goFonSecret      = "";
+  var $goFonInkeys      = "";
+  var $goFonOutkey      = "";
+  var $goFonTrunk       = "";
+  var $goFonAccountCode = "";
+  var $goFonMSN         = "";
+  var $selected_categorie    = 0;
 
   /* attribute list for save action */
-  var $attributes= array("cn", "description", "macAddress", "ipHostNumber");
+  var $attributes= array("cn", "description", "macAddress", "ipHostNumber"
+                         ,"goFonType","goFonDmtfMode","goFonHost","goFonDefaultIP",
+                          "goFonQualify","goFonAuth","goFonSecret","goFonInkeys","goFonOutkey",
+                          "goFonTrunk","goFonAccountCode","goFonMSN","selected_categorie" 
+                         );
+ 
+  var $usedattrs =    array( "0"=>array("cn", "description", "macAddress", "ipHostNumber",
+                                  "goFonType","goFonDmtfMode","goFonHost","goFonDefaultIP",
+                                  "goFonQualify"),
+                             "1"=>array("cn", "description", "macAddress", "ipHostNumber",
+                                  "goFonType","goFonHost","goFonDefaultIP",
+                                  "goFonQualify","goFonAuth","goFonSecret","goFonInkeys","goFonOutkey",
+                                  "goFonTrunk","goFonAccountCode","selected_categorie"),
+                             "2"=>array("cn", "description", "macAddress", "ipHostNumber","goFonMSN"));
+  
+
   var $objectclasses= array("top", "goFonHardware");
 
   function phonegeneric ($config, $dn= NULL)
@@ -35,6 +63,16 @@ class phoneGeneric extends plugin
     } else {
       $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,/", "", $this->dn);
     }
+  
+    if($this->goFonMSN != ""){
+      $this->selected_categorie = 2;
+    }elseif($this->goFonAccountCode != ""){
+      $this->selected_categorie = 1 ;
+    } else {
+      $this->selected_categorie = 0;
+    }
+    
+    
 
     /* Save dn for later references */
     $this->orig_dn= $this->dn;
@@ -42,6 +80,8 @@ class phoneGeneric extends plugin
 
   function execute()
   {
+  
+  
     /* Do we represent a valid phone? */
     if (!$this->is_account && $this->parent == NULL){
       $display= "<img alt=\"\" src=\"images/stop.png\" align=middle>&nbsp;<b>".
@@ -52,6 +92,23 @@ class phoneGeneric extends plugin
     /* Fill templating stuff */
     $smarty= get_smarty();
     $smarty->assign("bases", $this->config->idepartments);
+
+    /* Create Arrays for samrty select boxes */
+    $smarty->assign("categories",     array("SIP - phones","IAX - phones","CAPI - phones"));
+    $smarty->assign("goFonTypes",     array("peer"      =>"peer"      ,"user"   =>"user"    ,"friend" =>"friend"));
+    $smarty->assign("goFonDmtfModes", array("inband"    =>"inband"    ,"rfc2833"=>"rfc2833" ,"info"   =>"info"));
+    $smarty->assign("goFonAuths",     array("plaintext" =>"plaintext" ,"md5"    =>"md5"     ,"rsa"    =>"rsa"));
+    $smarty->assign("goFonTrunks",    array("yes" =>"yes"             ,"no"     =>"no"));
+
+    /* deativate all fields that are not used by the specified type */
+    foreach($this->attributes as $att){
+      if(!in_array($att,$this->usedattrs[$this->selected_categorie])){
+        $smarty->assign($att."USED", "disabled" );
+      }else{
+        $smarty->assign($att."USED", "" );
+      }
+    }
+
 
     /* Assign attributes */
     foreach ($this->attributes as $attr){
@@ -65,6 +122,7 @@ class phoneGeneric extends plugin
         
     /* Show main page */
     $smarty->assign("netconfig", dirname(__FILE__)."/network.tpl");
+    $smarty->assign("phonesettings", dirname(__FILE__)."/phonesettings.tpl");
     return($smarty->fetch (get_template_path('phone.tpl', TRUE)));
   }
 
@@ -148,7 +206,21 @@ class phoneGeneric extends plugin
   function save()
   {
     plugin::save();
+   
+   
+    /* only to define which attrs to save*/ 
+    $mode = $this->attrs['selected_categorie'];
 
+    /* Remove all unwanted attrs */
+    foreach($this->attributes as $att){
+      if(!in_array($att,$this->usedattrs[$mode])){
+        $this->attrs[$att] = array();
+      }
+    }
+
+    /* unset the categorie*/
+    unset($this->attrs['selected_categorie']);
+    
     /* Remove all empty values */
     if ($this->orig_dn == 'new'){
       $attrs= array();

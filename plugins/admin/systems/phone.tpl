@@ -30,7 +30,9 @@
 </table>
 
 <p class="plugbottom" style="margin-bottom:0px; padding:0px;">&nbsp;</p>
+{include file="$phonesettings"}
 
+<p class="plugbottom" style="margin-bottom:0px; padding:0px;">&nbsp;</p>
 {include file="$netconfig"}
 
 <!-- Place cursor -->
