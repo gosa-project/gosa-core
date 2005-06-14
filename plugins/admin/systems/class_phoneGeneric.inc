@@ -165,6 +165,16 @@ class phoneGeneric extends plugin
     $message= array();
     $this->dn= "cn=".$this->cn.",ou=phones,ou=systems,".$this->base;
 
+    /* To check for valid ip*/
+    $num="(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])";
+    if (!preg_match("/^$num\\.$num\\.$num\\.$num$/", $this->goFonDefaultIP)){
+       $message[]= _("Wrong IP format in field goFonDefaultIP\\n");
+    }
+    
+    if((strlen($this->goFonQualify))!=(strlen((int)($this->goFonQualify)))){
+      $message[]= _("The given value for goFonQualify is not a valid number.");
+    }
+
     /* must: cn, macAddress, ipHostNumber */
     if ($this->cn == "" && chkacl ($this->acl, "cn") == ""){
       $message[]= _("The required field 'Phone name' is not set.");
