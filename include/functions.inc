@@ -1635,6 +1635,39 @@ function rmdirRecursive($path, $followLinks=false) {
   return rmdir($path);
 }
 
+function scandir_php4($path,$sort_desc=false)
+{
+$ret = false;
+
+/* is this a dir ? */
+if(is_dir($path)) {
+  
+  /* is this path a readable one */
+  if(is_readable($path)){
+    
+    /* Get contents and write it into an array */   
+    $ret = array();    
+  
+    $dir = opendir($path);
+    
+    /* Is this a correct result ?*/
+    if($dir){
+      while($fp = readdir($dir))
+        $ret[]= $fp;
+      }
+    }
+  }
+  /* Sort array ascending , like scandir */
+  sort($ret);
+
+  /* Sort descending if parameter is sort_desc is set */
+  if($sort_desc) {
+    $ret = array_reverse($ret);
+    }
+
+  return($ret);
+}
+
 function clean_smarty_compile_dir($directory)
 {
   global $svn_revision;
@@ -1652,7 +1685,7 @@ function clean_smarty_compile_dir($directory)
       # contents should match the revision number
       if(!compare_revision($revision_file, $svn_revision)){
         // If revision differs, clean compile directory
-        foreach(scandir($directory) as $file) {
+        foreach(scandir_php4($directory) as $file) {
           if( is_file($directory."/".$file) &&
               is_writable($directory."/".$file)) {
               // delete file
