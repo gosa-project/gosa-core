@@ -102,18 +102,20 @@ class phoneGeneric extends plugin
 
     /* deativate all fields that are not used by the specified type */
     foreach($this->attributes as $att){
-      if(!in_array($att,$this->usedattrs[$this->selected_categorie])){
+      if((!in_array($att,$this->usedattrs[$this->selected_categorie]))||(chkacl($this->acl,$att)!="")){
         $smarty->assign($att."USED", "disabled" );
+        $smarty->assign($att, "");
       }else{
         $smarty->assign($att."USED", "" );
+        $smarty->assign($att, $this->$att);
       }
     }
-
+    
+    $smarty->assign("selected_categorie",$this->selected_categorie);
 
     /* Assign attributes */
     foreach ($this->attributes as $attr){
       $smarty->assign($attr."ACL", chkacl($this->acl, $attr));
-      $smarty->assign("$attr", $this->$attr);
     }
     $smarty->assign("base_select", $this->base);
     
@@ -213,8 +215,15 @@ class phoneGeneric extends plugin
 
     /* Remove all unwanted attrs */
     foreach($this->attributes as $att){
+      
+      /* Check all attributes, if they are needed for this type of phone */
       if(!in_array($att,$this->usedattrs[$mode])){
         $this->attrs[$att] = array();
+      }
+    
+      /* Test rights of this user ... */
+      if(chkacl($this->acl,$att)!=""){
+        unset($this->attrs[$att]);
       }
     }
 
