@@ -2,7 +2,7 @@
 
 <table width="100%" cellpadding=10>
 	<tr>
-		<td colspan>
+		<td>
 			<table width="100%">
 			<tr>
 				<td width="25%">
@@ -46,7 +46,7 @@
 					{t}Default IP{/t}
 				</td>
 				<td>
-					<input width="200" name="goFonDefaultIP" value="{$goFonDefaultIP}" {$goFonDefaultIPUSED}>
+					<input style="width:200px" name="goFonDefaultIP" value="{$goFonDefaultIP}" {$goFonDefaultIPUSED}>
 				</td>
 			</tr>
 			<tr>
@@ -54,7 +54,7 @@
 					{t}Quality{/t}
 				</td>
 				<td>
-					<input width="200" name="goFonQualify" value="{$goFonQualify}" {$goFonQualifyUSED}>
+					<input style="width:200px" name="goFonQualify" value="{$goFonQualify}" {$goFonQualifyUSED}>
 				</td>
 			</tr>
 			</table>
@@ -76,7 +76,7 @@
 						 {t}GoFonSecret{/t}	
 					</td>
 					<td>
-						<input width="200" name="goFonSecret" value="{$goFonSecret}" {$goFonSecretUSED}>
+						<input style="width:200px" name="goFonSecret" value="{$goFonSecret}" {$goFonSecretUSED}>
 					</td>
 				</tr>
 				<tr>
@@ -84,7 +84,7 @@
 						 {t}GoFonInkeys{/t}
 					</td>
 					<td>
-						<input width="200" name="goFonInkeys" value="{$goFonInkeys}" {$goFonInkeysUSED}>
+						<input style="width:200px" name="goFonInkeys" value="{$goFonInkeys}" {$goFonInkeysUSED}>
 					</td>
 				</tr>
 				<tr>
@@ -92,7 +92,7 @@
 						 {t}GoFonOutKeys{/t}
 					</td>
 					<td>
-						<input width="200" name="goFonOutkey" value="{$goFonOutkey}" {$goFonOutkeyUSED}>
+						<input style="width:200px" name="goFonOutkey" value="{$goFonOutkey}" {$goFonOutkeyUSED}>
 					</td>
 				</tr>
 			</table>
@@ -114,7 +114,7 @@
 					{t}AccountCode {/t}
         </td>
         <td>
-					<input width="200" name="goFonAccountCode" value="{$goFonAccountCode}" {$goFonAccountCodeUSED}>
+					<input style="width:200px" name="goFonAccountCode" value="{$goFonAccountCode}" {$goFonAccountCodeUSED}>
 				</td>
 			</tr>
 		</table>
@@ -136,7 +136,7 @@
 						{t}MSN{/t}
 					</td>
 					<td>
-						<input width="200" name="goFonMSN" value="{$goFonMSN}" {$goFonMSNUSED}>
+						<input style="width:200px" name="goFonMSN" value="{$goFonMSN}" {$goFonMSNUSED}>
 					</td>
 				</tr>
 			</table>
