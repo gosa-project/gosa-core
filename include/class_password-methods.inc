@@ -63,7 +63,7 @@ class passwordMethod
 
 
   // this function returns all loaded classes for password encryption
-  function get_available_methods()
+  static function get_available_methods()
   {
     $ret =false;
     $all = get_declared_classes();
@@ -169,7 +169,7 @@ function change_password ($dn, $password, $mode=0, $hash= "")
 }
 
 
-// Retrun something like array['sambaLMPassword']= "lalla..." 
+// Return something like array['sambaLMPassword']= "lalla..." 
 function generate_smb_nt_hash($password)
 {
   global $config;
