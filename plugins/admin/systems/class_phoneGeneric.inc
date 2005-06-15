@@ -38,7 +38,8 @@ class phoneGeneric extends plugin
                           "goFonQualify","goFonAuth","goFonSecret","goFonInkeys","goFonOutkey",
                           "goFonTrunk","goFonAccountCode","goFonMSN","selected_categorie" 
                          );
- 
+
+  /* this array defines which attributes are schown / saved for the different type of phones */ 
   var $usedattrs =    array( "0"=>array("cn", "description", "macAddress", "ipHostNumber",
                                   "goFonType","goFonDmtfMode","goFonHost","goFonDefaultIP",
                                   "goFonQualify"),
