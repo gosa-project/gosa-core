@@ -337,7 +337,7 @@ class group extends plugin
     natcasesort ($this->users);
     reset ($this->users);
 
-    $ldap->cd ($this->config->current['BASE']);
+    $ldap->cd ($gufilter['dselect']);
     $ldap->search ("(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(!(uid=*$)))");
     $this->allusers= array();
     while ($attrs= $ldap->fetch()){
