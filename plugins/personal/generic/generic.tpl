@@ -394,7 +394,8 @@
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
   document.mainform.sn.focus();
-  if (yearSel != "") populate(document.mainform,document.mainform.dob);
+  	if (document.mainform.yearSel != "")
+				populate(document.mainform,document.mainform.dob);
   -->
 </script>
 

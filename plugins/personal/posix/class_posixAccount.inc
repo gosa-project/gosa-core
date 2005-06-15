@@ -488,8 +488,11 @@ class posixAccount extends plugin
     /* Checkboxes */
     if ($this->force_ids == 1){
       $smarty->assign("force_ids", "checked");
+      if ($_SESSION['js']){
+        $smarty->assign("forceMode", "");
+      }
     } else {
-      if ($_SESSION["js"]){
+      if ($_SESSION['js']){
         $smarty->assign("forceMode", "disabled");
       }
       $smarty->assign("force_ids", "");
@@ -876,7 +879,6 @@ class posixAccount extends plugin
           $message[]= _("Value specified as 'GID' is too small.");
         }
       }
-
     }
 
     /* Check shadow settings, well I like spaghetties... */

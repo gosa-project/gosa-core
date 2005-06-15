@@ -1,34 +1,37 @@
 	function populate(objForm,resultForm) {
-		yearSel=objForm.year.options[objForm.year.selectedIndex].text;
-		monthIx=objForm.month.selectedIndex;
-		nextMonthIx=0;
-		if(monthIx!=11)
-			nextMonthIx=monthIx+1;
+		if(objForm.year) {
+			yearSel=objForm.year.options[objForm.year.selectedIndex].text;
+		
+			monthIx=objForm.month.selectedIndex;
+			nextMonthIx=0;
+			if(monthIx!=11)
+				nextMonthIx=monthIx+1;
 
-		nextMonthSel=objForm.month.options[nextMonthIx].value;
-		monthSel=objForm.month.options[monthIx].value;
+			nextMonthSel=objForm.month.options[nextMonthIx].value;
+			monthSel=objForm.month.options[monthIx].value;
 
-		daySel=1;
-		if(objForm.day.selectedIndex!=-1)
-			daySel=objForm.day.options[objForm.day.selectedIndex].value;
+			daySel=1;
+			if(objForm.day.selectedIndex!=-1)
+				daySel=objForm.day.options[objForm.day.selectedIndex].value;
 
-		timeOfDayOne = new Date(yearSel, nextMonthSel, 1);
-		timeDifference = timeOfDayOne - 86400000;
-		timeOfLastDay = new Date(timeDifference);
+			timeOfDayOne = new Date(yearSel, nextMonthSel, 1);
+			timeDifference = timeOfDayOne - 86400000;
+			timeOfLastDay = new Date(timeDifference);
 
-		var daysInMonth = timeOfLastDay.getDate();
+			var daysInMonth = timeOfLastDay.getDate();
 
-		if(daySel>daysInMonth) daySel=daysInMonth;
+			if(daySel>daysInMonth) daySel=daysInMonth;
 
-		selectedDate= new Date(yearSel,monthSel,daySel);
-		for (var i = 0; i < objForm.day.length; i++) {
-			objForm.day.options[0] = null;
+			selectedDate= new Date(yearSel,monthSel,daySel);
+			for (var i = 0; i < objForm.day.length; i++) {
+				objForm.day.options[0] = null;
+			}
+			for (var i = 0; i < daysInMonth; i++) {
+				objForm.day.options[i] = new Option(i+1);
+			}
+			objForm.day.selectedIndex=daySel-1;
+			saveResult(selectedDate,resultForm);
 		}
-		for (var i = 0; i < daysInMonth; i++) {
-			objForm.day.options[i] = new Option(i+1);
-		}
-		objForm.day.selectedIndex=daySel-1;
-		saveResult(selectedDate,resultForm);
 	}
 
 	function createResult(objForm,resultForm){
