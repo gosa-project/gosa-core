@@ -30,21 +30,31 @@
      <td>{$status}</td>
     </tr>
    </table>
-   <br>
    <table>
     <tr>
      <td>
-      <input type=checkbox name="force_ids" value="1" {$force_ids} {$force_idsACL} onclick="changeState('uidNumber'); changeState('gidNumber')">
+      <input type=checkbox name="force_ids" value="1" {$force_ids} {$force_idsACL} onclick="changeState('uidNumber'); changeState('gidNumber');">
+					</td>
+					<td>
       {t}Force UID/GID{/t}
      </td>
-     <td>{t}UID{/t}</td>
-     <td><input name="uidNumber" id="uidNumber" size=5 maxlength=5 {$forceMode} {$uidNumberACL} value="{$uidNumber}"></td>
-    </tr>
-    <tr>
-     <td style="width:120px;"></td>
-     <td>{t}GID{/t}</td>
-     <td><input name="gidNumber" id="gidNumber" size=5 maxlength=5 {$forceMode} {$gidNumberACL} value="{$gidNumber}"></td>
-    </tr>
+					<td style="width:20px;"></td>
+					<td>
+						{t}UID{/t}
+					</td>
+					<td>
+						<input name="uidNumber" id="uidNumber" size=5 maxlength=5 {$forceMode} {$uidNumberACL} value="{$uidNumber}">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3"></td>
+					<td>
+						{t}GID{/t}
+					</td>
+     <td>
+						<input name="gidNumber" id="gidNumber" size=5 maxlength=5 {$forceMode} {$gidNumberACL} value="{$gidNumber}">
+					</td>
+				</tr>
    </table>
   </td>
   <td style="border-left:1px solid #A0A0A0">
@@ -56,7 +66,7 @@
     <b style="color:red">{t}(Warning: more than 16 groups are not supported by NFS!){/t}</b>
     <br>
    {/if}
-   <select style="width:400px; height:120px;" name="group_list[]" size=15 multiple>
+   <select style="width:400px; height:130px;" name="group_list[]" size=16 multiple>
     {html_options options=$groupMembership}
    </select>
    <br>
