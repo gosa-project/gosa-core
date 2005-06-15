@@ -171,6 +171,8 @@ class phoneGeneric extends plugin
     if (!preg_match("/^$num\\.$num\\.$num\\.$num$/", $this->goFonDefaultIP)){
        $message[]= _("Wrong IP format in field goFonDefaultIP.");
     }
+    
+    /* Check for valid number */
     if((strlen($this->goFonQualify))!=(strlen((int)($this->goFonQualify)))){
       $message[]= _("The given value for goFonQualify is not a valid number.");
     }

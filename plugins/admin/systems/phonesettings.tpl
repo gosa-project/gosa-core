@@ -51,7 +51,7 @@
 			</tr>
 			<tr>
 				<td >
-					{t}Quality{/t}
+					{t}Qualify{/t}
 				</td>
 				<td>
 					<input style="width:200px" name="goFonQualify" value="{$goFonQualify}" {$goFonQualifyUSED}>
