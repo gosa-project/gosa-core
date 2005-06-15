@@ -10,12 +10,12 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schröder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-06-10 15:05+0200\n"
+"PO-Revision-Date: 2005-06-15 13:04+0200\n"
 "Last-Translator:  <(null)>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: contrib/gosa.conf:4
 msgid "My account"
@@ -235,7 +235,7 @@ msgid ""
 "This account has mail features enabled. You can disable them by clicking "
 "below."
 msgstr ""
-"Dieses Gruppe hat Mail-Optionen aktiviert. Sie können diese deaktivieren, "
+"Dieses Konto hat die Mail-Erweiterungen aktiviert. Sie können diese deaktivieren, "
 "indem Sie auf die Schaltfläche unten klicken."
 
 #: plugins/personal/mail/class_mailAccount.inc:200
@@ -249,7 +249,7 @@ msgid ""
 "This account has mail features disabled. You can enable them by clicking "
 "below."
 msgstr ""
-"Dieses Konto hat keine Mail-Optionen. Sie können diese aktivieren, wenn Sie "
+"Dieses Konto hat keine Mail-Erweiterungen. Sie können diese aktivieren, wenn Sie "
 "auf die untere Schaltfläche klicken."
 
 #: plugins/personal/mail/class_mailAccount.inc:249
@@ -2095,22 +2095,20 @@ msgid "Open-Xchange"
 msgstr "Open-Xchange"
 
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:610
-#, fuzzy
 msgid ""
 "This account has <b>OpenXchange</b> features disabled. Posix features are "
 "needed for openXchange accounts, enable them first."
 msgstr ""
-"Dieses Konto hat die Samba-Erweiterungen deaktiviert. Um diese zu aktivieren "
+"Dieses Konto hat die OpenXchange-Erweiterungen deaktiviert. Um diese zu aktivieren "
 "werden die UNIX-Erweiterungen benötigt. Aktivieren Sie diese."
 
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:614
-#, fuzzy
 msgid ""
 "This account has <b>OpenXchange</b> features disabled. Mail features are "
 "needed for openXchange accounts, enable them first."
 msgstr ""
-"Dieses Konto hat die Samba-Erweiterungen deaktiviert. Um diese zu aktivieren "
-"werden die UNIX-Erweiterungen benötigt. Aktivieren Sie diese."
+"Dieses Konto hat die OpenXchange-Erweiterungen deaktiviert. Um diese zu aktivieren "
+"werden die Mail-Erweiterungen benötigt. Aktivieren Sie diese."
 
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:696
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:774
@@ -5318,13 +5316,11 @@ msgstr "Diese 'dn' hat keine Telefon-Erweiterungen."
 
 #: plugins/admin/systems/class_phoneGeneric.inc:172
 msgid "Wrong IP format in field goFonDefaultIP."
-msgstr ""
+msgstr "Ungültige IP-Adresse in Feld 'Standard IP-Adresse'."
 
 #: plugins/admin/systems/class_phoneGeneric.inc:175
-#, fuzzy
 msgid "The given value for goFonQualify is not a valid number."
-msgstr ""
-"Das Numerische Feld der Kontingent-Einstellung enthält einen ungültigen Wert."
+msgstr "Das Numerische Feld 'Qualität' enthält einen ungültigen Wert."
 
 #: plugins/admin/systems/class_phoneGeneric.inc:180
 msgid "The required field 'Phone name' is not set."
@@ -5336,7 +5332,7 @@ msgstr "Der Telefon-Name '0' ist reserviert und kann nicht verwendet werden."
 
 #: plugins/admin/systems/class_phoneGeneric.inc:192
 msgid "Wrong IP format in field IP-address."
-msgstr ""
+msgstr "Ungültige IP-Adresse in Feld IP-Adresse"
 
 #: plugins/admin/systems/class_phoneGeneric.inc:199
 msgid "You have no permissions to create a phone on this 'Base'."
@@ -5344,65 +5340,60 @@ msgstr ""
 "Sie haben keine Berechtigung, ein Telefon unterhalb dieser 'Basis' anzulegen."
 
 #: plugins/admin/systems/phonesettings.tpl:1
-#, fuzzy
 msgid "Specific Phone settings"
-msgstr "Telefon-Einstellungen"
+msgstr "Erweiterte Telefon-Einstellungen"
 
 #: plugins/admin/systems/phonesettings.tpl:10
-#, fuzzy
 msgid "Phone category"
-msgstr "Telefon-Berichte"
+msgstr "Telefon-Kategorie"
 
 #: plugins/admin/systems/phonesettings.tpl:13
 #: plugins/admin/systems/phonesettings.tpl:30
 #: plugins/admin/systems/phonesettings.tpl:40
 #: plugins/admin/systems/phonesettings.tpl:71
 #: plugins/admin/systems/phonesettings.tpl:135
-#, fuzzy
 msgid "Choose a phone type"
-msgstr "Wählen Sie den Maus-Typ"
+msgstr "Wählen Sie den Telefon-Typ"
 
 #: plugins/admin/systems/phonesettings.tpl:16
 msgid "refresh"
-msgstr ""
+msgstr "Aktualisieren"
 
 #: plugins/admin/systems/phonesettings.tpl:27
-#, fuzzy
 msgid "Phone type"
-msgstr "Telefon-Name"
+msgstr "Telefon-Typ"
 
 #: plugins/admin/systems/phonesettings.tpl:37
 msgid "Dtmfmode What ever ..."
 msgstr ""
 
 #: plugins/admin/systems/phonesettings.tpl:47
-#, fuzzy
 msgid "Default IP"
-msgstr "Standard"
+msgstr "Standard IP-Adresse"
 
 #: plugins/admin/systems/phonesettings.tpl:55
 msgid "Quality"
-msgstr ""
+msgstr "Qualität"
 
 #: plugins/admin/systems/phonesettings.tpl:68
 msgid "Authtype"
-msgstr ""
+msgstr "Authentifizierung"
 
 #: plugins/admin/systems/phonesettings.tpl:78
 msgid "GoFonSecret"
-msgstr ""
+msgstr "GOFon Secret"
 
 #: plugins/admin/systems/phonesettings.tpl:86
 msgid "GoFonInkeys"
-msgstr ""
+msgstr "GOFon-Schlüssel (eingehend)"
 
 #: plugins/admin/systems/phonesettings.tpl:94
 msgid "GoFonOutKeys"
-msgstr ""
+msgstr "GOFon-Schlüssel (ausgehend)"
 
 #: plugins/admin/systems/phonesettings.tpl:111
 msgid "permit/ deny "
-msgstr ""
+msgstr "Erlauben / Verbieten"
 
 #: plugins/admin/systems/phonesettings.tpl:119
 #, fuzzy
@@ -5415,7 +5406,7 @@ msgstr ""
 
 #: plugins/admin/systems/phonesettings.tpl:142
 msgid "MSN"
-msgstr ""
+msgstr "MSN"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:19
 msgid "Terminals"
@@ -7191,7 +7182,7 @@ msgstr ""
 #~ "needs. Lets go for the GOsa configuration part now..."
 #~ msgstr ""
 #~ "Die Webserver-seitigen Untersuchungen sind nun abgeschlossen. Es sieht so "
-#~ "aus, als ob alle benötigten Module vorhanden sind. Nun zum zweiten "
+#~ "aus, als ob alle benÃ¶tigten Module vorhanden sind. Nun zum zweiten "
 #~ "Schritt..."
 
 #~ msgid "Please enter the server URI"
@@ -7203,12 +7194,12 @@ msgstr ""
 #~ "workaround till OpenLDAP's in directory ACI's are fully implemented. For "
 #~ "this to work, we need the admin DN and the corresponding password."
 #~ msgstr ""
-#~ "Abschließend benötigt GOsa Zugriffsparameter für den angegebenen LDAP-"
+#~ "AbschlieÃŸend benÃ¶tigt GOsa Zugriffsparameter fÃ¼r den angegebenen LDAP-"
 #~ "Server. GOsa arbeitet dabei immer als Administrator und verwaltet die "
 #~ "Rechte intern (solange die in OpenLDAP implementierten ACIs nicht "
-#~ "vollständig unterstützt werden, wird dieser Workaround bestehen bleiben). "
+#~ "vollstÃ¤ndig unterstÃ¼tzt werden, wird dieser Workaround bestehen bleiben). "
 #~ "Damit dies funktioniert, wird an dieser Stelle der DN des LDAP-"
-#~ "Administrators und das dazugehörige Passwort benötigt."
+#~ "Administrators und das dazugehÃ¶rige Passwort benÃ¶tigt."
 
 #~ msgid " interpreted as "
 #~ msgstr " verstanden als "
