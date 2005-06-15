@@ -3,7 +3,6 @@
 <table width="100%" cellpadding=10>
 	<tr>
 		<td colspan>
-		
 			<table width="100%">
 			<tr>
 				<td width="25%">
@@ -61,7 +60,6 @@
 			</table>
 		</td>
 		<td valign="top">
-
 			<table width="100%">
 				<tr>
 					<td width="25%">
@@ -97,57 +95,51 @@
 						<input width="200" name="goFonOutkey" value="{$goFonOutkey}" {$goFonOutkeyUSED}>
 					</td>
 				</tr>
-				
 			</table>
-
 		</td>
 	</tr>
 	<tr>
+	<td>
+		<table width="100%">
+			<tr>
+				<td width="25%">
+					{t}permit / deny {/t}
+				</td>
+				<td>
+					<input name="notsetyet">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					{t}AccountCode {/t}
+        </td>
+        <td>
+					<input width="200" name="goFonAccountCode" value="{$goFonAccountCode}" {$goFonAccountCodeUSED}>
+				</td>
+			</tr>
+		</table>
+	</td>
 		<td>
-		
 			<table width="100%">
 				<tr>
 					<td width="25%">
-						{t}permit/ deny {/t}
+						{t}Trunk several calls{/t}
 					</td>
 					<td>
-						<input name="notsetyet">
+						<select size="1" name="goFonTrunk" title="{t}Choose a phone type{/t}" style="width:200px;" {$goFonTrunkUSED}>
+							{html_options options=$goFonTrunks selected=$goFonTrunk}
+						</select>
 					</td>
 				</tr>
-                <tr>
-                    <td>
-                        {t}AccountCode {/t}
-                    </td>
-                    <td>
-                        <input width="200" name="goFonAccountCode" value="{$goFonAccountCode}" {$goFonAccountCodeUSED}>
-                    </td>
-                </tr>
-			</table>
-
-		</td>
-		<td>
-            <table width="100%">
-                <tr>
-                    <td width="25%">
-                        {t}Trunk several calls{/t}
-                    </td>
-                    <td>
-                        <select size="1" name="goFonTrunk" title="{t}Choose a phone type{/t}" style="width:200px;" {$goFonTrunkUSED}>
-                            {html_options options=$goFonTrunks selected=$goFonTrunk}
-                        </select
+				<tr>
+					<td>
+						{t}MSN{/t}
 					</td>
-                </tr>
-                <tr>
-                    <td>
-                        {t}MSN{/t}
-                    </td>
-                    <td>
-                        <input width="200" name="goFonMSN" value="{$goFonMSN}" {$goFonMSNUSED}>
-                    </td>
-                </tr>
-            </table>
-
+					<td>
+						<input width="200" name="goFonMSN" value="{$goFonMSN}" {$goFonMSNUSED}>
+					</td>
+				</tr>
+			</table>
 		</td>
 	</tr>
 </table>
-
