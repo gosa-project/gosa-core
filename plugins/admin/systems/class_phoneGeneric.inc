@@ -169,9 +169,8 @@ class phoneGeneric extends plugin
     /* To check for valid ip*/
     $num="(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])";
     if (!preg_match("/^$num\\.$num\\.$num\\.$num$/", $this->goFonDefaultIP)){
-       $message[]= _("Wrong IP format in field goFonDefaultIP\\n");
+       $message[]= _("Wrong IP format in field goFonDefaultIP.");
     }
-    
     if((strlen($this->goFonQualify))!=(strlen((int)($this->goFonQualify)))){
       $message[]= _("The given value for goFonQualify is not a valid number.");
     }
@@ -188,6 +187,9 @@ class phoneGeneric extends plugin
     }
     if ($this->ipHostNumber == "" && chkacl ($this->acl, "ipHostNumber") == ""){
       $message[]= _("The required field 'IP-address' is not set.");
+    }
+    if (!preg_match("/^$num\\.$num\\.$num\\.$num$/", $this->ipHostNumber)){
+       $message[]= _("Wrong IP format in field IP-address.");
     }
 
     $ui= get_userinfo();
