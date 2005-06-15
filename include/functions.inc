@@ -1635,7 +1635,7 @@ function rmdirRecursive($path, $followLinks=false) {
   return rmdir($path);
 }
 
-function scandir_php4($path,$sort_desc=false)
+function scan_directory($path,$sort_desc=false)
 {
 $ret = false;
 
@@ -1685,7 +1685,7 @@ function clean_smarty_compile_dir($directory)
       # contents should match the revision number
       if(!compare_revision($revision_file, $svn_revision)){
         // If revision differs, clean compile directory
-        foreach(scandir_php4($directory) as $file) {
+        foreach(scan_directory($directory) as $file) {
           if( is_file($directory."/".$file) &&
               is_writable($directory."/".$file)) {
               // delete file
