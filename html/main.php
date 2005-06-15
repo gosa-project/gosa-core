@@ -212,7 +212,7 @@ if ($_SESSION['js']==FALSE){
   $smarty->assign("help_method", "href='helpviewer.php$plug' target='_new'");
 } else {
   $smarty->assign("javascript", "true");
-  $smarty->assign("help_method","href='' onclick=\"return popup('helpviewer.php$plug')\",'GOsa help')\"");
+  $smarty->assign("help_method","href='' onclick=\"return popup('helpviewer.php$plug','GOsa help');\"");
 }
 
 $smarty->assign ("username", $ui->username);
