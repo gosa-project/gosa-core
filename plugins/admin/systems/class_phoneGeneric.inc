@@ -26,6 +26,8 @@ class phoneGeneric extends plugin
   var $goFonAuth        = "";
   var $goFonSecret      = "";
   var $goFonInkeys      = "";
+  var $goFonPermit      = array();
+  var $goFonDeny        = array();
   var $goFonOutkey      = "";
   var $goFonTrunk       = "";
   var $goFonAccountCode = "";
@@ -36,7 +38,7 @@ class phoneGeneric extends plugin
   var $attributes= array("cn", "description", "macAddress", "ipHostNumber"
                          ,"goFonType","goFonDmtfMode","goFonHost","goFonDefaultIP",
                           "goFonQualify","goFonAuth","goFonSecret","goFonInkeys","goFonOutkey",
-                          "goFonTrunk","goFonAccountCode","goFonMSN","selected_categorie" 
+                          "goFonTrunk","goFonAccountCode","goFonMSN","selected_categorie","goFonPermit","goFonDeny" 
                          );
 
   /* this array defines which attributes are schown / saved for the different type of phones */ 
@@ -46,7 +48,7 @@ class phoneGeneric extends plugin
                              "1"=>array("cn", "description", "macAddress", "ipHostNumber",
                                   "goFonType","goFonHost","goFonDefaultIP",
                                   "goFonQualify","goFonAuth","goFonSecret","goFonInkeys","goFonOutkey",
-                                  "goFonTrunk","goFonAccountCode","selected_categorie"),
+                                  "goFonTrunk","goFonAccountCode","selected_categorie","goFonPermit","goFonDeny"),
                              "2"=>array("cn", "description", "macAddress", "ipHostNumber","goFonMSN"));
   
 
@@ -69,19 +71,28 @@ class phoneGeneric extends plugin
       $this->selected_categorie = 2;
     }elseif($this->goFonAccountCode != ""){
       $this->selected_categorie = 1 ;
+    
+      if(isset($this->attrs['goFonPermit']['count'])){
+        unset ($this->attrs['goFonPermit']['count']);
+        $this->goFonPermit=$this->attrs['goFonPermit'];
+      }  
+     
+      if(isset($this->attrs['goFonDeny']['count'])){
+        unset ($this->attrs['goFonDeny']['count'])   ;
+        $this->goFonDeny=$this->attrs['goFonDeny'];
+      } 
+
     } else {
       $this->selected_categorie = 0;
     }
-    
-    
-
+ 
     /* Save dn for later references */
     $this->orig_dn= $this->dn;
   }
 
   function execute()
   {
-  
+ 
   
     /* Do we represent a valid phone? */
     if (!$this->is_account && $this->parent == NULL){
@@ -90,6 +101,65 @@ class phoneGeneric extends plugin
       return($display);
     }
 
+    /* handle Permit Add*/
+    if(isset($_POST['goFonPermitAdd'])){
+      if(isset($_POST['goFonPermitNew'])){
+        if(is_string($this->goFonPermit)){
+          $this->goFonPermit=array();
+        }
+        $new = $_POST['goFonPermitNew'];
+        if(strlen($new)> 1) {
+          $this->goFonPermit[]= $new;
+        }
+      }
+    }
+      
+    /* handle Deny Add*/
+    if(isset($_POST['goFonDenyAdd'])){
+      if(isset($_POST['goFonDenyNew'])){
+        if(is_string($this->goFonDeny)){
+          $this->goFonDeny=array();
+        }
+        $new = $_POST['goFonDenyNew'];
+        if(strlen($new)> 1) {
+          $this->goFonDeny[]= $new;
+        }
+      }
+    }
+
+    /* Handle Permit Deletion*/
+    if(isset($_POST['goFonPermitDel'])){
+      if(isset($_POST['goFonPermitS'])){
+        if(is_string($this->goFonPermit)){
+          $this->goFonPermit=array();
+        }
+        $new = $_POST['goFonPermitS'];
+        $tmp = array_flip($this->goFonPermit);
+        unset($tmp[$new]);
+        $this->goFonPermit=array();
+        foreach(array_flip($tmp) as $tm){
+          $this->goFonPermit[]=$tm;
+        }
+      }
+    }
+
+
+    /* Handle Permit Deletion*/
+    if(isset($_POST['goFonDenyDel'])){
+      if(isset($_POST['goFonDenyS'])){
+        if(is_string($this->goFonDeny)){
+          $this->goFonDeny=array();
+        }
+        $new = $_POST['goFonDenyS'];
+        $tmp = array_flip($this->goFonDeny);
+        unset($tmp[$new]);
+        $this->goFonDeny=array();
+        foreach(array_flip($tmp) as $tm){
+          $this->goFonDeny[]=$tm;
+        }
+      }
+    }
+  
     /* Fill templating stuff */
     $smarty= get_smarty();
     $smarty->assign("bases", $this->config->idepartments);
@@ -261,7 +331,7 @@ class phoneGeneric extends plugin
       }
       $this->attrs= $attrs;
     }
-
+    
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
     if ($this->orig_dn == 'new'){
@@ -280,7 +350,6 @@ class phoneGeneric extends plugin
       $this->handle_post_events("modify");
     }
     show_ldap_error($ldap->get_error());
-
     /* Optionally execute a command after we're done */
     $this->postcreate();
   }
