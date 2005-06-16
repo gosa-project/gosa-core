@@ -1191,7 +1191,7 @@ function apply_filter()
   $apply= "";
 
   $apply= ''.
-    '<table width="100%"  style="border-top:1px solid #B0B0B0;"><tr><td width="100%" align="right">'.
+    '<table width="100%"  style="background:#EEEEEE;border-top:1px solid #B0B0B0;"><tr><td width="100%" align="right">'.
     '<input type="submit" name="apply" value="'._("Apply").'"></td></tr></table>';
 
   return ($apply);
