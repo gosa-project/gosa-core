@@ -454,9 +454,8 @@ class user extends plugin
     }  else {
       $uidACL= "readonly";
     }
-    if ($uidACL == ""){
-      $uidACL= chkacl($this->acl, "uid");
-    }
+    $uidACL.= " ".chkacl($this->acl, "uid");
+    
     $smarty->assign("uidACL", $uidACL);
     $smarty->assign("is_template", $this->is_template);
     $smarty->assign("use_dob", $this->use_dob);
