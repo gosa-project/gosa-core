@@ -1,6 +1,6 @@
 <table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
 <tr>
-  <td style="vertical-align:top;">
+  <td style="vertical-align:top;" width="500">
    <div class="contentboxh" style="height:20px;">
     <p class="contentboxh" style="font-size:12px">
      <b>{t}Select users to add{/t} {$hint}</b>
