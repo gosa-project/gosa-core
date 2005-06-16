@@ -125,6 +125,20 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.13.17 NAME 'goFonMSN'
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
 	SINGLE-VALUE )
 
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.18 NAME 'goFonPermit'
+	DESC 'sets the sip.conf permit parameter'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.19 NAME 'goFonDeny'
+	DESC 'sets the sip.conf deny parameter'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE )
+
 # objectclass 
 objectclass (1.3.6.1.4.1.10098.1.2.3.11 NAME 'goFonAccount' SUP top AUXILIARY
 	DESC 'GOFon Account objectclass (v1.0)'
@@ -136,7 +150,7 @@ objectclass (1.3.6.1.4.1.10098.1.2.3.12 NAME 'goFonHardware' SUP top STRUCTURAL
 	MUST ( cn $ macAddress $ ipHostNumber )
 	MAY (description $ goFonType $ goFonDmtfMode $ goFonHost $ goFonDefaultIP $
 		 goFonQualify $ goFonAuth $ goFonSecret $ goFonInkeys $ goFonOutkey $
-		 goFonTrunk $ goFonAccountCode $ goFonMSN ) )
+		 goFonTrunk $ goFonAccountCode $ goFonMSN $ goFonPermit $ goFonDeny ) )
 
 objectclass (1.3.6.1.4.1.10098.1.2.3.13 NAME 'goFonPickupGroup' SUP top AUXILIARY
 	DESC 'Additive for posixGroups (v1.0)'
