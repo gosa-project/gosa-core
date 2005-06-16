@@ -93,7 +93,7 @@ class workgeneric extends plugin
     if (isset($_POST['action'])){
       switch($_POST['saction']){
         case 'wake':
-          $cmd= $this->search($this->config->data['TABS'], "terminfo", "WAKECMD");
+          $cmd= search_config($this->config->data['TABS'], "terminfo", "WAKECMD");
           if ($cmd == ""){
             print_red(_("No WAKECMD definition found in your gosa.conf"));
           } else {
@@ -105,7 +105,7 @@ class workgeneric extends plugin
           break;
 
         case 'reboot':
-          $cmd= $this->search($this->config->data['TABS'], "terminfo", "REBOOTCMD");
+          $cmd= search_config($this->config->data['TABS'], "terminfo", "REBOOTCMD");
           if ($cmd == ""){
             print_red(_("No REBOOTCMD definition found in your gosa.conf"));
           } else {
@@ -117,7 +117,7 @@ class workgeneric extends plugin
           break;
 
         case 'halt':
-          $cmd= $this->search($this->config->data['TABS'], "terminfo", "HALTCMD");
+          $cmd= search_config($this->config->data['TABS'], "terminfo", "HALTCMD");
           if ($cmd == ""){
             print_red(_("No HALTCMD definition found in your gosa.conf"));
           } else {

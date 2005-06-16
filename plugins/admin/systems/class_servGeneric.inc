@@ -54,7 +54,7 @@ class servgeneric extends plugin
     if (isset($_POST['action'])){
       switch($_POST['action']){
         case 'wake':
-          $cmd= $this->search($this->config->data['TABS'], "servgeneric", "WAKECMD");
+          $cmd= search_config($this->config->data['TABS'], "servgeneric", "WAKECMD");
           if ($cmd == ""){
             print_red(_("No WAKECMD definition found in your gosa.conf"));
           } else {
@@ -66,7 +66,7 @@ class servgeneric extends plugin
           break;
 
         case 'reboot':
-          $cmd= $this->search($this->config->data['TABS'], "servgeneric", "REBOOTCMD");
+          $cmd= search_config($this->config->data['TABS'], "servgeneric", "REBOOTCMD");
           if ($cmd == ""){
             print_red(_("No REBOOTCMD definition found in your gosa.conf"));
           } else {
@@ -78,7 +78,7 @@ class servgeneric extends plugin
           break;
 
         case 'halt':
-          $cmd= $this->search($this->config->data['TABS'], "servgeneric", "HALTCMD");
+          $cmd= search_config($this->config->data['TABS'], "servgeneric", "HALTCMD");
           if ($cmd == ""){
             print_red(_("No HALTCMD definition found in your gosa.conf"));
           } else {

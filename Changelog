@@ -16,6 +16,7 @@ GOsa2 changelog
     automatically if the revision changes
   - Improved W3C compatibility
   - Added checks that remove the contents of /var/spool/gosa/*
+  - Added postmodify for password change operations
 
 * gosa 2.4beta1
   - Override automatically detected user bases if they don't exist

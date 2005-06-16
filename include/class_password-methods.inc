@@ -91,7 +91,6 @@ class passwordMethod
 // change_password, changes the Password, of the given dn
 function change_password ($dn, $password, $mode=0, $hash= "")
 {
-
   global $config;
   $newpass= "";
 
@@ -130,8 +129,6 @@ function change_password ($dn, $password, $mode=0, $hash= "")
     $newpass =  $test->generate_hash($password);
   }
 
-
-
   // Update shadow timestamp? 
   if (isset($attrs["shadowLastChange"][0])){
     $shadow= (int)(date("U") / 86400);
@@ -151,7 +148,7 @@ function change_password ($dn, $password, $mode=0, $hash= "")
     }
 
     // Create SMB Password 
-    $attrs =    generate_smb_nt_hash($password);
+    $attrs= generate_smb_nt_hash($password);
   }
 
   $attrs['userPassword']= array();
@@ -161,10 +158,27 @@ function change_password ($dn, $password, $mode=0, $hash= "")
   $ldap->modify($attrs);
 
 
-  if ($ldap->error != 'Success')
-  {
+  if ($ldap->error != 'Success') {
     print_red(sprintf(_("Setting the password failed. LDAP server says '%s'."),
           $ldap->get_error()));
+  } else {
+
+    /* Find postmodify entries for this class */
+    $command= search_config($config->data['MENU'], "password", "POSTMODIFY");
+
+    if ($command != ""){
+      /* Walk through attribute list */
+      $command= preg_replace("/%userPassword/", $password, $command);
+      $command= preg_replace("/%dn/", $dn, $command);
+
+      if (check_command($command)){
+        @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
+        exec($command);
+      } else {
+        $message= sprintf(_("Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."), $command, "password");
+        print_red ($message);
+      }
+    }
   }
 }
 

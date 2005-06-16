@@ -366,9 +366,9 @@ class plugin
   function postcreate()
   {
     /* Find postcreate entries for this class */
-    $command= $this->search($this->config->data['MENU'], get_class($this), "POSTCREATE");
+    $command= search_config($this->config->data['MENU'], get_class($this), "POSTCREATE");
     if ($command == ""){
-      $command= $this->search($this->config->data['SERVICE'], get_class($this), "POSTCREATE");
+      $command= search_config($this->config->data['SERVICE'], get_class($this), "POSTCREATE");
     }
 
     if ($command != ""){
@@ -392,9 +392,9 @@ class plugin
   function postmodify()
   {
     /* Find postcreate entries for this class */
-    $command= $this->search($this->config->data['MENU'], get_class($this), "POSTMODIFY");
+    $command= search_config($this->config->data['MENU'], get_class($this), "POSTMODIFY");
     if ($command == ""){
-      $command= $this->search($this->config->data['SERVICE'], get_class($this), "POSTMODIFY");
+      $command= search_config($this->config->data['SERVICE'], get_class($this), "POSTMODIFY");
     }
 
     if ($command != ""){
@@ -418,9 +418,9 @@ class plugin
   function postremove()
   {
     /* Find postremove entries for this class */
-    $command= $this->search($this->config->data['MENU'], get_class($this), "POSTREMOVE");
+    $command= search_config($this->config->data['MENU'], get_class($this), "POSTREMOVE");
     if ($command == ""){
-      $command= $this->search($this->config->data['SERVICE'], get_class($this), "POSTREMOVE");
+      $command= search_config($this->config->data['SERVICE'], get_class($this), "POSTREMOVE");
     }
 
     if ($command != ""){
@@ -439,29 +439,6 @@ class plugin
         print_red ($message);
       }
     }
-  }
-
-  function search($arr, $name, $return)
-  {
-    if (is_array($arr)){
-      foreach ($arr as $a){
-        if (isset($a['CLASS']) &&
-            strtolower($a['CLASS']) == strtolower($name)){
-
-          if (isset($a[$return])){
-            return ($a[$return]);
-          } else {
-            return ("");
-          }
-        } else {
-          $res= $this->search ($a, $name, $return);
-          if ($res != ""){
-            return $res;
-          }
-        }
-      }
-    }
-    return ("");
   }
 
   /* Create unique DN */

@@ -1752,7 +1752,7 @@ function compare_revision($revision_file, $revision)
 }
 
 function progressbar($percentage,$width=100,$height=15,$showvalue=false)
-  {
+{
   $str = ""; // Our return value will be saved in this var
 
   $color  = dechex($percentage+150);
@@ -1766,30 +1766,54 @@ function progressbar($percentage,$width=100,$height=15,$showvalue=false)
 
   /* If theres a better solution for this, use it... */
   $str = "
-  <div style=\" width:".($width)."px; 
-                height:".($height)."px;
-                background-color:#000000;
-                padding:1px;\">
+    <div style=\" width:".($width)."px; 
+    height:".($height)."px;
+  background-color:#000000;
+padding:1px;\">
 
           <div style=\" width:".($width)."px;
-                        background-color:#$bgcolor;
-                        height:".($height)."px;\">
+        background-color:#$bgcolor;
+height:".($height)."px;\">
 
-                <div style=\" width:".$progress."px;
-                              height:".$height."px;
-                              background-color:#".$color2.$color2.$color."; \">";
+         <div style=\" width:".$progress."px;
+height:".$height."px;
+       background-color:#".$color2.$color2.$color."; \">";
 
 
-    if(($height >10)&&($showvalue)){
-      $str.=                 "<font style=\"font-size:".($height-2)."px;color:#FF0000;align:middle;padding-left:".((int)(($width*0.4)))."px;\">
-                               <b>".$percentage."%</b>
-                             </font>";
-   }
+       if(($height >10)&&($showvalue)){
+         $str.=                 "<font style=\"font-size:".($height-2)."px;color:#FF0000;align:middle;padding-left:".((int)(($width*0.4)))."px;\">
+           <b>".$percentage."%</b>
+           </font>";
+       }
 
-  $str.= "</div></div></div>";
+       $str.= "</div></div></div>";
 
-  return($str);
+       return($str);
+}
+
+
+function search_config($arr, $name, $return)
+{
+  if (is_array($arr)){
+    foreach ($arr as $a){
+      if (isset($a['CLASS']) &&
+          strtolower($a['CLASS']) == strtolower($name)){
+
+        if (isset($a[$return])){
+          return ($a[$return]);
+        } else {
+          return ("");
+        }
+      } else {
+        $res= search_config ($a, $name, $return);
+        if ($res != ""){
+          return $res;
+        }
+      }
+    }
   }
+  return ("");
+}
 
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
