@@ -48,7 +48,6 @@ class userManagement extends plugin
           "subsearch"       => "",
           "proxyusers"      => "checked",
           "sambausers"      => "checked",
-          "ftpusers"        => "checked",
           "faxusers"        => "checked",
           "functionalusers" => "checked",
           "depselect"       => $base,
@@ -71,8 +70,7 @@ class userManagement extends plugin
       }
       if (isset($_POST['depselect'])){
         foreach( array("functionalusers", "unixusers", "mailusers",
-              "sambausers", "proxyusers", "ftpusers",
-              "faxusers", "templates", "subsearch") as $type){
+              "sambausers", "proxyusers", "faxusers", "templates", "subsearch") as $type){
 
           if (isset($_POST[$type])) {
             $userfilter[$type]= "checked";
@@ -537,7 +535,7 @@ class userManagement extends plugin
     $smarty->assign("launchimage", get_template_path('images/launch.png'));
     $smarty->assign("deplist", $this->config->idepartments);
     foreach( array("depselect", "regex", "functionalusers", "unixusers",
-          "mailusers", "sambausers", "proxyusers", "ftpusers",
+          "mailusers", "sambausers", "proxyusers", 
           "faxusers", "templates", "subsearch") as $type){
 
       $smarty->assign("$type", $userfilter[$type]);
@@ -576,7 +574,7 @@ class userManagement extends plugin
 
     $filter="";
     if ($userfilter['functionalusers'] == "checked"){
-      $filter.= "(&(objectClass=gosaAccount)(!(|(objectClass=posixAccount)(objectClass=gosaMailAccount)(objectClass=PureFTPdUser)(objectClass=$samba)(objectClass=goFaxAccount)(objectClass=gosaProxyAccount))))";
+      $filter.= "(&(objectClass=gosaAccount)(!(|(objectClass=posixAccount)(objectClass=gosaMailAccount)(objectClass=$samba)(objectClass=goFaxAccount)(objectClass=gosaProxyAccount))))";
     }
     if ($userfilter['unixusers'] == "checked"){
       $filter.= "(objectClass=posixAccount)";
@@ -589,9 +587,6 @@ class userManagement extends plugin
     }
     if ($userfilter['proxyusers'] == "checked"){
       $filter.= "(objectClass=gosaProxyAccount)";
-    }
-    if ($userfilter['ftpusers'] == "checked"){
-      $filter.= "(objectClass=PureFTPdUser)";
     }
     if ($userfilter['faxusers'] == "checked"){
       $filter.= "(objectClass=goFaxAccount)";

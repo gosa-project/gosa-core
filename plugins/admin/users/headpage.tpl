@@ -51,8 +51,6 @@
 				<input type=checkbox name="mailusers" value="1" {$mailusers} onClick="mainform.submit()" title="{t}Select to see users that have mail settings{/t}">{t}Show mail users{/t}<br>
 				<input type=checkbox name="sambausers" value="1" {$sambausers} onClick="mainform.submit()" title="{t}Select to see users that have samba settings{/t}">{t}Show samba users{/t}<br>
 				<input type=checkbox name="proxyusers" value="1" {$proxyusers} onClick="mainform.submit()" title="{t}Select to see users that have proxy settings{/t}">{t}Show proxy users{/t}<br>
-				<input type=checkbox name="ftpusers" value="1" {$ftpusers} onClick="mainform.submit()" title="{t}Select to see users that have ftp settings{/t}">{t}Show FTP users{/t}<br>
-				<input type=checkbox name="faxusers" value="1" {$faxusers} onClick="mainform.submit()" title="{t}Select to see users that have FAX settings{/t}">{t}Show FAX users{/t}<br>
 
             </td>
         </tr>
