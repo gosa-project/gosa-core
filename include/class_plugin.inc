@@ -367,7 +367,7 @@ class plugin
   {
     /* Find postcreate entries for this class */
     $command= search_config($this->config->data['MENU'], get_class($this), "POSTCREATE");
-    if ($command == ""){
+    if ($command == "" && isset($this->config->data['TAB'])){
       $command= search_config($this->config->data['TAB'], get_class($this), "POSTCREATE");
     }
 
@@ -393,7 +393,7 @@ class plugin
   {
     /* Find postcreate entries for this class */
     $command= search_config($this->config->data['MENU'], get_class($this), "POSTMODIFY");
-    if ($command == ""){
+    if ($command == "" && isset($this->config->data['TAB'])){
       $command= search_config($this->config->data['TAB'], get_class($this), "POSTMODIFY");
     }
 
@@ -419,7 +419,7 @@ class plugin
   {
     /* Find postremove entries for this class */
     $command= search_config($this->config->data['MENU'], get_class($this), "POSTREMOVE");
-    if ($command == ""){
+    if ($command == "" && isset($this->config->data['TAB'])){
       $command= search_config($this->config->data['TAB'], get_class($this), "POSTREMOVE");
     }
 

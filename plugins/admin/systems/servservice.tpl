@@ -12,7 +12,7 @@
    <table>
     <tr>
      <td>
-		<select style="width:350px;" id="goExportEntry" name="goExportEntry" {$goExportEntryACL} {$goNfsServerState} size=4 multiple >
+		<select style="width:350px;" id="goExportEntry" name="goExportEntry[]" {$goExportEntryACL} {$goNfsServerState} size=4 multiple >
     		{html_options values=$goExportEntry output=$goExportEntry}
 			<option disabled></option>
 	    </select>
@@ -38,7 +38,7 @@
    <table>
     <tr>
      <td>
-        <select style="width:350px;" id="goTimeEntry" name="goTimeSource" {$goNtpServerState} {$goTimeSourceACL}  size=4 multiple>
+        <select style="width:350px;" id="goTimeEntry" name="goTimeSource[]" {$goNtpServerState} {$goTimeSourceACL}  size=4 multiple>
             {html_options values=$goTimeSource output=$goTimeSource}
 			<option disabled></option>
         </select>
@@ -74,7 +74,7 @@
   <table>
 	<tr>
 	 <td colspan=2>
-	  <input type="checkbox"  value="1" name="goXdmcpIsEnabled" {$goTerminalServerState} {$goXdmcpIsEnabledACL} id="Temporariid"> {t}Temporary disable login{/t}</td>
+	  <input type="checkbox" value="true" name="goXdmcpIsEnabled" {$goTerminalServerState} {$goXdmcpIsEnabledACL} id="Temporariid" {$goXdmcpIsEnabled}> {t}Temporary disable login{/t}</td>
     </tr>
     <tr>
 	 <td>{t}Font path{/t}</td>
