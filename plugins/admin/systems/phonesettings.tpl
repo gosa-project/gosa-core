@@ -2,32 +2,27 @@
 
 <table width="100%" cellpadding=10>
 	<tr>
-		<td width="40%">
+		<td width="40%" colspan="2">
 			<table width="100%">
 			<tr>
 				<td>
-					{t}Phone category{/t}{$staticAddress}
-				</td>
-				<td>
+					{t}Phone type{/t}{$staticAddress}
 					<select size="1" name="selected_categorie" title="{t}Choose a phone type{/t}" style="width:200px;" onchange="mainform.submit();">
 						{html_options options=$categories selected=$selected_categorie}
 					</select>
 					<input type="submit" value="{t}refresh{/t}" name="refresh">
 				</td>
 			</table>
-		</td>
-		<td>
-		</td>
 	</tr>
 
 {if $selected_categorie eq '0'}
 	
 	<tr>
 		<td>
-			<table  width="100%">
+			<table>
 			 <tr>
-				<td width="25%">
-					{t}Phone type{/t}{$staticAddress}
+				<td>
+					{t}Mode{/t}{$staticAddress}
 				</td>
 				<td>
 					<select size="1" name="goFonType" title="{t}Choose a phone type{/t}" style="width:200px;" {$goFonTypeUSED}>
@@ -37,7 +32,7 @@
 			 </tr>
 			 <tr>
 				<td >
-					{t}Dtmfmode What ever ...{/t}
+					{t}DTMF mode{/t}
 				</td>
 				<td>
 					<select size="1" name="goFonDmtfMode" title="{t}Choose a phone type{/t}" style="width:200px;" {$goFonDmtfModeUSED}>
@@ -55,7 +50,7 @@
 			</tr>
 			<tr>
 				<td >
-					{t}Qualify{/t}
+					{t}Response timeout{/t}
 				</td>
 				<td>
 					<input style="width:200px" name="goFonQualify" value="{$goFonQualify}" {$goFonQualifyUSED}>
@@ -72,11 +67,11 @@
 {if $selected_categorie eq '1'}
 		
 	<tr>
-		<td>
+		<td style="vertical-align:top">
 			<table width="100%">
 			 <tr>
 				<td width="25%">
-					{t}Phone type{/t}{$staticAddress}
+					{t}Modus{/t}{$staticAddress}
 				</td>
 				<td >
 					<select size="1" name="goFonType" title="{t}Choose a phone type{/t}" style="width:200px;" {$goFonTypeUSED}>
@@ -94,7 +89,7 @@
 			</tr>
 			<tr>
 				<td >
-					{t}Qualify{/t}
+					{t}Response timeout{/t}
 				</td>
 				<td>
 					<input style="width:200px" name="goFonQualify" value="{$goFonQualify}" {$goFonQualifyUSED}>
@@ -117,13 +112,13 @@
 			</tr>
 			<tr>
 				<td>	
-					 {t}GoFonSecret{/t}	
+					 {t}Secret{/t}	
 				</td>
 				<td>
 					<input style="width:200px" name="goFonSecret" value="{$goFonSecret}" {$goFonSecretUSED}>
 				</td>
 			</tr>
-			<tr>
+<!--			<tr>
 				<td>
 					 {t}GoFonInkeys{/t}
 				</td>
@@ -138,7 +133,7 @@
 				<td>
 					<input style="width:200px" name="goFonOutkey" value="{$goFonOutkey}" {$goFonOutkeyUSED}>
 				</td>
-			</tr>
+			</tr> -->
 			<tr>
                 <td colspan=2>
 					&nbsp;
@@ -146,7 +141,7 @@
             </tr>
             <tr>
                 <td>
-                    {t}AccountCode {/t}
+                    {t}Account code{/t}
                 </td>
                 <td>
                     <input style="width:200px" name="goFonAccountCode" value="{$goFonAccountCode}" {$goFonAccountCodeUSED}>
@@ -154,7 +149,7 @@
             </tr>
             <tr>
                 <td width="25%">
-                    {t}Trunk several calls{/t}
+                    {t}Trunk lines{/t}
                 </td>
                 <td>
                      <select size="1" name="goFonTrunk" title="{t}Choose a phone type{/t}" style="width:200px;" {$goFonTrunkUSED}>
@@ -165,13 +160,11 @@
 
 			</table>
 		</td>
-		<td valign="top">
+		<td valign="top" style="vertical-align:top">
 			 <table width="100%">
                <tr>
-                    <td width="25%" align="left" valign="top">
-                        {t}Hosts that are allowed to connect{/t}
-                    </td>
                     <td style="vertical-align:top;">
+                        {t}Hosts that are allowed to connect{/t}<br>
                         <select style="width:300px; height:80px;" name="goFonPermitS" size=15
                             multiple title="{t}List of alternative mail addresses{/t}">
                             {html_options values=$goFonPermit output=$goFonPermit}
@@ -185,10 +178,8 @@
                     </td>
                 </tr>
 				<tr>
-                    <td width="25%" align="left" valign="top">
-                        {t}Hosts that are not allowed to connect{/t}
-                    </td>
                     <td style="vertical-align:top;">
+                        {t}Hosts that are not allowed to connect{/t}<br>
                         <select style="width:300px; height:80px;" name="goFonDenyS" size=15
                             multiple title="{t}List of alternative mail addresses{/t}">
                             {html_options values=$goFonDeny output=$goFonDeny}
