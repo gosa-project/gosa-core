@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schr�der <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-06-17 17:10+0200\n"
+"PO-Revision-Date: 2005-06-17 17:12+0200\n"
 "Last-Translator:  <(null)>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -5401,7 +5401,7 @@ msgstr "Authentifizierung"
 
 #: plugins/admin/systems/phonesettings.tpl:119
 msgid "Secret"
-msgstr "Schl�sselwort"
+msgstr "Passwort"
 
 #: plugins/admin/systems/phonesettings.tpl:127
 msgid "GoFonInkeys"
@@ -5421,11 +5421,11 @@ msgstr "Leitungen zusammenfassen"
 
 #: plugins/admin/systems/phonesettings.tpl:171
 msgid "Hosts that are allowed to connect"
-msgstr "Erlaube diesen Rechner die Verbindung"
+msgstr "Erlaube diesen Rechnern die Verbindung"
 
 #: plugins/admin/systems/phonesettings.tpl:186
 msgid "Hosts that are not allowed to connect"
-msgstr "Verbiete diesen Rechner die Verbindung"
+msgstr "Verbiete diesen Rechnern die Verbindung"
 
 #: plugins/admin/systems/phonesettings.tpl:210
 msgid "MSN"
@@ -7205,7 +7205,7 @@ msgstr "Index"
 
 #, fuzzy
 #~ msgid "Trunk several calls"
-#~ msgstr "Verbindung mehrerer GesprÃ€che"
+#~ msgstr "Verbindung mehrerer GesprÃâ¬che"
 
 #~ msgid "permit / deny "
 #~ msgstr "Erlauben / Verbieten"
