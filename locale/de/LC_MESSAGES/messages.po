@@ -5416,11 +5416,11 @@ msgstr "Verbindung mehrerer Gespräche"
 
 #: plugins/admin/systems/phonesettings.tpl:172
 msgid "Hosts that are allowed to connect"
-msgstr "Erlaube diesen Rechner die Verbindung"
+msgstr "Erlaube Systemen die Verbindung"
 
 #: plugins/admin/systems/phonesettings.tpl:189
 msgid "Hosts that are not allowed to connect"
-msgstr "Verbiete diesen Rechner die Verbindung"
+msgstr "Verbiete Systemen die Verbindung"
 
 #: plugins/admin/systems/phonesettings.tpl:215
 msgid "MSN"
