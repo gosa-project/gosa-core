@@ -189,6 +189,8 @@ msgid "Alternative addresses"
 msgstr ""
 
 #: plugins/personal/mail/generic.tpl:50 plugins/admin/groups/mail.tpl:48
+#: plugins/admin/systems/phonesettings.tpl:176
+#: plugins/admin/systems/phonesettings.tpl:193
 msgid "List of alternative mail addresses"
 msgstr ""
 
@@ -214,6 +216,8 @@ msgstr ""
 #: plugins/admin/systems/servservice.tpl:47
 #: plugins/admin/systems/startup.tpl:61 plugins/admin/systems/startup.tpl:75
 #: plugins/admin/systems/startup.tpl:95
+#: plugins/admin/systems/phonesettings.tpl:182
+#: plugins/admin/systems/phonesettings.tpl:199
 #: plugins/admin/ogroups/ogroup_objects.tpl:50
 #: plugins/admin/ogroups/generic.tpl:38
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:211
@@ -243,8 +247,11 @@ msgstr ""
 #: plugins/admin/systems/servservice.tpl:48
 #: plugins/admin/systems/remove.tpl:15 plugins/admin/systems/headpage.tpl:17
 #: plugins/admin/systems/startup.tpl:62 plugins/admin/systems/startup.tpl:76
-#: plugins/admin/systems/startup.tpl:96 plugins/admin/ogroups/generic.tpl:39
-#: plugins/admin/ogroups/remove.tpl:15 plugins/admin/ogroups/headpage.tpl:18
+#: plugins/admin/systems/startup.tpl:96
+#: plugins/admin/systems/phonesettings.tpl:183
+#: plugins/admin/systems/phonesettings.tpl:200
+#: plugins/admin/ogroups/generic.tpl:39 plugins/admin/ogroups/remove.tpl:15
+#: plugins/admin/ogroups/headpage.tpl:18
 #: plugins/gofon/phoneaccount/generic.tpl:47
 msgid "Delete"
 msgstr ""
@@ -1713,102 +1720,102 @@ msgstr ""
 msgid "No certificate installed"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:790
+#: plugins/personal/generic/class_user.inc:789
 msgid "Kerberos database communication failed"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:807
+#: plugins/personal/generic/class_user.inc:806
 msgid "Can't remove user from kerberos database."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:818
+#: plugins/personal/generic/class_user.inc:817
 msgid "Can't add user to kerberos database."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:858
+#: plugins/personal/generic/class_user.inc:857
 msgid "You have no permissions to create a user on this 'Base'."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:863
+#: plugins/personal/generic/class_user.inc:862
 msgid "You have no permissions to move a user from the original 'Base'."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:869
+#: plugins/personal/generic/class_user.inc:868
 #: plugins/addons/addressbook/class_addressbook.inc:525
 #: plugins/admin/users/class_userManagement.inc:426
 msgid "The required field 'Name' is not set."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:878
+#: plugins/personal/generic/class_user.inc:877
 msgid "There's already a person with this 'Login' in the database."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:884
+#: plugins/personal/generic/class_user.inc:883
 #: plugins/addons/addressbook/class_addressbook.inc:529
 #: plugins/admin/users/class_userManagement.inc:429
 msgid "The required field 'Given name' is not set."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:887
+#: plugins/personal/generic/class_user.inc:886
 msgid "The required field 'Login' is not set."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:894
+#: plugins/personal/generic/class_user.inc:893
 msgid ""
 "There's already a person with this 'Name'/'Given name' combination in the "
 "database."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:901
+#: plugins/personal/generic/class_user.inc:900
 msgid ""
 "The field 'Login' contains invalid characters. Lowercase, numbers and dashes "
 "are allowed."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:904
+#: plugins/personal/generic/class_user.inc:903
 msgid "The field 'Homepage' contains an invalid URL definition."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:907
-#: plugins/personal/generic/class_user.inc:935
+#: plugins/personal/generic/class_user.inc:906
+#: plugins/personal/generic/class_user.inc:934
 #: plugins/addons/addressbook/class_addressbook.inc:535
 #: plugins/addons/addressbook/class_addressbook.inc:563
 #: plugins/admin/departments/class_departmentGeneric.inc:155
 msgid "The field 'Name' contains invalid characters."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:910
-#: plugins/personal/generic/class_user.inc:932
+#: plugins/personal/generic/class_user.inc:909
+#: plugins/personal/generic/class_user.inc:931
 #: plugins/addons/addressbook/class_addressbook.inc:538
 #: plugins/addons/addressbook/class_addressbook.inc:560
 msgid "The field 'Given name' contains invalid characters."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:915
-#: plugins/personal/generic/class_user.inc:918
+#: plugins/personal/generic/class_user.inc:914
+#: plugins/personal/generic/class_user.inc:917
 #: plugins/addons/addressbook/class_addressbook.inc:543
 #: plugins/addons/addressbook/class_addressbook.inc:546
 #: plugins/admin/departments/class_departmentGeneric.inc:158
 msgid "The field 'Phone' contains an invalid phone number."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:921
+#: plugins/personal/generic/class_user.inc:920
 #: plugins/addons/addressbook/class_addressbook.inc:549
 #: plugins/admin/departments/class_departmentGeneric.inc:161
 msgid "The field 'Fax' contains an invalid phone number."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:924
+#: plugins/personal/generic/class_user.inc:923
 #: plugins/addons/addressbook/class_addressbook.inc:552
 msgid "The field 'Mobile' contains an invalid phone number."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:927
+#: plugins/personal/generic/class_user.inc:926
 #: plugins/addons/addressbook/class_addressbook.inc:555
 msgid "The field 'Pager' contains an invalid phone number."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1052
+#: plugins/personal/generic/class_user.inc:1051
 msgid "Could not open specified certificate!"
 msgstr ""
 
@@ -3901,13 +3908,13 @@ msgstr ""
 
 #: plugins/admin/systems/class_winGeneric.inc:139
 #: plugins/admin/systems/class_componentGeneric.inc:113
-#: plugins/admin/systems/class_phoneGeneric.inc:193
+#: plugins/admin/systems/class_phoneGeneric.inc:263
 msgid "The required field 'MAC-address' is not set."
 msgstr ""
 
 #: plugins/admin/systems/class_winGeneric.inc:142
 #: plugins/admin/systems/class_componentGeneric.inc:116
-#: plugins/admin/systems/class_phoneGeneric.inc:196
+#: plugins/admin/systems/class_phoneGeneric.inc:266
 msgid "The required field 'IP-address' is not set."
 msgstr ""
 
@@ -3922,7 +3929,7 @@ msgstr ""
 #: plugins/admin/systems/class_workstationGeneric.inc:242
 #: plugins/admin/systems/class_printGeneric.inc:136
 #: plugins/admin/systems/class_componentGeneric.inc:133
-#: plugins/admin/systems/class_phoneGeneric.inc:216
+#: plugins/admin/systems/class_phoneGeneric.inc:286
 #, php-format
 msgid "There is already an entry '%s' in the base choosen by you"
 msgstr ""
@@ -5005,31 +5012,31 @@ msgstr ""
 msgid "Add additional filesystems to be mounted during startup"
 msgstr ""
 
-#: plugins/admin/systems/class_phoneGeneric.inc:89
+#: plugins/admin/systems/class_phoneGeneric.inc:100
 msgid "This 'dn' has no phone features."
 msgstr ""
 
-#: plugins/admin/systems/class_phoneGeneric.inc:174
+#: plugins/admin/systems/class_phoneGeneric.inc:244
 msgid "Wrong IP format in field goFonDefaultIP."
 msgstr ""
 
-#: plugins/admin/systems/class_phoneGeneric.inc:181
+#: plugins/admin/systems/class_phoneGeneric.inc:251
 msgid "The given value for goFonQualify is not a valid number."
 msgstr ""
 
-#: plugins/admin/systems/class_phoneGeneric.inc:187
+#: plugins/admin/systems/class_phoneGeneric.inc:257
 msgid "The required field 'Phone name' is not set."
 msgstr ""
 
-#: plugins/admin/systems/class_phoneGeneric.inc:190
+#: plugins/admin/systems/class_phoneGeneric.inc:260
 msgid "The 'Phone name' '0' is reserved and cannot be used."
 msgstr ""
 
-#: plugins/admin/systems/class_phoneGeneric.inc:199
+#: plugins/admin/systems/class_phoneGeneric.inc:269
 msgid "Wrong IP format in field IP-address."
 msgstr ""
 
-#: plugins/admin/systems/class_phoneGeneric.inc:206
+#: plugins/admin/systems/class_phoneGeneric.inc:276
 msgid "You have no permissions to create a phone on this 'Base'."
 msgstr ""
 
@@ -5042,10 +5049,11 @@ msgid "Phone category"
 msgstr ""
 
 #: plugins/admin/systems/phonesettings.tpl:12
-#: plugins/admin/systems/phonesettings.tpl:29
-#: plugins/admin/systems/phonesettings.tpl:39
-#: plugins/admin/systems/phonesettings.tpl:69
-#: plugins/admin/systems/phonesettings.tpl:129
+#: plugins/admin/systems/phonesettings.tpl:33
+#: plugins/admin/systems/phonesettings.tpl:43
+#: plugins/admin/systems/phonesettings.tpl:82
+#: plugins/admin/systems/phonesettings.tpl:113
+#: plugins/admin/systems/phonesettings.tpl:160
 msgid "Choose a phone type"
 msgstr ""
 
@@ -5053,51 +5061,58 @@ msgstr ""
 msgid "refresh"
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:26
+#: plugins/admin/systems/phonesettings.tpl:30
+#: plugins/admin/systems/phonesettings.tpl:79
 msgid "Phone type"
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:36
+#: plugins/admin/systems/phonesettings.tpl:40
 msgid "Dtmfmode What ever ..."
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:46
+#: plugins/admin/systems/phonesettings.tpl:50
+#: plugins/admin/systems/phonesettings.tpl:89
 msgid "Default IP"
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:54
+#: plugins/admin/systems/phonesettings.tpl:58
+#: plugins/admin/systems/phonesettings.tpl:97
 msgid "Qualify"
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:66
+#: plugins/admin/systems/phonesettings.tpl:110
 msgid "Authtype"
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:76
+#: plugins/admin/systems/phonesettings.tpl:120
 msgid "GoFonSecret"
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:84
+#: plugins/admin/systems/phonesettings.tpl:128
 msgid "GoFonInkeys"
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:92
+#: plugins/admin/systems/phonesettings.tpl:136
 msgid "GoFonOutKeys"
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:106
-msgid "permit / deny "
-msgstr ""
-
-#: plugins/admin/systems/phonesettings.tpl:114
+#: plugins/admin/systems/phonesettings.tpl:149
 msgid "AccountCode "
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:126
+#: plugins/admin/systems/phonesettings.tpl:157
 msgid "Trunk several calls"
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:136
+#: plugins/admin/systems/phonesettings.tpl:172
+msgid "Hosts that are allowed to connect"
+msgstr ""
+
+#: plugins/admin/systems/phonesettings.tpl:189
+msgid "Hosts that are not allowed to connect"
+msgstr ""
+
+#: plugins/admin/systems/phonesettings.tpl:215
 msgid "MSN"
 msgstr ""
 
@@ -5713,7 +5728,7 @@ msgid ""
 "Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
 msgstr ""
 
-#: include/class_plugin.inc:412
+#: include/class_plugin.inc:412 include/class_password-methods.inc:178
 #, php-format
 msgid ""
 "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
@@ -5743,12 +5758,12 @@ msgid ""
 "changes?"
 msgstr ""
 
-#: include/class_password-methods.inc:166
+#: include/class_password-methods.inc:162
 #, php-format
 msgid "Setting the password failed. LDAP server says '%s'."
 msgstr ""
 
-#: include/class_password-methods.inc:185
+#: include/class_password-methods.inc:199
 msgid ""
 "Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
 msgstr ""
