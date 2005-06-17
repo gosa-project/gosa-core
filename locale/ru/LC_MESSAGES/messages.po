@@ -207,8 +207,8 @@ msgid "Alternative addresses"
 msgstr "Альтернативные адреса"
 
 #: plugins/personal/mail/generic.tpl:50 plugins/admin/groups/mail.tpl:48
-#: plugins/admin/systems/phonesettings.tpl:176
-#: plugins/admin/systems/phonesettings.tpl:193
+#: plugins/admin/systems/phonesettings.tpl:173
+#: plugins/admin/systems/phonesettings.tpl:188
 msgid "List of alternative mail addresses"
 msgstr "Список альтернативных адресов эл. почты"
 
@@ -234,8 +234,8 @@ msgstr "Список альтернативных адресов эл. почт�
 #: plugins/admin/systems/servservice.tpl:47
 #: plugins/admin/systems/startup.tpl:61 plugins/admin/systems/startup.tpl:75
 #: plugins/admin/systems/startup.tpl:95
-#: plugins/admin/systems/phonesettings.tpl:182
-#: plugins/admin/systems/phonesettings.tpl:199
+#: plugins/admin/systems/phonesettings.tpl:179
+#: plugins/admin/systems/phonesettings.tpl:194
 #: plugins/admin/ogroups/ogroup_objects.tpl:50
 #: plugins/admin/ogroups/generic.tpl:38
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:211
@@ -266,8 +266,8 @@ msgstr "Добавить"
 #: plugins/admin/systems/remove.tpl:15 plugins/admin/systems/headpage.tpl:17
 #: plugins/admin/systems/startup.tpl:62 plugins/admin/systems/startup.tpl:76
 #: plugins/admin/systems/startup.tpl:96
-#: plugins/admin/systems/phonesettings.tpl:183
-#: plugins/admin/systems/phonesettings.tpl:200
+#: plugins/admin/systems/phonesettings.tpl:180
+#: plugins/admin/systems/phonesettings.tpl:195
 #: plugins/admin/ogroups/generic.tpl:39 plugins/admin/ogroups/remove.tpl:15
 #: plugins/admin/ogroups/headpage.tpl:18
 #: plugins/gofon/phoneaccount/generic.tpl:47
@@ -4480,6 +4480,7 @@ msgstr "Терминал"
 
 #: plugins/admin/systems/terminal.tpl:36
 #: plugins/admin/systems/workstation.tpl:36
+#: plugins/admin/systems/phonesettings.tpl:25
 msgid "Mode"
 msgstr "Режим"
 
@@ -5339,6 +5340,16 @@ msgstr ""
 msgid "This 'dn' has no phone features."
 msgstr "Этот DN не имеет свойств телефона."
 
+#: plugins/admin/systems/class_phoneGeneric.inc:172
+#, fuzzy
+msgid "yes"
+msgstr "Системы"
+
+#: plugins/admin/systems/class_phoneGeneric.inc:172
+#, fuzzy
+msgid "no"
+msgstr "нет"
+
 #: plugins/admin/systems/class_phoneGeneric.inc:244
 msgid "Wrong IP format in field goFonDefaultIP."
 msgstr ""
@@ -5372,79 +5383,81 @@ msgstr "Настройки телефона"
 
 #: plugins/admin/systems/phonesettings.tpl:9
 #, fuzzy
-msgid "Phone category"
-msgstr "Телефонные отчеты"
+msgid "Phone type"
+msgstr "Название"
 
-#: plugins/admin/systems/phonesettings.tpl:12
-#: plugins/admin/systems/phonesettings.tpl:33
-#: plugins/admin/systems/phonesettings.tpl:43
-#: plugins/admin/systems/phonesettings.tpl:82
-#: plugins/admin/systems/phonesettings.tpl:113
-#: plugins/admin/systems/phonesettings.tpl:160
+#: plugins/admin/systems/phonesettings.tpl:10
+#: plugins/admin/systems/phonesettings.tpl:28
+#: plugins/admin/systems/phonesettings.tpl:38
+#: plugins/admin/systems/phonesettings.tpl:81
+#: plugins/admin/systems/phonesettings.tpl:112
+#: plugins/admin/systems/phonesettings.tpl:159
 #, fuzzy
 msgid "Choose a phone type"
 msgstr "Выберите тип мыши"
 
-#: plugins/admin/systems/phonesettings.tpl:15
+#: plugins/admin/systems/phonesettings.tpl:13
 msgid "refresh"
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:30
-#: plugins/admin/systems/phonesettings.tpl:79
+#: plugins/admin/systems/phonesettings.tpl:35
 #, fuzzy
-msgid "Phone type"
-msgstr "Название"
+msgid "DTMF mode"
+msgstr "Режим"
 
-#: plugins/admin/systems/phonesettings.tpl:40
-msgid "Dtmfmode What ever ..."
-msgstr ""
-
-#: plugins/admin/systems/phonesettings.tpl:50
-#: plugins/admin/systems/phonesettings.tpl:89
+#: plugins/admin/systems/phonesettings.tpl:49
+#: plugins/admin/systems/phonesettings.tpl:88
 #, fuzzy
 msgid "Default IP"
 msgstr "по умолчанию"
 
-#: plugins/admin/systems/phonesettings.tpl:58
-#: plugins/admin/systems/phonesettings.tpl:97
-msgid "Qualify"
+#: plugins/admin/systems/phonesettings.tpl:57
+#: plugins/admin/systems/phonesettings.tpl:96
+msgid "Response timeout"
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:110
+#: plugins/admin/systems/phonesettings.tpl:78
+#, fuzzy
+msgid "Modus"
+msgstr "Мышь"
+
+#: plugins/admin/systems/phonesettings.tpl:109
 msgid "Authtype"
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:120
-msgid "GoFonSecret"
-msgstr ""
+#: plugins/admin/systems/phonesettings.tpl:119
+#, fuzzy
+msgid "Secret"
+msgstr "Улица"
 
-#: plugins/admin/systems/phonesettings.tpl:128
+#: plugins/admin/systems/phonesettings.tpl:127
 msgid "GoFonInkeys"
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:136
+#: plugins/admin/systems/phonesettings.tpl:135
 msgid "GoFonOutKeys"
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:149
+#: plugins/admin/systems/phonesettings.tpl:148
 #, fuzzy
-msgid "AccountCode "
+msgid "Account code"
 msgstr "Учетная запись"
 
-#: plugins/admin/systems/phonesettings.tpl:157
-msgid "Trunk several calls"
-msgstr ""
+#: plugins/admin/systems/phonesettings.tpl:156
+#, fuzzy
+msgid "Trunk lines"
+msgstr "Тонкие клиенты"
 
-#: plugins/admin/systems/phonesettings.tpl:172
+#: plugins/admin/systems/phonesettings.tpl:171
 msgid "Hosts that are allowed to connect"
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:189
+#: plugins/admin/systems/phonesettings.tpl:186
 #, fuzzy
 msgid "Hosts that are not allowed to connect"
 msgstr "У вас недостаточно прав для удаления этого объекта!"
 
-#: plugins/admin/systems/phonesettings.tpl:215
+#: plugins/admin/systems/phonesettings.tpl:210
 msgid "MSN"
 msgstr ""
 
@@ -7139,6 +7152,10 @@ msgstr ""
 #: ihtml/themes/default/help.tpl:15
 msgid "Index"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Phone category"
+#~ msgstr "Телефонные отчеты"
 
 #, fuzzy
 #~ msgid "Serial"

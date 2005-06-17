@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schröder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-06-17 13:16+0200\n"
+"PO-Revision-Date: 2005-06-17 17:10+0200\n"
 "Last-Translator:  <(null)>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -208,8 +208,8 @@ msgid "Alternative addresses"
 msgstr "Alternative Adressen"
 
 #: plugins/personal/mail/generic.tpl:50 plugins/admin/groups/mail.tpl:48
-#: plugins/admin/systems/phonesettings.tpl:176
-#: plugins/admin/systems/phonesettings.tpl:193
+#: plugins/admin/systems/phonesettings.tpl:173
+#: plugins/admin/systems/phonesettings.tpl:188
 msgid "List of alternative mail addresses"
 msgstr "Liste alternativer Mail-Adressen"
 
@@ -235,8 +235,8 @@ msgstr "Liste alternativer Mail-Adressen"
 #: plugins/admin/systems/servservice.tpl:47
 #: plugins/admin/systems/startup.tpl:61 plugins/admin/systems/startup.tpl:75
 #: plugins/admin/systems/startup.tpl:95
-#: plugins/admin/systems/phonesettings.tpl:182
-#: plugins/admin/systems/phonesettings.tpl:199
+#: plugins/admin/systems/phonesettings.tpl:179
+#: plugins/admin/systems/phonesettings.tpl:194
 #: plugins/admin/ogroups/ogroup_objects.tpl:50
 #: plugins/admin/ogroups/generic.tpl:38
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:211
@@ -267,8 +267,8 @@ msgstr "Hinzufügen"
 #: plugins/admin/systems/remove.tpl:15 plugins/admin/systems/headpage.tpl:17
 #: plugins/admin/systems/startup.tpl:62 plugins/admin/systems/startup.tpl:76
 #: plugins/admin/systems/startup.tpl:96
-#: plugins/admin/systems/phonesettings.tpl:183
-#: plugins/admin/systems/phonesettings.tpl:200
+#: plugins/admin/systems/phonesettings.tpl:180
+#: plugins/admin/systems/phonesettings.tpl:195
 #: plugins/admin/ogroups/generic.tpl:39 plugins/admin/ogroups/remove.tpl:15
 #: plugins/admin/ogroups/headpage.tpl:18
 #: plugins/gofon/phoneaccount/generic.tpl:47
@@ -2410,9 +2410,9 @@ msgid ""
 "a large size of lists, you might prefer the range selectors on top of the "
 "select box."
 msgstr ""
-"Dieses Menü ermöglicht es Ihnen Sperrlisten hinzuzufügen, "
-"zu bearbeiten oder zu entfernen. Bei einer Vielzahl von Sperrlisten bietet sich die "
-"Verwendung der Bereichswahl an."
+"Dieses Menü ermöglicht es Ihnen Sperrlisten hinzuzufügen, zu bearbeiten oder "
+"zu entfernen. Bei einer Vielzahl von Sperrlisten bietet sich die Verwendung "
+"der Bereichswahl an."
 
 #: plugins/gofax/blocklists/headpage.tpl:32
 msgid ""
@@ -3387,9 +3387,9 @@ msgid ""
 "to use the range selector on top of the group listbox, when working with a "
 "large number of groups."
 msgstr ""
-"Dieses Menü erlaubt es Ihnen Gruppen hinzuzufügen, zu bearbeiten "
-"oder zu entfernen. Bei einer Vielzahl von Gruppen bietet sich die Verwendung "
-"der Bereichsauswahl an."
+"Dieses Menü erlaubt es Ihnen Gruppen hinzuzufügen, zu bearbeiten oder zu "
+"entfernen. Bei einer Vielzahl von Gruppen bietet sich die Verwendung der "
+"Bereichsauswahl an."
 
 #: plugins/admin/groups/headpage.tpl:33 plugins/admin/ogroups/headpage.tpl:33
 msgid ""
@@ -3681,8 +3681,9 @@ msgid ""
 "great number of users, you may want to use the range selectors on top of the "
 "user list."
 msgstr ""
-"Dieses Menü ermöglicht es Ihnen Benutzer hinzuzufügen, zu bearbeiten "
-"oder zu entfernen. Bei einer Vielzahl von Benutzern bietet sich die Verwendung der Bereichsauswahl an."
+"Dieses Menü ermöglicht es Ihnen Benutzer hinzuzufügen, zu bearbeiten oder zu "
+"entfernen. Bei einer Vielzahl von Benutzern bietet sich die Verwendung der "
+"Bereichsauswahl an."
 
 #: plugins/admin/users/headpage.tpl:34
 msgid ""
@@ -3874,8 +3875,9 @@ msgid ""
 "want to use the range selector on top of the application listbox, when "
 "working with a large number of applications."
 msgstr ""
-"Dieses Menü ermöglicht es Ihnen Anwendungen hinzuzufügen, zu bearbeiten"
-" oder zu entfernen. Bei einer Vielzahl von Anwendungen bietet sich die Verwendung der Bereichsauswahl an."
+"Dieses Menü ermöglicht es Ihnen Anwendungen hinzuzufügen, zu bearbeiten oder "
+"zu entfernen. Bei einer Vielzahl von Anwendungen bietet sich die Verwendung "
+"der Bereichsauswahl an."
 
 #: plugins/admin/applications/headpage.tpl:32
 msgid ""
@@ -4019,9 +4021,9 @@ msgid ""
 "a large size of departments, you might prefer the range selectors on top of "
 "the department list."
 msgstr ""
-"Dieses Menü erlaubt es Ihnen Abteilungen hinzuzufügen, zu "
-"bearbeiten oder zu entfernen. Bei einer Vielzahl von Abteilungen bietet sich die Verwendung "
-"der Bereichswahl an."
+"Dieses Menü erlaubt es Ihnen Abteilungen hinzuzufügen, zu bearbeiten oder zu "
+"entfernen. Bei einer Vielzahl von Abteilungen bietet sich die Verwendung der "
+"Bereichswahl an."
 
 #: plugins/admin/departments/headpage.tpl:32
 msgid ""
@@ -4475,6 +4477,7 @@ msgstr "Terminal-Name"
 
 #: plugins/admin/systems/terminal.tpl:36
 #: plugins/admin/systems/workstation.tpl:36
+#: plugins/admin/systems/phonesettings.tpl:25
 msgid "Mode"
 msgstr "Modus"
 
@@ -5320,6 +5323,14 @@ msgstr ""
 msgid "This 'dn' has no phone features."
 msgstr "Diese 'dn' hat keine Telefon-Erweiterungen."
 
+#: plugins/admin/systems/class_phoneGeneric.inc:172
+msgid "yes"
+msgstr "ja"
+
+#: plugins/admin/systems/class_phoneGeneric.inc:172
+msgid "no"
+msgstr "nein"
+
 #: plugins/admin/systems/class_phoneGeneric.inc:244
 msgid "Wrong IP format in field goFonDefaultIP."
 msgstr "Ungültige IP-Adresse in Feld 'Standard IP-Adresse'."
@@ -5350,76 +5361,73 @@ msgid "Specific Phone settings"
 msgstr "Erweiterte Telefon-Einstellungen"
 
 #: plugins/admin/systems/phonesettings.tpl:9
-msgid "Phone category"
-msgstr "Telefon-Kategorie"
-
-#: plugins/admin/systems/phonesettings.tpl:12
-#: plugins/admin/systems/phonesettings.tpl:33
-#: plugins/admin/systems/phonesettings.tpl:43
-#: plugins/admin/systems/phonesettings.tpl:82
-#: plugins/admin/systems/phonesettings.tpl:113
-#: plugins/admin/systems/phonesettings.tpl:160
-msgid "Choose a phone type"
-msgstr "Wählen Sie den Telefon-Typ"
-
-#: plugins/admin/systems/phonesettings.tpl:15
-msgid "refresh"
-msgstr "Aktualisieren"
-
-#: plugins/admin/systems/phonesettings.tpl:30
-#: plugins/admin/systems/phonesettings.tpl:79
 msgid "Phone type"
 msgstr "Telefon-Typ"
 
-#: plugins/admin/systems/phonesettings.tpl:40
-msgid "Dtmfmode What ever ..."
-msgstr ""
+#: plugins/admin/systems/phonesettings.tpl:10
+#: plugins/admin/systems/phonesettings.tpl:28
+#: plugins/admin/systems/phonesettings.tpl:38
+#: plugins/admin/systems/phonesettings.tpl:81
+#: plugins/admin/systems/phonesettings.tpl:112
+#: plugins/admin/systems/phonesettings.tpl:159
+msgid "Choose a phone type"
+msgstr "Wählen Sie den Telefon-Typ"
 
-#: plugins/admin/systems/phonesettings.tpl:50
-#: plugins/admin/systems/phonesettings.tpl:89
+#: plugins/admin/systems/phonesettings.tpl:13
+msgid "refresh"
+msgstr "Aktualisieren"
+
+#: plugins/admin/systems/phonesettings.tpl:35
+msgid "DTMF mode"
+msgstr "DTMF-Modus"
+
+#: plugins/admin/systems/phonesettings.tpl:49
+#: plugins/admin/systems/phonesettings.tpl:88
 msgid "Default IP"
 msgstr "Standard IP-Adresse"
 
-#: plugins/admin/systems/phonesettings.tpl:58
-#: plugins/admin/systems/phonesettings.tpl:97
-msgid "Qualify"
-msgstr "Qualify"
+#: plugins/admin/systems/phonesettings.tpl:57
+#: plugins/admin/systems/phonesettings.tpl:96
+msgid "Response timeout"
+msgstr "Wartezeit bis Antwort"
 
-#: plugins/admin/systems/phonesettings.tpl:110
+#: plugins/admin/systems/phonesettings.tpl:78
+msgid "Modus"
+msgstr "Modus"
+
+#: plugins/admin/systems/phonesettings.tpl:109
 msgid "Authtype"
 msgstr "Authentifizierung"
 
-#: plugins/admin/systems/phonesettings.tpl:120
-msgid "GoFonSecret"
-msgstr "GOFon Secret"
+#: plugins/admin/systems/phonesettings.tpl:119
+msgid "Secret"
+msgstr "Schlüsselwort"
 
-#: plugins/admin/systems/phonesettings.tpl:128
+#: plugins/admin/systems/phonesettings.tpl:127
 msgid "GoFonInkeys"
 msgstr "GOFon-Schlüssel (eingehend)"
 
-#: plugins/admin/systems/phonesettings.tpl:136
+#: plugins/admin/systems/phonesettings.tpl:135
 msgid "GoFonOutKeys"
 msgstr "GOFon-Schlüssel (ausgehend)"
 
-#: plugins/admin/systems/phonesettings.tpl:149
-#, fuzzy
-msgid "AccountCode "
-msgstr "Konto"
+#: plugins/admin/systems/phonesettings.tpl:148
+msgid "Account code"
+msgstr "Konto-Identifikation"
 
-#: plugins/admin/systems/phonesettings.tpl:157
-#, fuzzy
-msgid "Trunk several calls"
-msgstr "Verbindung mehrerer Gespräche"
+#: plugins/admin/systems/phonesettings.tpl:156
+msgid "Trunk lines"
+msgstr "Leitungen zusammenfassen"
 
-#: plugins/admin/systems/phonesettings.tpl:172
+#: plugins/admin/systems/phonesettings.tpl:171
 msgid "Hosts that are allowed to connect"
 msgstr "Erlaube diesen Rechner die Verbindung"
 
-#: plugins/admin/systems/phonesettings.tpl:189
+#: plugins/admin/systems/phonesettings.tpl:186
 msgid "Hosts that are not allowed to connect"
 msgstr "Verbiete diesen Rechner die Verbindung"
 
-#: plugins/admin/systems/phonesettings.tpl:215
+#: plugins/admin/systems/phonesettings.tpl:210
 msgid "MSN"
 msgstr "MSN"
 
@@ -5628,9 +5636,9 @@ msgid ""
 "use the range selector on top of the group listbox, when working with a "
 "large number of groups."
 msgstr ""
-"Dieses Menü erlaubt es Ihnen Gruppen hinzuzufügen, zu "
-"bearbeiten oder zu entfernen. Bei einer Vielzahl von Gruppen bietet sich die "
-"Verwendung der Bereichsauswahl an."
+"Dieses Menü erlaubt es Ihnen Gruppen hinzuzufügen, zu bearbeiten oder zu "
+"entfernen. Bei einer Vielzahl von Gruppen bietet sich die Verwendung der "
+"Bereichsauswahl an."
 
 #: plugins/admin/ogroups/headpage.tpl:48
 msgid "Show empty groups"
@@ -7188,6 +7196,16 @@ msgstr "GOsa Hilfe-Browser"
 #: ihtml/themes/default/help.tpl:15
 msgid "Index"
 msgstr "Index"
+
+#~ msgid "Phone category"
+#~ msgstr "Telefon-Kategorie"
+
+#~ msgid "Qualify"
+#~ msgstr "Qualify"
+
+#, fuzzy
+#~ msgid "Trunk several calls"
+#~ msgstr "Verbindung mehrerer GesprÃƒâ‚¬che"
 
 #~ msgid "permit / deny "
 #~ msgstr "Erlauben / Verbieten"
