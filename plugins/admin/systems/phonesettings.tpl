@@ -7,7 +7,7 @@
 			<tr>
 				<td>
 					{t}Phone type{/t}{$staticAddress}
-					<select size="1" name="selected_categorie" title="{t}Choose a phone type{/t}" style="width:200px;" onchange="mainform.submit();">
+					<select size="1" name="selected_categorie" title="{t}Choose a phone type{/t}" onchange="mainform.submit();">
 						{html_options options=$categories selected=$selected_categorie}
 					</select>
 					<input type="submit" value="{t}refresh{/t}" name="refresh">

@@ -165,10 +165,10 @@ class phoneGeneric extends plugin
     $smarty->assign("bases", $this->config->idepartments);
 
     /* Create Arrays for samrty select boxes */
-    $smarty->assign("categories",     array("SIP - phones","IAX - phones","CAPI - phones"));
+    $smarty->assign("categories",     array("SIP","IAX","CAPI"));
     $smarty->assign("goFonTypes",     array("peer"      =>"peer"      ,"user"   =>"user"    ,"friend" =>"friend"));
     $smarty->assign("goFonDmtfModes", array("inband"    =>"inband"    ,"rfc2833"=>"rfc2833" ,"info"   =>"info"));
-    $smarty->assign("goFonAuths",     array("plaintext" =>"plaintext" ,"md5"    =>"md5"     ,"rsa"    =>"rsa"));
+    $smarty->assign("goFonAuths",     array("plaintext" =>"plaintext" ,"md5"    =>"md5"     /*,"rsa"    =>"rsa"*/));
     $smarty->assign("goFonTrunks",    array("yes" =>_("yes") ,"no" => _("no")));
 
     /* deativate all fields that are not used by the specified type */
