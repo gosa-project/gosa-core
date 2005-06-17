@@ -207,9 +207,7 @@
 			<table width="100%">
 				<tr>
 					<td width="25%">
-						{t}MSN{/t}
-					</td>
-					<td>
+						{t}MSN{/t}&nbsp;
 						<input style="width:200px" name="goFonMSN" value="{$goFonMSN}" {$goFonMSNUSED}>
 					</td>
 				</tr>
