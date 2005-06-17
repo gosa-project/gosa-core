@@ -2,7 +2,7 @@
 
 <table width="100%" cellpadding=10>
 	<tr>
-		<td width="40%" colspan="2">
+		<td width="40%" colspan="3">
 			<table width="100%">
 			<tr>
 				<td>
@@ -40,6 +40,10 @@
 					</select>
 				</td>
 			</tr>
+		</table>
+	   </td>
+	   <td>
+		<table>
 			<tr>
 				<td >
 					{t}Default IP{/t}
