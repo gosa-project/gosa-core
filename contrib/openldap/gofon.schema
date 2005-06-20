@@ -137,6 +137,26 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.13.19 NAME 'goFonDeny'
 	SUBSTR caseExactIA5SubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
 
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.20 NAME 'goFonMacroVisible'
+	DESC 'Triggers if the macro is visible for users'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.21 NAME 'goFonMacroContent'
+	DESC 'Holds the macro'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+	SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.22 NAME 'goFonMacroParameter'
+	DESC 'Holds the macro parameter definitions'
+	EQUALITY caseExactIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+
 # objectclass 
 objectclass (1.3.6.1.4.1.10098.1.2.3.11 NAME 'goFonAccount' SUP top AUXILIARY
 	DESC 'GOFon Account objectclass (v1.0)'
@@ -153,4 +173,10 @@ objectclass (1.3.6.1.4.1.10098.1.2.3.12 NAME 'goFonHardware' SUP top STRUCTURAL
 objectclass (1.3.6.1.4.1.10098.1.2.3.13 NAME 'goFonPickupGroup' SUP top AUXILIARY
 	DESC 'Additive for posixGroups (v1.0)'
 	MUST ( cn $ gidNumber ) )
+
+objectclass (1.3.6.1.4.1.10098.1.2.3.13 NAME 'goFonMacro' SUP top AUXILIARY
+	DESC 'Macro definitions for asterisk machines (v1.0)'
+	MUST ( cn ) 
+	MAY ( goFonMacroVisible $ displayName $ goFonMacroContent $description $
+		  goFonMacroParameter ))
 
