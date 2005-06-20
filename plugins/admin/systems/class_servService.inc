@@ -42,12 +42,13 @@ class servservice extends plugin
 
     /* Load arrays */
     foreach (array("goTimeSource", "goExportEntry") as $name){
-      $this->$name= array();
+      $tmp= array();
       if (isset($this->attrs[$name])){
         for ($i= 0; $i<$this->attrs[$name]['count']; $i++){
-          $this->$name[$this->attrs[$name][$i]]= $this->attrs[$name][$i];
+          $tmp[$this->attrs[$name][$i]]= $this->attrs[$name][$i];
         }
       }
+      $this->$name= $tmp;
     }
 
     /* Always is account... */
@@ -177,7 +178,6 @@ class servservice extends plugin
   /* Save to LDAP */
   function save()
   {
-
     /* Normalize lazy objectclass arrays */
     $objectclasses= array();
     foreach($this->objectclasses as $oc){
@@ -196,6 +196,14 @@ class servservice extends plugin
         foreach ($attrs as $attr){
           $this->attrs[$attr]= array();
         }
+      }
+    }
+
+    /* Arrays */
+    foreach (array("goTimeSource", "goExportEntry") as $name){
+      $this->attrs[$name]= array();
+      foreach ($this->$name as $element){
+        $this->attrs[$name][]= $element;
       }
     }
 
