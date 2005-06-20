@@ -8,6 +8,8 @@
 # translation of messages.po to
 # translation of messages.po to
 # translation of messages.po to
+# translation of messages.po to
+# translation of messages.po to
 # translation of messages.po to Français
 # Gosa2 French Translation
 # This file is distributed under the GPL
@@ -17,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2005-06-16 08:24+0200\n"
+"PO-Revision-Date: 2005-06-20 07:48+0200\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -299,8 +301,7 @@ msgid "No delivery to own mailbox"
 msgstr "Aucune distribution des messages dans la boite de l'utilisateur"
 
 #: plugins/personal/mail/generic.tpl:74
-msgid ""
-"Select to automatically response with the vacation message defined below"
+msgid "Select to automatically response with the vacation message defined below"
 msgstr ""
 "Indiquez la réponse automatique en remplissant le message d'absence ci-"
 "dessous"
@@ -451,8 +452,7 @@ msgstr ""
 "l'activer en cliquant sur le bouton ci-dessous."
 
 #: plugins/personal/mail/class_mailAccount.inc:249
-msgid ""
-"You're trying to add an invalid email address to the list of forwarders."
+msgid "You're trying to add an invalid email address to the list of forwarders."
 msgstr ""
 "Vous essayez d'ajouter une adresse de messagerie invalide à la liste des "
 "destinataires."
@@ -503,8 +503,7 @@ msgstr "La valeur dans le champ 'Quota size' n'est pas valide."
 #: plugins/personal/mail/class_mailAccount.inc:700
 #: plugins/admin/groups/class_groupMail.inc:634
 msgid "Please specify a vaild mail size for mails to be rejected."
-msgstr ""
-"Veuillez indiquer une taille valide pour les messages devant être rejetés."
+msgstr "Veuillez indiquer une taille valide pour les messages devant être rejetés."
 
 #: plugins/personal/mail/class_mailAccount.inc:710
 #: plugins/admin/groups/class_groupMail.inc:642
@@ -775,8 +774,7 @@ msgstr "Vous n'avez pas l'autorisation pour changer votre mot de passe."
 
 #: plugins/personal/password/main.inc:89
 msgid "External password changer reported a problem: "
-msgstr ""
-"Le programme externe pour changer votre mot de passe à renvoyé une erreur: "
+msgstr "Le programme externe pour changer votre mot de passe à renvoyé une erreur: "
 
 #: plugins/personal/posix/posix_groups.tpl:6
 msgid "Select groups to add"
@@ -822,8 +820,7 @@ msgstr "Afficher les groupes Samba"
 #: plugins/personal/posix/posix_groups.tpl:29
 #: plugins/admin/groups/headpage.tpl:49
 msgid "Select to see groups that have applications configured"
-msgstr ""
-"Sélectionnez afin d'afficher les groupes ayant des applications configurées"
+msgstr "Sélectionnez afin d'afficher les groupes ayant des applications configurées"
 
 #: plugins/personal/posix/posix_groups.tpl:29
 #: plugins/admin/groups/headpage.tpl:49
@@ -879,8 +876,7 @@ msgstr "Utilisateur dont on montre les groupes"
 
 #: plugins/personal/posix/posix_shadow.tpl:5
 msgid "User must change password on first login"
-msgstr ""
-"L'utilisateur doit changer son mot de passe lors de sa première connexion"
+msgstr "L'utilisateur doit changer son mot de passe lors de sa première connexion"
 
 #: plugins/personal/posix/posix_shadow.tpl:19
 #: plugins/personal/samba/samba2.tpl:68 plugins/personal/samba/samba3.tpl:225
@@ -1200,8 +1196,7 @@ msgstr "Le champ obligatoire 'Home directory' n'est pas renseigné."
 
 #: plugins/personal/posix/class_posixAccount.inc:861
 msgid "Please enter a valid path in 'Home directory' field."
-msgstr ""
-"Veuillez indiquer un chemin d'accès valide dans le champ 'Home directory'."
+msgstr "Veuillez indiquer un chemin d'accès valide dans le champ 'Home directory'."
 
 #: plugins/personal/posix/class_posixAccount.inc:869
 msgid "Value specified as 'UID' is not valid."
@@ -1239,13 +1234,11 @@ msgstr "'shadowWarning' sans 'shadowMax' n'a pas de sens."
 
 #: plugins/personal/posix/class_posixAccount.inc:903
 msgid "Value specified as 'shadowWarning' should be smaller than 'shadowMax'."
-msgstr ""
-"La valeur de 'shadowWarning' doit être inférieure à celle de 'shadowMax'."
+msgstr "La valeur de 'shadowWarning' doit être inférieure à celle de 'shadowMax'."
 
 #: plugins/personal/posix/class_posixAccount.inc:906
 msgid "Value specified as 'shadowWarning' should be greater than 'shadowMin'."
-msgstr ""
-"La valeur de 'shadowWarning' doit être supérieure à celle de 'shadowMin'."
+msgstr "La valeur de 'shadowWarning' doit être supérieure à celle de 'shadowMin'."
 
 #: plugins/personal/posix/class_posixAccount.inc:911
 msgid "Value specified as 'shadowInactive' is not valid."
@@ -1257,8 +1250,7 @@ msgstr "'shadowInactive' sans 'shadowMax' n'a pas de sens."
 
 #: plugins/personal/posix/class_posixAccount.inc:919
 msgid "Value specified as 'shadowMin' should be smaller than 'shadowMax'."
-msgstr ""
-"La valeur pour 'shadowMin' doit être inférieure à celle de 'shadowMax'."
+msgstr "La valeur pour 'shadowMin' doit être inférieure à celle de 'shadowMax'."
 
 #: plugins/personal/posix/class_posixAccount.inc:1021
 #: plugins/admin/groups/class_groupGeneric.inc:644
@@ -1295,8 +1287,7 @@ msgstr ""
 
 #: plugins/personal/samba/samba2.tpl:57 plugins/personal/samba/samba3.tpl:219
 msgid "Login from windows client requires no password"
-msgstr ""
-"L'identification sur une station windows ne nécessite pas de mot de passe"
+msgstr "L'identification sur une station windows ne nécessite pas de mot de passe"
 
 #: plugins/personal/samba/samba2.tpl:60
 msgid "Temporary disable samba account"
@@ -1490,8 +1481,7 @@ msgstr "La valeur spécifiée comme '%s' contient des caractères invalides!"
 
 #: plugins/personal/samba/class_sambaAccount.inc:634
 #, php-format
-msgid ""
-"The timeout property '%s' is checked and contains invalid or no characters!"
+msgid "The timeout property '%s' is checked and contains invalid or no characters!"
 msgstr ""
 "La propriété temps d'attente '%s' est activée et contient des caractères "
 "invalides ou ne contient rien!"
@@ -1811,8 +1801,7 @@ msgstr "Veuillez entrer un numéro de série valide"
 
 #: plugins/personal/generic/class_user.inc:396
 #, php-format
-msgid ""
-"Certificate is valid from <b>%s</b> to <b>%s</b> and is currently <b>%s</b>."
+msgid "Certificate is valid from <b>%s</b> to <b>%s</b> and is currently <b>%s</b>."
 msgstr ""
 "Le certificat est valide de <b>%s</b> à <b>%s</b> et est actuellement <b>%s</"
 "b>."
@@ -1843,8 +1832,7 @@ msgstr "Impossible d'ajouter un utilisateur à la base de données kerberos."
 
 #: plugins/personal/generic/class_user.inc:857
 msgid "You have no permissions to create a user on this 'Base'."
-msgstr ""
-"Vous n'avez pas l'autorisation pour créer un utilisateur sur cette 'Base'."
+msgstr "Vous n'avez pas l'autorisation pour créer un utilisateur sur cette 'Base'."
 
 #: plugins/personal/generic/class_user.inc:862
 msgid "You have no permissions to move a user from the original 'Base'."
@@ -1970,8 +1958,7 @@ msgid "Kolab"
 msgstr "Kolab"
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:102
-msgid ""
-"You're trying to add an invalid email address to the list of delegations."
+msgid "You're trying to add an invalid email address to the list of delegations."
 msgstr ""
 "Vous essayez d'ajouter une adresse de messagerie invalide à la liste des "
 "délégations."
@@ -2016,8 +2003,7 @@ msgstr ""
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:233
 msgid "The value specified as Free Busy Information URL is invalid."
-msgstr ""
-"La valeur spécifiée comme URL d'information de disponibilité est invalide."
+msgstr "La valeur spécifiée comme URL d'information de disponibilité est invalide."
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:247
 #, php-format
@@ -2046,8 +2032,7 @@ msgstr "La valeur spécifiée dans le champ 'Upload bandwidth' n'est pas valide."
 
 #: plugins/personal/connectivity/class_pureftpdAccount.inc:128
 msgid "Value specified as 'Download bandwidth' is not valid."
-msgstr ""
-"La valeur spécifiée dans le champ 'Download bandwidth' n'est pas valide."
+msgstr "La valeur spécifiée dans le champ 'Download bandwidth' n'est pas valide."
 
 #: plugins/personal/connectivity/class_pureftpdAccount.inc:131
 msgid "Value specified as 'Files' is not valid."
@@ -2303,8 +2288,7 @@ msgstr "recevoir"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:348
 msgid "You have no permissions to create a blocklist on this 'Base'."
-msgstr ""
-"Vous n'avez pas l'autorisation de créer une liste rouge sur cette 'Base'."
+msgstr "Vous n'avez pas l'autorisation de créer une liste rouge sur cette 'Base'."
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:354
 #: plugins/admin/departments/class_departmentGeneric.inc:143
@@ -2321,8 +2305,7 @@ msgstr "Le nom spécifié est déjà utilisé."
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:372
 msgid "No permission to create a blocklist on this base."
-msgstr ""
-"Vous n'avez pas l'autorisation de créer des listes rouge sur cette base."
+msgstr "Vous n'avez pas l'autorisation de créer des listes rouge sur cette base."
 
 #: plugins/gofax/blocklists/generic.tpl:8
 msgid "List name"
@@ -2344,8 +2327,7 @@ msgstr "Type"
 
 #: plugins/gofax/blocklists/generic.tpl:34
 msgid "Select wether to filter incoming or outgoing calls"
-msgstr ""
-"Veuillez sélectionner si il faut filtrer sur les appels entrants ou sortants"
+msgstr "Veuillez sélectionner si il faut filtrer sur les appels entrants ou sortants"
 
 #: plugins/gofax/blocklists/generic.tpl:41 plugins/admin/groups/generic.tpl:13
 #: plugins/admin/applications/generic.tpl:24
@@ -2643,8 +2625,7 @@ msgstr "Veuillez entrer un numéro de téléphone valide dans le champ 'Fax'."
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:482
 msgid "Mail delivery is checked, but no address has been specified."
-msgstr ""
-"La livraison par messagerie est activée, mais aucune adresse est spécifiée."
+msgstr "La livraison par messagerie est activée, mais aucune adresse est spécifiée."
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:484
 msgid "The mail address you've entered is invalid."
@@ -2889,8 +2870,7 @@ msgstr "Afficher les entrées de l'organisation"
 
 #: plugins/addons/addressbook/contents.tpl:69
 msgid "Select to see users in addressbook"
-msgstr ""
-"Sélectionner pour afficher les utilisateurs présent dans le carnet d'adresse"
+msgstr "Sélectionner pour afficher les utilisateurs présent dans le carnet d'adresse"
 
 #: plugins/addons/addressbook/contents.tpl:69
 msgid "Show addressbook entries"
@@ -3004,15 +2984,13 @@ msgid "User ID"
 msgstr "ID de l'utilisateur"
 
 #: plugins/addons/addressbook/class_addressbook.inc:576
-msgid ""
-"Cannot create a unique DN for your entry. Please fill more formular fields."
+msgid "Cannot create a unique DN for your entry. Please fill more formular fields."
 msgstr ""
 "Impossible de créer un DN unique pour cette entrée. Veuillez remplir plus de "
 "champs."
 
 #: plugins/addons/addressbook/class_addressbook.inc:588
-msgid ""
-"You have no permissions to create or modify a global address book entry."
+msgid "You have no permissions to create or modify a global address book entry."
 msgstr ""
 "Vous n'avez pas les droits nécessaires pour créer ou modifier une entrée "
 "dans le carnet d'adresse général."
@@ -3024,8 +3002,7 @@ msgstr "Exportation LDIF"
 
 #: plugins/addons/ldapmanager/class_csvimport.inc:93
 msgid "You've no permission to do CSV imports."
-msgstr ""
-"Vous n'avez pas les droits nécessaires pour effectuer des importations CSV."
+msgstr "Vous n'avez pas les droits nécessaires pour effectuer des importations CSV."
 
 #: plugins/addons/ldapmanager/class_csvimport.inc:154
 msgid "Need 'sn','givenName' and 'uid' to create user."
@@ -3143,8 +3120,7 @@ msgstr "Sélectionnez le modèle"
 
 #: plugins/addons/ldapmanager/class_import.inc:38
 msgid "You've no permission to do LDAP imports."
-msgstr ""
-"Vous n'avez pas les droits nécessaires pour effectuer des importations LDAP."
+msgstr "Vous n'avez pas les droits nécessaires pour effectuer des importations LDAP."
 
 #: plugins/addons/ldapmanager/class_import.inc:104
 msgid "Unknown Error"
@@ -3201,8 +3177,7 @@ msgstr "Importer un fichier CSV"
 
 #: plugins/addons/ldapmanager/class_export.inc:35
 msgid "You've no permission to do LDAP exports."
-msgstr ""
-"Vous n'avez pas les droits nécessaires pour effectuer des exportations LDAP."
+msgstr "Vous n'avez pas les droits nécessaires pour effectuer des exportations LDAP."
 
 #: plugins/addons/ldapmanager/class_export.inc:80
 msgid "Error while exporting the requested entries!"
@@ -3309,8 +3284,7 @@ msgstr "Adresse de messagerie principale pour ce répertoire partagé"
 
 #: plugins/admin/groups/mail.tpl:16
 msgid "Select mail server to place user on"
-msgstr ""
-"Sélectionner le serveur de messagerie sur lequel sera créé l'utilisateur"
+msgstr "Sélectionner le serveur de messagerie sur lequel sera créé l'utilisateur"
 
 #: plugins/admin/groups/mail.tpl:66
 msgid "IMAP shared folders"
@@ -3610,8 +3584,7 @@ msgstr ""
 
 #: plugins/admin/groups/class_groupApplication.inc:107
 msgid "The selected application name is not uniq. Please check your LDAP."
-msgstr ""
-"Le nom de l'application n'est pas unique. Veuillez vérifier l'annuaire LDAP."
+msgstr "Le nom de l'application n'est pas unique. Veuillez vérifier l'annuaire LDAP."
 
 #: plugins/admin/groups/class_groupApplication.inc:143
 msgid "The selected application has no options."
@@ -3634,8 +3607,7 @@ msgstr "Utilisateurs"
 #: plugins/admin/users/class_userManagement.inc:159
 #: plugins/admin/users/class_userManagement.inc:210
 msgid "You are not allowed to set this users password!"
-msgstr ""
-"Vous n'êtes pas autorisé à indiquer un mot de passe pour cet utilisateur!"
+msgstr "Vous n'êtes pas autorisé à indiquer un mot de passe pour cet utilisateur!"
 
 #: plugins/admin/users/class_userManagement.inc:246
 #, php-format
@@ -3734,8 +3706,7 @@ msgstr "Afficher les modèles"
 
 #: plugins/admin/users/headpage.tpl:49
 msgid "Select to see users that have only a GOsa object"
-msgstr ""
-"Sélectionnez afin d'afficher les utilisateurs qui ont seulement un objet GOsa"
+msgstr "Sélectionnez afin d'afficher les utilisateurs qui ont seulement un objet GOsa"
 
 #: plugins/admin/users/headpage.tpl:49
 msgid "Show functional users"
@@ -3751,8 +3722,7 @@ msgstr "Afficher les utilisateurs Unix"
 
 #: plugins/admin/users/headpage.tpl:51
 msgid "Select to see users that have mail settings"
-msgstr ""
-"Sélectionnez afin d'afficher les utilisateurs ayant un compte de messagerie"
+msgstr "Sélectionnez afin d'afficher les utilisateurs ayant un compte de messagerie"
 
 #: plugins/admin/users/headpage.tpl:51
 msgid "Show mail users"
@@ -3809,8 +3779,7 @@ msgid "Create options"
 msgstr "Créer des options"
 
 #: plugins/admin/applications/class_applicationParameters.inc:51
-msgid ""
-"This application has options disabled. You can enable them by clicking below."
+msgid "This application has options disabled. You can enable them by clicking below."
 msgstr ""
 "Cette application a des options désactivées. Vous pouvez les activer en "
 "cliquant en-dessous."
@@ -4090,8 +4059,7 @@ msgstr "Gestion des départements"
 
 #: plugins/admin/departments/class_departmentGeneric.inc:129
 msgid "You have no permissions to create a department on this 'Base'."
-msgstr ""
-"Vous n'avez pas l'autorisation pour créer un département sur cette 'Base'."
+msgstr "Vous n'avez pas l'autorisation pour créer un département sur cette 'Base'."
 
 #: plugins/admin/departments/class_departmentGeneric.inc:136
 #: plugins/admin/departments/class_departmentGeneric.inc:138
@@ -4665,8 +4633,7 @@ msgid "Remove DNS service"
 msgstr "Suppression du service DNS"
 
 #: plugins/admin/systems/class_servDNS.inc:34
-msgid ""
-"This server has DNS features enabled. You can disable them by clicking below."
+msgid "This server has DNS features enabled. You can disable them by clicking below."
 msgstr ""
 "Ce serveur à l'option DNS activée. Vous pouvez le désactiver en cliquant sur "
 "le bouton ci-dessous."
@@ -4676,8 +4643,7 @@ msgid "Add DNS service"
 msgstr "Ajouter un service DNS"
 
 #: plugins/admin/systems/class_servDNS.inc:37
-msgid ""
-"This server has DNS features disabled. You can enable them by clicking below."
+msgid "This server has DNS features disabled. You can enable them by clicking below."
 msgstr ""
 "Ce serveur à l'option DNS désactivé. Vous pouvez l'activer en cliquant sur "
 "le bouton ci-dessous."
@@ -4913,8 +4879,7 @@ msgstr "Accepter le courrier électronique venant d'internet"
 
 #: plugins/admin/systems/servkolab.tpl:167
 msgid "Accept mail from other domains over non-authenticated SMTP"
-msgstr ""
-"Accepter les messages sur du SMTP non authentifié venant d'autre domaines"
+msgstr "Accepter les messages sur du SMTP non authentifié venant d'autre domaines"
 
 #: plugins/admin/systems/class_printGeneric.inc:57
 msgid "This 'dn' has no printer features."
@@ -4922,8 +4887,7 @@ msgstr "Ce 'dn' n'a pas d'extensions d'impression."
 
 #: plugins/admin/systems/class_printGeneric.inc:126
 msgid "You have no permissions to create a printer on this 'Base'."
-msgstr ""
-"Vous n'avez pas l'autorisation de créer une imprimante sur cette 'Base'."
+msgstr "Vous n'avez pas l'autorisation de créer une imprimante sur cette 'Base'."
 
 #: plugins/admin/systems/wingeneric.tpl:6
 msgid "Machine name"
@@ -5337,8 +5301,7 @@ msgstr "Ajouter des modules à charger au démarrage"
 
 #: plugins/admin/systems/startup.tpl:67
 msgid "Automount devices (format: complete autofs entry)"
-msgstr ""
-"Montage automatique des périphériques (format: entrée complète de autofs)"
+msgstr "Montage automatique des périphériques (format: entrée complète de autofs)"
 
 #: plugins/admin/systems/startup.tpl:69
 msgid "Add additional automount entries"
@@ -5357,14 +5320,12 @@ msgid "This 'dn' has no phone features."
 msgstr "Ce 'dn' n'a pas d'extensions téléphoniques."
 
 #: plugins/admin/systems/class_phoneGeneric.inc:172
-#, fuzzy
 msgid "yes"
-msgstr "Systèmes"
+msgstr "oui"
 
 #: plugins/admin/systems/class_phoneGeneric.inc:172
-#, fuzzy
 msgid "no"
-msgstr "aucun"
+msgstr "non"
 
 #: plugins/admin/systems/class_phoneGeneric.inc:244
 msgid "Wrong IP format in field goFonDefaultIP."
@@ -5391,9 +5352,8 @@ msgid "You have no permissions to create a phone on this 'Base'."
 msgstr "Vous n'avez pas l'autorisation de créer un téléphone sur cette 'Base'."
 
 #: plugins/admin/systems/phonesettings.tpl:1
-#, fuzzy
 msgid "Specific Phone settings"
-msgstr "Configuration du téléphone"
+msgstr "Configuration particulière du téléphone"
 
 #: plugins/admin/systems/phonesettings.tpl:9
 msgid "Phone type"
@@ -5413,9 +5373,8 @@ msgid "refresh"
 msgstr "Rafraichir"
 
 #: plugins/admin/systems/phonesettings.tpl:35
-#, fuzzy
 msgid "DTMF mode"
-msgstr "Mode"
+msgstr "Mode DTMF"
 
 #: plugins/admin/systems/phonesettings.tpl:49
 #: plugins/admin/systems/phonesettings.tpl:88
@@ -5425,21 +5384,20 @@ msgstr "Adresse ip par défaut"
 #: plugins/admin/systems/phonesettings.tpl:57
 #: plugins/admin/systems/phonesettings.tpl:96
 msgid "Response timeout"
-msgstr ""
+msgstr "Dépassement du temps de réponse"
 
 #: plugins/admin/systems/phonesettings.tpl:78
 #, fuzzy
 msgid "Modus"
-msgstr "Souris"
+msgstr "Moins"
 
 #: plugins/admin/systems/phonesettings.tpl:109
 msgid "Authtype"
 msgstr "Type d'authentification"
 
 #: plugins/admin/systems/phonesettings.tpl:119
-#, fuzzy
 msgid "Secret"
-msgstr "Rue"
+msgstr "Secret"
 
 #: plugins/admin/systems/phonesettings.tpl:127
 msgid "GoFonInkeys"
@@ -5450,24 +5408,20 @@ msgid "GoFonOutKeys"
 msgstr ""
 
 #: plugins/admin/systems/phonesettings.tpl:148
-#, fuzzy
 msgid "Account code"
-msgstr "Code pour le compte"
+msgstr "Code du compte téléphonique"
 
 #: plugins/admin/systems/phonesettings.tpl:156
-#, fuzzy
 msgid "Trunk lines"
-msgstr "Clients légers"
+msgstr "Regrouper des lignes"
 
 #: plugins/admin/systems/phonesettings.tpl:171
-#, fuzzy
 msgid "Hosts that are allowed to connect"
-msgstr "Machines/Réseaux qui peuvent relayer du mail"
+msgstr "Machines qui peuvent se connecter"
 
 #: plugins/admin/systems/phonesettings.tpl:186
-#, fuzzy
 msgid "Hosts that are not allowed to connect"
-msgstr "Vous n'êtes pas autorisé à supprimer ce composant!"
+msgstr "Machines qui peuvent pas se connecter"
 
 #: plugins/admin/systems/phonesettings.tpl:210
 msgid "MSN"
@@ -5941,8 +5895,7 @@ msgstr "Echec lors de l'ajout d'un verrou. Le serveur LDAP indique '%s'."
 #: include/functions.inc:402
 #, php-format
 msgid "Removing a lock failed. LDAP server says '%s'."
-msgstr ""
-"Echec lors de la suppression d'un verrou. Le serveur LDAP indique '%s'."
+msgstr "Echec lors de la suppression d'un verrou. Le serveur LDAP indique '%s'."
 
 #: include/functions.inc:432
 msgid ""
@@ -6079,8 +6032,7 @@ msgstr ""
 #: include/class_mail-methods-cyrus.inc:114
 #, php-format
 msgid "Can't create IMAP mailbox. Server says '%s'."
-msgstr ""
-"Impossible de créer la boite de messagerie IMAP. Le serveur indique '%s'."
+msgstr "Impossible de créer la boite de messagerie IMAP. Le serveur indique '%s'."
 
 #: include/class_mail-methods-cyrus.inc:130
 #, php-format
@@ -6088,8 +6040,7 @@ msgid "Can't write IMAP quota. Server says '%s'."
 msgstr "Impossible de créer les quotas IMAP. Le serveur indique'%s'."
 
 #: include/class_mail-methods-cyrus.inc:141
-msgid ""
-"Warning: imap_getacl is not implemented, wouldn't modify acl informations."
+msgid "Warning: imap_getacl is not implemented, wouldn't modify acl informations."
 msgstr ""
 "Erreur: imap_getacl n'est pas implémenté, il est impossible de modifier les "
 "informations à propos des acls."
@@ -6125,8 +6076,7 @@ msgstr "Impossible d'envoyer un script à sieve. Le serveur indique '%s'."
 #: include/class_mail-methods-cyrus.inc:314
 #, php-format
 msgid "Can't activate GOsa sieve script. Server says '%s'."
-msgstr ""
-"Impossible d'activer les scripts sieve de GOsa. Le serveur indique '%s'."
+msgstr "Impossible d'activer les scripts sieve de GOsa. Le serveur indique '%s'."
 
 #: include/class_plugin.inc:180
 msgid "This 'dn' has no account extensions."
@@ -6138,24 +6088,21 @@ msgstr "Cette extension est vide."
 
 #: include/class_plugin.inc:386
 #, php-format
-msgid ""
-"Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
 msgstr ""
 "La commande '%s', utilisée dans le POSTCREATE de l'extension '%s' n'existe "
 "pas."
 
 #: include/class_plugin.inc:412 include/class_password-methods.inc:178
 #, php-format
-msgid ""
-"Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
 msgstr ""
 "La commande '%s', utilisée dans le POSTMODIFY de l'extension '%s' n'existe "
 "pas."
 
 #: include/class_plugin.inc:438
 #, php-format
-msgid ""
-"Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
 msgstr ""
 "La commande '%s', utilisée dans le POSTREMOVE de l'extension '%s' n'existe "
 "pas."
@@ -6192,8 +6139,7 @@ msgstr ""
 "s'."
 
 #: include/class_password-methods.inc:199
-msgid ""
-"Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
+msgid "Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
 msgstr ""
 "La configuration de SMBHASH dans gosa.conf est incorrecte ! Impossible de "
 "changer le mot de passe Samba."
@@ -6316,8 +6262,7 @@ msgstr ""
 
 #: include/functions_setup.inc:114
 #, php-format
-msgid ""
-"Optional objectclass '%s' required by plugin '%s' does not have version %s"
+msgid "Optional objectclass '%s' required by plugin '%s' does not have version %s"
 msgstr ""
 "l'objectCLass optionnel '%s' requis par l'extension '%s' nécessite la "
 "version %s"
@@ -6371,8 +6316,7 @@ msgstr "Le support de WEBDAV est activé"
 
 #: include/functions_setup.inc:182
 msgid "Support for phpgroupware disabled, no schema seems to be installed"
-msgstr ""
-"Le support de phpgroupware est désactivé, aucun schéma ne semble installé"
+msgstr "Le support de phpgroupware est désactivé, aucun schéma ne semble installé"
 
 #: include/functions_setup.inc:187
 msgid "Support for phpgroupware enabled"
@@ -6447,8 +6391,7 @@ msgstr "Vérification des modules LDAP"
 
 #: include/functions_setup.inc:261
 msgid "This is the main module used by GOsa and therefore really required."
-msgstr ""
-"Ce module est le module de base utilisé par GOsa et est donc indispensable."
+msgstr "Ce module est le module de base utilisé par GOsa et est donc indispensable."
 
 #: include/functions_setup.inc:264
 msgid "Checking for XML functions"
@@ -6561,8 +6504,7 @@ msgid "Checking for snmp Module"
 msgstr "Vérification du module snmp"
 
 #: include/functions_setup.inc:300
-msgid ""
-"Simple Network Management Protocol (SNMP) is required for client monitoring."
+msgid "Simple Network Management Protocol (SNMP) is required for client monitoring."
 msgstr "Le protocole SNMP est nécessaire pour pouvoir surveiller les clients."
 
 #: include/functions_setup.inc:309
@@ -6607,8 +6549,7 @@ msgstr ""
 
 #: include/functions_setup.inc:346
 msgid "Checking for a way to generate LM/NT password hashes"
-msgstr ""
-"Vérification de la possibilité de générer des mots de passe au format LM/NT"
+msgstr "Vérification de la possibilité de générer des mots de passe au format LM/NT"
 
 #: include/functions_setup.inc:347
 msgid ""
@@ -6768,8 +6709,7 @@ msgstr "Echec des requêtes sur la base de données!"
 
 #: html/getvcard.php:36
 msgid "Error: getcvard.php needs a parameter to export a vcard!"
-msgstr ""
-"Erreur: getvcard.php nécessite un paramètre pour exporter au format vcard!"
+msgstr "Erreur: getvcard.php nécessite un paramètre pour exporter au format vcard!"
 
 #: html/setup.php:75
 #, php-format
@@ -6845,8 +6785,7 @@ msgstr "suivant"
 
 #: html/helpviewer.php:144
 #, php-format
-msgid ""
-"Can't read any helpfiles from ' %s ', possibly there is no help available."
+msgid "Can't read any helpfiles from ' %s ', possibly there is no help available."
 msgstr ""
 "Impossible de lire les fichiers d'aides depuis '%s', probablement qu'il n'y "
 "a pas d'aide disponible."
@@ -7234,16 +7173,3 @@ msgstr "Aide en ligne de GOsa"
 msgid "Index"
 msgstr "Index"
 
-#, fuzzy
-#~ msgid "Phone category"
-#~ msgstr "Catégorie téléphonique"
-
-#~ msgid "Qualify"
-#~ msgstr "Qualifier"
-
-#, fuzzy
-#~ msgid "Trunk several calls"
-#~ msgstr "Regrouper plusieurs appels"
-
-#~ msgid "permit / deny "
-#~ msgstr "permettre / interdire"
