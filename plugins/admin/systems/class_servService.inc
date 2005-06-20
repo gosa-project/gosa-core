@@ -21,6 +21,8 @@ class servservice extends plugin
   /* attribute list for save action */
   var $ignore_account= TRUE;
   var $attributes       = array("goLdapBase","goXdmcpIsEnabled","goFontPath");
+  var $possible_objectclasses= array( "goNfsServer", "goNtpServer", "goServer", "goLdapServer",
+                                      "goTerminalServer", "goSyslogServer", "goCupsServer");
   var $objectclasses    = array("top","goServer"); 
   var $additionaloc     = array( "goNfsServer"     => array("goExportEntry"),
                                  "goNtpServer"     => array("goTimeSource"),
@@ -187,8 +189,24 @@ class servservice extends plugin
 
     plugin::save();
 
-    /* Normalize objectclasses */
-    $this->attrs['objectClass']= $this->objectclasses;
+    $tmp= array();
+
+    /* Remove all from this plugin */
+    foreach($this->attrs['objectClass'] as $oc){
+      if (!in_array_ics($oc, $this->possible_objectclasses)){
+        $tmp[]= $oc;
+      }
+    }
+
+    /* Merge our current objectclasses */
+    foreach($this->objectclasses as $oc){
+      if (!in_array_ics($oc, $tmp)){
+        $tmp[]= $oc;
+      }
+    }
+
+    /* Reassign cleaned value */
+    $this->attrs['objectClass']= $tmp;
 
     /* Remove illegal attributes */
     foreach ($this->additionaloc as $oc => $attrs){

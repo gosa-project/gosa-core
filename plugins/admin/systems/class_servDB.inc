@@ -216,8 +216,6 @@ class servdb extends plugin
     }
     $this->attrs = array_reverse($this->attrs);
 
-
-
     /* Write to LDAP */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
