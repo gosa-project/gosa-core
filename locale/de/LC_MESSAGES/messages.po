@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schr�der <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-06-17 17:12+0200\n"
+"PO-Revision-Date: 2005-06-20 07:45+0200\n"
 "Last-Translator:  <(null)>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -3482,7 +3482,7 @@ msgstr "Zeige die Benutzer der Abteilung"
 #: plugins/admin/groups/group_objects.tpl:30
 #: plugins/admin/users/headpage.tpl:73
 msgid "Display users matching"
-msgstr "Zeige die Benutzer, auf die das folgendes passt"
+msgstr "Zeige die Benutzer, auf die folgendes passt"
 
 #: plugins/admin/groups/group_objects.tpl:31
 #: plugins/admin/users/headpage.tpl:74
@@ -7205,7 +7205,7 @@ msgstr "Index"
 
 #, fuzzy
 #~ msgid "Trunk several calls"
-#~ msgstr "Verbindung mehrerer GesprÃâ¬che"
+#~ msgstr "Verbindung mehrerer GesprÃÂÃ¢ÂÂ¬che"
 
 #~ msgid "permit / deny "
 #~ msgstr "Erlauben / Verbieten"
