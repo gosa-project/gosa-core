@@ -1,7 +1,6 @@
-<table style="width:100%;">
-	<tr>
-  		<td valign="top" >
-
+<table width="100%">
+  <tr>
+    <td>
    			<table>
      			<tr>
       				<td>{t}Macro name{/t}{$must}</td>
@@ -11,18 +10,6 @@
      				<td>{t}Display name{/t}</td>
      				<td>
         				<input name="displayName" size=35 maxlength=60 value="{$displayName}" title="{t}Macro name to be displayed{/t}">
-     				</td>
-    			</tr>
-    			<tr>
-     				<td>{t}Description{/t}</td>
-     				<td>
-      					<input name="description" size=35 maxlength=60 value="{$description}">
-     				</td>
-    			</tr>
-    			<tr>
-     				<td>{t}Visible for user{/t}</td>
-     				<td>
-      					<input type="checkbox" name="goFonMacroVisible" size=35 maxlength=60 value="1" {$goFonMacroVisibleChecked}>
      				</td>
     			</tr>
     			<tr>
@@ -38,14 +25,28 @@
 		      		</td>
 	     		</tr>
    			</table>
-
-  		</td>
-		<td align="right">	
-			<textarea name="goFonMacroContent" style="width:700px;height:400px;font-size:14px;font-family:Arial;">{$goFonMacroContent}</textarea>
 		</td>
-	<tr>
+		<td style="vertical-align:top;">
+			<table>
+    			<tr>
+     				<td>{t}Description{/t}</td>
+     				<td>
+      					<input name="description" size=35 maxlength=60 value="{$description}">
+     				</td>
+    			</tr>
+    			<tr>
+     				<td colspan=2>
+      					<input type="checkbox" name="goFonMacroVisible" size=35 maxlength=60 value="1" {$goFonMacroVisibleChecked}> {t}Visible for user{/t}
+     				</td>
+    			</tr>
+			</table>
+		</td>
+	</tr>
 </table>
-<p class="plugbottom" style="height:4px; margin-bottom:0px;">&nbsp</p>
+<br>
+{t}Macro text{/t}
+<br>
+<textarea name="goFonMacroContent" style="width:99%;height:300px;font-size:14px;font-family:Arial;">{$goFonMacroContent}</textarea>
 
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
