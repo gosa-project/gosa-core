@@ -2,7 +2,7 @@
 
 <table width="100%" cellpadding=10>
 	<tr>
-		<td width="40%" colspan="3">
+		<td colspan="3">
 			<table width="100%">
 			<tr>
 				<td>
@@ -74,7 +74,7 @@
 		<td style="vertical-align:top">
 			<table width="100%">
 			 <tr>
-				<td width="25%">
+				<td>
 					{t}Modus{/t}{$staticAddress}
 				</td>
 				<td >
@@ -105,7 +105,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td width="25%">
+				<td>
 					{t}Authtype{/t}
 				</td>
 				<td>
@@ -152,7 +152,7 @@
                 </td>
             </tr>
             <tr>
-                <td width="25%">
+                <td>
                     {t}Trunk lines{/t}
                 </td>
                 <td>
@@ -206,7 +206,7 @@
 		<td>
 			<table width="100%">
 				<tr>
-					<td width="25%">
+					<td>
 						{t}MSN{/t}&nbsp;
 						<input style="width:200px" name="goFonMSN" value="{$goFonMSN}" {$goFonMSNUSED}>
 					</td>
