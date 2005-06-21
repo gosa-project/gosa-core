@@ -22,7 +22,7 @@ require "tabs_macros.inc";
 class gofonMacro extends plugin
 {
   /* Definitions */
-  var $plHeadline		= "Macro";
+  var $plHeadline		= "Phone macros";
   var $plDescription	= "This does something";
 
   /* Dialog attributes */
