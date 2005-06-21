@@ -221,6 +221,8 @@ class fonreport extends plugin
 	if ($output != ""){
 		$smarty->assign("search_result", $output);
 		$smarty->assign("range_selector", range_selector(count($this->report_list), $this->start, 20));
+	} else {
+		$smarty->assign("search_result", "");
 	}
 
 	/* Show main page */
