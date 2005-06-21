@@ -26,7 +26,7 @@
    </div>
    <div class="contentboxb">
    <p class="contentboxb">
-    {t}This menu allows you to add, edit and remove selected Macro. You may want to use the range selector on top of the macro listbox, when working with a large number of macros.{/t}
+    {t}This menu allows you to add, edit and remove selected macros. You may want to use the range selector on top of the macro listbox, when working with a large number of macros.{/t}
    </p>
    <p class="contentboxb">
     {t}-Edit- and -New...- will execute an assistant to aid you in editing properties. -Delete- will ask for confirmation before removing macros.{/t}
