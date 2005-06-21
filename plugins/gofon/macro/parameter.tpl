@@ -3,7 +3,7 @@
 		<td>
 			<table>
 				<tr>
-					<td width="10%">{t}Number{/t}
+					<td width="10%">{t}Argument{/t}
 					</td>
 					<td width="25%">{t}Name{/t}
 					</td>
@@ -19,7 +19,8 @@
 		</td>
  	</tr>
 </table>
-<p class="plugbottom" style="height:4px; margin-bottom:0px;">&nbsp</p>
+
+<input type="hidden" name="phoneparemeters">
 
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">

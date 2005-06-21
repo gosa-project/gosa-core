@@ -48,7 +48,7 @@ class macro extends plugin
     /* Do we represent a valid group? */
     if (!$this->is_account && $this->parent == NULL){
       $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
-        _("This 'dn' is no application.")."</b>";
+        _("This 'dn' is no phone macro.")."</b>";
       return ($display);
     }
 
