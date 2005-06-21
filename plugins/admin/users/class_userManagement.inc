@@ -450,6 +450,7 @@ class userManagement extends plugin
             $this->uid= current($uids);
           }
         } else {
+            $smarty->assign("edit_uid", "");
           $this->uid= "";
         }
         $this->got_uid= true;
