@@ -40,23 +40,6 @@
    			</table>
 
   		</td>
-		<td>
-			<table>
-				<tr>
-					<td>{t}Number{/t}
-					</td>
-					<td>{t}Name{/t}
-					</td>
-					<td>{t}type{/t}
-					</td>
-					<td>{t}Default value{/t}
-					</td>
-					<td>{t}Option{/t}
-					<td>
-				</tr>
-					{$vars}
-			</table>
-		</td>
  	</tr>
 </table>
 <table width="100%">
