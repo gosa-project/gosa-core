@@ -22,16 +22,17 @@ msgstr "Моя учетная запись"
 msgid "Administration"
 msgstr "Администрирование"
 
-#: contrib/gosa.conf:40
+#: contrib/gosa.conf:42
 msgid "Addons"
 msgstr "Дополнительно"
 
-#: contrib/gosa.conf:55 contrib/gosa.conf:66 contrib/gosa.conf:74
-#: contrib/gosa.conf:80 contrib/gosa.conf:88 contrib/gosa.conf:97
-#: contrib/gosa.conf:105 contrib/gosa.conf:110 contrib/gosa.conf:115
-#: contrib/gosa.conf:120 contrib/gosa.conf:125 contrib/gosa.conf:130
-#: plugins/personal/mail/generic.tpl:4 plugins/personal/posix/generic.tpl:4
-#: plugins/personal/samba/samba2.tpl:6 plugins/personal/samba/samba3.tpl:6
+#: contrib/gosa.conf:57 contrib/gosa.conf:68 contrib/gosa.conf:76
+#: contrib/gosa.conf:82 contrib/gosa.conf:88 contrib/gosa.conf:96
+#: contrib/gosa.conf:105 contrib/gosa.conf:113 contrib/gosa.conf:118
+#: contrib/gosa.conf:123 contrib/gosa.conf:128 contrib/gosa.conf:133
+#: contrib/gosa.conf:138 plugins/personal/mail/generic.tpl:4
+#: plugins/personal/posix/generic.tpl:4 plugins/personal/samba/samba2.tpl:6
+#: plugins/personal/samba/samba3.tpl:6
 #: plugins/personal/generic/class_user.inc:16
 #: plugins/gofax/blocklists/generic.tpl:1
 #: plugins/gofax/faxaccount/generic.tpl:6 plugins/admin/groups/mail.tpl:7
@@ -39,29 +40,29 @@ msgstr "Дополнительно"
 msgid "Generic"
 msgstr "Общее"
 
-#: contrib/gosa.conf:56
+#: contrib/gosa.conf:58
 msgid "Unix"
 msgstr "Unix"
 
-#: contrib/gosa.conf:57 contrib/gosa.conf:68
+#: contrib/gosa.conf:59 contrib/gosa.conf:70
 #: plugins/personal/mail/class_mailAccount.inc:22
 #: plugins/generic/references/class_reference.inc:24
 msgid "Mail"
 msgstr "Почта"
 
-#: contrib/gosa.conf:58 plugins/personal/samba/class_sambaAccount.inc:24
+#: contrib/gosa.conf:60 plugins/personal/samba/class_sambaAccount.inc:24
 #: plugins/generic/references/class_reference.inc:26
 #: plugins/generic/references/class_reference.inc:28
 msgid "Samba"
 msgstr "Samba"
 
-#: contrib/gosa.conf:59
+#: contrib/gosa.conf:61
 #: plugins/personal/connectivity/class_connectivity.inc:15
 #: plugins/personal/connectivity/main.inc:136
 msgid "Connectivity"
 msgstr "Подключение"
 
-#: contrib/gosa.conf:60 plugins/personal/generic/generic.tpl:231
+#: contrib/gosa.conf:62 plugins/personal/generic/generic.tpl:231
 #: plugins/personal/generic/generic.tpl:362
 #: plugins/gofax/faxaccount/generic.tpl:10
 #: plugins/addons/addressbook/contents.tpl:14
@@ -69,7 +70,7 @@ msgstr "Подключение"
 msgid "Fax"
 msgstr "Факс"
 
-#: contrib/gosa.conf:61 plugins/personal/generic/generic.tpl:214
+#: contrib/gosa.conf:63 plugins/personal/generic/generic.tpl:214
 #: plugins/personal/generic/generic.tpl:352
 #: plugins/addons/addressbook/address_edit.tpl:41
 #: plugins/addons/addressbook/address_edit.tpl:89
@@ -84,94 +85,100 @@ msgstr "Факс"
 msgid "Phone"
 msgstr "Телефон"
 
-#: contrib/gosa.conf:62 contrib/gosa.conf:70 contrib/gosa.conf:76
-#: contrib/gosa.conf:84 contrib/gosa.conf:93 contrib/gosa.conf:101
-#: contrib/gosa.conf:106 contrib/gosa.conf:111 contrib/gosa.conf:116
-#: contrib/gosa.conf:121 contrib/gosa.conf:126 contrib/gosa.conf:131
+#: contrib/gosa.conf:64 contrib/gosa.conf:72 contrib/gosa.conf:78
+#: contrib/gosa.conf:84 contrib/gosa.conf:92 contrib/gosa.conf:101
+#: contrib/gosa.conf:109 contrib/gosa.conf:114 contrib/gosa.conf:119
+#: contrib/gosa.conf:124 contrib/gosa.conf:129 contrib/gosa.conf:134
+#: contrib/gosa.conf:139
 msgid "References"
 msgstr "Ссылки"
 
-#: contrib/gosa.conf:67
+#: contrib/gosa.conf:69
 #: plugins/admin/applications/class_applicationManagement.inc:25
 #: plugins/admin/ogroups/class_ogroupManagement.inc:44
 msgid "Applications"
 msgstr "Приложения"
 
-#: contrib/gosa.conf:69
+#: contrib/gosa.conf:71
 msgid "ACL"
 msgstr "Доступ"
 
-#: contrib/gosa.conf:75
+#: contrib/gosa.conf:77
 msgid "Options"
 msgstr "Параметры"
 
-#: contrib/gosa.conf:81 contrib/gosa.conf:98
+#: contrib/gosa.conf:83
+#, fuzzy
+msgid "Parameter"
+msgstr "Параметры загрузки"
+
+#: contrib/gosa.conf:89 contrib/gosa.conf:106
 msgid "Devices"
 msgstr "Устройства"
 
-#: contrib/gosa.conf:82 contrib/gosa.conf:99
+#: contrib/gosa.conf:90 contrib/gosa.conf:107
 msgid "Startup"
 msgstr "Запуск"
 
-#: contrib/gosa.conf:83 contrib/gosa.conf:92 contrib/gosa.conf:100
+#: contrib/gosa.conf:91 contrib/gosa.conf:100 contrib/gosa.conf:108
 msgid "Monitoring"
 msgstr "Мониторинг"
 
-#: contrib/gosa.conf:89
+#: contrib/gosa.conf:97
 msgid "Databases"
 msgstr "Базы данных"
 
-#: contrib/gosa.conf:90 plugins/admin/systems/servkolab.tpl:7
+#: contrib/gosa.conf:98 plugins/admin/systems/servkolab.tpl:7
 msgid "Services"
 msgstr "Сервисы"
 
-#: contrib/gosa.conf:142 plugins/addons/ldapmanager/contentexport.tpl:16
+#: contrib/gosa.conf:150 plugins/addons/ldapmanager/contentexport.tpl:16
 #: plugins/addons/ldapmanager/contentexport.tpl:29
 #: plugins/addons/ldapmanager/contentexport.tpl:44
 msgid "Export"
 msgstr "Экспорт"
 
-#: contrib/gosa.conf:143 plugins/personal/mail/generic.tpl:111
+#: contrib/gosa.conf:151 plugins/personal/mail/generic.tpl:111
 #: plugins/addons/ldapmanager/contentimport.tpl:49
 #: plugins/addons/ldapmanager/contentcsv.tpl:117
 #: plugins/addons/ldapmanager/contentcsv.tpl:120
 msgid "Import"
 msgstr "Импортировать"
 
-#: contrib/gosa.conf:144
+#: contrib/gosa.conf:152
 #, fuzzy
 msgid "CSV Import"
 msgstr "Импортировать"
 
-#: contrib/gosa.conf:159
+#: contrib/gosa.conf:167
 msgid "{LOCATIONNAME}"
 msgstr ""
 
-#: contrib/gosa.conf:176
+#: contrib/gosa.conf:184
 msgid "German"
 msgstr "Немецкий"
 
-#: contrib/gosa.conf:177
+#: contrib/gosa.conf:185
 msgid "Russian"
 msgstr "Русский"
 
-#: contrib/gosa.conf:178
+#: contrib/gosa.conf:186
 msgid "Spanish"
 msgstr "Испанский"
 
-#: contrib/gosa.conf:179
+#: contrib/gosa.conf:187
 msgid "French"
 msgstr "Французский"
 
-#: contrib/gosa.conf:180
+#: contrib/gosa.conf:188
 msgid "Dutch"
 msgstr "Датский"
 
-#: contrib/gosa.conf:181
+#: contrib/gosa.conf:189
 msgid "English"
 msgstr "Английский"
 
-#: contrib/gosa.conf:182
+#: contrib/gosa.conf:190
 msgid "Italian"
 msgstr ""
 
@@ -240,6 +247,7 @@ msgstr "Список альтернативных адресов эл. почт�
 #: plugins/admin/ogroups/generic.tpl:38
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:211
 #: plugins/gofon/phoneaccount/generic.tpl:45
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:158
 msgid "Add"
 msgstr "Добавить"
 
@@ -270,7 +278,8 @@ msgstr "Добавить"
 #: plugins/admin/systems/phonesettings.tpl:195
 #: plugins/admin/ogroups/generic.tpl:39 plugins/admin/ogroups/remove.tpl:15
 #: plugins/admin/ogroups/headpage.tpl:18
-#: plugins/gofon/phoneaccount/generic.tpl:47
+#: plugins/gofon/phoneaccount/generic.tpl:47 plugins/gofon/macro/remove.tpl:14
+#: plugins/gofon/macro/headpage.tpl:18
 msgid "Delete"
 msgstr "Удалить"
 
@@ -387,6 +396,7 @@ msgstr "отключает все почтовые настройки!"
 #: plugins/admin/ogroups/class_ogroupManagement.inc:26
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:7
 #: plugins/gofon/reports/class_fonreport.inc:7
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:26
 msgid "This does something"
 msgstr "Что-то будет"
 
@@ -505,6 +515,7 @@ msgstr "Помните, что указывать нужно максималь�
 #: plugins/admin/systems/class_systemManagement.inc:440
 #: plugins/admin/ogroups/class_ogroupManagement.inc:271
 #: plugins/gofon/phoneaccount/main.inc:104
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:238
 msgid "Finish"
 msgstr "Готово"
 
@@ -544,6 +555,8 @@ msgstr "Готово"
 #: plugins/admin/ogroups/ogroup_objects.tpl:52
 #: plugins/admin/ogroups/class_ogroupManagement.inc:273
 #: plugins/admin/ogroups/remove.tpl:17 plugins/gofon/phoneaccount/main.inc:106
+#: plugins/gofon/macro/remove.tpl:16
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:240
 #: ihtml/themes/altlinux/islocked.tpl:15 ihtml/themes/default/islocked.tpl:15
 msgid "Cancel"
 msgstr "Отмена"
@@ -567,7 +580,7 @@ msgstr "Нажмите 'Изменить' чтобы отредактирова�
 #: plugins/admin/applications/headpage.tpl:17
 #: plugins/admin/departments/headpage.tpl:17
 #: plugins/admin/systems/headpage.tpl:16 plugins/admin/ogroups/headpage.tpl:17
-#: plugins/gofon/phoneaccount/main.inc:112
+#: plugins/gofon/phoneaccount/main.inc:112 plugins/gofon/macro/headpage.tpl:17
 msgid "Edit"
 msgstr "Изменить"
 
@@ -594,12 +607,12 @@ msgstr "Показать адреса подразделения"
 #: plugins/addons/addressbook/contents.tpl:81
 #: plugins/admin/groups/headpage.tpl:66
 #: plugins/admin/groups/group_objects.tpl:27
-#: plugins/admin/groups/mail_locals.tpl:33 plugins/admin/users/headpage.tpl:70
+#: plugins/admin/groups/mail_locals.tpl:33 plugins/admin/users/headpage.tpl:68
 #: plugins/admin/applications/headpage.tpl:49
 #: plugins/admin/departments/headpage.tpl:47
 #: plugins/admin/systems/headpage.tpl:62
 #: plugins/admin/ogroups/ogroup_objects.tpl:38
-#: plugins/admin/ogroups/headpage.tpl:62
+#: plugins/admin/ogroups/headpage.tpl:62 plugins/gofon/macro/headpage.tpl:49
 msgid "Choose the department the search will be based on"
 msgstr "Выбрать раздел, для которого будет осуществлен поиск"
 
@@ -724,14 +737,14 @@ msgid "You need to specify your current password in order to proceed."
 msgstr "Для продолжения укажите свой текущий пароль."
 
 #: plugins/personal/password/main.inc:48 plugins/personal/generic/main.inc:84
-#: plugins/admin/users/class_userManagement.inc:176
+#: plugins/admin/users/class_userManagement.inc:174
 msgid ""
 "The passwords you've entered as 'New password' and 'Repeated new password' "
 "do not match."
 msgstr "Введенные пароли не совпадают!"
 
 #: plugins/personal/password/main.inc:51 plugins/personal/generic/main.inc:89
-#: plugins/admin/users/class_userManagement.inc:181
+#: plugins/admin/users/class_userManagement.inc:179
 msgid "The password you've entered as 'New password' is empty."
 msgstr "Вы не указали новый пароль."
 
@@ -766,7 +779,7 @@ msgstr "Выберите группы для добавления"
 #: plugins/admin/departments/headpage.tpl:37
 #: plugins/admin/systems/headpage.tpl:37
 #: plugins/admin/ogroups/ogroup_objects.tpl:20
-#: plugins/admin/ogroups/headpage.tpl:38
+#: plugins/admin/ogroups/headpage.tpl:38 plugins/gofon/macro/headpage.tpl:37
 msgid "Filters"
 msgstr "Фильтры"
 
@@ -1523,7 +1536,7 @@ msgstr "Сменить изображение"
 #: plugins/addons/addressbook/contents.tpl:14
 #: plugins/addons/addressbook/class_addressbook.inc:502
 #: plugins/addons/addressbook/address_info.tpl:16
-#: plugins/admin/users/template.tpl:19
+#: plugins/admin/users/template.tpl:19 plugins/gofon/macro/parameter.tpl:8
 msgid "Name"
 msgstr "Фамилия"
 
@@ -1571,6 +1584,7 @@ msgstr "Пол"
 #: plugins/admin/systems/workstation.tpl:18
 #: plugins/admin/systems/wingeneric.tpl:13
 #: plugins/admin/systems/component.tpl:13 plugins/admin/ogroups/generic.tpl:21
+#: plugins/gofon/macro/generic.tpl:33
 msgid "Base"
 msgstr "Ветка"
 
@@ -1819,7 +1833,7 @@ msgstr "У вас недостаточно прав для создания по
 
 #: plugins/personal/generic/class_user.inc:868
 #: plugins/addons/addressbook/class_addressbook.inc:525
-#: plugins/admin/users/class_userManagement.inc:426
+#: plugins/admin/users/class_userManagement.inc:425
 msgid "The required field 'Name' is not set."
 msgstr "Обязательное поле \"Имя\" не заполнено."
 
@@ -1830,7 +1844,7 @@ msgstr ""
 
 #: plugins/personal/generic/class_user.inc:883
 #: plugins/addons/addressbook/class_addressbook.inc:529
-#: plugins/admin/users/class_userManagement.inc:429
+#: plugins/admin/users/class_userManagement.inc:428
 msgid "The required field 'Given name' is not set."
 msgstr "Обязательное поле \"Личное имя\" не заполнено."
 
@@ -2326,6 +2340,7 @@ msgstr "Выберите, нужно ли фильтровать входящи�
 #: plugins/admin/systems/printer.tpl:10
 #: plugins/admin/systems/wingeneric.tpl:24
 #: plugins/admin/systems/component.tpl:24 plugins/admin/ogroups/generic.tpl:13
+#: plugins/gofon/macro/generic.tpl:17
 #: plugins/generic/references/contents.tpl:11
 msgid "Description"
 msgstr "Описание"
@@ -2345,6 +2360,7 @@ msgstr "Блокируемые номера"
 #: plugins/admin/applications/headpage.tpl:25
 #: plugins/admin/departments/headpage.tpl:25
 #: plugins/admin/systems/headpage.tpl:25 plugins/admin/ogroups/headpage.tpl:26
+#: plugins/gofon/macro/headpage.tpl:25
 msgid "Information"
 msgstr "Информация"
 
@@ -2356,9 +2372,10 @@ msgstr "Вместо точных номеров можно использова
 #: plugins/addons/addressbook/remove.tpl:2 plugins/admin/groups/remove.tpl:2
 #: plugins/admin/users/remove.tpl:2 plugins/admin/applications/remove.tpl:2
 #: plugins/admin/departments/remove.tpl:2 plugins/admin/systems/remove.tpl:2
-#: plugins/admin/ogroups/remove.tpl:2 html/index.php:217
-#: ihtml/themes/altlinux/conflict.tpl:6 ihtml/themes/altlinux/islocked.tpl:6
-#: ihtml/themes/default/conflict.tpl:6 ihtml/themes/default/islocked.tpl:6
+#: plugins/admin/ogroups/remove.tpl:2 plugins/gofon/macro/remove.tpl:2
+#: html/index.php:217 ihtml/themes/altlinux/conflict.tpl:6
+#: ihtml/themes/altlinux/islocked.tpl:6 ihtml/themes/default/conflict.tpl:6
+#: ihtml/themes/default/islocked.tpl:6
 msgid "Warning"
 msgstr "Предупреждение"
 
@@ -2373,7 +2390,7 @@ msgstr ""
 #: plugins/gofax/blocklists/remove.tpl:11
 #: plugins/addons/addressbook/remove.tpl:11 plugins/admin/groups/remove.tpl:11
 #: plugins/admin/users/remove.tpl:11 plugins/admin/applications/remove.tpl:10
-#: plugins/admin/ogroups/remove.tpl:11
+#: plugins/admin/ogroups/remove.tpl:11 plugins/gofon/macro/remove.tpl:10
 msgid ""
 "So - if you're sure - press <i>Delete</i> to continue or <i>Cancel</i> to "
 "abort."
@@ -2390,6 +2407,7 @@ msgstr "Стоп-листы"
 #: plugins/admin/applications/headpage.tpl:16
 #: plugins/admin/departments/headpage.tpl:16
 #: plugins/admin/systems/headpage.tpl:15 plugins/admin/ogroups/headpage.tpl:16
+#: plugins/gofon/macro/headpage.tpl:16
 msgid "New"
 msgstr "Создать"
 
@@ -3388,11 +3406,11 @@ msgstr ""
 "редактирования их свойств. Перед удалением групп вам нужно будет подтвердить "
 "свое решение."
 
-#: plugins/admin/groups/headpage.tpl:60 plugins/admin/users/headpage.tpl:64
+#: plugins/admin/groups/headpage.tpl:60 plugins/admin/users/headpage.tpl:62
 msgid "Dive into LDAP subtrees when searching"
 msgstr "Искать в поддеревьях LDAP"
 
-#: plugins/admin/groups/headpage.tpl:60 plugins/admin/users/headpage.tpl:64
+#: plugins/admin/groups/headpage.tpl:60 plugins/admin/users/headpage.tpl:62
 msgid "Search in subtrees"
 msgstr "Искать в поддеревьях"
 
@@ -3461,17 +3479,17 @@ msgid "Select users to add"
 msgstr "Выбрать пользователей для добавления"
 
 #: plugins/admin/groups/group_objects.tpl:26
-#: plugins/admin/users/headpage.tpl:69
+#: plugins/admin/users/headpage.tpl:67
 msgid "Display users of department"
 msgstr "Подразделение"
 
 #: plugins/admin/groups/group_objects.tpl:30
-#: plugins/admin/users/headpage.tpl:73
+#: plugins/admin/users/headpage.tpl:71
 msgid "Display users matching"
 msgstr "Фильтр"
 
 #: plugins/admin/groups/group_objects.tpl:31
-#: plugins/admin/users/headpage.tpl:74
+#: plugins/admin/users/headpage.tpl:72
 msgid "Regular expression for matching user names"
 msgstr "Регулярное выражение, соответствующее именам пользователей"
 
@@ -3589,31 +3607,31 @@ msgstr ""
 msgid "Users"
 msgstr "Пользователи"
 
-#: plugins/admin/users/class_userManagement.inc:159
-#: plugins/admin/users/class_userManagement.inc:210
+#: plugins/admin/users/class_userManagement.inc:157
+#: plugins/admin/users/class_userManagement.inc:208
 msgid "You are not allowed to set this users password!"
 msgstr "У вас недостаточно прав для смены пароля этого пользователя!"
 
-#: plugins/admin/users/class_userManagement.inc:246
+#: plugins/admin/users/class_userManagement.inc:244
 #, php-format
 msgid "You're about to delete the user %s."
 msgstr "Вы собираетесь удалить пользователя %s."
 
-#: plugins/admin/users/class_userManagement.inc:252
-#: plugins/admin/users/class_userManagement.inc:280
+#: plugins/admin/users/class_userManagement.inc:250
+#: plugins/admin/users/class_userManagement.inc:278
 msgid "You are not allowed to delete this user!"
 msgstr "У вас недостаточно прав для удаления этого пользователя!"
 
-#: plugins/admin/users/class_userManagement.inc:370
+#: plugins/admin/users/class_userManagement.inc:368
 #: plugins/admin/ogroups/class_ogroup.inc:203
 msgid "none"
 msgstr "нет"
 
-#: plugins/admin/users/class_userManagement.inc:438
+#: plugins/admin/users/class_userManagement.inc:437
 msgid "A person with the choosen name is already used in this tree."
 msgstr "Пользователь с таким именем уже есть в этой ветке."
 
-#: plugins/admin/users/class_userManagement.inc:621
+#: plugins/admin/users/class_userManagement.inc:618
 #: plugins/admin/users/template.tpl:11
 msgid "Template"
 msgstr "Шаблон"
@@ -3733,22 +3751,6 @@ msgstr "Выберите, чтобы просмотреть пользовате
 msgid "Show proxy users"
 msgstr "Показать пользователей с прокси-серверами"
 
-#: plugins/admin/users/headpage.tpl:54
-msgid "Select to see users that have ftp settings"
-msgstr "Выберите, чтобы просмотреть пользователей с настройками FTP"
-
-#: plugins/admin/users/headpage.tpl:54
-msgid "Show FTP users"
-msgstr "Показать пользователей FTP"
-
-#: plugins/admin/users/headpage.tpl:55
-msgid "Select to see users that have FAX settings"
-msgstr "Выберите, чтобы просмотреть пользователей с настройками факсов"
-
-#: plugins/admin/users/headpage.tpl:55
-msgid "Show FAX users"
-msgstr "Показать пользователей факсов"
-
 #: plugins/admin/users/main.inc:40 plugins/admin/users/main.inc:46
 msgid "User administration"
 msgstr "Управление пользователями"
@@ -3779,6 +3781,7 @@ msgid "Variable"
 msgstr "Переменная"
 
 #: plugins/admin/applications/class_applicationParameters.inc:87
+#: plugins/gofon/macro/parameter.tpl:12
 msgid "Default value"
 msgstr "По умолчанию"
 
@@ -3808,6 +3811,7 @@ msgid "Path and/or binary name of application"
 msgstr "Путь и/или имя исполняемого файла приложения"
 
 #: plugins/admin/applications/generic.tpl:18
+#: plugins/gofon/macro/generic.tpl:11
 msgid "Display name"
 msgstr "Отображаемое имя"
 
@@ -3818,6 +3822,7 @@ msgstr ""
 "пиктограммами)"
 
 #: plugins/admin/applications/generic.tpl:35
+#: plugins/gofon/macro/generic.tpl:35
 msgid "Choose subtree to place application in"
 msgstr "Выберите ветку, куда нужно поместить приложение"
 
@@ -3849,7 +3854,7 @@ msgstr "Помещать пиктограмму на рабочие столы �
 msgid "Place entry in members startmenu"
 msgstr "Помещать членам группы соответствующий элемент в меню запуска"
 
-#: plugins/admin/applications/remove.tpl:7
+#: plugins/admin/applications/remove.tpl:7 plugins/gofon/macro/remove.tpl:7
 msgid ""
 "This may be used by several groups. Please double check if your really want "
 "to do this since there is no way for GOsa to get your data back."
@@ -3901,6 +3906,8 @@ msgid "Application management"
 msgstr "Управление приложениями"
 
 #: plugins/admin/applications/class_applicationGeneric.inc:59
+#: plugins/gofon/macro/class_gofonMacro.inc:51
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:81
 msgid "This 'dn' is no application."
 msgstr "Это DN соответствует не приложению."
 
@@ -3931,6 +3938,7 @@ msgstr "Вы собираетесь удалить приложение \"%s\"."
 
 #: plugins/admin/applications/class_applicationManagement.inc:191
 #: plugins/admin/applications/class_applicationManagement.inc:217
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:217
 msgid "You are not allowed to delete this application!"
 msgstr "У вас недостаточно прав для удаления этого приложения!"
 
@@ -5826,6 +5834,111 @@ msgstr "Продолжительность"
 msgid "Phone reports"
 msgstr "Телефонные отчеты"
 
+#: plugins/gofon/macro/class_gofonMacro.inc:123
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:208
+#, php-format
+msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:132
+msgid "Makro length must be lower than 100 lines"
+msgstr ""
+
+#: plugins/gofon/macro/generic.tpl:7 plugins/gofon/macro/generic.tpl:8
+#, fuzzy
+msgid "Macro name"
+msgstr "Название"
+
+#: plugins/gofon/macro/generic.tpl:13
+msgid "Macro name to be displayed"
+msgstr ""
+
+#: plugins/gofon/macro/generic.tpl:23
+#, fuzzy
+msgid "Visible for user"
+msgstr "Список пользователей"
+
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:159
+#, fuzzy
+msgid "Refresh"
+msgstr "Ссылки"
+
+#: plugins/gofon/macro/headpage.tpl:6
+#, fuzzy
+msgid "List of macros"
+msgstr "Список групп"
+
+#: plugins/gofon/macro/headpage.tpl:29
+#, fuzzy
+msgid ""
+"This menu allows you to add, edit and remove selected macros. You may want "
+"to use the range selector on top of the macro listbox, when working with a "
+"large number of macros."
+msgstr ""
+"С помощью этого меню вы можете добавлять, изменять и удалять выбранные "
+"группы пользователей. Если у вас их достаточно большое количество, вы можете "
+"использовать групповое выделение."
+
+#: plugins/gofon/macro/headpage.tpl:32
+#, fuzzy
+msgid ""
+"-Edit- and -New...- will execute an assistant to aid you in editing "
+"properties. -Delete- will ask for confirmation before removing macros."
+msgstr ""
+"При изменении и создании приложений появится интерактивный помощник для "
+"редактирования свойств. Перед удалением приложений вам нужно будет "
+"подтвердить свое решение."
+
+#: plugins/gofon/macro/headpage.tpl:46
+#, fuzzy
+msgid "Display macros of department"
+msgstr "Объединения в подразделении"
+
+#: plugins/gofon/macro/headpage.tpl:58
+#, fuzzy
+msgid "Display macros  matching"
+msgstr "Шаблон для групп"
+
+#: plugins/gofon/macro/headpage.tpl:61
+#, fuzzy
+msgid "Regular expression for matching macro names"
+msgstr "Регулярное выражение, соответствующее именам групп"
+
+#: plugins/gofon/macro/main.inc:38 plugins/gofon/macro/main.inc:40
+#, fuzzy
+msgid "Phone macro management"
+msgstr "Управление системами"
+
+#: plugins/gofon/macro/parameter.tpl:6
+#, fuzzy
+msgid "Number"
+msgstr "Ноябрь"
+
+#: plugins/gofon/macro/parameter.tpl:10
+#, fuzzy
+msgid "type"
+msgstr "Тип"
+
+#: plugins/gofon/macro/parameter.tpl:14
+#, fuzzy
+msgid "Option"
+msgstr "Параметры"
+
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:25
+#, fuzzy
+msgid "Phone macros"
+msgstr "Телефонные отчеты"
+
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:186
+#, fuzzy, php-format
+msgid "You're about to delete the macro '%s'."
+msgstr "Вы собираетесь удалить группу \"%s\"."
+
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:192
+#, fuzzy
+msgid "You are not allowed to delete this macro!"
+msgstr "У вас недостаточно прав для удаления этой группы!"
+
 #: plugins/generic/references/class_reference.inc:36
 msgid "Group"
 msgstr "Группа"
@@ -7152,6 +7265,18 @@ msgstr ""
 #: ihtml/themes/default/help.tpl:15
 msgid "Index"
 msgstr ""
+
+#~ msgid "Select to see users that have ftp settings"
+#~ msgstr "Выберите, чтобы просмотреть пользователей с настройками FTP"
+
+#~ msgid "Show FTP users"
+#~ msgstr "Показать пользователей FTP"
+
+#~ msgid "Select to see users that have FAX settings"
+#~ msgstr "Выберите, чтобы просмотреть пользователей с настройками факсов"
+
+#~ msgid "Show FAX users"
+#~ msgstr "Показать пользователей факсов"
 
 #, fuzzy
 #~ msgid "Phone category"
