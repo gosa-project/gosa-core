@@ -189,7 +189,9 @@ class phoneGeneric extends plugin
       $smarty->assign($attr."ACL", chkacl($this->acl, $attr));
     }
     $smarty->assign("base_select", $this->base);
-    
+   
+    $smarty->assign("goFonDefaultIPs",array("dynamic"=>_("dynamic"),"network"=>_("Networksettings")));
+ 
     /* Show Asterisk for required attribute ipHostNumber and macAddress */
     $smarty->assign("staticAddress", "<font class=\"must\">*</font>");
         
@@ -239,18 +241,18 @@ class phoneGeneric extends plugin
     /* To check for valid ip*/
     $num="(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])";
 
-    if(in_array("goFonDefaultIP",$this->usedattrs[$this->selected_categorie])){
-      if (!preg_match("/^$num\\.$num\\.$num\\.$num$/", $this->goFonDefaultIP)){
-       $message[]= _("Wrong IP format in field goFonDefaultIP.");
-      }
-    }
+//    if(in_array("goFonDefaultIP",$this->usedattrs[$this->selected_categorie])){
+//      if (!preg_match("/^$num\\.$num\\.$num\\.$num$/", $this->goFonDefaultIP)){
+//       $message[]= _("Wrong IP format in field goFonDefaultIP.");
+//      }
+//    }
     
-    /* Check for valid number */
-    if(in_array("goFonDefaultIP",$this->usedattrs[$this->selected_categorie])){
-      if((strlen($this->goFonQualify))!=(strlen((int)($this->goFonQualify)))){
-        $message[]= _("The given value for goFonQualify is not a valid number.");
-      } 
-    }
+//    /* Check for valid number */
+//    if(in_array("goFonDefaultIP",$this->usedattrs[$this->selected_categorie])){
+//      if((strlen($this->goFonQualify))!=(strlen((int)($this->goFonQualify)))){
+//        $message[]= _("The given value for 'Response timeout' is not a valid number.");
+//      } 
+//    }
 
     /* must: cn, macAddress, ipHostNumber */
     if ($this->cn == "" && chkacl ($this->acl, "cn") == ""){
