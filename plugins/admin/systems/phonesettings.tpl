@@ -49,7 +49,6 @@
 					{t}Default IP{/t}
 				</td>
                 <td>
-                   <input style="width:200px" name="goFonDefaultIP" value="{$goFonDefaultIP}" {$goFonDefaultIPUSED}>
                     <select size="1" name="goFonDefaultIP" title="{t}Choose a phone type{/t}" style="width:200px;" >
                         {html_options options=$goFonDefaultIPs selected=$goFonDefaultIP}
                     </select>
