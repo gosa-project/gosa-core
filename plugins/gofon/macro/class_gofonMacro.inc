@@ -80,7 +80,6 @@ class macro extends plugin
       }
     }
 
-
     /* Show main page */
     return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }
@@ -97,11 +96,10 @@ class macro extends plugin
     $ldap->cd ($this->config->current['BASE']);
     $ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))", array("cn"));
     while ($ldap->fetch()){
-      $og= new ogroup($this->config, $ldap->getDN());
-      unset($og->member[$this->dn]);
-      $og->save ();
+        $og= new ogroup($this->config, $ldap->getDN());
+        unset($og->member[$this->dn]);
+        $og->save ();
     }
-
   }
 
 
@@ -129,7 +127,6 @@ class macro extends plugin
     if(($this->cn != strtolower($this->cn))||(empty($this->cn))){
       $message[] = "The attribute 'cn' must be lowercase and a least one char.";
     }
-
     return $message;
   }
 

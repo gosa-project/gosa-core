@@ -60,7 +60,7 @@ class macroParameter extends plugin
       $tmp = split("!",$para);
       $tmp2[$tmp[0]]['name'] 		= $tmp[1];  
       $tmp2[$tmp[0]]['type'] 		= $tmp[2];  
-      $tmp2[$tmp[0]]['default'] 	= $tmp[3];  
+      $tmp2[$tmp[0]]['default']	= $tmp[3];  
     }
 
     /* Assign this array */
@@ -120,7 +120,7 @@ class macroParameter extends plugin
         $key = $_POST[$name];
         $this->goFonMacroParameter[$key]['name']		=$_POST["varname".$key];		
         $this->goFonMacroParameter[$key]['type']		=$_POST["vartype".$key];		
-        $this->goFonMacroParameter[$key]['default']		=$_POST["default".$key];		
+        $this->goFonMacroParameter[$key]['default']	=$_POST["default".$key];		
       }
     } 
 
@@ -170,21 +170,22 @@ class macroParameter extends plugin
 
   function remove_from_parent()
   {
+    /*
     $ldap= $this->config->get_ldap_link();
     $ldap->rmDir($this->dn);
 
-    /* Optionally execute a command after we're done */
+    /* Optionally execute a command after we're done * /
     $this->handle_post_events("remove");
 
-    /* Delete references to object groups */
+    /* Delete references to object groups * /
     $ldap->cd ($this->config->current['BASE']);
     $ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))", array("cn"));
     while ($ldap->fetch()){
-      $og= new ogroup($this->config, $ldap->getDN());
-      unset($og->member[$this->dn]);
-      $og->save ();
+        $og= new ogroup($this->config, $ldap->getDN());
+        unset($og->member[$this->dn]);
+        $og->save ();
     }
-
+  */
   }
 
 
@@ -193,7 +194,6 @@ class macroParameter extends plugin
   {
     if (isset($_POST['cn'])){
       plugin::save_object();
-
     }
   }
 

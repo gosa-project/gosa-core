@@ -199,11 +199,11 @@ class gofonMacro extends plugin
       /* Some nice guy may send this as POST, so we've to check
          for the permissions again. */
       if (chkacl($this->acl, "delete") == ""){
-
+      
         /* Delete request is permitted, perform LDAP action */
-        $this->macrotabs= new macrotabs($this->config,
-            $this->config->data['TABS']['MACROTABS'], $this->dn);
+        $this->macrotabs= new macrotabs($this->config,$this->config->data['TABS']['MACROTABS'], $this->dn);
         $this->macrotabs->set_acl(array($this->acl));
+      
         $this->macrotabs->delete ();
         gosa_log ("Application object'".$this->dn."' has been removed");
         unset ($this->macrotabs);
@@ -212,13 +212,11 @@ class gofonMacro extends plugin
         /* Group list has changed, reload it. */
         $this->reload ();
       } else {
-
         /* Normally this shouldn't be reached, send some extra
            logs to notify the administrator */
         print_red (_("You are not allowed to delete this application!"));
         gosa_log ("Warning: '".$this->ui->uid."' tried to trick group deletion.");
       }
-
       /* Remove lock file after successfull deletion */
       del_lock ($this->dn);
     }
