@@ -26,6 +26,9 @@
 	     		</tr>
    			</table>
 		</td>
+		<td style="border-left:1px solid #A0A0A0">
+		     &nbsp;
+		</td>
 		<td style="vertical-align:top;">
 			<table>
     			<tr>
@@ -43,6 +46,7 @@
 		</td>
 	</tr>
 </table>
+<p class="seperator">&nbsp;</p>
 <br>
 {t}Macro text{/t}
 <br>
