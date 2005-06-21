@@ -127,6 +127,11 @@ class macro extends plugin
     if(($this->cn != strtolower($this->cn))||(empty($this->cn))){
       $message[] = "The attribute 'cn' must be lowercase and a least one char.";
     }
+    
+    if(count(split("\n",$this->goFonMacroContent))>100){
+      $message[] = _("Makro length must be lower than 100 lines");
+    }
+    
     return $message;
   }
 
