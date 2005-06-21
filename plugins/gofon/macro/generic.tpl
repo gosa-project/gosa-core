@@ -1,6 +1,6 @@
 <table style="width:100%;">
 	<tr>
-  		<td style="width:50%;">
+  		<td valign="top" >
 
    			<table>
      			<tr>
@@ -40,12 +40,8 @@
    			</table>
 
   		</td>
- 	</tr>
-</table>
-<table width="100%">
-	<tr>
-		<td>	
-			<textarea name="goFonMacroContent" style="width:600px;height:400px;">{$goFonMacroContent}</textarea>
+		<td align="right">	
+			<textarea name="goFonMacroContent" style="width:700px;height:400px;font-size:14px;font-family:Arial;">{$goFonMacroContent}</textarea>
 		</td>
 	<tr>
 </table>
