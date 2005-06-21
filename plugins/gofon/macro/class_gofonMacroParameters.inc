@@ -220,7 +220,7 @@ function check_paras($content,$goFonMacroParameter)
         $vars.=_("Ok");
         $vars.=" <td></td>";
       }else{
-        $vars.=_("Unused");
+        $vars.="<b>"._("Unused")."</b>";
         $vars.=" <td><input name='del".$key."' value='delete' type='submit'></td>";
       }
         
