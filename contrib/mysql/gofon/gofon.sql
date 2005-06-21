@@ -1,4 +1,4 @@
-create database gophone;
+create database asteriskcdrdb;
 
 create table cdr (
   calldate datetime NOT NULL default '0000-00-00 00:00:00',

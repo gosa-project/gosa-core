@@ -6,7 +6,10 @@ Things to fix before 2.4:
   - shared folders
   - Kolab disabled -> check. Check is_account!
 
-* Don't show properties which are not available for several phone types
+* Check moving of servers
+
+* Check for empty mail server settings in mail tab
+
 
 Target for 2.5:
 ===============
