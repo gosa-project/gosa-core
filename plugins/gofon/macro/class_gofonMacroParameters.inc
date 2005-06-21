@@ -51,22 +51,69 @@ class macroParameter extends plugin
       $tmp3 = $this->goFonMacroParameter;
       $this->goFonMacroParameter =array();	
       if(!empty($tmp3)) {
-        $this->goFonMacroParameter[] = $tmp3;
+        $this->goFonMacroParameter[]  = $tmp3;
       }
     }
+    
+    foreach($this->goFonMacroParameter as $para){
 
-    /* Create a better sorted array */
-    foreach($this->goFonMacroParameter as $para)    {
       $tmp = split("!",$para);
-      $tmp2[$tmp[0]]['name'] 		= $tmp[1];  
-      $tmp2[$tmp[0]]['type'] 		= $tmp[2];  
-      $tmp2[$tmp[0]]['default']	= $tmp[3];  
+      $num = preg_replace("/[^0-9]/","",$tmp[1]);
+      $tmp2[$num]['name']        = $tmp[1];
+      $tmp2[$num]['type']        = $tmp[2];
+      $tmp2[$num]['default']     = $tmp[3];
     }
-
+  
     /* Assign this array */
-    $this->goFonMacroParameter = $tmp2;	
+    $this->goFonMacroParameter = $tmp2;
+  }
+
+function check_paras($content,$goFonMacroParameter)
+  {
+  preg_match_all("/[$]\{ARG[0-9]*\}/",$content,$res,PREG_OFFSET_CAPTURE);
+
+  $anz = count($res[0]);
+  $new = array();
+
+  foreach($res[0] as $val){
+    $num = preg_replace("/[^0-9]/","",$val[0]); 
+    $new[$num]['val'] = $val[0];
+    $new[$num]['num'] = $num;
+    }
+  
+  foreach($goFonMacroParameter as $gokey => $goval){
+    foreach($new as $nkey => $nval){
+      if($gokey == $nval['num']){
+        $goFonMacroParameter[$gokey]['check']= true;
+        }
+      }
+    }
+  foreach($new as $key => $val){
+    $goFonMacroParameter[$key]['check']= true;
+    if((!isset($goFonMacroParameter[$key]['name']))||(empty($goFonMacroParameter[$key]['name']))){
+      $goFonMacroParameter[$key]['name']="\${ARG".$key."}";
+    }
+  }  
+
+  foreach($goFonMacroParameter as $key => $val){
+    if(!isset($goFonMacroParameter[$key]['check'])){
+      $goFonMacroParameter[$key]['check']= false;
+      }
+    if(!isset($goFonMacroParameter[$key]['default'])){
+      $goFonMacroParameter[$key]['default'] = "";
+      }
+    }
+  asort($goFonMacroParameter);
+  return($goFonMacroParameter);
 
   }
+
+
+
+
+
+
+
 
   function execute()
   {
@@ -74,6 +121,13 @@ class macroParameter extends plugin
     $vars 	= "";
     $tmp  	= array();
     $number = 0; 
+
+    $content = $_SESSION['macroManagment']->macrotabs->by_object['macro']->goFonMacroContent;
+
+    if(strstr($content,"ARG")){
+       $vorpos = strpos($content,"ARG");
+       $rest   = substr($content,$vorpos, strlen($content));
+    }    
 
     /* Do we represent a valid group? */
     if (!$this->is_account && $this->parent == NULL){
@@ -125,40 +179,56 @@ class macroParameter extends plugin
     } 
 
     /*generate Table which shows als parameters */
-    foreach($this->goFonMacroParameter as $key=>$para)	{
+   
+     $FonParas = $this->check_paras($content,$this->goFonMacroParameter); 
+    
+    foreach($FonParas as $key=>$para)	{
 
+    if(isset($para['type'])){
       if($para['type']=="string") {
         $sel1 = "selected";
         $sel2 = "";
-      }else{
+        $sel3 = "";
+      }elseif($para['type']=="combo"){
         $sel1 = "";
         $sel2 = "selected";
+        $sel3 = "" ;
+      }else{
+        $sel1 = "";
+        $sel3 = "selected";
+        $sel2 = "" ;
       }
+    }else{
+        $sel1 = "";
+        $sel3 = "";
+        $sel2 = "" ;
+    }
 
       $vars .="<tr>
-        <td>".$key."<input name=\"number".$key."\" value='".$key."' type='hidden'> </td>
-        <td><input name='varname".$key."'   value='".$para['name']."'></td>
+        <td><input name=\"number".$key."\" value='".$key."' type='hidden'> </td>
+        <td><input name='varname".$key."' type='hidden'   value='".$para['name']."'>".$para['name']."</td>
         <td>
         <select name='vartype".$key."'>
         <option name='vartype".$key."' value='string' ".$sel1.">string</option>
         <option name='vartype".$key."' value='combo'   ".$sel2.">combo</option>
-        <option name='vartype".$key."' value='bool'   ".$sel2.">bool</option>
+        <option name='vartype".$key."' value='bool'   ".$sel3.">bool</option>
         </select>
         </td>
         <td><input name='default".$key."'   value='".$para['default']."'></td>
-        <td><input name='del".$key."' value='delete' type='submit'></td>
-        </tr>";
+        <td>";
+      if($para['check']==true) {
+        $vars.=_("Ok");
+        $vars.=" <td></td>";
+      }else{
+        $vars.=_("Unused");
+        $vars.=" <td><input name='del".$key."' value='delete' type='submit'></td>";
+      }
+        
+      $vars.=" </tr>";
 
 
     }
 
-    /* Display add renew button */
-    $vars .="<tr>	
-      <td colspan=5>
-      <input name='addvar' value="._("Add")." type='submit'>
-      <input name='actvar' value="._("Refresh")." type='submit'>
-      </td>
-      </tr>";
     /* Checkboxes */
     $smarty->assign("base_select", $this->base);
     $smarty->assign("vars", $vars);
@@ -222,7 +292,7 @@ class macroParameter extends plugin
     plugin::save();
 
     $this->attrs['goFonMacroParameter']=array();
-
+  
     foreach($this->goFonMacroParameter as $key=>$fonpara){
       $this->attrs['goFonMacroParameter'][]=$key."!".$fonpara['name']."!".$fonpara['type']."!".$fonpara['default'];
     }
