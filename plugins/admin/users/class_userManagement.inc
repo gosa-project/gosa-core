@@ -408,6 +408,7 @@ class userManagement extends plugin
         } else {
           $smarty->assign("template", "");
         }
+        $smarty->assign("edit_uid", "");
         return($smarty->fetch(get_template_path('template.tpl', TRUE)));
       }
 
