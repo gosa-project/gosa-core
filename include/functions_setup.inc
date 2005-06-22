@@ -435,8 +435,8 @@ function parse_contrib_conf()
   $replacements['{LDAPHOST}']      = $ldapconf['uri'];
   $replacements['{PASSWORD}']      = $ldapconf['password'];
   $replacements['{CRYPT}']         = $ldapconf['arr_cryptkeys'][$ldapconf['arr_crypts']];
-  $replacements['{SID}\n']         = "";
-  $replacements['{RIDBASE}\n']     = "";
+  $replacements['{SID}']         = "";
+  $replacements['{RIDBASE}']     = "";
   if($ldapconf['mail'] != "disabled"){
     $replacements['{MAILMETHOD}']    = $ldapconf['mail_methods'][$ldapconf['mail']];
   }   
@@ -456,7 +456,7 @@ function parse_contrib_conf()
   $possible_plugins['phpgroupware'][]= "'\n.*<tab.*phpgroupware.*>.*\n'i";
 
   /* Header information
-     Needed to send the generated gosa.conf to the browser */
+     Needed to send the generated gosa.conf to the browser 
   header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
   header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
   header("Cache-Control: no-cache");
@@ -470,7 +470,7 @@ function parse_contrib_conf()
   } else {
     header('Content-Disposition: attachment; filename="gosa.conf"');
   }
-
+  */
   if(!$fp=fopen(CONFIG_TEMPLATE_DIR."/gosa.conf","r")) {
     echo "Can't open file ".CONFIG_TEMPLATE_DIR."/gosa.conf";
   } else {
@@ -492,7 +492,7 @@ function parse_contrib_conf()
 
       /* Try to find a Samba Domain Objekt */
       $ldap->search("(objectClass=sambaDomain)");
-
+    
       /* Something found ??? so we need to define ridbase an SID by ourselfs */
       if($ldap->count()< 1) {
         $replacements['{SID}']= "sid=\"123412-11\"";
@@ -528,7 +528,7 @@ function parse_contrib_conf()
 
 
     /* Remove all unused plugins */
-    foreach($possible_plugins as $plugin) {
+    foreach($possible_plugins as $key=> $plugin) {
       foreach($plugin as $key=>$val) {
         if(in_array($plugin,$classes)) {
           $str = preg_replace($val,"\n",$str);
@@ -537,7 +537,7 @@ function parse_contrib_conf()
     }
   }
 
-  return ((($str)));
+  return (nl2br(htmlentities($str)));
 }
 
 
