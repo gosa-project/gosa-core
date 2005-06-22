@@ -168,7 +168,7 @@ class servdb extends plugin
     if (in_array("goImapServer", $this->objectclasses) && 
         $this->goImapName != $this->goImapName_old) {
       // Attribute has changed
-      if(!preg_match("/^[a-z0-9\.]+$/", $this->goImapName)) {
+      if(!preg_match("/^[a-z0-9.-]+$/", $this->goImapName)) {
         $message[]= sprintf(_("The imap name string needs to be a hostname or an IP-address."));
       }
     }
