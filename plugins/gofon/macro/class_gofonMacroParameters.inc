@@ -251,6 +251,20 @@ class macroParameter extends plugin
         return(array($str));
       }
     }
+    foreach($this->goFonMacroParameter as $key=>$val){
+      switch($val['type']){
+        case 'bool'   :   $possible = array("","0","1","true","false");
+                          if(!in_array($val['default'],$possible)) {
+                            $message[] = sprintf(_("The parameter %s has incorrect value for type bool."),$val['name']);
+                          };break;
+        case 'string' :
+        case 'combo'  :   if(strstr($val['default'],"!")){
+                            $message[] = sprintf(_("The parameter %s contains invalid char. '!' is used as delimiter"),$val['name']);
+                          };break;
+        default : ;
+  
+      }
+    }
     return $message;
   }
 
