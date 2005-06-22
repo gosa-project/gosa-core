@@ -62,9 +62,10 @@ class macroParameter extends plugin
     foreach($this->goFonMacroParameter as $para){
       $tmp = split("!",$para);
       $num = preg_replace("/[^0-9]/","",$tmp[1]);
-      $tmp2[$num]['name']        = $tmp[1];
-      $tmp2[$num]['type']        = $tmp[2];
-      $tmp2[$num]['default']     = $tmp[3];
+      $tmp2[$num]['var']        = $tmp[1];
+      $tmp2[$num]['name']        = $tmp[2];
+      $tmp2[$num]['type']        = $tmp[3];
+      $tmp2[$num]['default']     = $tmp[4];
     }
 
     /* Assign this array */
@@ -92,6 +93,7 @@ class macroParameter extends plugin
       }
     }
     foreach($new as $key => $val){
+      $goFonMacroParameter[$key]['var']="\${ARG".$key."}";
       $goFonMacroParameter[$key]['check']= true;
       if((!isset($goFonMacroParameter[$key]['name']))||(empty($goFonMacroParameter[$key]['name']))){
         $goFonMacroParameter[$key]['name']="\${ARG".$key."}";
@@ -150,7 +152,7 @@ class macroParameter extends plugin
       }
       $number= count($this->goFonMacroParameter);
       $number++;
-      $this->goFonMacroParameter[]=array("name"=>"new","type"=>"string","default"=>"test");
+      $this->goFonMacroParameter[]=array("var"=>"var","name"=>"new","type"=>"string","default"=>"test");
     }
 
     /*generate Table which shows als parameters */
@@ -168,8 +170,9 @@ class macroParameter extends plugin
 
       /* Assemble output table */
       $vars .="<tr>
-        <td><input name=\"number".$key."\" value='".$key."' type='hidden'> </td>
-        <td><input name='varname".$key."' type='hidden'   value='".$para['name']."'>".$para['name']."</td>
+        <input name=\"number".$key."\" value='".$key."' type='hidden'>
+        <td><input name='var".$key."' type='hidden'   value='".$para['var']."'>".$para['var']."</td>
+        <td><input name='varname".$key."'  value='".$para['name']."'></td>
         <td>
         <select name='vartype".$key."'>
         <option name='vartype".$key."' value='string' ".$sel1.">"._("String")."</option>
@@ -180,10 +183,9 @@ class macroParameter extends plugin
         <td><input name='default".$key."'   value='".$para['default']."'></td>
         <td>";
       if($para['check']==true) {
-        $vars.=_("Ok");
-        $vars.=" <td></td>";
+        $vars.="</td><td></td>";
       }else{
-        $vars.="<b>"._("Unused")."</b>";
+        $vars.="<b>"._("Unused")."</b></td>";
         $vars.=" <td><input name='del".$key."' value='delete' type='submit'></td>";
       }
 
@@ -227,6 +229,8 @@ class macroParameter extends plugin
 
         /* Set Post vars */
         $key = $_POST[$name];
+
+        $this->goFonMacroParameter[$key]['var']   = $_POST["var".$key];
         $this->goFonMacroParameter[$key]['name']   = $_POST["varname".$key];
         $this->goFonMacroParameter[$key]['type']   = $_POST["vartype".$key];
         $this->goFonMacroParameter[$key]['default']= $_POST["default".$key];
@@ -261,7 +265,7 @@ class macroParameter extends plugin
     $this->attrs['goFonMacroParameter']=array();
 
     foreach($this->goFonMacroParameter as $key=>$fonpara){
-      $this->attrs['goFonMacroParameter'][]=$key."!".$fonpara['name']."!".$fonpara['type']."!".$fonpara['default'];
+      $this->attrs['goFonMacroParameter'][]=$key."!".$fonpara['var']."!".$fonpara['name']."!".$fonpara['type']."!".$fonpara['default'];
     }
 
     unset($this->attrs['base']);
