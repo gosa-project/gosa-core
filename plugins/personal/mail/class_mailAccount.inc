@@ -183,7 +183,6 @@ class mailAccount extends plugin
       $mailserver[]= $key;
     }
 
-
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
       $this->is_account= !$this->is_account;
@@ -194,7 +193,6 @@ class mailAccount extends plugin
     foreach ($this->config->data['SERVERS']['IMAP'] as $key => $val){
       $mailserver[]= $key;
     }
-
 
     /* Do we represent a valid account? */
     if (!$this->is_account && $this->parent == NULL){
