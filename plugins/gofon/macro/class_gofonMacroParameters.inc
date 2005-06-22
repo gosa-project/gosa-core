@@ -1,4 +1,5 @@
 <?php
+
 class macroParameter extends plugin
 {
   /* CLI vars */

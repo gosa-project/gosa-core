@@ -10,7 +10,7 @@
  */
 
 /* Load sieve support */
-@require_once ("class_sieve.inc");
+require_once ("class_sieve.inc");
 
 /* Load mail methods */
 global $BASE_DIR;
@@ -178,15 +178,29 @@ class mailAccount extends plugin
     $smarty= get_smarty();
     $display= "";
 
+    $mailserver= array();
+    foreach ($this->config->data['SERVERS']['IMAP'] as $key => $val){
+      $mailserver[]= $key;
+    }
+
+
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
       $this->is_account= !$this->is_account;
     }
 
+    /* Show main page */
+    $mailserver= array();
+    foreach ($this->config->data['SERVERS']['IMAP'] as $key => $val){
+      $mailserver[]= $key;
+    }
+
+
     /* Do we represent a valid account? */
     if (!$this->is_account && $this->parent == NULL){
       $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
         _("This account has no mail extensions.")."</b>";
+
       $display.= back_to_main();
       return ($display);
     }
@@ -197,8 +211,7 @@ class mailAccount extends plugin
         $display= $this->show_header(_("Remove mail account"),
             _("This account has mail features enabled. You can disable them by clicking below."));
       } else {
-        $display= $this->show_header(_("Create mail account"),
-            _("This account has mail features disabled. You can enable them by clicking below."));
+        $display= $this->show_header(_("Create mail account"), _("This account has mail features disabled. You can enable them by clicking below."));
         return ($display);
       }
     }
@@ -419,11 +432,6 @@ class mailAccount extends plugin
       return ($display);
     }
 
-    /* Show main page */
-    $mailserver= array();
-    foreach ($this->config->data['SERVERS']['IMAP'] as $key => $val){
-      $mailserver[]= $key;
-    }
     $smarty->assign("mailServers", $mailserver);
     foreach(array("gosaMailServer", "gosaMailQuota", "perms", "mail",
           "gosaMailAlternateAddress", "gosaMailForwardingAddress",
@@ -664,6 +672,10 @@ class mailAccount extends plugin
     $ldap= $this->config->get_ldap_link();
 
     $message= array();
+
+    if(empty($this->gosaMailServer)){
+      $message[]= _("There is no valid mailserver specified, please add one in the system setup.");
+    }
 
     /* must: mail */
     if ($this->mail == ""){
