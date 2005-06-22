@@ -136,12 +136,6 @@ class mailMethodCyrus extends mailMethod
 
   function setSharedFolderPermissions($folder, $permissions)
   {
-    /* Show warning message in case of missing imap_getacl */
-    if (!function_exists('imap_getacl')){
-      print_red (_("Warning: imap_getacl is not implemented, wouldn't modify acl informations."));
-      return;
-    }
-
     /* Get list of subfolders */
     $folders= $this->getMailboxList($folder, "");
     $folders[]= $folder;
@@ -156,6 +150,8 @@ class mailMethodCyrus extends mailMethod
         foreach ($users as $userid => $perms){
           imap_setacl ($this->mbox, $subfolder, $userid, "");
         }
+      } else {
+        print_red (_("Warning: imap_getacl is not implemented, can't remove acl informations."));
       }
 
       /* Set permissions for this folder */
