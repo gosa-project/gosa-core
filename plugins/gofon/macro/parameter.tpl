@@ -13,6 +13,8 @@
 					</td>
 					<td>{t}Option{/t}
 					</td>
+					<td>
+					</td>
 				</tr>
 					{$vars}
 			</table>
