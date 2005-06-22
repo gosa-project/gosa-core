@@ -1,25 +1,18 @@
-<table style="width:100%;">
+<table width="100%">
 	<tr>
-		<td>
-			<table>
-				<tr>
-					<td width="10%">{t}Argument{/t}
-					</td>
-					<td width="25%">{t}Name{/t}
-					</td>
-					<td width="15%">{t}type{/t}
-					</td>
-					<td width="30%">{t}Default value{/t}
-					</td>
-					<td>{t}Option{/t}
-					</td>
-					<td>
-					</td>
-				</tr>
-					{$vars}
-			</table>
+		<td>{t}Argument{/t}
 		</td>
- 	</tr>
+		<td>{t}Name{/t}
+		</td>
+		<td>{t}type{/t}
+		</td>
+		<td>{t}Default value{/t}
+		</td>
+		<td>
+		&nbsp;
+		</td>
+	</tr>
+		{$vars}
 </table>
 
 <input type="hidden" name="phoneparemeters">

@@ -172,7 +172,7 @@ class macroParameter extends plugin
       $vars .="<tr>
         <input name=\"number".$key."\" value='".$key."' type='hidden'>
         <td><input name='var".$key."' type='hidden'   value='".$para['var']."'>".$para['var']."</td>
-        <td><input name='varname".$key."'  value='".$para['name']."'></td>
+        <td><input size=\"45\" name='varname".$key."'  value='".$para['name']."'></td>
         <td>
         <select name='vartype".$key."'>
         <option name='vartype".$key."' value='string' ".$sel1.">"._("String")."</option>
@@ -180,16 +180,13 @@ class macroParameter extends plugin
         <option name='vartype".$key."' value='bool'   ".$sel3.">"._("Bool")."</option>
         </select>
         </td>
-        <td><input name='default".$key."'   value='".$para['default']."'></td>
-        <td>";
-      if($para['check']==true) {
-        $vars.="</td><td></td>";
-      }else{
-        $vars.="<b>"._("Unused")."</b></td>";
-        $vars.=" <td><input name='del".$key."' value='delete' type='submit'></td>";
+        <td><input size=\"45\" name='default".$key."'   value='".$para['default']."'></td>
+        <td>&nbsp;";
+      if($para['check']==false) {
+        $vars.="<input name='del".$key."' value='"._("Delete unused")."' type='submit'>";
       }
 
-      $vars.=" </tr>";
+      $vars.=" </td></tr>";
     }
 
     /* Checkboxes */
