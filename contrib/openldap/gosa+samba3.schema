@@ -202,8 +202,12 @@ attributetype ( 1.3.6.1.4.1.15305.2.2 NAME ( 'dateOfBirth' 'dob' )
         SYNTAX  1.3.6.1.4.1.1466.115.121.1.15{10}
         SINGLE-VALUE )
 
+# cyrus imapd access control list
+# acls work with users and groups
 attributetype ( 1.3.6.1.4.1.19414.2.1.651
 		NAME 'acl'
+  		EQUALITY caseIgnoreIA5Match
+		SUBSTR caseIgnoreIA5SubstringsMatch
 	    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256} )
 
 # Objectclasses
