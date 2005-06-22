@@ -153,33 +153,6 @@ class macroParameter extends plugin
       $this->goFonMacroParameter[]=array("name"=>"new","type"=>"string","default"=>"test");
     }
 
-
-    #FIXME: Der Transfer der momentanen Variablen muss nach save_object(),
-    #       damit kann in save() auf den execute() Aufruf verzichtet werden!
-    
-    /* read out post data, and assign it to the parameters */
-    /* And or delete */
-    foreach($_POST as $name=>$value){	
-
-      /* Test if there is a variable begining with "del" */
-      if(preg_match("/del/",$name)){
-
-        /* Extract entry id to delete */
-        $nr = str_replace("del","",$name)	;
-
-        /* unset entry */			
-        unset($this->goFonMacroParameter[$nr]);
-
-      }elseif(preg_match("/number/",$name)){
-
-        /* Set Post vars */
-        $key = $_POST[$name];
-        $this->goFonMacroParameter[$key]['name']	 = $_POST["varname".$key];		
-        $this->goFonMacroParameter[$key]['type']	 = $_POST["vartype".$key];		
-        $this->goFonMacroParameter[$key]['default']= $_POST["default".$key];		
-      }
-    } 
-
     /*generate Table which shows als parameters */
 
     $FonParas = $this->check_paras($content,$this->goFonMacroParameter); 
@@ -192,9 +165,6 @@ class macroParameter extends plugin
       }else{
         list($sel1, $sel2, $sel3)= array("", "", "");
       }
-
-      #FIXME: Der Name des Parameters ist nicht gesetzt
-      #       -> Argument (ARG#)    Name [....]    Typ [...^]    Default [....]
 
       /* Assemble output table */
       $vars .="<tr>
@@ -240,6 +210,29 @@ class macroParameter extends plugin
     if (isset($_POST['phoneparameters'])){
       plugin::save_object();
     }
+        /* read out post data, and assign it to the parameters */
+    /* And or delete */
+    foreach($_POST as $name=>$value){
+
+      /* Test if there is a variable begining with "del" */
+      if(preg_match("/del/",$name)){
+
+        /* Extract entry id to delete */
+        $nr = str_replace("del","",$name) ;
+
+        /* unset entry */
+        unset($this->goFonMacroParameter[$nr]);
+
+      }elseif(preg_match("/number/",$name)){
+
+        /* Set Post vars */
+        $key = $_POST[$name];
+        $this->goFonMacroParameter[$key]['name']   = $_POST["varname".$key];
+        $this->goFonMacroParameter[$key]['type']   = $_POST["vartype".$key];
+        $this->goFonMacroParameter[$key]['default']= $_POST["default".$key];
+      }
+    }
+
   }
 
 
@@ -262,9 +255,6 @@ class macroParameter extends plugin
   function save()
   {
     /* Post checks */
-
-    # FIXME: das hat hier nix zu suchen...
-    $this->execute();
 
     plugin::save();
 
