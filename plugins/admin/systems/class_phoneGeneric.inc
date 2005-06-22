@@ -85,7 +85,11 @@ class phoneGeneric extends plugin
     } else {
       $this->selected_categorie = 0;
     }
- 
+
+    if($this->goFonDefaultIP!="dynamic"){
+      $this->goFonDefaultIP = "network";
+    }
+
     /* Save dn for later references */
     $this->orig_dn= $this->dn;
   }
@@ -333,7 +337,11 @@ class phoneGeneric extends plugin
       }
       $this->attrs= $attrs;
     }
-    
+
+    if($this->goFonDefaultIP!="dynamic"){
+      $this->attrs['goFonDefaultIP'] = $this->ipHostNumber;
+    }    
+
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
     if ($this->orig_dn == 'new'){
