@@ -1615,6 +1615,13 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
 
   /* Write to syslog */
   gosa_log ("PHP error: $errstr ($errfile, line $errline)");
+
+  /* Flush in case of fatal errors */
+  if (preg_match('/^fatal/i', $errstr)){
+    echo $error_collector."</div>";
+    flush();
+    exit;
+  }
 }
 
 
