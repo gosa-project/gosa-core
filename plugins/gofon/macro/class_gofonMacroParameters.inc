@@ -170,9 +170,11 @@ class macroParameter extends plugin
     }
 
     /*generate Table which shows als parameters */
-
     $FonParas = $this->check_paras($content,$this->goFonMacroParameter); 
 
+    /* Sort by Parameterid, and keep keys */    
+    ksort($FonParas);
+    
     foreach($FonParas as $key=>$para)	{
 
       /* Select correct item of combobox */
