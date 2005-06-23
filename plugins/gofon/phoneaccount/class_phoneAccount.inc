@@ -24,7 +24,7 @@ class phoneAccount extends plugin
   var $macros                 = array();        // List of macros for smarty select box
   var $macroarray             = array();        // All needed macro informations
   var $macrostillavailable    = false;
-  
+
   /* CLI vars */
   var $cli_summary            = "Manage users phone account";
   var $cli_description        = "Some longer text\nfor help";
@@ -32,7 +32,7 @@ class phoneAccount extends plugin
 
   /* attribute list for save action */
   var $attributes             = array("goFonDeliveryMode", "goFonForwarding", "goFonFormat",
-                                            "goFonHardware", "goFonPIN", "telephoneNumber", "goFonMacro","macro");
+      "goFonHardware", "goFonPIN", "telephoneNumber", "goFonMacro","macro");
   var $objectclasses= array("goFonAccount");
 
   function phoneAccount ($config, $dn= NULL)
@@ -86,7 +86,7 @@ class phoneAccount extends plugin
         $description= "";
       }
       $this->hardware_list[$cn]= "$cn$description";
-      
+
     }
 
     /* Prepare templating */
@@ -103,23 +103,23 @@ class phoneAccount extends plugin
 
     /* Fetch all Macros*/
     while ($attrs= $ldap->fetch()){
-      
+
       /* Only visisble */
       if((isset($attrs['goFonMacroVisible'][0]))&&($attrs['goFonMacroVisible'][0] ==1)){
-        
+
         /* unset Count, we don't need that here */
         unset($attrs['displayName']['count']);
-      
+
         /* fill Selectfield variable with Macros */
         if(isset($attrs['displayName'][0])){
-          $this->macros[$attrs['dn']] = $attrs['displayName'][0];
+          $this->macros[$attrs['dn']] = $attrs['displayName'][0]." (".$attrs['cn'][0].")";
         }else{
           $this->macros[$attrs['dn']] = _("undefined");
         }
 
         /* Parse macro data, unset count for parameterarrays  */
         unset($attrs['goFonMacroParameter']['count']);
- 
+
         /* Go through available parameters and parse all attributes, like parametername, type, default ...*/
         if((isset($attrs['goFonMacroParameter']))&&(is_array($attrs['goFonMacroParameter']))){
 
@@ -127,7 +127,7 @@ class phoneAccount extends plugin
 
             /* Split Data in readable values, by delimiter !  */
             $data = split("!",$attrs['goFonMacroParameter'][$pkey]);
-        
+
             /* Set all attrs */
             $id = $data[0];
             $this->macroarray[$attrs['dn']][$id]['var']    ="var".$id;
@@ -136,19 +136,19 @@ class phoneAccount extends plugin
             $this->macroarray[$attrs['dn']][$id]['name']   =$data[1];
             $this->macroarray[$attrs['dn']][$id]['type']   =$data[2];
             $this->macroarray[$attrs['dn']][$id]['default']=$data[3];
-           }//foreach
-         }//is_array
-       }//visible = 1
-     }//while
+          }//foreach
+        }//is_array
+      }//visible = 1
+    }//while
     /* Go through already saved values, for a parameter */
     $tmp = split("!",$this->goFonMacro);
 
     /* it is possible that nothing has been saved yet */
     if(is_array($tmp)){
-  
+
       /* First value is the macroname */
       $this->macro = $tmp[0];
-  
+
       /* Macroname saved, delete that index */
       unset($tmp[0]);
 
@@ -161,18 +161,18 @@ class phoneAccount extends plugin
 
       /* for each parametervalues ( parameterID#value like 25#twentyfive) */
       foreach($tmp as $var){
-    
+
         /* Split this, so we have $varar[0] = parameterID $varar[1] = SelectedValue */
         $varar = split("#",$var);
-      
+
         /* Only insert if the parameter still exists */
         if(isset($this->macroarray[$this->macro][$varar[0]])){
-      
+
           /* Assign value */
           $this->macroarray[$this->macro][$varar[0]]['choosen']=$varar[1];
-          }
         }
       }
+    }
 
     /* Eventually colorize phones */
     $ldap->cd($this->config->current['BASE']);
@@ -214,12 +214,12 @@ class phoneAccount extends plugin
     /* Assing macroselectbox values  */
     $smarty->assign("macros",$this->macros);   
     $smarty->assign("macro", $this->macro);   
-  
+
     /* Create parameter table, skip if no parameters given */
     if(!isset($this->macroarray[$this->macro])){
       $macrotab="";
     }else{
-      
+
       $macrotab ="<table>";
       /* for every single parameter-> display textfile,combo, or true false switch*/
       foreach($this->macroarray[$this->macro] as $paras){
@@ -244,10 +244,10 @@ class phoneAccount extends plugin
           }
           $str.="</select>";
         }
-      
+
         /* Display switch for true false*/
         if($type == "bool"){
-       
+
           $str="<select name='".$var."'>";
 
           if($choosen){
@@ -259,15 +259,15 @@ class phoneAccount extends plugin
           }
           $str.="<select name='".$var."'>";
         }
-     
+
         /* display simple textfield */ 
         if($type=="string"){
           $str="<input name='".$var."' value='".$choosen."'>";
         }
-        
+
         /* create table entry*/
         $macrotab.= "\n<tr><td>".$name."</td><td>".$str."</td></tr>"; 
-        
+
       }
       $macrotab.="</table>";
     }//is_array()
@@ -341,7 +341,7 @@ class phoneAccount extends plugin
       $smarty->assign ("phoneNumbers", $this->phoneNumbers);
     }
     $hl= "<select size=\"1\" name=\"goFonHardware\" title=\"".
-         _("Choose your private phone")."\" ".chkacl($this->acl, "goFonHardware").">\n";
+      _("Choose your private phone")."\" ".chkacl($this->acl, "goFonHardware").">\n";
     foreach ($this->hardware_list as $cn => $description){
       if ($cn == $this->goFonHardware){
         $selected= "selected";
@@ -446,7 +446,7 @@ class phoneAccount extends plugin
       if((isset($_POST['macro']))){
         $this->macrostillavailable=true;
       }
-  
+
       /* get all Postvars */
       if(isset($this->macroarray[$this->macro])){ 
         foreach($this->macroarray[$this->macro] as $key => $paras){
@@ -534,7 +534,7 @@ class phoneAccount extends plugin
       $this->attrs['goFonMacro']=array();
     }
     unset($this->attrs['macro'])  ;
-  
+
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
@@ -605,7 +605,7 @@ class phoneAccount extends plugin
     if (!$this->initially_was_account){
       return;
     }
-    
+
     plugin::remove_from_parent();
 
     /* Just keep one phone number */

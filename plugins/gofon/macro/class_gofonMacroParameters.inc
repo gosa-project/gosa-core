@@ -11,8 +11,8 @@ class macroParameter extends plugin
   var $base= "";
   var $goFonMacroParameter =array();
   var $type_shortcut= array("string" => array("selected", "", ""),
-                            "combo"  => array("", "selected", ""),
-                            "bool"   => array("", "", "selected"));
+      "combo"  => array("", "selected", ""),
+      "bool"   => array("", "", "selected"));
 
   /* attribute list for save action */
   var $attributes= array("base","goFonMacroParameter");
@@ -60,13 +60,14 @@ class macroParameter extends plugin
       }
     }
 
+    /* Load parametersettings*/
     foreach($this->goFonMacroParameter as $para){
       $tmp = split("!",$para);
-      $num = preg_replace("/[^0-9]/","",$tmp[1]);
-      $tmp2[$num]['var']        = $tmp[1];
-      $tmp2[$num]['name']        = $tmp[2];
-      $tmp2[$num]['type']        = $tmp[3];
-      $tmp2[$num]['default']     = $tmp[4];
+      $num = $tmp[0];
+      $tmp2[$num]['name']        = $tmp[1];
+      $tmp2[$num]['type']        = $tmp[2];
+      $tmp2[$num]['default']     = $tmp[3];
+      $tmp2[$num]['var']         = "var".$num;
     }
 
     /* Assign this array */
@@ -74,41 +75,53 @@ class macroParameter extends plugin
   }
 
   function check_paras($content,$goFonMacroParameter)
-  {
+  { 
+    /* Check contents for parameters */
     preg_match_all("/[$]\{ARG[0-9]*\}/",$content,$res,PREG_OFFSET_CAPTURE);
 
-    $anz = count($res[0]);
     $new = array();
 
+    /* Detect parameters with positions */
     foreach($res[0] as $val){
       $num = preg_replace("/[^0-9]/","",$val[0]); 
       $new[$num]['val'] = $val[0];
       $new[$num]['num'] = $num;
     }
 
+    /* Compare content parameter and macro parameter */
     foreach($goFonMacroParameter as $gokey => $goval){
       foreach($new as $nkey => $nval){
         if($gokey == $nval['num']){
+          /* sign this as OK */
           $goFonMacroParameter[$gokey]['check']= true;
         }
       }
     }
+
+    /* Now check if there is new parameter in the content, which is not assigned yet */
     foreach($new as $key => $val){
-      $goFonMacroParameter[$key]['var']="\${ARG".$key."}";
+      /* Assign std values */
+      $goFonMacroParameter[$key]['var']="var".$key;
       $goFonMacroParameter[$key]['check']= true;
+
+      /* If this is a new Parameter, name it ${ARG#} by default*/
       if((!isset($goFonMacroParameter[$key]['name']))||(empty($goFonMacroParameter[$key]['name']))){
         $goFonMacroParameter[$key]['name']="\${ARG".$key."}";
       }
     }  
 
     foreach($goFonMacroParameter as $key => $val){
+      /* All attributes with check == false, are unneeded so mark them with ['check']= false */
       if(!isset($goFonMacroParameter[$key]['check'])){
         $goFonMacroParameter[$key]['check']= false;
       }
+      /* Ah no default given assign ="" to prevent unsigned index  */
       if(!isset($goFonMacroParameter[$key]['default'])){
         $goFonMacroParameter[$key]['default'] = "";
       }
     }
+
+    /* Sort output for better reading */
     asort($goFonMacroParameter);
     return($goFonMacroParameter);
 
@@ -210,7 +223,7 @@ class macroParameter extends plugin
     if (isset($_POST['phoneparameters'])){
       plugin::save_object();
     }
-        /* read out post data, and assign it to the parameters */
+    /* read out post data, and assign it to the parameters */
     /* And or delete */
     foreach($_POST as $name=>$value){
 
@@ -249,18 +262,21 @@ class macroParameter extends plugin
         return(array($str));
       }
     }
+
+
     foreach($this->goFonMacroParameter as $key=>$val){
+      if(strstr($val['default'],"!")) {
+        $message[] = sprintf(_("The parameter %s contains invalid char. '!' is used as delimiter"),$val['name']);
+      }
       switch($val['type']){
         case 'bool'   :   $possible = array("","0","1","true","false");
                           if(!in_array($val['default'],$possible)) {
                             $message[] = sprintf(_("The parameter %s has incorrect value for type bool."),$val['name']);
                           };break;
         case 'string' :
-        case 'combo'  :   if(strstr($val['default'],"!")){
-                            $message[] = sprintf(_("The parameter %s contains invalid char. '!' is used as delimiter"),$val['name']);
-                          };break;
+        case 'combo'  : 
         default : ;
-  
+
       }
     }
     return $message;
@@ -277,7 +293,7 @@ class macroParameter extends plugin
     $this->attrs['goFonMacroParameter']=array();
 
     foreach($this->goFonMacroParameter as $key=>$fonpara){
-      $this->attrs['goFonMacroParameter'][]=$key."!".$fonpara['var']."!".$fonpara['name']."!".$fonpara['type']."!".$fonpara['default'];
+      $this->attrs['goFonMacroParameter'][]=$key."!".$fonpara['name']."!".$fonpara['type']."!".$fonpara['default'];
     }
 
     unset($this->attrs['base']);

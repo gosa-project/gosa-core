@@ -117,7 +117,11 @@ class macro extends plugin
   function check()
   {
     $message = array();
-    
+
+    if(empty($this->displayName)){
+      $message[] = _("You must specify the 'Display Name' in order to save this macro");
+    }  
+  
     foreach($this->attributes as $attr){
       if(chkacl($this->acl,$attr)){
         $str =  sprintf( _("Insufficient permissions, can't change attribute '%s' in goFonMacro"),$attr) ;
