@@ -251,11 +251,11 @@ class phoneAccount extends plugin
           $str="<select name='".$var."' ".chkacl($this->acl, "goFonMacro").">";
 
           if($choosen){
-            $str.="<option name='".$var."' value='0'>"._("false")."</option>";
-            $str.="<option name='".$var."' value='1' selected>"._("true")."</option>";
+            $str.="\n<option name='".$var."' value='0'>"._("false")."</option>";
+            $str.="\n<option name='".$var."' value='1' selected>"._("true")."</option>";
           }else{
-            $str.="<option name='".$var."' value='0' selected>"._("false")."</option>";
-            $str.="<option name='".$var."' value='1'>"._("true")."</option>";
+            $str.="\n<option name='".$var."' value='0' selected>"._("false")."</option>";
+            $str.="\n<option name='".$var."' value='1'>"._("true")."</option>";
           }
           $str.="<select name='".$var."'>";
         }
@@ -380,28 +380,6 @@ class phoneAccount extends plugin
     }
     $smarty->assign("forwarder_list", $forwarder_list);
 
-
-
-    /* Check box * /
-    if ($this->parent->by_object['mailAccount'] &&
-        $this->parent->by_object['mailAccount']->is_account &&
-        preg_match("/M/i", $this->goFonDeliveryMode)){
-      $smarty->assign("fon_to_mail", "checked");
-    } else {
-      $smarty->assign("fon_to_mail", "");
-    }
-    
-   
-    if (!isset($this->parent->by_object['mailAccount'])) {
-      $smarty->assign("has_mailaccount", "false");
-      $this->has_mailAccount= false;
-    } elseif ( !$this->parent->by_object['mailAccount']->is_account){
-      $smarty->assign("has_mailaccount", "false");
-      $this->has_mailAccount= false;
-    } else {
-      $smarty->assign("has_mailaccount", "true");
-    }
-    */
     /* Show main page */
     $display.= $smarty->fetch(get_template_path('generic.tpl', TRUE, dirname(__FILE__)));
     return($display);
@@ -437,13 +415,6 @@ class phoneAccount extends plugin
         }
       }
 
-
-      /* Check if mail account is active and correct the internal
-         reference to represent the current status. * /
-      if ($this->parent->by_object['mailAccount']->is_account){
-        $this->has_mailAccount= TRUE;
-      }
-      */
       /* Every macro in the select box are available */
       if((isset($_POST['macro']))){
         $this->macrostillavailable=true;
@@ -507,13 +478,6 @@ class phoneAccount extends plugin
   {
     plugin::save();
 
-    /* goFonAccount has "mail" as must! Block if no mailaddress is specified... * /
-    if (isset($this->parent->by_object['mailAccount']) &&
-        !$this->parent->by_object['mailAccount']->is_account) {
-
-      $this->goFonDeliveryMode= preg_replace("/M/i", "", $this->goFonDeliveryMode);
-    }
-    */
     /* Save arrays */
     $this->attrs['telephoneNumber']= array();
     foreach ($this->phoneNumbers as $number){
