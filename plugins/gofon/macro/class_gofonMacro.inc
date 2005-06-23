@@ -18,6 +18,10 @@ class macro extends plugin
   var $attributes= array("cn","base", "description","displayName","goFonMacroContent","goFonMacroVisible");
   var $objectclasses= array("top", "goFonMacro");
 
+  
+  /*!
+  Konstructor, load class with  attributes of the given dn    
+  */
   function macro ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
@@ -38,6 +42,9 @@ class macro extends plugin
     }
   }
 
+  /*! 
+  Execute this plugin
+  */
   function execute()
   {
     /* Variables */
@@ -84,6 +91,9 @@ class macro extends plugin
     return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }
 
+  /*!
+  Remove this Object
+  */
   function remove_from_parent()
   {
     $ldap= $this->config->get_ldap_link();
@@ -103,7 +113,9 @@ class macro extends plugin
   }
 
 
-  /* Save data to object */
+  /*!
+  Save data to object 
+  */
   function save_object()
   {
     if (isset($_POST['cn'])){
@@ -113,7 +125,9 @@ class macro extends plugin
   }
 
 
-  /* Check values */
+  /*! 
+  Check values 
+  */
   function check()
   {
     $message = array();
@@ -140,7 +154,9 @@ class macro extends plugin
   }
 
 
-  /* Save to LDAP */
+  /*! 
+  Save to LDAP 
+  */
   function save()
   {
     /* Post checks */

@@ -18,7 +18,9 @@ class macroParameter extends plugin
   var $attributes= array("base","goFonMacroParameter");
   var $objectclasses= array("top", "goFonMacro");
 
-
+  /*!
+    Konstructor
+   */
   function macroParameter ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
@@ -74,6 +76,9 @@ class macroParameter extends plugin
     $this->goFonMacroParameter = $tmp2;
   }
 
+  /*!
+    Check given parameters from content and from object and compare them
+   */
   function check_paras($content,$goFonMacroParameter)
   { 
     /* Check contents for parameters */
@@ -174,7 +179,7 @@ class macroParameter extends plugin
 
     /* Sort by Parameterid, and keep keys */    
     ksort($FonParas);
-    
+
     foreach($FonParas as $key=>$para)	{
 
       /* Select correct item of combobox */
