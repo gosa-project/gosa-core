@@ -8,26 +8,31 @@ class phoneAccount extends plugin
   var $has_mailAccount= FALSE;
 
   /* Attributes */
-  var $telephoneNumber= "";
-  var $goFonHardware= "";
-  var $goFonForwarding= "";
-  var $goFonFormat= "";
-  var $goFonPIN= "";
-  var $goFonDeliveryMode= "";
-  var $phoneNumbers= array();
-  var $forwarders= array();
-  var $mail= "";
-  var $hardware_list= array();
-  var $used_hardware= array();
-
+  var $telephoneNumber        = "";
+  var $goFonHardware          = "";
+  var $goFonForwarding        = "";
+  var $goFonFormat            = "";
+  var $goFonPIN               = "";
+  var $goFonDeliveryMode      = "";
+  var $phoneNumbers           = array();
+  var $forwarders             = array();
+  var $mail                   = "";
+  var $hardware_list          = array();
+  var $used_hardware          = array();
+  var $goFonMacro             = "";
+  var $macro                  = 0;              // Selected Macor
+  var $macros                 = array();        // List of macros for smarty select box
+  var $macroarray             = array();        // All needed macro informations
+  var $macrostillavailable    = false;
+  
   /* CLI vars */
-  var $cli_summary= "Manage users phone account";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
+  var $cli_summary            = "Manage users phone account";
+  var $cli_description        = "Some longer text\nfor help";
+  var $cli_parameters         = array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* attribute list for save action */
-  var $attributes= array("goFonDeliveryMode", "goFonForwarding", "goFonFormat",
-      "goFonHardware", "goFonPIN", "telephoneNumber");
+  var $attributes             = array("goFonDeliveryMode", "goFonForwarding", "goFonFormat",
+                                            "goFonHardware", "goFonPIN", "telephoneNumber", "goFonMacro","macro");
   var $objectclasses= array("goFonAccount");
 
   function phoneAccount ($config, $dn= NULL)
@@ -84,6 +89,91 @@ class phoneAccount extends plugin
       
     }
 
+    /* Prepare templating */
+    $smarty= get_smarty();
+
+
+    /* Perform search, to get Macro Parameters,Name,Dn,Displayname etc*/
+    $ldap->search("(objectClass=goFonMacro)", array("*"));
+
+    /* Add none for no macro*/
+    $this->macros['none']=_("none");    
+    $this->macro ="none";
+
+
+    /* Fetch all Macros*/
+    while ($attrs= $ldap->fetch()){
+      
+      /* Only visisble */
+      if((isset($attrs['goFonMacroVisible'][0]))&&($attrs['goFonMacroVisible'][0] ==1)){
+        
+        /* unset Count, we don't need that here */
+        unset($attrs['displayName']['count']);
+      
+        /* fill Selectfield variable with Macros */
+        if(isset($attrs['displayName'][0])){
+          $this->macros[$attrs['dn']] = $attrs['displayName'][0];
+        }else{
+          $this->macros[$attrs['dn']] = _("undefined");
+        }
+
+        /* Parse macro data, unset count for parameterarrays  */
+        unset($attrs['goFonMacroParameter']['count']);
+ 
+        /* Go through available parameters and parse all attributes, like parametername, type, default ...*/
+        if((isset($attrs['goFonMacroParameter']))&&(is_array($attrs['goFonMacroParameter']))){
+
+          foreach($attrs['goFonMacroParameter'] as $pkey=>$pval){
+
+            /* Split Data in readable values, by delimiter !  */
+            $data = split("!",$attrs['goFonMacroParameter'][$pkey]);
+        
+            /* Set all attrs */
+            $id = $data[0];
+            $this->macroarray[$attrs['dn']][$id]['var']    ="var".$id;
+            $this->macroarray[$attrs['dn']][$id]['choosen']="N/A";
+            $this->macroarray[$attrs['dn']][$id]['id']     = $id;
+            $this->macroarray[$attrs['dn']][$id]['name']   =$data[1];
+            $this->macroarray[$attrs['dn']][$id]['type']   =$data[2];
+            $this->macroarray[$attrs['dn']][$id]['default']=$data[3];
+           }//foreach
+         }//is_array
+       }//visible = 1
+     }//while
+    /* Go through already saved values, for a parameter */
+    $tmp = split("!",$this->goFonMacro);
+
+    /* it is possible that nothing has been saved yet */
+    if(is_array($tmp)){
+  
+      /* First value is the macroname */
+      $this->macro = $tmp[0];
+  
+      /* Macroname saved, delete that index */
+      unset($tmp[0]);
+
+      /* Check if makro has been removed */
+      if(!isset($this->macroarray[$this->macro])){
+        $this->macrostillavailable = false;
+      }else{
+        $this->macrostillavailable = true;
+      }
+
+      /* for each parametervalues ( parameterID#value like 25#twentyfive) */
+      foreach($tmp as $var){
+    
+        /* Split this, so we have $varar[0] = parameterID $varar[1] = SelectedValue */
+        $varar = split("#",$var);
+      
+        /* Only insert if the parameter still exists */
+        if(isset($this->macroarray[$this->macro][$varar[0]])){
+      
+          /* Assign value */
+          $this->macroarray[$this->macro][$varar[0]]['choosen']=$varar[1];
+          }
+        }
+      }
+
     /* Eventually colorize phones */
     $ldap->cd($this->config->current['BASE']);
     foreach ($this->hardware_list as $cn => $desc){
@@ -95,7 +185,7 @@ class phoneAccount extends plugin
         }
       }
     }
-    
+
     $this->hardware_list["automatic"]= _("automatic");
     ksort($this->hardware_list);
   }
@@ -107,6 +197,83 @@ class phoneAccount extends plugin
     if (isset($_POST['modify_state'])){
       $this->is_account= !$this->is_account;
     }
+
+    /* Select no macro if, state is empty, this is the case, if the selected macro is no longer available */
+    if(empty($this->macro)){
+      $this->macro ="none";
+    }
+
+    /* tell user that the pluging selected is no longer available*/
+    if((!$this->macrostillavailable)&&($this->macro!="none")){
+      print_red(_("The macro you selected in the past, is no longer available for you, please choose another one."));
+    }
+
+    /* Prepare templating */
+    $smarty= get_smarty();
+
+    /* Assing macroselectbox values  */
+    $smarty->assign("macros",$this->macros);   
+    $smarty->assign("macro", $this->macro);   
+  
+    /* Create parameter table, skip if no parameters given */
+    if(!isset($this->macroarray[$this->macro])){
+      $macrotab="";
+    }else{
+      
+      $macrotab ="<table>";
+      /* for every single parameter-> display textfile,combo, or true false switch*/
+      foreach($this->macroarray[$this->macro] as $paras){
+
+        /* get al vars */
+        $var        = $paras['var'];           
+        $name       = $paras['name'];           
+        $default    = $paras['default'];
+        $type       = $paras['type'];
+        $choosen    = $paras['choosen'] ; 
+        $str        = $default;
+
+        /* in case of a combo box display a combobox with selected attr */
+        if($type == "combo"){
+          $str="<select name='".$var."' >";
+          foreach(split(":",$default) as $choice){
+            if($choosen==$choice){
+              $str.="\n<option name='".$var."' value='".$choice."' selected>".$choice."</option>";
+            }else{
+              $str.="\n<option name='".$var."' value='".$choice."'>".$choice."</option>";
+            }
+          }
+          $str.="</select>";
+        }
+      
+        /* Display switch for true false*/
+        if($type == "bool"){
+       
+          $str="<select name='".$var."'>";
+
+          if($choosen){
+            $str.="<option name='".$var."' value='0'>"._("false")."</option>";
+            $str.="<option name='".$var."' value='1' selected>"._("true")."</option>";
+          }else{
+            $str.="<option name='".$var."' value='0' selected>"._("false")."</option>";
+            $str.="<option name='".$var."' value='1'>"._("true")."</option>";
+          }
+          $str.="<select name='".$var."'>";
+        }
+     
+        /* display simple textfield */ 
+        if($type=="string"){
+          $str="<input name='".$var."' value='".$choosen."'>";
+        }
+        
+        /* create table entry*/
+        $macrotab.= "\n<tr><td>".$name."</td><td>".$str."</td></tr>"; 
+        
+      }
+      $macrotab.="</table>";
+    }//is_array()
+
+    /* Give smarty the table */
+    $smarty->assign("macrotab",$macrotab);
 
     /* Do we represent a valid account? */
     if (!$this->is_account && $this->parent == NULL){
@@ -160,9 +327,6 @@ class phoneAccount extends plugin
         unset($this->forwarders[$nr]);
       }
     }
-
-    /* Prepare templating */
-    $smarty= get_smarty();
 
     /* Transfer ACL's */
     foreach($this->attributes as $val){
@@ -277,7 +441,22 @@ class phoneAccount extends plugin
       if ($this->parent->by_object['mailAccount']->is_account){
         $this->has_mailAccount= TRUE;
       }
+
+      /* Every macro in the select box are available */
+      if((isset($_POST['macro']))){
+        $this->macrostillavailable=true;
+      }
+  
+      /* get all Postvars */
+      if(isset($this->macroarray[$this->macro])){ 
+        foreach($this->macroarray[$this->macro] as $key => $paras){
+          if(isset($_POST[$paras['var']])){
+            $this->macroarray[$this->macro][$key]['choosen'] = $_POST[$paras['var']]; 
+          }
+        }
+      }
     }
+
 
   }
 
@@ -309,6 +488,14 @@ class phoneAccount extends plugin
       }
     }
 
+    /* check for ! in any parameter setting*/
+    if(isset($this->macroarray[$this->macro])){
+      foreach($this->macroarray[$this->macro] as $val){
+        if(strstr("!",$val['choosen'])){
+          $message[] = sprintf(_("The parameter %s contains invalid char. '!' is used as delimiter"),$val['name']);
+        }
+      }
+    }
     return ($message);
   }
 
@@ -335,6 +522,19 @@ class phoneAccount extends plugin
       $this->attrs['goFonForwarding'][]= "$index;$number";
     }
 
+    /* Save settings, or remove goFonMacro attribute*/
+    if($this->macro!="none"){    
+      $this->attrs['goFonMacro']=$this->macro;
+      if(isset($this->macroarray[$this->macro])){
+        foreach($this->macroarray[$this->macro] as $paras)  {
+          $this->attrs['goFonMacro'].="!".$paras['id']."#".$paras['choosen'];
+        }
+      }
+    }else{
+      $this->attrs['goFonMacro']=array();
+    }
+    unset($this->attrs['macro'])  ;
+  
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
