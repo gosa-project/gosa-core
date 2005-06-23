@@ -59,10 +59,10 @@
 					</td>
 					<td>
 						<img src="images/select_phone.png">
-						 <select name="macro" onchange="document.mainform.submit()">
+						 <select name="macro" onchange="document.mainform.submit()" {$telephoneNumberACL}>
 					       {html_options options=$macros selected=$macro}
 					     </select>
-						 <input type="submit" name="refresh" value="{t}refresh{/t}">
+						 <input type="submit" name="refresh" value="{t}refresh{/t}" {$goFonMacroACL}>
 					</td>
 				</tr>
 			</table>

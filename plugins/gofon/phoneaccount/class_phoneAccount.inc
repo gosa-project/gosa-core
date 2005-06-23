@@ -234,7 +234,7 @@ class phoneAccount extends plugin
 
         /* in case of a combo box display a combobox with selected attr */
         if($type == "combo"){
-          $str="<select name='".$var."' >";
+          $str="<select name='".$var."' ".chkacl($this->acl, "goFonMacro").">";
           foreach(split(":",$default) as $choice){
             if($choosen==$choice){
               $str.="\n<option name='".$var."' value='".$choice."' selected>".$choice."</option>";
@@ -248,7 +248,7 @@ class phoneAccount extends plugin
         /* Display switch for true false*/
         if($type == "bool"){
 
-          $str="<select name='".$var."'>";
+          $str="<select name='".$var."' ".chkacl($this->acl, "goFonMacro").">";
 
           if($choosen){
             $str.="<option name='".$var."' value='0'>"._("false")."</option>";
@@ -262,7 +262,7 @@ class phoneAccount extends plugin
 
         /* display simple textfield */ 
         if($type=="string"){
-          $str="<input name='".$var."' value='".$choosen."'>";
+          $str="<input name='".$var."' value='".$choosen."' ".chkacl($this->acl, "goFonMacro").">";
         }
 
         /* create table entry*/
@@ -382,7 +382,7 @@ class phoneAccount extends plugin
 
 
 
-    /* Check box */
+    /* Check box * /
     if ($this->parent->by_object['mailAccount'] &&
         $this->parent->by_object['mailAccount']->is_account &&
         preg_match("/M/i", $this->goFonDeliveryMode)){
@@ -390,7 +390,8 @@ class phoneAccount extends plugin
     } else {
       $smarty->assign("fon_to_mail", "");
     }
-
+    
+   
     if (!isset($this->parent->by_object['mailAccount'])) {
       $smarty->assign("has_mailaccount", "false");
       $this->has_mailAccount= false;
@@ -400,7 +401,7 @@ class phoneAccount extends plugin
     } else {
       $smarty->assign("has_mailaccount", "true");
     }
-
+    */
     /* Show main page */
     $display.= $smarty->fetch(get_template_path('generic.tpl', TRUE, dirname(__FILE__)));
     return($display);
@@ -436,12 +437,13 @@ class phoneAccount extends plugin
         }
       }
 
+
       /* Check if mail account is active and correct the internal
-         reference to represent the current status. */
+         reference to represent the current status. * /
       if ($this->parent->by_object['mailAccount']->is_account){
         $this->has_mailAccount= TRUE;
       }
-
+      */
       /* Every macro in the select box are available */
       if((isset($_POST['macro']))){
         $this->macrostillavailable=true;
@@ -505,13 +507,13 @@ class phoneAccount extends plugin
   {
     plugin::save();
 
-    /* goFonAccount has "mail" as must! Block if no mailaddress is specified... */
+    /* goFonAccount has "mail" as must! Block if no mailaddress is specified... * /
     if (isset($this->parent->by_object['mailAccount']) &&
         !$this->parent->by_object['mailAccount']->is_account) {
 
       $this->goFonDeliveryMode= preg_replace("/M/i", "", $this->goFonDeliveryMode);
     }
-
+    */
     /* Save arrays */
     $this->attrs['telephoneNumber']= array();
     foreach ($this->phoneNumbers as $number){
