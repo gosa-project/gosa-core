@@ -269,7 +269,7 @@ class macroParameter extends plugin
         $message[] = sprintf(_("The parameter %s contains invalid char. '!,#' is used as delimiter"),$val['name']);
       }
       switch($val['type']){
-        case 'bool'   :   $possible = array("","0","1","true","false");
+        case 'bool'   :   $possible = array("","0","1");
                           if(!in_array($val['default'],$possible)) {
                             $message[] = sprintf(_("The parameter %s has incorrect value for type bool."),$val['name']);
                           };break;
