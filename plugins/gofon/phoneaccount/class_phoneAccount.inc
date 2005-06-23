@@ -487,12 +487,12 @@ class phoneAccount extends plugin
         $message[]= sprintf(_("The timeout '%s' contains invalid characters!"), $timeout);
       }
     }
-
+    
     /* check for ! in any parameter setting*/
     if(isset($this->macroarray[$this->macro])){
       foreach($this->macroarray[$this->macro] as $val){
-        if(strstr("!",$val['choosen'])){
-          $message[] = sprintf(_("The parameter %s contains invalid char. '!' is used as delimiter"),$val['name']);
+        if((strstr($val['choosen'],"!"))||(strstr($val['choosen'],"#"))){
+          $message[] = sprintf(_("The parameter %s contains invalid char. '!,#' is used as delimiter"),$val['name']);
         }
       }
     }

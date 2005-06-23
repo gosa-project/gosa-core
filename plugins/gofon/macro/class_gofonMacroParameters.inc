@@ -265,8 +265,8 @@ class macroParameter extends plugin
 
 
     foreach($this->goFonMacroParameter as $key=>$val){
-      if(strstr($val['default'],"!")) {
-        $message[] = sprintf(_("The parameter %s contains invalid char. '!' is used as delimiter"),$val['name']);
+      if((strstr($val['default'],"!"))||(strstr($val['default'],"#"))) {
+        $message[] = sprintf(_("The parameter %s contains invalid char. '!,#' is used as delimiter"),$val['name']);
       }
       switch($val['type']){
         case 'bool'   :   $possible = array("","0","1","true","false");
