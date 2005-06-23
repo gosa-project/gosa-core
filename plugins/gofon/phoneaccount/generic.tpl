@@ -55,7 +55,7 @@
 		<td width="50%">
 			<table>
 				<tr>
-					<td>{t}Select Makro{/t}
+					<td>{t}Select Macro{/t}
 					</td>
 					<td>
 						<img src="images/select_phone.png">

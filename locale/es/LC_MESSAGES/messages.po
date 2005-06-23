@@ -57,9 +57,8 @@ msgstr "Correo Electrónico"
 msgid "Samba"
 msgstr "Samba"
 
-#: contrib/gosa.conf:61
+#: contrib/gosa.conf:61 plugins/personal/connectivity/main.inc:136
 #: plugins/personal/connectivity/class_connectivity.inc:15
-#: plugins/personal/connectivity/main.inc:136
 msgid "Connectivity"
 msgstr "Conectividad"
 
@@ -73,9 +72,9 @@ msgstr "Fax"
 
 #: contrib/gosa.conf:63 plugins/personal/generic/generic.tpl:214
 #: plugins/personal/generic/generic.tpl:352
+#: plugins/addons/addressbook/contents.tpl:14
 #: plugins/addons/addressbook/address_edit.tpl:41
 #: plugins/addons/addressbook/address_edit.tpl:89
-#: plugins/addons/addressbook/contents.tpl:14
 #: plugins/addons/addressbook/address_info.tpl:37
 #: plugins/addons/addressbook/address_info.tpl:85
 #: plugins/admin/departments/generic.tpl:58
@@ -182,6 +181,152 @@ msgstr "Inglés"
 msgid "Italian"
 msgstr "Italiano"
 
+#: plugins/personal/mail/class_mailAccount.inc:23
+#: plugins/personal/password/class_password.inc:6
+#: plugins/personal/posix/class_posixAccount.inc:17
+#: plugins/personal/samba/class_sambaAccount.inc:25
+#: plugins/personal/generic/class_user.inc:17
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:7
+#: plugins/personal/connectivity/class_phpgwAccount.inc:6
+#: plugins/personal/connectivity/class_kolabAccount.inc:6
+#: plugins/personal/connectivity/class_webdavAccount.inc:7
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:25
+#: plugins/personal/connectivity/class_connectivity.inc:16
+#: plugins/personal/connectivity/class_proxyAccount.inc:6
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:6
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:7
+#: plugins/gofax/reports/class_faxreport.inc:7
+#: plugins/addons/addressbook/class_addressbook.inc:7
+#: plugins/addons/ldapmanager/class_csvimport.inc:7
+#: plugins/addons/ldapmanager/class_import.inc:7
+#: plugins/addons/ldapmanager/class_ldif.inc:8
+#: plugins/addons/ldapmanager/class_export.inc:8
+#: plugins/addons/logview/class_logview.inc:7
+#: plugins/admin/groups/class_groupManagement.inc:26
+#: plugins/admin/users/class_userManagement.inc:26
+#: plugins/admin/applications/class_applicationManagement.inc:26
+#: plugins/admin/departments/class_departmentManagement.inc:26
+#: plugins/admin/systems/class_systemManagement.inc:33
+#: plugins/admin/ogroups/class_ogroupManagement.inc:26
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:7
+#: plugins/gofon/reports/class_fonreport.inc:7
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:26
+msgid "This does something"
+msgstr "Esto hace algo"
+
+#: plugins/personal/mail/class_mailAccount.inc:79
+#: plugins/admin/groups/class_groupMail.inc:59
+#, php-format
+msgid "There is no mail method '%s' specified in your gosa.conf available."
+msgstr "No hay protocolo de correo %s configurado en su 'gosa.conf'."
+
+#: plugins/personal/mail/class_mailAccount.inc:163
+msgid "No DESC tag in vacation file:"
+msgstr "En el archivo de ausencia no existe la etiqueta 'DESC':"
+
+#: plugins/personal/mail/class_mailAccount.inc:200
+msgid "This account has no mail extensions."
+msgstr "Esta cuenta no tiene extensiones validas de correo."
+
+#: plugins/personal/mail/class_mailAccount.inc:209
+#: plugins/admin/groups/class_groupMail.inc:187
+msgid "Remove mail account"
+msgstr "Borrar cuenta de correo"
+
+#: plugins/personal/mail/class_mailAccount.inc:210
+#: plugins/admin/groups/class_groupMail.inc:188
+msgid ""
+"This account has mail features enabled. You can disable them by clicking "
+"below."
+msgstr ""
+"Esta cuenta tiene las características de correo activas. Puede desactivarlas "
+"apretando a continuación."
+
+#: plugins/personal/mail/class_mailAccount.inc:212
+#: plugins/admin/groups/class_groupMail.inc:190
+msgid "Create mail account"
+msgstr "Crear cuenta de correo"
+
+#: plugins/personal/mail/class_mailAccount.inc:212
+#: plugins/admin/groups/class_groupMail.inc:191
+msgid ""
+"This account has mail features disabled. You can enable them by clicking "
+"below."
+msgstr ""
+"Esta cuenta tiene las características de correo desactivadas.Puede "
+"activarlas pulsando aqui."
+
+#: plugins/personal/mail/class_mailAccount.inc:260
+msgid ""
+"You're trying to add an invalid email address to the list of forwarders."
+msgstr ""
+"Esta intentando añadir una dirección de correo no valida a la lista de "
+"reenvíos."
+
+#: plugins/personal/mail/class_mailAccount.inc:266
+#: plugins/admin/groups/class_groupMail.inc:250
+msgid "Adding your one of your own addresses to the forwarders makes no sense."
+msgstr ""
+"Añadir una de sus propias cuentas de correo a la lista de reenvío no tiene "
+"sentido."
+
+#: plugins/personal/mail/class_mailAccount.inc:301
+#: plugins/personal/mail/class_mailAccount.inc:306
+#: plugins/admin/groups/class_groupMail.inc:278
+msgid ""
+"You're trying to add an invalid email address to the list of alternate "
+"addresses."
+msgstr ""
+"Esta intentando añadir una dirección de correo no valida a la lista de "
+"direcciones alternativas"
+
+#: plugins/personal/mail/class_mailAccount.inc:316
+#: plugins/admin/groups/class_groupMail.inc:283
+msgid "The address you're trying to add is already used by user"
+msgstr ""
+"La dirección de correo que esta intentando añadir, ya esta usada por otro "
+"usuario"
+
+#: plugins/personal/mail/class_mailAccount.inc:675
+msgid ""
+"There is no valid mailserver specified, please add one in the system setup."
+msgstr ""
+
+#: plugins/personal/mail/class_mailAccount.inc:680
+#: plugins/admin/groups/class_groupMail.inc:610
+msgid "The required field 'Primary address' is not set."
+msgstr " El campo requerido 'Cuenta Principal' no ha sido rellenado."
+
+#: plugins/personal/mail/class_mailAccount.inc:684
+#: plugins/personal/mail/class_mailAccount.inc:688
+#: plugins/addons/addressbook/class_addressbook.inc:568
+msgid "Please enter a valid email address in 'Primary address' field."
+msgstr ""
+"Por favor introduzca una dirección valida de correo electrónico en el campo "
+"'Cuenta Principal'."
+
+#: plugins/personal/mail/class_mailAccount.inc:695
+#: plugins/admin/groups/class_groupMail.inc:619
+msgid "The primary address you've entered is already in use."
+msgstr "La cuenta principal que ha introducido ya esta en uso."
+
+#: plugins/personal/mail/class_mailAccount.inc:701
+#: plugins/admin/groups/class_groupMail.inc:625
+msgid "Value in 'Quota size' is not valid."
+msgstr "El valor de 'Tamaño de Cola' no es valido."
+
+#: plugins/personal/mail/class_mailAccount.inc:710
+#: plugins/admin/groups/class_groupMail.inc:634
+msgid "Please specify a vaild mail size for mails to be rejected."
+msgstr "Por favor especifique un usuario valido."
+
+#: plugins/personal/mail/class_mailAccount.inc:720
+#: plugins/admin/groups/class_groupMail.inc:642
+msgid "You need to set the maximum mail size in order to reject anything."
+msgstr ""
+"Necesita poner un valor máximo en el tamaño de mensaje de correo para poder "
+"rechazar mensajes."
+
 #: plugins/personal/mail/generic.tpl:7 plugins/admin/groups/mail.tpl:10
 msgid "Primary address"
 msgstr "Cuenta Principal"
@@ -213,15 +358,15 @@ msgid "Alternative addresses"
 msgstr "Direcciones alternativas"
 
 #: plugins/personal/mail/generic.tpl:50 plugins/admin/groups/mail.tpl:48
-#: plugins/admin/systems/phonesettings.tpl:173
-#: plugins/admin/systems/phonesettings.tpl:188
+#: plugins/admin/systems/phonesettings.tpl:175
+#: plugins/admin/systems/phonesettings.tpl:190
 msgid "List of alternative mail addresses"
 msgstr "Lista de direcciones de correo alternativas."
 
 #: plugins/personal/mail/generic.tpl:56 plugins/personal/mail/generic.tpl:126
 #: plugins/personal/mail/mail_locals.tpl:41
-#: plugins/personal/posix/posix_groups.tpl:72
 #: plugins/personal/posix/trust_machines.tpl:39
+#: plugins/personal/posix/posix_groups.tpl:72
 #: plugins/personal/posix/generic.tpl:73
 #: plugins/personal/posix/generic.tpl:135
 #: plugins/personal/samba/samba3.tpl:287
@@ -240,13 +385,12 @@ msgstr "Lista de direcciones de correo alternativas."
 #: plugins/admin/systems/servservice.tpl:47
 #: plugins/admin/systems/startup.tpl:61 plugins/admin/systems/startup.tpl:75
 #: plugins/admin/systems/startup.tpl:95
-#: plugins/admin/systems/phonesettings.tpl:179
-#: plugins/admin/systems/phonesettings.tpl:194
+#: plugins/admin/systems/phonesettings.tpl:181
+#: plugins/admin/systems/phonesettings.tpl:196
 #: plugins/admin/ogroups/ogroup_objects.tpl:50
 #: plugins/admin/ogroups/generic.tpl:38
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:211
-#: plugins/gofon/phoneaccount/generic.tpl:45
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:158
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:375
+#: plugins/gofon/phoneaccount/generic.tpl:10
 msgid "Add"
 msgstr "Añadir"
 
@@ -261,8 +405,8 @@ msgstr "Añadir"
 #: plugins/gofax/faxaccount/generic.tpl:77
 #: plugins/gofax/faxaccount/lists.tpl:13
 #: plugins/addons/addressbook/remove.tpl:15 plugins/admin/groups/mail.tpl:55
-#: plugins/admin/groups/mail.tpl:103 plugins/admin/groups/remove.tpl:15
-#: plugins/admin/groups/headpage.tpl:18 plugins/admin/groups/generic.tpl:90
+#: plugins/admin/groups/mail.tpl:103 plugins/admin/groups/headpage.tpl:18
+#: plugins/admin/groups/remove.tpl:15 plugins/admin/groups/generic.tpl:90
 #: plugins/admin/users/remove.tpl:15 plugins/admin/users/headpage.tpl:19
 #: plugins/admin/applications/remove.tpl:14
 #: plugins/admin/applications/headpage.tpl:18
@@ -273,11 +417,11 @@ msgstr "Añadir"
 #: plugins/admin/systems/remove.tpl:15 plugins/admin/systems/headpage.tpl:17
 #: plugins/admin/systems/startup.tpl:62 plugins/admin/systems/startup.tpl:76
 #: plugins/admin/systems/startup.tpl:96
-#: plugins/admin/systems/phonesettings.tpl:180
-#: plugins/admin/systems/phonesettings.tpl:195
+#: plugins/admin/systems/phonesettings.tpl:182
+#: plugins/admin/systems/phonesettings.tpl:197
 #: plugins/admin/ogroups/generic.tpl:39 plugins/admin/ogroups/remove.tpl:15
 #: plugins/admin/ogroups/headpage.tpl:18
-#: plugins/gofon/phoneaccount/generic.tpl:47 plugins/gofon/macro/remove.tpl:14
+#: plugins/gofon/phoneaccount/generic.tpl:12 plugins/gofon/macro/remove.tpl:14
 #: plugins/gofon/macro/headpage.tpl:18
 msgid "Delete"
 msgstr "Borrar"
@@ -368,147 +512,6 @@ msgstr "Usar 'script sive' propios"
 msgid "disables all Mail options!"
 msgstr "¡Desactivar todas las opciones de correo!"
 
-#: plugins/personal/mail/class_mailAccount.inc:23
-#: plugins/personal/password/class_password.inc:6
-#: plugins/personal/posix/class_posixAccount.inc:17
-#: plugins/personal/samba/class_sambaAccount.inc:25
-#: plugins/personal/generic/class_user.inc:17
-#: plugins/personal/connectivity/class_phpgwAccount.inc:6
-#: plugins/personal/connectivity/class_kolabAccount.inc:6
-#: plugins/personal/connectivity/class_webdavAccount.inc:7
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:7
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:25
-#: plugins/personal/connectivity/class_connectivity.inc:16
-#: plugins/personal/connectivity/class_proxyAccount.inc:6
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:6
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:7
-#: plugins/gofax/reports/class_faxreport.inc:7
-#: plugins/addons/addressbook/class_addressbook.inc:7
-#: plugins/addons/ldapmanager/class_csvimport.inc:7
-#: plugins/addons/ldapmanager/class_import.inc:7
-#: plugins/addons/ldapmanager/class_ldif.inc:8
-#: plugins/addons/ldapmanager/class_export.inc:8
-#: plugins/addons/logview/class_logview.inc:7
-#: plugins/admin/groups/class_groupManagement.inc:26
-#: plugins/admin/users/class_userManagement.inc:26
-#: plugins/admin/applications/class_applicationManagement.inc:26
-#: plugins/admin/departments/class_departmentManagement.inc:26
-#: plugins/admin/systems/class_systemManagement.inc:33
-#: plugins/admin/ogroups/class_ogroupManagement.inc:26
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:7
-#: plugins/gofon/reports/class_fonreport.inc:7
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:26
-msgid "This does something"
-msgstr "Esto hace algo"
-
-#: plugins/personal/mail/class_mailAccount.inc:79
-#: plugins/admin/groups/class_groupMail.inc:59
-#, php-format
-msgid "There is no mail method '%s' specified in your gosa.conf available."
-msgstr "No hay protocolo de correo %s configurado en su 'gosa.conf'."
-
-#: plugins/personal/mail/class_mailAccount.inc:163
-msgid "No DESC tag in vacation file:"
-msgstr "En el archivo de ausencia no existe la etiqueta 'DESC':"
-
-#: plugins/personal/mail/class_mailAccount.inc:189
-msgid "This account has no mail extensions."
-msgstr "Esta cuenta no tiene extensiones validas de correo."
-
-#: plugins/personal/mail/class_mailAccount.inc:197
-#: plugins/admin/groups/class_groupMail.inc:187
-msgid "Remove mail account"
-msgstr "Borrar cuenta de correo"
-
-#: plugins/personal/mail/class_mailAccount.inc:198
-#: plugins/admin/groups/class_groupMail.inc:188
-msgid ""
-"This account has mail features enabled. You can disable them by clicking "
-"below."
-msgstr ""
-"Esta cuenta tiene las características de correo activas. Puede desactivarlas "
-"apretando a continuación."
-
-#: plugins/personal/mail/class_mailAccount.inc:200
-#: plugins/admin/groups/class_groupMail.inc:190
-msgid "Create mail account"
-msgstr "Crear cuenta de correo"
-
-#: plugins/personal/mail/class_mailAccount.inc:201
-#: plugins/admin/groups/class_groupMail.inc:191
-msgid ""
-"This account has mail features disabled. You can enable them by clicking "
-"below."
-msgstr ""
-"Esta cuenta tiene las características de correo desactivadas.Puede "
-"activarlas pulsando aqui."
-
-#: plugins/personal/mail/class_mailAccount.inc:249
-msgid ""
-"You're trying to add an invalid email address to the list of forwarders."
-msgstr ""
-"Esta intentando añadir una dirección de correo no valida a la lista de "
-"reenvíos."
-
-#: plugins/personal/mail/class_mailAccount.inc:255
-#: plugins/admin/groups/class_groupMail.inc:250
-msgid "Adding your one of your own addresses to the forwarders makes no sense."
-msgstr ""
-"Añadir una de sus propias cuentas de correo a la lista de reenvío no tiene "
-"sentido."
-
-#: plugins/personal/mail/class_mailAccount.inc:290
-#: plugins/personal/mail/class_mailAccount.inc:295
-#: plugins/admin/groups/class_groupMail.inc:278
-msgid ""
-"You're trying to add an invalid email address to the list of alternate "
-"addresses."
-msgstr ""
-"Esta intentando añadir una dirección de correo no valida a la lista de "
-"direcciones alternativas"
-
-#: plugins/personal/mail/class_mailAccount.inc:305
-#: plugins/admin/groups/class_groupMail.inc:283
-msgid "The address you're trying to add is already used by user"
-msgstr ""
-"La dirección de correo que esta intentando añadir, ya esta usada por otro "
-"usuario"
-
-#: plugins/personal/mail/class_mailAccount.inc:670
-#: plugins/admin/groups/class_groupMail.inc:610
-msgid "The required field 'Primary address' is not set."
-msgstr " El campo requerido 'Cuenta Principal' no ha sido rellenado."
-
-#: plugins/personal/mail/class_mailAccount.inc:674
-#: plugins/personal/mail/class_mailAccount.inc:678
-#: plugins/addons/addressbook/class_addressbook.inc:568
-msgid "Please enter a valid email address in 'Primary address' field."
-msgstr ""
-"Por favor introduzca una dirección valida de correo electrónico en el campo "
-"'Cuenta Principal'."
-
-#: plugins/personal/mail/class_mailAccount.inc:685
-#: plugins/admin/groups/class_groupMail.inc:619
-msgid "The primary address you've entered is already in use."
-msgstr "La cuenta principal que ha introducido ya esta en uso."
-
-#: plugins/personal/mail/class_mailAccount.inc:691
-#: plugins/admin/groups/class_groupMail.inc:625
-msgid "Value in 'Quota size' is not valid."
-msgstr "El valor de 'Tamaño de Cola' no es valido."
-
-#: plugins/personal/mail/class_mailAccount.inc:700
-#: plugins/admin/groups/class_groupMail.inc:634
-msgid "Please specify a vaild mail size for mails to be rejected."
-msgstr "Por favor especifique un usuario valido."
-
-#: plugins/personal/mail/class_mailAccount.inc:710
-#: plugins/admin/groups/class_groupMail.inc:642
-msgid "You need to set the maximum mail size in order to reject anything."
-msgstr ""
-"Necesita poner un valor máximo en el tamaño de mensaje de correo para poder "
-"rechazar mensajes."
-
 #: plugins/personal/mail/main.inc:104 plugins/personal/posix/main.inc:110
 #: plugins/personal/samba/main.inc:104
 #: plugins/personal/generic/generic_certs.tpl:76
@@ -528,11 +531,10 @@ msgid "Finish"
 msgstr "Terminar"
 
 #: plugins/personal/mail/main.inc:106 plugins/personal/mail/mail_locals.tpl:43
-#: plugins/personal/posix/posix_groups.tpl:74
 #: plugins/personal/posix/trust_machines.tpl:41
-#: plugins/personal/posix/main.inc:112
+#: plugins/personal/posix/posix_groups.tpl:74
+#: plugins/personal/posix/main.inc:112 plugins/personal/samba/main.inc:106
 #: plugins/personal/samba/samba3_workstations.tpl:41
-#: plugins/personal/samba/main.inc:106
 #: plugins/personal/generic/password.tpl:19
 #: plugins/personal/generic/generic_picture.tpl:31
 #: plugins/personal/generic/generic_certs.tpl:78
@@ -547,13 +549,13 @@ msgstr "Terminar"
 #: plugins/addons/addressbook/remove.tpl:17
 #: plugins/admin/groups/class_groupManagement.inc:261
 #: plugins/admin/groups/remove.tpl:17
+#: plugins/admin/groups/application_options.tpl:10
 #: plugins/admin/groups/group_objects.tpl:41
 #: plugins/admin/groups/mail_admins.tpl:39
-#: plugins/admin/groups/application_options.tpl:10
 #: plugins/admin/groups/mail_locals.tpl:68 plugins/admin/users/password.tpl:23
+#: plugins/admin/users/template.tpl:46
 #: plugins/admin/users/class_userManagement.inc:509
-#: plugins/admin/users/template.tpl:46 plugins/admin/users/remove.tpl:17
-#: plugins/admin/applications/remove.tpl:16
+#: plugins/admin/users/remove.tpl:17 plugins/admin/applications/remove.tpl:16
 #: plugins/admin/applications/class_applicationManagement.inc:241
 #: plugins/admin/departments/remove.tpl:17
 #: plugins/admin/departments/class_departmentManagement.inc:230
@@ -608,8 +610,8 @@ msgid "Display addresses of department"
 msgstr "Mostrar las direcciones de los departamentos"
 
 #: plugins/personal/mail/mail_locals.tpl:27
-#: plugins/personal/posix/posix_groups.tpl:39
 #: plugins/personal/posix/trust_machines.tpl:27
+#: plugins/personal/posix/posix_groups.tpl:39
 #: plugins/personal/samba/samba3_workstations.tpl:27
 #: plugins/gofax/blocklists/headpage.tpl:58
 #: plugins/gofax/faxaccount/locals.tpl:31
@@ -651,9 +653,9 @@ msgstr "Nombre de usuario de las direcciones mostradas"
 #: plugins/admin/systems/servdb.tpl:18 plugins/admin/systems/servdb.tpl:34
 #: plugins/admin/systems/servdb.tpl:50 plugins/admin/systems/servdb.tpl:86
 #: plugins/admin/systems/servdb.tpl:109 ihtml/themes/altlinux/login.tpl:35
-#: ihtml/themes/altlinux/login.tpl:39
+#: ihtml/themes/altlinux/login.tpl:39 ihtml/themes/default/login.tpl:35
+#: ihtml/themes/default/login.tpl:39
 #: ihtml/themes/default/setup_useradmin.tpl:30
-#: ihtml/themes/default/login.tpl:35 ihtml/themes/default/login.tpl:39
 msgid "Password"
 msgstr "Contraseña"
 
@@ -773,6 +775,20 @@ msgstr "No tiene permisos para cambiar su contraseña."
 msgid "External password changer reported a problem: "
 msgstr "El programa externo de cambio de contraseña informo de un problema: "
 
+#: plugins/personal/posix/trust_machines.tpl:6
+msgid "Select systems to add"
+msgstr "Seleccione sistema a añadir"
+
+#: plugins/personal/posix/trust_machines.tpl:26
+#: plugins/admin/systems/headpage.tpl:59
+msgid "Display systems of department"
+msgstr "Mostrar sistemas de departamentos"
+
+#: plugins/personal/posix/trust_machines.tpl:30
+#: plugins/admin/systems/headpage.tpl:71
+msgid "Display systems matching"
+msgstr "Mostrar sistemas que concuerden con"
+
 #: plugins/personal/posix/posix_groups.tpl:6
 msgid "Select groups to add"
 msgstr "Seleccione grupo a añadir"
@@ -878,20 +894,6 @@ msgstr ""
 msgid "Password expires on"
 msgstr "La contraseña expira en"
 
-#: plugins/personal/posix/trust_machines.tpl:6
-msgid "Select systems to add"
-msgstr "Seleccione sistema a añadir"
-
-#: plugins/personal/posix/trust_machines.tpl:26
-#: plugins/admin/systems/headpage.tpl:59
-msgid "Display systems of department"
-msgstr "Mostrar sistemas de departamentos"
-
-#: plugins/personal/posix/trust_machines.tpl:30
-#: plugins/admin/systems/headpage.tpl:71
-msgid "Display systems matching"
-msgstr "Mostrar sistemas que concuerden con"
-
 #: plugins/personal/posix/generic.tpl:7 plugins/personal/samba/samba3.tpl:13
 #: plugins/personal/samba/samba3.tpl:65
 #: plugins/personal/samba/class_sambaAccount.inc:621
@@ -951,6 +953,10 @@ msgstr "Lenguaje por defecto"
 msgid "System trust"
 msgstr "Autentificación del sistema"
 
+#: plugins/personal/posix/main.inc:131
+msgid "Unix settings"
+msgstr "Parametros Unix"
+
 #: plugins/personal/posix/class_posixAccount.inc:16
 #: plugins/generic/references/class_reference.inc:22
 msgid "UNIX"
@@ -967,7 +973,7 @@ msgstr "Desconfigurado"
 
 #: plugins/personal/posix/class_posixAccount.inc:190
 #: plugins/admin/systems/class_terminalService.inc:122
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:99
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:189
 msgid "automatic"
 msgstr "automático"
 
@@ -1255,10 +1261,6 @@ msgstr ""
 msgid "Too many users, can't allocate a free ID!"
 msgstr "¡Demasiados usuarios, no hay identificadores (ID) libres!"
 
-#: plugins/personal/posix/main.inc:131
-msgid "Unix settings"
-msgstr "Parametros Unix"
-
 #: plugins/personal/samba/samba2.tpl:13
 msgid "Samba home"
 msgstr "Directorio Samba"
@@ -1385,6 +1387,10 @@ msgstr "La cuenta expirará después de"
 msgid "Allow connection from these workstations only"
 msgstr "Permitir la conexión solo desde estas estaciones de trabajo"
 
+#: plugins/personal/samba/main.inc:123
+msgid "Samba settings"
+msgstr "Parametros de samba"
+
 #: plugins/personal/samba/samba3_workstations.tpl:6
 msgid "Select workstations to add"
 msgstr "Selecciones estaciones de trabajo para añadir"
@@ -1396,10 +1402,6 @@ msgstr "Mostrar estaciones de trabajo de departamentos"
 #: plugins/personal/samba/samba3_workstations.tpl:30
 msgid "Display workstations matching"
 msgstr "Mostrar estaciones de trabajo que concuerden con"
-
-#: plugins/personal/samba/main.inc:123
-msgid "Samba settings"
-msgstr "Parametros de samba"
 
 #: plugins/personal/samba/class_sambaAccount.inc:193
 msgid "This account has no samba extensions."
@@ -1507,276 +1509,6 @@ msgid ""
 msgstr ""
 "Aviso: No puedo identificar el grupo primario de usuarios - ¡No se puede "
 "realizar una conversión a grupo de samba!"
-
-#: plugins/personal/generic/password.tpl:2
-msgid ""
-"You have changed the method your password is stored in the ldap database. "
-"For that reason you've to enter your password at this point again. GOsa will "
-"then encode it with the selected method."
-msgstr ""
-"Ha cambiado el método en que su clave es guardada en la base de datos LDAP. "
-"Por esa razón tiene que volver a reintroducir su contraseña de nuevo. Gosa "
-"codificara esta con el nuevo método seleccionado."
-
-#: plugins/personal/generic/generic_picture.tpl:6
-#: plugins/personal/generic/generic.tpl:15
-msgid "Personal picture"
-msgstr "Foto Personal"
-
-#: plugins/personal/generic/generic_picture.tpl:23
-msgid "Remove picture"
-msgstr "Eliminar foto"
-
-#: plugins/personal/generic/generic_picture.tpl:29
-#: plugins/addons/addressbook/address_edit.tpl:107
-msgid "Save"
-msgstr "Guardar"
-
-#: plugins/personal/generic/generic.tpl:6
-msgid "Personal information"
-msgstr "Información personal"
-
-#: plugins/personal/generic/generic.tpl:17
-msgid "Change picture"
-msgstr "Cambiar foto"
-
-#: plugins/personal/generic/generic.tpl:24
-#: plugins/addons/addressbook/address_edit.tpl:20
-#: plugins/addons/addressbook/contents.tpl:14
-#: plugins/addons/addressbook/class_addressbook.inc:502
-#: plugins/addons/addressbook/address_info.tpl:16
-#: plugins/admin/users/template.tpl:19 plugins/gofon/macro/parameter.tpl:8
-msgid "Name"
-msgstr "Nombre"
-
-#: plugins/personal/generic/generic.tpl:30
-#: plugins/addons/addressbook/address_edit.tpl:20
-#: plugins/addons/addressbook/class_addressbook.inc:502
-#: plugins/admin/users/template.tpl:23
-msgid "Given name"
-msgstr "Nombre"
-
-#: plugins/personal/generic/generic.tpl:34 plugins/admin/users/template.tpl:28
-msgid "Login"
-msgstr "Inicio"
-
-#: plugins/personal/generic/generic.tpl:42
-#: plugins/addons/addressbook/address_edit.tpl:26
-#: plugins/addons/addressbook/address_info.tpl:22
-msgid "Personal title"
-msgstr "Título Personal"
-
-#: plugins/personal/generic/generic.tpl:50
-msgid "Academic title"
-msgstr "Títulos academicos"
-
-#: plugins/personal/generic/generic.tpl:58
-msgid "Date of birth"
-msgstr "Fecha de nacimiento"
-
-#: plugins/personal/generic/generic.tpl:75
-#: ihtml/themes/altlinux/sizelimit.tpl:14
-#: ihtml/themes/default/sizelimit.tpl:14
-msgid "Set"
-msgstr "por debajo"
-
-#: plugins/personal/generic/generic.tpl:81
-msgid "Sex"
-msgstr "Sexo"
-
-#: plugins/personal/generic/generic.tpl:92
-#: plugins/gofax/blocklists/generic.tpl:14 plugins/admin/groups/generic.tpl:21
-#: plugins/admin/applications/generic.tpl:33
-#: plugins/admin/departments/generic.tpl:27
-#: plugins/admin/systems/server.tpl:13 plugins/admin/systems/phone.tpl:13
-#: plugins/admin/systems/terminal.tpl:18 plugins/admin/systems/printer.tpl:21
-#: plugins/admin/systems/workstation.tpl:18
-#: plugins/admin/systems/wingeneric.tpl:13
-#: plugins/admin/systems/component.tpl:13 plugins/admin/ogroups/generic.tpl:21
-#: plugins/gofon/macro/generic.tpl:33
-msgid "Base"
-msgstr "Base"
-
-#: plugins/personal/generic/generic.tpl:96
-msgid "Choose subtree to place user in"
-msgstr "Elija el subárbol donde colocar el usuario"
-
-#: plugins/personal/generic/generic.tpl:111
-#: plugins/personal/generic/generic.tpl:255
-#: plugins/addons/addressbook/address_edit.tpl:37
-#: plugins/addons/addressbook/address_edit.tpl:86
-#: plugins/addons/addressbook/address_info.tpl:33
-#: plugins/addons/addressbook/address_info.tpl:82
-#: plugins/admin/departments/generic.tpl:54
-msgid "Address"
-msgstr "Dirección"
-
-#: plugins/personal/generic/generic.tpl:115
-msgid "Private phone"
-msgstr "Numero privado"
-
-#: plugins/personal/generic/generic.tpl:119
-msgid "Homepage"
-msgstr "Página Web Principal"
-
-#: plugins/personal/generic/generic.tpl:128
-msgid "Password storage"
-msgstr "Carpeta de almacenamiento de Contraseñas"
-
-#: plugins/personal/generic/generic.tpl:138
-#: plugins/personal/generic/generic_certs.tpl:3
-msgid "Certificates"
-msgstr "Certificados"
-
-#: plugins/personal/generic/generic.tpl:140
-msgid "Edit certificates"
-msgstr "Editar certificados"
-
-#: plugins/personal/generic/generic.tpl:144
-msgid "Kerberos"
-msgstr "Kerberos"
-
-#: plugins/personal/generic/generic.tpl:145
-msgid "Edit properties"
-msgstr "Editar propiedades"
-
-#: plugins/personal/generic/generic.tpl:161
-msgid "Organizational information"
-msgstr "Información organizativa"
-
-#: plugins/personal/generic/generic.tpl:173
-msgid "Organization"
-msgstr "Organización"
-
-#: plugins/personal/generic/generic.tpl:177
-#: plugins/addons/addressbook/address_edit.tpl:68
-#: plugins/addons/addressbook/address_info.tpl:64
-#: plugins/generic/references/class_reference.inc:38
-msgid "Department"
-msgstr "Departamento"
-
-#: plugins/personal/generic/generic.tpl:181
-msgid "Department No."
-msgstr "Departamento No."
-
-#: plugins/personal/generic/generic.tpl:187
-msgid "Employee No."
-msgstr "Empleado No."
-
-#: plugins/personal/generic/generic.tpl:193
-msgid "Employee type"
-msgstr "Tipo de empleado"
-
-#: plugins/personal/generic/generic.tpl:209
-#: plugins/personal/generic/generic.tpl:348
-msgid "Room No."
-msgstr "Habitación No."
-
-#: plugins/personal/generic/generic.tpl:221
-#: plugins/addons/addressbook/address_edit.tpl:44
-#: plugins/addons/addressbook/contents.tpl:15
-#: plugins/addons/addressbook/address_info.tpl:40
-msgid "Mobile"
-msgstr "Teléfono Móvil"
-
-#: plugins/personal/generic/generic.tpl:225
-#: plugins/addons/addressbook/address_edit.tpl:95
-#: plugins/addons/addressbook/address_info.tpl:91
-msgid "Pager"
-msgstr "Dispositivo de aviso"
-
-#: plugins/personal/generic/generic.tpl:247
-#: plugins/admin/departments/generic.tpl:42
-#: plugins/admin/departments/generic.tpl:50
-#: plugins/admin/systems/printer.tpl:14
-msgid "Location"
-msgstr "Localización"
-
-#: plugins/personal/generic/generic.tpl:251
-#: plugins/admin/departments/generic.tpl:46
-msgid "State"
-msgstr "Estado"
-
-#: plugins/personal/generic/generic.tpl:269
-msgid "Vocation"
-msgstr "Intereses"
-
-#: plugins/personal/generic/generic.tpl:273
-msgid "Unit description"
-msgstr "Descripción de la unidad"
-
-#: plugins/personal/generic/generic.tpl:281
-msgid "Subject area"
-msgstr "Adjunto al area"
-
-#: plugins/personal/generic/generic.tpl:289
-msgid "Functional title"
-msgstr "Título Funcional"
-
-#: plugins/personal/generic/generic.tpl:296
-msgid "Role"
-msgstr "Papel desempeñado"
-
-#: plugins/personal/generic/generic.tpl:308
-msgid "Person locality"
-msgstr "Población de la Persona"
-
-#: plugins/personal/generic/generic.tpl:316
-msgid "Unit"
-msgstr "Unidad"
-
-#: plugins/personal/generic/generic.tpl:323
-msgid "Street"
-msgstr "Calle"
-
-#: plugins/personal/generic/generic.tpl:329
-#: plugins/addons/addressbook/address_edit.tpl:74
-#: plugins/addons/addressbook/address_info.tpl:70
-msgid "Postal code"
-msgstr "Código Postal"
-
-#: plugins/personal/generic/generic.tpl:335
-msgid "House identifier"
-msgstr "Tipo de Vía"
-
-#: plugins/personal/generic/generic.tpl:357
-msgid "Please use the phone tab"
-msgstr "Por favor use la casilla teléfono"
-
-#: plugins/personal/generic/generic.tpl:370
-msgid "Last delivery"
-msgstr "Último envío"
-
-#: plugins/personal/generic/generic.tpl:378
-msgid "Public visible"
-msgstr "Visible Publicamente"
-
-#: plugins/personal/generic/generic_certs.tpl:8
-msgid "Standard certificate"
-msgstr "Certificado estandar"
-
-#: plugins/personal/generic/generic_certs.tpl:17
-#: plugins/personal/generic/generic_certs.tpl:37
-#: plugins/personal/generic/generic_certs.tpl:57
-#: plugins/personal/connectivity/class_kolabAccount.inc:202
-#: plugins/admin/groups/class_groupMail.inc:408
-#: plugins/admin/applications/class_applicationParameters.inc:94
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:213
-#: ihtml/themes/altlinux/islocked.tpl:13 ihtml/themes/default/islocked.tpl:13
-msgid "Remove"
-msgstr "Eliminar"
-
-#: plugins/personal/generic/generic_certs.tpl:28
-msgid "S/MIME certificate"
-msgstr "Certificado S/MIME"
-
-#: plugins/personal/generic/generic_certs.tpl:48
-msgid "PKCS12 certificate"
-msgstr "Certificado PKCS12"
-
-#: plugins/personal/generic/generic_certs.tpl:65
-msgid "Certificate serial number"
-msgstr "Numero de serie del certificado"
 
 #: plugins/personal/generic/class_user.inc:225
 msgid "female"
@@ -1923,6 +1655,276 @@ msgstr ""
 msgid "Could not open specified certificate!"
 msgstr "No puedo seleccionar la base de datos."
 
+#: plugins/personal/generic/password.tpl:2
+msgid ""
+"You have changed the method your password is stored in the ldap database. "
+"For that reason you've to enter your password at this point again. GOsa will "
+"then encode it with the selected method."
+msgstr ""
+"Ha cambiado el método en que su clave es guardada en la base de datos LDAP. "
+"Por esa razón tiene que volver a reintroducir su contraseña de nuevo. Gosa "
+"codificara esta con el nuevo método seleccionado."
+
+#: plugins/personal/generic/generic.tpl:6
+msgid "Personal information"
+msgstr "Información personal"
+
+#: plugins/personal/generic/generic.tpl:15
+#: plugins/personal/generic/generic_picture.tpl:6
+msgid "Personal picture"
+msgstr "Foto Personal"
+
+#: plugins/personal/generic/generic.tpl:17
+msgid "Change picture"
+msgstr "Cambiar foto"
+
+#: plugins/personal/generic/generic.tpl:24
+#: plugins/addons/addressbook/contents.tpl:14
+#: plugins/addons/addressbook/address_edit.tpl:20
+#: plugins/addons/addressbook/address_info.tpl:16
+#: plugins/addons/addressbook/class_addressbook.inc:502
+#: plugins/admin/users/template.tpl:19 plugins/gofon/macro/parameter.tpl:5
+msgid "Name"
+msgstr "Nombre"
+
+#: plugins/personal/generic/generic.tpl:30
+#: plugins/addons/addressbook/address_edit.tpl:20
+#: plugins/addons/addressbook/class_addressbook.inc:502
+#: plugins/admin/users/template.tpl:23
+msgid "Given name"
+msgstr "Nombre"
+
+#: plugins/personal/generic/generic.tpl:34 plugins/admin/users/template.tpl:28
+msgid "Login"
+msgstr "Inicio"
+
+#: plugins/personal/generic/generic.tpl:42
+#: plugins/addons/addressbook/address_edit.tpl:26
+#: plugins/addons/addressbook/address_info.tpl:22
+msgid "Personal title"
+msgstr "Título Personal"
+
+#: plugins/personal/generic/generic.tpl:50
+msgid "Academic title"
+msgstr "Títulos academicos"
+
+#: plugins/personal/generic/generic.tpl:58
+msgid "Date of birth"
+msgstr "Fecha de nacimiento"
+
+#: plugins/personal/generic/generic.tpl:75
+#: ihtml/themes/altlinux/sizelimit.tpl:14
+#: ihtml/themes/default/sizelimit.tpl:14
+msgid "Set"
+msgstr "por debajo"
+
+#: plugins/personal/generic/generic.tpl:81
+msgid "Sex"
+msgstr "Sexo"
+
+#: plugins/personal/generic/generic.tpl:92
+#: plugins/gofax/blocklists/generic.tpl:14 plugins/admin/groups/generic.tpl:21
+#: plugins/admin/applications/generic.tpl:33
+#: plugins/admin/departments/generic.tpl:27
+#: plugins/admin/systems/server.tpl:13 plugins/admin/systems/phone.tpl:13
+#: plugins/admin/systems/terminal.tpl:18 plugins/admin/systems/printer.tpl:21
+#: plugins/admin/systems/workstation.tpl:18
+#: plugins/admin/systems/wingeneric.tpl:13
+#: plugins/admin/systems/component.tpl:13 plugins/admin/ogroups/generic.tpl:21
+#: plugins/gofon/macro/generic.tpl:20
+msgid "Base"
+msgstr "Base"
+
+#: plugins/personal/generic/generic.tpl:96
+msgid "Choose subtree to place user in"
+msgstr "Elija el subárbol donde colocar el usuario"
+
+#: plugins/personal/generic/generic.tpl:111
+#: plugins/personal/generic/generic.tpl:255
+#: plugins/addons/addressbook/address_edit.tpl:37
+#: plugins/addons/addressbook/address_edit.tpl:86
+#: plugins/addons/addressbook/address_info.tpl:33
+#: plugins/addons/addressbook/address_info.tpl:82
+#: plugins/admin/departments/generic.tpl:54
+msgid "Address"
+msgstr "Dirección"
+
+#: plugins/personal/generic/generic.tpl:115
+msgid "Private phone"
+msgstr "Numero privado"
+
+#: plugins/personal/generic/generic.tpl:119
+msgid "Homepage"
+msgstr "Página Web Principal"
+
+#: plugins/personal/generic/generic.tpl:128
+msgid "Password storage"
+msgstr "Carpeta de almacenamiento de Contraseñas"
+
+#: plugins/personal/generic/generic.tpl:138
+#: plugins/personal/generic/generic_certs.tpl:3
+msgid "Certificates"
+msgstr "Certificados"
+
+#: plugins/personal/generic/generic.tpl:140
+msgid "Edit certificates"
+msgstr "Editar certificados"
+
+#: plugins/personal/generic/generic.tpl:144
+msgid "Kerberos"
+msgstr "Kerberos"
+
+#: plugins/personal/generic/generic.tpl:145
+msgid "Edit properties"
+msgstr "Editar propiedades"
+
+#: plugins/personal/generic/generic.tpl:161
+msgid "Organizational information"
+msgstr "Información organizativa"
+
+#: plugins/personal/generic/generic.tpl:173
+msgid "Organization"
+msgstr "Organización"
+
+#: plugins/personal/generic/generic.tpl:177
+#: plugins/addons/addressbook/address_edit.tpl:68
+#: plugins/addons/addressbook/address_info.tpl:64
+#: plugins/generic/references/class_reference.inc:38
+msgid "Department"
+msgstr "Departamento"
+
+#: plugins/personal/generic/generic.tpl:181
+msgid "Department No."
+msgstr "Departamento No."
+
+#: plugins/personal/generic/generic.tpl:187
+msgid "Employee No."
+msgstr "Empleado No."
+
+#: plugins/personal/generic/generic.tpl:193
+msgid "Employee type"
+msgstr "Tipo de empleado"
+
+#: plugins/personal/generic/generic.tpl:209
+#: plugins/personal/generic/generic.tpl:348
+msgid "Room No."
+msgstr "Habitación No."
+
+#: plugins/personal/generic/generic.tpl:221
+#: plugins/addons/addressbook/contents.tpl:15
+#: plugins/addons/addressbook/address_edit.tpl:44
+#: plugins/addons/addressbook/address_info.tpl:40
+msgid "Mobile"
+msgstr "Teléfono Móvil"
+
+#: plugins/personal/generic/generic.tpl:225
+#: plugins/addons/addressbook/address_edit.tpl:95
+#: plugins/addons/addressbook/address_info.tpl:91
+msgid "Pager"
+msgstr "Dispositivo de aviso"
+
+#: plugins/personal/generic/generic.tpl:247
+#: plugins/admin/departments/generic.tpl:42
+#: plugins/admin/departments/generic.tpl:50
+#: plugins/admin/systems/printer.tpl:14
+msgid "Location"
+msgstr "Localización"
+
+#: plugins/personal/generic/generic.tpl:251
+#: plugins/admin/departments/generic.tpl:46
+msgid "State"
+msgstr "Estado"
+
+#: plugins/personal/generic/generic.tpl:269
+msgid "Vocation"
+msgstr "Intereses"
+
+#: plugins/personal/generic/generic.tpl:273
+msgid "Unit description"
+msgstr "Descripción de la unidad"
+
+#: plugins/personal/generic/generic.tpl:281
+msgid "Subject area"
+msgstr "Adjunto al area"
+
+#: plugins/personal/generic/generic.tpl:289
+msgid "Functional title"
+msgstr "Título Funcional"
+
+#: plugins/personal/generic/generic.tpl:296
+msgid "Role"
+msgstr "Papel desempeñado"
+
+#: plugins/personal/generic/generic.tpl:308
+msgid "Person locality"
+msgstr "Población de la Persona"
+
+#: plugins/personal/generic/generic.tpl:316
+msgid "Unit"
+msgstr "Unidad"
+
+#: plugins/personal/generic/generic.tpl:323
+msgid "Street"
+msgstr "Calle"
+
+#: plugins/personal/generic/generic.tpl:329
+#: plugins/addons/addressbook/address_edit.tpl:74
+#: plugins/addons/addressbook/address_info.tpl:70
+msgid "Postal code"
+msgstr "Código Postal"
+
+#: plugins/personal/generic/generic.tpl:335
+msgid "House identifier"
+msgstr "Tipo de Vía"
+
+#: plugins/personal/generic/generic.tpl:357
+msgid "Please use the phone tab"
+msgstr "Por favor use la casilla teléfono"
+
+#: plugins/personal/generic/generic.tpl:370
+msgid "Last delivery"
+msgstr "Último envío"
+
+#: plugins/personal/generic/generic.tpl:378
+msgid "Public visible"
+msgstr "Visible Publicamente"
+
+#: plugins/personal/generic/generic_picture.tpl:23
+msgid "Remove picture"
+msgstr "Eliminar foto"
+
+#: plugins/personal/generic/generic_picture.tpl:29
+#: plugins/addons/addressbook/address_edit.tpl:107
+msgid "Save"
+msgstr "Guardar"
+
+#: plugins/personal/generic/generic_certs.tpl:8
+msgid "Standard certificate"
+msgstr "Certificado estandar"
+
+#: plugins/personal/generic/generic_certs.tpl:17
+#: plugins/personal/generic/generic_certs.tpl:37
+#: plugins/personal/generic/generic_certs.tpl:57
+#: plugins/personal/connectivity/class_kolabAccount.inc:202
+#: plugins/admin/groups/class_groupMail.inc:408
+#: plugins/admin/applications/class_applicationParameters.inc:94
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:377
+#: ihtml/themes/altlinux/islocked.tpl:13 ihtml/themes/default/islocked.tpl:13
+msgid "Remove"
+msgstr "Eliminar"
+
+#: plugins/personal/generic/generic_certs.tpl:28
+msgid "S/MIME certificate"
+msgstr "Certificado S/MIME"
+
+#: plugins/personal/generic/generic_certs.tpl:48
+msgid "PKCS12 certificate"
+msgstr "Certificado PKCS12"
+
+#: plugins/personal/generic/generic_certs.tpl:65
+msgid "Certificate serial number"
+msgstr "Numero de serie del certificado"
+
 #: plugins/personal/generic/main.inc:107
 msgid "You are not allowed to set your password!"
 msgstr "¡No tiene permisos para cambiar su contraseña!"
@@ -1930,6 +1932,31 @@ msgstr "¡No tiene permisos para cambiar su contraseña!"
 #: plugins/personal/generic/main.inc:187
 msgid "Generic user information"
 msgstr "Información genérica del usuario"
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:6
+#: plugins/generic/references/class_reference.inc:34
+msgid "FTP"
+msgstr "FTP"
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:125
+msgid "Value specified as 'Upload bandwidth' is not valid."
+msgstr "El valor especificado en 'Ancho de Banda ascendente' no es válido"
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:128
+msgid "Value specified as 'Download bandwidth' is not valid."
+msgstr "El valor especificado en 'Ancho de Banda descendente' no es válido"
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:131
+msgid "Value specified as 'Files' is not valid."
+msgstr "El valor especificado como 'Archivos' no es válido"
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:134
+msgid "Value specified as 'Size' is not valid."
+msgstr "El valor especificado como 'Tamaño' no es válido"
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:137
+msgid "Value specified as 'Ratio' is not valid."
+msgstr "El valor especificado como 'relación' no es válido"
 
 #: plugins/personal/connectivity/class_phpgwAccount.inc:5
 msgid "PHPGroupware"
@@ -2023,75 +2050,9 @@ msgstr ""
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:6
-#: plugins/generic/references/class_reference.inc:34
-msgid "FTP"
-msgstr "FTP"
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:125
-msgid "Value specified as 'Upload bandwidth' is not valid."
-msgstr "El valor especificado en 'Ancho de Banda ascendente' no es válido"
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:128
-msgid "Value specified as 'Download bandwidth' is not valid."
-msgstr "El valor especificado en 'Ancho de Banda descendente' no es válido"
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:131
-msgid "Value specified as 'Files' is not valid."
-msgstr "El valor especificado como 'Archivos' no es válido"
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:134
-msgid "Value specified as 'Size' is not valid."
-msgstr "El valor especificado como 'Tamaño' no es válido"
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:137
-msgid "Value specified as 'Ratio' is not valid."
-msgstr "El valor especificado como 'relación' no es válido"
-
 #: plugins/personal/connectivity/phpgw.tpl:1
 msgid "PHPGroupware account"
 msgstr "Cuenta PHPGroupware"
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:24
-msgid "Open-Xchange"
-msgstr "Open-Xchange"
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:610
-#, fuzzy
-msgid ""
-"This account has <b>OpenXchange</b> features disabled. Posix features are "
-"needed for openXchange accounts, enable them first."
-msgstr ""
-"Esta cuenta tiene sus características samba desactivadas, las "
-"características Posix son necesarias para las cuentas samba, activelas "
-"primero."
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:614
-#, fuzzy
-msgid ""
-"This account has <b>OpenXchange</b> features disabled. Mail features are "
-"needed for openXchange accounts, enable them first."
-msgstr ""
-"Esta cuenta tiene sus características samba desactivadas, las "
-"características Posix son necesarias para las cuentas samba, activelas "
-"primero."
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:696
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:774
-msgid "Couldn't Connect To Postgresql Database"
-msgstr "No puedo conectar al servidor de base de datos postgresql."
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:700
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:778
-msgid "Needed Parameters to openexchange connectivity plugin failed!"
-msgstr ""
-"¡Los parámetros necesarios para extensión de conectividad open-xchange no "
-"son validos!"
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:704
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:782
-msgid "PHP4 module for Postgresql Database Failed!"
-msgstr "¡El módulo de PHP4 para la base de datos Postgresql falla!"
 
 #: plugins/personal/connectivity/kolab.tpl:1
 msgid "Kolab account"
@@ -2142,6 +2103,47 @@ msgstr "Política de invitación"
 #: plugins/personal/connectivity/webdav.tpl:1
 msgid "WebDAV account"
 msgstr "Cuenta WebDAV"
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:24
+msgid "Open-Xchange"
+msgstr "Open-Xchange"
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:610
+#, fuzzy
+msgid ""
+"This account has <b>OpenXchange</b> features disabled. Posix features are "
+"needed for openXchange accounts, enable them first."
+msgstr ""
+"Esta cuenta tiene sus características samba desactivadas, las "
+"características Posix son necesarias para las cuentas samba, activelas "
+"primero."
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:614
+#, fuzzy
+msgid ""
+"This account has <b>OpenXchange</b> features disabled. Mail features are "
+"needed for openXchange accounts, enable them first."
+msgstr ""
+"Esta cuenta tiene sus características samba desactivadas, las "
+"características Posix son necesarias para las cuentas samba, activelas "
+"primero."
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:696
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:774
+msgid "Couldn't Connect To Postgresql Database"
+msgstr "No puedo conectar al servidor de base de datos postgresql."
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:700
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:778
+msgid "Needed Parameters to openexchange connectivity plugin failed!"
+msgstr ""
+"¡Los parámetros necesarios para extensión de conectividad open-xchange no "
+"son validos!"
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:704
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:782
+msgid "PHP4 module for Postgresql Database Failed!"
+msgstr "¡El módulo de PHP4 para la base de datos Postgresql falla!"
 
 #: plugins/personal/connectivity/pureftpd.tpl:1
 msgid "FTP account"
@@ -2266,6 +2268,63 @@ msgstr ""
 msgid "Numerical value for Quota Setting is not valid."
 msgstr "El valor de 'Tamaño de Cola' no es valido."
 
+#: plugins/gofax/blocklists/generic.tpl:8
+msgid "List name"
+msgstr "Nombre de la lista"
+
+#: plugins/gofax/blocklists/generic.tpl:10
+msgid "Name of blocklist"
+msgstr "Nombre de la lista de bloqueos"
+
+#: plugins/gofax/blocklists/generic.tpl:16
+msgid "Select subtree to place blocklist in"
+msgstr "Seleccione un subárbol para colocar la lista de bloqueos"
+
+#: plugins/gofax/blocklists/generic.tpl:32
+#: plugins/admin/systems/service.tpl:42 plugins/admin/systems/service.tpl:120
+#: include/functions.inc:1608
+msgid "Type"
+msgstr "Tipo"
+
+#: plugins/gofax/blocklists/generic.tpl:34
+msgid "Select wether to filter incoming or outgoing calls"
+msgstr "Seleccione la manera de filtrar llamadas entrantes o salientes"
+
+#: plugins/gofax/blocklists/generic.tpl:41 plugins/admin/groups/generic.tpl:13
+#: plugins/admin/applications/generic.tpl:24
+#: plugins/admin/departments/generic.tpl:12
+#: plugins/admin/systems/server.tpl:24 plugins/admin/systems/phone.tpl:24
+#: plugins/admin/systems/printer.tpl:10
+#: plugins/admin/systems/wingeneric.tpl:24
+#: plugins/admin/systems/component.tpl:24 plugins/admin/ogroups/generic.tpl:13
+#: plugins/gofon/macro/generic.tpl:35
+#: plugins/generic/references/contents.tpl:11
+msgid "Description"
+msgstr "Descripción"
+
+#: plugins/gofax/blocklists/generic.tpl:43
+msgid "Descriptive text for this blocklist"
+msgstr "Descripción de esta lista de bloqueos"
+
+#: plugins/gofax/blocklists/generic.tpl:56
+msgid "Blocked numbers"
+msgstr "Números bloqueados"
+
+#: plugins/gofax/blocklists/generic.tpl:67
+#: plugins/gofax/blocklists/headpage.tpl:25
+#: plugins/addons/addressbook/contents.tpl:33
+#: plugins/admin/groups/headpage.tpl:26 plugins/admin/users/headpage.tpl:27
+#: plugins/admin/applications/headpage.tpl:25
+#: plugins/admin/departments/headpage.tpl:25
+#: plugins/admin/systems/headpage.tpl:25 plugins/admin/ogroups/headpage.tpl:26
+#: plugins/gofon/macro/headpage.tpl:25
+msgid "Information"
+msgstr "Información"
+
+#: plugins/gofax/blocklists/generic.tpl:69
+msgid "Numbers can also contain wild cards."
+msgstr "Los números pueden contener también comodínes"
+
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:5
 msgid "FAX Blocklists"
 msgstr "Lista de bloqueos de FAX"
@@ -2311,63 +2370,6 @@ msgstr "El nombre especificado ya esta siendo usado"
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:372
 msgid "No permission to create a blocklist on this base."
 msgstr "No tiene permisos para crear una lista de bloqueos en esta base"
-
-#: plugins/gofax/blocklists/generic.tpl:8
-msgid "List name"
-msgstr "Nombre de la lista"
-
-#: plugins/gofax/blocklists/generic.tpl:10
-msgid "Name of blocklist"
-msgstr "Nombre de la lista de bloqueos"
-
-#: plugins/gofax/blocklists/generic.tpl:16
-msgid "Select subtree to place blocklist in"
-msgstr "Seleccione un subárbol para colocar la lista de bloqueos"
-
-#: plugins/gofax/blocklists/generic.tpl:32
-#: plugins/admin/systems/service.tpl:42 plugins/admin/systems/service.tpl:120
-#: include/functions.inc:1608
-msgid "Type"
-msgstr "Tipo"
-
-#: plugins/gofax/blocklists/generic.tpl:34
-msgid "Select wether to filter incoming or outgoing calls"
-msgstr "Seleccione la manera de filtrar llamadas entrantes o salientes"
-
-#: plugins/gofax/blocklists/generic.tpl:41 plugins/admin/groups/generic.tpl:13
-#: plugins/admin/applications/generic.tpl:24
-#: plugins/admin/departments/generic.tpl:12
-#: plugins/admin/systems/server.tpl:24 plugins/admin/systems/phone.tpl:24
-#: plugins/admin/systems/printer.tpl:10
-#: plugins/admin/systems/wingeneric.tpl:24
-#: plugins/admin/systems/component.tpl:24 plugins/admin/ogroups/generic.tpl:13
-#: plugins/gofon/macro/generic.tpl:17
-#: plugins/generic/references/contents.tpl:11
-msgid "Description"
-msgstr "Descripción"
-
-#: plugins/gofax/blocklists/generic.tpl:43
-msgid "Descriptive text for this blocklist"
-msgstr "Descripción de esta lista de bloqueos"
-
-#: plugins/gofax/blocklists/generic.tpl:56
-msgid "Blocked numbers"
-msgstr "Números bloqueados"
-
-#: plugins/gofax/blocklists/generic.tpl:67
-#: plugins/gofax/blocklists/headpage.tpl:25
-#: plugins/addons/addressbook/contents.tpl:33
-#: plugins/admin/groups/headpage.tpl:26 plugins/admin/users/headpage.tpl:27
-#: plugins/admin/applications/headpage.tpl:25
-#: plugins/admin/departments/headpage.tpl:25
-#: plugins/admin/systems/headpage.tpl:25 plugins/admin/ogroups/headpage.tpl:26
-#: plugins/gofon/macro/headpage.tpl:25
-msgid "Information"
-msgstr "Información"
-
-#: plugins/gofax/blocklists/generic.tpl:69
-msgid "Numbers can also contain wild cards."
-msgstr "Los números pueden contener también comodínes"
 
 #: plugins/gofax/blocklists/remove.tpl:2
 #: plugins/addons/addressbook/remove.tpl:2 plugins/admin/groups/remove.tpl:2
@@ -2573,8 +2575,8 @@ msgid "List of predefined blocklists"
 msgstr "Listas de listas de bloqueos predefinidas"
 
 #: plugins/gofax/faxaccount/lists.tpl:37
-#: plugins/admin/groups/mail_admins.tpl:37
-#: plugins/admin/groups/application_options.tpl:8 include/functions.inc:1195
+#: plugins/admin/groups/application_options.tpl:8
+#: plugins/admin/groups/mail_admins.tpl:37 include/functions.inc:1195
 msgid "Apply"
 msgstr "Aplicar"
 
@@ -2687,40 +2689,6 @@ msgstr "Tiempo de envio"
 msgid "# pages"
 msgstr "# páginas"
 
-#: plugins/gofax/reports/class_faxreport.inc:6
-msgid "FAX Reports"
-msgstr "Informes de FAX"
-
-#: plugins/gofax/reports/class_faxreport.inc:97
-#: plugins/gofax/reports/class_faxreport.inc:204
-msgid "Can't connect to fax database, no reports can be shown!"
-msgstr ""
-"No puedo conectar a la de base de datos de fax, ¡no se pueden mostrar los "
-"informes!"
-
-#: plugins/gofax/reports/class_faxreport.inc:101
-#: plugins/gofax/reports/class_faxreport.inc:208
-msgid "Can't select fax database for report generation!"
-msgstr ""
-"¡No puedo seleccionar la base de datos de fax para la generación de informes!"
-
-#: plugins/gofax/reports/class_faxreport.inc:109
-#: plugins/gofax/reports/class_faxreport.inc:216
-msgid "Query for fax database failed!"
-msgstr "¡La consulta a la base de datos de fax ha fallado!"
-
-#: plugins/gofax/reports/class_faxreport.inc:117
-msgid "You have no permission to retrieve informations about this fax id!"
-msgstr ""
-"¡No tiene permisos para recuperar información sobre el identificador (ID) "
-"del fax!"
-
-#: plugins/gofax/reports/class_faxreport.inc:137
-#: plugins/gofax/reports/class_faxreport.inc:224
-#: plugins/gofon/reports/class_fonreport.inc:161
-msgid "Y-M-D"
-msgstr "Y-M-D"
-
 #: plugins/gofax/reports/contents.tpl:2 plugins/addons/logview/contents.tpl:2
 #: plugins/gofon/reports/contents.tpl:2
 msgid "Filter"
@@ -2775,66 +2743,49 @@ msgstr "Receptor"
 msgid "Search returned no results..."
 msgstr "La busqueda no ha encontrado resultados"
 
+#: plugins/gofax/reports/class_faxreport.inc:6
+msgid "FAX Reports"
+msgstr "Informes de FAX"
+
+#: plugins/gofax/reports/class_faxreport.inc:97
+#: plugins/gofax/reports/class_faxreport.inc:204
+msgid "Can't connect to fax database, no reports can be shown!"
+msgstr ""
+"No puedo conectar a la de base de datos de fax, ¡no se pueden mostrar los "
+"informes!"
+
+#: plugins/gofax/reports/class_faxreport.inc:101
+#: plugins/gofax/reports/class_faxreport.inc:208
+msgid "Can't select fax database for report generation!"
+msgstr ""
+"¡No puedo seleccionar la base de datos de fax para la generación de informes!"
+
+#: plugins/gofax/reports/class_faxreport.inc:109
+#: plugins/gofax/reports/class_faxreport.inc:216
+msgid "Query for fax database failed!"
+msgstr "¡La consulta a la base de datos de fax ha fallado!"
+
+#: plugins/gofax/reports/class_faxreport.inc:117
+msgid "You have no permission to retrieve informations about this fax id!"
+msgstr ""
+"¡No tiene permisos para recuperar información sobre el identificador (ID) "
+"del fax!"
+
+#: plugins/gofax/reports/class_faxreport.inc:137
+#: plugins/gofax/reports/class_faxreport.inc:224
+#: plugins/gofon/reports/class_fonreport.inc:161
+msgid "Y-M-D"
+msgstr "Y-M-D"
+
 #: plugins/gofax/reports/main.inc:5
 msgid "FAX reports"
 msgstr "Reportes de FAX"
 
-#: plugins/addons/addressbook/dial.tpl:3
-msgid "Dial connection..."
-msgstr "Marcando conexión"
-
-#: plugins/addons/addressbook/dial.tpl:10
-#: plugins/addons/addressbook/class_addressbook.inc:359
-#: plugins/addons/addressbook/class_addressbook.inc:366
-#: plugins/addons/addressbook/class_addressbook.inc:370
-#: plugins/addons/addressbook/class_addressbook.inc:452
-msgid "Dial"
-msgstr "Llamar"
-
-#: plugins/addons/addressbook/address_edit.tpl:4
-msgid "Choose the department to store entry in"
-msgstr "Elija un departamento para guardar la entrada"
-
-#: plugins/addons/addressbook/address_edit.tpl:16
-#: plugins/addons/addressbook/address_info.tpl:12
-msgid "Personal"
-msgstr "Personal"
-
-#: plugins/addons/addressbook/address_edit.tpl:23
-#: plugins/addons/addressbook/address_info.tpl:19
-msgid "Initials"
-msgstr "Iniciales"
-
-#: plugins/addons/addressbook/address_edit.tpl:33
 #: plugins/addons/addressbook/contents.tpl:15
+#: plugins/addons/addressbook/address_edit.tpl:33
 #: plugins/addons/addressbook/address_info.tpl:29
 msgid "Private"
 msgstr "Privado"
-
-#: plugins/addons/addressbook/address_edit.tpl:47
-#: plugins/addons/addressbook/address_info.tpl:43
-msgid "Email"
-msgstr "Correo Electrónico"
-
-#: plugins/addons/addressbook/address_edit.tpl:57
-#: plugins/addons/addressbook/address_info.tpl:53
-msgid "Organizational"
-msgstr "De organización"
-
-#: plugins/addons/addressbook/address_edit.tpl:65
-#: plugins/addons/addressbook/address_info.tpl:61
-msgid "Company"
-msgstr "Compañia"
-
-#: plugins/addons/addressbook/address_edit.tpl:71
-#: plugins/addons/addressbook/address_info.tpl:67
-msgid "City"
-msgstr "Ciudad"
-
-#: plugins/addons/addressbook/address_edit.tpl:77
-#: plugins/addons/addressbook/address_info.tpl:73
-msgid "Country"
-msgstr "Pais"
 
 #: plugins/addons/addressbook/contents.tpl:15
 msgid "Contact"
@@ -2897,6 +2848,57 @@ msgstr "Encontrar objeto"
 #: plugins/addons/addressbook/contents.tpl:106
 msgid "Choose the object that will be searched in"
 msgstr "Elegir el objeto que sera buscado"
+
+#: plugins/addons/addressbook/dial.tpl:3
+msgid "Dial connection..."
+msgstr "Marcando conexión"
+
+#: plugins/addons/addressbook/dial.tpl:10
+#: plugins/addons/addressbook/class_addressbook.inc:359
+#: plugins/addons/addressbook/class_addressbook.inc:366
+#: plugins/addons/addressbook/class_addressbook.inc:370
+#: plugins/addons/addressbook/class_addressbook.inc:452
+msgid "Dial"
+msgstr "Llamar"
+
+#: plugins/addons/addressbook/address_edit.tpl:4
+msgid "Choose the department to store entry in"
+msgstr "Elija un departamento para guardar la entrada"
+
+#: plugins/addons/addressbook/address_edit.tpl:16
+#: plugins/addons/addressbook/address_info.tpl:12
+msgid "Personal"
+msgstr "Personal"
+
+#: plugins/addons/addressbook/address_edit.tpl:23
+#: plugins/addons/addressbook/address_info.tpl:19
+msgid "Initials"
+msgstr "Iniciales"
+
+#: plugins/addons/addressbook/address_edit.tpl:47
+#: plugins/addons/addressbook/address_info.tpl:43
+msgid "Email"
+msgstr "Correo Electrónico"
+
+#: plugins/addons/addressbook/address_edit.tpl:57
+#: plugins/addons/addressbook/address_info.tpl:53
+msgid "Organizational"
+msgstr "De organización"
+
+#: plugins/addons/addressbook/address_edit.tpl:65
+#: plugins/addons/addressbook/address_info.tpl:61
+msgid "Company"
+msgstr "Compañia"
+
+#: plugins/addons/addressbook/address_edit.tpl:71
+#: plugins/addons/addressbook/address_info.tpl:67
+msgid "City"
+msgstr "Ciudad"
+
+#: plugins/addons/addressbook/address_edit.tpl:77
+#: plugins/addons/addressbook/address_info.tpl:73
+msgid "Country"
+msgstr "Pais"
 
 #: plugins/addons/addressbook/remove.tpl:7
 msgid ""
@@ -3284,45 +3286,6 @@ msgstr "Mensaje"
 msgid "System log view"
 msgstr "Ver registro del sistema"
 
-#: plugins/admin/groups/mail.tpl:11
-msgid "Primary mail address for this shared folder"
-msgstr "Dirección de correo electrónica primaria para esta carpeta compartida"
-
-#: plugins/admin/groups/mail.tpl:16
-msgid "Select mail server to place user on"
-msgstr "Seleccione el servidor de correo del usuario"
-
-#: plugins/admin/groups/mail.tpl:66
-msgid "IMAP shared folders"
-msgstr "Carpetas compartidas IMAP"
-
-#: plugins/admin/groups/mail.tpl:70
-msgid "Default permission"
-msgstr "Permisos por defecto"
-
-#: plugins/admin/groups/mail.tpl:79
-msgid "Member permission"
-msgstr "Miembro con Permisos"
-
-#: plugins/admin/groups/mail.tpl:94
-msgid "Forward messages to non group members"
-msgstr "Reenviar mensajes a miembros que no sean del grupo"
-
-#: plugins/admin/groups/class_groupManagement.inc:25
-#: plugins/admin/ogroups/class_ogroupManagement.inc:42
-msgid "Groups"
-msgstr "Grupos"
-
-#: plugins/admin/groups/class_groupManagement.inc:204
-#, php-format
-msgid "You're about to delete the group '%s'."
-msgstr "Está a punto de borrar el grupo '%s'."
-
-#: plugins/admin/groups/class_groupManagement.inc:210
-#: plugins/admin/groups/class_groupManagement.inc:236
-msgid "You are not allowed to delete this group!"
-msgstr "¡No le está permitido eliminar este grupo!"
-
 #: plugins/admin/groups/class_groupGeneric.inc:109
 msgid "Can't find this groups SID in LDAP or in your configuration file!"
 msgstr ""
@@ -3372,17 +3335,29 @@ msgstr ""
 msgid "Value specified as 'Name' is already used."
 msgstr "El valor especificado como 'Nombre' esta siendo utilizado."
 
-#: plugins/admin/groups/remove.tpl:7
-msgid ""
-"This may be a primary user group. Please double check if you really want to "
-"do this since there is no way for GOsa to get your data back."
-msgstr ""
-"Este puede ser un grupo primario. Por favor pinche dos veces si realmente "
-"quiere hacerlo, dado que GOsa no tiene manera de recuperar esta información."
+#: plugins/admin/groups/mail.tpl:11
+msgid "Primary mail address for this shared folder"
+msgstr "Dirección de correo electrónica primaria para esta carpeta compartida"
 
-#: plugins/admin/groups/main.inc:39 plugins/admin/groups/main.inc:43
-msgid "Group administration"
-msgstr "Administración de grupos"
+#: plugins/admin/groups/mail.tpl:16
+msgid "Select mail server to place user on"
+msgstr "Seleccione el servidor de correo del usuario"
+
+#: plugins/admin/groups/mail.tpl:66
+msgid "IMAP shared folders"
+msgstr "Carpetas compartidas IMAP"
+
+#: plugins/admin/groups/mail.tpl:70
+msgid "Default permission"
+msgstr "Permisos por defecto"
+
+#: plugins/admin/groups/mail.tpl:79
+msgid "Member permission"
+msgstr "Miembro con Permisos"
+
+#: plugins/admin/groups/mail.tpl:94
+msgid "Forward messages to non group members"
+msgstr "Reenviar mensajes a miembros que no sean del grupo"
 
 #: plugins/admin/groups/headpage.tpl:6 plugins/admin/ogroups/headpage.tpl:6
 msgid "List of groups"
@@ -3414,6 +3389,37 @@ msgstr "Desciende a todo el árbol LDAP cuando se busca"
 #: plugins/admin/groups/headpage.tpl:60 plugins/admin/users/headpage.tpl:62
 msgid "Search in subtrees"
 msgstr "Buscar en el subárbol"
+
+#: plugins/admin/groups/main.inc:39 plugins/admin/groups/main.inc:43
+msgid "Group administration"
+msgstr "Administración de grupos"
+
+#: plugins/admin/groups/class_groupManagement.inc:25
+#: plugins/admin/ogroups/class_ogroupManagement.inc:42
+msgid "Groups"
+msgstr "Grupos"
+
+#: plugins/admin/groups/class_groupManagement.inc:204
+#, php-format
+msgid "You're about to delete the group '%s'."
+msgstr "Está a punto de borrar el grupo '%s'."
+
+#: plugins/admin/groups/class_groupManagement.inc:210
+#: plugins/admin/groups/class_groupManagement.inc:236
+msgid "You are not allowed to delete this group!"
+msgstr "¡No le está permitido eliminar este grupo!"
+
+#: plugins/admin/groups/remove.tpl:7
+msgid ""
+"This may be a primary user group. Please double check if you really want to "
+"do this since there is no way for GOsa to get your data back."
+msgstr ""
+"Este puede ser un grupo primario. Por favor pinche dos veces si realmente "
+"quiere hacerlo, dado que GOsa no tiene manera de recuperar esta información."
+
+#: plugins/admin/groups/application_options.tpl:1
+msgid "Application options"
+msgstr "Opciones de aplicaciones"
 
 #: plugins/admin/groups/class_groupMail.inc:153
 msgid "read"
@@ -3554,10 +3560,6 @@ msgstr "Miembros del grupo"
 msgid "Folder administrators"
 msgstr "Administradores de Carpetas"
 
-#: plugins/admin/groups/application_options.tpl:1
-msgid "Application options"
-msgstr "Opciones de aplicaciones"
-
 #: plugins/admin/groups/class_groupApplication.inc:61
 msgid "This 'dn' is no appgroup."
 msgstr "Esta'dn' no es un grupo de aplicaciones."
@@ -3606,6 +3608,40 @@ msgstr ""
 "cambios tomarán efecto inmediatamente. Por favor, recuerde la nueva "
 "contraseña, el usuario no podrá autenticarse sin ella."
 
+#: plugins/admin/users/template.tpl:2
+msgid "Creating a new user using templates"
+msgstr "Crear un nuevo usuario usando plantillas"
+
+#: plugins/admin/users/template.tpl:6
+msgid ""
+"Creating a new user can be assisted by using templates. Many database "
+"records will be filled automatically. Choose <b>none</b> to skip the usage "
+"of templates."
+msgstr ""
+"Crear un nuevo usuario puede ser asistido a través de plantillas. Algunos "
+"valores en la base de datos serán rellenado automáticamente. Elegir "
+"<b>ninguno</b> para saltarse el uso de plantillas."
+
+#: plugins/admin/users/template.tpl:11
+#: plugins/admin/users/class_userManagement.inc:618
+msgid "Template"
+msgstr "Plantilla"
+
+#: plugins/admin/users/template.tpl:44
+#: ihtml/themes/altlinux/setup_introduction.tpl:12
+#: ihtml/themes/altlinux/setup_step2.tpl:13
+#: ihtml/themes/altlinux/setup_step3.tpl:18
+#: ihtml/themes/default/setup_introduction.tpl:12
+#: ihtml/themes/default/setup_useradmin.tpl:41
+#: ihtml/themes/default/setup_step2.tpl:13
+#: ihtml/themes/default/setup_step3.tpl:18
+msgid "Continue"
+msgstr "Continuar"
+
+#: plugins/admin/users/main.inc:40 plugins/admin/users/main.inc:46
+msgid "User administration"
+msgstr "Administración de Usuarios"
+
 #: plugins/admin/users/class_userManagement.inc:25
 msgid "Users"
 msgstr "Usuarios"
@@ -3627,42 +3663,13 @@ msgstr "No le es permitido borrar este usuario"
 
 #: plugins/admin/users/class_userManagement.inc:368
 #: plugins/admin/ogroups/class_ogroup.inc:203
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:100
 msgid "none"
 msgstr "ninguno"
 
 #: plugins/admin/users/class_userManagement.inc:437
 msgid "A person with the choosen name is already used in this tree."
 msgstr "Una persona con el nombre elegido ya existe en el árbol"
-
-#: plugins/admin/users/class_userManagement.inc:618
-#: plugins/admin/users/template.tpl:11
-msgid "Template"
-msgstr "Plantilla"
-
-#: plugins/admin/users/template.tpl:2
-msgid "Creating a new user using templates"
-msgstr "Crear un nuevo usuario usando plantillas"
-
-#: plugins/admin/users/template.tpl:6
-msgid ""
-"Creating a new user can be assisted by using templates. Many database "
-"records will be filled automatically. Choose <b>none</b> to skip the usage "
-"of templates."
-msgstr ""
-"Crear un nuevo usuario puede ser asistido a través de plantillas. Algunos "
-"valores en la base de datos serán rellenado automáticamente. Elegir "
-"<b>ninguno</b> para saltarse el uso de plantillas."
-
-#: plugins/admin/users/template.tpl:44
-#: ihtml/themes/altlinux/setup_introduction.tpl:12
-#: ihtml/themes/altlinux/setup_step2.tpl:13
-#: ihtml/themes/altlinux/setup_step3.tpl:18
-#: ihtml/themes/default/setup_introduction.tpl:12
-#: ihtml/themes/default/setup_useradmin.tpl:41
-#: ihtml/themes/default/setup_step2.tpl:13
-#: ihtml/themes/default/setup_step3.tpl:18
-msgid "Continue"
-msgstr "Continuar"
 
 #: plugins/admin/users/remove.tpl:7
 msgid ""
@@ -3750,46 +3757,6 @@ msgstr "Seleccione para ver los usuarios que tienen configuraciones de proxy"
 msgid "Show proxy users"
 msgstr "Mostrar los usuarios de proxy"
 
-#: plugins/admin/users/main.inc:40 plugins/admin/users/main.inc:46
-msgid "User administration"
-msgstr "Administración de Usuarios"
-
-#: plugins/admin/applications/class_applicationParameters.inc:47
-msgid "Remove options"
-msgstr "Eliminar opciones"
-
-#: plugins/admin/applications/class_applicationParameters.inc:48
-msgid "This application has options. You can disable them by clicking below."
-msgstr "Esta aplicación tiene opciones. Puede desactivarlas pulsando aquí."
-
-#: plugins/admin/applications/class_applicationParameters.inc:50
-msgid "Create options"
-msgstr "Crear opciones"
-
-#: plugins/admin/applications/class_applicationParameters.inc:51
-msgid ""
-"This application has options disabled. You can enable them by clicking below."
-msgstr ""
-"Esta aplicación tiene opciones desactivadas. Puede activarlas pulsando aquí."
-
-#: plugins/admin/applications/class_applicationParameters.inc:87
-msgid "Variable"
-msgstr "Variable"
-
-#: plugins/admin/applications/class_applicationParameters.inc:87
-#: plugins/gofon/macro/parameter.tpl:12
-msgid "Default value"
-msgstr "Valor por defecto"
-
-#: plugins/admin/applications/class_applicationParameters.inc:98
-msgid "Add option"
-msgstr "Añadir opción"
-
-#: plugins/admin/applications/class_applicationParameters.inc:149
-#, php-format
-msgid "Value '%s' specified as option name is not valid."
-msgstr "El valor '%s' especificado como nombre de opción no es valido."
-
 #: plugins/admin/applications/generic.tpl:7
 #: plugins/admin/applications/generic.tpl:8
 msgid "Application name"
@@ -3807,7 +3774,7 @@ msgid "Path and/or binary name of application"
 msgstr "Ruta y nombre del binario de la aplicación"
 
 #: plugins/admin/applications/generic.tpl:18
-#: plugins/gofon/macro/generic.tpl:11
+#: plugins/gofon/macro/generic.tpl:10
 msgid "Display name"
 msgstr "Nombre mostrado"
 
@@ -3817,7 +3784,7 @@ msgstr ""
 "Nombre que sera mostrado de la aplicación(por ejemplo despues de los iconos)."
 
 #: plugins/admin/applications/generic.tpl:35
-#: plugins/gofon/macro/generic.tpl:35
+#: plugins/gofon/macro/generic.tpl:22
 msgid "Choose subtree to place application in"
 msgstr "Elija lugar del árbol para colocar la aplicación"
 
@@ -3848,6 +3815,42 @@ msgstr "Colocar icono en los escritorios de los miembros "
 #: plugins/admin/applications/generic.tpl:70
 msgid "Place entry in members startmenu"
 msgstr "Colocar entrado en los menús de inicio de los miembros"
+
+#: plugins/admin/applications/class_applicationParameters.inc:47
+msgid "Remove options"
+msgstr "Eliminar opciones"
+
+#: plugins/admin/applications/class_applicationParameters.inc:48
+msgid "This application has options. You can disable them by clicking below."
+msgstr "Esta aplicación tiene opciones. Puede desactivarlas pulsando aquí."
+
+#: plugins/admin/applications/class_applicationParameters.inc:50
+msgid "Create options"
+msgstr "Crear opciones"
+
+#: plugins/admin/applications/class_applicationParameters.inc:51
+msgid ""
+"This application has options disabled. You can enable them by clicking below."
+msgstr ""
+"Esta aplicación tiene opciones desactivadas. Puede activarlas pulsando aquí."
+
+#: plugins/admin/applications/class_applicationParameters.inc:87
+msgid "Variable"
+msgstr "Variable"
+
+#: plugins/admin/applications/class_applicationParameters.inc:87
+#: plugins/gofon/macro/parameter.tpl:9
+msgid "Default value"
+msgstr "Valor por defecto"
+
+#: plugins/admin/applications/class_applicationParameters.inc:98
+msgid "Add option"
+msgstr "Añadir opción"
+
+#: plugins/admin/applications/class_applicationParameters.inc:149
+#, php-format
+msgid "Value '%s' specified as option name is not valid."
+msgstr "El valor '%s' especificado como nombre de opción no es valido."
 
 #: plugins/admin/applications/remove.tpl:7 plugins/gofon/macro/remove.tpl:7
 msgid ""
@@ -3898,9 +3901,18 @@ msgstr "Expresiones regulares para encontrar nombres de aplicaciones"
 msgid "Application management"
 msgstr "Mantenimiento de aplicaciones"
 
+#: plugins/admin/applications/class_applicationManagement.inc:185
+#, php-format
+msgid "You're about to delete the application '%s'."
+msgstr "Va ha eliminar la aplicación '%s'."
+
+#: plugins/admin/applications/class_applicationManagement.inc:191
+#: plugins/admin/applications/class_applicationManagement.inc:217
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:217
+msgid "You are not allowed to delete this application!"
+msgstr "¡No tiene permisos para eliminar esta aplicación!"
+
 #: plugins/admin/applications/class_applicationGeneric.inc:59
-#: plugins/gofon/macro/class_gofonMacro.inc:51
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:81
 msgid "This 'dn' is no application."
 msgstr "Este 'dn' no es una aplicación"
 
@@ -3923,17 +3935,6 @@ msgstr "El campo requerido 'Ejecutar' no ha sido llenado."
 #: plugins/admin/applications/class_applicationGeneric.inc:246
 msgid "There's already an application with this 'Name'."
 msgstr "Ya existe una aplicación con este 'Nombre'."
-
-#: plugins/admin/applications/class_applicationManagement.inc:185
-#, php-format
-msgid "You're about to delete the application '%s'."
-msgstr "Va ha eliminar la aplicación '%s'."
-
-#: plugins/admin/applications/class_applicationManagement.inc:191
-#: plugins/admin/applications/class_applicationManagement.inc:217
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:217
-msgid "You are not allowed to delete this application!"
-msgstr "¡No tiene permisos para eliminar esta aplicación!"
 
 #: plugins/admin/departments/generic.tpl:4
 #: plugins/admin/systems/terminal.tpl:1
@@ -4045,6 +4046,20 @@ msgstr "Expresiones regulares para encontrar nombres de departamentos"
 msgid "Department management"
 msgstr "Mantenimiento de Departamentos"
 
+#: plugins/admin/departments/class_departmentManagement.inc:25
+#: plugins/admin/ogroups/class_ogroupManagement.inc:43
+msgid "Departments"
+msgstr "Departamentos"
+
+#: plugins/admin/departments/class_departmentManagement.inc:130
+#, php-format
+msgid "You're about to delete the whole LDAP subtree placed under '%s'."
+msgstr "Esta a punto de borrar todo el subárbol LDAP colocado bajo '%s'."
+
+#: plugins/admin/departments/class_departmentManagement.inc:145
+msgid "You have no permission to remove this department."
+msgstr "No tiene permisos para eliminar este departamento."
+
 #: plugins/admin/departments/class_departmentGeneric.inc:129
 msgid "You have no permissions to create a department on this 'Base'."
 msgstr "No tiene permisos para crear un departamento en esta 'Base'."
@@ -4065,20 +4080,6 @@ msgstr "El campo 'Nombre' contiene la palabra reservada 'incoming'."
 #: plugins/admin/departments/class_departmentGeneric.inc:152
 msgid " Please choose another name."
 msgstr "Por favor elija otro nombre."
-
-#: plugins/admin/departments/class_departmentManagement.inc:25
-#: plugins/admin/ogroups/class_ogroupManagement.inc:43
-msgid "Departments"
-msgstr "Departamentos"
-
-#: plugins/admin/departments/class_departmentManagement.inc:130
-#, php-format
-msgid "You're about to delete the whole LDAP subtree placed under '%s'."
-msgstr "Esta a punto de borrar todo el subárbol LDAP colocado bajo '%s'."
-
-#: plugins/admin/departments/class_departmentManagement.inc:145
-msgid "You have no permission to remove this department."
-msgstr "No tiene permisos para eliminar este departamento."
 
 #: plugins/admin/systems/class_terminalInfo.inc:53
 #: plugins/admin/systems/class_terminalInfo.inc:178
@@ -4142,14 +4143,14 @@ msgstr "El campo requerido 'Sobrenombre' no ha sido rellenado."
 
 #: plugins/admin/systems/class_winGeneric.inc:139
 #: plugins/admin/systems/class_componentGeneric.inc:113
-#: plugins/admin/systems/class_phoneGeneric.inc:263
+#: plugins/admin/systems/class_phoneGeneric.inc:269
 #, fuzzy
 msgid "The required field 'MAC-address' is not set."
 msgstr " El campo requerido 'Cuenta Principal' no ha sido rellenado."
 
 #: plugins/admin/systems/class_winGeneric.inc:142
 #: plugins/admin/systems/class_componentGeneric.inc:116
-#: plugins/admin/systems/class_phoneGeneric.inc:266
+#: plugins/admin/systems/class_phoneGeneric.inc:272
 #, fuzzy
 msgid "The required field 'IP-address' is not set."
 msgstr " El campo requerido 'Cuenta Principal' no ha sido rellenado."
@@ -4165,7 +4166,7 @@ msgstr "No tiene permisos para crear un componente en esta 'Base'."
 #: plugins/admin/systems/class_workstationGeneric.inc:242
 #: plugins/admin/systems/class_printGeneric.inc:136
 #: plugins/admin/systems/class_componentGeneric.inc:133
-#: plugins/admin/systems/class_phoneGeneric.inc:286
+#: plugins/admin/systems/class_phoneGeneric.inc:292
 #, php-format
 msgid "There is already an entry '%s' in the base choosen by you"
 msgstr "Ya hay una entrada '%s' en la base elegida"
@@ -4266,6 +4267,42 @@ msgstr "Servicio de sonido"
 msgid "GUI"
 msgstr "GUI"
 
+#: plugins/admin/systems/main.inc:45 plugins/admin/systems/main.inc:47
+msgid "System management"
+msgstr "Gestión del sistema"
+
+#: plugins/admin/systems/servservice.tpl:11
+msgid "Nfs Export"
+msgstr "Exportación NFS"
+
+#: plugins/admin/systems/servservice.tpl:37
+msgid "Time Service"
+msgstr "Servicio de Hora"
+
+#: plugins/admin/systems/servservice.tpl:61
+msgid "LDAP Service"
+msgstr "Servicio LDAP"
+
+#: plugins/admin/systems/servservice.tpl:72
+msgid "Terminal Service"
+msgstr "Servidor de terminal"
+
+#: plugins/admin/systems/servservice.tpl:77
+msgid "Temporary disable login"
+msgstr "Desactivación temporal del acceso"
+
+#: plugins/admin/systems/servservice.tpl:80
+msgid "Font path"
+msgstr "Ruta a las fuentes tipográficas"
+
+#: plugins/admin/systems/servservice.tpl:93
+msgid "Syslog Service"
+msgstr "Servicio de Logs"
+
+#: plugins/admin/systems/servservice.tpl:101
+msgid "Print Service"
+msgstr "Servicio de impresión"
+
 #: plugins/admin/systems/class_terminalService.inc:83
 msgid "default"
 msgstr "por defecto"
@@ -4304,41 +4341,28 @@ msgstr "Por favor especifique un rango VSync valido"
 msgid "Please specify a valid HSync range."
 msgstr "Por favor especifique un rango HSync valido"
 
-#: plugins/admin/systems/main.inc:45 plugins/admin/systems/main.inc:47
-msgid "System management"
-msgstr "Gestión del sistema"
+#: plugins/admin/systems/class_servDB.inc:131
+#: plugins/admin/systems/class_servDB.inc:147
+#: plugins/admin/systems/class_servDB.inc:153
+#: plugins/admin/systems/class_servDB.inc:158
+#: plugins/admin/systems/class_servDB.inc:164
+#, php-format
+msgid "The attribute '%s' is empty or contains invalid characters."
+msgstr "¡El atributo '%s' está vacío o contiene caracteres no validos!"
 
-#: plugins/admin/systems/servservice.tpl:11
-msgid "Nfs Export"
-msgstr "Exportación NFS"
+#: plugins/admin/systems/class_servDB.inc:137
+#, php-format
+msgid "The imap connect string needs to be in the form '%s'."
+msgstr "La cadena de conexión imap necesita estar en la forma '%s'."
 
-#: plugins/admin/systems/servservice.tpl:37
-msgid "Time Service"
-msgstr "Servicio de Hora"
+#: plugins/admin/systems/class_servDB.inc:141
+msgid "The sieve port needs to be numeric."
+msgstr "El puerto sieve necesita ser un numero."
 
-#: plugins/admin/systems/servservice.tpl:61
-msgid "LDAP Service"
-msgstr "Servicio LDAP"
-
-#: plugins/admin/systems/servservice.tpl:72
-msgid "Terminal Service"
-msgstr "Servidor de terminal"
-
-#: plugins/admin/systems/servservice.tpl:77
-msgid "Temporary disable login"
-msgstr "Desactivación temporal del acceso"
-
-#: plugins/admin/systems/servservice.tpl:80
-msgid "Font path"
-msgstr "Ruta a las fuentes tipográficas"
-
-#: plugins/admin/systems/servservice.tpl:93
-msgid "Syslog Service"
-msgstr "Servicio de Logs"
-
-#: plugins/admin/systems/servservice.tpl:101
-msgid "Print Service"
-msgstr "Servicio de impresión"
+#: plugins/admin/systems/class_servDB.inc:172
+#, fuzzy, php-format
+msgid "The imap name string needs to be a hostname or an IP-address."
+msgstr "La cadena de conexión imap necesita estar en la forma '%s'."
 
 #: plugins/admin/systems/server.tpl:6
 msgid "Server name"
@@ -4361,6 +4385,76 @@ msgstr "Acción"
 #: plugins/admin/systems/server.tpl:42
 msgid "Select action to execute for this server"
 msgstr "Seleccione una acción que se ejecutara en este servidor"
+
+#: plugins/admin/systems/phone.tpl:6
+msgid "Phone name"
+msgstr "Número de teléfono"
+
+#: plugins/admin/systems/terminal.tpl:9
+msgid "Terminal template"
+msgstr "Plantilla de terminal"
+
+#: plugins/admin/systems/terminal.tpl:11
+msgid "Terminal name"
+msgstr "Nombre de terminal"
+
+#: plugins/admin/systems/terminal.tpl:36
+#: plugins/admin/systems/workstation.tpl:36
+#: plugins/admin/systems/phonesettings.tpl:25
+msgid "Mode"
+msgstr "Modo"
+
+#: plugins/admin/systems/terminal.tpl:38
+#: plugins/admin/systems/workstation.tpl:38
+msgid "Select terminal mode"
+msgstr "Seleccionar modo de terminal"
+
+#: plugins/admin/systems/terminal.tpl:52
+#: plugins/admin/systems/workstation.tpl:52
+msgid "Root server"
+msgstr "Servidor Raíz"
+
+#: plugins/admin/systems/terminal.tpl:54
+#: plugins/admin/systems/workstation.tpl:54
+msgid "Select NFS root filesystem to use"
+msgstr "Seleccione sistema de archivos raíz 'NFS' que se usará"
+
+#: plugins/admin/systems/terminal.tpl:60
+#: plugins/admin/systems/workstation.tpl:60
+msgid "Swap server"
+msgstr "Servidor de Intercambio"
+
+#: plugins/admin/systems/terminal.tpl:62
+#: plugins/admin/systems/workstation.tpl:62
+msgid "Choose NFS filesystem to place swap files on"
+msgstr ""
+"Seleccione sistema de archivos 'NFS' donde estarán los archivos de "
+"intercambio"
+
+#: plugins/admin/systems/terminal.tpl:74
+#: plugins/admin/systems/workstation.tpl:74
+msgid "Syslog server"
+msgstr "Servidor de Logs"
+
+#: plugins/admin/systems/terminal.tpl:76
+#: plugins/admin/systems/workstation.tpl:76
+msgid "Choose server to use for logging"
+msgstr "Elija un servidor que será usado para registro"
+
+#: plugins/admin/systems/terminal.tpl:82
+#: plugins/admin/systems/workstation.tpl:82
+msgid "NTP server"
+msgstr "Servidor NTP"
+
+#: plugins/admin/systems/terminal.tpl:84
+#: plugins/admin/systems/workstation.tpl:84
+msgid "Choose server to use for synchronizing time"
+msgstr "Elija un servidor que será usado para sincronización horaria"
+
+#: plugins/admin/systems/terminal.tpl:103
+#: plugins/admin/systems/workstation.tpl:103
+msgid "Select action to execute for this terminal"
+msgstr "Seleccione una acción que se ejecutara en este terminal"
 
 #: plugins/admin/systems/class_terminalGeneric.inc:63
 #: plugins/admin/systems/class_workstationGeneric.inc:71
@@ -4438,10 +4532,6 @@ msgstr "No tiene permisos para crear un terminal en esta 'Base'."
 msgid "The required field 'Terminal name' is not set."
 msgstr " El campo requerido 'Nombre del terminal' no ha sido rellenado."
 
-#: plugins/admin/systems/phone.tpl:6
-msgid "Phone name"
-msgstr "Número de teléfono"
-
 #: plugins/admin/systems/class_servGeneric.inc:49
 msgid "This 'dn' has no server features."
 msgstr "Esta 'dn' no tiene características de servidor."
@@ -4454,72 +4544,6 @@ msgstr "El campo requerido 'Sobrenombre' no ha sido rellenado."
 #: plugins/admin/systems/class_servGeneric.inc:170
 msgid "You have no permissions to create a server on this 'Base'."
 msgstr "No tiene permisos para crear un servidor en esta 'Base'."
-
-#: plugins/admin/systems/terminal.tpl:9
-msgid "Terminal template"
-msgstr "Plantilla de terminal"
-
-#: plugins/admin/systems/terminal.tpl:11
-msgid "Terminal name"
-msgstr "Nombre de terminal"
-
-#: plugins/admin/systems/terminal.tpl:36
-#: plugins/admin/systems/workstation.tpl:36
-#: plugins/admin/systems/phonesettings.tpl:25
-msgid "Mode"
-msgstr "Modo"
-
-#: plugins/admin/systems/terminal.tpl:38
-#: plugins/admin/systems/workstation.tpl:38
-msgid "Select terminal mode"
-msgstr "Seleccionar modo de terminal"
-
-#: plugins/admin/systems/terminal.tpl:52
-#: plugins/admin/systems/workstation.tpl:52
-msgid "Root server"
-msgstr "Servidor Raíz"
-
-#: plugins/admin/systems/terminal.tpl:54
-#: plugins/admin/systems/workstation.tpl:54
-msgid "Select NFS root filesystem to use"
-msgstr "Seleccione sistema de archivos raíz 'NFS' que se usará"
-
-#: plugins/admin/systems/terminal.tpl:60
-#: plugins/admin/systems/workstation.tpl:60
-msgid "Swap server"
-msgstr "Servidor de Intercambio"
-
-#: plugins/admin/systems/terminal.tpl:62
-#: plugins/admin/systems/workstation.tpl:62
-msgid "Choose NFS filesystem to place swap files on"
-msgstr ""
-"Seleccione sistema de archivos 'NFS' donde estarán los archivos de "
-"intercambio"
-
-#: plugins/admin/systems/terminal.tpl:74
-#: plugins/admin/systems/workstation.tpl:74
-msgid "Syslog server"
-msgstr "Servidor de Logs"
-
-#: plugins/admin/systems/terminal.tpl:76
-#: plugins/admin/systems/workstation.tpl:76
-msgid "Choose server to use for logging"
-msgstr "Elija un servidor que será usado para registro"
-
-#: plugins/admin/systems/terminal.tpl:82
-#: plugins/admin/systems/workstation.tpl:82
-msgid "NTP server"
-msgstr "Servidor NTP"
-
-#: plugins/admin/systems/terminal.tpl:84
-#: plugins/admin/systems/workstation.tpl:84
-msgid "Choose server to use for synchronizing time"
-msgstr "Elija un servidor que será usado para sincronización horaria"
-
-#: plugins/admin/systems/terminal.tpl:103
-#: plugins/admin/systems/workstation.tpl:103
-msgid "Select action to execute for this terminal"
-msgstr "Seleccione una acción que se ejecutara en este terminal"
 
 #: plugins/admin/systems/class_servDHCP.inc:33
 msgid "Remove DHCP service"
@@ -4544,6 +4568,18 @@ msgid ""
 msgstr ""
 "Este servidor tiene la extensión DHCP desactivada. Puede activarla pulsando "
 "aquí."
+
+#: plugins/admin/systems/printer.tpl:6
+msgid "Printer name"
+msgstr "Nombre de la impresora"
+
+#: plugins/admin/systems/printer.tpl:32
+msgid "Printer URL"
+msgstr "URL de la impresora"
+
+#: plugins/admin/systems/printer.tpl:36
+msgid "Path to PPD"
+msgstr "Ruta al 'PPD'"
 
 #: plugins/admin/systems/class_workstationGeneric.inc:136
 msgid "This 'dn' has no workstation features."
@@ -4601,17 +4637,13 @@ msgstr "Plantilla de cliente ligero para"
 msgid "Workstation template for"
 msgstr "Plantilla de estación de trabajo para"
 
-#: plugins/admin/systems/printer.tpl:6
-msgid "Printer name"
-msgstr "Nombre de la impresora"
+#: plugins/admin/systems/class_printGeneric.inc:57
+msgid "This 'dn' has no printer features."
+msgstr "Esta 'dn' no tiene características de impresora."
 
-#: plugins/admin/systems/printer.tpl:32
-msgid "Printer URL"
-msgstr "URL de la impresora"
-
-#: plugins/admin/systems/printer.tpl:36
-msgid "Path to PPD"
-msgstr "Ruta al 'PPD'"
+#: plugins/admin/systems/class_printGeneric.inc:126
+msgid "You have no permissions to create a printer on this 'Base'."
+msgstr "No tiene permisos para crear una impresora en esta 'Base'."
 
 #: plugins/admin/systems/class_servDNS.inc:33
 msgid "Remove DNS service"
@@ -4634,29 +4666,6 @@ msgid ""
 msgstr ""
 "Este servidor tiene la extensión DNS desactivada. Puede activarla pulsando "
 "aquí."
-
-#: plugins/admin/systems/class_servDB.inc:131
-#: plugins/admin/systems/class_servDB.inc:147
-#: plugins/admin/systems/class_servDB.inc:153
-#: plugins/admin/systems/class_servDB.inc:158
-#: plugins/admin/systems/class_servDB.inc:164
-#, php-format
-msgid "The attribute '%s' is empty or contains invalid characters."
-msgstr "¡El atributo '%s' está vacío o contiene caracteres no validos!"
-
-#: plugins/admin/systems/class_servDB.inc:137
-#, php-format
-msgid "The imap connect string needs to be in the form '%s'."
-msgstr "La cadena de conexión imap necesita estar en la forma '%s'."
-
-#: plugins/admin/systems/class_servDB.inc:141
-msgid "The sieve port needs to be numeric."
-msgstr "El puerto sieve necesita ser un numero."
-
-#: plugins/admin/systems/class_servDB.inc:172
-#, fuzzy, php-format
-msgid "The imap name string needs to be a hostname or an IP-address."
-msgstr "La cadena de conexión imap necesita estar en la forma '%s'."
 
 #: plugins/admin/systems/workstation.tpl:9
 msgid "Workstation template"
@@ -4867,14 +4876,6 @@ msgid "Accept mail from other domains over non-authenticated SMTP"
 msgstr ""
 "Aceptar correo desde otros dominios que usen ninguna autentificación SMTP"
 
-#: plugins/admin/systems/class_printGeneric.inc:57
-msgid "This 'dn' has no printer features."
-msgstr "Esta 'dn' no tiene características de impresora."
-
-#: plugins/admin/systems/class_printGeneric.inc:126
-msgid "You have no permissions to create a printer on this 'Base'."
-msgstr "No tiene permisos para crear una impresora en esta 'Base'."
-
 #: plugins/admin/systems/wingeneric.tpl:6
 msgid "Machine name"
 msgstr "Nombre de la maquina"
@@ -5027,12 +5028,12 @@ msgid "Choose mouse port"
 msgstr "Elija el puerto del ratón"
 
 #: plugins/admin/systems/service.tpl:66
-#: plugins/gofon/phoneaccount/generic.tpl:5
+#: plugins/gofon/phoneaccount/generic.tpl:21
 msgid "Telephone hardware"
 msgstr "Componente telefónico"
 
 #: plugins/admin/systems/service.tpl:69
-#: plugins/gofon/phoneaccount/generic.tpl:9
+#: plugins/gofon/phoneaccount/generic.tpl:25
 msgid "Telephone"
 msgstr "Teléfono"
 
@@ -5300,43 +5301,43 @@ msgstr "Entradas de fstab adicionales"
 msgid "Add additional filesystems to be mounted during startup"
 msgstr "Añadir sistemas de archivos adicionales que serán montados al arrancar"
 
-#: plugins/admin/systems/class_phoneGeneric.inc:100
+#: plugins/admin/systems/class_phoneGeneric.inc:104
 msgid "This 'dn' has no phone features."
 msgstr "Esta 'dn' no tiene características de teléfono."
 
-#: plugins/admin/systems/class_phoneGeneric.inc:172
+#: plugins/admin/systems/class_phoneGeneric.inc:176
 #, fuzzy
 msgid "yes"
 msgstr "Sistemas"
 
-#: plugins/admin/systems/class_phoneGeneric.inc:172
+#: plugins/admin/systems/class_phoneGeneric.inc:176
 #, fuzzy
 msgid "no"
 msgstr "ninguno"
 
-#: plugins/admin/systems/class_phoneGeneric.inc:244
-msgid "Wrong IP format in field goFonDefaultIP."
+#: plugins/admin/systems/class_phoneGeneric.inc:197
+msgid "dynamic"
 msgstr ""
 
-#: plugins/admin/systems/class_phoneGeneric.inc:251
+#: plugins/admin/systems/class_phoneGeneric.inc:197
 #, fuzzy
-msgid "The given value for goFonQualify is not a valid number."
-msgstr "El valor de 'Tamaño de Cola' no es valido."
+msgid "Networksettings"
+msgstr "Configuración de red"
 
-#: plugins/admin/systems/class_phoneGeneric.inc:257
+#: plugins/admin/systems/class_phoneGeneric.inc:263
 #, fuzzy
 msgid "The required field 'Phone name' is not set."
 msgstr "El campo requerido 'Sobrenombre' no ha sido rellenado."
 
-#: plugins/admin/systems/class_phoneGeneric.inc:260
+#: plugins/admin/systems/class_phoneGeneric.inc:266
 msgid "The 'Phone name' '0' is reserved and cannot be used."
 msgstr ""
 
-#: plugins/admin/systems/class_phoneGeneric.inc:269
+#: plugins/admin/systems/class_phoneGeneric.inc:275
 msgid "Wrong IP format in field IP-address."
 msgstr ""
 
-#: plugins/admin/systems/class_phoneGeneric.inc:276
+#: plugins/admin/systems/class_phoneGeneric.inc:282
 msgid "You have no permissions to create a phone on this 'Base'."
 msgstr "No tiene permisos para crear un teléfono en esta 'Base'."
 
@@ -5353,14 +5354,16 @@ msgstr "Número de teléfono"
 #: plugins/admin/systems/phonesettings.tpl:10
 #: plugins/admin/systems/phonesettings.tpl:28
 #: plugins/admin/systems/phonesettings.tpl:38
-#: plugins/admin/systems/phonesettings.tpl:81
-#: plugins/admin/systems/phonesettings.tpl:112
-#: plugins/admin/systems/phonesettings.tpl:159
+#: plugins/admin/systems/phonesettings.tpl:52
+#: plugins/admin/systems/phonesettings.tpl:83
+#: plugins/admin/systems/phonesettings.tpl:114
+#: plugins/admin/systems/phonesettings.tpl:161
 #, fuzzy
 msgid "Choose a phone type"
 msgstr "Elija tipo de ratón"
 
 #: plugins/admin/systems/phonesettings.tpl:13
+#: plugins/gofon/phoneaccount/generic.tpl:65
 msgid "refresh"
 msgstr ""
 
@@ -5370,59 +5373,59 @@ msgid "DTMF mode"
 msgstr "Modo"
 
 #: plugins/admin/systems/phonesettings.tpl:49
-#: plugins/admin/systems/phonesettings.tpl:88
+#: plugins/admin/systems/phonesettings.tpl:90
 #, fuzzy
 msgid "Default IP"
 msgstr "por defecto"
 
-#: plugins/admin/systems/phonesettings.tpl:57
-#: plugins/admin/systems/phonesettings.tpl:96
+#: plugins/admin/systems/phonesettings.tpl:59
+#: plugins/admin/systems/phonesettings.tpl:98
 msgid "Response timeout"
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:78
+#: plugins/admin/systems/phonesettings.tpl:80
 #, fuzzy
 msgid "Modus"
 msgstr "Ratón"
 
-#: plugins/admin/systems/phonesettings.tpl:109
+#: plugins/admin/systems/phonesettings.tpl:111
 msgid "Authtype"
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:119
+#: plugins/admin/systems/phonesettings.tpl:121
 #, fuzzy
 msgid "Secret"
 msgstr "Calle"
 
-#: plugins/admin/systems/phonesettings.tpl:127
+#: plugins/admin/systems/phonesettings.tpl:129
 msgid "GoFonInkeys"
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:135
+#: plugins/admin/systems/phonesettings.tpl:137
 msgid "GoFonOutKeys"
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:148
+#: plugins/admin/systems/phonesettings.tpl:150
 #, fuzzy
 msgid "Account code"
 msgstr "Cuenta"
 
-#: plugins/admin/systems/phonesettings.tpl:156
+#: plugins/admin/systems/phonesettings.tpl:158
 #, fuzzy
 msgid "Trunk lines"
 msgstr "Clientes Ligeros"
 
-#: plugins/admin/systems/phonesettings.tpl:171
+#: plugins/admin/systems/phonesettings.tpl:173
 #, fuzzy
 msgid "Hosts that are allowed to connect"
 msgstr "Equipos/Redes que son permitidos para hacer relay"
 
-#: plugins/admin/systems/phonesettings.tpl:186
+#: plugins/admin/systems/phonesettings.tpl:188
 #, fuzzy
 msgid "Hosts that are not allowed to connect"
 msgstr "¡No tiene permisos para eliminar este componente!"
 
-#: plugins/admin/systems/phonesettings.tpl:210
+#: plugins/admin/systems/phonesettings.tpl:212
 msgid "MSN"
 msgstr ""
 
@@ -5512,42 +5515,6 @@ msgstr ""
 msgid "Select action to execute for this   group of terminals"
 msgstr "Seleccione una acción que se ejecutara en este grupo de terminales"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:25
-#: plugins/admin/ogroups/main.inc:34 plugins/admin/ogroups/main.inc:39
-msgid "Object groups"
-msgstr "Grupos de objetos"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:41
-msgid "UNIX accounts"
-msgstr "Cuentas UNIX"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:45
-msgid "Servers"
-msgstr "Servidores"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:46
-msgid "Thin Clients"
-msgstr "Clientes Ligeros"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:47
-msgid "Workstations"
-msgstr "Estaciones de trabajo"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:49
-#: plugins/generic/references/class_reference.inc:52
-msgid "Printer"
-msgstr "Impresora"
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:150
-#, php-format
-msgid "You're about to delete the object group '%s'."
-msgstr "Has decidido eliminar el objeto grupo '%s'."
-
-#: plugins/admin/ogroups/class_ogroupManagement.inc:156
-#: plugins/admin/ogroups/class_ogroupManagement.inc:182
-msgid "You are not allowed to delete this object group!"
-msgstr "¡No tiene permisos para eliminar este objeto grupo!"
-
 #: plugins/admin/ogroups/class_ogroup.inc:91
 msgid "This 'dn' is no object group."
 msgstr "Este 'dn' no es un objeto tipo grupo."
@@ -5607,6 +5574,42 @@ msgstr "'Grupos de objetos que necesitan al menos un miembro!"
 #: plugins/admin/ogroups/class_ogroup.inc:505
 msgid "You can combine two different object types at maximum only!"
 msgstr "¡Solo se pueden combinar dos objetos diferentes hasta un máximo!"
+
+#: plugins/admin/ogroups/main.inc:34 plugins/admin/ogroups/main.inc:39
+#: plugins/admin/ogroups/class_ogroupManagement.inc:25
+msgid "Object groups"
+msgstr "Grupos de objetos"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:41
+msgid "UNIX accounts"
+msgstr "Cuentas UNIX"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:45
+msgid "Servers"
+msgstr "Servidores"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:46
+msgid "Thin Clients"
+msgstr "Clientes Ligeros"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:47
+msgid "Workstations"
+msgstr "Estaciones de trabajo"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:49
+#: plugins/generic/references/class_reference.inc:52
+msgid "Printer"
+msgstr "Impresora"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:150
+#, php-format
+msgid "You're about to delete the object group '%s'."
+msgstr "Has decidido eliminar el objeto grupo '%s'."
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:156
+#: plugins/admin/ogroups/class_ogroupManagement.inc:182
+msgid "You are not allowed to delete this object group!"
+msgstr "¡No tiene permisos para eliminar este objeto grupo!"
 
 #: plugins/admin/ogroups/generic.tpl:9
 msgid "Name of the group"
@@ -5670,15 +5673,42 @@ msgstr "Mostrar grupos que contienen terminales"
 msgid "Show groups containing printers"
 msgstr "Mostrar grupos que contienen impresoras"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:114
+#: plugins/gofon/phoneaccount/main.inc:120
+msgid "Phone settings"
+msgstr "Configuración telefónica"
+
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:117
+#, fuzzy
+msgid "undefined"
+msgstr "sin definirse"
+
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:208
+msgid ""
+"The macro you selected in the past, is no longer available for you, please "
+"choose another one."
+msgstr ""
+
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:254
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:257
+#, fuzzy
+msgid "false"
+msgstr "mujer"
+
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:255
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:258
+#, fuzzy
+msgid "true"
+msgstr "Futuro"
+
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:281
 msgid "This account has no phone extensions."
 msgstr "Esta cuenta no tiene extensiones telefónicas"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:124
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:291
 msgid "Remove phone account"
 msgstr "Eliminar cuenta telefónica"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:125
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:292
 msgid ""
 "This account has phone features enabled. You can disable them by clicking "
 "below."
@@ -5686,11 +5716,11 @@ msgstr ""
 "Esta cuenta tiene la extensión telefónica activada. Puede desactivarla "
 "pulsando aquí."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:127
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:294
 msgid "Create phone account"
 msgstr "Crear cuenta telefónica"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:128
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:295
 msgid ""
 "This account has phone features disabled. You can enable them by clicking "
 "below."
@@ -5698,57 +5728,54 @@ msgstr ""
 "Esta cuenta tiene la extensión telefónica desactivada. Puede activarla "
 "pulsando aquí."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:140
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:307
 msgid "Please enter a valid phone number!"
 msgstr "¡Por favor introduzca un número de teléfono valido!"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:180
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:344
 msgid "Choose your private phone"
 msgstr "Indique su teléfono particular"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:291
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:443
 #, php-format
 msgid "You need to specify at least one phone number!"
 msgstr "¡Necesita introducir al menos un número de teléfono!"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:305
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:457
 #, php-format
 msgid "The number '%s' is no valid phone number!"
 msgstr "¡El número '%s' no es un número de teléfono valido!"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:308
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:460
 #, php-format
 msgid "The timeout '%s' contains invalid characters!"
 msgstr "¡El tiempo de expiración '%s' contiene caracteres no validos!"
 
-#: plugins/gofon/phoneaccount/generic.tpl:16
-msgid "Answering machine"
-msgstr "Contestador automático"
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:468
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:276
+#, fuzzy, php-format
+msgid "The parameter %s contains invalid char. '!,#' is used as delimiter"
+msgstr "¡El tiempo de expiración '%s' contiene caracteres no validos!"
 
-#: plugins/gofon/phoneaccount/generic.tpl:22
-#: plugins/gofon/phoneaccount/generic.tpl:25
-msgid "Deliver missed calls as mail"
-msgstr "Enviar llamadas perdidas como correo electrónico"
-
-#: plugins/gofon/phoneaccount/generic.tpl:39
+#: plugins/gofon/phoneaccount/generic.tpl:4
 msgid "Phone numbers"
 msgstr "Números de teléfonos"
 
-#: plugins/gofon/phoneaccount/generic.tpl:56
+#: plugins/gofon/phoneaccount/generic.tpl:37
 msgid "Forward calls to"
 msgstr "Reenviar llamadas a"
 
-#: plugins/gofon/phoneaccount/generic.tpl:60
+#: plugins/gofon/phoneaccount/generic.tpl:41
 msgid "Phone number"
 msgstr "Número de teléfono"
 
-#: plugins/gofon/phoneaccount/generic.tpl:60
+#: plugins/gofon/phoneaccount/generic.tpl:41
 msgid "Timeout (s)"
 msgstr "Tiempo(s) excedido(s)"
 
-#: plugins/gofon/phoneaccount/main.inc:120
-msgid "Phone settings"
-msgstr "Configuración telefónica"
+#: plugins/gofon/phoneaccount/generic.tpl:58
+msgid "Select Makro"
+msgstr ""
 
 #: plugins/gofon/reports/class_fonreport.inc:6
 msgid "Phone Reports"
@@ -5795,34 +5822,43 @@ msgstr "Duración"
 msgid "Phone reports"
 msgstr "Informes telefónicos"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:123
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:208
+#: plugins/gofon/macro/class_gofonMacro.inc:58
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:153
+#, fuzzy
+msgid "This 'dn' is no phone macro."
+msgstr "Esta 'dn' no tiene características de teléfono."
+
+#: plugins/gofon/macro/class_gofonMacro.inc:136
+msgid "You must specify the 'Display Name' in order to save this macro"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:141
 #, php-format
 msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro"
 msgstr ""
 
-#: plugins/gofon/macro/class_gofonMacro.inc:132
+#: plugins/gofon/macro/class_gofonMacro.inc:150
 msgid "Makro length must be lower than 100 lines"
 msgstr ""
 
-#: plugins/gofon/macro/generic.tpl:7 plugins/gofon/macro/generic.tpl:8
+#: plugins/gofon/macro/generic.tpl:6 plugins/gofon/macro/generic.tpl:7
 #, fuzzy
 msgid "Macro name"
 msgstr "Nombre de la maquina"
 
-#: plugins/gofon/macro/generic.tpl:13
+#: plugins/gofon/macro/generic.tpl:12
 msgid "Macro name to be displayed"
 msgstr ""
 
-#: plugins/gofon/macro/generic.tpl:23
+#: plugins/gofon/macro/generic.tpl:42
 #, fuzzy
 msgid "Visible for user"
 msgstr "Lista de usuarios"
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:159
+#: plugins/gofon/macro/generic.tpl:51
 #, fuzzy
-msgid "Refresh"
-msgstr "Referencias"
+msgid "Macro text"
+msgstr "Nombre de la maquina"
 
 #: plugins/gofon/macro/headpage.tpl:6
 #, fuzzy
@@ -5870,20 +5906,33 @@ msgstr "Expresión regular que concuerde con nombres de grupos"
 msgid "Phone macro management"
 msgstr "Gestión del sistema"
 
-#: plugins/gofon/macro/parameter.tpl:6
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:199
 #, fuzzy
-msgid "Number"
-msgstr "Noviembre"
+msgid "String"
+msgstr "durante"
 
-#: plugins/gofon/macro/parameter.tpl:10
-#, fuzzy
-msgid "type"
-msgstr "Tipo"
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:200
+msgid "Combobox"
+msgstr ""
 
-#: plugins/gofon/macro/parameter.tpl:14
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:201
+msgid "Bool"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:207
 #, fuzzy
-msgid "Option"
-msgstr "Opciones"
+msgid "Delete unused"
+msgstr "Borrar"
+
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:268
+#, php-format
+msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro."
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:281
+#, php-format
+msgid "The parameter %s has incorrect value for type bool."
+msgstr ""
 
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:25
 #, fuzzy
@@ -5899,6 +5948,16 @@ msgstr "Está a punto de borrar el grupo '%s'."
 #, fuzzy
 msgid "You are not allowed to delete this macro!"
 msgstr "¡No le está permitido eliminar este grupo!"
+
+#: plugins/gofon/macro/parameter.tpl:3
+#, fuzzy
+msgid "Argument"
+msgstr "Argumentos"
+
+#: plugins/gofon/macro/parameter.tpl:7
+#, fuzzy
+msgid "type"
+msgstr "Tipo"
 
 #: plugins/generic/references/class_reference.inc:36
 msgid "Group"
@@ -6141,47 +6200,65 @@ msgstr ""
 msgid "Can't write IMAP quota. Server says '%s'."
 msgstr "No se puede activar una cuota IMAP. El error del servidor es: '%s'"
 
-#: include/class_mail-methods-cyrus.inc:141
-msgid ""
-"Warning: imap_getacl is not implemented, wouldn't modify acl informations."
+#: include/class_mail-methods-cyrus.inc:154
+#, fuzzy
+msgid "Warning: imap_getacl is not implemented, can't remove acl informations."
 msgstr ""
 "Aviso: imap_getacl no ha sido implementado, no se modificara información "
 "sobre las listas de acceso."
 
-#: include/class_mail-methods-cyrus.inc:176
+#: include/class_mail-methods-cyrus.inc:172
 msgid "Warning: imap_getacl is not available, can't get imap permissions!"
 msgstr ""
 "Aviso: no esta disponible imap_getacl, ¡no se puede acceder a los permisos "
 "IMAP!"
 
-#: include/class_mail-methods-cyrus.inc:198
+#: include/class_mail-methods-cyrus.inc:194
 #, php-format
 msgid "Can't remove IMAP mailbox. Server says '%s'."
 msgstr ""
 "No se puede eliminar la carpeta de correo IMAP. El error del servidor es: '%"
 "s'"
 
-#: include/class_mail-methods-cyrus.inc:226
+#: include/class_mail-methods-cyrus.inc:222
 #, php-format
 msgid "Can't log into SIEVE server. Server says '%s'."
 msgstr "No se puede conectar al servidor SIEVE. El error del servidor es: '%s'"
 
-#: include/class_mail-methods-cyrus.inc:239
+#: include/class_mail-methods-cyrus.inc:235
 #, php-format
 msgid "Can't get sieve script. Server says '%s'."
 msgstr "No puedo ejecutar un 'script' SIEVE. El error del servidor es: '%s'"
 
-#: include/class_mail-methods-cyrus.inc:310
+#: include/class_mail-methods-cyrus.inc:306
 #, php-format
 msgid "Can't send sieve script. Server says '%s'."
 msgstr "No puedo subir un 'script' SIEVE. El error del servidor es: '%s'"
 
-#: include/class_mail-methods-cyrus.inc:314
+#: include/class_mail-methods-cyrus.inc:310
 #, php-format
 msgid "Can't activate GOsa sieve script. Server says '%s'."
 msgstr ""
 "No se puede activar el 'script GOsa para SIEVE'. El error del servidor es: '%"
 "s'"
+
+#: include/class_pluglist.inc:98
+msgid ""
+"Your gosa.conf information has changed partly. Please convert it using the "
+"contributed script fix_config.sh!"
+msgstr ""
+"El contenido de la configuración 'gosa.conf' ha cambiado parcialmente. ¡Por "
+"favor actualízela usando el script 'fix_config.sh'!"
+
+#: include/class_pluglist.inc:113 ihtml/themes/altlinux/framework.tpl:14
+#: ihtml/themes/altlinux/framework.tpl:24
+#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
+msgid ""
+"You are currently editing a database entry. Do you want to dismiss the "
+"changes?"
+msgstr ""
+"Esta actualmente editando una entrada de la base de datos. ?Quiere quitar "
+"los cambios?"
 
 #: include/class_plugin.inc:180
 msgid "This 'dn' has no account extensions."
@@ -6215,42 +6292,6 @@ msgstr ""
 "El comando '%s', especificado como POSTREMOVE para la extensión '%s' no "
 "parece existir."
 
-#: include/class_password-methods-ssha.inc:51
-msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
-msgstr ""
-"No se puede usar sha para encriptación. (Falta la función mhash / sha1)"
-
-#: include/class_pluglist.inc:98
-msgid ""
-"Your gosa.conf information has changed partly. Please convert it using the "
-"contributed script fix_config.sh!"
-msgstr ""
-"El contenido de la configuración 'gosa.conf' ha cambiado parcialmente. ¡Por "
-"favor actualízela usando el script 'fix_config.sh'!"
-
-#: include/class_pluglist.inc:113 ihtml/themes/altlinux/framework.tpl:14
-#: ihtml/themes/altlinux/framework.tpl:24
-#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
-msgid ""
-"You are currently editing a database entry. Do you want to dismiss the "
-"changes?"
-msgstr ""
-"Esta actualmente editando una entrada de la base de datos. ?Quiere quitar "
-"los cambios?"
-
-#: include/class_password-methods.inc:162
-#, php-format
-msgid "Setting the password failed. LDAP server says '%s'."
-msgstr ""
-"Fallo al tratar de configurar la contraseña. El servidor LDAP contesto '%s'."
-
-#: include/class_password-methods.inc:199
-msgid ""
-"Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
-msgstr ""
-"La configuración para SMBHASH en /etc/gosa/gosa.conf es incorrecta. No se "
-"pueden cambiar las contraseñas de SAMBA."
-
 #: include/class_config.inc:69
 #, php-format
 msgid "XML error in gosa.conf: %s at line %d"
@@ -6266,10 +6307,23 @@ msgstr ""
 msgid "SID and/or RIDBASE missing in your configuration!"
 msgstr "SID y/o RIDBASE no se encuentran en su configuración."
 
-#: include/class_password-methods-sha.inc:50
-msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
+#: include/class_password-methods-ssha.inc:51
+msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
 msgstr ""
-"No puedo usar sha para encriptación, falta la función sha1 / mhash / crypt"
+"No se puede usar sha para encriptación. (Falta la función mhash / sha1)"
+
+#: include/class_password-methods.inc:162
+#, php-format
+msgid "Setting the password failed. LDAP server says '%s'."
+msgstr ""
+"Fallo al tratar de configurar la contraseña. El servidor LDAP contesto '%s'."
+
+#: include/class_password-methods.inc:199
+msgid ""
+"Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
+msgstr ""
+"La configuración para SMBHASH en /etc/gosa/gosa.conf es incorrecta. No se "
+"pueden cambiar las contraseñas de SAMBA."
 
 #: include/class_password-methods-kerberos.inc:43
 msgid ""
@@ -6287,6 +6341,11 @@ msgstr "¡La comunicación con la base de datos Kerberos fallo!."
 msgid "Changing password in kerberos database failed!"
 msgstr ""
 "¡Fallo al tratar de cambiar la contraseña en la base de datos de kerberos!."
+
+#: include/class_password-methods-sha.inc:50
+msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
+msgstr ""
+"No puedo usar sha para encriptación, falta la función sha1 / mhash / crypt"
 
 #: include/class_ldap.inc:398
 #, php-format
@@ -6341,6 +6400,16 @@ msgstr "Fichero de configuración"
 
 #: include/class_certificate.inc:199
 msgid "No valid certificate loaded"
+msgstr ""
+
+#: include/functions_helpviewer.inc:260
+#, php-format
+msgid "%s results for your search with the keyword %s interpreted as %s"
+msgstr ""
+
+#: include/functions_helpviewer.inc:335
+#, php-format
+msgid "%s%% hit rate in file %s"
 msgstr ""
 
 #: include/functions_setup.inc:72
@@ -6804,14 +6873,23 @@ msgid ""
 msgstr ""
 "No tiene una cuenta administrativa para GOsa, no podrá administrar nada."
 
-#: include/functions_helpviewer.inc:260
-#, php-format
-msgid "%s results for your search with the keyword %s interpreted as %s"
+#: html/helpviewer.php:54
+msgid "Help is not available if you are not logged in."
 msgstr ""
 
-#: include/functions_helpviewer.inc:335
+#: html/helpviewer.php:85
+msgid "previous"
+msgstr ""
+
+#: html/helpviewer.php:89
+#, fuzzy
+msgid "next"
+msgstr "texto"
+
+#: html/helpviewer.php:144
 #, php-format
-msgid "%s%% hit rate in file %s"
+msgid ""
+"Can't read any helpfiles from ' %s ', possibly there is no help available."
 msgstr ""
 
 #: html/getfax.php:53
@@ -6891,99 +6969,6 @@ msgstr "La sesion no sera encriptada."
 msgid "Enter SSL session"
 msgstr "Entrar en sesión SSL"
 
-#: html/helpviewer.php:54
-msgid "Help is not available if you are not logged in."
-msgstr ""
-
-#: html/helpviewer.php:85
-msgid "previous"
-msgstr ""
-
-#: html/helpviewer.php:89
-#, fuzzy
-msgid "next"
-msgstr "texto"
-
-#: html/helpviewer.php:144
-#, php-format
-msgid ""
-"Can't read any helpfiles from ' %s ', possibly there is no help available."
-msgstr ""
-
-#: ihtml/themes/altlinux/conflict.tpl:2 ihtml/themes/default/conflict.tpl:2
-msgid "Session conflict detected"
-msgstr "Detectado conflicto de sesiones."
-
-#: ihtml/themes/altlinux/conflict.tpl:6 ihtml/themes/default/conflict.tpl:6
-msgid ""
-"Probably there's another active instance of your session. Multiple window "
-"operation is technical not possible and heavily depends on the browser "
-"you're using. Usage of different browsers at a time (i.e. IE and Mozilla) is "
-"possible. Pressing the <b>Logout</b> button will close this session."
-msgstr ""
-"Probablemente hay otra instancia de su sesión. Las operaciones con múltiples "
-"ventanas son técnicamente imposibles y dependen altamente del navegador que "
-"este usando. Es posible usar distintos navegadores al mismo tiempo (es "
-"decir, IE y Mozilla). Apretando el botón <b>Salir</b> cerrará está sesión."
-
-#: ihtml/themes/altlinux/conflict.tpl:10 ihtml/themes/default/conflict.tpl:10
-msgid ""
-"Ignoring this message will change/destroy the data you're currently editing, "
-"so please close multiple windows and log in again."
-msgstr ""
-"Ignorando este mensaje cambiara/borrara los datos que esta actualmente "
-"editando. Por favor, cierre las ventanas múltiples y vuelva a entrar."
-
-#: ihtml/themes/altlinux/conflict.tpl:14 ihtml/themes/default/conflict.tpl:14
-msgid "Logout"
-msgstr "Salir"
-
-#: ihtml/themes/altlinux/setup_introduction.tpl:1
-#: ihtml/themes/default/setup_introduction.tpl:1
-msgid "Welcome to the GOsa setup!"
-msgstr "Bienvenido a la configuración de GOsa"
-
-#: ihtml/themes/altlinux/setup_introduction.tpl:4
-#: ihtml/themes/default/setup_introduction.tpl:4
-msgid ""
-"It looks like you're calling GOsa for the first time - no configuration was "
-"found. This setup like script will try to aid you in creating a working "
-"configuration by performing three major steps: first we'll check the PHP "
-"installation for required modules, than we're going to check for optional/"
-"needed programms and after you've provided basic informations for your LDAP "
-"connectivity, we're going to check your LDAP setup."
-msgstr ""
-"Parece que esta ejecutando GOsa por primera vez - no se encontró la "
-"configuración. Los siguientes pasos tratarán de asistirlo en crear una "
-"configuración funcional, efectuando las siguientes tareas: comprobar la "
-"instalación de PHP y de los módulos necesarios, luego comprobar los "
-"programas opcionales y, luego de ingresar la información necesaria para "
-"conectarse al servidor LDAP, vamos a comprobar la configuración de LDAP."
-
-#: ihtml/themes/altlinux/login.tpl:15 ihtml/themes/default/login.tpl:15
-msgid "Please use your <i>username</i> and <i>password</i> to log in"
-msgstr ""
-"Por favor introduzca su <i>usuario</i> y <i>contraseña</i> para entrar."
-
-#: ihtml/themes/altlinux/login.tpl:26 ihtml/themes/altlinux/login.tpl:30
-#: ihtml/themes/default/setup_useradmin.tpl:22
-#: ihtml/themes/default/login.tpl:26 ihtml/themes/default/login.tpl:30
-msgid "Username"
-msgstr "Nombre de Usuario"
-
-#: ihtml/themes/altlinux/login.tpl:44 ihtml/themes/altlinux/login.tpl:47
-#: ihtml/themes/default/login.tpl:44 ihtml/themes/default/login.tpl:47
-msgid "Directory"
-msgstr "Directorio"
-
-#: ihtml/themes/altlinux/login.tpl:55 ihtml/themes/default/login.tpl:55
-msgid "Sign in"
-msgstr "Entrando"
-
-#: ihtml/themes/altlinux/login.tpl:56 ihtml/themes/default/login.tpl:56
-msgid "Click here to log in"
-msgstr "Pulse aquí para entrar"
-
 #: ihtml/themes/altlinux/sizelimit.tpl:3 ihtml/themes/default/sizelimit.tpl:3
 msgid ""
 "The size limit option makes LDAP operations faster and saves the LDAP server "
@@ -7015,6 +7000,80 @@ msgstr ""
 "ignore este error y muestre todas las entradas que concuerdan con el 'tamaño "
 "limite' definido y active el uso de filtros en su lugar"
 
+#: ihtml/themes/altlinux/conflict.tpl:2 ihtml/themes/default/conflict.tpl:2
+msgid "Session conflict detected"
+msgstr "Detectado conflicto de sesiones."
+
+#: ihtml/themes/altlinux/conflict.tpl:6 ihtml/themes/default/conflict.tpl:6
+msgid ""
+"Probably there's another active instance of your session. Multiple window "
+"operation is technical not possible and heavily depends on the browser "
+"you're using. Usage of different browsers at a time (i.e. IE and Mozilla) is "
+"possible. Pressing the <b>Logout</b> button will close this session."
+msgstr ""
+"Probablemente hay otra instancia de su sesión. Las operaciones con múltiples "
+"ventanas son técnicamente imposibles y dependen altamente del navegador que "
+"este usando. Es posible usar distintos navegadores al mismo tiempo (es "
+"decir, IE y Mozilla). Apretando el botón <b>Salir</b> cerrará está sesión."
+
+#: ihtml/themes/altlinux/conflict.tpl:10 ihtml/themes/default/conflict.tpl:10
+msgid ""
+"Ignoring this message will change/destroy the data you're currently editing, "
+"so please close multiple windows and log in again."
+msgstr ""
+"Ignorando este mensaje cambiara/borrara los datos que esta actualmente "
+"editando. Por favor, cierre las ventanas múltiples y vuelva a entrar."
+
+#: ihtml/themes/altlinux/conflict.tpl:14 ihtml/themes/default/conflict.tpl:14
+msgid "Logout"
+msgstr "Salir"
+
+#: ihtml/themes/altlinux/login.tpl:15 ihtml/themes/default/login.tpl:15
+msgid "Please use your <i>username</i> and <i>password</i> to log in"
+msgstr ""
+"Por favor introduzca su <i>usuario</i> y <i>contraseña</i> para entrar."
+
+#: ihtml/themes/altlinux/login.tpl:26 ihtml/themes/altlinux/login.tpl:30
+#: ihtml/themes/default/login.tpl:26 ihtml/themes/default/login.tpl:30
+#: ihtml/themes/default/setup_useradmin.tpl:22
+msgid "Username"
+msgstr "Nombre de Usuario"
+
+#: ihtml/themes/altlinux/login.tpl:44 ihtml/themes/altlinux/login.tpl:47
+#: ihtml/themes/default/login.tpl:44 ihtml/themes/default/login.tpl:47
+msgid "Directory"
+msgstr "Directorio"
+
+#: ihtml/themes/altlinux/login.tpl:55 ihtml/themes/default/login.tpl:55
+msgid "Sign in"
+msgstr "Entrando"
+
+#: ihtml/themes/altlinux/login.tpl:56 ihtml/themes/default/login.tpl:56
+msgid "Click here to log in"
+msgstr "Pulse aquí para entrar"
+
+#: ihtml/themes/altlinux/setup_introduction.tpl:1
+#: ihtml/themes/default/setup_introduction.tpl:1
+msgid "Welcome to the GOsa setup!"
+msgstr "Bienvenido a la configuración de GOsa"
+
+#: ihtml/themes/altlinux/setup_introduction.tpl:4
+#: ihtml/themes/default/setup_introduction.tpl:4
+msgid ""
+"It looks like you're calling GOsa for the first time - no configuration was "
+"found. This setup like script will try to aid you in creating a working "
+"configuration by performing three major steps: first we'll check the PHP "
+"installation for required modules, than we're going to check for optional/"
+"needed programms and after you've provided basic informations for your LDAP "
+"connectivity, we're going to check your LDAP setup."
+msgstr ""
+"Parece que esta ejecutando GOsa por primera vez - no se encontró la "
+"configuración. Los siguientes pasos tratarán de asistirlo en crear una "
+"configuración funcional, efectuando las siguientes tareas: comprobar la "
+"instalación de PHP y de los módulos necesarios, luego comprobar los "
+"programas opcionales y, luego de ingresar la información necesaria para "
+"conectarse al servidor LDAP, vamos a comprobar la configuración de LDAP."
+
 #: ihtml/themes/altlinux/framework.tpl:15
 #: ihtml/themes/default/framework.tpl:15
 msgid "Main"
@@ -7035,20 +7094,6 @@ msgstr "Salir"
 msgid "Signed in:"
 msgstr "Entrando"
 
-#: ihtml/themes/altlinux/islocked.tpl:2 ihtml/themes/default/islocked.tpl:2
-msgid "Locking conflict detected"
-msgstr "Detectado conflicto de Bloqueos"
-
-#: ihtml/themes/altlinux/islocked.tpl:9 ihtml/themes/default/islocked.tpl:9
-msgid ""
-"If this lock detection is false, the other person has obviously closed the "
-"webbrowser during the edit operation. You may delete the lockfile in this "
-"case by pressing the <i>Remove</i> button."
-msgstr ""
-"Si esta detección de bloqueo es falsa, la otra persona cerro su navegador "
-"mientras estaba editando. Puede borrar el archivo de bloqueo en ese caso, "
-"pulsando en el botón <i>Eliminar</i>."
-
 #: ihtml/themes/altlinux/setup_step2.tpl:1
 #: ihtml/themes/altlinux/setup_step3.tpl:1
 #: ihtml/themes/altlinux/setup_step4.tpl:1
@@ -7066,6 +7111,20 @@ msgid ""
 msgstr ""
 "El paso dos busca por una colección de programas/herramientas de soporte y "
 "comprueba si tienen al menos la mínima versión necesaria."
+
+#: ihtml/themes/altlinux/islocked.tpl:2 ihtml/themes/default/islocked.tpl:2
+msgid "Locking conflict detected"
+msgstr "Detectado conflicto de Bloqueos"
+
+#: ihtml/themes/altlinux/islocked.tpl:9 ihtml/themes/default/islocked.tpl:9
+msgid ""
+"If this lock detection is false, the other person has obviously closed the "
+"webbrowser during the edit operation. You may delete the lockfile in this "
+"case by pressing the <i>Remove</i> button."
+msgstr ""
+"Si esta detección de bloqueo es falsa, la otra persona cerro su navegador "
+"mientras estaba editando. Puede borrar el archivo de bloqueo en ese caso, "
+"pulsando en el botón <i>Eliminar</i>."
 
 #: ihtml/themes/altlinux/setup_step3.tpl:4
 #: ihtml/themes/default/setup_step3.tpl:4
@@ -7267,6 +7326,14 @@ msgstr ""
 msgid "Retry"
 msgstr "Reintentar"
 
+#: ihtml/themes/default/help.tpl:9
+msgid "GOsa help viewer"
+msgstr ""
+
+#: ihtml/themes/default/help.tpl:15
+msgid "Index"
+msgstr ""
+
 #: ihtml/themes/default/setup_useradmin.tpl:3
 msgid "You already have an Administrative Account and a Group."
 msgstr "Ya tiene una cuenta y un grupo administrativo."
@@ -7283,13 +7350,27 @@ msgstr ""
 "configuración puede ayudarle en esta tarea. Introduzca el nombre y "
 "contraseñas deseadas para crear las entradas necesarias."
 
-#: ihtml/themes/default/help.tpl:9
-msgid "GOsa help viewer"
-msgstr ""
+#, fuzzy
+#~ msgid "The given value for goFonQualify is not a valid number."
+#~ msgstr "El valor de 'Tamaño de Cola' no es valido."
 
-#: ihtml/themes/default/help.tpl:15
-msgid "Index"
-msgstr ""
+#~ msgid "Answering machine"
+#~ msgstr "Contestador automático"
+
+#~ msgid "Deliver missed calls as mail"
+#~ msgstr "Enviar llamadas perdidas como correo electrónico"
+
+#, fuzzy
+#~ msgid "Refresh"
+#~ msgstr "Referencias"
+
+#, fuzzy
+#~ msgid "Number"
+#~ msgstr "Noviembre"
+
+#, fuzzy
+#~ msgid "Option"
+#~ msgstr "Opciones"
 
 #~ msgid "Select to see users that have ftp settings"
 #~ msgstr "Selecctione para ver los usuarios que tienen configuraciones de ftp"
