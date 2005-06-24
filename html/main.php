@@ -24,10 +24,6 @@ require_once ("../include/php_setup.inc");
 require_once ("functions.inc");
 header("Content-type: text/html; charset=UTF-8");
 
-/* Reset error handler */
-$error_collector= "";
-set_error_handler('gosaRaiseError');
-
 /* Find all class files and include them */
 get_dir_list("$BASE_DIR/plugins");
 
@@ -283,19 +279,8 @@ $smarty->assign("w3c", "");
 $display= $header.$smarty->fetch(get_template_path('framework.tpl'));
 
 /* For development, perform a W3C conformance check if specified in gosa.conf */
-if (isset($config->data['MAIN']['W3CTEST'])) {
-  $fp = fopen("/tmp/gosa.html","w+");
-  fwrite($fp, $display, strlen($display));
-  $url= $config->data['MAIN']['W3CTEST'];
-  $str = shell_exec( "curl -F uploaded_file=@/tmp/gosa.html $url/check");
-  if(!preg_match("/This Page Is Valid/i",$str )){
-    /* Show errors */
-    echo $str;
-  } else {
-    /* Re-render page with W3C logo */
-    $smarty->assign("w3c", "<a href=\"$url/check?uri=referer\"><img alt=\"\" border=\"0\" src=\"$url/images/vh401.png\" alt=\"Valid HTML 4.01!\" height=\"31\" width=\"88\"></a>");
-    $display= $header.$smarty->fetch(get_template_path('framework.tpl'));
-  }
+if (isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->data['MAIN']['W3CTEST'])) {
+#  $display= "";
 }
 
 /* Show page... */
