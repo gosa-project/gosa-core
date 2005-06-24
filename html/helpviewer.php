@@ -89,9 +89,6 @@ $forwardlink                 = "<a href=\"?pg=%s\"  class=\"maintitlebar\">
                                   <img src='images/forward.png' align=\"middle\" alt=\""._("next")."\" border=\"0\">
                                  </a>";
 
-$error_collector= "";
-set_error_handler('gosaRaiseError');
-
 /* Define which tags musst be delete, header, navigation, banner */
 $replacements=array();
 $replacements['from']=array("@<!DOC.*<BODY >@si",

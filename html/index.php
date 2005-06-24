@@ -23,10 +23,6 @@ require_once ("../include/php_setup.inc");
 require_once ("functions.inc");
 header("Content-type: text/html; charset=UTF-8");
 
-/* Reset error handler */
-$error_collector= "";
-set_error_handler('gosaRaiseError');
-
 /* Set error handler to own one, initialize time calculation
    and start session. */
 session_start ();
