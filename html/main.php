@@ -275,7 +275,6 @@ if ($error_collector != ""){
 } else {
   $smarty->assign("php_errors", "");
 }
-$smarty->assign("w3c", "");
 $display= $header.$smarty->fetch(get_template_path('framework.tpl'));
 
 /* For development, perform a W3C conformance check if specified in gosa.conf */
