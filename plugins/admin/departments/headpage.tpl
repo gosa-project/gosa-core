@@ -1,4 +1,4 @@
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
 <tr>
   <td style="vertical-align:top;">
   <div class="contentboxh">
@@ -37,10 +37,10 @@
     <p class="contentboxh"><img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}</p>
    </div>
    <div class="contentboxb">
-     <table style="width:100%;border-top:1px solid #B0B0B0;">
+     <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
       {$alphabet}
      </table>
-    <table  style="width:100%;border-top:1px solid #B0B0B0;">
+    <table summary=""  style="width:100%;border-top:1px solid #B0B0B0;">
 			<tr>
 					<td width="50%"><img alt="" src="{$tree_image}" align=middle>&nbsp;{t}Display subdepartments of{/t}</td>
 				    <td>
@@ -50,7 +50,7 @@
 					</td>
 			</tr>
 	</table>
-    <table  style="width:100%;border-top:1px solid #B0B0B0;">
+    <table summary=""  style="width:100%;border-top:1px solid #B0B0B0;">
 			<tr>
 				<td width="50%">
 						<img alt="" src="{$search_image}" align=middle>&nbsp;{t}Display departments matching{/t}</td>
@@ -64,6 +64,6 @@
    </div>
   </td>
 </tr>
-</table>
+</table summary="">
 
 <input type="hidden" name="ignore">

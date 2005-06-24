@@ -1,4 +1,4 @@
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
 <tr>
   <td style="vertical-align:top;">
    <div class="contentboxh" style="height:20px;">
@@ -21,10 +21,10 @@
 t}Filters{/t}</b></p>
    </div>
    <div class="contentboxb">
-     <table style="width:100%;border-top:1px solid #B0B0B0; background-color:#F8F8F8">
+     <table summary="" style="width:100%;border-top:1px solid #B0B0B0; background-color:#F8F8F8">
       {$alphabet}
      </table>
-    <table width="100%" style="width:100%;border-top:1px solid #B0B0B0; background-color:#F8F8F8">
+    <table summary="" width="100%" style="width:100%;border-top:1px solid #B0B0B0; background-color:#F8F8F8">
 		<tr>
 			<td width="50%">
 				<img alt="" src="{$tree_image}" align=middle>&nbsp;{t}Display addresses of department{/t}
@@ -36,7 +36,7 @@ t}Filters{/t}</b></p>
 			</td>
 		</tr>
 	</table>
-    <table width="100%" style="width:100%;border-top:1px solid #B0B0B0; background-color:#F8F8F8">
+    <table summary="" width="100%" style="width:100%;border-top:1px solid #B0B0B0; background-color:#F8F8F8">
 		<tr>
 			<td width="50%">
 				<img alt="" src="{$search_image}" align=middle>&nbsp;{t}Display addresses matching{/t}
@@ -46,7 +46,7 @@ t}Filters{/t}</b></p>
 			</td>
 		</tr>
 	</table>
-    <table width="100%"  style="width:100%;border-top:1px solid #B0B0B0; background-color:#F8F8F8">
+    <table summary="" width="100%"  style="width:100%;border-top:1px solid #B0B0B0; background-color:#F8F8F8">
 		<tr>
 			<td width="50%">
 				<img alt="" src="{$search_image}" align=middle>&nbsp;{t}Display addresses of user{/t}
