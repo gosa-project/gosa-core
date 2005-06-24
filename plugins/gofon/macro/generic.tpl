@@ -21,6 +21,7 @@
       				<td>
 					   <select size="1" name="base" title="{t}Choose subtree to place application in{/t}">
 							{html_options options=$bases selected=$base_select}
+		<option disabled>&nbsp;</option>
 					   </select>
 		      		</td>
 	     		</tr>

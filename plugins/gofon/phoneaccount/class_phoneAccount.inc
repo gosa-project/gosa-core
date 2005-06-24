@@ -352,7 +352,7 @@ class phoneAccount extends plugin
       } else {
         $color= "";
       }
-      $hl.= "  <option $color label=\"$cn\" value=\"$cn\" $selected>$description</option>\n";
+      $hl.= "  <option $color label=\"$cn\" value=\"$cn\" $selected>$description&nbsp;</option>\n";
     }
     $hl.= "</select>\n";
     $smarty->assign ("hardware_list", $hl);

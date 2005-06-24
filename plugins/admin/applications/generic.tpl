@@ -53,7 +53,7 @@
  </tr>
 </table>
 
-<p class="plugbottom" style="height:4px; margin-bottom:0px;">&nbsp</p>
+<p class="plugbottom" style="height:4px; margin-bottom:0px;">&nbsp;</p>
 
 <table summary="" style="width:100%;">
   <tr>

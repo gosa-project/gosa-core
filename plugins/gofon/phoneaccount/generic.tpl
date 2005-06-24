@@ -4,6 +4,7 @@
    <h2><img alt="" align="middle" src="images/banana.png"> {t}Phone numbers{/t}</h2>
       <select style="width:380px; height:120px;" name="phonenumber_list[]" size=6 multiple {$telephoneNumberACL}>
        {html_options options=$phoneNumbers}
+		<option disabled>&nbsp;</option>
       </select>
       <br>
       <input name="phonenumber" size=20 align=middle maxlength=60 {$telephoneNumberACL} value="">
@@ -55,6 +56,7 @@
 		<td colspan=2><img alt="" src="images/select_macro.png" align="middle">&nbsp;{t}Phone macro{/t}
 			 <select name="macro" onchange="document.mainform.submit()" {$telephoneNumberACL}>
 			   {html_options options=$macros selected=$macro}
+		<option disabled>&nbsp;</option>
 			 </select>
 			 <input type="submit" name="refresh" value="{t}refresh{/t}" {$goFonMacroACL}>
 		</td>
