@@ -48,6 +48,7 @@
 		    <td>
 				<select name="depselect" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
 				  {html_options options=$deplist selected=$depselect}
+					<option disabled>&nbsp;</option>
 				</select>
 			</td>
 		</tr>

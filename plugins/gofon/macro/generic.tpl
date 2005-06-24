@@ -13,7 +13,7 @@
      				</td>
     			</tr>
     			<tr>
-					<td colspan=2><div style="height:15px;">
+					<td colspan=2>
 					</td>
 				</tr>
     			<tr>

@@ -241,9 +241,9 @@ class phoneAccount extends plugin
             $str= "<select name='".$var."' ".chkacl($this->acl, "goFonMacro").">";
             foreach(split(":",$default) as $choice){
               if($choosen==$choice){
-                $str.= "\n<option value='".$choice."' selected>".$choice."</option>";
+                $str.= "\n<option value='".$choice."' selected>".$choice."&nbsp;</option>";
               }else{
-                $str.= "\n<option value='".$choice."'>".$choice."</option>";
+                $str.= "\n<option value='".$choice."'>".$choice."&nbsp;</option>";
               }
             }
             $str.="</select>";

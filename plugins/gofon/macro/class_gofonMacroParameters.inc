@@ -191,14 +191,15 @@ class macroParameter extends plugin
 
       /* Assemble output table */
       $vars .="<tr>
+        <td>
         <input name=\"number".$key."\" value='".$key."' type='hidden'>
         <td><input name='var".$key."' type='hidden'   value='".$para['var']."'>ARG".$key."</td>
         <td><input size=\"45\" name='varname".$key."'  value='".$para['name']."'></td>
         <td>
         <select name='vartype".$key."'>
-        <option name='vartype".$key."' value='string' ".$sel1.">"._("String")."</option>
-        <option name='vartype".$key."' value='combo'   ".$sel2.">"._("Combobox")."</option>
-        <option name='vartype".$key."' value='bool'   ".$sel3.">"._("Bool")."</option>
+        <option  value='string' ".$sel1.">"._("String")."&nbsp;</option>
+        <option  value='combo'   ".$sel2.">"._("Combobox")."&nbsp;</option>
+        <option  value='bool'   ".$sel3.">"._("Bool")."&nbsp;</option>
         </select>
         </td>
         <td><input size=\"45\" name='default".$key."'   value='".$para['default']."'></td>
