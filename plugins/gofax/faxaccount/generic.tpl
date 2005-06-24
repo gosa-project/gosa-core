@@ -54,7 +54,7 @@
      {t}Deliver fax to printer{/t}&nbsp;
      <select size="1" name="goFaxPrinter" {$goFaxPrinterACL}>
       {html_options options=$printers selected=$goFaxPrinter}
-		<option disabled></option>
+		<option disabled> </option>
      </select>
 
    </td>

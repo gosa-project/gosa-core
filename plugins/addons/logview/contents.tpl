@@ -12,7 +12,7 @@
       <td>
        <select name="host" size=1 onChange="mainform.submit()">
 		       {html_options options=$hostlist selected=$host}
-			   <option disabled></option>
+			   <option disabled>&nbsp; </option>
        </select>
       </td>
      </tr>
@@ -21,7 +21,7 @@
       <td>
        <select name="log_level" size=1 onChange="mainform.submit()">
         	{html_options options=$loglevellist selected=$log_level}
-            <option disabled></option>
+            <option disabled>&nbsp;</option>
        </select>
       </td>
      </tr>
@@ -39,7 +39,7 @@
       <td>
        <select name="time" size=1 onChange="mainform.submit()">
         	{html_options options=$tilist selected=$time}
-            <option disabled></option>
+            <option disabled>&nbsp;</option>
        </select>
       </td>
      </tr>
