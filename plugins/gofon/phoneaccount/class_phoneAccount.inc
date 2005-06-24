@@ -245,19 +245,15 @@ class phoneAccount extends plugin
           $str.="</select>";
         }
 
+
+      
         /* Display switch for true false*/
         if($type == "bool"){
-
-          $str="<select name='".$var."' ".chkacl($this->acl, "goFonMacro").">";
-
-          if($choosen){
-            $str.="\n<option name='".$var."' value='0'>"._("false")."</option>";
-            $str.="\n<option name='".$var."' value='1' selected>"._("true")."</option>";
+          if(!$choosen){
+            $str="\n<input type='checkbox' name='".$var."' value='1'>";
           }else{
-            $str.="\n<option name='".$var."' value='0' selected>"._("false")."</option>";
-            $str.="\n<option name='".$var."' value='1'>"._("true")."</option>";
+            $str="\n<input type='checkbox' name='".$var."' value='1' checked>";
           }
-          $str.="<select name='".$var."'>";
         }
 
         /* display simple textfield */ 
@@ -425,6 +421,17 @@ class phoneAccount extends plugin
         foreach($this->macroarray[$this->macro] as $key => $paras){
           if(isset($_POST[$paras['var']])){
             $this->macroarray[$this->macro][$key]['choosen'] = $_POST[$paras['var']]; 
+          }
+        
+          /* Checkboxes are special, they are not Posted if they are not selected, so the won't be changed with the above code 
+             We need this code below to read and save checkboxes correct
+          */
+          if($this->macroarray[$this->macro][$key]['type']=="bool"){
+            if(isset($_POST[$this->macroarray[$this->macro][$key]['var']])) {
+              $this->macroarray[$this->macro][$key]['choosen']=$_POST[$paras['var']];
+            }else{
+              $this->macroarray[$this->macro][$key]['choosen']=false;
+            }
           }
         }
       }
