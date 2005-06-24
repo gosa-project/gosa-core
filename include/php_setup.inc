@@ -18,10 +18,128 @@
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+function gosaRaiseError($errno, $errstr, $errfile, $errline)
+{
+  global $error_collector;
+
+  /* Return if error reporting is set to zero */
+  if (error_reporting() == 0){
+    return;
+  }
+
+  /* Workaround for buggy imap_open error outputs */
+  if (preg_match('/imap_open/', $errstr)){
+    return;
+  }
+
+  /* FIXME: Workaround for PHP5 error message flooding. The new OOM
+     code want's us to use public/protected/private instead of flat
+     var declarations. For now I can't workaround this - let's ignore
+     the messages till the next major release which may drop support
+     for PHP4. */
+  if (preg_match('/var: Deprecated./', $errstr)){
+    return;
+  }
+
+  /* FIXME: Same as above. Compatibility does error flooding.*/
+  if (preg_match('/zend.ze1_compatibility_mode/', $errstr)){
+    return;
+  }
+
+  /* Hide ldap size limit messages */
+  if (preg_match('/ldap_error/', $errstr)){
+    if (preg_match('/sizelimit/', $errstr)){
+      return;
+    }
+  }
+
+  /* Create header as needed */
+  if ($error_collector == ""){
+    if ($_SESSION['js']==FALSE){
+      $error_collector= "<div>";
+    } else {
+      $error_collector= "<table width=\"100%\" style='background-color:#E0E0E0;border-bottom:1px solid black'><tr><td><img alt=\"\" align=\"middle\" src='".get_template_path('images/warning.png')."'>&nbsp;<font style='font-size:14px;font-weight:bold'>"._("Generating this page caused the PHP interpreter to raise some errors!")."</font></td><td align=right><button onClick='toggle(\"errorbox\")'>"._("Toggle information")."</button></td></tr></table><div id='errorbox' style='position:absolute; z-index:0; visibility: hidden'>";
+    }
+  }
+ 
+  /* Create error header */
+  $error_collector.= "<table width=\"100%\" cellspacing=0 style='background-color:#402005;color:white;border:2px solid red'><tr><td colspan=3><h1 style='color:white'>"._("PHP error")." \"$errstr\"</h1></td></tr>";
+  
+  /* Extract traceback data - if available */
+  if (function_exists('debug_backtrace')){
+    $trace= debug_backtrace();
+
+    /* Generate trace history */
+    for ($index= 1; $index<count($trace); $index++){
+      $ct= $trace[$index];
+      $loc= "";
+      if (isset($ct['class'])){
+        $loc.= _("class")." ".$ct['class'];
+        if (isset($ct['function'])){
+          $loc.= " / ";
+        }
+      }
+      if (isset($ct['function'])){
+        $loc.= _("function")." ".$ct['function'];
+      }
+      if (isset($ct['type'])){
+        switch ($ct['type']){
+          case "::":
+            $type= _("static");
+          break;
+
+          case "->":
+            $type= _("method");
+          break;
+        }
+      } else {
+        $type= "-";
+      }
+      $args= "";
+      foreach ($ct['args'] as $arg){
+        $args.= htmlentities("\"$arg\", ");
+      }
+      $args= preg_replace("/, $/", "", $args);
+      if ($args == ""){
+        $args= "-";
+      }
+      $file= $ct['file'];
+      $line= $ct['line'];
+      $color= ($index&1)?'#404040':'606060';
+      $error_collector.= "<tr style='background-color:$color'><td style='padding-left:20px' width=\"30%\">"._("Trace")."[$index]: $loc</td>";
+      $error_collector.= "<td>"._("File").": $file ("._('Line')." $line)</td><td width=\"10%\">"._("Type").": $type</td></tr>";
+      $error_collector.= "<tr style='background-color:$color'><td colspan=3 style='padding-left:20px;'>"._("Arguments").": $args</td></tr>";
+    }
+  }
+
+  /* Close error table */
+  $error_collector.= "</table>";
+
+  /* Write to syslog */
+  gosa_log ("PHP error: $errstr ($errfile, line $errline)");
+
+  /* Flush in case of fatal errors */
+  if (preg_match('/^fatal/i', $errstr)){
+    echo $error_collector."</div>";
+    flush();
+    exit;
+  }
+}
+
+
+function dummy_error_handler()
+{
+}
+
+
 /* Get base dir for reference */
 $BASE_DIR= dirname(dirname(__FILE__));
 $ROOT_DIR= $BASE_DIR."/html";
 error_reporting (E_ALL);
+
+/* Register error handler */
+$error_collector= "";
+set_error_handler('gosaRaiseError');
 
 $variables_order= "ES";
 ini_set("register_globals",0);
