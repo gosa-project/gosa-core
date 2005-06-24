@@ -21,6 +21,15 @@ class ogrouptabs extends tabs
           $this->by_object['termgroup']->parent= &$this;
 
           break;
+
+        case "U":
+          /* Add a user tab used for mail distribution lists */
+          require_once("class_mailogroup.inc");
+          $this->by_name['mailogroup']= _("Mail");
+          $this->by_object['mailogroup']= new mailogroup($this->config, $this->dn);
+          $this->by_object['mailogroup']->parent= &$this;
+
+          break;
       }
     }
   }
@@ -28,6 +37,29 @@ class ogrouptabs extends tabs
   function check()
   {
     return (tabs::check(TRUE));
+  }
+
+
+  function save_object($save_current= FALSE)
+  {
+    tabs::save_object($save_current);
+
+    /* Update reference, transfer variables */
+    $baseobject= $this->by_object['ogroup'];
+    foreach ($this->by_object as $name => $obj){
+
+      /* Don't touch base object */
+      if ($name != 'ogroup'){
+        $obj->parent= &$this;
+        $obj->uid= $baseobject->uid;
+        $obj->sn= $baseobject->uid;
+        $obj->givenName= $baseobject->uid;
+        $this->by_object[$name]= $obj;
+      }
+
+      /* Update parent in base object */
+      $this->by_object['ogroup']->parent= &$this;
+    }
   }
 
 
@@ -55,6 +87,7 @@ class ogrouptabs extends tabs
     if ($this->dn == "new"){
       $this->dn= 'cn='.$baseobject->cn.','.get_groups_ou().$baseobject->base;
     }
+
     tabs::save(TRUE);
   }
 

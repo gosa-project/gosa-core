@@ -36,6 +36,10 @@ class termgroup extends plugin
     $this->config= $config;
   }
 
+  function check()
+  {
+  }
+
   function execute()
   {
 
