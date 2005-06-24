@@ -117,6 +117,12 @@ class user extends plugin
           $this->$val= $this->attrs["$val"][0];
         }
       }
+
+      /* Fix public visible attribute if unset */
+      if (!isset($this->attrs['publicVisible'])){
+        $this->publicVisible == "nein";
+      }
+
     }
 
     /* Create me for new accounts */
@@ -435,7 +441,7 @@ class user extends plugin
         preg_match('/true/i', $this->config->current['GOVERNMENTMODE'])){
       $smarty->assign("governmentmode", "true");
       $ivbbmodes= array("nein", "ivbv", "testa", "ivbv,testa", "internet",
-          "internet,ivbv", "internet,testa", "internet,ivbv,testa", "ja");
+          "internet,ivbv", "internet,testa", "internet,ivbv,testa");
       $smarty->assign("ivbbmodes", $ivbbmodes);
       foreach ($this->govattrs as $val){
         $smarty->assign("$val", $this->$val);
@@ -599,6 +605,11 @@ class user extends plugin
         } elseif (!$this->new) {
           $this->attrs["$val"]= array();
         }
+      }
+
+      /* Remove attribute if set to "nein" */
+      if ($this->publicVisible == "nein"){
+        $this->attrs['publicVisible']= array();
       }
 
     }
