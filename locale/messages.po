@@ -30,6 +30,7 @@ msgstr ""
 
 #: contrib/gosa.conf:59 contrib/gosa.conf:70
 #: plugins/personal/mail/class_mailAccount.inc:22
+#: plugins/admin/ogroups/tabs_ogroups.inc:28
 #: plugins/generic/references/class_reference.inc:24
 msgid "Mail"
 msgstr ""
@@ -90,7 +91,7 @@ msgstr ""
 msgid "Options"
 msgstr ""
 
-#: contrib/gosa.conf:83
+#: contrib/gosa.conf:83 plugins/gofon/phoneaccount/class_phoneAccount.inc:224
 msgid "Parameter"
 msgstr ""
 
@@ -269,12 +270,14 @@ msgstr ""
 
 #: plugins/personal/mail/class_mailAccount.inc:684
 #: plugins/personal/mail/class_mailAccount.inc:688
-#: plugins/addons/addressbook/class_addressbook.inc:568
+#: plugins/addons/addressbook/class_addressbook.inc:569
+#: plugins/admin/ogroups/class_mailogroup.inc:45
 msgid "Please enter a valid email address in 'Primary address' field."
 msgstr ""
 
 #: plugins/personal/mail/class_mailAccount.inc:695
 #: plugins/admin/groups/class_groupMail.inc:619
+#: plugins/admin/ogroups/class_mailogroup.inc:52
 msgid "The primary address you've entered is already in use."
 msgstr ""
 
@@ -294,6 +297,7 @@ msgid "You need to set the maximum mail size in order to reject anything."
 msgstr ""
 
 #: plugins/personal/mail/generic.tpl:7 plugins/admin/groups/mail.tpl:10
+#: plugins/admin/ogroups/mail.tpl:10
 msgid "Primary address"
 msgstr ""
 
@@ -355,8 +359,8 @@ msgstr ""
 #: plugins/admin/systems/phonesettings.tpl:196
 #: plugins/admin/ogroups/ogroup_objects.tpl:50
 #: plugins/admin/ogroups/generic.tpl:38
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:375
-#: plugins/gofon/phoneaccount/generic.tpl:10
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:374
+#: plugins/gofon/phoneaccount/generic.tpl:11
 msgid "Add"
 msgstr ""
 
@@ -387,7 +391,7 @@ msgstr ""
 #: plugins/admin/systems/phonesettings.tpl:197
 #: plugins/admin/ogroups/generic.tpl:39 plugins/admin/ogroups/remove.tpl:15
 #: plugins/admin/ogroups/headpage.tpl:18
-#: plugins/gofon/phoneaccount/generic.tpl:12 plugins/gofon/macro/remove.tpl:14
+#: plugins/gofon/phoneaccount/generic.tpl:13 plugins/gofon/macro/remove.tpl:14
 #: plugins/gofon/macro/headpage.tpl:18
 msgid "Delete"
 msgstr ""
@@ -612,8 +616,9 @@ msgstr ""
 #: plugins/admin/systems/servdb.tpl:18 plugins/admin/systems/servdb.tpl:34
 #: plugins/admin/systems/servdb.tpl:50 plugins/admin/systems/servdb.tpl:86
 #: plugins/admin/systems/servdb.tpl:109 ihtml/themes/altlinux/login.tpl:35
-#: ihtml/themes/altlinux/login.tpl:39 ihtml/themes/default/login.tpl:35
-#: ihtml/themes/default/login.tpl:39
+#: ihtml/themes/altlinux/login.tpl:39
+#: ihtml/themes/altlinux/setup_useradmin.tpl:30
+#: ihtml/themes/default/login.tpl:35 ihtml/themes/default/login.tpl:39
 #: ihtml/themes/default/setup_useradmin.tpl:30
 msgid "Password"
 msgstr ""
@@ -676,6 +681,7 @@ msgstr ""
 #: plugins/addons/ldapmanager/contentcsv.tpl:122
 #: plugins/addons/ldapmanager/contentexport.tpl:66 include/functions.inc:1204
 #: ihtml/themes/altlinux/setup_step2.tpl:12
+#: ihtml/themes/altlinux/setup_useradmin.tpl:40
 #: ihtml/themes/altlinux/setup_step3.tpl:17
 #: ihtml/themes/altlinux/setup_step4.tpl:99
 #: ihtml/themes/altlinux/setup_finish.tpl:30
@@ -921,7 +927,7 @@ msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:190
 #: plugins/admin/systems/class_terminalService.inc:122
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:189
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:190
 msgid "automatic"
 msgstr ""
 
@@ -981,7 +987,7 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:370
 #: plugins/personal/samba/class_sambaAccount.inc:388
 #: plugins/personal/samba/class_sambaAccount.inc:406
-#: plugins/personal/generic/class_user.inc:214
+#: plugins/personal/generic/class_user.inc:220
 #: plugins/gofax/reports/class_faxreport.inc:272
 #: plugins/gofon/reports/class_fonreport.inc:208
 msgid "January"
@@ -992,7 +998,7 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:370
 #: plugins/personal/samba/class_sambaAccount.inc:388
 #: plugins/personal/samba/class_sambaAccount.inc:406
-#: plugins/personal/generic/class_user.inc:214
+#: plugins/personal/generic/class_user.inc:220
 #: plugins/gofax/reports/class_faxreport.inc:272
 #: plugins/gofon/reports/class_fonreport.inc:208
 msgid "February"
@@ -1003,7 +1009,7 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:370
 #: plugins/personal/samba/class_sambaAccount.inc:388
 #: plugins/personal/samba/class_sambaAccount.inc:406
-#: plugins/personal/generic/class_user.inc:214
+#: plugins/personal/generic/class_user.inc:220
 #: plugins/gofax/reports/class_faxreport.inc:272
 #: plugins/gofon/reports/class_fonreport.inc:208
 msgid "March"
@@ -1014,7 +1020,7 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:370
 #: plugins/personal/samba/class_sambaAccount.inc:388
 #: plugins/personal/samba/class_sambaAccount.inc:406
-#: plugins/personal/generic/class_user.inc:214
+#: plugins/personal/generic/class_user.inc:220
 #: plugins/gofax/reports/class_faxreport.inc:272
 #: plugins/gofon/reports/class_fonreport.inc:208
 msgid "April"
@@ -1025,7 +1031,7 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:371
 #: plugins/personal/samba/class_sambaAccount.inc:389
 #: plugins/personal/samba/class_sambaAccount.inc:407
-#: plugins/personal/generic/class_user.inc:215
+#: plugins/personal/generic/class_user.inc:221
 #: plugins/gofax/reports/class_faxreport.inc:273
 #: plugins/gofon/reports/class_fonreport.inc:209
 msgid "May"
@@ -1036,7 +1042,7 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:371
 #: plugins/personal/samba/class_sambaAccount.inc:389
 #: plugins/personal/samba/class_sambaAccount.inc:407
-#: plugins/personal/generic/class_user.inc:215
+#: plugins/personal/generic/class_user.inc:221
 #: plugins/gofax/reports/class_faxreport.inc:273
 #: plugins/gofon/reports/class_fonreport.inc:209
 msgid "June"
@@ -1047,7 +1053,7 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:371
 #: plugins/personal/samba/class_sambaAccount.inc:389
 #: plugins/personal/samba/class_sambaAccount.inc:407
-#: plugins/personal/generic/class_user.inc:215
+#: plugins/personal/generic/class_user.inc:221
 #: plugins/gofax/reports/class_faxreport.inc:273
 #: plugins/gofon/reports/class_fonreport.inc:209
 msgid "July"
@@ -1058,7 +1064,7 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:371
 #: plugins/personal/samba/class_sambaAccount.inc:389
 #: plugins/personal/samba/class_sambaAccount.inc:407
-#: plugins/personal/generic/class_user.inc:215
+#: plugins/personal/generic/class_user.inc:221
 #: plugins/gofax/reports/class_faxreport.inc:273
 #: plugins/gofon/reports/class_fonreport.inc:209
 msgid "August"
@@ -1069,7 +1075,7 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:371
 #: plugins/personal/samba/class_sambaAccount.inc:389
 #: plugins/personal/samba/class_sambaAccount.inc:407
-#: plugins/personal/generic/class_user.inc:215
+#: plugins/personal/generic/class_user.inc:221
 #: plugins/gofax/reports/class_faxreport.inc:274
 #: plugins/gofon/reports/class_fonreport.inc:210
 msgid "September"
@@ -1080,7 +1086,7 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:372
 #: plugins/personal/samba/class_sambaAccount.inc:390
 #: plugins/personal/samba/class_sambaAccount.inc:408
-#: plugins/personal/generic/class_user.inc:216
+#: plugins/personal/generic/class_user.inc:222
 #: plugins/gofax/reports/class_faxreport.inc:274
 #: plugins/gofon/reports/class_fonreport.inc:210
 msgid "October"
@@ -1091,7 +1097,7 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:372
 #: plugins/personal/samba/class_sambaAccount.inc:390
 #: plugins/personal/samba/class_sambaAccount.inc:408
-#: plugins/personal/generic/class_user.inc:216
+#: plugins/personal/generic/class_user.inc:222
 #: plugins/gofax/reports/class_faxreport.inc:274
 #: plugins/gofon/reports/class_fonreport.inc:210
 msgid "November"
@@ -1102,7 +1108,7 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:372
 #: plugins/personal/samba/class_sambaAccount.inc:390
 #: plugins/personal/samba/class_sambaAccount.inc:408
-#: plugins/personal/generic/class_user.inc:216
+#: plugins/personal/generic/class_user.inc:222
 #: plugins/gofax/reports/class_faxreport.inc:274
 #: plugins/gofon/reports/class_fonreport.inc:210
 msgid "December"
@@ -1430,140 +1436,140 @@ msgid ""
 "possible!"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:225
+#: plugins/personal/generic/class_user.inc:231
 msgid "female"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:225
+#: plugins/personal/generic/class_user.inc:231
 msgid "male"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:235
+#: plugins/personal/generic/class_user.inc:241
 msgid "This account has no valid GOsa extensions."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:264
+#: plugins/personal/generic/class_user.inc:270
 msgid "The specified file has not been uploaded via HTTP POST! Aborted."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:359
+#: plugins/personal/generic/class_user.inc:365
 msgid "Please enter a valid serial number"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:396
+#: plugins/personal/generic/class_user.inc:402
 #, php-format
 msgid ""
 "Certificate is valid from <b>%s</b> to <b>%s</b> and is currently <b>%s</b>."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:396
+#: plugins/personal/generic/class_user.inc:402
 msgid "valid"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:396
+#: plugins/personal/generic/class_user.inc:402
 msgid "invalid"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:400
+#: plugins/personal/generic/class_user.inc:406
 msgid "No certificate installed"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:789
+#: plugins/personal/generic/class_user.inc:800
 msgid "Kerberos database communication failed"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:806
+#: plugins/personal/generic/class_user.inc:817
 msgid "Can't remove user from kerberos database."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:817
+#: plugins/personal/generic/class_user.inc:828
 msgid "Can't add user to kerberos database."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:857
+#: plugins/personal/generic/class_user.inc:868
 msgid "You have no permissions to create a user on this 'Base'."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:862
+#: plugins/personal/generic/class_user.inc:873
 msgid "You have no permissions to move a user from the original 'Base'."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:868
-#: plugins/addons/addressbook/class_addressbook.inc:525
+#: plugins/personal/generic/class_user.inc:879
+#: plugins/addons/addressbook/class_addressbook.inc:526
 #: plugins/admin/users/class_userManagement.inc:425
 msgid "The required field 'Name' is not set."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:877
+#: plugins/personal/generic/class_user.inc:888
 msgid "There's already a person with this 'Login' in the database."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:883
-#: plugins/addons/addressbook/class_addressbook.inc:529
+#: plugins/personal/generic/class_user.inc:894
+#: plugins/addons/addressbook/class_addressbook.inc:530
 #: plugins/admin/users/class_userManagement.inc:428
 msgid "The required field 'Given name' is not set."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:886
+#: plugins/personal/generic/class_user.inc:897
 msgid "The required field 'Login' is not set."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:893
+#: plugins/personal/generic/class_user.inc:904
 msgid ""
 "There's already a person with this 'Name'/'Given name' combination in the "
 "database."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:900
+#: plugins/personal/generic/class_user.inc:911
 msgid ""
 "The field 'Login' contains invalid characters. Lowercase, numbers and dashes "
 "are allowed."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:903
+#: plugins/personal/generic/class_user.inc:914
 msgid "The field 'Homepage' contains an invalid URL definition."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:906
-#: plugins/personal/generic/class_user.inc:934
-#: plugins/addons/addressbook/class_addressbook.inc:535
-#: plugins/addons/addressbook/class_addressbook.inc:563
+#: plugins/personal/generic/class_user.inc:917
+#: plugins/personal/generic/class_user.inc:945
+#: plugins/addons/addressbook/class_addressbook.inc:536
+#: plugins/addons/addressbook/class_addressbook.inc:564
 #: plugins/admin/departments/class_departmentGeneric.inc:155
 msgid "The field 'Name' contains invalid characters."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:909
-#: plugins/personal/generic/class_user.inc:931
-#: plugins/addons/addressbook/class_addressbook.inc:538
-#: plugins/addons/addressbook/class_addressbook.inc:560
+#: plugins/personal/generic/class_user.inc:920
+#: plugins/personal/generic/class_user.inc:942
+#: plugins/addons/addressbook/class_addressbook.inc:539
+#: plugins/addons/addressbook/class_addressbook.inc:561
 msgid "The field 'Given name' contains invalid characters."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:914
-#: plugins/personal/generic/class_user.inc:917
-#: plugins/addons/addressbook/class_addressbook.inc:543
-#: plugins/addons/addressbook/class_addressbook.inc:546
+#: plugins/personal/generic/class_user.inc:925
+#: plugins/personal/generic/class_user.inc:928
+#: plugins/addons/addressbook/class_addressbook.inc:544
+#: plugins/addons/addressbook/class_addressbook.inc:547
 #: plugins/admin/departments/class_departmentGeneric.inc:158
 msgid "The field 'Phone' contains an invalid phone number."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:920
-#: plugins/addons/addressbook/class_addressbook.inc:549
+#: plugins/personal/generic/class_user.inc:931
+#: plugins/addons/addressbook/class_addressbook.inc:550
 #: plugins/admin/departments/class_departmentGeneric.inc:161
 msgid "The field 'Fax' contains an invalid phone number."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:923
-#: plugins/addons/addressbook/class_addressbook.inc:552
+#: plugins/personal/generic/class_user.inc:934
+#: plugins/addons/addressbook/class_addressbook.inc:553
 msgid "The field 'Mobile' contains an invalid phone number."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:926
-#: plugins/addons/addressbook/class_addressbook.inc:555
+#: plugins/personal/generic/class_user.inc:937
+#: plugins/addons/addressbook/class_addressbook.inc:556
 msgid "The field 'Pager' contains an invalid phone number."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1051
+#: plugins/personal/generic/class_user.inc:1062
 msgid "Could not open specified certificate!"
 msgstr ""
 
@@ -1591,14 +1597,14 @@ msgstr ""
 #: plugins/addons/addressbook/contents.tpl:14
 #: plugins/addons/addressbook/address_edit.tpl:20
 #: plugins/addons/addressbook/address_info.tpl:16
-#: plugins/addons/addressbook/class_addressbook.inc:502
+#: plugins/addons/addressbook/class_addressbook.inc:503
 #: plugins/admin/users/template.tpl:19 plugins/gofon/macro/parameter.tpl:5
 msgid "Name"
 msgstr ""
 
 #: plugins/personal/generic/generic.tpl:30
 #: plugins/addons/addressbook/address_edit.tpl:20
-#: plugins/addons/addressbook/class_addressbook.inc:502
+#: plugins/addons/addressbook/class_addressbook.inc:503
 #: plugins/admin/users/template.tpl:23
 msgid "Given name"
 msgstr ""
@@ -1817,7 +1823,7 @@ msgstr ""
 #: plugins/personal/connectivity/class_kolabAccount.inc:202
 #: plugins/admin/groups/class_groupMail.inc:408
 #: plugins/admin/applications/class_applicationParameters.inc:94
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:377
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:376
 #: ihtml/themes/altlinux/islocked.tpl:13 ihtml/themes/default/islocked.tpl:13
 msgid "Remove"
 msgstr ""
@@ -2171,7 +2177,7 @@ msgstr ""
 
 #: plugins/gofax/blocklists/generic.tpl:32
 #: plugins/admin/systems/service.tpl:42 plugins/admin/systems/service.tpl:120
-#: include/functions.inc:1608
+#: include/php_setup.inc:112
 msgid "Type"
 msgstr ""
 
@@ -2186,7 +2192,7 @@ msgstr ""
 #: plugins/admin/systems/printer.tpl:10
 #: plugins/admin/systems/wingeneric.tpl:24
 #: plugins/admin/systems/component.tpl:24 plugins/admin/ogroups/generic.tpl:13
-#: plugins/gofon/macro/generic.tpl:35
+#: plugins/gofon/macro/generic.tpl:36
 #: plugins/generic/references/contents.tpl:11
 msgid "Description"
 msgstr ""
@@ -2265,7 +2271,7 @@ msgstr ""
 #: plugins/admin/users/remove.tpl:2 plugins/admin/applications/remove.tpl:2
 #: plugins/admin/departments/remove.tpl:2 plugins/admin/systems/remove.tpl:2
 #: plugins/admin/ogroups/remove.tpl:2 plugins/gofon/macro/remove.tpl:2
-#: html/index.php:217 ihtml/themes/altlinux/conflict.tpl:6
+#: html/index.php:213 ihtml/themes/altlinux/conflict.tpl:6
 #: ihtml/themes/altlinux/islocked.tpl:6 ihtml/themes/default/conflict.tpl:6
 #: ihtml/themes/default/islocked.tpl:6
 msgid "Warning"
@@ -2720,7 +2726,7 @@ msgstr ""
 #: plugins/addons/addressbook/class_addressbook.inc:359
 #: plugins/addons/addressbook/class_addressbook.inc:366
 #: plugins/addons/addressbook/class_addressbook.inc:370
-#: plugins/addons/addressbook/class_addressbook.inc:452
+#: plugins/addons/addressbook/class_addressbook.inc:453
 msgid "Dial"
 msgstr ""
 
@@ -2809,51 +2815,51 @@ msgstr ""
 msgid "Send mail to %s"
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:464
+#: plugins/addons/addressbook/class_addressbook.inc:465
 msgid "global addressbook"
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:467
+#: plugins/addons/addressbook/class_addressbook.inc:468
 msgid "organizations user database"
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:471
+#: plugins/addons/addressbook/class_addressbook.inc:472
 #, php-format
 msgid "Contact stored in %s"
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:473
+#: plugins/addons/addressbook/class_addressbook.inc:474
 msgid "Creating new entry in"
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:502
+#: plugins/addons/addressbook/class_addressbook.inc:503
 #: plugins/addons/logview/class_logview.inc:63
 #: plugins/addons/logview/class_logview.inc:77
 msgid "All"
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:503
+#: plugins/addons/addressbook/class_addressbook.inc:504
 msgid "Work phone"
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:503
+#: plugins/addons/addressbook/class_addressbook.inc:504
 msgid "Cell phone"
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:504
+#: plugins/addons/addressbook/class_addressbook.inc:505
 msgid "Home phone"
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:504
+#: plugins/addons/addressbook/class_addressbook.inc:505
 msgid "User ID"
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:576
+#: plugins/addons/addressbook/class_addressbook.inc:577
 msgid ""
 "Cannot create a unique DN for your entry. Please fill more formular fields."
 msgstr ""
 
-#: plugins/addons/addressbook/class_addressbook.inc:588
+#: plugins/addons/addressbook/class_addressbook.inc:589
 msgid ""
 "You have no permissions to create or modify a global address book entry."
 msgstr ""
@@ -3438,6 +3444,7 @@ msgstr ""
 #: plugins/admin/users/template.tpl:44
 #: ihtml/themes/altlinux/setup_introduction.tpl:12
 #: ihtml/themes/altlinux/setup_step2.tpl:13
+#: ihtml/themes/altlinux/setup_useradmin.tpl:41
 #: ihtml/themes/altlinux/setup_step3.tpl:18
 #: ihtml/themes/default/setup_introduction.tpl:12
 #: ihtml/themes/default/setup_useradmin.tpl:41
@@ -3471,7 +3478,6 @@ msgstr ""
 
 #: plugins/admin/users/class_userManagement.inc:368
 #: plugins/admin/ogroups/class_ogroup.inc:203
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:100
 msgid "none"
 msgstr ""
 
@@ -4238,7 +4244,7 @@ msgstr ""
 #: plugins/admin/systems/class_terminalGeneric.inc:89
 #: plugins/admin/systems/class_servGeneric.inc:59
 #: plugins/admin/systems/class_workstationGeneric.inc:98
-#: plugins/admin/ogroups/class_termgroup.inc:55
+#: plugins/admin/ogroups/class_termgroup.inc:59
 msgid "No WAKECMD definition found in your gosa.conf"
 msgstr ""
 
@@ -4251,9 +4257,9 @@ msgstr ""
 #: plugins/admin/systems/class_workstationGeneric.inc:102
 #: plugins/admin/systems/class_workstationGeneric.inc:114
 #: plugins/admin/systems/class_workstationGeneric.inc:126
-#: plugins/admin/ogroups/class_termgroup.inc:59
-#: plugins/admin/ogroups/class_termgroup.inc:71
-#: plugins/admin/ogroups/class_termgroup.inc:83
+#: plugins/admin/ogroups/class_termgroup.inc:63
+#: plugins/admin/ogroups/class_termgroup.inc:75
+#: plugins/admin/ogroups/class_termgroup.inc:87
 #, php-format
 msgid "Execution of '%s' failed!"
 msgstr ""
@@ -4261,35 +4267,35 @@ msgstr ""
 #: plugins/admin/systems/class_terminalGeneric.inc:101
 #: plugins/admin/systems/class_servGeneric.inc:71
 #: plugins/admin/systems/class_workstationGeneric.inc:110
-#: plugins/admin/ogroups/class_termgroup.inc:67
+#: plugins/admin/ogroups/class_termgroup.inc:71
 msgid "No REBOOTCMD definition found in your gosa.conf"
 msgstr ""
 
 #: plugins/admin/systems/class_terminalGeneric.inc:113
 #: plugins/admin/systems/class_servGeneric.inc:83
 #: plugins/admin/systems/class_workstationGeneric.inc:122
-#: plugins/admin/ogroups/class_termgroup.inc:79
+#: plugins/admin/ogroups/class_termgroup.inc:83
 msgid "No HALTCMD definition found in your gosa.conf"
 msgstr ""
 
 #: plugins/admin/systems/class_terminalGeneric.inc:144
 #: plugins/admin/systems/class_servGeneric.inc:112
 #: plugins/admin/systems/class_workstationGeneric.inc:152
-#: plugins/admin/ogroups/class_termgroup.inc:95
+#: plugins/admin/ogroups/class_termgroup.inc:99
 msgid "Switch off"
 msgstr ""
 
 #: plugins/admin/systems/class_terminalGeneric.inc:144
 #: plugins/admin/systems/class_servGeneric.inc:112
 #: plugins/admin/systems/class_workstationGeneric.inc:152
-#: plugins/admin/ogroups/class_termgroup.inc:95
+#: plugins/admin/ogroups/class_termgroup.inc:99
 msgid "Reboot"
 msgstr ""
 
 #: plugins/admin/systems/class_terminalGeneric.inc:146
 #: plugins/admin/systems/class_servGeneric.inc:114
 #: plugins/admin/systems/class_workstationGeneric.inc:154
-#: plugins/admin/ogroups/class_termgroup.inc:95
+#: plugins/admin/ogroups/class_termgroup.inc:99
 msgid "Wake up"
 msgstr ""
 
@@ -4768,12 +4774,13 @@ msgid "Choose mouse port"
 msgstr ""
 
 #: plugins/admin/systems/service.tpl:66
-#: plugins/gofon/phoneaccount/generic.tpl:21
+#: plugins/gofon/phoneaccount/generic.tpl:22
 msgid "Telephone hardware"
 msgstr ""
 
 #: plugins/admin/systems/service.tpl:69
-#: plugins/gofon/phoneaccount/generic.tpl:25
+#: plugins/gofon/phoneaccount/generic.tpl:24
+#: plugins/gofon/phoneaccount/generic.tpl:26
 msgid "Telephone"
 msgstr ""
 
@@ -5076,7 +5083,7 @@ msgid "Choose a phone type"
 msgstr ""
 
 #: plugins/admin/systems/phonesettings.tpl:13
-#: plugins/gofon/phoneaccount/generic.tpl:65
+#: plugins/gofon/phoneaccount/generic.tpl:61
 msgid "refresh"
 msgstr ""
 
@@ -5370,101 +5377,106 @@ msgstr ""
 msgid "Show groups containing printers"
 msgstr ""
 
+#: plugins/admin/ogroups/mail.tpl:7
+msgid "Mail distribution list"
+msgstr ""
+
+#: plugins/admin/ogroups/mail.tpl:11
+msgid "Primary mail address for this distribution list"
+msgstr ""
+
 #: plugins/gofon/phoneaccount/main.inc:120
 msgid "Phone settings"
+msgstr ""
+
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:100
+msgid "no macro"
 msgstr ""
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:117
 msgid "undefined"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:208
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:209
 msgid ""
 "The macro you selected in the past, is no longer available for you, please "
 "choose another one."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:254
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:257
-msgid "false"
-msgstr ""
-
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:255
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:258
-msgid "true"
-msgstr ""
-
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:281
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:280
 msgid "This account has no phone extensions."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:291
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:290
 msgid "Remove phone account"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:292
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:291
 msgid ""
 "This account has phone features enabled. You can disable them by clicking "
 "below."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:294
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:293
 msgid "Create phone account"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:295
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:294
 msgid ""
 "This account has phone features disabled. You can enable them by clicking "
 "below."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:307
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:306
 msgid "Please enter a valid phone number!"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:344
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:343
 msgid "Choose your private phone"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:443
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:453
 #, php-format
 msgid "You need to specify at least one phone number!"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:457
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:467
 #, php-format
 msgid "The number '%s' is no valid phone number!"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:460
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:470
 #, php-format
 msgid "The timeout '%s' contains invalid characters!"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:468
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:276
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:478
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:277
 #, php-format
 msgid "The parameter %s contains invalid char. '!,#' is used as delimiter"
 msgstr ""
 
+#: plugins/gofon/phoneaccount/generic.tpl:1
 #: plugins/gofon/phoneaccount/generic.tpl:4
 msgid "Phone numbers"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/generic.tpl:37
+#: plugins/gofon/phoneaccount/generic.tpl:38
 msgid "Forward calls to"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/generic.tpl:41
+#: plugins/gofon/phoneaccount/generic.tpl:40
+#: plugins/gofon/phoneaccount/generic.tpl:42
 msgid "Phone number"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/generic.tpl:41
+#: plugins/gofon/phoneaccount/generic.tpl:42
 msgid "Timeout (s)"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/generic.tpl:58
-msgid "Select Makro"
+#: plugins/gofon/phoneaccount/generic.tpl:54
+#: plugins/gofon/phoneaccount/generic.tpl:56
+msgid "Phone macro"
 msgstr ""
 
 #: plugins/gofon/reports/class_fonreport.inc:6
@@ -5534,11 +5546,11 @@ msgstr ""
 msgid "Macro name to be displayed"
 msgstr ""
 
-#: plugins/gofon/macro/generic.tpl:42
+#: plugins/gofon/macro/generic.tpl:43
 msgid "Visible for user"
 msgstr ""
 
-#: plugins/gofon/macro/generic.tpl:51
+#: plugins/gofon/macro/generic.tpl:52
 msgid "Macro text"
 msgstr ""
 
@@ -5563,11 +5575,11 @@ msgstr ""
 msgid "Display macros of department"
 msgstr ""
 
-#: plugins/gofon/macro/headpage.tpl:58
+#: plugins/gofon/macro/headpage.tpl:59
 msgid "Display macros  matching"
 msgstr ""
 
-#: plugins/gofon/macro/headpage.tpl:61
+#: plugins/gofon/macro/headpage.tpl:62
 msgid "Regular expression for matching macro names"
 msgstr ""
 
@@ -5575,28 +5587,28 @@ msgstr ""
 msgid "Phone macro management"
 msgstr ""
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:199
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:200
 msgid "String"
 msgstr ""
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:200
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:201
 msgid "Combobox"
 msgstr ""
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:201
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:202
 msgid "Bool"
 msgstr ""
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:207
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:208
 msgid "Delete unused"
 msgstr ""
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:268
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:269
 #, php-format
 msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro."
 msgstr ""
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:281
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:282
 #, php-format
 msgid "The parameter %s has incorrect value for type bool."
 msgstr ""
@@ -5670,6 +5682,50 @@ msgstr ""
 #: plugins/generic/welcome/main.inc:24
 #, php-format
 msgid "Welcome %s!"
+msgstr ""
+
+#: include/php_setup.inc:61
+msgid "Generating this page caused the PHP interpreter to raise some errors!"
+msgstr ""
+
+#: include/php_setup.inc:61 html/main.php:292
+msgid "Toggle information"
+msgstr ""
+
+#: include/php_setup.inc:66
+msgid "PHP error"
+msgstr ""
+
+#: include/php_setup.inc:77
+msgid "class"
+msgstr ""
+
+#: include/php_setup.inc:83
+msgid "function"
+msgstr ""
+
+#: include/php_setup.inc:88
+msgid "static"
+msgstr ""
+
+#: include/php_setup.inc:92
+msgid "method"
+msgstr ""
+
+#: include/php_setup.inc:111
+msgid "Trace"
+msgstr ""
+
+#: include/php_setup.inc:112
+msgid "File"
+msgstr ""
+
+#: include/php_setup.inc:112
+msgid "Line"
+msgstr ""
+
+#: include/php_setup.inc:113
+msgid "Arguments"
 msgstr ""
 
 #: include/functions.inc:272
@@ -5767,101 +5823,57 @@ msgstr ""
 msgid "GOsa development snapshot (Rev %s)"
 msgstr ""
 
-#: include/functions.inc:1559
-msgid "Generating this page caused the PHP interpreter to raise some errors!"
-msgstr ""
-
-#: include/functions.inc:1559
-msgid "Toggle information"
-msgstr ""
-
-#: include/functions.inc:1564
-msgid "PHP error"
-msgstr ""
-
-#: include/functions.inc:1575
-msgid "class"
-msgstr ""
-
-#: include/functions.inc:1581
-msgid "function"
-msgstr ""
-
-#: include/functions.inc:1586
-msgid "static"
-msgstr ""
-
-#: include/functions.inc:1590
-msgid "method"
-msgstr ""
-
-#: include/functions.inc:1607
-msgid "Trace"
-msgstr ""
-
-#: include/functions.inc:1608
-msgid "File"
-msgstr ""
-
-#: include/functions.inc:1608
-msgid "Line"
-msgstr ""
-
-#: include/functions.inc:1609
-msgid "Arguments"
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:38
+#: include/class_mail-methods-cyrus.inc:39
 msgid ""
 "Warning: Account has an invalid mailserver string! Please check the mail "
 "server settings in the mail tab."
 msgstr ""
 
-#: include/class_mail-methods-cyrus.inc:51
+#: include/class_mail-methods-cyrus.inc:52
 msgid ""
 "Warning: IMAP Server cannot be reached! If you save this account, some mail "
 "settings will not be stored on your server!"
 msgstr ""
 
-#: include/class_mail-methods-cyrus.inc:114
+#: include/class_mail-methods-cyrus.inc:115
 #, php-format
 msgid "Can't create IMAP mailbox. Server says '%s'."
 msgstr ""
 
-#: include/class_mail-methods-cyrus.inc:130
+#: include/class_mail-methods-cyrus.inc:131
 #, php-format
 msgid "Can't write IMAP quota. Server says '%s'."
 msgstr ""
 
-#: include/class_mail-methods-cyrus.inc:154
+#: include/class_mail-methods-cyrus.inc:155
 msgid "Warning: imap_getacl is not implemented, can't remove acl informations."
 msgstr ""
 
-#: include/class_mail-methods-cyrus.inc:172
+#: include/class_mail-methods-cyrus.inc:173
 msgid "Warning: imap_getacl is not available, can't get imap permissions!"
 msgstr ""
 
-#: include/class_mail-methods-cyrus.inc:194
+#: include/class_mail-methods-cyrus.inc:195
 #, php-format
 msgid "Can't remove IMAP mailbox. Server says '%s'."
 msgstr ""
 
-#: include/class_mail-methods-cyrus.inc:222
+#: include/class_mail-methods-cyrus.inc:223
 #, php-format
 msgid "Can't log into SIEVE server. Server says '%s'."
 msgstr ""
 
-#: include/class_mail-methods-cyrus.inc:235
+#: include/class_mail-methods-cyrus.inc:236
 #, php-format
 msgid "Can't get sieve script. Server says '%s'."
 msgstr ""
 
-#: include/class_mail-methods-cyrus.inc:306
+#: include/class_mail-methods-cyrus.inc:307
 #, php-format
 msgid "Can't send sieve script. Server says '%s'."
 msgstr ""
 
-#: include/class_mail-methods-cyrus.inc:310
+#: include/class_mail-methods-cyrus.inc:311
 #, php-format
 msgid "Can't activate GOsa sieve script. Server says '%s'."
 msgstr ""
@@ -5911,7 +5923,7 @@ msgstr ""
 msgid "XML error in gosa.conf: %s at line %d"
 msgstr ""
 
-#: include/class_config.inc:195 html/index.php:144
+#: include/class_config.inc:195 html/index.php:140
 msgid "Can't bind to LDAP. Please contact the system administrator."
 msgstr ""
 
@@ -6382,7 +6394,8 @@ msgid "Can't log into LDAP server. Reason was: %s."
 msgstr ""
 
 #: include/functions_setup.inc:938 include/functions_setup.inc:961
-#: include/functions_setup.inc:970 html/index.php:162
+#: include/functions_setup.inc:970 html/index.php:158
+#: ihtml/themes/altlinux/setup_useradmin.tpl:6
 #: ihtml/themes/default/setup_useradmin.tpl:6
 msgid ""
 "You're missing an administrative account for GOsa, you'll not be able to "
@@ -6401,7 +6414,7 @@ msgstr ""
 msgid "next"
 msgstr ""
 
-#: html/helpviewer.php:144
+#: html/helpviewer.php:141
 #, php-format
 msgid ""
 "Can't read any helpfiles from ' %s ', possibly there is no help available."
@@ -6430,48 +6443,53 @@ msgid ""
 "check existence and rigths of this directory!"
 msgstr ""
 
-#: html/main.php:100
+#: html/main.php:96
 msgid ""
 "Register globals is on. GOsa will refuse to login unless this is fixed by an "
 "administrator."
 msgstr ""
 
-#: html/main.php:143
+#: html/main.php:139
 msgid "Warning: memory is getting low - please increase the memory_limit!"
 msgstr ""
 
-#: html/main.php:267
+#: html/main.php:263
 #, php-format
 msgid "Can't find any plugin definitions for plugin '%s'!"
 msgstr ""
 
-#: html/index.php:57
+#: html/main.php:292
+msgid ""
+"Generating this page caused the W3C conformance checker to raise some errors!"
+msgstr ""
+
+#: html/index.php:53
 #, php-format
 msgid "GOsa configuration %s/gosa.conf is not readable. Aborted."
 msgstr ""
 
-#: html/index.php:79
+#: html/index.php:75
 #, php-format
 msgid "Directory '%s' specified as compile directory is not accessable!"
 msgstr ""
 
-#: html/index.php:170
+#: html/index.php:166
 msgid "Please specify a valid username!"
 msgstr ""
 
-#: html/index.php:172
+#: html/index.php:168
 msgid "Please specify your password!"
 msgstr ""
 
-#: html/index.php:179
+#: html/index.php:175
 msgid "Please check the username/password combination."
 msgstr ""
 
-#: html/index.php:217
+#: html/index.php:213
 msgid "Session will not be encrypted."
 msgstr ""
 
-#: html/index.php:217
+#: html/index.php:213
 msgid "Enter SSL session"
 msgstr ""
 
@@ -6525,6 +6543,7 @@ msgid "Please use your <i>username</i> and <i>password</i> to log in"
 msgstr ""
 
 #: ihtml/themes/altlinux/login.tpl:26 ihtml/themes/altlinux/login.tpl:30
+#: ihtml/themes/altlinux/setup_useradmin.tpl:22
 #: ihtml/themes/default/login.tpl:26 ihtml/themes/default/login.tpl:30
 #: ihtml/themes/default/setup_useradmin.tpl:22
 msgid "Username"
@@ -6604,6 +6623,20 @@ msgid ""
 "If this lock detection is false, the other person has obviously closed the "
 "webbrowser during the edit operation. You may delete the lockfile in this "
 "case by pressing the <i>Remove</i> button."
+msgstr ""
+
+#: ihtml/themes/altlinux/setup_useradmin.tpl:3
+#: ihtml/themes/default/setup_useradmin.tpl:3
+msgid "You already have an Administrative Account and a Group."
+msgstr ""
+
+#: ihtml/themes/altlinux/setup_useradmin.tpl:10
+#: ihtml/themes/default/setup_useradmin.tpl:10
+msgid ""
+"To provide full administrative access to GOsa, you need to create a special "
+"group which contains the administrative user. The setup program can assist "
+"you with this task. Enter the desired username and the password below to "
+"create the missing entries."
 msgstr ""
 
 #: ihtml/themes/altlinux/setup_step3.tpl:4
@@ -6776,16 +6809,4 @@ msgstr ""
 
 #: ihtml/themes/default/help.tpl:15
 msgid "Index"
-msgstr ""
-
-#: ihtml/themes/default/setup_useradmin.tpl:3
-msgid "You already have an Administrative Account and a Group."
-msgstr ""
-
-#: ihtml/themes/default/setup_useradmin.tpl:10
-msgid ""
-"To provide full administrative access to GOsa, you need to create a special "
-"group which contains the administrative user. The setup program can assist "
-"you with this task. Enter the desired username and the password below to "
-"create the missing entries."
 msgstr ""
