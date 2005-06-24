@@ -279,11 +279,29 @@ $display= $header.$smarty->fetch(get_template_path('framework.tpl'));
 
 /* For development, perform a W3C conformance check if specified in gosa.conf */
 if (isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->data['MAIN']['W3CTEST'])) {
-#  $display= "";
-}
 
-/* Show page... */
-echo $display;
+  /* Use PHP tidy for debugging */
+  // Specify configuration
+
+  $tidy = new tidy();
+  $config = array('indent' => TRUE,
+               'output-xhtml' => TRUE,
+               'wrap' => 200);
+
+  $tidy = tidy_parse_string($display, $config, 'UTF8');
+  tidy_clean_repair($tidy);
+//$tidy->diagnose();
+  $cnt =  tidy_error_count($tidy);
+//  if($cnt != 0){
+    echo nl2br(htmlentities($tidy->errorBuffer));
+//    }
+  tidy_clean_repair($tidy);
+
+echo $tidy;
+}else{
+  /* Show page... */
+  echo $display;
+}
 
 /* Save plist */
 $_SESSION['plist']= $plist;
