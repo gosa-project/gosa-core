@@ -281,8 +281,6 @@ $display= $header.$smarty->fetch(get_template_path('framework.tpl'));
 if (isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->data['MAIN']['W3CTEST'])) {
 
   /* Use PHP tidy for debugging */
-  // Specify configuration
-
   $tidy = new tidy();
   $config = array('indent' => TRUE,
                'output-xhtml' => TRUE,
@@ -291,7 +289,9 @@ if (isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->da
   tidy_clean_repair($display);
   $cnt =  (tidy_error_count($display))+(tidy_warning_count($display));
   if($cnt != 0){
-    echo "<div style='background:#FFFFFF;'>".nl2br(htmlentities($display->errorBuffer))."</div>";
+    echo "<table width=\"100%\" style='background-color:#E0E0E0;border-bottom:1px solid black'><tr><td><img alt=\"\" align=\"middle\" src='images/warning.png'>&nbsp;<font style='font-size:14px;font-weight:bold'>"._("Generating this page caused the W3C conformance checker to raise some errors!")."</font></td><td align=right><button onClick='toggle(\"w3cbox\")'>"._("Toggle information")."</button></td></tr></table><div id='w3cbox' style='width:100%; position:absolute; z-index:0; visibility: hidden; background-color:white; border-bottom:1px solid black;'>";
+
+    echo nl2br(htmlentities($display->errorBuffer))."</div>";
   }
   tidy_clean_repair($display);
 }
