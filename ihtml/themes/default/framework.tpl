@@ -41,9 +41,6 @@
       <div style="background-color:#CDF6BD; height:12px; width:100%;">&nbsp;</div>
       {$menu}
 	  <br>
-      <div style="height:100px; width:140px;"></div>
-	  <center>{$w3c}</center>
-      <div style="height:10px; width:140px;"></div>
     </td>
     <!-- Plugin window -->
     <td style="background-color:white; width:100%; vertical-align:top; height:15px; border-left:1px solid #778F6E; border-top:1px solid #778F6E" colspan=2>

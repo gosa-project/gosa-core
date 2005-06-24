@@ -39,9 +39,6 @@
     <td style="background-color:#5353ad; vertical-align:top;">
       <div style="background-color:#5353ad; height:12px; width:100%;">&nbsp;</div>
       {$menu}
-	  <br>
-	  <center>{$w3c}</center>
-      <div style="height:100px; width:140px;"></div>
     </td>
 
     <!-- Plugin window -->
