@@ -96,8 +96,10 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
         $type= "-";
       }
       $args= "";
-      foreach ($ct['args'] as $arg){
-        $args.= htmlentities("\"$arg\", ");
+      if (isset($ct['args'])){
+        foreach ($ct['args'] as $arg){
+          $args.= htmlentities("\"$arg\", ");
+        }
       }
       $args= preg_replace("/, $/", "", $args);
       if ($args == ""){

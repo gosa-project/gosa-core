@@ -689,7 +689,7 @@ class mailAccount extends plugin
       }
     }
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search ("(&(objectClass=gosaMailAccount)(!(objectClass=gosaUserTemplate))(|(mail=".$this->mail.")(gosaMailAlternateAddress=".
+    $ldap->search ("(&(!(objectClass=gosaUserTemplate))(|(mail=".$this->mail.")(gosaMailAlternateAddress=".
         $this->mail."))(!(uid=".$this->uid."))(!(cn=".$this->uid.")))", array("uid"));
     if ($ldap->count() != 0){
       $message[]= _("The primary address you've entered is already in use.");

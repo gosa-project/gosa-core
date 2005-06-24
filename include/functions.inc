@@ -178,7 +178,7 @@ function get_template_path($filename= '', $plugin= FALSE, $path= "")
 {
   global $config, $BASE_DIR;
 
-  if (!isset($config->data['MAIN']['THEME'])){
+  if (!@isset($config->data['MAIN']['THEME'])){
     $theme= 'default';
   } else {
     $theme= $config->data['MAIN']['THEME'];
