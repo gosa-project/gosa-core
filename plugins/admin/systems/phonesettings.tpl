@@ -1,9 +1,9 @@
 <h2><img alt="" align="middle" src="images/select_phone.png"> {t}Specific Phone settings{/t}</h2>
 
-<table width="100%" cellpadding=10>
+<table summary="" width="100%" cellpadding=10>
 	<tr>
 		<td colspan="3">
-			<table width="100%">
+			<table summary="" width="100%">
 			<tr>
 				<td>
 					{t}Phone type{/t}{$staticAddress}
@@ -19,7 +19,7 @@
 	
 	<tr>
 		<td>
-			<table>
+			<table summary="">
 			 <tr>
 				<td>
 					{t}Mode{/t}{$staticAddress}
@@ -43,7 +43,7 @@
 		</table>
 	   </td>
 	   <td>
-		<table>
+		<table summary="">
 			<tr>
 				<td >
 					{t}Default IP{/t}
@@ -74,7 +74,7 @@
 		
 	<tr>
 		<td style="vertical-align:top">
-			<table width="100%">
+			<table summary="" width="100%">
 			 <tr>
 				<td>
 					{t}Modus{/t}{$staticAddress}
@@ -167,7 +167,7 @@
 			</table>
 		</td>
 		<td valign="top" style="vertical-align:top">
-			 <table width="100%">
+			 <table summary="" width="100%">
                <tr>
                     <td style="vertical-align:top;">
                         {t}Hosts that are allowed to connect{/t}<br>
@@ -206,7 +206,7 @@
 {if $selected_categorie eq '2'}
 	<tr>
 		<td>
-			<table width="100%">
+			<table summary="" width="100%">
 				<tr>
 					<td>
 						{t}MSN{/t}&nbsp;
