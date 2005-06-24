@@ -1,4 +1,4 @@
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
  <tr>
   <td> 
    <b>{t}Blocked numbers/lists{/t}</b>

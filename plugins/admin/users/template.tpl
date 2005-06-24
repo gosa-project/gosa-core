@@ -6,7 +6,7 @@
   {t}Creating a new user can be assisted by using templates. Many database records will be filled automatically. Choose <b>none</b> to skip the usage of templates.{/t}
 </p>
 
-<table style="vertical-align:top; text-align:left;" cellpadding=4 border=0>
+<table summary="" style="vertical-align:top; text-align:left;" cellpadding=4 border=0>
   <tr>
     <td><b>{t}Template{/t}</b></td>
     <td>

@@ -1,4 +1,4 @@
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
 <tr>
   <td style="vertical-align:top;">
    <div class="contentboxh" style="height:20px;">
@@ -19,10 +19,10 @@
     <p class="contentboxh" style="font-size:12px"><img src="{$launchimage}" align="right" alt="[F]"><b>{t}Filters{/t}</b></p>
    </div>
    <div class="contentboxb"  style="background-color:#F8F8F8">
-     <table style="width:100%;border-top:1px solid #B0B0B0; background-color:#F8F8F8">
+     <table summary="" style="width:100%;border-top:1px solid #B0B0B0; background-color:#F8F8F8">
       {$alphabet}
      </table>
-    <table width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
+    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 		<tr>
 			<td width="50%">
 				<img alt="" src="{$tree_image}" align="middle">&nbsp;{t}Display numbers of department{/t}
@@ -34,7 +34,7 @@
 			</td>
 		</tr>
 	</table>
-    <table width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
+    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 		<tr>
 			<td width="50%">
 				<img alt="" src="{$search_image}" align="middle">&nbsp;{t}Display numbers matching{/t}
@@ -43,7 +43,7 @@
 				<input type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching numbers{/t}' onChange="mainform.submit()">	</td>
 		</tr>
 	</table>
-    <table width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
+    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 		<tr>
 			<td width="50%">
 				<img alt="" src="{$search_image}" align="middle">&nbsp;{t}Display numbers of user{/t}

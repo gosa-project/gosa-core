@@ -1,4 +1,4 @@
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td style="width:50%; vertical-align:top;">
    <input type=checkbox name="must_change_password" value="1" {$must_change_password} {$must_change_passwordACL}>

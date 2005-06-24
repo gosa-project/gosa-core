@@ -1,8 +1,8 @@
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td style="width:50%; vertical-align:top;">
    <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
-   <table>
+   <table summary="">
     <tr>
      <td>{t}Primary address{/t}{$must}</td>
      <td><input name="mail" size=25 maxlength=65 {$mailACL} value="{$mail}"></td>
@@ -64,7 +64,7 @@
 <p class="seperator">&nbsp;</p>
 
 <h2><img alt="" align="middle" src="images/envelope.png"> {t}Mail options{/t}</h2>
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
  <tr style="padding-bottom:0px;">
   <td style="width:45%">
    <input type=checkbox name="drop_own_mails" value="1" {$drop_own_mails}
@@ -137,7 +137,7 @@
 
 <h2><img alt="" align="middle" src="images/false.png"> {t}Advanced mail options{/t}</h2>
 
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
  <tr>
   <td>
    <input type=checkbox name="only_local" value="1" {$only_local} {$only_localACL} title="{t}Select if user can only send and receive inside his own domain{/t}">

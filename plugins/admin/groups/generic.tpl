@@ -1,8 +1,8 @@
-<table style="width:100%;">
+<table summary="" style="width:100%;">
  <tr>
   <td style="width:50%; vertical-align:top;">
    <input type="hidden" name="groupedit" value="1">
-   <table>
+   <table summary="">
     <tr>
      <td>{t}Group name{/t}{$must}</td>
      <td>
@@ -75,7 +75,7 @@
 
   <td style="vertical-align:top;">
 
-   <table>
+   <table summary="">
     <tr>
      <td style="vertical-align:top;">
       <b>{t}Group members{/t}</b>

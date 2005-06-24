@@ -4,7 +4,7 @@
 {t}The kolab account is currently disabled. It's features can be adjusted if you add a mail account.{/t}
 {else}
 
-<table style="width:100%">
+<table summary="" style="width:100%">
  <tr>
   <td style="width:50%; vertical-align:top;">
    <b>{t}Delegations{/t}</b><br>
@@ -29,7 +29,7 @@
   <td style="vertical-align:top;">
 
  <b>{t}Free Busy information{/t}</b><br>
- <table>
+ <table summary="">
   <tr>
    <td>{t}URL{/t}</td>
    <td><input name="calFBURL" size=30 maxlength=60 {$calFBURLACL} value="{$calFBURL}"></td>
@@ -42,7 +42,7 @@
 
 
  <b>{t}Invitation policy{/t}</b><br>
- <table>
+ <table summary="">
    {$invitation}
  </table>
 

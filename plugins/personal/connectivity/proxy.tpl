@@ -15,10 +15,10 @@
 			">
 	{/if}{t}Proxy account{/t}</h2>
 
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
    <td>
-    <table border=0 width="100%" cellpadding=0>
+    <table summary="" border=0 width="100%" cellpadding=0>
     <tr><td colspan=2>
     <input type="checkbox" name="filterF" id="filterF" value="F" {$filterF} {$gosaProxyAcctFlagsACL} {$pstate}>
     {t}Filter unwanted content (i.e. pornographic or violence related){/t}
@@ -34,7 +34,7 @@
 	">
     {t}Limit proxy access to working time{/t}
     <br>
-    <table style="margin-left:20px;">
+    <table summary="" style="margin-left:20px;">
      <tr>
       <td>
         <select size="1" id="startHour" name="startHour" {$gosaProxyWorkingStartACL} {$Tstate}>
@@ -68,7 +68,7 @@
 	">
     {t}Restrict proxy usage by quota{/t}
     <br>
-    <table style="margin-left:20px;">
+    <table summary="" style="margin-left:20px;">
      <tr>
       <td>
        <input name="quota_size" id="quota_size" size=7 maxlength=10 {$Bstate} {$gosaProxyQuotaACL} value="{$quota_size}">

@@ -1,9 +1,9 @@
 <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
 
  <tr>
    <td style="width:50%; vertical-align:top;">
-    <table>
+    <table summary="">
      <tr>
       <td>{t}List name{/t}{$must}</td>
       <td>
@@ -27,7 +27,7 @@
   </td>
 
    <td style="vertical-align:top;">
-    <table>
+    <table summary="">
      <tr>
        <td>{t}Type{/t}</td>
        <td>
@@ -50,7 +50,7 @@
 
 <p class="plugbottom" style="margin-bottom:0px; padding:0px;">&nbsp;</p>
 
-<table>
+<table summary="">
  <tr>
    <td>
      <h2><img alt="" align="middle" src="images/false.png"> {t}Blocked numbers{/t}</h2>

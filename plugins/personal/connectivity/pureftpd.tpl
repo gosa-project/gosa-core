@@ -1,11 +1,11 @@
 <h2>{if $tabbed eq 1}<input type="checkbox" name="pureftpd" value="B" {$pureftpdState} {$pureftpdACL} onclick="changeState('FTPUploadBandwidth'); changeState('FTPDownloadBandwidth'); changeState('FTPQuotaFiles'); changeState('FTPQuotaMBytes'); changeState('FTPUploadRatio'); changeState('FTPDownloadRatio'); changeState('FTPStatus');" {$pureftpdACL}>{/if}{t}FTP account{/t}</h2>
 
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
 
  <!-- Headline container -->
  <tr>
    <td style="width:50%; vertical-align:top;">
-     <table style="margin-left:4px;">
+     <table summary="" style="margin-left:4px;">
        <tr>
          <td colspan=2 style="vertical-align:top;">
            <b>{t}Bandwidth{/t}</b>
@@ -25,7 +25,7 @@
      &nbsp;
    </td>
    <td>
-     <table>
+     <table summary="">
        <tr>
          <td colspan=2 style="vertical-align:top;">
            <b>{t}Quota{/t}</b>
@@ -44,7 +44,7 @@
  </tr>
  <tr>
    <td>
-     <table style="margin-left:4px;">
+     <table summary="" style="margin-left:4px;">
        <tr>
          <td colspan=2 style="vertical-align:top;">
            <b>{t}Ratio{/t}</b>
@@ -58,7 +58,7 @@
      </table>
    </td>
    <td>
-     <table>
+     <table summary="">
        <tr>
          <td colspan=2 style="vertical-align:top;">
            <b>{t}Miscellaneous{/t}</b>

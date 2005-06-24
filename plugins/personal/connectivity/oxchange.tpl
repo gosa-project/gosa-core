@@ -2,12 +2,12 @@
 <h2>{t}Open-Xchange Account{/t} - {t}disabled, no Postgresql support detected{/t}</h2>
 {else}
 <h2>{if $tabbed eq 1}<input type="checkbox" name="oxchange" value="B" {$oxchangeState} {$oxchangeAccountACL} onCLick="changeState('OXAppointmentDays');changeState('OXTaskDays');changeState('OXTimeZone');" >{/if}{t}Open-Xchange account{/t}</h2>
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
 
  <!-- Headline container -->
  <tr>
    <td style="width:50%; vertical-align:top;">
-     <table style="margin-left:4px;">
+     <table summary="" style="margin-left:4px;">
        <tr>
          <td colspan=2 style="vertical-align:top;">
            <b>{t}Remember{/t}</b>
@@ -27,7 +27,7 @@
      &nbsp;
    </td>
    <td style="vertical-align:top;">
-     <table>
+     <table summary="">
        <tr>
          <td colspan=2 style="vertical-align:top;">
            <b>{t}User Information{/t}</b>

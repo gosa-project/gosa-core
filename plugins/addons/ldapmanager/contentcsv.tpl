@@ -4,7 +4,7 @@
 <p class="seperator">&nbsp;</p>
 
 {if $fileup != TRUE}
-<table>
+<table summary="">
 	<tr>
 		<td>
 			{t}Select CSV file to import{/t}
@@ -41,7 +41,7 @@
 <br>
 
 
-	<table cellspacing="1" border=0 cellpadding="4"  bgcolor="#FEFEFE">
+	<table summary="" cellspacing="1" border=0 cellpadding="4"  bgcolor="#FEFEFE">
 		<tr>
 			{section name=head loop=$head}
 			<td bgcolor="#BBBBBB">
@@ -87,7 +87,7 @@
 <br><b>{t}Selected Template{/t}:</b> {$tpl}
 <br>
 <br>
-	<table cellspacing="1" border=0 cellpadding="4" bgcolor="#FEFEFE">
+	<table summary="" cellspacing="1" border=0 cellpadding="4" bgcolor="#FEFEFE">
 		<tr>
 			{section name=attr loop=$anz}
 			<td bgcolor="#BBBBBB">

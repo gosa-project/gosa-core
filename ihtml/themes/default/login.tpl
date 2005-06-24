@@ -6,7 +6,7 @@
 <!-- Spacer for some browsers -->
 <div class='gosaLoginSpacer'></div>
 
-<table class='gosaLoginMask' align='center'>
+<table summary="" class='gosaLoginMask' align='center'>
  <tr>
   <td class='gosaLoginBack' width="606">
    <div class='gosaLoginBack'>
@@ -20,7 +20,7 @@
 
     <!-- Formular data, containing a table to center fields -->
     <form action='index.php' method='post' name='mainform'>
-     <table style='align:center; text-align:left;' cellspacing='7' align='center'>
+     <table summary="" style='align:center; text-align:left;' cellspacing='7' align='center'>
       <tr>
         <td>
           <img src='{$personal_img}' alt='{t}Username{/t}' title='{t}Username{/t}'>

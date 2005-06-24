@@ -1,7 +1,7 @@
-<table summary="" width="100%">
+<table summary="" summary="" width="100%">
  <tr>
   <td style="vertical-align:top; width:50%;">
-	<table>
+	<table summary="">
 	 <tr>
 	  <td>{t}Printer name{/t}{$must}</td>
 	  <td><input name="cn" size=20 maxlength=60 value="{$cn}"></td>
@@ -27,7 +27,7 @@
 	</table>
   </td>
   <td style="vertical-align:top">
-	<table>
+	<table summary="">
 	 <tr>
 	  <td>{t}Printer URL{/t}</td>
 	  <td><input name="labeledURI" size=25 maxlength=80 value="{$labeledURI}"></td>

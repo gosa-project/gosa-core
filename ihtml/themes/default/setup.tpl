@@ -10,7 +10,7 @@
 
 {$errors}
 
-<table cellspacing=0 cellpadding=0 style="width:100%;height:100%;">
+<table summary="" cellspacing=0 cellpadding=0 style="width:100%;height:100%;">
   <tr style="background-color:#CDF6C5">
     <td style="border-bottom:1px solid black; height:50px;">
       <img alt="" src="themes/default/images/go_logo.png">
@@ -24,7 +24,7 @@
     {include file="$content"}
     </td>
   </tr>
-<table>
+<table summary="">
 
 <script language="JavaScript" type="text/javascript">
   <!--

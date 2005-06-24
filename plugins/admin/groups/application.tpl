@@ -1,4 +1,4 @@
-<table style="width:100%;">
+<table summary="" style="width:100%;">
  <tr>
   <td style="width:45%; vertical-align:top;">
    <b>{t}Used applications{/t}</b>

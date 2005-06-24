@@ -1,4 +1,4 @@
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
 
  <!-- Headline container -->
  <tr>
@@ -8,7 +8,7 @@
  </tr>
  <tr>
   <td style="vertical-align:top;">
-   <table>
+   <table summary="">
     <tr>
      <td>{t}Home directory{/t}</td>
      <td>
@@ -33,7 +33,7 @@
    &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <table>
+   <table summary="">
     <tr>
      <td>{t}Script path{/t}</td>
      <td>
@@ -55,12 +55,12 @@
 
 <h2><img alt="" align="middle" src="images/display.png"> {t}Terminal Server{/t}</h2>
 
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td style="vertical-align:top;width:50%">
    <input type=checkbox name="tslogin" value="1" {$tslogin} {$tsloginACL}>
    <i>{t}Allow login on terminal server{/t}</i>
-   <table>
+   <table summary="">
     <tr>
      <td>{t}Home directory{/t}</td>
      <td>
@@ -85,7 +85,7 @@
   <td style="vertical-align:top;">
    <input type=checkbox name="inherit" value="1" {$inherit} {$inheritACL} onclick="changeState('CtxInitialProgram'); changeState('CtxWorkDirectory')">
    <i>{t}Inherit client config{/t}</i>
-   <table>
+   <table summary="">
     <tr>
      <td>{t}Initial program{/t}</td>
      <td>
@@ -105,11 +105,11 @@
 
 <p class="seperator">&nbsp;</p>
 
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td style="vertical-align:top;">
    <i>{t}Timeout settings (in minutes){/t}</i>
-   <table>
+   <table summary="">
     <tr>
      <td>
       <input type=checkbox name="CtxMaxConnectionTimeF" value="1" {$CtxMaxConnectionTimeF} {$CtxMaxConnectionTimeACL} onclick="changeState('CtxMaxConnectionTime')">
@@ -145,7 +145,7 @@
   <td style="vertical-align:top;">
 
    <i>{t}Client devices{/t}</i>
-   <table>
+   <table summary="">
     <tr>
      <td>
       <input type=checkbox name="connectclientdrives" value="1" {$connectclientdrives} {$connectclientdrivesACL}>
@@ -172,7 +172,7 @@
   </td>
   <td style="vertical-align:top;">
    <i>{t}Miscellaneous{/t}</i>
-   <table>
+   <table summary="">
     <tr>
      <td>
       {t}Shadowing{/t}
@@ -209,7 +209,7 @@
 
 <h2><img alt="" align="middle" src="images/certs.png"> {t}Access options{/t}</h2>
 
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
  <tr>
   <td style="width:50%; vertical-align:top;">
    <input type=checkbox name="allow_pwchange" value="1" {$flagsP} {$allow_pwchangeACL}>

@@ -1,4 +1,4 @@
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
 
  <!-- Headline container -->
  <tr>
@@ -8,7 +8,7 @@
  </tr>
  <tr>
   <td style="vertical-align:top;">
-   <table>
+   <table summary="">
     <tr>
      <td>{t}Samba home{/t}</td>
      <td>
@@ -25,7 +25,7 @@
     &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <table>
+   <table summary="">
     <tr>
      <td>{t}Script path{/t}</td>
      <td>
@@ -47,7 +47,7 @@
 
 <h2><img  alt="" align="middle" src="images/certs.png"> {t}Access options{/t}</h2>
 
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
  <tr>
   <td style="width:50%;">
    <input type=checkbox name="allow_pwchange" value="1" {$flagsP} {$allow_pwchangeACL}>

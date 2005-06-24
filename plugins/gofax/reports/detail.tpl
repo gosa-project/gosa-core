@@ -1,4 +1,4 @@
-<table>
+<table summary="">
  <tr>
   <td> 
    <a href="getfax.php?id={$detail}&amp;download=1">
@@ -13,7 +13,7 @@
     &nbsp;
   </td>
   <td style="vertical-align:top">
-    <table border=0 cellspacing=5>
+    <table summary="" border=0 cellspacing=5>
      <tr>
       <td><b>{t}FAX ID{/t}</b></td>
       <td>{$fax_id}</td>

@@ -1,8 +1,8 @@
-<table style="width:100%;">
+<table summary="" style="width:100%;">
  <tr>
   <td style="width:50%;">
 
-   <table>
+   <table summary="">
      <tr>
       <td>{t}Application name{/t}{$must}</td>
       <td><input name="cn" size=25 maxlength=60 value="{$cn}" title="{t}Application name{/t}"></td>
@@ -55,7 +55,7 @@
 
 <p class="plugbottom" style="height:4px; margin-bottom:0px;">&nbsp</p>
 
-<table style="width:100%;">
+<table summary="" style="width:100%;">
   <tr>
     <td>
       <input type=checkbox name="exec_for_groupmembers" value="1" {$gosaApplicationFlagsACL} {$exec_for_groupmembers}>{t}Only executable for members{/t}

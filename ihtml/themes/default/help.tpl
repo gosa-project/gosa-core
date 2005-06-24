@@ -3,7 +3,7 @@
 
 <form action='helpviewer.php' name='mainform' method='post' enctype='multipart/form-data'>
 <div style='background-color:#CDF6BD;width:100%;border-bottom:1px solid #909090'>
-  <table width="99%">
+  <table summary="" width="99%">
    <tr>
     <td width="33%">
      <b>{t}GOsa help viewer{/t}</b>

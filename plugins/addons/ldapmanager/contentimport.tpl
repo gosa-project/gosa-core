@@ -4,7 +4,7 @@
 </p>
 
 <p class="seperator">&nbsp;</p>
-<table>
+<table summary="">
 <tr>
     <td width="30%">
 		{t}Import LDIF File{/t}

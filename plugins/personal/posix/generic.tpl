@@ -1,8 +1,8 @@
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td style="width:50%; vertical-align:top;">
    <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
-   <table>
+   <table summary="">
     <tr>
      <td>{t}Home directory{/t}{$must}</td>
      <td>
@@ -30,7 +30,7 @@
      <td>{$status}</td>
     </tr>
    </table>
-   <table>
+   <table summary="">
     <tr>
      <td>
       <input type=checkbox name="force_ids" value="1" {$force_ids} {$force_idsACL} onclick="changeState('uidNumber'); changeState('gidNumber');">
@@ -78,7 +78,7 @@
 
 <p class="seperator">&nbsp;</p>
 
-<table style="width:100% ; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table summary="" style="width:100% ; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td>
    <h2><img alt="" align="middle" src="images/terminal_small.png"> {t}Account{/t}</h2>
@@ -92,11 +92,11 @@
 </table>
 
 <p class="seperator">&nbsp;</p>
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td style="vertical-align:top; width:50%">
    <h2><img alt="" align="middle" src="images/display.png"> {t}Environment{/t}</h2>
-   <table>
+   <table summary="">
     <tr>
      <td>{t}Default printer{/t}</td>
      <td>

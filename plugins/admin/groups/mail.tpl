@@ -1,11 +1,11 @@
 <input type="hidden" name="mailedit" value="1">
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
 
  <!-- Headline container -->
  <tr>
   <td style="width:50%; vertical-align:top;">
    <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
-   <table>
+   <table summary="">
     <tr>
      <td>{t}Primary address{/t}{$must}</td>
      <td><input name="mail" size=25 maxlength=65 {$mailACL} value="{$mail}" title="{t}Primary mail address for this shared folder{/t}"></td>
@@ -60,12 +60,12 @@
 
 <p class="seperator">&nbsp;</p>
 
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
  <tr>
   <td style="width:50%; vertical-align:top;">
    <h2><img alt="" align="middle" src="images/members.png"> {t}IMAP shared folders{/t}</h2>
 
-   <table cellpadding=0 border=0>
+   <table summary="" cellpadding=0 border=0>
     <tr>
      <td>{t}Default permission{/t}</td>
      <td>

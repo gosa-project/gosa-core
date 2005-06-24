@@ -6,7 +6,7 @@
 <p>
  {t}Enter a description for the location you're configuring here{/t}:
 </p>
-<table>
+<table summary="">
  <tr>
   <td>{t}Location name{/t}</td>
   <td><input type='text' name='location' maxlength='80' size='25' value='{$location}'></td>
@@ -18,7 +18,7 @@
  {t}GOsa always acts as admin and manages access rights internally. This is a workaround till OpenLDAP's in directory ACI's are fully implemented. For this to work, we need the admin DN and the corresponding password.{/t}
 </p>
 
-<table>
+<table summary="">
  <tr>
   <td>{t}Admin DN{/t}</td>
   <td><input type='text' name='admin' maxlength='80' size='40' value='{$admin}'></td>
@@ -34,7 +34,7 @@
  {t}Some basic LDAP parameters are tunable and affect the locations where GOsa saves people and groups, including the way accounts get created. Check the values below if the fit your needs.{/t}
 </p>
 
-<table>
+<table summary="">
  <tr>
   <td>{t}Base {/t}</td>
   <td><input type='text' name='base' maxlength='80' size='40' value='{$base}'></td>
@@ -67,7 +67,7 @@
  {t}GOsa supports several encryption types for your passwords. Normally this is adjustable via user templates, but you can specify a default method to be used here, too.{/t}
 </p>
 
-<table>
+<table summary="">
  <tr>
   <td>{t}Encryption algorithm{/t}</td>
   <td>
@@ -83,7 +83,7 @@
  {t}GOsa has modular support for several mail methods. These methods provide interfaces to users mailboxes and general handling for quotas. You can choose the dummy plugin to leave all your mail settings untouched.{/t}
 </p>
 
-<table>
+<table summary="">
  <tr>
   <td>{t}Mail method{/t}</td>
   <td>

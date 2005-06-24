@@ -1,11 +1,11 @@
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
 
  <!-- Headline container -->
  <tr>
    <td style="width:50%; vertical-align:top;">
      <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
 
-     <table>
+     <table summary="">
        <tr>
          <td>{t}Fax{/t}{$must}</td>
          <td>
@@ -63,7 +63,7 @@
 
 <p class="seperator">&nbsp;</p>
 
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
   <tr>
     <td style="width:50%;">
     <h2><img alt="" align="middle" src="images/fax_small.png"> {t}Alternate fax numbers{/t}</h2>
@@ -83,7 +83,7 @@
     
     <td style="vertical-align:top; width:100%">
       <h2><img alt="" align="middle" src="images/false.png"> {t}Blocklists{/t}</h2>
-      <table>
+      <table summary="">
         <tr>
           <td>{t}Blocklists for incoming fax{/t}</td>
           <td>

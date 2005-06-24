@@ -16,7 +16,7 @@
 
 <br>
 
-<table>
+<table summary="">
 	<tr>
 		<td>
 		{t}Username{/t}

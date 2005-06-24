@@ -4,7 +4,7 @@
 </p>
 <p class="seperator">&nbsp;</p>
 
-<table style="width:100%;">
+<table summary="" style="width:100%;">
 <tr>
 	<td width="30%">
 		{t}Export single entry{/t}

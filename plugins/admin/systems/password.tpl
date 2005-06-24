@@ -6,7 +6,7 @@
  {t}Changing the password impinges on authentification only.{/t}
 </p>
 
-<table style="vertical-align:top; text-align:left;" cellpadding=4 border=0>
+<table summary="" style="vertical-align:top; text-align:left;" cellpadding=4 border=0>
   <tr>
     <td><b>{t}New password{/t}</b></td>
     <td><input type="password" name="new_password" size="30" maxlength="40"

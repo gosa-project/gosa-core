@@ -1,4 +1,4 @@
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
 <tr>
   <td style="vertical-align:top;">
    <div class="contentboxh" style="height:20px;">
@@ -20,14 +20,14 @@
 t}Filters{/t}</b></p>
    </div>
    <div class="contentboxb">
-     <table style="width:100%;border-top:1px solid #B0B0B0;background-color:#F8F8F8">
+     <table summary="" style="width:100%;border-top:1px solid #B0B0B0;background-color:#F8F8F8">
       {$alphabet}
      </table>
-    <table width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8"><tr><td width="50%"><img alt="" src="{$tree_image}" align="middle">&nbsp;{t}Display workstations of department{/t}</td>
+    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8"><tr><td width="50%"><img alt="" src="{$tree_image}" align="middle">&nbsp;{t}Display workstations of department{/t}</td>
     <td><select name="depselect" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
       {html_options options=$deplist selected=$depselect}
     </select></td></tr></table>
-    <table width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8"><tr><td width="50%"><img alt="" src="{$search_image}" align="middle">&nbsp;{t}Display workstations matching{/t}</td>
+    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8"><tr><td width="50%"><img alt="" src="{$search_image}" align="middle">&nbsp;{t}Display workstations matching{/t}</td>
     <td><input type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching addresses{/t}' onChange="mainform.submit()"></td></tr></table>
    {$apply}
    </div>

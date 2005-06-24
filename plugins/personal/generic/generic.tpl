@@ -1,4 +1,4 @@
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
 
  <!-- Headline container -->
  <tr>
@@ -19,7 +19,7 @@
 
   <!-- Name, ... -->
   <td style="vertical-align:top;">
-   <table> 
+   <table summary=""> 
     <tr>
      <td>{t}Name{/t}{$must}</td>
      <td><input name="sn" size=25 maxlength=60 {$snACL} value="{$sn}"></td>
@@ -106,7 +106,7 @@
   <td style="vertical-align:top;">
 
    <!-- Address, ... -->
-   <table> 
+   <table summary=""> 
     <tr>
      <td style="vertical-align:top;">{t}Address{/t}</td>
      <td><textarea name="homePostalAddress" rows=3 cols=22 {$homePostalAddressACL}>{$homePostalAddress}</textarea></td>
@@ -153,7 +153,7 @@
 
 <p class="seperator">&nbsp;</p>
 
-<table class="line" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
+<table summary="" class="line" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
 
  <!-- Headline container -->
  <tr>
@@ -168,7 +168,7 @@
   {if $governmentmode ne "true"}
   <!-- Company, ... -->
   <td style="vertical-align:top;">
-   <table> 
+   <table summary=""> 
     <tr>
      <td>{t}Organization{/t}</td>
      <td><input name="o" size=22 maxlength=60 {$oACL} value="{$o}"></td>
@@ -204,7 +204,7 @@
 
   <!-- Phone, ... -->
   <td style="vertical-align:top;">
-   <table> 
+   <table summary=""> 
     <tr>
      <td>{t}Room No.{/t}</td>
      <td><input name="roomNumber" size=22 maxlength=60 {$roomNumberACL} value="{$roomNumber}"></td>
@@ -242,7 +242,7 @@
 
   <!-- Location, ... -->
   <td style="vertical-align:top;">
-   <table> 
+   <table summary=""> 
     <tr>
      <td>{t}Location{/t}</td>
      <td><input name="l" size=22 maxlength=60 {$lACL} value="{$l}"></td>
@@ -264,7 +264,7 @@
 
   <!-- Beschreibung, ... -->
   <td style="vertical-align:top;">
-   <table> 
+   <table summary=""> 
     <tr>
      <td>{t}Vocation{/t}</td>
      <td><input name="vocation" size=22 maxlength=60 {$vocationACL} value="{$vocation}"></td>
@@ -303,7 +303,7 @@
   
   <!-- Phone, ... -->
   <td style="vertical-align:top;">
-   <table> 
+   <table summary=""> 
     <tr>
      <td>{t}Person locality{/t}</td>
      <td>
@@ -343,7 +343,7 @@
 
   <!-- Location, ... -->
   <td style="vertical-align:top;">
-   <table> 
+   <table summary=""> 
     <tr>
      <td>{t}Room No.{/t}</td>
      <td><input name="roomNumber" size=22 maxlength=60 {$roomNumberACL} value="{$roomNumber}"></td>

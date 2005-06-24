@@ -1,4 +1,4 @@
-<table width="100%">
+<table summary="" width="100%">
  <tr>
   <td>
    <b>{t}Object{/t}</b>

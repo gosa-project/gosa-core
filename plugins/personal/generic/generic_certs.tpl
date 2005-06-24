@@ -2,7 +2,7 @@
  <!-- Headline container -->
 <h2><img alt="" align="middle" src="images/certs.png"> {t}Certificates{/t}</h2>
 
-<table style="vertical-align:top; text-align:left;border-top: 1px solid rgb(176,176,176);" width="100%" cellpadding=4 border=0>
+<table summary="" style="vertical-align:top; text-align:left;border-top: 1px solid rgb(176,176,176);" width="100%" cellpadding=4 border=0>
  <tr>
    <td width="12%" style="vertical-align:top">
       {t}Standard certificate{/t}
@@ -22,7 +22,7 @@
 
 <br>
 
- <table style="vertical-align:top; text-align:left;border-top: 1px solid rgb(176,176,176);" width="100%" cellpadding=4 border=0>
+ <table summary="" style="vertical-align:top; text-align:left;border-top: 1px solid rgb(176,176,176);" width="100%" cellpadding=4 border=0>
  <tr>
    <td width="12%" style="vertical-align:top">
       {t}S/MIME certificate{/t} 
@@ -42,7 +42,7 @@
 
 <br>
 
-<table style="vertical-align:top; text-align:left;border-top: 1px solid rgb(176,176,176);" width="100%" cellpadding=4 border=0> 
+<table summary="" style="vertical-align:top; text-align:left;border-top: 1px solid rgb(176,176,176);" width="100%" cellpadding=4 border=0> 
  <tr>
    <td width="12%" style="vertical-align:top">
       {t}PKCS12 certificate{/t} 

@@ -2,7 +2,7 @@
  {t}You have changed the method your password is stored in the ldap database. For that reason you've to enter your password at this point again. GOsa will then encode it with the selected method.{/t}
 </p>
 
-<table style="vertical-align:top; text-align:left;" cellpadding=4 border=0>
+<table summary="" style="vertical-align:top; text-align:left;" cellpadding=4 border=0>
   <tr>
     <td><b>{t}New password{/t}</b></td>
     <td><input type="password" name="new_password" size="30" maxlength="40" onFocus="nextfield= 'repeated_password';"></td>
