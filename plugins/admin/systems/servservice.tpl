@@ -14,7 +14,7 @@
      <td>
 		<select style="width:350px;" id="goExportEntry" name="goExportEntry[]" {$goExportEntryACL} {$goNfsServerState} size=4 multiple >
     		{html_options values=$goExportEntry output=$goExportEntry}
-			<option disabled></option>
+			<option disabled>&nbsp;</option>
 	    </select>
 	<br>	
 		<input type="text" 		name="NewNfsExport" {$goNfsServerState} id="NewNfsExportId"> 
@@ -40,7 +40,7 @@
      <td>
         <select style="width:350px;" id="goTimeEntry" name="goTimeSource[]" {$goNtpServerState} {$goTimeSourceACL}  size=4 multiple>
             {html_options values=$goTimeSource output=$goTimeSource}
-			<option disabled></option>
+			<option disabled>&nbsp;</option>
         </select>
     <br>
         <input type="text" name="NewNTPExport" {$goNtpServerState} id="NewNTPExportId">

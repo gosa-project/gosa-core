@@ -174,7 +174,7 @@
                         <select style="width:300px; height:80px;" name="goFonPermitS" size=15
                             multiple title="{t}List of alternative mail addresses{/t}">
                             {html_options values=$goFonPermit output=$goFonPermit}
-                            <option disabled></option>
+                            <option disabled>&nbsp;</option>
                         </select>
                         <br>
                             <input name="goFonPermitNew" size=30 align="middle" maxlength="65" value="">
@@ -189,7 +189,7 @@
                         <select style="width:300px; height:80px;" name="goFonDenyS" size=15
                             multiple title="{t}List of alternative mail addresses{/t}">
                             {html_options values=$goFonDeny output=$goFonDeny}
-                            <option disabled></option>
+                            <option disabled>&nbsp;</option>
                         </select>
                         <br>
                             <input name="goFonDenyNew" size=30 align="middle" maxlength="65" value="">

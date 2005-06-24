@@ -12,7 +12,7 @@
      <td>
       <select size="1" name="gosaMailServer" {$gosaMailServerACL} title="{t}Specify the mail server where the user will be hosted on{/t}">
 		    {html_options values=$mailServers output=$mailServers selected=$gosaMailServer}
-			<option disabled></option>
+			<option disabled>&nbsp;</option>
       </select>
      </td>
     </tr>
@@ -49,7 +49,7 @@
    <select style="width:350px; height:100px;" name="alternates_list[]" size=15
 	 multiple title="{t}List of alternative mail addresses{/t}">
             {html_options values=$gosaMailAlternateAddress output=$gosaMailAlternateAddress}
-			<option disabled></option>
+			<option disabled>&nbsp;</option>
    </select>
    <br>
    <input name="alternate_address" size=30 align="middle" maxlength="65" {$gosaMailAlternateAddressACL} value="">
@@ -85,7 +85,7 @@
    {t}to folder{/t}
    <select size="1" name="gosaSpamMailbox" {$gosaSpamMailboxACL}>
         	{html_options values=$spambox output=$spambox selected=$gosaSpamMailbox}
-			<option disabled></option>
+			<option disabled>&nbsp;</option>
    </select>
    <br>
    <input type=checkbox name="use_mailsize_limit" value="1" {$use_mailsize_limit}
@@ -105,7 +105,7 @@
    {if $show_templates eq "true"}
    <select name="vacation_template">
         	{html_options options=$vacationtemplates selected=$template}
-			<option disabled></option>
+			<option disabled>&nbsp;</option>
 	{html_options options=$vacationtemplates selected=$template}
    </select>
    <input type="submit" value="{t}Import{/t}" name="import_vacation"
@@ -118,7 +118,7 @@
    </p>
    <select style="width:350px; height:100px;" name="forwarder_list[]" size=15 multiple>
 			{html_options values=$gosaMailForwardingAddress output=$gosaMailForwardingAddress selected=$template}        
-			<option disabled></option>
+			<option disabled>&nbsp;</option>
    </select>
    <br>
    <input name="forward_address" size=20 align="middle" maxlength=65

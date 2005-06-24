@@ -5,7 +5,7 @@
    <br>
    <select style="width:350px; height:275;" name="used_apps[]" size=15 multiple>
     {html_options options=$used_apps}
-	<option disabled></option>
+	<option disabled>&nbsp;</option>
    </select>
    <br>
    <input type=submit name="edit_options" value="{t}Edit parameters{/t}" title="{t}Edit optional application parameters{/t}">
@@ -22,7 +22,7 @@
   <br>
   <select style="width:350px; height:275px;" name="apps[]" size=15 multiple>
     {html_options options=$apps}
-	<option disabled></option>
+	<option disabled>&nbsp;</option>
   </select>
  </td>
  </tr>

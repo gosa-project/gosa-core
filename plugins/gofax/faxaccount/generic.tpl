@@ -54,7 +54,7 @@
      {t}Deliver fax to printer{/t}&nbsp;
      <select size="1" name="goFaxPrinter" {$goFaxPrinterACL}>
       {html_options options=$printers selected=$goFaxPrinter}
-		<option disabled> </option>
+		<option disabled>&nbsp;</option>
      </select>
 
    </td>
@@ -69,7 +69,7 @@
     <h2><img alt="" align="middle" src="images/fax_small.png"> {t}Alternate fax numbers{/t}</h2>
      <select style="width:350px; height:100px;" name="alternate_list[]" size=15 multiple {$facsimileAlternateTelephoneNumberACL}>
 			{html_options values=$facsimileAlternateTelephoneNumber output=$facsimileAlternateTelephoneNumber}
-			<option disabled></option>
+			<option disabled>&nbsp;</option>
      </select><br>
      <input name="forward_address" size=20 align="middle" maxlength=65 {$facsimileAlternateTelephoneNumberACL} value="">
      <input type=submit value="{t}Add{/t}" name="add_alternate" {$facsimileAlternateTelephoneNumberACL}>&nbsp;

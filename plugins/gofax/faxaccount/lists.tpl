@@ -5,7 +5,7 @@
    <br> 
    <select style="width:350px; height:300px;" name="block_list[]" size=15 multiple>
 	    {html_options values=$cblocklist output=$cblocklist}
-		<option disabled></option>
+		<option disabled>&nbsp;</option>
    </select>
    <br>
    <input name="block_number" size=25 align="middle" maxlength=30 {$goFaxBlockListACL} value="">
@@ -27,7 +27,7 @@
    <b>{t}List of predefined blocklists{/t}</b>
    <select style="width:350px; height:250px;" name="predefined_list[]" size=15 multiple>
         {html_options values=$list}
-		<option disabled></option>
+		<option disabled>&nbsp;</option>
    </select>
   </td>
  </tr>
