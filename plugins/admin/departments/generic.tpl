@@ -1,9 +1,9 @@
-<table style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
  <tr>
    <td style="vertical-align:top;">
      <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Properties{/t}</h2>
      
-     <table>
+     <table summary="">
       <tr>
        <td>{t}Name of department{/t}{$must}</td>
        <td><input name="ou" size=25 maxlength=60 value="{$ou}" title="{t}Name of subtree to create{/t}"></td>
@@ -41,7 +41,7 @@
    <td>
      <h2><img alt="" align="middle" src="images/house.png"> {t}Location{/t}</h2>
 
-     <table>
+     <table summary="">
       <tr>
        <td>{t}State{/t}</td>
        <td><input name="st" size=25 maxlength=60 {$stACL} value="{$st}" title="{t}State where this subtree is located{/t}"></td>

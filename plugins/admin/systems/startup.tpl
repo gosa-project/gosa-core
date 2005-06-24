@@ -1,9 +1,9 @@
 <h2><img alt="" align="middle" src="images/penguin.png"> {t}Boot parameters{/t}</h2>
-<table style="width:100%;">
+<table summary="" style="width:100%;">
  <tr>
   <td style="width:50%; vertical-align:top;">
 
-   <table>
+   <table summary="">
     <tr>
      <td>{t}LDAP server{/t}</td>
      <td>
@@ -44,7 +44,7 @@
  </tr>
 </table>
 
-<table style="width:100%;">
+<table summary="" style="width:100%;">
  <tr><td colspan=2><p class="plugbottom" style="margin-top:0px;"></p></td></tr>
 
  <tr>
@@ -78,7 +78,7 @@
  </tr>
 </table>
 
-<table style="width:100%;">
+<table summary="" style="width:100%;">
  <tr><td colspan=2><p class="plugbottom" style="margin-top:0px;"></p></td></tr>
 
  <tr>

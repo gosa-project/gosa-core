@@ -1,9 +1,9 @@
 <h2><img alt="" align="middle" src="images/network.png"> {t}Network settings{/t}</h2>
 
-<table width="100%">
+<table summary="" width="100%">
  <tr>
   <td>
-   <table>
+   <table summary="">
     <tr>
      <td>{t}IP-address{/t}{$staticAddress}</td>
      <td><input name="ipHostNumber" size=25 maxlength=80 value="{$ipHostNumber}"></td>
@@ -11,7 +11,7 @@
    </table>
   </td>
   <td>
-   <table>
+   <table summary="">
     <tr>
      <td>{t}MAC-address{/t}{$staticAddress}</td>
      <td><input name="macAddress" size=25 maxlength=80 value="{$macAddress}"></td>

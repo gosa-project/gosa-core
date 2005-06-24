@@ -1,9 +1,9 @@
 <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Properties{/t}</h2>
-<table style="width:100%;">
+<table summary="" style="width:100%;">
  <tr>
   <td style="width:50%; vertical-align:top;">
 
-   <table>
+   <table summary="">
     <tr>
      {if $cn eq 'default'}
      <td colspan=2>{t}Terminal template{/t}</td>
@@ -31,7 +31,7 @@
 
   <td style="vertical-align:top;">
 
-   <table>
+   <table summary="">
     <tr>
      <td>{t}Mode{/t}</td>
      <td>
@@ -46,7 +46,7 @@
  </tr>
  <tr>
   <td style="width:50%;">
-   <table>
+   <table summary="">
     <tr><td colspan=2><div style="height:15px;"></div></td></tr>
     <tr>
      <td>{t}Root server{/t}</td>
@@ -68,7 +68,7 @@
   </td>
   <td style="vertical-align:top;">
 
-   <table>
+   <table summary="">
     <tr><td colspan=2><div style="height:15px;"></div></td></tr>
     <tr>
      <td>{t}Syslog server{/t}</td>
@@ -97,7 +97,7 @@
 
 <p class="plugbottom" style="margin-bottom:0px; padding:0px;">&nbsp;</p>
 <h2><img alt="" align="middle" src="images/rocket.png"> {t}Action{/t}</h2>
-<table>
+<table summary="">
  <tr>
   <td>
    <select size="1" name="saction" {$actionACL} title="{t}Select action to execute for this terminal{/t}">
