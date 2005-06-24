@@ -1,7 +1,7 @@
-<table width="100%">
+<table width="100%" summary="">
   <tr>
     <td>
-   			<table>
+   			<table summary="">
      			<tr>
       				<td>{t}Macro name{/t}{$must}</td>
       				<td><input name="cn" size=25 maxlength=60 value="{$cn}" title="{t}Macro name{/t}"></td>
@@ -30,7 +30,7 @@
 		     &nbsp;
 		</td>
 		<td style="vertical-align:top;">
-			<table>
+			<table summary="">
     			<tr>
      				<td>{t}Description{/t}</td>
      				<td>
