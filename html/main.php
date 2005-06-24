@@ -291,7 +291,7 @@ if (isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->da
   tidy_clean_repair($display);
   $cnt =  (tidy_error_count($display))+(tidy_warning_count($display));
   if($cnt != 0){
-    echo nl2br(htmlentities($display->errorBuffer));
+    echo "<div style='background:#FFFFFF;'>".nl2br(htmlentities($display->errorBuffer))."</div>";
   }
   tidy_clean_repair($display);
 }
