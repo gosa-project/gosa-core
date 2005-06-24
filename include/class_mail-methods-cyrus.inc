@@ -32,6 +32,7 @@ class mailMethodCyrus extends mailMethod
   function connect($gosaMailServer)
   {
     $cfg=array();
+
     /* Connect to IMAP server. I don't want to see these warning here... */
     $this->gosaMailServer= $gosaMailServer;
     if (!isset($this->config[$gosaMailServer])){
