@@ -287,21 +287,17 @@ if (isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->da
   $config = array('indent' => TRUE,
                'output-xhtml' => TRUE,
                'wrap' => 200);
-
-  $tidy = tidy_parse_string($display, $config, 'UTF8');
-  tidy_clean_repair($tidy);
-//$tidy->diagnose();
-  $cnt =  tidy_error_count($tidy);
-//  if($cnt != 0){
-    echo nl2br(htmlentities($tidy->errorBuffer));
-//    }
-  tidy_clean_repair($tidy);
-
-echo $tidy;
-}else{
-  /* Show page... */
-  echo $display;
+  $display = tidy_parse_string($display, $config, 'UTF8');
+  tidy_clean_repair($display);
+  $cnt =  (tidy_error_count($display))+(tidy_warning_count($display));
+  if($cnt != 0){
+    echo nl2br(htmlentities($display->errorBuffer));
+  }
+  tidy_clean_repair($display);
 }
+
+/* Show page... */
+echo $display;
 
 /* Save plist */
 $_SESSION['plist']= $plist;
