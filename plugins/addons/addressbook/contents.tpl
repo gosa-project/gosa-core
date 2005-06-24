@@ -80,7 +80,7 @@
     	<td>
 			<select name="search_base" size="1" onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
 		      	{html_options options=$deplist selected=$depselect}
-				<option disabled></option>
+				<option disabled>&nbsp;</option>
     		</select>
 		</td>
 	</tr>
@@ -105,7 +105,7 @@
 	    <td>
 	      	<select name="object_type" size="1" onChange="mainform.submit()" title="{t}Choose the object that will be searched in{/t}">
     	   		{html_options options=$objlist selected=$object_type}
-				<option disabled></option>
+				<option disabled>&nbsp;</option>
 	      	</select>
 	    </td>
 	</tr>

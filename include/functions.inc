@@ -896,7 +896,7 @@ function print_red()
   if (isset($_SESSION['DEBUGLEVEL'])){
     $_SESSION['errors'].= "<div align=\"left\" style=\"border-width:5px;".
       "border-style:solid;border-color:red; background-color:black;".
-      "margin-bottom:10px; padding:8px;\"><table summary=\"\" ><tr><td><img alt=\"\" src=\"".
+      "margin-bottom:10px; padding:8px;\"><table summary=''><tr><td><img alt=\"\" src=\"".
       get_template_path('images/warning.png')."\"></td>".
       "<td width=\"100%\" align=\"center\"><font color=\"#FFFFFF\">".
       "<b style='font-size:16px;'>$string</b></font></td><td>".
@@ -1191,7 +1191,7 @@ function apply_filter()
   $apply= "";
 
   $apply= ''.
-    '<table summary=\"\"  width="100%"  style="background:#EEEEEE;border-top:1px solid #B0B0B0;"><tr><td width="100%" align="right">'.
+    '<table summary=""  width="100%"  style="background:#EEEEEE;border-top:1px solid #B0B0B0;"><tr><td width="100%" align="right">'.
     '<input type="submit" name="apply" value="'._("Apply").'"></td></tr></table>';
 
   return ($apply);
