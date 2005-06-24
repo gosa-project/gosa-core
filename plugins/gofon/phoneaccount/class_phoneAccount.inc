@@ -221,7 +221,7 @@ class phoneAccount extends plugin
       $macrotab="";
     }else{
 
-      $macrotab ="<table>";
+      $macrotab ="<table summary=\""._("Parameter")."\">";
       /* for every single parameter-> display textfile,combo, or true false switch*/
       foreach($this->macroarray[$this->macro] as $paras){
 
@@ -241,9 +241,9 @@ class phoneAccount extends plugin
             $str= "<select name='".$var."' ".chkacl($this->acl, "goFonMacro").">";
             foreach(split(":",$default) as $choice){
               if($choosen==$choice){
-                $str.= "\n<option name='".$var."' value='".$choice."' selected>".$choice."</option>";
+                $str.= "\n<option value='".$choice."' selected>".$choice."</option>";
               }else{
-                $str.= "\n<option name='".$var."' value='".$choice."'>".$choice."</option>";
+                $str.= "\n<option value='".$choice."'>".$choice."</option>";
               }
             }
             $str.="</select>";
