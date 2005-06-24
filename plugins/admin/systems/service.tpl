@@ -1,8 +1,8 @@
-<table style="width:100%;">
+<table style="width:100%;" summary="">
  <tr>
   <td style="width:33%; vertical-align:top;">
    <h2><img alt="" align="middle" src="images/keyboard.png"> {t}Keyboard{/t}</h2>
-   <table>
+   <table summary="">
     <tr>
      <td>{t}Model{/t}</td>
      <td>
@@ -37,7 +37,7 @@
   
   <td style="vertical-align:top;width:32%">
    <h2><img alt="" align="middle" src="images/mouse.png"> {t}Mouse{/t}</h2>
-   <table>
+   <table summary="">
     <tr>
      <td>{t}Type{/t}</td>
      <td>
@@ -64,7 +64,7 @@
   
   <td style="vertical-align:top;width:33%">
    <h2><img alt="" align="middle" src="images/select_phone.png"> {t}Telephone hardware{/t}</h2>
-   <table style="width:100%" border=0>
+   <table style="width:100%" border=0 summary="">
     <tr>
      <td>{t}Telephone{/t}&nbsp;
 	  {$hardware_list}
@@ -76,12 +76,12 @@
  </tr>
 </table>
 
-<table style="width:100%;">
+<table style="width:100%;" summary="">
  <tr><td colspan=5><p class="plugbottom" style="text-align:left;"></p></td></tr>
  <tr>
    <td style="width:33%;vertical-align:top;">
    <h2><img alt="" align="middle" src="images/hardware.png"> {t}Graphic device{/t}</h2>
-   <table>
+   <table summary="">
     <tr>
      <td>{t}Driver{/t}</td>
      <td>
@@ -115,7 +115,7 @@
 
    <td style="width:32%; vertical-align:top;">
    <h2><img alt="" align="middle" src="images/display.png"> {t}Display device{/t}</h2>
-   <table>
+   <table summary="">
     <tr>
      <td>{t}Type{/t}</td>
      <td>{$gotoXMonitor}</td>
@@ -139,7 +139,7 @@
 
   <td style="width:33%; vertical-align:top;">
    <h2><img alt="" align="middle" src="images/server.png"> {t}Remote desktop{/t}</h2>
-   <table>
+   <table summary="">
     <tr>
      <td></td>
      <td>{t}Connect method{/t}</td>
@@ -173,7 +173,7 @@
  </tr>
 </table>
 
-<table style="width:100%;">
+<table style="width:100%;" summary="">
  <tr><td colspan=3><p class="plugbottom" style="margin-top:0px;"></p></td></tr>
 
  <tr>
@@ -183,8 +183,8 @@
    {t}Provide print services{/t}
    <br>
 
-   <table>
-    <tr>
+   <table summary="">
+   <tr>
      <td><div style="width:20px;"></div></td>
      <td>{t}Spool server{/t}</td>
      <td>
@@ -204,7 +204,7 @@
    <input type=checkbox name="gotoScannerEnable" value="1" title="{t}Select to start SANE scan service on terminal{/t}" {$gotoScannerEnable} {$gotoScannerEnableACL}>
    {t}Provide scan services{/t}
    <br>
-   <table>
+   <table summary="">
     <tr>
      <td><div style="width:20px;"></div></td>
      <td>{t}Model{/t}</td>

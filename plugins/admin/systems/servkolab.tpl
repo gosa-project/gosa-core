@@ -1,8 +1,8 @@
-<table style="width:100%">
+<table summary="" style="width:100%">
  <tr>
   <td style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;" width="50%">
 
-   <table>
+   <table summary="">
     <tr>
 	 <td colspan="2"><b>{t}Services{/t}</b></td>
 	</tr>
@@ -75,7 +75,7 @@
    <p class="seperator">&nbsp;</p>
    <br>
 
-   <table>
+   <table summary="">
     <tr>
 		<td> 
 			<b>{t}Quota settings{/t}</b>
@@ -91,7 +91,7 @@
   </td>
   <td style="vertical-align:top" width="50%">
 
-   <table>
+   <table summary="">
     <tr>
         <td colspan="2">
             <b>{t}Free/Busy settings{/t}</b>
@@ -111,7 +111,7 @@
 
 <p class="seperator">&nbsp;</p>
 <br>
-   <table>
+   <table summary="">
     <tr>
         <td>
         	<b>{t}SMTP privileged networks{/t}</b>
@@ -130,7 +130,7 @@
 <br>
 
 
-   <table>
+   <table summary="">
     <tr>
         <td>
         	<b>{t}SMTP smarthost/relayhost{/t}</b>
@@ -155,7 +155,7 @@
 <br>
 
 
-   <table>
+   <table summary="">
     <tr>
         <td>
         	<b>{t}Accept Internet Mail{/t}</b>
