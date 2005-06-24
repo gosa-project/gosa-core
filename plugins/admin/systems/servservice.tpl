@@ -1,4 +1,4 @@
-<table style="width:100%">
+<table summary="" style="width:100%">
  <tr>
   <td style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;" width="50%">
 
@@ -9,7 +9,7 @@
 			changeState('NewNfsAddId');"> 
 
 		<b>{t}Nfs Export{/t}</b>
-   <table>
+   <table summary="">
     <tr>
      <td>
 		<select style="width:350px;" id="goExportEntry" name="goExportEntry[]" {$goExportEntryACL} {$goNfsServerState} size=4 multiple >
@@ -35,7 +35,7 @@
             changeState('NewNTPAddId');">
 
         <b>{t}Time Service{/t}</b>
-   <table>
+   <table summary="">
     <tr>
      <td>
         <select style="width:350px;" id="goTimeEntry" name="goTimeSource[]" {$goNtpServerState} {$goTimeSourceACL}  size=4 multiple>
@@ -71,7 +71,7 @@
 
      <b>{t}Terminal Service{/t}</b>
 
-  <table>
+  <table summary="">
 	<tr>
 	 <td colspan=2>
 	  <input type="checkbox" value="true" name="goXdmcpIsEnabled" {$goTerminalServerState} {$goXdmcpIsEnabledACL} id="Temporariid" {$goXdmcpIsEnabled}> {t}Temporary disable login{/t}</td>

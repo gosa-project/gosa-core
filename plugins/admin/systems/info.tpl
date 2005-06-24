@@ -1,8 +1,8 @@
 <h2><img alt="" align="middle" src="images/info_small.png"> {t}System information{/t}</h2>
-<table style="width:100%;">
+<table summary="" style="width:100%;">
  <tr>
   <td style="vertical-align:top; width:50%">
-   <table>
+   <table summary="">
     <tr>
      <td style="vertical-align:top"><b>{t}CPU{/t}</b></td><td>{$ghCpuType}</td>
     </tr>
@@ -33,7 +33,7 @@
    &nbsp;
   </td>
   <td>
-   <table>
+   <table summary="">
     <tr>
      <td style="vertical-align:top"><b>{t}Network devices{/t}</b></td>
      <td>
@@ -85,10 +85,10 @@
 {if $active eq "true"}
 <br>
 <h2 style="border-top:1px solid #A0A0A0; padding-top:5px;"><img alt="" align="middle" src="images/lamp.png"> {t}System status{/t}</h2>
-<table style="width:100%">
+<table summary="" style="width:100%">
  <tr>
   <td style="vertical-align:top; width:50%">
-   <table>
+   <table summary="">
     <tr>
      <td><b>{t}Up since{/t}</b></td><td>{$uptime}</td>
     </tr>
@@ -111,7 +111,7 @@
    &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <table>
+   <table summary="">
     <tr>
      <td><b>{t}SSH service{/t}</b></td><td>{$sshd}</td>
     </tr>
