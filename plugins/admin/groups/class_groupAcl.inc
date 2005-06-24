@@ -202,7 +202,7 @@ class acl extends plugin
 	asort ($name);
 
 	# Generate checklist
-	$display.= "<table style=\"width:100%;\">\n";
+	$display.= "<table summary=\"\" style=\"width:100%;\">\n";
 	$switch= 0;
 	foreach ($name as $key => $val){
 		if ($switch == 0){

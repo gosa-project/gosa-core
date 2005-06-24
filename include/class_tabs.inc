@@ -74,7 +74,7 @@ class tabs
 	$display= $this->gen_tabs();
 
 	/* Show object */
-	$display.= "<table cellpadding=4 cellspacing=0 border=0 style=\"width:100%; background-color:#F0F0F0; border-style:solid; border-color:black; border-top-width:0px; border-bottom-width:1px; border-left-width:1px; border-right-width:1px;\">\n";
+	$display.= "<table summary=\"\" cellpadding=4 cellspacing=0 border=0 style=\"width:100%; background-color:#F0F0F0; border-style:solid; border-color:black; border-top-width:0px; border-bottom-width:1px; border-left-width:1px; border-right-width:1px;\">\n";
 	$display.= "<tr><td>\n";
 
 	$obj= $this->by_object[$this->current];
@@ -119,7 +119,7 @@ class tabs
   function gen_tabs()
   {
   	$display= "<input type=\"hidden\" name=\"arg\" value=\"\">";
-	$display.= "<table cellpadding=0 cellspacing=0 border=0 style=\"width:100%;\"><tr>";
+	$display.= "<table summary=\"\" cellpadding=0 cellspacing=0 border=0 style=\"width:100%;\"><tr>";
 	$index= 0;
 	$style= array("tab_left", "tab_active", "tab_near_active", "tab_right");
 	foreach ($this->by_name as $class => $name){

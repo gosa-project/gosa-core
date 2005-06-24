@@ -116,7 +116,7 @@ class pluglist {
 						_($plHeadline)."</a></p>\n";
 
 				/* Generate icon entry with description */
-				$this->menuparts[_($headline)][]= '<table class="menuitem" onClick=\'location.href="'.$href.'"\'><tr><td style="background-color:#F0F0F0;"><a href="'.$href.'"><img alt=\"\" border=0 src="'.$image.'"></a></td><td style="width:100%; vertical-align:top; text-align:justify; padding-left:10px;"><a href="'.$href.'"><b>'._($plHeadline).'</b></a><br><a href="'.$href.'">'._($plDescription).'</a></td></tr></table>';
+				$this->menuparts[_($headline)][]= '<table summary=\"\" class="menuitem" onClick=\'location.href="'.$href.'"\'><tr><td style="background-color:#F0F0F0;"><a href="'.$href.'"><img alt=\"\" border=0 src="'.$image.'"></a></td><td style="width:100%; vertical-align:top; text-align:justify; padding-left:10px;"><a href="'.$href.'"><b>'._($plHeadline).'</b></a><br><a href="'.$href.'">'._($plDescription).'</a></td></tr></table>';
 
 				}
 			}
@@ -142,7 +142,7 @@ class pluglist {
 	}
 
 	/* Fill current array */
-	$result= "<table width=\"100%\">";
+	$result= "<table width=\"100%\" summary=\"\">";
 	$count= 0;
 	foreach ($this->menuparts[$this->current] as $entry){
 		if ($count == 2){
@@ -182,7 +182,7 @@ class pluglist {
 		foreach ($cfg as $headline => $plug){
 			$col= 1;
 			$menu= "<h1 class=\"menuheader\">".
-					_($headline)."</h1>\n<table style=\"width:100%;".
+					_($headline)."</h1>\n<table summary=\"\" style=\"width:100%;".
 					"font-size: 14px;\" cellpadding=7 border=0>\n<tr>\n";
 			$entries= "";
 

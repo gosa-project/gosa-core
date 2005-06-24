@@ -84,7 +84,7 @@ class applicationParameters extends plugin
 		$this->option_name[]= "";
 		$this->option_value[]= "";
 	}
-	$table= "<table><tr><td>"._("Variable")."</td><td>"._("Default value")."</td><td></td></tr>";
+	$table= "<table summary=\"\"><tr><td>"._("Variable")."</td><td>"._("Default value")."</td><td></td></tr>";
 	if (count ($this->option_name)){
 		for ($i= 0; $i < count($this->option_name); $i++){
 			$table.="<tr><td><input name=\"option$i\" size=25 maxlength=50 ".

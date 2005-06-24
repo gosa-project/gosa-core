@@ -126,7 +126,7 @@ class appgroup extends plugin
           }
 
           /* Create edit field */
-          $table= "<table>";
+          $table= "<table summary=\"\">";
           for ($i= 0; $i < count($this->option_name); $i++){
             if (isset($this->option_value[$i])){
               $value= $this->option_value[$i];

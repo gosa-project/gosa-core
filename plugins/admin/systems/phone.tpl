@@ -1,7 +1,7 @@
-<table width="100%">
+<table summary="" width="100%">
  <tr>
   <td style="vertical-align:top; width:50%;">
-	<table>
+	<table summary="">
 	 <tr>
 	  <td>{t}Phone name{/t}{$must}</td>
 	  <td><input name="cn" size=20 maxlength=60 value="{$cn}"></td>
@@ -19,7 +19,7 @@
 	</table>
   </td>
   <td style="vertical-align:top">
-	<table>
+	<table summary="">
 	 <tr>
 	  <td>{t}Description{/t}</td>
 	  <td><input name="description" size=25 maxlength=80 value="{$description}"></td>

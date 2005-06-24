@@ -10,7 +10,7 @@ function check_schema_version($description, $version)
 
 function view_schema_check($table)
 {
-  $message="<table class=\"check\">";
+  $message="<table summary=\"\" class=\"check\">";
 
   foreach ($table as $key => $values){
     $msg = $values['msg'];
@@ -223,7 +223,7 @@ function schema_check($server, $admin, $password, $aff=0)
 
 function check(&$faults, $message, $description, $test, $required= TRUE)
 {
-  $msg= "<table class='check'><tr><td class='check' style='font-size:14px;'>$message</td>
+  $msg= "<table summary=\"\" class='check'><tr><td class='check' style='font-size:14px;'>$message</td>
     <td rowspan=2 style='vertical-align:middle; text-align:center;width:45px;'>";
   if ($test){
     $msg.= _("OK")."<br>";
@@ -862,7 +862,7 @@ function show_setup_page5($withoutput=true)
   $info= posix_getgrgid(posix_getgid());
   $smarty->assign("webgroup", $info['name']);
   $smarty->assign("path", CONFIG_DIR);
-  $message= "<table class=\"check\">";
+  $message= "<table summary=\"\" class=\"check\">";
   $m= schema_check($ldapconf['uri'], $ldapconf['admin'], $ldapconf['password'],1);
 
   if($withoutput) {

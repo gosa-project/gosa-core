@@ -58,12 +58,12 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
     if ($_SESSION['js']==FALSE){
       $error_collector= "<div>";
     } else {
-      $error_collector= "<table width=\"100%\" style='background-color:#E0E0E0;border-bottom:1px solid black'><tr><td><img alt=\"\" align=\"middle\" src='".get_template_path('images/warning.png')."'>&nbsp;<font style='font-size:14px;font-weight:bold'>"._("Generating this page caused the PHP interpreter to raise some errors!")."</font></td><td align=right><button onClick='toggle(\"errorbox\")'>"._("Toggle information")."</button></td></tr></table><div id='errorbox' style='position:absolute; z-index:0; visibility: hidden'>";
+      $error_collector= "<table summary=\"\" width=\"100%\" style='background-color:#E0E0E0;border-bottom:1px solid black'><tr><td><img alt=\"\" align=\"middle\" src='".get_template_path('images/warning.png')."'>&nbsp;<font style='font-size:14px;font-weight:bold'>"._("Generating this page caused the PHP interpreter to raise some errors!")."</font></td><td align=right><button onClick='toggle(\"errorbox\")'>"._("Toggle information")."</button></td></tr></table><div id='errorbox' style='position:absolute; z-index:0; visibility: hidden'>";
     }
   }
  
   /* Create error header */
-  $error_collector.= "<table width=\"100%\" cellspacing=0 style='background-color:#402005;color:white;border:2px solid red'><tr><td colspan=3><h1 style='color:white'>"._("PHP error")." \"$errstr\"</h1></td></tr>";
+  $error_collector.= "<table summary=\"\" width=\"100%\" cellspacing=0 style='background-color:#402005;color:white;border:2px solid red'><tr><td colspan=3><h1 style='color:white'>"._("PHP error")." \"$errstr\"</h1></td></tr>";
   
   /* Extract traceback data - if available */
   if (function_exists('debug_backtrace')){

@@ -322,7 +322,7 @@ function createResultEntry($entry,$res,$name,$max)
   /* the object tag is needed for W3c */
   $str =  "<a href=\"?pg=".$name."&amp;mark=1\" title=\"".$percentage."% ".$entry['headline']."\">
           <object>
-          <table width=\"98%\" align=\"center\">
+          <table summary=\"\"  width=\"98%\" align=\"center\">
             <tr>
               <td height=15>
                 <b>".$entry['headline']."</b> -".htmlentities( substr(strip_tags($entry['content']),0,120))."...
