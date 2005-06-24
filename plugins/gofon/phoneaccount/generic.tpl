@@ -52,8 +52,7 @@
 <br>
 <table>
 	<tr>
-		<td colspan=2>{t}Select macro{/t}
-			<img src="images/select_phone.png">
+		<td colspan=2><img src="images/select_macro.png" align="center">&nbsp;{t}Phone macro{/t}
 			 <select name="macro" onchange="document.mainform.submit()" {$telephoneNumberACL}>
 			   {html_options options=$macros selected=$macro}
 			 </select>

@@ -97,7 +97,7 @@ class phoneAccount extends plugin
     $ldap->search("(objectClass=goFonMacro)", array("*"));
 
     /* Add none for no macro*/
-    $this->macros['none']=_("none");    
+    $this->macros['none']=_("no macro");    
     $this->macro ="none";
 
 
@@ -140,6 +140,7 @@ class phoneAccount extends plugin
         }//is_array
       }//visible = 1
     }//while
+
     /* Go through already saved values, for a parameter */
     $tmp = split("!",$this->goFonMacro);
 
@@ -233,36 +234,38 @@ class phoneAccount extends plugin
         $str        = $default;
 
         /* in case of a combo box display a combobox with selected attr */
-        if($type == "combo"){
-          $str="<select name='".$var."' ".chkacl($this->acl, "goFonMacro").">";
-          foreach(split(":",$default) as $choice){
-            if($choosen==$choice){
-              $str.="\n<option name='".$var."' value='".$choice."' selected>".$choice."</option>";
-            }else{
-              $str.="\n<option name='".$var."' value='".$choice."'>".$choice."</option>";
+        $macrotab.= "<tr>";
+        switch ($type){
+
+          case "combo":
+            $str= "<select name='".$var."' ".chkacl($this->acl, "goFonMacro").">";
+            foreach(split(":",$default) as $choice){
+              if($choosen==$choice){
+                $str.= "\n<option name='".$var."' value='".$choice."' selected>".$choice."</option>";
+              }else{
+                $str.= "\n<option name='".$var."' value='".$choice."'>".$choice."</option>";
+              }
             }
-          }
-          $str.="</select>";
+            $str.="</select>";
+            $macrotab.= "<td>$name</td><td>$str";
+            break;
+
+          case "bool":
+            if(!$choosen){
+              $str="\n<input type='checkbox' name='".$var."' value='1'>";
+            }else{
+              $str="\n<input type='checkbox' name='".$var."' value='1' checked>";
+            }
+            $macrotab.= "<td colspan='2'>$str&nbsp;$name";
+            break;
+
+          case "string":
+            $str="<input name='".$var."' value='".$choosen."' ".chkacl($this->acl, "goFonMacro").">";
+            $macrotab.= "<td>$name</td><td>$str";
+            break;
+
         }
-
-
-      
-        /* Display switch for true false*/
-        if($type == "bool"){
-          if(!$choosen){
-            $str="\n<input type='checkbox' name='".$var."' value='1'>";
-          }else{
-            $str="\n<input type='checkbox' name='".$var."' value='1' checked>";
-          }
-        }
-
-        /* display simple textfield */ 
-        if($type=="string"){
-          $str="<input name='".$var."' value='".$choosen."' ".chkacl($this->acl, "goFonMacro").">";
-        }
-
-        /* create table entry*/
-        $macrotab.= "\n<tr><td>".$name."</td><td>".$str."</td></tr>"; 
+        $macrotab.= "</td</tr>";
 
       }
       $macrotab.="</table>";
