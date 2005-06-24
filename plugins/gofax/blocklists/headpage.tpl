@@ -10,7 +10,7 @@
     <p class="contentboxb">
       <select style="width:500px; height:450px;" name="blocklist" size=15 ondblclick="this.form.edit_helper.value='1'; this.form.submit()">
 	  {html_options options=$blocklists}
-      <option disabled></option>
+      <option disabled>&nbsp;</option>
   	  </select>
       <br>
       <input type=submit value="{t}New{/t}..." name="new_blocklist">&nbsp;
@@ -57,7 +57,7 @@
     	<td>
 			<select name="depselect" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
 			     {html_options options=$deplist selected=$depselect}
-      			<option disabled></option>
+      			<option disabled>&nbsp;</option>
 		    </select>
 		</td>
 	</tr>

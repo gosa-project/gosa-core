@@ -82,7 +82,7 @@
       <br>
       <select style="width:400px; height:300px;" name="members[]" size=15 multiple>
        {html_options options=$members}
-		<option disabled></option>
+		<option disabled>&nbsp;</option>
       </select>
       <br>
       <input type=submit name="edit_membership" value="{t}Add{/t}" {$membersACL}>
