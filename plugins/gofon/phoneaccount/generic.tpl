@@ -50,26 +50,17 @@
 </table>
 <p class="seperator">&nbsp;</p>
 <br>
-<table width="100%">
+<table>
 	<tr>
-		<td width="50%">
-			<table>
-				<tr>
-					<td>{t}Select Macro{/t}
-					</td>
-					<td>
-						<img src="images/select_phone.png">
-						 <select name="macro" onchange="document.mainform.submit()" {$telephoneNumberACL}>
-					       {html_options options=$macros selected=$macro}
-					     </select>
-						 <input type="submit" name="refresh" value="{t}refresh{/t}" {$goFonMacroACL}>
-					</td>
-				</tr>
-			</table>
-		</td>
-		<td>
-			{$macrotab}
+		<td colspan=2>{t}Select macro{/t}
+			<img src="images/select_phone.png">
+			 <select name="macro" onchange="document.mainform.submit()" {$telephoneNumberACL}>
+			   {html_options options=$macros selected=$macro}
+			 </select>
+			 <input type="submit" name="refresh" value="{t}refresh{/t}" {$goFonMacroACL}>
 		</td>
 	</tr>
 </table>
+<br>
+{$macrotab}
 <input type="hidden" name="phoneTab" value="phoneTab">
