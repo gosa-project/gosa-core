@@ -396,6 +396,7 @@ class LDAP{
             break;
           default:
             print_red(sprintf(_("Autocreation of type '%s' is currently not supported. Please report to the GOsa team."), $type));
+            echo $_SESSION['errors'];
             exit;
         }
         $this->cd($cdn);
