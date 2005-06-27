@@ -10,6 +10,7 @@
    <b>{t}Delegations{/t}</b><br>
    <select style="width:350px; height:100px;" name="delegate_list[]" size=15 multiple>
     {html_options values=$kolabDelegate output=$kolabDelegate}
+	<option disabled>&nbsp;</option>
    </select>
    <br>
    <input name="delegate_address" size=30 align=middle maxlength=60

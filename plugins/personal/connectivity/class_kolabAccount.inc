@@ -157,7 +157,8 @@ class kolabAccount extends plugin
 
     /* Transfer delegation list */
     if (!count($this->kolabDelegate)){
-      $smarty->assign("kolabDelegate", array(""));
+      /* Smarty will produce <option value=""></option> and tidy don't like that, so tell smarty to create no option (array();)*/
+      $smarty->assign("kolabDelegate", array());
     } else {
       $smarty->assign("kolabDelegate", $this->kolabDelegate);
     }
