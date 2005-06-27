@@ -145,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
   $ldap->search("(objectClass=*)",array("subschemaSubentry"));
   $attrs= $ldap->fetch();
   if(!count($attrs)){
-    print_red(_("Can't read schema informations, GOsa needs to know your schema setup. Pleasy verify taht it is readable for GOsa"));
+    print_red(_("GOsa cannot retrieve information about the installed schema files. Please make sure, that this is possible."));
     echo $_SESSION['errors'];
     exit();
   }
