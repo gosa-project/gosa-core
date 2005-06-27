@@ -853,7 +853,7 @@ function show_setup_page4($withoutput = true)
 
     if(!is_schema_readable($ldapconf['uri'],$ldapconf['admin'],$ldapconf['password'])){
       if($withoutput){
-        print_red(_("Can't read schema informations, GOsa needs to know your schema setup. Pleasy verify taht it is readable for GOsa"));
+        print_red(_("Can't read schema informations, GOsa needs to know your schema setup. Please verify that it is readable for GOsa"));
       }
       $fault=true;
     }

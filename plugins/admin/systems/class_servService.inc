@@ -176,7 +176,7 @@ class servservice extends plugin
     
   
     if((isset($_POST['goTerminalServer']))&&(empty($this->goFontPath))){
-      $message[]=_("Termial server, must have fontpath specified.");
+      $message[]=_("Terminal server, must have fontpath specified.");
     }
 
     return ($message);
