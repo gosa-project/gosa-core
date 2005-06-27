@@ -131,8 +131,8 @@ class faxreport extends plugin
 		$queuing_time= $line['queuing_time'];
 
 		$_SESSION['fuserfilter']= $this->userfilter;
-	        $smarty->assign("plug", validate($_GET['plug']));
-	        $smarty->assign("detail", validate($_GET['detail']));
+ 	    $smarty->assign("plug", validate($_GET['plug']));
+	    $smarty->assign("detail", validate($_GET['detail']));
 
 		$format= _("Y-M-D");
 		$date= preg_replace("/Y/", substr($queuing_time,0,4), $format);
@@ -292,7 +292,7 @@ class faxreport extends plugin
 	
 
 	/* Show main page */
-        $smarty->assign("plug", validate($_GET['plug']));
+    $smarty->assign("plug", "?plug=".validate($_GET['plug']));
 	$smarty->assign("launchimage", get_template_path('images/launch.png'));
 	$smarty->assign("search_image", get_template_path('images/search.png'));
 	for($i= 0; $i<7; $i++){
