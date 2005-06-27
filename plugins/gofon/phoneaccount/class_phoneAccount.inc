@@ -577,6 +577,11 @@ class phoneAccount extends plugin
 
   function remove_from_parent()
   {
+    /* unset macro attr, it will cause an error */
+    $tmp = array_flip($this->attributes);
+    unset($tmp['macro']);
+    $this->attributes=array_flip($tmp);
+  
     /* Cancel if there's nothing to do here */
     if (!$this->initially_was_account){
       return;
