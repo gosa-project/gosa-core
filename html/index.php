@@ -142,6 +142,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     exit();
   }
 
+  $ldap->search("(objectClass=*)",array("subschemaSubentry"));
+  $attrs= $ldap->fetch();
+  if(!count($attrs)){
+    print_red(_("Can't read schema informations, GOsa needs to know your schema setup. Pleasy verify taht it is readable for GOsa"));
+    echo $_SESSION['errors'];
+    exit();
+  }
+
   /* Check for locking area */
   $ldap->cat($config->current['CONFIG']);
   $attrs= $ldap->fetch();
