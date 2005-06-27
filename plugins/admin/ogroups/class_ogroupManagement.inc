@@ -60,7 +60,6 @@ class ogroupManagement extends plugin
           "servergroups" => "checked",
           "wsgroups" => "checked",
           "prtgroups" => "checked",
-          "emptygroups" => "checked",
           "tcgroups" => "checked",
           "fongroups" => "checked",
           "depselect" => $base,
@@ -83,7 +82,7 @@ class ogroupManagement extends plugin
       }
     }
     if (isset($_POST['depselect'])){
-      foreach( array("usergroups", "groupgroups", "appgroups", "depgroups", "emptygroups",
+      foreach( array("usergroups", "groupgroups", "appgroups", "depgroups",
             "servergroups", "wsgroups", "prtgroups", "tcgroups", "fongroups") as $type){
 
         if (isset($_POST[$type])) {
@@ -285,7 +284,7 @@ class ogroupManagement extends plugin
 
     $smarty->assign("groups", $this->convert_list($this->grouplist));
 
-    foreach( array("usergroups", "groupgroups", "appgroups", "depgroups", "emptygroups",
+    foreach( array("usergroups", "groupgroups", "appgroups", "depgroups",
           "servergroups", "wsgroups", "prtgroups", "tcgroups", "fongroups", "regex", "depselect") as $type){
       $smarty->assign("$type", $ogroupfilter[$type]);
     }
@@ -380,9 +379,6 @@ class ogroupManagement extends plugin
     }
     if ($ogroupfilter['fongroups'] == "checked"){
       $filter.= "(gosaGroupObjects=*F*)";
-    }
-    if ($ogroupfilter['emptygroups'] == "checked"){
-      $filter.= "(gosaGroupObjects=[])";
     }
 
     if ($filter != ""){

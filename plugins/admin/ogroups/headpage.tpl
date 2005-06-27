@@ -45,7 +45,6 @@
 <table summary=""  style="width:100%;border-top:1px solid #B0B0B0;"> 
 	<tr>
 		<td>
-	<input type=checkbox name="emptygroups" value="1" {$emptygroups} onClick="mainform.submit()">{t}Show empty groups{/t}<br>
     <input type=checkbox name="usergroups" value="1" {$usergroups} onClick="mainform.submit()">{t}Show groups containing users{/t}<br>
     <input type=checkbox name="groupgroups" value="1" {$groupgroups} onClick="mainform.submit()">{t}Show groups containing groups{/t}<br>
     <input type=checkbox name="appgroups" value="1" {$appgroups} onClick="mainform.submit()">{t}Show groups containing applications{/t}<br>
