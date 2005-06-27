@@ -22,6 +22,17 @@
 session_start();
 $_SESSION['DEBUGLEVEL']= 1;
 
+
+if (!isset($_GET['js']) && !isset($_SESSION['js'])){
+  echo '<script language="JavaScript" type="text/javascript">';
+  echo '  location = "index.php?js=true";';
+  echo '</script>';
+
+  $_SESSION['js']= FALSE;
+} else {
+  $_SESSION['js']= TRUE;
+}
+
 /* Load required includes */
 require_once ("../include/php_setup.inc");
 require_once ("functions.inc");

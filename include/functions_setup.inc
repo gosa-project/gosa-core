@@ -29,6 +29,31 @@ function view_schema_check($table)
   return $message;
 }
 
+function is_schema_readable($server, $admin, $password)
+{
+  $ds= ldap_connect ($server);
+  if (!$ds) {
+    return (false);
+  }
+  ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
+  $r= ldap_bind ($ds, $admin, $password);
+
+  /* Get base to look for schema */
+  $sr  = @ldap_read ($ds, "", "objectClass=*", array("subschemaSubentry"));
+  $attr= @ldap_get_entries($ds,$sr);
+  if (!isset($attr[0]['subschemasubentry'][0])){
+    return (false);
+  }
+
+  $nb= $attr[0]['subschemasubentry'][0];
+  $objectclasses= array();
+  $sr= ldap_read ($ds, $nb, "objectClass=*", array("objectclasses"));
+  $attrs= ldap_get_entries($ds,$sr);
+  if (!isset($attrs[0])){
+    return (false);
+  }
+  return(true);
+} 
 
 function schema_check($server, $admin, $password, $aff=0)
 {
@@ -455,8 +480,8 @@ function parse_contrib_conf()
   $possible_plugins['webdav'][]      = "'\n.*<tab.*webdav.*>.*\n'i";
   $possible_plugins['phpgroupware'][]= "'\n.*<tab.*phpgroupware.*>.*\n'i";
 
-  /* Header information
-     Needed to send the generated gosa.conf to the browser 
+  /*Header information
+     Needed to send the generated gosa.conf to the browser */
   header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
   header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
   header("Cache-Control: no-cache");
@@ -470,7 +495,7 @@ function parse_contrib_conf()
   } else {
     header('Content-Disposition: attachment; filename="gosa.conf"');
   }
-  */
+
   if(!$fp=fopen(CONFIG_TEMPLATE_DIR."/gosa.conf","r")) {
     echo "Can't open file ".CONFIG_TEMPLATE_DIR."/gosa.conf";
   } else {
@@ -537,7 +562,7 @@ function parse_contrib_conf()
     }
   }
 
-  return (nl2br(htmlentities($str)));
+  return ((($str)));
 }
 
 
@@ -822,6 +847,15 @@ function show_setup_page4($withoutput = true)
         $_SESSION['ldapconf']['password']);
     $_SESSION['classes']= $m;
 
+    if(!is_schema_readable($ldapconf['uri'],$ldapconf['admin'],$ldapconf['password'])){
+      if($withoutput){
+        print_red(_("Can't read schema informations, GOsa needs to know your schema setup. Pleasy verify taht it is readable for GOsa"));
+      }
+      $fault=true;
+    }
+
+
+
     if ($ldap->error != "Success") {
       if($withoutput) {
         print_red(sprintf(_("Can't log into LDAP server. Reason was: %s."), $ldap->get_error()));
@@ -842,7 +876,6 @@ function show_setup_page4($withoutput = true)
   if($withoutput){
     $smarty->display (get_template_path('setup.tpl'));
   }
-
   return (!$fault);
 }
 
