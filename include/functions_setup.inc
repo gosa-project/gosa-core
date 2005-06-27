@@ -29,6 +29,7 @@ function view_schema_check($table)
   return $message;
 }
 
+
 function is_schema_readable($server, $admin, $password)
 {
   $ds= ldap_connect ($server);
@@ -137,6 +138,7 @@ function schema_check($server, $admin, $password, $aff=0)
         } else {
           if (!check_schema_version($objectclasses[$key], $value['version'])){
             $messages[$key]['msg']= sprintf(_("Optional objectclass '%s' required by plugin '%s' does not have version %s"), $key, $class, $value['version']);
+            $messages[$key]['needonstartup'] = TRUE;
             $messages[$key]['status'] =FALSE;
           }else {
             if(!isset($affich2[$class])){
@@ -156,7 +158,9 @@ function schema_check($server, $admin, $password, $aff=0)
         if (!check_schema_version($objectclasses[$key], $value['version'])){
           $messages[$key]['msg']= sprintf(_("Required objectclass '%s' does not have version %s"), $key, $value['version']);
           $messages[$key]['status'] = FALSE;  
+          $messages[$key]['needonstartup'] = TRUE;
         }
+    
       }
     }
   }
