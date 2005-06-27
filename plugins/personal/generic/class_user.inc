@@ -228,7 +228,7 @@ class user extends plugin
     $smarty->assign("year", $date["year"]);
 
     /* Assign sex */
-    $sex= array(0 => "", "F" => _("female"), "M" => _("male"));
+    $sex= array(0 => "&nbsp;", "F" => _("female"), "M" => _("male"));
     $smarty->assign("gender_list", $sex);
 
     /* Get random number for pictures */

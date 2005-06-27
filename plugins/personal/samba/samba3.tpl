@@ -14,7 +14,7 @@
      <td>
       <input name="sambaHomePath" size=30 maxlength=60 {$sambaHomePathACL} value="{$sambaHomePath}">
       <select size="1" name="sambaHomeDrive" {$sambaHomeDriveACL}>
-       <option></option>
+       <option disabled>&nbsp;</option>
        {html_options values=$drives output=$drives selected=$sambaHomeDrive}
       </select>
      </td>
@@ -66,7 +66,7 @@
      <td>
       <input name="CtxWFHomeDir" size=30 maxlength=60 {$CtxWFHomeDirACL} value="{$CtxWFHomeDir}">
       <select size="1" name="CtxWFHomeDirDrive" {$CtxWFHomeDirDriveACL}>
-       <option></option>
+       <option disabled>&nbsp;</option>
        {html_options values=$drives output=$drives selected=$CtxWFHomeDirDrive}
       </select>
      </td>

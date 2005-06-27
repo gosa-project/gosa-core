@@ -14,7 +14,7 @@
      <td>
       <input name="smbHome" size=30 maxlength=60 {$smbHomeACL} value="{$smbHome}">
       <select size="1" name="homeDrive" {$homeDriveACL}>
-       <option></option>
+       <option disabled>&nbsp;</option>
        {html_options values=$drives output=$drives selected=$homeDrive}
       </select>
      </td>

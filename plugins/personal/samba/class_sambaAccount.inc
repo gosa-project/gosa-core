@@ -499,6 +499,11 @@ class sambaAccount extends plugin
       /* Fill sambaUserWorkstations */
       $ws= split(",", $this->sambaUserWorkstations);
       sort($ws);
+      
+      /* Tidy checks for empty option, and smarty will produce one if array[0]="" */
+      if(($ws[0]=="")&&(count($ws)==1)) $ws=array();
+
+
       $smarty->assign("workstations", $ws);
       $smarty->assign("sambaUserWorkstationACL", chkacl($this->acl,"sambauserworkstation"));
     }
