@@ -232,7 +232,7 @@ class logview extends plugin
 
 	/* Show main page */
 	$smarty->assign("search_result", $res);
-	$smarty->assign("plug", validate($_GET['plug']));
+	$smarty->assign("plug", "?plug=".validate($_GET['plug']));
 	$smarty->assign("search_image", get_template_path('images/search.png'));
 	$smarty->assign("time_image", get_template_path('images/time.png'));
 	$smarty->assign("server_image", get_template_path('images/server.png'));
