@@ -148,7 +148,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     print_red(_("GOsa cannot retrieve information about the installed schema files. Please make sure, that this is possible."));
     echo $_SESSION['errors'];
     exit();
+  }else{
+    require_once("functions_setup.inc");
+    $str = (schema_check($config->current['SERVER'],$config->current['ADMIN'],$config->current['PASSWORD']));
+    $checkarr = array();
+    foreach($str as $tr){
+      if(isset($tr['needonstartup'])){
+        print_red(_("Your Schema files are not at actual version, please move your gosa.conf and  run Setup again, to check this."));
+        print $_SESSION['errors'];
+        exit();
+      }
+    }
   }
+
 
   /* Check for locking area */
   $ldap->cat($config->current['CONFIG']);
