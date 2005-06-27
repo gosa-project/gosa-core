@@ -565,6 +565,6 @@ objectclass ( 1.3.6.1.4.1.19414.3.2.4
 objectclass ( 1.3.6.1.4.1.19414.3.2.5    
   NAME 'kolabGroupOfNames'    
   DESC 'Kolab group of names (DNs) derived from RFC2256'    
-  SUP gosaGroupOfNames STRUCTURAL    
+  SUP goupOfNames AUXILIARY
   MAY ( mail $    
         kolabDeleteflag ) )
