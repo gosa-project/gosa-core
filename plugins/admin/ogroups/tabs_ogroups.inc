@@ -24,15 +24,18 @@ class ogrouptabs extends tabs
 
         case "U":
           /* Add a user tab used for mail distribution lists */
-          require_once("class_mailogroup.inc");
-          $this->by_name['mailogroup']= _("Mail");
-          $this->by_object['mailogroup']= new mailogroup($this->config, $this->dn);
-          $this->by_object['mailogroup']->parent= &$this;
+          if (preg_match('/kolab/i', $this->config->current['MAILMETHOD'])){
+            require_once("class_mailogroup.inc");
+            $this->by_name['mailogroup']= _("Mail");
+            $this->by_object['mailogroup']= new mailogroup($this->config, $this->dn);
+            $this->by_object['mailogroup']->parent= &$this;
+          }
 
           break;
       }
     }
   }
+
 
   function check()
   {
@@ -88,7 +91,7 @@ class ogrouptabs extends tabs
       $this->dn= 'cn='.$baseobject->cn.','.get_groups_ou().$baseobject->base;
     }
 
-    tabs::save(TRUE);
+    tabs::save();
   }
 
 }
