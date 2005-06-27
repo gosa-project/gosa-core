@@ -48,20 +48,38 @@
   </td>
 
  </tr>
+ <tr>
+	<td style="vertical-align:top; border-top:1px solid #A0A0A0; width:50%" colspan="2">&nbsp;</td>
+ </tr>
+ <tr style="vertical-align:top; border-top:1px solid #A0A0A0;">
+	<td  style="vertical-align:top; border-right:1px solid #A0A0A0; width:50%">
+		<br>
+		<table summary="{t}Phone macro{/t}">
+			<tr>
+				<td colspan=2><img alt="" src="images/select_macro.png" align="middle">&nbsp;{t}Phone macro{/t}
+					 <select name="macro" onchange="document.mainform.submit()" {$telephoneNumberACL}>
+					   {html_options options=$macros selected=$macro}
+				<option disabled>&nbsp;</option>
+					 </select>
+					 <input type="submit" name="refresh" value="{t}refresh{/t}" {$goFonMacroACL}>
+				</td>
+			</tr>
+		</table>
+		<br>
+		{$macrotab}
+	</td>
+	<td valign="top" style="vertical-align:top; border-right:1px solid #A0A0A0; width:50%">
+		<table summary="">
+			<tr>
+				<td>
+					{t}Telefon PIN{/t}
+				</td>
+				<td>
+					<input type="password" name="goFonPIN" value="{$goFonPIN}">
+				</td>
+			</tr>
+		</table>
+	</td>
+ </tr>
 </table>
-<p class="seperator">&nbsp;</p>
-<br>
-<table summary="{t}Phone macro{/t}">
-	<tr>
-		<td colspan=2><img alt="" src="images/select_macro.png" align="middle">&nbsp;{t}Phone macro{/t}
-			 <select name="macro" onchange="document.mainform.submit()" {$telephoneNumberACL}>
-			   {html_options options=$macros selected=$macro}
-		<option disabled>&nbsp;</option>
-			 </select>
-			 <input type="submit" name="refresh" value="{t}refresh{/t}" {$goFonMacroACL}>
-		</td>
-	</tr>
-</table>
-<br>
-{$macrotab}
 <input type="hidden" name="phoneTab" value="phoneTab">

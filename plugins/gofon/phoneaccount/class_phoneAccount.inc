@@ -330,6 +330,7 @@ class phoneAccount extends plugin
     /* Transfer ACL's */
     foreach($this->attributes as $val){
       $smarty->assign($val."ACL", chkacl($this->acl, "$val"));
+      $smarty->assign($val,$this->$val);
     }
 
     /* Fill arrays */
@@ -453,6 +454,16 @@ class phoneAccount extends plugin
       $message[]= sprintf(_("You need to specify at least one phone number!"));
     }
 
+    if(($this->goFonPIN)==""){
+      $this->goFonPIN = array();
+    }else{
+      if(strcmp ((int)($this->goFonPIN),($this->goFonPIN))){
+        $message[] = sprintf(_("The given PIN is not valid, only numbers are allowed for this type."));
+      }elseif(strlen($this->goFonPIN) < 4){
+        $message[] = sprintf(_("The given PIN is too short"));
+      }
+
+    }
     /* Check timestamps and phonenumbers */
     foreach ($this->forwarders as $fw){
 
