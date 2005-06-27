@@ -511,6 +511,9 @@ class phoneAccount extends plugin
     }
     unset($this->attrs['macro'])  ;
 
+    if($this->attrs['goFonMacro']==""){
+      $this->attrs['goFonMacro']=array();
+    }
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
