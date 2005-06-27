@@ -32,7 +32,6 @@ class wingeneric extends plugin
   var $sambaSID="";
   var $sambaPrimaryGroupSID="";
   var $displayName="";
-  var $sambaPwdCanChange2="";
   var $sambaPwdMustChange="";
   var $sambaNTPassword="";
   var $sambaPwdLastSet="";
@@ -43,7 +42,7 @@ class wingeneric extends plugin
   var $attributes   = array("cn", "description", "macAddress", "ipHostNumber","shadowLastChange",
                             "uidNumber","gidNumber","loginShell","gecos","shadowMin","shadowWarning",
                             "shadowInactive","uid","cn","sn","givenName","homeDirectory","sambaSID",
-                            "sambaPrimaryGroupSID","displayName", "sambaPwdCanChange2","sambaPwdMustChange",
+                            "sambaPrimaryGroupSID","displayName", "sambaPwdMustChange",
                             "sambaNTPassword","sambaPwdLastSet","sambaAcctFlags");
   var $objectclasses= array("posixAccount","person","organizationalPerson","inetOrgPerson","gosaAccount","shadowAccount","sambaSamAccount","top", "device", "ipHost", "ieee802Device");
 

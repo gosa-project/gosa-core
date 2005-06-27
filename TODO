@@ -3,12 +3,15 @@ Things to fix before 2.4:
 
 * Finish kolab integration
   - shared folders
+* Fix problem with winstation and invalid structural object class chain (inetOrgPerson/device)
 
 
 Target for 2.5:
 ===============
 
-* Complete PHP5 compliance
+* Complete PHP5 compliance and optimization
+
+* Simplify plugins by providing a schema parser
 
 * Remove smarty from SVN. It has an own repository.
 
