@@ -7,7 +7,7 @@
       				<td><input name="cn" size=25 maxlength=60 value="{$cn}" title="{t}Macro name{/t}"></td>
     			</tr>
     			<tr>
-     				<td>{t}Display name{/t}</td>
+     				<td>{t}Display name{/t}{$must}</td>
      				<td>
         				<input name="displayName" size=35 maxlength=60 value="{$displayName}" title="{t}Macro name to be displayed{/t}">
      				</td>
