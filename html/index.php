@@ -153,8 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $checkarr = array();
     foreach($str as $tr){
       if(isset($tr['needonstartup'])){
-        print_red(_($tr['msg']));
-        print_red(_("Your ldap setup contains old schema definitions. Please re-run the setup."));
+        print_red($tr['msg']."<br>"._("Your ldap setup contains old schema definitions. Please re-run the setup."));
         print $_SESSION['errors'];
         exit();
       }
