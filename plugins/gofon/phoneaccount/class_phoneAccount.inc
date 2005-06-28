@@ -131,7 +131,7 @@ class phoneAccount extends plugin
             /* Set all attrs */
             $id = $data[0];
             $this->macroarray[$attrs['dn']][$id]['var']    ="var".$id;
-            $this->macroarray[$attrs['dn']][$id]['choosen']="N/A";
+            $this->macroarray[$attrs['dn']][$id]['choosen']=$data[3];
             $this->macroarray[$attrs['dn']][$id]['id']     = $id;
             $this->macroarray[$attrs['dn']][$id]['name']   =$data[1];
             $this->macroarray[$attrs['dn']][$id]['type']   =$data[2];
