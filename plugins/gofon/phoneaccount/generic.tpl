@@ -75,7 +75,7 @@
 					{t}Phone PIN{/t}
 				</td>
 				<td>
-					<input type="password" name="goFonPIN" value="{$goFonPIN}">
+					<input type="password" name="goFonPIN" value="{$goFonPIN}" {$goFonPINACL}>
 				</td>
 			</tr>
 		</table>
