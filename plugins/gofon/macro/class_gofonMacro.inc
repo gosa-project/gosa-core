@@ -1,28 +1,50 @@
 <?php
+
+//!  The Phone Macro Class: Handles Macro Contents, and some attributes. 
+/*!
+     This class handles the basic information about phone macros, like
+     cn base description displayName goFonMacroContent goFonMacroVisible
+
+     This is not the only Class that manages phone Macros, there ist also the class_goFonMacroParameter.
+*/
 class macro extends plugin
 {
-  /* CLI vars */
+  /*! CLI vars */
   var $cli_summary= "Handling of GOsa's application object";
+  /*! CLI vars */
   var $cli_description= "Some longer text\nfor help";
+  /*! CLI vars */
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
-  /* application attributes */
-  var $cn= "";
-  var $description= "";
-  var $base= "";
-  var $displayName = "";
-  var $goFonMacroContent;
-  var $goFonMacroVisible=0;
-
-  /* attribute list for save action */
-  var $attributes= array("cn","base", "description","displayName","goFonMacroContent","goFonMacroVisible");
-  var $objectclasses= array("top", "goFonMacro");
-
+  /*! Macro attributes,  */
   
-  /*!
-  Konstructor, load class with  attributes of the given dn    
-  */
-  function macro ($config, $dn= NULL)
+  /*! The name of the Macro in the openldap drirectory */
+  var $cn               = ""; 
+  
+  /*! This ist the variable that contains the description of the macro*/
+  var $description      = "";
+
+  /*! The base of the macro, is used to save the macro in the correct directory tree */
+  var $base             = "";
+
+  /*! This is the name of the macro which the enduser will see, instead of the cn */
+  var $displayName      = "";
+    
+  /*! Here is the macro content, the real macroscript */
+  var $goFonMacroContent= "";
+  
+  /*! To allow user to use this macro this var must be true, else false * /
+  var $goFonMacroVisible= 0;
+
+  /*! attribute list for save action */
+  var $attributes     = array("cn","base", "description","displayName","goFonMacroContent","goFonMacroVisible");
+  
+  /*! Objectclasses that this calls handles */
+  var $objectclasses  = array("top", "goFonMacro");
+
+  //! The Konstructor   
+  /*!  Konstructor, load class with  attributes of the given dn*/
+  function macro::macro ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
 
@@ -44,9 +66,7 @@ class macro extends plugin
     }
   }
 
-  /*! 
-  Execute this plugin
-  */
+  /*!  Execute this plugin */
   function execute()
   {
     /* Variables */

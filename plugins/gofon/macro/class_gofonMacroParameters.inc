@@ -1,26 +1,45 @@
 <?php
-
+//! This class handles the goFonMacroParameter
+/*! In this class all parameters from goFonMacroContent \n
+    and all (if given) already defined parameters are managed \n
+    \n
+    Parameters will be saved to openldap like this :\n
+    goFonMacroParameter: ID!NAME:!TYPE(string:combo:bool)!DEFAULT_VALUE\n    
+    In Case of type=combo the DEFAULT_VALUE specifies the entries in the listbox, like this\n
+    "first:second:third:last" \n
+*/
 class macroParameter extends plugin
 {
-  /* CLI vars */
+  /*! CLI vars */
   var $cli_summary= "Handling of GOsa's application object";
+  /*! CLI vars */
   var $cli_description= "Some longer text\nfor help";
+  /*! CLI vars */
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
-  /* application attributes */
+  /*! macro base  */
   var $base= "";
+  
+  /*! This array contains all Parameter defined for the macro*/
   var $goFonMacroParameter =array();
+
+  /*! This are the available types for a macro */
   var $type_shortcut= array("string" => array("selected", "", ""),
       "combo"  => array("", "selected", ""),
       "bool"   => array("", "", "selected"));
 
-  /* attribute list for save action */
+  /*! attribute list for save action */
   var $attributes= array("base","goFonMacroParameter");
+  
+  /*! Objectclasses needed by the class*/  
   var $objectclasses= array("top", "goFonMacro");
 
-  /*!
-    Konstructor
-   */
+  //! The konstructor of macroParameter    
+  /*! The konstructor of macroParameter...
+     - reads goFonMacroParameter and parses them to an array 
+     - Set attributes from openldap (edit)
+     - Set attributes from default (new)
+  */
   function macroParameter ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
@@ -76,8 +95,13 @@ class macroParameter extends plugin
     $this->goFonMacroParameter = $tmp2;
   }
 
-  /*!
-    Check given parameters from content and from object and compare them
+  //! Perform Parameter check 
+  /*! 
+      Compares the given parameters (goFonMacroParameters) with the parameters defined in goFonContent\n 
+      -> Decide which attrs are new and which are unused\n
+      -> Sort result array (containing both parameters 'goFonMacroParameters/goFonContent' and new / unused info)\n
+      \param $content The given goFonContent for this macro\n
+      \param $goFonMacroParameter Array with the already given parameters \n
    */
   function check_paras($content,$goFonMacroParameter)
   { 
@@ -132,7 +156,12 @@ class macroParameter extends plugin
 
   }
 
-
+  //! Execute this Plugin
+  /*! 
+      Perform Parameter check \n
+      Draw paramter table\n
+      Show tpl   \n 
+  */
   function execute()
   {
     /* Variables */
@@ -218,14 +247,22 @@ class macroParameter extends plugin
     /* Show main page */
     return($smarty->fetch (get_template_path('parameter.tpl', TRUE)));
   }
-
-
+  
+  //! Unused here 
+  /*!
+      Unused here because goFonMacro will remove this Macro\n 
+  */
   function remove_from_parent()
   {
   }
 
-
-  /* Save data to object */
+  //! Save our data
+  /*! 
+      Save POST data to object \n
+      This gives us the possibility to leave a tab, without losing our typed informations\n
+      \n
+      Read the POST fields for the parameters and saves their info the the class\n
+  */
   function save_object()
   {
     if (isset($_POST['phoneparameters'])){
@@ -259,7 +296,12 @@ class macroParameter extends plugin
   }
 
 
-  /* Check values */
+  //! Checks given values 
+  /*! 
+      Check values\n 
+      If a user enters an invalid value, then this function will output an error msg\n
+      (In better words :prepare the errormessages that will be put out )\n
+  */
   function check()
   {
     $message = array();
@@ -290,8 +332,11 @@ class macroParameter extends plugin
     return $message;
   }
 
-
-  /* Save to LDAP */
+  //! Save changes to openldap
+  /*!
+      Save to LDAP 
+      This function saves given attributes to the ldap
+  */
   function save()
   {
     /* Post checks */
