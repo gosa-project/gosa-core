@@ -20,7 +20,7 @@
 
 function gosaRaiseError($errno, $errstr, $errfile, $errline)
 {
-  global $error_collector;
+  global $error_collector,$config;
 
   /* Return if error reporting is set to zero */
   if (error_reporting() == 0){
@@ -52,6 +52,15 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
       return;
     }
   }
+
+  if((isset($config->data))){ 
+    if((isset($config->data['MAIN']['DISPLAYERRORS']))&&(!preg_match("/true/i",$config->data['MAIN']['DISPLAYERRORS']))){
+      /* Write to syslog */
+      gosa_log ("PHP error: $errstr ($errfile, line $errline)");
+      return;
+    }
+  }
+
 
   /* Create header as needed */
   if ($error_collector == ""){
@@ -116,9 +125,6 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
 
   /* Close error table */
   $error_collector.= "</table>";
-
-  /* Write to syslog */
-  gosa_log ("PHP error: $errstr ($errfile, line $errline)");
 
   /* Flush in case of fatal errors */
   if (preg_match('/^fatal/i', $errstr)){
