@@ -97,7 +97,7 @@
 <p class="seperator">&nbsp;</p>
 
 <p>
- {t}GOsa may cause PHP interpreter errors, particularly in case of Beta versions. In some cases it would be helpfull to enable the error reporting. (But it could be a security risk)  {/t}
+ {t}GOsa may cause PHP interpreter errors, particularly in case of Beta versions. In some cases it would be helpful to enable the error reporting. (But it could be a security risk)  {/t}
 </p>
 <table summary="">
  <tr>
