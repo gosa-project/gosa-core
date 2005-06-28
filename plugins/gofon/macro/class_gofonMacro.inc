@@ -39,6 +39,7 @@ class macro extends plugin
       $ui= get_userinfo();
       $this->base= dn2base($ui->dn);
     } else {
+      $this->orig_cn=$this->cn;
       $this->base= dn2base($this->dn);
     }
   }
@@ -133,7 +134,7 @@ class macro extends plugin
   {
     $message = array();
 
-    if($this->dn=="new"){
+    if(($this->dn=="new")||($this->orig_cn!=$this->cn)){
       $ldap = $this->config->get_ldap_link();
       $ldap->search("(&(objectClass=goFonMacro)(cn=".$this->cn."))",array("cn"));
       if($ldap->count()>0){
