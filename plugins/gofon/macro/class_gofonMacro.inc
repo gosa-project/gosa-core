@@ -33,6 +33,7 @@ class macro extends plugin
     /* This is always an account */
     $this->is_account= TRUE;
 
+
     /* Edit or new one ?*/
     if ($this->dn == "new"){
       $ui= get_userinfo();
@@ -132,6 +133,14 @@ class macro extends plugin
   {
     $message = array();
 
+    if($this->dn=="new"){
+      $ldap = $this->config->get_ldap_link();
+      $ldap->search("(&(objectClass=goFonMacro)(cn=".$this->cn."))",array("cn"));
+      if($ldap->count()>0){
+        $message[]=sprintf(_("The given cn '%s' already exists."),$this->cn);
+      }
+    }
+
     if(empty($this->displayName)){
       $message[] = _("You must specify the 'Display Name' in order to save this macro");
     }  
@@ -163,7 +172,6 @@ class macro extends plugin
     $this->execute();
 
     plugin::save();
-
     unset($this->attrs['base']);
 
     /* Write back to ldap */
