@@ -13,9 +13,9 @@
 		<option disabled>&nbsp;</option>
     </select>
     <br>
-    <input type=submit value="{t}New{/t}..." name="new_app">&nbsp;
-    <input type=submit value="{t}Edit{/t}" name="select_app">&nbsp;
-    <input type=submit value="{t}Delete{/t}" name="delete_app">&nbsp;
+    <input type=submit value="{t}New{/t}..." name="new_mac">&nbsp;
+    <input type=submit value="{t}Edit{/t}" name="select_mac">&nbsp;
+    <input type=submit value="{t}Delete{/t}" name="delete_mac">&nbsp;
     <input type=hidden name="edit_helper">
    </p>
   </div>

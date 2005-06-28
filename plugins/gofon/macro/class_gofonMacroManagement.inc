@@ -66,9 +66,9 @@ class gofonMacro extends plugin
 
     /* Check sorting variable */
     if (!isset($this->macrotabs) &&
-        !isset($_POST['new_app']) &&
-        !isset($_POST['delete_app']) &&
-        !isset($_POST['select_app'])){
+        !isset($_POST['new_mac']) &&
+        !isset($_POST['delete_mac']) &&
+        !isset($_POST['select_mac'])){
       $this->reload();
     }
   
@@ -81,7 +81,7 @@ class gofonMacro extends plugin
     }
 
     /* New macro? */
-    if (isset($_POST['new_app'])){
+    if (isset($_POST['new_mac'])){
 
       /* By default we set 'dn' to 'new', all relevant plugins will
          react on this. */
@@ -100,7 +100,7 @@ class gofonMacro extends plugin
       unset ($_SESSION['objectinfo']);
     }
 
-    /* Finish apps edit is triggered by the tabulator dialog, so
+    /* Finish mac edit is triggered by the tabulator dialog, so
        the user wants to save edited data. Check and save at this
        point. */
     if (isset($_POST['edit_finish'])){
@@ -123,7 +123,7 @@ class gofonMacro extends plugin
           del_lock ($this->dn);
         }
 
-        /* There's no page reload so we have to read new apps at
+        /* There's no page reload so we have to read new mac at
            this point. */
         $this->reload ();
         unset ($this->macrotabs);
@@ -137,7 +137,7 @@ class gofonMacro extends plugin
     }
 
     /* User wants to edit data? */
-    if ((isset($_POST['select_app']) || (isset($_POST['edit_helper']) && $_POST['edit_helper'] == "1")) && isset($_POST['macrolists']) && $_POST['macrolists'] != ""){
+    if ((isset($_POST['select_mac']) || (isset($_POST['edit_helper']) && $_POST['edit_helper'] == "1")) && isset($_POST['macrolists']) && $_POST['macrolists'] != ""){
 
       /* Get 'dn' from posted 'macrolists', must be unique */
       $this->dn= trim($_POST['macrolists']);
@@ -163,7 +163,7 @@ class gofonMacro extends plugin
     }
 
     /* Remove user was requested */
-    if (isset($_POST['delete_app']) && isset($_POST['macrolists'])){
+    if (isset($_POST['delete_mac']) && isset($_POST['macrolists'])){
 
       /* Get 'dn' from posted 'uid' */
       $this->dn= trim($_POST['macrolists']);
@@ -194,7 +194,7 @@ class gofonMacro extends plugin
     }
 
     /* Confirmation for deletion has been passed. Group should be deleted. */
-    if (isset($_POST['delete_app_confirm'])){
+    if (isset($_POST['delete_macro_confirm'])){
 
       /* Some nice guy may send this as POST, so we've to check
          for the permissions again. */

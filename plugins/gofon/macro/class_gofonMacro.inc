@@ -10,7 +10,7 @@
 class macro extends plugin
 {
   /*! CLI vars */
-  var $cli_summary= "Handling of GOsa's application object";
+  var $cli_summary= "Handling of GOsa's macro object";
   /*! CLI vars */
   var $cli_description= "Some longer text\nfor help";
   /*! CLI vars */
