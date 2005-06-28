@@ -13,8 +13,6 @@ class wingeneric extends plugin
   /* Needed values and lists */
   var $base= "";
   var $cn= "";
-  var $macAddress= "";
-  var $ipHostNumber= "";
   var $description= "";
   var $orig_dn= "";
   var $shadowLastChange="";
@@ -39,12 +37,12 @@ class wingeneric extends plugin
 
   /* attribute list for save action */
   var $ignore_account= TRUE;
-  var $attributes   = array("cn", "description", "macAddress", "ipHostNumber","shadowLastChange",
+  var $attributes   = array("cn", "description","shadowLastChange",
                             "uidNumber","gidNumber","loginShell","gecos","shadowMin","shadowWarning",
                             "shadowInactive","uid","cn","sn","givenName","homeDirectory","sambaSID",
                             "sambaPrimaryGroupSID","displayName", "sambaPwdMustChange",
                             "sambaNTPassword","sambaPwdLastSet","sambaAcctFlags");
-  var $objectclasses= array("posixAccount","person","organizationalPerson","inetOrgPerson","gosaAccount","shadowAccount","sambaSamAccount","top", "device", "ipHost", "ieee802Device");
+  var $objectclasses= array("posixAccount","person","organizationalPerson","inetOrgPerson","gosaAccount","shadowAccount","sambaSamAccount","top");
 
 
   function wingeneric ($config, $dn= NULL)
@@ -130,17 +128,19 @@ class wingeneric extends plugin
     $message= array();
     $this->dn= "cn=".$this->cn.",ou=netdevices,ou=systems,".$this->base;
 
+
     /* must: cn, macAddress */
     if ($this->cn == "" && chkacl ($this->acl, "cn") == ""){
       $message[]= _("The required field 'Component name' is not set.");
     }
-    if ($this->macAddress == "" && chkacl ($this->acl, "macAddress") == ""){
+
+/*    if ($this->macAddress == "" && chkacl ($this->acl, "macAddress") == ""){
       $message[]= _("The required field 'MAC-address' is not set.");
     }
     if ($this->ipHostNumber == "" && chkacl ($this->acl, "ipHostNumber") == ""){
       $message[]= _("The required field 'IP-address' is not set.");
     }
-
+*/
     $ui= get_userinfo();
     $acl= get_permissions ($this->dn, $ui->subtreeACL);
     $acl= get_module_permission($acl, "component", $this->dn);
