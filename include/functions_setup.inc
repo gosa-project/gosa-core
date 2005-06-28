@@ -473,6 +473,7 @@ function parse_contrib_conf()
   $replacements['{GOVERNMENTMODE}']= "false"; 
   $replacements['{kolabAccount}']  = "";
   $replacements['{servKolab}']     = "";
+  $replacements['{errorlvl}']     = $ldapconf['errorlvl'];
 
   /* This array contains all preg_replace syntax to delete all unused plugins
      THE kEY MUST BE THE CLASSNAME so we can check it with $ldapconf['classes'] */
@@ -727,7 +728,7 @@ function show_setup_page4($withoutput = true)
   $arr_crypts= array();
   $temp      = "";
   $checkvars = array("location", "admin", "password", "peopleou", "base",
-      "peopledn", "arr_crypts", "mail", "uidbase");
+      "peopledn", "arr_crypts", "mail", "uidbase","errorlvl");
 
   if(!isset($_SESSION['ldapconf']['arr_cryptkeys'])) {
     require_once("class_password-methods.inc");

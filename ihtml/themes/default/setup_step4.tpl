@@ -94,6 +94,21 @@
  </tr>
 </table>
 
+<p class="seperator">&nbsp;</p>
+
+<p>
+ {t}GOsa may cause PHP interpreter errors, particularly in case of Beta versions. In some cases it would be helpfull to enable the error reporting. (But it could be a security risk)  {/t}
+</p>
+<table summary="">
+ <tr>
+  <td>{t}Display PHP errors{/t}</td>
+  <td>
+     <select name="errorlvl" size="1" title="">
+        <option value="true">{t}true{/t}</option>
+        <option value="false">{t}false{/t}</option>
+     </select>
+ </tr>
+</table>
 <p class="plugbottom">
  <input type="hidden" name="next" value="5">
  <input type='submit' name='back' value='{t}Back{/t}'> 
