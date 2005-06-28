@@ -238,7 +238,7 @@ class phoneAccount extends plugin
         switch ($type){
 
           case "combo":
-            $str= "<select name='".$var."' ".chkacl($this->acl, "goFonMacro").">";
+            $str= "<select name='".$var."' ".chkacl($this->acl, "goFonMacro")."  ".chkacl($this->acl, "goFonMacro").">";
             foreach(split(":",$default) as $choice){
               if($choosen==$choice){
                 $str.= "\n<option value='".$choice."' selected>".$choice."&nbsp;</option>";
@@ -252,9 +252,9 @@ class phoneAccount extends plugin
 
           case "bool":
             if(!$choosen){
-              $str="\n<input type='checkbox' name='".$var."' value='1'>";
+              $str="\n<input type='checkbox' name='".$var."' value='1' ".chkacl($this->acl, "goFonMacro")." >";
             }else{
-              $str="\n<input type='checkbox' name='".$var."' value='1' checked>";
+              $str="\n<input type='checkbox' name='".$var."' value='1' checked  ".chkacl($this->acl, "goFonMacro").">";
             }
             $macrotab.= "<td colspan='2'>$str&nbsp;$name";
             break;
