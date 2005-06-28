@@ -68,7 +68,7 @@
 		<br>
 		{$macrotab}
 	</td>
-	<td valign="top" style="vertical-align:top; border-right:1px solid #A0A0A0; width:50%">
+	<td valign="top" style="vertical-align:top; width:50%">
 		<table summary="">
 			<tr>
 				<td>
