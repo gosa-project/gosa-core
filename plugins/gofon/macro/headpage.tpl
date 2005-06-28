@@ -9,7 +9,7 @@
   <div class="contentboxb">
     <p class="contentboxb">
      <select style="width:500px; height:450px;" name="macrolists" size=15 ondblclick="this.form.edit_helper.value='1'; this.form.submit()">
-      {html_options options=$applications}
+      {html_options options=$macros}
 		<option disabled>&nbsp;</option>
     </select>
     <br>

@@ -27,7 +27,7 @@ class gofonMacro extends plugin
 
   /* Dialog attributes */
   var $macrotabs		= NULL;
-  var $applications		= array();
+  var $macros		= array();
   var $ui				= NULL;
   var $acl				= "";
 
@@ -80,7 +80,7 @@ class gofonMacro extends plugin
       return($message);
     }
 
-    /* New application? */
+    /* New macro? */
     if (isset($_POST['new_app'])){
 
       /* By default we set 'dn' to 'new', all relevant plugins will
@@ -117,7 +117,7 @@ class gofonMacro extends plugin
         $this->macrotabs->save();
         gosa_log ("Macro object'".$this->dn."' has been saved");
 
-        /* Application has been saved successfully, remove lock from
+        /* macro has been saved successfully, remove lock from
            LDAP. */
         if ($this->dn != "new"){
           del_lock ($this->dn);
@@ -171,7 +171,7 @@ class gofonMacro extends plugin
       /* Load permissions for selected 'dn' and check if
          we're allowed to remove this 'dn' */
       $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
-      $this->acl= get_module_permission($acl, "application", $this->dn);
+      $this->acl= get_module_permission($acl, "macro", $this->dn);
       if (chkacl($this->acl, "delete") == ""){
 
         /* Check locking, save current plugin in 'back_plugin', so
@@ -205,7 +205,7 @@ class gofonMacro extends plugin
         $this->macrotabs->set_acl(array($this->acl));
       
         $this->macrotabs->delete ();
-        gosa_log ("Application object'".$this->dn."' has been removed");
+        gosa_log ("macro object'".$this->dn."' has been removed");
         unset ($this->macrotabs);
         $this->macrotabs= NULL;
 
@@ -214,7 +214,7 @@ class gofonMacro extends plugin
       } else {
         /* Normally this shouldn't be reached, send some extra
            logs to notify the administrator */
-        print_red (_("You are not allowed to delete this application!"));
+        print_red (_("You are not allowed to delete this macro!"));
         gosa_log ("Warning: '".$this->ui->uid."' tried to trick group deletion.");
       }
       /* Remove lock file after successfull deletion */
@@ -222,7 +222,7 @@ class gofonMacro extends plugin
     }
 
 
-    /* Delete application canceled? */
+    /* Delete macro canceled? */
     if (isset($_POST['delete_cancel'])){
       del_lock ($this->dn);
       unset($_SESSION['objectinfo']);
@@ -244,7 +244,7 @@ class gofonMacro extends plugin
     }
 
     /* Show main page */
-    $smarty->assign("applications", $this->applications);
+    $smarty->assign("macros", $this->macros);
     $smarty->assign("search_image", get_template_path('images/search.png'));
     $smarty->assign("tree_image", get_template_path('images/tree.png'));
     $smarty->assign("infoimage", get_template_path('images/info.png'));
@@ -278,18 +278,18 @@ class gofonMacro extends plugin
       $regex= "*";
     }
 
-    /* Generate application list */
+    /* Generate macro list */
     $res= get_list($this->ui->subtreeACL, "(&(cn=$regex)(objectClass=goFonMacro))", TRUE, $base, array("cn", "description"), TRUE);
-    $this->applications= array();
+    $this->macros= array();
     foreach ($res as $value){
-      $this->applications[$value["dn"]]= $value["cn"][0];
+      $this->macros[$value["dn"]]= $value["cn"][0];
       if (isset($value["description"][0])){
-        $this->applications[$value["dn"]]= $value["cn"][0]." (".
+        $this->macros[$value["dn"]]= $value["cn"][0]." (".
           $value["description"][0].")";
       }
     }
-    natcasesort ($this->applications);
-    reset ($this->applications);
+    natcasesort ($this->macros);
+    reset ($this->macros);
   }
 
   function remove_from_parent()
