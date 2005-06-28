@@ -22,7 +22,7 @@ class macrotabs extends tabs
                 /* Write entry on new 'dn' */
                 if ($this->dn != "new"){
                         $baseobject->move($this->dn, $new_dn);
-                        $this->by_object['application']= $baseobject;
+                        $this->by_object['macro']= $baseobject;
                 }
 
                 /* Happen to use the new one */
