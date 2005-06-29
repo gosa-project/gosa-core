@@ -19,36 +19,36 @@
  */
 
 if ($remove_lock){
-	if(isset($_SESSION['macroManagement'])){
-		$macroManagment= $_SESSION['macroManagment'];
-		$macroManagment->remove_lock();
-		del_lock ($ui->dn);
-		sess_del ('macroManagment');
-	}
+  if(isset($_SESSION['macroManagement'])){
+    $macroManagment= $_SESSION['macroManagment'];
+    $macroManagment->remove_lock();
+    del_lock ($ui->dn);
+    sess_del ('macroManagment');
+  }
 } else {
-	/* Create macroManagment object on demand */
-	if (!isset($_SESSION['macroManagment']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-		$_SESSION['macroManagment']= new goFonMacro ($config, $_SESSION['ui']);
-	}
-	$macroManagment= $_SESSION['macroManagment'];
-	$output= $macroManagment->execute();
+  /* Create macroManagment object on demand */
+  if (!isset($_SESSION['macroManagment']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+    $_SESSION['macroManagment']= new goFonMacro ($config, $_SESSION['ui']);
+  }
+  $macroManagment= $_SESSION['macroManagment'];
+  $output= $macroManagment->execute();
 
-	/* Page header*/
-	if (isset($_SESSION['objectinfo'])){
-		$display= print_header(get_template_path('images/macros.png'), _("Phone macro management"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".$_SESSION['objectinfo']);
-	} else {
-		$display= print_header(get_template_path('images/macros.png'), _("Phone macro management"));
-	}
+  /* Page header*/
+  if (isset($_SESSION['objectinfo'])){
+    $display= print_header(get_template_path('images/macros.png'), _("Phone macro management"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".$_SESSION['objectinfo']);
+  } else {
+    $display= print_header(get_template_path('images/macros.png'), _("Phone macro management"));
+  }
 
-	/* Reset requested? */
-	if (isset($_GET['reset']) && $_GET['reset'] == 1){
-		del_lock ($ui->dn);
-		sess_del ('macroManagment');
-	}
+  /* Reset requested? */
+  if (isset($_GET['reset']) && $_GET['reset'] == 1){
+    del_lock ($ui->dn);
+    sess_del ('macroManagment');
+  }
 
-	/* Show and save dialog */
-	$display.= $output;
-	$_SESSION['macroManagment']= $macroManagment;
+  /* Show and save dialog */
+  $display.= $output;
+  $_SESSION['macroManagment']= $macroManagment;
 }
-
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
