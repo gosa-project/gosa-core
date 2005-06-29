@@ -145,7 +145,7 @@ class applicationParameters extends plugin
 
 	/* Check for valid option names */
 	for ($i= 0; $i<count($this->option_name); $i++){
-		if (!preg_match ("/^[a-z0-9_]+$/", $this->option_name[$i])){
+		if (!preg_match ("/^[a-z0-9_]+$/i", $this->option_name[$i])){
 			$message[]= sprintf(_("Value '%s' specified as option name is not valid."), 
 					$this->option_name[$i]);
 		}
