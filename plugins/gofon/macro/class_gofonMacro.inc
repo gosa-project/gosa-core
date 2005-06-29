@@ -33,7 +33,7 @@ class macro extends plugin
   /*! Here is the macro content, the real macroscript */
   var $goFonMacroContent= "";
   
-  /*! To allow user to use this macro this var must be true, else false * /
+  /*! To allow user to use this macro this var must be true, else false */
   var $goFonMacroVisible= 0;
 
   /*! attribute list for save action */
