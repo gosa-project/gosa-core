@@ -133,7 +133,7 @@ rm -rf %{buildroot}
 
 %files schema
 %defattr(-,root,root)
-%doc COPYING AUTHORS README contrib/iplanet contrib/demo.ldif contrib/openldap
+%doc COPYING AUTHORS README contrib/demo.ldif contrib/openldap
 /etc/openldap/schema/gosa
 
 %changelog
