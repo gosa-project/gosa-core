@@ -315,7 +315,6 @@ class groupManagement extends plugin
     $error= $ldap->error;
     while ($attrs= $ldap->fetch()){
       $primaries[$attrs['gidNumber'][0]]= $attrs['cn'][0];
-      $primarie[$attrs['dn']]= $attrs['cn'][0];
     }
 
     if ($groupfilter['primarygroups'] == "checked"){
@@ -324,26 +323,28 @@ class groupManagement extends plugin
         $filter.= "(gidNumber=$gidNumber)";
       }
       $filter.= "))";
-    }else{
-      $filter.= "(&(objectClass=posixGroup)(&";
+    } else {
+      $filter.= "(&(objectClass=posixGroup)(!(|";
       foreach ($primaries as $gidNumber => $cn){
-        $filter.= "(!gidNumber=$gidNumber)";
+        $filter.= "(gidNumber=$gidNumber)";
       }
-      $filter.= "))";
+      $filter.= ")))";
     }
+
   
     /* Set filter depending on selection */
+    $sfilter= "";
     if ($groupfilter['appgroups'] == "checked"){
       $filter.= "(objectClass=gosaApplicationGroup)";
     }
     if ($this->config->current['SAMBAVERSION'] == 3){
-      $sfilter= "(objectClass=sambaGroupMapping)";
-      if ($groupfilter['sambagroups'] == "checked"){
+      if ($groupfilter['primarygroups'] != "checked"){
+        $sfilter= "(objectClass=sambaGroupMapping)";
+      } elseif ($groupfilter['sambagroups'] == "checked"){
         $filter.= "(objectClass=sambaGroupMapping)";
       }
-    } else {
-      $sfilter= "";
     }
+
     if ($groupfilter['mailgroups'] == "checked"){
       $filter.= "(objectClass=gosaMailAccount)";
     }
@@ -389,12 +390,6 @@ class groupManagement extends plugin
         $this->grouplist[$value["dn"]]= $value["cn"][0];
       }
     }
-
-   if($groupfilter['primarygroups']!="checked"){
-      foreach($primarie as $rm ){
-        unset($this->grouplist[$rm]);
-      }
-   } 
 
     natcasesort ($this->grouplist);
     reset ($this->grouplist);
