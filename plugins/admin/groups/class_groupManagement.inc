@@ -315,15 +315,23 @@ class groupManagement extends plugin
     $error= $ldap->error;
     while ($attrs= $ldap->fetch()){
       $primaries[$attrs['gidNumber'][0]]= $attrs['cn'][0];
+      $primarie[$attrs['dn']]= $attrs['cn'][0];
     }
+
     if ($groupfilter['primarygroups'] == "checked"){
       $filter.= "(&(objectClass=posixGroup)(|";
       foreach ($primaries as $gidNumber => $cn){
         $filter.= "(gidNumber=$gidNumber)";
       }
       $filter.= "))";
+    }else{
+      $filter.= "(&(objectClass=posixGroup)(&";
+      foreach ($primaries as $gidNumber => $cn){
+        $filter.= "(!gidNumber=$gidNumber)";
+      }
+      $filter.= "))";
     }
-
+  
     /* Set filter depending on selection */
     if ($groupfilter['appgroups'] == "checked"){
       $filter.= "(objectClass=gosaApplicationGroup)";
@@ -381,6 +389,13 @@ class groupManagement extends plugin
         $this->grouplist[$value["dn"]]= $value["cn"][0];
       }
     }
+
+   if($groupfilter['primarygroups']!="checked"){
+      foreach($primarie as $rm ){
+        unset($this->grouplist[$rm]);
+      }
+   } 
+
     natcasesort ($this->grouplist);
     reset ($this->grouplist);
   }
