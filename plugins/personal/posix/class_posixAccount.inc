@@ -473,7 +473,7 @@ class posixAccount extends plugin
     $smarty->assign("secondaryGroups", $this->secondaryGroups);
     $smarty->assign("primaryGroup", $this->primaryGroup);
     if (!count($this->groupMembership)){
-      $smarty->assign("groupMembership", array(""));
+      $smarty->assign("groupMembership", array("&nbsp;"));
     } else {
       $smarty->assign("groupMembership", $this->groupMembership);
     }

@@ -216,10 +216,10 @@ class user extends plugin
     for($y= $date['year']-100; $y<=$date['year']+100; $y++){
       $years[]= $y;
     }
-    $years['-']= "&nbsp;";
+    $years['-']= "-&nbsp;";
     $months= array(_("January"), _("February"), _("March"), _("April"),
         _("May"), _("June"), _("July"), _("August"), _("September"),
-        _("October"), _("November"), _("December"), '-' => '&nbsp;');
+        _("October"), _("November"), _("December"), '-' => '-&nbsp;');
     $smarty->assign("day", $date["mday"]);
     $smarty->assign("days", $days);
     $smarty->assign("months", $months);
