@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schröder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-07-01 10:39+0200\n"
+"PO-Revision-Date: 2005-07-01 16:01+0200\n"
 "Last-Translator:  <(null)>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -5794,7 +5794,7 @@ msgstr "Auswahl-Liste"
 
 #: plugins/gofon/macro/class_gofonMacroParameters.inc:232
 msgid "Bool"
-msgstr "Bool"
+msgstr "Schalter"
 
 #: plugins/gofon/macro/class_gofonMacroParameters.inc:238
 msgid "Delete unused"
