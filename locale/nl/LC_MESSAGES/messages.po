@@ -62,9 +62,8 @@ msgstr "E-mail"
 msgid "Samba"
 msgstr "Samba"
 
-#: contrib/gosa.conf:61
+#: contrib/gosa.conf:61 plugins/personal/connectivity/main.inc:136
 #: plugins/personal/connectivity/class_connectivity.inc:15
-#: plugins/personal/connectivity/main.inc:136
 msgid "Connectivity"
 msgstr "Verbindingen"
 
@@ -187,6 +186,129 @@ msgstr "Engels"
 msgid "Italian"
 msgstr "Italiaans"
 
+#: plugins/personal/mail/mail_locals.tpl:6
+#: plugins/admin/groups/mail_locals.tpl:6
+msgid "Select addresses to add"
+msgstr "Selecteer de toe te voegen adressen"
+
+#: plugins/personal/mail/mail_locals.tpl:26
+#: plugins/admin/groups/mail_locals.tpl:30
+msgid "Display addresses of department"
+msgstr "Toon adressen van afdeling"
+
+#: plugins/personal/mail/mail_locals.tpl:27
+#: plugins/personal/posix/posix_groups.tpl:39
+#: plugins/personal/posix/trust_machines.tpl:27
+#: plugins/personal/samba/samba3_workstations.tpl:27
+#: plugins/gofax/blocklists/headpage.tpl:58
+#: plugins/gofax/faxaccount/locals.tpl:31
+#: plugins/addons/addressbook/contents.tpl:81
+#: plugins/admin/groups/headpage.tpl:66
+#: plugins/admin/groups/group_objects.tpl:27
+#: plugins/admin/groups/mail_locals.tpl:33 plugins/admin/users/headpage.tpl:68
+#: plugins/admin/applications/headpage.tpl:49
+#: plugins/admin/departments/headpage.tpl:47
+#: plugins/admin/systems/headpage.tpl:62
+#: plugins/admin/ogroups/ogroup_objects.tpl:38
+#: plugins/admin/ogroups/headpage.tpl:61 plugins/gofon/macro/headpage.tpl:49
+msgid "Choose the department the search will be based on"
+msgstr "Selecteer de afdeling waarbinnen gezocht zal worden"
+
+#: plugins/personal/mail/mail_locals.tpl:30
+#: plugins/admin/groups/mail_locals.tpl:42
+msgid "Display addresses matching"
+msgstr "Toon overeenkomende adressen"
+
+#: plugins/personal/mail/mail_locals.tpl:31
+#: plugins/personal/posix/trust_machines.tpl:31
+#: plugins/personal/samba/samba3_workstations.tpl:31
+#: plugins/admin/groups/mail_locals.tpl:45
+msgid "Regular expression for matching addresses"
+msgstr "Reguliere expresie voor overeenkomende adressen"
+
+#: plugins/personal/mail/mail_locals.tpl:32
+#: plugins/admin/groups/mail_locals.tpl:52
+msgid "Display addresses of user"
+msgstr "Toon adressen van gebruiker"
+
+#: plugins/personal/mail/mail_locals.tpl:33
+#: plugins/admin/groups/mail_locals.tpl:55
+msgid "User name of which addresses are shown"
+msgstr "Gebruikersnaam van wie de adressen getoond worden"
+
+#: plugins/personal/mail/mail_locals.tpl:41
+#: plugins/personal/mail/generic.tpl:56 plugins/personal/mail/generic.tpl:126
+#: plugins/personal/posix/generic.tpl:73
+#: plugins/personal/posix/generic.tpl:135
+#: plugins/personal/posix/posix_groups.tpl:72
+#: plugins/personal/posix/trust_machines.tpl:39
+#: plugins/personal/samba/samba3.tpl:287
+#: plugins/personal/samba/samba3_workstations.tpl:39
+#: plugins/personal/connectivity/kolab.tpl:18
+#: plugins/personal/connectivity/class_kolabAccount.inc:200
+#: plugins/gofax/blocklists/generic.tpl:63
+#: plugins/gofax/faxaccount/generic.tpl:75
+#: plugins/gofax/faxaccount/locals.tpl:62
+#: plugins/gofax/faxaccount/lists.tpl:12 plugins/gofax/faxaccount/lists.tpl:16
+#: plugins/admin/groups/mail.tpl:54 plugins/admin/groups/mail.tpl:101
+#: plugins/admin/groups/class_groupMail.inc:404
+#: plugins/admin/groups/group_objects.tpl:39
+#: plugins/admin/groups/generic.tpl:88 plugins/admin/groups/mail_locals.tpl:66
+#: plugins/admin/systems/servservice.tpl:21
+#: plugins/admin/systems/servservice.tpl:47
+#: plugins/admin/systems/phonesettings.tpl:181
+#: plugins/admin/systems/phonesettings.tpl:196
+#: plugins/admin/systems/startup.tpl:61 plugins/admin/systems/startup.tpl:75
+#: plugins/admin/systems/startup.tpl:95
+#: plugins/admin/ogroups/ogroup_objects.tpl:50
+#: plugins/admin/ogroups/generic.tpl:38
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:375
+#: plugins/gofon/phoneaccount/generic.tpl:11
+msgid "Add"
+msgstr "Toevoegen"
+
+#: plugins/personal/mail/mail_locals.tpl:43 plugins/personal/mail/main.inc:106
+#: plugins/personal/posix/posix_groups.tpl:74
+#: plugins/personal/posix/trust_machines.tpl:41
+#: plugins/personal/posix/main.inc:112
+#: plugins/personal/samba/samba3_workstations.tpl:41
+#: plugins/personal/samba/main.inc:106
+#: plugins/personal/generic/password.tpl:19
+#: plugins/personal/generic/generic_picture.tpl:31
+#: plugins/personal/generic/generic_certs.tpl:78
+#: plugins/personal/generic/main.inc:160
+#: plugins/personal/connectivity/main.inc:118
+#: plugins/gofax/blocklists/generic.tpl:79
+#: plugins/gofax/blocklists/remove.tpl:17
+#: plugins/gofax/faxaccount/locals.tpl:64
+#: plugins/gofax/faxaccount/lists.tpl:39 plugins/gofax/faxaccount/main.inc:91
+#: plugins/addons/addressbook/dial.tpl:10
+#: plugins/addons/addressbook/address_edit.tpl:108
+#: plugins/addons/addressbook/remove.tpl:17
+#: plugins/admin/groups/class_groupManagement.inc:261
+#: plugins/admin/groups/remove.tpl:17
+#: plugins/admin/groups/group_objects.tpl:41
+#: plugins/admin/groups/mail_admins.tpl:39
+#: plugins/admin/groups/application_options.tpl:10
+#: plugins/admin/groups/mail_locals.tpl:68 plugins/admin/users/password.tpl:23
+#: plugins/admin/users/class_userManagement.inc:509
+#: plugins/admin/users/template.tpl:46 plugins/admin/users/remove.tpl:17
+#: plugins/admin/applications/remove.tpl:16
+#: plugins/admin/applications/class_applicationManagement.inc:241
+#: plugins/admin/departments/remove.tpl:17
+#: plugins/admin/departments/class_departmentManagement.inc:230
+#: plugins/admin/systems/class_systemManagement.inc:442
+#: plugins/admin/systems/remove.tpl:17 plugins/admin/systems/password.tpl:27
+#: plugins/admin/systems/chooser.tpl:18
+#: plugins/admin/ogroups/ogroup_objects.tpl:52
+#: plugins/admin/ogroups/class_ogroupManagement.inc:272
+#: plugins/admin/ogroups/remove.tpl:17
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:240
+#: plugins/gofon/macro/remove.tpl:16 plugins/gofon/phoneaccount/main.inc:106
+#: ihtml/themes/altlinux/islocked.tpl:15 ihtml/themes/default/islocked.tpl:15
+msgid "Cancel"
+msgstr "Annuleren"
+
 #: plugins/personal/mail/generic.tpl:7 plugins/admin/groups/mail.tpl:10
 #: plugins/admin/ogroups/mail.tpl:10
 msgid "Primary address"
@@ -224,37 +346,6 @@ msgstr "Alternatieve adressen"
 msgid "List of alternative mail addresses"
 msgstr "Lijst met alternatieve E-mail adressen"
 
-#: plugins/personal/mail/generic.tpl:56 plugins/personal/mail/generic.tpl:126
-#: plugins/personal/mail/mail_locals.tpl:41
-#: plugins/personal/posix/posix_groups.tpl:72
-#: plugins/personal/posix/trust_machines.tpl:39
-#: plugins/personal/posix/generic.tpl:73
-#: plugins/personal/posix/generic.tpl:135
-#: plugins/personal/samba/samba3.tpl:287
-#: plugins/personal/samba/samba3_workstations.tpl:39
-#: plugins/personal/connectivity/class_kolabAccount.inc:200
-#: plugins/personal/connectivity/kolab.tpl:18
-#: plugins/gofax/blocklists/generic.tpl:63
-#: plugins/gofax/faxaccount/generic.tpl:75
-#: plugins/gofax/faxaccount/locals.tpl:62
-#: plugins/gofax/faxaccount/lists.tpl:12 plugins/gofax/faxaccount/lists.tpl:16
-#: plugins/admin/groups/mail.tpl:54 plugins/admin/groups/mail.tpl:101
-#: plugins/admin/groups/class_groupMail.inc:404
-#: plugins/admin/groups/group_objects.tpl:39
-#: plugins/admin/groups/generic.tpl:88 plugins/admin/groups/mail_locals.tpl:66
-#: plugins/admin/systems/servservice.tpl:21
-#: plugins/admin/systems/servservice.tpl:47
-#: plugins/admin/systems/startup.tpl:61 plugins/admin/systems/startup.tpl:75
-#: plugins/admin/systems/startup.tpl:95
-#: plugins/admin/systems/phonesettings.tpl:181
-#: plugins/admin/systems/phonesettings.tpl:196
-#: plugins/admin/ogroups/ogroup_objects.tpl:50
-#: plugins/admin/ogroups/generic.tpl:38
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:375
-#: plugins/gofon/phoneaccount/generic.tpl:11
-msgid "Add"
-msgstr "Toevoegen"
-
 #: plugins/personal/mail/generic.tpl:58 plugins/personal/mail/generic.tpl:130
 #: plugins/personal/posix/generic.tpl:74
 #: plugins/personal/posix/generic.tpl:137
@@ -275,15 +366,14 @@ msgstr "Toevoegen"
 #: plugins/admin/departments/headpage.tpl:18
 #: plugins/admin/systems/servservice.tpl:22
 #: plugins/admin/systems/servservice.tpl:48
-#: plugins/admin/systems/remove.tpl:15 plugins/admin/systems/headpage.tpl:17
-#: plugins/admin/systems/startup.tpl:62 plugins/admin/systems/startup.tpl:76
-#: plugins/admin/systems/startup.tpl:96
 #: plugins/admin/systems/phonesettings.tpl:182
 #: plugins/admin/systems/phonesettings.tpl:197
-#: plugins/admin/ogroups/generic.tpl:39 plugins/admin/ogroups/remove.tpl:15
-#: plugins/admin/ogroups/headpage.tpl:18
-#: plugins/gofon/phoneaccount/generic.tpl:13 plugins/gofon/macro/remove.tpl:14
-#: plugins/gofon/macro/headpage.tpl:18
+#: plugins/admin/systems/remove.tpl:15 plugins/admin/systems/headpage.tpl:17
+#: plugins/admin/systems/startup.tpl:62 plugins/admin/systems/startup.tpl:76
+#: plugins/admin/systems/startup.tpl:96 plugins/admin/ogroups/generic.tpl:39
+#: plugins/admin/ogroups/remove.tpl:15 plugins/admin/ogroups/headpage.tpl:18
+#: plugins/gofon/macro/remove.tpl:14 plugins/gofon/macro/headpage.tpl:18
+#: plugins/gofon/phoneaccount/generic.tpl:13
 msgid "Delete"
 msgstr "Verwijderen"
 
@@ -371,18 +461,66 @@ msgstr "Gebruik een eigen sieve script"
 msgid "disables all Mail options!"
 msgstr "schakelt alle E-mail opties uit!"
 
+#: plugins/personal/mail/main.inc:104 plugins/personal/posix/main.inc:110
+#: plugins/personal/samba/main.inc:104
+#: plugins/personal/generic/generic_certs.tpl:76
+#: plugins/personal/generic/main.inc:158
+#: plugins/personal/connectivity/main.inc:116
+#: plugins/gofax/blocklists/generic.tpl:77
+#: plugins/gofax/faxaccount/main.inc:89
+#: plugins/admin/groups/class_groupManagement.inc:259
+#: plugins/admin/users/class_userManagement.inc:507
+#: plugins/admin/applications/class_applicationManagement.inc:239
+#: plugins/admin/departments/class_departmentManagement.inc:228
+#: plugins/admin/systems/class_systemManagement.inc:440
+#: plugins/admin/ogroups/class_ogroupManagement.inc:270
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:238
+#: plugins/gofon/phoneaccount/main.inc:104
+msgid "Finish"
+msgstr "Opslaan"
+
+#: plugins/personal/mail/main.inc:114 plugins/personal/posix/main.inc:120
+#: plugins/personal/samba/main.inc:114 plugins/personal/generic/main.inc:177
+#: plugins/personal/connectivity/main.inc:126
+#: plugins/gofax/faxaccount/main.inc:96
+#: plugins/gofon/phoneaccount/main.inc:111
+msgid "Click the 'Edit' button below to change informations in this dialog"
+msgstr ""
+"Gebruik de 'Bewerk' knop hieronder om de informatie in deze dialoog te "
+"veranderen"
+
+#: plugins/personal/mail/main.inc:115 plugins/personal/posix/main.inc:122
+#: plugins/personal/samba/main.inc:115 plugins/personal/generic/main.inc:170
+#: plugins/personal/connectivity/main.inc:127
+#: plugins/gofax/blocklists/headpage.tpl:17
+#: plugins/gofax/faxaccount/generic.tpl:90
+#: plugins/gofax/faxaccount/generic.tpl:96
+#: plugins/gofax/faxaccount/main.inc:97 plugins/addons/logview/contents.tpl:62
+#: plugins/admin/groups/headpage.tpl:17 plugins/admin/users/headpage.tpl:18
+#: plugins/admin/applications/headpage.tpl:17
+#: plugins/admin/departments/headpage.tpl:17
+#: plugins/admin/systems/headpage.tpl:16 plugins/admin/ogroups/headpage.tpl:17
+#: plugins/gofon/macro/headpage.tpl:17 plugins/gofon/phoneaccount/main.inc:112
+msgid "Edit"
+msgstr "Bewerken"
+
+#: plugins/personal/mail/main.inc:124
+msgid "User mail settings"
+msgstr "Gebruikers E-mail instellingen"
+
 #: plugins/personal/mail/class_mailAccount.inc:23
 #: plugins/personal/password/class_password.inc:6
 #: plugins/personal/posix/class_posixAccount.inc:17
 #: plugins/personal/samba/class_sambaAccount.inc:25
 #: plugins/personal/generic/class_user.inc:17
+#: plugins/personal/connectivity/class_webdavAccount.inc:7
+#: plugins/personal/connectivity/class_proxyAccount.inc:6
+#: plugins/personal/connectivity/class_intranetAccount.inc:16
 #: plugins/personal/connectivity/class_phpgwAccount.inc:6
 #: plugins/personal/connectivity/class_kolabAccount.inc:6
-#: plugins/personal/connectivity/class_webdavAccount.inc:7
 #: plugins/personal/connectivity/class_pureftpdAccount.inc:7
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:25
 #: plugins/personal/connectivity/class_connectivity.inc:16
-#: plugins/personal/connectivity/class_proxyAccount.inc:6
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:6
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:7
 #: plugins/gofax/reports/class_faxreport.inc:7
@@ -398,9 +536,9 @@ msgstr "schakelt alle E-mail opties uit!"
 #: plugins/admin/departments/class_departmentManagement.inc:26
 #: plugins/admin/systems/class_systemManagement.inc:33
 #: plugins/admin/ogroups/class_ogroupManagement.inc:26
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:26
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:7
 #: plugins/gofon/reports/class_fonreport.inc:7
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:26
 msgid "This does something"
 msgstr "Dit doet iets"
 
@@ -517,144 +655,36 @@ msgstr ""
 "U moet de maximale E-mail grootte instellen om uberhaupt iets af te kunnen "
 "afwijzen."
 
-#: plugins/personal/mail/main.inc:104 plugins/personal/posix/main.inc:110
-#: plugins/personal/samba/main.inc:104
-#: plugins/personal/generic/generic_certs.tpl:76
-#: plugins/personal/generic/main.inc:158
-#: plugins/personal/connectivity/main.inc:116
-#: plugins/gofax/blocklists/generic.tpl:77
-#: plugins/gofax/faxaccount/main.inc:89
-#: plugins/admin/groups/class_groupManagement.inc:259
-#: plugins/admin/users/class_userManagement.inc:507
-#: plugins/admin/applications/class_applicationManagement.inc:239
-#: plugins/admin/departments/class_departmentManagement.inc:228
-#: plugins/admin/systems/class_systemManagement.inc:440
-#: plugins/admin/ogroups/class_ogroupManagement.inc:270
-#: plugins/gofon/phoneaccount/main.inc:104
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:238
-msgid "Finish"
-msgstr "Opslaan"
+#: plugins/personal/password/changed.tpl:2
+#: plugins/personal/password/password.tpl:2
+msgid "Change password"
+msgstr "Verander wachtwoord"
 
-#: plugins/personal/mail/main.inc:106 plugins/personal/mail/mail_locals.tpl:43
-#: plugins/personal/posix/posix_groups.tpl:74
-#: plugins/personal/posix/trust_machines.tpl:41
-#: plugins/personal/posix/main.inc:112
-#: plugins/personal/samba/samba3_workstations.tpl:41
-#: plugins/personal/samba/main.inc:106
-#: plugins/personal/generic/password.tpl:19
-#: plugins/personal/generic/generic_picture.tpl:31
-#: plugins/personal/generic/generic_certs.tpl:78
-#: plugins/personal/generic/main.inc:160
-#: plugins/personal/connectivity/main.inc:118
-#: plugins/gofax/blocklists/generic.tpl:79
-#: plugins/gofax/blocklists/remove.tpl:17
-#: plugins/gofax/faxaccount/locals.tpl:64
-#: plugins/gofax/faxaccount/lists.tpl:39 plugins/gofax/faxaccount/main.inc:91
-#: plugins/addons/addressbook/dial.tpl:10
-#: plugins/addons/addressbook/address_edit.tpl:108
-#: plugins/addons/addressbook/remove.tpl:17
-#: plugins/admin/groups/class_groupManagement.inc:261
-#: plugins/admin/groups/remove.tpl:17
-#: plugins/admin/groups/group_objects.tpl:41
-#: plugins/admin/groups/mail_admins.tpl:39
-#: plugins/admin/groups/application_options.tpl:10
-#: plugins/admin/groups/mail_locals.tpl:68 plugins/admin/users/password.tpl:23
-#: plugins/admin/users/class_userManagement.inc:509
-#: plugins/admin/users/template.tpl:46 plugins/admin/users/remove.tpl:17
-#: plugins/admin/applications/remove.tpl:16
-#: plugins/admin/applications/class_applicationManagement.inc:241
-#: plugins/admin/departments/remove.tpl:17
-#: plugins/admin/departments/class_departmentManagement.inc:230
-#: plugins/admin/systems/class_systemManagement.inc:442
-#: plugins/admin/systems/remove.tpl:17 plugins/admin/systems/password.tpl:27
-#: plugins/admin/systems/chooser.tpl:18
-#: plugins/admin/ogroups/ogroup_objects.tpl:52
-#: plugins/admin/ogroups/class_ogroupManagement.inc:272
-#: plugins/admin/ogroups/remove.tpl:17 plugins/gofon/phoneaccount/main.inc:106
-#: plugins/gofon/macro/remove.tpl:16
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:240
-#: ihtml/themes/altlinux/islocked.tpl:15 ihtml/themes/default/islocked.tpl:15
-msgid "Cancel"
-msgstr "Annuleren"
-
-#: plugins/personal/mail/main.inc:114 plugins/personal/posix/main.inc:120
-#: plugins/personal/samba/main.inc:114 plugins/personal/generic/main.inc:177
-#: plugins/personal/connectivity/main.inc:126
-#: plugins/gofax/faxaccount/main.inc:96
-#: plugins/gofon/phoneaccount/main.inc:111
-msgid "Click the 'Edit' button below to change informations in this dialog"
+#: plugins/personal/password/changed.tpl:6
+msgid ""
+"You've successfully changed your password. Remember to change all programms "
+"configured to use it as well."
 msgstr ""
-"Gebruik de 'Bewerk' knop hieronder om de informatie in deze dialoog te "
-"veranderen"
+"U heeft succesvol uw wachtwoord veranderd. Denkt u eraan dat u alle "
+"programma's die dit wachtwoord gebruiken ook aanpast!"
 
-#: plugins/personal/mail/main.inc:115 plugins/personal/posix/main.inc:122
-#: plugins/personal/samba/main.inc:115 plugins/personal/generic/main.inc:170
-#: plugins/personal/connectivity/main.inc:127
-#: plugins/gofax/blocklists/headpage.tpl:17
-#: plugins/gofax/faxaccount/generic.tpl:90
-#: plugins/gofax/faxaccount/generic.tpl:96
-#: plugins/gofax/faxaccount/main.inc:97 plugins/addons/logview/contents.tpl:62
-#: plugins/admin/groups/headpage.tpl:17 plugins/admin/users/headpage.tpl:18
-#: plugins/admin/applications/headpage.tpl:17
-#: plugins/admin/departments/headpage.tpl:17
-#: plugins/admin/systems/headpage.tpl:16 plugins/admin/ogroups/headpage.tpl:17
-#: plugins/gofon/phoneaccount/main.inc:112 plugins/gofon/macro/headpage.tpl:17
-msgid "Edit"
-msgstr "Bewerken"
-
-#: plugins/personal/mail/main.inc:124
-msgid "User mail settings"
-msgstr "Gebruikers E-mail instellingen"
-
-#: plugins/personal/mail/mail_locals.tpl:6
-#: plugins/admin/groups/mail_locals.tpl:6
-msgid "Select addresses to add"
-msgstr "Selecteer de toe te voegen adressen"
-
-#: plugins/personal/mail/mail_locals.tpl:26
-#: plugins/admin/groups/mail_locals.tpl:30
-msgid "Display addresses of department"
-msgstr "Toon adressen van afdeling"
-
-#: plugins/personal/mail/mail_locals.tpl:27
-#: plugins/personal/posix/posix_groups.tpl:39
-#: plugins/personal/posix/trust_machines.tpl:27
-#: plugins/personal/samba/samba3_workstations.tpl:27
-#: plugins/gofax/blocklists/headpage.tpl:58
-#: plugins/gofax/faxaccount/locals.tpl:31
-#: plugins/addons/addressbook/contents.tpl:81
-#: plugins/admin/groups/headpage.tpl:66
-#: plugins/admin/groups/group_objects.tpl:27
-#: plugins/admin/groups/mail_locals.tpl:33 plugins/admin/users/headpage.tpl:68
-#: plugins/admin/applications/headpage.tpl:49
-#: plugins/admin/departments/headpage.tpl:47
-#: plugins/admin/systems/headpage.tpl:62
-#: plugins/admin/ogroups/ogroup_objects.tpl:38
-#: plugins/admin/ogroups/headpage.tpl:61 plugins/gofon/macro/headpage.tpl:49
-msgid "Choose the department the search will be based on"
-msgstr "Selecteer de afdeling waarbinnen gezocht zal worden"
-
-#: plugins/personal/mail/mail_locals.tpl:30
-#: plugins/admin/groups/mail_locals.tpl:42
-msgid "Display addresses matching"
-msgstr "Toon overeenkomende adressen"
-
-#: plugins/personal/mail/mail_locals.tpl:31
-#: plugins/personal/posix/trust_machines.tpl:31
-#: plugins/personal/samba/samba3_workstations.tpl:31
-#: plugins/admin/groups/mail_locals.tpl:45
-msgid "Regular expression for matching addresses"
-msgstr "Reguliere expresie voor overeenkomende adressen"
-
-#: plugins/personal/mail/mail_locals.tpl:32
-#: plugins/admin/groups/mail_locals.tpl:52
-msgid "Display addresses of user"
-msgstr "Toon adressen van gebruiker"
-
-#: plugins/personal/mail/mail_locals.tpl:33
-#: plugins/admin/groups/mail_locals.tpl:55
-msgid "User name of which addresses are shown"
-msgstr "Gebruikersnaam van wie de adressen getoond worden"
+#: plugins/personal/password/changed.tpl:12
+#: plugins/personal/generic/main.inc:167 plugins/gofax/reports/detail.tpl:68
+#: plugins/addons/ldapmanager/contentimport.tpl:44
+#: plugins/addons/ldapmanager/contentcsv.tpl:122
+#: plugins/addons/ldapmanager/contentexport.tpl:66 include/functions.inc:1204
+#: ihtml/themes/altlinux/setup_useradmin.tpl:40
+#: ihtml/themes/altlinux/setup_step2.tpl:12
+#: ihtml/themes/altlinux/setup_step3.tpl:17
+#: ihtml/themes/altlinux/setup_step4.tpl:114
+#: ihtml/themes/altlinux/setup_finish.tpl:30
+#: ihtml/themes/default/setup_useradmin.tpl:40
+#: ihtml/themes/default/setup_step2.tpl:12
+#: ihtml/themes/default/setup_step3.tpl:17
+#: ihtml/themes/default/setup_step4.tpl:114
+#: ihtml/themes/default/setup_finish.tpl:30
+msgid "Back"
+msgstr "Terug"
 
 #: plugins/personal/password/class_password.inc:5
 #: plugins/admin/systems/servdb.tpl:18 plugins/admin/systems/servdb.tpl:34
@@ -666,11 +696,6 @@ msgstr "Gebruikersnaam van wie de adressen getoond worden"
 #: ihtml/themes/default/login.tpl:35 ihtml/themes/default/login.tpl:39
 msgid "Password"
 msgstr "Wachtwoord"
-
-#: plugins/personal/password/password.tpl:2
-#: plugins/personal/password/changed.tpl:2
-msgid "Change password"
-msgstr "Verander wachtwoord"
 
 #: plugins/personal/password/password.tpl:6
 msgid ""
@@ -718,32 +743,6 @@ msgstr "Wachtwoord instellen"
 msgid "Clear fields"
 msgstr "Wis velden"
 
-#: plugins/personal/password/changed.tpl:6
-msgid ""
-"You've successfully changed your password. Remember to change all programms "
-"configured to use it as well."
-msgstr ""
-"U heeft succesvol uw wachtwoord veranderd. Denkt u eraan dat u alle "
-"programma's die dit wachtwoord gebruiken ook aanpast!"
-
-#: plugins/personal/password/changed.tpl:12
-#: plugins/personal/generic/main.inc:167 plugins/gofax/reports/detail.tpl:68
-#: plugins/addons/ldapmanager/contentimport.tpl:44
-#: plugins/addons/ldapmanager/contentcsv.tpl:122
-#: plugins/addons/ldapmanager/contentexport.tpl:66 include/functions.inc:1204
-#: ihtml/themes/altlinux/setup_step2.tpl:12
-#: ihtml/themes/altlinux/setup_step3.tpl:17
-#: ihtml/themes/altlinux/setup_step4.tpl:99
-#: ihtml/themes/altlinux/setup_finish.tpl:30
-#: ihtml/themes/altlinux/setup_useradmin.tpl:40
-#: ihtml/themes/default/setup_useradmin.tpl:40
-#: ihtml/themes/default/setup_step2.tpl:12
-#: ihtml/themes/default/setup_step3.tpl:17
-#: ihtml/themes/default/setup_step4.tpl:114
-#: ihtml/themes/default/setup_finish.tpl:30
-msgid "Back"
-msgstr "Terug"
-
 #: plugins/personal/password/main.inc:40
 msgid ""
 "The password you've entered as your current password doesn't match the real "
@@ -786,6 +785,65 @@ msgstr "U heeft geen toestemming om uw wachtwoord te veranderen."
 #: plugins/personal/password/main.inc:89
 msgid "External password changer reported a problem: "
 msgstr "Extern wachtwoord verander mechanisme rapporteerde een probleem:"
+
+#: plugins/personal/posix/generic.tpl:7 plugins/personal/samba/samba3.tpl:13
+#: plugins/personal/samba/samba3.tpl:65
+#: plugins/personal/samba/class_sambaAccount.inc:626
+msgid "Home directory"
+msgstr "Home directory"
+
+#: plugins/personal/posix/generic.tpl:13
+msgid "Shell"
+msgstr "Shell"
+
+#: plugins/personal/posix/generic.tpl:21
+msgid "Primary group"
+msgstr "Primaire groep"
+
+#: plugins/personal/posix/generic.tpl:29 plugins/gofax/reports/detail.tpl:46
+#: plugins/gofax/reports/contents.tpl:32 plugins/gofon/reports/contents.tpl:35
+msgid "Status"
+msgstr "Status"
+
+#: plugins/personal/posix/generic.tpl:39
+msgid "Force UID/GID"
+msgstr "Forceer UID/GID"
+
+#: plugins/personal/posix/generic.tpl:43
+msgid "UID"
+msgstr "UID"
+
+#: plugins/personal/posix/generic.tpl:52
+msgid "GID"
+msgstr "GID"
+
+#: plugins/personal/posix/generic.tpl:64
+msgid "Group membership"
+msgstr "Groep lidmaatschap"
+
+#: plugins/personal/posix/generic.tpl:66
+msgid "(Warning: more than 16 groups are not supported by NFS!)"
+msgstr "(Waarschuwing: NFS ondersteunt niet meer dan 16 groepen!)"
+
+#: plugins/personal/posix/generic.tpl:84
+msgid "Account"
+msgstr "Account"
+
+#: plugins/personal/posix/generic.tpl:98
+msgid "Environment"
+msgstr "Omgeving"
+
+#: plugins/personal/posix/generic.tpl:101
+msgid "Default printer"
+msgstr "Standaard printer"
+
+#: plugins/personal/posix/generic.tpl:110
+msgid "Default language"
+msgstr "Standaard taal"
+
+#: plugins/personal/posix/generic.tpl:123
+msgid "System trust"
+msgstr "Systeem vertrouwen"
 
 #: plugins/personal/posix/posix_groups.tpl:6
 msgid "Select groups to add"
@@ -906,64 +964,9 @@ msgstr "Toon systemen van afdeling"
 msgid "Display systems matching"
 msgstr "Toon de overeenkomende systemen"
 
-#: plugins/personal/posix/generic.tpl:7 plugins/personal/samba/samba3.tpl:13
-#: plugins/personal/samba/samba3.tpl:65
-#: plugins/personal/samba/class_sambaAccount.inc:626
-msgid "Home directory"
-msgstr "Home directory"
-
-#: plugins/personal/posix/generic.tpl:13
-msgid "Shell"
-msgstr "Shell"
-
-#: plugins/personal/posix/generic.tpl:21
-msgid "Primary group"
-msgstr "Primaire groep"
-
-#: plugins/personal/posix/generic.tpl:29 plugins/gofax/reports/detail.tpl:46
-#: plugins/gofax/reports/contents.tpl:32 plugins/gofon/reports/contents.tpl:35
-msgid "Status"
-msgstr "Status"
-
-#: plugins/personal/posix/generic.tpl:39
-msgid "Force UID/GID"
-msgstr "Forceer UID/GID"
-
-#: plugins/personal/posix/generic.tpl:43
-msgid "UID"
-msgstr "UID"
-
-#: plugins/personal/posix/generic.tpl:52
-msgid "GID"
-msgstr "GID"
-
-#: plugins/personal/posix/generic.tpl:64
-msgid "Group membership"
-msgstr "Groep lidmaatschap"
-
-#: plugins/personal/posix/generic.tpl:66
-msgid "(Warning: more than 16 groups are not supported by NFS!)"
-msgstr "(Waarschuwing: NFS ondersteunt niet meer dan 16 groepen!)"
-
-#: plugins/personal/posix/generic.tpl:84
-msgid "Account"
-msgstr "Account"
-
-#: plugins/personal/posix/generic.tpl:98
-msgid "Environment"
-msgstr "Omgeving"
-
-#: plugins/personal/posix/generic.tpl:101
-msgid "Default printer"
-msgstr "Standaard printer"
-
-#: plugins/personal/posix/generic.tpl:110
-msgid "Default language"
-msgstr "Standaard taal"
-
-#: plugins/personal/posix/generic.tpl:123
-msgid "System trust"
-msgstr "Systeem vertrouwen"
+#: plugins/personal/posix/main.inc:131
+msgid "Unix settings"
+msgstr "Unix instellingen"
 
 #: plugins/personal/posix/class_posixAccount.inc:16
 #: plugins/generic/references/class_reference.inc:22
@@ -1269,10 +1272,6 @@ msgstr ""
 msgid "Too many users, can't allocate a free ID!"
 msgstr ""
 "Er zitten te veel gebruikers in de database. Kan geen vrij ID toewijzen!"
-
-#: plugins/personal/posix/main.inc:131
-msgid "Unix settings"
-msgstr "Unix instellingen"
 
 #: plugins/personal/samba/samba2.tpl:13
 msgid "Samba home"
@@ -1948,10 +1947,6 @@ msgstr "U heeft geen toestemming om uw wachtwoord te veranderen!"
 msgid "Generic user information"
 msgstr "Algemene gebruikersinformatie"
 
-#: plugins/personal/connectivity/class_phpgwAccount.inc:5
-msgid "PHPGroupware"
-msgstr "PHPGroupware"
-
 #: plugins/personal/connectivity/proxy.tpl:16
 msgid "Proxy account"
 msgstr "Proxy account"
@@ -1974,135 +1969,18 @@ msgstr "Beperk proxy gebruik met quota"
 msgid "per"
 msgstr "per"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:5
-msgid "Kolab"
-msgstr "Kolab"
-
-#: plugins/personal/connectivity/class_kolabAccount.inc:102
-msgid ""
-"You're trying to add an invalid email address to the list of delegations."
-msgstr ""
-"U probeert een ongeldig email adres toe te voegen aan de delegatielijst."
-
-#: plugins/personal/connectivity/class_kolabAccount.inc:110
-msgid ""
-"The mail address you're trying to add is no primary mail address of an "
-"existing user."
-msgstr ""
-"Het E-mail adres dat u probeert toe te voegen is geen primair E-mail adres "
-"van een bestaande gebruiker."
-
-#: plugins/personal/connectivity/class_kolabAccount.inc:137
-msgid "Always accept"
-msgstr "Altijd accepteren"
-
-#: plugins/personal/connectivity/class_kolabAccount.inc:138
-msgid "Always reject"
-msgstr "Altijd afwijzen"
-
-#: plugins/personal/connectivity/class_kolabAccount.inc:139
-msgid "Reject if conflicts"
-msgstr "Afwijzen bij conflicten"
-
-#: plugins/personal/connectivity/class_kolabAccount.inc:140
-msgid "Manual if conflicts"
-msgstr "Handmatig bij conflicten"
-
-#: plugins/personal/connectivity/class_kolabAccount.inc:141
-msgid "Manual"
-msgstr "Handmatig"
-
-#: plugins/personal/connectivity/class_kolabAccount.inc:177
-msgid "Anonymous"
-msgstr "Anoniem"
-
-#: plugins/personal/connectivity/class_kolabAccount.inc:229
-msgid "The value specified as Free Busy future needs to be an integer."
-msgstr "De waarde opgegeven als Free Busy toekomst dient een integer te zijn"
-
-#: plugins/personal/connectivity/class_kolabAccount.inc:234
-msgid "The value specified as Free Busy Information URL is invalid."
-msgstr "De opgegeven waarde voor de Free Busy informatie URL is niet geldig."
-
-#: plugins/personal/connectivity/class_kolabAccount.inc:248
-#, php-format
-msgid "The invitation policy entry for address '%s' is not valid."
-msgstr "Het uitnodigingsbeleid invoer voor adres '%s' is niet geldig"
-
-#: plugins/personal/connectivity/class_kolabAccount.inc:256
-#, php-format
-msgid "There's no mail user with address '%s' for your invitation policy!"
-msgstr "Er is geen E-mail gebruiker met adres '%s' voor uw uitwisselingsbeleid"
+#: plugins/personal/connectivity/intranet.tpl:1
+#, fuzzy
+msgid "Intranet account"
+msgstr "Telefoon account aanmaken"
 
 #: plugins/personal/connectivity/class_webdavAccount.inc:6
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:6
-#: plugins/generic/references/class_reference.inc:34
-msgid "FTP"
-msgstr "Ftp"
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:125
-msgid "Value specified as 'Upload bandwidth' is not valid."
-msgstr "De opgegeven waarde voor 'Verstuur Bandbreedte' is niet geldig."
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:128
-msgid "Value specified as 'Download bandwidth' is not valid."
-msgstr "De opgegeven waarde voor 'Ontvangst bandbreedte' is niet geldig."
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:131
-msgid "Value specified as 'Files' is not valid."
-msgstr "De opgegeven waarde voor 'Bestanden' is niet geldig."
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:134
-msgid "Value specified as 'Size' is not valid."
-msgstr "De opgegeven waarde voor 'Grootte' is niet geldig."
-
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:137
-msgid "Value specified as 'Ratio' is not valid."
-msgstr "De opgegeven waarde voor 'Verhouding' is niet geldig."
-
 #: plugins/personal/connectivity/phpgw.tpl:1
 msgid "PHPGroupware account"
 msgstr "PHPGroupware account"
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:24
-msgid "Open-Xchange"
-msgstr "Open-Xchange"
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:610
-#, fuzzy
-msgid ""
-"This account has <b>OpenXchange</b> features disabled. Posix features are "
-"needed for openXchange accounts, enable them first."
-msgstr ""
-"De samba mogelijkheden zijn uitgeschakeld voor dit account. Posix "
-"mogelijkheden zijn noodzakelijk voor samba accounts. Schakel deze eerst in."
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:614
-#, fuzzy
-msgid ""
-"This account has <b>OpenXchange</b> features disabled. Mail features are "
-"needed for openXchange accounts, enable them first."
-msgstr ""
-"De samba mogelijkheden zijn uitgeschakeld voor dit account. Posix "
-"mogelijkheden zijn noodzakelijk voor samba accounts. Schakel deze eerst in."
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:696
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:774
-msgid "Couldn't Connect To Postgresql Database"
-msgstr "Kan niet verbinden met de Postgresql Database"
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:700
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:778
-msgid "Needed Parameters to openexchange connectivity plugin failed!"
-msgstr "Vereiste parameters voor Open-Xchange verbindingsmodule ontbreken!"
-
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:704
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:782
-msgid "PHP4 module for Postgresql Database Failed!"
-msgstr "PHP4 module voor Postgresql Database ontbreekt!"
 
 #: plugins/personal/connectivity/kolab.tpl:1
 msgid "Kolab account"
@@ -2149,10 +2027,6 @@ msgstr "dagen"
 #: plugins/personal/connectivity/kolab.tpl:45
 msgid "Invitation policy"
 msgstr "Uitnodigingsbeleid"
-
-#: plugins/personal/connectivity/webdav.tpl:1
-msgid "WebDAV account"
-msgstr "WebDAV Account"
 
 #: plugins/personal/connectivity/pureftpd.tpl:1
 msgid "FTP account"
@@ -2235,10 +2109,6 @@ msgstr "Gebruikers informatie"
 msgid "User Timezone"
 msgstr "Gebruikers tijdzone"
 
-#: plugins/personal/connectivity/class_connectivity.inc:60
-msgid "This account has no connectivity extensions."
-msgstr "Dit account heeft geen verbindings mogelijkheden."
-
 #: plugins/personal/connectivity/class_proxyAccount.inc:5
 #: plugins/generic/references/class_reference.inc:32
 msgid "Proxy"
@@ -2275,6 +2145,144 @@ msgstr "De nummerieke waarde opgegeven voor Quota Instellingen is leeg."
 #: plugins/personal/connectivity/class_proxyAccount.inc:131
 msgid "Numerical value for Quota Setting is not valid."
 msgstr "De nummerieke waarde opgegeven voor Quota Instellingen is niet geldig."
+
+#: plugins/personal/connectivity/class_intranetAccount.inc:14
+msgid "Intranet"
+msgstr ""
+
+#: plugins/personal/connectivity/class_phpgwAccount.inc:5
+msgid "PHPGroupware"
+msgstr "PHPGroupware"
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:5
+msgid "Kolab"
+msgstr "Kolab"
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:102
+msgid ""
+"You're trying to add an invalid email address to the list of delegations."
+msgstr ""
+"U probeert een ongeldig email adres toe te voegen aan de delegatielijst."
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:110
+msgid ""
+"The mail address you're trying to add is no primary mail address of an "
+"existing user."
+msgstr ""
+"Het E-mail adres dat u probeert toe te voegen is geen primair E-mail adres "
+"van een bestaande gebruiker."
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:137
+msgid "Always accept"
+msgstr "Altijd accepteren"
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:138
+msgid "Always reject"
+msgstr "Altijd afwijzen"
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:139
+msgid "Reject if conflicts"
+msgstr "Afwijzen bij conflicten"
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:140
+msgid "Manual if conflicts"
+msgstr "Handmatig bij conflicten"
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:141
+msgid "Manual"
+msgstr "Handmatig"
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:177
+msgid "Anonymous"
+msgstr "Anoniem"
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:229
+msgid "The value specified as Free Busy future needs to be an integer."
+msgstr "De waarde opgegeven als Free Busy toekomst dient een integer te zijn"
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:234
+msgid "The value specified as Free Busy Information URL is invalid."
+msgstr "De opgegeven waarde voor de Free Busy informatie URL is niet geldig."
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:248
+#, php-format
+msgid "The invitation policy entry for address '%s' is not valid."
+msgstr "Het uitnodigingsbeleid invoer voor adres '%s' is niet geldig"
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:256
+#, php-format
+msgid "There's no mail user with address '%s' for your invitation policy!"
+msgstr "Er is geen E-mail gebruiker met adres '%s' voor uw uitwisselingsbeleid"
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:6
+#: plugins/generic/references/class_reference.inc:34
+msgid "FTP"
+msgstr "Ftp"
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:125
+msgid "Value specified as 'Upload bandwidth' is not valid."
+msgstr "De opgegeven waarde voor 'Verstuur Bandbreedte' is niet geldig."
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:128
+msgid "Value specified as 'Download bandwidth' is not valid."
+msgstr "De opgegeven waarde voor 'Ontvangst bandbreedte' is niet geldig."
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:131
+msgid "Value specified as 'Files' is not valid."
+msgstr "De opgegeven waarde voor 'Bestanden' is niet geldig."
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:134
+msgid "Value specified as 'Size' is not valid."
+msgstr "De opgegeven waarde voor 'Grootte' is niet geldig."
+
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:137
+msgid "Value specified as 'Ratio' is not valid."
+msgstr "De opgegeven waarde voor 'Verhouding' is niet geldig."
+
+#: plugins/personal/connectivity/webdav.tpl:1
+msgid "WebDAV account"
+msgstr "WebDAV Account"
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:24
+msgid "Open-Xchange"
+msgstr "Open-Xchange"
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:610
+#, fuzzy
+msgid ""
+"This account has <b>OpenXchange</b> features disabled. Posix features are "
+"needed for openXchange accounts, enable them first."
+msgstr ""
+"De samba mogelijkheden zijn uitgeschakeld voor dit account. Posix "
+"mogelijkheden zijn noodzakelijk voor samba accounts. Schakel deze eerst in."
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:614
+#, fuzzy
+msgid ""
+"This account has <b>OpenXchange</b> features disabled. Mail features are "
+"needed for openXchange accounts, enable them first."
+msgstr ""
+"De samba mogelijkheden zijn uitgeschakeld voor dit account. Posix "
+"mogelijkheden zijn noodzakelijk voor samba accounts. Schakel deze eerst in."
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:696
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:774
+msgid "Couldn't Connect To Postgresql Database"
+msgstr "Kan niet verbinden met de Postgresql Database"
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:700
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:778
+msgid "Needed Parameters to openexchange connectivity plugin failed!"
+msgstr "Vereiste parameters voor Open-Xchange verbindingsmodule ontbreken!"
+
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:704
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:782
+msgid "PHP4 module for Postgresql Database Failed!"
+msgstr "PHP4 module voor Postgresql Database ontbreekt!"
+
+#: plugins/personal/connectivity/class_connectivity.inc:60
+msgid "This account has no connectivity extensions."
+msgstr "Dit account heeft geen verbindings mogelijkheden."
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:5
 msgid "FAX Blocklists"
@@ -3654,9 +3662,9 @@ msgstr ""
 
 #: plugins/admin/users/template.tpl:44
 #: ihtml/themes/altlinux/setup_introduction.tpl:12
+#: ihtml/themes/altlinux/setup_useradmin.tpl:41
 #: ihtml/themes/altlinux/setup_step2.tpl:13
 #: ihtml/themes/altlinux/setup_step3.tpl:18
-#: ihtml/themes/altlinux/setup_useradmin.tpl:41
 #: ihtml/themes/default/setup_introduction.tpl:12
 #: ihtml/themes/default/setup_useradmin.tpl:41
 #: ihtml/themes/default/setup_step2.tpl:13
@@ -3818,7 +3826,6 @@ msgid "Application name to be displayed (i.e. below icons)"
 msgstr "Te tonen programma naam (bv. onder iconen)"
 
 #: plugins/admin/applications/generic.tpl:35
-#: plugins/gofon/macro/generic.tpl:22
 msgid "Choose subtree to place application in"
 msgstr "Selecteer de subtree waaronder het programma geplaatst zal worden."
 
@@ -3931,7 +3938,6 @@ msgstr "U staat op het punt de programma '%s' te verwijderen."
 
 #: plugins/admin/applications/class_applicationManagement.inc:191
 #: plugins/admin/applications/class_applicationManagement.inc:217
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:217
 msgid "You are not allowed to delete this application!"
 msgstr "U heeft geen toestemming dit programma te verwijderen"
 
@@ -4871,6 +4877,94 @@ msgid "You have no permissions to create a printer on this 'Base'."
 msgstr ""
 "U heeft geen toestemming om een printer aan te maken onder deze 'Basis'."
 
+#: plugins/admin/systems/phonesettings.tpl:1
+#, fuzzy
+msgid "Specific Phone settings"
+msgstr "Telefoon instellingen"
+
+#: plugins/admin/systems/phonesettings.tpl:9
+#, fuzzy
+msgid "Phone type"
+msgstr "Telefoon naam"
+
+#: plugins/admin/systems/phonesettings.tpl:10
+#: plugins/admin/systems/phonesettings.tpl:28
+#: plugins/admin/systems/phonesettings.tpl:38
+#: plugins/admin/systems/phonesettings.tpl:52
+#: plugins/admin/systems/phonesettings.tpl:83
+#: plugins/admin/systems/phonesettings.tpl:114
+#: plugins/admin/systems/phonesettings.tpl:161
+#, fuzzy
+msgid "Choose a phone type"
+msgstr "Kies het muis type"
+
+#: plugins/admin/systems/phonesettings.tpl:13
+#: plugins/gofon/phoneaccount/generic.tpl:64
+msgid "refresh"
+msgstr ""
+
+#: plugins/admin/systems/phonesettings.tpl:35
+#, fuzzy
+msgid "DTMF mode"
+msgstr "Modus"
+
+#: plugins/admin/systems/phonesettings.tpl:49
+#: plugins/admin/systems/phonesettings.tpl:90
+#, fuzzy
+msgid "Default IP"
+msgstr "standaard"
+
+#: plugins/admin/systems/phonesettings.tpl:59
+#: plugins/admin/systems/phonesettings.tpl:98
+msgid "Response timeout"
+msgstr ""
+
+#: plugins/admin/systems/phonesettings.tpl:80
+#, fuzzy
+msgid "Modus"
+msgstr "Muis"
+
+#: plugins/admin/systems/phonesettings.tpl:111
+msgid "Authtype"
+msgstr ""
+
+#: plugins/admin/systems/phonesettings.tpl:121
+#, fuzzy
+msgid "Secret"
+msgstr "Straat"
+
+#: plugins/admin/systems/phonesettings.tpl:129
+msgid "GoFonInkeys"
+msgstr ""
+
+#: plugins/admin/systems/phonesettings.tpl:137
+msgid "GoFonOutKeys"
+msgstr ""
+
+#: plugins/admin/systems/phonesettings.tpl:150
+#, fuzzy
+msgid "Account code"
+msgstr "Account"
+
+#: plugins/admin/systems/phonesettings.tpl:158
+#, fuzzy
+msgid "Trunk lines"
+msgstr "Thin Clients"
+
+#: plugins/admin/systems/phonesettings.tpl:173
+#, fuzzy
+msgid "Hosts that are allowed to connect"
+msgstr "Hosts/netwerken die E-mail mogen ralayen"
+
+#: plugins/admin/systems/phonesettings.tpl:188
+#, fuzzy
+msgid "Hosts that are not allowed to connect"
+msgstr "U heeft geen toestemming om dit component te verwijderen!"
+
+#: plugins/admin/systems/phonesettings.tpl:212
+msgid "MSN"
+msgstr ""
+
 #: plugins/admin/systems/wingeneric.tpl:6
 msgid "Machine name"
 msgstr "Machine naam"
@@ -5347,97 +5441,18 @@ msgid "You have no permissions to create a phone on this 'Base'."
 msgstr ""
 "U heeft geen toestemming om een telefoon aan te maken onder deze 'Basis'."
 
-#: plugins/admin/systems/phonesettings.tpl:1
-#, fuzzy
-msgid "Specific Phone settings"
-msgstr "Telefoon instellingen"
-
-#: plugins/admin/systems/phonesettings.tpl:9
-#, fuzzy
-msgid "Phone type"
-msgstr "Telefoon naam"
-
-#: plugins/admin/systems/phonesettings.tpl:10
-#: plugins/admin/systems/phonesettings.tpl:28
-#: plugins/admin/systems/phonesettings.tpl:38
-#: plugins/admin/systems/phonesettings.tpl:52
-#: plugins/admin/systems/phonesettings.tpl:83
-#: plugins/admin/systems/phonesettings.tpl:114
-#: plugins/admin/systems/phonesettings.tpl:161
-#, fuzzy
-msgid "Choose a phone type"
-msgstr "Kies het muis type"
-
-#: plugins/admin/systems/phonesettings.tpl:13
-#: plugins/gofon/phoneaccount/generic.tpl:64
-msgid "refresh"
-msgstr ""
-
-#: plugins/admin/systems/phonesettings.tpl:35
-#, fuzzy
-msgid "DTMF mode"
-msgstr "Modus"
-
-#: plugins/admin/systems/phonesettings.tpl:49
-#: plugins/admin/systems/phonesettings.tpl:90
-#, fuzzy
-msgid "Default IP"
-msgstr "standaard"
-
-#: plugins/admin/systems/phonesettings.tpl:59
-#: plugins/admin/systems/phonesettings.tpl:98
-msgid "Response timeout"
-msgstr ""
-
-#: plugins/admin/systems/phonesettings.tpl:80
-#, fuzzy
-msgid "Modus"
-msgstr "Muis"
-
-#: plugins/admin/systems/phonesettings.tpl:111
-msgid "Authtype"
-msgstr ""
-
-#: plugins/admin/systems/phonesettings.tpl:121
-#, fuzzy
-msgid "Secret"
-msgstr "Straat"
-
-#: plugins/admin/systems/phonesettings.tpl:129
-msgid "GoFonInkeys"
-msgstr ""
-
-#: plugins/admin/systems/phonesettings.tpl:137
-msgid "GoFonOutKeys"
-msgstr ""
-
-#: plugins/admin/systems/phonesettings.tpl:150
-#, fuzzy
-msgid "Account code"
-msgstr "Account"
-
-#: plugins/admin/systems/phonesettings.tpl:158
-#, fuzzy
-msgid "Trunk lines"
-msgstr "Thin Clients"
-
-#: plugins/admin/systems/phonesettings.tpl:173
-#, fuzzy
-msgid "Hosts that are allowed to connect"
-msgstr "Hosts/netwerken die E-mail mogen ralayen"
-
-#: plugins/admin/systems/phonesettings.tpl:188
-#, fuzzy
-msgid "Hosts that are not allowed to connect"
-msgstr "U heeft geen toestemming om dit component te verwijderen!"
-
-#: plugins/admin/systems/phonesettings.tpl:212
-msgid "MSN"
-msgstr ""
-
 #: plugins/admin/ogroups/tabs_ogroups.inc:19
 msgid "Terminals"
 msgstr "Terminals"
+
+#: plugins/admin/ogroups/mail.tpl:7
+msgid "Mail distribution list"
+msgstr ""
+
+#: plugins/admin/ogroups/mail.tpl:11
+#, fuzzy
+msgid "Primary mail address for this distribution list"
+msgstr "Primair E-mail adres voor deze gedeelde map"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:6
 msgid "Select objects to add"
@@ -5625,6 +5640,22 @@ msgstr "Naam van de groep"
 msgid "Member objects"
 msgstr "Lidmaatschap objecten"
 
+#: plugins/admin/ogroups/class_mailogroup.inc:38
+#, fuzzy
+msgid ""
+"This group has mail features enabled. You can disable them by clicking below."
+msgstr ""
+"Dit account heeft E-mail mogelijkheden ingeschakeld. U kunt deze "
+"uitschakelen door de knop hieronder te gebruiken."
+
+#: plugins/admin/ogroups/class_mailogroup.inc:40
+#, fuzzy
+msgid ""
+"This group has mail features disabled. You can enable them by clicking below."
+msgstr ""
+"Dit account heeft geen E-mail mogelijkheden. U kunt deze inschakelen door de "
+"knop hieronder te gebruiken."
+
 #: plugins/admin/ogroups/remove.tpl:7
 msgid ""
 "Please double check if you really want to do this since there is no way for "
@@ -5675,30 +5706,159 @@ msgstr "Toon groepen die terminals bevatten"
 msgid "Show groups containing printers"
 msgstr "Toon groepen die printers bevatten"
 
-#: plugins/admin/ogroups/mail.tpl:7
-msgid "Mail distribution list"
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:25
+#, fuzzy
+msgid "Phone macros"
+msgstr "Telefoon rapporten"
+
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:186
+#, fuzzy, php-format
+msgid "You're about to delete the macro '%s'."
+msgstr "U staat op het punt de groep '%s' te verwijderen."
+
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:192
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:217
+#, fuzzy
+msgid "You are not allowed to delete this macro!"
+msgstr "U heeft geen toestemming om deze groep te verwijderen!"
+
+#: plugins/gofon/macro/class_gofonMacro.inc:80
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:182
+#, fuzzy
+msgid "This 'dn' is no phone macro."
+msgstr "Deze 'dn' heeft geen telefoon mogelijkheden."
+
+#: plugins/gofon/macro/class_gofonMacro.inc:161
+#, fuzzy, php-format
+msgid "The given cn '%s' already exists."
+msgstr "Er bestaat al een afdeling met deze 'Naam'."
+
+#: plugins/gofon/macro/class_gofonMacro.inc:166
+msgid "You must specify the 'Display Name' in order to save this macro"
 msgstr ""
 
-#: plugins/admin/ogroups/mail.tpl:11
-#, fuzzy
-msgid "Primary mail address for this distribution list"
-msgstr "Primair E-mail adres voor deze gedeelde map"
+#: plugins/gofon/macro/class_gofonMacro.inc:171
+#, php-format
+msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro"
+msgstr ""
 
-#: plugins/admin/ogroups/class_mailogroup.inc:38
+#: plugins/gofon/macro/class_gofonMacro.inc:180
+msgid "Makro length must be lower than 100 lines"
+msgstr ""
+
+#: plugins/gofon/macro/generic.tpl:6 plugins/gofon/macro/generic.tpl:7
+#, fuzzy
+msgid "Macro name"
+msgstr "Machine naam"
+
+#: plugins/gofon/macro/generic.tpl:12
+msgid "Macro name to be displayed"
+msgstr ""
+
+#: plugins/gofon/macro/generic.tpl:22
+#, fuzzy
+msgid "Choose subtree to place macro in"
+msgstr "Selecteer de subtree waaronder deze groep geplaatst wordt"
+
+#: plugins/gofon/macro/generic.tpl:43
+#, fuzzy
+msgid "Visible for user"
+msgstr "Lijst met gebruikers"
+
+#: plugins/gofon/macro/generic.tpl:52
+#, fuzzy
+msgid "Macro text"
+msgstr "Machine naam"
+
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:230
+#, fuzzy
+msgid "String"
+msgstr "gedurende"
+
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:231
+msgid "Combobox"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:232
+msgid "Bool"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:238
+#, fuzzy
+msgid "Delete unused"
+msgstr "Verwijderen"
+
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:312
+#, php-format
+msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro."
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:320
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:489
+#, fuzzy, php-format
+msgid "The parameter %s contains invalid char. '!,#' is used as delimiter"
+msgstr "De timeout '%s' bevat ongeldige karakters!"
+
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:325
+#, php-format
+msgid "The parameter %s has incorrect value for type bool."
+msgstr ""
+
+#: plugins/gofon/macro/headpage.tpl:6
+#, fuzzy
+msgid "List of macros"
+msgstr "Lijst met groepen"
+
+#: plugins/gofon/macro/headpage.tpl:29
 #, fuzzy
 msgid ""
-"This group has mail features enabled. You can disable them by clicking below."
+"This menu allows you to add, edit and remove selected macros. You may want "
+"to use the range selector on top of the macro listbox, when working with a "
+"large number of macros."
 msgstr ""
-"Dit account heeft E-mail mogelijkheden ingeschakeld. U kunt deze "
-"uitschakelen door de knop hieronder te gebruiken."
+"Dit menu maakt het mogelijk om geselecteerde groepen toe te voegen, bewerken "
+"of verwijderen. Indien u veel groepen heeft, dan is het aan te raden de "
+"selectie mogelijkheden te gebruiken."
 
-#: plugins/admin/ogroups/class_mailogroup.inc:40
+#: plugins/gofon/macro/headpage.tpl:32
 #, fuzzy
 msgid ""
-"This group has mail features disabled. You can enable them by clicking below."
+"-Edit- and -New...- will execute an assistant to aid you in editing "
+"properties. -Delete- will ask for confirmation before removing macros."
 msgstr ""
-"Dit account heeft geen E-mail mogelijkheden. U kunt deze inschakelen door de "
-"knop hieronder te gebruiken."
+"-Bewerken- en -Nieuw- zullen een wizard opstarten die u helpt bij het "
+"bewerken van eigenchappen. -Verwijderen- zal om bevestiging vragen voordat "
+"programma's verwijderd worden uit de LDAP database."
+
+#: plugins/gofon/macro/headpage.tpl:46
+#, fuzzy
+msgid "Display macros of department"
+msgstr "Toon groepen van afdeling"
+
+#: plugins/gofon/macro/headpage.tpl:59
+#, fuzzy
+msgid "Display macros  matching"
+msgstr "Toon overeenkomende groepen"
+
+#: plugins/gofon/macro/headpage.tpl:62
+#, fuzzy
+msgid "Regular expression for matching macro names"
+msgstr "Reguliere expressie voor overeenkomende groepnamen"
+
+#: plugins/gofon/macro/main.inc:38 plugins/gofon/macro/main.inc:40
+#, fuzzy
+msgid "Phone macro management"
+msgstr "Systeembeheer"
+
+#: plugins/gofon/macro/parameter.tpl:3
+#, fuzzy
+msgid "Argument"
+msgstr "Argumenten"
+
+#: plugins/gofon/macro/parameter.tpl:7
+#, fuzzy
+msgid "type"
+msgstr "Type"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:100
 #, fuzzy
@@ -5777,12 +5937,6 @@ msgstr "Het nummer '%s' is geen geldig telefoonnummer!"
 msgid "The timeout '%s' contains invalid characters!"
 msgstr "De timeout '%s' bevat ongeldige karakters!"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:489
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:319
-#, fuzzy, php-format
-msgid "The parameter %s contains invalid char. '!,#' is used as delimiter"
-msgstr "De timeout '%s' bevat ongeldige karakters!"
-
 #: plugins/gofon/phoneaccount/generic.tpl:1
 #: plugins/gofon/phoneaccount/generic.tpl:4
 msgid "Phone numbers"
@@ -5859,148 +6013,6 @@ msgstr "Tijdsduur"
 msgid "Phone reports"
 msgstr "Telefoon rapporten"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:80
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:182
-#, fuzzy
-msgid "This 'dn' is no phone macro."
-msgstr "Deze 'dn' heeft geen telefoon mogelijkheden."
-
-#: plugins/gofon/macro/class_gofonMacro.inc:161
-#, fuzzy, php-format
-msgid "The given cn '%s' already exists."
-msgstr "Er bestaat al een afdeling met deze 'Naam'."
-
-#: plugins/gofon/macro/class_gofonMacro.inc:166
-msgid "You must specify the 'Display Name' in order to save this macro"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:171
-#, php-format
-msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:180
-msgid "Makro length must be lower than 100 lines"
-msgstr ""
-
-#: plugins/gofon/macro/generic.tpl:6 plugins/gofon/macro/generic.tpl:7
-#, fuzzy
-msgid "Macro name"
-msgstr "Machine naam"
-
-#: plugins/gofon/macro/generic.tpl:12
-msgid "Macro name to be displayed"
-msgstr ""
-
-#: plugins/gofon/macro/generic.tpl:43
-#, fuzzy
-msgid "Visible for user"
-msgstr "Lijst met gebruikers"
-
-#: plugins/gofon/macro/generic.tpl:52
-#, fuzzy
-msgid "Macro text"
-msgstr "Machine naam"
-
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:229
-#, fuzzy
-msgid "String"
-msgstr "gedurende"
-
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:230
-msgid "Combobox"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:231
-msgid "Bool"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:237
-#, fuzzy
-msgid "Delete unused"
-msgstr "Verwijderen"
-
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:311
-#, php-format
-msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro."
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:324
-#, php-format
-msgid "The parameter %s has incorrect value for type bool."
-msgstr ""
-
-#: plugins/gofon/macro/headpage.tpl:6
-#, fuzzy
-msgid "List of macros"
-msgstr "Lijst met groepen"
-
-#: plugins/gofon/macro/headpage.tpl:29
-#, fuzzy
-msgid ""
-"This menu allows you to add, edit and remove selected macros. You may want "
-"to use the range selector on top of the macro listbox, when working with a "
-"large number of macros."
-msgstr ""
-"Dit menu maakt het mogelijk om geselecteerde groepen toe te voegen, bewerken "
-"of verwijderen. Indien u veel groepen heeft, dan is het aan te raden de "
-"selectie mogelijkheden te gebruiken."
-
-#: plugins/gofon/macro/headpage.tpl:32
-#, fuzzy
-msgid ""
-"-Edit- and -New...- will execute an assistant to aid you in editing "
-"properties. -Delete- will ask for confirmation before removing macros."
-msgstr ""
-"-Bewerken- en -Nieuw- zullen een wizard opstarten die u helpt bij het "
-"bewerken van eigenchappen. -Verwijderen- zal om bevestiging vragen voordat "
-"programma's verwijderd worden uit de LDAP database."
-
-#: plugins/gofon/macro/headpage.tpl:46
-#, fuzzy
-msgid "Display macros of department"
-msgstr "Toon groepen van afdeling"
-
-#: plugins/gofon/macro/headpage.tpl:59
-#, fuzzy
-msgid "Display macros  matching"
-msgstr "Toon overeenkomende groepen"
-
-#: plugins/gofon/macro/headpage.tpl:62
-#, fuzzy
-msgid "Regular expression for matching macro names"
-msgstr "Reguliere expressie voor overeenkomende groepnamen"
-
-#: plugins/gofon/macro/main.inc:38 plugins/gofon/macro/main.inc:40
-#, fuzzy
-msgid "Phone macro management"
-msgstr "Systeembeheer"
-
-#: plugins/gofon/macro/parameter.tpl:3
-#, fuzzy
-msgid "Argument"
-msgstr "Argumenten"
-
-#: plugins/gofon/macro/parameter.tpl:7
-#, fuzzy
-msgid "type"
-msgstr "Type"
-
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:25
-#, fuzzy
-msgid "Phone macros"
-msgstr "Telefoon rapporten"
-
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:186
-#, fuzzy, php-format
-msgid "You're about to delete the macro '%s'."
-msgstr "U staat op het punt de groep '%s' te verwijderen."
-
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:192
-#, fuzzy
-msgid "You are not allowed to delete this macro!"
-msgstr "U heeft geen toestemming om deze groep te verwijderen!"
-
 #: plugins/generic/references/class_reference.inc:36
 msgid "Group"
 msgstr "Groep"
@@ -6057,6 +6069,35 @@ msgstr "Het GOsa team"
 #, php-format
 msgid "Welcome %s!"
 msgstr "Welkom %s!"
+
+#: include/class_certificate.inc:35
+msgid "Can't open specified file, check accessibility and or existence"
+msgstr ""
+"Kan het opgegeven bestand niet openen. Controleer of het bestand bestaat en "
+"toegankelijk is."
+
+#: include/class_certificate.inc:53
+msgid "Can't read specified certificate / or empty string given"
+msgstr ""
+"Kan het opgegeven certificaat niet lezen of er is een lege string opgegeven."
+
+#: include/class_certificate.inc:80
+msgid "Can't load certificate, possibly unsupported format (use PEM/DER) "
+msgstr ""
+"Kan het certificaat niet laden. Mogelijk is een niet ondersteund formaat "
+"gebruikt (gebruik PEM/DER)."
+
+#: include/class_certificate.inc:95
+msgid "The Format must be PEM, to output certificate informations"
+msgstr "Het formaat moet PEM zijn om certificaat informatie te tonen"
+
+#: include/class_certificate.inc:192
+msgid "Can't create/open File"
+msgstr "Kan bestand niet aanmaken/openen"
+
+#: include/class_certificate.inc:199
+msgid "No valid certificate loaded"
+msgstr "Geen geldig certificaat geladen"
 
 #: include/php_setup.inc:71
 msgid "Generating this page caused the PHP interpreter to raise some errors!"
@@ -6316,6 +6357,18 @@ msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
 msgstr ""
 "Kan SSHA niet gebruiken voor encryptie. (Ontbrekende functie mhash / sha1)"
 
+#: include/class_password-methods.inc:162
+#, php-format
+msgid "Setting the password failed. LDAP server says '%s'."
+msgstr "Instellen van het wachtwoord is mislukt. De LDAP server meldt: '%s'."
+
+#: include/class_password-methods.inc:199
+msgid ""
+"Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
+msgstr ""
+"De instelling voor 'SMBHASH' in /etc/gosa/gosa.conf is niet correct. Kan het "
+"samba wachtwoord niet veranderen."
+
 #: include/class_pluglist.inc:98
 msgid ""
 "Your gosa.conf information has changed partly. Please convert it using the "
@@ -6333,114 +6386,6 @@ msgid ""
 msgstr ""
 "U bent momenteel database gegevens aan het bewerken. Wilt u eventuele "
 "wijzigingen ongedaan maken?"
-
-#: include/class_password-methods.inc:162
-#, php-format
-msgid "Setting the password failed. LDAP server says '%s'."
-msgstr "Instellen van het wachtwoord is mislukt. De LDAP server meldt: '%s'."
-
-#: include/class_password-methods.inc:199
-msgid ""
-"Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
-msgstr ""
-"De instelling voor 'SMBHASH' in /etc/gosa/gosa.conf is niet correct. Kan het "
-"samba wachtwoord niet veranderen."
-
-#: include/class_config.inc:69
-#, php-format
-msgid "XML error in gosa.conf: %s at line %d"
-msgstr "XML fout in gosa.conf: %s op regel %d"
-
-#: include/class_config.inc:195 html/index.php:140
-msgid "Can't bind to LDAP. Please contact the system administrator."
-msgstr ""
-"Kan de LDAP server niet bereiken. Neem a.u.b. contact op met de "
-"systeembeheerder."
-
-#: include/class_config.inc:426
-msgid "SID and/or RIDBASE missing in your configuration!"
-msgstr "SID en/of RIDBASE ontbreken in uw configuratie!"
-
-#: include/class_password-methods-sha.inc:50
-msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
-msgstr ""
-"Kan SHA niet gebruiken voor encryptie. Functie sha1 / mhash / crypt "
-"ontbreekt."
-
-#: include/class_password-methods-kerberos.inc:43
-msgid ""
-"Warning: Can't set kerberos password. Your PHP version has no kerberos "
-"support, password has not been changed."
-msgstr ""
-"Waarschuwing: Kan het kerberos wachtwoord niet instellen. Uw PHP versie "
-"heeft geen kerberos ondersteuning. Wachtwoord is niet veranderd."
-
-#: include/class_password-methods-kerberos.inc:52
-msgid "Kerberos database communication failed!"
-msgstr "De kerberos database communicatie is mislukt!"
-
-#: include/class_password-methods-kerberos.inc:59
-msgid "Changing password in kerberos database failed!"
-msgstr "Het veranderen van het wachtwoord in de kerberos database is mislukt!"
-
-#: include/class_ldap.inc:398
-#, php-format
-msgid ""
-"Autocreation of type '%s' is currently not supported. Please report to the "
-"GOsa team."
-msgstr ""
-"Automatische aanmaak van object type '%s' wordt momenteel niet ondersteund. "
-"Rapporteer dit a.u.b. aan het GOsa team."
-
-#: include/class_ldap.inc:631
-#, php-format
-msgid ""
-"This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
-"in line %s"
-msgstr ""
-"Dit is geen geldige DN: '%s'. Een blok dat geïmporteerd wordt, dient te "
-"beginnen met 'dn: ...' op regel %s"
-
-#: include/class_ldap.inc:644
-#, php-format
-msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
-msgstr "De dn: '%s' (op regel %s) bestaat al in de LDAP database."
-
-#: include/class_ldap.inc:660
-#, php-format
-msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
-msgstr ""
-"Fout bij het importeren van dn: '%s', controleer uw LDIF bestand a.u.b. "
-"vanaf regel %s!"
-
-#: include/class_certificate.inc:35
-msgid "Can't open specified file, check accessibility and or existence"
-msgstr ""
-"Kan het opgegeven bestand niet openen. Controleer of het bestand bestaat en "
-"toegankelijk is."
-
-#: include/class_certificate.inc:53
-msgid "Can't read specified certificate / or empty string given"
-msgstr ""
-"Kan het opgegeven certificaat niet lezen of er is een lege string opgegeven."
-
-#: include/class_certificate.inc:80
-msgid "Can't load certificate, possibly unsupported format (use PEM/DER) "
-msgstr ""
-"Kan het certificaat niet laden. Mogelijk is een niet ondersteund formaat "
-"gebruikt (gebruik PEM/DER)."
-
-#: include/class_certificate.inc:95
-msgid "The Format must be PEM, to output certificate informations"
-msgstr "Het formaat moet PEM zijn om certificaat informatie te tonen"
-
-#: include/class_certificate.inc:192
-msgid "Can't create/open File"
-msgstr "Kan bestand niet aanmaken/openen"
-
-#: include/class_certificate.inc:199
-msgid "No valid certificate loaded"
-msgstr "Geen geldig certificaat geladen"
 
 #: include/functions_setup.inc:98
 msgid "Can't bind to LDAP. No schema check possible!"
@@ -6905,6 +6850,43 @@ msgstr ""
 "Er is geen beheerders account voor GOsa. U zal niets kunnen beheren op dit "
 "moment!"
 
+#: include/class_config.inc:69
+#, php-format
+msgid "XML error in gosa.conf: %s at line %d"
+msgstr "XML fout in gosa.conf: %s op regel %d"
+
+#: include/class_config.inc:195 html/index.php:140
+msgid "Can't bind to LDAP. Please contact the system administrator."
+msgstr ""
+"Kan de LDAP server niet bereiken. Neem a.u.b. contact op met de "
+"systeembeheerder."
+
+#: include/class_config.inc:426
+msgid "SID and/or RIDBASE missing in your configuration!"
+msgstr "SID en/of RIDBASE ontbreken in uw configuratie!"
+
+#: include/class_password-methods-sha.inc:50
+msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
+msgstr ""
+"Kan SHA niet gebruiken voor encryptie. Functie sha1 / mhash / crypt "
+"ontbreekt."
+
+#: include/class_password-methods-kerberos.inc:43
+msgid ""
+"Warning: Can't set kerberos password. Your PHP version has no kerberos "
+"support, password has not been changed."
+msgstr ""
+"Waarschuwing: Kan het kerberos wachtwoord niet instellen. Uw PHP versie "
+"heeft geen kerberos ondersteuning. Wachtwoord is niet veranderd."
+
+#: include/class_password-methods-kerberos.inc:52
+msgid "Kerberos database communication failed!"
+msgstr "De kerberos database communicatie is mislukt!"
+
+#: include/class_password-methods-kerberos.inc:59
+msgid "Changing password in kerberos database failed!"
+msgstr "Het veranderen van het wachtwoord in de kerberos database is mislukt!"
+
 #: include/functions_helpviewer.inc:260
 #, php-format
 msgid "%s results for your search with the keyword %s interpreted as %s"
@@ -6915,6 +6897,56 @@ msgstr ""
 #, php-format
 msgid "%s%% hit rate in file %s"
 msgstr "%s%% resultaat in bestand %s"
+
+#: include/class_ldap.inc:398
+#, php-format
+msgid ""
+"Autocreation of type '%s' is currently not supported. Please report to the "
+"GOsa team."
+msgstr ""
+"Automatische aanmaak van object type '%s' wordt momenteel niet ondersteund. "
+"Rapporteer dit a.u.b. aan het GOsa team."
+
+#: include/class_ldap.inc:631
+#, php-format
+msgid ""
+"This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
+"in line %s"
+msgstr ""
+"Dit is geen geldige DN: '%s'. Een blok dat geïmporteerd wordt, dient te "
+"beginnen met 'dn: ...' op regel %s"
+
+#: include/class_ldap.inc:644
+#, php-format
+msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
+msgstr "De dn: '%s' (op regel %s) bestaat al in de LDAP database."
+
+#: include/class_ldap.inc:660
+#, php-format
+msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
+msgstr ""
+"Fout bij het importeren van dn: '%s', controleer uw LDIF bestand a.u.b. "
+"vanaf regel %s!"
+
+#: html/helpviewer.php:54
+msgid "Help is not available if you are not logged in."
+msgstr "Help is niet beschikbaar als u niet ingelogd bent."
+
+#: html/helpviewer.php:85
+msgid "previous"
+msgstr "vorige"
+
+#: html/helpviewer.php:89
+msgid "next"
+msgstr "volgende"
+
+#: html/helpviewer.php:141
+#, php-format
+msgid ""
+"Can't read any helpfiles from ' %s ', possibly there is no help available."
+msgstr ""
+"Kon geen helpbestanden lezen van '%s'. Het is mogelijk dat help niet "
+"beschikbaar is."
 
 #: html/getfax.php:53
 msgid "Could not connect to database server!"
@@ -7011,25 +7043,58 @@ msgstr "De sessie zal niet versleuteld zijn."
 msgid "Enter SSL session"
 msgstr "Gebruik een SSL sessie"
 
-#: html/helpviewer.php:54
-msgid "Help is not available if you are not logged in."
-msgstr "Help is niet beschikbaar als u niet ingelogd bent."
-
-#: html/helpviewer.php:85
-msgid "previous"
-msgstr "vorige"
-
-#: html/helpviewer.php:89
-msgid "next"
-msgstr "volgende"
-
-#: html/helpviewer.php:141
-#, php-format
+#: ihtml/themes/altlinux/sizelimit.tpl:3 ihtml/themes/default/sizelimit.tpl:3
 msgid ""
-"Can't read any helpfiles from ' %s ', possibly there is no help available."
+"The size limit option makes LDAP operations faster and saves the LDAP server "
+"from getting too much load. The easiest way to handle big databases without "
+"long timeouts would be to limit your search to smaller values and use "
+"filters to get the entries you are looking for."
 msgstr ""
-"Kon geen helpbestanden lezen van '%s'. Het is mogelijk dat help niet "
-"beschikbaar is."
+"De grootte limiet optie maakt LDAP bewerkingen sneller en behoedt de LDAP "
+"server voor een te grote werkdruk. De eenvoudigste manier om met grote "
+"databases te werken zonder lange timeouts is door zoekopdrachten in grootte "
+"te beperken en door filters te gebruiken voor de informatie die u zoekt."
+
+#: ihtml/themes/altlinux/sizelimit.tpl:6 ihtml/themes/default/sizelimit.tpl:6
+msgid "Please choose the way to react for this session"
+msgstr "Kies a.u.b. de manier waarop gereageerd moet worden voor deze sessie"
+
+#: ihtml/themes/altlinux/sizelimit.tpl:9 ihtml/themes/default/sizelimit.tpl:9
+msgid "ignore this error and show all entries the LDAP server returns"
+msgstr "Negeer deze fout en toon alle gegevens die de LDAP server teruggeeft"
+
+#: ihtml/themes/altlinux/sizelimit.tpl:10
+#: ihtml/themes/default/sizelimit.tpl:10
+msgid ""
+"ignore this error and show all entries that fit into the defined sizelimit "
+"and let me use filters instead"
+msgstr ""
+"Negeer deze fout en toon alle gegevens die passen binnen de gedefiniëerde "
+"grootte limiet en laat me daarvoor in de plaats filters gebruiken"
+
+#: ihtml/themes/altlinux/login.tpl:15 ihtml/themes/default/login.tpl:15
+msgid "Please use your <i>username</i> and <i>password</i> to log in"
+msgstr "Voer uw <i>gebruikersnaam</i> en <i>wachtwoord</i> in"
+
+#: ihtml/themes/altlinux/login.tpl:26 ihtml/themes/altlinux/login.tpl:30
+#: ihtml/themes/altlinux/setup_useradmin.tpl:22
+#: ihtml/themes/default/setup_useradmin.tpl:22
+#: ihtml/themes/default/login.tpl:26 ihtml/themes/default/login.tpl:30
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+#: ihtml/themes/altlinux/login.tpl:44 ihtml/themes/altlinux/login.tpl:47
+#: ihtml/themes/default/login.tpl:44 ihtml/themes/default/login.tpl:47
+msgid "Directory"
+msgstr "Directory"
+
+#: ihtml/themes/altlinux/login.tpl:55 ihtml/themes/default/login.tpl:55
+msgid "Sign in"
+msgstr "Inloggen"
+
+#: ihtml/themes/altlinux/login.tpl:56 ihtml/themes/default/login.tpl:56
+msgid "Click here to log in"
+msgstr "Klik hier om in te loggen"
 
 #: ihtml/themes/altlinux/conflict.tpl:2 ihtml/themes/default/conflict.tpl:2
 msgid "Session conflict detected"
@@ -7084,58 +7149,23 @@ msgstr ""
 "basis informatie verschaft heeft voor de LDAP verbinding zal de LDAP "
 "installatie gecontroleerd worden."
 
-#: ihtml/themes/altlinux/login.tpl:15 ihtml/themes/default/login.tpl:15
-msgid "Please use your <i>username</i> and <i>password</i> to log in"
-msgstr "Voer uw <i>gebruikersnaam</i> en <i>wachtwoord</i> in"
+#: ihtml/themes/altlinux/setup_useradmin.tpl:3
+#: ihtml/themes/default/setup_useradmin.tpl:3
+msgid "You already have an Administrative Account and a Group."
+msgstr "U heeft al een Administratief Account en Groep"
 
-#: ihtml/themes/altlinux/login.tpl:26 ihtml/themes/altlinux/login.tpl:30
-#: ihtml/themes/altlinux/setup_useradmin.tpl:22
-#: ihtml/themes/default/setup_useradmin.tpl:22
-#: ihtml/themes/default/login.tpl:26 ihtml/themes/default/login.tpl:30
-msgid "Username"
-msgstr "Gebruikersnaam"
-
-#: ihtml/themes/altlinux/login.tpl:44 ihtml/themes/altlinux/login.tpl:47
-#: ihtml/themes/default/login.tpl:44 ihtml/themes/default/login.tpl:47
-msgid "Directory"
-msgstr "Directory"
-
-#: ihtml/themes/altlinux/login.tpl:55 ihtml/themes/default/login.tpl:55
-msgid "Sign in"
-msgstr "Inloggen"
-
-#: ihtml/themes/altlinux/login.tpl:56 ihtml/themes/default/login.tpl:56
-msgid "Click here to log in"
-msgstr "Klik hier om in te loggen"
-
-#: ihtml/themes/altlinux/sizelimit.tpl:3 ihtml/themes/default/sizelimit.tpl:3
+#: ihtml/themes/altlinux/setup_useradmin.tpl:10
+#: ihtml/themes/default/setup_useradmin.tpl:10
 msgid ""
-"The size limit option makes LDAP operations faster and saves the LDAP server "
-"from getting too much load. The easiest way to handle big databases without "
-"long timeouts would be to limit your search to smaller values and use "
-"filters to get the entries you are looking for."
+"To provide full administrative access to GOsa, you need to create a special "
+"group which contains the administrative user. The setup program can assist "
+"you with this task. Enter the desired username and the password below to "
+"create the missing entries."
 msgstr ""
-"De grootte limiet optie maakt LDAP bewerkingen sneller en behoedt de LDAP "
-"server voor een te grote werkdruk. De eenvoudigste manier om met grote "
-"databases te werken zonder lange timeouts is door zoekopdrachten in grootte "
-"te beperken en door filters te gebruiken voor de informatie die u zoekt."
-
-#: ihtml/themes/altlinux/sizelimit.tpl:6 ihtml/themes/default/sizelimit.tpl:6
-msgid "Please choose the way to react for this session"
-msgstr "Kies a.u.b. de manier waarop gereageerd moet worden voor deze sessie"
-
-#: ihtml/themes/altlinux/sizelimit.tpl:9 ihtml/themes/default/sizelimit.tpl:9
-msgid "ignore this error and show all entries the LDAP server returns"
-msgstr "Negeer deze fout en toon alle gegevens die de LDAP server teruggeeft"
-
-#: ihtml/themes/altlinux/sizelimit.tpl:10
-#: ihtml/themes/default/sizelimit.tpl:10
-msgid ""
-"ignore this error and show all entries that fit into the defined sizelimit "
-"and let me use filters instead"
-msgstr ""
-"Negeer deze fout en toon alle gegevens die passen binnen de gedefiniëerde "
-"grootte limiet en laat me daarvoor in de plaats filters gebruiken"
+"Om volledige administratieve toegang tot GOsa te verkrijgen, dient U een "
+"speciale groep aan te maken die de administratieve gebruiker bevat. Het "
+"installatie programma kan u bij deze taak helpen. Voer hieronder de gewenste "
+"gebruikersnaam en wachtwoord in om de ontbrekende gegevens aan te maken."
 
 #: ihtml/themes/altlinux/framework.tpl:15
 #: ihtml/themes/default/framework.tpl:15
@@ -7326,7 +7356,32 @@ msgstr ""
 msgid "Mail method"
 msgstr "E-mail methode"
 
-#: ihtml/themes/altlinux/setup_step4.tpl:100
+#: ihtml/themes/altlinux/setup_step4.tpl:99
+msgid ""
+"GOsa may cause PHP interpreter errors, particularly in case of Beta "
+"versions. In some cases it would be helpful to enable the error reporting. "
+"(But it  could be a security risk)  "
+msgstr ""
+
+#: ihtml/themes/altlinux/setup_step4.tpl:103
+#: ihtml/themes/default/setup_step4.tpl:104
+#, fuzzy
+msgid "Display PHP errors"
+msgstr "PHP fout"
+
+#: ihtml/themes/altlinux/setup_step4.tpl:106
+#: ihtml/themes/default/setup_step4.tpl:107
+#, fuzzy
+msgid "true"
+msgstr "Toekomstig"
+
+#: ihtml/themes/altlinux/setup_step4.tpl:107
+#: ihtml/themes/default/setup_step4.tpl:108
+#, fuzzy
+msgid "false"
+msgstr "vrouw"
+
+#: ihtml/themes/altlinux/setup_step4.tpl:115
 #: ihtml/themes/default/setup_step4.tpl:115
 msgid "Check"
 msgstr "Controleer"
@@ -7389,46 +7444,6 @@ msgstr ""
 msgid "Retry"
 msgstr "Opnieuw proberen"
 
-#: ihtml/themes/altlinux/setup_useradmin.tpl:3
-#: ihtml/themes/default/setup_useradmin.tpl:3
-msgid "You already have an Administrative Account and a Group."
-msgstr "U heeft al een Administratief Account en Groep"
-
-#: ihtml/themes/altlinux/setup_useradmin.tpl:10
-#: ihtml/themes/default/setup_useradmin.tpl:10
-msgid ""
-"To provide full administrative access to GOsa, you need to create a special "
-"group which contains the administrative user. The setup program can assist "
-"you with this task. Enter the desired username and the password below to "
-"create the missing entries."
-msgstr ""
-"Om volledige administratieve toegang tot GOsa te verkrijgen, dient U een "
-"speciale groep aan te maken die de administratieve gebruiker bevat. Het "
-"installatie programma kan u bij deze taak helpen. Voer hieronder de gewenste "
-"gebruikersnaam en wachtwoord in om de ontbrekende gegevens aan te maken."
-
-#: ihtml/themes/default/setup_step4.tpl:100
-msgid ""
-"GOsa may cause PHP interpreter errors, particularly in case of Beta "
-"versions. In some cases it would be helpful to enable the error reporting. "
-"(But it could be a security risk)  "
-msgstr ""
-
-#: ihtml/themes/default/setup_step4.tpl:104
-#, fuzzy
-msgid "Display PHP errors"
-msgstr "PHP fout"
-
-#: ihtml/themes/default/setup_step4.tpl:107
-#, fuzzy
-msgid "true"
-msgstr "Toekomstig"
-
-#: ihtml/themes/default/setup_step4.tpl:108
-#, fuzzy
-msgid "false"
-msgstr "vrouw"
-
 #: ihtml/themes/default/help.tpl:9
 msgid "GOsa help viewer"
 msgstr "GOsa help"
@@ -7436,6 +7451,13 @@ msgstr "GOsa help"
 #: ihtml/themes/default/help.tpl:15
 msgid "Index"
 msgstr "Index"
+
+#: ihtml/themes/default/setup_step4.tpl:100
+msgid ""
+"GOsa may cause PHP interpreter errors, particularly in case of Beta "
+"versions. In some cases it would be helpful to enable the error reporting. "
+"(But it could be a security risk)  "
+msgstr ""
 
 #, fuzzy
 #~ msgid "Telefon PIN"
