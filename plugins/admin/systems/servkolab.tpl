@@ -119,8 +119,10 @@
     </tr>
     <tr>
 	  <td>
-	    {t}Hosts/networks allowed to relay{/t}&nbsp;
-        <input name="postfix_mynetworks" size="35" maxlength="120" value="{$postfix_mynetworks}" {$postfix_mynetworksACL} type="text">
+	    {t}Hosts/networks allowed to relay{/t}<br>
+        <input name="postfix_mynetworks" size="60" maxlength="220" value="{$postfix_mynetworks}" {$postfix_mynetworksACL} type="text">
+		<br>
+		( {t}Enter multiple values, seperated with{/t} ; )
 	</td>
      </tr>
    </table>

@@ -65,6 +65,15 @@ class servkolab extends plugin {
     } else {   
       $this->is_account=false;    
     } 
+
+    if(is_array($this->attrs['postfix-mynetworks'])){  
+      unset($this->attrs['postfix-mynetworks']['count']);
+      $tmp="";
+      foreach($this->attrs['postfix-mynetworks'] as $tm){
+        $tmp.=$tm.";";
+      }
+      $this->postfix_mynetworks = $tmp;
+    }
   }
 
 
@@ -238,6 +247,18 @@ class servkolab extends plugin {
     if (!in_array($this->cn, $this->kolabHost)){
       $this->kolabHost[]= $this->cn;
     }
+
+  
+    $tmp = split(";",$this->postfix_mynetworks);
+    $this->postfix_mynetworks = array();
+    foreach($tmp as $tm){
+      trim($tm);
+      if(!empty($tm)){
+        $this->postfix_mynetworks[]=$tm;
+      }
+    }
+  
+    $this->attrs['postfix_mynetworks']=$this->postfix_mynetworks;
 
     /* Call parents save to prepare $this->attrs */
     plugin::save();
