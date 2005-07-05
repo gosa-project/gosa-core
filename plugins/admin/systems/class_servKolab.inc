@@ -65,14 +65,17 @@ class servkolab extends plugin {
     } else {   
       $this->is_account=false;    
     } 
-
-    if(is_array($this->attrs['postfix-mynetworks'])){  
-      unset($this->attrs['postfix-mynetworks']['count']);
-      $tmp="";
-      foreach($this->attrs['postfix-mynetworks'] as $tm){
-        $tmp.=$tm.";";
+    if(isset($this->attrs['postfix-mynetworks'])){
+      if(is_array($this->attrs['postfix-mynetworks'])){  
+        unset($this->attrs['postfix-mynetworks']['count']);
+        $tmp="";
+        foreach($this->attrs['postfix-mynetworks'] as $tm){
+          $tmp.=$tm.";";
+        }
+        $this->postfix_mynetworks = $tmp;
       }
-      $this->postfix_mynetworks = $tmp;
+    }else{
+      $this->postfix_mynetworks="";
     }
   }
 
