@@ -26,7 +26,8 @@ class servkolab extends plugin {
   var $proftpd_ftp                      = "TRUE";
   var $apache_http                      = "TRUE";
   var $kolabHost                        = array();
-  
+  var $is_in_there                      = false;
+  var $exactName                        = false;
   var $attributes =  array("postfix_mydomain", "postfix_mydestination", "proftpd_ftp", "k",
         "postfix_mynetworks", "postfix_enable_virus_scan", "postfix_relayhost", "apache_http",
         "postfix_allow_unauthenticated", "cyrus_admins", "cyrus_imap","kolabFreeBusyFuture",
@@ -60,10 +61,21 @@ class servkolab extends plugin {
       $this->kolabHost= $this->attrs['kolabHost'];
       unset($this->kolabHost['count']);
     }
+  
+
+    $this->is_in_there=false;
+    $this->is_account=false;
+    foreach($this->kolabHost as $host){
+      if(preg_match("/".$this->hostname.".*/i",$host)){
+        $this->is_account=true;
+        $this->is_in_there=true;
+      }
+    } 
+  
     if(in_array($this->hostname, $this->kolabHost)) {
-      $this->is_account=true;
+      $this->exactName=true;
     } else {   
-      $this->is_account=false;    
+      $this->exactName=false;    
     } 
     if(isset($this->attrs['postfix-mynetworks'])){
       if(is_array($this->attrs['postfix-mynetworks'])){  
@@ -247,10 +259,11 @@ class servkolab extends plugin {
     }
 
     /* Add ourselves to the list of kolabHost's if needed */
-    if (!in_array($this->cn, $this->kolabHost)){
+    if ((!$this->is_in_there)){
       $this->kolabHost[]= $this->cn;
     }
-
+    
+ 
   
     $tmp = split(";",$this->postfix_mynetworks);
     $this->postfix_mynetworks = array();
@@ -286,6 +299,10 @@ class servkolab extends plugin {
 
     /* Add kolab hosts */
     $this->attrs['kolabHost']= $this->kolabHost;
+  
+    if(($this->is_in_there)&&(!$this->exactName)){
+      unset($this->attrs['kolabHost']);
+    }
 
     /* Perform LDAP action */
     $ldap->cd($this->dn);
