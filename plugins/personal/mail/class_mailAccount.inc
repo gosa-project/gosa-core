@@ -535,7 +535,12 @@ class mailAccount extends plugin
     $method->fixAttributesOnRemove($this);
 
     /* Mailmethod wants us to remove the entry from LDAP. Keep uid! */
+    #fixme: || kolab || is differs here, you can't delete all attrs specified in this plugin .... 
+    #fixme: there are some attributes we have to keep, i think.
     unset ($this->attrs['uid']);
+
+
+
     @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
         $this->attributes, "Save");
     $ldap->cd($this->dn);
