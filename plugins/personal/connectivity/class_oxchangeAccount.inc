@@ -713,7 +713,10 @@ class oxchangeAccount extends plugin
         $this->attributes, "Save");
     $ldap->modify($this->attrs);
     show_ldap_error($ldap->get_error());
-
+    if($ldap->dn_exists("ou=addr,".$this->dn)){
+    	$ldap->rmdir("ou=addr,".$this->dn);
+    	show_ldap_error($ldap->get_error());
+    }
     /* Optionally execute a command after we're done */
     $this->postremove();
 
@@ -752,18 +755,26 @@ class oxchangeAccount extends plugin
   {
 
     $needupdate=TRUE;
+    $istemplate=FALSE;
+
+
+/*	 print "<pre>".print_r($this->attrs, true)."</pre>";*/
+
 
     /*First at all, we must check if this is new or is updated */
+    /*Also check is we have a template, if is a template, is a new user */
     if (isset($this->attrs['objectClass'])){
       foreach ($this->attrs['objectClass'] as $object){
         if($object=="OXUserObject") $needupdate=FALSE;
+	if($object=="gosaUserTemplate") $istemplate=TRUE;
       }
-	$uid=$this->attrs[$this->dnmode][0];
-    }else{
-
-	if($this->dnmode="uid") $uid=$this->parent->by_object['user']->uid;
-	else $uid=$this->parent->by_object['user']->sn." ".$this->parent->by_object['user']->givenName;
     }
+
+	$uidarray=array();
+	preg_match("/^(\w+(?=\=))=((\w|\s)+(?=\,)),.*/",$this->dn,$uidarray);
+	$uid=$uidarray[2];
+    
+    if ($istemplate) $needupdate=TRUE;
 
     if($needupdate){
       /* Trying to open a Postgresql Database Server */
@@ -784,8 +795,6 @@ class oxchangeAccount extends plugin
       }
     }
 
-
-
     plugin::save();
 
     /* Write back to ldap */
@@ -798,6 +807,8 @@ class oxchangeAccount extends plugin
     $this->postcreate();
 
     if($needupdate){
+      $ldap->create_missing_trees("ou=addr,".$this->dn);
+      show_ldap_error($ldap->get_error());
       /* Finally save data to postgresql server */
       pg_set_client_encoding ("UNICODE");
       $nv = "SELECT nextval ('serial_id')";
