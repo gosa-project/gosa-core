@@ -708,15 +708,16 @@ class oxchangeAccount extends plugin
     plugin::remove_from_parent();
     $ldap= $this->config->get_ldap_link();
 
+    if($ldap->dn_exists("ou=addr,".$this->dn)){
+    	$ldap->rmdir("ou=addr,".$this->dn);
+    	show_ldap_error($ldap->get_error());
+    }
+
     $ldap->cd($this->dn);
     @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
         $this->attributes, "Save");
     $ldap->modify($this->attrs);
     show_ldap_error($ldap->get_error());
-    if($ldap->dn_exists("ou=addr,".$this->dn)){
-    	$ldap->rmdir("ou=addr,".$this->dn);
-    	show_ldap_error($ldap->get_error());
-    }
     /* Optionally execute a command after we're done */
     $this->postremove();
 
