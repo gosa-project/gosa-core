@@ -56,7 +56,7 @@ function is_schema_readable($server, $admin, $password)
   return(true);
 } 
 
-function schema_check($server, $admin, $password, $aff=0)
+function schema_check($server, $admin, $password, $aff=0,$CalledByIndexPhP=false)
 {
   global $config;
 
@@ -227,9 +227,8 @@ function schema_check($server, $admin, $password, $aff=0)
     $affich['phoneaccount']['status']= true;
   }
 
-  if(($_SESSION['ldapconf']['mail_methods'][$_SESSION['ldapconf']['mail']] == "kolab")){
-    if(!isset($objectclasses['kolabInetOrgPerson']))
-    {
+  if(($_SESSION['ldapconf']['mail_methods'][$_SESSION['ldapconf']['mail']] == "kolab")&&(!$CalledByIndexPhP)){
+    if(!isset($objectclasses['kolabInetOrgPerson']))  {
       $messages['kolab']['msg']= _("Support for Kolab disabled, no schema seems to be installed, setting mail-method to cyrus");
       $affich['kolab']['msg']=$messages['kolab']['msg']."<td class=\"check\">kolab2.schema</td>";
 

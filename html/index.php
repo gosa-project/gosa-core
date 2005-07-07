@@ -149,7 +149,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     echo $_SESSION['errors'];
     exit();
   }else{
-    $str = (schema_check($config->current['SERVER'],$config->current['ADMIN'],$config->current['PASSWORD']));
+    $str = (schema_check($config->current['SERVER'],$config->current['ADMIN'],$config->current['PASSWORD'],0,TRUE));
     $checkarr = array();
     foreach($str as $tr){
       if(isset($tr['needonstartup'])){
