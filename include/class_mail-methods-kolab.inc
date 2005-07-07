@@ -89,6 +89,9 @@ class mailMethodKolab extends mailMethodCyrus
         $objectclasses[]= $oc;
       }
     }
+
+    $mailObject->attrs['cyrus-userquota'] = ( $mailObject->attrs['cyrus-userquota']/1024);
+
     $mailObject->attrs['objectClass']= $objectclasses;
     $mailObject->attrs['objectClass'][]= 'kolabInetOrgPerson';
 
