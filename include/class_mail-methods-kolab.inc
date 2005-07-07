@@ -90,7 +90,7 @@ class mailMethodKolab extends mailMethodCyrus
       }
     }
 
-    $mailObject->attrs['cyrus-userquota'] = ( $mailObject->attrs['cyrus-userquota']/1024);
+    $mailObject->attrs['cyrus-userquota'] = ( $mailObject->gosaMailQuota/1024);
 
     $mailObject->attrs['objectClass']= $objectclasses;
     $mailObject->attrs['objectClass'][]= 'kolabInetOrgPerson';
