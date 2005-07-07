@@ -63,6 +63,8 @@ class mailMethodKolab extends mailMethodCyrus
         unset ($mailObject->attrs[$source]);
       }
     }
+    // without this line gosaMailQuota is in MB instead of KB 
+    $mailObject->gosaMailQuota=$mailObject->attrs['gosaMailQuota'][0];
 
     /* Adjust server name if needed */
     foreach ($mailObject->config->data['SERVERS']['IMAP'] as $srv => $dummy){
@@ -90,7 +92,7 @@ class mailMethodKolab extends mailMethodCyrus
       }
     }
 
-    $mailObject->attrs['cyrus-userquota'] = ( $mailObject->gosaMailQuota/1024);
+    $mailObject->attrs['gosaMailQuota'] = ( $mailObject->gosaMailQuota/1024);
 
     $mailObject->attrs['objectClass']= $objectclasses;
     $mailObject->attrs['objectClass'][]= 'kolabInetOrgPerson';
