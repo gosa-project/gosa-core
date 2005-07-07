@@ -120,7 +120,7 @@ if (!isset($HTTP_SERVER_VARS['HTTPS']) ||
 }
 
 /* If SSL is forced, just forward to the SSL enabled site */
-if ($config->data['MAIN']['FORCESSL'] == 'true'){
+if ($config->data['MAIN']['FORCESSL'] == 'true' && $ssl != ''){
   header ("Location: $ssl");
   exit;
 }
