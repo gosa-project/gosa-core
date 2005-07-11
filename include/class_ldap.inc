@@ -523,7 +523,7 @@ class LDAP{
 
     /* Reset index */
     $i = 1 ; 
-
+	$identifier = array();
     $attribute= @ldap_first_attribute($this->cid,$entry,$identifier);
     while ($attribute) {
       $i++;
