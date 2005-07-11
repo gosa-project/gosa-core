@@ -85,7 +85,7 @@ class LDAP{
       $this->reconnect= true;
       return (0);
     } else {
-      $this->error = "Could not bind to " . $binddn;
+      $this->error = "Could not bind to " . $credentials['ADMIN'];
       return NULL;
     }
   }
