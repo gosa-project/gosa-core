@@ -42,7 +42,8 @@ class ldifimport extends plugin
 
 
         $smarty->assign("type","importfile");
-
+			
+		$handle = NULL;
 
         // Check if there is a file submitted
 
@@ -87,7 +88,7 @@ class ldifimport extends plugin
           if(!empty($_POST['cleanup']))   $cleanup   = true; else $cleanup = false;
 
           //
-
+		  $ErrorStr="";
           $check = $ldap->import_complete_ldif($str,$ErrorStr,$overwrite,$cleanup);
 
           if($check == INSERT_OK  )
