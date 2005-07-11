@@ -150,6 +150,8 @@ class user extends plugin
 
       /* get password storage type */
       if (isset ($this->attrs['userPassword'][0])){
+      	/* Initialize local array */
+      	$matches= array();
         if (preg_match ("/^{([^}]+)}(.+)/", $this->attrs['userPassword'][0], $matches)){
           $this->pw_storage= strtolower($matches[1]);
         } else {
@@ -559,7 +561,7 @@ class user extends plugin
       $this->reconnect= true;
       return (0);
     } else {
-      $this->error = "Could not bind to " . $binddn;
+      $this->error = "Could not bind to " . $credentials['ADMIN'];
       return NULL;
     }
   }
