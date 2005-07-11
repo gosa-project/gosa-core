@@ -294,6 +294,9 @@ class csvimport extends plugin
     } else {
       /* Check if theres a file uploaded */
       if(!empty($_FILES['userfile']['name'])){
+      	
+      	$handle = NULL;
+      	
         if((!isset($_FILES['userfile']['name']))||(!isset($_POST['fileup'])))
         {
           print_red(_("There is no file uploaded."));
@@ -319,6 +322,7 @@ class csvimport extends plugin
         {
           $smarty->assign("fileup",TRUE);
           $str = "";
+			
 
           /* Reading content */
           while(!feof($handle)) {
