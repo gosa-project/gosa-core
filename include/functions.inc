@@ -302,7 +302,6 @@ function ldap_login_user ($username, $password)
 
     /* user not found */
     case 0:	return (NULL);
-            break;
 
             /* valid uniq user */
     case 1: 
@@ -966,7 +965,7 @@ function get_printer_list($cups_server)
 
     /* CUPS is not available, try lpstat as a replacement */
   } else {
-    unset ($ar);
+    $ar = false;
     exec("lpstat -p", $ar);
     foreach($ar as $val){
       list($dummy, $printer, $rest)= split(' ', $val, 3);
