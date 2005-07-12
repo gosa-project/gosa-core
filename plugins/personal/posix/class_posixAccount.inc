@@ -779,6 +779,10 @@ class posixAccount extends plugin
       }
     }
 
+    if(empty($this->attrs['gosaDefaultPrinter'])){
+      $thid->attrs['gosaDefaultPrinter']=array();
+    }
+
     /* Save data to LDAP */
     $ldap->cd($this->dn);
     $ldap->modify($this->attrs);
@@ -920,9 +924,9 @@ class posixAccount extends plugin
       }
     }
 
-    if(empty($this->gosaDefaultPrinter)){
-      $message[]= _("You need to specify a valid default printer.");
-    }
+  //  if(empty($this->gosaDefaultPrinter)){
+  //    $message[]= _("You need to specify a valid default printer.");
+  //  }
 
     return ($message);
   }
