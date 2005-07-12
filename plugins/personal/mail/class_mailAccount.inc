@@ -632,6 +632,10 @@ class mailAccount extends plugin
     $id= $method->uattrib;
     $method->fixAttributesOnStore($this);
 
+    if(empty($this->attrs['gosaSpamMailbox'])){
+      unset($this->attrs['gosaSpamMailbox']);
+    }
+
     /* Save data to LDAP */
     $ldap->cd($this->dn);
     $ldap->modify($this->attrs);
@@ -723,6 +727,10 @@ class mailAccount extends plugin
         $this->gosaMailMaxSize == ""){
 
       $message[]= _("You need to set the maximum mail size in order to reject anything.");
+    }
+
+    if((preg_match("/S/", $this->gosaMailDeliveryMode))&&(empty($this->gosaSpamMailbox))) {
+      $message[]= _("You specified Spam settings, but there is no Folder specified.");
     }
 
     return ($message);
