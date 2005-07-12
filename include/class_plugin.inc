@@ -233,7 +233,6 @@ class plugin
     /* Save values to object */
     foreach ($this->attributes as $val){
       if (chkacl ($this->acl, "$val") == "" && isset ($_POST["$val"])){
-
         /* Check for modifications */
         if (get_magic_quotes_gpc()) {
           $data= stripcslashes($_POST["$val"]);
@@ -243,7 +242,20 @@ class plugin
         if ($this->$val != $data){
           $this->is_modified= TRUE;
         }
-        $this->$val= $data;
+    
+      /* Okay, how can I explain this fix ... 
+       * In firefox, disabled option fields aren't selectable ... but in IE you can select these fileds. 
+       * So IE posts these 'unselectable' option, with value = chr(194) 
+       * chr(194) seems to be the &nbsp; in between the ...option>&nbsp;</option.. because there is no value=".." specified in these option fields  
+       * This &nbsp; was added for W3c compliance, but now causes these ... ldap errors ... 
+       * So we set these Fields to ""; a normal empty string, and we can check these values in plugin::check() again ...
+       */
+      if(isset($data[0])){
+        if($data[0] == chr(194)) {
+          $data = "";  
+        }
+      }
+      $this->$val= $data;
       }
     }
   }
