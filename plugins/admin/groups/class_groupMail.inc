@@ -647,7 +647,7 @@ class mailgroup extends plugin
     }
 
     if(empty($this->gosaMailServer)){
-      $message[] = _("Please Select a valid Mailserver.");
+      $message[] = _("Please select a valid mail server.");
     }
 
     return ($message);

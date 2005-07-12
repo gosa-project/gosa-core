@@ -182,7 +182,7 @@ class macro extends plugin
    
     /*Some stupid IE fixes again*/
     if(empty ($this->base)) {
-      $message[] = _("Please coose a valid  base.");
+      $message[] = _("Please choose a valid  base.");
     }
  
     return $message;

@@ -247,10 +247,10 @@ msgstr "Nome dell'utente del quale mostrare gli indirizzi"
 #: plugins/gofax/faxaccount/locals.tpl:62
 #: plugins/gofax/faxaccount/lists.tpl:12 plugins/gofax/faxaccount/lists.tpl:16
 #: plugins/admin/groups/mail.tpl:54 plugins/admin/groups/mail.tpl:101
-#: plugins/admin/groups/class_groupMail.inc:404
 #: plugins/admin/groups/generic.tpl:88
 #: plugins/admin/groups/group_objects.tpl:39
 #: plugins/admin/groups/mail_locals.tpl:66
+#: plugins/admin/groups/class_groupMail.inc:404
 #: plugins/admin/systems/servservice.tpl:21
 #: plugins/admin/systems/servservice.tpl:47
 #: plugins/admin/systems/phonesettings.tpl:181
@@ -605,44 +605,48 @@ msgstr ""
 msgid "The address you're trying to add is already used by user"
 msgstr "L'indirizzo che stai cercando di aggiungere  gi in uso"
 
-#: plugins/personal/mail/class_mailAccount.inc:680
+#: plugins/personal/mail/class_mailAccount.inc:684
 msgid ""
 "There is no valid mailserver specified, please add one in the system setup."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:685
+#: plugins/personal/mail/class_mailAccount.inc:689
 #: plugins/admin/groups/class_groupMail.inc:610
 msgid "The required field 'Primary address' is not set."
 msgstr "Il campo 'Indirizzo principale' non è stao inserito"
 
-#: plugins/personal/mail/class_mailAccount.inc:689
 #: plugins/personal/mail/class_mailAccount.inc:693
+#: plugins/personal/mail/class_mailAccount.inc:697
 #: plugins/addons/addressbook/class_addressbook.inc:569
 #: plugins/admin/ogroups/class_mailogroup.inc:67
 msgid "Please enter a valid email address in 'Primary address' field."
 msgstr ""
 "Inserire un indirizzo di posta valido nel campo 'Indirizzo principale'."
 
-#: plugins/personal/mail/class_mailAccount.inc:700
+#: plugins/personal/mail/class_mailAccount.inc:704
 #: plugins/admin/groups/class_groupMail.inc:619
 #: plugins/admin/ogroups/class_mailogroup.inc:74
 msgid "The primary address you've entered is already in use."
 msgstr "L'indirizzo principale inserito è già in uso."
 
-#: plugins/personal/mail/class_mailAccount.inc:706
+#: plugins/personal/mail/class_mailAccount.inc:710
 #: plugins/admin/groups/class_groupMail.inc:625
 msgid "Value in 'Quota size' is not valid."
 msgstr "Il valore di 'Dimensione quota' non è valido"
 
-#: plugins/personal/mail/class_mailAccount.inc:715
+#: plugins/personal/mail/class_mailAccount.inc:719
 #: plugins/admin/groups/class_groupMail.inc:634
 msgid "Please specify a vaild mail size for mails to be rejected."
 msgstr "Specificare una dimenzione valida per le mail da rigettare."
 
-#: plugins/personal/mail/class_mailAccount.inc:725
+#: plugins/personal/mail/class_mailAccount.inc:729
 #: plugins/admin/groups/class_groupMail.inc:642
 msgid "You need to set the maximum mail size in order to reject anything."
 msgstr "Devi specificare la dimensione massima delle mail da rigettare."
+
+#: plugins/personal/mail/class_mailAccount.inc:733
+msgid "You specified Spam settings, but there is no Folder specified."
+msgstr ""
 
 #: plugins/personal/password/changed.tpl:2
 #: plugins/personal/password/password.tpl:2
@@ -661,7 +665,7 @@ msgstr ""
 #: plugins/personal/generic/main.inc:167 plugins/gofax/reports/detail.tpl:68
 #: plugins/addons/ldapmanager/contentimport.tpl:44
 #: plugins/addons/ldapmanager/contentcsv.tpl:122
-#: plugins/addons/ldapmanager/contentexport.tpl:66 include/functions.inc:1204
+#: plugins/addons/ldapmanager/contentexport.tpl:66 include/functions.inc:1203
 #: ihtml/themes/altlinux/setup_useradmin.tpl:40
 #: ihtml/themes/altlinux/setup_step2.tpl:12
 #: ihtml/themes/altlinux/setup_step3.tpl:17
@@ -958,7 +962,7 @@ msgid "UNIX"
 msgstr "Unix"
 
 #: plugins/personal/posix/class_posixAccount.inc:132
-#: plugins/personal/posix/class_posixAccount.inc:942
+#: plugins/personal/posix/class_posixAccount.inc:950
 msgid "Group of user"
 msgstr "Gruppo di utenti"
 
@@ -1033,7 +1037,7 @@ msgstr "Avvisa l'utente %s giorni prima che la password spiri"
 #: plugins/personal/samba/class_sambaAccount.inc:370
 #: plugins/personal/samba/class_sambaAccount.inc:388
 #: plugins/personal/samba/class_sambaAccount.inc:406
-#: plugins/personal/generic/class_user.inc:220
+#: plugins/personal/generic/class_user.inc:222
 #: plugins/gofax/reports/class_faxreport.inc:272
 #: plugins/gofon/reports/class_fonreport.inc:208
 msgid "January"
@@ -1044,7 +1048,7 @@ msgstr "Gennaio"
 #: plugins/personal/samba/class_sambaAccount.inc:370
 #: plugins/personal/samba/class_sambaAccount.inc:388
 #: plugins/personal/samba/class_sambaAccount.inc:406
-#: plugins/personal/generic/class_user.inc:220
+#: plugins/personal/generic/class_user.inc:222
 #: plugins/gofax/reports/class_faxreport.inc:272
 #: plugins/gofon/reports/class_fonreport.inc:208
 msgid "February"
@@ -1055,7 +1059,7 @@ msgstr "Febbraio"
 #: plugins/personal/samba/class_sambaAccount.inc:370
 #: plugins/personal/samba/class_sambaAccount.inc:388
 #: plugins/personal/samba/class_sambaAccount.inc:406
-#: plugins/personal/generic/class_user.inc:220
+#: plugins/personal/generic/class_user.inc:222
 #: plugins/gofax/reports/class_faxreport.inc:272
 #: plugins/gofon/reports/class_fonreport.inc:208
 msgid "March"
@@ -1066,7 +1070,7 @@ msgstr "Marzo"
 #: plugins/personal/samba/class_sambaAccount.inc:370
 #: plugins/personal/samba/class_sambaAccount.inc:388
 #: plugins/personal/samba/class_sambaAccount.inc:406
-#: plugins/personal/generic/class_user.inc:220
+#: plugins/personal/generic/class_user.inc:222
 #: plugins/gofax/reports/class_faxreport.inc:272
 #: plugins/gofon/reports/class_fonreport.inc:208
 msgid "April"
@@ -1077,7 +1081,7 @@ msgstr "Aprile"
 #: plugins/personal/samba/class_sambaAccount.inc:371
 #: plugins/personal/samba/class_sambaAccount.inc:389
 #: plugins/personal/samba/class_sambaAccount.inc:407
-#: plugins/personal/generic/class_user.inc:221
+#: plugins/personal/generic/class_user.inc:223
 #: plugins/gofax/reports/class_faxreport.inc:273
 #: plugins/gofon/reports/class_fonreport.inc:209
 msgid "May"
@@ -1088,7 +1092,7 @@ msgstr "Maggio"
 #: plugins/personal/samba/class_sambaAccount.inc:371
 #: plugins/personal/samba/class_sambaAccount.inc:389
 #: plugins/personal/samba/class_sambaAccount.inc:407
-#: plugins/personal/generic/class_user.inc:221
+#: plugins/personal/generic/class_user.inc:223
 #: plugins/gofax/reports/class_faxreport.inc:273
 #: plugins/gofon/reports/class_fonreport.inc:209
 msgid "June"
@@ -1099,7 +1103,7 @@ msgstr "Giugno"
 #: plugins/personal/samba/class_sambaAccount.inc:371
 #: plugins/personal/samba/class_sambaAccount.inc:389
 #: plugins/personal/samba/class_sambaAccount.inc:407
-#: plugins/personal/generic/class_user.inc:221
+#: plugins/personal/generic/class_user.inc:223
 #: plugins/gofax/reports/class_faxreport.inc:273
 #: plugins/gofon/reports/class_fonreport.inc:209
 msgid "July"
@@ -1110,7 +1114,7 @@ msgstr "Luglio"
 #: plugins/personal/samba/class_sambaAccount.inc:371
 #: plugins/personal/samba/class_sambaAccount.inc:389
 #: plugins/personal/samba/class_sambaAccount.inc:407
-#: plugins/personal/generic/class_user.inc:221
+#: plugins/personal/generic/class_user.inc:223
 #: plugins/gofax/reports/class_faxreport.inc:273
 #: plugins/gofon/reports/class_fonreport.inc:209
 msgid "August"
@@ -1121,7 +1125,7 @@ msgstr "Agosto"
 #: plugins/personal/samba/class_sambaAccount.inc:371
 #: plugins/personal/samba/class_sambaAccount.inc:389
 #: plugins/personal/samba/class_sambaAccount.inc:407
-#: plugins/personal/generic/class_user.inc:221
+#: plugins/personal/generic/class_user.inc:223
 #: plugins/gofax/reports/class_faxreport.inc:274
 #: plugins/gofon/reports/class_fonreport.inc:210
 msgid "September"
@@ -1132,7 +1136,7 @@ msgstr "Settembre"
 #: plugins/personal/samba/class_sambaAccount.inc:372
 #: plugins/personal/samba/class_sambaAccount.inc:390
 #: plugins/personal/samba/class_sambaAccount.inc:408
-#: plugins/personal/generic/class_user.inc:222
+#: plugins/personal/generic/class_user.inc:224
 #: plugins/gofax/reports/class_faxreport.inc:274
 #: plugins/gofon/reports/class_fonreport.inc:210
 msgid "October"
@@ -1143,7 +1147,7 @@ msgstr "Ottobre"
 #: plugins/personal/samba/class_sambaAccount.inc:372
 #: plugins/personal/samba/class_sambaAccount.inc:390
 #: plugins/personal/samba/class_sambaAccount.inc:408
-#: plugins/personal/generic/class_user.inc:222
+#: plugins/personal/generic/class_user.inc:224
 #: plugins/gofax/reports/class_faxreport.inc:274
 #: plugins/gofon/reports/class_fonreport.inc:210
 msgid "November"
@@ -1154,7 +1158,7 @@ msgstr "Novembre"
 #: plugins/personal/samba/class_sambaAccount.inc:372
 #: plugins/personal/samba/class_sambaAccount.inc:390
 #: plugins/personal/samba/class_sambaAccount.inc:408
-#: plugins/personal/generic/class_user.inc:222
+#: plugins/personal/generic/class_user.inc:224
 #: plugins/gofax/reports/class_faxreport.inc:274
 #: plugins/gofon/reports/class_fonreport.inc:210
 msgid "December"
@@ -1181,69 +1185,69 @@ msgstr "accesso limitato ai seguenti host"
 msgid "Failed: overriding lock"
 msgstr "Fallito: override the lock"
 
-#: plugins/personal/posix/class_posixAccount.inc:858
+#: plugins/personal/posix/class_posixAccount.inc:862
 msgid "The required field 'Home directory' is not set."
 msgstr "Il campo necessario 'Home directory' non è vuoto"
 
-#: plugins/personal/posix/class_posixAccount.inc:861
+#: plugins/personal/posix/class_posixAccount.inc:865
 msgid "Please enter a valid path in 'Home directory' field."
 msgstr "Inserire un nome cartella valido per il campo 'Home directory'."
 
-#: plugins/personal/posix/class_posixAccount.inc:869
+#: plugins/personal/posix/class_posixAccount.inc:873
 msgid "Value specified as 'UID' is not valid."
 msgstr "Il valore specificato per l'UID non è valido."
 
-#: plugins/personal/posix/class_posixAccount.inc:872
+#: plugins/personal/posix/class_posixAccount.inc:876
 msgid "Value specified as 'UID' is too small."
 msgstr "Il valore specificato per l'UID è troppo basso."
 
-#: plugins/personal/posix/class_posixAccount.inc:876
+#: plugins/personal/posix/class_posixAccount.inc:880
 #: plugins/admin/groups/class_groupGeneric.inc:610
 msgid "Value specified as 'GID' is not valid."
 msgstr "Il valore specificato per il GID non è valido."
 
-#: plugins/personal/posix/class_posixAccount.inc:879
+#: plugins/personal/posix/class_posixAccount.inc:883
 #: plugins/admin/groups/class_groupGeneric.inc:613
 msgid "Value specified as 'GID' is too small."
 msgstr "Il valore specificato per il GID è troppo basso."
 
-#: plugins/personal/posix/class_posixAccount.inc:887
+#: plugins/personal/posix/class_posixAccount.inc:891
 msgid "Value specified as 'shadowMin' is not valid."
 msgstr "Il valore specificato come 'shadowMin' non è valido"
 
-#: plugins/personal/posix/class_posixAccount.inc:892
+#: plugins/personal/posix/class_posixAccount.inc:896
 msgid "Value specified as 'shadowMax' is not valid."
 msgstr "Il valore specificato come 'shadowMax' non è valido"
 
-#: plugins/personal/posix/class_posixAccount.inc:897
+#: plugins/personal/posix/class_posixAccount.inc:901
 msgid "Value specified as 'shadowWarning' is not valid."
 msgstr "Il valore specificato come 'shadowWarning' non è valido"
 
-#: plugins/personal/posix/class_posixAccount.inc:900
+#: plugins/personal/posix/class_posixAccount.inc:904
 msgid "'shadowWarning' without 'shadowMax' makes no sense."
 msgstr "'shadowWarning' senza 'shadowMax' non ha senso."
 
-#: plugins/personal/posix/class_posixAccount.inc:903
+#: plugins/personal/posix/class_posixAccount.inc:907
 msgid "Value specified as 'shadowWarning' should be smaller than 'shadowMax'."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:906
+#: plugins/personal/posix/class_posixAccount.inc:910
 msgid "Value specified as 'shadowWarning' should be greater than 'shadowMin'."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:911
+#: plugins/personal/posix/class_posixAccount.inc:915
 msgid "Value specified as 'shadowInactive' is not valid."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:914
+#: plugins/personal/posix/class_posixAccount.inc:918
 msgid "'shadowInactive' without 'shadowMax' makes no sense."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:919
+#: plugins/personal/posix/class_posixAccount.inc:923
 msgid "Value specified as 'shadowMin' should be smaller than 'shadowMax'."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:1021
+#: plugins/personal/posix/class_posixAccount.inc:1029
 #: plugins/admin/groups/class_groupGeneric.inc:644
 msgid "Too many users, can't allocate a free ID!"
 msgstr "Troppi utenti non posso allocare un ID libero!"
@@ -1484,141 +1488,141 @@ msgid ""
 "possible!"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:231
+#: plugins/personal/generic/class_user.inc:233
 msgid "female"
 msgstr "femmina"
 
-#: plugins/personal/generic/class_user.inc:231
+#: plugins/personal/generic/class_user.inc:233
 msgid "male"
 msgstr "maschio"
 
-#: plugins/personal/generic/class_user.inc:241
+#: plugins/personal/generic/class_user.inc:243
 msgid "This account has no valid GOsa extensions."
 msgstr "Questa identità non possiede estensioni GOsa."
 
-#: plugins/personal/generic/class_user.inc:270
+#: plugins/personal/generic/class_user.inc:272
 msgid "The specified file has not been uploaded via HTTP POST! Aborted."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:365
+#: plugins/personal/generic/class_user.inc:367
 msgid "Please enter a valid serial number"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:402
+#: plugins/personal/generic/class_user.inc:404
 #, php-format
 msgid ""
 "Certificate is valid from <b>%s</b> to <b>%s</b> and is currently <b>%s</b>."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:402
+#: plugins/personal/generic/class_user.inc:404
 msgid "valid"
 msgstr "valido"
 
-#: plugins/personal/generic/class_user.inc:402
+#: plugins/personal/generic/class_user.inc:404
 msgid "invalid"
 msgstr "invalido"
 
-#: plugins/personal/generic/class_user.inc:406
+#: plugins/personal/generic/class_user.inc:408
 #, fuzzy
 msgid "No certificate installed"
 msgstr "Modifica certificati"
 
-#: plugins/personal/generic/class_user.inc:800
+#: plugins/personal/generic/class_user.inc:808
 msgid "Kerberos database communication failed"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:817
+#: plugins/personal/generic/class_user.inc:825
 msgid "Can't remove user from kerberos database."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:828
+#: plugins/personal/generic/class_user.inc:836
 msgid "Can't add user to kerberos database."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:868
+#: plugins/personal/generic/class_user.inc:876
 msgid "You have no permissions to create a user on this 'Base'."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:873
+#: plugins/personal/generic/class_user.inc:881
 msgid "You have no permissions to move a user from the original 'Base'."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:879
+#: plugins/personal/generic/class_user.inc:887
 #: plugins/addons/addressbook/class_addressbook.inc:526
 #: plugins/admin/users/class_userManagement.inc:425
 msgid "The required field 'Name' is not set."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:888
+#: plugins/personal/generic/class_user.inc:896
 msgid "There's already a person with this 'Login' in the database."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:894
+#: plugins/personal/generic/class_user.inc:902
 #: plugins/addons/addressbook/class_addressbook.inc:530
 #: plugins/admin/users/class_userManagement.inc:428
 msgid "The required field 'Given name' is not set."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:897
+#: plugins/personal/generic/class_user.inc:905
 msgid "The required field 'Login' is not set."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:904
+#: plugins/personal/generic/class_user.inc:912
 msgid ""
 "There's already a person with this 'Name'/'Given name' combination in the "
 "database."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:911
+#: plugins/personal/generic/class_user.inc:919
 msgid ""
 "The field 'Login' contains invalid characters. Lowercase, numbers and dashes "
 "are allowed."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:914
+#: plugins/personal/generic/class_user.inc:922
 msgid "The field 'Homepage' contains an invalid URL definition."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:917
-#: plugins/personal/generic/class_user.inc:945
+#: plugins/personal/generic/class_user.inc:925
+#: plugins/personal/generic/class_user.inc:953
 #: plugins/addons/addressbook/class_addressbook.inc:536
 #: plugins/addons/addressbook/class_addressbook.inc:564
 #: plugins/admin/departments/class_departmentGeneric.inc:155
 msgid "The field 'Name' contains invalid characters."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:920
-#: plugins/personal/generic/class_user.inc:942
+#: plugins/personal/generic/class_user.inc:928
+#: plugins/personal/generic/class_user.inc:950
 #: plugins/addons/addressbook/class_addressbook.inc:539
 #: plugins/addons/addressbook/class_addressbook.inc:561
 msgid "The field 'Given name' contains invalid characters."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:925
-#: plugins/personal/generic/class_user.inc:928
+#: plugins/personal/generic/class_user.inc:933
+#: plugins/personal/generic/class_user.inc:936
 #: plugins/addons/addressbook/class_addressbook.inc:544
 #: plugins/addons/addressbook/class_addressbook.inc:547
 #: plugins/admin/departments/class_departmentGeneric.inc:158
 msgid "The field 'Phone' contains an invalid phone number."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:931
+#: plugins/personal/generic/class_user.inc:939
 #: plugins/addons/addressbook/class_addressbook.inc:550
 #: plugins/admin/departments/class_departmentGeneric.inc:161
 msgid "The field 'Fax' contains an invalid phone number."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:934
+#: plugins/personal/generic/class_user.inc:942
 #: plugins/addons/addressbook/class_addressbook.inc:553
 msgid "The field 'Mobile' contains an invalid phone number."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:937
+#: plugins/personal/generic/class_user.inc:945
 #: plugins/addons/addressbook/class_addressbook.inc:556
 msgid "The field 'Pager' contains an invalid phone number."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:1062
+#: plugins/personal/generic/class_user.inc:1070
 #, fuzzy
 msgid "Could not open specified certificate!"
 msgstr "Impossibile selezionare il database!"
@@ -2213,17 +2217,17 @@ msgstr ""
 "creare prima le estensioni Unix."
 
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:696
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:774
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:786
 msgid "Couldn't Connect To Postgresql Database"
 msgstr ""
 
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:700
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:778
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:790
 msgid "Needed Parameters to openexchange connectivity plugin failed!"
 msgstr ""
 
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:704
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:782
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:794
 msgid "PHP4 module for Postgresql Database Failed!"
 msgstr ""
 
@@ -2529,7 +2533,7 @@ msgstr "Liste di blocco predefinite"
 
 #: plugins/gofax/faxaccount/lists.tpl:37
 #: plugins/admin/groups/mail_admins.tpl:37
-#: plugins/admin/groups/application_options.tpl:8 include/functions.inc:1195
+#: plugins/admin/groups/application_options.tpl:8 include/functions.inc:1194
 msgid "Apply"
 msgstr "Applica"
 
@@ -2586,6 +2590,12 @@ msgstr ""
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:484
 msgid "The mail address you've entered is invalid."
+msgstr ""
+
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:490
+msgid ""
+"Deliver fax to printer, is only possible if valid printer is given. Please "
+"correct your choice."
 msgstr ""
 
 #: plugins/gofax/reports/contents.tpl:2 plugins/addons/logview/contents.tpl:2
@@ -2976,20 +2986,20 @@ msgstr ""
 msgid "Nothing to import!"
 msgstr ""
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:299
-#: plugins/addons/ldapmanager/class_csvimport.inc:310
-#: plugins/addons/ldapmanager/class_csvimport.inc:315
-#: plugins/addons/ldapmanager/class_import.inc:58
-#: plugins/addons/ldapmanager/class_import.inc:66
+#: plugins/addons/ldapmanager/class_csvimport.inc:302
+#: plugins/addons/ldapmanager/class_csvimport.inc:313
+#: plugins/addons/ldapmanager/class_csvimport.inc:318
+#: plugins/addons/ldapmanager/class_import.inc:59
+#: plugins/addons/ldapmanager/class_import.inc:67
 msgid "There is no file uploaded."
 msgstr ""
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:304
-#: plugins/addons/ldapmanager/class_import.inc:51
+#: plugins/addons/ldapmanager/class_csvimport.inc:307
+#: plugins/addons/ldapmanager/class_import.inc:52
 msgid "The specified file is empty."
 msgstr ""
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:442
+#: plugins/addons/ldapmanager/class_csvimport.inc:446
 msgid "The selected file does not contain any CSV Data..."
 msgstr ""
 
@@ -3058,7 +3068,7 @@ msgstr ""
 msgid "You've no permission to do LDAP imports."
 msgstr ""
 
-#: plugins/addons/ldapmanager/class_import.inc:104
+#: plugins/addons/ldapmanager/class_import.inc:105
 msgid "Unknown Error"
 msgstr ""
 
@@ -3350,43 +3360,6 @@ msgstr "Oggetto"
 msgid "Apply this acl only for users own entries"
 msgstr "Applica questa ACL solo per i campi propri dell'utente"
 
-#: plugins/admin/groups/class_groupMail.inc:153
-msgid "read"
-msgstr "leggere"
-
-#: plugins/admin/groups/class_groupMail.inc:154
-msgid "post"
-msgstr "spedire"
-
-#: plugins/admin/groups/class_groupMail.inc:155
-msgid "external post"
-msgstr "spedire esterno"
-
-#: plugins/admin/groups/class_groupMail.inc:156
-msgid "append"
-msgstr "appendere"
-
-#: plugins/admin/groups/class_groupMail.inc:157
-msgid "write"
-msgstr "scrivere"
-
-#: plugins/admin/groups/class_groupMail.inc:179
-msgid "This 'dn' has no valid mail extensions."
-msgstr ""
-
-#: plugins/admin/groups/class_groupMail.inc:244
-msgid "You're trying to add an invalid email address "
-msgstr "Stai cercando di aggungere un indirizzo di posta non valido"
-
-#: plugins/admin/groups/class_groupMail.inc:245
-msgid "to the list of forwarders."
-msgstr "alla lista degli inoltri"
-
-#: plugins/admin/groups/class_groupMail.inc:613
-msgid "Please enter a valid email addres in 'Primary address' field."
-msgstr ""
-"Prego inserire un indirizzo email valido nel campo 'Indirizzo principale'"
-
 #: plugins/admin/groups/mail_admins.tpl:4
 msgid "Folder administrators"
 msgstr "Amministratori cartella"
@@ -3499,6 +3472,53 @@ msgstr ""
 #: plugins/admin/groups/class_groupApplication.inc:143
 msgid "The selected application has no options."
 msgstr ""
+
+#: plugins/admin/groups/class_groupMail.inc:153
+msgid "read"
+msgstr "leggere"
+
+#: plugins/admin/groups/class_groupMail.inc:154
+msgid "post"
+msgstr "spedire"
+
+#: plugins/admin/groups/class_groupMail.inc:155
+msgid "external post"
+msgstr "spedire esterno"
+
+#: plugins/admin/groups/class_groupMail.inc:156
+msgid "append"
+msgstr "appendere"
+
+#: plugins/admin/groups/class_groupMail.inc:157
+msgid "write"
+msgstr "scrivere"
+
+#: plugins/admin/groups/class_groupMail.inc:179
+msgid "This 'dn' has no valid mail extensions."
+msgstr ""
+
+#: plugins/admin/groups/class_groupMail.inc:244
+msgid "You're trying to add an invalid email address "
+msgstr "Stai cercando di aggungere un indirizzo di posta non valido"
+
+#: plugins/admin/groups/class_groupMail.inc:245
+msgid "to the list of forwarders."
+msgstr "alla lista degli inoltri"
+
+#: plugins/admin/groups/class_groupMail.inc:613
+msgid "Please enter a valid email addres in 'Primary address' field."
+msgstr ""
+"Prego inserire un indirizzo email valido nel campo 'Indirizzo principale'"
+
+#: plugins/admin/groups/class_groupMail.inc:646
+msgid ""
+"Please choose valid permission settings. Default permission can't be emtpy."
+msgstr ""
+
+#: plugins/admin/groups/class_groupMail.inc:650
+#, fuzzy
+msgid "Please select a valid mail server."
+msgstr "Prego inserire un numero di telefono valido!"
 
 #: plugins/admin/users/headpage.tpl:6
 msgid "List of users"
@@ -5582,30 +5602,6 @@ msgstr ""
 msgid "You are not allowed to delete this macro!"
 msgstr "Non hai il permesso di cambiare la tua password."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:80
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:182
-#, fuzzy
-msgid "This 'dn' is no phone macro."
-msgstr "Questa identità non possiede estensioni telefoniche"
-
-#: plugins/gofon/macro/class_gofonMacro.inc:161
-#, php-format
-msgid "The given cn '%s' already exists."
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:166
-msgid "You must specify the 'Display Name' in order to save this macro"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:171
-#, php-format
-msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:180
-msgid "Makro length must be lower than 100 lines"
-msgstr ""
-
 #: plugins/gofon/macro/parameter.tpl:3
 #, fuzzy
 msgid "Argument"
@@ -5615,6 +5611,12 @@ msgstr "Argomenti"
 #, fuzzy
 msgid "type"
 msgstr "Tipo"
+
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:182
+#: plugins/gofon/macro/class_gofonMacro.inc:80
+#, fuzzy
+msgid "This 'dn' is no phone macro."
+msgstr "Questa identità non possiede estensioni telefoniche"
 
 #: plugins/gofon/macro/class_gofonMacroParameters.inc:230
 #, fuzzy
@@ -5653,6 +5655,29 @@ msgstr ""
 #: plugins/gofon/macro/main.inc:38 plugins/gofon/macro/main.inc:40
 msgid "Phone macro management"
 msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:161
+#, php-format
+msgid "The given cn '%s' already exists."
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:166
+msgid "You must specify the 'Display Name' in order to save this macro"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:171
+#, php-format
+msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:180
+msgid "Makro length must be lower than 100 lines"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:185
+#, fuzzy
+msgid "Please choose a valid  base."
+msgstr "Prego inserire un numero di telefono valido!"
 
 #: plugins/gofon/phoneaccount/generic.tpl:1
 #: plugins/gofon/phoneaccount/generic.tpl:4
@@ -5936,72 +5961,72 @@ msgstr "Errore durante la connessione al server LDAP. Il server dice: '%s'"
 msgid "User login failed. LDAP server said '%s'."
 msgstr ""
 
-#: include/functions.inc:313
+#: include/functions.inc:312
 msgid "Username / UID is not unique. Please check your LDAP database."
 msgstr ""
 
-#: include/functions.inc:351
+#: include/functions.inc:350
 msgid ""
 "Error while adding a lock. Parameters are not set correctly, please check "
 "the source!"
 msgstr ""
 
-#: include/functions.inc:361
+#: include/functions.inc:360
 #, php-format
 msgid ""
 "Can't set locking information in LDAP database. Please check the 'config' "
 "entry in gosa.conf! LDAP server says '%s'."
 msgstr ""
 
-#: include/functions.inc:376
+#: include/functions.inc:375
 #, php-format
 msgid "Adding a lock failed. LDAP server says '%s'."
 msgstr ""
 
-#: include/functions.inc:402
+#: include/functions.inc:401
 #, php-format
 msgid "Removing a lock failed. LDAP server says '%s'."
 msgstr ""
 
-#: include/functions.inc:432
+#: include/functions.inc:431
 msgid ""
 "Getting the lock from LDAP failed. Parameters are not set correctly, please "
 "check the source!"
 msgstr ""
 
-#: include/functions.inc:442
+#: include/functions.inc:441
 msgid ""
 "Can't get locking information in LDAP database. Please check the 'config' "
 "entry in gosa.conf!"
 msgstr ""
 
-#: include/functions.inc:450
+#: include/functions.inc:449
 msgid ""
 "Found multiple locks for object to be locked. This should not be possible - "
 "cleaning up multiple references."
 msgstr ""
 
-#: include/functions.inc:522
+#: include/functions.inc:521
 #, php-format
 msgid "The size limit of %d entries is exceed!"
 msgstr ""
 
-#: include/functions.inc:524
+#: include/functions.inc:523
 #, php-format
 msgid ""
 "Set the new size limit to %s and show me this message if the limit still "
 "exceeds"
 msgstr ""
 
-#: include/functions.inc:536
+#: include/functions.inc:535
 msgid "Configure"
 msgstr "Configura"
 
-#: include/functions.inc:541
+#: include/functions.inc:540
 msgid "incomplete"
 msgstr "incompleto"
 
-#: include/functions.inc:924
+#: include/functions.inc:923
 #, php-format
 msgid ""
 "You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
@@ -6010,15 +6035,15 @@ msgstr ""
 "Stai per modificare il record LDAP '%s' che sembra essere in uso da '%s'. "
 "Contatta la persona interessata."
 
-#: include/functions.inc:1023
+#: include/functions.inc:1022
 msgid "LDAP error:"
 msgstr "Errore LDAP"
 
-#: include/functions.inc:1469
+#: include/functions.inc:1468
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr ""
 
-#: include/functions.inc:1512
+#: include/functions.inc:1511
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "versione di sviluppo di GOsa (Rev %s)"
@@ -6086,19 +6111,19 @@ msgstr ""
 msgid "This is an empty plugin."
 msgstr ""
 
-#: include/class_plugin.inc:386
+#: include/class_plugin.inc:398
 #, php-format
 msgid ""
 "Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
 msgstr ""
 
-#: include/class_plugin.inc:412 include/class_password-methods.inc:178
+#: include/class_plugin.inc:424 include/class_password-methods.inc:178
 #, php-format
 msgid ""
 "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
 msgstr ""
 
-#: include/class_plugin.inc:438
+#: include/class_plugin.inc:450
 #, php-format
 msgid ""
 "Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
@@ -6217,7 +6242,7 @@ msgstr "Supporto per gofon disabilitato. Manca il file di schema?"
 msgid "Support for gofon enabled"
 msgstr "Supporto per gofon abilitato."
 
-#: include/functions_setup.inc:233
+#: include/functions_setup.inc:232
 msgid ""
 "Support for Kolab disabled, no schema seems to be installed, setting mail-"
 "method to cyrus"
@@ -6225,41 +6250,41 @@ msgstr ""
 "Supporto per Kolab disabilitato. Manca il file di schema?Il metodo di "
 "amministrazine della posta è impostato su cyrus"
 
-#: include/functions_setup.inc:241
+#: include/functions_setup.inc:240
 msgid "Support for Kolab enabled"
 msgstr "Supporto per Kolab abilitato."
 
-#: include/functions_setup.inc:258
+#: include/functions_setup.inc:257
 msgid "OK"
 msgstr "OK"
 
-#: include/functions_setup.inc:261
+#: include/functions_setup.inc:260
 msgid "Ignored"
 msgstr "Ignora"
 
-#: include/functions_setup.inc:263
+#: include/functions_setup.inc:262
 msgid "Failed"
 msgstr "Fallito"
 
-#: include/functions_setup.inc:280
+#: include/functions_setup.inc:279
 msgid "PHP setup inspection"
 msgstr "Ispezione della configurazione PHP"
 
-#: include/functions_setup.inc:281
+#: include/functions_setup.inc:280
 msgid "Checking for PHP version (>=4.1.0)"
 msgstr "Controllo della versione di PHP (>=4.1.0)"
 
-#: include/functions_setup.inc:282
+#: include/functions_setup.inc:281
 msgid ""
 "PHP must be of version 4.1.0 or above for some functions and known bugs in "
 "PHP language."
 msgstr "PHP deve essere la versione 4.1.0 o superiore."
 
-#: include/functions_setup.inc:285
+#: include/functions_setup.inc:284
 msgid "Checking if register_globals is set to 'off'"
 msgstr "Controllo se register_globals e impostato su 'off'"
 
-#: include/functions_setup.inc:286
+#: include/functions_setup.inc:285
 msgid ""
 "register_globals is a PHP mechanism to register all global varibales to be "
 "accessible from scripts without changing the scope. This may be a security "
@@ -6268,37 +6293,37 @@ msgstr ""
 "register_globals è un meccanismo PHP che può comportare maggiori rischi per "
 "la sicurezza. GOsa funziona in entrambe le modalità"
 
-#: include/functions_setup.inc:289
+#: include/functions_setup.inc:288
 msgid "Checking for ldap module"
 msgstr "Controllo il modulo ldap"
 
-#: include/functions_setup.inc:290
+#: include/functions_setup.inc:289
 msgid "This is the main module used by GOsa and therefore really required."
 msgstr ""
 "Questo è il modulo più importante usato da GOsa ed è quindi necessario."
 
-#: include/functions_setup.inc:293
+#: include/functions_setup.inc:292
 #, fuzzy
 msgid "Checking for XML functions"
 msgstr "Controllo il supporto per iconv"
 
-#: include/functions_setup.inc:294
+#: include/functions_setup.inc:293
 msgid "XML functions are required to parse the configuration file."
 msgstr ""
 
-#: include/functions_setup.inc:297
+#: include/functions_setup.inc:296
 msgid "Checking for gettext support"
 msgstr "Controllo il support per gettext"
 
-#: include/functions_setup.inc:298
+#: include/functions_setup.inc:297
 msgid "Gettext support is required for internationalized GOsa."
 msgstr "Gettext è necessario al supporto per le lingue."
 
-#: include/functions_setup.inc:300
+#: include/functions_setup.inc:299
 msgid "Checking for iconv support"
 msgstr "Controllo il supporto per iconv"
 
-#: include/functions_setup.inc:301
+#: include/functions_setup.inc:300
 msgid ""
 "This module is used by GOsa to convert samba munged dial informations and is "
 "therefore required."
@@ -6306,11 +6331,11 @@ msgstr ""
 "Questo modulo è usato da GOsa per convertire alcune informazioni usate da "
 "samba ed è necessario."
 
-#: include/functions_setup.inc:304
+#: include/functions_setup.inc:303
 msgid "Checking for mhash module"
 msgstr "Controllo il module mhash"
 
-#: include/functions_setup.inc:305
+#: include/functions_setup.inc:304
 msgid ""
 "To use SSHA encryption, you'll need this module. If you are just using crypt "
 "or md5 encryption, ignore this message. GOsa will run without it."
@@ -6319,21 +6344,21 @@ msgstr ""
 "gli schemi classici 'crypt' e 'md5' ignora queso messaggio. GOsa funziona "
 "correttamente anche senza."
 
-#: include/functions_setup.inc:308
+#: include/functions_setup.inc:307
 msgid "Checking for imap module"
 msgstr "Controllo il modulo imap"
 
-#: include/functions_setup.inc:309
+#: include/functions_setup.inc:308
 msgid ""
 "The IMAP module is needed to communicate with the IMAP server. It gets "
 "status informations, creates and deletes mail users."
 msgstr "Questo modulo è necessario per comunicare con il server di posta."
 
-#: include/functions_setup.inc:312
+#: include/functions_setup.inc:311
 msgid "Checking for getacl in imap"
 msgstr "Controllo il supporto per getacl"
 
-#: include/functions_setup.inc:313
+#: include/functions_setup.inc:312
 msgid ""
 "The getacl support is needed for shared folder permissions. The standard "
 "IMAP module is not capable of reading acl's. You need a recend PHP version "
@@ -6342,21 +6367,21 @@ msgstr ""
 "Il support per getacl serve a ottenere i permessi di accesso delle cartelle "
 "di posta sul server. GOsa funziona correttamente anche senza."
 
-#: include/functions_setup.inc:316
+#: include/functions_setup.inc:315
 msgid "Checking for mysql module"
 msgstr "Controllo il modulo mysql"
 
-#: include/functions_setup.inc:317
+#: include/functions_setup.inc:316
 msgid "MySQL support is needed for reading GOfax reports from databases."
 msgstr ""
 "Queso modulo serve a leggere i report di GOfax dal database.GOsa funziona "
 "correttamente anche senza."
 
-#: include/functions_setup.inc:320
+#: include/functions_setup.inc:319
 msgid "Checking for cups module"
 msgstr "Controllo il modulo cups"
 
-#: include/functions_setup.inc:321
+#: include/functions_setup.inc:320
 msgid ""
 "In order to read available printers from IPP protocol instead of printcap "
 "files, you've to install the CUPS module."
@@ -6364,11 +6389,11 @@ msgstr ""
 "Questo modulo serve a ottenere le informazioni sulle stampanti di rete. GOsa "
 "funziona correttamente anche senza."
 
-#: include/functions_setup.inc:324
+#: include/functions_setup.inc:323
 msgid "Checking for kadm5 module"
 msgstr "Controllo il modulo kadm5"
 
-#: include/functions_setup.inc:325
+#: include/functions_setup.inc:324
 msgid ""
 "Managing users in kerberos requires the kadm5 module which is downloadable "
 "via PEAR network."
@@ -6376,25 +6401,25 @@ msgstr ""
 "Questo modulo serve ad amministrare gli utenti in un dominio Kerberos. GOsa "
 "funziona correttamente anche senza."
 
-#: include/functions_setup.inc:328
+#: include/functions_setup.inc:327
 #, fuzzy
 msgid "Checking for snmp Module"
 msgstr "Controllo il modulo imap"
 
-#: include/functions_setup.inc:329
+#: include/functions_setup.inc:328
 msgid ""
 "Simple Network Management Protocol (SNMP) is required for client monitoring."
 msgstr ""
 
-#: include/functions_setup.inc:338
+#: include/functions_setup.inc:337
 msgid "Checking for some additional programms"
 msgstr "Controllo la presenza di alcuni programmi addizionali"
 
-#: include/functions_setup.inc:347
+#: include/functions_setup.inc:346
 msgid "Checking for ImageMagick (>=5.4.0)"
 msgstr "Controllo per ImageMagick (>=5.4.0)"
 
-#: include/functions_setup.inc:348
+#: include/functions_setup.inc:347
 msgid ""
 "ImageMagick is used to convert user supplied images to fit the suggested "
 "size and the unified JPEG format."
@@ -6402,21 +6427,21 @@ msgstr ""
 "Il programma ImageMagick serve a convertire le immagini fornite dagli utenti "
 "nelle dimensioni e nel formato di default."
 
-#: include/functions_setup.inc:351
+#: include/functions_setup.inc:350
 msgid "Checking imagick module for PHP"
 msgstr ""
 
-#: include/functions_setup.inc:352
+#: include/functions_setup.inc:351
 msgid ""
 "Imagick is used to convert user supplied images to fit the suggested size "
 "and the unified JPEG format from PHP script."
 msgstr ""
 
-#: include/functions_setup.inc:359
+#: include/functions_setup.inc:358
 msgid "Checking for fping utility"
 msgstr "Controllo il supporto per fping"
 
-#: include/functions_setup.inc:360
+#: include/functions_setup.inc:359
 msgid ""
 "The fping utility is only used if you've got a thin client based terminal "
 "environment running."
@@ -6424,11 +6449,11 @@ msgstr ""
 "Il programma fping è usato solo nel caso di ambienti basati su terminali "
 "'thin client'."
 
-#: include/functions_setup.inc:375
+#: include/functions_setup.inc:374
 msgid "Checking for a way to generate LM/NT password hashes"
 msgstr "Controllo la possibilità di generare password con algoritmo LM/NT"
 
-#: include/functions_setup.inc:376
+#: include/functions_setup.inc:375
 msgid ""
 "In order to use SAMBA 2/3, you've to install some additional packages to "
 "generate password hashes."
@@ -6436,11 +6461,11 @@ msgstr ""
 "Un programma in grado di generare password con algoritmo LM/NT è necessario "
 "per poter usare Samba 2 o 3."
 
-#: include/functions_setup.inc:389
+#: include/functions_setup.inc:388
 msgid "php.ini check -> session.auto_register"
 msgstr "Controllo php.ini per session.auto_register"
 
-#: include/functions_setup.inc:390
+#: include/functions_setup.inc:389
 msgid ""
 "In Order to use GOsa without any trouble, the session.auto_register option "
 "in your php.ini must be set to 'Off'."
@@ -6448,11 +6473,11 @@ msgstr ""
 "Per non avere problemi con GOsa è necessario impostare l'opzione session."
 "auto_register su 'off' nel file php.ini"
 
-#: include/functions_setup.inc:393
+#: include/functions_setup.inc:392
 msgid "php.ini check -> implicit_flush"
 msgstr "Controllo php.ini per implicit_flush"
 
-#: include/functions_setup.inc:394
+#: include/functions_setup.inc:393
 msgid ""
 "This option influences the Output handling. Turn this Option off, to "
 "increase performance."
@@ -6460,11 +6485,11 @@ msgstr ""
 "Per motivi di performance è consigliato di impostare l'opzione "
 "implicit_flush su 'off' nel file php.ini."
 
-#: include/functions_setup.inc:401
+#: include/functions_setup.inc:400
 msgid "php.ini check -> max_execution_time"
 msgstr "Controllo php.ini per max_execution_time"
 
-#: include/functions_setup.inc:402
+#: include/functions_setup.inc:401
 msgid ""
 "The Execution time should be at least 30 seconds, because some actions may "
 "consume more time."
@@ -6472,11 +6497,11 @@ msgstr ""
 "Per non avere problemi con GOsa è necessario impostare l'opzione "
 "max_execution_time a 30 secondi o più nel file php.ini"
 
-#: include/functions_setup.inc:409
+#: include/functions_setup.inc:408
 msgid "php.ini check -> memory_limit"
 msgstr "Controllo php.ini per memory_limit"
 
-#: include/functions_setup.inc:410
+#: include/functions_setup.inc:409
 #, fuzzy
 msgid ""
 "GOsa needs at least 16MB of memory, less will cause unpredictable errors! "
@@ -6485,11 +6510,11 @@ msgstr ""
 "Per non avere problemi con GOsa è necessario impostare l'opzione "
 "memory_limit a 16MB o più nel file php.ini"
 
-#: include/functions_setup.inc:414
+#: include/functions_setup.inc:413
 msgid "php.ini check -> expose_php"
 msgstr "Controllo php.ini per expose_php"
 
-#: include/functions_setup.inc:415
+#: include/functions_setup.inc:414
 msgid ""
 "Increase the server security by setting expose_php to 'off'. PHP won't send "
 "any Information about the server you are running in this case."
@@ -6497,11 +6522,11 @@ msgstr ""
 "Per motivi di sicurezza è consigliato di impostare l'opzione expose_php su "
 "'off' nel file php.ini."
 
-#: include/functions_setup.inc:419
+#: include/functions_setup.inc:418
 msgid "php.ini check -> magic_quotes_gpc"
 msgstr "Controllo php.ini per magic_quotes_gpc"
 
-#: include/functions_setup.inc:420
+#: include/functions_setup.inc:419
 msgid ""
 "Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
 "escape all quotes in strings in this case."
@@ -6509,49 +6534,49 @@ msgstr ""
 "Per motivi di sicurezza è consigliato di impostare l'opzione "
 "magic_quotes_gpc su 'on' nel file php.ini."
 
-#: include/functions_setup.inc:659
+#: include/functions_setup.inc:658
 msgid "You've to specify an ldap server before continuing!"
 msgstr ""
 
-#: include/functions_setup.inc:668 include/functions_setup.inc:750
+#: include/functions_setup.inc:667 include/functions_setup.inc:749
 msgid ""
 "Can't connect to the specified LDAP server! Please make sure that is "
 "reachable for GOsa."
 msgstr ""
 
-#: include/functions_setup.inc:682 include/functions_setup.inc:755
-#: include/functions_setup.inc:760
+#: include/functions_setup.inc:681 include/functions_setup.inc:754
+#: include/functions_setup.inc:759
 msgid ""
 "Can't bind to the specified LDAP server! Please make sure that it is "
 "reachable for GOsa."
 msgstr ""
 
-#: include/functions_setup.inc:770
+#: include/functions_setup.inc:769
 msgid ""
 "Bind to server successful, but the server seems to be completly empty, "
 "please check all informations twice"
 msgstr ""
 
-#: include/functions_setup.inc:826
+#: include/functions_setup.inc:825
 #, php-format
 msgid ""
 "You're missing the required attribute '%s' from this formular. Please "
 "complete!"
 msgstr "Manca il campo obbligatorio '%s'. Completarlo, prego. "
 
-#: include/functions_setup.inc:857
+#: include/functions_setup.inc:856
 msgid ""
 "Can't read schema informations, GOsa needs to know your schema setup. Please "
 "verify that it is readable for GOsa"
 msgstr ""
 
-#: include/functions_setup.inc:866
+#: include/functions_setup.inc:865
 #, php-format
 msgid "Can't log into LDAP server. Reason was: %s."
 msgstr "Accesso al server LDAP fallito. La ragione è: %s."
 
-#: include/functions_setup.inc:976 include/functions_setup.inc:999
-#: include/functions_setup.inc:1008 html/index.php:176
+#: include/functions_setup.inc:975 include/functions_setup.inc:998
+#: include/functions_setup.inc:1007 html/index.php:176
 #: ihtml/themes/altlinux/setup_useradmin.tpl:6
 #: ihtml/themes/default/setup_useradmin.tpl:6
 msgid ""
@@ -6560,6 +6585,30 @@ msgid ""
 msgstr ""
 "Manca un utente amministrativo per GOsa, non sarai in grado di amministrare "
 "niente!"
+
+#: include/class_ldap.inc:398
+#, php-format
+msgid ""
+"Autocreation of type '%s' is currently not supported. Please report to the "
+"GOsa team."
+msgstr ""
+
+#: include/class_ldap.inc:631
+#, php-format
+msgid ""
+"This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
+"in line %s"
+msgstr ""
+
+#: include/class_ldap.inc:644
+#, php-format
+msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
+msgstr ""
+
+#: include/class_ldap.inc:660
+#, php-format
+msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
+msgstr ""
 
 #: include/class_config.inc:69
 #, php-format
@@ -6601,30 +6650,6 @@ msgstr ""
 #: include/functions_helpviewer.inc:335
 #, php-format
 msgid "%s%% hit rate in file %s"
-msgstr ""
-
-#: include/class_ldap.inc:398
-#, php-format
-msgid ""
-"Autocreation of type '%s' is currently not supported. Please report to the "
-"GOsa team."
-msgstr ""
-
-#: include/class_ldap.inc:631
-#, php-format
-msgid ""
-"This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
-"in line %s"
-msgstr ""
-
-#: include/class_ldap.inc:644
-#, php-format
-msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
-msgstr ""
-
-#: include/class_ldap.inc:660
-#, php-format
-msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
 msgstr ""
 
 #: html/helpviewer.php:54
