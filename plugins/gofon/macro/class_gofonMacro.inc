@@ -179,7 +179,12 @@ class macro extends plugin
     if(count(split("\n",$this->goFonMacroContent))>100){
       $message[] = _("Makro length must be lower than 100 lines");
     }
-    
+   
+    /*Some stupid IE fixes again*/
+    if(empty ($this->base)) {
+      $message[] = _("Please coose a valid  base.");
+    }
+ 
     return $message;
   }
 
