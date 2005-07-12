@@ -920,6 +920,10 @@ class posixAccount extends plugin
       }
     }
 
+    if(empty($this->gosaDefaultPrinter)){
+      $message[]= _("You need to specify a valid default printer.");
+    }
+
     return ($message);
   }
 

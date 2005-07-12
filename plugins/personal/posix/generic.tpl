@@ -102,7 +102,7 @@
      <td>
       <select size="1" name="gosaDefaultPrinter" {$gosaDefaultPrinterACL}>
        {html_options options=$printerList selected=$gosaDefaultPrinter}
-		<option disabled>&nbsp;</option>
+		<option disabled value="">&nbsp;</option>
       </select> 
      </td>
     </tr>
