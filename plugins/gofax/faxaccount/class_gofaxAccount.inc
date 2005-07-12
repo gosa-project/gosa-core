@@ -484,6 +484,11 @@ class gofaxAccount extends plugin
         $message[]= _("The mail address you've entered is invalid.");
       }
     }
+ 
+    // IE Fix, IE lets you choose disabled option, stupid browser ... 
+    if((empty($this->goFaxPrinter))&&($this->goFaxDeliveryMode & 64)){
+      $message[]= _("Deliver fax to printer, is only possible if valid printer is given. Please correct your choice.");
+    }
 
     return ($message);
   }
