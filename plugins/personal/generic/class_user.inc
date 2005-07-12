@@ -915,7 +915,7 @@ class user extends plugin
     }
 
     /* Check for valid input */
-    if (!is_uid($this->uid)){
+    if ($this->is_modified && !is_uid($this->uid)){
       $message[]= _("The field 'Login' contains invalid characters. Lowercase, numbers and dashes are allowed.");
     }
     if (!is_url($this->labeledURI)){
