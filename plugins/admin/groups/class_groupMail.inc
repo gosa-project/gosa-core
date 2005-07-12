@@ -641,6 +641,14 @@ class mailgroup extends plugin
     if (is_integer(strpos($this->gosaMailDeliveryMode, "reject")) && $this->gosaMailMaxSize == ""){
       $message[]= _("You need to set the maximum mail size in order to reject anything.");
     }
+    
+    if(ord($this->imapacl['anyone'][0])==194){
+      $message[] = _("Please choose valid permission settings. Default permission can't be emtpy.");
+    }
+
+    if(empty($this->gosaMailServer)){
+      $message[] = _("Please Select a valid Mailserver.");
+    }
 
     return ($message);
   }
