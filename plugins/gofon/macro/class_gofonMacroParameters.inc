@@ -63,7 +63,10 @@ class macroParameter extends plugin
     }
 
     /* initialising macro parameter */
-    unset($this->attrs['goFonMacroParameter']['count']);
+    if(isset($this->attrs['goFonMacroParameter']) &&
+        isset($this->attrs['goFonMacroParameter']['count'])){
+      unset($this->attrs['goFonMacroParameter']['count']);
+    }
 
     /* Set Parameters, or a new array if ther are no parameters */
     if(isset($this->attrs['goFonMacroParameter'])){
