@@ -612,6 +612,12 @@ class user extends plugin
       /* Remove attribute if set to "nein" */
       if ($this->publicVisible == "nein"){
         $this->attrs['publicVisible']= array();
+        if($this->new){
+          unset($this->attrs['publicVisible']);
+        }else{
+          $this->attrs['publicVisible']=array();
+        }
+
       }
 
     }
