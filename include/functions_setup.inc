@@ -230,7 +230,7 @@ function schema_check($server, $admin, $password, $aff=0,$CalledByIndexPhP=false
   /* Fix for PHP Fehler "Undefined index: ldapconf"
    * Ablaufverfolgung[1]: Funktion schema_check	Datei: /home/hickert/gosa/include/functions_setup.inc (Zeile 230)
    */
-  if(isset($_SESSION['ldapconf']['mail_methods'][$_SESSION['ldapconf']['mail']])){
+  if((isset($_SESSION['ldapconf']['mail_methods']))&&(isset([$_SESSION['ldapconf']))){
 	if(($_SESSION['ldapconf']['mail_methods'][$_SESSION['ldapconf']['mail']] == "kolab")&&(!$CalledByIndexPhP)){
 	  if(!isset($objectclasses['kolabInetOrgPerson']))  {
 	    $messages['kolab']['msg']= _("Support for Kolab disabled, no schema seems to be installed, setting mail-method to cyrus");
