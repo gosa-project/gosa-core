@@ -1,0 +1,123 @@
+\chapter{Servicios de seguridad - Kerberos}
+
+\section{Seguridad e identificación}
+¿Quién se conecta al servidor?\\
+¿Puedo estar seguro de que se puede confiar en el cliente, y el cliente en el servidor?
+
+Esto es solo un pequeño resumen, para mas documentación vease Criptografía y Seguridad en Computadores\cite{cripto1} en español.
+
+\subsection{Caso 1: Las contraseñas van en texto plano}
+Están ahí, todo aquel que vea el tráfico de la red las verá.
+Solo es factible si se están usando canales que se consideren seguros (SSL,ipsec,etc).
+
+\subsection{El problema del hombre de enmedio}
+Si alguien ve tu usuario y tu contraseña puede hacer algo peor que simplemente ver que haces, puede suplantarte.
+
+El hombre de enmedio (man in the middle) es un sistema que esta entre el cliente y el servidor que coge las peticiones del cliente, las manipula y las envia al servidor, por supuesto tambien puede manipular lo que viene del servidor.
+
+\subsection{Caso 2: Las contraseñas tienen codificación simetrica}
+
+\begin{enumerate}
+\item Mejora mucho la seguridad, cuanto mejor sea la encriptación sera mas seguro.
+\item Aún así es problemático y deberia usarse bajo canales seguros.
+\item ¿Como enviamos la clave con la que encriptamos la contraseña?
+\item Si esta clave cae, se producira una situación como la del envio en texto plano, y volvemos a estar en situación de que un sistema intermedio tome nuestra personalidad.
+\item Se considera segura a partir de 128bits de longitud.
+\item No autentifica quien envio el mensaje.
+\end{enumerate}
+
+\subsection{Caso 3: Cifrado por bloques (Hashes)}
+
+\begin{enumerate}
+\item Las contraseñas se codifican de tal manera que no se puede volver a conseguir la contraseña por otro metodo que no sea la fuerza bruta.
+\item Es menos problemático, pero deberia usarse solo bajo canales seguros.
+\item Se envían de esta manera por la red, cualquiera puede identificar que es una contraseña e intentar romper por fuerza bruta la contraseña.
+\item Sigue siendo sensible al problema del robo de identidad, ya que no autentifica quien envio el mensaje.
+\item Se puede mejorar usando tecnicas de desafio, enviando antes de pedir la clave un codigo al usuario con el que mejorar la seguridad del código resultante.
+\end{enumerate}
+
+\subsection{Caso 4: Cifrado Asimetrico, Certificados SSL}
+\begin{enumerate}
+\item Se dividen en dos partes: la privada, aquella con la que codificamos, y la publica, que es aquella con la que decodifican los mensajes los clientes.
+\item Necesita logitudes de clave muy largas para ser seguros (>1024bits) y mucho mas tiempo de computación que los cifrados simetricos.
+\item En la práctica se utilizan para el envio de la clave y despues los mensaje se envian con codificación simetrica.
+\item Es mas resistente a sistemas intermedios, ya que este no puede acceder a la clave privada y por lo tanto no puede codificar mensajes.
+\end{enumerate}
+
+
+\subsection{Caso 5: Kerberos para identificación}
+\begin{enumerate}
+\item El protocolo supone que la red es insegura y que hay sistemas intermedios que pueden escuchar.
+\item Los usuarios y servicios (principales) deben autentificarse ante un tercero, el servidor kerberos, el cual es aceptado como autentico.
+\item Usa cifrado simetrico y asimetrico convirtiendo el conjunto en una red segura.
+\end{enumerate}
+
+
+\section{El protocolo Kerberos}
+
+\subsection{El servidor Kerberos}
+El servidor kerberos no sirve un unico servicio, sino tres: \\
+AS = Servidor de autentificación.\\
+TGS = Servidor de Tickets.\\
+SS = Servidor de servicios.\\
+
+\subsection{Clientes y Servidores}
+
+El cliente autentifica contra el AS, despues demuestra al TGS que esta autorizado para recibir el ticket para el servicio que quiere usar, y por último demuestra ante el SS que esta autorizado para usar el servicio.
+
+\subsection{Que es un ticket y como funciona Kerberos}
+
+\begin{enumerate}
+\item[1.-] Un usuario introduce una clave y contraseña en el cliente.
+\item[2.-] El Cliente usa un hash sobre la contraseña y la convierte en la clave secreta del cliente.
+\item[3.-] El cliente envía un mensaje al AS pidiendo servicio para el cliente.
+\item[4.-] El AS comprueba si el usuario existe en la base de datos. Si existe le envia dos mensajes al cliente.\\
+El mensaje A: Tiene una clave de sesión del TGS codificada usando la clave secreta del usuario.\\
+El mensaje B: (TGT)Ticket-Granting Ticket. Este incluye el identificador del cliente, la dirección de red es este, un periodo de valided, y la clave de sesión del TGS, todo codificado usando la clave secreta del TGS.
+\item[5.-] El cliente recibe los mensajes A y B, con su clave secreta decodifica el mensaje A y coge la clave de sesión del TGS, con esta podra comunicarse con el TGS. Se observa que el cliente no puede decodificar el mensaje B al no tener la clave secreta del TGS.
+\item[6.-] Cuando el cliente quiere usar algún servicio, envia los siguientes mensajes al TGS:\\
+Mensaje C: Compuesto por el TGT del mensaje B y el identificador de petición de servicio.\\
+Mensaje D: Autentificador (El cual está compuesto por el identificador del cliente y una marca horaria - timestamp -) codificado con la clave de sesión del TGS.
+\item[7.-] Al recibir los dos mensajes, el TGS decodifica el autentificador usando la clave de sesión del usuario y envia los siguientes mensajes al cliente:\\
+Mensaje E: Ticket Cliente Servidor, que contiene el identificador del cliente, su dirección de red, un periodo de valided, y la clave de sesión del TGS, codificado usando la clave secreta del servidor.\\
+Mensaje F: Clave de sesión Cliente / Servidor codificada con la clave de sesión del TGS del cliente.
+\item[8.-] Una vez recibidos desde el TGS los mensajes, el cliente tiene información suficiente para autentificarse ante el SS. El cliente se conectara al SS y le enviara los siguientes mensajes:\\
+Mensaje G: El ticket de cliente / servidor codificado con la clave secreta del servidor. (Mensaje E).\\
+Mensaje H: Un nuevo autentificador que contiene el identificador del cliente, una marca horaria y que esta codificado usando la clave de sesión cliente / servidor.
+\item[9.-] El SS decodifica el Mensaje G usando su propia clave secreta y usando la clave Cliente/TGS en el mensaje F consigue la clave de sesion cliente/servidor, entonces le enviara el siguiente mensaje al cliente para confirmar su identidad:\\
+Mensaje I: La marca horaria del Autentificador mas 1, codificado usando la clave de sesión cliente/servidor.
+\item[10.-] El cliente decodifica el mensaje de confirmación y comprueba si la marca horaria ha sido actualizada correctamente. Si todo es correcto, el cliente confiara en el servidor y puede comenzar a hacer peticiones al servidor.
+\item[11.-] El servidor responde a las peticiones de ese cliente que ha sido autentificado.
+
+\end{enumerate}
+
+\section{MIT Kerberos}
+
+\subsection{Instalación}
+
+\subsection{Configuración y funcionamiento}
+
+\subsection{Repliación - kprop}
+
+\subsection{Ventajas y desventajas}
+
+\section{El servidor Heimdal Kerberos}
+
+\subsection{Instalación}
+
+\subsection{Configuración y funcionamiento}
+
+\subsection{Repliación - hprop}
+
+\subsection{Repliación incremental - iprop}
+
+\subsection{Heimdal sobre ldap}
+
+\subsection{Ventajas y desventajas}
+
+\section{La configuración de SASL}
+
+\subsection{Modulos para kerberos}
+
+\section{La configuración de clientes MS Windows}
+

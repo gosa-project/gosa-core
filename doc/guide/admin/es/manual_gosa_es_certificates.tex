@@ -1,0 +1,96 @@
+\chapter{Seguridad y Certificados}
+\section{Introduction SSL}
+\section{Creación de certificados}
+La seguridad es uno de los puntos mas importantes al configurar un servidor, necesitaremos un entorno seguro donde no permitir que los usuarios manipulen y accedan a codigo o programas.
+
+Una formas de conseguir esto es usando encriptación, con lo que buscamos que los usuarios y el servidor se comuniquen de forma que nadie mas pueda acceder a los datos. Esto se consigue con encriptación.
+
+La otra manera de asegurar el sistema es que si existe algún fallo en el sistema o en el código, y un intruso intenta ejecutar codigo, este se vea incapacitado, ya que existen poderosas limitaciones, como no permitir que ejecute comandos, lea el codigo de otros script, no pueda modificar nada y tenga un usuario con muy limitados recursos.
+\subsection{ Certificados SSL}
+
+\noindent Existe amplia documentación sobre encriptación y concretamente sobre SSL, un sistema de encriptación con clave publica y privada.\\
+\\
+\noindent Como el paquete openSSL ya lo tenemos instalado a partir de los pasos anteriores, debemos crear los certificados que usaremos en nuestro servidor web.\\
+\\
+\noindent Supongamos que guardamos el certificado en /etc/apache2/ssl/gosa.pem\\
+\\
+\begin{tabular}{|l|}\hline 
+\#>FILE=/ect/apache2/ssl/gosa.pem\\
+\#>export RANDFILE=/dev/random\\
+\#>openssl req -new -x509 -nodes -out \$FILE -keyout /etc/apache2/ssl/apache.pem\\
+\#>chmod 600 \$FILE\\
+\#>ln -sf \$FILE /etc/apache2/ssl/`/usr/bin/openssl x509 -noout -hash < \$FILE`.0\\
+\hline \end{tabular}
+\vspace{0.5cm}
+\\
+\noindent Con esto hemos creado un certificado que nos permite el acceso SSL a nuestras páginas.\\
+\\
+\noindent Si lo que queremos es una configuración que nos permita no solo que el tráfico esté encriptado, sino que además el cliente garantice que es un usuario válido, debemos provocar que el servidor pida una certificación de cliente. \\
+\\
+\noindent En este caso seguiremos un procedimiento mas largo, primero la creación de una certificación de CA:\\
+\\
+\begin{tabular}{|l|}\hline 
+\#>CAFILE=gosa.ca\\
+\#>KEY=gosa.key\\
+\#>REQFILE=gosa.req\\
+\#>CERTFILE=gosa.cert\\
+\#>DAYS=2048\\
+\#>OUTDIR=.\\
+\#>export RANDFILE=/dev/random\\
+\#>openssl req -new -x509 -keyout \$KEY -out \$CAFILE -days \$DAYS\\
+\hline \end{tabular}
+\vspace{0.5cm}
+\\
+\noindent Después de varias cuestiones tendremos una CA, ahora hacemos un requerimiento para un nuevo certificado:\\
+\\
+\begin{tabular}{|l|}\hline 
+\#>DAYS=365\\
+\#>openssl req -new -keyout \$REQFILE -out \$REQFILE -days\$DAYS\\
+\hline \end{tabular}
+\vspace{0.5cm}
+\\
+\noindent Creamos una configuración para usar la CA con openssl y la guardamos en openssl.cnf:\\
+\\
+\begin{tabular}{|l|}\hline 
+\verb|HOME = .|\\
+\verb|RANDFILE = $ENV::HOME/.rnd|\\
+\verb|[ ca ]|\\
+\verb|default_ca  = CA_default|\\
+\verb|[ CA_default ]|\\
+\verb|dir = .|\\
+\verb|database = index.txt|\\
+\verb|serial = serial|\\
+\verb|default_days = 365|\\
+\verb|default_crl_days= 30|\\
+\verb|default_md = md5|\\
+\verb|preserve = no|\\
+\verb|policy = policy_anything|\\
+\verb|[ policy_anything ]|\\
+\verb|countryName = optional|\\
+\verb|stateOrProvinceName  = optional|\\
+\verb|localityName = optional|\\
+\verb|organizationName = optional|\\
+\verb|organizationalUnitName  = optional|\\
+\verb|commonName = supplied|\\
+\verb|emailAddress = optional|\\
+\hline \end{tabular}
+\vspace{0.5cm}
+\\
+\noindent Firmamos el nuevo certificado:\\
+\\
+\begin{tabular}{|l|}\hline 
+\#>\verb|touch index.txt|\\
+\#>\verb|touch index.txt.attr|\\
+\#>\verb|echo "01" >serial|\\
+\#>\verb|openssl ca -config openssl.cnf -policy policy_anything \|\\\verb|-keyfile $KEY -cert $CAFILE -outdir . -out $CERFILE -infiles $REQFILE|\\
+\hline \end{tabular}
+\vspace{0.5cm}
+\\
+\noindent Y creamos un pkcs12 para configurar la certificación en los clientes:\\
+\\
+\begin{tabular}{|l|}\hline 
+\#>openssl pkcs12 -export -inkey \$KEY -in \$CERTFILE -out certificado\_cliente.pkcs12\\
+\hline \end{tabular}
+\vspace{0.5cm}
+\\
+\noindent Este certificado se puede instalar en el cliente, y en el servidor mediante la configuración explicada en cada uno, esto nos dará la seguridad de que su comunicación será estrictamente confidencial.\\
