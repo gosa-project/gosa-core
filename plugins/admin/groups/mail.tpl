@@ -7,11 +7,11 @@
    <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
    <table summary="">
     <tr>
-     <td>{t}Primary address{/t}{$must}</td>
-     <td><input name="mail" size=25 maxlength=65 {$mailACL} value="{$mail}" title="{t}Primary mail address for this shared folder{/t}"></td>
+     <td><LABEL for="mail">{t}Primary address{/t}</LABEL>{$must}</td>
+     <td><input id="mail" name="mail" size=25 maxlength=65 {$mailACL} value="{$mail}" title="{t}Primary mail address for this shared folder{/t}"></td>
     </tr>
     <tr>
-     <td>{t}Server{/t}</td>
+     <td><LABEL for="gosaMailServer">{t}Server{/t}</LABEL></td>
      <td>
       <select size="1" name="gosaMailServer" {$gosaMailServerACL} title="{t}Select mail server to place user on{/t}">
        {html_options values=$mailServers output=$mailServers selected=$gosaMailServer}
@@ -22,7 +22,7 @@
     <tr>
      <td>
       <br>
-      {t}Quota usage{/t}
+     	<LABEL for="gosaMailQuota"> {t}Quota usage{/t}</LABEL>
      </td>
      <td>
       <br>
@@ -35,7 +35,7 @@
     </tr>
     <tr>
      <td>{t}Quota size{/t}</td>
-     <td><input name="gosaMailQuota" size=6 align=middle maxlength=30 {$gosaMailQuotaACL} value="{$gosaMailQuota}"> KB</td>
+     <td><input id="gosaMailQuota" name="gosaMailQuota" size=6 align=middle maxlength=30 {$gosaMailQuotaACL} value="{$gosaMailQuota}"> KB</td>
     </tr>
    </table>
      
@@ -67,18 +67,18 @@
 
    <table summary="" cellpadding=0 border=0>
     <tr>
-     <td>{t}Default permission{/t}</td>
+     <td><LABEL for="default_permissions">{t}Default permission{/t}</LABEL></td>
      <td>
-      <select size="1" name="default_permissions" {$permissionsACL}>
+      <select size="1" id="default_permissions" name="default_permissions" {$permissionsACL}>
        {html_options options=$perms selected=$default_permissions}
 	   <option disabled>&nbsp;</option>
       </select>
      </td>
     </tr>
     <tr>
-     <td>{t}Member permission{/t}</td>
+     <td><LABEL for="member_permissions">{t}Member permission{/t}</LABEL></td>
      <td>
-      <select size="1" name="member_permissions" {$permissionsACL}>
+      <select id="member_permissions" size="1" name="member_permissions" {$permissionsACL}>
        {html_options options=$perms selected=$member_permissions}
       </select>
      </td>
