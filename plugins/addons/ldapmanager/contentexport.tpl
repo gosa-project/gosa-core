@@ -7,10 +7,10 @@
 <table summary="" style="width:100%;">
 <tr>
 	<td width="30%">
-		{t}Export single entry{/t}
+		<LABEL for="text" >{t}Export single entry{/t}</LABEL>
 	</td>
 	<td>
-		<input type="text" value="" name="single">
+		<input id="text" type="text" value="" name="single">
 	</td>
 	<td>
 		<input type="submit" value="{t}Export{/t}" name="sfrmgetsingle">
@@ -18,10 +18,10 @@
 </tr>
 <tr>
 	<td width="30%">
-		{t}Export complete LDIF for{/t}
+		<LABEL for="selfull">{t}Export complete LDIF for{/t}</LABEL>
 	</td>
 	<td>
-		<select name="selfull" size="1" title="{t}Choose the department you want to Export{/t}">
+		<select id="selfull" name="selfull" size="1" title="{t}Choose the department you want to Export{/t}">
 			{html_options options=$deplist selected=0}
 		</select>
 	</td>
@@ -33,10 +33,10 @@
 {if $govmode eq "true"}
 <tr>
 	<td width="30%">
-		{t}Export IVBB LDIF for{/t}
+		<LABEL for="selivbb">{t}Export IVBB LDIF for{/t}</LABEL>
 	</td>
 	<td>
-		<select name="selivbb" size="1" title="{t}Choose the department you want to Export{/t}">
+		<select id="selivbb" name="selivbb" size="1" title="{t}Choose the department you want to Export{/t}">
 			{html_options options=$deplist selected=$depselectivbb}
 		</select>
 	</td>

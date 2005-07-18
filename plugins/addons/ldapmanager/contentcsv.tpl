@@ -16,10 +16,10 @@
 	</tr>
 	<tr>
 		<td>
-		{t}Select template{/t}
+		<LABEL for="template">{t}Select template{/t}</LABEL>
 		</td>
 		<td>
-		<select name="template" size="1" title="">
+		<select id="template" name="template" size="1" title="">
 			{html_options options=$templates selected=""}	
 		</select>
 		</td>
