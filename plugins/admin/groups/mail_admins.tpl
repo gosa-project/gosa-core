@@ -1,9 +1,9 @@
 <table summary="" style="width:100%;">
  <tr>
   <td style="width:45%; vertical-align:top;">
-   {t}Folder administrators{/t}
+  <LABEL for="admins"> {t}Folder administrators{/t}</LABEL>
    <br>
-   <select style="width:380px; height:300px;" name="admins[]" size=15 multiple>
+   <select id="admins" style="width:380px; height:300px;" name="admins[]" size=15 multiple>
     {html_options options=$admins}
    </select>
   </td>
@@ -21,8 +21,8 @@
     {html_options options=$mailusers}
    </select>
    <br>
-   {t}Select a specific department{/t}:
-   <select name="department" size=1 onChange="mainform.submit()">
+	<LABEL for="department">{t}Select a specific department{/t}</LABEL>:
+   <select id="department" name="department" size=1 onChange="mainform.submit()">
     {html_options options=$departments selected=$department}
    </select>
 
