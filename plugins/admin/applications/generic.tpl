@@ -4,35 +4,35 @@
 
    <table summary="">
      <tr>
-      <td>{t}Application name{/t}{$must}</td>
-      <td><input name="cn" size=25 maxlength=60 value="{$cn}" title="{t}Application name{/t}"></td>
+      <td><LABEL for="cn">{t}Application name{/t}{$must}</LABEL></td>
+      <td><input id="cn" name="cn" size=25 maxlength=60 value="{$cn}" title="{t}Application name{/t}"></td>
     </tr>
 
     <tr>
-     <td>{t}Execute{/t}{$must}</td>
+     <td><LABEL for="gosaApplicationExecute">{{t}Execute{/t}{$must}</LABEL></td>
      <td>
-        <input name="gosaApplicationExecute" size=35 maxlength=60 {$gosaApplicationExecuteACL} value="{$gosaApplicationExecute}" title="{t}Path and/or binary name of application{/t}">
+        <input id="gosaApplicationExecute" name="gosaApplicationExecute" size=35 maxlength=60 {$gosaApplicationExecuteACL} value="{$gosaApplicationExecute}" title="{t}Path and/or binary name of application{/t}">
      </td>
     </tr>
     <tr>
-     <td>{t}Display name{/t}</td>
+     <td><LABEL for="gosaApplicationName">{{t}Display name{/t}</LABEL></td>
      <td>
-        <input name="gosaApplicationName" size=35 maxlength=60 {$gosaApplicationNameACL} value="{$gosaApplicationName}" title="{t}Application name to be displayed (i.e. below icons){/t}">
+        <input id="gosaApplicationName" name="gosaApplicationName" size=35 maxlength=60 {$gosaApplicationNameACL} value="{$gosaApplicationName}" title="{t}Application name to be displayed (i.e. below icons){/t}">
      </td>
     </tr>
     <tr>
-     <td>{t}Description{/t}</td>
+     <td><LABEL for="description">{{t}Description{/t}</LABEL></td>
      <td>
-      <input name="description" size=35 maxlength=60 {$descriptionACL} value="{$description}">
+      <input id="description" name="description" size=35 maxlength=60 {$descriptionACL} value="{$description}">
      </td>
     </tr>
 
     <tr><td colspan=2><div style="height:15px;"></div></td></tr>
  
     <tr>
-      <td>{t}Base{/t}{$must}</td>
+      <td><LABEL for="base">{t}Base{/t}{$must}</LABEL></td>
       <td>
-       <select size="1" name="base" title="{t}Choose subtree to place application in{/t}">
+       <select size="1" id="base" name="base" title="{t}Choose subtree to place application in{/t}">
         {html_options options=$bases selected=$base_select}
        </select>
       </td>
