@@ -8,18 +8,18 @@
    <td width="33%">
     <table summary="">
      <tr>
-      <td><img alt="" align="middle" border=0 src="{$server_image}">&nbsp;{t}Show hosts{/t}</td>
+      <td><img alt="" align="middle" border=0 src="{$server_image}">&nbsp;<LABEL FOR="host">{t}Show hosts{/t}</LABEL></td>
       <td>
-       <select name="host" size=1 onChange="mainform.submit()">
+       <select id="host" name="host" size=1 onChange="mainform.submit()">
 		       {html_options options=$hostlist selected=$host}
 			   <option disabled>&nbsp; </option>
        </select>
       </td>
      </tr>
      <tr>
-      <td><img alt="" align="middle" border=0 src="{$log_image}">&nbsp;{t}Log level{/t}</td>
+      <td><img alt="" align="middle" border=0 src="{$log_image}">&nbsp;<LABEL for="log_level">{t}Log level{/t}</label></td>
       <td>
-       <select name="log_level" size=1 onChange="mainform.submit()">
+       <select id="log_level" name="log_level" size=1 onChange="mainform.submit()">
         	{html_options options=$loglevellist selected=$log_level}
             <option disabled>&nbsp;</option>
        </select>
@@ -35,17 +35,17 @@
    <td width="33%">
     <table summary="">
      <tr>
-      <td><img alt="" align="middle" border=0 src="{$time_image}">&nbsp;{t}Time interval{/t}</td>
+      <td><img alt="" align="middle" border=0 src="{$time_image}">&nbsp;<LABEL for="time" >{t}Time interval{/t}</LABEL></td>
       <td>
-       <select name="time" size=1 onChange="mainform.submit()">
+       <select id="time" name="time" size=1 onChange="mainform.submit()">
         	{html_options options=$tilist selected=$time}
             <option disabled>&nbsp;</option>
        </select>
       </td>
      </tr>
      <tr>
-      <td><img alt="" align="middle" border=0 src="{$search_image}">&nbsp;{t}Search for{/t}</td>
-      <td><input name="regex" size=25 maxlength=60 value="{$regex}" title="{t}Enter string to search for{/t}"></td>
+      <td><img alt="" align="middle" border=0 src="{$search_image}">&nbsp;<LABEL for="regex">{t}Search for{/t}</LABEL></td>
+      <td><input id="regex" name="regex" size=25 maxlength=60 value="{$regex}" title="{t}Enter string to search for{/t}"></td>
      </tr>
     </table>
    </td>
@@ -57,9 +57,9 @@
    <td>
     <table summary="" width="100%">
      <tr>
-      <td><img alt="" align="middle" border=0 src="{$ruleset_image}">&nbsp;{t}Ruleset{/t}</td>
+      <td><img alt="" align="middle" border=0 src="{$ruleset_image}">&nbsp;<LABEL foe="edit_rules">{t}Ruleset{/t}</LABEL></td>
       <td width="100%">
-       <input name="edit_rules" type="submit" value="{t}Edit{/t}" disabled>
+       <input id="edit_rules" name="edit_rules" type="submit" value="{t}Edit{/t}" disabled>
       </td>
      </tr>
      <tr>
