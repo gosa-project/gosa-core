@@ -337,6 +337,7 @@ function perform_php_checks(&$faults)
 
 function perform_additional_checks(&$faults)
 {
+  $ret = NULL;
   /* Programm check */
   $msg= "<h1>"._("Checking for some additional programms")."</h1>";
 
@@ -577,6 +578,7 @@ function parse_contrib_conf()
 /* Show setup_page 1 */
 function show_setup_page1($withoutput = true)
 {
+  $faults = array();
   $smarty = get_smarty();  
   $smarty->assign ("content", get_template_path('setup_introduction.tpl'));
   $smarty->assign ("tests", perform_php_checks($faults));
@@ -606,6 +608,7 @@ function show_setup_page1($withoutput = true)
 /* Show setup_page 2 */
 function show_setup_page2($withoutput = true)
 {
+  $faults = array();
   $smarty = get_smarty();
   $smarty->assign ("content", get_template_path('setup_step2.tpl'));
   $smarty->assign ("tests", perform_additional_checks($faults));
@@ -629,6 +632,7 @@ function show_setup_page2($withoutput = true)
 
 function show_setup_page3($withoutput = true)
 {
+  $ds = NULL;
   $smarty = get_smarty();
 
   /* Take the Post oder the Sessioin saved data */
@@ -716,6 +720,7 @@ function show_setup_page4($withoutput = true)
 {
   $smarty= get_smarty();      
 
+	// ?
   if(!isset($_SESSION['ldapconf']['base'])){
     $_SESSION['ldapconf']['base']= $base;
   }
@@ -1104,7 +1109,7 @@ function create_user_for_setup($withoutput=true)
     return(true);
   } else {
 
-    if(!($create_user)) {
+    if((!isset($create_user))||(!($create_user))) {
       $smarty->assign ("content", get_template_path('setup_useradmin.tpl'));
       $smarty->assign("exists",true);
     } else {
