@@ -55,10 +55,10 @@
     <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
 		<tr>
 			<td>
-				<img alt="" src="{$search_image}" align=middle>&nbsp;{t}Display applications matching{/t}
+				<img alt="" src="{$search_image}" align=middle>&nbsp;<LABEL for="regex">{t}Display applications matching{/t}</LABEL>
 			</td>
     		<td>
-				<input type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching application names{/t}' onChange="mainform.submit()">
+				<input type='text' id="regex" name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching application names{/t}' onChange="mainform.submit()">
 			</td>
 		</tr>
 	</table>
