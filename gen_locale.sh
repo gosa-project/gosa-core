@@ -40,8 +40,7 @@ echo "Merging po files with existing ones:"
 error=0
 for f in locale/??/LC_MESSAGES; do
   echo -n "* merging $f/messages.po: "
-  msgmerge $f/messages.po locale/messages.po --output-file=$f/messages.po.new &> /dev/null
-  
+  [ -f $f/messages.po ] && msgmerge $f/messages.po locale/messages.po --output-file=$f/messages.po.new &> /dev/null || /bin/true
   if [ $? -eq 0 ]; then
     echo "done";
   else
