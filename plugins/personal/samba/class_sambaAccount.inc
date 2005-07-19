@@ -879,29 +879,29 @@ class sambaAccount extends plugin
       } else {
         $this->attrs['sambaPwdMustChange']= array();
       }
+      /* Make sure not to save zero in sambaPwdLastset */
+      if ($this->sambaPwdLastSet != "0"){
+        $this->attrs['sambaPwdLastSet']= $this->sambaPwdLastSet;
+      } else {
+        $this->attrs['sambaPwdLastSet']= array();
+      }
       /* Account expiery */
       if ($this->logon_time_set == "1"){
         $this->attrs['sambaLogonTime']= $this->sambaLogonTime;
       } else {
-        # $this->attrs['sambaLogonTime']= array();
-        # Set more useful default setting
-        $this->attrs['sambaLogonTime']= 0;
+        $this->attrs['sambaLogonTime']= array();
       }
       if ($this->logoff_time_set == "1"){
         $this->attrs['sambaLogoffTime']= $this->sambaLogoffTime;
       } else {
-        # $this->attrs['sambaLogoffTime']= array();
-        # Set more useful default setting
-        $this->attrs['sambaLogoffTime']= 2147483647;
+        $this->attrs['sambaLogoffTime']= array();
       }
       if ($this->kickoff_time_set == "1"){
         # Add one day in unixtime format to be compatible with usrmgr
         //$this->attrs['sambaKickoffTime']= $this->sambaKickoffTime + 86400; 
         $this->attrs['sambaKickoffTime']= $this->sambaKickoffTime; //hickert 
       } else {
-        # $this->attrs['sambaKickoffTime']= array();
-        # Set more useful default setting
-        $this->attrs['sambaKickoffTime']= 2147483647;
+        $this->attrs['sambaKickoffTime']= array();
       }
     } else {
     /* Not samba3 */
@@ -918,22 +918,28 @@ class sambaAccount extends plugin
       } else {
         $this->attrs['pwdMustChange']= 2147483647;
       }
+      /* Make sure not to save zero in pwdLastset */
+      if ($this->pwdLastSet != "0"){
+        $this->attrs['pwdLastSet']= $this->pwdLastSet;
+      } else {
+        $this->attrs['pwdLastSet']= array();
+      }
       /* Account expiery */
       if ($this->logon_time_set == "1"){
         $this->attrs['logonTime']= $this->logonTime;
       } else {
-        $this->attrs['logonTime']= 0;
+        $this->attrs['logonTime']= array();
       }
       if ($this->logoff_time_set == "1"){
         $this->attrs['logoffTime']= $this->logoffTime;
       } else {
-        $this->attrs['logoffTime']= 2147483647;
+        $this->attrs['logoffTime']= array();
       }
       if ($this->kickoff_time_set == "1"){
         # Add one day in unixtime format to be compatible with usrmgr
         $this->attrs['kickoffTime']= $this->kickoffTime + 86400;
       } else {
-        $this->attrs['kickoffTime']= 2147483647;
+        $this->attrs['kickoffTime']= array();
       }
     }
 
