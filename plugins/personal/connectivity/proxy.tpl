@@ -32,7 +32,7 @@
 		changeSubselectState('filterT', 'stopHour');
 		changeSubselectState('filterT', 'stopMinute');
 	">
-    {t}Limit proxy access to working time{/t}
+    <LABEL for="startHour">{t}Limit proxy access to working time{/t}</LABEL>
     <br>
     <table summary="" style="margin-left:20px;">
      <tr>
@@ -66,7 +66,7 @@
 		changeSubselectState('filterB', 'quota_unit');
 		changeSubselectState('filterB', 'gosaProxyQuotaPeriod');
 	">
-    {t}Restrict proxy usage by quota{/t}
+    <LABEL for="quota_size">{t}Restrict proxy usage by quota{/t}</LABEL>
     <br>
     <table summary="" style="margin-left:20px;">
      <tr>
@@ -76,7 +76,8 @@
        <select size="1" name="quota_unit" id="quota_unit" {$Bstate} {$gosaProxyQuotaACL}>
 	{html_options options=$quota_unit selected=$quota_u}
        </select>
-       {t}per{/t}
+	   
+       <LABEL for="gosaProxyQuotaPeriod">{t}per{/t}</LABEL>
        <select size="1" name="gosaProxyQuotaPeriod" id="gosaProxyQuotaPeriod" {$Bstate} {$gosaProxyQuotaACL}>
         {html_options options=$quota_time selected=$gosaProxyQuotaPeriod}
        </select>
