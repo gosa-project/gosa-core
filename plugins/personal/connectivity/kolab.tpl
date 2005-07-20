@@ -1,14 +1,14 @@
 <h2>{t}Kolab account{/t}</h2>
 
 {if $is_account ne 'true'}
-{t}The kolab account is currently disabled. It's features can be adjusted if you add a mail account.{/t}
+	{t}The kolab account is currently disabled. It's features can be adjusted if you add a mail account.{/t}
 {else}
 
 <table summary="" style="width:100%">
  <tr>
   <td style="width:50%; vertical-align:top;">
-   <b>{t}Delegations{/t}</b><br>
-   <select style="width:350px; height:100px;" name="delegate_list[]" size=15 multiple>
+   <b><LABEL for="delegate_list">{t}Delegations{/t}"</LABEL></b><br>
+   <select id="delegate_list" style="width:350px; height:100px;" name="delegate_list[]" size=15 multiple>
     {html_options values=$kolabDelegate output=$kolabDelegate}
 	<option disabled>&nbsp;</option>
    </select>
@@ -32,12 +32,12 @@
  <b>{t}Free Busy information{/t}</b><br>
  <table summary="">
   <tr>
-   <td>{t}URL{/t}</td>
-   <td><input name="calFBURL" size=30 maxlength=60 {$calFBURLACL} value="{$calFBURL}"></td>
+   <td><LABEL for="calFBURL">{t}URL{/t}</LABEL></td>
+   <td><input id="calFBURL" name="calFBURL" size=30 maxlength=60 {$calFBURLACL} value="{$calFBURL}"></td>
   </tr>
   <tr>
-   <td>{t}Future{/t}</td>
-   <td><input name="kolabFreeBusyFuture" size=5 maxlength=6 {$kolabFreeBusyFutureACL} value="{$kolabFreeBusyFuture}"> {t}days{/t}</td>
+  <td><LABEL for="kolabFreeBusyFuture">{t}Future{/t}</LABEL></td>
+   <td><input id="kolabFreeBusyFuture" name="kolabFreeBusyFuture" size=5 maxlength=6 {$kolabFreeBusyFutureACL} value="{$kolabFreeBusyFuture}"> {t}days{/t}</td>
   </tr>
  </table>
 
