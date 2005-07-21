@@ -3,12 +3,12 @@
   <td style="vertical-align:top;">
    <div class="contentboxh" style="height:20px;">
     <p class="contentboxh" style="font-size:12px">
-     <b>{t}Select addresses to add{/t} {$hint}</b><br>
+     <b><LABEL for="local_list">{t}Select addresses to add{/t} {$hint}</LABEL ></b><br>
     </p>
    </div>
    <div class="contentboxb">
     <p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-     <select style="width:500px; margin-top:4px; height:450px;" name="local_list[]" size="15" multiple>
+     <select style="width:500px; margin-top:4px; height:450px;" id="local_list" name="local_list[]" size="15" multiple>
 		{html_options options=$mailusers}
 		<option disabled>&nbsp;</option>
      </select>
@@ -17,8 +17,10 @@
   </td>
   <td style="vertical-align:top;">
    <div class="contentboxh" style="height:20px;">
-    <p class="contentboxh" style="font-size:12px"><img src="{$launchimage}" align="right" alt="[F]"><b>{
-t}Filters{/t}</b></p>
+    <p class="contentboxh" style="font-size:12px">
+		<img src="{$launchimage}" align="right" alt="[F]">
+			<b>{t}Filters{/t}</b>
+	</p>
    </div>
    <div class="contentboxb">
      <table summary="" style="width:100%;border-top:1px solid #B0B0B0; background-color:#F8F8F8">
