@@ -3,22 +3,22 @@
   <td style="vertical-align:top; width:50%;">
 	<table summary="">
 	 <tr>
-	  <td>{t}Printer name{/t}{$must}</td>
-	  <td><input name="cn" size=20 maxlength=60 value="{$cn}"></td>
+	  <td><LABEL for="cn" >{t}Printer name{/t}</LABEL>{$must}</td>
+	  <td><input name="cn" id="cn" size=20 maxlength=60 value="{$cn}"></td>
 	 </tr>
 	 <tr>
-	  <td>{t}Description{/t}</td>
-	  <td><input name="description" size=25 maxlength=80 value="{$description}"></td>
+	  <td><LABEL for="description">{t}Description{/t}</LABEL></td>
+	  <td><input id="description" name="description" size=25 maxlength=80 value="{$description}"></td>
 	 </tr>
 	 <tr>
-	  <td>{t}Location{/t}</td>
-	  <td><input name="l" size=25 maxlength=80 value="{$l}"></td>
+	  <td><LABEL for="l">{t}Location{/t}</LABEL></td>
+	  <td><input id="l" name="l" size=25 maxlength=80 value="{$l}"></td>
 	 </tr>
 	 <tr>
           <td colspan=2>&nbsp;</td>
 	 </tr>
  	 <tr>
-	  <td>{t}Base{/t}{$must}</td>
+	  <td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
 	  <td>
 	   <select size="1" name="base" title="{t}Choose subtree to place terminal in{/t}">
 	    {html_options options=$bases selected=$base_select}
@@ -29,12 +29,12 @@
   <td style="vertical-align:top">
 	<table summary="">
 	 <tr>
-	  <td>{t}Printer URL{/t}</td>
-	  <td><input name="labeledURI" size=25 maxlength=80 value="{$labeledURI}"></td>
+	  <td><LABEL for="labeledURI">{t}Printer URL{/t}</LABEL></td>
+	  <td><input id="labeledURI" name="labeledURI" size=25 maxlength=80 value="{$labeledURI}"></td>
 	 </tr>
 	 <tr>
-	  <td>{t}Path to PPD{/t}</td>
-	  <td><input name="gotoPrinterPPD" size=25 maxlength=80 value="{$gotoPrinterPPD}"></td>
+	  <td><LABEL for="gotoPrinterPPD">{t}Path to PPD{/t}</LABEL></td>
+	  <td><input id="gotoPrinterPPD" name="gotoPrinterPPD" size=25 maxlength=80 value="{$gotoPrinterPPD}"></td>
 	 </tr>
 	</table>
   </td>
