@@ -5,22 +5,22 @@
 
    <table summary="">
     <tr>
-     <td>{t}LDAP server{/t}</td>
+     <td><LABEL for="gotoLdapServer">{t}LDAP server{/t}</LABEL></td>
      <td>
-      <select name="gotoLdapServer" title="{t}Choose LDAP server to use for accounts and terminal management{/t}" {$gotoLdapServerACL}>
+      <select name="gotoLdapServer" id="gotoLdapServer" title="{t}Choose LDAP server to use for accounts and terminal management{/t}" {$gotoLdapServerACL}>
        {html_options values=$ldapservers output=$ldapservers selected=$gotoLdapServer_select}
 	   <option disabled>&nbsp;</option>
       </select>
      </td>
     </tr>
     <tr>
-     <td>{t}Boot kernel{/t}</td>
-     <td><input name="gotoBootKernel" size=20 maxlength=60 {$gotoBootKernelACL}
+     <td><LABEL for="gotoBootKernel">{t}Boot kernel{/t}</LABEL></td>
+     <td><input id="gotoBootKernel" name="gotoBootKernel" size=20 maxlength=60 {$gotoBootKernelACL}
                 value="{$gotoBootKernel}" title="{t}Enter the filename of the kernel to use{/t}"></td>
     </tr>
     <tr>
-     <td>{t}Custom options{/t}</td>
-     <td><input name="customParameters" size=25 maxlength=500 {$gotoKernelParametersACL}
+     <td><LABEL for="customParameters">{t}Custom options{/t}</LABEL></td>
+     <td><input name="customParameters" id="customParameters"  size=25 maxlength=500 {$gotoKernelParametersACL}
                 value="{$customParameters}" title="{t}Enter any parameters that should be passed to the kernel as append line during bootup{/t}"></td>
     </tr>
    </table>

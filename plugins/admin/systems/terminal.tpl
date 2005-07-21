@@ -8,16 +8,16 @@
      {if $cn eq 'default'}
      <td colspan=2>{t}Terminal template{/t}</td>
      {else}
-     <td>{t}Terminal name{/t}{$must}</td>
+     <td><LABEL for="cn">{t}Terminal name{/t}</LABEL>{$must}</td>
      <td>
-      <input name="cn" size=18 maxlength=60 value="{$cn}">
+      <input name="cn" id="cn" size=18 maxlength=60 value="{$cn}">
      </td>
      {/if}
     </tr>
     <tr>
-     <td>{t}Base{/t}{$must}</td>
+     <td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
      <td>
-      <select size="1" name="base" title="{t}Choose subtree to place terminal in{/t}">
+      <select size="1" id="base" name="base" title="{t}Choose subtree to place terminal in{/t}">
        {html_options options=$bases selected=$base_select}
       </select>
     </tr>
@@ -33,9 +33,9 @@
 
    <table summary="">
     <tr>
-     <td>{t}Mode{/t}</td>
+     <td><LABEL for="gotoMode">{t}Mode{/t}</LABEL></td>
      <td>
-      <select name="gotoMode" title="{t}Select terminal mode{/t}" {$gotoModeACL}>
+      <select id="gotoMode" name="gotoMode" title="{t}Select terminal mode{/t}" {$gotoModeACL}>
        {html_options options=$modes selected=$gotoMode_select}
       </select>
      </td>
@@ -49,17 +49,17 @@
    <table summary="">
     <tr><td colspan=2><div style="height:15px;"></div></td></tr>
     <tr>
-     <td>{t}Root server{/t}</td>
+     <td><LABEL for="gotoTerminalPath">{t}Root server{/t}<LABEL></td>
      <td>
-      <select name="gotoTerminalPath" title="{t}Select NFS root filesystem to use{/t}" {$gotoTerminalPathACL}>
+      <select name="gotoTerminalPath" id="gotoTerminalPath" title="{t}Select NFS root filesystem to use{/t}" {$gotoTerminalPathACL}>
        {html_options values=$nfsservers output=$nfsservers selected=$gotoTerminalPath_select}
       </select>
      </td>
     </tr>
     <tr>
-     <td>{t}Swap server{/t}</td>
+     <td><LABEL for="gotoSwapServer">{t}Swap server{/t}</LABEL></td>
      <td>
-      <select name="gotoSwapServer" title="{t}Choose NFS filesystem to place swap files on{/t}" {$gotoSwapServerACL}>
+      <select name="gotoSwapServer" id="gotoSwapServer" title="{t}Choose NFS filesystem to place swap files on{/t}" {$gotoSwapServerACL}>
        {html_options values=$nfsservers output=$nfsservers selected=$gotoSwapServer_select}
       </select>
      </td>
@@ -71,17 +71,17 @@
    <table summary="">
     <tr><td colspan=2><div style="height:15px;"></div></td></tr>
     <tr>
-     <td>{t}Syslog server{/t}</td>
+     <td><LABEL for="gotoSyslogServer">{t}Syslog server{/t}</LABEL></td>
      <td>
-      <select name="gotoSyslogServer" title="{t}Choose server to use for logging{/t}" {$gotoSyslogServerACL}>
+      <select name="gotoSyslogServer" id="gotoSyslogServer" title="{t}Choose server to use for logging{/t}" {$gotoSyslogServerACL}>
        {html_options values=$syslogservers output=$syslogservers selected=$gotoSyslogServer_select}
       </select>
      </td>
     </tr>
     <tr>
-     <td>{t}NTP server{/t}</td>
+     <td><LABEL for="gotoNtpServer">{t}NTP server{/t}</LABEL></td>
      <td>
-      <select name="gotoNtpServer" title="{t}Choose server to use for synchronizing time{/t}" {$gotoNtpServerACL}>
+      <select name="gotoNtpServer" id="gotoNtpServer" title="{t}Choose server to use for synchronizing time{/t}" {$gotoNtpServerACL}>
        {html_options values=$ntpservers output=$ntpservers selected=$gotoNtpServer_select}
       </select>
      </td>

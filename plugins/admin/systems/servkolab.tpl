@@ -8,66 +8,66 @@
 	</tr>
 	<tr>
 		<td>
-			<input name="cyrus_pop3" value="1" type="checkbox" {$cyrus_pop3Check} {$cyrus_pop3ACL}>
+			<input id="cyrus_pop3" name="cyrus_pop3" value="1" type="checkbox" {$cyrus_pop3Check} {$cyrus_pop3ACL}>
 		</td>
 		<td>
-			{t}POP3 service{/t}
+			<LABEL for="cyrus_pop3">{t}POP3 service{/t}</LABEL>
 		</td>
 	</tr>
 	<tr>
         <td>
-            <input name="cyrus_pop3s" value="1" type="checkbox" {$cyrus_pop3sCheck} {$cyrus_pop3sACL}>
+            <input id="cyrus_pop3s" name="cyrus_pop3s" value="1" type="checkbox" {$cyrus_pop3sCheck} {$cyrus_pop3sACL}>
         </td>
 		<td>
-			{t}POP3/SSL service{/t}
+			<LABEL for="cyrus_pop3s">{t}POP3/SSL service{/t}</LABEL>
         </td>
     </tr>
     <tr>
         <td>
-            <input name="cyrus_imap" value="1" type="checkbox" {$cyrus_imapCheck} {$cyrus_imapACL}>
+            <input id="cyrus_imap" name="cyrus_imap" value="1" type="checkbox" {$cyrus_imapCheck} {$cyrus_imapACL}>
         </td>
         <td>
-			{t}IMAP service{/t}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <input name="cyrus_imaps" value="1" type="checkbox" {$cyrus_imapsCheck} {$cyrus_imapsACL}>
-        </td>
-        <td>
-			{t}IMAP/SSL service{/t}
+			<LABEL for="cyrus_imap">{t}IMAP service{/t}</LABEL>
         </td>
     </tr>
     <tr>
         <td>
-            <input name="cyrus_sieve" value="1" type="checkbox" {$cyrus_sieveCheck} {$cyrus_sieveACL}>
+            <input id="cyrus_imaps" name="cyrus_imaps" value="1" type="checkbox" {$cyrus_imapsCheck} {$cyrus_imapsACL}>
         </td>
         <td>
-			{t}Sieve service{/t}
+			<LABEL for="cyrus_imaps">{t}IMAP/SSL service{/t}</LABEL>
         </td>
     </tr>
     <tr>
         <td>
-            <input name="proftpd_ftp" value="1" type="checkbox" {$proftpd_ftpCheck} {$proftpd_ftpACL}>
+            <input id="cyrus_sieve" name="cyrus_sieve" value="1" type="checkbox" {$cyrus_sieveCheck} {$cyrus_sieveACL}>
+        </td>
+        <td>
+			<LABEL for="cyrus_sieve">{t}Sieve service{/t}</LABEL>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input id="proftpd_ftp" name="proftpd_ftp" value="1" type="checkbox" {$proftpd_ftpCheck} {$proftpd_ftpACL}>
         </td>	
         <td>
-			{t}FTP FreeBusy service (legacy, not interoperable with Kolab2 FreeBusy){/t}
+			<LABEL for="proftpd_ftp">{t}FTP FreeBusy service (legacy, not interoperable with Kolab2 FreeBusy){/t}</LABEL>
         </td>
     </tr>
     <tr>
         <td>
-            <input name="apache_http" value="1" type="checkbox" {$apache_httpCheck} {$apache_httpACL}>
+            <input id="apache_http" name="apache_http" value="1" type="checkbox" {$apache_httpCheck} {$apache_httpACL}>
         </td>
         <td>
-			{t}HTTP FreeBusy service (legacy){/t}
+			<LABEL for="apache_http">{t}HTTP FreeBusy service (legacy){/t}</LABEL>
         </td>
     </tr>
     <tr>
         <td>
-            <input name="postfix_enable_virus_scan" value="1" type="checkbox" {$postfix_enable_virus_scanCheck} {$postfix_enable_virus_scanACL}>
+			<input id="postfix_enable_virus_scan" name="postfix_enable_virus_scan" value="1" type="checkbox" {$postfix_enable_virus_scanCheck} {$postfix_enable_virus_scanACL}>
         </td>
         <td>
-			{t}Amavis email scanning (virus/spam){/t}
+			<LABEL for="postfix_enable_virus_scan">{t}Amavis email scanning (virus/spam){/t}</LABEL>
 		</td>
 	</tr>
    </table>
@@ -119,8 +119,8 @@
     </tr>
     <tr>
 	  <td>
-	    {t}Hosts/networks allowed to relay{/t}<br>
-        <input name="postfix_mynetworks" size="60" maxlength="220" value="{$postfix_mynetworks}" {$postfix_mynetworksACL} type="text">
+	    <LABEL for="postfix_mynetworks">{t}Hosts/networks allowed to relay{/t}</LABEL><br>
+        <input id="postfix_mynetworks" name="postfix_mynetworks" size="60" maxlength="220" value="{$postfix_mynetworks}" {$postfix_mynetworksACL} type="text">
 		<br>
 		( {t}Enter multiple values, seperated with{/t} ; )
 	</td>
@@ -140,14 +140,14 @@
     </tr>
     <tr>
         <td>
-            <input name="RelayMxSupport" value="1" type="checkbox" {$RelayMxSupportCheck} {$postfix_relayhostACL}>
-			{t}Enable MX lookup for relayhost{/t}
+            <input id="RelayMxSupport" name="RelayMxSupport" value="1" type="checkbox" {$RelayMxSupportCheck} {$postfix_relayhostACL}>
+			<LABEL for="RelayMxSupport">{t}Enable MX lookup for relayhost{/t}</LABEL>
 		</td>
      </tr>
 	<tr>	
 		<td>
-		    {t}Host used to relay mails{/t}&nbsp;
-			<input name="postfix_relayhost" size="35" maxlength="120" value="{$postfix_relayhost}" {$postfix_relayhostACL} type="text">
+		    <LABEL for="postfix_relayhost">{t}Host used to relay mails{/t}</LABEL>&nbsp;
+			<input id="postfix_relayhost" name="postfix_relayhost" size="35" maxlength="120" value="{$postfix_relayhost}" {$postfix_relayhostACL} type="text">
 		</td>
 	</tr>
    </table>
@@ -165,8 +165,8 @@
     </tr>
     <tr>
         <td>
-            <input name="postfix_allow_unauthenticated" value="1" type="checkbox" {$postfix_allow_unauthenticatedCheck} {$postfix_allow_unauthenticatedACL}>
-        	{t}Accept mail from other domains over non-authenticated SMTP{/t}
+            <input id="postfix_allow_unauthenticated" name="postfix_allow_unauthenticated" value="1" type="checkbox" {$postfix_allow_unauthenticatedCheck} {$postfix_allow_unauthenticatedACL}>
+        	<LABEL for="postfix_allow_unauthenticated">{t}Accept mail from other domains over non-authenticated SMTP{/t}</LABEL>
 		</td>
      </tr>
    </table>
