@@ -22,17 +22,17 @@
    <table summary=""> 
     <tr>
      <td><label for="sn">{t}Name{/t}{$must}</label></td>
-     <td><input name="sn" size=25 maxlength=60 {$snACL} value="{$sn}"></td>
+     <td><input id="sn" name="sn" size=25 maxlength=60 {$snACL} value="{$sn}"></td>
     </tr>
 
     {if $is_template ne "true"}
     <tr>
      <td><label for="givenName">{t}Given name{/t}{$must}</label></td>
-     <td><input name="givenName" size=25 maxlength=60 {$givenNameACL} value="{$givenName}"></td>
+     <td><input id="givenName" name="givenName" size=25 maxlength=60 {$givenNameACL} value="{$givenName}"></td>
     </tr>
     <tr>
      <td><label for="uid">{t}Login{/t}{$must}</label></td>
-     <td><input name="uid" size=25 maxlength=60 {$uidACL} value="{$uid}"></td>
+     <td><input id="uid" name="uid" size=25 maxlength=60 {$uidACL} value="{$uid}"></td>
     </tr>
     {/if}
       
@@ -43,13 +43,13 @@
      </td>
      <td>
       <div style="height:10px;"></div>
-      <input name="personalTitle" size=25 maxlength=60 {$personalTitleACL} value="{$personalTitle}">
+      <input id="personalTitle" name="personalTitle" size=25 maxlength=60 {$personalTitleACL} value="{$personalTitle}">
      </td>
     </tr>
     <tr>
      <td><label for="academicTitle">{t}Academic title{/t}</label></td>
      <td>
-      <input name="academicTitle" size=25 maxlength=60 {$academicTitleACL} value="{$academicTitle}">
+      <input id="academicTitle" name="academicTitle" size=25 maxlength=60 {$academicTitleACL} value="{$academicTitle}">
      </td>
     </tr>
     <tr>
@@ -60,7 +60,7 @@
      <td>
       <div style="height:10px;"></div>
       {if $use_dob eq 1}
-      <select name=day onChange="createResult(this.form,this.form.dob);" {$dobACL}>
+      <select id="day" name=day onChange="createResult(this.form,this.form.dob);" {$dobACL}>
        {html_options values=$days output=$days selected=$day}
       </select>
       <select name=month onChange="populate(this.form,this.form.dob);" {$dobACL}>
@@ -81,7 +81,7 @@
       <label for="gender">{t}Sex{/t}</label>
      </td>
      <td>
-      <select size="1" name="gender" {$genderACL}>
+      <select size="1" id="gender" name="gender" {$genderACL}>
        {html_options options=$gender_list selected=$gender}
       </select>
      </td>
@@ -93,7 +93,7 @@
      </td>
      <td>
       <div style="height:10px;"></div>
-      <select size="1" name="base" {$selectmode} title="{t}Choose subtree to place user in{/t}">
+      <select id="base" size="1" name="base" {$selectmode} title="{t}Choose subtree to place user in{/t}">
        {html_options options=$bases selected=$base_select}
       </select>
      </td>
@@ -109,15 +109,15 @@
    <table summary=""> 
     <tr>
      <td style="vertical-align:top;"><label for="homePostalAddress">{t}Address{/t}</label></td>
-     <td><textarea name="homePostalAddress" rows=3 cols=22 {$homePostalAddressACL}>{$homePostalAddress}</textarea></td>
+     <td><textarea id="homePostalAddress" name="homePostalAddress" rows=3 cols=22 {$homePostalAddressACL}>{$homePostalAddress}</textarea></td>
     </tr>
     <tr>
      <td><label for="homePhone">{t}Private phone{/t}</label></td>
-     <td><input name="homePhone" size=25 maxlength=60 {$homePhoneACL} value="{$homePhone}"></td>
+     <td><input id="homePhone" name="homePhone" size=25 maxlength=60 {$homePhoneACL} value="{$homePhone}"></td>
     </tr>
     <tr>
      <td><label for="labeledURI">{t}Homepage{/t}</label></td>
-     <td><input name="labeledURI" size=25 maxlength=60 {$labeledURIACL} value="{$labeledURI}"></td>
+     <td><input id="labeledURI" name="labeledURI" size=25 maxlength=60 {$labeledURIACL} value="{$labeledURI}"></td>
     </tr>
     <tr>
      <td colspan=2>
@@ -125,9 +125,9 @@
      </td>
     </tr>
     <tr>
-     <td><label for="passwordStorage">{t}Password storage{/t}</label></td>
+     <td><label for="pw_storage">{t}Password storage{/t}</label></td>
      <td>
-      <select size="1" name="pw_storage" {$passwordStorageACL}>
+      <select size="1" id="pw_storage" name="pw_storage" {$passwordStorageACL}>
        {html_options values=$pwmode output=$pwmode selected=$pwmode_select}
       </select>
      </td>
@@ -137,12 +137,12 @@
     <tr>
      <td><label for="edit_cert">{t}Certificates{/t}</label></td>
      <td>
-      <input type=submit name="edit_cert" {$certificatesACL} value="{t}Edit certificates{/t}...">
+      <input id="edit_cert" type=submit name="edit_cert" {$certificatesACL} value="{t}Edit certificates{/t}...">
      </td>
     </tr>
     <tr>
      <td><label for="edit_krb">{t}Kerberos{/t}</label></td>
-     <td><input type=submit name="edit_krb" disabled value="{t}Edit properties{/t}..."></td>
+     <td><input id="edit_krb" type=submit name="edit_krb" disabled value="{t}Edit properties{/t}..."></td>
     </tr>
     {/if}
 
