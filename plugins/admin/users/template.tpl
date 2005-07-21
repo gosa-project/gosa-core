@@ -8,20 +8,20 @@
 
 <table summary="" style="vertical-align:top; text-align:left;" cellpadding=4 border=0>
   <tr>
-    <td><b>{t}Template{/t}</b></td>
+    <td><b><LABEL for="template">{t}Template{/t}</LABEL></b></td>
     <td>
-      <select size="1" name="template">
+      <select size="1" name="template" id="template">
        {html_options options=$templates selected=$template}
       </select>
     </td>
   </tr>
   <tr>
-    <td><b>{t}Name{/t}</b></td>
-    <td><input name="sn" size="30" maxlength="40" value="{$sn}"></td>
+    <td><b><LABEL for="sn">{t}Name{/t}</LABEL></b></td>
+    <td><input name="sn" id="sn" size="30" maxlength="40" value="{$sn}"></td>
   </tr>
   <tr>
-    <td><b>{t}Given name{/t}</b></td>
-    <td><input name="givenName" size="30" maxlength="40" value="{$givenName}"></td>
+    <td><b><LABEL for="givenName">{t}Given name{/t}</LABEL></b></td>
+    <td><input name="givenName" id="givenName" size="30" maxlength="40" value="{$givenName}"></td>
   </tr>
   {if $got_uid eq "true"}
   <tr>

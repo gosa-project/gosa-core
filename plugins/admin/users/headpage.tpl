@@ -3,12 +3,12 @@
   <td style="vertical-align:top;">
   <div class="contentboxh">
     <p class="contentboxh">
-     {t}List of users{/t} {$hint}
+     <LABEL for="userlist">{t}List of users{/t}</LABEL> {$hint}
     </p>
   </div>
   <div class="contentboxb">
     <p class="contentboxb">
-      <select style="width:500px; height:450px;" name="userlist" size=15 ondblclick="this.form.edit_helper.value='1'; this.form.submit()">
+      <select style="width:500px; height:450px;" id="userlist" name="userlist" size=15 ondblclick="this.form.edit_helper.value='1'; this.form.submit()">
 			{html_options options=$userlist}
 			<option disabled>&nbsp;</option>
       </select>
