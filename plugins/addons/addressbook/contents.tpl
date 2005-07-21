@@ -75,7 +75,7 @@
 	<tr>
 		<td>
 			<img alt="" src="{$tree_image}" align=middle>
-			&nbsp;{t}Display results for department{/t}
+			&nbsp;<LABEL for="search_base">{t}Display results for department{/t}</LABEL>
 		</td>
     	<td>
 			<select name="search_base" size="1" onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
@@ -89,10 +89,10 @@
 <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
 	<tr>
 		<td width="50%"><img alt="" src="{$search_image}" align=middle>
-			&nbsp;{t}Search for{/t}
+			&nbsp;<LABEL for="search_for">{t}Search for{/t}</LABEL>
 		</td>
 	    <td>
-			<input type='text' name='search_for' maxlength='20' value='{$search_for}' title='{t}Search string{/t}' onChange="mainform.submit()">
+			<input id="search_for" type='text' name='search_for' maxlength='20' value='{$search_for}' title='{t}Search string{/t}' onChange="mainform.submit()">
 		</td>
 	</tr>
 </table>
@@ -100,10 +100,10 @@
 <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
 	<tr>
 		<td width="50%">
-			<img alt="" src="{$search_image}" align=middle>&nbsp;{t}Match object{/t}
+			<img alt="" src="{$search_image}" align=middle>&nbsp;<LABEL for="object_type">{t}Match object{/t}</LABEL>
 		</td>
 	    <td>
-	      	<select name="object_type" size="1" onChange="mainform.submit()" title="{t}Choose the object that will be searched in{/t}">
+	      	<select id="object_type" name="object_type" size="1" onChange="mainform.submit()" title="{t}Choose the object that will be searched in{/t}">
     	   		{html_options options=$objlist selected=$object_type}
 				<option disabled>&nbsp;</option>
 	      	</select>
