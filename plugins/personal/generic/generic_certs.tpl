@@ -8,11 +8,11 @@
       {t}Standard certificate{/t}
    </td>
    <td style="vertical-align:top">
-	 {$userCertificateinfo}
+	 <LABEL for="userCertificate_file">{$userCertificateinfo}</LABEL>
 	 </td>
 	 <td style="vertical-align:top;text-align:right">
 	 {if $userCertificate_state ne "true"}
-     <input name="userCertificate_file" type="file" size="20" maxlength="255" accept="text/*.*">
+     <input id="userCertificate_file" name="userCertificate_file" type="file" size="20" maxlength="255" accept="text/*.*">
      {else}
      <input type=submit name="remove_userCertificate" value="{t}Remove{/t}">
 	 {/if}
@@ -28,11 +28,11 @@
       {t}S/MIME certificate{/t} 
    </td>
    <td style="vertical-align:top">
-     {$userSMIMECertificateinfo}
+     <LABEL for="userSMIMECertificate_file">{$userSMIMECertificateinfo}</LABEL>
    </td>
    <td style="vertical-align:top;text-align:right">
 	 {if $userSMIMECertificate_state ne "true"}
-     <input name="userSMIMECertificate_file" type="file" size="20" maxlength="255" accept="text/*.*">
+     <input id="userSMIMECertificate_file" name="userSMIMECertificate_file" type="file" size="20" maxlength="255" accept="text/*.*">
      {else}
      <input type=submit name="remove_userSMIMECertificate" value="{t}Remove{/t}">
 	 {/if}
@@ -48,11 +48,11 @@
       {t}PKCS12 certificate{/t} 
    </td>
    <td style="vertical-align:top">
-     {$userPKCS12info}
+     <LABEL for="userPKCS12_file">{$userPKCS12info}</LABEL>
    </td>
    <td style="vertical-align:top;text-align:right">
 	 {if $userPKCS12_state ne "true"}
-     <input name="userPKCS12_file" type="file" size="20" maxlength="255" accept="text/*.*">
+     <input id="userPKCS12_file" name="userPKCS12_file" type="file" size="20" maxlength="255" accept="text/*.*">
 	 {else}
      <input type=submit name="remove_userPKCS12" value="{t}Remove{/t}">
 	 {/if}
@@ -62,10 +62,10 @@
  {if $governmentmode eq "true"}
  <tr>
    <td>
-     {t}Certificate serial number{/t}
+     <LABEL for="certificateSerialNumber">{t}Certificate serial number{/t}</LABEL>
    </td>
    <td>
-     <input name="certificateSerialNumber" size=10 maxlength=20 {$certificateSerialNumberACL}
+     <input id="certificateSerialNumber" name="certificateSerialNumber" size=10 maxlength=20 {$certificateSerialNumberACL}
             value="{$certificateSerialNumber}">
    </td>
  </tr>
