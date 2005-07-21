@@ -7,11 +7,11 @@
 <table summary="">
 	<tr>
 		<td>
-			{t}Select CSV file to import{/t}
+			<LABEL for="userfile">{t}Select CSV file to import{/t}<LABEL>
 		</td>
 		<td>
 		<input type="hidden" name="MAX_FILE_SIZE" value="2097152">
-		<input name="userfile" type="file" value="{t}Browse{/t}">
+		<input id="userfile" name="userfile" type="file" value="{t}Browse{/t}">
 		</td>
 	</tr>
 	<tr>

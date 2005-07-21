@@ -3,12 +3,12 @@
   <td style="vertical-align:top;">
    <div class="contentboxh" style="height:20px;">
     <p class="contentboxh" style="font-size:12px">
-     <b>{t}Select workstations to add{/t} {$hint}</b><br>
+     <b><LABEL for="wslist">{t}Select workstations to add{/t}</LABEL> {$hint}</b><br>
     </p>
    </div>
    <div class="contentboxb">
     <p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-     <select style="width:500px; margin-top:4px; height:450px;" name="wslist[]" size="15" multiple>
+     <select id="wslist" style="width:500px; margin-top:4px; height:450px;" name="wslist[]" size="15" multiple>
 	{html_options values=$wslist output=$wslist}
      </select>
     </p>
@@ -16,8 +16,8 @@
   </td>
   <td style="vertical-align:top;">
    <div class="contentboxh" style="height:20px;">
-    <p class="contentboxh" style="font-size:12px"><img src="{$launchimage}" align="right" alt="[F]"><b>{
-t}Filters{/t}</b></p>
+    <p class="contentboxh" style="font-size:12px"><img src="{$launchimage}" align="right" alt="[F]">
+	<b>{t}Filters{/t}</b></p>
    </div>
    <div class="contentboxb">
      <table summary="" style="width:100%;border-top:1px solid #B0B0B0;background-color:#F8F8F8">
