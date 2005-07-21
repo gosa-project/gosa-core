@@ -4,23 +4,23 @@
    <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
    <table summary="">
     <tr>
-     <td>{t}Home directory{/t}{$must}</td>
+     <td><LABEL for="homeDirectory">{t}Home directory{/t}</LABEL>{$must}</td>
      <td>
-      <input name="homeDirectory" size=25 maxlength=120 {$homeDirectoryACL} value="{$homeDirectory}">
+      <input id="homeDirectory" name="homeDirectory" size=25 maxlength=120 {$homeDirectoryACL} value="{$homeDirectory}">
      </td>
     </tr>
     <tr>
-     <td>{t}Shell{/t}</td>
+     <td><LABEL for="loginShell">{t}Shell{/t}</LABEL></td>
      <td>
-      <select size="1" name="loginShell" {$loginShellACL}>
+      <select id="loginShell" size="1" name="loginShell" {$loginShellACL}>
        {html_options values=$shells output=$shells selected=$loginShell}
       </select> 
      </td>
     </tr>
     <tr>
-     <td>{t}Primary group{/t}</td>
+     <td><LABEL for="">{t}Primary group{/t}</LABEL></td>
      <td>
-      <select size="1" name="primaryGroup" {$gidNumberACL}>
+      <select id="primaryGroup" size="1" name="primaryGroup" {$gidNumberACL}>
        {html_options options=$secondaryGroups selected=$primaryGroup}
       </select> 
      </td>
@@ -33,26 +33,26 @@
    <table summary="">
     <tr>
      <td>
-      <input type=checkbox name="force_ids" value="1" {$force_ids} {$force_idsACL} onclick="changeState('uidNumber'); changeState('gidNumber');">
+      <input id="force_ids" type=checkbox name="force_ids" value="1" {$force_ids} {$force_idsACL} onclick="changeState('uidNumber'); changeState('gidNumber');">
 					</td>
 					<td>
-      {t}Force UID/GID{/t}
+      <LABEL for="force_ids">{t}Force UID/GID{/t}</LABEL>
      </td>
 					<td style="width:20px;"></td>
 					<td>
-						{t}UID{/t}
+						<LABEL for="uidNumber">{t}UID{/t}</LABEL>
 					</td>
 					<td>
-						<input name="uidNumber" id="uidNumber" size=5 maxlength=5 {$forceMode} {$uidNumberACL} value="{$uidNumber}">
+						<input id="uidNumber" name="uidNumber" id="uidNumber" size=5 maxlength=5 {$forceMode} {$uidNumberACL} value="{$uidNumber}">
 					</td>
 				</tr>
 				<tr>
 					<td colspan="3"></td>
 					<td>
-						{t}GID{/t}
+						<LABEL for="gidNumber">{t}GID{/t}</LABEL>
 					</td>
      <td>
-						<input name="gidNumber" id="gidNumber" size=5 maxlength=5 {$forceMode} {$gidNumberACL} value="{$gidNumber}">
+						<input id="gidNumber" name="gidNumber" id="gidNumber" size=5 maxlength=5 {$forceMode} {$gidNumberACL} value="{$gidNumber}">
 					</td>
 				</tr>
    </table>
@@ -98,18 +98,18 @@
    <h2><img alt="" align="middle" src="images/display.png"> {t}Environment{/t}</h2>
    <table summary="">
     <tr>
-     <td>{t}Default printer{/t}</td>
+     <td><LABEL for="gosaDefaultPrinter">{t}Default printer{/t}</LABEL></td>
      <td>
-      <select size="1" name="gosaDefaultPrinter" {$gosaDefaultPrinterACL}>
+      <select id="gosaDefaultPrinter" size="1" name="gosaDefaultPrinter" {$gosaDefaultPrinterACL}>
        {html_options options=$printerList selected=$gosaDefaultPrinter}
 		<option disabled value="">&nbsp;</option>
       </select> 
      </td>
     </tr>
     <tr>
-     <td>{t}Default language{/t}</td>
+     <td><LABEL for="gosaDefaultLanguage">{t}Default language{/t}</LABEL></td>
      <td>
-      <select size="1" name="gosaDefaultLanguage" {$gosaDefaultLanguageACL}>
+      <select size="1" id="gosaDefaultLanguage" name="gosaDefaultLanguage" {$gosaDefaultLanguageACL}>
        {html_options values=$languages output=$languages selected=$gosaDefaultLanguage}
       </select> 
      </td>
