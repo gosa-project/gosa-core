@@ -1,9 +1,9 @@
 <table summary="" style="width:100%;">
  <tr>
   <td style="width:45%; vertical-align:top;">
-   <b>{t}Used applications{/t}</b>
+   <b><LABEL for="used_apps">{t}Used applications{/t}</LABEL></b>
    <br>
-   <select style="width:350px; height:275;" name="used_apps[]" size=15 multiple>
+   <select id="used_apps" style="width:350px; height:275;" name="used_apps[]" size=15 multiple>
     {html_options options=$used_apps}
 	<option disabled>&nbsp;</option>
    </select>
@@ -18,9 +18,9 @@
     <input type=submit name="del_app" value="&rarr;" style="width:50px;">
   </td>
   <td style="width:45%; vertical-align:top;">
-  <b>{t}Available applications{/t}</b>
+  <b><LABEL for="apps">{t}Available applications{/t}</LABEL></b>
   <br>
-  <select style="width:350px; height:275px;" name="apps[]" size=15 multiple>
+  <select style="width:350px; height:275px;" id="apps" name="apps[]" size=15 multiple>
     {html_options options=$apps}
 	<option disabled>&nbsp;</option>
   </select>

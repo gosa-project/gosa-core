@@ -3,12 +3,12 @@
   <td style="vertical-align:top;" width="500">
    <div class="contentboxh" style="height:20px;">
     <p class="contentboxh" style="font-size:12px">
-     <b>{t}Select users to add{/t} {$hint}</b>
+     <b><LABEL for="users">{t}Select users to add{/t}</LABEL> {$hint}</b>
     </p>
    </div>
    <div class="contentboxb">
     <p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-     <select style="width:500px; height:450px; margin-top:4px;" name="users[]" size="15" multiple>
+     <select id="users" style="width:500px; height:450px; margin-top:4px;" name="users[]" size="15" multiple>
       {html_options options=$users}
      </select>
      <input type=hidden name="edit_helper">
@@ -23,10 +23,20 @@
      <table summary="" style="width:100%;border-top:1px solid #B0B0B0;background-color:#F8F8F8">
       {$alphabet}
      </table>
-    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8"><tr><td width="50%"><img alt="" src="{$tree_image}" align=middle>&nbsp;{t}Display users of department{/t}</td>
-    <td><select name="dselect" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
-      {html_options options=$deplist selected=$dselect}
-    </select></td></tr></table>
+    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
+		<tr>
+			<td width="50%">
+				<img alt="" src="{$tree_image}" align=middle>
+				&nbsp;<LABEL for="dselect">{t}Display users of department{/t}</LABEL>
+			</td>
+    		<td>
+				<select name="dselect" id="dselect" size=1 onChange="mainform.submit()" 
+					title="{t}Choose the department the search will be based on{/t}">
+      				{html_options options=$deplist selected=$dselect}
+    			</select>
+			</td>
+		</tr>
+	</table>
     <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8"><tr><td width="50%"><img alt="" src="{$search_image}" align=middle>&nbsp;{t}Display users matching{/t}</td>
     <td><input type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching user names{/t}' onChange="mainform.submit()"></td></tr></table>
    {$apply}
