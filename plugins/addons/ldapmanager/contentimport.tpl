@@ -7,12 +7,12 @@
 <table summary="">
 <tr>
     <td width="30%">
-		{t}Import LDIF File{/t}
+		<LABEL for="userfile">{t}Import LDIF File{/t}</LABEL>
     </td>
     <td>
 			<input type="hidden" name="ignore">
 			<input type="hidden" name="MAX_FILE_SIZE" value="2097152">
-			<input name="userfile" type="file" value="{t}Browse{/t}">
+			<input name="userfile" id="userfile" type="file" value="{t}Browse{/t}">
     </td>
 </tr>
 <tr>
@@ -20,8 +20,8 @@
 		&nbsp;
 	</td>
 	<td>
-        <input type="checkbox" name="overwrite" value="1">
-		{t}Modify existing attributes{/t}
+        <input type="checkbox" name="overwrite" value="1" id="overwrite">
+		<LABEL for="overwrite">{t}Modify existing attributes{/t}</LABEL>
 	</td>
 </tr>
 <tr>
@@ -29,8 +29,8 @@
 		&nbsp;
    	</td>
    	<td>
-        <input type="checkbox" name="cleanup" value="1">
-		{t}Overwrite existing entry{/t}
+        <input type="checkbox" name="cleanup" value="1" id="cleanup">
+		<LABEL for="cleanup">{t}Overwrite existing entry{/t}</LABEL>
 	</td>
 </tr>
 </table>

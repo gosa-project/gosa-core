@@ -18,7 +18,7 @@
    <!-- Name, ... -->
    <td style="vertical-align:bottom; width:100%;">
      <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
-     <input name="picture_file" type="file" size="20" maxlength="255" accept="image/*.jpg">
+     <input id="picture_file" name="picture_file" type="file" size="20" maxlength="255" accept="image/*.jpg">
      &nbsp;
      <input type=submit name="picture_remove" value="{t}Remove picture{/t}">
    </td>

@@ -55,7 +55,7 @@
 				<td width="50%">
 						<img alt="" src="{$search_image}" align=middle>&nbsp;{t}Display departments matching{/t}</td>
 			    <td>
-						<input type='text' name='regex' maxlength='20' value='{$regex}' 
+						<input id="" type='text' name='regex' maxlength='20' value='{$regex}' 
 							title='{t}Regular expression for matching department names{/t}' onChange="mainform.submit()">
 				</td>
 			</tr>

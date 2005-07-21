@@ -7,23 +7,23 @@
 
      <table summary="">
        <tr>
-         <td>{t}Fax{/t}{$must}</td>
+         <td><LABEL for="facsimileTelephoneNumber">{t}Fax{/t}</LABEL>{$must}</td>
          <td>
-           <input name="facsimileTelephoneNumber" size=20 maxlength=65 {$facsimileTelephoneNumberACL} value="{$facsimileTelephoneNumber}" title="{t}Fax number for GOfax to trigger on{/t}">
+           <input name="facsimileTelephoneNumber" id="facsimileTelephoneNumber" size=20 maxlength=65 {$facsimileTelephoneNumberACL} value="{$facsimileTelephoneNumber}" title="{t}Fax number for GOfax to trigger on{/t}">
          </td>
        </tr>
        <tr>
-         <td>{t}Language{/t}</td>
+         <td><LABEL for="goFaxLanguage">{t}Language{/t}</LABEL></td>
 	 <td>
-           <select size="1" name="goFaxLanguage" {$goFaxLanguageACL} title="{t}Specify the GOfax communication language for fax to mail gateway{/t}">
+           <select size="1" name="goFaxLanguage" id="goFaxLanguage" {$goFaxLanguageACL} title="{t}Specify the GOfax communication language for fax to mail gateway{/t}">
 	    {html_options values=$languages output=$languages selected=$goFaxLanguage}
            </select>
          </td>
        </tr>
        <tr>
-         <td>{t}Delivery format{/t}</td>
+         <td><LABEL for="goFaxFormat">{t}Delivery format{/t}</LABEL></td>
          <td>
-           <select size="1" name="goFaxFormat" {$goFaxFormatACL} title="{t}Specify delivery format for fax to mail gateway{/t}">
+           <select idP="goFaxFormat" size="1" name="goFaxFormat" {$goFaxFormatACL} title="{t}Specify delivery format for fax to mail gateway{/t}">
 	    {html_options values=$formats output=$formats selected=$goFaxFormat}
            </select>
          </td>
@@ -42,8 +42,8 @@
 
      {if $has_mailaccount eq "false"}
      <input type=checkbox name="fax_to_mail" value="1" {$fax_to_mail} {$goFaxDeliveryModeACL}>
-      {t}Deliver fax as mail to{/t}&nbsp;
-      <input name="mail" size=25 maxlength=65 {$goFaxDeliveryModeACL} value="{$mail}">
+      <LABEL for="mail">{t}Deliver fax as mail to{/t}</LABEL>&nbsp;
+      <input name="mail" id="mail" size=25 maxlength=65 {$goFaxDeliveryModeACL} value="{$mail}">
      {else}
      <input type=checkbox name="fax_to_mail" value="1" {$fax_to_mail} {$goFaxDeliveryModeACL}>
       {t}Deliver fax as mail{/t}

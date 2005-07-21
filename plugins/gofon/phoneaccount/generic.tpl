@@ -72,10 +72,10 @@
 		<table summary="">
 			<tr>
 				<td>
-					{t}Phone PIN{/t}
+					<LABEL for="goFonPIN">{t}Phone PIN{/t}</LABEL>
 				</td>
 				<td>
-					<input type="password" name="goFonPIN" value="{$goFonPIN}" {$goFonPINACL}>
+					<input type="password" id="goFonPIN" name="goFonPIN" value="{$goFonPIN}" {$goFonPINACL}>
 				</td>
 			</tr>
 		</table>
@@ -83,3 +83,6 @@
  </tr>
 </table>
 <input type="hidden" name="phoneTab" value="phoneTab">
+
+
+

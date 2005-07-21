@@ -5,15 +5,15 @@
    <td style="width:50%; vertical-align:top;">
     <table summary="">
      <tr>
-      <td>{t}List name{/t}{$must}</td>
+      <td><LABEL for="cn">{t}List name{/t}</LABEL>{$must}</td>
       <td>
-       <input name="cn" size=25 maxlength=60 {$mode} {$cnACL} value="{$cn}" title="{t}Name of blocklist{/t}">
+       <input name="cn" id="cn" size=25 maxlength=60 {$mode} {$cnACL} value="{$cn}" title="{t}Name of blocklist{/t}">
       </td>
      </tr>
      <tr>
-      <td>{t}Base{/t}{$must}</td>
+      <td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
       <td>
-       <select size="1" name="base" {$selectmode} title="{t}Select subtree to place blocklist in{/t}">
+       <select size="1" id="base" name="base" {$selectmode} title="{t}Select subtree to place blocklist in{/t}">
         {html_options options=$bases selected=$base_select}
 		<option disabled>&nbsp;</option>
        </select>
@@ -29,18 +29,18 @@
    <td style="vertical-align:top;">
     <table summary="">
      <tr>
-       <td>{t}Type{/t}</td>
+       <td><LABEL for="type">{t}Type{/t}</LABEL></td>
        <td>
-        <select size="1" name="type" {$typeACL} title="{t}Select wether to filter incoming or outgoing calls{/t}">
+        <select size="1" id="type" name="type" {$typeACL} title="{t}Select wether to filter incoming or outgoing calls{/t}">
         {html_options options=$types selected=$type}
 		<option disabled>&nbsp;</option>
         </select>
         </td>
       </tr>
       <tr>
-       <td>{t}Description{/t}</td>
+       <td><LABEL for="description">{t}Description{/t}</LABEL></td>
        <td>
-         <input name="description" size=25 maxlength=60 {$descriptionACL} value="{$description}" title="{t}Descriptive text for this blocklist{/t}">
+         <input name="description" id="description" size=25 maxlength=60 {$descriptionACL} value="{$description}" title="{t}Descriptive text for this blocklist{/t}">
        </td>
       </tr>
     </table>
@@ -59,7 +59,7 @@
 	  <option disabled>&nbsp;</option>
      </select>
      <br>
-     <input name="number" size=25 maxlength=60 {$goFaxBlocklistACL}>&nbsp;
+     <input id="" name="number" size=25 maxlength=60 {$goFaxBlocklistACL}>&nbsp;
      <input type=submit value="{t}Add{/t}" {$goFaxBlocklistACL} name="add_number">&nbsp;
      <input type=submit value="{t}Delete{/t}" {$goFaxBlocklistACL} name="delete_number">
    </td>

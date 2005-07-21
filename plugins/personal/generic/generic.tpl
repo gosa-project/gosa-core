@@ -171,28 +171,28 @@
    <table summary=""> 
     <tr>
      <td><label for="o">{t}Organization{/t}</label></td>
-     <td><input name="o" size=22 maxlength=60 {$oACL} value="{$o}"></td>
+     <td><input id="o" name="o" size=22 maxlength=60 {$oACL} value="{$o}"></td>
     </tr>
     <tr>
      <td><label for="ou">{t}Department{/t}</label></td>
-     <td><input name="ou" size=22 maxlength=60 {$ouACL} value="{$ou}"></td>
+     <td><input id="ou" name="ou" size=22 maxlength=60 {$ouACL} value="{$ou}"></td>
     </tr>
     <tr>
      <td><label for="departmentNumber">{t}Department No.{/t}</label></td>
      <td>
-      <input name="departmentNumber" size=22 maxlength=60 {$departmentNumberACL} value="{$departmentNumber}">
+      <input id="departmentNumber" name="departmentNumber" size=22 maxlength=60 {$departmentNumberACL} value="{$departmentNumber}">
      </td>
     </tr>
     <tr>
      <td><label for="employeeNumber">{t}Employee No.{/t}</label></td>
      <td>
-      <input name="employeeNumber" size=22 maxlength=60 {$employeeNumberACL} value="{$employeeNumber}">
+      <input id="employeeNumber" name="employeeNumber" size=22 maxlength=60 {$employeeNumberACL} value="{$employeeNumber}">
      </td>
     </tr>
     <tr>
      <td><label for="employeeType">{t}Employee type{/t}</label></td>
      <td>
-      <input name="employeeType" size=22 maxlength=60 {$employeeTypeACL} value="{$employeeType}">
+      <input id="employeeType" name="employeeType" size=22 maxlength=60 {$employeeTypeACL} value="{$employeeType}">
      </td>
     </tr>
    </table>
@@ -207,29 +207,29 @@
    <table summary=""> 
     <tr>
      <td><label for="roomNumber">{t}Room No.{/t}</label></td>
-     <td><input name="roomNumber" size=22 maxlength=60 {$roomNumberACL} value="{$roomNumber}"></td>
+     <td><input id="roomNumber" name="roomNumber" size=22 maxlength=60 {$roomNumberACL} value="{$roomNumber}"></td>
     </tr>
     {if $has_phoneaccount ne "true"}
     <tr>
      <td><label for="telephoneNumber">{t}Phone{/t}</label></td>
      <td>
-      <input name="telephoneNumber" size=22 maxlength=60 {$telephoneNumberACL} value="{$telephoneNumber}">
+      <input id="telephoneNumber" name="telephoneNumber" size=22 maxlength=60 {$telephoneNumberACL} value="{$telephoneNumber}">
      </td>
     </tr>
     {/if}
     <tr>
      <td><label for="mobile">{t}Mobile{/t}</label></td>
-     <td><input name="mobile" size=22 maxlength=60 {$mobileACL} value="{$mobile}"></td>
+     <td><input id="mobile" name="mobile" size=22 maxlength=60 {$mobileACL} value="{$mobile}"></td>
     </tr>
     <tr>
      <td><label for="pager">{t}Pager{/t}</label></td>
      <td>
-      <input name="pager" size=22 maxlength=60 {$pagerACL} value="{$pager}">
+      <input id="pager" name="pager" size=22 maxlength=60 {$pagerACL} value="{$pager}">
      </td>
     </tr>
     <tr>
      <td><label for="facsimileTelephoneNumber">{t}Fax{/t}</label></td>
-     <td><input name="facsimileTelephoneNumber" size=22 maxlength=60 {$facsimileTelephoneNumberACL}
+     <td><input id="facsimileTelephoneNumber" name="facsimileTelephoneNumber" size=22 maxlength=60 {$facsimileTelephoneNumberACL}
                 value="{$facsimileTelephoneNumber}">
      </td>
     </tr>
@@ -245,16 +245,16 @@
    <table summary=""> 
     <tr>
      <td><label for="l">{t}Location{/t}</l></td>
-     <td><input name="l" size=22 maxlength=60 {$lACL} value="{$l}"></td>
+     <td><input id="l" name="l" size=22 maxlength=60 {$lACL} value="{$l}"></td>
     </tr>
     <tr>
      <td><label for="st">{t}State{/t}</label></td>
-     <td><input name="st" size=22 maxlength=60 {$stACL} value="{$st}"></td>
+     <td><input id="st" name="st" size=22 maxlength=60 {$stACL} value="{$st}"></td>
     </tr>
     <tr>
      <td style="vertical-align:top;"><label for="postalAddress">{t}Address{/t}</label></td>
      <td>
-      <textarea name="postalAddress" rows=3 cols=22 {$postalAddressACL}>{$postalAddress}</textarea>
+      <textarea id="postalAddress" name="postalAddress" rows=3 cols=22 {$postalAddressACL}>{$postalAddress}</textarea>
      </td>
     </tr>
    </table>
@@ -267,35 +267,35 @@
    <table summary=""> 
     <tr>
      <td><label for="vocation">{t}Vocation{/t}</label></td>
-     <td><input name="vocation" size=22 maxlength=60 {$vocationACL} value="{$vocation}"></td>
+     <td><input id="vocation" name="vocation" size=22 maxlength=60 {$vocationACL} value="{$vocation}"></td>
     </tr>
     <tr>
      <td><label for="gouvernmentOrganizationalUnitDescription">{t}Unit description{/t}</label></td>
      <td>
-      <input name="gouvernmentOrganizationalUnitDescription" size=22 maxlength=60
-	{$gouvernmentOrganizationalUnitDescriptionACL}
+      <input id="gouvernmentOrganizationalUnitDescription" name="gouvernmentOrganizationalUnitDescription" size=22 maxlength=60
+	{$gouvernmentOrganizationalUnitDescriptionACL} id="gouvernmentOrganizationalUnitDescription" 
 	value="{$gouvernmentOrganizationalUnitDescription}">
      </td>
     </tr>
     <tr>
      <td><label for="gouvernmentOrganizationalUnitSubjectArea">{t}Subject area{/t}</label></td>
      <td>
-      <input name="gouvernmentOrganizationalUnitSubjectArea" size=22 maxlength=60
-          {$gouvernmentOrganizationalUnitSubjectAreaACL}
+      <input id="gouvernmentOrganizationalUnitSubjectArea" name="gouvernmentOrganizationalUnitSubjectArea" size=22 maxlength=60
+          {$gouvernmentOrganizationalUnitSubjectAreaACL} id="gouvernmentOrganizationalUnitSubjectArea" 
            value="{$gouvernmentOrganizationalUnitSubjectArea}">
      </td>
     </tr>
     <tr>
      <td><label for="functionalTitle">{t}Functional title{/t}</label></td>
      <td>
-      <input name="functionalTitle" size=22 maxlength=60 {$functionalTitleACL}
+      <input name="functionalTitle" id="functionalTitle"  size=22 maxlength=60 {$functionalTitleACL}
              value="{$functionalTitle}">
      </td>
     </tr>
     <tr>
      <td><label for="role">{t}Role{/t}</label></td>
      <td>
-      <input name="role" size=22 maxlength=60 {$roleACL} value="{$role}">
+      <input id="role" name="role" size=22 maxlength=60 {$roleACL} value="{$role}">
      </td>
     </tr>
    </table>
@@ -307,14 +307,14 @@
     <tr>
      <td><label for="gouvernmentOrganizationalPersonLocality">{t}Person locality{/t}</label></td>
      <td>
-      <input name="gouvernmentOrganizationalPersonLocality" size=22 maxlength=60
+      <input id="gouvernmentOrganizationalPersonLocality" name="gouvernmentOrganizationalPersonLocality" size=22 maxlength=60
          {$gouvernmentOrganizationalPersonLocalityACL}
                 value="{$gouvernmentOrganizationalPersonLocality}">
      </td>
     </tr>
     <tr>
      <td><label for="gouvernmentOrganizationalUnit">{t}Unit{/t}</label></td>
-     <td><input name="gouvernmentOrganizationalUnit" size=22 maxlength=60 
+     <td><input id="gouvernmentOrganizationalUnit" name="gouvernmentOrganizationalUnit" size=22 maxlength=60 
      {$gouvernmentOrganizationalUnitACL}
             value="{$gouvernmentOrganizationalUnit}">
      </td>
@@ -322,19 +322,19 @@
     <tr>
      <td><label for="street">{t}Street{/t}</label></td>
      <td>
-      <input name="street" size=22 maxlength=60 {$streetACL} value="{$street}">
+      <input name="street" id="street" size=22 maxlength=60 {$streetACL} value="{$street}">
      </td>
     </tr>
     <tr>
      <td><label for="postalCode">{t}Postal code{/t}</label></td>
      <td> 
-      <input name="postalCode" size=22 maxlength=60 {$postalCodeACL} value="{$postalCode}">
+      <input name="postalCode" id="postalCode" size=22 maxlength=60 {$postalCodeACL} value="{$postalCode}">
      </td>
     </tr>
     <tr>
      <td><label for="houseIdentifier">{t}House identifier{/t}</label></td>
      <td>
-      <input name="houseIdentifier" size=22 maxlength=60 {$houseIdentifierACL}
+      <input id="houseIdentifier" name="houseIdentifier" size=22 maxlength=60 {$houseIdentifierACL}
              value="{$houseIdentifier}">
      </td>
     </tr>
@@ -346,13 +346,13 @@
    <table summary=""> 
     <tr>
      <td><label for="roomNumber">{t}Room No.{/t}</label></td>
-     <td><input name="roomNumber" size=22 maxlength=60 {$roomNumberACL} value="{$roomNumber}"></td>
+     <td><input id="roomNumber" name="roomNumber" size=22 maxlength=60 {$roomNumberACL} value="{$roomNumber}"></td>
     </tr>
     <tr>
      <td><label for="telephoneNumber">{t}Phone{/t}</label></td>
      <td>
       {if $has_phoneaccount ne "true"}
-      <input name="telephoneNumber" size=22 maxlength=60 {$telephoneNumberACL} value="{$telephoneNumber}">
+      <input id="telephoneNumber" name="telephoneNumber" size=22 maxlength=60 {$telephoneNumberACL} value="{$telephoneNumber}">
       {else}
       <i>{t}Please use the phone tab{/t}</i>
       {/if}
@@ -361,23 +361,22 @@
     <tr>
      <td><label for="facsimileTelephoneNumber">{t}Fax{/t}</label></td>
      <td>
-      <input name="facsimileTelephoneNumber" size=22 maxlength=60 
-	          {$facsimileTelephoneNumberACL}
+      <input id="facsimileTelephoneNumber" name="facsimileTelephoneNumber" size=22 maxlength=60 
+	          {$facsimileTelephoneNumberACL} id="facsimileTelephoneNumber" 
                  value="{$facsimileTelephoneNumber}">
      </td>
     </tr>
     <tr>
      <td><label for="ivbbLastDeliveryCollective">{t}Last delivery{/t}</label></td>
      <td>
-      <input name="ivbbLastDeliveryCollective" size=22 maxlength=60 
-      {$ivbbLastDeliveryCollectiveACL}
+      <input name="ivbbLastDeliveryCollective" size=22 maxlength=60 {$ivbbLastDeliveryCollectiveACL} id="ivbbLastDeliveryCollective" 
              value="{$ivbbLastDeliveryCollective}">
      </td>
     </tr>
     <tr>
      <td><label for="publicVisible">{t}Public visible{/t}</label></td>
      <td>
-      <select size="1" name="publicVisible" {$publicVisibleACL}>
+      <select size="1" id="publicVisible" name="publicVisible" {$publicVisibleACL}>
        {html_options values=$ivbbmodes output=$ivbbmodes selected=$publicVisible}
       </select>
      </td>
