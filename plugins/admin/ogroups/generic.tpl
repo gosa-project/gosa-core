@@ -4,13 +4,13 @@
    <input type="hidden" name="ogroupedit" value="1">
    <table summary="">
     <tr>
-     <td>{t}Group name{/t}{$must}</td>
+     <td><LABEL for="cn">{t}Group name{/t}</LABEL>{$must}</td>
      <td>
-       <input name="cn" size=25 maxlength=60 {$cnACL} value="{$cn}" title="{t}Name of the group{/t}">
+       <input name="cn" id="cn" size=25 maxlength=60 {$cnACL} value="{$cn}" title="{t}Name of the group{/t}">
      </td>
     </tr>
     <tr>
-     <td>{t}Description{/t}</td>
+     <td><LABEL for="description">{t}Description{/t}</LABEL></td>
      <td><input name="description" size=40 maxlength=60 {$descriptionACL} value="{$description}" title="{t}Descriptive text for this group{/t}">
      </td>
     </tr>
@@ -18,9 +18,9 @@
      <td colspan=2></td>
     </tr>
     <tr>
-     <td>{t}Base{/t}{$must}</td>
+     <td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
      <td>
-      <select size="1" name="base" {$baseACL} title="{t}Choose subtree to place group in{/t}">
+      <select size="1" cn="base" name="base" {$baseACL} title="{t}Choose subtree to place group in{/t}">
        {html_options options=$bases selected=$base_select}
       </select>
      </td>
@@ -29,9 +29,9 @@
 
   </td>
   <td style="border-left:1px solid #A0A0A0; padding-left:10px;">
-   <b>{t}Member objects{/t}</b>&nbsp;({$combinedObjects})
+   <b><LABEL for="members">{t}Member objects{/t}</LABEL></b>&nbsp;({$combinedObjects})
    <br>
-   <select style="width:400px; height:300px;" name="members[]" size="15" multiple>
+   <select style="width:400px; height:300px;" id="members" name="members[]" size="15" multiple>
     {$members}
    </select>
    <br>

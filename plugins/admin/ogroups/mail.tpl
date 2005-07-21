@@ -7,8 +7,8 @@
    <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Mail distribution list{/t}</h2>
    <table summary="">
     <tr>
-     <td>{t}Primary address{/t}{$must}</td>
-     <td><input name="mail" size=25 maxlength=65 {$mailACL} value="{$mail}" title="{t}Primary mail address for this distribution list{/t}"></td>
+     <td><LABEL for="mail">{t}Primary address{/t}</LABEL>{$must}</td>
+     <td><input id="mail" name="mail" size=25 maxlength=65 {$mailACL} value="{$mail}" title="{t}Primary mail address for this distribution list{/t}"></td>
     </tr>
    </table>
   </td>
