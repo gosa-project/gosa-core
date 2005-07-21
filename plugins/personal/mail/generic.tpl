@@ -4,13 +4,13 @@
    <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
    <table summary="">
     <tr>
-     <td>{t}Primary address{/t}{$must}</td>
-     <td><input name="mail" size=25 maxlength=65 {$mailACL} value="{$mail}"></td>
+     <td><LABEL for="mail">{t}Primary address{/t}</LABEL>{$must}</td>
+     <td><input id="mail" name="mail" size=25 maxlength=65 {$mailACL} value="{$mail}"></td>
     </tr>
     <tr>
-     <td>{t}Server{/t}</td>
+     <td><LABEL for="gosaMailServer">{t}Server{/t}</LABEL></td>
      <td>
-      <select size="1" name="gosaMailServer" {$gosaMailServerACL} title="{t}Specify the mail server where the user will be hosted on{/t}">
+      <select size="1" id="gosaMailServer" name="gosaMailServer" {$gosaMailServerACL} title="{t}Specify the mail server where the user will be hosted on{/t}">
 		    {html_options values=$mailServers output=$mailServers selected=$gosaMailServer}
 			<option disabled>&nbsp;</option>
       </select>
@@ -31,9 +31,9 @@
      </td>
     </tr>
     <tr>
-     <td>{t}Quota size{/t}</td>
+     <td><LABEL for="gosaMailQuota">{t}Quota size{/t}</LABEL></td>
      <td>
-      <input name="gosaMailQuota" size="6" align="middle" maxlength="30" {$gosaMailQuotaACL}
+      <input id="gosaMailQuota" name="gosaMailQuota" size="6" align="middle" maxlength="30" {$gosaMailQuotaACL}
 		value="{$gosaMailQuota}"> KB
      </td>
     </tr>
@@ -45,8 +45,8 @@
   </td>
 
   <td style="vertical-align:top;">
-   <h2><img alt="" align="middle" src="images/alternatemail.png"> {t}Alternative addresses{/t}</h2>
-   <select style="width:350px; height:100px;" name="alternates_list[]" size=15
+   <h2><img alt="" align="middle" src="images/alternatemail.png"><LABEL for="alternates_list"> {t}Alternative addresses{/t}</LABEL></h2>
+   <select id="alternates_list" style="width:350px; height:100px;" name="alternates_list[]" size=15
 	 multiple title="{t}List of alternative mail addresses{/t}">
             {html_options values=$gosaMailAlternateAddress output=$gosaMailAlternateAddress}
 			<option disabled>&nbsp;</option>
@@ -78,28 +78,29 @@
   </td>
   <td style="vertical-align:top;">
    <input type=checkbox name="use_spam_filter" value="1" {$use_spam_filter}
-	{$gosaSpamSortLevelACL} title="{t}Select if you want to filter this mails through spamassassin{/t}"> {t}Move mails tagged with spam level greater than{/t}
-   <select size="1" name="gosaSpamSortLevel" {$gosaSpamSortLevelACL} title="{t}Choose spam level - smaller values are more sensitive{/t}">
+	{$gosaSpamSortLevelACL} title="{t}Select if you want to filter this mails through spamassassin{/t}"> <LABEL for="gosaSpamSortLevel">{t}Move mails tagged with spam level greater than{/t}</LABEL>
+	
+   <select id="gosaSpamSortLevel" size="1" name="gosaSpamSortLevel" {$gosaSpamSortLevelACL} title="{t}Choose spam level - smaller values are more sensitive{/t}">
         {html_options values=$spamlevel output=$spamlevel selected=$gosaSpamSortLevel}
    </select>
-   {t}to folder{/t}
-   <select size="1" name="gosaSpamMailbox" {$gosaSpamMailboxACL}>
+   <LABEL for="gosaSpamMailbox">{t}to folder{/t}</LABEL>
+   <select size="1" id="gosaSpamMailbox" name="gosaSpamMailbox" {$gosaSpamMailboxACL}>
         	{html_options values=$spambox output=$spambox selected=$gosaSpamMailbox}
 			<option disabled>&nbsp;</option>
    </select>
    <br>
    <input type=checkbox name="use_mailsize_limit" value="1" {$use_mailsize_limit}
-	{$gosaMailMaxSizeACL}> {t}Reject mails bigger than{/t} 
-   <input name="gosaMailMaxSize" size=6 align="middle" maxlength="30" {$gosaMailMaxSizeACL}
+	{$gosaMailMaxSizeACL}> <LABEL for="gosaMailMaxSize">{t}Reject mails bigger than{/t}</LABEL> 
+   <input id="gosaMailMaxSize" name="gosaMailMaxSize" size=6 align="middle" maxlength="30" {$gosaMailMaxSizeACL}
 	value="{$gosaMailMaxSize}"> {t}MB{/t}
   </td>
  </tr>
  <tr>
   <td style="vertical-align:top; width:45%">
    <p style="margin-bottom:0px;">
-    <b>{t}Vacation message{/t}</b>
+    <b><LABEL for="gosaVacationMessage">{t}Vacation message{/t}</LABEL></b>
    </p>
-   <textarea style="width:350px; height:100px;" name="gosaVacationMessage" rows="4" cols="512"
+   <textarea id="gosaVacationMessage" style="width:350px; height:100px;" name="gosaVacationMessage" rows="4" cols="512"
 	{$gosaVacationMessageACL}>{$gosaVacationMessage}</textarea>
    <br>
    {if $show_templates eq "true"}
@@ -114,9 +115,9 @@
   </td>
   <td>
    <p style="margin-bottom:0px;">
-    <b>{t}Forward messages to{/t}</b>
+    <b><LABEL for="forwarder_list">{t}Forward messages to{/t}</LABEL></b>
    </p>
-   <select style="width:350px; height:100px;" name="forwarder_list[]" size=15 multiple>
+   <select id="gosaMailForwardingAddress" style="width:350px; height:100px;" name="forwarder_list[]" size=15 multiple>
 			{html_options values=$gosaMailForwardingAddress output=$gosaMailForwardingAddress selected=$template}        
 			<option disabled>&nbsp;</option>
    </select>
