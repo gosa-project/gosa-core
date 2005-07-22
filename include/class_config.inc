@@ -441,6 +441,8 @@ class config  {
 	foreach ($this->departments as $key => $val){
 		$this->idepartments[$val]= $key;
 	}
+
+	ksort($this->idepartments);
   }
 
 }
