@@ -9,19 +9,19 @@
     </tr>
 
     <tr>
-     <td><LABEL for="gosaApplicationExecute">{{t}Execute{/t}{$must}</LABEL></td>
+     <td><LABEL for="gosaApplicationExecute">{t}Execute{/t}{$must}</LABEL></td>
      <td>
         <input id="gosaApplicationExecute" name="gosaApplicationExecute" size=35 maxlength=60 {$gosaApplicationExecuteACL} value="{$gosaApplicationExecute}" title="{t}Path and/or binary name of application{/t}">
      </td>
     </tr>
     <tr>
-     <td><LABEL for="gosaApplicationName">{{t}Display name{/t}</LABEL></td>
+     <td><LABEL for="gosaApplicationName">{t}Display name{/t}</LABEL></td>
      <td>
         <input id="gosaApplicationName" name="gosaApplicationName" size=35 maxlength=60 {$gosaApplicationNameACL} value="{$gosaApplicationName}" title="{t}Application name to be displayed (i.e. below icons){/t}">
      </td>
     </tr>
     <tr>
-     <td><LABEL for="description">{{t}Description{/t}</LABEL></td>
+     <td><LABEL for="description">{t}Description{/t}</LABEL></td>
      <td>
       <input id="description" name="description" size=35 maxlength=60 {$descriptionACL} value="{$description}">
      </td>
