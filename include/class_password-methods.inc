@@ -95,7 +95,13 @@ function change_password ($dn, $password, $mode=0, $hash= "")
   $newpass= "";
 
   // Get all available encryption Methods 
-  $available = passwordMethod::get_available_methods();
+
+  // STATIC : :(   
+  // $available = passwordMethod::get_available_methods();
+
+  // NON STATIC CALL :)
+  $tmp = new passwordMethod($_SESSION['config']);
+  $available = $tmp->get_available_methods();
 
   // read current password entry for $dn, to detect the encryption Method
   $ldap       = $config->get_ldap_link();
