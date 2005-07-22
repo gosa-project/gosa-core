@@ -57,7 +57,7 @@
    <td>
     <table summary="" width="100%">
      <tr>
-      <td><img alt="" align="middle" border=0 src="{$ruleset_image}">&nbsp;<LABEL foe="edit_rules">{t}Ruleset{/t}</LABEL></td>
+      <td><img alt="" align="middle" border=0 src="{$ruleset_image}">&nbsp;<LABEL for="edit_rules">{t}Ruleset{/t}</LABEL></td>
       <td width="100%">
        <input id="edit_rules" name="edit_rules" type="submit" value="{t}Edit{/t}" disabled>
       </td>

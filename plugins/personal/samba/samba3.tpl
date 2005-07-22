@@ -89,13 +89,13 @@
     <tr>
      <td><LABEL for="CtxInitialProgram">{t}Initial program{/t}</LABEL></td>
      <td>
-      <input id="CtxInitialProgram" name="CtxInitialProgram" id="CtxInitialProgram" size=35 maxlength=60 {if $CtxInitialProgramACL==""}{$CtxInitialProgramMode}{/if} value="{$CtxInitialProgram}" {$CtxInitialProgramACL}>
+      <input id="CtxInitialProgram" name="CtxInitialProgram" size=35 maxlength=60 {if $CtxInitialProgramACL==""}{$CtxInitialProgramMode}{/if} value="{$CtxInitialProgram}" {$CtxInitialProgramACL}>
      </td>
     </tr>
     <tr>
      <td><LABEL for="CtxWorkDirectory">{t}Working directory{/t}</LABEL></td>
      <td>
-      <input id="CtxWorkDirectory" name="CtxWorkDirectory" id="CtxWorkDirectory" size=35 maxlength=60 {if $CtxWorkDirectoryACL==""}{$CtxInitialProgramMode}{/if} value="{$CtxWorkDirectory}" {$CtxInitialProgramACL}>
+      <input id="CtxWorkDirectory" name="CtxWorkDirectory" size=35 maxlength=60 {if $CtxWorkDirectoryACL==""}{$CtxInitialProgramMode}{/if} value="{$CtxWorkDirectory}" {$CtxInitialProgramACL}>
      </td>
     </tr>
    </table>

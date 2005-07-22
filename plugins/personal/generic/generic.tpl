@@ -273,7 +273,7 @@
      <td><label for="gouvernmentOrganizationalUnitDescription">{t}Unit description{/t}</label></td>
      <td>
       <input id="gouvernmentOrganizationalUnitDescription" name="gouvernmentOrganizationalUnitDescription" size=22 maxlength=60
-	{$gouvernmentOrganizationalUnitDescriptionACL} id="gouvernmentOrganizationalUnitDescription" 
+	{$gouvernmentOrganizationalUnitDescriptionACL}  
 	value="{$gouvernmentOrganizationalUnitDescription}">
      </td>
     </tr>
@@ -281,7 +281,7 @@
      <td><label for="gouvernmentOrganizationalUnitSubjectArea">{t}Subject area{/t}</label></td>
      <td>
       <input id="gouvernmentOrganizationalUnitSubjectArea" name="gouvernmentOrganizationalUnitSubjectArea" size=22 maxlength=60
-          {$gouvernmentOrganizationalUnitSubjectAreaACL} id="gouvernmentOrganizationalUnitSubjectArea" 
+          {$gouvernmentOrganizationalUnitSubjectAreaACL}  
            value="{$gouvernmentOrganizationalUnitSubjectArea}">
      </td>
     </tr>
@@ -362,7 +362,7 @@
      <td><label for="facsimileTelephoneNumber">{t}Fax{/t}</label></td>
      <td>
       <input id="facsimileTelephoneNumber" name="facsimileTelephoneNumber" size=22 maxlength=60 
-	          {$facsimileTelephoneNumberACL} id="facsimileTelephoneNumber" 
+	          {$facsimileTelephoneNumberACL}  
                  value="{$facsimileTelephoneNumber}">
      </td>
     </tr>

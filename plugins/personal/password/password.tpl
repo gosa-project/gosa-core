@@ -33,7 +33,7 @@
 <p class="plugbottom">
   <input type=submit name="password_finish" value="{t}Set password{/t}">
   &nbsp;
-  <input type=reset id="" name="password_cancel" value="{t}Clear fields{/t}">
+  <input type=reset id="password_cancel" name="password_cancel" value="{t}Clear fields{/t}">
 </p>
 
 <input type="hidden" name="ignore">

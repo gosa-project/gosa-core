@@ -59,7 +59,7 @@
 	  <option disabled>&nbsp;</option>
      </select>
      <br>
-     <input id="" name="number" size=25 maxlength=60 {$goFaxBlocklistACL}>&nbsp;
+     <input id="number" name="number" size=25 maxlength=60 {$goFaxBlocklistACL}>&nbsp;
      <input type=submit value="{t}Add{/t}" {$goFaxBlocklistACL} name="add_number">&nbsp;
      <input type=submit value="{t}Delete{/t}" {$goFaxBlocklistACL} name="delete_number">
    </td>

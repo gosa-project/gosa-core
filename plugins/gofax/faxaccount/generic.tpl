@@ -23,7 +23,7 @@
        <tr>
          <td><LABEL for="goFaxFormat">{t}Delivery format{/t}</LABEL></td>
          <td>
-           <select idP="goFaxFormat" size="1" name="goFaxFormat" {$goFaxFormatACL} title="{t}Specify delivery format for fax to mail gateway{/t}">
+           <select id="goFaxFormat" size="1" name="goFaxFormat" {$goFaxFormatACL} title="{t}Specify delivery format for fax to mail gateway{/t}">
 	    {html_options values=$formats output=$formats selected=$goFaxFormat}
            </select>
          </td>
