@@ -96,9 +96,6 @@ function change_password ($dn, $password, $mode=0, $hash= "")
 
   // Get all available encryption Methods 
 
-  // STATIC : :(   
-  // $available = passwordMethod::get_available_methods();
-
   // NON STATIC CALL :)
   $tmp = new passwordMethod($_SESSION['config']);
   $available = $tmp->get_available_methods();
