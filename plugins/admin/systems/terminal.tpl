@@ -49,7 +49,7 @@
    <table summary="">
     <tr><td colspan=2><div style="height:15px;"></div></td></tr>
     <tr>
-     <td><LABEL for="gotoTerminalPath">{t}Root server{/t}<LABEL></td>
+     <td><LABEL for="gotoTerminalPath">{t}Root server{/t}</LABEL></td>
      <td>
       <select name="gotoTerminalPath" id="gotoTerminalPath" title="{t}Select NFS root filesystem to use{/t}" {$gotoTerminalPathACL}>
        {html_options values=$nfsservers output=$nfsservers selected=$gotoTerminalPath_select}

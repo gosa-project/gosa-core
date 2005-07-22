@@ -73,6 +73,11 @@ class wingeneric extends plugin
 
     /* Fill templating stuff */
     $smarty= get_smarty();
+
+    // Undefined index in wingeneric.tpl ... 
+    $smarty->assign("macAddress","");
+    $smarty->assign("ipHostNumber","");
+
     $smarty->assign("bases", $this->config->idepartments);
 
     /* Assign attributes */
