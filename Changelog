@@ -1,5 +1,18 @@
 GOsa2 changelog
 ===============
+
+* gosa 2.4beta3
+  - Fixed application removal
+  - Improved accessibility for disabled persons
+  - Added intranet account to list of connectivity plugins
+  - Several kolab related fixes for server objects
+  - Corrected contributed slapd.conf
+  - Fixed kolab mode where GOsa saves KB quotas, interprets quotas as kolab MB
+  - Increased robustnes for non set fields
+  - Fixed IE issues with W3C compatibilty where IE posts disabled fields
+  - Fixed problems with existing samba accounts and password changed fields
+  - Removed login problems with undefined ldap_conf variable
+
 * gosa 2.4beta2
   - Fixed error handler to be PHP 4.x compatible
   - Fixed PHP compatibility problem in setup.php, using ini_get()

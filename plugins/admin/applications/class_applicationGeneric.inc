@@ -98,6 +98,7 @@ class application extends plugin
 	return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }
 
+
   function remove_from_parent()
   {
 	$ldap= $this->config->get_ldap_link();
@@ -113,6 +114,12 @@ class application extends plugin
 		$og= new ogroup($this->config, $ldap->getDN());
 		unset($og->member[$this->dn]);
 		$og->save ();
+	}
+	$ldap->search ("(&(objectClass=posixGroup)(gosaMemberApplication=".$this->cn."))", array("cn"));
+	while ($attrs= $ldap->fetch()){
+		$ag= new appgroup($this->config, $ldap->getDN());
+		$ag->removeApp($this->cn);
+		$ag->save ();
 	}
 
   }
