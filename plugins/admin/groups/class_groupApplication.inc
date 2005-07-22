@@ -272,8 +272,17 @@ class appgroup extends plugin
     reset ($this->apps);
 
     $this->used_apps= array();
+  
     foreach ($this->gosaMemberApplication as $value){
-      $this->used_apps[$value]= $this->apps[$value];
+      if(!isset($this->apps[$value])){
+        print_red(sprintf(_("The application named %s is no longer available and has been removed."),$value));
+        $test = $this->gosaMemberApplication;
+        $test = array_flip($test);
+        unset($test[$value]);
+        $this->gosaMemberApplication = array_flip($test);
+      }else{
+        $this->used_apps[$value]= $this->apps[$value];
+      }
     }
   }
 
