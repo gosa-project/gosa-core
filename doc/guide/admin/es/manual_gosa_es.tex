@@ -12,7 +12,7 @@
 \usepackage{anysize}
 \usepackage{float}
 \usepackage{longtable}
-\usepackage{verbatim}
+\usepackage{fancyvrb}
 
 \author{Alejandro Escanero Blanco}
 \title{Administración de Sistemas con GOsa }
@@ -32,6 +32,35 @@
 \renewcommand{\appendixname}{Apéndice}
 \renewcommand{\abstractname}{Resumen}
 \renewcommand{\tablename}{Tabla}
+
+\CustomVerbatimEnvironment%
+ {rbox}{Verbatim}{frame=single,fontsize=\small,fontfamily=helvetica,label=Cuadro,framesep=2mm,xleftmargin=2mm,xrightmargin=2mm,rulecolor=\color{blue}}
+
+\newcommand{\bbox}{
+\vspace{0.5cm}
+\noindent \begin{tabular}{|l|}\hline 
+}
+\newcommand{\ebox}{
+\hline \end{tabular}
+\vspace{0.5cm}
+}
+
+\newcommand{\cbbox}{
+\vspace{0.5cm}
+\noindent \begin{tabular}{|l|}\hline 
+}
+\newcommand{\cebox}{
+\hline \end{tabular}
+\vspace{0.5cm}
+}
+
+\newcommand{\hlink}[1]{
+\htmladdnormallink{#1}{#1}
+}
+
+\newcommand{\jump}{
+\vspace{0.5cm}
+}
 
 \maketitle
 \newpage
@@ -80,6 +109,7 @@ If you have questions, please visit the following url: http://www.gnu.org/licens
 \include{manual_gosa_es_vpn}
 \include{manual_gosa_es_ftp}
 \include{manual_gosa_es_im}
+\include{manual_gosa_es_otros}
 
 \chapter{Los Servidores}
 \label{servidores}

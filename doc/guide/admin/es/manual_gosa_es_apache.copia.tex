@@ -1,0 +1,691 @@
+\chapter{Apache y PHP}
+\section{Introducción a Apache}
+
+GOsa es una aplicación escrita en el lenguaje de programación PHP y pensada para uso atraves de páginas web.
+
+Aunque todo el mundo conoce lo que es una página web, no viene de menos repasar algunos puntos:
+
+\begin{description}
+\item[WWW]
+La World Wide Web (Red alrededor del mundo) es el motor de lo que conocemos como internet, es un espacio de información donde cara recurso está identificado por su URI (Identificador de Recurso Universal /  Universal Resource Identifier), este define el protocolo necesario para acceder a la información, el equipo que la posee y donde está colocada.
+
+La WWW es la gran revolución de nuestra epoca, es una fuente enorme de información. Y como tal todas las aplicaciones están siendo orientadas a ella. GOsa usa WWW por una sencilla razón, distribuye el programa, una aplicación orientada a internet es capaz de ser usada desde cualquier lugar y practicamente en cualquier momento. GOsa no necesita estar siendo ejecutado en la misma maquina que lo tiene, mas 
+aun cada uno de los servidores que controla pueden estar en maquinas diferentes y en remotos lugares.
+
+\item[HTTP]
+\htmladdnormallink{HTTP}{http://www.w3.org/Protocols/}\cite{2616} es el acrónimo de Protocolo de Transferencia de Texto / HyperText Transfer Protocol, cuyo proposito mas importante es la publicación y recepción de "páginas Web".
+
+Es un protocolo de nivel de aplicación ideado para sistemas distribuidos de información hipermedia. Ha estado siendo usada para la WWW desde 1990, la versión actual es HTTP/1.1.
+
+El funcionamiento práctico se puede reducir a un cliente que realiza una petición y a un servidor que gestiona esa petición y realiza una respuesta.
+
+\item[HTML]
+Si la petición del cliente y la respuesta del servidor son correctas, la respuesta del servidor contendra algun tipo de hipermedia, el mas habitual es \htmladdnormallink{HTML}{http://www.w3.org/TR/1998/REC-html40-19980424/} (Lenguaje de markas de hipertexto /  HyperText Markup Language), un lenguaje pensado para la publicación con contenidos y para una facil navegación por ellos. Es un protocolo en constante desarrollo, la versión actual es HTML4.01 y en publicación XHTML2.0
+\end{description}
+
+\htmladdnormallink{APACHE}{http://httpd.apache.org/} es el servidor HTTP mas utilizado que \htmladdnormallink{existe}{http://news.netcraft.com/archives/web_server_survey.html}, seguro, eficiente y extensible.
+
+En este manual nos centraremos en este servidor, ya que es el mas usado y tiene una licencia calificada de opensource.
+
+Mas información sobre este servidor en \htmladdnormallink{http://httpd.apache.org/docs-2.0/}{http://httpd.apache.org/docs-2.0/}
+ 
+\section{Introducción a PHP}
+
+PHP (PHP: Hypertext Preprocessor), es un lenguaje de interpretado alto nivel, especialmente pensado para el diseño de páginas webs. Su sintaxis es una mezcla de C, Perl y Java. Es embebido en las páginas HTML y es ejecutado por el servidor HTTP.
+
+PHP está ampliamente extendido y tiene un numerosisimo grupo de desarrolladores, una \htmladdnormallink{extensa documentación}{http://www.php.net/docs.php} y numerosos sitios webs con documentación y ejemplos.
+
+\section{Instalación}
+\subsection{Descargando e Instalando Apache}
+\label{down_apache}
+Al igual que en el capítulo anterior, Apache está en practicamente todas las distribuciones, aunque veremos su instalación desde las fuentes. Nos vamos a centrar por ahora en las versiones mas avanzadas de apache, la serie 2.0.XX considerada estable.
+
+Se recomienda instalar los mismos paquetes que se necesitan para openLDAP\ref{down_ldap}.
+
+Se puede descargar de: \htmladdnormallink{http://httpd.apache.org/download.cgi}{http://httpd.apache.org/download.cgi}, la versión que vamos a descargar en /usr/src es la httpd-2.0.XX.tar.gz
+
+\begin{itemize}
+\item[Generales]
+\begin{tabular}{ll}
+--enable-so & $\rightarrow$ Soporte de Objetos Dinamicos Compartios (DSO)\\
+--with-program-name=apache2 & \\
+--with-dbm=db42 & $\rightarrow$ Versión de la Berkeley DB que vamos a usar\\
+--with-external-pcre=/usr & \\
+--enable-logio & $\rightarrow$ Registro de entrada y salida\\
+--with-ldap=yes & \\
+--with-ldap-include=/usr/include & \\
+--with-ldap-lib=/usr/lib & \\
+\end{tabular}
+ 
+\item[Soporte suexec]
+\begin{tabular}{ll}
+--with-suexec-caller=www-data & \\
+--with-suexec-bin=/usr/lib/apache2/suexec2 & \\
+--with-suexec-docroot=/var/www & \\
+--with-suexec-userdir=public\_html & \\
+--with-suexec-logfile=/var/log/apache2/suexec.log & \\
+\end{tabular}
+
+\item[Módulos]
+\begin{tabular}{ll}
+--enable-userdir=shared & $\rightarrow$ mod\_userdir, módulo para directorios de usuario\\
+--enable-ssl=shared & $\rightarrow$ mod\_ssl, módulo de conectividad segura SSL\\
+--enable-deflate=shared & $\rightarrow$ mod\_deflate, módulo para comprimir la información enviada\\
+--enable-ldap=shared & $\rightarrow$ mod\_ldap\_userdir, módulo para caché y conexiones ldap\\
+--enable-auth-ldap=shared & $\rightarrow$ mod\_ldap, módulo de autentificación en ldap\\
+--enable-speling=shared & $\rightarrow$ mod\_speling, módulo para la corrección de fallos en URL\\
+--enable-include=shared & $\rightarrow$ mod\_include, módulo para la inclusión de otras configuraciones\\
+--enable-rewrite=shared & $\rightarrow$ mod\_rewrite, permite la manipulación de URL\\
+--enable-cgid=shared & $\rightarrow$ CGI script\\
+--enable-vhost-alias=shared & $\rightarrow$ módulo de alias de dominios virtuales\\
+--enable-info=shared & $\rightarrow$ Información del servidor\\
+--enable-suexec=shared & $\rightarrow$ Cambia el usuario y el grupo de los procesos\\
+--enable-unique-id=shared & $\rightarrow$ Identificador único por petición\\
+--enable-usertrack=shared & $\rightarrow$ Seguimiento de la sesión de usuario\\
+--enable-expires=shared & $\rightarrow$ Módulo para el envio de la cabecera de expiración\\
+--enable-cern-meta=shared & $\rightarrow$ Ficheros meta tipo CERN\\
+--enable-mime-magic=shared & $\rightarrow$ Determina automaticamente el tipo MIME\\
+--enable-headers=shared & $\rightarrow$ Control cabeceras HTTP\\
+--enable-auth-anon=shared & $\rightarrow$ Acceso a usuarios anonimos\\
+--enable-proxy=shared & $\rightarrow$ Permite el uso de Apache como proxy\\
+--enable-dav=shared & $\rightarrow$ Capaz de manejar el protocolo WebDav\\
+--enable-dav-fs=shared & $\rightarrow$ Proveedor DAV para el sistema de archivos\\
+--enable-auth-dbm=shared & $\rightarrow$ Autentificación basada en base de datos DBM\\
+--enable-cgi=shared & $\rightarrow$ Permite CGI scripts\\
+--enable-asis=shared & $\rightarrow$ Tipos de archivos como son\\
+--enable-imap=shared & $\rightarrow$ Mapas de imagenes en el lado de servidor\\
+--enable-ext-filter=shared & $\rightarrow$ Módulo para filtros externos\\
+--enable-authn-dbm=shared & \\
+--enable-authn-anon=shared & \\
+--enable-authz-dbm=shared & \\
+--enable-auth-digest=shared & $\rightarrow$ Colección de autentificaciones segun RFC2617\\
+--enable-actions=shared & $\rightarrow$ Activa acciones segun peticiones\\
+--enable-file-cache=shared & $\rightarrow$ Cache de archivos\\
+--enable-cache=shared & $\rightarrow$ Cache dinamicos de archivos\\
+--enable-disk-cache=shared & $\rightarrow$ Cache de disco\\
+--enable-mem-cache=shared & $\rightarrow$ Cache de memoria\\
+\end{tabular}
+\end{itemize}
+
+Una vez configurado, hacemos make y make install.
+
+\subsection{Instalando PHP sobre Apache}
+
+Se puede descargar de \htmladdnormallink{http://www.php.net/downloads.php}{http://www.php.net/downloads.php} siendo la versión necesaria a la fecha de este manual para utilizar GOsa la 4.3.XX, ya que las versiones 5.0.XX aún no están soportadas. Las descargaremos en /usr/src.
+
+Para poder compilar los módulos necesarios ademas de necesitar las librerias de desarrollo de la seccion Servidores\ref{servidores}, ademas de las mismas que para openLDAP\ref{down_ldap} y Apache\ref{down_apache} necesitaremos alguna libreria mas:
+
+\begin{itemize}
+\item[libbz2]
+La podemos descargar de \htmladdnormallink{http://sources.redhat.com/bzip2/}{http://sources.redhat.com/bzip2/} para módulo de compresión BZ2.
+\item[e2fsprogs]
+Se puede descargar de \htmladdnormallink{http://e2fsprogs.sourceforge.net}{http://e2fsprogs.sourceforge.net} para acceso al sistema de archivos.
+\item[expat]
+Se descarga de \htmladdnormallink{http://expat.sourceforge.net/}{http://expat.sourceforge.net/}, es un parser XML.
+\item[zziplib]
+Bajarla de \htmladdnormallink{http://zziplib.sourceforge.net/}{http://zziplib.sourceforge.net/}, acceso a archivos ZIP.
+\item[zlib]
+Desde \htmladdnormallink{http://www.gzip.org/zlib/}{http://www.gzip.org/zlib/} para compresión GZ.
+\item[file]
+Desde \htmladdnormallink{http://www.darwinsys.com/freeware/file.html}{http://www.darwinsys.com/freeware/file.html} control de archivos.
+\item[sed]
+De \htmladdnormallink{http://www.gnu.org/software/sed/sed.html}{http://www.gnu.org/software/sed/sed.html}, una de las herramientas mas potentes para manipulación de texto.
+\item[libcurl]
+Potente heramienta para manejar archivos remotos, la bajaremos de \htmladdnormallink{http://curl.haxx.se/}{http://curl.haxx.se/} .
+\item[gettext]
+Herramienta GNU para soporte de varios idiomas, la descaramos de \htmladdnormallink{http://www.gnu.org/software/gettext/gettext.html}{http://www.gnu.org/software/gettext/gettext.html} .
+\item[libgd]
+Para la manipulación y creación de imagenes desde: \htmladdnormallink{http://www.boutell.com/gd/}{http://www.boutell.com/gd/} .
+\item[libjpeg]
+Manipulación imagenes JPEG de \htmladdnormallink{http://www.ijg.org/}{http://www.ijg.org/} .
+\item[libpng]
+Manipulación imagenes PNG de \htmladdnormallink{http://www.libpng.org/pub/png/libpng.html}{http://www.libpng.org/pub/png/libpng.html} .
+\item[mcal]
+Libreria para el acceso a Calendarios remotos, se baja de \htmladdnormallink{http://mcal.chek.com/}{http://mcal.chek.com/} .
+\item[libmysql]
+Soporte para la famosisima base de datos, es imprescindible para php, se baja de \htmladdnormallink{http://www.mysql.com/}{http://www.mysql.com/}
+\end{itemize}
+
+Una configuración recomendada sera:
+
+
+\begin{itemize}
+\item[Apache2]
+\begin{tabular}{ll}
+--prefix=/usr --with-apxs2=/usr/bin/apxs2 & \\
+--with-config-file-path=/etc/php4/apache2 & \\
+\end{tabular}
+
+\item[Opciones de compilación]
+\begin{tabular}{ll}
+--enable-memory-limit & Compilado con límite de memoria\\
+--disable-debug & Compilar sin simbolos de debug\\
+--disable-static & Sin librerias estáticas\\
+--with-pic & Usar objetos PIC y no PIC\\
+--with-layout=GNU & \\
+--enable-sysvsem & Soporte sysvmsg \\
+--enable-sysvshm & Soporte semáforos System V \\
+--enable-sysvmsg & Soporte memoria compartida System V \\
+--disable-rpath & Desactiva poder pasar rutas a librerias adiciones al binario\\
+--without-mm & Desactivar el soporte de sessiones por memoria\\
+\end{tabular}
+
+\item[De sesión]
+\begin{tabular}{ll}
+--enable-track-vars & \\
+--enable-trans-sid & \\
+\end{tabular}
+
+\item[Soporte]
+\begin{tabular}{ll}
+--enable-sockets & Soporte de sockets\\
+--with-mime-magic=/usr/share/misc/file/magic.mime & \\
+--with-exec-dir=/usr/lib/php4/libexec & \\
+\end{tabular}
+
+\item[pear]
+\begin{tabular}{ll}
+--with-pear=/usr/share/php & Donde vamos a instalar PEAR\\
+\end{tabular}
+  
+\item[funciones]
+\begin{tabular}{ll}
+--enable-ctype & Soporte funciones de control de caracteres \\
+--with-iconv & Soporte funciones iconv\\
+--with-bz2 & Soporte Compresión BZ2\\
+--with-regex=php & Tipo de libreria de expresiones regulares\\
+--enable-calendar & Funciones para conversión de calendario\\
+--enable-bcmath & Soporte de matematicas de precisión arbitraria\\
+--with-db4 & DBA: Soporte Berkeley DB versión 4\\
+--enable-exif & Soporte funciones exif, para lectura metadata JPG y TIFF\\
+--enable-ftp & Soporte funciones FTP \\
+--with-gettext & Soporte Localización\\
+--enable-mbstring & \\
+--with-pcre-regex=/usr & \\
+--enable-shmop & Funciones de memoria compartida\\
+--disable-xml --with-expat-dir=/usr & Usa el xml de expat en vez del que viene con php\\
+--with-xmlrpc & \\
+--with-zlib & \\
+--with-zlib-dir=/usr & \\
+--with-imap=shared,/usr & Soporte imap generico\\
+--with-kerberos=/usr & Imap con autentificación kerberos\\
+--with-imap-ssl & Imap con acceso seguro SSL\\
+--with-openssl=/usr & \\
+--with-zip=/usr & \\
+--enable-dbx & Capa de abstracción a base de datos\\
+\end{tabular}
+
+\item[módulos externos]
+\begin{tabular}{ll}
+--with-curl=shared,/usr & Manejo remote de archivos\\
+--with-dom=shared,/usr --with-dom-xslt=shared,/usr --with-dom-exslt=shared,/usr & Con xmlrpc ya integrado\\
+--with-gd=shared,/usr --enable-gd-native-ttf & Soporte de manejo de graficos\\
+--with-jpeg-dir=shared,/usr & Soporte GD para jpeg\\
+--with-png-dir=shared,/usr & Soporte GD para png\\
+--with-ldap=shared,/usr & Soporte para ldap\\
+--with-mcal=shared,/usr & Soporte de calendarios\\
+--with-mhash=shared,/usr & Módulo para encriptaciones varias\\
+--with-mysql=shared,/usr & Soporte de base de datos Mysql\\    
+\end{tabular}
+%  --with-crack[=DIR]      Include crack support.
+%  --with-cyrus[=DIR]      Include Cyrus IMAP support
+%  --with-mcrypt[=DIR]     Include mcrypt support.
+%  --with-qtdom            Include QtDOM support (requires Qt >= 2.2.0).
+%  --with-recode[=DIR]     Include recode support.
+
+
+\end{itemize}
+
+\section{Configuración Apache2}
+
+La configuración de apache se guardara en el directorio /etc/apache2 en los siguientes ficheros y directorios:
+\begin{itemize}
+\item[Fichero apache2.conf]
+\item[Fichero ports.conf]
+\item[Directorio conf.d]
+\item[Directorios mods-available y mods-enabled]
+\item[Directorios sites-available y sites-enabled]
+\item[Directorio ssl]
+\end{itemize}
+
+\subsection{Seguridad}
+
+La seguridad es uno de los puntos mas importantes al configurar un servidor apache, necesitaremos un entorno seguro donde no permitir que los usuarios manipulen y accedan a codigo o programas.
+
+La formas de conseguir esto es usando encriptacion, con lo que buscamos que los usuarios y el servidor se comuniquen de forma que nadie mas pueda acceder a los datos. Esto se consigue con encriptación.
+
+La otra manera de asegurar el sistema es que si existe algún fallo en el sistema o en el código, y un intruso intenta ejecutar codigo, este se vea incapacitado, ya que existen poderosas limitaciones, como no permitir que ejecute comandos, lea el codigo de otros script, no pueda modificar nada y tenga un usuario con muy limitados recursos.
+
+\subsubsection{Certificados SSL}
+
+\noindent Existe amplia documentación sobre encriptación y concretamente sobre SSL, un sistema de encriptación con clave publica y privada.\\
+\\
+\noindent Como el paquete openSSL ya lo tenemos instalado a partir de los pasos anteriores, debemos crear los certificados que usaremos en nuestro servidor web.\\
+\\
+\noindent Supongamos que guardamos el certificado en /etc/apache2/ssl/gosa.pem\\
+\\
+\#>FILE=/ect/apache2/ssl/gosa.pem\\
+\#>export RANDFILE=/dev/random\\
+\#>openssl req -new -x509 -nodes -out \$FILE -keyout /etc/apache2/ssl/apache.pem\\
+\#>chmod 600 \$FILE\\
+\#>ln -sf \$FILE /etc/apache2/ssl/`/usr/bin/openssl x509 -noout -hash < \$FILE`.0\\
+\\
+\noindent Con esto hemos creado un certificado que nos permite el acceso SSL a nuestras páginas.\\
+\\
+\noindent Si lo que queremos es una configuración que nos permita no solo que el tráfico esté ecriptado, sino que ademas el cliente garantice que es un usuario válido, debemos provocar que el servidor pida una certificación de cliente. \\
+\\
+\noindent En este caso segiremos un procedimiento mas largo, primero la creación de una certificación de CA:\\
+\\
+\#>CAFILE=/ect/apache2/ssl/gosa.ca\\
+\#>KEY=/etc/apache2/ssl/gosa.key\\
+\#>REQFILE=/etc/apache2/ssl/gosa.req\\
+\#>CERTFILE=/ect/apache2/ssl/gosa.cert\\
+\#>DAYS=365\\
+\#>export RANDFILE=/dev/random\\
+\#>openssl req -x509 -keyout \$CAKEY -out \$CAFILE \$DAYS\\
+\\
+\noindent Despues de varias cuestiones tendremos una CA, ahora hacemos un requerimiento a la CA creada:\\
+\\
+\#>openssl req -new -keyout \$REQFILE -out \$REQFILE \$DAYS\\
+\\
+\noindent Firmamos el nuevo certificado:\\
+\\
+\#>openssl ca -policy policy\_anything -out \$CERFILE -infiles \$REQFILE\\
+\\
+\noindent Y creamos un pkcs12 para configurar la certificación en los clientes:\\
+\\
+\#>openssl pkcs12 -export -inkey \$KEY -in \$CERTFILE -out certificado\_cliente.pkcs12\\
+\\
+\noindent Este certificado se puede instalar en el cliente, y en el servidor web mediante la configuración explicada en el siguiente punto, nos dara la seguridad de que solo accederán aquellos clientes que nosotros deseamos y que su comunicación sera estrictamente confidencial.\\
+
+\subsubsection{Configurando mod-SSL}
+
+
+\noindent El módulo SSL viene de serie con apache2, esto simplificara nuestro trabajo. Para saber si está ya configurado:\\
+\\
+\#> if [ -h /etc/apache2/mods-enabled/ssl.load ]; then echo "módulo instalado";else echo "módulo no instalado"; fi\\
+\\
+\noindent Para activarlo haremos lo siguiente:\\
+\\
+\#>ln -s /etc/apache2/mods-available/ssl.conf /etc/apache2/mods-enabled/ssl.conf\\
+\#>ln -s /etc/apache2/mods-available/ssl.load /etc/apache2/mods-enabled/ssl.load\\
+\\
+\noindent Esto configurará el módulo en apache2 y se podra utilizar despues de recargar el servidor con:\\
+\\
+\#>/etc/init.d/apache2 restart\\
+\\
+\\
+\noindent Para el caso de querer solo una configuración para comunicación encriptada, creamos dos configuraciones en /etc/apache2/sites-available/, una sera gosa, y la otra gosa-ssl:\\
+\\
+\noindent NameVirtual *:443\\
+<VirtualHost *:443>\\
+\indent ServerName gosa.chaosdimension.org\\
+\\
+\indent alias /gosa /usr/share/gosa/html\\
+\\
+\indent DocumentRoot /var/www/gosa.chaosdimension.org\\
+\indent CustomLog /var/log/apache/gosa.log combined\\
+\indent ErrorLog /var/log/apache/gosa.log\\
+\\
+\indent SSLEngine On\\
+\indent SSLCertificateFile    /etc/apache2/ssl/gosa.cert\\
+\indent SSLCertificateKeyFile /etc/apache2/ssl/gosa.key\\
+\indent SSLCertificateChainFile /etc/apache2/ssl/gosa.cert\\
+\indent SSLCertificateKeyFile /etc/apache2/ssl/gosa.key\\
+\indent SSLCACertificateFile /etc/apache2/ssl/gosa.ca\\
+\indent SSLCACertificatePath /etc/apache2/ssl/\\
+\indent SSLLogLevel error\\
+\indent SSLLog /var/log/apache2/ssl-gosa.log\\
+\\
+</VirtualHost>\\
+\\
+\noindent Para una comunicación encriptada en la cual verificamos el certificado del cliente:
+\\
+\noindent NameVirtual *:443\\
+<VirtualHost *:443>\\
+\indent ServerName gosa.chaosdimension.org\\
+\\
+\indent alias /gosa /usr/share/gosa/html\\
+\\
+\indent DocumentRoot /var/www/gosa.chaosdimension.org\\
+\indent CustomLog /var/log/apache/gosa.log combined\\
+\indent ErrorLog /var/log/apache/gosa.log\\
+\\
+\indent SSLEngine On\\
+\indent SSLCertificateFile    /etc/apache2/ssl/gosa.cert\\
+\indent SSLCertificateKeyFile /etc/apache2/ssl/gosa.key\\
+\indent SSLCertificateChainFile /etc/apache2/ssl/gosa.cert\\
+\indent SSLCertificateKeyFile /etc/apache2/ssl/gosa.key\\
+\indent SSLCACertificateFile /etc/apache2/ssl/gosa.ca\\
+\indent SSLCACertificatePath /etc/apache2/ssl/\\
+\indent SSLLogLevel error\\
+\indent SSLLog /var/log/apache2/ssl-gosa.log\\
+\\      
+\indent <Directory /usr/share/gosa >\\
+\indent \indent SSLVerifyClient require\\
+\indent \indent SSLVerifyDepth 1\\
+\indent </Directory>\\
+</VirtualHost>
+
+\subsubsection{Configurando suphp}
+\noindent
+Suphp es un módulo para apache y php que permite ejecutar procesos de php con un usuario diferente del que usa apache para ejecutar las páginas html y php.
+
+Consta de dos partes, una es un modulo para apache que "captura" las peticiones de páginas php, comprueba el usuario del archivo, su grupo, y envia la información a la otra parte, que es un ejecutable suid-root que lanza php4-cgi con el usuario que le ha sido indicado, este devuelve el resultado al módulo del apache.
+
+La idea es minimizar el daño que se provocaria al ser explotado un posible fallo del sistema, de esta manera el usuario entraria en el sistema con una cuenta no habilitada, sin permisos de ejecución y sin posiblidad de acceso a otro código o sitios web.
+
+Suphp se puede descargar de \htmladdnormallink{http://www.suphp.org/Home.html}{http://www.suphp.org/Home.html}, descomprimiendo el paquete en /usr/src y compilando con las siguientes opciones:
+\\
+\#>./configure --prefix=/usr \textbackslash \\
+\indent --with-apxs=/usr/bin/apxs2 \textbackslash \\
+\indent --with-apache-user=www-data \textbackslash \\
+\indent --with-php=/usr/lib/cgi-bin/php4 \textbackslash \\
+\indent --sbindir=/usr/lib/suphp \textbackslash \\
+\indent --with-logfile=/var/log/suphp/suphp.log \textbackslash \\
+\indent -with-setid-mode \textbackslash \\
+\indent --disable-checkpath \\
+\\
+\noindent Por supuesto necesitaremos tener compilado php para cgi, esto significa volver a compilar php, pero quitando la configuración para apache2 y añadiendo:\\
+\\
+\indent --prefix=/usr --enable-force-cgi-redirect --enable-fastcgi \textbackslash\\
+\indent --with-config-file-path=/etc/php4/cgi\\
+
+
+\noindent Para configurarlo en apache haremos igual que para ssl, primero comprobamos si está configurado:\\
+\\
+\#> if [ -h /etc/apache2/mods-enabled/suphp.load ]; then echo "módulo instalado";else echo "módulo no instalado"; fi\\
+\\
+\noindent Para activarlo haremos lo siguiente:\\
+\\
+\#>ln -s /etc/apache2/mods-available/suphp.conf /etc/apache2/mods-enabled/suphp.conf\\
+\#>ln -s /etc/apache2/mods-available/suphp.load /etc/apache2/mods-enabled/suphp.load\\
+\\
+\noindent Esto configurará el módulo en apache2 y se podra utilizar despues de recargar el servidor con:\\
+\\
+\#>/etc/init.d/apache2 restart\\
+\\
+
+\noindent La configuración del sitio seguro con suphp incluido quedaria así:\\
+\\
+\noindent NameVirtual *:443\\
+<VirtualHost *:443>\\
+\indent ServerName gosa.chaosdimension.org\\
+\\
+\indent DocumentRoot /usr/share/gosa/html\\
+\indent alias /gosa /usr/share/gosa/html\\
+\indent CustomLog /var/log/apache/gosa.log combined\\
+\indent ErrorLog /var/log/apache/gosa.log\\
+\\
+\indent suPHP\_Engine on\\
+\\
+\indent SSLEngine On\\
+\indent SSLCertificateFile    /etc/apache2/ssl/gosa.cert\\
+\indent SSLCertificateKeyFile /etc/apache2/ssl/gosa.key\\
+\indent SSLCertificateChainFile /etc/apache2/ssl/gosa.cert\\
+\indent SSLCertificateKeyFile /etc/apache2/ssl/gosa.key\\
+\indent SSLCACertificateFile /etc/apache2/ssl/gosa.ca\\
+\indent SSLCACertificatePath /etc/apache2/ssl/\\
+\indent SSLLogLevel error\\
+\indent SSLLog /var/log/apache2/ssl-gosa.log\\
+\\      
+\indent <Directory /usr/share/gosa >\\
+\indent \indent SSLVerifyClient require\\
+\indent \indent SSLVerifyDepth 1\\
+\indent </Directory>\\
+</VirtualHost>
+
+
+\noindent Debemos decidir que usuario vamos a usar, en este caso voy a crear uno llamado gosa, que me sirva para el fin indicado anteriormente:\\
+\\
+\indent \#>useradd -d /usr/share/gosa/html gosa\\
+\indent \#>passwd -l gosa\\
+\indent \#>cd /usr/share/gosa\\
+\indent \#>find /usr/share/gosa -name "*.php" -exec chown gosa {} ";"\\
+\indent \#>find /usr/share/gosa -name "*.php" -exec chmod 600 {} ";"\\
+
+
+\section{Configuración Php4}
+
+La configuración para mod\_php se guardará en el sitio que hallamos puesto en la partes anteriores. En nuestro caso es /etc/php4/apache2.
+
+El archivo de configuración siempre es php.ini y en el configuramos los módulos.
+
+Una configuración básica sera como esta:
+
+; Engine\\
+\indent engine   = On ; Activa PHP\\
+\indent short\_open\_tag = On ; Permite usar <? para simplificar <?php\\
+\indent asp\_tags  = Off ; No permitimos etiquetas estilo ASP: <\% \%>\\
+\indent precision  = 14 ; Número de digitos significantes mosrados en números en coma flotante\\
+\indent output\_buffering = Off ; Solo permitimos que envie cabecera antes de enviar el contenido.\\
+\indent implicit\_flush  = Off ; No forzamos a php a que limpie el buffer de salida despues de cada bloque.\\
+\\
+; Safe Mode\\
+\indent \label{sm} safe\_mode  = Off ; No queremos el modo seguro\\
+\indent \label{smed} safe\_mode\_exec\_dir = ; Directorio donde se ejecutara PHP\\
+\indent \label{smid} safe\_mode\_include\_dir = Directorios donde hara la busqueda PHP de librerias\\
+\indent \label{smaev} safe\_mode\_allowed\_env\_vars = PHP\_     ; Solo se permite a los usuarios\\
+\indent \indent \indent ;a crear variables del sistema que empiezen por PHP\_\\
+\indent \label{smpev} safe\_mode\_protected\_env\_vars = LD\_LIBRARY\_PATH  ; Lista de variables del sistema que\\
+\indent \indent \indent ; no pueden ser cambiadas por razones de seguridad\\
+\indent \label{df} disable\_functions =        ; Funciones que serán desactivadas por razones de seguridad\\
+\indent \label{auf} allow\_url\_fopen = Yes ; Permitimos que se abran archivos desde PHP\\
+\indent \label{ob} open\_basedir = ;\\
+\\
+; Colores para el modo de sintasis coloreada.\\
+\indent highlight.string = \#DD0000\\
+\indent highlight.comment = \#FF8000\\
+\indent highlight.keyword = \#007700\\
+\indent highlight.bg  = \#FFFFFF\\
+\indent highlight.default = \#0000BB\\
+\indent highlight.html  = \#000000\\
+\\
+; Misc\\
+\indent \label{ep}expose\_php = On  ; Indica en el mensaje del servidor web si está instalado o no.\\
+\\
+; Resource Limits ;\\
+\indent max\_execution\_time = 30     ; Tiempo máximo de ejcución del script.\\
+\indent memory\_limit = 16M   ; La cantidad máxima permitida de memoria que puede consumir un script.\\
+\\
+; Error handling and logging ;\\
+\indent error\_reporting = E\_ALL; Indicamos que muestre todos los errores y avisos.\\
+\indent display\_errors = Off ; Que no los imprima en pantalla.\\
+\indent display\_startup\_errors = Off  ; Que no muestre los errore de arranque de PHP.\\
+\indent log\_errors  = On ; Que envíe los errores a un fichero.\\
+\indent track\_errors = On ; Que guarde el último error/aviso para \$php\_errormsg (boolean)\\
+\indent error\_log = /var/log/php/php4.log ; Fichero que guardará los errores\\
+\indent warn\_plus\_overloading = Off  ; No avisamos si se usa el operador + con cadenas de texto\\
+\\
+; Data Handling ;\\
+\indent variables\_order  = "EGPCS" ; Esta directiva describe el orden en el cual\\
+\indent ;se registrarán las variables de PHP (Siendo G=GET, P=POST, C=Cookie,\\
+\indent ; E=Sistema, S=Propias de PHP, todas es indicado como EGPCS)\\
+\indent \label{rg} register\_globals = Off  ; No queremos que se registren las EGPCS como globales.\\
+\indent register\_argc\_argv = Off  ; No declaramos ARGV y ARGC para su uso en scripts.\\
+\indent post\_max\_size  = 8M  ; Tamaño máximo de un envio POST que aceptará PHP.\\
+
+; Magic quotes\\
+\indent \label{mqq}magic\_quotes\_gpc = On  ; Comillas añadidas para gpc(información GET/POST/Cookie)\\
+\indent magic\_quotes\_runtime= Off  ; Comillas añadidas para información generada por el sistema, \\
+\indent ;por ejemplo desde SQL, exec(), etc.\\
+\indent magic\_quotes\_sybase = Off  ; Usar comillas añadidas al estilo de Sybase \\
+\indent ;(escapa ' con '' en lugar de \textbackslash ')\\
+\\
+; Tipo de archivo por defecto de PHP y codificación por defecto.\\
+\indent default\_mimetype = "text/html"\\
+\indent default\_charset = "iso-8859-1"\\
+\\
+; Rutas y directorios ;\\
+\indent \label{ip} include\_path = . ;\\
+\indent doc\_root  =     ; Raiz de lsa paginas php, mejor dejarlo en blanco.\\
+\indent user\_dir  =     ; Donde php ejecuta el script, tambien mejor en blanco.\\
+\indent ;extension\_dir = /usr/lib/php4/apache   ; ¿Donde estan los módulos?\\
+\indent enable\_dl  = Off    ; Permitir o no la carga dinamica de módulos con la funciñon dl().\\
+\\
+; Subir ficheros al servidor;\\
+\indent file\_uploads = On    ; Permitir el subir archivos al servidor.\\
+\indent upload\_max\_filesize = 2M      ; Tamaño máximo de los archivos que vamos a subir.\\
+\\
+; Extensiones dinamicas ;\\
+\indent extension=gd.so		; Graficos\\
+\indent extension=mysql.so	; Mysql\\
+\indent extension=ldap.so	; Ldap\\
+\indent extension=mhash.so	; Mhash\\
+\indent extension=imap.so	; Imap\\
+\indent extension=kadm5.so	; Kerberos\\
+\indent extension=cups.so	; Cupsys\\
+\\
+; Log del sistema\\
+
+[Syslog]\\
+\indent define\_syslog\_variables = Off ; Desactivamos la definición de variables de syslog.\\
+\\
+; funciones de correo\\
+
+[mail function]\\
+\indent ;sendmail\_path =      ;En sistemas Unix, donde esta hubicado sendmail (por defecto es 'sendmail -t -i')\\
+\\
+; depuración\\
+
+[Debugger]\\
+\indent debugger.host = localhost ; Donde está el depurador.\\
+\indent debugger.port = 7869	; En que puerto escucha.\\
+\indent debugger.enabled = False ; En principio suponemos que no hay depurados.\\
+\\
+;Opciones SQL\\
+
+[SQL]\\
+\indent sql.safe\_mode = Off	; Modo seguro de sql, en principio estará desactivado.\\
+\\
+; Opciones Mysql\\
+
+[MySQL]\\
+\indent mysql.allow\_persistent = Off ; Desactivaremos los enlaces persistentes por razones de seguridad.\\
+\indent mysql.max\_persistent = -1 ; Numero de conexiones persistentes, no se usa por haberlas desactivado.\\
+\indent mysql.max\_links   = -1 ; Numero máximo de conexiones, -1 es sin limite.\\
+\indent mysql.default\_port  =  3306; Puerto por defecto del mysql.\\
+\indent mysql.default\_socket =  ; Nombre de socket que se usaran para conexiones locales MySQL.\\
+\indent ;Si está vacio se usara el que tengamos en la configuración de la compilación del PHP.\\
+\indent mysql.default\_host  =  ; No configuramos host por defecto.\\
+\indent mysql.default\_user  =  ; No configuramos usuario por defecto.\\
+\indent mysql.default\_password =  ; No configuramos una contraseña por defecto.\\
+\\
+; Control de sesiones\\
+
+[Session]\\
+\indent session.save\_handler      = files   ; Guardamos la información de sesión en ficheros.\\
+\indent \label{ss} session.save\_path         = /var/lib/php4    ; Donde se van ha guardar los ficheros de sesión.\\
+\indent session.use\_cookies       = 1       ; Usaremos cookies para el seguimiento de sesión.\\
+\indent session.name              = PHPSESSID   ; Nombre de la sesión que será usado en el nombre de la cookie.\\
+\indent session.auto\_start        = 0       ; No iniciamos sesión automaticamente.\\
+\indent session.cookie\_lifetime   = 0       ; Tiempo de vida de una cookie de sesión o 0 si esperamos a que cierre el navegador.\\
+\indent session.cookie\_path       = /       ; La ruta para que es válida la cookie.\\
+\indent session.cookie\_domain     =         ; El dominio para el cual es válida la cookie.\\
+\indent session.serialize\_handler = php     ; Manipulador usado para serializar los datos.\\
+\indent session.gc\_probability    = 1       ; Probabilidad en porcentaje de que el recolector de basure se active en cada sesión.\\
+\indent session.gc\_maxlifetime    = 1440    ; Despues de este tiempo en segundos, la información guardada\\
+\indent ; será vista como basura para el recolector de basura.\\
+\indent session.referer\_check     =         ; Comprueba los Referer HTTP para invalidar URLs externas conteniendo ids\\
+\indent session.entropy\_length    = 0       ; Número de bytes a leer del fichero de entropía.\\
+\indent session.entropy\_file      =         ; El fichero que generará la entropía.\\
+\indent session.cache\_limiter     = nocache ; Aspecto de cache HTTP, sin cache.\\
+\indent session.cache\_expire      = 180     ; Tiempo de expiración del documento.\\
+\indent session.use\_trans\_sid     = 0       ; Usar sid transportable si está activado en la compilación\\
+\\
+; FIN\\
+
+
+\subsection{Seguridad}
+
+Php es un poderoso lenguaje de script, permite a su usuario tener bastante control sobre el sistema y a atacantes maliciosos muchas opciones de alcanzar su objetivo.
+
+Un administrador de sistemas no debe suponer que un sistema es completamente seguro con solo tener las actualizaciones de seguridad instaladas, un sistema que muesta código al exterior no es seguro, aunque el resultado sea HTML, se expone a ataques de formas muy diversas y a fallos de seguridad desconocidos.
+
+Limitar al máximo el acceso que permite php es entonces una necesidad.
+
+\subsection{Configurando safe php}
+
+PHP tiene un modo llamado \htmladdnormallink{safe-mode}{http://www.php.net/manual/en/features.safe-mode.php} que permite una mayor seguridad, una configuración para Safe mode recomendada es:
+
+\indent \ref{mqq} magic\_quotes\_qpc = On\\
+\indent \ref{auf} allow\_url\_fopen = No\\
+\indent \ref{rg} register\_globals = Off\\
+\indent \ref{sm} safe\_mode = On\\
+\indent \ref{smid} safe\_mode\_include\_dir = "/usr/share/gosa:/var/spool/gosa"\\
+\indent \ref{smed} safe\_mode\_exec\_dir = "/usr/lib/gosa"\\
+\indent \ref{smaev} safe\_mode\_allowed\_env\_vars = PHP\_,LANG\\
+\indent \ref{ob} open\_basedir = "/etc/gosa:/var/spool/gosa:/var/cache/gosa:/usr/share/gosa:/tmp"\\
+\indent \ref{ip} include\_path = ".:/usr/share/php:/usr/share/gosa:/var/spool/gosa:/usr/share/gosa/safe\_bin"\\
+\indent \ref{df} disable\_functions = system, shell\_exec, passthru, phpinfo, show\_source\\
+
+
+En el caso de que vayamos a usar SuPHP, debemos dar los siguientes permisos al directorio /var/lib/php4:
+
+\#>chmod 1777 /var/lib/php4
+
+Ya que cada usuario que ejecute PHP guardara la sesión con ese usuario.
+
+
+\section{Módulos de PHP necesarios}
+
+En esta sección se explicaran los pasos para conseguir compilar y usar los módulos necesarios o importantes para GOsa, se recomenienda instalar todos los módulos, incluso los que no son necesarios.
+
+\subsection{ldap.so}
+
+MÓDULO NECESARIO
+
+\indent Este módulo no necesita ninguna configuración especial para funcionar.
+
+\indent Solo se conoce un problema: No puede conectarse PHP+Apache con un servidor LDAP que pida Certificado válido. Con lo cual la comunicación será segura, ya que se puede usar SSL, pero no estará garantizada.
+
+\subsection{mysql.so}
+
+MÓDULO OPCIONAL
+
+\indent Este módulo no necesita ninguna configuración especial para funcionar.
+
+\indent Sirve para albergar configuraciones del plugin imap - sieve.
+
+\subsection{imap.so}
+
+MÓDULO OPCIONAL
+
+\indent El módulo instalado al compilar PHP funcionara, pero tendra una importante carencia, la función getacl que da control sobre las carpetas, asi que necesitaremos un parche y una serie de pasos para compilar el módulo para su uso en GOsa.
+
+Nos bajamos el parche de \htmladdnormallink{php4-imap-getacl.patch}{ftp://ftp.gonicus.de/gosa/contrib/php4-imap-getacl.patch} y lo ponemos en /usr/src, como tenemos las fuentes de PHP en /usr/src, ejecutamos los siguientes comandos:
+
+\#>cd /usr/src/php4.3-XXX/extensions/imap
+\#>make clear
+\#>patch -p1 </usr/src/patch/php4-imap-getacl.patch
+\#>phpize
+\#>./configure
+\#>make
+\#>make install
+
+Esto configurara e instalara correctamente el módulo.
+
+\subsection{gd.so}
+
+MÓDULO OPCIONAL
+
+\indent Este módulo no necesita ninguna configuración especial para funcionar.
+
+\indent El módulo es usado para el manejo de gráficos, tambien usado por el sistema de plantillas smarty.
+
+\subsection{cups}
+
+MÓDULO OPCIONAL
+
+\indent Para utilizar el módulo Cups para la selección de la impresora en Posix, debemos debemos descargar el módulo
+
+
+
+
+\subsection{krb}
+
+MÓDULO OPCIONAL
+
+\indent Este módulo no necesita ninguna configuración especial para funcionar.
+
+

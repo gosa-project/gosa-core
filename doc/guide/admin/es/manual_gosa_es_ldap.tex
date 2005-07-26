@@ -85,11 +85,9 @@ Las mayorías de las distribuciones tienen paquetes de openLDAP. Como usar apt-ge
 \label{down_ldap}
 Aunque realmente no son necesarios, hay varios paquetes que deberían ser instalados antes de openLDAP ya que seguramente los necesitaremos.
 
-El primero de ellos es \textbf{openSSL}, también existe en todas las distribuciones y tiene documentación en su pagina web\cite{ssldoc}.
+El primero de ellos es \textbf{openSSL} \ref{down_ssl}.
 
-Las fuentes se pueden descargar de \htmladdnormallink{http://www.openssl.org/source/}{http://www.openssl.org/source/}
-
-El segundo es Servicios \textbf{Kerberos v5}, del cual existen dos implementaciones, una es \htmladdnormallink{MIT Kerberos V}{http://web.mit.edu/kerberos/www} y la otra es \htmladdnormallink{Heimdal Kerberos}{http://www.pdc.kth.se/heimdal}, ambas tienen buena documentación y están ampliamente soportadas por todas las distribuciones.
+El segundo es Servicios es \textbf{Kerberos v5} \ref{down_kerberos_mit} \ref{down_kerberos_heimdal}.
 
 También será interesante tener instaladas las librerías \textbf{Cyrus SASL} (Capa simple de seguridad y autentificación de Cyrus / Cyrus's Simple Authentication and Security Layer).\\Que se pueden conseguir en \htmladdnormallink{http://asg.web.cmu.edu/sasl/}{http://asg.web.cmu.edu/sasl/sasl-library.html}, Cyrus SASL hace uso de openSSL y Kerberos/GSSAPI para autentificación.
 
@@ -1057,3 +1055,81 @@ objectClass: top\\
 EOF\\
 \hline \end{longtable}
 \end{center}
+
+\section{Modificaciones para Kerberos}
+\subsection{Configurando Sasl y Openldap}
+
+
+\section{Configurar Heimdal Kerberos sobre OpenLdap}
+\label{heimdal_ldap}
+
+¿Porque debemos meter la base de datos de heimdal en ldap?
+
+La explicación es sencilla, replicación, ldap tiene sistemas de replicación y de acceso a datos mucho mas modernos y utiles que los de hprop o iprop.
+
+Por otro lado al estar los datos en ldap, GOsa no tiene mas que escribirlos o modificarlos directamente, permitiendo crear dominios Kerberos desde ldap o añadir/quitar usuarios/servicios.
+
+\subsection{Configurar Heimdal}
+
+La instalación \ref{down_kerberos_heimdal} y la configuración \ref{heimdal_conf} en la misma, pero vamos a añadir al archivo de configuración un nuevo bloque:
+
+\vspace{0.5cm}
+\begin{center}
+\begin{tabular}{|l|l|}\hline 
+\verb|    [kdc]| & $\rightarrow$ Configuración de base de datos del KDC.\\
+\verb|    database = {| & $\rightarrow$ Definiciones de la base de datos.\\
+\verb|            realm=CHAOSDIMENSION.ORG| & $\rightarrow$ Que dominio tendremos bajo ese DN\\
+\verb|            dbname = ldap:ou=people,dc=chaosdimension,dc=org| & $\rightarrow$ El DN bajo el cual se va a guardar la\\
+& base de datos, debemos elegir la que convenga segun nuestra configuración GOsa.\\
+\verb|            acl_file=/var/lib/heimdal-kdc/kadmind.acl| & $\rightarrow$ Fichero con los permisos de acceso a esa base de datos.\\
+\verb|            mkey_file = /var/lib/heimdal-kdc/m-key| & $\rightarrow$ Clave maestra de esa base de datos.\\
+\verb|    }| & $\rightarrow$ \\
+\hline \end{tabular}
+\end{center}
+\vspace{0.5cm}
+
+\subsection{Configurar OpenLdap}
+
+La configuración de openLDAP tiene cuatro partes:\\
+La primera es que heimdal solo accede al servidor openLDAP de forma local, via ldapi://, esto tendra que ser activado en el inicio de openLDAP.\\
+La segunda es que tenemos que añadir el esquema para kerberos, lo podemos descargar de \htmladdnormallink{http://www.stanford.edu/services/directory/openldap/configuration/krb5-kdc.schema}{http://www.stanford.edu/services/directory/openldap/configuration/krb5-kdc.schema} y debemos colocarlo en /etc/ldap/schemas.\\
+La tercera parte son los cambios necesarios en slapd.conf:\\
+\vspace{0.5cm}
+\begin{center}
+\begin{tabular}{|l|l|}\hline 
+... & $\rightarrow$ En la carga de esquemas\\
+\verb|include         /etc/ldap/schema/krb5-kdc.schema| & \\
+... & $\rightarrow$ Configuración SSL/TLS\\
+\verb|TLSCertificateFile /etc/ldap/ssl/ldap.crt| & \\
+\verb|TLSCertificateKeyFile /etc/ldap/ssl/ldap.key| & \\
+\verb|TLSCACertificateFile /etc/ldap/ssl/gosa.ca| & \\
+... & $\rightarrow$ Configuración Sasl\\
+\verb|sasl-host ldap.chaosdimension.og| & \\
+\verb|sasl-keytab /etc/krb5.keytab.ldap| & \\
+\verb|sasl-realm CHAOSDIMENSION.ORG| & \\
+\verb|sasl-secprops noanonymous| & \\
+ & \\
+\verb|sasl-regexp "uidNumber=0\\\+gidNumber=.*,cn=peercred,cn=external,cn=auth"| & \\
+\verb|        "krb5PrincipalName=kadmin/admin@CHAOSDIMENSION.ORG,ou=people,dc=chaosdimension,dc=org"| & \\
+\verb|sasl-regexp uid=(.+),cn=gssapi,cn=auth uid=$1,ou=people,dc=chaosdimension,dc=org| & \\
+... & $\rightarrow$ Configuracion Kerberos:\\
+\verb|srvtab          /etc/krb5.keytab.ldap| & \\
+... & $\rightarrow$ El las listas de acceso de la base de datos:\\
+\verb|access to dn=""| & \\
+\verb|  by * read| & \\
+ & \\
+\verb|access to dn.base="cn=Subschema"| & \\
+\verb| by * read| & \\
+ & \\
+\verb|access to attr=supportedSASLMechanisms,subschemaSubentry| & \\
+\verb|  by anonymous read| & \\
+\verb|  by * read| & \\
+ & \\
+\verb|access to dn.regex="(.*,)?ou=chlgrupo,dc=chlgrupo,dc=com"| & \\
+\verb|  by dn="krb5PrincipalName=kadmin/admin@CHAOSDIMENSION.ORG,ou=people,dc=chaosdimension,dc=org" =wrscx| & \\
+\hline \end{tabular}
+\end{center}
+\vspace{0.5cm}
+
+
+
