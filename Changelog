@@ -12,6 +12,7 @@ GOsa2 changelog
   - Fixed IE issues with W3C compatibilty where IE posts disabled fields
   - Fixed problems with existing samba accounts and password changed fields
   - Removed login problems with undefined ldap_conf variable
+  - Fixed problems where the GECOS field is not written correctly
 
 * gosa 2.4beta2
   - Fixed error handler to be PHP 4.x compatible

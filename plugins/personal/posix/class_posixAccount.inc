@@ -746,13 +746,13 @@ class posixAccount extends plugin
       $this->shadowExpire = "";
     }
 
-    /* Call parents save to prepare $this->attrs */
-    plugin::save();
-
     /* Fill gecos */
     if (isset($this->parent) && $this->parent != NULL){
       $this->gecos= $this->parent->by_object['user']->cn;
     }
+
+    /* Call parents save to prepare $this->attrs */
+    plugin::save();
 
     /* Trust accounts */
     $objectclasses= array();
