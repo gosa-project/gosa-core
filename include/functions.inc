@@ -464,6 +464,48 @@ function get_lock ($object)
 }
 
 
+function get_list2($subtreeACL, $filter, $subsearch= TRUE, $base="", $attrs= array(), $flag= FALSE)
+{
+ global $config;
+
+  /* Base the search on default base if not set */
+  $ldap= $config->get_ldap_link($flag);
+  if ($base == ""){
+    $ldap->cd ($config->current['BASE']);
+  } else {
+    $ldap->cd ($base);
+  }
+
+  /* Perform ONE or SUB scope searches? */
+  $ldap->ls ($filter);
+
+  /* Check for size limit exceeded messages for GUI feedback */
+  if (preg_match("/size limit/i", $ldap->error)){
+    $_SESSION['limit_exceeded']= TRUE;
+  } else {
+    $_SESSION['limit_exceeded']= FALSE;
+  }
+  $result= array();
+
+
+  /* Crawl through reslut entries and perform the migration to the
+     result array */
+  while($attrs = $ldap->fetch()) {
+    $dn= preg_replace("/[ ]*,[ ]*/", ",", $ldap->getDN());
+    foreach ($subtreeACL as $key => $value){
+      if (preg_match("/$key/", $dn)){
+        $attrs["dn"]= convert_department_dn($dn);
+        $result[]= $attrs;
+        break;
+      }
+    }
+  }
+
+
+  return ($result);
+
+}
+
 function get_list($subtreeACL, $filter, $subsearch= TRUE, $base="", $attrs= array(), $flag= FALSE)
 {
   global $config;
@@ -698,6 +740,22 @@ function convert_department_dn($dn)
 
   /* Return and remove accidently trailing slashes */
   return rtrim($dep, "/");
+}
+
+function convert_department_dn2($dn)
+{
+  $dep= "";
+
+  /* Build a sub-directory style list of the tree level
+     specified in $dn */
+  $tmp = split (",", $dn);
+
+  $dep= preg_replace("%^.*/([^/]+)$%", "\\1", $tmp[0]);
+  
+  
+  /* Return and remove accidently trailing slashes */
+  $tmp = rtrim($dep, "/");
+  return $tmp;
 }
 
 
@@ -1133,8 +1191,14 @@ function range_selector($dcnt,$start,$range=25)
   }
 
   $numpages= (($dcnt / $range));
-  if(((int)($numpages))!=($numpages))
+
+  if ((int)$numpages <= 1 ){
+    return ("");
+  }
+
+  if(((int)($numpages))!=($numpages)){
     $numpages = (int)$numpages + 1;
+  }
   $ppage= (int)(($start / $range) + 0.5);
 
 
