@@ -325,6 +325,46 @@ class LDAP{
     }
   }
 
+  /**
+  *  Function rmdir_recursive
+  *
+  *  Description: Based in recursive_remove, adding two thing: full subtree remove, and delete own node.
+  *  Parameters:  The dn to delete
+  *  GiveBack:    True on sucessfull , 0 in error, and "" when we don't get a ldap conection
+  *
+  */
+
+  function rmdir_recursive($deletedn)
+  {
+    if($this->hascon){
+      if ($this->reconnect) $this->connect();
+      $delarray= array();
+        
+      /* Get sorted list of dn's to delete */
+      $this->ls ("(objectClass=*)",$deletedn);
+      while ($this->fetch()){
+        $deldn= $this->getDN();
+        $delarray[$deldn]= strlen($deldn);
+      }
+      arsort ($delarray);
+      reset ($delarray);
+
+      /* Really Delete ALL dn's in subtree */
+      foreach ($delarray as $key => $value){
+        $this->rmdir_recursive($key);
+      }
+      
+      /* Finally Delete own Node */
+      $r = @ldap_delete($this->cid, $deletedn);
+      $this->error = @ldap_error($this->cid);
+      return($r ? $r : 0);
+    }else{
+      $this->error = "Could not connect to LDAP server";
+      return("");
+    }
+  }
+
+
   function modify($attrs)
   {
     if($this->hascon){

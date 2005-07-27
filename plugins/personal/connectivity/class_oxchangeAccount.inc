@@ -709,7 +709,7 @@ class oxchangeAccount extends plugin
     $ldap= $this->config->get_ldap_link();
 
     if($ldap->dn_exists("ou=addr,".$this->dn)){
-    	$ldap->rmdir("ou=addr,".$this->dn);
+    	$ldap->rmdir_recursive("ou=addr,".$this->dn);
     	show_ldap_error($ldap->get_error());
     }
 
