@@ -2,18 +2,18 @@
 
 class divlist {
 
-	private $a_entries;
-	private $a_header;
-	private $b_displayPageNums; 	
-	private $summary;
-	private $cols;
+	var $a_entries;
+	var $a_header;
+	var $b_displayPageNums; 	
+	var $summary;
+	var $cols;
 
 	// Members for page managment
-	private $i_currentPage;
-	private $i_entriesPerPage;
+	var $i_currentPage;
+	var $i_entriesPerPage;
 	
 	
-	public function __construct(){
+	function __construct(){
 		$this->i_currentPage	=0;
 		$this->i_entriesPerPage	=10;
 		$this->s_summary		="";
@@ -24,27 +24,27 @@ class divlist {
 	}
 	
 
-	public function __destruct(){
+	function __destruct(){
 	
 	}
 
-	public function AddEntry($a_entriedata) {
+	function AddEntry($a_entriedata) {
 		$this->a_entries[] = $a_entriedata;
 	}
 
-	public function DisablePageNums() {
+	function DisablePageNums() {
 		$this->b_displayPageNums =false;
 	}
 
-	public function SetHeader($a_headerdata) {
+	function SetHeader($a_headerdata) {
 		$this->a_header[] = $a_headerdata ;
 	}
 
-	public function SetEntriesPerPage($i_num){
+	function SetEntriesPerPage($i_num){
 		$this->i_entriesPerPage=$i_num;
 	}
 	
-	public function DrawList(){
+	function DrawList(){
 		
 		$s_return = "";
 		
@@ -60,7 +60,7 @@ class divlist {
 		return ($s_return);
 	}
 	
-	private function _numpages(){
+	function _numpages(){
 		$cnt = count($this->a_entries);
 		
 		$tmp 	= $cnt % $this->i_entriesPerPage;
@@ -70,12 +70,12 @@ class divlist {
 		return $pages;
 	}
 	
-	private function _numentries(){
+	function _numentries(){
 		$cnt = count($this->a_entries);
 		return $cnt;
 	}
 	
-	private function _generateHeader(){
+	function _generateHeader(){
 		
 		$s_return = "";
 		
@@ -95,11 +95,11 @@ class divlist {
 		return $s_return;
 	}
 	
-	public function	 SetSummary($msg){
+	function	 SetSummary($msg){
 		$this->s_summary = $msg;
 	}
 
-	private function  _generatePage(){
+	function  _generatePage(){
 		
 		$s_value 	= "";
 		$s_key 		= "";
