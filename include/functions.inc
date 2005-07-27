@@ -1191,13 +1191,11 @@ function range_selector($dcnt,$start,$range=25)
   }
 
   $numpages= (($dcnt / $range));
-
-  if ((int)$numpages <= 1 ){
-    return ("");
-  }
-
   if(((int)($numpages))!=($numpages)){
     $numpages = (int)$numpages + 1;
+  }
+  if (((int)$numpages) <= 1 ){
+    return ("");
   }
   $ppage= (int)(($start / $range) + 0.5);
 
@@ -1218,6 +1216,8 @@ function range_selector($dcnt,$start,$range=25)
   if (($end - $begin) < $max_entries && ($end - $max_entries) > 0){
     $begin= $end - $max_entries;
   }
+
+  $output.= "<div style='border:1px solid #E0E0E0; background-color:#FFFFFF;'>";
 
   /* Draw decrement */
   if ($start > 0 ) {
@@ -1244,6 +1244,8 @@ function range_selector($dcnt,$start,$range=25)
       (($start+($range)))."\">".
       "<img alt=\"\" src=\"images/forward.png\" border=0 align=\"middle\"></a>";
   }
+
+  $output.= "</div>";
 
   return($output);
 }

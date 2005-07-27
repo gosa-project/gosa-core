@@ -435,14 +435,18 @@ class config  {
 	}
   }
 
-  function make_idepartments()
+  function make_idepartments($max_size= 40)
   {
   	$this->idepartments= array();
 	foreach ($this->departments as $key => $val){
-		$this->idepartments[$val]= $key;
+		if (strlen($key) > $max_size){
+			$this->idepartments[$val]= substr($key, 0, $max_size/2 - 3)."...".substr($key, -$max_size/2);
+		} else {
+			$this->idepartments[$val]= $key;
+		}
 	}
 
-	ksort($this->idepartments);
+	asort($this->idepartments);
   }
 
 }
