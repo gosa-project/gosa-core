@@ -26,7 +26,7 @@
    </div>
    <br>
    <div class="contentboxh">
-    <p class="contentboxh"><img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}</p>
+    <p class="contentboxh"><img src="{$launchimage}" align="right" alt="[F]"><LABEL for='filter'>{t}Filters{/t}</LABEL></p>
    </div>
    <div class="contentboxb">
      <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
@@ -46,7 +46,7 @@
         </tr>
     </table>
     <table summary="" width="100%" style="border-top:1px solid #B0B0B0;"><tr><td><img alt="Search" src="{$search_image}" align="middle" title="{t}Display users matching{/t}"></td>
-    <td><input style='width:99%' type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching user names{/t}' onChange="mainform.submit()"></td></tr></table>
+    <td><input id='filter' style='width:99%' type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching user names{/t}' onChange="mainform.submit()"></td></tr></table>
    {$apply}
    </div>
   </td>

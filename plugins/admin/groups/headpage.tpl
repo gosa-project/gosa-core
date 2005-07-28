@@ -27,7 +27,7 @@
    </div>
    <br>
    <div class="contentboxh">
-    <p class="contentboxh"><img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}</p>
+    <p class="contentboxh"><img src="{$launchimage}" align="right" alt="[F]"><LABEL for='filter'>{t}Filters{/t}</LABEL></p>
    </div>
    <div class="contentboxb">
      <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
@@ -66,7 +66,7 @@
 				<LABEL for="regex">{t}Display groups matching{/t}</LABEL>
 			</td>
     		<td>
-				<input type='text' id="regex" name='regex' maxlength='20' value='{$regex}' 
+				<input type='text' id="regex" name='regex' maxlength='20' value='{$regex}' id='filter' 
 					title='{t}Regular expression for matching group names{/t}' onChange="mainform.submit()">
 			</td>
 		</tr>
