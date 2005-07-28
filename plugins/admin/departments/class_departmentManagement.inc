@@ -76,10 +76,14 @@ class departmentManagement extends plugin
 			if(preg_match("/dep_del.*/",$key)){
 				$s_action = "del";
 				$s_entry  = preg_replace("/dep_".$s_action."_/i","",$key);
+				$s_entry  = preg_replace("/_.*/","",$s_entry);
+				$s_entry  = base64_decode($s_entry);
 			// Post for edit
 			}elseif(preg_match("/dep_edit_.*/",$key)){
 				$s_action="edit";
 				$s_entry  = preg_replace("/dep_".$s_action."_/i","",$key);
+				$s_entry  = preg_replace("/_.*/","",$s_entry);
+				$s_entry  = base64_decode($s_entry);
 				// Post for new
 			}elseif(preg_match("/dep_new.*/",$key)){
 				$s_action="new";
@@ -90,6 +94,7 @@ class departmentManagement extends plugin
 			}elseif(preg_match("/dep_root.*/i",$key)){
 				$s_action="root";
 			}
+		
 		}
 
 		if(isset($_POST['depselect']) && $_POST['depselect']){
@@ -126,9 +131,6 @@ class departmentManagement extends plugin
 			$depfilter['depselect']= $this->config->departments[trim($s_entry)];
 			$this->reload();
 		}
-
-
-		$s_entry  = preg_replace("/_.*/","",$s_entry);
 
 		if (isset($_GET['search'])){
 			$s= mb_substr($_GET['search'], 0, 1, "UTF8")."*";
@@ -306,7 +308,7 @@ class departmentManagement extends plugin
 				}
 				$field0 = array("string" => "<img src='images/folder.png' alt='department'>","attach"=>"style='width:20px;'");
 				$field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "width='100%'");
-				$field2 = array("string" => preg_replace("/%KEY%/", $key, $actions),"attach"=>"style='text-align:right;border:none'");
+				$field2 = array("string" => preg_replace("/%KEY%/", base64_encode($key), $actions),"attach"=>"style='text-align:right;border:none'");
 
 				$divlist->AddEntry( array($field0,$field1,$field2));
 
