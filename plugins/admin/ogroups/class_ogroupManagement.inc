@@ -425,14 +425,14 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
         $mail = $empty;
       }
 
-      $title = "title='gid : ".$key." - dn : ".$val['dn']."'";
+      $title = "title='dn : ".$val['dn']."'";
 
       if(!isset($val['description'][0])){
         $desc = "";
       }else{
         $desc = " - [ ".$val['description'][0]." ]";
       }
-      $field1 = array("string" => "<img src='images/list_ogroup.png' alt='"._("Object group")."'>");
+      $field1 = array("string" => "<img src='images/list_ogroup.png' alt='"._("Object group")."' ".$title.">");
       $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)),"attach"=>$title);
       $field3 = array("string" => $this->convert_list($val)."&nbsp;".$mail);
       $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions),"attach"=>"style='text-align:right;border:none'");
@@ -472,35 +472,40 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
     $temp= "";
 
 
-    $conv= array(   "U" => "select_user.png",
-        "G" => "select_groups.png",
-        "A" => "select_application.png",
-        "D" => "select_department.png",
-        "S" => "select_server.png",
-        "F" => "select_phone.png",
-        "W" => "select_workstation.png",
-        "T" => "select_terminal.png",
-        "P" => "select_printer.png");
+    $conv= array(   
+        "U" => array("select_user.png",_("User")),
+        "G" => array("select_groups.png",_("Group")),
+        "A" => array("select_application.png",_("Application")),
+        "D" => array("select_department.png",_("Department")),
+        "S" => array("select_server.png",_("Server")),
+        "F" => array("select_phone.png",_("Phone")),
+        "W" => array("select_workstation.png",_("Workstation")),
+        "T" => array("select_terminal.png",_("Terminal")),
+        "P" => array("select_printer.png",_("Printer")));
 
     /* Assemble picture */
     $type= $input['gosaGroupObjects'][0];
     $type= preg_replace("/[^A-Z]/i","",$type);
     if (isset($type[0])){
-      $p1['pic']= $conv[$type[0]];
+      $p1['pic']= $conv[$type[0]][0];
+      $p1['tit']= $conv[$type[0]][1];
       $p1['alt']= $type[0];
     } else {
       $p1['pic']= "empty.png";
+      $p1['tit']= "";
       $p1['alt']= "";
     }
     if (isset($type[1])){
-      $p2['pic']= $conv[$type[1]];
+      $p2['pic']= $conv[$type[1]][0];
       $p2['alt']= $type[1];
+      $p2['tit']= $conv[$type[1]][1];
     } else {
       $p2['pic']= "empty.png";
       $p2['alt']= "";
+      $p2['tit']= "";
     }
-    $temp = "<img src='images/".$p1['pic']."' alt='".$p1['alt']."'>";
-    $temp.= "<img src='images/".$p2['pic']."' alt='".$p2['alt']."'>";
+    $temp = "<img src='images/".$p1['pic']."' alt='".$p1['alt']."' title='".$p1['tit']."'>";
+    $temp.= "<img src='images/".$p2['pic']."' alt='".$p2['alt']."' title='".$p2['tit']."'>";
     return ($temp);
   }
 
