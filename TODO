@@ -14,20 +14,14 @@ Things to fix before 2.4:
   - adapt base when creating a new user/template
   - Add button for template created users
 
-* Group dialog
-  - Add properties
-  - tooltips
-  - Check strings
-
 * Systems dialog
   - Add buttons for all system types
   
 * All dialogs
   - adapt base when creating a new entity
-  - sorting
   - cleanup, remove not used code fragments
   - &nbsp; between pictures ... if needed (convert_list ? )
-  - ALT tags are partly wrong and not translated 
+  - ALT not translated 
 
 * include/class_mail-methods-kolab.inc -> gosaMailQuota not defined when opening "cajus"
 
