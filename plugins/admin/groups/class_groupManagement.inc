@@ -385,7 +385,7 @@ class groupManagement extends plugin
     $applimg  = "<img src='images/select_application.png' alt='A'  title='"._("Application")."'>"; 
     $phoneimg  = "<img src='images/select_phone.png'      alt='Ph' title='"._("Phone")  ."'>"; 
     // Space
-    $empty    = "<img src='images/nothing.png' style='width:16px;height:16px;' alt=''>";
+    $empty    = "<img src='images/empty.png' style='width:16px;height:16px;' alt=''>";
 
 
     $divlist = new divlist();

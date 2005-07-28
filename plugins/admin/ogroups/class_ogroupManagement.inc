@@ -391,7 +391,7 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
     $mailimg  = "<img src='images/mailto.png'             alt='M'  title='"._("Mail")   ."'>";
 
     // Space
-    $empty    = "<img src='images/nothing.png' style='width:16px;height:16px;' alt=''>";
+    $empty    = "<img src='images/empty.png' style='width:16px;height:16px;' alt=''>";
 
     // List Setup
     $divlist = new divlist();

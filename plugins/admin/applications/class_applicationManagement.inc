@@ -355,7 +355,7 @@ class applicationManagement extends plugin
         $applimg  = "<img src='images/select_application.png' alt='A'  title='"._("Application")."'>";
 
         // Space
-        $empty    = "<img src='images/nothing.png' style='width:16px;height:16px;' alt=''>";
+        $empty    = "<img src='images/empty.png' style='width:16px;height:16px;' alt=''>";
 
 
         $divlist = new divlist();

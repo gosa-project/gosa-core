@@ -568,7 +568,7 @@ class systems extends plugin
     }
 
     // Space
-    $empty    ="";//= "<img src='images/nothing.png' style='width:16px;height:16px;' alt=''>";
+    $empty    ="&nbsp;";
 
     // User and Template  Images
     $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";

@@ -671,7 +671,7 @@ class userManagement extends plugin
     $sambaimg = "<img src='images/select_winstation.png'  alt='S' title='"._("Samba") ."'>";
  
     // Space 
-    $empty    = "<img src='images/nothing.png' style='width:16px;height:16px;' alt=''>"; 
+    $empty    = "<img src='images/empty.png' style='width:16px;height:16px;' alt=''>"; 
     
     // User and Template  Images  
     $userimg  = "<img src='images/select_user.png' alt='User' title='%s'>";   
