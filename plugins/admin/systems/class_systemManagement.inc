@@ -535,7 +535,7 @@ class systems extends plugin
     " <input type='image' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
     " <input type='image' align='middle' src='images/list_home.png' title='"._("Go to users department")."' alt='"._("Home")."'                     name='dep_home'>&nbsp;".
     " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-    " <input type='image' align='middle' src='images/list_new_user.png' title='"._("Create new user")."' alt='"._("New user")."'                    name='user_new'>&nbsp;".
+    " <input type='image' align='middle' src='images/list_new_user.png' title='"._("Create new system")."' alt='"._("New user")."'                    name='user_new'>&nbsp;".
     " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
     _("Current base")."&nbsp;<select name='depselect' onChange='mainform.submit()'>$options</select>".
     " <input type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='".           _("Submit")."'>&nbsp;".
@@ -543,8 +543,8 @@ class systems extends plugin
 
 
 
-    $action= "<input type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit user")."'>";
-    $action.= "<input type='image' src='images/editdelete.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete user")."'>";
+    $action= "<input type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit system")."'>";
+    $action.= "<input type='image' src='images/editdelete.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete system")."'>";
 
 
     $divlist = new divlist();
@@ -554,7 +554,7 @@ class systems extends plugin
           array("string" => _("Actions"), "attach" => "style='border:none'" )));
 
 
-    $divlist->SetSummary(_("This table displays all users, in the selected tree."));
+    $divlist->SetSummary(_("This table displays all systems, in the selected tree."));
     $divlist->SetEntriesPerPage(20);
 
     // Defining Links
@@ -657,25 +657,24 @@ class systems extends plugin
   function convert_list($input)
   {
     $temp= "";
-    $conv= array(	"D" => "select_default.png",
-        
-
-  "T" => "select_terminal.png",
-        "L" => "select_workstation.png",
-        "F" => "select_phone.png",
-        "S" => "select_server.png",
-        "NT" => "select_new_terminal.png",
-        "NL" => "select_new_workstation.png",
-        "W" => "select_winstation.png",
-        "C" => "select_component.png",
-        "P" => "select_printer.png");
+    $conv= array(	
+        "D" => array("select_default.png",_("Template")),
+        "T" => array("select_terminal.png",_("Terminal")),
+        "L" => array("select_workstation.png",_("Workstation")),
+        "F" => array("select_phone.png",_("Phone")),
+        "S" => array("select_server.png",_("Server")),
+        "NT"=> array("select_new_terminal.png",_("New Terminal")),
+        "NL"=> array("select_new_workstation.png",_("New Workstation")),
+        "W" => array("select_winstation.png",_("Winstation")),
+        "C" => array("select_component.png",_("Network Device")),
+        "P" => array("select_printer.png",_("Printer")));
 
    if((isset($input['is_new']))&&(!empty($input['is_new']))){
      $input['type']="N".$input['type'];
    }
    foreach ($conv  as $key => $value){
       if($input['type']==$key){
-        $tmp['img'] ="<img src='images/".$value."' alt='".$key."' title='%s'>";
+        $tmp['img'] ="<img src='images/".$value[0]."' alt='".$key."' title='".$value['1']."'>";
         $tmp['class']=$key;
         return $tmp;
       }
