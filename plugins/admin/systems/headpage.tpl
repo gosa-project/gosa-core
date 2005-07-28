@@ -7,17 +7,12 @@
     </p>
   </div>
   <div class="contentboxb">
-    <p class="contentboxb">
-     <select style="width:500px; height:450px;" name="termlist" size=15 ondblclick="this.form.edit_helper.value='1'; this.form.submit()">
+      {$terminalshead}
+  </div>
+  <div style='height:4px;'></div>
+  <div class="contentboxb" style="border-top:1px solid #B0B0B0;">
       {$terminals}
-    </select>
-    <br>
-    <input type=submit value="{t}New{/t}..." name="new_terminal">&nbsp;
-    <input type=submit value="{t}Edit{/t}" name="select_terminal">&nbsp;
-    <input type=submit value="{t}Delete{/t}" name="delete_terminal">&nbsp;
-    <input type=submit value="{t}Set password{/t}" name="set_password">&nbsp;
     <input type=hidden name="edit_helper">
-   </p>
   </div>
   </td>
   <td style="vertical-align:top;">
@@ -27,9 +22,6 @@
    <div class="contentboxb">
    <p class="contentboxb">
     {t}This menu allows you to add, remove and change the properties of specific systems. You can only add systems which have already been started once.{/t}
-   </p>
-   <p>
-    {t}-Edit- will execute an assistant to aid you in changing the system properties. -Delete- will ask for confirmation before deleting systems.{/t}
    </p>
    </div>
    <br>
@@ -53,18 +45,6 @@
 		</td>
 	</tr>
 </table>    
-<table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
-	<tr>
-		<td width="50%"><img alt="" src="{$tree_image}" align=middle>
-			&nbsp;{t}Display systems of department{/t}
-		</td>
-	    <td>
-			<select name="depselect" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
-			      {html_options options=$deplist selected=$depselect}
-		    </select>
-		</td>
-	</tr>
-</table>
 <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
 	<tr>
 		<td width="50%"><img alt="" src="{$search_image}" align=middle>

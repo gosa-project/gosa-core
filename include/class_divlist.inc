@@ -117,9 +117,7 @@ class divlist {
 
 		$appendempty = ($this->_numentries() -$start);
 
-
-
-		for($i = $start ; $i <= $stop;$i++){
+		for($i = $start ; $i < $stop;$i++){
 			
 			if(isset($this->a_entries[$i])){
 							

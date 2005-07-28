@@ -2,6 +2,7 @@ GOsa2 changelog
 ===============
 
 * gosa 2.4beta3
+  - Updated layout
   - Fixed application removal
   - Improved accessibility for disabled persons
   - Added intranet account to list of connectivity plugins

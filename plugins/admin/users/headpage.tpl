@@ -1,25 +1,18 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
 <tr>
-  <td style="vertical-align:top;">
+  <td style="vertical-align:top;width:50%;">
   <div class="contentboxh">
     <p class="contentboxh">
      <LABEL for="userlist">{t}List of users{/t}</LABEL> {$hint}
     </p>
   </div>
   <div class="contentboxb">
-    <p class="contentboxb">
-      <select style="width:500px; height:450px;" id="userlist" name="userlist" size=15 ondblclick="this.form.edit_helper.value='1'; this.form.submit()">
-			{html_options options=$userlist}
-			<option disabled>&nbsp;</option>
-      </select>
-      <br>
-      <input type=submit value="{t}New{/t}..." name="new_user">&nbsp;
-      <input type=submit value="{t}New template{/t}" name="new_template">&nbsp;
-      <input type=submit value="{t}Edit{/t}" name="select_user">&nbsp;
-      <input type=submit value="{t}Delete{/t}" name="delete_user">&nbsp;
-      <input type=submit value="{t}Set password{/t}" name="setpass_user">
+		{$userlisthead}
+  </div>
+  <div style='height:4px;'></div>
+  <div class="contentboxb" style="border-top:1px solid #B0B0B0;">
+			{$userlist}
       <input type=hidden name="edit_helper">
-    </p>
   </div>
   </td>
   <td style="vertical-align:top;">
@@ -30,9 +23,6 @@
    <p class="contentboxb">
     {t}This menu allows you to create, edit and delete selected users. Having a great number of users, you may want to use the range selectors on top of the user list.{/t}
     </p>
-   <p class="contentboxb">
-   {t}-Edit- and -New...- execute an assistant to aid you in managing your account informations. -Delete- will ask for confirmation before deleting users.{/t}
-   </p>
    </div>
    <br>
    <div class="contentboxh">
@@ -55,21 +45,8 @@
             </td>
         </tr>
     </table>
-    <table summary="" style="border-top:1px solid #B0B0B0;" width="100%">
-        <tr>
-            <td>
-
-				<input type=checkbox name="subsearch" value="1" {$subsearch} onClick="mainform.submit()" title="{t}Dive into LDAP subtrees when searching{/t}">{t}Search in subtrees{/t}<br>
-			</td>
-		</tr>
-	</table>	
-
-			<table summary="" width="100%" style="border-top:1px solid #B0B0B0;"><tr><td width="50%"><img alt="" src="{$tree_image}" align="middle">&nbsp;{t}Display users of department{/t}</td>
-    <td><select name="depselect" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
-      {html_options options=$deplist selected=$depselect}
-    </select></td></tr></table>
-    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;"><tr><td width="50%"><img alt="" src="{$search_image}" align="middle">&nbsp;{t}Display users matching{/t}</td>
-    <td><input type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching user names{/t}' onChange="mainform.submit()"></td></tr></table>
+    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;"><tr><td><img alt="Search" src="{$search_image}" align="middle" title="{t}Display users matching{/t}"></td>
+    <td><input style='width:99%' type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching user names{/t}' onChange="mainform.submit()"></td></tr></table>
    {$apply}
    </div>
   </td>

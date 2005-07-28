@@ -32,6 +32,7 @@ class userManagement extends plugin
   var $acl= "";
   var $templates= array();
   var $got_uid= false;
+  var $departments=array();
 
   function userManagement ($config, $ui)
   {
@@ -58,45 +59,124 @@ class userManagement extends plugin
 
   function execute()
   {
-    $smarty= get_smarty();
-    $userfilter= get_global("userfilter");
+    $smarty       = get_smarty();             // Smarty instance
+    $userfilter   = get_global("userfilter"); // contains Filter Settings
+    $s_action     = "";                       // Contains the action to proceed
+    $s_entry      = "";                       // The value for s_action
+    $base_back    = "";                       // The Link for Backbutton
+
+    /* Start for New List Managment */
+    if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
+            $s_action="open";
+            $s_entry = base64_decode($_GET['dep_id']);
+            $userfilter['depselect']= "".$this->config->departments[trim($s_entry)];
+            $this->reload();
+    }
+
+    /* Test Posts */  
+    foreach($_POST as $key => $val){
+      // Post for delete
+      if(preg_match("/user_del.*/",$key)){
+        $s_action = "del";
+        $s_entry  = preg_replace("/user_".$s_action."_/i","",$key);
+        // Post for edit
+      }elseif(preg_match("/user_edit_.*/",$key)){
+        $s_action="edit";
+        $s_entry  = preg_replace("/user_".$s_action."_/i","",$key);
+        // Post for new
+      }elseif(preg_match("/dep_back.*/i",$key)){
+        $s_action="back";
+      }elseif(preg_match("/user_new.*/",$key)){
+        $s_action="new";
+      }elseif(preg_match("/dep_home.*/i",$key)){
+        $s_action="home";
+      }elseif(preg_match("/user_tplnew.*/i",$key)){
+        $s_action="new_tpl";
+      }elseif(preg_match("/user_chgpw.*/i",$key)){
+        $s_action="change_pw";
+        $s_entry  = preg_replace("/user_chgpw_/i","",$key);
+      }elseif(preg_match("/dep_root.*/i",$key)){
+        $s_action="root";
+      }
+    }
+    
+    if((isset($_GET['act']))&&($_GET['act']=="edit_entry")){
+      $s_action ="edit";
+      $s_entry  = $_GET['id'];
+    }
+
+    $s_entry  = preg_replace("/_.$/","",$s_entry);
+
+    /* Department changed? */
+    if(isset($_POST['depselect']) && $_POST['depselect']){
+      $userfilter['depselect']= $_POST['depselect'];
+      $this->reload();
+    }
+
+    /* Homebutton is posted */
+    if($s_action=="home"){
+      $userfilter['depselect']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
+      $userfilter['depselect']=(preg_replace("/^[^,]+,/","",$userfilter['depselect']));
+      $this->reload();
+    }
+
+    if($s_action=="root"){
+      $userfilter['depselect']=($this->config->current['BASE']);
+      $this->reload();
+    }
+
+
+    /* If Backbutton is Posted */
+    if($s_action=="back"){
+      $base_back          = preg_replace("/^[^,]+,/","",$userfilter['depselect']);
+      $base_back          = convert_department_dn($base_back);
+
+      if(isset($this->config->departments[trim($base_back)])){
+        $userfilter['depselect']= $this->config->departments[trim($base_back)];
+      }else{
+        $userfilter['depselect']= $this->config->departments["/"];
+      }
+      $this->reload();
+    }
+
+    /* End for new List Managment */
 
     /* Save filter data if we are in the headpage */
     if (!isset($this->usertab)){
-      foreach( array("depselect", "regex") as $type){
+      foreach( array("regex") as $type){
         if (isset($_POST[$type])){
           $userfilter[$type]= $_POST[$type];
         }
       }
-      if (isset($_POST['depselect'])){
-        foreach( array("functionalusers", "unixusers", "mailusers",
-              "sambausers", "proxyusers", "faxusers", "templates", "subsearch") as $type){
-
-          if (isset($_POST[$type])) {
-            $userfilter[$type]= "checked";
-          } else {
-            $userfilter[$type]= "";
-          }
-        }
-      }
-      if (isset($_GET['search'])){
-        $s= mb_substr($_GET['search'], 0, 1, "UTF8")."*";
-        if ($s == "**"){
-          $s= "*";
-        }
-        $userfilter['regex']= $s;
-      }
-      register_global("userfilter", $userfilter);
     }
+    if(isset($_POST['regex'])){
+      foreach( array("functionalusers", "unixusers", "mailusers","sambausers", "proxyusers", "faxusers", "templates", "subsearch") as $type){
+        if (isset($_POST[$type])) {
+          $userfilter[$type]= "checked";
+        } else {
+          $userfilter[$type]= "";
+        }
+      }
+    }
+    if (isset($_GET['search'])){
+      $s= mb_substr($_GET['search'], 0, 1, "UTF8")."*";
+      if ($s == "**"){
+        $s= "*";
+      }
+      $userfilter['regex']= $s;
+    }
+    register_global("userfilter", $userfilter);
+    
 
     /* React on user interaction here */
-    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    if (($_SERVER["REQUEST_METHOD"] == "POST")||($_SERVER["REQUEST_METHOD"]== "GET")){
 
       /* User wants to edit data? */
-      if ( (isset($_POST['select_user']) || (isset($_POST['edit_helper']) && $_POST['edit_helper'] == "1")) && isset($_POST['userlist']) && $_POST['userlist'] != ""){
+      if ($s_action=="edit"){
 
         /* Get 'dn' from posted 'uid', must be unique */
-        $this->dn= trim($_POST['userlist']);
+        
+        $this->dn= $this->list[trim($s_entry)]['dn'];
 
         /* Check locking, save current plugin in 'back_plugin', so
            the dialog knows where to return. */
@@ -135,10 +215,10 @@ class userManagement extends plugin
     }
 
     /* Password change requested */
-    if (isset($_POST['setpass_user']) && isset($_POST['userlist'])){
+    if ($s_action=="change_pw"){
 
       /* Get 'dn' from posted 'uid' */
-      $this->dn= trim($_POST['userlist']);
+      $this->dn= $this->list[trim($s_entry)]['dn'];
 
       /* Load permissions for selected 'dn' and check if
          we're allowed to remove this 'dn' */
@@ -222,10 +302,10 @@ class userManagement extends plugin
 
 
     /* Remove user was requested */
-    if (isset($_POST['delete_user']) && isset($_POST['userlist'])){
+    if ($s_action=="del"){
 
       /* Get 'dn' from posted 'uid' */
-      $this->dn= trim($_POST['userlist']);
+      $this->dn= $this->list[trim($s_entry)]['dn'];
 
       /* Load permissions for selected 'dn' and check if
          we're allowed to remove this 'dn' */
@@ -350,7 +430,7 @@ class userManagement extends plugin
     }
 
     /* Generate template list */
-    if (isset($_POST['new_user'])){
+    if ($s_action=="new"){
       $this->templates= array();
       $ldap= $this->config->get_ldap_link();
       foreach ($this->config->departments as $key => $value){
@@ -374,8 +454,7 @@ class userManagement extends plugin
     }
 
     /* New user/template request */
-    if (isset($_POST['new_user']) || isset($_POST['new_template'])){
-
+    if (($s_action=="new") || ($s_action=="new_tpl")){
       /* By default we set 'dn' to 'new', all relevant plugins will
          react on this. */
       $this->dn= "new";
@@ -391,7 +470,7 @@ class userManagement extends plugin
       $this->usertab->set_acl(array(':all'));
 
       /* Take care about templates */
-      if (isset($_POST['new_template'])){
+      if ($s_action=="new_tpl"){
         $this->is_template= TRUE;
         $this->usertab->set_template_mode ();
       } else {
@@ -529,8 +608,133 @@ class userManagement extends plugin
       return($message);
     }
 
+    /* Prepare departments */
+    $options= "";
+    foreach ($this->config->idepartments as $key => $value){
+            if ($userfilter['depselect'] == $key){
+                    $options.= "<option selected value='$key'>$value</option>";
+            } else {
+                    $options.= "<option value='$key'>$value</option>";
+            }
+    }
+ 
+    /* NEW LIST MANAGMENT */
+    $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
+            " <input type='image' align='middle' src='images/list_back.png' title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
+            " <input type='image' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
+            " <input type='image' align='middle' src='images/list_home.png' title='"._("Go to users department")."' alt='"._("Home")."' name='dep_home'>&nbsp;".
+            " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
+            " <input type='image' align='middle' src='images/list_new_user.png' title='"._("Create new user")."' alt='"._("New user")."' name='user_new'>&nbsp;".
+            " <input type='image' align='middle' src='images/list_new.png' title='"._("Create new template")."' alt='"._("New template")."' name='user_tplnew'>&nbsp;".
+            " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
+            _("Current base")."&nbsp;<select name='depselect' onChange='mainform.submit()'>$options</select>".
+            " <input type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
+            "</div>";
+
+    $action= "<input type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit user")."'>";
+    $action.= "<input type='image' src='images/list_password.png' alt='"._("password")."' name='user_chgpw_%KEY%' title='"._("Change password")."'>";
+    $action.= "<input type='image' src='images/editdelete.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete user")."'>";
+
+
+
+    $divlist = new divlist();
+    $divlist->SetHeader(array(
+                              array("string" => "&nbsp;"),
+                              array("string" => _("Username")." / "._("Department")),
+                              array("string" => _("Properties")),
+                              array("string" => _("Actions"), "attach" => "style='border:none'" )));
+                                    
+
+    $divlist->SetSummary(_("This table displays all users, in the selected tree."));
+    $divlist->SetEntriesPerPage(20);
+
+    // Defining Links 
+    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
+
+    foreach($this->departments as $key=> $val){
+
+      $field1 = array("string" => "<img src='images/folder.png' alt='department'>");
+      $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
+      $field3 = array("string" => "&nbsp;");
+      $field4 = array("string" => "&nbsp;", "attach" => "style='border:none'");
+
+      
+      $divlist->AddEntry(array($field1,$field2,$field3,$field4));
+    }
+
+    // Pictures for Extensions 
+    $usrimg  = "<img src='images/penguin.png'             alt='U' title='"._("GOsa")  ."'>";
+    $posiximg = "<img src='images/select_user.png'        alt='P' title='"._("Posix") ."'>";
+    $mailimg  = "<img src='images/mailto.png'             alt='M' title='"._("Mail")  ."'>";
+    $fonimg   = "<img src='images/select_phone.png'       alt='T' title='"._("Phone") ."'>";
+    $faximg   = "<img src='images/fax_small.png'          alt='F' title='"._("Fax")   ."'>";
+    $sambaimg = "<img src='images/select_winstation.png'  alt='S' title='"._("Samba") ."'>";
+ 
+    // Space 
+    $empty    = "<img src='images/nothing.png' style='width:16px;height:16px;' alt=''>"; 
+    
+    // User and Template  Images  
+    $userimg  = "<img src='images/select_user.png' alt='User' title='%s'>";   
+    $tplimg   = "<img src='images/select_template.png' alt='Template' title='%s'>";   
+   
+    $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
+ 
+    // Defines Arrays to save User and Templates
+    $tpls = array();
+    $users= array();
+
+    // Test Every Entry and generate divlist Array  
+    foreach($this->list as $key => $val){
+
+      // Specify Pics for Extensions  
+      if(in_array("posixAccount"    ,$val['objectClass'])) $posix = $posiximg;  else $posix=$empty; 
+      if(in_array("gosaMailAccount" ,$val['objectClass'])) $maila = $mailimg;   else $maila=$empty; 
+      if(in_array("goFonAccount"    ,$val['objectClass'])) $fonac = $fonimg;    else $fonac=$empty; 
+      if(in_array("goFaxAccount"    ,$val['objectClass'])) $faxac = $faximg;    else $faxac=$empty; 
+      if(in_array("sambaSamAccount" ,$val['objectClass'])) $samba = $sambaimg;  else $samba=$empty; 
+      if(in_array("gosaUserTemplate",$val['objectClass'])) $tpl   = $tplimg;    else $tpl=$userimg;
+        
+      // Generate Array to Add 
+      if (isset($val["sn"]) && isset($val["givenName"])){
+        $display= $val["sn"][0].", ".$val["givenName"][0]." [".$val["uid"][0]."]";
+      } else {
+        $display= "[".$val["uid"][0]."]";
+      }
+
+      $field1 = array("string" => sprintf($tpl,$val['dn']),"attach"=>"style='width:20px;align:middle;'");
+      $field2 = array("string" => sprintf($editlink,$key,$display),"attach"=>"title='".$val['dn']."'");
+      $field3 = array("string" => $usrimg."&nbsp;".$posix."&nbsp;".$maila."&nbsp;".$fonac."&nbsp;".$faxac."&nbsp;".$samba,"attach" => "style='width:118px;'");
+      $field4 = array("string" => preg_replace("/%KEY%/", "$key", $action),"attach" => "style='border:none; text-align:right;width:48px'");
+    
+      $add = array($field1,$field2,$field3,$field4);
+      
+      // Template or User
+      if(in_array("gosaUserTemplate",$val['objectClass'])){
+        $tpls[strtolower( $val['sn']['0'].$val['uid']['0'])]=$add;
+      }else{
+        $users[strtolower( $val['sn']['0'].$val['uid']['0'])]=$add;
+      }
+    }
+    
+    // Sort Entries 
+    ksort($users);
+    ksort($tpls);
+
+    // Append Templates
+    foreach($tpls as $key => $val){
+      $divlist->AddEntry( $val, array(""));
+    }
+    // Append Users 
+    foreach($users as $key => $val){
+      $divlist->AddEntry( $val, array(""));
+    }
     /* Show main page */
-    $smarty->assign("userlist", $this->userlist);
+    //$smarty->assign("userlist",   nl2br(htmlentities($divlist->DrawList())));
+    $smarty->assign("userlist",   $divlist->DrawList());
+    $smarty->assign("userlisthead", $listhead);
+
+    /* END NEW LIST MANAGMENT
+     */  
     $smarty->assign("search_image", get_template_path('images/search.png'));
     $smarty->assign("tree_image", get_template_path('images/tree.png'));
     $smarty->assign("infoimage", get_template_path('images/info.png'));
@@ -610,6 +814,30 @@ class userManagement extends plugin
       $this->list= get_list($this->ui->subtreeACL, "$filter", FALSE, $base, array("uid", "givenName", "sn", "objectClass"), TRUE);
     }
 
+
+
+    /* NEW LIST MANAGMENT
+     * We also need to search for the departments
+     * So we are able to navigate like in konquerer 
+     */
+    $base2 = preg_replace("/ou=people,/i","",$base);
+
+    $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
+                              TRUE, $base2, array("ou", "description"), TRUE);
+
+    $this->departments= array();
+    foreach ($res3 as $value){
+      if($value["description"][0]!=".."){
+        $this->departments[$value['dn']]= convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
+      }else{
+        $this->departments[$value['dn']]=$value["description"][0];
+      }
+    }
+    
+    /* END NEW LIST MANAGMENT 
+     */
+  
+    
     $this->userlist= array();
 
     foreach ($this->list as $value){
@@ -627,6 +855,7 @@ class userManagement extends plugin
         }
       }
     }
+
     natcasesort ($this->userlist);
     reset ($this->userlist);
   }

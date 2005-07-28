@@ -435,7 +435,7 @@ class config  {
 	}
   }
 
-  function make_idepartments($max_size= 40)
+  function make_idepartments($max_size= 28)
   {
   	$this->idepartments= array();
 	foreach ($this->departments as $key => $val){

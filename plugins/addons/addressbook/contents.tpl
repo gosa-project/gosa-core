@@ -74,40 +74,36 @@
 <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
 	<tr>
 		<td>
-			<img alt="" src="{$tree_image}" align=middle>
-			&nbsp;<LABEL for="search_base">{t}Display results for department{/t}</LABEL>
+			<LABEL for="search_base"><img alt="" src="{$tree_image}" align=middle title='{t}Display results for department{/t}'></LABEL>
 		</td>
     	<td>
-			<select name="search_base" size="1" onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
+			<select name="search_base" style='width:99%' size="1" onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
 		      	{html_options options=$deplist selected=$depselect}
 				<option disabled>&nbsp;</option>
     		</select>
 		</td>
 	</tr>
 </table>
-
 <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
 	<tr>
-		<td width="50%"><img alt="" src="{$search_image}" align=middle>
-			&nbsp;<LABEL for="search_for">{t}Search for{/t}</LABEL>
+		<td>
+			<LABEL for="object_type"><img alt="" src="{$obj_image}" align=middle title='{t}Match object{/t}'></LABEL>
 		</td>
 	    <td>
-			<input id="search_for" type='text' name='search_for' maxlength='20' value='{$search_for}' title='{t}Search string{/t}' onChange="mainform.submit()">
-		</td>
-	</tr>
-</table>
-
-<table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
-	<tr>
-		<td width="50%">
-			<img alt="" src="{$search_image}" align=middle>&nbsp;<LABEL for="object_type">{t}Match object{/t}</LABEL>
-		</td>
-	    <td>
-	      	<select id="object_type" name="object_type" size="1" onChange="mainform.submit()" title="{t}Choose the object that will be searched in{/t}">
+			<select id="object_type" style='width:99%' name="object_type" size="1" onChange="mainform.submit()" title="{t}Choose the object that will be searched in{/t}">
     	   		{html_options options=$objlist selected=$object_type}
 				<option disabled>&nbsp;</option>
 	      	</select>
 	    </td>
+	</tr>
+</table>
+<table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
+	<tr>
+		<td><LABEL for="search_for"><img alt="" src="{$search_image}" align=middle title='{t}Search for{/t}'></LABEL>
+		</td>
+	    <td>
+			<input id="search_for" style='width:99%' type='text' name='search_for' maxlength='20' value='{$search_for}' title='{t}Search string{/t}' onChange="mainform.submit()">
+		</td>
 	</tr>
 </table>
    {$apply}

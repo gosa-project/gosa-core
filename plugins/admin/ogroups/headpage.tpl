@@ -7,17 +7,11 @@
     </p>
   </div>
   <div class="contentboxb">
-    <p class="contentboxb">
-     <select style="width:500px; height:450px;" name="grouplist" size="15" ondblclick="this.form.edit_helper.value='1'; this.form.submit()">
+      {$groupshead}
+  </div>
+  <div style='height:4px;'></div>
+  <div class="contentboxb" style="border-top:1px solid #B0B0B0;">
       {$groups}
-	 <option disabled>&nbsp;</option> 
-    </select>
-    <br>
-    <input type=submit value="{t}New{/t}..." name="new_group">&nbsp;
-    <input type=submit value="{t}Edit{/t}" name="select_group">&nbsp;
-    <input type=submit value="{t}Delete{/t}" name="delete_group">&nbsp;
-    <input type=hidden name="edit_helper">
-   </p>
   </div>
 
   </td>
@@ -28,9 +22,6 @@
    <div class="contentboxb">
    <p class="contentboxb">
      {t}This menu allows you to add, edit or remove selected groups. You may want to use the range selector on top of the group listbox, when working with a large number of groups.{/t}
-    </p>
-    <p class="contentboxb">
-      {t}-Edit- and -New...- will execute an assistant to aid you in editing group properties. -Delete- will ask for confirmation before removing groups.{/t}
     </p>
    </div>
    <br>
@@ -57,12 +48,8 @@
 	</tr>
 </table>    
 
-    <table summary="" style="width:100%;border-top:1px solid #B0B0B0;"><tr><td width="50%"><img alt="" src="{$tree_image}" align=middle>&nbsp;{t}Display groups of department{/t}</td>
-    <td><select name="depselect" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
-      {html_options options=$deplist selected=$depselect}
-    </select></td></tr></table>
-    <table summary="" style="width:100%;border-top:1px solid #B0B0B0;"><tr><td width="50%"><img alt="" src="{$search_image}" align=middle>&nbsp;{t}Display groups matching{/t}</td>
-    <td><input type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching group names{/t}' onChange="mainform.submit()"></td></tr></table>
+    <table summary="" style="width:100%;border-top:1px solid #B0B0B0;"><tr><td><img alt="" src="{$search_image}" align=middle title='{t}Display groups matching{/t}'></td>
+    <td><input type='text' name='regex' style='width:99%' maxlength='20' value='{$regex}' title='{t}Regular expression for matching group names{/t}' onChange="mainform.submit()"></td></tr></table>
    {$apply}
    </div>
   </td>

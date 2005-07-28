@@ -24,6 +24,7 @@ class groupManagement extends plugin
   /* Definitions */
   var $plHeadline= "Groups";
   var $plDescription= "This does something";
+  var $departments = array();
 
   /* Dialog attributes */
   var $grouptab= NULL;
@@ -57,13 +58,17 @@ class groupManagement extends plugin
   {
     /* Save data */
     $groupfilter= get_global("groupfilter");
+    $s_action   = "";
+    $s_entry    = "";
+
+
     if (!isset($this->grouptab)){
       foreach( array("depselect", "guser", "regex") as $type){
         if (isset($_POST[$type])){
           $groupfilter[$type]= $_POST[$type];
         } 
       }
-      if (isset($_POST['depselect'])){
+      if (isset($_POST['regex'])){
         foreach( array("primarygroups", "sambagroups", "mailgroups", "appgroups",
               "functionalgroups", "subsearch") as $type){
 
@@ -84,6 +89,81 @@ class groupManagement extends plugin
       register_global("groupfilter", $groupfilter);
     }
 
+
+    /* Test Posts */
+    foreach($_POST as $key => $val){
+      // Post for delete
+      if(preg_match("/group_del.*/",$key)){
+        $s_action = "del";
+        $s_entry  = preg_replace("/group_".$s_action."_/i","",$key);
+        // Post for edit
+      }elseif(preg_match("/group_edit_.*/",$key)){
+        $s_action="edit";
+        $s_entry  = preg_replace("/group_".$s_action."_/i","",$key);
+        // Post for new
+      }elseif(preg_match("/dep_back.*/i",$key)){
+        $s_action="back";
+      }elseif(preg_match("/group_new.*/",$key)){
+        $s_action="new";
+      }elseif(preg_match("/dep_home.*/i",$key)){
+        $s_action="home";
+      }elseif(preg_match("/group_tplnew.*/i",$key)){
+        $s_action="new_tpl";
+      }elseif(preg_match("/group_chgpw.*/i",$key)){
+        $s_action="change_pw";
+        $s_entry  = preg_replace("/group_chgpw_/i","",$key);
+      }elseif(preg_match("/dep_root.*/i",$key)){
+        $s_action="root";
+      }
+    }
+    $s_entry  = preg_replace("/_.$/","",$s_entry); 
+
+    /* Start for New List Managment */
+    if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
+      $s_action="open";
+      $s_entry = base64_decode($_GET['dep_id']);
+      $groupfilter['depselect']= "".$this->config->departments[trim($s_entry)];
+      $this->reload();
+    }
+
+    // Edit if
+    if((isset($_GET['act']))&&($_GET['act']=="edit_entry")){
+      $s_action ="edit";
+      $s_entry  = $_GET['id'];
+    }
+
+    /* Department changed? */
+    if(isset($_POST['depselect']) && $_POST['depselect']){
+      $groupfilter['depselect']= $_POST['depselect'];
+      $this->reload();
+    }
+
+    /* Homebutton is posted */
+    if($s_action=="home"){
+      $groupfilter['depselect']= (preg_replace("/^[^,]+,/","",$this->ui->dn));
+      $groupfilter['depselect']= (preg_replace("/^[^,]+,/","",$groupfilter['depselect']));
+      $this->reload();
+    }
+
+    if($s_action=="root"){
+      $groupfilter['depselect']=($this->config->current['BASE']);
+      $this->reload();
+    }
+
+    /* If Backbutton is Posted */
+    if($s_action == "back"){
+      $base_back= preg_replace("/^[^,]+,/","",$groupfilter['depselect']);
+      $base_back= convert_department_dn($base_back);
+
+      if(isset($this->config->departments[trim($base_back)])){
+        $groupfilter['depselect']= $this->config->departments[trim($base_back)];
+      }else{
+        $groupfilter['depselect']= $this->config->departments["/"];
+      }
+      $this->reload();
+    }
+    register_global("groupfilter", $groupfilter);
+
     $smarty= get_smarty();
 
     /* Prepare formular */
@@ -100,7 +180,7 @@ class groupManagement extends plugin
     }
 
     /* New group? */
-    if (isset($_POST['new_group'])){
+    if ($s_action=="new"){
 
       /* By default we set 'dn' to 'new', all relevant plugins will
          react on this. */
@@ -156,10 +236,10 @@ class groupManagement extends plugin
     }
 
     /* User wants to edit data? */
-    if ((isset($_POST['select_group']) || (isset($_POST['edit_helper']) && $_POST['edit_helper'] == "1")) && isset($_POST['grouplist']) && $_POST['grouplist'] != ""){
+    if ($s_action=="edit"){
 
       /* Get 'dn' from posted 'uid', must be unique */
-      $this->dn= trim($_POST['grouplist']);
+      $this->dn= $this->grouplist[trim($s_entry)]['dn'];
 
       /* Check locking, save current plugin in 'back_plugin', so
          the dialog knows where to return. */
@@ -182,10 +262,9 @@ class groupManagement extends plugin
     }
 
     /* Remove user was requested */
-    if (isset($_POST['delete_group']) && isset($_POST['grouplist'])){
-
+    if ($s_action=="del"){
       /* Get 'dn' from posted 'uid' */
-      $this->dn= trim($_POST['grouplist']);
+      $this->dn= $this->grouplist[trim($s_entry)]['dn'];
 
       /* Load permissions for selected 'dn' and check if
          we're allowed to remove this 'dn' */
@@ -264,16 +343,109 @@ class groupManagement extends plugin
       return ($display);
     }
 
+    /* Prepare departments */
+    $options= "";
+    foreach ($this->config->idepartments as $key => $value){
+            if ($groupfilter['depselect'] == $key){
+                    $options.= "<option selected value='$key'>$value</option>";
+            } else {
+                    $options.= "<option value='$key'>$value</option>";
+            }
+    }
+
+    // Managment
+    $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
+      " <input type='image' align='middle' src='images/list_back.png' title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
+      " <input type='image' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
+      " <input type='image' align='middle' src='images/list_home.png' title='"._("Go to users department")."'
+ alt='"._("Home")."' name='dep_home'>&nbsp;".
+      " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
+      " <input type='image' align='middle' src='images/list_new_group.png' title='"._("Create new group")."'
+ alt='"._("New")."' name='group_new'>&nbsp;".
+      " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
+      _("Current base")."&nbsp;<select name='depselect' onChange='mainform.submit()'>$options</select>".
+       " <input type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."'   name='submit_department' alt='"._("Submit")."'>&nbsp;".
+      "</div>";
+
+    
+    $actions = "<input type='image' src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
+    $actions.= "<input type='image' src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
+
+    // Defining Links
+    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
+
+    // image Buttons 
+    $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
+    $userimg  = "<img src='images/select_groups.png' alt='User'    title='%s'>";
+
+    // Extension images 
+    $posiximg = "<img src='images/select_groups.png'        alt='P'  title='"._("Posix")  ."'>";
+    $mailimg  = "<img src='images/mailto.png'             alt='M'  title='"._("Mail")   ."'>";
+    $sambaimg = "<img src='images/select_winstation.png'  alt='S'  title='"._("Samba")  ."'>";
+    $applimg  = "<img src='images/select_application.png' alt='A'  title='"._("Application")."'>"; 
+    $phoneimg  = "<img src='images/select_phone.png'      alt='Ph' title='"._("Phone")  ."'>"; 
+    // Space
+    $empty    = "<img src='images/nothing.png' style='width:16px;height:16px;' alt=''>";
+
+
+    $divlist = new divlist();
+    $divlist->SetHeader(array(
+          array("string" => "&nbsp;"),
+          array("string" => _("Groupname")." / "._("Department")),
+          array("string" => _("Properties"), "attach" => "style='width:100px;'"),
+          array("string" => _("Actions")    ,"attach" => "style='border:none'")
+          ));
+
+
+    $divlist->SetSummary(_("This table displays all groups, in the selected tree."));
+    $divlist->SetEntriesPerPage(20);
+
+    foreach($this->departments as $key=> $val){
+
+      $field1 = array("string" => "<img src='images/folder.png' alt='department'>");
+      $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
+      $field3 = array("string" => "&nbsp;");
+      $field4 = array("string" => "&nbsp;","attach"=>"style='text-align:right;border:none'");
+
+      $divlist->AddEntry(array($field1,$field2,$field3,$field4));
+    }
+
+    foreach($this->grouplist as $key => $val){
+
+      if(isset($val['objectClass'])){
+        if(in_array("posixGroup",           $val['objectClass']))   $posix = $posiximg;   else $posix   = $empty;
+        if(in_array("gosaMailAccount",      $val['objectClass']))   $mail  = $mailimg;    else $mail    = $empty;
+        if(in_array("sambaGroupMapping",    $val['objectClass']))   $samba = $sambaimg;   else $samba   = $empty;
+        if(in_array("gosaApplicationGroup", $val['objectClass']))   $appl  = $applimg;    else $appl    = $empty;
+        if(in_array("goFonPickupGroup",     $val['objectClass']))   $phone = $phoneimg;   else $phone   = $empty;
+      }else{
+        $posix=$mail=$samba=$appl=$phone=$empty;
+      }
+
+      $title = "title='gid : ".$key." - dn : ".$val['dn']."'";
+
+      if(!isset($val['description'][0])){
+        $desc = "";
+      }else{
+        $desc = " - [ ".$val['description'][0]." ]";
+      }      
+      $field1 = array("string" => sprintf($userimg,$val['dn']),"attach"=>"style='width:20px;align:middle;'");
+      $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)),"attach"=>$title);
+      $field3 = array("string" => $posix."&nbsp;".$mail."&nbsp;".$samba."&nbsp;".$appl."&nbsp;".$phone);  
+      $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions),"attach"=>"style='text-align:right;border:none;width:32px;'");
+      
+      $divlist->AddEntry(array($field1,$field2,$field3,$field4));    
+    }
+
     /* Show main page */
-    $smarty->assign("grouplist", $this->grouplist);
+    $smarty->assign("grouplisthead", $listhead);
+    $smarty->assign("grouplist", $divlist->DrawList());
     $smarty->assign("search_image", get_template_path('images/search.png'));
     $smarty->assign("tree_image", get_template_path('images/tree.png'));
     $smarty->assign("infoimage", get_template_path('images/info.png'));
     $smarty->assign("launchimage", get_template_path('images/launch.png'));
     $smarty->assign("deplist", $this->config->idepartments);
-    foreach( array("depselect", "guser", "regex", "primarygroups", "mailgroups",
-          "appgroups", "sambagroups", "functionalgroups", "subsearch") as $type){
-
+    foreach( array("depselect", "guser", "regex", "primarygroups", "mailgroups","appgroups", "sambagroups", "functionalgroups", "subsearch") as $type){
       $smarty->assign("$type", $groupfilter[$type]);
     }
 
@@ -355,15 +527,35 @@ class groupManagement extends plugin
       $error2= $ldap->error;
       while ($attrs= $ldap->fetch()){
         if (!isset($primaries[$attrs['gidNumber'][0]])){
-          if (isset($attrs["description"][0])){
-            $this->grouplist[$attrs["dn"]]= $attrs["cn"][0]." [".
-              $attrs["description"][0]."]";
-          } else {
-            $this->grouplist[$attrs["dn"]]= $attrs["cn"][0];
-          }
+          $this->grouplist[$attrs['gidNumber'][0]]= $attrs;
         }
       }
     }
+
+    /* NEW LIST MANAGMENT
+     * We also need to search for the departments
+     * So we are able to navigate like in konquerer
+     */
+    $base2 = preg_replace("/ou=people,/i","",$base);
+
+    $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
+                              TRUE, $base2, array("ou", "description"), TRUE);
+
+    $this->departments= array();
+    foreach ($res3 as $value){
+      if($value["description"][0]!=".."){
+        $this->departments[$value['dn']]= convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
+      }else{
+        $this->departments[$value['dn']]=$value["description"][0];
+      }
+    }
+
+    /* END NEW LIST MANAGMENT
+     */
+
+
+
+
 
     /* Generate grouplist */
     if ($filter != ""){
@@ -383,15 +575,9 @@ class groupManagement extends plugin
     }
 
     foreach ($res as $value){
-      if (isset($value["description"][0])){
-        $this->grouplist[$value["dn"]]= $value["cn"][0]." [".
-          $value["description"][0]."]";
-      } else {
-        $this->grouplist[$value["dn"]]= $value["cn"][0];
-      }
+      $this->grouplist[$value['gidNumber'][0]]= $value;
     }
 
-    natcasesort ($this->grouplist);
     reset ($this->grouplist);
   }
 

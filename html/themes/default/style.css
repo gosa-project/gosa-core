@@ -1,3 +1,31 @@
+table.listframe {
+	width:600px;
+	background:#F3F3F3;
+}
+
+tr.listrow {
+	background:#EAEAEA;
+}
+
+td.listheader {
+	background:#E5E5E5;
+	font-weight:bold;
+    border-right:1px solid #C0C0C0;
+	padding:3px;
+}
+
+td.list0 {
+	background:#F0F0F0;
+    border-right:1px solid #C0C0C0;
+	padding:3px;
+}
+
+td.list1 {
+	background:white;
+    border-right:1px solid #C0C0C0;
+	padding:3px;
+}
+
 body
 {
   margin-left: 0px;

@@ -73,15 +73,16 @@ class ogroupManagement extends plugin
     /* Prepare template */
     $smarty= get_smarty();
 
-    /* Save data */
     $ogroupfilter= get_global("ogroupfilter");
+    $s_action   = "";
+    $s_entry    = "";
 
     foreach( array("depselect", "regex") as $type){
       if (isset($_POST[$type])){
         $ogroupfilter[$type]= $_POST[$type];
       }
     }
-    if (isset($_POST['depselect'])){
+    if (isset($_POST['regex'])){
       foreach( array("usergroups", "groupgroups", "appgroups", "depgroups",
             "servergroups", "wsgroups", "prtgroups", "tcgroups", "fongroups") as $type){
 
@@ -99,6 +100,82 @@ class ogroupManagement extends plugin
       }
       $ogroupfilter['regex']= $s;
     }
+
+    /* Test Posts */
+    foreach($_POST as $key => $val){
+      // Post for delete
+      if(preg_match("/group_del.*/",$key)){
+        $s_action = "del";
+        $s_entry  = preg_replace("/group_".$s_action."_/i","",$key);
+        // Post for edit
+      }elseif(preg_match("/group_edit_.*/",$key)){
+        $s_action="edit";
+        $s_entry  = preg_replace("/group_".$s_action."_/i","",$key);
+        // Post for new
+      }elseif(preg_match("/dep_back.*/i",$key)){
+        $s_action="back";
+      }elseif(preg_match("/group_new.*/",$key)){
+        $s_action="new";
+      }elseif(preg_match("/dep_home.*/i",$key)){
+        $s_action="home";
+      }elseif(preg_match("/group_tplnew.*/i",$key)){
+        $s_action="new_tpl";
+      }elseif(preg_match("/group_chgpw.*/i",$key)){
+        $s_action="change_pw";
+        $s_entry  = preg_replace("/group_chgpw_/i","",$key);
+      }elseif(preg_match("/dep_root.*/i",$key)){
+        $s_action="root";
+      }
+    }
+    $s_entry  = preg_replace("/_.$/","",$s_entry);
+
+    /* Department changed? */
+    if(isset($_POST['depselect']) && $_POST['depselect']){
+      $ogroupfilter['depselect']= $_POST['depselect'];
+      $this->reload();
+    }
+
+    /* Start for New List Managment */
+    if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
+      $s_action="open";
+      $s_entry = base64_decode($_GET['dep_id']);
+      $ogroupfilter['depselect']= "".$this->config->departments[trim($s_entry)];
+      $this->reload();
+    }
+
+    /* If Backbutton is Posted */
+    if($s_action=="back"){
+      $base_back          = preg_replace("/^[^,]+,/","",$ogroupfilter['depselect']);
+      $base_back          = convert_department_dn($base_back);
+
+      if(isset($this->config->departments[trim($base_back)])){
+        $ogroupfilter['depselect']= $this->config->departments[trim($base_back)];
+      }else{
+        $ogroupfilter['depselect']= $this->config->departments["/"];
+      }
+      register_global("ogroupfilter", $ogroupfilter);
+      $this->reload();
+    }
+
+    /* Homebutton is posted */
+    if($s_action=="home"){
+      $ogroupfilter['depselect']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
+      $ogroupfilter['depselect']=(preg_replace("/^[^,]+,/","",$ogroupfilter['depselect']));
+      $this->reload();
+    }
+
+    /* root posted */ 
+    if($s_action=="root"){
+      $ogroupfilter['depselect']=($this->config->current['BASE']);
+      $this->reload();
+    }
+
+    // Edit if
+    if((isset($_GET['act']))&&($_GET['act']=="edit_entry")){
+      $s_action ="edit";
+      $s_entry  = $_GET['id'];
+    }
+
     register_global("ogroupfilter", $ogroupfilter);
 
     /* Prepare formular */
@@ -115,7 +192,7 @@ class ogroupManagement extends plugin
     }
 
     /* New group? */
-    if (isset($_POST['new_group'])){
+    if ($s_action=="new"){
 
       /* By default we set 'dn' to 'new', all relevant plugins will
          react on this. */
@@ -127,10 +204,10 @@ class ogroupManagement extends plugin
       $this->ogroup->set_acl(array(':all'));
     }
 
-    if (isset($_POST['delete_group']) && isset($_POST['grouplist'])){
+    if ($s_action=="del"){
 
       /* Get 'dn' from posted 'uid' */
-      $this->dn= trim($_POST['grouplist']);
+      $this->dn= $this->ogrouplist[$s_entry]['dn'];
 
       /* Load permissions for selected 'dn' and check if
          we're allowed to remove this 'dn' */
@@ -194,10 +271,10 @@ class ogroupManagement extends plugin
       unset($_SESSION['objectinfo']);
     }
 
-    if ((isset($_POST['select_group']) || (isset($_POST['edit_helper']) && $_POST['edit_helper'] == "1")) && isset($_POST['grouplist']) && $_POST['grouplist'] != ""){
+    if ($s_action=="edit"){
 
       /* Get 'dn' from posted 'uid', must be unique */
-      $this->dn= trim($_POST['grouplist']);
+      $this->dn= $this->ogrouplist[$s_entry]['dn'];
 
       /* Check locking, save current plugin in 'back_plugin', so
          the dialog knows where to return. */
@@ -275,6 +352,99 @@ class ogroupManagement extends plugin
       return ($display);
     }
 
+    /* Prepare departments */
+    $options= "";
+    foreach ($this->config->idepartments as $key => $value){
+            if ($ogroupfilter['depselect'] == $key){
+                    $options.= "<option selected value='$key'>$value</option>";
+            } else {
+                    $options.= "<option value='$key'>$value</option>";
+            }
+    }
+
+    // Managment
+    $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
+      " <input type='image' align='middle' src='images/list_back.png' title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
+      " <input type='image' src='images/list_root.png' align='middle' title='"._("Go to root department")."'
+name='dep_root' alt='"._("Root")."'>&nbsp;".
+      " <input type='image' align='middle' src='images/list_home.png' title='"._("Go to users department")."'
+ alt='"._("Home")."' name='dep_home'>&nbsp;".
+      " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
+      " <input type='image' align='middle' src='images/list_new_ogroup.png' title='"._("Create new object group")."' alt='"._("new")."' name='group_new'>".
+      " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
+      _("Current base")."&nbsp;<select name='depselect' onChange='mainform.submit()'>$options</select>".
+      " <input type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
+      "</div>";
+
+
+    $actions = "<input type='image' src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
+    $actions.= "<input type='image' src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
+
+    // Defining Links
+    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
+
+    // image Buttons
+    $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
+    $userimg  = "<img src='images/select_groups.png' alt='User'    title='%s'>";
+
+    // Extension images
+    $mailimg  = "<img src='images/mailto.png'             alt='M'  title='"._("Mail")   ."'>";
+
+    // Space
+    $empty    = "<img src='images/nothing.png' style='width:16px;height:16px;' alt=''>";
+
+    // List Setup
+    $divlist = new divlist();
+    $divlist->SetHeader(array(
+          array("string" => "&nbsp;","attach"=>"style='width:20px;'"),
+          array("string" => _("Name of object groups")." / "._("Departments")),
+          array("string" => _("Properties") ,"attach"=>"style='width:50px;'"),
+          array("string" => _("Actions")    ,"attach"=>"style='width:50px;border:none;'")
+          ));
+
+
+    $divlist->SetSummary(_("This table displays all groups, in the selected tree."));
+    $divlist->SetEntriesPerPage(20);
+
+    foreach($this->departments as $key=> $val){
+
+      $field1 = array("string" => "<img src='images/folder.png' alt='"._("Department")."'>");
+      $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
+      $field3 = array("string" => "&nbsp;");
+      $field4 = array("string" => "&nbsp;","attach"=>"style='text-align:right;border:none'");
+
+      $divlist->AddEntry(array($field1,$field2,$field3,$field4));
+    }
+
+    // Assigning ogroups 
+    foreach($this->ogrouplist as $key => $val){
+
+      if(isset($val['mail'])){
+        $mail = $mailimg;
+      }else{
+        $mail = $empty;
+      }
+
+      $title = "title='gid : ".$key." - dn : ".$val['dn']."'";
+
+      if(!isset($val['description'][0])){
+        $desc = "";
+      }else{
+        $desc = " - [ ".$val['description'][0]." ]";
+      }
+      $field1 = array("string" => "<img src='images/list_ogroup.png' alt='"._("Object group")."'>");
+      $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)),"attach"=>$title);
+      $field3 = array("string" => $this->convert_list($val)."&nbsp;".$mail);
+      $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions),"attach"=>"style='text-align:right;border:none'");
+
+      $divlist->AddEntry(array($field1,$field2,$field3,$field4));
+    }
+
+
+
+
+
+
     /* Show main page */
     $smarty->assign("search_image", get_template_path('images/search.png'));
     $smarty->assign("tree_image", get_template_path('images/tree.png'));
@@ -282,7 +452,8 @@ class ogroupManagement extends plugin
     $smarty->assign("launchimage", get_template_path('images/launch.png'));
     $smarty->assign("deplist", $this->config->idepartments);
 
-    $smarty->assign("groups", $this->convert_list($this->grouplist));
+    $smarty->assign("groupshead", $listhead);
+    $smarty->assign("groups", $divlist->DrawList());
 
     foreach( array("usergroups", "groupgroups", "appgroups", "depgroups",
           "servergroups", "wsgroups", "prtgroups", "tcgroups", "fongroups", "regex", "depselect") as $type){
@@ -299,6 +470,8 @@ class ogroupManagement extends plugin
   function convert_list($input)
   {
     $temp= "";
+
+
     $conv= array(   "U" => "select_user.png",
         "G" => "select_groups.png",
         "A" => "select_application.png",
@@ -309,25 +482,25 @@ class ogroupManagement extends plugin
         "T" => "select_terminal.png",
         "P" => "select_printer.png");
 
-    foreach ($input as $key => $value){
-
-      /* Assemble picture */
-      $type= $value['type'];
-      if (isset($type[0])){
-        $p1= $conv[$type[0]];
-      } else {
-        $p1= "empty.png";
-      }
-      if (isset($type[1])){
-        $p2= $conv[$type[1]];
-      } else {
-        $p2= "empty.png";
-      }
-
-      /* Generate output */
-      $temp= "<option value=\"$key\" class=\"select\" style=\"background-image:url('combine.php?image1=$p1&amp;image2=$p2');padding-left:35px;\">".$value['text']."</option>\n".$temp;
+    /* Assemble picture */
+    $type= $input['gosaGroupObjects'][0];
+    $type= preg_replace("/[^A-Z]/i","",$type);
+    if (isset($type[0])){
+      $p1['pic']= $conv[$type[0]];
+      $p1['alt']= $type[0];
+    } else {
+      $p1['pic']= "empty.png";
+      $p1['alt']= "";
     }
-
+    if (isset($type[1])){
+      $p2['pic']= $conv[$type[1]];
+      $p2['alt']= $type[1];
+    } else {
+      $p2['pic']= "empty.png";
+      $p2['alt']= "";
+    }
+    $temp = "<img src='images/".$p1['pic']."' alt='".$p1['alt']."'>";
+    $temp.= "<img src='images/".$p2['pic']."' alt='".$p2['alt']."'>";
     return ($temp);
   }
 
@@ -348,9 +521,9 @@ class ogroupManagement extends plugin
     }
 
     /* User filter? */
-    $this->grouplist= array();
+    $this->oogrouplist= array();
 
-    /* Generate grouplist filter */
+    /* Generate oogrouplist filter */
     $filter= "";
 
     if ($ogroupfilter['usergroups'] == "checked"){
@@ -386,22 +559,36 @@ class ogroupManagement extends plugin
     } else {
       $filter= "(&(cn=$regex)(objectClass=gosaGroupOfNames))";
     }
-    $res= get_list($this->ui->subtreeACL, "$filter", TRUE, $base, array("cn", "description", "gosaGroupObjects"), TRUE);
-    foreach ($res as $value){
-      $pictype= preg_replace('/[\[\]]/', '', $value["gosaGroupObjects"][0]);
-      $sortstring= preg_split('//', $pictype, -1, PREG_SPLIT_NO_EMPTY);
-      sort($sortstring);
-      $pictype= implode("", $sortstring);
-      if (isset($value["description"][0])){
-        $this->grouplist[$value["dn"]]= array("text" => $value["cn"][0]." [".
-            $value["description"][0]."]", "type" => $pictype);
-      } else {
-        $this->grouplist[$value["dn"]]= array("text" => $value["cn"][0],
-            "type" => $pictype);
+    $res= get_list($this->ui->subtreeACL, "$filter", TRUE, $base, array("*"), TRUE);
+    $this->ogrouplist= $res;
+    ksort ($this->ogrouplist);
+    reset ($this->ogrouplist);
+
+
+    /* NEW LIST MANAGMENT
+     * We also need to search for the departments
+     * So we are able to navigate like in konquerer
+     */
+    $base2 = preg_replace("/ou=people,/i","",$base);
+
+    $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
+                              TRUE, $base2, array("ou", "description"), TRUE);
+
+    $this->departments= array();
+    foreach ($res3 as $value){
+      if($value["description"][0]!=".."){
+        $this->departments[$value['dn']]= convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
+      }else{
+        $this->departments[$value['dn']]=$value["description"][0];
       }
     }
-    ksort ($this->grouplist);
-    reset ($this->grouplist);
+
+    /* END NEW LIST MANAGMENT
+     */
+
+
+
+
   }
 
 }

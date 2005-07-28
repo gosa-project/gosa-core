@@ -31,6 +31,7 @@ class systems extends plugin
   /* Definitions */
   var $plHeadline= "Systems";
   var $plDescription= "This does something";
+  var $departments=array();
 
   /* Dialog attributes */
   var $systab= NULL;
@@ -88,17 +89,85 @@ class systems extends plugin
       }
       $terminalfilter['regex']= $s;
     }
-    register_global("terminalfilter", $terminalfilter);
 
-    /* Check sorting variable */
-    if (!isset($this->systab) &&
-        !isset($_POST['new_terminal']) &&
-        !isset($_POST['delete_terminal']) &&
-        !isset($_POST['set_password']) &&
-        !isset($_POST['select_terminal'])){
-      $this->reload();
+    $terminalfilter   = get_global("terminalfilter"); // contains Filter Settings
+    $s_action     = "";                       // Contains the action to proceed
+    $s_entry      = "";                       // The value for s_action
+    $base_back    = "";                       // The Link for Backbutton
+    $smarty       = get_smarty();
+
+    /* Start for New List Managment */
+    if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
+            $s_action="open";
+            $s_entry = base64_decode($_GET['dep_id']);
+            $terminalfilter['depselect']= "".$this->config->departments[trim($s_entry)];
+            $this->reload();
     }
-    $smarty= get_smarty();
+
+    /* Test Posts */
+    foreach($_POST as $key => $val){
+      // Post for delete
+      if(preg_match("/user_del.*/",$key)){
+        $s_action = "del";
+        $s_entry  = preg_replace("/user_".$s_action."_/i","",$key);
+        // Post for edit
+      }elseif(preg_match("/user_edit_.*/",$key)){
+        $s_action="edit";
+        $s_entry  = preg_replace("/user_".$s_action."_/i","",$key);
+        // Post for new
+      }elseif(preg_match("/dep_back.*/i",$key)){
+        $s_action="back";
+      }elseif(preg_match("/user_new.*/",$key)){
+        $s_action="new";
+      }elseif(preg_match("/dep_home.*/i",$key)){
+        $s_action="home";
+      }elseif(preg_match("/user_tplnew.*/i",$key)){
+        $s_action="new_tpl";
+      }elseif(preg_match("/user_setpwd_.*/i",$key)){
+        $s_action="change_pw";
+        $s_entry  = preg_replace("/user_setpwd_/i","",$key);
+      }elseif(preg_match("/dep_root.*/i",$key)){
+        $s_action="root";
+      }
+    }
+
+     if((isset($_GET['act']))&&($_GET['act']=="edit_entry")){
+      $s_action ="edit";
+      $s_entry  = $_GET['id'];
+    }
+
+    $s_entry  = preg_replace("/_.$/","",$s_entry);
+
+    /* Department changed? */
+    if(isset($_POST['depselect']) && $_POST['depselect']){
+      $terminalfilter['depselect']= $_POST['depselect'];
+    }
+
+    /* Homebutton is posted */
+    if($s_action=="home"){
+      $terminalfilter['depselect']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
+      $terminalfilter['depselect']=(preg_replace("/^[^,]+,/","",$terminalfilter['depselect']));
+    }
+
+    if($s_action=="root"){
+      $terminalfilter['depselect']=($this->config->current['BASE']);
+    }
+
+
+    /* If Backbutton is Posted */
+    if($s_action=="back"){
+      $base_back          = preg_replace("/^[^,]+,/","",$terminalfilter['depselect']);
+      $base_back          = convert_department_dn($base_back);
+
+      if(isset($this->config->departments[trim($base_back)])){
+        $terminalfilter['depselect']= $this->config->departments[trim($base_back)];
+      }else{
+        $terminalfilter['depselect']= $this->config->departments["/"];
+      }
+    }
+
+    register_global("terminalfilter", $terminalfilter);
+    $this->reload();
 
     /* Check for exeeded sizelimit */
     if (($message= check_sizelimit()) != ""){
@@ -106,7 +175,7 @@ class systems extends plugin
     }
 
     /* Try to get informations about what kind of system to create */
-    if (isset($_POST['new_terminal'])) {
+    if ($s_action=="new") {
       return ($smarty->fetch(get_template_path('chooser.tpl', TRUE)));
     }
 
@@ -159,11 +228,10 @@ class systems extends plugin
     }
 
     /* User wants to edit data? */
-    if ((isset($_POST['select_terminal']) || (isset($_POST['edit_helper']) && $_POST['edit_helper'] == "1")) && isset($_POST['termlist']) &&
-          $_POST['termlist'] != ""){
+    if ($s_action == "edit"){
 
       /* Get 'dn' from posted 'cn', must be unique */
-      $this->dn= trim($_POST['termlist']);
+      $this->dn= $this->terminals[$s_entry]['dn'];
 
       /* Check locking, save current plugin in 'back_plugin', so
          the dialog knows where to return. */
@@ -250,8 +318,8 @@ class systems extends plugin
     }
 
     /* Set terminals root password */
-    if (isset($_POST['set_password']) && isset($_POST['termlist'])){
-      $this->dn= trim($_POST['termlist']);
+    if ($s_action=="change_pw"){
+      $this->dn= $this->terminals[$s_entry]['dn'];
       $_SESSION['objectinfo']= $this->dn;
       return ($smarty->fetch(get_template_path('password.tpl', TRUE)));
     }
@@ -297,10 +365,10 @@ class systems extends plugin
     }
 
     /* Remove terminal was requested */
-    if (isset($_POST['delete_terminal']) && isset($_POST['termlist'])){
+    if ($s_action=="del"){
 
       /* Get 'dn' from posted termlinst */
-      $this->dn= $_POST['termlist'];
+      $this->dn= $this->terminals[$s_entry]['dn'];
 
       /* Load permissions for selected 'dn' and check if
          we're allowed to remove this 'dn' */
@@ -445,8 +513,127 @@ class systems extends plugin
       return ($display);
     }
 
+
+
+
+
+
+    /* Prepare departments */
+    $options= "";
+    foreach ($this->config->idepartments as $key => $value){
+            if ($terminalfilter['depselect'] == $key){
+                    $options.= "<option selected value='$key'>$value</option>";
+            } else {
+                    $options.= "<option value='$key'>$value</option>";
+            }
+    }
+
+
+  /* NEW LIST MANAGMENT */
+    $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
+    " <input type='image' align='middle' src='images/list_back.png' title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
+    " <input type='image' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
+    " <input type='image' align='middle' src='images/list_home.png' title='"._("Go to users department")."' alt='"._("Home")."'                     name='dep_home'>&nbsp;".
+    " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
+    " <input type='image' align='middle' src='images/list_new_user.png' title='"._("Create new user")."' alt='"._("New user")."'                    name='user_new'>&nbsp;".
+    " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
+    _("Current base")."&nbsp;<select name='depselect' onChange='mainform.submit()'>$options</select>".
+    " <input type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='".           _("Submit")."'>&nbsp;".
+    "</div>";
+
+
+
+    $action= "<input type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit user")."'>";
+    $action.= "<input type='image' src='images/editdelete.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete user")."'>";
+
+
+    $divlist = new divlist();
+    $divlist->SetHeader(array(
+          array("string" => "&nbsp;"),
+          array("string" => _("System")." / "._("Department")),
+          array("string" => _("Actions"), "attach" => "style='border:none'" )));
+
+
+    $divlist->SetSummary(_("This table displays all users, in the selected tree."));
+    $divlist->SetEntriesPerPage(20);
+
+    // Defining Links
+    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
+
+    foreach($this->departments as $key=> $val){
+      $field1 = array("string" => "<img src='images/folder.png' alt='department'>");
+      $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
+      $field3 = array("string" => "&nbsp;", "attach" => "style='border:none'");
+      $divlist->AddEntry(array($field1,$field2,$field3));
+    }
+
+    // Space
+    $empty    ="";//= "<img src='images/nothing.png' style='width:16px;height:16px;' alt=''>";
+
+    // User and Template  Images
+    $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
+
+    // Pictures for Extensions
+    $img1  = "<img src='images/printer.png'            alt='C' title='"._("Cups Server")  ."'>";
+    $img2  = "<img src='images/scanner.png'            alt='L' title='"._("Log Db") ."'>";
+    $img3  = "<img src='images/select_terminal.png'    alt='L' title='"._("Syslog Server") ."'>";
+    $img4  = "<img src='images/mailto.png'             alt='M' title='"._("Mail Server")  ."'>";
+    $img5  = "<img src='images/select_phone.png'       alt='I' title='"._("Imap Server") ."'>";
+    $img6  = "<img src='images/fax_small.png'          alt='F' title='"._("Nfs Server")   ."'>";
+    $img7  = "<img src='images/select_winstation.png'  alt='K' title='"._("Kerberos Server") ."'>";
+    $img8  = "<img src='images/select_phone.png'       alt='A' title='"._("Asterisk Server") ."'>";
+    $img9  = "<img src='images/fax_small.png'          alt='F' title='"._("Fax Server") ."'>";
+    $img10 = "<img src='images/save.png'               alt='L' title='"._("Ldap Server") ."'>";
+
+    // Test Every Entry and generate divlist Array
+    foreach($this->terminals as $key => $val){
+      // Specify Pics for Extensions
+      if(in_array("goCupsServer"    ,$val['objectClass'])) $cups    = $img1;   else $cups  =$empty;
+      if(in_array("goLogDBServer"   ,$val['objectClass'])) $logdb   = $img2;   else $logdb =$empty;
+      if(in_array("goSyslogServer"  ,$val['objectClass'])) $syslog  = $img3;   else $syslog=$empty;
+      if(in_array("goImapServer"    ,$val['objectClass'])) $imap    = $img4;   else $imap  =$empty;
+      if(in_array("sambaSamAccount" ,$val['objectClass'])) $samba   = $img5;   else $samba =$empty;
+      if(in_array("goNfsServer"     ,$val['objectClass'])) $nfs     = $img6;   else $nfs   =$empty;
+      if(in_array("goKrbServer"     ,$val['objectClass'])) $krb     = $img7;   else $krb   =$empty;
+      if(in_array("goFonServer"     ,$val['objectClass'])) $fon     = $img8;   else $fon   =$empty;
+      if(in_array("goFaxServer"     ,$val['objectClass'])) $fax     = $img9;   else $fax   =$empty;
+      if(in_array("goLdapServer"    ,$val['objectClass'])) $ldap     = $img10;   else $ldap   =$empty;
+  
+      $pics = $cups.$logdb.$syslog.$imap.$samba.$nfs.$krb.$fon.$fax.$ldap;
+      $pics = "";
+      // Generate Array to Add
+      if((isset($val['is_new']))&&(!empty($val['is_new']))){
+        $display= "".$val["cn"][0]." ".$val['is_new'];
+      }else{
+        $display= "".$val["cn"][0]."";
+      }
+
+      if(in_array("gotoTerminal",$val['objectClass'])){
+        $action2 = "<input type='image' src='images/certs.png' alt='"._("Password")."'   name='user_setpwd_%KEY%' title='"._("Set root password")."'>";
+      }else{
+        $action2 = "";
+      }
+
+
+      if(isset($val['message'])){
+        $display.= "  (".$val['message']." '".$this->config->idepartments[$terminalfilter['depselect']]."'  )";
+      }
+
+      $img=$this->convert_list($val);
+
+      $field1 = array("string" => sprintf($img['img'],$val['dn']),"attach"=>"style='width:20px;align:middle;'");
+      $field2 = array("string" => sprintf($editlink,$key,$display),"attach"=>"title='".$val['dn']."'");
+      $field3 = array("string" => preg_replace("/%KEY%/", "$key", $action2.$action),"attach" => "style='border:none; text-align:right;width:48px'");
+      $divlist->AddEntry( array($field1,$field2,$field3));
+    }
+
+
+
+
+
     /* Show main page */
-    $smarty->assign("terminals", $this->convert_list($this->terminals));
+    $smarty->assign("terminalshead", $listhead);
+    $smarty->assign("terminals", $divlist->DrawList());
     $smarty->assign("search_image", get_template_path('images/search.png'));
     $smarty->assign("tree_image", get_template_path('images/tree.png'));
     $smarty->assign("infoimage", get_template_path('images/info.png'));
@@ -471,7 +658,9 @@ class systems extends plugin
   {
     $temp= "";
     $conv= array(	"D" => "select_default.png",
-        "T" => "select_terminal.png",
+        
+
+  "T" => "select_terminal.png",
         "L" => "select_workstation.png",
         "F" => "select_phone.png",
         "S" => "select_server.png",
@@ -481,22 +670,16 @@ class systems extends plugin
         "C" => "select_component.png",
         "P" => "select_printer.png");
 
-    foreach ($input as $key => $value){
-      $mode= preg_replace('/^.*(.)$/', '\\1', $value);
-      if ($mode == "D"){
-        $temp= "<option value=\"$key\" class=\"select\" style=\"background-image:url('".get_template_path('images/select_default.png')."');\">".preg_replace('/.$/', '', $value)."</option>\n".$temp;
-      } else {
-        if (preg_match('/^\+/', $value)){
-          $value= preg_replace('/^\+ /', '', $value);
-          $new= "N";
-        } else {
-          $new= "";
-        }
-        $temp.= "<option value=\"$key\" class=\"select\" style=\"background-image:url('".get_template_path('images/'.$conv["$new$mode"])."');\">".preg_replace('/.$/', '', $value)."</option>\n";
+   if((isset($input['is_new']))&&(!empty($input['is_new']))){
+     $input['type']="N".$input['type'];
+   }
+   foreach ($conv  as $key => $value){
+      if($input['type']==$key){
+        $tmp['img'] ="<img src='images/".$value."' alt='".$key."' title='%s'>";
+        $tmp['class']=$key;
+        return $tmp;
       }
     }
-
-    return ($temp);
   }
 
   function remove_from_parent()
@@ -611,6 +794,35 @@ class systems extends plugin
     $this->terminals= array();
 
     $res= get_list($this->ui->subtreeACL, "(|$termfilter$workfilter$winfilter$printfilter$phonefilter$serverfilter$netfilter)", TRUE, $base, array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), TRUE);
+
+      
+    /* NEW LIST MANAGMENT
+     * We also need to search for the departments
+     * So we are able to navigate like in konquerer
+     */
+    $base2 = preg_replace("/ou=people,/i","",$base);
+
+    $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
+                              TRUE, $base2, array("ou", "description"), TRUE);
+
+    $this->departments= array();
+    $tmp = array();
+    foreach ($res3 as $value){
+      $tmp[strtolower($value['dn']).$value['dn']]=$value;
+    }
+    ksort($tmp);
+    foreach($tmp as $value){
+      if($value["description"][0]!=".."){
+        $this->departments[$value['dn']]=convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
+      }else{
+        $this->departments[$value['dn']]=$value["description"][0];
+      }
+    }
+
+    /* END NEW LIST MANAGMENT
+     */
+
+
     foreach ($res as $value){
 
       /* Look for new terminals and mark them with '+' */
@@ -650,57 +862,42 @@ class systems extends plugin
         $add= "";
       }
 
+      $terminal = array();
+  
       if (in_array ($tmp, $responsible) || $add != ""){
         if (in_array('gotoTerminal', $value["objectClass"])){
-          if (isset($value["macAddress"][0]) &&
-              $value["macAddress"][0] != "-"){
-
-            $this->terminals[$value["dn"]]= $add." ".
-              $value["cn"][0].
-              " [".$value["macAddress"][0]."]T";
+          if (isset($value["macAddress"][0]) && $value["macAddress"][0] != "-"){
+            $terminal             = $value;
+            $terminal['type']     = "T";
+            $terminal['is_new']   = $add;
           } else {
-            $location= array_search($tmp, $this->config->departments);
-            $this->terminals[$value["dn"]]= _("Thin client template for").
-              " $location"."D";
+            $terminal             = $value;
+            $terminal['type']     = "D";
+            $terminal['message']  = _("Terminal template for");
+            $terminal['location'] = array_search($tmp, $this->config->departments); 
           }
         } elseif (in_array('gotoWorkstation', $value["objectClass"])){
-          if (isset($value["macAddress"][0]) &&
-              $value["macAddress"][0] != "-"){
-
-            $this->terminals[$value["dn"]]= $add." ".
-              $value["cn"][0].
-              " [".$value["macAddress"][0]."]L";
+          if (isset($value["macAddress"][0]) &&  $value["macAddress"][0] != "-"){
+            $terminal             = $value;
+            $terminal['type']     = "L";
           } else {
-            $location= array_search($tmp, $this->config->departments);
-            $this->terminals[$value["dn"]]= _("Workstation template for").
-              " $location"."D";
+            $terminal             = $value;
+            $terminal['type']     = "D";
+            $terminal['location'] = array_search($tmp, $this->config->departments);
+            $terminal['message']  = _("Workstation template for");
           }
         } elseif (in_array('gotoPrinter', $value["objectClass"])){
-          if (isset($value['description'][0])){
-            $this->terminals[$value['dn']]= $value['cn'][0]." [".$value['description'][0]."]P";
-          } else {
-            $this->terminals[$value['dn']]= $value['cn'][0]."P";
-          }
+            $terminal             = $value;
+            $terminal['type']     = "P";
         } elseif (in_array('goServer', $value["objectClass"])){
-          if (isset($value['description'][0])){
-            $this->terminals[$value['dn']]= $value['cn'][0]." [".$value['description'][0]."]S";
-          } else {
-            $this->terminals[$value['dn']]= $value['cn'][0]."S";
-          }
+            $terminal             = $value;
+            $terminal['type']     = "S";
         } elseif (in_array('goFonHardware', $value["objectClass"])){
-
-          if (isset($value['description'][0])){
-            $this->terminals[$value['dn']]= $value['cn'][0]." [".$value['description'][0]."]F";
-          } else {
-            $this->terminals[$value['dn']]= $value['cn'][0]."F";
-          }
+            $terminal             = $value;
+            $terminal['type']     = "F";
         } elseif (in_array('ieee802Device', $value["objectClass"])){
-
-          if (isset($value['description'][0])){
-            $this->terminals[$value['dn']]= $value['cn'][0]." [".$value['description'][0]."]C";
-          } else {
-            $this->terminals[$value['dn']]= $value['cn'][0]."C";
-          }
+            $terminal             = $value;
+            $terminal['type']     = "C";
         } else{
           $name= preg_replace('/\$$/', '', $value['cn'][0]);
           if (isset($value['sambaDomainName'])){
@@ -708,11 +905,23 @@ class systems extends plugin
           } else {
             $domain= "";
           }
-          $this->terminals[$value['dn']]= $name.$domain."W";
+            $terminal=$value;
+            $terminal['type']     ="W";
+            $terminal['domain']   = $name.$domain;
         }
+      $this->terminals[]=$terminal;
       }
     }
-    natcasesort ($this->terminals);
+
+    $tmp=array();
+    foreach($this->terminals as $tkey => $val ){
+      $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
+    }
+    ksort($tmp);
+    $this->terminals=array();
+    foreach($tmp as $val){
+      $this->terminals[]=$val;
+    }
     reset ($this->terminals);
   }
 

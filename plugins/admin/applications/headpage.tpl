@@ -7,17 +7,12 @@
     </p>
   </div>
   <div class="contentboxb">
-    <p class="contentboxb">
-     <select style="width:500px; height:450px;" name="applist" size=15 ondblclick="this.form.edit_helper.value='1'; this.form.submit()">
-      {html_options options=$applications}
-		<option disabled>&nbsp;</option>
-    </select>
-    <br>
-    <input type=submit value="{t}New{/t}..." name="new_app">&nbsp;
-    <input type=submit value="{t}Edit{/t}" name="select_app">&nbsp;
-    <input type=submit value="{t}Delete{/t}" name="delete_app">&nbsp;
+      {$applicationshead}
+  </div>
+  <div style='height:4px;'></div>
+  <div class="contentboxb" style="border-top:1px solid #B0B0B0;">
+      {$applications}
     <input type=hidden name="edit_helper">
-   </p>
   </div>
   </td>
   <td style="vertical-align:top">
@@ -27,9 +22,6 @@
    <div class="contentboxb">
    <p class="contentboxb">
     {t}This menu allows you to add, edit and remove selected applications. You may want to use the range selector on top of the application listbox, when working with a large number of applications.{/t}
-   </p>
-   <p class="contentboxb">
-    {t}-Edit- and -New...- will execute an assistant to aid you in editing properties. -Delete- will ask for confirmation before removing applications.{/t}
    </p>
    </div>
    <br>
@@ -43,22 +35,10 @@
     <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
 		<tr>
 			<td>
-				<img alt="" src="{$tree_image}" align=middle>&nbsp;{t}Display applications of department{/t}
-			</td>
-		    <td>
-				<select name="depselect" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
-				  {html_options options=$deplist selected=$depselect}
-				</select>
-			</td>
-		</tr>
-	</table>
-    <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
-		<tr>
-			<td>
-				<img alt="" src="{$search_image}" align=middle>&nbsp;<LABEL for="regex">{t}Display applications matching{/t}</LABEL>
+				<LABEL for="regex"><img alt="" src="{$search_image}" align=middle title='{t}Display applications matching{/t}'>&nbsp;</LABEL>
 			</td>
     		<td>
-				<input type='text' id="regex" name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching application names{/t}' onChange="mainform.submit()">
+				<input style='width:99%' type='text' id="regex" name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching application names{/t}' onChange="mainform.submit()">
 			</td>
 		</tr>
 	</table>

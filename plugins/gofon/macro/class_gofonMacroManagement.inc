@@ -61,17 +61,79 @@ class gofonMacro extends plugin
       }
       $macrofilter['regex']= $s;
     }
-    /* Save (new) Filter */
-    register_global("macrofilter", $macrofilter);
 
-    /* Check sorting variable */
-    if (!isset($this->macrotabs) &&
-        !isset($_POST['new_mac']) &&
-        !isset($_POST['delete_mac']) &&
-        !isset($_POST['select_mac'])){
-      $this->reload();
+    $s_action     = "";                       // Contains the action to proceed
+    $s_entry      = "";                       // The value for s_action
+    $base_back    = "";                       // The Link for Backbutton
+
+    /* Start for New List Managment */
+    if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
+            $s_action="open";
+            $s_entry = base64_decode($_GET['dep_id']);
+            $macrofilter['depselect']= "".$this->config->departments[trim($s_entry)];
     }
-  
+
+    /* Test Posts */
+    foreach($_POST as $key => $val){
+      // Post for delete
+      if(preg_match("/user_del.*/",$key)){
+        $s_action = "del";
+        $s_entry  = preg_replace("/user_".$s_action."_/i","",$key);
+        // Post for edit
+      }elseif(preg_match("/user_edit_.*/",$key)){
+        $s_action="edit";
+        $s_entry  = preg_replace("/user_".$s_action."_/i","",$key);
+        // Post for new
+      }elseif(preg_match("/dep_back.*/i",$key)){
+        $s_action="back";
+      }elseif(preg_match("/user_new.*/",$key)){
+        $s_action="new";
+      }elseif(preg_match("/dep_home.*/i",$key)){
+        $s_action="home";
+      }elseif(preg_match("/user_chgpw.*/i",$key)){
+        $s_action="change_pw";
+        $s_entry  = preg_replace("/user_chgpw_/i","",$key);
+      }elseif(preg_match("/dep_root.*/i",$key)){
+        $s_action="root";
+      }
+    }
+  if((isset($_GET['act']))&&($_GET['act']=="edit_entry")){
+      $s_action ="edit";
+      $s_entry  = $_GET['id'];
+    }
+
+    $s_entry  = preg_replace("/_.$/","",$s_entry);
+
+    /* Department changed? */
+    if(isset($_POST['depselect']) && $_POST['depselect']){
+      $macrofilter['depselect']= $_POST['depselect'];
+    }
+
+    /* Homebutton is posted */
+    if($s_action=="home"){
+      $macrofilter['depselect']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
+      $macrofilter['depselect']=(preg_replace("/^[^,]+,/","",$macrofilter['depselect']));
+    }
+
+    if($s_action=="root"){
+      $macrofilter['depselect']=($this->config->current['BASE']);
+    }
+
+
+    /* If Backbutton is Posted */
+    if($s_action=="back"){
+      $base_back          = preg_replace("/^[^,]+,/","",$macrofilter['depselect']);
+      $base_back          = convert_department_dn($base_back);
+
+      if(isset($this->config->departments[trim($base_back)])){
+        $macrofilter['depselect']= $this->config->departments[trim($base_back)];
+      }else{
+        $macrofilter['depselect']= $this->config->departments["/"];
+      }
+    }
+
+    register_global("macrofilter", $macrofilter);
+    $this->reload();
     
     $smarty= get_smarty();
 
@@ -81,7 +143,7 @@ class gofonMacro extends plugin
     }
 
     /* New macro? */
-    if (isset($_POST['new_mac'])){
+    if ($s_action=="new"){
 
       /* By default we set 'dn' to 'new', all relevant plugins will
          react on this. */
@@ -137,10 +199,10 @@ class gofonMacro extends plugin
     }
 
     /* User wants to edit data? */
-    if ((isset($_POST['select_mac']) || (isset($_POST['edit_helper']) && $_POST['edit_helper'] == "1")) && isset($_POST['macrolists']) && $_POST['macrolists'] != ""){
+    if ($s_action=="edit"){
 
       /* Get 'dn' from posted 'macrolists', must be unique */
-      $this->dn= trim($_POST['macrolists']);
+      $this->dn= $this->macros[$s_entry]['dn']; 
 
       /* Check locking, save current plugin in 'back_plugin', so
          the dialog knows where to return. */
@@ -163,10 +225,10 @@ class gofonMacro extends plugin
     }
 
     /* Remove user was requested */
-    if (isset($_POST['delete_mac']) && isset($_POST['macrolists'])){
+    if ($s_action=="del"){
 
       /* Get 'dn' from posted 'uid' */
-      $this->dn= trim($_POST['macrolists']);
+      $this->dn= $this->macros[$s_entry]['dn'];
 
       /* Load permissions for selected 'dn' and check if
          we're allowed to remove this 'dn' */
@@ -243,8 +305,93 @@ class gofonMacro extends plugin
       return ($display);
     }
 
+
+
+
+    /* Prepare departments */
+    $options= "";
+    foreach ($this->config->idepartments as $key => $value){
+            if ($macrofilter['depselect'] == $key){
+                    $options.= "<option selected value='$key'>$value</option>";
+            } else {
+                    $options.= "<option value='$key'>$value</option>";
+            }
+    }
+
+
+   /* NEW LIST MANAGMENT */
+    $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
+            " <input type='image' align='middle' src='images/list_back.png' title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
+            " <input type='image' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root").        "'>&nbsp;".
+            " <input type='image' align='middle' src='images/list_home.png' title='"._("Go to users department")."' alt='"._("Home")."'                     name='dep_home'>&nbsp;".
+            " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
+            " <input type='image' align='middle' src='images/list_new_macro.png' title='"._("Create new phone macro")."' alt='"._("New")."' name='user_new'>&nbsp;".
+            " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
+            _("Current base")."&nbsp;<select name='depselect' onChange='mainform.submit()'>$options</select>".
+            " <input type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
+            "</div>";
+
+
+    /* Options */
+    $action= "<input type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit user")."'>";
+    $action.= "<input type='image' src='images/editdelete.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete user")."'>";
+
+    $divlist = new divlist();
+    $divlist->SetHeader(array(
+                              array("string" => "&nbsp;"),
+                              array("string" => _("Username")." / "._("Department")),
+                              array("string" => _("Visible"), "attach" => "style='width:30px;'"),
+                              array("string" => _("Actions"), "attach" => "style='border:none'" )));
+
+
+    $divlist->SetSummary(_("This table displays all phone macros, in the selected tree."));
+    $divlist->SetEntriesPerPage(20);
+
+    // Defining Links
+    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
+
+    foreach($this->departments as $key=> $val){
+      $field1 = array("string" => "<img src='images/folder.png' alt='department'>");
+      $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
+      $field3 = array("string" => "&nbsp;");
+      $field4 = array("string" => "&nbsp;", "attach" => "style='border:none'");
+      $divlist->AddEntry(array($field1,$field2,$field3,$field4));
+    }
+
+    // Pictures for Extensions
+    $empty    = "<img src='images/nothing.png' style='width:16px;height:16px;' alt=''>";
+
+    // User and Template  Images
+    $macroimg   = "<img src='images/list_macro.png' alt='"._("Macro")."' title='%s'>";
+    $visible    = "<img src='images/true.png' alt='"._("yes")."' title='"._("visible")."'>";
+    $invisible  = "<img src='images/false.png' alt='"._("no")."'title='"._("invisible")."'>";
+
+    // Link for edit
+    $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
+  
+    // Test Every Entry and generate divlist Array
+    foreach($this->macros as $key => $val){
+      // Generate Array to Add
+      $display= $val["displayName"][0];
+    
+      
+      if(isset($val['goFonMacroVisible']['0'])&&($val['goFonMacroVisible']['0'] == "1")){
+        $pic1 = $visible;
+      }else{
+        $pic1 = $invisible;
+      }
+
+      $field1 = array("string" => sprintf($macroimg,$val['dn']),"attach"=>"style='width:20px;align:middle;'");
+      $field2 = array("string" => sprintf($editlink,$key,$display),"attach"=>"title='".$val['dn']."'");
+      $field3 = array("string" => $pic1, "attach" => "style='width:20px;text-align:right;'");
+      $field4 = array("string" => preg_replace("/%KEY%/", "$key", $action),"attach" => "style='border:none;text-align:right;width:48px'");
+
+      $divlist->AddEntry(array($field1,$field2,$field3,$field4));
+    }
+
     /* Show main page */
-    $smarty->assign("macros", $this->macros);
+    $smarty->assign("macroshead", $listhead);
+    $smarty->assign("macros", $divlist->DrawList());
     $smarty->assign("search_image", get_template_path('images/search.png'));
     $smarty->assign("tree_image", get_template_path('images/tree.png'));
     $smarty->assign("infoimage", get_template_path('images/info.png'));
@@ -279,16 +426,31 @@ class gofonMacro extends plugin
     }
 
     /* Generate macro list */
-    $res= get_list($this->ui->subtreeACL, "(&(cn=$regex)(objectClass=goFonMacro))", TRUE, $base, array("cn", "description"), TRUE);
-    $this->macros= array();
-    foreach ($res as $value){
-      $this->macros[$value["dn"]]= $value["cn"][0];
-      if (isset($value["description"][0])){
-        $this->macros[$value["dn"]]= $value["cn"][0]." (".
-          $value["description"][0].")";
+    $res= get_list($this->ui->subtreeACL, "(&(cn=$regex)(objectClass=goFonMacro))", TRUE, $base, array("*"), TRUE);
+    $this->macros= $res;
+
+    /* NEW LIST MANAGMENT
+     * We also need to search for the departments
+     * So we are able to navigate like in konquerer
+     */
+    $base2 = preg_replace("/ou=people,/i","",$base);
+
+    $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
+        TRUE, $base2, array("ou", "description"), TRUE);
+
+    $this->departments= array();
+    foreach ($res3 as $value){
+      if($value["description"][0]!=".."){
+        $this->departments[$value['dn']]= convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
+      }else{
+        $this->departments[$value['dn']]=$value["description"][0];
       }
     }
-    natcasesort ($this->macros);
+
+    /* END NEW LIST MANAGMENT
+     */
+
+
     reset ($this->macros);
   }
 

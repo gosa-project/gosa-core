@@ -7,17 +7,12 @@
     </p>
   </div>
   <div class="contentboxb">
-    <p class="contentboxb">
-      <select style="width:500px; height:450px;" name="blocklist" size=15 ondblclick="this.form.edit_helper.value='1'; this.form.submit()">
-	  {html_options options=$blocklists}
-      <option disabled>&nbsp;</option>
-  	  </select>
-      <br>
-      <input type=submit value="{t}New{/t}..." name="new_blocklist">&nbsp;
-      <input type=submit value="{t}Edit{/t}" name="select_blocklist">&nbsp;
-      <input type=submit value="{t}Delete{/t}" name="delete_blocklist">
+	  {$blocklistshead}
+  </div>
+  <div style='height:4px;'></div>
+  <div class="contentboxb" style="border-top:1px solid #B0B0B0;">
+	  {$blocklists}
       <input type=hidden name="edit_helper">
-    </p>
   </div>
   </td>
   <td style="vertical-align:top;">
@@ -27,9 +22,6 @@
    <div class="contentboxb">
    <p class="contentboxb">
     {t}This menu allows you to create, delete and edit selected blocklists. Having a large size of lists, you might prefer the range selectors on top of the select box.{/t}
-   </p>
-   <p class="contentboxb">
-    {t}-Edit- and -New...- will execute an assistant to aid you when performing changes on your blocklist. -Delete- will ask you for confirmation before really deleting anything.{/t}
    </p>
    </div>
    <br>
@@ -48,21 +40,6 @@
 			</td>
 		</tr>
 	</table>    
-
-<table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
-	<tr>
-		<td width="50%">
-			<img alt="" src="{$tree_image}" align=middle>&nbsp;{t}Display lists of department{/t}
-		</td>
-    	<td>
-			<select name="depselect" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
-			     {html_options options=$deplist selected=$depselect}
-      			<option disabled>&nbsp;</option>
-		    </select>
-		</td>
-	</tr>
-</table>
-
 <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
 	<tr>
 		<td width="50%"><img alt=""  src="{$search_image}" align=middle>
@@ -76,8 +53,8 @@
 
 <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
 	<tr>
-		<td width="50%">
-			<img alt="" src="{$search_image}" align=middle>&nbsp;{t}Display lists containing{/t}
+		<td width=50%>
+			<img alt="Search" src="{$search_image}" align=middle>{t}Display lists containing{/t}
 		</td>
 	    <td>
 		<input type='text' name='entry' maxlength='20' value='{$entry}' title='{t}Show lists containing entered numbers{/t}' onChange="mainform.submit()">
