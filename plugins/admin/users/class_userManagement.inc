@@ -466,7 +466,7 @@ class userManagement extends plugin
 
       /* Create new usertab object */
       $this->usertab= new usertabs($this->config,
-          $this->config->data['TABS']['USERTABS'], $this->dn);
+        $this->config->data['TABS']['USERTABS'], $this->dn);
       $this->usertab->set_acl(array(':all'));
 
       /* Take care about templates */
@@ -476,7 +476,7 @@ class userManagement extends plugin
       } else {
         $this->is_template= FALSE;
       }
-
+    
       /* Use template if there are any of them */
       if (count($this->templates) && !isset($_POST['new_template'])){
         foreach(array("sn", "givenName", "uid", "got_uid", "templates") as $attr){
@@ -490,7 +490,6 @@ class userManagement extends plugin
         $smarty->assign("edit_uid", "");
         return($smarty->fetch(get_template_path('template.tpl', TRUE)));
       }
-
     }
 
     /* Continue template editing */
@@ -568,7 +567,7 @@ class userManagement extends plugin
       $this->usertab->givenName= $this->givenName;
       $template_dn= $_POST['template'];
       $this->usertab->adapt_from_template($template_dn);
-      $template_base= preg_replace("/^[^,]+,".get_people_ou()."/", '', $template_dn);
+      $template_base= $userfilter['depselect'];//preg_replace("/^[^,]+,".get_people_ou()."/", '', $template_dn);
       $this->usertab->by_object['user']->base= $template_base;
 
       /* Set up the users ACL's for this 'dn' */
