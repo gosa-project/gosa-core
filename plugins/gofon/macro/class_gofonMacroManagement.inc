@@ -439,9 +439,14 @@ class gofonMacro extends plugin
         TRUE, $base2, array("ou", "description"), TRUE);
 
     $this->departments= array();
+    $tmp = array();
     foreach ($res3 as $value){
+      $tmp[strtolower($value['dn']).$value['dn']]=$value;
+    }
+    ksort($tmp);
+    foreach($tmp as $value){
       if($value["description"][0]!=".."){
-        $this->departments[$value['dn']]= convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
+        $this->departments[$value['dn']]=convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
       }else{
         $this->departments[$value['dn']]=$value["description"][0];
       }
@@ -450,6 +455,15 @@ class gofonMacro extends plugin
     /* END NEW LIST MANAGMENT
      */
 
+   $tmp=array();
+    foreach($this->macros as $tkey => $val ){
+      $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
+    }
+    ksort($tmp);
+    $this->macros=array();
+    foreach($tmp as $val){
+      $this->macros[]=$val;
+    }
 
     reset ($this->macros);
   }

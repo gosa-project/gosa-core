@@ -579,18 +579,34 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
     $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
                               TRUE, $base2, array("ou", "description"), TRUE);
 
+   
+
     $this->departments= array();
+    $tmp = array();
     foreach ($res3 as $value){
+      $tmp[strtolower($value['dn']).$value['dn']]=$value;
+    }
+    ksort($tmp);
+    foreach($tmp as $value){
       if($value["description"][0]!=".."){
-        $this->departments[$value['dn']]= convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
+        $this->departments[$value['dn']]=convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
       }else{
         $this->departments[$value['dn']]=$value["description"][0];
       }
     }
-
     /* END NEW LIST MANAGMENT
      */
 
+    $tmp=array();
+    foreach($this->ogrouplist as $tkey => $val ){
+      $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
+    }
+    ksort($tmp);
+    $this->ogrouplist=array();
+    foreach($tmp as $val){
+      $this->ogrouplist[]=$val;
+    }
+    reset ($this->ogrouplist);
 
 
 

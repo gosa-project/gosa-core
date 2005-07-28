@@ -826,14 +826,19 @@ class userManagement extends plugin
                               TRUE, $base2, array("ou", "description"), TRUE);
 
     $this->departments= array();
+
+    $tmp = array();
     foreach ($res3 as $value){
+      $tmp[strtolower($value['dn']).$value['dn']]=$value;
+    }
+    ksort($tmp);
+    foreach($tmp as $value){
       if($value["description"][0]!=".."){
-        $this->departments[$value['dn']]= convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
+        $this->departments[$value['dn']]=convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
       }else{
         $this->departments[$value['dn']]=$value["description"][0];
       }
     }
-    
     /* END NEW LIST MANAGMENT 
      */
   

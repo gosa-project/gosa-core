@@ -441,9 +441,14 @@ class blocklist extends plugin
         TRUE, $base2, array("ou", "description"), TRUE);
 
     $this->departments= array();
+    $tmp = array();
     foreach ($res3 as $value){
+      $tmp[strtolower($value['dn']).$value['dn']]=$value;
+    }
+    ksort($tmp);
+    foreach($tmp as $value){
       if($value["description"][0]!=".."){
-        $this->departments[$value['dn']]= convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
+        $this->departments[$value['dn']]=convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
       }else{
         $this->departments[$value['dn']]=$value["description"][0];
       }
@@ -451,7 +456,15 @@ class blocklist extends plugin
 
     /* END NEW LIST MANAGMENT
      */
-
+    $tmp=array();
+    foreach($this->blocklists as $tkey => $val ){
+      $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
+    }
+    ksort($tmp);
+    $this->blocklists=array();
+    foreach($tmp as $val){
+      $this->blocklists[]=$val;
+    }
     reset ($this->blocklists);
   }
 
