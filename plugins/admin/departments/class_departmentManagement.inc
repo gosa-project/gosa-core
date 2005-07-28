@@ -76,13 +76,13 @@ class departmentManagement extends plugin
 			if(preg_match("/dep_del.*/",$key)){
 				$s_action = "del";
 				$s_entry  = preg_replace("/dep_".$s_action."_/i","",$key);
-				$s_entry  = preg_replace("/_.*/","",$s_entry);
+				$s_entry  = preg_replace("/_.*$/","",$s_entry);
 				$s_entry  = base64_decode($s_entry);
 			// Post for edit
 			}elseif(preg_match("/dep_edit_.*/",$key)){
 				$s_action="edit";
 				$s_entry  = preg_replace("/dep_".$s_action."_/i","",$key);
-				$s_entry  = preg_replace("/_.*/","",$s_entry);
+				$s_entry  = preg_replace("/_.*$/","",$s_entry);
 				$s_entry  = base64_decode($s_entry);
 				// Post for new
 			}elseif(preg_match("/dep_new.*/",$key)){
