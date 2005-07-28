@@ -632,6 +632,11 @@ class mailAccount extends plugin
     $id= $method->uattrib;
     $method->fixAttributesOnStore($this);
 
+    /* Remove Mailquota if = "" */
+    if($this->attrs['gosaMailQuota']=="") {
+      $this->attrs['gosaMailQuota']=array();
+    }
+
     if(empty($this->attrs['gosaSpamMailbox'])){
       unset($this->attrs['gosaSpamMailbox']);
     }
