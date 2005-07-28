@@ -1646,6 +1646,7 @@ function clean_smarty_compile_dir($directory)
       if(!compare_revision($revision_file, $svn_revision)){
         // If revision differs, clean compile directory
         foreach(scan_directory($directory) as $file) {
+          if(($file==".")||($file=="..")) continue;
           if( is_file($directory."/".$file) &&
               is_writable($directory."/".$file)) {
               // delete file
