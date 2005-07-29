@@ -173,8 +173,6 @@ class servservice extends plugin
   {
     $message= array();
   
-    
-  
     if((isset($_POST['goTerminalServer']))&&(empty($this->goFontPath))){
       $message[]=_("Terminal server, must have fontpath specified.");
     }
@@ -186,13 +184,6 @@ class servservice extends plugin
   /* Save to LDAP */
   function save()
   {
-    /* Normalize lazy objectclass arrays */
-    $objectclasses= array();
-    foreach($this->objectclasses as $oc){
-      $objectclasses[]= $oc;
-    }
-    $this->objectclasses= $objectclasses;
-
     plugin::save();
 
     $tmp= array();

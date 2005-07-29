@@ -532,7 +532,7 @@ class groupManagement extends plugin
       }
     }
 
-    /* NEW LIST MANAGMENT
+    /*
      * We also need to search for the departments
      * So we are able to navigate like in konquerer
      */
@@ -554,13 +554,6 @@ class groupManagement extends plugin
         $this->departments[$value['dn']]=$value["description"][0];
       }
     }
-
-    /* END NEW LIST MANAGMENT
-     */
-
-
-
-
 
     /* Generate grouplist */
     if ($filter != ""){

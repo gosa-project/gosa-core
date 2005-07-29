@@ -29,6 +29,8 @@ Things to fix before 2.4:
 
 * Minimize "reload" calls during post of depselect in all plugins
 
+* Check renaming of servers
+
 
 Target for 2.5:
 ===============
