@@ -78,6 +78,10 @@ class ogroup extends plugin
       }
     }
     register_global("ogfilter", $ogfilter);
+  
+    if(isset($_SESSION['ogroupfilter']['depselect'])){
+     $this->base = $_SESSION['ogroupfilter']['depselect'];
+    }
 
     /* Load member data */
     $this->reload();
@@ -187,16 +191,10 @@ class ogroup extends plugin
     }
 
     /* Bases / Departments */
-    if ($this->dn == "new"){
-      $ui= get_userinfo();
-      $this->base= dn2base($ui->dn);
-    } else {
+   
       if (isset($_POST['base'])){
         $this->base= $_POST['base'];
-      } else {
-        $this->base= preg_replace ("/^[^,]+,[^,]+,/", "", $this->dn);
       }
-    }
 
     /* Assemble combine string */
     if ($this->gosaGroupObjects == "[]"){

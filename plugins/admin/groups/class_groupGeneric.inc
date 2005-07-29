@@ -128,6 +128,20 @@ class group extends plugin
     }
     $gufilter= get_global('gufilter');
 
+      /* Bases / Departments */
+      
+    if(isset($_SESSION['groupfilter']['depselect'])){
+      $this->base = $_SESSION['groupfilter']['depselect'];
+    }else{
+      if ($this->dn == "new"){
+        $ui= get_userinfo();
+        $this->base= dn2base($ui->dn);
+      } else {
+        $this->base= preg_replace ("/^[^,]+,[^,]+,/", "", $this->dn);
+      }
+    }
+
+
     /* This is always an account */
     $this->is_account= TRUE;
     $this->reload();
@@ -230,13 +244,6 @@ class group extends plugin
     /* Bases / Departments */
     if (isset($_POST['base'])){
       $this->base= $_POST['base'];
-    } else {
-      if ($this->dn == "new"){
-        $ui= get_userinfo();
-        $this->base= dn2base($ui->dn);
-      } else {
-        $this->base= preg_replace ("/^[^,]+,[^,]+,/", "", $this->dn);
-      }
     }
 
     $smarty->assign("bases", $this->config->idepartments);
