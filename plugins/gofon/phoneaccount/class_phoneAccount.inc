@@ -24,6 +24,8 @@ class phoneAccount extends plugin
   var $macros                 = array();        // List of macros for smarty select box
   var $macroarray             = array();        // All needed macro informations
   var $macrostillavailable    = false;
+  var $generate_error         = "";
+  var $a_old_telenums           = array();
 
   /* CLI vars */
   var $cli_summary            = "Manage users phone account";
@@ -189,7 +191,263 @@ class phoneAccount extends plugin
 
     $this->hardware_list["automatic"]= _("automatic");
     ksort($this->hardware_list);
+    $this->a_old_telenums = $this->phoneNumbers;
   }
+
+
+
+
+  // Generate MySQL Syntax
+  function generate_mysql_entension_entries($save = false){
+
+    // Get Configuration for Mysql database Server
+    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
+    $s_parameter  ="";
+
+    // Connect to DB server
+    $r_con =  @mysql_connect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+
+    // Check if we are  connected correctly
+    if(!$r_con){
+      $this->generate_error = sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
+          $a_SETUP['SERVER'],$a_SETUP['LOGIN']);
+      gosa_log(mysql_error());
+      return false;
+    }
+
+    // Select database for Extensions
+    $db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
+
+    // Test if we have the database selected correctly
+    if(!$db){
+      $this->generate_error = sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']);
+      gosa_log(mysql_error());
+      return false;
+    }
+
+    // Save data 
+    if($save == true){
+
+      // Get phonehardware to setup sip entry
+      $ldap= $this->config->get_ldap_link();
+      $res = $ldap->search("(&(objectClass=goFonHardware)(cn=".$this->goFonHardware."))", array('*'));
+      $attrs = $ldap->fetch();
+
+      // Attribute GoFonDefaultIP set ?
+      if(((isset($attrs['goFonDefaultIP'][0]))&&($attrs['goFonDefaultIP'][0] != "dynamic"))){
+        $ip = $attrs['goFonDefaultIP'][0];
+        $host = $ip;
+      }else{
+        $ip = NULL;
+        $host = "dynamic";
+      }
+
+      // Attribute GoFonQualify set ?
+      if(!isset($attrs['goFonQualify'])){
+        $qualify = NULL;
+      }else{
+        $qualify = $attrs['goFonQualify'][0];
+      }
+
+      // Attribute GoFonPIN set ?
+      if(!isset($this->goFonPIN)){
+        $pin = NULL;
+      }else{
+        $pin = $this->goFonPIN;
+      }
+
+      // Attribute GoFonType set ?
+      if(!isset($attrs['goFonType'])){
+        $type = NULL;
+      }else{
+        $type = $attrs['goFonType'][0];
+      }
+
+      // generate SIP entry
+      $sip_data_array['id']           = "";
+      $sip_data_array['name']         = $this->uid;
+      $sip_data_array['accountcode']  = NULL;          
+      $sip_data_array['amaflags']     = NULL;
+      $sip_data_array['callgroup']    = NULL;
+      $sip_data_array['callerid']     = "";
+      $sip_data_array['canreinvite']  = "yes";
+    
+      // Must be default and the name of an entry that already exists
+      $sip_data_array['context']      = "default";
+      $sip_data_array['defaultip']    = NULL;
+      
+      if(isset($attrs['goFonDmtfMode'][0])){
+        $sip_data_array['dtmfmode']     = $attrs['goFonDmtfMode'][0];
+      }else{
+        $sip_data_array['dtmfmode']     ="rfc2833";
+      }
+      $sip_data_array['fromuser']     = NULL;
+      $sip_data_array['fromdomain']   = NULL;
+      $sip_data_array['host']         = $host;
+      $sip_data_array['insecure']     = NULL;
+      $sip_data_array['language']     = NULL;
+      $sip_data_array['mailbox']      = "asterisk";
+      $sip_data_array['md5secret']    = NULL;
+      $sip_data_array['nat']          = "no";
+      $sip_data_array['permit']       = NULL;
+      $sip_data_array['deny']         = NULL;
+      $sip_data_array['mask']         = NULL;
+      $sip_data_array['pickupgroup']  = NULL;
+      $sip_data_array['port']         = NULL;
+      $sip_data_array['qualify']      = $qualify;
+      $sip_data_array['restrictcid']  = "n";
+      $sip_data_array['rtptimeout']   = NULL;
+      $sip_data_array['rtpholdtimeout']=NULL;
+      $sip_data_array['secret']       = $pin;
+      $sip_data_array['type']         = $type ;
+      $sip_data_array['username']     = $this->uid;
+      $sip_data_array['disallow']     = NULL;
+      $sip_data_array['allow']        = NULL;
+      $sip_data_array['musiconhold']  = NULL;
+      $sip_data_array['regseconds']   = NULL;
+      $sip_data_array['ipaddr']       = $ip;
+      $sip_data_array['regexten']     = NULL;
+      $sip_data_array['cancallforward']=NULL;
+
+      // Get selected Macro Parameter and create parameter entry 
+      if(isset($this->macroarray[$this->macro])){
+        foreach($this->macroarray[$this->macro] as $key => $val ){
+          $s_parameter .= $val['choosen']."|";
+        }
+        $s_parameter = preg_replace("/\|$/","",$s_parameter);
+      }
+
+      // $SQL contains all queries
+      $SQL = array();
+      $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$this->uid."';\n";
+      $SQL[] = "DELETE FROM ".$a_SETUP['SIP_TABLE']." WHERE name='".$this->uid."';\n";
+
+      // Create new SIP entry ...
+      $sip_entry = $sip_data_array;
+    
+      reset($this->phoneNumbers);
+  
+      $key = key($this->phoneNumbers);
+      $sip_entry['callerid']  =$this->phoneNumbers[$key];
+     
+      if(isset($this->parent->by_object['mailAccount']->mail)){
+        $mail = $this->parent->by_object['mailAccount']->mail;
+      }else{
+        $mail = "";
+      }
+
+
+      $SQL[]= "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id='".$this->phoneNumbers[$key]."';"; 
+      $SQL[]= "INSERT INTO ".$a_SETUP['VOICE_TABLE']." 
+                  (`customer_id`,`context`,`mailbox`,`password`,`fullname`,`email`,`pager`) 
+               VALUES 
+                  ('".$this->phoneNumbers[$key]."','default','".$this->phoneNumbers[$key]."','".$this->goFonPIN."','".$this->sn."','".$mail."','');";
+
+      // Generate Strings with keys and values 
+      $values = "";
+      $keys   = "";
+      foreach($sip_entry as $key=>$val){
+        if($val == NULL) continue;
+        $values.="'".$val."',";
+        $keys  .="`".$key."`,";
+      }
+      // Remove last ,
+      $values =  preg_replace("/,$/","",$values);
+      $keys   =  preg_replace("/,$/","",$keys);
+
+      // Append SIP Entry 
+      $SQL[] ="INSERT INTO ".$a_SETUP['SIP_TABLE']." (".$keys.") VALUES (".$values.");";
+
+      // Delete old entries
+      foreach($this->a_old_telenums as $s_telenums){
+        $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$s_telenums."';\n";
+      }
+
+      $i_is_accounted=false;
+
+      // Entension entries  Hint / Dial / Goto
+      foreach($this->phoneNumbers as $s_telenums){
+        // Entry  to call by name
+        $s_entry_name['context']  = 'GOsa';
+        $s_entry_name['exten']    = $this->uid;
+        $s_entry_name['priority'] = 1;
+        $s_entry_name['app']      = 'Goto';
+        $s_entry_name['appdata']  = $s_telenums."|1";
+        
+        // hint
+        $s_entry_hint['context']  = 'GOsa';
+        $s_entry_hint['exten']    = $s_telenums;
+        $s_entry_hint['app']      = 'hint';
+        $s_entry_hint['appdata']  = 'SIP/'.$this->uid;
+
+        // If no macro is selected use Dial
+        if($this->macro!="none"){ 
+          $macroname = preg_replace("/,.*$/","",$this->macro);        
+          $macroname = preg_replace("/^.*=/","",$macroname);        
+          $s_app = "Macro";$macroname;
+          $s_par = $macroname."|".$s_parameter; 
+        }else{
+          $s_app = "Dial";
+          $s_par = 'SIP/'.$this->uid;
+        }
+
+        // Entry  to call by number
+        $s_entry_phone['context']  = 'GOsa';
+        $s_entry_phone['exten']    = $s_telenums;
+        $s_entry_phone['priority'] = 1;
+        $s_entry_phone['app']      = $s_app;
+        $s_entry_phone['appdata']  = $s_par;
+
+        // append name entry only once
+        if(!$i_is_accounted){ 
+          $i_is_accounted = true;
+          $entries[]=array("hint"=>$s_entry_hint,"phone"=>$s_entry_phone,"name"=>$s_entry_name); 
+        }else{
+          $entries[]=array("hint"=>$s_entry_hint,"phone"=>$s_entry_phone);
+        }
+      }
+
+      // Append all these Entries 
+      foreach($entries as $num => $val){
+        foreach($val as $entr){
+          $SQL_syn = "INSERT INTO ".$a_SETUP['EXT_TABLE']." (";
+          foreach($entr as $key2 => $val2){
+            $SQL_syn.= "`".$key2."`,";
+          }
+          $SQL_syn = preg_replace("/,$/","",$SQL_syn);
+          $SQL_syn .= ") VALUES ("; 
+          foreach($entr as $key2 => $val2){
+            $SQL_syn .= "'".$val2."',";
+          }
+          $SQL_syn = preg_replace("/,$/","",$SQL_syn);
+          $SQL_syn .=");\n";
+          $SQL[] =$SQL_syn;
+          $SQL_syn ="";
+        }
+      }
+
+      // Perform queries ...
+      foreach($SQL as $query){
+        if(!mysql_query($query,$r_con)){
+          print_red(_("Error while performing query ".mysql_error()));
+          return false;
+        }
+      }
+    }
+  return true;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   function execute()
@@ -239,16 +497,16 @@ class phoneAccount extends plugin
 
           case "combo":
             $str= "<select name='".$var."' ".chkacl($this->acl, "goFonMacro")."  ".chkacl($this->acl, "goFonMacro").">";
-            foreach(split(":",$default) as $choice){
-              if($choosen==$choice){
-                $str.= "\n<option value='".$choice."' selected>".$choice."&nbsp;</option>";
-              }else{
-                $str.= "\n<option value='".$choice."'>".$choice."&nbsp;</option>";
-              }
+          foreach(split(":",$default) as $choice){
+            if($choosen==$choice){
+              $str.= "\n<option value='".$choice."' selected>".$choice."&nbsp;</option>";
+            }else{
+              $str.= "\n<option value='".$choice."'>".$choice."&nbsp;</option>";
             }
-            $str.="</select>";
-            $macrotab.= "<td>$name</td><td>$str";
-            break;
+          }
+          $str.="</select>";
+          $macrotab.= "<td>$name</td><td>$str";
+          break;
 
           case "bool":
             if(!$choosen){
@@ -256,13 +514,13 @@ class phoneAccount extends plugin
             }else{
               $str="\n<input type='checkbox' name='".$var."' value='1' checked  ".chkacl($this->acl, "goFonMacro").">";
             }
-            $macrotab.= "<td colspan='2'>$str&nbsp;$name";
-            break;
+          $macrotab.= "<td colspan='2'>$str&nbsp;$name";
+          break;
 
           case "string":
             $str="<input name='".$var."' value='".$choosen."' ".chkacl($this->acl, "goFonMacro").">";
-            $macrotab.= "<td>$name</td><td>$str";
-            break;
+          $macrotab.= "<td>$name</td><td>$str";
+          break;
 
         }
         $macrotab.= "</td</tr>";
@@ -426,10 +684,10 @@ class phoneAccount extends plugin
           if(isset($_POST[$paras['var']])){
             $this->macroarray[$this->macro][$key]['choosen'] = $_POST[$paras['var']]; 
           }
-        
+
           /* Checkboxes are special, they are not Posted if they are not selected, so the won't be changed with the above code 
              We need this code below to read and save checkboxes correct
-          */
+           */
           if($this->macroarray[$this->macro][$key]['type']=="bool"){
             if(isset($_POST[$this->macroarray[$this->macro][$key]['var']])) {
               $this->macroarray[$this->macro][$key]['choosen']=$_POST[$paras['var']];
@@ -448,6 +706,10 @@ class phoneAccount extends plugin
   {
     /* Reset message array */
     $message= array();
+
+    if(!$this->generate_mysql_entension_entries()){
+      $message[] = $this->generate_error;
+    }
 
     /* We need at least one phone number */
     if (count($this->phoneNumbers) == 0){
@@ -481,7 +743,7 @@ class phoneAccount extends plugin
         $message[]= sprintf(_("The timeout '%s' contains invalid characters!"), $timeout);
       }
     }
-    
+
     /* check for ! in any parameter setting*/
     if(isset($this->macroarray[$this->macro])){
       foreach($this->macroarray[$this->macro] as $val){
@@ -530,6 +792,9 @@ class phoneAccount extends plugin
     $ldap->cd($this->dn);
     $ldap->modify($this->attrs);
     show_ldap_error($ldap->get_error());
+
+    $this->generate_mysql_entension_entries(true);
+
 
     /* Optionally execute a command after we're done */
     if ($this->initially_was_account == $this->is_account){
@@ -591,11 +856,61 @@ class phoneAccount extends plugin
 
   function remove_from_parent()
   {
+    // Get Configuration for Mysql database Server
+    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
+    $s_parameter  ="";
+
+    // Connect to DB server
+    $r_con =  @mysql_connect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+
+    // Check if we are  connected correctly
+    if(!$r_con){
+      $this->generate_error = sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
+          $a_SETUP['SERVER'],$a_SETUP['LOGIN']);
+      gosa_log(mysql_error());
+      return false;
+    }
+
+    // Select database for Extensions
+    $db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
+
+    // Test if we have the database selected correctly
+    if(!$db){
+      $this->generate_error = sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']);
+      gosa_log(mysql_error());
+      return false;
+    }
+
+    $SQL="";
+
+    $first_num = false;
+    // Delete old entries
+      foreach($this->a_old_telenums as $s_telenums){
+        if(!$first_num){
+          $first_num = $s_telenums;
+        }
+        $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$s_telenums."';\n";
+      }
+
+      $SQL[] = "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id='".$first_num."';";
+      $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$this->uid."';\n";
+      $SQL[] = "DELETE FROM ".$a_SETUP['SIP_TABLE']." WHERE name='".$this->uid."';\n";
+
+
+      foreach($SQL as $query){
+        if(!mysql_query($query,$r_con)){
+          print_red(_("Stop".mysql_error()));
+          return false;
+        }
+      }
+
+
+
     /* unset macro attr, it will cause an error */
     $tmp = array_flip($this->attributes);
     unset($tmp['macro']);
     $this->attributes=array_flip($tmp);
-  
+
     /* Cancel if there's nothing to do here */
     if (!$this->initially_was_account){
       return;
