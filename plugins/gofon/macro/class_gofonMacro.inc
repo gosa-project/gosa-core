@@ -16,7 +16,9 @@ class macro extends plugin
   /*! CLI vars */
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
+
   /*! Macro attributes,  */
+  var $generate_error= "";
   
   /*! The name of the Macro in the openldap drirectory */
   var $cn               = ""; 
@@ -38,6 +40,8 @@ class macro extends plugin
 
   /*! attribute list for save action */
   var $attributes     = array("cn","base", "description","displayName","goFonMacroContent","goFonMacroVisible");
+
+  var $is_new=false;
   
   /*! Objectclasses that this calls handles */
   var $objectclasses  = array("top", "goFonMacro");
@@ -58,9 +62,11 @@ class macro extends plugin
 
     /* Edit or new one ?*/
     if ($this->dn == "new"){
+      $this->is_new = true;
       $ui= get_userinfo();
       $this->base= dn2base($ui->dn);
     } else {
+      $this->is_new = false;
       $this->orig_cn=$this->cn;
       $this->base= dn2base($this->dn);
     }
@@ -103,12 +109,20 @@ class macro extends plugin
       $this->goFonMacroVisible= 1 ;
       $smarty->assign("goFonMacroVisibleChecked"," checked ");
     }else  {
-      if(isset($_POST['cn'])){
+      if(isset($_POST['displayName'])){
         $this->goFonMacroVisible= 0 ;
         $smarty->assign("goFonMacroVisibleChecked","");
       }
     }
-
+    
+    if(!$this->is_new){
+      $smarty->assign("disable_cn"," disabled ");
+      $smarty->assign("cn",$this->orig_cn);
+    }else{
+      $smarty->assign("disable_cn","  ");
+      $smarty->assign("cn","");
+    }
+    $this->generate_mysql_entension_entries();
     /* Show main page */
     return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }
@@ -119,10 +133,24 @@ class macro extends plugin
   function remove_from_parent()
   {
     $ldap= $this->config->get_ldap_link();
-    $ldap->rmDir($this->dn);
+    
+    $res = $ldap->search("(&(objectClass=goFonAccount)(objectClass=gosaAccount))", array("goFonMacro"));
 
-    /* Optionally execute a command after we're done */
-    $this->handle_post_events("remove");
+    while ($val = $ldap->fetch()){ 
+      if(isset($val['goFonMacro'])){
+        if(strstr($val['goFonMacro'][0],$this->dn)){ 
+          print_red(_("This macro ist still in use. To delete this Macro ensure that nobody has selected this Macro."));
+          return false;
+        }
+      }
+    }
+  
+    $ldap->rmDir($this->dn); 
+    if(isset($this->orig_cn)){
+      $this->generate_mysql_entension_entries(false,true,$this->orig_cn);
+    }else{
+      $this->generate_mysql_entension_entries(false,true);
+    }
 
     /* Delete references to object groups */
     $ldap->cd ($this->config->current['BASE']);
@@ -134,13 +162,138 @@ class macro extends plugin
     }
   }
 
+  // Generate MySQL Syntax 
+  function generate_mysql_entension_entries($save = false,$delete_only=false,$remove_old_macroname=false){
+
+    // Get Configuration for Mysql database Server  
+    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
+
+    // Connect to DB server
+    $r_con =  @mysql_connect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']); 
+  
+    // Check if we are  connected correctly 
+    if(!$r_con){
+      $this->generate_error = sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
+          $a_SETUP['SERVER'],$a_SETUP['LOGIN']);
+      gosa_log(mysql_error());
+      return false;
+    }
+
+    // Select database for Extensions 
+    $db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
+
+    // Test if we have the database selected correctly
+    if(!$db){
+      $this->generate_error = sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']);
+      gosa_log(mysql_error());
+      return false;
+    }
+
+
+    // Context def
+    $context  = "macro-".$this->cn;
+
+    // Parse Content if we connected correctly
+    if($db &&  $r_con && $save){
+
+      // Split Content into lines 
+      $a_contentLines = split ("\n",$this->goFonMacroContent);
+
+      // Foreach single line ...
+      foreach($a_contentLines as $i_linenum => $s_linestr){
+    
+        // Remove unwanted exten => tag 
+        $s_linestr= preg_replace ("/^.*\> /","",$s_linestr);
+      
+        // Remove  spaces 
+        $s_linestr = trim ( $s_linestr);
+
+        // If not empty or linebreak at [0]
+        if((!empty($s_linestr))&&($s_linestr[0]!=";")&&(ord($s_linestr[0]) !=13)){
+  
+          // Set general SQL statement
+          $SQL[$i_linenum] =  
+            "INSERT INTO ".$a_SETUP['EXT_TABLE'].
+            " (context,exten,priority,app,appdata) ".
+            " VALUES ".
+            " (";
+      
+          // Parse linestr to entry data
+          $linecontents = preg_replace("/;.*$/","",$s_linestr) ;
+
+          $tmp  = split(",", preg_replace("/\(.*$/","",$linecontents));
+  
+          if(!isset($tmp[2])){
+            print_red(sprintf(_("Unable to parse macro contents on line: %s"),$i_linenum));
+          }    
+      
+          $exten = $tmp[0];
+          $prio = $tmp[1];
+          $app  = $tmp[2];
+          $para = $linecontents; 
+          $para = preg_replace("/^.*\(/","",$para);
+          $para = preg_replace("/\)$/","",$para);
+
+          // Append SQL syntax
+          $SQL[$i_linenum].="'".$context."','".$exten."','".$prio."','".$app."','".$para."');";
+        }
+      }
+
+      if(($save)||($delete_only)){
+        $res = mysql_query("SELECT count(*) FROM ".$a_SETUP['EXT_TABLE']." WHERE context= '".$context."'");
+        if(!$res){
+          $this->generate_error = sprintf(_("Can't perform SELECT query in DB '%s'"),$a_SETUP['DB']);
+          gosa_log(mysql_error());
+          return false;
+        }
+        $cnt = mysql_fetch_row($res);
+        $cnt = $cnt[0];
+
+        if($cnt != 0) {
+          if(!mysql_query("DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE context= '".$context."'")){
+            $this->generate_error = sprintf(_("Can't perform DELETE query in DB '%s'"),$a_SETUP['DB']);
+            gosa_log(mysql_error());
+            return false;
+          }
+        }
+
+        if($remove_old_macroname!="false"){
+          if(!mysql_query("DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE context= 'Makro-".$remove_old_macroname."'")){
+            $this->generate_error = sprintf(_("Can't perform DELETE query in DB '%s'"),$a_SETUP['DB']);
+            gosa_log(mysql_error());
+            return false;
+          }
+        }
+
+
+
+      }
+
+      // We want to save this 
+      if($save){
+        foreach($SQL as $entry){
+          if(!mysql_query($entry)){
+            $this->generate_error = sprintf(_("Can't perform INSERT query in DB '%s'"),$a_SETUP['DB']);
+            gosa_log(mysql_error());
+            return false;
+          }
+        } 
+      }    
+    }
+
+  return true;
+
+  }
+
+
+
 
   /*!
   Save data to object 
   */
   function save_object()
   {
-    if (isset($_POST['cn'])){
+    if (isset($_POST['displayName'])){
       plugin::save_object();
 
     }
@@ -152,7 +305,11 @@ class macro extends plugin
   */
   function check()
   {
+
     $message = array();
+    if(!$this->generate_mysql_entension_entries()){
+      $message[] = $this->generate_error;
+    }
 
     if(($this->dn=="new")||($this->orig_cn!=$this->cn)){
       $ldap = $this->config->get_ldap_link();
@@ -165,16 +322,17 @@ class macro extends plugin
     if(empty($this->displayName)){
       $message[] = _("You must specify the 'Display Name' in order to save this macro");
     }  
-  
+ 
+    if(strlen("Makro-".$this->cn)>20 ){
+      $message[]=_("The given cn is too long, to create a Makro entry, maximum 20 chars.");
+    }
+ 
     foreach($this->attributes as $attr){
       if(chkacl($this->acl,$attr)){
         $str =  sprintf( _("Insufficient permissions, can't change attribute '%s' in goFonMacro"),$attr) ;
         return(array($str));
         }
       }
-    if(($this->cn != strtolower($this->cn))||(empty($this->cn))){
-      $message[] = "The attribute 'cn' must be lowercase and a least one char.";
-    }
     
     if(count(split("\n",$this->goFonMacroContent))>100){
       $message[] = _("Makro length must be lower than 100 lines");
@@ -205,16 +363,25 @@ class macro extends plugin
     $ldap->cat($this->dn);
     $a= $ldap->fetch();
 
-    if (count($a)){
-      $ldap->cd($this->dn);
-      $ldap->modify($this->attrs);
-      $this->handle_post_events("modify");
-    } else {
-      $ldap->cd($this->dn);
-      $ldap->create_missing_trees( $this->dn);
-      $ldap->cd($this->dn);
-      $ldap->add($this->attrs);
-      $this->handle_post_events("add");
+    
+    if(isset($this->orig_cn)){
+      $this-> generate_mysql_entension_entries(true,false,$this->orig_cn);
+    }else{
+      $this-> generate_mysql_entension_entries(true);
+    }
+
+    if($this->generate_mysql_entension_entries()){
+      if (count($a)){
+        $ldap->cd($this->dn);
+        $ldap->modify($this->attrs);
+        $this->handle_post_events("modify");
+      } else {
+        $ldap->cd($this->dn);
+        $ldap->create_missing_trees( $this->dn);
+        $ldap->cd($this->dn);
+        $ldap->add($this->attrs);
+        $this->handle_post_events("add");
+      }
     }
     show_ldap_error($ldap->get_error());
   }
