@@ -4,7 +4,7 @@
    			<table summary="">
      			<tr>
       				<td><LABEL for="cn">{t}Macro name{/t}</LABEL>{$must}</td>
-      				<td><input name="cn" id="id" size=25 maxlength=60 value="{$cn}" title="{t}Macro name{/t}"></td>
+      				<td><input {$disable_cn} name="cn" id="id" size=13 maxlength=13 value="{$cn}" title="{t}Macro name{/t}"></td>
     			</tr>
     			<tr>
      				<td><LABEL for="displayName">{t}Display name{/t}</LABEL>{$must}</td>
