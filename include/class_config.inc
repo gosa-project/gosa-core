@@ -346,9 +346,14 @@ class config  {
 	$ldap->search ("(objectClass=goFonServer)");
 	if ($ldap->count()){
 		$attrs= $ldap->fetch();
-		$this->data['SERVERS']['FON']= array( 'SERVER' => $attrs['cn'][0],
-						'LOGIN' => $attrs['goFonAdmin'][0],
-						'PASSWORD' => $attrs['goFonPassword'][0]);
+		$this->data['SERVERS']['FON']= array( 
+						'SERVER' 	=> $attrs['cn'][0],
+						'LOGIN' 	=> $attrs['goFonAdmin'][0],
+						'PASSWORD' 	=> $attrs['goFonPassword'][0],
+						'DB'		=> "gophone",
+						'SIP_TABLE'		=> "sip_users",
+						'EXT_TABLE' 	=> "extensions",
+						'VOICE_TABLE'	=> "voicemail_users");
 	}
 	/* Get logdb server */
 	$ldap->cd ($this->current['BASE']);
