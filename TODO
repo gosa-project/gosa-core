@@ -6,8 +6,6 @@ Things to fix before 2.4:
 
 * Fix problem with winstation and invalid structural object class chain (inetOrgPerson/device)
 
-* Deparment dialog
-
 * User dialog
   - Add button for template created users
 
