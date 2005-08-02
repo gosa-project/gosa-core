@@ -367,7 +367,6 @@ class macro extends plugin
     $ldap= $this->config->get_ldap_link();
     $ldap->cat($this->dn);
     $a= $ldap->fetch();
-
     
     if(isset($this->orig_cn)){
       $this-> generate_mysql_entension_entries(true,false,$this->orig_cn);
@@ -381,8 +380,8 @@ class macro extends plugin
         $ldap->modify($this->attrs);
         $this->handle_post_events("modify");
       } else {
-        $ldap->cd($this->dn);
-        $ldap->create_missing_trees( $this->dn);
+        $ldap->cd($this->config->current['BASE']);
+        $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
         $ldap->cd($this->dn);
         $ldap->add($this->attrs);
         $this->handle_post_events("add");
