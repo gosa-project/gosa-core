@@ -128,6 +128,9 @@ class systems extends plugin
         $s_entry  = preg_replace("/user_setpwd_/i","",$key);
       }elseif(preg_match("/dep_root.*/i",$key)){
         $s_action="root";
+      }elseif(preg_match("/newsystem_.*/i",$key)){
+        $s_action="newsystem";
+        $s_entry  = preg_replace("/newsystem_/i","",$key);
       }
     }
 
@@ -180,11 +183,17 @@ class systems extends plugin
     }
 
     /* Create new default terminal */
-    if (isset($_POST['create_system'])) {
+    if (isset($_POST['create_system'])||$s_action=="newsystem") {
       $this->dn= "new";
       $this->acl= array(":all");
 
-      switch ($_POST['system']){
+      if(isset($_POST['system'])){
+        $sw = $_POST['system'];
+      }else{
+        $sw = $s_entry;
+      }
+
+      switch ($sw){
         case 'terminal':
           $this->systab= new termtabs($this->config,
               $this->config->data['TABS']['TERMTABS'], $this->dn);
@@ -535,7 +544,14 @@ class systems extends plugin
     " <input type='image' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
     " <input type='image' align='middle' src='images/list_home.png' title='"._("Go to users department")."' alt='"._("Home")."'                     name='dep_home'>&nbsp;".
     " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-    " <input type='image' align='middle' src='images/list_new_user.png' title='"._("Create new system")."' alt='"._("New user")."'                    name='user_new'>&nbsp;".
+    " <input type='image' align='middle' src='images/select_terminal.png'   name='newsystem_terminal'    alt='"._("New Terminal")."' title='"._("New Terminal")."'>".
+    " <input type='image' align='middle' src='images/select_winstation.png' name='newsystem_workstation' alt='"._("New Workstation")."' title='"._("New Workstation")."'>".
+    " <input type='image' align='middle' src='images/select_server.png'     name='newsystem_server'      alt='"._("New Server")."' title='"._("New Server")."'>".
+    " <input type='image' align='middle' src='images/select_printer.png'    name='newsystem_printer'     alt='"._("New Printer")."' title='"._("New Printer")."'>".
+    " <input type='image' align='middle' src='images/select_phone.png'      name='newsystem_phone'       alt='"._("New Phone")."' title='"._("New Phone")."'>".
+    " <input type='image' align='middle' src='images/select_component.png'  name='newsystem_component'   alt='"._("New Component")."' title='"._("New Component")."'>".
+    " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
+    " <input type='image' align='middle' src='images/list_new_user.png' title='"._("Create new system")."' alt='"._("New system")."'                    name='user_new'>&nbsp;".
     " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
     _("Current base")."&nbsp;<select name='depselect' onChange='mainform.submit()'>$options</select>".
     " <input type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='".           _("Submit")."'>&nbsp;".
