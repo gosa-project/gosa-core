@@ -636,7 +636,7 @@ class userManagement extends plugin
 
 
 
-    $divlist = new divlist();
+    $divlist = new divlist("userstab");
     $divlist->SetHeader(array(
                               array("string" => "&nbsp;"),
                               array("string" => _("Username")." / "._("Department")),

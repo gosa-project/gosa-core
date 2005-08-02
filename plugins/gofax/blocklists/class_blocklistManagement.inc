@@ -299,7 +299,7 @@ class blocklist extends plugin
       $action.= "<input type='image' src='images/editdelete.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete user")."'>";
 
 
-      $divlist = new divlist();
+      $divlist = new divlist("faxtabs");
       $divlist->SetHeader(array(
             array("string" => "&nbsp;"),
             array("string" => _("Blocklist name")." / "._("Department")),

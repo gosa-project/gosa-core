@@ -290,7 +290,7 @@ class departmentManagement extends plugin
 						"</div>";
 
 			/* Show main page */
-			$divlist = new divlist();
+			$divlist = new divlist("departmenttabs");
 			$divlist->SetSummary(_("This table displays all departments, in the selected tree."));
 			$divlist->SetEntriesPerPage(20);
 			$actions= "<input type='image' src='images/edit.png' 		 alt='"._("edit")."' 	name='dep_edit_%KEY%' title='"._("Edit this entry")."'>";

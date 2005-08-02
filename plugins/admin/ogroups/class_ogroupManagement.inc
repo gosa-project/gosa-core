@@ -394,7 +394,7 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
     $empty    = "<img src='images/empty.png' style='width:16px;height:16px;' alt=''>";
 
     // List Setup
-    $divlist = new divlist();
+    $divlist = new divlist("ogroubstab");
     $divlist->SetHeader(array(
           array("string" => "&nbsp;","attach"=>"style='width:20px;'"),
           array("string" => _("Name of object groups")." / "._("Departments")),

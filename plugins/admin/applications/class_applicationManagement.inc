@@ -358,7 +358,7 @@ class applicationManagement extends plugin
         $empty    = "<img src='images/empty.png' style='width:16px;height:16px;' alt=''>";
 
 
-        $divlist = new divlist();
+        $divlist = new divlist("applicationtabs");
         $divlist->SetHeader(array(
               array("string" => ""),
               array("string" => _("Application name")." / "._("Department")),

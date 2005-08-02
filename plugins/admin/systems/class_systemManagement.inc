@@ -547,7 +547,7 @@ class systems extends plugin
     $action.= "<input type='image' src='images/editdelete.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete system")."'>";
 
 
-    $divlist = new divlist();
+    $divlist = new divlist("systemstab");
     $divlist->SetHeader(array(
           array("string" => "&nbsp;"),
           array("string" => _("System")." / "._("Department")),

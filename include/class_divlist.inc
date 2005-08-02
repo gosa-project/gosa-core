@@ -7,22 +7,23 @@ class divlist {
 	var $b_displayPageNums; 	
 	var $summary;
 	var $cols;
+	var $pageid;
 
 	// Members for page managment
 	var $i_currentPage;
 	var $i_entriesPerPage;
 	
 	
-	function __construct(){
-		$this->i_currentPage	=0;
-		$this->i_entriesPerPage	=10;
-		$this->s_summary		="";
-		$this->a_entries		=array();
-		$this->a_header			=array();
-		$this->b_displayPageNums 		=true;
-		$this->cols = 0;
+	function __construct($pageid){
+		$this->i_currentPage	= 0;
+		$this->i_entriesPerPage	= 10;
+		$this->s_summary		= "";
+		$this->a_entries		= array();
+		$this->a_header			= array();
+		$this->b_displayPageNums= true;
+		$this->cols 			= 0;
+		$this->pageid 			= $pageid ;
 	}
-	
 
 	function __destruct(){
 	
@@ -108,12 +109,21 @@ class divlist {
 		$i_alternate=0;
 	
 		if(isset($_GET['start'])){
+			$_SESSION['start'.$this->pageid]=$_GET['start'];
 			$start = $_GET['start'];
 		}else{
-			$start=0;
+			if(isset($_SESSION['start'.$this->pageid])){
+				$start = $_SESSION['start'.$this->pageid];
+			}else{
+				$start=0;
+			}
 		}
-		$stop  = $start + $this->i_entriesPerPage;
 		
+		while($start > $this->_numentries()){
+			$start = $start - $this->i_entriesPerPage;
+		}	
+
+		$stop  = $start + $this->i_entriesPerPage;
 
 		$appendempty = ($this->_numentries() -$start);
 

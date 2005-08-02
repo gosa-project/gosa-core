@@ -388,7 +388,7 @@ class groupManagement extends plugin
     $empty    = "<img src='images/empty.png' style='width:16px;height:16px;' alt=''>";
 
 
-    $divlist = new divlist();
+    $divlist = new divlist("groupstab");
     $divlist->SetHeader(array(
           array("string" => "&nbsp;"),
           array("string" => _("Groupname")." / "._("Department")),
