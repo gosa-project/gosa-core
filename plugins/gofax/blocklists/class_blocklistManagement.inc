@@ -32,7 +32,6 @@ class blocklist extends plugin
 
     /* Get global filter config */
     if (!is_global("blockfilter")){
-      print_a($_SESSION['blocklist']);
       $uii= get_userinfo();
       $base= get_base_from_people($ui->dn);
       $blockfilter= array("sendlists" => "checked",
@@ -315,7 +314,19 @@ class blocklist extends plugin
       // Defining Links
       $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
       foreach($this->departments as $key=> $val){
-        $field1 = array("string" => "<img src='images/folder.png' alt='department'>");
+        if(!isset($this->config->departments[trim($key)])){
+          $this->config->departments[trim($key)]="";
+        }
+
+        $non_empty="";
+        $keys= str_replace("/","\/",$key);
+        foreach($this->config->departments as $keyd=>$vald ){
+          if(preg_match("/".$keys."\/.*/",$keyd)){
+            $non_empty="full";
+          }
+        }
+
+        $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>");
         $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
         $field3 = array("string" => "&nbsp;", "attach" => "style='border:none'");
         $divlist->AddEntry(array($field1,$field2,$field3));

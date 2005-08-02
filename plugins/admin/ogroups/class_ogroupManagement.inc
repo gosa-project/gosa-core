@@ -408,7 +408,21 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
 
     foreach($this->departments as $key=> $val){
 
-      $field1 = array("string" => "<img src='images/folder.png' alt='"._("Department")."'>");
+      if(!isset($this->config->departments[trim($key)])){
+        $this->config->departments[trim($key)]="";
+      }
+
+      $non_empty="";
+      $keys= str_replace("/","\/",$key);
+      foreach($this->config->departments as $keyd=>$vald ){
+        if(preg_match("/".$keys."\/.*/",$keyd)){
+          $non_empty="full";
+        }
+      }
+
+
+
+      $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='"._("Department")."'>");
       $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
       $field3 = array("string" => "&nbsp;");
       $field4 = array("string" => "&nbsp;","attach"=>"style='text-align:right;border:none'");
