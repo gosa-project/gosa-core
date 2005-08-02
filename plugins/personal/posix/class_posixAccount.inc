@@ -38,6 +38,7 @@ class posixAccount extends plugin
   var $accessTo= array();
   var $trustModel= "";
 
+  var $glist=array();
   var $status= "";
   var $loginShellList= array();
   var $groupMembership= array();
@@ -395,7 +396,7 @@ class posixAccount extends plugin
       register_global("groupfilter", $groupfilter);
 
       /* Calculate actual groups */
-      $gd->reload();
+      $gd->reload2();
       $glist= array();
       foreach ($gd->grouplist as $key => $value){
         if (!isset($this->groupMembership[$key])){
@@ -403,7 +404,6 @@ class posixAccount extends plugin
         }
       }
 
-      /* Show dialog */
       $smarty->assign("groups", $glist);
       $smarty->assign("search_image", get_template_path('images/search.png'));
       $smarty->assign("launchimage", get_template_path('images/small_filter.png'));
@@ -933,6 +933,13 @@ class posixAccount extends plugin
 
 
   /* Add posix user to some groups */
+  function addGroup2 ($groups){
+    print "Haleluja".$groups;
+    print_a($this->groupMembership);
+    $this->groupMembership[$this->glist[$groups]['dn']]= $this->glist[$groups]['cn'][0];
+  }
+  
+
   function addGroup ($groups)
   {
     /* include global link_info */
@@ -1032,7 +1039,14 @@ class posixAccount extends plugin
 
   }
 
+
+
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+
+
+
+
+
 ?>
