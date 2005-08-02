@@ -384,7 +384,9 @@ class plugin
     if ($command != ""){
       /* Walk through attribute list */
       foreach ($this->attributes as $attr){
-        $command= preg_replace("/%$attr/", $this->$attr, $command);
+        if (!is_array($this->$attr)){
+          $command= preg_replace("/%$attr/", $this->$attr, $command);
+        }
       }
       $command= preg_replace("/%dn/", $this->dn, $command);
       if (check_command($command)){
@@ -410,7 +412,9 @@ class plugin
     if ($command != ""){
       /* Walk through attribute list */
       foreach ($this->attributes as $attr){
-        $command= preg_replace("/%$attr/", $this->$attr, $command);
+        if (!is_array($this->$attr)){
+          $command= preg_replace("/%$attr/", $this->$attr, $command);
+        }
       }
       $command= preg_replace("/%dn/", $this->dn, $command);
       if (check_command($command)){
@@ -436,7 +440,9 @@ class plugin
     if ($command != ""){
       /* Walk through attribute list */
       foreach ($this->attributes as $attr){
-        $command= preg_replace("/%$attr/", $this->$attr, $command);
+        if (!is_array($this->$attr)){
+          $command= preg_replace("/%$attr/", $this->$attr, $command);
+        }
       }
       $command= preg_replace("/%dn/", $this->dn, $command);
       if (check_command($command)){
