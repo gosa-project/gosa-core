@@ -41,7 +41,7 @@ class userManagement extends plugin
     $this->ui= $ui;
 
     /* Get global filter config */
-    if (!is_global("userfilter")){
+    if (!isset($_SESSION["userfilter"])){
       $base= get_base_from_people($ui->dn);
       $userfilter= array( "mailusers"       => "checked",
           "unixusers"       => "checked",
@@ -53,7 +53,7 @@ class userManagement extends plugin
           "functionalusers" => "checked",
           "depselect"       => $base,
           "regex"           => "*");
-      register_global("userfilter", $userfilter);
+      $_SESSION["userfilter"] = $userfilter;
     }
   }
 
@@ -143,13 +143,11 @@ class userManagement extends plugin
 
     /* Save filter data if we are in the headpage */
     if (!isset($this->usertab)){
-      foreach( array("regex") as $type){
-        if (isset($_POST[$type])){
-          $userfilter[$type]= $_POST[$type];
-        }
+      if (isset($_POST['regexit'])){
+        $userfilter["regex"]= $_POST['regexit'];
       }
     }
-    if(isset($_POST['regex'])){
+    if(isset($_POST['regexit'])){
       foreach( array("functionalusers", "unixusers", "mailusers","sambausers", "proxyusers", "faxusers", "templates", "subsearch") as $type){
         if (isset($_POST[$type])) {
           $userfilter[$type]= "checked";
@@ -739,13 +737,14 @@ class userManagement extends plugin
     $smarty->assign("infoimage", get_template_path('images/info.png'));
     $smarty->assign("launchimage", get_template_path('images/launch.png'));
     $smarty->assign("deplist", $this->config->idepartments);
-    foreach( array("depselect", "regex", "functionalusers", "unixusers",
+    foreach( array("depselect",  "functionalusers", "unixusers",
           "mailusers", "sambausers", "proxyusers", 
           "faxusers", "templates", "subsearch") as $type){
 
       $smarty->assign("$type", $userfilter[$type]);
     }
 
+    $smarty->assign("regex", $userfilter["regex"]);
     /* Extend if we are not using javascript */
     $smarty->assign("apply", apply_filter());
     $smarty->assign("alphabet", generate_alphabet());
