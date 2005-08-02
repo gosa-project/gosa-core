@@ -32,7 +32,8 @@ class blocklist extends plugin
 
     /* Get global filter config */
     if (!is_global("blockfilter")){
-      $ui= get_userinfo();
+      print_a($_SESSION['blocklist']);
+      $uii= get_userinfo();
       $base= get_base_from_people($ui->dn);
       $blockfilter= array("sendlists" => "checked",
           "receivelists" => "checked",
@@ -40,8 +41,10 @@ class blocklist extends plugin
           "depselect" => $base,
           "regex" => "*");
       register_global("blockfilter", $blockfilter);
+    }else{
+      $blockfilter = $_SESSION["blockfilter"];
+      $this->base = $blockfilter['depselect'];
     }
-
   }
 
   function execute()
@@ -361,7 +364,7 @@ class blocklist extends plugin
 
     /* Fill templating stuff */
     $smarty->assign("bases", $this->config->idepartments);
-    $smarty->assign("base_select", $this->base);
+    $smarty->assign("base_select", $_SESSION['blockfilter']['depselect']);//$this->base);
     $smarty->assign("types", array(0 => _("send"), 1 => _("receive")));
     if ($this->dn == "new" || preg_match ("/,ou=incoming,/", $this->dn)){
       $smarty->assign("selectmode", "");

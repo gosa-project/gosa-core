@@ -42,7 +42,7 @@ class macro extends plugin
   var $attributes     = array("cn","base", "description","displayName","goFonMacroContent","goFonMacroVisible");
 
   var $is_new=false;
-  
+  var $orig_cn = ""; 
   /*! Objectclasses that this calls handles */
   var $objectclasses  = array("top", "goFonMacro");
 
@@ -62,9 +62,14 @@ class macro extends plugin
 
     /* Edit or new one ?*/
     if ($this->dn == "new"){
-      $this->is_new = true;
-      $ui= get_userinfo();
-      $this->base= dn2base($ui->dn);
+      if(isset($_SESSION['macrofilter']['depselect'])){
+        $this->base = $_SESSION['macrofilter']['depselect'];
+        $this->is_new = true;
+      }else{
+        $this->is_new = true;
+        $ui= get_userinfo();
+        $this->base= dn2base($ui->dn);
+      }
     } else {
       $this->is_new = false;
       $this->orig_cn=$this->cn;
@@ -120,7 +125,7 @@ class macro extends plugin
       $smarty->assign("cn",$this->orig_cn);
     }else{
       $smarty->assign("disable_cn","  ");
-      $smarty->assign("cn","");
+      $smarty->assign("cn",$this->cn);
     }
     $this->generate_mysql_entension_entries();
     /* Show main page */
@@ -194,7 +199,7 @@ class macro extends plugin
     $context  = "macro-".$this->cn;
 
     // Parse Content if we connected correctly
-    if($db &&  $r_con && $save){
+    if($db &&  $r_con ){
 
       // Split Content into lines 
       $a_contentLines = split ("\n",$this->goFonMacroContent);
@@ -224,20 +229,20 @@ class macro extends plugin
           $tmp  = split(",", preg_replace("/\(.*$/","",$linecontents));
   
           if(!isset($tmp[2])){
-            print_red(sprintf(_("Unable to parse macro contents on line: %s"),$i_linenum));
+            $this->generate_error = sprintf(_("Unable to parse macro contents on line: %s"),$i_linenum);
+            return false;
           }    
-      
-          $exten = $tmp[0];
-          $prio = $tmp[1];
-          $app  = $tmp[2];
-          $para = $linecontents; 
-          $para = preg_replace("/^.*\(/","",$para);
-          $para = preg_replace("/\)$/","",$para);
+            $exten = $tmp[0];
+            $prio = $tmp[1];
+            $app  = $tmp[2];
+            $para = $linecontents; 
+            $para = preg_replace("/^.*\(/","",$para);
+            $para = preg_replace("/\)$/","",$para);
 
-          // Append SQL syntax
-          $SQL[$i_linenum].="'".$context."','".$exten."','".$prio."','".$app."','".$para."');";
+            // Append SQL syntax
+            $SQL[$i_linenum].="'".$context."','".$exten."','".$prio."','".$app."','".$para."');";
         }
-      }
+     }
 
       if(($save)||($delete_only)){
         $res = mysql_query("SELECT count(*) FROM ".$a_SETUP['EXT_TABLE']." WHERE context= '".$context."'");
@@ -270,7 +275,7 @@ class macro extends plugin
       }
 
       // We want to save this 
-      if($save){
+      if(($save)&&(isset($SQL))){
         foreach($SQL as $entry){
           if(!mysql_query($entry)){
             $this->generate_error = sprintf(_("Can't perform INSERT query in DB '%s'"),$a_SETUP['DB']);

@@ -44,8 +44,12 @@ class application extends plugin
 	$this->is_account= TRUE;
 
 	if ($this->dn == "new"){
-		$ui= get_userinfo();
-		$this->base= dn2base($ui->dn);
+		if(isset($_SESSION['appfilter']['depselect'])){
+			$this->base=$_SESSION['appfilter']['depselect'];
+		}else{
+			$ui= get_userinfo();
+			$this->base= dn2base($ui->dn);
+		}
 	} else {
 		$this->base= preg_replace ("/^[^,]+,[^,]+,/", "", $this->dn);
 	}

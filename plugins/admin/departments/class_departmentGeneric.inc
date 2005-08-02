@@ -51,7 +51,7 @@ class department extends plugin
 	$this->config= $config;
 
 	/* Set base */
-        if ($this->dn == "new"){
+    if ($this->dn == "new"){
 		$ui= get_userinfo();
 		if(isset($_SESSION['depfilter']['depselect'])){
 			$this->base = $_SESSION['depfilter']['depselect'];
