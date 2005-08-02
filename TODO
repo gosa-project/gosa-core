@@ -7,19 +7,14 @@ Things to fix before 2.4:
 * Fix problem with winstation and invalid structural object class chain (inetOrgPerson/device)
 
 * Deparment dialog
-  - adapt base when creating a new department
-  - show different symbol when the department contains subdepartments
 
 * User dialog
-  - adapt base when creating a new user/template
   - Add button for template created users
 
 * Systems dialog
   - Add buttons for all system types
-  - Filter is broken
   
 * All dialogs
-  - adapt base when creating a new entity
   - cleanup, remove not used code fragments
   - &nbsp; between pictures ... if needed (convert_list ? )
   - ALT not translated 

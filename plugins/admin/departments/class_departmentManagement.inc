@@ -302,14 +302,23 @@ class departmentManagement extends plugin
 									  array("string"=>_("Department name")),
                                       array("string" =>_("Actions"), "attach" => "style='text-align:  right;border:none'")));
 
+
 			foreach($this->departments as $key => $val) {
 				if(!isset($this->config->departments[trim($key)])){
 					$this->config->departments[trim($key)]="";
 				}
+				
+				$non_empty="";	
+				$keys= str_replace("/","\/",$key);
+				foreach($this->config->departments as $keyd=>$vald ){
+					if(preg_match("/".$keys."\/.*/",$keyd)){
+						$non_empty="full";
+					}	
+				}
+			    
 	
 				$title = $this->config->departments[$key];
-
-				$field0 = array("string" => "<img src='images/folder.png' title='"._("department")."' alt='department'>","attach"=>"style='width:20px;'");
+				$field0 = array("string" => "<img src='images/".$non_empty."folder.png' title='"._("department")."' alt='department'>","attach"=>"style='width:20px;'");
 				$field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style='width:100%' title='".$title."'");
 				$field2 = array("string" => preg_replace("/%KEY%/", base64_encode($key), $actions),"attach"=>"style='text-align:right;border:none'");
 
