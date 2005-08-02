@@ -226,7 +226,6 @@ class phoneAccount extends plugin
     }
 
     // Save data 
-    if($save == true){
 
       // Get phonehardware to setup sip entry
       $ldap= $this->config->get_ldap_link();
@@ -316,6 +315,12 @@ class phoneAccount extends plugin
         }
         $s_parameter = preg_replace("/\|$/","",$s_parameter);
       }
+      
+
+
+
+
+
 
       // $SQL contains all queries
       $SQL = array();
@@ -329,7 +334,24 @@ class phoneAccount extends plugin
   
       $key = key($this->phoneNumbers);
       $sip_entry['callerid']  =$this->phoneNumbers[$key];
+
+
+
+      foreach($this->phoneNumbers as $phonekey => $val){
+        $ress = mysql_query( "SELECT * FROM ".$a_SETUP['EXT_TABLE']." WHERE   ((exten='".$this->phoneNumbers[$phonekey]."') AND (app='hint')) 
+                                                                      OR      ((exten='".$this->phoneNumbers[$phonekey]."') AND (priority='hint'));");
+        while($atr = mysql_fetch_row($ress)){
+          $uid = preg_replace("/^.*\//","",$atr[5]);
+          if($uid != $this->uid){
+            $this->generate_error = sprintf(_("This telephone number '%s' is already assigned to userID '%s'"),$this->phoneNumbers[$key],$uid);
+            gosa_log(mysql_error());
+            return false;
+          }
+        }
+      }
+
      
+    if($save == true){
       if(isset($this->parent->by_object['mailAccount']->mail)){
         $mail = $this->parent->by_object['mailAccount']->mail;
       }else{
