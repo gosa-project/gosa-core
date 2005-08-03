@@ -70,7 +70,6 @@ class userManagement extends plugin
             $s_action="open";
             $s_entry = base64_decode($_GET['dep_id']);
             $userfilter['depselect']= "".$this->config->departments[trim($s_entry)];
-            $this->reload();
     }
 
     /* Test Posts */  
@@ -110,19 +109,16 @@ class userManagement extends plugin
     /* Department changed? */
     if(isset($_POST['depselect']) && $_POST['depselect']){
       $userfilter['depselect']= $_POST['depselect'];
-      $this->reload();
     }
 
     /* Homebutton is posted */
     if($s_action=="home"){
       $userfilter['depselect']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
       $userfilter['depselect']=(preg_replace("/^[^,]+,/","",$userfilter['depselect']));
-      $this->reload();
     }
 
     if($s_action=="root"){
       $userfilter['depselect']=($this->config->current['BASE']);
-      $this->reload();
     }
 
 
@@ -136,9 +132,7 @@ class userManagement extends plugin
       }else{
         $userfilter['depselect']= $this->config->departments["/"];
       }
-      $this->reload();
     }
-
     /* End for new List Managment */
 
     /* Save filter data if we are in the headpage */
