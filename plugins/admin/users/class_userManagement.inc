@@ -105,6 +105,12 @@ class userManagement extends plugin
     }
 
     $s_entry  = preg_replace("/_.$/","",$s_entry);
+    if(preg_match("/.*-.*/",$s_entry)){
+      $s_tab   = preg_replace("/^.*-/i","",$s_entry);
+      $s_entry = preg_replace("/-.*$/i","",$s_entry);
+    }else{
+      $s_tab   = "user";
+    };
 
     /* Department changed? */
     if(isset($_POST['depselect']) && $_POST['depselect']){
@@ -184,6 +190,7 @@ class userManagement extends plugin
         $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
 
         /* Register usertab to trigger edit dialog */
+        $_POST[$s_tab]=$s_tab;
         $this->usertab= new usertabs($this->config, 
             $this->config->data['TABS']['USERTABS'], $this->dn);
         $this->usertab->set_acl($acl);
@@ -669,13 +676,18 @@ class userManagement extends plugin
     }
 
     // Pictures for Extensions 
-    $usrimg  = "<img src='images/penguin.png'             alt='U' title='"._("GOsa")  ."'>";
-    $posiximg = "<img src='images/select_user.png'        alt='P' title='"._("Posix") ."'>";
-    $mailimg  = "<img src='images/mailto.png'             alt='M' title='"._("Mail")  ."'>";
-    $fonimg   = "<img src='images/select_phone.png'       alt='T' title='"._("Phone") ."'>";
-    $faximg   = "<img src='images/fax_small.png'          alt='F' title='"._("Fax")   ."'>";
-    $sambaimg = "<img src='images/select_winstation.png'  alt='S' title='"._("Samba") ."'>";
- 
+//$usrimg  = "<img src='images/penguin.png'             alt='U' title='"._("GOsa")  ."'>";
+    $usrimg   ="<input type='image' src='images/penguin.png' alt='"._("Generic Tab")."'     name='user_edit_%KEY%-user' title='"._("Edit users Generic Tab")."'>";
+//$posiximg = "<img src='images/select_user.png'        alt='P' title='"._("Posix") ."'>";
+    $posiximg = "<input type='image' src='images/select_user.png' alt='"._("Posix Tab")."'     name='user_edit_%KEY%-posixAccount' title='"._("Edit users Posix Tab")."'>";
+//$mailimg  = "<img src='images/mailto.png'             alt='M' title='"._("Mail")  ."'>";
+    $mailimg  = "<input type='image' src='images/mailto.png' alt='"._("Mail Tab")."'     name='user_edit_%KEY%-mailAccount' title='"._("Edit users Mail Tab")."'>";
+//$fonimg   = "<img src='images/select_phone.png'       alt='T' title='"._("Phone") ."'>";
+    $fonimg   = "<input type='image' src='images/select_phone.png' alt='"._("Phone Tab")."'     name='user_edit_%KEY%-phoneAccount' title='"._("Edit users Phone Tab")."'>";
+//$faximg   = "<img src='images/fax_small.png'          alt='F' title='"._("Fax")   ."'>";
+    $faximg   = "<input type='image' src='images/fax_small.png' alt='"._("goFox Tab")."'     name='user_edit_%KEY%-gofaxAccount' title='"._("Edit users Fax Tab")."'>";
+//$sambaimg = "<img src='images/select_winstation.png'  alt='S' title='"._("Samba") ."'>";
+    $sambaimg = "<input type='image' src='images/select_winstation.png' alt='"._("Samba Tab")."'     name='user_edit_%KEY%-sambaAccount' title='"._("Edit users Samba Tab")."'>"; 
     // Space 
     $empty    = "<img src='images/empty.png' style='width:16px;height:16px;' alt=''>"; 
     
@@ -693,13 +705,15 @@ class userManagement extends plugin
     foreach($this->list as $key => $val){
 
       // Specify Pics for Extensions  
-      if(in_array("posixAccount"    ,$val['objectClass'])) $posix = $posiximg;  else $posix=$empty; 
-      if(in_array("gosaMailAccount" ,$val['objectClass'])) $maila = $mailimg;   else $maila=$empty; 
-      if(in_array("goFonAccount"    ,$val['objectClass'])) $fonac = $fonimg;    else $fonac=$empty; 
-      if(in_array("goFaxAccount"    ,$val['objectClass'])) $faxac = $faximg;    else $faxac=$empty; 
-      if(in_array("sambaSamAccount" ,$val['objectClass'])) $samba = $sambaimg;  else $samba=$empty; 
-      if(in_array("gosaUserTemplate",$val['objectClass'])) $tpl   = $tplimg;    else $tpl=$userimg;
-        
+      if(in_array("posixAccount"    ,$val['objectClass'])) $posix = preg_replace("/%KEY%/", "$key", $posiximg);  else $posix=$empty; 
+      if(in_array("gosaMailAccount" ,$val['objectClass'])) $maila = preg_replace("/%KEY%/", "$key", $mailimg);   else $maila=$empty; 
+      if(in_array("goFonAccount"    ,$val['objectClass'])) $fonac = preg_replace("/%KEY%/", "$key", $fonimg);    else $fonac=$empty; 
+      if(in_array("goFaxAccount"    ,$val['objectClass'])) $faxac = preg_replace("/%KEY%/", "$key", $faximg);    else $faxac=$empty; 
+      if(in_array("sambaSamAccount" ,$val['objectClass'])) $samba = preg_replace("/%KEY%/", "$key", $sambaimg);  else $samba=$empty; 
+      if(in_array("gosaUserTemplate",$val['objectClass'])) $tpl   = preg_replace("/%KEY%/", "$key", $tplimg);    else $tpl=$userimg;
+       
+      $usrimg = preg_replace("/%KEY%/", "$key", $usrimg);
+ 
       // Generate Array to Add 
       if (isset($val["sn"]) && isset($val["givenName"])){
         $display= $val["sn"][0].", ".$val["givenName"][0]." [".$val["uid"][0]."]";
