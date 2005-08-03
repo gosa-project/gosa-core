@@ -99,18 +99,15 @@ class departmentManagement extends plugin
 
 		if(isset($_POST['depselect']) && $_POST['depselect']){
 			$depfilter['depselect']= $_POST['depselect'];
-            $this->reload();
 		}
 		
 		if($s_action=="root"){
 			$depfilter['depselect']=($this->config->current['BASE']);
-			$this->reload();
 		}
 
 		if($s_action=="home"){
 			$depfilter['depselect']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
 			$depfilter['depselect']=(preg_replace("/^[^,]+,/","",$depfilter['depselect']));
-			$this->reload();
 		}
 
 		if($s_action=="back"){
@@ -122,14 +119,12 @@ class departmentManagement extends plugin
 			}else{
 				$depfilter['depselect']= $this->config->departments["/"];
 			}
-            $this->reload();
 		}
 
 		if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
 			$s_action="open";
 			$s_entry = base64_decode($_GET['dep_id']);
 			$depfilter['depselect']= $this->config->departments[trim($s_entry)];
-			$this->reload();
 		}
 
 		if (isset($_GET['search'])){

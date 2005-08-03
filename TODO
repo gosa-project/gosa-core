@@ -9,12 +9,8 @@ Things to fix before 2.4:
 * User dialog
   - Add button for template created users
 
-* Systems dialog
-  - Add buttons for all system types
-  
 * All dialogs
   - cleanup, remove not used code fragments
-  - &nbsp; between pictures ... if needed (convert_list ? )
   - ALT not translated 
   - Image cleanup
 

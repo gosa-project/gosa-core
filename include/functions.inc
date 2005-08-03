@@ -81,9 +81,19 @@ function get_dir_list($folder= ".")
 
   $dh = opendir(".");
   while(false !== ($file = readdir($dh))){
+    
+    // Smarty is included by  include/php_setup.inc     require("smarty/Smarty.class.php");
+    // Skip all files and dirs in  "./.svn/" we don't need any information from them
+    // Skip all Template, so they won't be checked twice in the following preg_matches   
+    // Skip . / ..
+
+    // Result  : from 1023 ms to 490 ms   i think thats great...
+    if(preg_match("/.*\.svn.*/i",$file)||preg_match("/.*smarty.*/i",$file)||preg_match("/.*\.tpl.*/",$file)||($file==".")||($file==".."))
+      continue;
+    
 
     /* Recurse through all "common" directories */
-    if(is_dir($file) && $file!="." && $file!=".." && $file!="CVS"){
+    if(is_dir($file) &&$file!="CVS"){
       get_dir_list($file);
       continue;
     }
