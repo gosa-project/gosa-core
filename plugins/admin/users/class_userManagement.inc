@@ -190,9 +190,12 @@ class userManagement extends plugin
         $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
 
         /* Register usertab to trigger edit dialog */
-        $_POST[$s_tab]=$s_tab;
         $this->usertab= new usertabs($this->config, 
             $this->config->data['TABS']['USERTABS'], $this->dn);
+//        $_POST[$s_tab]=$s_tab;
+
+// This would be better
+        $this->usertab->current = $s_tab;
         $this->usertab->set_acl($acl);
 
         $_SESSION['objectinfo']= $this->dn;
