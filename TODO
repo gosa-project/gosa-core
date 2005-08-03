@@ -10,15 +10,10 @@ Things to fix before 2.4:
   - Add button for template created users
 
 * All dialogs
-  - cleanup, remove not used code fragments
   - ALT not translated 
   - Image cleanup
 
 * include/class_mail-methods-kolab.inc -> gosaMailQuota not defined when opening "cajus"
-
-* Autofs entries cannot be removed
-
-* Minimize "reload" calls during post of depselect in all plugins
 
 * Check renaming of servers
 
