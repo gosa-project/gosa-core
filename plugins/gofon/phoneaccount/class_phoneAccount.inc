@@ -343,6 +343,10 @@ class phoneAccount extends plugin
                                                                       OR      ((exten='".$this->phoneNumbers[$phonekey]."') AND (priority='hint'));");
         while($atr = mysql_fetch_row($ress)){
           $uid = preg_replace("/^.*\//","",$atr[5]);
+          if(empty($uid)){
+            $uid = preg_replace("/^.*\//","",$atr[4]);
+          }
+          
           if($uid != $this->uid){
             $this->generate_error = sprintf(_("This telephone number '%s' is already assigned to userID '%s'"),$this->phoneNumbers[$key],$uid);
             gosa_log(mysql_error());
