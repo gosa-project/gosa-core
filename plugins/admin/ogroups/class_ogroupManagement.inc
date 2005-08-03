@@ -132,7 +132,6 @@ class ogroupManagement extends plugin
     /* Department changed? */
     if(isset($_POST['depselect']) && $_POST['depselect']){
       $ogroupfilter['depselect']= $_POST['depselect'];
-      $this->reload();
     }
 
     /* Start for New List Managment */
@@ -140,7 +139,6 @@ class ogroupManagement extends plugin
       $s_action="open";
       $s_entry = base64_decode($_GET['dep_id']);
       $ogroupfilter['depselect']= "".$this->config->departments[trim($s_entry)];
-      $this->reload();
     }
 
     /* If Backbutton is Posted */
@@ -154,20 +152,17 @@ class ogroupManagement extends plugin
         $ogroupfilter['depselect']= $this->config->departments["/"];
       }
       register_global("ogroupfilter", $ogroupfilter);
-      $this->reload();
     }
 
     /* Homebutton is posted */
     if($s_action=="home"){
       $ogroupfilter['depselect']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
       $ogroupfilter['depselect']=(preg_replace("/^[^,]+,/","",$ogroupfilter['depselect']));
-      $this->reload();
     }
 
     /* root posted */ 
     if($s_action=="root"){
       $ogroupfilter['depselect']=($this->config->current['BASE']);
-      $this->reload();
     }
 
     // Edit if
@@ -178,13 +173,7 @@ class ogroupManagement extends plugin
 
     register_global("ogroupfilter", $ogroupfilter);
 
-    /* Prepare formular */
-    if (!isset($this->ogroup) &&
-        !isset($_POST['new_group']) &&
-        !isset($_POST['delete_group']) &&
-        !isset($_POST['select_group'])){
-      $this->reload();
-    }
+    $this->reload();
 
     /* Check for exeeded sizelimit */
     if (($message= check_sizelimit()) != ""){

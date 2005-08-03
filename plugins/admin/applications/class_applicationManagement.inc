@@ -60,7 +60,6 @@ class applicationManagement extends plugin
             $s_action="open";
             $s_entry = base64_decode($_GET['dep_id']);
             $appfilter['depselect']= "".$this->config->departments[trim($s_entry)];
-            $this->reload();
     }
 
     /* Test Posts */
@@ -95,19 +94,16 @@ class applicationManagement extends plugin
     /* Department changed? */
     if(isset($_POST['depselect']) && $_POST['depselect']){
       $appfilter['depselect']= $_POST['depselect'];
-      $this->reload();
     }
 
     /* Homebutton is posted */
     if($s_action=="home"){
       $appfilter['depselect']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
       $appfilter['depselect']=(preg_replace("/^[^,]+,/","",$appfilter['depselect']));
-      $this->reload();
     }
 
     if($s_action=="root"){
       $appfilter['depselect']=($this->config->current['BASE']);
-      $this->reload();
     }
 
     /* If Backbutton is Posted */
@@ -120,7 +116,6 @@ class applicationManagement extends plugin
       }else{
         $appfilter['depselect']= $this->config->departments["/"];
       }
-      $this->reload();
     }
 
     if (isset($_POST['regex'])){
@@ -136,12 +131,7 @@ class applicationManagement extends plugin
     register_global("appfilter", $appfilter);
 
     /* Check sorting variable */
-    if (!isset($this->apptabs) &&
-        !isset($_POST['new_app']) &&
-        !isset($_POST['delete_app']) &&
-        !isset($_POST['select_app'])){
-      $this->reload();
-    }
+    $this->reload();
     $smarty= get_smarty();
 
     /* Check for exeeded sizelimit */

@@ -123,7 +123,6 @@ class groupManagement extends plugin
       $s_action="open";
       $s_entry = base64_decode($_GET['dep_id']);
       $groupfilter['depselect']= "".$this->config->departments[trim($s_entry)];
-      $this->reload();
     }
 
     // Edit if
@@ -135,19 +134,16 @@ class groupManagement extends plugin
     /* Department changed? */
     if(isset($_POST['depselect']) && $_POST['depselect']){
       $groupfilter['depselect']= $_POST['depselect'];
-      $this->reload();
     }
 
     /* Homebutton is posted */
     if($s_action=="home"){
       $groupfilter['depselect']= (preg_replace("/^[^,]+,/","",$this->ui->dn));
       $groupfilter['depselect']= (preg_replace("/^[^,]+,/","",$groupfilter['depselect']));
-      $this->reload();
     }
 
     if($s_action=="root"){
       $groupfilter['depselect']=($this->config->current['BASE']);
-      $this->reload();
     }
 
     /* If Backbutton is Posted */
@@ -160,19 +156,13 @@ class groupManagement extends plugin
       }else{
         $groupfilter['depselect']= $this->config->departments["/"];
       }
-      $this->reload();
     }
     register_global("groupfilter", $groupfilter);
 
     $smarty= get_smarty();
 
     /* Prepare formular */
-    if (!isset($this->grouptab) &&
-        !isset($_POST['new_group']) &&
-        !isset($_POST['delete_group']) &&
-        !isset($_POST['select_group'])){
-      $this->reload();
-    }
+    $this->reload();
 
     /* Check for exeeded sizelimit */
     if (($message= check_sizelimit()) != ""){
