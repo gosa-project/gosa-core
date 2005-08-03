@@ -334,6 +334,7 @@ class phoneAccount extends plugin
   
       $key = key($this->phoneNumbers);
       $sip_entry['callerid']  =$this->phoneNumbers[$key];
+      $sip_entry['mailbox']   =$this->phoneNumbers[$key];
 
 
 
