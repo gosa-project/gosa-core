@@ -679,19 +679,12 @@ class userManagement extends plugin
     }
 
     // Pictures for Extensions 
-//$usrimg  = "<img src='images/penguin.png'             alt='U' title='"._("GOsa")  ."'>";
-    $usrimg   ="<input type='image' src='images/penguin.png' alt='"._("Generic Tab")."'     name='user_edit_%KEY%-user' title='"._("Edit users Generic Tab")."'>";
-//$posiximg = "<img src='images/select_user.png'        alt='P' title='"._("Posix") ."'>";
-    $posiximg = "<input type='image' src='images/select_user.png' alt='"._("Posix Tab")."'     name='user_edit_%KEY%-posixAccount' title='"._("Edit users Posix Tab")."'>";
-//$mailimg  = "<img src='images/mailto.png'             alt='M' title='"._("Mail")  ."'>";
-    $mailimg  = "<input type='image' src='images/mailto.png' alt='"._("Mail Tab")."'     name='user_edit_%KEY%-mailAccount' title='"._("Edit users Mail Tab")."'>";
-//$fonimg   = "<img src='images/select_phone.png'       alt='T' title='"._("Phone") ."'>";
-    $fonimg   = "<input type='image' src='images/select_phone.png' alt='"._("Phone Tab")."'     name='user_edit_%KEY%-phoneAccount' title='"._("Edit users Phone Tab")."'>";
-//$faximg   = "<img src='images/fax_small.png'          alt='F' title='"._("Fax")   ."'>";
-    $faximg   = "<input type='image' src='images/fax_small.png' alt='"._("goFox Tab")."'     name='user_edit_%KEY%-gofaxAccount' title='"._("Edit users Fax Tab")."'>";
-//$sambaimg = "<img src='images/select_winstation.png'  alt='S' title='"._("Samba") ."'>";
-    $sambaimg = "<input type='image' src='images/select_winstation.png' alt='"._("Samba Tab")."'     name='user_edit_%KEY%-sambaAccount' title='"._("Edit users Samba Tab")."'>"; 
-    // Space 
+    $usrimg   ="<input type='image' src='images/penguin.png' alt='"._("GOsa")."'     name='user_edit_%KEY%-user' title='"._("Edit generic properties")."'>";
+    $posiximg = "<input type='image' src='images/select_user.png' alt='"._("Posix")."'     name='user_edit_%KEY%-posixAccount' title='"._("Edit UNIX properties")."'>";
+    $mailimg  = "<input type='image' src='images/mailto.png' alt='"._("Mail")."'     name='user_edit_%KEY%-mailAccount' title='"._("Edit mail properties")."'>";
+    $fonimg   = "<input type='image' src='images/select_phone.png' alt='"._("Phone")."'     name='user_edit_%KEY%-phoneAccount' title='"._("Edit phone properties")."'>";
+    $faximg   = "<input type='image' src='images/fax_small.png' alt='"._("Fax")."'     name='user_edit_%KEY%-gofaxAccount' title='"._("Edit fax properies")."'>";
+    $sambaimg = "<input type='image' src='images/select_winstation.png' alt='"._("Samba")."'     name='user_edit_%KEY%-sambaAccount' title='"._("Edit samba properties")."'>"; 
     $empty    = "<img src='images/empty.png' style='width:16px;height:16px;' alt=''>"; 
     
     // User and Template  Images  
