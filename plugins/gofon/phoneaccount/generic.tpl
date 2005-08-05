@@ -4,7 +4,9 @@
    <h2><img alt="" align="middle" src="images/banana.png"> {t}Phone numbers{/t}</h2>
       <select style="width:380px; height:120px;" name="phonenumber_list[]" size=6 multiple {$telephoneNumberACL}>
        {html_options options=$phoneNumbers}
-		<option disabled>&nbsp;</option>
+		<option disabled>
+			&nbsp;
+			</option>
       </select>
       <br>
       <input name="phonenumber" size=20 align=middle maxlength=60 {$telephoneNumberACL} value="">
