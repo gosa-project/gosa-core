@@ -141,7 +141,7 @@ class fonreport extends plugin
 		print_red(_("Can't connect to phone database, no reports can be shown!"));
 		return;
 	}
-	if (! @mysql_select_db("asteriskcdrdb")){
+	if (! @mysql_select_db("gophone")){
 		print_red(_("Can't select phone database for report generation!"));
 		return;
 	}
