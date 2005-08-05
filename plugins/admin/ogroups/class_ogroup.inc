@@ -344,6 +344,10 @@ class ogroup extends plugin
       } else {
         $this->allobjects[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
       }
+      $this->allobjects[$attrs["dn"]]['objectClass']  = $attrs['objectClass'];
+      if(isset($attrs['uid'])){
+        $this->allobjects[$attrs["dn"]]['uid']          = $attrs['uid'];
+      }
     }
     uasort ($this->allobjects, 'sort_list');
     reset ($this->allobjects);

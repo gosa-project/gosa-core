@@ -23,6 +23,23 @@ class ogrouptabs extends tabs
           break;
 
         case "U":
+          /* Append a PhoneQueue, if objectClass = goFonAccount */
+          $use = false;
+          foreach($this->by_object['ogroup']->memberList as $dn => $val){
+            if(in_array("goFonAccount",$val['objectClass'])){
+              $use = true; 
+            }
+          }
+    
+          /* We found goFonAccount in users objectClasses*/
+          if($use){
+            require_once("class_phonequeue.inc");
+            $this->by_name['phonequeue']= _("Phone queue");
+            $this->by_object['phonequeue']= new phonequeue($this->config, $this->dn);
+            $this->by_object['phonequeue']->parent= &$this;
+
+          } 
+ 
           /* Add a user tab used for mail distribution lists */
           if (preg_match('/kolab/i', $this->config->current['MAILMETHOD'])){
             require_once("class_mailogroup.inc");

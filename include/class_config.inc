@@ -353,7 +353,9 @@ class config  {
 						'DB'		=> "gophone",
 						'SIP_TABLE'		=> "sip_users",
 						'EXT_TABLE' 	=> "extensions",
-						'VOICE_TABLE'	=> "voicemail_users");
+						'VOICE_TABLE'	=> "voicemail_users",
+						'QUEUE_TABLE'	=> "queues",
+						'QUEUE_MEMBER_TABLE'	=> "queue_members");
 	}
 	/* Get logdb server */
 	$ldap->cd ($this->current['BASE']);

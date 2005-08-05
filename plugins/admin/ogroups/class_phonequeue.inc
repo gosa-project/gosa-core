@@ -1,0 +1,548 @@
+<?php
+
+class phonequeue extends plugin
+{
+  /* plugin specific values */
+  var $mail= "";
+  var $cn= "";
+
+
+  var $goFonTimeOut             =""; 
+  var $goFonMaxLen              ="";
+  var $goFonAnnounceFrequency   ="";
+  var $goFonDialOption_t        ="";
+  var $goFonDialOption_T        ="";
+  var $goFonDialOption_h        ="";
+  var $goFonAnnounce            ="";
+  var $goFonDialOption_H        ="";
+  var $goFonMusiconHold         ="";
+  var $goFonWelcomeMusic        ="";
+  var $goFonQueueReportHold     ="";
+  var $goFonQueueYouAreNext     ="";
+  var $goFonQueueThereAre       ="";
+  var $goFonQueueCallsWaiting   ="";
+  var $goFonQueueThankYou       ="";
+  var $goFonQueueMinutes        =""; 
+  var $goFonQueueSeconds        ="";
+  var $goFonLanguage            ="";
+  var $goFonStrategy            ="";
+  var $goFonAnnounceHoldtime    ="";
+  var $telephoneNumber          =array();
+  var $goFonQueueMember         =array(); 
+  var $goFonDialOption          ="";
+
+  var $old_phone_numbers        =array();
+
+  /* attribute list for save action */
+  var $attributes= array( "goFonTimeOut","goFonMaxLen","goFonAnnounceFrequency","goFonDialOption_t","goFonDialOption_T","goFonDialOption_h",
+      "goFonDialOption_H","goFonMusiconHold","goFonWelcomeMusic","goFonQueueReportHold","goFonQueueYouAreNext",
+      "goFonQueueThereAre","goFonQueueCallsWaiting","goFonQueueThankYou","goFonQueueMinutes","goFonQueueSeconds",
+      "telephoneNumber","goFonLanguage","goFonStrategy","goFonAnnounceHoldtime","goFonAnnounce","goFonDialOption");
+  /* ObjectClass */
+  var $objectclasses= array("goFonQueue");
+
+  function phonequeue ($config, $dn= NULL)
+  {
+    plugin::plugin($config, $dn);
+
+    /* Include config object */
+    $this->config= $config;
+
+    /* Save initial account state */
+    $this->initially_was_account= $this->is_account;
+
+    $this->telephoneNumber=$this->attrs['telephoneNumber'];
+    unset($this->telephoneNumber['count']); 
+
+
+    for($i = 0; $i < strlen($this->goFonDialOption); $i++){
+      $name = "goFonDialOption_".$this->goFonDialOption[$i];
+      $this->$name=$this->goFonDialOption[$i];
+    }
+    
+    $this->old_phone_numbers = $this->telephoneNumber;
+  }
+
+
+  function execute()
+  {
+    /* Do we need to flip is_account state? */
+    if (isset($_POST['modify_state'])){
+      $this->is_account= !$this->is_account;
+    }
+
+    /* Show tab dialog headers */
+    if ($this->parent != NULL){
+      if ($this->is_account){
+        $display= $this->show_header(_("Remove the phone queue from this Account"),
+            _("Phone queue is enabled for this group. You can disable it by clicking below."));
+      } else {
+        $display= $this->show_header(_("Create phone queue"), _("For this group the phone queues are disabled. You can enable them by clicking below."));
+        return ($display);
+      }
+    }
+
+    /* Add queue number */ 
+    if(isset($_POST['add_phonenumber'])&&(isset($_POST['phonenumber']))&&(!empty($_POST['phonenumber']))){
+      if((!in_array($_POST['phonenumber'],$this->telephoneNumber))&&(is_numeric($_POST['phonenumber']))){
+        $this->telephoneNumber[]=$_POST['phonenumber'];
+      }
+    }
+
+    /* Delete queue number */ 
+    if(isset($_POST['delete_phonenumber'])&&(isset($_POST['goFonQueueNumber_List']))){
+      unset($this->telephoneNumber[$_POST['goFonQueueNumber_List']]);
+    }
+  
+    $tmp = array();
+    foreach($this->telephoneNumber as $val){
+      if(!empty($val)){
+        $tmp[]= $val;
+      }
+    }  
+    $this->telephoneNumber=$tmp;
+
+    /* queue number up */ 
+    if(isset($_POST['up_phonenumber'])&&(isset($_POST['goFonQueueNumber_List']))){
+      if($_POST['goFonQueueNumber_List']>0){
+        $up   = $this->telephoneNumber[$_POST['goFonQueueNumber_List']];
+        $down = $this->telephoneNumber[$_POST['goFonQueueNumber_List']-1];
+        $this->telephoneNumber[$_POST['goFonQueueNumber_List']]    = $down; 
+        $this->telephoneNumber[$_POST['goFonQueueNumber_List']-1]  = $up;
+      }
+    }
+
+    /* Queuenumber down */ 
+    if(isset($_POST['down_phonenumber'])&&(isset($_POST['goFonQueueNumber_List']))){
+      if(isset($this->telephoneNumber[($_POST['goFonQueueNumber_List']+1)])){
+        $up   = $this->telephoneNumber[$_POST['goFonQueueNumber_List']+1];
+        $down = $this->telephoneNumber[$_POST['goFonQueueNumber_List']];
+        $this->telephoneNumber[$_POST['goFonQueueNumber_List']+1]    = $down; 
+        $this->telephoneNumber[$_POST['goFonQueueNumber_List']]  = $up;
+      }
+    }
+
+
+    $smarty= get_smarty();
+
+    $smarty->assign("goFonLanguageOptions",array('de'=>_('Germany'),'ur'=>_('Uruguai')));
+    $smarty->assign("goFonAnnounceHoldtimeOptions",array('no'=>_("No"),'yes'=>_('Yes')));
+    $smarty->assign("goFonStrategyOptions",array('ringall'    =>_("ring all available channels until one answers"),
+          'roundrobin' =>_("take turns ringing each available interface"),
+          'leastrecent'=>_("ring interface which was least recently called by this queue"),
+          'fewestcalls'=>_("ring the one with fewest completed calls from this queue"),
+          'random'     =>_("ring random interface"),
+          'rrmemory'   =>_("round robin with memory, remember where we left off last ring pass")));
+
+    foreach($this->attributes as $key => $val){
+      $smarty->assign($val,$this->$val);  
+
+      if($this->$val == false){
+        $smarty->assign($val."CHK","");
+      }else{
+        $smarty->assign($val."CHK"," checked ");
+      }
+
+      if(chkacl($this->acl,$key)==""){
+        $smarty->assign($val."ACL","");
+      }else{
+        $smarty->assign($val."ACL"," disabled ");
+      }
+    }
+    return ($display.$smarty->fetch (get_template_path('phonequeue.tpl', TRUE)));
+  }
+
+
+  /* Check formular input */
+  function check()
+  {
+    $message= array();
+
+    if($this->is_number_used()){
+      $message[] = $this->is_number_used();
+    }
+
+    if($this->generate_mysql_entension_entries()){
+      $message[] = $this->generate_mysql_entension_entries();
+    }
+
+    if(!is_numeric($this->goFonTimeOut)){
+      $message[] = _("Timeout must be numeric");
+    }
+    if(!is_numeric($this->goFonMaxLen)){
+      $message[] = _("Queue length must be numeric");
+    }
+    if(!is_numeric($this->goFonAnnounceFrequency)){
+      $message[] = _("Announce frequency must be numeric");
+    }
+    if(count($this->telephoneNumber)==0){
+      $message[] = _("There must be least one queue number defined.");
+    }
+
+    return $message;
+  }
+
+
+
+  function generate_mysql_entension_entries($save = false)
+  {
+
+    $SQL = array();
+ 
+    // Get Configuration for Mysql database Server
+    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
+    $s_parameter  ="";
+
+    // Connect to DB server
+    $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+
+    // Check if we are  connected correctly
+    if(!$r_con){
+      gosa_log(mysql_error());
+      return (sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
+          $a_SETUP['SERVER'],$a_SETUP['LOGIN']));
+    }
+
+    // Select database for Extensions
+    $db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
+
+    // Test if we have the database selected correctly
+    if(!$db){
+      gosa_log(mysql_error());
+      return( sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']));
+    }
+
+
+
+    if($save){
+      $i = 0;
+      $prio = 11; 
+
+      if(empty($this->cn)){
+        $this->cn = $this->parent->by_object['ogroup']->cn;
+        $this->attrs['cn'][0] = $this->parent->by_object['ogroup']->cn;
+      }
+
+      if(empty($this->description)){
+        $this->description = $this->parent->by_object['ogroup']->description;
+        $this->attrs['description'][0] = $this->parent->by_object['ogroup']->description;
+      }
+      
+      // Delete old Entries 
+      $delete = array();
+      foreach($this->old_phone_numbers as $phone){
+        $delete[]= "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$phone."';\n";
+      }
+      $delete[]=    "DELETE FROM ".$a_SETUP['QUEUE_TABLE']." WHERE name=\"".$this->attrs['cn'][0]."\"; \n";
+      $delete[]=    "DELETE FROM ".$a_SETUP['QUEUE_MEMBER_TABLE']." WHERE queue_name=\"".$this->attrs['cn'][0]."\";\n";
+
+      /* Perform queries to delte old entries */
+      foreach($delete as $query){
+        if(!mysql_query($query)){
+          gosa_log(mysql_error());
+          return(mysql_error(). sprintf(_("Can't delete in Database %s, on Server %s."),$a_SETUP['DB'],$a_SETUP['SERVER']));
+        }
+      }
+
+      /* Append new Member for this queue */ 
+      $i = 0;
+      foreach($this->parent->by_object['ogroup']->memberList as $member){
+        if(in_array("goFonAccount",$member['objectClass'])){
+          $i ++ ;
+          $queueuser[$i]['queue_name']  = $this->attrs['cn'][0]; 
+          $queueuser[$i]['interface']   = "SIP/".$member['uid'][0]; 
+          $queueuser[$i]['penalty']     = 1; 
+        }
+      }
+
+      /* Parse and Add members to query Array */
+      foreach($queueuser as $user){
+        $entries = "";
+        $values  = "";
+        foreach($user as $attr => $val){
+          $entries.= "`".$attr."`,"; 
+          $values .= "'".$val."',";
+        }
+        $values  = preg_replace("/,$/","",$values);
+        $entries = preg_replace("/,$/","",$entries );
+        
+        $SQL[]="INSERT INTO ".$a_SETUP['QUEUE_MEMBER_TABLE']." (".$entries.") VALUES (".$values.")"; 
+      }
+      
+
+      /* generate Extension entries, with priority  */
+      $i = 0;
+      foreach($this->telephoneNumber as $num){
+        $prio --;
+        $a_ext[$i]['context']  = 'GOsa';
+        $a_ext[$i]['exten']    = $num;
+        $a_ext[$i]['priority'] = 1;
+        $a_ext[$i]['app']      = "SetLanguage";
+        $a_ext[$i]['appdata']  = $this->goFonLanguage;
+        $i ++ ; 
+        $a_ext[$i]['context']  = 'GOsa';
+        $a_ext[$i]['exten']    = $num;
+        $a_ext[$i]['priority'] = 2;
+        $a_ext[$i]['app']      = "Playback";
+        $a_ext[$i]['appdata']  = $this->goFonWelcomeMusic;
+        $i ++ ; 
+        $a_ext[$i]['context']  = 'GOsa';
+        $a_ext[$i]['exten']    = $num;
+        $a_ext[$i]['priority'] = 3;
+        $a_ext[$i]['app']      = "SetCIDName";
+        $a_ext[$i]['appdata']  = $this->attrs['description'][0];
+        $i ++ ; 
+        $a_ext[$i]['context']  = 'GOsa';
+        $a_ext[$i]['exten']    = $num;
+        $a_ext[$i]['priority'] = 4;
+        $a_ext[$i]['app']      = "Queue";
+        $a_ext[$i]['appdata']  =  $this->attrs['cn'][0].
+          "|".
+          $this->goFonDialOption_t.
+          $this->goFonDialOption_T.
+          $this->goFonDialOption_h.
+          $this->goFonDialOption_H.
+          "|".  // Optionalurl egal
+          "|".  // announceoverride
+          "|".  // Timeout
+          $this->goFonTimeOut;     
+
+        $i ++ ; 
+        $a_ext[$i]['context']  = 'GOsa';
+        $a_ext[$i]['exten']    = $num;
+        $a_ext[$i]['priority'] = 5;
+        $a_ext[$i]['app']      = "SetVar";
+        $a_ext[$i]['appdata']  = "Queue_Prio=".$prio;
+        $i ++ ;
+
+        /* Generate Priority Entry */
+        $queue["announce"]              = "";
+        $queue["monitor_join"]          = "";
+        $queue["monitor_format"]        = "";
+        $queue["queue_holdtime"]        = $this->goFonAnnounce;
+        $queue["queue_lessthan"]        = "";   
+        $queue["announce_round_seconds"]= "";   
+        $queue["retry"]                 = "";
+        $queue["wrapuptime"]            = "";
+        $queue["servicelevel"]          = "";
+        $queue["joinempty"]             = "";
+        $queue["leavewhenempty"]        = "";   
+        $queue["eventmemberstatus"]     = "";
+        $queue["eventwhencalled"]       = "";
+        $queue["reportholdtime"]        = "";
+        $queue["memberdelay"]           = "";
+        $queue["weight"]                = "";
+        $queue["timeoutrestart"]        = "";
+
+        $queue["context"]               = "default";
+        $queue["name"]                  = $this->attrs['cn'][0];  
+        $queue["timeout"]               = $this->goFonTimeOut;
+        $queue["maxlen"]                = $this->goFonMaxLen;
+        $queue["strategy" ]             = $this->goFonStrategy;
+        $queue["queue_thankyou"]        = $this->goFonQueueThankYou;   
+        $queue["queue_reporthold"]      = $this->goFonQueueReportHold; 
+        $queue["announce_frequency"]    = $this->goFonAnnounceFrequency;
+        $queue["queue_youarenext"]      = $this->goFonQueueYouAreNext;   
+        $queue["queue_thereare"]        = $this->goFonQueueThereAre;   
+        $queue["queue_callswaiting"]    = $this->goFonQueueCallsWaiting;
+        $queue["queue_minutes"]         = $this->goFonQueueMinutes;
+        $queue["queue_seconds"]         = $this->goFonQueueSeconds;   
+        $queue["announce_holdtime"]     = $this->goFonAnnounceHoldtime;   
+        $queue["musiconhold"]           = $this->goFonMusiconHold;
+
+        $i++;
+      }
+
+      /* Parse and Add Extension entries */
+      foreach($a_ext as $ext){
+        $entries = "";
+        $values  = "";
+        foreach($ext as $attr => $val){
+          $entries.= "`".$attr."`,";
+          $values .= "'".$val."',";
+        }
+        $values  = preg_replace("/,$/","",$values);
+        $entries = preg_replace("/,$/","",$entries );
+        $SQL[]="INSERT INTO ".$a_SETUP['EXT_TABLE']." (".$entries.") VALUES (".$values.")";
+      }
+
+
+      /* Parse and Add Queue */
+      $entries = "";
+      $values  = "";
+      foreach($queue as $attr=>$val){
+        if($val == "") continue;
+        $entries.= "`".$attr."`,";
+        $values .= "'".$val."',";
+      }
+      $values  = preg_replace("/,$/","",$values);
+      $entries = preg_replace("/,$/","",$entries );
+      $SQL[]="INSERT INTO ".$a_SETUP['QUEUE_TABLE']." (".$entries.") VALUES (".$values.")";
+
+      foreach($SQL as $query){
+         if(!mysql_query($query)){
+          gosa_log(mysql_error());
+          print_red(mysql_error());
+          return(mysql_error(). sprintf(_("Can't delete in Database %s, on Server %s."),$a_SETUP['DB'],$a_SETUP['SERVER']));
+        }
+      }
+
+    }
+    return(false);
+  }
+
+
+  function is_number_used()
+  {
+    $ldap= $this->config->get_ldap_link();
+    $ldap->search("(objectClass=goFonAccount)", array("telephoneNumber","uid","cn"));
+    while($attrs = $ldap->fetch()) {
+      unset($attrs['telephoneNumber']['count']);
+      $usednumber[$attrs['uid'][0]]= $attrs['telephoneNumber'];
+      foreach($attrs['telephoneNumber'] as $tele){
+        $numbers[$tele]=$attrs;
+      }
+    }
+
+
+    foreach($this->telephoneNumber as $num){
+      if((isset($numbers[$num]))&&(($numbers[$num]['cn'][0]!= $this->cn)||($numbers[$num]['uid'][0]!=$this->uid))){
+        if(isset($numbers[$num]['uid'][0])){
+          return sprintf(_("The specified telephonenumber '%s' is already assigned to '%s'."),$num,$numbers[$num]['uid'][0]);
+        }else{
+          return sprintf(_("The specified telephonenumber '%s' is already assigned to '%s'."),$num,$numbers[$num]['cn'][0]);
+        }
+      }
+    }
+  }
+
+
+
+
+
+  function save_object()
+  {
+    plugin::save_object();  
+    if(isset($_POST['phonenumber'])){
+      foreach(array("goFonDialOption_t","goFonDialOption_T","goFonDialOption_h","goFonDialOption_H","goFonMusiconHold") as $val){
+        if(isset($_POST[$val])){
+          $this->$val = $_POST[$val];
+        }else{
+          $this->$val = false;
+        }
+      }
+    }
+
+  }
+
+  function save()
+  {
+    $ldap= $this->config->get_ldap_link();
+
+    plugin::save();
+    $this->attrs['goFonDialOption'] = "";
+    foreach(array("goFonDialOption_t","goFonDialOption_T","goFonDialOption_h","goFonDialOption_H") as $val){
+      $this->attrs['goFonDialOption'].=$this->$val; 
+      unset($this->attrs[$val]); 
+    }
+    $this->generate_mysql_entension_entries(true);
+    if($this->attrs['goFonDialOption']=="") $this->attrs['goFonDialOption']=array();
+
+    /* Save data to LDAP */
+    $ldap->cd($this->dn);
+    $ldap->modify($this->attrs);
+
+    show_ldap_error($ldap->get_error());
+
+    /* Optionally execute a command after we're done */
+    if ($this->initially_was_account == $this->is_account){
+      if ($this->is_modified){
+        $this->handle_post_events("mofify");
+      }
+    } else {
+      $this->handle_post_events("add");
+    }
+  }
+
+
+  /* remove object from parent */
+  function remove_from_parent()
+  {
+    $SQL = array();
+
+    // Get Configuration for Mysql database Server
+    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
+    $s_parameter  ="";
+
+    // Connect to DB server
+    $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+
+    // Check if we are  connected correctly
+    if(!$r_con){
+      gosa_log(mysql_error());
+      return (sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
+            $a_SETUP['SERVER'],$a_SETUP['LOGIN']));
+    }
+
+    // Select database for Extensions
+    $db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
+
+    // Test if we have the database selected correctly
+    if(!$db){
+      gosa_log(mysql_error());
+      return( sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']));
+    }
+
+    $i = 0;
+    $prio = 11;
+
+    if(empty($this->cn)){
+      $this->cn = $this->parent->by_object['ogroup']->cn;
+      $this->attrs['cn'][0] = $this->parent->by_object['ogroup']->cn;
+    }
+
+    if(empty($this->description)){
+      $this->description = $this->parent->by_object['ogroup']->description;
+      $this->attrs['description'][0] = $this->parent->by_object['ogroup']->description;
+    }
+
+    // Delete old Entries
+    $delete = array();
+    foreach($this->old_phone_numbers as $phone){
+      $delete[]= "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$phone."';\n";
+    }
+    $delete[]=    "DELETE FROM ".$a_SETUP['QUEUE_TABLE']." WHERE name=\"".$this->attrs['cn'][0]."\"; \n";
+    $delete[]=    "DELETE FROM ".$a_SETUP['QUEUE_MEMBER_TABLE']." WHERE queue_name=\"".$this->attrs['cn'][0]."\";\n";
+
+    /* Perform queries to delte old entries */
+    foreach($delete as $query){
+      if(!mysql_query($query)){
+        gosa_log(mysql_error());
+        return(mysql_error(). sprintf(_("Can't delete in Database %s, on Server %s."),$a_SETUP['DB'],$a_SETUP['SERVER']));
+      }
+    }
+
+
+
+    /* Cancel if there's nothing to do here */
+    if (!$this->initially_was_account){
+      return;
+    }
+
+    /* include global link_info */
+    $ldap= $this->config->get_ldap_link();
+
+    /* Remove and write to LDAP */
+    plugin::remove_from_parent();
+
+    @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
+        $this->attributes, "Save");
+    $ldap->cd($this->dn);
+    $ldap->modify($this->attrs);
+    show_ldap_error($ldap->get_error());
+  }
+
+}
+
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+?>
