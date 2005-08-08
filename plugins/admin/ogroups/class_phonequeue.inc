@@ -399,14 +399,19 @@ class phonequeue extends plugin
   }
 
 
+
+ /* This function checks if the given phonenumbers are available or already in use*/
+
   function is_number_used()
   {
     $ldap= $this->config->get_ldap_link();
-    $ldap->search("(objectClass=goFonAccount)", array("telephoneNumber","uid","cn"));
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(|(objectClass=goFonAccount)(objectClass=goFonQueue))", array("telephoneNumber","cn","uid"));
     while($attrs = $ldap->fetch()) {
       unset($attrs['telephoneNumber']['count']);
-      $usednumber[$attrs['uid'][0]]= $attrs['telephoneNumber'];
       foreach($attrs['telephoneNumber'] as $tele){
+        if(!isset($attrs['cn'][0])) $attrs['cn'][0]=$attrs['dn'];
+        if(!isset($attrs['uid'][0])) $attrs['uid'][0]=$attrs['dn'];
         $numbers[$tele]=$attrs;
       }
     }
