@@ -210,7 +210,7 @@ class phoneGeneric extends plugin
 
     $ldap->search ("(&(objectClass=goFonAccount)(goFonHardware=".$this->cn."))", array("uid","cn"));
     while ($attr =  $ldap->fetch()){
-      print_red(sprintf(_("Can't delete the phone. There are still users using this phone, one of them is user '%s'."),
+      print_red(sprintf(_("Can't delete because there are user which are depending on this phone. One of them is user '%s'."),
         ($attr['uid'][0]." - ".$attr['cn'][0])));
       return;
     }
