@@ -907,6 +907,8 @@ class phoneAccount extends plugin
 
     $SQL="";
 
+    
+
     $first_num = false;
     // Delete old entries
     foreach($this->a_old_telenums as $s_telenums){
@@ -950,6 +952,17 @@ class phoneAccount extends plugin
     }
 
     $ldap= $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(objectClass=goFonQueue)", array("member"));
+    while($attr = $ldap->fetch()){
+      if(in_array($this->dn,$attr['member'])){
+        $new =new ogrouptabs($this->config, $this->config->data['TABS']['OGROUPTABS'],$attr['dn']);
+        unset($new->by_object['ogroup']->memberList[$this->dn]);
+        unset($new->by_object['ogroup']->member[$this->dn]);
+        $new->save();
+        print_red(sprintf(_("Removed user '%s' from phone queue '%s'."),$this->uid,$new->by_object['ogroup']->attrs['cn']));
+      }
+    }
     $ldap->cd($this->dn);
     $ldap->modify($this->attrs);
     show_ldap_error($ldap->get_error());
