@@ -416,9 +416,8 @@ class phonequeue extends plugin
       }
     }
 
-
     foreach($this->telephoneNumber as $num){
-      if((isset($numbers[$num]))&&(($numbers[$num]['cn'][0]!= $this->cn)||($numbers[$num]['uid'][0]!=$this->uid))){
+      if((isset($numbers[$num]))&&(($numbers[$num]['cn'][0]!= $this->attrs['cn'][0]))){
         if(isset($numbers[$num]['uid'][0])){
           return sprintf(_("The specified telephonenumber '%s' is already assigned to '%s'."),$num,$numbers[$num]['uid'][0]);
         }else{
