@@ -132,9 +132,10 @@ class phoneAccount extends plugin
             /* Set all attrs */
             $id = $data[0];
             $this->macroarray[$attrs['dn']][$id]['var']    ="var".$id;
-            $string = preg_replace("/%uid/",$this->attrs['uid'][0],$data[3]);
-            $string = preg_replace("/%telephoneNumber/",$this->attrs['telephoneNumber'][0],$string);
-            $string = preg_replace("/%cn/",$this->attrs['cn'][0],$string);
+            $string= $data[3];
+//            $string = preg_replace("/%uid/",$this->attrs['uid'][0],$data[3]);
+//            $string = preg_replace("/%telephoneNumber/",$this->attrs['telephoneNumber'][0],$string);
+//            $string = preg_replace("/%cn/",$this->attrs['cn'][0],$string);
             $this->macroarray[$attrs['dn']][$id]['choosen']= $string; 
 
             $this->macroarray[$attrs['dn']][$id]['id']     = $id;
@@ -540,6 +541,14 @@ class phoneAccount extends plugin
           break;
 
           case "string":
+            $choosen = preg_replace("/%uid/",$this->attrs['uid'][0],$choosen);
+            foreach($this->phoneNumbers as  $phone){
+              $tmp_phone[] = $phone;
+            }            
+  
+            $choosen = preg_replace("/%telephoneNumber/",$tmp_phone[0],$choosen);
+            $choosen = preg_replace("/%cn/",$this->attrs['cn'][0],$choosen);
+
             $str="<input name='".$var."' value='".$choosen."' ".chkacl($this->acl, "goFonMacro").">";
           $macrotab.= "<td>$name</td><td>$str";
           break;
