@@ -7,29 +7,29 @@ class phonequeue extends plugin
   var $cn= "";
 
 
-  var $goFonTimeOut             =""; 
-  var $goFonMaxLen              ="";
-  var $goFonAnnounceFrequency   ="";
-  var $goFonDialOption_t        ="";
-  var $goFonDialOption_T        ="";
-  var $goFonDialOption_h        ="";
+  var $goFonTimeOut             ="5"; 
+  var $goFonMaxLen              ="20";
+  var $goFonAnnounceFrequency   ="90";
+  var $goFonDialOption_t        ="t";
+  var $goFonDialOption_T        ="T";
+  var $goFonDialOption_h        ="h";
   var $goFonAnnounce            ="";
-  var $goFonDialOption_H        ="";
-  var $goFonMusiconHold         ="";
-  var $goFonWelcomeMusic        ="";
+  var $goFonDialOption_H        ="H";
+  var $goFonMusiconHold         ="vm-for";
+  var $goFonWelcomeMusic        ="random";
   var $goFonQueueReportHold     ="";
-  var $goFonQueueYouAreNext     ="";
-  var $goFonQueueThereAre       ="";
-  var $goFonQueueCallsWaiting   ="";
-  var $goFonQueueThankYou       ="";
-  var $goFonQueueMinutes        =""; 
-  var $goFonQueueSeconds        ="";
-  var $goFonLanguage            ="";
-  var $goFonStrategy            ="";
-  var $goFonAnnounceHoldtime    ="";
+  var $goFonQueueYouAreNext     ="queue-youarenext";
+  var $goFonQueueThereAre       ="queue-therare";
+  var $goFonQueueCallsWaiting   ="queue-callswaiting";
+  var $goFonQueueThankYou       ="queue-thankyou";
+  var $goFonQueueMinutes        ="queue-minutes"; 
+  var $goFonQueueSeconds        ="queue-seconds";
+  var $goFonLanguage            ="queue-holdtime";
+  var $goFonStrategy            ="rrmemory";
+  var $goFonAnnounceHoldtime    ="yes";
   var $telephoneNumber          =array();
   var $goFonQueueMember         =array(); 
-  var $goFonDialOption          ="";
+  var $goFonDialOption          ="tThH";
 
   var $old_phone_numbers        =array();
 
@@ -51,8 +51,10 @@ class phonequeue extends plugin
     /* Save initial account state */
     $this->initially_was_account= $this->is_account;
 
-    $this->telephoneNumber=$this->attrs['telephoneNumber'];
-    unset($this->telephoneNumber['count']); 
+    if(isset($this->attrs['telephoneNumber'])){
+      $this->telephoneNumber=$this->attrs['telephoneNumber'];
+      unset($this->telephoneNumber['count']); 
+    }
 
 
     for($i = 0; $i < strlen($this->goFonDialOption); $i++){
@@ -157,6 +159,9 @@ class phonequeue extends plugin
   function check()
   {
     $message= array();
+  //  if(empty($this->description)){
+  //    $message[] = _("You must specify a description for this queue");
+  //  }
 
     if($this->is_number_used()){
       $message[] = $this->is_number_used();
@@ -230,10 +235,13 @@ class phonequeue extends plugin
       
       // Delete old Entries 
       $delete = array();
-      foreach($this->old_phone_numbers as $phone){
-        $delete[]= "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$phone."';\n";
+      if(is_array($this->old_phone_numbers)){
+        foreach($this->old_phone_numbers as $phone){
+          $delete[]= "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$phone."';\n";
+        }
       }
-      $delete[]=    "DELETE FROM ".$a_SETUP['QUEUE_TABLE']." WHERE name=\"".$this->attrs['cn'][0]."\"; \n";
+      $delete[]=    "DELETE FROM ".$a_SETUP['EXT_TABLE']."    WHERE exten='".$this->attrs['cn'][0]."';\n";
+      $delete[]=    "DELETE FROM ".$a_SETUP['QUEUE_TABLE']."  WHERE name=\"".$this->attrs['cn'][0]."\"; \n";
       $delete[]=    "DELETE FROM ".$a_SETUP['QUEUE_MEMBER_TABLE']." WHERE queue_name=\"".$this->attrs['cn'][0]."\";\n";
 
       /* Perform queries to delte old entries */
@@ -275,6 +283,12 @@ class phonequeue extends plugin
       foreach($this->telephoneNumber as $num){
         
         $prio --;
+        $a_ext[$i]['context']  = 'GOsa';
+        $a_ext[$i]['exten']    = $this->attrs['cn'][0];
+        $a_ext[$i]['priority'] = 1;
+        $a_ext[$i]['app']      = "Goto";
+        $a_ext[$i]['appdata']  = $num."|1";
+        $i ++ ; 
         $a_ext[$i]['context']  = 'GOsa';
         $a_ext[$i]['exten']    = $num;
         $a_ext[$i]['priority'] = 1;
@@ -504,6 +518,12 @@ class phonequeue extends plugin
       return( sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']));
     }
 
+
+    foreach(array("goFonDialOption_t","goFonDialOption_T","goFonDialOption_h","goFonDialOption_H") as $val){
+      unset($this->$val);
+      unset($this->attrs[$val]);
+    }    
+
     $i = 0;
     $prio = 11;
 
@@ -522,6 +542,7 @@ class phonequeue extends plugin
     foreach($this->old_phone_numbers as $phone){
       $delete[]= "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$phone."';\n";
     }
+    $delete[]=    "DELETE FROM ".$a_SETUP['EXT_TABLE']."    WHERE exten='".$this->attrs['cn'][0]."';\n";
     $delete[]=    "DELETE FROM ".$a_SETUP['QUEUE_TABLE']." WHERE name=\"".$this->attrs['cn'][0]."\"; \n";
     $delete[]=    "DELETE FROM ".$a_SETUP['QUEUE_MEMBER_TABLE']." WHERE queue_name=\"".$this->attrs['cn'][0]."\";\n";
 

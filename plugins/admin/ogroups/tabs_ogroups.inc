@@ -41,11 +41,13 @@ class ogrouptabs extends tabs
           } 
  
           /* Add a user tab used for mail distribution lists */
-          if (preg_match('/kolab/i', $this->config->current['MAILMETHOD'])){
-            require_once("class_mailogroup.inc");
-            $this->by_name['mailogroup']= _("Mail");
-            $this->by_object['mailogroup']= new mailogroup($this->config, $this->dn);
-            $this->by_object['mailogroup']->parent= &$this;
+          if(isset($this->config->current['MAILMETHOD'])){
+            if (preg_match('/kolab/i', $this->config->current['MAILMETHOD'])){
+              require_once("class_mailogroup.inc");
+              $this->by_name['mailogroup']= _("Mail");
+              $this->by_object['mailogroup']= new mailogroup($this->config, $this->dn);
+              $this->by_object['mailogroup']->parent= &$this;
+            }
           }
 
           break;
