@@ -467,6 +467,11 @@ class phoneAccount extends plugin
 
   function execute()
   {
+    /* force postmodify event, to restart phones */
+    
+    $this->parent->by_object['user']->is_modified=TRUE;
+    $this->is_modified=TRUE; 
+
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
       $this->is_account= !$this->is_account;
@@ -543,7 +548,7 @@ class phoneAccount extends plugin
         $macrotab.= "</td></tr>";
 
       }
-      $macrotab.="</table>";
+      $macrotab.="</table><input name='post_success' type='hidden' value='1'>";
     }//is_array()
 
     /* Give smarty the table */
@@ -695,6 +700,7 @@ class phoneAccount extends plugin
         $this->macrostillavailable=true;
       }
 
+
       /* get all Postvars */
       if(isset($this->macroarray[$this->macro])){ 
         foreach($this->macroarray[$this->macro] as $key => $paras){
@@ -705,18 +711,19 @@ class phoneAccount extends plugin
           /* Checkboxes are special, they are not Posted if they are not selected, so the won't be changed with the above code 
              We need this code below to read and save checkboxes correct
            */
-          if($this->macroarray[$this->macro][$key]['type']=="bool"){
-            if(isset($_POST[$this->macroarray[$this->macro][$key]['var']])) {
-              $this->macroarray[$this->macro][$key]['choosen']=$_POST[$paras['var']];
-            }else{
-              $this->macroarray[$this->macro][$key]['choosen']=false;
+  
+          if(isset($_POST['post_success'])){
+            if($this->macroarray[$this->macro][$key]['type']=="bool"){
+              if(isset($_POST[$this->macroarray[$this->macro][$key]['var']])) {
+                $this->macroarray[$this->macro][$key]['choosen']=$_POST[$paras['var']];
+              }else{
+                $this->macroarray[$this->macro][$key]['choosen']=false;
+              }
             }
           }
         }
       }
     }
-
-
   }
 
   function check()
@@ -734,7 +741,7 @@ class phoneAccount extends plugin
     }
 
     if(($this->goFonPIN)==""){
-      $this->goFonPIN = array();
+      $message[]= sprintf(_("You need to specify a Phone PIN."));
     }else{
       if(strcmp ((int)($this->goFonPIN),($this->goFonPIN))){
         $message[] = sprintf(_("The given PIN is not valid, only numbers are allowed for this type."));
@@ -813,6 +820,7 @@ class phoneAccount extends plugin
     show_ldap_error($ldap->get_error());
 
     /* Optionally execute a command after we're done */
+    
     if ($this->initially_was_account == $this->is_account){
       if ($this->is_modified){
         $this->handle_post_events("modify");
@@ -952,14 +960,17 @@ class phoneAccount extends plugin
 
 
 
+  /* This function checks if the given phonenumbers are available or already in use*/
   function is_number_used()
   {
     $ldap= $this->config->get_ldap_link();
-    $ldap->search("(objectClass=goFonAccount)", array("telephoneNumber","uid","cn"));
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(|(objectClass=goFonAccount)(objectClass=goFonQueue))", array("telephoneNumber","cn","uid"));
     while($attrs = $ldap->fetch()) {
       unset($attrs['telephoneNumber']['count']);
-      $usednumber[$attrs['uid'][0]]= $attrs['telephoneNumber'];
       foreach($attrs['telephoneNumber'] as $tele){
+        if(!isset($attrs['cn'][0])) $attrs['cn'][0]=$attrs['dn'];
+        if(!isset($attrs['uid'][0])) $attrs['uid'][0]=$attrs['dn'];
         $numbers[$tele]=$attrs;
       }
     }

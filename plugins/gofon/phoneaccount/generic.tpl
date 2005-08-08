@@ -74,7 +74,7 @@
 		<table summary="">
 			<tr>
 				<td>
-					<LABEL for="goFonPIN">{t}Phone PIN{/t}</LABEL>
+					<LABEL for="goFonPIN">{t}Phone PIN{/t}{$must}</LABEL>
 				</td>
 				<td>
 					<input type="password" id="goFonPIN" name="goFonPIN" value="{$goFonPIN}" {$goFonPINACL}>
