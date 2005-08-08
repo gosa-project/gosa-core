@@ -166,13 +166,13 @@ class phonequeue extends plugin
       $message[] = $this->generate_mysql_entension_entries();
     }
 
-    if(!is_numeric($this->goFonTimeOut)){
+    if(!((is_numeric($this->goFonTimeOut))||(empty($this->goFonTimeOut)))){
       $message[] = _("Timeout must be numeric");
     }
-    if(!is_numeric($this->goFonMaxLen)){
+    if(!((is_numeric($this->goFonMaxLen))||(empty($this->goFonMaxLen)))){
       $message[] = _("Queue length must be numeric");
     }
-    if(!is_numeric($this->goFonAnnounceFrequency)){
+    if(!((is_numeric($this->goFonAnnounceFrequency))||(empty($this->goFonAnnounceFrequency)))){
       $message[] = _("Announce frequency must be numeric");
     }
     if(count($this->telephoneNumber)==0){
@@ -273,28 +273,35 @@ class phonequeue extends plugin
       /* generate Extension entries, with priority  */
       $i = 0;
       foreach($this->telephoneNumber as $num){
+        
         $prio --;
         $a_ext[$i]['context']  = 'GOsa';
         $a_ext[$i]['exten']    = $num;
         $a_ext[$i]['priority'] = 1;
-        $a_ext[$i]['app']      = "SetLanguage";
-        $a_ext[$i]['appdata']  = $this->goFonLanguage;
+        $a_ext[$i]['app']      = "Wait";
+        $a_ext[$i]['appdata']  = "2";
         $i ++ ; 
         $a_ext[$i]['context']  = 'GOsa';
         $a_ext[$i]['exten']    = $num;
         $a_ext[$i]['priority'] = 2;
+        $a_ext[$i]['app']      = "Set";
+        $a_ext[$i]['appdata']  = "LANGUAGE|".$this->goFonLanguage;
+        $i ++ ; 
+        $a_ext[$i]['context']  = 'GOsa';
+        $a_ext[$i]['exten']    = $num;
+        $a_ext[$i]['priority'] = 3;
         $a_ext[$i]['app']      = "Playback";
         $a_ext[$i]['appdata']  = $this->goFonWelcomeMusic;
         $i ++ ; 
         $a_ext[$i]['context']  = 'GOsa';
         $a_ext[$i]['exten']    = $num;
-        $a_ext[$i]['priority'] = 3;
+        $a_ext[$i]['priority'] = 4;
         $a_ext[$i]['app']      = "SetCIDName";
         $a_ext[$i]['appdata']  = $this->attrs['description'][0];
         $i ++ ; 
         $a_ext[$i]['context']  = 'GOsa';
         $a_ext[$i]['exten']    = $num;
-        $a_ext[$i]['priority'] = 4;
+        $a_ext[$i]['priority'] = 5;
         $a_ext[$i]['app']      = "Queue";
         $a_ext[$i]['appdata']  =  $this->attrs['cn'][0].
           "|".
@@ -310,7 +317,7 @@ class phonequeue extends plugin
         $i ++ ; 
         $a_ext[$i]['context']  = 'GOsa';
         $a_ext[$i]['exten']    = $num;
-        $a_ext[$i]['priority'] = 5;
+        $a_ext[$i]['priority'] = 6;
         $a_ext[$i]['app']      = "SetVar";
         $a_ext[$i]['appdata']  = "Queue_Prio=".$prio;
         $i ++ ;
