@@ -96,8 +96,6 @@ class phoneGeneric extends plugin
 
   function execute()
   {
- 
-  
     /* Do we represent a valid phone? */
     if (!$this->is_account && $this->parent == NULL){
       $display= "<img alt=\"\" src=\"images/stop.png\" align=middle>&nbsp;<b>".
@@ -208,6 +206,15 @@ class phoneGeneric extends plugin
   function remove_from_parent()
   {
     $ldap= $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+
+    $ldap->search ("(&(objectClass=goFonAccount)(goFonHardware=".$this->cn."))", array("uid","cn"));
+    while ($attr =  $ldap->fetch()){
+      print_red(sprintf(_("Can't delete the phone. There are still users using this phone, one of them is user '%s'."),
+        ($attr['uid'][0]." - ".$attr['cn'][0])));
+      return;
+    }
+
     $ldap->rmdir($this->dn);
     show_ldap_error($ldap->get_error());
     $this->handle_post_events("remove");

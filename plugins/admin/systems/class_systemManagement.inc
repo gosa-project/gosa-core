@@ -424,6 +424,10 @@ class systems extends plugin
           case "workstation":
             $tabtype= "worktabs";
           break;
+          
+          case "phone":
+            $tabtype= "phonetabs";
+          break;
 
           case "server":
             $tabtype= "servtabs";
@@ -438,10 +442,17 @@ class systems extends plugin
         }
 
         /* Delete request is permitted, perform LDAP action */
-        $this->systab= new $tabtype($this->config,
-            $this->config->data['TABS']['TERMTABS'], $this->dn);
-        $this->systab->set_acl(array($this->acl));
-        $this->systab->by_object['termgeneric']->remove_from_parent ();
+        if($tabtype=="phonetabs"){
+          $this->systab= new $tabtype($this->config,
+             $this->config->data['TABS']['PHONETABS'], $this->dn);
+          $this->systab->set_acl(array($this->acl));
+          $this->systab->by_object['phonegeneric']->remove_from_parent ();
+        }else{  
+          $this->systab= new $tabtype($this->config,
+             $this->config->data['TABS']['TERMTABS'], $this->dn);
+          $this->systab->set_acl(array($this->acl));
+          $this->systab->by_object['termgeneric']->remove_from_parent ();
+        }
         unset ($this->systab);
         gosa_log ("System object'".$this->dn."' has been removed");
         $this->systab= NULL;
