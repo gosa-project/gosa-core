@@ -931,15 +931,6 @@ class posixAccount extends plugin
     return ($message);
   }
 
-
-  /* Add posix user to some groups */
-  function addGroup2 ($groups){
-    print "Haleluja".$groups;
-    print_a($this->groupMembership);
-    $this->groupMembership[$this->glist[$groups]['dn']]= $this->glist[$groups]['cn'][0];
-  }
-  
-
   function addGroup ($groups)
   {
     /* include global link_info */
