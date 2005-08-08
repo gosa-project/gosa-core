@@ -17,6 +17,8 @@ class macroParameter extends plugin
   /*! CLI vars */
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
+  /* Parameter Count*/
+  var $para_count = 0 ; 
   /*! macro base  */
   var $base= "";
   
@@ -94,8 +96,12 @@ class macroParameter extends plugin
       $tmp2[$num]['var']         = "var".$num;
     }
 
+    
     /* Assign this array */
     $this->goFonMacroParameter = $tmp2;
+
+    $this->para_count = count ($tmp2);
+    
   }
 
   //! Perform Parameter check 
@@ -171,7 +177,7 @@ class macroParameter extends plugin
     $vars 	= "";
     $tmp  	= array();
     $number = 0; 
-
+  
     $content = $_SESSION['macroManagment']->macrotabs->by_object['macro']->goFonMacroContent;
 
     if(strstr($content,"ARG")){
@@ -351,6 +357,10 @@ class macroParameter extends plugin
 
     foreach($this->goFonMacroParameter as $key=>$fonpara){
       $this->attrs['goFonMacroParameter'][]=$key."!".$fonpara['name']."!".$fonpara['type']."!".$fonpara['default'];
+    }
+
+    if($this->para_count != count($this->attrs['goFonMacroParameter'])){
+      print_red(_("Parameter count of the macro changed, you must update each user which are using this macro '%s'."),$this->dn);
     }
 
     unset($this->attrs['base']);
