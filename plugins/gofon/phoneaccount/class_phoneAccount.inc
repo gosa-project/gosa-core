@@ -709,12 +709,37 @@ class phoneAccount extends plugin
         $this->macrostillavailable=true;
       }
 
+      if(is_array($this->phoneNumbers)){
+        foreach($this->phoneNumbers as $telenumms) {
+          $nummsinorder[]=$telenumms; 
+        }
+      }else{
+        $nummsinorder=array("");
+      }
 
       /* get all Postvars */
       if(isset($this->macroarray[$this->macro])){ 
         foreach($this->macroarray[$this->macro] as $key => $paras){
           if(isset($_POST[$paras['var']])){
-            $this->macroarray[$this->macro][$key]['choosen'] = $_POST[$paras['var']]; 
+            $par = $this->macroarray[$this->macro][$key];
+            $string = "";
+            if(preg_match("/.*%telephoneNumber_.*/",$par['default'])){
+              $string = $par['default'];
+              foreach($nummsinorder as $nummsinorderkey=> $nummsinorderval){
+                $string = (str_replace("%telephoneNumber_".($nummsinorderkey+1),$nummsinorderval,$string));
+              }
+            }
+            
+            if(preg_match("/.*%uid.*/",$par['default'])){
+              if(empty($string)) $string = $par['default'];
+              $string = str_replace("%uid",$this->uid,$string);
+            }    
+  
+            if(!empty($string)){  
+              $this->macroarray[$this->macro][$key]['choosen'] = $string; 
+            }else{
+              $this->macroarray[$this->macro][$key]['choosen'] = $_POST[$paras['var']];
+            }
           }
 
           /* Checkboxes are special, they are not Posted if they are not selected, so the won't be changed with the above code 
