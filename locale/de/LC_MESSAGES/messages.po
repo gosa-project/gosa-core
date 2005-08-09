@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-08-09 13:57+0200\n"
+"PO-Revision-Date: 2005-08-09 14:09+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -5854,7 +5854,7 @@ msgstr "Arbeitsplätze"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:37
 msgid "Phone queue"
-msgstr "Telefon-Warteschlange"
+msgstr "Telefon-Gruppe"
 
 #: plugins/admin/ogroups/mail.tpl:7
 msgid "Mail distribution list"
@@ -6134,7 +6134,7 @@ msgstr "Zeige Objektgruppen auf die Folgendes passt"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:79
 msgid "Remove the phone queue from this Account"
-msgstr "Telefon-Warteschlange von diesem Konto entfernen"
+msgstr "Telefon-Gruppe von diesem Konto entfernen"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:80
 #, fuzzy
@@ -6146,7 +6146,7 @@ msgstr ""
 
 #: plugins/admin/ogroups/class_phonequeue.inc:82
 msgid "Create phone queue"
-msgstr "Telefon-Warteschlange erstellen"
+msgstr "Telefon-Gruppe erstellen"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:82
 #, fuzzy
@@ -6175,7 +6175,7 @@ msgstr "Ja"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:132
 msgid "ring all available channels until one answers"
-msgstr "Rufe auf alle verfügbaren Kanäle bis jemand antwortet"
+msgstr "Rufe auf alle verfügbaren Anschlüsse bis jemand antwortet"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:133
 msgid "take turns ringing each available interface"
@@ -6191,7 +6191,7 @@ msgstr "Rufe auf Anschluss mit den wenigsten abgeschlossenen Gesprächen"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:136
 msgid "ring random interface"
-msgstr "Rufe auf zufälligen Kanal"
+msgstr "Rufe auf zufälligen Anschluss"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:137
 msgid "round robin with memory, remember where we left off last ring pass"
@@ -6250,7 +6250,7 @@ msgstr ""
 
 #: plugins/admin/ogroups/phonequeue.tpl:1
 msgid "Queue Settings"
-msgstr "Warteschlangen-Einstellungen"
+msgstr "Gruppen-Einstellungen"
 
 #: plugins/admin/ogroups/phonequeue.tpl:6
 msgid "Generic queue setup"
@@ -6282,7 +6282,7 @@ msgstr "Strategie"
 
 #: plugins/admin/ogroups/phonequeue.tpl:59
 msgid "Max queue length"
-msgstr "Maximale Länge der Warteschlange"
+msgstr "Maximale Größe der Gruppe"
 
 #: plugins/admin/ogroups/phonequeue.tpl:67
 msgid "Announce frequency"
@@ -6314,7 +6314,7 @@ msgstr ""
 
 #: plugins/admin/ogroups/phonequeue.tpl:122
 msgid "Queue sound file setup"
-msgstr "Ansagen-Einstellungen"
+msgstr "Einstellung der Ansagen"
 
 #: plugins/admin/ogroups/phonequeue.tpl:127
 msgid "Use music on hold instead of ringing"
