@@ -6345,7 +6345,7 @@ msgid "Retry must be numeric"
 msgstr ""
 
 #: plugins/admin/ogroups/class_phonequeue.inc:178
-msgid "Queue length must be numeric"
+msgid "Max queue length must be numeric"
 msgstr ""
 
 #: plugins/admin/ogroups/class_phonequeue.inc:181

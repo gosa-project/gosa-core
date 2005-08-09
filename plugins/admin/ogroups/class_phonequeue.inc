@@ -175,7 +175,7 @@ class phonequeue extends plugin
       $message[] = _("Retry must be numeric");
     }
     if(!((is_numeric($this->goFonMaxLen))||(empty($this->goFonMaxLen)))){
-      $message[] = _("Queue length must be numeric");
+      $message[] = _("Max queue length must be numeric");
     }
     if(!((is_numeric($this->goFonAnnounceFrequency))||(empty($this->goFonAnnounceFrequency)))){
       $message[] = _("Announce frequency must be numeric");

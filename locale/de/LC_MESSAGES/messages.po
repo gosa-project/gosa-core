@@ -11,12 +11,12 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-08-09 14:09+0200\n"
+"PO-Revision-Date: 2005-08-09 15:12+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: contrib/gosa.conf:4
 msgid "My account"
@@ -5829,7 +5829,8 @@ msgstr "Netzwerk-Einstellungen"
 msgid ""
 "Can't delete because there are user which are depending on this phone. One "
 "of them is user '%s'."
-msgstr ""
+msgstr "Das Telefon kann nicht entfernt werden, da es abhängige Benutzer gibt. Der erste Benutzer "
+"in der Liste ist '%s'."
 
 #: plugins/admin/systems/class_phoneGeneric.inc:270
 msgid "The required field 'Phone name' is not set."
@@ -6142,9 +6143,8 @@ msgstr "Allgemeine Einstellungen"
 
 #: plugins/admin/ogroups/phonequeue.tpl:8
 #: plugins/admin/ogroups/phonequeue.tpl:124
-#, fuzzy
 msgid "Generic queue Settings"
-msgstr "Generische Benutzer-Information"
+msgstr "Allgemeine Gruppen-Einstellungen"
 
 #: plugins/admin/ogroups/phonequeue.tpl:11
 msgid "Phone Number"
@@ -6166,11 +6166,11 @@ msgstr "Strategie"
 
 #: plugins/admin/ogroups/phonequeue.tpl:59
 msgid "Max queue length"
-msgstr "Maximale Größe der Gruppe"
+msgstr "Maximale Grösse der Gruppe"
 
 #: plugins/admin/ogroups/phonequeue.tpl:67
 msgid "Announce frequency"
-msgstr ""
+msgstr "Benachrichtigungsfrequenz"
 
 #: plugins/admin/ogroups/phonequeue.tpl:71
 msgid "(in seconds)"
@@ -6178,23 +6178,23 @@ msgstr "(in Sekunden)"
 
 #: plugins/admin/ogroups/phonequeue.tpl:76
 msgid "Announce holdtime"
-msgstr ""
+msgstr "Benachrichtige über Wartezeit"
 
 #: plugins/admin/ogroups/phonequeue.tpl:90
 msgid "Allow the called user to transfer his call"
-msgstr ""
+msgstr "Erlaube Weiterleiten des Gesprächs (Angerufener)"
 
 #: plugins/admin/ogroups/phonequeue.tpl:98
 msgid "Allows calling user to transfer call"
-msgstr ""
+msgstr "Erlaube Weiterleiten des Gesprächs (Anrufer)"
 
 #: plugins/admin/ogroups/phonequeue.tpl:106
 msgid "Allow the called to hangup by pressing *"
-msgstr ""
+msgstr "Auflegen durch Drücken der Taste '*' (Angerufener)"
 
 #: plugins/admin/ogroups/phonequeue.tpl:114
 msgid "Allows calling to hangup by pressing *"
-msgstr ""
+msgstr "Auflegen durch Drücken der Taste '*' (Anrufer)"
 
 #: plugins/admin/ogroups/phonequeue.tpl:122
 msgid "Queue sound file setup"
@@ -6218,7 +6218,7 @@ msgstr "Benachrichtigung"
 
 #: plugins/admin/ogroups/phonequeue.tpl:160
 msgid "Sound file for 'You are next ...'"
-msgstr ""
+msgstr "'Sie sind der Nächste...'"
 
 #: plugins/admin/ogroups/phonequeue.tpl:168
 msgid "'There are ...'"
@@ -6249,11 +6249,10 @@ msgid "Remove the phone queue from this Account"
 msgstr "Telefon-Gruppe von diesem Konto entfernen"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:80
-#, fuzzy
 msgid ""
 "Phone queue is enabled for this group. You can disable it by clicking below."
 msgstr ""
-"Dieses Konto hat die Telefon-Erweiterungen aktiviert. Sie können diese durch "
+"Diese Gruppe hat die Telefon-Gruppen-Erweiterungen aktiviert. Sie können diese durch "
 "einen Klick auf die untere Schaltfläche deaktivieren."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:82
@@ -6261,17 +6260,16 @@ msgid "Create phone queue"
 msgstr "Telefon-Gruppe erstellen"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:82
-#, fuzzy
 msgid ""
 "For this group the phone queues are disabled. You can enable them by "
 "clicking below."
 msgstr ""
-"Dieses Konto hat keine gültigen Telefon-Erweiterungen. Sie können diese "
+"Diese Gruppe hat keine gültigen Telefon-Gruppen-Erweiterungen. Sie können diese "
 "durch einen Klick auf die untere Schaltfläche aktivieren."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:130
 msgid "Uruguai"
-msgstr ""
+msgstr "Uruguai"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:131
 msgid "No"
@@ -6287,11 +6285,11 @@ msgstr "Rufe auf alle verfügbaren Anschlüsse bis jemand antwortet"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:133
 msgid "take turns ringing each available interface"
-msgstr ""
+msgstr "Rufe auf alle verfügbaren Anschlüsse"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:134
 msgid "ring interface which was least recently called by this queue"
-msgstr ""
+msgstr "Rufe Anschluss, der die wenigsten Anrufe hatte"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:135
 msgid "ring the one with fewest completed calls from this queue"
@@ -6303,23 +6301,23 @@ msgstr "Rufe auf zufälligen Anschluss"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:137
 msgid "round robin with memory, remember where we left off last ring pass"
-msgstr ""
+msgstr "Ring mit Speicher, an welchem Anschluss der Ring verlassen wurde"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:175
 msgid "Retry must be numeric"
-msgstr ""
+msgstr "Der Wert für 'Wiederholen' muss numerisch sein"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:178
-msgid "Queue length must be numeric"
-msgstr ""
+msgid "Max queue length must be numeric"
+msgstr "Der Wert für 'Maximale Grösse der Gruppe' muss numerisch sein"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:181
 msgid "Announce frequency must be numeric"
-msgstr ""
+msgstr "Der Wert für 'Benachrichtigungsfrequenz' muss numerisch sein"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:184
 msgid "There must be least one queue number defined."
-msgstr ""
+msgstr "Es ist mindestens eine Telefonnummer erforderlich."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:207
 #: plugins/admin/ogroups/class_phonequeue.inc:507
@@ -6346,9 +6344,9 @@ msgstr "Die Datenbank %s auf %s kann nicht ausgewählt werden."
 #: plugins/admin/ogroups/class_phonequeue.inc:251
 #: plugins/admin/ogroups/class_phonequeue.inc:406
 #: plugins/admin/ogroups/class_phonequeue.inc:557
-#, fuzzy, php-format
+#, php-format
 msgid "Can't delete in Database %s, on Server %s."
-msgstr "Die angegebene Datenbank kann nicht ausgewählt werden."
+msgstr "Kann nicht entfernen (Datenbank '%s' auf Server '%s')."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:435
 #: plugins/admin/ogroups/class_phonequeue.inc:437
@@ -6356,7 +6354,7 @@ msgstr "Die angegebene Datenbank kann nicht ausgewählt werden."
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1032
 #, php-format
 msgid "The specified telephonenumber '%s' is already assigned to '%s'."
-msgstr ""
+msgstr "Die angegebene Telefonnummer '%s' wird bereits von '%s' verwendet."
 
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:25
 msgid "Phone macros"
@@ -6405,12 +6403,13 @@ msgstr "Diese 'dn' ist kein Telefon-Makro."
 msgid ""
 "This macro ist still in use. To delete this Macro ensure that nobody has "
 "selected this Macro."
-msgstr ""
+msgstr "Dieses Makro ist in Benutzung. Um es zu entfernen, stellen Sie bitte zunächst sicher, dass niemand dieses "
+"Makro ausgewählt hat."
 
 #: plugins/gofon/macro/class_gofonMacro.inc:232
 #, php-format
 msgid "Unable to parse macro contents on line: %s"
-msgstr ""
+msgstr "Fehler beim Einlesen des Makros in Zeile %s"
 
 #: plugins/gofon/macro/class_gofonMacro.inc:250
 #, php-format
@@ -6440,7 +6439,7 @@ msgstr ""
 
 #: plugins/gofon/macro/class_gofonMacro.inc:332
 msgid "The given cn is too long, to create a Makro entry, maximum 20 chars."
-msgstr ""
+msgstr "Die angegebene cn ist zu lang. Die mögliche Länge ist auf 20 Zeichen begrenzt."
 
 #: plugins/gofon/macro/class_gofonMacro.inc:337
 #, php-format
@@ -6518,7 +6517,8 @@ msgstr "Der Parameter %s besitzt einen ungültigen Wert für Datentyp bool."
 msgid ""
 "Parameter count of the macro changed, you must update each user which are "
 "using this macro '%s'."
-msgstr ""
+msgstr "Die Parameterzahl des Makros hat sich geändert, sie müssen jeden Benutzer aktualisieren, der"
+" das Makro '%s' benutzt."
 
 #: plugins/gofon/macro/headpage.tpl:6
 msgid "List of macros"
@@ -6563,9 +6563,8 @@ msgid "undefined"
 msgstr "nicht definiert"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:448
-#, fuzzy
 msgid "Error while performing query "
-msgstr "Fehler"
+msgstr "Fehler bei der Ausführung der Anfrage"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:488
 msgid ""
@@ -6616,9 +6615,9 @@ msgid "You need to specify at least one phone number!"
 msgstr "Bitte geben Sie mindestens eine Telefonnummer an!"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:778
-#, fuzzy, php-format
+#, php-format
 msgid "You need to specify a Phone PIN."
-msgstr "Bitte geben Sie mindestens eine Telefonnummer an!"
+msgstr "Die Eingabe einer Telefon-PIN wird benötigt."
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:781
 #, php-format
@@ -6644,7 +6643,7 @@ msgstr "Das Zeitlimit '%s' enthält ungültige Zeichen!"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:962
 msgid "Stop"
-msgstr ""
+msgstr "Beenden"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:997
 #, php-format
