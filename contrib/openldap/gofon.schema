@@ -241,26 +241,32 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.13.36 NAME 'goFonQueueSeconds'
     SUBSTR caseExactIA5SubstringsMatch
     SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
 
-attributetype ( 1.3.6.1.4.1.10098.1.1.13.37 NAME 'goFonLanguage'
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.37 NAME 'goFonQueueLanguage'
     DESC 'Holds the queue goFonLanguage definitions'
     EQUALITY caseExactIA5Match
     SUBSTR caseExactIA5SubstringsMatch
     SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
 
-attributetype ( 1.3.6.1.4.1.10098.1.1.13.38 NAME 'goFonStrategy'
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.38 NAME 'goFonQueueStrategy'
     DESC 'Holds the queue goFonStrategy definitions'
     EQUALITY caseExactIA5Match
     SUBSTR caseExactIA5SubstringsMatch
     SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
 
-attributetype ( 1.3.6.1.4.1.10098.1.1.13.39 NAME 'goFonAnnounceHoldtime'
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.39 NAME 'goFonQueueAnnounceHoldtime'
     DESC 'Holds the queue goFonAnnounceHoldtime definitions'
     EQUALITY caseExactIA5Match
     SUBSTR caseExactIA5SubstringsMatch
     SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
 
-attributetype ( 1.3.6.1.4.1.10098.1.1.13.40 NAME 'goFonAnnounce'
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.40 NAME 'goFonQueueAnnounce'
     DESC 'Holds the queue goFonAnnounce definitions'
+    EQUALITY caseExactIA5Match
+    SUBSTR caseExactIA5SubstringsMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.41 NAME 'goFonQueueRetry'
+    DESC 'Holds the queue goFonRetry definitions'
     EQUALITY caseExactIA5Match
     SUBSTR caseExactIA5SubstringsMatch
     SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
@@ -295,5 +301,6 @@ objectclass (1.3.6.1.4.1.10098.1.2.3.15 NAME 'goFonQueue' SUP top AUXILIARY
 		  goFonMusiconHold $ goFonWelcomeMusic $ goFonQueueReportHold $
 		  goFonQueueYouAreNext $ goFonQueueThereAre $ goFonQueueCallsWaiting $
 		  goFonQueueThankYou $ goFonQueueMinutes $ goFonQueueSeconds $ telephoneNumber $
-		  goFonLanguage $ goFonStrategy $ goFonAnnounceHoldtime $ goFonAnnounce ))
+		  goFonQueueLanguage $ goFonQueueStrategy $ goFonQueueAnnounceHoldtime $ goFonQueueAnnounce $
+		  goFonQueueRetry ))
 
