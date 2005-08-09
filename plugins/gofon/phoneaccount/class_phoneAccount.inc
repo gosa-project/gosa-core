@@ -133,9 +133,13 @@ class phoneAccount extends plugin
             $id = $data[0];
             $this->macroarray[$attrs['dn']][$id]['var']    ="var".$id;
             $string= $data[3];
-//            $string = preg_replace("/%uid/",$this->attrs['uid'][0],$data[3]);
-//            $string = preg_replace("/%telephoneNumber/",$this->attrs['telephoneNumber'][0],$string);
-//            $string = preg_replace("/%cn/",$this->attrs['cn'][0],$string);
+            $string = preg_replace("/%uid/",$this->attrs['uid'][0],$data[3]);
+            for($i = 0 ; $i < 10; $i++){
+              if(isset($this->attrs['telephoneNumber'][$i])){
+                $string = preg_replace("/%telephoneNumber_".($i+1)."/",$this->attrs['telephoneNumber'][$i],$string);
+              }
+            }
+            $string = preg_replace("/%cn/",$this->attrs['cn'][0],$string);
             $this->macroarray[$attrs['dn']][$id]['choosen']= $string; 
 
             $this->macroarray[$attrs['dn']][$id]['id']     = $id;
@@ -541,15 +545,7 @@ class phoneAccount extends plugin
           break;
 
           case "string":
-            $choosen = preg_replace("/%uid/",$this->attrs['uid'][0],$choosen);
-            foreach($this->phoneNumbers as  $phone){
-              $tmp_phone[] = $phone;
-            }            
-  
-            $choosen = preg_replace("/%telephoneNumber/",$tmp_phone[0],$choosen);
-            $choosen = preg_replace("/%cn/",$this->attrs['cn'][0],$choosen);
-
-            $str="<input name='".$var."' value='".$choosen."' ".chkacl($this->acl, "goFonMacro").">";
+          $str="<input name='".$var."' value='".$choosen."' ".chkacl($this->acl, "goFonMacro").">";
           $macrotab.= "<td>$name</td><td>$str";
           break;
 
@@ -721,25 +717,25 @@ class phoneAccount extends plugin
       if(isset($this->macroarray[$this->macro])){ 
         foreach($this->macroarray[$this->macro] as $key => $paras){
           if(isset($_POST[$paras['var']])){
-            $par = $this->macroarray[$this->macro][$key];
-            $string = "";
-            if(preg_match("/.*%telephoneNumber_.*/",$par['default'])){
-              $string = $par['default'];
-              foreach($nummsinorder as $nummsinorderkey=> $nummsinorderval){
-                $string = (str_replace("%telephoneNumber_".($nummsinorderkey+1),$nummsinorderval,$string));
-              }
-            }
+//            $par = $this->macroarray[$this->macro][$key];
+//            $string = "";
+//            if(preg_match("/.*%telephoneNumber_.*/",$par['default'])){
+//              $string = $par['default'];
+//              foreach($nummsinorder as $nummsinorderkey=> $nummsinorderval){
+//                $string = (str_replace("%telephoneNumber_".($nummsinorderkey+1),$nummsinorderval,$string));
+//              }
+//            }
             
-            if(preg_match("/.*%uid.*/",$par['default'])){
-              if(empty($string)) $string = $par['default'];
-              $string = str_replace("%uid",$this->uid,$string);
-            }    
+//            if(preg_match("/.*%uid.*/",$par['default'])){
+//              if(empty($string)) $string = $par['default'];
+//              $string = str_replace("%uid",$this->uid,$string);
+//            }    
   
-            if(!empty($string)){  
-              $this->macroarray[$this->macro][$key]['choosen'] = $string; 
-            }else{
+//            if(!empty($string)){  
+//              $this->macroarray[$this->macro][$key]['choosen'] = $string; 
+//            }else{
               $this->macroarray[$this->macro][$key]['choosen'] = $_POST[$paras['var']];
-            }
+//            }
           }
 
           /* Checkboxes are special, they are not Posted if they are not selected, so the won't be changed with the above code 
@@ -941,7 +937,9 @@ class phoneAccount extends plugin
 
     $SQL="";
 
-    
+    /* If deletion starts from userslist, cn uid are not set */
+    $this->uid = $this->parent->by_object['user']->uid;
+    $this->cn  = $this->parent->by_object['user']->cn;
 
     $first_num = false;
     // Delete old entries

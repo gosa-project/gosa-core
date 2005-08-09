@@ -28,15 +28,15 @@
 			{t}Language{/t}	
 		</td>
 		<td>
-			<select style="width:380px;" name="goFonLanguage" {$goFonLanguageACL}>
-			{html_options options=$goFonLanguageOptions selected=$goFonLanguage}
+			<select style="width:380px;" name="goFonQueueLanguage" {$goFonQueueLanguageACL}>
+			{html_options options=$goFonQueueLanguageOptions selected=$goFonQueueLanguage}
 			<option disabled>&nbsp;</option>
 			</select>
 		</td>
 		</tr>
 		<tr>
 		<td>
-			{t}Retry{/t}
+			{t}Timeout{/t}
 		</td>
 		<td>
 			<input name='goFonTimeOut' value='{$goFonTimeOut}' {$goFonTimeOutACL}>
@@ -44,11 +44,19 @@
 		</tr>
 		<tr>
 		<td>
+			{t}Retry{/t}
+		</td>
+		<td>
+			<input name='goFonQueueRetry' value='{$goFonQueueRetry}' {$goFonQueueRetryACL}>
+		</td>
+		</tr>
+		<tr>
+		<td>
 			{t}Strategy{/t}	
 		</td>
 		<td>
-			<select style="width:380px;" name="goFonStrategy" {$goFonStrategyACL}>
-            {html_options options=$goFonStrategyOptions selected=$goFonStrategy}
+			<select style="width:380px;" name="goFonQueueStrategy" {$goFonQueueStrategyACL}>
+            {html_options options=$goFonQueueStrategyOptions selected=$goFonQueueStrategy}
             <option disabled>&nbsp;</option>
             </select>
 	
@@ -76,8 +84,8 @@
 			{t}Announce holdtime{/t}
 		</td>
 		<td>
-			<select style="width:380px;" name="goFonAnnounceHoldtime" {$goFonAnnounceHoldtimeACL}>
-            {html_options options=$goFonAnnounceHoldtimeOptions selected=$goFonAnnounceHoldtime}
+			<select style="width:380px;" name="goFonQueueAnnounceHoldtime" {$goFonQueueAnnounceHoldtimeACL}>
+            {html_options options=$goFonQueueAnnounceHoldtimeOptions selected=$goFonQueueAnnounceHoldtime}
             <option disabled>&nbsp;</option>
             </select>
 		</td>
@@ -152,7 +160,7 @@
 			{t}Announce message{/t}
 		</td>
 		<td>
-			<input type="text" style='width:250px;' name='goFonAnnounce' value='{$goFonAnnounce}' {$goFonAnnounceACL}>
+			<input type="text" style='width:250px;' name='goFonQueueAnnounce' value='{$goFonQueueAnnounce}' {$goFonQueueAnnounceACL}>
 		</td>
 		</tr>
 		<tr>
