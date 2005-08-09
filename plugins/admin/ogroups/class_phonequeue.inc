@@ -518,11 +518,16 @@ class phonequeue extends plugin
       return( sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']));
     }
 
-
+    $tmp = array_flip($this->attributes);
     foreach(array("goFonDialOption_t","goFonDialOption_T","goFonDialOption_h","goFonDialOption_H") as $val){
       unset($this->$val);
       unset($this->attrs[$val]);
-    }    
+      unset($tmp[$val]);
+    }   
+    foreach(array_flip($tmp) as $key => $val){
+      $tmp2[]=$val;
+    } 
+    $this->attributes = $tmp2;
 
     $i = 0;
     $prio = 11;
