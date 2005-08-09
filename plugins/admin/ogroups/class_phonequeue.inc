@@ -9,14 +9,14 @@ class phonequeue extends plugin
 
   var $goFonTimeOut             ="5"; 
   var $goFonMaxLen              ="20";
-  var $goFonAnnounceFrequency   ="90";
+  var $goFonAnnounceFrequency   ="60";
   var $goFonDialOption_t        ="t";
   var $goFonDialOption_T        ="T";
   var $goFonDialOption_h        ="h";
-  var $goFonAnnounce            ="";
+  var $goFonAnnounce            ="gonicus-berlin-welcome";
   var $goFonDialOption_H        ="H";
-  var $goFonMusiconHold         ="vm-for";
-  var $goFonWelcomeMusic        ="random";
+  var $goFonMusiconHold         ="default";
+  var $goFonWelcomeMusic        ="gonicus-berlin-welcome";
   var $goFonQueueReportHold     ="";
   var $goFonQueueYouAreNext     ="queue-youarenext";
   var $goFonQueueThereAre       ="queue-therare";
@@ -172,7 +172,7 @@ class phonequeue extends plugin
     }
 
     if(!((is_numeric($this->goFonTimeOut))||(empty($this->goFonTimeOut)))){
-      $message[] = _("Timeout must be numeric");
+      $message[] = _("Retry must be numeric");
     }
     if(!((is_numeric($this->goFonMaxLen))||(empty($this->goFonMaxLen)))){
       $message[] = _("Queue length must be numeric");
@@ -325,15 +325,14 @@ class phonequeue extends plugin
           $this->goFonDialOption_H.
           "|".  // Optionalurl egal
           "|".  // announceoverride
-          "|".  // Timeout
-          $this->goFonTimeOut;     
+          "|";  // Timeout
 
-        $i ++ ; 
-        $a_ext[$i]['context']  = 'GOsa';
-        $a_ext[$i]['exten']    = $num;
-        $a_ext[$i]['priority'] = 6;
-        $a_ext[$i]['app']      = "SetVar";
-        $a_ext[$i]['appdata']  = "Queue_Prio=".$prio;
+//        $i ++ ; 
+//        $a_ext[$i]['context']  = 'GOsa';
+//        $a_ext[$i]['exten']    = $num;
+//        $a_ext[$i]['priority'] = 6;
+//        $a_ext[$i]['app']      = "SetVar";
+//        $a_ext[$i]['appdata']  = "Queue_Prio=".$prio;
         $i ++ ;
 
         /* Generate Priority Entry */
@@ -343,7 +342,7 @@ class phonequeue extends plugin
         $queue["queue_holdtime"]        = $this->goFonAnnounce;
         $queue["queue_lessthan"]        = "";   
         $queue["announce_round_seconds"]= "";   
-        $queue["retry"]                 = "";
+        $queue["retry"]                 = $this->goFonTimeOut;
         $queue["wrapuptime"]            = "";
         $queue["servicelevel"]          = "";
         $queue["joinempty"]             = "";
@@ -357,7 +356,7 @@ class phonequeue extends plugin
 
         $queue["context"]               = "default";
         $queue["name"]                  = $this->attrs['cn'][0];  
-        $queue["timeout"]               = $this->goFonTimeOut;
+        $queue["timeout"]               = 20; 
         $queue["maxlen"]                = $this->goFonMaxLen;
         $queue["strategy" ]             = $this->goFonStrategy;
         $queue["queue_thankyou"]        = $this->goFonQueueThankYou;   

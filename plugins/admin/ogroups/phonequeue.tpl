@@ -36,7 +36,7 @@
 		</tr>
 		<tr>
 		<td>
-			{t}Timeout{/t}
+			{t}Retry{/t}
 		</td>
 		<td>
 			<input name='goFonTimeOut' value='{$goFonTimeOut}' {$goFonTimeOutACL}>
