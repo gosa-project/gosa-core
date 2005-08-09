@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-08-09 15:12+0200\n"
+"PO-Revision-Date: 2005-08-09 15:52+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6617,7 +6617,7 @@ msgstr "Bitte geben Sie mindestens eine Telefonnummer an!"
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:778
 #, php-format
 msgid "You need to specify a Phone PIN."
-msgstr "Die Eingabe einer Telefon-PIN wird benötigt."
+msgstr "Die Eingabe einer Telefon-PIN ist erforderlicht."
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:781
 #, php-format
