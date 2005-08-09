@@ -146,7 +146,7 @@ msgstr ""
 msgid "{LOCATIONNAME}"
 msgstr ""
 
-#: contrib/gosa.conf:186
+#: contrib/gosa.conf:186 plugins/admin/ogroups/class_phonequeue.inc:130
 msgid "German"
 msgstr ""
 
@@ -5821,116 +5821,6 @@ msgstr ""
 msgid "Display object groups matching"
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:79
-msgid "Remove the phone queue from this Account"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:80
-msgid ""
-"Phone queue is enabled for this group. You can disable it by clicking below."
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:82
-msgid "Create phone queue"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:82
-msgid ""
-"For this group the phone queues are disabled. You can enable them by "
-"clicking below."
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:130
-msgid "Germany"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:130
-msgid "Uruguai"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:131
-msgid "No"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:131
-msgid "Yes"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:132
-msgid "ring all available channels until one answers"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:133
-msgid "take turns ringing each available interface"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:134
-msgid "ring interface which was least recently called by this queue"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:135
-msgid "ring the one with fewest completed calls from this queue"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:136
-msgid "ring random interface"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:137
-msgid "round robin with memory, remember where we left off last ring pass"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:175
-msgid "Retry must be numeric"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:178
-msgid "Queue length must be numeric"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:181
-msgid "Announce frequency must be numeric"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:184
-msgid "There must be least one queue number defined."
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:207
-#: plugins/admin/ogroups/class_phonequeue.inc:507
-#: plugins/gofon/macro/class_gofonMacro.inc:181
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:218
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:926
-#, php-format
-msgid ""
-"The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql "
-"error."
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:217
-#: plugins/admin/ogroups/class_phonequeue.inc:517
-#: plugins/gofon/macro/class_gofonMacro.inc:192
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:229
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:937
-#, php-format
-msgid "Can't select database %s on %s."
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:251
-#: plugins/admin/ogroups/class_phonequeue.inc:406
-#: plugins/admin/ogroups/class_phonequeue.inc:557
-#, php-format
-msgid "Can't delete in Database %s, on Server %s."
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:435
-#: plugins/admin/ogroups/class_phonequeue.inc:437
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1030
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1032
-#, php-format
-msgid "The specified telephonenumber '%s' is already assigned to '%s'."
-msgstr ""
-
 #: plugins/admin/ogroups/phonequeue.tpl:1
 msgid "Queue Settings"
 msgstr ""
@@ -6040,6 +5930,112 @@ msgstr ""
 
 #: plugins/admin/ogroups/phonequeue.tpl:208
 msgid "Hold sound file"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:79
+msgid "Remove the phone queue from this Account"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:80
+msgid ""
+"Phone queue is enabled for this group. You can disable it by clicking below."
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:82
+msgid "Create phone queue"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:82
+msgid ""
+"For this group the phone queues are disabled. You can enable them by "
+"clicking below."
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:130
+msgid "Uruguai"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:131
+msgid "No"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:131
+msgid "Yes"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:132
+msgid "ring all available channels until one answers"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:133
+msgid "take turns ringing each available interface"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:134
+msgid "ring interface which was least recently called by this queue"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:135
+msgid "ring the one with fewest completed calls from this queue"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:136
+msgid "ring random interface"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:137
+msgid "round robin with memory, remember where we left off last ring pass"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:175
+msgid "Retry must be numeric"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:178
+msgid "Queue length must be numeric"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:181
+msgid "Announce frequency must be numeric"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:184
+msgid "There must be least one queue number defined."
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:207
+#: plugins/admin/ogroups/class_phonequeue.inc:507
+#: plugins/gofon/macro/class_gofonMacro.inc:181
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:218
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:926
+#, php-format
+msgid ""
+"The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql "
+"error."
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:217
+#: plugins/admin/ogroups/class_phonequeue.inc:517
+#: plugins/gofon/macro/class_gofonMacro.inc:192
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:229
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:937
+#, php-format
+msgid "Can't select database %s on %s."
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:251
+#: plugins/admin/ogroups/class_phonequeue.inc:406
+#: plugins/admin/ogroups/class_phonequeue.inc:557
+#, php-format
+msgid "Can't delete in Database %s, on Server %s."
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:435
+#: plugins/admin/ogroups/class_phonequeue.inc:437
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1030
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1032
+#, php-format
+msgid "The specified telephonenumber '%s' is already assigned to '%s'."
 msgstr ""
 
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:25

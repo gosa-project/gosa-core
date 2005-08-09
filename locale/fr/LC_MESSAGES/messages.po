@@ -182,7 +182,7 @@ msgstr "Importer un fichier CSV"
 msgid "{LOCATIONNAME}"
 msgstr ""
 
-#: contrib/gosa.conf:186
+#: contrib/gosa.conf:186 plugins/admin/ogroups/class_phonequeue.inc:130
 msgid "German"
 msgstr "Allemand"
 
@@ -6186,128 +6186,6 @@ msgstr "Afficher les groupes contenant des imprimantes"
 msgid "Display object groups matching"
 msgstr "Afficher les groupes d'objets correspondants"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:79
-#, fuzzy
-msgid "Remove the phone queue from this Account"
-msgstr "Supprimer l'extension téléphonique"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:80
-#, fuzzy
-msgid ""
-"Phone queue is enabled for this group. You can disable it by clicking below."
-msgstr ""
-"Une extension téléphone existe pour cet utilisateur. Vous pouvez la "
-"supprimer en cliquant sur le bouton ci-dessous."
-
-#: plugins/admin/ogroups/class_phonequeue.inc:82
-#, fuzzy
-msgid "Create phone queue"
-msgstr "Créer un compte téléphone"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:82
-#, fuzzy
-msgid ""
-"For this group the phone queues are disabled. You can enable them by "
-"clicking below."
-msgstr ""
-"Aucun extension téléphone n'existe pour cet utilisateur. Vous pouvez en "
-"créer une en cliquant sur le bouton ci-dessous."
-
-#: plugins/admin/ogroups/class_phonequeue.inc:130
-#, fuzzy
-msgid "Germany"
-msgstr "Allemand"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:130
-msgid "Uruguai"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:131
-msgid "No"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:131
-#, fuzzy
-msgid "Yes"
-msgstr "oui"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:132
-msgid "ring all available channels until one answers"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:133
-msgid "take turns ringing each available interface"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:134
-msgid "ring interface which was least recently called by this queue"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:135
-msgid "ring the one with fewest completed calls from this queue"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:136
-msgid "ring random interface"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:137
-msgid "round robin with memory, remember where we left off last ring pass"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:175
-msgid "Retry must be numeric"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:178
-msgid "Queue length must be numeric"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:181
-msgid "Announce frequency must be numeric"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:184
-msgid "There must be least one queue number defined."
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:207
-#: plugins/admin/ogroups/class_phonequeue.inc:507
-#: plugins/gofon/macro/class_gofonMacro.inc:181
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:218
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:926
-#, php-format
-msgid ""
-"The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql "
-"error."
-msgstr ""
-"Le serveur MySQL '%s' n'est pas joignable avec l'utilisateur '%s', veuillez "
-"vérifier les logs GOsa pour les erreurs mysql."
-
-#: plugins/admin/ogroups/class_phonequeue.inc:217
-#: plugins/admin/ogroups/class_phonequeue.inc:517
-#: plugins/gofon/macro/class_gofonMacro.inc:192
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:229
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:937
-#, php-format
-msgid "Can't select database %s on %s."
-msgstr "Impossible de sélectionner la base de données %s située sur %s."
-
-#: plugins/admin/ogroups/class_phonequeue.inc:251
-#: plugins/admin/ogroups/class_phonequeue.inc:406
-#: plugins/admin/ogroups/class_phonequeue.inc:557
-#, fuzzy, php-format
-msgid "Can't delete in Database %s, on Server %s."
-msgstr "Impossible de sélectionner la base de données %s située sur %s."
-
-#: plugins/admin/ogroups/class_phonequeue.inc:435
-#: plugins/admin/ogroups/class_phonequeue.inc:437
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1030
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1032
-#, php-format
-msgid "The specified telephonenumber '%s' is already assigned to '%s'."
-msgstr ""
-
 #: plugins/admin/ogroups/phonequeue.tpl:1
 #, fuzzy
 msgid "Queue Settings"
@@ -6425,6 +6303,123 @@ msgstr ""
 
 #: plugins/admin/ogroups/phonequeue.tpl:208
 msgid "Hold sound file"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:79
+#, fuzzy
+msgid "Remove the phone queue from this Account"
+msgstr "Supprimer l'extension téléphonique"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:80
+#, fuzzy
+msgid ""
+"Phone queue is enabled for this group. You can disable it by clicking below."
+msgstr ""
+"Une extension téléphone existe pour cet utilisateur. Vous pouvez la "
+"supprimer en cliquant sur le bouton ci-dessous."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:82
+#, fuzzy
+msgid "Create phone queue"
+msgstr "Créer un compte téléphone"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:82
+#, fuzzy
+msgid ""
+"For this group the phone queues are disabled. You can enable them by "
+"clicking below."
+msgstr ""
+"Aucun extension téléphone n'existe pour cet utilisateur. Vous pouvez en "
+"créer une en cliquant sur le bouton ci-dessous."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:130
+msgid "Uruguai"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:131
+msgid "No"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:131
+#, fuzzy
+msgid "Yes"
+msgstr "oui"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:132
+msgid "ring all available channels until one answers"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:133
+msgid "take turns ringing each available interface"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:134
+msgid "ring interface which was least recently called by this queue"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:135
+msgid "ring the one with fewest completed calls from this queue"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:136
+msgid "ring random interface"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:137
+msgid "round robin with memory, remember where we left off last ring pass"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:175
+msgid "Retry must be numeric"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:178
+msgid "Queue length must be numeric"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:181
+msgid "Announce frequency must be numeric"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:184
+msgid "There must be least one queue number defined."
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:207
+#: plugins/admin/ogroups/class_phonequeue.inc:507
+#: plugins/gofon/macro/class_gofonMacro.inc:181
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:218
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:926
+#, php-format
+msgid ""
+"The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql "
+"error."
+msgstr ""
+"Le serveur MySQL '%s' n'est pas joignable avec l'utilisateur '%s', veuillez "
+"vérifier les logs GOsa pour les erreurs mysql."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:217
+#: plugins/admin/ogroups/class_phonequeue.inc:517
+#: plugins/gofon/macro/class_gofonMacro.inc:192
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:229
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:937
+#, php-format
+msgid "Can't select database %s on %s."
+msgstr "Impossible de sélectionner la base de données %s située sur %s."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:251
+#: plugins/admin/ogroups/class_phonequeue.inc:406
+#: plugins/admin/ogroups/class_phonequeue.inc:557
+#, fuzzy, php-format
+msgid "Can't delete in Database %s, on Server %s."
+msgstr "Impossible de sélectionner la base de données %s située sur %s."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:435
+#: plugins/admin/ogroups/class_phonequeue.inc:437
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1030
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1032
+#, php-format
+msgid "The specified telephonenumber '%s' is already assigned to '%s'."
 msgstr ""
 
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:25
@@ -8228,3 +8223,7 @@ msgstr ""
 "GOsa peut provoquer des erreurs PHP, particulièrement dans le cas des Beta "
 "versions. Dans certains cas il peut être intéressant d'activer l'affichage "
 "des erreurs. (Cela peut représenter un risque de sécurité)  "
+
+#, fuzzy
+#~ msgid "Germany"
+#~ msgstr "Allemand"

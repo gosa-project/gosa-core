@@ -127,7 +127,7 @@ class phonequeue extends plugin
 
     $smarty= get_smarty();
 
-    $smarty->assign("goFonLanguageOptions",array('de'=>_('Germany'),'ur'=>_('Uruguai')));
+    $smarty->assign("goFonLanguageOptions",array('de'=>_('German'),'ur'=>_('Uruguai')));
     $smarty->assign("goFonAnnounceHoldtimeOptions",array('no'=>_("No"),'yes'=>_('Yes')));
     $smarty->assign("goFonStrategyOptions",array('ringall'    =>_("ring all available channels until one answers"),
           'roundrobin' =>_("take turns ringing each available interface"),
