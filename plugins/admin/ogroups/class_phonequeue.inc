@@ -20,7 +20,7 @@ class phonequeue extends plugin
   var $goFonWelcomeMusic        ="gonicus-berlin-welcome";
   var $goFonQueueReportHold     ="yes";
   var $goFonQueueYouAreNext     ="queue-youarenext";
-  var $goFonQueueThereAre       ="queue-therare";
+  var $goFonQueueThereAre       ="queue-thereare";
   var $goFonQueueCallsWaiting   ="queue-callswaiting";
   var $goFonQueueThankYou       ="queue-thankyou";
   var $goFonQueueMinutes        ="queue-minutes"; 
@@ -309,8 +309,8 @@ class phonequeue extends plugin
           $a_ext[$i]['context']  = 'GOsa';
           $a_ext[$i]['exten']    = $num;
           $a_ext[$i]['priority'] = 1;
-          $a_ext[$i]['app']      = "Wait";
-          $a_ext[$i]['appdata']  = "2";
+          $a_ext[$i]['app']      = "SetLanguage";
+          $a_ext[$i]['appdata']  = "de";
           $i ++ ; 
           
           $a_ext[$i]['context']  = 'GOsa';
@@ -337,8 +337,8 @@ class phonequeue extends plugin
           $a_ext[$i]['context']  = 'GOsa';
           $a_ext[$i]['exten']    = $num;
           $a_ext[$i]['priority'] = 2;
-          $a_ext[$i]['app']      = "Set";
-          $a_ext[$i]['appdata']  = "LANGUAGE|".$this->goFonQueueLanguage;
+          $a_ext[$i]['app']      = "SetLanguage";
+          $a_ext[$i]['appdata']  = $this->goFonQueueLanguage;
           $i ++ ; 
           $a_ext[$i]['context']  = 'GOsa';
           $a_ext[$i]['exten']    = $num;
@@ -359,6 +359,12 @@ class phonequeue extends plugin
           $a_ext[$i]['context']  = 'GOsa';
           $a_ext[$i]['exten']    = $num;
           $a_ext[$i]['priority'] = 5;
+          $a_ext[$i]['app']      = "SetVar";
+          $a_ext[$i]['appdata']  =  $prio;
+          $i ++ ; 
+          $a_ext[$i]['context']  = 'GOsa';
+          $a_ext[$i]['exten']    = $num;
+          $a_ext[$i]['priority'] = 6;
           $a_ext[$i]['app']      = "Queue";
           $a_ext[$i]['appdata']  =  $this->attrs['cn'][0].
             "|".
