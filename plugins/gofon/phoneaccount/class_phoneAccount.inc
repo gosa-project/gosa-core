@@ -204,8 +204,34 @@ class phoneAccount extends plugin
   function generate_mysql_entension_entries($save = false){
 
     // Get Configuration for Mysql database Server
-    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
-    $s_parameter  ="";
+    $a_SETUP        = $_SESSION['config']->data['SERVERS']['FON'];  // DB Configuration
+    $s_parameter    = "";                                           // Contains paramter for selected Macro 
+    $r_con          = false;                                        // DB connection
+    $r_db           = false;                                        // Selected DB
+    $r_res          = false;                                        // Result resource
+    $a_ldap_attrs   = array();                                      //  
+
+    $s_ip           = NULL;                   // Contains ip for Sip entry
+    $s_host         = NULL;                   // Contains host for Sip entry
+    $s_qualify      = NULL;                   // Qualify entry
+    $s_pin          = NULL;                   // Entry for secret
+    $s_type         = NULL;                   // Entry for phone type (friend , peer ..)
+
+    $sip_data_array = array();                // Contains complete sip entry, to generate SQL syntax
+    $i_old_key      = false;                  // Contains index for first old phonenumber, to delete old entries corectly
+    $i_new_key      = false;                  // Contains index for first new phonenumber, to generate new  entries corectly
+
+    $s_sip_values   = "";     // Contains string with all values for given attributes in SQL syntax
+    $s_sip_keys     = "";     // Contains all needed attributes to generate sip entry in DB
+
+    $s_sip_key      = "";     // Key for SIP entry index      
+    $s_sip_val      = "";     // Value for SIP entry index      
+
+    $b_first_deleted= false;  // Only delete first entry, 
+    $s_telenums     = "";     // for each value variable
+
+    $i_is_accounted =false;   // Ensure that extension entry, for name to number is only once in table
+
 
     // Connect to DB server
     $r_con =  @mysql_connect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
@@ -219,170 +245,159 @@ class phoneAccount extends plugin
     }
 
     // Select database for Extensions
-    $db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
+    $r_db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
 
     // Test if we have the database selected correctly
-    if(!$db){
+    if(!$r_db){
       $this->generate_error = sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']);
       gosa_log(mysql_error());
       return false;
     }
 
     // Get phonehardware to setup sip entry
-    $ldap= $this->config->get_ldap_link();
-    $res = $ldap->search("(&(objectClass=goFonHardware)(cn=".$this->goFonHardware."))", array('*'));
-    $attrs = $ldap->fetch();
-
-    // Attribute GoFonDefaultIP set ?
-    if(((isset($attrs['goFonDefaultIP'][0]))&&($attrs['goFonDefaultIP'][0] != "dynamic"))){
-      $ip = $attrs['goFonDefaultIP'][0];
-      $host = $ip;
-    }else{
-      $ip = NULL;
-      $host = "dynamic";
-    }
-
-    // Attribute GoFonQualify set ?
-    if(!isset($attrs['goFonQualify'])){
-      $qualify = NULL;
-    }else{
-      $qualify = $attrs['goFonQualify'][0];
-    }
-
-    // Attribute GoFonPIN set ?
-    if(!isset($this->goFonPIN)){
-      $pin = NULL;
-    }else{
-      $pin = $this->goFonPIN;
-    }
-
-    // Attribute GoFonType set ?
-    if(!isset($attrs['goFonType'])){
-      $type = NULL;
-    }else{
-      $type = $attrs['goFonType'][0];
-    }
-
-    // generate SIP entry
-    $sip_data_array['id']           = "";
-    $sip_data_array['name']         = $this->uid;
-    $sip_data_array['accountcode']  = NULL;          
-    $sip_data_array['amaflags']     = NULL;
-    $sip_data_array['callgroup']    = NULL;
-    $sip_data_array['callerid']     = "";
-    $sip_data_array['canreinvite']  = "yes";
-
-    // Must be default and the name of an entry that already exists
-    $sip_data_array['context']      = "default";
-    $sip_data_array['defaultip']    = NULL;
-
-    if(isset($attrs['goFonDmtfMode'][0])){
-      $sip_data_array['dtmfmode']     = $attrs['goFonDmtfMode'][0];
-    }else{
-      $sip_data_array['dtmfmode']     ="rfc2833";
-    }
-    $sip_data_array['fromuser']     = NULL;
-    $sip_data_array['fromdomain']   = NULL;
-    $sip_data_array['host']         = $host;
-    $sip_data_array['insecure']     = NULL;
-    $sip_data_array['language']     = NULL;
-    $sip_data_array['mailbox']      = "asterisk";
-    $sip_data_array['md5secret']    = NULL;
-    $sip_data_array['nat']          = "no";
-    $sip_data_array['permit']       = NULL;
-    $sip_data_array['deny']         = NULL;
-    $sip_data_array['mask']         = NULL;
-    $sip_data_array['pickupgroup']  = NULL;
-    $sip_data_array['port']         = NULL;
-    $sip_data_array['qualify']      = $qualify;
-    $sip_data_array['restrictcid']  = "n";
-    $sip_data_array['rtptimeout']   = NULL;
-    $sip_data_array['rtpholdtimeout']=NULL;
-    $sip_data_array['secret']       = $pin;
-    $sip_data_array['type']         = $type ;
-    $sip_data_array['username']     = $this->uid;
-    $sip_data_array['disallow']     = NULL;
-    $sip_data_array['allow']        = NULL;
-    $sip_data_array['musiconhold']  = NULL;
-    $sip_data_array['regseconds']   = NULL;
-    $sip_data_array['ipaddr']       = $ip;
-    $sip_data_array['regexten']     = NULL;
-    $sip_data_array['cancallforward']=NULL;
-
-    // Get selected Macro Parameter and create parameter entry 
-    if(isset($this->macroarray[$this->macro])){
-      foreach($this->macroarray[$this->macro] as $key => $val ){
-        $s_parameter .= $val['choosen']."|";
-      }
-      $s_parameter = preg_replace("/\|$/","",$s_parameter);
-    }
-
-
-
-
-
-
-
-    // $SQL contains all queries
-    $SQL = array();
-    $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$this->uid."';\n";
-    $SQL[] = "DELETE FROM ".$a_SETUP['SIP_TABLE']." WHERE name='".$this->uid."';\n";
-
-    // Create new SIP entry ...
-    $sip_entry = $sip_data_array;
-
-    reset($this->phoneNumbers);
-    $key = key($this->phoneNumbers);
-    $sip_entry['callerid']  =$this->phoneNumbers[$key];
-    $sip_entry['mailbox']   =$this->phoneNumbers[$key];
+    $ldap         = $this->config->get_ldap_link();
+    $r_res        = $ldap->search("(&(objectClass=goFonHardware)(cn=".$this->goFonHardware."))", array('*'));
+    $a_ldap_attrs = $ldap->fetch();
 
     if($this->is_number_used()){
       $this->generate_error = $this->is_number_used(); 
       return false;
     }
 
+
+
+    /* If Save == true, we should save something.
+     * Generate SQL, for drop of old entries
+     * Generate SQL, for insert of new entries
+     */ 
     if($save == true){
-      if(isset($this->parent->by_object['mailAccount']->mail)){
-        $mail = $this->parent->by_object['mailAccount']->mail;
+      // Attribute GoFonDefaultIP set ?
+      if(((isset($a_ldap_attrs['goFonDefaultIP'][0]))&&($a_ldap_attrs['goFonDefaultIP'][0] != "dynamic"))){
+        $s_ip       = $a_ldap_attrs['goFonDefaultIP'][0];
+        $s_host     = $s_ip;
       }else{
-        $mail = "";
+        $s_ip       = NULL;
+        $s_host     = "dynamic";
       }
 
+      // Attribute GoFonQualify set ?
+      if(isset($a_ldap_attrs['goFonQualify'])){
+        $s_qualify = $a_ldap_attrs['goFonQualify'][0];
+      }
 
-      $SQL[]= "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$this->phoneNumbers[$key].";"; 
+      // Attribute GoFonPIN set ?
+      if(isset($this->goFonPIN)){
+        $s_pin      = $this->goFonPIN;
+      }
+
+      // Attribute GoFonType set ?
+      if(isset($a_ldap_attrs['goFonType'])){
+        $s_type = $a_ldap_attrs['goFonType'][0];
+      }
+
+      if(isset($a_ldap_attrs['goFonDmtfMode'][0])){
+        $sip_data_array['dtmfmode']     = $a_ldap_attrs['goFonDmtfMode'][0];
+      }else{
+        $sip_data_array['dtmfmode']     ="rfc2833";
+      }
+
+      // generate SIP entry
+      $sip_data_array['id']           = "";
+      $sip_data_array['name']         = $this->uid;
+      $sip_data_array['accountcode']  = NULL;          
+      $sip_data_array['amaflags']     = NULL;
+      $sip_data_array['callgroup']    = NULL;
+      $sip_data_array['callerid']     = "";
+      $sip_data_array['canreinvite']  = "yes";
+      $sip_data_array['context']      = "default";
+      $sip_data_array['defaultip']    = NULL;
+      $sip_data_array['fromuser']     = NULL;
+      $sip_data_array['fromdomain']   = NULL;
+      $sip_data_array['host']         = $s_host;
+      $sip_data_array['insecure']     = NULL;
+      $sip_data_array['language']     = NULL;
+      $sip_data_array['mailbox']      = "asterisk";
+      $sip_data_array['md5secret']    = NULL;
+      $sip_data_array['nat']          = "no";
+      $sip_data_array['permit']       = NULL;
+      $sip_data_array['deny']         = NULL;
+      $sip_data_array['mask']         = NULL;
+      $sip_data_array['pickupgroup']  = NULL;
+      $sip_data_array['port']         = NULL;
+      $sip_data_array['qualify']      = $s_qualify;
+      $sip_data_array['restrictcid']  = "n";
+      $sip_data_array['rtptimeout']   = NULL;
+      $sip_data_array['rtpholdtimeout']=NULL;
+      $sip_data_array['secret']       = $s_pin;
+      $sip_data_array['type']         = $s_type ;
+      $sip_data_array['username']     = $this->uid;
+      $sip_data_array['disallow']     = NULL;
+      $sip_data_array['allow']        = NULL;
+      $sip_data_array['musiconhold']  = NULL;
+      $sip_data_array['regseconds']   = NULL;
+      $sip_data_array['ipaddr']       = $s_ip;
+      $sip_data_array['regexten']     = NULL;
+      $sip_data_array['cancallforward']=NULL;
+
+      // Get selected Macro Parameter and create parameter entry 
+      if(isset($this->macroarray[$this->macro])){
+        foreach($this->macroarray[$this->macro] as $key => $val ){
+          $s_parameter .= $val['choosen']."|";
+        }
+        $s_parameter = preg_replace("/\|$/","",$s_parameter);
+      }
+
+      if($this->is_number_used()){
+        $this->generate_error = $this->is_number_used(); 
+        return false;
+      }
+
+      // Create new SIP entry ...
+      $sip_entry = $sip_data_array;
+      reset($this->phoneNumbers);
+      $i_new_key = key($this->phoneNumbers);
+      $sip_entry['callerid']  =$this->phoneNumbers[$i_new_key];
+      $sip_entry['mailbox']   =$this->phoneNumbers[$i_new_key];
+
+      if(isset($this->parent->by_object['mailAccount']->mail)){
+        $s_mail = $this->parent->by_object['mailAccount']->mail;
+      }else{
+        $s_mail = "";
+      }
+
+      // $SQL contains all queries
+      $SQL   = array();
+      $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$this->uid."';\n";
+      $SQL[] = "DELETE FROM ".$a_SETUP['SIP_TABLE']." WHERE name='".$this->uid."';\n";
+      $SQL[] = "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$this->phoneNumbers[$i_new_key].";"; 
 
       // Generate Strings with keys and values 
-      $values = "";
-      $keys   = "";
-      foreach($sip_entry as $key=>$val){
-        if($val == NULL) continue;
-        $values.="'".$val."',";
-        $keys  .="`".$key."`,";
+      foreach($sip_entry as $s_sip_key=>$s_sip_val){
+        if($s_sip_val == NULL) continue;
+        $s_sip_values.="'".$s_sip_val."',";
+        $s_sip_keys  .="`".$s_sip_key."`,";
       }
       // Remove last ,
-      $values =  preg_replace("/,$/","",$values);
-      $keys   =  preg_replace("/,$/","",$keys);
+      $s_sip_values =  preg_replace("/,$/","",$s_sip_values);
+      $s_sip_keys   =  preg_replace("/,$/","",$s_sip_keys);
 
       // Append SIP Entry 
-      $SQL[] ="INSERT INTO ".$a_SETUP['SIP_TABLE']." (".$keys.") VALUES (".$values.");";
+      $SQL[] ="INSERT INTO ".$a_SETUP['SIP_TABLE']." (".$s_sip_keys.") VALUES (".$s_sip_values.");";
 
       // Delete old entries
-      $first_deleted  =false;
+      $b_first_deleted  =false;
       foreach($this->a_old_telenums as $s_telenums){
         $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$s_telenums."';\n";
-        if(!$first_deleted){
-          $first_deleted=true;
+        if(!$b_first_deleted){
+          $b_first_deleted=true;
           $SQL[] = "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$s_telenums.";";
         }
       }
 
-      reset($this->phoneNumbers);
-      $key = key($this->phoneNumbers);
-
       $SQL[]= "INSERT INTO ".$a_SETUP['VOICE_TABLE']."
         (`customer_id`,`context`,`mailbox`,`password`,`fullname`,`email`,`pager`)
         VALUES
-        ('".$this->phoneNumbers[$key]."','default','".$this->phoneNumbers[$key]."','".$this->goFonPIN."','".$this->sn."','".$mail."','');";
+        ('".$this->phoneNumbers[$i_new_key]."','default','".$this->phoneNumbers[$i_new_key]."','".$this->goFonPIN."','".$this->sn."','".$s_mail."','');";
 
       $i_is_accounted=false;
 
@@ -474,7 +489,7 @@ class phoneAccount extends plugin
   function execute()
   {
     /* force postmodify event, to restart phones */
-    
+
     $this->parent->by_object['user']->is_modified=TRUE;
     $this->is_modified=TRUE; 
 
@@ -515,16 +530,16 @@ class phoneAccount extends plugin
 
       /* Automatic fill out */
       if(isset($_POST['fillout'])){
-      
+
         foreach($this->phoneNumbers as $phonenum){
           $tmp[] = $phonenum;
         }
 
         /* Go through all params */
         foreach($this->macroarray[$this->macro] as $key => $paras){
-          
+
           $string = $paras['default'];
-         
+
           $string=str_replace("%uid",$this->uid,$string);
           $string=str_replace("%cn",$this->cn,$string);
 
@@ -575,7 +590,7 @@ class phoneAccount extends plugin
           break;
 
           case "string":
-          $str="<input name='".$var."' value='".$choosen."' ".chkacl($this->acl, "goFonMacro").">";
+            $str="<input name='".$var."' value='".$choosen."' ".chkacl($this->acl, "goFonMacro").">";
           $macrotab.= "<td>$name</td><td>$str";
           break;
 
@@ -606,11 +621,11 @@ class phoneAccount extends plugin
             _("This account has phone features enabled. You can disable them by clicking below."));
       } else {
         if(empty($this->uid)){
-        $display= $this->show_header(_("Create phone account"),
-            _("This account has phone features disabled. You can't enable them while no uid is set."),TRUE,TRUE);
+          $display= $this->show_header(_("Create phone account"),
+              _("This account has phone features disabled. You can't enable them while no uid is set."),TRUE,TRUE);
         }else{
-        $display= $this->show_header(_("Create phone account"),
-            _("This account has phone features disabled. You can enable them by clicking below."));
+          $display= $this->show_header(_("Create phone account"),
+              _("This account has phone features disabled. You can enable them by clicking below."));
         }
         return ($display);
       }
@@ -752,31 +767,31 @@ class phoneAccount extends plugin
       if(isset($this->macroarray[$this->macro])){ 
         foreach($this->macroarray[$this->macro] as $key => $paras){
           if(isset($_POST[$paras['var']])){
-//            $par = $this->macroarray[$this->macro][$key];
-//            $string = "";
-//            if(preg_match("/.*%telephoneNumber_.*/",$par['default'])){
-//              $string = $par['default'];
-//              foreach($nummsinorder as $nummsinorderkey=> $nummsinorderval){
-//                $string = (str_replace("%telephoneNumber_".($nummsinorderkey+1),$nummsinorderval,$string));
-//              }
-//            }
-            
-//            if(preg_match("/.*%uid.*/",$par['default'])){
-//              if(empty($string)) $string = $par['default'];
-//              $string = str_replace("%uid",$this->uid,$string);
-//            }    
-  
-//            if(!empty($string)){  
-//              $this->macroarray[$this->macro][$key]['choosen'] = $string; 
-//            }else{
-              $this->macroarray[$this->macro][$key]['choosen'] = $_POST[$paras['var']];
-//            }
+            //            $par = $this->macroarray[$this->macro][$key];
+            //            $string = "";
+            //            if(preg_match("/.*%telephoneNumber_.*/",$par['default'])){
+            //              $string = $par['default'];
+            //              foreach($nummsinorder as $nummsinorderkey=> $nummsinorderval){
+            //                $string = (str_replace("%telephoneNumber_".($nummsinorderkey+1),$nummsinorderval,$string));
+            //              }
+            //            }
+
+            //            if(preg_match("/.*%uid.*/",$par['default'])){
+            //              if(empty($string)) $string = $par['default'];
+            //              $string = str_replace("%uid",$this->uid,$string);
+            //            }    
+
+            //            if(!empty($string)){  
+            //              $this->macroarray[$this->macro][$key]['choosen'] = $string; 
+            //            }else{
+            $this->macroarray[$this->macro][$key]['choosen'] = $_POST[$paras['var']];
+            //            }
           }
 
           /* Checkboxes are special, they are not Posted if they are not selected, so the won't be changed with the above code 
              We need this code below to read and save checkboxes correct
            */
-  
+
           if(isset($_POST['post_success'])){
             if($this->macroarray[$this->macro][$key]['type']=="bool"){
               if(isset($_POST[$this->macroarray[$this->macro][$key]['var']])) {
@@ -885,7 +900,7 @@ class phoneAccount extends plugin
     show_ldap_error($ldap->get_error());
 
     /* Optionally execute a command after we're done */
-    
+
     if ($this->initially_was_account == $this->is_account){
       if ($this->is_modified){
         $this->handle_post_events("modify");
