@@ -52,17 +52,18 @@ class phonequeue extends plugin
     /* Save initial account state */
     $this->initially_was_account= $this->is_account;
 
-    if(isset($this->attrs['telephoneNumber'])){
-      $this->telephoneNumber=$this->attrs['telephoneNumber'];
-      unset($this->telephoneNumber['count']); 
+    if($this->is_account){
+      if(isset($this->attrs['telephoneNumber'])){
+        $this->telephoneNumber=$this->attrs['telephoneNumber'];
+        unset($this->telephoneNumber['count']); 
+      }
+
+      for($i = 0; $i < strlen($this->goFonDialOption); $i++){
+        $name = "goFonDialOption_".$this->goFonDialOption[$i];
+        $this->$name=$this->goFonDialOption[$i];
+      }
     }
 
-
-    for($i = 0; $i < strlen($this->goFonDialOption); $i++){
-      $name = "goFonDialOption_".$this->goFonDialOption[$i];
-      $this->$name=$this->goFonDialOption[$i];
-    }
-    
     $this->old_phone_numbers = $this->telephoneNumber;
   }
 
@@ -160,9 +161,6 @@ class phonequeue extends plugin
   function check()
   {
     $message= array();
-  //  if(empty($this->description)){
-  //    $message[] = _("You must specify a description for this queue");
-  //  }
 
     if($this->is_number_used()){
       $message[] = $this->is_number_used();
@@ -221,8 +219,6 @@ class phonequeue extends plugin
       return( sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']));
     }
 
-
-
     if($save){
       $i = 0;
       $prio = 11; 
@@ -232,11 +228,6 @@ class phonequeue extends plugin
         $this->attrs['cn'][0] = $this->parent->by_object['ogroup']->cn;
       }
 
-      if(empty($this->description)){
-        $this->description = $this->parent->by_object['ogroup']->description;
-        $this->attrs['description'][0] = $this->parent->by_object['ogroup']->description;
-      }
-      
       // Delete old Entries 
       $delete = array();
       if(is_array($this->old_phone_numbers)){
@@ -315,7 +306,7 @@ class phonequeue extends plugin
         $a_ext[$i]['exten']    = $num;
         $a_ext[$i]['priority'] = 4;
         $a_ext[$i]['app']      = "SetCIDName";
-        $a_ext[$i]['appdata']  = $this->attrs['description'][0];
+        $a_ext[$i]['appdata']  = $this->parent->by_object['ogroup']->description;
         $i ++ ; 
         $a_ext[$i]['context']  = 'GOsa';
         $a_ext[$i]['exten']    = $num;
@@ -475,7 +466,7 @@ class phonequeue extends plugin
     }
     $this->generate_mysql_entension_entries(true);
     if($this->attrs['goFonDialOption']=="") $this->attrs['goFonDialOption']=array();
-
+    
     /* Save data to LDAP */
     $ldap->cd($this->dn);
     $ldap->modify($this->attrs);
@@ -538,11 +529,6 @@ class phonequeue extends plugin
     if(empty($this->cn)){
       $this->cn = $this->parent->by_object['ogroup']->cn;
       $this->attrs['cn'][0] = $this->parent->by_object['ogroup']->cn;
-    }
-
-    if(empty($this->description)){
-      $this->description = $this->parent->by_object['ogroup']->description;
-      $this->attrs['description'][0] = $this->parent->by_object['ogroup']->description;
     }
 
     // Delete old Entries
