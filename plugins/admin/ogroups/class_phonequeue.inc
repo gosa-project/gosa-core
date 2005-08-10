@@ -161,6 +161,7 @@ class phonequeue extends plugin
   function check()
   {
     $message= array();
+	  if(!$this->is_account) return($message);
 
     if($this->is_number_used()){
       $message[] = $this->is_number_used();
@@ -249,6 +250,7 @@ class phonequeue extends plugin
 
       /* Append new Member for this queue */ 
       $i = 0;
+      $queueuser =array();
       foreach($this->parent->by_object['ogroup']->memberList as $member){
         if(in_array("goFonAccount",$member['objectClass'])){
           $i ++ ;
@@ -259,17 +261,19 @@ class phonequeue extends plugin
       }
 
       /* Parse and Add members to query Array */
-      foreach($queueuser as $user){
-        $entries = "";
-        $values  = "";
-        foreach($user as $attr => $val){
-          $entries.= "`".$attr."`,"; 
-          $values .= "'".$val."',";
+      if(is_array($queueuser)){
+        foreach($queueuser as $user){
+          $entries = "";
+          $values  = "";
+          foreach($user as $attr => $val){
+            $entries.= "`".$attr."`,"; 
+            $values .= "'".$val."',";
+          }
+          $values  = preg_replace("/,$/","",$values);
+          $entries = preg_replace("/,$/","",$entries );
+
+          $SQL[]="INSERT INTO ".$a_SETUP['QUEUE_MEMBER_TABLE']." (".$entries.") VALUES (".$values.")"; 
         }
-        $values  = preg_replace("/,$/","",$values);
-        $entries = preg_replace("/,$/","",$entries );
-        
-        $SQL[]="INSERT INTO ".$a_SETUP['QUEUE_MEMBER_TABLE']." (".$entries.") VALUES (".$values.")"; 
       }
       
 
@@ -456,6 +460,7 @@ class phonequeue extends plugin
 
   function save()
   {
+	if(!$this->is_account) return;
     $ldap= $this->config->get_ldap_link();
 
     plugin::save();
