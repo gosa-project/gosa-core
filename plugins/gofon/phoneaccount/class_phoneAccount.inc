@@ -332,7 +332,6 @@ class phoneAccount extends plugin
     $sip_entry = $sip_data_array;
 
     reset($this->phoneNumbers);
-
     $key = key($this->phoneNumbers);
     $sip_entry['callerid']  =$this->phoneNumbers[$key];
     $sip_entry['mailbox']   =$this->phoneNumbers[$key];
@@ -350,11 +349,7 @@ class phoneAccount extends plugin
       }
 
 
-      $SQL[]= "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id='".$this->phoneNumbers[$key]."';"; 
-      $SQL[]= "INSERT INTO ".$a_SETUP['VOICE_TABLE']." 
-        (`customer_id`,`context`,`mailbox`,`password`,`fullname`,`email`,`pager`) 
-        VALUES 
-        ('".$this->phoneNumbers[$key]."','default','".$this->phoneNumbers[$key]."','".$this->goFonPIN."','".$this->sn."','".$mail."','');";
+      $SQL[]= "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$this->phoneNumbers[$key].";"; 
 
       // Generate Strings with keys and values 
       $values = "";
@@ -372,9 +367,22 @@ class phoneAccount extends plugin
       $SQL[] ="INSERT INTO ".$a_SETUP['SIP_TABLE']." (".$keys.") VALUES (".$values.");";
 
       // Delete old entries
+      $first_deleted  =false;
       foreach($this->a_old_telenums as $s_telenums){
         $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$s_telenums."';\n";
+        if(!$first_deleted){
+          $first_deleted=true;
+          $SQL[] = "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$s_telenums.";";
+        }
       }
+
+      reset($this->phoneNumbers);
+      $key = key($this->phoneNumbers);
+
+      $SQL[]= "INSERT INTO ".$a_SETUP['VOICE_TABLE']."
+        (`customer_id`,`context`,`mailbox`,`password`,`fullname`,`email`,`pager`)
+        VALUES
+        ('".$this->phoneNumbers[$key]."','default','".$this->phoneNumbers[$key]."','".$this->goFonPIN."','".$this->sn."','".$mail."','');";
 
       $i_is_accounted=false;
 
