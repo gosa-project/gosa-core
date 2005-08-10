@@ -122,6 +122,14 @@
 			{t}Allows calling to hangup by pressing *{/t}
 		</td>
 		</tr>
+		<tr>
+		<td>
+		</td>
+		<td>
+			<input type="checkbox" name='goFonDialOption_r' value='r' {$goFonDialOption_rCHK} {$goFonDialOption_rACL}>
+			{t}Ring instead of playing background music{/t}
+		</td>
+		</tr>
 		</table>
 </td>
 <td valign='top' style="border-left: 1px solid rgb(160, 160, 160);">

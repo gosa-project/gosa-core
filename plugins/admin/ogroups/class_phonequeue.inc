@@ -7,26 +7,27 @@ class phonequeue extends plugin
   var $cn= "";
 
 
-  var $goFonTimeOut             ="5"; 
-  var $goFonMaxLen              ="20";
-  var $goFonAnnounceFrequency   ="60";
-  var $goFonDialOption_t        ="t";
-  var $goFonDialOption_T        ="T";
-  var $goFonDialOption_h        ="h";
-  var $goFonQueueAnnounce            ="gonicus-berlin-welcome";
-  var $goFonDialOption_H        ="H";
+  var $goFonTimeOut             ="20"; 
+  var $goFonMaxLen              ="20"; // 
+  var $goFonAnnounceFrequency   ="60"; // Annouce Frequency in seconds
+  var $goFonDialOption_t        ="";
+  var $goFonDialOption_T        ="";
+  var $goFonDialOption_h        ="";
+  var $goFonDialOption_r        ="";
+  var $goFonQueueAnnounce       ="gonicus-berlin-welcome";
+  var $goFonDialOption_H        ="";
   var $goFonMusiconHold         ="default";
   var $goFonWelcomeMusic        ="gonicus-berlin-welcome";
-  var $goFonQueueReportHold     ="";
+  var $goFonQueueReportHold     ="yes";
   var $goFonQueueYouAreNext     ="queue-youarenext";
   var $goFonQueueThereAre       ="queue-therare";
   var $goFonQueueCallsWaiting   ="queue-callswaiting";
   var $goFonQueueThankYou       ="queue-thankyou";
   var $goFonQueueMinutes        ="queue-minutes"; 
   var $goFonQueueSeconds        ="queue-seconds";
-  var $goFonQueueLanguage            ="queue-holdtime";
-  var $goFonQueueStrategy            ="rrmemory";
-  var $goFonQueueAnnounceHoldtime    ="yes";
+  var $goFonQueueLanguage       ="queue-holdtime";
+  var $goFonQueueStrategy       ="ringall";
+  var $goFonQueueAnnounceHoldtime="yes";
   var $telephoneNumber          =array();
   var $goFonQueueMember         =array(); 
   var $goFonDialOption          ="tThH";
@@ -35,7 +36,8 @@ class phonequeue extends plugin
   var $old_phone_numbers        =array();
 
   /* attribute list for save action */
-  var $attributes= array( "goFonTimeOut","goFonMaxLen","goFonAnnounceFrequency","goFonDialOption_t","goFonDialOption_T","goFonDialOption_h",
+  var $attributes= array( "goFonTimeOut","goFonMaxLen","goFonAnnounceFrequency","goFonDialOption_t","goFonDialOption_T",
+      "goFonDialOption_h","goFonDialOption_r",
       "goFonDialOption_H","goFonMusiconHold","goFonWelcomeMusic","goFonQueueReportHold","goFonQueueYouAreNext",
       "goFonQueueThereAre","goFonQueueCallsWaiting","goFonQueueThankYou","goFonQueueMinutes","goFonQueueSeconds",
       "telephoneNumber","goFonQueueLanguage","goFonQueueStrategy","goFonQueueAnnounceHoldtime","goFonQueueAnnounce","goFonDialOption","goFonQueueRetry");
@@ -161,6 +163,7 @@ class phonequeue extends plugin
   function check()
   {
     $message= array();
+  #fixme workaround : Tab is not initialised correct
 	  if(!$this->is_account) return($message);
 
     if($this->is_number_used()){
@@ -278,61 +281,93 @@ class phonequeue extends plugin
       
 
       /* generate Extension entries, with priority  */
+
+      $queueusers=0;
+      foreach($this->parent->by_object['ogroup']->memberList as $member){
+        if(in_array("goFonAccount",$member['objectClass'])){
+          $queueusers++;
+        }
+      }
+
+
       $i = 0;
       foreach($this->telephoneNumber as $num){
+       
+        // If there are no member in a Queue
+        // Play sound an quit
+
+        // A Queue is not deleted directly, it is stored until the o group is deleted
         
-        $prio --;
         $a_ext[$i]['context']  = 'GOsa';
         $a_ext[$i]['exten']    = $this->attrs['cn'][0];
         $a_ext[$i]['priority'] = 1;
         $a_ext[$i]['app']      = "Goto";
         $a_ext[$i]['appdata']  = $num."|1";
         $i ++ ; 
-        $a_ext[$i]['context']  = 'GOsa';
-        $a_ext[$i]['exten']    = $num;
-        $a_ext[$i]['priority'] = 1;
-        $a_ext[$i]['app']      = "Wait";
-        $a_ext[$i]['appdata']  = "2";
-        $i ++ ; 
-        $a_ext[$i]['context']  = 'GOsa';
-        $a_ext[$i]['exten']    = $num;
-        $a_ext[$i]['priority'] = 2;
-        $a_ext[$i]['app']      = "Set";
-        $a_ext[$i]['appdata']  = "LANGUAGE|".$this->goFonQueueLanguage;
-        $i ++ ; 
-        $a_ext[$i]['context']  = 'GOsa';
-        $a_ext[$i]['exten']    = $num;
-        $a_ext[$i]['priority'] = 3;
-        $a_ext[$i]['app']      = "Playback";
-        $a_ext[$i]['appdata']  = $this->goFonWelcomeMusic;
-        $i ++ ; 
-        $a_ext[$i]['context']  = 'GOsa';
-        $a_ext[$i]['exten']    = $num;
-        $a_ext[$i]['priority'] = 4;
-        $a_ext[$i]['app']      = "SetCIDName";
-        $a_ext[$i]['appdata']  = $this->parent->by_object['ogroup']->description;
-        $i ++ ; 
-        $a_ext[$i]['context']  = 'GOsa';
-        $a_ext[$i]['exten']    = $num;
-        $a_ext[$i]['priority'] = 5;
-        $a_ext[$i]['app']      = "Queue";
-        $a_ext[$i]['appdata']  =  $this->attrs['cn'][0].
-          "|".
-          $this->goFonDialOption_t.
-          $this->goFonDialOption_T.
-          $this->goFonDialOption_h.
-          $this->goFonDialOption_H.
-          "|".  // Optionalurl egal
-          "|".  // announceoverride
-          "|";  // Timeout
-
-//        $i ++ ; 
-//        $a_ext[$i]['context']  = 'GOsa';
-//        $a_ext[$i]['exten']    = $num;
-//        $a_ext[$i]['priority'] = 6;
-//        $a_ext[$i]['app']      = "SetVar";
-//        $a_ext[$i]['appdata']  = "Queue_Prio=".$prio;
-        $i ++ ;
+    
+        if($queueusers == 0){
+          $a_ext[$i]['context']  = 'GOsa';
+          $a_ext[$i]['exten']    = $num;
+          $a_ext[$i]['priority'] = 1;
+          $a_ext[$i]['app']      = "Wait";
+          $a_ext[$i]['appdata']  = "2";
+          $i ++ ; 
+          
+          $a_ext[$i]['context']  = 'GOsa';
+          $a_ext[$i]['exten']    = $num;
+          $a_ext[$i]['priority'] = 2;
+          $a_ext[$i]['app']      = "Playback";
+          $a_ext[$i]['appdata']  = "ss-noservice";
+          $i ++ ; 
+          
+          $a_ext[$i]['context']  = 'GOsa';
+          $a_ext[$i]['exten']    = $num;
+          $a_ext[$i]['priority'] = 3;
+          $a_ext[$i]['app']      = "Goto";
+          $a_ext[$i]['appdata']  = "default";
+          $i ++ ; 
+        }else{
+          $prio --;
+          $a_ext[$i]['context']  = 'GOsa';
+          $a_ext[$i]['exten']    = $num;
+          $a_ext[$i]['priority'] = 1;
+          $a_ext[$i]['app']      = "Wait";
+          $a_ext[$i]['appdata']  = "2";
+          $i ++ ; 
+          $a_ext[$i]['context']  = 'GOsa';
+          $a_ext[$i]['exten']    = $num;
+          $a_ext[$i]['priority'] = 2;
+          $a_ext[$i]['app']      = "Set";
+          $a_ext[$i]['appdata']  = "LANGUAGE|".$this->goFonQueueLanguage;
+          $i ++ ; 
+          $a_ext[$i]['context']  = 'GOsa';
+          $a_ext[$i]['exten']    = $num;
+          $a_ext[$i]['priority'] = 3;
+          $a_ext[$i]['app']      = "Playback";
+          $a_ext[$i]['appdata']  = $this->goFonWelcomeMusic;
+          $i ++ ; 
+          $a_ext[$i]['context']  = 'GOsa';
+          $a_ext[$i]['exten']    = $num;
+          $a_ext[$i]['priority'] = 4;
+          $a_ext[$i]['app']      = "SetCIDName";
+          if(!empty($this->parent->by_object['ogroup']->description)){
+            $a_ext[$i]['appdata']  = $this->parent->by_object['ogroup']->description;
+          }else{
+            $a_ext[$i]['appdata']  = $this->attrs['cn'][0]." - ".$num;
+          }
+          $i ++ ; 
+          $a_ext[$i]['context']  = 'GOsa';
+          $a_ext[$i]['exten']    = $num;
+          $a_ext[$i]['priority'] = 5;
+          $a_ext[$i]['app']      = "Queue";
+          $a_ext[$i]['appdata']  =  $this->attrs['cn'][0].
+            "|".
+            $this->goFonDialOption_t.
+            $this->goFonDialOption_T.
+            $this->goFonDialOption_h.
+            $this->goFonDialOption_H.
+            $this->goFonDialOption_r;
+        }
 
         /* Generate Priority Entry */
         $queue["announce"]              = "";
@@ -344,11 +379,11 @@ class phonequeue extends plugin
         $queue["retry"]                 = $this->goFonQueueRetry;
         $queue["wrapuptime"]            = "";
         $queue["servicelevel"]          = "";
-        $queue["joinempty"]             = "";
-        $queue["leavewhenempty"]        = "";   
+        $queue["joinempty"]             = "no";
+        $queue["leavewhenempty"]        = "yes";   
         $queue["eventmemberstatus"]     = "";
         $queue["eventwhencalled"]       = "";
-        $queue["reportholdtime"]        = "";
+        $queue["reportholdtime"]        = "yes";
         $queue["memberdelay"]           = "";
         $queue["weight"]                = "";
         $queue["timeoutrestart"]        = "";
@@ -447,7 +482,7 @@ class phonequeue extends plugin
   {
     plugin::save_object();  
     if(isset($_POST['phonenumber'])){
-      foreach(array("goFonDialOption_t","goFonDialOption_T","goFonDialOption_h","goFonDialOption_H","goFonMusiconHold") as $val){
+      foreach(array("goFonDialOption_t","goFonDialOption_T","goFonDialOption_h","goFonDialOption_r","goFonDialOption_H","goFonMusiconHold") as $val){
         if(isset($_POST[$val])){
           $this->$val = $_POST[$val];
         }else{
@@ -460,12 +495,13 @@ class phonequeue extends plugin
 
   function save()
   {
+  #fixme workaround : Tab is not initialised correct
 	if(!$this->is_account) return;
     $ldap= $this->config->get_ldap_link();
 
     plugin::save();
     $this->attrs['goFonDialOption'] = "";
-    foreach(array("goFonDialOption_t","goFonDialOption_T","goFonDialOption_h","goFonDialOption_H") as $val){
+    foreach(array("goFonDialOption_t","goFonDialOption_T","goFonDialOption_r","goFonDialOption_h","goFonDialOption_H") as $val){
       $this->attrs['goFonDialOption'].=$this->$val; 
       unset($this->attrs[$val]); 
     }
@@ -518,7 +554,7 @@ class phonequeue extends plugin
     }
 
     $tmp = array_flip($this->attributes);
-    foreach(array("goFonDialOption_t","goFonDialOption_T","goFonDialOption_h","goFonDialOption_H") as $val){
+    foreach(array("goFonDialOption_t","goFonDialOption_T","goFonDialOption_r","goFonDialOption_h","goFonDialOption_H") as $val){
       unset($this->$val);
       unset($this->attrs[$val]);
       unset($tmp[$val]);
