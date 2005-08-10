@@ -44,9 +44,6 @@ class mailMethodKolab extends mailMethodCyrus
     return (TRUE);
   }
 
-  function setSharedFolderPermissions($folder, $permissions)
-  {
-  }
 
   function deleteMailbox($folder)
   {
@@ -63,12 +60,6 @@ class mailMethodKolab extends mailMethodCyrus
         unset ($mailObject->attrs[$source]);
       }
     }
-    // without this line gosaMailQuota is in MB instead of KB 
-    if(isset($mailObject->attrs['gosaMailQuota'][0])){
-      $mailObject->gosaMailQuota=$mailObject->attrs['gosaMailQuota'][0];
-    }  
-    
-    
 
     /* Adjust server name if needed */
     foreach ($mailObject->config->data['SERVERS']['IMAP'] as $srv => $dummy){
@@ -91,15 +82,33 @@ class mailMethodKolab extends mailMethodCyrus
     }
     $objectclasses= array();
     foreach ($mailObject->attrs['objectClass'] as $oc){
-      if ($oc !=  'kolabInetOrgPerson'){
+      if ($oc !=  'kolabInetOrgPerson' && $oc !=  'kolabSharedFolder'){
         $objectclasses[]= $oc;
       }
     }
-
-    $mailObject->attrs['gosaMailQuota'] = ( $mailObject->gosaMailQuota/1024);
-
     $mailObject->attrs['objectClass']= $objectclasses;
-    $mailObject->attrs['objectClass'][]= 'kolabInetOrgPerson';
+    if (in_array("posixGroup", $mailObject->attrs['objectClass'])){
+      $mailObject->attrs['objectClass'][]= 'kolabSharedFolder';
+
+      /* Work on acl attribute */
+      $new_acl= array();
+      foreach ($mailObject->attrs['acl'] as $uacl){
+        list($user, $acl) = split(" ", $uacl);
+        if ($user != "%members%"){
+          $new_acl[$user]= $uacl;
+        } else {
+          foreach ($mailObject->members as $member){
+            $new_acl[$member]= "$member $acl";
+          }
+        }
+      }
+      $mailObject->attrs['acl']= array();
+      foreach ($new_acl as $key => $value){
+        $mailObject->attrs['acl'][]= $value;
+      }
+    } else {
+      $mailObject->attrs['objectClass'][]= 'kolabInetOrgPerson';
+    }
 
     /* Remove imap:// tagging */
     $mailObject->attrs['kolabHomeServer']= preg_replace('%imap://%', '', $mailObject->attrs['kolabHomeServer']);
