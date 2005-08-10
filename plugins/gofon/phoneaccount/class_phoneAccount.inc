@@ -26,6 +26,8 @@ class phoneAccount extends plugin
   var $macrostillavailable    = false;
   var $generate_error         = "";
   var $a_old_telenums           = array();
+  var $uid;
+  var $cn;
 
   /* CLI vars */
   var $cli_summary            = "Manage users phone account";
@@ -132,17 +134,8 @@ class phoneAccount extends plugin
             /* Set all attrs */
             $id = $data[0];
             $this->macroarray[$attrs['dn']][$id]['var']    ="var".$id;
-            $string= $data[3];
-            $string = preg_replace("/%uid/",$this->attrs['uid'][0],$data[3]);
-            for($i = 0 ; $i < 10; $i++){
-              if(isset($this->attrs['telephoneNumber'][$i])){
-                $string = preg_replace("/%telephoneNumber_".($i+1)."/",$this->attrs['telephoneNumber'][$i],$string);
-              }
-            }
-            $string = preg_replace("/%cn/",$this->attrs['cn'][0],$string);
-            $this->macroarray[$attrs['dn']][$id]['choosen']= $string; 
-
-            $this->macroarray[$attrs['dn']][$id]['id']     = $id;
+            $this->macroarray[$attrs['dn']][$id]['choosen']=$data[3]; 
+            $this->macroarray[$attrs['dn']][$id]['id']     =$id;
             $this->macroarray[$attrs['dn']][$id]['name']   =$data[1];
             $this->macroarray[$attrs['dn']][$id]['type']   =$data[2];
             $this->macroarray[$attrs['dn']][$id]['default']=$data[3];
@@ -397,8 +390,8 @@ class phoneAccount extends plugin
         // hint
         $s_entry_hint['context']  = 'GOsa';
         $s_entry_hint['exten']    = $s_telenums;
-        $s_entry_hint['app']      = 'hint';
-        $s_entry_hint['appdata']  = 'SIP/'.$this->uid;
+        $s_entry_hint['priority']      = 'hint';
+        $s_entry_hint['app']  = 'SIP/'.$this->uid;
 
         // If no macro is selected use Dial
         if($this->macro!="none"){ 
@@ -477,6 +470,10 @@ class phoneAccount extends plugin
     $this->parent->by_object['user']->is_modified=TRUE;
     $this->is_modified=TRUE; 
 
+    $this->uid = $this->parent->by_object['user']->uid;
+    $this->cn  = $this->parent->by_object['user']->cn;
+
+
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
       $this->is_account= !$this->is_account;
@@ -507,6 +504,31 @@ class phoneAccount extends plugin
       $macrotab ="<table summary=\""._("Parameter")."\">";
       /* for every single parameter-> display textfile,combo, or true false switch*/
 
+
+      /* Automatic fill out */
+      if(isset($_POST['fillout'])){
+      
+        foreach($this->phoneNumbers as $phonenum){
+          $tmp[] = $phonenum;
+        }
+
+        /* Go through all params */
+        foreach($this->macroarray[$this->macro] as $key => $paras){
+          
+          $string = $paras['default'];
+         
+          $string=str_replace("%uid",$this->uid,$string);
+          $string=str_replace("%cn",$this->cn,$string);
+
+          for($i = 0 ; $i < 10; $i++){
+            if(isset($tmp[$i])){
+              $string = preg_replace("/%telephoneNumber_".($i+1)."/",$tmp[$i],$string);
+            }
+          }
+
+          $this->macroarray[$this->macro][$key]['choosen']=$string;
+        }
+      }
 
       foreach($this->macroarray[$this->macro] as $paras){
 
@@ -575,8 +597,13 @@ class phoneAccount extends plugin
         $display= $this->show_header(_("Remove phone account"),
             _("This account has phone features enabled. You can disable them by clicking below."));
       } else {
+        if(empty($this->uid)){
+        $display= $this->show_header(_("Create phone account"),
+            _("This account has phone features disabled. You can't enable them while no uid is set."),TRUE,TRUE);
+        }else{
         $display= $this->show_header(_("Create phone account"),
             _("This account has phone features disabled. You can enable them by clicking below."));
+        }
         return ($display);
       }
     }
