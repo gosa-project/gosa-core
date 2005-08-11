@@ -35,12 +35,9 @@
     <table style="width:100%;border-top:1px solid #B0B0B0;" summary="">
 		<tr>
 			<td>
-				<img alt="Search" src="{$search_image}" align=middle title='{t}Display macros  matching{/t}'>
+				<img alt="{t}Display macros matching{/t}" src="{$search_image}" align=middle title='{t}Display macros  matching{/t}'>
 			</td>
-			<td>
-				<LABEL for='regex'>{t}Display macros  matching{/t}</LABEL>
-			</td>
-    		<td>
+    		<td width="99%">
 				<input type='text' id='regex' name='regex' maxlength='20' value='{$regex}' style='width:99%;' title='{t}Regular expression for matching macro names{/t}' onChange="mainform.submit()">
 			</td>
 		</tr>
