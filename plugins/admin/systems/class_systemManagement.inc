@@ -561,8 +561,6 @@ class systems extends plugin
     " <input type='image' align='middle' src='images/select_new_phone.png'      name='newsystem_phone'       alt='"._("New Phone")."' title='"._("New Phone")."'>".
     " <input type='image' align='middle' src='images/select_new_component.png'  name='newsystem_component'   alt='"._("New Component")."' title='"._("New Component")."'>".
     " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-    " <input type='image' align='middle' src='images/list_new_user.png' title='"._("Create new system")."' alt='"._("New system")."'                    name='user_new'>&nbsp;".
-    " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
     _("Current base")."&nbsp;<select name='depselect' onChange='mainform.submit()'>$options</select>".
     " <input type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='".           _("Submit")."'>&nbsp;".
     "</div>";
