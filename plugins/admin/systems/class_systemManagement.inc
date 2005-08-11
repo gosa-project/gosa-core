@@ -674,6 +674,7 @@ class systems extends plugin
     $smarty->assign("terminalshead", $listhead);
     $smarty->assign("terminals", $divlist->DrawList());
     $smarty->assign("search_image", get_template_path('images/search.png'));
+    $smarty->assign("searchu_image", get_template_path('images/search_user.png'));
     $smarty->assign("tree_image", get_template_path('images/tree.png'));
     $smarty->assign("infoimage", get_template_path('images/info.png'));
     $smarty->assign("launchimage", get_template_path('images/launch.png'));

@@ -46,25 +46,22 @@
 	</tr>
 </table>    
 <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
-	<tr>
-		<td width="50%"><img alt="" src="{$search_image}" align=middle>
-			&nbsp;{t}Display systems matching{/t}
-		</td>
-	    <td>
-			<input type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching system names{/t}' onChange="mainform.submit()">
-		</td>
-	</tr>
+<tr>
+<td><LABEL for="regex"><img alt="{t}Display systems matching{/t}" src="{$search_image}" align=middle></label></td>
+<td width="99%">
+<input type='text' style='width:99%' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching system names{/t}' onChange="mainform.submit()">
+</td>
+</tr>
 </table>
 <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
-	<tr>
-		<td width="50%">
-			<img alt="" src="{$search_image}" align=middle>
-				&nbsp;{t}Display terminal(s) of user{/t}
-			</td>
-		    <td>
-				<input type='text' name='user' maxlength='20' value='{$user}' title='{t}User name of which terminal(s) are shown{/t}' onChange="mainform.submit()">
-			</td>
-	</tr>
+<tr>
+<td>
+<LABEL for="user"><img alt="{t}Display systems of user{/t}" src="{$searchu_image}" align=middle></LABEL>
+</td>
+<td width="99%">
+<input type='text' style='width:99%' name='user' maxlength='20' value='{$user}' title='{t}User name of which terminal(s) are shown{/t}' onChange="mainform.submit()">
+</td>
+</tr>
 </table>
    {$apply}
    </div>
