@@ -698,13 +698,15 @@ class userManagement extends plugin
     $users= array();
     
     // Get Configuration
-    $a_SETUP        = $_SESSION['config']->data['SERVERS']['FON'];
-    // Connect to DB server
-    $r_con =  @mysql_connect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
-    // Check if we are  connected correctly
     $r_db=false;
-    if($r_con){
-    $r_db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
+    if (isset($_SESSION['config']->data['SERVERS']['FON'])){
+      $a_SETUP= $_SESSION['config']->data['SERVERS']['FON'];
+      // Connect to DB server
+      $r_con= @mysql_connect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+      // Check if we are  connected correctly
+      if($r_con){
+        $r_db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
+      }
     }
 
     // Test Every Entry and generate divlist Array  

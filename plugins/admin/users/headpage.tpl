@@ -45,8 +45,8 @@
             </td>
         </tr>
     </table>
-    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;"><tr><td><img alt="Search" src="{$search_image}" align="middle" title="{t}Display users matching{/t}"></td>
-    <td><LABEL for='filter'>{t}Display users matching{/t}</LABEL></td><td><input id='filter' style='width:99%' type='text' name='regexit' maxlength='20' value='{$regex}' title='{t}Regular expression for matching user names{/t}' onChange="mainform.submit()"></td></tr></table>
+    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;"><tr><td><LABEL for='filter'><img alt="Search" src="{$search_image}" align="middle" title="{t}Display users matching{/t}"></LABEL></td>
+    <td width="99%"><input id='filter' style='width:99%' type='text' name='regexit' maxlength='20' value='{$regex}' title='{t}Regular expression for matching user names{/t}' onChange="mainform.submit()"></td></tr></table>
    {$apply}
    </div>
   </td>
