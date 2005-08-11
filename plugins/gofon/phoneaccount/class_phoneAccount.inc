@@ -524,7 +524,7 @@ class phoneAccount extends plugin
       $macrotab="";
     }else{
 
-      $macrotab ="<table summary=\""._("Parameter")."\">";
+      $macrotab ="<table summary=\""._("Parameter")."\" width='100%'>";
       /* for every single parameter-> display textfile,combo, or true false switch*/
 
 
@@ -540,12 +540,12 @@ class phoneAccount extends plugin
 
           $string = $paras['default'];
 
-          $string=str_replace("%uid",$this->uid,$string);
-          $string=str_replace("%cn",$this->cn,$string);
+          $string=preg_replace("/%uid/i",$this->uid,$string);
+          $string=preg_replace("/%cn/i",$this->cn,$string);
 
           for($i = 0 ; $i < 10; $i++){
             if(isset($tmp[$i])){
-              $string = preg_replace("/%telephoneNumber_".($i+1)."/",$tmp[$i],$string);
+              $string = preg_replace("/%telephoneNumber_".($i+1)."/i",$tmp[$i],$string);
             }
           }
 
@@ -590,8 +590,8 @@ class phoneAccount extends plugin
           break;
 
           case "string":
-            $str="<input name='".$var."' value='".$choosen."' ".chkacl($this->acl, "goFonMacro").">";
-          $macrotab.= "<td>$name</td><td>$str";
+            $str="<input name='".$var."' value='".$choosen."' ".chkacl($this->acl, "goFonMacro")." style='width:340px;'>";
+          $macrotab.= "<td>$name</td><td style='width:350px'>$str";
           break;
 
         }
