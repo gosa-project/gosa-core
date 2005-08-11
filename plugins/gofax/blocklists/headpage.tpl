@@ -42,27 +42,10 @@
 	</table>    
 <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
 	<tr>
-		<td width='20'><img alt=""  src="{$search_image}" align=middle>
+		<td><img alt="{t}Display lists matching{/t}" src="{$search_image}" align=middle>
 		</td>
-		<td width='50%'>		
-			{t}Display lists matching{/t}
-		</td>
-	    <td>
-			<input type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching list names{/t}' onChange="mainform.submit()">
-		</td>
-	</tr>
-</table>
-
-<table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
-	<tr>
-		<td width='20'>
-			<img alt="Search" src="{$search_image}" align=middle>
-		</td>
-		<td width='50%'>	
-			{t}Display lists containing{/t}
-		</td>
-	    <td>
-		<input type='text' name='entry' maxlength='20' value='{$entry}' title='{t}Show lists containing entered numbers{/t}' onChange="mainform.submit()">
+	    <td width="99%">
+			<input style='width:99%' type='text' name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching list names{/t}' onChange="mainform.submit()">
 		</td>
 	</tr>
 </table>
