@@ -90,7 +90,6 @@ class systems extends plugin
       $terminalfilter['regex']= $s;
     }
 
-    $terminalfilter   = get_global("terminalfilter"); // contains Filter Settings
     $s_action     = "";                       // Contains the action to proceed
     $s_entry      = "";                       // The value for s_action
     $base_back    = "";                       // The Link for Backbutton
