@@ -682,7 +682,7 @@ class userManagement extends plugin
     $usrimg   ="<input type='image' src='images/penguin.png' alt='"._("GOsa")."'     name='user_edit_%KEY%-user' title='"._("Edit generic properties")."'>";
     $posiximg = "<input type='image' src='images/select_user.png' alt='"._("Posix")."'     name='user_edit_%KEY%-posixAccount' title='"._("Edit UNIX properties")."'>";
     $mailimg  = "<input type='image' src='images/mailto.png' alt='"._("Mail")."'     name='user_edit_%KEY%-mailAccount' title='"._("Edit mail properties")."'>";
-    $fonimg   = "<input type='image' src='images/select_phone.png' alt='"._("Phone")."'     name='user_edit_%KEY%-phoneAccount' title='"._("Edit phone properties")."'>";
+    $fonimg   = "<input type='image' src='images/%image%' alt='"._("Phone")."'     name='user_edit_%KEY%-phoneAccount' title='"._("Edit phone properties")."%title%'>";
     $faximg   = "<input type='image' src='images/fax_small.png' alt='"._("Fax")."'     name='user_edit_%KEY%-gofaxAccount' title='"._("Edit fax properies")."'>";
     $sambaimg = "<input type='image' src='images/select_winstation.png' alt='"._("Samba")."'     name='user_edit_%KEY%-sambaAccount' title='"._("Edit samba properties")."'>"; 
     $empty    = "<img src='images/empty.png' style='width:16px;height:16px;' alt=''>"; 
@@ -696,14 +696,52 @@ class userManagement extends plugin
     // Defines Arrays to save User and Templates
     $tpls = array();
     $users= array();
+    
+    // Get Configuration
+    $a_SETUP        = $_SESSION['config']->data['SERVERS']['FON'];
+    // Connect to DB server
+    $r_con =  @mysql_connect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+    // Check if we are  connected correctly
+    $r_db=false;
+    if($r_con){
+    $r_db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
+    }
 
     // Test Every Entry and generate divlist Array  
     foreach($this->list as $key => $val){
+      $connected = "";
+      $ip_port= ""; 
+      if((in_array("goFonAccount"    ,$val['objectClass']))){
+        $fonac = preg_replace("/%image%/", "select_phone.png", $fonimg);
+        $fonac = preg_replace("/%KEY%/", "$key", $fonac);
+        $fonac = preg_replace("/%title%/", "", $fonac);
 
+        if($r_db){
+          $res= @mysql_query("SELECT regseconds,name,port,ipaddr FROM ".$a_SETUP['SIP_TABLE']." WHERE (name='".$val['uid'][0]."')");
+          $mysql_entry = @mysql_fetch_row($res);
+          if(is_array($mysql_entry)){
+            if((isset($mysql_entry[0]))&&($mysql_entry[0]>1)){
+              $connected = " | "._("Online")." : ".gmdate("d.m.Y H:i:s",($mysql_entry[0]+(60*60)));
+              $fonac = preg_replace("/%image%/", "select_phone_connected.png", $fonimg);
+              $fonac = preg_replace("/%KEY%/", "$key", $fonac);
+              $fonac = preg_replace("/%title%/", $connected, $fonac);
+              $ip_port= " - ".$mysql_entry[3].":".$mysql_entry[2];
+            }
+            if((isset($mysql_entry[0]))&&($mysql_entry[0]==0)){
+              $connected = " | "._("Offline");
+              $fonac = preg_replace("/%image%/", "select_phone_notconnected.png", $fonimg);
+              $fonac = preg_replace("/%KEY%/", "$key", $fonac);
+              $fonac = preg_replace("/%title%/", $connected, $fonac);
+            }
+          }
+        }
+      }else{
+        $fonac=$empty;
+      }
+    
       // Specify Pics for Extensions  
       if(in_array("posixAccount"    ,$val['objectClass'])) $posix = preg_replace("/%KEY%/", "$key", $posiximg);  else $posix=$empty; 
       if(in_array("gosaMailAccount" ,$val['objectClass'])) $maila = preg_replace("/%KEY%/", "$key", $mailimg);   else $maila=$empty; 
-      if(in_array("goFonAccount"    ,$val['objectClass'])) $fonac = preg_replace("/%KEY%/", "$key", $fonimg);    else $fonac=$empty; 
       if(in_array("goFaxAccount"    ,$val['objectClass'])) $faxac = preg_replace("/%KEY%/", "$key", $faximg);    else $faxac=$empty; 
       if(in_array("sambaSamAccount" ,$val['objectClass'])) $samba = preg_replace("/%KEY%/", "$key", $sambaimg);  else $samba=$empty; 
       if(in_array("gosaUserTemplate",$val['objectClass'])) $tpl   = preg_replace("/%KEY%/", "$key", $tplimg);    else $tpl=$userimg;
@@ -718,7 +756,7 @@ class userManagement extends plugin
       }
 
       $field1 = array("string" => sprintf($tpl,$val['dn']),"attach"=>"style='width:20px;align:middle;'");
-      $field2 = array("string" => sprintf($editlink,$key,$display),"attach"=>"title='".$val['dn']."'");
+      $field2 = array("string" => sprintf($editlink,$key,$display).$ip_port,"attach"=>"title='".$val['dn']."'");
       $field3 = array("string" => $usrimg."&nbsp;".$posix."&nbsp;".$maila."&nbsp;".$fonac."&nbsp;".$faxac."&nbsp;".$samba,"attach" => "style='width:118px;'");
       $field4 = array("string" => preg_replace("/%KEY%/", "$key", $action),"attach" => "style='border:none; text-align:right;width:48px'");
     
