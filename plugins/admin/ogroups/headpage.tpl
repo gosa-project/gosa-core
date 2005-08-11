@@ -48,8 +48,8 @@
 	</tr>
 </table>    
 
-    <table summary="" style="width:100%;border-top:1px solid #B0B0B0;"><tr><td><img alt="" src="{$search_image}" align=middle title='{t}Display groups matching{/t}'></td>
-    <td><LABEL for='filter'>{t}Display object groups matching{/t}</LABEL></td><td><input type='text' name='regex' style='width:99%' maxlength='20' id='filer' value='{$regex}' title='{t}Regular expression for matching group names{/t}' onChange="mainform.submit()"></td></tr></table>
+    <table summary="" style="width:100%;border-top:1px solid #B0B0B0;"><tr><td><LABEL for="regex"><img alt="{t}Display object groups matching{/t}" src="{$search_image}" align=middle title='{t}Display groups matching{/t}'></LABEL></td>
+    <td width="99%"><input type='text' name='regex' style='width:99%' maxlength='20' id='filer' value='{$regex}' title='{t}Regular expression for matching group names{/t}' onChange="mainform.submit()"></td></tr></table>
    {$apply}
    </div>
   </td>
