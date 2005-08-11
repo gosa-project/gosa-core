@@ -62,21 +62,19 @@
 
     <table summary=""  style="width:100%;border-top:1px solid #B0B0B0;">
 		<tr>
-			<td width="50%"><img alt="" src="{$search_image}" align=middle>&nbsp;
-				<LABEL for="regex">{t}Display groups matching{/t}</LABEL>
+			<td><LABEL for="regex"><img alt="{t}Display groups matching{/t}" src="{$searchg_image}" align="middle"></LABEL>
 			</td>
-    		<td>
-				<input type='text' id="regex" name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching group names{/t}' onChange="mainform.submit()">
+    		<td width="99%">
+			<input style='width:99%' type='text' id="regex" name='regex' maxlength='20' value='{$regex}' title='{t}Regular expression for matching group names{/t}' onChange="mainform.submit()">
 			</td>
 		</tr>
 	</table>
     <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
 		<tr>
-			<td width="50%"><img alt="" src="{$search_image}" align=middle>&nbsp;
-				<LABEL for="guser">{t}Display groups of user{/t}</LABEL>
+			<td><LABEL for="guser"><img alt="{t}Display groups of user{/t}" src="{$searchu_image}" align=middle></LABEL>
 			</td>
-    		<td>
-				<input id="guser" type='text' name='guser' maxlength='20' value='{$guser}' 
+    		<td width="99%">
+				<input style='width:99%' id="guser" type='text' name='guser' maxlength='20' value='{$guser}' 
 					title='{t}User name of which groups are shown{/t}' onChange="mainform.submit()">
 			</td>
 		</tr>
