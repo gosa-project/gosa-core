@@ -188,7 +188,7 @@
 			{t}Less Than sound file{/t}
 		</td>
 		<td>
-			<input type="text" style='width:250px;' name='goFonQueueLessThan' value='{$goFonQueueLessThanHold}' {$goFonQueueLessThanACL}>
+			<input type="text" style='width:250px;' name='goFonQueueLessThan' value='{$goFonQueueLessThan}' {$goFonQueueLessThanACL}>
 		</td>
 		</tr>
 
