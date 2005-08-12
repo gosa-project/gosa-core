@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-08-12 17:06+0200\n"
+"PO-Revision-Date: 2005-08-12 17:08+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6284,7 +6284,7 @@ msgstr "Ja"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:136
 msgid "ring all"
-msgstr "rufe alle"
+msgstr "alle gleichzeitig"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:137
 msgid "round robin"
@@ -8195,25 +8195,25 @@ msgstr ""
 #~ msgstr "Telefonnummer"
 
 #~ msgid "ring all available channels until one answers"
-#~ msgstr "Rufe auf alle verfÃŒgbaren AnschlÃŒsse bis jemand antwortet"
+#~ msgstr "Rufe auf alle verfÃÅgbaren AnschlÃÅsse bis jemand antwortet"
 
 #~ msgid "take turns ringing each available interface"
-#~ msgstr "Rufe auf alle verfÃŒgbaren AnschlÃŒsse"
+#~ msgstr "Rufe auf alle verfÃÅgbaren AnschlÃÅsse"
 
 #~ msgid "ring interface which was least recently called by this queue"
 #~ msgstr "Rufe Anschluss, der die wenigsten Anrufe hatte"
 
 #~ msgid "ring the one with fewest completed calls from this queue"
-#~ msgstr "Rufe auf Anschluss mit den wenigsten abgeschlossenen GesprÃ€chen"
+#~ msgstr "Rufe auf Anschluss mit den wenigsten abgeschlossenen GesprÃâ¬chen"
 
 #~ msgid "ring random interface"
-#~ msgstr "Rufe auf zufÃ€lligen Anschluss"
+#~ msgstr "Rufe auf zufÃâ¬lligen Anschluss"
 
 #~ msgid "round robin with memory, remember where we left off last ring pass"
 #~ msgstr "Ring mit Speicher, an welchem Anschluss der Ring verlassen wurde"
 
 #~ msgid "fill out"
-#~ msgstr "ausfÃŒllen"
+#~ msgstr "ausfÃÅllen"
 
 #~ msgid "Display lists containing"
 #~ msgstr "Zeige Listen die folgendes enthalten"
