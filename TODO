@@ -6,9 +6,6 @@ Things to fix before 2.4:
 
 * Fix problem with winstation and invalid structural object class chain (inetOrgPerson/device)
 
-* User dialog
-  - Add button for template created users
-
 * All dialogs
   - ALT not translated 
   - Image cleanup
