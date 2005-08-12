@@ -28,7 +28,7 @@
 		</table>
 		</tr>
 		<tr>
-		  <td colspan=2><h2><img alt="" src="images/select_phone.png" align="middle">&nbsp;{t}Options{/t}</h2></td>
+		  <td colspan=2><h2><img alt="" src="images/select_ogroup.png" align="middle">&nbsp;{t}Options{/t}</h2></td>
 		</tr>
 		<tr>
 		<td>
@@ -90,8 +90,8 @@
 </td>
 <td valign='top' style="border-left: 1px solid rgb(160, 160, 160);">
 	<h2>
-    <img alt="" src="images/select_phone.png" align="middle">
-    {t}Queue sound file setup{/t}
+    <img alt="" src="images/sound.png" align="middle">
+    {t}Queue sound setup{/t}
     </h2>
 	<table summary="{t}Generic queue Settings{/t}">
 		<!--<tr>
@@ -193,7 +193,7 @@
 	</td>
 </tr>
 <tr>
-<td colspan=2><h2 style='margin-bottom:0px;'><img alt="" src="images/select_phone.png" align="middle">&nbsp;{t}Phone attributes {/t}</h2></td>
+<td colspan=2><h2 style='margin-bottom:0px;'><img alt="" src="images/select_ogroup.png" align="middle">&nbsp;{t}Phone attributes {/t}</h2></td>
 </tr>
 <tr>
 <td>
@@ -243,4 +243,3 @@
 </tr>
 
 </table>
-			
