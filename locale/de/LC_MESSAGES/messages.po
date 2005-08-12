@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-08-12 17:08+0200\n"
+"PO-Revision-Date: 2005-08-12 17:59+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -166,7 +166,7 @@ msgstr "CSV Import"
 msgid "{LOCATIONNAME}"
 msgstr "{LOCATIONNAME}"
 
-#: contrib/gosa.conf:186 plugins/admin/ogroups/class_phonequeue.inc:134
+#: contrib/gosa.conf:186 plugins/admin/ogroups/class_phonequeue.inc:137
 msgid "German"
 msgstr "Deutsch"
 
@@ -6127,7 +6127,7 @@ msgid "Phone numbers"
 msgstr "Telefonnummern"
 
 #: plugins/admin/ogroups/phonequeue.tpl:8
-#: plugins/admin/ogroups/phonequeue.tpl:137
+#: plugins/admin/ogroups/phonequeue.tpl:96
 msgid "Generic queue Settings"
 msgstr "Allgemeine Warteschlangen-Einstellungen"
 
@@ -6161,77 +6161,85 @@ msgstr "Benachrichtigungsfrequenz"
 msgid "(in seconds)"
 msgstr "(in Sekunden)"
 
-#: plugins/admin/ogroups/phonequeue.tpl:91
-msgid "Announce holdtime"
-msgstr "Benachrichtige �ber Wartezeit"
-
-#: plugins/admin/ogroups/phonequeue.tpl:103
-msgid "Allow the called user to transfer his call"
-msgstr "Erlaube Weiterleiten des Gespr�chs (Angerufener)"
-
-#: plugins/admin/ogroups/phonequeue.tpl:109
-msgid "Allows calling user to transfer call"
-msgstr "Erlaube Weiterleiten des Gespr�chs (Anrufer)"
-
-#: plugins/admin/ogroups/phonequeue.tpl:115
-msgid "Allow the called to hangup by pressing *"
-msgstr "Auflegen durch Dr�cken der Taste '*' (Angerufener)"
-
-#: plugins/admin/ogroups/phonequeue.tpl:121
-msgid "Allows calling to hangup by pressing *"
-msgstr "Auflegen durch Dr�cken der Taste '*' (Anrufer)"
-
-#: plugins/admin/ogroups/phonequeue.tpl:127
-msgid "Ring instead of playing background music"
-msgstr "Klingelton statt Hintergrund-Musik"
-
-#: plugins/admin/ogroups/phonequeue.tpl:135
+#: plugins/admin/ogroups/phonequeue.tpl:94
 msgid "Queue sound file setup"
 msgstr "Einstellung der Ansagen"
 
-#: plugins/admin/ogroups/phonequeue.tpl:140
+#: plugins/admin/ogroups/phonequeue.tpl:99
 msgid "Use music on hold instead of ringing"
 msgstr "Benutze Wartemusik statt Klingelton"
 
-#: plugins/admin/ogroups/phonequeue.tpl:149
+#: plugins/admin/ogroups/phonequeue.tpl:108
 msgid "Music on hold"
 msgstr "Wartemusik"
 
-#: plugins/admin/ogroups/phonequeue.tpl:157
+#: plugins/admin/ogroups/phonequeue.tpl:116
 msgid "Welcome sound file"
 msgstr "'Willkommen'"
 
-#: plugins/admin/ogroups/phonequeue.tpl:165
+#: plugins/admin/ogroups/phonequeue.tpl:124
 msgid "Announce message"
 msgstr "Benachrichtigung"
 
-#: plugins/admin/ogroups/phonequeue.tpl:173
+#: plugins/admin/ogroups/phonequeue.tpl:132
 msgid "Sound file for 'You are next ...'"
 msgstr "'Sie sind der N�chste...'"
 
-#: plugins/admin/ogroups/phonequeue.tpl:181
+#: plugins/admin/ogroups/phonequeue.tpl:140
 msgid "'There are ...'"
 msgstr "'Es gibt ...'"
 
-#: plugins/admin/ogroups/phonequeue.tpl:189
+#: plugins/admin/ogroups/phonequeue.tpl:148
 msgid "'... calls waiting'"
 msgstr "'... wartende Anrufe'"
 
-#: plugins/admin/ogroups/phonequeue.tpl:197
+#: plugins/admin/ogroups/phonequeue.tpl:156
 msgid "'Thank you' message"
 msgstr "'Vielen Dank'"
 
-#: plugins/admin/ogroups/phonequeue.tpl:205
+#: plugins/admin/ogroups/phonequeue.tpl:164
 msgid "'minutes' sound file"
 msgstr "'Minuten'"
 
-#: plugins/admin/ogroups/phonequeue.tpl:213
+#: plugins/admin/ogroups/phonequeue.tpl:172
 msgid "'seconds' sound file"
 msgstr "'Sekunden'"
 
-#: plugins/admin/ogroups/phonequeue.tpl:221
+#: plugins/admin/ogroups/phonequeue.tpl:180
 msgid "Hold sound file"
 msgstr "Gespr�ch halten"
+
+#: plugins/admin/ogroups/phonequeue.tpl:197
+msgid "Phone attributes "
+msgstr "Telefon-Attribute"
+
+#: plugins/admin/ogroups/phonequeue.tpl:202
+msgid "Announce holdtime"
+msgstr "Benachrichtige �ber Wartezeit"
+
+#: plugins/admin/ogroups/phonequeue.tpl:208
+msgid "Allow the called user to transfer his call"
+msgstr "Erlaube Weiterleiten des Gespr�chs (Angerufener)"
+
+#: plugins/admin/ogroups/phonequeue.tpl:214
+msgid "Allows calling user to transfer call"
+msgstr "Erlaube Weiterleiten des Gespr�chs (Anrufer)"
+
+#: plugins/admin/ogroups/phonequeue.tpl:220
+msgid "Additional phone attributes "
+msgstr "Zus�tzliche Telefon-Attribute"
+
+#: plugins/admin/ogroups/phonequeue.tpl:225
+msgid "Allow the called to hangup by pressing *"
+msgstr "Auflegen durch Dr�cken der Taste '*' (Angerufener)"
+
+#: plugins/admin/ogroups/phonequeue.tpl:231
+msgid "Allows calling to hangup by pressing *"
+msgstr "Auflegen durch Dr�cken der Taste '*' (Anrufer)"
+
+#: plugins/admin/ogroups/phonequeue.tpl:237
+msgid "Ring instead of playing background music"
+msgstr "Klingelton statt Hintergrund-Musik"
 
 #: plugins/admin/ogroups/class_mailogroup.inc:38
 msgid ""
@@ -6247,22 +6255,22 @@ msgstr ""
 "Diese Gruppe hat keine Mail-Erweiterungen. Sie k�nnen diese aktivieren, wenn "
 "Sie auf die untere Schaltfl�che klicken."
 
-#: plugins/admin/ogroups/class_phonequeue.inc:83
+#: plugins/admin/ogroups/class_phonequeue.inc:86
 msgid "Remove the phone queue from this Account"
 msgstr "Warteschlange von diesem Konto entfernen"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:84
+#: plugins/admin/ogroups/class_phonequeue.inc:87
 msgid ""
 "Phone queue is enabled for this group. You can disable it by clicking below."
 msgstr ""
 "Diese Gruppe hat die Warteschlangen-Erweiterung aktiviert. Sie k�nnen diese "
 "durch einen Klick auf die untere Schaltfl�che deaktivieren."
 
-#: plugins/admin/ogroups/class_phonequeue.inc:86
+#: plugins/admin/ogroups/class_phonequeue.inc:89
 msgid "Create phone queue"
 msgstr "Warteschlange erstellen"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:86
+#: plugins/admin/ogroups/class_phonequeue.inc:89
 msgid ""
 "For this group the phone queues are disabled. You can enable them by "
 "clicking below."
@@ -6270,64 +6278,56 @@ msgstr ""
 "Diese Gruppe hat keine g�ltigen Warteschlangen-Erweiterung. Sie k�nnen diese "
 "durch einen Klick auf die untere Schaltfl�che aktivieren."
 
-#: plugins/admin/ogroups/class_phonequeue.inc:134
+#: plugins/admin/ogroups/class_phonequeue.inc:137
 msgid "Uruguai"
 msgstr "Uruguai"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:135
-msgid "No"
-msgstr "Nein"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:135
-msgid "Yes"
-msgstr "Ja"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:136
+#: plugins/admin/ogroups/class_phonequeue.inc:138
 msgid "ring all"
 msgstr "alle gleichzeitig"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:137
+#: plugins/admin/ogroups/class_phonequeue.inc:139
 msgid "round robin"
 msgstr "nacheinander"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:138
+#: plugins/admin/ogroups/class_phonequeue.inc:140
 msgid "least recently called"
 msgstr "am wenigsten Anrufe"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:139
+#: plugins/admin/ogroups/class_phonequeue.inc:141
 msgid "fewest completed calls"
 msgstr "am wenigsten abgeschlossene Anrufe"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:140
+#: plugins/admin/ogroups/class_phonequeue.inc:142
 msgid "random"
 msgstr "zuf�llig"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:141
+#: plugins/admin/ogroups/class_phonequeue.inc:143
 msgid "round robin with memory"
 msgstr "nacheinander (mit Speicher)"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:180
+#: plugins/admin/ogroups/class_phonequeue.inc:182
 msgid "Timeout must be numeric"
 msgstr "Der Wert f�r 'Wartezeit' muss numerisch sein"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:183
+#: plugins/admin/ogroups/class_phonequeue.inc:185
 msgid "Retry must be numeric"
 msgstr "Der Wert f�r 'Wiederholen' muss numerisch sein"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:186
+#: plugins/admin/ogroups/class_phonequeue.inc:188
 msgid "Max queue length must be numeric"
 msgstr "Der Wert f�r 'Maximale Gr�sse der Warteschlange' muss numerisch sein"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:189
+#: plugins/admin/ogroups/class_phonequeue.inc:191
 msgid "Announce frequency must be numeric"
 msgstr "Der Wert f�r 'Benachrichtigungsfrequenz' muss numerisch sein"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:192
+#: plugins/admin/ogroups/class_phonequeue.inc:194
 msgid "There must be least one queue number defined."
 msgstr "Es ist mindestens eine Telefonnummer erforderlich."
 
-#: plugins/admin/ogroups/class_phonequeue.inc:215
-#: plugins/admin/ogroups/class_phonequeue.inc:551
+#: plugins/admin/ogroups/class_phonequeue.inc:217
+#: plugins/admin/ogroups/class_phonequeue.inc:572
 #: plugins/gofon/macro/class_gofonMacro.inc:181
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:241
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:972
@@ -6339,8 +6339,8 @@ msgstr ""
 "MySQL-Server '%s' kann nicht als Benutzer '%s' erreicht werden, �berpr�fen "
 "Sie das GOsa Protokoll auf MySQL-Meldungen."
 
-#: plugins/admin/ogroups/class_phonequeue.inc:225
-#: plugins/admin/ogroups/class_phonequeue.inc:561
+#: plugins/admin/ogroups/class_phonequeue.inc:227
+#: plugins/admin/ogroups/class_phonequeue.inc:582
 #: plugins/gofon/macro/class_gofonMacro.inc:192
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:252
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:983
@@ -6348,15 +6348,15 @@ msgstr ""
 msgid "Can't select database %s on %s."
 msgstr "Die Datenbank %s auf %s kann nicht ausgew�hlt werden."
 
-#: plugins/admin/ogroups/class_phonequeue.inc:252
-#: plugins/admin/ogroups/class_phonequeue.inc:448
-#: plugins/admin/ogroups/class_phonequeue.inc:596
+#: plugins/admin/ogroups/class_phonequeue.inc:254
+#: plugins/admin/ogroups/class_phonequeue.inc:457
+#: plugins/admin/ogroups/class_phonequeue.inc:617
 #, php-format
 msgid "Can't delete in Database %s, on Server %s."
 msgstr "Kann nicht entfernen (Datenbank '%s' auf Server '%s')."
 
-#: plugins/admin/ogroups/class_phonequeue.inc:477
-#: plugins/admin/ogroups/class_phonequeue.inc:479
+#: plugins/admin/ogroups/class_phonequeue.inc:486
+#: plugins/admin/ogroups/class_phonequeue.inc:488
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1078
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1080
 #, php-format
@@ -8188,6 +8188,12 @@ msgstr ""
 "Versionen). In einigen F�llen ist es hilfreich, das 'error_reporting' zu "
 "aktivieren (dies kann jedoch ein Sicherheitsrisiko darstellen)."
 
+#~ msgid "No"
+#~ msgstr "Nein"
+
+#~ msgid "Yes"
+#~ msgstr "Ja"
+
 #~ msgid "Generic queue setup"
 #~ msgstr "Allgemeine Einstellungen"
 
@@ -8195,25 +8201,26 @@ msgstr ""
 #~ msgstr "Telefonnummer"
 
 #~ msgid "ring all available channels until one answers"
-#~ msgstr "Rufe auf alle verfÃÅgbaren AnschlÃÅsse bis jemand antwortet"
+#~ msgstr "Rufe auf alle verfÃÂÃÂgbaren AnschlÃÂÃÂsse bis jemand antwortet"
 
 #~ msgid "take turns ringing each available interface"
-#~ msgstr "Rufe auf alle verfÃÅgbaren AnschlÃÅsse"
+#~ msgstr "Rufe auf alle verfÃÂÃÂgbaren AnschlÃÂÃÂsse"
 
 #~ msgid "ring interface which was least recently called by this queue"
 #~ msgstr "Rufe Anschluss, der die wenigsten Anrufe hatte"
 
 #~ msgid "ring the one with fewest completed calls from this queue"
-#~ msgstr "Rufe auf Anschluss mit den wenigsten abgeschlossenen GesprÃâ¬chen"
+#~ msgstr ""
+#~ "Rufe auf Anschluss mit den wenigsten abgeschlossenen GesprÃÂÃ¢ÂÂ¬chen"
 
 #~ msgid "ring random interface"
-#~ msgstr "Rufe auf zufÃâ¬lligen Anschluss"
+#~ msgstr "Rufe auf zufÃÂÃ¢ÂÂ¬lligen Anschluss"
 
 #~ msgid "round robin with memory, remember where we left off last ring pass"
 #~ msgstr "Ring mit Speicher, an welchem Anschluss der Ring verlassen wurde"
 
 #~ msgid "fill out"
-#~ msgstr "ausfÃÅllen"
+#~ msgstr "ausfÃÂÃÂllen"
 
 #~ msgid "Display lists containing"
 #~ msgstr "Zeige Listen die folgendes enthalten"

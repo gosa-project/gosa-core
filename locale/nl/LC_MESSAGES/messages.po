@@ -167,7 +167,7 @@ msgstr "CSV Import"
 msgid "{LOCATIONNAME}"
 msgstr "{LOCATIONNAME}"
 
-#: contrib/gosa.conf:186 plugins/admin/ogroups/class_phonequeue.inc:134
+#: contrib/gosa.conf:186 plugins/admin/ogroups/class_phonequeue.inc:137
 msgid "German"
 msgstr "Duits"
 
@@ -6155,7 +6155,7 @@ msgid "Phone numbers"
 msgstr "Telefoonnummers"
 
 #: plugins/admin/ogroups/phonequeue.tpl:8
-#: plugins/admin/ogroups/phonequeue.tpl:137
+#: plugins/admin/ogroups/phonequeue.tpl:96
 #, fuzzy
 msgid "Generic queue Settings"
 msgstr "Algemene gebruikersinformatie"
@@ -6193,79 +6193,89 @@ msgstr ""
 msgid "(in seconds)"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:91
-msgid "Announce holdtime"
-msgstr ""
-
-#: plugins/admin/ogroups/phonequeue.tpl:103
-msgid "Allow the called user to transfer his call"
-msgstr ""
-
-#: plugins/admin/ogroups/phonequeue.tpl:109
-msgid "Allows calling user to transfer call"
-msgstr ""
-
-#: plugins/admin/ogroups/phonequeue.tpl:115
-msgid "Allow the called to hangup by pressing *"
-msgstr ""
-
-#: plugins/admin/ogroups/phonequeue.tpl:121
-msgid "Allows calling to hangup by pressing *"
-msgstr ""
-
-#: plugins/admin/ogroups/phonequeue.tpl:127
-msgid "Ring instead of playing background music"
-msgstr ""
-
-#: plugins/admin/ogroups/phonequeue.tpl:135
+#: plugins/admin/ogroups/phonequeue.tpl:94
 msgid "Queue sound file setup"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:140
+#: plugins/admin/ogroups/phonequeue.tpl:99
 msgid "Use music on hold instead of ringing"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:149
+#: plugins/admin/ogroups/phonequeue.tpl:108
 msgid "Music on hold"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:157
+#: plugins/admin/ogroups/phonequeue.tpl:116
 #, fuzzy
 msgid "Welcome sound file"
 msgstr "Welkom %s!"
 
-#: plugins/admin/ogroups/phonequeue.tpl:165
+#: plugins/admin/ogroups/phonequeue.tpl:124
 #, fuzzy
 msgid "Announce message"
 msgstr "Afwezigheidsbericht"
 
-#: plugins/admin/ogroups/phonequeue.tpl:173
+#: plugins/admin/ogroups/phonequeue.tpl:132
 msgid "Sound file for 'You are next ...'"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:181
+#: plugins/admin/ogroups/phonequeue.tpl:140
 msgid "'There are ...'"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:189
+#: plugins/admin/ogroups/phonequeue.tpl:148
 msgid "'... calls waiting'"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:197
+#: plugins/admin/ogroups/phonequeue.tpl:156
 #, fuzzy
 msgid "'Thank you' message"
 msgstr "Status bericht"
 
-#: plugins/admin/ogroups/phonequeue.tpl:205
+#: plugins/admin/ogroups/phonequeue.tpl:164
 msgid "'minutes' sound file"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:213
+#: plugins/admin/ogroups/phonequeue.tpl:172
 msgid "'seconds' sound file"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:221
+#: plugins/admin/ogroups/phonequeue.tpl:180
 msgid "Hold sound file"
+msgstr ""
+
+#: plugins/admin/ogroups/phonequeue.tpl:197
+#, fuzzy
+msgid "Phone attributes "
+msgstr "DN atribuut voor gebruikers"
+
+#: plugins/admin/ogroups/phonequeue.tpl:202
+msgid "Announce holdtime"
+msgstr ""
+
+#: plugins/admin/ogroups/phonequeue.tpl:208
+msgid "Allow the called user to transfer his call"
+msgstr ""
+
+#: plugins/admin/ogroups/phonequeue.tpl:214
+msgid "Allows calling user to transfer call"
+msgstr ""
+
+#: plugins/admin/ogroups/phonequeue.tpl:220
+#, fuzzy
+msgid "Additional phone attributes "
+msgstr "Additionele fstab invoerregels"
+
+#: plugins/admin/ogroups/phonequeue.tpl:225
+msgid "Allow the called to hangup by pressing *"
+msgstr ""
+
+#: plugins/admin/ogroups/phonequeue.tpl:231
+msgid "Allows calling to hangup by pressing *"
+msgstr ""
+
+#: plugins/admin/ogroups/phonequeue.tpl:237
+msgid "Ring instead of playing background music"
 msgstr ""
 
 #: plugins/admin/ogroups/class_mailogroup.inc:38
@@ -6282,12 +6292,12 @@ msgstr ""
 "Deze groep heeft geen E-mail mogelijkheden. U kunt deze inschakelen door de "
 "knop hieronder te gebruiken."
 
-#: plugins/admin/ogroups/class_phonequeue.inc:83
+#: plugins/admin/ogroups/class_phonequeue.inc:86
 #, fuzzy
 msgid "Remove the phone queue from this Account"
 msgstr "Verwijder telefoon account"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:84
+#: plugins/admin/ogroups/class_phonequeue.inc:87
 #, fuzzy
 msgid ""
 "Phone queue is enabled for this group. You can disable it by clicking below."
@@ -6295,12 +6305,12 @@ msgstr ""
 "Dit account heeft telefoon mogelijkheden ingeschakeld. U kunt deze "
 "uitschakelen door de knop hieronder te gebruiken."
 
-#: plugins/admin/ogroups/class_phonequeue.inc:86
+#: plugins/admin/ogroups/class_phonequeue.inc:89
 #, fuzzy
 msgid "Create phone queue"
 msgstr "Telefoon account aanmaken"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:86
+#: plugins/admin/ogroups/class_phonequeue.inc:89
 #, fuzzy
 msgid ""
 "For this group the phone queues are disabled. You can enable them by "
@@ -6309,68 +6319,59 @@ msgstr ""
 "Dit account heeft telefoon mogelijkheden uitgeschakeld. U kunt deze "
 "inschakelen door de knop hieronder te gebruiken."
 
-#: plugins/admin/ogroups/class_phonequeue.inc:134
+#: plugins/admin/ogroups/class_phonequeue.inc:137
 msgid "Uruguai"
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:135
-msgid "No"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:135
-#, fuzzy
-msgid "Yes"
-msgstr "ja"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:136
+#: plugins/admin/ogroups/class_phonequeue.inc:138
 #, fuzzy
 msgid "ring all"
 msgstr "Terminals"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:137
+#: plugins/admin/ogroups/class_phonequeue.inc:139
 msgid "round robin"
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:138
+#: plugins/admin/ogroups/class_phonequeue.inc:140
 msgid "least recently called"
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:139
+#: plugins/admin/ogroups/class_phonequeue.inc:141
 msgid "fewest completed calls"
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:140
+#: plugins/admin/ogroups/class_phonequeue.inc:142
 #, fuzzy
 msgid "random"
 msgstr "en"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:141
+#: plugins/admin/ogroups/class_phonequeue.inc:143
 msgid "round robin with memory"
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:180
+#: plugins/admin/ogroups/class_phonequeue.inc:182
 #, fuzzy
 msgid "Timeout must be numeric"
 msgstr "De sieve poort dient nummeriek te zijn."
 
-#: plugins/admin/ogroups/class_phonequeue.inc:183
+#: plugins/admin/ogroups/class_phonequeue.inc:185
 msgid "Retry must be numeric"
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:186
+#: plugins/admin/ogroups/class_phonequeue.inc:188
 msgid "Max queue length must be numeric"
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:189
+#: plugins/admin/ogroups/class_phonequeue.inc:191
 msgid "Announce frequency must be numeric"
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:192
+#: plugins/admin/ogroups/class_phonequeue.inc:194
 msgid "There must be least one queue number defined."
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:215
-#: plugins/admin/ogroups/class_phonequeue.inc:551
+#: plugins/admin/ogroups/class_phonequeue.inc:217
+#: plugins/admin/ogroups/class_phonequeue.inc:572
 #: plugins/gofon/macro/class_gofonMacro.inc:181
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:241
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:972
@@ -6380,8 +6381,8 @@ msgid ""
 "error."
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:225
-#: plugins/admin/ogroups/class_phonequeue.inc:561
+#: plugins/admin/ogroups/class_phonequeue.inc:227
+#: plugins/admin/ogroups/class_phonequeue.inc:582
 #: plugins/gofon/macro/class_gofonMacro.inc:192
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:252
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:983
@@ -6389,15 +6390,15 @@ msgstr ""
 msgid "Can't select database %s on %s."
 msgstr "De opgegeven database kon niet geselecteerd worden!"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:252
-#: plugins/admin/ogroups/class_phonequeue.inc:448
-#: plugins/admin/ogroups/class_phonequeue.inc:596
+#: plugins/admin/ogroups/class_phonequeue.inc:254
+#: plugins/admin/ogroups/class_phonequeue.inc:457
+#: plugins/admin/ogroups/class_phonequeue.inc:617
 #, fuzzy, php-format
 msgid "Can't delete in Database %s, on Server %s."
 msgstr "De opgegeven database kon niet geselecteerd worden!"
 
-#: plugins/admin/ogroups/class_phonequeue.inc:477
-#: plugins/admin/ogroups/class_phonequeue.inc:479
+#: plugins/admin/ogroups/class_phonequeue.inc:486
+#: plugins/admin/ogroups/class_phonequeue.inc:488
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1078
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1080
 #, php-format
@@ -8218,6 +8219,10 @@ msgstr ""
 "Het kan, met name bij Beta versies, voorkomen dat GOsa PHP fouten genereerd. "
 "In sommige gevallen kan het handig zijn om foutrapportage aan te zetten "
 "(maar dit kan een veiligheidsrisico vormen) "
+
+#, fuzzy
+#~ msgid "Yes"
+#~ msgstr "ja"
 
 #, fuzzy
 #~ msgid "Phone Number"
