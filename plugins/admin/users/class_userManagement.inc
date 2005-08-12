@@ -777,7 +777,7 @@ class userManagement extends plugin
             }
             if((isset($mysql_entry[0]))&&($mysql_entry[0]==0)){
               $connected = " | "._("Offline");
-              $fonac = preg_replace("/%image%/", "select_phone_notconnected.png", $fonimg);
+              $fonac = preg_replace("/%image%/", "select_phone.png", $fonimg);
               $fonac = preg_replace("/%KEY%/", "$key", $fonac);
               $fonac = preg_replace("/%title%/", $connected, $fonac);
             }
