@@ -32,19 +32,16 @@
      <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
       {$alphabet}
      </table>
-    <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
-		<tr>
-			<td>
-				<img alt="" src="{$search_image}" align=middle title='{t}Display applications matching{/t}'>
-			</td>
-			<td>
-				<LABEL for='filter'>{t}Display applications matching{/t}</LABEL>
-			</td>
-    		<td>
-				<input style='width:99%' type='text' name='regex' maxlength='20' id='filter' value='{$regex}' title='{t}Regular expression for matching application names{/t}' onChange="mainform.submit()">
-			</td>
-		</tr>
-	</table>
+     <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
+     <tr>
+     <td>
+     <LABEL for='regex'><img alt="{t}Display applications matching{/t}" src="{$search_image}" align=middle title='{t}Display applications matching{/t}'></LABEL>
+     </td>
+     <td width="99%">
+     <input style='width:99%' type='text' name='regex' maxlength='20' id='filter' value='{$regex}' title='{t}Regular expression for matching application names{/t}' onChange="mainform.submit()">
+     </td>
+     </tr>
+     </table>
     {$apply}
    </div>
   </td>
