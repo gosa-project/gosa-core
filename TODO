@@ -14,8 +14,6 @@ Things to fix before 2.4:
 
 * Check renaming of servers
 
-* Reload language settings when language has changed
-
 * Fix system dialog -> icons on top are not adapted yet, remove "create system"
 
 * Fix filter part of dialogs and remove long descriptive textx in front of the search
