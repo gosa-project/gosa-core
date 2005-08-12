@@ -108,6 +108,7 @@ class userManagement extends plugin
     }
 
     $s_entry  = preg_replace("/_.$/","",$s_entry);
+
     if(preg_match("/.*-.*/",$s_entry)){
       $s_tab   = preg_replace("/^.*-/i","",$s_entry);
       $s_entry = preg_replace("/-.*$/i","",$s_entry);
@@ -455,7 +456,7 @@ class userManagement extends plugin
     }
 
     /* Generate template list */
-    if ($s_action=="new"){
+    if (($s_action=="new")||($s_action=="create_user_from_tpl")){
       $this->templates= array();
       $ldap= $this->config->get_ldap_link();
       foreach ($this->config->departments as $key => $value){
@@ -503,7 +504,7 @@ class userManagement extends plugin
       }
 
       /* Use template if there are any of them */
-      if (count($this->templates) && !isset($_POST['new_template'])){
+      if ((count($this->templates) && !isset($_POST['new_template']))||($s_action=="create_user_from_tpl")){
         foreach(array("sn", "givenName", "uid", "got_uid", "templates") as $attr){
           $smarty->assign("$attr", $this->$attr);
         }
