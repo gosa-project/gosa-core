@@ -193,9 +193,11 @@
 	</td>
 </tr>
 <tr>
+<td colspan=2><h2 style='margin-bottom:0px;'><img alt="" src="images/select_phone.png" align="middle">&nbsp;{t}Phone attributes {/t}</h2></td>
+</tr>
+<tr>
 <td>
-		<h2><img alt="" src="images/select_phone.png" align="middle">&nbsp;{t}Phone attributes {/t}</h2>
-		<table summary="" style="width: 100%; vertical-align: top; text-align: left;" border="0" cellpadding="4">
+		<table summary="" style="width: 100%; vertical-align: top; text-align: left;" border="0" cellpadding="0">
         <tr>
         <td colspan=2>
             <input type="checkbox" name='goFonQueueAnnounceHoldtime' value='yes'  {$goFonQueueAnnounceHoldtimeCHK} {$goFonQueueAnnounceHoldtimeACL}>
@@ -217,8 +219,7 @@
 
 </td>
 <td valign='top' style="border-left: 1px solid rgb(160, 160, 160);">
-		<h2><img alt="" src="images/select_phone.png" align="middle">&nbsp;{t}Additional phone attributes {/t}</h2>
-	 	<table summary=""  style="width: 100%; vertical-align: top; text-align: left;" border="0" cellpadding="4">
+	 	<table summary=""  style="width: 100%; vertical-align: top; text-align: left;" border="0" cellpadding="0">
         <tr>
         <td colspan=2>
             <input type="checkbox" name='goFonDialOption_h' value='h' {$goFonDialOption_hCHK} {$goFonDialOption_hACL}>
