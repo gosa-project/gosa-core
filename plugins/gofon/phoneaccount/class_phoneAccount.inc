@@ -359,7 +359,7 @@ class phoneAccount extends plugin
       $sip_entry['callerid']  =$this->phoneNumbers[$i_new_key];
       $sip_entry['mailbox']   =$this->phoneNumbers[$i_new_key];
 
-      if(isset($this->parent->by_object['mailAccount']->mail)){
+      if((isset($this->parent->by_object['mailAccount']->mail))&&($this->parent->by_object['mailAccount']->is_account==true)){
         $s_mail = $this->parent->by_object['mailAccount']->mail;
       }else{
         $s_mail = "";
@@ -1028,7 +1028,7 @@ class phoneAccount extends plugin
 
     /* Just keep one phone number */
     if (count($this->telephoneNumber) && $this->telephoneNumber != ""){
-      $this->attrs['telephoneNumber']= $this->telephoneNumber[0];
+      $this->attrs['telephoneNumber']= $this->telephoneNumber;
     } else {
       $this->attrs['telephoneNumber']= array();
     }
