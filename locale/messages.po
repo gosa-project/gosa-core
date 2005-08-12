@@ -31,7 +31,7 @@ msgstr ""
 #: contrib/gosa.conf:59 contrib/gosa.conf:70
 #: plugins/personal/mail/class_mailAccount.inc:22
 #: plugins/admin/groups/class_groupManagement.inc:373
-#: plugins/admin/users/class_userManagement.inc:707
+#: plugins/admin/users/class_userManagement.inc:708
 #: plugins/admin/ogroups/tabs_ogroups.inc:47
 #: plugins/admin/ogroups/class_ogroupManagement.inc:380
 #: plugins/generic/references/class_reference.inc:24
@@ -40,7 +40,7 @@ msgstr ""
 
 #: contrib/gosa.conf:60 plugins/personal/samba/class_sambaAccount.inc:24
 #: plugins/admin/groups/class_groupManagement.inc:374
-#: plugins/admin/users/class_userManagement.inc:713
+#: plugins/admin/users/class_userManagement.inc:714
 #: plugins/generic/references/class_reference.inc:26
 #: plugins/generic/references/class_reference.inc:28
 msgid "Samba"
@@ -55,7 +55,7 @@ msgstr ""
 #: plugins/personal/generic/generic.tpl:362
 #: plugins/gofax/faxaccount/generic.tpl:10
 #: plugins/addons/addressbook/contents.tpl:14
-#: plugins/admin/users/class_userManagement.inc:711
+#: plugins/admin/users/class_userManagement.inc:712
 #: plugins/admin/departments/generic.tpl:62
 msgid "Fax"
 msgstr ""
@@ -68,7 +68,7 @@ msgstr ""
 #: plugins/addons/addressbook/address_info.tpl:37
 #: plugins/addons/addressbook/address_info.tpl:85
 #: plugins/admin/groups/class_groupManagement.inc:376
-#: plugins/admin/users/class_userManagement.inc:709
+#: plugins/admin/users/class_userManagement.inc:710
 #: plugins/admin/departments/generic.tpl:58
 #: plugins/admin/systems/class_systemManagement.inc:702
 #: plugins/admin/systems/chooser.tpl:12
@@ -97,7 +97,7 @@ msgstr ""
 msgid "ACL"
 msgstr ""
 
-#: contrib/gosa.conf:77
+#: contrib/gosa.conf:77 plugins/admin/ogroups/phonequeue.tpl:31
 msgid "Options"
 msgstr ""
 
@@ -261,7 +261,7 @@ msgstr ""
 #: plugins/admin/systems/startup.tpl:61 plugins/admin/systems/startup.tpl:75
 #: plugins/admin/systems/startup.tpl:95 plugins/admin/ogroups/generic.tpl:38
 #: plugins/admin/ogroups/ogroup_objects.tpl:50
-#: plugins/admin/ogroups/phonequeue.tpl:20
+#: plugins/admin/ogroups/phonequeue.tpl:24
 #: plugins/gofon/phoneaccount/generic.tpl:13
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:710
 msgid "Add"
@@ -288,10 +288,10 @@ msgstr ""
 #: plugins/admin/groups/class_groupManagement.inc:330
 #: plugins/admin/groups/mail_admins.tpl:39
 #: plugins/admin/groups/group_objects.tpl:51
-#: plugins/admin/groups/mail_locals.tpl:70
 #: plugins/admin/groups/application_options.tpl:10
-#: plugins/admin/users/remove.tpl:17 plugins/admin/users/password.tpl:23
-#: plugins/admin/users/class_userManagement.inc:612
+#: plugins/admin/groups/mail_locals.tpl:70 plugins/admin/users/remove.tpl:17
+#: plugins/admin/users/password.tpl:23
+#: plugins/admin/users/class_userManagement.inc:613
 #: plugins/admin/users/template.tpl:46
 #: plugins/admin/applications/remove.tpl:16
 #: plugins/admin/applications/class_applicationManagement.inc:303
@@ -369,7 +369,7 @@ msgstr ""
 #: plugins/admin/systems/phonesettings.tpl:197
 #: plugins/admin/systems/startup.tpl:62 plugins/admin/systems/startup.tpl:76
 #: plugins/admin/systems/startup.tpl:96 plugins/admin/ogroups/generic.tpl:39
-#: plugins/admin/ogroups/remove.tpl:15 plugins/admin/ogroups/phonequeue.tpl:21
+#: plugins/admin/ogroups/remove.tpl:15 plugins/admin/ogroups/phonequeue.tpl:25
 #: plugins/gofon/macro/remove.tpl:14 plugins/gofon/phoneaccount/generic.tpl:15
 msgid "Delete"
 msgstr ""
@@ -461,7 +461,7 @@ msgstr ""
 #: plugins/gofax/blocklists/generic.tpl:77
 #: plugins/gofax/faxaccount/main.inc:89
 #: plugins/admin/groups/class_groupManagement.inc:328
-#: plugins/admin/users/class_userManagement.inc:610
+#: plugins/admin/users/class_userManagement.inc:611
 #: plugins/admin/applications/class_applicationManagement.inc:301
 #: plugins/admin/departments/class_departmentManagement.inc:348
 #: plugins/admin/systems/class_systemManagement.inc:527
@@ -634,7 +634,7 @@ msgstr ""
 
 #: plugins/personal/password/password.tpl:2
 #: plugins/personal/password/changed.tpl:2
-#: plugins/admin/users/class_userManagement.inc:659
+#: plugins/admin/users/class_userManagement.inc:660
 msgid "Change password"
 msgstr ""
 
@@ -725,14 +725,14 @@ msgid "You need to specify your current password in order to proceed."
 msgstr ""
 
 #: plugins/personal/password/main.inc:48 plugins/personal/generic/main.inc:84
-#: plugins/admin/users/class_userManagement.inc:260
+#: plugins/admin/users/class_userManagement.inc:261
 msgid ""
 "The passwords you've entered as 'New password' and 'Repeated new password' "
 "do not match."
 msgstr ""
 
 #: plugins/personal/password/main.inc:51 plugins/personal/generic/main.inc:89
-#: plugins/admin/users/class_userManagement.inc:265
+#: plugins/admin/users/class_userManagement.inc:266
 msgid "The password you've entered as 'New password' is empty."
 msgstr ""
 
@@ -1500,7 +1500,7 @@ msgstr ""
 
 #: plugins/personal/generic/class_user.inc:887
 #: plugins/addons/addressbook/class_addressbook.inc:527
-#: plugins/admin/users/class_userManagement.inc:528
+#: plugins/admin/users/class_userManagement.inc:529
 msgid "The required field 'Name' is not set."
 msgstr ""
 
@@ -1510,7 +1510,7 @@ msgstr ""
 
 #: plugins/personal/generic/class_user.inc:902
 #: plugins/addons/addressbook/class_addressbook.inc:531
-#: plugins/admin/users/class_userManagement.inc:531
+#: plugins/admin/users/class_userManagement.inc:532
 msgid "The required field 'Given name' is not set."
 msgstr ""
 
@@ -1703,7 +1703,7 @@ msgstr ""
 #: plugins/addons/addressbook/address_edit.tpl:75
 #: plugins/addons/addressbook/address_info.tpl:64
 #: plugins/admin/groups/class_groupManagement.inc:384
-#: plugins/admin/users/class_userManagement.inc:667
+#: plugins/admin/users/class_userManagement.inc:668
 #: plugins/admin/applications/class_applicationManagement.inc:354
 #: plugins/admin/systems/class_systemManagement.inc:577
 #: plugins/admin/ogroups/class_ogroupManagement.inc:414
@@ -2294,7 +2294,7 @@ msgstr ""
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:291
 #: plugins/admin/groups/class_groupManagement.inc:348
-#: plugins/admin/users/class_userManagement.inc:647
+#: plugins/admin/users/class_userManagement.inc:648
 #: plugins/admin/applications/class_applicationManagement.inc:323
 #: plugins/admin/departments/class_departmentManagement.inc:277
 #: plugins/admin/systems/class_systemManagement.inc:553
@@ -2305,19 +2305,19 @@ msgstr ""
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:291
 #: plugins/admin/groups/class_groupManagement.inc:348
-#: plugins/admin/users/class_userManagement.inc:647
+#: plugins/admin/users/class_userManagement.inc:648
 #: plugins/admin/applications/class_applicationManagement.inc:323
 #: plugins/admin/departments/class_departmentManagement.inc:277
 #: plugins/admin/systems/class_systemManagement.inc:553
 #: plugins/admin/ogroups/class_ogroupManagement.inc:356
-#: plugins/admin/ogroups/phonequeue.tpl:22
+#: plugins/admin/ogroups/phonequeue.tpl:17
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:324
 msgid "Up"
 msgstr ""
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:292
 #: plugins/admin/groups/class_groupManagement.inc:349
-#: plugins/admin/users/class_userManagement.inc:648
+#: plugins/admin/users/class_userManagement.inc:649
 #: plugins/admin/applications/class_applicationManagement.inc:324
 #: plugins/admin/departments/class_departmentManagement.inc:278
 #: plugins/admin/systems/class_systemManagement.inc:554
@@ -2328,7 +2328,7 @@ msgstr ""
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:292
 #: plugins/admin/groups/class_groupManagement.inc:349
-#: plugins/admin/users/class_userManagement.inc:648
+#: plugins/admin/users/class_userManagement.inc:649
 #: plugins/admin/applications/class_applicationManagement.inc:324
 #: plugins/admin/departments/class_departmentManagement.inc:278
 #: plugins/admin/systems/class_systemManagement.inc:554
@@ -2339,7 +2339,7 @@ msgstr ""
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:293
 #: plugins/admin/groups/class_groupManagement.inc:350
-#: plugins/admin/users/class_userManagement.inc:649
+#: plugins/admin/users/class_userManagement.inc:650
 #: plugins/admin/applications/class_applicationManagement.inc:325
 #: plugins/admin/systems/class_systemManagement.inc:555
 #: plugins/admin/ogroups/class_ogroupManagement.inc:359
@@ -2349,7 +2349,7 @@ msgstr ""
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:293
 #: plugins/admin/groups/class_groupManagement.inc:351
-#: plugins/admin/users/class_userManagement.inc:649
+#: plugins/admin/users/class_userManagement.inc:650
 #: plugins/admin/applications/class_applicationManagement.inc:325
 #: plugins/admin/departments/class_departmentManagement.inc:279
 #: plugins/admin/systems/class_systemManagement.inc:555
@@ -2368,7 +2368,7 @@ msgstr ""
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:296
 #: plugins/admin/groups/class_groupManagement.inc:356
-#: plugins/admin/users/class_userManagement.inc:654
+#: plugins/admin/users/class_userManagement.inc:655
 #: plugins/admin/applications/class_applicationManagement.inc:329
 #: plugins/admin/departments/class_departmentManagement.inc:283
 #: plugins/admin/systems/class_systemManagement.inc:564
@@ -2379,7 +2379,7 @@ msgstr ""
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:297
 #: plugins/admin/groups/class_groupManagement.inc:357
-#: plugins/admin/users/class_userManagement.inc:655
+#: plugins/admin/users/class_userManagement.inc:656
 #: plugins/admin/applications/class_applicationManagement.inc:330
 #: plugins/admin/departments/class_departmentManagement.inc:284
 #: plugins/admin/systems/class_systemManagement.inc:565
@@ -2390,7 +2390,7 @@ msgstr ""
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:297
 #: plugins/admin/groups/class_groupManagement.inc:357
-#: plugins/admin/users/class_userManagement.inc:655
+#: plugins/admin/users/class_userManagement.inc:656
 #: plugins/admin/applications/class_applicationManagement.inc:330
 #: plugins/admin/departments/class_departmentManagement.inc:284
 #: plugins/admin/systems/class_systemManagement.inc:565
@@ -2401,7 +2401,7 @@ msgstr ""
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:300
 #: plugins/admin/groups/class_groupManagement.inc:361
-#: plugins/admin/users/class_userManagement.inc:658
+#: plugins/admin/users/class_userManagement.inc:659
 #: plugins/admin/applications/class_applicationManagement.inc:334
 #: plugins/admin/departments/class_departmentManagement.inc:291
 #: plugins/admin/systems/class_systemManagement.inc:570
@@ -2411,14 +2411,14 @@ msgid "edit"
 msgstr ""
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:300
-#: plugins/admin/users/class_userManagement.inc:658
+#: plugins/admin/users/class_userManagement.inc:659
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:336
 msgid "Edit user"
 msgstr ""
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:301
 #: plugins/admin/groups/class_groupManagement.inc:362
-#: plugins/admin/users/class_userManagement.inc:660
+#: plugins/admin/users/class_userManagement.inc:661
 #: plugins/admin/applications/class_applicationManagement.inc:335
 #: plugins/admin/departments/class_departmentManagement.inc:292
 #: plugins/admin/systems/class_systemManagement.inc:571
@@ -2428,7 +2428,7 @@ msgid "delete"
 msgstr ""
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:301
-#: plugins/admin/users/class_userManagement.inc:660
+#: plugins/admin/users/class_userManagement.inc:661
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:337
 msgid "Delete user"
 msgstr ""
@@ -2440,7 +2440,7 @@ msgstr ""
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:308
 #: plugins/addons/addressbook/contents.tpl:42
 #: plugins/admin/groups/class_groupManagement.inc:386
-#: plugins/admin/users/class_userManagement.inc:669
+#: plugins/admin/users/class_userManagement.inc:670
 #: plugins/admin/applications/class_applicationManagement.inc:355
 #: plugins/admin/departments/class_departmentManagement.inc:298
 #: plugins/admin/systems/class_systemManagement.inc:578
@@ -2517,7 +2517,7 @@ msgid "Fax number for GOfax to trigger on"
 msgstr ""
 
 #: plugins/gofax/faxaccount/generic.tpl:16
-#: plugins/admin/ogroups/phonequeue.tpl:28
+#: plugins/admin/ogroups/phonequeue.tpl:35
 msgid "Language"
 msgstr ""
 
@@ -3369,7 +3369,7 @@ msgid "Delete this entry"
 msgstr ""
 
 #: plugins/admin/groups/class_groupManagement.inc:372
-#: plugins/admin/users/class_userManagement.inc:705
+#: plugins/admin/users/class_userManagement.inc:706
 msgid "Posix"
 msgstr ""
 
@@ -3386,7 +3386,7 @@ msgid "Groupname"
 msgstr ""
 
 #: plugins/admin/groups/class_groupManagement.inc:385
-#: plugins/admin/users/class_userManagement.inc:668
+#: plugins/admin/users/class_userManagement.inc:669
 #: plugins/admin/departments/generic.tpl:4
 #: plugins/admin/systems/terminal.tpl:1
 #: plugins/admin/systems/workstation.tpl:1
@@ -3706,51 +3706,51 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:243
-#: plugins/admin/users/class_userManagement.inc:313
+#: plugins/admin/users/class_userManagement.inc:244
+#: plugins/admin/users/class_userManagement.inc:314
 msgid "You are not allowed to set this users password!"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:349
+#: plugins/admin/users/class_userManagement.inc:350
 #, php-format
 msgid "You're about to delete the user %s."
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:355
-#: plugins/admin/users/class_userManagement.inc:383
+#: plugins/admin/users/class_userManagement.inc:356
+#: plugins/admin/users/class_userManagement.inc:384
 msgid "You are not allowed to delete this user!"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:473
+#: plugins/admin/users/class_userManagement.inc:474
 #: plugins/admin/ogroups/class_ogroup.inc:201
 msgid "none"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:540
+#: plugins/admin/users/class_userManagement.inc:541
 msgid "A person with the choosen name is already used in this tree."
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:651
+#: plugins/admin/users/class_userManagement.inc:652
 msgid "Create new user"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:651
+#: plugins/admin/users/class_userManagement.inc:652
 msgid "New user"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:652
+#: plugins/admin/users/class_userManagement.inc:653
 msgid "Create new template"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:652
+#: plugins/admin/users/class_userManagement.inc:653
 msgid "New template"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:659
+#: plugins/admin/users/class_userManagement.inc:660
 msgid "password"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:667
+#: plugins/admin/users/class_userManagement.inc:668
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:342
 #: ihtml/themes/altlinux/login.tpl:26 ihtml/themes/altlinux/login.tpl:30
 #: ihtml/themes/altlinux/setup_useradmin.tpl:22
@@ -3759,55 +3759,55 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:672
+#: plugins/admin/users/class_userManagement.inc:673
 msgid "This table displays all users, in the selected tree."
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:703
+#: plugins/admin/users/class_userManagement.inc:704
 msgid "GOsa"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:704
+#: plugins/admin/users/class_userManagement.inc:705
 msgid "Edit generic properties"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:706
+#: plugins/admin/users/class_userManagement.inc:707
 msgid "Edit UNIX properties"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:708
+#: plugins/admin/users/class_userManagement.inc:709
 msgid "Edit mail properties"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:710
+#: plugins/admin/users/class_userManagement.inc:711
 msgid "Edit phone properties"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:712
+#: plugins/admin/users/class_userManagement.inc:713
 msgid "Edit fax properies"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:714
+#: plugins/admin/users/class_userManagement.inc:715
 msgid "Edit samba properties"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:715
+#: plugins/admin/users/class_userManagement.inc:716
 msgid "Create user from template"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:716
+#: plugins/admin/users/class_userManagement.inc:717
 msgid "Create user with this template"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:771
+#: plugins/admin/users/class_userManagement.inc:772
 msgid "Online"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:778
+#: plugins/admin/users/class_userManagement.inc:779
 msgid "Offline"
 msgstr ""
 
-#: plugins/admin/users/class_userManagement.inc:980
+#: plugins/admin/users/class_userManagement.inc:981
 #: plugins/admin/users/template.tpl:11
 #: plugins/admin/systems/class_systemManagement.inc:699
 msgid "Template"
@@ -3852,11 +3852,10 @@ msgid ""
 msgstr ""
 
 #: plugins/admin/applications/headpage.tpl:38
-#: plugins/admin/applications/headpage.tpl:41
 msgid "Display applications matching"
 msgstr ""
 
-#: plugins/admin/applications/headpage.tpl:44
+#: plugins/admin/applications/headpage.tpl:41
 msgid "Regular expression for matching application names"
 msgstr ""
 
@@ -5136,7 +5135,6 @@ msgid "Choose a phone type"
 msgstr ""
 
 #: plugins/admin/systems/phonesettings.tpl:13
-#: plugins/gofon/phoneaccount/generic.tpl:66
 msgid "refresh"
 msgstr ""
 
@@ -5813,118 +5811,116 @@ msgstr ""
 msgid "Queue Settings"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:6
-msgid "Generic queue setup"
+#: plugins/admin/ogroups/phonequeue.tpl:4
+#: plugins/gofon/phoneaccount/generic.tpl:1
+#: plugins/gofon/phoneaccount/generic.tpl:4
+msgid "Phone numbers"
 msgstr ""
 
 #: plugins/admin/ogroups/phonequeue.tpl:8
-#: plugins/admin/ogroups/phonequeue.tpl:140
+#: plugins/admin/ogroups/phonequeue.tpl:137
 msgid "Generic queue Settings"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:11
-msgid "Phone Number"
-msgstr ""
-
-#: plugins/admin/ogroups/phonequeue.tpl:23
+#: plugins/admin/ogroups/phonequeue.tpl:18
 msgid "Down"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:39
+#: plugins/admin/ogroups/phonequeue.tpl:46
 msgid "Timeout"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:47
+#: plugins/admin/ogroups/phonequeue.tpl:54
 #: ihtml/themes/altlinux/setup_finish.tpl:31
 #: ihtml/themes/default/setup_finish.tpl:31
 msgid "Retry"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:55
+#: plugins/admin/ogroups/phonequeue.tpl:62
 msgid "Strategy"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:67
+#: plugins/admin/ogroups/phonequeue.tpl:74
 msgid "Max queue length"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:75
+#: plugins/admin/ogroups/phonequeue.tpl:82
 msgid "Announce frequency"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:79
+#: plugins/admin/ogroups/phonequeue.tpl:86
 msgid "(in seconds)"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:84
+#: plugins/admin/ogroups/phonequeue.tpl:91
 msgid "Announce holdtime"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:98
+#: plugins/admin/ogroups/phonequeue.tpl:103
 msgid "Allow the called user to transfer his call"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:106
+#: plugins/admin/ogroups/phonequeue.tpl:109
 msgid "Allows calling user to transfer call"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:114
+#: plugins/admin/ogroups/phonequeue.tpl:115
 msgid "Allow the called to hangup by pressing *"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:122
+#: plugins/admin/ogroups/phonequeue.tpl:121
 msgid "Allows calling to hangup by pressing *"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:130
+#: plugins/admin/ogroups/phonequeue.tpl:127
 msgid "Ring instead of playing background music"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:138
+#: plugins/admin/ogroups/phonequeue.tpl:135
 msgid "Queue sound file setup"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:143
+#: plugins/admin/ogroups/phonequeue.tpl:140
 msgid "Use music on hold instead of ringing"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:152
+#: plugins/admin/ogroups/phonequeue.tpl:149
 msgid "Music on hold"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:160
+#: plugins/admin/ogroups/phonequeue.tpl:157
 msgid "Welcome sound file"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:168
+#: plugins/admin/ogroups/phonequeue.tpl:165
 msgid "Announce message"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:176
+#: plugins/admin/ogroups/phonequeue.tpl:173
 msgid "Sound file for 'You are next ...'"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:184
+#: plugins/admin/ogroups/phonequeue.tpl:181
 msgid "'There are ...'"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:192
+#: plugins/admin/ogroups/phonequeue.tpl:189
 msgid "'... calls waiting'"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:200
+#: plugins/admin/ogroups/phonequeue.tpl:197
 msgid "'Thank you' message"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:208
+#: plugins/admin/ogroups/phonequeue.tpl:205
 msgid "'minutes' sound file"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:216
+#: plugins/admin/ogroups/phonequeue.tpl:213
 msgid "'seconds' sound file"
 msgstr ""
 
-#: plugins/admin/ogroups/phonequeue.tpl:224
+#: plugins/admin/ogroups/phonequeue.tpl:221
 msgid "Hold sound file"
 msgstr ""
 
@@ -5970,51 +5966,51 @@ msgid "Yes"
 msgstr ""
 
 #: plugins/admin/ogroups/class_phonequeue.inc:136
-msgid "ring all available channels until one answers"
+msgid "ring all"
 msgstr ""
 
 #: plugins/admin/ogroups/class_phonequeue.inc:137
-msgid "take turns ringing each available interface"
+msgid "round robin"
 msgstr ""
 
 #: plugins/admin/ogroups/class_phonequeue.inc:138
-msgid "ring interface which was least recently called by this queue"
+msgid "least recently called"
 msgstr ""
 
 #: plugins/admin/ogroups/class_phonequeue.inc:139
-msgid "ring the one with fewest completed calls from this queue"
+msgid "fewest completed calls"
 msgstr ""
 
 #: plugins/admin/ogroups/class_phonequeue.inc:140
-msgid "ring random interface"
+msgid "random"
 msgstr ""
 
 #: plugins/admin/ogroups/class_phonequeue.inc:141
-msgid "round robin with memory, remember where we left off last ring pass"
+msgid "round robin with memory"
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:178
+#: plugins/admin/ogroups/class_phonequeue.inc:180
 msgid "Timeout must be numeric"
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:181
+#: plugins/admin/ogroups/class_phonequeue.inc:183
 msgid "Retry must be numeric"
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:184
+#: plugins/admin/ogroups/class_phonequeue.inc:186
 msgid "Max queue length must be numeric"
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:187
+#: plugins/admin/ogroups/class_phonequeue.inc:189
 msgid "Announce frequency must be numeric"
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:190
+#: plugins/admin/ogroups/class_phonequeue.inc:192
 msgid "There must be least one queue number defined."
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:213
-#: plugins/admin/ogroups/class_phonequeue.inc:549
+#: plugins/admin/ogroups/class_phonequeue.inc:215
+#: plugins/admin/ogroups/class_phonequeue.inc:551
 #: plugins/gofon/macro/class_gofonMacro.inc:181
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:241
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:972
@@ -6024,8 +6020,8 @@ msgid ""
 "error."
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:223
-#: plugins/admin/ogroups/class_phonequeue.inc:559
+#: plugins/admin/ogroups/class_phonequeue.inc:225
+#: plugins/admin/ogroups/class_phonequeue.inc:561
 #: plugins/gofon/macro/class_gofonMacro.inc:192
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:252
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:983
@@ -6033,15 +6029,15 @@ msgstr ""
 msgid "Can't select database %s on %s."
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:250
-#: plugins/admin/ogroups/class_phonequeue.inc:446
-#: plugins/admin/ogroups/class_phonequeue.inc:594
+#: plugins/admin/ogroups/class_phonequeue.inc:252
+#: plugins/admin/ogroups/class_phonequeue.inc:448
+#: plugins/admin/ogroups/class_phonequeue.inc:596
 #, php-format
 msgid "Can't delete in Database %s, on Server %s."
 msgstr ""
 
-#: plugins/admin/ogroups/class_phonequeue.inc:475
 #: plugins/admin/ogroups/class_phonequeue.inc:477
+#: plugins/admin/ogroups/class_phonequeue.inc:479
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1078
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1080
 #, php-format
@@ -6238,35 +6234,34 @@ msgstr ""
 msgid "Phone macro management"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/generic.tpl:1
-#: plugins/gofon/phoneaccount/generic.tpl:4
-msgid "Phone numbers"
+#: plugins/gofon/phoneaccount/generic.tpl:33
+msgid "Phone PIN"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/generic.tpl:40
+#: plugins/gofon/phoneaccount/generic.tpl:47
 msgid "Forward calls to"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/generic.tpl:42
-#: plugins/gofon/phoneaccount/generic.tpl:44
+#: plugins/gofon/phoneaccount/generic.tpl:49
+#: plugins/gofon/phoneaccount/generic.tpl:51
 msgid "Phone number"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/generic.tpl:44
+#: plugins/gofon/phoneaccount/generic.tpl:51
 msgid "Timeout (s)"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/generic.tpl:59
-#: plugins/gofon/phoneaccount/generic.tpl:61
+#: plugins/gofon/phoneaccount/generic.tpl:65
+#: plugins/gofon/phoneaccount/generic.tpl:66
 msgid "Phone macro"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/generic.tpl:67
-msgid "fill out"
+#: plugins/gofon/phoneaccount/generic.tpl:73
+msgid "Refresh"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/generic.tpl:78
-msgid "Phone PIN"
+#: plugins/gofon/phoneaccount/generic.tpl:74
+msgid "Complete"
 msgstr ""
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:104
