@@ -66,6 +66,9 @@ class phonequeue extends plugin
       }
     }
 
+    if($this->goFonQueueAnnounceHoldtime == "no"){
+      $this->goFonQueueAnnounceHoldtime=false;
+    }
     $this->old_phone_numbers = $this->telephoneNumber;
   }
 
@@ -132,7 +135,6 @@ class phonequeue extends plugin
     $smarty= get_smarty();
 
     $smarty->assign("goFonQueueLanguageOptions",array('de'=>_('German'),'ur'=>_('Uruguai')));
-    $smarty->assign("goFonQueueAnnounceHoldtimeOptions",array('no'=>_("No"),'yes'=>_('Yes')));
     $types= array('ringall'    =>_("ring all"),
           'roundrobin' =>_("round robin"),
           'leastrecent'=>_("least recently called"),
@@ -377,6 +379,13 @@ class phonequeue extends plugin
             $this->goFonDialOption_r;
         }
 
+        if($this->goFonQueueAnnounceHoldtime != false) {
+          $this->goFonQueueAnnounceHoldtime = "yes";
+        }else{
+          $this->goFonQueueAnnounceHoldtime = "no";
+        }
+
+
         /* Generate Priority Entry */
         $queue["announce"]              = "";
         $queue["monitor_join"]          = "";
@@ -497,6 +506,12 @@ class phonequeue extends plugin
           $this->$val = false;
         }
       }
+      if(isset($_POST['goFonQueueAnnounceHoldtime'])){
+        $this->goFonQueueAnnounceHoldtime = "yes";
+      }else{
+        $this->goFonQueueAnnounceHoldtime = false;
+      }
+      
     }
 
   }
@@ -515,7 +530,13 @@ class phonequeue extends plugin
     }
     $this->generate_mysql_entension_entries(true);
     if($this->attrs['goFonDialOption']=="") $this->attrs['goFonDialOption']=array();
-    
+  
+    if($this->goFonQueueAnnounceHoldtime != "no" ){
+      $this->attrs['goFonQueueAnnounceHoldtime'] = "yes";
+    }else{
+      $this->attrs['goFonQueueAnnounceHoldtime'] = "no";
+    }
+ 
     /* Save data to LDAP */
     $ldap->cd($this->dn);
     $ldap->modify($this->attrs);

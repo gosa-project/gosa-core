@@ -86,47 +86,6 @@
 			{t}(in seconds){/t}	
 		</td>
 		</tr>
-		<tr>	
-		<td>	
-			{t}Announce holdtime{/t}
-		</td>
-		<td>
-			<select name="goFonQueueAnnounceHoldtime" {$goFonQueueAnnounceHoldtimeACL}>
-            {html_options options=$goFonQueueAnnounceHoldtimeOptions selected=$goFonQueueAnnounceHoldtime}
-            <option disabled>&nbsp;</option>
-            </select>
-		</td>
-		</tr>
-		<tr>
-		<td colspan=2>
-			<input type="checkbox" name='goFonDialOption_t' value='t'  {$goFonDialOption_tCHK} {$goFonDialOption_tACL}>
-			{t}Allow the called user to transfer his call{/t}
-		</td>
-		</tr>
-		<tr>
-		<td colspan=2>
-			<input type="checkbox" name='goFonDialOption_T' value='T' {$goFonDialOption_TCHK} {$goFonDialOption_TACL}>
-			{t}Allows calling user to transfer call{/t}
-		</td>
-		</tr>
-		<tr>
-		<td colspan=2>
-			<input type="checkbox" name='goFonDialOption_h' value='h' {$goFonDialOption_hCHK} {$goFonDialOption_hACL}>
-			{t}Allow the called to hangup by pressing *{/t}
-		</td>
-		</tr>
-		<tr>
-		<td colspan=2>
-			<input type="checkbox" name='goFonDialOption_H' value='H' {$goFonDialOption_HCHK} {$goFonDialOption_HACL}>
-			{t}Allows calling to hangup by pressing *{/t}
-		</td>
-		</tr>
-		<tr>
-		<td colspan=2>
-			<input type="checkbox" name='goFonDialOption_r' value='r' {$goFonDialOption_rCHK} {$goFonDialOption_rACL}>
-			{t}Ring instead of playing background music{/t}
-		</td>
-		</tr>
 		</table>
 </td>
 <td valign='top' style="border-left: 1px solid rgb(160, 160, 160);">
@@ -227,7 +186,59 @@
 
 		</table>
 </td>
+</tr>
+<tr>
+	<td colspan=2>
+		<p class="seperator">
+	</td>
+</tr>
+<tr>
+<td>
+		<h2><img alt="" src="images/select_phone.png" align="middle">&nbsp;{t}Phone attributes {/t}</h2>
+		<table summary="" style="width: 100%; vertical-align: top; text-align: left;" border="0" cellpadding="4">
+        <tr>
+        <td colspan=2>
+            <input type="checkbox" name='goFonQueueAnnounceHoldtime' value='yes'  {$goFonQueueAnnounceHoldtimeCHK} {$goFonQueueAnnounceHoldtimeACL}>
+            {t}Announce holdtime{/t}
+        </td>
+        </tr>
+        <tr>
+        <td colspan=2>
+            <input type="checkbox" name='goFonDialOption_t' value='t'  {$goFonDialOption_tCHK} {$goFonDialOption_tACL}>
+            {t}Allow the called user to transfer his call{/t}
+        </td>
+        </tr>
+        <tr>
+        <td colspan=2>
+            <input type="checkbox" name='goFonDialOption_T' value='T' {$goFonDialOption_TCHK} {$goFonDialOption_TACL}>
+            {t}Allows calling user to transfer call{/t}
+        </td>
+        </table>
 
+</td>
+<td valign='top' style="border-left: 1px solid rgb(160, 160, 160);">
+		<h2><img alt="" src="images/select_phone.png" align="middle">&nbsp;{t}Additional phone attributes {/t}</h2>
+	 	<table summary=""  style="width: 100%; vertical-align: top; text-align: left;" border="0" cellpadding="4">
+        <tr>
+        <td colspan=2>
+            <input type="checkbox" name='goFonDialOption_h' value='h' {$goFonDialOption_hCHK} {$goFonDialOption_hACL}>
+            {t}Allow the called to hangup by pressing *{/t}
+        </td>
+        </tr>
+        <tr>
+        <td colspan=2>
+            <input type="checkbox" name='goFonDialOption_H' value='H' {$goFonDialOption_HCHK} {$goFonDialOption_HACL}>
+            {t}Allows calling to hangup by pressing *{/t}
+        </td>
+        </tr>
+        <tr>
+        <td colspan=2>
+            <input type="checkbox" name='goFonDialOption_r' value='r' {$goFonDialOption_rCHK} {$goFonDialOption_rACL}>
+            {t}Ring instead of playing background music{/t}
+        </td>
+        </tr>
+        </table>
+</td>
 </tr>
 
 </table>
