@@ -524,7 +524,7 @@ class phoneAccount extends plugin
       $macrotab="";
     }else{
 
-      $macrotab ="<table summary=\""._("Parameter")."\" width='100%'>";
+      $macrotab ="<table summary=\""._("Parameter")."\">";
       /* for every single parameter-> display textfile,combo, or true false switch*/
 
 
@@ -586,16 +586,16 @@ class phoneAccount extends plugin
             }else{
               $str="\n<input type='checkbox' name='".$var."' value='1' checked  ".chkacl($this->acl, "goFonMacro").">";
             }
-          $macrotab.= "<td colspan='2'>$str&nbsp;$name";
+          $macrotab.= "<td colspan='2'>$str&nbsp;".base64_decode($name)."";
           break;
 
           case "string":
             $str="<input name='".$var."' value='".$choosen."' ".chkacl($this->acl, "goFonMacro")." style='width:340px;'>";
-          $macrotab.= "<td colspan='2'>$name</td></tr><tr><td colspan='2' style='width:350px'>$str";
+          $macrotab.= "<td>".base64_decode($name)."</td><td>$str";
           break;
 
         }
-        $macrotab.= "</td></tr><tr><td colspan='2'>&nbsp;</td></tr>";
+        $macrotab.= "</td></tr>";
 
       }
       $macrotab.="</table><input name='post_success' type='hidden' value='1'>";

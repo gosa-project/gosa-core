@@ -90,7 +90,7 @@ class macroParameter extends plugin
     foreach($this->goFonMacroParameter as $para){
       $tmp = split("!",$para);
       $num = $tmp[0];
-      $tmp2[$num]['name']        = $tmp[1];
+      $tmp2[$num]['name']        = base64_decode($tmp[1]);
       $tmp2[$num]['type']        = $tmp[2];
       $tmp2[$num]['default']     = $tmp[3];
       $tmp2[$num]['var']         = "var".$num;
@@ -356,7 +356,7 @@ class macroParameter extends plugin
     $this->attrs['goFonMacroParameter']=array();
 
     foreach($this->goFonMacroParameter as $key=>$fonpara){
-      $this->attrs['goFonMacroParameter'][]=$key."!".$fonpara['name']."!".$fonpara['type']."!".$fonpara['default'];
+      $this->attrs['goFonMacroParameter'][]=$key."!".base64_encode($fonpara['name'])."!".$fonpara['type']."!".$fonpara['default'];
     }
 
     if($this->para_count != count($this->attrs['goFonMacroParameter'])){
