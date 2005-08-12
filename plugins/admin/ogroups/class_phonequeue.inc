@@ -25,6 +25,7 @@ class phonequeue extends plugin
   var $goFonQueueThankYou       ="queue-thankyou";
   var $goFonQueueMinutes        ="queue-minutes"; 
   var $goFonQueueSeconds        ="queue-seconds";
+  var $goFonQueueLessThan       ="queue-lessthan";
   var $goFonQueueLanguage       ="queue-holdtime";
   var $goFonQueueStrategy       ="ringall";
   var $goFonQueueAnnounceHoldtime="yes";
@@ -39,7 +40,7 @@ class phonequeue extends plugin
   var $attributes= array( "goFonTimeOut","goFonMaxLen","goFonAnnounceFrequency","goFonDialOption_t","goFonDialOption_T",
       "goFonDialOption_h","goFonDialOption_r",
       "goFonDialOption_H","goFonMusiconHold","goFonWelcomeMusic","goFonQueueReportHold","goFonQueueYouAreNext",
-      "goFonQueueThereAre","goFonQueueCallsWaiting","goFonQueueThankYou","goFonQueueMinutes","goFonQueueSeconds",
+      "goFonQueueThereAre","goFonQueueCallsWaiting","goFonQueueThankYou","goFonQueueMinutes","goFonQueueSeconds","goFonQueueLessThan",
       "telephoneNumber","goFonQueueLanguage","goFonQueueStrategy","goFonQueueAnnounceHoldtime","goFonQueueAnnounce","goFonDialOption","goFonQueueRetry");
   /* ObjectClass */
   var $objectclasses= array("goFonQueue");
@@ -391,7 +392,7 @@ class phonequeue extends plugin
         $queue["monitor_join"]          = "";
         $queue["monitor_format"]        = "";
         $queue["queue_holdtime"]        = $this->goFonQueueAnnounce;
-        $queue["queue_lessthan"]        = "";   
+        $queue["queue_lessthan"]        = $this->goFonQueueLessThan;   
         $queue["announce_round_seconds"]= "";   
         $queue["retry"]                 = $this->goFonQueueRetry;
         $queue["wrapuptime"]            = "";
