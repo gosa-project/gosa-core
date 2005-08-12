@@ -1,34 +1,41 @@
 <table summary="{t}Queue Settings{/t}" style="width: 100%; vertical-align: top; text-align: left;" border="0" cellpadding="4">
 <tr>
 <td valign='top'>
-	<h2>
-	<img alt="" src="images/select_phone.png" align="middle">
-	{t}Generic queue setup{/t}
-	</h2>
-		<table summary="{t}Generic queue Settings{/t}" cellspacing="0" cellpadding="5">
+		<h2><img alt="" src="images/select_phone.png" align="middle">&nbsp;{t}Phone numbers{/t}</h2>
+		<table summary="">
 		<tr>
-		<td>
-			{t}Phone Number{/t}
-		</td>
-		<td>
-			<select style="width:380px; height:60px;" name="goFonQueueNumber_List" size=6 {$telephoneNumberACL}>
+		<td colspan=2>
+		  <table summary="{t}Generic queue Settings{/t}">
+		   <tr>
+		    <td>
+			<select style="width:300px; height:60px;" name="goFonQueueNumber_List" size=6 {$telephoneNumberACL}>
 			{html_options options=$telephoneNumber}
 			<option disabled>&nbsp;</option>
 			</select>
-			<br>
+		</td>
+		<td style="vertical-align:center">
+			<input type="submit" value="{t}Up{/t}" 		name="up_phonenumber" 		{$telephoneNumberACL}><br>
+			<input type="submit" value="{t}Down{/t}" 	name="down_phonenumber" 	{$telephoneNumberACL}>
+		</td>
+		</tr>
+		<tr>
+		 <td colspan=2>
 			<input name="phonenumber" size=20 align=middle maxlength=60 			{$telephoneNumberACL} value="">
 			<input type="submit" value="{t}Add{/t}" 	name="add_phonenumber" 		{$telephoneNumberACL}>&nbsp;
 			<input type="submit" value="{t}Delete{/t}" 	name="delete_phonenumber" 	{$telephoneNumberACL}>
-			<input type="submit" value="{t}Up{/t}" 		name="up_phonenumber" 		{$telephoneNumberACL}>
-			<input type="submit" value="{t}Down{/t}" 	name="down_phonenumber" 	{$telephoneNumberACL}>
-		</td>
+	     </td>
+		</tr>
+		</table>
+		</tr>
+		<tr>
+		  <td colspan=2><h2><img alt="" src="images/select_phone.png" align="middle">&nbsp;{t}Options{/t}</h2></td>
 		</tr>
 		<tr>
 		<td>
 			{t}Language{/t}	
 		</td>
 		<td>
-			<select style="width:380px;" name="goFonQueueLanguage" {$goFonQueueLanguageACL}>
+			<select name="goFonQueueLanguage" {$goFonQueueLanguageACL}>
 			{html_options options=$goFonQueueLanguageOptions selected=$goFonQueueLanguage}
 			<option disabled>&nbsp;</option>
 			</select>
@@ -55,7 +62,7 @@
 			{t}Strategy{/t}	
 		</td>
 		<td>
-			<select style="width:380px;" name="goFonQueueStrategy" {$goFonQueueStrategyACL}>
+			<select name="goFonQueueStrategy" {$goFonQueueStrategyACL}>
             {html_options options=$goFonQueueStrategyOptions selected=$goFonQueueStrategy}
             <option disabled>&nbsp;</option>
             </select>
@@ -84,48 +91,38 @@
 			{t}Announce holdtime{/t}
 		</td>
 		<td>
-			<select style="width:380px;" name="goFonQueueAnnounceHoldtime" {$goFonQueueAnnounceHoldtimeACL}>
+			<select name="goFonQueueAnnounceHoldtime" {$goFonQueueAnnounceHoldtimeACL}>
             {html_options options=$goFonQueueAnnounceHoldtimeOptions selected=$goFonQueueAnnounceHoldtime}
             <option disabled>&nbsp;</option>
             </select>
 		</td>
 		</tr>
 		<tr>
-		<td>
-		</td>
-		<td>
+		<td colspan=2>
 			<input type="checkbox" name='goFonDialOption_t' value='t'  {$goFonDialOption_tCHK} {$goFonDialOption_tACL}>
 			{t}Allow the called user to transfer his call{/t}
 		</td>
 		</tr>
 		<tr>
-		<td>
-		</td>
-		<td>
+		<td colspan=2>
 			<input type="checkbox" name='goFonDialOption_T' value='T' {$goFonDialOption_TCHK} {$goFonDialOption_TACL}>
 			{t}Allows calling user to transfer call{/t}
 		</td>
 		</tr>
 		<tr>
-		<td>
-		</td>
-		<td>
+		<td colspan=2>
 			<input type="checkbox" name='goFonDialOption_h' value='h' {$goFonDialOption_hCHK} {$goFonDialOption_hACL}>
 			{t}Allow the called to hangup by pressing *{/t}
 		</td>
 		</tr>
 		<tr>
-		<td>
-		</td>
-		<td>
+		<td colspan=2>
 			<input type="checkbox" name='goFonDialOption_H' value='H' {$goFonDialOption_HCHK} {$goFonDialOption_HACL}>
 			{t}Allows calling to hangup by pressing *{/t}
 		</td>
 		</tr>
 		<tr>
-		<td>
-		</td>
-		<td>
+		<td colspan=2>
 			<input type="checkbox" name='goFonDialOption_r' value='r' {$goFonDialOption_rCHK} {$goFonDialOption_rACL}>
 			{t}Ring instead of playing background music{/t}
 		</td>
@@ -137,7 +134,7 @@
     <img alt="" src="images/select_phone.png" align="middle">
     {t}Queue sound file setup{/t}
     </h2>
-	<table summary="{t}Generic queue Settings{/t}"  cellspacing="0" cellpadding="5">
+	<table summary="{t}Generic queue Settings{/t}">
 		<!--<tr>
 		<td>
 			{t}Use music on hold instead of ringing{/t}

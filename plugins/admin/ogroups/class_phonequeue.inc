@@ -133,12 +133,14 @@ class phonequeue extends plugin
 
     $smarty->assign("goFonQueueLanguageOptions",array('de'=>_('German'),'ur'=>_('Uruguai')));
     $smarty->assign("goFonQueueAnnounceHoldtimeOptions",array('no'=>_("No"),'yes'=>_('Yes')));
-    $smarty->assign("goFonQueueStrategyOptions",array('ringall'    =>_("ring all available channels until one answers"),
-          'roundrobin' =>_("take turns ringing each available interface"),
-          'leastrecent'=>_("ring interface which was least recently called by this queue"),
-          'fewestcalls'=>_("ring the one with fewest completed calls from this queue"),
-          'random'     =>_("ring random interface"),
-          'rrmemory'   =>_("round robin with memory, remember where we left off last ring pass")));
+    $types= array('ringall'    =>_("ring all"),
+          'roundrobin' =>_("round robin"),
+          'leastrecent'=>_("least recently called"),
+          'fewestcalls'=>_("fewest completed calls"),
+          'random'     =>_("random"),
+          'rrmemory'   =>_("round robin with memory"));
+    sort($types);
+    $smarty->assign("goFonQueueStrategyOptions", $types);
 
     foreach($this->attributes as $key => $val){
       $smarty->assign($val,$this->$val);  
