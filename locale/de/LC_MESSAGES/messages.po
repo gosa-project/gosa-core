@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-08-12 12:36+0200\n"
+"PO-Revision-Date: 2005-08-12 16:53+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -5876,7 +5876,7 @@ msgstr "Arbeitsplätze"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:37
 msgid "Phone queue"
-msgstr "Telefon-Gruppe"
+msgstr "Warteschlange"
 
 #: plugins/admin/ogroups/headpage.tpl:24
 msgid ""
@@ -6120,7 +6120,7 @@ msgstr ""
 
 #: plugins/admin/ogroups/phonequeue.tpl:1
 msgid "Queue Settings"
-msgstr "Gruppen-Einstellungen"
+msgstr "Warteschlangen-Einstellungen"
 
 #: plugins/admin/ogroups/phonequeue.tpl:6
 msgid "Generic queue setup"
@@ -6129,7 +6129,7 @@ msgstr "Allgemeine Einstellungen"
 #: plugins/admin/ogroups/phonequeue.tpl:8
 #: plugins/admin/ogroups/phonequeue.tpl:140
 msgid "Generic queue Settings"
-msgstr "Allgemeine Gruppen-Einstellungen"
+msgstr "Allgemeine Warteschlangen-Einstellungen"
 
 #: plugins/admin/ogroups/phonequeue.tpl:11
 msgid "Phone Number"
@@ -6155,7 +6155,7 @@ msgstr "Strategie"
 
 #: plugins/admin/ogroups/phonequeue.tpl:67
 msgid "Max queue length"
-msgstr "Maximale Grösse der Gruppe"
+msgstr "Maximale Grösse der Warteschlange"
 
 #: plugins/admin/ogroups/phonequeue.tpl:75
 msgid "Announce frequency"
@@ -6253,7 +6253,7 @@ msgstr ""
 
 #: plugins/admin/ogroups/class_phonequeue.inc:83
 msgid "Remove the phone queue from this Account"
-msgstr "Telefon-Gruppe von diesem Konto entfernen"
+msgstr "Warteschlange von diesem Konto entfernen"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:84
 msgid ""
@@ -6264,7 +6264,7 @@ msgstr ""
 
 #: plugins/admin/ogroups/class_phonequeue.inc:86
 msgid "Create phone queue"
-msgstr "Telefon-Gruppe erstellen"
+msgstr "Warteschlange erstellen"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:86
 msgid ""
@@ -6320,7 +6320,7 @@ msgstr "Der Wert für 'Wiederholen' muss numerisch sein"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:184
 msgid "Max queue length must be numeric"
-msgstr "Der Wert für 'Maximale Grösse der Gruppe' muss numerisch sein"
+msgstr "Der Wert für 'Maximale Grösse der Warteschlange' muss numerisch sein"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:187
 msgid "Announce frequency must be numeric"
@@ -6707,7 +6707,7 @@ msgstr "Beenden"
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1045
 #, php-format
 msgid "Removed user '%s' from phone queue '%s'."
-msgstr "Benutzer '%s' von Telefon-Warteschlange '%s' entfernt."
+msgstr "Benutzer '%s' von Warteschlange '%s' entfernt."
 
 #: plugins/gofon/phoneaccount/main.inc:120
 msgid "Phone settings"
