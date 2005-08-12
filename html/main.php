@@ -66,12 +66,28 @@ if (isset ($config->data['MAIN']['COMPILE'])){
   $smarty->compile_dir= '/var/spool/gosa/';
 }
 
+/* Set default */
+$reload_navigation = false;
+
+/* Set last initialised language to current, browser settings */
+if((!isset($_SESSION['Last_init_lang']))){
+  $reload_navigation = true;
+  $_SESSION['Last_init_lang'] = get_browser_language();
+}
+
 /* Language setup */
 if ($config->data['MAIN']['LANG'] == ""){
+  
+  /* If last language != current force navi reload */
+  if($_SESSION['Last_init_lang'] != get_browser_language()){
+    $reload_navigation = true;
+  }
   $lang= get_browser_language();
+  $_SESSION['Last_init_lang'] = $lang;
 } else {
   $lang= $config->data['MAIN']['LANG'];
 }
+
 $lang.=".UTF-8";
 putenv("LANGUAGE=");
 putenv("LANG=$lang");
@@ -220,6 +236,11 @@ $smarty->assign ("go_top", get_template_path('images/go_top.png'));
 $smarty->assign ("go_corner", get_template_path('images/go_corner.png'));
 $smarty->assign ("go_left", get_template_path('images/go_left.png'));
 $smarty->assign ("go_help", get_template_path('images/help.png'));
+
+/* reload navigation if language changed*/  
+if($reload_navigation){
+  $plist->menu="";;
+}
 $plist->gen_menu();
 $smarty->assign ("menu", $plist->menu);
 $smarty->assign ("plug", "$plug");
