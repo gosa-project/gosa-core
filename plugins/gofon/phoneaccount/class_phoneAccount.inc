@@ -591,11 +591,11 @@ class phoneAccount extends plugin
 
           case "string":
             $str="<input name='".$var."' value='".$choosen."' ".chkacl($this->acl, "goFonMacro")." style='width:340px;'>";
-          $macrotab.= "<td>$name</td><td style='width:350px'>$str";
+          $macrotab.= "<td colspan='2'>$name</td></tr><tr><td colspan='2' style='width:350px'>$str";
           break;
 
         }
-        $macrotab.= "</td></tr>";
+        $macrotab.= "</td></tr><tr><td colspan='2'>&nbsp;</td></tr>";
 
       }
       $macrotab.="</table><input name='post_success' type='hidden' value='1'>";
