@@ -365,7 +365,7 @@ class phonequeue extends plugin
           $a_ext[$i]['exten']    = $num;
           $a_ext[$i]['priority'] = 5;
           $a_ext[$i]['app']      = "SetVar";
-          $a_ext[$i]['appdata']  =  $prio;
+          $a_ext[$i]['appdata']  = "QUEUE_PRIO=".$prio;
           $i ++ ; 
           $a_ext[$i]['context']  = 'GOsa';
           $a_ext[$i]['exten']    = $num;
