@@ -31,7 +31,7 @@ class phonequeue extends plugin
   var $goFonQueueAnnounceHoldtime="yes";
   var $telephoneNumber          =array();
   var $goFonQueueMember         =array(); 
-  var $goFonDialOption          ="tThH";
+  var $goFonDialOption          ="";
   var $goFonQueueRetry          =5;
 
   var $old_phone_numbers        =array();
