@@ -566,7 +566,7 @@ class phoneAccount extends plugin
             }
           }
           $str.="</select>";
-          $macrotab.= "<td>$name</td><td>$str";
+          $macrotab.= "<td>".base64_decode($name)."</td><td>$str";
           break;
 
           case "bool":
