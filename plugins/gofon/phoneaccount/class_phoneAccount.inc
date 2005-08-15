@@ -10,12 +10,10 @@ class phoneAccount extends plugin
   /* Attributes */
   var $telephoneNumber        = "";
   var $goFonHardware          = "";
-  var $goFonForwarding        = "";
   var $goFonFormat            = "";
   var $goFonPIN               = "";
   var $goFonDeliveryMode      = "";
   var $phoneNumbers           = array();
-  var $forwarders             = array();
   var $mail                   = "";
   var $hardware_list          = array();
   var $used_hardware          = array();
@@ -35,7 +33,7 @@ class phoneAccount extends plugin
   var $cli_parameters         = array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* attribute list for save action */
-  var $attributes             = array("goFonDeliveryMode", "goFonForwarding", "goFonFormat",
+  var $attributes             = array("goFonDeliveryMode", "goFonFormat",
       "goFonHardware", "goFonPIN", "telephoneNumber", "goFonMacro","macro");
   var $objectclasses= array("goFonAccount");
 
@@ -59,15 +57,6 @@ class phoneAccount extends plugin
         $number= $this->attrs['telephoneNumber'][$i];
         $this->phoneNumbers[$number]= $number;
       }
-    }
-    /* Assemble forwarders */
-    if (isset($this->attrs['goFonForwarding'])){
-      for ($i= 0; $i<$this->attrs['goFonForwarding']['count']; $i++){
-        list($num, $v1, $v2) =split(';', $this->attrs['goFonForwarding'][$i]);
-        $this->forwarders[$num]= "$v1;$v2";
-      }
-    } else {
-      $this->forwarders= array("");
     }
 
     /* Set up has_mailAccount */
@@ -650,18 +639,6 @@ class phoneAccount extends plugin
       }
     }
 
-    /* Check for forwarding action */
-    foreach ($this->forwarders as $nr => $fw){
-
-      /* Buttons pressed? */
-      if (isset($_POST["add_fw$nr"])){
-        $this->forwarders= $this->insert_after("", $nr, $this->forwarders);
-      }
-      if (isset($_POST["remove_fw$nr"])){
-        unset($this->forwarders[$nr]);
-      }
-    }
-
     /* Transfer ACL's */
     foreach($this->attributes as $val){
       $smarty->assign($val."ACL", chkacl($this->acl, "$val"));
@@ -693,28 +670,6 @@ class phoneAccount extends plugin
     $hl.= "</select>\n";
     $smarty->assign ("hardware_list", $hl);
 
-    /* Generate forwarder view */
-    $forwarder_list="";
-    $acl= chkacl($this->acl, "goFonForwaring");
-    foreach ($this->forwarders as $nr => $fw){
-      if ($fw == ""){
-        $number= ""; $timeout= "";
-      } else {
-        list($number, $timeout)= split(";", $fw);
-      }
-      $forwarder_list.= "<tr><td>";
-      $forwarder_list.= "<input name=\"fwn$nr\" size=25 align=\"middle\" maxlength=60 value=\"$number\" $acl>";
-      $forwarder_list.= "</td><td>";
-      $forwarder_list.= "<input name=\"fwt$nr\" size=5 align=\"middle\" maxlength=5 value=\"$timeout\" $acl>";
-      $forwarder_list.= "</td><td>";
-      $forwarder_list.= "<input type=\"submit\" value=\""._("Add")."\" name=\"add_fw$nr\" $acl>";
-      if (count($this->forwarders) > 1){
-        $forwarder_list.= "<input type=\"submit\" value=\""._("Remove")."\" name=\"remove_fw$nr\" $acl>";
-      }
-      $forwarder_list.= "</td></tr>";
-    }
-    $smarty->assign("forwarder_list", $forwarder_list);
-
     /* Show main page */
     $display.= $smarty->fetch(get_template_path('generic.tpl', TRUE, dirname(__FILE__)));
     return($display);
@@ -737,17 +692,6 @@ class phoneAccount extends plugin
           $this->is_modified= TRUE;
         }
         $this->goFonDeliveryMode= $tmp;
-      }
-
-      /* Save forwarding numbers and timeouts */
-      if (chkacl ($this->acl, "goFonForwarder") == ""){
-        foreach ($this->forwarders as $nr => $fw){
-          $tmp= $_POST["fwn$nr"].";".$_POST["fwt$nr"];
-          if ($this->forwarders[$nr] != $tmp){
-            $this->is_modified= TRUE;
-          }
-          $this->forwarders[$nr]= $tmp;
-        }
       }
 
       /* Every macro in the select box are available */
@@ -830,23 +774,6 @@ class phoneAccount extends plugin
       }
 
     }
-    /* Check timestamps and phonenumbers */
-    foreach ($this->forwarders as $fw){
-
-      /* Skip empty values */
-      if ($fw == ";"){
-        continue;
-      }		
-
-      /* Check */
-      list($number, $timeout)= split(";", $fw);
-      if (!is_phone_nr($number)){
-        $message[]= sprintf(_("The number '%s' is no valid phone number!"), $number);
-      }
-      if (!is_id($timeout)){
-        $message[]= sprintf(_("The timeout '%s' contains invalid characters!"), $timeout);
-      }
-    }
 
     /* check for ! in any parameter setting*/
     if(isset($this->macroarray[$this->macro])){
@@ -869,10 +796,6 @@ class phoneAccount extends plugin
     $this->attrs['telephoneNumber']= array();
     foreach ($this->phoneNumbers as $number){
       $this->attrs['telephoneNumber'][]= $number;
-    }
-    $this->attrs['goFonForwarding']= array();
-    foreach ($this->forwarders as $index => $number){
-      $this->attrs['goFonForwarding'][]= "$index;$number";
     }
 
     /* Save settings, or remove goFonMacro attribute*/
@@ -944,16 +867,6 @@ class phoneAccount extends plugin
         $number= $this->attrs['telephoneNumber'][$i];
         $this->phoneNumbers[$number]= $number;
       }
-    }
-
-    /* Assemble forwarders */
-    if (isset($this->attrs['goFonForwarding'])){
-      for ($i= 0; $i<$this->attrs['goFonForwarding']['count']; $i++){
-        list($num, $v1, $v2) =split(';', $this->attrs['goFonForwarding'][$i]);
-        $this->forwarders[$num]= "$v1;$v2";
-      }
-    } else {
-      $this->forwarders= array("");
     }
   }
 

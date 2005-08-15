@@ -2,7 +2,7 @@
  <tr>
   <td style="vertical-align:top; border-right:1px solid #A0A0A0; width:50%">
    <h2><img alt="" align="middle" src="images/banana.png"> {t}Phone numbers{/t}</h2>
-      <select style="width:380px; height:120px;" name="phonenumber_list[]" size=6 multiple {$telephoneNumberACL}>
+      <select style="width:380px;" name="phonenumber_list[]" size=4 multiple {$telephoneNumberACL}>
        {html_options options=$phoneNumbers}
 		<option disabled>
 			&nbsp;
@@ -40,20 +40,6 @@
   </td>
  </tr>
 </table>
-
-   <table summary="">
-	<tr>
-    <td>
-     <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Forward calls to{/t}</h2>
-
-     <table summary="{t}Phone number{/t}">
-      <tr> 
-       <td>{t}Phone number{/t}</td><td>{t}Timeout (s){/t}</td><td>&nbsp;</td>
-      </tr>
-      {$forwarder_list}
-     </table>
-    </td>
-   </table>
   </td>
 
  </tr>
