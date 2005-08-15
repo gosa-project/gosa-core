@@ -277,6 +277,24 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.13.42 NAME 'goFonQueueLessThan'
     SUBSTR caseExactIA5SubstringsMatch
     SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
 
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.43 NAME 'goFonConferenceOptions'
+    DESC 'Holds the queue goFonConferenceOptions definitions'
+    EQUALITY caseExactIA5Match
+    SUBSTR caseExactIA5SubstringsMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.44 NAME 'goFonConferenceTimeOut'
+    DESC 'Holds the queue goFonConferenceTimeOut definitions'
+    EQUALITY caseExactIA5Match
+    SUBSTR caseExactIA5SubstringsMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.45 NAME 'goFonConferenceOwner'
+    DESC 'Holds the queue goFonConferenceOwner definitions'
+    EQUALITY caseExactIA5Match
+    SUBSTR caseExactIA5SubstringsMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+
 # objectclass 
 objectclass (1.3.6.1.4.1.10098.1.2.3.11 NAME 'goFonAccount' SUP top AUXILIARY
 	DESC 'GOFon Account objectclass (v1.0)'
@@ -297,7 +315,7 @@ objectclass (1.3.6.1.4.1.10098.1.2.3.13 NAME 'goFonPickupGroup' SUP top AUXILIAR
 objectclass (1.3.6.1.4.1.10098.1.2.3.14 NAME 'goFonMacro' SUP top STRUCTURAL
 	DESC 'Macro definitions for asterisk machines (v1.0)'
 	MUST ( cn ) 
-	MAY ( goFonMacroVisible $ displayName $ goFonMacroContent $description $
+	MAY ( goFonMacroVisible $ displayName $ goFonMacroContent $ description $
 		  goFonMacroParameter ))
 
 objectclass (1.3.6.1.4.1.10098.1.2.3.15 NAME 'goFonQueue' SUP top AUXILIARY
@@ -309,4 +327,10 @@ objectclass (1.3.6.1.4.1.10098.1.2.3.15 NAME 'goFonQueue' SUP top AUXILIARY
 		  goFonQueueThankYou $ goFonQueueMinutes $ goFonQueueSeconds $ telephoneNumber $
 		  goFonQueueLanguage $ goFonQueueStrategy $ goFonQueueAnnounceHoldtime $ goFonQueueAnnounce $
 		  goFonQueueRetry $ goFonQueueLessThan ))
+
+objectclass (1.3.6.1.4.1.10098.1.2.3.16 NAME 'goFonConference' SUP top STRUCTURAL
+	DESC 'Conference definitions for asterisk machines (v1.0)'
+	MUST ( cn ) 
+	MAY ( description $ goFonConferenceOption $ goFonConferenceTimeout $ goFonPIN $
+		  goFonConferenceOwner ))
 
