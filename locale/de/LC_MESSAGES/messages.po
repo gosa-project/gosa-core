@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-08-16 15:21+0200\n"
+"PO-Revision-Date: 2005-08-16 23:17+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -118,7 +118,7 @@ msgid "ACL"
 msgstr "Zugriffsregeln"
 
 #: contrib/gosa.conf:77 plugins/admin/ogroups/phonequeue.tpl:31
-#: plugins/gofon/conference/generic.tpl:77
+#: plugins/gofon/conference/generic.tpl:85
 msgid "Options"
 msgstr "Optionen"
 
@@ -1618,7 +1618,7 @@ msgstr "Geschlecht"
 #: plugins/admin/systems/workstation.tpl:18
 #: plugins/admin/systems/wingeneric.tpl:13
 #: plugins/admin/systems/component.tpl:13 plugins/admin/ogroups/generic.tpl:21
-#: plugins/gofon/macro/generic.tpl:20 plugins/gofon/conference/generic.tpl:36
+#: plugins/gofon/macro/generic.tpl:20 plugins/gofon/conference/generic.tpl:44
 msgid "Base"
 msgstr "Basis"
 
@@ -1722,7 +1722,7 @@ msgstr "Pager"
 #: plugins/admin/departments/generic.tpl:42
 #: plugins/admin/departments/generic.tpl:50
 #: plugins/admin/systems/printer.tpl:14
-#: plugins/gofon/conference/generic.tpl:47
+#: plugins/gofon/conference/generic.tpl:55
 msgid "Location"
 msgstr "Ort"
 
@@ -2544,7 +2544,7 @@ msgstr "W�hlen Sie den Teilbaum, in den die Sperrliste plaziert werden soll."
 
 #: plugins/gofax/blocklists/generic.tpl:32
 #: plugins/admin/systems/service.tpl:42 plugins/admin/systems/service.tpl:120
-#: include/php_setup.inc:122
+#: plugins/gofon/conference/generic.tpl:36 include/php_setup.inc:122
 msgid "Type"
 msgstr "Typ"
 
@@ -4276,7 +4276,8 @@ msgstr "Kategorie dieses Unterbaums"
 
 #: plugins/admin/departments/generic.tpl:30
 #: plugins/gofon/conference/generic.tpl:38
-#: plugins/gofon/conference/generic.tpl:110
+#: plugins/gofon/conference/generic.tpl:46
+#: plugins/gofon/conference/generic.tpl:118
 msgid "Choose subtree to place department in"
 msgstr "W�hlen Sie den Unterbaum, in den die Abteilung eingepflegt werden soll"
 
@@ -6364,8 +6365,8 @@ msgstr "Es ist mindestens eine Telefonnummer erforderlich."
 #: plugins/gofon/macro/class_gofonMacro.inc:181
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:230
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:885
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:184
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:288
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:205
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:314
 #, php-format
 msgid ""
 "The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql "
@@ -6379,8 +6380,8 @@ msgstr ""
 #: plugins/gofon/macro/class_gofonMacro.inc:192
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:241
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:896
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:195
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:299
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:216
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:325
 #, php-format
 msgid "Can't select database %s on %s."
 msgstr "Die Datenbank %s auf %s kann nicht ausgew�hlt werden."
@@ -6396,8 +6397,8 @@ msgstr "Kann nicht entfernen (Datenbank '%s' auf Server '%s')."
 #: plugins/admin/ogroups/class_phonequeue.inc:489
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:991
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:993
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:336
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:338
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:362
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:364
 #, php-format
 msgid "The specified telephonenumber '%s' is already assigned to '%s'."
 msgstr "Die angegebene Telefonnummer '%s' wird bereits von '%s' verwendet."
@@ -6764,15 +6765,25 @@ msgstr "Dauer"
 msgid "Phone reports"
 msgstr "Telefon-Berichte"
 
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:152
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:165
+msgid ""
+"You have specified a conference 'without PIN' ... please leave the PIN "
+"fields empty."
+msgstr "Sie haben eine Konferenz ohne PIN angelegt - bitte lassen Sie die PIN-Felder leer."
+
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:169
+msgid "Please enter a PIN."
+msgstr "Bitte geben Sie eine PIN ein."
+
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:173
 msgid "Please enter a name for the conference."
 msgstr "Bitte geben Sie einen Namen f�r die Konferenz ein."
 
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:156
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:177
 msgid "Only numeric chars are allowed in Number field."
 msgstr "Der Wert f�r 'Nummer' muss numerisch sein."
 
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:160
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:181
 msgid "Only numbers are allowed in Lifetime."
 msgstr "Der Wert f�r 'Lebenszeit' muss numerisch sein."
 
@@ -6788,44 +6799,44 @@ msgstr "Konferenz-Verwaltung"
 msgid "Name of Conference"
 msgstr "Name der Konferenz"
 
-#: plugins/gofon/conference/generic.tpl:52
+#: plugins/gofon/conference/generic.tpl:60
 msgid "Lifetime in days"
 msgstr "Lebenszeit (in Tagen)"
 
-#: plugins/gofon/conference/generic.tpl:60
+#: plugins/gofon/conference/generic.tpl:68
 msgid "Number"
 msgstr "Nummer"
 
-#: plugins/gofon/conference/generic.tpl:83
+#: plugins/gofon/conference/generic.tpl:91
 msgid "preset PIN"
 msgstr "PIN vorgeben"
 
-#: plugins/gofon/conference/generic.tpl:88
+#: plugins/gofon/conference/generic.tpl:96
 msgid "PIN"
 msgstr "PIN"
 
-#: plugins/gofon/conference/generic.tpl:102
+#: plugins/gofon/conference/generic.tpl:110
 msgid "Record Conference"
 msgstr "Konferenz aufnehmen"
 
-#: plugins/gofon/conference/generic.tpl:107
+#: plugins/gofon/conference/generic.tpl:115
 #, fuzzy
 msgid "Format"
 msgstr "Anschluss"
 
-#: plugins/gofon/conference/generic.tpl:122
+#: plugins/gofon/conference/generic.tpl:130
 msgid "Play music on hold"
 msgstr "Wartemusik bei Halten"
 
-#: plugins/gofon/conference/generic.tpl:130
+#: plugins/gofon/conference/generic.tpl:138
 msgid "Activate menu"
 msgstr ""
 
-#: plugins/gofon/conference/generic.tpl:138
+#: plugins/gofon/conference/generic.tpl:146
 msgid "Announce new or leaving user"
 msgstr "Benachrichtige �ber Abgang/Zugang von Teilnehmern"
 
-#: plugins/gofon/conference/generic.tpl:146
+#: plugins/gofon/conference/generic.tpl:154
 msgid "Count user"
 msgstr "Z�hle Benutzer"
 
@@ -8290,7 +8301,7 @@ msgstr ""
 "aktivieren (dies kann jedoch ein Sicherheitsrisiko darstellen)."
 
 #~ msgid "Additional phone attributes "
-#~ msgstr "ZusÃâ¬tzliche Telefon-Attribute"
+#~ msgstr "ZusÃÂÃ¢ÂÂ¬tzliche Telefon-Attribute"
 
 #~ msgid "Forward calls to"
 #~ msgstr "Anrufe weiterleiten an"
@@ -8299,10 +8310,10 @@ msgstr ""
 #~ msgstr "Zeitlimit (s)"
 
 #~ msgid "The number '%s' is no valid phone number!"
-#~ msgstr "Die Nummer '%s' ist keine gÃÅltige Telefonnummer!"
+#~ msgstr "Die Nummer '%s' ist keine gÃÂÃÂltige Telefonnummer!"
 
 #~ msgid "The timeout '%s' contains invalid characters!"
-#~ msgstr "Das Zeitlimit '%s' enthÃâ¬lt ungÃÅltige Zeichen!"
+#~ msgstr "Das Zeitlimit '%s' enthÃÂÃ¢ÂÂ¬lt ungÃÂÃÂltige Zeichen!"
 
 #~ msgid "No"
 #~ msgstr "Nein"
@@ -8317,10 +8328,14 @@ msgstr ""
 #~ msgstr "Telefonnummer"
 
 #~ msgid "ring all available channels until one answers"
-#~ msgstr "Rufe auf alle verfÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgbaren AnschlÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂsse bis jemand antwortet"
+#~ msgstr ""
+#~ "Rufe auf alle verfÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgbaren "
+#~ "AnschlÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂsse bis jemand antwortet"
 
 #~ msgid "take turns ringing each available interface"
-#~ msgstr "Rufe auf alle verfÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgbaren AnschlÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂsse"
+#~ msgstr ""
+#~ "Rufe auf alle verfÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgbaren "
+#~ "AnschlÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂsse"
 
 #~ msgid "ring interface which was least recently called by this queue"
 #~ msgstr "Rufe Anschluss, der die wenigsten Anrufe hatte"
@@ -8328,17 +8343,19 @@ msgstr ""
 #~ msgid "ring the one with fewest completed calls from this queue"
 #~ msgstr ""
 #~ "Rufe auf Anschluss mit den wenigsten abgeschlossenen "
-#~ "GesprÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬chen"
+#~ "GesprÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬chen"
 
 #~ msgid "ring random interface"
 #~ msgstr ""
-#~ "Rufe auf zufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬lligen Anschluss"
+#~ "Rufe auf zufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬lligen Anschluss"
 
 #~ msgid "round robin with memory, remember where we left off last ring pass"
 #~ msgstr "Ring mit Speicher, an welchem Anschluss der Ring verlassen wurde"
 
 #~ msgid "fill out"
-#~ msgstr "ausfÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂllen"
+#~ msgstr "ausfÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂllen"
 
 #~ msgid "Display lists containing"
 #~ msgstr "Zeige Listen die folgendes enthalten"

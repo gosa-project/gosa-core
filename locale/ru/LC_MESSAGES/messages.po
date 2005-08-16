@@ -114,7 +114,7 @@ msgid "ACL"
 msgstr "Доступ"
 
 #: contrib/gosa.conf:77 plugins/admin/ogroups/phonequeue.tpl:31
-#: plugins/gofon/conference/generic.tpl:77
+#: plugins/gofon/conference/generic.tpl:85
 msgid "Options"
 msgstr "Параметры"
 
@@ -1601,7 +1601,7 @@ msgstr "Пол"
 #: plugins/admin/systems/workstation.tpl:18
 #: plugins/admin/systems/wingeneric.tpl:13
 #: plugins/admin/systems/component.tpl:13 plugins/admin/ogroups/generic.tpl:21
-#: plugins/gofon/macro/generic.tpl:20 plugins/gofon/conference/generic.tpl:36
+#: plugins/gofon/macro/generic.tpl:20 plugins/gofon/conference/generic.tpl:44
 msgid "Base"
 msgstr "Ветка"
 
@@ -1705,7 +1705,7 @@ msgstr "Пейджер"
 #: plugins/admin/departments/generic.tpl:42
 #: plugins/admin/departments/generic.tpl:50
 #: plugins/admin/systems/printer.tpl:14
-#: plugins/gofon/conference/generic.tpl:47
+#: plugins/gofon/conference/generic.tpl:55
 msgid "Location"
 msgstr "Местоположение"
 
@@ -2546,7 +2546,7 @@ msgstr "Выберите ветку стоп-листа"
 
 #: plugins/gofax/blocklists/generic.tpl:32
 #: plugins/admin/systems/service.tpl:42 plugins/admin/systems/service.tpl:120
-#: include/php_setup.inc:122
+#: plugins/gofon/conference/generic.tpl:36 include/php_setup.inc:122
 msgid "Type"
 msgstr "Тип"
 
@@ -4294,7 +4294,8 @@ msgstr "Категория этой ветки"
 
 #: plugins/admin/departments/generic.tpl:30
 #: plugins/gofon/conference/generic.tpl:38
-#: plugins/gofon/conference/generic.tpl:110
+#: plugins/gofon/conference/generic.tpl:46
+#: plugins/gofon/conference/generic.tpl:118
 msgid "Choose subtree to place department in"
 msgstr "Выберите ветку для подразделения"
 
@@ -6466,8 +6467,8 @@ msgstr ""
 #: plugins/gofon/macro/class_gofonMacro.inc:181
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:230
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:885
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:184
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:288
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:205
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:314
 #, php-format
 msgid ""
 "The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql "
@@ -6479,8 +6480,8 @@ msgstr ""
 #: plugins/gofon/macro/class_gofonMacro.inc:192
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:241
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:896
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:195
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:299
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:216
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:325
 #, fuzzy, php-format
 msgid "Can't select database %s on %s."
 msgstr "Невозможно выбрать базу данных!"
@@ -6496,8 +6497,8 @@ msgstr "Невозможно выбрать базу данных!"
 #: plugins/admin/ogroups/class_phonequeue.inc:489
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:991
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:993
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:336
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:338
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:362
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:364
 #, php-format
 msgid "The specified telephonenumber '%s' is already assigned to '%s'."
 msgstr ""
@@ -6874,16 +6875,27 @@ msgstr "Продолжительность"
 msgid "Phone reports"
 msgstr "Телефонные отчеты"
 
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:152
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:165
+msgid ""
+"You have specified a conference 'without PIN' ... please leave the PIN "
+"fields empty."
+msgstr ""
+
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:169
+#, fuzzy
+msgid "Please enter a PIN."
+msgstr "Введите адрес сервера"
+
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:173
 #, fuzzy
 msgid "Please enter a name for the conference."
 msgstr "Введите корректный номер телефона!"
 
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:156
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:177
 msgid "Only numeric chars are allowed in Number field."
 msgstr ""
 
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:160
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:181
 msgid "Only numbers are allowed in Lifetime."
 msgstr ""
 
@@ -6902,47 +6914,47 @@ msgstr "Управление подразделениями"
 msgid "Name of Conference"
 msgstr "Подразделение"
 
-#: plugins/gofon/conference/generic.tpl:52
+#: plugins/gofon/conference/generic.tpl:60
 msgid "Lifetime in days"
 msgstr ""
 
-#: plugins/gofon/conference/generic.tpl:60
+#: plugins/gofon/conference/generic.tpl:68
 #, fuzzy
 msgid "Number"
 msgstr "Ноябрь"
 
-#: plugins/gofon/conference/generic.tpl:83
+#: plugins/gofon/conference/generic.tpl:91
 #, fuzzy
 msgid "preset PIN"
 msgstr "присутствует"
 
-#: plugins/gofon/conference/generic.tpl:88
+#: plugins/gofon/conference/generic.tpl:96
 msgid "PIN"
 msgstr ""
 
-#: plugins/gofon/conference/generic.tpl:102
+#: plugins/gofon/conference/generic.tpl:110
 #, fuzzy
 msgid "Record Conference"
 msgstr "Ссылки"
 
-#: plugins/gofon/conference/generic.tpl:107
+#: plugins/gofon/conference/generic.tpl:115
 #, fuzzy
 msgid "Format"
 msgstr "Порт"
 
-#: plugins/gofon/conference/generic.tpl:122
+#: plugins/gofon/conference/generic.tpl:130
 msgid "Play music on hold"
 msgstr ""
 
-#: plugins/gofon/conference/generic.tpl:130
+#: plugins/gofon/conference/generic.tpl:138
 msgid "Activate menu"
 msgstr ""
 
-#: plugins/gofon/conference/generic.tpl:138
+#: plugins/gofon/conference/generic.tpl:146
 msgid "Announce new or leaving user"
 msgstr ""
 
-#: plugins/gofon/conference/generic.tpl:146
+#: plugins/gofon/conference/generic.tpl:154
 #, fuzzy
 msgid "Count user"
 msgstr "Страна"
@@ -8511,9 +8523,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Ваш веб-сервер проверен. Его параметры подходят для работы с GOsa. "
 #~ "Перейдите к настройке GOsa."
-
-#~ msgid "Please enter the server URI"
-#~ msgstr "Введите адрес сервера"
 
 #~ msgid ""
 #~ "Finally, you need to specify parameters to access the LDAP server. GOsa "
