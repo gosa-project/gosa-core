@@ -347,8 +347,8 @@ class phoneConferenceManagment extends plugin
     $base             = $conferencefilter['depselect'];
     $regex            = $conferencefilter['regex'];
 
-		$this->conferences= get_list2($this->ui->subtreeACL, "(objectClass=goFonConference)",TRUE, $base, array("*"), FALSE);
-    
+		$this->conferences= get_list($this->ui->subtreeACL, "(objectClass=goFonConference)",FALSE, $base, array("*"), FALSE);
+  
     /* NEW LIST MANAGMENT
      * We also need to search for the departments
      * So we are able to navigate like in konquerer

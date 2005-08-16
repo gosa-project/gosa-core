@@ -105,8 +105,6 @@ class conference extends plugin
 	$this->config->make_idepartments();
 	$smarty= get_smarty();
 
-  print_a($_POST);
-
   $smarty->assign("bases" ,array_flip($this->config->departments));
   $smarty->assign("base"  ,$this->base);
 
