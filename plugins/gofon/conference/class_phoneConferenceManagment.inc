@@ -23,7 +23,7 @@ class phoneConferenceManagment extends plugin
 {
 	/* Definitions */
 	var $plHeadline				  = "Phone conference";
-	var $plDescription			= "Managment ";
+	var $plDescription			= "Management";
 
 	/* CLI vars */
 	var $cli_summary			  = "Handling of LDAP subtrees";

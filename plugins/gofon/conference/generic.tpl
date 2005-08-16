@@ -80,7 +80,7 @@
     <tr>
 	<td colspan=2>
 		<input type="checkbox" name="goFonConferenceOption_D" value="D" {$goFonConferenceOption_DCHK} {$goFonConferenceOption_DACL}> 
-		{t}PIN vorgeben{/t}
+		{t}preset PIN{/t}
 	</td>
 	</tr>
 	<tr>
