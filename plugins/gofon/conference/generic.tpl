@@ -33,10 +33,10 @@
 	<td colspan="2"><br></td>
 	</tr>
 	<tr>
-	<td><LABEL for="goFonConferenceOption">{t}Base{/t}</LABEL>{$must}</td>
+	<td><LABEL for="goFonConferenceOption_P">{t}Base{/t}</LABEL>{$must}</td>
 	<td>
-	<select id="goFonConferenceOption" size="1" name="goFonConferenceOption" title="{t}Choose subtree to place department in{/t}"> 
-	{html_options options=$goFonConferenceOptions selected=$goFonConferenceOption}
+	<select id="goFonConferenceOption_P" size="1" name="goFonConferenceOption_P" title="{t}Choose subtree to place department in{/t}"> 
+	{html_options options=$goFonConferenceOptions selected=$goFonConferenceOption_P}
 	</select>
 	</td>
 	</tr>
@@ -79,7 +79,7 @@
 	<table summary="">
     <tr>
 	<td colspan=2>
-		<input type="checkbox" name="goFonConferenceOption_D" value="PD" {$goFonConferenceOption_DCHK} {$goFonConferenceOption_DACL}> 
+		<input type="checkbox" name="goFonConferenceOption_D" value="D" {$goFonConferenceOption_DCHK} {$goFonConferenceOption_DACL}> 
 		{t}PIN vorgeben{/t}
 	</td>
 	</tr>

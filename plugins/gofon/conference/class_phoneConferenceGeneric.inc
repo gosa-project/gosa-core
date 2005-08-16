@@ -21,25 +21,28 @@
 class conference extends plugin
 {
   /* department attributes */
-  var $cn= "";
-  var $description= "";
-  var $base ="";
+  var $cn						  = "";
+  var $description		= "";
+  var $base 				  = "";
+  var $ou 						= "";
+  var $goFonPIN				= "";
 
-
-  var $goFonPIN				   = "";
-
-  var $goFonConferenceOption_D = "";
-  var $goFonConferenceOption_r = "";
-  var $goFonConferenceOption_M = "";
-  var $goFonConferenceOption_s = "";
-  var $goFonConferenceOption_i = "";
-  var $goFonConferenceOption_c = "";
-  var $goFonConferenceOption_P = "";
+  var $goFonConferenceOption   	= "";
+  var $goFonConferenceOption_D 	= "";   // Set PIN 
+  var $goFonConferenceOption_r 	= "";   // record Conference
+  var $goFonConferenceOption_M 	= "";   // Play Music opn hold
+  var $goFonConferenceOption_s 	= "";   // activate menu
+  var $goFonConferenceOption_i 	= "";   // announce new and leaving user
+  var $goFonConferenceOption_c 	= "";   // Count User
+  var $goFonConferenceOption_P 	= "";   // Conference Type, no PIN/PIN
 
   var $goFonConferenceOptionFormat 		= "";
   var $goFonConferenceOptionLifetime 	= "";
   var $goFonConferenceOptionNumber 		= "";
-	
+
+  var $old_tele_number	        = false;
+  var $generate_error           = "";
+
   /* Headpage attributes */
   var $last_dep_sorting= "invalid";
   var $departments= array();
@@ -49,66 +52,68 @@ class conference extends plugin
 						 "goFonConferenceOption_M","goFonConferenceOption_s","goFonConferenceOption_i","goFonConferenceOption_c",
 						 "goFonConferenceOption_P","goFonConferenceOptionFormat","goFonConferenceOptionLifetime","goFonConferenceOptionNumber");
 
-  var $objectclasses= array("top", "gosaDepartment", "organizationalUnit");
+  var $objectclasses= array("top", "goFonConference");
 
   function conference ($config, $dn)
   {
-  	plugin::plugin($config, $dn);
-	$this->is_account= TRUE;
-	$this->ui= get_userinfo();
-	$this->dn= $dn;
-	$this->orig_dn= $dn;
-	$this->config= $config;
+    plugin::plugin($config, $dn);
+    $this->is_account	= TRUE;
+    $this->ui			= get_userinfo();
+    $this->dn			= $dn;
+    $this->orig_dn		= $dn;
+    $this->config		= $config;
 
-	/* Set base */
+    /* Set base */
     if ($this->dn == "new"){
-		$ui= get_userinfo();
-		if(isset($_SESSION['depfilter']['depselect'])){
-			$this->base = $_SESSION['depfilter']['depselect'];
-		}else{
-			$this->base= dn2base($ui->dn);
-		}
-	} else {
-                $this->base= preg_replace ("/^[^,]+,/", "", $this->dn);
-        }
+      $ui= get_userinfo();
+      if(isset($_SESSION['conferencefilter']['depselect'])){
+        $this->base = $_SESSION['conferencefilter']['depselect'];
+      }else{
+        $this->base= dn2base($ui->dn);
+      }
+    } else {
+      $this->base= preg_replace ("/^[^,]+,/", "", $this->dn);
+    }
+
+
+    /* Parse Options ... 
+     * Parameter|Lifetime|number
+     */
+    if($this->dn!="new"){
+      $tmp1= split("\|",$this->attrs['goFonConferenceOption'][0]);
+
+      for($i = 0 ; $i < strlen($tmp1[0]);$i++){
+        $varname = "goFonConferenceOption_".$tmp1[0][$i];
+        $this->$varname = $tmp1[0][$i];    
+      }
+
+      $this->goFonConferenceOptionLifetime  = $tmp1[1];
+      $this->goFonConferenceOptionNumber    = $tmp1[2];
+      $this->old_tele_number                = $tmp1[2];
+    }
   }
 
   function execute()
   {
-	/* Reload departments */
-	$this->config->departments= get_departments($this->dn);
+	$this->config->departments    = get_departments($this->dn);
 	$this->config->make_idepartments();
 	$smarty= get_smarty();
 
-	$smarty->assign("goFonConferenceOptions",		array("P"=>"Conference ",""=>"Conference without PIN"));
-	$smarty->assign("goFonConferenceOptionFormats",	array("P"=>"Conference ",""=>"Conference without PIN"));
-	$smarty->assign("goFonConferenceOption" ,$this->goFonConferenceOption_P);
+	$smarty->assign("goFonConferenceOptions",		    array("P"=>"Conference ",""=>"Conference without PIN"));
+	$smarty->assign("goFonConferenceOptionFormats",	array("wav"=>"Wave","gsm"=>"GSM","wav49"=>"Wave49"));
+	$smarty->assign("goFonConferenceOption",        $this->goFonConferenceOption_P);
 	
 	foreach ($this->attributes as $val){
 		$smarty->assign("$val", $this->$val);
 		$smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
-		if($this->$val){
+		if(!$this->$val){
 			$smarty->assign($val."CHK", "");
 		}else{
 			$smarty->assign($val."CHK", " checked ");
 		}
 	}
-	$smarty->assign("bases", $this->config->idepartments);
-	$smarty->assign("base_select", $this->base);
 	return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }
-
-  function clear_fields()
-  {
-	$this->dn= "";
-	$this->base= "";
-	$this->acl= "#none#";
-
-	foreach ($this->attributes as $val){
-		$this->$val= "";
-	}
-  }
-
 
   function remove_from_parent()
   {
@@ -124,14 +129,17 @@ class conference extends plugin
   /* Save data to object */
   function save_object()
   {
-	if (isset($_POST['base'])){
-		plugin::save_object();
-
-		/* Save base, since this is no LDAP attribute */
-		if (chkacl($this->acl, "create") == ""){
-			$this->base= $_POST['base'];
-		}
-	}
+    plugin::save_object();
+    if(isset($_POST['cn'])){
+      foreach(array("goFonConferenceOption_D","goFonConferenceOption_r","goFonConferenceOption_M","goFonConferenceOption_s",
+            "goFonConferenceOption_i","goFonConferenceOption_c","goFonConferenceOption_P") as $attrs){
+      if(isset($_POST[$attrs])){
+        $this->$attrs = $_POST[$attrs];
+      }else{
+        $this->$attrs = false;
+        }
+      }
+    }
   }
 
 
@@ -139,48 +147,161 @@ class conference extends plugin
   function check()
   {
 	$message= array();
+  
+  if(empty($this->cn)){
+    $message[] =_("Please enter a name for the conference.");
+  }
+  
+  if(!is_numeric($this->goFonConferenceOptionNumber)){
+    $message[] =_("Only numeric chars are allowed in Number field.");
+  }
 
-	/* Permissions for that base? */
-	$this->dn= "ou=$this->ou,".$this->base;
-	$acl= get_permissions ($this->dn, $this->ui->subtreeACL);
-	$acl= get_module_permission($acl, "department", $this->dn);
-	if (chkacl($acl, "create") != ""){
-		$message[]= _("You have no permissions to create a department on this 'Base'.");
-	}
-
-	/* Check for presence of this department */
-	$ldap= $this->config->get_ldap_link();
-	$attrs= $ldap->cat ($this->dn);
-	if ($this->orig_dn == "new" && !($attrs === FALSE)){
-		$message[]= _("Department with that 'Name' already exists.");
-	} elseif ($this->orig_dn != $this->dn && !($attrs === FALSE)){
-		$message[]= _("Department with that 'Name' already exists.");
-	}
-
-	/* All required fields are set? */
-	if ($this->ou == ""){
-		$message[]= _("Required field 'Name' is not set.");
-	}
-	if ($this->description == ""){
-		$message[]= _("Required field 'Description' is not set.");
-	}
-
-	/* Validate and modify - or: spaghetti rules! */
-	if ($this->ou == "incoming"){
-		$message[]= _("The field 'Name' contains the reserved word 'incoming'.".
-				" Please choose another name.");
-	}
-	if (preg_match ('/[,#+:=>\\\\]/', $this->ou)){
-		$message[]= _("The field 'Name' contains invalid characters.");
-	}
-	if (!is_phone_nr($this->telephoneNumber)){
-		$message[]= _("The field 'Phone' contains an invalid phone number.");
-	}
-	if (!is_phone_nr($this->facsimileTelephoneNumber)){
-		$message[]= _("The field 'Fax' contains an invalid phone number.");
-	}
+  if(!is_numeric($this->goFonConferenceOptionLifetime)){
+    $message[] =_("Only numbers are allowed in Lifetime.");
+  }
+ 
+  $this->SQL_remove_me(false);
+  $this->SQL_add_me(false);
+ 
+  if(!empty($this->generate_error)){
+    $message[]=$this->generate_error;
+    $this->generate_error="";
+  }
 
 	return $message;
+  }
+
+
+  function SQL_add_me($save){
+    // Get Configuration for Mysql database Server
+    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
+
+    // Connect to DB server
+    $r_con =  @mysql_connect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+
+    // Check if we are  connected correctly
+    if(!$r_con){
+      $this->generate_error = sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
+          $a_SETUP['SERVER'],$a_SETUP['LOGIN']);
+      gosa_log(mysql_error());
+      return false;
+    }
+
+    // Select database for Extensions
+    $db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
+
+    // Test if we have the database selected correctly
+    if(!$db){
+      $this->generate_error = sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']);
+      gosa_log(mysql_error());
+      return false;
+    }
+   
+    if((!empty($this->goFonConferenceOptionNumber))&&($save==true)){
+      
+      $EXT=array();
+
+      $parameter  ="";
+      foreach(array("goFonConferenceOption_D","goFonConferenceOption_r","goFonConferenceOption_M","goFonConferenceOption_s",
+            "goFonConferenceOption_i","goFonConferenceOption_c","goFonConferenceOption_P") as $attrs){
+        $parameter .= $this->$attrs;
+      }
+
+      $i=1;
+      $context="GOsa";
+      // Set Language to German
+      $EXT[$i]['exten']   =$this->goFonConferenceOptionNumber;
+      $EXT[$i]['context'] = $context;
+      $EXT[$i]['priority']= $i;
+      $EXT[$i]['app']     ="SetLanguage";
+      $EXT[$i]['appdata'] ="de";
+      $i++;      
+
+      if($this->goFonConferenceOption_r == "r"){
+
+      // Recordingformat for conference
+      $EXT[$i]['exten']   =$this->goFonConferenceOptionNumber;
+      $EXT[$i]['context'] =$context;
+      $EXT[$i]['priority']= $i;
+      $EXT[$i]['app']     ="Setvar";
+      $EXT[$i]['appdata'] ="MEETME_RECORDINGFORMAT=".$this->goFonConferenceOptionFormat;
+      $i++;      
+
+      }
+
+      // Answer Call
+      $EXT[$i]['exten']   =$this->goFonConferenceOptionNumber;
+      $EXT[$i]['context'] =$context;
+      $EXT[$i]['priority']=$i;
+      $EXT[$i]['app']     ="answer";
+      $EXT[$i]['appdata'] ="";
+      $i++;      
+
+      // Start Conference 
+      $EXT[$i]['exten']   =$this->goFonConferenceOptionNumber;
+      $EXT[$i]['context'] =$context;
+      $EXT[$i]['priority']=$i;
+      $EXT[$i]['app']     ="MeetMe";
+      $EXT[$i]['appdata'] =$this->goFonConferenceOptionNumber."|".$parameter."|".$this->goFonPIN;
+      
+      $SQL=array();
+    
+      foreach($EXT as $keytop => $valtop){
+      $s_keys = "";
+      $s_values = ""; 
+        foreach($valtop as $key=>$val){
+          $s_keys   .="`".$key."`,";
+          $s_values .="'".$val."',";
+        }
+        $s_keys   =preg_replace("/\,$/","",$s_keys); 
+        $s_values =preg_replace("/\,$/","",$s_values); 
+        $SQL[]="INSERT INTO ".$a_SETUP['EXT_TABLE']." (".$s_keys.") VALUES (".$s_values.");"; 
+      }
+      foreach($SQL as $sqlsyn){
+        mysql_query($sqlsyn);
+      }
+    } 
+    
+
+
+    return(true);
+  }
+
+  function SQL_remove_me($save){
+
+    if($this->old_tele_number){
+      // Get Configuration for Mysql database Server
+      $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
+
+      // Connect to DB server
+      $r_con =  @mysql_connect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+
+      // Check if we are  connected correctly
+      if(!$r_con){
+        $this->generate_error = sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
+            $a_SETUP['SERVER'],$a_SETUP['LOGIN']);
+        gosa_log(mysql_error());
+        return false;
+      }
+
+      // Select database for Extensions
+      $db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
+
+      // Test if we have the database selected correctly
+      if(!$db){
+        $this->generate_error = sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']);
+        gosa_log(mysql_error());
+        return false;
+      }
+
+      $SQL = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE (exten= '".$this->old_tele_number."') OR (exten='".$this->goFonConferenceOptionNumber."')";
+      
+      if($save){
+        @mysql_query($SQL);
+      } 
+
+    }//ENDE  old num availiable ...
+    return(true);
   }
 
 
@@ -189,7 +310,24 @@ class conference extends plugin
   {
 	plugin::save();
 
-	/* Write back to ldap */
+  $this->SQL_remove_me(true);
+  $this->SQL_add_me(true);
+
+  $this->attrs['goFonConferenceOption']="";
+  foreach(array("goFonConferenceOption_D","goFonConferenceOption_r","goFonConferenceOption_M","goFonConferenceOption_s",
+            "goFonConferenceOption_i","goFonConferenceOption_c","goFonConferenceOption_P","goFonConferenceOptionFormat") as $attrs){
+    $this->attrs['goFonConferenceOption'] .= $this->$attrs;
+    unset($this->attrs[$attrs]);         
+  }
+
+  $this->attrs['goFonConferenceOption'].="|".$this->goFonConferenceOptionLifetime;
+  unset($this->attrs['goFonConferenceOptionLifetime']);
+
+  $this->attrs['goFonConferenceOption'].="|".$this->goFonConferenceOptionNumber;
+  unset($this->attrs['goFonConferenceOptionNumber']);
+	
+
+  /* Write back to ldap */
 	$ldap= $this->config->get_ldap_link();
 	$ldap->cat($this->dn);
 	$a= $ldap->fetch();
@@ -209,4 +347,5 @@ class conference extends plugin
 
 }
 
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

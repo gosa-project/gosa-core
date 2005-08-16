@@ -6,8 +6,8 @@ class conferencetabs extends tabs
 
   function conferencetabs($config, $data, $dn)
   {
-	tabs::tabs($config, $data, $dn);
-	$this->base= $this->by_object['conference']->base;
+	  tabs::tabs($config, $data, $dn);
+	  $this->base= $this->by_object['conference']->base; 
   }
 
   function check()
@@ -19,7 +19,7 @@ class conferencetabs extends tabs
   function save()
   {
   	$baseobject= $this->by_object['conference'];
-	$new_dn= 'ou='.$baseobject->ou.','.$baseobject->base;
+	$new_dn= 'cn='.$baseobject->cn.','.$baseobject->base;
 
  	if ($this->dn != $new_dn && $this->dn != "new"){
 		$baseobject->recursive_move($this->dn, $new_dn);
