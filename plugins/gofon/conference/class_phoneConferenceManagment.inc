@@ -343,22 +343,19 @@ class phoneConferenceManagment extends plugin
 
 	function reload()
 	{
-    $base = "dc=gonicus,dc=de";
-   
     $conferencefilter = $_SESSION["conferencefilter"];
     $base             = $conferencefilter['depselect'];
     $regex            = $conferencefilter['regex'];
-     
-		$this->conferences= get_list($this->ui->subtreeACL, "(objectClass=goFonConference)",TRUE, $base, array("*"), TRUE);
+
+		$this->conferences= get_list2($this->ui->subtreeACL, "(objectClass=goFonConference)",TRUE, $base, array("*"), FALSE);
     
     /* NEW LIST MANAGMENT
      * We also need to search for the departments
      * So we are able to navigate like in konquerer
      */
-    $base2 = preg_replace("/ou=people,/i","",$base);
 
     $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
-        TRUE, $base2, array("ou", "description"), TRUE);
+        TRUE, $base, array("ou", "description"), TRUE);
 
     $this->departments= array();
 

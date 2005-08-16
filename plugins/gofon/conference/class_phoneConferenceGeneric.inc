@@ -43,12 +43,14 @@ class conference extends plugin
   var $old_tele_number	        = false;
   var $generate_error           = "";
 
+  var $old_dn;
+
   /* Headpage attributes */
   var $last_dep_sorting= "invalid";
   var $departments= array();
 
   /* attribute list for save action */
-  var $attributes= array("cn", "description", "goFonPIN","goFonConferenceOption_P","goFonConferenceOption_r",
+  var $attributes= array("cn","base", "description", "goFonPIN","goFonConferenceOption_P","goFonConferenceOption_r",
 						 "goFonConferenceOption_M","goFonConferenceOption_s","goFonConferenceOption_i","goFonConferenceOption_c",
 						 "goFonConferenceOption_D","goFonConferenceOptionFormat","goFonConferenceOptionLifetime","telephoneNumber");
 
@@ -94,6 +96,7 @@ class conference extends plugin
       $this->goFonConferenceOptionLifetime  = $tmp1[1];
       $this->old_tele_number                = $this->telephoneNumber;
     }
+    $this->old_dn = $this->dn;
   }
 
   function execute()
@@ -101,6 +104,11 @@ class conference extends plugin
 	$this->config->departments    = get_departments($this->dn);
 	$this->config->make_idepartments();
 	$smarty= get_smarty();
+
+  print_a($_POST);
+
+  $smarty->assign("bases" ,array_flip($this->config->departments));
+  $smarty->assign("base"  ,$this->base);
 
 	$smarty->assign("goFonConferenceOptions",		    array("D"=>"Conference ","d"=>"Conference without PIN"));
 	$smarty->assign("goFonConferenceOptionFormats",	array("WAV"=>"Wave","GSM"=>"GSM","WAV49"=>"Wave49"));
@@ -383,7 +391,11 @@ class conference extends plugin
   unset($this->attrs['goFonConferenceOptionLifetime']);
 
   /* Write back to ldap */
+
+  unset($this->attrs['base']);
+
 	$ldap= $this->config->get_ldap_link();
+
 	$ldap->cat($this->dn);
 	$a= $ldap->fetch();
 	$ldap->cd($this->dn);

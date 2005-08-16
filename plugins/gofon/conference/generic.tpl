@@ -33,10 +33,18 @@
 	<td colspan="2"><br></td>
 	</tr>
 	<tr>
-	<td><LABEL for="goFonConferenceOption_D">{t}Base{/t}</LABEL>{$must}</td>
+	<td><LABEL for="goFonConferenceOption_D">{t}Type{/t}</LABEL>{$must}</td>
 	<td>
 	<select id="goFonConferenceOption_D" size="1" name="goFonConferenceOption_D" title="{t}Choose subtree to place department in{/t}"> 
 	{html_options options=$goFonConferenceOptions selected=$goFonConferenceOption_D}
+	</select>
+	</td>
+	</tr>
+	<tr>
+	<td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
+	<td>
+	<select id="base" size="1" name="base" title="{t}Choose subtree to place department in{/t}"> 
+	{html_options options=$bases selected=$base}
 	</select>
 	</td>
 	</tr>
