@@ -33,10 +33,10 @@
 	<td colspan="2"><br></td>
 	</tr>
 	<tr>
-	<td><LABEL for="goFonConferenceOption_P">{t}Base{/t}</LABEL>{$must}</td>
+	<td><LABEL for="goFonConferenceOption_D">{t}Base{/t}</LABEL>{$must}</td>
 	<td>
-	<select id="goFonConferenceOption_P" size="1" name="goFonConferenceOption_P" title="{t}Choose subtree to place department in{/t}"> 
-	{html_options options=$goFonConferenceOptions selected=$goFonConferenceOption_P}
+	<select id="goFonConferenceOption_D" size="1" name="goFonConferenceOption_D" title="{t}Choose subtree to place department in{/t}"> 
+	{html_options options=$goFonConferenceOptions selected=$goFonConferenceOption_D}
 	</select>
 	</td>
 	</tr>
@@ -60,7 +60,7 @@
 	{t}Number{/t}
 	</td>
 	<td>
-	<input name="goFonConferenceOptionNumber" value="{$goFonConferenceOptionNumber}" {$goFonConferenceOptionNumberACL}>
+	<input name="telephoneNumber" value="{$telephoneNumber}" {$telephoneNumberACL}>
 	</td>
 	</tr>
 	</table>
@@ -79,7 +79,7 @@
 	<table summary="">
     <tr>
 	<td colspan=2>
-		<input type="checkbox" name="goFonConferenceOption_D" value="D" {$goFonConferenceOption_DCHK} {$goFonConferenceOption_DACL}> 
+		<input type="checkbox" name="goFonConferenceOption_P" value="P" {$goFonConferenceOption_PCHK} {$goFonConferenceOption_PACL}> 
 		{t}preset PIN{/t}
 	</td>
 	</tr>

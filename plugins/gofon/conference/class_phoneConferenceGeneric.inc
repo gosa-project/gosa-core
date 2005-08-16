@@ -28,17 +28,17 @@ class conference extends plugin
   var $goFonPIN				= "";
 
   var $goFonConferenceOption   	= "";
-  var $goFonConferenceOption_D 	= "";   // Set PIN 
+  var $goFonConferenceOption_P 	= "";   // Set PIN 
   var $goFonConferenceOption_r 	= "";   // record Conference
   var $goFonConferenceOption_M 	= "";   // Play Music opn hold
   var $goFonConferenceOption_s 	= "";   // activate menu
   var $goFonConferenceOption_i 	= "";   // announce new and leaving user
   var $goFonConferenceOption_c 	= "";   // Count User
-  var $goFonConferenceOption_P 	= "";   // Conference Type, no PIN/PIN
+  var $goFonConferenceOption_D 	= "";   // Conference Type, no PIN/PIN
 
   var $goFonConferenceOptionFormat 		= "";
   var $goFonConferenceOptionLifetime 	= "";
-  var $goFonConferenceOptionNumber 		= "";
+  var $telephoneNumber 		= "";
 
   var $old_tele_number	        = false;
   var $generate_error           = "";
@@ -48,9 +48,9 @@ class conference extends plugin
   var $departments= array();
 
   /* attribute list for save action */
-  var $attributes= array("cn", "description", "goFonPIN","goFonConferenceOption_D","goFonConferenceOption_r",
+  var $attributes= array("cn", "description", "goFonPIN","goFonConferenceOption_P","goFonConferenceOption_r",
 						 "goFonConferenceOption_M","goFonConferenceOption_s","goFonConferenceOption_i","goFonConferenceOption_c",
-						 "goFonConferenceOption_P","goFonConferenceOptionFormat","goFonConferenceOptionLifetime","goFonConferenceOptionNumber");
+						 "goFonConferenceOption_D","goFonConferenceOptionFormat","goFonConferenceOptionLifetime","telephoneNumber");
 
   var $objectclasses= array("top", "goFonConference");
 
@@ -84,12 +84,15 @@ class conference extends plugin
 
       for($i = 0 ; $i < strlen($tmp1[0]);$i++){
         $varname = "goFonConferenceOption_".$tmp1[0][$i];
-        $this->$varname = $tmp1[0][$i];    
+        if($tmp1[0][$i]=="d"){
+          $this->goFonConferenceOption_D = $tmp1[0][$i];    
+        }else{
+          $this->$varname = $tmp1[0][$i];    
+        }
       }
 
       $this->goFonConferenceOptionLifetime  = $tmp1[1];
-      $this->goFonConferenceOptionNumber    = $tmp1[2];
-      $this->old_tele_number                = $tmp1[2];
+      $this->old_tele_number                = $this->telephoneNumber;
     }
   }
 
@@ -99,9 +102,9 @@ class conference extends plugin
 	$this->config->make_idepartments();
 	$smarty= get_smarty();
 
-	$smarty->assign("goFonConferenceOptions",		    array("P"=>"Conference ",""=>"Conference without PIN"));
+	$smarty->assign("goFonConferenceOptions",		    array("D"=>"Conference ","d"=>"Conference without PIN"));
 	$smarty->assign("goFonConferenceOptionFormats",	array("WAV"=>"Wave","GSM"=>"GSM","WAV49"=>"Wave49"));
-	$smarty->assign("goFonConferenceOption",        $this->goFonConferenceOption_P);
+	$smarty->assign("goFonConferenceOption",        $this->goFonConferenceOption_D);
 	
 	foreach ($this->attributes as $val){
 		$smarty->assign("$val", $this->$val);
@@ -131,8 +134,8 @@ class conference extends plugin
   {
     plugin::save_object();
     if(isset($_POST['cn'])){
-      foreach(array("goFonConferenceOption_D","goFonConferenceOption_r","goFonConferenceOption_M","goFonConferenceOption_s",
-            "goFonConferenceOption_i","goFonConferenceOption_c","goFonConferenceOption_P") as $attrs){
+      foreach(array("goFonConferenceOption_P","goFonConferenceOption_r","goFonConferenceOption_M","goFonConferenceOption_s",
+            "goFonConferenceOption_i","goFonConferenceOption_c","goFonConferenceOption_D") as $attrs){
       if(isset($_POST[$attrs])){
         $this->$attrs = $_POST[$attrs];
       }else{
@@ -147,12 +150,24 @@ class conference extends plugin
   function check()
   {
 	$message= array();
-  
+ 
+  if($this->is_number_used()){
+    $message[] =  $this->is_number_used();
+  }
+
+  if((!empty($this->goFonPIN)||($this->goFonConferenceOption_P=="P"))&&($this->goFonConferenceOption_D=="d")){
+    $message[] =_("You have specified a conference 'without PIN' ... please leave the PIN fields empty.");
+  }
+
+  if((empty($this->goFonPIN))&&($this->goFonConferenceOption_P=="P")&&($this->goFonConferenceOption_D=="D")){
+    $message[]= _("Please enter a PIN.");
+  }
+ 
   if(empty($this->cn)){
     $message[] =_("Please enter a name for the conference.");
   }
   
-  if(!is_numeric($this->goFonConferenceOptionNumber)){
+  if(!is_numeric($this->telephoneNumber)){
     $message[] =_("Only numeric chars are allowed in Number field.");
   }
 
@@ -197,20 +212,20 @@ class conference extends plugin
       return false;
     }
    
-    if((!empty($this->goFonConferenceOptionNumber))&&($save==true)){
+    if((!empty($this->telephoneNumber))&&($save==true)){
       
       $EXT=array();
 
       $parameter  ="";
-      foreach(array("goFonConferenceOption_D","goFonConferenceOption_r","goFonConferenceOption_M","goFonConferenceOption_s",
-            "goFonConferenceOption_i","goFonConferenceOption_c","goFonConferenceOption_P") as $attrs){
+      foreach(array("goFonConferenceOption_P","goFonConferenceOption_r","goFonConferenceOption_M","goFonConferenceOption_s",
+            "goFonConferenceOption_i","goFonConferenceOption_c","goFonConferenceOption_D") as $attrs){
         $parameter .= $this->$attrs;
       }
 
       $i=1;
       $context="GOsa";
       // Set Language to German
-      $EXT[$i]['exten']   =$this->goFonConferenceOptionNumber;
+      $EXT[$i]['exten']   =$this->telephoneNumber;
       $EXT[$i]['context'] = $context;
       $EXT[$i]['priority']= $i;
       $EXT[$i]['app']     ="SetLanguage";
@@ -220,7 +235,7 @@ class conference extends plugin
       if($this->goFonConferenceOption_r == "r"){
 
       // Recordingformat for conference
-      $EXT[$i]['exten']   =$this->goFonConferenceOptionNumber;
+      $EXT[$i]['exten']   =$this->telephoneNumber;
       $EXT[$i]['context'] =$context;
       $EXT[$i]['priority']= $i;
       $EXT[$i]['app']     ="Setvar";
@@ -230,7 +245,7 @@ class conference extends plugin
       }
 
       // Answer Call
-      $EXT[$i]['exten']   =$this->goFonConferenceOptionNumber;
+      $EXT[$i]['exten']   =$this->telephoneNumber;
       $EXT[$i]['context'] =$context;
       $EXT[$i]['priority']=$i;
       $EXT[$i]['app']     ="answer";
@@ -238,11 +253,16 @@ class conference extends plugin
       $i++;      
 
       // Start Conference 
-      $EXT[$i]['exten']   =$this->goFonConferenceOptionNumber;
+      $EXT[$i]['exten']   =$this->telephoneNumber;
       $EXT[$i]['context'] =$context;
       $EXT[$i]['priority']=$i;
       $EXT[$i]['app']     ="MeetMe";
-      $EXT[$i]['appdata'] =$this->goFonConferenceOptionNumber."|".$parameter."|".$this->goFonPIN;
+      
+      if(empty($this->goFonPIN)) {
+        $EXT[$i]['appdata'] =$this->telephoneNumber."|".$parameter;
+      }else{
+        $EXT[$i]['appdata'] =$this->telephoneNumber."|".$parameter."|".$this->goFonPIN;
+      }
       $i++; 
 
       // Start Conference 
@@ -250,7 +270,7 @@ class conference extends plugin
       $EXT[$i]['context'] =$context;
       $EXT[$i]['priority']=1;
       $EXT[$i]['app']     ="Goto";
-      $EXT[$i]['appdata'] =$this->goFonConferenceOptionNumber."|1";
+      $EXT[$i]['appdata'] =$this->telephoneNumber."|1";
       $SQL=array();
     
       foreach($EXT as $keytop => $valtop){
@@ -301,7 +321,9 @@ class conference extends plugin
         return false;
       }
 
-      $SQL = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE (exten= '".$this->old_tele_number."') OR (exten='".$this->goFonConferenceOptionNumber."')";
+      $SQL = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE   (exten= '".$this->old_tele_number."') 
+                                                        OR  (exten='".$this->telephoneNumber."') 
+                                                        OR  (exten='".$this->cn."')";
       
       if($save){
         @mysql_query($SQL);
@@ -328,19 +350,15 @@ class conference extends plugin
       }
     }
 
-    foreach($this->phoneNumbers as $num){
-      if(!isset($this->cn)) $this->cn = "";
-
-      if((isset($numbers[$num]))&&(($numbers[$num]['uid'][0]!=$this->uid))){
-        if(isset($numbers[$num]['uid'][0])){
-          return sprintf(_("The specified telephonenumber '%s' is already assigned to '%s'."),$num,$numbers[$num]['uid'][0]);
-        }else{
-          return sprintf(_("The specified telephonenumber '%s' is already assigned to '%s'."),$num,$numbers[$num]['cn'][0]);
-        }
+    $num = $this->telephoneNumber;
+    if((isset($numbers[$num]))&&(($numbers[$num]['cn'][0]!=$this->cn))){
+      if(isset($numbers[$num]['uid'][0])){
+        return sprintf(_("The specified telephonenumber '%s' is already assigned to '%s'."),$num,$numbers[$num]['uid'][0]);
+      }else{
+        return sprintf(_("The specified telephonenumber '%s' is already assigned to '%s'."),$num,$numbers[$num]['cn'][0]);
       }
     }
   }
-
 
 
 
@@ -355,18 +373,14 @@ class conference extends plugin
   $this->SQL_add_me(true);
 
   $this->attrs['goFonConferenceOption']="";
-  foreach(array("goFonConferenceOption_D","goFonConferenceOption_r","goFonConferenceOption_M","goFonConferenceOption_s",
-            "goFonConferenceOption_i","goFonConferenceOption_c","goFonConferenceOption_P","goFonConferenceOptionFormat") as $attrs){
+  foreach(array("goFonConferenceOption_P","goFonConferenceOption_r","goFonConferenceOption_M","goFonConferenceOption_s",
+            "goFonConferenceOption_i","goFonConferenceOption_c","goFonConferenceOption_D","goFonConferenceOptionFormat") as $attrs){
     $this->attrs['goFonConferenceOption'] .= $this->$attrs;
     unset($this->attrs[$attrs]);         
   }
 
   $this->attrs['goFonConferenceOption'].="|".$this->goFonConferenceOptionLifetime;
   unset($this->attrs['goFonConferenceOptionLifetime']);
-
-  $this->attrs['goFonConferenceOption'].="|".$this->goFonConferenceOptionNumber;
-  unset($this->attrs['goFonConferenceOptionNumber']);
-	
 
   /* Write back to ldap */
 	$ldap= $this->config->get_ldap_link();
