@@ -277,7 +277,7 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.13.42 NAME 'goFonQueueLessThan'
     SUBSTR caseExactIA5SubstringsMatch
     SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
 
-attributetype ( 1.3.6.1.4.1.10098.1.1.13.43 NAME 'goFonConferenceOptions'
+attributetype ( 1.3.6.1.4.1.10098.1.1.13.43 NAME 'goFonConferenceOption'
     DESC 'Holds the queue goFonConferenceOptions definitions'
     EQUALITY caseExactIA5Match
     SUBSTR caseExactIA5SubstringsMatch
@@ -332,5 +332,5 @@ objectclass (1.3.6.1.4.1.10098.1.2.3.16 NAME 'goFonConference' SUP top STRUCTURA
 	DESC 'Conference definitions for asterisk machines (v1.0)'
 	MUST ( cn ) 
 	MAY ( description $ goFonConferenceOption $ goFonConferenceTimeout $ goFonPIN $
-		  goFonConferenceOwner ))
+		  goFonConferenceOwner $ telephoneNumber ))
 
