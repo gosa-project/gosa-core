@@ -100,7 +100,7 @@ class conference extends plugin
 	$smarty= get_smarty();
 
 	$smarty->assign("goFonConferenceOptions",		    array("P"=>"Conference ",""=>"Conference without PIN"));
-	$smarty->assign("goFonConferenceOptionFormats",	array("wav"=>"Wave","gsm"=>"GSM","wav49"=>"Wave49"));
+	$smarty->assign("goFonConferenceOptionFormats",	array("WAV"=>"Wave","GSM"=>"GSM","WAV49"=>"Wave49"));
 	$smarty->assign("goFonConferenceOption",        $this->goFonConferenceOption_P);
 	
 	foreach ($this->attributes as $val){
@@ -243,7 +243,14 @@ class conference extends plugin
       $EXT[$i]['priority']=$i;
       $EXT[$i]['app']     ="MeetMe";
       $EXT[$i]['appdata'] =$this->goFonConferenceOptionNumber."|".$parameter."|".$this->goFonPIN;
-      
+      $i++; 
+
+      // Start Conference 
+      $EXT[$i]['exten']   =$this->cn;
+      $EXT[$i]['context'] =$context;
+      $EXT[$i]['priority']=1;
+      $EXT[$i]['app']     ="Goto";
+      $EXT[$i]['appdata'] =$this->goFonConferenceOptionNumber."|1";
       $SQL=array();
     
       foreach($EXT as $keytop => $valtop){
@@ -303,6 +310,40 @@ class conference extends plugin
     }//ENDE  old num availiable ...
     return(true);
   }
+
+
+
+  /* This function checks if the given phonenumbers are available or already in use*/
+  function is_number_used()
+  {
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(|(objectClass=goFonAccount)(objectClass=goFonQueue)(objectClass=goFonConference))", array("telephoneNumber","cn","uid"));
+    while($attrs = $ldap->fetch()) {
+      unset($attrs['telephoneNumber']['count']);
+      foreach($attrs['telephoneNumber'] as $tele){
+        if(!isset($attrs['cn'][0])) $attrs['cn'][0]=$attrs['dn'];
+        if(!isset($attrs['uid'][0])) $attrs['uid'][0]=$attrs['dn'];
+        $numbers[$tele]=$attrs;
+      }
+    }
+
+    foreach($this->phoneNumbers as $num){
+      if(!isset($this->cn)) $this->cn = "";
+
+      if((isset($numbers[$num]))&&(($numbers[$num]['uid'][0]!=$this->uid))){
+        if(isset($numbers[$num]['uid'][0])){
+          return sprintf(_("The specified telephonenumber '%s' is already assigned to '%s'."),$num,$numbers[$num]['uid'][0]);
+        }else{
+          return sprintf(_("The specified telephonenumber '%s' is already assigned to '%s'."),$num,$numbers[$num]['cn'][0]);
+        }
+      }
+    }
+  }
+
+
+
+
 
 
   /* Save to LDAP */

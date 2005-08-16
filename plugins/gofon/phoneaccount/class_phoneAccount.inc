@@ -973,7 +973,7 @@ class phoneAccount extends plugin
   {
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(|(objectClass=goFonAccount)(objectClass=goFonQueue))", array("telephoneNumber","cn","uid"));
+    $ldap->search("(|(objectClass=goFonAccount)(objectClass=goFonQueue)(objectClass=goFonConference))", array("telephoneNumber","cn","uid"));
     while($attrs = $ldap->fetch()) {
       unset($attrs['telephoneNumber']['count']);
       foreach($attrs['telephoneNumber'] as $tele){
