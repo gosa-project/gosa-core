@@ -477,6 +477,7 @@ class phoneAccount extends plugin
 
   function execute()
   {
+
     /* force postmodify event, to restart phones */
 
     $this->parent->by_object['user']->is_modified=TRUE;
@@ -811,11 +812,14 @@ class phoneAccount extends plugin
     }
     unset($this->attrs['macro'])  ;
 
+    $this->attrs['goFonForwarding']=array();
+
     $this->generate_mysql_entension_entries(true);
 
     if($this->attrs['goFonMacro']==""){
       $this->attrs['goFonMacro']=array();
     }
+
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
