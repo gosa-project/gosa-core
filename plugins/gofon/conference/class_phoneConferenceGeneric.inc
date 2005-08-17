@@ -121,6 +121,12 @@ class conference extends plugin
 			$smarty->assign($val."CHK", " checked ");
 		}
 	}
+ 
+  if($this->goFonConferenceOption_P != "P"){
+    $smarty->assign("goFonPINACL"," disabled ");
+    $smarty->assign("goFonPIN","");
+  }
+
 	return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }
 
@@ -141,7 +147,7 @@ class conference extends plugin
     plugin::save_object();
     if(isset($_POST['cn'])){
       foreach(array("goFonConferenceOption_P","goFonConferenceOption_r","goFonConferenceOption_M","goFonConferenceOption_s",
-            "goFonConferenceOption_i","goFonConferenceOption_c","goFonConferenceOption_D") as $attrs){
+            "goFonConferenceOption_i","goFonConferenceOption_c","goFonConferenceOption_D","goFonPIN") as $attrs){
       if(isset($_POST[$attrs])){
         $this->$attrs = $_POST[$attrs];
       }else{
@@ -378,6 +384,9 @@ class conference extends plugin
   $this->SQL_remove_me(true);
   $this->SQL_add_me(true);
 
+  if(empty($this->goFonConferenceOption_P)){
+    $this->attrs['goFonPIN']=array();
+  }
   $this->attrs['goFonConferenceOption']="";
   foreach(array("goFonConferenceOption_P","goFonConferenceOption_r","goFonConferenceOption_M","goFonConferenceOption_s",
             "goFonConferenceOption_i","goFonConferenceOption_c","goFonConferenceOption_D","goFonConferenceOptionFormat") as $attrs){

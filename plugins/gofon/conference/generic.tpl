@@ -87,7 +87,8 @@
 	<table summary="">
     <tr>
 	<td colspan=2>
-		<input type="checkbox" name="goFonConferenceOption_P" value="P" {$goFonConferenceOption_PCHK} {$goFonConferenceOption_PACL}> 
+		<input type="checkbox" onclick="changeState('goFonPIN');" name="goFonConferenceOption_P" 
+					value="P" {$goFonConferenceOption_PCHK} {$goFonConferenceOption_PACL}> 
 		{t}preset PIN{/t}
 	</td>
 	</tr>
@@ -96,7 +97,7 @@
 	&nbsp;	{t}PIN{/t}
 	</td>
 	<td>
-		<input type='text' name="goFonPIN" {$goFonPINACL} value="{$goFonPIN}">
+		<input type='text' name="goFonPIN" {$goFonPINACL} id="goFonPIN" value="{$goFonPIN}">
 	</td>
 	</tr>
 	<tr>
