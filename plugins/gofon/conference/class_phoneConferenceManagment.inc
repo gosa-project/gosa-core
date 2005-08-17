@@ -324,7 +324,7 @@ class phoneConferenceManagment extends plugin
       $a_field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
       $a_field3 = array("string" => "&nbsp;");
       $a_field4 = array("string" => "&nbsp;");
-      $a_field5 = array("string" => "&nbsp;", "attach" => "style='border:none;width:60px;'");
+      $a_field5 = array("string" => "&nbsp;",  "attach" => "style='text-align:  right;border:none'");
 
       /* Add entries */
       $divlist->AddEntry(array($a_field1,$a_field2,$a_field3,$a_field4,$a_field5));
@@ -360,7 +360,7 @@ class phoneConferenceManagment extends plugin
       $a_field2 = array("string"=>sprintf($editlink,$conferencekey,$conference['cn'][0].$number));
       $a_field3 = array("string"=> $cn);
       $a_field4 = array("string"=> $pin);
-      $a_field5 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions));
+      $a_field5 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions), "attach" => "style='text-align:  right;border:none'");
       $divlist->AddEntry(array($a_field1,$a_field2,$a_field3,$a_field4,$a_field5));
     }
 
