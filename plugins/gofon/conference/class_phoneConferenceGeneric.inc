@@ -36,6 +36,8 @@ class conference extends plugin
   var $goFonConferenceOption_c 	= "";   // Count User
   var $goFonConferenceOption_D 	= "";   // Conference Type, no PIN/PIN
 
+  var $goFonConferenceOwner    = "";
+
   var $goFonConferenceOptionFormat 		= "";
   var $goFonConferenceOptionLifetime 	= "";
   var $telephoneNumber 		= "";
@@ -52,7 +54,7 @@ class conference extends plugin
   /* attribute list for save action */
   var $attributes= array("cn","base", "description", "goFonPIN","goFonConferenceOption_P","goFonConferenceOption_r",
 						 "goFonConferenceOption_M","goFonConferenceOption_s","goFonConferenceOption_i","goFonConferenceOption_c",
-						 "goFonConferenceOption_D","goFonConferenceOptionFormat","goFonConferenceOptionLifetime","telephoneNumber");
+						 "goFonConferenceOption_D","goFonConferenceOptionFormat","goFonConferenceOptionLifetime","telephoneNumber","goFonConferenceOwner");
 
   var $objectclasses= array("top", "goFonConference");
 
@@ -77,6 +79,7 @@ class conference extends plugin
       $this->base= preg_replace ("/^[^,]+,/", "", $this->dn);
     }
 
+    $this->goFonConferenceOwner=$this->ui->dn;
 
     /* Parse Options ... 
      * Parameter|Lifetime|number
@@ -121,15 +124,16 @@ class conference extends plugin
 			$smarty->assign($val."CHK", " checked ");
 		}
 	}
- 
-  if($this->goFonConferenceOption_P != "P"){
-    $smarty->assign("goFonPINACL"," disabled ");
-    $smarty->assign("goFonPIN","");
-  }
-  if($this->goFonConferenceOption_r != "r"){
-    $smarty->assign("goFonConferenceOptionFormatACL"," disabled ");
-  }
 
+  if($_SESSION['js']==1){
+    if($this->goFonConferenceOption_P != "P"){
+      $smarty->assign("goFonPINACL"," disabled ");
+      $smarty->assign("goFonPIN","");
+    }
+    if($this->goFonConferenceOption_r != "r"){
+      $smarty->assign("goFonConferenceOptionFormatACL"," disabled ");
+    }
+  }
 	return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }
 
