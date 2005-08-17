@@ -359,6 +359,8 @@ class phoneConferenceManagment extends plugin
  
       $a_field1 = array("string"=>sprintf($userimg,_("Conference")));
 
+      $acl= get_permissions ($conference['dn'], $this->ui->subtreeACL);
+      $this->acl =  get_module_permission($acl, "goFonConference", $conference['dn']);
 
       if(($this->ui->dn==$conference['goFonConferenceOwner'][0])&&(chkacl($this->acl,"goFonConferenceOwner")=="")){
         $a_field2 = array("string"=>sprintf($editlink,$conferencekey,$conference['cn'][0].$number));
@@ -368,9 +370,6 @@ class phoneConferenceManagment extends plugin
       $a_field3 = array("string"=> $cn);
       $a_field4 = array("string"=> $pin);
 
-      $acl= get_permissions ($conference['dn'], $this->ui->subtreeACL);
-      $this->acl =  get_module_permission($acl, "goFonConference", $conference['dn']);
-
       if(($this->ui->dn==$conference['goFonConferenceOwner'][0])&&(chkacl($this->acl,"goFonConferenceOwner")=="")){
         $a_field5 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions), "attach" => "style='text-align:  right;border:none'");
       }elseif(chkacl($this->acl,"goFonConferenceOwner")==""){
@@ -378,7 +377,6 @@ class phoneConferenceManagment extends plugin
       }else{
         $a_field5 = array("string"=>"&nbsp;", "attach" => "style='text-align:  right;border:none'");
       }
-
 
       $divlist->AddEntry(array($a_field1,$a_field2,$a_field3,$a_field4,$a_field5));
     }
