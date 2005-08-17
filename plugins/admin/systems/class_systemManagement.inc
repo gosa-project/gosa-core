@@ -830,9 +830,8 @@ class systems extends plugin
     /* Get all gotoTerminal's */
     $this->terminals= array();
 
-    $res= get_list($this->ui->subtreeACL, "(|$termfilter$workfilter$winfilter$printfilter$phonefilter$serverfilter$netfilter)", TRUE, $base, array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), TRUE);
+    $res= get_list($this->ui->subtreeACL, "(|$termfilter$workfilter$winfilter$printfilter$phonefilter$serverfilter$netfilter)", false, $base, array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE);
 
-      
     /* NEW LIST MANAGMENT
      * We also need to search for the departments
      * So we are able to navigate like in konquerer

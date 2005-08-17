@@ -547,10 +547,11 @@ class groupManagement extends plugin
         $filter= "(&(|(memberUID=" . $groupfilter['guser'] . ")(cn=" . $groupfilter['guser'] . "))$filter)";
       }
     }
-    if ($groupfilter['subsearch'] == "checked"){
-      $res= get_list($this->ui->subtreeACL, "$filter", TRUE, $base, array("cn", "description", "gidNumber"), TRUE);
+    if ($groupfilter['subsearch'] != "checked"){
+      $res= get_list($this->ui->subtreeACL, "$filter", FALSE, $base, array("cn", "description", "gidNumber"), TRUE);
     } else {
       $base= get_groups_ou().$base;
+     
       $res= get_list($this->ui->subtreeACL, "$filter", FALSE, $base, array("cn", "description", "gidNumber"), TRUE);
     }
     if (preg_match("/size limit/i", $error) || preg_match("/size limit/i", $error2)){
@@ -662,7 +663,7 @@ class groupManagement extends plugin
     $base2 = preg_replace("/ou=people,/i","",$base);
 
     $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
-                              TRUE, $base2, array("ou", "description"), TRUE);
+                              FALSE, $base2, array("ou", "description"), TRUE);
 
     $this->departments= array();
     $tmp = array();
@@ -686,15 +687,16 @@ class groupManagement extends plugin
       }
     }
     if ($groupfilter['subsearch'] == "checked"){
-      $res= get_list($this->ui->subtreeACL, "$filter", TRUE, $base, array("cn", "description", "gidNumber"), TRUE);
+      $res= get_list($this->ui->subtreeACL, "$filter", FALSE, $base, array("cn", "description", "gidNumber"), TRUE);
     } else {
-      $base= get_groups_ou().$base;
+     $base= get_groups_ou().$base;
       $res= get_list($this->ui->subtreeACL, "$filter", FALSE, $base, array("cn", "description", "gidNumber"), TRUE);
     }
     if (preg_match("/size limit/i", $error) || preg_match("/size limit/i", $error2)){
       $_SESSION['limit_exceeded']= TRUE;
     }
 
+    $this->grouplist = array();  
     foreach ($res as $value){
       $this->grouplist[$value['gidNumber'][0]]= $value;
     }
