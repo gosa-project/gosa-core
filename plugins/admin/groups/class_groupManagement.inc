@@ -607,7 +607,7 @@ class groupManagement extends plugin
     $primaries= array();
     $ldap= $this->config->get_ldap_link(TRUE);
     $ldap->cd($base);
-    $ldap->search("(&(uid=$regex)(!(uid=*$))(objectClass=posixAccount)(gidNumber=*))", array("gidNumber", "cn"));
+    $ldap->ls("(&(uid=$regex)(!(uid=*$))(objectClass=posixAccount)(gidNumber=*))", array("gidNumber", "cn"));
     $error= $ldap->error;
     while ($attrs= $ldap->fetch()){
       $primaries[$attrs['gidNumber'][0]]= $attrs['cn'][0];
@@ -647,7 +647,7 @@ class groupManagement extends plugin
     if ($groupfilter['functionalgroups'] == "checked"){
       $ldap->cd($base);
       $ldap->set_size_limit($_SESSION['size_limit']);
-      $ldap->search("(&(cn=$regex)(objectClass=posixGroup)(!(|(objectClass=gosaMailAccount)(objectClass=gosaApplicationGroup)$sfilter)))", array("cn", "gidNumber", "description"));
+      $ldap->ls("(&(cn=$regex)(objectClass=posixGroup)(!(|(objectClass=gosaMailAccount)(objectClass=gosaApplicationGroup)$sfilter)))", array("cn", "gidNumber", "description"));
       $error2= $ldap->error;
       while ($attrs= $ldap->fetch()){
         if (!isset($primaries[$attrs['gidNumber'][0]])){
@@ -696,7 +696,6 @@ class groupManagement extends plugin
       $_SESSION['limit_exceeded']= TRUE;
     }
 
-    $this->grouplist = array();  
     foreach ($res as $value){
       $this->grouplist[$value['gidNumber'][0]]= $value;
     }
