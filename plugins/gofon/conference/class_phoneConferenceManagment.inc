@@ -290,7 +290,8 @@ class phoneConferenceManagment extends plugin
     /* Images for delete / edit */
     $actions = "<input type='image' src='images/edit.png' 		 alt='"._("edit")."' 	  name='conf_edit_%KEY%' title='"._("Edit this entry")."'>";
     $actions.= "<input type='image' src='images/edittrash.png' alt='"._("delete")."' 	name='conf_del_%KEY%'  title='"._("Delete this entry")."'>";
-
+    
+    $actions2= "<input type='image' src='images/edittrash.png' alt='"._("delete")."' 	name='conf_del_%KEY%'  title='"._("Delete this entry")."'>";
     /* open an entry */
     $linkopen= "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
 
@@ -339,7 +340,7 @@ class phoneConferenceManagment extends plugin
     /* Insert conferneces*/
     foreach($this->conferences as $conferencekey => $conference ){
   
-      if(isset($conference['goFonPIN'][0])){
+      if((isset($conference['goFonPIN'][0]))&&($this->ui->dn==$conference['goFonConferenceOwner'][0])){
         $pin = $conference['goFonPIN'][0];
       }else{
         $pin = "&nbsp;";
@@ -357,10 +358,28 @@ class phoneConferenceManagment extends plugin
       $cn = $data['cn'][0];
  
       $a_field1 = array("string"=>sprintf($userimg,_("Conference")));
-      $a_field2 = array("string"=>sprintf($editlink,$conferencekey,$conference['cn'][0].$number));
+
+
+      if(($this->ui->dn==$conference['goFonConferenceOwner'][0])&&(chkacl($this->acl,"goFonConferenceOwner")=="")){
+        $a_field2 = array("string"=>sprintf($editlink,$conferencekey,$conference['cn'][0].$number));
+      }else{  
+        $a_field2 = array("string"=>$conference['cn'][0].$number);
+      }
       $a_field3 = array("string"=> $cn);
       $a_field4 = array("string"=> $pin);
-      $a_field5 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions), "attach" => "style='text-align:  right;border:none'");
+
+      $acl= get_permissions ($conference['dn'], $this->ui->subtreeACL);
+      $this->acl =  get_module_permission($acl, "goFonConference", $conference['dn']);
+
+      if(($this->ui->dn==$conference['goFonConferenceOwner'][0])&&(chkacl($this->acl,"goFonConferenceOwner")=="")){
+        $a_field5 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions), "attach" => "style='text-align:  right;border:none'");
+      }elseif(chkacl($this->acl,"goFonConferenceOwner")==""){
+        $a_field5 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions2), "attach" => "style='text-align:  right;border:none'");
+      }else{
+        $a_field5 = array("string"=>"&nbsp;", "attach" => "style='text-align:  right;border:none'");
+      }
+
+
       $divlist->AddEntry(array($a_field1,$a_field2,$a_field3,$a_field4,$a_field5));
     }
 

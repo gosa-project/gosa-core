@@ -26,6 +26,7 @@ class conference extends plugin
   var $base 				  = "";
   var $ou 						= "";
   var $goFonPIN				= "";
+  var $acl = "";
 
   var $goFonConferenceOption   	= "";
   var $goFonConferenceOption_P 	= "";   // Set PIN 
@@ -79,7 +80,9 @@ class conference extends plugin
       $this->base= preg_replace ("/^[^,]+,/", "", $this->dn);
     }
 
-    $this->goFonConferenceOwner=$this->ui->dn;
+   $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
+   $this->acl= get_module_permission($acl, "goFonConference", $this->dn);
+   $this->goFonConferenceOwner=$this->ui->dn;
 
     /* Parse Options ... 
      * Parameter|Lifetime|number
@@ -104,6 +107,9 @@ class conference extends plugin
 
   function execute()
   {
+  $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
+  $this->acl= get_module_permission($acl, "goFonConference", $this->dn);
+
 	$this->config->departments    = get_departments($this->dn);
 	$this->config->make_idepartments();
 	$smarty= get_smarty();
@@ -407,6 +413,12 @@ class conference extends plugin
   /* Write back to ldap */
 
   unset($this->attrs['base']);
+
+  foreach($this->attributes as $atr){
+    if(chkacl($this->acl, $atr)!=""){
+      unset($this->attrs[$atr]);
+    }
+  }
 
 	$ldap= $this->config->get_ldap_link();
 

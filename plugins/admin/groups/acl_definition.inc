@@ -174,6 +174,25 @@ $ACLD['pureftpd']=   array("FTPUploadBandwidth",
 			"FTPQuotaFiles",
 			"FTPUploadRatio",
 			"FTPDownloadRatio");
+$ACLD['goFonConference']= array(
+			"goFonConference",
+			"goFonPIN",
+			"base",
+			"cn",
+			"description",
+			"telephoneNumber",			
+			"goFonConferenceOption",
+			"goFonConferenceOptionLifetime",
+			"goFonConferenceOptionFormat",
+			"goFonConferenceOption_s",
+			"goFonConferenceOption_i",
+			"goFonConferenceOption_r",
+			"goFonConferenceOption_d",
+			"goFonConferenceOption_D",
+			"goFonConferenceOption_P",
+			"goFonConferenceOption_M",
+			"goFonConferenceOption_c",
+			"goFonConferenceOwner");
 
 $ACLD['global-addressbook']=  array("create", "delete");
 ?>
