@@ -427,9 +427,9 @@ class applicationManagement extends plugin
         } else {
                 $regex= "*";
         }
-
+      
         /* Generate application list */
-        $res= get_list($this->ui->subtreeACL, "(&(cn=$regex)(objectClass=gosaApplication))", TRUE, $base, array("*"), TRUE);
+        $res= get_list($this->ui->subtreeACL, "(&(cn=$regex)(objectClass=gosaApplication))", FALSE, "ou=apps,".$base, array("*"), TRUE);
         $this->applications= array();
         foreach ($res as $value){
           $this->applications[]= $value;
