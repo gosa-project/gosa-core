@@ -248,6 +248,7 @@ class phoneConferenceManagment extends plugin
       } else {
         show_errors($message);
       }
+      $this->reload();
     }
 
     /* if edit or new, show dialog */
@@ -300,6 +301,8 @@ class phoneConferenceManagment extends plugin
     $divlist->SetHeader(array(
           array("string" => "&nbsp;"),            
           array("string" =>_("Name / nummer")),
+          array("string" => _("Owner")),
+          array("string" => _("PIN")),
           array("string" =>_("Actions"), "attach" => "style='text-align:  right;border:none'")));
 
     /* Insert departments in divlist*/
@@ -319,10 +322,12 @@ class phoneConferenceManagment extends plugin
       /* Prepare and insert fields*/
       $a_field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>","attach"=>"style='width:22px;'");
       $a_field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
-      $a_field3 = array("string" => "&nbsp;", "attach" => "style='border:none;width:60px;'");
+      $a_field3 = array("string" => "&nbsp;");
+      $a_field4 = array("string" => "&nbsp;");
+      $a_field5 = array("string" => "&nbsp;", "attach" => "style='border:none;width:60px;'");
 
       /* Add entries */
-      $divlist->AddEntry(array($a_field1,$a_field2,$a_field3));
+      $divlist->AddEntry(array($a_field1,$a_field2,$a_field3,$a_field4,$a_field5));
     }
 
     /* Image shown in divlist */
@@ -333,10 +338,23 @@ class phoneConferenceManagment extends plugin
 
     /* Insert conferneces*/
     foreach($this->conferences as $conferencekey => $conference ){
+  
+      if(isset($conference['goFonPIN'][0])){
+        $pin = $conference['goFonPIN'][0];
+      }else{
+        $pin = "&nbsp;";
+      }
+      $ldap= $this->config->get_ldap_link();
+      $ldap->cd ($conference['goFonConferenceOwner'][0]);
+      $data = $ldap->fetch($ldap->cat($conference['goFonConferenceOwner'][0]));
+      $cn = $data['cn'][0];
+ 
       $a_field1 = array("string"=>sprintf($userimg,_("Conference")));
       $a_field2 = array("string"=>sprintf($editlink,$conferencekey,$conference['cn'][0]));
-      $a_field3 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions));
-      $divlist->AddEntry(array($a_field1,$a_field2,$a_field3));
+      $a_field3 = array("string"=> $cn);
+      $a_field4 = array("string"=> $pin);
+      $a_field5 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions));
+      $divlist->AddEntry(array($a_field1,$a_field2,$a_field3,$a_field4,$a_field5));
     }
 
     $smarty->assign("search_image",     get_template_path('images/search.png'));
