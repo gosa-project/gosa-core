@@ -110,7 +110,7 @@
     <tr>
 	<td colspan=2>
 		<input type="checkbox" onclick="changeState('goFonConferenceOptionFormat');" name="goFonConferenceOption_r" value="r" {$goFonConferenceOption_rCHK} {$goFonConferenceOption_rACL}> 
-    	{t}Record Conference{/t}
+    	{t}Record conference{/t}
 	</td>
 	</tr>
 	<tr>
@@ -118,7 +118,7 @@
 	&nbsp;
 	</td>
 	<td>
-	{t}Format{/t}&nbsp;
+	{t}Sound file format{/t}&nbsp;
 	<select id="goFonConferenceOptionFormat" size="1" name="goFonConferenceOptionFormat" {$goFonConferenceOptionFormatACL} title="{t}Choose subtree to place department in{/t}"> 
 	{html_options options=$goFonConferenceOptionFormats selected=$goFonConferenceOptionFormat}
 	</select>
@@ -141,19 +141,19 @@
 	<tr>
 	<td>
 		<input type="checkbox" name="goFonConferenceOption_s" value="s" {$goFonConferenceOption_sCHK} {$goFonConferenceOption_sACL}> 
-		{t}Activate menu{/t}
+		{t}Activate session menu{/t}
 	</td>
 	</tr>
 	<tr>
 	<td>
 		<input type="checkbox" name="goFonConferenceOption_i" value="i" {$goFonConferenceOption_iCHK} {$goFonConferenceOption_iACL}> 
-		{t}Announce new or leaving user{/t}
+		{t}Announce users joining or leaving the conference{/t}
 	</td>
 	</tr>
 	<tr>
 	<td>
 		<input type="checkbox" name="goFonConferenceOption_c" value="c" {$goFonConferenceOption_cCHK} {$goFonConferenceOption_cACL}> 
-		{t}Count user{/t}
+		{t}Count users{/t}
 	</td>
 	</tr>
 	</table>
