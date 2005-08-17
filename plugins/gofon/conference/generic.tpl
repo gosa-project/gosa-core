@@ -1,22 +1,50 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
 <tr>
-<td style="vertical-align:top;">
-<h2>
-<img alt="" align="middle" src="images/rightarrow.png"> {t}Properties{/t}
-</h2>
-     
+ <td colspan=3>
+<h2 style='margin:0px; padding:0px;'><img alt="" align="middle" src="images/rightarrow.png"> {t}Properties{/t}</h2>
+ </td>
+</tr>
+<tr>
+<td style="vertical-align:top">
 	<table summary="">
 	<tr>
 	<td>
 	<LABEL for="cn">
-	{t}Name of Conference{/t}
+	{t}Conference name{/t}
 	</LABEL>
 	{$must}
 	</td>
 	<td>
-	<input id="cn" name="cn" size=25 maxlength=60 value="{$cn}" title="{t}Name of subtree to create{/t}">
+	<input id="cn" name="cn" size=25 maxlength=60 value="{$cn}" title="{t}Name of conference to create{/t}" {$cnACL}>
 	</td>
 	</tr>
+	<tr>
+	<td><LABEL for="goFonConferenceOption_D">{t}Type{/t}</LABEL>{$must}</td>
+	<td>
+	<select id="goFonConferenceOption_D" size="1" name="goFonConferenceOption_D" title="{t}Choose subtree to place department in{/t}" {$goFonConferenceOption_DACL}> 
+	{html_options options=$goFonConferenceOptions selected=$goFonConferenceOption_D}
+	</select>
+	</td>
+	</tr>
+	<tr>
+	<td colspan="2"><br></td>
+	</tr>
+	<tr>
+	<td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
+	<td>
+	<select id="base" size="1" name="base" title="{t}Choose subtree to place conference in{/t}" {$baseACL}> 
+	{html_options options=$bases selected=$base}
+	</select>
+	</td>
+	</tr>
+	</table>
+
+</td>
+<td style="border-left:1px solid #A0A0A0">
+     &nbsp;
+</td>
+<td width="50%">
+	<table summary="">
 	<tr>
 	<td>
 	<LABEL for="description">
@@ -25,50 +53,24 @@
 	{$must}
 	</td>
 	<td>
-	<input id="description" name="description" size=25 maxlength=60 {$descriptionACL} 
+	<input id="description" name="description" size=40 maxlength=60 {$descriptionACL} 
 	value="{$description}" title="{t}Descriptive text for department{/t}">
 	</td>
 	</tr>
 	<tr>
-	<td colspan="2"><br></td>
-	</tr>
-	<tr>
-	<td><LABEL for="goFonConferenceOption_D">{t}Type{/t}</LABEL>{$must}</td>
 	<td>
-	<select id="goFonConferenceOption_D" size="1" name="goFonConferenceOption_D" title="{t}Choose subtree to place department in{/t}"> 
-	{html_options options=$goFonConferenceOptions selected=$goFonConferenceOption_D}
-	</select>
-	</td>
-	</tr>
-	<tr>
-	<td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
-	<td>
-	<select id="base" size="1" name="base" title="{t}Choose subtree to place department in{/t}"> 
-	{html_options options=$bases selected=$base}
-	</select>
-	</td>
-	</tr>
-	</table>
-
-</td>
-<td>
-<h2><img alt="" align="middle" src="images/house.png"> {t}Location{/t}</h2>
-
-	<table summary="">
-	<tr>
-	<td>
-	{t}Lifetime in days{/t}
+	{t}Lifetime (in days){/t}
 	</td>
 	<td>
-	<input name="goFonConferenceOptionLifetime" value="{$goFonConferenceOptionLifetime}" {$goFonConferenceOptionLifetimeACL}>
+	<input name="goFonConferenceOptionLifetime" size=15 value="{$goFonConferenceOptionLifetime}" {$goFonConferenceOptionLifetimeACL}>
 	</td>
 	</tr>
 	<tr>
 	<td>
-	{t}Number{/t}
+	{t}Phone number{/t}
 	</td>
 	<td>
-	<input name="telephoneNumber" value="{$telephoneNumber}" {$telephoneNumberACL}>
+	<input name="telephoneNumber" value="{$telephoneNumber}" size=15 {$telephoneNumberACL}>
 	</td>
 	</tr>
 	</table>
@@ -76,33 +78,33 @@
 </td>
 </tr>
 <tr>
-<td colspan=2 style='width:100%;'>
+<td colspan=3 style='width:100%;'>
 	<p class='seperator'>&nbsp;</p>
 </td>
 </tr>
 <tr>
+ <td colspan=3>
+<h2 style='margin:0px; padding:0px;'><img alt="" align="middle" src="images/select_ogroup.png"> {t}Options{/t}</h2>
+ </td>
+</tr>
+<tr>
 <td>
-<h2><img alt="" align="middle" src="images/house.png"> {t}Options{/t}</h2>
 
 	<table summary="">
     <tr>
-	<td colspan=2>
+	<td>
 		<input type="checkbox" onclick="changeState('goFonPIN');" name="goFonConferenceOption_P" 
 					value="P" {$goFonConferenceOption_PCHK} {$goFonConferenceOption_PACL}> 
-		{t}preset PIN{/t}
+	</td><td>
+		{t}Preset PIN{/t}
 	</td>
 	</tr>
 	<tr>
 	<td>
-	&nbsp;	{t}PIN{/t}
+	 &nbsp;
 	</td>
 	<td>
-		<input type='text' name="goFonPIN" {$goFonPINACL} id="goFonPIN" value="{$goFonPIN}">
-	</td>
-	</tr>
-	<tr>
-	<td colspan=2>
-	<br><br>
+		{t}PIN{/t} <input type='text' name="goFonPIN" {$goFonPINACL} id="goFonPIN" value="{$goFonPIN}">
 	</td>
 	</tr>
     <tr>
@@ -113,9 +115,10 @@
 	</tr>
 	<tr>
 	<td>
-	&nbsp;	{t}Format{/t}
+	&nbsp;
 	</td>
 	<td>
+	{t}Format{/t}&nbsp;
 	<select id="goFonConferenceOptionFormat" size="1" name="goFonConferenceOptionFormat" {$goFonConferenceOptionFormatACL} title="{t}Choose subtree to place department in{/t}"> 
 	{html_options options=$goFonConferenceOptionFormats selected=$goFonConferenceOptionFormat}
 	</select>
@@ -124,38 +127,33 @@
 	</table>
 
 </td>
+  <td style="border-left:1px solid #A0A0A0">
+     &nbsp;
+	   </td>
 <td>
 	<table summary="">
 	<tr>
 	<td>
+		<input type="checkbox" name="goFonConferenceOption_M" value="M" {$goFonConferenceOption_MCHK} {$goFonConferenceOption_MACL}> 
 		{t}Play music on hold{/t}
 	</td>
-	<td>
-		<input type="checkbox" name="goFonConferenceOption_M" value="M" {$goFonConferenceOption_MCHK} {$goFonConferenceOption_MACL}> 
-	</td>
 	</tr>
 	<tr>
-	<td>
-		{t}Activate menu{/t}
-	</td>
 	<td>
 		<input type="checkbox" name="goFonConferenceOption_s" value="s" {$goFonConferenceOption_sCHK} {$goFonConferenceOption_sACL}> 
+		{t}Activate menu{/t}
 	</td>
 	</tr>
 	<tr>
-	<td>
-		{t}Announce new or leaving user{/t}
-	</td>
 	<td>
 		<input type="checkbox" name="goFonConferenceOption_i" value="i" {$goFonConferenceOption_iCHK} {$goFonConferenceOption_iACL}> 
+		{t}Announce new or leaving user{/t}
 	</td>
 	</tr>
 	<tr>
 	<td>
-		{t}Count user{/t}
-	</td>
-	<td>
 		<input type="checkbox" name="goFonConferenceOption_c" value="c" {$goFonConferenceOption_cCHK} {$goFonConferenceOption_cACL}> 
+		{t}Count user{/t}
 	</td>
 	</tr>
 	</table>
