@@ -344,13 +344,20 @@ class phoneConferenceManagment extends plugin
       }else{
         $pin = "&nbsp;";
       }
+
+      if(isset($conference['telephoneNumber'][0])){
+        $number = " - ".$conference['telephoneNumber'][0];
+      }else{
+        $number = "&nbsp; - ?";
+      }
+
       $ldap= $this->config->get_ldap_link();
       $ldap->cd ($conference['goFonConferenceOwner'][0]);
       $data = $ldap->fetch($ldap->cat($conference['goFonConferenceOwner'][0]));
       $cn = $data['cn'][0];
  
       $a_field1 = array("string"=>sprintf($userimg,_("Conference")));
-      $a_field2 = array("string"=>sprintf($editlink,$conferencekey,$conference['cn'][0]));
+      $a_field2 = array("string"=>sprintf($editlink,$conferencekey,$conference['cn'][0].$number));
       $a_field3 = array("string"=> $cn);
       $a_field4 = array("string"=> $pin);
       $a_field5 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions));
