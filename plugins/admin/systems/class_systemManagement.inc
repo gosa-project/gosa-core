@@ -830,9 +830,34 @@ class systems extends plugin
     /* Get all gotoTerminal's */
     $this->terminals= array();
 
-    $res= get_list($this->ui->subtreeACL, "(|$termfilter$workfilter$winfilter$printfilter$phonefilter$serverfilter$netfilter)", false, $base, array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE);
+    $res= get_list($this->ui->subtreeACL, "(|$termfilter)", FALSE, "ou=terminals,ou=systems,".$base, 
+        array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE);
 
-    /* NEW LIST MANAGMENT
+    $res= array_merge($res,
+          get_list($this->ui->subtreeACL, "(|$serverfilter)", FALSE, "ou=servers,ou=systems,".$base, 
+        array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE));
+
+    $res= array_merge($res,
+          get_list($this->ui->subtreeACL, "(|$phonefilter)", FALSE, "ou=phones,ou=systems,".$base, 
+        array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE));
+
+    $res= array_merge($res,
+          get_list($this->ui->subtreeACL, "(|$netfilter)", FALSE, "ou=netdevices,ou=systems,".$base, 
+        array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE));
+
+    $res= array_merge($res,
+          get_list($this->ui->subtreeACL, "(|$printfilter)", FALSE, "ou=printers,ou=systems,".$base, 
+        array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE));
+
+    $res= array_merge($res,
+          get_list($this->ui->subtreeACL, "(|$workfilter)", FALSE, "ou=workstations,ou=systems,".$base, 
+        array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE));
+
+    $res= array_merge($res,
+          get_list($this->ui->subtreeACL, "(|$winfilter)", FALSE, "ou=winstations,ou=systems,".$base, 
+        array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE));
+
+/* NEW LIST MANAGMENT
      * We also need to search for the departments
      * So we are able to navigate like in konquerer
      */
