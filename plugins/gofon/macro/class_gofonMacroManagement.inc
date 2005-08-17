@@ -439,7 +439,7 @@ class gofonMacro extends plugin
     }
 
     /* Generate macro list */
-    $res= get_list($this->ui->subtreeACL, "(&(cn=$regex)(objectClass=goFonMacro))", TRUE, $base, array("*"), TRUE);
+    $res= get_list($this->ui->subtreeACL, "(&(cn=$regex)(objectClass=goFonMacro))", FALSE, "ou=macros,ou=asterisk,ou=config,".$base, array("*"), TRUE);
     $this->macros= $res;
 
     /* NEW LIST MANAGMENT
