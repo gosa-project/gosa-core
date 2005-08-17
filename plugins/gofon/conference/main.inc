@@ -35,9 +35,9 @@ if ($remove_lock){
 
 	/* Page header*/
 	if (isset($_SESSION['objectinfo'])){
-		$display= print_header(get_template_path('images/conference.png'), _("conference management"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".$_SESSION['objectinfo']);
+		$display= print_header(get_template_path('images/conference.png'), _("Conference management"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".$_SESSION['objectinfo']);
 	} else {
-		$display= print_header(get_template_path('images/conference.png'), _("conference management"));
+		$display= print_header(get_template_path('images/conference.png'), _("Conference management"));
 	}
 
 	/* Reset requested? */

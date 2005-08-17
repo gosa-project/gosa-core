@@ -22,7 +22,7 @@ require "tabs_conference.inc";
 class phoneConferenceManagment extends plugin
 {
   /* Definitions */
-  var $plHeadline				  = "Phone conference";
+  var $plHeadline				  = "Phone conferences";
   var $plDescription			= "Management";
 
   /* CLI vars */

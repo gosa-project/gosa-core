@@ -21,7 +21,7 @@
    </div>
    <div class="contentboxb">
    <p class="contentboxb">
-     {t}This menu allows you to create, delete and edit selected departments. Having a large size of departments, you might prefer the range selectors on top of the department list.{/t}
+     {t}This menu allows you to create, delete and edit selected phone conferences. Having a large number of phone conferences, you might prefer the range selectors on top of the conferences list.{/t}
    </p>
    </div>
    <div class="contentboxh">
