@@ -126,6 +126,9 @@ class conference extends plugin
     $smarty->assign("goFonPINACL"," disabled ");
     $smarty->assign("goFonPIN","");
   }
+  if($this->goFonConferenceOption_r != "r"){
+    $smarty->assign("goFonConferenceOptionFormatACL"," disabled ");
+  }
 
 	return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }

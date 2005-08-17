@@ -107,7 +107,7 @@
 	</tr>
     <tr>
 	<td colspan=2>
-		<input type="checkbox" name="goFonConferenceOption_r" value="r" {$goFonConferenceOption_rCHK} {$goFonConferenceOption_rACL}> 
+		<input type="checkbox" onclick="changeState('goFonConferenceOptionFormat');" name="goFonConferenceOption_r" value="r" {$goFonConferenceOption_rCHK} {$goFonConferenceOption_rACL}> 
     	{t}Record Conference{/t}
 	</td>
 	</tr>
@@ -116,7 +116,7 @@
 	&nbsp;	{t}Format{/t}
 	</td>
 	<td>
-	<select id="goFonConferenceOptionFormat" size="1" name="goFonConferenceOptionFormat" title="{t}Choose subtree to place department in{/t}"> 
+	<select id="goFonConferenceOptionFormat" size="1" name="goFonConferenceOptionFormat" {$goFonConferenceOptionFormatACL} title="{t}Choose subtree to place department in{/t}"> 
 	{html_options options=$goFonConferenceOptionFormats selected=$goFonConferenceOptionFormat}
 	</select>
 	</td>
