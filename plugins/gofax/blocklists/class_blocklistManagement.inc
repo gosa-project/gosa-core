@@ -441,7 +441,7 @@ class blocklist extends plugin
     }
 
     /* Generate blocklists */
-    $res= get_list($this->ui->subtreeACL, "(&(cn=$regex)$filter)", TRUE, $base, array("*"));
+    $res= get_list($this->ui->subtreeACL, "(&(cn=$regex)$filter)", FALSE, "ou=gofax,ou=systems,".$base, array("*"));
 
     $this->blocklists=$res;
 
@@ -450,7 +450,6 @@ class blocklist extends plugin
      * So we are able to navigate like in konquerer
      */
     $base2 = preg_replace("/ou=people,/i","",$base);
-
     $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
         TRUE, $base2, array("ou", "description"), TRUE);
 
