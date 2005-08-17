@@ -567,7 +567,10 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
     } else {
       $filter= "(&(cn=$regex)(objectClass=gosaGroupOfNames))";
     }
-    $res= get_list($this->ui->subtreeACL, "$filter", TRUE, $base, array("*"), TRUE);
+    
+   $groups = ($this->config->current['GROUPS']);
+
+    $res= get_list($this->ui->subtreeACL, "$filter",FALSE, $groups.",".$base, array("*"), TRUE);
     $this->ogrouplist= $res;
     ksort ($this->ogrouplist);
     reset ($this->ogrouplist);
