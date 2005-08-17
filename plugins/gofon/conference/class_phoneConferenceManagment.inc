@@ -21,32 +21,32 @@ require "tabs_conference.inc";
 
 class phoneConferenceManagment extends plugin
 {
-	/* Definitions */
-	var $plHeadline				  = "Phone conference";
-	var $plDescription			= "Management";
+  /* Definitions */
+  var $plHeadline				  = "Phone conference";
+  var $plDescription			= "Management";
 
-	/* CLI vars */
-	var $cli_summary			  = "Handling of LDAP subtrees";
-	var $cli_description		= "Some longer text\nfor help";
-	var $cli_parameters			= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
+  /* CLI vars */
+  var $cli_summary			  = "Handling of LDAP subtrees";
+  var $cli_description		= "Some longer text\nfor help";
+  var $cli_parameters			= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
-	/* Headpage attributes */
-	var $conferences			  = array();
+  /* Headpage attributes */
+  var $conferences			  = array();
 
-	/* attribute list for save action */
-	var $attributes				  = array();
-	var $objectclasses			= array();
+  /* attribute list for save action */
+  var $attributes				  = array();
+  var $objectclasses			= array();
   var $conftab            = false;
 
   var $departments  =array();
 
-	/* Initialise Class */
-	function phoneConferenceManagment ($config, $ui)
-	{
-		$this->ui			= $ui;
-		$this->dn			= "";
-		$this->config		= $config;
-  
+  /* Initialise Class */
+  function phoneConferenceManagment ($config, $ui)
+  {
+    $this->ui			= $ui;
+    $this->dn			= "";
+    $this->config		= $config;
+
     /* Get global filter config */
     if (!isset($_SESSION["conferencefilter"])){
       $base= get_base_from_people($ui->dn);
@@ -55,21 +55,33 @@ class phoneConferenceManagment extends plugin
           "regex"           => "*");
       $_SESSION["conferencefilter"] = $conferencefilter;
     }
+  }
 
-  
-	}
+  /* Execute class and display something */
+  function execute()
+  {
+    /* Reload departments */
+    $this->config->departments	= get_departments();
+    $smarty						          = get_smarty();
+    $display 					          = "";
+    $s_action 					        = "";  // Will contain an action, like del or edit
+    $s_entry  					        = "";  // The entry name for edit delete -...
+    $conferencefilter           = $_SESSION["conferencefilter"]; 
 
-	/* Execute class and display something */
-	function execute()
-	{
-		/* Reload departments */
-		$this->config->departments	= get_departments();
-		$smarty						= get_smarty();
-		$display 					= "";
-		$s_action 					= "";  // Will contain an action, like del or edit
-		$s_entry  					= "";  // The entry name for edit delete -...
-    $conferencefilter   = $_SESSION["conferencefilter"]; 
-    
+    if(isset($_POST['regexit'])){
+      $conferencefilter['regex']=$_POST['regexit'];
+    }
+
+    if(isset($_GET['search'])){
+      if($_GET['search']=="*"){
+        $conferencefilter['regex']=$_GET['search'];
+      }else{
+        $conferencefilter['regex']=$_GET['search']."*";
+      }
+    }
+
+    $smarty->assign("regex",$conferencefilter['regex']); 
+
     /* Start for New List Managment */
     if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
       $s_action="open";
@@ -80,7 +92,7 @@ class phoneConferenceManagment extends plugin
     foreach($_POST as $key => $post){
       if(preg_match("/.*new.*/i",$key)){
         $s_action = "new";
-      // Post for delete
+        // Post for delete
       }elseif(preg_match("/conf_del.*/",$key)){
         $s_action = "del";
         $s_entry  = preg_replace("/conf_".$s_action."_/i","",$key);
@@ -99,6 +111,7 @@ class phoneConferenceManagment extends plugin
       } 
     }
 
+    /* Edit Entry */
     if((isset($_GET['act']))&&($_GET['act']=="edit_entry")){
       $s_action = "edit";
       $s_entry  = $_GET['id'];
@@ -108,13 +121,14 @@ class phoneConferenceManagment extends plugin
     if(isset($_POST['depselect']) && $_POST['depselect']){
       $conferencefilter['depselect']= $_POST['depselect'];
     }
- 
+
     /* Homebutton is posted */
     if($s_action=="home"){
       $conferencefilter['depselect']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
       $conferencefilter['depselect']=(preg_replace("/^[^,]+,/","",$conferencefilter['depselect']));
     }
-
+    
+    /* back to root */
     if($s_action=="root"){
       $conferencefilter['depselect']=($this->config->current['BASE']);
     }
@@ -202,14 +216,15 @@ class phoneConferenceManagment extends plugin
       $_SESSION['objectinfo']= $this->dn;
     }
 
+    /* Insert new entry*/    
     if($s_action == "new"){
       $this->dn= "new";
       $this->conftab= new conferencetabs($this->config,$this->config->data['TABS']['CONFERENCETABS'], $this->dn);
       $this->conftab->set_acl(array(':all'));
     }
 
+    /* Edit finished, check and save changes */
     if (isset($_POST['edit_finish'])){
-
       /* Check tabs, will feed message array */
       $this->conftab->last= $this->conftab->current;
       $this->conftab->save_object();
@@ -234,9 +249,9 @@ class phoneConferenceManagment extends plugin
         show_errors($message);
       }
     }
- 
+
     /* if edit or new, show dialog */
-		if($this->conftab){
+    if($this->conftab){
       $display= $this->conftab->execute();
 
       /* Don't show buttons if tab dialog requests this */
@@ -250,15 +265,8 @@ class phoneConferenceManagment extends plugin
       return ($display);
     }
 
-    $this->reload();
-		$listhead = "<div style='background:#F0F0F9;padding:5px;'>  
-                  <input type='image' align='middle' src='images/list_new_department.png' 
-                      align='middle' alt='"._("Create new department")."' name='dep_new'>&nbsp;
-			          </div>";
-
-
-
-       $options= "";
+    /* Header + Departmentlist*/
+    $options= "";
     foreach ($this->config->idepartments as $key => $value){
       if ($conferencefilter['depselect'] == $key){
         $options.= "<option selected value='$key'>$value</option>";
@@ -267,7 +275,7 @@ class phoneConferenceManagment extends plugin
       }
     }
 
-        $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
+    $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
       " <input type='image' align='middle' src='images/list_back.png' title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
       " <input type='image' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
       " <input type='image' align='middle' src='images/list_home.png' title='"._("Go to users department")."' alt='"._("Home")."' name='dep_home'>&nbsp;".
@@ -278,23 +286,24 @@ class phoneConferenceManagment extends plugin
       " <input type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit").     "'>&nbsp;".
       "</div>";
 
-
+    /* Images for delete / edit */
     $actions = "<input type='image' src='images/edit.png' 		 alt='"._("edit")."' 	  name='conf_edit_%KEY%' title='"._("Edit this entry")."'>";
-		$actions.= "<input type='image' src='images/edittrash.png' alt='"._("delete")."' 	name='conf_del_%KEY%'  title='"._("Delete this entry")."'>";
-		$linkopen= "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
+    $actions.= "<input type='image' src='images/edittrash.png' alt='"._("delete")."' 	name='conf_del_%KEY%'  title='"._("Delete this entry")."'>";
+
+    /* open an entry */
+    $linkopen= "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
 
     /* Set Header */
-		$divlist  = new divlist("conferenceTabs");
-		$divlist->SetSummary(_("This table displays all available conference rooms."));
-		$divlist->SetEntriesPerPage(20);
-		$divlist->SetHeader(array(
+    $divlist  = new divlist("conferenceTabs");
+    $divlist->SetSummary(_("This table displays all available conference rooms."));
+    $divlist->SetEntriesPerPage(20);
+    $divlist->SetHeader(array(
           array("string" => "&nbsp;"),            
-					array("string" =>_("Name / nummer")),
-					array("string" =>_("Actions"), "attach" => "style='text-align:  right;border:none'")));
+          array("string" =>_("Name / nummer")),
+          array("string" =>_("Actions"), "attach" => "style='text-align:  right;border:none'")));
 
-       /* Insert departments in divlist*/
+    /* Insert departments in divlist*/
     foreach($this->departments as $key=> $val){
-
       if(!isset($this->config->departments[trim($key)])){
         $this->config->departments[trim($key)]="";
       }
@@ -307,55 +316,58 @@ class phoneConferenceManagment extends plugin
         }
       }
 
-      $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>","attach"=>"style='width:22px;'");
-      $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
-      $field3 = array("string" => "&nbsp;", "attach" => "style='border:none;width:60px;'");
+      /* Prepare and insert fields*/
+      $a_field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>","attach"=>"style='width:22px;'");
+      $a_field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
+      $a_field3 = array("string" => "&nbsp;", "attach" => "style='border:none;width:60px;'");
 
-
-      $divlist->AddEntry(array($field1,$field2,$field3));
+      /* Add entries */
+      $divlist->AddEntry(array($a_field1,$a_field2,$a_field3));
     }
-    
+
+    /* Image shown in divlist */
     $userimg  = "<img src='images/select_user.png' alt='User' title='%s'>";
+
+    /* Edit entry link*/
     $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
 
+    /* Insert conferneces*/
     foreach($this->conferences as $conferencekey => $conference ){
-      $field1 = array("string"=>sprintf($userimg,_("Conference")));
-      $field2 = array("string"=>sprintf($editlink,$conferencekey,$conference['cn'][0]));
-      $field3 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions));
-      $divlist->AddEntry(array($field1,$field2,$field3));
+      $a_field1 = array("string"=>sprintf($userimg,_("Conference")));
+      $a_field2 = array("string"=>sprintf($editlink,$conferencekey,$conference['cn'][0]));
+      $a_field3 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions));
+      $divlist->AddEntry(array($a_field1,$a_field2,$a_field3));
     }
 
-		$smarty->assign("search_image",     get_template_path('images/search.png'));
-		$smarty->assign("tree_image",       get_template_path('images/tree.png'));
-		$smarty->assign("infoimage",        get_template_path('images/info.png'));
-		$smarty->assign("launchimage",      get_template_path('images/launch.png'));
+    $smarty->assign("search_image",     get_template_path('images/search.png'));
+    $smarty->assign("tree_image",       get_template_path('images/tree.png'));
+    $smarty->assign("infoimage",        get_template_path('images/info.png'));
+    $smarty->assign("launchimage",      get_template_path('images/launch.png'));
     $smarty->assign("conferences",      $divlist->DrawList());
     $smarty->assign("conferencehead",  $listhead);
-		$smarty->assign("deplist",          $this->config->idepartments);
-		$smarty->assign("apply",            apply_filter());
-		$smarty->assign("alphabet",         generate_alphabet());
-		$smarty->assign("hint",             print_sizelimit_warning());
+    $smarty->assign("deplist",          $this->config->idepartments);
+    $smarty->assign("apply",            apply_filter());
+    $smarty->assign("alphabet",         generate_alphabet());
+    $smarty->assign("hint",             print_sizelimit_warning());
 
-		$display= $smarty->fetch(get_template_path('headpage.tpl', TRUE));
-		return($display);
-	}
+    $display= $smarty->fetch(get_template_path('headpage.tpl', TRUE));
+    return($display);
+  }
 
 
-	function reload()
-	{
+  /* Reload entries for divlist.
+   * First, reload all conferences for the current base, with the given regex
+   * Second, get all departments for the given base and regex
+   * Convert departments dn
+   */
+  function reload()
+  {
     $conferencefilter = $_SESSION["conferencefilter"];
     $base             = $conferencefilter['depselect'];
     $regex            = $conferencefilter['regex'];
 
-		$this->conferences= get_list($this->ui->subtreeACL, "(objectClass=goFonConference)",FALSE, $base, array("*"), FALSE);
-  
-    /* NEW LIST MANAGMENT
-     * We also need to search for the departments
-     * So we are able to navigate like in konquerer
-     */
-
-    $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
-        TRUE, $base, array("ou", "description"), TRUE);
+    $this->conferences=get_list($this->ui->subtreeACL, "(&(|(cn=$regex)(description=$regex))(objectClass=goFonConference))",FALSE, $base, array("*"), TRUE);
+    $res3=get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",TRUE, $base, array("ou", "description"), TRUE);
 
     $this->departments= array();
 
@@ -371,39 +383,34 @@ class phoneConferenceManagment extends plugin
         $this->departments[$value['dn']]=$value["description"][0];
       }
     }
-    /* END NEW LIST MANAGMENT
-     */
-
-
-	  
   }
 
-	function remove_from_parent()
-	{
-		$ldap= $this->config->get_ldap_link();
-		$ldap->cd ($this->dn);
-		$ldap->recursive_remove();
+  function remove_from_parent()
+  {
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd ($this->dn);
+    $ldap->recursive_remove();
 
-		/* Optionally execute a command after we're done */
-		$this->postremove();
+    /* Optionally execute a command after we're done */
+    $this->postremove();
 
-		/* Delete references to object groups */
-		$ldap->cd ($this->config->current['BASE']);
-		$ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))", array("cn"));
-		while ($ldap->fetch()){
-			$og= new conftab($this->config, $ldap->getDN());
-			unset($og->member[$this->dn]);
-			$og->save ();
-		}
+    /* Delete references to object groups */
+    $ldap->cd ($this->config->current['BASE']);
+    $ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))", array("cn"));
+    while ($ldap->fetch()){
+      $og= new conftab($this->config, $ldap->getDN());
+      unset($og->member[$this->dn]);
+      $og->save ();
+    }
 
-	}
+  }
 
-	function remove_lock()
-	{
-		if (isset($this->dn)){
-			del_lock ($this->dn);
-		}
-	}
+  function remove_lock()
+  {
+    if (isset($this->dn)){
+      del_lock ($this->dn);
+    }
+  }
 
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
