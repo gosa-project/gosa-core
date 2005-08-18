@@ -34,6 +34,10 @@ class phonequeue extends plugin
   var $goFonDialOption          ="";
   var $goFonQueueRetry          =5;
 
+  var $goFonQueueStrategyOptions=array();
+  var $goFonQueueStrategyOptionsR=array();
+  
+
   var $old_phone_numbers        =array();
 
   /* attribute list for save action */
@@ -71,6 +75,25 @@ class phonequeue extends plugin
       $this->goFonQueueAnnounceHoldtime=false;
     }
     $this->old_phone_numbers = $this->telephoneNumber;
+
+   $types= array('ringall'    =>_("ring all"),
+          'roundrobin' =>_("round robin"),
+          'leastrecent'=>_("least recently called"),
+          'fewestcalls'=>_("fewest completed calls"),
+          'random'     =>_("random"),
+          'rrmemory'   =>_("round robin with memory"));
+
+   $i = 0;
+   foreach($types as $type => $name){
+     $i++;
+     $this->goFonQueueStrategyOptions[$i]    =$name;
+     $this->goFonQueueStrategyOptionsR[$i]   =$type;
+     $tmp[$type] = $i; 
+   }
+  
+  $this->goFonQueueStrategy= $tmp[$this->goFonQueueStrategy];
+  
+
   }
 
 
@@ -132,18 +155,10 @@ class phonequeue extends plugin
       }
     }
 
-
     $smarty= get_smarty();
 
     $smarty->assign("goFonQueueLanguageOptions",array('de'=>_('German'),'ur'=>_('Uruguai')));
-    $types= array('ringall'    =>_("ring all"),
-          'roundrobin' =>_("round robin"),
-          'leastrecent'=>_("least recently called"),
-          'fewestcalls'=>_("fewest completed calls"),
-          'random'     =>_("random"),
-          'rrmemory'   =>_("round robin with memory"));
-    sort($types);
-    $smarty->assign("goFonQueueStrategyOptions", $types);
+    $smarty->assign("goFonQueueStrategyOptions", $this->goFonQueueStrategyOptions);
 
     foreach($this->attributes as $key => $val){
       $smarty->assign($val,$this->$val);  
@@ -410,7 +425,7 @@ class phonequeue extends plugin
         $queue["name"]                  = $this->attrs['cn'][0];  
         $queue["timeout"]               = $this->goFonTimeOut; 
         $queue["maxlen"]                = $this->goFonMaxLen;
-        $queue["strategy" ]             = $this->goFonQueueStrategy;
+        $queue["strategy" ]             = $this->goFonQueueStrategyOptionsR[$this->goFonQueueStrategy];
         $queue["queue_thankyou"]        = $this->goFonQueueThankYou;   
         $queue["queue_reporthold"]      = $this->goFonQueueReportHold; 
         $queue["announce_frequency"]    = $this->goFonAnnounceFrequency;
@@ -537,7 +552,9 @@ class phonequeue extends plugin
     }else{
       $this->attrs['goFonQueueAnnounceHoldtime'] = "no";
     }
- 
+
+    $this->attrs['goFonQueueStrategy'] = $this->goFonQueueStrategyOptionsR[$this->goFonQueueStrategy];
+
     /* Save data to LDAP */
     $ldap->cd($this->dn);
     $ldap->modify($this->attrs);
