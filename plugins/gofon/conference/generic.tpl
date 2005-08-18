@@ -104,7 +104,7 @@
 	 &nbsp;
 	</td>
 	<td>
-		{t}PIN{/t} <input type='text' name="goFonPIN" {$goFonPINACL} id="goFonPIN" value="{$goFonPIN}">
+		{t}PIN{/t} <input type='password' name="goFonPIN" {$goFonPINACL} id="goFonPIN" value="{$goFonPIN}" title="{$goFonPIN}">
 	</td>
 	</tr>
     <tr>

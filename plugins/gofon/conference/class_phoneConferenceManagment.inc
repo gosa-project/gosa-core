@@ -341,7 +341,7 @@ class phoneConferenceManagment extends plugin
     foreach($this->conferences as $conferencekey => $conference ){
   
       if((isset($conference['goFonPIN'][0]))&&($this->ui->dn==$conference['goFonConferenceOwner'][0])){
-        $pin = $conference['goFonPIN'][0];
+        $pin = "<img src='images/list_password.png' title='PIN : ".$conference['goFonPIN'][0]."' alt='PIN'>";
       }else{
         $pin = "&nbsp;";
       }

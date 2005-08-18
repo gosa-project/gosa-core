@@ -27,6 +27,7 @@ class conference extends plugin
   var $ou 						= "";
   var $goFonPIN				= "";
   var $acl = "";
+  var $old_cn         = "";
 
   var $goFonConferenceOption   	= "";
   var $goFonConferenceOption_P 	= "";   // Set PIN 
@@ -103,6 +104,7 @@ class conference extends plugin
       $this->old_tele_number                = $this->telephoneNumber;
     }
     $this->old_dn = $this->dn;
+    $this->old_cn = $this->cn;
   }
 
   function execute()
@@ -376,7 +378,7 @@ class conference extends plugin
     }
 
     $num = $this->telephoneNumber;
-    if((isset($numbers[$num]))&&(($numbers[$num]['cn'][0]!=$this->cn))){
+    if((isset($numbers[$num]))&&(($numbers[$num]['cn'][0]!=$this->old_cn))){
       if(isset($numbers[$num]['uid'][0])){
         return sprintf(_("The specified telephonenumber '%s' is already assigned to '%s'."),$num,$numbers[$num]['uid'][0]);
       }else{
