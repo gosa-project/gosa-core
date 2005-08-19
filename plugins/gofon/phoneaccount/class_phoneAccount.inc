@@ -768,7 +768,7 @@ class phoneAccount extends plugin
     if(($this->goFonPIN)==""){
       $message[]= sprintf(_("You need to specify a Phone PIN."));
     }else{
-      if(strcmp ((int)($this->goFonPIN),($this->goFonPIN))){
+      if(!is_id($this->goFonPIN)){
         $message[] = sprintf(_("The given PIN is not valid, only numbers are allowed for this type."));
       }elseif(strlen($this->goFonPIN) < 4){
         $message[] = sprintf(_("The given PIN is too short"));
