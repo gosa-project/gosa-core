@@ -82,10 +82,6 @@ class phoneAccount extends plugin
 
     }
 
-    /* Prepare templating */
-    $smarty= get_smarty();
-
-
     /* Perform search, to get Macro Parameters,Name,Dn,Displayname etc*/
     $ldap->search("(objectClass=goFonMacro)", array("*"));
 
@@ -185,8 +181,6 @@ class phoneAccount extends plugin
     ksort($this->hardware_list);
     $this->a_old_telenums = $this->phoneNumbers;
   }
-
-
 
 
   // Generate MySQL Syntax
@@ -463,29 +457,24 @@ class phoneAccount extends plugin
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
   function execute()
   {
+    /* Do we represent a valid account? */
+    if (!$this->is_account && $this->parent == NULL){
+      $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
+        _("This account has no phone extensions.")."</b>";
+      $display.= back_to_main();
+      return ($display);
+    }
 
     /* force postmodify event, to restart phones */
+    if ($this->parent != NULL){
+      $this->parent->by_object['user']->is_modified=TRUE;
+      $this->is_modified= TRUE; 
 
-    $this->parent->by_object['user']->is_modified=TRUE;
-    $this->is_modified=TRUE; 
-
-    $this->uid = $this->parent->by_object['user']->uid;
-    $this->cn  = $this->parent->by_object['user']->cn;
-
+      $this->uid = $this->parent->by_object['user']->uid;
+      $this->cn  = $this->parent->by_object['user']->cn;
+    }
 
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
@@ -499,7 +488,7 @@ class phoneAccount extends plugin
 
     /* tell user that the pluging selected is no longer available*/
     if((!$this->macrostillavailable)&&($this->macro!="none")){
-      print_red(_("The macro you selected in the past, is no longer available for you, please choose another one."));
+      print_red(_("The macro you selected, is no longer available for you, please choose another one."));
     }
 
     /* Prepare templating */

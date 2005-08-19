@@ -114,6 +114,7 @@ if (!$remove_lock){
 			$display.= "<input type=\"hidden\" name=\"ignore\">\n";
 		}
 		$display.= "</p>\n";
+		$display.= "<input type=\"hidden\" name=\"ignore\">\n";
 	}
 
 	/* Page header*/
