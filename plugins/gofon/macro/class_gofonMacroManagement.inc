@@ -334,7 +334,7 @@ class gofonMacro extends plugin
 
     /* Options */
     $action= "<input type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit user")."'>";
-    $action.= "<input type='image' src='images/editdelete.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete user")."'>";
+    $action.= "<input type='image' src='images/edittrash.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete user")."'>";
 
     $divlist = new divlist("macrotabs");
     $divlist->SetHeader(array(
