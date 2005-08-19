@@ -42,6 +42,8 @@ class proxyAccount extends plugin
     /* Show checkbox? */
     if ($this->parent != NULL){
       $smarty->assign("tabbed", "1");
+    } else {
+      $smarty->assign("tabbed", "0");
     }
 
     /* Assign radio boxes */
