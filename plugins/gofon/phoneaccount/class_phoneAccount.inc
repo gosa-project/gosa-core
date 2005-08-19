@@ -24,8 +24,6 @@ class phoneAccount extends plugin
   var $macrostillavailable    = false;
   var $generate_error         = "";
   var $a_old_telenums           = array();
-  var $uid;
-  var $cn;
 
   /* CLI vars */
   var $cli_summary            = "Manage users phone account";
@@ -33,7 +31,7 @@ class phoneAccount extends plugin
   var $cli_parameters         = array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* attribute list for save action */
-  var $attributes             = array("goFonDeliveryMode", "goFonFormat",
+  var $attributes             = array("goFonDeliveryMode", "goFonFormat", "uid",
       "goFonHardware", "goFonPIN", "telephoneNumber", "goFonMacro","macro");
   var $objectclasses= array("goFonAccount");
 
@@ -465,15 +463,6 @@ class phoneAccount extends plugin
         _("This account has no phone extensions.")."</b>";
       $display.= back_to_main();
       return ($display);
-    }
-
-    /* force postmodify event, to restart phones */
-    if ($this->parent != NULL){
-      $this->parent->by_object['user']->is_modified=TRUE;
-      $this->is_modified= TRUE; 
-
-      $this->uid = $this->parent->by_object['user']->uid;
-      $this->cn  = $this->parent->by_object['user']->cn;
     }
 
     /* Do we need to flip is_account state? */
