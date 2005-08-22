@@ -34,7 +34,8 @@
 				</td>
 				<td>
 					<input type="password" id="goFonPIN" name="goFonPIN" value="{$goFonPIN}" {$goFonPINACL}>
-				</td>
+					<input type="submit" name="goFonPINVoiceSet" value="{t}Set voicemail password{/t}" {$goFonPINACL}>
+			</td>
 			</tr>
    </table>
   </td>

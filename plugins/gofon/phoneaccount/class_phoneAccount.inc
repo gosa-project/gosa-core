@@ -18,12 +18,13 @@ class phoneAccount extends plugin
   var $hardware_list          = array();
   var $used_hardware          = array();
   var $goFonMacro             = "";
-  var $macro                  = 0;              // Selected Macor
+  var $macro                  = 0;              // Selected Macro
   var $macros                 = array();        // List of macros for smarty select box
   var $macroarray             = array();        // All needed macro informations
   var $macrostillavailable    = false;
   var $generate_error         = "";
-  var $a_old_telenums           = array();
+  var $a_old_telenums         = array();
+  var $goFonPINVoice          = "";
 
   /* CLI vars */
   var $cli_summary            = "Manage users phone account";
@@ -31,7 +32,7 @@ class phoneAccount extends plugin
   var $cli_parameters         = array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* attribute list for save action */
-  var $attributes             = array("goFonDeliveryMode", "goFonFormat", "uid",
+  var $attributes             = array("goFonDeliveryMode", "goFonFormat","uid","cn","mail",
       "goFonHardware", "goFonPIN", "telephoneNumber", "goFonMacro","macro");
   var $objectclasses= array("goFonAccount");
 
@@ -64,6 +65,34 @@ class phoneAccount extends plugin
       }
     }
 
+    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
+    $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+    if(!$r_con){
+      $this->generate_error = sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
+          $a_SETUP['SERVER'],$a_SETUP['LOGIN']);
+      gosa_log(mysql_error());
+      return false;
+    }
+    $db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
+    if(!$db){
+      $this->generate_error = sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']);
+      gosa_log(mysql_error());
+      return false;
+    }
+ 
+    $first = false; 
+    foreach($this->phoneNumbers as $key => $val){
+      if(!$first){
+        $first = $key;
+      }
+    }
+
+    $attrs = mysql_fetch_row(mysql_query("SELECT *  FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$this->phoneNumbers[$first].";"));
+    if($attrs){
+      $this->goFonPINVoice = $attrs[4];
+    }else{
+      $this->goFonPINVoice = false;
+    }
 
     /* Load hardware list */
     $ldap= $this->config->get_ldap_link();
@@ -245,11 +274,9 @@ class phoneAccount extends plugin
       return false;
     }
 
-
-
     /* If Save == true, we should save something.
      * Generate SQL, for drop of old entries
-     * Generate SQL, for insert of new entries
+     * Generate SQL, for insert new entries
      */ 
     if($save == true){
       // Attribute GoFonDefaultIP set ?
@@ -340,7 +367,7 @@ class phoneAccount extends plugin
       $sip_entry['callerid']  =$this->phoneNumbers[$i_new_key];
       $sip_entry['mailbox']   =$this->phoneNumbers[$i_new_key];
 
-      if((isset($this->parent->by_object['mailAccount']->mail))&&($this->parent->by_object['mailAccount']->is_account==true)){
+      if((isset($this->parent))&&(isset($this->parent->by_object['mailAccount']))&&($this->parent->by_object['mailAccount']->is_account==true)){
         $s_mail = $this->parent->by_object['mailAccount']->mail;
       }else{
         $s_mail = "";
@@ -375,10 +402,14 @@ class phoneAccount extends plugin
         }
       }
 
+      if(empty($this->goFonPINVoice)){
+        $this->goFonPINVoice = $this->goFonPIN;
+      } 
+
       $SQL[]= "INSERT INTO ".$a_SETUP['VOICE_TABLE']."
         (`customer_id`,`context`,`mailbox`,`password`,`fullname`,`email`,`pager`)
         VALUES
-        ('".$this->phoneNumbers[$i_new_key]."','default','".$this->phoneNumbers[$i_new_key]."','".$this->goFonPIN."','".$this->sn."','".$s_mail."','');";
+        ('".$this->phoneNumbers[$i_new_key]."','default','".$this->phoneNumbers[$i_new_key]."','".$this->goFonPINVoice."','".$this->sn."','".$s_mail."','');";
 
       $i_is_accounted=false;
 
@@ -473,6 +504,11 @@ class phoneAccount extends plugin
     /* Select no macro if, state is empty, this is the case, if the selected macro is no longer available */
     if(empty($this->macro)){
       $this->macro ="none";
+    }
+
+    /* Set new Voicemail password */
+    if(isset($_POST['goFonPINVoiceSet'])){
+      $this->goFonPINVoice = $_POST['goFonPIN'];
     }
 
     /* tell user that the pluging selected is no longer available*/
@@ -690,25 +726,7 @@ class phoneAccount extends plugin
       if(isset($this->macroarray[$this->macro])){ 
         foreach($this->macroarray[$this->macro] as $key => $paras){
           if(isset($_POST[$paras['var']])){
-            //            $par = $this->macroarray[$this->macro][$key];
-            //            $string = "";
-            //            if(preg_match("/.*%telephoneNumber_.*/",$par['default'])){
-            //              $string = $par['default'];
-            //              foreach($nummsinorder as $nummsinorderkey=> $nummsinorderval){
-            //                $string = (str_replace("%telephoneNumber_".($nummsinorderkey+1),$nummsinorderval,$string));
-            //              }
-            //            }
-
-            //            if(preg_match("/.*%uid.*/",$par['default'])){
-            //              if(empty($string)) $string = $par['default'];
-            //              $string = str_replace("%uid",$this->uid,$string);
-            //            }    
-
-            //            if(!empty($string)){  
-            //              $this->macroarray[$this->macro][$key]['choosen'] = $string; 
-            //            }else{
             $this->macroarray[$this->macro][$key]['choosen'] = $_POST[$paras['var']];
-            //            }
           }
 
           /* Checkboxes are special, they are not Posted if they are not selected, so the won't be changed with the above code 
@@ -855,12 +873,22 @@ class phoneAccount extends plugin
 
   function remove_from_parent()
   {
+  
+    foreach($this->attributes as $key=>$val){
+
+      if(in_array($val,array("uid","cn","mail"))){
+        unset($this->attributes[$key]);
+        unset($this->$val);
+      }
+    
+    }
+
     // Get Configuration for Mysql database Server
     $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
     $s_parameter  ="";
 
     // Connect to DB server
-    $r_con =  @mysql_connect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+    $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
 
     // Check if we are  connected correctly
     if(!$r_con){
@@ -883,8 +911,13 @@ class phoneAccount extends plugin
     $SQL="";
 
     /* If deletion starts from userslist, cn uid are not set */
-    $this->uid = $this->parent->by_object['user']->uid;
-    $this->cn  = $this->parent->by_object['user']->cn;
+    if((isset($this->parent->by_object['user']->uid))&&(!empty($this->parent->by_object['user']->uid))){
+      $this->uid = $this->parent->by_object['user']->uid;
+    }
+
+    if((isset($this->parent->by_object['user']->cn))&&(!empty($this->parent->by_object['user']->cn))){
+      $this->cn  = $this->parent->by_object['user']->cn;
+    }
 
     $first_num = false;
     // Delete old entries
@@ -977,8 +1010,6 @@ class phoneAccount extends plugin
       }
     }
   }
-
-
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
