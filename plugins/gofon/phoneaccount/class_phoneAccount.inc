@@ -409,7 +409,7 @@ class phoneAccount extends plugin
       $SQL[]= "INSERT INTO ".$a_SETUP['VOICE_TABLE']."
         (`customer_id`,`context`,`mailbox`,`password`,`fullname`,`email`,`pager`)
         VALUES
-        ('".$this->phoneNumbers[$i_new_key]."','default','".$this->phoneNumbers[$i_new_key]."','".$this->goFonPINVoice."','".$this->sn."','".$s_mail."','');";
+        ('".$this->phoneNumbers[$i_new_key]."','default','".$this->phoneNumbers[$i_new_key]."','".$this->goFonPINVoice."','".$this->cn."','".$s_mail."','');";
 
       $i_is_accounted=false;
 
