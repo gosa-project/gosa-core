@@ -24,7 +24,7 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.9.2 NAME 'goFontPath'
 
 # Attributes for common Gonicus Server Class
 attributetype ( 1.3.6.1.4.1.10098.1.1.9.4 NAME 'goExportEntry'
-	DESC 'Provides a NFS export entry'
+	DESC 'Provides an export entry'
 	EQUALITY caseExactIA5Match
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
 
@@ -225,4 +225,10 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.29 NAME 'goFonServer' SUP top AUXILIARY
         DESC 'Fon server description (v2.4)'
         MUST ( cn $ goFonAdmin $ goFonPassword $ goFonAreaCode $ goFonCountryCode )
         MAY  ( description ))
+
+# Share Server description
+objectclass (1.3.6.1.4.1.10098.1.2.1.30 NAME 'goShareServer' SUP top AUXILIARY
+	DESC 'NFS server description (v2.4)'
+	MUST ( cn )
+	MAY  ( description $ goExportEntry ))
 
