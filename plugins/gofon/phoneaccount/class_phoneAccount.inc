@@ -87,7 +87,7 @@ class phoneAccount extends plugin
       }
     }
 
-    $attrs = mysql_fetch_row(mysql_query("SELECT *  FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$this->phoneNumbers[$first].";"));
+    $attrs = @mysql_fetch_row(@mysql_query("SELECT *  FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$this->phoneNumbers[$first].";"));
     if($attrs){
       $this->goFonPINVoice = $attrs[4];
     }else{
