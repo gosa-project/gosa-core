@@ -42,7 +42,7 @@ class phonequeue extends plugin
 
   /* attribute list for save action */
   var $attributes= array( "goFonTimeOut","goFonMaxLen","goFonAnnounceFrequency","goFonDialOption_t","goFonDialOption_T",
-      "goFonDialOption_h","goFonDialOption_r",
+      "goFonDialOption_h","goFonDialOption_r","cn",
       "goFonDialOption_H","goFonMusiconHold","goFonWelcomeMusic","goFonQueueReportHold","goFonQueueYouAreNext",
       "goFonQueueThereAre","goFonQueueCallsWaiting","goFonQueueThankYou","goFonQueueMinutes","goFonQueueSeconds","goFonQueueLessThan",
       "telephoneNumber","goFonQueueLanguage","goFonQueueStrategy","goFonQueueAnnounceHoldtime","goFonQueueAnnounce","goFonDialOption","goFonQueueRetry");
@@ -190,8 +190,8 @@ class phonequeue extends plugin
       $message[] = $this->is_number_used();
     }
 
-    if($this->generate_mysql_entension_entries()){
-      $message[] = $this->generate_mysql_entension_entries();
+    if($this->generate_mysql_table_entries()){
+      $message[] = $this->generate_mysql_table_entries();
     }
 
     if(!((is_numeric($this->goFonTimeOut))||(empty($this->goFonTimeOut)))){
@@ -215,7 +215,7 @@ class phonequeue extends plugin
 
 
 
-  function generate_mysql_entension_entries($save = false)
+  function generate_mysql_table_entries($save = false)
   {
 
     $SQL = array();
@@ -247,21 +247,25 @@ class phonequeue extends plugin
       $i = 0;
       $prio = 11; 
 
-      if(empty($this->cn)){
-        $this->cn = $this->parent->by_object['ogroup']->cn;
-        $this->attrs['cn'][0] = $this->parent->by_object['ogroup']->cn;
+      $delete = array();
+      if(!empty($this->parent->by_object['ogroup'])){
+        $new_cn = $this->parent->by_object['ogroup']->cn;
       }
+      $old_cn = $this->cn;
+
+      $delete[]=    "DELETE FROM ".$a_SETUP['EXT_TABLE']."    WHERE exten='".$new_cn."';\n";
+      $delete[]=    "DELETE FROM ".$a_SETUP['QUEUE_TABLE']."  WHERE name='".$new_cn."'; \n";
+      $delete[]=    "DELETE FROM ".$a_SETUP['QUEUE_MEMBER_TABLE']." WHERE queue_name='".$new_cn."';\n";
+      $delete[]=    "DELETE FROM ".$a_SETUP['EXT_TABLE']."    WHERE exten='".$old_cn."';\n";
+      $delete[]=    "DELETE FROM ".$a_SETUP['QUEUE_TABLE']."  WHERE name='".$old_cn."'; \n";
+      $delete[]=    "DELETE FROM ".$a_SETUP['QUEUE_MEMBER_TABLE']." WHERE queue_name='".$old_cn."';\n";
 
       // Delete old Entries 
-      $delete = array();
       if(is_array($this->old_phone_numbers)){
         foreach($this->old_phone_numbers as $phone){
           $delete[]= "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$phone."';\n";
         }
       }
-      $delete[]=    "DELETE FROM ".$a_SETUP['EXT_TABLE']."    WHERE exten='".$this->attrs['cn'][0]."';\n";
-      $delete[]=    "DELETE FROM ".$a_SETUP['QUEUE_TABLE']."  WHERE name=\"".$this->attrs['cn'][0]."\"; \n";
-      $delete[]=    "DELETE FROM ".$a_SETUP['QUEUE_MEMBER_TABLE']." WHERE queue_name=\"".$this->attrs['cn'][0]."\";\n";
 
       /* Perform queries to delte old entries */
       foreach($delete as $query){
@@ -270,6 +274,8 @@ class phonequeue extends plugin
           return(mysql_error(). sprintf(_("Can't delete in Database %s, on Server %s."),$a_SETUP['DB'],$a_SETUP['SERVER']));
         }
       }
+
+      $this->attrs['cn'][0] = $new_cn;
 
       /* Append new Member for this queue */ 
       $i = 0;
@@ -299,7 +305,6 @@ class phonequeue extends plugin
         }
       }
       
-
       /* generate Extension entries, with priority  */
 
       $queueusers=0;
@@ -538,13 +543,14 @@ class phonequeue extends plugin
 	if(!$this->is_account) return;
     $ldap= $this->config->get_ldap_link();
 
+    $this->generate_mysql_table_entries(true);
+
     plugin::save();
     $this->attrs['goFonDialOption'] = "";
-    foreach(array("goFonDialOption_t","goFonDialOption_T","goFonDialOption_r","goFonDialOption_h","goFonDialOption_H") as $val){
+    foreach(array("goFonDialOption_t","goFonDialOption_T","goFonDialOption_r","goFonDialOption_h","goFonDialOption_H","cn") as $val){
       $this->attrs['goFonDialOption'].=$this->$val; 
       unset($this->attrs[$val]); 
     }
-    $this->generate_mysql_entension_entries(true);
     if($this->attrs['goFonDialOption']=="") $this->attrs['goFonDialOption']=array();
   
     if($this->goFonQueueAnnounceHoldtime != "no" ){
@@ -600,8 +606,9 @@ class phonequeue extends plugin
       return( sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']));
     }
 
+    /* Remove all temporary attributes */
     $tmp = array_flip($this->attributes);
-    foreach(array("goFonDialOption_t","goFonDialOption_T","goFonDialOption_r","goFonDialOption_h","goFonDialOption_H") as $val){
+    foreach(array("goFonDialOption_t","goFonDialOption_T","goFonDialOption_r","goFonDialOption_h","goFonDialOption_H","cn") as $val){
       unset($this->$val);
       unset($this->attrs[$val]);
       unset($tmp[$val]);
