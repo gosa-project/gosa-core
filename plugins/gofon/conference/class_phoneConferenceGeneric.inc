@@ -1,22 +1,22 @@
 <?php
 /*
-  This code is part of GOsa (https://gosa.gonicus.de)
-  Copyright (C) 2003  Cajus Pollmeier
+   This code is part of GOsa (https://gosa.gonicus.de)
+   Copyright (C) 2003  Cajus Pollmeier
 
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation; either version 2 of the License, or
-  (at your option) any later version.
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-*/
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 class conference extends plugin
 {
@@ -55,8 +55,8 @@ class conference extends plugin
 
   /* attribute list for save action */
   var $attributes= array("cn","base", "description", "goFonPIN","goFonConferenceOption_P","goFonConferenceOption_r",
-						 "goFonConferenceOption_M","goFonConferenceOption_s","goFonConferenceOption_i","goFonConferenceOption_c",
-						 "goFonConferenceOption_D","goFonConferenceOptionFormat","goFonConferenceOptionLifetime","telephoneNumber","goFonConferenceOwner");
+      "goFonConferenceOption_M","goFonConferenceOption_s","goFonConferenceOption_i","goFonConferenceOption_c",
+      "goFonConferenceOption_D","goFonConferenceOptionFormat","goFonConferenceOptionLifetime","telephoneNumber","goFonConferenceOwner");
 
   var $objectclasses= array("top", "goFonConference");
 
@@ -81,9 +81,9 @@ class conference extends plugin
       $this->base= preg_replace ("/^[^,]+,/", "", $this->dn);
     }
 
-   $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
-   $this->acl= get_module_permission($acl, "goFonConference", $this->dn);
-   $this->goFonConferenceOwner=$this->ui->dn;
+    $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "goFonConference", $this->dn);
+    $this->goFonConferenceOwner=$this->ui->dn;
 
     /* Parse Options ... 
      * Parameter|Lifetime|number
@@ -109,50 +109,50 @@ class conference extends plugin
 
   function execute()
   {
-  $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
-  $this->acl= get_module_permission($acl, "goFonConference", $this->dn);
+    $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "goFonConference", $this->dn);
 
-	$this->config->departments    = get_departments($this->dn);
-	$this->config->make_idepartments();
-	$smarty= get_smarty();
+    $this->config->departments    = get_departments($this->dn);
+    $this->config->make_idepartments();
+    $smarty= get_smarty();
 
-  $smarty->assign("bases" ,array_flip($this->config->departments));
-  $smarty->assign("base"  ,$this->base);
+    $smarty->assign("bases" ,array_flip($this->config->departments));
+    $smarty->assign("base"  ,$this->base);
 
-	$smarty->assign("goFonConferenceOptions",		    array("D"=>"Conference ","d"=>"Conference without PIN"));
-	$smarty->assign("goFonConferenceOptionFormats",	array("WAV"=>"Wave","GSM"=>"GSM","WAV49"=>"Wave49"));
-	$smarty->assign("goFonConferenceOption",        $this->goFonConferenceOption_D);
-	
-	foreach ($this->attributes as $val){
-		$smarty->assign("$val", $this->$val);
-		$smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
-		if(!$this->$val){
-			$smarty->assign($val."CHK", "");
-		}else{
-			$smarty->assign($val."CHK", " checked ");
-		}
-	}
+    $smarty->assign("goFonConferenceOptions",		    array("D"=>"Conference ","d"=>"Conference without PIN"));
+    $smarty->assign("goFonConferenceOptionFormats",	array("WAV"=>"Wave","GSM"=>"GSM","WAV49"=>"Wave49"));
+    $smarty->assign("goFonConferenceOption",        $this->goFonConferenceOption_D);
 
-  if($_SESSION['js']==1){
-    if($this->goFonConferenceOption_P != "P"){
-      $smarty->assign("goFonPINACL"," disabled ");
-      $smarty->assign("goFonPIN","");
+    foreach ($this->attributes as $val){
+      $smarty->assign("$val", $this->$val);
+      $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
+      if(!$this->$val){
+        $smarty->assign($val."CHK", "");
+      }else{
+        $smarty->assign($val."CHK", " checked ");
+      }
     }
-    if($this->goFonConferenceOption_r != "r"){
-      $smarty->assign("goFonConferenceOptionFormatACL"," disabled ");
+
+    if($_SESSION['js']==1){
+      if($this->goFonConferenceOption_P != "P"){
+        $smarty->assign("goFonPINACL"," disabled ");
+        $smarty->assign("goFonPIN","");
+      }
+      if($this->goFonConferenceOption_r != "r"){
+        $smarty->assign("goFonConferenceOptionFormatACL"," disabled ");
+      }
     }
-  }
-	return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
+    return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }
 
   function remove_from_parent()
   {
-	$ldap= $this->config->get_ldap_link();
-	$ldap->cd ($this->dn);
-	$ldap->recursive_remove();
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd ($this->dn);
+    $ldap->recursive_remove();
 
-	/* Optionally execute a command after we're done */
-	$this->handle_post_events('remove');
+    /* Optionally execute a command after we're done */
+    $this->handle_post_events('remove');
   }
 
 
@@ -163,10 +163,10 @@ class conference extends plugin
     if(isset($_POST['cn'])){
       foreach(array("goFonConferenceOption_P","goFonConferenceOption_r","goFonConferenceOption_M","goFonConferenceOption_s",
             "goFonConferenceOption_i","goFonConferenceOption_c","goFonConferenceOption_D","goFonPIN") as $attrs){
-      if(isset($_POST[$attrs])){
-        $this->$attrs = $_POST[$attrs];
-      }else{
-        $this->$attrs = false;
+        if(isset($_POST[$attrs])){
+          $this->$attrs = $_POST[$attrs];
+        }else{
+          $this->$attrs = false;
         }
       }
     }
@@ -176,41 +176,41 @@ class conference extends plugin
   /* Check values */
   function check()
   {
-	$message= array();
- 
-  if($this->is_number_used()){
-    $message[] =  $this->is_number_used();
-  }
+    $message= array();
 
-  if((!empty($this->goFonPIN)||($this->goFonConferenceOption_P=="P"))&&($this->goFonConferenceOption_D=="d")){
-    $message[] =_("You have specified a conference 'without PIN' ... please leave the PIN fields empty.");
-  }
+    if($this->is_number_used()){
+      $message[] =  $this->is_number_used();
+    }
 
-  if((empty($this->goFonPIN))&&($this->goFonConferenceOption_P=="P")&&($this->goFonConferenceOption_D=="D")){
-    $message[]= _("Please enter a PIN.");
-  }
- 
-  if(empty($this->cn)){
-    $message[] =_("Please enter a name for the conference.");
-  }
-  
-  if(!is_numeric($this->telephoneNumber)){
-    $message[] =_("Only numeric chars are allowed in Number field.");
-  }
+    if((!empty($this->goFonPIN)||($this->goFonConferenceOption_P=="P"))&&($this->goFonConferenceOption_D=="d")){
+      $message[] =_("You have specified a conference 'without PIN' ... please leave the PIN fields empty.");
+    }
 
-  if(!is_numeric($this->goFonConferenceOptionLifetime)){
-    $message[] =_("Only numbers are allowed in Lifetime.");
-  }
- 
-  $this->SQL_remove_me(false);
-  $this->SQL_add_me(false);
- 
-  if(!empty($this->generate_error)){
-    $message[]=$this->generate_error;
-    $this->generate_error="";
-  }
+    if((empty($this->goFonPIN))&&($this->goFonConferenceOption_P=="P")&&($this->goFonConferenceOption_D=="D")){
+      $message[]= _("Please enter a PIN.");
+    }
 
-	return $message;
+    if(empty($this->cn)){
+      $message[] =_("Please enter a name for the conference.");
+    }
+
+    if(!is_numeric($this->telephoneNumber)){
+      $message[] =_("Only numeric chars are allowed in Number field.");
+    }
+
+    if(!is_numeric($this->goFonConferenceOptionLifetime)){
+      $message[] =_("Only numbers are allowed in Lifetime.");
+    }
+
+    $this->SQL_remove_me(false);
+    $this->SQL_add_me(false);
+
+    if(!empty($this->generate_error)){
+      $message[]=$this->generate_error;
+      $this->generate_error="";
+    }
+
+    return $message;
   }
 
 
@@ -238,9 +238,9 @@ class conference extends plugin
       gosa_log(mysql_error());
       return false;
     }
-   
+
     if((!empty($this->telephoneNumber))&&($save==true)){
-      
+
       $EXT=array();
 
       $parameter  ="";
@@ -261,13 +261,13 @@ class conference extends plugin
 
       if($this->goFonConferenceOption_r == "r"){
 
-      // Recordingformat for conference
-      $EXT[$i]['exten']   =$this->telephoneNumber;
-      $EXT[$i]['context'] =$context;
-      $EXT[$i]['priority']= $i;
-      $EXT[$i]['app']     ="Setvar";
-      $EXT[$i]['appdata'] ="MEETME_RECORDINGFORMAT=".$this->goFonConferenceOptionFormat;
-      $i++;      
+        // Recordingformat for conference
+        $EXT[$i]['exten']   =$this->telephoneNumber;
+        $EXT[$i]['context'] =$context;
+        $EXT[$i]['priority']= $i;
+        $EXT[$i]['app']     ="Setvar";
+        $EXT[$i]['appdata'] ="MEETME_RECORDINGFORMAT=".$this->goFonConferenceOptionFormat;
+        $i++;      
 
       }
 
@@ -284,7 +284,7 @@ class conference extends plugin
       $EXT[$i]['context'] =$context;
       $EXT[$i]['priority']=$i;
       $EXT[$i]['app']     ="MeetMe";
-      
+
       if(empty($this->goFonPIN)) {
         $EXT[$i]['appdata'] =$this->telephoneNumber."|".$parameter;
       }else{
@@ -299,10 +299,10 @@ class conference extends plugin
       $EXT[$i]['app']     ="Goto";
       $EXT[$i]['appdata'] =$this->telephoneNumber."|1";
       $SQL=array();
-    
+
       foreach($EXT as $keytop => $valtop){
-      $s_keys = "";
-      $s_values = ""; 
+        $s_keys = "";
+        $s_values = ""; 
         foreach($valtop as $key=>$val){
           $s_keys   .="`".$key."`,";
           $s_values .="'".$val."',";
@@ -315,7 +315,7 @@ class conference extends plugin
         mysql_query($sqlsyn);
       }
     } 
-    
+
 
 
     return(true);
@@ -348,10 +348,12 @@ class conference extends plugin
         return false;
       }
 
-      $SQL = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE   (exten= '".$this->old_tele_number."') 
-                                                        OR  (exten='".$this->telephoneNumber."') 
-                                                        OR  (exten='".$this->cn."')";
-      
+      $SQL = "DELETE FROM ".$a_SETUP['EXT_TABLE']." 
+      WHERE   (exten='".$this->old_tele_number."') 
+        OR    (exten='".$this->telephoneNumber."') 
+        OR    (exten='".$this->cn."')  
+        OR    (exten='".$this->old_cn."')";
+
       if($save){
         @mysql_query($SQL);
       } 
@@ -394,50 +396,50 @@ class conference extends plugin
   /* Save to LDAP */
   function save()
   {
-	plugin::save();
+    plugin::save();
 
-  $this->SQL_remove_me(true);
-  $this->SQL_add_me(true);
+    $this->SQL_remove_me(true);
+    $this->SQL_add_me(true);
 
-  if(empty($this->goFonConferenceOption_P)){
-    $this->attrs['goFonPIN']=array();
-  }
-  $this->attrs['goFonConferenceOption']="";
-  foreach(array("goFonConferenceOption_P","goFonConferenceOption_r","goFonConferenceOption_M","goFonConferenceOption_s",
-            "goFonConferenceOption_i","goFonConferenceOption_c","goFonConferenceOption_D","goFonConferenceOptionFormat") as $attrs){
-    $this->attrs['goFonConferenceOption'] .= $this->$attrs;
-    unset($this->attrs[$attrs]);         
-  }
-
-  $this->attrs['goFonConferenceOption'].="|".$this->goFonConferenceOptionLifetime;
-  unset($this->attrs['goFonConferenceOptionLifetime']);
-
-  /* Write back to ldap */
-
-  unset($this->attrs['base']);
-
-  foreach($this->attributes as $atr){
-    if(chkacl($this->acl, $atr)!=""){
-      unset($this->attrs[$atr]);
+    if(empty($this->goFonConferenceOption_P)){
+      $this->attrs['goFonPIN']=array();
     }
-  }
+    $this->attrs['goFonConferenceOption']="";
+    foreach(array("goFonConferenceOption_P","goFonConferenceOption_r","goFonConferenceOption_M","goFonConferenceOption_s",
+          "goFonConferenceOption_i","goFonConferenceOption_c","goFonConferenceOption_D","goFonConferenceOptionFormat") as $attrs){
+      $this->attrs['goFonConferenceOption'] .= $this->$attrs;
+      unset($this->attrs[$attrs]);         
+    }
 
-	$ldap= $this->config->get_ldap_link();
+    $this->attrs['goFonConferenceOption'].="|".$this->goFonConferenceOptionLifetime;
+    unset($this->attrs['goFonConferenceOptionLifetime']);
 
-	$ldap->cat($this->dn);
-	$a= $ldap->fetch();
-	$ldap->cd($this->dn);
-	if (count($a)){
-		$ldap->modify($this->attrs);
-		$this->handle_post_events('modify');
-	} else {
-		$ldap->add($this->attrs);
-		$this->handle_post_events('add');
-	}
-	show_ldap_error($ldap->get_error());
+    /* Write back to ldap */
 
-	/* Optionally execute a command after we're done */
-	$this->postcreate();
+    unset($this->attrs['base']);
+
+    foreach($this->attributes as $atr){
+      if(chkacl($this->acl, $atr)!=""){
+        unset($this->attrs[$atr]);
+      }
+    }
+
+    $ldap= $this->config->get_ldap_link();
+
+    $ldap->cat($this->dn);
+    $a= $ldap->fetch();
+    $ldap->cd($this->dn);
+    if (count($a)){
+      $ldap->modify($this->attrs);
+      $this->handle_post_events('modify');
+    } else {
+      $ldap->add($this->attrs);
+      $this->handle_post_events('add');
+    }
+    show_ldap_error($ldap->get_error());
+
+    /* Optionally execute a command after we're done */
+    $this->postcreate();
   }
 
 }
