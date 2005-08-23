@@ -410,11 +410,12 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.30 NAME 'gotoWorkstation'
 objectclass (1.3.6.1.4.1.10098.1.2.1.31 NAME 'gotoPrinter'
 	DESC 'GOto - Gonicus Terminal Concept, objectclass (v2.2)' SUP top STRUCTURAL
 	MUST ( cn )
-	MAY ( labeledURI $ description $ l $ gotoPrinterPPD $ macAddress $ ipHostNumber ) )
+	MAY ( labeledURI $ description $ l $ gotoPrinterPPD $ macAddress $ ipHostNumber $ gotoUserPrinter $
+		  gotoAdminPrinter ) )
 
 # objectclass for the Terminal Conecept
 objectclass (1.3.6.1.4.1.10098.1.2.1.32 NAME 'gotoEnvironment'
 	DESC 'GOto - contains environment settings (v2.2)' SUP top STRUCTURAL
 	MAY ( gotoProfileServer $ gotoProfileFlags $ gotoXResolution $ gotoShare $ gotoLogonScript $
-		  gotoKioskProfile $ gotoUserPrinter $ gotoAdminPrinter $ gotoHotplugDevice $ gotoProfileQuota ) )
+		  gotoKioskProfile $ gotoHotplugDevice $ gotoProfileQuota ) )
 
