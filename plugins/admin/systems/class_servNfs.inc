@@ -29,11 +29,11 @@ class servnfs extends plugin
     plugin::plugin ($config, $dn);
     $this->types   = array("NFS"=>"NFS","samba"=>"samba","NCP"=>"NCP");
     $this->charsets = array("UTF-8" => "UTF-8",
-                        "ISO8859-1"=>"ISO8859-1 (Latin 1)",
-                        "ISO8859-2"=>"ISO8859-2 (Latin 2)",
-                        "ISO8859-3"=>"ISO8859-3 (Latin 3)",
-                        "ISO8859-4"=>"ISO8859-4 (Latin 4)",
-                        "ISO8859-5"=>"ISO8859-5 (Latin 5)");
+        "ISO8859-1"=>"ISO8859-1 (Latin 1)",
+        "ISO8859-2"=>"ISO8859-2 (Latin 2)",
+        "ISO8859-3"=>"ISO8859-3 (Latin 3)",
+        "ISO8859-4"=>"ISO8859-4 (Latin 4)",
+        "ISO8859-5"=>"ISO8859-5 (Latin 5)");
 
     if($entry){
       $tmp = split("\|",$entry);
@@ -45,7 +45,7 @@ class servnfs extends plugin
       $this->option        = $tmp[5];  // Options
       $this->is_edit          = true;
     }else{
-    $this->attributes[] = "name";
+      $this->attributes[] = "name";
     }
   }
 
@@ -61,12 +61,12 @@ class servnfs extends plugin
     foreach($this->attributes as $attr){
       $smarty->assign($attr,$this->$attr);
     }
-    
+
     $smarty->assign("nameACL","");    
+    $smarty->assign("name",$this->name);
 
     if($this->is_edit){
       $smarty->assign("nameACL"," disabled ");
-      $smarty->assign("name","");
     }
 
     $display= $smarty->fetch(get_template_path('servnfs.tpl', TRUE));
@@ -100,7 +100,7 @@ class servnfs extends plugin
     if(empty($this->path)){
       $message[]=_("Please specify a valid path for your setup.");
     }
-  
+
     // only 0-9a-z
     if(!$this->is_edit){
       if(preg_match("/[^a-z0-9]/i",$this->name)){
@@ -133,10 +133,10 @@ class servnfs extends plugin
   {
     /* Everything seems perfect, lets 
        generate an new export Entry 
-    */
-  
+     */
+
     $s_return = "";
-    
+
     $s_return.= $this->name."|";     
     $s_return.= $this->description."|";     
     $s_return.= $this->type."|";     
