@@ -370,7 +370,7 @@ class config  {
 	/* Get NFS server lists */
 	$tmp= array("default");
 	$ldap->cd ($this->current['BASE']);
-	$ldap->search ("(&(objectClass=goNfsServer)(goExportEntry=*))");
+	$ldap->search ("(&(objectClass=goShareServer)(goExportEntry=*))");
 	while ($attrs= $ldap->fetch()){
 		for ($i= 0; $i<$attrs["goExportEntry"]["count"]; $i++){
 			$path= preg_replace ("/\s.*$/", "", $attrs["goExportEntry"][$i]);

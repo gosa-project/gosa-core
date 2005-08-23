@@ -286,7 +286,7 @@ class servservice extends plugin
     }
     $oc = array();
     foreach($this->attrs['objectClass'] as $name){
-      if($name!="goNfsServer"){
+      if($name!="goShareServer"){
         $oc[]=$name; 
       }
     }

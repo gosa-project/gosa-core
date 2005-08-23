@@ -82,7 +82,7 @@ function schema_check($server, $admin, $password, $aff=0,$CalledByIndexPhP=false
       "gotoTerminal"          => array("version" => "2.0", "class" => "terminals","file" => "goto.schema"),
       "goServer"              => array("version" => "2.4","class" => "server","file" => "goserver.schema"),
       "goTerminalServer"      => array("version" => "2.4", "class" => "terminals","file" => "goto.schema"),
-      "goNfsServer"           => array("version" => "2.4", "class" => "terminals","file" => "goto.schema"),
+      "goShareServer"           => array("version" => "2.4", "class" => "terminals","file" => "goto.schema"),
       "goNtpServer"           => array("version" => "2.4", "class" => "terminals","file" => "goto.schema"),
       "goSyslogServer"        => array("version" => "2.4", "class" => "terminals","file" => "goto.schema"),
       "goLdapServer"          => array("version" => "2.4"),
