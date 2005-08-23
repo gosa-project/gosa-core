@@ -22,6 +22,7 @@
 # translation of messages.po to
 # translation of messages.po to
 # translation of messages.po to
+# translation of messages.po to
 # translation of messages.po to Français
 # Gosa2 French Translation
 # This file is distributed under the GPL
@@ -31,7 +32,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2005-08-23 16:09+0200\n"
+"PO-Revision-Date: 2005-08-23 17:37+0200\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6197,7 +6198,7 @@ msgstr "Tout faire sonner"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:80
 msgid "round robin"
-msgstr ""
+msgstr "les un après les autres"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:81
 msgid "least recently called"
@@ -6213,7 +6214,7 @@ msgstr "au hazard"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:84
 msgid "round robin with memory"
-msgstr ""
+msgstr "les un après les autres avec mémorisation du dernier utilisé"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:110
 msgid "Remove the phone queue from this Account"
@@ -6401,7 +6402,7 @@ msgstr "Fichier son du message d'attente"
 
 #: plugins/admin/ogroups/phonequeue.tpl:188
 msgid "Less Than sound file"
-msgstr ""
+msgstr "Fichier son, moins de"
 
 #: plugins/admin/ogroups/phonequeue.tpl:204
 msgid "Phone attributes "
