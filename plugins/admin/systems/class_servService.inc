@@ -17,14 +17,15 @@ class servservice extends plugin
   var $goTerminalServer="";
   var $goSyslogServer="";
   var $goCupsServer="";
+  var $o_subWindow = NULL;
 
   /* attribute list for save action */
   var $ignore_account= TRUE;
   var $attributes       = array("goLdapBase","goXdmcpIsEnabled","goFontPath");
-  var $possible_objectclasses= array( "goNfsServer", "goNtpServer", "goServer", "goLdapServer",
+  var $possible_objectclasses= array( "goShareServer", "goNtpServer", "goServer", "goLdapServer",
                                       "goTerminalServer", "goSyslogServer", "goCupsServer");
   var $objectclasses    = array("top","goServer"); 
-  var $additionaloc     = array( "goNfsServer"     => array("goExportEntry"),
+  var $additionaloc     = array( "goShareServer"     => array("goExportEntry"),
                                  "goNtpServer"     => array("goTimeSource"),
                                  "goLdapServer"    => array("goLdapBase"),
                                  "goTerminalServer"=> array("goXdmcpIsEnabled", "goFontPath"),
@@ -43,7 +44,7 @@ class servservice extends plugin
     }
 
     /* Load arrays */
-    foreach (array("goTimeSource", "goExportEntry") as $name){
+    foreach (array("goTimeSource") as $name){
       $tmp= array();
       if (isset($this->attrs[$name])){
         for ($i= 0; $i<$this->attrs[$name]['count']; $i++){
@@ -53,8 +54,28 @@ class servservice extends plugin
       $this->$name= $tmp;
     }
 
+    $tmp =array();
+    $tmp2=array();
+    unset($this->attrs['goExportEntry']['count']);
+    if((isset($this->attrs['goExportEntry']))&&(isset($this->attrs['goExportEntry']))){
+      foreach($this->attrs['goExportEntry'] as $entry){
+        $tmp2= split("\|",$entry);
+        $tmp[$tmp2[0]]= $entry;
+      }
+    }
+    $this->goExportEntry = $tmp;
+
     /* Always is account... */
     $this->is_account= TRUE;
+  }
+
+  function addToList($entry){
+    $key =  key($entry);
+    $this->goExportEntry[$key]=$entry[$key];
+  }
+
+  function deleteFromList($id){
+    unset($this->goExportEntry[$id]);
   }
 
 
@@ -65,19 +86,49 @@ class servservice extends plugin
 
     $smarty->assign("staticAddress", "");
 
-    /* Here we add a new entry  */
-    if(isset($_POST['NewNfsAdd']) && $_POST['NewNfsExport'] != "") {
-      $this->goExportEntry[$_POST['NewNfsExport']]= $_POST['NewNfsExport'];
-      asort($this->goExportEntry);
+    if((isset($_POST['DelNfsEnt']))&&(isset($_POST['goExportEntry']))){
+      $this->deleteFromList($_POST['goExportEntry']);
     }
 
-    /* Deleting an Entry, is a bit more complicated than adding one*/
-    if(isset($_POST['DelNfsEnt']) && isset($_POST['goExportEntry'])) {
-      foreach ($_POST['goExportEntry'] as $entry){
-        if (isset($this->goExportEntry[$entry])){
-          unset($this->goExportEntry[$entry]);
+    if(isset($_POST['NewNfsAdd'])){
+      $this->o_subWindow = new servnfs($this->config, $this->dn);
+      $this->dialog = true;
+    }
+
+    if((isset($_POST['NewNfsEdit']))&&(isset($_POST['goExportEntry']))){
+      $entry = $this->goExportEntry[$_POST['goExportEntry']];
+      $this->o_subWindow = new servnfs($this->config, $this->dn,$entry);
+      $this->dialog = true;
+    }
+
+    if(isset($this->o_subWindow)){
+    $this->o_subWindow->save_object(TRUE);
+    }
+
+    /* Save NFS setup */
+    if(isset($_POST['NFSsave'])){
+      if(count($this->o_subWindow->check())>0){
+        foreach($this->o_subWindow->check() as $msg) {
+          print_red($msg);
         }
+      }else{
+        $this->o_subWindow->save_object();
+        $newone = $this->o_subWindow->save();
+        $this->addToList($newone) ;
+        unset($this->o_subWindow);
+        $this->dialog = false;
       }
+    }
+    
+    /* Cancel NFS setup */
+    if(isset($_POST['NFScancel'])){
+      unset($this->o_subWindow);
+      $this->dialog = false;
+    }
+  
+    /* Execute NFS setup dialog*/
+    if(isset($this->o_subWindow)){
+      return $this->o_subWindow->execute(); 
     }
 
     /* Here we add a new entry  */
@@ -101,13 +152,20 @@ class servservice extends plugin
       $smarty->assign("$attr"."ACL", chkacl($this->acl, $attr));
       $smarty->assign($attr."State","");
     }
-
-    /* Arrays */
-    foreach (array("goTimeSource", "goExportEntry") as $name){
-      $smarty->assign("$name", $this->$name);
-      $smarty->assign("$name"."ACL", chkacl($this->acl, $name));
-      $smarty->assign($name."State","");
+    
+    $tellSmarty=array();
+    foreach($this->goExportEntry as $name=>$values){
+       $tmp = split("\|",$values);
+       $tellSmarty[$name] = $tmp[0]." ".$tmp[4];
     }
+    $smarty->assign("goExportEntry",array_keys($tellSmarty));
+    $smarty->assign("goExportEntryKeys",($tellSmarty));
+    $smarty->assign("goExportEntryACL", chkacl($this->acl, "goExportEntry"));
+
+    $smarty->assign("goTimeSource", $this->goTimeSource);
+    $smarty->assign("goTimeSourceACL", chkacl($this->acl, "goTimeSource"));
+    $smarty->assign("goTimeSourceState","");
+    
 
     /* Classes... */
     foreach ($this->additionaloc as $oc => $dummy){
@@ -121,6 +179,10 @@ class servservice extends plugin
         $smarty->assign("$oc"."ACL", chkacl($this->acl, $oc));
         $smarty->assign("$oc"."State", "disabled");
       }
+    }
+
+    if(!count($this->goExportEntry)){
+      $smarty->assign("goShareServerState", " disabled ");
     }
 
     /* Different handling for checkbox */
@@ -184,6 +246,7 @@ class servservice extends plugin
   /* Save to LDAP */
   function save()
   {
+
     plugin::save();
 
     $tmp= array();
@@ -221,6 +284,14 @@ class servservice extends plugin
         $this->attrs[$name][]= $element;
       }
     }
+ 
+    $oc = array();
+    foreach($this->attrs['objectClass'] as $name){
+      if($name!="goNfsServer"){
+        $oc[]=$name; 
+      }
+    }
+    $this->attrs['objectClass']=$oc;
 
     /* Write to LDAP */
     $ldap= $this->config->get_ldap_link();

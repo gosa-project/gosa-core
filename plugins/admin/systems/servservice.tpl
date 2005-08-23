@@ -2,9 +2,9 @@
  <tr>
   <td style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;" width="50%">
 
-   <input type=checkbox name="goNfsServer" value="1" {$goNfsServer} {$goNfsServerACL}  
+   <input type=checkbox name="goShareServer" value="1" {$goShareServer} {$goShareServer}  
 			onchange="changeState('goExportEntry');
-			changeState('NewNfsExportId');
+			changeState('NewNfsEditId');
 			changeState('DelNfsEntId');
 			changeState('NewNfsAddId');"> 
 
@@ -12,14 +12,14 @@
    <table summary="">
     <tr>
      <td>
-		<select style="width:350px;" id="goExportEntry" name="goExportEntry[]" {$goExportEntryACL} {$goNfsServerState} size=4 multiple >
-    		{html_options values=$goExportEntry output=$goExportEntry}
+		<select style="width:350px;" id="goExportEntry" name="goExportEntry" {$goExportEntryACL} {$goShareServerState} size=4 multiple >
+    		{html_options values=$goExportEntry output=$goExportEntryKeys}
 			<option disabled>&nbsp;</option>
 	    </select>
 	<br>	
-		<input type="text" 		name="NewNfsExport" {$goNfsServerState} id="NewNfsExportId"> 
-		<input type="submit" 	value="{t}Add{/t}"	 	name="NewNfsAdd" {$goNfsServer} {$goExportEntryACL}	{$goNfsServerState} id="NewNfsAddId"> 
-		<input type="submit" 	value="{t}Delete{/t}"  	name="DelNfsEnt" {$goNfsServer} {$goExportEntryACL}	{$goNfsServerState} id="DelNfsEntId">
+		<input type="submit" 	value="{t}Edit{/t}" 	name="NewNfsEdit" {$goShareServer} {$goExportEntryACL}  {$goShareServerState} id="NewNfsEditId"> 
+		<input type="submit" 	value="{t}Add{/t}"	 	name="NewNfsAdd"  {$goShareServer} {$goExportEntryACL}	{$goShareServerState} id="NewNfsAddId"> 
+		<input type="submit" 	value="{t}Delete{/t}"  	name="DelNfsEnt"  {$goShareServer} {$goExportEntryACL}	{$goShareServerState} id="DelNfsEntId">
 	</td>
 	</tr>
    </table>
