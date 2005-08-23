@@ -80,52 +80,19 @@
 
 <table summary="" style="width:100% ; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
-  <td>
+  <td style='width:50%'>
    <h2><img alt="" align="middle" src="images/terminal_small.png"> {t}Account{/t}</h2>
-  </td>
- </tr>
- <tr>
-  <td>
    {include file="$pwmode.tpl"}
-  </td>
- </tr>
-</table>
-
-<p class="seperator">&nbsp;</p>
-<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
- <tr>
-  <td style="vertical-align:top; width:50%">
-   <h2><img alt="" align="middle" src="images/display.png"> {t}Environment{/t}</h2>
-   <table summary="">
-    <tr>
-     <td><LABEL for="gosaDefaultPrinter">{t}Default printer{/t}</LABEL></td>
-     <td>
-      <select id="gosaDefaultPrinter" size="1" name="gosaDefaultPrinter" {$gosaDefaultPrinterACL}>
-       {html_options options=$printerList selected=$gosaDefaultPrinter}
-		<option disabled value="">&nbsp;</option>
-      </select> 
-     </td>
-    </tr>
-    <tr>
-     <td><LABEL for="gosaDefaultLanguage">{t}Default language{/t}</LABEL></td>
-     <td>
-      <select size="1" id="gosaDefaultLanguage" name="gosaDefaultLanguage" {$gosaDefaultLanguageACL}>
-       {html_options values=$languages output=$languages selected=$gosaDefaultLanguage}
-      </select> 
-     </td>
-    </tr>
-   </table>
   </td>
   <td style="border-left:1px solid #A0A0A0">
     &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <h2><img alt="" align="middle" src="images/closedlock.png" style="margin-bottom:10px;"> {t}System trust{/t}&nbsp;
-    <select name="trustmode" id="trustmode" size=1 onchange="changeSelectState('trustmode', 'wslist'); changeSelectState('trustmode', 'add_ws'); changeSelectState('trustmode', 'del_ws');" {$trustmodeACL}>
+   <h2><img alt="" align="middle" src="images/closedlock.png" style="margin-bottom:10px;"> {t}System trust{/t}</h2>
+    {t}Trust mode{/t}&nbsp;<select name="trustmode" id="trustmode" size=1 onchange="changeSelectState('trustmode', 'wslist'); changeSelectState('trustmode', 'add_ws'); changeSelectState('trustmode', 'del_ws');" {$trustmodeACL}>
       {html_options options=$trustmodes selected=$trustmode}
     </select>
-   </h2>
-   <select style="width:350px;" id="wslist" name="workstation_list[]" size=4 multiple {$trustmodeACL} {$trusthide}>
+   <select style="width:350px;" id="wslist" name="workstation_list[]" size=5 multiple {$trustmodeACL} {$trusthide}>
     {html_options values=$workstations output=$workstations}
 	{if $emptyArrAccess}
 		<option disabled>&nbsp;</option>

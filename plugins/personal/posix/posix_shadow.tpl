@@ -10,11 +10,6 @@
    <input type=checkbox name="use_shadowMax" value="1" {$use_shadowMax} {$shadowMaxACL}>
    {$shadowmaxs}
    <br>
-  </td>
-  <td style="border-left:1px solid #A0A0A0">
-    &nbsp;
-  </td>
-  <td style="vertical-align:top">
    <input type=checkbox name="use_shadowExpire" value="1" {$use_shadowExpire} {$shadowExpireACL}>
    {t}Password expires on{/t}
    <select name=day onChange="createResult(this.form,this.form.shadowExpire);" {$shadowExpireACL}>
