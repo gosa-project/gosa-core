@@ -9,26 +9,26 @@ class servnfs extends plugin
 
   /* attribute list for save action */
   var $ignore_account   = TRUE;
-  var $attributes       = array("NFSdescription","NFStype","NFScharset","NFSpath","NFSoption");
+  var $attributes       = array("description","type","charset","path","option");
   var $objectclasses    = array("whatever");
   var $is_account       = true;
 
-  var $NFSname          ="";  // Name of NFS 
-  var $NFSdescription   ="";  // description
-  var $NFStype          ="";  // Type NFS/Samba/NCP
-  var $NFScharset       ="";  // charset
-  var $NFStypes         =array();  // Array Types NFS/Samba/NCP
-  var $NFScharsets      =array();  // Array with charsets
-  var $NFSpath          ="";  // Path
-  var $NFSoption        ="";  // Options
+  var $name          ="";  // Name of  
+  var $description   ="";  // description
+  var $type          ="";  // Type FS/Samba/NCP
+  var $charset       ="";  // charset
+  var $types         =array();  // Array Types NFS/Samba/NCP
+  var $charsets      =array();  // Array with charsets
+  var $path          ="";  // Path
+  var $option        ="";  // Options
   var $is_edit           =false;
 
 
   function servnfs ($config, $dn= NULL,$entry = false)
   {
     plugin::plugin ($config, $dn);
-    $this->NFStypes   = array("NFS"=>"NFS","samba"=>"samba","NCP"=>"NCP");
-    $this->NFScharsets = array("UTF-8" => "UTF-8",
+    $this->types   = array("NFS"=>"NFS","samba"=>"samba","NCP"=>"NCP");
+    $this->charsets = array("UTF-8" => "UTF-8",
                         "ISO8859-1"=>"ISO8859-1 (Latin 1)",
                         "ISO8859-2"=>"ISO8859-2 (Latin 2)",
                         "ISO8859-3"=>"ISO8859-3 (Latin 3)",
@@ -37,15 +37,15 @@ class servnfs extends plugin
 
     if($entry){
       $tmp = split("\|",$entry);
-      $this->NFSname          = $tmp[0];  // Name of NFS
-      $this->NFSdescription   = $tmp[1];  // description
-      $this->NFStype          = $tmp[2];  // Type NFS/Samba/NCP
-      $this->NFScharset       = $tmp[3];  // charset
-      $this->NFSpath          = $tmp[4];  // Path
-      $this->NFSoption        = $tmp[5];  // Options
+      $this->name          = $tmp[0];  // Name of NFS
+      $this->description   = $tmp[1];  // description
+      $this->type          = $tmp[2];  // Type NFS/Samba/NCP
+      $this->charset       = $tmp[3];  // charset
+      $this->path          = $tmp[4];  // Path
+      $this->option        = $tmp[5];  // Options
       $this->is_edit          = true;
     }else{
-    $this->attributes[] = "NFSname";
+    $this->attributes[] = "name";
     }
   }
 
@@ -54,19 +54,19 @@ class servnfs extends plugin
     /* Fill templating stuff */
     $smarty= get_smarty();
 
-    $smarty->assign("NFScharsets" ,$this->NFScharsets);
-    $smarty->assign("NFStypes"    ,$this->NFStypes);
+    $smarty->assign("charsets" ,$this->charsets);
+    $smarty->assign("types"    ,$this->types);
 
     /* attrs to smarty*/
     foreach($this->attributes as $attr){
       $smarty->assign($attr,$this->$attr);
     }
     
-    $smarty->assign("NFSnameACL","");    
+    $smarty->assign("nameACL","");    
 
     if($this->is_edit){
-      $smarty->assign("NFSnameACL"," disabled ");
-      $smarty->assign("NFSname","");
+      $smarty->assign("nameACL"," disabled ");
+      $smarty->assign("name","");
     }
 
     $display= $smarty->fetch(get_template_path('servnfs.tpl', TRUE));
@@ -83,7 +83,7 @@ class servnfs extends plugin
   function save_object()
   {
     plugin::save_object(TRUE);
-    if(isset($_POST['NFSpath'])){
+    if(isset($_POST['path'])){
       foreach($this->attributes as $attr){
         $this->$attr = $_POST[$attr];
       }
@@ -97,16 +97,16 @@ class servnfs extends plugin
     $message= array();
 
     // fixme : a check for the path ?  ? 
-    if(empty($this->NFSpath)){
+    if(empty($this->path)){
       $message[]=_("Please specify a valid path for your setup.");
     }
   
     // only 0-9a-z
     if(!$this->is_edit){
-      if(preg_match("/[^a-z0-9]/i",$this->NFSname)){
+      if(preg_match("/[^a-z0-9]/i",$this->name)){
         $message[]=_("Please specify a valid name for your setup.");
       }
-      if(empty($this->NFSname)){
+      if(empty($this->name)){
         $message[]=_("Please specify a name for your setup.");
       }
     }
@@ -119,7 +119,7 @@ class servnfs extends plugin
         continue;
       foreach($test['goExportEntry'] as $entry){
         $tmp = split("\|",$entry);
-        if($tmp[0] == $this->NFSname){
+        if($tmp[0] == $this->name){
           $message[]="Name already in use";
         }
       }
@@ -137,14 +137,14 @@ class servnfs extends plugin
   
     $s_return = "";
     
-    $s_return.= $this->NFSname."|";     
-    $s_return.= $this->NFSdescription."|";     
-    $s_return.= $this->NFStype."|";     
-    $s_return.= $this->NFScharset."|";     
-    $s_return.= $this->NFSpath."|";     
-    $s_return.= $this->NFSoption;     
+    $s_return.= $this->name."|";     
+    $s_return.= $this->description."|";     
+    $s_return.= $this->type."|";     
+    $s_return.= $this->charset."|";     
+    $s_return.= $this->path."|";     
+    $s_return.= $this->option;     
 
-    return(array($this->NFSname=>$s_return));
+    return(array($this->name=>$s_return));
   }
 
 }

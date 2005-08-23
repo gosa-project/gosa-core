@@ -9,7 +9,7 @@
 						{t}Name{/t} {$must}
 					</td>
 					<td>
-						<input type="text" name="NFSname" value="{$NFSname}" {$NFSnameACL}>
+						<input type="text" name="name" value="{$name}" {$nameACL}>
 					</td>
 				</tr>
 				<tr>
@@ -17,7 +17,7 @@
 						{t}Description{/t}
 					</td>
 					<td>
-						<input type="text" name="NFSdescription" value="{$NFSdescription}">
+						<input type="text" name="description" value="{$description}">
 					</td>
 				</tr>
 			</table>
@@ -31,8 +31,8 @@
 						{t}Type{/t}
 					</td>
 					<td>
-						<select size="1" name="NFStype">
-   							{html_options options=$NFStypes selected=$NFStype}
+						<select size="1" name="type">
+   							{html_options options=$types selected=$type}
 						</select>	
 					</td>
 				</tr>
@@ -41,8 +41,8 @@
 						{t}Charset{/t}
 					</td>
 					<td>
-						<select size="1" name="NFScharset">
-   							{html_options options=$NFScharsets selected=$NFScharset}
+						<select size="1" name="charset">
+   							{html_options options=$charsets selected=$charset}
 						</select>	
 					</td>
 				</tr>
@@ -63,7 +63,7 @@
 						{t}Path{/t}
 					</td>
 					<td>
-						<input type="text" name="NFSpath" value="{$NFSpath}">
+						<input type="text" name="path" value="{$path}">
 					</td>
 				</tr>
 			</table>
@@ -75,7 +75,7 @@
                         {t}Option{/t}
                     </td>
                     <td>
-						<input type="text" name="NFSoption" value="{$NFSoption}">
+						<input type="text" name="option" value="{$option}">
                     </td>
                 </tr>
             </table>

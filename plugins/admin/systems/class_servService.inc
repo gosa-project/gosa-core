@@ -268,15 +268,6 @@ class servservice extends plugin
     /* Reassign cleaned value */
     $this->attrs['objectClass']= $tmp;
 
-    /* Remove illegal attributes */
-    foreach ($this->additionaloc as $oc => $attrs){
-      if (!in_array($oc, $this->objectclasses)){
-        foreach ($attrs as $attr){
-          $this->attrs[$attr]= array();
-        }
-      }
-    }
-
     /* Arrays */
     foreach (array("goTimeSource", "goExportEntry") as $name){
       $this->attrs[$name]= array();
@@ -285,6 +276,14 @@ class servservice extends plugin
       }
     }
  
+    /* Remove illegal attributes */
+    foreach ($this->additionaloc as $oc => $attrs){
+      if (!in_array($oc, $this->objectclasses)){
+        foreach ($attrs as $attr){
+          $this->attrs[$attr]= array();
+        }
+      }
+    }
     $oc = array();
     foreach($this->attrs['objectClass'] as $name){
       if($name!="goNfsServer"){
