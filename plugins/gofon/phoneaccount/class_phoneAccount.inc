@@ -412,21 +412,32 @@ class phoneAccount extends plugin
         ('".$this->phoneNumbers[$i_new_key]."','default','".$this->phoneNumbers[$i_new_key]."','".$this->goFonPINVoice."','".$this->cn."','".$s_mail."','');";
 
       $i_is_accounted=false;
-
+    
+      $i = 0; 
+  
       // Entension entries  Hint / Dial / Goto
       foreach($this->phoneNumbers as $s_telenums){
-        // Entry  to call by name
-        $s_entry_name['context']  = 'GOsa';
-        $s_entry_name['exten']    = $this->uid;
-        $s_entry_name['priority'] = 1;
-        $s_entry_name['app']      = 'Goto';
-        $s_entry_name['appdata']  = $s_telenums."|1";
 
-        // hint
-        $s_entry_hint['context']  = 'GOsa';
-        $s_entry_hint['exten']    = $s_telenums;
-        $s_entry_hint['priority']      = 'hint';
-        $s_entry_hint['app']  = 'SIP/'.$this->uid;
+        /* Mapping : Name TO Number*/
+        $EXT[$i]['context'] = 'GOsa';
+        $EXT[$i]['exten']   = $this->uid;
+        $EXT[$i]['priority']= 1;
+        $EXT[$i]['app']     = "Goto";
+        $EXT[$i]['appdata'] = $s_telenums."|1";
+        $i ++;  
+        /* Hint Entry */
+        $EXT[$i]['context'] = 'GOsa';
+        $EXT[$i]['exten']   = $s_telenums;
+        $EXT[$i]['priority']= "Hint";
+        $EXT[$i]['app']     = 'SIP/'.$this->uid;
+        $i ++;  
+        /* SetCID */
+        $EXT[$i]['context'] = 'GOsa';
+        $EXT[$i]['exten']   = $s_telenums;
+        $EXT[$i]['priority']= 1;
+        $EXT[$i]['app']     = "SetCIDName";
+        $EXT[$i]['appdata'] = $this->cn;
+        $i ++;  
 
         // If no macro is selected use Dial
         if($this->macro!="none"){ 
@@ -439,39 +450,30 @@ class phoneAccount extends plugin
           $s_par = 'SIP/'.$this->uid;
         }
 
-        // Entry  to call by number
-        $s_entry_phone['context']  = 'GOsa';
-        $s_entry_phone['exten']    = $s_telenums;
-        $s_entry_phone['priority'] = 1;
-        $s_entry_phone['app']      = $s_app;
-        $s_entry_phone['appdata']  = $s_par;
+        $EXT[$i]['context'] = 'GOsa';
+        $EXT[$i]['exten']   = $s_telenums;
+        $EXT[$i]['priority']= 2;
+        $EXT[$i]['app']     = $s_app;
+        $EXT[$i]['appdata'] = $s_par;
+        $i ++;
 
-        // append name entry only once
-        if(!$i_is_accounted){ 
-          $i_is_accounted = true;
-          $entries[]=array("hint"=>$s_entry_hint,"phone"=>$s_entry_phone,"name"=>$s_entry_name); 
-        }else{
-          $entries[]=array("hint"=>$s_entry_hint,"phone"=>$s_entry_phone);
-        }
       }
 
       // Append all these Entries 
-      foreach($entries as $num => $val){
-        foreach($val as $entr){
-          $SQL_syn = "INSERT INTO ".$a_SETUP['EXT_TABLE']." (";
-          foreach($entr as $key2 => $val2){
-            $SQL_syn.= "`".$key2."`,";
-          }
-          $SQL_syn = preg_replace("/,$/","",$SQL_syn);
-          $SQL_syn .= ") VALUES ("; 
-          foreach($entr as $key2 => $val2){
-            $SQL_syn .= "'".$val2."',";
-          }
-          $SQL_syn = preg_replace("/,$/","",$SQL_syn);
-          $SQL_syn .=");\n";
-          $SQL[] =$SQL_syn;
-          $SQL_syn ="";
+      foreach($EXT as $entr){
+        $SQL_syn = "INSERT INTO ".$a_SETUP['EXT_TABLE']." (";
+        foreach($entr as $key2 => $val2){
+          $SQL_syn.= "`".$key2."`,";
         }
+        $SQL_syn = preg_replace("/,$/","",$SQL_syn);
+        $SQL_syn .= ") VALUES ("; 
+        foreach($entr as $key2 => $val2){
+          $SQL_syn .= "'".$val2."',";
+        }
+        $SQL_syn = preg_replace("/,$/","",$SQL_syn);
+        $SQL_syn .=");\n";
+        $SQL[] =$SQL_syn;
+        $SQL_syn ="";
       }
 
       // Perform queries ...
