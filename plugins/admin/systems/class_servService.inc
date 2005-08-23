@@ -7,24 +7,25 @@ class servservice extends plugin
   var $cli_description= "Some longer text\nfor help";
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
-  var $goExportEntry  = array();
-  var $goTimeSource   = array();
-  var $goLdapBase= "";
-  var $goXdmcpIsEnabled ="";
-  var $goFontPath= "";
-  var $goNTPServer="";
-  var $goLdapServer="";
-  var $goTerminalServer="";
-  var $goSyslogServer="";
-  var $goCupsServer="";
-  var $o_subWindow = NULL;
+  var $goExportEntry    = array();
+  var $goTimeSource     = array();
+  var $goLdapBase       = "";
+  var $goXdmcpIsEnabled = "";
+  var $goFontPath       = "";
+  var $goNTPServer      = "";
+  var $goShareServer      = "";
+  var $goLdapServer     = "";
+  var $goTerminalServer = "";
+  var $goSyslogServer   = "";
+  var $goCupsServer     = "";
+  var $o_subWindow      = NULL;
 
   /* attribute list for save action */
   var $ignore_account= TRUE;
   var $attributes       = array("goLdapBase","goXdmcpIsEnabled","goFontPath");
   var $possible_objectclasses= array( "goShareServer", "goNtpServer", "goServer", "goLdapServer",
                                       "goTerminalServer", "goSyslogServer", "goCupsServer");
-  var $objectclasses    = array("top","goServer"); 
+  var $objectclasses    = array( "top","goServer"); 
   var $additionaloc     = array( "goShareServer"     => array("goExportEntry"),
                                  "goNtpServer"     => array("goTimeSource"),
                                  "goLdapServer"    => array("goLdapBase"),
@@ -246,7 +247,6 @@ class servservice extends plugin
   /* Save to LDAP */
   function save()
   {
-
     plugin::save();
 
     $tmp= array();
@@ -257,7 +257,7 @@ class servservice extends plugin
         $tmp[]= $oc;
       }
     }
-
+    
     /* Merge our current objectclasses */
     foreach($this->objectclasses as $oc){
       if (!in_array_ics($oc, $tmp)){
@@ -284,13 +284,6 @@ class servservice extends plugin
         }
       }
     }
-    $oc = array();
-    foreach($this->attrs['objectClass'] as $name){
-      if($name!="goShareServer"){
-        $oc[]=$name; 
-      }
-    }
-    $this->attrs['objectClass']=$oc;
 
     /* Write to LDAP */
     $ldap= $this->config->get_ldap_link();
