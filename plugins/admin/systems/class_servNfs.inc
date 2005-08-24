@@ -111,6 +111,18 @@ class servnfs extends plugin
       }
     }
 
+    if(preg_match("/\|/",$this->description)){
+      $message[]=_("Description contains invalid characters.");
+    }
+  
+    if(preg_match("/\|/",$this->path)){
+      $message[]=_("Path contains invalid characters.");
+    }
+
+    if(preg_match("/\|/",$this->option)){
+      $message[]=_("Option contains invalid characters.");
+    }
+
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
     $ldap->search("(objectClass=goShareServer)", array("goExportEntry"));
