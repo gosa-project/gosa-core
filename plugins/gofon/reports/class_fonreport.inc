@@ -226,7 +226,7 @@ class fonreport extends plugin
 	}
 
 	/* Show main page */
-	$smarty->assign("plug", validate($_GET['plug']));
+	$smarty->assign("plug", "?plug=".validate($_GET['plug']));
 	$smarty->assign("launchimage", get_template_path('images/launch.png'));
 	$smarty->assign("search_image", get_template_path('images/search.png'));
         for($i= 0; $i<7; $i++){
