@@ -208,6 +208,7 @@ msgstr "Italienisch"
 #: plugins/personal/connectivity/class_connectivity.inc:16
 #: plugins/personal/connectivity/class_proxyAccount.inc:6
 #: plugins/personal/connectivity/class_intranetAccount.inc:16
+#: plugins/personal/environment/class_environment.inc:13
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:6
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:7
 #: plugins/gofax/reports/class_faxreport.inc:7
@@ -402,6 +403,8 @@ msgstr "Liste alternativer Mail-Adressen"
 #: plugins/personal/samba/samba3_workstations.tpl:39
 #: plugins/personal/connectivity/class_kolabAccount.inc:200
 #: plugins/personal/connectivity/kolab.tpl:18
+#: plugins/personal/environment/environment.tpl:108
+#: plugins/personal/environment/environment.tpl:166
 #: plugins/gofax/blocklists/generic.tpl:63
 #: plugins/gofax/faxaccount/generic.tpl:75
 #: plugins/gofax/faxaccount/locals.tpl:62
@@ -428,6 +431,9 @@ msgstr "Hinzuf�gen"
 #: plugins/personal/posix/generic.tpl:104
 #: plugins/personal/samba/samba3.tpl:289
 #: plugins/personal/connectivity/kolab.tpl:20
+#: plugins/personal/environment/environment.tpl:109
+#: plugins/personal/environment/environment.tpl:151
+#: plugins/personal/environment/environment.tpl:167
 #: plugins/gofax/blocklists/generic.tpl:64
 #: plugins/gofax/blocklists/remove.tpl:15
 #: plugins/gofax/faxaccount/generic.tpl:77
@@ -540,6 +546,7 @@ msgstr "schaltet alle �brigen Mail-Einstellungen aus!"
 #: plugins/personal/generic/generic_certs.tpl:76
 #: plugins/personal/generic/main.inc:158
 #: plugins/personal/connectivity/main.inc:116
+#: plugins/personal/environment/main.inc:104
 #: plugins/gofax/blocklists/generic.tpl:77
 #: plugins/gofax/faxaccount/main.inc:89
 #: plugins/admin/groups/class_groupManagement.inc:328
@@ -564,6 +571,7 @@ msgstr "Speichern"
 #: plugins/personal/generic/generic_certs.tpl:78
 #: plugins/personal/generic/main.inc:160
 #: plugins/personal/connectivity/main.inc:118
+#: plugins/personal/environment/main.inc:106
 #: plugins/gofax/blocklists/generic.tpl:79
 #: plugins/gofax/blocklists/remove.tpl:17
 #: plugins/gofax/faxaccount/locals.tpl:64
@@ -600,6 +608,7 @@ msgstr "Abbrechen"
 #: plugins/personal/mail/main.inc:114 plugins/personal/posix/main.inc:120
 #: plugins/personal/samba/main.inc:114 plugins/personal/generic/main.inc:177
 #: plugins/personal/connectivity/main.inc:126
+#: plugins/personal/environment/main.inc:114
 #: plugins/gofax/faxaccount/main.inc:96
 #: plugins/gofon/phoneaccount/main.inc:111
 msgid "Click the 'Edit' button below to change informations in this dialog"
@@ -610,6 +619,8 @@ msgstr ""
 #: plugins/personal/mail/main.inc:115 plugins/personal/posix/main.inc:122
 #: plugins/personal/samba/main.inc:115 plugins/personal/generic/main.inc:170
 #: plugins/personal/connectivity/main.inc:127
+#: plugins/personal/environment/main.inc:115
+#: plugins/personal/environment/environment.tpl:110
 #: plugins/gofax/faxaccount/generic.tpl:90
 #: plugins/gofax/faxaccount/generic.tpl:96
 #: plugins/gofax/faxaccount/main.inc:97 plugins/addons/logview/contents.tpl:62
@@ -2194,6 +2205,7 @@ msgid "Download bandwidth"
 msgstr "Download-Bandbreite"
 
 #: plugins/personal/connectivity/pureftpd.tpl:31
+#: plugins/personal/environment/environment.tpl:48
 msgid "Quota"
 msgstr "Kontingent"
 
@@ -2302,6 +2314,120 @@ msgstr ""
 #: plugins/personal/connectivity/class_intranetAccount.inc:14
 msgid "Intranet"
 msgstr "Intranet"
+
+#: plugins/personal/environment/main.inc:124
+#, fuzzy
+msgid "User environment settings"
+msgstr "Benutzer Mail-Einstellungen"
+
+#: plugins/personal/environment/class_environment.inc:12
+msgid "Environment"
+msgstr "Umgebung"
+
+#: plugins/personal/environment/class_environment.inc:109
+#, fuzzy
+msgid "Remove environment extension"
+msgstr "Kolab Erweiterung entfernen"
+
+#: plugins/personal/environment/class_environment.inc:110
+#, fuzzy
+msgid ""
+"This server has environment extension enabled. You can disable it by "
+"clicking below."
+msgstr ""
+"Dieser Server hat die Kolab-Funtionen aktiviert. Sie k�nnen diese durch "
+"einen Klick auf die Schaltfl�che unten deaktivieren."
+
+#: plugins/personal/environment/class_environment.inc:113
+msgid "Add environment extension"
+msgstr ""
+
+#: plugins/personal/environment/class_environment.inc:114
+#, fuzzy
+msgid ""
+"This server has environment extension disabled. You can enable it by "
+"clicking below."
+msgstr ""
+"Aktuell hat dieser Server keine Kolab-Funktionen aktiviert. Sie k�nnen diese "
+"durch einen Klick auf die Schaltfl�che unten aktivieren."
+
+#: plugins/personal/environment/environment.tpl:3
+msgid "The environment extension is currently disabled."
+msgstr ""
+
+#: plugins/personal/environment/environment.tpl:8
+#, fuzzy
+msgid "Profiles"
+msgstr "Profil-Pfad"
+
+#: plugins/personal/environment/environment.tpl:15
+#, fuzzy
+msgid "Use profile managment"
+msgstr "Asterisk Verwaltung"
+
+#: plugins/personal/environment/environment.tpl:25
+#, fuzzy
+msgid "Profil server"
+msgstr "Spool-Server"
+
+#: plugins/personal/environment/environment.tpl:36
+msgid "Use local caching"
+msgstr ""
+
+#: plugins/personal/environment/environment.tpl:56
+#: plugins/admin/systems/service.tpl:94
+msgid "Resolution"
+msgstr "Aufl�sung"
+
+#: plugins/personal/environment/environment.tpl:70
+msgid "Resolution changeable on runtime "
+msgstr ""
+
+#: plugins/personal/environment/environment.tpl:76
+#: plugins/personal/environment/environment.tpl:80
+msgid "Kiosk profile"
+msgstr ""
+
+#: plugins/personal/environment/environment.tpl:93
+#, fuzzy
+msgid "Profile management"
+msgstr "Konferenz-Verwaltung"
+
+#: plugins/personal/environment/environment.tpl:98
+msgid "Login scripts"
+msgstr ""
+
+#: plugins/personal/environment/environment.tpl:116
+msgid "Attach share"
+msgstr ""
+
+#: plugins/personal/environment/environment.tpl:138
+#, fuzzy
+msgid "Hotplug devices"
+msgstr "Disketten-Laufwerk"
+
+#: plugins/personal/environment/environment.tpl:149
+#: plugins/admin/groups/class_groupManagement.inc:354
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:328
+msgid "New"
+msgstr "Neu"
+
+#: plugins/personal/environment/environment.tpl:150
+msgid "Existing"
+msgstr ""
+
+#: plugins/personal/environment/environment.tpl:156
+#: plugins/admin/systems/class_systemManagement.inc:708
+#: plugins/admin/ogroups/class_ogroupManagement.inc:49
+#: plugins/admin/ogroups/class_ogroupManagement.inc:487
+#: plugins/generic/references/class_reference.inc:52
+msgid "Printer"
+msgstr "Drucker"
+
+#: plugins/personal/environment/environment.tpl:168
+#, fuzzy
+msgid "Admin Toggle"
+msgstr "Administrator"
 
 #: plugins/gofax/blocklists/generic.tpl:8
 msgid "List name"
@@ -3586,11 +3712,6 @@ msgstr "Es ist Ihnen nicht erlaubt, diese Gruppe zu l�schen!"
 #: plugins/admin/groups/class_groupManagement.inc:353
 msgid "Create new group"
 msgstr "Neue Gruppe erstellen"
-
-#: plugins/admin/groups/class_groupManagement.inc:354
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:328
-msgid "New"
-msgstr "Neu"
 
 #: plugins/admin/groups/class_groupManagement.inc:361
 #: plugins/admin/applications/class_applicationManagement.inc:334
@@ -5058,13 +5179,6 @@ msgstr "Windows-Workstation"
 msgid "Network Device"
 msgstr "Netzwerk-Ger�t"
 
-#: plugins/admin/systems/class_systemManagement.inc:708
-#: plugins/admin/ogroups/class_ogroupManagement.inc:49
-#: plugins/admin/ogroups/class_ogroupManagement.inc:487
-#: plugins/generic/references/class_reference.inc:52
-msgid "Printer"
-msgstr "Drucker"
-
 #: plugins/admin/systems/class_systemManagement.inc:917
 msgid "New terminal"
 msgstr "Neues Terminal"
@@ -5485,10 +5599,6 @@ msgid "Choose graphic driver that is needed by the installed graphic board"
 msgstr ""
 "W�hlen Sie den Treiber, der von der installierten Grafikkarte ben�tigt wird."
 
-#: plugins/admin/systems/service.tpl:94
-msgid "Resolution"
-msgstr "Aufl�sung"
-
 #: plugins/admin/systems/service.tpl:96
 msgid "Choose screen resolution used in graphic mode"
 msgstr "W�hlen Sie die Aufl�sung, die im Grafik-Modus genutzt wird"
@@ -5890,6 +6000,21 @@ msgstr "Bitte geben Sie eine g�ltige Telefonnummer an."
 #, fuzzy
 msgid "Please specify a name for your setup."
 msgstr "Bitte geben Sie eine g�ltige Telefonnummer an."
+
+#: plugins/admin/systems/class_servNfs.inc:115
+#, fuzzy
+msgid "Description contains invalid characters."
+msgstr "Das Zeitlimit '%s' enthÃÂÃ¢ÂÂ¬lt ungÃÂÃÂltige Zeichen!"
+
+#: plugins/admin/systems/class_servNfs.inc:119
+#, fuzzy
+msgid "Path contains invalid characters."
+msgstr "Das Feld 'Name' enth�lt ung�ltige Zeichen."
+
+#: plugins/admin/systems/class_servNfs.inc:123
+#, fuzzy
+msgid "Option contains invalid characters."
+msgstr "Das Zeitlimit '%s' enthÃÂÃ¢ÂÂ¬lt ungÃÂÃÂltige Zeichen!"
 
 #: plugins/admin/systems/servnfs.tpl:2
 msgid "NFS setup"
@@ -8381,9 +8506,6 @@ msgstr ""
 "Versionen). In einigen F�llen ist es hilfreich, das 'error_reporting' zu "
 "aktivieren (dies kann jedoch ein Sicherheitsrisiko darstellen)."
 
-#~ msgid "Environment"
-#~ msgstr "Umgebung"
-
 #~ msgid "Default printer"
 #~ msgstr "Standard-Drucker"
 
@@ -8411,9 +8533,6 @@ msgstr ""
 
 #~ msgid "The number '%s' is no valid phone number!"
 #~ msgstr "Die Nummer '%s' ist keine gÃÂÃÂltige Telefonnummer!"
-
-#~ msgid "The timeout '%s' contains invalid characters!"
-#~ msgstr "Das Zeitlimit '%s' enthÃÂÃ¢ÂÂ¬lt ungÃÂÃÂltige Zeichen!"
 
 #~ msgid "No"
 #~ msgstr "Nein"

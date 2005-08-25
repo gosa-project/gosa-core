@@ -23,6 +23,7 @@
 # translation of messages.po to
 # translation of messages.po to
 # translation of messages.po to
+# translation of messages.po to
 # translation of messages.po to Français
 # Gosa2 French Translation
 # This file is distributed under the GPL
@@ -32,7 +33,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2005-08-23 17:37+0200\n"
+"PO-Revision-Date: 2005-08-25 15:05+0200\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -231,6 +232,7 @@ msgstr "Italien"
 #: plugins/personal/connectivity/class_connectivity.inc:16
 #: plugins/personal/connectivity/class_proxyAccount.inc:6
 #: plugins/personal/connectivity/class_intranetAccount.inc:16
+#: plugins/personal/environment/class_environment.inc:13
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:6
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:7
 #: plugins/gofax/reports/class_faxreport.inc:7
@@ -422,6 +424,8 @@ msgstr "Liste des adresses de messagerie alternatives"
 #: plugins/personal/samba/samba3_workstations.tpl:39
 #: plugins/personal/connectivity/class_kolabAccount.inc:200
 #: plugins/personal/connectivity/kolab.tpl:18
+#: plugins/personal/environment/environment.tpl:108
+#: plugins/personal/environment/environment.tpl:166
 #: plugins/gofax/blocklists/generic.tpl:63
 #: plugins/gofax/faxaccount/generic.tpl:75
 #: plugins/gofax/faxaccount/locals.tpl:62
@@ -448,6 +452,9 @@ msgstr "Ajouter"
 #: plugins/personal/posix/generic.tpl:104
 #: plugins/personal/samba/samba3.tpl:289
 #: plugins/personal/connectivity/kolab.tpl:20
+#: plugins/personal/environment/environment.tpl:109
+#: plugins/personal/environment/environment.tpl:151
+#: plugins/personal/environment/environment.tpl:167
 #: plugins/gofax/blocklists/generic.tpl:64
 #: plugins/gofax/blocklists/remove.tpl:15
 #: plugins/gofax/faxaccount/generic.tpl:77
@@ -564,6 +571,7 @@ msgstr "désactive toutes les options de messagerie!"
 #: plugins/personal/generic/generic_certs.tpl:76
 #: plugins/personal/generic/main.inc:158
 #: plugins/personal/connectivity/main.inc:116
+#: plugins/personal/environment/main.inc:104
 #: plugins/gofax/blocklists/generic.tpl:77
 #: plugins/gofax/faxaccount/main.inc:89
 #: plugins/admin/groups/class_groupManagement.inc:328
@@ -588,6 +596,7 @@ msgstr "Terminé"
 #: plugins/personal/generic/generic_certs.tpl:78
 #: plugins/personal/generic/main.inc:160
 #: plugins/personal/connectivity/main.inc:118
+#: plugins/personal/environment/main.inc:106
 #: plugins/gofax/blocklists/generic.tpl:79
 #: plugins/gofax/blocklists/remove.tpl:17
 #: plugins/gofax/faxaccount/locals.tpl:64
@@ -624,6 +633,7 @@ msgstr "Annuler"
 #: plugins/personal/mail/main.inc:114 plugins/personal/posix/main.inc:120
 #: plugins/personal/samba/main.inc:114 plugins/personal/generic/main.inc:177
 #: plugins/personal/connectivity/main.inc:126
+#: plugins/personal/environment/main.inc:114
 #: plugins/gofax/faxaccount/main.inc:96
 #: plugins/gofon/phoneaccount/main.inc:111
 msgid "Click the 'Edit' button below to change informations in this dialog"
@@ -634,6 +644,8 @@ msgstr ""
 #: plugins/personal/mail/main.inc:115 plugins/personal/posix/main.inc:122
 #: plugins/personal/samba/main.inc:115 plugins/personal/generic/main.inc:170
 #: plugins/personal/connectivity/main.inc:127
+#: plugins/personal/environment/main.inc:115
+#: plugins/personal/environment/environment.tpl:110
 #: plugins/gofax/faxaccount/generic.tpl:90
 #: plugins/gofax/faxaccount/generic.tpl:96
 #: plugins/gofax/faxaccount/main.inc:97 plugins/addons/logview/contents.tpl:62
@@ -2209,6 +2221,7 @@ msgid "Download bandwidth"
 msgstr "Bande passante descendante"
 
 #: plugins/personal/connectivity/pureftpd.tpl:31
+#: plugins/personal/environment/environment.tpl:48
 msgid "Quota"
 msgstr "Quota"
 
@@ -2316,6 +2329,110 @@ msgstr "La valeur dans le champ 'Quota Setting' n'est pas valide."
 #: plugins/personal/connectivity/class_intranetAccount.inc:14
 msgid "Intranet"
 msgstr "Intranet"
+
+#: plugins/personal/environment/main.inc:124
+msgid "User environment settings"
+msgstr "Utiliser les préférences d'environnement"
+
+#: plugins/personal/environment/class_environment.inc:12
+msgid "Environment"
+msgstr "Environnement"
+
+#: plugins/personal/environment/class_environment.inc:109
+msgid "Remove environment extension"
+msgstr "Enlever l'extension d'environnement"
+
+#: plugins/personal/environment/class_environment.inc:110
+msgid ""
+"This server has environment extension enabled. You can disable it by "
+"clicking below."
+msgstr ""
+"Ce serveur à l'extension d'environnement activée. Vous pouvez la désactiver en "
+"cliquant sur le bouton ci-dessous."
+
+#: plugins/personal/environment/class_environment.inc:113
+msgid "Add environment extension"
+msgstr "Ajouter une extension d'environnement"
+
+#: plugins/personal/environment/class_environment.inc:114
+msgid ""
+"This server has environment extension disabled. You can enable it by "
+"clicking below."
+msgstr ""
+"Ce serveur à l'extension d'environnement désactivé. Vous pouvez l'activer en cliquant "
+"sur le bouton ci-dessous."
+
+#: plugins/personal/environment/environment.tpl:3
+msgid "The environment extension is currently disabled."
+msgstr "L'extension d'environnement est actuellement désactivée."
+
+#: plugins/personal/environment/environment.tpl:8
+msgid "Profiles"
+msgstr "Profils"
+
+#: plugins/personal/environment/environment.tpl:15
+msgid "Use profile managment"
+msgstr "Utiliser la gestion des profiles"
+
+#: plugins/personal/environment/environment.tpl:25
+msgid "Profil server"
+msgstr "Serveur de profiles"
+
+#: plugins/personal/environment/environment.tpl:36
+msgid "Use local caching"
+msgstr "Utiliser le cache local"
+
+#: plugins/personal/environment/environment.tpl:56
+#: plugins/admin/systems/service.tpl:94
+msgid "Resolution"
+msgstr "Résolution"
+
+#: plugins/personal/environment/environment.tpl:70
+msgid "Resolution changeable on runtime "
+msgstr "La résolution peut être changée lors de l'execution"
+
+#: plugins/personal/environment/environment.tpl:76
+#: plugins/personal/environment/environment.tpl:80
+msgid "Kiosk profile"
+msgstr "Profil Kiosk"
+
+#: plugins/personal/environment/environment.tpl:93
+msgid "Profile management"
+msgstr "Gestion des profiles"
+
+#: plugins/personal/environment/environment.tpl:98
+msgid "Login scripts"
+msgstr "Scripts de démarrage"
+
+#: plugins/personal/environment/environment.tpl:116
+msgid "Attach share"
+msgstr "Attacher un partage"
+
+#: plugins/personal/environment/environment.tpl:138
+msgid "Hotplug devices"
+msgstr "Périphériques Hotplug"
+
+#: plugins/personal/environment/environment.tpl:149
+#: plugins/admin/groups/class_groupManagement.inc:354
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:328
+msgid "New"
+msgstr "Nouveau"
+
+#: plugins/personal/environment/environment.tpl:150
+msgid "Existing"
+msgstr "Existant"
+
+#: plugins/personal/environment/environment.tpl:156
+#: plugins/admin/systems/class_systemManagement.inc:708
+#: plugins/admin/ogroups/class_ogroupManagement.inc:49
+#: plugins/admin/ogroups/class_ogroupManagement.inc:487
+#: plugins/generic/references/class_reference.inc:52
+msgid "Printer"
+msgstr "Imprimante"
+
+#: plugins/personal/environment/environment.tpl:168
+msgid "Admin Toggle"
+msgstr ""
 
 #: plugins/gofax/blocklists/generic.tpl:8
 msgid "List name"
@@ -3599,11 +3716,6 @@ msgstr "Vous n'êtes pas autorisé à supprimer ce groupe!"
 #: plugins/admin/groups/class_groupManagement.inc:353
 msgid "Create new group"
 msgstr "Créer un nouveau groupe"
-
-#: plugins/admin/groups/class_groupManagement.inc:354
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:328
-msgid "New"
-msgstr "Nouveau"
 
 #: plugins/admin/groups/class_groupManagement.inc:361
 #: plugins/admin/applications/class_applicationManagement.inc:334
@@ -5066,13 +5178,6 @@ msgstr "Stations Windows"
 msgid "Network Device"
 msgstr "Périphérique réseau"
 
-#: plugins/admin/systems/class_systemManagement.inc:708
-#: plugins/admin/ogroups/class_ogroupManagement.inc:49
-#: plugins/admin/ogroups/class_ogroupManagement.inc:487
-#: plugins/generic/references/class_reference.inc:52
-msgid "Printer"
-msgstr "Imprimante"
-
 #: plugins/admin/systems/class_systemManagement.inc:917
 msgid "New terminal"
 msgstr "Nouveau terminal"
@@ -5497,10 +5602,6 @@ msgstr ""
 "Sélectionnez le pilote de la carte vidéo correspondant à la carte graphique "
 "installée"
 
-#: plugins/admin/systems/service.tpl:94
-msgid "Resolution"
-msgstr "Résolution"
-
 #: plugins/admin/systems/service.tpl:96
 msgid "Choose screen resolution used in graphic mode"
 msgstr "Sélectionnez la résolution utilisée en mode graphique"
@@ -5893,6 +5994,18 @@ msgstr "Veuillez entrer un nom valide pour votre configuration."
 #: plugins/admin/systems/class_servNfs.inc:110
 msgid "Please specify a name for your setup."
 msgstr "Veuillez spécifier un nom valide pour votre configuration."
+
+#: plugins/admin/systems/class_servNfs.inc:115
+msgid "Description contains invalid characters."
+msgstr "La description contient des caractères invalides."
+
+#: plugins/admin/systems/class_servNfs.inc:119
+msgid "Path contains invalid characters."
+msgstr "Le chemin contient des caractères invalides."
+
+#: plugins/admin/systems/class_servNfs.inc:123
+msgid "Option contains invalid characters."
+msgstr "L'option contient des caractères invalides."
 
 #: plugins/admin/systems/servnfs.tpl:2
 msgid "NFS setup"
