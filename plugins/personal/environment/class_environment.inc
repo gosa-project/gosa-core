@@ -250,7 +250,8 @@ class environment extends plugin
        * In this case we create a new Logon Script.
        */
       if(isset($_POST['gotoLogonScriptNew'])){
-        print "Adding ".$is_entry;
+        $this->is_dialog = true;
+        $this->dialog = new logonManagementDialog($this->config,$this->dn);
       }
 
       /* If we receive a Delete request and there is a Script selected in the selectbox, delete this one.
@@ -266,7 +267,8 @@ class environment extends plugin
        */
       if((isset($_POST['gotoLogonScriptEdit']))&&(isset($_POST['gotoLogonScript']))){
         $is_entry = $this->gotoLogonScripts[$_POST['gotoLogonScript']];
-        print "Editing ".$is_entry;
+        $this->is_dialog = true;
+        $this->dialog = new logonManagementDialog($this->config,$this->dn,$is_entry);
       }
     }
     
