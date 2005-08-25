@@ -238,10 +238,28 @@ class environment extends plugin
      * Perform add Delete edit Posts 
      */
 
-    $this->gotoLogonScripts = array("asdf"=>"one","aaaa"=>"two","121"=>"3");
-  
-    $smarty->assign("gotoLogonScripts",$this->gotoLogonScripts);
-    $smarty->assign("gotoLogonScriptKeys",array_flip($this->gotoLogonScripts));
+    /* Dialog Save */
+    if(isset($_POST['LogonSave'])){
+      $this->dialog->save_object();
+      if(count($this->dialog->check())!=0){
+        foreach($this->dialog->check() as $msg){
+          print_red($msg);
+        }
+      }else{
+        $tmp = $this->dialog->save();
+        unset($this->dialog);
+        $this->dialog=NULL;
+        $this->is_dialog=false;
+        $this->gotoLogonScripts[$tmp['LogonName']]=$tmp; 
+      }
+    }
+    
+    /* Dialog Quit without saving */
+    if(isset($_POST['LogonCancel'])){
+      $this->is_dialog= false;
+      unset($this->dialog);
+      $this->dialog= NULL;
+    }
    
     /* Check Edit Del New Posts for a selected LogonScript */ 
     if(isset($_POST['gotoLogonScriptNew'])||isset($_POST['gotoLogonScriptEdit'])||isset($_POST['gotoLogonScriptDel'])){
@@ -271,7 +289,11 @@ class environment extends plugin
         $this->dialog = new logonManagementDialog($this->config,$this->dn,$is_entry);
       }
     }
-    
+     
+    /* Append List to smarty*/
+    $smarty->assign("gotoLogonScripts",   $this->printOutLogonScripts());
+    $smarty->assign("gotoLogonScriptKeys",array_flip($this->printOutLogonScripts()));
+
     /* In this section server shares will be defined 
      * A user can select one of the given shares and a mount point
      *  and attach this combination to his setup.
@@ -473,7 +495,7 @@ class environment extends plugin
     if(isset($_POST['iamposted'])){
       plugin::save_object();
       foreach($this->attributes as $s_attr){
-        if(in_array($s_attr,array("gotoShares","gotoHotplugDevices","gotoPrinters"))) continue;
+        if(in_array($s_attr,array("gotoShares","gotoHotplugDevices","gotoPrinters","gotoLogonScripts"))) continue;
         if(isset($_POST[$s_attr])){
           $this->$s_attr = $_POST[$s_attr];
         }else{
@@ -688,28 +710,37 @@ function printOutHotPlugDevices()
     return($a_return);
   }
 
-/* Generates ListBox frienly output of used printer devices 
- * Append ' - admin' if printer is used in admin mode
- */
-function printOutPrinterDevices()
+  /* Generates ListBox frienly output of used printer devices 
+   * Append ' - admin' if printer is used in admin mode
+   */
+  function printOutPrinterDevices()
   {
-  $a_return = array();
-  if(is_array($this->gotoPrinters)){
-    foreach($this->gotoPrinters as $printer){
+    $a_return = array();
+    if(is_array($this->gotoPrinters)){
+      foreach($this->gotoPrinters as $printer){
         if($printer['mode'] == "admin"){
-         $a_return[$printer['cn'][0]]= $printer['cn'][0]." - "._("Admin");
+          $a_return[$printer['cn'][0]]= $printer['cn'][0]." - "._("Admin");
         }else{
-         $a_return[$printer['cn'][0]]= $printer['cn'][0]; 
+          $a_return[$printer['cn'][0]]= $printer['cn'][0]; 
         }
       }
     }
-  return($a_return);
+    return($a_return);
   }
 
-
-
-
-
+  /* Generates ListBox frienly output of used logonscripts 
+   */
+  function printOutLogonScripts()
+  {
+    print_a($this->gotoLogonScripts);
+    $a_return = array();
+    if(is_array($this->gotoLogonScripts)){
+      foreach($this->gotoLogonScripts as $script){
+        $a_return[$script['LogonName']]= $script['LogonName']; 
+      }
+    }
+    return($a_return);
+  }
 }
 
 
