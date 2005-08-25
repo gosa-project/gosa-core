@@ -2,6 +2,7 @@
 	<img alt="" src="images/stop.png" align="middle">
 	{t}The environment extension is currently disabled.{/t}
 {else}
+<input type="hidden" name="iamposted" value="1">
 <table summary="" width="100%">
 	<tr>
 		<td valign="top" width="50%">
@@ -25,8 +26,8 @@
 									{t}Profil server{/t}
 								</td>
 								<td>
-									<select style="width:350px;" name="goProfileServer">
-										{html_options values=$goProfileServers output=$goProfileServer}
+									<select style="width:350px;" name="gotoProfileServer" {$gotoProfileACL}>
+										{html_options values=$gotoProfileServers output=$gotoProfileServers selected=$gotoProfileServer}
 										<option disabled>&nbsp;</option>
 									</select>
 								</td>
@@ -36,7 +37,7 @@
 									{t}Use local caching{/t}
 								</td>
 								<td>
-									<input type="checkbox" name="gotoProfileFlag_C" value="C" {$gotoProfileFlagsACL} {$gotoProfileFlag_CCHK}>
+									<input type="checkbox" name="gotoProfileFlag_C" value="C" {$gotoProfileACL} {$gotoProfileFlag_CCHK}>
 								</td>
 							</tr>
 						</table>
@@ -48,7 +49,7 @@
 					<td>{t}Quota{/t} 
 					</td>
 					<td>
-						<input type="text" name="gotoIDon'tKnow">
+						<input type="text" name="gotoProfileQuota" value="{$gotoProfileQuota}">
 					</td>
 				</tr>
 				<tr>
@@ -57,14 +58,14 @@
 					</td>
 					<td>
 						<select name="gotoXResolution" {$gotoXResolutionACL}>
-                        	{html_options values=$gotoXResolutions output=$gotoXResolutions}
+                        	{html_options values=$gotoXResolutions output=$gotoXResolutions selected=$gotoXResolution}
                             <option disabled>&nbsp;</option>
                     	</select>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<input type="checkbox" name="gotoProfileFlag_L" {$gotoProfileFlagsACL} {$gotoProfileFlag_LCHK}>
+						<input type="checkbox" name="gotoProfileFlag_L" value="L" {$gotoProfileFlagsACL} {$gotoProfileFlag_LCHK}>
 					</td>
 					<td>
 						{t}Resolution changeable on runtime {/t}
@@ -81,7 +82,7 @@
 					</td>
 					<td>
 						<select name="gotoKioskProfile" {$gotoKioskProfileACL}>
-                        {html_options values=$gotoKioskProfiles output=$gotoKioskProfiles}
+                        {html_options values=$gotoKioskProfiles output=$gotoKioskProfiles selected=$gotoKioskProfile}
                         <option disabled>&nbsp;</option>
 					</td>
 				</tr>
@@ -95,19 +96,19 @@
 				</tr>
 			</table>	
 			<p class="seperator">&nbsp;</p>
-			<h2><img alt="" src="images/banana.png" align="middle">&nbsp;{t}Login scripts{/t}</h2>
+			<h2><img alt="" src="images/banana.png" align="middle">&nbsp;{t}Logon scripts{/t}</h2>
 			<table summary="">
 				<tr>
 					<td>
-			        	<select style="width:350px;" name="gotoLoginScript" multiple size=4 {$gotoLoginScriptACL}>
-                        {html_options values=$gotoLoginScripts output=$gotoLoginScripts}
+			        	<select style="width:350px;" name="gotoLogonScript" multiple size=4 {$gotoLogonScriptACL}>
+                        {html_options values=$gotoLogonScriptKeys output=$gotoLogonScripts }
                         <option disabled>&nbsp;</option>
 						</select>
 			
 						<br>
-						<input type="submit" {gotoLoginScriptACL} name="gotoLoginScriptNew"		value="{t}Add{/t}">
-						<input type="submit" {gotoLoginScriptACL} name="gotoLoginScriptDel" 	value="{t}Delete{/t}"> 
-						<input type="submit" {gotoLoginScriptACL} name="gotoLoginScriptEditl" 	value="{t}Edit{/t}"> 
+						<input type="submit" {gotoLogonScriptACL} name="gotoLogonScriptNew"		value="{t}Add{/t}">
+						<input type="submit" {gotoLogonScriptACL} name="gotoLogonScriptDel" 	value="{t}Delete{/t}"> 
+						<input type="submit" {gotoLogonScriptACL} name="gotoLogonScriptEdit" 	value="{t}Edit{/t}"> 
 					</td>
 				</tr>
 			</table>	
@@ -118,14 +119,14 @@
 				<tr>
 					<td>
 			        	<select style="width:350px;" name="gotoShare" multiple size=4 {$gotoShareACL}>
-                        {html_options values=$gotoShares output=$gotoShares}
+                        {html_options values=$gotoShareKeys output=$gotoShares}
                         <option disabled>&nbsp;</option>
 						</select>
 			
 						<br>
 							
 			        	<select name="gotoShareSelection" {$gotoShareACL}>
-                        {html_options values=$gotoShareSelections output=$gotoShareSelections}
+                        {html_options values=$gotoShareSelectionKeys output=$gotoShareSelections}
                         <option disabled>&nbsp;</option>
 						</select>
 						<input type="text"	 {$gotoShareACL} name="gotoShareMountPoint"	value="">
@@ -140,7 +141,7 @@
 				<tr>
 					<td>
 						<select name="gotoHotplugDevice" {$gotoHotplugDeviceACL} size=4  style="width:350px;">
-                        {html_options values=$gotoHotplugDevices output=$gotoHotplugDevices}
+                        {html_options values=$gotoHotplugDeviceKeys output=$gotoHotplugDevices}
                         <option disabled>&nbsp;</option>
 					</td>
 				</tr>
@@ -158,14 +159,14 @@
                 <tr>
                     <td>
                         <select style="width:350px;" name="gotoPrinter" multiple size=4 {$gotoPrinterACL}>
-                        {html_options values=$gotoPrinters output=$gotoPrinters}
+                        {html_options values=$gotoPrinterKeys output=$gotoPrinters}
                         <option disabled>&nbsp;</option>
                         </select>
 
                         <br>
-                        <input type="submit" {$gotoLoginScriptACL} name="gotoLoginScriptNew"     value="{t}Add{/t}">
-                        <input type="submit" {$gotoLoginScriptACL} name="gotoLoginScriptDel"     value="{t}Delete{/t}">
-                        <input type="submit" {$gotoLoginScriptACL} name="gotoLoginScriptEditl"   value="{t}Admin Toggle{/t}">
+                        <input type="submit" {$gotoPrinterACL} name="gotoPrinterAdd"     value="{t}Add{/t}">
+                        <input type="submit" {$gotoPrinterACL} name="gotoPrinterDel"     value="{t}Delete{/t}">
+                        <input type="submit" {$gotoPrinterACL} name="gotoPrinterEdit"   value="{t}Admin Toggle{/t}">
                     </td>
                 </tr>
             </table>
