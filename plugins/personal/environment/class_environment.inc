@@ -564,6 +564,11 @@ class environment extends plugin
   function check()
   {
     $message= array();
+  
+    if(preg_match("/[^0-9]/",$this->gotoProfileQuota)) {
+      $message[]=_("Please set a valid profile quota size.");
+    }  
+
     return ($message);
   }
 

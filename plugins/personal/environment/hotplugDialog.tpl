@@ -25,8 +25,7 @@
                 </div>
                 <div class="contentboxb">
                     <p class="contentboxb">
-                        {t}This menu allows you to create, edit and delete selected users.
-                            Having a great number of users, you may want to use the range selectors on top of the user list.{/t}
+                        {t}This menu allows you to select an existing hotplug configuration.{/t}
                     </p>
                 </div>
                 <br>
@@ -38,7 +37,7 @@
                 <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
                     <tr>
                         <td width="50%">
-                            <img alt="" src="{$tree_image}" align=middle>&nbsp;{t}Display groups of department{/t}
+                            <img alt="" src="{$tree_image}" align=middle>&nbsp;{t}Display hotplugs of department{/t}
                         </td>
                         <td>
                             <select name="depselectHot" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based    on{/t}">
@@ -60,7 +59,7 @@
                                 </td>
                                 <td width="99%">
                                     <input id='filter' style='width:99%' type='text' name='regexHot' maxlength='20' value='{$regexHot}'
-                                            title='{t}Regular expression for        matching user names{/t}' onChange="mainform.submit()">
+                                            title='{t}Regular expression for        matching hotplugs{/t}' onChange="mainform.submit()">
                                 </td>
                             </tr>
                         </table>
