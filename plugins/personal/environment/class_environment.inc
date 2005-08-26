@@ -12,7 +12,9 @@ class environment extends plugin
   var $plHeadline           = "Environment";
   var $plDescription        = "This does something";
   var $dialog               = false;    // Indicates that we are currently editing in an seperate dialog
-
+  
+  var $in_dialog            = false;
+  var $uid                  = "";
   /* Attribute definition
    */
 
@@ -93,6 +95,29 @@ class environment extends plugin
       }
     }
     
+    /* prepare LogonScripts */
+    if((isset($this->attrs['gotoLogonScript']))&&(is_array($this->attrs['gotoLogonScript']))){
+      unset($this->attrs['gotoLogonScript']['count']);
+      foreach($this->attrs['gotoLogonScript'] as $device){
+        $tmp = $tmp2 = array();
+        $tmp = split("\|",$device);
+        $tmp2['LogonName']        = $tmp[0]; 
+        $tmp2['LogonPriority']    = $tmp[2]; 
+        if(preg_match("/O/i",$tmp[1])){
+          $tmp2['LogonOverload'] = "O";
+        }else{
+          $tmp2['LogonOverload'] = "";
+        }
+        if(preg_match("/L/i",$tmp[1])){
+          $tmp2['LogonLast'] = "L";
+        }else{
+          $tmp2['LogonLast'] = "";
+        }
+        $tmp2['LogonData']        = base64_decode($tmp[3]); 
+        $this->gotoLogonScripts[$tmp[0]]=$tmp2;
+      }
+    }
+    
     /* Prepare Shares */
     if((isset($this->attrs['gotoShare']))&&(is_array($this->attrs['gotoShare']))){
       unset($this->attrs['gotoShare']['count']);
@@ -130,7 +155,7 @@ class environment extends plugin
 
     // 1. Account disabled . Editing from usermenu
     if((!isset($this->parent))&&(!$this->is_account)){
-      /* We are currently editing this tab from usermenu, but htis account is not enabled */
+      /* We are currently editing this tab from usermenu, but this account is not enabled */
       $smarty->assign("is_account",$this->is_account);
       /* Load template */
       $display .= $smarty->fetch(get_template_path('environment.tpl', TRUE));
@@ -157,10 +182,17 @@ class environment extends plugin
           $display= $this->show_header(_("Remove environment extension"),
               _("This server has environment extension enabled. You can disable it by clicking below."));
         } else {
-        // 4. Account disabled . Editing from adminmenu
-          $display= $this->show_header(_("Add environment extension"),
-              _("This server has environment extension disabled. You can enable it by clicking below."));
-          return $display;
+          if((in_array("posixAccount",$this->attrs['objectClass']))||($this->parent->by_object['posixAccount']->is_account==true)){
+            // 4. There is a PosixAccount
+            $display= $this->show_header(_("Add environment extension"),
+                _("This server has environment extension disabled. You can enable it by clicking below."));
+            return $display;
+          }else{
+            // 4. There is a PosixAccount
+            $display= $this->show_header(_("Add environment extension"),
+                _("This server has environment extension disabled. You have to setup a posix account before you can enable this feature."),TRUE,TRUE);
+            return $display;
+          }
         }
       }
     }
@@ -276,8 +308,7 @@ class environment extends plugin
        * We only can delete if there is an entry selected.
        */
       if((isset($_POST['gotoLogonScriptDel']))&&(isset($_POST['gotoLogonScript']))){
-        $is_entry = $this->gotoLogonScripts[$_POST['gotoLogonScript']];
-        print "Deleting ".$is_entry;
+        unset($this->gotoLogonScripts[$_POST['gotoLogonScript']]);
       }
       
       /* In this case we want to edit an existing entry, we open a new Dialog to allow editing.
@@ -495,7 +526,7 @@ class environment extends plugin
     if(isset($_POST['iamposted'])){
       plugin::save_object();
       foreach($this->attributes as $s_attr){
-        if(in_array($s_attr,array("gotoShares","gotoHotplugDevices","gotoPrinters","gotoLogonScripts"))) continue;
+        if(in_array($s_attr,array("gotoShares","gotoHotplugDevices","gotoPrinters","gotoLogonScripts","uid"))) continue;
         if(isset($_POST[$s_attr])){
           $this->$s_attr = $_POST[$s_attr];
         }else{
@@ -521,7 +552,10 @@ class environment extends plugin
     $ldap= $this->config->get_ldap_link();
 
     $realyUsedAttrs= array();
+  
+ 
     
+  
     /* Save already used objectClasses */
     $ocs        = $this->attrs['objectClass'];
     unset($ocs['count']);
@@ -535,6 +569,58 @@ class environment extends plugin
 
 
     /* Save usersettings to Printer */
+
+    if(chkacl($this->acl,"gotoPrinter")!=""){
+      $this->gotoPrinters = array();
+    }  
+
+    if(count($this->gotoPrinters)==0){
+      $ldap->search("(&(objectClass=gotoPrinter)(|(gotoUserPrinter=".$this->uid.")(gotoAdminPrinter=".$this->uid.")))",array("*"));
+      while($attr = $ldap->fetch()){
+      
+        foreach($attr['gotoUserPrinter'] as $key => $user){
+          if($this->uid==$user){
+            unset($attr['gotoUserPrinter'][$key]);
+          }
+        }    
+
+        foreach($attr['gotoAdminPrinter'] as $key => $user){
+          if($this->uid==$user){
+            unset($attr['gotoAdminPrinter'][$key]);
+          }
+        }    
+
+        $attrs_used = array();
+        foreach($attr as $key=>$val){
+          if((!is_numeric($key))&&($key!="count")){
+            if(is_array($val)&&isset($val['count'])){
+              unset($val['count']);
+            }
+            $attrs_used[$key]=$val;
+          }
+        }
+        $attr= $attrs_used;
+        $tmp =array();
+        foreach($attr['gotoAdminPrinter'] as $print){
+          $tmp[]=$print;
+        }
+        $attr['gotoAdminPrinter'] = $tmp;
+
+        $tmp =array();
+        foreach($attr['gotoUserPrinter'] as $print){
+          $tmp[]=$print;
+        }
+        $attr['gotoUserPrinter'] = $tmp;
+
+        $ldap->cd($attr['dn']);
+        unset($attr['dn']);
+        $ldap->modify($attr);
+        if($ldap->get_error()!="Success"){
+          print_red("Printer saving ".$ldap->get_error());
+        }
+      }
+    }    
+
     foreach($this->gotoPrinters as $printer) {
       $ldap->cd($printer['dn']);
       $ldap->cat($printer['dn']);
@@ -559,7 +645,7 @@ class environment extends plugin
         $attribute  = "gotoAdminPrinter";
         $attribute2 = "gotoUserPrinter";
       }
-      
+
       /* If this user is already assigned to $attribute2 
        * delete user from $attribute2, to be albe to attach him to $attribute
        * A user can't be admin and normal user for one printer
@@ -570,14 +656,14 @@ class environment extends plugin
         if(in_array($this->uid,$printer[$attribute2])){ 
           $tmp = array_flip($attrs[$attribute2]);
           unset($tmp[$this->uid]);
-          $attrs[$attribute2]=$tmp;
+          $attrs[$attribute2]=array_flip($tmp);
         }
         /* If Last entry removed, clear attribute*/
         if(empty($attrs[$attribute2])){
           $attrs[$attribute2]=array();
         }
       }
-
+    
       /* Attach user to the $attribute, if he is'nt already attached
        */
       if(!isset($attrs[$attribute])){
@@ -588,18 +674,50 @@ class environment extends plugin
           $attrs[$attribute][]=$this->uid;
         }
       }
+
+      $tmp =array();
+      if(isset($attrs['gotoAdminPrinter'])){
+        foreach($attrs['gotoAdminPrinter'] as $print){
+          $tmp[]=$print;
+        }
+      }
+      $attrs['gotoAdminPrinter'] = $tmp;
+
+      $tmp =array();
+      if(isset($attrs['gotoUserPrinter'])){
+        foreach($attrs['gotoUserPrinter'] as $print){
+          $tmp[]=$print;
+        }
+      }
+      $attrs['gotoUserPrinter'] = $tmp;
+
       $ldap->cd($attrs['dn']);
       unset($attrs['dn']);
       $ldap->modify($attrs);
       if($ldap->get_error()!="Success"){
-        print_red($ldap->get_error());
+        print_red("Printer saving ".$ldap->get_error());
       }
     }
-    
+  
+    plugin::save();
+
+    if(isset($this->attrs['gotoPrinter'])){
+      unset($this->attrs['gotoPrinter']);
+    }
+ 
     /* Prepare HotPlug devices */
     $this->attrs['gotoHotplugDevice'] = array();
     foreach($this->gotoHotplugDevices as $name => $device){
       $this->attrs['gotoHotplugDevice'][] = $device['name']."|".$device['description']."|".$device['id'];
+    }
+
+    /* Prepare LogonScripts */
+    $this->attrs['gotoLogonScript'] = array();
+    foreach($this->gotoLogonScripts as $name => $script){
+      $this->attrs['gotoLogonScript'][] =   $script['LogonName']."|".
+                                            $script['LogonOverload'].$script['LogonLast']."|".
+                                            $script['LogonPriority']."|".
+                                            base64_encode($script['LogonData']); 
     }
 
     /* Prepare Shares */
@@ -635,6 +753,15 @@ class environment extends plugin
       $this->attrs['gotoProfileServer']= array(); 
     }
 
+    foreach($this->attributes as $s_attr){
+      if(chkacl($this->acl,$s_attr)!="") {
+        if(isset($this->attrs[$s_attr])){
+          unset($this->attrs[$s_attr]);
+        }
+      }
+    }
+
+
     $ldap->cat ($this->dn);
     if ($ldap->fetch()){
       $mode= "modify";
@@ -651,9 +778,6 @@ class environment extends plugin
     }
     $this->handle_post_events($mode);
   }
-
-
-
 
 /* This function returns all available Shares defined in this ldap 
  * There are two ways to call this function, if listboxEntry is true
@@ -732,7 +856,6 @@ function printOutHotPlugDevices()
    */
   function printOutLogonScripts()
   {
-    print_a($this->gotoLogonScripts);
     $a_return = array();
     if(is_array($this->gotoLogonScripts)){
       foreach($this->gotoLogonScripts as $script){

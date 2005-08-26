@@ -10,7 +10,7 @@
 			<table summary="">
 				<tr>
 					<td>
-						<input type="checkbox" value="1" {$useProfileCHK} name="useProfile">
+						<input type="checkbox" value="1" {$useProfileCHK} name="useProfile" {$useProfileACL}>
 					</td>
 					<td valign="top">
 						{t}Use profile managment{/t}
@@ -49,7 +49,7 @@
 					<td>{t}Quota{/t} 
 					</td>
 					<td>
-						<input type="text" name="gotoProfileQuota" value="{$gotoProfileQuota}">
+						<input type="text" name="gotoProfileQuota" value="{$gotoProfileQuota}" {$gotoProfileQuotaACL}>
 					</td>
 				</tr>
 				<tr>
@@ -91,7 +91,7 @@
 						&nbsp;
 					</td>
 					<td>
-						<input type="submit" name="KioskManagementDialog" value="{t}Profile management{/t}">
+						<input type="submit" name="KioskManagementDialog" value="{t}Profile management{/t}" {$gotoKioskProfileACL}>
 					</td>
 				</tr>
 			</table>	
@@ -106,9 +106,9 @@
 						</select>
 			
 						<br>
-						<input type="submit" {gotoLogonScriptACL} name="gotoLogonScriptNew"		value="{t}Add{/t}">
-						<input type="submit" {gotoLogonScriptACL} name="gotoLogonScriptDel" 	value="{t}Delete{/t}"> 
-						<input type="submit" {gotoLogonScriptACL} name="gotoLogonScriptEdit" 	value="{t}Edit{/t}"> 
+						<input type="submit" {$gotoLogonScriptACL} name="gotoLogonScriptNew"		value="{t}Add{/t}">
+						<input type="submit" {$gotoLogonScriptACL} name="gotoLogonScriptDel" 	value="{t}Delete{/t}"> 
+						<input type="submit" {$gotoLogonScriptACL} name="gotoLogonScriptEdit" 	value="{t}Edit{/t}"> 
 					</td>
 				</tr>
 			</table>	

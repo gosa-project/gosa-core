@@ -57,10 +57,10 @@ if (!$remove_lock){
   /* Adjust acl's to mode */
   if (isset($_SESSION['edit'])){
     $acl= get_permissions ($ui->dn, $ui->subtreeACL);
-    $environment->acl= get_module_permission($acl, "environment", $ui->dn);
+    $environment->acl= get_module_permission($acl, "gotoEnvironment", $ui->dn);
   } else {
     $acl= get_permissions ($ui->dn, $ui->subtreeACL);
-    $editacl= get_module_permission($acl, "environment",$ui->dn);
+    $editacl= get_module_permission($acl, "gotoEnvironment",$ui->dn);
     $environment->acl= "#none#";
   }
 
@@ -100,7 +100,7 @@ if (!$remove_lock){
     $display.= "<p class=\"plugbottom\">";
 
     /* Are we in edit mode? */
-    if (isset($_SESSION['edit'])){
+    if ((isset($_SESSION['edit']))&&($environment->dialog==NULL)){
       $display.= "<input type=submit name=\"edit_finish\" value=\""._("Finish")."\">\n";
       $display.= "&nbsp;";
       $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";

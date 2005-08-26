@@ -36,10 +36,15 @@ class kioskManagementDialog extends plugin
       $file = $_FILES['newProfile'];
       if(!file_exists($this->baseDir.$file['name'])){
         $name = preg_replace("/\..*$/","",$file['name']).$this->filePrefix;
-        $str = file_get_contents($file['tmp_name']);
-        $fp = fopen($this->baseDir.$name,"w+");
-        fwrite($fp,$str,strlen($str));
-        fclose($fp);
+        $str  = file_get_contents($file['tmp_name']);
+        $fp   = @fopen($this->baseDir.$name,"w+");
+        if($fp){
+          fwrite($fp,$str,strlen($str));
+          fclose($fp);
+        }else{
+          print_red(_("Can't save kioskProfile. Permission denied.")." ".$this->baseDir);
+        }
+        unlink($file['tmp_name']);;
       }
     }
       
@@ -72,6 +77,9 @@ class kioskManagementDialog extends plugin
   function getKioskProfiles()
   {
     $dir = opendir($this->baseDir);
+    if(!file_exists($this->baseDir)){
+      mkdir($this->baseDir);
+    }
     $a_return = array();
     while($file = readdir($dir)){
       if(preg_match("/".$this->filePrefix."$/i",$file)){

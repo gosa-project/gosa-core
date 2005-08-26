@@ -194,5 +194,19 @@ $ACLD['goFonConference']= array(
 			"goFonConferenceOption_c",
 			"goFonConferenceOwner");
 
+$ACLD['gotoEnvironment']=array(
+					"gotoPrinter",
+					"gotoEnvironment",
+					"gotoShare",
+					"gotoProfileServer",
+					"gotoProfileFlags",
+					"gotoXResolution",
+					"gotoLogonScript",
+					"gotoKioskProfile",
+					"gotoProfileQuota",
+					"gotoHotplugDevice"
+					);
+
+
 $ACLD['global-addressbook']=  array("create", "delete");
 ?>

@@ -705,6 +705,8 @@ class userManagement extends plugin
                     name='user_edit_%KEY%-user' title='"._("Edit generic properties")."'>";
     $posiximg = "<input type='image' src='images/select_user.png' alt='"._("Posix")."'  
                     name='user_edit_%KEY%-posixAccount' title='"._("Edit UNIX properties")."'>";
+    $eviroimg = "<input type='image' src='images/network.png' alt='"._("Environment")."'  
+                    name='user_edit_%KEY%-environment' title='"._("Edit environment properties")."'>";
     $mailimg  = "<input type='image' src='images/mailto.png' alt='"._("Mail")."'     
                     name='user_edit_%KEY%-mailAccount' title='"._("Edit mail properties")."'>";
     $fonimg   = "<input type='image' src='images/%image%' alt='"._("Phone")."'     
@@ -793,6 +795,12 @@ class userManagement extends plugin
       }else{ 
         $posix=$empty;
       }
+      
+      if(in_array("gotoEnvironment"    ,$val['objectClass'])){ 
+        $enviro = preg_replace("/%KEY%/", "$key", $eviroimg);
+      }else{ 
+        $enviro =$empty;
+      }
    
       if(in_array("gosaMailAccount" ,$val['objectClass'])){ 
         $maila = preg_replace("/%KEY%/", "$key", $mailimg);   
@@ -832,7 +840,7 @@ class userManagement extends plugin
       /* Create each field */
       $field1 = array("string" => sprintf($tpl,$val['dn']),"attach"=>"style='width:20px;align:middle;'");
       $field2 = array("string" => sprintf($editlink,$key,$display).$ip_port,"attach"=>"title='".$val['dn']."'");
-      $field3 = array("string" => $usrimg."&nbsp;".$posix."&nbsp;".$maila."&nbsp;".$fonac."&nbsp;".$faxac."&nbsp;".$samba."&nbsp;".$s_img_create_from_template, "attach" => "style='width:138px;'");
+      $field3 = array("string" => $usrimg."&nbsp;".$posix."&nbsp;".$enviro."&nbsp;".$maila."&nbsp;".$fonac."&nbsp;".$faxac."&nbsp;".$samba."&nbsp;".$s_img_create_from_template, "attach" => "style='width:138px;'");
       $field4 = array("string" => preg_replace("/%KEY%/", "$key", $action),"attach" => "style='border:none; text-align:right;width:48px'");
 
       $add = array($field1,$field2,$field3,$field4);

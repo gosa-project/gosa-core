@@ -10,7 +10,7 @@
 							<td>{t}Name{/t}
 							</td>
 							<td>
-								<input type="text" value="{$LogonName}" name="LogonName">
+								<input type="text" value="{$LogonName}" name="LogonName" {$LogonNameACL}>
 							</td>
 						</tr>
 						<tr>
