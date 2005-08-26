@@ -114,6 +114,7 @@ class environment extends plugin
           $tmp2['LogonLast'] = "";
         }
         $tmp2['LogonData']        = base64_decode($tmp[3]); 
+        $tmp2['LogonDescription'] = $tmp[4];
         $this->gotoLogonScripts[$tmp[0]]=$tmp2;
       }
     }
@@ -730,7 +731,8 @@ class environment extends plugin
       $this->attrs['gotoLogonScript'][] =   $script['LogonName']."|".
                                             $script['LogonOverload'].$script['LogonLast']."|".
                                             $script['LogonPriority']."|".
-                                            base64_encode($script['LogonData']); 
+                                            base64_encode($script['LogonData'])."|".
+                                            $script['LogonDescription'];
     }
 
     /* Prepare Shares */

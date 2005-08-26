@@ -8,15 +8,17 @@ class logonManagementDialog extends plugin
 
   /* attribute list for save action */
   var $ignore_account       = TRUE;
-  var $attributes           = array("LogonName","LogonPriority","LogonLast","LogonOverload","LogonData");
+  var $attributes           = array("LogonName","LogonPriority","LogonLast","LogonOverload","LogonData","LogonDescription");
   var $objectclasses        = array("whatever");
   var $use_existing         = false;  
 
-  var $LogonName      ="";  // Name for the LogonScript
-  var $LogonPriority  ="";  // Priority defines the order in which the scripts will be processed 
-  var $LogonLast      ="";  // Is this script marked as the last, all following scripts will be skipped
-  var $LogonOverload  ="";  // If Overload is activated this script is overlaodable by a group script with same prio
-  var $LogonData      ="";  // The script itself
+  var $LogonName        ="";  // Name for the LogonScript
+  var $LogonPriority    ="";  // Priority defines the order in which the scripts will be processed 
+  var $LogonLast        ="";  // Is this script marked as the last, all following scripts will be skipped
+  var $LogonOverload    ="";  // If Overload is activated this script is overlaodable by a group script with same prio
+  var $LogonData        ="";  // The script itself
+  var $LogonDescription ="";
+    
   var $nameIsEditable = true;
 
   var $real_LogonName = "";
@@ -26,13 +28,14 @@ class logonManagementDialog extends plugin
     plugin::plugin ($config, $dn);
     
     if($data){
-      $this->LogonName      = $data['LogonName'];
-      $this->LogonPriority  = $data['LogonPriority'];
-      $this->LogonOverload  = $data['LogonOverload'];
-      $this->LogonLast      = $data['LogonLast'];
-      $this->LogonData      = $data['LogonData'];
-      $this->nameIsEditable = false;
-      $this->real_LogonName = $data['LogonName'];
+      $this->LogonName        = $data['LogonName'];
+      $this->LogonPriority    = $data['LogonPriority'];
+      $this->LogonOverload    = $data['LogonOverload'];
+      $this->LogonLast        = $data['LogonLast'];
+      $this->LogonData        = $data['LogonData'];
+      $this->LogonDescription = $data['LogonDescription'];
+      $this->nameIsEditable   = false;
+      $this->real_LogonName   = $data['LogonName'];
     }
   }
 
@@ -40,6 +43,11 @@ class logonManagementDialog extends plugin
   {
     $smarty= get_smarty();
     $display= "";
+
+    if((isset($_POST['StartImport']))&&(isset($_FILES['importFile']))){
+      $this->LogonData = file_get_contents($_FILES['importFile']['tmp_name']);
+      @unlink($_FILES['importFile']['tmp_name']);
+    }
 
     foreach($this->attributes as $attr){
       $smarty->assign($attr,$this->$attr);

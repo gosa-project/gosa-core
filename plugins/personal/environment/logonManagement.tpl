@@ -14,6 +14,13 @@
 							</td>
 						</tr>
 						<tr>
+							<td>{t}Description{/t}
+							</td>
+							<td>
+								<input type="text" value="{$LogonDescription}" name="LogonDescription">
+							</td>
+						</tr>
+						<tr>
 							<td>{t}Priority{/t}
 							</td>
 							<td>
@@ -38,6 +45,15 @@
 								<input type="checkbox" value="O" name="LogonOverload" {$LogonOverloadCHK}>
 							</td>
 							<td>{t}Overloadable{/t}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								{t}Import{/t}
+							</td>
+							<td>
+								<input type="file" name="importFile" >
+								<input type="submit" value="{t}Import{/t}" name="StartImport" >
 							</td>
 						</tr>
 					</table>
