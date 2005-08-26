@@ -485,9 +485,18 @@ class environment extends plugin
     if($this->acl != "#none#"){
       $smarty->assign("useProfileACL","");
     }else{
-      $smarty->assign("gotoProfileFlagsACL"," disabled ");
+      $smarty->assign("gotoProfileFlag_CACL"," disabled ");
       $smarty->assign("gotoProfileServerACL"," disabled ");
     }
+
+    if(!$this->useProfile){
+      $smarty->assign("gotoProfileFlag_CACL"," disabled ");
+      $smarty->assign("gotoProfileServerACL"," disabled ");
+    }
+
+
+
+
     /* Als smarty vars are set. Get smarty template and generate output */
     $display.= $smarty->fetch(get_template_path('environment.tpl', TRUE,dirname(__FILE__)));
     
@@ -711,8 +720,6 @@ class environment extends plugin
       }
     }
   
-    plugin::save();
-
     if(isset($this->attrs['gotoPrinter'])){
       unset($this->attrs['gotoPrinter']);
     }
@@ -772,7 +779,6 @@ class environment extends plugin
         }
       }
     }
-
 
     $ldap->cat ($this->dn);
     if ($ldap->fetch()){

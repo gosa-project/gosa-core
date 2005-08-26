@@ -38,7 +38,7 @@
 									{t}Use local caching{/t}
 								</td>
 								<td>
-									<input type="checkbox" name="gotoProfileFlag_C" value="C" id="gotoProfileFlag_C" {$gotoProfileFlagsACL} {$gotoProfileFlag_CCHK}>
+									<input type="checkbox" name="gotoProfileFlag_C" value="C" id="gotoProfileFlag_C" {$gotoProfileFlag_CACL} {$gotoProfileFlag_CCHK}>
 								</td>
 							</tr>
 						</table>
