@@ -76,15 +76,16 @@ class kioskManagementDialog extends plugin
 
   function getKioskProfiles()
   {
-    $dir = opendir($this->baseDir);
-    if(!file_exists($this->baseDir)){
-      mkdir($this->baseDir);
-    }
-    $a_return = array();
-    while($file = readdir($dir)){
-      if(preg_match("/".$this->filePrefix."$/i",$file)){
-        $name = preg_replace("/".$this->filePrefix."$/i","",$file);;
-        $a_return[$name] = $name;
+    $dir = @opendir($this->baseDir);
+    if(!dir){
+      print_red(sprintf(_("Can't open %s permission denied."),$this->baseDir));
+    }else{
+      $a_return = array();
+      while($file = readdir($dir)){
+        if(preg_match("/".$this->filePrefix."$/i",$file)){
+          $name = preg_replace("/".$this->filePrefix."$/i","",$file);;
+          $a_return[$name] = $name;
+        }
       }
     }
     return($a_return);
