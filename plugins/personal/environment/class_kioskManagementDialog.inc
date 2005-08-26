@@ -77,7 +77,7 @@ class kioskManagementDialog extends plugin
   function getKioskProfiles()
   {
     $dir = @opendir($this->baseDir);
-    if(!dir){
+    if(!$dir){
       print_red(sprintf(_("Can't open %s permission denied."),$this->baseDir));
     }else{
       $a_return = array();
