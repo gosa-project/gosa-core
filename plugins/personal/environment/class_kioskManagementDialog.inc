@@ -9,16 +9,19 @@ class kioskManagementDialog extends plugin
 
   /* attribute list for save action */
   var $ignore_account       = TRUE;
-  var $attributes           = array();
+  var $attributes           = array("filesToAttach");
   var $objectclasses        = array("whatever");
   var $use_existing         = false;  
+  var $filesToAttach        = array();
 
   var $baseDir              = "../kioskProfiles/";
 
-  function kioskManagementDialog ($config, $dn= NULL,$use_existing=false )
+  function kioskManagementDialog ($config, $dn= NULL,$attach=false )
   {
-    $this->use_existing = $use_existing;
     plugin::plugin ($config, $dn);
+    if($attach){
+      $this->filesToAttach = $attach;
+    }
     $this->baseDir = search_config($this->config->data['MENU'],"environment", "KIOSKPATH");
   }
 
@@ -34,16 +37,8 @@ class kioskManagementDialog extends plugin
     if((isset($_POST['profileAdd']))&&(isset($_FILES['newProfile']))){
       $file = $_FILES['newProfile'];
       if(!file_exists($this->baseDir.$file['name'])){
-        $name = $file['name'];
-        $str  = file_get_contents($file['tmp_name']);
-        $fp   = @fopen($this->baseDir."/".$name,"w");
-        if($fp){
-          fwrite($fp,$str,strlen($str));
-          fclose($fp);
-        }else{
-          print_red(_("Can't save kioskProfile. Permission denied.")." ".$this->baseDir);
-        }
-        unlink($file['tmp_name']);;
+        $this->filesToAttach[$file['name']]=$file;
+        $this->filesToAttach[$file['name']]['contents'] = file_get_contents($file['tmp_name']);
       }
     }
       
@@ -73,7 +68,11 @@ class kioskManagementDialog extends plugin
     return($display);
   }
 
-  function getKioskProfiles()
+  function save(){
+    return($this->filesToAttach);
+  }
+
+  function getKioskProfiles($attach = false)
   {
     $a_return = array();
     $dir = @opendir($this->baseDir);
@@ -88,6 +87,17 @@ class kioskManagementDialog extends plugin
         }
       }
     }
+    
+    foreach($this->filesToAttach as $file){
+      $a_return[$file['name']] = $file['name'];
+    }
+
+    if($attach){
+      foreach($attach as $file){
+        $a_return[$file['name']] = $file['name'];
+      }
+    }
+
     return($a_return);
   }
 

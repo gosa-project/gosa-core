@@ -47,6 +47,7 @@ class environment extends plugin
   /* Kiosk profile */
   var $gotoKioskProfile   = "";     // The selected Kiosk Profile
   var $gotoKioskProfiles  = array();// All available Kiosk profiles
+  VAR $newKioskProfiles   = array();
 
   /* Hotplug Devices */
   var $gotoHotplugDevice  = "";     // Selected hotplug
@@ -254,24 +255,26 @@ class environment extends plugin
      * Read available from filesystem
      * Open management if post is transmitted
      */
-    $tmp = new kioskManagementDialog($this->config,$this->dn);
-    $list = $tmp->getKioskProfiles();
-
-    $smarty->assign("gotoKioskProfiles",$list);
-    $smarty->assign("gotoKioskProfileKeys",array_flip($list));
 
     /* Open Management Dialog */
     if(isset($_POST['KioskManagementDialog'])){
-      $this->dialog = new kioskManagementDialog($this->config,$this->dn); 
+      $this->dialog = new kioskManagementDialog($this->config,$this->dn,$this->newKioskProfiles); 
       $this->is_dialog = true;
     }
 
     /* Save */
     if(isset($_POST['KioskClose'])){
+      $this->newKioskProfiles = array_merge($this->newKioskProfiles,$this->dialog->save());
+  
       unset($this->dialog);
       $this->dialog=NULL;
       $this->is_dialog = false;
     }
+    $tmp = new kioskManagementDialog($this->config,$this->dn);
+    $list = $tmp->getKioskProfiles($this->newKioskProfiles);
+
+    $smarty->assign("gotoKioskProfiles",$list);
+    $smarty->assign("gotoKioskProfileKeys",array_flip($list));
 
     /* Logonscript Management
      * Get available LogonScripts (possibly grey out (or mark) these script that are defined for the group) 
@@ -571,7 +574,26 @@ class environment extends plugin
     $ldap= $this->config->get_ldap_link();
 
     $realyUsedAttrs= array();
-  
+
+
+    $path = search_config($this->config->data['MENU'],"environment", "KIOSKPATH"); 
+    /* Creating Kiosk Profiles */
+    foreach($this->newKioskProfiles as $file){
+      $contents = $file['contents'];
+      $fp = @fopen($path."/".$file['name'],"w");
+      if(!$fp){
+        print_red("Can't save new kiosk profiles, possibly permission denied for folder :",$path);
+      }else{
+        fwrite($fp,$contents,strlen($contents));
+      }
+      @unlink($file['tmp_name']);
+    }
+
+
+
+
+
+ 
     /* Save already used objectClasses */
     $ocs        = $this->attrs['objectClass'];
     unset($ocs['count']);
