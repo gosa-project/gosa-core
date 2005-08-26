@@ -19,6 +19,11 @@ class hotplugDialog extends plugin
 
   var $hotplugDevices           = ""; 
   var $hotplugDeviceList        = array(); 
+  var $regex                    = "*";
+  var $depselect                = "/";
+  var $deplist                  = "/";
+
+
 
   function hotplugDialog ($config, $dn= NULL,$use_existing=false )
   {
@@ -37,7 +42,32 @@ class hotplugDialog extends plugin
     }
 
     if($this->use_existing){
+
+      if(isset($_POST['dialogissubmitted'])){
+        $this->regex=$_POST['regexHot'];
+        $this->depselect = $_POST['depselectHot'];
+      }
+
+      if((isset($_GET['search']))&&(!empty($_GET['search']))){
+        $this->regex=$_GET['search']."*";
+        $this->regex=preg_replace("/\*\*/","*",$this->regex);
+      }
+
+      $this->deplist=array_flip($this->config->departments);
+
       $this->hotplugDevices = $this->getHotplugs();
+      $smarty->assign("regexHot"    ,$this->regex);
+      $smarty->assign("deplistHot"  ,$this->deplist);
+      $smarty->assign("depselectHot",$this->depselect);
+      $smarty->assign("apply", apply_filter());
+      $smarty->assign("alphabet", generate_alphabet());
+      $smarty->assign("search_image", get_template_path('images/search.png'));
+      $smarty->assign("tree_image", get_template_path('images/tree.png'));
+      $smarty->assign("infoimage", get_template_path('images/info.png'));
+      $smarty->assign("launchimage", get_template_path('images/launch.png'));
+      $smarty->assign("deplist", $this->config->idepartments);
+
+
       $smarty->assign("hotplugDevices",$this->hotplugDevices);
       $smarty->assign("hotplugDeviceKeys",array_flip($this->hotplugDevices));
       $display.= $smarty->fetch(get_template_path('hotplugDialog.tpl', TRUE,dirname(__FILE__)));
@@ -112,9 +142,9 @@ class hotplugDialog extends plugin
 
   function getHotplugs(){
     $ldap= $this->config->get_ldap_link();
-    $ldap->cd($this->config->current['BASE']);
+    $ldap->cd($this->depselect);
 
-    $ldap->search("(objectClass=gotoEnvironment)",array("gotoHotplugDevice")); 
+    $ldap->search("(&(objectClass=gotoEnvironment)(gotoHotplugDevice=".$this->regex."))",array("gotoHotplugDevice")); 
 
     $a_return = array();  
     $this->hotplugDeviceList = array();
@@ -124,13 +154,16 @@ class hotplugDialog extends plugin
         foreach($attr['gotoHotplugDevice'] as $device){
           $tmp =$tmp2= array();
           $tmp = split("\|",$device);
-          $a_return[$tmp[0]]= $tmp[0]." [".$tmp[1]."] ".$tmp[2];
           
-          $tmp2['name']         = $tmp[0];
-          $tmp2['description'] = $tmp[1];
-          $tmp2['id']           = $tmp[2];
+          if(preg_match("/^".str_replace("*","",$this->regex).".*/i",$tmp[0])){
+            $a_return[$tmp[0]]= $tmp[0]." [".$tmp[1]."] ".$tmp[2];
+            
+            $tmp2['name']         = $tmp[0];
+            $tmp2['description'] = $tmp[1];
+            $tmp2['id']           = $tmp[2];
 
-          $this->hotplugDeviceList[$tmp[0]]=$tmp2;
+            $this->hotplugDeviceList[$tmp[0]]=$tmp2;
+          }
         }
       }
     }
