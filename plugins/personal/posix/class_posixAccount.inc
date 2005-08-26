@@ -230,14 +230,15 @@ class posixAccount extends plugin
           $obj= $this->parent->by_object['sambaAccount'];
         }
         if (isset($obj) && $obj->is_account == TRUE &&
-            isset($this->parent->by_object['sambaAccount'])){
+             ((isset($this->parent->by_object['sambaAccount']))&&($this->parent->by_object['sambaAccount']->is_account))
+			||(isset($this->parent->by_object['environment'] ))&&($this->parent->by_object['environment'] ->is_account)){
 
           /* Samba3 dependency on posix accounts are enabled
              in the moment, because I need to rely on unique
              uidNumbers. There'll be a better solution later
              on. */
           $display= $this->show_header(_("Remove posix account"),
-              _("This account has unix features enabled. To disable them, you'll need to remove the samba account first."), TRUE);
+              _("This account has unix features enabled. To disable them, you'll need to remove the samba / environment account first."), TRUE);
         } else {
           $display= $this->show_header(_("Remove posix account"),
               _("This account has posix features enabled. You can disable them by clicking below."));

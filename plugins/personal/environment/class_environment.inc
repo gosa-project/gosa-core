@@ -569,6 +569,10 @@ class environment extends plugin
       $message[]=_("Please set a valid profile quota size.");
     }  
 
+    if(!((in_array("posixAccount",$this->attrs['objectClass']))||($this->parent->by_object['posixAccount']->is_account==true))){
+      $message[]=(_("You need to setup a valid posix extension in order to enable evironment features."));  
+    }
+
     return ($message);
   }
 
