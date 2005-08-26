@@ -28,7 +28,7 @@
 								</td>
 								<td>
 									<select style="width:350px;" name="gotoProfileServer" {$gotoProfileServerACL} id="gotoProfileServer">
-										{html_options values=$gotoProfileServers output=$gotoProfileServers selected=$gotoProfileServer}
+										{html_options values=$gotoProfileServerKeys output=$gotoProfileServers selected=$gotoProfileServer}
 										<option disabled>&nbsp;</option>
 									</select>
 								</td>

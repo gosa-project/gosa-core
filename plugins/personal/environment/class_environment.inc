@@ -250,6 +250,7 @@ class environment extends plugin
 
     $smarty->assign("gotoXResolutions",$this->gotoXResolutions);
     $smarty->assign("gotoProfileServers",$this->gotoProfileServers);
+    $smarty->assign("gotoProfileServerKeys",array_flip($this->gotoProfileServers));
 
     /* Handle kiosk profiles 
      * Read available from filesystem
