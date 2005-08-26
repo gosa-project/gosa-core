@@ -10,7 +10,8 @@
 			<table summary="">
 				<tr>
 					<td>
-						<input type="checkbox" value="1" {$useProfileCHK} name="useProfile" {$useProfileACL}>
+						<input type="checkbox" value="1" {$useProfileCHK} name="useProfile" {$useProfileACL} 
+									onclick="changeState('gotoProfileServer');changeState('gotoProfileFlag_C');">
 					</td>
 					<td valign="top">
 						{t}Use profile managment{/t}
@@ -26,7 +27,7 @@
 									{t}Profil server{/t}
 								</td>
 								<td>
-									<select style="width:350px;" name="gotoProfileServer" {$gotoProfileACL}>
+									<select style="width:350px;" name="gotoProfileServer" {$gotoProfileServerACL} id="gotoProfileServer">
 										{html_options values=$gotoProfileServers output=$gotoProfileServers selected=$gotoProfileServer}
 										<option disabled>&nbsp;</option>
 									</select>
@@ -37,7 +38,7 @@
 									{t}Use local caching{/t}
 								</td>
 								<td>
-									<input type="checkbox" name="gotoProfileFlag_C" value="C" {$gotoProfileACL} {$gotoProfileFlag_CCHK}>
+									<input type="checkbox" name="gotoProfileFlag_C" value="C" id="gotoProfileFlag_C" {$gotoProfileFlagsACL} {$gotoProfileFlag_CCHK}>
 								</td>
 							</tr>
 						</table>

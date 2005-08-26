@@ -220,7 +220,14 @@ class environment extends plugin
       }
  
     }
-  
+ 
+    if($this->acl != "#none#"){
+      $smarty->assign("useProfileACL","");
+    }else{
+      $smarty->assign("gotoProfileFlag_CACL"," disabled ");
+      $smarty->assign("gotoProfileServer"," disabled ");
+    }
+
     /* HANDLE Profile Settings here 
      * Assign available Quota and resolution settings
      * Get all available profile server
@@ -475,7 +482,12 @@ class environment extends plugin
       $this->dialog->save_object();
       return ($this->dialog->execute());
     }
- 
+    if($this->acl != "#none#"){
+      $smarty->assign("useProfileACL","");
+    }else{
+      $smarty->assign("gotoProfileFlagsACL"," disabled ");
+      $smarty->assign("gotoProfileServerACL"," disabled ");
+    }
     /* Als smarty vars are set. Get smarty template and generate output */
     $display.= $smarty->fetch(get_template_path('environment.tpl', TRUE,dirname(__FILE__)));
     
