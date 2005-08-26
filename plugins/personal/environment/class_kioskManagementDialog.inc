@@ -14,12 +14,12 @@ class kioskManagementDialog extends plugin
   var $use_existing         = false;  
 
   var $baseDir              = "../kioskProfiles/";
-  var $filePrefix           = ".kioskProfile";
 
   function kioskManagementDialog ($config, $dn= NULL,$use_existing=false )
   {
     $this->use_existing = $use_existing;
     plugin::plugin ($config, $dn);
+    $this->baseDir = search_config($this->config->data['MENU'],"environment", "KIOSKPATH");
   }
 
   function execute()
@@ -29,15 +29,14 @@ class kioskManagementDialog extends plugin
     $display= "";
 
     /* Add new kiosk profile 
-     * Save the new Profile with filePrefix ($this->filePrefix)
      * in profile directory ($this->baseDir); 
      */
     if((isset($_POST['profileAdd']))&&(isset($_FILES['newProfile']))){
       $file = $_FILES['newProfile'];
       if(!file_exists($this->baseDir.$file['name'])){
-        $name = preg_replace("/\..*$/","",$file['name']).$this->filePrefix;
+        $name = $file['name'];
         $str  = file_get_contents($file['tmp_name']);
-        $fp   = @fopen($this->baseDir.$name,"w+");
+        $fp   = @fopen($this->baseDir."/".$name,"w");
         if($fp){
           fwrite($fp,$str,strlen($str));
           fclose($fp);
@@ -52,7 +51,7 @@ class kioskManagementDialog extends plugin
      * Delete selected file form $this->baseDir
      */
     if((isset($_POST['profileDel']))&&(isset($_POST['gotoKioskProfile']))){
-      $filename = $this->baseDir.$_POST['gotoKioskProfile'].$this->filePrefix;
+      $filename = $this->baseDir.$_POST['gotoKioskProfile'];
   
       $res = @unlink($filename);
       if(!$res){
@@ -76,14 +75,15 @@ class kioskManagementDialog extends plugin
 
   function getKioskProfiles()
   {
+    $a_return = array();
     $dir = @opendir($this->baseDir);
     if(!$dir){
       print_red(sprintf(_("Can't open %s permission denied."),$this->baseDir));
     }else{
       $a_return = array();
       while($file = readdir($dir)){
-        if(preg_match("/".$this->filePrefix."$/i",$file)){
-          $name = preg_replace("/".$this->filePrefix."$/i","",$file);;
+        if(!(($file==".")||($file==".."))){
+          $name = $file;
           $a_return[$name] = $name;
         }
       }
