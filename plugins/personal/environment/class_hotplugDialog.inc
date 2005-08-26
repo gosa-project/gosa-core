@@ -29,6 +29,7 @@ class hotplugDialog extends plugin
   {
     $this->use_existing = $use_existing;
     plugin::plugin ($config, $dn);
+    $this->depselect = $this->config->current['BASE'];
   }
 
   function execute()

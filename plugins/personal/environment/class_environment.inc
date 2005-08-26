@@ -494,9 +494,6 @@ class environment extends plugin
       $smarty->assign("gotoProfileServerACL"," disabled ");
     }
 
-
-
-
     /* Als smarty vars are set. Get smarty template and generate output */
     $display.= $smarty->fetch(get_template_path('environment.tpl', TRUE,dirname(__FILE__)));
     
@@ -573,9 +570,6 @@ class environment extends plugin
     $ldap= $this->config->get_ldap_link();
 
     $realyUsedAttrs= array();
-  
- 
-    
   
     /* Save already used objectClasses */
     $ocs        = $this->attrs['objectClass'];
@@ -810,7 +804,7 @@ class environment extends plugin
     while($entry = $ldap->fetch($a_res)){
       $shareAttrs = split("\|",$entry['goExportEntry'][0]);
       if($listboxEntry) { 
-        $return[$shareAttrs[0]] = $shareAttrs[0]." - ".$shareAttrs[3];
+        $return[$shareAttrs[0]] = $shareAttrs[0]." - ".$shareAttrs[4];
       }else{
         $return[$shareAttrs[0]]['name']         = $shareAttrs[0]; 
         $return[$shareAttrs[0]]['description']  = $shareAttrs[1]; 
@@ -877,7 +871,7 @@ function printOutHotPlugDevices()
     $a_return = array();
     if(is_array($this->gotoLogonScripts)){
       foreach($this->gotoLogonScripts as $script){
-        $a_return[$script['LogonName']]= $script['LogonName']; 
+        $a_return[$script['LogonName']]= $script['LogonPriority']." - ".$script['LogonName']; 
       }
     }
     return($a_return);
