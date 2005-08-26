@@ -244,7 +244,7 @@ class environment extends plugin
     }
 
     $this->gotoXResolutions = array("640x480","800x600","1024x768","1280x768","1280x1024");
-    $this->gotoProfileServers = array("none","none1");
+    $this->gotoProfileServers =$this->getShareServerList() ;
 
     $smarty->assign("gotoXResolutions",$this->gotoXResolutions);
     $smarty->assign("gotoProfileServers",$this->gotoProfileServers);
@@ -802,21 +802,37 @@ class environment extends plugin
     $a_res = $ldap->search("(objectClass=goShareServer)",array("goExportEntry"));
     $return= array();
     while($entry = $ldap->fetch($a_res)){
-      $shareAttrs = split("\|",$entry['goExportEntry'][0]);
-      if($listboxEntry) { 
-        $return[$shareAttrs[0]] = $shareAttrs[0]." - ".$shareAttrs[4];
-      }else{
-        $return[$shareAttrs[0]]['name']         = $shareAttrs[0]; 
-        $return[$shareAttrs[0]]['description']  = $shareAttrs[1]; 
-        $return[$shareAttrs[0]]['type']         = $shareAttrs[2]; 
-        $return[$shareAttrs[0]]['charset']      = $shareAttrs[3]; 
-        $return[$shareAttrs[0]]['path']         = $shareAttrs[4]; 
-        $return[$shareAttrs[0]]['option']       = $shareAttrs[5]; 
+      unset($entry['goExportEntry']['count']);
+      foreach($entry['goExportEntry'] as $export){
+        $shareAttrs = split("\|",$export);
+        if($listboxEntry) { 
+          $return[$shareAttrs[0]] = $shareAttrs[0]." - ".$shareAttrs[4];
+        }else{
+          $return[$shareAttrs[0]]['name']         = $shareAttrs[0]; 
+          $return[$shareAttrs[0]]['description']  = $shareAttrs[1]; 
+          $return[$shareAttrs[0]]['type']         = $shareAttrs[2]; 
+          $return[$shareAttrs[0]]['charset']      = $shareAttrs[3]; 
+          $return[$shareAttrs[0]]['path']         = $shareAttrs[4]; 
+          $return[$shareAttrs[0]]['option']       = $shareAttrs[5]; 
+        }
       }
     }
     return($return);
   }
 
+
+/* This function returns all available ShareServer  
+ */
+  function getShareServerList()
+  {
+    $ldap= $this->config->get_ldap_link();
+    $a_res = $ldap->search("(objectClass=goShareServer)",array("goExportEntry","cn"));
+    $return= array();
+    while($entry = $ldap->fetch($a_res)){
+      $return[$entry['cn'][0]] = $entry['cn'][0];
+    }
+    return($return);
+  }
 
 /* Generate ListBox frindly output for the defined shares 
  * Possibly Add or remove an attribute here, 
