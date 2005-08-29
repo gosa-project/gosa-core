@@ -305,6 +305,7 @@ class kolabAccount extends plugin
   /* Save to LDAP */
   function save()
   {
+    /* Check mailmethod before doing something useful */
     plugin::save();
 
     /* Transfer arrays */
