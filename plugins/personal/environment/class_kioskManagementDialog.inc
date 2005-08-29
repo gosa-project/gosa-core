@@ -51,10 +51,10 @@ class kioskManagementDialog extends plugin
       $res = @unlink($filename);
       if(!$res){
         if(!is_writeable($filename)){
-          print_red(_("Can't delete '".$filename."' permission denied."));
+          print_red(sprintf(_("Can't delete '%s'. Error was: permission denied."), $filename));
         }
         if(!file_exists($filename)){
-          print_red(_("Can't delete '".$filename."' file don't exists."));
+          print_red(sprintf(_("Can't delete '%s'. Errow was: file doesn't exist."), $filename));
         }
       
       }
@@ -77,7 +77,7 @@ class kioskManagementDialog extends plugin
     $a_return = array();
     $dir = @opendir($this->baseDir);
     if(!$dir){
-      print_red(sprintf(_("Can't open %s permission denied."),$this->baseDir));
+      print_red(sprintf(_("Can't open '%s'. Error was: permission denied."),$this->baseDir));
     }else{
       $a_return = array();
       while($file = readdir($dir)){

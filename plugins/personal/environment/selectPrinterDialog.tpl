@@ -25,8 +25,8 @@
   	 			</div>
    				<div class="contentboxb">
    					<p class="contentboxb">
-    					{t}This menu allows you to create, edit and delete selected users. 
-							Having a great number of users, you may want to use the range selectors on top of the user list.{/t}
+    					{t}This menu allows you to create, edit and delete selected printers. 
+							Having a great number of printers, you may want to use the range selectors on top of the printers list.{/t}
     				</p>
    				</div>
    				<br>
@@ -38,7 +38,7 @@
 				<table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 					<tr>
 						<td width="50%">
-							<img alt="" src="{$tree_image}" align=middle>&nbsp;{t}Display groups of department{/t}
+							<img alt="" src="{$tree_image}" align=middle>&nbsp;{t}Display printers of department{/t}
 						</td>
 						<td>
 							<select name="depselectPrinter" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
@@ -55,12 +55,12 @@
     					<table summary="" width="100%" style="border-top:1px solid #B0B0B0;">
 							<tr>
 								<td>
-									<LABEL for='filter'><img alt="Search" src="{$search_image}" align="middle" title="{t}Display users matching{/t}">
+									<LABEL for='filter'><img alt="Search" src="{$search_image}" align="middle" title="{t}Display printers matching{/t}">
 									</LABEL>
 								</td>
     							<td width="99%">
 									<input id='filter' style='width:99%' type='text' name='regexPrinter' maxlength='20' value='{$regexPrinter}' 
-											title='{t}Regular expression for        matching user names{/t}' onChange="mainform.submit()">
+											title='{t}Regular expression for matching printer names{/t}' onChange="mainform.submit()">
 								</td>
 							</tr>
 						</table>

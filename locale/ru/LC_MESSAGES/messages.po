@@ -245,9 +245,9 @@ msgstr "Список альтернативных адресов эл. почт�
 #: plugins/personal/samba/samba3_workstations.tpl:39
 #: plugins/personal/connectivity/kolab.tpl:18
 #: plugins/personal/connectivity/class_kolabAccount.inc:200
+#: plugins/personal/environment/kioskManagement.tpl:13
 #: plugins/personal/environment/environment.tpl:114
 #: plugins/personal/environment/environment.tpl:169
-#: plugins/personal/environment/kioskManagement.tpl:13
 #: plugins/gofax/blocklists/generic.tpl:63
 #: plugins/gofax/faxaccount/generic.tpl:75
 #: plugins/gofax/faxaccount/locals.tpl:62
@@ -566,9 +566,9 @@ msgstr "Готово"
 #: plugins/personal/connectivity/main.inc:118
 #: plugins/personal/environment/main.inc:106
 #: plugins/personal/environment/hotplugDialog.tpl:76
-#: plugins/personal/environment/selectPrinterDialog.tpl:75
 #: plugins/personal/environment/logonManagement.tpl:78
 #: plugins/personal/environment/hotplugDialogNew.tpl:30
+#: plugins/personal/environment/selectPrinterDialog.tpl:75
 #: plugins/gofax/blocklists/generic.tpl:79
 #: plugins/gofax/blocklists/remove.tpl:17
 #: plugins/gofax/faxaccount/locals.tpl:64
@@ -614,8 +614,8 @@ msgstr "Нажмите 'Изменить' чтобы отредактирова�
 #: plugins/personal/mail/main.inc:115 plugins/personal/posix/main.inc:122
 #: plugins/personal/samba/main.inc:115 plugins/personal/generic/main.inc:170
 #: plugins/personal/connectivity/main.inc:127
-#: plugins/personal/environment/environment.tpl:116
 #: plugins/personal/environment/main.inc:115
+#: plugins/personal/environment/environment.tpl:116
 #: plugins/gofax/faxaccount/generic.tpl:90
 #: plugins/gofax/faxaccount/generic.tpl:96
 #: plugins/gofax/faxaccount/main.inc:97 plugins/addons/logview/contents.tpl:62
@@ -878,7 +878,6 @@ msgid "Show functional groups"
 msgstr "Показать обычные группы"
 
 #: plugins/personal/posix/posix_groups.tpl:36
-#: plugins/personal/environment/selectPrinterDialog.tpl:41
 msgid "Display groups of department"
 msgstr "Объединения в подразделении"
 
@@ -2381,120 +2380,6 @@ msgstr ""
 msgid "Admin"
 msgstr "DN администратора"
 
-#: plugins/personal/environment/environment.tpl:3
-msgid "The environment extension is currently disabled."
-msgstr ""
-
-#: plugins/personal/environment/environment.tpl:6
-#, fuzzy
-msgid "Environment managment settings"
-msgstr "Почтовые настройки пользователя"
-
-#: plugins/personal/environment/environment.tpl:9
-#, fuzzy
-msgid "Profiles"
-msgstr "Путь к профилю"
-
-#: plugins/personal/environment/environment.tpl:10
-#, fuzzy
-msgid "Profile managment"
-msgstr "Управление подразделениями"
-
-#: plugins/personal/environment/environment.tpl:17
-#, fuzzy
-msgid "Use profile managment"
-msgstr "Управление системами"
-
-#: plugins/personal/environment/environment.tpl:24
-#, fuzzy
-msgid "Profile server managment"
-msgstr "Управление подразделениями"
-
-#: plugins/personal/environment/environment.tpl:27
-#, fuzzy
-msgid "Profil server"
-msgstr "Сервер для хранения запросов и временных файлов"
-
-#: plugins/personal/environment/environment.tpl:39
-msgid "Use local caching"
-msgstr ""
-
-#: plugins/personal/environment/environment.tpl:62
-#: plugins/admin/systems/service.tpl:94
-msgid "Resolution"
-msgstr "Разрешение"
-
-#: plugins/personal/environment/environment.tpl:76
-msgid "Resolution changeable on runtime "
-msgstr ""
-
-#: plugins/personal/environment/environment.tpl:82
-#: plugins/personal/environment/environment.tpl:86
-msgid "Kiosk profile"
-msgstr ""
-
-#: plugins/personal/environment/environment.tpl:83
-#, fuzzy
-msgid "Kiosk profile settings"
-msgstr "Почтовые настройки пользователя"
-
-#: plugins/personal/environment/environment.tpl:99
-#, fuzzy
-msgid "Profile management"
-msgstr "Управление подразделениями"
-
-#: plugins/personal/environment/environment.tpl:104
-msgid "Logon scripts"
-msgstr ""
-
-#: plugins/personal/environment/environment.tpl:105
-#: plugins/personal/environment/logonManagement.tpl:5
-#, fuzzy
-msgid "Logon script management"
-msgstr "Управление системами"
-
-#: plugins/personal/environment/environment.tpl:122
-msgid "Attach share"
-msgstr ""
-
-#: plugins/personal/environment/environment.tpl:142
-#, fuzzy
-msgid "Hotplug devices"
-msgstr "Дисковод"
-
-#: plugins/personal/environment/environment.tpl:143
-#, fuzzy
-msgid "Hotplug device settings"
-msgstr "Дисковод"
-
-#: plugins/personal/environment/environment.tpl:153
-#: plugins/admin/groups/class_groupManagement.inc:354
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:328
-msgid "New"
-msgstr "Создать"
-
-#: plugins/personal/environment/environment.tpl:154
-msgid "Existing"
-msgstr ""
-
-#: plugins/personal/environment/environment.tpl:160
-#: plugins/admin/systems/class_systemManagement.inc:708
-#: plugins/admin/ogroups/class_ogroupManagement.inc:49
-#: plugins/admin/ogroups/class_ogroupManagement.inc:487
-#: plugins/generic/references/class_reference.inc:52
-msgid "Printer"
-msgstr "Принтер"
-
-#: plugins/personal/environment/environment.tpl:161
-#, fuzzy
-msgid "Printer settings"
-msgstr "Настройки телефона"
-
-#: plugins/personal/environment/environment.tpl:171
-#, fuzzy
-msgid "Admin Toggle"
-msgstr "Пользователи домена"
-
 #: plugins/personal/environment/main.inc:124
 #, fuzzy
 msgid "User environment settings"
@@ -2564,7 +2449,6 @@ msgid "Choose the department the search will be based    on"
 msgstr "Выбрать раздел, для которого будет осуществлен поиск"
 
 #: plugins/personal/environment/hotplugDialog.tpl:57
-#: plugins/personal/environment/selectPrinterDialog.tpl:58
 #: plugins/admin/groups/group_objects.tpl:40
 #: plugins/admin/users/headpage.tpl:48
 #: plugins/gofon/conference/headpage.tpl:34
@@ -2577,39 +2461,11 @@ msgid "Regular expression for        matching hotplugs"
 msgstr "Регулярное выражение, соответствующее именам пользователей"
 
 #: plugins/personal/environment/hotplugDialog.tpl:75
-#: plugins/personal/environment/selectPrinterDialog.tpl:74
 #: plugins/personal/environment/logonManagement.tpl:77
+#: plugins/personal/environment/selectPrinterDialog.tpl:74
 #, fuzzy
 msgid "Use"
 msgstr "Пользователь"
-
-#: plugins/personal/environment/selectPrinterDialog.tpl:1
-#, fuzzy
-msgid "Select printer entry"
-msgstr "Выберите чтобы посмотреть принтеры"
-
-#: plugins/personal/environment/selectPrinterDialog.tpl:5
-#: plugins/personal/environment/selectPrinterDialog.tpl:10
-#, fuzzy
-msgid "Select printer to add"
-msgstr "Выбрать номера для добавления"
-
-#: plugins/personal/environment/selectPrinterDialog.tpl:28
-#, fuzzy
-msgid ""
-"This menu allows you to create, edit and delete selected users. \n"
-"\t\t\t\t\t\t\tHaving a great number of users, you may want to use the range "
-"selectors on top of the user list."
-msgstr ""
-"С помощью этого меню вы можете добавлять, изменять и удалять выбранных "
-"пользователей. Если у вас достаточно большое количество пользователей, вы "
-"можете использовать групповое выделение."
-
-#: plugins/personal/environment/selectPrinterDialog.tpl:63
-#: plugins/gofon/conference/headpage.tpl:35
-#, fuzzy
-msgid "Regular expression for        matching user names"
-msgstr "Регулярное выражение, соответствующее именам пользователей"
 
 #: plugins/personal/environment/class_logonManagementDialog.inc:92
 #, fuzzy
@@ -2625,6 +2481,12 @@ msgstr "Неправильное указание таймаута '%s'"
 #, fuzzy
 msgid "Logon management"
 msgstr "Управление подразделениями"
+
+#: plugins/personal/environment/logonManagement.tpl:5
+#: plugins/personal/environment/environment.tpl:105
+#, fuzzy
+msgid "Logon script management"
+msgstr "Управление системами"
 
 #: plugins/personal/environment/logonManagement.tpl:8
 #, fuzzy
@@ -2667,25 +2529,6 @@ msgstr ""
 msgid "Logon script"
 msgstr ""
 
-#: plugins/personal/environment/class_kioskManagementDialog.inc:54
-#: plugins/personal/environment/class_kioskManagementDialog.inc:57
-#, fuzzy
-msgid "Can't delete '"
-msgstr "Удалить"
-
-#: plugins/personal/environment/class_kioskManagementDialog.inc:54
-msgid "' permission denied."
-msgstr ""
-
-#: plugins/personal/environment/class_kioskManagementDialog.inc:57
-msgid "' file don't exists."
-msgstr ""
-
-#: plugins/personal/environment/class_kioskManagementDialog.inc:80
-#, php-format
-msgid "Can't open %s permission denied."
-msgstr ""
-
 #: plugins/personal/environment/hotplugDialogNew.tpl:1
 #: plugins/personal/environment/hotplugDialogNew.tpl:5
 #, fuzzy
@@ -2712,6 +2555,166 @@ msgstr "Управление системами"
 #, fuzzy
 msgid "Close"
 msgstr "Выбрать"
+
+#: plugins/personal/environment/environment.tpl:3
+msgid "The environment extension is currently disabled."
+msgstr ""
+
+#: plugins/personal/environment/environment.tpl:6
+#, fuzzy
+msgid "Environment managment settings"
+msgstr "Почтовые настройки пользователя"
+
+#: plugins/personal/environment/environment.tpl:9
+#, fuzzy
+msgid "Profiles"
+msgstr "Путь к профилю"
+
+#: plugins/personal/environment/environment.tpl:10
+#, fuzzy
+msgid "Profile managment"
+msgstr "Управление подразделениями"
+
+#: plugins/personal/environment/environment.tpl:17
+#, fuzzy
+msgid "Use profile managment"
+msgstr "Управление системами"
+
+#: plugins/personal/environment/environment.tpl:24
+#, fuzzy
+msgid "Profile server managment"
+msgstr "Управление подразделениями"
+
+#: plugins/personal/environment/environment.tpl:27
+#, fuzzy
+msgid "Profil server"
+msgstr "Сервер для хранения запросов и временных файлов"
+
+#: plugins/personal/environment/environment.tpl:39
+msgid "Use local caching"
+msgstr ""
+
+#: plugins/personal/environment/environment.tpl:62
+#: plugins/admin/systems/service.tpl:94
+msgid "Resolution"
+msgstr "Разрешение"
+
+#: plugins/personal/environment/environment.tpl:76
+msgid "Resolution changeable on runtime"
+msgstr ""
+
+#: plugins/personal/environment/environment.tpl:82
+#: plugins/personal/environment/environment.tpl:86
+msgid "Kiosk profile"
+msgstr ""
+
+#: plugins/personal/environment/environment.tpl:83
+#, fuzzy
+msgid "Kiosk profile settings"
+msgstr "Почтовые настройки пользователя"
+
+#: plugins/personal/environment/environment.tpl:99
+#, fuzzy
+msgid "Profile management"
+msgstr "Управление подразделениями"
+
+#: plugins/personal/environment/environment.tpl:104
+msgid "Logon scripts"
+msgstr ""
+
+#: plugins/personal/environment/environment.tpl:122
+msgid "Attach share"
+msgstr ""
+
+#: plugins/personal/environment/environment.tpl:142
+#, fuzzy
+msgid "Hotplug devices"
+msgstr "Дисковод"
+
+#: plugins/personal/environment/environment.tpl:143
+#, fuzzy
+msgid "Hotplug device settings"
+msgstr "Дисковод"
+
+#: plugins/personal/environment/environment.tpl:153
+#: plugins/admin/groups/class_groupManagement.inc:354
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:328
+msgid "New"
+msgstr "Создать"
+
+#: plugins/personal/environment/environment.tpl:154
+msgid "Existing"
+msgstr ""
+
+#: plugins/personal/environment/environment.tpl:160
+#: plugins/admin/systems/class_systemManagement.inc:708
+#: plugins/admin/ogroups/class_ogroupManagement.inc:49
+#: plugins/admin/ogroups/class_ogroupManagement.inc:487
+#: plugins/generic/references/class_reference.inc:52
+msgid "Printer"
+msgstr "Принтер"
+
+#: plugins/personal/environment/environment.tpl:161
+#, fuzzy
+msgid "Printer settings"
+msgstr "Настройки телефона"
+
+#: plugins/personal/environment/environment.tpl:171
+#, fuzzy
+msgid "Admin Toggle"
+msgstr "Пользователи домена"
+
+#: plugins/personal/environment/selectPrinterDialog.tpl:1
+#, fuzzy
+msgid "Select printer entry"
+msgstr "Выберите чтобы посмотреть принтеры"
+
+#: plugins/personal/environment/selectPrinterDialog.tpl:5
+#: plugins/personal/environment/selectPrinterDialog.tpl:10
+#, fuzzy
+msgid "Select printer to add"
+msgstr "Выбрать номера для добавления"
+
+#: plugins/personal/environment/selectPrinterDialog.tpl:28
+#, fuzzy
+msgid ""
+"This menu allows you to create, edit and delete selected printers. \n"
+"\t\t\t\t\t\t\tHaving a great number of printers, you may want to use the "
+"range selectors on top of the printers list."
+msgstr ""
+"С помощью этого меню вы можете добавлять, изменять и удалять выбранных "
+"пользователей. Если у вас достаточно большое количество пользователей, вы "
+"можете использовать групповое выделение."
+
+#: plugins/personal/environment/selectPrinterDialog.tpl:41
+#, fuzzy
+msgid "Display printers of department"
+msgstr "Показать номера из подразделения"
+
+#: plugins/personal/environment/selectPrinterDialog.tpl:58
+#, fuzzy
+msgid "Display printers matching"
+msgstr "Показать совпадения номеров"
+
+#: plugins/personal/environment/selectPrinterDialog.tpl:63
+#, fuzzy
+msgid "Regular expression for matching printer names"
+msgstr "Регулярное выражение, соответствующее именам пользователей"
+
+#: plugins/personal/environment/class_kioskManagementDialog.inc:54
+#, php-format
+msgid "Can't delete '%s'. Error was: permission denied."
+msgstr ""
+
+#: plugins/personal/environment/class_kioskManagementDialog.inc:57
+#, php-format
+msgid "Can't delete '%s'. Errow was: file doesn't exist."
+msgstr ""
+
+#: plugins/personal/environment/class_kioskManagementDialog.inc:80
+#, php-format
+msgid "Can't open '%s'. Error was: permission denied."
+msgstr ""
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:5
 msgid "FAX Blocklists"
@@ -7344,6 +7347,11 @@ msgstr ""
 "подразделения. Если у вас достаточно большое количество подразделений, вы "
 "можете использовать групповое выделение."
 
+#: plugins/gofon/conference/headpage.tpl:35
+#, fuzzy
+msgid "Regular expression for        matching user names"
+msgstr "Регулярное выражение, соответствующее именам пользователей"
+
 #: plugins/gofon/conference/main.inc:38 plugins/gofon/conference/main.inc:40
 #, fuzzy
 msgid "Conference management"
@@ -8797,6 +8805,10 @@ msgid ""
 "versions. In some cases it would be helpful to enable the error reporting. "
 "(But it could be a security risk)  "
 msgstr ""
+
+#, fuzzy
+#~ msgid "Can't delete '"
+#~ msgstr "Удалить"
 
 #~ msgid "Default printer"
 #~ msgstr "Принтер по умолчанию"

@@ -73,7 +73,7 @@
 						<input type="checkbox" name="gotoProfileFlag_L" id="gotoProfileFlag_L" value="L" {$gotoProfileFlagsACL} {$gotoProfileFlag_LCHK}>
 					</td>
 					<td>
-						<LABEL for="gotoProfileFlag_L">{t}Resolution changeable on runtime {/t}</LABEL>
+						<LABEL for="gotoProfileFlag_L">{t}Resolution changeable on runtime{/t}</LABEL>
 					</td>
 				</tr>
 			</table>
