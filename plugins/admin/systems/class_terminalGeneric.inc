@@ -147,7 +147,25 @@ class termgeneric extends plugin
     }
     /* Arrays */
     $smarty->assign("modes", $this->modes);
-    $smarty->assign("nfsservers", $this->config->data['SERVERS']['NFS']);
+
+    $tmp2 = array(); 
+    foreach($this->config->data['SERVERS']['NFS'] as $server){
+      if($server != "default"){
+        $tmp = split("\|",$server);
+        $tmp3= split(":",$tmp[0]);
+
+        $servername = $tmp3[0];
+        $nfsname    = $tmp3[1];  
+
+        $path       = $tmp[4];  
+
+        $tmp2[$servername.":".$path]= $servername.":".$path; 
+      }else{
+        $tmp2[$server]=$server;
+      }
+    }
+  
+    $smarty->assign("nfsservers", $tmp2);
     $smarty->assign("syslogservers", $this->config->data['SERVERS']['SYSLOG']);
     $smarty->assign("ntpservers", $this->config->data['SERVERS']['NTP']);
 
