@@ -9,7 +9,7 @@
                 {html_options values=$gotoKioskProfileKeys output=$gotoKioskProfiles}
                 <option disabled>&nbsp;</option>
                 </select><br>
-				<input type="file" 	 name="newProfile" value="">			
+				<input type="file" 	 name="newProfile" value="{t}Browse{/t}">			
     			<input type="submit" name="profileAdd" value="{t}Add{/t}">
 			    <input type="submit" name="profileDel" value="{t}Remove{/t}">
 			</td>
