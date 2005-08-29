@@ -353,7 +353,7 @@ class environment extends plugin
      */
     if(isset($_POST['gotoShareAdd'])){
       /* We assign a share to this user, if we don't know where to mount the share */
-      if((!isset($_POST['gotoShareMountPoint']))||(empty($_POST['gotoShareMountPoint']))){
+      if((!isset($_POST['gotoShareMountPoint']))||(empty($_POST['gotoShareMountPoint']))||(preg_match("/[\|]/i",$_POST['gotoShareMountPoint']))){
         print_red("You must specify a valid mount point.");
       }else{
         $a_share = $this->gotoAvailableShares[$_POST['gotoShareSelection']];
