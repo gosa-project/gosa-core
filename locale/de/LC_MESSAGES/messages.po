@@ -16,7 +16,7 @@ msgstr ""
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: contrib/gosa.conf:4
 msgid "My account"
@@ -211,7 +211,8 @@ msgstr "Server"
 
 #: plugins/personal/mail/generic.tpl:13
 msgid "Specify the mail server where the user will be hosted on"
-msgstr "W�len Sie den Mail-Server, auf dem dieses Konto verwaltet werden soll"
+msgstr ""
+"W�len Sie den Mail-Server, auf dem dieses Konto verwaltet werden soll"
 
 #: plugins/personal/mail/generic.tpl:22 plugins/admin/groups/mail.tpl:25
 msgid "Quota usage"
@@ -334,7 +335,8 @@ msgstr "Verschiebe Mails mit einem SPAM-Level gr�er als"
 #: plugins/personal/mail/generic.tpl:83
 msgid "Choose spam level - smaller values are more sensitive"
 msgstr ""
-"W�len sie den 'SPAM'-Level - kleinere Werte reagieren empfindlicher auf SPAM"
+"W�len sie den 'SPAM'-Level - kleinere Werte reagieren empfindlicher auf "
+"SPAM"
 
 #: plugins/personal/mail/generic.tpl:86
 msgid "to folder"
@@ -464,8 +466,8 @@ msgid ""
 "This account has mail features disabled. You can enable them by clicking "
 "below."
 msgstr ""
-"Dieses Konto hat keine Mail-Erweiterungen. Sie k�nen diese aktivieren, wenn "
-"Sie auf die untere Schaltfl�he klicken."
+"Dieses Konto hat keine Mail-Erweiterungen. Sie k�nen diese aktivieren, "
+"wenn Sie auf die untere Schaltfl�he klicken."
 
 #: plugins/personal/mail/class_mailAccount.inc:260
 msgid ""
@@ -478,8 +480,7 @@ msgstr ""
 #: plugins/admin/groups/class_groupMail.inc:250
 msgid "Adding your one of your own addresses to the forwarders makes no sense."
 msgstr ""
-"Das Hinzufgen Ihrer eigenen Adresse zu den Weiterleitungen macht keinen "
-"Sinn."
+"Das Hinzufgen Ihrer eigenen Adresse zu den Weiterleitungen macht keinen Sinn."
 
 #: plugins/personal/mail/class_mailAccount.inc:301
 #: plugins/personal/mail/class_mailAccount.inc:306
@@ -1026,8 +1027,8 @@ msgid ""
 "This account has unix features enabled. To disable them, you'll need to "
 "remove the samba / environment account first."
 msgstr ""
-"Dieses Konto hat UNIX-Erweiterungen aktiviert. Um sie zu deaktivieren, "
-"mssen Sie zun�hst die Samba- u. Umgebungs-Erweiterungen deaktivieren."
+"Dieses Konto hat UNIX-Erweiterungen aktiviert. Um sie zu deaktivieren, mssen "
+"Sie zun�hst die Samba- u. Umgebungs-Erweiterungen deaktivieren."
 
 #: plugins/personal/posix/class_posixAccount.inc:244
 msgid ""
@@ -1053,7 +1054,8 @@ msgstr ""
 #, php-format
 msgid "Password can't be changed up to %s days after last change"
 msgstr ""
-"Passwort kann bis zu %s Tage nach der letzten �derung nicht ge�dert werden"
+"Passwort kann bis zu %s Tage nach der letzten �derung nicht ge�dert "
+"werden"
 
 #: plugins/personal/posix/class_posixAccount.inc:434
 #, php-format
@@ -1229,8 +1231,7 @@ msgstr "Das ben�igte Feld 'Basisverzeichnis' ist nicht gesetzt."
 
 #: plugins/personal/posix/class_posixAccount.inc:869
 msgid "Please enter a valid path in 'Home directory' field."
-msgstr ""
-"Bitte geben Sie einen gltigen Pfad in das Feld 'Basisverzeichnis' ein."
+msgstr "Bitte geben Sie einen gltigen Pfad in das Feld 'Basisverzeichnis' ein."
 
 #: plugins/personal/posix/class_posixAccount.inc:877
 msgid "Value specified as 'UID' is not valid."
@@ -1468,8 +1469,8 @@ msgid ""
 "This account has samba features disabled. You can enable them by clicking "
 "below."
 msgstr ""
-"Dieses Konto hat die Samba-Erweiterungen deaktiviert. Sie k�nen diese durch "
-"einen Klick auf die untere Schaltfl�he aktivieren."
+"Dieses Konto hat die Samba-Erweiterungen deaktiviert. Sie k�nen diese "
+"durch einen Klick auf die untere Schaltfl�he aktivieren."
 
 #: plugins/personal/samba/class_sambaAccount.inc:217
 msgid ""
@@ -1554,10 +1555,10 @@ msgid ""
 "For that reason you've to enter your password at this point again. GOsa will "
 "then encode it with the selected method."
 msgstr ""
-"Sie haben die Verschlsselungsart, mit der Ihr Passwort in der LDAP-"
-"Datenbank gespeichert wird, ge�dert. Aus diesem Grund mssen Sie das "
-"Passwort an dieser Stelle noch einmal eingeben, damit es von GOsa in der "
-"gewnschten Verschlsselung abgelegt werden kann."
+"Sie haben die Verschlsselungsart, mit der Ihr Passwort in der LDAP-Datenbank "
+"gespeichert wird, ge�dert. Aus diesem Grund mssen Sie das Passwort an "
+"dieser Stelle noch einmal eingeben, damit es von GOsa in der gewnschten "
+"Verschlsselung abgelegt werden kann."
 
 #: plugins/personal/generic/generic_picture.tpl:6
 #: plugins/personal/generic/generic.tpl:15
@@ -1846,8 +1847,7 @@ msgstr "Dieses Konto hat keine gltigen GOsa-Erweiterungen."
 #: plugins/personal/generic/class_user.inc:272
 msgid "The specified file has not been uploaded via HTTP POST! Aborted."
 msgstr ""
-"Die angegebene Datei wurde nicht ber HTTP POST bertragen! Aktion "
-"abgebrochen."
+"Die angegebene Datei wurde nicht ber HTTP POST bertragen! Aktion abgebrochen."
 
 #: plugins/personal/generic/class_user.inc:367
 msgid "Please enter a valid serial number"
@@ -2356,8 +2356,8 @@ msgid ""
 "This server has environment extension disabled. You can enable it by "
 "clicking below."
 msgstr ""
-"Aktuell hat dieses Konto keine Umgebungs-Erweiterungen aktiviert. Sie k�nen "
-"diese durch einen Klick auf die Schaltfl�he unten aktivieren."
+"Aktuell hat dieses Konto keine Umgebungs-Erweiterungen aktiviert. Sie "
+"k�nen diese durch einen Klick auf die Schaltfl�he unten aktivieren."
 
 #: plugins/personal/environment/class_environment.inc:195
 msgid ""
@@ -2680,6 +2680,12 @@ msgstr ""
 #: plugins/personal/environment/kioskManagement.tpl:5
 msgid "Kiosk profile management"
 msgstr "Kiosk-Profil-Verwaltung"
+
+#: plugins/personal/environment/kioskManagement.tpl:12
+#: plugins/addons/ldapmanager/contentimport.tpl:15
+#: plugins/addons/ldapmanager/contentcsv.tpl:14
+msgid "Browse"
+msgstr "Durchsuchen"
 
 #: plugins/personal/environment/kioskManagement.tpl:22
 msgid "Close"
@@ -3156,8 +3162,8 @@ msgid ""
 "This account has fax features disabled. You can enable them by clicking "
 "below."
 msgstr ""
-"Aktuell hat dieses Konto keine Fax-Erweiterungen aktiviert. Sie k�nen diese "
-"durch einen Klick auf die Schaltfl�he unten aktivieren."
+"Aktuell hat dieses Konto keine Fax-Erweiterungen aktiviert. Sie k�nen "
+"diese durch einen Klick auf die Schaltfl�he unten aktivieren."
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:192
 msgid "You're trying to add an invalid phone number."
@@ -3607,8 +3613,8 @@ msgid ""
 "existing entries. Remember that GOsa will not check your ldifs for GOsa "
 "conformance."
 msgstr ""
-"Dieses Modul erm�licht es Ihnen, einen Satz von Eintr�en als LDIF in Ihre "
-"laufende LDAP-Datenbank zu importieren. Sie k�nen diese Funktion "
+"Dieses Modul erm�licht es Ihnen, einen Satz von Eintr�en als LDIF in "
+"Ihre laufende LDAP-Datenbank zu importieren. Sie k�nen diese Funktion "
 "beispielsweise zum Hinzufgen oder Aktualisieren existierender Eintr�e "
 "nutzen. Beachten Sie dabei bitte, dass GOsa die LDIF-Datei nicht auf "
 "Konformit� prft."
@@ -3616,11 +3622,6 @@ msgstr ""
 #: plugins/addons/ldapmanager/contentimport.tpl:10
 msgid "Import LDIF File"
 msgstr "Importiere LDIF Datei"
-
-#: plugins/addons/ldapmanager/contentimport.tpl:15
-#: plugins/addons/ldapmanager/contentcsv.tpl:14
-msgid "Browse"
-msgstr "Durchsuchen"
 
 #: plugins/addons/ldapmanager/contentimport.tpl:24
 msgid "Modify existing attributes"
@@ -3981,8 +3982,8 @@ msgid ""
 "This may be a primary user group. Please double check if you really want to "
 "do this since there is no way for GOsa to get your data back."
 msgstr ""
-"Bitte prfen Sie, ob Sie die Aktion wirklich durchfhren m�hten, da GOsa "
-"die Daten nicht wiederherstellen kann."
+"Bitte prfen Sie, ob Sie die Aktion wirklich durchfhren m�hten, da GOsa die "
+"Daten nicht wiederherstellen kann."
 
 #: plugins/admin/groups/main.inc:39 plugins/admin/groups/main.inc:43
 msgid "Group administration"
@@ -4044,8 +4045,8 @@ msgstr ""
 msgid ""
 "Please choose valid permission settings. Default permission can't be emtpy."
 msgstr ""
-"Bitte w�len sie gltige Zugriffsrechte. Standard-Zugriffsrechte drfen "
-"nicht leer sein."
+"Bitte w�len sie gltige Zugriffsrechte. Standard-Zugriffsrechte drfen nicht "
+"leer sein."
 
 #: plugins/admin/groups/class_groupMail.inc:650
 msgid "Please select a valid mail server."
@@ -4396,7 +4397,8 @@ msgstr "Zeige UNIX-Benutzer"
 
 #: plugins/admin/users/headpage.tpl:41
 msgid "Select to see users that have mail settings"
-msgstr "Ausw�len, um die Benutzer zu sehen die eine Mail-Erweiterung besitzen"
+msgstr ""
+"Ausw�len, um die Benutzer zu sehen die eine Mail-Erweiterung besitzen"
 
 #: plugins/admin/users/headpage.tpl:41
 msgid "Show mail users"
@@ -4524,9 +4526,9 @@ msgid ""
 "This may be used by several groups. Please double check if your really want "
 "to do this since there is no way for GOsa to get your data back."
 msgstr ""
-"Dieser Eintrag wird unter Umst�den von verschiedenen Gruppen genutzt. Bitte "
-"berprfen Sie genau was Sie tun, da GOsa keine M�lichkeit hat, die Daten "
-"wiederherzustellen."
+"Dieser Eintrag wird unter Umst�den von verschiedenen Gruppen genutzt. "
+"Bitte berprfen Sie genau was Sie tun, da GOsa keine M�lichkeit hat, die "
+"Daten wiederherzustellen."
 
 #: plugins/admin/applications/headpage.tpl:6
 msgid "List of applications"
@@ -4624,7 +4626,8 @@ msgstr "Kategorie dieses Unterbaums"
 #: plugins/admin/departments/generic.tpl:30
 #: plugins/gofon/conference/generic.tpl:122
 msgid "Choose subtree to place department in"
-msgstr "W�len Sie den Unterbaum, in den die Abteilung eingepflegt werden soll"
+msgstr ""
+"W�len Sie den Unterbaum, in den die Abteilung eingepflegt werden soll"
 
 #: plugins/admin/departments/generic.tpl:47
 msgid "State where this subtree is located"
@@ -4653,9 +4656,8 @@ msgid ""
 "double check if your really want to do this since there is no way for GOsa "
 "to get your data back."
 msgstr ""
-"Dies umfasst <b>alle</b> Konten, System- und Setup-Informationen Bitte "
-"prfen Sie genau, da es keine M�lichkeit fr GOsa gibt, die Daten zu "
-"restaurieren. "
+"Dies umfasst <b>alle</b> Konten, System- und Setup-Informationen Bitte prfen "
+"Sie genau, da es keine M�lichkeit fr GOsa gibt, die Daten zu restaurieren. "
 
 #: plugins/admin/departments/remove.tpl:11 plugins/admin/systems/remove.tpl:11
 #: plugins/gofon/conference/remove.tpl:11
@@ -5404,8 +5406,8 @@ msgstr "DNS-Dienst entfernen"
 msgid ""
 "This server has DNS features enabled. You can disable them by clicking below."
 msgstr ""
-"Dieser Server hat die DNS-Funktionen aktiviert. Sie k�nen diese durch einen "
-"Klick auf die untere Schaltfl�he deaktivieren."
+"Dieser Server hat die DNS-Funktionen aktiviert. Sie k�nen diese durch "
+"einen Klick auf die untere Schaltfl�he deaktivieren."
 
 #: plugins/admin/systems/class_servDNS.inc:36
 msgid "Add DNS service"
@@ -5532,8 +5534,8 @@ msgid ""
 "This server has kolab features disabled. You can enable them by clicking "
 "below."
 msgstr ""
-"Aktuell hat dieser Server keine Kolab-Funktionen aktiviert. Sie k�nen diese "
-"durch einen Klick auf die Schaltfl�he unten aktivieren."
+"Aktuell hat dieser Server keine Kolab-Funktionen aktiviert. Sie k�nen "
+"diese durch einen Klick auf die Schaltfl�he unten aktivieren."
 
 #: plugins/admin/systems/class_servKolab.inc:143
 #, php-format
@@ -5909,7 +5911,8 @@ msgstr "Treiber"
 #: plugins/admin/systems/service.tpl:88
 msgid "Choose graphic driver that is needed by the installed graphic board"
 msgstr ""
-"W�len Sie den Treiber, der von der installierten Grafikkarte ben�igt wird."
+"W�len Sie den Treiber, der von der installierten Grafikkarte ben�igt "
+"wird."
 
 #: plugins/admin/systems/service.tpl:96
 msgid "Choose screen resolution used in graphic mode"
@@ -6016,11 +6019,11 @@ msgid ""
 "from default entries.</b>"
 msgstr ""
 "Um das Terminal Verwalter-Passwort zu �dern, benutzen Sie die unteren "
-"Felder. Die Ver�derungen werden w�rend des n�hsten Starts des Terminals "
-"wirksam. Bitte merken Sie sich dieses Passwort, da Sie sonst nicht in der "
-"Lage sein werden, sich am entsprechenden System anzumelden. <b>Lassen Sie "
-"das Feld leer, um das Passwort von den Standard-Einstellungen zu bernehmen."
-"</b>"
+"Felder. Die Ver�derungen werden w�rend des n�hsten Starts des "
+"Terminals wirksam. Bitte merken Sie sich dieses Passwort, da Sie sonst nicht "
+"in der Lage sein werden, sich am entsprechenden System anzumelden. <b>Lassen "
+"Sie das Feld leer, um das Passwort von den Standard-Einstellungen zu "
+"bernehmen.</b>"
 
 #: plugins/admin/systems/password.tpl:6
 msgid "Changing the password impinges on authentification only."
@@ -6046,10 +6049,10 @@ msgid ""
 msgstr ""
 "Linux Terminals und Arbeitsstationen werden beim Systemstart automatisch "
 "hinzugefgt. Aus diesem Grund k�nen Sie fr diese Systemtypen nur Vorlagen "
-"fr einen Unterbaum anelgen. Server werden ebenfalls automatisch "
-"hinzugefgt, in einigen F�len ben�igen Sie Pseudo-Eintr�e um GOsa mit "
-"ben�igten Informationen zu versorgen. Weitere Netzwerk-Komponenten k�nen z."
-"B. fr Nagios Umgebungen genutzt werden um die Abh�gigkeiten aufzul�en."
+"fr einen Unterbaum anelgen. Server werden ebenfalls automatisch hinzugefgt, "
+"in einigen F�len ben�igen Sie Pseudo-Eintr�e um GOsa mit ben�igten "
+"Informationen zu versorgen. Weitere Netzwerk-Komponenten k�nen z.B. fr "
+"Nagios Umgebungen genutzt werden um die Abh�gigkeiten aufzul�en."
 
 #: plugins/admin/systems/chooser.tpl:7
 msgid "Linux thin client template"
@@ -6116,8 +6119,8 @@ msgstr ""
 #: plugins/admin/systems/startup.tpl:35
 msgid "Select if terminal supports graphical startup with progress bar"
 msgstr ""
-"W�len, wenn das Terminal den grafischen Startvorgang mit Fortschrittsbalken "
-"untersttzt"
+"W�len, wenn das Terminal den grafischen Startvorgang mit "
+"Fortschrittsbalken untersttzt"
 
 #: plugins/admin/systems/startup.tpl:36
 msgid "use graphical bootup"
@@ -6133,7 +6136,8 @@ msgstr "standard Textmodus nutzen"
 
 #: plugins/admin/systems/startup.tpl:41
 msgid "Select to get more verbose output during startup"
-msgstr "W�len, um ausfhrlichere Informationen w�rend des Starts zu erhalten"
+msgstr ""
+"W�len, um ausfhrlichere Informationen w�rend des Starts zu erhalten"
 
 #: plugins/admin/systems/startup.tpl:42
 msgid "use debug mode for startup"
@@ -6479,8 +6483,8 @@ msgstr ""
 msgid ""
 "This group has mail features disabled. You can enable them by clicking below."
 msgstr ""
-"Diese Gruppe hat keine Mail-Erweiterungen. Sie k�nen diese aktivieren, wenn "
-"Sie auf die untere Schaltfl�he klicken."
+"Diese Gruppe hat keine Mail-Erweiterungen. Sie k�nen diese aktivieren, "
+"wenn Sie auf die untere Schaltfl�he klicken."
 
 #: plugins/admin/ogroups/remove.tpl:7
 msgid ""
@@ -6745,8 +6749,8 @@ msgid ""
 "The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql "
 "error."
 msgstr ""
-"MySQL-Server '%s' kann nicht als Benutzer '%s' erreicht werden, berprfen "
-"Sie das GOsa Protokoll auf MySQL-Meldungen."
+"MySQL-Server '%s' kann nicht als Benutzer '%s' erreicht werden, berprfen Sie "
+"das GOsa Protokoll auf MySQL-Meldungen."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:243
 #: plugins/admin/ogroups/class_phonequeue.inc:606
@@ -7016,8 +7020,8 @@ msgid ""
 "This account has phone features enabled. You can disable them by clicking "
 "below."
 msgstr ""
-"Dieses Konto hat die Telefon-Erweiterungen aktiviert. Sie k�nen diese durch "
-"einen Klick auf die untere Schaltfl�he deaktivieren."
+"Dieses Konto hat die Telefon-Erweiterungen aktiviert. Sie k�nen diese "
+"durch einen Klick auf die untere Schaltfl�he deaktivieren."
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:630
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:633
@@ -7201,7 +7205,8 @@ msgstr "Name der zu erzeugenden Konferenz"
 #: plugins/gofon/conference/generic.tpl:24
 #: plugins/gofon/conference/generic.tpl:35
 msgid "Choose subtree to place conference in"
-msgstr "W�len Sie den Unterbaum, in den die Konferenz eingepflegt werden soll"
+msgstr ""
+"W�len Sie den Unterbaum, in den die Konferenz eingepflegt werden soll"
 
 #: plugins/gofon/conference/generic.tpl:62
 msgid "Lifetime (in days)"
@@ -7423,8 +7428,8 @@ msgid ""
 "entry in gosa.conf! LDAP server says '%s'."
 msgstr ""
 "Der Zugriffsschutz fr die LDAP-Datenbank kann nicht gesetzt werden. Bitte "
-"berprfen Sie den \"Config\" Eintrag in der Datei gosa.conf! Der LDAP-"
-"Server meldete '%s'."
+"berprfen Sie den \"Config\" Eintrag in der Datei gosa.conf! Der LDAP-Server "
+"meldete '%s'."
 
 #: include/functions.inc:385
 #, php-format
@@ -7513,8 +7518,8 @@ msgid ""
 "Warning: Account has an invalid mailserver string! Please check the mail "
 "server settings in the mail tab."
 msgstr ""
-"Warnung: Das Konto hat eine ungltige Mail-Server Adresse! Bitte berprfen "
-"Sie die Einstellungen des Mail-Servers."
+"Warnung: Das Konto hat eine ungltige Mail-Server Adresse! Bitte berprfen Sie "
+"die Einstellungen des Mail-Servers."
 
 #: include/class_mail-methods-cyrus.inc:52
 msgid ""
@@ -7679,8 +7684,8 @@ msgid ""
 "This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
 "in line %s"
 msgstr ""
-"Dies ist keine valide DN: '%s'.  Ein Block fr den Import sollte mit "
-"'dn:...' beginnen in Zeile %s"
+"Dies ist keine valide DN: '%s'.  Ein Block fr den Import sollte mit 'dn:...' "
+"beginnen in Zeile %s"
 
 #: include/class_ldap.inc:684
 #, php-format
@@ -7721,7 +7726,8 @@ msgstr ""
 #: include/functions_setup.inc:98
 msgid "Can't bind to LDAP. No schema check possible!"
 msgstr ""
-"Kann den LDAP-Server nicht erreichen: keine �erprfung der Schemata m�lich!"
+"Kann den LDAP-Server nicht erreichen: keine �erprfung der Schemata "
+"m�lich!"
 
 #: include/functions_setup.inc:107 include/functions_setup.inc:116
 msgid "Can't get schema information from server. No schema check possible!"
@@ -7792,8 +7798,8 @@ msgstr "Untersttzung fr PureFTPd aktiviert"
 #: include/functions_setup.inc:201
 msgid "Support for WebDAV disabled, no schema seems to be installed"
 msgstr ""
-"Die Untersttzung fr WebDAV wurde deaktiviert, das passende Schema ist "
-"nicht installiert."
+"Die Untersttzung fr WebDAV wurde deaktiviert, das passende Schema ist nicht "
+"installiert."
 
 #: include/functions_setup.inc:206
 msgid "Support for WebDAV enabled"
@@ -7802,8 +7808,8 @@ msgstr "Untersttzung fr WebDAV aktiviert"
 #: include/functions_setup.inc:211
 msgid "Support for phpgroupware disabled, no schema seems to be installed"
 msgstr ""
-"Die Untersttzung fr PHPGroupware wurde deaktiviert, das passende Schema "
-"ist nicht installiert."
+"Die Untersttzung fr PHPGroupware wurde deaktiviert, das passende Schema ist "
+"nicht installiert."
 
 #: include/functions_setup.inc:216
 msgid "Support for phpgroupware enabled"
@@ -7857,8 +7863,8 @@ msgid ""
 "PHP language."
 msgstr ""
 "PHP mu�mindestens in der Version 4.1.0 vorliegen. GOsa verwendet einige "
-"Funktionen, die in frheren Versionen fehlerhaft oder gar nicht "
-"implementiert waren."
+"Funktionen, die in frheren Versionen fehlerhaft oder gar nicht implementiert "
+"waren."
 
 #: include/functions_setup.inc:288
 msgid "Checking if register_globals is set to 'off'"
@@ -7870,9 +7876,9 @@ msgid ""
 "accessible from scripts without changing the scope. This may be a security "
 "risk. GOsa will run in both modes."
 msgstr ""
-"register_globals ist ein PHP-Mechanismus, welcher alle globalen Variablen "
-"fr Skripte direkt zug�glich macht. Dies kann ein Sicherheitsrisiko sein. "
-"GOsa funktioniert mit beiden m�lichen Einstellungen."
+"register_globals ist ein PHP-Mechanismus, welcher alle globalen Variablen fr "
+"Skripte direkt zug�glich macht. Dies kann ein Sicherheitsrisiko sein. GOsa "
+"funktioniert mit beiden m�lichen Einstellungen."
 
 #: include/functions_setup.inc:292
 msgid "Checking for ldap module"
@@ -7973,7 +7979,8 @@ msgid ""
 "files, you've to install the CUPS module."
 msgstr ""
 "Falls Sie eine Liste der verfgbaren Drucker ber IPP auslesen m�hten, "
-"ben�igen Sie dieses Modul. Anderenfalls wird die printcap-Datei ausgewertet."
+"ben�igen Sie dieses Modul. Anderenfalls wird die printcap-Datei "
+"ausgewertet."
 
 #: include/functions_setup.inc:327
 msgid "Checking for kadm5 module"
@@ -8057,8 +8064,8 @@ msgid ""
 "In Order to use GOsa without any trouble, the session.auto_register option "
 "in your php.ini must be set to 'Off'."
 msgstr ""
-"Um GOsa fehlerfrei benutzen zu k�nen, mu�die Option session.auto_register "
-"in Ihrer php.ini auf 'off' stehen."
+"Um GOsa fehlerfrei benutzen zu k�nen, mu�die Option session."
+"auto_register in Ihrer php.ini auf 'off' stehen."
 
 #: include/functions_setup.inc:397
 msgid "php.ini check -> implicit_flush"
@@ -8325,9 +8332,9 @@ msgid ""
 "Ignoring this message will change/destroy the data you're currently editing, "
 "so please close multiple windows and log in again."
 msgstr ""
-"Falls Sie trotzdem fortfahren, k�nen einige Daten der momentan bearbeiteten "
-"Dialoge verlorengehen. Deshalb schlie�n Sie bitte die verschiedenen Fenster "
-"und melden sich neu an."
+"Falls Sie trotzdem fortfahren, k�nen einige Daten der momentan "
+"bearbeiteten Dialoge verlorengehen. Deshalb schlie�n Sie bitte die "
+"verschiedenen Fenster und melden sich neu an."
 
 #: ihtml/themes/altlinux/conflict.tpl:14 ihtml/themes/default/conflict.tpl:14
 msgid "Logout"
@@ -8404,8 +8411,8 @@ msgstr ""
 "Die Gr�enbeschr�kung sorgt dafr, da�die LDAP-Operationen schneller "
 "durchgefhrt werden k�nen und verringern die Last auf dem LDAP-Server. Der "
 "einfachste Weg gro� Datenbanken ohne gro� Zeitberschreitungen zu "
-"bearbeiten ist es Filter zu verwenden und die Gr�enbeschr�kungen auf einen "
-"sinnvollen Wert einzustellen."
+"bearbeiten ist es Filter zu verwenden und die Gr�enbeschr�kungen auf "
+"einen sinnvollen Wert einzustellen."
 
 #: ihtml/themes/altlinux/sizelimit.tpl:6 ihtml/themes/default/sizelimit.tpl:6
 msgid "Please choose the way to react for this session"
@@ -8589,8 +8596,8 @@ msgid ""
 "used here, too."
 msgstr ""
 "GOsa untersttzt zahlreiche Verschlsselungsarten fr Ihre Passw�ter. "
-"�licherweise wird die Auswahl ber Vorlagen verwaltet, Sie k�nen aber auch "
-"eine Standardmethode festlegen, die benutzt werden soll."
+"�licherweise wird die Auswahl ber Vorlagen verwaltet, Sie k�nen aber "
+"auch eine Standardmethode festlegen, die benutzt werden soll."
 
 #: ihtml/themes/altlinux/setup_step4.tpl:72
 #: ihtml/themes/default/setup_step4.tpl:72
@@ -8693,8 +8700,8 @@ msgid ""
 "user is able to read gosa.conf, while other users shouldn't. You may want to "
 "execute these commands to achieve this requirement:"
 msgstr ""
-"Nachdem Sie die Konfigurationsdatei unter /etc/gosa abgelegt haben, mu�"
-"sichergestellt werden, da�der Webserver auch darauf zugreifen kann - "
+"Nachdem Sie die Konfigurationsdatei unter /etc/gosa abgelegt haben, "
+"mu�sichergestellt werden, da�der Webserver auch darauf zugreifen kann - "
 "w�rend normale Nutzer dies nicht drfen. Fhren Sie diese Kommandos aus, um "
 "die obigen Voraussetzungen zu erfllen:"
 
