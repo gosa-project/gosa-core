@@ -84,6 +84,22 @@ class logonManagementDialog extends plugin
     }
   }
 
+  function check()
+  {
+  $message = array();
+  
+  if(preg_match("/[^a-z]/",$this->LogonName)){
+    $message[] = _("Specified name is invalid.");
+  } 
+  
+  if(preg_match("/[^a-z0-9,\.-;:_\(\)!\? ]/i",$this->LogonDescription)){
+    $message[] = _("Specified decription contains invalid characters.");
+  }
+ 
+  return $message;
+  }
+
+
   function save()
   {
     $a_return= array();
