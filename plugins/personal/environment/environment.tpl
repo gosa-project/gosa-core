@@ -10,11 +10,11 @@
 			<table summary="">
 				<tr>
 					<td>
-						<input type="checkbox" value="1" {$useProfileCHK} name="useProfile" {$useProfileACL} 
+						<input type="checkbox" value="1" {$useProfileCHK} name="useProfile" {$useProfileACL} id="useProfile"
 									onclick="changeState('gotoProfileServer');changeState('gotoProfileFlag_C');">
 					</td>
 					<td valign="top">
-						{t}Use profile managment{/t}
+						<LABEL for="useProfile">{t}Use profile managment{/t}</LABEL>
 					</td>
 				</tr>
 				<tr>
@@ -24,10 +24,11 @@
 						<table summary="">
 							<tr>
 								<td>	
-									{t}Profil server{/t}
+									<LABEL for="gotoProfileServer">{t}Profil server{/t}</LABEL>
 								</td>
 								<td>
-									<select style="width:350px;" name="gotoProfileServer" {$gotoProfileServerACL} id="gotoProfileServer">
+									<select style="width:350px;" id="gotoProfileServer" 
+											name="gotoProfileServer" {$gotoProfileServerACL} id="gotoProfileServer">
 										{html_options values=$gotoProfileServerKeys output=$gotoProfileServers selected=$gotoProfileServer}
 										<option disabled>&nbsp;</option>
 									</select>
@@ -35,10 +36,11 @@
 							</tr>
 							<tr>
 								<td>	
-									{t}Use local caching{/t}
+									<LABEL for="gotoProfileFlag_C">{t}Use local caching{/t}</LABEL>
 								</td>
 								<td>
-									<input type="checkbox" name="gotoProfileFlag_C" value="C" id="gotoProfileFlag_C" {$gotoProfileFlag_CACL} {$gotoProfileFlag_CCHK}>
+									<input type="checkbox" name="gotoProfileFlag_C" value="C" 
+										id="gotoProfileFlag_C" {$gotoProfileFlag_CACL} {$gotoProfileFlag_CCHK}>
 								</td>
 							</tr>
 						</table>
@@ -47,18 +49,19 @@
 				</table>
 				<table>
 				<tr>
-					<td>{t}Quota{/t} 
+					<td>
+						<LABEL for="gotoProfileQuota">{t}Quota{/t}</LABEL> 
 					</td>
 					<td>
-						<input type="text" name="gotoProfileQuota" value="{$gotoProfileQuota}" {$gotoProfileQuotaACL}>
+						<input type="text" name="gotoProfileQuota" value="{$gotoProfileQuota}" {$gotoProfileQuotaACL} id="gotoProfileQuota">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						{t}Resolution{/t}
+						<LABEL for="gotoXResolution">{t}Resolution{/t}</LABEL>
 					</td>
 					<td>
-						<select name="gotoXResolution" {$gotoXResolutionACL}>
+						<select name="gotoXResolution" {$gotoXResolutionACL} id="gotoXResolution">
                         	{html_options values=$gotoXResolutions output=$gotoXResolutions selected=$gotoXResolution}
                             <option disabled>&nbsp;</option>
                     	</select>
@@ -66,10 +69,10 @@
 				</tr>
 				<tr>
 					<td>
-						<input type="checkbox" name="gotoProfileFlag_L" value="L" {$gotoProfileFlagsACL} {$gotoProfileFlag_LCHK}>
+						<input type="checkbox" name="gotoProfileFlag_L" id="gotoProfileFlag_L" value="L" {$gotoProfileFlagsACL} {$gotoProfileFlag_LCHK}>
 					</td>
 					<td>
-						{t}Resolution changeable on runtime {/t}
+						<LABEL for="gotoProfileFlag_L">{t}Resolution changeable on runtime {/t}</LABEL>
 					</td>
 				</tr>
 			</table>
@@ -79,10 +82,10 @@
 			<table summary="">
 				<tr>
 					<td>
-						{t}Kiosk profile{/t}	
+						<LABEL for="gotoKioskProfile">{t}Kiosk profile{/t}</LABEL>
 					</td>
 					<td>
-						<select name="gotoKioskProfile" {$gotoKioskProfileACL}>
+						<select name="gotoKioskProfile" {$gotoKioskProfileACL} id="gotoKioskProfile">
                         {html_options values=$gotoKioskProfiles output=$gotoKioskProfiles selected=$gotoKioskProfile}
                         <option disabled>&nbsp;</option>
 					</td>
@@ -97,11 +100,11 @@
 				</tr>
 			</table>	
 			<p class="seperator">&nbsp;</p>
-			<h2><img alt="" src="images/banana.png" align="middle">&nbsp;{t}Logon scripts{/t}</h2>
+			<h2><img alt="" src="images/banana.png" align="middle">&nbsp;<LABEL for="gotoLogonScript">{t}Logon scripts{/t}</LABEL></h2>
 			<table summary="">
 				<tr>
 					<td>
-			        	<select style="width:350px;" name="gotoLogonScript" multiple size=4 {$gotoLogonScriptACL}>
+			        	<select style="width:350px;" name="gotoLogonScript" multiple size=4 {$gotoLogonScriptACL} id="gotoLogonScript">
                         {html_options values=$gotoLogonScriptKeys output=$gotoLogonScripts }
                         <option disabled>&nbsp;</option>
 						</select>
@@ -115,17 +118,15 @@
 			</table>	
 		</td>
 		<td style="border-left: 1px solid rgb(160, 160, 160);"  valign="top">
-			<h2><img alt="" src="images/banana.png" align="middle">&nbsp;{t}Attach share{/t}</h2>
+			<h2><img alt="" src="images/banana.png" align="middle">&nbsp;<LABEL for="gotoShare">{t}Attach share{/t}</LABEL></h2>
 			<table summary="">
 				<tr>
 					<td>
-			        	<select style="width:350px;" name="gotoShare" multiple size=4 {$gotoShareACL}>
+			        	<select style="width:350px;" name="gotoShare" multiple size=4 {$gotoShareACL} id="gotoShare">
                         {html_options values=$gotoShareKeys output=$gotoShares}
                         <option disabled>&nbsp;</option>
 						</select>
-			
 						<br>
-							
 			        	<select name="gotoShareSelection" {$gotoShareACL}>
                         {html_options values=$gotoShareSelectionKeys output=$gotoShareSelections}
                         <option disabled>&nbsp;</option>
@@ -137,11 +138,11 @@
 				</tr>
 			</table>
 			<p class="seperator">&nbsp;</p>
-            <h2><img alt="" src="images/banana.png" align="middle">&nbsp;{t}Hotplug devices{/t}</h2>	
+            <h2><img alt="" src="images/banana.png" align="middle">&nbsp;<LABEL for="gotoHotplugDevice">{t}Hotplug devices{/t}</LABEL></h2>	
 			<table summary="">
 				<tr>
 					<td>
-						<select name="gotoHotplugDevice" {$gotoHotplugDeviceACL} size=4  style="width:350px;">
+						<select name="gotoHotplugDevice" {$gotoHotplugDeviceACL} size=4  style="width:350px;" id="gotoHotplugDevice">
                         {html_options values=$gotoHotplugDeviceKeys output=$gotoHotplugDevices}
                         <option disabled>&nbsp;</option>
 					</td>
@@ -155,19 +156,18 @@
 				</tr>
 			</table>
 		 	<p class="seperator">&nbsp;</p>
-            <h2><img alt="" src="images/banana.png" align="middle">&nbsp;{t}Printer{/t}</h2>
+            <h2><img alt="" src="images/banana.png" align="middle">&nbsp;<LABEL for="gotoPrinter">{t}Printer{/t}</LABEL></h2>
             <table summary="">
                 <tr>
                     <td>
-                        <select style="width:350px;" name="gotoPrinter" multiple size=4 {$gotoPrinterACL}>
+                        <select style="width:350px;" name="gotoPrinter" multiple size=4 {$gotoPrinterACL} id="gotoPrinter">
                         {html_options values=$gotoPrinterKeys output=$gotoPrinters}
                         <option disabled>&nbsp;</option>
                         </select>
-
                         <br>
                         <input type="submit" {$gotoPrinterACL} name="gotoPrinterAdd"     value="{t}Add{/t}">
                         <input type="submit" {$gotoPrinterACL} name="gotoPrinterDel"     value="{t}Delete{/t}">
-                        <input type="submit" {$gotoPrinterACL} name="gotoPrinterEdit"   value="{t}Admin Toggle{/t}">
+                        <input type="submit" {$gotoPrinterACL} name="gotoPrinterEdit"    value="{t}Admin Toggle{/t}">
                     </td>
                 </tr>
             </table>

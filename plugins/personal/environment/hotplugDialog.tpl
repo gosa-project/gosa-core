@@ -7,12 +7,12 @@
             <td width="50%" style="vertical-align:top;">
 	 			<div class="contentboxh" style="height:20px;">
     				<p class="contentboxh" style="font-size:12px">
-     					<b>Select hotplug to add </b>
+     					<b><LABEL for="hotplugName">Select hotplug to add</LABEL></b>
     				</p>
    				</div>
    				<div class="contentboxb">
     				<p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-						<select style="width:550px;" size=20 name="hotplugName">
+						<select style="width:550px;" size=20 name="hotplugName" id="hotplugName">
 						{html_options values=$hotplugDeviceKeys output=$hotplugDevices}
 						<option disabled>&nbsp;</option>
 						</select><br>

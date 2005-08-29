@@ -7,24 +7,24 @@
 			<td width="50%">
 					<table>
 						<tr>
-							<td>{t}Name{/t}
+							<td><LABEL for="LogonName">{t}Name{/t}</LABEL>
 							</td>
 							<td>
-								<input type="text" value="{$LogonName}" name="LogonName" {$LogonNameACL}>
+								<input type="text" value="{$LogonName}" name="LogonName" {$LogonNameACL} id="LogonName">
 							</td>
 						</tr>
 						<tr>
-							<td>{t}Description{/t}
+							<td><LABEL for="LogonDescription">{t}Description{/t}</LABEL>
 							</td>
 							<td>
-								<input type="text" value="{$LogonDescription}" name="LogonDescription">
+								<input type="text" value="{$LogonDescription}" name="LogonDescription" id="LogonDescription"> 
 							</td>
 						</tr>
 						<tr>
-							<td>{t}Priority{/t}
+							<td><LABEL for="LogonPriority">{t}Priority{/t}</LABEL>
 							</td>
 							<td>
-				            	<select name="LogonPriority">
+				            	<select name="LogonPriority" id="LogonPriority">
                 					{html_options values=$LogonPriorityKeys output=$LogonPrioritys}
                 				</select>
 							</td>
@@ -35,24 +35,25 @@
 					<table>
 						<tr>
 							<td>
-								<input type="checkbox" value="L" name="LogonLast" {$LogonLastCHK}>
+								<input type="checkbox" value="L" name="LogonLast" {$LogonLastCHK} id="LogonLast">
 							</td>
-							<td>{t}Last proceeded script{/t}
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<input type="checkbox" value="O" name="LogonOverload" {$LogonOverloadCHK}>
-							</td>
-							<td>{t}Overloadable{/t}
+							<td><LABEL for="LogonLast">{t}Last proceeded script{/t}</LABEL>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								{t}Import{/t}
+								<input type="checkbox" value="O" name="LogonOverload" {$LogonOverloadCHK} id="LogonOverload">
 							</td>
 							<td>
-								<input type="file" name="importFile" >
+								<LABEL for="LogonOverload">{t}Overloadable{/t}</LABEL>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<LABEL for="importFile">{t}Import{/t}</LABEL>
+							</td>
+							<td>
+								<input type="file" name="importFile" id="importFile">
 								<input type="submit" value="{t}Import{/t}" name="StartImport" >
 							</td>
 						</tr>

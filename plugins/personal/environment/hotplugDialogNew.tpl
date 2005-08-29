@@ -4,24 +4,24 @@
 	
 	<table>
 		<tr>
-			<td>{t}Name{/t}
+			<td><LABEL for="HOT_name">{t}Name{/t}</LABEL>
 			</td>
 			<td>	
-				<input type="text" value="{$HOT_name}" name="HOT_name">
+				<input type="text" value="{$HOT_name}" name="HOT_name" id="HOT_name">
 			</td>
 		</tr>
 		<tr>
-			<td>{t}Description{/t}
+			<td><LABEL for="HOT_description">{t}Description{/t}</LABEL>
 			</td>
 			<td>
-				<input type="text" value="{$HOT_description}" name="HOT_description">
+				<input type="text" value="{$HOT_description}" name="HOT_description" id="HOT_description">
 			</td>
 		</tr>
 		<tr>
-			<td>{t}ID{/t}
+			<td><LABEL for="HOT_id">{t}ID{/t}</LABEL>
 			</td>
 			<td>
-				<input type="text" value="{$HOT_id}" name="HOT_id">
+				<input type="text" value="{$HOT_id}" name="HOT_id" id="HOT_id">
 			</td>
 		</tr>
 	</table>

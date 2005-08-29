@@ -7,12 +7,12 @@
             <td width="50%">
 	  			<div class="contentboxh" style="height:20px;">
     				<p class="contentboxh" style="font-size:12px">
-     					<b>Select printer to add </b>
+     					<b><LABEL for="gotoPrinter">{t}Select printer to add{/t}</LABEL></b>
     				</p>
    				</div>
    				<div class="contentboxb">
     				<p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-		                <select style="width:550px;" size=20 name="gotoPrinter">
+		                <select style="width:550px;" size=20 name="gotoPrinter" id="gotoPrinter">
         		        {html_options values=$gotoPrinterKeys output=$gotoPrinters}
                 		<option disabled>&nbsp;</option>
                			 </select><br>

@@ -1,11 +1,11 @@
-<h2><img alt="" src="images/house.png" align="middle">&nbsp;{t}Kiosk profile management{/t}</h2>
+<h2><img alt="" src="images/house.png" align="middle">&nbsp;<LABEL for="gotoKioskProfile">{t}Kiosk profile management{/t}</LABEL></h2>
 
     <input type="hidden" name="dialogissubmitted" value="1">
 
 	<table summary="">
 		<tr>
 			<td>
-            	<select style="width:350px;" size=8 name="gotoKioskProfile" {$gotoKioskProfileACL}>
+            	<select style="width:350px;" size=8 name="gotoKioskProfile" {$gotoKioskProfileACL} id="gotoKioskProfile">
                 {html_options values=$gotoKioskProfileKeys output=$gotoKioskProfiles}
                 <option disabled>&nbsp;</option>
                 </select><br>
