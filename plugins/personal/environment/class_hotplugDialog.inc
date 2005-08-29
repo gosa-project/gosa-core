@@ -111,7 +111,7 @@ class hotplugDialog extends plugin
       if((empty($this->HOT_description))||(preg_match("/[^a-z0-9!\"?.,;:-_\(\) ]/i",$this->HOT_description))){
         $message[]=_("Please specify a valid description.");
       }
-      if((empty($this->HOT_id))){
+      if((empty($this->HOT_id))||(preg_match("/[\|]/i",$this->HOT_id))){
         $message[]=_("Please specify a valid id.");
       }
     }else{

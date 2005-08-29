@@ -66,6 +66,7 @@ class logonManagementDialog extends plugin
     }else{
       $smarty->assign("LogonNameACL","");
     }
+  
 
     $display.= $smarty->fetch(get_template_path('logonManagement.tpl', TRUE,dirname(__FILE__)));
     return($display);
@@ -93,7 +94,7 @@ class logonManagementDialog extends plugin
   } 
   
   if(preg_match("/[^a-z0-9,\.-;:_\(\)!\? ]/i",$this->LogonDescription)){
-    $message[] = _("Specified decription contains invalid characters.");
+    $message[] = _("Specified des^cription contains invalid characters.");
   }
  
   return $message;

@@ -15,6 +15,9 @@ class environment extends plugin
   
   var $in_dialog            = false;
   var $uid                  = "";
+
+  var $is_group             = false;
+  
   /* Attribute definition
    */
 
@@ -64,25 +67,34 @@ class environment extends plugin
                                     "gotoKioskProfile","gotoKioskProfiles",
                                     "gotoHotplugDevice","gotoHotplugDevices");
   var $objectclasses      = array("gotoEnvironment"); // Specifies the objectClass which contains the attributes edited here 
+  var $cn;
 
   function environment ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
 
+    if(!isset($this->attrs['uid'][0])){
+      $suffix="Group";
+      $this->uid          = $this->attrs['cn'][0];
+      $this->attrs['uid'] = $this->attrs['cn'][0];
+    }else{
+      $suffix="User";
+    }
+
     /* Get all Printer assignments */
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(&(objectClass=gotoPrinter)(gotoUserPrinter=".$this->uid."))",array("*"));
+    $ldap->search("(&(objectClass=gotoPrinter)(goto".$suffix."Printer=".$this->uid."))",array("*"));
     while($printer = $ldap->fetch()){
       $this->gotoPrinters[$printer['cn'][0]]=$printer;
       $this->gotoPrinters[$printer['cn'][0]]['mode']="user";
     }
-    $ldap->search("(&(objectClass=gotoPrinter)(gotoAdminPrinter=".$this->uid."))",array("*"));
+    $ldap->search("(&(objectClass=gotoPrinter)(goto".$suffix."AdminPrinter=".$this->uid."))",array("*"));
     while($printer = $ldap->fetch()){
       $this->gotoPrinters[$printer['cn'][0]]=$printer;
       $this->gotoPrinters[$printer['cn'][0]]['mode']="admin";
     }
-    
+   
     /* prepare hotplugs */
     if((isset($this->attrs['gotoHotplugDevice']))&&(is_array($this->attrs['gotoHotplugDevice']))){
       unset($this->attrs['gotoHotplugDevice']['count']);
@@ -167,6 +179,37 @@ class environment extends plugin
       return $display;
 
     // Account is enabled
+    }elseif((isset($this->parent))&&(!isset($this->parent->by_object['posixAccount']))){
+        $smarty->assign("is_account","true");
+        $this->is_Account = true;
+        $this->is_group = true;
+        $this->uid          = $this->cn;
+        $this->attrs['uid'] = $this->cn;
+
+          if (isset($_POST['modify_state'])){
+        $this->is_account= !$this->is_account;
+      }
+ 
+        // 3. Account enabled . Editing from adminmenu
+        if ($this->is_account){
+          $display= $this->show_header(_("Remove environment extension"),
+              _("This server has environment extension enabled. You can disable it by clicking below."));
+        } else {
+          if((in_array("posixAccount",$this->attrs['objectClass']))){
+            // 4. There is a PosixAccount
+            $display= $this->show_header(_("Add environment extension"),
+                _("This server has environment extension disabled. You can enable it by clicking below."));
+            return $display;
+          }else{
+            // 4. There is a PosixAccount
+            $display= $this->show_header(_("Add environment extension"),
+                _("This server has environment extension disabled. You have to setup a posix account before you can enable this feature."));
+            return $display;
+          }
+        }
+
+
+
     }else{
       /* Tell smarty that this accoutn is enabled */
       $smarty->assign("is_account","true");
@@ -260,6 +303,7 @@ class environment extends plugin
     /* Open Management Dialog */
     if(isset($_POST['KioskManagementDialog'])){
       $this->dialog = new kioskManagementDialog($this->config,$this->dn,$this->newKioskProfiles); 
+      $this->dialog->parent= $this;
       $this->is_dialog = true;
     }
 
@@ -568,11 +612,11 @@ class environment extends plugin
     if(preg_match("/[^0-9]/",$this->gotoProfileQuota)) {
       $message[]=_("Please set a valid profile quota size.");
     }  
-
-    if(!((in_array("posixAccount",$this->attrs['objectClass']))||($this->parent->by_object['posixAccount']->is_account==true))){
-      $message[]=(_("You need to setup a valid posix extension in order to enable evironment features."));  
+    if(!$this->is_group){
+      if((!((in_array("posixAccount",$this->attrs['objectClass']))||($this->parent->by_object['posixAccount']->is_account==true)))&&(!$this->is_group)){
+        $message[]=(_("You need to setup a valid posix extension in order to enable evironment features."));  
+      }
     }
-
     return ($message);
   }
 
@@ -598,11 +642,6 @@ class environment extends plugin
       }
       @unlink($file['tmp_name']);
     }
-
-
-
-
-
  
     /* Save already used objectClasses */
     $ocs        = $this->attrs['objectClass'];
@@ -621,20 +660,27 @@ class environment extends plugin
     if(chkacl($this->acl,"gotoPrinter")!=""){
       $this->gotoPrinters = array();
     }  
+    
+    if($this->is_group){
+      $s_suffix = "Group";
+    }else{
+      $s_suffix = "User";
+    }
+  
 
     if(count($this->gotoPrinters)==0){
-      $ldap->search("(&(objectClass=gotoPrinter)(|(gotoUserPrinter=".$this->uid.")(gotoAdminPrinter=".$this->uid.")))",array("*"));
+      $ldap->search("(&(objectClass=gotoPrinter)(|(goto".$s_suffix."Printer=".$this->uid.")(goto".$s_suffix."AdminPrinter=".$this->uid.")))",array("*"));
       while($attr = $ldap->fetch()){
       
-        foreach($attr['gotoUserPrinter'] as $key => $user){
+        foreach($attr['goto'.$s_suffix.'Printer'] as $key => $user){
           if($this->uid==$user){
-            unset($attr['gotoUserPrinter'][$key]);
+            unset($attr['goto'.$s_suffix.'Printer'][$key]);
           }
         }    
 
-        foreach($attr['gotoAdminPrinter'] as $key => $user){
+        foreach($attr['goto'.$s_suffix.'AdminPrinter'] as $key => $user){
           if($this->uid==$user){
-            unset($attr['gotoAdminPrinter'][$key]);
+            unset($attr['goto'.$s_suffix.'AdminPrinter'][$key]);
           }
         }    
 
@@ -649,16 +695,16 @@ class environment extends plugin
         }
         $attr= $attrs_used;
         $tmp =array();
-        foreach($attr['gotoAdminPrinter'] as $print){
+        foreach($attr['goto'.$s_suffix.'AdminPrinter'] as $print){
           $tmp[]=$print;
         }
-        $attr['gotoAdminPrinter'] = $tmp;
+        $attr['goto'.$s_suffix.'AdminPrinter'] = $tmp;
 
         $tmp =array();
-        foreach($attr['gotoUserPrinter'] as $print){
+        foreach($attr['goto'.$s_suffix.'Printer'] as $print){
           $tmp[]=$print;
         }
-        $attr['gotoUserPrinter'] = $tmp;
+        $attr['goto'.$s_suffix.'Printer'] = $tmp;
 
         $ldap->cd($attr['dn']);
         unset($attr['dn']);
@@ -687,11 +733,11 @@ class environment extends plugin
       /* Filter entries */
  
       if($printer['mode'] == "user"){
-        $attribute  = "gotoUserPrinter";
-        $attribute2 = "gotoAdminPrinter";
+        $attribute  = "goto".$s_suffix."Printer";
+        $attribute2 = "goto".$s_suffix."AdminPrinter";
       }else{
-        $attribute  = "gotoAdminPrinter";
-        $attribute2 = "gotoUserPrinter";
+        $attribute  = "goto".$s_suffix."AdminPrinter";
+        $attribute2 = "goto".$s_suffix."UserPrinter";
       }
 
       /* If this user is already assigned to $attribute2 
@@ -724,20 +770,20 @@ class environment extends plugin
       }
 
       $tmp =array();
-      if(isset($attrs['gotoAdminPrinter'])){
-        foreach($attrs['gotoAdminPrinter'] as $print){
+      if(isset($attrs['goto'.$s_suffix.'AdminPrinter'])){
+        foreach($attrs['goto'.$s_suffix.'AdminPrinter'] as $print){
           $tmp[]=$print;
         }
       }
-      $attrs['gotoAdminPrinter'] = $tmp;
+      $attrs['goto'.$s_suffix.'AdminPrinter'] = $tmp;
 
       $tmp =array();
-      if(isset($attrs['gotoUserPrinter'])){
-        foreach($attrs['gotoUserPrinter'] as $print){
+      if(isset($attrs['goto'.$s_suffix.'Printer'])){
+        foreach($attrs['goto'.$s_suffix.'Printer'] as $print){
           $tmp[]=$print;
         }
       }
-      $attrs['gotoUserPrinter'] = $tmp;
+      $attrs['goto'.$s_suffix.'Printer'] = $tmp;
 
       $ldap->cd($attrs['dn']);
       unset($attrs['dn']);

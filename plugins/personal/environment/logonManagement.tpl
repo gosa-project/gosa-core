@@ -37,7 +37,7 @@
 							<td>
 								<input type="checkbox" value="L" name="LogonLast" {$LogonLastCHK} id="LogonLast">
 							</td>
-							<td><LABEL for="LogonLast">{t}Last proceeded script{/t}</LABEL>
+							<td><LABEL for="LogonLast">{t}Last script{/t}</LABEL>
 							</td>
 						</tr>
 						<tr>
