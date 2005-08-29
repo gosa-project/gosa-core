@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-08-29 14:18+0200\n"
+"PO-Revision-Date: 2005-08-29 14:23+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -7082,7 +7082,7 @@ msgstr "Benutzer '%s' von Warteschlange '%s' entfernt."
 
 #: plugins/gofon/phoneaccount/generic.tpl:33
 msgid "Phone PIN"
-msgstr "Telefon PIN"
+msgstr "Telefon-PIN"
 
 #: plugins/gofon/phoneaccount/generic.tpl:37
 msgid "Set voicemail password"
@@ -7099,7 +7099,7 @@ msgstr "Aktualisieren"
 
 #: plugins/gofon/phoneaccount/generic.tpl:61
 msgid "Complete"
-msgstr "Abschliessen"
+msgstr "Vervollständigen"
 
 #: plugins/gofon/phoneaccount/main.inc:121
 msgid "Phone settings"
