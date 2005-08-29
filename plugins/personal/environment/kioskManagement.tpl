@@ -2,7 +2,7 @@
 
     <input type="hidden" name="dialogissubmitted" value="1">
 
-	<table summary="">
+	<table summary="{t}Kiosk profile management{/t}">
 		<tr>
 			<td>
             	<select style="width:350px;" size=8 name="gotoKioskProfile" {$gotoKioskProfileACL} id="gotoKioskProfile">

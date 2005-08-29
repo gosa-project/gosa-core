@@ -2,7 +2,7 @@
 
     <input type="hidden" name="dialogissubmitted" value="1">
 
-  	<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 cellspacing=2>
+  	<table summary="{t}Hotplug management{/t}" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 cellspacing=2>
         <tr>
             <td width="50%" style="vertical-align:top;">
 	 			<div class="contentboxh" style="height:20px;">

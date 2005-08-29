@@ -2,7 +2,7 @@
 	
 	<input type="hidden" name="dialogissubmitted" value="1">
 	
-	<table>
+	<table summary="{t}Create new hotplug entry{/t}">
 		<tr>
 			<td><LABEL for="HOT_name">{t}Name{/t}</LABEL>
 			</td>

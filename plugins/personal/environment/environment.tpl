@@ -3,11 +3,11 @@
 	{t}The environment extension is currently disabled.{/t}
 {else}
 <input type="hidden" name="iamposted" value="1">
-<table summary="" width="100%">
+<table summary="{t}Environment managment settings{/t}" width="100%">
 	<tr>
 		<td valign="top" width="50%">
 			<h2><img alt="" src="images/banana.png" align="middle">&nbsp;{t}Profiles{/t}</h2>
-			<table summary="">
+			<table summary="{t}Profile managment{/t}">
 				<tr>
 					<td>
 						<input type="checkbox" value="1" {$useProfileCHK} name="useProfile" {$useProfileACL} id="useProfile"
@@ -21,7 +21,7 @@
 					<td>&nbsp;
 					</td>
 					<td>
-						<table summary="">
+						<table summary="{t}Profile server managment{/t}">
 							<tr>
 								<td>	
 									<LABEL for="gotoProfileServer">{t}Profil server{/t}</LABEL>
@@ -79,7 +79,7 @@
 
 			<p class="seperator">&nbsp;</p>
             <h2><img alt="" src="images/banana.png" align="middle">&nbsp;{t}Kiosk profile{/t}</h2>	
-			<table summary="">
+			<table summary="{t}Kiosk profile settings{/t}">
 				<tr>
 					<td>
 						<LABEL for="gotoKioskProfile">{t}Kiosk profile{/t}</LABEL>
@@ -101,7 +101,7 @@
 			</table>	
 			<p class="seperator">&nbsp;</p>
 			<h2><img alt="" src="images/banana.png" align="middle">&nbsp;<LABEL for="gotoLogonScript">{t}Logon scripts{/t}</LABEL></h2>
-			<table summary="">
+			<table summary="{t}Logon script management{/t}">
 				<tr>
 					<td>
 			        	<select style="width:350px;" name="gotoLogonScript" multiple size=4 {$gotoLogonScriptACL} id="gotoLogonScript">
@@ -139,7 +139,7 @@
 			</table>
 			<p class="seperator">&nbsp;</p>
             <h2><img alt="" src="images/banana.png" align="middle">&nbsp;<LABEL for="gotoHotplugDevice">{t}Hotplug devices{/t}</LABEL></h2>	
-			<table summary="">
+			<table summary="{t}Hotplug device settings{/t}">
 				<tr>
 					<td>
 						<select name="gotoHotplugDevice" {$gotoHotplugDeviceACL} size=4  style="width:350px;" id="gotoHotplugDevice">
@@ -157,7 +157,7 @@
 			</table>
 		 	<p class="seperator">&nbsp;</p>
             <h2><img alt="" src="images/banana.png" align="middle">&nbsp;<LABEL for="gotoPrinter">{t}Printer{/t}</LABEL></h2>
-            <table summary="">
+            <table summary="{t}Printer settings{/t}">
                 <tr>
                     <td>
                         <select style="width:350px;" name="gotoPrinter" multiple size=4 {$gotoPrinterACL} id="gotoPrinter">

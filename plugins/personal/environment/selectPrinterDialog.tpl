@@ -2,7 +2,7 @@
 
     <input type="hidden" name="dialogissubmitted" value="1">
 
-  	<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
+  	<table summary="{t}Select printer to add{/t}" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
         <tr>
             <td width="50%">
 	  			<div class="contentboxh" style="height:20px;">
