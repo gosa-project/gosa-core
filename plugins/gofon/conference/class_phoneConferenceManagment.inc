@@ -281,7 +281,7 @@ class phoneConferenceManagment extends plugin
       " <input type='image' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
       " <input type='image' align='middle' src='images/list_home.png' title='"._("Go to users department")."' alt='"._("Home")."' name='dep_home'>&nbsp;".
       " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-      " <input type='image' align='middle' src='images/list_new_user.png' title='"._("Create new user")."' alt='"._("New user")."' name='user_new'>&nbsp;".
+      " <input type='image' align='middle' src='images/list_new_user.png' title='"._("Create new conference")."' alt='"._("New conference")."' name='user_new'>&nbsp;".
       " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
       _("Current base")."&nbsp;<select name='depselect' onChange='mainform.submit()'>$options</select>".
       " <input type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit").     "'>&nbsp;".
@@ -301,7 +301,7 @@ class phoneConferenceManagment extends plugin
     $divlist->SetEntriesPerPage(20);
     $divlist->SetHeader(array(
           array("string" => "&nbsp;"),            
-          array("string" =>_("Name / nummer")),
+          array("string" =>_("Name - Number")),
           array("string" => _("Owner")),
           array("string" => _("PIN")),
           array("string" =>_("Actions"), "attach" => "style='text-align:  right;border:none'")));

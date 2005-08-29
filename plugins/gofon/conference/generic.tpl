@@ -21,7 +21,7 @@
 	<tr>
 	<td><LABEL for="goFonConferenceOption_D">{t}Type{/t}</LABEL>{$must}</td>
 	<td>
-	<select id="goFonConferenceOption_D" size="1" name="goFonConferenceOption_D" title="{t}Choose subtree to place department in{/t}" {$goFonConferenceOption_DACL}> 
+	<select id="goFonConferenceOption_D" size="1" name="goFonConferenceOption_D" title="{t}Choose subtree to place conference in{/t}" {$goFonConferenceOption_DACL}> 
 	{html_options options=$goFonConferenceOptions selected=$goFonConferenceOption_D}
 	</select>
 	</td>
