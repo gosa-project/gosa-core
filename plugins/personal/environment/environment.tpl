@@ -53,7 +53,8 @@
 						<LABEL for="gotoProfileQuota">{t}Quota{/t}</LABEL> 
 					</td>
 					<td>
-						<input type="text" name="gotoProfileQuota" value="{$gotoProfileQuota}" {$gotoProfileQuotaACL} id="gotoProfileQuota">
+						<input type="text" name="gotoProfileQuota" value="{$gotoProfileQuota}" style="width:100px;" 
+							{$gotoProfileQuotaACL} id="gotoProfileQuota">{t}MB{/t}
 					</td>
 				</tr>
 				<tr>

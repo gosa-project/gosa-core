@@ -25,7 +25,7 @@ class environment extends plugin
   var $gotoProfileFlags   = "";     // Flags enabled  ? only used to set ACL and save 
   var $gotoProfileFlag_C  = "";     // Flag is set to C if we have the profile caching fucntion enabled 
   
-  var $gotoXResolution    = "";     // The selected resolution eg: 1024x768
+  var $gotoXResolution    = "1024x768";     // The selected resolution eg: 1024x768
   var $gotoXResolutions   = array();// Contains all available resolutions for this account
   var $gotoProfileFlag_L  = "";     // Flag is set to L to enable runtime resolution change 
   var $gotoProfileQuota   = "";     // User Quota Settings
