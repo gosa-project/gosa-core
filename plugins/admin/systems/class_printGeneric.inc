@@ -54,7 +54,23 @@ class printgeneric extends plugin
     }
 
 
-    if(in_array("gotoTerminal",$this->attrs['objectClass'])){
+    if((in_array("gotoWorkstation",$this->attrs['objectClass']))){
+      $this->is_terminal = "true";   
+      $this->dn   = preg_replace("/ou=workstation/","ou=printer",$this->dn);
+
+      // Reload plugin with new dn... (ou=printers instead of ou=terminals)
+      plugin::plugin ($this->config, $this->dn);
+      $ldap->cat($this->dn);
+      if(count($ldap->fetch())>0){
+        $this->orig_dn= $this->dn;
+        $this->is_account=true;
+        $this->initially_was_account = true;
+      }else{
+        $this->orig_dn = "new";
+        $this->is_account=false;
+        $this->initially_was_account = false;
+      }
+    }elseif((in_array("gotoTerminal",$this->attrs['objectClass']))){
       $this->is_terminal = "true";
       $this->dn   = preg_replace("/ou=terminal/","ou=printer",$this->dn);
 
@@ -106,6 +122,7 @@ class printgeneric extends plugin
 
   function execute()
   {
+    print_a($this);
     $smarty= get_smarty();
     $display="";
     /* Template management.
@@ -317,17 +334,23 @@ class printgeneric extends plugin
   /* Save to LDAP */
   function save()
   {
+    $dn= $this->dn;
     plugin::save();
-    
+   
+    if((in_array("gotoTerminal",$this->attrs['objectClass']))){
+      $this->dn= preg_replace("/ou=terminal/","ou=printer",$this->dn);
+    }
+ 
+    if((in_array("gotoWorkstation",$this->attrs['objectClass']))){
+      $this->dn= preg_replace("/ou=workstation/","ou=printer",$this->dn);
+    }
+
     $ldap= $this->config->get_ldap_link();
-  
+ 
     /* We are currently editing a Terminal, so we want to save a seperate printer which cn is the terminla cn 
     */
     if($this->is_terminal){
       
-      /* Save in ou=printers instead of ou=terminals */
-      $this->dn   = preg_replace("/ou=terminal/","ou=printer",$this->dn);
-
       /* reduce objectClasses to minimun */
       $this->attrs['objectClass']= $this->objectclasses;
 

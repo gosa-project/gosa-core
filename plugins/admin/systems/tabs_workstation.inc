@@ -31,6 +31,10 @@ class worktabs extends tabs
     }
 
     tabs::save(TRUE);
+    if(($this->by_object['printgeneric']->is_account==false)&&($this->by_object['printgeneric']->initially_was_account==true)){
+      $this->by_object['printgeneric']->remove_from_parent();
+    }
+
   }
 
 }
