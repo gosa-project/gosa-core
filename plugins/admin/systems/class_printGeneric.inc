@@ -9,27 +9,40 @@ class printgeneric extends plugin
 
   /* Generic terminal attributes */
   var $interfaces= array();
-  var $ignore_account= TRUE;
+  var $ignore_account= FALSE;
 
   /* Needed values and lists */
-  var $base= "";
-  var $cn= "";
-  var $macAddress= "";
-  var $ipHostNumber= "";
-  var $l= "";
-  var $description= "";
-  var $labeledURI= "";
-  var $gotoPrinterPPD= "";
-  var $orig_dn= "";
+  var $base             = "";
+  var $cn               = "";
+  var $macAddress       = "";
+  var $ipHostNumber     = "";
+  var $l                = "";
+  var $description      = "";
+  var $labeledURI       = "";
+  var $gotoPrinterPPD   = "";
+  var $orig_dn          = "";
+  var $is_terminal      = false;
+
+  var $UserMember       ="";
+  var $UserMembers      =array();
+  var $UserMemberKeys   =array();
+
+  var $AdminMember      ="";
+  var $AdminMembers     =array();
+  var $AdminMemberKeys  =array();
+
+  var $member           =array();
+
+  var $dialog           =NULL;
 
   /* attribute list for save action */
-  var $attributes= array("cn", "description", "l", "labeledURI", "gotoPrinterPPD",
-                         "macAddress", "ipHostNumber");
-  var $objectclasses= array("top", "gotoPrinter");
+  var $attributes     = array("cn", "description", "l", "labeledURI", "gotoPrinterPPD","macAddress", "ipHostNumber");
+  var $objectclasses  = array("top", "gotoPrinter");
 
   function printgeneric ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
+    $ldap= $this->config->get_ldap_link();
 
     /* Set base */
     if ($this->dn == "new"){
@@ -40,16 +53,92 @@ class printgeneric extends plugin
       $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,/", "", $this->dn);
     }
 
-    /* Save dn for later references */
-    $this->orig_dn= $this->dn;
+
+    if(in_array("gotoTerminal",$this->attrs['objectClass'])){
+      $this->is_terminal = "true";
+      $this->dn   = preg_replace("/ou=terminal/","ou=printer",$this->dn);
+
+      // Reload plugin with new dn... (ou=printers instead of ou=terminals) 
+      plugin::plugin ($this->config, $this->dn);
+      $ldap->cat($this->dn);
+      if(count($ldap->fetch())>0){
+        $this->orig_dn= $this->dn;
+        $this->is_account=true;
+        $this->initially_was_account = true;
+      }else{
+        $this->orig_dn = "new";
+        $this->is_account=false;
+        $this->initially_was_account = false;
+      }
+
+    }else{
+
+      /* Save dn for later references */
+      $this->orig_dn= $this->dn;
+    }
+    
+    foreach(array("AddUser"       =>"gotoUserPrinter",
+                  "AddGroup"      =>"gotoGroupPrinter",
+                  "AddAdminUser"  =>"gotoUserAdminPrinter",
+                  "AddAdminGroup" =>"gotoGroupAdminPrinter") as $type => $attr){
+
+      $this->member[$type]=array();
+      unset($this->attrs[$attr]['count']);
+      if(isset($this->attrs[$attr]))
+      foreach($this->attrs[$attr] as $mem){
+        if(preg_match("/Group/",$type)){
+          $ldap->search("(&(objectClass=posixGroup)(cn=".$mem."))",array("cn","description"));
+          $entry = $ldap->fetch();
+          if(isset($entry['description'])){
+            $this->member[$type][$entry['cn'][0]]=$entry;
+          }
+        }else{
+          $ldap->search("(&(objectClass=person)(objectClass=inetOrgPerson)(uid=".$mem."))",array("cn","uid"));
+          $entry = $ldap->fetch();
+          if(isset($entry['uid'])){
+            $this->member[$type][$entry['uid'][0]]=$entry;
+          }
+        }
+      }
+    }
+    
   }
 
   function execute()
   {
+    $smarty= get_smarty();
+    $display="";
+    /* Template management.
+     * There are two ways to call this tab.
+     * 1. From a printer Dialog, here we will see the full template, without a toggle state button
+     * 2. As a terminal tab, here we hide the top (name,base,description) of the template. 
+     *    Toggle Account state will be shown in this case, to disable or enable this tab.
+     *
+     * $this->is_terminal indecates this two different types.
+     */
+    if($this->is_terminal){    
+      $smarty->assign("is_terminal","true");
+    }else{
+      $smarty->assign("is_terminal","false");
+    }
+
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
+      $this->is_modified = true;
       $this->is_account= !$this->is_account;
     }
+
+    if($this->is_terminal){
+      if ($this->is_account){
+        $display= $this->show_header(_("Remove environment extension"),
+            _("This server has environment extension enabled. You can disable it by clicking below."));
+      }else{
+        $display= $this->show_header(_("Add environment extension"),
+            _("This server has environment extension disabled. You can enable it by clicking below."));
+        return ($display);
+      }
+    }
+
 
     /* Do we represent a valid printer? */
     if (!$this->is_account && $this->parent == NULL){
@@ -59,22 +148,106 @@ class printgeneric extends plugin
     }
 
     /* Fill templating stuff */
-    $smarty= get_smarty();
     $smarty->assign("bases", $this->config->idepartments);
+    $smarty->assign("base_select", $this->base);
 
     /* Assign attributes */
     foreach ($this->attributes as $attr){
       $smarty->assign($attr."ACL", chkacl($this->acl, $attr));
       $smarty->assign("$attr", $this->$attr);
     }
-    $smarty->assign("base_select", $this->base);
+    
+    if(isset($_POST['AddUser'])){
+      $this->dialog = new selectUserToPrinterDialog($this->config, get_userinfo(),"AddUser");
+    }
+    if(isset($_POST['AddGroup'])){
+      $this->dialog = new selectUserToPrinterDialog($this->config, get_userinfo(),"AddGroup");
+    }
+    if(isset($_POST['AddAdminUser'])){
+      $this->dialog = new selectUserToPrinterDialog($this->config, get_userinfo(),"AddAdminUser");
+    }
+    if(isset($_POST['AddAdminGroup'])){
+      $this->dialog = new selectUserToPrinterDialog($this->config, get_userinfo(),"AddAdminGroup");
+    }
+
+    if(isset($_POST['PrinterCancel'])){
+      unset($this->dialog);
+      $this->dialog= NULL;
+    }
+
+    if((isset($_POST['DelUser']))&&(isset($_POST['UserMember']))){
+      if(isset($this->member['AddUser'][$_POST['UserMember']])){
+        unset($this->member['AddUser'][$_POST['UserMember']]);
+      }
+    }
+
+    if((isset($_POST['DelUser']))&&(isset($_POST['UserMember']))){
+      if(isset($this->member['AddGroup'][$_POST['UserMember']])){
+        unset($this->member['AddGroup'][$_POST['UserMember']]);
+      }
+    }
+
+    if((isset($_POST['DelAdmin']))&&(isset($_POST['AdminMember']))){
+      if(isset($this->member['AddAdminUser'][$_POST['AdminMember']])){
+        unset($this->member['AddAdminUser'][$_POST['AdminMember']]);
+      }
+    }
+
+    if((isset($_POST['DelAdmin']))&&(isset($_POST['AdminMember']))){
+      if(isset($this->member['AddAdmingroup'][$_POST['AdminMember']])){
+        unset($this->member['AddAdminGroup'][$_POST['AdminMember']]);
+      }
+    }
+
+    if(isset($_POST['PrinterSave'])){
+      $this->dialog->save_object();
+      if(count($this->dialog->check())){
+        foreach($this->dialog->check() as $msg){
+          print_red($msg);
+        }
+      }else{
+        $new = $this->dialog->save();
+        $data = $new;
+        unset($data['type']);
+
+        if(preg_match("/User/",$new['type'])){
+          $use = "uid";
+        }else{
+          $use = "cn";
+        }
+
+        foreach($data as $mem){
+          $this->member[$new['type']][$mem[$use][0]]=$mem;    
+        }
+        unset($this->dialog);
+        $this->dialog=NULL; 
+      }
+    }
+
+    if($this->dialog != NULL){
+      $display = $this->dialog->execute();
+      return $display;
+    }
 
     /* Don't show Asterisk for non-required attribute ipHostNumber and macAddress */
     $smarty->assign("staticAddress", "");
-    
-    /* Show main page */
+    $smarty->assign("driverInfo", "Not implemented yet");
+
+    $list=$this->generateList();
+    $userlist   = array_merge($list['AddUser'],$list['AddGroup']);
+    $adminlist  = array_merge($list['AddAdminUser'],$list['AddAdminGroup']);
+
+    $smarty->assign("UserMember"    ,$this->UserMember);
+    $smarty->assign("UserMembers"   ,$userlist);
+    $smarty->assign("UserMemberKeys",array_flip($userlist));
+
+    $smarty->assign("AdminMember"    ,$this->AdminMember);
+    $smarty->assign("AdminMembers"   ,$adminlist);
+    $smarty->assign("AdminMemberKeys",array_flip($adminlist));
     $smarty->assign("netconfig", dirname(__FILE__)."/network.tpl");
-    return($smarty->fetch (get_template_path('printer.tpl', TRUE)));
+
+
+    return($display.$smarty->fetch (get_template_path('printer.tpl', TRUE)));
   }
 
   function remove_from_parent()
@@ -92,9 +265,7 @@ class printgeneric extends plugin
       unset($og->member[$this->dn]);
       $og->save ();
     }
-
   }
-
 
   /* Save data to object */
   function save_object()
@@ -106,7 +277,6 @@ class printgeneric extends plugin
       $this->base= $_POST['base'];
     }
   }
-
 
   /* Check supplied data */
   function check()
@@ -126,7 +296,7 @@ class printgeneric extends plugin
       $message[]= _("You have no permissions to create a printer on this 'Base'.");
     }
 
-    if ($this->orig_dn != $this->dn){
+    if (($this->orig_dn != $this->dn)&&(!$this->is_terminal)){
       $ldap= $this->config->get_ldap_link();
       $ldap->cd ($this->base);
       $ldap->search ("(cn=".$this->cn.")", array("cn"));
@@ -148,6 +318,27 @@ class printgeneric extends plugin
   function save()
   {
     plugin::save();
+    
+    $ldap= $this->config->get_ldap_link();
+  
+    /* We are currently editing a Terminal, so we want to save a seperate printer which cn is the terminla cn 
+    */
+    if($this->is_terminal){
+      
+      /* Save in ou=printers instead of ou=terminals */
+      $this->dn   = preg_replace("/ou=terminal/","ou=printer",$this->dn);
+
+      /* reduce objectClasses to minimun */
+      $this->attrs['objectClass']= $this->objectclasses;
+
+      /* If a printer with the given dn exists, modify else create new one */
+      $ldap->cat($this->dn);
+      if($ldap->fetch()){
+        $this->orig_dn= $this->dn;
+      }else{
+        $this->orig_dn = "new";
+      }
+    }
 
     /* Remove all empty values */
     if ($this->orig_dn == 'new'){
@@ -159,6 +350,31 @@ class printgeneric extends plugin
         $attrs[$key]= $val;
       }
       $this->attrs= $attrs;
+    }
+
+
+    /* Append printer user 
+     */
+    foreach($this->member['AddUser'] as $mem){
+      $this->attrs['gotoUserPrinter'][]=$mem['uid'][0];
+    }
+
+    /* Append printer group 
+     */
+    foreach($this->member['AddGroup'] as $mem){
+      $this->attrs['gotoGroupPrinter'][]=$mem['cn'][0];
+    }
+
+    /* Append printer admin user 
+     */
+    foreach($this->member['AddAdminUser'] as $mem){
+      $this->attrs['gotoUserAdminPrinter'][]=$mem['uid'][0];
+    }
+    
+    /* Append printer admin group 
+     */
+    foreach($this->member['AddAdminGroup'] as $mem){
+      $this->attrs['gotoGroupAdminPrinter'][]=$mem['cn'][0];
     }
 
     /* Write back to ldap */
@@ -184,7 +400,29 @@ class printgeneric extends plugin
     $this->postcreate();
   }
 
+  function generateList(){
+    $a_return=array();
+    foreach($this->member as $type => $values){
+      $a_return[$type]=array();
+      foreach($values as $value){
+        if((preg_match("/Group/i",$type))){
+          if(!isset($value['description'])){
+            $a_return[$type][$value['cn'][0]]= _("Group")." : ".$value['cn'][0];
+          }else{
+            $a_return[$type][$value['cn'][0]]= _("Group")." : ".$value['cn'][0]." [".$value['description'][0]."]";
+          }
+        }else{
+          $a_return[$type][$value['uid'][0]]=_("User")." : ".$value['cn'][0];
+        }
+      }
+    }
+    return($a_return);
+  }
+
+
 }
+
+
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

@@ -1,48 +1,105 @@
+
 <table summary="" width="100%">
- <tr>
-  <td style="vertical-align:top; width:50%;">
-	<table summary="">
-	 <tr>
-	  <td><LABEL for="cn" >{t}Printer name{/t}</LABEL>{$must}</td>
-	  <td><input name="cn" id="cn" size=20 maxlength=60 value="{$cn}"></td>
-	 </tr>
-	 <tr>
-	  <td><LABEL for="description">{t}Description{/t}</LABEL></td>
-	  <td><input id="description" name="description" size=25 maxlength=80 value="{$description}"></td>
-	 </tr>
-	 <tr>
-	  <td><LABEL for="l">{t}Location{/t}</LABEL></td>
-	  <td><input id="l" name="l" size=25 maxlength=80 value="{$l}"></td>
-	 </tr>
-	 <tr>
-          <td colspan=2>&nbsp;</td>
-	 </tr>
- 	 <tr>
-	  <td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
-	  <td>
-	   <select size="1" name="base" title="{t}Choose subtree to place terminal in{/t}">
-	    {html_options options=$bases selected=$base_select}
-	   </select>
-	  </tr>
-	</table>
-  </td>
-  <td style="vertical-align:top">
-	<table summary="">
-	 <tr>
-	  <td><LABEL for="labeledURI">{t}Printer URL{/t}</LABEL></td>
-	  <td><input id="labeledURI" name="labeledURI" size=25 maxlength=80 value="{$labeledURI}"></td>
-	 </tr>
-	 <tr>
-	  <td><LABEL for="gotoPrinterPPD">{t}Path to PPD{/t}</LABEL></td>
-	  <td><input id="gotoPrinterPPD" name="gotoPrinterPPD" size=25 maxlength=80 value="{$gotoPrinterPPD}"></td>
-	 </tr>
-	</table>
+	<tr>
+		<td style="vertical-align:top; width:50%;">
+{if $is_terminal ne 'true'}
+			<table summary="">
+			 <tr>
+			  <td><LABEL for="cn" >{t}Printer name{/t}</LABEL>{$must}</td>
+			  <td><input name="cn" id="cn" size=20 maxlength=60 value="{$cn}"></td>
+			 </tr>
+			 <tr>
+			  <td><LABEL for="description">{t}Description{/t}</LABEL></td>
+			  <td><input id="description" name="description" size=25 maxlength=80 value="{$description}"></td>
+			 </tr>
+			</table>
+		</td>
+		<td>
+			<table summary="">
+			 <tr>
+				  <td colspan=2>&nbsp;</td>
+			 </tr>
+			 <tr>
+			  <td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
+			  <td>
+			   <select size="1" name="base" title="{t}Choose subtree to place terminal in{/t}">
+				{html_options options=$bases selected=$base_select}
+			   </select>
+			  </tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<p class="seperator">&nbsp;</p>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+{/if}
+			<table summary="">
+			 	<tr>
+			  		<td><LABEL for="l">{t}Location{/t}</LABEL></td>
+			  		<td><input id="l" name="l" size=25 maxlength=80 value="{$l}"></td>
+			 	</tr>
+			 	<tr>
+			  		<td><LABEL for="labeledURI">{t}Printer URL{/t}</LABEL></td>
+			  		<td><input id="labeledURI" name="labeledURI" size=25 maxlength=80 value="{$labeledURI}"></td>
+			 	</tr>
+				<tr>	
+					<td>{t}Driver{/t}:<br>{$driverInfo}<input type="submit" name="EditDriver" value="{t}Edit{/t}"></td>
+					
+				</tr>
+			</table>
   </td>
  </tr>
 </table>
 
 <p class="plugbottom" style="margin-bottom:0px; padding:0px;">&nbsp;</p>
 
+{t}Permissions{/t}
+<table summary="" width="100%">
+	<tr>
+		<td>
+
+			<table>
+				<tr>
+					<td>
+						{t}Following objects are assigned as user.{/t}<br>
+		     				<select size="1" name="UserMember" title="{t}Users{/t}" style="width:350px;height:200px;" size=10 multiple>
+                				{html_options options=$UserMembers values=$UserMemberKeys}
+               				</select><br>
+							<input type="submit" value="Add user"  name="AddUser">
+							<input type="submit" value="Add group" name="AddGroup">
+							<input type="submit" value="Delete" name="DelUser">
+					</td>
+				</tr>
+			</table>	
+	
+		</td>
+		<td>
+			
+			<table>
+				<tr>
+					<td>
+						{t}Following objects are assigned as admin.{/t}<br>
+		     				<select size="1" name="AdminMember" title="{t}Admins{/t}" style="width:350px;height:200px;" size=10 multiple>
+                				{html_options options=$AdminMembers values=$AdminMemberKeys}
+               				</select><br>
+							<input type="submit" value="Add admin user"  name="AddAdminUser">
+							<input type="submit" value="Add admin group" name="AddAdminGroup">
+							<input type="submit" value="Delete" name="DelAdmin">
+		
+					</td>
+				</tr>
+			</table>
+			
+		</td>
+	</tr>
+</table>
+
+
+<p class="plugbottom" style="margin-bottom:0px; padding:0px;">&nbsp;</p>
 {include file="$netconfig"}
 
 <!-- Place cursor -->

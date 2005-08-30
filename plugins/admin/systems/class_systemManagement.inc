@@ -976,7 +976,7 @@ class systems extends plugin
 
     $tmp=array();
     foreach($this->terminals as $tkey => $val ){
-      $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
+      $tmp[strtolower($val['cn'][0]).$val['dn']]=$val;
     }
     ksort($tmp);
     $this->terminals=array();
@@ -984,6 +984,7 @@ class systems extends plugin
       $this->terminals[]=$val;
     }
     reset ($this->terminals);
+
   }
 
   function remove_lock()
