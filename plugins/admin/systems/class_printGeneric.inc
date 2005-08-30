@@ -349,17 +349,16 @@ class printgeneric extends plugin
   {
     $dn= $this->dn;
     plugin::save();
+    $ldap= $this->config->get_ldap_link();
    
     if((in_array("gotoTerminal",$this->attrs['objectClass']))){
       $this->dn= preg_replace("/ou=terminal/","ou=printer",$this->dn);
     }
- 
+    
     if((in_array("gotoWorkstation",$this->attrs['objectClass']))){
       $this->dn= preg_replace("/ou=workstation/","ou=printer",$this->dn);
     }
 
-    $ldap= $this->config->get_ldap_link();
- 
     /* We are currently editing a Terminal, so we want to save a seperate printer which cn is the terminla cn 
     */
     if($this->is_terminal){
@@ -454,8 +453,6 @@ class printgeneric extends plugin
     }
     return($a_return);
   }
-
-
 }
 
 
