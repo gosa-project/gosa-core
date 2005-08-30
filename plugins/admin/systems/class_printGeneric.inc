@@ -32,7 +32,10 @@ class printgeneric extends plugin
   var $AdminMemberKeys  =array();
 
   var $member           =array();
+  
+  var $strings          = "";
 
+  var $type             = "";
   var $dialog           =NULL;
 
   /* attribute list for save action */
@@ -54,10 +57,22 @@ class printgeneric extends plugin
     }
 
 
+    /* In case of gotoWorkstation this tab is calles from workstation plugin
+     */
     if((in_array("gotoWorkstation",$this->attrs['objectClass']))){
       $this->is_terminal = "true";   
       $this->dn   = preg_replace("/ou=workstation/","ou=printer",$this->dn);
+      $this->type = "station";
+    }elseif((in_array("gotoTerminal",$this->attrs['objectClass']))){
+      $this->type = "terminal";
+      $this->is_terminal = "true";
+      $this->dn   = preg_replace("/ou=terminal/","ou=printer",$this->dn);
+    }else{
+      /* Save dn for later references */
+      $this->orig_dn= $this->dn;
+    }
 
+    if($this->is_terminal){
       // Reload plugin with new dn... (ou=printers instead of ou=terminals)
       plugin::plugin ($this->config, $this->dn);
       $ldap->cat($this->dn);
@@ -70,59 +85,43 @@ class printgeneric extends plugin
         $this->is_account=false;
         $this->initially_was_account = false;
       }
-    }elseif((in_array("gotoTerminal",$this->attrs['objectClass']))){
-      $this->is_terminal = "true";
-      $this->dn   = preg_replace("/ou=terminal/","ou=printer",$this->dn);
-
-      // Reload plugin with new dn... (ou=printers instead of ou=terminals) 
-      plugin::plugin ($this->config, $this->dn);
-      $ldap->cat($this->dn);
-      if(count($ldap->fetch())>0){
-        $this->orig_dn= $this->dn;
-        $this->is_account=true;
-        $this->initially_was_account = true;
-      }else{
-        $this->orig_dn = "new";
-        $this->is_account=false;
-        $this->initially_was_account = false;
-      }
-
-    }else{
-
-      /* Save dn for later references */
-      $this->orig_dn= $this->dn;
     }
-    
+
+   
+    /* Prepare different member types 
+     */ 
     foreach(array("AddUser"       =>"gotoUserPrinter",
                   "AddGroup"      =>"gotoGroupPrinter",
                   "AddAdminUser"  =>"gotoUserAdminPrinter",
                   "AddAdminGroup" =>"gotoGroupAdminPrinter") as $type => $attr){
 
+      /* $this->members contains all members */
       $this->member[$type]=array();
+
       unset($this->attrs[$attr]['count']);
-      if(isset($this->attrs[$attr]))
-      foreach($this->attrs[$attr] as $mem){
-        if(preg_match("/Group/",$type)){
-          $ldap->search("(&(objectClass=posixGroup)(cn=".$mem."))",array("cn","description"));
-          $entry = $ldap->fetch();
-          if(isset($entry['description'])){
-            $this->member[$type][$entry['cn'][0]]=$entry;
-          }
-        }else{
-          $ldap->search("(&(objectClass=person)(objectClass=inetOrgPerson)(uid=".$mem."))",array("cn","uid"));
-          $entry = $ldap->fetch();
-          if(isset($entry['uid'])){
-            $this->member[$type][$entry['uid'][0]]=$entry;
+
+      if(isset($this->attrs[$attr])){
+        foreach($this->attrs[$attr] as $mem){
+          if(preg_match("/Group/",$type)){
+            $ldap->search("(&(objectClass=posixGroup)(cn=".$mem."))",array("cn","description"));
+            $entry = $ldap->fetch();
+            if(isset($entry['description'])){
+              $this->member[$type][$entry['cn'][0]]=$entry;
+            }
+          }else{
+            $ldap->search("(&(objectClass=person)(objectClass=inetOrgPerson)(uid=".$mem."))",array("cn","uid"));
+            $entry = $ldap->fetch();
+            if(isset($entry['uid'])){
+              $this->member[$type][$entry['uid'][0]]=$entry;
+            }
           }
         }
       }
     }
-    
   }
 
   function execute()
   {
-    print_a($this);
     $smarty= get_smarty();
     $display="";
     /* Template management.
@@ -147,11 +146,21 @@ class printgeneric extends plugin
 
     if($this->is_terminal){
       if ($this->is_account){
-        $display= $this->show_header(_("Remove environment extension"),
-            _("This server has environment extension enabled. You can disable it by clicking below."));
+        if($this->type=="station"){
+          $display= $this->show_header(_("Remove printer extension"),
+              _("This workstation has printer extension enabled. You can disable it by clicking below."));
+        }else{
+          $display= $this->show_header(_("Remove printer extension"),
+              _("This terminal has printer extension enabled. You can disable it by clicking below."));
+        }
       }else{
-        $display= $this->show_header(_("Add environment extension"),
-            _("This server has environment extension disabled. You can enable it by clicking below."));
+        if($this->type=="station"){
+          $display= $this->show_header(_("Add printer extension"),
+              _("This workstation has printer extension disabled. You can enable it by clicking below."));
+        }else{
+          $display= $this->show_header(_("Add printer extension"),
+              _("This terminal has printer extension disabled. You can enable it by clicking below."));
+        }  
         return ($display);
       }
     }

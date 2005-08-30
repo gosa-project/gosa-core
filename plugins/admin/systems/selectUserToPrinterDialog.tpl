@@ -1,4 +1,4 @@
-<h2><img alt="" src="images/house.png" align="middle">&nbsp;{t}Select printer entry{/t}</h2>
+<h2><img alt="" src="images/house.png" align="middle">&nbsp;{t}Select entry{/t}</h2>
 
     <input type="hidden" name="dialogissubmitted" value="1">
 
@@ -7,12 +7,12 @@
             <td width="50%">
 	  			<div class="contentboxh" style="height:20px;">
     				<p class="contentboxh" style="font-size:12px">
-     					<b><LABEL for="gotoPrinter">{t}Select printer to add{/t}</LABEL></b>
+     					<b><LABEL for="gotoPrinter">{t}Select user/group to add{/t}</LABEL></b>
     				</p>
    				</div>
    				<div class="contentboxb">
     				<p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-		                <select style="width:550px;" size=20 name="gotoPrinter[]" id="gotoPrinter" multiple>
+		                <select style="width:500px;" size=20 name="gotoPrinter[]" id="gotoPrinter" multiple>
         		        {html_options values=$gotoPrinterKeys output=$gotoPrinters}
                 		<option disabled>&nbsp;</option>
                			 </select><br>
@@ -25,8 +25,8 @@
   	 			</div>
    				<div class="contentboxb">
    					<p class="contentboxb">
-    					{t}This menu allows you to create, edit and delete selected printers. 
-							Having a great number of printers, you may want to use the range selectors on top of the printers list.{/t}
+    					{t}This menu allows you to select one or multiple users or groups to add them to the printer. 
+							Having a great number of users, you may want to use the range selectors on top of this list.{/t}
     				</p>
    				</div>
    				<br>
@@ -38,7 +38,7 @@
 				<table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 					<tr>
 						<td width="50%">
-							<img alt="" src="{$tree_image}" align=middle>&nbsp;{t}Display printers of department{/t}
+							<img alt="" src="{$tree_image}" align=middle>&nbsp;{t}Display members of department{/t}
 						</td>
 						<td>
 							<select name="depselectPrinter" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
@@ -55,12 +55,12 @@
     					<table summary="" width="100%" style="border-top:1px solid #B0B0B0;">
 							<tr>
 								<td>
-									<LABEL for='filter'><img alt="Search" src="{$search_image}" align="middle" title="{t}Display printers matching{/t}">
+									<LABEL for='filter'><img alt="Search" src="{$search_image}" align="middle" title="{t}Display members matching{/t}">
 									</LABEL>
 								</td>
     							<td width="99%">
 									<input id='filter' style='width:99%' type='text' name='regexPrinter' maxlength='20' value='{$regexPrinter}' 
-											title='{t}Regular expression for matching printer names{/t}' onChange="mainform.submit()">
+											title='{t}Regular expression for matching member names{/t}' onChange="mainform.submit()">
 								</td>
 							</tr>
 						</table>
@@ -71,7 +71,7 @@
     </table>
 
     <p align="right">
-    <input type="submit" name="PrinterSave"     value="{t}Use{/t}">
+    <input type="submit" name="PrinterSave"     value="{t}Add{/t}">
     <input type="submit" name="PrinterCancel"   value="{t}Cancel{/t}">
     </p>
 
