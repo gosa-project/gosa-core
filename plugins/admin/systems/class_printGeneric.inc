@@ -3,13 +3,13 @@
 class printgeneric extends plugin
 {
   /* CLI vars */
-  var $cli_summary= "Manage terminal base objects";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
+  var $cli_summary      = "Manage terminal base objects";
+  var $cli_description  = "Some longer text\nfor help";
+  var $cli_parameters   = array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* Generic terminal attributes */
-  var $interfaces= array();
-  var $ignore_account= FALSE;
+  var $interfaces     = array();
+  var $ignore_account = FALSE;
 
   /* Needed values and lists */
   var $base             = "";
@@ -30,11 +30,9 @@ class printgeneric extends plugin
   var $AdminMember      ="";
   var $AdminMembers     =array();
   var $AdminMemberKeys  =array();
-
-  var $member           =array();
   
+  var $member           =array();
   var $strings          = "";
-
   var $type             = "";
   var $dialog           =NULL;
 
@@ -58,6 +56,8 @@ class printgeneric extends plugin
 
 
     /* In case of gotoWorkstation this tab is calles from workstation plugin
+     * in case of gotoTerminal it is called from a terminal tab
+     * else it is a standalone printer
      */
     if((in_array("gotoWorkstation",$this->attrs['objectClass']))){
       $this->is_terminal = "true";   
@@ -72,6 +72,8 @@ class printgeneric extends plugin
       $this->orig_dn= $this->dn;
     }
 
+    /* If it is no standalone printer 
+     */
     if($this->is_terminal){
       // Reload plugin with new dn... (ou=printers instead of ou=terminals)
       plugin::plugin ($this->config, $this->dn);
@@ -263,6 +265,9 @@ class printgeneric extends plugin
     $userlist   = array_merge($list['AddUser'],$list['AddGroup']);
     $adminlist  = array_merge($list['AddAdminUser'],$list['AddAdminGroup']);
 
+    asort($userlist);
+    asort($adminlist);
+
     $smarty->assign("UserMember"    ,$this->UserMember);
     $smarty->assign("UserMembers"   ,$userlist);
     $smarty->assign("UserMemberKeys",array_flip($userlist));
@@ -271,7 +276,6 @@ class printgeneric extends plugin
     $smarty->assign("AdminMembers"   ,$adminlist);
     $smarty->assign("AdminMemberKeys",array_flip($adminlist));
     $smarty->assign("netconfig", dirname(__FILE__)."/network.tpl");
-
 
     return($display.$smarty->fetch (get_template_path('printer.tpl', TRUE)));
   }
