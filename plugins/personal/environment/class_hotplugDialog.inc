@@ -114,6 +114,13 @@ class hotplugDialog extends plugin
       if((empty($this->HOT_id))||(preg_match("/[\|]/i",$this->HOT_id))){
         $message[]=_("Please specify a valid id.");
       }
+
+    $ldap = $this->config->get_ldap_link();
+    $ldap->search("(&(objectClass=gotoEnvironment)(gotoHotplugDevice=".$this->HOT_name."*))");
+    if($ldap->count()){
+      $message[]=_("An Entry with this name already exists.");
+    }
+
     }else{
       if((!isset($_POST['hotplugName']))||(empty($_POST['hotplugName']))){
         $message[] = _("Please select an entry or press cancel.");
