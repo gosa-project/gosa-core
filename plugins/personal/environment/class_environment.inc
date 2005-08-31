@@ -73,7 +73,9 @@ class environment extends plugin
   {
     plugin::plugin ($config, $dn);
 
-    if(!isset($this->attrs['uid'][0])){
+   
+
+    if((isset($this->attrs['cn'][0]))&&(!isset($this->attrs['uid'][0]))){
       $suffix="Group";
       $this->uid          = $this->attrs['cn'][0];
       $this->attrs['uid'] = $this->attrs['cn'][0];
@@ -227,7 +229,7 @@ class environment extends plugin
           $display= $this->show_header(_("Remove environment extension"),
               _("This server has environment extension enabled. You can disable it by clicking below."));
         } else {
-          if((in_array("posixAccount",$this->attrs['objectClass']))||($this->parent->by_object['posixAccount']->is_account==true)){
+          if((isset($this->attrs['objectClass']))&&((in_array("posixAccount",$this->attrs['objectClass'])))||($this->parent->by_object['posixAccount']->is_account==true)){
             // 4. There is a PosixAccount
             $display= $this->show_header(_("Add environment extension"),
                 _("This server has environment extension disabled. You can enable it by clicking below."));
@@ -611,7 +613,10 @@ class environment extends plugin
   
     if(preg_match("/[^0-9]/",$this->gotoProfileQuota)) {
       $message[]=_("Please set a valid profile quota size.");
-    }  
+    } 
+    if(!isset($this->attrs['objectClass'])){
+      $this->attrs['objectClass']=array();
+    } 
     if(!$this->is_group){
       if((!((in_array("posixAccount",$this->attrs['objectClass']))||($this->parent->by_object['posixAccount']->is_account==true)))&&(!$this->is_group)){
         $message[]=(_("You need to setup a valid posix extension in order to enable evironment features."));  

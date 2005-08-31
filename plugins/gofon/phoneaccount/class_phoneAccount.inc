@@ -406,10 +406,16 @@ class phoneAccount extends plugin
         $this->goFonPINVoice = $this->goFonPIN;
       } 
 
+      if((!isset($this->cn))||(empty($this->cn))){
+        $CNname= $this->uid;
+      }else{
+        $CNname= $this->cn;
+      }
+
       $SQL[]= "INSERT INTO ".$a_SETUP['VOICE_TABLE']."
         (`customer_id`,`context`,`mailbox`,`password`,`fullname`,`email`,`pager`)
         VALUES
-        ('".$this->phoneNumbers[$i_new_key]."','default','".$this->phoneNumbers[$i_new_key]."','".$this->goFonPINVoice."','".$this->cn."','".$s_mail."','');";
+        ('".$this->phoneNumbers[$i_new_key]."','default','".$this->phoneNumbers[$i_new_key]."','".$this->goFonPINVoice."','".$CNname."','".$s_mail."','');";
 
       $i_is_accounted=false;
     
@@ -436,7 +442,7 @@ class phoneAccount extends plugin
         $EXT[$i]['exten']   = $s_telenums;
         $EXT[$i]['priority']= 1;
         $EXT[$i]['app']     = "SetCIDName";
-        $EXT[$i]['appdata'] = $this->cn;
+        $EXT[$i]['appdata'] = $CNname;
         $i ++;  
 
         // If no macro is selected use Dial
@@ -659,7 +665,11 @@ class phoneAccount extends plugin
     /* Transfer ACL's */
     foreach($this->attributes as $val){
       $smarty->assign($val."ACL", chkacl($this->acl, "$val"));
-      $smarty->assign($val,$this->$val);
+      if(isset($this->$val)){
+        $smarty->assign($val,$this->$val);
+      }else{
+        $smarty->assign($val,"");
+      }
     }
 
     /* Fill arrays */
@@ -817,6 +827,8 @@ class phoneAccount extends plugin
     if($this->attrs['goFonMacro']==""){
       $this->attrs['goFonMacro']=array();
     }
+
+    unset($this->attrs['cn']);
 
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
