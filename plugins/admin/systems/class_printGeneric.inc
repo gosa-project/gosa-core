@@ -26,7 +26,7 @@ class printgeneric extends plugin
   var $UserMember       ="";
   var $UserMembers      =array();
   var $UserMemberKeys   =array();
-
+  
   var $AdminMember      ="";
   var $AdminMembers     =array();
   var $AdminMemberKeys  =array();
@@ -37,7 +37,7 @@ class printgeneric extends plugin
   var $dialog           =NULL;
 
   /* attribute list for save action */
-  var $attributes     = array("cn", "description", "l", "labeledURI", "gotoPrinterPPD","macAddress", "ipHostNumber");
+  var $attributes     = array("cn", "description", "l", "labeledURI", "macAddress", "ipHostNumber","gotoPrinterPPD");
   var $objectclasses  = array("top", "gotoPrinter");
 
   function printgeneric ($config, $dn= NULL)
@@ -124,6 +124,7 @@ class printgeneric extends plugin
 
   function execute()
   {
+
     $smarty= get_smarty();
     $display="";
     /* Template management.
@@ -198,9 +199,32 @@ class printgeneric extends plugin
       $this->dialog = new selectUserToPrinterDialog($this->config, get_userinfo(),"AddAdminGroup");
     }
 
+    if(isset($_POST['EditDriver'])){
+      $this->dialog = new printerPPDDialog($this->config, $this->dn,$this->gotoPrinterPPD);
+    }
+
     if(isset($_POST['PrinterCancel'])){
       unset($this->dialog);
       $this->dialog= NULL;
+    }
+
+    if(isset($_POST['SavePPD'])){
+      if(count($this->dialog->check())){
+        foreach($this->dialog->check() as $msg){
+          print_red($msg);
+        }
+      }else{
+        $this->gotoPrinterPPD = array();
+        $this->gotoPrinterPPD = $this->dialog->save();
+        unset($this->dialog);
+        $this->dialog=NULL;
+      }
+
+    }
+    
+    if(isset($_POST['ClosePPD'])){
+      unset($this->dialog);
+      $this->dialog=NULL;
     }
 
     if((isset($_POST['DelUser']))&&(isset($_POST['UserMember']))){
@@ -259,7 +283,15 @@ class printgeneric extends plugin
 
     /* Don't show Asterisk for non-required attribute ipHostNumber and macAddress */
     $smarty->assign("staticAddress", "");
-    $smarty->assign("driverInfo", "Not implemented yet");
+
+
+    require_once ("class_ppdManager.inc");
+    $ppdManager= new ppdManager('/var/spool/ppd/');
+    if(!empty($this->gotoPrinterPPD)){
+      $smarty->assign("driverInfo", $ppdManager->loadDescription($this->gotoPrinterPPD));
+    }else{
+      $smarty->assign("driverInfo", _("Undefined"));
+    }
 
     $list=$this->generateList();
     $userlist   = array_merge($list['AddUser'],$list['AddGroup']);

@@ -3,6 +3,7 @@
 	<tr>
 		<td style="vertical-align:top; width:50%;">
 {if $is_terminal ne 'true'}
+			<h2>{t}General{/t}</h2>
 			<table summary="">
 			 <tr>
 			  <td><LABEL for="cn" >{t}Printer name{/t}</LABEL>{$must}</td>
@@ -37,6 +38,7 @@
 	<tr>
 		<td colspan="2">
 {/if}
+			<h2>{t}Details{/t}</h2>
 			<table summary="">
 			 	<tr>
 			  		<td><LABEL for="l">{t}Location{/t}</LABEL></td>
@@ -46,9 +48,13 @@
 			  		<td><LABEL for="labeledURI">{t}Printer URL{/t}</LABEL></td>
 			  		<td><input id="labeledURI" name="labeledURI" size=25 maxlength=80 value="{$labeledURI}"></td>
 			 	</tr>
+			</table>
+			<table summary="">
 				<tr>	
-					<td>{t}Driver{/t}:<br>{$driverInfo}<input type="submit" name="EditDriver" value="{t}Edit{/t}"></td>
-					
+					<td>
+						<br>
+						{t}PPD{/t} : {$driverInfo}<br><input type="submit" name="EditDriver" value="{t}Edit{/t}">
+					</td>
 				</tr>
 			</table>
   </td>
@@ -57,7 +63,7 @@
 
 <p class="plugbottom" style="margin-bottom:0px; padding:0px;">&nbsp;</p>
 
-{t}Permissions{/t}
+<h2>{t}Permissions{/t}</h2>
 <table summary="" width="100%">
 	<tr>
 		<td>
@@ -66,7 +72,7 @@
 				<tr>
 					<td>
 						{t}Following objects are assigned as user.{/t}<br>
-		     				<select size="1" name="UserMember" title="{t}Users{/t}" style="width:350px;height:200px;" size=10 multiple>
+		     				<select size="1" name="UserMember" title="{t}Users{/t}" style="width:350px;height:120px;"  multiple>
                 				{html_options options=$UserMembers values=$UserMemberKeys}
                				</select><br>
 							<input type="submit" value="Add user"  name="AddUser">
@@ -83,7 +89,7 @@
 				<tr>
 					<td>
 						{t}Following objects are assigned as admin.{/t}<br>
-		     				<select size="1" name="AdminMember" title="{t}Admins{/t}" style="width:350px;height:200px;" size=10 multiple>
+		     				<select size="1" name="AdminMember" title="{t}Admins{/t}" style="width:350px;height:120px;"  multiple>
                 				{html_options options=$AdminMembers values=$AdminMemberKeys}
                				</select><br>
 							<input type="submit" value="Add admin user"  name="AddAdminUser">
