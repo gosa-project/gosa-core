@@ -84,7 +84,20 @@ class usertabs extends tabs
         $new_dn= "cn=".$baseobject->givenName." ".$baseobject->sn.','.
           get_people_ou().$baseobject->base;
       }
-
+      
+      /* Hickert: 31.08.2005 
+       * fixed error = Trying to overwrite cn=***  which already exists.
+       * If you changed one of the "Name" / "Givenname" attributes to lower or upper case, like "test" to "Test", (in DNMODE=cn)
+       *  the old_dn and new dn were different. cn=test ... cn=Test ...
+       * The following code decided to move the entry from old_dn to new_dn. (Because they differ)
+       * But the ldap functions are not case sensitive and so the function plugin::move() quits with 
+       *  an error, because source and destination dn are both the same (for ldap, but not for php).
+       * This fix allow you to change the givenname or name attributes.
+       */
+      if(strtolower($this->dn)==strtolower($new_dn)){
+        $this->dn=$new_dn;
+      }
+  
       if ($this->dn != $new_dn){
 
         /* Write entry on new 'dn' */
@@ -99,6 +112,7 @@ class usertabs extends tabs
         $this->dn= $new_dn;
       }
     }
+    print_a($this);
     return tabs::save();
   }
 
