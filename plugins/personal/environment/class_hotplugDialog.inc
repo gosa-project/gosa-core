@@ -105,11 +105,11 @@ class hotplugDialog extends plugin
   {
     $message= array();
     if(!$this->use_existing){
-      if((empty($this->HOT_name))||(preg_match("/[^a-z0-9]/i",$this->HOT_name))){
-        $message[]=_("Please specify a valid name.");
+      if((empty($this->HOT_name))||(preg_match("/[^a-z0-9 ]/i",$this->HOT_name))){
+        $message[]=_("Please specify a valid name. Only 0-9 a-Z is allowed.");
       }
       if((empty($this->HOT_description))||(preg_match("/[^a-z0-9!\"?.,;:-_\(\) ]/i",$this->HOT_description))){
-        $message[]=_("Please specify a valid description.");
+        $message[]=_("Invalid character in description. Please specify a valid description.");
       }
       if((empty($this->HOT_id))||(preg_match("/[\|]/i",$this->HOT_id))){
         $message[]=_("Please specify a valid id.");
@@ -157,11 +157,11 @@ class hotplugDialog extends plugin
           $tmp = split("\|",$device);
           
           if(preg_match("/^".str_replace("*","",$this->regex).".*/i",$tmp[0])){
-            $a_return[$tmp[0]]= $tmp[0]." [".$tmp[1]."] ".$tmp[2];
+            $a_return[$tmp[0]]= $tmp[0]." [".$tmp[1]."] ".base64_decode($tmp[2]);
             
             $tmp2['name']         = $tmp[0];
             $tmp2['description'] = $tmp[1];
-            $tmp2['id']           = $tmp[2];
+            $tmp2['id']           = base64_decode($tmp[2]);
 
             $this->hotplugDeviceList[$tmp[0]]=$tmp2;
           }
