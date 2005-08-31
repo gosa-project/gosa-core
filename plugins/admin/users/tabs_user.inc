@@ -112,7 +112,6 @@ class usertabs extends tabs
         $this->dn= $new_dn;
       }
     }
-    print_a($this);
     return tabs::save();
   }
 
