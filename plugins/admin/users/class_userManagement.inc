@@ -593,12 +593,16 @@ class userManagement extends plugin
       $this->usertab->givenName = $this->givenName;
       $template_dn              = $_POST['template'];
       $this->usertab->adapt_from_template($template_dn);
-      $template_base            = $userfilter['depselect'];//preg_replace("/^[^,]+,".get_people_ou()."/", '', $template_dn);
+      $template_base            = preg_replace("/^[^,]+,".get_people_ou()."/", '', $template_dn);
       $this->usertab->by_object['user']->base= $template_base;
 
       /* Set up the users ACL's for this 'dn' */
       $acl= get_permissions ($template_base, $this->ui->subtreeACL);
       $this->usertab->set_acl($acl);
+    }
+    
+    if (isset($_POST['template_continue']) && ($_POST['template'] == 'none')){
+      $this->usertab->by_object['user']->base= $userfilter['depselect'];
     }
 
     /* Show tab dialog if object is present */
