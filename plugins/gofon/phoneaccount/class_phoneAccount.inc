@@ -207,6 +207,10 @@ class phoneAccount extends plugin
     $this->hardware_list["automatic"]= _("automatic");
     ksort($this->hardware_list);
     $this->a_old_telenums = $this->phoneNumbers;
+
+    if($this->is_account){
+      $this->is_modified = true;
+    }
   }
 
 
@@ -406,6 +410,15 @@ class phoneAccount extends plugin
         $this->goFonPINVoice = $this->goFonPIN;
       } 
 
+      /* If deletion starts from userslist, cn uid are not set */
+      if((isset($this->parent->by_object['user']->uid))&&(!empty($this->parent->by_object['user']->uid))){
+        $this->uid = $this->parent->by_object['user']->uid;
+      }
+
+      if((isset($this->parent->by_object['user']->cn))&&(!empty($this->parent->by_object['user']->cn))){
+        $this->cn  = $this->parent->by_object['user']->cn;
+      }
+
       if((!isset($this->cn))||(empty($this->cn))){
         $CNname= $this->uid;
       }else{
@@ -553,7 +566,10 @@ class phoneAccount extends plugin
           $string = $paras['default'];
 
           $string=preg_replace("/%uid/i",$this->uid,$string);
-          $string=preg_replace("/%cn/i",$this->cn,$string);
+          
+          if(isset($this->cn)){
+            $string=preg_replace("/%cn/i",$this->cn,$string);
+          }
 
           for($i = 0 ; $i < 10; $i++){
             if(isset($tmp[$i])){
