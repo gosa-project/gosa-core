@@ -30,11 +30,10 @@
     </tr>
 			<tr>
 				<td>
-					<LABEL for="goFonPIN">{t}Voicemail PIN{/t}{$must}</LABEL>
+					<LABEL for="goFonVoicemailPIN">{t}Voicemail PIN{/t}{$must}</LABEL>
 				</td>
 				<td>
-					<input type="password" id="goFonVoicePIN" name="goFonVoicePIN" value="{$goFonVoicePIN}" {$goFonPINACL}>
-					<input type="submit" name="goFonVoicePINSet" value="{t}Set phone password{/t}" {$goFonPINACL}>
+					<input type="password" id="goFonVoicemailPIN" name="goFonVoicemailPIN" value="{$goFonVoicemailPIN}" {$goFonVoicemailPINACL}>
 			</td>
 			</tr>
 			<tr>
@@ -43,7 +42,6 @@
 				</td>
 				<td>
 					<input type="password" id="goFonPIN" name="goFonPIN" value="{$goFonPIN}" {$goFonPINACL}>
-					<input type="submit" name="goFonPINSet" value="{t}Set voicemail password{/t}" {$goFonPINACL}>
 			</td>
 			</tr>
    </table>

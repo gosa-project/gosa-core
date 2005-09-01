@@ -12,7 +12,7 @@ class phoneAccount extends plugin
   var $goFonHardware          = "";
   var $goFonFormat            = "";
   var $goFonPIN               = "";
-  var $goFonVoicePIN          = "";
+  var $goFonVoicemailPIN      = "";
   var $goFonDeliveryMode      = "";
   var $phoneNumbers           = array();
   var $mail                   = "";
@@ -34,7 +34,7 @@ class phoneAccount extends plugin
 
   /* attribute list for save action */
   var $attributes             = array("goFonDeliveryMode", "goFonFormat","uid","cn","mail",
-      "goFonHardware","goFonPIN", "telephoneNumber", "goFonMacro","macro");
+      "goFonHardware","goFonPIN","goFonVoicemailPIN","telephoneNumber", "goFonMacro","macro");
   var $objectclasses= array("goFonAccount");
 
   function phoneAccount ($config, $dn= NULL)
@@ -86,13 +86,6 @@ class phoneAccount extends plugin
       if(!$first){
         $first = $key;
       }
-    }
-
-    $attrs = @mysql_fetch_row(@mysql_query("SELECT *  FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$this->phoneNumbers[$first].";"));
-    if($attrs){
-      $this->goFonPINVoice = $attrs[4];
-    }else{
-      $this->goFonPINVoice = false;
     }
 
     /* Load hardware list */
@@ -213,26 +206,6 @@ class phoneAccount extends plugin
       $this->is_modified = true;
     }
 
-    /* Set PINs to false, 
-     *  to avoid setting them before we explicitly 
-     *  pressed set voicemail PIN or Phone PIN  
-     */
-
-    if(count(split("\|",$this->goFonPIN))==2){
-      $tmp = split("\|",$this->goFonPIN);
-      $this->goFonPIN       = $tmp[0]; 
-      $this->goFonVoicePIN  = $tmp[1]; 
-    }else{
-      $this->goFonVoicePIN  = $this->goFonPIN;
-    }
- 
-    // Unset goFonPIN, to avoid save_object for this attribute 
-    foreach($this->attributes as $key=>$val){
-      if($val == "goFonPIN"){
-        unset($this->attributes[$key]);
-      }    
-    }
-
   }
 
 
@@ -300,37 +273,11 @@ class phoneAccount extends plugin
       return false;
     }
 
-    $existence = @mysql_fetch_row(@mysql_query(  "SELECT * FROM ".$a_SETUP['SIP_TABLE']." WHERE name='".$this->uid."';"));
-    
-    if(!$existence&&((empty($this->goFonPIN))||(empty($this->goFonVoicePIN)))){
-      $this->generate_error = _("You are currently creating a new phone account, please specify a value for phone PIN and voice PIN.");  
-      return(false);
-    }
-  
-    if((empty($this->goFonPIN))&&(empty($existence[27]))){
-      $this->generate_error = _("The PIN attribute is missing in database entry. Please assign a valid phone PIN.");  
-      return(false);
-    }
-  
-    if(isset($existence[15])){
-      $voice = @mysql_fetch_row(@mysql_query("SELECT password FROM ".$a_SETUP['VOICE_TABLE']." where customer_id='".$existence[15]."'"));
-      if((empty($this->goFonVoicePIN))&&(empty($voice[0]))){
-        $this->generate_error = _("The voice PIN attribute is missing in database entry. Please assign a valid voice PIN.");
-        return(false);
-      }
-    }
-     
     /* If Save == true, we should save something.
      * Generate SQL, for drop of old entries
      * Generate SQL, for insert new entries
      */ 
     if($save == true){
-
-      /* Get old voice passwword if no new isset */
-      if($this->goFonPIN==false){
-        $pin = @mysql_fetch_row(@mysql_query("SELECT secret FROM ".$a_SETUP['SIP_TABLE']." where name='".$this->uid."'"));
-        $this->goFonPIN = $pin[0];
-      }
 
       // Attribute GoFonDefaultIP set ?
       if(((isset($a_ldap_attrs['goFonDefaultIP'][0]))&&($a_ldap_attrs['goFonDefaultIP'][0] != "dynamic"))){
@@ -389,7 +336,7 @@ class phoneAccount extends plugin
       $sip_data_array['restrictcid']  = "n";
       $sip_data_array['rtptimeout']   = NULL;
       $sip_data_array['rtpholdtimeout']=NULL;
-      $sip_data_array['secret']       = $s_pin;
+      $sip_data_array['secret']       = $this->goFonPIN;
       $sip_data_array['type']         = $s_type ;
       $sip_data_array['username']     = $this->uid;
       $sip_data_array['disallow']     = NULL;
@@ -427,18 +374,6 @@ class phoneAccount extends plugin
       }
 
 
-      /* Get old voice passwword if no new isset */
-      if($this->goFonVoicePIN==false){
-        $voice = @mysql_fetch_row(@mysql_query("SELECT password FROM ".$a_SETUP['VOICE_TABLE']." where customer_id=".$this->phoneNumbers[$i_new_key].""));
-        $this->goFonVoicePIN = $voice[0];
-      }
-      
-      /* Get old voice passwword if no new isset */
-      if($this->goFonPIN==false){
-        $pin = @mysql_fetch_row(@mysql_query("SELECT secret FROM ".$a_SETUP['SIP_TABLE']." where name='".$this->uid."'"));
-        $this->goFonPIN = $pin[0];
-      }
-    
       // $SQL contains all queries
       $SQL   = array();
       $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$this->uid."';\n";
@@ -468,10 +403,6 @@ class phoneAccount extends plugin
         }
       }
 
-      if(empty($this->goFonPINVoice)){
-        $this->goFonPINVoice = $this->goFonPIN;
-      } 
-
       /* If deletion starts from userslist, cn uid are not set */
       if((isset($this->parent->by_object['user']->uid))&&(!empty($this->parent->by_object['user']->uid))){
         $this->uid = $this->parent->by_object['user']->uid;
@@ -491,7 +422,7 @@ class phoneAccount extends plugin
           VALUES   ('".$this->phoneNumbers[$i_new_key]."',
                     'default',
                     '".$this->phoneNumbers[$i_new_key]."',
-                    '".$this->goFonVoicePIN."',
+                    '".$this->goFonVoicemailPIN."',
                     '".$CNname."',
                     '".$s_mail."',
                     '');";
@@ -590,30 +521,6 @@ class phoneAccount extends plugin
     /* Select no macro if, state is empty, this is the case, if the selected macro is no longer available */
     if(empty($this->macro)){
       $this->macro ="none";
-    }
-
-    if(isset($_POST['goFonVoicePINSet'])){
-      if((strlen($_POST['goFonVoicePIN'])==0)||(strlen($_POST['goFonVoicePIN'])>4)){
-        print_red(_("Voicemail PIN must be between 1-4 characters."));
-      }else{
-        if(preg_match("/[^0-9]/",$_POST['goFonVoicePIN'])){
-          print_red(_("The specified Voicemail PIN contains invalid characters, only numeric values are allowed here."));
-        }else{
-          $this->goFonVoicePIN=$_POST['goFonVoicePIN'];
-        }
-      }
-    }
-
-    if(isset($_POST['goFonPINSet'])){
-      if((strlen($_POST['goFonPIN'])!=4)){
-        print_red(_("Phone PIN must be 4 characters long."));
-      }else{
-        if(preg_match("/[^0-9]/",$_POST['goFonVoicePIN'])){
-          print_red(_("The specified phone PIN contains invalid characters, only numeric values are allowed here."));
-        }else{
-          $this->goFonPIN=$_POST['goFonPIN'];
-        }
-      }
     }
 
     /* tell user that the pluging selected is no longer available*/
@@ -799,12 +706,6 @@ class phoneAccount extends plugin
 
     /* Show main page */
 
-    foreach(array("goFonVoicePIN","goFonPIN") as $attrs ){
-      $smarty->assign($attrs,$this->$attrs);
-      $smarty->assign($attrs."ACL",chkacl($this->acl,$attrs));
-    }
-
-
     $display.= $smarty->fetch(get_template_path('generic.tpl', TRUE, dirname(__FILE__)));
     return($display);
   }
@@ -871,6 +772,23 @@ class phoneAccount extends plugin
     /* Reset message array */
     $message= array();
 
+    if((strlen($this->goFonVoicemailPIN)==0)||(strlen($this->goFonVoicemailPIN)>4)){
+      $message[]=(_("Voicemail PIN must be between 1-4 characters."));
+    }else{
+      if(preg_match("/[^0-9]/",$this->goFonVoicemailPIN)){
+        $message[]=(_("The specified oicemail PIN contains invalid characters, only numeric values are allowed here."));
+      }
+    }
+
+
+    if((strlen($this->goFonPIN)!=4)){
+      $message[]=(_("Phone PIN must be 4 characters long."));
+    }else{
+      if(preg_match("/[^0-9]/",$this->goFonPIN)){
+        $message[]=(_("The specified phone PIN contains invalid characters, only numeric values are allowed here."));
+      }
+    }
+
     if(!$this->generate_mysql_entension_entries()){
       $message[] = $this->generate_error;
     }
@@ -924,9 +842,6 @@ class phoneAccount extends plugin
       $this->attrs['goFonMacro']=array();
     }
 
-    /* Cahnged behavior for goFonPIN */
-    $this->attrs['goFonPIN'] = $this->goFonPIN."|".$this->goFonVoicePIN;
-  
     unset($this->attrs['cn']);
 
     /* Write back to ldap */
@@ -993,8 +908,6 @@ class phoneAccount extends plugin
         unset($this->$val);
       }
     }
-
-    $this->attributes[]="goFonPIN";
 
     // Get Configuration for Mysql database Server
     $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
