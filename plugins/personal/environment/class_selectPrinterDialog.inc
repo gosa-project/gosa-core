@@ -85,7 +85,11 @@ class selectPrinterDialog extends plugin
       if($detailed ==true){
         $a_return[$printer['cn'][0]] = $printer;
       }else{
-        $a_return[$printer['cn'][0]] = $printer['cn'][0]." - ".$printer['description'][0]; 
+        if(isset($printer['description'][0])){
+          $a_return[$printer['cn'][0]] = $printer['cn'][0]." - ".$printer['description'][0];  
+        }else{
+          $a_return[$printer['cn'][0]] = $printer['cn'][0];  
+        }
       }
     }
     return($a_return);
