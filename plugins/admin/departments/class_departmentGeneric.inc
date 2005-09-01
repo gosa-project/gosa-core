@@ -70,15 +70,22 @@ class department extends plugin
 	$this->config->make_idepartments();
 	$smarty= get_smarty();
 
-
-	/* Show main page */
-	$smarty->assign("bases", $this->config->idepartments);
+	/* Hide all departments, that are subtrees of this department */
+	$bases 	= $this->config->idepartments;
+	$tmp	= array();	
+	foreach($bases as $dn=>$base){
+		
+		/* Only attach departments which are not a subtree of this one */
+		if(!preg_match("/".$this->dn."/",$dn)){
+			$tmp[$dn]=$base;
+		}
+	}
+	$smarty->assign("bases", $tmp);
 
 	foreach ($this->attributes as $val){
 		$smarty->assign("$val", $this->$val);
 		$smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
 	}
-	$smarty->assign("bases", $this->config->idepartments);
 	$smarty->assign("base_select", $this->base);
 	return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }
