@@ -597,7 +597,7 @@ class phoneAccount extends plugin
         print_red(_("Voicemail PIN must be between 1-4 characters."));
       }else{
         if(preg_match("/[^0-9]/",$_POST['goFonVoicePIN'])){
-          print_red(_("The specified oicemail PIN contains invalid characters, only numeric values are allowed here."));
+          print_red(_("The specified Voicemail PIN contains invalid characters, only numeric values are allowed here."));
         }else{
           $this->goFonVoicePIN=$_POST['goFonVoicePIN'];
         }

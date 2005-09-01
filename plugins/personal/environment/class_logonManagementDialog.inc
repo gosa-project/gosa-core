@@ -94,7 +94,7 @@ class logonManagementDialog extends plugin
   } 
   
   if(preg_match("/[^a-z0-9,\.-;:_\(\)!\? ]/i",$this->LogonDescription)){
-    $message[] = _("Specified des^cription contains invalid characters.");
+    $message[] = _("Specified description contains invalid characters.");
   }
  
   return $message;
