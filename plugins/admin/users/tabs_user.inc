@@ -90,7 +90,7 @@ class usertabs extends tabs
        * If you changed one of the "Name" / "Givenname" attributes to lower or upper case, like "test" to "Test", (in DNMODE=cn)
        *  the old_dn and new dn were different. cn=test ... cn=Test ...
        * The following code decided to move the entry from old_dn to new_dn. (Because they differ)
-       * But the ldap functions are not case sensitive and so the function plugin::move() quits with 
+       * But the ldap attribute cn is not case sensitive and the function plugin::move() quits with 
        *  an error, because source and destination dn are both the same (for ldap, but not for php).
        * This fix allow you to change the givenname or name attributes.
        */
