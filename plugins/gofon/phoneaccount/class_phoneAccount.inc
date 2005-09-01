@@ -300,7 +300,7 @@ class phoneAccount extends plugin
       return false;
     }
 
-    $existence = mysql_fetch_row(mysql_query(  "SELECT * FROM ".$a_SETUP['SIP_TABLE']." WHERE name='".$this->uid."';"));
+    $existence = @mysql_fetch_row(@mysql_query(  "SELECT * FROM ".$a_SETUP['SIP_TABLE']." WHERE name='".$this->uid."';"));
     
     if(!$existence&&((empty($this->goFonPIN))||(empty($this->goFonVoicePIN)))){
       $this->generate_error = _("You are currently creating a new phone account, please specify a value for phone PIN and voice PIN.");  
@@ -313,7 +313,7 @@ class phoneAccount extends plugin
     }
   
     if(isset($existence[15])){
-      $voice = mysql_fetch_row(mysql_query("SELECT password FROM ".$a_SETUP['VOICE_TABLE']." where customer_id='".$existence[15]."'"));
+      $voice = @mysql_fetch_row(@mysql_query("SELECT password FROM ".$a_SETUP['VOICE_TABLE']." where customer_id='".$existence[15]."'"));
       if((empty($this->goFonVoicePIN))&&(empty($voice[0]))){
         $this->generate_error = _("The voice PIN attribute is missing in database entry. Please assign a valid voice PIN.");
         return(false);
@@ -328,7 +328,7 @@ class phoneAccount extends plugin
 
       /* Get old voice passwword if no new isset */
       if($this->goFonPIN==false){
-        $pin = mysql_fetch_row(mysql_query("SELECT secret FROM ".$a_SETUP['SIP_TABLE']." where name='".$this->uid."'"));
+        $pin = @mysql_fetch_row(@mysql_query("SELECT secret FROM ".$a_SETUP['SIP_TABLE']." where name='".$this->uid."'"));
         $this->goFonPIN = $pin[0];
       }
 
@@ -429,13 +429,13 @@ class phoneAccount extends plugin
 
       /* Get old voice passwword if no new isset */
       if($this->goFonVoicePIN==false){
-        $voice = mysql_fetch_row(mysql_query("SELECT password FROM ".$a_SETUP['VOICE_TABLE']." where customer_id=".$this->phoneNumbers[$i_new_key].""));
+        $voice = @mysql_fetch_row(@mysql_query("SELECT password FROM ".$a_SETUP['VOICE_TABLE']." where customer_id=".$this->phoneNumbers[$i_new_key].""));
         $this->goFonVoicePIN = $voice[0];
       }
       
       /* Get old voice passwword if no new isset */
       if($this->goFonPIN==false){
-        $pin = mysql_fetch_row(mysql_query("SELECT secret FROM ".$a_SETUP['SIP_TABLE']." where name='".$this->uid."'"));
+        $pin = @mysql_fetch_row(@mysql_query("SELECT secret FROM ".$a_SETUP['SIP_TABLE']." where name='".$this->uid."'"));
         $this->goFonPIN = $pin[0];
       }
     
@@ -562,7 +562,7 @@ class phoneAccount extends plugin
 
       // Perform queries ...
       foreach($SQL as $query){
-        if(!mysql_query($query,$r_con)){
+        if(!@mysql_query($query,$r_con)){
           print_red(_("Error while performing query ".mysql_error()));
           return false;
         }
@@ -988,13 +988,13 @@ class phoneAccount extends plugin
   {
   
     foreach($this->attributes as $key=>$val){
-
       if(in_array($val,array("uid","cn","mail"))){
         unset($this->attributes[$key]);
         unset($this->$val);
       }
-    
     }
+
+    $this->attributes[]="goFonPIN";
 
     // Get Configuration for Mysql database Server
     $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
@@ -1007,7 +1007,7 @@ class phoneAccount extends plugin
     if(!$r_con){
       $this->generate_error = sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
           $a_SETUP['SERVER'],$a_SETUP['LOGIN']);
-      gosa_log(mysql_error());
+      gosa_log(@mysql_error());
       return false;
     }
 
@@ -1017,7 +1017,7 @@ class phoneAccount extends plugin
     // Test if we have the database selected correctly
     if(!$db){
       $this->generate_error = sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']);
-      gosa_log(mysql_error());
+      gosa_log(@mysql_error());
       return false;
     }
 
@@ -1047,7 +1047,7 @@ class phoneAccount extends plugin
 
 
     foreach($SQL as $query){
-      if(!mysql_query($query,$r_con)){
+      if(!@mysql_query($query,$r_con)){
         print_red(_("Stop".mysql_error()));
         return false;
       }
