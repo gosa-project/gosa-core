@@ -141,7 +141,7 @@ class environment extends plugin
         $tmp = $tmp2 = array();
         $tmp = split("\|",$share);
         $tmp2['name']      =$tmp[0];
-        $tmp2['mountPoint']=$tmp[1];
+        $tmp2['mountPoint']=base64_decode($tmp[1]);
         $this->gotoShares[$tmp[0]]=$tmp2;
       }
     }
@@ -821,7 +821,7 @@ class environment extends plugin
     /* Prepare Shares */
     $this->attrs['gotoShare']=array();
     foreach($this->gotoShares as $name => $share){
-      $this->attrs['gotoShare'][] = $share['name']."|".$share['mountPoint'];
+      $this->attrs['gotoShare'][] = $share['name']."|".base64_encode($share['mountPoint']);
     }
 
     if(!empty($this->gotoKioskProfile)){
