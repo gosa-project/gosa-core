@@ -74,9 +74,9 @@ class department extends plugin
 	$bases 	= $this->config->idepartments;
 	$tmp	= array();	
 	foreach($bases as $dn=>$base){
-		
+		$fixed = str_replace("/","\\",$this->dn);
 		/* Only attach departments which are not a subtree of this one */
-		if(!preg_match("/".$this->dn."/",$dn)){
+		if(!preg_match("/".$fixed."/",$dn)){
 			$tmp[$dn]=$base;
 		}
 	}
@@ -162,7 +162,7 @@ class department extends plugin
 		$message[]= _("The field 'Name' contains the reserved word 'incoming'.".
 				" Please choose another name.");
 	}
-	if (preg_match ('/[,#+:=>\\\\]/', $this->ou)){
+	if (preg_match ('/[,#+:=>\\\\\/]/', $this->ou)){
 		$message[]= _("The field 'Name' contains invalid characters.");
 	}
 	if (!is_phone_nr($this->telephoneNumber)){
