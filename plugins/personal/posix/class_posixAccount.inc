@@ -669,6 +669,7 @@ class posixAccount extends plugin
   /* Save data to LDAP, depending on is_account we save or delete */
   function save()
   {
+	
     /* include global link_info */
     $ldap= $this->config->get_ldap_link();
 
@@ -786,6 +787,10 @@ class posixAccount extends plugin
     if(empty($this->attrs['gosaDefaultPrinter'])){
       $thid->attrs['gosaDefaultPrinter']=array();
     }
+
+	foreach(array("shadowMin","shadowMax","shadowWarning","shadowInactive") as $attr){
+		$this->attrs[$attr] = (int) $this->attrs[$attr];
+	}
 
     /* Save data to LDAP */
     $ldap->cd($this->dn);
