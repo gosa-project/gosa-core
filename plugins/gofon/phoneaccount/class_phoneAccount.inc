@@ -66,25 +66,30 @@ class phoneAccount extends plugin
       }
     }
 
-    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
-    $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
-    if(!$r_con){
-      $this->generate_error = sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
+    $a_SETUP= array();
+    if(array_key_exists('config',$_SESSION) &&
+       array_key_exists('SERVERS',$_SESSION['config']->data) &&
+       array_key_exists('FON',$_SESSION['config']->data['SERVERS'])) {
+      $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
+      $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+      if(!$r_con){
+        $this->generate_error = sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
           $a_SETUP['SERVER'],$a_SETUP['LOGIN']);
-      gosa_log(mysql_error());
-      return false;
-    }
-    $db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
-    if(!$db){
-      $this->generate_error = sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']);
-      gosa_log(mysql_error());
-      return false;
-    }
+        gosa_log(mysql_error());
+        return false;
+      }
+      $db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
+      if(!$db){
+        $this->generate_error = sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']);
+        gosa_log(mysql_error());
+        return false;
+      }
  
-    $first = false; 
-    foreach($this->phoneNumbers as $key => $val){
-      if(!$first){
-        $first = $key;
+      $first = false; 
+      foreach($this->phoneNumbers as $key => $val){
+        if(!$first){
+          $first = $key;
+        }
       }
     }
 
