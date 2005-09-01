@@ -369,7 +369,7 @@ class phoneAccount extends plugin
       $sip_data_array['amaflags']     = NULL;
       $sip_data_array['callgroup']    = NULL;
       $sip_data_array['callerid']     = "";
-      $sip_data_array['canreinvite']  = "yes";
+      $sip_data_array['canreinvite']  = "no";
       $sip_data_array['context']      = "default";
       $sip_data_array['defaultip']    = NULL;
       $sip_data_array['fromuser']     = NULL;

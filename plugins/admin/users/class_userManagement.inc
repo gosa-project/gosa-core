@@ -844,7 +844,7 @@ class userManagement extends plugin
       /* Create each field */
       $field1 = array("string" => sprintf($tpl,$val['dn']),"attach"=>"style='width:20px;align:middle;'");
       $field2 = array("string" => sprintf($editlink,$key,$display).$ip_port,"attach"=>"title='".$val['dn']."'");
-      $field3 = array("string" => $usrimg2."&nbsp;".$posix."&nbsp;".$enviro."&nbsp;".$maila."&nbsp;".$fonac."&nbsp;".$faxac."&nbsp;".$samba."&nbsp;".$s_img_create_from_template, "attach" => "style='width:150px;'");
+      $field3 = array("string" => $usrimg2."&nbsp;".$posix."&nbsp;".$enviro."&nbsp;".$maila."&nbsp;".$fonac."&nbsp;".$faxac."&nbsp;".$samba."&nbsp;".$s_img_create_from_template, "attach" => "style='width:155px;'");
       $field4 = array("string" => preg_replace("/%KEY%/", "$key", $action),"attach" => "style='border:none; text-align:right;width:48px'");
 
       $add = array($field1,$field2,$field3,$field4);
