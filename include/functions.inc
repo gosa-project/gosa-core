@@ -760,12 +760,14 @@ function convert_department_dn2($dn)
      specified in $dn */
   $deps = array_flip($_SESSION['config']->idepartments);
 
-  $dn= $deps[$dn];
-
-  $tmp = split (",", $dn);
-
-//  $dep= preg_replace("%^.*/([^/]+)$%", "\\1", $tmp[0]);
-  $dep = preg_replace("/^.*=/","",$tmp[0]);
+  if(isset($deps[$dn])){
+    $dn= $deps[$dn];
+    $tmp = split (",", $dn);
+    $dep = preg_replace("/^.*=/","",$tmp[0]);
+  }else{
+    $tmp = split (",", $dn);
+    $dep= preg_replace("%^.*/([^/]+)$%", "\\1", $tmp[0]);
+  }
 
   /* Return and remove accidently trailing slashes */
   $tmp = rtrim($dep, "/");
