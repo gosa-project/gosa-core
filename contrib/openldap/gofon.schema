@@ -281,7 +281,7 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.13.46 NAME 'goFonVoicemailPIN'
 objectclass (1.3.6.1.4.1.10098.1.2.3.11 NAME 'goFonAccount' SUP top AUXILIARY
 	DESC 'GOFon Account objectclass (v1.0)'
 	MUST ( goFonDeliveryMode $ telephoneNumber $ uid )
-	MAY ( goFonFormat $ goFonForwarding $ goFonHardware $ goFonPIN $ goFonMacro ))
+	MAY ( goFonFormat $ goFonForwarding $ goFonHardware $ goFonPIN $ goFonVoicemailPIN $ goFonMacro ))
 
 objectclass (1.3.6.1.4.1.10098.1.2.3.12 NAME 'goFonHardware' SUP top STRUCTURAL
 	DESC 'defines a telephone (v1.0)'
