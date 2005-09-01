@@ -43,7 +43,7 @@
 
      <table summary="">
       <tr>
-       <td><LABEL for="st">{t}State{/t}/</LABEL></td>
+       <td><LABEL for="st">{t}State{/t}</LABEL></td>
        <td><input id="st" name="st" size=25 maxlength=60 {$stACL} value="{$st}" title="{t}State where this subtree is located{/t}"></td>
       </tr>
       <tr>

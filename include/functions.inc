@@ -758,11 +758,15 @@ function convert_department_dn2($dn)
 
   /* Build a sub-directory style list of the tree level
      specified in $dn */
+  $deps = array_flip($_SESSION['config']->idepartments);
+
+  $dn= $deps[$dn];
+
   $tmp = split (",", $dn);
 
-  $dep= preg_replace("%^.*/([^/]+)$%", "\\1", $tmp[0]);
-  
-  
+//  $dep= preg_replace("%^.*/([^/]+)$%", "\\1", $tmp[0]);
+  $dep = preg_replace("/^.*=/","",$tmp[0]);
+
   /* Return and remove accidently trailing slashes */
   $tmp = rtrim($dep, "/");
   return $tmp;
