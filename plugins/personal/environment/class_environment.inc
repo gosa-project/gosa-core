@@ -407,7 +407,7 @@ class environment extends plugin
     if(isset($_POST['gotoShareAdd'])){
       /* We assign a share to this user, if we don't know where to mount the share */
       if((!isset($_POST['gotoShareMountPoint']))||(empty($_POST['gotoShareMountPoint']))||(preg_match("/[\|]/i",$_POST['gotoShareMountPoint']))){
-        print_red("You must specify a valid mount point.");
+        print_red(_("You must specify a valid mount point."));
       }else{
         $a_share = $this->gotoAvailableShares[$_POST['gotoShareSelection']];
         $s_mount = $_POST['gotoShareMountPoint'];
@@ -648,7 +648,7 @@ class environment extends plugin
       $contents = $file['contents'];
       $fp = @fopen($path."/".$file['name'],"w");
       if(!$fp){
-        print_red("Can't save new kiosk profiles, possibly permission denied for folder :",$path);
+        print_red(_("Can't save new kiosk profiles, possibly permission denied for folder")." : ",$path);
       }else{
         fwrite($fp,$contents,strlen($contents));
       }
@@ -722,7 +722,7 @@ class environment extends plugin
         unset($attr['dn']);
         $ldap->modify($attr);
         if($ldap->get_error()!="Success"){
-          print_red("Printer saving ".$ldap->get_error());
+          print_red(_("Error while writing printer")." : ".$ldap->get_error());
         }
       }
     }    
@@ -801,7 +801,7 @@ class environment extends plugin
       unset($attrs['dn']);
       $ldap->modify($attrs);
       if($ldap->get_error()!="Success"){
-        print_red("Printer saving ".$ldap->get_error());
+        print_red(_("Error while writing printer settings")." : ".$ldap->get_error());
       }
     }
   
