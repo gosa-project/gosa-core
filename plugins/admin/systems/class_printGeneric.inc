@@ -149,11 +149,12 @@ class printgeneric extends plugin
     }
 
     if($this->is_terminal){
-      if(empty($this->cn))
+      if(empty($this->cn)){
         $display= $this->show_header(_("Add printer extension"),
               _("This workstation has printer extension disabled. You can't enable it while 'cn' is not present in entry. Possibly you are currently creating a new terminal template"),TRUE,TRUE);
         $this->is_account= false;
         return $display;
+       }
 
        if ($this->is_account){
         if($this->type=="station"){
