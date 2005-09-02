@@ -323,9 +323,9 @@ class printgeneric extends plugin
     asort($adminlist);
     if($this->is_terminalBased){
       if($this->is_terminalBased == "Terminal"){
-        $smarty->assign("desc"    ,sprintf(_("This printer belongs to terminal %s. You can't rename this printer."),$this->cn));
+        $smarty->assign("desc"    ,sprintf(_("This printer belongs to terminal %s. You can't rename this printer."),"<b>".$this->cn."</b>"));
       }else{
-        $smarty->assign("desc"    ,sprintf(_("This printer belongs to workstation %s. You can't rename this printer."),$this->cn));
+        $smarty->assign("desc"    ,sprintf(_("This printer belongs to workstation %s. You can't rename this printer."),"<b>".$this->cn."</b>"));
       }
       $smarty->assign("cnACL"    ," disabled ");
     }else{
