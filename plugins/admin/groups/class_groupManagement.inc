@@ -373,7 +373,8 @@ class groupManagement extends plugin
     $mailimg  = "<img src='images/mailto.png'             alt='M'  title='"._("Mail")   ."'>";
     $sambaimg = "<img src='images/select_winstation.png'  alt='S'  title='"._("Samba")  ."'>";
     $applimg  = "<img src='images/select_application.png' alt='A'  title='"._("Application")."'>"; 
-    $phoneimg  = "<img src='images/select_phone.png'      alt='Ph' title='"._("Phone")  ."'>"; 
+    $phoneimg = "<img src='images/select_phone.png'      alt='Ph' title='"._("Phone")  ."'>"; 
+    $envimg   = "<img src='images/network.png'      alt='E' title='"._("Environment")  ."'>"; 
     // Space
     $empty    = "<img src='images/empty.png' style='width:16px;height:16px;' alt=''>";
 
@@ -382,7 +383,7 @@ class groupManagement extends plugin
     $divlist->SetHeader(array(
           array("string" => "&nbsp;"),
           array("string" => _("Groupname")." / "._("Department")),
-          array("string" => _("Properties"), "attach" => "style='width:100px;'"),
+          array("string" => _("Properties"), "attach" => "style='width:116px;'"),
           array("string" => _("Actions")    ,"attach" => "style='border:none'")
           ));
 
@@ -421,6 +422,7 @@ class groupManagement extends plugin
         if(in_array("sambaGroupMapping",    $val['objectClass']))   $samba = $sambaimg;   else $samba   = $empty;
         if(in_array("gosaApplicationGroup", $val['objectClass']))   $appl  = $applimg;    else $appl    = $empty;
         if(in_array("goFonPickupGroup",     $val['objectClass']))   $phone = $phoneimg;   else $phone   = $empty;
+        if(in_array("gotoEnvironment",      $val['objectClass']))   $enviro= $envimg;     else $enviro  = $empty;
       }else{
         $posix=$mail=$samba=$appl=$phone=$empty;
       }
@@ -434,7 +436,7 @@ class groupManagement extends plugin
       }      
       $field1 = array("string" => sprintf($userimg,$val['dn']),"attach"=>"style='width:20px;align:middle;'");
       $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)),"attach"=>$title);
-      $field3 = array("string" => $posix."&nbsp;".$mail."&nbsp;".$samba."&nbsp;".$appl."&nbsp;".$phone);  
+      $field3 = array("string" => $posix."&nbsp;".$enviro."&nbsp;".$mail."&nbsp;".$samba."&nbsp;".$appl."&nbsp;".$phone);  
       $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions),"attach"=>"style='text-align:right;border:none;width:32px;'");
       
       $divlist->AddEntry(array($field1,$field2,$field3,$field4));    
