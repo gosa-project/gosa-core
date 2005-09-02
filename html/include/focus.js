@@ -57,6 +57,17 @@ function changeTripleSelectState(firstTriggerField, secondTriggerField, myField)
   }
 }
 
+<!-- Second field must be non-checked -->
+function changeTripleSelectState_2nd_neg(firstTriggerField, secondTriggerField, myField) {
+  if (
+  	document.getElementById(firstTriggerField).checked == true &&
+	document.getElementById(secondTriggerField).checked == false){
+	  document.getElementById(myField).disabled= false;
+  } else {
+	  document.getElementById(myField).disabled= true;
+  }
+}
+
 document.onkeydown= keyDown; // work together to analyze keystrokes
 if (netscape){
   document.captureEvents(Event.KEYDOWN|Event.KEYUP);

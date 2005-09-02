@@ -472,6 +472,10 @@ class sambaAccount extends plugin
       $smarty->assign("reconnmode", $this->mungedObject->getReConn());
       $smarty->assign("reconnACL", chkacl($this->acl,"reconn"));
 
+      /* Set form elements to disabled/enable state */
+      $smarty->assign("tsloginstate", $this->mungedObject->getTsLogin()?"":"disabled");
+      $smarty->assign("inheritstate", $this->mungedObject->getInheritMode()?"disabled":"");
+      
       /* Set checkboxes to checked or unchecked state */
       $smarty->assign("tslogin", $this->mungedObject->getTsLogin()?"checked":"");
       $smarty->assign("tsloginACL", chkacl($this->acl,"tslogin"));
@@ -762,10 +766,15 @@ class sambaAccount extends plugin
         /* Save checkbox states. */
         $this->mungedObject->setTsLogin(!isset($_POST['tslogin'])
                         && chkacl($this->acl, "tslogin") == "");
-        $this->mungedObject->setBrokenConn($_POST['brokenconn'] == '1'
-                        && chkacl($this->acl, "brokenconn") == "");
-        $this->mungedObject->setReConn($_POST['reconn'] == '1'
-                        && chkacl($this->acl, "reconn") == "");
+        // Need to do some index checking to avoid messages like "index ... not found"
+        if(isset($_POST['brokenconn'])) {
+          $this->mungedObject->setBrokenConn($_POST['brokenconn'] == '1'
+                          && chkacl($this->acl, "brokenconn") == "");
+        }
+        if(isset($_POST['reconn'])) {
+          $this->mungedObject->setReConn($_POST['reconn'] == '1'
+                          && chkacl($this->acl, "reconn") == "");
+        }
         $this->mungedObject->setInheritMode(isset($_POST['inherit'])
                         && chkacl($this->acl, "inherit") == "");
         $this->mungedObject->setCtxMaxConnectionTimeF(!isset($_POST['CtxMaxConnectionTimeF'])
@@ -783,8 +792,10 @@ class sambaAccount extends plugin
                         && chkacl($this->acl, "defaultprinter") == "");
 
         /* Save combo boxes. Takes two values */
-        $this->mungedObject->setShadow((isset($_POST['shadow'])
-                        && chkacl($this->acl, "shadow") == ""), $_POST['shadow']);
+        if(isset($_POST['reconn'])) {
+          $this->mungedObject->setShadow((isset($_POST['shadow'])
+                          && chkacl($this->acl, "shadow") == ""), $_POST['shadow']);
+        }
 
         /* Check for changes */
         if ($this->sambaMungedDial != $this->mungedObject->getMunged()){

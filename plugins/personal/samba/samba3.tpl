@@ -58,14 +58,34 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td style="vertical-align:top;width:50%">
-   <input type=checkbox name="tslogin" value="1" {$tslogin} {$tsloginACL}>
+   <input type=checkbox name="tslogin" id="tslogin" value="1" {$tslogin} {$tsloginACL}
+   	onclick="
+		changeState('CtxWFHomeDir');
+		changeState('CtxWFHomeDirDrive');
+		changeState('CtxWFProfilePath');
+		changeState('inherit');
+		changeTripleSelectState_2nd_neg('tslogin','inherit','CtxInitialProgram');
+		changeTripleSelectState_2nd_neg('tslogin','inherit','CtxWorkDirectory');
+		changeState('CtxMaxConnectionTimeF');
+		changeState('CtxMaxDisconnectionTimeF');
+		changeState('CtxMaxIdleTimeF');
+		changeTripleSelectState('tslogin','CtxMaxConnectionTimeF','CtxMaxConnectionTime');
+		changeTripleSelectState('tslogin','CtxMaxDisconnectionTimeF','CtxMaxDisconnectionTime');
+		changeTripleSelectState('tslogin','CtxMaxIdleTimeF','CtxMaxIdleTime');
+		changeState('connectclientdrives');
+		changeState('connectclientprinters');
+		changeState('defaultprinter');
+		changeState('shadow');
+		changeState('brokenconn');
+		changeState('reconn');
+	">
    <i>{t}Allow login on terminal server{/t}</i>
    <table summary="">
     <tr>
      <td><LABEL for="CtxWFHomeDir">{t}Home directory{/t}</LABEL></td>
      <td>
-      <input id="CtxWFHomeDir" name="CtxWFHomeDir" size=30 maxlength=60 {$CtxWFHomeDirACL} value="{$CtxWFHomeDir}">
-      <select size="1" name="CtxWFHomeDirDrive" {$CtxWFHomeDirDriveACL}>
+      <input id="CtxWFHomeDir" name="CtxWFHomeDir" size=30 maxlength=60 {$CtxWFHomeDirACL} value="{$CtxWFHomeDir}" {$tsloginstate}>
+      <select size="1" id="CtxWFHomeDirDrive" name="CtxWFHomeDirDrive" {$CtxWFHomeDirDriveACL} {$tsloginstate}>
        <option disabled>&nbsp;</option>
        {html_options values=$drives output=$drives selected=$CtxWFHomeDirDrive}
       </select>
@@ -74,7 +94,7 @@
     <tr>
      <td><LABEL for="CtxWFProfilePath">{t}Profile path{/t}</LABEL></td>
      <td>
-      <input id="CtxWFProfilePath" name="CtxWFProfilePath" size=35 maxlength=60 {$CtxWFProfilePathACL} value="{$CtxWFProfilePath}">
+      <input id="CtxWFProfilePath" name="CtxWFProfilePath" size=35 maxlength=60 {$CtxWFProfilePathACL} value="{$CtxWFProfilePath}" {$tsloginstate}>
      </td>
     </tr>
    </table>
@@ -83,19 +103,19 @@
    &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <input type=checkbox name="inherit" value="1" {$inherit} {$inheritACL} onclick="changeState('CtxInitialProgram'); changeState('CtxWorkDirectory')">
+   <input type=checkbox id="inherit" name="inherit" {$inherit} {$inheritACL} onclick="changeState('CtxInitialProgram'); changeState('CtxWorkDirectory')" {$tsloginstate}>
    <i>{t}Inherit client config{/t}</i>
    <table summary="">
     <tr>
      <td><LABEL for="CtxInitialProgram">{t}Initial program{/t}</LABEL></td>
      <td>
-      <input id="CtxInitialProgram" name="CtxInitialProgram" size=35 maxlength=60 {if $CtxInitialProgramACL==""}{$CtxInitialProgramMode}{/if} value="{$CtxInitialProgram}" {$CtxInitialProgramACL}>
+      <input id="CtxInitialProgram" name="CtxInitialProgram" size=35 maxlength=60 {if $CtxInitialProgramACL==""}{$CtxInitialProgramMode}{/if} value="{$CtxInitialProgram}" {$CtxInitialProgramACL} {$tsloginstate} {$inheritstate}>
      </td>
     </tr>
     <tr>
      <td><LABEL for="CtxWorkDirectory">{t}Working directory{/t}</LABEL></td>
      <td>
-      <input id="CtxWorkDirectory" name="CtxWorkDirectory" size=35 maxlength=60 {if $CtxWorkDirectoryACL==""}{$CtxInitialProgramMode}{/if} value="{$CtxWorkDirectory}" {$CtxInitialProgramACL}>
+      <input id="CtxWorkDirectory" name="CtxWorkDirectory" size=35 maxlength=60 {if $CtxWorkDirectoryACL==""}{$CtxInitialProgramMode}{/if} value="{$CtxWorkDirectory}" {$CtxInitialProgramACL} {$tsloginstate} {$inheritstate}>
      </td>
     </tr>
    </table>
@@ -112,29 +132,29 @@
    <table summary="">
     <tr>
      <td>
-      <input id="CtxMaxConnectionTimeF" type=checkbox name="CtxMaxConnectionTimeF" value="1" {$CtxMaxConnectionTimeF} {$CtxMaxConnectionTimeACL} onclick="changeState('CtxMaxConnectionTime')">
+      <input id="CtxMaxConnectionTimeF" type=checkbox name="CtxMaxConnectionTimeF" value="1" {$CtxMaxConnectionTimeF} {$CtxMaxConnectionTimeACL} onclick="changeSubselectState('CtxMaxConnectionTimeF','CtxMaxConnectionTime')" {$tsloginstate}>
       <LABEL for="CtxMaxConnectionTimeF">{t}Connection{/t}</LABEL>
      </td>
      <td>
-      <input name="CtxMaxConnectionTime" id="CtxMaxConnectionTime" size=5 maxlength=5 {if $CtxMaxConnectionTimeACL==""}{$CtxMaxConnectionTimeMode}{/if} value="{$CtxMaxConnectionTime}" {$CtxMaxConnectionTimeACL}>
+      <input name="CtxMaxConnectionTime" id="CtxMaxConnectionTime" size=5 maxlength=5 {if $CtxMaxConnectionTimeACL==""}{$CtxMaxConnectionTimeMode}{/if} value="{$CtxMaxConnectionTime}" {$CtxMaxConnectionTimeACL} {$tsloginstate}>
      </td>
     </tr>
     <tr>
      <td>
-      <input id="CtxMaxDisconnectionTimeF" type=checkbox name="CtxMaxDisconnectionTimeF" value="1" {$CtxMaxDisconnectionTimeF} {$CtxMaxDisconnectionTimeACL} onclick="changeState('CtxMaxDisconnectionTime')">
+      <input id="CtxMaxDisconnectionTimeF" type=checkbox name="CtxMaxDisconnectionTimeF" value="1" {$CtxMaxDisconnectionTimeF} {$CtxMaxDisconnectionTimeACL} onclick="changeState('CtxMaxDisconnectionTime')" {$tsloginstate}>
       <LABEL for="CtxMaxDisconnectionTimeF">{t}Disconnection{/t}</LABEL>
      </td>
      <td>
-      <input name="CtxMaxDisconnectionTime" id="CtxMaxDisconnectionTime" size=5 maxlength=5 {if $CtxMaxDisconnectionTimeACL ==""}{$CtxMaxDisconnectionTimeMode}{/if} value="{$CtxMaxDisconnectionTime}" {$CtxMaxDisconnectionTimeACL}>
+      <input name="CtxMaxDisconnectionTime" id="CtxMaxDisconnectionTime" size=5 maxlength=5 {if $CtxMaxDisconnectionTimeACL ==""}{$CtxMaxDisconnectionTimeMode}{/if} value="{$CtxMaxDisconnectionTime}" {$CtxMaxDisconnectionTimeACL} {$tsloginstate}>
      </td>
     </tr>
     <tr>
      <td>
-      <input id="CtxMaxIdleTimeF" type=checkbox name="CtxMaxIdleTimeF" value="1" {$CtxMaxIdleTimeF} {$CtxMaxIdleTimeACL} onclick="changeState('CtxMaxIdleTime')">
+      <input id="CtxMaxIdleTimeF" type=checkbox name="CtxMaxIdleTimeF" value="1" {$CtxMaxIdleTimeF} {$CtxMaxIdleTimeACL} onclick="changeState('CtxMaxIdleTime')" {$tsloginstate}>
       <LABEL for="CtxMaxIdleTimeF">{t}IDLE{/t}</LABEL>
      </td>
      <td>
-      <input name="CtxMaxIdleTime" id="CtxMaxIdleTime" size=5 maxlength=5 {if $CtxMaxIdleTimeACL==""}{$CtxMaxIdleTimeMode}{/if} value="{$CtxMaxIdleTime}" {$CtxMaxIdleTimeACL}>
+      <input name="CtxMaxIdleTime" id="CtxMaxIdleTime" size=5 maxlength=5 {if $CtxMaxIdleTimeACL==""}{$CtxMaxIdleTimeMode}{/if} value="{$CtxMaxIdleTime}" {$CtxMaxIdleTimeACL} {$tsloginstate}>
      </td>
     </tr>
    </table>
@@ -148,19 +168,19 @@
    <table summary="">
     <tr>
      <td>
-      <input id="connectclientdrives" type=checkbox name="connectclientdrives" value="1" {$connectclientdrives} {$connectclientdrivesACL}>
+      <input id="connectclientdrives" type=checkbox name="connectclientdrives" value="1" {$connectclientdrives} {$connectclientdrivesACL} {$tsloginstate}>
       <LABEL for="connectclientdrives">{t}Connect client drives at logon{/t}</LABEL>
      </td>
     </tr>
     <tr>
      <td>
-      <input id="connectclientprinters" type=checkbox name="connectclientprinters" value="1" {$connectclientprinters} {$connectclientprintersACL}>
+      <input id="connectclientprinters" type=checkbox name="connectclientprinters" value="1" {$connectclientprinters} {$connectclientprintersACL} {$tsloginstate}>
       <LABEL for="connectclientprinters">{t}Connect client printers at logon{/t}</LABEL>
      </td>
     </tr>
     <tr>
      <td>
-      <input id="defaultprinter" type=checkbox name="defaultprinter" value="1" {$defaultprinter} {$defaultprinterACL}>
+      <input id="defaultprinter" type=checkbox name="defaultprinter" value="1" {$defaultprinter} {$defaultprinterACL} {$tsloginstate}>
       <LABEL for="defaultprinter">{t}Default to main client printer{/t}</LABEL>
      </td>
     </tr>
@@ -178,7 +198,7 @@
       <LABEL for="shadow">{t}Shadowing{/t}</LABEL>
      </td>
      <td>
-      <select id="shadow" size="1" name="shadow" {$shadowACL}>
+      <select id="shadow" size="1" name="shadow" {$shadowACL} {$tsloginstate}>
        {html_options options=$shadow selected=$shadowmode}
       </select>
      </td>
@@ -186,7 +206,7 @@
     <tr>
      <td><LABEL for="brokenconn">{t}On broken or timed out{/t}</LABEL></td>
      <td>
-      <select id="brokenconn" size="1" name="brokenconn" {$brokenconnACL}>
+      <select id="brokenconn" size="1" name="brokenconn" {$brokenconnACL} {$tsloginstate}>
        {html_options options=$brokenconn selected=$brokenconnmode}
       </select>
      </td>
@@ -194,7 +214,7 @@
     <tr>
      <td><LABEL for="reconn">{t}Reconnect if disconnected{/t}</LABEL></td>
      <td>
-      <select id="reconn" size="1" name="reconn" {$reconnACL}>
+      <select id="reconn" size="1" name="reconn" {$reconnACL} {$tsloginstate}>
        {html_options options=$reconn selected=$reconnmode}
       </select>
      </td>
