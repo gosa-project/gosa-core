@@ -914,63 +914,66 @@ class phoneAccount extends plugin
       }
     }
 
-    // Get Configuration for Mysql database Server
-    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
-    $s_parameter  ="";
+    if(array_key_exists('config', $_SESSION) &&
+       array_key_exists('SERVERS', $_SESSION['config']->data) &&
+       array_key_exists('FON', $_SESSION['config']->data['SERVERS'])) {
+      // Get Configuration for Mysql database Server
+      $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
+      $s_parameter  ="";
 
-    // Connect to DB server
-    $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+      // Connect to DB server
+      $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
 
-    // Check if we are  connected correctly
-    if(!$r_con){
-      $this->generate_error = sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
-          $a_SETUP['SERVER'],$a_SETUP['LOGIN']);
-      gosa_log(@mysql_error());
-      return false;
-    }
-
-    // Select database for Extensions
-    $db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
-
-    // Test if we have the database selected correctly
-    if(!$db){
-      $this->generate_error = sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']);
-      gosa_log(@mysql_error());
-      return false;
-    }
-
-    $SQL="";
-
-    /* If deletion starts from userslist, cn uid are not set */
-    if((isset($this->parent->by_object['user']->uid))&&(!empty($this->parent->by_object['user']->uid))){
-      $this->uid = $this->parent->by_object['user']->uid;
-    }
-
-    if((isset($this->parent->by_object['user']->cn))&&(!empty($this->parent->by_object['user']->cn))){
-      $this->cn  = $this->parent->by_object['user']->cn;
-    }
-
-    $first_num = false;
-    // Delete old entries
-    foreach($this->a_old_telenums as $s_telenums){
-      if(!$first_num){
-        $first_num = $s_telenums;
-      }
-      $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$s_telenums."';\n";
-    }
-
-    $SQL[] = "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id='".$first_num."';";
-    $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$this->uid."';\n";
-    $SQL[] = "DELETE FROM ".$a_SETUP['SIP_TABLE']." WHERE name='".$this->uid."';\n";
-
-
-    foreach($SQL as $query){
-      if(!@mysql_query($query,$r_con)){
-        print_red(_("Stop".mysql_error()));
+      // Check if we are  connected correctly
+      if(!$r_con){
+        $this->generate_error = sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
+            $a_SETUP['SERVER'],$a_SETUP['LOGIN']);
+        gosa_log(@mysql_error());
         return false;
       }
-    }
 
+      // Select database for Extensions
+      $db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
+
+      // Test if we have the database selected correctly
+      if(!$db){
+        $this->generate_error = sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']);
+        gosa_log(@mysql_error());
+        return false;
+      }
+
+      $SQL="";
+
+      /* If deletion starts from userslist, cn uid are not set */
+      if((isset($this->parent->by_object['user']->uid))&&(!empty($this->parent->by_object['user']->uid))){
+        $this->uid = $this->parent->by_object['user']->uid;
+      }
+
+      if((isset($this->parent->by_object['user']->cn))&&(!empty($this->parent->by_object['user']->cn))){
+        $this->cn  = $this->parent->by_object['user']->cn;
+      }
+
+      $first_num = false;
+      // Delete old entries
+      foreach($this->a_old_telenums as $s_telenums){
+        if(!$first_num){
+          $first_num = $s_telenums;
+        }
+        $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$s_telenums."';\n";
+      }
+
+      $SQL[] = "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id='".$first_num."';";
+      $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$this->uid."';\n";
+      $SQL[] = "DELETE FROM ".$a_SETUP['SIP_TABLE']." WHERE name='".$this->uid."';\n";
+
+
+      foreach($SQL as $query){
+        if(!@mysql_query($query,$r_con)){
+          print_red(_("Stop".mysql_error()));
+          return false;
+        }
+      }
+    }
 
 
     /* unset macro attr, it will cause an error */
