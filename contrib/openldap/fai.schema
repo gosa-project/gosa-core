@@ -48,7 +48,7 @@
 # FAIpartitionDisk     | (inherit from FAIclass)
 # FAIpartitionEntry    | FAIpartitionType, FAIpartitionNr, FAImountOptions,
 #                      | FAIfsOptions, FAIfsType, FAImountPoint
-# FAIpackageList       | FAIinstallFlag, FAIpackage
+# FAIpackageList       | FAIinstallMethod, FAIpackage
 # FAIdebconfInfo       | FAIvariable, FAIvariableContent, FAIvariableType
 # FAIobject            | FAIclass, FAIstatus, macAddress
 #
@@ -107,7 +107,7 @@
 #     |-cn=SRVBASE 
 #     | |-objectClass: FAIpackageList
 #     | |-description: Server base package list
-#     | |-FAIinstallFlag: recommend
+#     | |-FAIinstallMethod: recommend
 #     | |-FAIpackage=adduser
 #     | | |-FAIvariable=adduser/homedir-permission
 #     | | | |-FAIvariableContent: false
@@ -252,11 +252,11 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.5.13 NAME 'FAIvariableType'
 		EQUALITY caseIgnoreIA5Match
 		SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE)
 
-# Name       : FAIinstallFlag
+# Name       : FAIinstallMethod
 # Description: Keeps a per package setting on how packages should be
 #              installed. This is the normal line you'd specify in
 #              our ordinary package lists.
-attributetype ( 1.3.6.1.4.1.10098.1.1.5.14 NAME 'FAIinstallFlag'
+attributetype ( 1.3.6.1.4.1.10098.1.1.5.14 NAME 'FAIinstallMethod'
 		DESC 'Store debian package installation flag'
 		SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE)
 
@@ -299,7 +299,7 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.5.18 NAME 'FAIowner'
 attributetype ( 1.3.6.1.4.1.10098.1.1.5.19 NAME 'FAImode'
 		DESC 'Store template file storage path'
 		EQUALITY caseIgnoreIA5Match
-		SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE)
+		SYNTAX 1.3.6.1.4.1.1466.115.121.1.40 SINGLE-VALUE)
 		
 # Name       : FAIstatus
 # Desrciption: Normally the fai daemon should set the status flag to the
@@ -428,7 +428,7 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.40.12 NAME 'FAIvariableEntry'
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.13 NAME 'FAIpackageList'
 	SUP FAIclass STRUCTURAL
 	DESC 'Stores complete package lists'
-	MUST ( FAIpackage ) MAY ( FAIpackagelistDependency $ FAIinstallFlag ) )
+	MUST ( FAIpackage ) MAY ( FAIpackagelistDependency $ FAIinstallMethod ) )
 
 # Name       : FAItemplate
 # Description: Container for template objects.
