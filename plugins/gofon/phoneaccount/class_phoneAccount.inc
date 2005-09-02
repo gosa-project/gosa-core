@@ -222,7 +222,7 @@ class phoneAccount extends plugin
       $r_con =  @mysql_connect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
       if($r_con){
         $r_db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
-        $vp = mysql_fetch_row(mysql_query("SELECT voicemail_users.password FROM `voicemail_users`,`sip_users` WHERE customer_id = sip_users.mailbox AND name='".$this->uid."'"));
+        $vp = mysql_fetch_row(mysql_query("SELECT ".$a_SETUP['VOICE_TABLE'].".password FROM  ".$a_SETUP['VOICE_TABLE'].", ".$a_SETUP['SIP_TABLE']."  WHERE customer_id = sip_users.mailbox AND name='".$this->uid."'"));
 
         if((isset($vp[0]))&&(!empty($vp[0]))){
           $this->goFonPINVoice = $vp[0];
