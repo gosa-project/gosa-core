@@ -211,6 +211,24 @@ class phoneAccount extends plugin
       $this->is_modified = true;
     }
 
+
+  /* Get voicemail PIN from MySQL DB 
+   * Because every user can change his PIN directly from the phone
+   *  without any update to the ldap
+   * This means, the PIN in the DB is up to date
+   */
+    // Connect to DB server
+    if((isset($a_SETUP))&&(isset($a_SETUP['SERVER']))&&(isset($a_SETUP['LOGIN']))&&(isset($a_SETUP['PASSWORD']))){
+      $r_con =  @mysql_connect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+      if($r_con){
+        $r_db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
+        $vp = mysql_fetch_row(mysql_query("SELECT voicemail_users.password FROM `voicemail_users`,`sip_users` WHERE customer_id = sip_users.mailbox AND name='".$this->uid."'"));
+
+        if((isset($vp[0]))&&(!empty($vp[0]))){
+          $this->goFonPINVoice = $vp[0];
+        }
+      }
+    }
   }
 
 
