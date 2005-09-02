@@ -30,8 +30,10 @@ class printerPPDSelectionDialog extends plugin
      */
     if(isset($ppd)){
       $tmp2 = split("\n",$ppd['ppd']);
-      $this->currentPos = $tmp2[0];
-      $this->currentSel = preg_replace("/^ -/","",$tmp2[1]);
+      if(count($tmp2)==2){
+        $this->currentPos = $tmp2[0];
+        $this->currentSel = preg_replace("/^ -/","",$tmp2[1]);
+      }
     }
   
     /* Order the manufacturers index */
