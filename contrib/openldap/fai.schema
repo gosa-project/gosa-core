@@ -1,4 +1,4 @@
-###############################################################################
+
 #                                                                             #
 #            F A I - Fully automatic installation LDAP schema file            #
 #                                                                             #
@@ -33,9 +33,8 @@
 #
 # Objectclasses        | Attributes
 # -----------------------------------------------------------------------------
-# FAIclass             | cn,description
-# FAIprofile           | (inherit from FAIclass)
-# FAIprofileEntry      | FAIclass, FAIpriority
+# FAIclass             | cn,description,FAIclassType
+# FAIprofile           | FAIclass
 # FAIhook              | (inherit from FAIclass)
 # FAIhookEntry         | FAIscript, FAItask
 # FAIscript            | (inherit from FAIclass)
@@ -44,10 +43,11 @@
 # FAIvariableEntry     | FAIvariableContent
 # FAItemplate          | (inherit from FAIclass)
 # FAItemplateEntry     | FAItemplateFile, FAItemplatePath, FAIowner, FAImode
-# FAIpartition         | (inherit from FAIclass)
+# FAIpartitionTable    | (inherit from FAIclass)
 # FAIpartitionDisk     | (inherit from FAIclass)
 # FAIpartitionEntry    | FAIpartitionType, FAIpartitionNr, FAImountOptions,
-#                      | FAIfsOptions, FAIfsType, FAImountPoint
+#                      | FAIfsOptions, FAIfsType, FAImountPoint,FAIpartitionSize,
+#                      | FAIpartitionFlag
 # FAIpackageList       | FAIinstallMethod, FAIpackage
 # FAIdebconfInfo       | FAIvariable, FAIvariableContent, FAIvariableType
 # FAIobject            | FAIclass, FAIstatus, macAddress
@@ -298,7 +298,6 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.5.18 NAME 'FAIowner'
 #              way like 775.
 attributetype ( 1.3.6.1.4.1.10098.1.1.5.19 NAME 'FAImode'
 		DESC 'Store template file storage path'
-		EQUALITY caseIgnoreIA5Match
 		SYNTAX 1.3.6.1.4.1.1466.115.121.1.40 SINGLE-VALUE)
 		
 # Name       : FAIstatus
@@ -327,6 +326,21 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.5.21 NAME 'FAIpackagelistDependency'
 		EQUALITY caseIgnoreIA5Match
 		SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE)
 
+attributetype ( 1.3.6.1.4.1.10098.1.1.5.22 NAME 'FAIpartitionSize'
+		DESC 'TODO'
+		EQUALITY caseIgnoreIA5Match
+		SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.5.23 NAME 'FAIpartitionFlags'
+		DESC 'TODO'
+		EQUALITY caseIgnoreIA5Match
+		SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.5.24 NAME 'FAIclassType'
+		DESC 'TODO'
+		EQUALITY caseIgnoreIA5Match
+		SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE)
+
 ##
 ## Object class definitions (allocated from the GONICUS oid space)
 ##
@@ -337,7 +351,7 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.5.21 NAME 'FAIpackagelistDependency'
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.1 NAME 'FAIclass'
 	SUP top STRUCTURAL
 	DESC 'Generic class parent for FAI objects'
-	MUST ( cn ) MAY  ( description ) )
+	MUST ( cn ) MAY  ( description $ FAIclassType) )
 
 # Name       : FAIprofile
 # Description: FAIprofile which bundles a set of FAIclass entries
@@ -346,14 +360,8 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.40.1 NAME 'FAIclass'
 #              administrators.
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.2 NAME 'FAIprofile'
 	SUP FAIclass STRUCTURAL
-	DESC 'FAI profile container for multiple class objects' )
-
-# Name       : FAIprofileEntry
-# Description: FAIprofileEntry is one subentry inside a FAIprofile. 
-objectclass (1.3.6.1.4.1.10098.1.2.1.40.3 NAME 'FAIprofileEntry'
-	SUP FAIprofile STRUCTURAL
-	DESC 'One class object stored under FAIprofile'
-	MUST ( FAIclass $ FAIpriority ) )
+	DESC 'FAI profile container for multiple class objects' 
+	MUST ( FAIclass ) )
 
 # Name       : FAIpartition
 # Description: Each installation profile should contain a partition
@@ -378,8 +386,8 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.40.6 NAME 'FAIpartitionEntry'
 	SUP FAIpartitionTable STRUCTURAL
 	DESC 'One partition table entry'
 	MUST ( FAIpartitionType $ FAIpartitionNr $ FAIfsType $
-	       FAImountPoint )
-	MAY  ( FAImountOptions $ FAIfsOptions ) )
+	       FAImountPoint $ FAIpartitionSize )
+	MAY  ( FAImountOptions $ FAIfsOptions $ FAIpartitionFlags ) )
 
 # Name       : FAIhook
 # Description: Container for hooks
@@ -395,19 +403,18 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.40.8 NAME 'FAIhookEntry'
 	DESC 'FAI hook storage'
 	MUST ( FAIscript $ FAItask ) )
 
-# Name       : FAIscript
+# Name       : FAIscriptEntry
 # Description: Container for scripts
-objectclass (1.3.6.1.4.1.10098.1.2.1.40.9 NAME 'FAIscript'
+objectclass (1.3.6.1.4.1.10098.1.2.1.40.9 NAME 'FAIscriptEntry'
 	SUP FAIclass STRUCTURAL
 	DESC 'FAI script storage'
 	MUST ( FAIscript $ FAIpriority ) )
 
-# Name       : FAIscriptEntry
+# Name       : FAIscript
 # Description: Hooks and scripts are somewhat similar.
-objectclass (1.3.6.1.4.1.10098.1.2.1.40.10 NAME 'FAIscriptEntry'
+objectclass (1.3.6.1.4.1.10098.1.2.1.40.10 NAME 'FAIscript'
 	SUP FAIclass STRUCTURAL
-	DESC 'FAI script storage'
-	MUST ( FAIscript $ FAIpriority ) )
+	DESC 'FAI script storage' )
 
 # Name       : FAIvariable
 # Description: Store a set of variables in this container.
@@ -447,9 +454,9 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.40.15 NAME 'FAItemplateEntry'
 # Description: Stores debconf information like shown in
 #              debconf-getselections.
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.16 NAME 'FAIdebconfInfo'
-	SUP FAIclass STRUCTURAL
+	SUP top STRUCTURAL
 	DESC 'Stores debconf informations for single packages'
-	MUST ( FAIvariable $ FAIvariableType ) MAY ( FAIvariableContent ) )
+	MUST ( FAIpackage $ FAIvariable $ FAIvariableType ) MAY ( FAIvariableContent ) )
 
 # Name       : FAIobject
 # Description: Marks objects to have a set of FAI classes.
