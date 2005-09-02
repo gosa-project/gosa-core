@@ -158,6 +158,12 @@ class environment extends plugin
       $this->useProfile = false;
     }
 
+    /* Set to group environment if we editing a group */
+    if(!isset($this->parent)){
+      $this->is_group = true;
+    }
+
+
   }
 
   function execute()
@@ -171,6 +177,7 @@ class environment extends plugin
 
     // 1. Account disabled . Editing from usermenu
     if((!isset($this->parent))&&(!$this->is_account)){
+      print "asdf";
       /* We are currently editing this tab from usermenu, but this account is not enabled */
       $smarty->assign("is_account",$this->is_account);
       /* Load template */
@@ -188,10 +195,10 @@ class environment extends plugin
         $this->uid          = $this->cn;
         $this->attrs['uid'] = $this->cn;
 
-          if (isset($_POST['modify_state'])){
-        $this->is_account= !$this->is_account;
-      }
- 
+        if (isset($_POST['modify_state'])){
+          $this->is_account= !$this->is_account;
+        }
+
         // 3. Account enabled . Editing from adminmenu
         if ($this->is_account){
           $display= $this->show_header(_("Remove environment extension"),
