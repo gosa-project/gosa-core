@@ -133,6 +133,7 @@ class application extends plugin
   function save_object()
   {
 	if (isset($_POST['cn'])){
+	
 		plugin::save_object();
 
 		/* Save application flags */
@@ -244,6 +245,11 @@ class application extends plugin
 	if ($this->cn == ""){
 		$message[]= _("Required field 'Name' is not filled.");
 	}
+
+	if(preg_match("/[^a-z0-9]/",$this->cn))	{
+		$message[]=_("Invalid character in application name. Only a-z 0-9 are allowed.");
+	}
+
 	if ($this->gosaApplicationExecute == ""){
 		$message[]= _("Required field 'Execute' is not filled.");
 	}
