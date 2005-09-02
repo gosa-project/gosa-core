@@ -6,8 +6,13 @@
 			<h2>{t}General{/t}</h2>
 			<table summary="">
 			 <tr>
+			  <td colspan=2>
+			   {$desc}
+			  </td>
+			 </tr>
+			 <tr>
 			  <td><LABEL for="cn" >{t}Printer name{/t}</LABEL>{$must}</td>
-			  <td><input name="cn" id="cn" size=20 maxlength=60 value="{$cn}"></td>
+			  <td><input name="cn" id="cn" size=20 maxlength=60 value="{$cn}" {$cnACL}></td>
 			 </tr>
 			 <tr>
 			  <td><LABEL for="description">{t}Description{/t}</LABEL></td>
@@ -15,7 +20,7 @@
 			 </tr>
 			</table>
 		</td>
-		<td>
+		<td valign="top">
 			<table summary="">
 			 <tr>
 				  <td colspan=2>&nbsp;</td>

@@ -30,7 +30,9 @@ class printgeneric extends plugin
   var $AdminMember      ="";
   var $AdminMembers     =array();
   var $AdminMemberKeys  =array();
-  
+
+  var $is_terminalBased = false; 
+ 
   var $member           =array();
   var $strings          = "";
   var $type             = "";
@@ -121,6 +123,18 @@ class printgeneric extends plugin
         }
       }
     }
+  
+    $ldap->search("(&(cn=".$this->cn.")(|(objectClass=gotoTerminal)(objectClass=gotoWorkstation)))",array("cn","objectClass"));
+    if($attrs = $ldap->fetch()){
+      if(in_array("gotoTerminal",$attrs['objectClass'])){
+        $this->is_terminalBased = "Terminal";
+      }else{
+        $this->is_terminalBased = "Workstation";
+      }
+    }
+
+
+
   }
 
   function execute()
@@ -307,7 +321,16 @@ class printgeneric extends plugin
 
     asort($userlist);
     asort($adminlist);
-
+    if($this->is_terminalBased){
+      if($this->is_terminalBased == "Terminal"){
+        $smarty->assign("desc"    ,sprintf(_("This printer belongs to terminal %s. You can't rename this printer."),$this->cn));
+      }else{
+        $smarty->assign("desc"    ,sprintf(_("This printer belongs to workstation %s. You can't rename this printer."),$this->cn));
+      }
+      $smarty->assign("cnACL"    ," disabled ");
+    }else{
+      $smarty->assign("desc"    ,_(""));
+    }
     $smarty->assign("UserMember"    ,$this->UserMember);
     $smarty->assign("UserMembers"   ,$userlist);
     $smarty->assign("UserMemberKeys",array_flip($userlist));
