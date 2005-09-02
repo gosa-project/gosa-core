@@ -50,6 +50,7 @@ class printgeneric extends plugin
       $ui= get_userinfo();
       $this->base= dn2base($ui->dn);
       $this->cn= "";
+      $this->is_terminal = true;
     } else {
       $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,/", "", $this->dn);
     }
@@ -59,11 +60,11 @@ class printgeneric extends plugin
      * in case of gotoTerminal it is called from a terminal tab
      * else it is a standalone printer
      */
-    if((in_array("gotoWorkstation",$this->attrs['objectClass']))){
+    if((isset($this->attrs['objectClass']))&&(in_array("gotoWorkstation",$this->attrs['objectClass']))){
       $this->is_terminal = "true";   
       $this->dn   = preg_replace("/ou=workstation/","ou=printer",$this->dn);
       $this->type = "station";
-    }elseif((in_array("gotoTerminal",$this->attrs['objectClass']))){
+    }elseif((isset($this->attrs['objectClass']))&&(in_array("gotoTerminal",$this->attrs['objectClass']))){
       $this->type = "terminal";
       $this->is_terminal = "true";
       $this->dn   = preg_replace("/ou=terminal/","ou=printer",$this->dn);
@@ -148,10 +149,16 @@ class printgeneric extends plugin
     }
 
     if($this->is_terminal){
-      if ($this->is_account){
+      if(empty($this->cn))
+        $display= $this->show_header(_("Add printer extension"),
+              _("This workstation has printer extension disabled. You can't enable it while 'cn' is not present in entry. Possibly you are currently creating a new terminal template"),TRUE,TRUE);
+        $this->is_account= false;
+        return $display;
+
+       if ($this->is_account){
         if($this->type=="station"){
           $display= $this->show_header(_("Remove printer extension"),
-              _("This workstation has printer extension enabled. You can disable it by clicking below."));
+              _("This workstation has printer extension enabled.You can disable it by clicking below."));
         }else{
           $display= $this->show_header(_("Remove printer extension"),
               _("This terminal has printer extension enabled. You can disable it by clicking below."));
