@@ -8,24 +8,25 @@ class faiPartitionTable extends plugin
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* attribute list for save action */
-  var $ignore_account= TRUE;
-  var $attributes   = array("cn","description");
-  var $objectclasses= array("top","FAIclass","FAIpartitionTable");
+  var $ignore_account   = TRUE;
+  var $attributes       = array("cn","description");
+  var $objectclasses    = array("top","FAIclass","FAIpartitionTable");
 
-  var $cn           = "";
-  var $description  = "";
-  var $disks   = array();
-  var $is_dialog    = false;
-  var $dialog       = NULL;  
+  /* Specific attributes */
+  var $cn               = "";       // The class name for this object
+  var $description      = "";       // The description for this set of partitions
+  var $disks            = array();  // All defined Disks 
+  var $is_dialog        = false;    // specifies which buttons will be shown to save or abort
+  var $dialog           = NULL;     // a dialog, e.g. new disk dialog
+
   function faiPartitionTable ($config, $dn= NULL)
   {
+    /* Load Attributes */
     plugin::plugin ($config, $dn);
 
-    $this->partitions = array();
-  
     /* If "dn==new" we try to create a new entry
-     * Else we must read all objects from ldap taht belong to this entry
-     * First read disks from ldap ... and then the partition definitions for the disks
+     * Else we must read all objects from ldap which belong to this entry.
+     * First read disks from ldap ... and then the partition definitions for the disks.
      */
     if($dn != "new"){
       $this->dn =$dn;
@@ -62,7 +63,8 @@ class faiPartitionTable extends plugin
               $partition[$key] = $val[0];
             }
           }
-
+          /* Append fetched partitions
+           */
           $this->disks[$name]['partitions'][$partition['FAIpartitionNr']] = $partition; 
         }  
       }
@@ -84,17 +86,25 @@ class faiPartitionTable extends plugin
       $this->is_dialog = true;
     }
 
+    /* Edit disk.
+     * Open dialog which allows us to edit the selected entry 
+     */    
     if((isset($_POST['EditDisk']))&&(isset($_POST['disks']))){
       $this->dialog = new faiPartitionTableEntry($this->config,$this->dn,$this->disks[$_POST['disks']]); 
       $this->is_dialog = true;
     }
 
+    /* Edit aborted, close dialog, without saving anything
+     */
     if(isset($_POST['CancelDisk'])){
       unset($this->dialog);
       $this->dialog = NULL;
       $this->is_dialog=false;
     }
   
+    /* Dialog saved
+     * Save given data from Dialog, if no error is occured
+     */
     if(isset($_POST['SaveDisk'])){
       $this->dialog->save_object();
       if(count($this->dialog->check())){
@@ -110,11 +120,15 @@ class faiPartitionTable extends plugin
       }
     }
 
+    /* Display dialog if one is defined
+     */
     if(isset($this->dialog)){
       $this->dialog->save_object();
       return($this->dialog->execute());
     }
 
+    /* Assign all attributes to smarty engine
+     */
     foreach($this->attributes as $attrs){
       $smarty->assign($attrs,$this->$attrs);
       if($this->$attrs){
@@ -123,13 +137,7 @@ class faiPartitionTable extends plugin
         $smarty->assign($attrs."CHK"," disabled ");
       }
     }
-
-    $disks = array();
-    foreach($this->partitions as $part){  
-      $disks[$part['cn']] = $part['cn']." [".$part['description']."]";
-    }
-
-
+    
     $disks = $this->getDisks();
     $smarty->assign("disks"   ,$disks);
     $smarty->assign("diskKeys",array_flip($disks));
@@ -138,6 +146,9 @@ class faiPartitionTable extends plugin
   }
 
   function getDisks(){
+    /* Return all available disks for this partition table
+     * Return in listBox friendly array
+     */
     $a_return = array();
     foreach($this->disks as $key => $disk){
       $cnt = count( $disk['partitions']);
@@ -150,13 +161,22 @@ class faiPartitionTable extends plugin
     return($a_return);
   }
 
+
+  /* Delete me, and all my subtrees
+   */
   function remove_from_parent()
   {
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd ($this->dn);
+    $ldap->rmdir_recursive($this->dn);
+    $this->handle_post_events("remove");    
+  
     /* This cannot be removed... */
   }
 
 
-  /* Save data to object */
+  /* Save data to object 
+   */
   function save_object()
   {
     plugin::save_object();
@@ -172,6 +192,9 @@ class faiPartitionTable extends plugin
   function check()
   {
     $message= array();
+    if(empty($this->description)){
+      $message[]=_("Please enter a valid description.");
+    }
 
     return ($message);
   }
@@ -181,7 +204,13 @@ class faiPartitionTable extends plugin
   function save()
   {
     plugin::save();
-   
+    /* Save current settings.
+     * 1 : We must save the partition table, with its description and cn 
+     * 2 : Append Disk with cn and  description.
+     * 3 : Save partitions for each disk
+     */  
+
+    /* remove old entry */ 
     $ldap = $this->config->get_ldap_link();
     $ldap->cat($this->dn);
     if($ldap->count()){
@@ -189,12 +218,16 @@ class faiPartitionTable extends plugin
       $ldap->rmdir_recursive($this->dn);
       show_ldap_error($ldap->get_error());
     }
+
+    /* Add partition table to ldap
+     */
     $ldap->cd($this->dn);
     $ldap->create_missing_trees($this->dn);
     $ldap->cd($this->dn);
     $ldap->add($this->attrs);
     show_ldap_error($ldap->get_error());
   
+    /* Append all disks to ldap */
     foreach($this->disks as $cn=>$disk){
       $disk_cn    = "cn=".$cn.",".$this->dn;
       $disk_attrs['cn']           =  $disk['cn'];
@@ -205,8 +238,9 @@ class faiPartitionTable extends plugin
       $ldap->create_missing_trees($disk_cn);
       $ldap->cd($disk_cn);
       $ldap->add($disk_attrs);
-    show_ldap_error($ldap->get_error());
+      show_ldap_error($ldap->get_error());
 
+      /* Add all partitions */
       foreach($disk['partitions'] as $key => $partition){
         $partition_attrs = array();
         foreach($partition as $key => $value){
@@ -229,7 +263,6 @@ class faiPartitionTable extends plugin
     }
     $this->handle_post_events("add");
   }
-
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

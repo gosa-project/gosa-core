@@ -51,10 +51,9 @@ class faiManagement extends plugin
 	 */
 	function faiManagement ($config, $ui)
 	{
-		/* #WT ??? Whats That */
 		$this->ui			= $ui;	
 
-		/* Set current dn to "", wherefore ? */
+		/* Set current dn to "", */
 		$this->dn			= "";
 
 		/* Assign config */
@@ -115,18 +114,91 @@ class faiManagement extends plugin
 			}elseif(preg_match("/^entry_edit_.*/",$key)){
 				$s_entry = preg_replace("/^entry_edit_/","",$key);
 				$s_entry = preg_replace("/_.*$/","",$s_entry);
-			
 				$s_action = "edit";
+			}elseif(preg_match("/^entry_delete_.*/",$key)){
+				$s_entry = preg_replace("/^entry_delete_/","",$key);
+				$s_entry = preg_replace("/_.*$/","",$s_entry);
+				$s_action = "delete";
 			}
-				
+
 		}
 
+		/* Confirm dialog 
+		 * Delte object 
+         */
+		if ($s_action=="delete"){
+
+			/* Get 'dn' from posted termlinst */
+			$this->dn= $this->objects[$s_entry]['dn'];
+
+			/* Load permissions for selected 'dn' and check if
+			   we're allowed to remove this 'dn' */
+			$acl= 		get_permissions ($this->dn, $this->ui->subtreeACL);
+			$this->acl= get_module_permission($acl, "FAIclass", $this->dn);
+			if (chkacl($this->acl, "delete") == ""){
+
+				/* Check locking, save current plugin in 'back_plugin', so the dialog knows where to return. */
+				if (($user= get_lock($this->dn)) != ""){
+					return(gen_locked_message ($user, $this->dn));
+				}
+
+				/* Lock the current entry, so nobody will edit it during deletion */
+				add_lock ($this->dn, $this->ui->dn);
+				$smarty->assign("warning", sprintf(_("You're about to delete all information about the component at '%s'."), $this->dn));
+				return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
+			} else {
+
+				/* Obviously the user isn't allowed to delete. Show message and
+				   clean session. */
+				print_red (_("You are not allowed to delete this component!"));
+			}
+		}
+
+		/* Deltetion was confirmed, so delete this entry
+		 */
+		if (isset($_POST['delete_terminal_confirm'])){
+
+			/* Some nice guy may send this as POST, so we've to check
+			   for the permissions again. */
+			if (chkacl($this->acl, "delete") == ""){
+
+				/* Find out more about the object type */
+				$ldap	= $this->config->get_ldap_link();
+				$ldap->cat($this->dn);
+				$attrs	= $ldap->fetch();
+
+				$type	= $this->get_type($attrs);			
+
+				$this->dialog= new $type[0]($this->config,	$this->config->data['TABS'][$type[2]], $this->dn);
+				$this->dialog->set_acl(array($this->acl));
+
+				$this->dialog->by_object[$type[1]]->remove_from_parent ();
+				unset ($this->dialog);
+				gosa_log ("System object'".$this->dn."' has been removed");
+				$this->dialog= NULL;
+
+				/* Terminal list has changed, reload it. */
+				$this->reload ();
+			} else {
+
+				/* Normally this shouldn't be reached, send some extra
+				   logs to notify the administrator */
+				print_red (_("You are not allowed to delete this component!"));
+				gosa_log ("Warning: '".$this->ui->uid."' tried to trick system ".
+						"deletion.");
+			}
+
+			/* Remove lock file after successfull deletion */
+			del_lock ($this->dn);
+		}
+
+		/* Edit Entry */
 		if($s_action == "edit"){
 			$entry  = $this->objects[$s_entry];
 			switch($entry['type']){
 				case "FAIpartitionTable" : 		
 					$this->dn = $entry['dn'];
-					$this->dialog= new tabsPartition($this->config,
+				$this->dialog= new tabsPartition($this->config,
                         $this->config->data['TABS']['PARTITIONTABS'],$this->dn);
 					$this->is_dialog = true;
 					;break; 
@@ -166,8 +238,6 @@ class faiManagement extends plugin
 		/* remove double asterisks and save new filter */
 		$faifilter['regex'] = preg_replace("/\*\*/","*",$faifilter['regex']);
 		$_SESSION['faifilter']= $faifilter;
-
-		$this->reload();
 
 		/* Edit dialog was canceled 
 		 * Remove dialog an show management dialog
@@ -245,6 +315,7 @@ class faiManagement extends plugin
 
 			"</div>";
 
+		$this->reload();
 
 		/* Create list with objects */
 		$divlist = new divlist("faiManagement"); 
@@ -258,7 +329,8 @@ class faiManagement extends plugin
 					array("string" => _("Obtions"), "attach" => "style='border:none'" )));
 
 
-		$action = "<input type='image' src='images/edit.png' alt='"._("edit")."'     name='entry_edit_%s' title='"._("Edit user")."'>";
+		$action  = "<input type='image' src='images/edit.png' 	alt='"._("edit")."'   name='entry_edit_%KEY%' title='"._("Edit object")."'>";
+		$action .= "<input type='image' src='images/delete.png' alt='"._("delete")."' name='entry_delete_%KEY%' title='"._("Delete object")."'>";
 
 		/* Attach objects */
 		foreach($this->objects as $key => $value){
@@ -331,7 +403,7 @@ class faiManagement extends plugin
 					$field1 = array("string" => $img , "attach" => "style='height:26px;width=20px;'");
 					$field2 = array("string" => $value['cn'].$desc , "attach" => "");
 					$field3 = array("string" => $info, "attach" => "");
-					$field4 = array("string" => sprintf($action,$key) , "attach" => "style='border-right:none;'");
+					$field4 = array("string" => preg_replace("/%KEY%/",$key,$action) , "attach" => "style='border-right:none;'");
 					$divlist->AddEntry(array($field1,$field2,$field3,$field4));
 
 			}
@@ -375,6 +447,8 @@ class faiManagement extends plugin
 
 		/* Array to save objects */
 		$objects = array();
+	
+		$this->objects=array();
 
 		$res= get_list($this->ui->subtreeACL, "(objectClass=organizationalUnit)", 
 				FALSE, $base, array("cn","description","objectClass"),TRUE);
@@ -419,30 +493,16 @@ class faiManagement extends plugin
 		reset ($this->objects);
 	}
 
-	function remove_from_parent()
-	{
-		$ldap= $this->config->get_ldap_link();
-		$ldap->cd ($this->dn);
-		$ldap->recursive_remove();
-
-		/* Optionally execute a command after we're done */
-		$this->postremove();
-
-		/* Delete references to object groups */
-		$ldap->cd ($this->config->current['BASE']);
-		$ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))", array("cn"));
-		while ($ldap->fetch()){
-			$og= new ogroup($this->config, $ldap->getDN());
-			unset($og->member[$this->dn]);
-			$og->save ();
-		}
-
-	}
-
 	function remove_lock()
 	{
 		if (isset($this->dn)){
 			del_lock ($this->dn);
+		}
+	}
+
+	function get_type($array){
+		if(in_array("FAIpartitionTable",$array['objectClass'])){
+			return(array("tabsPartition","faiPartitionTable","PARTITIONTABS"));
 		}
 	}
 
