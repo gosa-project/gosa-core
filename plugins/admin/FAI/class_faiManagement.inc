@@ -18,6 +18,7 @@
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 require "tabsPartition.inc";
+require "tabsScript.inc";
 
 class faiManagement extends plugin
 {
@@ -195,16 +196,13 @@ class faiManagement extends plugin
 		/* Edit Entry */
 		if($s_action == "edit"){
 			$entry  = $this->objects[$s_entry];
-			switch($entry['type']){
-				case "FAIpartitionTable" : 		
-					$this->dn = $entry['dn'];
-				$this->dialog= new tabsPartition($this->config,
-                        $this->config->data['TABS']['PARTITIONTABS'],$this->dn);
-					$this->is_dialog = true;
-					;break; 
-				default :;break;
-			}
-		
+
+			$a_setup = ( $this->get_type($entry));
+
+			$this->dn = $entry['dn'];
+			$this->dialog= new $a_setup[0]($this->config,
+					$this->config->data['TABS'][$a_setup[2]],$this->dn);
+			$this->is_dialog = true;
 		}
 
 
@@ -223,7 +221,7 @@ class faiManagement extends plugin
 				$this->dn = "new" ;
 				$name = $this->dialog->save();
 				$this->dialog = new tabsPartition($this->config,
-						$this->config->data['TABS']['PARTITIONTABS'],$this->dn);
+						$this->config->data['TABS']['FAIPARTITIONTABS'],$this->dn);
 				$this->dialog->by_object['faiPartitionTable']->cn = $name;
 				$this->is_dialog = true;
 			}		
@@ -502,7 +500,10 @@ class faiManagement extends plugin
 
 	function get_type($array){
 		if(in_array("FAIpartitionTable",$array['objectClass'])){
-			return(array("tabsPartition","faiPartitionTable","PARTITIONTABS"));
+			return(array("tabsPartition","faiPartitionTable","FAIPARTITIONTABS"));
+		}
+		if(in_array("FAIscript",$array['objectClass'])){
+			return(array("tabsScript","faiScript","FAISCRIPTTABS"));
 		}
 	}
 
