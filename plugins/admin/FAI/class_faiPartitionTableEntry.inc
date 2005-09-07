@@ -37,6 +37,8 @@ class faiPartitionTableEntry extends plugin
       }
     }
     
+    $this->AvailableDiskNames['disk1']= "disk1";
+    $this->AvailableDiskNames['disk2']= "disk2";
     /* Default status is new */
     $this->status = "new";    
  

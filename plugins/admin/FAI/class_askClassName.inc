@@ -127,7 +127,12 @@ class askClassName extends plugin
 
     if(in_array($this->ClassName,$this->forbidden)){
       $message[]=_("The specified class name is already in use for this object type.");
-    } 
+    }
+
+    if(preg_match("/[^a-z0-9]/i",$this->ClassName)){
+      $message[]=_("Please enter a valid class name. Only 0-9 a-z is allowed here.");
+    }
+ 
     return ($message);
   }
 
