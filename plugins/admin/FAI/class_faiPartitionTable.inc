@@ -37,6 +37,7 @@ class faiPartitionTable extends plugin
       $ldap->cd ($this->dn);
       $ldap->search("(&(objectClass=FAIclass)(objectClass=FAIpartitionDisk))",array("*"));
       while($object = $ldap->fetch()){
+        $this->disks[$object['cn'][0]]['status']      = "edited";
         $this->disks[$object['cn'][0]]['dn']          = $object['dn'];
         $this->disks[$object['cn'][0]]['cn']          = $object['cn'][0];
         if(isset($object['description'][0])){
@@ -65,6 +66,7 @@ class faiPartitionTable extends plugin
           }
           /* Append fetched partitions
            */
+          $partition['status']="edited";
           $this->disks[$name]['partitions'][$partition['FAIpartitionNr']] = $partition; 
         }  
       }
@@ -76,13 +78,17 @@ class faiPartitionTable extends plugin
     /* Fill templating stuff */
     $smarty= get_smarty();
     $display= "";
-  
+ 
     /* Add Disk to this Partitionset
      * This code adds a new HDD to the disks 
      * A new Dialog will be opened 
      */
     if(isset($_POST['AddDisk'])){
-      $this->dialog = new faiPartitionTableEntry($this->config,$this->dn); 
+      $usedDiskNames =array();
+      foreach($this->disks as $key=>$disk){
+        $usedDiskNames[]= $key;
+      }
+      $this->dialog = new faiPartitionTableEntry($this->config,$this->dn,$usedDiskNames); 
       $this->is_dialog = true;
     }
 
@@ -90,7 +96,13 @@ class faiPartitionTable extends plugin
      * Open dialog which allows us to edit the selected entry 
      */    
     if((isset($_POST['EditDisk']))&&(isset($_POST['disks']))){
-      $this->dialog = new faiPartitionTableEntry($this->config,$this->dn,$this->disks[$_POST['disks']]); 
+      $usedDiskNames =array();
+      foreach($this->disks  as $key=>$disk){
+        if($key != $_POST['disks']){
+          $usedDiskNames[]= $key;
+        }
+      }
+      $this->dialog = new faiPartitionTableEntry($this->config,$this->dn,$usedDiskNames,$this->disks[$_POST['disks']]); 
       $this->is_dialog = true;
     }
 
@@ -113,10 +125,49 @@ class faiPartitionTable extends plugin
         }
       }else{
         $disk = $this->dialog->save();
+        if(isset($disk['rename'])){
+          if($this->disks[$disk['rename']['from']]['status']=="edited"){
+            $this->disks[$disk['rename']['from']]['status']="delete";
+          }else{
+            unset($this->disks[$disk['rename']['from']]);
+          }
+  
+          foreach($disk['partitions'] as $key => $val){
+            if($disk['partitions'][$key]['status']!="delete"){
+              $disk['partitions'][$key]['status']= "new";
+            }
+          }
+
+          $disk['status']="new";
+          $disk['cn']= $disk['rename']['to'];
+        }
+      
         $this->disks[$disk['cn']]=$disk; 
         unset($this->dialog);
         $this->dialog = NULL;
         $this->is_dialog=false;
+      }
+    }
+
+    /* Delete selected disk drive from list
+     * Assign delete status for all its partitions      
+     */
+    if((isset($_POST['DelDisk']))&&(!empty($_POST['disks']))){
+      $disk = $_POST['disks'];
+      if($this->disks[$disk]['status']=="edited"){
+        $this->disks[$disk."-delete"]=$this->disks[$disk];
+        unset($this->disks[$disk]);
+        $disk = $disk."-delete";        
+        $this->disks[$disk]['status']="delete";
+        foreach($this->disks[$disk]['partitions'] as $name => $value ){
+          if($value['status']=="edited"){
+            $this->disks[$disk]['partitions'][$name]['status']="delete"; 
+          }else{
+            unset($this->disks[$disk]['partitions'][$name]);
+          }
+        }
+      }else{
+        unset($this->disks[$disk]);
       }
     }
 
@@ -151,11 +202,18 @@ class faiPartitionTable extends plugin
      */
     $a_return = array();
     foreach($this->disks as $key => $disk){
-      $cnt = count( $disk['partitions']);
-      if(!empty($disk['description'])){
-        $a_return[$key]=  $disk['cn']." [".$disk['description']."] - "._("Number of Partitions")." :".$cnt;
-      }else{
-        $a_return[$key]=  $disk['cn']." - "._("Number of Partitions")." :".$cnt;
+      if($disk['status'] != "delete"){
+        $cnt=0;
+        foreach($disk['partitions'] as $val){
+          if($val['status']!="delete"){
+            $cnt ++;
+          }
+        }
+        if(!empty($disk['description'])){
+          $a_return[$key]=  $disk['cn']." [".$disk['description']."] - "._("Number of Partitions")." :".$cnt;
+        }else{
+          $a_return[$key]=  $disk['cn']." - "._("Number of Partitions")." :".$cnt;
+        }
       }
     }
     return($a_return);
@@ -203,6 +261,7 @@ class faiPartitionTable extends plugin
   /* Save to LDAP */
   function save()
   {
+
     plugin::save();
     /* Save current settings.
      * 1 : We must save the partition table, with its description and cn 
@@ -210,36 +269,63 @@ class faiPartitionTable extends plugin
      * 3 : Save partitions for each disk
      */  
 
-    /* remove old entry */ 
     $ldap = $this->config->get_ldap_link();
-    $ldap->cat($this->dn);
-    if($ldap->count()){
-      $ldap->cd ($this->dn);
-      $ldap->rmdir_recursive($this->dn);
+
+    if($this->new){
+      $ldap->cd($this->dn);
+      $ldap->create_missing_trees($this->dn);
+      $ldap->cd($this->dn);
+      $ldap->add($this->attrs);
+      show_ldap_error($ldap->get_error());
+    }else{
+      /* Add partition table to ldap
+       */
+      $ldap->cd($this->dn);
+      $ldap->modify($this->attrs);
       show_ldap_error($ldap->get_error());
     }
-
-    /* Add partition table to ldap
-     */
-    $ldap->cd($this->dn);
-    $ldap->create_missing_trees($this->dn);
-    $ldap->cd($this->dn);
-    $ldap->add($this->attrs);
-    show_ldap_error($ldap->get_error());
   
+  
+    /* Sort entries, because we must delete entries with status="delete" first */
+    $order = array();
+    foreach($this->disks as $key => $disk){
+      if($disk['status'] == "delete"){
+        $order[$key] = $disk;
+      }
+    }
+    foreach($this->disks as $key => $disk){
+      if($disk['status'] != "delete"){
+        $order[$key] = $disk;
+      }
+    }
+
     /* Append all disks to ldap */
-    foreach($this->disks as $cn=>$disk){
-      $disk_cn    = "cn=".$cn.",".$this->dn;
+    foreach($order as $cn=>$disk){
+      $disk_dn                    = "cn=".$disk['cn'].",".$this->dn;
       $disk_attrs['cn']           =  $disk['cn'];
       $disk_attrs['description']  =  $disk['description']; 
-      $disk_attrs['objectClass']=array("top","FAIclass","FAIpartitionDisk");
+      $disk_attrs['objectClass']  =  array("top","FAIclass","FAIpartitionDisk");
+  
+      if($disk['status'] == "delete"){
+        $ldap->cd($disk_dn);
+        $ldap->rmdir_recursive($disk_dn);
+      }elseif($disk['status']== "edited"){
+        $ldap->cd($disk_dn);
+        $ldap->modify($disk_attrs);
+      }elseif($disk['status']== "new"){
+        $ldap->cd($disk_dn);
+        $ldap->create_missing_trees($disk_dn);
+        $ldap->cd($disk_dn);
+        $ldap->add($disk_attrs);
+      }else{
+        print_red("unknown status while saving disks");
+      }
 
-      $ldap->cd($disk_cn);
-      $ldap->create_missing_trees($disk_cn);
-      $ldap->cd($disk_cn);
-      $ldap->add($disk_attrs);
+      //print $disk_dn;
+      //print_a($disk_attrs);
+
       show_ldap_error($ldap->get_error());
-
+      if($disk['status']!="delete")
       /* Add all partitions */
       foreach($disk['partitions'] as $key => $partition){
         $partition_attrs = array();
@@ -251,14 +337,29 @@ class faiPartitionTable extends plugin
           }
         }
 
-        $partition_dn                       = "cn=".$partition_attrs['cn'].",".$disk_cn;      
+        $partition_dn                       = "cn=".$partition_attrs['cn'].",".$disk_dn;      
         $partition_attrs['objectClass']     = array("top","FAIclass","FAIpartitionEntry");
+        
+        unset($partition_attrs['status']);
+        unset($partition_attrs['old_cn']);
+      
+        //print $partition_dn;
+        //print_a($partition);
+        //print_a($partition_attrs);
 
-        $ldap->cd($partition_dn);
-        $ldap->create_missing_trees($partition_dn);
-        $ldap->cd($partition_dn);
-        $ldap->add($partition_attrs);
-        show_ldap_error($ldap->get_error());
+        if(($partition['status'] == "delete")&&($disk['status']!="new")){
+          $ldap->cd($partition_dn);
+          $ldap->rmdir_recursive($partition_dn);
+        }elseif($partition['status'] == "new"){
+          $ldap->cd($partition_dn);
+          $ldap->create_missing_trees($partition_dn);
+          $ldap->cd($partition_dn);
+          $ldap->add($partition_attrs);
+        }elseif($partition['status'] == "edited"){
+          $ldap->cd($partition_dn);
+          $ldap->modify($partition_attrs);
+        } 
+      show_ldap_error($ldap->get_error());
       }
     }
     $this->handle_post_events("add");

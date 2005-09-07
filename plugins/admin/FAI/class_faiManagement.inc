@@ -330,7 +330,7 @@ class faiManagement extends plugin
 
 
 		$action  = "<input type='image' src='images/edit.png' 	alt='"._("edit")."'   name='entry_edit_%KEY%' title='"._("Edit object")."'>";
-		$action .= "<input type='image' src='images/delete.png' alt='"._("delete")."' name='entry_delete_%KEY%' title='"._("Delete object")."'>";
+		$action .= "<input type='image' src='images/editdelete.png' alt='"._("delete")."' name='entry_delete_%KEY%' title='"._("Delete object")."'>";
 
 		/* Attach objects */
 		foreach($this->objects as $key => $value){
