@@ -84,7 +84,7 @@ class printerPPDSelectionDialog extends plugin
     $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
       " <input type='image' align='middle' src='images/list_back.png' title='"._("Reset list")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
       " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-      " <input type='image' align='middle' src='images/list_new_user.png' title='"._("Upload PPD")."' alt='"._("Uppload PPD")."' name='upload'>&nbsp;".
+      " <input type='image' align='middle' src='images/list_new_user.png' title='"._("Upload PPD")."' alt='"._("Upload PPD")."' name='upload'>&nbsp;".
       "</div>";
 
     /* Create new list*/
