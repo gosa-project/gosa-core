@@ -18,6 +18,9 @@
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 require "tabsPartition.inc";
+require "tabsVariable.inc";
+require "tabsHook.inc";
+require "tabsTemplate.inc";
 require "tabsScript.inc";
 
 class faiManagement extends plugin
@@ -198,7 +201,7 @@ class faiManagement extends plugin
 			$entry  = $this->objects[$s_entry];
 
 			$a_setup = ( $this->get_type($entry));
-
+		
 			$this->dn = $entry['dn'];
 			$this->dialog= new $a_setup[0]($this->config,
 					$this->config->data['TABS'][$a_setup[2]],$this->dn);
@@ -504,6 +507,15 @@ class faiManagement extends plugin
 		}
 		if(in_array("FAIscript",$array['objectClass'])){
 			return(array("tabsScript","faiScript","FAISCRIPTTABS"));
+		}
+		if(in_array("FAItemplate",$array['objectClass'])){
+			return(array("tabsTemplate","faiTemplate","FAITEMPLATETABS"));
+		}
+		if(in_array("FAIhook",$array['objectClass'])){
+			return(array("tabsHook","faiHook","FAIHOOKTABS"));
+		}
+		if(in_array("FAIvariable",$array['objectClass'])){
+			return(array("tabsVariable","faiVariable","FAIVARIABLETABS"));
 		}
 	}
 
