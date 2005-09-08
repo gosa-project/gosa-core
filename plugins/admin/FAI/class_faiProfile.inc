@@ -122,8 +122,8 @@ class faiProfile extends plugin
     $divlist->SetEntriesPerPage(10);
 
     $divlist->SetHeader(array(array("string"=>"Class name"),
-                              array("string"=>"Objects"),
-                              array("string"=>"Options")));
+                              array("string"=>"Objects","attach"=>"style='width:120px;'"),
+                              array("string"=>"Options","attach"=>"style='border-right:none;width:60px;'")));
     $listhead = 
     "<div style='background:#F0F0F9;padding:5px;'>".
     "<input type='image' align='middle' src='images/editpaste.png' title='"._("Append new class names")."' alt='"._("Add")."' name='Add_class'>&nbsp;".
