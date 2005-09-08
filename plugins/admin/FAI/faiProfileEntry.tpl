@@ -33,12 +33,18 @@
       {$alphabet}
      </table>
 	 <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
-		<tr><td><input type="checkbox" name="SShowTemplates" 	{$SShowTemplatesCHK}>{t}Show only classes with templates{/t}</td></tr>
-		<tr><td><input type="checkbox" name="SShowScripts" 		{$SShowScriptsCHK}>{t}Show only classes with scripts{/t}</td></tr>
-		<tr><td><input type="checkbox" name="SShowHooks" 		{$SShowHooksCHK}>{t}Show only classes with hooks{/t}</td></tr>
-		<tr><td><input type="checkbox" name="SShowVariables" 	{$SShowVariablesCHK}>{t}Show only classes with variables{/t}</td></tr>
-		<tr><td><input type="checkbox" name="SShowPackages" 	{$SShowPackagesCHK}>{t}Show only classes with packages{/t}</td></tr>
-		<tr><td><input type="checkbox" name="SShowPartitions"	{$SShowPartitionsCHK}>{t}Show only classes with partitions{/t}</td></tr>
+		<tr><td><input onChange='document.mainform.submit()' 
+								type="checkbox" name="SShowTemplates" 	{$SShowTemplatesCHK}>{t}Show only classes with templates{/t}</td></tr>
+		<tr><td><input onChange='document.mainform.submit()'
+								type="checkbox" name="SShowScripts" 		{$SShowScriptsCHK}>{t}Show only classes with scripts{/t}</td></tr>
+		<tr><td><input onChange='document.mainform.submit()'
+								type="checkbox" name="SShowHooks" 		{$SShowHooksCHK}>{t}Show only classes with hooks{/t}</td></tr>
+		<tr><td><input onChange='document.mainform.submit()'
+								type="checkbox" name="SShowVariables" 	{$SShowVariablesCHK}>{t}Show only classes with variables{/t}</td></tr>
+		<tr><td><input onChange='document.mainform.submit()'
+								type="checkbox" name="SShowPackages" 	{$SShowPackagesCHK}>{t}Show only classes with packages{/t}</td></tr>
+		<tr><td><input onChange='document.mainform.submit()'
+								type="checkbox" name="SShowPartitions"	{$SShowPartitionsCHK}>{t}Show only classes with partitions{/t}</td></tr>
 	 </table>
      <table summary=""  style="width:100%;border-top:1px solid #B0B0B0;">
      <tr>

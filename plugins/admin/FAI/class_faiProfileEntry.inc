@@ -68,7 +68,7 @@ class faiProfileEntry extends plugin
     $SUBfaifilter = $_SESSION['SUBfaifilter'];
 
     /* If someone used the apply button, update searchfilter */
-    if(isset($_POST['apply'])){
+    if(isset($_POST['Sregex'])){
       foreach($SUBfaifilter as $key => $val){
         if(!isset($_POST[$key])){
           $SUBfaifilter[$key] = false;
@@ -76,8 +76,12 @@ class faiProfileEntry extends plugin
           $SUBfaifilter[$key] =$_POST[$key];
         }
       }
+      $SUBfaifilter['Sregex']= $_POST['Sregex'];
+      if(!strstr($SUBfaifilter['Sregex'],"*")){
+        $SUBfaifilter['Sregex'] = $SUBfaifilter['Sregex']."*";
+      }
     }
-
+  
     /* Save current searchfilter in session*/
     $_SESSION['SUBfaifilter']= $SUBfaifilter;
 
@@ -134,24 +138,29 @@ class faiProfileEntry extends plugin
     /* Check every single class name to match the current search filter */
     foreach($this->FAIAllclasses as $usedClass => $classes){
 
-      $abort = false;
+      $fi = str_replace("*",".*",$SUBfaifilter['Sregex']);  
+ 
+      $abort = false; 
+      if(!preg_match("/".$fi."/",$usedClass)){
+        $abort = true;
+      }
       if(($SUBfaifilter['SShowScripts'])&&(!in_array('FAIscript',$classes['objects']))){
-        $abort = "true";
+        $abort = true;
       }
       if(($SUBfaifilter['SShowTemplates'])&&(!in_array('FAItemplate',$classes['objects']))){
-        $abort = "true";
+        $abort = true;
       }
       if(($SUBfaifilter['SShowHooks'])&&(!in_array('FAIhook',$classes['objects']))){
-        $abort = "true";
+        $abort = true;
       }
       if(($SUBfaifilter['SShowVariables'])&&(!in_array('FAIvariable',$classes['objects']))){
-        $abort = "true";
+        $abort = true;
       }
       if(($SUBfaifilter['SShowPartitions'])&&(!in_array('FAIpartitionTable',$classes['objects']))){
-        $abort = "true";
+        $abort = true;
       }
       if(($SUBfaifilter['SShowPackages'])&&(!in_array('FAIpackages',$classes['objects']))){
-        $abort = "true";
+        $abort = true;
       }
 
       if(!$abort){
