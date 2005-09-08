@@ -206,7 +206,7 @@ class faiProfile extends plugin
 
     $this->FAIclass = "";
     foreach($this->FAIclasses as $class){
-      $this->FAIclass=$class." ";
+      $this->FAIclass.=$class." ";
     }
 
     $this->attrs['FAIclass']=trim($this->FAIclass);
