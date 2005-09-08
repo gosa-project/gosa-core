@@ -29,7 +29,7 @@
 		   &nbsp;
 	 	</td>
 		<td>
-				<h2><img alt="" src="images/list_ogroup.png" align="middle" title="{t}Objects{/t}">&nbsp;
+				<h2><img alt="" src="images/fai_hook.png" align="middle" title="{t}Objects{/t}">&nbsp;
 					<LABEL for="SubObject">
 						{t}This bundle contains following objects{/t}
 					</LABEL>

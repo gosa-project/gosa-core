@@ -346,49 +346,49 @@ class faiManagement extends plugin
 						if(!$faifilter['ShowPartitions']){ 
 							$abort = true;
 						}
-					$img="<img src='images/server.png' title='Partition table' alt='PT'>";
+					$img="<img src='images/fai_partitionTable.png' title='Partition table' alt='PT'>";
 					$info = _("Partition table");
 					break;
 					case "FAIpackageList"		: 
 						if(!$faifilter['ShowPackages']){ 
 							$abort = true;
 						}
-					$img="<img src='images/zip.png' title='Package list' alt='PL'>";
+					$img="<img src='images/fai_packages.png' title='Package list' alt='PL'>";
 					$info = _("Package list");
 					break;
 					case "FAIscript"			: 
 						if(!$faifilter['ShowScripts']){ 
 							$abort = true;
 						}
-					$img="<img src='images/edit.png' title='Set of scripts' alt='S'>";
+					$img="<img src='images/fai_script' title='Set of scripts' alt='S'>";
 					$info = _("Script set");
 					break;
 					case "FAIvariable"			: 
 						if(!$faifilter['ShowVariables']){ 
 							$abort = true;
 						}
-					$img="<img src='images/log_critical.png' title='Variable set' alt='V'>";
+					$img="<img src='images/fai_variable.png' title='Variable set' alt='V'>";
 					$info = _("Varialbe set");
 					break;
 					case "FAIhook"				:
 						if(!$faifilter['ShowHooks']){ 
 							$abort = true;
 						}
-					$img="<img src='images/rightarrow.png' title='Hooks' alt='H'>";
+					$img="<img src='images/fai_hook.png' title='Hooks' alt='H'>";
 					$info = _("Hook set");
 					break;
 					case "FAIprofile"			: 
 						if(!$faifilter['ShowProfiles']){ 
 							$abort = true;
 						}
-					$img="<img src='images/tree.png' title='Profile' alt='P'>";
+					$img="<img src='images/fai_profile.png' title='Profile' alt='P'>";
 					$info = _("Profile")." (".$value['FAIclass']." )";
 					break;
 					case "FAItemplate"			: 
 						if(!$faifilter['ShowTemplates']){ 
 							$abort = true;
 						}
-					$img="<img src='images/folder.png' title='Template' alt='T'>";
+					$img="<img src='images/fai_template.png' title='Template' alt='T'>";
 					$info = _("Template");
 					break;
 					default 					: 

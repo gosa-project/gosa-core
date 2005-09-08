@@ -26,7 +26,7 @@
            &nbsp;
         </td>
 		<td>
-				<h2><img alt="" src="images/folder.png" align="middle" title="{t}Template attributes{/t}">&nbsp;{t}Template attributes{/t}</h2>
+				<h2><img alt="" src="images/fai_template.png" align="middle" title="{t}Template attributes{/t}">&nbsp;{t}Template attributes{/t}</h2>
 				<table width="100%">
 					<tr>
 						<td>

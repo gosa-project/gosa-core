@@ -26,7 +26,7 @@
            &nbsp;
         </td>
 		<td>
-				<h2><img alt="" src="images/rightarrow.png" align="middle" title="{t}Hook attributes{/t}">&nbsp;{t}Hook attributes{/t}</h2>
+				<h2><img alt="" src="images/fai_hook.png" align="middle" title="{t}Hook attributes{/t}">&nbsp;{t}Hook attributes{/t}</h2>
 				<table width="100%">
 					<tr>
 						<td>

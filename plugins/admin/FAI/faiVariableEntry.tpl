@@ -26,7 +26,7 @@
            &nbsp;
         </td>
 		<td valign="top">
-				<h2><img alt="" src="images/false.png" align="middle" title="{t}Variable attributes{/t}">&nbsp;{t}Variable attributes{/t}</h2>
+				<h2><img alt="" src="images/fai_variable.png" align="middle" title="{t}Variable attributes{/t}">&nbsp;{t}Variable attributes{/t}</h2>
 				<table width="100%">
 					<tr>
 						<td>
