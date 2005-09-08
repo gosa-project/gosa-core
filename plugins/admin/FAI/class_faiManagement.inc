@@ -111,6 +111,14 @@ class faiManagement extends plugin
 		foreach($_POST as $key => $val){
 			if(preg_match("/create_partition/i",$key)){
 				$s_action = "new_partition";
+			}elseif(preg_match("/create_script/i",$key)){
+				$s_action = "new_script";
+			}elseif(preg_match("/create_hook/i",$key)){
+				$s_action = "new_hook";
+			}elseif(preg_match("/create_variable/i",$key)){
+				$s_action = "new_variable";
+			}elseif(preg_match("/create_template/i",$key)){
+				$s_action = "new_template";
 			}elseif(preg_match("/UseNewClass/",$key)){
 				$s_action = "select_class_name_finished";
 			}elseif(preg_match("/UseSelectedClass/",$key)){
@@ -215,6 +223,26 @@ class faiManagement extends plugin
 			$this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIpartitionTable");
 		}
 
+		/* Dialog handling */
+		if($s_action == "new_script"){
+			$this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIscript");
+		}
+
+		/* Dialog handling */
+		if($s_action == "new_hook"){
+			$this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIhook");
+		}
+
+		/* Dialog handling */
+		if($s_action == "new_variable"){
+			$this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIvariable");
+		}
+
+		/* Dialog handling */
+		if($s_action == "new_template"){
+			$this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAItemplate");
+		}
+
 		if($s_action == "select_class_name_finished"){
 			$this->dialog->save_object();
 			if(count($this->dialog->check())!=0){
@@ -223,10 +251,12 @@ class faiManagement extends plugin
 				}		
 			}else{
 				$this->dn = "new" ;
+				$a_setup= $this->get_type(array("objectClass"=>array($this->dialog->objectClass)));
 				$name = $this->dialog->save();
-				$this->dialog = new tabsPartition($this->config,
-						$this->config->data['TABS']['FAIPARTITIONTABS'],$this->dn);
-				$this->dialog->by_object['faiPartitionTable']->cn = $name;
+
+				$this->dialog = new $a_setup[0]($this->config,
+						$this->config->data['TABS'][$a_setup[2]],$this->dn);
+				$this->dialog->by_object[$a_setup[1]]->cn = $name;
 				$this->is_dialog = true;
 			}		
 		}	
@@ -309,11 +339,20 @@ class faiManagement extends plugin
 			" <input type='image' align='middle' src='images/list_back.png' title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
 			" <input type='image' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
 
-			" <input type='image' src='images/select_new_server.png' align='middle' 
-			title='"._("New partition table")."' name='Create_partition' alt='"._("Partition")."'>&nbsp;".
+			" <input type='image' src='images/fai_partitionTable.png' align='middle' 
+			title='"._("New partition table")."' name='Create_partition' alt='"._("P")."'>&nbsp;".
 
-			" <input type='image' src='images/zip.png' align='middle' 
-			title='"._("New packages")."' name='' alt='"._("Partition")."'>&nbsp;".
+			" <input type='image' src='images/fai_script.png' align='middle' 
+			title='"._("New script bundle")."' name='Create_script' alt='"._("S")."'>&nbsp;".
+
+			" <input type='image' src='images/fai_hook.png' align='middle' 
+			title='"._("New hook bundle")."' name='Create_hook' alt='"._("H")."'>&nbsp;".
+
+			" <input type='image' src='images/fai_variable.png' align='middle' 
+			title='"._("New variable bundle")."' name='Create_variable' alt='"._("V")."'>&nbsp;".
+			
+			" <input type='image' src='images/fai_template.png' align='middle' 
+			title='"._("New template bundle")."' name='Create_template' alt='"._("T")."'>&nbsp;".
 
 			"</div>";
 

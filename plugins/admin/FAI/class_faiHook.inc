@@ -202,10 +202,20 @@ class faiHook extends plugin
     plugin::save();
  
     $ldap = $this->config->get_ldap_link();
-  
-    /* Write FAIscript to ldap*/ 
-    $ldap->cd($this->dn);
-    $ldap->modify($this->attrs);
+
+    $ldap->cat($this->dn);
+    if($ldap->count()!=0){     
+      /* Write FAIscript to ldap*/ 
+      $ldap->cd($this->dn);
+      $ldap->modify($this->attrs);
+    }else{
+      /* Write FAIscript to ldap*/ 
+      $ldap->cd($this->dn);
+      $ldap->create_missing_trees($this->dn);
+      $ldap->cd($this->dn);
+      $ldap->add($this->attrs);
+    }
+    show_ldap_error($ldap->get_error()); 
  
     /* Prepare FAIscriptEntry to write it to ldap
      * First sort array.
