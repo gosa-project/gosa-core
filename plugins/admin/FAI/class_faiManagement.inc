@@ -22,6 +22,7 @@ require "tabsVariable.inc";
 require "tabsHook.inc";
 require "tabsTemplate.inc";
 require "tabsScript.inc";
+require "tabsProfile.inc";
 
 class faiManagement extends plugin
 {
@@ -556,6 +557,9 @@ class faiManagement extends plugin
 		}
 		if(in_array("FAIvariable",$array['objectClass'])){
 			return(array("tabsVariable","faiVariable","FAIVARIABLETABS"));
+		}
+		if(in_array("FAIprofile",$array['objectClass'])){
+			return(array("tabsProfile","faiProfile","FAIPROFILETABS"));
 		}
 	}
 
