@@ -73,8 +73,31 @@ class faiHookEntry extends plugin
   function check()
   {
     $message= array();
+    if(empty($this->Object_FAItask)) {
+      $message[]=_("Please enter a value for task.");
+    }
+    if(empty($this->Object_FAIscript)) {
+      $message[]=_("Please enter a value for script.");
+    }
+
+    $str = utf8_encode("üצה");
+
+    if(empty($this->Object_description)){
+      $message[] = _("Please enter a description.");
+    }
+
+    if(preg_match("/[^a-z0-9".$str."\.,;:-_\? ]/i",$this->Object_description)){
+      $message[] = _("Invalid character in description. Please enter a valid description.");
+    }
+
+    if(empty($this->Object_cn)){
+      $message[] = _("Please enter a name.");
+    }
+
+    if(preg_match("/[^0-9a-z]/",$this->Object_cn)){
+      $message[] = _("Please enter a valid name. Only a-Z 0-9 are allowed.");
+    }
   
-    
     return ($message);
   }
  

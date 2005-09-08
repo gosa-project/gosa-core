@@ -71,8 +71,28 @@ class faiVariableEntry extends plugin
   function check()
   {
     $message= array();
-  
     
+    $str = utf8_encode("üצה");
+    if(empty($this->Object_FAIvariableContent)) {
+      $message[]=_("Please specify a value for the attribute 'content'."); 
+    }
+   
+    if(empty($this->Object_description)){
+      $message[] = _("Please enter a description.");
+    }
+
+    if(preg_match("/[^a-z0-9".$str."\.,;:-_\? ]/i",$this->Object_description)){
+      $message[] = _("Invalid character in description. Please enter a valid description.");
+    }
+
+    if(empty($this->Object_cn)){
+      $message[] = _("Please enter a name.");
+    }
+
+    if(preg_match("/[^0-9a-z]/",$this->Object_cn)){
+      $message[] = _("Please enter a valid name. Only a-Z 0-9 are allowed.");
+    }
+ 
     return ($message);
   }
  
