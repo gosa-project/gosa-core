@@ -12,32 +12,42 @@ class faiProfileEntry extends plugin
   var $attributes   = array();
   var $objectclasses= array();
 
+  /* Array with available class names */
   var $FAIAllclasses        = array();
 
   function faiProfileEntry ($config, $dn= NULL,$used=array(),$objects=false)
   {
     plugin::plugin ($config, $dn);
 
+    /* Search only in fai tree */
     $base = $_SESSION['faifilter']['base'];
 
-    $categories = array("FAIscript","FAItemplate","FAIhook","FAIvariable","FAIpartitionTAble","FAIpackage");
+    /* Create array with categories to be able to sort different types of objects */
+    $categories = array("FAIscript","FAItemplate","FAIhook","FAIvariable","FAIpartitionTable","FAIpackage");
 
-    $base = $_SESSION['faifilter']['base'];
+    /* Read out all objects from fai tree */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($base);
-    $ldap->search("(objectClass=*)",array("*"));
+    $ldap->search("(| (objectClass=FAIscript)(objectClass=FAItemplate)(objectClass=FAIhook)(objectClass=FAIvariable)
+                      (objectClass=FAIpartitionTable)(objectClass=FAIpackage))",array("*"));
     while($attrs = $ldap->fetch()){
+      
+      /* Only use objects which have cn set */
       if((isset($attrs['cn'][0]))&&(!in_array($attrs['cn'][0],$used))){
         foreach($categories as $cat){
           if(in_array($cat,$attrs['objectClass'])){
+        
+            /* Append different types of objects */
             $this->FAIAllclasses[$attrs['cn'][0]]['objects'][$cat]=$cat;
+
+            /* Set selected status to false */
             $this->FAIAllclasses[$attrs['cn'][0]]['status']=false;
           }
         }
       }
     }
-
-    if (1==1||!is_global("SUBfaifilter")){
+    /* If no search filter is set, create one */
+    if (is_global("SUBfaifilter")){
       $SUBfaifilter= array("base" => "ou=fai,ou=configs,ou=systems,".$base, "Sregex" => "*");
       $SUBfaifilter['SShowTemplates'] = false;
       $SUBfaifilter['SShowScripts']   = false;
@@ -57,6 +67,7 @@ class faiProfileEntry extends plugin
 
     $SUBfaifilter = $_SESSION['SUBfaifilter'];
 
+    /* If someone used the apply button, update searchfilter */
     if(isset($_POST['apply'])){
       foreach($SUBfaifilter as $key => $val){
         if(!isset($_POST[$key])){
@@ -67,8 +78,10 @@ class faiProfileEntry extends plugin
       }
     }
 
+    /* Save current searchfilter in session*/
     $_SESSION['SUBfaifilter']= $SUBfaifilter;
 
+    /* Check if we used a checkboxe from the list, to select dselect an entry */
     foreach($_POST as $name => $value){
       foreach($this->FAIAllclasses as $class => $obj){
         if(isset($_POST["ON_PAGE_".$class])){
@@ -81,17 +94,20 @@ class faiProfileEntry extends plugin
       }
     }
 
-    $objTypes['FAIhook']            = "<image src='images/fai_hook.png' title='"._("Hook bundle")."' alt=''>";
-    $objTypes['FAItemplate']        = "<image src='images/fai_template.png' title='"._("Hook bundle")."' alt=''>";
-    $objTypes['FAIscript']          = "<image src='images/fai_script.png' title='"._("Hook bundle")."' alt=''>";
-    $objTypes['FAIvariable']        = "<image src='images/fai_variable.png' title='"._("Hook bundle")."' alt=''>";
-    $objTypes['FAIpackages']        = "<image src='images/fai_packages.png' title='"._("Hook bundle")."' alt=''>";
-    $objTypes['FAIpartitionTable']  = "<image src='images/fai_partitionTable.png' title='"._("Hook bundle")."' alt=''>";
+    /* Create different picture for each object type */
+    $objTypes['FAIhook']            = "<image src='images/fai_hook.png' title='"._("Hook bundle")."' alt=''>&nbsp;";
+    $objTypes['FAItemplate']        = "<image src='images/fai_template.png' title='"._("Template bundle")."' alt=''>&nbsp;";
+    $objTypes['FAIscript']          = "<image src='images/fai_script.png' title='"._("Script bundle")."' alt=''>&nbsp;";
+    $objTypes['FAIvariable']        = "<image src='images/fai_variable.png' title='"._("Variable bundle")."' alt=''>&nbsp;";
+    $objTypes['FAIpackages']        = "<image src='images/fai_packages.png' title='"._("Package bundle")."' alt=''>&nbsp;";
+    $objTypes['FAIpartitionTable']  = "<image src='images/fai_partitionTable.png' title='"._("Partition table")."' alt=''>&nbsp;";
 
+    /* assign basic attributes */
     foreach($this->attributes as $attrs){
       $smarty->assign($attrs,stripslashes($this->$attrs));
     }
 
+    /* Assign all filter attributes to smarty */
     foreach($SUBfaifilter as $key => $val){
       if(($key != "base")&&($key != "Sregex")){
         if($val){
@@ -103,19 +119,22 @@ class faiProfileEntry extends plugin
         $smarty->assign($key,$val);
       }
     }
+  
+    /* Create a divlist to display all available class names with the depending object types */
     $divlist = new divlist("ProfileEntry");
     $divlist->SetSummary(_("This list displays all assigned class names for this profile."));
     $divlist->SetEntriesPerPage(20);
     $divlist->SetHeader(array(array("string"=>"Class name"),
                               array("string"=>"Objects")));
 
+    /* Action button allows us to delete an entry */
     $action = "<input type='hidden' name='ON_PAGE_%KEY%' value='1'>
               <input type='checkbox' name='USE_%KEY%' value='%KEY%' onChange='document.mainform.submit();' %CHECK%>";
 
+    /* Check every single class name to match the current search filter */
     foreach($this->FAIAllclasses as $usedClass => $classes){
 
       $abort = false;
-
       if(($SUBfaifilter['SShowScripts'])&&(!in_array('FAIscript',$classes['objects']))){
         $abort = "true";
       }
@@ -141,12 +160,14 @@ class faiProfileEntry extends plugin
           $str.= $objTypes[$obj];
         }
 
+        /* Is this entry selected */ 
         if($classes['status']==true){
           $action_check = preg_replace("/%CHECK%/"," checked ",$action);
         }else{
           $action_check = preg_replace("/%CHECK%/","",$action);
         }      
-
+        
+        /* Append to list */
         $field1 = array("string"=> preg_replace("/%KEY%/",$usedClass,$action_check).$usedClass,"attach"=>"");
         $field2 = array("string"=> $str,"attach"=>"");
         $divlist->AddEntry(array($field1,$field2));
@@ -168,15 +189,6 @@ class faiProfileEntry extends plugin
   /* Save data to object */
   function save_object()
   {
-    if(isset($_POST['SubObjectFormSubmitted'])){
-      foreach($this->attributes as $attrs){
-        if(isset($_POST[$attrs])){
-          $this->$attrs = $_POST[$attrs];
-        }else{
-          $this->$attrs = "";
-        }
-      }
-    }
   }
 
   /* Check supplied data */
