@@ -203,6 +203,7 @@ class faiManagement extends plugin
 			$a_setup = ( $this->get_type($entry));
 		
 			$this->dn = $entry['dn'];
+
 			$this->dialog= new $a_setup[0]($this->config,
 					$this->config->data['TABS'][$a_setup[2]],$this->dn);
 			$this->is_dialog = true;

@@ -236,7 +236,7 @@ class faiTemplate extends plugin
       $tmp['objectClass'] = $this->subClasses;
       
       $sub_dn = "cn=".$obj['cn'].",".$this->dn;
- 
+
       if($obj['status'] == "delete"){
         $ldap->cd($sub_dn);
         $ldap->rmdir_recursive($sub_dn);

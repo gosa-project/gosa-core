@@ -9,15 +9,13 @@ class faiVariableEntry extends plugin
 
   /* attribute list for save action */
   var $ignore_account= TRUE;
-  var $attributes   = array("Object_cn","Object_description","Object_FAIpriority","Object_FAIscript");
+  var $attributes   = array("Object_cn","Object_description","Object_FAIvariableContent");
   var $objectclasses= array();
 
   var $orig_cn              = "";
-
   var $Object_dn            = "";
   var $Object_cn            = "";
-  var $Object_FAIpriority   = "";
-  var $Object_FAIscript     = "";
+  var $Object_FAIvariableContent   = "";
   var $Object_description   = "";
   var $Object_status        = "new";
   
