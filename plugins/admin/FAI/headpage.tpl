@@ -33,13 +33,13 @@
       {$alphabet}
      </table>
 	 <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
-		<tr><td><input type="checkbox" name="ShowProfiles" 		{$ShowProfilesCHK}>{t}Show profiles{/t}</td></tr>
-		<tr><td><input type="checkbox" name="ShowTemplates" 	{$ShowTemplatesCHK}>{t}Show templates{/t}</td></tr>
-		<tr><td><input type="checkbox" name="ShowScripts" 		{$ShowScriptsCHK}>{t}Show scripts{/t}</td></tr>
-		<tr><td><input type="checkbox" name="ShowHooks" 		{$ShowHooksCHK}>{t}Show hooks{/t}</td></tr>
-		<tr><td><input type="checkbox" name="ShowVariables" 	{$ShowVariablesCHK}>{t}Show variables{/t}</td></tr>
-		<tr><td><input type="checkbox" name="ShowPackages" 		{$ShowPackagesCHK}>{t}Show packages{/t}</td></tr>
-		<tr><td><input type="checkbox" name="ShowPartitions"	{$ShowPartitionsCHK}>{t}Show partitions{/t}</td></tr>
+		<tr><td><input onChange='document.mainform.submit();' type="checkbox" name="ShowProfiles" 		{$ShowProfilesCHK}>{t}Show profiles{/t}</td></tr>
+		<tr><td><input onChange='document.mainform.submit();' type="checkbox" name="ShowTemplates" 	{$ShowTemplatesCHK}>{t}Show templates{/t}</td></tr>
+		<tr><td><input onChange='document.mainform.submit();' type="checkbox" name="ShowScripts" 		{$ShowScriptsCHK}>{t}Show scripts{/t}</td></tr>
+		<tr><td><input onChange='document.mainform.submit();' type="checkbox" name="ShowHooks" 		{$ShowHooksCHK}>{t}Show hooks{/t}</td></tr>
+		<tr><td><input onChange='document.mainform.submit();' type="checkbox" name="ShowVariables" 	{$ShowVariablesCHK}>{t}Show variables{/t}</td></tr>
+		<tr><td><input onChange='document.mainform.submit();' type="checkbox" name="ShowPackages" 		{$ShowPackagesCHK}>{t}Show packages{/t}</td></tr>
+		<tr><td><input onChange='document.mainform.submit();' type="checkbox" name="ShowPartitions"	{$ShowPartitionsCHK}>{t}Show partitions{/t}</td></tr>
 	 </table>
      <table summary=""  style="width:100%;border-top:1px solid #B0B0B0;">
      <tr>
