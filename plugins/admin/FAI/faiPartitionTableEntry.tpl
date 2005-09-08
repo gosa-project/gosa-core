@@ -1,32 +1,39 @@
-<h2>{t}FAI partition table entry{/t}
 <input type="hidden" name="TableEntryFrameSubmitted" value="1">
-<br><br>
+<br>
+<h2><img alt="" src="images/house.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
 <table>
 	<tr>
-		<td>{t}Name{/t}
+		<td><LABEL for="DISK_cn">
+			{t}Name{/t}
+			</LABEL>&nbsp;{$must}
 		</td>
 		<td>
-	        <select name="DISK_cn" title="{t}Choose a disc name{/t}" {$DISK_cnACL}>
+			<select name="DISK_cn" title="{t}Choose a disc name{/t}" {$DISK_cnACL} id="DISK_cn">
                 {html_options values=$cns output=$cns selected=$DISK_cn}
-            </select><br>
+            </select>
 		</td>
 	</tr>
 	<tr>
-		<td>{t}Description{/t}
+		<td><LABEL for="DISK_description">
+			{t}Description{/t}
+			</LABEL>&nbsp;{$must}
 		</td>
-		<td><input name="DISK_description" value="{$DISK_description}">
+		<td>
+			<input value="{$DISK_description}" name="DISK_description" id="DISK_description">
 		</td>
 	</tr>
-</table>	
+</table>
 <br>
 <p class="seperator">&nbsp;</p>
 <br>
+<h2><img alt="" src="images/editpaste.png" align="middle" title="{t}Partition entries{/t}">&nbsp;{t}Partition entries{/t}</h2>
 {$setup}
 <br>
 <input type="submit" name="AddPartition" value="{t}Add partition{/t}" >
 <br>	
 <br>
 <p class="seperator">&nbsp;</p>
+<br>
 <div style="align:right;" align="right">
 <input type="submit" name="SaveDisk" value="{t}Save{/t}" >
 <input type="submit" name="CancelDisk" value="{t}cancel{/t}" >
