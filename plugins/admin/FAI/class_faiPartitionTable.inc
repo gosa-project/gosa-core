@@ -11,6 +11,7 @@ class faiPartitionTable extends plugin
   var $ignore_account   = TRUE;
   var $attributes       = array("cn","description");
   var $objectclasses    = array("top","FAIclass","FAIpartitionTable");
+  var $base64_encode    = array("FAImountPoint","FAImountOptions","FAIfsOptions","description");
 
   /* Specific attributes */
   var $cn               = "";       // The class name for this object
@@ -67,6 +68,10 @@ class faiPartitionTable extends plugin
           /* Append fetched partitions
            */
           $partition['status']="edited";
+    
+          foreach($this->base64_encode as $attrs){
+            $partition[$attrs] = base64_decode($partition[$attrs]);
+          }
           $this->disks[$name]['partitions'][$partition['FAIpartitionNr']] = $partition; 
         }  
       }
@@ -249,9 +254,16 @@ class faiPartitionTable extends plugin
   /* Check supplied data */
   function check()
   {
+
     $message= array();
-    if(empty($this->description)){
+
+    $str = utf8_encode("üצה");
+    if((empty($this->description))||(preg_match("/[^a-z0-9".$str."\.,;:-_\? ]/i",$this->description))){
       $message[]=_("Please enter a valid description.");
+    }
+
+    if((empty($this->cn))||(preg_match("/[^a-z0-9]/i",$this->cn))){
+      $message[]=_("Please enter a valid name.");
     }
 
     return ($message);
@@ -321,14 +333,16 @@ class faiPartitionTable extends plugin
         print_red("unknown status while saving disks");
       }
 
-      //print $disk_dn;
-      //print_a($disk_attrs);
-
       show_ldap_error($ldap->get_error());
       if($disk['status']!="delete")
       /* Add all partitions */
       foreach($disk['partitions'] as $key => $partition){
         $partition_attrs = array();
+
+        foreach($this->base64_encode as $attrs){
+          $partition[$attrs] = base64_encode($partition[$attrs]);          
+        }
+
         foreach($partition as $key => $value){
           if(!empty($value)){
             $partition_attrs[$key]=$value;        
@@ -343,10 +357,6 @@ class faiPartitionTable extends plugin
         unset($partition_attrs['status']);
         unset($partition_attrs['old_cn']);
       
-        //print $partition_dn;
-        //print_a($partition);
-        //print_a($partition_attrs);
-
         if(($partition['status'] == "delete")&&($disk['status']!="new")){
           $ldap->cd($partition_dn);
           $ldap->rmdir_recursive($partition_dn);

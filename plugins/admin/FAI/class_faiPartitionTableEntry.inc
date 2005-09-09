@@ -293,10 +293,12 @@ class faiPartitionTableEntry extends plugin
     if(empty($this->DISK_description)){
       $message[] = _("Please enter a description for your disk.");
     }
-    if(preg_match("/[^0-9a-z]/",$this->DISK_description)){
-      $message[] = _("Please enter a valid description for your disk. Only a-Z 0-9 are allowed.");
+
+    $str = utf8_encode("üצה");
+    if(preg_match("/[^a-z0-9".$str."\.,;:-_\? ]/i",$this->DISK_description)){
+      $message[]=_("Please enter a valid description.");
     }
-  
+    
     /* check every partition.
      * if there is an invalid value defined, append an errorstr to message
      */
