@@ -43,9 +43,13 @@ class faiProfile extends plugin
         $this->FAIclasses[trim($class)] = trim($class);
       }
     }
-    
+    natcasesort($this->FAIclasses);
+    reset($this->FAIclasses) ;
+ 
     $categories = array("FAIscript","FAItemplate","FAIhook","FAIvariable","FAIpartitionTAble","FAIpackage");
-
+  
+    $sort = array();
+    
     $base = $_SESSION['faifilter']['base'];
     $ldap->cd($base);
     $ldap->search("(objectClass=*)",array("*"));
@@ -53,10 +57,17 @@ class faiProfile extends plugin
       foreach($categories as $cat){
         if(in_array($cat,$attrs['objectClass'])){
           $this->FAIAllclasses[$attrs['cn'][0]][$cat]=$attrs;
+          $sort[strtolower($attrs['cn'][0])] = $attrs['cn'][0];
         }
       }
     } 
-   
+    ksort($sort);
+    foreach($sort as $name){
+      $tmp[$name] =$this->FAIAllclasses[$name];
+    }
+    $this->FAIAllclasses = array();
+    $this->FAIAllclasses = $tmp;
+
     if($dn != "new"){
       $this->dn =$dn;
     }

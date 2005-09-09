@@ -42,10 +42,21 @@ class faiProfileEntry extends plugin
 
             /* Set selected status to false */
             $this->FAIAllclasses[$attrs['cn'][0]]['status']=false;
+
+            $sort[strtolower($attrs['cn'][0])] = $attrs['cn'][0];
           }
         }
       }
     }
+
+    ksort($sort);
+    foreach($sort as $name){
+      $tmp[$name] =$this->FAIAllclasses[$name];
+    }
+    $this->FAIAllclasses = array();
+    $this->FAIAllclasses = $tmp;
+
+
     /* If no search filter is set, create one */
     if (!is_global("SUBfaifilter")){
       $SUBfaifilter= array("base" => "ou=fai,ou=configs,ou=systems,".$base, "Sregex" => "*");
