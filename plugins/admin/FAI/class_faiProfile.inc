@@ -145,11 +145,11 @@ class faiProfile extends plugin
     "</div>";
 
     $objTypes['FAIhook']            = "<image src='images/fai_hook.png' title='"._("Hook bundle")."' alt=''>";
-    $objTypes['FAItemplate']        = "<image src='images/fai_template.png' title='"._("Hook bundle")."' alt=''>";
-    $objTypes['FAIscript']          = "<image src='images/fai_script.png' title='"._("Hook bundle")."' alt=''>";
-    $objTypes['FAIvariable']        = "<image src='images/fai_variable.png' title='"._("Hook bundle")."' alt=''>";
-    $objTypes['FAIpackages']        = "<image src='images/fai_packages.png' title='"._("Hook bundle")."' alt=''>";
-    $objTypes['FAIpartitionTable']  = "<image src='images/fai_partitionTable.png' title='"._("Hook bundle")."' alt=''>";
+    $objTypes['FAItemplate']        = "<image src='images/fai_template.png' title='"._("Template bundle")."' alt=''>";
+    $objTypes['FAIscript']          = "<image src='images/fai_script.png' title='"._("Script bundle")."' alt=''>";
+    $objTypes['FAIvariable']        = "<image src='images/fai_variable.png' title='"._("Variable bundle")."' alt=''>";
+    $objTypes['FAIpackages']        = "<image src='images/fai_packages.png' title='"._("Packages bundle")."' alt=''>";
+    $objTypes['FAIpartitionTable']  = "<image src='images/fai_partitionTable.png' title='"._("Partition table")."' alt=''>";
 
     $actions = "<input type='image' src='images/editdelete.png' title='"._("Remove class from profile")."' name='DEL_%KEY%'>"; 
 
