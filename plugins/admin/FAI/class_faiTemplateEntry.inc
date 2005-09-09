@@ -9,7 +9,7 @@ class faiTemplateEntry extends plugin
 
   /* attribute list for save action */
   var $ignore_account= TRUE;
-  var $attributes   = array("Object_cn","Object_description","Object_FAItemplateFile","Object_FAItemplatePath","Object_FAIowner","Object_FAImode");
+  var $attributes   = array("Object_cn","Object_description","Object_FAItemplateFile","Object_FAItemplatePath");
   var $objectclasses= array();
 
   var $orig_cn              = "";
@@ -18,8 +18,6 @@ class faiTemplateEntry extends plugin
   var $Object_cn            = "";
   var $Object_FAItemplateFile   = "";
   var $Object_FAItemplatePath   = "";
-  var $Object_FAIowner     = "";
-  var $Object_FAImode    = "";
   var $Object_description   = "";
   var $Object_status        = "new";
   
@@ -97,7 +95,7 @@ class faiTemplateEntry extends plugin
       $message[] = _("Please enter a name.");
     }
 
-    if(preg_match("/[^0-9a-z]/",$this->Object_cn)){
+    if(preg_match("/[^0-9a-z]/i",$this->Object_cn)){
       $message[] = _("Please enter a valid name. Only a-Z 0-9 are allowed.");
     }
     return ($message);
@@ -118,6 +116,7 @@ class faiTemplateEntry extends plugin
   
     $tmp['dn']      = $this->dn;  
     $tmp['status']  = $this->Object_status;  
+
     return($tmp);
   }
 }

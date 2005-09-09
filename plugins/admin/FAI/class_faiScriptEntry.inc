@@ -92,7 +92,7 @@ class faiScriptEntry extends plugin
       $message[] = _("Please enter a name.");
     }
 
-    if(preg_match("/[^0-9a-z]/",$this->Object_cn)){
+    if(preg_match("/[^0-9a-z]/i",$this->Object_cn)){
       $message[] = _("Please enter a valid name. Only a-Z 0-9 are allowed.");
     }
  
@@ -113,7 +113,7 @@ class faiScriptEntry extends plugin
     }
   
     $tmp['dn']      = $this->dn;  
-    $tmp['status']  = $this->Object_status;  
+    $tmp['status']  = $this->Object_status; 
     return($tmp);
   }
 }

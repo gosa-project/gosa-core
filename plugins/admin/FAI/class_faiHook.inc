@@ -25,6 +25,7 @@ class faiHook extends plugin
 
   /* Attributes to initialise for each subObject */
   var $subAttributes    = array("cn","description","FAItask","FAIscript"); 
+  var $sub64coded       = array("FAItask","FAIscript");
 
   /* Specific attributes */
   var $cn               = "";       // The class name for this object
@@ -64,6 +65,11 @@ class faiHook extends plugin
       
         $this->SubObjects[$object['cn'][0]]['status']      = "edited";
         $this->SubObjects[$object['cn'][0]]['dn']          = $object['dn'];
+
+        foreach($this->sub64coded as $codeIt){
+          $this->SubObjects[$object['cn'][0]][$codeIt]=base64_decode($this->SubObjects[$object['cn'][0]][$codeIt]);
+        }
+
       }
     }
   }
@@ -235,6 +241,11 @@ class faiHook extends plugin
     }
 
     foreach($Objects as $name => $obj){
+
+      foreach($this->sub64coded as $codeIt){
+        $obj[$codeIt]=base64_encode($obj[$codeIt]);
+      }
+
       $tmp = array();
       foreach($this->subAttributes as $attrs){
         if(empty($obj[$attrs])){
@@ -242,7 +253,7 @@ class faiHook extends plugin
         }
         $tmp[$attrs] = $obj[$attrs];
       }    
-        
+
       $tmp['objectClass'] = $this->subClasses;
       
       $sub_dn = "cn=".$obj['cn'].",".$this->dn;

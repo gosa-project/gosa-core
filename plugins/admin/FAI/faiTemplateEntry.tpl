@@ -48,26 +48,6 @@
 							<input type="text" name="Object_FAItemplateFile" value="{$Object_FAItemplateFile}" id="Object_FAItemplateFile">
 						</td>
 					</tr>
-					<tr>
-						<td>
-							<LABEL for="Object_FAItemplateEntry">
-							{t}Owner{/t}
-							</LABEL>
-						</td>
-						<td>
-							<input type="text" name="Object_FAItemplateEntry" value="{$Object_FAIowner}" id="Object_FAIowner">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<LABEL for="Object_FAImode">
-							{t}Mode{/t}
-							</LABEL>
-						</td>
-						<td>
-							<input type="text" name="Object_FAItemplateEntry" value="{$Object_FAImode}" id="Object_FAImode">
-						</td>
-					</tr>
 				</table>
 		</td>
 	</tr>

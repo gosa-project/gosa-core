@@ -8,7 +8,7 @@
 	   If you use this class name in a profile, all object with this class name will be included to this profile.{/t}
 	<br>
 	<br>
-	{t}The list box below shows all available class names you can use, for this object, to avoid duplicates.{/t}
+	{t}The list box below shows all available class names you may use, for this object, to avoid duplicates.{/t}
 <br>
 <br>
 <table >

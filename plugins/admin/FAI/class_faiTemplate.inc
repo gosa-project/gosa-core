@@ -24,7 +24,8 @@ class faiTemplate extends plugin
   var $subClassName     = "faiTemplateEntry";      
 
   /* Attributes to initialise for each subObject */
-  var $subAttributes    = array("cn","description","FAItemplateFile","FAItemplatePath","FAIowner"); 
+  var $subAttributes    = array("cn","description","FAItemplateFile","FAItemplatePath"); 
+  var $sub64coded       = array("FAItemplateFile","FAItemplatePath");
 
   /* Specific attributes */
   var $cn               = "";       // The class name for this object
@@ -61,7 +62,11 @@ class faiTemplate extends plugin
             $this->SubObjects[$object['cn'][0]][$attrs]=$object[$attrs][0];
           }
         }
-      
+
+        foreach($this->sub64coded as $codeIt){
+          $this->SubObjects[$object['cn'][0]][$codeIt]=base64_decode($this->SubObjects[$object['cn'][0]][$codeIt]);
+        }       
+ 
         $this->SubObjects[$object['cn'][0]]['status']      = "edited";
         $this->SubObjects[$object['cn'][0]]['dn']          = $object['dn'];
       }
@@ -235,6 +240,9 @@ class faiTemplate extends plugin
     }
 
     foreach($Objects as $name => $obj){
+      foreach($this->sub64coded as $codeIt){
+        $obj[$codeIt]=base64_encode($obj[$codeIt]);
+      }
       $tmp = array();
       foreach($this->subAttributes as $attrs){
         if(empty($obj[$attrs])){
@@ -244,7 +252,7 @@ class faiTemplate extends plugin
       }    
         
       $tmp['objectClass'] = $this->subClasses;
-      
+
       $sub_dn = "cn=".$obj['cn'].",".$this->dn;
 
       if($obj['status'] == "delete"){

@@ -21,7 +21,7 @@
    </div>
    <div class="contentboxb">
    <p class="contentboxb">
-     {t}This menu allows you to create, delete and edit selected FAI obejcts. Having a large size of objects, you might prefer the range selectors on top of this list.{/t}
+     {t}This menu allows you to create, delete and edit selected FAI objects.{/t}
    </p>
    </div>
    <br>
