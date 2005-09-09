@@ -120,6 +120,8 @@ class faiManagement extends plugin
 				$s_action = "new_variable";
 			}elseif(preg_match("/create_template/i",$key)){
 				$s_action = "new_template";
+			}elseif(preg_match("/create_profile/i",$key)){
+				$s_action = "new_profile";
 			}elseif(preg_match("/UseNewClass/",$key)){
 				$s_action = "select_class_name_finished";
 			}elseif(preg_match("/UseSelectedClass/",$key)){
@@ -244,6 +246,17 @@ class faiManagement extends plugin
 			$this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAItemplate");
 		}
 
+		/* New Profile */
+		if($s_action == "new_profile"){
+			$this->dn = "new" ;
+			$a_setup= $this->get_type(array("objectClass"=>array("FAIprofile")));
+
+			$this->dialog = new $a_setup[0]($this->config,
+					$this->config->data['TABS'][$a_setup[2]],$this->dn);
+			$this->is_dialog = true;
+
+		}
+
 		if($s_action == "select_class_name_finished"){
 			$this->dialog->save_object();
 			if(count($this->dialog->check())!=0){
@@ -337,11 +350,9 @@ class faiManagement extends plugin
 		 */
 		$faihead = 
 			"<div style='background:#F0F0F9;padding:5px;'>".
-			" <input type='image' align='middle' src='images/list_back.png' title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
-			" <input type='image' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
 
 			" <input type='image' src='images/fai_partitionTable.png' align='middle' 
-			title='"._("New partition table")."' name='Create_partition' alt='"._("P")."'>&nbsp;".
+			title='"._("New partition table")."' name='Create_partition' alt='"._("PT")."'>&nbsp;".
 
 			" <input type='image' src='images/fai_script.png' align='middle' 
 			title='"._("New script bundle")."' name='Create_script' alt='"._("S")."'>&nbsp;".
@@ -355,6 +366,9 @@ class faiManagement extends plugin
 			" <input type='image' src='images/fai_template.png' align='middle' 
 			title='"._("New template bundle")."' name='Create_template' alt='"._("T")."'>&nbsp;".
 
+			" <input type='image' src='images/fai_profile.png' align='middle' 
+			title='"._("New profile bundle")."' name='Create_profile' alt='"._("P")."'>&nbsp;".
+			
 			"</div>";
 
 		$this->reload();
@@ -527,11 +541,12 @@ class faiManagement extends plugin
 				}elseif(in_array("FAItemplate",$obj['objectClass'])){
 					$type = "FAItemplate";
 				}
-				$this->objects[$obj['cn'].$type] = $obj;
-				$this->objects[$obj['cn'].$type]['type']=$type;
+				$this->objects[strtolower($obj['cn']).$obj['cn'].$type] = $obj;
+				$this->objects[strtolower($obj['cn']).$obj['cn'].$type]['type']=$type;
  
 			}
 		}
+		ksort($this->objects);
 		reset ($this->objects);
 	}
 

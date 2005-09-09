@@ -3,11 +3,11 @@
 	<tr>
 		<td>
 			<LABEL for="cn">
-			{t}Name{/t}
+			{t}Name{/t}{$must}
 			</LABEL>
 		</td>
 		<td>
-			<input value="{$cn}" disabled id="cn">
+			<input value="{$cn}" id="cn" name="cn">
 		</td>
 	</tr>
 	<tr>

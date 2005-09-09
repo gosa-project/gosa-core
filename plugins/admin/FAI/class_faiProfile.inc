@@ -21,6 +21,7 @@ class faiProfile extends plugin
   var $subClasses       = array("top","FAIclass","FAIscriptEntry");
 
   /* Specific attributes */
+  var $old_cn           = "";
   var $cn               = "";       // The class name for this object
   var $description      = "";       // The description for this set of partitions
   var $is_dialog        = false;    // specifies which buttons will be shown to save or abort
@@ -36,9 +37,11 @@ class faiProfile extends plugin
     $ldap=$this->config->get_ldap_link();
 
     $tmp = split(" ",$this->FAIclass);
-
+    
     foreach($tmp as $class){
-      $this->FAIclasses[trim($class)] = trim($class);
+      if(!empty($class)){
+        $this->FAIclasses[trim($class)] = trim($class);
+      }
     }
     
     $categories = array("FAIscript","FAItemplate","FAIhook","FAIvariable","FAIpartitionTAble","FAIpackage");
@@ -57,6 +60,7 @@ class faiProfile extends plugin
     if($dn != "new"){
       $this->dn =$dn;
     }
+    $this->old_cn   = $this->cn;
   }
 
   function execute()
@@ -190,9 +194,30 @@ class faiProfile extends plugin
   {
     $message= array();
     $str = utf8_encode("üצה");
-    if((empty($this->description))||(preg_match("/[^a-z0-9".$str."\.,;:-_\? ]/i",$this->description))){
+    if((empty($this->description))){
+      $message[] =_("Please specify a description for this profile.");
+    }
+
+    if((preg_match("/[^a-z0-9".$str."\.,;:-_\? ]/i",$this->description))){
       $message[]=_("Please enter a valid description.");
     }
+    
+    if((empty($this->cn))||(preg_match("/[^a-z0-9]/i",$this->cn))){
+      $message[]=_("Please enter a valid name. Only 0-9 a-Z are allowed here.");
+    }
+
+    if(count($this->FAIclasses) == 0){
+      $message[]=_("Please assign at least one class to this  profile.");
+    }
+ 
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($_SESSION['faifilter']['base']);
+    $ldap->search("(&(objectClass=FAIprofile)(cn=".$this->cn.")(!cn=".$this->old_cn."))",array("*"));
+ 
+    if($ldap->count()){
+      $message[]=_("There is already a profile with this class name defined.");
+    }
+
     return ($message);
   }
 
@@ -210,7 +235,7 @@ class faiProfile extends plugin
     }
 
     $this->attrs['FAIclass']=trim($this->FAIclass);
-  
+
     $ldap->cat($this->dn);
     if($ldap->count()!=0){
       /* Write FAIscript to ldap*/

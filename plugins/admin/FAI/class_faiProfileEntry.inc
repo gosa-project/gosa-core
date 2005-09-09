@@ -47,7 +47,7 @@ class faiProfileEntry extends plugin
       }
     }
     /* If no search filter is set, create one */
-    if (is_global("SUBfaifilter")){
+    if (!is_global("SUBfaifilter")){
       $SUBfaifilter= array("base" => "ou=fai,ou=configs,ou=systems,".$base, "Sregex" => "*");
       $SUBfaifilter['SShowTemplates'] = false;
       $SUBfaifilter['SShowScripts']   = false;
