@@ -357,7 +357,7 @@ class faiManagement extends plugin
 		 * It provides general navigation and object creation
 		 */
 		$faihead = 
-			"<div style='background:#F0F0F9;padding:5px;'>".
+			"<div style='background:#F0F0F9;padding:5px;'>&nbsp;".
 
 			" <input type='image' src='images/fai_partitionTable.png' align='middle' 
 			title='"._("New partition table")."' name='Create_partition' alt='"._("PT")."'>&nbsp;".
@@ -377,6 +377,8 @@ class faiManagement extends plugin
 			" <input type='image' src='images/fai_packages.png' align='middle' 
 			title='"._("New package bundle")."' name='Create_package' alt='"._("PK")."'>&nbsp;".
 			
+			"<img src=\"images/list_seperator.png\" alt=\"\" align=\"middle\" height=\"16\" width=\"1\">&nbsp;".
+				
 			" <input type='image' src='images/fai_profile.png' align='middle' 
 			title='"._("New profile bundle")."' name='Create_profile' alt='"._("P")."'>&nbsp;".
 			
