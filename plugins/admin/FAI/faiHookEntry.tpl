@@ -35,7 +35,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<input type="text" name="Object_FAIscript" value="{$Object_FAIscript}" id="Object_FAIscript">
+							<input type="text" name="Object_FAIscript" value="{$Object_FAIscript}" id="Object_FAIscript" style="width:280px;">
 						</td>
 					</tr>
 					<tr>
@@ -45,7 +45,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<input type="text" name="Object_FAItask" value="{$Object_FAItask}" id="Object_FAItask">
+							<input type="text" name="Object_FAItask" value="{$Object_FAItask}" id="Object_FAItask" style="width:280px;">
 						</td>
 					</tr>
 				</table>

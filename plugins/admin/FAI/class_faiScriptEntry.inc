@@ -42,6 +42,20 @@ class faiScriptEntry extends plugin
     /* Fill templating stuff */
     $smarty     = get_smarty();
     $display = "";
+  
+    if(isset($_POST['ImportUpload'])){
+      if(($_FILES['ImportFile']['error']!=0)){
+        print_red(_("Please select a valid file."));
+      }else
+      if(($_FILES['ImportFile']['size']==0)){
+        print_red(_("Selected file is empty."));
+      }else{
+        $str = file_get_contents($_FILES['ImportFile']['tmp_name']);
+        $this->Object_FAIscript = $str;
+      }
+    }
+
+  
 
     foreach($this->attributes as $attrs){
       $smarty->assign($attrs,stripslashes($this->$attrs));

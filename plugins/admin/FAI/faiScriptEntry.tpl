@@ -50,6 +50,12 @@
 		{t}Script{/t}
 	</LABEL>
 	</h2>
+<div>
+	{t}Import script{/t} &nbsp;
+	<input type="file" name="ImportFile">&nbsp;
+	<input type="submit" name="ImportUpload" value="{t}Import{/t}">
+</div>
+<br>
 <table width="100%">
     <tr>
         <td>
