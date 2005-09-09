@@ -23,6 +23,7 @@ require "tabsHook.inc";
 require "tabsTemplate.inc";
 require "tabsScript.inc";
 require "tabsProfile.inc";
+require "tabsPackage.inc";
 
 class faiManagement extends plugin
 {
@@ -120,6 +121,8 @@ class faiManagement extends plugin
 				$s_action = "new_variable";
 			}elseif(preg_match("/create_template/i",$key)){
 				$s_action = "new_template";
+			}elseif(preg_match("/create_package/i",$key)){
+				$s_action = "new_package";
 			}elseif(preg_match("/create_profile/i",$key)){
 				$s_action = "new_profile";
 			}elseif(preg_match("/UseNewClass/",$key)){
@@ -211,7 +214,7 @@ class faiManagement extends plugin
 		if($s_action == "edit"){
 			$entry  = $this->objects[$s_entry];
 
-			$a_setup = ( $this->get_type($entry));
+			$a_setup = ($this->get_type($entry));
 		
 			$this->dn = $entry['dn'];
 
@@ -244,6 +247,11 @@ class faiManagement extends plugin
 		/* Dialog handling */
 		if($s_action == "new_template"){
 			$this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAItemplate");
+		}
+
+		/* Dialog handling */
+		if($s_action == "new_package"){
+			$this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIpackageList");
 		}
 
 		/* New Profile */
@@ -366,6 +374,9 @@ class faiManagement extends plugin
 			" <input type='image' src='images/fai_template.png' align='middle' 
 			title='"._("New template bundle")."' name='Create_template' alt='"._("T")."'>&nbsp;".
 
+			" <input type='image' src='images/fai_packages.png' align='middle' 
+			title='"._("New package bundle")."' name='Create_package' alt='"._("PK")."'>&nbsp;".
+			
 			" <input type='image' src='images/fai_profile.png' align='middle' 
 			title='"._("New profile bundle")."' name='Create_profile' alt='"._("P")."'>&nbsp;".
 			
@@ -575,6 +586,10 @@ class faiManagement extends plugin
 		}
 		if(in_array("FAIprofile",$array['objectClass'])){
 			return(array("tabsProfile","faiProfile","FAIPROFILETABS"));
+		}
+		
+		if(in_array("FAIpackageList",$array['objectClass'])){
+			return(array("tabsPackage","faiPackage","FAIPACKAGETABS"));
 		}
 	}
 
