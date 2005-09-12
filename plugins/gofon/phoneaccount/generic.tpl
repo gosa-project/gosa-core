@@ -20,7 +20,7 @@
 <table summary="" style="width:100%" border=0>
  <tr>
 
-  <td>
+  <td tyle="vertical-align:top;">
    <h2><img alt="" align="middle" src="images/hardware.png"> {t}Telephone hardware{/t}</h2>
 
    <table summary="{t}Telephone{/t}" border=0>
@@ -56,7 +56,7 @@
  </tr>
  <tr style="vertical-align:top; border-top:1px solid #A0A0A0;">
 	<td colspan=2 style="vertical-align:top;width:50%">
-		<img alt="" src="images/select_macro.png" align="middle">&nbsp;{t}Phone macro{/t}
+		<h2><img alt="" src="images/select_macro.png" align="middle">&nbsp;{t}Phone macro{/t}</h2>
 		<table summary="{t}Phone macro{/t}">
 			<tr>
 				<td colspan=2>

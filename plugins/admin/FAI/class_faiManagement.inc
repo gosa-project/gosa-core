@@ -394,7 +394,7 @@ class faiManagement extends plugin
 		$divlist->SetHeader(array(
 					array("string" => "&nbsp;"),
 					array("string" => _("FAI objects / ObjectClasses")),
-					array("string" => _("Object type")),
+					array("string" => _("Object group")),
 					array("string" => _("Obtions"), "attach" => "style='border:none'" )));
 
 
@@ -435,7 +435,7 @@ class faiManagement extends plugin
 							$abort = true;
 						}
 					$img="<img src='images/fai_variable.png' title='Variable set' alt='V'>";
-					$info = _("Varialbe set");
+					$info = _("Variable set");
 					break;
 					case "FAIhook"				:
 						if(!$faifilter['ShowHooks']){ 

@@ -71,7 +71,7 @@ class askClassName extends plugin
       case "FAIhook"          :  $str =_("Create new FAI object - set of hooks.");break;
       case "FAIprofile"       :  $str =_("Create new FAI object - profile.");break;
       case "FAItemplate"      :  $str =_("Create new FAI object - template.");break;
-      default                 :  $str =_("Create nre FAI object");break;
+      default                 :  $str =_("Create new FAI object");break;
     }
     $smarty->assign("headline",$str);
     

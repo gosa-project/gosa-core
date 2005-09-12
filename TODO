@@ -14,15 +14,8 @@ Things to fix before 2.4:
 
 * Check renaming of servers
 
-* Fix system dialog -> icons on top are not adapted yet, remove "create system"
-
 * Fix filter part of dialogs and remove long descriptive textx in front of the search
   fields
-
-* Phone plugin
-  -> macro for std dial -> where fore is phone number and voicemail number?
-     cleanup
-  -> layout broken, vertical align top is missing
 
 * Addressbook shows up with windows workstations
 

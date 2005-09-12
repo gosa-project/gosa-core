@@ -4,7 +4,7 @@
 
 <p>
  {$warning}
- {t}This includes <b>all</b> system and setup informations. Please double check if your really want to do this since there is no way for GOsa to get your data back.{/t}
+ {t}This includes <b>all</b> object informations. Please double check if your really want to do this since there is no way for GOsa to get your data back.{/t}
 </p>
 
 <p>

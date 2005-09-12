@@ -4,7 +4,7 @@
 </div>
 	{t}Please select a class name for this object. The class name specifies a set of configurations.{/t}
 	<br>
-	{t}Every Class name must be unique. But it can be used for diffrent objects at the same time.\n
+	{t}Every Class name must be unique. But it can be used for different objects at the same time.\n
 	   If you use this class name in a profile, all object with this class name will be included to this profile.{/t}
 	<br>
 	<br>
@@ -14,7 +14,7 @@
 <table >
 	<tr>
 		<td colspan="2"><b>
-			{t}You can select one the following class names for this object.{/t}
+			{t}You can select of one the following class names for this object.{/t}
 		</b></td>
 	</tr>
 	<tr>
