@@ -212,15 +212,21 @@ class phoneConferenceManagment extends plugin
 
       /* Register conftab to trigger edit dialog */
       $this->conftab= new conferencetabs($this->config,$this->config->data['TABS']['CONFERENCETABS'], $this->dn);
-      $this->conftab->set_acl(array(":all"));
+      $this->conftab->set_acl($this->acl);
       $_SESSION['objectinfo']= $this->dn;
     }
 
     /* Insert new entry*/    
     if($s_action == "new"){
       $this->dn= "new";
+      /* Set up the users ACL's for this 'dn' */
+      $this->acl= get_permissions ($this->dn, $this->ui->subtreeACL);
+      $this->dn= "new";
       $this->conftab= new conferencetabs($this->config,$this->config->data['TABS']['CONFERENCETABS'], $this->dn);
+      $this->acl= get_permissions ($this->conftab->dn, $this->ui->subtreeACL);
+      $this->conftab->set_acl($this->acl);
       $this->conftab->set_acl(array(':all'));
+      $_SESSION['objectinfo']= $this->dn;
     }
 
     /* Edit finished, check and save changes */

@@ -109,8 +109,8 @@ class conference extends plugin
 
   function execute()
   {
-    $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
-    $this->acl= get_module_permission($acl, "goFonConference", $this->dn);
+    //$acl= get_permissions ($this->dn, $this->ui->subtreeACL);
+    //$this->acl= get_module_permission($acl, "goFonConference", $this->dn);
 
     $this->config->departments    = get_departments($this->dn);
     $this->config->make_idepartments();
