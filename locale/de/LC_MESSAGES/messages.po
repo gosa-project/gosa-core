@@ -20,6 +20,13 @@ msgstr "Zusätzliches"
 #: plugins/personal/generic/class_user.inc:16
 #: plugins/gofax/blocklists/generic.tpl:1
 #: plugins/gofax/faxaccount/generic.tpl:6 plugins/admin/groups/mail.tpl:7
+#: plugins/admin/FAI/faiPartitionTableEntry.tpl:3
+#: plugins/admin/FAI/faiPartitionTable.tpl:4 plugins/admin/FAI/faiScript.tpl:4
+#: plugins/admin/FAI/faiVariableEntry.tpl:5
+#: plugins/admin/FAI/faiTemplate.tpl:4 plugins/admin/FAI/faiHookEntry.tpl:5
+#: plugins/admin/FAI/faiVariable.tpl:4 plugins/admin/FAI/faiScriptEntry.tpl:5
+#: plugins/admin/FAI/faiTemplateEntry.tpl:5 plugins/admin/FAI/faiHook.tpl:4
+#: plugins/admin/FAI/faiProfile.tpl:1 plugins/admin/FAI/faiPackage.tpl:4
 #: plugins/generic/references/class_reference.inc:20
 msgid "Generic"
 msgstr "Allgemein"
@@ -145,6 +152,7 @@ msgstr "Export"
 #: plugins/addons/ldapmanager/contentimport.tpl:49
 #: plugins/addons/ldapmanager/contentcsv.tpl:117
 #: plugins/addons/ldapmanager/contentcsv.tpl:120
+#: plugins/admin/FAI/faiScriptEntry.tpl:56
 msgid "Import"
 msgstr "Importieren"
 
@@ -413,9 +421,10 @@ msgstr "Liste alternativer Mail-Adressen"
 #: plugins/admin/ogroups/ogroup_objects.tpl:50
 #: plugins/admin/ogroups/generic.tpl:38
 #: plugins/admin/ogroups/phonequeue.tpl:24
-#: plugins/admin/FAI/faiPartitionTable.tpl:30
-#: plugins/admin/FAI/faiScript.tpl:30 plugins/admin/FAI/faiTemplate.tpl:30
-#: plugins/admin/FAI/faiVariable.tpl:30 plugins/admin/FAI/faiHook.tpl:30
+#: plugins/admin/FAI/faiPartitionTable.tpl:43
+#: plugins/admin/FAI/faiScript.tpl:43 plugins/admin/FAI/faiTemplate.tpl:43
+#: plugins/admin/FAI/faiVariable.tpl:43 plugins/admin/FAI/faiHook.tpl:43
+#: plugins/admin/FAI/class_faiProfile.inc:144
 #: plugins/gofon/phoneaccount/generic.tpl:13
 msgid "Add"
 msgstr "Hinzufügen"
@@ -445,10 +454,10 @@ msgstr "Hinzufügen"
 #: plugins/admin/systems/phonesettings.tpl:197
 #: plugins/admin/ogroups/generic.tpl:39 plugins/admin/ogroups/remove.tpl:15
 #: plugins/admin/ogroups/phonequeue.tpl:25
-#: plugins/admin/FAI/faiPartitionTable.tpl:32
-#: plugins/admin/FAI/faiScript.tpl:32 plugins/admin/FAI/faiTemplate.tpl:32
-#: plugins/admin/FAI/remove.tpl:15 plugins/admin/FAI/faiVariable.tpl:32
-#: plugins/admin/FAI/faiHook.tpl:32 plugins/gofon/phoneaccount/generic.tpl:15
+#: plugins/admin/FAI/faiPartitionTable.tpl:45
+#: plugins/admin/FAI/faiScript.tpl:45 plugins/admin/FAI/faiTemplate.tpl:45
+#: plugins/admin/FAI/remove.tpl:15 plugins/admin/FAI/faiVariable.tpl:45
+#: plugins/admin/FAI/faiHook.tpl:45 plugins/gofon/phoneaccount/generic.tpl:15
 #: plugins/gofon/macro/remove.tpl:14 plugins/gofon/conference/remove.tpl:15
 msgid "Delete"
 msgstr "Entfernen"
@@ -553,10 +562,10 @@ msgstr "schaltet alle übrigen Mail-Einstellungen aus!"
 #: plugins/admin/departments/class_departmentManagement.inc:348
 #: plugins/admin/systems/class_systemManagement.inc:527
 #: plugins/admin/ogroups/class_ogroupManagement.inc:336
-#: plugins/admin/FAI/class_faiManagement.inc:285
+#: plugins/admin/FAI/class_faiManagement.inc:338
 #: plugins/gofon/phoneaccount/main.inc:104
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:300
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:261
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:267
 msgid "Finish"
 msgstr "Speichern"
 
@@ -601,12 +610,12 @@ msgstr "Speichern"
 #: plugins/admin/ogroups/ogroup_objects.tpl:52
 #: plugins/admin/ogroups/class_ogroupManagement.inc:338
 #: plugins/admin/ogroups/remove.tpl:17
-#: plugins/admin/FAI/class_faiManagement.inc:287
-#: plugins/admin/FAI/class_faiManagement.inc:291
+#: plugins/admin/FAI/class_faiManagement.inc:340
+#: plugins/admin/FAI/class_faiManagement.inc:344
 #: plugins/admin/FAI/remove.tpl:17 plugins/gofon/phoneaccount/main.inc:106
 #: plugins/gofon/macro/remove.tpl:16
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:302
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:263
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:269
 #: plugins/gofon/conference/remove.tpl:17
 #: ihtml/themes/altlinux/islocked.tpl:15 ihtml/themes/default/islocked.tpl:15
 msgid "Cancel"
@@ -633,9 +642,9 @@ msgstr ""
 #: plugins/gofax/faxaccount/main.inc:97 plugins/addons/logview/contents.tpl:62
 #: plugins/admin/systems/servservice.tpl:20
 #: plugins/admin/systems/printer.tpl:61
-#: plugins/admin/FAI/faiPartitionTable.tpl:31
-#: plugins/admin/FAI/faiScript.tpl:31 plugins/admin/FAI/faiTemplate.tpl:31
-#: plugins/admin/FAI/faiVariable.tpl:31 plugins/admin/FAI/faiHook.tpl:31
+#: plugins/admin/FAI/faiPartitionTable.tpl:44
+#: plugins/admin/FAI/faiScript.tpl:44 plugins/admin/FAI/faiTemplate.tpl:44
+#: plugins/admin/FAI/faiVariable.tpl:44 plugins/admin/FAI/faiHook.tpl:44
 #: plugins/gofon/phoneaccount/main.inc:112
 msgid "Edit"
 msgstr "Bearbeiten"
@@ -666,6 +675,7 @@ msgstr "Wählen Sie die hinzuzufügenden Adressen"
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:35
 #: plugins/admin/ogroups/ogroup_objects.tpl:20
 #: plugins/admin/ogroups/headpage.tpl:29 plugins/admin/FAI/headpage.tpl:29
+#: plugins/admin/FAI/faiProfileEntry.tpl:29
 #: plugins/gofon/macro/headpage.tpl:29
 #: plugins/gofon/conference/headpage.tpl:28
 msgid "Filters"
@@ -1736,13 +1746,14 @@ msgstr "Bild ändern"
 #: plugins/admin/users/template.tpl:19 plugins/admin/systems/servnfs.tpl:9
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:98
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:112
-#: plugins/admin/FAI/faiPartitionTableEntry.tpl:6
-#: plugins/admin/FAI/faiPartitionTable.tpl:6 plugins/admin/FAI/faiScript.tpl:6
+#: plugins/admin/FAI/faiPartitionTableEntry.tpl:7
+#: plugins/admin/FAI/faiPartitionTable.tpl:9 plugins/admin/FAI/faiScript.tpl:9
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:192
-#: plugins/admin/FAI/faiVariableEntry.tpl:7
-#: plugins/admin/FAI/faiTemplate.tpl:6 plugins/admin/FAI/faiHookEntry.tpl:7
-#: plugins/admin/FAI/faiVariable.tpl:6 plugins/admin/FAI/faiScriptEntry.tpl:7
-#: plugins/admin/FAI/faiTemplateEntry.tpl:7 plugins/admin/FAI/faiHook.tpl:6
+#: plugins/admin/FAI/faiVariableEntry.tpl:9
+#: plugins/admin/FAI/faiTemplate.tpl:9 plugins/admin/FAI/faiHookEntry.tpl:9
+#: plugins/admin/FAI/faiVariable.tpl:9 plugins/admin/FAI/faiScriptEntry.tpl:9
+#: plugins/admin/FAI/faiTemplateEntry.tpl:9 plugins/admin/FAI/faiHook.tpl:9
+#: plugins/admin/FAI/faiProfile.tpl:6 plugins/admin/FAI/faiPackage.tpl:9
 #: plugins/gofon/macro/parameter.tpl:5
 msgid "Name"
 msgstr "Name"
@@ -1966,11 +1977,11 @@ msgstr "Bild entfernen"
 #: plugins/admin/systems/servnfs.tpl:85
 #: plugins/admin/systems/printerPPDDialog.tpl:22
 #: plugins/admin/systems/printerPPDSelectionDialog.tpl:18
-#: plugins/admin/FAI/faiPartitionTableEntry.tpl:31
-#: plugins/admin/FAI/faiVariableEntry.tpl:41
-#: plugins/admin/FAI/faiHookEntry.tpl:41
-#: plugins/admin/FAI/faiScriptEntry.tpl:47
-#: plugins/admin/FAI/faiTemplateEntry.tpl:41
+#: plugins/admin/FAI/faiPartitionTableEntry.tpl:38
+#: plugins/admin/FAI/faiVariableEntry.tpl:48
+#: plugins/admin/FAI/faiHookEntry.tpl:58
+#: plugins/admin/FAI/faiScriptEntry.tpl:69
+#: plugins/admin/FAI/faiTemplateEntry.tpl:58
 msgid "Save"
 msgstr "Sichern"
 
@@ -2571,6 +2582,7 @@ msgstr "Hotplug-Geräte-Verwaltung"
 #: plugins/admin/systems/headpage.tpl:20
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:24
 #: plugins/admin/ogroups/headpage.tpl:20 plugins/admin/FAI/headpage.tpl:20
+#: plugins/admin/FAI/faiProfileEntry.tpl:20
 #: plugins/gofon/macro/headpage.tpl:20
 #: plugins/gofon/conference/headpage.tpl:20
 msgid "Information"
@@ -2664,22 +2676,23 @@ msgstr "Anmeldungs-Skript-Einstellungen"
 #: plugins/admin/systems/wingeneric.tpl:24
 #: plugins/admin/systems/component.tpl:24 plugins/admin/systems/servnfs.tpl:17
 #: plugins/admin/ogroups/generic.tpl:13
-#: plugins/admin/FAI/faiPartitionTableEntry.tpl:15
-#: plugins/admin/FAI/faiPartitionTable.tpl:14
-#: plugins/admin/FAI/faiScript.tpl:14
+#: plugins/admin/FAI/faiPartitionTableEntry.tpl:18
+#: plugins/admin/FAI/faiPartitionTable.tpl:19
+#: plugins/admin/FAI/faiScript.tpl:19
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:193
-#: plugins/admin/FAI/faiVariableEntry.tpl:15
-#: plugins/admin/FAI/faiTemplate.tpl:14 plugins/admin/FAI/faiHookEntry.tpl:15
-#: plugins/admin/FAI/faiVariable.tpl:14
-#: plugins/admin/FAI/faiScriptEntry.tpl:15
-#: plugins/admin/FAI/faiTemplateEntry.tpl:15 plugins/admin/FAI/faiHook.tpl:14
+#: plugins/admin/FAI/faiVariableEntry.tpl:17
+#: plugins/admin/FAI/faiTemplate.tpl:19 plugins/admin/FAI/faiHookEntry.tpl:17
+#: plugins/admin/FAI/faiVariable.tpl:19
+#: plugins/admin/FAI/faiScriptEntry.tpl:17
+#: plugins/admin/FAI/faiTemplateEntry.tpl:17 plugins/admin/FAI/faiHook.tpl:19
+#: plugins/admin/FAI/faiProfile.tpl:16 plugins/admin/FAI/faiPackage.tpl:19
 #: plugins/gofon/macro/generic.tpl:36 plugins/gofon/conference/generic.tpl:51
 #: plugins/generic/references/contents.tpl:11
 msgid "Description"
 msgstr "Beschreibung"
 
 #: plugins/personal/environment/logonManagement.tpl:24
-#: plugins/admin/FAI/faiScriptEntry.tpl:23
+#: plugins/admin/FAI/faiScriptEntry.tpl:34
 msgid "Priority"
 msgstr "Priorität"
 
@@ -2816,9 +2829,8 @@ msgstr "Bitte geben Sie eine gültige Telefonnummer an."
 #: plugins/admin/departments/class_departmentManagement.inc:277
 #: plugins/admin/systems/class_systemManagement.inc:553
 #: plugins/admin/ogroups/class_ogroupManagement.inc:356
-#: plugins/admin/FAI/class_faiManagement.inc:308
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:324
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:280
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:286
 msgid "Go up one department"
 msgstr "Eine Abteilung nach oben"
 
@@ -2831,9 +2843,8 @@ msgstr "Eine Abteilung nach oben"
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:85
 #: plugins/admin/ogroups/class_ogroupManagement.inc:356
 #: plugins/admin/ogroups/phonequeue.tpl:17
-#: plugins/admin/FAI/class_faiManagement.inc:308
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:324
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:280
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:286
 msgid "Up"
 msgstr "Auf"
 
@@ -2844,9 +2855,8 @@ msgstr "Auf"
 #: plugins/admin/departments/class_departmentManagement.inc:278
 #: plugins/admin/systems/class_systemManagement.inc:554
 #: plugins/admin/ogroups/class_ogroupManagement.inc:357
-#: plugins/admin/FAI/class_faiManagement.inc:309
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:325
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:281
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:287
 msgid "Go to root department"
 msgstr "Gehe zur Wurzel-Abteilung"
 
@@ -2857,9 +2867,8 @@ msgstr "Gehe zur Wurzel-Abteilung"
 #: plugins/admin/departments/class_departmentManagement.inc:278
 #: plugins/admin/systems/class_systemManagement.inc:554
 #: plugins/admin/ogroups/class_ogroupManagement.inc:358
-#: plugins/admin/FAI/class_faiManagement.inc:309
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:325
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:281
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:287
 msgid "Root"
 msgstr "Wurzel"
 
@@ -2870,7 +2879,7 @@ msgstr "Wurzel"
 #: plugins/admin/systems/class_systemManagement.inc:555
 #: plugins/admin/ogroups/class_ogroupManagement.inc:359
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:326
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:282
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:288
 msgid "Go to users department"
 msgstr "Gehe zur Abteilung des Benutzers"
 
@@ -2882,7 +2891,7 @@ msgstr "Gehe zur Abteilung des Benutzers"
 #: plugins/admin/systems/class_systemManagement.inc:555
 #: plugins/admin/ogroups/class_ogroupManagement.inc:360
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:326
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:282
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:288
 msgid "Home"
 msgstr "Heimat"
 
@@ -2902,7 +2911,7 @@ msgstr "Neue Sperrlisten"
 #: plugins/admin/systems/class_systemManagement.inc:564
 #: plugins/admin/ogroups/class_ogroupManagement.inc:364
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:330
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:286
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:292
 msgid "Current base"
 msgstr "Momentane Basis"
 
@@ -2914,7 +2923,7 @@ msgstr "Momentane Basis"
 #: plugins/admin/systems/class_systemManagement.inc:565
 #: plugins/admin/ogroups/class_ogroupManagement.inc:365
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:331
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:287
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:293
 msgid "Submit department"
 msgstr "Aktualisieren"
 
@@ -2926,7 +2935,7 @@ msgstr "Aktualisieren"
 #: plugins/admin/systems/class_systemManagement.inc:565
 #: plugins/admin/ogroups/class_ogroupManagement.inc:365
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:331
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:287
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:293
 msgid "Submit"
 msgstr "Übertragen"
 
@@ -2937,9 +2946,9 @@ msgstr "Übertragen"
 #: plugins/admin/departments/class_departmentManagement.inc:291
 #: plugins/admin/systems/class_systemManagement.inc:570
 #: plugins/admin/ogroups/class_ogroupManagement.inc:369
-#: plugins/admin/FAI/class_faiManagement.inc:333
+#: plugins/admin/FAI/class_faiManagement.inc:401
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:336
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:291
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:297
 msgid "edit"
 msgstr "Bearbeiten"
 
@@ -2956,10 +2965,10 @@ msgstr "Benutzer bearbeiten"
 #: plugins/admin/departments/class_departmentManagement.inc:292
 #: plugins/admin/systems/class_systemManagement.inc:571
 #: plugins/admin/ogroups/class_ogroupManagement.inc:370
-#: plugins/admin/FAI/class_faiManagement.inc:334
+#: plugins/admin/FAI/class_faiManagement.inc:402
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:337
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:292
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:294
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:298
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:300
 msgid "delete"
 msgstr "Entfernen"
 
@@ -2982,7 +2991,7 @@ msgstr "Name der Sperrliste"
 #: plugins/admin/systems/class_systemManagement.inc:578
 #: plugins/admin/ogroups/class_ogroupManagement.inc:391
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:344
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:307
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:313
 msgid "Actions"
 msgstr "Aktionen"
 
@@ -4024,7 +4033,7 @@ msgstr "Neue Gruppe erstellen"
 #: plugins/admin/applications/class_applicationManagement.inc:334
 #: plugins/admin/departments/class_departmentManagement.inc:291
 #: plugins/admin/ogroups/class_ogroupManagement.inc:369
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:291
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:297
 msgid "Edit this entry"
 msgstr "Diesen Eintrag bearbeiten"
 
@@ -4032,8 +4041,8 @@ msgstr "Diesen Eintrag bearbeiten"
 #: plugins/admin/applications/class_applicationManagement.inc:335
 #: plugins/admin/departments/class_departmentManagement.inc:292
 #: plugins/admin/ogroups/class_ogroupManagement.inc:370
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:292
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:294
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:298
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:300
 msgid "Delete this entry"
 msgstr "Diesen Eintrag entfernen"
 
@@ -4297,7 +4306,7 @@ msgstr ""
 #: plugins/admin/users/template.tpl:11
 #: plugins/admin/users/class_userManagement.inc:993
 #: plugins/admin/systems/class_systemManagement.inc:699
-#: plugins/admin/FAI/class_faiManagement.inc:391
+#: plugins/admin/FAI/class_faiManagement.inc:459
 msgid "Template"
 msgstr "Vorlage"
 
@@ -4685,7 +4694,8 @@ msgstr "Eine Anwendung mit diesem Namen existiert bereits."
 #: plugins/admin/departments/tabs_department.inc:30
 #: plugins/admin/FAI/tabsPartition.inc:33 plugins/admin/FAI/tabsHook.inc:30
 #: plugins/admin/FAI/tabsScript.inc:30 plugins/admin/FAI/tabsTemplate.inc:30
-#: plugins/admin/FAI/tabsVariable.inc:30
+#: plugins/admin/FAI/tabsVariable.inc:30 plugins/admin/FAI/tabsPackage.inc:30
+#: plugins/admin/FAI/tabsProfile.inc:30
 msgid "Try to move tree failed. Destination tree is subtree of source tree."
 msgstr ""
 
@@ -5403,7 +5413,7 @@ msgid "You are not allowed to set this systems password!"
 msgstr "Es Ihnen nicht erlaubt das Passwort für dieses Systems zu setzen!"
 
 #: plugins/admin/systems/class_systemManagement.inc:395
-#: plugins/admin/FAI/class_faiManagement.inc:151
+#: plugins/admin/FAI/class_faiManagement.inc:165
 #, php-format
 msgid "You're about to delete all information about the component at '%s'."
 msgstr ""
@@ -5411,8 +5421,8 @@ msgstr ""
 
 #: plugins/admin/systems/class_systemManagement.inc:401
 #: plugins/admin/systems/class_systemManagement.inc:465
-#: plugins/admin/FAI/class_faiManagement.inc:157
-#: plugins/admin/FAI/class_faiManagement.inc:190
+#: plugins/admin/FAI/class_faiManagement.inc:171
+#: plugins/admin/FAI/class_faiManagement.inc:204
 msgid "You are not allowed to delete this component!"
 msgstr "Es ist Ihnen nicht erlaubt, diese Komponente zu löschen!"
 
@@ -5455,7 +5465,7 @@ msgid "System"
 msgstr "Systeme"
 
 #: plugins/admin/systems/class_systemManagement.inc:581
-#: plugins/admin/FAI/class_faiManagement.inc:324
+#: plugins/admin/FAI/class_faiManagement.inc:392
 msgid "This table displays all systems, in the selected tree."
 msgstr "Diese Tabelle enthält alle Systeme des gewählten Unterbaumes."
 
@@ -5879,7 +5889,7 @@ msgstr "Akzeptiere Mails von anderen Domänen über nicht-authentifiziertes SMTP"
 msgid "Machine name"
 msgstr "Name des Systems"
 
-#: plugins/admin/systems/remove.tpl:7 plugins/admin/FAI/remove.tpl:7
+#: plugins/admin/systems/remove.tpl:7
 msgid ""
 "This includes <b>all</b> system and setup informations. Please double check "
 "if your really want to do this since there is no way for GOsa to get your "
@@ -6458,6 +6468,7 @@ msgid "Charset"
 msgstr "Zeichensatz"
 
 #: plugins/admin/systems/servnfs.tpl:63
+#: plugins/admin/FAI/faiTemplateEntry.tpl:34
 msgid "Path"
 msgstr "Pfad"
 
@@ -6611,12 +6622,12 @@ msgid "Display objects of department"
 msgstr "Zeige die Objekte der Abteilung"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:41
-#: plugins/admin/FAI/headpage.tpl:47
+#: plugins/admin/FAI/headpage.tpl:47 plugins/admin/FAI/faiProfileEntry.tpl:52
 msgid "Display objects matching"
 msgstr "Zeige die Objekte auf die Folgendes passt"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:42
-#: plugins/admin/FAI/headpage.tpl:51
+#: plugins/admin/FAI/headpage.tpl:51 plugins/admin/FAI/faiProfileEntry.tpl:56
 msgid "Regular expression for matching object names"
 msgstr "Regulärer Ausdruck zum Abgleich mit Objekt-Namen"
 
@@ -6735,6 +6746,7 @@ msgid "Name of object groups"
 msgstr "Name der Objektgruppe Gruppe"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:438
+#: plugins/admin/FAI/class_faiManagement.inc:397
 #: plugins/generic/references/class_reference.inc:50
 msgid "Object group"
 msgstr "Objektgruppe"
@@ -7064,70 +7076,60 @@ msgstr "Auflegen durch Drücken der Taste '*' (Anrufer)"
 msgid "Ring instead of playing background music"
 msgstr "Klingelton statt Hintergrund-Musik"
 
-#: plugins/admin/FAI/faiPartitionTableEntry.tpl:1
-#, fuzzy
-msgid "FAI partition table entry"
-msgstr "Zusätzliche fstab-Einträge"
-
-#: plugins/admin/FAI/faiPartitionTableEntry.tpl:9
+#: plugins/admin/FAI/faiPartitionTableEntry.tpl:11
 #, fuzzy
 msgid "Choose a disc name"
 msgstr "Wählen Sie das Tastatur-Modell"
 
-#: plugins/admin/FAI/faiPartitionTableEntry.tpl:26
+#: plugins/admin/FAI/faiPartitionTableEntry.tpl:29
+#, fuzzy
+msgid "Partition entries"
+msgstr "Variable"
+
+#: plugins/admin/FAI/faiPartitionTableEntry.tpl:32
 #, fuzzy
 msgid "Add partition"
 msgstr "Option hinzufügen"
 
-#: plugins/admin/FAI/faiPartitionTableEntry.tpl:32
+#: plugins/admin/FAI/faiPartitionTableEntry.tpl:39
 #, fuzzy
 msgid "cancel"
 msgstr "Abbrechen"
 
-#: plugins/admin/FAI/faiPartitionTable.tpl:1
-msgid "FAI partition table"
+#: plugins/admin/FAI/faiPartitionTable.tpl:32
+#: plugins/admin/FAI/faiScript.tpl:32 plugins/admin/FAI/faiTemplate.tpl:32
+#: plugins/admin/FAI/faiVariable.tpl:32 plugins/admin/FAI/faiHook.tpl:32
+#, fuzzy
+msgid "Objects"
+msgstr "Objekt"
+
+#: plugins/admin/FAI/faiPartitionTable.tpl:34
+msgid "This partition table contains following disks"
 msgstr ""
 
-#: plugins/admin/FAI/faiPartitionTable.tpl:23
-msgid "Already defined disk"
-msgstr ""
-
-#: plugins/admin/FAI/faiPartitionTable.tpl:27
+#: plugins/admin/FAI/faiPartitionTable.tpl:40
 msgid "Choose a disk to delete or edit"
 msgstr ""
 
-#: plugins/admin/FAI/faiScript.tpl:1 plugins/admin/FAI/faiVariableEntry.tpl:1
-#: plugins/admin/FAI/faiTemplate.tpl:1 plugins/admin/FAI/faiHookEntry.tpl:1
-#: plugins/admin/FAI/faiVariable.tpl:1 plugins/admin/FAI/faiScriptEntry.tpl:1
-#: plugins/admin/FAI/faiTemplateEntry.tpl:1 plugins/admin/FAI/faiHook.tpl:1
-#, fuzzy
-msgid "FAI script set"
-msgstr "Anmeldungs-Skript-Einstellungen"
-
-#: plugins/admin/FAI/faiScript.tpl:23 plugins/admin/FAI/faiTemplate.tpl:23
-#: plugins/admin/FAI/faiVariable.tpl:23 plugins/admin/FAI/faiHook.tpl:23
-msgid "Already defined scripts"
+#: plugins/admin/FAI/faiScript.tpl:34 plugins/admin/FAI/faiTemplate.tpl:34
+#: plugins/admin/FAI/faiVariable.tpl:34 plugins/admin/FAI/faiHook.tpl:34
+msgid "This bundle contains following objects"
 msgstr ""
 
-#: plugins/admin/FAI/faiScript.tpl:27 plugins/admin/FAI/faiTemplate.tpl:27
-#: plugins/admin/FAI/faiVariable.tpl:27 plugins/admin/FAI/faiHook.tpl:27
+#: plugins/admin/FAI/faiScript.tpl:40
 msgid "Choose a script to delete or edit"
 msgstr ""
 
-#: plugins/admin/FAI/headpage.tpl:6
+#: plugins/admin/FAI/headpage.tpl:6 plugins/admin/FAI/faiProfileEntry.tpl:6
 msgid "List of FAI objects (Fully Automatic Installation)"
 msgstr ""
 
 #: plugins/admin/FAI/headpage.tpl:24
 #, fuzzy
-msgid ""
-"This menu allows you to create, delete and edit selected FAI obejcts. Having "
-"a large size of objects, you might prefer the range selectors on top of this "
-"list."
+msgid "This menu allows you to create, delete and edit FAI objects."
 msgstr ""
-"Dieses Menü ermöglicht es Ihnen Sperrlisten hinzuzufügen, zu bearbeiten oder "
-"zu entfernen. Bei einer Vielzahl von Sperrlisten bietet sich die Verwendung "
-"der Bereichswahl an."
+"Dieses Menü erlaubt es Ihnen, eine bestehende Hotplug-Konfiguration zu "
+"verwenden."
 
 #: plugins/admin/FAI/headpage.tpl:36
 #, fuzzy
@@ -7198,58 +7200,64 @@ msgstr "Server"
 msgid "Please enter a description for your disk."
 msgstr "Bitte geben Sie einen gültigen Pfad an."
 
-#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:297
+#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:299
+#: plugins/admin/FAI/class_faiPartitionTable.inc:262
+#: plugins/admin/FAI/class_faiScript.inc:198
+#: plugins/admin/FAI/class_faiTemplate.inc:198
+#: plugins/admin/FAI/class_faiVariable.inc:198
+#: plugins/admin/FAI/class_faiHook.inc:199
+#: plugins/admin/FAI/class_faiProfile.inc:213
+#: plugins/admin/FAI/class_faiPackage.inc:110
 #, fuzzy
-msgid ""
-"Please enter a valid description for your disk. Only a-Z 0-9 are allowed."
-msgstr "Bitte geben Sie einen gültigen Namen ein (0-9 und a-z sind erlaubt)."
+msgid "Please enter a valid description."
+msgstr "Bitte geben Sie eine gültige Seriennummer ein"
 
-#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:313
+#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:315
 #, fuzzy, php-format
 msgid "Please enter a valid name for partition %s."
 msgstr "Bitte geben Sie einen gültigen Namen an."
 
-#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:317
+#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:319
 #, fuzzy, php-format
 msgid "please enter a unique name for partition %s"
 msgstr "Bitte geben Sie einen Namen für die Konferenz ein."
 
-#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:321
+#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:323
 #, php-format
 msgid "please enter a unique mount point for partition %s"
 msgstr ""
 
-#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:325
+#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:327
 #, fuzzy, php-format
 msgid "Please enter a valid description for partition %s."
 msgstr ""
 "Bitte geben Sie einen gültigen Pfad in das Feld 'Basisverzeichnis' ein."
 
-#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:329
+#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:331
 #, fuzzy, php-format
 msgid "Please enter a valid mount point for partition %s."
 msgstr ""
 "Bitte geben Sie einen gültigen Pfad in das Feld 'Basisverzeichnis' ein."
 
-#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:334
+#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:336
 #, php-format
 msgid ""
 "Fils system type 'swap' is already used, change file system type for "
 "partition %s."
 msgstr ""
 
-#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:340
+#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:342
 #, php-format
 msgid "Please enter a range for partition size, 'from-to', for partition %s."
 msgstr ""
 
-#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:342
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:344
+#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:346
 #, fuzzy, php-format
 msgid "Please enter a valid range for partition %s."
 msgstr "Bitte geben Sie eine gültige Seriennummer ein"
 
-#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:387
+#: plugins/admin/FAI/class_faiPartitionTableEntry.inc:389
 #, php-format
 msgid ""
 "Size settings for partition %s, overlap with size settings for partition %s."
@@ -7291,7 +7299,7 @@ msgstr "Neue Vorlage erstellen"
 
 #: plugins/admin/FAI/class_askClassName.inc:74
 #, fuzzy
-msgid "Create nre FAI object"
+msgid "Create new FAI object"
 msgstr "Erstelle neue Objektgruppe"
 
 #: plugins/admin/FAI/class_askClassName.inc:125
@@ -7317,7 +7325,7 @@ msgstr ""
 
 #: plugins/admin/FAI/askClassName.tpl:7
 msgid ""
-"Every Class name must be unique. But it can be used for diffrent objects at "
+"Every Class name must be unique. But it can be used for different objects at "
 "the same time.\n"
 "\n"
 "\t   If you use this class name in a profile, all object with this class "
@@ -7326,12 +7334,12 @@ msgstr ""
 
 #: plugins/admin/FAI/askClassName.tpl:11
 msgid ""
-"The list box below shows all available class names you can use, for this "
+"The list box below shows all available class names you may use, for this "
 "object, to avoid duplicates."
 msgstr ""
 
 #: plugins/admin/FAI/askClassName.tpl:17
-msgid "You can select one the following class names for this object."
+msgid "You can select of one the following class names for this object."
 msgstr ""
 
 #: plugins/admin/FAI/askClassName.tpl:21
@@ -7352,119 +7360,399 @@ msgstr ""
 msgid "A new class name.</b>"
 msgstr ""
 
-#: plugins/admin/FAI/class_faiManagement.inc:29 plugins/admin/FAI/main.inc:38
+#: plugins/admin/FAI/class_faiManagement.inc:31 plugins/admin/FAI/main.inc:38
 #: plugins/admin/FAI/main.inc:40
 #, fuzzy
 msgid "FAI management"
 msgstr "Verwaltung"
 
-#: plugins/admin/FAI/class_faiManagement.inc:30
+#: plugins/admin/FAI/class_faiManagement.inc:32
 #, fuzzy
 msgid "Fully Automatic Installation - management"
 msgstr "Anwendungsverwaltung"
 
-#: plugins/admin/FAI/class_faiManagement.inc:312
+#: plugins/admin/FAI/class_faiManagement.inc:363
 #, fuzzy
 msgid "New partition table"
 msgstr "Neuer Drucker"
 
-#: plugins/admin/FAI/class_faiManagement.inc:312
-#: plugins/admin/FAI/class_faiManagement.inc:315
-#, fuzzy
-msgid "Partition"
-msgstr "Ziel"
+#: plugins/admin/FAI/class_faiManagement.inc:363
+msgid "PT"
+msgstr ""
 
-#: plugins/admin/FAI/class_faiManagement.inc:315
+#: plugins/admin/FAI/class_faiManagement.inc:366
 #, fuzzy
-msgid "New packages"
+msgid "New script bundle"
+msgstr "Neuer Drucker"
+
+#: plugins/admin/FAI/class_faiManagement.inc:366
+msgid "S"
+msgstr ""
+
+#: plugins/admin/FAI/class_faiManagement.inc:369
+#, fuzzy
+msgid "New hook bundle"
+msgstr "Neues Telefon"
+
+#: plugins/admin/FAI/class_faiManagement.inc:369
+msgid "H"
+msgstr ""
+
+#: plugins/admin/FAI/class_faiManagement.inc:372
+#, fuzzy
+msgid "New variable bundle"
+msgstr "Zeige Terminals"
+
+#: plugins/admin/FAI/class_faiManagement.inc:372
+msgid "V"
+msgstr ""
+
+#: plugins/admin/FAI/class_faiManagement.inc:375
+#, fuzzy
+msgid "New template bundle"
+msgstr "Neue Vorlage"
+
+#: plugins/admin/FAI/class_faiManagement.inc:375
+msgid "T"
+msgstr ""
+
+#: plugins/admin/FAI/class_faiManagement.inc:378
+#, fuzzy
+msgid "New package bundle"
 msgstr "# Seiten"
 
-#: plugins/admin/FAI/class_faiManagement.inc:328
+#: plugins/admin/FAI/class_faiManagement.inc:378
+msgid "PK"
+msgstr ""
+
+#: plugins/admin/FAI/class_faiManagement.inc:383
+#, fuzzy
+msgid "New profile bundle"
+msgstr "Benutze Profil-Verwaltung"
+
+#: plugins/admin/FAI/class_faiManagement.inc:383
+msgid "P"
+msgstr ""
+
+#: plugins/admin/FAI/class_faiManagement.inc:396
 msgid "FAI objects / ObjectClasses"
 msgstr ""
 
-#: plugins/admin/FAI/class_faiManagement.inc:329
-#, fuzzy
-msgid "Object type"
-msgstr "Objektname"
-
-#: plugins/admin/FAI/class_faiManagement.inc:330
+#: plugins/admin/FAI/class_faiManagement.inc:398
 #, fuzzy
 msgid "Obtions"
 msgstr "Optionen"
 
-#: plugins/admin/FAI/class_faiManagement.inc:333
+#: plugins/admin/FAI/class_faiManagement.inc:401
 #, fuzzy
 msgid "Edit object"
 msgstr "Untersuchtes Objekt"
 
-#: plugins/admin/FAI/class_faiManagement.inc:334
+#: plugins/admin/FAI/class_faiManagement.inc:402
 #, fuzzy
 msgid "Delete object"
 msgstr "Zusammengefasste Objekte"
 
-#: plugins/admin/FAI/class_faiManagement.inc:349
+#: plugins/admin/FAI/class_faiManagement.inc:417
+#: plugins/admin/FAI/class_faiProfile.inc:152
+#: plugins/admin/FAI/class_faiProfileEntry.inc:118
 #, fuzzy
 msgid "Partition table"
 msgstr "Variable"
 
-#: plugins/admin/FAI/class_faiManagement.inc:356
+#: plugins/admin/FAI/class_faiManagement.inc:424
 msgid "Package list"
 msgstr ""
 
-#: plugins/admin/FAI/class_faiManagement.inc:363
+#: plugins/admin/FAI/class_faiManagement.inc:431
 #, fuzzy
 msgid "Script set"
 msgstr "Anmeldeskript"
 
-#: plugins/admin/FAI/class_faiManagement.inc:370
+#: plugins/admin/FAI/class_faiManagement.inc:438
 #, fuzzy
-msgid "Varialbe set"
+msgid "Variable set"
 msgstr "Variable"
 
-#: plugins/admin/FAI/class_faiManagement.inc:377
+#: plugins/admin/FAI/class_faiManagement.inc:445
 msgid "Hook set"
 msgstr ""
 
-#: plugins/admin/FAI/class_faiManagement.inc:384
+#: plugins/admin/FAI/class_faiManagement.inc:452
 #, fuzzy
 msgid "Profile"
 msgstr "Profile"
 
-#: plugins/admin/FAI/class_faiPartitionTable.inc:213
-#: plugins/admin/FAI/class_faiPartitionTable.inc:215
+#: plugins/admin/FAI/class_faiPartitionTable.inc:218
+#: plugins/admin/FAI/class_faiPartitionTable.inc:220
 msgid "Number of Partitions"
 msgstr ""
 
-#: plugins/admin/FAI/class_faiPartitionTable.inc:254
-#: plugins/admin/FAI/class_faiScript.inc:193
-#: plugins/admin/FAI/class_faiTemplate.inc:193
-#: plugins/admin/FAI/class_faiVariable.inc:193
-#: plugins/admin/FAI/class_faiHook.inc:193
+#: plugins/admin/FAI/class_faiPartitionTable.inc:266
 #, fuzzy
-msgid "Please enter a valid description."
+msgid "Please enter a valid name."
 msgstr "Bitte geben Sie eine gültige Seriennummer ein"
 
-#: plugins/admin/FAI/faiVariableEntry.tpl:24
-#: plugins/admin/FAI/faiHookEntry.tpl:24
-#: plugins/admin/FAI/faiScriptEntry.tpl:35
-#: plugins/admin/FAI/faiTemplateEntry.tpl:24
+#: plugins/admin/FAI/class_faiVariableEntry.inc:77
 #, fuzzy
-msgid "Script"
-msgstr "Anmeldeskript"
+msgid "Please specify a value for the attribute 'content'."
+msgstr "Bitte geben Sie einen gültigen Namen an."
 
-#: plugins/admin/FAI/faiVariableEntry.tpl:42
-#: plugins/admin/FAI/faiHookEntry.tpl:42
-#: plugins/admin/FAI/faiScriptEntry.tpl:48
-#: plugins/admin/FAI/faiTemplateEntry.tpl:42
+#: plugins/admin/FAI/class_faiVariableEntry.inc:81
+#: plugins/admin/FAI/class_faiHookEntry.inc:86
+#: plugins/admin/FAI/class_faiScriptEntry.inc:98
+#: plugins/admin/FAI/class_faiTemplateEntry.inc:87
+#, fuzzy
+msgid "Please enter a description."
+msgstr "Bitte geben Sie eine gültige Seriennummer ein"
+
+#: plugins/admin/FAI/class_faiVariableEntry.inc:85
+#: plugins/admin/FAI/class_faiHookEntry.inc:90
+#: plugins/admin/FAI/class_faiScriptEntry.inc:102
+#: plugins/admin/FAI/class_faiTemplateEntry.inc:91
+#, fuzzy
+msgid "Invalid character in description. Please enter a valid description."
+msgstr ""
+"Ungültiges Zeichen im Feld 'Beschreibung'. Bitte geben Sie eine gültige "
+"Beschreibung ein."
+
+#: plugins/admin/FAI/class_faiVariableEntry.inc:89
+#: plugins/admin/FAI/class_faiHookEntry.inc:94
+#: plugins/admin/FAI/class_faiScriptEntry.inc:106
+#: plugins/admin/FAI/class_faiTemplateEntry.inc:95
+#, fuzzy
+msgid "Please enter a name."
+msgstr "Bitte geben Sie eine PIN ein."
+
+#: plugins/admin/FAI/class_faiVariableEntry.inc:93
+#: plugins/admin/FAI/class_faiHookEntry.inc:98
+#: plugins/admin/FAI/class_faiScriptEntry.inc:110
+#: plugins/admin/FAI/class_faiTemplateEntry.inc:99
+#, fuzzy
+msgid "Please enter a valid name. Only a-Z 0-9 are allowed."
+msgstr "Bitte geben Sie einen gültigen Namen ein (0-9 und a-z sind erlaubt)."
+
+#: plugins/admin/FAI/faiVariableEntry.tpl:29
+#, fuzzy
+msgid "Variable attributes"
+msgstr "Telefon-Attribute"
+
+#: plugins/admin/FAI/faiVariableEntry.tpl:34
+#, fuzzy
+msgid "Variable Content"
+msgstr "Variable"
+
+#: plugins/admin/FAI/faiVariableEntry.tpl:49
+#: plugins/admin/FAI/faiHookEntry.tpl:59
+#: plugins/admin/FAI/faiScriptEntry.tpl:70
+#: plugins/admin/FAI/faiTemplateEntry.tpl:59
 #, fuzzy
 msgid "Abort"
 msgstr "Anschluss"
 
-#: plugins/admin/FAI/faiScriptEntry.tpl:26
+#: plugins/admin/FAI/faiTemplate.tpl:40
+#, fuzzy
+msgid "Choose a template to delete or edit"
+msgstr "Wählen Sie die Abteilung in der der Eintrag abgelegt werden soll"
+
+#: plugins/admin/FAI/remove.tpl:7
+#, fuzzy
+msgid ""
+"This includes <b>all</b> object informations. Please double check if your "
+"really want to do this since there is no way for GOsa to get your data back."
+msgstr ""
+"Dies umfasst <b>alle</b> System- und Setup-Informationen Bitte prüfen Sie "
+"genau, da es keine Möglichkeit für GOsa gibt, die Daten zu restaurieren. "
+
+#: plugins/admin/FAI/class_faiHookEntry.inc:77
+#, fuzzy
+msgid "Please enter a value for task."
+msgstr "Bitte geben Sie einen gültigen Namen an."
+
+#: plugins/admin/FAI/class_faiHookEntry.inc:80
+#, fuzzy
+msgid "Please enter a value for script."
+msgstr "Bitte geben Sie eine gültige Seriennummer ein"
+
+#: plugins/admin/FAI/faiHookEntry.tpl:29
+#, fuzzy
+msgid "Hook attributes"
+msgstr "Telefon-Attribute"
+
+#: plugins/admin/FAI/faiHookEntry.tpl:34
+#: plugins/admin/FAI/faiScriptEntry.tpl:50
+#, fuzzy
+msgid "Script"
+msgstr "Anmeldeskript"
+
+#: plugins/admin/FAI/faiHookEntry.tpl:44
+#, fuzzy
+msgid "Task"
+msgstr "Tage für Aufgabe"
+
+#: plugins/admin/FAI/class_faiScriptEntry.inc:48
+#, fuzzy
+msgid "Please select a valid file."
+msgstr "Bitte wählen Sie einen gültigen Mail-Server."
+
+#: plugins/admin/FAI/class_faiScriptEntry.inc:51
+#, fuzzy
+msgid "Selected file is empty."
+msgstr "Die angebene Datei ist leer."
+
+#: plugins/admin/FAI/class_faiScriptEntry.inc:94
+#, fuzzy
+msgid "Please specify a script."
+msgstr "Bitte geben Sie eine gültige ID ein!"
+
+#: plugins/admin/FAI/faiVariable.tpl:40
+msgid "Choose a variable to delete or edit"
+msgstr ""
+
+#: plugins/admin/FAI/faiScriptEntry.tpl:29
+#: plugins/admin/FAI/faiScriptEntry.tpl:48
+#, fuzzy
+msgid "Script attributes"
+msgstr "Telefon-Attribute"
+
+#: plugins/admin/FAI/faiScriptEntry.tpl:38
 #, fuzzy
 msgid "Choose a priority"
 msgstr "Wählen Sie den Telefon-Typ"
+
+#: plugins/admin/FAI/faiScriptEntry.tpl:54
+#, fuzzy
+msgid "Import script"
+msgstr "Letztes Skript"
+
+#: plugins/admin/FAI/class_faiTemplateEntry.inc:77
+#, fuzzy
+msgid "Please specify a value for attribute 'file'."
+msgstr "Bitte geben Sie einen Namen an."
+
+#: plugins/admin/FAI/class_faiTemplateEntry.inc:81
+#, fuzzy
+msgid "Please specify a value for attribute 'path'."
+msgstr "Bitte geben Sie einen Namen an."
+
+#: plugins/admin/FAI/faiTemplateEntry.tpl:29
+#, fuzzy
+msgid "Template attributes"
+msgstr "DN-Attribut für Benutzer:"
+
+#: plugins/admin/FAI/faiTemplateEntry.tpl:44 include/php_setup.inc:122
+msgid "File"
+msgstr "Datei"
+
+#: plugins/admin/FAI/faiHook.tpl:40
+msgid "Choose a hook to delete or edit"
+msgstr ""
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:24
+#, fuzzy
+msgid ""
+"This menu allows you to select FAI class names, to add them to the currently "
+"editted profile."
+msgstr ""
+"Dieses Menü erlaubt es Ihnen, eine bestehende Hotplug-Konfiguration zu "
+"verwenden."
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:37
+#, fuzzy
+msgid "Show only classes with templates"
+msgstr "Zeige Vorlagen"
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:39
+msgid "Show only classes with scripts"
+msgstr ""
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:41
+msgid "Show only classes with hooks"
+msgstr ""
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:43
+#, fuzzy
+msgid "Show only classes with variables"
+msgstr "Zeige Terminals"
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:45
+msgid "Show only classes with packages"
+msgstr ""
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:47
+#, fuzzy
+msgid "Show only classes with partitions"
+msgstr "Zeige Arbeitsstationen"
+
+#: plugins/admin/FAI/class_faiProfile.inc:136
+#: plugins/admin/FAI/class_faiProfileEntry.inc:140
+msgid "This list displays all assigned class names for this profile."
+msgstr ""
+
+#: plugins/admin/FAI/class_faiProfile.inc:144
+#, fuzzy
+msgid "Append new class names"
+msgstr "Verfügbare Anwendungen"
+
+#: plugins/admin/FAI/class_faiProfile.inc:147
+#: plugins/admin/FAI/class_faiProfileEntry.inc:113
+#, fuzzy
+msgid "Hook bundle"
+msgstr "Gespräch halten"
+
+#: plugins/admin/FAI/class_faiProfile.inc:148
+#: plugins/admin/FAI/class_faiProfileEntry.inc:114
+#, fuzzy
+msgid "Template bundle"
+msgstr "Vorlage"
+
+#: plugins/admin/FAI/class_faiProfile.inc:149
+#: plugins/admin/FAI/class_faiProfileEntry.inc:115
+#, fuzzy
+msgid "Script bundle"
+msgstr "Anmeldeskript"
+
+#: plugins/admin/FAI/class_faiProfile.inc:150
+#: plugins/admin/FAI/class_faiProfileEntry.inc:116
+#, fuzzy
+msgid "Variable bundle"
+msgstr "Variable"
+
+#: plugins/admin/FAI/class_faiProfile.inc:151
+msgid "Packages bundle"
+msgstr ""
+
+#: plugins/admin/FAI/class_faiProfile.inc:154
+msgid "Remove class from profile"
+msgstr ""
+
+#: plugins/admin/FAI/class_faiProfile.inc:209
+#, fuzzy
+msgid "Please specify a description for this profile."
+msgstr "Bitte geben Sie einen gültigen Pfad an."
+
+#: plugins/admin/FAI/class_faiProfile.inc:217
+#, fuzzy
+msgid "Please enter a valid name. Only 0-9 a-Z are allowed here."
+msgstr "Bitte geben Sie einen gültigen Namen ein (0-9 und a-z sind erlaubt)."
+
+#: plugins/admin/FAI/class_faiProfile.inc:221
+msgid "Please assign at least one class to this  profile."
+msgstr ""
+
+#: plugins/admin/FAI/class_faiProfile.inc:229
+#, fuzzy
+msgid "There is already a profile with this class name defined."
+msgstr "Die von Ihnen angegebene 'Kennung' ist bereits vergeben."
+
+#: plugins/admin/FAI/faiProfile.tpl:31
+#, fuzzy
+msgid "List of used class names"
+msgstr "Wählen Sie den Telefon-Typ"
+
+#: plugins/admin/FAI/class_faiProfileEntry.inc:117
+msgid "Package bundle"
+msgstr ""
 
 #: plugins/gofon/phoneaccount/main.inc:121
 msgid "Phone settings"
@@ -7866,7 +8154,7 @@ msgid "Preset PIN"
 msgstr "PIN voreinstellen"
 
 #: plugins/gofon/conference/generic.tpl:107
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:306
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:312
 msgid "PIN"
 msgstr "PIN"
 
@@ -7902,27 +8190,27 @@ msgstr "Telefon-Konferenzen"
 msgid "Management"
 msgstr "Verwaltung"
 
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:284
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:290
 msgid "Create new conference"
 msgstr "Neue Konferenz erstellen"
 
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:284
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:290
 msgid "New conference"
 msgstr "Neue Konferenz"
 
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:300
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:306
 msgid "This table displays all available conference rooms."
 msgstr "Diese Tabelle enthält alle verfügbaren Konferenzräume."
 
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:304
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:310
 msgid "Name - Number"
 msgstr "Name - Nummer"
 
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:305
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:311
 msgid "Owner"
 msgstr "Besitzer"
 
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:360
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:366
 msgid "Conference"
 msgstr "Konferenz"
 
@@ -8048,10 +8336,6 @@ msgstr "Methode"
 #: include/php_setup.inc:121
 msgid "Trace"
 msgstr "Ablaufverfolgung"
-
-#: include/php_setup.inc:122
-msgid "File"
-msgstr "Datei"
 
 #: include/php_setup.inc:122
 msgid "Line"
@@ -9427,6 +9711,38 @@ msgstr ""
 "GOsa kann Fehler im PHP-Interpreter erzeugen (insbesondere bei Beta-"
 "Versionen). In einigen Fällen ist es hilfreich, das 'error_reporting' zu "
 "aktivieren (dies kann jedoch ein Sicherheitsrisiko darstellen)."
+
+#, fuzzy
+#~ msgid "FAI partition table entry"
+#~ msgstr "Zusätzliche fstab-Einträge"
+
+#, fuzzy
+#~ msgid "FAI script set"
+#~ msgstr "Anmeldungs-Skript-Einstellungen"
+
+#, fuzzy
+#~ msgid ""
+#~ "This menu allows you to create, delete and edit selected FAI obejcts. "
+#~ "Having a large size of objects, you might prefer the range selectors on "
+#~ "top of this list."
+#~ msgstr ""
+#~ "Dieses Menü ermöglicht es Ihnen Sperrlisten hinzuzufügen, zu bearbeiten "
+#~ "oder zu entfernen. Bei einer Vielzahl von Sperrlisten bietet sich die "
+#~ "Verwendung der Bereichswahl an."
+
+#, fuzzy
+#~ msgid ""
+#~ "Please enter a valid description for your disk. Only a-Z 0-9 are allowed."
+#~ msgstr ""
+#~ "Bitte geben Sie einen gültigen Namen ein (0-9 und a-z sind erlaubt)."
+
+#, fuzzy
+#~ msgid "Partition"
+#~ msgstr "Ziel"
+
+#, fuzzy
+#~ msgid "Object type"
+#~ msgstr "Objektname"
 
 #~ msgid "Set phone password"
 #~ msgstr "Telefon-Passwort setzen"
