@@ -164,29 +164,36 @@ class printgeneric extends plugin
 
     if($this->is_terminal){
       if(empty($this->cn)){
-        $display= $this->show_header(_("Add printer extension"),
+        if(!in_array("gotoPrinter",$this->objectclasses)){
+          $display= $this->show_header(_("Add printer extension"),
               _("This workstation has printer extension disabled. You can't enable it while 'cn' is not present in entry. Possibly you are currently creating a new terminal template"),TRUE,TRUE);
-        $this->is_account= false;
-        return $display;
-       }
-
-       if ($this->is_account){
-        if($this->type=="station"){
-          $display= $this->show_header(_("Remove printer extension"),
-              _("This workstation has printer extension enabled.You can disable it by clicking below."));
+          $this->is_account= false;
+          return $display;
         }else{
-          $display= $this->show_header(_("Remove printer extension"),
-              _("This terminal has printer extension enabled. You can disable it by clicking below."));
+          $smarty->assign("is_terminal","false");
+          $skip = true;
         }
-      }else{
-        if($this->type=="station"){
-          $display= $this->show_header(_("Add printer extension"),
-              _("This workstation has printer extension disabled. You can enable it by clicking below."));
+      }
+
+      if(!isset($skip)){
+        if (($this->is_account)){
+          if($this->type=="station"){
+            $display= $this->show_header(_("Remove printer extension"),
+                _("This workstation has printer extension enabled.You can disable it by clicking below."));
+          }else{
+            $display= $this->show_header(_("Remove printer extension"),
+                _("This terminal has printer extension enabled. You can disable it by clicking below."));
+          }
         }else{
-          $display= $this->show_header(_("Add printer extension"),
-              _("This terminal has printer extension disabled. You can enable it by clicking below."));
-        }  
-        return ($display);
+          if($this->type=="station"){
+            $display= $this->show_header(_("Add printer extension"),
+                _("This workstation has printer extension disabled. You can enable it by clicking below."));
+          }else{
+            $display= $this->show_header(_("Add printer extension"),
+                _("This terminal has printer extension disabled. You can enable it by clicking below."));
+          }  
+          return ($display);
+        }
       }
     }
 
@@ -207,7 +214,7 @@ class printgeneric extends plugin
       $smarty->assign($attr."ACL", chkacl($this->acl, $attr));
       $smarty->assign("$attr", $this->$attr);
     }
-    
+
     if(isset($_POST['AddUser'])){
       $this->dialog = new selectUserToPrinterDialog($this->config, get_userinfo(),"AddUser");
     }
@@ -243,7 +250,7 @@ class printgeneric extends plugin
       }
 
     }
-    
+
     if(isset($_POST['ClosePPD'])){
       unset($this->dialog);
       $this->dialog=NULL;
