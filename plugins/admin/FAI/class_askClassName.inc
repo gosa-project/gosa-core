@@ -27,7 +27,7 @@ class askClassName extends plugin
   function execute()
   {
     /* Fill templating stuff */
-    $smarty= get_smarty();
+    $smarty = get_smarty();
     $display= "";
 
     /* The faifilter contais 
@@ -39,16 +39,17 @@ class askClassName extends plugin
      * With a second search detect all object that belong to the different ous. 
      */
     $ldap = $this->config->get_ldap_link();
-    $res= get_list($this->ui->subtreeACL, "(objectClass=organizationalUnit)",FALSE, $faifilter['base'], array("cn","description","objectClass"),TRUE);
-    $used=array();
+    $res  = get_list($this->ui->subtreeACL, "(objectClass=organizationalUnit)",FALSE, $faifilter['base'], array("cn","description","objectClass"),TRUE);
+    $used = array();
 
     $delete = array();
     foreach($res as $objecttypes){
       $res2 = get_list2($this->ui->subtreeACL, "(objectClass=*)",
           FALSE, $objecttypes['dn'], array("cn","description","objectClass","FAIclass"),TRUE);
+
       foreach($res2 as $object){
-       
-        /* skip class names with this type of object */ 
+      
+        /* skip class names with this name */ 
         if(in_array($this->objectClass,$object['objectClass'])){
           $delete[] = $object['cn'][0];
         }
@@ -85,8 +86,8 @@ class askClassName extends plugin
       unset($used[$del]);
     }
    
-    /* if there is no class name which is missing the type 
-     *  of objectClass wew want to create now, disable selectBox 
+    /* if there is no class name which is missing for this type 
+     *  of objectClass, we only can create a new one, disable selectBox 
      */
     if(count ($used)==0){
       $smarty->assign("ClassNamesAvailable", " disabled ");
@@ -116,7 +117,6 @@ class askClassName extends plugin
 
 
   /* Check given class name 
-   * A class name For each object type, 
    */
   function check()
   {

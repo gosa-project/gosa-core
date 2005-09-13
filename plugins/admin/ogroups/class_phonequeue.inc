@@ -480,6 +480,7 @@ class phonequeue extends plugin
       }
 
     }
+    @mysql_close($r_con);
     return(false);
   }
 

@@ -219,7 +219,7 @@ class conference extends plugin
     $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
 
     // Connect to DB server
-    $r_con =  @mysql_connect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+    $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
 
     // Check if we are  connected correctly
     if(!$r_con){
@@ -317,7 +317,7 @@ class conference extends plugin
     } 
 
 
-
+    @mysql_close($r_con);
     return(true);
   }
 
@@ -328,7 +328,7 @@ class conference extends plugin
       $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
 
       // Connect to DB server
-      $r_con =  @mysql_connect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+      $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
 
       // Check if we are  connected correctly
       if(!$r_con){
@@ -359,6 +359,7 @@ class conference extends plugin
       } 
 
     }//ENDE  old num availiable ...
+    @mysql_close($r_con);
     return(true);
   }
 

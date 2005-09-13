@@ -41,7 +41,6 @@ class faiHook extends plugin
 
     /* If "dn==new" we try to create a new entry
      * Else we must read all objects from ldap which belong to this entry.
-     * First read SubObjects from ldap ... and then the partition definitions for the SubObjects.
      */
     if($dn != "new"){
       $this->dn =$dn;
@@ -103,15 +102,25 @@ class faiHook extends plugin
 
     /* Save Dialog */
     if(isset($_POST['SaveSubObject'])){
+
+      /* Perform post check*/
       $this->dialog->save_object();
+
+      /* Get messages */
       $msgs = $this->dialog->check();
+
+      /* print errors */
       if(count($msgs)>0){
         foreach($msgs as $msg){
           print_red($msg);
         }
       }else{
+
+        /* Get return object */
         $obj = $this->dialog->save();
         if(isset($obj['remove'])){
+
+          /* Depending on status, set new status */
           if($this->SubObjects[$obj['remove']['from']]['status']=="edited"){
             $this->SubObjects[$obj['remove']['from']]['status'] = "delete";
           }elseif($this->SubObjects[$obj['remove']['from']]['status']=="new"){

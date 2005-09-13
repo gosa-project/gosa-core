@@ -174,7 +174,7 @@ class macro extends plugin
     $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
 
     // Connect to DB server
-    $r_con =  @mysql_connect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']); 
+    $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']); 
   
     // Check if we are  connected correctly 
     if(!$r_con){
@@ -285,9 +285,10 @@ class macro extends plugin
         } 
       }    
     }
-
-  return true;
-
+    if((isset($r_con))&&($r_con)){
+      @mysql_close($r_con);
+    }
+    return true;
   }
 
 

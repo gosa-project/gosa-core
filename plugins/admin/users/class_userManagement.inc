@@ -751,7 +751,7 @@ class userManagement extends plugin
       /* 
         If you want to disable the status pictures, just comment out the next line
       */
-      $r_con= @mysql_connect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+      $r_con= @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
       // Check if we are  connected correctly
       if($r_con){
         $r_db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
@@ -788,10 +788,13 @@ class userManagement extends plugin
               $fonac = preg_replace("/%title%/", $connected, $fonac);
             }
           }
+        mysql_close($r_con);
         }
       }else{
         $fonac=$empty;
       }
+
+    
 
       // Specify Pics for Extensions  
       if(in_array("posixAccount"    ,$val['objectClass'])){ 

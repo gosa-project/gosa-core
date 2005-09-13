@@ -219,7 +219,7 @@ class phoneAccount extends plugin
    */
     // Connect to DB server
     if((isset($a_SETUP))&&(isset($a_SETUP['SERVER']))&&(isset($a_SETUP['LOGIN']))&&(isset($a_SETUP['PASSWORD']))){
-      $r_con =  @mysql_connect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+      $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
       if($r_con){
         $r_db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
         $vp = mysql_fetch_row(mysql_query("SELECT ".$a_SETUP['VOICE_TABLE'].".password FROM  ".$a_SETUP['VOICE_TABLE'].", ".$a_SETUP['SIP_TABLE']."  WHERE customer_id = sip_users.mailbox AND name='".$this->uid."'"));
@@ -227,8 +227,12 @@ class phoneAccount extends plugin
         if((isset($vp[0]))&&(!empty($vp[0]))){
           $this->goFonPINVoice = $vp[0];
         }
+        @mysql_close($r_con);
       }
+
     }
+
+  
   }
 
 
@@ -266,7 +270,7 @@ class phoneAccount extends plugin
 
 
     // Connect to DB server
-    $r_con =  @mysql_connect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+    $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
 
     // Check if we are  connected correctly
     if(!$r_con){
@@ -518,10 +522,12 @@ class phoneAccount extends plugin
       foreach($SQL as $query){
         if(!@mysql_query($query,$r_con)){
           print_red(_("Error while performing query ".mysql_error()));
+          @mysql_close($r_con);
           return false;
         }
       }
     }
+    @mysql_close($r_con);
     return true;
   }
 
@@ -1030,6 +1036,7 @@ class phoneAccount extends plugin
     show_ldap_error($ldap->get_error());
 
     /* Optionally execute a command after we're done */
+    @mysql_close($r_con);
     $this->handle_post_events('remove');
   }
 
