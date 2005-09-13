@@ -227,12 +227,9 @@ class phoneAccount extends plugin
         if((isset($vp[0]))&&(!empty($vp[0]))){
           $this->goFonPINVoice = $vp[0];
         }
-        @mysql_close($r_con);
       }
-
     }
-
-  
+  @mysql_close($r_con) ;
   }
 
 
@@ -522,7 +519,6 @@ class phoneAccount extends plugin
       foreach($SQL as $query){
         if(!@mysql_query($query,$r_con)){
           print_red(_("Error while performing query ".mysql_error()));
-          @mysql_close($r_con);
           return false;
         }
       }
