@@ -286,11 +286,13 @@ class phonequeue extends plugin
       $i = 0;
       $queueuser =array();
       foreach($this->parent->by_object['ogroup']->memberList as $member){
-        if(in_array("goFonAccount",$member['objectClass'])){
-          $i ++ ;
-          $queueuser[$i]['queue_name']  = $this->attrs['cn'][0]; 
-          $queueuser[$i]['interface']   = "SIP/".$member['uid'][0]; 
-          $queueuser[$i]['penalty']     = 1; 
+        if(isset($member['objectClass'])){
+          if(in_array("goFonAccount",$member['objectClass'])){
+            $i ++ ;
+            $queueuser[$i]['queue_name']  = $this->attrs['cn'][0]; 
+            $queueuser[$i]['interface']   = "SIP/".$member['uid'][0]; 
+            $queueuser[$i]['penalty']     = 1; 
+          }
         }
       }
 
@@ -314,8 +316,10 @@ class phonequeue extends plugin
 
       $queueusers=0;
       foreach($this->parent->by_object['ogroup']->memberList as $member){
-        if(in_array("goFonAccount",$member['objectClass'])){
-          $queueusers++;
+        if(isset($member['objectClass'])){
+          if(in_array("goFonAccount",$member['objectClass'])){
+            $queueusers++;
+          }
         }
       }
 
