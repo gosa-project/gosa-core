@@ -104,8 +104,6 @@ class phonequeue extends plugin
       $this->is_account= !$this->is_account;
     }
 
-    unset($_SESSION['config']->data['SERVERS']['FON']);
-
     /* Show tab dialog headers */
     if ($this->parent != NULL){
       if ($this->is_account){
