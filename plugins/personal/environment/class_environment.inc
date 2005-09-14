@@ -177,7 +177,6 @@ class environment extends plugin
 
     // 1. Account disabled . Editing from usermenu
     if((!isset($this->parent))&&(!$this->is_account)){
-      print "asdf";
       /* We are currently editing this tab from usermenu, but this account is not enabled */
       $smarty->assign("is_account",$this->is_account);
       /* Load template */
