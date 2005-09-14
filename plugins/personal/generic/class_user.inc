@@ -946,10 +946,10 @@ class user extends plugin
     }
 
     /* Check for reserved characers */
-    if (preg_match ('/[,+"?\'<>;]/', $this->givenName)){
+    if (preg_match ('/[,+"?\'()-=<>;]/', $this->givenName)){
       $message[]= _("The field 'Given name' contains invalid characters.");
   }
-  if (preg_match ('/[,+"?\'<>;]/', $this->sn)){
+  if (preg_match ('/[,+"?\'()-=<>;]/', $this->sn)){
     $message[]= _("The field 'Name' contains invalid characters.");
   }
 
