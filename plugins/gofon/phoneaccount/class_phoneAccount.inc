@@ -236,6 +236,11 @@ class phoneAccount extends plugin
   // Generate MySQL Syntax
   function generate_mysql_entension_entries($save = false){
 
+    if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
+      print_red(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). \n Your Settings can't be saved to asterisk Database. "));
+      return(true);
+    }
+
     // Get Configuration for Mysql database Server
     $a_SETUP        = $_SESSION['config']->data['SERVERS']['FON'];  // DB Configuration
     $s_parameter    = "";                                           // Contains paramter for selected Macro 
@@ -530,6 +535,7 @@ class phoneAccount extends plugin
 
   function execute()
   {
+    $display = "";
     /* Do we represent a valid account? */
     if (!$this->is_account && $this->parent == NULL){
       $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
@@ -548,17 +554,22 @@ class phoneAccount extends plugin
       $this->macro ="none";
     }
 
+    /* Prepare templating */
+    $smarty= get_smarty();
+
     /* tell user that the pluging selected is no longer available*/
     if((!$this->macrostillavailable)&&($this->macro!="none")){
       print_red(_("The macro you selected, is no longer available for you, please choose another one."));
     }
 
-    /* Prepare templating */
-    $smarty= get_smarty();
-
     /* Assing macroselectbox values  */
     $smarty->assign("macros",$this->macros);   
     $smarty->assign("macro", $this->macro);   
+
+    /* check if there is a FON server created */
+    if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
+      print_red(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). \n Your Settings can't be saved to asterisk Database. "));
+    }
 
     /* Create parameter table, skip if no parameters given */
     if(!isset($this->macroarray[$this->macro])){
