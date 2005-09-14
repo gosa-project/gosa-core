@@ -52,6 +52,8 @@ class macro extends plugin
   {
     plugin::plugin ($config, $dn);
 
+    unset($_SESSION['config']->data['SERVERS']['FON']);
+
     $ldap= $config->get_ldap_link();
 
     $this->dn = $dn;
@@ -84,6 +86,10 @@ class macro extends plugin
     $vars 	= "";
     $tmp  	= array();
     $number = 0; 
+
+    if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
+      print_red(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). \n  Your Settings can't be saved to asterisk Database. "));
+    }
 
     /* Do we represent a valid group? */
     if (!$this->is_account && $this->parent == NULL){
@@ -169,6 +175,10 @@ class macro extends plugin
 
   // Generate MySQL Syntax 
   function generate_mysql_entension_entries($save = false,$delete_only=false,$remove_old_macroname=false){
+
+    if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
+      return(true);
+    }
 
     // Get Configuration for Mysql database Server  
     $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
