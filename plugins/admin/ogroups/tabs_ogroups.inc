@@ -22,15 +22,17 @@ class ogrouptabs extends tabs
 
           break;
 
-        case "U":
-          /* Append a PhoneQueue, if objectClass = goFonAccount */
-          $use = false;
+          case "U":
+            /* Append a PhoneQueue, if objectClass = goFonAccount */
+            $use = false;
           foreach($this->by_object['ogroup']->memberList as $dn => $val){
-            if(in_array("goFonAccount",$val['objectClass'])){
-              $use = true; 
+            if(isset($val['objectClass'])){
+              if(in_array("goFonAccount",$val['objectClass'])){
+                $use = true; 
+              }
             }
           }
-    
+
           /* We found goFonAccount in users objectClasses*/
           if($use){
             require_once("class_phonequeue.inc");

@@ -16,7 +16,6 @@ class macro extends plugin
   /*! CLI vars */
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
-
   /*! Macro attributes,  */
   var $generate_error= "";
   

@@ -104,6 +104,8 @@ class phonequeue extends plugin
       $this->is_account= !$this->is_account;
     }
 
+    unset($_SESSION['config']->data['SERVERS']['FON']);
+
     /* Show tab dialog headers */
     if ($this->parent != NULL){
       if ($this->is_account){
@@ -219,7 +221,12 @@ class phonequeue extends plugin
   {
 
     $SQL = array();
- 
+
+    if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
+      return(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). \n  Your Settings can't be saved to asterisk Database. "));
+      return(false);
+    }
+
     // Get Configuration for Mysql database Server
     $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
     $s_parameter  ="";
