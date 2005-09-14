@@ -215,6 +215,12 @@ class conference extends plugin
 
 
   function SQL_add_me($save){
+
+    if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
+      $this->generate_error = _("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). \n  Your Settings can't be saved to asterisk Database. ");
+      return(false);
+    }
+  
     // Get Configuration for Mysql database Server
     $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
 
