@@ -52,8 +52,6 @@ class macro extends plugin
   {
     plugin::plugin ($config, $dn);
 
-    unset($_SESSION['config']->data['SERVERS']['FON']);
-
     $ldap= $config->get_ldap_link();
 
     $this->dn = $dn;
