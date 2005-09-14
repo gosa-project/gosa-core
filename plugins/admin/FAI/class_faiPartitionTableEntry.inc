@@ -295,7 +295,7 @@ class faiPartitionTableEntry extends plugin
     }
 
     $str = utf8_encode("üצה");
-    if(preg_match("/[^a-z0-9".$str."\.,;:-_\? ]/i",$this->DISK_description)){
+    if(preg_match("/[^a-z0-9".$str."\.,;:\-_\? ]/i",$this->DISK_description)){
       $message[]=_("Please enter a valid description.");
     }
     

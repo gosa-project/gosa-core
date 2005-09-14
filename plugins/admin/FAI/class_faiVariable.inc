@@ -194,7 +194,7 @@ class faiVariable extends plugin
   {
     $message= array();
     $str = utf8_encode("üצה");
-    if((empty($this->description))||(preg_match("/[^a-z0-9".$str."\.,;:-_\? ]/i",$this->description))){
+    if((empty($this->description))||(preg_match("/[^a-z0-9".$str."\.,;:\-_\? ]/i",$this->description))){
       $message[]=_("Please enter a valid description.");
     }
     return ($message);
