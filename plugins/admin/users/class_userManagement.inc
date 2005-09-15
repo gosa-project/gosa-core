@@ -788,7 +788,6 @@ class userManagement extends plugin
               $fonac = preg_replace("/%title%/", $connected, $fonac);
             }
           }
-        mysql_close($r_con);
         }
       }else{
         $fonac=$empty;
@@ -897,6 +896,7 @@ class userManagement extends plugin
     $smarty->assign("alphabet", generate_alphabet());
     $smarty->assign("hint", print_sizelimit_warning());
 
+    @mysql_close($r_con);
     return ($smarty->fetch(get_template_path('headpage.tpl', TRUE)));
   }
 

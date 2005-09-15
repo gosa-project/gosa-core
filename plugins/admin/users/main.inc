@@ -48,6 +48,11 @@ if ($remove_lock){
 
   /* Generate dialog output */
   $display.= $output;
+  $display.="<!-- Place cursor -->
+             <script language=\"JavaScript\" type=\"text/javascript\">
+              document.mainform.edit_finish.select();
+              document.mainform.edit_finish.focus();
+             </script>";
 
   /* Reset requested? */
   if (isset($_GET['reset']) && $_GET['reset'] == 1){
