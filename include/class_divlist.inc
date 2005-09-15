@@ -12,8 +12,22 @@ class divlist {
 	// Members for page managment
 	var $i_currentPage;
 	var $i_entriesPerPage;
-	
-	
+
+	// Added php 4 constructor
+	function divlist($pageid){
+
+		$this->i_currentPage    = 0;
+		$this->i_entriesPerPage = 10;
+		$this->s_summary                = "";
+		$this->a_entries                = array();
+		$this->a_header                 = array();
+		$this->b_displayPageNums= true;
+		$this->cols                     = 0;
+		$this->pageid                   = $pageid ;
+
+	}
+
+
 	function __construct($pageid){
 		$this->i_currentPage	= 0;
 		$this->i_entriesPerPage	= 10;
