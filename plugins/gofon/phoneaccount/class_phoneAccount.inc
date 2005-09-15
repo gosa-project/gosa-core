@@ -476,12 +476,12 @@ class phoneAccount extends plugin
         $EXT[$i]['app']     = 'SIP/'.$this->uid;
         $i ++;  
         /* SetCID */
-        $EXT[$i]['context'] = 'GOsa';
-        $EXT[$i]['exten']   = $s_telenums;
-        $EXT[$i]['priority']= 1;
-        $EXT[$i]['app']     = "SetCIDName";
-        $EXT[$i]['appdata'] = $CNname;
-        $i ++;  
+        //$EXT[$i]['context'] = 'GOsa';
+        //$EXT[$i]['exten']   = $s_telenums;
+        //$EXT[$i]['priority']= 1;
+        //$EXT[$i]['app']     = "SetCIDName";
+        //$EXT[$i]['appdata'] = $CNname;
+        //$i ++;  
 
         // If no macro is selected use Dial
         if($this->macro!="none"){ 
@@ -496,7 +496,7 @@ class phoneAccount extends plugin
 
         $EXT[$i]['context'] = 'GOsa';
         $EXT[$i]['exten']   = $s_telenums;
-        $EXT[$i]['priority']= 2;
+        $EXT[$i]['priority']= 1;
         $EXT[$i]['app']     = $s_app;
         $EXT[$i]['appdata'] = $s_par;
         $i ++;
