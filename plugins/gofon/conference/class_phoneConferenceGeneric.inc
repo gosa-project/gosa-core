@@ -403,13 +403,24 @@ class conference extends plugin
   /* Save to LDAP */
   function save()
   {
+
+    if((!isset($this->attrs['goFonPIN']))){
+      $pin_use = false;
+    }else{
+      $pin_use = true;
+    }
+
     plugin::save();
 
     $this->SQL_remove_me(true);
     $this->SQL_add_me(true);
 
     if(empty($this->goFonConferenceOption_P)){
-      $this->attrs['goFonPIN']=array();
+      if($pin_use){
+        $this->attrs['goFonPIN']=array();
+      }else{
+        unset($this->attrs['goFonPIN']);
+      }
     }
     $this->attrs['goFonConferenceOption']="";
     foreach(array("goFonConferenceOption_P","goFonConferenceOption_r","goFonConferenceOption_M","goFonConferenceOption_s",
