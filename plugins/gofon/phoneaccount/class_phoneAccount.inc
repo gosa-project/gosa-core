@@ -536,6 +536,43 @@ class phoneAccount extends plugin
   function execute()
   {
     $display = "";
+
+    if(empty($this->macro)&&(!empty($this->goFonMacro))){
+
+      /* Go through already saved values, for a parameter */
+      $tmp = split("!",$this->goFonMacro);
+
+      /* it is possible that nothing has been saved yet */
+      if(is_array($tmp)){
+
+        /* First value is the macroname */
+        $this->macro = $tmp[0];
+
+        /* Macroname saved, delete that index */
+        unset($tmp[0]);
+
+        /* Check if makro has been removed */
+        if(!isset($this->macroarray[$this->macro])){
+          $this->macrostillavailable = false;
+        }else{
+          $this->macrostillavailable = true;
+        }
+
+        /* for each parametervalues ( parameterID#value like 25#twentyfive) */
+        foreach($tmp as $var){
+
+          /* Split this, so we have $varar[0] = parameterID $varar[1] = SelectedValue */
+          $varar = split("#",$var);
+
+          /* Only insert if the parameter still exists */
+          if(isset($this->macroarray[$this->macro][$varar[0]])){
+            /* Assign value */
+            $this->macroarray[$this->macro][$varar[0]]['choosen']=$varar[1];
+          }
+        }
+      }
+    }
+    
     /* Do we represent a valid account? */
     if (!$this->is_account && $this->parent == NULL){
       $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
