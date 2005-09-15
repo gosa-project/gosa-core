@@ -48,7 +48,14 @@ if ($remove_lock){
 
 	/* Show and save dialog */
 	$department->save_object();
+
 	$display.= $output;
+
+	$display.="<!-- Place cursor -->
+		<script language=\"JavaScript\" type=\"text/javascript\">
+		document.mainform.edit_finish.focus();
+		</script>";
+
 	$_SESSION['department']= $department;
 }
 

@@ -48,6 +48,9 @@ if ($remove_lock){
 
 	/* Show and save dialog */
 	$display.= $output;
+	$display.= "<script language=\"JavaScript\" type=\"text/javascript\">
+			document.mainform.edit_finish.focus();
+			</script>";
 	$_SESSION['applicationManagement']= $applicationManagement;
 }
 
