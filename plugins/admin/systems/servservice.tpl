@@ -2,8 +2,8 @@
  <tr>
   <td style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;" width="50%">
 
-   <input type=checkbox name="goShareServer" value="1" {$goShareServer} {$goShareServer}  
-			onchange="changeState('goExportEntry');
+   <input type=checkbox name="goShareServer" value="1" {$goShareServer} 
+   	onchange="changeState('goExportEntry');
 			changeState('NewNfsEditId');
 			changeState('DelNfsEntId');
 			changeState('NewNfsAddId');"> 
@@ -18,7 +18,7 @@
 	    </select>
 	<br>	
 		<input type="submit" 	value="{t}Edit{/t}" 	name="NewNfsEdit" {$goShareServer} {$goExportEntryACL}  id="NewNfsEditId"> 
-		<input type="submit" 	value="{t}Add{/t}"	 	name="NewNfsAdd"  {$goShareServer} {$goExportEntryACL}	id="NewNfsAddId"> 
+		<input type="submit" 	value="{t}Add{/t}"	name="NewNfsAdd"  {$goShareServer} {$goExportEntryACL}	id="NewNfsAddId"> 
 		<input type="submit" 	value="{t}Delete{/t}"  	name="DelNfsEnt"  {$goShareServer} {$goExportEntryACL}	id="DelNfsEntId">
 	</td>
 	</tr>

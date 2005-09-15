@@ -13,7 +13,7 @@ class servservice extends plugin
   var $goXdmcpIsEnabled = "";
   var $goFontPath       = "";
   var $goNTPServer      = "";
-  var $goShareServer      = "";
+  var $goShareServer    = false;
   var $goLdapServer     = "";
   var $goTerminalServer = "";
   var $goSyslogServer   = "";
@@ -57,17 +57,25 @@ class servservice extends plugin
 
     $tmp =array();
     $tmp2=array();
-    unset($this->attrs['goExportEntry']['count']);
-    if((isset($this->attrs['goExportEntry']))&&(isset($this->attrs['goExportEntry']))){
-      foreach($this->attrs['goExportEntry'] as $entry){
-        $tmp2= split("\|",$entry);
-        $tmp[$tmp2[0]]= $entry;
+    if(isset($this->attrs['goExportEntry'])){
+      unset($this->attrs['goExportEntry']['count']);
+      if((isset($this->attrs['goExportEntry']))&&(isset($this->attrs['goExportEntry']))){
+        foreach($this->attrs['goExportEntry'] as $entry){
+          $tmp2= split("\|",$entry);
+          $tmp[$tmp2[0]]= $entry;
+        }
       }
     }
     $this->goExportEntry = $tmp;
 
     /* Always is account... */
     $this->is_account= TRUE;
+
+    if(is_array($this->attrs['objectClass'])){ 
+      if(in_array("goShareServer",$this->attrs['objectClass'])){
+        $this->goShareServer = true;    
+      }
+    }
   }
 
   function addToList($entry){
@@ -182,8 +190,12 @@ class servservice extends plugin
       }
     }
 
-    if(!count($this->goExportEntry)){
+    if(!$this->goShareServer){
       $smarty->assign("goShareServerState", " disabled ");
+      $smarty->assign("goExportEntryACL", " disabled ");
+    }else{
+      $smarty->assign("goShareServerState", "  ");
+      $smarty->assign("goExportEntryACL", "  ");
     }
 
     /* Different handling for checkbox */
@@ -227,6 +239,12 @@ class servservice extends plugin
         $this->goXdmcpIsEnabled= "false";
       }
         
+      /* Save xdmcp is enabled flag */
+      if (isset($_POST['goShareServer'])){
+        $this->goShareServer = true;
+      } else {
+        $this->goShareServer = false;
+      }
     }
   }
 
