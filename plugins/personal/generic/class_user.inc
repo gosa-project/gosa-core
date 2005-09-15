@@ -185,7 +185,8 @@ class user extends plugin
     if (isset ($this->attrs['dateOfBirth'])){
       /* This entry is ISO 8601 conform */
       list($year, $month, $day)= split("-", $this->attrs['dateOfBirth'][0], 3);
-      $this->dob= mktime ( 0, 0, 0, $month, $day, $year);
+    
+      $this->dob=array( 'mon'=> $month,"mday"=> $day,"year"=> $year);
       $this->use_dob= "1";
     } else {
       $this->use_dob= "0";
@@ -207,7 +208,11 @@ class user extends plugin
     if ($this->dob == "0"){
       $date= getdate();
     } else {
-      $date= getdate($this->dob);
+      if(is_array($this->dob)){
+        $date = $this->dob;
+      }else{
+        $date = getdate($this->dob);
+      } 
     }
 
     $days= array();
@@ -215,7 +220,16 @@ class user extends plugin
       $days[$d]= $d;
     }
     $years= array();
-    for($y= $date['year']-100; $y<=$date['year']+100; $y++){
+
+    if(($date['year']-100)<1901){
+      $start = 1901;
+    }else{
+      $start = $date['year']-100;
+    }
+
+    $end = $start +100;
+    
+    for($y= $start; $y<=$end; $y++){
       $years[]= $y;
     }
     $years['-']= "-&nbsp;";
