@@ -876,6 +876,10 @@ class user extends plugin
     /* Assemble cn */
     $this->cn= $this->givenName." ".$this->sn;
 
+    if(preg_match("/[^a-z0-9]/",$this->uid)){
+      $message[]=_("Invalid characters in uid.") ;
+    }
+
     /* Permissions for that base? */
     if (isset($this->config->current['DNMODE']) && $this->config->current['DNMODE'] == "uid"){
       $new_dn= 'uid='.$this->uid.','.get_people_ou().$this->base;
@@ -960,12 +964,12 @@ class user extends plugin
     }
 
     /* Check for reserved characers */
-    if (preg_match ('/[,+"?\'()-=<>;]/', $this->givenName)){
+    if (preg_match ('/[,+"?\'()=<>;]/', $this->givenName)){
       $message[]= _("The field 'Given name' contains invalid characters.");
-  }
-  if (preg_match ('/[,+"?\'()-=<>;]/', $this->sn)){
-    $message[]= _("The field 'Name' contains invalid characters.");
-  }
+    }
+    if (preg_match ('/[,+"?\'()=<>;]/', $this->sn)){
+      $message[]= _("The field 'Name' contains invalid characters.");
+    }
 
   return $message;
   }
