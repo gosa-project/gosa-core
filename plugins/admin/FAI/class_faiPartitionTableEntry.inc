@@ -333,7 +333,7 @@ class faiPartitionTableEntry extends plugin
 
       if($part['FAIfsType'] == "swap"){
         if(in_array($part['FAIfsType'],$alreadyUsed['FAIfsType'])){
-          $message[]=sprintf(_("Fils system type 'swap' is already used, change file system type for partition %s."),$key);
+          $message[]=sprintf(_("File system type 'swap' is already used, change file system type for partition %s."),$key);
         }
       }
 
