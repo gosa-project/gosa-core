@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-09-16 16:15+0200\n"
+"PO-Revision-Date: 2005-09-16 16:25+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -4000,7 +4000,7 @@ msgstr "PT"
 
 #: plugins/admin/FAI/class_faiManagement.inc:366
 msgid "New script bundle"
-msgstr "Neue Skript-Liste"
+msgstr "Neue Skript-Gruppe"
 
 #: plugins/admin/FAI/class_faiManagement.inc:366
 msgid "S"
@@ -4017,7 +4017,7 @@ msgstr "H"
 
 #: plugins/admin/FAI/class_faiManagement.inc:372
 msgid "New variable bundle"
-msgstr "Neue Variablen-Liste"
+msgstr "Neue Variablen-Gruppe"
 
 #: plugins/admin/FAI/class_faiManagement.inc:372
 msgid "V"
@@ -4025,7 +4025,7 @@ msgstr "V"
 
 #: plugins/admin/FAI/class_faiManagement.inc:375
 msgid "New template bundle"
-msgstr "Neue Vorlagen-Liste"
+msgstr "Neue Vorlagen-Gruppe"
 
 #: plugins/admin/FAI/class_faiManagement.inc:375
 msgid "T"
@@ -4033,16 +4033,15 @@ msgstr "T"
 
 #: plugins/admin/FAI/class_faiManagement.inc:378
 msgid "New package bundle"
-msgstr "Neue Paket-Liste"
+msgstr "Neue Paket-Gruppe"
 
 #: plugins/admin/FAI/class_faiManagement.inc:378
 msgid "PK"
 msgstr "PK"
 
 #: plugins/admin/FAI/class_faiManagement.inc:383
-#, fuzzy
 msgid "New profile bundle"
-msgstr "Benutze Profil-Verwaltung"
+msgstr "Neue Profil-Gruppe"
 
 #: plugins/admin/FAI/class_faiManagement.inc:383
 msgid "P"
@@ -4079,7 +4078,7 @@ msgstr "Partitionstabelle"
 
 #: plugins/admin/FAI/class_faiManagement.inc:424
 msgid "Package list"
-msgstr "Paket-Liste"
+msgstr "Paket-Gruppe"
 
 #: plugins/admin/FAI/class_faiManagement.inc:431
 msgid "Script set"
@@ -4087,7 +4086,7 @@ msgstr "Skript-Gruppe"
 
 #: plugins/admin/FAI/class_faiManagement.inc:438
 msgid "Variable set"
-msgstr "Variablen-Satz"
+msgstr "Variablen-Gruppe"
 
 #: plugins/admin/FAI/class_faiManagement.inc:445
 msgid "Hook set"
@@ -4213,17 +4212,17 @@ msgstr "Gespräch halten"
 #: plugins/admin/FAI/class_faiProfile.inc:148
 #: plugins/admin/FAI/class_faiProfileEntry.inc:114
 msgid "Template bundle"
-msgstr "Vorlagen-Liste"
+msgstr "Vorlagen-Gruppe"
 
 #: plugins/admin/FAI/class_faiProfile.inc:149
 #: plugins/admin/FAI/class_faiProfileEntry.inc:115
 msgid "Script bundle"
-msgstr "Skript-Liste"
+msgstr "Skript-Gruppe"
 
 #: plugins/admin/FAI/class_faiProfile.inc:150
 #: plugins/admin/FAI/class_faiProfileEntry.inc:116
 msgid "Variable bundle"
-msgstr "Variablen-Liste"
+msgstr "Variablen-Gruppe"
 
 #: plugins/admin/FAI/class_faiProfile.inc:151
 msgid "Packages bundle"
@@ -4251,9 +4250,8 @@ msgid "There is already a profile with this class name defined."
 msgstr "Der von Ihnen angegebene Klassen-Name ist bereits für ein Profil vergeben."
 
 #: plugins/admin/FAI/faiProfile.tpl:31
-#, fuzzy
 msgid "List of used class names"
-msgstr "Wählen Sie den Telefon-Typ"
+msgstr "Liste benutzter Klassen-Namen"
 
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:191
 msgid "Nr"
@@ -4338,7 +4336,7 @@ msgstr "Bitte geben Sie einen gültigen Bereich für Partition %s ein."
 #, php-format
 msgid ""
 "Size settings for partition %s, overlap with size settings for partition %s."
-msgstr ""
+msgstr "Die Größeneinstellungen für Partition %s überlappt mit den Größeneinstellungen der Partition %s."
 
 #: plugins/admin/FAI/faiPartitionTableEntry.tpl:11
 msgid "Choose a disc name"
@@ -4463,7 +4461,7 @@ msgstr "Bitte geben Sie einen Wert für 'Skript' ein."
 
 #: plugins/admin/FAI/class_faiProfileEntry.inc:117
 msgid "Package bundle"
-msgstr "Paket-Liste"
+msgstr "Paket-Gruppe"
 
 #: plugins/admin/FAI/faiHookEntry.tpl:29
 msgid "Hook attributes"
@@ -4479,7 +4477,7 @@ msgstr "Erstelle neues FAI-Objekt - Partitions-Tabelle"
 
 #: plugins/admin/FAI/class_askClassName.inc:69
 msgid "Create new FAI object - package list."
-msgstr "Erstelle neues FAI-Objekt - Paket-Liste"
+msgstr "Erstelle neues FAI-Objekt - Paket-Gruppe"
 
 #: plugins/admin/FAI/class_askClassName.inc:70
 msgid "Create new FAI object - set of scripts."
@@ -7775,7 +7773,7 @@ msgstr "Zeichenkette"
 
 #: plugins/gofon/macro/class_gofonMacroParameters.inc:240
 msgid "Combobox"
-msgstr "Auswahl-Liste"
+msgstr "Auswahl-Gruppe"
 
 #: plugins/gofon/macro/class_gofonMacroParameters.inc:241
 msgid "Bool"
