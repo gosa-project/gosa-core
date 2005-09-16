@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-09-16 17:42+0200\n"
+"PO-Revision-Date: 2005-09-16 17:57+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1669,7 +1669,7 @@ msgstr "Regulärer Ausdruck zum Erkennen von Hotplug-Geräten"
 #: plugins/personal/environment/hotplugDialog.tpl:75
 #: plugins/personal/environment/selectPrinterDialog.tpl:74
 #: plugins/personal/environment/logonManagement.tpl:77
-#: plugins/admin/FAI/askClassName.tpl:27 plugins/admin/FAI/askClassName.tpl:44
+#: plugins/admin/FAI/askClassName.tpl:26 plugins/admin/FAI/askClassName.tpl:43
 msgid "Use"
 msgstr "Benutzen"
 
@@ -4500,59 +4500,6 @@ msgid "Please enter a valid class name. Only 0-9 a-z is allowed here."
 msgstr ""
 "Bitte geben Sie einen gültigen Klassen-Namen ein (0-9 und a-z sind erlaubt)."
 
-#: plugins/admin/FAI/askClassName.tpl:5
-msgid ""
-"Please select a class name for this object. The class name specifies a set "
-"of configurations."
-msgstr ""
-"Bitte geben Sie einen Klassen-Namen für dieses Objekt ein. Der Klassen-Name "
-"beschreibt einen Satz von Konfigurationen."
-
-#: plugins/admin/FAI/askClassName.tpl:7
-msgid ""
-"Every Class name must be unique. But it can be used for different objects at "
-"the same time.\n"
-"\n"
-"\t   If you use this class name in a profile, all object with this class "
-"name will be included to this profile."
-msgstr ""
-"Jeder Klassen-Name muss eindeutig sein, jedoch kann er für verschiedene "
-"Objekte zur gleichen Zeit genutzt werden.\n"
-"\n"
-"\t   Wenn Sie diesen Klassen-Namen in einem Profil nutzen, werden alle "
-"Objekte mit diesem Klassen-Namen im Profil enthalten sein."
-
-#: plugins/admin/FAI/askClassName.tpl:11
-msgid ""
-"The list box below shows all available class names you may use, for this "
-"object, to avoid duplicates."
-msgstr ""
-"Die Listenbox unten enthält alle verfügbaren Klassen-Namen, die sie für "
-"dieses Objekt verwenden können, um Duplikate zu vermeiden."
-
-#: plugins/admin/FAI/askClassName.tpl:17
-msgid "You can select of one the following class names for this object."
-msgstr ""
-"Sie können einen der folgenden Klassen-Namen für dieses Objekt auswählen."
-
-#: plugins/admin/FAI/askClassName.tpl:21
-msgid "Available class names."
-msgstr "Verfügbare Klassen-Namen"
-
-#: plugins/admin/FAI/askClassName.tpl:24
-msgid "Choose class name"
-msgstr "Wählen Sie den Klassen-Namen"
-
-#: plugins/admin/FAI/askClassName.tpl:36
-msgid "Please enter your class name here, if want to create a new class."
-msgstr ""
-"Bitte geben Sie Ihren neuen Klassen-Namen an, wenn Sie eine neue Klasse "
-"erstellen möchten."
-
-#: plugins/admin/FAI/askClassName.tpl:40
-msgid "A new class name.</b>"
-msgstr "Ein neuer Klassen-Name.</b>"
-
 #: plugins/admin/FAI/class_faiTemplateEntry.inc:77
 msgid "Please specify a value for attribute 'file'."
 msgstr "Bitte geben Sie einen Wert für Attribut 'Datei' an."
@@ -4626,6 +4573,55 @@ msgstr "Wählen Sie einen Haltepunkt zum Entfernen oder Bearbeiten"
 #: plugins/admin/FAI/faiTemplate.tpl:40
 msgid "Choose a template to delete or edit"
 msgstr "Wählen Sie eine Vorlage zum Entfernen oder Bearbeiten"
+
+#: plugins/admin/FAI/askClassName.tpl:5
+msgid ""
+"Please select a class name for this object. The class name specifies a set "
+"of configurations."
+msgstr ""
+"Bitte geben Sie einen Klassen-Namen für dieses Objekt ein. Der Klassen-Name "
+"beschreibt eine Gruppe von Konfigurationen."
+
+#: plugins/admin/FAI/askClassName.tpl:7
+msgid ""
+"Every Class name must be unique. But it can be used for different objects at "
+"the same time.If you use this class name in a profile, all object with this "
+"class name will be included to this profile."
+msgstr ""
+"Jeder Klassen-Name muss eindeutig sein, jedoch kann er für verschiedene "
+"Objekte zur gleichen Zeit genutzt werden. Wenn Sie diesen Klassen-Namen in einem Profil nutzen, "
+"werden alle Objekte mit diesem Klassen-Namen im Profil enthalten sein."
+
+#: plugins/admin/FAI/askClassName.tpl:10
+msgid ""
+"The list box below shows all available class names you may use, for this "
+"object, to avoid duplicates."
+msgstr ""
+"Die Listenbox unten enthält alle verfügbaren Klassen-Namen, die sie für "
+"dieses Objekt verwenden können, um Duplikate zu vermeiden."
+
+#: plugins/admin/FAI/askClassName.tpl:16
+msgid "You can select of one the following class names for this object."
+msgstr ""
+"Sie können einen der folgenden Klassen-Namen für dieses Objekt auswählen."
+
+#: plugins/admin/FAI/askClassName.tpl:20
+msgid "Available class names."
+msgstr "Verfügbare Klassen-Namen"
+
+#: plugins/admin/FAI/askClassName.tpl:23
+msgid "Choose class name"
+msgstr "Wählen Sie den Klassen-Namen"
+
+#: plugins/admin/FAI/askClassName.tpl:35
+msgid "Please enter your class name here, if want to create a new class."
+msgstr ""
+"Bitte geben Sie Ihren neuen Klassen-Namen an, wenn Sie eine neue Klasse "
+"erstellen möchten."
+
+#: plugins/admin/FAI/askClassName.tpl:39
+msgid "A new class name.</b>"
+msgstr "Ein neuer Klassen-Name.</b>"
 
 #: plugins/admin/groups/mail.tpl:11
 msgid "Primary mail address for this shared folder"

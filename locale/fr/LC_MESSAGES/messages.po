@@ -1678,7 +1678,7 @@ msgstr ""
 #: plugins/personal/environment/hotplugDialog.tpl:75
 #: plugins/personal/environment/selectPrinterDialog.tpl:74
 #: plugins/personal/environment/logonManagement.tpl:77
-#: plugins/admin/FAI/askClassName.tpl:27 plugins/admin/FAI/askClassName.tpl:44
+#: plugins/admin/FAI/askClassName.tpl:26 plugins/admin/FAI/askClassName.tpl:43
 msgid "Use"
 msgstr "Utiliser"
 
@@ -4524,47 +4524,6 @@ msgstr ""
 "Veuillez indiquer un nom de classe valide. Seul les chiffres de 0 à 9 et les "
 "lettres de a à Z sont permises."
 
-#: plugins/admin/FAI/askClassName.tpl:5
-msgid ""
-"Please select a class name for this object. The class name specifies a set "
-"of configurations."
-msgstr ""
-
-#: plugins/admin/FAI/askClassName.tpl:7
-msgid ""
-"Every Class name must be unique. But it can be used for different objects at "
-"the same time.\n"
-"\n"
-"\t   If you use this class name in a profile, all object with this class "
-"name will be included to this profile."
-msgstr ""
-
-#: plugins/admin/FAI/askClassName.tpl:11
-msgid ""
-"The list box below shows all available class names you may use, for this "
-"object, to avoid duplicates."
-msgstr ""
-
-#: plugins/admin/FAI/askClassName.tpl:17
-msgid "You can select of one the following class names for this object."
-msgstr ""
-
-#: plugins/admin/FAI/askClassName.tpl:21
-msgid "Available class names."
-msgstr "Nom de classes disponibles."
-
-#: plugins/admin/FAI/askClassName.tpl:24
-msgid "Choose class name"
-msgstr ""
-
-#: plugins/admin/FAI/askClassName.tpl:36
-msgid "Please enter your class name here, if want to create a new class."
-msgstr ""
-
-#: plugins/admin/FAI/askClassName.tpl:40
-msgid "A new class name.</b>"
-msgstr "Un nouveau nom de classe.</b>"
-
 #: plugins/admin/FAI/class_faiTemplateEntry.inc:77
 msgid "Please specify a value for attribute 'file'."
 msgstr "Veuillez spécifier une valeur pour l'attribut 'fichier'."
@@ -4639,6 +4598,45 @@ msgstr ""
 #: plugins/admin/FAI/faiTemplate.tpl:40
 msgid "Choose a template to delete or edit"
 msgstr "Choisissez le modèle à effacer où éditer"
+
+#: plugins/admin/FAI/askClassName.tpl:5
+msgid ""
+"Please select a class name for this object. The class name specifies a set "
+"of configurations."
+msgstr ""
+
+#: plugins/admin/FAI/askClassName.tpl:7
+msgid ""
+"Every Class name must be unique. But it can be used for different objects at "
+"the same time.If you use this class name in a profile, all object with this "
+"class name will be included to this profile."
+msgstr ""
+
+#: plugins/admin/FAI/askClassName.tpl:10
+msgid ""
+"The list box below shows all available class names you may use, for this "
+"object, to avoid duplicates."
+msgstr ""
+
+#: plugins/admin/FAI/askClassName.tpl:16
+msgid "You can select of one the following class names for this object."
+msgstr ""
+
+#: plugins/admin/FAI/askClassName.tpl:20
+msgid "Available class names."
+msgstr "Nom de classes disponibles."
+
+#: plugins/admin/FAI/askClassName.tpl:23
+msgid "Choose class name"
+msgstr ""
+
+#: plugins/admin/FAI/askClassName.tpl:35
+msgid "Please enter your class name here, if want to create a new class."
+msgstr ""
+
+#: plugins/admin/FAI/askClassName.tpl:39
+msgid "A new class name.</b>"
+msgstr "Un nouveau nom de classe.</b>"
 
 #: plugins/admin/groups/mail.tpl:11
 msgid "Primary mail address for this shared folder"

@@ -4,8 +4,7 @@
 </div>
 	{t}Please select a class name for this object. The class name specifies a set of configurations.{/t}
 	<br>
-	{t}Every Class name must be unique. But it can be used for different objects at the same time.\n
-	   If you use this class name in a profile, all object with this class name will be included to this profile.{/t}
+	{t}Every Class name must be unique. But it can be used for different objects at the same time.If you use this class name in a profile, all object with this class name will be included to this profile.{/t}
 	<br>
 	<br>
 	{t}The list box below shows all available class names you may use, for this object, to avoid duplicates.{/t}

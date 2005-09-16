@@ -1671,7 +1671,7 @@ msgstr "Expresiones regulares que concuerden con nombres de usuarios"
 #: plugins/personal/environment/hotplugDialog.tpl:75
 #: plugins/personal/environment/selectPrinterDialog.tpl:74
 #: plugins/personal/environment/logonManagement.tpl:77
-#: plugins/admin/FAI/askClassName.tpl:27 plugins/admin/FAI/askClassName.tpl:44
+#: plugins/admin/FAI/askClassName.tpl:26 plugins/admin/FAI/askClassName.tpl:43
 #, fuzzy
 msgid "Use"
 msgstr "Usuario"
@@ -4606,49 +4606,6 @@ msgstr "El valor especificado como 'Nombre' esta siendo utilizado."
 msgid "Please enter a valid class name. Only 0-9 a-z is allowed here."
 msgstr "Por favor especifique un nombre de usuario valido."
 
-#: plugins/admin/FAI/askClassName.tpl:5
-msgid ""
-"Please select a class name for this object. The class name specifies a set "
-"of configurations."
-msgstr ""
-
-#: plugins/admin/FAI/askClassName.tpl:7
-msgid ""
-"Every Class name must be unique. But it can be used for different objects at "
-"the same time.\n"
-"\n"
-"\t   If you use this class name in a profile, all object with this class "
-"name will be included to this profile."
-msgstr ""
-
-#: plugins/admin/FAI/askClassName.tpl:11
-msgid ""
-"The list box below shows all available class names you may use, for this "
-"object, to avoid duplicates."
-msgstr ""
-
-#: plugins/admin/FAI/askClassName.tpl:17
-msgid "You can select of one the following class names for this object."
-msgstr ""
-
-#: plugins/admin/FAI/askClassName.tpl:21
-#, fuzzy
-msgid "Available class names."
-msgstr "Aplicaciones disponibles"
-
-#: plugins/admin/FAI/askClassName.tpl:24
-#, fuzzy
-msgid "Choose class name"
-msgstr "Elija tipo de ratón"
-
-#: plugins/admin/FAI/askClassName.tpl:36
-msgid "Please enter your class name here, if want to create a new class."
-msgstr ""
-
-#: plugins/admin/FAI/askClassName.tpl:40
-msgid "A new class name.</b>"
-msgstr ""
-
 #: plugins/admin/FAI/class_faiTemplateEntry.inc:77
 #, fuzzy
 msgid "Please specify a value for attribute 'file'."
@@ -4727,6 +4684,47 @@ msgstr ""
 #, fuzzy
 msgid "Choose a template to delete or edit"
 msgstr "Elija un departamento para guardar la entrada"
+
+#: plugins/admin/FAI/askClassName.tpl:5
+msgid ""
+"Please select a class name for this object. The class name specifies a set "
+"of configurations."
+msgstr ""
+
+#: plugins/admin/FAI/askClassName.tpl:7
+msgid ""
+"Every Class name must be unique. But it can be used for different objects at "
+"the same time.If you use this class name in a profile, all object with this "
+"class name will be included to this profile."
+msgstr ""
+
+#: plugins/admin/FAI/askClassName.tpl:10
+msgid ""
+"The list box below shows all available class names you may use, for this "
+"object, to avoid duplicates."
+msgstr ""
+
+#: plugins/admin/FAI/askClassName.tpl:16
+msgid "You can select of one the following class names for this object."
+msgstr ""
+
+#: plugins/admin/FAI/askClassName.tpl:20
+#, fuzzy
+msgid "Available class names."
+msgstr "Aplicaciones disponibles"
+
+#: plugins/admin/FAI/askClassName.tpl:23
+#, fuzzy
+msgid "Choose class name"
+msgstr "Elija tipo de ratón"
+
+#: plugins/admin/FAI/askClassName.tpl:35
+msgid "Please enter your class name here, if want to create a new class."
+msgstr ""
+
+#: plugins/admin/FAI/askClassName.tpl:39
+msgid "A new class name.</b>"
+msgstr ""
 
 #: plugins/admin/groups/mail.tpl:11
 msgid "Primary mail address for this shared folder"
