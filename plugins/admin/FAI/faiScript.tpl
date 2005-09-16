@@ -31,7 +31,7 @@
 		<td>
 				<h2><img alt="" src="images/list_ogroup.png" align="middle" title="{t}Objects{/t}">&nbsp;
 					<LABEL for="SubObject">
-						{t}This bundle contains following objects{/t}
+						{t}This bundle contains the following objects{/t}
 					</LABEL>
 				</h2><br>
 				<table width="100%">

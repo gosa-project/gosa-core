@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-09-16 16:25+0200\n"
+"PO-Revision-Date: 2005-09-16 16:38+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -42,12 +42,14 @@ msgstr "Zusätzliches"
 #: plugins/gofax/blocklists/generic.tpl:1
 #: plugins/gofax/faxaccount/generic.tpl:6
 #: plugins/admin/FAI/faiPartitionTable.tpl:4
-#: plugins/admin/FAI/faiVariable.tpl:4 plugins/admin/FAI/faiScriptEntry.tpl:5
-#: plugins/admin/FAI/faiPackage.tpl:4 plugins/admin/FAI/faiProfile.tpl:1
+#: plugins/admin/FAI/faiScriptEntry.tpl:5 plugins/admin/FAI/faiPackage.tpl:4
+#: plugins/admin/FAI/faiProfile.tpl:1
 #: plugins/admin/FAI/faiPartitionTableEntry.tpl:3
-#: plugins/admin/FAI/faiScript.tpl:4 plugins/admin/FAI/faiVariableEntry.tpl:5
-#: plugins/admin/FAI/faiTemplate.tpl:4 plugins/admin/FAI/faiHookEntry.tpl:5
-#: plugins/admin/FAI/faiTemplateEntry.tpl:5 plugins/admin/FAI/faiHook.tpl:4
+#: plugins/admin/FAI/faiVariableEntry.tpl:5
+#: plugins/admin/FAI/faiHookEntry.tpl:5
+#: plugins/admin/FAI/faiTemplateEntry.tpl:5
+#: plugins/admin/FAI/faiVariable.tpl:4 plugins/admin/FAI/faiScript.tpl:4
+#: plugins/admin/FAI/faiHook.tpl:4 plugins/admin/FAI/faiTemplate.tpl:4
 #: plugins/admin/groups/mail.tpl:7
 #: plugins/generic/references/class_reference.inc:20
 msgid "Generic"
@@ -272,11 +274,10 @@ msgstr "Liste alternativer Mail-Adressen"
 #: plugins/gofax/faxaccount/locals.tpl:62
 #: plugins/gofax/faxaccount/lists.tpl:12 plugins/gofax/faxaccount/lists.tpl:16
 #: plugins/admin/FAI/faiPartitionTable.tpl:43
-#: plugins/admin/FAI/faiVariable.tpl:43
 #: plugins/admin/FAI/class_faiProfile.inc:144
-#: plugins/admin/FAI/faiScript.tpl:43 plugins/admin/FAI/faiTemplate.tpl:43
-#: plugins/admin/FAI/faiHook.tpl:43 plugins/admin/groups/mail.tpl:54
-#: plugins/admin/groups/mail.tpl:101
+#: plugins/admin/FAI/faiVariable.tpl:43 plugins/admin/FAI/faiScript.tpl:43
+#: plugins/admin/FAI/faiHook.tpl:43 plugins/admin/FAI/faiTemplate.tpl:43
+#: plugins/admin/groups/mail.tpl:54 plugins/admin/groups/mail.tpl:101
 #: plugins/admin/groups/class_groupMail.inc:404
 #: plugins/admin/groups/group_objects.tpl:49
 #: plugins/admin/groups/generic.tpl:88 plugins/admin/groups/mail_locals.tpl:68
@@ -307,13 +308,12 @@ msgstr "Hinzufügen"
 #: plugins/gofax/faxaccount/generic.tpl:77
 #: plugins/gofax/faxaccount/lists.tpl:13
 #: plugins/addons/addressbook/remove.tpl:15
-#: plugins/admin/FAI/faiPartitionTable.tpl:45
+#: plugins/admin/FAI/faiPartitionTable.tpl:45 plugins/admin/FAI/remove.tpl:15
 #: plugins/admin/FAI/faiVariable.tpl:45 plugins/admin/FAI/faiScript.tpl:45
-#: plugins/admin/FAI/faiTemplate.tpl:45 plugins/admin/FAI/remove.tpl:15
-#: plugins/admin/FAI/faiHook.tpl:45 plugins/admin/groups/mail.tpl:55
-#: plugins/admin/groups/mail.tpl:103 plugins/admin/groups/remove.tpl:15
-#: plugins/admin/groups/generic.tpl:90 plugins/admin/users/remove.tpl:15
-#: plugins/admin/applications/remove.tpl:14
+#: plugins/admin/FAI/faiHook.tpl:45 plugins/admin/FAI/faiTemplate.tpl:45
+#: plugins/admin/groups/mail.tpl:55 plugins/admin/groups/mail.tpl:103
+#: plugins/admin/groups/remove.tpl:15 plugins/admin/groups/generic.tpl:90
+#: plugins/admin/users/remove.tpl:15 plugins/admin/applications/remove.tpl:14
 #: plugins/admin/departments/remove.tpl:15
 #: plugins/admin/systems/servservice.tpl:22
 #: plugins/admin/systems/servservice.tpl:48
@@ -670,7 +670,7 @@ msgstr ""
 #: plugins/gofax/faxaccount/main.inc:97 plugins/addons/logview/contents.tpl:62
 #: plugins/admin/FAI/faiPartitionTable.tpl:44
 #: plugins/admin/FAI/faiVariable.tpl:44 plugins/admin/FAI/faiScript.tpl:44
-#: plugins/admin/FAI/faiTemplate.tpl:44 plugins/admin/FAI/faiHook.tpl:44
+#: plugins/admin/FAI/faiHook.tpl:44 plugins/admin/FAI/faiTemplate.tpl:44
 #: plugins/admin/systems/servservice.tpl:20
 #: plugins/admin/systems/printer.tpl:61
 #: plugins/gofon/phoneaccount/main.inc:112
@@ -1907,13 +1907,15 @@ msgstr "Anmeldungs-Skript-Einstellungen"
 #: plugins/addons/addressbook/class_addressbook.inc:504
 #: plugins/addons/addressbook/address_info.tpl:16
 #: plugins/admin/FAI/faiPartitionTable.tpl:9
-#: plugins/admin/FAI/faiVariable.tpl:9 plugins/admin/FAI/faiScriptEntry.tpl:9
-#: plugins/admin/FAI/faiPackage.tpl:9 plugins/admin/FAI/faiProfile.tpl:6
+#: plugins/admin/FAI/faiScriptEntry.tpl:9 plugins/admin/FAI/faiPackage.tpl:9
+#: plugins/admin/FAI/faiProfile.tpl:6
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:192
 #: plugins/admin/FAI/faiPartitionTableEntry.tpl:7
-#: plugins/admin/FAI/faiScript.tpl:9 plugins/admin/FAI/faiVariableEntry.tpl:9
-#: plugins/admin/FAI/faiTemplate.tpl:9 plugins/admin/FAI/faiHookEntry.tpl:9
-#: plugins/admin/FAI/faiTemplateEntry.tpl:9 plugins/admin/FAI/faiHook.tpl:9
+#: plugins/admin/FAI/faiVariableEntry.tpl:9
+#: plugins/admin/FAI/faiHookEntry.tpl:9
+#: plugins/admin/FAI/faiTemplateEntry.tpl:9
+#: plugins/admin/FAI/faiVariable.tpl:9 plugins/admin/FAI/faiScript.tpl:9
+#: plugins/admin/FAI/faiHook.tpl:9 plugins/admin/FAI/faiTemplate.tpl:9
 #: plugins/admin/users/template.tpl:19
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:98
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:112
@@ -1925,15 +1927,15 @@ msgstr "Name"
 #: plugins/personal/environment/hotplugDialogNew.tpl:14
 #: plugins/gofax/blocklists/generic.tpl:41
 #: plugins/admin/FAI/faiPartitionTable.tpl:19
-#: plugins/admin/FAI/faiVariable.tpl:19
 #: plugins/admin/FAI/faiScriptEntry.tpl:17 plugins/admin/FAI/faiPackage.tpl:19
 #: plugins/admin/FAI/faiProfile.tpl:16
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:193
 #: plugins/admin/FAI/faiPartitionTableEntry.tpl:18
-#: plugins/admin/FAI/faiScript.tpl:19
 #: plugins/admin/FAI/faiVariableEntry.tpl:17
-#: plugins/admin/FAI/faiTemplate.tpl:19 plugins/admin/FAI/faiHookEntry.tpl:17
-#: plugins/admin/FAI/faiTemplateEntry.tpl:17 plugins/admin/FAI/faiHook.tpl:19
+#: plugins/admin/FAI/faiHookEntry.tpl:17
+#: plugins/admin/FAI/faiTemplateEntry.tpl:17
+#: plugins/admin/FAI/faiVariable.tpl:19 plugins/admin/FAI/faiScript.tpl:19
+#: plugins/admin/FAI/faiHook.tpl:19 plugins/admin/FAI/faiTemplate.tpl:19
 #: plugins/admin/groups/generic.tpl:13
 #: plugins/admin/applications/generic.tpl:24
 #: plugins/admin/departments/generic.tpl:12
@@ -4007,9 +4009,8 @@ msgid "S"
 msgstr "S"
 
 #: plugins/admin/FAI/class_faiManagement.inc:369
-#, fuzzy
 msgid "New hook bundle"
-msgstr "Neues Telefon"
+msgstr "Neue Haltepunkt-Gruppe"
 
 #: plugins/admin/FAI/class_faiManagement.inc:369
 msgid "H"
@@ -4090,7 +4091,7 @@ msgstr "Variablen-Gruppe"
 
 #: plugins/admin/FAI/class_faiManagement.inc:445
 msgid "Hook set"
-msgstr ""
+msgstr "Haltepunkt-Gruppe"
 
 #: plugins/admin/FAI/class_faiManagement.inc:452
 msgid "Profile"
@@ -4105,7 +4106,7 @@ msgstr "Vorlage"
 
 #: plugins/admin/FAI/faiPartitionTable.tpl:32
 #: plugins/admin/FAI/faiVariable.tpl:32 plugins/admin/FAI/faiScript.tpl:32
-#: plugins/admin/FAI/faiTemplate.tpl:32 plugins/admin/FAI/faiHook.tpl:32
+#: plugins/admin/FAI/faiHook.tpl:32 plugins/admin/FAI/faiTemplate.tpl:32
 msgid "Objects"
 msgstr "Objekte"
 
@@ -4116,15 +4117,6 @@ msgstr "Diese Partitionstabelle enthält die folgenden Festplatten"
 #: plugins/admin/FAI/faiPartitionTable.tpl:40
 msgid "Choose a disk to delete or edit"
 msgstr "Wählen Sie eine Festplatte zum Entfernen oder Bearbeiten"
-
-#: plugins/admin/FAI/faiVariable.tpl:34 plugins/admin/FAI/faiScript.tpl:34
-#: plugins/admin/FAI/faiTemplate.tpl:34 plugins/admin/FAI/faiHook.tpl:34
-msgid "This bundle contains following objects"
-msgstr ""
-
-#: plugins/admin/FAI/faiVariable.tpl:40
-msgid "Choose a variable to delete or edit"
-msgstr "Wählen Sie eine Variable zum Entfernen oder Bearbeiten"
 
 #: plugins/admin/FAI/class_faiScriptEntry.inc:48
 msgid "Please select a valid file."
@@ -4165,9 +4157,8 @@ msgstr "Bitte geben Sie eine Namen ein."
 #: plugins/admin/FAI/class_faiVariableEntry.inc:93
 #: plugins/admin/FAI/class_faiHookEntry.inc:98
 #: plugins/admin/FAI/class_faiTemplateEntry.inc:99
-#, fuzzy
 msgid "Please enter a valid name. Only a-Z 0-9 are allowed."
-msgstr "Bitte geben Sie einen gültigen Namen ein (0-9 und a-z sind erlaubt)."
+msgstr "Bitte geben Sie einen gültigen Namen ein (0-9 und a-Z sind erlaubt)."
 
 #: plugins/admin/FAI/faiScriptEntry.tpl:29
 #: plugins/admin/FAI/faiScriptEntry.tpl:48
@@ -4197,7 +4188,7 @@ msgstr "Abbrechen"
 #: plugins/admin/FAI/class_faiProfile.inc:136
 #: plugins/admin/FAI/class_faiProfileEntry.inc:140
 msgid "This list displays all assigned class names for this profile."
-msgstr ""
+msgstr "Diese Liste zeigt alle diesem Profil zugeordneten Klassen-Namen."
 
 #: plugins/admin/FAI/class_faiProfile.inc:144
 msgid "Append new class names"
@@ -4205,9 +4196,8 @@ msgstr "Neue Klassen-Namen anfügen"
 
 #: plugins/admin/FAI/class_faiProfile.inc:147
 #: plugins/admin/FAI/class_faiProfileEntry.inc:113
-#, fuzzy
 msgid "Hook bundle"
-msgstr "Gespräch halten"
+msgstr "Haltepunkt-Gruppe"
 
 #: plugins/admin/FAI/class_faiProfile.inc:148
 #: plugins/admin/FAI/class_faiProfileEntry.inc:114
@@ -4226,7 +4216,7 @@ msgstr "Variablen-Gruppe"
 
 #: plugins/admin/FAI/class_faiProfile.inc:151
 msgid "Packages bundle"
-msgstr ""
+msgstr "Paket-Gruppe"
 
 #: plugins/admin/FAI/class_faiProfile.inc:154
 msgid "Remove class from profile"
@@ -4237,17 +4227,17 @@ msgid "Please specify a description for this profile."
 msgstr "Bitte geben Sie eine gültigen Beschreibung für das Profil an."
 
 #: plugins/admin/FAI/class_faiProfile.inc:217
-#, fuzzy
 msgid "Please enter a valid name. Only 0-9 a-Z are allowed here."
 msgstr "Bitte geben Sie einen gültigen Namen ein (0-9 und a-z sind erlaubt)."
 
 #: plugins/admin/FAI/class_faiProfile.inc:221
 msgid "Please assign at least one class to this  profile."
-msgstr ""
+msgstr "Bitte ordnen Sie diesem Profil mindestens eine Klasse zu."
 
 #: plugins/admin/FAI/class_faiProfile.inc:229
 msgid "There is already a profile with this class name defined."
-msgstr "Der von Ihnen angegebene Klassen-Name ist bereits für ein Profil vergeben."
+msgstr ""
+"Der von Ihnen angegebene Klassen-Name ist bereits für ein Profil vergeben."
 
 #: plugins/admin/FAI/faiProfile.tpl:31
 msgid "List of used class names"
@@ -4291,14 +4281,14 @@ msgid "Please enter a valid name for partition %s."
 msgstr "Bitte geben Sie einen gültigen Namen für die Partition %s an."
 
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:319
-#, fuzzy, php-format
+#, php-format
 msgid "please enter a unique name for partition %s"
-msgstr "Bitte geben Sie einen Namen für die Konferenz ein."
+msgstr "Bitte geben Sie einen eindeutigen Namen für die Partition %s ein."
 
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:323
 #, php-format
 msgid "please enter a unique mount point for partition %s"
-msgstr ""
+msgstr "Bitte geben Sie einen eindeutigen Mount-Pfad für Partition %s ein."
 
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:327
 #, php-format
@@ -4336,7 +4326,9 @@ msgstr "Bitte geben Sie einen gültigen Bereich für Partition %s ein."
 #, php-format
 msgid ""
 "Size settings for partition %s, overlap with size settings for partition %s."
-msgstr "Die Größeneinstellungen für Partition %s überlappt mit den Größeneinstellungen der Partition %s."
+msgstr ""
+"Die Größeneinstellungen für Partition %s überlappt mit den "
+"Größeneinstellungen der Partition %s."
 
 #: plugins/admin/FAI/faiPartitionTableEntry.tpl:11
 msgid "Choose a disc name"
@@ -4354,14 +4346,9 @@ msgstr "Partition hinzufügen"
 msgid "cancel"
 msgstr "Abbrechen"
 
-#: plugins/admin/FAI/faiScript.tpl:40
-msgid "Choose a script to delete or edit"
-msgstr "Wählen Sie ein Skript zum Entfernen oder Bearbeiten"
-
 #: plugins/admin/FAI/class_faiVariableEntry.inc:77
-#, fuzzy
 msgid "Please specify a value for the attribute 'content'."
-msgstr "Bitte geben Sie einen gültigen Namen an."
+msgstr "Bitte geben Sie einen Wert für das Attribute 'Inhalt' an."
 
 #: plugins/admin/FAI/faiVariableEntry.tpl:29
 msgid "Variable attributes"
@@ -4371,18 +4358,13 @@ msgstr "Variablen-Attribute"
 msgid "Variable Content"
 msgstr "Variablen-Inhalt"
 
-#: plugins/admin/FAI/faiTemplate.tpl:40
-#, fuzzy
-msgid "Choose a template to delete or edit"
-msgstr "Wählen Sie die Abteilung in der der Eintrag abgelegt werden soll"
-
 #: plugins/admin/FAI/remove.tpl:7
 msgid ""
 "This includes <b>all</b> object informations. Please double check if your "
 "really want to do this since there is no way for GOsa to get your data back."
 msgstr ""
-"Dies umfasst <b>alle</b> Objekt-Informationen Bitte prüfen Sie "
-"genau, da es keine Möglichkeit für GOsa gibt, die Daten zu restaurieren. "
+"Dies umfasst <b>alle</b> Objekt-Informationen Bitte prüfen Sie genau, da es "
+"keine Möglichkeit für GOsa gibt, die Daten zu restaurieren. "
 
 #: plugins/admin/FAI/remove.tpl:11 plugins/admin/departments/remove.tpl:11
 #: plugins/admin/systems/remove.tpl:11 plugins/gofon/conference/remove.tpl:11
@@ -4401,7 +4383,9 @@ msgstr "Liste von FAI-Objekten (Voll-Automatische Installation)"
 
 #: plugins/admin/FAI/headpage.tpl:24
 msgid "This menu allows you to create, delete and edit FAI objects."
-msgstr "Dieses Menü erlaubt es Ihnen, FAI-Objekte zu erstellen, entfernen und zu bearbeiten."
+msgstr ""
+"Dieses Menü erlaubt es Ihnen, FAI-Objekte zu erstellen, entfernen und zu "
+"bearbeiten."
 
 #: plugins/admin/FAI/headpage.tpl:36
 msgid "Show profiles"
@@ -4416,9 +4400,8 @@ msgid "Show scripts"
 msgstr "Zeige Skripte"
 
 #: plugins/admin/FAI/headpage.tpl:39
-#, fuzzy
 msgid "Show hooks"
-msgstr "Zeige Rechner"
+msgstr "Zeige Haltepunkte"
 
 #: plugins/admin/FAI/headpage.tpl:40
 msgid "Show variables"
@@ -4508,13 +4491,13 @@ msgid "The given class name is empty."
 msgstr "Der angebene Klassen-Name ist leer."
 
 #: plugins/admin/FAI/class_askClassName.inc:129
-#, fuzzy
 msgid "The specified class name is already in use for this object type."
-msgstr "Eine Gruppe mit diesem Namen existiert bereits."
+msgstr "Der angegebene Klassen-Name ist für diesen Objekt-Typ bereits in Gebrauch."
 
 #: plugins/admin/FAI/class_askClassName.inc:133
 msgid "Please enter a valid class name. Only 0-9 a-z is allowed here."
-msgstr "Bitte geben Sie einen gültigen Klassen-Namen ein (0-9 und a-z sind erlaubt)."
+msgstr ""
+"Bitte geben Sie einen gültigen Klassen-Namen ein (0-9 und a-z sind erlaubt)."
 
 #: plugins/admin/FAI/askClassName.tpl:5
 msgid ""
@@ -4561,7 +4544,7 @@ msgstr "Wählen Sie den Klassen-Namen"
 
 #: plugins/admin/FAI/askClassName.tpl:36
 msgid "Please enter your class name here, if want to create a new class."
-msgstr ""
+msgstr "Bitte geben Sie Ihren neuen Klassen-Namen an, wenn Sie eine neue Klasse erstellen möchten."
 
 #: plugins/admin/FAI/askClassName.tpl:40
 msgid "A new class name.</b>"
@@ -4588,17 +4571,13 @@ msgstr "Pfad"
 msgid "File"
 msgstr "Datei"
 
-#: plugins/admin/FAI/faiHook.tpl:40
-msgid "Choose a hook to delete or edit"
-msgstr ""
-
 #: plugins/admin/FAI/faiProfileEntry.tpl:24
 msgid ""
 "This menu allows you to select FAI class names and to add them to the "
 "currently edited profile."
 msgstr ""
-"Dieses Menü erlaubt es Ihnen, FAI Klassen-Namen auszuwählen und zum gegenwärtig "
-"bearbeiteten Profil hinzuzufügen."
+"Dieses Menü erlaubt es Ihnen, FAI Klassen-Namen auszuwählen und zum "
+"gegenwärtig bearbeiteten Profil hinzuzufügen."
 
 #: plugins/admin/FAI/faiProfileEntry.tpl:37
 msgid "Show only classes with templates"
@@ -4610,7 +4589,7 @@ msgstr "Zeige nur Klassen mit Skripten"
 
 #: plugins/admin/FAI/faiProfileEntry.tpl:41
 msgid "Show only classes with hooks"
-msgstr ""
+msgstr "Zeige nur Klassen mit Haltepunkten"
 
 #: plugins/admin/FAI/faiProfileEntry.tpl:43
 msgid "Show only classes with variables"
@@ -4623,6 +4602,27 @@ msgstr "Zeige nur Klassen mit Paketen"
 #: plugins/admin/FAI/faiProfileEntry.tpl:47
 msgid "Show only classes with partitions"
 msgstr "Zeige nur Klassen mit Partitionen"
+
+#: plugins/admin/FAI/faiVariable.tpl:34 plugins/admin/FAI/faiScript.tpl:34
+#: plugins/admin/FAI/faiHook.tpl:34 plugins/admin/FAI/faiTemplate.tpl:34
+msgid "This bundle contains the following objects"
+msgstr "Diese Gruppe enthält die folgenden Objekte"
+
+#: plugins/admin/FAI/faiVariable.tpl:40
+msgid "Choose a variable to delete or edit"
+msgstr "Wählen Sie eine Variable zum Entfernen oder Bearbeiten"
+
+#: plugins/admin/FAI/faiScript.tpl:40
+msgid "Choose a script to delete or edit"
+msgstr "Wählen Sie ein Skript zum Entfernen oder Bearbeiten"
+
+#: plugins/admin/FAI/faiHook.tpl:40
+msgid "Choose a hook to delete or edit"
+msgstr "Wählen Sie einen Haltepunkt zum Entfernen oder Bearbeiten"
+
+#: plugins/admin/FAI/faiTemplate.tpl:40
+msgid "Choose a template to delete or edit"
+msgstr "Wählen Sie eine Vorlage zum Entfernen oder Bearbeiten"
 
 #: plugins/admin/groups/mail.tpl:11
 msgid "Primary mail address for this shared folder"
@@ -5357,7 +5357,8 @@ msgstr "Das benötigte Feld 'Name' ist nicht ausgefüllt."
 
 #: plugins/admin/applications/class_applicationGeneric.inc:250
 msgid "Invalid character in application name. Only a-z 0-9 are allowed."
-msgstr "Ungültiges Zeichen in Anwendungs-Name. Nur a-z und 0-9 sind erlaubte Zeichen."
+msgstr ""
+"Ungültiges Zeichen in Anwendungs-Name. Nur a-z und 0-9 sind erlaubte Zeichen."
 
 #: plugins/admin/applications/class_applicationGeneric.inc:254
 msgid "Required field 'Execute' is not filled."
@@ -5835,12 +5836,11 @@ msgstr "Wählen Sie die auszuführende Aktion für diesen Server"
 
 #: plugins/admin/systems/printerPPDDialog.tpl:2
 msgid "Printer driver information file setup"
-msgstr ""
+msgstr "Einrichtung der Informations-Datei des Drucker-Treibers"
 
 #: plugins/admin/systems/printerPPDDialog.tpl:7
-#, fuzzy
 msgid "Current used information setup : "
-msgstr "Generische Benutzer-Information"
+msgstr "Momentan genutzte Einrichtungs-Informationen : "
 
 #: plugins/admin/systems/printerPPDDialog.tpl:13
 msgid "Select"
@@ -6211,11 +6211,11 @@ msgstr "Berechtigungen"
 
 #: plugins/admin/systems/printer.tpl:79
 msgid "Following objects are assigned as user."
-msgstr ""
+msgstr "Die folgenden Objekte sind als Benutzer zugeordnet"
 
 #: plugins/admin/systems/printer.tpl:96
 msgid "Following objects are assigned as admin."
-msgstr ""
+msgstr "Die folgenden Objekte sind als Administrator zugeordnet"
 
 #: plugins/admin/systems/printer.tpl:97
 msgid "Admins"

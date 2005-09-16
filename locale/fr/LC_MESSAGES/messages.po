@@ -21,12 +21,14 @@ msgstr "Extensions"
 #: plugins/gofax/blocklists/generic.tpl:1
 #: plugins/gofax/faxaccount/generic.tpl:6
 #: plugins/admin/FAI/faiPartitionTable.tpl:4
-#: plugins/admin/FAI/faiVariable.tpl:4 plugins/admin/FAI/faiScriptEntry.tpl:5
-#: plugins/admin/FAI/faiPackage.tpl:4 plugins/admin/FAI/faiProfile.tpl:1
+#: plugins/admin/FAI/faiScriptEntry.tpl:5 plugins/admin/FAI/faiPackage.tpl:4
+#: plugins/admin/FAI/faiProfile.tpl:1
 #: plugins/admin/FAI/faiPartitionTableEntry.tpl:3
-#: plugins/admin/FAI/faiScript.tpl:4 plugins/admin/FAI/faiVariableEntry.tpl:5
-#: plugins/admin/FAI/faiTemplate.tpl:4 plugins/admin/FAI/faiHookEntry.tpl:5
-#: plugins/admin/FAI/faiTemplateEntry.tpl:5 plugins/admin/FAI/faiHook.tpl:4
+#: plugins/admin/FAI/faiVariableEntry.tpl:5
+#: plugins/admin/FAI/faiHookEntry.tpl:5
+#: plugins/admin/FAI/faiTemplateEntry.tpl:5
+#: plugins/admin/FAI/faiVariable.tpl:4 plugins/admin/FAI/faiScript.tpl:4
+#: plugins/admin/FAI/faiHook.tpl:4 plugins/admin/FAI/faiTemplate.tpl:4
 #: plugins/admin/groups/mail.tpl:7
 #: plugins/generic/references/class_reference.inc:20
 msgid "Generic"
@@ -251,11 +253,10 @@ msgstr "Liste des adresses de messagerie alternatives"
 #: plugins/gofax/faxaccount/locals.tpl:62
 #: plugins/gofax/faxaccount/lists.tpl:12 plugins/gofax/faxaccount/lists.tpl:16
 #: plugins/admin/FAI/faiPartitionTable.tpl:43
-#: plugins/admin/FAI/faiVariable.tpl:43
 #: plugins/admin/FAI/class_faiProfile.inc:144
-#: plugins/admin/FAI/faiScript.tpl:43 plugins/admin/FAI/faiTemplate.tpl:43
-#: plugins/admin/FAI/faiHook.tpl:43 plugins/admin/groups/mail.tpl:54
-#: plugins/admin/groups/mail.tpl:101
+#: plugins/admin/FAI/faiVariable.tpl:43 plugins/admin/FAI/faiScript.tpl:43
+#: plugins/admin/FAI/faiHook.tpl:43 plugins/admin/FAI/faiTemplate.tpl:43
+#: plugins/admin/groups/mail.tpl:54 plugins/admin/groups/mail.tpl:101
 #: plugins/admin/groups/class_groupMail.inc:404
 #: plugins/admin/groups/group_objects.tpl:49
 #: plugins/admin/groups/generic.tpl:88 plugins/admin/groups/mail_locals.tpl:68
@@ -286,13 +287,12 @@ msgstr "Ajouter"
 #: plugins/gofax/faxaccount/generic.tpl:77
 #: plugins/gofax/faxaccount/lists.tpl:13
 #: plugins/addons/addressbook/remove.tpl:15
-#: plugins/admin/FAI/faiPartitionTable.tpl:45
+#: plugins/admin/FAI/faiPartitionTable.tpl:45 plugins/admin/FAI/remove.tpl:15
 #: plugins/admin/FAI/faiVariable.tpl:45 plugins/admin/FAI/faiScript.tpl:45
-#: plugins/admin/FAI/faiTemplate.tpl:45 plugins/admin/FAI/remove.tpl:15
-#: plugins/admin/FAI/faiHook.tpl:45 plugins/admin/groups/mail.tpl:55
-#: plugins/admin/groups/mail.tpl:103 plugins/admin/groups/remove.tpl:15
-#: plugins/admin/groups/generic.tpl:90 plugins/admin/users/remove.tpl:15
-#: plugins/admin/applications/remove.tpl:14
+#: plugins/admin/FAI/faiHook.tpl:45 plugins/admin/FAI/faiTemplate.tpl:45
+#: plugins/admin/groups/mail.tpl:55 plugins/admin/groups/mail.tpl:103
+#: plugins/admin/groups/remove.tpl:15 plugins/admin/groups/generic.tpl:90
+#: plugins/admin/users/remove.tpl:15 plugins/admin/applications/remove.tpl:14
 #: plugins/admin/departments/remove.tpl:15
 #: plugins/admin/systems/servservice.tpl:22
 #: plugins/admin/systems/servservice.tpl:48
@@ -654,7 +654,7 @@ msgstr ""
 #: plugins/gofax/faxaccount/main.inc:97 plugins/addons/logview/contents.tpl:62
 #: plugins/admin/FAI/faiPartitionTable.tpl:44
 #: plugins/admin/FAI/faiVariable.tpl:44 plugins/admin/FAI/faiScript.tpl:44
-#: plugins/admin/FAI/faiTemplate.tpl:44 plugins/admin/FAI/faiHook.tpl:44
+#: plugins/admin/FAI/faiHook.tpl:44 plugins/admin/FAI/faiTemplate.tpl:44
 #: plugins/admin/systems/servservice.tpl:20
 #: plugins/admin/systems/printer.tpl:61
 #: plugins/gofon/phoneaccount/main.inc:112
@@ -1905,13 +1905,15 @@ msgstr "Paramètres des scripts de démarrage"
 #: plugins/addons/addressbook/class_addressbook.inc:504
 #: plugins/addons/addressbook/address_info.tpl:16
 #: plugins/admin/FAI/faiPartitionTable.tpl:9
-#: plugins/admin/FAI/faiVariable.tpl:9 plugins/admin/FAI/faiScriptEntry.tpl:9
-#: plugins/admin/FAI/faiPackage.tpl:9 plugins/admin/FAI/faiProfile.tpl:6
+#: plugins/admin/FAI/faiScriptEntry.tpl:9 plugins/admin/FAI/faiPackage.tpl:9
+#: plugins/admin/FAI/faiProfile.tpl:6
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:192
 #: plugins/admin/FAI/faiPartitionTableEntry.tpl:7
-#: plugins/admin/FAI/faiScript.tpl:9 plugins/admin/FAI/faiVariableEntry.tpl:9
-#: plugins/admin/FAI/faiTemplate.tpl:9 plugins/admin/FAI/faiHookEntry.tpl:9
-#: plugins/admin/FAI/faiTemplateEntry.tpl:9 plugins/admin/FAI/faiHook.tpl:9
+#: plugins/admin/FAI/faiVariableEntry.tpl:9
+#: plugins/admin/FAI/faiHookEntry.tpl:9
+#: plugins/admin/FAI/faiTemplateEntry.tpl:9
+#: plugins/admin/FAI/faiVariable.tpl:9 plugins/admin/FAI/faiScript.tpl:9
+#: plugins/admin/FAI/faiHook.tpl:9 plugins/admin/FAI/faiTemplate.tpl:9
 #: plugins/admin/users/template.tpl:19
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:98
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:112
@@ -1923,15 +1925,15 @@ msgstr "Nom"
 #: plugins/personal/environment/hotplugDialogNew.tpl:14
 #: plugins/gofax/blocklists/generic.tpl:41
 #: plugins/admin/FAI/faiPartitionTable.tpl:19
-#: plugins/admin/FAI/faiVariable.tpl:19
 #: plugins/admin/FAI/faiScriptEntry.tpl:17 plugins/admin/FAI/faiPackage.tpl:19
 #: plugins/admin/FAI/faiProfile.tpl:16
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:193
 #: plugins/admin/FAI/faiPartitionTableEntry.tpl:18
-#: plugins/admin/FAI/faiScript.tpl:19
 #: plugins/admin/FAI/faiVariableEntry.tpl:17
-#: plugins/admin/FAI/faiTemplate.tpl:19 plugins/admin/FAI/faiHookEntry.tpl:17
-#: plugins/admin/FAI/faiTemplateEntry.tpl:17 plugins/admin/FAI/faiHook.tpl:19
+#: plugins/admin/FAI/faiHookEntry.tpl:17
+#: plugins/admin/FAI/faiTemplateEntry.tpl:17
+#: plugins/admin/FAI/faiVariable.tpl:19 plugins/admin/FAI/faiScript.tpl:19
+#: plugins/admin/FAI/faiHook.tpl:19 plugins/admin/FAI/faiTemplate.tpl:19
 #: plugins/admin/groups/generic.tpl:13
 #: plugins/admin/applications/generic.tpl:24
 #: plugins/admin/departments/generic.tpl:12
@@ -4110,7 +4112,7 @@ msgstr "Modèle"
 
 #: plugins/admin/FAI/faiPartitionTable.tpl:32
 #: plugins/admin/FAI/faiVariable.tpl:32 plugins/admin/FAI/faiScript.tpl:32
-#: plugins/admin/FAI/faiTemplate.tpl:32 plugins/admin/FAI/faiHook.tpl:32
+#: plugins/admin/FAI/faiHook.tpl:32 plugins/admin/FAI/faiTemplate.tpl:32
 msgid "Objects"
 msgstr "Objets"
 
@@ -4121,15 +4123,6 @@ msgstr ""
 #: plugins/admin/FAI/faiPartitionTable.tpl:40
 msgid "Choose a disk to delete or edit"
 msgstr "Choisissez un disque à effacer ou editer"
-
-#: plugins/admin/FAI/faiVariable.tpl:34 plugins/admin/FAI/faiScript.tpl:34
-#: plugins/admin/FAI/faiTemplate.tpl:34 plugins/admin/FAI/faiHook.tpl:34
-msgid "This bundle contains following objects"
-msgstr ""
-
-#: plugins/admin/FAI/faiVariable.tpl:40
-msgid "Choose a variable to delete or edit"
-msgstr "Choisissez une variable à effacer ou éditer"
 
 #: plugins/admin/FAI/class_faiScriptEntry.inc:48
 msgid "Please select a valid file."
@@ -4358,10 +4351,6 @@ msgstr "Ajouter une partition"
 msgid "cancel"
 msgstr "annuler"
 
-#: plugins/admin/FAI/faiScript.tpl:40
-msgid "Choose a script to delete or edit"
-msgstr "Choisissez un script à effacer ou éditer"
-
 #: plugins/admin/FAI/class_faiVariableEntry.inc:77
 msgid "Please specify a value for the attribute 'content'."
 msgstr "Veuillez entrer une valeur pour l'attribut 'contenu'."
@@ -4373,10 +4362,6 @@ msgstr ""
 #: plugins/admin/FAI/faiVariableEntry.tpl:34
 msgid "Variable Content"
 msgstr ""
-
-#: plugins/admin/FAI/faiTemplate.tpl:40
-msgid "Choose a template to delete or edit"
-msgstr "Choisissez le modèle à effacer où éditer"
 
 #: plugins/admin/FAI/remove.tpl:7
 msgid ""
@@ -4583,10 +4568,6 @@ msgstr "Chemin"
 msgid "File"
 msgstr "Fichier"
 
-#: plugins/admin/FAI/faiHook.tpl:40
-msgid "Choose a hook to delete or edit"
-msgstr ""
-
 #: plugins/admin/FAI/faiProfileEntry.tpl:24
 #, fuzzy
 msgid ""
@@ -4619,6 +4600,27 @@ msgstr "Montrer seulement les classes avec des paquets"
 #: plugins/admin/FAI/faiProfileEntry.tpl:47
 msgid "Show only classes with partitions"
 msgstr "Montrer seulement les classes avec des partitions"
+
+#: plugins/admin/FAI/faiVariable.tpl:34 plugins/admin/FAI/faiScript.tpl:34
+#: plugins/admin/FAI/faiHook.tpl:34 plugins/admin/FAI/faiTemplate.tpl:34
+msgid "This bundle contains the following objects"
+msgstr ""
+
+#: plugins/admin/FAI/faiVariable.tpl:40
+msgid "Choose a variable to delete or edit"
+msgstr "Choisissez une variable à effacer ou éditer"
+
+#: plugins/admin/FAI/faiScript.tpl:40
+msgid "Choose a script to delete or edit"
+msgstr "Choisissez un script à effacer ou éditer"
+
+#: plugins/admin/FAI/faiHook.tpl:40
+msgid "Choose a hook to delete or edit"
+msgstr ""
+
+#: plugins/admin/FAI/faiTemplate.tpl:40
+msgid "Choose a template to delete or edit"
+msgstr "Choisissez le modèle à effacer où éditer"
 
 #: plugins/admin/groups/mail.tpl:11
 msgid "Primary mail address for this shared folder"
