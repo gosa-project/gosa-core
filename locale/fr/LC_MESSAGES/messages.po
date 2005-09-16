@@ -1,3 +1,17 @@
+# translation of messages.po to 
+# translation of messages.po to French
+# Benoit Mortier <benoit.mortier@opensides.be>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"PO-Revision-Date: 2005-09-13 01:56+0200\n"
+"Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
+"Language-Team:  <fr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
+
 #: contrib/gosa.conf:4
 msgid "My account"
 msgstr "Mon Compte"
@@ -4464,21 +4478,24 @@ msgid "Create new FAI object - partition table."
 msgstr "Créer un nouvel objet FAI - table des partitions."
 
 #: plugins/admin/FAI/class_askClassName.inc:69
-msgid "Create new FAI object - package list."
+#, fuzzy
+msgid "Create new FAI object - package bundle."
 msgstr "Créer un nouvel objet FAI - liste de paquets."
 
 #: plugins/admin/FAI/class_askClassName.inc:70
-msgid "Create new FAI object - set of scripts."
-msgstr "Créer un nouvel objet FAI - liste de scripts."
+#, fuzzy
+msgid "Create new FAI object - script bundle."
+msgstr "Créer un nouvel objet FAI - profil."
 
 #: plugins/admin/FAI/class_askClassName.inc:71
-msgid "Create new FAI object - set of variables."
+#, fuzzy
+msgid "Create new FAI object - variable bundle."
 msgstr "Créer un nouvel objet FAI - ensemble de variables."
 
 #: plugins/admin/FAI/class_askClassName.inc:72
 #, fuzzy
-msgid "Create new FAI object - set of hooks."
-msgstr "Créer un nouvel objet FAI - "
+msgid "Create new FAI object - hook bundle."
+msgstr "Créer un nouvel objet FAI - profil."
 
 #: plugins/admin/FAI/class_askClassName.inc:73
 msgid "Create new FAI object - profile."
@@ -6513,20 +6530,9 @@ msgstr ""
 "Cette imprimante appartient à la station de travail %s. Vous ne pouvez pas "
 "changer son nom."
 
-# translation of messages.po to 
-# translation of messages.po to French
-# Benoit Mortier <benoit.mortier@opensides.be>, 2005.
 #: plugins/admin/systems/class_printGeneric.inc:339
-msgid ""
+msgid " "
 msgstr ""
-"Project-Id-Version: messages\n"
-"PO-Revision-Date: 2005-09-13 01:56+0200\n"
-"Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
-"Language-Team:  <fr@li.org>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
 
 #: plugins/admin/systems/class_printGeneric.inc:396
 msgid "You have no permissions to create a printer on this 'Base'."
@@ -9673,6 +9679,13 @@ msgstr ""
 "GOsa peut provoquer des erreurs PHP, particulièrement dans le cas des Beta "
 "versions. Dans certains cas il peut être intéressant d'activer l'affichage "
 "des erreurs. (Cela peut représenter un risque de sécurité)  "
+
+#~ msgid "Create new FAI object - set of scripts."
+#~ msgstr "Créer un nouvel objet FAI - liste de scripts."
+
+#, fuzzy
+#~ msgid "Create new FAI object - set of hooks."
+#~ msgstr "Créer un nouvel objet FAI - "
 
 #, fuzzy
 #~ msgid "Obtions"

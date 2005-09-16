@@ -1,3 +1,19 @@
+# Translation of messages.po to Russian
+# Valia V. Vaneeva <fattie@altlinux.ru>, 2004.
+# $Id: messages.po,v 1.61 2005/04/18 10:37:13 migor-guest Exp $
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: Igor Muratov <migor@altlinux.org>\n"
+"POT-Creation-Date: 2004-06-01 13:40+0300\n"
+"PO-Revision-Date: 2005-04-18 14:35+0300\n"
+"Last-Translator: Igor Muratov <migor@altlinux.org>\n"
+"Language-Team: ALT Linux Team\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: poEdit 1.3.1\n"
+
 #: contrib/gosa.conf:4
 msgid "My account"
 msgstr "Моя учетная запись"
@@ -4534,21 +4550,22 @@ msgstr "Объект группы"
 
 #: plugins/admin/FAI/class_askClassName.inc:69
 #, fuzzy
-msgid "Create new FAI object - package list."
+msgid "Create new FAI object - package bundle."
 msgstr "Объект группы"
 
 #: plugins/admin/FAI/class_askClassName.inc:70
 #, fuzzy
-msgid "Create new FAI object - set of scripts."
+msgid "Create new FAI object - script bundle."
 msgstr "Объект группы"
 
 #: plugins/admin/FAI/class_askClassName.inc:71
-msgid "Create new FAI object - set of variables."
-msgstr ""
+#, fuzzy
+msgid "Create new FAI object - variable bundle."
+msgstr "Объект группы"
 
 #: plugins/admin/FAI/class_askClassName.inc:72
 #, fuzzy
-msgid "Create new FAI object - set of hooks."
+msgid "Create new FAI object - hook bundle."
 msgstr "Объект группы"
 
 #: plugins/admin/FAI/class_askClassName.inc:73
@@ -6669,22 +6686,9 @@ msgstr ""
 msgid "This printer belongs to workstation %s. You can't rename this printer."
 msgstr ""
 
-# Translation of messages.po to Russian
-# Valia V. Vaneeva <fattie@altlinux.ru>, 2004.
-# $Id: messages.po,v 1.61 2005/04/18 10:37:13 migor-guest Exp $
 #: plugins/admin/systems/class_printGeneric.inc:339
-msgid ""
+msgid " "
 msgstr ""
-"Project-Id-Version: messages\n"
-"Report-Msgid-Bugs-To: Igor Muratov <migor@altlinux.org>\n"
-"POT-Creation-Date: 2004-06-01 13:40+0300\n"
-"PO-Revision-Date: 2005-04-18 14:35+0300\n"
-"Last-Translator: Igor Muratov <migor@altlinux.org>\n"
-"Language-Team: ALT Linux Team\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: poEdit 1.3.1\n"
 
 #: plugins/admin/systems/class_printGeneric.inc:396
 msgid "You have no permissions to create a printer on this 'Base'."
@@ -9828,6 +9832,14 @@ msgid ""
 "versions. In some cases it would be helpful to enable the error reporting. "
 "(But it could be a security risk)  "
 msgstr ""
+
+#, fuzzy
+#~ msgid "Create new FAI object - set of scripts."
+#~ msgstr "Объект группы"
+
+#, fuzzy
+#~ msgid "Create new FAI object - set of hooks."
+#~ msgstr "Объект группы"
 
 #, fuzzy
 #~ msgid "Obtions"

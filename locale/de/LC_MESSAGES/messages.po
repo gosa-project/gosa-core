@@ -6,13 +6,12 @@
 # Alfred Schroeder <schroeder@GONICUS.de>, 2004.
 # Cajus Pollmeier <pollmeier@gonicus.de>, 2004, 2005.
 # Jan Wenzel <jan.wenzel@gonicus.de>, 2004,2005.
-#: plugins/admin/systems/class_printGeneric.inc:339
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-09-16 16:38+0200\n"
+"PO-Revision-Date: 2005-09-16 16:45+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -4459,20 +4458,20 @@ msgid "Create new FAI object - partition table."
 msgstr "Erstelle neues FAI-Objekt - Partitions-Tabelle"
 
 #: plugins/admin/FAI/class_askClassName.inc:69
-msgid "Create new FAI object - package list."
+msgid "Create new FAI object - package bundle."
 msgstr "Erstelle neues FAI-Objekt - Paket-Gruppe"
 
 #: plugins/admin/FAI/class_askClassName.inc:70
-msgid "Create new FAI object - set of scripts."
-msgstr "Erstelle neues FAI-Objekt - Satz von Skripten"
+msgid "Create new FAI object - script bundle."
+msgstr "Erstelle neues FAI-Objekt - Skript-Gruppe"
 
 #: plugins/admin/FAI/class_askClassName.inc:71
-msgid "Create new FAI object - set of variables."
-msgstr "Erstelle neues FAI-Objekt - Variablen-Gruppe."
+msgid "Create new FAI object - variable bundle."
+msgstr "Erstelle neues FAI-Objekt - Variablen-Gruppe"
 
 #: plugins/admin/FAI/class_askClassName.inc:72
-msgid "Create new FAI object - set of hooks."
-msgstr "Erstelle neues FAI-Objekt - Satz von Haltepunkten"
+msgid "Create new FAI object - hook bundle."
+msgstr "Erstelle neues FAI-Objekt - Haltepunkt-Gruppe"
 
 #: plugins/admin/FAI/class_askClassName.inc:73
 msgid "Create new FAI object - profile."
@@ -4492,7 +4491,8 @@ msgstr "Der angebene Klassen-Name ist leer."
 
 #: plugins/admin/FAI/class_askClassName.inc:129
 msgid "The specified class name is already in use for this object type."
-msgstr "Der angegebene Klassen-Name ist für diesen Objekt-Typ bereits in Gebrauch."
+msgstr ""
+"Der angegebene Klassen-Name ist für diesen Objekt-Typ bereits in Gebrauch."
 
 #: plugins/admin/FAI/class_askClassName.inc:133
 msgid "Please enter a valid class name. Only 0-9 a-z is allowed here."
@@ -4544,7 +4544,9 @@ msgstr "Wählen Sie den Klassen-Namen"
 
 #: plugins/admin/FAI/askClassName.tpl:36
 msgid "Please enter your class name here, if want to create a new class."
-msgstr "Bitte geben Sie Ihren neuen Klassen-Namen an, wenn Sie eine neue Klasse erstellen möchten."
+msgstr ""
+"Bitte geben Sie Ihren neuen Klassen-Namen an, wenn Sie eine neue Klasse "
+"erstellen möchten."
 
 #: plugins/admin/FAI/askClassName.tpl:40
 msgid "A new class name.</b>"
@@ -6509,6 +6511,10 @@ msgid "This printer belongs to workstation %s. You can't rename this printer."
 msgstr ""
 "Dieser Drucker gehört zur Arbeitsstation %s. Ein Umbenennen ist daher nicht "
 "möglich."
+
+#: plugins/admin/systems/class_printGeneric.inc:339
+msgid " "
+msgstr " "
 
 #: plugins/admin/systems/class_printGeneric.inc:396
 msgid "You have no permissions to create a printer on this 'Base'."
@@ -9660,6 +9666,12 @@ msgstr ""
 "GOsa kann Fehler im PHP-Interpreter erzeugen (insbesondere bei Beta-"
 "Versionen). In einigen Fällen ist es hilfreich, das 'error_reporting' zu "
 "aktivieren (dies kann jedoch ein Sicherheitsrisiko darstellen)."
+
+#~ msgid "Create new FAI object - set of scripts."
+#~ msgstr "Erstelle neues FAI-Objekt - Satz von Skripten"
+
+#~ msgid "Create new FAI object - set of hooks."
+#~ msgstr "Erstelle neues FAI-Objekt - Satz von Haltepunkten"
 
 #, fuzzy
 #~ msgid "Obtions"

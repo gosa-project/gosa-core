@@ -4244,19 +4244,19 @@ msgid "Create new FAI object - partition table."
 msgstr ""
 
 #: plugins/admin/FAI/class_askClassName.inc:69
-msgid "Create new FAI object - package list."
+msgid "Create new FAI object - package bundle."
 msgstr ""
 
 #: plugins/admin/FAI/class_askClassName.inc:70
-msgid "Create new FAI object - set of scripts."
+msgid "Create new FAI object - script bundle."
 msgstr ""
 
 #: plugins/admin/FAI/class_askClassName.inc:71
-msgid "Create new FAI object - set of variables."
+msgid "Create new FAI object - variable bundle."
 msgstr ""
 
 #: plugins/admin/FAI/class_askClassName.inc:72
-msgid "Create new FAI object - set of hooks."
+msgid "Create new FAI object - hook bundle."
 msgstr ""
 
 #: plugins/admin/FAI/class_askClassName.inc:73
@@ -6180,7 +6180,7 @@ msgid "This printer belongs to workstation %s. You can't rename this printer."
 msgstr ""
 
 #: plugins/admin/systems/class_printGeneric.inc:339
-msgid ""
+msgid " "
 msgstr ""
 
 #: plugins/admin/systems/class_printGeneric.inc:396

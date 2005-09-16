@@ -1,3 +1,20 @@
+# translation of messages.po to Italian
+# Copyright (c) 2005 B-Open Solutions srl - http://www.bopen.it/
+# Copyright (c) 2005 Alessandro Amici <a.amici@bopen.it>
+# Alessandro Amici <a.amici@bopen.it>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: messages\n"
+"Report-Msgid-Bugs-To: Alessandro Amici <a.amici@bopen.it>\n"
+"POT-Creation-Date: 2003-09-19 13:41+0200\n"
+"PO-Revision-Date: 2005-06-12 23:53+0200\n"
+"Last-Translator: Alessandro Amici <a.amici@bopen.it>\n"
+"Language-Team: Italian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
+
 #: contrib/gosa.conf:4
 msgid "My account"
 msgstr "Identità"
@@ -4408,21 +4425,22 @@ msgstr "Gruppo di oggetti"
 
 #: plugins/admin/FAI/class_askClassName.inc:69
 #, fuzzy
-msgid "Create new FAI object - package list."
+msgid "Create new FAI object - package bundle."
 msgstr "Gruppo di oggetti"
 
 #: plugins/admin/FAI/class_askClassName.inc:70
 #, fuzzy
-msgid "Create new FAI object - set of scripts."
+msgid "Create new FAI object - script bundle."
 msgstr "Gruppo di oggetti"
 
 #: plugins/admin/FAI/class_askClassName.inc:71
-msgid "Create new FAI object - set of variables."
-msgstr ""
+#, fuzzy
+msgid "Create new FAI object - variable bundle."
+msgstr "Gruppo di oggetti"
 
 #: plugins/admin/FAI/class_askClassName.inc:72
 #, fuzzy
-msgid "Create new FAI object - set of hooks."
+msgid "Create new FAI object - hook bundle."
 msgstr "Gruppo di oggetti"
 
 #: plugins/admin/FAI/class_askClassName.inc:73
@@ -6440,23 +6458,9 @@ msgstr ""
 msgid "This printer belongs to workstation %s. You can't rename this printer."
 msgstr ""
 
-# translation of messages.po to Italian
-# Copyright (c) 2005 B-Open Solutions srl - http://www.bopen.it/
-# Copyright (c) 2005 Alessandro Amici <a.amici@bopen.it>
-# Alessandro Amici <a.amici@bopen.it>, 2005.
 #: plugins/admin/systems/class_printGeneric.inc:339
-msgid ""
+msgid " "
 msgstr ""
-"Project-Id-Version: messages\n"
-"Report-Msgid-Bugs-To: Alessandro Amici <a.amici@bopen.it>\n"
-"POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-06-12 23:53+0200\n"
-"Last-Translator: Alessandro Amici <a.amici@bopen.it>\n"
-"Language-Team: Italian\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
 
 #: plugins/admin/systems/class_printGeneric.inc:396
 msgid "You have no permissions to create a printer on this 'Base'."
@@ -9459,6 +9463,14 @@ msgid ""
 "versions. In some cases it would be helpful to enable the error reporting. "
 "(But it could be a security risk)  "
 msgstr ""
+
+#, fuzzy
+#~ msgid "Create new FAI object - set of scripts."
+#~ msgstr "Gruppo di oggetti"
+
+#, fuzzy
+#~ msgid "Create new FAI object - set of hooks."
+#~ msgstr "Gruppo di oggetti"
 
 #, fuzzy
 #~ msgid "Obtions"
