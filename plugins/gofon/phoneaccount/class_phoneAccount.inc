@@ -408,6 +408,23 @@ class phoneAccount extends plugin
       $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$this->uid."';\n";
       $SQL[] = "DELETE FROM ".$a_SETUP['SIP_TABLE']." WHERE name='".$this->uid."';\n";
       $SQL[] = "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$this->phoneNumbers[$i_new_key].";"; 
+      // Delete old entries
+      $b_first_deleted  =false;
+      foreach($this->a_old_telenums as $s_telenums){
+        $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$s_telenums."';\n";
+        if(!$b_first_deleted){
+          $b_first_deleted=true;
+          $SQL[] = "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$s_telenums.";";
+        }
+      }
+
+   
+      if($this->goFonHardware=="automatic"){
+        foreach($SQL as $query ){
+          mysql_query($query) ;
+        }
+        return;
+      }
 
       // Generate Strings with keys and values 
       foreach($sip_entry as $s_sip_key=>$s_sip_val){
@@ -421,16 +438,6 @@ class phoneAccount extends plugin
 
       // Append SIP Entry 
       $SQL[] ="INSERT INTO ".$a_SETUP['SIP_TABLE']." (".$s_sip_keys.") VALUES (".$s_sip_values.");";
-
-      // Delete old entries
-      $b_first_deleted  =false;
-      foreach($this->a_old_telenums as $s_telenums){
-        $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$s_telenums."';\n";
-        if(!$b_first_deleted){
-          $b_first_deleted=true;
-          $SQL[] = "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$s_telenums.";";
-        }
-      }
 
       /* If deletion starts from userslist, cn uid are not set */
       if((isset($this->parent->by_object['user']->uid))&&(!empty($this->parent->by_object['user']->uid))){
@@ -458,17 +465,21 @@ class phoneAccount extends plugin
       $i_is_accounted=false;
     
       $i = 0; 
-  
+ 
+      $is_inserted_once = false;
+ 
       // Entension entries  Hint / Dial / Goto
       foreach($this->phoneNumbers as $s_telenums){
 
-        /* Mapping : Name TO Number*/
-        $EXT[$i]['context'] = 'GOsa';
-        $EXT[$i]['exten']   = $this->uid;
-        $EXT[$i]['priority']= 1;
-        $EXT[$i]['app']     = "Goto";
-        $EXT[$i]['appdata'] = $s_telenums."|1";
-        $i ++;  
+        if(!$is_inserted_once){
+          $is_inserted_once = true;
+          $EXT[$i]['context'] = 'GOsa';
+          $EXT[$i]['exten']   = $this->uid;
+          $EXT[$i]['priority']= 1;
+          $EXT[$i]['app']     = "Goto";
+          $EXT[$i]['appdata'] = $s_telenums."|1";
+          $i ++;
+        }
         /* Hint Entry */
         $EXT[$i]['context'] = 'GOsa';
         $EXT[$i]['exten']   = $s_telenums;
@@ -491,7 +502,7 @@ class phoneAccount extends plugin
           $s_par = $macroname."|".$s_parameter; 
         }else{
           $s_app = "Dial";
-          $s_par = 'SIP/'.$this->uid;
+          $s_par = 'SIP/'.$this->uid."|20|r";
         }
 
         $EXT[$i]['context'] = 'GOsa';
