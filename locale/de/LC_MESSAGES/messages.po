@@ -11,12 +11,12 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-09-16 16:45+0200\n"
+"PO-Revision-Date: 2005-09-16 17:33+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: contrib/gosa.conf:4
 msgid "My account"
@@ -5841,8 +5841,8 @@ msgid "Printer driver information file setup"
 msgstr "Einrichtung der Informations-Datei des Drucker-Treibers"
 
 #: plugins/admin/systems/printerPPDDialog.tpl:7
-msgid "Current used information setup : "
-msgstr "Momentan genutzte Einrichtungs-Informationen : "
+msgid "Current used information setup: "
+msgstr "Momentan genutzte Informationen: "
 
 #: plugins/admin/systems/printerPPDDialog.tpl:13
 msgid "Select"
@@ -6511,10 +6511,6 @@ msgid "This printer belongs to workstation %s. You can't rename this printer."
 msgstr ""
 "Dieser Drucker gehört zur Arbeitsstation %s. Ein Umbenennen ist daher nicht "
 "möglich."
-
-#: plugins/admin/systems/class_printGeneric.inc:339
-msgid " "
-msgstr " "
 
 #: plugins/admin/systems/class_printGeneric.inc:396
 msgid "You have no permissions to create a printer on this 'Base'."
@@ -9666,6 +9662,9 @@ msgstr ""
 "GOsa kann Fehler im PHP-Interpreter erzeugen (insbesondere bei Beta-"
 "Versionen). In einigen Fällen ist es hilfreich, das 'error_reporting' zu "
 "aktivieren (dies kann jedoch ein Sicherheitsrisiko darstellen)."
+
+#~ msgid " "
+#~ msgstr " "
 
 #~ msgid "Create new FAI object - set of scripts."
 #~ msgstr "Erstelle neues FAI-Objekt - Satz von Skripten"

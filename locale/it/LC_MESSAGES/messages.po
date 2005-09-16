@@ -5784,7 +5784,7 @@ msgstr ""
 
 #: plugins/admin/systems/printerPPDDialog.tpl:7
 #, fuzzy
-msgid "Current used information setup : "
+msgid "Current used information setup: "
 msgstr "Informazioni generiche"
 
 #: plugins/admin/systems/printerPPDDialog.tpl:13
@@ -6456,10 +6456,6 @@ msgstr ""
 #: plugins/admin/systems/class_printGeneric.inc:335
 #, php-format
 msgid "This printer belongs to workstation %s. You can't rename this printer."
-msgstr ""
-
-#: plugins/admin/systems/class_printGeneric.inc:339
-msgid " "
 msgstr ""
 
 #: plugins/admin/systems/class_printGeneric.inc:396

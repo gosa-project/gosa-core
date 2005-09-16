@@ -4,7 +4,7 @@
 <table summary="" width="50%">
 	<tr>
 		<td>
-			{t}Current used information setup : {/t}
+			{t}Current used information setup: {/t}
 		</td>
 		<td>
 			{$ppdString}

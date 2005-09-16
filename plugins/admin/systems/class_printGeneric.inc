@@ -336,7 +336,7 @@ class printgeneric extends plugin
       }
       $smarty->assign("cnACL"    ," disabled ");
     }else{
-      $smarty->assign("desc"    ,_(" "));
+      $smarty->assign("desc"    ,"");
     }
     $smarty->assign("UserMember"    ,$this->UserMember);
     $smarty->assign("UserMembers"   ,$userlist);

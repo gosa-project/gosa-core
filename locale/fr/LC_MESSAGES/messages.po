@@ -5864,8 +5864,9 @@ msgid "Printer driver information file setup"
 msgstr ""
 
 #: plugins/admin/systems/printerPPDDialog.tpl:7
-msgid "Current used information setup : "
-msgstr ""
+#, fuzzy
+msgid "Current used information setup: "
+msgstr "Information générales sur l'utilisateur"
 
 #: plugins/admin/systems/printerPPDDialog.tpl:13
 msgid "Select"
@@ -6529,10 +6530,6 @@ msgid "This printer belongs to workstation %s. You can't rename this printer."
 msgstr ""
 "Cette imprimante appartient à la station de travail %s. Vous ne pouvez pas "
 "changer son nom."
-
-#: plugins/admin/systems/class_printGeneric.inc:339
-msgid " "
-msgstr ""
 
 #: plugins/admin/systems/class_printGeneric.inc:396
 msgid "You have no permissions to create a printer on this 'Base'."
