@@ -40,7 +40,13 @@ echo "Merging po files with existing ones:"
 error=0
 for f in locale/??/LC_MESSAGES; do
   echo -n "* merging $f/messages.po: "
-  [ -f $f/messages.po ] && msgmerge $f/messages.po locale/messages.po --output-file=$f/messages.po.new &> /dev/null || /bin/true
+  [ -f $f/messages.po ] && msgmerge $f/messages.po locale/messages.po --output-file=$f/messages.po.new &> /dev/null
+
+  # Do an extra check for dummy dir 'locale/en/LC_MESSAGES'
+  if [ $? -ne 0 ]; then
+    [ "$f" == "locale/en/LC_MESSAGES" ] && /bin/true
+  fi
+
   if [ $? -eq 0 ]; then
     echo "done";
   else
