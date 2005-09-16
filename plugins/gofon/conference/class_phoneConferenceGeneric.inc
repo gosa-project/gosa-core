@@ -147,6 +147,8 @@ class conference extends plugin
 
   function remove_from_parent()
   {
+     $this->SQL_remove_me(true); 
+
     $ldap= $this->config->get_ldap_link();
     $ldap->cd ($this->dn);
     $ldap->recursive_remove();
@@ -411,6 +413,10 @@ class conference extends plugin
     }
 
     plugin::save();
+
+    if(empty($this->old_tele_number)){
+      $this->old_tele_number= $this->telephoneNumber;
+    }
 
     $this->SQL_remove_me(true);
     $this->SQL_add_me(true);

@@ -248,12 +248,14 @@ class phoneConferenceManagment extends plugin
         }
 
         $this->conftab->save ();
+        del_lock ($this->conftab->dn);;
         unset ($this->conftab);
         $this->conftab= NULL;
         unset ($_SESSION['objectinfo']);
       } else {
         show_errors($message);
       }
+      
       $this->reload();
     }
 
@@ -435,6 +437,8 @@ class phoneConferenceManagment extends plugin
 
   function remove_from_parent()
   {
+    $cfg = new conference($this->config, $this->dn);
+    $cfg->remove_from_parent();
     $ldap= $this->config->get_ldap_link();
     $ldap->cd ($this->dn);
     $ldap->recursive_remove();
