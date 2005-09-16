@@ -663,7 +663,7 @@ msgstr "Выберите адреса для добавления"
 #: plugins/gofax/blocklists/headpage.tpl:29
 #: plugins/gofax/faxaccount/locals.tpl:19
 #: plugins/addons/addressbook/contents.tpl:58
-#: plugins/admin/FAI/faiProfileEntry.tpl:29 plugins/admin/FAI/headpage.tpl:29
+#: plugins/admin/FAI/headpage.tpl:29 plugins/admin/FAI/faiProfileEntry.tpl:29
 #: plugins/admin/groups/headpage.tpl:30
 #: plugins/admin/groups/group_objects.tpl:20
 #: plugins/admin/groups/mail_locals.tpl:22 plugins/admin/users/headpage.tpl:29
@@ -1605,7 +1605,7 @@ msgstr "Управление подразделениями"
 #: plugins/gofax/blocklists/generic.tpl:67
 #: plugins/gofax/blocklists/headpage.tpl:20
 #: plugins/addons/addressbook/contents.tpl:33
-#: plugins/admin/FAI/faiProfileEntry.tpl:20 plugins/admin/FAI/headpage.tpl:20
+#: plugins/admin/FAI/headpage.tpl:20 plugins/admin/FAI/faiProfileEntry.tpl:20
 #: plugins/admin/groups/headpage.tpl:21 plugins/admin/users/headpage.tpl:20
 #: plugins/admin/applications/headpage.tpl:20
 #: plugins/admin/departments/headpage.tpl:20
@@ -4153,53 +4153,6 @@ msgstr ""
 msgid "Choose a disk to delete or edit"
 msgstr ""
 
-#: plugins/admin/FAI/faiProfileEntry.tpl:6 plugins/admin/FAI/headpage.tpl:6
-msgid "List of FAI objects (Fully Automatic Installation)"
-msgstr ""
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:24
-msgid ""
-"This menu allows you to select FAI class names, to add them to the currently "
-"editted profile."
-msgstr ""
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:37
-#, fuzzy
-msgid "Show only classes with templates"
-msgstr "Показать шаблоны"
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:39
-msgid "Show only classes with scripts"
-msgstr ""
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:41
-msgid "Show only classes with hooks"
-msgstr ""
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:43
-#, fuzzy
-msgid "Show only classes with variables"
-msgstr "Показать терминалы"
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:45
-msgid "Show only classes with packages"
-msgstr ""
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:47
-#, fuzzy
-msgid "Show only classes with partitions"
-msgstr "Показать рабочие станции"
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:52 plugins/admin/FAI/headpage.tpl:47
-#: plugins/admin/ogroups/ogroup_objects.tpl:41
-msgid "Display objects matching"
-msgstr "Показать совпадения объектов"
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:56 plugins/admin/FAI/headpage.tpl:51
-#: plugins/admin/ogroups/ogroup_objects.tpl:42
-msgid "Regular expression for matching object names"
-msgstr "Регулярное выражение, соответствующее именам объектов"
-
 #: plugins/admin/FAI/faiVariable.tpl:34 plugins/admin/FAI/faiScript.tpl:34
 #: plugins/admin/FAI/faiTemplate.tpl:34 plugins/admin/FAI/faiHook.tpl:34
 msgid "This bundle contains following objects"
@@ -4505,6 +4458,10 @@ msgstr ""
 "файл. Если вы сделали это и действительно хотите выполнить удаление, нажмите "
 "<i>Удалить</i>, иначе нажмите <i>Отмена</i>."
 
+#: plugins/admin/FAI/headpage.tpl:6 plugins/admin/FAI/faiProfileEntry.tpl:6
+msgid "List of FAI objects (Fully Automatic Installation)"
+msgstr ""
+
 #: plugins/admin/FAI/headpage.tpl:24
 msgid "This menu allows you to create, delete and edit FAI objects."
 msgstr ""
@@ -4542,6 +4499,16 @@ msgstr "Показать телефоны"
 #, fuzzy
 msgid "Show partitions"
 msgstr "Показать рабочие станции"
+
+#: plugins/admin/FAI/headpage.tpl:47 plugins/admin/FAI/faiProfileEntry.tpl:52
+#: plugins/admin/ogroups/ogroup_objects.tpl:41
+msgid "Display objects matching"
+msgstr "Показать совпадения объектов"
+
+#: plugins/admin/FAI/headpage.tpl:51 plugins/admin/FAI/faiProfileEntry.tpl:56
+#: plugins/admin/ogroups/ogroup_objects.tpl:42
+msgid "Regular expression for matching object names"
+msgstr "Регулярное выражение, соответствующее именам объектов"
 
 #: plugins/admin/FAI/class_faiPartitionTable.inc:218
 #: plugins/admin/FAI/class_faiPartitionTable.inc:220
@@ -4701,6 +4668,39 @@ msgstr "Файлы"
 #: plugins/admin/FAI/faiHook.tpl:40
 msgid "Choose a hook to delete or edit"
 msgstr ""
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:24
+msgid ""
+"This menu allows you to select FAI class names and to add them to the "
+"currently edited profile."
+msgstr ""
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:37
+#, fuzzy
+msgid "Show only classes with templates"
+msgstr "Показать шаблоны"
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:39
+msgid "Show only classes with scripts"
+msgstr ""
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:41
+msgid "Show only classes with hooks"
+msgstr ""
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:43
+#, fuzzy
+msgid "Show only classes with variables"
+msgstr "Показать терминалы"
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:45
+msgid "Show only classes with packages"
+msgstr ""
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:47
+#, fuzzy
+msgid "Show only classes with partitions"
+msgstr "Показать рабочие станции"
 
 #: plugins/admin/groups/mail.tpl:11
 msgid "Primary mail address for this shared folder"
@@ -7599,135 +7599,6 @@ msgstr ""
 "В этой учетной записи нет настроек электронной почты. Вы можете добавить их, "
 "щелкнув ниже."
 
-#: plugins/admin/ogroups/class_phonequeue.inc:79
-#, fuzzy
-msgid "ring all"
-msgstr "Терминалы"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:80
-msgid "round robin"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:81
-msgid "least recently called"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:82
-msgid "fewest completed calls"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:83
-#, fuzzy
-msgid "random"
-msgstr "и"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:84
-msgid "round robin with memory"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:110
-#, fuzzy
-msgid "Remove the phone queue from this Account"
-msgstr "Удалить телефонный аккаунт"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:111
-#, fuzzy
-msgid ""
-"Phone queue is enabled for this group. You can disable it by clicking below."
-msgstr ""
-"В этой учетной записи включены телефонные атрибуты. Вы можете отключить их, "
-"щелкнув ниже."
-
-#: plugins/admin/ogroups/class_phonequeue.inc:113
-#, fuzzy
-msgid "Create phone queue"
-msgstr "Создать телефонный аккаунт"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:113
-#, fuzzy
-msgid ""
-"For this group the phone queues are disabled. You can enable them by "
-"clicking below."
-msgstr ""
-"В этой учетной записи отключены телефонные атрибуты. Вы можете включить их, "
-"щелкнув ниже."
-
-#: plugins/admin/ogroups/class_phonequeue.inc:160
-msgid "Uruguai"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:198
-msgid "Timeout must be numeric"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:201
-msgid "Retry must be numeric"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:204
-msgid "Max queue length must be numeric"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:207
-msgid "Announce frequency must be numeric"
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:210
-msgid "There must be least one queue number defined."
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:224
-#: plugins/gofon/macro/class_gofonMacro.inc:88
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:222
-msgid ""
-"There is currently no asterisk server defined. Possibly you are missing a "
-"server that handles the asterisk management (goFonServer). \n"
-"  Your Settings can't be saved to asterisk Database. "
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:238
-#: plugins/admin/ogroups/class_phonequeue.inc:612
-#: plugins/gofon/macro/class_gofonMacro.inc:188
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:76
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:279
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1008
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:234
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:343
-#, php-format
-msgid ""
-"The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql "
-"error."
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:248
-#: plugins/admin/ogroups/class_phonequeue.inc:622
-#: plugins/gofon/macro/class_gofonMacro.inc:199
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:83
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:290
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1019
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:245
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:354
-#, fuzzy, php-format
-msgid "Can't select database %s on %s."
-msgstr "Невозможно выбрать базу данных!"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:279
-#: plugins/admin/ogroups/class_phonequeue.inc:493
-#: plugins/admin/ogroups/class_phonequeue.inc:658
-#, fuzzy, php-format
-msgid "Can't delete in Database %s, on Server %s."
-msgstr "Невозможно выбрать базу данных!"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:523
-#: plugins/admin/ogroups/class_phonequeue.inc:525
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1120
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1122
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:394
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:396
-#, php-format
-msgid "The specified telephonenumber '%s' is already assigned to '%s'."
-msgstr ""
-
 #: plugins/admin/ogroups/remove.tpl:7
 msgid ""
 "Please double check if you really want to do this since there is no way for "
@@ -7919,6 +7790,137 @@ msgstr ""
 msgid "Ring instead of playing background music"
 msgstr ""
 
+#: plugins/admin/ogroups/class_phonequeue.inc:79
+#, fuzzy
+msgid "ring all"
+msgstr "Терминалы"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:80
+msgid "round robin"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:81
+msgid "least recently called"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:82
+msgid "fewest completed calls"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:83
+#, fuzzy
+msgid "random"
+msgstr "и"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:84
+msgid "round robin with memory"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:110
+#, fuzzy
+msgid "Remove the phone queue from this Account"
+msgstr "Удалить телефонный аккаунт"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:111
+#, fuzzy
+msgid ""
+"Phone queue is enabled for this group. You can disable it by clicking below."
+msgstr ""
+"В этой учетной записи включены телефонные атрибуты. Вы можете отключить их, "
+"щелкнув ниже."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:113
+#, fuzzy
+msgid "Create phone queue"
+msgstr "Создать телефонный аккаунт"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:113
+#, fuzzy
+msgid ""
+"For this group the phone queues are disabled. You can enable them by "
+"clicking below."
+msgstr ""
+"В этой учетной записи отключены телефонные атрибуты. Вы можете включить их, "
+"щелкнув ниже."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:160
+msgid "Uruguai"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:198
+msgid "Timeout must be numeric"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:201
+msgid "Retry must be numeric"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:204
+msgid "Max queue length must be numeric"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:207
+msgid "Announce frequency must be numeric"
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:210
+msgid "There must be least one queue number defined."
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:224
+#: plugins/gofon/macro/class_gofonMacro.inc:88
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:240
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:619
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:222
+msgid ""
+"There is currently no asterisk server defined. Possibly you are missing a "
+"server that handles the asterisk management (goFonServer).\n"
+"Your Settings can't be saved to asterisk Database."
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:238
+#: plugins/admin/ogroups/class_phonequeue.inc:612
+#: plugins/gofon/macro/class_gofonMacro.inc:188
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:76
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:279
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1008
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:234
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:343
+#, php-format
+msgid ""
+"The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql "
+"error."
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:248
+#: plugins/admin/ogroups/class_phonequeue.inc:622
+#: plugins/gofon/macro/class_gofonMacro.inc:199
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:83
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:290
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1019
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:245
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:354
+#, fuzzy, php-format
+msgid "Can't select database %s on %s."
+msgstr "Невозможно выбрать базу данных!"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:279
+#: plugins/admin/ogroups/class_phonequeue.inc:493
+#: plugins/admin/ogroups/class_phonequeue.inc:658
+#, fuzzy, php-format
+msgid "Can't delete in Database %s, on Server %s."
+msgstr "Невозможно выбрать базу данных!"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:523
+#: plugins/admin/ogroups/class_phonequeue.inc:525
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1120
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1122
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:394
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:396
+#, php-format
+msgid "The specified telephonenumber '%s' is already assigned to '%s'."
+msgstr ""
+
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:25
 #, fuzzy
 msgid "Phone macros"
@@ -7964,66 +7966,6 @@ msgstr "Видимый всем"
 msgid "invisible"
 msgstr "Видимый всем"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:94
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:191
-#, fuzzy
-msgid "This 'dn' is no phone macro."
-msgstr "Этот DN не имеет свойств телефона."
-
-#: plugins/gofon/macro/class_gofonMacro.inc:150
-msgid ""
-"This macro ist still in use. To delete this Macro ensure that nobody has "
-"selected this Macro."
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:239
-#, php-format
-msgid "Unable to parse macro contents on line: %s"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:257
-#, php-format
-msgid "Can't perform SELECT query in DB '%s'"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:266
-#: plugins/gofon/macro/class_gofonMacro.inc:274
-#, php-format
-msgid "Can't perform DELETE query in DB '%s'"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:288
-#, php-format
-msgid "Can't perform INSERT query in DB '%s'"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:331
-#, fuzzy, php-format
-msgid "The given cn '%s' already exists."
-msgstr "Подразделение с таким именем уже существует."
-
-#: plugins/gofon/macro/class_gofonMacro.inc:336
-msgid "You must specify the 'Display Name' in order to save this macro"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:340
-msgid "The given cn is too long, to create a Makro entry, maximum 20 chars."
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:345
-#, php-format
-msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:351
-msgid "Makro length must be lower than 100 lines"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:356
-#, fuzzy
-msgid "Please choose a valid  base."
-msgstr "Пожалуйста, укажите корректную кадровую синхронизацию."
-
 #: plugins/gofon/macro/generic.tpl:6 plugins/gofon/macro/generic.tpl:7
 #, fuzzy
 msgid "Macro name"
@@ -8047,6 +7989,12 @@ msgstr "Список пользователей"
 #, fuzzy
 msgid "Macro text"
 msgstr "Название"
+
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:191
+#: plugins/gofon/macro/class_gofonMacro.inc:94
+#, fuzzy
+msgid "This 'dn' is no phone macro."
+msgstr "Этот DN не имеет свойств телефона."
 
 #: plugins/gofon/macro/class_gofonMacroParameters.inc:239
 #, fuzzy
@@ -8135,6 +8083,60 @@ msgstr "подразделения"
 msgid "type"
 msgstr "Тип"
 
+#: plugins/gofon/macro/class_gofonMacro.inc:150
+msgid ""
+"This macro ist still in use. To delete this Macro ensure that nobody has "
+"selected this Macro."
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:239
+#, php-format
+msgid "Unable to parse macro contents on line: %s"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:257
+#, php-format
+msgid "Can't perform SELECT query in DB '%s'"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:266
+#: plugins/gofon/macro/class_gofonMacro.inc:274
+#, php-format
+msgid "Can't perform DELETE query in DB '%s'"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:288
+#, php-format
+msgid "Can't perform INSERT query in DB '%s'"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:331
+#, fuzzy, php-format
+msgid "The given cn '%s' already exists."
+msgstr "Подразделение с таким именем уже существует."
+
+#: plugins/gofon/macro/class_gofonMacro.inc:336
+msgid "You must specify the 'Display Name' in order to save this macro"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:340
+msgid "The given cn is too long, to create a Makro entry, maximum 20 chars."
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:345
+#, php-format
+msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:351
+msgid "Makro length must be lower than 100 lines"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:356
+#, fuzzy
+msgid "Please choose a valid  base."
+msgstr "Пожалуйста, укажите корректную кадровую синхронизацию."
+
 #: plugins/gofon/phoneaccount/generic.tpl:33
 msgid "Voicemail PIN"
 msgstr ""
@@ -8173,14 +8175,6 @@ msgstr "Телефонные отчеты"
 #, fuzzy
 msgid "undefined"
 msgstr "не определена"
-
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:240
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:619
-msgid ""
-"There is currently no asterisk server defined. Possibly you are missing a "
-"server that handles the asterisk management (goFonServer). \n"
-" Your Settings can't be saved to asterisk Database. "
-msgstr ""
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:537
 msgid "Error while performing query "
@@ -8379,30 +8373,6 @@ msgstr ""
 msgid "Count users"
 msgstr "Страна"
 
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:188
-msgid ""
-"You have specified a conference 'without PIN' ... please leave the PIN "
-"fields empty."
-msgstr ""
-
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:192
-#, fuzzy
-msgid "Please enter a PIN."
-msgstr "Введите адрес сервера"
-
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:196
-#, fuzzy
-msgid "Please enter a name for the conference."
-msgstr "Введите корректный номер телефона!"
-
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:200
-msgid "Only numeric chars are allowed in Number field."
-msgstr ""
-
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:204
-msgid "Only numbers are allowed in Lifetime."
-msgstr ""
-
 #: plugins/gofon/conference/headpage.tpl:6
 #, fuzzy
 msgid "List of conference rooms"
@@ -8428,6 +8398,30 @@ msgstr "Регулярное выражение, соответствующее 
 #, fuzzy
 msgid "Conference management"
 msgstr "Управление подразделениями"
+
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:188
+msgid ""
+"You have specified a conference 'without PIN' ... please leave the PIN "
+"fields empty."
+msgstr ""
+
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:192
+#, fuzzy
+msgid "Please enter a PIN."
+msgstr "Введите адрес сервера"
+
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:196
+#, fuzzy
+msgid "Please enter a name for the conference."
+msgstr "Введите корректный номер телефона!"
+
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:200
+msgid "Only numeric chars are allowed in Number field."
+msgstr ""
+
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:204
+msgid "Only numbers are allowed in Lifetime."
+msgstr ""
 
 #: plugins/gofon/reports/class_fonreport.inc:6
 msgid "Phone Reports"

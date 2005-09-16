@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-09-16 15:24+0200\n"
+"PO-Revision-Date: 2005-09-16 16:15+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -694,7 +694,7 @@ msgstr "Wählen Sie die hinzuzufügenden Adressen"
 #: plugins/gofax/blocklists/headpage.tpl:29
 #: plugins/gofax/faxaccount/locals.tpl:19
 #: plugins/addons/addressbook/contents.tpl:58
-#: plugins/admin/FAI/faiProfileEntry.tpl:29 plugins/admin/FAI/headpage.tpl:29
+#: plugins/admin/FAI/headpage.tpl:29 plugins/admin/FAI/faiProfileEntry.tpl:29
 #: plugins/admin/groups/headpage.tpl:30
 #: plugins/admin/groups/group_objects.tpl:20
 #: plugins/admin/groups/mail_locals.tpl:22 plugins/admin/users/headpage.tpl:29
@@ -1630,7 +1630,7 @@ msgstr "Hotplug-Geräte-Verwaltung"
 #: plugins/gofax/blocklists/generic.tpl:67
 #: plugins/gofax/blocklists/headpage.tpl:20
 #: plugins/addons/addressbook/contents.tpl:33
-#: plugins/admin/FAI/faiProfileEntry.tpl:20 plugins/admin/FAI/headpage.tpl:20
+#: plugins/admin/FAI/headpage.tpl:20 plugins/admin/FAI/faiProfileEntry.tpl:20
 #: plugins/admin/groups/headpage.tpl:21 plugins/admin/users/headpage.tpl:20
 #: plugins/admin/applications/headpage.tpl:20
 #: plugins/admin/departments/headpage.tpl:20
@@ -3964,11 +3964,13 @@ msgstr "Bitte geben Sie eine gültige Beschreibung ein"
 #: plugins/admin/departments/tabs_department.inc:30
 msgid "Try to move tree failed. Destination tree is subtree of source tree."
 msgstr ""
+"Verschieben desBaums ist fehlgeschlagen: Der Zielbaum ist ein Unterbaum des "
+"Quellbaumes."
 
 #: plugins/admin/FAI/class_faiManagement.inc:31 plugins/admin/FAI/main.inc:38
 #: plugins/admin/FAI/main.inc:40
 msgid "FAI management"
-msgstr "FAI Verwaltung"
+msgstr "FAI-Verwaltung"
 
 #: plugins/admin/FAI/class_faiManagement.inc:32
 msgid "Fully Automatic Installation - management"
@@ -3997,9 +3999,8 @@ msgid "PT"
 msgstr "PT"
 
 #: plugins/admin/FAI/class_faiManagement.inc:366
-#, fuzzy
 msgid "New script bundle"
-msgstr "Neuer Drucker"
+msgstr "Neue Skript-Liste"
 
 #: plugins/admin/FAI/class_faiManagement.inc:366
 msgid "S"
@@ -4015,9 +4016,8 @@ msgid "H"
 msgstr "H"
 
 #: plugins/admin/FAI/class_faiManagement.inc:372
-#, fuzzy
 msgid "New variable bundle"
-msgstr "Zeige Terminals"
+msgstr "Neue Variablen-Liste"
 
 #: plugins/admin/FAI/class_faiManagement.inc:372
 msgid "V"
@@ -4118,56 +4118,6 @@ msgstr "Diese Partitionstabelle enthält die folgenden Festplatten"
 msgid "Choose a disk to delete or edit"
 msgstr "Wählen Sie eine Festplatte zum Entfernen oder Bearbeiten"
 
-#: plugins/admin/FAI/faiProfileEntry.tpl:6 plugins/admin/FAI/headpage.tpl:6
-msgid "List of FAI objects (Fully Automatic Installation)"
-msgstr "Liste von FAI-Objekten (Voll-Automatische Installation)"
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:24
-#, fuzzy
-msgid ""
-"This menu allows you to select FAI class names, to add them to the currently "
-"editted profile."
-msgstr ""
-"Dieses Menü erlaubt es Ihnen, eine bestehende Hotplug-Konfiguration zu "
-"verwenden."
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:37
-#, fuzzy
-msgid "Show only classes with templates"
-msgstr "Zeige Vorlagen"
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:39
-msgid "Show only classes with scripts"
-msgstr "Zeige nur Klassen mit Skripten"
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:41
-msgid "Show only classes with hooks"
-msgstr ""
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:43
-#, fuzzy
-msgid "Show only classes with variables"
-msgstr "Zeige Terminals"
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:45
-msgid "Show only classes with packages"
-msgstr "Zeige nur Klassen mit Paketen"
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:47
-#, fuzzy
-msgid "Show only classes with partitions"
-msgstr "Zeige Arbeitsstationen"
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:52 plugins/admin/FAI/headpage.tpl:47
-#: plugins/admin/ogroups/ogroup_objects.tpl:41
-msgid "Display objects matching"
-msgstr "Zeige die Objekte auf die Folgendes passt"
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:56 plugins/admin/FAI/headpage.tpl:51
-#: plugins/admin/ogroups/ogroup_objects.tpl:42
-msgid "Regular expression for matching object names"
-msgstr "Regulärer Ausdruck zum Abgleich mit Objekt-Namen"
-
 #: plugins/admin/FAI/faiVariable.tpl:34 plugins/admin/FAI/faiScript.tpl:34
 #: plugins/admin/FAI/faiTemplate.tpl:34 plugins/admin/FAI/faiHook.tpl:34
 msgid "This bundle contains following objects"
@@ -4175,30 +4125,26 @@ msgstr ""
 
 #: plugins/admin/FAI/faiVariable.tpl:40
 msgid "Choose a variable to delete or edit"
-msgstr ""
+msgstr "Wählen Sie eine Variable zum Entfernen oder Bearbeiten"
 
 #: plugins/admin/FAI/class_faiScriptEntry.inc:48
-#, fuzzy
 msgid "Please select a valid file."
-msgstr "Bitte wählen Sie einen gültigen Mail-Server."
+msgstr "Bitte wählen Sie eine gültige Datei."
 
 #: plugins/admin/FAI/class_faiScriptEntry.inc:51
-#, fuzzy
 msgid "Selected file is empty."
 msgstr "Die angebene Datei ist leer."
 
 #: plugins/admin/FAI/class_faiScriptEntry.inc:94
-#, fuzzy
 msgid "Please specify a script."
-msgstr "Bitte geben Sie eine gültige ID ein!"
+msgstr "Bitte geben Sie ein Skript an."
 
 #: plugins/admin/FAI/class_faiScriptEntry.inc:98
 #: plugins/admin/FAI/class_faiVariableEntry.inc:81
 #: plugins/admin/FAI/class_faiHookEntry.inc:86
 #: plugins/admin/FAI/class_faiTemplateEntry.inc:87
-#, fuzzy
 msgid "Please enter a description."
-msgstr "Bitte geben Sie eine gültige Seriennummer ein"
+msgstr "Bitte geben Sie eine gültige Beschreibung ein."
 
 #: plugins/admin/FAI/class_faiScriptEntry.inc:102
 #: plugins/admin/FAI/class_faiVariableEntry.inc:85
@@ -4213,9 +4159,8 @@ msgstr ""
 #: plugins/admin/FAI/class_faiVariableEntry.inc:89
 #: plugins/admin/FAI/class_faiHookEntry.inc:94
 #: plugins/admin/FAI/class_faiTemplateEntry.inc:95
-#, fuzzy
 msgid "Please enter a name."
-msgstr "Bitte geben Sie eine PIN ein."
+msgstr "Bitte geben Sie eine Namen ein."
 
 #: plugins/admin/FAI/class_faiScriptEntry.inc:110
 #: plugins/admin/FAI/class_faiVariableEntry.inc:93
@@ -4227,14 +4172,12 @@ msgstr "Bitte geben Sie einen gültigen Namen ein (0-9 und a-z sind erlaubt)."
 
 #: plugins/admin/FAI/faiScriptEntry.tpl:29
 #: plugins/admin/FAI/faiScriptEntry.tpl:48
-#, fuzzy
 msgid "Script attributes"
-msgstr "Telefon-Attribute"
+msgstr "Skript-Attribute"
 
 #: plugins/admin/FAI/faiScriptEntry.tpl:38
-#, fuzzy
 msgid "Choose a priority"
-msgstr "Wählen Sie den Telefon-Typ"
+msgstr "Wählen Sie eine Priorität"
 
 #: plugins/admin/FAI/faiScriptEntry.tpl:50
 #: plugins/admin/FAI/faiHookEntry.tpl:34
@@ -4258,9 +4201,8 @@ msgid "This list displays all assigned class names for this profile."
 msgstr ""
 
 #: plugins/admin/FAI/class_faiProfile.inc:144
-#, fuzzy
 msgid "Append new class names"
-msgstr "Verfügbare Anwendungen"
+msgstr "Neue Klassen-Namen anfügen"
 
 #: plugins/admin/FAI/class_faiProfile.inc:147
 #: plugins/admin/FAI/class_faiProfileEntry.inc:113
@@ -4270,21 +4212,18 @@ msgstr "Gespräch halten"
 
 #: plugins/admin/FAI/class_faiProfile.inc:148
 #: plugins/admin/FAI/class_faiProfileEntry.inc:114
-#, fuzzy
 msgid "Template bundle"
-msgstr "Vorlage"
+msgstr "Vorlagen-Liste"
 
 #: plugins/admin/FAI/class_faiProfile.inc:149
 #: plugins/admin/FAI/class_faiProfileEntry.inc:115
-#, fuzzy
 msgid "Script bundle"
-msgstr "Anmeldeskript"
+msgstr "Skript-Liste"
 
 #: plugins/admin/FAI/class_faiProfile.inc:150
 #: plugins/admin/FAI/class_faiProfileEntry.inc:116
-#, fuzzy
 msgid "Variable bundle"
-msgstr "Variable"
+msgstr "Variablen-Liste"
 
 #: plugins/admin/FAI/class_faiProfile.inc:151
 msgid "Packages bundle"
@@ -4295,9 +4234,8 @@ msgid "Remove class from profile"
 msgstr "Entferne Klasse von Profil"
 
 #: plugins/admin/FAI/class_faiProfile.inc:209
-#, fuzzy
 msgid "Please specify a description for this profile."
-msgstr "Bitte geben Sie einen gültigen Pfad an."
+msgstr "Bitte geben Sie eine gültigen Beschreibung für das Profil an."
 
 #: plugins/admin/FAI/class_faiProfile.inc:217
 #, fuzzy
@@ -4309,9 +4247,8 @@ msgid "Please assign at least one class to this  profile."
 msgstr ""
 
 #: plugins/admin/FAI/class_faiProfile.inc:229
-#, fuzzy
 msgid "There is already a profile with this class name defined."
-msgstr "Die von Ihnen angegebene 'Kennung' ist bereits vergeben."
+msgstr "Der von Ihnen angegebene Klassen-Name ist bereits für ein Profil vergeben."
 
 #: plugins/admin/FAI/faiProfile.tpl:31
 #, fuzzy
@@ -4343,19 +4280,17 @@ msgid "FS option"
 msgstr "Dateisystem-Option"
 
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:200
-#, fuzzy
 msgid "Preserve"
-msgstr "Server"
+msgstr "Bewahren"
 
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:294
-#, fuzzy
 msgid "Please enter a description for your disk."
-msgstr "Bitte geben Sie einen gültigen Pfad an."
+msgstr "Bitte geben Sie eine Beschreibung für die Festplatte an."
 
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:315
-#, fuzzy, php-format
+#, php-format
 msgid "Please enter a valid name for partition %s."
-msgstr "Bitte geben Sie einen gültigen Namen an."
+msgstr "Bitte geben Sie einen gültigen Namen für die Partition %s an."
 
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:319
 #, fuzzy, php-format
@@ -4368,10 +4303,9 @@ msgid "please enter a unique mount point for partition %s"
 msgstr ""
 
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:327
-#, fuzzy, php-format
+#, php-format
 msgid "Please enter a valid description for partition %s."
-msgstr ""
-"Bitte geben Sie einen gültigen Pfad in das Feld 'Basisverzeichnis' ein."
+msgstr "Bitte geben Sie eine gültige Beschreibung für Partition %s ein."
 
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:331
 #, php-format
@@ -4383,19 +4317,22 @@ msgstr "Bitte geben Sie einen gültigen Mount-Pfad für Partition %s ein."
 msgid ""
 "File system type 'swap' is already used, change file system type for "
 "partition %s."
-msgstr "Dateisystem 'swap' wird bereits benutzt, ändern Sie bitte das Dateisystem für "
-"Partition %s."
+msgstr ""
+"Dateisystem 'swap' wird bereits benutzt, ändern Sie bitte das Dateisystem "
+"für Partition %s."
 
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:342
 #, php-format
 msgid "Please enter a range for partition size, 'from-to', for partition %s."
 msgstr ""
+"Bitte geben Sie einen Bereich für die Partitionsgröße ('von-bis') für die "
+"Partition %s an-"
 
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:344
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:346
-#, fuzzy, php-format
+#, php-format
 msgid "Please enter a valid range for partition %s."
-msgstr "Bitte geben Sie eine gültige Seriennummer ein"
+msgstr "Bitte geben Sie einen gültigen Bereich für Partition %s ein."
 
 #: plugins/admin/FAI/class_faiPartitionTableEntry.inc:389
 #, php-format
@@ -4404,9 +4341,8 @@ msgid ""
 msgstr ""
 
 #: plugins/admin/FAI/faiPartitionTableEntry.tpl:11
-#, fuzzy
 msgid "Choose a disc name"
-msgstr "Wählen Sie das Tastatur-Modell"
+msgstr "Wählen Sie einen Festplatten-Namen"
 
 #: plugins/admin/FAI/faiPartitionTableEntry.tpl:29
 msgid "Partition entries"
@@ -4422,7 +4358,7 @@ msgstr "Abbrechen"
 
 #: plugins/admin/FAI/faiScript.tpl:40
 msgid "Choose a script to delete or edit"
-msgstr ""
+msgstr "Wählen Sie ein Skript zum Entfernen oder Bearbeiten"
 
 #: plugins/admin/FAI/class_faiVariableEntry.inc:77
 #, fuzzy
@@ -4443,12 +4379,11 @@ msgid "Choose a template to delete or edit"
 msgstr "Wählen Sie die Abteilung in der der Eintrag abgelegt werden soll"
 
 #: plugins/admin/FAI/remove.tpl:7
-#, fuzzy
 msgid ""
 "This includes <b>all</b> object informations. Please double check if your "
 "really want to do this since there is no way for GOsa to get your data back."
 msgstr ""
-"Dies umfasst <b>alle</b> System- und Setup-Informationen Bitte prüfen Sie "
+"Dies umfasst <b>alle</b> Objekt-Informationen Bitte prüfen Sie "
 "genau, da es keine Möglichkeit für GOsa gibt, die Daten zu restaurieren. "
 
 #: plugins/admin/FAI/remove.tpl:11 plugins/admin/departments/remove.tpl:11
@@ -4462,12 +4397,13 @@ msgstr ""
 "drücken Sie <i>Beenden</i> um Fortzufahren oder <i>Abbrechen</i>, um den "
 "Vorgang zu beenden."
 
+#: plugins/admin/FAI/headpage.tpl:6 plugins/admin/FAI/faiProfileEntry.tpl:6
+msgid "List of FAI objects (Fully Automatic Installation)"
+msgstr "Liste von FAI-Objekten (Voll-Automatische Installation)"
+
 #: plugins/admin/FAI/headpage.tpl:24
-#, fuzzy
 msgid "This menu allows you to create, delete and edit FAI objects."
-msgstr ""
-"Dieses Menü erlaubt es Ihnen, eine bestehende Hotplug-Konfiguration zu "
-"verwenden."
+msgstr "Dieses Menü erlaubt es Ihnen, FAI-Objekte zu erstellen, entfernen und zu bearbeiten."
 
 #: plugins/admin/FAI/headpage.tpl:36
 msgid "Show profiles"
@@ -4491,13 +4427,22 @@ msgid "Show variables"
 msgstr "Zeige Variablen"
 
 #: plugins/admin/FAI/headpage.tpl:41
-#, fuzzy
 msgid "Show packages"
-msgstr "Zeige Telefone"
+msgstr "Zeige Pakete"
 
 #: plugins/admin/FAI/headpage.tpl:42
 msgid "Show partitions"
 msgstr "Zeige Partitionen"
+
+#: plugins/admin/FAI/headpage.tpl:47 plugins/admin/FAI/faiProfileEntry.tpl:52
+#: plugins/admin/ogroups/ogroup_objects.tpl:41
+msgid "Display objects matching"
+msgstr "Zeige die Objekte auf die Folgendes passt"
+
+#: plugins/admin/FAI/headpage.tpl:51 plugins/admin/FAI/faiProfileEntry.tpl:56
+#: plugins/admin/ogroups/ogroup_objects.tpl:42
+msgid "Regular expression for matching object names"
+msgstr "Regulärer Ausdruck zum Abgleich mit Objekt-Namen"
 
 #: plugins/admin/FAI/class_faiPartitionTable.inc:218
 #: plugins/admin/FAI/class_faiPartitionTable.inc:220
@@ -4509,23 +4454,20 @@ msgid "Please enter a valid name."
 msgstr "Bitte geben Sie einen gültigen Namen ein."
 
 #: plugins/admin/FAI/class_faiHookEntry.inc:77
-#, fuzzy
 msgid "Please enter a value for task."
-msgstr "Bitte geben Sie einen gültigen Namen an."
+msgstr "Bitte geben Sie einen gültigen Wert für 'Aufgabe' an."
 
 #: plugins/admin/FAI/class_faiHookEntry.inc:80
-#, fuzzy
 msgid "Please enter a value for script."
-msgstr "Bitte geben Sie eine gültige Seriennummer ein"
+msgstr "Bitte geben Sie einen Wert für 'Skript' ein."
 
 #: plugins/admin/FAI/class_faiProfileEntry.inc:117
 msgid "Package bundle"
-msgstr ""
+msgstr "Paket-Liste"
 
 #: plugins/admin/FAI/faiHookEntry.tpl:29
-#, fuzzy
 msgid "Hook attributes"
-msgstr "Telefon-Attribute"
+msgstr "Haltepunkt-Attribute"
 
 #: plugins/admin/FAI/faiHookEntry.tpl:44
 msgid "Task"
@@ -4548,9 +4490,8 @@ msgid "Create new FAI object - set of variables."
 msgstr "Erstelle neues FAI-Objekt - Variablen-Gruppe."
 
 #: plugins/admin/FAI/class_askClassName.inc:72
-#, fuzzy
 msgid "Create new FAI object - set of hooks."
-msgstr "Erstelle neue Objektgruppe"
+msgstr "Erstelle neues FAI-Objekt - Satz von Haltepunkten"
 
 #: plugins/admin/FAI/class_askClassName.inc:73
 msgid "Create new FAI object - profile."
@@ -4561,14 +4502,12 @@ msgid "Create new FAI object - template."
 msgstr "Erstelle neues FAI-Objekt - Vorlage"
 
 #: plugins/admin/FAI/class_askClassName.inc:75
-#, fuzzy
 msgid "Create new FAI object"
-msgstr "Erstelle neue Objektgruppe"
+msgstr "Erstelle neues FAI-Objekt"
 
 #: plugins/admin/FAI/class_askClassName.inc:125
-#, fuzzy
 msgid "The given class name is empty."
-msgstr "Die angebene Datei ist leer."
+msgstr "Der angebene Klassen-Name ist leer."
 
 #: plugins/admin/FAI/class_askClassName.inc:129
 #, fuzzy
@@ -4576,9 +4515,8 @@ msgid "The specified class name is already in use for this object type."
 msgstr "Eine Gruppe mit diesem Namen existiert bereits."
 
 #: plugins/admin/FAI/class_askClassName.inc:133
-#, fuzzy
 msgid "Please enter a valid class name. Only 0-9 a-z is allowed here."
-msgstr "Bitte geben Sie einen gültigen Namen ein (0-9 und a-z sind erlaubt)."
+msgstr "Bitte geben Sie einen gültigen Klassen-Namen ein (0-9 und a-z sind erlaubt)."
 
 #: plugins/admin/FAI/askClassName.tpl:5
 msgid ""
@@ -4607,10 +4545,13 @@ msgid ""
 "The list box below shows all available class names you may use, for this "
 "object, to avoid duplicates."
 msgstr ""
+"Die Listenbox unten enthält alle verfügbaren Klassen-Namen, die sie für "
+"dieses Objekt verwenden können, um Duplikate zu vermeiden."
 
 #: plugins/admin/FAI/askClassName.tpl:17
 msgid "You can select of one the following class names for this object."
 msgstr ""
+"Sie können einen der folgenden Klassen-Namen für dieses Objekt auswählen."
 
 #: plugins/admin/FAI/askClassName.tpl:21
 msgid "Available class names."
@@ -4637,9 +4578,8 @@ msgid "Please specify a value for attribute 'path'."
 msgstr "Bitte geben Sie einen Wert für Attribut 'Pfad' an."
 
 #: plugins/admin/FAI/faiTemplateEntry.tpl:29
-#, fuzzy
 msgid "Template attributes"
-msgstr "DN-Attribut für Benutzer:"
+msgstr "Vorlagen-Attribute"
 
 #: plugins/admin/FAI/faiTemplateEntry.tpl:34
 #: plugins/admin/systems/servnfs.tpl:63
@@ -4653,6 +4593,38 @@ msgstr "Datei"
 #: plugins/admin/FAI/faiHook.tpl:40
 msgid "Choose a hook to delete or edit"
 msgstr ""
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:24
+msgid ""
+"This menu allows you to select FAI class names and to add them to the "
+"currently edited profile."
+msgstr ""
+"Dieses Menü erlaubt es Ihnen, FAI Klassen-Namen auszuwählen und zum gegenwärtig "
+"bearbeiteten Profil hinzuzufügen."
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:37
+msgid "Show only classes with templates"
+msgstr "Zeige nur Klassen mit Vorlagen"
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:39
+msgid "Show only classes with scripts"
+msgstr "Zeige nur Klassen mit Skripten"
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:41
+msgid "Show only classes with hooks"
+msgstr ""
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:43
+msgid "Show only classes with variables"
+msgstr "Zeige nur Klassen mit Variablen"
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:45
+msgid "Show only classes with packages"
+msgstr "Zeige nur Klassen mit Paketen"
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:47
+msgid "Show only classes with partitions"
+msgstr "Zeige nur Klassen mit Partitionen"
 
 #: plugins/admin/groups/mail.tpl:11
 msgid "Primary mail address for this shared folder"
@@ -5387,7 +5359,7 @@ msgstr "Das benötigte Feld 'Name' ist nicht ausgefüllt."
 
 #: plugins/admin/applications/class_applicationGeneric.inc:250
 msgid "Invalid character in application name. Only a-z 0-9 are allowed."
-msgstr ""
+msgstr "Ungültiges Zeichen in Anwendungs-Name. Nur a-z und 0-9 sind erlaubte Zeichen."
 
 #: plugins/admin/applications/class_applicationGeneric.inc:254
 msgid "Required field 'Execute' is not filled."
@@ -5834,14 +5806,12 @@ msgid "Entries"
 msgstr "Einträge"
 
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:117
-#, fuzzy
 msgid "selected"
-msgstr "Entfernen"
+msgstr "ausgewählt"
 
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:135
-#, fuzzy
 msgid "Please select a PPD or press cancel"
-msgstr "Bitte wählen Sie einen Eintrag oder 'Abbrechen'."
+msgstr "Bitte wählen Sie eine PPD oder Abbrechen"
 
 #: plugins/admin/systems/server.tpl:6
 msgid "Server name"
@@ -5875,9 +5845,8 @@ msgid "Current used information setup : "
 msgstr "Generische Benutzer-Information"
 
 #: plugins/admin/systems/printerPPDDialog.tpl:13
-#, fuzzy
 msgid "Select"
-msgstr "Auswahl des Eintrags"
+msgstr "Auswahl"
 
 #: plugins/admin/systems/class_terminalGeneric.inc:63
 #: plugins/admin/systems/class_workstationGeneric.inc:71
@@ -6476,14 +6445,15 @@ msgid "Add printer extension"
 msgstr "Drucker-Erweiterung hinzufügen"
 
 #: plugins/admin/systems/class_printGeneric.inc:169
-#, fuzzy
 msgid ""
 "This workstation has printer extension disabled. You can't enable it while "
 "'cn' is not present in entry. Possibly you are currently creating a new "
 "terminal template"
 msgstr ""
 "Aktuell hat diese Workstation keine Drucker-Erweiterung aktiviert. Sie "
-"können diese durch einen Klick auf die Schaltfläche unten aktivieren."
+"können diese nicht aktivieren, solange das 'cn'-Attribute nicht im Eintrag "
+"enthalten ist. Wahrscheinlich erstellen Sie gerade eine neue Terminal-"
+"Vorlage."
 
 #: plugins/admin/systems/class_printGeneric.inc:181
 #: plugins/admin/systems/class_printGeneric.inc:184
@@ -6539,6 +6509,8 @@ msgstr "Dieser Drucker gehört zu Terminal %s. Sie können ihn nicht umbenennen."
 #, php-format
 msgid "This printer belongs to workstation %s. You can't rename this printer."
 msgstr ""
+"Dieser Drucker gehört zur Arbeitsstation %s. Ein Umbenennen ist daher nicht "
+"möglich."
 
 #: plugins/admin/systems/class_printGeneric.inc:396
 msgid "You have no permissions to create a printer on this 'Base'."
@@ -7424,131 +7396,6 @@ msgstr ""
 "Diese Gruppe hat keine Mail-Erweiterungen. Sie können diese aktivieren, wenn "
 "Sie auf die untere Schaltfläche klicken."
 
-#: plugins/admin/ogroups/class_phonequeue.inc:79
-msgid "ring all"
-msgstr "alle gleichzeitig"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:80
-msgid "round robin"
-msgstr "nacheinander"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:81
-msgid "least recently called"
-msgstr "am wenigsten Anrufe"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:82
-msgid "fewest completed calls"
-msgstr "am wenigsten abgeschlossene Anrufe"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:83
-msgid "random"
-msgstr "zufällig"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:84
-msgid "round robin with memory"
-msgstr "nacheinander (mit Speicher)"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:110
-msgid "Remove the phone queue from this Account"
-msgstr "Warteschlange von diesem Konto entfernen"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:111
-msgid ""
-"Phone queue is enabled for this group. You can disable it by clicking below."
-msgstr ""
-"Diese Gruppe hat die Warteschlangen-Erweiterung aktiviert. Sie können diese "
-"durch einen Klick auf die untere Schaltfläche deaktivieren."
-
-#: plugins/admin/ogroups/class_phonequeue.inc:113
-msgid "Create phone queue"
-msgstr "Warteschlange erstellen"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:113
-msgid ""
-"For this group the phone queues are disabled. You can enable them by "
-"clicking below."
-msgstr ""
-"Diese Gruppe hat keine gültigen Warteschlangen-Erweiterung. Sie können diese "
-"durch einen Klick auf die untere Schaltfläche aktivieren."
-
-#: plugins/admin/ogroups/class_phonequeue.inc:160
-msgid "Uruguai"
-msgstr "Uruguai"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:198
-msgid "Timeout must be numeric"
-msgstr "Der Wert für 'Wartezeit' muss numerisch sein"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:201
-msgid "Retry must be numeric"
-msgstr "Der Wert für 'Wiederholen' muss numerisch sein"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:204
-msgid "Max queue length must be numeric"
-msgstr "Der Wert für 'Maximale Grösse der Warteschlange' muss numerisch sein"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:207
-msgid "Announce frequency must be numeric"
-msgstr "Der Wert für 'Benachrichtigungsfrequenz' muss numerisch sein"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:210
-msgid "There must be least one queue number defined."
-msgstr "Es ist mindestens eine Telefonnummer erforderlich."
-
-#: plugins/admin/ogroups/class_phonequeue.inc:224
-#: plugins/gofon/macro/class_gofonMacro.inc:88
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:222
-msgid ""
-"There is currently no asterisk server defined. Possibly you are missing a "
-"server that handles the asterisk management (goFonServer). \n"
-"  Your Settings can't be saved to asterisk Database. "
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:238
-#: plugins/admin/ogroups/class_phonequeue.inc:612
-#: plugins/gofon/macro/class_gofonMacro.inc:188
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:76
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:279
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1008
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:234
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:343
-#, php-format
-msgid ""
-"The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql "
-"error."
-msgstr ""
-"MySQL-Server '%s' kann nicht als Benutzer '%s' erreicht werden, überprüfen "
-"Sie das GOsa Protokoll auf MySQL-Meldungen."
-
-#: plugins/admin/ogroups/class_phonequeue.inc:248
-#: plugins/admin/ogroups/class_phonequeue.inc:622
-#: plugins/gofon/macro/class_gofonMacro.inc:199
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:83
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:290
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1019
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:245
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:354
-#, php-format
-msgid "Can't select database %s on %s."
-msgstr "Die Datenbank %s auf %s kann nicht ausgewählt werden."
-
-#: plugins/admin/ogroups/class_phonequeue.inc:279
-#: plugins/admin/ogroups/class_phonequeue.inc:493
-#: plugins/admin/ogroups/class_phonequeue.inc:658
-#, php-format
-msgid "Can't delete in Database %s, on Server %s."
-msgstr "Kann nicht entfernen (Datenbank '%s' auf Server '%s')."
-
-#: plugins/admin/ogroups/class_phonequeue.inc:523
-#: plugins/admin/ogroups/class_phonequeue.inc:525
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1120
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1122
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:394
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:396
-#, php-format
-msgid "The specified telephonenumber '%s' is already assigned to '%s'."
-msgstr "Die angegebene Telefonnummer '%s' wird bereits von '%s' verwendet."
-
 #: plugins/admin/ogroups/remove.tpl:7
 msgid ""
 "Please double check if you really want to do this since there is no way for "
@@ -7728,6 +7575,137 @@ msgstr "Auflegen durch Drücken der Taste '*' (Anrufer)"
 msgid "Ring instead of playing background music"
 msgstr "Klingelton statt Hintergrund-Musik"
 
+#: plugins/admin/ogroups/class_phonequeue.inc:79
+msgid "ring all"
+msgstr "alle gleichzeitig"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:80
+msgid "round robin"
+msgstr "nacheinander"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:81
+msgid "least recently called"
+msgstr "am wenigsten Anrufe"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:82
+msgid "fewest completed calls"
+msgstr "am wenigsten abgeschlossene Anrufe"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:83
+msgid "random"
+msgstr "zufällig"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:84
+msgid "round robin with memory"
+msgstr "nacheinander (mit Speicher)"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:110
+msgid "Remove the phone queue from this Account"
+msgstr "Warteschlange von diesem Konto entfernen"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:111
+msgid ""
+"Phone queue is enabled for this group. You can disable it by clicking below."
+msgstr ""
+"Diese Gruppe hat die Warteschlangen-Erweiterung aktiviert. Sie können diese "
+"durch einen Klick auf die untere Schaltfläche deaktivieren."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:113
+msgid "Create phone queue"
+msgstr "Warteschlange erstellen"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:113
+msgid ""
+"For this group the phone queues are disabled. You can enable them by "
+"clicking below."
+msgstr ""
+"Diese Gruppe hat keine gültigen Warteschlangen-Erweiterung. Sie können diese "
+"durch einen Klick auf die untere Schaltfläche aktivieren."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:160
+msgid "Uruguai"
+msgstr "Uruguai"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:198
+msgid "Timeout must be numeric"
+msgstr "Der Wert für 'Wartezeit' muss numerisch sein"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:201
+msgid "Retry must be numeric"
+msgstr "Der Wert für 'Wiederholen' muss numerisch sein"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:204
+msgid "Max queue length must be numeric"
+msgstr "Der Wert für 'Maximale Grösse der Warteschlange' muss numerisch sein"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:207
+msgid "Announce frequency must be numeric"
+msgstr "Der Wert für 'Benachrichtigungsfrequenz' muss numerisch sein"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:210
+msgid "There must be least one queue number defined."
+msgstr "Es ist mindestens eine Telefonnummer erforderlich."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:224
+#: plugins/gofon/macro/class_gofonMacro.inc:88
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:240
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:619
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:222
+msgid ""
+"There is currently no asterisk server defined. Possibly you are missing a "
+"server that handles the asterisk management (goFonServer).\n"
+"Your Settings can't be saved to asterisk Database."
+msgstr ""
+"Momentan ist kein Asterisk-Server definiert. Wahrscheinlich fehlt Ihnen ein "
+"Server, der das Asterisk-Management (goFonServer) enthält.\n"
+"Ihre Einstellungen können daher nicht in der Asterisk-Datenbank gespeichert "
+"werden."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:238
+#: plugins/admin/ogroups/class_phonequeue.inc:612
+#: plugins/gofon/macro/class_gofonMacro.inc:188
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:76
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:279
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1008
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:234
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:343
+#, php-format
+msgid ""
+"The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql "
+"error."
+msgstr ""
+"MySQL-Server '%s' kann nicht als Benutzer '%s' erreicht werden, überprüfen "
+"Sie das GOsa Protokoll auf MySQL-Meldungen."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:248
+#: plugins/admin/ogroups/class_phonequeue.inc:622
+#: plugins/gofon/macro/class_gofonMacro.inc:199
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:83
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:290
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1019
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:245
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:354
+#, php-format
+msgid "Can't select database %s on %s."
+msgstr "Die Datenbank %s auf %s kann nicht ausgewählt werden."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:279
+#: plugins/admin/ogroups/class_phonequeue.inc:493
+#: plugins/admin/ogroups/class_phonequeue.inc:658
+#, php-format
+msgid "Can't delete in Database %s, on Server %s."
+msgstr "Kann nicht entfernen (Datenbank '%s' auf Server '%s')."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:523
+#: plugins/admin/ogroups/class_phonequeue.inc:525
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1120
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1122
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:394
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:396
+#, php-format
+msgid "The specified telephonenumber '%s' is already assigned to '%s'."
+msgstr "Die angegebene Telefonnummer '%s' wird bereits von '%s' verwendet."
+
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:25
 msgid "Phone macros"
 msgstr "Telefon-Makros"
@@ -7766,71 +7744,6 @@ msgstr "sichtbar"
 msgid "invisible"
 msgstr "unsichtbar"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:94
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:191
-msgid "This 'dn' is no phone macro."
-msgstr "Diese 'dn' ist kein Telefon-Makro."
-
-#: plugins/gofon/macro/class_gofonMacro.inc:150
-msgid ""
-"This macro ist still in use. To delete this Macro ensure that nobody has "
-"selected this Macro."
-msgstr ""
-"Dieses Makro ist in Benutzung. Um es zu entfernen, stellen Sie bitte "
-"zunächst sicher, dass niemand dieses Makro ausgewählt hat."
-
-#: plugins/gofon/macro/class_gofonMacro.inc:239
-#, php-format
-msgid "Unable to parse macro contents on line: %s"
-msgstr "Fehler beim Einlesen des Makros in Zeile %s"
-
-#: plugins/gofon/macro/class_gofonMacro.inc:257
-#, php-format
-msgid "Can't perform SELECT query in DB '%s'"
-msgstr "Kann SELECT-Abfrage in Datenbank '%s' nicht ausführen"
-
-#: plugins/gofon/macro/class_gofonMacro.inc:266
-#: plugins/gofon/macro/class_gofonMacro.inc:274
-#, php-format
-msgid "Can't perform DELETE query in DB '%s'"
-msgstr "Kann DELETE-Abfrage in Datenbank '%s' nicht ausführen"
-
-#: plugins/gofon/macro/class_gofonMacro.inc:288
-#, php-format
-msgid "Can't perform INSERT query in DB '%s'"
-msgstr "Kann INSERT-Abfrage in Datenbank '%s' nicht ausführen"
-
-#: plugins/gofon/macro/class_gofonMacro.inc:331
-#, php-format
-msgid "The given cn '%s' already exists."
-msgstr "Die Kennung '%s' exisitiert bereits."
-
-#: plugins/gofon/macro/class_gofonMacro.inc:336
-msgid "You must specify the 'Display Name' in order to save this macro"
-msgstr ""
-"Das Feld 'Angezeigter Name' darf nicht leer sein, um das Makro zu speichern"
-
-#: plugins/gofon/macro/class_gofonMacro.inc:340
-msgid "The given cn is too long, to create a Makro entry, maximum 20 chars."
-msgstr ""
-"Die angegebene cn ist zu lang. Die mögliche Länge ist auf 20 Zeichen "
-"begrenzt."
-
-#: plugins/gofon/macro/class_gofonMacro.inc:345
-#, php-format
-msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro"
-msgstr ""
-"Zugriffsrechte nicht ausreichend, kann Attribut '%s' in goFonMacro nicht "
-"ändern"
-
-#: plugins/gofon/macro/class_gofonMacro.inc:351
-msgid "Makro length must be lower than 100 lines"
-msgstr "Das Makro darf nicht länger als 100 Zeilen sein"
-
-#: plugins/gofon/macro/class_gofonMacro.inc:356
-msgid "Please choose a valid  base."
-msgstr "Bitte wählen Sie eine gültige Basis."
-
 #: plugins/gofon/macro/generic.tpl:6 plugins/gofon/macro/generic.tpl:7
 msgid "Macro name"
 msgstr "Makro-Name"
@@ -7850,6 +7763,11 @@ msgstr "Sichtbar für Benutzer"
 #: plugins/gofon/macro/generic.tpl:52
 msgid "Macro text"
 msgstr "Makro-Inhalt"
+
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:191
+#: plugins/gofon/macro/class_gofonMacro.inc:94
+msgid "This 'dn' is no phone macro."
+msgstr "Diese 'dn' ist kein Telefon-Makro."
 
 #: plugins/gofon/macro/class_gofonMacroParameters.inc:239
 msgid "String"
@@ -7934,6 +7852,66 @@ msgstr "Argument"
 msgid "type"
 msgstr "Typ"
 
+#: plugins/gofon/macro/class_gofonMacro.inc:150
+msgid ""
+"This macro ist still in use. To delete this Macro ensure that nobody has "
+"selected this Macro."
+msgstr ""
+"Dieses Makro ist in Benutzung. Um es zu entfernen, stellen Sie bitte "
+"zunächst sicher, dass niemand dieses Makro ausgewählt hat."
+
+#: plugins/gofon/macro/class_gofonMacro.inc:239
+#, php-format
+msgid "Unable to parse macro contents on line: %s"
+msgstr "Fehler beim Einlesen des Makros in Zeile %s"
+
+#: plugins/gofon/macro/class_gofonMacro.inc:257
+#, php-format
+msgid "Can't perform SELECT query in DB '%s'"
+msgstr "Kann SELECT-Abfrage in Datenbank '%s' nicht ausführen"
+
+#: plugins/gofon/macro/class_gofonMacro.inc:266
+#: plugins/gofon/macro/class_gofonMacro.inc:274
+#, php-format
+msgid "Can't perform DELETE query in DB '%s'"
+msgstr "Kann DELETE-Abfrage in Datenbank '%s' nicht ausführen"
+
+#: plugins/gofon/macro/class_gofonMacro.inc:288
+#, php-format
+msgid "Can't perform INSERT query in DB '%s'"
+msgstr "Kann INSERT-Abfrage in Datenbank '%s' nicht ausführen"
+
+#: plugins/gofon/macro/class_gofonMacro.inc:331
+#, php-format
+msgid "The given cn '%s' already exists."
+msgstr "Die Kennung '%s' exisitiert bereits."
+
+#: plugins/gofon/macro/class_gofonMacro.inc:336
+msgid "You must specify the 'Display Name' in order to save this macro"
+msgstr ""
+"Das Feld 'Angezeigter Name' darf nicht leer sein, um das Makro zu speichern"
+
+#: plugins/gofon/macro/class_gofonMacro.inc:340
+msgid "The given cn is too long, to create a Makro entry, maximum 20 chars."
+msgstr ""
+"Die angegebene cn ist zu lang. Die mögliche Länge ist auf 20 Zeichen "
+"begrenzt."
+
+#: plugins/gofon/macro/class_gofonMacro.inc:345
+#, php-format
+msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro"
+msgstr ""
+"Zugriffsrechte nicht ausreichend, kann Attribut '%s' in goFonMacro nicht "
+"ändern"
+
+#: plugins/gofon/macro/class_gofonMacro.inc:351
+msgid "Makro length must be lower than 100 lines"
+msgstr "Das Makro darf nicht länger als 100 Zeilen sein"
+
+#: plugins/gofon/macro/class_gofonMacro.inc:356
+msgid "Please choose a valid  base."
+msgstr "Bitte wählen Sie eine gültige Basis."
+
 #: plugins/gofon/phoneaccount/generic.tpl:33
 msgid "Voicemail PIN"
 msgstr "Voicemail-PIN"
@@ -7966,14 +7944,6 @@ msgstr "kein Makro"
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:132
 msgid "undefined"
 msgstr "nicht definiert"
-
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:240
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:619
-msgid ""
-"There is currently no asterisk server defined. Possibly you are missing a "
-"server that handles the asterisk management (goFonServer). \n"
-" Your Settings can't be saved to asterisk Database. "
-msgstr ""
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:537
 msgid "Error while performing query "
@@ -8037,7 +8007,6 @@ msgid "Voicemail PIN must be between 1-4 characters."
 msgstr "Die Voicemail-PIN muss 1-4 Zeichen lang sein."
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:863
-#, fuzzy
 msgid ""
 "The specified Voicemail PIN contains invalid characters, only numeric values "
 "are allowed here."
@@ -8156,6 +8125,28 @@ msgstr "Benachrichtige über Abgang/Zugang von Teilnehmern"
 msgid "Count users"
 msgstr "Zähle Benutzer"
 
+#: plugins/gofon/conference/headpage.tpl:6
+msgid "List of conference rooms"
+msgstr "Liste der Konferenz-Räume"
+
+#: plugins/gofon/conference/headpage.tpl:24
+msgid ""
+"This menu allows you to create, delete and edit selected phone conferences. "
+"Having a large number of phone conferences, you might prefer the range "
+"selectors on top of the conferences list."
+msgstr ""
+"Dieses Menü erlaubt es Ihnen Telefon-Konferenzen hinzuzufügen, zu bearbeiten "
+"oder zu entfernen. Bei einer Vielzahl von Abteilungen bietet sich die "
+"Verwendung der Bereichswahl an."
+
+#: plugins/gofon/conference/headpage.tpl:35
+msgid "Regular expression for        matching user names"
+msgstr "Regulärer Ausdruck zum Erkennen von Benutzernamen"
+
+#: plugins/gofon/conference/main.inc:38 plugins/gofon/conference/main.inc:40
+msgid "Conference management"
+msgstr "Konferenz-Verwaltung"
+
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:188
 msgid ""
 "You have specified a conference 'without PIN' ... please leave the PIN "
@@ -8179,28 +8170,6 @@ msgstr "Der Wert für 'Nummer' muss numerisch sein."
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:204
 msgid "Only numbers are allowed in Lifetime."
 msgstr "Der Wert für 'Lebenszeit' muss numerisch sein."
-
-#: plugins/gofon/conference/headpage.tpl:6
-msgid "List of conference rooms"
-msgstr "Liste der Konferenz-Räume"
-
-#: plugins/gofon/conference/headpage.tpl:24
-msgid ""
-"This menu allows you to create, delete and edit selected phone conferences. "
-"Having a large number of phone conferences, you might prefer the range "
-"selectors on top of the conferences list."
-msgstr ""
-"Dieses Menü erlaubt es Ihnen Telefon-Konferenzen hinzuzufügen, zu bearbeiten "
-"oder zu entfernen. Bei einer Vielzahl von Abteilungen bietet sich die "
-"Verwendung der Bereichswahl an."
-
-#: plugins/gofon/conference/headpage.tpl:35
-msgid "Regular expression for        matching user names"
-msgstr "Regulärer Ausdruck zum Erkennen von Benutzernamen"
-
-#: plugins/gofon/conference/main.inc:38 plugins/gofon/conference/main.inc:40
-msgid "Conference management"
-msgstr "Konferenz-Verwaltung"
 
 #: plugins/gofon/reports/class_fonreport.inc:6
 msgid "Phone Reports"

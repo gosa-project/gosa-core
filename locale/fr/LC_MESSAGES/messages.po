@@ -678,7 +678,7 @@ msgstr "Sélectionner les adresses à ajouter"
 #: plugins/gofax/blocklists/headpage.tpl:29
 #: plugins/gofax/faxaccount/locals.tpl:19
 #: plugins/addons/addressbook/contents.tpl:58
-#: plugins/admin/FAI/faiProfileEntry.tpl:29 plugins/admin/FAI/headpage.tpl:29
+#: plugins/admin/FAI/headpage.tpl:29 plugins/admin/FAI/faiProfileEntry.tpl:29
 #: plugins/admin/groups/headpage.tpl:30
 #: plugins/admin/groups/group_objects.tpl:20
 #: plugins/admin/groups/mail_locals.tpl:22 plugins/admin/users/headpage.tpl:29
@@ -1624,7 +1624,7 @@ msgstr "Gestion des périphériques Hotplug"
 #: plugins/gofax/blocklists/generic.tpl:67
 #: plugins/gofax/blocklists/headpage.tpl:20
 #: plugins/addons/addressbook/contents.tpl:33
-#: plugins/admin/FAI/faiProfileEntry.tpl:20 plugins/admin/FAI/headpage.tpl:20
+#: plugins/admin/FAI/headpage.tpl:20 plugins/admin/FAI/faiProfileEntry.tpl:20
 #: plugins/admin/groups/headpage.tpl:21 plugins/admin/users/headpage.tpl:20
 #: plugins/admin/applications/headpage.tpl:20
 #: plugins/admin/departments/headpage.tpl:20
@@ -4122,51 +4122,6 @@ msgstr ""
 msgid "Choose a disk to delete or edit"
 msgstr "Choisissez un disque à effacer ou editer"
 
-#: plugins/admin/FAI/faiProfileEntry.tpl:6 plugins/admin/FAI/headpage.tpl:6
-msgid "List of FAI objects (Fully Automatic Installation)"
-msgstr "Liste des objets FAI (Fully Automatic Installation)"
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:24
-msgid ""
-"This menu allows you to select FAI class names, to add them to the currently "
-"editted profile."
-msgstr ""
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:37
-msgid "Show only classes with templates"
-msgstr "Montrer seulement les classes avec modèles"
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:39
-msgid "Show only classes with scripts"
-msgstr "Montrer seulement les classes avec scripts"
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:41
-#, fuzzy
-msgid "Show only classes with hooks"
-msgstr "Montrer seulement les classes avec "
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:43
-msgid "Show only classes with variables"
-msgstr "Montrer seulement les classes avec variables"
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:45
-msgid "Show only classes with packages"
-msgstr "Montrer seulement les classes avec des paquets"
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:47
-msgid "Show only classes with partitions"
-msgstr "Montrer seulement les classes avec des partitions"
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:52 plugins/admin/FAI/headpage.tpl:47
-#: plugins/admin/ogroups/ogroup_objects.tpl:41
-msgid "Display objects matching"
-msgstr "Afficher les objets correspondants"
-
-#: plugins/admin/FAI/faiProfileEntry.tpl:56 plugins/admin/FAI/headpage.tpl:51
-#: plugins/admin/ogroups/ogroup_objects.tpl:42
-msgid "Regular expression for matching object names"
-msgstr "Expression régulière pour trouver les objets correspondants"
-
 #: plugins/admin/FAI/faiVariable.tpl:34 plugins/admin/FAI/faiScript.tpl:34
 #: plugins/admin/FAI/faiTemplate.tpl:34 plugins/admin/FAI/faiHook.tpl:34
 msgid "This bundle contains following objects"
@@ -4443,6 +4398,10 @@ msgstr ""
 "fichier avant de réaliser cette action. Appuyez sur <i>Supprimer</i> pour "
 "continuer ou <i>Annuler</i> pour abandonner."
 
+#: plugins/admin/FAI/headpage.tpl:6 plugins/admin/FAI/faiProfileEntry.tpl:6
+msgid "List of FAI objects (Fully Automatic Installation)"
+msgstr "Liste des objets FAI (Fully Automatic Installation)"
+
 #: plugins/admin/FAI/headpage.tpl:24
 msgid "This menu allows you to create, delete and edit FAI objects."
 msgstr "Ce menu vous permet créer, effacer et éditer des objets FAI."
@@ -4475,6 +4434,16 @@ msgstr "Afficher les paquets"
 #: plugins/admin/FAI/headpage.tpl:42
 msgid "Show partitions"
 msgstr "Afficher les partitions"
+
+#: plugins/admin/FAI/headpage.tpl:47 plugins/admin/FAI/faiProfileEntry.tpl:52
+#: plugins/admin/ogroups/ogroup_objects.tpl:41
+msgid "Display objects matching"
+msgstr "Afficher les objets correspondants"
+
+#: plugins/admin/FAI/headpage.tpl:51 plugins/admin/FAI/faiProfileEntry.tpl:56
+#: plugins/admin/ogroups/ogroup_objects.tpl:42
+msgid "Regular expression for matching object names"
+msgstr "Expression régulière pour trouver les objets correspondants"
 
 #: plugins/admin/FAI/class_faiPartitionTable.inc:218
 #: plugins/admin/FAI/class_faiPartitionTable.inc:220
@@ -4617,6 +4586,39 @@ msgstr "Fichier"
 #: plugins/admin/FAI/faiHook.tpl:40
 msgid "Choose a hook to delete or edit"
 msgstr ""
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:24
+#, fuzzy
+msgid ""
+"This menu allows you to select FAI class names and to add them to the "
+"currently edited profile."
+msgstr ""
+"Ce menu vous permet de sélectionner un configuration hotplug existante."
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:37
+msgid "Show only classes with templates"
+msgstr "Montrer seulement les classes avec modèles"
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:39
+msgid "Show only classes with scripts"
+msgstr "Montrer seulement les classes avec scripts"
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:41
+#, fuzzy
+msgid "Show only classes with hooks"
+msgstr "Montrer seulement les classes avec "
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:43
+msgid "Show only classes with variables"
+msgstr "Montrer seulement les classes avec variables"
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:45
+msgid "Show only classes with packages"
+msgstr "Montrer seulement les classes avec des paquets"
+
+#: plugins/admin/FAI/faiProfileEntry.tpl:47
+msgid "Show only classes with partitions"
+msgstr "Montrer seulement les classes avec des partitions"
 
 #: plugins/admin/groups/mail.tpl:11
 msgid "Primary mail address for this shared folder"
@@ -7408,132 +7410,6 @@ msgstr ""
 "L'extension de messagerie est désactivée pour ce groupe, vous pouvez "
 "l'activer en cliquant sur le bouton ci-dessous."
 
-#: plugins/admin/ogroups/class_phonequeue.inc:79
-msgid "ring all"
-msgstr "Tout faire sonner"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:80
-msgid "round robin"
-msgstr "les un après les autres"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:81
-msgid "least recently called"
-msgstr "le moins appelé "
-
-#: plugins/admin/ogroups/class_phonequeue.inc:82
-msgid "fewest completed calls"
-msgstr "le plus petit nombre d'appel réussi"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:83
-msgid "random"
-msgstr "au hazard"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:84
-msgid "round robin with memory"
-msgstr "les un après les autres avec mémorisation du dernier utilisé"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:110
-msgid "Remove the phone queue from this Account"
-msgstr "Supprimer la queue téléphonique de ce compte"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:111
-msgid ""
-"Phone queue is enabled for this group. You can disable it by clicking below."
-msgstr ""
-"Une queue téléphonique existe pour ce groupe. Vous pouvez la désactiver en "
-"cliquant sur le bouton ci-dessous."
-
-#: plugins/admin/ogroups/class_phonequeue.inc:113
-msgid "Create phone queue"
-msgstr "Créer une queue téléphonique"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:113
-msgid ""
-"For this group the phone queues are disabled. You can enable them by "
-"clicking below."
-msgstr ""
-"Les queues téléphoniques sont désactivées pour ce groupe. Vous pouvez les "
-"activer en cliquant sur le bouton ci-dessous."
-
-#: plugins/admin/ogroups/class_phonequeue.inc:160
-msgid "Uruguai"
-msgstr "Uruguay"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:198
-msgid "Timeout must be numeric"
-msgstr "Le délai d'attente doit être un chiffre"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:201
-msgid "Retry must be numeric"
-msgstr "Le délai de rappel automatique doit être un chiffre"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:204
-msgid "Max queue length must be numeric"
-msgstr "La taille maximale de la queue doit être numérique"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:207
-msgid "Announce frequency must be numeric"
-msgstr "La fréquence du message d'annonce doit être numérique"
-
-#: plugins/admin/ogroups/class_phonequeue.inc:210
-msgid "There must be least one queue number defined."
-msgstr "Il doit y avoir au moins un numéro de queue définie."
-
-#: plugins/admin/ogroups/class_phonequeue.inc:224
-#: plugins/gofon/macro/class_gofonMacro.inc:88
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:222
-msgid ""
-"There is currently no asterisk server defined. Possibly you are missing a "
-"server that handles the asterisk management (goFonServer). \n"
-"  Your Settings can't be saved to asterisk Database. "
-msgstr ""
-
-#: plugins/admin/ogroups/class_phonequeue.inc:238
-#: plugins/admin/ogroups/class_phonequeue.inc:612
-#: plugins/gofon/macro/class_gofonMacro.inc:188
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:76
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:279
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1008
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:234
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:343
-#, php-format
-msgid ""
-"The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql "
-"error."
-msgstr ""
-"Le serveur MySQL '%s' n'est pas joignable avec l'utilisateur '%s', veuillez "
-"vérifier les logs GOsa pour les erreurs mysql."
-
-#: plugins/admin/ogroups/class_phonequeue.inc:248
-#: plugins/admin/ogroups/class_phonequeue.inc:622
-#: plugins/gofon/macro/class_gofonMacro.inc:199
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:83
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:290
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1019
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:245
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:354
-#, php-format
-msgid "Can't select database %s on %s."
-msgstr "Impossible de sélectionner la base de données %s située sur %s."
-
-#: plugins/admin/ogroups/class_phonequeue.inc:279
-#: plugins/admin/ogroups/class_phonequeue.inc:493
-#: plugins/admin/ogroups/class_phonequeue.inc:658
-#, php-format
-msgid "Can't delete in Database %s, on Server %s."
-msgstr ""
-"Impossible d'éffacer dans la base de données %s située sur le serveur %s."
-
-#: plugins/admin/ogroups/class_phonequeue.inc:523
-#: plugins/admin/ogroups/class_phonequeue.inc:525
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1120
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1122
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:394
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:396
-#, php-format
-msgid "The specified telephonenumber '%s' is already assigned to '%s'."
-msgstr "Le numéro de téléphone %s est déjà utilisé par '%s'."
-
 #: plugins/admin/ogroups/remove.tpl:7
 msgid ""
 "Please double check if you really want to do this since there is no way for "
@@ -7714,6 +7590,134 @@ msgstr "Permettre à la personne qui appelle de raccrocher en appuyant sur *"
 msgid "Ring instead of playing background music"
 msgstr "Sonner au lieu de mettre un musique d'ambiance"
 
+#: plugins/admin/ogroups/class_phonequeue.inc:79
+msgid "ring all"
+msgstr "Tout faire sonner"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:80
+msgid "round robin"
+msgstr "les un après les autres"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:81
+msgid "least recently called"
+msgstr "le moins appelé "
+
+#: plugins/admin/ogroups/class_phonequeue.inc:82
+msgid "fewest completed calls"
+msgstr "le plus petit nombre d'appel réussi"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:83
+msgid "random"
+msgstr "au hazard"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:84
+msgid "round robin with memory"
+msgstr "les un après les autres avec mémorisation du dernier utilisé"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:110
+msgid "Remove the phone queue from this Account"
+msgstr "Supprimer la queue téléphonique de ce compte"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:111
+msgid ""
+"Phone queue is enabled for this group. You can disable it by clicking below."
+msgstr ""
+"Une queue téléphonique existe pour ce groupe. Vous pouvez la désactiver en "
+"cliquant sur le bouton ci-dessous."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:113
+msgid "Create phone queue"
+msgstr "Créer une queue téléphonique"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:113
+msgid ""
+"For this group the phone queues are disabled. You can enable them by "
+"clicking below."
+msgstr ""
+"Les queues téléphoniques sont désactivées pour ce groupe. Vous pouvez les "
+"activer en cliquant sur le bouton ci-dessous."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:160
+msgid "Uruguai"
+msgstr "Uruguay"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:198
+msgid "Timeout must be numeric"
+msgstr "Le délai d'attente doit être un chiffre"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:201
+msgid "Retry must be numeric"
+msgstr "Le délai de rappel automatique doit être un chiffre"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:204
+msgid "Max queue length must be numeric"
+msgstr "La taille maximale de la queue doit être numérique"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:207
+msgid "Announce frequency must be numeric"
+msgstr "La fréquence du message d'annonce doit être numérique"
+
+#: plugins/admin/ogroups/class_phonequeue.inc:210
+msgid "There must be least one queue number defined."
+msgstr "Il doit y avoir au moins un numéro de queue définie."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:224
+#: plugins/gofon/macro/class_gofonMacro.inc:88
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:240
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:619
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:222
+msgid ""
+"There is currently no asterisk server defined. Possibly you are missing a "
+"server that handles the asterisk management (goFonServer).\n"
+"Your Settings can't be saved to asterisk Database."
+msgstr ""
+
+#: plugins/admin/ogroups/class_phonequeue.inc:238
+#: plugins/admin/ogroups/class_phonequeue.inc:612
+#: plugins/gofon/macro/class_gofonMacro.inc:188
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:76
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:279
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1008
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:234
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:343
+#, php-format
+msgid ""
+"The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql "
+"error."
+msgstr ""
+"Le serveur MySQL '%s' n'est pas joignable avec l'utilisateur '%s', veuillez "
+"vérifier les logs GOsa pour les erreurs mysql."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:248
+#: plugins/admin/ogroups/class_phonequeue.inc:622
+#: plugins/gofon/macro/class_gofonMacro.inc:199
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:83
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:290
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1019
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:245
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:354
+#, php-format
+msgid "Can't select database %s on %s."
+msgstr "Impossible de sélectionner la base de données %s située sur %s."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:279
+#: plugins/admin/ogroups/class_phonequeue.inc:493
+#: plugins/admin/ogroups/class_phonequeue.inc:658
+#, php-format
+msgid "Can't delete in Database %s, on Server %s."
+msgstr ""
+"Impossible d'éffacer dans la base de données %s située sur le serveur %s."
+
+#: plugins/admin/ogroups/class_phonequeue.inc:523
+#: plugins/admin/ogroups/class_phonequeue.inc:525
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1120
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1122
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:394
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:396
+#, php-format
+msgid "The specified telephonenumber '%s' is already assigned to '%s'."
+msgstr "Le numéro de téléphone %s est déjà utilisé par '%s'."
+
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:25
 msgid "Phone macros"
 msgstr "Macros téléphoniques"
@@ -7753,70 +7757,6 @@ msgstr "visible"
 msgid "invisible"
 msgstr "invisible"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:94
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:191
-msgid "This 'dn' is no phone macro."
-msgstr "Ce 'dn' n'est pas une macro téléphonique."
-
-#: plugins/gofon/macro/class_gofonMacro.inc:150
-msgid ""
-"This macro ist still in use. To delete this Macro ensure that nobody has "
-"selected this Macro."
-msgstr ""
-"Cette macro est toujours utilisée. Pour effacer cette macro, veuillez vous "
-"assurer que personne ne l'utilise."
-
-#: plugins/gofon/macro/class_gofonMacro.inc:239
-#, php-format
-msgid "Unable to parse macro contents on line: %s"
-msgstr "Impossible de lire le contenu de la macro à la ligne: %s"
-
-#: plugins/gofon/macro/class_gofonMacro.inc:257
-#, php-format
-msgid "Can't perform SELECT query in DB '%s'"
-msgstr "Impossible d'exécuter une requête SELECT sur la base de données '%s'"
-
-#: plugins/gofon/macro/class_gofonMacro.inc:266
-#: plugins/gofon/macro/class_gofonMacro.inc:274
-#, php-format
-msgid "Can't perform DELETE query in DB '%s'"
-msgstr "Impossible d'exécuter une requête DELETE sur la base de données '%s'"
-
-#: plugins/gofon/macro/class_gofonMacro.inc:288
-#, php-format
-msgid "Can't perform INSERT query in DB '%s'"
-msgstr "Impossible d'exécuter une requête INSERT sur la base de données '%s'"
-
-#: plugins/gofon/macro/class_gofonMacro.inc:331
-#, php-format
-msgid "The given cn '%s' already exists."
-msgstr "Le cn '%s' existe déjà."
-
-#: plugins/gofon/macro/class_gofonMacro.inc:336
-msgid "You must specify the 'Display Name' in order to save this macro"
-msgstr "Vous devez spécifier le 'Display Name' pour pouvoir sauver cette macro"
-
-#: plugins/gofon/macro/class_gofonMacro.inc:340
-msgid "The given cn is too long, to create a Makro entry, maximum 20 chars."
-msgstr ""
-"Le cn introduit est trop long, pour créer une macro le maximum est de 20 "
-"caractères."
-
-#: plugins/gofon/macro/class_gofonMacro.inc:345
-#, php-format
-msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro"
-msgstr ""
-"Permissions insuffisantes, vous ne pouvez pas changer l'attribut '%s' dans "
-"la macro goFonMacro"
-
-#: plugins/gofon/macro/class_gofonMacro.inc:351
-msgid "Makro length must be lower than 100 lines"
-msgstr "La longueur de la macro doit être plus petite que 100 lignes"
-
-#: plugins/gofon/macro/class_gofonMacro.inc:356
-msgid "Please choose a valid  base."
-msgstr "Veuillez choisir une base valide."
-
 #: plugins/gofon/macro/generic.tpl:6 plugins/gofon/macro/generic.tpl:7
 msgid "Macro name"
 msgstr "Nom de la macro"
@@ -7836,6 +7776,11 @@ msgstr "Visible pour l'utilisateur"
 #: plugins/gofon/macro/generic.tpl:52
 msgid "Macro text"
 msgstr "Texte de la macro"
+
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:191
+#: plugins/gofon/macro/class_gofonMacro.inc:94
+msgid "This 'dn' is no phone macro."
+msgstr "Ce 'dn' n'est pas une macro téléphonique."
 
 #: plugins/gofon/macro/class_gofonMacroParameters.inc:239
 msgid "String"
@@ -7920,6 +7865,65 @@ msgstr "Argument"
 msgid "type"
 msgstr "type"
 
+#: plugins/gofon/macro/class_gofonMacro.inc:150
+msgid ""
+"This macro ist still in use. To delete this Macro ensure that nobody has "
+"selected this Macro."
+msgstr ""
+"Cette macro est toujours utilisée. Pour effacer cette macro, veuillez vous "
+"assurer que personne ne l'utilise."
+
+#: plugins/gofon/macro/class_gofonMacro.inc:239
+#, php-format
+msgid "Unable to parse macro contents on line: %s"
+msgstr "Impossible de lire le contenu de la macro à la ligne: %s"
+
+#: plugins/gofon/macro/class_gofonMacro.inc:257
+#, php-format
+msgid "Can't perform SELECT query in DB '%s'"
+msgstr "Impossible d'exécuter une requête SELECT sur la base de données '%s'"
+
+#: plugins/gofon/macro/class_gofonMacro.inc:266
+#: plugins/gofon/macro/class_gofonMacro.inc:274
+#, php-format
+msgid "Can't perform DELETE query in DB '%s'"
+msgstr "Impossible d'exécuter une requête DELETE sur la base de données '%s'"
+
+#: plugins/gofon/macro/class_gofonMacro.inc:288
+#, php-format
+msgid "Can't perform INSERT query in DB '%s'"
+msgstr "Impossible d'exécuter une requête INSERT sur la base de données '%s'"
+
+#: plugins/gofon/macro/class_gofonMacro.inc:331
+#, php-format
+msgid "The given cn '%s' already exists."
+msgstr "Le cn '%s' existe déjà."
+
+#: plugins/gofon/macro/class_gofonMacro.inc:336
+msgid "You must specify the 'Display Name' in order to save this macro"
+msgstr "Vous devez spécifier le 'Display Name' pour pouvoir sauver cette macro"
+
+#: plugins/gofon/macro/class_gofonMacro.inc:340
+msgid "The given cn is too long, to create a Makro entry, maximum 20 chars."
+msgstr ""
+"Le cn introduit est trop long, pour créer une macro le maximum est de 20 "
+"caractères."
+
+#: plugins/gofon/macro/class_gofonMacro.inc:345
+#, php-format
+msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro"
+msgstr ""
+"Permissions insuffisantes, vous ne pouvez pas changer l'attribut '%s' dans "
+"la macro goFonMacro"
+
+#: plugins/gofon/macro/class_gofonMacro.inc:351
+msgid "Makro length must be lower than 100 lines"
+msgstr "La longueur de la macro doit être plus petite que 100 lignes"
+
+#: plugins/gofon/macro/class_gofonMacro.inc:356
+msgid "Please choose a valid  base."
+msgstr "Veuillez choisir une base valide."
+
 #: plugins/gofon/phoneaccount/generic.tpl:33
 msgid "Voicemail PIN"
 msgstr "PINCODE du voicemail"
@@ -7952,14 +7956,6 @@ msgstr "pas de macros"
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:132
 msgid "undefined"
 msgstr "non défini"
-
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:240
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:619
-msgid ""
-"There is currently no asterisk server defined. Possibly you are missing a "
-"server that handles the asterisk management (goFonServer). \n"
-" Your Settings can't be saved to asterisk Database. "
-msgstr ""
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:537
 msgid "Error while performing query "
@@ -8144,6 +8140,28 @@ msgstr "Annoncer les nouveaux utilisateurs et ceux qui quittent"
 msgid "Count users"
 msgstr "Compter les utilisateurs"
 
+#: plugins/gofon/conference/headpage.tpl:6
+msgid "List of conference rooms"
+msgstr "Liste des salles de conférence"
+
+#: plugins/gofon/conference/headpage.tpl:24
+msgid ""
+"This menu allows you to create, delete and edit selected phone conferences. "
+"Having a large number of phone conferences, you might prefer the range "
+"selectors on top of the conferences list."
+msgstr ""
+"Ce menu vous permet de d'ajouter, supprimer et éditer les conférences "
+"sélectionnés. Si vous avez un grand nombre de conférences il est conseillé "
+"d'utiliser les filtres."
+
+#: plugins/gofon/conference/headpage.tpl:35
+msgid "Regular expression for        matching user names"
+msgstr "Expression régulière concordant avec les noms des utilisateurs"
+
+#: plugins/gofon/conference/main.inc:38 plugins/gofon/conference/main.inc:40
+msgid "Conference management"
+msgstr "Gestion des conférences"
+
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:188
 msgid ""
 "You have specified a conference 'without PIN' ... please leave the PIN "
@@ -8167,28 +8185,6 @@ msgstr "Seul des chiffres sont permis dans le champ numéro."
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:204
 msgid "Only numbers are allowed in Lifetime."
 msgstr "Seul des nombres sont autorisés dans la durée."
-
-#: plugins/gofon/conference/headpage.tpl:6
-msgid "List of conference rooms"
-msgstr "Liste des salles de conférence"
-
-#: plugins/gofon/conference/headpage.tpl:24
-msgid ""
-"This menu allows you to create, delete and edit selected phone conferences. "
-"Having a large number of phone conferences, you might prefer the range "
-"selectors on top of the conferences list."
-msgstr ""
-"Ce menu vous permet de d'ajouter, supprimer et éditer les conférences "
-"sélectionnés. Si vous avez un grand nombre de conférences il est conseillé "
-"d'utiliser les filtres."
-
-#: plugins/gofon/conference/headpage.tpl:35
-msgid "Regular expression for        matching user names"
-msgstr "Expression régulière concordant avec les noms des utilisateurs"
-
-#: plugins/gofon/conference/main.inc:38 plugins/gofon/conference/main.inc:40
-msgid "Conference management"
-msgstr "Gestion des conférences"
 
 #: plugins/gofon/reports/class_fonreport.inc:6
 msgid "Phone Reports"

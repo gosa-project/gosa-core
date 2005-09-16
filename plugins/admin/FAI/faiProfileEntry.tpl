@@ -21,7 +21,7 @@
    </div>
    <div class="contentboxb">
    <p class="contentboxb">
-     {t}This menu allows you to select FAI class names, to add them to the currently editted profile.{/t}
+     {t}This menu allows you to select FAI class names and to add them to the currently edited profile.{/t}
    </p>
    </div>
    <br>
