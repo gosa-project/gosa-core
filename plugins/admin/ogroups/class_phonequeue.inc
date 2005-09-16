@@ -325,6 +325,9 @@ class phonequeue extends plugin
 
 
       $i = 0;
+
+      $i_insert_only_once = false;
+      
       foreach($this->telephoneNumber as $num){
        
         // If there are no member in a Queue
@@ -332,12 +335,15 @@ class phonequeue extends plugin
 
         // A Queue is not deleted directly, it is stored until the o group is deleted
         
-        $a_ext[$i]['context']  = 'GOsa';
-        $a_ext[$i]['exten']    = $this->attrs['cn'][0];
-        $a_ext[$i]['priority'] = 1;
-        $a_ext[$i]['app']      = "Goto";
-        $a_ext[$i]['appdata']  = $num."|1";
-        $i ++ ; 
+        if($i_insert_only_once == false){
+          $i_insert_only_once = true;
+          $a_ext[$i]['context']  = 'GOsa';
+          $a_ext[$i]['exten']    = $this->attrs['cn'][0];
+          $a_ext[$i]['priority'] = 1;
+          $a_ext[$i]['app']      = "Goto";
+          $a_ext[$i]['appdata']  = $num."|1";
+          $i ++ ; 
+        }
     
         if($queueusers == 0){
           $a_ext[$i]['context']  = 'GOsa';
