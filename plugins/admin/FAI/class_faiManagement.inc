@@ -395,7 +395,7 @@ class faiManagement extends plugin
 					array("string" => "&nbsp;"),
 					array("string" => _("FAI objects / ObjectClasses")),
 					array("string" => _("Object group")),
-					array("string" => _("Obtions"), "attach" => "style='border:none'" )));
+					array("string" => _("Options"), "attach" => "style='border:none'" )));
 
 
 		$action  = "<input type='image' src='images/edit.png' 	alt='"._("edit")."'   name='entry_edit_%KEY%' title='"._("Edit object")."'>";
