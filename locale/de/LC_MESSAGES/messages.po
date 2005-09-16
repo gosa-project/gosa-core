@@ -11,12 +11,12 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-09-16 17:33+0200\n"
+"PO-Revision-Date: 2005-09-16 17:42+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: contrib/gosa.conf:4
 msgid "My account"
@@ -316,6 +316,7 @@ msgstr "Hinzufügen"
 #: plugins/admin/departments/remove.tpl:15
 #: plugins/admin/systems/servservice.tpl:22
 #: plugins/admin/systems/servservice.tpl:48
+#: plugins/admin/systems/printer.tpl:85 plugins/admin/systems/printer.tpl:102
 #: plugins/admin/systems/phonesettings.tpl:182
 #: plugins/admin/systems/phonesettings.tpl:197
 #: plugins/admin/systems/remove.tpl:15 plugins/admin/systems/startup.tpl:62
@@ -6215,6 +6216,14 @@ msgstr "Berechtigungen"
 msgid "Following objects are assigned as user."
 msgstr "Die folgenden Objekte sind als Benutzer zugeordnet"
 
+#: plugins/admin/systems/printer.tpl:83
+msgid "Add user"
+msgstr "Benutzer hinzufügen"
+
+#: plugins/admin/systems/printer.tpl:84
+msgid "Add group"
+msgstr "Gruppe hinzufügen"
+
 #: plugins/admin/systems/printer.tpl:96
 msgid "Following objects are assigned as admin."
 msgstr "Die folgenden Objekte sind als Administrator zugeordnet"
@@ -6222,6 +6231,14 @@ msgstr "Die folgenden Objekte sind als Administrator zugeordnet"
 #: plugins/admin/systems/printer.tpl:97
 msgid "Admins"
 msgstr "Administratoren"
+
+#: plugins/admin/systems/printer.tpl:100
+msgid "Add admin user"
+msgstr "Administrator hinzufügen"
+
+#: plugins/admin/systems/printer.tpl:101
+msgid "Add admin group"
+msgstr "Administrator-Gruppe hinzufügen"
 
 #: plugins/admin/systems/class_servDNS.inc:33
 msgid "Remove DNS service"

@@ -315,6 +315,7 @@ msgstr "Добавить"
 #: plugins/admin/departments/remove.tpl:15
 #: plugins/admin/systems/servservice.tpl:22
 #: plugins/admin/systems/servservice.tpl:48
+#: plugins/admin/systems/printer.tpl:85 plugins/admin/systems/printer.tpl:102
 #: plugins/admin/systems/phonesettings.tpl:182
 #: plugins/admin/systems/phonesettings.tpl:197
 #: plugins/admin/systems/remove.tpl:15 plugins/admin/systems/startup.tpl:62
@@ -6366,6 +6367,16 @@ msgstr "Права для членов группы"
 msgid "Following objects are assigned as user."
 msgstr ""
 
+#: plugins/admin/systems/printer.tpl:83
+#, fuzzy
+msgid "Add user"
+msgstr "Пользователи домена"
+
+#: plugins/admin/systems/printer.tpl:84
+#, fuzzy
+msgid "Add group"
+msgstr "группы"
+
 #: plugins/admin/systems/printer.tpl:96
 msgid "Following objects are assigned as admin."
 msgstr ""
@@ -6374,6 +6385,16 @@ msgstr ""
 #, fuzzy
 msgid "Admins"
 msgstr "DN администратора"
+
+#: plugins/admin/systems/printer.tpl:100
+#, fuzzy
+msgid "Add admin user"
+msgstr "Пользователи домена"
+
+#: plugins/admin/systems/printer.tpl:101
+#, fuzzy
+msgid "Add admin group"
+msgstr "Группа Samba"
 
 #: plugins/admin/systems/class_servDNS.inc:33
 msgid "Remove DNS service"

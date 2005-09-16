@@ -310,6 +310,7 @@ msgstr "Ajouter"
 #: plugins/admin/departments/remove.tpl:15
 #: plugins/admin/systems/servservice.tpl:22
 #: plugins/admin/systems/servservice.tpl:48
+#: plugins/admin/systems/printer.tpl:85 plugins/admin/systems/printer.tpl:102
 #: plugins/admin/systems/phonesettings.tpl:182
 #: plugins/admin/systems/phonesettings.tpl:197
 #: plugins/admin/systems/remove.tpl:15 plugins/admin/systems/startup.tpl:62
@@ -6233,6 +6234,16 @@ msgstr "Permissions"
 msgid "Following objects are assigned as user."
 msgstr "Les objets suivants sont attribuées à un utilisateur."
 
+#: plugins/admin/systems/printer.tpl:83
+#, fuzzy
+msgid "Add user"
+msgstr "Administrateur"
+
+#: plugins/admin/systems/printer.tpl:84
+#, fuzzy
+msgid "Add group"
+msgstr "groupes"
+
 #: plugins/admin/systems/printer.tpl:96
 msgid "Following objects are assigned as admin."
 msgstr "Les objets suivants sont assignés à un administrateur."
@@ -6240,6 +6251,16 @@ msgstr "Les objets suivants sont assignés à un administrateur."
 #: plugins/admin/systems/printer.tpl:97
 msgid "Admins"
 msgstr "Administrateurs"
+
+#: plugins/admin/systems/printer.tpl:100
+#, fuzzy
+msgid "Add admin user"
+msgstr "Administrateur"
+
+#: plugins/admin/systems/printer.tpl:101
+#, fuzzy
+msgid "Add admin group"
+msgstr "Groupe Samba"
 
 #: plugins/admin/systems/class_servDNS.inc:33
 msgid "Remove DNS service"

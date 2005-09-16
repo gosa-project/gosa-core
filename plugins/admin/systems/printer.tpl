@@ -80,9 +80,9 @@
 		     				<select size="1" name="UserMember" title="{t}Users{/t}" style="width:350px;height:120px;"  multiple>
                 				{html_options options=$UserMembers values=$UserMemberKeys}
                				</select><br>
-							<input type="submit" value="Add user"  name="AddUser">
-							<input type="submit" value="Add group" name="AddGroup">
-							<input type="submit" value="Delete" name="DelUser">
+							<input type="submit" value="{t}Add user{/t}"  name="AddUser">
+							<input type="submit" value="{t}Add group{/t}" name="AddGroup">
+							<input type="submit" value="{t}Delete{/t}" name="DelUser">
 					</td>
 				</tr>
 			</table>	
@@ -97,9 +97,9 @@
 		     				<select size="1" name="AdminMember" title="{t}Admins{/t}" style="width:350px;height:120px;"  multiple>
                 				{html_options options=$AdminMembers values=$AdminMemberKeys}
                				</select><br>
-							<input type="submit" value="Add admin user"  name="AddAdminUser">
-							<input type="submit" value="Add admin group" name="AddAdminGroup">
-							<input type="submit" value="Delete" name="DelAdmin">
+							<input type="submit" value="{t}Add admin user{/t}"  name="AddAdminUser">
+							<input type="submit" value="{t}Add admin group{/t}" name="AddAdminGroup">
+							<input type="submit" value="{t}Delete{/t}" name="DelAdmin">
 		
 					</td>
 				</tr>
