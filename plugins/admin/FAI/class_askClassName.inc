@@ -66,10 +66,10 @@ class askClassName extends plugin
      */ 
     switch($this->objectClass) {
       case "FAIpartitionTable":  $str =_("Create new FAI object - partition table.");break;
-      case "FAIpackageList"   :  $str =_("Create new FAI object - package list.");break;
-      case "FAIscript"        :  $str =_("Create new FAI object - set of scripts.");break;
-      case "FAIvariable"      :  $str =_("Create new FAI object - set of variables.");break;
-      case "FAIhook"          :  $str =_("Create new FAI object - set of hooks.");break;
+      case "FAIpackageList"   :  $str =_("Create new FAI object - package bundle.");break;
+      case "FAIscript"        :  $str =_("Create new FAI object - script bundle.");break;
+      case "FAIvariable"      :  $str =_("Create new FAI object - variable bundle.");break;
+      case "FAIhook"          :  $str =_("Create new FAI object - hook bundle.");break;
       case "FAIprofile"       :  $str =_("Create new FAI object - profile.");break;
       case "FAItemplate"      :  $str =_("Create new FAI object - template.");break;
       default                 :  $str =_("Create new FAI object");break;
