@@ -4694,8 +4694,8 @@ msgstr ""
 #: plugins/admin/FAI/askClassName.tpl:7
 msgid ""
 "Every Class name must be unique. But it can be used for different objects at "
-"the same time.If you use this class name in a profile, all object with this "
-"class name will be included to this profile."
+"the same time.<br/>If you use this class name in a profile, all object with "
+"this class name will be included to this profile."
 msgstr ""
 
 #: plugins/admin/FAI/askClassName.tpl:10
