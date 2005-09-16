@@ -860,7 +860,7 @@ class phoneAccount extends plugin
       $message[]=(_("Voicemail PIN must be between 1-4 characters."));
     }else{
       if(preg_match("/[^0-9]/",$this->goFonVoicemailPIN)){
-        $message[]=(_("The specified oicemail PIN contains invalid characters, only numeric values are allowed here."));
+        $message[]=(_("The specified Voicemail PIN contains invalid characters, only numeric values are allowed here."));
       }
     }
 
