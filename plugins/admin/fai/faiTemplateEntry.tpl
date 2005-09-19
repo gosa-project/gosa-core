@@ -17,7 +17,7 @@
 							{t}Description{/t}{$must}&nbsp;
 						</td>
 						<td>
-							<input value="{$Object_description}" name="Object_description">
+							<input size=40 value="{$Object_description}" name="Object_description">
 						</td>
 					</tr>
 				</table>
@@ -30,22 +30,22 @@
 				<table width="100%">
 					<tr>
 						<td>
-							<LABEL for="Object_FAItemplatePath">
-							{t}Path{/t}{$must}&nbsp;
-							</LABEL>
-						</td>
-						<td>
-							<input type="text" name="Object_FAItemplatePath" value="{$Object_FAItemplatePath}" id="Object_FAItemplatePath">
-						</td>
-					</tr>
-					<tr>
-						<td>
 							<LABEL for="Object_FAItemplateFile">
 							{t}File{/t}{$must}&nbsp;
 							</LABEL>
 						</td>
 						<td>
 							<input type="text" name="Object_FAItemplateFile" value="{$Object_FAItemplateFile}" id="Object_FAItemplateFile">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<LABEL for="Object_FAItemplatePath">
+							{t}Destination path{/t}{$must}&nbsp;
+							</LABEL>
+						</td>
+						<td>
+							<input type="text" name="Object_FAItemplatePath" value="{$Object_FAItemplatePath}" id="Object_FAItemplatePath">
 						</td>
 					</tr>
 				</table>

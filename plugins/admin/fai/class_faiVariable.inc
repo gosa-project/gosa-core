@@ -159,7 +159,11 @@ class faiVariable extends plugin
     $a_return=array();
     foreach($this->SubObjects as $obj){
       if($obj['status'] != "delete"){
-        $a_return[$obj['cn']]= $obj['cn']." [".$obj['description']."]";
+          if (preg_match("/\[\*\]/", $obj['description'])){
+            $a_return[$obj['cn']]= $obj['cn']." [".preg_replace("/\s*\[\*\]\s*/", "", $obj['description'])."]";
+          } else {
+            $a_return[$obj['cn']]= $obj['cn']."=".$obj['FAIvariableContent']." [".$obj['description']."]";
+          }
       }
     }
     return($a_return);

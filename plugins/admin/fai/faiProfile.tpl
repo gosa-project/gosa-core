@@ -1,4 +1,4 @@
-<h2><img alt="" src="images/house.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2><br>
+<h2><img alt="" src="images/house.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
 <table summary="" cellspacing="4">
 	<tr>
 		<td>

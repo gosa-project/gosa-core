@@ -2,7 +2,7 @@
 <table width="100%" summary="">
 	<tr>
 		<td valign="top" width="50%">
-			<h2><img alt="" src="images/house.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
+			<h2><img alt="" src="images/fai_small.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
 				<table>
 					<tr>
 						<td>
@@ -17,7 +17,7 @@
 							{t}Description{/t}{$must}&nbsp;
 						</td>
 						<td>
-							<input value="{$Object_description}" name="Object_description">
+							<input size=40 value="{$Object_description}" name="Object_description">
 						</td>
 					</tr>
 				</table>
@@ -31,7 +31,7 @@
 					<tr>
 						<td>
 							<LABEL for="Content">
-							{t}Variable Content{/t}{$must}&nbsp;
+							{t}Variable content{/t}{$must}&nbsp;
 							</LABEL>
 						</td>
 						<td>

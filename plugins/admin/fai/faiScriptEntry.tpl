@@ -17,7 +17,7 @@
 							{t}Description{/t}{$must}&nbsp;
 						</td>
 						<td>
-							<input value="{$Object_description}" name="Object_description">
+							<input size=40 value="{$Object_description}" name="Object_description">
 						</td>
 					</tr>
 				</table>
@@ -26,7 +26,7 @@
            &nbsp;
         </td>
 		<td valign="top">
-				<h2><img alt="" src="images/edit.png" align="middle" title="{t}Script attributes{/t}">&nbsp;{t}Script attributes{/t}</h2>
+				<h2><img alt="" src="images/fai_script.png" align="middle" title="{t}Properties{/t}">&nbsp;{t}Script attributes{/t}</h2>
 				<table width="100%">
 					<tr>
 						<td>
@@ -45,24 +45,23 @@
 	</tr>
 </table>
 <p class="seperator">&nbsp;</p>
-<h2><img alt="" src="images/envelope.png" align="middle" title="{t}Script attributes{/t}">&nbsp;
+<h2><img alt="" src="images/fai_script.png" align="middle" title="{t}Script attributes{/t}">&nbsp;
 	<LABEL for="Object_FAIscript">
 		{t}Script{/t}
 	</LABEL>
 	</h2>
-<div>
-	{t}Import script{/t} &nbsp;
-	<input type="file" name="ImportFile">&nbsp;
-	<input type="submit" name="ImportUpload" value="{t}Import{/t}">
-</div>
-<br>
-<table width="100%">
+<table width="99%">
     <tr>
         <td>
             <textarea name="Object_FAIscript" style="width:100%;height:300px;" id="Object_FAIscript">{$Object_FAIscript}</textarea>
         </td>
     </tr>
 </table>
+<br>
+<div>
+	<input type="file" name="ImportFile">&nbsp;
+	<input type="submit" name="ImportUpload" value="{t}Import script{/t}">
+</div>
 
 <br>
 <div style="align:right;" align="right">
