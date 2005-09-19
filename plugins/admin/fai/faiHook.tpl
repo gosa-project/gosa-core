@@ -1,7 +1,7 @@
 <table width="100%">
 	<tr>
 		<td width="50%" valign="top">
-				<h2><img alt="" src="images/house.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2><br>
+				<h2><img alt="" src="images/house.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
 				<table summary="" cellspacing="4">
 					<tr>
 						<td>
@@ -31,13 +31,13 @@
 		<td>
 				<h2><img alt="" src="images/fai_hook.png" align="middle" title="{t}Objects{/t}">&nbsp;
 					<LABEL for="SubObject">
-						{t}This bundle contains the following objects{/t}
+						{t}List of hook scripts{/t}
 					</LABEL>
-				</h2><br>
+				</h2>
 				<table width="100%">
 				<tr>
 					<td>
-						<select name="SubObject" title="{t}Choose a hook to delete or edit{/t}" style="width:350px;height:120px;" size=10 id="SubObject">
+						<select name="SubObject" title="{t}Choose a hook to delete or edit{/t}" style="width:100%" size=15 id="SubObject">
 							{html_options values=$SubObjectKeys output=$SubObjects}
 						</select><br>
 						<input type="submit" name="AddSubObject"     value="{t}Add{/t}"		title="{t}Add{/t}">

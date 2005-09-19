@@ -28,7 +28,7 @@ require "tabsPackage.inc";
 class faiManagement extends plugin
 {
 	/* Definitions */
-	var $plHeadline			= "FAI management";
+	var $plHeadline			= "FAI";
 	var $plDescription		= "Fully Automatic Installation - management";
 
 	/* CLI vars */
@@ -413,55 +413,56 @@ class faiManagement extends plugin
 						if(!$faifilter['ShowPartitions']){ 
 							$abort = true;
 						}
-					$img="<img src='images/fai_partitionTable.png' title='Partition table' alt='PT'>";
+					$img="<img src='images/fai_partitionTable.png' title='"._("Partition table")."' alt='PT'>";
 					$info = _("Partition table");
 					break;
 					case "FAIpackageList"		: 
 						if(!$faifilter['ShowPackages']){ 
 							$abort = true;
 						}
-					$img="<img src='images/fai_packages.png' title='Package list' alt='PL'>";
+					$img="<img src='images/fai_packages.png' title='"._("Package list")."' alt='PL'>";
 					$info = _("Package list");
 					break;
 					case "FAIscript"			: 
 						if(!$faifilter['ShowScripts']){ 
 							$abort = true;
 						}
-					$img="<img src='images/fai_script' title='Set of scripts' alt='S'>";
+					$img="<img src='images/fai_script' title='"._("Scripts")."' alt='S'>";
 					$info = _("Scripts");
 					break;
 					case "FAIvariable"			: 
 						if(!$faifilter['ShowVariables']){ 
 							$abort = true;
 						}
-					$img="<img src='images/fai_variable.png' title='Variable set' alt='V'>";
+					$img="<img src='images/fai_variable.png' title='"._("Variables")."' alt='V'>";
 					$info = _("Variables");
 					break;
 					case "FAIhook"				:
 						if(!$faifilter['ShowHooks']){ 
 							$abort = true;
 						}
-					$img="<img src='images/fai_hook.png' title='Hooks' alt='H'>";
+					$img="<img src='images/fai_hook.png' title='"._("Hooks")."' alt='H'>";
 					$info = _("Hooks");
 					break;
 					case "FAIprofile"			: 
 						if(!$faifilter['ShowProfiles']){ 
 							$abort = true;
 						}
-					$img="<img src='images/fai_profile.png' title='Profile' alt='P'>";
-					$info = _("Profile")." (".$value['FAIclass']." )";
+					$img="<img src='images/fai_profile.png' title='"._("Profile")."' alt='P'>";
+					$info = _("Profile");
 					break;
 					case "FAItemplate"			: 
 						if(!$faifilter['ShowTemplates']){ 
 							$abort = true;
 						}
-					$img="<img src='images/fai_template.png' title='Template' alt='T'>";
+					$img="<img src='images/fai_template.png' title='"._("Templates")."' alt='T'>";
 					$info = _("Templates");
 					break;
 					default 					: 
 					$img="<img src='images/empty.png' >";$info = "";break;
 
 				}
+				
 				if(!$abort)	{
 					if((isset($value['description']))&&(!empty($value['description']))){
 						$desc= " [".$value['description']."]";
