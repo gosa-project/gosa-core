@@ -23,6 +23,15 @@ Things to fix before 2.4:
 
 * Rework printer tabs
 
+* FAI management
+  - Subtree support
+  - Add links for headpage list entries
+  - Hooks have to be implemented like skripts
+  - Add package lists
+  - Make templates uploadable
+  - Re-implement profile management, divlists look pretty ugly here
+  - Re-implement "new" functionality
+
 
 Target for 2.5:
 ===============
