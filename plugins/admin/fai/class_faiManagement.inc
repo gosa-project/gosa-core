@@ -192,7 +192,7 @@ class faiManagement extends plugin
 
 				$this->dialog->by_object[$type[1]]->remove_from_parent ();
 				unset ($this->dialog);
-				gosa_log ("System object'".$this->dn."' has been removed");
+				gosa_log ("FAI class '".$this->dn."' has been removed");
 				$this->dialog= NULL;
 
 				/* Terminal list has changed, reload it. */
@@ -359,28 +359,28 @@ class faiManagement extends plugin
 		$faihead = 
 			"<div style='background:#F0F0F9;padding:5px;'>&nbsp;".
 
-			" <input type='image' src='images/fai_partitionTable.png' align='middle' 
-			title='"._("New partition table")."' name='Create_partition' alt='"._("PT")."'>&nbsp;".
-
-			" <input type='image' src='images/fai_script.png' align='middle' 
-			title='"._("New script bundle")."' name='Create_script' alt='"._("S")."'>&nbsp;".
-
-			" <input type='image' src='images/fai_hook.png' align='middle' 
-			title='"._("New hook bundle")."' name='Create_hook' alt='"._("H")."'>&nbsp;".
-
-			" <input type='image' src='images/fai_variable.png' align='middle' 
-			title='"._("New variable bundle")."' name='Create_variable' alt='"._("V")."'>&nbsp;".
-			
-			" <input type='image' src='images/fai_template.png' align='middle' 
-			title='"._("New template bundle")."' name='Create_template' alt='"._("T")."'>&nbsp;".
-
-			" <input type='image' src='images/fai_packages.png' align='middle' 
-			title='"._("New package bundle")."' name='Create_package' alt='"._("PK")."'>&nbsp;".
+			" <input type='image' src='images/fai_new_profile.png' align='middle' 
+			title='"._("New profile bundle")."' name='Create_profile' alt='"._("P")."'>&nbsp;".
 			
 			"<img src=\"images/list_seperator.png\" alt=\"\" align=\"middle\" height=\"16\" width=\"1\">&nbsp;".
 				
-			" <input type='image' src='images/fai_profile.png' align='middle' 
-			title='"._("New profile bundle")."' name='Create_profile' alt='"._("P")."'>&nbsp;".
+			" <input type='image' src='images/fai_new_partitionTable.png' align='middle' 
+			title='"._("New partition table")."' name='Create_partition' alt='"._("PT")."'>&nbsp;".
+
+			" <input type='image' src='images/fai_new_script.png' align='middle' 
+			title='"._("New script bundle")."' name='Create_script' alt='"._("S")."'>&nbsp;".
+
+			" <input type='image' src='images/fai_new_hook.png' align='middle' 
+			title='"._("New hook bundle")."' name='Create_hook' alt='"._("H")."'>&nbsp;".
+
+			" <input type='image' src='images/fai_new_variable.png' align='middle' 
+			title='"._("New variable bundle")."' name='Create_variable' alt='"._("V")."'>&nbsp;".
+			
+			" <input type='image' src='images/fai_new_template.png' align='middle' 
+			title='"._("New template bundle")."' name='Create_template' alt='"._("T")."'>&nbsp;".
+
+			" <input type='image' src='images/fai_new_packages.png' align='middle' 
+			title='"._("New package list")."' name='Create_package' alt='"._("PK")."'>&nbsp;".
 			
 			"</div>";
 
@@ -393,13 +393,13 @@ class faiManagement extends plugin
 
 		$divlist->SetHeader(array(
 					array("string" => "&nbsp;"),
-					array("string" => _("FAI objects / ObjectClasses")),
-					array("string" => _("Object group")),
-					array("string" => _("Options"), "attach" => "style='border:none'" )));
+					array("string" => _("Name of FAI class")),
+					array("string" => _("Class type")),
+					array("string" => _("Actions"), "attach"=>"style='border:none;width:40px;'")));
 
 
 		$action  = "<input type='image' src='images/edit.png' 	alt='"._("edit")."'   name='entry_edit_%KEY%' title='"._("Edit object")."'>";
-		$action .= "<input type='image' src='images/editdelete.png' alt='"._("delete")."' name='entry_delete_%KEY%' title='"._("Delete object")."'>";
+		$action .= "<input type='image' src='images/edittrash.png' alt='"._("delete")."' name='entry_delete_%KEY%' title='"._("Delete object")."'>";
 
 		/* Attach objects */
 		foreach($this->objects as $key => $value){
@@ -428,21 +428,21 @@ class faiManagement extends plugin
 							$abort = true;
 						}
 					$img="<img src='images/fai_script' title='Set of scripts' alt='S'>";
-					$info = _("Script set");
+					$info = _("Scripts");
 					break;
 					case "FAIvariable"			: 
 						if(!$faifilter['ShowVariables']){ 
 							$abort = true;
 						}
 					$img="<img src='images/fai_variable.png' title='Variable set' alt='V'>";
-					$info = _("Variable set");
+					$info = _("Variables");
 					break;
 					case "FAIhook"				:
 						if(!$faifilter['ShowHooks']){ 
 							$abort = true;
 						}
 					$img="<img src='images/fai_hook.png' title='Hooks' alt='H'>";
-					$info = _("Hook set");
+					$info = _("Hooks");
 					break;
 					case "FAIprofile"			: 
 						if(!$faifilter['ShowProfiles']){ 
@@ -456,7 +456,7 @@ class faiManagement extends plugin
 							$abort = true;
 						}
 					$img="<img src='images/fai_template.png' title='Template' alt='T'>";
-					$info = _("Template");
+					$info = _("Templates");
 					break;
 					default 					: 
 					$img="<img src='images/empty.png' >";$info = "";break;
@@ -472,7 +472,7 @@ class faiManagement extends plugin
 					$field1 = array("string" => $img , "attach" => "style='height:26px;width=20px;'");
 					$field2 = array("string" => $value['cn'].$desc , "attach" => "");
 					$field3 = array("string" => $info, "attach" => "");
-					$field4 = array("string" => preg_replace("/%KEY%/",$key,$action) , "attach" => "style='border-right:none;'");
+					$field4 = array("string" => preg_replace("/%KEY%/",$key,$action) , "attach"=>"style='text-align:right;border:none'");
 					$divlist->AddEntry(array($field1,$field2,$field3,$field4));
 
 			}

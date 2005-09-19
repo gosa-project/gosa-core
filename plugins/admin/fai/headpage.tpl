@@ -3,7 +3,7 @@
   <td style="vertical-align:top;width:600px">
   <div class="contentboxh">
     <p class="contentboxh">
-     {t}List of FAI objects (Fully Automatic Installation){/t}
+     {t}List of FAI classes{/t}
     </p>
   </div>
   <div class="contentboxb">
@@ -21,7 +21,7 @@
    </div>
    <div class="contentboxb">
    <p class="contentboxb">
-     {t}This menu allows you to create, delete and edit FAI objects.{/t}
+     {t}This menu allows you to create, delete and edit FAI classes.{/t}
    </p>
    </div>
    <br>
