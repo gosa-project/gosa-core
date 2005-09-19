@@ -35,9 +35,9 @@ if ($remove_lock){
 
 	/* Page header*/
 	if (isset($_SESSION['objectinfo'])){
-		$display= print_header(get_template_path('images/fai.png'), _("FAI management"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".$_SESSION['objectinfo']);
+		$display= print_header(get_template_path('images/fai.png'), _("Fully Automatic Installation"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".$_SESSION['objectinfo']);
 	} else {
-		$display= print_header(get_template_path('images/fai.png'), _("FAI management"));
+		$display= print_header(get_template_path('images/fai.png'), _("Fully Automatic Installation"));
 	}
 
 	/* Reset requested? */

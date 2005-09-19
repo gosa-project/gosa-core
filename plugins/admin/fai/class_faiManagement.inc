@@ -360,7 +360,7 @@ class faiManagement extends plugin
 			"<div style='background:#F0F0F9;padding:5px;'>&nbsp;".
 
 			" <input type='image' src='images/fai_new_profile.png' align='middle' 
-			title='"._("New profile bundle")."' name='Create_profile' alt='"._("P")."'>&nbsp;".
+			title='"._("New profile")."' name='Create_profile' alt='"._("P")."'>&nbsp;".
 			
 			"<img src=\"images/list_seperator.png\" alt=\"\" align=\"middle\" height=\"16\" width=\"1\">&nbsp;".
 				
@@ -368,16 +368,16 @@ class faiManagement extends plugin
 			title='"._("New partition table")."' name='Create_partition' alt='"._("PT")."'>&nbsp;".
 
 			" <input type='image' src='images/fai_new_script.png' align='middle' 
-			title='"._("New script bundle")."' name='Create_script' alt='"._("S")."'>&nbsp;".
+			title='"._("New scripts")."' name='Create_script' alt='"._("S")."'>&nbsp;".
 
 			" <input type='image' src='images/fai_new_hook.png' align='middle' 
-			title='"._("New hook bundle")."' name='Create_hook' alt='"._("H")."'>&nbsp;".
+			title='"._("New hooks")."' name='Create_hook' alt='"._("H")."'>&nbsp;".
 
 			" <input type='image' src='images/fai_new_variable.png' align='middle' 
-			title='"._("New variable bundle")."' name='Create_variable' alt='"._("V")."'>&nbsp;".
+			title='"._("New variables")."' name='Create_variable' alt='"._("V")."'>&nbsp;".
 			
 			" <input type='image' src='images/fai_new_template.png' align='middle' 
-			title='"._("New template bundle")."' name='Create_template' alt='"._("T")."'>&nbsp;".
+			title='"._("New templates")."' name='Create_template' alt='"._("T")."'>&nbsp;".
 
 			" <input type='image' src='images/fai_new_packages.png' align='middle' 
 			title='"._("New package list")."' name='Create_package' alt='"._("PK")."'>&nbsp;".
