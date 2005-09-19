@@ -11,7 +11,6 @@ class faiPartitionTable extends plugin
   var $ignore_account   = TRUE;
   var $attributes       = array("cn","description");
   var $objectclasses    = array("top","FAIclass","FAIpartitionTable");
-  var $base64_encode    = array("FAImountPoint","FAImountOptions","FAIfsOptions","description");
 
   /* Specific attributes */
   var $cn               = "";       // The class name for this object
@@ -65,13 +64,10 @@ class faiPartitionTable extends plugin
               $partition[$key] = $val[0];
             }
           }
+
           /* Append fetched partitions
            */
           $partition['status']="edited";
-    
-          foreach($this->base64_encode as $attrs){
-            $partition[$attrs] = base64_decode($partition[$attrs]);
-          }
           $this->disks[$name]['partitions'][$partition['FAIpartitionNr']] = $partition; 
         }  
       }
@@ -215,9 +211,9 @@ class faiPartitionTable extends plugin
           }
         }
         if(!empty($disk['description'])){
-          $a_return[$key]=  $disk['cn']." [".$disk['description']."] - "._("Number of Partitions")." :".$cnt;
+          $a_return[$key]=  $disk['cn']." [".$disk['description']."], ".sprintf(_("%s partition(s)"), $cnt);
         }else{
-          $a_return[$key]=  $disk['cn']." - "._("Number of Partitions")." :".$cnt;
+          $a_return[$key]=  $disk['cn'].", ".sprintf(_("%s partition(s)"), $cnt);
         }
       }
     }
@@ -339,10 +335,6 @@ class faiPartitionTable extends plugin
       foreach($disk['partitions'] as $key => $partition){
         $partition_attrs = array();
 
-        foreach($this->base64_encode as $attrs){
-          $partition[$attrs] = base64_encode($partition[$attrs]);          
-        }
-
         foreach($partition as $key => $value){
           if(!empty($value)){
             $partition_attrs[$key]=$value;        
@@ -351,8 +343,9 @@ class faiPartitionTable extends plugin
           }
         }
 
-        $partition_dn                       = "cn=".$partition_attrs['cn'].",".$disk_dn;      
-        $partition_attrs['objectClass']     = array("top","FAIclass","FAIpartitionEntry");
+        $partition_dn= "FAIpartitionNr=".$partition_attrs['FAIpartitionNr'].",".$disk_dn;      
+        $partition_attrs['objectClass']= array("top","FAIclass","FAIpartitionEntry");
+        $partition_attrs['cn']= $partition_attrs['FAIpartitionNr'];
         
         unset($partition_attrs['status']);
         unset($partition_attrs['old_cn']);

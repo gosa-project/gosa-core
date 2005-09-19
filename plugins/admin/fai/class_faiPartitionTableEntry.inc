@@ -17,7 +17,6 @@ class faiPartitionTableEntry extends plugin
   
   var $partitions           = array();
   var $UsedAttrs            = array();
-  var $AvailableDiskNames   = array();
   var $is_edit              = false;
   var $old_cn               = "";
   var $status               = "new";
@@ -29,16 +28,6 @@ class faiPartitionTableEntry extends plugin
     $this->UsedAttrs  = array("cn","description","FAIpartitionType","FAIpartitionNr","FAIfsType","FAImountPoint","FAIpartitionSize",
                          "FAImountOptions","FAIfsOptions","FAIpartitionFlags");
 
-    /* Generate available disknames, to avoid duplicates in cn */
-    $this->AvailableDiskNames = array();
-    foreach(array("a","b","c","d","e","f","g","h") as $ts){
-      if(!in_array("hd".$ts,$usedDiskNames)){
-        $this->AvailableDiskNames["hd".$ts]= "hd".$ts;
-      }
-    }
-    
-    $this->AvailableDiskNames['disk1']= "disk1";
-    $this->AvailableDiskNames['disk2']= "disk2";
     /* Default status is new */
     $this->status = "new";    
  
@@ -153,10 +142,6 @@ class faiPartitionTableEntry extends plugin
       $this->partitions[count($this->partitions)+1]=$tmp;
     }
 
-    /* Tell smarty which Disknames are available.
-     */
-    $smarty->assign("cns", $this->AvailableDiskNames); 
-    
     /* $setup contains a table with the partitions. 
      */
     $smarty->assign("setup", $this->generateParts());
@@ -186,21 +171,20 @@ class faiPartitionTableEntry extends plugin
     $FAIfsTypes       = array("ext2","ext3","xfs","swap","reiserfs","dos fat 16","win fat 32");
 
     /* Display Header */
-    $str = "<table>";
-    $str .= "<tr>";
-    $str .= "<td>"._("Nr")."</td>";
-    $str .= "<td>"._("Name")."</td>";
-    $str .= "<td>"._("Description")."</td>";
-    $str .= "<td>"._("Type")."</td>";
-    $str .= "<td>"._("FS type")."</td>";
-    $str .= "<td>"._("Mount point")."</td>";
-    $str .= "<td>"._("Size in MB")."</td>";
-    $str .= "<td>"._("Mount options")."</td>";
-    $str .= "<td>"._("FS option")."</td>";
-    $str .= "<td>"._("Preserve")."</td>";
-    $str .= "<td></td>";
-    $str .= "</tr>";
-
+    $str = "<table style='width:100%'>";
+    if (count($this->partitions)){
+      $str .= "<tr>";
+      $str .= "<td>"._("Type")."</td>";
+      $str .= "<td>"._("FS type")."</td>";
+      $str .= "<td>"._("Mount point")."</td>";
+      $str .= "<td>"._("Size in MB")."</td>";
+      $str .= "<td>"._("Mount options")."</td>";
+      $str .= "<td>"._("FS option")."</td>";
+      $str .= "<td>"._("Preserve")."</td>";
+      $str .= "<td>&nbsp;</td>";
+      $str .= "</tr>";
+    }
+    
     /* Walk through all defined partitions.
      * Create a new row for each partition and append it to 
      *  the header defined above.
@@ -234,13 +218,10 @@ class faiPartitionTableEntry extends plugin
         $FAIfsType.="</select>";   
 
         $str .= "<tr>";
-        $str .= "<td>".($key)."</td>";
-        $str .= "<td><input name='cn_".$key."'                value='".$part['cn']."'               maxlength='8' style='width:80px;'></td>";
-        $str .= "<td><input name='description_".$key."'       value='".$part['description']."'      maxlength='8' style='width:80px;'></td>";
         $str .= "<td>".$PartitionType."</td>";
         $str .= "<td>".$FAIfsType."</td>";
         $str .= "<td><input name='FAImountPoint_".$key."'     value='".$part['FAImountPoint']."'    ></td>";
-        $str .= "<td><input name='FAIpartitionSize_".$key."'  value='".$part['FAIpartitionSize']."' style='width:200px;'></td>";
+        $str .= "<td><input name='FAIpartitionSize_".$key."'  value='".$part['FAIpartitionSize']."' size=12></td>";
         $str .= "<td><input name='FAImountOptions_".$key."'   value='".$part['FAImountOptions']."'  style='width:100px;'></td>";
         $str .= "<td><input name='FAIfsOptions_".$key."'      value='".$part['FAIfsOptions']."'     style='width:100px;'></td>";
         if($part['FAIpartitionFlags']!=false){
@@ -256,6 +237,36 @@ class faiPartitionTableEntry extends plugin
     return($str);
 
   }
+
+  function save()
+  {
+    $tmp = array();
+    $tmp['cn']          = $this->DISK_cn;
+
+    /* Attach partitions */
+    foreach($this->partitions as $key=>$val) {
+      $this->partitions[$key]['FAIpartitionNr']=$key;
+    }
+
+    /* Attach deleted */
+    foreach($this->deletePartitions as $key=>$val) {
+      $this->partitions[$key."-delete"]=$val;
+      $this->partitions[$key."-delete"]['status']="delete";
+    }
+
+    $tmp['description'] = $this->DISK_description;
+    $tmp['partitions']  = $this->partitions;
+    $tmp['status']      = $this->status;
+
+    /* If hdd name has changed, tell partitionTable to rename it */
+    if(($this->is_edit)&&($this->old_cn != $this->DISK_cn)){
+      $tmp['rename']['from']  = $this->old_cn;
+      $tmp['rename']['to']    = $this->DISK_cn;
+    }
+
+    return($tmp);
+  }
+
 
   /* Save data to object */
   function save_object()
@@ -294,11 +305,6 @@ class faiPartitionTableEntry extends plugin
       $message[] = _("Please enter a description for your disk.");
     }
 
-    $str = utf8_encode("üצה");
-    if(preg_match("/[^a-z0-9".$str."\.,;:\-_\? ]/i",$this->DISK_description)){
-      $message[]=_("Please enter a valid description.");
-    }
-    
     /* check every partition.
      * if there is an invalid value defined, append an errorstr to message
      */
@@ -311,20 +317,8 @@ class faiPartitionTableEntry extends plugin
 
     foreach($this->partitions as $key => $part){
     
-      if((empty($part['cn']))||(preg_match("/[^0-9a-z]/",$part['cn']))){
-        $message[]=sprintf(_("Please enter a valid name for partition %s."),($key));
-      }
-
-      if(in_array($part['cn'],$alreadyUsed['cn'])){
-        $message[]=sprintf(_("please enter a unique name for partition %s"),($key));
-      }
-    
       if(in_array($part['FAImountPoint'],$alreadyUsed['FAImountPoint'])){
         $message[]=sprintf(_("please enter a unique mount point for partition %s"),($key));
-      }
-
-      if(empty($part['description'])){
-        $message[]=sprintf(_("Please enter a valid description for partition %s." ),($key));
       }
 
       if((empty($part['FAImountPoint']))||(!((preg_match("/^\/.*/",$part['FAImountPoint']))||(preg_match("/^swap$/",$part['FAImountPoint']))))){
@@ -338,112 +332,36 @@ class faiPartitionTableEntry extends plugin
       }
 
       $tmp = split("-",$part['FAIpartitionSize']);
-      if(count($tmp)!=2){
-        $message[]=sprintf(_("Please enter a range for partition size, 'from-to', for partition %s."),($key));
-      }elseif((!is_numeric($tmp[0]))||(!is_numeric($tmp[1]))){
-        $message[]=sprintf(_("Please enter a valid range for partition %s."),($key)); 
-      }elseif($tmp[0]>=$tmp[1]){
-        $message[]=sprintf(_("Please enter a valid range for partition %s."),($key));
-      }elseif($this->checkSize($part['FAIpartitionSize'],$alreadyUsed['FAIpartitionSize'],$key)){
-        $message[]=$this->checkSize($part['FAIpartitionSize'],$alreadyUsed['FAIpartitionSize'],$key);
+      switch (count($tmp)){
+        case 0:
+                $message[]= sprintf(_("Please enter a valid partition size for partition %s."),($key));
+                break;
+        case 1:
+                if (!is_id(is_id($tmp[0]))){
+                  $message[]= sprintf(_("Please enter a valid partition size for partition %s."),($key));
+                }
+                break;
+                
+        case 2:
+                if((!is_id($tmp[0]))||(!is_id($tmp[1]))){
+                  $message[]=sprintf(_("Please enter a valid range for partition %s."),($key)); 
+                }elseif($tmp[0]>=$tmp[1]){
+                  $message[]=sprintf(_("Please enter a valid range for partition %s."),($key));
+                }
+                break;
+
+        default:
+                $message[]=sprintf(_("Please enter a range for partition size for partition %s."),($key));
       }
+
       foreach($this->UsedAttrs as $attrs){
         $alreadyUsed[$attrs][$key] = $part[$attrs];
       }      
     }
 
-
-    /* Only show 5 errors */
-    $cnt = 0;
-    if(count($message)>5){
-      foreach($message as $msg){
-        if($cnt < 5){
-          $tmp2[]=$msg;
-        }
-        $cnt ++;
-      }
-    $tmp2[] = "...";
-    $message = $tmp2;
-    }
-
     return ($message);
   }
  
-
-  /* This function checks the selected partition sizes 
-   * If a size setting overlap with another, it returns an error msg
-   */ 
-  function checkSize($current,$others,$ckey){
-    $tmp = split("-",$current);
-    $from = $tmp[0];
-    $to   = $tmp[1];
-    foreach($others as $key=> $other){
-      $tmp  = split("-",$other);
-      $oth_from = $tmp[0];
-      $oth_to   = $tmp[1];
-      /* surrounds another entry */
-      if( (($from <= $oth_from)&&($to >= $oth_to))||    // inside
-          (($from >= $oth_from)&&($to <= $oth_to))||    // outside
-          (($to >= $oth_from)&&($to <= $oth_to))  ||    // overlap at right
-          (($from >= $oth_from)&&($from <= $oth_to)) ){ // overlap left
-        $message =sprintf( _("Size settings for partition %s, overlap with size settings for partition %s."),$ckey,$key);
-        return($message);
-      }
-    }
-    return(false);
-  }
-  
-  function save()
-  {
-    /* This function returns the new or edited disk with its partitions.
-     * If the disk was edited and not a new one, we reset the name of the disk
-     *  to keep the correct index.
-     */
-
-    /* Check partition rename
-    */
-    foreach($this->partitions as $key => $part){
-      if($part['cn'] != $part['old_cn']){
-        if($part['status'] == "edited"){
-
-          $tmp          = $part;
-          $tmp['status']= "delete";
-          $tmp['cn']    = $part['old_cn'];
-
-          $this->deletePartitions[] = $tmp;
-        }
-        $this->partitions[$key]['old_cn']=$part['cn'];
-        $this->partitions[$key]['status']="new";
-      }
-    }
-
-    $tmp = array();
-    $tmp['cn']          = $this->DISK_cn;
- 
-    /* Attach partitions */ 
-    foreach($this->partitions as $key=>$val) {
-      $this->partitions[$key]['FAIpartitionNr']=$key;
-    }
-
-    /* Attach deleted */ 
-    foreach($this->deletePartitions as $key=>$val) {
-      $this->partitions[$key."-delete"]=$val;
-      $this->partitions[$key."-delete"]['status']="delete";
-    } 
- 
-    $tmp['description'] = $this->DISK_description;
-    $tmp['partitions']  = $this->partitions;
-    $tmp['status']      = $this->status;
-
-    /* If hdd name has changed, tell partitionTable to rename it */
-    if(($this->is_edit)&&($this->old_cn != $this->DISK_cn)){
-      $tmp['rename']['from']  = $this->old_cn;    
-      $tmp['rename']['to']    = $this->DISK_cn;    
-    }
-
-    return($tmp);
-  }
-
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

@@ -1,7 +1,7 @@
 <table width="100%">
 	<tr>
 		<td width="50%" valign="top">
-				<h2><img alt="" src="images/house.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2><br>
+				<h2><img alt="" src="images/fai_small.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
 				<table summary="" cellspacing="4">
 					<tr>
 						<td>
@@ -20,7 +20,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<input value="{$description}" {$description} name="description" id="description">
+							<input size=40 value="{$description}" {$description} name="description" id="description">
 						</td>
 					</tr>
 				</table>
@@ -29,15 +29,15 @@
 		   &nbsp;
 	 	</td>
 		<td>
-				<h2><img alt="" src="images/list_ogroup.png" align="middle" title="{t}Objects{/t}">&nbsp;
+				<h2><img alt="" src="images/fai_partitionTable.png" align="middle" title="{t}Objects{/t}">&nbsp;
 					<LABEL for="SubObject">
-						{t}This partition table contains following disks{/t}
+						{t}Discs{/t}
 					</LABEL>
-				</h2><br>
+				</h2>
 				<table width="100%">
 				<tr>
 					<td>
-						<select name="disks" title="{t}Choose a disk to delete or edit{/t}" style="width:350px;height:120px;" size=10 id="SubObject">
+						<select name="disks" title="{t}Choose a disk to delete or edit{/t}" style="width:100%" size=15 id="SubObject">
 							{html_options values=$diskKeys output=$disks}
 						</select><br>
 						<input type="submit" name="AddDisk"     value="{t}Add{/t}"		title="{t}Add{/t}">

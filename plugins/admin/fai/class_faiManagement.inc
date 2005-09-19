@@ -398,8 +398,8 @@ class faiManagement extends plugin
 					array("string" => _("Actions"), "attach"=>"style='border:none;width:40px;'")));
 
 
-		$action  = "<input type='image' src='images/edit.png' 	alt='"._("edit")."'   name='entry_edit_%KEY%' title='"._("Edit object")."'>";
-		$action .= "<input type='image' src='images/edittrash.png' alt='"._("delete")."' name='entry_delete_%KEY%' title='"._("Delete object")."'>";
+		$action  = "<input type='image' src='images/edit.png' 	alt='"._("edit")."'   name='entry_edit_%KEY%' title='"._("Edit class")."'>";
+		$action .= "<input type='image' src='images/edittrash.png' alt='"._("delete")."' name='entry_delete_%KEY%' title='"._("Delete class")."'>";
 
 		/* Attach objects */
 		foreach($this->objects as $key => $value){

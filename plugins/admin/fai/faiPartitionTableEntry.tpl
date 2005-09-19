@@ -1,25 +1,16 @@
 <input type="hidden" name="TableEntryFrameSubmitted" value="1">
-<br>
-<h2><img alt="" src="images/house.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
-<table>
+<h2><img alt="" src="images/fai_partitionTable.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Device{/t}</h2>
+<table style='width:100%'>
 	<tr>
-		<td><LABEL for="DISK_cn">
+		<td style='width:50%;border-right:1px solid #909090;'><LABEL for="DISK_cn">
 			{t}Name{/t}
-			</LABEL>&nbsp;{$must}
+			</LABEL>{$must}&nbsp;
+			<input value="{$DISK_cn}" size=20 name="DISK_cn" id="DISK_cn">
 		</td>
-		<td>
-			<select name="DISK_cn" title="{t}Choose a disc name{/t}" {$DISK_cnACL} id="DISK_cn">
-                {html_options values=$cns output=$cns selected=$DISK_cn}
-            </select>
-		</td>
-	</tr>
-	<tr>
 		<td><LABEL for="DISK_description">
-			{t}Description{/t}
-			</LABEL>&nbsp;{$must}
-		</td>
-		<td>
-			<input value="{$DISK_description}" name="DISK_description" id="DISK_description">
+			&nbsp;{t}Description{/t}
+			</LABEL>{$must}&nbsp;
+			<input value="{$DISK_description}" size=50 name="DISK_description" id="DISK_description">
 		</td>
 	</tr>
 </table>
@@ -36,5 +27,5 @@
 <br>
 <div style="align:right;" align="right">
 <input type="submit" name="SaveDisk" value="{t}Save{/t}" >
-<input type="submit" name="CancelDisk" value="{t}cancel{/t}" >
+<input type="submit" name="CancelDisk" value="{t}Cancel{/t}" >
 </div>

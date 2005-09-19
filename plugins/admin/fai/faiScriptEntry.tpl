@@ -6,7 +6,7 @@
 				<table>
 					<tr>
 						<td>
-							{t}Name{/t}&nbsp;{$must}
+							{t}Name{/t}{$must}&nbsp;
 						</td>
 						<td>
 							<input value="{$Object_cn}" name="Object_cn">
@@ -14,7 +14,7 @@
 					</tr>
 					<tr>
 						<td>
-							{t}Description{/t}&nbsp;{$must}
+							{t}Description{/t}{$must}&nbsp;
 						</td>
 						<td>
 							<input value="{$Object_description}" name="Object_description">
@@ -67,6 +67,6 @@
 <br>
 <div style="align:right;" align="right">
 	<input type="submit" value="{t}Save{/t}" 	name="SaveSubObject">&nbsp;
-	<input type="submit" value="{t}Abort{/t}" 	name="CancelSubObject">
+	<input type="submit" value="{t}Cancel{/t}" 	name="CancelSubObject">
 </div>
 
