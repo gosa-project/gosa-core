@@ -104,17 +104,18 @@ class askClassName extends plugin
    */ 
   function save_object()
   {
-    if(isset($_POST['UseNewClass'])){
+    if(isset($_POST['classSelector']) && $_POST['classSelector'] == 1 
+       && isset($_POST['edit_continue'])){
       $this->ClassName          = $_POST['UseTextInputName'];
       $this->ClassAlreadyExists = true;
     }
   
-    if(isset($_POST['UseSelectedClass'])){
+    if(isset($_POST['classSelector']) && $_POST['classSelector'] == 2 
+       && isset($_POST['edit_continue'])){
       $this->ClassAlreadyExists = false;
       $this->ClassName          = $_POST['SelectedClass'];
     }
   }
-
 
   /* Check given class name 
    */

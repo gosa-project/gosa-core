@@ -215,8 +215,8 @@ class faiScript extends plugin
       $ldap->modify($this->attrs);
     }else{
       /* Write FAIscript to ldap*/
-      $ldap->cd($this->dn);
-      $ldap->create_missing_trees($this->dn);
+      $ldap->cd(preg_replace('/^[^,]+,[^,]+,/', '', $this->dn));
+      $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
       $ldap->cd($this->dn);
       $ldap->add($this->attrs);
     }
@@ -266,8 +266,8 @@ class faiScript extends plugin
         $ldap->modify($tmp);
         $this->handle_post_events("modify");
       }elseif($obj['status']=="new"){
-        $ldap->cd($sub_dn);
-        $ldap->create_missing_trees($sub_dn);
+        $ldap->cd(preg_replace('/^[^,]+,[^,]+,/', '', $this->dn));
+        $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
         $ldap->cd($sub_dn);
         $ldap->add($tmp); 
         $this->handle_post_events("add");

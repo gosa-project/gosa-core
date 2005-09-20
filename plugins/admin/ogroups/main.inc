@@ -40,9 +40,7 @@ if (!$remove_lock){
   }
 
   $display.= $output;
-  $display.="<script language=\"JavaScript\" type=\"text/javascript\">
-                document.mainform.edit_finish.focus();
-                             </script>";
+
   /* Store changes  in session */
   $_SESSION['ogroup']= $ogroup;
 }

@@ -125,9 +125,7 @@ class faiManagement extends plugin
 				$s_action = "new_package";
 			}elseif(preg_match("/create_profile/i",$key)){
 				$s_action = "new_profile";
-			}elseif(preg_match("/UseNewClass/",$key)){
-				$s_action = "select_class_name_finished";
-			}elseif(preg_match("/UseSelectedClass/",$key)){
+			}elseif(preg_match("/edit_continue/",$key)){
 				$s_action = "select_class_name_finished";
 			}elseif(preg_match("/^entry_edit_.*/",$key)){
 				$s_entry = preg_replace("/^entry_edit_/","",$key);
@@ -162,7 +160,7 @@ class faiManagement extends plugin
 
 				/* Lock the current entry, so nobody will edit it during deletion */
 				add_lock ($this->dn, $this->ui->dn);
-				$smarty->assign("warning", sprintf(_("You're about to delete all information about the component at '%s'."), $this->dn));
+				$smarty->assign("warning", sprintf(_("You're about to delete all information about the FAI class at '%s'."), $this->dn));
 				return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
 			} else {
 
@@ -171,6 +169,12 @@ class faiManagement extends plugin
 				print_red (_("You are not allowed to delete this component!"));
 			}
 		}
+
+		/* Delete canceled? */
+		if (isset($_POST['delete_cancel'])){
+			del_lock ($this->dn);
+		}
+
 
 		/* Deltetion was confirmed, so delete this entry
 		 */
@@ -341,6 +345,7 @@ class faiManagement extends plugin
 				$display.= "</p>";
 			}elseif(!isset($this->dialog->current)){
 				$display.= "<p style=\"text-align:right\">\n";
+				$display.= "<input type=submit name=\"edit_continue\" value=\""._("Continue")."\">&nbsp;";
 				$display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
 				$display.= "</p>";
 			}

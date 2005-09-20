@@ -28,6 +28,7 @@
   <td style="vertical-align:top;">
   <div class="contentboxh">
     <p class="contentboxh">
+    Das ist zu groß hier... Macht keinen Sinn - 
      <LABEL for="userlist">{t}List of used class names{/t}</LABEL> 
     </p>
   </div>

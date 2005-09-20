@@ -393,7 +393,6 @@ class LDAP{
 
   function create_missing_trees($target)
   {
-    
     /* Ignore create_missing trees if the base equals target */
     if ($target == $this->basedn){
      return;

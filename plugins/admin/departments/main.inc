@@ -51,11 +51,6 @@ if ($remove_lock){
 
 	$display.= $output;
 
-	$display.="<!-- Place cursor -->
-		<script language=\"JavaScript\" type=\"text/javascript\">
-		document.mainform.edit_finish.focus();
-		</script>";
-
 	$_SESSION['department']= $department;
 }
 

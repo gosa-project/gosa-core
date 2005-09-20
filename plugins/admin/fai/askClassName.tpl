@@ -1,48 +1,88 @@
 <div style="font-size: 18px;">
 	{$headline}
-	<br><br>
 </div>
-	{t}Please select a class name for this object. The class name specifies a set of configurations.{/t}
-	<br>
-	{t}Every Class name must be unique. But it can be used for different objects at the same time.<br/>If you use this class name in a profile, all object with this class name will be included to this profile.{/t}
-	<br>
-	<br>
-	{t}The list box below shows all available class names you may use, for this object, to avoid duplicates.{/t}
+<br>
+<p class="seperator">
+{t}Adding a new class to the FAI management, requires a class name. You have to specify a unique class name for unique types of FAI classes, while you can use the same class name for different types of FAI classes. In the laste case, FAI will automatically enclose all these different class types to one unique class name.{/t}
 <br>
 <br>
-<table >
+</p>
+<p class="seperator">
+<br>
+<b>{t}Please use one of the following methods to choose the name for the new FAI class.{/t}</b>
+<br>
+<br>
+</p>
+<br>
+<table style='width:100%'>
+ <tr>
+  <td style='width:49%'>
+   <table>
+    <tr>
+     <td>
+       <input type=radio name="classSelector" value="1" checked>
+     </td>
+     <td> 
+       <h1>{t}Enter FAI class name manually{/t}</h1>
+     </td>
+   </tr>
+   <tr>
+     <td>&nbsp;</td>
+     <td>
+      {t}Class name{/t}&nbsp;<input type="text"	 name="UseTextInputName" value="" style="width:120px;">
+     </td>
+    </tr>
+   </table>
+   <br>
+   <br>
+  </td>
+  <td style='border-left:1px solid #909090'>
+  </td>
+  <td>
+   <table>
+    <tr>
+     <td>
+       <input type=radio name="classSelector" value="2" {$ClassNamesAvailable}>
+     </td>
+     <td>
+      <h1>{t}Choose FAI class name from a list of existing classes{/t}</h1>
+     </td>
+    </tr>
+    <tr>
+     <td>&nbsp;</td>
+     <td>
+      {t}Class name{/t}&nbsp;<select name="SelectedClass" title="{t}Choose class name{/t}" style="width:120px;" {$ClassNamesAvailable}>
+       {html_options values=$ClassNameKeys output=$ClassNames}
+      </select>
+     </td>
+    </tr>
+   </table>
+   <br>
+   <br>
+  </td>
+ </tr>
+</table>
+
+<!--
+<table>
 	<tr>
-		<td colspan="2"><b>
-			{t}You can select of one the following class names for this object.{/t}
-		</b></td>
-	</tr>
-	<tr>
-		<td><b>{t}Available class names.{/t}</b>
-		</td>
 		<td>
-	    <select name="SelectedClass" title="{t}Choose class name{/t}" style="width:120px;">
-       		{html_options values=$ClassNameKeys output=$ClassNames}
-      	</select>
 		<input type="submit" name="UseSelectedClass" value="{t}Use{/t}" {$ClassNamesAvailable}> 
 		</td>
-	</tr>
-	<tr>
-		<td colspan="2"><br>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2"><b>
-			{t}Please enter your class name here, if want to create a new class.{/t}
-		</b></td>
 	</tr>
 	<tr>
 		<td><b>{t}A new class name.</b>{/t}
 		</td>
 		<td>
-		<input type="text"	 name="UseTextInputName" value="" style="width:120px;">
 		<input type="submit" name="UseNewClass" value="{t}Use{/t}"> 
 		</td>
 	</tr>
 </table>
+-->
 <p class="seperator">&nbsp;</p>
 	
+<!-- Place cursor -->
+<script language="JavaScript" type="text/javascript">
+	document.mainform.UseTextInputName.select();
+	document.mainform.UseTextInputName.focus();
+</script>

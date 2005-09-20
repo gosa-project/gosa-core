@@ -130,8 +130,8 @@ class faiPackage extends plugin
       $ldap->modify($this->attrs);
     }else{
       /* Write FAIscript to ldap*/
-      $ldap->cd($this->dn);
-      $ldap->create_missing_trees($this->dn);
+      $ldap->cd(preg_replace('/^[^,]+,[^,]+,/', '', $this->dn));
+      $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
       $ldap->cd($this->dn);
       $ldap->add($this->attrs);
     }
