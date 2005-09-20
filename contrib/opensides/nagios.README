@@ -1,0 +1,11 @@
+For test the plugin ( beginning of the plugin :) )
+add this in gosa.conf
+
+        <nagios>
+                <tab class="nagiosAccount" />
+        </nagios>
+
+before <connectivity> eg.
+
+
+Guillaume.
