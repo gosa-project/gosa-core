@@ -225,7 +225,7 @@ class faiHook extends plugin
       $ldap->modify($this->attrs);
     }else{
       /* Write FAIscript to ldap*/ 
-      $ldap->cd(preg_replace('/^[^,]+,[^,]+,/', '', $this->dn));
+      $ldap->cd($this->config->current['BASE']);
       $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
       $ldap->cd($this->dn);
       $ldap->add($this->attrs);
@@ -276,7 +276,7 @@ class faiHook extends plugin
         $ldap->modify($tmp);
         $this->handle_post_events("modify");
       }elseif($obj['status']=="new"){
-        $ldap->cd(preg_replace('/^[^,]+,[^,]+,/', '', $sub_dn));
+        $ldap->cd($this->config->current['BASE']);
         $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $sub_dn));
         $ldap->cd($sub_dn);
         $ldap->add($tmp); 

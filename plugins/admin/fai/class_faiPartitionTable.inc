@@ -280,7 +280,7 @@ class faiPartitionTable extends plugin
     $ldap = $this->config->get_ldap_link();
 
     if($this->new){
-      $ldap->cd(preg_replace('/^[^,]+,[^,]+,/', '', $this->dn));
+      $ldap->cd($this->config->current['BASE']);
       $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
       $ldap->cd($this->dn);
       $ldap->add($this->attrs);
@@ -321,7 +321,7 @@ class faiPartitionTable extends plugin
         $ldap->cd($disk_dn);
         $ldap->modify($disk_attrs);
       }elseif($disk['status']== "new"){
-        $ldap->cd(preg_replace('/^[^,]+,[^,]+,/', '', $disk_dn));
+        $ldap->cd($this->config->current['BASE']);
         $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $disk_dn));
         $ldap->cd($disk_dn);
         $ldap->add($disk_attrs);
@@ -354,7 +354,7 @@ class faiPartitionTable extends plugin
           $ldap->cd($partition_dn);
           $ldap->rmdir_recursive($partition_dn);
         }elseif($partition['status'] == "new"){
-          $ldap->cd(preg_replace('/^[^,]+,[^,]+,/', '', $partition_dn));
+          $ldap->cd($this->config->current['BASE']);
           $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $partition_dn));
           $ldap->cd($partition_dn);
           $ldap->add($partition_attrs);
