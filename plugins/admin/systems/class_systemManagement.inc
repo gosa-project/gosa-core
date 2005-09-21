@@ -921,10 +921,10 @@ class systems extends plugin
       }
       if (preg_match ("/,ou=incoming,/i", $tmp)){
         if (in_array('gotoTerminal', $value['objectClass'])){
-          $add= "+ "._("New terminal");
+          $add= "- "._("New terminal");
         }
         if (in_array('gotoWorkstation', $value['objectClass'])){
-          $add= "+ "._("New workstation");
+          $add= "- "._("New workstation");
         }
       } else {
         $add= "";
@@ -948,6 +948,7 @@ class systems extends plugin
           if (isset($value["macAddress"][0]) &&  $value["macAddress"][0] != "-"){
             $terminal             = $value;
             $terminal['type']     = "L";
+            $terminal['is_new']   = $add;
           } else {
             $terminal             = $value;
             $terminal['type']     = "D";
