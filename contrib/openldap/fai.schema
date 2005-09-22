@@ -51,6 +51,7 @@
 # FAIpackageList       | FAIinstallMethod, FAIpackage
 # FAIdebconfInfo       | FAIvariable, FAIvariableContent, FAIvariableType
 # FAIobject            | FAIclass, FAIstatus, macAddress
+# FAIrepository        | FAIdebianMirror, FAIdebianRelease, FAIdebianSection
 #
 # Rem.: Except of FAIdebconfInfo and FAIobject, all object classes are inherited
 #       from FAIclass, so ALL cn's MUST be unique in your tree.
@@ -263,10 +264,33 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.5.22 NAME 'FAIpartitionSize'
 # Description: Optionally this flag contains the "preserve" keyword, in
 #              order to influence partitioning.
 attributetype ( 1.3.6.1.4.1.10098.1.1.5.23 NAME 'FAIpartitionFlags'
+		DESC 'Optional flags like "preserve"'
+		EQUALITY caseIgnoreIA5Match
+		SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE)
+
+# Name       : FAIdebianMirror
+# Description: Used for bootstrap sources.list settings. It contains
+#              the mirror server url.
+attributetype ( 1.3.6.1.4.1.10098.1.1.5.24 NAME 'FAIdebianMirror'
 		DESC 'TODO'
 		EQUALITY caseIgnoreIA5Match
 		SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE)
 
+# Name       : FAIdebianRelease
+# Description: Used for bootstrap sources.list settings. It contains
+#              the release.
+attributetype ( 1.3.6.1.4.1.10098.1.1.5.25 NAME 'FAIdebianRelease'
+		DESC 'TODO'
+		EQUALITY caseIgnoreIA5Match
+		SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE)
+
+# Name       : FAIdebianSection
+# Description: Used for bootstrap sources.list settings. It contains
+#              the section. Multiple Sections get appended.
+attributetype ( 1.3.6.1.4.1.10098.1.1.5.26 NAME 'FAIdebianSection'
+		DESC 'TODO'
+		EQUALITY caseIgnoreIA5Match
+		SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
 
 ##
 ## Object class definitions (allocated from the GONICUS oid space)
@@ -391,5 +415,12 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.40.16 NAME 'FAIobject'
 	SUP top AUXILIARY
 	DESC 'Marks an object as an FAI object.'
 	MUST ( FAIclass $ macAddress ) MAY ( FAIstatus ) )
+
+# Name       : FAIrepository
+# Description: Marks objects to have a set of FAI classes.
+objectclass (1.3.6.1.4.1.10098.1.2.1.40.17 NAME 'FAIrepository'
+	SUP top AUXILIARY
+	DESC 'Provides per object repository informations.'
+	MUST ( FAIdebianMirror $ FAIdebianRelease $ FAIdebianSection ) )
 
 ### END of FAI schema file
