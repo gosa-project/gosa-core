@@ -109,6 +109,11 @@ class nagiosAccount extends plugin
     /* Call parents save to prepare $this->attrs */
 	  plugin::save();
 
+    /* Adapt attributes if needed */
+    $method= new $this->method($this->config);
+    $id= $method->uattrib;
+    $method->fixAttributesOnStore($this);
+                
 
 	  /* Write back to ldap */
 	  $ldap->cd($this->dn);
@@ -126,37 +131,49 @@ class nagiosAccount extends plugin
 	
   }
 
-function save_object()
-{
+  function check()
+  {
+  }
+  
+  function save_object()
+  {
 
-	if (!$this->is_account && ($_POST['nagiosAuth'] == "B" || $_POST['nagiosContact'] == "B")) {
-		$this->is_account= TRUE;
-	}
-	else {
-		$this->is_account= FALSE;
-	}
-	plugin::save_object();
-}
+    if (isset($_POST['mailTab'])){
+      /* Save ldap attributes */
+      plugin::save_object();
 
-function remove_from_parent()
-{
-	/* Cancel if there's nothing to do here */
-	if (!$this->initially_was_account){
-	return;
-	}
-	
-	plugin::remove_from_parent();
-	$ldap= $this->config->get_ldap_link();
-	
-	$ldap->cd($this->dn);
-	@DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
-	$this->attributes, "Save");
-	$ldap->modify($this->attrs);
-	show_ldap_error($ldap->get_error());
-	
-	/* Optionally execute a command after we're done */
-	$this->handle_post_events('remove');
-}
+  }
+
+  function remove_from_parent()
+  {
+	  /* Cancel if there's nothing to do here */
+	  if (!$this->initially_was_account){
+	    return;
+	  }
+
+    /* include global link_info */
+    $ldap= $this->config->get_ldap_link();
+
+    /* Remove and write to LDAP */
+    plugin::remove_from_parent();
+
+    /* Adapt attributes if needed */
+    $method= new $this->method($this->config);
+    $method->fixAttributesOnRemove($this);
+    
+
+    @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
+      $this->attributes, "Save");
+    $ldap->cd($this->dn);
+    $ldap->modify($this->attrs);
+    show_ldap_error($ldap->get_error());
+                        
+    /* remove the entry from LDAP */
+    //unset ($this->attrs['uid']);
+                
+    /* Optionally execute a command after we're done */
+    $this->handle_post_events('remove');
+  }
 
 }
 
