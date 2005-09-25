@@ -40,3 +40,12 @@
 
 <input type="checkbox" name="AuthorizedAllHostCommands" {$AuthorizedAllHostCommandsACL} value="{$AuthorizedAllHostCommands}" {$AuthorizedAllHostCommands}>authorized_for_all_host_commands<br />
 
+<input type="hidden" name="nagiosTab" value="nagiosTab">
+
+<!-- Place cursor -->
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+  document.mainform.mail.focus();
+  -->
+</script>
+
