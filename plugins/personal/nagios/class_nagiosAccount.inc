@@ -32,8 +32,6 @@ class nagiosAccount extends plugin
   var $ServiceNotificationCommands= "";
   var $HostNotitificationOptions= "";
   var $ServiceNotificationOptions= "";
-  var $HostNotificationPeriod= "";
-  var $ServiceNotificationPeriod= "";
 
   var $AuthorizedAllHosts= "";
   var $AuthorizedAllServices= "";
@@ -84,7 +82,7 @@ class nagiosAccount extends plugin
 		      _("This account has no nagios extensions.")."</b>";
     
         $display.= back_to_main();
-         return ($display);
+        return ($display);
 	    }
   
 	  /* Show tab dialog headers */
@@ -141,7 +139,7 @@ class nagiosAccount extends plugin
     if (isset($_POST['mailTab'])){
       /* Save ldap attributes */
       plugin::save_object();
-
+    }
   }
 
   function remove_from_parent()
