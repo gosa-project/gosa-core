@@ -45,8 +45,7 @@ class nagiosAccount extends plugin
   
 	var $attributes= array("NagiosAlias", "NagiosPager", "NagiosMail", "HostNotificationPeriod",
       "ServiceNotificationPeriod", "HostNotificationCommands", "ServiceNotificationCommands",
-      "HostNotificationOptions", "ServiceNotificationOptions", "HostNotificationPeriod",
-      "ServiceNotificationPeriod", "AuthorizedAllHosts", "AuthorizedAllServices",
+      "HostNotificationOptions", "ServiceNotificationOptions", "AuthorizedAllHosts", "AuthorizedAllServices",
       "AuthorizedSystemCommands", "AuthorizedAllHostCommands", "AuthorizedAllServiceCommands",
       "AuthorizedConfigurationInformation", "AuthorizedSystemInformation");
 
