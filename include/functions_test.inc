@@ -75,7 +75,8 @@ function test_defined_functions($path="",$pattern="",$skip_dirs="") {
   $array= read_php_files($path,$pattern,$skip_dirs);
 
   $functions= array();
-  $user_functions= array();
+  // We need to add our own method here, cause PHP doesn't scan 'itself' :-(
+  $user_functions= array('test_defined_functions');
   
   // Scan files for used defined functions
   foreach($array as $file) {
@@ -143,7 +144,8 @@ function test_functions($path="",$pattern="",$skip_dirs="") {
   }
 
   $functions= array();
-  $user_functions= array();
+  // We need to add our own method here, cause PHP doesn't scan 'itself' :-(
+  $user_functions= array('test_functions');
   $invalid_functions= array();
   
   if($debug || $verbose) {
@@ -198,7 +200,6 @@ function test_functions($path="",$pattern="",$skip_dirs="") {
 }
 
 /**
- * @see
  * @return array of content from PHP-Files scanned
  */
 function read_php_files($path,$pattern,$skip_dirs) {
