@@ -33,18 +33,18 @@
       {$alphabet}
      </table>
 	 <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
-		<tr><td><input onChange='document.mainform.submit();' type="checkbox" name="ShowProfiles" 		{$ShowProfilesCHK}>{t}Show profiles{/t}</td></tr>
-		<tr><td><input onChange='document.mainform.submit();' type="checkbox" name="ShowTemplates" 	{$ShowTemplatesCHK}>{t}Show templates{/t}</td></tr>
-		<tr><td><input onChange='document.mainform.submit();' type="checkbox" name="ShowScripts" 		{$ShowScriptsCHK}>{t}Show scripts{/t}</td></tr>
-		<tr><td><input onChange='document.mainform.submit();' type="checkbox" name="ShowHooks" 		{$ShowHooksCHK}>{t}Show hooks{/t}</td></tr>
-		<tr><td><input onChange='document.mainform.submit();' type="checkbox" name="ShowVariables" 	{$ShowVariablesCHK}>{t}Show variables{/t}</td></tr>
-		<tr><td><input onChange='document.mainform.submit();' type="checkbox" name="ShowPackages" 		{$ShowPackagesCHK}>{t}Show packages{/t}</td></tr>
-		<tr><td><input onChange='document.mainform.submit();' type="checkbox" name="ShowPartitions"	{$ShowPartitionsCHK}>{t}Show partitions{/t}</td></tr>
+		<tr><td><input onClick='document.mainform.submit();' type="checkbox" name="ShowProfiles" 		{$ShowProfilesCHK}>{t}Show profiles{/t}</td></tr>
+		<tr><td><input onClick='document.mainform.submit();' type="checkbox" name="ShowTemplates" 	{$ShowTemplatesCHK}>{t}Show templates{/t}</td></tr>
+		<tr><td><input onClick='document.mainform.submit();' type="checkbox" name="ShowScripts" 		{$ShowScriptsCHK}>{t}Show scripts{/t}</td></tr>
+		<tr><td><input onClick='document.mainform.submit();' type="checkbox" name="ShowHooks" 		{$ShowHooksCHK}>{t}Show hooks{/t}</td></tr>
+		<tr><td><input onClick='document.mainform.submit();' type="checkbox" name="ShowVariables" 	{$ShowVariablesCHK}>{t}Show variables{/t}</td></tr>
+		<tr><td><input onClick='document.mainform.submit();' type="checkbox" name="ShowPackages" 		{$ShowPackagesCHK}>{t}Show packages{/t}</td></tr>
+		<tr><td><input onClick='document.mainform.submit();' type="checkbox" name="ShowPartitions"	{$ShowPartitionsCHK}>{t}Show partitions{/t}</td></tr>
 	 </table>
      <table summary=""  style="width:100%;border-top:1px solid #B0B0B0;">
      <tr>
      <td>
-     <LABEL for "regex"><img alt="{t}Display objects matching{/t}" src="{$search_image}" align=middle title='{t}Display objects matching{/t}'></LABEL>
+     <label for="regex"><img alt="{t}Display objects matching{/t}" src="{$search_image}" align='middle' title='{t}Display objects matching{/t}'/>
      </td>
      <td width="99%">
      <input type='text' name='regex' maxlength='20' style='width:99%' value='{$regex}' id='filter' 
@@ -52,10 +52,10 @@
      </td>
      </tr>
      </table>
-			    {$apply}
+			  {$apply}
    </div>
   </td>
 </tr>
-</table summary="">
+</table>
 
 <input type="hidden" name="ignore">
