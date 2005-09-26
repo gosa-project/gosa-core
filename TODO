@@ -37,6 +37,8 @@ Things to fix before 2.4:
 
 * Password changing for workstations doesn't work anymore
 
+* Add function to get GOto application templates -> filled variables, etc.
+
 
 Target for 2.5:
 ===============
