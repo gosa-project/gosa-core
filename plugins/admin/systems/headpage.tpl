@@ -55,11 +55,12 @@
 </table>
 <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
 <tr>
-<td>
-<LABEL for="user"><img alt="{t}Display systems of user{/t}" src="{$searchu_image}" align=middle></LABEL>
+<td style="width:20%;">
+	<!--<LABEL for="user"><img alt="{t}Display systems of user{/t}" src="{$searchu_image}" align=middle></LABEL>-->
+	<label for="user" style="white-space:nowrap;">{t}Display systems of user{/t}</label>
 </td>
-<td width="99%">
-<input type='text' style='width:99%' name='user' maxlength='20' value='{$user}' title='{t}User name of which terminal(s) are shown{/t}' onChange="mainform.submit()">
+<td>
+<input type='text' style='width:99%' align='left' name='user' maxlength='20' value='{$user}' title='{t}User name of which terminal(s) are shown{/t}' onChange="mainform.submit()">
 </td>
 </tr>
 </table>
