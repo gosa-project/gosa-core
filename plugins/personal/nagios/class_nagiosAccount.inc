@@ -107,9 +107,9 @@ class nagiosAccount extends plugin
 	  plugin::save();
 
     /* Adapt attributes if needed */
-    $method= new $this->method($this->config);
-    $id= $method->uattrib;
-    $method->fixAttributesOnStore($this);
+    //$method= new $this->method($this->config);
+    //$id= $method->uattrib;
+    //$method->fixAttributesOnStore($this);
                 
 
 	  /* Write back to ldap */
@@ -166,7 +166,7 @@ class nagiosAccount extends plugin
     show_ldap_error($ldap->get_error());
                         
     /* remove the entry from LDAP */
-    //unset ($this->attrs['uid']);
+    unset ($this->attrs['uid']);
                 
     /* Optionally execute a command after we're done */
     $this->handle_post_events('remove');

@@ -1,44 +1,56 @@
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+ <tr>
+  <td style="width:50%; vertical-align:top;">
+   <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Nagios Account{/t}</h2>
+   <table summary="">
+    <tr>
+     <td><LABEL for="NagiosAlias">{t}alias{/t}</LABEL>{$must}</td>
+     <td><input id="NagiosAlias" name="NagiosAlias" size=25 maxlength=65 {$NagiosAliasACL} value="{$NagiosAlias}"></td>
+    </tr>
 
+    <tr>
+     <td><LABEL for="NagiosEmail">{t}email{/t}</LABEL>{$must}</td>
+     <td><input id="NagiosEmail" name="NagiosEmail" size=25 maxlength=65 {$NagiosEmailACL} value="{$NagiosEmail}"></td>
+    </tr>
 
-<h2><input type="checkbox" name="nagiosContact" value="B" {$nagiosContact}>{t}Nagios Contact{/t}</h2>
-<table summary="" style="width:90%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+    <tr>
+     <td><LABEL for="NagiosPager">{t}pager{/t}</LABEL></td>
+     <td><input id="NagiosPager" name="NagiosPager" size=25 maxlength=65 {$NagiosPagerACL} value="{$NagiosPager}"></td>
+    </tr>
 
-<tr><td>nagios alias</td><td><input  style="width:280px" type="textbox" name="NagiosAlias"  {$NagiosAliasACL} value="{$NagiosAlias}"></td></tr>
+    <tr>
+     <td><LABEL for="ServiceNotificationPeriod">{t}Service Notification Period{/t}</LABEL>{$must}</td>
+     <td><input id="ServiceNotificationPeriod" name="ServiceNotificationPeriod" size=25 maxlength=65 {$ServiceNotificationPeriodACL} value="{$ServiceNotificationPeriod}"></td>
+    </tr>
 
-<tr><td>nagios email</td><td><input style="width:280px" type="textbox" name="NagiosMail"  {$NagiosMailACL} value="{$NagiosMail}"></td></tr>
+    <tr>
+     <td><LABEL for="ServiceNotificationOptions">{t}Service Notification Options{/t}</LABEL>{$must}</td>
+     <td><input id="ServiceNotificationOptions" name="ServiceNotificationOptions" size=25 maxlength=65 {$ServiceNotificationOptionsACL} value="{$ServiceNotificationOptions}"></td>
+    </tr>
 
-<tr><td>nagios pager</td><td><input style="width:280px" type="textbox" name="NagiosPager"  {$NagiosPagerACL} value="{$NagiosPager}"></td></tr>
-<tr><td colspan=2><hr></td><td></tr>
-<tr><td>service_notification_period</td><td><input style="width:280px" type="textbox" name="ServiceNotificationPeriod"  {$ServiceNotificationPeriodACL} value="{$ServiceNotificationPeriod}"></td>
+    <tr>
+     <td><LABEL for="ServiceNotificationCommands">{t}Service Notification Commands{/t}</LABEL>{$must}</td>
+     <td><input id="ServiceNotificationCommands" name="ServiceNotificationCommands" size=25 maxlength=65 {$ServiceNotificationCommandsACL} value="{$ServiceNotificationCommands}"></td>
+    </tr>
 
-<td>host_notification_options</td><td><input style="width:280px" type="textbox" name="HostNotificationOptions" {$HostNotificationOptionsACL} value="{$HostNotificationOptions}"></td></tr>
+    <tr>
+     <td><LABEL for="HostNotificationPeriod">{t}Host Notification Period{/t}</LABEL>{$must}</td>
+     <td><input id="HostNotificationPeriod" name="HostNotificationPeriod" size=25 maxlength=65 {$HostNotificationPeriodACL} value="{$HostNotificationPeriod}"></td>
+    </tr>
 
-<tr><td>service_notification_options</td><td><input style="width:280px" type="textbox" name="ServiceNotificationOptions" {$ServiceNotificationOptions} value="{$ServiceNotificationPeriod}"></td>
+    <tr>
+     <td><LABEL for="HostNotificationOptions">{t}Host Notification Options{/t}</LABEL>{$must}</td>
+     <td><input id="HostNotificationOptions" name="HostNotificationOptions" size=25 maxlength=65 {$HostNotificationOptionsACL} value="{$HostNotificationOptions}"></td>
+    </tr>
 
-<td>host_notification_period</td><td><input style="width:280px" type="textbox" name="HostNotificationPeriod"  {$HostNotificationPeriodACL} value="{$HostNotificationPeriod}"></td></tr>
-
-<tr><td>service_notification_commands</td><td><input style="width:280px" type="textbox" name="ServiceNotificationCommands" {$ServiceNotificationCommands} value="{$ServiceNotificationCommands}"></td>
-
-<td>host_notification_commands</td><td><input style="width:280px" type="textbox" name="HostNotificationCommands" {$HostNotificationCommandsACL} value="{$HostNotificationCommands}"></td></tr>
+    <tr>
+     <td><LABEL for="HostNotificationCommands">{t}Host Notification Period{/t}</LABEL>{$must}</td>
+     <td><input id="HostNotificationCommands" name="HostNotificationCommands" size=25 maxlength=65 {$HostNotificationCommandsACL} value="{$HostNotificationCommands}"></td>
+    </tr>
+	</table>
+  
 
 </table>
-
-<hr>
-<h2><input type="checkbox" name="nagiosAuth" value="B "{$nagiosAuth} >{t}Nagios authorisation{/t}</h2>
-
-<input type="checkbox" name="AuthorizedSystemInformation" {$AuthorizedSystemInformationACL} value="{$AuthorizedSystemInformation}" {$AuthorizedSystemInformation}>authorized_for_system_information<br />
-
-<input type="checkbox" name="AuthorizedConfigurationInformation" {$AuthorizedConfigurationInformationACL} value="{$AuthorizedConfigurationInformation}" {$AuthorizedConfigurationInformation}>authorized_for_configuration_information<br />
-
-<input type="checkbox" name="AuthorizedSystemCommands" {$AuthorizedSystemCommandsACL} value="{$AuthorizedSystemCommands}" {$AuthorizedSystemCommands}>authorized_for_system_commands<br />
-
-<input type="checkbox" name="AuthorizedAllServices" {$AuthorizedAllServicesACL} value="{$AuthorizedAllServices}" {$AuthorizedAllServices}>authorized_for_all_services<br />
-
-<input type="checkbox" name="AuthorizedAllHosts" {$AuthorizedAllHostsACL} value="{$AuthorizedAllHosts}" {$AuthorizedAllHosts}>authorized_for_all_hosts<br />
-
-<input type="checkbox" name="AuthorizedAllServiceCommands" {$AuthorizedAllServiceCommandsACL} value="{$AuthorizedAllServiceCommands}" {$AuthorizedAllServiceCommands}>authorized_for_all_service_commands<br />
-
-<input type="checkbox" name="AuthorizedAllHostCommands" {$AuthorizedAllHostCommandsACL} value="{$AuthorizedAllHostCommands}" {$AuthorizedAllHostCommands}>authorized_for_all_host_commands<br />
 
 <input type="hidden" name="nagiosTab" value="nagiosTab">
 
