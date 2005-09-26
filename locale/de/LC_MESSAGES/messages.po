@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-09-24 15:03+0200\n"
+"PO-Revision-Date: 2005-09-26 11:22+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -7302,7 +7302,7 @@ msgstr "Profil"
 
 #: plugins/admin/fai/main.inc:38 plugins/admin/fai/main.inc:40
 msgid "Fully Automatic Installation"
-msgstr "vollautomatische Installation"
+msgstr "Automatische Installation"
 
 #: plugins/admin/fai/faiPartitionTable.tpl:32
 #: plugins/admin/fai/faiVariable.tpl:32 plugins/admin/fai/faiScript.tpl:32
@@ -7340,7 +7340,7 @@ msgstr "Zeige nur Klassen mit Skripten"
 
 #: plugins/admin/fai/faiProfileEntry.tpl:41
 msgid "Show only classes with hooks"
-msgstr "Zeige nur Klassen mit Haltepunkten"
+msgstr "Zeige nur Klassen mit Hooks"
 
 #: plugins/admin/fai/faiProfileEntry.tpl:43
 msgid "Show only classes with variables"
@@ -7428,7 +7428,7 @@ msgstr "Neue Klassen-Namen anf�gen"
 #: plugins/admin/fai/class_faiProfile.inc:147
 #: plugins/admin/fai/class_faiProfileEntry.inc:113
 msgid "Hook bundle"
-msgstr "Haltepunkt-Gruppe"
+msgstr "Hook-Gruppe"
 
 #: plugins/admin/fai/class_faiProfile.inc:148
 #: plugins/admin/fai/class_faiProfileEntry.inc:114
@@ -7608,7 +7608,7 @@ msgstr "Zeige Skripte"
 
 #: plugins/admin/fai/headpage.tpl:39
 msgid "Show hooks"
-msgstr "Zeige Haltepunkte"
+msgstr "Zeige Hooks"
 
 #: plugins/admin/fai/headpage.tpl:40
 msgid "Show variables"
@@ -7646,7 +7646,7 @@ msgstr "Paket-Gruppe"
 
 #: plugins/admin/fai/faiHookEntry.tpl:29
 msgid "Hook attributes"
-msgstr "Haltepunkt-Attribute"
+msgstr "Hook-Attribute"
 
 #: plugins/admin/fai/faiHookEntry.tpl:44
 msgid "Task"
@@ -7670,7 +7670,7 @@ msgstr "Erstelle neues FAI-Objekt - Variablen-Gruppe"
 
 #: plugins/admin/fai/class_askClassName.inc:72
 msgid "Create new FAI object - hook bundle."
-msgstr "Erstelle neues FAI-Objekt - Haltepunkt-Gruppe"
+msgstr "Erstelle neues FAI-Objekt - Hook-Gruppe"
 
 #: plugins/admin/fai/class_askClassName.inc:73
 msgid "Create new FAI object - profile."
@@ -7766,7 +7766,7 @@ msgstr "Liste der Hook-Skripte"
 
 #: plugins/admin/fai/faiHook.tpl:40
 msgid "Choose a hook to delete or edit"
-msgstr "W�hlen Sie einen Haltepunkt zum Entfernen oder Bearbeiten"
+msgstr "W�hlen Sie einen Hook zum Entfernen oder Bearbeiten"
 
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:25
 msgid "Phone macros"
@@ -9759,7 +9759,7 @@ msgstr ""
 #~ msgstr "Variablen-Gruppe"
 
 #~ msgid "This partition table contains following disks"
-#~ msgstr "Diese Partitionstabelle enthÃ€lt die folgenden Festplatten"
+#~ msgstr "Diese Partitionstabelle enthÃâ¬lt die folgenden Festplatten"
 
 #~ msgid "Abort"
 #~ msgstr "Abbrechen"
@@ -9768,20 +9768,20 @@ msgstr ""
 #~ msgstr "Nr"
 
 #~ msgid "Please enter a valid name for partition %s."
-#~ msgstr "Bitte geben Sie einen gÃŒltigen Namen fÃŒr die Partition %s an."
+#~ msgstr "Bitte geben Sie einen gÃÅltigen Namen fÃÅr die Partition %s an."
 
 #~ msgid "please enter a unique name for partition %s"
-#~ msgstr "Bitte geben Sie einen eindeutigen Namen fÃŒr die Partition %s ein."
+#~ msgstr "Bitte geben Sie einen eindeutigen Namen fÃÅr die Partition %s ein."
 
 #~ msgid ""
 #~ "Size settings for partition %s, overlap with size settings for partition %"
 #~ "s."
 #~ msgstr ""
-#~ "Die GrÃ¶Ãeneinstellungen fÃŒr Partition %s ÃŒberlappt mit den "
-#~ "GrÃ¶Ãeneinstellungen der Partition %s."
+#~ "Die GrÃÂ¶ÃÂeneinstellungen fÃÅr Partition %s ÃÅberlappt mit den "
+#~ "GrÃÂ¶ÃÂeneinstellungen der Partition %s."
 
 #~ msgid "Choose a disc name"
-#~ msgstr "WÃ€hlen Sie einen Festplatten-Namen"
+#~ msgstr "WÃâ¬hlen Sie einen Festplatten-Namen"
 
 #~ msgid "cancel"
 #~ msgstr "Abbrechen"
@@ -9790,13 +9790,13 @@ msgstr ""
 #~ msgstr "Anzahl der Partitionen"
 
 #~ msgid "This bundle contains the following objects"
-#~ msgstr "Diese Gruppe enthÃ€lt die folgenden Objekte"
+#~ msgstr "Diese Gruppe enthÃâ¬lt die folgenden Objekte"
 
 #~ msgid ""
 #~ "Please select a class name for this object. The class name specifies a "
 #~ "set of configurations."
 #~ msgstr ""
-#~ "Bitte geben Sie einen Klassen-Namen fÃŒr dieses Objekt ein. Der Klassen-"
+#~ "Bitte geben Sie einen Klassen-Namen fÃÅr dieses Objekt ein. Der Klassen-"
 #~ "Name beschreibt eine Gruppe von Konfigurationen."
 
 #~ msgid ""
@@ -9804,7 +9804,7 @@ msgstr ""
 #~ "at the same time.<br/>If you use this class name in a profile, all object "
 #~ "with this class name will be included to this profile."
 #~ msgstr ""
-#~ "Jeder Klassen-Name muss eindeutig sein, jedoch kann er fÃŒr verschiedene "
+#~ "Jeder Klassen-Name muss eindeutig sein, jedoch kann er fÃÅr verschiedene "
 #~ "Objekte zur gleichen Zeit genutzt werden.<br/>Wenn Sie diesen Klassen-"
 #~ "Namen in einem Profil nutzen, werden alle Objekte mit diesem Klassen-"
 #~ "Namen im Profil enthalten sein."
@@ -9813,21 +9813,21 @@ msgstr ""
 #~ "The list box below shows all available class names you may use, for this "
 #~ "object, to avoid duplicates."
 #~ msgstr ""
-#~ "Die Listenbox unten enthÃ€lt alle verfÃŒgbaren Klassen-Namen, die sie "
-#~ "fÃŒr dieses Objekt verwenden kÃ¶nnen, um Duplikate zu vermeiden."
+#~ "Die Listenbox unten enthÃâ¬lt alle verfÃÅgbaren Klassen-Namen, die sie "
+#~ "fÃÅr dieses Objekt verwenden kÃÂ¶nnen, um Duplikate zu vermeiden."
 
 #~ msgid "You can select of one the following class names for this object."
 #~ msgstr ""
-#~ "Sie kÃ¶nnen einen der folgenden Klassen-Namen fÃŒr dieses Objekt auswÃ"
-#~ "€hlen."
+#~ "Sie kÃÂ¶nnen einen der folgenden Klassen-Namen fÃÅr dieses Objekt auswÃ"
+#~ "â¬hlen."
 
 #~ msgid "Available class names."
-#~ msgstr "VerfÃŒgbare Klassen-Namen"
+#~ msgstr "VerfÃÅgbare Klassen-Namen"
 
 #~ msgid "Please enter your class name here, if want to create a new class."
 #~ msgstr ""
 #~ "Bitte geben Sie Ihren neuen Klassen-Namen an, wenn Sie eine neue Klasse "
-#~ "erstellen mÃ¶chten."
+#~ "erstellen mÃÂ¶chten."
 
 #~ msgid " "
 #~ msgstr " "
