@@ -534,7 +534,7 @@ class phoneAccount extends plugin
       // Perform queries ...
       foreach($SQL as $query){
         if(!@mysql_query($query,$r_con)){
-          print_red(_("Error while performing query:")." ".mysql_error()));
+          print_red(_("Error while performing query:")." ".mysql_error());
           return false;
         }
       }
