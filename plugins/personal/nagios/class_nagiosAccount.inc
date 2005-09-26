@@ -135,7 +135,7 @@ class nagiosAccount extends plugin
   function save_object()
   {
 
-    if (isset($_POST['mailTab'])){
+    if (isset($_POST['nagiosTab'])){
       /* Save ldap attributes */
       plugin::save_object();
     }
