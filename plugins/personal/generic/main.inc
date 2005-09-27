@@ -158,7 +158,7 @@ if (!$remove_lock){
       $display.= "<input type=submit name=\"edit_finish\" value=\""._("Finish")."\">\n";
       $display.= "&nbsp;";
       $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
-      $display.="<script language='javascript'>
+      $display.="<script language='javascript'>";
 
       $info= "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png').
              "\"> ".$ui->dn."&nbsp;";
