@@ -220,6 +220,11 @@ class macro extends plugin
         // Remove  spaces 
         $s_linestr = trim ( $s_linestr);
 
+        // Skip empty lines
+        if ($s_linestr == ""){
+          continue;
+        }
+
         // If not empty or linebreak at [0]
         if((!empty($s_linestr))&&($s_linestr[0]!=";")&&(ord($s_linestr[0]) !=13)){
   
