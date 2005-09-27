@@ -31,13 +31,26 @@ Things to fix before 2.4:
   - Make templates uploadable
   - Re-implement profile management, divlists look pretty ugly here
   - Re-implement "new" functionality
+  - FSoptions needed?
 
 * Phone account
   - Errors while saving phone numbers with spaces
+  - Errors when phone account is diabled and a user is saved
 
 * Password changing for workstations doesn't work anymore
 
 * Add function to get GOto application templates -> filled variables, etc.
+
+* Removing of servers produces error messages
+
+* Creating servers produces PHP error messages
+
+* Disabling error messages doesn't work
+
+* Phoneaccount -> defaults + auto fill
+
+* Saving of initially created gofon stuff fails
+
 
 
 Target for 2.5:
