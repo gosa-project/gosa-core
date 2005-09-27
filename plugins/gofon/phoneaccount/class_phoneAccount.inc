@@ -133,7 +133,9 @@ class phoneAccount extends plugin
         }
 
         /* Parse macro data, unset count for parameterarrays  */
-        unset($attrs['goFonMacroParameter']['count']);
+        if (isset($attrs['goFonMacroParameter']['count'])){
+          unset($attrs['goFonMacroParameter']['count']);
+        }
 
         /* Go through available parameters and parse all attributes, like parametername, type, default ...*/
         if((isset($attrs['goFonMacroParameter']))&&(is_array($attrs['goFonMacroParameter']))){
