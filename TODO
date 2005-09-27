@@ -51,7 +51,13 @@ Things to fix before 2.4:
 
 * Saving of initially created gofon stuff fails
 
+* Unterbäume in Applicatins wird nicht angezeigt
 
+* Terminals/Workstations lassen sich nicht speichern
+
+* Basis wird bei diversen Dialogen nicht übernommen
+
+* Workstation is defekt
 
 Target for 2.5:
 ===============
