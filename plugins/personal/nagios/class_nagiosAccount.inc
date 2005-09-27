@@ -94,8 +94,20 @@ class nagiosAccount extends plugin
         return($display);
 	    }
 	  }
+	  
+    foreach(array("NagiosAlias", "NagiosPager", "NagiosMail", "HostNotificationPeriod",
+                  "ServiceNotificationPeriod", "HostNotificationCommands", "ServiceNotificationCommands",
+                  "HostNotificationOptions", "ServiceNotificationOptions", "AuthorizedAllHosts", "AuthorizedAllServices",
+                  "AuthorizedSystemCommands", "AuthorizedAllHostCommands", "AuthorizedAllServiceCommands",
+                  "AuthorizedConfigurationInformation", "AuthorizedSystemInformation") as $val) {
+
+    $smarty->assign("$val", $this->$val);
+    $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
+    }
+
     	$display.= $smarty->fetch (get_template_path('nagios.tpl', TRUE, dirname(__FILE__)));
 	    return ($display);
+
   }
 
   /* Save to LDAP */
