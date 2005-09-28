@@ -1,7 +1,7 @@
 <?
 /*
  * This code is part of GOsa (https://gosa.gonicus.de)
- * Copyright (C) 2003 Cajus Pollmeier
+ * Copyright (C) 2005 Jan Wenzel
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -57,16 +57,15 @@ function cmd_test_functions($path) {
  */
 function test_defined_functions($path="",$pattern="",$skip_dirs="") {
   global $debug,$verbose;
+  $verbose= true;
 
-  // Check for empty parameters
+  // Check for empty parameters. If empty, set default.
   if(strlen($path)==0) {
     $path= "./";
   }
-  
   if(strlen($pattern)==0) {
     $pattern= "/.+\.(php[34]?$)|(inc$)/";
   }
-
   if(strlen($skip_dirs)==0) {
     $skip_dirs= ".svn";
   }
@@ -74,9 +73,9 @@ function test_defined_functions($path="",$pattern="",$skip_dirs="") {
   // Create file-list
   $array= read_php_files($path,$pattern,$skip_dirs);
 
+  // Needed arrays
   $functions= array();
-  // We need to add our own method here, cause PHP doesn't scan 'itself' :-(
-  $user_functions= array('test_defined_functions');
+  $user_functions= array();
   
   // Scan files for used defined functions
   foreach($array as $file) {
@@ -144,8 +143,7 @@ function test_functions($path="",$pattern="",$skip_dirs="") {
   }
 
   $functions= array();
-  // We need to add our own method here, cause PHP doesn't scan 'itself' :-(
-  $user_functions= array('test_functions');
+  $user_functions= array();
   $invalid_functions= array();
   
   if($debug || $verbose) {
@@ -200,15 +198,20 @@ function test_functions($path="",$pattern="",$skip_dirs="") {
 }
 
 /**
+ * Reads $path for files matching $pattern but not in $skip_dirs.
+ * @param $path Path to search for files in (default: "./")
+ * @param $pattern RegEx-Pattern for matching PHP-Files (default: "/.+\.(php[34]?$)|(inc$)/")
+ * @param $skip_dirs RegEx-Pattern for directories to ignore (default: ".svn")
  * @return array of content from PHP-Files scanned
  */
 function read_php_files($path,$pattern,$skip_dirs) {
+  global $debug,$verbose;
   $result= array();
   
   if(is_file($path)) {
     $file= $path;
-
-    $php_content= "";
+    
+    $php_content="";
     
     // Open Filehandle to process
     $fh= popen("`which php` -w $file", 'r');
@@ -256,6 +259,9 @@ function filter_meta_functions ($function) {
   return $result;
 }
 
+/**
+ * @return true if $function is a known php-function, false otherwise
+ */
 function check_function($function) {
   $result= false;
   if(is_keyword($function)) {
@@ -277,7 +283,7 @@ function is_meta_function($function) {
   return(in_array($function,$meta_functions));
 }
 
-/** @return true if $param is keyword, false otherwise */
+/** @return true if $function is keyword, false otherwise */
 function is_keyword($function) {
   $keywords= array(
      "if","else","elseif","while","do","case",
@@ -287,9 +293,13 @@ function is_keyword($function) {
     "try","catch"
   );
 
-    return(in_array($function,$keywords));
+  return(in_array($function,$keywords));
 }
 
+/**
+ * @param $string PHP-Code
+ * @return array of called functions
+ */
 function extract_php_functions($string) {
   // Function names have to be A-z or _ for the first letter
   // plus 0-9, +, - for the following letters
@@ -308,8 +318,9 @@ function extract_php_functions($string) {
   array_shift($result);
 
 
-  // We need to check if "function" is actual a class created by new operator
-  // negative lookbehind isn't possible with php yet
+  // We need to check if "function" is actual a class created by new operator,
+  // but negative lookbehind isn't possible with php yet.
+  // So we must scan the array again and remove the found keys later (not while we're walking through).
   $classes= array();
   foreach($result[0] as $key => $function) {
     $match= array();
@@ -332,9 +343,9 @@ function extract_php_functions($string) {
 }
 
 /**
- * Extracts function-calls in php-code
- * @param $string php-code to extract function calls from
- * @return array of functions called
+ * Extracts function-definitions from php-code
+ * @param $string php-code to extract function definitions from
+ * @return array of functions defined
  */
 function extract_user_functions($string) {
   $rx_name="[A-Za-z_][A-Za-z0-9_+-]*";
@@ -369,11 +380,12 @@ function get_php_code($string) {
 }
 
 /**
+ * Removes all double and single quotes strings from sourcecode.
  * Returns 'print ();' for 'print ("hello world!\n");'
  * AND:
- * Returns '$message= sprintf(_()...); for
- *  $message= sprintf(_("Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist.")...);
- * Note the "doesn't"
+ * Returns '$message= sprintf(_()$foo,$bar); for
+ *  $message= sprintf(_("Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist.")$foo,$bar);
+ * (Note the "doesn't")
  * @param $string code with strings
  * @return code with strings removed
  */
@@ -425,7 +437,7 @@ function remove_strings($string) {
 }
 
 /** 
- * Iteratively scans directory $dir for files (filenames) matching regular expression $pattern
+ * Scans directory $dir for files (filenames) matching regular expression $pattern
  * @param $dir Initial Directory to start scan
  * @param $pattern Regex-Pattern to match on files to scan
  * @param $skip_dirs Regex-Patten to match on directories to skip
@@ -452,6 +464,9 @@ function list_directory($dir, $pattern, $skip_dirs) {
   return $file_list;
 }
 
+/**
+ * 'Flats' a multi-dimensional array. Keys are newly (incrementally) created by PHP.
+ */
 function array_values_recursive($array) {
   $arrayValues = array();
   
