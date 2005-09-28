@@ -39,7 +39,7 @@ install-stamp:
 	-gzip -c9 Changelog > debian/gosa/usr/share/doc/gosa/changelog.gz
 	-cp AUTHORS TODO README FAQ README.safemode DEVEL debian/gosa/usr/share/doc/gosa/
 	-rm debian/gosa/usr/share/gosa/README debian/gosa/usr/share/gosa/INSTALL
-	-rm debian/gosa/usr/share/gosa/README.openxchange debian/gosa/usr/share/gosa/README.safemode
+	-rm debian/gosa/usr/share/gosa/README.safemode
 	-rm debian/gosa/usr/share/gosa/AUTHORS debian/gosa/usr/share/gosa/Changelog
 	-rm debian/gosa/usr/share/gosa/DEVEL
 	-rm debian/gosa/usr/share/gosa/COPYING debian/gosa/usr/share/gosa/TODO
