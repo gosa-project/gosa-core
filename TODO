@@ -51,19 +51,15 @@ Things to fix before 2.4:
 
 * Saving of initially created gofon stuff fails
 
-<<<<<<< .mine
 * %telephoneNumber is not filled
-=======
+
 * Unterbäume in Applicatins wird nicht angezeigt
->>>>>>> .r1434
 
-<<<<<<< .mine
 * lifetime must be numeric - wirklich toll
-=======
-* Terminals/Workstations lassen sich nicht speichern
->>>>>>> .r1434
 
-<<<<<<< .mine
+* Terminals/Workstations lassen sich nicht speichern
+
+* Escapen von Skripten ist sehr suboptimal
 
 
 =======
@@ -71,7 +67,7 @@ Things to fix before 2.4:
 
 * Workstation is defekt
 
->>>>>>> .r1434
+
 Target for 2.5:
 ===============
 
