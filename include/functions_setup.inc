@@ -291,49 +291,79 @@ function perform_php_checks(&$faults)
 
   $msg.= check (	$faults, _("Checking for ldap module"),
       _("This is the main module used by GOsa and therefore really required."),
-      function_exists('ldap_bind'));
+      is_callable('ldap_bind'));
 
   $msg.= check (  $faults, _("Checking for XML functions"),
       _("XML functions are required to parse the configuration file."),
-      function_exists('xml_parser_create'));
+      is_callable('xml_parser_create'));
 
   $msg.= check (	$faults, _("Checking for gettext support"),
-      _("Gettext support is required for internationalized GOsa."), function_exists('bindtextdomain'));
+      _("Gettext support is required for internationalized GOsa."),
+      is_callable('bindtextdomain'));
 
   $msg.= check (	$faults, _("Checking for iconv support"),
       _("This module is used by GOsa to convert samba munged dial informations and is therefore required."),
-      function_exists('iconv'));
+      is_callable('iconv'));
 
   $msg.= check (	$faults, _("Checking for mhash module"),
       _("To use SSHA encryption, you'll need this module. If you are just using crypt or md5 encryption, ignore this message. GOsa will run without it."),
-      function_exists('mhash'), FALSE);
+      is_callable('mhash'), FALSE);
 
   $msg.= check (	$faults, _("Checking for imap module"),
       _("The IMAP module is needed to communicate with the IMAP server. It gets status informations, creates and deletes mail users."),
-      function_exists('imap_open'));
+      is_callable('imap_open'));
 
   $msg.= check (	$faults, _("Checking for getacl in imap"),
       _("The getacl support is needed for shared folder permissions. The standard IMAP module is not capable of reading acl's. You need a recend PHP version for this feature."),
-      function_exists('imap_getacl'), FALSE);
+      is_callable('imap_getacl'), FALSE);
 
   $msg.= check (	$faults, _("Checking for mysql module"),
       _("MySQL support is needed for reading GOfax reports from databases."),
-      function_exists('mysql_query'), FALSE);
+      is_callable('mysql_query'), FALSE);
 
   $msg.= check (	$faults, _("Checking for cups module"),
       _("In order to read available printers from IPP protocol instead of printcap files, you've to install the CUPS module."),
-      function_exists('cups_get_dest_list'), FALSE);
+      is_callable('cups_get_dest_list'), FALSE);
 
   $msg.= check (	$faults, _("Checking for kadm5 module"),
       _("Managing users in kerberos requires the kadm5 module which is downloadable via PEAR network."),
-      function_exists('kadm5_init_with_password'), FALSE);
+      is_callable('kadm5_init_with_password'), FALSE);
 
   $msg.= check (  $faults, _("Checking for snmp Module"),
       _("Simple Network Management Protocol (SNMP) is required for client monitoring."),
-      function_exists('snmpget'), FALSE);
+      is_callable('snmpget'), FALSE);
+
   return ($msg);
 }
 
+function perform_additional_function_checks(&$faults) {
+  global $check_globals;
+
+  $faults= 0;
+  $msg= "";
+  $functions= array();
+  
+  $functions_list= '../include/functions_list.inc';
+
+  /* Make sure that we can read the file */
+  if(is_readable($functions_list)) {
+    /* Open filehandle */
+    $fh= fopen($functions_list,'rb');
+    if($fh!=null) {
+      $functions= eval(fread($fh,filesize($functions_list)));
+    }
+  }
+
+  /* Only print message, if function is not callable */
+  foreach($functions as $key => $fn_name) {
+    if(!is_callable($fn_name)) {
+      $msg.= check (  $faults, _(sprintf("Checking for optional function %s", $fn_name)),
+        _(sprintf("The function $fn_name is used by GOsa. There is no information if it's optional or required yet.",$fn_name)),
+        is_callable($fn_name), TRUE);
+    }
+  }
+  return $msg;
+}
 
 function perform_additional_checks(&$faults)
 {
