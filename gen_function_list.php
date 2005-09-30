@@ -20,16 +20,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/* This file builds a list of used php_functions in all files matching $pattern
- * (walks recursively through current directory but skips dirs matching $skip_dirs).
- *
- * 1. builds an array of filenames
- * 2. get contents from files
- * 2. fetches user defined functions using content
- * 3. fetches functions calls using content
- * 4. checks function calls for matching known functions
- */
-
 include('include/functions_test.inc');
 
 // Build Array of called functions
