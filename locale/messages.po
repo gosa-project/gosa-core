@@ -8501,14 +8501,14 @@ msgstr ""
 
 #: include/functions_setup.inc:373
 #, php-format
-msgid "Checking for function <b><a href='%s' target='_blank'>%s</a></b>"
+msgid "Checking for function <b>%s</b>"
 msgstr ""
 
 #: include/functions_setup.inc:374
 #, php-format
 msgid ""
-"The function <b><a href='%s' target='_blank'>%s</a></b> is used by GOsa. "
-"There is no information if it's optional or required yet."
+"The function <b>%s</b> is used by GOsa. There is no information if it's "
+"optional or required yet."
 msgstr ""
 
 #: include/functions_setup.inc:385
@@ -9092,11 +9092,10 @@ msgid ""
 "You can also use the new and more-advanced way of inspecting your PHP-"
 "installation. It will give you information about the exact function that "
 "could not be found (functions that could be found are not mentioned). This "
-"is useful if you know what you're doing.\n"
-" "
+"is useful if you know what you're doing."
 msgstr ""
 
-#: ihtml/themes/default/setup_introduction.tpl:20
+#: ihtml/themes/default/setup_introduction.tpl:19
 msgid "Toggle Show/Hide"
 msgstr ""
 
