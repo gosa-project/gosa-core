@@ -11,12 +11,12 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-09-30 12:49+0200\n"
+"PO-Revision-Date: 2005-09-30 15:28+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: contrib/gosa.conf:4
 msgid "My account"
@@ -9012,9 +9012,8 @@ msgstr ""
 "ben�tigt."
 
 #: include/functions_setup.inc:369
-#, fuzzy
 msgid "PHP detailed function inspection"
-msgstr "�berpr�fung des PHP-Setups"
+msgstr "Detaillierte �berpr�fung der verwendeten PHP-Funktionen"
 
 #: include/functions_setup.inc:385
 msgid "Checking for some additional programms"
@@ -9757,11 +9756,13 @@ msgid ""
 "could not be found (functions that could be found are not mentioned). This "
 "is useful if you know what you're doing.\n"
 " "
-msgstr ""
+msgstr "Sie k�nnen auch das detailliertere Verfahren zum �berpr�fen der PHP-Installation verwenden. Es zeigt "
+"Ihnen genau an, welche verwendete PHP-Funktion auf Ihrem Zielsystem nicht vorhanden ist, bzw. nicht "
+"aufgerufen werden kann. Diese Methode ist n�tzlich, wenn Sie genau wissen, was Sie tun."
 
 #: ihtml/themes/default/setup_introduction.tpl:20
 msgid "Toggle Show/Hide"
-msgstr ""
+msgstr "Zeige/Verstecke"
 
 #: ihtml/themes/default/setup_step4.tpl:100
 msgid ""
@@ -9774,7 +9775,7 @@ msgstr ""
 "aktivieren (dies kann jedoch ein Sicherheitsrisiko darstellen)."
 
 #~ msgid "Monitoring"
-#~ msgstr "Überwachung"
+#~ msgstr "Ãberwachung"
 
 #~ msgid "Nagios authorisation"
 #~ msgstr "Nagios-Berechtigung"
@@ -9814,7 +9815,7 @@ msgstr ""
 
 #~ msgid "This partition table contains following disks"
 #~ msgstr ""
-#~ "Diese Partitionstabelle enthÃÂÃ¢ÂÂ¬lt die folgenden Festplatten"
+#~ "Diese Partitionstabelle enthÃÂÃÂÃÂ¢ÃÂÃÂ¬lt die folgenden Festplatten"
 
 #~ msgid "Abort"
 #~ msgstr "Abbrechen"
@@ -9823,18 +9824,18 @@ msgstr ""
 #~ msgstr "Nr"
 
 #~ msgid "Please enter a valid name for partition %s."
-#~ msgstr "Bitte geben Sie einen gÃÂÃÂltigen Namen fÃÂÃÂr die Partition %s an."
+#~ msgstr "Bitte geben Sie einen gÃÂÃÂÃÂÃÂltigen Namen fÃÂÃÂÃÂÃÂr die Partition %s an."
 
 #~ msgid "please enter a unique name for partition %s"
-#~ msgstr "Bitte geben Sie einen eindeutigen Namen fÃÂÃÂr die Partition %s ein."
+#~ msgstr "Bitte geben Sie einen eindeutigen Namen fÃÂÃÂÃÂÃÂr die Partition %s ein."
 
 #~ msgid ""
 #~ "Size settings for partition %s, overlap with size settings for partition %"
 #~ "s."
-#~ msgstr "Die GrÃÂÃÂ¶ÃÂÃÂeneinstellungen fÃÂÃÂr Partition %s ÃÂÃÂberlappt mit den GrÃÂÃÂ¶ÃÂÃÂeneinstellungen der Partition %s."
+#~ msgstr "Die GrÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂeneinstellungen fÃÂÃÂÃÂÃÂr Partition %s ÃÂÃÂÃÂÃÂberlappt mit den GrÃÂÃÂÃÂÃÂ¶ÃÂÃÂÃÂÃÂeneinstellungen der Partition %s."
 
 #~ msgid "Choose a disc name"
-#~ msgstr "WÃÂÃ¢ÂÂ¬hlen Sie einen Festplatten-Namen"
+#~ msgstr "WÃÂÃÂÃÂ¢ÃÂÃÂ¬hlen Sie einen Festplatten-Namen"
 
 #~ msgid "cancel"
 #~ msgstr "Abbrechen"
@@ -9843,13 +9844,13 @@ msgstr ""
 #~ msgstr "Anzahl der Partitionen"
 
 #~ msgid "This bundle contains the following objects"
-#~ msgstr "Diese Gruppe enthÃÂÃ¢ÂÂ¬lt die folgenden Objekte"
+#~ msgstr "Diese Gruppe enthÃÂÃÂÃÂ¢ÃÂÃÂ¬lt die folgenden Objekte"
 
 #~ msgid ""
 #~ "Please select a class name for this object. The class name specifies a "
 #~ "set of configurations."
 #~ msgstr ""
-#~ "Bitte geben Sie einen Klassen-Namen fÃÂÃÂr dieses Objekt ein. Der Klassen-Name beschreibt eine Gruppe von "
+#~ "Bitte geben Sie einen Klassen-Namen fÃÂÃÂÃÂÃÂr dieses Objekt ein. Der Klassen-Name beschreibt eine Gruppe von "
 #~ "Konfigurationen."
 
 #~ msgid ""
@@ -9857,25 +9858,25 @@ msgstr ""
 #~ "at the same time.<br/>If you use this class name in a profile, all object "
 #~ "with this class name will be included to this profile."
 #~ msgstr ""
-#~ "Jeder Klassen-Name muss eindeutig sein, jedoch kann er fÃÂÃÂr verschiedene Objekte zur gleichen Zeit genutzt werden.<br/>Wenn Sie "
+#~ "Jeder Klassen-Name muss eindeutig sein, jedoch kann er fÃÂÃÂÃÂÃÂr verschiedene Objekte zur gleichen Zeit genutzt werden.<br/>Wenn Sie "
 #~ "diesen Klassen-Namen in einem Profil nutzen, werden alle Objekte mit "
 #~ "diesem Klassen-Namen im Profil enthalten sein."
 
 #~ msgid ""
 #~ "The list box below shows all available class names you may use, for this "
 #~ "object, to avoid duplicates."
-#~ msgstr "Die Listenbox unten enthÃÂÃ¢ÂÂ¬lt alle verfÃÂÃÂgbaren Klassen-Namen, die sie fÃÂÃÂr dieses Objekt verwenden kÃÂÃÂ¶nnen, um Duplikate zu vermeiden."
+#~ msgstr "Die Listenbox unten enthÃÂÃÂÃÂ¢ÃÂÃÂ¬lt alle verfÃÂÃÂÃÂÃÂgbaren Klassen-Namen, die sie fÃÂÃÂÃÂÃÂr dieses Objekt verwenden kÃÂÃÂÃÂÃÂ¶nnen, um Duplikate zu vermeiden."
 
 #~ msgid "You can select of one the following class names for this object."
-#~ msgstr "Sie kÃÂÃÂ¶nnen einen der folgenden Klassen-Namen fÃÂÃÂr dieses Objekt auswÃÂÃ¢ÂÂ¬hlen."
+#~ msgstr "Sie kÃÂÃÂÃÂÃÂ¶nnen einen der folgenden Klassen-Namen fÃÂÃÂÃÂÃÂr dieses Objekt auswÃÂÃÂÃÂ¢ÃÂÃÂ¬hlen."
 
 #~ msgid "Available class names."
-#~ msgstr "VerfÃÂÃÂgbare Klassen-Namen"
+#~ msgstr "VerfÃÂÃÂÃÂÃÂgbare Klassen-Namen"
 
 #~ msgid "Please enter your class name here, if want to create a new class."
 #~ msgstr ""
 #~ "Bitte geben Sie Ihren neuen Klassen-Namen an, wenn Sie eine neue Klasse "
-#~ "erstellen mÃÂÃÂ¶chten."
+#~ "erstellen mÃÂÃÂÃÂÃÂ¶chten."
 
 #~ msgid " "
 #~ msgstr " "
