@@ -48,7 +48,7 @@ if(is_writable($file)) {
 	// Open filehandle
 	$fh= fopen($file,'w');
 	if($fh != null) {
-		fwrite($fh,"<?php\n".var_export($array,true)."\n?>");
+		fwrite($fh,"return(\n".var_export($array,true).");");
 		fclose($fh);
 	}
 }
