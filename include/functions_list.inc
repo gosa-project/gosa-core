@@ -249,7 +249,7 @@ array (
   246 => 'pg_exec',
   247 => 'pg_close',
   248 => 'pg_set_client_encoding',
-  249 => 'pg_freeresult',
+  249 => 'pg_free_result',
   250 => 'getdate',
   251 => 'is_uploaded_file',
   252 => 'ldap_start_tls',

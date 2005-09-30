@@ -336,6 +336,18 @@ function perform_php_checks(&$faults)
   return ($msg);
 }
 
+function get_link($function_name) {
+  $result= "http://de.php.net/manual/en/function.";
+
+  /* Replace all underscores with hyphens (phpdoc convention) */
+  $function_name= str_replace("_", "-", $function_name);
+
+  /* Append to base URL */
+  $result.= $function_name.'.php';
+
+  return $result;
+}
+
 function perform_additional_function_checks(&$faults) {
   global $check_globals;
 
@@ -354,12 +366,13 @@ function perform_additional_function_checks(&$faults) {
     }
   }
 
+  $msg.= "<h1>"._("PHP detailed function inspection")."</h1>";
   /* Only print message, if function is not callable */
   foreach($functions as $key => $fn_name) {
     if(!is_callable($fn_name)) {
-      $msg.= check (  $faults, _(sprintf("Checking for optional function %s", $fn_name)),
-        _(sprintf("The function $fn_name is used by GOsa. There is no information if it's optional or required yet.",$fn_name)),
-        is_callable($fn_name), TRUE);
+      $msg.= check (  $faults, _(sprintf("Checking for function <b><a href='%s' target='_blank'>%s</a></b>", get_link($fn_name), $fn_name)),
+        _(sprintf("The function <b><a href='%s' target='_blank'>%s</a></b> is used by GOsa. There is no information if it's optional or required yet.",get_link($fn_name),$fn_name)),
+        is_callable($fn_name), FALSE);
     }
   }
   return $msg;
@@ -612,6 +625,7 @@ function show_setup_page1($withoutput = true)
   $smarty = get_smarty();  
   $smarty->assign ("content", get_template_path('setup_introduction.tpl'));
   $smarty->assign ("tests", perform_php_checks($faults));
+  $smarty->assign ("detailed_tests", perform_additional_function_checks($faults));
 
   /* This var is true if anything went wrong */
   if ($faults){
