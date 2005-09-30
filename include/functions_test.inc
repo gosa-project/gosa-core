@@ -49,7 +49,7 @@ function cmd_test_functions($path) {
 }
 
 /**
- * Scans files in $path an checks for calls of functions.
+ * Scans files in $path and checks for calls of functions.
  * @param $path Path to search for files in (default: "./")
  * @param $pattern RegEx-Pattern for matching PHP-Files (default: "/.+\.(php[34]?$)|(inc$)/")
  * @param $skip_dirs RegEx-Pattern for directories to ignore (default: ".svn")
@@ -75,7 +75,9 @@ function test_defined_functions($path="",$pattern="",$skip_dirs="") {
 
   // Needed arrays
   $functions= array();
-  $user_functions= array();
+  
+  // We need to include our own function here, because PHP seems to lock the current executed function
+  $user_functions= array('test_defined_functions');
   
   // Scan files for used defined functions
   foreach($array as $file) {
@@ -108,7 +110,7 @@ function test_defined_functions($path="",$pattern="",$skip_dirs="") {
 }
 
 /**
- * Scans files in $path an checks for calls of functions that are undefined.
+ * Scans files in $path and checks for calls of functions that are undefined.
  * Edit $debug and $verbose to control output. Default is 'false' for both to disallow
  * console functionality.
  * @param $path Path to search for files in (default: "./")
@@ -260,7 +262,8 @@ function filter_meta_functions ($function) {
 }
 
 /**
- * @return true if $function is a known php-function, false otherwise
+ * Returns true if $function is a known php-function, false otherwise.
+ * @return true if $function is a known php-function, false otherwise.
  */
 function check_function($function) {
   $result= false;
@@ -274,7 +277,9 @@ function check_function($function) {
   return $result;
 }
 
-/** @return true if $function is meta-function, false otherwise */
+/** Returns true if $function is meta-function, false otherwise.
+ * @return true if $function is meta-function, false otherwise.
+ */
 function is_meta_function($function) {
   $meta_functions= array(
       "print","array","isset","exit","unset",
@@ -283,7 +288,9 @@ function is_meta_function($function) {
   return(in_array($function,$meta_functions));
 }
 
-/** @return true if $function is keyword, false otherwise */
+/** Returns true if $function is keyword, false otherwise.
+ * @return true if $function is keyword, false otherwise.
+ */
 function is_keyword($function) {
   $keywords= array(
      "if","else","elseif","while","do","case",
@@ -297,8 +304,9 @@ function is_keyword($function) {
 }
 
 /**
+ * Returns array of called functions.
  * @param $string PHP-Code
- * @return array of called functions
+ * @return array of called functions.
  */
 function extract_php_functions($string) {
   // Function names have to be A-z or _ for the first letter
@@ -362,7 +370,8 @@ function extract_user_functions($string) {
 }
 
 /**
- * @return php-code without <?php ... markers
+ * Returns php-code without <?php ... markers.
+ * @return php-code without <?php ... markers.
  */
 function get_php_code($string) {
   $array= array();
