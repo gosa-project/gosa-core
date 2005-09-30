@@ -337,13 +337,13 @@ function perform_php_checks(&$faults)
 }
 
 function get_link($function_name) {
-  $result= "http://de.php.net/manual/en/function.";
+  $result= "<a href='http://de.php.net/manual/en/function.";
 
   /* Replace all underscores with hyphens (phpdoc convention) */
   $function_name= str_replace("_", "-", $function_name);
 
   /* Append to base URL */
-  $result.= $function_name.'.php';
+  $result.= $function_name.".php'>$function_name</a>";
 
   return $result;
 }
@@ -370,9 +370,9 @@ function perform_additional_function_checks(&$faults) {
   /* Only print message, if function is not callable */
   foreach($functions as $key => $fn_name) {
     if(!is_callable($fn_name)) {
-      $msg.= check ($faults, sprintf(_("Checking for function <b><a href='%s' target='_blank'>%s</a></b>"), get_link($fn_name), $fn_name),
-        sprintf(_("The function <b><a href='%s' target='_blank'>%s</a></b> is used by GOsa. There is no information if it's optional or required yet."),get_link($fn_name),$fn_name),
-        is_callable($fn_name), FALSE);
+      $msg.= check ($faults, sprintf(_("Checking for function <b>%s</b>"), get_link($fn_name)),
+        sprintf(_("The function <b>%s</b> is used by GOsa. There is no information if it's optional or required yet."),get_link($fn_name)),
+        is_callable($fn_name), false);
     }
   }
   return $msg;

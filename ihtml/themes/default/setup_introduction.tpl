@@ -13,9 +13,8 @@
 </p>
 
 <p class="seperator">&nbsp;</p>
-<p>
- {t}You can also use the new and more-advanced way of inspecting your PHP-installation. It will give you information about the exact function that could not be found (functions that could be found are not mentioned). This is useful if you know what you're doing.
- {/t}
+<p style="width:90%;">
+ {t}You can also use the new and more-advanced way of inspecting your PHP-installation. It will give you information about the exact function that could not be found (functions that could be found are not mentioned). This is useful if you know what you're doing.{/t}
 </p>
 <button type='button' onClick='toggle("functionbox")'>{t}Toggle Show/Hide{/t}</button>
 <div id='functionbox' style='background-color:#ffffff;position:absolute; z-index:0; visibility:hidden'>
