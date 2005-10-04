@@ -139,6 +139,11 @@ class faiManagement extends plugin
 
 		}
 
+		if(isset($_GET['edit_entry'])){
+			$s_entry = $_GET['edit_entry'];
+			$s_action = "edit";
+		}
+
 		/* Confirm dialog 
 		 * Delte object 
          */
@@ -406,6 +411,8 @@ class faiManagement extends plugin
 		$action  = "<input type='image' src='images/edit.png' 	alt='"._("edit")."'   name='entry_edit_%KEY%' title='"._("Edit class")."'>";
 		$action .= "<input type='image' src='images/edittrash.png' alt='"._("delete")."' name='entry_delete_%KEY%' title='"._("Delete class")."'>";
 
+		$editlink ="<a href='?plug=".$_GET['plug']."&edit_entry=%KEY%'>%NAME%</a>"; 		
+
 		/* Attach objects */
 		foreach($this->objects as $key => $value){
 				$info= "";
@@ -476,7 +483,7 @@ class faiManagement extends plugin
 					}
 
 					$field1 = array("string" => $img , "attach" => "style='height:26px;width=20px;'");
-					$field2 = array("string" => $value['cn'].$desc , "attach" => "");
+					$field2 = array("string" => preg_replace(array("/%KEY%/","/%NAME%/"),array($key,$value['cn'].$desc),$editlink) , "attach" => "");
 					$field3 = array("string" => $info, "attach" => "");
 					$field4 = array("string" => preg_replace("/%KEY%/",$key,$action) , "attach"=>"style='text-align:right;border:none'");
 					$divlist->AddEntry(array($field1,$field2,$field3,$field4));

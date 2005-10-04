@@ -25,7 +25,6 @@ Things to fix before 2.4:
 
 * FAI management
   - Subtree support
-  - Add links for headpage list entries
   - Hooks have to be implemented like skripts
   - Add package lists
   - Make templates uploadable
