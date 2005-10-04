@@ -71,7 +71,8 @@ class servservice extends plugin
     /* Always is account... */
     $this->is_account= TRUE;
 
-    if(is_array($this->attrs['objectClass'])){ 
+    /* Check if goShareServer is defined */
+    if((isset($this->attrs['objectClass']))&&(is_array($this->attrs['objectClass']))){ 
       if(in_array("goShareServer",$this->attrs['objectClass'])){
         $this->goShareServer = true;    
       }

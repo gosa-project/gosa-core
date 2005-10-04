@@ -43,8 +43,6 @@ Things to fix before 2.4:
 
 * Removing of servers produces error messages
 
-* Creating servers produces PHP error messages
-
 * Disabling error messages doesn't work
 
 * Phoneaccount -> defaults + auto fill
