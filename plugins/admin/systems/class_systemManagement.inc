@@ -833,8 +833,8 @@ class systems extends plugin
     $res= get_list($this->ui->subtreeACL, "(|$termfilter)", FALSE, "ou=terminals,ou=systems,".$base, 
         array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE);
 
-    $res= get_list($this->ui->subtreeACL, "(|$termfilter)", FALSE, "ou=incoming,".$base, 
-        array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE);
+    $res= array_merge($res,get_list($this->ui->subtreeACL, "(|$termfilter)", FALSE, "ou=incoming,".$base, 
+        array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE));
 
     $res= array_merge($res,
           get_list($this->ui->subtreeACL, "(|$serverfilter)", FALSE, "ou=servers,ou=systems,".$base, 
@@ -992,7 +992,6 @@ class systems extends plugin
       $this->terminals[]=$val;
     }
     reset ($this->terminals);
-
   }
 
   function remove_lock()
