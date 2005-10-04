@@ -159,7 +159,11 @@ class faiScript extends plugin
     $a_return=array();
     foreach($this->SubObjects as $obj){
       if($obj['status'] != "delete"){
-        $a_return[$obj['cn']]= $obj['cn']." [".$obj['description']."]";
+        if((isset($obj['description']))&&(!empty($obj['description']))){
+          $a_return[$obj['cn']]= $obj['cn']." [".$obj['description']."]";
+        }else{
+          $a_return[$obj['cn']]= $obj['cn'];
+        }
       }
     }
     return($a_return);
@@ -194,7 +198,7 @@ class faiScript extends plugin
   {
     $message= array();
     $str = utf8_encode("üצה");
-    if((empty($this->description))||(preg_match("/[^a-z0-9".$str."\.,;:\-_\? ]/i",$this->description))){
+    if(preg_match("/[^a-z0-9".$str."\.,;:\-_\? ]/i",$this->description)){
       $message[]=_("Please enter a valid description.");
     }
     return ($message);
@@ -266,6 +270,9 @@ class faiScript extends plugin
         $ldap->modify($tmp);
         $this->handle_post_events("modify");
       }elseif($obj['status']=="new"){
+        if($tmp['description']==array()){
+          unset($tmp['description']);
+        }
         $ldap->cd($this->config->current['BASE']);
         $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
         $ldap->cd($sub_dn);
