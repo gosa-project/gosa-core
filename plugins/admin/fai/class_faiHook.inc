@@ -169,7 +169,11 @@ class faiHook extends plugin
     $a_return=array();
     foreach($this->SubObjects as $obj){
       if($obj['status'] != "delete"){
-        $a_return[$obj['cn']]= $obj['cn']." [".$obj['description']."]";
+        if((isset($obj['description']))&&(!empty($obj['description']))){
+          $a_return[$obj['cn']]= $obj['cn']." [".$obj['description']."]";
+        }else{
+          $a_return[$obj['cn']]= $obj['cn'];
+        }
       }
     }
     return($a_return);
@@ -204,7 +208,7 @@ class faiHook extends plugin
   {
     $message= array();
     $str = utf8_encode("üצה");
-    if((empty($this->description))||(preg_match("/[^a-z0-9".$str."\-.,;:_\? ]/i",$this->description))){
+    if((preg_match("/[^a-z0-9".$str."\-.,;:_\? ]/i",$this->description))){
       $message[]=_("Please enter a valid description.");
     }
     return ($message);
@@ -264,7 +268,7 @@ class faiHook extends plugin
       }    
 
       $tmp['objectClass'] = $this->subClasses;
-      
+
       $sub_dn = "cn=".$obj['cn'].",".$this->dn;
  
       if($obj['status'] == "delete"){

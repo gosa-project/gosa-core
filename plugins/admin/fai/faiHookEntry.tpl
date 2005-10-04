@@ -14,7 +14,7 @@
 					</tr>
 					<tr>
 						<td>
-							{t}Description{/t}{$must}&nbsp;
+							{t}Description{/t}&nbsp;
 						</td>
 						<td>
 							<input value="{$Object_description}" name="Object_description">

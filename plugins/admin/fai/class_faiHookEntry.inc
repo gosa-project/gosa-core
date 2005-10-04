@@ -82,10 +82,6 @@ class faiHookEntry extends plugin
 
     $str = utf8_encode("üצה");
 
-    if(empty($this->Object_description)){
-      $message[] = _("Please enter a description.");
-    }
-
     if(preg_match("/[^a-z0-9".$str."\.,;:\-_\? ]/i",$this->Object_description)){
       $message[] = _("Invalid character in description. Please enter a valid description.");
     }
