@@ -147,6 +147,10 @@ class servdb extends plugin
           $message[]= sprintf(_("The attribute '%s' is empty or contains invalid characters."), $attr);
         }
       }
+      /* goKrbPassword is a must field, if goKrbServer is used as objectClass */
+      if ($this->goKrbPassword == "" ){
+        $message[]= sprintf(_("The specified kerberos password is empty."), $attr);
+      }
     }
     if (in_array("goFaxServer", $this->objectclasses)){
       if ($this->goFaxAdmin == "" || preg_match("/ /", $this->goFaxAdmin)){
