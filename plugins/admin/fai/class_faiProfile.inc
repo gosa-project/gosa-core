@@ -205,10 +205,6 @@ class faiProfile extends plugin
   {
     $message= array();
     $str = utf8_encode("üצה");
-    if((empty($this->description))){
-      $message[] =_("Please specify a description for this profile.");
-    }
-
     if((preg_match("/[^a-z0-9".$str."\.,;:\-_\? ]/i",$this->description))){
       $message[]=_("Please enter a valid description.");
     }
