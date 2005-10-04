@@ -280,6 +280,9 @@ class faiHook extends plugin
         $ldap->modify($tmp);
         $this->handle_post_events("modify");
       }elseif($obj['status']=="new"){
+        if($tmp['description']==array()){
+          unset($tmp['description']);
+        }
         $ldap->cd($this->config->current['BASE']);
         $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $sub_dn));
         $ldap->cd($sub_dn);
