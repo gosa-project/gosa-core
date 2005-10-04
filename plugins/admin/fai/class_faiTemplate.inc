@@ -194,7 +194,7 @@ class faiTemplate extends plugin
   {
     $message= array();
     $str = utf8_encode("üצה");
-    if((empty($this->description))||(preg_match("/[^a-z0-9".$str."\.,;:\-_\? ]/i",$this->description))){
+    if((preg_match("/[^a-z0-9".$str."\.,;:\-_\? ]/i",$this->description))){
       $message[]=_("Please enter a valid description.");
     }
     return ($message);
@@ -264,6 +264,10 @@ class faiTemplate extends plugin
         $ldap->modify($tmp);
         $this->handle_post_events("modify");
       }elseif($obj['status']=="new"){
+
+        if($tmp['description']==array()){
+          unset($tmp['description']);
+        }
         $ldap->cd($this->config->current['BASE']);
         $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $sub_dn));
         $ldap->cd($sub_dn);

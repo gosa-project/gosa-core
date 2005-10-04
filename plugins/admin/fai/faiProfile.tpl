@@ -13,7 +13,7 @@
 	<tr>
 		<td>
 			<LABEL for="description">
-			{t}Description{/t}{$must}
+			{t}Description{/t}
 			</LABEL>
 		</td>
 		<td>
