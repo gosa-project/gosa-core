@@ -83,7 +83,7 @@ $smarty->compile_dir= '/var/spool/gosa';
 
 /* Check for compile directory */
 if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))){
-  print_red(_("Directory '%s' specified as smarty compile directory is not accessable, check existence and rigths of this directory!"), $smarty->compile_dir);
+  print_red(_("Directory '%s' specified as smarty compile directory is not accessible, please check existence and rights of this directory!"), $smarty->compile_dir);
   echo $_SESSION['errors'];
   exit();
 }
