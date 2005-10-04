@@ -159,11 +159,20 @@ class faiVariable extends plugin
     $a_return=array();
     foreach($this->SubObjects as $obj){
       if($obj['status'] != "delete"){
+
+        if((isset($obj['description']))&&(!empty($obj['description']))){
           if (preg_match("/\[\*\]/", $obj['description'])){
             $a_return[$obj['cn']]= $obj['cn']." [".preg_replace("/\s*\[\*\]\s*/", "", $obj['description'])."]";
           } else {
             $a_return[$obj['cn']]= $obj['cn']."=".$obj['FAIvariableContent']." [".$obj['description']."]";
           }
+        }else{
+          if (preg_match("/\[\*\]/", $obj['description'])){
+            $a_return[$obj['cn']]= $obj['cn'];
+          } else {
+            $a_return[$obj['cn']]= $obj['cn']."=".$obj['FAIvariableContent'];
+          }
+        }
       }
     }
     return($a_return);
@@ -198,7 +207,7 @@ class faiVariable extends plugin
   {
     $message= array();
     $str = utf8_encode("üצה");
-    if((empty($this->description))||(preg_match("/[^a-z0-9".$str."\.,;:\-_\? ]/i",$this->description))){
+    if(preg_match("/[^a-z0-9".$str."\.,;:\-_\? ]/i",$this->description)){
       $message[]=_("Please enter a valid description.");
     }
     return ($message);
@@ -270,6 +279,11 @@ class faiVariable extends plugin
         $ldap->modify($tmp);
         $this->handle_post_events("modify");
       }elseif($obj['status']=="new"){
+
+        if($tmp['description'] == array()){
+          unset($tmp['description']);
+        }
+
         $ldap->cd(preg_replace('/^[^,]+,[^,]+,/', '', $sub_dn));
         $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $sub_dn));
         $ldap->cd($sub_dn);

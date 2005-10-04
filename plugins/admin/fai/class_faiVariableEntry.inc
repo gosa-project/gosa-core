@@ -76,10 +76,6 @@ class faiVariableEntry extends plugin
       $message[]=_("Please specify a value for the attribute 'content'."); 
     }
    
-    if(empty($this->Object_description)){
-      $message[] = _("Please enter a description.");
-    }
-
     if(empty($this->Object_cn)){
       $message[] = _("Please enter a name.");
     }
