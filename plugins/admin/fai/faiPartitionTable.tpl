@@ -6,7 +6,7 @@
 					<tr>
 						<td>
 							<LABEL for="cn">
-							{t}Name{/t}
+							{t}Name{/t}{$must}
 							</LABEL>
 						</td>
 						<td>
@@ -16,7 +16,7 @@
 					<tr>
 						<td>
 							<LABEL for="description">
-							{t}Description{/t}{$must}
+							{t}Description{/t}
 							</LABEL>
 						</td>
 						<td>

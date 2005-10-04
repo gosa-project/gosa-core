@@ -299,12 +299,6 @@ class faiPartitionTableEntry extends plugin
   {
     $message= array();
    
-    /* Check descriptions 
-     */ 
-    if(empty($this->DISK_description)){
-      $message[] = _("Please enter a description for your disk.");
-    }
-
     /* check every partition.
      * if there is an invalid value defined, append an errorstr to message
      */

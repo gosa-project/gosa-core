@@ -9,7 +9,7 @@
 		</td>
 		<td><LABEL for="DISK_description">
 			&nbsp;{t}Description{/t}
-			</LABEL>{$must}&nbsp;
+			</LABEL>&nbsp;
 			<input value="{$DISK_description}" size=50 name="DISK_description" id="DISK_description">
 		</td>
 	</tr>

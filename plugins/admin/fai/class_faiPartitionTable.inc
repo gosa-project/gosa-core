@@ -254,7 +254,7 @@ class faiPartitionTable extends plugin
     $message= array();
 
     $str = utf8_encode("üצה");
-    if((empty($this->description))||(preg_match("/[^a-z0-9".$str."\.,;:\-_\? ]/i",$this->description))){
+    if(preg_match("/[^a-z0-9".$str."\.,;:\-_\? ]/i",$this->description)){
       $message[]=_("Please enter a valid description.");
     }
 
@@ -313,14 +313,20 @@ class faiPartitionTable extends plugin
       $disk_attrs['cn']           =  $disk['cn'];
       $disk_attrs['description']  =  $disk['description']; 
       $disk_attrs['objectClass']  =  array("top","FAIclass","FAIpartitionDisk");
-  
+ 
       if($disk['status'] == "delete"){
         $ldap->cd($disk_dn);
         $ldap->rmdir_recursive($disk_dn);
       }elseif($disk['status']== "edited"){
+        if(empty($disk_attrs['description'])){
+          $disk_attrs['description']=array();
+        }
         $ldap->cd($disk_dn);
         $ldap->modify($disk_attrs);
       }elseif($disk['status']== "new"){
+        if(empty($disk_attrs['description'])){
+          unset($disk_attrs['description']);
+        }
         $ldap->cd($this->config->current['BASE']);
         $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $disk_dn));
         $ldap->cd($disk_dn);
@@ -354,11 +360,17 @@ class faiPartitionTable extends plugin
           $ldap->cd($partition_dn);
           $ldap->rmdir_recursive($partition_dn);
         }elseif($partition['status'] == "new"){
+          if(empty($partition_attrs['description'])){
+            unset($partition_attrs['description']);
+          }
           $ldap->cd($this->config->current['BASE']);
           $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $partition_dn));
           $ldap->cd($partition_dn);
           $ldap->add($partition_attrs);
         }elseif($partition['status'] == "edited"){
+          if(empty($partition_attrs['description'])){
+            $partition_attrs['description']=array();
+          }
           $ldap->cd($partition_dn);
           $ldap->modify($partition_attrs);
         } 
