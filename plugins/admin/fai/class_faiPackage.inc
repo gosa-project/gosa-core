@@ -106,9 +106,6 @@ class faiPackage extends plugin
   {
     $message= array();
     $str = utf8_encode("üצה");
-    if((empty($this->description))){
-      $message[]=_("Please enter a valid description.");
-    } 
     if((preg_match("/[^a-z0-9".$str."\.,;:\-_\? ]/i",$this->description))){
       $message[]=_("Please enter a valid description.");
     }
