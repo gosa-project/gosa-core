@@ -195,28 +195,10 @@ Propriétés
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="5" columns="2">
+<lyxtabular version="3" rows="4" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Objets
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -316,28 +298,10 @@ Dans le cas d'une société possedant plusieurs départements sur des sites
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="6" columns="2">
+<lyxtabular version="3" rows="5" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Objets
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -352,11 +316,7 @@ Département
 
 \layout Standard
 
-
-\color red
-?
-\color default
- à nouveau donner le nom ?
+Nom du département
 \end_inset 
 </cell>
 </row>
@@ -374,11 +334,7 @@ Lieu
 
 \layout Standard
 
-
-\color red
-?
-\color default
- dans la société ?
+Endroit ou est situé le département
 \end_inset 
 </cell>
 </row>
@@ -396,9 +352,7 @@ Adresse
 
 \layout Standard
 
-Insérez l'adresse de la société ou du département 
-\color red
-?
+Insérez l'adresse du département
 \end_inset 
 </cell>
 </row>
@@ -416,9 +370,7 @@ Téléphone
 
 \layout Standard
 
-société ou département 
-\color red
-?
+Téléphone central du département
 \end_inset 
 </cell>
 </row>
@@ -436,7 +388,7 @@ Fax
 
 \layout Standard
 
-idem
+Fax central du département
 \end_inset 
 </cell>
 </row>
@@ -450,5 +402,4 @@ idem
 Références
 \layout Standard
 
-pas d'exemple dans GOsa
 \the_end

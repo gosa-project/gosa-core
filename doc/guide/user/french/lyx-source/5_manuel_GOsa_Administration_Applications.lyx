@@ -183,28 +183,10 @@ Informations générales
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="7" columns="2">
+<lyxtabular version="3" rows="6" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Objets 
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -212,6 +194,8 @@ Champs à remplir
 \layout Standard
 
 Nom de l'application
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -220,7 +204,7 @@ Nom de l'application
 \layout Standard
 
 obligatoire.
- Insérez le nom de l'application.
+ Indiquez le nom de l'application.
 \end_inset 
 </cell>
 </row>
@@ -231,6 +215,8 @@ obligatoire.
 \layout Standard
 
 Exécuter
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -239,9 +225,6 @@ Exécuter
 \layout Standard
 
 obligatoire.
- 
-\color red
-?
 \end_inset 
 </cell>
 </row>
@@ -279,9 +262,7 @@ Description
 
 \layout Standard
 
-
-\color red
-?
+Description de l'application
 \end_inset 
 </cell>
 </row>
@@ -299,8 +280,7 @@ Base
 
 \layout Standard
 
-obligatoire.
- Choisissez dans la liste déroulante le département associé à l'application.
+Choisissez dans la liste déroulante le département associé à l'application.
 \end_inset 
 </cell>
 </row>
@@ -373,28 +353,10 @@ Options
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="3" columns="2">
+<lyxtabular version="3" rows="2" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Objets
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -409,9 +371,7 @@ Variable
 
 \layout Standard
 
-
-\color red
-?
+Nom de la variable
 \end_inset 
 </cell>
 </row>
@@ -429,9 +389,7 @@ Valeur par défaut
 
 \layout Standard
 
-
-\color red
-?
+Valeurs par defaut asscociées à la variable
 \end_inset 
 </cell>
 </row>

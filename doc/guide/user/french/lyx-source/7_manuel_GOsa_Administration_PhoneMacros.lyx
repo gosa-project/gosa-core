@@ -86,7 +86,7 @@ La page est divisée en trois colonnes :
 - la première colonne est destinée à afficher les _,
 \layout Standard
 
-- la deuxième _____
+- la deuxième 
 \layout Standard
 
 - la troisième colonne contient les icônes qui sont les actions que l'on
@@ -179,28 +179,10 @@ Informations générales
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="6" columns="2">
+<lyxtabular version="3" rows="5" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Objets 
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -208,6 +190,8 @@ Champs à remplir
 \layout Standard
 
 Macro name
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -216,9 +200,7 @@ Macro name
 \layout Standard
 
 obligatoire.
- Insérez le nom _ 
-\color red
-?
+ Insérez le nom de la macro
 \end_inset 
 </cell>
 </row>

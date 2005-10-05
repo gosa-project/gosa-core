@@ -230,28 +230,10 @@ Informations personnelles
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="15" columns="2">
+<lyxtabular version="3" rows="14" columns="2">
 <features>
-<column alignment="block" valignment="top" leftline="true" width="5cm">
-<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Intitulés
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
+<column alignment="left" valignment="top" leftline="true" width="0">
+<column alignment="left" valignment="top" leftline="true" rightline="true" width="0">
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -479,10 +461,8 @@ Format de stockage des mots de passe
 
 \layout Standard
 
-Choix dans le menu déroulant entre crypt*; clear*; sha*; md5*; ssha*; smd5.
+Choix dans le menu déroulant entre crypt, clear, sha, md5, ssha, smd5.
  
-\color red
-?
 \end_inset 
 </cell>
 </row>
@@ -533,24 +513,6 @@ Kerberos
 
 \layout Standard
 
-*crypt :
-\layout Standard
-
-*clear :
-\layout Standard
-
-*sha :
-\layout Standard
-
-*md5 :
-\layout Standard
-
-*ssha :
-\layout Standard
-
-*smd5 :
-\layout Standard
-
 Vous pouvez aussi si vous le désirez agrémenter d'une photo le profil de
  l'utilisateur en cliquant sur le bouton 
 \shape italic 
@@ -566,28 +528,10 @@ Informations sur l'entreprise
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="14" columns="2">
+<lyxtabular version="3" rows="13" columns="2">
 <features>
 <column alignment="left" valignment="top" leftline="true" width="5cm">
 <column alignment="left" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Intitulés
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -846,28 +790,10 @@ Informations générales
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="6" columns="2">
+<lyxtabular version="3" rows="5" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Intitulés
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -1074,28 +1000,10 @@ Informations générales
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="5" columns="2">
+<lyxtabular version="3" rows="4" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Intitulés
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -1111,8 +1019,6 @@ Adresse principale
 \layout Standard
 
 obligatoire, insérez l'adresse email de l'utilisateur 
-\color red
-?
 \end_inset 
 </cell>
 </row>
@@ -1130,9 +1036,7 @@ Serveur
 
 \layout Standard
 
-Insérez le chemin vers le serveur 
-\color red
-?
+séléctionnez le serveur de l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -1150,9 +1054,6 @@ Utilisation des Quota
 
 \layout Standard
 
-non défini 
-\color red
-?
 \end_inset 
 </cell>
 </row>
@@ -1170,9 +1071,6 @@ Tailles des Quota
 
 \layout Standard
 
-
-\color red
-?
 \end_inset 
 </cell>
 </row>
@@ -1255,28 +1153,10 @@ Informations générales
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="5" columns="2">
+<lyxtabular version="3" rows="4" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Intitulés
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -1291,7 +1171,16 @@ Répertoire Home
 
 \layout Standard
 
-Indiquez le chemin du répertoire personnel de l'utilisateur
+Indiquez le chemin du répertoire personnel de l'utilisateur en notation
+ UNC ex: 
+\backslash 
+
+\backslash 
+SERVER
+\backslash 
+homes
+\backslash 
+user
 \end_inset 
 </cell>
 </row>
@@ -1369,28 +1258,10 @@ Serveur de terminal
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="3" columns="2">
+<lyxtabular version="3" rows="2" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Intitulés
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -1443,28 +1314,10 @@ Chemin du Profile
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="3" columns="2">
+<lyxtabular version="3" rows="2" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Intitulés
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -1535,7 +1388,7 @@ Connectivité
 \layout Standard
 
 L'administrateur peut afiner la gestion du compte de l'utilisateur en configuran
-t la manière dont il peut se connecter.
+t les services supplémentaires auquel il peut se connecter.
 \layout Subparagraph*
 
 Compte Proxy
@@ -1557,9 +1410,8 @@ Si vous activez le compte FTP, vous pouvez régler la bande passante montante
 Compte WebDAV
 \layout Standard
 
-
-\color red
-?
+Si vous activez le compte WebDav, l'utilisateur aura accès au serveur WebDAV
+ 
 \layout Subparagraph
 
 Compte PHPGroupware
@@ -1591,28 +1443,10 @@ Informations générales
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="4" columns="2">
+<lyxtabular version="3" rows="3" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Intitulés
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -1628,19 +1462,7 @@ Fax
 \layout Standard
 
 Obligatoire.
- Insérez le numéro de fax de
-\begin_inset Quotes erd
-\end_inset 
-
- l'utilisateur 
-\color red
-?
-\color default
- 
-\begin_inset Quotes eld
-\end_inset 
-
-
+ Insérez le numéro de fax de l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -1659,9 +1481,6 @@ Langue
 \layout Standard
 
 Cliquez pour voir apparaître la liste déroulante pour le choix de la langue
- ou du pays 
-\color red
-?
 \end_inset 
 </cell>
 </row>
@@ -1680,9 +1499,7 @@ Format de distribution
 \layout Standard
 
 Cliquez pour voir apparaître une liste déroulante qui donne le choix du
- format du fax à envoyer ou à réceptionner 
-\color red
-?
+ format de stockage des fax à envoyer ou à réceptionner 
 \end_inset 
 </cell>
 </row>
@@ -1696,19 +1513,7 @@ Cliquez pour voir apparaître une liste déroulante qui donne le choix du
 Méthodes de distribution
 \layout Itemize
 
-L'utilisation du fax peut être suspendu 
-\begin_inset Quotes eld
-\end_inset 
-
-temporairement
-\begin_inset Quotes erd
-\end_inset 
-
- 
-\color red
-?
-\color default
-.
+L'utilisation du fax peut être suspendu temporairement.
  
 \layout Itemize
 
@@ -1739,7 +1544,6 @@ Le fax est aujourd'hui fréquemment utilisé pour distribuer des messages
  Pour éviter que les utilisateurs soient submergés par ces messages, l'administr
 ateur peut instaurer une liste rouge reprenant les numéros de fax indésirables
  qu'ils soient entrant ou sortant.
- 
 \layout Standard
 
 En cliquant sur le bouton Edit vous faites apparaître une page avec du côté
@@ -1774,28 +1578,10 @@ Matériel téléphonique
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="4" columns="2">
+<lyxtabular version="3" rows="3" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Intitulés
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
