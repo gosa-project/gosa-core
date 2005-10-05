@@ -3,6 +3,7 @@
 /*! \brief   mail plugin
   \author  Guillame Delecourt <guillaume@opensides.be>
   \author  Benoit Mortier <benoit.mortier@opensides.be>
+  \author  Vincent Seynhaeve <vincent@opensides.be>  
   \version 1.00
   \date    25.09.2005
 
@@ -49,7 +50,7 @@ class nagiosAccount extends plugin
       "AuthorizedSystemCommands", "AuthorizedAllHostCommands", "AuthorizedAllServiceCommands",
       "AuthorizedConfigurationInformation", "AuthorizedSystemInformation");
 
-  var $objectclasses= array("nagiosContact");
+  var $objectclasses= array("nagiosContact","nagiosAuth");
 
   /* constructor, if 'dn' is set, the node loads the given
        'dn' from LDAP */
@@ -69,7 +70,7 @@ class nagiosAccount extends plugin
     /* Load templating engine */
     $smarty= get_smarty();
     $display= "";
-            
+
 	  /* Do we need to flip is_account state? */
 	  if (isset($_POST['modify_state'])){
 	    $this->is_account= !$this->is_account;
@@ -104,6 +105,12 @@ class nagiosAccount extends plugin
     $smarty->assign("$val", $this->$val);
     $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
     }
+    $smarty->assign('ServiceNotificationOptionsValues',array("d,u,r,v" ,"d,u,r" ,"d,u"));
+    $smarty->assign('HostNotificationOptionsValues',array("w,u,c,r" ,"w,u,c" ,"c,w"));
+
+
+    $smarty->assign('ServiceNotificationPeriodValues',array("24x7" ,"24x5" ,"8x5"));
+    $smarty->assign('HostNotificationPeriodValues',array("24x7" ,"24x5" ,"8x5"));
 
     	$display.= $smarty->fetch (get_template_path('nagios.tpl', TRUE, dirname(__FILE__)));
 	    return ($display);
@@ -122,8 +129,21 @@ class nagiosAccount extends plugin
     //$method= new $this->method($this->config);
     //$id= $method->uattrib;
     //$method->fixAttributesOnStore($this);
-                
 
+	$check="unchecked";
+	if(isset($_POST['AuthorizedSystemInformation'])){$check="checked";}$this->attrs['AuthorizedSystemInformation']=$check;
+	$check="unchecked";
+	if(isset($_POST['AuthorizedConfigurationInformation'])){$check="checked";}$this->attrs['AuthorizedConfigurationInformation']=$check;
+	$check="unchecked";
+	if(isset($_POST['AuthorizedSystemCommands'])){$check="checked";}$this->attrs['AuthorizedSystemCommands']=$check;
+	$check="unchecked";
+	if(isset($_POST['AuthorizedAllServices'])){$check="checked";}$this->attrs['AuthorizedAllServices']=$check;
+	$check="unchecked";
+	if(isset($_POST['AuthorizedAllHosts'])){$check="checked";}$this->attrs['AuthorizedAllHosts']=$check;
+	$check="unchecked";
+	if(isset($_POST['AuthorizedAllServiceCommands'])){$check="checked";}$this->attrs['AuthorizedAllServiceCommands']=$check;
+	$check="unchecked";
+	if(isset($_POST['AuthorizedAllHostCommands'])){$check="checked";}$this->attrs['AuthorizedAllHostCommands']=$check;
 	  /* Write back to ldap */
 	  $ldap->cd($this->dn);
 	  $ldap->modify($this->attrs);
@@ -142,6 +162,25 @@ class nagiosAccount extends plugin
 
   function check()
   {
+    $message= array();
+    $ldap= $this->config->get_ldap_link();
+    /* must: mail */
+    if ($this->NagiosAlias == ""){
+      $message[]= _("The required field 'NagiosAlias' is not set.");
+    }
+    if ($this->NagiosMail == ""){
+      $message[]= _("The required field 'NagiosMail' is not set.");
+    }
+    if ($this->is_template){
+      if (!is_email($this->NagiosMail, TRUE)){
+        $message[]= _("Please enter a valid email address in 'NagiosMail' field.");
+      }
+    } else {
+      if (!is_email($this->NagiosMail)){
+        $message[]= _("Please enter a valid email address in 'NagiosMail' field.");
+      }
+    }
+	return($message);
   }
   
   function save_object()
@@ -167,8 +206,8 @@ class nagiosAccount extends plugin
     plugin::remove_from_parent();
 
     /* Adapt attributes if needed */
-    $method= new $this->method($this->config);
-    $method->fixAttributesOnRemove($this);
+//     $method= new $this->method($this->config);
+//     $method->fixAttributesOnRemove($this);
     
 
     @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,

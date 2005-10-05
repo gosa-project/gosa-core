@@ -1,6 +1,6 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
-  <td style="width:50%; vertical-align:top;">
+  <td style="width:40%; vertical-align:top;">
    <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Nagios Account{/t}</h2>
    <table summary="">
     <tr>
@@ -9,46 +9,78 @@
     </tr>
 
     <tr>
-     <td><LABEL for="NagiosEmail">{t}email{/t}</LABEL>{$must}</td>
-     <td><input id="NagiosEmail" name="NagiosEmail" size=25 maxlength=65 {$NagiosEmailACL} value="{$NagiosEmail}"></td>
+     <td><LABEL for="NagiosMail">{t}email{/t}</LABEL>{$must}</td>
+     <td><input id="NagiosMail" name="NagiosMail" size=25 maxlength=65 {$NagiosMailACL} value="{$NagiosMail}"></td>
     </tr>
 
+	<tr>
+	<td><LABEL for="HostNotificationPeriod">{t}Host Notification Period{/t}</LABEL>{$must}</td>
+	<td><select name="HostNotificationPeriod" id="HostNotificationPeriod">
+	{html_options options=$HostNotificationPeriodValues values=$HostNotificationPeriodValues selected=$HostNotificationPeriod }
+	</select>
+	</td>
+	</tr>
+
+	<tr>
+	<td><LABEL for="ServiceNotificationPeriod">{t}Service Notification Period{/t}</LABEL>{$must}</td>
+	<td><select name="ServiceNotificationPeriod" id="ServiceNotificationPeriod">
+	{html_options options=$ServiceNotificationPeriodValues values=$ServiceNotificationPeriodValues selected=$ServiceNotificationPeriod}
+	</select>
+	</td>
+	</tr>
+	<tr>
+	<td><LABEL for="ServiceNotificationOptions">{t}Service Notification Options{/t}</LABEL>{$must}</td>
+	<td><select name="ServiceNotificationOptions" id="ServiceNotificationOptions">
+	{html_options options=$ServiceNotificationOptionsValues values=$ServiceNotificationOptionsValues selected=$ServiceNotificationOptions}
+	</select>
+	</td>
+	</tr>
+
+
+	<tr>
+	<td><LABEL for="HostNotificationOptions">{t}Host Notification Options{/t}</LABEL>{$must}</td>
+	<td><select name="HostNotificationOptions" id="HostNotificationOptions">
+	{html_options options=$HostNotificationOptionsValues values=$HostNotificationOptionsValues selected=$HostNotificationOptions }
+	</select>
+	</td>
+	</tr>
     <tr>
      <td><LABEL for="NagiosPager">{t}pager{/t}</LABEL></td>
      <td><input id="NagiosPager" name="NagiosPager" size=25 maxlength=65 {$NagiosPagerACL} value="{$NagiosPager}"></td>
     </tr>
 
     <tr>
-     <td><LABEL for="ServiceNotificationPeriod">{t}Service Notification Period{/t}</LABEL>{$must}</td>
-     <td><input id="ServiceNotificationPeriod" name="ServiceNotificationPeriod" size=25 maxlength=65 {$ServiceNotificationPeriodACL} value="{$ServiceNotificationPeriod}"></td>
+     <td><LABEL for="ServiceNotificationCommands">{t}Service Notification Commands{/t}</LABEL></td>
+     <td><input id="ServiceNotificationCommands" disabled name="ServiceNotificationCommands" size=25 maxlength=65 {$ServiceNotificationCommandsACL} value="{$ServiceNotificationCommands}"></td>
     </tr>
-
     <tr>
-     <td><LABEL for="ServiceNotificationOptions">{t}Service Notification Options{/t}</LABEL>{$must}</td>
-     <td><input id="ServiceNotificationOptions" name="ServiceNotificationOptions" size=25 maxlength=65 {$ServiceNotificationOptionsACL} value="{$ServiceNotificationOptions}"></td>
+     <td><LABEL for="HostNotificationCommands">{t}Host Notification Commands{/t}</LABEL></td>
+     <td><input id="HostNotificationCommands" disabled name="HostNotificationCommands" size=25 maxlength=65 {$HostNotificationCommandsACL} value="{$HostNotificationCommands}"></td>
     </tr>
+</table>
+</td>
+  <td style="border-left:1px solid #A0A0A0">
+   &nbsp;
+  </td>
+<td style="width:100%; vertical-align:top;">
+   <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Nagios Auth{/t}</h2>
+   <table summary="">
+	<input type="checkbox" name="AuthorizedSystemInformation" value="{$AuthorizedSystemInformation}"  {$AuthorizedSystemInformation}>{t}authorized_for_system_information{/t}<br />
+	
+	<input type="checkbox" name="AuthorizedConfigurationInformation" {$AuthorizedConfigurationInformationACL} value="{$AuthorizedConfigurationInformation}" {$AuthorizedConfigurationInformation}>authorized_for_configuration_information<br />
+	
+	<input type="checkbox" name="AuthorizedSystemCommands" {$AuthorizedSystemCommandsACL} value="{$AuthorizedSystemCommands}" {$AuthorizedSystemCommands}>authorized_for_system_commands<br />
+	
+	<input type="checkbox" name="AuthorizedAllServices" {$AuthorizedAllServicesACL} value="{$AuthorizedAllServices}" {$AuthorizedAllServices}>authorized_for_all_services<br />
+	
+	<input type="checkbox" name="AuthorizedAllHosts" {$AuthorizedAllHostsACL} value="{$AuthorizedAllHosts}" {$AuthorizedAllHosts}>authorized_for_all_hosts<br />
+	
+	<input type="checkbox" name="AuthorizedAllServiceCommands" {$AuthorizedAllServiceCommandsACL} value="{$AuthorizedAllServiceCommands}" {$AuthorizedAllServiceCommands}>authorized_for_all_service_commands<br />
+	
+	<input type="checkbox" name="AuthorizedAllHostCommands" {$AuthorizedAllHostCommandsACL} value="{$AuthorizedAllHostCommands}" {$AuthorizedAllHostCommands}>authorized_for_all_host_commands<br />
 
-    <tr>
-     <td><LABEL for="ServiceNotificationCommands">{t}Service Notification Commands{/t}</LABEL>{$must}</td>
-     <td><input id="ServiceNotificationCommands" name="ServiceNotificationCommands" size=25 maxlength=65 {$ServiceNotificationCommandsACL} value="{$ServiceNotificationCommands}"></td>
-    </tr>
-
-    <tr>
-     <td><LABEL for="HostNotificationPeriod">{t}Host Notification Period{/t}</LABEL>{$must}</td>
-     <td><input id="HostNotificationPeriod" name="HostNotificationPeriod" size=25 maxlength=65 {$HostNotificationPeriodACL} value="{$HostNotificationPeriod}"></td>
-    </tr>
-
-    <tr>
-     <td><LABEL for="HostNotificationOptions">{t}Host Notification Options{/t}</LABEL>{$must}</td>
-     <td><input id="HostNotificationOptions" name="HostNotificationOptions" size=25 maxlength=65 {$HostNotificationOptionsACL} value="{$HostNotificationOptions}"></td>
-    </tr>
-
-    <tr>
-     <td><LABEL for="HostNotificationCommands">{t}Host Notification Period{/t}</LABEL>{$must}</td>
-     <td><input id="HostNotificationCommands" name="HostNotificationCommands" size=25 maxlength=65 {$HostNotificationCommandsACL} value="{$HostNotificationCommands}"></td>
-    </tr>
-	</table>
-  
+   </table>
+</td>
 
 </table>
 

@@ -73,7 +73,7 @@ if (!$remove_lock){
     /* No errors, save object */
     if (count ($message) == 0){
       $nagiosAccount->save ();
-      gosa_log ("User/mail object'".$ui->dn."' has been saved");
+      gosa_log ("User/nagios object'".$ui->dn."' has been saved");
       $nagiosAccount->acl= "#none#";
       del_lock ($ui->dn);
       sess_del ('edit');
