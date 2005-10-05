@@ -824,7 +824,7 @@ class environment extends plugin
     /* Prepare HotPlug devices */
     $this->attrs['gotoHotplugDevice'] = array();
     foreach($this->gotoHotplugDevices as $name => $device){
-      $this->attrs['gotoHotplugDevice'][] = $device['name']."|".$device['description']."|".base64_encode($device['id']);
+      $this->attrs['gotoHotplugDevice'][] = $device['name']."|".$device['description']."|".$device['id'];
     }
 
     /* Prepare LogonScripts */
