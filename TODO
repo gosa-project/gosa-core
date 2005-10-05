@@ -38,8 +38,6 @@ Things to fix before 2.4:
 
 * Unterbäume in Applicatins wird nicht angezeigt (?)
 
-* lifetime must be numeric - wirklich toll
-
 * Terminals/Workstations lassen sich nicht speichern
 
 * Escapen von Skripten ist sehr suboptimal
