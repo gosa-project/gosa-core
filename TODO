@@ -26,6 +26,8 @@ Things to fix before 2.4:
 * FAI management
   - Add package lists
   - Re-implement profile management, divlists look pretty ugly here
+  - Description checks arn't necessary.
+  - Check base64_encoding/decoding is not needed everytime.
 
 * Phone account
   - Errors when phone account is diabled and a user is saved (?)
@@ -42,6 +44,7 @@ Things to fix before 2.4:
 
 * Escapen von Skripten ist sehr suboptimal
 
+* Group Dialog : Primary group chkbox is broken, nothing is shown if it is checked.
 
 =======
 * Basis wird bei diversen Dialogen nicht übernommen
