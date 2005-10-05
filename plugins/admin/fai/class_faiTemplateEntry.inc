@@ -49,6 +49,13 @@ class faiTemplateEntry extends plugin
       }
     
     }
+    
+    $status="<br>"._("No file uploaded");
+    if(strlen($this->Object_FAItemplateFile)){
+      $status="<br>".sprintf(_("File uploaded, size : %s byte"),strlen($this->Object_FAItemplateFile));
+    }
+    $smarty->assign("status",$status);
+
     foreach($this->attributes as $attrs){
       $smarty->assign($attrs,stripslashes($this->$attrs));
     }

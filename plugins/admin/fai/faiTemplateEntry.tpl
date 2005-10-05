@@ -37,6 +37,7 @@
 						<td>
 							<input type="file" name="FAItemplateFile" value="{$Object_FAItemplateFile}" id="Object_FAItemplateFile">
 							<input type="submit" value="{t}upload{/t}" name="TmpFileUpload">
+							 {$status}
 						</td>
 					</tr>
 					<tr>
