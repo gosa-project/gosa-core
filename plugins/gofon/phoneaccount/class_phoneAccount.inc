@@ -660,7 +660,9 @@ class phoneAccount extends plugin
               $string = preg_replace("/%telephoneNumber_".($i+1)."/i",$tmp[$i],$string);
             }
           }
-
+          if(isset($tmp[0])){
+            $string = preg_replace("/%telephoneNumber/i",$tmp[0],$string);
+          }
           $this->macroarray[$this->macro][$key]['choosen']=$string;
         }
       }
