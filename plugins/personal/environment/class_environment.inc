@@ -105,7 +105,7 @@ class environment extends plugin
         $tmp = split("\|",$device);
         $tmp2['name']        = $tmp[0]; 
         $tmp2['description'] = $tmp[1]; 
-        $tmp2['id']          = base64_decode($tmp[2]); 
+        $tmp2['id']          = $tmp[2]; 
         $this->gotoHotplugDevices[$tmp[0]]=$tmp2;
       }
     }
