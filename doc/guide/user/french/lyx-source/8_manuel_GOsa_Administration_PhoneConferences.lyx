@@ -1,0 +1,419 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass article
+\language frenchb
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize a4paper
+\paperpackage a4
+\use_geometry 1
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\leftmargin 10mm
+\topmargin 10mm
+\rightmargin 10mm
+\bottommargin 20mm
+\headheight 10mm
+\headsep 10mm
+\footskip 10mm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\bullet 0
+	1
+	20
+	-1
+\end_bullet
+\bullet 1
+	1
+	20
+	-1
+\end_bullet
+\bullet 2
+	1
+	20
+	-1
+\end_bullet
+\bullet 3
+	1
+	20
+	4
+\end_bullet
+
+\layout Title
+
+
+\series bold 
+ADMINISTRATION
+\layout Section
+
+Phone conferences
+\layout Standard
+
+L'administrateur peut configurer les phone conferences à partir du bouton
+ 
+\series bold 
+\color blue
+Phone conferences
+\series default 
+\color default
+ dans le menu de gauche dans la partie 
+\series bold 
+Administration
+\series default 
+.
+ La page 
+\family sans 
+Conference management
+\family default 
+ s'affiche.
+ 
+\layout Standard
+
+La page est divisée en quatre colonnes :
+\layout Standard
+
+- la première colonne est destinée à afficher les _,
+\layout Standard
+
+- la deuxième _____
+\layout Standard
+
+- la troisième _____
+\layout Standard
+
+- la dernière colonne contient les icônes qui sont les actions que l'on
+ peut executer sur ces _.
+\layout Standard
+
+Les flêches en entête ( 
+\begin_inset Graphics
+	filename images/list_back.png
+
+\end_inset 
+
+, 
+\begin_inset Graphics
+	filename images/list_root.png
+
+\end_inset 
+
+, 
+\begin_inset Graphics
+	filename images/list_home.png
+
+\end_inset 
+
+ ) servent à modifier l'affichage selon le département.
+ Ces icônes prédominent sur toutes autres formes de séléction d'affichage.
+ 
+\layout Standard
+\added_space_top medskip 
+C'est à partir de la page 
+\family sans 
+Conference management
+\family default 
+ que l'administrateur gère les _ instaurées dans la société.
+\layout Standard
+
+Il est possible de modifier l'affichage des _ en utilisant le tableau intitulé
+ Filtres 
+\begin_inset Graphics
+	filename images/rocket.png
+
+\end_inset 
+
+.
+\layout Standard
+
+L'administrateur peut faire une recherche sur le nom :
+\layout Standard
+
+- cliquez sur l'astérisque (étoile : *) pour voir apparaître toutes _;
+\layout Standard
+
+- cliquez sur une lettre et tous les noms des _ débutant par cette lettre
+ s'afficheront;
+\layout Standard
+
+- cliquez sur un numéro et tous les noms des _ débutant par ce numéro s'afficher
+ont;
+\layout Standard
+
+- recherche rapide 
+\begin_inset Graphics
+	filename images/search.png
+
+\end_inset 
+
+ : remplissez le champ par le nom de _ et ensuite cliquez sur le bouton
+ Appliquer.
+\layout Standard
+\added_space_top medskip 
+Pour créer et configurer _, l'administrateur doit cliquer sur le bouton
+ 
+\begin_inset Graphics
+	filename images/list_new_user.png
+
+\end_inset 
+
+.
+\layout Standard
+
+Apparaît l'espace de configuration.
+\layout Standard
+
+Pour enregistrer la configuration, cliquez sur le bouton Terminé, pour revenir
+ à la page précédente cliquez sur le bouton Annuler.
+\layout Subsection
+
+Informations générales
+\layout Subsubsection
+
+Propriétés
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="7" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Objets 
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Champs à remplir
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Conference name
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+obligatoire.
+ Insérez le nom _ 
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Type
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+obligatoire.
+ 
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Base
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color black
+obligatoire.
+
+\color red
+ ?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Description
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color black
+obligatoire.
+
+\color red
+ ?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Lifetime (in days)
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Numéros de téléphone
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection
+
+Options
+\layout Itemize
+
+Preset PIN
+\begin_deeper 
+\layout Standard
+
+
+\color red
+?
+\end_deeper 
+\layout Itemize
+
+Record conference
+\begin_deeper 
+\layout Standard
+
+Cochez si vous désirez enregistrer la conférence.
+ 
+\color red
+?
+\end_deeper 
+\layout Itemize
+
+Play music on hold
+\begin_deeper 
+\layout Standard
+
+
+\color red
+?
+\end_deeper 
+\layout Itemize
+
+Activate session menu
+\begin_deeper 
+\layout Standard
+
+
+\color red
+?
+\end_deeper 
+\layout Itemize
+
+Announce users joining or leaving the conference
+\begin_deeper 
+\layout Standard
+
+Cochez si vous désirez qu'une annonce soit faite lorsque un participant
+ rejoint ou quitte la conférence.
+ 
+\color red
+?
+\end_deeper 
+\layout Itemize
+
+Count users
+\begin_deeper 
+\layout Standard
+
+Cochez si vous désirez compter ls participants.
+ 
+\color red
+?
+\end_deeper 
+\layout Subsection
+
+Références
+\layout Standard
+
+
+\color red
+?
+\the_end
