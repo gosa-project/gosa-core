@@ -35,35 +35,8 @@ class faiHookEntry extends plugin
       $this->Object_status = "new";
       $this->orig_cn       = false;
     }
-
-    if(isset($this->Object_FAIscript)){
-      $ds= ldap_connect($this->config->current['SERVER']);
-      ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
-      if(function_exists("ldap_set_rebind_proc") && isset($this->config->current['RECURSIVE']) && $this->config->current['RECURSIVE'] == "true") {
-        ldap_set_option($this->cid, LDAP_OPT_REFERRALS, 1);
-        ldap_set_rebind_proc($ds, array(&$this, "rebind"));
-      }
-
-      if(isset($this->config->current['TLS']) && $this->config->current['TLS'] == "true"){
-        ldap_start_tls($ds);
-      }
-
-      $r = ldap_bind($ds);
-      $sr= @ldap_read($ds, $this->dn, "FAIscript=*", array("FAIscript"));
-      if ($sr) {
-        $ei=ldap_first_entry($ds, $sr);
-        if ($ei) {
-          if ($info = ldap_get_values_len($ds, $ei, "FAIscript")){
-            $this->Object_FAIscript = base64_decode($info[0]);
-          }
-        }
-      }
-
-      /* close conncetion */
-      ldap_unbind($ds);
-    }
-
   }
+
 
   function execute()
   {

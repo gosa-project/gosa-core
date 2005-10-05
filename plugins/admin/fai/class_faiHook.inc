@@ -61,7 +61,7 @@ class faiHook extends plugin
             $this->SubObjects[$object['cn'][0]][$attrs]=$object[$attrs][0];
           }
         }
-      
+     
         $this->SubObjects[$object['cn'][0]]['status']      = "edited";
         $this->SubObjects[$object['cn'][0]]['dn']          = $object['dn'];
 
