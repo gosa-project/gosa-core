@@ -645,12 +645,11 @@ class systems extends plugin
         $display= "".$val["cn"][0]."";
       }
 
-      if(in_array("gotoTerminal",$val['objectClass'])){
+      if((in_array("gotoTerminal",$val['objectClass']))||(in_array("gotoWorkstation",$val['objectClass']))){
         $action2 = "<input type='image' src='images/certs.png' alt='"._("Password")."'   name='user_setpwd_%KEY%' title='"._("Set root password")."'>";
       }else{
         $action2 = "";
       }
-
 
       if(isset($val['message'])){
         $display.= "  (".$val['message']." '".$this->config->idepartments[$terminalfilter['depselect']]."'  )";
@@ -663,10 +662,6 @@ class systems extends plugin
       $field3 = array("string" => preg_replace("/%KEY%/", "$key", $action2.$action),"attach" => "style='border:none; text-align:right;width:48px'");
       $divlist->AddEntry( array($field1,$field2,$field3));
     }
-
-
-
-
 
     /* Show main page */
     $smarty->assign("terminalshead", $listhead);
