@@ -68,7 +68,7 @@ class faiManagement extends plugin
 		/* Get global filter config */
 		if (!is_global("faifilter")){
 			$base	= get_base_from_people($ui->dn);
-			$faifilter= array("base" => "ou=fai,ou=configs,ou=systems,".$base,
+			$faifilter= array("base" => $base,
 					"regex" => "*");
 			$faifilter['ShowProfiles'] 	= true;
 			$faifilter['ShowTemplates'] = true;
@@ -135,9 +135,41 @@ class faiManagement extends plugin
 				$s_entry = preg_replace("/^entry_delete_/","",$key);
 				$s_entry = preg_replace("/_.*$/","",$s_entry);
 				$s_action = "delete";
+			}elseif(preg_match("/dep_back.*/i",$key)){
+                $s_action="back";
+            }elseif(preg_match("/dep_home.*/i",$key)){
+                $s_action="home";
+            }elseif(preg_match("/dep_root.*/i",$key)){
+                $s_action="root";
 			}
 
 		}
+
+		if($s_action=="root"){
+			$faifilter['base']=($this->config->current['BASE']);
+		}
+
+		if($s_action=="home"){
+			$faifilter['base']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
+			$faifilter['base']=(preg_replace("/^[^,]+,/","",$faifilter['base']));
+		}
+
+		if($s_action=="back"){
+			$base_back          = preg_replace("/^[^,]+,/","",$faifilter['base']);
+			$base_back          = convert_department_dn($base_back);
+
+			if(isset($this->config->departments[trim($base_back)])){
+				$faifilter['base']= $this->config->departments[trim($base_back)];
+			}else{
+				$faifilter['base']= $this->config->departments["/"];
+			}
+		}
+
+		if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
+            $s_action="open";
+            $s_entry = base64_decode($_GET['dep_id']);
+            $faifilter['base']= $this->config->departments[trim($s_entry)];
+        }
 
 		if(isset($_GET['edit_entry'])){
 			$s_entry = $_GET['edit_entry'];
@@ -369,6 +401,17 @@ class faiManagement extends plugin
 		$faihead = 
 			"<div style='background:#F0F0F9;padding:5px;'>&nbsp;".
 
+			"<input type='image' src='images/list_up.png' align='middle' 
+			title='"._("Go up one department")."' name='dep_back' alt='"._("Up"). "'>&nbsp;".
+
+			"<input type='image' src='images/list_root.png' align='middle' 
+			title='"._("Go to root department")."' name='dep_root' alt='".      _("Root")."'>&nbsp;".
+
+			"<input type='image' src='images/list_home.png' align='middle' 
+			title='"._("Go to users home department")."' name='dep_home' alt='"._("Home")."'>&nbsp;".
+
+			"<img src=\"images/list_seperator.png\" alt=\"\" align=\"middle\" height=\"16\" width=\"1\">&nbsp;".
+			
 			" <input type='image' src='images/fai_new_profile.png' align='middle' 
 			title='"._("New profile")."' name='Create_profile' alt='"._("P")."'>&nbsp;".
 			
@@ -412,6 +455,32 @@ class faiManagement extends plugin
 		$action .= "<input type='image' src='images/edittrash.png' alt='"._("delete")."' name='entry_delete_%KEY%' title='"._("Delete class")."'>";
 
 		$editlink ="<a href='?plug=".$_GET['plug']."&edit_entry=%KEY%'>%NAME%</a>"; 		
+		$linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
+
+		foreach($this->departments as $key => $val) {
+			if(!isset($this->config->departments[trim($key)])){
+				$this->config->departments[trim($key)]="";
+			}
+
+			$non_empty="";
+			$keys= str_replace("/","\/",$key);
+			foreach($this->config->departments as $keyd=>$vald ){
+				if(preg_match("/".$keys."\/.*/",$keyd)){
+					$non_empty="full";
+				}
+			}
+
+
+			$title = $this->config->departments[$key];
+			$field0 = array("string" => "<img src='images/".$non_empty."folder.png' title='"._("department")."' alt='department'>",                     "attach"=>"style='width:20px;'");
+			$field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "title='".$title."'");
+			$field2 = array("string" => "");
+			$field3 = array("string" => "","attach"=>"style='text-align:right'");
+
+			$divlist->AddEntry( array($field0,$field1,$field2,$field3));
+
+		}
+
 
 		/* Attach objects */
 		foreach($this->objects as $key => $value){
@@ -524,7 +593,7 @@ class faiManagement extends plugin
 		// Added for dirlist function...
 
 		/* Set base for all searches */
-		$base= $faifilter['base'];
+		$base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
 		$regex = $faifilter['regex'];	
 
 		/* Array to save objects */
@@ -532,6 +601,33 @@ class faiManagement extends plugin
 	
 		$this->objects=array();
 
+		/* NEW LIST MANAGMENT
+		 * We also need to search for the departments
+		 * So we are able to navigate like in konquerer
+		 */
+		$base2 = $faifilter['base'];
+
+		$res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
+				TRUE, $base2, array("ou", "description"), TRUE);
+
+		$this->departments= array();
+		$tmp = array();
+		foreach ($res3 as $value){
+			$tmp[strtolower($value['dn']).$value['dn']]=$value;
+		}
+		ksort($tmp);
+		foreach($tmp as $value){
+			if($value["description"][0]!=".."){
+				$this->departments[$value['dn']]=convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
+			}else{
+				$this->departments[$value['dn']]=$value["description"][0];
+			}
+		}
+
+		/* END NEW LIST MANAGMENT
+		 */
+
+	
 		$res= get_list($this->ui->subtreeACL, "(objectClass=organizationalUnit)", 
 				FALSE, $base, array("cn","description","objectClass"),TRUE);
 

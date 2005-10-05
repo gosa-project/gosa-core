@@ -19,7 +19,7 @@ class tabsTemplate extends tabs
   {
   	$baseobject= $this->by_object['faiTemplate'];
 
-	$new_dn= 'cn='.$baseobject->cn.",ou=templates,ou=fai,ou=configs,ou=systems,".$_SESSION['config']->current['BASE'];
+	$new_dn= 'cn='.$baseobject->cn.",ou=templates,ou=fai,ou=configs,ou=systems,".$_SESSION['faifilter']['base'];
 	
  	if ($this->dn != $new_dn && $this->dn != "new"){
 		

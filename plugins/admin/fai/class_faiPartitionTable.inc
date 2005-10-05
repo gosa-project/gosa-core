@@ -370,6 +370,9 @@ class faiPartitionTable extends plugin
           }
         }
 
+        if((!isset($partition['FAImountPoint']))||(empty($partition['FAImountPoint']))){
+          $partition_attrs['FAImountPoint']="swap";
+        }
 
         if(($partition['status'] == "delete")&&($disk['status']!="new")){
           $ldap->cd($partition_dn);

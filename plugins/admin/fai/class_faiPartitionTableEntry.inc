@@ -311,18 +311,22 @@ class faiPartitionTableEntry extends plugin
 
     foreach($this->partitions as $key => $part){
     
-      if(in_array($part['FAImountPoint'],$alreadyUsed['FAImountPoint'])){
+      if((in_array($part['FAImountPoint'],$alreadyUsed['FAImountPoint']))&&($part['FAIfsType']!="swap")){
         $message[]=sprintf(_("please enter a unique mount point for partition %s"),($key));
       }
 
-      if((empty($part['FAImountPoint']))||(!((preg_match("/^\/.*/",$part['FAImountPoint']))||(preg_match("/^swap$/",$part['FAImountPoint']))))){
-        $message[]=sprintf(_("Please enter a valid mount point for partition %s." ),($key));
+      if($part['FAIfsType']!="swap"){
+        if((empty($part['FAImountPoint']))||(!((preg_match("/^\/.*/",$part['FAImountPoint']))||(preg_match("/^swap$/",$part['FAImountPoint']))))){
+          $message[]=sprintf(_("Please enter a valid mount point for partition %s." ),($key));
+        }
       }
-
       if($part['FAIfsType'] == "swap"){
         if(in_array($part['FAIfsType'],$alreadyUsed['FAIfsType'])){
           $message[]=sprintf(_("File system type 'swap' is already used, change file system type for partition %s."),$key);
         }
+      }
+      if(($part['FAIfsType'] == "swap")&&(!empty($part['FAImountPoint']))&&($part['FAImountPoint']!="swap")){
+        $message[]=_("Please use 'swap' as mount point, if 'swap' is used as fs-type.");
       }
 
       $tmp = split("-",$part['FAIpartitionSize']);
