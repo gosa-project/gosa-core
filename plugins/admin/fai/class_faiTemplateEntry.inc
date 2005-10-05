@@ -43,10 +43,18 @@ class faiTemplateEntry extends plugin
     $smarty     = get_smarty();
     $display = "";
 
+    if(isset($_POST['TmpFileUpload'])){
+      if($str=file_get_contents($_FILES['FAItemplateFile']['tmp_name'])){
+        $this->Object_FAItemplateFile = $str;
+      }
+    
+    }
     foreach($this->attributes as $attrs){
       $smarty->assign($attrs,stripslashes($this->$attrs));
     }
 
+    $smarty->assign("Object_FAItemplateFile","");
+  
     for($i =1 ; $i <= 100 ; $i++){
       $Object_FAIprioritys[$i]=$i;
     }
@@ -60,6 +68,7 @@ class faiTemplateEntry extends plugin
   {
     if(isset($_POST['SubObjectFormSubmitted'])){
       foreach($this->attributes as $attrs){
+        if($attrs == "Object_FAItemplateFile") continue;
         if(isset($_POST[$attrs])){
           $this->$attrs = $_POST[$attrs];
         }else{

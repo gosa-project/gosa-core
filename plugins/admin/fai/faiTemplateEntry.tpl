@@ -35,7 +35,8 @@
 							</LABEL>
 						</td>
 						<td>
-							<input type="text" name="Object_FAItemplateFile" value="{$Object_FAItemplateFile}" id="Object_FAItemplateFile">
+							<input type="file" name="FAItemplateFile" value="{$Object_FAItemplateFile}" id="Object_FAItemplateFile">
+							<input type="submit" value="{t}upload{/t}" name="TmpFileUpload">
 						</td>
 					</tr>
 					<tr>
