@@ -19,7 +19,8 @@ class phoneAccount extends plugin
   var $hardware_list          = array();
   var $used_hardware          = array();
   var $goFonMacro             = "";
-  var $macro                  = 0;              // Selected Macro
+  var $macro                  = 0;              // Selected Macroi
+  var $lastmacro              = "";
   var $macros                 = array();        // List of macros for smarty select box
   var $macroarray             = array();        // All needed macro informations
   var $macrostillavailable    = false;
@@ -231,6 +232,7 @@ class phoneAccount extends plugin
         }
       }
     }
+  $this->lastmacro=$this->macro;
   @mysql_close($r_con) ;
   }
 
@@ -635,21 +637,20 @@ class phoneAccount extends plugin
       $macrotab ="<table summary=\""._("Parameter")."\">";
       /* for every single parameter-> display textfile,combo, or true false switch*/
 
+      foreach($this->phoneNumbers as $phonenum){
+        $tmp[] = $phonenum;
+      }
 
-      /* Automatic fill out */
-      if(isset($_POST['fillout'])){
-
-        foreach($this->phoneNumbers as $phonenum){
-          $tmp[] = $phonenum;
-        }
-
+      
+    
+      if($this->macro != $this->lastmacro){
         /* Go through all params */
         foreach($this->macroarray[$this->macro] as $key => $paras){
 
           $string = $paras['default'];
 
           $string=preg_replace("/%uid/i",$this->uid,$string);
-          
+
           if(isset($this->cn)){
             $string=preg_replace("/%cn/i",$this->cn,$string);
           }
@@ -797,7 +798,7 @@ class phoneAccount extends plugin
     $smarty->assign ("hardware_list", $hl);
 
     /* Show main page */
-
+    $this->lastmacro = $this->macro;
     $display.= $smarty->fetch(get_template_path('generic.tpl', TRUE, dirname(__FILE__)));
     return($display);
   }

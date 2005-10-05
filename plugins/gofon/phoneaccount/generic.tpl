@@ -65,7 +65,6 @@
 				<option disabled>&nbsp;</option>
 					 </select>
 					 <input type="submit" name="refresh" value="{t}Refresh{/t}" {$goFonMacroACL}>
-					 <input type="submit" name="fillout" value="{t}Complete{/t}" {$goFonMacroACL}>
 				</td>
 			</tr>
 		</table>
