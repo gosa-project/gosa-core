@@ -175,7 +175,12 @@ class environment extends plugin
        All these tab management is done here
     */
 
-    // 1. Account disabled . Editing from usermenu
+    print_a($this);
+
+    /* Working from Usermenu an the Account is currently disbled
+     * this->parent :  is only set if we are working in a list of tabs
+     * is_account   :  is only true if the needed objectClass is given
+    */
     if((!isset($this->parent))&&(!$this->is_account)){
       /* We are currently editing this tab from usermenu, but this account is not enabled */
       $smarty->assign("is_account",$this->is_account);
@@ -185,65 +190,73 @@ class environment extends plugin
       $display .= back_to_main(); 
       /* Display our message to the user */
       return $display;
+    
 
-    // Account is enabled
+    /* We are currently editing from group tabs, because 
+     * $this->parent is set
+     * posixAccount is not set, so we are not in usertabs.
+     */
     }elseif((isset($this->parent))&&(!isset($this->parent->by_object['posixAccount']))){
-        $smarty->assign("is_account","true");
-        $this->is_Account = true;
-        $this->is_group = true;
-        $this->uid          = $this->cn;
-        $this->attrs['uid'] = $this->cn;
+      $smarty->assign("is_account","true");
+      $this->is_group     = true;
+      $this->uid          = $this->cn;
+      $this->attrs['uid'] = $this->cn;
 
-        if (isset($_POST['modify_state'])){
-          $this->is_account= !$this->is_account;
+      /* Change state if needed */
+      if (isset($_POST['modify_state'])){
+        $this->is_account= !$this->is_account;
+      }
+
+      /* Group Dialog with enabled environment options */
+      if ($this->is_account){
+        $display= $this->show_header(_("Remove environment extension"),
+            _("Environment extension enabled. You can disable it by clicking below."));
+      } else {
+  
+      /* Environment is disabled 
+         If theres is no posixAccount enabled, you won't be able to enable 
+         environment extensions
+       */
+        if((isset($this->attrs['objectClass']))&&((in_array("posixAccount",$this->attrs['objectClass'])))){
+          // 4. There is a PosixAccount
+          $display= $this->show_header(_("Add environment extension"),
+              _("Environment extension disabled. You can enable it by clicking below."));
+          return $display;
+        }else{
+          // 4. There is no PosixAccount
+          $display= $this->show_header(_("Add environment extension"),
+              _("Environment extension disabled. You have to setup a posix account before you can enable this feature."));
+          return $display;
         }
-
-        // 3. Account enabled . Editing from adminmenu
-        if ($this->is_account){
-          $display= $this->show_header(_("Remove environment extension"),
-              _("This server has environment extension enabled. You can disable it by clicking below."));
-        } else {
-          if((in_array("posixAccount",$this->attrs['objectClass']))){
-            // 4. There is a PosixAccount
-            $display= $this->show_header(_("Add environment extension"),
-                _("This server has environment extension disabled. You can enable it by clicking below."));
-            return $display;
-          }else{
-            // 4. There is a PosixAccount
-            $display= $this->show_header(_("Add environment extension"),
-                _("This server has environment extension disabled. You have to setup a posix account before you can enable this feature."));
-            return $display;
-          }
-        }
-
-
-
+      }
     }else{
-      /* Tell smarty that this accoutn is enabled */
+      /* Editing from Usermenu 
+       *  Tell smarty that this accoutn is enabled 
+       */
       $smarty->assign("is_account","true");
 
       /* Do we need to flip is_account state? */
       if (isset($_POST['modify_state'])){
         $this->is_account= !$this->is_account;
       }
-      if(!isset($this->parent)){
-          // 3. ? Account Enabled . Editing from usermenu        
 
-      }else{
+      if(isset($this->parent)){
         // 3. Account enabled . Editing from adminmenu
         if ($this->is_account){
           $display= $this->show_header(_("Remove environment extension"),
-              _("This server has environment extension enabled. You can disable it by clicking below."));
+              _("Environment extension enabled. You can disable it by clicking below."));
         } else {
-          if((isset($this->attrs['objectClass']))&&((in_array("posixAccount",$this->attrs['objectClass'])))||($this->parent->by_object['posixAccount']->is_account==true)){
+          if((isset($this->attrs['objectClass']))
+                &&((in_array("posixAccount",$this->attrs['objectClass'])))
+                  ||($this->parent->by_object['posixAccount']->is_account==true)){
             // 4. There is a PosixAccount
             $display= $this->show_header(_("Add environment extension"),
-                _("This server has environment extension disabled. You can enable it by clicking below."));
+                _("Environment extension disabled. You can enable it by clicking below."));
             return $display;
           }else{
             // 4. There is a PosixAccount
             $display= $this->show_header(_("Add environment extension"),
-                _("This server has environment extension disabled. You have to setup a posix account before you can enable this feature."),TRUE,TRUE);
+                _("Environment extension disabled. You have to setup a posix account before you can enable this feature."),TRUE,TRUE);
             return $display;
           }
         }
