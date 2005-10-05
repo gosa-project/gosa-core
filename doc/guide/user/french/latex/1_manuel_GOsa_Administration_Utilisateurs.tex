@@ -108,11 +108,7 @@ générales}}.
 
 \subsubsection{Informations personnelles}
 
-\begin{tabular}{|p{5cm}|p{10cm}|}
-\hline 
-Intitulés&
-Champs à remplir\tabularnewline
-\hline
+\begin{tabular}{|l|l|}
 \hline 
 Nom&
 obligatoire\tabularnewline
@@ -150,8 +146,7 @@ Page d'accueil&
 Insérez l'URL complète du site Web de la société \tabularnewline
 \hline 
 Format de stockage des mots de passe&
-Choix dans le menu déroulant entre crypt{*}; clear{*}; sha{*}; md5{*};
-ssha{*}; smd5. \textcolor{red}{?}\tabularnewline
+Choix dans le menu déroulant entre crypt, clear, sha, md5, ssha, smd5. \tabularnewline
 \hline 
 Certificats&
 \textcolor{red}{?}\tabularnewline
@@ -160,18 +155,6 @@ Kerberos&
 \textcolor{red}{?}\tabularnewline
 \hline
 \end{tabular}
-
-{*}crypt :
-
-{*}clear :
-
-{*}sha :
-
-{*}md5 :
-
-{*}ssha :
-
-{*}smd5 :
 
 Vous pouvez aussi si vous le désirez agrémenter d'une photo le profil
 de l'utilisateur en cliquant sur le bouton \textit{changer la photo}.
@@ -182,10 +165,6 @@ chercher l'image.
 \subsubsection{Informations sur l'entreprise}
 
 \begin{tabular}{|>{\raggedright}p{5cm}|>{\raggedright}p{10cm}|}
-\hline 
-Intitulés&
-Champs à remplir\tabularnewline
-\hline
 \hline 
 Entreprise&
 Insérez le nom de la société\tabularnewline
@@ -240,10 +219,6 @@ Pour activer le compte Unix pour un utilisateur cliquez sur le bouton
 \subsubsection{Informations générales}
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline 
-Intitulés&
-Champs à remplir\tabularnewline
-\hline
 \hline 
 Répertoire home&
 Indiquez la racine du compte\tabularnewline
@@ -333,21 +308,17 @@ un compte email}.
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline 
-Intitulés&
-Champs à remplir\tabularnewline
-\hline
-\hline 
 Adresse principale&
-obligatoire, insérez l'adresse email de l'utilisateur \textcolor{red}{?}\tabularnewline
+obligatoire, insérez l'adresse email de l'utilisateur \tabularnewline
 \hline 
 Serveur&
-Insérez le chemin vers le serveur \textcolor{red}{?}\tabularnewline
+séléctionnez le serveur de l'utilisateur\tabularnewline
 \hline 
 Utilisation des Quota&
-non défini \textcolor{red}{?}\tabularnewline
+\tabularnewline
 \hline 
 Tailles des Quota&
-\textcolor{red}{?}\tabularnewline
+\tabularnewline
 \hline
 \end{tabular}
 
@@ -405,12 +376,9 @@ Pour créer un compte samba pour un utilisateur cliquez sur le bouton
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline 
-Intitulés&
-Champs à remplir\tabularnewline
-\hline
-\hline 
 Répertoire Home&
-Indiquez le chemin du répertoire personnel de l'utilisateur\tabularnewline
+Indiquez le chemin du répertoire personnel de l'utilisateur en notation
+UNC ex: \textbackslash{}\textbackslash{}SERVER\textbackslash{}homes\textbackslash{}user\tabularnewline
 \hline 
 Domaine&
 Précisez le domaine auquel appartient l'utilisateur\tabularnewline
@@ -432,10 +400,6 @@ Indiquez le chemin pour accéder au profile de l'utilisateur\tabularnewline
 \end{itemize}
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline 
-Intitulés&
-Champs à remplir\tabularnewline
-\hline
-\hline 
 Répertoire Home&
 \tabularnewline
 \hline 
@@ -449,10 +413,6 @@ Chemin du Profile&
 \item \textcolor{red}{?} Hérite de la configuration du client
 \end{itemize}
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline 
-Intitulés&
-Champs à remplir\tabularnewline
-\hline
 \hline 
 Programme initial&
 \tabularnewline
@@ -484,7 +444,7 @@ les noms de stations. Le bouton Ajouter renvoie à la liste des stations.
 \subsection{Connectivité}
 
 L'administrateur peut afiner la gestion du compte de l'utilisateur
-en configurant la manière dont il peut se connecter.
+en configurant les services supplémentaires auquel il peut se connecter.
 
 
 \subparagraph*{Compte Proxy}
@@ -504,7 +464,8 @@ de cet endroit désactiver le compte FTP.
 
 \subparagraph{Compte WebDAV}
 
-\textcolor{red}{?}
+Si vous activez le compte WebDav, l'utilisateur aura accès au serveur
+WebDAV 
 
 
 \subparagraph{Compte PHPGroupware}
@@ -527,21 +488,16 @@ Pour créer un compte Fax pour un utilisateur cliquez sur le bouton
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline 
-Intitulés&
-Champs à remplir\tabularnewline
-\hline
-\hline 
 Fax&
-Obligatoire. Insérez le numéro de fax de'' l'utilisateur \textcolor{red}{?}
-{}``\tabularnewline
+Obligatoire. Insérez le numéro de fax de l'utilisateur\tabularnewline
 \hline 
 Langue&
 Cliquez pour voir apparaître la liste déroulante pour le choix de
-la langue ou du pays \textcolor{red}{?}\tabularnewline
+la langue\tabularnewline
 \hline 
 Format de distribution&
 Cliquez pour voir apparaître une liste déroulante qui donne le choix
-du format du fax à envoyer ou à réceptionner \textcolor{red}{?}\tabularnewline
+du format de stockage des fax à envoyer ou à réceptionner \tabularnewline
 \hline
 \end{tabular}
 
@@ -549,7 +505,7 @@ du format du fax à envoyer ou à réceptionner \textcolor{red}{?}\tabularnewline
 \subsubsection{Méthodes de distribution}
 
 \begin{itemize}
-\item L'utilisation du fax peut être suspendu {}``temporairement'' \textcolor{red}{?}. 
+\item L'utilisation du fax peut être suspendu temporairement. 
 \item Les fax peuvent être redirigés sous forme de mail à une adresse mail.
 \item Les fax peuvent être envoyés directement au télécopieur et imprimés.
 \end{itemize}
@@ -569,7 +525,7 @@ Le fax est aujourd'hui fréquemment utilisé pour distribuer des messages
 publicitaires. On peut les apparenter au spam. Pour éviter que les
 utilisateurs soient submergés par ces messages, l'administrateur peut
 instaurer une liste rouge reprenant les numéros de fax indésirables
-qu'ils soient entrant ou sortant. 
+qu'ils soient entrant ou sortant.
 
 En cliquant sur le bouton Edit vous faites apparaître une page avec
 du côté droit le champ avec la liste rouge prédéfinie dans laquelle
@@ -594,10 +550,6 @@ précédent est rempli par un numéro.
 \subsubsection{Matériel téléphonique}
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline 
-Intitulés&
-Champs à remplir\tabularnewline
-\hline
 \hline 
 Téléphone&
 Spécifier le type de téléphone dans la liste déroulante\tabularnewline
