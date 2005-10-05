@@ -200,7 +200,7 @@ class conference extends plugin
       $message[] =_("Only numeric chars are allowed in Number field.");
     }
 
-    if(!is_numeric($this->goFonConferenceOptionLifetime)){
+    if(!((is_numeric($this->goFonConferenceOptionLifetime))||(empty($this->goFonConferenceOptionLifetime)))){
       $message[] =_("Only numbers are allowed in Lifetime.");
     }
 
