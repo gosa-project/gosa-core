@@ -309,6 +309,14 @@ class phoneAccount extends plugin
      * Generate SQL, for insert new entries
      */ 
     if($save == true){
+      
+      foreach($this->a_old_telenums as $tele){
+        $oldnums[]= preg_replace("/[^0-9]/","",$tele);
+      }
+
+      foreach($this->phoneNumbers as $tele){
+        $newnums[]= preg_replace("/[^0-9]/","",$tele);
+      }
 
       // Attribute GoFonDefaultIP set ?
       if(((isset($a_ldap_attrs['goFonDefaultIP'][0]))&&($a_ldap_attrs['goFonDefaultIP'][0] != "dynamic"))){
@@ -393,10 +401,10 @@ class phoneAccount extends plugin
 
       // Create new SIP entry ...
       $sip_entry = $sip_data_array;
-      reset($this->phoneNumbers);
-      $i_new_key = key($this->phoneNumbers);
-      $sip_entry['callerid']  =$this->phoneNumbers[$i_new_key];
-      $sip_entry['mailbox']   =$this->phoneNumbers[$i_new_key];
+      reset($newnums);
+      $i_new_key = key($newnums);
+      $sip_entry['callerid']  =$newnums[$i_new_key];
+      $sip_entry['mailbox']   =$newnums[$i_new_key];
 
       if((isset($this->parent))&&(isset($this->parent->by_object['mailAccount']))&&($this->parent->by_object['mailAccount']->is_account==true)){
         $s_mail = $this->parent->by_object['mailAccount']->mail;
@@ -404,15 +412,14 @@ class phoneAccount extends plugin
         $s_mail = "";
       }
 
-
       // $SQL contains all queries
       $SQL   = array();
       $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$this->uid."';\n";
       $SQL[] = "DELETE FROM ".$a_SETUP['SIP_TABLE']." WHERE name='".$this->uid."';\n";
-      $SQL[] = "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$this->phoneNumbers[$i_new_key].";"; 
+      $SQL[] = "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$newnums[$i_new_key].";"; 
       // Delete old entries
       $b_first_deleted  =false;
-      foreach($this->a_old_telenums as $s_telenums){
+      foreach($oldnums as $s_telenums){
         $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$s_telenums."';\n";
         if(!$b_first_deleted){
           $b_first_deleted=true;
@@ -420,7 +427,6 @@ class phoneAccount extends plugin
         }
       }
 
-   
       if($this->goFonHardware=="automatic"){
         foreach($SQL as $query ){
           mysql_query($query) ;
@@ -457,9 +463,9 @@ class phoneAccount extends plugin
       }
 
       $SQL[]= "INSERT INTO ".$a_SETUP['VOICE_TABLE']." (`customer_id`,`context`,`mailbox`,`password`,`fullname`,`email`,`pager`)
-          VALUES   ('".$this->phoneNumbers[$i_new_key]."',
+          VALUES   ('".$newnums[$i_new_key]."',
                     'default',
-                    '".$this->phoneNumbers[$i_new_key]."',
+                    '".$newnums[$i_new_key]."',
                     '".$this->goFonVoicemailPIN."',
                     '".$CNname."',
                     '".$s_mail."',
@@ -471,7 +477,7 @@ class phoneAccount extends plugin
       $is_inserted_once = false;
  
       // Entension entries  Hint / Dial / Goto
-      foreach($this->phoneNumbers as $s_telenums){
+      foreach($newnums as $s_telenums){
 
         if(!$is_inserted_once){
           $is_inserted_once = true;
