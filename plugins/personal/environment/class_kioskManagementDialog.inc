@@ -77,7 +77,7 @@ class kioskManagementDialog extends plugin
     $a_return = array();
     $dir = @opendir($this->baseDir);
     if(!$dir){
-      print_red(sprintf(_("Can't open '%s'. Error was: permission denied."),$this->baseDir));
+      print_red(sprintf(_("Can't open kiosk_path '%s'. Error was: permission denied. Possibly there is no kiosk_path defined in the configuration file."),$this->baseDir));
     }else{
       $a_return = array();
       while($file = readdir($dir)){
