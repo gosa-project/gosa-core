@@ -449,7 +449,7 @@ class faiManagement extends plugin
 					array("string" => "&nbsp;"),
 					array("string" => _("Name of FAI class")),
 					array("string" => _("Class type")),
-					array("string" => _("Actions"), "attach"=>"style='border:none;width:40px;'")));
+					array("string" => _("Actions"), "attach"=>"style='border-right:none;width:40px;'")));
 
 
 		$action  = "<input type='image' src='images/edit.png' 	alt='"._("edit")."'   name='entry_edit_%KEY%' title='"._("Edit class")."'>";
@@ -476,7 +476,7 @@ class faiManagement extends plugin
 			$field0 = array("string" => "<img src='images/".$non_empty."folder.png' title='"._("department")."' alt='department'>",                     "attach"=>"style='width:20px;'");
 			$field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "title='".$title."'");
 			$field2 = array("string" => "");
-			$field3 = array("string" => "","attach"=>"style='text-align:right'");
+			$field3 = array("string" => "","attach"=>"style='text-align:right;border-right:none;'");
 
 			$divlist->AddEntry( array($field0,$field1,$field2,$field3));
 
