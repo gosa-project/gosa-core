@@ -50,7 +50,7 @@ class faiScriptEntry extends plugin
       if(($_FILES['ImportFile']['size']==0)){
         print_red(_("Selected file is empty."));
       }else{
-        $str = file_get_contents($_FILES['ImportFile']['tmp_name']);
+        $str = utf8_encode(file_get_contents($_FILES['ImportFile']['tmp_name']));
         $this->Object_FAIscript = $str;
       }
     }

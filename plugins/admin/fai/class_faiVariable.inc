@@ -160,7 +160,7 @@ class faiVariable extends plugin
     foreach($this->SubObjects as $obj){
       if($obj['status'] != "delete"){
 
-        if((isset($obj['description']))&&(!empty($obj['description']))){
+        if((isset($obj['description']))&&(!empty($obj['description']))&&(!preg_match("/\[\*\]/",$obj['description']))){
           if (preg_match("/\[\*\]/", $obj['description'])){
             $a_return[$obj['cn']]= $obj['cn']." [".preg_replace("/\s*\[\*\]\s*/", "", $obj['description'])."]";
           } else {
@@ -269,6 +269,13 @@ class faiVariable extends plugin
       $tmp['objectClass'] = $this->subClasses;
 
       $sub_dn = "cn=".$obj['cn'].",".$this->dn;
+
+      if($obj['status']=="new"){
+        $ldap->cat($sub_dn);
+        if($ldap->count()){
+          $obj['status']="modify";
+        }
+      }
  
       if($obj['status'] == "delete"){
         $ldap->cd($sub_dn);

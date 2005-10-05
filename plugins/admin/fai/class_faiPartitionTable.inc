@@ -313,6 +313,13 @@ class faiPartitionTable extends plugin
       $disk_attrs['cn']           =  $disk['cn'];
       $disk_attrs['description']  =  $disk['description']; 
       $disk_attrs['objectClass']  =  array("top","FAIclass","FAIpartitionDisk");
+
+      if($disk['status']=="new"){
+        $ldap->cat($disk_dn);
+        if($ldap->count()){
+          $disk['status']="edited";
+        }
+      }
  
       if($disk['status'] == "delete"){
         $ldap->cd($disk_dn);
@@ -355,7 +362,15 @@ class faiPartitionTable extends plugin
         
         unset($partition_attrs['status']);
         unset($partition_attrs['old_cn']);
-      
+
+        if($partition['status']=="new"){
+          $ldap->cat($partition_dn);
+          if($ldap->count()){
+            $partition['status']="edited";
+          }
+        }
+
+
         if(($partition['status'] == "delete")&&($disk['status']!="new")){
           $ldap->cd($partition_dn);
           $ldap->rmdir_recursive($partition_dn);

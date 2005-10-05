@@ -159,7 +159,11 @@ class faiTemplate extends plugin
     $a_return=array();
     foreach($this->SubObjects as $obj){
       if($obj['status'] != "delete"){
-        $a_return[$obj['cn']]= $obj['cn']." [".$obj['description']."]";
+        if((isset($obj['description']))&&(!empty($obj['description']))){
+          $a_return[$obj['cn']]= $obj['cn']." [".$obj['description']."]";
+        }else{
+          $a_return[$obj['cn']]= $obj['cn'];
+        }
       }
     }
     return($a_return);
@@ -240,6 +244,7 @@ class faiTemplate extends plugin
     }
 
     foreach($Objects as $name => $obj){
+
       foreach($this->sub64coded as $codeIt){
         $obj[$codeIt]=base64_encode($obj[$codeIt]);
       }
@@ -254,6 +259,13 @@ class faiTemplate extends plugin
       $tmp['objectClass'] = $this->subClasses;
 
       $sub_dn = "cn=".$obj['cn'].",".$this->dn;
+
+      if($obj['status']=="new"){
+        $ldap->cat($sub_dn);
+        if($ldap->count()){
+          $obj['status']="modify";
+        }
+      }
 
       if($obj['status'] == "delete"){
         $ldap->cd($sub_dn);
