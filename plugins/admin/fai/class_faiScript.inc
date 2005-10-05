@@ -280,6 +280,9 @@ class faiScript extends plugin
         if($tmp['description']==array()){
           unset($tmp['description']);
         }
+        if($tmp['FAIscript']==array()){
+          $tmp['FAIscript']=" ";
+        }
         $ldap->cd($this->config->current['BASE']);
         $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
         $ldap->cd($sub_dn);
