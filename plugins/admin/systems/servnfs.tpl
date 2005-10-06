@@ -81,6 +81,15 @@
             </table>
 		</td>
 	</tr>
+	<tr>
+		<td colspan=2>
+			<p class="seperator">&nbsp;</p>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 style="text-align:right">
+			<input type="submit" name="NFSsave" value="{t}Save{/t}">
+			<input type="submit" name="NFScancel" value="{t}Cancel{/t}">
+		</td>
+	</tr>
 </table>
-<input type="submit" name="NFSsave" value="{t}Save{/t}">
-<input type="submit" name="NFScancel" value="{t}Cancel{/t}">
