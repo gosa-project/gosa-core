@@ -35,10 +35,10 @@
 							</LABEL>
 						</td>
 						<td>
-							<select name="FAIdebianSection" title="{t}section{/t}" {$sectionACL}>
+							<select name="FAIdebianSection" title="{t}section{/t}" {SsectionACL}>
 								{html_options options=$sections selected=$section}
 							</select>
-							<input type="submit" value="{t}refresh{/t}" name="refresh2">
+							<input type="submit" value="{t}refresh{/t}" name="SetSection">
 						</td>
 					</tr>
 					<tr>
@@ -48,10 +48,10 @@
 							</LABEL>
 						</td>
 						<td>
-							<select name="FAIdebianRelease" title="{t}release{/t}" {$releaseACL}>
+							<select name="FAIdebianRelease" title="{t}release{/t}" {$ReleaseACL}>
 								{html_options options=$releases selected=$release}
 							</select>
-							<input type="submit" value="{t}refresh{/t}" name="refresh1">
+							<input type="submit" value="{t}refresh{/t}" name="SetRelease">
 						</td>
 					</tr>
 					<tr>
@@ -61,10 +61,10 @@
 							</LABEL>
 						</td>
 						<td>
-							<select name="FAIdebianMirror" title="{t}mirror{/t}" {$mirrorACL}>
+							<select name="FAIdebianMirror" title="{t}mirror{/t}" {$MirrorACL}>
 								{html_options options=$mirrors selected=$mirror}
 							</select>
-							<input type="submit" value="{t}refresh{/t}" name="refresh3">
+							<input type="submit" value="{t}refresh{/t}" name="SetMirror">
 						</td>
 					</tr>
 				</table>
@@ -80,9 +80,9 @@
        			{html_options options=$usedPackages}
       		</select>
 			<br>
-			<input type="submit" name="Addpkg" value="+">
-			<input type="submit" name="Delpkg" value="-">
-			<input type="submit" name="Conpkg" value="Configure">
+			<input type="submit" name="Addpkg" value="+" {$OptionACL}>
+			<input type="submit" name="Delpkg" value="-" {$OptionACL}>
+			<input type="submit" name="Conpkg" value="Configure" {$OptionACL}>
 		</td>
 	</tr>
 </table>

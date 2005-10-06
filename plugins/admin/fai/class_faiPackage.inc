@@ -42,8 +42,6 @@ class faiPackage extends plugin
   var $releases         = array();  // All possible releases 
   var $sections         = array();  // All section types
 
-  var $disableRepository = false;
-
   var $mirrors          = array();  // The combination of server/release/section
   var $confDir          = "";
   var $usedPackages      = array();
@@ -59,10 +57,6 @@ class faiPackage extends plugin
      */
     if($dn != "new"){
       $this->dn =$dn;
-    }
-
-    if(isset($this->attrs['FAIdebianSection'])){
-      $this->disableRepository=true;
     }
 
     if(isset($this->attrs['FAIpackage'])){
@@ -88,6 +82,33 @@ class faiPackage extends plugin
       $smarty->assign($attrs,$this->$attrs);
     }
 
+    $disableRelease = false;
+    $disableMirror  = false;
+    $disableOptions = false;
+    /* Gray out handling */
+    if(empty($this->FAIdebianSection)){
+      $disableRelease = $disableMirror = $disableOptions = true;
+    }else
+    if(empty($this->FAIdebianRelease)){
+      $disableMirror = $disableOptions = true;
+    }else
+    if(empty($this->FAIdebianMirror)){
+      $disableOptions = true;
+    }
+   
+    $smarty->assign("ReleaseACL", "");
+    $smarty->assign("MirrorACL", "");
+    if($disableOptions){
+      $smarty->assign("OptionACL"," disabled ");
+    }else{
+      $smarty->assign("OptionACL", "");
+    } 
+    if($disableRelease){
+      $smarty->assign("ReleaseACL"," disabled ");
+    } 
+    if($disableMirror){
+      $smarty->assign("MirrorACL"," disabled ");
+    } 
     $this->genMirror();
 
     $availableServer = array();
@@ -95,6 +116,10 @@ class faiPackage extends plugin
       if(($mir['release'] == $this->FAIdebianRelease)&&($mir['section']==$this->FAIdebianSection)){
         $availableServer[$mir['mirror']]=$mir['mirror'];
       }
+    }
+
+    if($disableMirror){
+      $availableServer[$mir['mirror']]=array("---");
     }
 
     if(isset($_POST['Addpkg'])){
@@ -122,7 +147,6 @@ class faiPackage extends plugin
         $this->usedPackages = $use;
         $this->dialog = false;
         $this->is_dialog=false;
-        $this->disableRepository =true;
       }
     }
  
@@ -130,15 +154,6 @@ class faiPackage extends plugin
       return $this->dialog->execute();
     }
 
-    if($this->disableRepository == true){
-      $smarty->assign("mirrorACL"  ," disabled ");
-      $smarty->assign("releaseACL" ," disabled ");
-      $smarty->assign("sectionACL" ," disabled ");
-    }else{
-      $smarty->assign("mirrorACL"  ,"");
-      $smarty->assign("releaseACL" ,"");
-      $smarty->assign("sectionACL" ,"");
-    }
     $smarty->assign("mirrors" ,$availableServer);
     $smarty->assign("mirror"  ,$this->FAIdebianMirror);
     $smarty->assign("releases",$this->releases);
@@ -159,6 +174,10 @@ class faiPackage extends plugin
       /* Try to catch all available mirrors 
          Possibly check if each server is reachable
        */
+
+      $this->servers= array();
+      $this->releases=array();  
+      $this->sections=array(); 
       $this->mirrors= array();
       $fd = opendir($confDir);
       while($mirror = readdir($fd)){
@@ -180,11 +199,11 @@ class faiPackage extends plugin
                   $this->releases[$release]=$release;
                   $this->sections[$section]=$section;
 
-                  if(empty($this->FAIdebianMirror)){
-                    $this->FAIdebianMirror= $mirror;
-                  }
                   if(empty($this->FAIdebianRelease)){
-                    $this->FAIdebianRelease = $release;
+                    $this->servers= array("---");
+                  }
+                  if(empty($this->FAIdebianSection)){
+                    $this->releases= array("---");
                   }
                   if(empty($this->FAIdebianSection)){
                     $this->FAIdebianSection = $section;
