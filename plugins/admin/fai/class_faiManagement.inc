@@ -396,6 +396,16 @@ class faiManagement extends plugin
 		 * Assign all reguired vars to template engine
 		 */
 
+		/* Prepare departments */
+		$options= "";
+		foreach ($this->config->idepartments as $key => $value){
+			if ($faifilter['base'] == $key){
+				$options.= "<option selected value='$key'>$value</option>";
+			} else {
+				$options.= "<option value='$key'>$value</option>";
+			}
+		}
+
 		/* Create listhead, it will be shown on top of the divlist. 
 		 * It provides general navigation and object creation
 		 */
@@ -435,6 +445,11 @@ class faiManagement extends plugin
 
 			" <input type='image' src='images/fai_new_packages.png' align='middle' 
 			title='"._("New package list")."' name='Create_package' alt='"._("PK")."'>&nbsp;".
+
+			" <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
+
+			_("Current base")."&nbsp;<select name='base' onChange='mainform.submit()'>$options</select>".
+			" <input type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
 			
 			"</div>";
 
