@@ -44,6 +44,7 @@ class faiPackage extends plugin
 
   var $mirrors          = array();  // The combination of server/section/release
   var $confDir          = "";
+  var $usedPackages      = array();
 
   function faiPackage ($config, $dn= NULL)
   {
@@ -58,6 +59,10 @@ class faiPackage extends plugin
       $this->dn =$dn;
     }
 
+    unset($this->attrs['FAIpackage']['count']);
+    foreach($this->attrs['FAIpackage'] as $pkg){
+      $this->usedPackages[] = $pkg;
+    }
     $this->confDir = CONFIG_DIR."/fai/";
     $this->FAIpackage = "test";
   }
@@ -73,10 +78,56 @@ class faiPackage extends plugin
       $smarty->assign($attrs,$this->$attrs);
     }
 
-    /* Second try */
+    $this->genMirror();
+
+    $availableServer = array();
+    foreach($this->mirrors as $mir){
+      if(($mir['section'] == $this->section)&&($mir['release']==$this->release)){
+        $availableServer[$mir['mirror']]=$mir['mirror'];
+      }
+    }
+
+    if(isset($_POST['Addpkg'])){
+      $this->dialog = new faiPackageEntry($this->config, $this->dn,$this->confDir.$this->mirror."/".$this->section."/".$this->release,$this->usedPackages);
+      $this->is_dialog =true;
+    }
+  
+    if(isset($_POST['CancelSubObject'])){
+      $this->dialog = false;
+      $this->is_dialog=false;
+    }
+
+    if(isset($_POST['SaveSubObject'])) {
+      $this->dialog->save_object();
+      if(count($this->dialog->check())){
+        foreach($this->dialog->check() as $msgs){
+        print_red($msgs);
+        }
+      }else{
+        $use = $this->dialog->save();
+        $this->usedPackages = $use;
+        $this->dialog = false;
+        $this->is_dialog=false;
+      }
+    }
+ 
+    if($this->is_dialog){
+      return $this->dialog->execute();
+    }
     
-    /* Check available server entries in CONFIG_DIR/fai 
-     */
+
+    $smarty->assign("mirrors" ,$availableServer);
+    $smarty->assign("mirror"  ,$this->mirror);
+    $smarty->assign("sections",$this->sections);
+    $smarty->assign("section" ,$this->section);
+    $smarty->assign("releases",$this->releases);
+    $smarty->assign("release" ,$this->release);
+    $smarty->assign("usedPackages",$this->printUsedPackages());
+    $display.= $smarty->fetch(get_template_path('faiPackage.tpl', TRUE));
+    return($display);
+  }
+
+  function genMirror(){
     $confDir = $this->confDir; 
     if(!is_readable($confDir)){
       print_red(sprintf(_("Can't read configuration folder '%s'."),$confDir));
@@ -133,32 +184,7 @@ class faiPackage extends plugin
       fclose($fd);
     }
 
-    $availableServer = array();
-    foreach($this->mirrors as $mir){
-      if(($mir['section'] == $this->section)&&($mir['release']==$this->release)){
-        $availableServer[$mir['mirror']]=$mir['mirror'];
-      }
-    }
 
-    if(isset($_POST['Addpkg'])){
-      $this->dialog = new faiPackageEntry($this->config, $this->dn,$this->confDir.$this->mirror."/".$this->section."/".$this->release);
-      $this->is_dialog =true;
-    }
-    
-    if($this->is_dialog){
-      return $this->dialog->execute();
-    }
-    
-
-    $smarty->assign("mirrors" ,$availableServer);
-    $smarty->assign("mirror"  ,$this->mirror);
-    $smarty->assign("sections",$this->sections);
-    $smarty->assign("section" ,$this->section);
-    $smarty->assign("releases",$this->releases);
-    $smarty->assign("release" ,$this->release);
-    $smarty->assign("usedPackages",$this->usedPackages);
-    $display.= $smarty->fetch(get_template_path('faiPackage.tpl', TRUE));
-    return($display);
   }
 
   /* Delete me, and all my subtrees
@@ -196,6 +222,15 @@ class faiPackage extends plugin
     return ($message);
   }
 
+  function printUsedPackages(){
+    $a_ret=array(); 
+    if(is_array($this->usedPackages)) {
+      foreach($this->usedPackages as $usedName){
+        $a_ret[$usedName] = $usedName;
+      }
+    }
+    return($a_ret);
+  }
 
   /* Save to LDAP */
   function save()
@@ -203,7 +238,16 @@ class faiPackage extends plugin
     plugin::save();
  
     $ldap = $this->config->get_ldap_link();
-  
+
+    $this->attrs['FAIpackage'] = array();
+    foreach($this->usedPackages as $pkg => $obj){
+      $this->attrs['FAIpackage'][] = $pkg;
+    } 
+
+    unset($this->attrs['section']);
+    unset($this->attrs['mirror']);
+    unset($this->attrs['release']);
+
     $ldap->cat($this->dn);
     if($ldap->count()!=0){
       /* Write FAIscript to ldap*/

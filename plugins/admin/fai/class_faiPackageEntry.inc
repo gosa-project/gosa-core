@@ -16,15 +16,17 @@ class faiPackageEntry extends plugin
   var $buffer       = array();
   var $categories   = array();
   var $searchStr    = "*";
+  var $selected     = array();
 
   /* Array with available class names */
   var $FAIAllclasses        = array();
 
-  function faiPackageEntry ($config, $dn= NULL,$strID=false)
+  function faiPackageEntry ($config, $dn= NULL,$strID=false,$selected=array())
   {
     plugin::plugin ($config, $dn);
     $this->strID = $strID;
 
+    $this->selected=$selected;
   }
 
   function execute()
@@ -39,7 +41,7 @@ class faiPackageEntry extends plugin
     $divlist->SetHeader(array(array("string"=>"&nbsp;"),
                               array("string"=>"Name"),
                               array("string"=>"Version"),
-                              array("string"=>"Description")));
+                              array("string"=>"Description","attach"=>"style='border-right:0px;'")));
 
     if(isset($_GET['search'])){
       $this->searchStr= $_GET['search']."*";
@@ -64,9 +66,9 @@ class faiPackageEntry extends plugin
     $CHKS = "<table><tr><td><input type='hidden' value='chkchange' name='chkchange'>";
     foreach($this->categories as $cat => $selected){
       if($selected){
-        $CHKS .="<input type='checkbox' value='1' name='CAT".$cat."' checked>&nbsp;".$cat."&nbsp;";
+        $CHKS .="<input type='checkbox' value='1' name='CAT".$cat."' checked onclick='document.mainform.submit()'>&nbsp;".$cat."&nbsp;";
       }else{
-        $CHKS .="<input type='checkbox' value='1' name='CAT".$cat."'>&nbsp;".$cat."&nbsp;";
+        $CHKS .="<input type='checkbox' value='1' name='CAT".$cat."' onclick='document.mainform.submit()'>&nbsp;".$cat."&nbsp;";
       }
     }
     $CHKS .= "<br><input type='submit' name='refresh0' value='"._("refresh")."'> </td></tr></table>";
@@ -77,26 +79,35 @@ class faiPackageEntry extends plugin
         $packages = array_merge($packages,$pkgs[$cat]);
       }
     }
-/*
+
     foreach($_POST as $name => $value){
       if(preg_match("/^wasonpage_/i",$name)){
         $name = preg_replace("/^wasonpage_/","",$name);
+        $n =base64_decode($name);
         if(isset($_POST['use_'.$name])){
-          print "was checked";
+          $this->selected[$n] = $n; 
+        }else{
+          if(isset($this->selected[$n])){
+            unset($this->selected[$n]);
+          }
         }
+
       }
-    
     }
 
-*/
     foreach($packages as $pkg){
       if(preg_match("/^".str_replace("*",".*",$this->searchStr)."/i",$pkg[0])){
-      $chkbox = "<input type='checkbox' value='1' name='use_".base64_encode($pkg[0])."'>
+      if(in_array($pkg[0],$this->selected)){
+        $check = " checked ";
+      }else{
+        $check = "";
+      }
+      $chkbox = "<input type='checkbox' value='1' name='use_".base64_encode($pkg[0])."' ".$check." onclick='document.mainform.submit()'>
                  <input type='hidden' value='1' name='wasonpage_".base64_encode($pkg[0])."'>";
       $divlist->AddEntry(array(array("string"=>$chkbox),
                                array("string"=>$pkg[0]),
                                array("string"=>$pkg[1]),
-                               array("string"=>$pkg[3])));
+                               array("string"=>$pkg[3],"attach"=>"style='border-right:0px'")));
       }
     }
 
@@ -117,6 +128,21 @@ class faiPackageEntry extends plugin
   /* Save data to object */
   function save_object()
   {
+    foreach($_POST as $name => $value){
+      if(preg_match("/^wasonpage_/i",$name)){
+        $name = preg_replace("/^wasonpage_/","",$name);
+        $n =base64_decode($name);
+        if(isset($_POST['use_'.$name])){
+          $this->selected[$n] = $n;
+        }else{
+          if(isset($this->selected[$n])){
+            unset($this->selected[$n]);
+          }
+        }
+
+      }
+    }
+
   }
 
   /* Check supplied data */
@@ -128,13 +154,22 @@ class faiPackageEntry extends plugin
 
   function save()
   {
-    $tmp = array();
-    foreach($this->FAIAllclasses as $class => $obj){
-      if($obj['status']==true){
-        $tmp[$class]=$class;
+/*
+    $a_ret= array();
+    $pkgs = $this->genPkgs();
+    foreach($this->selected as $pkg){
+      foreach($pkgs as $cat => $obj){
+        foreach($obj as $package){
+          if($package[0] == $pkg){
+            $a_ret[$package[0]]=$package;
+          }
+        }
       }
     }
-    return($tmp);
+    return($a_ret);
+*/
+
+  return($this->selected);
   }
 
     /* Generate listbox friendly SubObject list
