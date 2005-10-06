@@ -143,7 +143,7 @@ class environment extends plugin
         $tmp2['server']      =$tmp[0];
         $tmp2['name']        =$tmp[1];
         $tmp2['mountPoint']  =$tmp[2];
-        $this->gotoShares[$tmp[1].$tmp[0]]=$tmp2;
+        $this->gotoShares[$tmp[1]."|".$tmp[0]]=$tmp2;
       }
     }
 
@@ -908,15 +908,15 @@ class environment extends plugin
       foreach($entry['goExportEntry'] as $export){
         $shareAttrs = split("\|",$export);
         if($listboxEntry) { 
-          $return[$shareAttrs[0].$entry['cn'][0]] = $shareAttrs[0]." - ".$entry['cn'][0];
+          $return[$shareAttrs[0]."|".$entry['cn'][0]] = $shareAttrs[0]." - ".$entry['cn'][0];
         }else{
-          $return[$shareAttrs[0].$entry['cn'][0]]['server']       = $entry['cn'][0];
-          $return[$shareAttrs[0].$entry['cn'][0]]['name']         = $shareAttrs[0]; 
-          $return[$shareAttrs[0].$entry['cn'][0]]['description']  = $shareAttrs[1]; 
-          $return[$shareAttrs[0].$entry['cn'][0]]['type']         = $shareAttrs[2]; 
-          $return[$shareAttrs[0].$entry['cn'][0]]['charset']      = $shareAttrs[3]; 
-          $return[$shareAttrs[0].$entry['cn'][0]]['path']         = $shareAttrs[4]; 
-          $return[$shareAttrs[0].$entry['cn'][0]]['option']       = $shareAttrs[5]; 
+          $return[$shareAttrs[0]."|".$entry['cn'][0]]['server']       = $entry['cn'][0];
+          $return[$shareAttrs[0]."|".$entry['cn'][0]]['name']         = $shareAttrs[0]; 
+          $return[$shareAttrs[0]."|".$entry['cn'][0]]['description']  = $shareAttrs[1]; 
+          $return[$shareAttrs[0]."|".$entry['cn'][0]]['type']         = $shareAttrs[2]; 
+          $return[$shareAttrs[0]."|".$entry['cn'][0]]['charset']      = $shareAttrs[3]; 
+          $return[$shareAttrs[0]."|".$entry['cn'][0]]['path']         = $shareAttrs[4]; 
+          $return[$shareAttrs[0]."|".$entry['cn'][0]]['option']       = $shareAttrs[5]; 
         }
       }
     }
@@ -950,7 +950,7 @@ class environment extends plugin
     $a_return = array();
     if(is_array($this->gotoShares)){
       foreach($this->gotoShares as $share){
-        $a_return[$share['name']]= $share['name']." [".$share['server']."]";
+        $a_return[$share['name']."|".$share['server']]= $share['name']." [".$share['server']."]";
       }
     }
     return($a_return);
