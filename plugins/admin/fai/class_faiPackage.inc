@@ -11,7 +11,7 @@ class faiPackage extends plugin
   var $ignore_account   = TRUE;
 
   /* Attributes for this Object */
-  var $attributes       = array("cn","description","FAIpackage");
+  var $attributes       = array("cn","description","FAIpackage","section","mirror","release");
 
   /* ObjectClasses for this Object*/
   var $objectclasses    = array("top","FAIclass","FAIpackageList");
@@ -34,6 +34,17 @@ class faiPackage extends plugin
   var $dialog           = NULL;     // a dialog, e.g. new disk dialog
   var $SubObjects       = array();  // All leafobjects of this object
 
+  var $section          = ""; // The selected section
+  var $release          = ""; // selected release
+  var $mirror           = ""; // selected mirror
+
+  var $servers          = array();  // All available servers
+  var $sections         = array();  // All possible sections 
+  var $releases         = array();  // All release types
+
+  var $mirrors          = array();  // The combination of server/section/release
+  var $confDir          = "";
+
   function faiPackage ($config, $dn= NULL)
   {
     /* Load Attributes */
@@ -47,6 +58,7 @@ class faiPackage extends plugin
       $this->dn =$dn;
     }
 
+    $this->confDir = CONFIG_DIR."/fai/";
     $this->FAIpackage = "test";
   }
 
@@ -61,20 +73,92 @@ class faiPackage extends plugin
       $smarty->assign($attrs,$this->$attrs);
     }
 
-    $display.= $smarty->fetch(get_template_path('faiPackage.tpl', TRUE));
-    return($display);
-  }
+    /* Second try */
+    
+    /* Check available server entries in CONFIG_DIR/fai 
+     */
+    $confDir = $this->confDir; 
+    if(!is_readable($confDir)){
+      print_red(sprintf(_("Can't read configuration folder '%s'."),$confDir));
+    }else{
+      
+      /* Try to catch all available mirrors 
+         Possibly check if each server is reachable
+       */
+      $this->mirrors= array();
+      $fd = opendir($confDir);
+      while($mirror = readdir($fd)){
+        if((is_dir($confDir.$mirror."/"))&&(($mirror != "." )&&($mirror!=".."))){
 
-  /* Generate listbox friendly SubObject list
-  */
-  function getList(){
-    $a_return=array();
-    foreach($this->SubObjects as $obj){
-      if($obj['status'] != "delete"){
-        $a_return[$obj['cn']]= $obj['cn']." [".$obj['description']."]";
+          $mirrorDir = $confDir.$mirror."/";
+
+          $fe = opendir($mirrorDir);
+          while($section = readdir($fe)){
+            if((is_dir($mirrorDir.$section))&&(($section != "." )&&($section!=".."))){
+
+              $sectionDir = $mirrorDir.$section."/";
+
+              $ff = opendir($sectionDir);
+              while($release = readdir($ff)){
+                if((is_file($sectionDir.$release))&&(($release != "." )&&($release!="..")&&(!preg_match("/.*\.in$/",$release)))){
+              
+                  $this->servers[$mirror]=$mirror;
+                  $this->sections[$section]=$section;
+                  $this->releases[$release]=$release;
+
+                  if(empty($this->mirror)){
+                    $this->mirror= $mirror;
+                  }
+                  if(empty($this->section)){
+                    $this->section = $section;
+                  }
+                  if(empty($this->release)){
+                    $this->release = $release;
+                  }                    
+
+                  $arr=array();
+                  $arr['mirror'] = $mirror;
+                  $arr['section']= $section; 
+                  $arr['release']= $release;
+ 
+                  $this->mirrors[] = $arr ;
+                }
+              }
+              fclose($ff);
+            }
+          }
+          fclose($fe);
+        }
+      }
+      fclose($fd);
+    }
+
+    $availableServer = array();
+    foreach($this->mirrors as $mir){
+      if(($mir['section'] == $this->section)&&($mir['release']==$this->release)){
+        $availableServer[$mir['mirror']]=$mir['mirror'];
       }
     }
-    return($a_return);
+
+    if(isset($_POST['Addpkg'])){
+      $this->dialog = new faiPackageEntry($this->config, $this->dn,$this->confDir.$this->mirror."/".$this->section."/".$this->release);
+      $this->is_dialog =true;
+    }
+    
+    if($this->is_dialog){
+      return $this->dialog->execute();
+    }
+    
+
+    $smarty->assign("mirrors" ,$availableServer);
+    $smarty->assign("mirror"  ,$this->mirror);
+    $smarty->assign("sections",$this->sections);
+    $smarty->assign("section" ,$this->section);
+    $smarty->assign("releases",$this->releases);
+    $smarty->assign("release" ,$this->release);
+    $smarty->assign("usedPackages",$this->usedPackages);
+    $display.= $smarty->fetch(get_template_path('faiPackage.tpl', TRUE));
+    return($display);
   }
 
   /* Delete me, and all my subtrees
