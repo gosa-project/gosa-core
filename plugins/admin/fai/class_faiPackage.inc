@@ -98,7 +98,7 @@ class faiPackage extends plugin
     }
 
     if(isset($_POST['Addpkg'])){
-      $this->dialog = new faiPackageEntry($this->config, $this->dn,$this->confDir.$this->mirror."/".$this->section."/".$this->release,$this->usedPackages);
+      $this->dialog = new faiPackageEntry($this->config, $this->dn,$this->confDir.$this->FAIdebianMirror."/".$this->FAIdebianSection."/".$this->FAIdebianRelease,$this->usedPackages);
       $this->is_dialog =true;
     }
  
@@ -238,7 +238,11 @@ class faiPackage extends plugin
   function check()
   {
     $message= array();
-    
+  
+    if(count($this->usedPackages)==0){
+      $message[]=_("Please select a least one Package.");
+    }
+  
     if((empty($this->FAIdebianSection))||(empty($this->FAIdebianRelease))||(empty($this->FAIdebianMirror))){
       $message[]=_("Please choose a valid combination for your repository setup.");
     }
