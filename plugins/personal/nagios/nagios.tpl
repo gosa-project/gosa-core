@@ -65,19 +65,19 @@
 <td style="width:100%; vertical-align:top;">
    <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Nagios Auth{/t}</h2>
    <table summary="">
-	<input type="checkbox" name="AuthorizedSystemInformation" value="{$AuthorizedSystemInformation}"  {$AuthorizedSystemInformation}>{t}authorized_for_system_information{/t}<br />
+	<tr><td><input type="checkbox" name="AuthorizedSystemInformation" value="{$AuthorizedSystemInformation}"  {$AuthorizedSystemInformation}>{t}authorized_for_system_information{/t}</td></tr>
 	
-	<input type="checkbox" name="AuthorizedConfigurationInformation" {$AuthorizedConfigurationInformationACL} value="{$AuthorizedConfigurationInformation}" {$AuthorizedConfigurationInformation}>authorized_for_configuration_information<br />
+	<tr><td><input type="checkbox" name="AuthorizedConfigurationInformation" {$AuthorizedConfigurationInformationACL} value="{$AuthorizedConfigurationInformation}" {$AuthorizedConfigurationInformation}>authorized_for_configuration_information</td></tr>
 	
-	<input type="checkbox" name="AuthorizedSystemCommands" {$AuthorizedSystemCommandsACL} value="{$AuthorizedSystemCommands}" {$AuthorizedSystemCommands}>authorized_for_system_commands<br />
+	<tr><td><input type="checkbox" name="AuthorizedSystemCommands" {$AuthorizedSystemCommandsACL} value="{$AuthorizedSystemCommands}" {$AuthorizedSystemCommands}>authorized_for_system_commands</td></tr>
 	
-	<input type="checkbox" name="AuthorizedAllServices" {$AuthorizedAllServicesACL} value="{$AuthorizedAllServices}" {$AuthorizedAllServices}>authorized_for_all_services<br />
+	<tr><td><input type="checkbox" name="AuthorizedAllServices" {$AuthorizedAllServicesACL} value="{$AuthorizedAllServices}" {$AuthorizedAllServices}>authorized_for_all_services</td></tr>
 	
-	<input type="checkbox" name="AuthorizedAllHosts" {$AuthorizedAllHostsACL} value="{$AuthorizedAllHosts}" {$AuthorizedAllHosts}>authorized_for_all_hosts<br />
+	<tr><td><input type="checkbox" name="AuthorizedAllHosts" {$AuthorizedAllHostsACL} value="{$AuthorizedAllHosts}" {$AuthorizedAllHosts}>authorized_for_all_hosts</td></tr>
 	
-	<input type="checkbox" name="AuthorizedAllServiceCommands" {$AuthorizedAllServiceCommandsACL} value="{$AuthorizedAllServiceCommands}" {$AuthorizedAllServiceCommands}>authorized_for_all_service_commands<br />
+	<tr><td><input type="checkbox" name="AuthorizedAllServiceCommands" {$AuthorizedAllServiceCommandsACL} value="{$AuthorizedAllServiceCommands}" {$AuthorizedAllServiceCommands}>authorized_for_all_service_commands</td></tr>
 	
-	<input type="checkbox" name="AuthorizedAllHostCommands" {$AuthorizedAllHostCommandsACL} value="{$AuthorizedAllHostCommands}" {$AuthorizedAllHostCommands}>authorized_for_all_host_commands<br />
+	<tr><td><input type="checkbox" name="AuthorizedAllHostCommands" {$AuthorizedAllHostCommandsACL} value="{$AuthorizedAllHostCommands}" AuthorizedAllHostCommands}>authorized_for_all_host_commands</td></tr>
 
    </table>
 </td>
