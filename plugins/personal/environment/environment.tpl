@@ -24,7 +24,7 @@
 						<table summary="{t}Profile server managment{/t}">
 							<tr>
 								<td>	
-									<LABEL for="gotoProfileServer">{t}Profil server{/t}</LABEL>
+									<LABEL for="gotoProfileServer">{t}Profil path{/t}</LABEL>
 								</td>
 								<td>
 									<select style="width:350px;" id="gotoProfileServer" 

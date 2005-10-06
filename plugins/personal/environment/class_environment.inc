@@ -931,7 +931,12 @@ class environment extends plugin
     $a_res = $ldap->search("(objectClass=goShareServer)",array("goExportEntry","cn"));
     $return= array();
     while($entry = $ldap->fetch($a_res)){
-      $return[$entry['cn'][0]] = $entry['cn'][0];
+      unset($entry['goExportEntry']['count']);
+      foreach($entry['goExportEntry'] as $share){
+        $a_share = split("\|",$share);
+        $sharename = $a_share[0];
+        $return[$entry['cn'][0]."|".$sharename] = $entry['cn'][0]." [".$sharename."]";
+      }
     }
     return($return);
   }
