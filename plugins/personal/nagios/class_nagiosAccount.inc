@@ -159,7 +159,8 @@ class nagiosAccount extends plugin
     }
 	
   }
-
+	
+   /* Check formular input */
   function check()
   {
     $message= array();
@@ -183,6 +184,7 @@ class nagiosAccount extends plugin
 	return($message);
   }
   
+  /* Save data to object */
   function save_object()
   {
 
@@ -192,6 +194,7 @@ class nagiosAccount extends plugin
     }
   }
 
+  /* remove object from parent */
   function remove_from_parent()
   {
 	  /* Cancel if there's nothing to do here */
