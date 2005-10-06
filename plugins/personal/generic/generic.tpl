@@ -88,6 +88,16 @@
     </tr>
     <tr>
      <td>
+      <label for="preferredLanguage">{t}Prefered langage{/t}</label>
+     </td>
+     <td>
+      <select size="1" id="preferredLanguage" name="preferredLanguage" {$preferredLanguageACL}>
+       {html_options options=$preferredLanguage_list selected=$preferredLanguage}
+      </select>
+     </td>
+    </tr>
+    <tr>
+     <td>
       <div style="height:10px;"></div>
       <label for="base">{t}Base{/t}</label>
      </td>

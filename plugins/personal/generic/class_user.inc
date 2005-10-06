@@ -45,6 +45,7 @@ class user extends plugin
   var $dob= "0";
   var $use_dob= "0";
   var $gender= "0";
+  var $preferredLanguage= "";
 
   var $jpegPhoto= "*removed*";
   var $photoData= "";
@@ -82,7 +83,7 @@ class user extends plugin
 
   /* attribute list for save action */
   var $attributes= array("sn", "givenName", "uid", "personalTitle", "academicTitle",
-      "homePostalAddress", "homePhone", "labeledURI", "o", "ou", "dob", "gender",
+      "homePostalAddress", "homePhone", "labeledURI", "o", "ou", "dob", "gender","preferredLanguage",
       "departmentNumber", "employeeNumber", "employeeType", "l", "st",
       "roomNumber", "telephoneNumber", "mobile", "pager", "cn", "userPKCS12",
       "postalAddress", "facsimileTelephoneNumber", "userSMIMECertificate");
@@ -246,6 +247,10 @@ class user extends plugin
     /* Assign sex */
     $sex= array(0 => "&nbsp;", "F" => _("female"), "M" => _("male"));
     $smarty->assign("gender_list", $sex);
+
+    /* Assign prefered langage */
+    $language= array(0 => "&nbsp;", "fr_FR" => _("fr_FR"), "en_EN" => _("en_EN"), "de_DE" => _("de_DE"), "it_IT" => _("it_IT"));
+    $smarty->assign("preferredLanguage_list", $language);
 
     /* Get random number for pictures */
     srand((double)microtime()*1000000); 
@@ -659,6 +664,13 @@ class user extends plugin
         unset($this->attrs["gender"]);
       } else {
         $this->attrs["gender"]= array();
+      }
+    }
+      if ($this->preferredLanguage == "0"){
+      if ($this->new) {
+        unset($this->attrs["preferredLanguage"]);
+      } else {
+        $this->attrs["preferredLanguage"]= array();
       }
     }
 
