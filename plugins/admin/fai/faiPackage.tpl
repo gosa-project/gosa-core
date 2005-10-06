@@ -38,7 +38,7 @@
 							<select name="FAIdebianSection" title="{t}section{/t}" {$sectionACL}>
 								{html_options options=$sections selected=$section}
 							</select>
-							<input type="submit" value="{t}refresh{/t}" name="refresh1">
+							<input type="submit" value="{t}refresh{/t}" name="refresh2">
 						</td>
 					</tr>
 					<tr>
@@ -51,7 +51,7 @@
 							<select name="FAIdebianRelease" title="{t}release{/t}" {$releaseACL}>
 								{html_options options=$releases selected=$release}
 							</select>
-							<input type="submit" value="{t}refresh{/t}" name="refresh2">
+							<input type="submit" value="{t}refresh{/t}" name="refresh1">
 						</td>
 					</tr>
 					<tr>

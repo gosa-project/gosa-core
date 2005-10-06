@@ -63,12 +63,18 @@ class faiPackageEntry extends plugin
   
     }
 
-    $CHKS = "<table><tr><td><input type='hidden' value='chkchange' name='chkchange'>";
+    $CHKS = "<table><tr><input type='hidden' value='chkchange' name='chkchange'>";
+    $i = 0; 
     foreach($this->categories as $cat => $selected){
+      if($i == 3){
+        $CHKS .="</tr><tr>";
+        $i = 0;
+      }
+      $i ++ ;
       if($selected){
-        $CHKS .="<input type='checkbox' value='1' name='CAT".$cat."' checked onclick='document.mainform.submit()'>&nbsp;".$cat."&nbsp;";
+        $CHKS .="<td><input type='checkbox' value='1' name='CAT".$cat."' checked onclick='document.mainform.submit()'>&nbsp;".$cat."&nbsp;</td>";
       }else{
-        $CHKS .="<input type='checkbox' value='1' name='CAT".$cat."' onclick='document.mainform.submit()'>&nbsp;".$cat."&nbsp;";
+        $CHKS .="<td><input type='checkbox' value='1' name='CAT".$cat."' onclick='document.mainform.submit()'>&nbsp;".$cat."&nbsp;</td>";
       }
     }
     $CHKS .= "<br><input type='submit' name='refresh0' value='"._("refresh")."'> </td></tr></table>";

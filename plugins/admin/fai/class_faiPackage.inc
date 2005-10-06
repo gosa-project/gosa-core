@@ -11,7 +11,7 @@ class faiPackage extends plugin
   var $ignore_account   = TRUE;
 
   /* Attributes for this Object */
-  var $attributes       = array("cn","description","FAIpackage","FAIdebianSection","FAIdebianRelease","FAIdebianMirror");
+  var $attributes       = array("cn","description","FAIpackage","FAIdebianRelease","FAIdebianSection","FAIdebianMirror");
 
   /* ObjectClasses for this Object*/
   var $objectclasses    = array("top","FAIclass","FAIpackageList","FAIrepository");
@@ -34,17 +34,17 @@ class faiPackage extends plugin
   var $dialog           = NULL;     // a dialog, e.g. new disk dialog
   var $SubObjects       = array();  // All leafobjects of this object
 
-  var $FAIdebianSection          = ""; // The selected section
-  var $FAIdebianRelease          = ""; // selected release
+  var $FAIdebianRelease          = ""; // The selected release
+  var $FAIdebianSection          = ""; // selected section
   var $FAIdebianMirror           = ""; // selected mirror
 
   var $servers          = array();  // All available servers
-  var $sections         = array();  // All possible sections 
-  var $releases         = array();  // All release types
+  var $releases         = array();  // All possible releases 
+  var $sections         = array();  // All section types
 
   var $disableRepository = false;
 
-  var $mirrors          = array();  // The combination of server/section/release
+  var $mirrors          = array();  // The combination of server/release/section
   var $confDir          = "";
   var $usedPackages      = array();
 
@@ -61,7 +61,7 @@ class faiPackage extends plugin
       $this->dn =$dn;
     }
 
-    if(isset($this->attrs['FAIdebianRelease'])){
+    if(isset($this->attrs['FAIdebianSection'])){
       $this->disableRepository=true;
     }
 
@@ -92,13 +92,13 @@ class faiPackage extends plugin
 
     $availableServer = array();
     foreach($this->mirrors as $mir){
-      if(($mir['section'] == $this->FAIdebianSection)&&($mir['release']==$this->FAIdebianRelease)){
+      if(($mir['release'] == $this->FAIdebianRelease)&&($mir['section']==$this->FAIdebianSection)){
         $availableServer[$mir['mirror']]=$mir['mirror'];
       }
     }
 
     if(isset($_POST['Addpkg'])){
-      $this->dialog = new faiPackageEntry($this->config, $this->dn,$this->confDir.$this->FAIdebianMirror."/".$this->FAIdebianSection."/".$this->FAIdebianRelease,$this->usedPackages);
+      $this->dialog = new faiPackageEntry($this->config, $this->dn,$this->confDir.$this->FAIdebianMirror."/".$this->FAIdebianRelease."/".$this->FAIdebianSection,$this->usedPackages);
       $this->is_dialog =true;
     }
  
@@ -132,19 +132,19 @@ class faiPackage extends plugin
 
     if($this->disableRepository == true){
       $smarty->assign("mirrorACL"  ," disabled ");
-      $smarty->assign("sectionACL" ," disabled ");
       $smarty->assign("releaseACL" ," disabled ");
+      $smarty->assign("sectionACL" ," disabled ");
     }else{
       $smarty->assign("mirrorACL"  ,"");
-      $smarty->assign("sectionACL" ,"");
       $smarty->assign("releaseACL" ,"");
+      $smarty->assign("sectionACL" ,"");
     }
     $smarty->assign("mirrors" ,$availableServer);
     $smarty->assign("mirror"  ,$this->FAIdebianMirror);
-    $smarty->assign("sections",$this->sections);
-    $smarty->assign("section" ,$this->FAIdebianSection);
     $smarty->assign("releases",$this->releases);
     $smarty->assign("release" ,$this->FAIdebianRelease);
+    $smarty->assign("sections",$this->sections);
+    $smarty->assign("section" ,$this->FAIdebianSection);
     $smarty->assign("usedPackages",$this->printUsedPackages());
     $display.= $smarty->fetch(get_template_path('faiPackage.tpl', TRUE));
     return($display);
@@ -167,33 +167,33 @@ class faiPackage extends plugin
           $mirrorDir = $confDir.$mirror."/";
 
           $fe = opendir($mirrorDir);
-          while($section = readdir($fe)){
-            if((is_dir($mirrorDir.$section))&&(($section != "." )&&($section!=".."))){
+          while($release = readdir($fe)){
+            if((is_dir($mirrorDir.$release))&&(($release != "." )&&($release!=".."))){
 
-              $sectionDir = $mirrorDir.$section."/";
+              $releaseDir = $mirrorDir.$release."/";
 
-              $ff = opendir($sectionDir);
-              while($release = readdir($ff)){
-                if((is_file($sectionDir.$release))&&(($release != "." )&&($release!="..")&&(!preg_match("/.*\.in$/",$release)))){
+              $ff = opendir($releaseDir);
+              while($section = readdir($ff)){
+                if((is_file($releaseDir.$section))&&(($section != "." )&&($section!="..")&&(!preg_match("/.*\.in$/",$section)))){
               
                   $this->servers[$mirror]=$mirror;
-                  $this->sections[$section]=$section;
                   $this->releases[$release]=$release;
+                  $this->sections[$section]=$section;
 
                   if(empty($this->FAIdebianMirror)){
                     $this->FAIdebianMirror= $mirror;
                   }
-                  if(empty($this->FAIdebianSection)){
-                    $this->FAIdebianSection = $section;
-                  }
                   if(empty($this->FAIdebianRelease)){
                     $this->FAIdebianRelease = $release;
+                  }
+                  if(empty($this->FAIdebianSection)){
+                    $this->FAIdebianSection = $section;
                   }                    
 
                   $arr=array();
                   $arr['mirror'] = $mirror;
-                  $arr['section']= $section; 
-                  $arr['release']= $release;
+                  $arr['release']= $release; 
+                  $arr['section']= $section;
  
                   $this->mirrors[] = $arr ;
                 }
@@ -243,7 +243,7 @@ class faiPackage extends plugin
       $message[]=_("Please select a least one Package.");
     }
   
-    if((empty($this->FAIdebianSection))||(empty($this->FAIdebianRelease))||(empty($this->FAIdebianMirror))){
+    if((empty($this->FAIdebianRelease))||(empty($this->FAIdebianSection))||(empty($this->FAIdebianMirror))){
       $message[]=_("Please choose a valid combination for your repository setup.");
     }
 
