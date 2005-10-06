@@ -38,18 +38,15 @@ Things to fix before 2.4:
 
 * Saving of initially created gofon stuff fails (?)
 
-* Unterbäume in Applicatins wird nicht angezeigt (?)
-
-* Terminals/Workstations lassen sich nicht speichern
-
-* Escapen von Skripten ist sehr suboptimal
+* Avoid escaping of " in FAI scripts
 
 * Group Dialog : Primary group chkbox is broken, nothing is shown if it is checked.
 
 =======
-* Basis wird bei diversen Dialogen nicht übernommen
+* Base is not evaluated in several dialogs -> Creating an object in a special base
+  results in creation in the ldap root
 
-* Workstation is defekt
+* Workstation is defect
 
 
 Target for 2.5:
