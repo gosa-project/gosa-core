@@ -35,7 +35,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<select name="section" title="{t}section{/t}">
+							<select name="FAIdebianSection" title="{t}section{/t}">
 								{html_options options=$sections selected=$section}
 							</select>
 							<input type="submit" value="{t}refresh{/t}" name="refresh1">
@@ -48,7 +48,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<select name="release" title="{t}release{/t}">
+							<select name="FAIdebianRelease" title="{t}release{/t}">
 								{html_options options=$releases selected=$release}
 							</select>
 							<input type="submit" value="{t}refresh{/t}" name="refresh2">
@@ -61,7 +61,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<select name="mirror" title="{t}mirror{/t}">
+							<select name="FAIdebianMirror" title="{t}mirror{/t}">
 								{html_options options=$mirrors selected=$mirror}
 							</select>
 							<input type="submit" value="{t}refresh{/t}" name="refresh3">

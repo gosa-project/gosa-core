@@ -11,10 +11,10 @@ class faiPackage extends plugin
   var $ignore_account   = TRUE;
 
   /* Attributes for this Object */
-  var $attributes       = array("cn","description","FAIpackage","section","mirror","release");
+  var $attributes       = array("cn","description","FAIpackage","FAIdebianSection","FAIdebianRelease","FAIdebianMirror");
 
   /* ObjectClasses for this Object*/
-  var $objectclasses    = array("top","FAIclass","FAIpackageList");
+  var $objectclasses    = array("top","FAIclass","FAIpackageList","FAIrepository");
 
   /* Class name of the Ldap ObjectClass for the Sub Object */
   var $subClass         = "";
@@ -34,9 +34,9 @@ class faiPackage extends plugin
   var $dialog           = NULL;     // a dialog, e.g. new disk dialog
   var $SubObjects       = array();  // All leafobjects of this object
 
-  var $section          = ""; // The selected section
-  var $release          = ""; // selected release
-  var $mirror           = ""; // selected mirror
+  var $FAIdebianSection          = ""; // The selected section
+  var $FAIdebianRelease          = ""; // selected release
+  var $FAIdebianMirror           = ""; // selected mirror
 
   var $servers          = array();  // All available servers
   var $sections         = array();  // All possible sections 
@@ -61,10 +61,10 @@ class faiPackage extends plugin
 
     unset($this->attrs['FAIpackage']['count']);
     foreach($this->attrs['FAIpackage'] as $pkg){
-      $this->usedPackages[] = $pkg;
+      $this->usedPackages[$pkg] = $pkg;
     }
     $this->confDir = CONFIG_DIR."/fai/";
-    $this->FAIpackage = "test";
+    $this->FAIpackage = array();
   }
 
   function execute()
@@ -82,7 +82,7 @@ class faiPackage extends plugin
 
     $availableServer = array();
     foreach($this->mirrors as $mir){
-      if(($mir['section'] == $this->section)&&($mir['release']==$this->release)){
+      if(($mir['section'] == $this->FAIdebianSection)&&($mir['release']==$this->FAIdebianRelease)){
         $availableServer[$mir['mirror']]=$mir['mirror'];
       }
     }
@@ -117,11 +117,11 @@ class faiPackage extends plugin
     
 
     $smarty->assign("mirrors" ,$availableServer);
-    $smarty->assign("mirror"  ,$this->mirror);
+    $smarty->assign("mirror"  ,$this->FAIdebianMirror);
     $smarty->assign("sections",$this->sections);
-    $smarty->assign("section" ,$this->section);
+    $smarty->assign("section" ,$this->FAIdebianSection);
     $smarty->assign("releases",$this->releases);
-    $smarty->assign("release" ,$this->release);
+    $smarty->assign("release" ,$this->FAIdebianRelease);
     $smarty->assign("usedPackages",$this->printUsedPackages());
     $display.= $smarty->fetch(get_template_path('faiPackage.tpl', TRUE));
     return($display);
@@ -243,10 +243,6 @@ class faiPackage extends plugin
     foreach($this->usedPackages as $pkg => $obj){
       $this->attrs['FAIpackage'][] = $pkg;
     } 
-
-    unset($this->attrs['section']);
-    unset($this->attrs['mirror']);
-    unset($this->attrs['release']);
 
     $ldap->cat($this->dn);
     if($ldap->count()!=0){
