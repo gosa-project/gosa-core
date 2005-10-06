@@ -65,10 +65,14 @@ class faiPackage extends plugin
       $this->disableRepository=true;
     }
 
-    unset($this->attrs['FAIpackage']['count']);
-    foreach($this->attrs['FAIpackage'] as $pkg){
-      $this->usedPackages[$pkg] = $pkg;
-    }
+    if(isset($this->attrs['FAIpackage'])){
+      unset($this->attrs['FAIpackage']['count']);
+      foreach($this->attrs['FAIpackage'] as $pkg){
+        $this->usedPackages[$pkg] = $pkg;
+      }
+    }else{
+      $this->usedPackages = array();;
+    }  
     $this->confDir = CONFIG_DIR."/fai/";
     $this->FAIpackage = array();
   }
