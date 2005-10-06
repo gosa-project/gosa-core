@@ -42,6 +42,8 @@ class faiPackage extends plugin
   var $sections         = array();  // All possible sections 
   var $releases         = array();  // All release types
 
+  var $disableRepository = false;
+
   var $mirrors          = array();  // The combination of server/section/release
   var $confDir          = "";
   var $usedPackages      = array();
@@ -57,6 +59,10 @@ class faiPackage extends plugin
      */
     if($dn != "new"){
       $this->dn =$dn;
+    }
+
+    if(isset($this->attrs['FAIdebianRelease'])){
+      $this->disableRepository=true;
     }
 
     unset($this->attrs['FAIpackage']['count']);
@@ -91,7 +97,11 @@ class faiPackage extends plugin
       $this->dialog = new faiPackageEntry($this->config, $this->dn,$this->confDir.$this->mirror."/".$this->section."/".$this->release,$this->usedPackages);
       $this->is_dialog =true;
     }
-  
+ 
+    if(isset($_POST['Delpkg'])){
+      unset($this->usedPackages[$_POST['usedPackages']]);
+    }
+ 
     if(isset($_POST['CancelSubObject'])){
       $this->dialog = false;
       $this->is_dialog=false;
@@ -108,6 +118,7 @@ class faiPackage extends plugin
         $this->usedPackages = $use;
         $this->dialog = false;
         $this->is_dialog=false;
+        $this->disableRepository =true;
       }
     }
  
@@ -115,7 +126,15 @@ class faiPackage extends plugin
       return $this->dialog->execute();
     }
     
-
+    if($this->disableRepository == true){
+      $smarty->assign("mirrorACL"  ," disabled ");
+      $smarty->assign("sectionACL" ," disabled ");
+      $smarty->assign("releaseACL" ," disabled ");
+    }else{
+      $smarty->assign("mirrorACL"  ,"");
+      $smarty->assign("sectionACL" ,"");
+      $smarty->assign("releaseACL" ,"");
+    }
     $smarty->assign("mirrors" ,$availableServer);
     $smarty->assign("mirror"  ,$this->FAIdebianMirror);
     $smarty->assign("sections",$this->sections);
@@ -215,10 +234,11 @@ class faiPackage extends plugin
   function check()
   {
     $message= array();
-    $str = utf8_encode("üצה");
-    if((preg_match("/[^a-z0-9".$str."\.,;:\-_\? ]/i",$this->description))){
-      $message[]=_("Please enter a valid description.");
+    
+    if((empty($this->FAIdebianSection))||(empty($this->FAIdebianRelease))||(empty($this->FAIdebianMirror))){
+      $message[]=_("Please choose a valid combination for your repository setup.");
     }
+
     return ($message);
   }
 
