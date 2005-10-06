@@ -22,7 +22,7 @@ class kioskManagementDialog extends plugin
     if($attach){
       $this->filesToAttach = $attach;
     }
-    $this->baseDir = search_config($this->config->data['MENU'],"environment", "KIOSKPATH");
+    $this->baseDir = search_config($this->config->data,"environment", "KIOSKPATH");
   }
 
   function execute()
@@ -75,9 +75,16 @@ class kioskManagementDialog extends plugin
   function getKioskProfiles($attach = false)
   {
     $a_return = array();
+    
+    /* Empty? */
+    if ($this->baseDir == ""){
+      print_red(_("There is no KIOSKPATH defined in your gosa.conf. Can't manage kiosk profiles!"));
+      return ($a_return);
+    }
+    
     $dir = @opendir($this->baseDir);
     if(!$dir){
-      print_red(sprintf(_("Can't open kiosk_path '%s'. Error was: permission denied. Possibly there is no kiosk_path defined in the configuration file."),$this->baseDir));
+      print_red(sprintf(_("Kiosk path '%s' is not accessible. Please check the permissions."),$this->baseDir));
     }else{
       $a_return = array();
       while($file = readdir($dir)){

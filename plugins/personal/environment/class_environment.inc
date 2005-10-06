@@ -175,8 +175,6 @@ class environment extends plugin
        All these tab management is done here
     */
 
-    print_a($this);
-
     /* Working from Usermenu an the Account is currently disbled
      * this->parent :  is only set if we are working in a list of tabs
      * is_account   :  is only true if the needed objectClass is given
@@ -654,7 +652,7 @@ class environment extends plugin
     $realyUsedAttrs= array();
 
 
-    $path = search_config($this->config->data['MENU'],"environment", "KIOSKPATH"); 
+    $path = search_config($this->config->data,"environment", "KIOSKPATH"); 
     /* Creating Kiosk Profiles */
     foreach($this->newKioskProfiles as $file){
       $contents = $file['contents'];
