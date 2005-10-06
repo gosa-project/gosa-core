@@ -17,8 +17,8 @@
 			<option disabled>&nbsp;</option>
 	    </select>
 	<br>	
-		<input type="submit" 	value="{t}Edit{/t}" 	name="NewNfsEdit" {$goShareServer} {$goExportEntryACL}  id="NewNfsEditId"> 
 		<input type="submit" 	value="{t}Add{/t}"	name="NewNfsAdd"  {$goShareServer} {$goExportEntryACL}	id="NewNfsAddId"> 
+		<input type="submit" 	value="{t}Edit{/t}" 	name="NewNfsEdit" {$goShareServer} {$goExportEntryACL}  id="NewNfsEditId"> 
 		<input type="submit" 	value="{t}Delete{/t}"  	name="DelNfsEnt"  {$goShareServer} {$goExportEntryACL}	id="DelNfsEntId">
 	</td>
 	</tr>
