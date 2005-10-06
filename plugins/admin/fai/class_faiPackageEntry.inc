@@ -77,7 +77,7 @@ class faiPackageEntry extends plugin
         $CHKS .="<td><input type='checkbox' value='1' name='CAT".$cat."' onclick='document.mainform.submit()'>&nbsp;".$cat."&nbsp;</td>";
       }
     }
-    $CHKS .= "<br><input type='submit' name='refresh0' value='"._("refresh")."'> </td></tr></table>";
+    $CHKS .= "</td></tr></table>";
 
     $packages = array();
     foreach($this->categories as $cat => $use){

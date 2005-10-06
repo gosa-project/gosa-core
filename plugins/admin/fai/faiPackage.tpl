@@ -30,19 +30,6 @@
 				<table summary="" cellspacing="4">
 					<tr>
 						<td>
-							<LABEL for="section">
-							{t}Section{/t}
-							</LABEL>
-						</td>
-						<td>
-							<select name="FAIdebianSection" title="{t}section{/t}" {SsectionACL}>
-								{html_options options=$sections selected=$section}
-							</select>
-							<input type="submit" value="{t}refresh{/t}" name="SetSection">
-						</td>
-					</tr>
-					<tr>
-						<td>
 							<LABEL for="release">
 							{t}Release{/t}
 							</LABEL>
@@ -52,6 +39,19 @@
 								{html_options options=$releases selected=$release}
 							</select>
 							<input type="submit" value="{t}refresh{/t}" name="SetRelease">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<LABEL for="section">
+							{t}Section{/t}
+							</LABEL>
+						</td>
+						<td>
+							<select name="FAIdebianSection" title="{t}section{/t}" {SsectionACL}>
+								{html_options options=$sections selected=$section}
+							</select>
+							<input type="submit" value="{t}refresh{/t}" name="SetSection">
 						</td>
 					</tr>
 					<tr>
