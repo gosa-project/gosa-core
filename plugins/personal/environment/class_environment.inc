@@ -140,9 +140,10 @@ class environment extends plugin
       foreach($this->attrs['gotoShare'] as $share){
         $tmp = $tmp2 = array();
         $tmp = split("\|",$share);
-        $tmp2['name']      =$tmp[0];
-        $tmp2['mountPoint']=base64_decode($tmp[1]);
-        $this->gotoShares[$tmp[0]]=$tmp2;
+        $tmp2['server']      =$tmp[0];
+        $tmp2['name']        =$tmp[1];
+        $tmp2['mountPoint']  =$tmp[2];
+        $this->gotoShares[$tmp[1].$tmp[0]]=$tmp2;
       }
     }
 
@@ -421,7 +422,6 @@ class environment extends plugin
       }else{
         $a_share = $this->gotoAvailableShares[$_POST['gotoShareSelection']];
         $s_mount = $_POST['gotoShareMountPoint'];
-
         /* Preparing the new assignment */ 
         $this->gotoShares[$a_share['name']]=$a_share;
         $this->gotoShares[$a_share['name']]['mountPoint']=$s_mount;
@@ -838,7 +838,7 @@ class environment extends plugin
     /* Prepare Shares */
     $this->attrs['gotoShare']=array();
     foreach($this->gotoShares as $name => $share){
-      $this->attrs['gotoShare'][] = $share['name']."|".base64_encode($share['mountPoint']);
+      $this->attrs['gotoShare'][] =$share['server']."|".$share['name']."|".$share['mountPoint'];
     }
 
     if(!empty($this->gotoKioskProfile)){
@@ -901,21 +901,22 @@ class environment extends plugin
   function getShareList($listboxEntry = false)
   {
     $ldap= $this->config->get_ldap_link();
-    $a_res = $ldap->search("(objectClass=goShareServer)",array("goExportEntry"));
+    $a_res = $ldap->search("(objectClass=goShareServer)",array("goExportEntry","cn"));
     $return= array();
     while($entry = $ldap->fetch($a_res)){
       unset($entry['goExportEntry']['count']);
       foreach($entry['goExportEntry'] as $export){
         $shareAttrs = split("\|",$export);
         if($listboxEntry) { 
-          $return[$shareAttrs[0]] = $shareAttrs[0]." - ".$shareAttrs[4];
+          $return[$shareAttrs[0].$entry['cn'][0]] = $shareAttrs[0]." - ".$entry['cn'][0];
         }else{
-          $return[$shareAttrs[0]]['name']         = $shareAttrs[0]; 
-          $return[$shareAttrs[0]]['description']  = $shareAttrs[1]; 
-          $return[$shareAttrs[0]]['type']         = $shareAttrs[2]; 
-          $return[$shareAttrs[0]]['charset']      = $shareAttrs[3]; 
-          $return[$shareAttrs[0]]['path']         = $shareAttrs[4]; 
-          $return[$shareAttrs[0]]['option']       = $shareAttrs[5]; 
+          $return[$shareAttrs[0].$entry['cn'][0]]['server']       = $entry['cn'][0];
+          $return[$shareAttrs[0].$entry['cn'][0]]['name']         = $shareAttrs[0]; 
+          $return[$shareAttrs[0].$entry['cn'][0]]['description']  = $shareAttrs[1]; 
+          $return[$shareAttrs[0].$entry['cn'][0]]['type']         = $shareAttrs[2]; 
+          $return[$shareAttrs[0].$entry['cn'][0]]['charset']      = $shareAttrs[3]; 
+          $return[$shareAttrs[0].$entry['cn'][0]]['path']         = $shareAttrs[4]; 
+          $return[$shareAttrs[0].$entry['cn'][0]]['option']       = $shareAttrs[5]; 
         }
       }
     }
@@ -949,7 +950,7 @@ class environment extends plugin
     $a_return = array();
     if(is_array($this->gotoShares)){
       foreach($this->gotoShares as $share){
-        $a_return[$share['name']]= $share['name']." ".$share['mountPoint'];
+        $a_return[$share['name']]= $share['name']." [".$share['server']."]";
       }
     }
     return($a_return);
