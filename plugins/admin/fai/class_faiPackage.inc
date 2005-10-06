@@ -129,7 +129,7 @@ class faiPackage extends plugin
     if($this->is_dialog){
       return $this->dialog->execute();
     }
-    
+
     if($this->disableRepository == true){
       $smarty->assign("mirrorACL"  ," disabled ");
       $smarty->assign("sectionACL" ," disabled ");
@@ -180,14 +180,14 @@ class faiPackage extends plugin
                   $this->sections[$section]=$section;
                   $this->releases[$release]=$release;
 
-                  if(empty($this->mirror)){
-                    $this->mirror= $mirror;
+                  if(empty($this->FAIdebianMirror)){
+                    $this->FAIdebianMirror= $mirror;
                   }
-                  if(empty($this->section)){
-                    $this->section = $section;
+                  if(empty($this->FAIdebianSection)){
+                    $this->FAIdebianSection = $section;
                   }
-                  if(empty($this->release)){
-                    $this->release = $release;
+                  if(empty($this->FAIdebianRelease)){
+                    $this->FAIdebianRelease = $release;
                   }                    
 
                   $arr=array();
