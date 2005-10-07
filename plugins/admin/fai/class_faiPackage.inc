@@ -100,12 +100,32 @@ class faiPackage extends plugin
 
     if(empty($this->FAIdebianRelease)){
       $disableSection = $disableMirror  = $disableOptions = true;
+      $this->sections=array("---");
     }elseif(empty($this->FAIdebianSection)){
       $disableRelease = $disableMirror  = $disableOptions = true;
     }elseif(empty($this->FAIdebianMirror)){
       $disableRelease = $disableSection = $disableOptions = true;
     }else{
       $disableRelease = $disableSection =  true;
+    }
+
+    $this->genMirror();
+
+    $availableServer = array();
+    foreach($this->mirrors as $mir){
+      if(($mir['release'] == $this->FAIdebianRelease)&&($mir['section']==$this->FAIdebianSection)){
+        $availableServer[$mir['mirror']]=$mir['mirror'];
+      }
+    }
+
+    if(($disableMirror==false)&&(count($availableServer)==0)){
+      $this->FAIdebianRelease = $this->FAIdebianSection = $this->FAIdebianMirror = "";
+      $disableSection = $disableMirror  = $disableOptions = true;
+      $disableRelease = false;
+    }
+
+    if(count($availableServer)==0){
+      $availableServer=array("---");
     }
 
     $smarty->assign("ReleaseACL"  , "");
@@ -125,19 +145,6 @@ class faiPackage extends plugin
     if($disableSection){
       $smarty->assign("SectionACL"," disabled ");
     } 
-
-    $this->genMirror();
-
-    $availableServer = array();
-    foreach($this->mirrors as $mir){
-      if(($mir['release'] == $this->FAIdebianRelease)&&($mir['section']==$this->FAIdebianSection)){
-        $availableServer[$mir['mirror']]=$mir['mirror'];
-      }
-    }
-
-    if($disableMirror){
-      $availableServer[$mir['mirror']]=array("---");
-    }
 
     if(isset($_POST['Addpkg'])){
       $this->dialog = new faiPackageEntry($this->config, $this->dn,$this->confDir.$this->FAIdebianMirror."/".$this->FAIdebianRelease."/".$this->FAIdebianSection,$this->usedPackages);
@@ -165,6 +172,21 @@ class faiPackage extends plugin
         $this->dialog = false;
         $this->is_dialog=false;
       }
+    }
+
+    if(isset($_POST['Conpkg'])){
+      $this->dialog = new faiPackageConfiguration($this->config, $this->dn,"none");
+      $this->is_dialog =true;
+    }
+   
+    if(isset($_POST['SaveObjectConfig'])){
+      $this->dialog = false;
+      $this->is_dialog=false;
+    }
+     
+    if(isset($_POST['CancelObjectConfig'])){
+      $this->dialog = false;
+      $this->is_dialog=false;
     }
  
     if($this->is_dialog){
@@ -217,14 +239,8 @@ class faiPackage extends plugin
                   $this->sections[$section]=$section;
 
                   if(empty($this->FAIdebianRelease)){
-                    $this->servers= array("---");
+                    $this->sections= array("---");
                   }
-                  if(empty($this->FAIdebianSection)){
-                    $this->releases= array("---");
-                  }
-                  if(empty($this->FAIdebianSection)){
-                    $this->FAIdebianSection = $section;
-                  }                    
 
                   $arr=array();
                   $arr['mirror'] = $mirror;
