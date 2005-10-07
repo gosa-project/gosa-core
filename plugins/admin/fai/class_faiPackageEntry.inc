@@ -26,6 +26,10 @@ class faiPackageEntry extends plugin
     plugin::plugin ($config, $dn);
     $this->strID = $strID;
 
+    if(isset($_SESSION['searchStrPKG'])){
+      $this->searchStrPKG=$_SESSION['searchStrPKG'];
+    }
+
     $this->selected=$selected;
   }
 
@@ -116,7 +120,7 @@ class faiPackageEntry extends plugin
                                array("string"=>$pkg[3],"attach"=>"style='border-right:0px'")));
       }
     }
-
+    $_SESSION['searchStrPKG']       = $this->searchStrPKG;
     $smarty->assign("CHKS"          , $CHKS);
     $smarty->assign("searchStrPKG"  , $this->searchStrPKG);
     $smarty->assign("faihead"       , "");
