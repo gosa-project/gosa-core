@@ -56,9 +56,12 @@ class faiScriptEntry extends plugin
     }
 
   
-
     foreach($this->attributes as $attrs){
-      $smarty->assign($attrs,stripslashes($this->$attrs));
+      if(get_magic_quotes_gpc()){
+       $smarty->assign($attrs,stripslashes($this->$attrs));
+      }else{
+       $smarty->assign($attrs,($this->$attrs));
+      } 
     }
 
     for($i =1 ; $i <= 100 ; $i++){
