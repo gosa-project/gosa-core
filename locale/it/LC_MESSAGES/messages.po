@@ -1777,40 +1777,14 @@ msgstr ""
 msgid "Could not open specified certificate!"
 msgstr "Impossibile selezionare il database!"
 
-#: plugins/personal/generic/password.tpl:2
-msgid ""
-"You have changed the method your password is stored in the ldap database. "
-"For that reason you've to enter your password at this point again. GOsa will "
-"then encode it with the selected method."
-msgstr ""
-"Hai modificato il metodo con cui la tua password è immagazzinata nel "
-"database LDAP. Per questo motivo devi inserire nuovamnete la tua password."
-
-#: plugins/personal/generic/generic_picture.tpl:6
-#: plugins/personal/generic/generic.tpl:15
-msgid "Personal picture"
-msgstr "Foto personale"
-
-#: plugins/personal/generic/generic_picture.tpl:23
-msgid "Remove picture"
-msgstr "Elimina foto"
-
-#: plugins/personal/generic/generic_picture.tpl:29
-#: plugins/addons/addressbook/address_edit.tpl:114
-#: plugins/admin/systems/servnfs.tpl:91
-#: plugins/admin/systems/printerPPDDialog.tpl:22
-#: plugins/admin/systems/printerPPDSelectionDialog.tpl:18
-#: plugins/admin/fai/faiScriptEntry.tpl:68
-#: plugins/admin/fai/faiPartitionTableEntry.tpl:29
-#: plugins/admin/fai/faiVariableEntry.tpl:48
-#: plugins/admin/fai/faiHookEntry.tpl:69
-#: plugins/admin/fai/faiTemplateEntry.tpl:60
-msgid "Save"
-msgstr "Salva"
-
 #: plugins/personal/generic/generic.tpl:6
 msgid "Personal information"
 msgstr "Informazioni personali"
+
+#: plugins/personal/generic/generic.tpl:15
+#: plugins/personal/generic/generic_picture.tpl:6
+msgid "Personal picture"
+msgstr "Foto personale"
 
 #: plugins/personal/generic/generic.tpl:17
 msgid "Change picture"
@@ -2053,6 +2027,32 @@ msgstr "Ultimo recapito"
 #: plugins/personal/generic/generic.tpl:387
 msgid "Public visible"
 msgstr "Pubblico"
+
+#: plugins/personal/generic/password.tpl:2
+msgid ""
+"You have changed the method your password is stored in the ldap database. "
+"For that reason you've to enter your password at this point again. GOsa will "
+"then encode it with the selected method."
+msgstr ""
+"Hai modificato il metodo con cui la tua password è immagazzinata nel "
+"database LDAP. Per questo motivo devi inserire nuovamnete la tua password."
+
+#: plugins/personal/generic/generic_picture.tpl:23
+msgid "Remove picture"
+msgstr "Elimina foto"
+
+#: plugins/personal/generic/generic_picture.tpl:29
+#: plugins/addons/addressbook/address_edit.tpl:114
+#: plugins/admin/systems/servnfs.tpl:91
+#: plugins/admin/systems/printerPPDDialog.tpl:22
+#: plugins/admin/systems/printerPPDSelectionDialog.tpl:18
+#: plugins/admin/fai/faiScriptEntry.tpl:68
+#: plugins/admin/fai/faiPartitionTableEntry.tpl:29
+#: plugins/admin/fai/faiVariableEntry.tpl:48
+#: plugins/admin/fai/faiHookEntry.tpl:69
+#: plugins/admin/fai/faiTemplateEntry.tpl:60
+msgid "Save"
+msgstr "Salva"
 
 #: plugins/personal/generic/main.inc:107
 msgid "You are not allowed to set your password!"
@@ -7492,15 +7492,10 @@ msgstr "Specificare una dimenzione valida per le mail da rigettare."
 msgid "Repository"
 msgstr "Riprova"
 
-#: plugins/admin/fai/faiPackage.tpl:34
+#: plugins/admin/fai/faiPackage.tpl:34 plugins/admin/fai/faiPackage.tpl:38
 #, fuzzy
 msgid "Release"
 msgstr "Rimuovi"
-
-#: plugins/admin/fai/faiPackage.tpl:38
-#, fuzzy
-msgid "release"
-msgstr "reset"
 
 #: plugins/admin/fai/faiPackage.tpl:41 plugins/admin/fai/faiPackage.tpl:54
 #: plugins/admin/fai/faiPackage.tpl:67
@@ -7508,14 +7503,9 @@ msgstr "reset"
 msgid "set"
 msgstr "reset"
 
-#: plugins/admin/fai/faiPackage.tpl:47
+#: plugins/admin/fai/faiPackage.tpl:47 plugins/admin/fai/faiPackage.tpl:51
 #, fuzzy
 msgid "Section"
-msgstr "Azione"
-
-#: plugins/admin/fai/faiPackage.tpl:51
-#, fuzzy
-msgid "section"
 msgstr "Azione"
 
 #: plugins/admin/fai/faiPackage.tpl:60
@@ -9741,6 +9731,14 @@ msgstr ""
 #: ihtml/themes/default/help.tpl:15
 msgid "Index"
 msgstr ""
+
+#, fuzzy
+#~ msgid "release"
+#~ msgstr "reset"
+
+#, fuzzy
+#~ msgid "section"
+#~ msgstr "Azione"
 
 #, fuzzy
 #~ msgid "Profil server"

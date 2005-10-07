@@ -1812,41 +1812,14 @@ msgstr "Значение поля \"Пейджер\" содержит некор
 msgid "Could not open specified certificate!"
 msgstr "Невозможно выбрать базу данных!"
 
-#: plugins/personal/generic/password.tpl:2
-msgid ""
-"You have changed the method your password is stored in the ldap database. "
-"For that reason you've to enter your password at this point again. GOsa will "
-"then encode it with the selected method."
-msgstr ""
-"Вы изменили метод шифрования паролей в базе LDAP. В связи с этим введите "
-"свой пароль снова. GOsa произведет шифрование в соответствии с выбраной "
-"схемой."
-
-#: plugins/personal/generic/generic_picture.tpl:6
-#: plugins/personal/generic/generic.tpl:15
-msgid "Personal picture"
-msgstr "Изображение"
-
-#: plugins/personal/generic/generic_picture.tpl:23
-msgid "Remove picture"
-msgstr "Удалить изображение"
-
-#: plugins/personal/generic/generic_picture.tpl:29
-#: plugins/addons/addressbook/address_edit.tpl:114
-#: plugins/admin/systems/servnfs.tpl:91
-#: plugins/admin/systems/printerPPDDialog.tpl:22
-#: plugins/admin/systems/printerPPDSelectionDialog.tpl:18
-#: plugins/admin/fai/faiScriptEntry.tpl:68
-#: plugins/admin/fai/faiPartitionTableEntry.tpl:29
-#: plugins/admin/fai/faiVariableEntry.tpl:48
-#: plugins/admin/fai/faiHookEntry.tpl:69
-#: plugins/admin/fai/faiTemplateEntry.tpl:60
-msgid "Save"
-msgstr "Сохранить"
-
 #: plugins/personal/generic/generic.tpl:6
 msgid "Personal information"
 msgstr "Личная информация"
+
+#: plugins/personal/generic/generic.tpl:15
+#: plugins/personal/generic/generic_picture.tpl:6
+msgid "Personal picture"
+msgstr "Изображение"
 
 #: plugins/personal/generic/generic.tpl:17
 msgid "Change picture"
@@ -2089,6 +2062,33 @@ msgstr "Последняя доставка"
 #: plugins/personal/generic/generic.tpl:387
 msgid "Public visible"
 msgstr "Видимый всем"
+
+#: plugins/personal/generic/password.tpl:2
+msgid ""
+"You have changed the method your password is stored in the ldap database. "
+"For that reason you've to enter your password at this point again. GOsa will "
+"then encode it with the selected method."
+msgstr ""
+"Вы изменили метод шифрования паролей в базе LDAP. В связи с этим введите "
+"свой пароль снова. GOsa произведет шифрование в соответствии с выбраной "
+"схемой."
+
+#: plugins/personal/generic/generic_picture.tpl:23
+msgid "Remove picture"
+msgstr "Удалить изображение"
+
+#: plugins/personal/generic/generic_picture.tpl:29
+#: plugins/addons/addressbook/address_edit.tpl:114
+#: plugins/admin/systems/servnfs.tpl:91
+#: plugins/admin/systems/printerPPDDialog.tpl:22
+#: plugins/admin/systems/printerPPDSelectionDialog.tpl:18
+#: plugins/admin/fai/faiScriptEntry.tpl:68
+#: plugins/admin/fai/faiPartitionTableEntry.tpl:29
+#: plugins/admin/fai/faiVariableEntry.tpl:48
+#: plugins/admin/fai/faiHookEntry.tpl:69
+#: plugins/admin/fai/faiTemplateEntry.tpl:60
+msgid "Save"
+msgstr "Сохранить"
 
 #: plugins/personal/generic/main.inc:107
 msgid "You are not allowed to set your password!"
@@ -7771,15 +7771,10 @@ msgstr "Укажите корректный номер телефона."
 msgid "Repository"
 msgstr "Повторить"
 
-#: plugins/admin/fai/faiPackage.tpl:34
+#: plugins/admin/fai/faiPackage.tpl:34 plugins/admin/fai/faiPackage.tpl:38
 #, fuzzy
 msgid "Release"
 msgstr "Набор правил"
-
-#: plugins/admin/fai/faiPackage.tpl:38
-#, fuzzy
-msgid "release"
-msgstr "сброс"
 
 #: plugins/admin/fai/faiPackage.tpl:41 plugins/admin/fai/faiPackage.tpl:54
 #: plugins/admin/fai/faiPackage.tpl:67
@@ -7787,14 +7782,9 @@ msgstr "сброс"
 msgid "set"
 msgstr "сброс"
 
-#: plugins/admin/fai/faiPackage.tpl:47
+#: plugins/admin/fai/faiPackage.tpl:47 plugins/admin/fai/faiPackage.tpl:51
 #, fuzzy
 msgid "Section"
-msgstr "Действие"
-
-#: plugins/admin/fai/faiPackage.tpl:51
-#, fuzzy
-msgid "section"
 msgstr "Действие"
 
 #: plugins/admin/fai/faiPackage.tpl:60
@@ -10112,6 +10102,14 @@ msgstr ""
 #: ihtml/themes/default/help.tpl:15
 msgid "Index"
 msgstr ""
+
+#, fuzzy
+#~ msgid "release"
+#~ msgstr "сброс"
+
+#, fuzzy
+#~ msgid "section"
+#~ msgstr "Действие"
 
 #, fuzzy
 #~ msgid "Profil server"

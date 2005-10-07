@@ -1819,41 +1819,14 @@ msgstr ""
 msgid "Could not open specified certificate!"
 msgstr "No puedo seleccionar la base de datos."
 
-#: plugins/personal/generic/password.tpl:2
-msgid ""
-"You have changed the method your password is stored in the ldap database. "
-"For that reason you've to enter your password at this point again. GOsa will "
-"then encode it with the selected method."
-msgstr ""
-"Ha cambiado el método en que su clave es guardada en la base de datos LDAP. "
-"Por esa razón tiene que volver a reintroducir su contraseña de nuevo. Gosa "
-"codificara esta con el nuevo método seleccionado."
-
-#: plugins/personal/generic/generic_picture.tpl:6
-#: plugins/personal/generic/generic.tpl:15
-msgid "Personal picture"
-msgstr "Foto Personal"
-
-#: plugins/personal/generic/generic_picture.tpl:23
-msgid "Remove picture"
-msgstr "Eliminar foto"
-
-#: plugins/personal/generic/generic_picture.tpl:29
-#: plugins/addons/addressbook/address_edit.tpl:114
-#: plugins/admin/systems/servnfs.tpl:91
-#: plugins/admin/systems/printerPPDDialog.tpl:22
-#: plugins/admin/systems/printerPPDSelectionDialog.tpl:18
-#: plugins/admin/fai/faiScriptEntry.tpl:68
-#: plugins/admin/fai/faiPartitionTableEntry.tpl:29
-#: plugins/admin/fai/faiVariableEntry.tpl:48
-#: plugins/admin/fai/faiHookEntry.tpl:69
-#: plugins/admin/fai/faiTemplateEntry.tpl:60
-msgid "Save"
-msgstr "Guardar"
-
 #: plugins/personal/generic/generic.tpl:6
 msgid "Personal information"
 msgstr "Información personal"
+
+#: plugins/personal/generic/generic.tpl:15
+#: plugins/personal/generic/generic_picture.tpl:6
+msgid "Personal picture"
+msgstr "Foto Personal"
 
 #: plugins/personal/generic/generic.tpl:17
 msgid "Change picture"
@@ -2096,6 +2069,33 @@ msgstr "Último envío"
 #: plugins/personal/generic/generic.tpl:387
 msgid "Public visible"
 msgstr "Visible Publicamente"
+
+#: plugins/personal/generic/password.tpl:2
+msgid ""
+"You have changed the method your password is stored in the ldap database. "
+"For that reason you've to enter your password at this point again. GOsa will "
+"then encode it with the selected method."
+msgstr ""
+"Ha cambiado el método en que su clave es guardada en la base de datos LDAP. "
+"Por esa razón tiene que volver a reintroducir su contraseña de nuevo. Gosa "
+"codificara esta con el nuevo método seleccionado."
+
+#: plugins/personal/generic/generic_picture.tpl:23
+msgid "Remove picture"
+msgstr "Eliminar foto"
+
+#: plugins/personal/generic/generic_picture.tpl:29
+#: plugins/addons/addressbook/address_edit.tpl:114
+#: plugins/admin/systems/servnfs.tpl:91
+#: plugins/admin/systems/printerPPDDialog.tpl:22
+#: plugins/admin/systems/printerPPDSelectionDialog.tpl:18
+#: plugins/admin/fai/faiScriptEntry.tpl:68
+#: plugins/admin/fai/faiPartitionTableEntry.tpl:29
+#: plugins/admin/fai/faiVariableEntry.tpl:48
+#: plugins/admin/fai/faiHookEntry.tpl:69
+#: plugins/admin/fai/faiTemplateEntry.tpl:60
+msgid "Save"
+msgstr "Guardar"
 
 #: plugins/personal/generic/main.inc:107
 msgid "You are not allowed to set your password!"
@@ -7740,15 +7740,10 @@ msgstr "Por favor especifique un usuario valido."
 msgid "Repository"
 msgstr "Reintentar"
 
-#: plugins/admin/fai/faiPackage.tpl:34
+#: plugins/admin/fai/faiPackage.tpl:34 plugins/admin/fai/faiPackage.tpl:38
 #, fuzzy
 msgid "Release"
 msgstr "Paquete de reglas"
-
-#: plugins/admin/fai/faiPackage.tpl:38
-#, fuzzy
-msgid "release"
-msgstr "Borrar"
 
 #: plugins/admin/fai/faiPackage.tpl:41 plugins/admin/fai/faiPackage.tpl:54
 #: plugins/admin/fai/faiPackage.tpl:67
@@ -7756,14 +7751,9 @@ msgstr "Borrar"
 msgid "set"
 msgstr "Borrar"
 
-#: plugins/admin/fai/faiPackage.tpl:47
+#: plugins/admin/fai/faiPackage.tpl:47 plugins/admin/fai/faiPackage.tpl:51
 #, fuzzy
 msgid "Section"
-msgstr "Acción"
-
-#: plugins/admin/fai/faiPackage.tpl:51
-#, fuzzy
-msgid "section"
 msgstr "Acción"
 
 #: plugins/admin/fai/faiPackage.tpl:60
@@ -10155,6 +10145,14 @@ msgstr ""
 #: ihtml/themes/default/help.tpl:15
 msgid "Index"
 msgstr ""
+
+#, fuzzy
+#~ msgid "release"
+#~ msgstr "Borrar"
+
+#, fuzzy
+#~ msgid "section"
+#~ msgstr "Acción"
 
 #, fuzzy
 #~ msgid "Profil server"

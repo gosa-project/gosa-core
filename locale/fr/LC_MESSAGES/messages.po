@@ -1824,41 +1824,14 @@ msgstr "Le champ 'Pager' contient un numéro invalide."
 msgid "Could not open specified certificate!"
 msgstr "Impossible d'ouvrir le certificat demandé!"
 
-#: plugins/personal/generic/password.tpl:2
-msgid ""
-"You have changed the method your password is stored in the ldap database. "
-"For that reason you've to enter your password at this point again. GOsa will "
-"then encode it with the selected method."
-msgstr ""
-"Vous avez sélectionnez une autre méthode de stockage des mots de passe. Pour "
-"cette raison vous devez ressaisir votre mot de passe afin que GOsa puisse le "
-"réencoder et l'enregistrer dans l'annuaire LDAP."
-
-#: plugins/personal/generic/generic_picture.tpl:6
-#: plugins/personal/generic/generic.tpl:15
-msgid "Personal picture"
-msgstr "Image personnelle"
-
-#: plugins/personal/generic/generic_picture.tpl:23
-msgid "Remove picture"
-msgstr "Suppression de l'image personnelle"
-
-#: plugins/personal/generic/generic_picture.tpl:29
-#: plugins/addons/addressbook/address_edit.tpl:114
-#: plugins/admin/systems/servnfs.tpl:91
-#: plugins/admin/systems/printerPPDDialog.tpl:22
-#: plugins/admin/systems/printerPPDSelectionDialog.tpl:18
-#: plugins/admin/fai/faiScriptEntry.tpl:68
-#: plugins/admin/fai/faiPartitionTableEntry.tpl:29
-#: plugins/admin/fai/faiVariableEntry.tpl:48
-#: plugins/admin/fai/faiHookEntry.tpl:69
-#: plugins/admin/fai/faiTemplateEntry.tpl:60
-msgid "Save"
-msgstr "Enregistrer"
-
 #: plugins/personal/generic/generic.tpl:6
 msgid "Personal information"
 msgstr "Informations personnelles"
+
+#: plugins/personal/generic/generic.tpl:15
+#: plugins/personal/generic/generic_picture.tpl:6
+msgid "Personal picture"
+msgstr "Image personnelle"
 
 #: plugins/personal/generic/generic.tpl:17
 msgid "Change picture"
@@ -2101,6 +2074,33 @@ msgstr "Dernière distribution"
 #: plugins/personal/generic/generic.tpl:387
 msgid "Public visible"
 msgstr "Visible par tous"
+
+#: plugins/personal/generic/password.tpl:2
+msgid ""
+"You have changed the method your password is stored in the ldap database. "
+"For that reason you've to enter your password at this point again. GOsa will "
+"then encode it with the selected method."
+msgstr ""
+"Vous avez sélectionnez une autre méthode de stockage des mots de passe. Pour "
+"cette raison vous devez ressaisir votre mot de passe afin que GOsa puisse le "
+"réencoder et l'enregistrer dans l'annuaire LDAP."
+
+#: plugins/personal/generic/generic_picture.tpl:23
+msgid "Remove picture"
+msgstr "Suppression de l'image personnelle"
+
+#: plugins/personal/generic/generic_picture.tpl:29
+#: plugins/addons/addressbook/address_edit.tpl:114
+#: plugins/admin/systems/servnfs.tpl:91
+#: plugins/admin/systems/printerPPDDialog.tpl:22
+#: plugins/admin/systems/printerPPDSelectionDialog.tpl:18
+#: plugins/admin/fai/faiScriptEntry.tpl:68
+#: plugins/admin/fai/faiPartitionTableEntry.tpl:29
+#: plugins/admin/fai/faiVariableEntry.tpl:48
+#: plugins/admin/fai/faiHookEntry.tpl:69
+#: plugins/admin/fai/faiTemplateEntry.tpl:60
+msgid "Save"
+msgstr "Enregistrer"
 
 #: plugins/personal/generic/main.inc:107
 msgid "You are not allowed to set your password!"
@@ -7593,15 +7593,10 @@ msgstr "Veuillez entrer un chemin valide pour votre configuration."
 msgid "Repository"
 msgstr "Réessayer"
 
-#: plugins/admin/fai/faiPackage.tpl:34
+#: plugins/admin/fai/faiPackage.tpl:34 plugins/admin/fai/faiPackage.tpl:38
 #, fuzzy
 msgid "Release"
 msgstr "Ensemble de Règles"
-
-#: plugins/admin/fai/faiPackage.tpl:38
-#, fuzzy
-msgid "release"
-msgstr "remise à zéro"
 
 #: plugins/admin/fai/faiPackage.tpl:41 plugins/admin/fai/faiPackage.tpl:54
 #: plugins/admin/fai/faiPackage.tpl:67
@@ -7609,14 +7604,9 @@ msgstr "remise à zéro"
 msgid "set"
 msgstr "remise à zéro"
 
-#: plugins/admin/fai/faiPackage.tpl:47
+#: plugins/admin/fai/faiPackage.tpl:47 plugins/admin/fai/faiPackage.tpl:51
 #, fuzzy
 msgid "Section"
-msgstr "Action"
-
-#: plugins/admin/fai/faiPackage.tpl:51
-#, fuzzy
-msgid "section"
 msgstr "Action"
 
 #: plugins/admin/fai/faiPackage.tpl:60
@@ -9950,6 +9940,14 @@ msgstr "Aide en ligne de GOsa"
 #: ihtml/themes/default/help.tpl:15
 msgid "Index"
 msgstr "Index"
+
+#, fuzzy
+#~ msgid "release"
+#~ msgstr "remise à zéro"
+
+#, fuzzy
+#~ msgid "section"
+#~ msgstr "Action"
 
 #~ msgid "Profil server"
 #~ msgstr "Serveur de profiles"

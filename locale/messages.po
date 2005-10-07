@@ -1722,37 +1722,13 @@ msgstr ""
 msgid "Could not open specified certificate!"
 msgstr ""
 
-#: plugins/personal/generic/password.tpl:2
-msgid ""
-"You have changed the method your password is stored in the ldap database. "
-"For that reason you've to enter your password at this point again. GOsa will "
-"then encode it with the selected method."
-msgstr ""
-
-#: plugins/personal/generic/generic_picture.tpl:6
-#: plugins/personal/generic/generic.tpl:15
-msgid "Personal picture"
-msgstr ""
-
-#: plugins/personal/generic/generic_picture.tpl:23
-msgid "Remove picture"
-msgstr ""
-
-#: plugins/personal/generic/generic_picture.tpl:29
-#: plugins/addons/addressbook/address_edit.tpl:114
-#: plugins/admin/systems/servnfs.tpl:91
-#: plugins/admin/systems/printerPPDDialog.tpl:22
-#: plugins/admin/systems/printerPPDSelectionDialog.tpl:18
-#: plugins/admin/fai/faiScriptEntry.tpl:68
-#: plugins/admin/fai/faiPartitionTableEntry.tpl:29
-#: plugins/admin/fai/faiVariableEntry.tpl:48
-#: plugins/admin/fai/faiHookEntry.tpl:69
-#: plugins/admin/fai/faiTemplateEntry.tpl:60
-msgid "Save"
-msgstr ""
-
 #: plugins/personal/generic/generic.tpl:6
 msgid "Personal information"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:15
+#: plugins/personal/generic/generic_picture.tpl:6
+msgid "Personal picture"
 msgstr ""
 
 #: plugins/personal/generic/generic.tpl:17
@@ -1994,6 +1970,30 @@ msgstr ""
 
 #: plugins/personal/generic/generic.tpl:387
 msgid "Public visible"
+msgstr ""
+
+#: plugins/personal/generic/password.tpl:2
+msgid ""
+"You have changed the method your password is stored in the ldap database. "
+"For that reason you've to enter your password at this point again. GOsa will "
+"then encode it with the selected method."
+msgstr ""
+
+#: plugins/personal/generic/generic_picture.tpl:23
+msgid "Remove picture"
+msgstr ""
+
+#: plugins/personal/generic/generic_picture.tpl:29
+#: plugins/addons/addressbook/address_edit.tpl:114
+#: plugins/admin/systems/servnfs.tpl:91
+#: plugins/admin/systems/printerPPDDialog.tpl:22
+#: plugins/admin/systems/printerPPDSelectionDialog.tpl:18
+#: plugins/admin/fai/faiScriptEntry.tpl:68
+#: plugins/admin/fai/faiPartitionTableEntry.tpl:29
+#: plugins/admin/fai/faiVariableEntry.tpl:48
+#: plugins/admin/fai/faiHookEntry.tpl:69
+#: plugins/admin/fai/faiTemplateEntry.tpl:60
+msgid "Save"
 msgstr ""
 
 #: plugins/personal/generic/main.inc:107
@@ -7174,12 +7174,8 @@ msgstr ""
 msgid "Repository"
 msgstr ""
 
-#: plugins/admin/fai/faiPackage.tpl:34
+#: plugins/admin/fai/faiPackage.tpl:34 plugins/admin/fai/faiPackage.tpl:38
 msgid "Release"
-msgstr ""
-
-#: plugins/admin/fai/faiPackage.tpl:38
-msgid "release"
 msgstr ""
 
 #: plugins/admin/fai/faiPackage.tpl:41 plugins/admin/fai/faiPackage.tpl:54
@@ -7187,12 +7183,8 @@ msgstr ""
 msgid "set"
 msgstr ""
 
-#: plugins/admin/fai/faiPackage.tpl:47
+#: plugins/admin/fai/faiPackage.tpl:47 plugins/admin/fai/faiPackage.tpl:51
 msgid "Section"
-msgstr ""
-
-#: plugins/admin/fai/faiPackage.tpl:51
-msgid "section"
 msgstr ""
 
 #: plugins/admin/fai/faiPackage.tpl:60

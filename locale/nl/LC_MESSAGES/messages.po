@@ -1816,41 +1816,14 @@ msgstr "Het veld 'Pieper' bevat een ongeldig telefoonnummer."
 msgid "Could not open specified certificate!"
 msgstr "Het opgegeven certificaat kon geopend worden!"
 
-#: plugins/personal/generic/password.tpl:2
-msgid ""
-"You have changed the method your password is stored in the ldap database. "
-"For that reason you've to enter your password at this point again. GOsa will "
-"then encode it with the selected method."
-msgstr ""
-"U heeft de manier waarop uw wachtwoord wordt opgeslagen in de LDAP database "
-"veranderd. Daarom moet u het wachtwoord op dit moment opnieuw invoeren. GOsa "
-"zal dan het wachtwoord versleutelen op de door u geselecteerde methode."
-
-#: plugins/personal/generic/generic_picture.tpl:6
-#: plugins/personal/generic/generic.tpl:15
-msgid "Personal picture"
-msgstr "Persoonlijk plaatje"
-
-#: plugins/personal/generic/generic_picture.tpl:23
-msgid "Remove picture"
-msgstr "Plaatje verwijderen"
-
-#: plugins/personal/generic/generic_picture.tpl:29
-#: plugins/addons/addressbook/address_edit.tpl:114
-#: plugins/admin/systems/servnfs.tpl:91
-#: plugins/admin/systems/printerPPDDialog.tpl:22
-#: plugins/admin/systems/printerPPDSelectionDialog.tpl:18
-#: plugins/admin/fai/faiScriptEntry.tpl:68
-#: plugins/admin/fai/faiPartitionTableEntry.tpl:29
-#: plugins/admin/fai/faiVariableEntry.tpl:48
-#: plugins/admin/fai/faiHookEntry.tpl:69
-#: plugins/admin/fai/faiTemplateEntry.tpl:60
-msgid "Save"
-msgstr "Opslaan"
-
 #: plugins/personal/generic/generic.tpl:6
 msgid "Personal information"
 msgstr "Persoonlijke informatie"
+
+#: plugins/personal/generic/generic.tpl:15
+#: plugins/personal/generic/generic_picture.tpl:6
+msgid "Personal picture"
+msgstr "Persoonlijk plaatje"
 
 #: plugins/personal/generic/generic.tpl:17
 msgid "Change picture"
@@ -2093,6 +2066,33 @@ msgstr "Laatste levering"
 #: plugins/personal/generic/generic.tpl:387
 msgid "Public visible"
 msgstr "Publiek zichtbaar"
+
+#: plugins/personal/generic/password.tpl:2
+msgid ""
+"You have changed the method your password is stored in the ldap database. "
+"For that reason you've to enter your password at this point again. GOsa will "
+"then encode it with the selected method."
+msgstr ""
+"U heeft de manier waarop uw wachtwoord wordt opgeslagen in de LDAP database "
+"veranderd. Daarom moet u het wachtwoord op dit moment opnieuw invoeren. GOsa "
+"zal dan het wachtwoord versleutelen op de door u geselecteerde methode."
+
+#: plugins/personal/generic/generic_picture.tpl:23
+msgid "Remove picture"
+msgstr "Plaatje verwijderen"
+
+#: plugins/personal/generic/generic_picture.tpl:29
+#: plugins/addons/addressbook/address_edit.tpl:114
+#: plugins/admin/systems/servnfs.tpl:91
+#: plugins/admin/systems/printerPPDDialog.tpl:22
+#: plugins/admin/systems/printerPPDSelectionDialog.tpl:18
+#: plugins/admin/fai/faiScriptEntry.tpl:68
+#: plugins/admin/fai/faiPartitionTableEntry.tpl:29
+#: plugins/admin/fai/faiVariableEntry.tpl:48
+#: plugins/admin/fai/faiHookEntry.tpl:69
+#: plugins/admin/fai/faiTemplateEntry.tpl:60
+msgid "Save"
+msgstr "Opslaan"
 
 #: plugins/personal/generic/main.inc:107
 msgid "You are not allowed to set your password!"
@@ -7530,15 +7530,10 @@ msgstr "Geef a.u.b. een geldig pad op voor uw instellingen."
 msgid "Repository"
 msgstr "Opnieuw proberen"
 
-#: plugins/admin/fai/faiPackage.tpl:34
+#: plugins/admin/fai/faiPackage.tpl:34 plugins/admin/fai/faiPackage.tpl:38
 #, fuzzy
 msgid "Release"
 msgstr "Ruleset"
-
-#: plugins/admin/fai/faiPackage.tpl:38
-#, fuzzy
-msgid "release"
-msgstr "reset"
 
 #: plugins/admin/fai/faiPackage.tpl:41 plugins/admin/fai/faiPackage.tpl:54
 #: plugins/admin/fai/faiPackage.tpl:67
@@ -7546,14 +7541,9 @@ msgstr "reset"
 msgid "set"
 msgstr "reset"
 
-#: plugins/admin/fai/faiPackage.tpl:47
+#: plugins/admin/fai/faiPackage.tpl:47 plugins/admin/fai/faiPackage.tpl:51
 #, fuzzy
 msgid "Section"
-msgstr "Actie"
-
-#: plugins/admin/fai/faiPackage.tpl:51
-#, fuzzy
-msgid "section"
 msgstr "Actie"
 
 #: plugins/admin/fai/faiPackage.tpl:60
@@ -9874,6 +9864,14 @@ msgstr "GOsa help"
 #: ihtml/themes/default/help.tpl:15
 msgid "Index"
 msgstr "Index"
+
+#, fuzzy
+#~ msgid "release"
+#~ msgstr "reset"
+
+#, fuzzy
+#~ msgid "section"
+#~ msgstr "Actie"
 
 #~ msgid "Profil server"
 #~ msgstr "Profiel server"
