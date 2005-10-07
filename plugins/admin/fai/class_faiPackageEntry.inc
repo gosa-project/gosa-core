@@ -15,7 +15,7 @@ class faiPackageEntry extends plugin
 
   var $buffer       = array();
   var $categories   = array();
-  var $searchStr    = "*";
+  var $searchStrPKG = "Please enter your search string here";
   var $selected     = array();
 
   /* Array with available class names */
@@ -44,16 +44,16 @@ class faiPackageEntry extends plugin
                               array("string"=>"Description","attach"=>"style='border-right:0px;'")));
 
     if(isset($_GET['search'])){
-      $this->searchStr= $_GET['search']."*";
+      $this->searchStrPKG= $_GET['search']."*";
     }
 
     $pkgs = $this->genPkgs();
     foreach($pkgs as $cat => $entries){
       if(!isset($this->categories[$cat])){  
-        $this->categories[$cat] = false;
+        $this->categories[$cat] = true;
       }
       if(isset($_POST['chkchange'])){
-        $this->searchStr = $_POST['searchStr'];
+        $this->searchStrPKG = $_POST['searchStrPKG'];
         if(isset($_POST['CAT'.$cat])){
           $this->categories[$cat]=true;
         }else{
@@ -102,7 +102,7 @@ class faiPackageEntry extends plugin
     }
 
     foreach($packages as $pkg){
-      if(preg_match("/^".str_replace("*",".*",$this->searchStr)."/i",$pkg[0])){
+      if(preg_match("/^".str_replace("*",".*",$this->searchStrPKG)."/i",$pkg[0])){
       if(in_array($pkg[0],$this->selected)){
         $check = " checked ";
       }else{
@@ -118,7 +118,7 @@ class faiPackageEntry extends plugin
     }
 
     $smarty->assign("CHKS"          , $CHKS);
-    $smarty->assign("searchStr"     , $this->searchStr);
+    $smarty->assign("searchStrPKG"  , $this->searchStrPKG);
     $smarty->assign("faihead"       , "");
     $smarty->assign("failist"       , $divlist->DrawList());
     $smarty->assign("infoimage"     , get_template_path('images/info.png'));

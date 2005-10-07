@@ -51,7 +51,7 @@
 						</LABEL>
      				</td>
      				<td width="99%">
-     					<input type='text' name='searchStr' maxlength='20' style='width:99%' value='{$searchStr}' id='filter' 
+     					<input type='text' name='searchStrPKG' maxlength='40' style='width:99%' value='{$searchStrPKG}' id='filter' 
 					     title='{t}Regular expression for matching object names{/t}' onChange="mainform.submit()">
     	 			</td>
      			</tr>
