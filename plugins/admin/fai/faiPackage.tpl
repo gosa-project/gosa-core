@@ -35,7 +35,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<select name="FAIdebianReleaseS" title="{t}release{/t}" {$ReleaseACL}>
+							<select name="FAIdebianReleaseS" title="{t}Release{/t}" {$ReleaseACL}>
 								{html_options options=$releases selected=$release}
 							</select>
 							<input type="submit" value="{t}set{/t}" name="SetRelease" {$ReleaseACL}>
@@ -48,7 +48,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<select name="FAIdebianSectionS" title="{t}section{/t}" {$SectionACL}>
+							<select name="FAIdebianSectionS" title="{t}Section{/t}" {$SectionACL}>
 								{html_options options=$sections selected=$section}
 							</select>
 							<input type="submit" value="{t}set{/t}" name="SetSection" {$SectionACL}>
@@ -86,9 +86,3 @@
 		</td>
 	</tr>
 </table>
-
-
-
-
-
-
