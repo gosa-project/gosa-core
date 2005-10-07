@@ -158,7 +158,7 @@ objectclass ( 1.3.6.1.4.1.22262.1.1.1.1.4 NAME 'nagiosContact' SUP top AUXILIARY
 
 objectclass ( 1.3.6.1.4.1.22262.1.1.1.1.6 NAME 'nagiosContactGroup' SUP top AUXILIARY
  DESC 'ContactGroup'
- MUST ( ContactGroupName $ ContactGroupAlias $ ContactGroupMembers  ))
+ MAY ( ContactGroupName $ ContactGroupAlias $ ContactGroupMembers  ))
 
 #objectclass ( 1.3.6.1.4.1.22262.1.1.1.1.7 NAME 'nagiosTimePeriod' SUP top AUXILIARY
 # DESC 'TimePeriod'
