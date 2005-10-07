@@ -271,7 +271,11 @@ class faiHook extends plugin
         if(empty($obj[$attrs])){
           $obj[$attrs] = array();
         }
-        $tmp[$attrs] = stripslashes($obj[$attrs]);
+        if(!is_array($obj[$attrs])){
+          $tmp[$attrs] = stripslashes($obj[$attrs]);
+        }else{
+          $tmp[$attrs] = $obj[$attrs];
+        }
       }    
 
       $tmp['objectClass'] = $this->subClasses;
