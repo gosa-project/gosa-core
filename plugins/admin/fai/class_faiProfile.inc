@@ -170,10 +170,17 @@ class faiProfile extends plugin
     $smarty->assign("divlisthead" ,$listhead);
     $smarty->assign("divlist"     ,$divlist->DrawList());
 
-    /* Assign variables */
+     /* Magic quotes GPC, escapes every ' " \, to solve some security risks
+     * If we post the escaped strings they will be escaped again
+     */
     foreach($this->attributes as $attrs){
-      $smarty->assign($attrs,$this->$attrs);
+      if(get_magic_quotes_gpc()){
+        $smarty->assign($attrs,stripslashes($this->$attrs));
+      }else{
+        $smarty->assign($attrs,($this->$attrs));
+      }
     }
+
 
     $display.= $smarty->fetch(get_template_path('faiProfile.tpl', TRUE));
     return($display);
