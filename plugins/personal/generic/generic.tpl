@@ -88,7 +88,7 @@
     </tr>
     <tr>
      <td>
-      <label for="preferredLanguage">{t}Prefered langage{/t}</label>
+      <label for="preferredLanguage">{t}Preferred langage{/t}</label>
      </td>
      <td>
       <select size="1" id="preferredLanguage" name="preferredLanguage" {$preferredLanguageACL}>
