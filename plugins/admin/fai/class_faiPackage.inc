@@ -44,7 +44,7 @@ class faiPackage extends plugin
 
   var $mirrors          = array();  // The combination of server/release/section
   var $confDir          = "";
-  var $usedPackages      = array();
+  var $usedPackages     = array();
 
   function faiPackage ($config, $dn= NULL)
   {
@@ -65,7 +65,7 @@ class faiPackage extends plugin
         $this->usedPackages[$pkg] = $pkg;
       }
     }else{
-      $this->usedPackages = array();;
+      $this->usedPackages = array();
     }  
     $this->confDir = CONFIG_DIR."/fai/";
     $this->FAIpackage = array();
@@ -77,38 +77,55 @@ class faiPackage extends plugin
     $smarty= get_smarty();
     $display= "";
 
+    $disableRelease   = false;
+    $disableMirror    = false;
+    $disableOptions   = false;
+    $disableSection   = false;
+
     /* Assign variables */
     foreach($this->attributes as $attrs){
       $smarty->assign($attrs,$this->$attrs);
     }
 
-    $disableRelease = false;
-    $disableMirror  = false;
-    $disableOptions = false;
-    /* Gray out handling */
-    if(empty($this->FAIdebianSection)){
-      $disableRelease = $disableMirror = $disableOptions = true;
-    }else
-    if(empty($this->FAIdebianRelease)){
-      $disableMirror = $disableOptions = true;
-    }else
-    if(empty($this->FAIdebianMirror)){
-      $disableOptions = true;
+    /* Post handling for Section, Release and Mirror Setup */
+    if(isset($_POST['SetSection'])){
+      $this->FAIdebianSection = $_POST['FAIdebianSectionS'];
     }
-   
-    $smarty->assign("ReleaseACL", "");
-    $smarty->assign("MirrorACL", "");
+    if(isset($_POST['SetRelease'])){
+      $this->FAIdebianRelease = $_POST['FAIdebianReleaseS'];
+    }
+    if(isset($_POST['SetMirror'])){
+      $this->FAIdebianMirror = $_POST['FAIdebianMirrorS'];
+    }
+
+    if(empty($this->FAIdebianRelease)){
+      $disableSection = $disableMirror  = $disableOptions = true;
+    }elseif(empty($this->FAIdebianSection)){
+      $disableRelease = $disableMirror  = $disableOptions = true;
+    }elseif(empty($this->FAIdebianMirror)){
+      $disableRelease = $disableSection = $disableOptions = true;
+    }else{
+      $disableRelease = $disableSection =  true;
+    }
+
+    $smarty->assign("ReleaseACL"  , "");
+    $smarty->assign("MirrorACL"   , "");
+    $smarty->assign("OptionACL"   , "");
+    $smarty->assign("SectionACL"  , "");
+
     if($disableOptions){
       $smarty->assign("OptionACL"," disabled ");
-    }else{
-      $smarty->assign("OptionACL", "");
     } 
     if($disableRelease){
       $smarty->assign("ReleaseACL"," disabled ");
     } 
     if($disableMirror){
       $smarty->assign("MirrorACL"," disabled ");
+    }
+    if($disableSection){
+      $smarty->assign("SectionACL"," disabled ");
     } 
+
     $this->genMirror();
 
     $availableServer = array();
@@ -244,6 +261,7 @@ class faiPackage extends plugin
    */
   function save_object()
   {
+    
     plugin::save_object();
     foreach($this->attributes as $attrs){
       if(isset($_POST[$attrs])){

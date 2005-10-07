@@ -35,10 +35,10 @@
 							</LABEL>
 						</td>
 						<td>
-							<select name="FAIdebianRelease" title="{t}release{/t}" {$ReleaseACL}>
+							<select name="FAIdebianReleaseS" title="{t}release{/t}" {$ReleaseACL}>
 								{html_options options=$releases selected=$release}
 							</select>
-							<input type="submit" value="{t}refresh{/t}" name="SetRelease">
+							<input type="submit" value="{t}set{/t}" name="SetRelease" {$ReleaseACL}>
 						</td>
 					</tr>
 					<tr>
@@ -48,10 +48,10 @@
 							</LABEL>
 						</td>
 						<td>
-							<select name="FAIdebianSection" title="{t}section{/t}" {SsectionACL}>
+							<select name="FAIdebianSectionS" title="{t}section{/t}" {$SectionACL}>
 								{html_options options=$sections selected=$section}
 							</select>
-							<input type="submit" value="{t}refresh{/t}" name="SetSection">
+							<input type="submit" value="{t}set{/t}" name="SetSection" {$SectionACL}>
 						</td>
 					</tr>
 					<tr>
@@ -61,10 +61,10 @@
 							</LABEL>
 						</td>
 						<td>
-							<select name="FAIdebianMirror" title="{t}mirror{/t}" {$MirrorACL}>
+							<select name="FAIdebianMirrorS" title="{t}mirror{/t}" {$MirrorACL}>
 								{html_options options=$mirrors selected=$mirror}
 							</select>
-							<input type="submit" value="{t}refresh{/t}" name="SetMirror">
+							<input type="submit" value="{t}set{/t}" name="SetMirror" {$MirrorACL}>
 						</td>
 					</tr>
 				</table>
