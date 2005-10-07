@@ -24,9 +24,8 @@ Things to fix before 2.4:
 * Rework printer tabs
 
 * FAI management
-  - Add package lists
+  - Add package configuration dialog 
   - Re-implement profile management, divlists look pretty ugly here
-  - Description checks arn't necessary.
   - Check base64_encoding/decoding is not needed everytime.
 
 * Phone account
@@ -34,11 +33,9 @@ Things to fix before 2.4:
 
 * Add function to get GOto application templates -> filled variables, etc.
 
-* Disabling error messages doesn't work, (?) For me it works;Fabian
+* Disabling error messages doesn't work, (?) 
 
 * Saving of initially created gofon stuff fails (?)
-
-* Avoid escaping of " in FAI scripts
 
 * Group Dialog : Primary group chkbox is broken, nothing is shown if it is checked.
 
