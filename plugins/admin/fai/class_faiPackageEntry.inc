@@ -52,20 +52,25 @@ class faiPackageEntry extends plugin
     }
 
     $pkgs = $this->genPkgs();
-    foreach($pkgs as $cat => $entries){
-      if(!isset($this->categories[$cat])){  
-        $this->categories[$cat] = true;
-      }
-      if(isset($_POST['chkchange'])){
-        $this->searchStrPKG = $_POST['searchStrPKG'];
-        if(isset($_POST['CAT'.$cat])){
-          $this->categories[$cat]=true;
-        }else{
-          $this->categories[$cat]=false;
+    unset($this->categories);
+    foreach($pkgs as $name => $entry){
+      $cat = $entry[2];
+      if(!empty($cat)){
+        if(!isset($this->categories[$cat])){  
+          $this->categories[$cat] = true;
+        }
+        if(isset($_POST['chkchange'])){
+          $this->searchStrPKG = $_POST['searchStrPKG'];
+          if(isset($_POST['CAT'.$cat])){
+            $this->categories[$cat]=true;
+          }else{
+            $this->categories[$cat]=false;
+          }
         }
       } 
-  
     }
+
+    ksort($this->categories);
 
     $CHKS = "<table><tr><input type='hidden' value='chkchange' name='chkchange'>";
     $i = 0; 
@@ -83,17 +88,12 @@ class faiPackageEntry extends plugin
     }
     $CHKS .= "</td></tr></table>";
 
-    $packages = array();
-    foreach($this->categories as $cat => $use){
-      if($use){
-        $packages = array_merge($packages,$pkgs[$cat]);
-      }
-    }
 
     foreach($_POST as $name => $value){
       if(preg_match("/^wasonpage_/i",$name)){
         $name = preg_replace("/^wasonpage_/","",$name);
         $n =base64_decode($name);
+
         if(isset($_POST['use_'.$name])){
           $this->selected[$n] = $n; 
         }else{
@@ -105,21 +105,24 @@ class faiPackageEntry extends plugin
       }
     }
 
-    foreach($packages as $pkg){
+    foreach($pkgs as $pkg){
       if(preg_match("/^".str_replace("*",".*",$this->searchStrPKG)."/i",$pkg[0])){
-      if(in_array($pkg[0],$this->selected)){
-        $check = " checked ";
-      }else{
-        $check = "";
-      }
-      $chkbox = "<input type='checkbox' value='1' name='use_".base64_encode($pkg[0])."' ".$check." onclick='document.mainform.submit()'>
-                 <input type='hidden' value='1' name='wasonpage_".base64_encode($pkg[0])."'>";
-      $divlist->AddEntry(array(array("string"=>$chkbox),
-                               array("string"=>$pkg[0]),
+        if($this->categories[$pkg[2]]){
+          if(in_array($pkg[0],$this->selected)){
+            $check = " checked ";
+          }else{
+            $check = "";
+          }
+          $chkbox = "<input type='checkbox' value='1' name='use_".base64_encode($pkg[0])."' ".$check." onclick='document.mainform.submit()'>
+                   <input type='hidden' value='1' name='wasonpage_".base64_encode($pkg[0])."'>";
+          $divlist->AddEntry(array(array("string"=>$chkbox),
+                                 array("string"=>$pkg[0]),
                                array("string"=>$pkg[1]),
                                array("string"=>$pkg[3],"attach"=>"style='border-right:0px'")));
+        }
       }
     }
+
     $_SESSION['searchStrPKG']       = $this->searchStrPKG;
     $smarty->assign("CHKS"          , $CHKS);
     $smarty->assign("searchStrPKG"  , $this->searchStrPKG);
@@ -164,22 +167,7 @@ class faiPackageEntry extends plugin
 
   function save()
   {
-/*
-    $a_ret= array();
-    $pkgs = $this->genPkgs();
-    foreach($this->selected as $pkg){
-      foreach($pkgs as $cat => $obj){
-        foreach($obj as $package){
-          if($package[0] == $pkg){
-            $a_ret[$package[0]]=$package;
-          }
-        }
-      }
-    }
-    return($a_ret);
-*/
-
-  return($this->selected);
+    return($this->selected);
   }
 
     /* Generate listbox friendly SubObject list
@@ -192,6 +180,7 @@ class faiPackageEntry extends plugin
     /* Open the packelist */
     $fp = fopen($strID,"r");  
     $a_ret = array();
+    $this->buffer = array();
     /* Only read this file if it wasn't read before */
     if(!isset($this->buffer[$strID])){
       $str = "";
@@ -200,12 +189,14 @@ class faiPackageEntry extends plugin
         $str= fgets($fp,512);
         $stra= split("\|",$str);
         if(count($stra)==4){
-          $a_ret[$stra[2]][] = $stra;
-          } 
+          $a_ret[$stra[0]] = $stra;
+          }
         }
-        
         /* Save our Data, to avoid reading it again */
       $this->buffer[$strID]=$a_ret;
+
+      ksort($a_ret);
+
       return($a_ret);
     }else{
       return $this->buffer[$strID];

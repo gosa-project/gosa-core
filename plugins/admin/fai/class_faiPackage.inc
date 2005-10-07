@@ -42,9 +42,13 @@ class faiPackage extends plugin
   var $releases         = array();  // All possible releases 
   var $sections         = array();  // All section types
 
+  var $list             = array();
+
   var $mirrors          = array();  // The combination of server/release/section
   var $confDir          = "";
   var $usedPackages     = array();
+  
+  var $strID            ="";
 
   function faiPackage ($config, $dn= NULL)
   {
@@ -146,8 +150,17 @@ class faiPackage extends plugin
       $smarty->assign("SectionACL"," disabled ");
     } 
 
+    $this->strID = $this->confDir.$this->FAIdebianMirror."/".$this->FAIdebianRelease."/".$this->FAIdebianSection;
+    if(!$disableOptions){
+      if(!isset($this->list[$this->strID])){
+        $tmp = new faiPackageEntry($this->config, $this->dn,$this->strID,$this->usedPackages);
+        $this->list[$this->strID]=$tmp->genPkgs();
+      }
+    }
+
     if(isset($_POST['Addpkg'])){
-      $this->dialog = new faiPackageEntry($this->config, $this->dn,$this->confDir.$this->FAIdebianMirror."/".$this->FAIdebianRelease."/".$this->FAIdebianSection,$this->usedPackages);
+      $this->dialog = new faiPackageEntry($this->config, $this->dn,$this->strID,$this->usedPackages);
+      $this->dialog->buffer[$this->strID]= $this->list[$this->strID];
       $this->is_dialog =true;
     }
  
@@ -307,7 +320,11 @@ class faiPackage extends plugin
     $a_ret=array(); 
     if(is_array($this->usedPackages)) {
       foreach($this->usedPackages as $usedName){
-        $a_ret[$usedName] = $usedName;
+        if(isset($this->list[$this->strID][$usedName][1])){
+          $a_ret[$usedName] = $usedName." [".$this->list[$this->strID][$usedName][1]."]";
+        }else{
+          $a_ret[$usedName] = $usedName;
+        }
       }
     }
     return($a_ret);
