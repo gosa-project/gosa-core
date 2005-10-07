@@ -88,12 +88,6 @@ class faiScriptEntry extends plugin
   {
     $message= array();
   
-    $str = utf8_encode("üצה");
-
-    if(preg_match("/[^a-z0-9".$str."\.,;:\-_\? ]/i",$this->Object_description)){
-      $message[] = _("Invalid character in description. Please enter a valid description.");
-    }
-
     if(empty($this->Object_cn)){
       $message[] = _("Please enter a name.");
     }

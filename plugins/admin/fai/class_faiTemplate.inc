@@ -199,10 +199,6 @@ class faiTemplate extends plugin
   function check()
   {
     $message= array();
-    $str = utf8_encode("üצה");
-    if((preg_match("/[^a-z0-9".$str."\.,;:\-_\? ]/i",$this->description))){
-      $message[]=_("Please enter a valid description.");
-    }
     return ($message);
   }
 
