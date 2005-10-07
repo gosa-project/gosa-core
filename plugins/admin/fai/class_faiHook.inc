@@ -69,6 +69,9 @@ class faiHook extends plugin
           $this->SubObjects[$object['cn'][0]][$codeIt]=base64_decode($this->SubObjects[$object['cn'][0]][$codeIt]);
         }
 
+        foreach($this->subAttributes as $attrs){
+          $this->SubObjects[$object['cn'][0]][$attrs]=addslashes($this->SubObjects[$object['cn'][0]][$attrs]);
+        }
       }
     }
   }
@@ -260,7 +263,7 @@ class faiHook extends plugin
     foreach($Objects as $name => $obj){
 
       foreach($this->sub64coded as $codeIt){
-        $obj[$codeIt]=base64_encode($obj[$codeIt]);
+        $obj[$codeIt]=base64_encode(stripslashes($obj[$codeIt]));
       }
 
       $tmp = array();
@@ -268,7 +271,7 @@ class faiHook extends plugin
         if(empty($obj[$attrs])){
           $obj[$attrs] = array();
         }
-        $tmp[$attrs] = $obj[$attrs];
+        $tmp[$attrs] = stripslashes($obj[$attrs]);
       }    
 
       $tmp['objectClass'] = $this->subClasses;
