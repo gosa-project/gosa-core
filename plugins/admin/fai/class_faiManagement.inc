@@ -556,7 +556,7 @@ class faiManagement extends plugin
 					$info = _("Templates");
 					break;
 					default 					: 
-					$img="<img src='images/empty.png' >";$info = "";break;
+					$img="<img src='images/empty.png' alt=''>";$info = "";break;
 
 				}
 				

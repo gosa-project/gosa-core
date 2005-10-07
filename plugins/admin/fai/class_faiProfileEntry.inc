@@ -20,7 +20,7 @@ class faiProfileEntry extends plugin
     plugin::plugin ($config, $dn);
 
     /* Search only in fai tree */
-    $base = $_SESSION['faifilter']['base'];
+    $base = "ou=fai,ou=configs,ou=systems,".$_SESSION['faifilter']['base'];
 
     /* Create array with categories to be able to sort different types of objects */
     $categories = array("FAIscript","FAItemplate","FAIhook","FAIvariable","FAIpartitionTable","FAIpackage");
@@ -30,6 +30,8 @@ class faiProfileEntry extends plugin
     $ldap->cd($base);
     $ldap->search("(| (objectClass=FAIscript)(objectClass=FAItemplate)(objectClass=FAIhook)(objectClass=FAIvariable)
                       (objectClass=FAIpartitionTable)(objectClass=FAIpackage))",array("*"));
+    
+    $sort=array();
     while($attrs = $ldap->fetch()){
       
       /* Only use objects which have cn set */
@@ -48,7 +50,7 @@ class faiProfileEntry extends plugin
         }
       }
     }
-
+    $tmp = array();
     ksort($sort);
     foreach($sort as $name){
       $tmp[$name] =$this->FAIAllclasses[$name];
