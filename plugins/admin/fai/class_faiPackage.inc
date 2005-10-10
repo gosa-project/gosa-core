@@ -94,14 +94,27 @@ class faiPackage extends plugin
     $smarty= get_smarty();
     $display= "";
 
+    $this->genMirror();
+
     if((!$this->is_account)&&(!$this->newDialogShown)){
       
       if($this->dialog==NULL){
-        $this->genMirror();
         $this->dialog = new faiPackageNew($this->config, $this->dn,$this->mirrors,$this->servers,$this->sections,$this->releases);
         $this->is_dialog =true;
       }
-  
+
+      /* alert possible missconfigurations */ 
+      if((count($this->releases)==0)||(count($this->servers)==0)||(count($this->sections)==0)){
+        print_red(_("There is no useable package list defined."));
+      }
+
+      /* Assign posible changes, for mirror combinations */
+      $this->dialog->releases = $this->releases;
+      $this->dialog->servers  = $this->servers;
+      $this->dialog->sections = $this->sections;
+      $this->dialog->mirrors  = $this->mirrors;
+
+      /* Assign Repository settings*/ 
       if(isset($_POST['SaveObjectNew'])){
         $this->FAIdebianRelease = $this->dialog->FAIdebianRelease;
         $this->FAIdebianSection = $this->dialog->FAIdebianSection;
@@ -112,6 +125,7 @@ class faiPackage extends plugin
         $this->newDialogShown = true;
       }
 
+      /* Draw dialog */
       if($this->dialog){
         $display=$this->dialog->execute();
         return($display); 
@@ -123,12 +137,10 @@ class faiPackage extends plugin
       $smarty->assign($attrs,$this->$attrs);
     }
 
-    $this->genMirror();
-
+    /* Set mirror if changed */
     if((isset($_POST['FAIdebianMirrorS']))&&(!empty($_POST['FAIdebianMirrorS']))){
       $this->FAIdebianMirror = $_POST['FAIdebianMirrorS'];
     }
-
 
     /* check servers matching release and section settings */
     $availableServer = array();
@@ -145,23 +157,28 @@ class faiPackage extends plugin
         }
       }
     }
-
+    
+    /* Generate package list */
     $this->list=$this->genPkgs();
 
+    /* + was pressed to open the package dialog */
     if(isset($_POST['Addpkg'])){
       $this->dialog = new faiPackageEntry($this->config, $this->dn,$this->list,$this->usedPackages);
       $this->is_dialog =true;
     }
- 
+
+    /* Delte selected package */ 
     if(isset($_POST['Delpkg'])){
       unset($this->usedPackages[$_POST['usedPackages']]);
     }
- 
+
+    /* Abort package selection dialog */ 
     if(isset($_POST['CancelSubObject'])){
       $this->dialog = false;
       $this->is_dialog=false;
     }
 
+    /* attach new packages */
     if(isset($_POST['SaveSubObject'])) {
       $this->dialog->save_object();
       if(count($this->dialog->check())){
@@ -176,31 +193,35 @@ class faiPackage extends plugin
       }
     }
 
+    /* Configuration dialog open*/
     if(isset($_POST['Conpkg'])){
       $this->dialog = new faiPackageConfiguration($this->config, $this->dn,"none");
       $this->is_dialog =true;
     }
    
+    /* Save Configuration */
     if(isset($_POST['SaveObjectConfig'])){
       $this->dialog = false;
       $this->is_dialog=false;
     }
-     
+
+    /* cancel configuration */     
     if(isset($_POST['CancelObjectConfig'])){
       $this->dialog = false;
       $this->is_dialog=false;
     }
- 
+
+    /* Display dialog */ 
     if($this->is_dialog){
       return $this->dialog->execute();
     }
 
+    /* Assign section to smarty */
     $strsec = "";
     foreach($this->FAIdebianSection as $sec){
        $strsec .= $sec." ";
     }
 
-    
     $smarty->assign("OptionsACL","");
     if(empty($this->FAIdebianMirror)){
       $smarty->assign("OptionsACL"," disabled ");
