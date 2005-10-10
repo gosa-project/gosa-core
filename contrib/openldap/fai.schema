@@ -399,7 +399,7 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.40.13 NAME 'FAItemplate'
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.14 NAME 'FAItemplateEntry'
 	SUP FAItemplate STRUCTURAL
 	DESC 'Stores real file templates'
-	MUST ( FAItemplateFile $ FAItemplatePath ) )
+	MUST ( FAItemplateFile $ FAItemplatePath $ FAIowner $ FAImode ) )
 	
 # Name       : FAIdebconfInfo
 # Description: Stores debconf information like shown in
