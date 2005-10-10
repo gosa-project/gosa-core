@@ -117,10 +117,6 @@ class faiPackage extends plugin
         return($display); 
       }
     }
-    $disableRelease   = false;
-    $disableMirror    = false;
-    $disableOptions   = false;
-    $disableSection   = false;
 
     /* Assign variables */
     foreach($this->attributes as $attrs){
@@ -128,6 +124,11 @@ class faiPackage extends plugin
     }
 
     $this->genMirror();
+
+    if((isset($_POST['FAIdebianMirrorS']))&&(!empty($_POST['FAIdebianMirrorS']))){
+      $this->FAIdebianMirror = $_POST['FAIdebianMirrorS'];
+    }
+
 
     /* check servers matching release and section settings */
     $availableServer = array();
@@ -144,9 +145,8 @@ class faiPackage extends plugin
         }
       }
     }
-    if($this->list==NULL){
-      $this->list=$this->genPkgs();
-    }
+
+    $this->list=$this->genPkgs();
 
     if(isset($_POST['Addpkg'])){
       $this->dialog = new faiPackageEntry($this->config, $this->dn,$this->list,$this->usedPackages);
@@ -198,6 +198,12 @@ class faiPackage extends plugin
     $strsec = "";
     foreach($this->FAIdebianSection as $sec){
        $strsec .= $sec." ";
+    }
+
+    
+    $smarty->assign("OptionsACL","");
+    if(empty($this->FAIdebianMirror)){
+      $smarty->assign("OptionsACL"," disabled ");
     }
 
     $smarty->assign("mirrors" ,$availableServer);
@@ -332,6 +338,8 @@ class faiPackage extends plugin
         
         if(!is_file($strID)){
           print_red(sprintf(_("Package file don't exists '%s'."),$strID));
+          $this->FAIdebianMirror="";
+          unset($this->buffer);
           return(array());
         }
         $fp = fopen($strID,"r");
@@ -351,7 +359,7 @@ class faiPackage extends plugin
       ksort($a_ret);
       return($a_ret);
     }else{
-      return $this->buffer[$strID];
+      return $this->buffer;
     }
   }
 

@@ -83,12 +83,19 @@ class faiPackageNew extends plugin
     /* check servers matching release and section settings */
     $availableServer = array();
     foreach($this->mirrors as $mir){
+    
+      /* Check if release and section match */
       if($mir['release'] == $this->FAIdebianRelease){
         $pass = true;
+    
         foreach($this->FAIdebianSection as $sec){
+
+        /* If a mirror match, attach */
           if($sec != $mir['section']){
             $pass = false;
           }
+
+        /* Save all matching */ 
         if($pass){
             $availableServer[$mir['mirror']]=$mir['mirror'];
           }

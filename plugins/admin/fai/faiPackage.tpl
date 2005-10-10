@@ -70,9 +70,9 @@
        			{html_options options=$usedPackages}
       		</select>
 			<br>
-			<input type="submit" name="Addpkg" value="+">
-			<input type="submit" name="Delpkg" value="-">
-			<input type="submit" name="Conpkg" value="Configure"
+			<input type="submit" name="Addpkg" value="+" {$OptionsACL}>
+			<input type="submit" name="Delpkg" value="-"  {$OptionsACL}>
+			<input type="submit" name="Conpkg" value="Configure"  {$OptionsACL}>
 		</td>
 	</tr>
 </table>
