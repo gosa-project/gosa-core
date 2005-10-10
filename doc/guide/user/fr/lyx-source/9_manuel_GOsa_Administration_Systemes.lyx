@@ -229,7 +229,7 @@ Apparaît l'espace de configuration pour ces systèmes.
 Pour enregistrer la configuration, cliquez sur le bouton Terminé, pour revenir
  à la page précédente cliquez sur le bouton Annuler.
 \layout Subsection
-
+\pagebreak_top 
 Configurer un terminal
 \layout Subsubsection
 
@@ -260,11 +260,8 @@ Modèle de terminaux
 \layout Standard
 
 
-\color black
-obligatoire.
-
 \color red
- ?
+?
 \color black
  Y a-t-il un choix à faire.
 \end_inset 
@@ -277,6 +274,8 @@ obligatoire.
 \layout Standard
 
 Base
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -395,7 +394,7 @@ Seveur NTP
 
 
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Configuration réseau
 \layout Standard
 
@@ -451,7 +450,7 @@ Adresse MAC
 
 
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Action
 \layout Standard
 
@@ -534,7 +533,7 @@ Variante
 
 
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Souris
 \layout Standard
 
@@ -589,14 +588,14 @@ Sélectionnez le port sur lequel sera branché la souris dans la liste déroulante.
 
 
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Matériel téléphonique
 \layout Standard
 
 Précisez de quel type de téléphone il s'agit.
  (pour un terminal ?)
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Périphérique graphique
 \layout Standard
 
@@ -670,7 +669,7 @@ Profondeur des couleurs
 
 
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Ecran
 \layout Standard
 
@@ -746,7 +745,7 @@ VSync
 
 
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Bureau distant
 \layout Standard
 
@@ -822,7 +821,7 @@ Police du serveur
 
 
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Imprimante
 \layout Standard
 
@@ -878,34 +877,16 @@ Serveur de file d'attente
 
 
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Scanner
 \layout Standard
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="3" columns="2">
+<lyxtabular version="3" rows="2" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="6cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="9cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Objets
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -950,7 +931,7 @@ Sélectionnez le modèle du scanner dans la liste déroulante.
 
 
 \layout Subsubsection
-\added_space_top medskip 
+\added_space_top bigskip 
 Démarrage
 \layout Subsubsection*
 
@@ -1026,7 +1007,7 @@ Options personnalisées
 
 Trois points à expliquer
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Modules du kernel (format : nom paramètre)
 \layout Standard
 
@@ -1038,7 +1019,7 @@ Modules du kernel (format : nom paramètre)
 Utiliser le bouton Ajouter après avoir rempli le champ qui le précède et
  le bouton Supprimer après avoir séléctionné dans la liste.
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Périphérique Automount (format : entrée complète de autofs)
 \layout Standard
 
@@ -1050,7 +1031,7 @@ Périphérique Automount (format : entrée complète de autofs)
 Utiliser le bouton Ajouter après avoir rempli le champ qui le précède et
  le bouton Supprimer après avoir séléctionné dans la liste.
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Entrée fstab supplémentaire
 \layout Standard
 
@@ -1062,13 +1043,13 @@ Entrée fstab supplémentaire
 Utiliser le bouton Ajouter après avoir rempli le champ qui le précède et
  le bouton Supprimer après avoir séléctionné dans la liste.
 \layout Subsubsection
-\added_space_top medskip 
+\added_space_top bigskip 
 Surveillance
 \layout Standard
 
 Cet onglet donne un compte rendu de l'état du système.
 \layout Subsubsection
-\added_space_top medskip 
+\added_space_top bigskip 
 Références
 \layout Standard
 
@@ -1088,28 +1069,10 @@ Propriétés
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="8" columns="2">
+<lyxtabular version="3" rows="7" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Objets 
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -1125,11 +1088,8 @@ Modèle de station de travail
 \layout Standard
 
 
-\color black
-obligatoire.
-
 \color red
- ?
+?
 \color black
  Y a-t-il un choix à faire.
 \end_inset 
@@ -1142,6 +1102,8 @@ obligatoire.
 \layout Standard
 
 Base
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1260,34 +1222,16 @@ Seveur NTP
 
 
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Configuration réseau
 \layout Standard
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="3" columns="2">
+<lyxtabular version="3" rows="2" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Objets 
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -1334,7 +1278,7 @@ Adresse MAC
 
 
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Action
 \layout Standard
 
@@ -1351,28 +1295,10 @@ Clavier
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="4" columns="2">
+<lyxtabular version="3" rows="3" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Objets
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -1435,34 +1361,16 @@ Variante
 
 
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Souris
 \layout Standard
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="3" columns="2">
+<lyxtabular version="3" rows="2" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Objets
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -1508,41 +1416,23 @@ Sélectionnez le port sur lequel sera branché la souris dans la liste déroulante.
 
 
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Matériel téléphonique
 \layout Standard
 
 Précisez de quel type de téléphone il s'agit.
  (pour un terminal ?)
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Périphérique graphique
 \layout Standard
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="4" columns="2">
+<lyxtabular version="3" rows="3" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Objets
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -1607,34 +1497,16 @@ Profondeur des couleurs
 
 
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Ecran
 \layout Standard
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="4" columns="2">
+<lyxtabular version="3" rows="3" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="7cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="8cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Objets
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -1701,34 +1573,16 @@ VSync
 
 
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Bureau distant
 \layout Standard
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="4" columns="2">
+<lyxtabular version="3" rows="3" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Objets
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -1795,34 +1649,16 @@ Police du serveur
 
 
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Imprimante
 \layout Standard
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="3" columns="2">
+<lyxtabular version="3" rows="2" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="6cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="9cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Objets
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -1869,34 +1705,16 @@ Serveur de file d'attente
 
 
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Scanner
 \layout Standard
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="3" columns="2">
+<lyxtabular version="3" rows="2" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="6cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="9cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Objets
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -1941,7 +1759,7 @@ Sélectionnez le modèle du scanner dans la liste déroulante.
 
 
 \layout Subsubsection
-\added_space_top medskip 
+\added_space_top bigskip 
 Démarrage
 \layout Subsubsection*
 
@@ -1950,28 +1768,10 @@ Paramètre de démarrage
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="4" columns="2">
+<lyxtabular version="3" rows="3" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Objets
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -2035,7 +1835,7 @@ Options personnalisées
 
 Trois points à expliquer ...
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Modules du kernel (format : nom paramètre)
 \layout Standard
 
@@ -2047,7 +1847,7 @@ Modules du kernel (format : nom paramètre)
 Utiliser le bouton Ajouter après avoir rempli le champ qui le précède et
  le bouton Supprimer après avoir séléctionné dans la liste.
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Périphérique Automount (format : entrée complète de autofs)
 \layout Standard
 
@@ -2059,7 +1859,7 @@ Périphérique Automount (format : entrée complète de autofs)
 Utiliser le bouton Ajouter après avoir rempli le champ qui le précède et
  le bouton Supprimer après avoir séléctionné dans la liste.
 \layout Subsubsection*
-\added_space_top bigskip 
+\added_space_top medskip 
 Entrée fstab supplémentaire
 \layout Standard
 
@@ -2071,13 +1871,13 @@ Entrée fstab supplémentaire
 Utiliser le bouton Ajouter après avoir rempli le champ qui le précède et
  le bouton Supprimer après avoir séléctionné dans la liste.
 \layout Subsubsection
-\added_space_top medskip 
+\added_space_top bigskip 
 Surveillance
 \layout Standard
 
 Cet onglet donne un compte rendu de l'état du système.
 \layout Subsubsection
-\added_space_top medskip 
+\added_space_top bigskip 
 Références
 \layout Standard
 
@@ -2094,28 +1894,10 @@ Informations générales
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="4" columns="2">
+<lyxtabular version="3" rows="3" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Objets
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -2123,6 +1905,8 @@ Champs à remplir
 \layout Standard
 
 Server name
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2130,8 +1914,7 @@ Server name
 
 \layout Standard
 
-obligatoire.
- Insérez le nom ou le chemin du serveur 
+Insérez le nom ou le chemin du serveur 
 \color red
 ?
 \end_inset 
@@ -2144,6 +1927,8 @@ obligatoire.
 \layout Standard
 
 Base
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2151,9 +1936,8 @@ Base
 
 \layout Standard
 
-obligatoire.
- Sélectionnez dans la liste déroulante le département auquel le serveur
- sera associé.
+Sélectionnez dans la liste déroulante le département auquel le serveur sera
+ associé.
 \end_inset 
 </cell>
 </row>
@@ -2181,34 +1965,16 @@ Insérez une description sur le serveur.
 
 
 \layout Subsubsection*
-
+\added_space_top medskip 
 Configuration réseau
 \layout Standard
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="3" columns="2">
+<lyxtabular version="3" rows="2" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Objets
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -2249,7 +2015,7 @@ Adresse MAC
 
 
 \layout Subsubsection*
-
+\added_space_top medskip 
 Action
 \layout Standard
 
@@ -2257,14 +2023,15 @@ Action
 \color red
 ?
 \layout Subsubsection
-
+\added_space_top bigskip 
 Databases
 \layout Standard
 
 Ce point regroupe toutes les bases de données qui peuvent être associés
  au serveur.
  L'administrateur peut cocher une ou plusieurs propositions de bases de
- données selon la configuration du système.
+ données selon la configuration du système et les droits d'accès des utilisateur
+s.
 \layout Standard
 
 L'administrateur à le choix entre :
@@ -2338,7 +2105,7 @@ Mot de passe
 
 \end_deeper 
 \layout Itemize
-
+\added_space_top medskip 
 FAX database
 \begin_deeper 
 \layout Standard
@@ -2390,7 +2157,7 @@ Mot de passe
 
 \end_deeper 
 \layout Itemize
-
+\added_space_top medskip 
 Asterisk Management
 \begin_deeper 
 \layout Standard
@@ -2476,7 +2243,7 @@ Local dial prefix
 
 \end_deeper 
 \layout Itemize
-
+\added_space_top medskip 
 IMAP admin access
 \begin_deeper 
 \layout Standard
@@ -2579,7 +2346,7 @@ Sieve port
 
 \end_deeper 
 \layout Itemize
-
+\added_space_top medskip 
 Logging database
 \begin_deeper 
 \layout Standard
@@ -2629,4 +2396,786 @@ Mot de passe
 \end_inset 
 
 
+\end_deeper 
+\layout Subsubsection
+\added_space_top bigskip 
+Services
+\layout Itemize
+
+Nfs Export
+\layout Standard
+
+
+\color red
+?
+\layout Itemize
+\added_space_top medskip 
+Time Service
+\layout Standard
+
+
+\color red
+?
+\layout Itemize
+\added_space_top medskip 
+LDAP Service
+\layout Standard
+
+
+\color red
+?
+\layout Itemize
+\added_space_top medskip 
+Terminal Service
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Temporary disable login
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Font path
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Itemize
+\added_space_top medskip 
+Syslog Service
+\layout Standard
+
+
+\color red
+?
+\layout Itemize
+\added_space_top medskip 
+Print Service
+\layout Standard
+
+
+\color red
+?
+\layout Subsubsection
+\added_space_top bigskip 
+Surveillance
+\layout Standard
+
+Cet onglet donne un compte rendu de l'état du système.
+\layout Subsubsection
+\added_space_top bigskip 
+Références
+\layout Standard
+
+
+\color red
+?
+\layout Subsection
+\pagebreak_top 
+Configurer une imprimante
+\layout Subsubsection
+
+Informations générales
+\layout Subsubsection
+\added_space_top bigskip 
+Références
+\layout Subsection
+\pagebreak_top 
+Configurer un téléphone
+\layout Subsubsection
+
+Informations générales
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Nom du téléphone
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insérez le nom du téléphone.
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Base
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Choisissez dans la liste déroulante le nom du département auquel sera associé
+ le téléphone.
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Description
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Rédigez une description à propos du téléphone.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Specific Phone settings
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Phone type
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Choisissez dans la liste déroulante le type du téléphone : SIP, IAX ou CAPI
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Itemize
+\added_space_top bigskip 
+Si SIP est sélectionné vous devez remplir les champs suivants :
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="4cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Mode
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+DTMF mode
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Default IP
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Response timeout
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+\added_space_top bigskip 
+Si IAX est sélectionné vous devez remplir les champs suivants :
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="9" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="4cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Modus
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Default IP
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Response timeout
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Authtype
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Secret
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Account code
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Trunk lines
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Hosts that are allowed to connect
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Utilisez le bouton Ajouter pour insérer le nom d'hôte pouvant se connecter.
+ Le bouton Supprimer sert à effacer le nom d'hôte sélectionné.
+ 
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Hosts that are not allowed to connect
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Utilisez le bouton Ajouter pour insérer le nom d'hôte ne pouvant pas se
+ connecter.
+ Le bouton Supprimer sert à effacer le nom d'hôte sélectionné.
+ 
+\color red
+?
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+\added_space_top bigskip 
+Si CAPI est sélectionné vous devez remplir le champ suivant :
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="4cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+MSN
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_deeper 
+\layout Subsubsection*
+\added_space_top medskip 
+Configuration réseau
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse IP
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse MAC
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection
+\added_space_top bigskip 
+Références
+\layout Standard
+
+
+\color red
+?
+\layout Subsection
+\pagebreak_top 
+Configuration d'un composant
+\layout Subsubsection
+
+Informations générales
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Device name
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insérez le nom du composant.
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Base
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Choisissez dans la liste déroulante le nom du département auquel sera associé
+ le composant.
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Description
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Rédigez une description à propos du composant.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Configuration réseau
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse IP
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse MAC
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection
+\added_space_top bigskip 
+Références
+\layout Standard
+
+
+\color red
+?
 \the_end

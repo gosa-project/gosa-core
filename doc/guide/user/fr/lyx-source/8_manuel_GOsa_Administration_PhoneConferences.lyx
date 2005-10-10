@@ -177,7 +177,7 @@ Apparaît l'espace de configuration.
 Pour enregistrer la configuration, cliquez sur le bouton Terminé, pour revenir
  à la page précédente cliquez sur le bouton Annuler.
 \layout Subsection
-
+\pagebreak_top 
 Informations générales
 \layout Subsubsection
 
@@ -197,6 +197,8 @@ Propriétés
 \layout Standard
 
 Conference name
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -204,8 +206,7 @@ Conference name
 
 \layout Standard
 
-obligatoire.
- Insérez le nom _ 
+Insérez le nom _ 
 \color red
 ?
 \end_inset 
@@ -218,6 +219,8 @@ obligatoire.
 \layout Standard
 
 Type
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -225,8 +228,7 @@ Type
 
 \layout Standard
 
-obligatoire.
- 
+
 \color red
 ?
 \end_inset 
@@ -239,6 +241,8 @@ obligatoire.
 \layout Standard
 
 Base
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -247,11 +251,8 @@ Base
 \layout Standard
 
 
-\color black
-obligatoire.
-
 \color red
- ?
+?
 \end_inset 
 </cell>
 </row>
@@ -262,6 +263,8 @@ obligatoire.
 \layout Standard
 
 Description
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -270,11 +273,8 @@ Description
 \layout Standard
 
 
-\color black
-obligatoire.
-
 \color red
- ?
+?
 \end_inset 
 </cell>
 </row>
@@ -324,7 +324,7 @@ Numéros de téléphone
 
 
 \layout Subsubsection
-
+\added_space_top medskip 
 Options
 \layout Itemize
 
@@ -391,7 +391,7 @@ Cochez si vous désirez compter ls participants.
 ?
 \end_deeper 
 \layout Subsection
-
+\added_space_top bigskip 
 Références
 \layout Standard
 

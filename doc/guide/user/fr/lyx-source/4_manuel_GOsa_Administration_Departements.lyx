@@ -186,7 +186,7 @@ Pour enregistrer la configuration cliquer sur le bouton Terminé, pour revenir
 
 Tous les champs précédés d'une astérisque doivent être remplis obligatoirement.
 \layout Subsection
-
+\pagebreak_top 
 Informations générales
 \layout Subsubsection
 
@@ -206,6 +206,8 @@ Propriétés
 \layout Standard
 
 Nom du département
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -213,8 +215,7 @@ Nom du département
 
 \layout Standard
 
-obligatoire.
- Insérez le nom du département.
+Insérez le nom du département.
 \end_inset 
 </cell>
 </row>
@@ -225,6 +226,8 @@ obligatoire.
 \layout Standard
 
 Description
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -232,8 +235,7 @@ Description
 
 \layout Standard
 
-obligatoire.
- 
+
 \color red
 Quel type de description, pourquoi est-elle obligatoire?
 \end_inset 
@@ -266,6 +268,8 @@ Catégorie
 \layout Standard
 
 Base
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -273,8 +277,7 @@ Base
 
 \layout Standard
 
-obligatoire.
- 
+
 \color red
 ?
 \color default
@@ -288,7 +291,7 @@ obligatoire.
 
 
 \layout Subsubsection
-
+\added_space_top medskip 
 Lieu
 \layout Standard
 
@@ -398,7 +401,7 @@ Fax central du département
 
 
 \layout Subsection
-
+\added_space_top bigskip 
 Références
 \layout Standard
 

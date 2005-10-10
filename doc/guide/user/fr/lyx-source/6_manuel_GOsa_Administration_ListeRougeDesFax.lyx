@@ -174,7 +174,7 @@ Apparaît l'espace de configuration.
 Pour enregistrer la configuration, cliquez sur le bouton Terminé, pour revenir
  à la page précédente cliquez sur le bouton Annuler.
 \layout Subsection
-
+\pagebreak_top 
 Informations générales
 \layout Standard
 
@@ -200,8 +200,7 @@ Liste des noms
 
 \layout Standard
 
-obligatoire.
- Insérez le nom de la liste des fax.
+Insérez le nom de la liste des fax.
  
 \color red
 ambigu ?
@@ -269,7 +268,7 @@ Description de l'utilisation de la liste fax
 
 
 \layout Subsection
-
+\added_space_top bigskip 
 Numéros bloqués
 \layout Standard
 
@@ -277,7 +276,7 @@ L'administrateur doit insérer dans le champ inférieur les numéros de fax
  qui seront liés à la nouvelle liste rouge créee.
  Utilisez les boutons Ajouter et Supprimer pour la gestion de ces numéros.
 \layout Subsection
-
+\added_space_top bigskip 
 Information
 \layout Standard
 

@@ -61,4 +61,245 @@ ADMINISTRATION
 Groupes d'objets
 \layout Standard
 
+L'administrateur peut ajouter et configurer les Groupes d'objets à partir
+ du bouton 
+\series bold 
+\color blue
+Groupes d'objets
+\series default 
+\color default
+ dans le menu de gauche dans la partie 
+\series bold 
+Administration
+\series default 
+.
+ La page 
+\family sans 
+Groupes d'objets
+\family default 
+ s'affiche.
+ 
+\layout Standard
+
+La page est divisée en trois colonnes :
+\layout Standard
+
+- la première colonne est destinée à afficher les noms des Groupes d'objets,
+\layout Standard
+
+- la deuxième colonne contient les icônes qui sont des raccourcis vers les
+ propriétés des Groupes d'objets,
+\layout Standard
+
+- la troisième colonne contient les icônes qui sont les actions que l'on
+ peut exécuter sur les Groupes d'objets.
+\layout Standard
+
+Les flêches en entête ( 
+\begin_inset Graphics
+	filename images/list_back.png
+
+\end_inset 
+
+, 
+\begin_inset Graphics
+	filename images/list_root.png
+
+\end_inset 
+
+, 
+\begin_inset Graphics
+	filename images/list_home.png
+
+\end_inset 
+
+ ) servent à modifier l'affichage selon le département.
+ Ces icônes prédominent sur toutes autres formes de séléction d'affichage.
+ 
+\layout Standard
+\added_space_top medskip 
+C'est à partir de la page 
+\family sans 
+Groupes d'objets
+\family default 
+ que l'administrateur gère les Groupes d'objets instaurées dans la société.
+\layout Standard
+
+Il est possible de modifier l'affichage de la liste des Groupes en utilisant
+ le tableau intitulé Filtres 
+\begin_inset Graphics
+	filename images/rocket.png
+
+\end_inset 
+
+.
+\layout Itemize
+
+L'administrateur peut faire une recherche sur le nom :
+\begin_deeper 
+\layout Standard
+
+- cliquez sur l'astérisque (étoile : *) pour voir apparaître tous les noms
+ de Groupes d'objets;
+\layout Standard
+
+- cliquez sur une lettre et tous les noms de Groupes d'objets débutant par
+ cette lettre s'afficheront;
+\layout Standard
+
+- cliquez sur un numéro et tous les noms des Groupes d'objets débutant par
+ ce numéro s'afficheront.
+\end_deeper 
+\layout Itemize
+
+L'administrateur peut faire une recherche à partir des propriétés du Groupe
+ d'objets :
+\begin_deeper 
+\layout Standard
+
+- cochez une ou plusieurs propositions 
+\end_deeper 
+\layout Itemize
+
+Ou encore la recherche rapide 
+\begin_inset Graphics
+	filename images/search.png
+
+\end_inset 
+
+ : remplissez le champ par le nom du Groupes d'objets recherché et ensuite
+ cliquez sur le bouton Appliquer.
+\layout Standard
+\added_space_top medskip 
+Pour créer, configurer ou modifier un Groupe d'objets, l'administrateur
+ doit cliquer sur le bouton 
+\begin_inset Graphics
+	filename images/list_new_ogroup.png
+
+\end_inset 
+
+.
+ 
+\layout Standard
+
+Apparaît alors l'espace de configuration.
+ Les onglets sont les extensions apportées à GOsa.
+ L'administrateur configure ces extensions pour chaque groupe.
+ A chaque extension configurée, pour enregistrer les modifications, cliquer
+ sur le bouton Terminé et pour revenir à la page précédente cliquer sur
+ le bouton Annuler.
+\layout Standard
+
+Tous les champs précédés d'une astérisque doivent être remplis obligatoirement.
+\layout Standard
+
+Le premier onglet est l'onglet 
+\series bold 
+informations générales
+\series default 
+.
+\layout Subsection
+\pagebreak_top 
+Informations générales
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Nom du groupe
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insérez le nom du groupe.
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Description
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Rédigez une petite description sur le groupe.
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Base
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez dans le menu déroulant le département auquel sera associé le
+ groupe.
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Objets membres
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+?.
+ Le bouton Ajouter renvoie à la liste des objets à sélectionner, utilisez
+ le bouton Supprimer après avoir sélectionné dans le champ les objets à
+ effacer.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsection
+\added_space_top bigskip 
+Références
+\layout Standard
+
+
+\color red
+?
 \the_end

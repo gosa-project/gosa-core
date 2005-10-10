@@ -177,7 +177,7 @@ Apparaît l'espace de configuration contenant trois onglets : informations
 Pour enregistrer la configuration de chaque onglet, cliquez sur le bouton
  Terminé, pour revenir à la page précédente cliquez sur le bouton Annuler.
 \layout Subsection
-
+\pagebreak_top 
 Informations générales
 \layout Standard
 
@@ -203,8 +203,7 @@ Nom de l'application
 
 \layout Standard
 
-obligatoire.
- Indiquez le nom de l'application.
+Indiquez le nom de l'application.
 \end_inset 
 </cell>
 </row>
@@ -224,7 +223,9 @@ Exécuter
 
 \layout Standard
 
-obligatoire.
+
+\color red
+?
 \end_inset 
 </cell>
 </row>
@@ -347,7 +348,7 @@ Placer une entrée dans le menu démarrage des membres
 ?
 \end_deeper 
 \layout Subsection
-\pagebreak_top 
+\added_space_top bigskip 
 Options
 \layout Standard
 
@@ -402,7 +403,7 @@ Valeurs par defaut asscociées à la variable
 \added_space_top medskip 
 Utilisez le bouton Supprimez pour effacer une variable.
 \layout Subsection
-
+\added_space_top bigskip 
 Références
 \layout Standard
 

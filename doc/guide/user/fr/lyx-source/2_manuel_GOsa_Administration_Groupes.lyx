@@ -214,34 +214,16 @@ informations générales
 \series default 
 .
 \layout Subsection
-
+\pagebreak_top 
 Informations générales
 \layout Itemize
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="4" columns="2">
+<lyxtabular version="3" rows="3" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Intitulés
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -249,6 +231,8 @@ Champs à remplir
 \layout Standard
 
 Nom du groupe
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -256,8 +240,7 @@ Nom du groupe
 
 \layout Standard
 
-obligatoire.
- 
+Insérez le nom du groupe.
 \end_inset 
 </cell>
 </row>
@@ -286,6 +269,8 @@ Insérez une description, un commentaire sur le groupe
 \layout Standard
 
 Base
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -293,8 +278,7 @@ Base
 
 \layout Standard
 
-obligatoire.
- Dans la liste déroulante faites le choix d'un département.
+Dans la liste déroulante faites le choix d'un département.
 \end_inset 
 </cell>
 </row>
@@ -330,7 +314,7 @@ L'administrateur insère les membres du personnel devant faire partie de
  groupe.
  Pour supprimer un membre, utiliser le bouton Supprimer.
 \layout Subsection
-
+\added_space_top bigskip 
 Environnement
 \layout Standard
 
@@ -343,22 +327,22 @@ Ajouter l'extension environnement
 
 Profiles
 \layout Subsubsection
-
+\added_space_top medskip 
 Kiosk profile
 \layout Subsubsection
-
+\added_space_top medskip 
 Logon scripts
 \layout Subsubsection
-
+\added_space_top medskip 
 Attach share
 \layout Subsubsection
-
+\added_space_top medskip 
 Hotplug devices
 \layout Subsubsection
-
+\added_space_top medskip 
 Imprimante
 \layout Subsection
-
+\added_space_top bigskip 
 Applications
 \layout Standard
 
@@ -377,7 +361,7 @@ Les applications disponibles sont les applications existantes au sein de
  pour faire voyager l'application d'un champ à l'autre.
  Pour terminé cliquer sur le bouton Editer les paramètres.
 \layout Subsection
-
+\added_space_top bigskip 
 Mail
 \layout Standard
 
@@ -393,28 +377,10 @@ Informations générales
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="5" columns="2">
+<lyxtabular version="3" rows="4" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Intitulés
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -422,6 +388,8 @@ Champs à remplir
 \layout Standard
 
 Adresse principale
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -429,8 +397,7 @@ Adresse principale
 
 \layout Standard
 
-obligatoire.
- 
+
 \color red
 ?
 \end_inset 
@@ -502,37 +469,19 @@ Taille des Quota
 
 
 \layout Subsubsection
-
+\added_space_top medskip 
 Alternative addresses
 \layout Subsubsection
-
+\added_space_top medskip 
 Répertoire partagé IMAP
 \layout Standard
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="4" columns="2">
+<lyxtabular version="3" rows="3" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Intitulés
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Champs à remplir
-\end_inset 
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -596,7 +545,7 @@ Choisissez dans la liste déroulante le type d'accès accordés aux membres
 
 
 \layout Subsubsection
-
+\added_space_top medskip 
 Transférer le messages vers un membre n'appartenant pas au groupe
 \layout Standard
 
@@ -606,7 +555,7 @@ Des utilisateurs peuvent recevoir les messages d'un groupe sans pour autant
  précède les boutons Ajouter, Ajouter en local et Supprimer.
  Le bouton Ajouter en local renvoie aux adresses déjà configurées dans GOsa.
 \layout Subsection
-
+\added_space_top bigskip 
 ACL
 \layout Standard
 
@@ -614,7 +563,7 @@ ACL
 \color red
 ?
 \layout Subsection
-
+\added_space_top bigskip 
 Références
 \layout Standard
 

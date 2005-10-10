@@ -221,7 +221,7 @@ informations générales
 \color default
 .
 \layout Subsection
-
+\pagebreak_top 
 Informations générales
 \layout Subsubsection
 
@@ -241,6 +241,8 @@ Informations personnelles
 \layout Standard
 
 Nom
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -248,7 +250,7 @@ Nom
 
 \layout Standard
 
-obligatoire
+Insérez le nom de l'utilisateur.
 \end_inset 
 </cell>
 </row>
@@ -259,6 +261,8 @@ obligatoire
 \layout Standard
 
 Prénom
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -266,7 +270,7 @@ Prénom
 
 \layout Standard
 
-obligatoire
+Insérez le prénom de l'utilisateur.
 \end_inset 
 </cell>
 </row>
@@ -277,6 +281,8 @@ obligatoire
 \layout Standard
 
 Identifiant
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -284,7 +290,9 @@ Identifiant
 
 \layout Standard
 
-obligatoire
+
+\color red
+?
 \end_inset 
 </cell>
 </row>
@@ -522,7 +530,7 @@ changer la photo
  Vous parcourez alors l'arborescence de votre ordinateur pour aller chercher
  l'image.
 \layout Subsubsection
-
+\added_space_top medskip 
 Informations sur l'entreprise
 \layout Standard
 
@@ -776,7 +784,7 @@ Insérez l'adresse de l'entreprise
 
 
 \layout Subsection
-
+\added_space_top bigskip 
 Unix
 \layout Standard
 
@@ -912,7 +920,7 @@ UID/GID
 
 
 \layout Subsubsection
-
+\added_space_top medskip 
 Appartient aux groupes
 \layout Standard
 
@@ -923,7 +931,7 @@ L'utilisateur peut appartenir à un ou plusieurs Groupes.
  le champ.
  Le bouton Ajouter renvoie à la liste des utilisateurs.
 \layout Subsubsection
-
+\added_space_top medskip 
 Compte
 \layout Standard
 
@@ -932,7 +940,7 @@ Il s'agit de la gestion du mot de passe de l'utilisateur.
  doit veiller à rester cohérent pour éviter les conflits dans l'application
  de ses choix.
 \layout Subsubsection
-
+\added_space_top medskip 
 Système de confiance
 \layout Standard
 
@@ -951,7 +959,7 @@ permettre l'accès à ces hôtes, utilisez alors les boutons Ajouter et Supprimer
  pour faire apparaître les systèmes auxquels l'utilisateur peut avoir accès.
  Le bouton Ajouter renvoie à la liste des hôtes.
 \layout Subsection
-
+\added_space_top bigskip 
 Environnement 
 \color red
 ?
@@ -967,22 +975,22 @@ ajouter une extension environnemental
 
 Profiles
 \layout Subsubsection
-
+\added_space_top medskip 
 Kiosk profile
 \layout Subsubsection
-
+\added_space_top medskip 
 Logon scripts
 \layout Subsubsection
-
+\added_space_top medskip 
 Attach share
 \layout Subsubsection
-
+\added_space_top medskip 
 Hotplug devices
 \layout Subsubsection
-
+\added_space_top medskip 
 Imprimante
 \layout Subsection
-
+\added_space_top bigskip 
 Mail
 \layout Standard
 
@@ -1011,6 +1019,8 @@ Informations générales
 \layout Standard
 
 Adresse principale
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1018,7 +1028,7 @@ Adresse principale
 
 \layout Standard
 
-obligatoire, insérez l'adresse email de l'utilisateur 
+Insérez l'adresse email de l'utilisateur 
 \end_inset 
 </cell>
 </row>
@@ -1080,7 +1090,7 @@ Tailles des Quota
 
 
 \layout Subsubsection
-
+\added_space_top medskip 
 Alternative addresses
 \layout Standard
 
@@ -1093,7 +1103,7 @@ adresses alternatives
  Utilisez les boutons Ajouter et Supprimer pour insérer les alias.
  L'alias doit être introduit dans le champ précédent le bouton Ajouter.
 \layout Subsubsection
-
+\added_space_top medskip 
 Options email
 \layout Standard
 
@@ -1126,7 +1136,7 @@ et Supprimer pour la gestion des adresses.
  dans GOsa.
  Le bouton Ajouter permet l'ajout d'adresses extérieures au système.
 \layout Subsubsection
-
+\added_space_top medskip 
 Options email avancées
 \layout Itemize
 
@@ -1137,7 +1147,7 @@ L'administrateur peut restreindre l'utilisateur dans l'envoi et la réception
 L'administrateur peut aussi écrire un script sieve qui établit les règles
  de gestion du mail qui remplace alors les options email décrites ci-dessus.
 \layout Subsection
-
+\added_space_top bigskip 
 Samba
 \layout Standard
 
@@ -1245,7 +1255,7 @@ Indiquez le chemin pour accéder au profile de l'utilisateur
 
 
 \layout Subsubsection
-
+\added_space_top medskip 
 Serveur de terminal
 \layout Itemize
 
@@ -1366,7 +1376,7 @@ Périphériques clients :
 
 Divers :
 \layout Subsubsection
-
+\added_space_top medskip 
 Options d'accès
 \layout Itemize
 
@@ -1383,7 +1393,7 @@ Le champ à droite doit être rempli par les noms de stations à partir desquelles
  faire apparaître les noms de stations.
  Le bouton Ajouter renvoie à la liste des stations.
 \layout Subsection
-
+\added_space_top bigskip 
 Connectivité
 \layout Standard
 
@@ -1397,7 +1407,7 @@ Compte Proxy
 Si vous activez le compte Proxy pour l'utilisateur vous pouvez filtrer sur
  le contenu, limité l'accès à certaines heures et restreindre le téléchargement.
 \layout Subparagraph
-
+\added_space_top smallskip 
 Compte FTP
 \layout Standard
 
@@ -1406,14 +1416,14 @@ Si vous activez le compte FTP, vous pouvez régler la bande passante montante
  le transfert de fichiers .
  Vous pouvez aussi à partir de cet endroit désactiver le compte FTP.
 \layout Subparagraph
-
+\added_space_top smallskip 
 Compte WebDAV
 \layout Standard
 
 Si vous activez le compte WebDav, l'utilisateur aura accès au serveur WebDAV
  
 \layout Subparagraph
-
+\added_space_top smallskip 
 Compte PHPGroupware
 \layout Standard
 
@@ -1421,7 +1431,7 @@ Compte PHPGroupware
 \color red
 ?
 \layout Subparagraph
-
+\added_space_top smallskip 
 Intranet account 
 \layout Standard
 
@@ -1429,7 +1439,7 @@ Intranet account
 \color red
 ?
 \layout Subsection
-
+\added_space_top bigskip 
 Fax
 \layout Standard
 
@@ -1454,6 +1464,8 @@ Informations générales
 \layout Standard
 
 Fax
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1461,8 +1473,7 @@ Fax
 
 \layout Standard
 
-Obligatoire.
- Insérez le numéro de fax de l'utilisateur
+Insérez le numéro de fax de l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -1509,7 +1520,7 @@ Cliquez pour voir apparaître une liste déroulante qui donne le choix du
 
 
 \layout Subsubsection
-
+\added_space_top medskip 
 Méthodes de distribution
 \layout Itemize
 
@@ -1522,7 +1533,7 @@ Les fax peuvent être redirigés sous forme de mail à une adresse mail.
 
 Les fax peuvent être envoyés directement au télécopieur et imprimés.
 \layout Subsubsection
-
+\added_space_top medskip 
 Numéros de fax alternatif
 \layout Standard
 
@@ -1534,7 +1545,7 @@ L'administrateur peut compléter la configuration du fax par une série d'autres
  Le bouton Ajouter permet d'insérez des numéros de fax autres que ceux de
  la liste.
 \layout Subsubsection
-
+\added_space_top medskip 
 Listes rouges
 \layout Standard
 
@@ -1552,7 +1563,7 @@ En cliquant sur le bouton Edit vous faites apparaître une page avec du côté
  La liste des numéros indésirables peuvent varier selon les utilisateurs.
  Pour terminer, cliquez sur le bouton Appliquer.
 \layout Subsection
-
+\added_space_top bigskip 
 Téléphone
 \layout Standard
 
@@ -1572,7 +1583,7 @@ Insérez le ou les numéro(s) de l'utilisateur en utilisant les boutons Ajouter
  Le bouton Ajouter fonctionne que si le champ précédent est rempli par un
  numéro.
 \layout Subsubsection
-
+\added_space_top medskip 
 Matériel téléphonique
 \layout Standard
 
@@ -1607,6 +1618,8 @@ Spécifier le type de téléphone dans la liste déroulante
 \layout Standard
 
 VoicemailPIN
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1614,7 +1627,7 @@ VoicemailPIN
 
 \layout Standard
 
-obligatoire 
+
 \color red
 ?
 \end_inset 
@@ -1627,6 +1640,8 @@ obligatoire
 \layout Standard
 
 Phone PIN
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1634,7 +1649,7 @@ Phone PIN
 
 \layout Standard
 
-obligatoire 
+
 \color red
 ?
 \end_inset 
@@ -1646,7 +1661,7 @@ obligatoire
 
 
 \layout Subsubsection
-
+\added_space_top medskip 
 Phone macro
 \layout Standard
 
@@ -1654,7 +1669,7 @@ Phone macro
 \color red
 ?
 \layout Subsection
-
+\added_space_top bigskip 
 Références
 \layout Standard
 

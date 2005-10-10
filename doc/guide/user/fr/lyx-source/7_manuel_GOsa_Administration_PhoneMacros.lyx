@@ -173,7 +173,7 @@ Apparaît l'espace de configuration.
 Pour enregistrer la configuration, cliquez sur le bouton Terminé, pour revenir
  à la page précédente cliquez sur le bouton Annuler.
 \layout Subsection
-
+\pagebreak_top 
 Informations générales
 \layout Standard
 
@@ -199,8 +199,7 @@ Macro name
 
 \layout Standard
 
-obligatoire.
- Insérez le nom de la macro
+Insérez le nom de la macro
 \end_inset 
 </cell>
 </row>
@@ -211,6 +210,8 @@ obligatoire.
 \layout Standard
 
 Afficher le nom
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -218,8 +219,7 @@ Afficher le nom
 
 \layout Standard
 
-obligatoire.
- 
+
 \color red
 ?
 \end_inset 
@@ -294,7 +294,7 @@ Visible for user
 \added_space_top medskip 
 Macro text
 \layout Subsection
-
+\added_space_top bigskip 
 Parameter
 \layout Standard
 
@@ -302,7 +302,7 @@ Parameter
 \color red
 ?
 \layout Subsection
-
+\added_space_top bigskip 
 Références
 \layout Standard
 
