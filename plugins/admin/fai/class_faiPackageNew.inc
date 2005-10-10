@@ -75,7 +75,7 @@ class faiPackageNew extends plugin
     }elseif(empty($this->FAIdebianSection)){
       $disableRelease = $disableMirror  = $disableContinue = true;
     }elseif(empty($this->FAIdebianMirror)){
-      $disableRelease = $disableSection = $disableContinue = true;
+      $disableRelease = $disableSection =  true;
     }else{
       $disableRelease = $disableSection =  true;
     }

@@ -55,7 +55,9 @@
 </tr>
 {/if}
 </table>
-		<input type="submit" value="{t}set{/t}" name="SetRepository">
+{if $ContinueACL neq ""}
+<input type="submit" value="{t}set{/t}" name="SetRepository">
+{/if}
 <p class="seperator">&nbsp;
 </p>
 
