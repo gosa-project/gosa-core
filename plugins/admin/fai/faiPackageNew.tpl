@@ -31,6 +31,7 @@
 		</select>
 	</td>
 </tr>
+{if $DisRelease neq false}
 <tr>
 	<td height="30">
         <h2>{t}Sections for this release{/t} : </h2> 
@@ -40,6 +41,8 @@
 		{$sections} 
 	</td>
 </tr>
+{/if}
+{if $DisSection neq false}
 <tr>
 	<td height="30">
 		<h2><LABEL for="mirror">{t}Matching mirrors{/t}</LABEL> : </h2>
@@ -48,10 +51,11 @@
 		<select name="FAIdebianMirrorS" title="{t}mirror{/t}" {$MirrorACL}>
 			{html_options options=$mirrors selected=$mirror}
 		</select>
-		<input type="submit" value="{t}set{/t}" name="SetRepository">
 	</td>
 </tr>
+{/if}
 </table>
+		<input type="submit" value="{t}set{/t}" name="SetRepository">
 <p class="seperator">&nbsp;
 </p>
 

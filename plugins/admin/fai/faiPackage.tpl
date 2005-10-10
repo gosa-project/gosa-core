@@ -72,7 +72,7 @@
 			<br>
 			<input type="submit" name="Addpkg" value="+" {$OptionsACL}>
 			<input type="submit" name="Delpkg" value="-"  {$OptionsACL}>
-			<input type="submit" name="Conpkg" value="Configure"  {$OptionsACL}>
+			<input type="submit" name="Conpkg" value="Configure"  {$OptionsACL} disabled>
 		</td>
 	</tr>
 </table>

@@ -166,6 +166,10 @@ class faiPackageNew extends plugin
       $smarty->assign("SectionACL"," disabled ");
     }
 
+
+    $smarty->assign("DisSection",!empty($this->FAIdebianSection));
+    $smarty->assign("DisRelease",!empty($this->FAIdebianRelease));
+
     $smarty->assign("mirrors" ,$availableServer);
     $smarty->assign("mirror"  ,$this->FAIdebianMirror);
     $smarty->assign("releases",$this->releases);
