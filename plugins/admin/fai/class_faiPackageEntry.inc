@@ -107,7 +107,8 @@ class faiPackageEntry extends plugin
     }
 
     foreach($pkgs as $pkg){
-      if(preg_match("/^".str_replace("*",".*",$this->searchStrPKG)."/i",$pkg[0])){
+      if((preg_match("/^".str_replace("*",".*",$this->searchStrPKG)."/i",$pkg[0]))||
+         (preg_match("/^".str_replace("*",".*",$this->searchStrPKG)."/i",$pkg[3]))){
         if($this->categories[$pkg[2]]){
           if(in_array($pkg[0],$this->selected)){
             $check = " checked ";

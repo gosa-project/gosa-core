@@ -30,7 +30,7 @@
 				<table summary="" cellspacing="4">
 					<tr>
 						<td>
-							{t}Release{/t}
+							{t}Release{/t} : 
 						</td>
 						<td>
 							{$release}
@@ -38,7 +38,7 @@
 					</tr>
 					<tr>
 						<td>
-							{t}Section{/t}
+							{t}Section{/t} : 
 						</td>
 						<td>
 							{$section}
