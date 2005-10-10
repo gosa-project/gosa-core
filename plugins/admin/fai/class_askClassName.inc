@@ -3,17 +3,17 @@
 class askClassName extends plugin
 {
   /* CLI vars */
-  var $cli_summary= "Manage server basic objects";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
+  var $cli_summary          = "Manage server basic objects";
+  var $cli_description      = "Some longer text\nfor help";
+  var $cli_parameters       = array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* attribute list for save action */
-  var $ignore_account = TRUE;
-  var $attributes     = array();
-  var $objectclasses  = array("whatever");
+  var $ignore_account     = TRUE;
+  var $attributes         = array();
+  var $objectclasses      = array("whatever");
 
-  var $objectClass    = false;
-  var $forbidden      =array();
+  var $objectClass        = false;
+  var $forbidden          = array();
   var $ClassName          = "";  
   var $ClassAlreadyExists = false;
 
@@ -31,7 +31,7 @@ class askClassName extends plugin
     $display= "";
 
     /* The faifilter contais 
-       The base for all fai objects 
+     * The base for all fai objects 
      */
     $faifilter = $_SESSION['faifilter'];
 
@@ -49,7 +49,6 @@ class askClassName extends plugin
           FALSE, $objecttypes['dn'], array("cn","description","objectClass","FAIclass"),TRUE);
 
       foreach($res2 as $object){
-      
         /* skip class names with this name */ 
         if(in_array($this->objectClass,$object['objectClass'])){
           $delete[] = $object['cn'][0];

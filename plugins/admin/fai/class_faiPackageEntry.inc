@@ -11,7 +11,7 @@ class faiPackageEntry extends plugin
   var $ignore_account= TRUE;
   var $attributes   = array();
   var $objectclasses= array();
-  var $strID        = "";  
+  var $pkgs        = array();  
 
   var $buffer       = array();
   var $categories   = array();
@@ -21,15 +21,15 @@ class faiPackageEntry extends plugin
   /* Array with available class names */
   var $FAIAllclasses        = array();
 
-  function faiPackageEntry ($config, $dn= NULL,$strID=false,$selected=array())
+  function faiPackageEntry ($config, $dn= NULL,$pkgs,$selected=array())
   {
     plugin::plugin ($config, $dn);
-    $this->strID = $strID;
+    
+    $this->pkgs=$pkgs;
 
     if(isset($_SESSION['searchStrPKG'])){
       $this->searchStrPKG=$_SESSION['searchStrPKG'];
     }
-
     $this->selected=$selected;
   }
 
@@ -50,8 +50,9 @@ class faiPackageEntry extends plugin
     if(isset($_GET['search'])){
       $this->searchStrPKG= $_GET['search']."*";
     }
+    
+    $pkgs= $this->pkgs;
 
-    $pkgs = $this->genPkgs();
     unset($this->categories);
     foreach($pkgs as $name => $entry){
       $cat = $entry[2];
@@ -169,41 +170,6 @@ class faiPackageEntry extends plugin
   {
     return($this->selected);
   }
-
-    /* Generate listbox friendly SubObject list
-  */
-  function genPkgs(){
-    /* Generate a list off available packages for this mirror, section and release
-     */
-    $strID = $this->strID;    // This var contains the path to the parsed package file
-    
-    /* Open the packelist */
-    $fp = fopen($strID,"r");  
-    $a_ret = array();
-    $this->buffer = array();
-    /* Only read this file if it wasn't read before */
-    if(!isset($this->buffer[$strID])){
-      $str = "";
-      /* Parse every line and create an array */
-      while(!feof($fp)){
-        $str= fgets($fp,512);
-        $stra= split("\|",$str);
-        if(count($stra)==4){
-          $a_ret[$stra[0]] = $stra;
-          }
-        }
-        /* Save our Data, to avoid reading it again */
-      $this->buffer[$strID]=$a_ret;
-
-      ksort($a_ret);
-
-      return($a_ret);
-    }else{
-      return $this->buffer[$strID];
-    }
-  }
-
-
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

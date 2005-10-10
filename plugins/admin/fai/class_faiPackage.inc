@@ -42,13 +42,14 @@ class faiPackage extends plugin
   var $releases         = array();  // All possible releases 
   var $sections         = array();  // All section types
 
-  var $list             = array();
+  var $list             = NULL;
 
   var $mirrors          = array();  // The combination of server/release/section
   var $confDir          = "";
   var $usedPackages     = array();
-  
+  var $buffer           = NULL; 
   var $strID            ="";
+  var $newDialogShown   =false;
 
   function faiPackage ($config, $dn= NULL)
   {
@@ -71,6 +72,18 @@ class faiPackage extends plugin
     }else{
       $this->usedPackages = array();
     }  
+
+    unset($this->attrs['FAIdebianSection']['count']);
+    if((isset($this->attrs['FAIdebianSection']))&&(is_array($this->attrs['FAIdebianSection']))){
+      $this->FAIdebianSection = array();
+      foreach($this->attrs['FAIdebianSection'] as $sec){
+        $this->FAIdebianSection[$sec]=$sec;
+      }
+    }
+
+    if((isset($this->attrs['FAIdebianSection']))&&(is_string($this->attrs['FAIdebianSection']))){
+      $this->FAIdebianSection=array($this->attrs['FAIdebianSection']=>$this->attrs['FAIdebianSection']) ;
+    }
     $this->confDir = CONFIG_DIR."/fai/";
     $this->FAIpackage = array();
   }
@@ -81,6 +94,29 @@ class faiPackage extends plugin
     $smarty= get_smarty();
     $display= "";
 
+    if((!$this->is_account)&&(!$this->newDialogShown)){
+      
+      if($this->dialog==NULL){
+        $this->genMirror();
+        $this->dialog = new faiPackageNew($this->config, $this->dn,$this->mirrors,$this->servers,$this->sections,$this->releases);
+        $this->is_dialog =true;
+      }
+  
+      if(isset($_POST['SaveObjectNew'])){
+        $this->FAIdebianRelease = $this->dialog->FAIdebianRelease;
+        $this->FAIdebianSection = $this->dialog->FAIdebianSection;
+        $this->FAIdebianMirror  = $this->dialog->FAIdebianMirror;
+        unset($this->dialog);
+        $this->dialog = false;
+        $this->is_dialog=false;
+        $this->newDialogShown = true;
+      }
+
+      if($this->dialog){
+        $display=$this->dialog->execute();
+        return($display); 
+      }
+    }
     $disableRelease   = false;
     $disableMirror    = false;
     $disableOptions   = false;
@@ -91,76 +127,29 @@ class faiPackage extends plugin
       $smarty->assign($attrs,$this->$attrs);
     }
 
-    /* Post handling for Section, Release and Mirror Setup */
-    if(isset($_POST['SetSection'])){
-      $this->FAIdebianSection = $_POST['FAIdebianSectionS'];
-    }
-    if(isset($_POST['SetRelease'])){
-      $this->FAIdebianRelease = $_POST['FAIdebianReleaseS'];
-    }
-    if(isset($_POST['SetMirror'])){
-      $this->FAIdebianMirror = $_POST['FAIdebianMirrorS'];
-    }
-
-    if(empty($this->FAIdebianRelease)){
-      $disableSection = $disableMirror  = $disableOptions = true;
-      $this->sections=array("---");
-    }elseif(empty($this->FAIdebianSection)){
-      $disableRelease = $disableMirror  = $disableOptions = true;
-    }elseif(empty($this->FAIdebianMirror)){
-      $disableRelease = $disableSection = $disableOptions = true;
-    }else{
-      $disableRelease = $disableSection =  true;
-    }
-
     $this->genMirror();
 
+    /* check servers matching release and section settings */
     $availableServer = array();
     foreach($this->mirrors as $mir){
-      if(($mir['release'] == $this->FAIdebianRelease)&&($mir['section']==$this->FAIdebianSection)){
-        $availableServer[$mir['mirror']]=$mir['mirror'];
+      if($mir['release'] == $this->FAIdebianRelease){
+        $pass = true;
+        foreach($this->FAIdebianSection as $sec){
+          if($sec != $mir['section']){
+            $pass = false;
+          }
+        if($pass){
+            $availableServer[$mir['mirror']]=$mir['mirror'];
+          }
+        }
       }
     }
-
-    if(($disableMirror==false)&&(count($availableServer)==0)){
-      $this->FAIdebianRelease = $this->FAIdebianSection = $this->FAIdebianMirror = "";
-      $disableSection = $disableMirror  = $disableOptions = true;
-      $disableRelease = false;
-    }
-
-    if(count($availableServer)==0){
-      $availableServer=array("---");
-    }
-
-    $smarty->assign("ReleaseACL"  , "");
-    $smarty->assign("MirrorACL"   , "");
-    $smarty->assign("OptionACL"   , "");
-    $smarty->assign("SectionACL"  , "");
-
-    if($disableOptions){
-      $smarty->assign("OptionACL"," disabled ");
-    } 
-    if($disableRelease){
-      $smarty->assign("ReleaseACL"," disabled ");
-    } 
-    if($disableMirror){
-      $smarty->assign("MirrorACL"," disabled ");
-    }
-    if($disableSection){
-      $smarty->assign("SectionACL"," disabled ");
-    } 
-
-    $this->strID = $this->confDir.$this->FAIdebianMirror."/".$this->FAIdebianRelease."/".$this->FAIdebianSection;
-    if(!$disableOptions){
-      if(!isset($this->list[$this->strID])){
-        $tmp = new faiPackageEntry($this->config, $this->dn,$this->strID,$this->usedPackages);
-        $this->list[$this->strID]=$tmp->genPkgs();
-      }
+    if($this->list==NULL){
+      $this->list=$this->genPkgs();
     }
 
     if(isset($_POST['Addpkg'])){
-      $this->dialog = new faiPackageEntry($this->config, $this->dn,$this->strID,$this->usedPackages);
-      $this->dialog->buffer[$this->strID]= $this->list[$this->strID];
+      $this->dialog = new faiPackageEntry($this->config, $this->dn,$this->list,$this->usedPackages);
       $this->is_dialog =true;
     }
  
@@ -206,12 +195,17 @@ class faiPackage extends plugin
       return $this->dialog->execute();
     }
 
+    $strsec = "";
+    foreach($this->FAIdebianSection as $sec){
+       $strsec .= $sec." ";
+    }
+
     $smarty->assign("mirrors" ,$availableServer);
     $smarty->assign("mirror"  ,$this->FAIdebianMirror);
     $smarty->assign("releases",$this->releases);
     $smarty->assign("release" ,$this->FAIdebianRelease);
     $smarty->assign("sections",$this->sections);
-    $smarty->assign("section" ,$this->FAIdebianSection);
+    $smarty->assign("section" ,$strsec);
     $smarty->assign("usedPackages",$this->printUsedPackages());
     $display.= $smarty->fetch(get_template_path('faiPackage.tpl', TRUE));
     return($display);
@@ -250,10 +244,6 @@ class faiPackage extends plugin
                   $this->servers[$mirror]=$mirror;
                   $this->releases[$release]=$release;
                   $this->sections[$section]=$section;
-
-                  if(empty($this->FAIdebianRelease)){
-                    $this->sections= array("---");
-                  }
 
                   $arr=array();
                   $arr['mirror'] = $mirror;
@@ -320,8 +310,8 @@ class faiPackage extends plugin
     $a_ret=array(); 
     if(is_array($this->usedPackages)) {
       foreach($this->usedPackages as $usedName){
-        if(isset($this->list[$this->strID][$usedName][1])){
-          $a_ret[$usedName] = $usedName." [".$this->list[$this->strID][$usedName][1]."]";
+        if(isset($this->list[$usedName][1])){
+          $a_ret[$usedName] = $usedName." [".$this->list[$usedName][1]."]";
         }else{
           $a_ret[$usedName] = $usedName;
         }
@@ -329,6 +319,42 @@ class faiPackage extends plugin
     }
     return($a_ret);
   }
+
+   function genPkgs(){
+    /* Generate a list off available packages for this mirror, section and release
+     */
+    /* Only read this file if it wasn't read before */
+    if($this->buffer==NULL){
+      $this->buffer=array();
+      $a_ret = array();
+      foreach($this->FAIdebianSection as $sec){
+        $strID= "/etc/gosa/fai/".$this->FAIdebianMirror."/".$this->FAIdebianRelease."/".$sec;
+        
+        if(!is_file($strID)){
+          print_red(sprintf(_("Package file don't exists '%s'."),$strID));
+          return(array());
+        }
+        $fp = fopen($strID,"r");
+
+        /* Parse every line and create an array */
+        while(!feof($fp)){
+          $str= fgets($fp,512);
+          $stra= split("\|",$str);
+          if(count($stra)==4){
+            $a_ret[$stra[0]] = $stra;
+          }
+        }
+        fclose($fp);
+          /* Save our Data, to avoid reading it again */
+      }
+      $this->buffer = $a_ret;
+      ksort($a_ret);
+      return($a_ret);
+    }else{
+      return $this->buffer[$strID];
+    }
+  }
+
 
   /* Save to LDAP */
   function save()
@@ -341,6 +367,11 @@ class faiPackage extends plugin
     foreach($this->usedPackages as $pkg => $obj){
       $this->attrs['FAIpackage'][] = $pkg;
     } 
+  
+    $this->attrs['FAIdebianSection'] = array();
+    foreach($this->FAIdebianSection as $sec){
+      $this->attrs['FAIdebianSection'][] = $sec;
+    }
 
     $ldap->cat($this->dn);
     if($ldap->count()!=0){

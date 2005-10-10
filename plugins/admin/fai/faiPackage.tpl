@@ -30,28 +30,18 @@
 				<table summary="" cellspacing="4">
 					<tr>
 						<td>
-							<LABEL for="release">
 							{t}Release{/t}
-							</LABEL>
 						</td>
 						<td>
-							<select name="FAIdebianReleaseS" title="{t}Release{/t}" {$ReleaseACL}>
-								{html_options options=$releases selected=$release}
-							</select>
-							<input type="submit" value="{t}set{/t}" name="SetRelease" {$ReleaseACL}>
+							{$release}
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<LABEL for="section">
 							{t}Section{/t}
-							</LABEL>
 						</td>
 						<td>
-							<select name="FAIdebianSectionS" title="{t}Section{/t}" {$SectionACL}>
-								{html_options options=$sections selected=$section}
-							</select>
-							<input type="submit" value="{t}set{/t}" name="SetSection" {$SectionACL}>
+							{$section}
 						</td>
 					</tr>
 					<tr>
@@ -61,10 +51,10 @@
 							</LABEL>
 						</td>
 						<td>
-							<select name="FAIdebianMirrorS" title="{t}mirror{/t}" {$MirrorACL}>
+							<select name="FAIdebianMirrorS" title="{t}mirror{/t}">
 								{html_options options=$mirrors selected=$mirror}
 							</select>
-							<input type="submit" value="{t}set{/t}" name="SetMirror" {$MirrorACL}>
+							<input type="submit" value="{t}set{/t}" name="SetMirror">
 						</td>
 					</tr>
 				</table>
@@ -80,9 +70,9 @@
        			{html_options options=$usedPackages}
       		</select>
 			<br>
-			<input type="submit" name="Addpkg" value="+" {$OptionACL}>
-			<input type="submit" name="Delpkg" value="-" {$OptionACL}>
-			<input type="submit" name="Conpkg" value="Configure" {$OptionACL}>
+			<input type="submit" name="Addpkg" value="+">
+			<input type="submit" name="Delpkg" value="-">
+			<input type="submit" name="Conpkg" value="Configure"
 		</td>
 	</tr>
 </table>
