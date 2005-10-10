@@ -554,8 +554,8 @@ class systems extends plugin
     " <input type='image' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
     " <input type='image' align='middle' src='images/list_home.png' title='"._("Go to users department")."' alt='"._("Home")."'                     name='dep_home'>&nbsp;".
     " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-    " <input type='image' align='middle' src='images/select_new_terminal.png'   name='newsystem_terminal'    alt='"._("New Terminal")."' title='"._("New Terminal")."'>".
-    " <input type='image' align='middle' src='images/select_new_workstation.png' name='newsystem_workstation' alt='"._("New Workstation")."' title='"._("New Workstation")."'>".
+    " <input type='image' align='middle' src='images/select_new_terminal.png'   name='newsystem_terminal'    alt='"._("New Terminal template")."' title='"._("New Terminal")."'>".
+    " <input type='image' align='middle' src='images/select_new_workstation.png' name='newsystem_workstation' alt='"._("New Workstation template")."' title='"._("New Workstation")."'>".
     " <input type='image' align='middle' src='images/select_new_server.png'     name='newsystem_server'      alt='"._("New Server")."' title='"._("New Server")."'>".
     " <input type='image' align='middle' src='images/select_new_printer.png'    name='newsystem_printer'     alt='"._("New Printer")."' title='"._("New Printer")."'>".
     " <input type='image' align='middle' src='images/select_new_phone.png'      name='newsystem_phone'       alt='"._("New Phone")."' title='"._("New Phone")."'>".
