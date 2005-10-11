@@ -144,12 +144,6 @@
    <input type=checkbox name="gotoScannerEnable" value="1" title="{t}Select to start SANE scan service on terminal{/t}" {$gotoScannerEnable} {$gotoScannerEnableACL}>
    {t}Provide scan services{/t}
    <br>
-   <table summary="">
-    <tr>
-     <td><div style="width:20px;"></div></td>
-     <td><LABEL for="gotoScannerModel">{t}Model{/t}</LABEL></td>
-    </tr>
-  </table>
 	</td>
  </tr>
 </table>
