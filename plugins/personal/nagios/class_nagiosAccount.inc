@@ -105,12 +105,12 @@ class nagiosAccount extends plugin
     $smarty->assign("$val", $this->$val);
     $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
     }
-    $smarty->assign('ServiceNotificationOptionsValues',array("d,u,r,v" ,"d,u,r" ,"d,u"));
-    $smarty->assign('HostNotificationOptionsValues',array("w,u,c,r" ,"w,u,c" ,"c,w"));
+    $smarty->assign('ServiceNotificationOptionsValues',array("d,u,r,v"=>"d,u,r,v" ,"d,u,r"=>"d,u,r" ,"d,u"=>"d,u"));
+    $smarty->assign('HostNotificationOptionsValues',array("w,u,c,r"=>"w,u,c,r" ,"w,u,c"=>"w,u,c" ,"c,w"=>"c,w"));
 
 
-    $smarty->assign('ServiceNotificationPeriodValues',array("24x7" ,"24x5" ,"8x5"));
-    $smarty->assign('HostNotificationPeriodValues',array("24x7" ,"24x5" ,"8x5"));
+    $smarty->assign('ServiceNotificationPeriodValues',array("24x7"=>"24x7" ,"24x5"=>"24x5" ,"8x5"=>"8x5"));
+    $smarty->assign('HostNotificationPeriodValues',array("24x7"=>"24x7" ,"24x5"=>"24x5" ,"8x5"=>"8x5"));
 
     	$display.= $smarty->fetch (get_template_path('nagios.tpl', TRUE, dirname(__FILE__)));
 	    return ($display);
@@ -159,8 +159,7 @@ class nagiosAccount extends plugin
     }
 	
   }
-	
-   /* Check formular input */
+
   function check()
   {
     $message= array();
@@ -184,7 +183,6 @@ class nagiosAccount extends plugin
 	return($message);
   }
   
-  /* Save data to object */
   function save_object()
   {
 
@@ -194,7 +192,6 @@ class nagiosAccount extends plugin
     }
   }
 
-  /* remove object from parent */
   function remove_from_parent()
   {
 	  /* Cancel if there's nothing to do here */
