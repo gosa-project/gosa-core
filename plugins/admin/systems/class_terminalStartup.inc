@@ -158,7 +158,7 @@ class termstartup extends plugin
     }
 
     /* Show main page */
-    return($smarty->fetch (get_template_path('startup.tpl', TRUE)));
+    return($smarty->fetch (get_template_path('terminalStartup.tpl', TRUE)));
   }
 
   function remove_from_parent()

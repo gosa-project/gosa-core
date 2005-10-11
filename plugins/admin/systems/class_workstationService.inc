@@ -1,6 +1,6 @@
 <?php
 
-class termservice extends plugin
+class workservice extends plugin
 {
   /* CLI vars */
   var $cli_summary= "Manage terminal service aspects";
@@ -67,7 +67,7 @@ class termservice extends plugin
   var $objectclasses= array("GOhard");
 
 
-  function termservice ($config, $dn= NULL)
+  function workservice ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
 

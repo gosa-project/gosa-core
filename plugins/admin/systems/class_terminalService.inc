@@ -201,7 +201,7 @@ class termservice extends plugin
     $smarty->assign ("gotoXMonitor", $this->gotoXMonitor);
 
     /* Show main page */
-    return($smarty->fetch (get_template_path('service.tpl', TRUE)));
+    return($smarty->fetch (get_template_path('terminalService.tpl', TRUE)));
   }
 
   function remove_from_parent()

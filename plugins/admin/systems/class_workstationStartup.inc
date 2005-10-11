@@ -1,5 +1,5 @@
 <?php
-class termstartup extends plugin
+class workstartup extends plugin
 {
   /* CLI vars */
   var $cli_summary= "Manage terminal startup options";
@@ -26,7 +26,7 @@ class termstartup extends plugin
   var $orig_dn= "";
   var $ignore_account= TRUE;
 
-  function termstartup ($config, $dn= NULL)
+  function workstartup ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
 
