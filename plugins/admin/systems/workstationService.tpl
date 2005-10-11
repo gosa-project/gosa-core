@@ -138,68 +138,8 @@
   </td>
 
   <td style="width:33%; vertical-align:top;">
-   <h2><img alt="" align="middle" src="images/server.png"> {t}Remote desktop{/t}</h2>
-   <table summary="">
-    <tr>
-     <td></td>
-     <td><LABEL for="gotoXMethod">{t}Connect method{/t}</LABEL></td>
-     <td>
-      <select name="gotoXMethod" id="gotoXMethod" title="{t}Choose method to connect to terminal server{/t}" {$gotoXMethodACL}>
-       {html_options options=$XMethods selected=$gotoXMethod_select}
-      </select>
-     </td>
-    </tr>
-    <tr>
-     <td></td>
-     <td><LABEL for="gotoXdmcpServer">{t}Terminal server{/t}</LABEL></td>
-     <td>
-      <select id="gotoXdmcpServer" name="gotoXdmcpServer" title="{t}Select specific terminal server to use{/t}" {$gotoXdmcpServerACL}>
-       {html_options values=$xdmcpservers output=$xdmcpservers selected=$gotoXdmcpServer_select}
-      </select>
-     </td>
-    </tr>
-    <tr>
-     <td></td>
-     <td><LABEL for="gotoFontPath">{t}Font server{/t}</LABEL></td>
-     <td>
-      <select name="gotoFontPath" id="gotoFontPath" title="{t}Select specific font server to use{/t}" {$gotoFontPathACL}>
-       {html_options values=$fontservers output=$fontservers selected=$gotoFontPath_select}
-      </select>
-     </td>
-    </tr>
-   </table>
-   
-  </td>
- </tr>
-</table>
+  
 
-<table style="width:100%;" summary="">
- <tr><td colspan=3><p class="plugbottom" style="margin-top:0px;"></p></td></tr>
-
- <tr>
-  <td style="width:50%; vertical-align:top;">
-   <h2><img alt="" align="middle" src="images/printer.png"><LABEL for="gotoLpdEnable"> {t}Print device{/t}</LABEL></h2>
-   <input id="gotoLpdEnable" type=checkbox name="gotoLpdEnable" value="1" {$gotoLpdEnable} {$gotoLpdEnableACL} title="{t}Select to start IPP based printing service on terminal{/t}">
-   {t}Provide print services{/t}
-   <br>
-
-   <table summary="">
-   <tr>
-     <td><div style="width:20px;"></div></td>
-     <td><LABEL for="gotoLpdServer">{t}Spool server{/t}</LABEL></td>
-     <td>
-      <select name="gotoLpdServer" id="gotoLpdServer" title="{t}Select NFS filesystem to place spool files on{/t}" {$gotoLpdServerACL}>
-       {html_options values=$nfsservers output=$nfsservers selected=$gotoLpdServer_select}
-      </select>
-     </td>
-    </tr>
-  </table>
-
-  <td style="border-left:1px solid #A0A0A0">
-   &nbsp;
-  </td>
-
-  <td style="vertical-align:top;">
    <h2><img alt="" align="middle" src="images/scanner.png"> {t}Scan device{/t}</h2>
    <input type=checkbox name="gotoScannerEnable" value="1" title="{t}Select to start SANE scan service on terminal{/t}" {$gotoScannerEnable} {$gotoScannerEnableACL}>
    {t}Provide scan services{/t}
@@ -208,16 +148,11 @@
     <tr>
      <td><div style="width:20px;"></div></td>
      <td><LABEL for="gotoScannerModel">{t}Model{/t}</LABEL></td>
-     <td>
-      <select name="gotoScannerModel" id="gotoScannerModel" title="{t}Select scanner driver to use{/t}" {$gotoScannerEnableACL}>
-       {html_options values=$gotoScannerModels output=$gotoScannerModels selected=$gotoScannerModel_select}
-      </select>
-     </td>
     </tr>
   </table>
-
-  </td>
+	</td>
  </tr>
 </table>
+
 
 <div style="height:40px;"></div>

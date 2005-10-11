@@ -7,12 +7,9 @@ class workservice extends plugin
   var $cli_description= "Some longer text\nfor help";
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
+  var $gotoScannerEnable;
   /* Generic terminal attributes */
-  var $gotoLpdEnable= FALSE;
   var $gotoXMonitor= "";
-  var $gotoXMethod= "";
-  var $gotoXdmcpServer= "";
-  var $gotoFontPath= "";
   var $gotoXDriver= "";
   var $gotoXResolution= "";
   var $gotoXColordepth= "";
@@ -23,9 +20,6 @@ class workservice extends plugin
   var $gotoXKbVariant= "";
   var $gotoXMouseType= "";
   var $gotoXMouseport= "";
-  var $gotoLpdServer= "";
-  var $gotoScannerEnable= "";
-  var $gotoScannerModel= "";
   var $gotoScannerClients= "";
   var $gotoScannerBackend= "";
   var $goFonHardware= "automatic";
@@ -52,16 +46,15 @@ class workservice extends plugin
   var $XKbVariants= array ("default", "nodeadkeys", "basic");
   var $MouseTypes= array("AUTO", "ImPS/2", "PS/2", "Microsoft", "Logitech");
   var $MousePorts= array("AUTO", "/dev/ttyS0", "/dev/ttyS1", "/dev/psaux", "/dev/input/mice");
-  var $gotoScannerModels= array();
   var $hardware_list= array();
   var $used_hardware= array();
 
 
   /* attribute list for save action */
-  var $attributes= array("cn", "gotoLpdEnable", "gotoXMonitor", "gotoXMethod", "gotoXdmcpServer",
-      "gotoFontPath", "gotoXDriver", "gotoXResolution", "gotoXColordepth",
-      "gotoXHsync", "gotoXVsync", "gotoLpdEnable", "gotoLpdServer",
-      "gotoScannerEnable", "gotoScannerModel", "gotoScannerClients",
+  var $attributes= array("cn","gotoXMonitor",
+      "gotoXDriver", "gotoXResolution", "gotoXColordepth",
+      "gotoXHsync", "gotoXVsync",
+      "gotoScannerEnable", "gotoScannerClients",
       "gotoScannerBackend", "gotoXKbModel", "gotoXKbLayout", "gotoXKbVariant",
       "gotoXMouseType", "gotoXMouseport", "goFonHardware");
   var $objectclasses= array("GOhard");
@@ -70,14 +63,6 @@ class workservice extends plugin
   function workservice ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
-
-    /* Load scanner models */
-    $fcontents = file ($this->config->basedir."/include/scanner.inc");
-    while (list ($line_num, $line) = each ($fcontents)) {
-      preg_match('/^(\w+) "([^"]+)" "([^"]+)" "([^"]+)"/', "$line", $matches);
-      $this->gotoScannerModels[$matches[2]." - ".$matches[3]]= $matches[1]."|".$matches[4];
-    }
-    ksort ($this->gotoScannerModels);
 
     /* Initialize methods */
     $this->XMethods["default"]= _("default");
@@ -142,7 +127,7 @@ class workservice extends plugin
 
     /* Arrays */ 
     foreach(array("XMethods", "XDrivers", "XResolutions", "XColordepths",
-          "gotoScannerModels", "XKbModels", "XKbLayouts", "XKbVariants",
+          "XKbModels", "XKbLayouts", "XKbVariants",
           "MouseTypes", "MousePorts") as $val){
       $smarty->assign("$val", $this->$val);
     }
@@ -152,9 +137,9 @@ class workservice extends plugin
     $smarty->assign("nfsservers", $this->config->data['SERVERS']['NFS']);
 
     /* Variables - select */
-    foreach(array("gotoXMethod", "gotoXdmcpServer", "gotoFontPath", 
+    foreach(array(
           "gotoXDriver", "gotoXResolution", "gotoXColordepth", 
-          "gotoLpdServer", "gotoScannerModel", "gotoXKbModel", "gotoXKbLayout",
+          "gotoXKbModel", "gotoXKbLayout","gotoScannerEnable",
           "gotoXKbVariant", "gotoXMouseType", "gotoXMouseport") as $val){
 
       $smarty->assign($val."_select", $this->$val);
@@ -169,13 +154,12 @@ class workservice extends plugin
     $smarty->assign("staticAddress", "");
 
     /* Checkboxes */
-    foreach(array("gotoLpdEnable", "gotoScannerEnable") as $val){
+    foreach(array("gotoScannerEnable") as $val){
       if ($this->$val == TRUE) {
         $smarty->assign("$val", "checked");
       } else {
         $smarty->assign("$val", "");
       }
-      $smarty->assign($val."ACL", chkacl($this->acl, "gotoLpdEnable"));
     }
 
     /* Phone stuff */
@@ -218,17 +202,6 @@ class workservice extends plugin
   {
     plugin::save_object();
 
-    /* Save checkbox state */
-    if (isset ($_POST['gotoXMethod'])){
-      foreach (array("gotoLpdEnable", "gotoScannerEnable") as $val){
-
-        if (!isset ($_POST["$val"]) && chkacl ($this->acl, "$val") == ""){
-          $this->$val= FALSE;
-        } else {
-          $this->$val= TRUE;
-        }
-      }
-    }
   }
 
 
@@ -280,9 +253,9 @@ class workservice extends plugin
     plugin::save();
 
     /* Strip out 'default' values */
-    foreach(array("gotoXMethod", "gotoXdmcpServer", "gotoFontPath",
+    foreach(array(
           "gotoXDriver", "gotoXResolution", "gotoXColordepth",
-          "gotoLpdServer", "gotoScannerModel", "gotoXKbModel", "gotoXKbLayout",
+          "gotoXKbModel", "gotoXKbLayout",
           "gotoXKbVariant", "gotoXMouseType", "gotoXMouseport") as $val){
 
       if ($this->attrs[$val] == "default"){
