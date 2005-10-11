@@ -14,6 +14,7 @@ class application extends plugin
   var $gosaApplicationName= "";
   var $gosaApplicationFlags= "";
   var $gosaApplicationIcon= "";
+  var $gotoLogonScript	="";
   var $iconData;
 
   /* Headpage attributes */
@@ -22,7 +23,7 @@ class application extends plugin
 
   /* attribute list for save action */
   var $attributes= array("cn", "description", "gosaApplicationExecute", "gosaApplicationName",
-			"gosaApplicationFlags");
+			"gosaApplicationFlags","gotoLogonScript");
   var $objectclasses= array("top", "gosaApplication");
 
   function application ($config, $dn= NULL)
@@ -55,6 +56,55 @@ class application extends plugin
 	}
   }
 
+  function generateTempalte(){
+	$str = 	"# This code is part of GOsa (https://gosa.gonicus.de)\n".
+			"#\n".
+            "# This program is free software; you can redistribute it and/or modify\n".
+            "# it under the terms of the GNU General Public License as published by\n".
+            "# the Free Software Foundation; either version 2 of the License, or\n".
+            "# (at your option) any later version.\n".
+            "#\n".
+            "# This program is distributed in the hope that it will be useful,\n".
+            "# but WITHOUT ANY WARRANTY; without even the implied warranty of\n".
+            "# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n".
+            "# GNU General Public License for more details.\n".
+            "#\n".
+            "# You should have received a copy of the GNU General Public License\n".
+            "# along with this program; if not, write to the Free Software\n".
+            "# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA\n".
+            "#\n";
+
+	$vars = ($this->attrs['gosaApplicationParameter']);
+	unset($vars['count']);
+
+
+	$str .="# This plugin handles these environment variables:\n";
+
+	foreach($vars as $var){
+		if(preg_match("/\:/",$var)){
+			$stra 	= split(":",$var);
+			$Name 	= $stra[0];
+			$Value 	= $stra[1];
+		}else{
+			$Name 	= $var;
+			$Value 	= "";
+		}
+		for($i = strlen($Name);$i < 25 ; $i++){
+			$Name.=" ";
+		}
+		if(!empty($Value)){
+			$str.= "# ".$Name."\t\t(e.g. ".$Value.")\n";
+		}else{
+			$str.= "# ".$Name."\n";
+		}
+	}
+	$str .= "#\n".
+			"# Don't remove the following tag, it is used for header update.\n".
+			"### END HEADER ###";
+ 
+	return($str);
+  }
+
   function execute()
   {
  	/* Do we represent a valid group? */
@@ -63,7 +113,25 @@ class application extends plugin
 			 _("This 'dn' is no application.")."</b>";
 		 return ($display);
 	}
-  
+
+	if(isset($_POST['ScriptTemplate'])){
+		$head = $this->generateTempalte();
+		$scr  = $this->gotoLogonScript; 
+		
+		if(preg_match("/### END HEADER ###/",$scr)){
+			$pos = strrpos($scr,"### END HEADER ###");
+			$pos = $pos + strlen("### END HEADER ###");
+			$scr=substr($scr,$pos,(strlen($scr)));
+		}
+
+		$this->gotoLogonScript = $head.$scr;
+	}
+	
+	if((isset($_POST['upLoad']))&&(isset($_FILES['ScriptFile']))){
+		$str = file_get_contents($_FILES['ScriptFile']['tmp_name']);
+		$this->gotoLogonScript = $str;
+	}
+ 
 	/* Fill templating stuff */
 	$smarty= get_smarty();
 	$smarty->assign("cn", $this->cn);
@@ -95,6 +163,7 @@ class application extends plugin
 			$smarty->assign("$val", "");
 		}
 	}
+	$smarty->assign("gotoLogonScript",$this->gotoLogonScript);
 	$smarty->assign("base_select", $this->base);
 	$smarty->assign("gosaApplicationFlagsACL", chkacl($this->acl, "gosaApplicationFlags"));
 

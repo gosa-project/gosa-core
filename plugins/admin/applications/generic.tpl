@@ -72,6 +72,20 @@
   </tr>
 </table>
 
+<p class="plugbottom" style="height:4px; margin-bottom:0px;">&nbsp;</p>
+
+<table width="99%">
+	<tr>
+		<td>
+			<h2><img src="images/script.png" alt="{t}Script{/t}">{t}Script{/t}</h2>
+			<textarea name="gotoLogonScript" style='width:99%;height:220px;'>{$gotoLogonScript}</textarea>
+			<input type="file" name="ScriptFile" value="{t}Import{/t}">
+			<input type="submit" name="upLoad" value="{t}Upload{/t}">
+			<input type="submit" name="ScriptTemplate" value="{t}Template{/t}">
+		</td>
+	</tr>
+</table>
+
 <div style="height:20px;"></div>
 
 <!-- Place cursor -->
