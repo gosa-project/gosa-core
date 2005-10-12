@@ -106,7 +106,7 @@
 			<td align="center"><input type="checkbox" name="g1" value="1" {$g1}></td>
 			<td>&nbsp;</td>
 			<td align="center"><input type="checkbox" name="s2" value="2" {$s2}></td>
-			<td>({t}GUID{/t})</td>
+			<td>({t}SGID{/t})</td>
 			</tr>
 
 		<tr><td>{t}Others{/t}</td>
