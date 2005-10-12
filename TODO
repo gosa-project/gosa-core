@@ -48,6 +48,14 @@ Things to fix before 2.4:
 
 * Workstation is defect
 
+* Save FAI sub objects directly when they already exist
+
+* FAI variables are not editable during creation
+
+* FAI package lists -> why do we ask for distribution if the list is already filled?
+
+* FAI package lists behave strange
+
 
 Target for 2.5:
 ===============

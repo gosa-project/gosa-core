@@ -12,7 +12,7 @@
 
   <!-- Image container -->
   <td style="vertical-align:top">
-   <img align="bottom" border="1" width="145" height="200" src="getpic.php?rand={$rand}" alt="{t}Personal picture{/t}">
+   <img align="bottom" border="1" width="145" height="200" src="getbin.php?rand={$rand}" alt="{t}Personal picture{/t}">
    <br>
    <input type=submit name="edit_picture" {$jpegPhotoACL} value="{t}Change picture{/t}...">
   </td>

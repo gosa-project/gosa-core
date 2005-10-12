@@ -45,7 +45,7 @@
   <td style="vertical-align:top;">
     <LABEL for="picture_file">{t}Icon{/t}</LABEL>
     <br>
-    <img alt="" src="getpic.php?rand={$rand}" border=1 style="width:48px; height:48; background-color:white; vertical-align:bottom;">
+    <img alt="" src="getbin.php?rand={$rand}" border=1 style="width:48px; height:48; background-color:white; vertical-align:bottom;">
     <input type="hidden" name="MAX_FILE_SIZE" value="100000">
     <input name="picture_file" type="file" size="20" maxlength="255" accept="image/*.png" id="picture_file">
     <input type="submit" name="update" value="{t}Update{/t}" title="{t}Reload picture from LDAP{/t}">

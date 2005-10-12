@@ -309,7 +309,8 @@ class user extends plugin
       $this->photoData= $this->old_photoData;
 
       /* Update picture */
-      $_SESSION['picture']= $this->photoData;
+      $_SESSION['binary']= $this->photoData;
+      $_SESSION['binarytype']= "image/jpeg";
       $this->picture_dialog= FALSE;
       $this->dialog= FALSE;
     }
@@ -1024,7 +1025,8 @@ class user extends plugin
       if ($ei) {
         if ($info = ldap_get_values_len($ds, $ei, "jpegPhoto")){
           $this->photoData= $info[0];
-          $_SESSION['picture']= $this->photoData;
+          $_SESSION['binary']= $this->photoData;
+          $_SESSION['binarytype']= "image/jpeg";
           $this->jpegPhoto= "";
         }
       }
@@ -1081,7 +1083,8 @@ class user extends plugin
 
     $fd = fopen ($filename, "rb");
     $this->photoData= fread ($fd, filesize ($filename));
-    $_SESSION['picture']= $this->photoData;
+    $_SESSION['binary']= $this->photoData;
+    $_SESSION['binarytype']= "image/jpeg";
     $this->jpegPhoto= "";
 
     fclose ($fd);

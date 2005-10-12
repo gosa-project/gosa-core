@@ -26,7 +26,7 @@ session_start ();
 
 /* Logged in? Simple security check */
 if (!isset($_SESSION['ui'])){
-  gosa_log ("Error: getpic.php called without session");
+  gosa_log ("Error: getbin.php called without session");
   header ("Location: ../index.php");
   exit;
 }
@@ -36,9 +36,15 @@ header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
 header("Cache-Control: no-cache");
 header("Pragma: no-cache");
 header("Cache-Control: post-check=0, pre-check=0");
-header("Content-type: image/jpeg");
+$bintype = isset($_SESSION['binarytype']) 
+  ? $_SESSION['binarytype'] : "octet-stream";
+header("Content-type: " . $bintype);
+if (isset($_SESSION['binaryfile'])) {
+  header( "Content-disposition: attachment; filename=" 
+    . $_SESSION['binaryfile'] );
+}
 
-echo $_SESSION['picture'];
+echo $_SESSION['binary'];
 error_reporting (E_ALL);
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

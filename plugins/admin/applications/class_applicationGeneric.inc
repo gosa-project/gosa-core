@@ -38,7 +38,8 @@ class application extends plugin
 	if ($this->iconData == ""){
 		$this->set_picture("");
 	}
-	$_SESSION['picture']= $this->iconData;
+	$_SESSION['binary']= $this->iconData;
+	$_SESSION['binarytype']= "image/jpeg";
 	$this->gosaApplicationIcon= $this->iconData;
 
 	/* This is always an account */
@@ -370,7 +371,8 @@ class application extends plugin
 	if (file_exists($filename)){
 		$fd = fopen ($filename, "rb");
 		$this->iconData= fread ($fd, filesize ($filename));
-		$_SESSION['picture']= $this->iconData;
+		$_SESSION['binary']= $this->iconData;
+		$_SESSION['binarytype']= "image/jpeg";
 		$this->gosaApplicationIcon= $this->iconData;
 
 		fclose ($fd);
