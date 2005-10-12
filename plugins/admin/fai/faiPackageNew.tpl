@@ -65,5 +65,4 @@
     <input name="SaveObjectNew" value="{t}Continue{/t}" type="submit" {$ContinueACL}>
     <input name="edit_cancel" value="{t}Cancel{/t}" type="submit">
 </div>
-<input type="hidden" name="ignore">
 

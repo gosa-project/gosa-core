@@ -4,5 +4,4 @@
     <input name="SaveObjectConfig" value="Use" type="submit">
     <input name="CancelObjectConfig" value="Cancel" type="submit">
 </div>
-<input type="hidden" name="ignore">
 

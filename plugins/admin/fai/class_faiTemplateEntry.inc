@@ -9,7 +9,7 @@ class faiTemplateEntry extends plugin
 
   /* attribute list for save action */
   var $ignore_account= TRUE;
-  var $attributes   = array("Object_cn","Object_description","Object_FAItemplateFile","Object_FAItemplatePath");
+  var $attributes   = array("Object_cn","Object_description","Object_FAItemplateFile","Object_FAItemplatePath","Object_FAImode","Object_user","Object_group","Object_binary","Object_FAIowner");
   var $objectclasses= array();
 
   var $orig_cn              = "";
@@ -20,6 +20,11 @@ class faiTemplateEntry extends plugin
   var $Object_FAItemplatePath   = "";
   var $Object_description   = "";
   var $Object_status        = "new";
+  var $Object_FAImode       = "0640";
+  var $Object_FAIowner      = "root.root";
+  var $Object_user          = "root";
+  var $Object_group         = "root";
+  var $Object_binary        = false;
   
   function faiTemplateEntry ($config, $dn= NULL,$object=false)
   {
@@ -35,24 +40,35 @@ class faiTemplateEntry extends plugin
       $this->Object_status = "new";
       $this->orig_cn       = false;
     }
+    $this->Object_user = explode( '.', $this->Object_FAIowner );
+    $this->Object_group = $this->Object_user[1];
+    $this->Object_user = $this->Object_user[0];
+    $_SESSION['binary'] = $this->Object_FAItemplateFile;
+    $_SESSION['binarytype'] = 'octet-stream';
+    $_SESSION['binaryfile'] = basename( $this->Object_FAItemplatePath );
   }
 
   function execute()
   {
     /* Fill templating stuff */
     $smarty     = get_smarty();
+    $smarty->assign("rand", rand(0, 10000));
     $display = "";
 
     if(isset($_POST['TmpFileUpload'])){
       if($str=file_get_contents($_FILES['FAItemplateFile']['tmp_name'])){
         $this->Object_FAItemplateFile = $str;
+
+        /* If we don't have a filename set it from upload filename. */
+        if( 0 == strlen( $this->Object_FAItemplatePath ) )
+          $this->Object_FAItemplatePath = $_FILES['FAItemplateFile']['name'];
       }
     
     }
     
-    $status="<br>"._("No file uploaded");
+    $status= _("no file uploaded yet");
     if(strlen($this->Object_FAItemplateFile)){
-      $status="<br>".sprintf(_("File uploaded, size : %s byte"),strlen($this->Object_FAItemplateFile));
+      $status= sprintf(_("exists in database (size: %s bytes)"),strlen($this->Object_FAItemplateFile));
     }
     $smarty->assign("status",$status);
 
@@ -67,12 +83,24 @@ class faiTemplateEntry extends plugin
       }
     }
 
+    /* Assign file modes */
+    $tmode= "$this->Object_FAImode ";
+    foreach (array("s", "u", "g", "o") as $type){
+      $current= substr($tmode, 0, 1);
+      $tmode=   preg_replace("/^./", "", $tmode);
+      $nr= 1;
+      while ($nr < 5){
+        if ($current & $nr){
+          $smarty->assign($type.$nr, "checked");
+        } else {
+          $smarty->assign($type.$nr, "");
+        }
+        $nr+= $nr;
+      }
+    }
+
     $smarty->assign("Object_FAItemplateFile","");
 
-    for($i =1 ; $i <= 100 ; $i++){
-      $Object_FAIprioritys[$i]=$i;
-    }
-    $smarty->assign("Object_FAIprioritys",$Object_FAIprioritys);
     $display.= $smarty->fetch(get_template_path('faiTemplateEntry.tpl', TRUE));
     return($display);
   }
@@ -80,9 +108,17 @@ class faiTemplateEntry extends plugin
   /* Save data to object */
   function save_object()
   {
+    if (!isset($_POST['Object_FAItemplatePath'])){
+      return;
+    }
     if(isset($_POST['SubObjectFormSubmitted'])){
       foreach($this->attributes as $attrs){
-        if($attrs == "Object_FAItemplateFile") continue;
+        if($attrs == "Object_FAItemplateFile") 
+          continue;
+        if($attrs == "Object_FAIowner") {
+          $this->$attrs = $_POST["Object_user"] . '.' . $_POST["Object_group"];
+          continue;
+        }
         if(isset($_POST[$attrs])){
           $this->$attrs = $_POST[$attrs];
         }else{
@@ -90,6 +126,21 @@ class faiTemplateEntry extends plugin
         }
       }
     }
+
+    /* Save mode */
+    $tmode= "";
+    foreach (array("s", "u", "g", "o") as $type){
+      $nr= 1;
+      $dest= 0;
+      while ($nr < 5){
+        if (isset($_POST["$type$nr"])){
+          $dest+= $nr;
+        }
+        $nr+= $nr;
+      }
+      $tmode= $tmode.$dest;
+    }
+    $this->Object_FAImode= $tmode;
   }
 
   /* Check supplied data */
@@ -107,10 +158,24 @@ class faiTemplateEntry extends plugin
     if(empty($this->Object_cn)){
       $message[] = _("Please enter a name.");
     }
-
-    if(preg_match("/[^0-9a-z]/i",$this->Object_cn)){
+    elseif(preg_match("/[^0-9a-z]/i",$this->Object_cn)){
       $message[] = _("Please enter a valid name. Only a-Z 0-9 are allowed.");
     }
+
+    if(empty($this->Object_user)){
+      $message[] = _("Please enter a user.");
+    }
+    elseif(preg_match("/[^0-9a-z]/i",$this->Object_user)){
+      $message[] = _("Please enter a valid user. Only a-Z 0-9 are allowed.");
+    }
+
+    if(empty($this->Object_group)){
+      $message[] = _("Please enter a group.");
+    }
+    elseif(preg_match("/[^0-9a-z]/i",$this->Object_group)){
+      $message[] = _("Please enter a valid group. Only a-Z 0-9 are allowed.");
+    }
+
     return ($message);
   }
  

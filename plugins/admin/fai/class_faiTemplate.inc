@@ -24,8 +24,8 @@ class faiTemplate extends plugin
   var $subClassName     = "faiTemplateEntry";      
 
   /* Attributes to initialise for each subObject */
-  var $subAttributes    = array("cn","description","FAItemplateFile","FAItemplatePath"); 
-  var $sub64coded       = array("FAItemplateFile","FAItemplatePath");
+  var $subAttributes    = array("cn","description","FAItemplateFile","FAItemplatePath","FAIowner","FAImode"); 
+  var $sub64coded       = array("FAItemplatePath");
 
   /* Specific attributes */
   var $cn               = "";       // The class name for this object
@@ -67,7 +67,7 @@ class faiTemplate extends plugin
           $this->SubObjects[$object['cn'][0]][$codeIt]=base64_decode($this->SubObjects[$object['cn'][0]][$codeIt]);
         }       
 
-        $this->SubObjects[$object['cn'][0]]['FAItemplateFile'] =base64_decode($this->readBinary("FAItemplateFile",$object['dn']));
+        $this->SubObjects[$object['cn'][0]]['FAItemplateFile'] = $this->readBinary("FAItemplateFile",$object['dn']);
        
         $this->SubObjects[$object['cn'][0]]['status']      = "edited";
         $this->SubObjects[$object['cn'][0]]['dn']          = $object['dn'];

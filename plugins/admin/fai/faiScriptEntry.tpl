@@ -62,7 +62,6 @@
 	<input type="file" name="ImportFile">&nbsp;
 	<input type="submit" name="ImportUpload" value="{t}Import script{/t}">
 </div>
-
 <br>
 <div style="align:right;" align="right">
 	<input type="submit" value="{t}Save{/t}" 	name="SaveSubObject">&nbsp;

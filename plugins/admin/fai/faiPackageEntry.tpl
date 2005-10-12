@@ -62,7 +62,7 @@
 </tr>
 </table>
 <div align="right" style="align:right;">
-	<input name="SaveSubObject" value="Use" type="submit">
+	<input name="SaveSubObject" value="Add" type="submit">
 	<input name="CancelSubObject" value="Cancel" type="submit">
 </div>
 <input type="hidden" name="ignore">
