@@ -37,6 +37,7 @@ class faiPackage extends plugin
   var $FAIdebianRelease          = ""; // The selected release
   var $FAIdebianSection          = ""; // selected section
   var $FAIdebianMirror           = ""; // selected mirror
+  var $mirror                    = ""; // selected mirror
 
   var $servers          = array();  // All available servers
   var $releases         = array();  // All possible releases 
@@ -86,6 +87,9 @@ class faiPackage extends plugin
     }
     $this->confDir = CONFIG_DIR."/fai/";
     $this->FAIpackage = array();
+
+    /* Extract mirror location */
+    $this->mirror= preg_replace("!^[^/]+//([^/]+).*$!", '$1', $this->FAIdebianMirror);
   }
 
   function execute()
@@ -95,6 +99,11 @@ class faiPackage extends plugin
     $display= "";
 
     $this->genMirror();
+
+    /* Check if we exist already - no need to ask for revisions, etc. then */
+    if ($this->dn != "new"){
+        $this->newDialogShown= true;
+    }
 
     if((!$this->is_account)&&(!$this->newDialogShown)){
       
@@ -355,7 +364,7 @@ class faiPackage extends plugin
       $this->buffer=array();
       $a_ret = array();
       foreach($this->FAIdebianSection as $sec){
-        $strID= "/etc/gosa/fai/".$this->FAIdebianMirror."/".$this->FAIdebianRelease."/".$sec;
+        $strID= "/etc/gosa/fai/".$this->mirror."/".$this->FAIdebianRelease."/".$sec;
         
         if(!is_file($strID)){
           print_red(sprintf(_("Package file don't exists '%s'."),$strID));
