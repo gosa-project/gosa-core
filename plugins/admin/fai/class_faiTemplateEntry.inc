@@ -46,6 +46,8 @@ class faiTemplateEntry extends plugin
     $_SESSION['binary'] = $this->Object_FAItemplateFile;
     $_SESSION['binarytype'] = 'octet-stream';
     $_SESSION['binaryfile'] = basename( $this->Object_FAItemplatePath );
+    
+    $this->Object_FAImode= sprintf("%0.4s", $this->Object_FAImode)." ";
   }
 
   function execute()
