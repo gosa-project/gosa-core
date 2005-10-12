@@ -1,4 +1,4 @@
-<h2><img alt="" src="images/house.png" align="middle">&nbsp;{t}Select printer entry{/t}</h2>
+<h2><img alt="" src="images/select_printer.png" align="middle">&nbsp;{t}Add printer devcies{/t}</h2>
 
     <input type="hidden" name="dialogissubmitted" value="1">
 
@@ -24,7 +24,7 @@
     				<p class="contentboxh"><img src="{$infoimage}" align="right" alt="[i]">{t}Information{/t}</p>
   	 			</div>
    				<div class="contentboxb">
-   					<p class="contentboxb">
+   					<p class="contentboxb" style="background-color:#F8F8F8">
     					{t}This menu allows you to create, edit and delete selected printers. 
 							Having a great number of printers, you may want to use the range selectors on top of the printers list.{/t}
     				</p>
@@ -35,24 +35,20 @@
     				<p class="contentboxh"><img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}</p>
    				</div>
    				<div class="contentboxb">
+     				<table summary="" style="width:100%;border-top:1px solid #B0B0B0;background-color:#F8F8F8">
+      				{$alphabet}
+     				</table>
 				<table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 					<tr>
-						<td width="50%">
-							<img alt="" src="{$tree_image}" align=middle>&nbsp;{t}Display printers of department{/t}
-						</td>
 						<td>
+							<img alt="" src="{$tree_image}" align=middle>&nbsp;
 							<select name="depselectPrinter" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
 							  {html_options options=$deplistPrinter selected=$depselectPrinter}
 							</select>
 						</td>
 					</tr>
 				</table>
-   				</div>
-   				<div class="contentboxb">
-     				<table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
-      				{$alphabet}
-     				</table>
-    					<table summary="" width="100%" style="border-top:1px solid #B0B0B0;">
+    					<table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 							<tr>
 								<td>
 									<LABEL for='filter'><img alt="Search" src="{$search_image}" align="middle" title="{t}Display printers matching{/t}">
@@ -70,8 +66,9 @@
     	</tr>
     </table>
 
+    <p class="seperator">&nbsp;</p>
     <p align="right">
-    <input type="submit" name="PrinterSave"     value="{t}Use{/t}">
+    <input type="submit" name="PrinterSave"     value="{t}Add{/t}">
     <input type="submit" name="PrinterCancel"   value="{t}Cancel{/t}">
     </p>
 

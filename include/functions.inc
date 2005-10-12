@@ -21,7 +21,7 @@
 /* Configuration file location */
 define ("CONFIG_DIR", "/etc/gosa");
 define ("CONFIG_TEMPLATE_DIR", "../contrib/");
-define ("HELP_BASEDIR", "/home/cajus/");
+define ("HELP_BASEDIR", "/var/www/doc/");
 
 /* Define globals for revision comparing */
 $svn_path = '$HeadURL$';

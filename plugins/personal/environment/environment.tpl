@@ -3,13 +3,14 @@
 	{t}The environment extension is currently disabled.{/t}
 {else}
 <input type="hidden" name="iamposted" value="1">
+
+<h2><img alt="" src="images/fai_profile.png" align="middle">&nbsp;{t}Profiles{/t}</h2>
 <table summary="{t}Environment managment settings{/t}" width="100%">
-	<tr>
-		<td valign="top" width="50%">
-			<h2><img alt="" src="images/banana.png" align="middle">&nbsp;{t}Profiles{/t}</h2>
+  <tr>
+   <td style="width:50%;border-right:1px solid #B0B0B0;vertical-align:top;">
 			<table summary="{t}Profile managment{/t}">
 				<tr>
-					<td>
+					<td style="vertical-align:top">
 						<input type="checkbox" value="1" {$useProfileCHK} name="useProfile" {$useProfileACL} id="useProfile"
 									onclick="changeState('gotoProfileServer');changeState('gotoProfileFlag_C');">
 					</td>
@@ -27,7 +28,7 @@
 									<LABEL for="gotoProfileServer">{t}Profil path{/t}</LABEL>
 								</td>
 								<td>
-									<select style="width:350px;" id="gotoProfileServer" 
+									<select id="gotoProfileServer" 
 											name="gotoProfileServer" {$gotoProfileServerACL} id="gotoProfileServer">
 										{html_options values=$gotoProfileServerKeys output=$gotoProfileServers selected=$gotoProfileServer}
 										<option disabled>&nbsp;</option>
@@ -35,26 +36,47 @@
 								</td>
 							</tr>
 							<tr>
-								<td>	
-									<LABEL for="gotoProfileFlag_C">{t}Use local caching{/t}</LABEL>
-								</td>
-								<td>
+								<td colspan=2>	
 									<input type="checkbox" name="gotoProfileFlag_C" value="C" 
-										id="gotoProfileFlag_C" {$gotoProfileFlag_CACL} {$gotoProfileFlag_CCHK}>
+										id="gotoProfileFlag_C" {$gotoProfileFlag_CACL} {$gotoProfileFlag_CCHK}>&nbsp;
+									<LABEL for="gotoProfileFlag_C">{t}Cache profile localy{/t}</LABEL>
 								</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 				</table>
-				<table>
+		</td>
+		<td style="vertical-align:top">
+			<table summary="{t}Kiosk profile settings{/t}">
+				<tr>
+					<td>
+						<LABEL for="gotoKioskProfile">{t}Kiosk profile{/t}</LABEL>
+					</td>
+					<td>
+						<select name="gotoKioskProfile" {$gotoKioskProfileACL} id="gotoKioskProfile">
+                        {html_options values=$gotoKioskProfiles output=$gotoKioskProfiles selected=$gotoKioskProfile}
+                        <option disabled>&nbsp;</option></select>&nbsp;
+						<input type="submit" name="KioskManagementDialog" value="{t}Manage{/t}" {$gotoKioskProfileACL}>
+					</td>
+				</tr>
 				<tr>
 					<td>
 						<LABEL for="gotoProfileQuota">{t}Quota{/t}</LABEL> 
+						<br>
+						<br>
 					</td>
 					<td>
 						<input type="text" name="gotoProfileQuota" value="{$gotoProfileQuota}" style="width:100px;" 
 							{$gotoProfileQuotaACL} id="gotoProfileQuota">{t}MB{/t}
+						<br>
+						<br>
+					</td>
+				</tr>
+				<tr>
+					<td colspan=2>
+						<input type="checkbox" name="gotoProfileFlag_L" id="gotoProfileFlag_L" value="L" {$gotoProfileFlagsACL} {$gotoProfileFlag_LCHK}>
+						<LABEL for="gotoProfileFlag_L">{t}Resolution changeable on runtime{/t}</LABEL>
 					</td>
 				</tr>
 				<tr>
@@ -68,117 +90,98 @@
                     	</select>
 					</td>
 				</tr>
-				<tr>
-					<td>
-						<input type="checkbox" name="gotoProfileFlag_L" id="gotoProfileFlag_L" value="L" {$gotoProfileFlagsACL} {$gotoProfileFlag_LCHK}>
-					</td>
-					<td>
-						<LABEL for="gotoProfileFlag_L">{t}Resolution changeable on runtime{/t}</LABEL>
-					</td>
-				</tr>
-			</table>
+			</table>	
+   </td>
+  </tr>
+</table>
 
-			<p class="seperator">&nbsp;</p>
-            <h2><img alt="" src="images/banana.png" align="middle">&nbsp;{t}Kiosk profile{/t}</h2>	
-			<table summary="{t}Kiosk profile settings{/t}">
-				<tr>
-					<td>
-						<LABEL for="gotoKioskProfile">{t}Kiosk profile{/t}</LABEL>
-					</td>
-					<td>
-						<select name="gotoKioskProfile" {$gotoKioskProfileACL} id="gotoKioskProfile">
-                        {html_options values=$gotoKioskProfiles output=$gotoKioskProfiles selected=$gotoKioskProfile}
-                        <option disabled>&nbsp;</option>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						&nbsp;
-					</td>
-					<td>
-						<input type="submit" name="KioskManagementDialog" value="{t}Profile management{/t}" {$gotoKioskProfileACL}>
-					</td>
-				</tr>
-			</table>	
-			<p class="seperator">&nbsp;</p>
-			<h2><img alt="" src="images/banana.png" align="middle">&nbsp;<LABEL for="gotoLogonScript">{t}Logon scripts{/t}</LABEL></h2>
-			<table summary="{t}Logon script management{/t}">
-				<tr>
-					<td>
-			        	<select style="width:350px;" name="gotoLogonScript" multiple size=4 {$gotoLogonScriptACL} id="gotoLogonScript">
-                        {html_options values=$gotoLogonScriptKeys output=$gotoLogonScripts }
-                        <option disabled>&nbsp;</option>
-						</select>
-			
-						<br>
-						<input type="submit" {$gotoLogonScriptACL} name="gotoLogonScriptNew"		value="{t}Add{/t}">
-						<input type="submit" {$gotoLogonScriptACL} name="gotoLogonScriptDel" 	value="{t}Delete{/t}"> 
-						<input type="submit" {$gotoLogonScriptACL} name="gotoLogonScriptEdit" 	value="{t}Edit{/t}"> 
-					</td>
-				</tr>
-			</table>	
-		</td>
-		<td style="border-left: 1px solid rgb(160, 160, 160);"  valign="top">
-			<h2><img alt="" src="images/banana.png" align="middle">&nbsp;<LABEL for="gotoShare">{t}Attach share{/t}</LABEL></h2>
-			<table summary="">
-				<tr>
-					<td>
-			        	<select style="width:350px;" name="gotoShare" multiple size=4 {$gotoShareACL} id="gotoShare">
-                        {html_options values=$gotoShareKeys output=$gotoShares}
-                        <option disabled>&nbsp;</option>
-						</select>
-						<br>
-			        	<select name="gotoShareSelection" {$gotoShareACL}>
-                        {html_options values=$gotoShareSelectionKeys output=$gotoShareSelections}
-                        <option disabled>&nbsp;</option>
-						</select>
-						<input type="text"	 {$gotoShareACL} name="gotoShareMountPoint"	value="">
-						<input type="submit" {$gotoShareACL} name="gotoShareAdd" 		value="+"> 
-						<input type="submit" {$gotoShareACL} name="gotoShareDel" 		value="-"> 
-					</td>
-				</tr>
-			</table>
-			<p class="seperator">&nbsp;</p>
-            <h2><img alt="" src="images/banana.png" align="middle">&nbsp;<LABEL for="gotoHotplugDevice">{t}Hotplug devices{/t}</LABEL></h2>	
-			<table summary="{t}Hotplug device settings{/t}">
-				<tr>
-					<td>
-						<select name="gotoHotplugDevice" {$gotoHotplugDeviceACL} size=4  style="width:350px;" id="gotoHotplugDevice">
-                        {html_options values=$gotoHotplugDeviceKeys output=$gotoHotplugDevices}
-                        <option disabled>&nbsp;</option>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="submit" {$gotoHotplugDeviceACL} name="gotoHotplugDeviceNew" value="{t}New{/t}">
-						<input type="submit" {$gotoHotplugDeviceACL} name="gotoHotplugDeviceUse" value="{t}Existing{/t}">
-						<input type="submit" {$gotoHotplugDeviceACL} name="gotoHotplugDeviceDel" value="{t}Delete{/t}">
-					</td>
-				</tr>
-			</table>
-		 	<p class="seperator">&nbsp;</p>
-            <h2><img alt="" src="images/banana.png" align="middle">&nbsp;<LABEL for="gotoPrinter">{t}Printer{/t}</LABEL></h2>
-            <table summary="{t}Printer settings{/t}">
-                <tr>
-                    <td>
-                        <select style="width:350px;" name="gotoPrinter" multiple size=4 {$gotoPrinterACL} id="gotoPrinter">
-                        {html_options values=$gotoPrinterKeys output=$gotoPrinters}
-                        <option disabled>&nbsp;</option>
-                        </select>
-                        <br>
-                        <input type="submit" {$gotoPrinterACL} name="gotoPrinterAdd"     value="{t}Add{/t}">
-                        <input type="submit" {$gotoPrinterACL} name="gotoPrinterDel"     value="{t}Delete{/t}">
-                        <input type="submit" {$gotoPrinterACL} name="gotoPrinterEdit"    value="{t}Admin Toggle{/t}">
-                    </td>
-                </tr>
-            </table>
-		</td>
+<p class="seperator">&nbsp;</p>
+
+<table summary="{t}Environment managment settings{/t}" width="100%">
+  <tr>
+   <td style="width:50%;border-right:1px solid #B0B0B0">
+	<h2><img alt="" src="images/fai_partitionTable.png" align="middle">&nbsp;<LABEL for="gotoShare">{t}Shares{/t}</LABEL></h2>
+	<table summary="">
+		<tr>
+			<td>
+			<select style="width:350px;" name="gotoShare" multiple size=4 {$gotoShareACL} id="gotoShare">
+	{html_options values=$gotoShareKeys output=$gotoShares}
+	<option disabled>&nbsp;</option>
+				</select>
+				<br>
+			<select name="gotoShareSelection" {$gotoShareACL}>
+	{html_options values=$gotoShareSelectionKeys output=$gotoShareSelections}
+	<option disabled>&nbsp;</option>
+				</select>
+				<input type="text" size=15 {$gotoShareACL} name="gotoShareMountPoint" value="{t}Mountpoint{/t}">
+				<input type="submit" {$gotoShareACL} name="gotoShareAdd" value="{t}Add{/t}"> 
+				<input type="submit" {$gotoShareACL} name="gotoShareDel" value="{t}Remove{/t}"> 
+			</td>
+		</tr>
+	</table>
+   </td>
+   <td>
+	<h2><img alt="" src="images/fai_script.png" align="middle">&nbsp;<LABEL for="gotoLogonScript">{t}Logon scripts{/t}</LABEL></h2>
+	<table summary="{t}Logon script management{/t}">
+		<tr>
+			<td>
+			<select style="width:350px;" name="gotoLogonScript" multiple size=4 {$gotoLogonScriptACL} id="gotoLogonScript">
+	{html_options values=$gotoLogonScriptKeys output=$gotoLogonScripts }
+	<option disabled>&nbsp;</option>
+				</select>
+	
+				<br>
+				<input type="submit" {$gotoLogonScriptACL} name="gotoLogonScriptNew"		value="{t}Add{/t}">
+				<input type="submit" {$gotoLogonScriptACL} name="gotoLogonScriptDel" 	value="{t}Delete{/t}"> 
+				<input type="submit" {$gotoLogonScriptACL} name="gotoLogonScriptEdit" 	value="{t}Edit{/t}"> 
+			</td>
+		</tr>
+	</table>	
+   </td>
+  </tr>
+</table>
+
+<p class="seperator">&nbsp;</p>
+
+<table summary="{t}Environment managment settings{/t}" width="100%">
+  <tr>
+   <td style="border-right:1px solid #B0B0B0">
+	<h2><img alt="" src="images/hotplug.png" align="middle">&nbsp;<LABEL for="gotoHotplugDevice">{t}Hotplug devices{/t}</LABEL></h2>	
+	<table summary="{t}Hotplug device settings{/t}">
+		<tr>
+			<td>
+				<select name="gotoHotplugDevice" {$gotoHotplugDeviceACL} size=4  style="width:350px;" id="gotoHotplugDevice">
+	{html_options values=$gotoHotplugDeviceKeys output=$gotoHotplugDevices}
+	<option disabled>&nbsp;</option>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="submit" {$gotoHotplugDeviceACL} name="gotoHotplugDeviceNew" value="{t}New{/t}">
+				<input type="submit" {$gotoHotplugDeviceACL} name="gotoHotplugDeviceUse" value="{t}Existing{/t}">
+				<input type="submit" {$gotoHotplugDeviceACL} name="gotoHotplugDeviceDel" value="{t}Delete{/t}">
+			</td>
+		</tr>
+	</table>
+   </td>
+   <td>
+    <h2><img alt="" src="images/select_printer.png" align="middle">&nbsp;<LABEL for="gotoPrinter">{t}Printer{/t}</LABEL></h2>
+    <table summary="{t}Printer settings{/t}">
+	<tr>
+	    <td>
+		<select style="width:350px;" name="gotoPrinter" multiple size=4 {$gotoPrinterACL} id="gotoPrinter">
+		{html_options values=$gotoPrinterKeys output=$gotoPrinters}
+		<option disabled>&nbsp;</option>
+		</select>
+		<br>
+		<input type="submit" {$gotoPrinterACL} name="gotoPrinterAdd"     value="{t}Add{/t}">
+		<input type="submit" {$gotoPrinterACL} name="gotoPrinterDel"     value="{t}Delete{/t}">
+		<input type="submit" {$gotoPrinterACL} name="gotoPrinterEdit"    value="{t}Admin Toggle{/t}">
+	    </td>
 	</tr>
-</table>	
-	
-		
-
-
-	
+    </table>
+   </td>
+  </tr>
+</table>
 
 {/if}
