@@ -19,7 +19,7 @@
     <p class='gosaLoginWarning'> {$ssl} </p>
 
     <!-- Formular data, containing a table to center fields -->
-    <form action='index.php' method='post' name='mainform'>
+    <form action='index.php' method='post' name='mainform' onSubmit='js_check(this);return true;'>
      <table summary="" style='align:center; text-align:left;' cellspacing='7' align='center'>
       <tr>
         <td>
@@ -57,6 +57,7 @@
 	</td>
       </tr>
      </table>
+				<input type='hidden' name='javascript' value='false'/>
     </form>
 
     <!-- Display error message on demand -->
