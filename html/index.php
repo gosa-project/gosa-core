@@ -38,14 +38,10 @@ if (!file_exists(CONFIG_DIR."/gosa.conf")){
 $_SESSION['errors']= "";
 
 /* Check for java script */
-if (!isset($_GET['js']) && !isset($_SESSION['js'])){
-  echo '<script language="JavaScript" type="text/javascript">';
-  echo '  location = "index.php?js=true";';
-  echo '</script>';
-
-  $_SESSION['js']= FALSE;
-} else {
+if(isset($_POST['javascript']) && $_POST['javascript'] == "true") {
   $_SESSION['js']= TRUE;
+} else {
+  $_SESSION['js']= FALSE;
 }
 
 /* Check if gosa.conf is accessable */

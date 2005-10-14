@@ -118,3 +118,7 @@ function popup(target, name) {
 	mypopup.focus();
 	return false;
 }
+
+function js_check(form) {
+	form.javascript.value = 'true';
+}
