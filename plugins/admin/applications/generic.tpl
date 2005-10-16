@@ -55,9 +55,10 @@
 
 <p class="plugbottom" style="height:4px; margin-bottom:0px;">&nbsp;</p>
 
+<h2><img src="images/lamp.png" alt="{t}Options{/t}" align="center">&nbsp;{t}Options{/t}</h2>
 <table summary="" style="width:100%;">
   <tr>
-    <td>
+    <td style="width:50%;border-right:1px solid #B0B0B0">
       <input type=checkbox name="exec_for_groupmembers" value="1" {$gosaApplicationFlagsACL} {$exec_for_groupmembers}>{t}Only executable for members{/t}
       <br>
       <input type=checkbox name="overwrite_config" value="1" {$gosaApplicationFlagsACL} {$overwrite_config}>{t}Replace user configuration on startup{/t}
@@ -77,11 +78,11 @@
 <table width="99%">
 	<tr>
 		<td>
-			<h2><img src="images/script.png" alt="{t}Script{/t}">{t}Script{/t}</h2>
+			<h2><img src="images/fai_script.png" alt="{t}Script{/t}" align="center">&nbsp;{t}Script{/t}</h2>
 			<textarea name="gotoLogonScript" style='width:99%;height:220px;'>{$gotoLogonScript}</textarea>
 			<input type="file" name="ScriptFile" value="{t}Import{/t}">
 			<input type="submit" name="upLoad" value="{t}Upload{/t}">
-			<input type="submit" name="ScriptTemplate" value="{t}Template{/t}">
+			<input type="submit" name="ScriptTemplate" value="{t}Create template{/t}">
 		</td>
 	</tr>
 </table>
