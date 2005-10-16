@@ -31,28 +31,16 @@ Things to fix before 2.4:
   - Re-implement profile management, divlists look pretty ugly here
   - Check base64_encoding/decoding is not needed everytime.
 
-* Phone account
-  - Errors when phone account is diabled and a user is saved (?)
-
 * Add function to get GOto application templates -> filled variables, etc.
-
-* Disabling error messages doesn't work, (?) 
-
-* Saving of initially created gofon stuff fails (?)
 
 * Group Dialog : Primary group chkbox is broken, nothing is shown if it is checked.
 
-=======
 * Base is not evaluated in several dialogs -> Creating an object in a special base
   results in creation in the ldap root
 
 * Workstation is defect
 
 * Save FAI sub objects directly when they already exist
-
-* FAI variables are not editable during creation
-
-* FAI package lists -> why do we ask for distribution if the list is already filled?
 
 * FAI package lists behave strange
 

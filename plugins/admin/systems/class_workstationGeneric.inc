@@ -8,7 +8,7 @@ class workgeneric extends plugin
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* Generic terminal attributes */
-  var $gotoMode= "disabled";
+  var $gotoMode= "locked";
   var $gotoSyslogServer= "";
   var $gotoNtpServer= "";
   var $gotoSndModule= "";
@@ -65,9 +65,9 @@ class workgeneric extends plugin
       }
     }
 
-    $this->modes["disabled"]= _("disabled");
-    $this->modes["text"]= _("text");
-    $this->modes["graphic"]= _("graphic");
+    $this->modes["active"]= _("Activated");
+    $this->modes["locked"]= _("Locked");
+    $this->modes["memcheck"]= _("Memory test");
 
     /* Set base */
     if ($this->dn == "new"){
@@ -89,42 +89,14 @@ class workgeneric extends plugin
     }
 
     if (isset($_POST['action'])){
-      switch($_POST['saction']){
-        case 'wake':
-          $cmd= search_config($this->config->data['TABS'], "terminfo", "WAKECMD");
-          if ($cmd == ""){
-            print_red(_("No WAKECMD definition found in your gosa.conf"));
-          } else {
-            exec ($cmd." ".$this->macAddress, $dummy, $retval);
-            if ($retval != 0){
-              print_red(sprintf(_("Execution of '%s' failed!"), $cmd));
-            }
-          }
-          break;
-
-        case 'reboot':
-          $cmd= search_config($this->config->data['TABS'], "terminfo", "REBOOTCMD");
-          if ($cmd == ""){
-            print_red(_("No REBOOTCMD definition found in your gosa.conf"));
-          } else {
-            exec ($cmd." ".$this->cn, $dummy, $retval);
-            if ($retval != 0){
-              print_red(sprintf(_("Execution of '%s' failed!"), $cmd));
-            }
-          }
-          break;
-
-        case 'halt':
-          $cmd= search_config($this->config->data['TABS'], "terminfo", "HALTCMD");
-          if ($cmd == ""){
-            print_red(_("No HALTCMD definition found in your gosa.conf"));
-          } else {
-            exec ($cmd." ".$this->cn, $dummy, $retval);
-            if ($retval != 0){
-              print_red(sprintf(_("Execution of '%s' failed!"), $cmd));
-            }
-          }
-          break;
+      $cmd= search_config($this->config->data['TABS'], "terminfo", "ACTIONCMD");
+      if ($cmd == ""){
+        print_red(_("No ACTIONCMD definition found in your gosa.conf"));
+      } else {
+        exec ($cmd." ".$this->macAddress." ".escapeshellarg($_POST['action']), $dummy, $retval);
+        if ($retval != 0){
+          print_red(sprintf(_("Execution of '%s' failed!"), $cmd));
+        }
       }
     }
 
@@ -148,9 +120,13 @@ class workgeneric extends plugin
 
     /* Offline */
     if ($retval == 0){
-      $smarty->assign("actions", array("halt" => _("Switch off"), "reboot" => _("Reboot")));
+      $smarty->assign("actions", array("halt" => _("Switch off"), "reboot" => _("Reboot"),
+                                       "instant_update" => _("Instant update"),
+                                       "update" => _("Scheduled update"),
+                                       "rescan" => _("Rescan hardware")));
     } else {
-      $smarty->assign("actions", array("wake" => _("Wake up")));
+      $smarty->assign("actions", array("wake" => _("Wake up"),
+                                       "update" => _("Scheduled update")));
     }
     /* Arrays */
     $smarty->assign("modes", $this->modes);

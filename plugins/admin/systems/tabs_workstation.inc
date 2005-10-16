@@ -10,7 +10,6 @@ class worktabs extends tabs
 
   function save_object($save_current= FALSE)
   {
-echo "Take care of the l attribute. It needs to be synced in case of workstations.";
     tabs::save_object($save_current);
   }
 
