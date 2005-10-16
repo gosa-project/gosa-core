@@ -64,7 +64,7 @@ class faiScriptEntry extends plugin
       } 
     }
 
-    for($i =1 ; $i < 100 ; $i++){
+    for($i =0 ; $i < 100 ; $i++){
       $Object_FAIprioritys[$i]=$i;
     }
     $smarty->assign("Object_FAIprioritys",$Object_FAIprioritys);
