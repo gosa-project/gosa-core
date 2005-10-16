@@ -16,10 +16,18 @@ class workstartup extends plugin
   var $gotoAutoFs= array();
   var $gotoFilesystem= array();
   var $gotoTerminalPath= "";
+  var $FAIstatus= "";
+  var $FAIclass= "";
 
   /* attribute list for save action */
-  var $attributes= array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters");
-  var $objectclasses= array("GOhard");
+  var $attributes= array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters", "FAIclass", "FAIstatus", "gotoShare");
+  var $objectclasses= array("GOhard", "FAIobject");
+
+  /* Share */
+  var $gotoShares         = array();// Currently Share Option
+  var $gotoShare          = "";     // currently selected Share Option
+  var $gotoShareSelections= array();// Available Shares for this account in Listbox format
+  var $gotoAvailableShares= array();// Available Shares for this account
 
   /* Helper */
   var $customParameters= "";
@@ -59,6 +67,22 @@ class workstartup extends plugin
       $this->customParameters= "";
     }
 
+    /* Prepare Shares */
+    if((isset($this->attrs['gotoShare']))&&(is_array($this->attrs['gotoShare']))){
+      unset($this->attrs['gotoShare']['count']);
+      foreach($this->attrs['gotoShare'] as $share){
+        $tmp = $tmp2 = array();
+        $tmp = split("\|",$share);
+        $tmp2['server']      =$tmp[0];
+        $tmp2['name']        =$tmp[1];
+        $tmp2['mountPoint']  =$tmp[2];
+        $this->gotoShares[$tmp[1]."|".$tmp[0]]=$tmp2;
+      }
+    }
+
+    $this->gotoShareSelections= $config->getShareList(true);
+    $this->gotoAvailableShares= $config->getShareList(false);
+
     $this->orig_dn= $this->dn;
   }
 
@@ -90,36 +114,42 @@ class workstartup extends plugin
       }
     }
 
-    /* Add autofs */
-    if (isset ($_POST['add_autofs'])){
-      if ($_POST['autofs'] != "" && chkacl ($this->acl, "gotoAutoFs") == ""){
-        $this->add_list ($this->gotoAutoFs, $_POST['autofs']);
-      }
-    }
-
-    /* Delete autofs */
-    if (isset ($_POST['delete_autofs'])){
-      if (count($_POST['autofs_list']) && chkacl ($this->acl, "gotoAutoFs") == ""){
-        $this->del_list ($this->gotoAutoFs, $_POST['autofs_list']);
-      }
-    }
-
-    /* Add filesystem */
-    if (isset ($_POST['add_fs'])){
-      if ($_POST['fstab'] != "" && chkacl ($this->acl, "gotoFilesystem") == ""){
-        $this->add_list ($this->gotoFilesystem, $_POST['fstab']);
-      }
-    }
-
-    /* Delete filesystem */
-    if (isset ($_POST['delete_fs'])){
-      if (count($_POST['fstab_list']) && chkacl ($this->acl, "gotoFilesystem") == ""){
-        $this->del_list ($this->gotoFilesystem, $_POST['fstab_list']);
-      }
-    }
-
     /* Show main page */
     $smarty= get_smarty();
+
+    /* In this section server shares will be defined
+     * A user can select one of the given shares and a mount point
+     *  and attach this combination to his setup.
+     */
+    $smarty->assign("gotoShareSelections",    $this->gotoShareSelections);
+    $smarty->assign("gotoShareSelectionKeys", array_flip($this->gotoShareSelections));
+
+    /* if $_POST['gotoShareAdd'] is set, we will try to add a new entry
+     * This entry will be, a combination of mountPoint and sharedefinitions
+     */
+    if(isset($_POST['gotoShareAdd'])){
+      /* We assign a share to this user, if we don't know where to mount the share */
+      if((!isset($_POST['gotoShareMountPoint']))||(empty($_POST['gotoShareMountPoint']))||(preg_match("/[\|]/i",$_POST['gotoShareMountPoi
+nt']))){
+        print_red(_("You must specify a valid mount point."));
+      }else{
+        $a_share = $this->gotoAvailableShares[$_POST['gotoShareSelection']];
+        $s_mount = $_POST['gotoShareMountPoint'];
+        /* Preparing the new assignment */
+        $this->gotoShares[$a_share['name']]=$a_share;
+        $this->gotoShares[$a_share['name']]['mountPoint']=$s_mount;
+      }
+    }
+
+    /* if the Post  gotoShareDel is set, someone asked GOsa to delete the selected entry (if there is one selected)
+     * If there is no defined share selected, we will abort the deletion without any message
+     */
+    if((isset($_POST['gotoShareDel']))&&(isset($_POST['gotoShare']))){
+      unset($this->gotoShares[$_POST['gotoShare']]);
+    }
+
+    $smarty->assign("gotoShares",$this->printOutAssignedShares());
+    $smarty->assign("gotoShareKeys",array_flip($this->printOutAssignedShares()));
 
     /* Arrays */
     $smarty->assign("ldapservers", $this->config->data['SERVERS']['LDAP']);
@@ -130,7 +160,7 @@ class workstartup extends plugin
     }
 
     /* Values */
-    foreach(array("gotoBootKernel", "customParameters") as $val){
+    foreach(array("gotoBootKernel", "customParameters", "gotoShare") as $val){
       $smarty->assign($val, $this->$val);
       $smarty->assign($val."ACL", chkacl($this->acl, $val));
     }
@@ -286,6 +316,19 @@ class workstartup extends plugin
     $array= $tmp;
   }
 
+  /* Generate ListBox frindly output for the defined shares
+   * Possibly Add or remove an attribute here,
+   */
+  function printOutAssignedShares()
+  {
+    $a_return = array();
+    if(is_array($this->gotoShares)){
+      foreach($this->gotoShares as $share){
+        $a_return[$share['name']."|".$share['server']]= $share['name']." [".$share['server']."]";
+      }
+    }
+    return($a_return);
+  }
 
 }
 

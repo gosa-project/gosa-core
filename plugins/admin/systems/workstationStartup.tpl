@@ -32,14 +32,14 @@
   </td>
   
   <td style="vertical-align:top;">
-    <input type="radio" name="bootmode" value="G" title="{t}Select if terminal supports graphical startup with progress bar{/t}" {$graphicalbootup} {$gotoKernelParametersACL}>
-    {t}use graphical bootup{/t}
+    {t}Installation server{/t} [.........]<br>
     <br>
-    <input type="radio" name="bootmode" value="T" title="{t}Select if terminal should boot in text mode{/t}" {$textbootup} {$gotoKernelParametersACL}>
-    {t}use standard linux textual bootup{/t}
-    <br>
-    <input type="radio" name="bootmode" value="D" title="{t}Select to get more verbose output during startup{/t}" {$debugbootup} {$gotoKernelParametersACL}>
-    {t}use debug mode for startup{/t}
+    {t}Assigned FAI classes{/t}<br>
+    [..........................]<br>
+    [..........................]<br>
+    [..........................]<br>
+    [..........................]<br>
+    [Add] [Remove]
   </td>
  </tr>
 </table>
@@ -48,11 +48,11 @@
  <tr><td colspan=2><p class="plugbottom" style="margin-top:0px;"></p></td></tr>
 
  <tr>
-  <td style="width:50%; vertical-align:top;">
+  <td style="width:50%; vertical-align:top; border-right:1px solid #B0B0B0">
    <h2>
     <img alt="" align="middle" src="images/hardware.png"> {t}Kernel modules (format: name parameters){/t}
    </h2>
-    <select style="width:100%; height:100px;" name="modules_list[]" size=15 multiple title="{t}Add additional modules to load on startup{/t}">
+    <select style="width:100%; height:150px;" name="modules_list[]" size=15 multiple title="{t}Add additional modules to load on startup{/t}">
      {html_options values=$gotoModules output=$gotoModules}
 	 <option disabled>&nbsp;</option>
     </select>
@@ -63,37 +63,25 @@
   </td>
 
   <td style="vertical-align:top;">
-   <h2>
-    <img alt="" align="middle" src="images/zip.png"> {t}Automount devices (format: complete autofs entry){/t}
-   </h2>
-   <select style="width:100%; height:100px;" name="autofs_list[]" size=15 multiple title='{t}Add additional automount entries{/t}'>
-    {html_options values=$gotoAutoFs output=$gotoAutoFs}
-	<option disabled>&nbsp;</option>
-   </select>
-   <br>
-   <input name="autofs" size=30 align=middle maxlength=80>
-   <input type=submit value="{t}Add{/t}" name="add_autofs">&nbsp;
-   <input type=submit value="{t}Delete{/t}" name="delete_autofs">
-  </td>
- </tr>
-</table>
-
-<table summary="" style="width:100%;">
- <tr><td colspan=2><p class="plugbottom" style="margin-top:0px;"></p></td></tr>
-
- <tr>
-  <td style="width:50%; vertical-align:top;">
-   <h2>
-    <img alt="" align="middle" src="images/folder.png"> {t}Additional fstab entries{/t}
-   </h2>
-   <select style="width:100%; height:100px;" name="fstab_list[]" size=15 multiple title="{t}Add additional filesystems to be mounted during startup{/t}">
-    {html_options values=$gotoFilesystem output=$gotoFilesystem}
-	<option disabled>&nbsp;</option>
-   </select>
-   <br>
-   <input name="fstab" size=80 align=middle maxlength=200 {$gotoFilesystemACL}>
-   <input type=submit value="{t}Add{/t}" name="add_fs" {$gotoFilesystemACL}>&nbsp;
-   <input type=submit value="{t}Delete{/t}" name="delete_fs" {$gotoFilesystemACL}>
+        <h2><img alt="" src="images/fai_partitionTable.png" align="middle">&nbsp;<LABEL for="gotoShare">{t}Shares{/t}</LABEL></h2>
+        <table summary="" style="width:100%">
+                <tr>
+                        <td>
+                        <select style="width:100%;height:150px;" name="gotoShare" multiple size=4 {$gotoShareACL} id="gotoShare">
+        {html_options values=$gotoShareKeys output=$gotoShares}
+        <option disabled>&nbsp;</option>
+                                </select>
+                                <br>
+                        <select name="gotoShareSelection" {$gotoShareACL}>
+        {html_options values=$gotoShareSelectionKeys output=$gotoShareSelections}
+        <option disabled>&nbsp;</option>
+                                </select>
+                                <input type="text" size=15 {$gotoShareACL} name="gotoShareMountPoint" value="{t}Mountpoint{/t}">
+                                <input type="submit" {$gotoShareACL} name="gotoShareAdd" value="{t}Add{/t}">
+                                <input type="submit" {$gotoShareACL} name="gotoShareDel" value="{t}Remove{/t}">
+                        </td>
+                </tr>
+        </table>
   </td>
  </tr>
 </table>

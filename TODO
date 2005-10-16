@@ -44,6 +44,9 @@ Things to fix before 2.4:
 
 * FAI package lists behave strange
 
+* Add shares to terminal tabs
+
+* Shares are not removable!
 
 Target for 2.5:
 ===============
