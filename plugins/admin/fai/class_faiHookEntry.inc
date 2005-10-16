@@ -67,11 +67,6 @@ class faiHookEntry extends plugin
       }
     }
 
-
-    for($i =1 ; $i <= 100 ; $i++){
-      $Object_FAIprioritys[$i]=$i;
-    }
-    $smarty->assign("Object_FAIprioritys",$Object_FAIprioritys);
     $display.= $smarty->fetch(get_template_path('faiHookEntry.tpl', TRUE));
     return($display);
   }
