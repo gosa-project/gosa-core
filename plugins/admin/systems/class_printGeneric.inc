@@ -64,7 +64,7 @@ class printgeneric extends plugin
      */
     if((isset($this->attrs['objectClass']))&&(in_array("gotoWorkstation",$this->attrs['objectClass']))){
       $this->is_terminal = "true";   
-      $this->dn   = preg_replace("/ou=workstation/","ou=printer",$this->dn);
+      $this->dn   = preg_replace("/ou=workstations,/","ou=printers,",$this->dn);
       $this->type = "station";
     }elseif((isset($this->attrs['objectClass']))&&(in_array("gotoTerminal",$this->attrs['objectClass']))){
       $this->type = "terminal";
@@ -352,6 +352,7 @@ class printgeneric extends plugin
 
   function remove_from_parent()
   {
+    $this->dn= preg_replace('/ou=workstations,/', 'ou=printers,', $this->dn);
     $ldap= $this->config->get_ldap_link();
     $ldap->rmdir($this->dn);
     show_ldap_error($ldap->get_error());
@@ -417,16 +418,20 @@ class printgeneric extends plugin
   /* Save to LDAP */
   function save()
   {
+    if (!$this->is_account){
+      return;
+    }
+    
     $dn= $this->dn;
     plugin::save();
     $ldap= $this->config->get_ldap_link();
    
     if((in_array("gotoTerminal",$this->attrs['objectClass']))){
-      $this->dn= preg_replace("/ou=terminal/","ou=printer",$this->dn);
+      $this->dn= preg_replace("/ou=terminals,/","ou=printers,",$this->dn);
     }
     
     if((in_array("gotoWorkstation",$this->attrs['objectClass']))){
-      $this->dn= preg_replace("/ou=workstation/","ou=printer",$this->dn);
+      $this->dn= preg_replace("/ou=workstations,/","ou=printers,",$this->dn);
     }
 
     /* We are currently editing a Terminal, so we want to save a seperate printer which cn is the terminla cn 

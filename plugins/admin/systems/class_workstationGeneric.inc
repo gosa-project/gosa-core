@@ -9,8 +9,6 @@ class workgeneric extends plugin
 
   /* Generic terminal attributes */
   var $gotoMode= "disabled";
-  var $gotoTerminalPath= "";
-  var $gotoSwapServer= "";
   var $gotoSyslogServer= "";
   var $gotoNtpServer= "";
   var $gotoSndModule= "";
@@ -31,6 +29,7 @@ class workgeneric extends plugin
   /* Needed values and lists */
   var $base= "";
   var $cn= "";
+  var $l= "";
   var $orig_dn= "";
 
   /* Plugin side filled */
@@ -38,11 +37,10 @@ class workgeneric extends plugin
 
   /* attribute list for save action */
   var $ignore_account= TRUE;
-  var $attributes= array("gotoMode", "gotoTerminalPath", "macAddress",
-      "gotoSwapServer", "gotoSyslogServer", "gotoNtpServer",
+  var $attributes= array("gotoMode", "macAddress", "gotoSyslogServer", "gotoNtpServer",
       "gotoFloppyEnable", "gotoCdromEnable", "cn", "gotoSndModule",
       "ghCpuType", "ghMemSize", "ghUsbSupport", "ipHostNumber",
-      "ghGfxAdapter", "ghSoundAdapter", "gotoLastUser");
+      "ghGfxAdapter", "ghSoundAdapter", "gotoLastUser", "l");
   var $objectclasses= array("top", "gotoWorkstation", "GOhard");
 
   function workgeneric ($config, $dn= NULL)
@@ -140,6 +138,7 @@ class workgeneric extends plugin
     /* Fill templating stuff */
     $smarty= get_smarty();
     $smarty->assign("cn", $this->cn);
+    $smarty->assign("l", $this->l);
     $smarty->assign("bases", $this->config->idepartments);
     $smarty->assign("staticAddress", "");
         
@@ -160,8 +159,7 @@ class workgeneric extends plugin
     $smarty->assign("ntpservers", $this->config->data['SERVERS']['NTP']);
 
     /* Variables */
-    foreach(array("base", "gotoMode", "gotoTerminalPath", "gotoSwapServer",
-          "gotoSyslogServer", "gotoNtpServer") as $val){
+    foreach(array("base", "gotoMode", "gotoSyslogServer", "gotoNtpServer") as $val){
 
       $smarty->assign($val."_select", $this->$val);
       $smarty->assign($val."ACL", chkacl($this->acl, $val));
@@ -205,10 +203,6 @@ class workgeneric extends plugin
     if (isset($_POST['base']) && chkacl($this->acl, "create") == ""){
       $this->base= $_POST['base'];
     }
-
-    /* Save terminal path to parent since it is used by termstartup, too */
-    $this->parent->by_object['termstartup']->gotoTerminalPath=
-      $this->gotoTerminalPath;
   }
 
 
@@ -257,7 +251,7 @@ class workgeneric extends plugin
     plugin::save();
 
     /* Strip out 'default' values */
-    foreach (array("gotoTerminalPath", "gotoSwapServer", "gotoSyslogServer") as $val){
+    foreach (array("gotoSyslogServer") as $val){
 
       if ($this->attrs[$val] == "default"){
         $this->attrs[$val]= array();

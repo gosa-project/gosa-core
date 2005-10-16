@@ -206,7 +206,7 @@ class systems extends plugin
               $this->config->data['TABS']['WORKTABS'], $this->dn);
           $this->systab->set_acl ($this->acl);
           $this->systab->by_object['workgeneric']->cn= "wdefault";
-          $this->systab->by_object['termservice']->cn= "default";
+          $this->systab->by_object['workservice']->cn= "default";
           break;
 
         case 'server':

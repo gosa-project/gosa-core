@@ -15,6 +15,15 @@
      {/if}
     </tr>
     <tr>
+     <td><LABEL for="cn">{t}Location{/t}</LABEL></td>
+     <td>
+      <input name="l" id="l" size=18 maxlength=60 value="{$l}">
+     </td>
+    </tr>
+    <tr>
+     <td colspan=2>&nbsp;</td>
+    </tr>
+    <tr>
      <td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
      <td>
       <select size="1" id="base" name="base" title="{t}Choose subtree to place terminal in{/t}">
@@ -40,35 +49,6 @@
       </select>
      </td>
     </tr>
-   </table>
-
-  </td>
- </tr>
- <tr>
-  <td style="width:50%;">
-   <table summary="">
-    <tr><td colspan=2><div style="height:15px;"></div></td></tr>
-    <tr>
-     <td>{t}Root server{/t}</td>
-     <td>
-      <select name="gotoTerminalPath" title="{t}Select NFS root filesystem to use{/t}" {$gotoTerminalPathACL}>
-       {html_options values=$nfsservers output=$nfsservers selected=$gotoTerminalPath_select}
-      </select>
-     </td>
-    </tr>
-    <tr>
-     <td>{t}Swap server{/t}</td>
-     <td>
-      <select name="gotoSwapServer" title="{t}Choose NFS filesystem to place swap files on{/t}" {$gotoSwapServerACL}>
-       {html_options values=$nfsservers output=$nfsservers selected=$gotoSwapServer_select}
-      </select>
-     </td>
-    </tr>
-   </table>
-  </td>
-  <td style="vertical-align:top;">
-
-   <table summary="">
     <tr><td colspan=2><div style="height:15px;"></div></td></tr>
     <tr>
      <td><LABEL for="gotoSyslogServer">{t}Syslog server{/t}</LABEL></td>
@@ -87,7 +67,6 @@
      </td>
     </tr>
    </table>
-
   </td>
  </tr>
 </table>
