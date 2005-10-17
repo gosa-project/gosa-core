@@ -85,11 +85,11 @@ class workstartup extends plugin
 
     $this->gotoShareSelections= $config->getShareList(true);
     $this->gotoAvailableShares= $config->getShareList(false);
-
+/*
     $tmp = array();
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(objectClass=FAIprofile)",array("cn"));
+    $ldap->search("(objectClass=FAIclass)",array("cn"));
     while($attr = $ldap->fetch()){
       $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
       $base =  "ou=fai,".preg_replace("/^.*ou=fai,/","",$attr['dn']);
@@ -97,39 +97,46 @@ class workstartup extends plugin
       $tmp[$cn] = $base;
     }
 
-
+*/
     $tmp2 = array();
   
-    foreach($tmp as $cn => $base){
-
-      $ldap->cd($base);
-      $ldap->search("(&(objectClass=*)(cn=".$cn."))",array("objectClass","cn"));
-      while($attr = $ldap->fetch()){
-  
-        if(in_array('FAIpackageList',$attr['objectClass'])){
-          $tmp2[$cn]['FAIpackageList']['obj']   = 'FAIpackageList'; 
-          $tmp2[$cn]['FAIpackageList']['kzl']   = 'P'; 
-        }
-        if(in_array('FAItemplate',$attr['objectClass'])){
-          $tmp2[$cn]['FAItemplate']['obj']      = 'FAItemplate'; 
-          $tmp2[$cn]['FAItemplate']['kzl']      = 'T'; 
-        }
-        if(in_array('FAIvariable',$attr['objectClass'])){
-          $tmp2[$cn]['FAIvariable']['obj']      = 'FAIvariable'; 
-          $tmp2[$cn]['FAIvariable']['kzl']      = 'V'; 
-        }
-        if(in_array('FAIscript',$attr['objectClass'])){
-          $tmp2[$cn]['FAIscript']['obj']        = 'FAIscript'; 
-          $tmp2[$cn]['FAIscript']['kzl']        = 'S'; 
-        }
-        if(in_array('FAIhook',$attr['objectClass'])){
-          $tmp2[$cn]['FAIhook']['obj']          = 'FAIhook'; 
-          $tmp2[$cn]['FAIhook']['kzl']          = 'H'; 
-        }
-        if(in_array('FAIpartitionTable',$attr['objectClass'])){
-          $tmp2[$cn]['FAIpartitionTable']['obj']= 'FAIpartitionTable'; 
-          $tmp2[$cn]['FAIpartitionTable']['kzl']= 'Pt'; 
-        }
+    //$ldap->cd($base);
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(|(objectClass=FAIpackageList)(objectClass=FAItemplate)
+                      (objectClass=FAIvariable)(objectClass=FAIscript')(objectClass=FAIhook)
+                      (objectClass=FAIpartitionTable))",array("objectClass","cn"),true);
+    while($attr = $ldap->fetch()){
+      $cn = $attr['cn'][0];
+      if(in_array('FAIpackageList',$attr['objectClass'])){
+        $tmp2[$cn]['FAIpackageList']['obj']   = 'FAIpackageList'; 
+        $tmp2[$cn]['FAIpackageList']['kzl']   = 'P'; 
+        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+      }
+      if(in_array('FAItemplate',$attr['objectClass'])){
+        $tmp2[$cn]['FAItemplate']['obj']      = 'FAItemplate'; 
+        $tmp2[$cn]['FAItemplate']['kzl']      = 'T'; 
+        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+      }
+      if(in_array('FAIvariable',$attr['objectClass'])){
+        $tmp2[$cn]['FAIvariable']['obj']      = 'FAIvariable'; 
+        $tmp2[$cn]['FAIvariable']['kzl']      = 'V'; 
+        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+      }
+      if(in_array('FAIscript',$attr['objectClass'])){
+        $tmp2[$cn]['FAIscript']['obj']        = 'FAIscript'; 
+        $tmp2[$cn]['FAIscript']['kzl']        = 'S'; 
+        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+      }
+      if(in_array('FAIhook',$attr['objectClass'])){
+        $tmp2[$cn]['FAIhook']['obj']          = 'FAIhook'; 
+        $tmp2[$cn]['FAIhook']['kzl']          = 'H'; 
+        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+      }
+      if(in_array('FAIpartitionTable',$attr['objectClass'])){
+        $tmp2[$cn]['FAIpartitionTable']['obj']= 'FAIpartitionTable'; 
+        $tmp2[$cn]['FAIpartitionTable']['kzl']= 'Pt'; 
+        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
       }
     }
 
