@@ -45,7 +45,7 @@
      <td>{t}Mode{/t}</td>
      <td>
       <select name="gotoMode" title="{t}Select terminal mode{/t}" {$gotoModeACL}>
-       {html_options options=$modes selected=$gotoMode_select}
+       {html_options options=$modes selected=$gotoMode}
       </select>
      </td>
     </tr>
