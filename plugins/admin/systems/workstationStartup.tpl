@@ -1,7 +1,7 @@
-<h2><img alt="" align="middle" src="images/penguin.png"> {t}Boot parameters{/t}</h2>
 <table summary="" style="width:100%;">
  <tr>
   <td style="width:50%; vertical-align:top;">
+<h2><img alt="" align="middle" src="images/penguin.png"> {t}Boot parameters{/t}</h2>
 
    <table summary="">
     <tr>
@@ -31,8 +31,7 @@
      &nbsp;
   </td>
   
-  <td style="vertical-align:top;">
-    {t}Assigned FAI classes{/t}<br>
+  <td style="vertical-align:top;"><h2><img alt="" align="middle" src="images/penguin.png">&nbsp;{t}Assigned FAI classes{/t}</h2>
 		<select name="FAIclassSel" {$FAIclassACL} multiple style="width:280px;height:100px;">
         {html_options values=$FAIclass output=$FAIclassKeys}
         <option disabled>&nbsp;</option>

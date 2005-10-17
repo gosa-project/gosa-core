@@ -86,6 +86,7 @@ class workstartup extends plugin
     $this->gotoShareSelections= $config->getShareList(true);
     $this->gotoAvailableShares= $config->getShareList(false);
 
+    $tmp = array();
     $ldap = $this->config->get_ldap_link();
     $ldap->search("(objectClass=FAIprofile)",array("*"));
     while($attr = $ldap->fetch()){
@@ -95,6 +96,9 @@ class workstartup extends plugin
       $tmp[$cn] = $base;
     }
 
+
+    $tmp2 = array();
+  
     foreach($tmp as $cn => $base){
 
       $ldap->cd($base);
