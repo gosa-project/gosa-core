@@ -75,6 +75,11 @@ class group extends plugin
       } else {
         $this->fon_group= TRUE;
       }
+      if (array_search ('nagiosContactGroup', $this->attrs['objectClass']) == NULL ){
+        $this->nagios_group= FALSE;
+      } else {
+        $this->nagios_group= TRUE;
+      }
     }
 
     /* Set mail flag */
@@ -293,6 +298,13 @@ class group extends plugin
     }
     $smarty->assign("fon_groupACL", chkacl($this->acl, "fon_group"));
 
+    if ($this->nagios_group){
+      $smarty->assign("nagios_group", "checked");
+    } else {
+      $smarty->assign("nagios_group", "");
+    }
+    $smarty->assign("nagios_groupACL", chkacl($this->acl, "nagios_group"));
+
     /* Fields */
     foreach (array("cn", "description", "gidNumber") as $val){
       $smarty->assign("$val", $this->$val);
@@ -427,7 +439,13 @@ class group extends plugin
           $this->fon_group= FALSE;
         }
       }
-
+	 if (chkacl ($this->acl, "nagios_group") == ""){
+        if (isset ($_POST['nagios_group'])){
+          $this->nagios_group= TRUE;
+        } else {
+          $this->nagios_group= FALSE;
+        }
+      }
     }
   }
 
@@ -462,7 +480,8 @@ class group extends plugin
     for ($i= 0; $i<count($this->attrs["objectClass"]); $i++){
       if ($this->attrs['objectClass'][$i] != 'sambaGroupMapping' &&
           $this->attrs['objectClass'][$i] != 'sambaIdmapEntry' &&
-          $this->attrs['objectClass'][$i] != 'goFonPickupGroup'){
+          $this->attrs['objectClass'][$i] != 'goFonPickupGroup' &&
+	 $this->attrs['objectClass'][$i] != 'nagiosContactGroup'){
         $tmp[]= $this->attrs['objectClass'][$i];
       }
     }
@@ -512,6 +531,11 @@ class group extends plugin
     /* Add phone functionality */
     if ($this->fon_group){
       $this->attrs['objectClass'][]= "goFonPickupGroup";
+    }
+
+    /* Add nagios functionality */
+    if ($this->nagios_group){
+	$this->attrs['objectClass'][]= "nagiosContactGroup";
     }
 
     /* Take members array */

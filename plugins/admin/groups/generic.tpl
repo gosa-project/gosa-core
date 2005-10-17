@@ -66,6 +66,17 @@
       <input type=checkbox name="fon_group" value="1" {$fon_group} {$fon_groupACL}>{t}Members are in a phone pickup group{/t}
      </td>
     </tr>
+    <tr>
+      <td colspan=2> <div style="height:15px; width:100%; border-bottom:1px solid #909090;"></div> </td>
+    </tr>
+    <tr>
+      <td colspan=2> <div style="height:15px; width:100%;"></div> </td>
+    </tr>
+    <tr>
+     <td colspan=2>
+      <input type=checkbox name="nagios_group" value="1" {$nagios_group} {$nagios_groupACL}>{t}Members are in a nagios group{/t}
+     </td>
+    </tr>
    </table>
 
   </td>
