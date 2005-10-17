@@ -160,9 +160,6 @@ class faiTemplateEntry extends plugin
     if(empty($this->Object_cn)){
       $message[] = _("Please enter a name.");
     }
-    elseif(preg_match("/[^0-9a-z]/i",$this->Object_cn)){
-      $message[] = _("Please enter a valid name. Only a-Z 0-9 are allowed.");
-    }
 
     if(empty($this->Object_user)){
       $message[] = _("Please enter a user.");
