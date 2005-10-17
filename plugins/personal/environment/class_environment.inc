@@ -60,12 +60,12 @@ class environment extends plugin
   /* general settings */
   // Sets the attributes which will kept on page reload, which will be saved, ...
   var $attributes         = array("uid","useProfile","gotoProfileServer","gotoProfileServers","gotoProfileFlags","gotoProfileFlag_C",
-                                    "gotoXResolution","gotoXResolutions","gotoProfileFlag_L","gotoProfileQuota",
+                                    "gotoXResolution","gotoProfileFlag_L","gotoProfileQuota",
                                     "gotoLogonScripts","gotoLogonScript",
-                                    "gotoPrinters","gotoPrinter",
+                                    "gotoPrinters",
                                     "gotoShares","gotoShare","gotoShareSelections",
                                     "gotoKioskProfile","gotoKioskProfiles",
-                                    "gotoHotplugDevice","gotoHotplugDevices");
+                                    "gotoHotplugDevices");
   var $objectclasses      = array("gotoEnvironment"); // Specifies the objectClass which contains the attributes edited here 
   var $cn;
 
@@ -96,7 +96,7 @@ class environment extends plugin
       $this->gotoPrinters[$printer['cn'][0]]=$printer;
       $this->gotoPrinters[$printer['cn'][0]]['mode']="admin";
     }
-   
+  
     /* prepare hotplugs */
     if((isset($this->attrs['gotoHotplugDevice']))&&(is_array($this->attrs['gotoHotplugDevice']))){
       unset($this->attrs['gotoHotplugDevice']['count']);
@@ -237,6 +237,8 @@ class environment extends plugin
        */
       $smarty->assign("is_account","true");
 
+      $this->is_group = false;
+
       /* Do we need to flip is_account state? */
       if (isset($_POST['modify_state'])){
         $this->is_account= !$this->is_account;
@@ -288,6 +290,14 @@ class environment extends plugin
       }
  
     }
+
+    foreach(array("gotoHotplugDevice","gotoPrinter") as $s_attr){
+      if(chkacl($this->acl,$s_attr)=="") {
+        $smarty->assign($s_attr."ACL","");
+      }else{
+        $smarty->assign($s_attr."ACL"," disabled ");
+      }
+    }
  
     if($this->acl != "#none#"){
       $smarty->assign("useProfileACL","");
@@ -315,6 +325,9 @@ class environment extends plugin
 
     $smarty->assign("gotoXResolutions",$this->gotoXResolutions);
     $smarty->assign("gotoProfileServers",$this->gotoProfileServers);
+    if(!is_array($this->gotoProfileServers)){
+      $this->gotoProfileServers =array();
+    }
     $smarty->assign("gotoProfileServerKeys",array_flip($this->gotoProfileServers));
 
     /* Handle kiosk profiles 
@@ -409,6 +422,9 @@ class environment extends plugin
      */
     
     $smarty->assign("gotoShareSelections",    $this->gotoShareSelections);
+    if(!is_array($this->gotoShareSelections)){
+      $this->gotoShareSelections = array();
+    }
     $smarty->assign("gotoShareSelectionKeys", array_flip($this->gotoShareSelections));
 
     /* if $_POST['gotoShareAdd'] is set, we will try to add a new entry 
@@ -581,8 +597,8 @@ class environment extends plugin
     plugin::remove_from_parent();
 
     /* Don't save our template variables */
-    $skip = array("useProfile","uid","gotoProfileServers","gotoProfileFlag_C","gotoXResolutions","gotoProfileFlag_L",
-                  "gotoLogonScripts","gotoPrinters","gotoShares","gotoShareSelections","gotoKioskProfiles","gotoHotplugDevices",
+    $skip = array("useProfile","uid","gotoProfileServers","gotoProfileFlag_C","gotoProfileFlag_L",
+                  "gotoLogonScripts","gotoPrinters","gotoShares","gotoKioskProfiles","gotoHotplugDevices",
                   "gotoPrinter");
     /* Skip all these attributes */
     foreach($skip as $del){
@@ -689,21 +705,28 @@ class environment extends plugin
     }
   
 
-    if(count($this->gotoPrinters)==0){
+
+    /* Deleted printer settings wasn't deleted from ldap ... 
+     */
+    //if(count($this->gotoPrinters)==0){
+    if(1==1){
       $ldap->search("(&(objectClass=gotoPrinter)(|(goto".$s_suffix."Printer=".$this->uid.")(goto".$s_suffix."AdminPrinter=".$this->uid.")))",array("*"));
       while($attr = $ldap->fetch()){
-      
-        foreach($attr['goto'.$s_suffix.'Printer'] as $key => $user){
-          if($this->uid==$user){
-            unset($attr['goto'.$s_suffix.'Printer'][$key]);
-          }
-        }    
+        if(isset($attr['goto'.$s_suffix.'Printer'])) {
+          foreach($attr['goto'.$s_suffix.'Printer'] as $key => $user){
+            if($this->uid==$user){
+              unset($attr['goto'.$s_suffix.'Printer'][$key]);
+            }
+          }    
+        }
 
-        foreach($attr['goto'.$s_suffix.'AdminPrinter'] as $key => $user){
-          if($this->uid==$user){
-            unset($attr['goto'.$s_suffix.'AdminPrinter'][$key]);
-          }
-        }    
+        if(isset($attr['goto'.$s_suffix.'AdminPrinter'])){
+          foreach($attr['goto'.$s_suffix.'AdminPrinter'] as $key => $user){
+            if($this->uid==$user){
+              unset($attr['goto'.$s_suffix.'AdminPrinter'][$key]);
+            }
+          }    
+        }
 
         $attrs_used = array();
         foreach($attr as $key=>$val){
@@ -716,16 +739,26 @@ class environment extends plugin
         }
         $attr= $attrs_used;
         $tmp =array();
-        foreach($attr['goto'.$s_suffix.'AdminPrinter'] as $print){
-          $tmp[]=$print;
+        
+        if(isset($attr['goto'.$s_suffix.'AdminPrinter'])){
+          foreach($attr['goto'.$s_suffix.'AdminPrinter'] as $print){
+            $tmp[]=$print;
+          }
         }
         $attr['goto'.$s_suffix.'AdminPrinter'] = $tmp;
 
         $tmp =array();
-        foreach($attr['goto'.$s_suffix.'Printer'] as $print){
-          $tmp[]=$print;
+    
+        if(isset($attr['goto'.$s_suffix.'Printer'])){
+          foreach($attr['goto'.$s_suffix.'Printer'] as $print){
+            $tmp[]=$print;
+          }
         }
         $attr['goto'.$s_suffix.'Printer'] = $tmp;
+
+        if(isset($attr['GOTOADMINPRINTER'])){
+          unset($attr['GOTOADMINPRINTER']);
+        }
 
         $ldap->cd($attr['dn']);
         unset($attr['dn']);
@@ -749,6 +782,7 @@ class environment extends plugin
           $attrs_used[$key]=$val;
         }
       }
+
       $attrs= $attrs_used;
 
       /* Filter entries */
@@ -758,7 +792,7 @@ class environment extends plugin
         $attribute2 = "goto".$s_suffix."AdminPrinter";
       }else{
         $attribute  = "goto".$s_suffix."AdminPrinter";
-        $attribute2 = "goto".$s_suffix."UserPrinter";
+        $attribute2 = "goto".$s_suffix."Printer";
       }
 
       /* If this user is already assigned to $attribute2 
@@ -814,10 +848,6 @@ class environment extends plugin
       }
     }
   
-    if(isset($this->attrs['gotoPrinter'])){
-      unset($this->attrs['gotoPrinter']);
-    }
- 
     /* Prepare HotPlug devices */
     $this->attrs['gotoHotplugDevice'] = array();
     foreach($this->gotoHotplugDevices as $name => $device){
