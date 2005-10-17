@@ -42,7 +42,7 @@ class environment extends plugin
   var $gotoPrinter        = "";     //  The selected Printer
 
   /* Share */
-  var $gotoShares         = array();// Currently Share Option
+  var $gotoShares         = array();// Current Share Options
   var $gotoShare          = "";     // currently selected Share Option
   var $gotoShareSelections= array();// Available Shares for this account in Listbox format
   var $gotoAvailableShares= array();// Available Shares for this account
@@ -63,7 +63,7 @@ class environment extends plugin
                                     "gotoXResolution","gotoProfileQuota",
                                     "gotoLogonScripts","gotoLogonScript",
                                     "gotoPrinters",
-                                    "gotoShares","gotoShare","gotoShareSelections",
+                                    "gotoShares","gotoShare",
                                     "gotoKioskProfile","gotoKioskProfiles",
                                     "gotoHotplugDevices");
   var $objectclasses      = array("gotoEnvironment"); // Specifies the objectClass which contains the attributes edited here 
@@ -435,6 +435,7 @@ class environment extends plugin
     
     $smarty->assign("gotoShareSelections",    $this->gotoShareSelections);
     if(!is_array($this->gotoShareSelections)){
+      print $this->gotoShareSelections;
       $this->gotoShareSelections = array();
     }
     $smarty->assign("gotoShareSelectionKeys", array_flip($this->gotoShareSelections));
