@@ -32,14 +32,18 @@
   </td>
   
   <td style="vertical-align:top;">
-    {t}Installation server{/t} [.........]<br>
-    <br>
     {t}Assigned FAI classes{/t}<br>
-    [..........................]<br>
-    [..........................]<br>
-    [..........................]<br>
-    [..........................]<br>
-    [Add] [Remove]
+		<select name="FAIclassSel" {$FAIclassACL} multiple style="width:200px;height:50px;">
+        {html_options values=$FAIclass output=$FAIclassKeys}
+        <option disabled>&nbsp;</option>
+		</select>	
+    <br>
+		<select name="FAIclassesSel" {$FAIclassACL}>
+        {html_options values=$FAIclassesKeys output=$FAIclasses}
+        <option disabled>&nbsp;</option>
+		</select>	
+   		<input name="AddClass" value="{t}Add{/t}" type="submit"> 
+   		<input name="DelClass" value="{t}Delete{/t}" type="submit"> 
   </td>
  </tr>
 </table>

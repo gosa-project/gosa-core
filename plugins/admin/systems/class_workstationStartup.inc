@@ -17,7 +17,10 @@ class workstartup extends plugin
   var $gotoFilesystem= array();
   var $gotoTerminalPath= "";
   var $FAIstatus= "";
-  var $FAIclass= "";
+  var $FAIclass     = array();
+  var $FAIclasses   = array();
+  var $FAIclassInfo = array();
+
 
   /* attribute list for save action */
   var $attributes= array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters", "FAIclass", "FAIstatus", "gotoShare");
@@ -83,7 +86,80 @@ class workstartup extends plugin
     $this->gotoShareSelections= $config->getShareList(true);
     $this->gotoAvailableShares= $config->getShareList(false);
 
+    $ldap = $this->config->get_ldap_link();
+    $ldap->search("(objectClass=FAIprofile)",array("*"));
+    while($attr = $ldap->fetch()){
+      $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+      $base =  "ou=fai,".preg_replace("/^.*ou=fai,/","",$attr['dn']);
+      $cn   = $attr['cn'][0];
+      $tmp[$cn] = $base;
+    }
+
+    foreach($tmp as $cn => $base){
+
+      $ldap->cd($base);
+      $ldap->search("(&(objectClass=*)(cn=".$cn."))",array("objectClass","cn"));
+      while($attr = $ldap->fetch()){
+  
+        if(in_array('FAIpackageList',$attr['objectClass'])){
+          $tmp2[$cn]['FAIpackageList']['obj']   = 'FAIpackageList'; 
+          $tmp2[$cn]['FAIpackageList']['kzl']   = 'P'; 
+        }
+        if(in_array('FAItemplate',$attr['objectClass'])){
+          $tmp2[$cn]['FAItemplate']['obj']      = 'FAItemplate'; 
+          $tmp2[$cn]['FAItemplate']['kzl']      = 'T'; 
+        }
+        if(in_array('FAIvariable',$attr['objectClass'])){
+          $tmp2[$cn]['FAIvariable']['obj']      = 'FAIvariable'; 
+          $tmp2[$cn]['FAIvariable']['kzl']      = 'V'; 
+        }
+        if(in_array('FAIscript',$attr['objectClass'])){
+          $tmp2[$cn]['FAIscript']['obj']        = 'FAIscript'; 
+          $tmp2[$cn]['FAIscript']['kzl']        = 'S'; 
+        }
+        if(in_array('FAIhook',$attr['objectClass'])){
+          $tmp2[$cn]['FAIhook']['obj']          = 'FAIhook'; 
+          $tmp2[$cn]['FAIhook']['kzl']          = 'H'; 
+        }
+        if(in_array('FAIpartitionTable',$attr['objectClass'])){
+          $tmp2[$cn]['FAIpartitionTable']['obj']= 'FAIpartitionTable'; 
+          $tmp2[$cn]['FAIpartitionTable']['kzl']= 'Pt'; 
+        }
+      }
+    }
+
+    $this->FAIclassInfo = $tmp2;
+
+    if(isset($this->attrs['FAIclass'])){
+      $tmp = array();
+      $tmp2 = $this->attrs['FAIclass'];
+      unset($tmp2['count']);
+      foreach($tmp2 as $class){
+        $tmp[$class] = $class;
+      }
+      $this->FAIclass = $tmp;
+    }
+
+    if(!is_array($this->FAIclass)){
+      $this->FAIclass = array();
+    }
+
+
     $this->orig_dn= $this->dn;
+  }
+
+  function selectFriendlyClasses(){
+    $tmp=array();
+    foreach($this->FAIclasses as $class){
+      $str    = "";
+      if(isset($this->FAIclassInfo[$class])){
+        foreach($this->FAIclassInfo[$class] as $objs){
+          $str .= $objs['kzl']." "; 
+        }
+      }
+    $tmp[$class] = $class."&nbsp; [".$str."]";
+    }
+  return($tmp);
   }
 
   function execute()
@@ -92,6 +168,7 @@ class workstartup extends plugin
     if (isset($_POST['modify_state'])){
       $this->is_account= !$this->is_account;
     }
+
 
     /* Do we represent a valid terminal? */
     if (!$this->is_account && $this->parent == NULL){
@@ -113,6 +190,28 @@ class workstartup extends plugin
         $this->del_list ($this->gotoModules, $_POST['modules_list']);
       }
     }
+
+    /* FAI class management */
+    
+    if((isset($_POST['AddClass']))&&(isset($_POST['FAIclassesSel']))){
+      $this->FAIclass[$_POST['FAIclassesSel']]=$_POST['FAIclassesSel'];
+    }
+
+
+    if((isset($_POST['DelClass']))&&(isset($_POST['FAIclassSel']))){
+      if(isset($this->FAIclass[$_POST['FAIclassSel']])){
+        unset($this->FAIclass[$_POST['FAIclassSel']]);
+      }
+    }
+
+
+
+
+
+
+
+
+
 
     /* Show main page */
     $smarty= get_smarty();
@@ -159,10 +258,15 @@ class workstartup extends plugin
     }
 
     /* Values */
-    foreach(array("gotoBootKernel", "customParameters", "gotoShare") as $val){
+    foreach(array("gotoBootKernel", "customParameters", "gotoShare","FAIclasses","FAIclass") as $val){
       $smarty->assign($val, $this->$val);
       $smarty->assign($val."ACL", chkacl($this->acl, $val));
     }
+   
+    
+    $smarty->assign("FAIclasses",$this->selectFriendlyClasses());
+    $smarty->assign("FAIclassesKeys",array_flip($this->selectFriendlyClasses()));
+    $smarty->assign("FAIclassKeys",$this->FAIclass);
 
     /* Radio button group */
     if (preg_match("/G/", $this->bootmode)) {
@@ -182,7 +286,7 @@ class workstartup extends plugin
     }
 
     /* ACL's */
-    foreach (array("gotoKernelParameters", "gotoModules", "gotoFilesystem") as $value){
+    foreach (array("gotoKernelParameters", "gotoModules", "gotoFilesystem","FAIclass") as $value){
       $smarty->assign($value."ACL", chkacl($this->acl, "$value"));
     }
 
@@ -268,6 +372,12 @@ class workstartup extends plugin
       $this->gotoKernelParameters.= " o ".$this->customParameters;
     }
 
+    $tmp = array();
+    foreach($this->FAIclass as $class){
+      $tmp[] = $class;
+    }
+    $this->FAIclass = $tmp;
+
     plugin::save();
 
     /* Add missing arrays */
@@ -278,13 +388,19 @@ class workstartup extends plugin
       }
       if(!isset($this->attrs["$val"])) $this->attrs["$val"]=array();
     }
-
     /* Strip out 'default' values */
     if ($this->attrs['gotoLdapServer'] == "default"){
       unset ($this->attrs['gotoLdapServer']);
     }
 
+    $tmp = array();
+    foreach($this->FAIclass as $class){
+      $tmp[] = $class;
+    }
+    $this->FAIclass = $tmp;
     /* Write back to ldap */
+    
+
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
     $ldap->modify($this->attrs);
