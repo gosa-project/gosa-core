@@ -136,7 +136,6 @@ class workgeneric extends plugin
 
     /* Variables */
     foreach(array("base", "gotoMode", "gotoSyslogServer", "gotoNtpServer") as $val){
-
       $smarty->assign($val."_select", $this->$val);
       $smarty->assign($val."ACL", chkacl($this->acl, $val));
     }
