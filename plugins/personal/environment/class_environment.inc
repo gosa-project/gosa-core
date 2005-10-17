@@ -59,8 +59,8 @@ class environment extends plugin
 
   /* general settings */
   // Sets the attributes which will kept on page reload, which will be saved, ...
-  var $attributes         = array("uid","useProfile","gotoProfileServer","gotoProfileServers","gotoProfileFlags","gotoProfileFlag_C",
-                                    "gotoXResolution","gotoProfileFlag_L","gotoProfileQuota",
+  var $attributes         = array("uid","gotoProfileServer","gotoProfileFlags",
+                                    "gotoXResolution","gotoProfileQuota",
                                     "gotoLogonScripts","gotoLogonScript",
                                     "gotoPrinters",
                                     "gotoShares","gotoShare","gotoShareSelections",
@@ -312,6 +312,18 @@ class environment extends plugin
      * Get cache checkbox
      * Assign this all to Smarty 
      */
+
+    if(empty($this->gotoProfileFlag_L)){
+      $smarty->assign("gotoProfileFlag_LCHK"," ");
+    }else{
+      $smarty->assign("gotoProfileFlag_LCHK"," checked ");
+    }
+
+    if(empty($this->gotoProfileFlag_C)){
+      $smarty->assign("gotoProfileFlag_CCHK"," ");
+    }else{
+      $smarty->assign("gotoProfileFlag_CCHK"," checked ");
+    }
 
     if(empty($this->useProfile)){
       $smarty->assign("gotoProfileACL","disabled"); 
@@ -597,7 +609,7 @@ class environment extends plugin
     plugin::remove_from_parent();
 
     /* Don't save our template variables */
-    $skip = array("useProfile","uid","gotoProfileServers","gotoProfileFlag_C","gotoProfileFlag_L",
+    $skip = array("uid",
                   "gotoLogonScripts","gotoPrinters","gotoShares","gotoKioskProfiles","gotoHotplugDevices",
                   "gotoPrinter");
     /* Skip all these attributes */
@@ -623,8 +635,26 @@ class environment extends plugin
     /* Get all Posted vars 
      * Setup checkboxes 
      */
+   
     
+ 
     if(isset($_POST['iamposted'])){
+      if(isset($_POST['useProfile'])){
+        $this->useProfile = $_POST['useProfile'];
+      }else{
+        $this->useProfile = true;
+      }
+      if(isset($_POST['gotoProfileFlag_C'])){
+        $this->gotoProfileFlag_C = $_POST['gotoProfileFlag_C'];
+      }else{
+        $this->gotoProfileFlag_C = false;
+      }
+      if(isset($_POST['gotoProfileFlag_L'])){
+        $this->gotoProfileFlag_L = $_POST['gotoProfileFlag_L'];
+      }else{
+        $this->gotoProfileFlag_L = false;
+      }
+
       plugin::save_object();
       foreach($this->attributes as $s_attr){
         if(in_array($s_attr,array("gotoShares","gotoHotplugDevices","gotoPrinters","gotoLogonScripts","uid"))) continue;

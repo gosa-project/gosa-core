@@ -38,7 +38,7 @@
 							<tr>
 								<td colspan=2>	
 									<input type="checkbox" name="gotoProfileFlag_C" value="C" 
-										id="gotoProfileFlag_C" {$gotoProfileFlag_CACL} {$gotoProfileFlag_CCHK}>&nbsp;
+										id="gotoProfileFlag_C" {$gotoProfileACL} {$gotoProfileFlag_CCHK}>&nbsp;
 									<LABEL for="gotoProfileFlag_C">{t}Cache profile localy{/t}</LABEL>
 								</td>
 							</tr>
@@ -75,7 +75,7 @@
 				</tr>
 				<tr>
 					<td colspan=2>
-						<input type="checkbox" name="gotoProfileFlag_L" id="gotoProfileFlag_L" value="L" {$gotoProfileFlagsACL} {$gotoProfileFlag_LCHK}>
+						<input type="checkbox" name="gotoProfileFlag_L" id="gotoProfileFlag_L" value="L" {$gotoProfileACL} {$gotoProfileFlag_LCHK}>
 						<LABEL for="gotoProfileFlag_L">{t}Resolution changeable on runtime{/t}</LABEL>
 					</td>
 				</tr>
