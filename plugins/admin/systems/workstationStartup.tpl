@@ -31,8 +31,8 @@
      &nbsp;
   </td>
   
-  <td style="vertical-align:top;"><h2><img alt="" align="middle" src="images/penguin.png">&nbsp;{t}Assigned FAI classes{/t}</h2>
-		<select name="FAIclassSel" {$FAIclassACL} multiple style="width:280px;height:100px;">
+  <td style="vertical-align:top;"><h2><img alt="" align="middle" src="images/fai_profile.png">&nbsp;{t}Assigned FAI classes{/t}</h2>
+		<select name="FAIclassSel" {$FAIclassACL} multiple style="width:100%;height:100px;">
         {html_options values=$FAIclass output=$FAIclassKeys}
         <option disabled>&nbsp;</option>
 		</select>	
