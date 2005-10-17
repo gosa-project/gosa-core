@@ -88,7 +88,8 @@ class workstartup extends plugin
 
     $tmp = array();
     $ldap = $this->config->get_ldap_link();
-    $ldap->search("(objectClass=FAIprofile)",array("*"));
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(objectClass=FAIprofile)",array("cn"));
     while($attr = $ldap->fetch()){
       $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
       $base =  "ou=fai,".preg_replace("/^.*ou=fai,/","",$attr['dn']);
