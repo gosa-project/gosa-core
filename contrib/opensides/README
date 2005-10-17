@@ -2,6 +2,8 @@ goSamba.pl - This script will help you populate your ldap tree with
 	     the correct attribute when using the smbldap-tools
 	     from idealx.
 
+goNagios.pl - This script will help you to manage the authentification
+              users inside of the cgi.cfg, contacts.cfg, contactgroups.cfg
 ldap :
  
 slapd.conf - The slapd.conf confg for openldap 2.2
