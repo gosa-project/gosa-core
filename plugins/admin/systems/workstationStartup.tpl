@@ -33,7 +33,7 @@
   
   <td style="vertical-align:top;">
     {t}Assigned FAI classes{/t}<br>
-		<select name="FAIclassSel" {$FAIclassACL} multiple style="width:200px;height:50px;">
+		<select name="FAIclassSel" {$FAIclassACL} multiple style="width:280px;height:100px;">
         {html_options values=$FAIclass output=$FAIclassKeys}
         <option disabled>&nbsp;</option>
 		</select>	

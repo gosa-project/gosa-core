@@ -192,26 +192,32 @@ class workstartup extends plugin
     }
 
     /* FAI class management */
-    
     if((isset($_POST['AddClass']))&&(isset($_POST['FAIclassesSel']))){
-      $this->FAIclass[$_POST['FAIclassesSel']]=$_POST['FAIclassesSel'];
-    }
 
+      $found = 0 ; 
+
+      foreach($this->FAIclass as $name){
+        if(isset($this->FAIclassInfo[$name])){
+          foreach($this->FAIclassInfo[$name] as $atr){
+            if($atr['obj'] == "FAIpartitionTable"){
+              $found ++ ; 
+            }
+          }
+        }
+      }
+
+      if((isset($this->FAIclassInfo[$_POST['FAIclassesSel']]['FAIpackageList']))&&($found>0)){
+        print_red(_("There is already a profile in your selection that contain partition table configuratons."));
+      }else{
+        $this->FAIclass[$_POST['FAIclassesSel']]=$_POST['FAIclassesSel'];
+      }
+    }
 
     if((isset($_POST['DelClass']))&&(isset($_POST['FAIclassSel']))){
       if(isset($this->FAIclass[$_POST['FAIclassSel']])){
         unset($this->FAIclass[$_POST['FAIclassSel']]);
       }
     }
-
-
-
-
-
-
-
-
-
 
     /* Show main page */
     $smarty= get_smarty();
@@ -397,9 +403,20 @@ class workstartup extends plugin
     foreach($this->FAIclass as $class){
       $tmp[] = $class;
     }
-    $this->FAIclass = $tmp;
+    $this->attrs['FAIclass'] = $tmp;
     /* Write back to ldap */
-    
+   
+    if(count($this->attrs['FAIclass'])==0){
+      $tmp = array();
+      foreach($this->attrs['objectClass'] as $class){
+        if($class != "FAIobject"){
+          $tmp[] = $class;
+        }
+      }
+      $this->attrs['objectClass'] = $tmp;
+      $this->attrs['FAIclass'] = array();;
+    }
+ 
 
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
