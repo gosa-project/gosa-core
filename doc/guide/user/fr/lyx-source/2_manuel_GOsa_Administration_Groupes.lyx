@@ -76,12 +76,7 @@ Administration
 \color black
 Administration du groupe
 \family default 
-\color default
- (
-\color red
-? pas au pluriel
-\color black
-) s'affiche.
+ s'affiche.
  
 \layout Standard
 

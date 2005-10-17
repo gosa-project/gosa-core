@@ -101,6 +101,7 @@ Pour enregistrer la configuration, cliquez sur le bouton Terminé,
 pour revenir à la page précédente cliquez sur le bouton Annuler.
 
 
+\newpage
 \subsection{Configurer un terminal}
 
 
@@ -112,10 +113,9 @@ pour revenir à la page précédente cliquez sur le bouton Annuler.
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline 
 Modèle de terminaux&
-\textcolor{black}{obligatoire.} \textcolor{red}{?} \textcolor{black}{Y
-a-t-il un choix à faire.}\tabularnewline
+\textcolor{red}{?} \textcolor{black}{Y a-t-il un choix à faire.}\tabularnewline
 \hline 
-Base&
+Base\textcolor{red}{{*}}&
 Sélection d'un département dans la liste déroulante. Le terminal sera
 associé à ce département.\tabularnewline
 \hline 
@@ -138,7 +138,7 @@ Seveur NTP&
 \end{tabular}
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Configuration réseau}
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
@@ -152,7 +152,7 @@ Adresse MAC&
 \end{tabular}
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Action}
 
 \textcolor{red}{?}
@@ -178,7 +178,7 @@ Variante&
 \end{tabular}
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Souris}
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
@@ -193,13 +193,13 @@ déroulante. \textcolor{red}{?}\tabularnewline
 \end{tabular}
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Matériel téléphonique}
 
 Précisez de quel type de téléphone il s'agit. (pour un terminal ?)
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Périphérique graphique}
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
@@ -216,7 +216,7 @@ Profondeur des couleurs&
 \end{tabular}
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Ecran}
 
 \begin{tabular}{|p{7cm}|p{8cm}|}
@@ -233,7 +233,7 @@ VSync&
 \end{tabular}
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Bureau distant}
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
@@ -250,7 +250,7 @@ Police du serveur&
 \end{tabular}
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Imprimante}
 
 \begin{tabular}{|p{6cm}|p{9cm}|}
@@ -264,14 +264,10 @@ Serveur de file d'attente&
 \end{tabular}
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Scanner}
 
 \begin{tabular}{|p{6cm}|p{9cm}|}
-\hline 
-Objets&
-Champs à remplir\tabularnewline
-\hline
 \hline 
 Fournir un service de scanner&
 \textcolor{red}{?}\tabularnewline
@@ -282,7 +278,7 @@ Sélectionnez le modèle du scanner dans la liste déroulante.\tabularnewline
 \end{tabular}
 
 
-\medskip{}
+\bigskip{}
 \subsubsection{Démarrage}
 
 
@@ -304,7 +300,7 @@ Options personnalisées&
 Trois points à expliquer
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Modules du kernel (format : nom paramètre)}
 
 \textcolor{red}{?}
@@ -313,7 +309,7 @@ Utiliser le bouton Ajouter après avoir rempli le champ qui le précède
 et le bouton Supprimer après avoir séléctionné dans la liste.
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Périphérique Automount (format : entrée complète de autofs)}
 
 \textcolor{red}{?}
@@ -322,7 +318,7 @@ Utiliser le bouton Ajouter après avoir rempli le champ qui le précède
 et le bouton Supprimer après avoir séléctionné dans la liste.
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Entrée fstab supplémentaire}
 
 \textcolor{red}{?}
@@ -331,13 +327,13 @@ Utiliser le bouton Ajouter après avoir rempli le champ qui le précède
 et le bouton Supprimer après avoir séléctionné dans la liste.
 
 
-\medskip{}
+\bigskip{}
 \subsubsection{Surveillance}
 
 Cet onglet donne un compte rendu de l'état du système.
 
 
-\medskip{}
+\bigskip{}
 \subsubsection{Références}
 
 \textcolor{red}{?}
@@ -354,15 +350,10 @@ Cet onglet donne un compte rendu de l'état du système.
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline 
-Objets &
-Champs à remplir\tabularnewline
-\hline
-\hline 
 Modèle de station de travail&
-\textcolor{black}{obligatoire.} \textcolor{red}{?} \textcolor{black}{Y
-a-t-il un choix à faire.}\tabularnewline
+\textcolor{red}{?} \textcolor{black}{Y a-t-il un choix à faire.}\tabularnewline
 \hline 
-Base&
+Base\textcolor{red}{{*}}&
 Sélection d'un département dans la liste déroulante. Le terminal sera
 associé à ce département.\tabularnewline
 \hline 
@@ -385,14 +376,10 @@ Seveur NTP&
 \end{tabular}
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Configuration réseau}
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline 
-Objets &
-Champs à remplir\tabularnewline
-\hline
 \hline 
 Adresse IP&
 \textcolor{red}{?}\tabularnewline
@@ -403,7 +390,7 @@ Adresse MAC&
 \end{tabular}
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Action}
 
 \textcolor{red}{?}
@@ -417,10 +404,6 @@ Adresse MAC&
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline 
-Objets&
-Champs à remplir\tabularnewline
-\hline
-\hline 
 Modèle&
 Sélectionnez le modèle du clavier dans la liste déroulante.\tabularnewline
 \hline 
@@ -433,14 +416,10 @@ Variante&
 \end{tabular}
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Souris}
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline 
-Objets&
-Champs à remplir\tabularnewline
-\hline
 \hline 
 Type&
 Sélectionnez le modèle de la souris dans la liste déroulante.\tabularnewline
@@ -452,20 +431,16 @@ déroulante. \textcolor{red}{?}\tabularnewline
 \end{tabular}
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Matériel téléphonique}
 
 Précisez de quel type de téléphone il s'agit. (pour un terminal ?)
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Périphérique graphique}
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline 
-Objets&
-Champs à remplir\tabularnewline
-\hline
 \hline 
 Pilote&
 \textcolor{red}{?}\tabularnewline
@@ -479,14 +454,10 @@ Profondeur des couleurs&
 \end{tabular}
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Ecran}
 
 \begin{tabular}{|p{7cm}|p{8cm}|}
-\hline 
-Objets&
-Champs à remplir\tabularnewline
-\hline
 \hline 
 Type&
 \textcolor{red}{?}\tabularnewline
@@ -500,14 +471,10 @@ VSync&
 \end{tabular}
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Bureau distant}
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline 
-Objets&
-Champs à remplir\tabularnewline
-\hline
 \hline 
 Méthode de connexion&
 \textcolor{red}{?}\tabularnewline
@@ -521,14 +488,10 @@ Police du serveur&
 \end{tabular}
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Imprimante}
 
 \begin{tabular}{|p{6cm}|p{9cm}|}
-\hline 
-Objets&
-Champs à remplir\tabularnewline
-\hline
 \hline 
 Fournir un service d'impression&
 \textcolor{red}{?}\tabularnewline
@@ -539,14 +502,10 @@ Serveur de file d'attente&
 \end{tabular}
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Scanner}
 
 \begin{tabular}{|p{6cm}|p{9cm}|}
-\hline 
-Objets&
-Champs à remplir\tabularnewline
-\hline
 \hline 
 Fournir un service de scanner&
 \textcolor{red}{?}\tabularnewline
@@ -557,17 +516,13 @@ Sélectionnez le modèle du scanner dans la liste déroulante.\tabularnewline
 \end{tabular}
 
 
-\medskip{}
+\bigskip{}
 \subsubsection{Démarrage}
 
 
 \subsubsection*{Paramètre de démarrage}
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline 
-Objets&
-Champs à remplir\tabularnewline
-\hline
 \hline 
 Serveur LDAP&
 ?\tabularnewline
@@ -583,7 +538,7 @@ Options personnalisées&
 Trois points à expliquer ...
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Modules du kernel (format : nom paramètre)}
 
 \textcolor{red}{?}
@@ -592,7 +547,7 @@ Utiliser le bouton Ajouter après avoir rempli le champ qui le précède
 et le bouton Supprimer après avoir séléctionné dans la liste.
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Périphérique Automount (format : entrée complète de autofs)}
 
 \textcolor{red}{?}
@@ -601,7 +556,7 @@ Utiliser le bouton Ajouter après avoir rempli le champ qui le précède
 et le bouton Supprimer après avoir séléctionné dans la liste.
 
 
-\bigskip{}
+\medskip{}
 \subsubsection*{Entrée fstab supplémentaire}
 
 \textcolor{red}{?}
@@ -610,13 +565,13 @@ Utiliser le bouton Ajouter après avoir rempli le champ qui le précède
 et le bouton Supprimer après avoir séléctionné dans la liste.
 
 
-\medskip{}
+\bigskip{}
 \subsubsection{Surveillance}
 
 Cet onglet donne un compte rendu de l'état du système.
 
 
-\medskip{}
+\bigskip{}
 \subsubsection{Références}
 
 \textcolor{red}{?}
@@ -630,16 +585,12 @@ Cet onglet donne un compte rendu de l'état du système.
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline 
-Objets&
-Champs à remplir\tabularnewline
-\hline
+Server name\textcolor{red}{{*}}&
+Insérez le nom ou le chemin du serveur \textcolor{red}{?}\tabularnewline
 \hline 
-Server name&
-obligatoire. Insérez le nom ou le chemin du serveur \textcolor{red}{?}\tabularnewline
-\hline 
-Base&
-obligatoire. Sélectionnez dans la liste déroulante le département
-auquel le serveur sera associé.\tabularnewline
+Base\textcolor{red}{{*}}&
+Sélectionnez dans la liste déroulante le département auquel le serveur
+sera associé.\tabularnewline
 \hline 
 Description&
 Insérez une description sur le serveur.\tabularnewline
@@ -647,13 +598,10 @@ Insérez une description sur le serveur.\tabularnewline
 \end{tabular}
 
 
+\medskip{}
 \subsubsection*{Configuration réseau}
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
-\hline 
-Objets&
-Champs à remplir\tabularnewline
-\hline
 \hline 
 Adresse IP&
 \tabularnewline
@@ -664,16 +612,19 @@ Adresse MAC&
 \end{tabular}
 
 
+\medskip{}
 \subsubsection*{Action}
 
 \textcolor{red}{?}
 
 
+\bigskip{}
 \subsubsection{Databases}
 
 Ce point regroupe toutes les bases de données qui peuvent être associés
 au serveur. L'administrateur peut cocher une ou plusieurs propositions
-de bases de données selon la configuration du système.
+de bases de données selon la configuration du système et les droits
+d'accès des utilisateurs.
 
 L'administrateur à le choix entre :
 
@@ -694,6 +645,7 @@ Mot de passe&
 \hline
 \end{tabular}
 
+\medskip{}
 \item FAX database
 
 
@@ -707,6 +659,7 @@ Mot de passe&
 \hline
 \end{tabular}
 
+\medskip{}
 \item Asterisk Management
 
 
@@ -726,6 +679,7 @@ Local dial prefix&
 \hline
 \end{tabular}
 
+\medskip{}
 \item IMAP admin access
 
 
@@ -748,6 +702,7 @@ Sieve port&
 \hline
 \end{tabular}
 
+\medskip{}
 \item Logging database
 
 
@@ -759,6 +714,241 @@ Logging DB user&
 Mot de passe&
 \tabularnewline
 \hline
-\end{tabular}\end{itemize}
+\end{tabular}
 
+\end{itemize}
+
+\bigskip{}
+\subsubsection{Services}
+
+\begin{itemize}
+\item Nfs Export
+\end{itemize}
+\textcolor{red}{?}
+
+\begin{itemize}
+\medskip{}
+\item Time Service
+\end{itemize}
+\textcolor{red}{?}
+
+\begin{itemize}
+\medskip{}
+\item LDAP Service
+\end{itemize}
+\textcolor{red}{?}
+
+\begin{itemize}
+\medskip{}
+\item Terminal Service
+\end{itemize}
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline 
+Temporary disable login&
+\textcolor{red}{?}\tabularnewline
+\hline 
+Font path&
+\textcolor{red}{?}\tabularnewline
+\hline
+\end{tabular}
+
+\begin{itemize}
+\medskip{}
+\item Syslog Service
+\end{itemize}
+\textcolor{red}{?}
+
+\begin{itemize}
+\medskip{}
+\item Print Service
+\end{itemize}
+\textcolor{red}{?}
+
+
+\bigskip{}
+\subsubsection{Surveillance}
+
+Cet onglet donne un compte rendu de l'état du système.
+
+
+\bigskip{}
+\subsubsection{Références}
+
+\textcolor{red}{?}
+
+
+\newpage
+\subsection{Configurer une imprimante}
+
+
+\subsubsection{Informations générales}
+
+
+\bigskip{}
+\subsubsection{Références}
+
+
+\newpage
+\subsection{Configurer un téléphone}
+
+
+\subsubsection{Informations générales}
+
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline 
+Nom du téléphone\textcolor{red}{{*}}&
+Insérez le nom du téléphone.\tabularnewline
+\hline 
+Base\textcolor{red}{{*}}&
+Choisissez dans la liste déroulante le nom du département auquel sera
+associé le téléphone.\tabularnewline
+\hline 
+Description&
+Rédigez une description à propos du téléphone.\tabularnewline
+\hline
+\end{tabular}
+
+
+\medskip{}
+\subsubsection*{Specific Phone settings}
+
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline 
+Phone type\textcolor{red}{{*}}&
+Choisissez dans la liste déroulante le type du téléphone : SIP, IAX
+ou CAPI\tabularnewline
+\hline
+\end{tabular}
+
+\begin{itemize}
+\bigskip{}
+\item Si SIP est sélectionné vous devez remplir les champs suivants :
+
+
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline 
+Mode\textcolor{red}{{*}}&
+\tabularnewline
+\hline 
+DTMF mode&
+\tabularnewline
+\hline 
+Default IP&
+\tabularnewline
+\hline 
+Response timeout&
+\tabularnewline
+\hline
+\end{tabular}
+
+\bigskip{}
+\item Si IAX est sélectionné vous devez remplir les champs suivants :
+
+
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline 
+Modus\textcolor{red}{{*}}&
+\textcolor{red}{?}\tabularnewline
+\hline 
+Default IP&
+\textcolor{red}{?}\tabularnewline
+\hline 
+Response timeout&
+\textcolor{red}{?}\tabularnewline
+\hline 
+Authtype&
+\textcolor{red}{?}\tabularnewline
+\hline 
+Secret&
+\textcolor{red}{?}\tabularnewline
+\hline 
+Account code&
+\textcolor{red}{?}\tabularnewline
+\hline 
+Trunk lines&
+\textcolor{red}{?}\tabularnewline
+\hline 
+Hosts that are allowed to connect&
+Utilisez le bouton Ajouter pour insérer le nom d'hôte pouvant se connecter.
+Le bouton Supprimer sert à effacer le nom d'hôte sélectionné. \textcolor{red}{?}\tabularnewline
+\hline 
+Hosts that are not allowed to connect&
+Utilisez le bouton Ajouter pour insérer le nom d'hôte ne pouvant pas
+se connecter. Le bouton Supprimer sert à effacer le nom d'hôte sélectionné.
+\textcolor{red}{?}\tabularnewline
+\hline
+\end{tabular}
+
+\bigskip{}
+\item Si CAPI est sélectionné vous devez remplir le champ suivant :
+
+
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline 
+MSN&
+\textcolor{red}{?}\tabularnewline
+\hline
+\end{tabular}
+
+\end{itemize}
+
+\medskip{}
+\subsubsection*{Configuration réseau}
+
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline 
+Adresse IP\textcolor{red}{{*}}&
+\textcolor{red}{?}\tabularnewline
+\hline 
+Adresse MAC\textcolor{red}{{*}}&
+\textcolor{red}{?}\tabularnewline
+\hline
+\end{tabular}
+
+
+\bigskip{}
+\subsubsection{Références}
+
+\textcolor{red}{?}
+
+
+\newpage
+\subsection{Configuration d'un composant}
+
+
+\subsubsection{Informations générales}
+
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline 
+Device name\textcolor{red}{{*}}&
+Insérez le nom du composant.\tabularnewline
+\hline 
+Base\textcolor{red}{{*}}&
+Choisissez dans la liste déroulante le nom du département auquel sera
+associé le composant.\tabularnewline
+\hline 
+Description&
+Rédigez une description à propos du composant.\tabularnewline
+\hline
+\end{tabular}
+
+
+\medskip{}
+\subsubsection*{Configuration réseau}
+
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline 
+Adresse IP\textcolor{red}{{*}}&
+\textcolor{red}{?}\tabularnewline
+\hline 
+Adresse MAC\textcolor{red}{{*}}&
+\textcolor{red}{?}\tabularnewline
+\hline
+\end{tabular}
+
+
+\bigskip{}
+\subsubsection{Références}
+
+\textcolor{red}{?}
 \end{document}

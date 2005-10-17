@@ -40,12 +40,12 @@ des utilisateurs}} s'affiche, elle est divisée en trois colonnes.
 Au fur et à mesure que les utilisateurs sont configurés ils apparaîtront
 dans la première colonne, classés selon leur département. 
 
-Les deux dernières colonnes comportent des icônes qui d'une part sont
-des raccourcis vers les propriétés de chaque utilisateur et d'autre
-part les actions à executer sur l'utilisateur. Les flèches en entête
-( \includegraphics{images/list_back.png}, \includegraphics{images/list_root.png},
+Les deux dernières colonnes comportent des icônes qui dans la deuxième
+colonne sont des raccourcis vers les propriétés de chaque utilisateur
+et dans la troisième les actions à executer sur l'utilisateur. Les
+flèches en entête ( \includegraphics{images/list_back.png}, \includegraphics{images/list_root.png},
 \includegraphics{images/list_home.png} ) servent à modifier l'affichage
-selon le département, elles prédominent sur toutes autres sélection
+selon le département, elles prédominent sur toutes autres sélections
 d'affichage.
 
 C'est à partir de la page \textsf{\textcolor{black}{Administration
@@ -62,21 +62,21 @@ intitulé Filtres \includegraphics{images/rocket.png}. }
 
 
 \textcolor{black}{- Cliquer sur une lettre, par exemple la lettre
-L, pour que s'affiche tous les utilisateurs dont l'id commence par
-la lettre L;}
+L, pour que s'affichent tous les utilisateurs dont le nom commence
+par la lettre L;}
 
-\textcolor{black}{- Cliquez sur l'astérisque et tous les utilisateurs
+\textcolor{black}{- Cliquez sur l'astérisque et tous les noms d'utilisateurs
 apparaîtront.}
 
 \item Plus bas d'autres possibilités d'affichage sont possibles :
 
 
-- Cochez une ou plusieurs propositions;
+- Cochez une ou plusieurs propositions pour un affichage;
 
-- Insérez une lettre ou un numéro suivis d'astérisque dans le champ
-précédé d'une loupe \includegraphics{images/search.png}, il symbolise
-la recherche d'un item. Cliquez sur le bouton Appliquer pour faire
-apparaître les utilisateurs recherchés.
+- Insérez une lettre, un numéro suivi de l'astérisque ou un nom d'utilisateur
+dans le champ précédé d'une loupe \includegraphics{images/search.png},
+il symbolise la recherche d'un item. Cliquez sur le bouton Appliquer
+pour faire apparaître le(s) utilisateur(s) recherché(s).
 
 \end{itemize}
 Pour créer un compte cliquez sur \includegraphics{images/list_new_user.png}.
@@ -94,30 +94,28 @@ cliquez sur le bouton Annuler. \\
 Tous les champs précédés d'une astérisque doivent être remplis obligatoirement.
 
 Dans le haut à droite vous avez à la fois l'id de l'utilisateur sur
-lequel vous travaillez mais aussi sa place dans l'arbre LDAP. 
+lequel vous travaillez mais aussi sa place dans l'arbre LDAP. \textcolor{red}{?}
 
 L'image \includegraphics{images/closedlock.png} signale que vous
 êtes en mode sécurisé.
 
-Le premier onglet est l'onglet \textcolor{black}{}\textbf{\textcolor{black}{informations
-générales}}.
 
-
+\newpage
 \subsection{Informations générales}
 
 
 \subsubsection{Informations personnelles}
 
-\begin{tabular}{|l|l|}
+\begin{tabular}{|p{5cm}|p{10cm}|}
 \hline 
-Nom&
-obligatoire\tabularnewline
+Nom\textcolor{red}{{*}}&
+Insérez le nom de l'utilisateur\tabularnewline
 \hline 
-Prénom&
-obligatoire\tabularnewline
+Prénom\textcolor{red}{{*}}&
+Insérez le prénom de l'utilisateur\tabularnewline
 \hline 
-Identifiant&
-obligatoire\tabularnewline
+Identifiant\textcolor{red}{{*}}&
+\textcolor{red}{?}\tabularnewline
 \hline 
 Titre personnel&
 Fonction dans la société\tabularnewline
@@ -146,7 +144,8 @@ Page d'accueil&
 Insérez l'URL complète du site Web de la société \tabularnewline
 \hline 
 Format de stockage des mots de passe&
-Choix dans le menu déroulant entre crypt, clear, sha, md5, ssha, smd5. \tabularnewline
+Choix dans le menu déroulant entre crypt, clear, sha, md5, ssha, smd5.
+\textcolor{red}{?}\tabularnewline
 \hline 
 Certificats&
 \textcolor{red}{?}\tabularnewline
@@ -162,6 +161,7 @@ Vous parcourez alors l'arborescence de votre ordinateur pour aller
 chercher l'image.
 
 
+\medskip{}
 \subsubsection{Informations sur l'entreprise}
 
 \begin{tabular}{|>{\raggedright}p{5cm}|>{\raggedright}p{10cm}|}
@@ -210,6 +210,7 @@ Insérez l'adresse de l'entreprise\tabularnewline
 \end{tabular}
 
 
+\bigskip{}
 \subsection{Unix}
 
 Pour activer le compte Unix pour un utilisateur cliquez sur le bouton
@@ -241,6 +242,7 @@ UID/GID&
 \end{tabular}
 
 
+\medskip{}
 \subsubsection{Appartient aux groupes}
 
 L'utilisateur peut appartenir à un ou plusieurs Groupes. Appartenir
@@ -250,6 +252,7 @@ boutons Ajouter et Supprimer pour insérer les groupes dans le champ.
 Le bouton Ajouter renvoie à la liste des utilisateurs.
 
 
+\medskip{}
 \subsubsection{Compte}
 
 Il s'agit de la gestion du mot de passe de l'utilisateur. Différentes
@@ -258,6 +261,7 @@ doit veiller à rester cohérent pour éviter les conflits dans l'application
 de ses choix.
 
 
+\medskip{}
 \subsubsection{Système de confiance}
 
 Le système de confiance sert à accorder ou à limiter l'accès de l'utilisateur
@@ -272,6 +276,7 @@ et Supprimer pour faire apparaître les systèmes auxquels l'utilisateur
 peut avoir accès. Le bouton Ajouter renvoie à la liste des hôtes.
 \end{itemize}
 
+\bigskip{}
 \subsection{Environnement \textcolor{red}{?}}
 
 Cliquez sur le bouton \textit{ajouter une extension environnemental}
@@ -282,21 +287,27 @@ environnementale de l'utilisateur.
 \subsubsection{Profiles}
 
 
+\medskip{}
 \subsubsection{Kiosk profile}
 
 
+\medskip{}
 \subsubsection{Logon scripts}
 
 
+\medskip{}
 \subsubsection{Attach share}
 
 
+\medskip{}
 \subsubsection{Hotplug devices}
 
 
+\medskip{}
 \subsubsection{Imprimante}
 
 
+\bigskip{}
 \subsection{Mail}
 
 Le compte email est lié au serveur de mail. Pour activer le compte
@@ -308,8 +319,8 @@ un compte email}.
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline 
-Adresse principale&
-obligatoire, insérez l'adresse email de l'utilisateur \tabularnewline
+Adresse principale\textcolor{red}{{*}}&
+Insérez l'adresse email de l'utilisateur \tabularnewline
 \hline 
 Serveur&
 séléctionnez le serveur de l'utilisateur\tabularnewline
@@ -323,6 +334,7 @@ Tailles des Quota&
 \end{tabular}
 
 
+\medskip{}
 \subsubsection{Alternative addresses}
 
 L'utilisateur peut être en possession d'alias. Ces alias sont à insérer
@@ -331,6 +343,7 @@ et Supprimer pour insérer les alias. L'alias doit être introduit dans
 le champ précédent le bouton Ajouter.
 
 
+\medskip{}
 \subsubsection{Options email}
 
 Cette option est destinée à la gestion des emails de l'utilisateur.
@@ -356,6 +369,7 @@ renvoie à la liste d'adresses déjà configurées dans GOsa. Le bouton
 Ajouter permet l'ajout d'adresses extérieures au système.}
 
 
+\medskip{}
 \subsubsection{Options email avancées}
 
 \begin{itemize}
@@ -366,6 +380,7 @@ règles de gestion du mail qui remplace alors les options email décrites
 ci-dessus.
 \end{itemize}
 
+\bigskip{}
 \subsection{Samba}
 
 Pour créer un compte samba pour un utilisateur cliquez sur le bouton
@@ -393,6 +408,7 @@ Indiquez le chemin pour accéder au profile de l'utilisateur\tabularnewline
 \end{tabular}
 
 
+\medskip{}
 \subsubsection{Serveur de terminal}
 
 \begin{itemize}
@@ -428,6 +444,7 @@ Périphériques clients :
 Divers :
 
 
+\medskip{}
 \subsubsection{Options d'accès}
 
 \begin{itemize}
@@ -441,6 +458,7 @@ doit utiliser les boutons Ajouter et Supprimer pour y faire apparaître
 les noms de stations. Le bouton Ajouter renvoie à la liste des stations.
 \end{itemize}
 
+\bigskip{}
 \subsection{Connectivité}
 
 L'administrateur peut afiner la gestion du compte de l'utilisateur
@@ -454,6 +472,7 @@ sur le contenu, limité l'accès à certaines heures et restreindre le
 téléchargement.
 
 
+\smallskip{}
 \subparagraph{Compte FTP}
 
 Si vous activez le compte FTP, vous pouvez régler la bande passante
@@ -462,22 +481,26 @@ dépasser pour le transfert de fichiers . Vous pouvez aussi à partir
 de cet endroit désactiver le compte FTP.
 
 
+\smallskip{}
 \subparagraph{Compte WebDAV}
 
 Si vous activez le compte WebDav, l'utilisateur aura accès au serveur
 WebDAV 
 
 
+\smallskip{}
 \subparagraph{Compte PHPGroupware}
 
 \textcolor{red}{?}
 
 
+\smallskip{}
 \subparagraph{Intranet account }
 
 \textcolor{red}{?}
 
 
+\bigskip{}
 \subsection{Fax}
 
 Pour créer un compte Fax pour un utilisateur cliquez sur le bouton
@@ -488,8 +511,8 @@ Pour créer un compte Fax pour un utilisateur cliquez sur le bouton
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
 \hline 
-Fax&
-Obligatoire. Insérez le numéro de fax de l'utilisateur\tabularnewline
+Fax\textcolor{red}{{*}}&
+Insérez le numéro de fax de l'utilisateur\tabularnewline
 \hline 
 Langue&
 Cliquez pour voir apparaître la liste déroulante pour le choix de
@@ -502,6 +525,7 @@ du format de stockage des fax à envoyer ou à réceptionner \tabularnewline
 \end{tabular}
 
 
+\medskip{}
 \subsubsection{Méthodes de distribution}
 
 \begin{itemize}
@@ -510,6 +534,7 @@ du format de stockage des fax à envoyer ou à réceptionner \tabularnewline
 \item Les fax peuvent être envoyés directement au télécopieur et imprimés.
 \end{itemize}
 
+\medskip{}
 \subsubsection{Numéros de fax alternatif}
 
 L'administrateur peut compléter la configuration du fax par une série
@@ -519,6 +544,7 @@ en local renvoie à la liste des numéros de fax. Le bouton Ajouter
 permet d'insérez des numéros de fax autres que ceux de la liste.
 
 
+\medskip{}
 \subsubsection{Listes rouges}
 
 Le fax est aujourd'hui fréquemment utilisé pour distribuer des messages
@@ -534,6 +560,7 @@ gauche. La liste des numéros indésirables peuvent varier selon les
 utilisateurs. Pour terminer, cliquez sur le bouton Appliquer.
 
 
+\bigskip{}
 \subsection{Téléphone}
 
 Pour activer le compte téléphone pour un utilisateur cliquez sur le
@@ -547,6 +574,7 @@ Ajouter et Supprimer. Le bouton Ajouter fonctionne que si le champ
 précédent est rempli par un numéro.
 
 
+\medskip{}
 \subsubsection{Matériel téléphonique}
 
 \begin{tabular}{|p{5cm}|p{10cm}|}
@@ -554,20 +582,22 @@ précédent est rempli par un numéro.
 Téléphone&
 Spécifier le type de téléphone dans la liste déroulante\tabularnewline
 \hline 
-VoicemailPIN&
-obligatoire \textcolor{red}{?}\tabularnewline
+VoicemailPIN\textcolor{red}{{*}}&
+\textcolor{red}{?}\tabularnewline
 \hline 
-Phone PIN&
-obligatoire \textcolor{red}{?}\tabularnewline
+Phone PIN\textcolor{red}{{*}}&
+\textcolor{red}{?}\tabularnewline
 \hline
 \end{tabular}
 
 
+\medskip{}
 \subsubsection{Phone macro}
 
 \textcolor{red}{?}
 
 
+\bigskip{}
 \subsection{Références}
 
 Les références présentent les groupes auxquels appartient l'utilisateur.

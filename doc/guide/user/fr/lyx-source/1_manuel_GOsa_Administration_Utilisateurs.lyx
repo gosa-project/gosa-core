@@ -85,9 +85,9 @@ Administration
  
 \layout Standard
 
-Les deux dernières colonnes comportent des icônes qui d'une part sont des
- raccourcis vers les propriétés de chaque utilisateur et d'autre part les
- actions à executer sur l'utilisateur.
+Les deux dernières colonnes comportent des icônes qui dans la deuxième colonne
+ sont des raccourcis vers les propriétés de chaque utilisateur et dans la
+ troisième les actions à executer sur l'utilisateur.
  Les flèches en entête ( 
 \begin_inset Graphics
 	filename images/list_back.png
@@ -107,7 +107,7 @@ Les deux dernières colonnes comportent des icônes qui d'une part sont des
 \end_inset 
 
  ) servent à modifier l'affichage selon le département, elles prédominent
- sur toutes autres sélection d'affichage.
+ sur toutes autres sélections d'affichage.
 \layout Standard
 
 C'est à partir de la page 
@@ -141,13 +141,13 @@ Ce tableau sert à modifier l'affichage des utilisateurs :
 
 
 \color black
-- Cliquer sur une lettre, par exemple la lettre L, pour que s'affiche tous
- les utilisateurs dont l'id commence par la lettre L;
+- Cliquer sur une lettre, par exemple la lettre L, pour que s'affichent
+ tous les utilisateurs dont le nom commence par la lettre L;
 \layout Standard
 
 
 \color black
-- Cliquez sur l'astérisque et tous les utilisateurs apparaîtront.
+- Cliquez sur l'astérisque et tous les noms d'utilisateurs apparaîtront.
 \end_deeper 
 \layout Itemize
 
@@ -155,19 +155,19 @@ Plus bas d'autres possibilités d'affichage sont possibles :
 \begin_deeper 
 \layout Standard
 
-- Cochez une ou plusieurs propositions;
+- Cochez une ou plusieurs propositions pour un affichage;
 \layout Standard
 
-- Insérez une lettre ou un numéro suivis d'astérisque dans le champ précédé
- d'une loupe 
+- Insérez une lettre, un numéro suivi de l'astérisque ou un nom d'utilisateur
+ dans le champ précédé d'une loupe 
 \begin_inset Graphics
 	filename images/search.png
 
 \end_inset 
 
 , il symbolise la recherche d'un item.
- Cliquez sur le bouton Appliquer pour faire apparaître les utilisateurs
- recherchés.
+ Cliquez sur le bouton Appliquer pour faire apparaître le(s) utilisateur(s)
+ recherché(s).
 \end_deeper 
 \layout Standard
 
@@ -201,6 +201,8 @@ Tous les champs précédés d'une astérisque doivent être remplis obligatoirement.
 Dans le haut à droite vous avez à la fois l'id de l'utilisateur sur lequel
  vous travaillez mais aussi sa place dans l'arbre LDAP.
  
+\color red
+?
 \layout Standard
 
 L'image 
@@ -210,16 +212,6 @@ L'image
 \end_inset 
 
  signale que vous êtes en mode sécurisé.
-\layout Standard
-
-Le premier onglet est l'onglet
-\color black
- 
-\series bold 
-informations générales
-\series default 
-\color default
-.
 \layout Subsection
 \pagebreak_top 
 Informations générales
@@ -232,8 +224,8 @@ Informations personnelles
 \begin_inset  Tabular
 <lyxtabular version="3" rows="14" columns="2">
 <features>
-<column alignment="left" valignment="top" leftline="true" width="0">
-<column alignment="left" valignment="top" leftline="true" rightline="true" width="0">
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -250,7 +242,7 @@ Nom
 
 \layout Standard
 
-Insérez le nom de l'utilisateur.
+Insérez le nom de l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -270,7 +262,7 @@ Prénom
 
 \layout Standard
 
-Insérez le prénom de l'utilisateur.
+Insérez le prénom de l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -471,6 +463,8 @@ Format de stockage des mots de passe
 
 Choix dans le menu déroulant entre crypt, clear, sha, md5, ssha, smd5.
  
+\color red
+?
 \end_inset 
 </cell>
 </row>
