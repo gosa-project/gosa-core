@@ -83,7 +83,7 @@ class faiVariableEntry extends plugin
       $message[] = _("Please enter a name.");
     }
 
-    if(preg_match("/[^0-9a-z]/i",$this->Object_cn)){
+    if(preg_match("/[^0-9a-z_]/i",$this->Object_cn)){
       $message[] = _("Please enter a valid name. Only a-Z 0-9 are allowed.");
     }
  
