@@ -63,13 +63,26 @@ class printgeneric extends plugin
      * else it is a standalone printer
      */
     if((isset($this->attrs['objectClass']))&&(in_array("gotoWorkstation",$this->attrs['objectClass']))){
-      $this->is_terminal = "true";   
-      $this->dn   = preg_replace("/ou=workstations,/","ou=printers,",$this->dn);
-      $this->type = "station";
+      /* Fix for new Workstations */
+      if(preg_match("/ou=incoming/",$this->dn)){    
+        $this->is_terminal = "true";   
+        $this->dn   = preg_replace("/ou=incoming/","ou=printers",$this->dn);
+        $this->type = "station";
+      }else{
+        $this->is_terminal = "true";   
+        $this->dn   = preg_replace("/ou=workstations/","ou=printers",$this->dn);
+        $this->type = "station";
+      }
     }elseif((isset($this->attrs['objectClass']))&&(in_array("gotoTerminal",$this->attrs['objectClass']))){
-      $this->type = "terminal";
-      $this->is_terminal = "true";
-      $this->dn   = preg_replace("/ou=terminal/","ou=printer",$this->dn);
+      if(preg_match("/ou=incoming/",$this->dn)){    
+        $this->is_terminal = "true";   
+        $this->dn   = preg_replace("/ou=incoming/","ou=printers",$this->dn);
+        $this->type = "terminal";
+      }else{
+        $this->type = "terminal";
+        $this->is_terminal = "true";
+        $this->dn   = preg_replace("/ou=terminal/","ou=printers",$this->dn);
+      }
     }else{
       /* Save dn for later references */
       $this->orig_dn= $this->dn;
@@ -92,7 +105,6 @@ class printgeneric extends plugin
       }
     }
 
-   
     /* Prepare different member types 
      */ 
     foreach(array("AddUser"       =>"gotoUserPrinter",
