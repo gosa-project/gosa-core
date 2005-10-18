@@ -17,13 +17,14 @@ class workstartup extends plugin
   var $gotoFilesystem= array();
   var $gotoTerminalPath= "";
   var $FAIstatus= "";
-  var $FAIclass     = array();
-  var $FAIclasses   = array();
-  var $FAIclassInfo = array();
+  var $FAIclass         = array();
+  var $FAIclasses       = array();
+  var $FAIclassInfo     = array();
+  var $FAIdebianMirror  = array();
 
 
   /* attribute list for save action */
-  var $attributes= array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters", "FAIclass", "FAIstatus", "gotoShare");
+  var $attributes= array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters", "FAIclass", "FAIstatus", "gotoShare","FAIdebianMirror");
   var $objectclasses= array("GOhard", "FAIobject");
 
   /* Share */
@@ -36,11 +37,27 @@ class workstartup extends plugin
   var $customParameters= "";
   var $orig_dn= "";
   var $ignore_account= TRUE;
+  var $FAIdebianMirrors = array();
 
   function workstartup ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
-
+    
+    // Create Mirror 
+    $this->FAIdebianMirrors=array();
+    $path = "/etc/gosa/fai/";
+    $suffix = "http://";
+    if(is_readable($path)){
+      $od= opendir($path);
+      if($od){
+        while($dir = readdir($od)){
+          if((is_dir($path.$dir))&&($dir[0]!=".")){
+            $this->FAIdebianMirrors[$suffix.$dir]=$suffix.$dir;
+          }
+        }
+      }
+    }
+    
     /* Get arrays */
     foreach (array("gotoModules", "gotoAutoFs", "gotoFilesystem") as $val){
       if (isset($this->attrs["$val"]["count"])){
@@ -85,19 +102,6 @@ class workstartup extends plugin
 
     $this->gotoShareSelections= $config->getShareList(true);
     $this->gotoAvailableShares= $config->getShareList(false);
-/*
-    $tmp = array();
-    $ldap = $this->config->get_ldap_link();
-    $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(objectClass=FAIclass)",array("cn"));
-    while($attr = $ldap->fetch()){
-      $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
-      $base =  "ou=fai,".preg_replace("/^.*ou=fai,/","",$attr['dn']);
-      $cn   = $attr['cn'][0];
-      $tmp[$cn] = $base;
-    }
-
-*/
     $tmp2 = array();
   
     //$ldap->cd($base);
@@ -276,11 +280,12 @@ class workstartup extends plugin
     }
 
     /* Values */
-    foreach(array("gotoBootKernel", "customParameters", "gotoShare","FAIclasses","FAIclass") as $val){
+    foreach(array("gotoBootKernel", "customParameters", "gotoShare","FAIclasses","FAIclass","FAIdebianMirror") as $val){
       $smarty->assign($val, $this->$val);
       $smarty->assign($val."ACL", chkacl($this->acl, $val));
     }
-   
+  
+    $smarty->assign("FAIdebianMirrors",$this->FAIdebianMirrors);
     
     $smarty->assign("FAIclasses",$this->selectFriendlyClasses());
     $smarty->assign("FAIclassesKeys",array_flip($this->selectFriendlyClasses()));
@@ -428,7 +433,6 @@ class workstartup extends plugin
       $this->attrs['objectClass'] = $tmp;
       $this->attrs['FAIclass'] = array();;
     }
- 
 
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
