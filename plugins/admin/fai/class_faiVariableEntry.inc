@@ -46,9 +46,9 @@ class faiVariableEntry extends plugin
      */
     foreach($this->attributes as $attrs){
       if(get_magic_quotes_gpc()){
-        $smarty->assign($attrs,stripslashes($this->$attrs));
+        $smarty->assign($attrs,htmlentities (stripslashes($this->$attrs)));
       }else{
-        $smarty->assign($attrs,($this->$attrs));
+        $smarty->assign($attrs,htmlentities (($this->$attrs)));
       }
     }
 
@@ -95,7 +95,7 @@ class faiVariableEntry extends plugin
     $tmp=array();
     foreach($this->attributes as $attrs){ 
       $attr = preg_replace("/^Object_/","",$attrs);
-      $tmp[$attr] = $this->$attrs;
+      $tmp[$attr] = stripslashes( $this->$attrs);
     }
 
     if(($this->orig_cn)&&($tmp['cn']!=$this->orig_cn)){
