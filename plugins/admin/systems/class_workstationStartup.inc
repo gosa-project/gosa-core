@@ -43,21 +43,16 @@ class workstartup extends plugin
   {
     plugin::plugin ($config, $dn);
     
-    // Create Mirror 
-    $this->FAIdebianMirrors=array();
-    $path = "/etc/gosa/fai/";
-    $suffix = "http://";
-    if(is_readable($path)){
-      $od= opendir($path);
-      if($od){
-        while($dir = readdir($od)){
-          if((is_dir($path.$dir))&&($dir[0]!=".")){
-            $this->FAIdebianMirrors[$suffix.$dir]=$suffix.$dir;
-          }
-        }
+    $this->FAIdebianMirrors= array("none"=>_("none"));
+    $ldap = $this->config->get_ldap_link();
+    $ldap->search("(objectClass=FAIrepository)",array("FAIdebianMirror"));
+    while($attr = $ldap->fetch()){
+      if(isset($attr['FAIdebianMirror'])){
+        $this->FAIdebianMirrors[$attr['FAIdebianMirror'][0]]=$attr['FAIdebianMirror'][0];
       }
-    }
-    
+    } 
+ 
+
     /* Get arrays */
     foreach (array("gotoModules", "gotoAutoFs", "gotoFilesystem") as $val){
       if (isset($this->attrs["$val"]["count"])){
@@ -110,11 +105,14 @@ class workstartup extends plugin
     $ldap->search("(|(objectClass=FAIpackageList)(objectClass=FAItemplate)
                       (objectClass=FAIvariable)(objectClass=FAIscript')(objectClass=FAIhook)
                       (objectClass=FAIpartitionTable))",array("objectClass","cn"),true);
+    $test_dns = array();
     while($attr = $ldap->fetch()){
       $cn = $attr['cn'][0];
       if(in_array('FAIpackageList',$attr['objectClass'])){
         $tmp2[$cn]['FAIpackageList']['obj']   = 'FAIpackageList'; 
-        $tmp2[$cn]['FAIpackageList']['kzl']   = 'P'; 
+        $tmp2[$cn]['FAIpackageList']['kzl']   = 'P';
+        $tmp2[$cn]['FAIpackageList']['dn']    = $attr['dn'];
+        $test_dns[$cn]=$attr['dn'];
         $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
       }
       if(in_array('FAItemplate',$attr['objectClass'])){
@@ -144,6 +142,13 @@ class workstartup extends plugin
       }
     }
 
+    foreach($test_dns as $cn => $dn){
+      $entry = $ldap->cat($dn);
+      $attr = $ldap->fetch();
+      $mirror = $attr['FAIdebianMirror'][0];
+      $tmp2[$cn]['FAIpackageList']['mirror']= $mirror;
+    }
+  
     $this->FAIclassInfo = $tmp2;
 
     if(isset($this->attrs['FAIclass'])){
@@ -168,14 +173,25 @@ class workstartup extends plugin
     $tmp=array();
     foreach($this->FAIclasses as $class){
       $str    = "";
+      $skip = false;
       if(isset($this->FAIclassInfo[$class])){
         foreach($this->FAIclassInfo[$class] as $objs){
           $str .= $objs['kzl']." "; 
         }
       }
-    $tmp[$class] = $class."&nbsp; [".$str."]";
+      $tmp[$class] = $class."&nbsp; [".$str."]";
     }
-  return($tmp);
+    return($tmp);
+  }
+
+  function check()
+  {
+    $messages = array();
+   
+    if(($this->FAIdebianMirror == "none")&&(count($this->FAIclass)>0)){
+      $messages[]=_("Please select a 'FAI server' or remove the 'FAI classes'.");
+    }
+    return($messages);
   }
 
   function execute()
@@ -285,8 +301,8 @@ class workstartup extends plugin
       $smarty->assign($val."ACL", chkacl($this->acl, $val));
     }
   
+
     $smarty->assign("FAIdebianMirrors",$this->FAIdebianMirrors);
-    
     $smarty->assign("FAIclasses",$this->selectFriendlyClasses());
     $smarty->assign("FAIclassesKeys",array_flip($this->selectFriendlyClasses()));
     $smarty->assign("FAIclassKeys",$this->FAIclass);
@@ -422,6 +438,10 @@ class workstartup extends plugin
     }
     $this->attrs['FAIclass'] = $tmp;
     /* Write back to ldap */
+
+    if($this->FAIdebianMirror == "none"){
+      $this->FAIdebianMirror = "";
+    }
    
     if((count($this->attrs['FAIclass'])==0)&&(empty($this->FAIdebianMirror))){
       $tmp = array();
@@ -432,6 +452,7 @@ class workstartup extends plugin
       }
       $this->attrs['objectClass'] = $tmp;
       $this->attrs['FAIclass'] = array();;
+      $this->attrs['FAIdebianMirror'] = array();;
     }
 
     $ldap= $this->config->get_ldap_link();
