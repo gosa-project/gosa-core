@@ -38,8 +38,8 @@ class environment extends plugin
   var $gotoLogonScript    = "";     // The selected Logon Script
 
   /* Printer */
-  var $gotoPrinters       = array();// All available Printer
-  var $gotoPrinter        = "";     //  The selected Printer
+  var $gotoPrinter       = array();// All available Printer
+  var $gotoPrinterSel     = "";     //  The selected Printer
 
   /* Share */
   var $gotoShares         = array();// Current Share Options
@@ -62,7 +62,7 @@ class environment extends plugin
   var $attributes         = array("uid","gotoProfileServer","gotoProfileFlags",
                                     "gotoXResolution","gotoProfileQuota",
                                     "gotoLogonScripts","gotoLogonScript",
-                                    "gotoPrinters",
+                                    "gotoPrinter",
                                     "gotoShares","gotoShare",
                                     "gotoKioskProfile","gotoKioskProfiles",
                                     "gotoHotplugDevices");
@@ -88,13 +88,13 @@ class environment extends plugin
     $ldap->cd($this->config->current['BASE']);
     $ldap->search("(&(objectClass=gotoPrinter)(goto".$suffix."Printer=".$this->uid."))",array("*"));
     while($printer = $ldap->fetch()){
-      $this->gotoPrinters[$printer['cn'][0]]=$printer;
-      $this->gotoPrinters[$printer['cn'][0]]['mode']="user";
+      $this->gotoPrinter[$printer['cn'][0]]=$printer;
+      $this->gotoPrinter[$printer['cn'][0]]['mode']="user";
     }
     $ldap->search("(&(objectClass=gotoPrinter)(goto".$suffix."AdminPrinter=".$this->uid."))",array("*"));
     while($printer = $ldap->fetch()){
-      $this->gotoPrinters[$printer['cn'][0]]=$printer;
-      $this->gotoPrinters[$printer['cn'][0]]['mode']="admin";
+      $this->gotoPrinter[$printer['cn'][0]]=$printer;
+      $this->gotoPrinter[$printer['cn'][0]]['mode']="admin";
     }
   
     /* prepare hotplugs */
@@ -291,7 +291,7 @@ class environment extends plugin
  
     }
 
-    foreach(array("gotoHotplugDevice","gotoPrinter") as $s_attr){
+    foreach(array("gotoHotplugDevice","gotoPrinterSel") as $s_attr){
       if(chkacl($this->acl,$s_attr)=="") {
         $smarty->assign($s_attr."ACL","");
       }else{
@@ -548,29 +548,29 @@ class environment extends plugin
         $this->dialog->save_object();
         $tmp = $this->dialog->save();
         $tmp2= $this->dialog->getPrinter(true);
-        $this->gotoPrinters[$tmp]=$tmp2[$tmp];
-        $this->gotoPrinters[$tmp]['mode']="user";
+        $this->gotoPrinter[$tmp]=$tmp2[$tmp];
+        $this->gotoPrinter[$tmp]['mode']="user";
         $this->is_dialog=false;
         unset($this->dialog);
         $this->dialog   =NULL;
       }
     }
   
-    if((isset($_POST['gotoPrinterDel']))&&(isset($_POST['gotoPrinter']))&&(!empty($_POST['gotoPrinter']))){
-      $printer = $_POST['gotoPrinter'];
-      unset($this->gotoPrinters[$printer]);
+    if((isset($_POST['gotoPrinterDel']))&&(isset($_POST['gotoPrinterSel']))&&(!empty($_POST['gotoPrinterSel']))){
+      $printer = $_POST['gotoPrinterSel'];
+      unset($this->gotoPrinter[$printer]);
     }
 
-    if((isset($_POST['gotoPrinterEdit']))&&(isset($_POST['gotoPrinter']))&&(!empty($_POST['gotoPrinter']))){
-      $printer = $_POST['gotoPrinter'];
-      if($this->gotoPrinters[$printer]['mode']=="user"){
-        $this->gotoPrinters[$printer]['mode']="admin";
+    if((isset($_POST['gotoPrinterEdit']))&&(isset($_POST['gotoPrinterSel']))&&(!empty($_POST['gotoPrinterSel']))){
+      $printer = $_POST['gotoPrinterSel'];
+      if($this->gotoPrinter[$printer]['mode']=="user"){
+        $this->gotoPrinter[$printer]['mode']="admin";
       }else{
-        $this->gotoPrinters[$printer]['mode']="user";
+        $this->gotoPrinter[$printer]['mode']="user";
       }
     }
 
-    $smarty->assign("gotoPrinters",$this->printOutPrinterDevices());
+    $smarty->assign("gotoPrinter",$this->printOutPrinterDevices());
     $smarty->assign("gotoPrinterKeys",array_flip($this->printOutPrinterDevices()));
  
     /* General behavior */
@@ -611,8 +611,7 @@ class environment extends plugin
 
     /* Don't save our template variables */
     $skip = array("uid",
-                  "gotoLogonScripts","gotoPrinters","gotoShares","gotoKioskProfiles","gotoHotplugDevices",
-                  "gotoPrinter");
+                  "gotoLogonScripts","gotoPrinter","gotoShares","gotoKioskProfiles","gotoHotplugDevices" );
     /* Skip all these attributes */
     foreach($skip as $del){
       unset($this->attrs[$del]);
@@ -658,7 +657,7 @@ class environment extends plugin
 
       plugin::save_object();
       foreach($this->attributes as $s_attr){
-        if(in_array($s_attr,array("gotoShares","gotoHotplugDevices","gotoPrinters","gotoLogonScripts","uid"))) continue;
+        if(in_array($s_attr,array("gotoShares","gotoHotplugDevices","gotoPrinter","gotoLogonScripts","uid"))) continue;
         if(isset($_POST[$s_attr])){
           $this->$s_attr = $_POST[$s_attr];
         }else{
@@ -726,7 +725,7 @@ class environment extends plugin
     /* Save usersettings to Printer */
 
     if(chkacl($this->acl,"gotoPrinter")!=""){
-      $this->gotoPrinters = array();
+      $this->gotoPrinter = array();
     }  
     
     if($this->is_group){
@@ -739,7 +738,7 @@ class environment extends plugin
 
     /* Deleted printer settings wasn't deleted from ldap ... 
      */
-    //if(count($this->gotoPrinters)==0){
+    //if(count($this->gotoPrinter)==0){
     if(1==1){
       $ldap->search("(&(objectClass=gotoPrinter)(|(goto".$s_suffix."Printer=".$this->uid.")(goto".$s_suffix."AdminPrinter=".$this->uid.")))",array("*"));
       while($attr = $ldap->fetch()){
@@ -800,7 +799,7 @@ class environment extends plugin
       }
     }    
 
-    foreach($this->gotoPrinters as $printer) {
+    foreach($this->gotoPrinter as $printer) {
       $ldap->cd($printer['dn']);
       $ldap->cat($printer['dn']);
       $attrs= $ldap->fetch();
@@ -834,7 +833,7 @@ class environment extends plugin
         $printer[$attribute2]=array();
       }else{
         if(in_array($this->uid,$printer[$attribute2])){ 
-          $tmp = array_flip($attrs[$attribute2]);
+          $tmp = array_flip($printer[$attribute2]);
           unset($tmp[$this->uid]);
           $attrs[$attribute2]=array_flip($tmp);
         }
@@ -987,8 +986,8 @@ function printOutHotPlugDevices()
   function printOutPrinterDevices()
   {
     $a_return = array();
-    if(is_array($this->gotoPrinters)){
-      foreach($this->gotoPrinters as $printer){
+    if(is_array($this->gotoPrinter)){
+      foreach($this->gotoPrinter as $printer){
         if($printer['mode'] == "admin"){
           $a_return[$printer['cn'][0]]= $printer['cn'][0]." - "._("Admin");
         }else{

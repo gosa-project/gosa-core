@@ -169,8 +169,8 @@
     <table summary="{t}Printer settings{/t}">
 	<tr>
 	    <td>
-		<select style="width:350px;" name="gotoPrinter" multiple size=4 {$gotoPrinterACL} id="gotoPrinter">
-		{html_options values=$gotoPrinterKeys output=$gotoPrinters}
+		<select style="width:350px;" name="gotoPrinterSel" multiple size=4 {$gotoPrinterACL} id="gotoPrinter">
+		{html_options values=$gotoPrinterKeys output=$gotoPrinter}
 		<option disabled>&nbsp;</option>
 		</select>
 		<br>
