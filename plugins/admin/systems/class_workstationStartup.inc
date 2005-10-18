@@ -423,7 +423,7 @@ class workstartup extends plugin
     $this->attrs['FAIclass'] = $tmp;
     /* Write back to ldap */
    
-    if(count($this->attrs['FAIclass'])==0){
+    if((count($this->attrs['FAIclass'])==0)&&(empty($this->FAIdebianMirror))){
       $tmp = array();
       foreach($this->attrs['objectClass'] as $class){
         if($class != "FAIobject"){
