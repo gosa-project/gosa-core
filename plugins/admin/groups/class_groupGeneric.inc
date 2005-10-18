@@ -32,6 +32,7 @@ class group extends plugin
   var $orig_dn= "";
   var $has_mailAccount= FALSE;
   var $group_dialog= FALSE;
+  var $nagios_group =FALSE;
 
   /* attribute list for save action */
   var $attributes= array("cn", "description", "gidNumber");
