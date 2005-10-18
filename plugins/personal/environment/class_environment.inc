@@ -38,7 +38,7 @@ class environment extends plugin
   var $gotoLogonScript    = "";     // The selected Logon Script
 
   /* Printer */
-  var $gotoPrinter       = array();// All available Printer
+  var $gotoPrinter        = array();// All available Printer, with their configurations
   var $gotoPrinterSel     = "";     //  The selected Printer
 
   /* Share */
@@ -74,7 +74,7 @@ class environment extends plugin
     plugin::plugin ($config, $dn);
 
    
-
+    /* Check : Are we currently editing a group or user dialog */
     if((isset($this->attrs['cn'][0]))&&(!isset($this->attrs['uid'][0]))){
       $suffix="Group";
       $this->uid          = $this->attrs['cn'][0];
@@ -735,70 +735,75 @@ class environment extends plugin
     }
   
 
-
-    /* Deleted printer settings wasn't deleted from ldap ... 
+    /* 1. Search all printers that have our uid/cn as member 
+     * 2. Delete this uid/cn from every single entry and save it again.
+     * 2.1 There are different types of members: Users / Groups, this will be defined in $suffix
+     * 2.2 And each type has two modes, Admin (e.g. 'gotoUserAdminPrinter') and Normal 
      */
-    //if(count($this->gotoPrinter)==0){
-    if(1==1){
-      $ldap->search("(&(objectClass=gotoPrinter)(|(goto".$s_suffix."Printer=".$this->uid.")(goto".$s_suffix."AdminPrinter=".$this->uid.")))",array("*"));
-      while($attr = $ldap->fetch()){
-        if(isset($attr['goto'.$s_suffix.'Printer'])) {
-          foreach($attr['goto'.$s_suffix.'Printer'] as $key => $user){
-            if($this->uid==$user){
-              unset($attr['goto'.$s_suffix.'Printer'][$key]);
-            }
-          }    
-        }
+    $ldap->search("(&(objectClass=gotoPrinter)(|(goto".$s_suffix."Printer=".$this->uid.")(goto".$s_suffix."AdminPrinter=".$this->uid.")))",array("*"));
+    while($attr = $ldap->fetch()){
 
-        if(isset($attr['goto'.$s_suffix.'AdminPrinter'])){
-          foreach($attr['goto'.$s_suffix.'AdminPrinter'] as $key => $user){
-            if($this->uid==$user){
-              unset($attr['goto'.$s_suffix.'AdminPrinter'][$key]);
-            }
-          }    
-        }
+      /* Walk trough all printers and check if our user id used, if so remove it.
+       * Later we will insert our uid at the right place.
+       */
 
-        $attrs_used = array();
-        foreach($attr as $key=>$val){
-          if((!is_numeric($key))&&($key!="count")){
-            if(is_array($val)&&isset($val['count'])){
-              unset($val['count']);
-            }
-            $attrs_used[$key]=$val;
+      /* Remove normal entries (User)*/
+      if(isset($attr['goto'.$s_suffix.'Printer'])) {
+        foreach($attr['goto'.$s_suffix.'Printer'] as $key => $user){
+          if($this->uid==$user){
+            unset($attr['goto'.$s_suffix.'Printer'][$key]);
           }
-        }
-        $attr= $attrs_used;
-        $tmp =array();
-        
-        if(isset($attr['goto'.$s_suffix.'AdminPrinter'])){
-          foreach($attr['goto'.$s_suffix.'AdminPrinter'] as $print){
-            $tmp[]=$print;
+        }    
+      }
+
+      /* Remove administrational entries (Admin)*/
+      if(isset($attr['goto'.$s_suffix.'AdminPrinter'])){
+        foreach($attr['goto'.$s_suffix.'AdminPrinter'] as $key => $user){
+          if($this->uid==$user){
+            unset($attr['goto'.$s_suffix.'AdminPrinter'][$key]);
           }
-        }
-        $attr['goto'.$s_suffix.'AdminPrinter'] = $tmp;
+        }    
+      }
 
-        $tmp =array();
-    
-        if(isset($attr['goto'.$s_suffix.'Printer'])){
-          foreach($attr['goto'.$s_suffix.'Printer'] as $print){
-            $tmp[]=$print;
+      /* Extract useable tags, to be able to save all changes 
+       */
+      $attrs_used = array();
+      foreach($attr as $key=>$val){
+
+        /* If index is numeric, skip it ...*/
+        if((!is_numeric($key))&&($key!="count")){
+
+          /* If entry contains 'count' remove it */
+          if(is_array($val)&&isset($val['count'])){
+            unset($val['count']);
           }
-        }
-        $attr['goto'.$s_suffix.'Printer'] = $tmp;
-
-        if(isset($attr['GOTOADMINPRINTER'])){
-          unset($attr['GOTOADMINPRINTER']);
-        }
-
-        $ldap->cd($attr['dn']);
-        unset($attr['dn']);
-        $ldap->modify($attr);
-        if($ldap->get_error()!="Success"){
-          print_red(_("Error while writing printer")." : ".$ldap->get_error());
+          $attrs_used[$key]=$val;
         }
       }
-    }    
+      /* the result of cleaning the entry is 
+       *  to be able to directly save this again,
+       *  if all changes are made 
+       */
+      $attr= $attrs_used;
 
+#fix : Id don't know why such an entry was set ... 
+      if(isset($attr['GOTOADMINPRINTER'])){
+        unset($attr['GOTOADMINPRINTER']);
+      }
+
+      /* Save changes */
+      $ldap->cd($attr['dn']);
+      unset($attr['dn']);
+      $ldap->modify($attr);
+      if($ldap->get_error()!="Success"){
+        print_red(_("Error while writing printer")." : ".$ldap->get_error());
+      }
+    }
+
+    /* All printers are cleaned, (our cn/uid removed) 
+     *  now we must add our uid / cn 
+     *  to the new configured printers.
+     */
     foreach($this->gotoPrinter as $printer) {
       $ldap->cd($printer['dn']);
       $ldap->cat($printer['dn']);
@@ -812,11 +817,14 @@ class environment extends plugin
           $attrs_used[$key]=$val;
         }
       }
-
+      /* $attrs contains all values 
+       * we need, to save the entry lateron 
+      */
       $attrs= $attrs_used;
 
-      /* Filter entries */
- 
+      /* Depending on the type (User/Admin) 
+       *  switch these attributes, that makes it easier
+       */
       if($printer['mode'] == "user"){
         $attribute  = "goto".$s_suffix."Printer";
         $attribute2 = "goto".$s_suffix."AdminPrinter";
@@ -853,22 +861,6 @@ class environment extends plugin
           $attrs[$attribute][]=$this->uid;
         }
       }
-
-      $tmp =array();
-      if(isset($attrs['goto'.$s_suffix.'AdminPrinter'])){
-        foreach($attrs['goto'.$s_suffix.'AdminPrinter'] as $print){
-          $tmp[]=$print;
-        }
-      }
-      $attrs['goto'.$s_suffix.'AdminPrinter'] = $tmp;
-
-      $tmp =array();
-      if(isset($attrs['goto'.$s_suffix.'Printer'])){
-        foreach($attrs['goto'.$s_suffix.'Printer'] as $print){
-          $tmp[]=$print;
-        }
-      }
-      $attrs['goto'.$s_suffix.'Printer'] = $tmp;
 
       $ldap->cd($attrs['dn']);
       unset($attrs['dn']);
