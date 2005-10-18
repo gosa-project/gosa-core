@@ -87,18 +87,8 @@ class ogroup extends plugin
     $this->reload();
   }
 
-  function execute()
-  {
-    /* Do we represent a valid group? */
-    if (!$this->is_account){
-      $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
-        _("This 'dn' is no object group.")."</b>";
-      return ($display);
-    }
-
-
-
-    /* Delete objects from group */
+  function AddDelMembership(){
+     /* Delete objects from group */
     if (isset($_POST['delete_membership']) && isset($_POST['members'])){
       foreach ($_POST['members'] as $value){
         $this->objects["$value"]= $this->memberList[$value];
@@ -118,6 +108,47 @@ class ogroup extends plugin
         unset ($this->objects[$value]);
         uasort ($this->memberList, 'sort_list');
         reset ($this->memberList);
+      }
+      $this->reload();
+    }
+  }
+
+  function execute()
+  {
+    
+    $this->reload();
+
+    /* Do we represent a valid group? */
+    if (!$this->is_account){
+      $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
+        _("This 'dn' is no object group.")."</b>";
+      return ($display);
+    }
+
+    /* Delete objects from group */
+    if (isset($_POST['delete_membership']) && isset($_POST['members'])){
+      foreach ($_POST['members'] as $value){
+        if(isset($this->memberList[$value])){
+          $this->objects["$value"]= $this->memberList[$value];
+          unset ($this->memberList["$value"]);
+          unset ($this->member["$value"]);
+          uasort ($this->objects, 'sort_list');
+          reset ($this->objects);
+        }
+      }
+      $this->reload();
+    }
+
+    /* Add objects to group */
+    if (isset($_POST['add_object_finish']) && isset($_POST['objects'])){
+      foreach ($_POST['objects'] as $value){
+        if(isset($this->objects[$value])){
+          $this->memberList["$value"]= $this->objects[$value];
+          $this->member["$value"]= $value;
+          unset ($this->objects[$value]);
+          uasort ($this->memberList, 'sort_list');
+          reset ($this->memberList);
+        }
       }
       $this->reload();
     }

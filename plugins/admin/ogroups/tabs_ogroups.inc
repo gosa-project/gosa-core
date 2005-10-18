@@ -3,14 +3,99 @@
 class ogrouptabs extends tabs
 {
   var $base= "";
+  
+  function reload($dd){
+    $objects= preg_replace('/[\[\]]/', '', $dd);
+    
+    /* If there is a phonequeue,
+     * but there is no user left with goPhoneAccount ... remove it.
+     */
+    $usePhoneTab = false;
+    foreach($this->by_object['ogroup']->memberList as $dn => $val){
+      if(isset($val['objectClass'])){
+        if(in_array("goFonAccount",$val['objectClass'])){
+          $usePhoneTab = true;
+        }
+      }
+    }
+    if(((!$usePhoneTab)&&(isset($this->by_object['phonequeue'])))||((!preg_match("/U/",$objects))&&(isset($this->by_object['phonequeue'])))){
+      $this->by_object['phonequeue']->remove_from_parent();
+      unset($this->by_object['phonequeue']);
+      unset($this->by_name['phonequeue']);
+    }
+
+    /* Remove mail group if there is no user anymore */
+    if((!preg_match("/U/",$objects))&&(isset($this->by_object['mailgroup']))){
+      $this->by_object['mailgroup']->remove_from_parent();
+      unset($this->by_object['mailgroup']);
+      unset($this->by_name['mailgroup']);
+    }
+    
+    /* Remove terminal group, if theres no terminal left in the object list */
+    if((!preg_match("/T/",$objects))&&(isset($this->by_object['termgroup']))){
+      $this->by_object['termgroup']->remove_from_parent();
+      unset($this->by_object['termgroup']);
+      unset($this->by_name['termgroup']);
+    }
+  
+    /* Create goPhoneAccount if theres an user with goPhoneAccount
+     * but only if there is currently no queue enabled.
+     */
+    if(!isset($this->by_object['phonequeue'])){
+      foreach($this->by_object['ogroup']->memberList as $dn => $val){
+        if(isset($val['objectClass'])){
+          if(in_array("goFonAccount",$val['objectClass'])){
+            require_once("class_phonequeue.inc");
+            $this->by_name['phonequeue']= _("Phone queue");
+            $this->by_object['phonequeue']= new phonequeue($this->config, $this->dn);
+            $this->by_object['phonequeue']->acl = "#all#";
+            $this->by_object['phonequeue']->parent= &$this;
+          }
+        }
+      }
+    }
+
+    /* Add mail group tab , if there is curerntly no mail tab defined */ 
+    if((!preg_match("/U/",$objects))&&(!isset($this->by_object['mailogroup']))){
+      if(isset($this->config->current['MAILMETHOD'])){
+        if (preg_match('/kolab/i', $this->config->current['MAILMETHOD'])){
+          require_once("class_mailogroup.inc");
+          $this->by_name['mailogroup']= _("Mail");
+          $this->by_object['mailogroup']= new mailogroup($this->config, $this->dn);
+          $this->by_object['mailogroup']->parent= &$this;
+        }
+      }
+    }
+
+    /* Add Terminal tab */
+    if((!preg_match("/T/",$objects))&&(!isset($this->by_object['termgroup']))){
+      require_once("class_termgroup.inc");
+      if(!isset($this->by_object['termgroup'])){
+        $this->by_name['termgroup']= _("Terminals");
+        $this->by_object['termgroup']= new termgroup($this->config, $this->dn);
+        $this->by_object['termgroup']->parent= &$this;
+      }
+    }
+  }
+
+  function execute(){
+    $str = "";
+    $this->by_object['ogroup']->AddDelMembership();
+    $this->reload($this->by_object['ogroup']->gosaGroupObjects);
+    $str .= tabs::execute();
+    return ( $str);
+  }  
 
   function ogrouptabs($config, $data, $dn)
   {
+
     tabs::tabs($config, $data, $dn);
     $this->base= $this->by_object['ogroup']->base;
 
     /* Insert extra tabs for several object types - if present */
+
     $objects= preg_replace('/[\[\]]/', '', $this->by_object['ogroup']->gosaGroupObjects);
+    
     for ($n= 0; $n<strlen($objects); $n++){
       switch ($objects[$n]){
         case "T":

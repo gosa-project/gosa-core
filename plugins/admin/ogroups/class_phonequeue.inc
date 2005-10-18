@@ -110,7 +110,8 @@ class phonequeue extends plugin
         $display= $this->show_header(_("Remove the phone queue from this Account"),
             _("Phone queue is enabled for this group. You can disable it by clicking below."));
       } else {
-        $display= $this->show_header(_("Create phone queue"), _("For this group the phone queues are disabled. You can enable them by clicking below."));
+        $display= $this->show_header(_("Create phone queue"), 
+                  _("For this group the phone queues are disabled. You can enable them by clicking below."));
         return ($display);
       }
     }
