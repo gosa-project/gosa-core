@@ -486,6 +486,9 @@ class posixAccount extends plugin
     $smarty->assign("printerList", $this->printerList);
     $smarty->assign("languages", $this->config->data['MAIN']['LANGUAGES']);
 
+	/* Avoid "Undefined index: forceMode" */
+    $smarty->assign("forceMode", "");
+
     /* Checkboxes */
     if ($this->force_ids == 1){
       $smarty->assign("force_ids", "checked");
