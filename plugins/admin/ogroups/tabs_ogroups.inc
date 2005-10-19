@@ -37,6 +37,13 @@ class ogrouptabs extends tabs
       unset($this->by_object['termgroup']);
       unset($this->by_name['termgroup']);
     }
+    
+    /* Remove ws tabs, if theres no ws left in the object list */
+    if((!preg_match("/W/",$objects))&&(isset($this->by_object['workstartup']))){
+//      $this->by_object['workstartup']->remove_from_parent();
+      unset($this->by_object['workstartup']);
+      unset($this->by_name['workstartup']);
+    }
   
     /* Create goPhoneAccount if theres an user with goPhoneAccount
      * but only if there is currently no queue enabled.
@@ -56,7 +63,7 @@ class ogrouptabs extends tabs
     }
 
     /* Add mail group tab , if there is curerntly no mail tab defined */ 
-    if((!preg_match("/U/",$objects))&&(!isset($this->by_object['mailogroup']))){
+    if((preg_match("/U/",$objects))&&(!isset($this->by_object['mailogroup']))){
       if(isset($this->config->current['MAILMETHOD'])){
         if (preg_match('/kolab/i', $this->config->current['MAILMETHOD'])){
           require_once("class_mailogroup.inc");
@@ -68,12 +75,22 @@ class ogrouptabs extends tabs
     }
 
     /* Add Terminal tab */
-    if((!preg_match("/T/",$objects))&&(!isset($this->by_object['termgroup']))){
+    if((preg_match("/T/",$objects))&&(!isset($this->by_object['termgroup']))){
       require_once("class_termgroup.inc");
       if(!isset($this->by_object['termgroup'])){
         $this->by_name['termgroup']= _("Terminals");
         $this->by_object['termgroup']= new termgroup($this->config, $this->dn);
         $this->by_object['termgroup']->parent= &$this;
+      }
+    }
+    
+    /* Add Workstation tabs */
+    if((preg_match("/W/",$objects))&&(!isset($this->by_object['workstartup']))){
+      if(!isset($this->by_object['workstartup'])){
+        $this->by_name['workstartup']= _("Startup");
+        $this->by_object['workstartup']= new workstartup($this->config, $this->dn);
+        $this->by_object['workstartup']->acl = "#all#";
+        $this->by_object['workstartup']->parent= &$this;
       }
     }
   }
