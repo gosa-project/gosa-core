@@ -42,13 +42,13 @@ class workstartup extends plugin
   function workstartup ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
-   
 
     /* Creating a list of valid Mirrors 
      * none will not be saved to ldap.
      */
     $this->FAIdebianMirrors   = array("none"=>_("none"));
     $ldap   = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
     $ldap->search("(objectClass=FAIrepository)",array("FAIdebianMirror"));
     
     /* attach all attributes with "index => cn" to avoid multiple entries */
@@ -333,7 +333,7 @@ class workstartup extends plugin
     }
 
     /* Show main page */
-    return($smarty->fetch (get_template_path('workstationStartup.tpl', TRUE)));
+    return($smarty->fetch (get_template_path('workstationStartup.tpl', TRUE,dirname(__FILE__))));
   }
 
   function remove_from_parent()
@@ -365,6 +365,21 @@ class workstartup extends plugin
   /* Save to LDAP */
   function save()
   {
+
+    /* Depending on the baseobject (Ogroup / WS) we
+     *  use another set of objectClasses
+     * In case of WS itself, we use  "array("GOhard", "FAIobject");"
+     * if we are currently editing from ogroup menu we use (array("gotWorkstationTemplate","GOhard", "FAIobject"))
+     */
+    if(isset($this->parent->by_object['ogroup'])){
+      $this->objectclasses = array("gotoWorkstationTemplate","GOhard", "FAIobject");
+    }elseif(isset($this->parent->by_object['workgeneric'])){
+      $this->objectclasses = array("GOhard", "FAIobject");
+    }else{
+      print "unknown";
+      exit();
+    }
+
     /* Find proper terminal path for tftp configuration
        FIXME: This is suboptimal when the default has changed to
        another location! */
@@ -459,6 +474,13 @@ class workstartup extends plugin
       $this->attrs['FAIclass']        = array();
       $this->attrs['FAIdebianMirror'] = array();
     }
+
+    /* prepare share settings */
+    $tmp = array();
+    foreach($this->gotoShares as $name => $settings){
+      $tmp[] = $settings['server']."|".$name."|".$settings['mountPoint'];
+    }
+    $this->attrs['gotoShare']=$tmp;
 
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
