@@ -524,7 +524,7 @@ class faiManagement extends plugin
 						if(!$faifilter['ShowScripts']){ 
 							$abort = true;
 						}
-					$img="<img src='images/fai_script' title='"._("Scripts")."' alt='S'>";
+					$img="<img src='images/fai_script.png' title='"._("Scripts")."' alt='S'>";
 					$info = _("Scripts");
 					break;
 					case "FAIvariable"			: 
