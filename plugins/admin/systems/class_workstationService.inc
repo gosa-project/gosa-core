@@ -51,7 +51,7 @@ class workservice extends plugin
 
 
   /* attribute list for save action */
-  var $attributes= array("cn","gotoXMonitor",
+  var $attributes= array("gotoXMonitor",
       "gotoXDriver", "gotoXResolution", "gotoXColordepth",
       "gotoXHsync", "gotoXVsync",
       "gotoScannerEnable", "gotoScannerClients",
@@ -190,11 +190,20 @@ class workservice extends plugin
 
   function remove_from_parent()
   {
-    $ldap= $this->config->get_ldap_link();
+    /* This is not necessary, i think 
+     * Remove should be called from workGeneric ... 
+     */
+    /*$ldap= $this->config->get_ldap_link();
     $ldap->rmdir($this->dn);
     show_ldap_error($ldap->get_error());
     $this->handle_post_events("remove");
-  }
+    */
+    
+    $ldap= $this->config->get_ldap_link();
+    plugin::remove_from_parent();
+    $ldap->cd($this->dn);
+    $ldap->modify($this->attrs);
+    show_ldap_error($ldap->get_error());}
 
 
   /* Save data to object */

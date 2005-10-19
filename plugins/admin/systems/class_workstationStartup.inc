@@ -338,10 +338,39 @@ class workstartup extends plugin
 
   function remove_from_parent()
   {
+    /*
     $ldap= $this->config->get_ldap_link();
     $ldap->rmdir($this->dn);
     show_ldap_error($ldap->get_error());
     $this->handle_post_events("remove");
+    */
+
+
+    /* Depending on the baseobject (Ogroup / WS) we
+     *  use another set of objectClasses
+     * In case of WS itself, we use  "array("GOhard", "FAIobject");"
+     * if we are currently editing from ogroup menu we use (array("gotWorkstationTemplate","GOhard", "FAIobject"))
+     */
+    if(isset($this->parent->by_object['ogroup'])){
+      $this->objectclasses = array("gotoWorkstationTemplate","GOhard", "FAIobject");
+    }elseif(isset($this->parent->by_object['workgeneric'])){
+      $this->objectclasses = array("GOhard", "FAIobject");
+    }else{
+      print "unknown";
+      exit();
+    }
+
+    $ldap= $this->config->get_ldap_link();
+    plugin::remove_from_parent();
+    
+    foreach(array("gotoModules", "gotoAutoFs", "gotoFilesystem") as $attr){
+      $this->attrs [$attr] = array();
+    }
+
+    $ldap->cd($this->dn);
+    $ldap->modify($this->attrs);
+    show_ldap_error($ldap->get_error());
+
   }
 
 

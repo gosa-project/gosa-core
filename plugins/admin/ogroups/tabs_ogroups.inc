@@ -40,12 +40,12 @@ class ogrouptabs extends tabs
     
     /* Remove ws tabs, if theres no ws left in the object list */
     if((!preg_match("/W/",$objects))&&(isset($this->by_object['workstartup']))){
-//      $this->by_object['workstartup']->remove_from_parent();
-      unset($this->by_object['workstartup']);
-      unset($this->by_name['workstartup']);
-//      $this->by_object['workservice']->remove_from_parent();
+      $this->by_object['workservice']->remove_from_parent();
       unset($this->by_object['workservice']);
       unset($this->by_name['workservice']);
+      $this->by_object['workstartup']->remove_from_parent();
+      unset($this->by_object['workstartup']);
+      unset($this->by_name['workstartup']);
     }
   
     /* Create goPhoneAccount if theres an user with goPhoneAccount
