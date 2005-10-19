@@ -198,7 +198,10 @@ class workservice extends plugin
     show_ldap_error($ldap->get_error());
     $this->handle_post_events("remove");
     */
-    
+   
+    /* This only removes the attributes from this tab, 
+     * and not hte whole entry 
+     */ 
     $ldap= $this->config->get_ldap_link();
     plugin::remove_from_parent();
     $ldap->cd($this->dn);

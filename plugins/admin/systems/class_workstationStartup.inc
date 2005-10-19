@@ -184,11 +184,9 @@ class workstartup extends plugin
     return($tmp);
   }
 
-
   function check()
   {
     $messages = array();
-
     /* If there are packages selected, but no mirror show error */   
     if(($this->FAIdebianMirror == "none")&&(count($this->FAIclass)>0)){
       $messages[]=_("Please select a 'FAI server' or remove the 'FAI classes'.");
@@ -362,7 +360,8 @@ class workstartup extends plugin
 
     $ldap= $this->config->get_ldap_link();
     plugin::remove_from_parent();
-    
+   
+    /* Remove additional attributes.*/ 
     foreach(array("gotoModules", "gotoAutoFs", "gotoFilesystem") as $attr){
       $this->attrs [$attr] = array();
     }
