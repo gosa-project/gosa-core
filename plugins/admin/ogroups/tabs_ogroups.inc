@@ -43,6 +43,9 @@ class ogrouptabs extends tabs
 //      $this->by_object['workstartup']->remove_from_parent();
       unset($this->by_object['workstartup']);
       unset($this->by_name['workstartup']);
+//      $this->by_object['workservice']->remove_from_parent();
+      unset($this->by_object['workservice']);
+      unset($this->by_name['workservice']);
     }
   
     /* Create goPhoneAccount if theres an user with goPhoneAccount
@@ -91,6 +94,10 @@ class ogrouptabs extends tabs
         $this->by_object['workstartup']= new workstartup($this->config, $this->dn);
         $this->by_object['workstartup']->acl = "#all#";
         $this->by_object['workstartup']->parent= &$this;
+        $this->by_name['workservice']= _("Service");
+        $this->by_object['workservice']= new workservice($this->config, $this->dn);
+        $this->by_object['workservice']->acl = "#all#";
+        $this->by_object['workservice']->parent= &$this;
       }
     }
   }

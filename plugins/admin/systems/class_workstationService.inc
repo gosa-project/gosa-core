@@ -185,7 +185,7 @@ class workservice extends plugin
     $smarty->assign ("gotoXMonitor", $this->gotoXMonitor);
 
     /* Show main page */
-    return($smarty->fetch (get_template_path('workstationService.tpl', TRUE)));
+    return($smarty->fetch (get_template_path('workstationService.tpl',TRUE,dirname(__FILE__))));
   }
 
   function remove_from_parent()
