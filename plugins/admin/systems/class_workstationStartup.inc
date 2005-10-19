@@ -7,25 +7,25 @@ class workstartup extends plugin
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* Generic terminal attributes */
-  var $bootmode= "G";
-  var $goLdapServerList= array("default");
-  var $gotoBootKernel= "default";
-  var $gotoKernelParameters= "";
-  var $gotoLdapServer= "";
-  var $gotoModules= array();
-  var $gotoAutoFs= array();
-  var $gotoFilesystem= array();
-  var $gotoTerminalPath= "";
-  var $FAIstatus= "";
-  var $FAIclass         = array();
-  var $FAIclasses       = array();
-  var $FAIclassInfo     = array();
-  var $FAIdebianMirror  = array();
+  var $bootmode             = "G";
+  var $goLdapServerList     = array("default");
+  var $gotoBootKernel       = "default";
+  var $gotoKernelParameters = "";
+  var $gotoLdapServer       = "";
+  var $gotoModules          = array();
+  var $gotoAutoFs           = array();
+  var $gotoFilesystem       = array();
+  var $gotoTerminalPath     = "";
+  var $FAIstatus            = "";
+  var $FAIclass             = array();
+  var $FAIclasses           = array();
+  var $FAIclassInfo         = array();
+  var $FAIdebianMirror      = array();
 
 
   /* attribute list for save action */
-  var $attributes= array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters", "FAIclass", "FAIstatus", "gotoShare","FAIdebianMirror");
-  var $objectclasses= array("GOhard", "FAIobject");
+  var $attributes     = array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters", "FAIclass", "FAIstatus", "gotoShare","FAIdebianMirror");
+  var $objectclasses  = array("GOhard", "FAIobject");
 
   /* Share */
   var $gotoShares         = array();// Currently Share Option
@@ -34,25 +34,30 @@ class workstartup extends plugin
   var $gotoAvailableShares= array();// Available Shares for this account
 
   /* Helper */
-  var $customParameters= "";
-  var $orig_dn= "";
-  var $ignore_account= TRUE;
-  var $FAIdebianMirrors = array();
+  var $customParameters   = "";
+  var $orig_dn            = "";
+  var $ignore_account     = TRUE;
+  var $FAIdebianMirrors   = array();
 
   function workstartup ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
-    
-    $this->FAIdebianMirrors= array("none"=>_("none"));
-    $ldap = $this->config->get_ldap_link();
+   
+
+    /* Creating a list of valid Mirrors 
+     * none will not be saved to ldap.
+     */
+    $this->FAIdebianMirrors   = array("none"=>_("none"));
+    $ldap   = $this->config->get_ldap_link();
     $ldap->search("(objectClass=FAIrepository)",array("FAIdebianMirror"));
+    
+    /* attach all attributes with "index => cn" to avoid multiple entries */
     while($attr = $ldap->fetch()){
       if(isset($attr['FAIdebianMirror'])){
         $this->FAIdebianMirrors[$attr['FAIdebianMirror'][0]]=$attr['FAIdebianMirror'][0];
       }
     } 
  
-
     /* Get arrays */
     foreach (array("gotoModules", "gotoAutoFs", "gotoFilesystem") as $val){
       if (isset($this->attrs["$val"]["count"])){
@@ -99,20 +104,21 @@ class workstartup extends plugin
     $this->gotoAvailableShares= $config->getShareList(false);
     $tmp2 = array();
   
-    //$ldap->cd($base);
-    $ldap = $this->config->get_ldap_link();
+    $ldap   = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(|(objectClass=FAIpackageList)(objectClass=FAItemplate)
+
+    /* Search all FAI objects */
+    $ldap->search("(| (objectClass=FAIpackageList)(objectClass=FAItemplate)
                       (objectClass=FAIvariable)(objectClass=FAIscript')(objectClass=FAIhook)
                       (objectClass=FAIpartitionTable))",array("objectClass","cn"),true);
-    $test_dns = array();
+    /* Sort all entries, and attach elementtype.
+     * To be able to show the types in the listbox.
+     */
     while($attr = $ldap->fetch()){
       $cn = $attr['cn'][0];
       if(in_array('FAIpackageList',$attr['objectClass'])){
         $tmp2[$cn]['FAIpackageList']['obj']   = 'FAIpackageList'; 
         $tmp2[$cn]['FAIpackageList']['kzl']   = 'P';
-        $tmp2[$cn]['FAIpackageList']['dn']    = $attr['dn'];
-        $test_dns[$cn]=$attr['dn'];
         $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
       }
       if(in_array('FAItemplate',$attr['objectClass'])){
@@ -142,13 +148,6 @@ class workstartup extends plugin
       }
     }
 
-    foreach($test_dns as $cn => $dn){
-      $entry = $ldap->cat($dn);
-      $attr = $ldap->fetch();
-      $mirror = $attr['FAIdebianMirror'][0];
-      $tmp2[$cn]['FAIpackageList']['mirror']= $mirror;
-    }
-  
     $this->FAIclassInfo = $tmp2;
 
     if(isset($this->attrs['FAIclass'])){
@@ -169,6 +168,7 @@ class workstartup extends plugin
     $this->orig_dn= $this->dn;
   }
 
+  /* Create array to display available classes/profiles in a selectbox */
   function selectFriendlyClasses(){
     $tmp=array();
     foreach($this->FAIclasses as $class){
@@ -184,10 +184,12 @@ class workstartup extends plugin
     return($tmp);
   }
 
+
   function check()
   {
     $messages = array();
-   
+
+    /* If there are packages selected, but no mirror show error */   
     if(($this->FAIdebianMirror == "none")&&(count($this->FAIclass)>0)){
       $messages[]=_("Please select a 'FAI server' or remove the 'FAI classes'.");
     }
@@ -200,7 +202,6 @@ class workstartup extends plugin
     if (isset($_POST['modify_state'])){
       $this->is_account= !$this->is_account;
     }
-
 
     /* Do we represent a valid terminal? */
     if (!$this->is_account && $this->parent == NULL){
@@ -225,9 +226,11 @@ class workstartup extends plugin
 
     /* FAI class management */
     if((isset($_POST['AddClass']))&&(isset($_POST['FAIclassesSel']))){
-
       $found = 0 ; 
 
+      /* If this new class/profile will attach a second partition table
+       * to our list of classes, abort and show a message.
+       */
       foreach($this->FAIclass as $name){
         if(isset($this->FAIclassInfo[$name])){
           foreach($this->FAIclassInfo[$name] as $atr){
@@ -245,6 +248,7 @@ class workstartup extends plugin
       }
     }
 
+    /* Delete selected class from our list */
     if((isset($_POST['DelClass']))&&(isset($_POST['FAIclassSel']))){
       if(isset($this->FAIclass[$_POST['FAIclassSel']])){
         unset($this->FAIclass[$_POST['FAIclassSel']]);
@@ -301,7 +305,6 @@ class workstartup extends plugin
       $smarty->assign($val."ACL", chkacl($this->acl, $val));
     }
   
-
     $smarty->assign("FAIdebianMirrors",$this->FAIdebianMirrors);
     $smarty->assign("FAIclasses",$this->selectFriendlyClasses());
     $smarty->assign("FAIclassesKeys",array_flip($this->selectFriendlyClasses()));
@@ -411,6 +414,7 @@ class workstartup extends plugin
       $this->gotoKernelParameters.= " o ".$this->customParameters;
     }
 
+    /* Create numeric index for our classes */
     $tmp = array();
     foreach($this->FAIclass as $class){
       $tmp[] = $class;
@@ -439,6 +443,7 @@ class workstartup extends plugin
     $this->attrs['FAIclass'] = $tmp;
     /* Write back to ldap */
 
+    /* if mirror == none stop saving this attribute */
     if($this->FAIdebianMirror == "none"){
       $this->FAIdebianMirror = "";
     }
@@ -450,9 +455,9 @@ class workstartup extends plugin
           $tmp[] = $class;
         }
       }
-      $this->attrs['objectClass'] = $tmp;
-      $this->attrs['FAIclass'] = array();;
-      $this->attrs['FAIdebianMirror'] = array();;
+      $this->attrs['objectClass']     = $tmp;
+      $this->attrs['FAIclass']        = array();
+      $this->attrs['FAIdebianMirror'] = array();
     }
 
     $ldap= $this->config->get_ldap_link();
