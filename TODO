@@ -30,6 +30,7 @@ Things to fix before 2.4:
   - Add package configuration dialog 
   - Re-implement profile management, divlists look pretty ugly here
   - Check base64_encoding/decoding is not needed everytime.
+  - Save subDialogs directly, without clicking save two or three times.
 
 * Add function to get GOto application templates -> filled variables, etc.
 
