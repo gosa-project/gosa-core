@@ -118,6 +118,7 @@ class faiPackage extends plugin
       }
 
       /* Assign posible changes, for mirror combinations */
+      $this->dialog->save_object();
       $this->dialog->releases = $this->releases;
       $this->dialog->servers  = $this->servers;
       $this->dialog->sections = $this->sections;
@@ -131,7 +132,7 @@ class faiPackage extends plugin
         unset($this->dialog);
         $this->dialog = false;
         $this->is_dialog=false;
-        $this->newDialogShown = true;
+        //  $this->newDialogShown = true;
       }
 
       /* Draw dialog */
@@ -145,12 +146,12 @@ class faiPackage extends plugin
     foreach($this->attributes as $attrs){
       $smarty->assign($attrs,$this->$attrs);
     }
-
+  
     /* Set mirror if changed */
     if((isset($_POST['FAIdebianMirrorS']))&&(!empty($_POST['FAIdebianMirrorS']))){
       $this->FAIdebianMirror = $_POST['FAIdebianMirrorS'];
     }
-
+  
     /* check servers matching release and section settings */
     $availableServer = array();
     foreach($this->mirrors as $mir){
@@ -166,7 +167,7 @@ class faiPackage extends plugin
         }
       }
     }
-    
+ 
     /* Generate package list */
     $this->list=$this->genPkgs();
 
@@ -364,7 +365,7 @@ class faiPackage extends plugin
       $this->buffer=array();
       $a_ret = array();
       foreach($this->FAIdebianSection as $sec){
-        $strID= "/etc/gosa/fai/".$this->mirror."/".$this->FAIdebianRelease."/".$sec;
+        $strID= "/etc/gosa/fai/".$this->FAIdebianMirror."/".$this->FAIdebianRelease."/".$sec;
         
         if(!is_file($strID)){
           print_red(sprintf(_("Package file don't exists '%s'."),$strID));
