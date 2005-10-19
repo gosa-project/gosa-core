@@ -365,10 +365,10 @@ class faiPackage extends plugin
       $this->buffer=array();
       $a_ret = array();
       foreach($this->FAIdebianSection as $sec){
-        $strID= "/etc/gosa/fai/".$this->FAIdebianMirror."/".$this->FAIdebianRelease."/".$sec;
+        $strID= "/etc/gosa/fai/".preg_replace("#^[^/]+//([^/]+).*$#","\\1",$this->FAIdebianMirror)."/".$this->FAIdebianRelease."/".$sec;
         
         if(!is_file($strID)){
-          print_red(sprintf(_("Package file don't exists '%s'."),$strID));
+          print_red(sprintf(_("Package file '%s' does not exist."),$strID));
           $this->FAIdebianMirror="";
           unset($this->buffer);
           return(array());
