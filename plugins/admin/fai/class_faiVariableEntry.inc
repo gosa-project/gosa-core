@@ -27,7 +27,7 @@ class faiVariableEntry extends plugin
       $this->dn=$object['dn'];
       foreach($object as $name=>$value){
         $oname = "Object_".$name;
-        $this->$oname=$value;
+        $this->$oname=addslashes($value);
       }
     }else{
       $this->Object_status = "new";
