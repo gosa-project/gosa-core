@@ -25,7 +25,7 @@ class faiTemplate extends plugin
 
   /* Attributes to initialise for each subObject */
   var $subAttributes    = array("cn","description","FAItemplateFile","FAItemplatePath","FAIowner","FAImode"); 
-  var $sub64coded       = array("FAItemplatePath");
+  var $sub64coded       = array();
 
   /* Specific attributes */
   var $cn               = "";       // The class name for this object
