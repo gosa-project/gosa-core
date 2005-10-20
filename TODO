@@ -30,7 +30,6 @@ Things to fix before 2.4:
   - Add package configuration dialog 
   - Re-implement profile management, divlists look pretty ugly here
   - Check base64_encoding/decoding is not needed everytime.
-  - Save subDialogs directly, without clicking save two or three times.
 
 * Add function to get GOto application templates -> filled variables, etc.
 
@@ -40,10 +39,6 @@ Things to fix before 2.4:
   results in creation in the ldap root
 
 * Workstation is defect
-
-* Save FAI sub objects directly when they already exist
-
-* FAI package lists behave strange
 
 * Add shares to terminal tabs
 
