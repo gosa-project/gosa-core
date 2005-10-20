@@ -3,37 +3,36 @@
 class faiScriptEntry extends plugin
 {
   /* CLI vars */
-  var $cli_summary= "Manage server basic objects";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
+  var $cli_summary      = "Manage server basic objects";
+  var $cli_description  = "Some longer text\nfor help";
+  var $cli_parameters   = array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* attribute list for save action */
   var $ignore_account= TRUE;
-  var $attributes   = array("Object_cn","Object_description","Object_FAIpriority","Object_FAIscript");
-  var $objectclasses= array();
+  var $attributes   = array("cn","description","FAIpriority","FAIscript");
+  var $objectclasses= array("FAIscriptEntry");
 
-  var $orig_cn              = "";
-
-  var $Object_dn            = "";
-  var $Object_cn            = "";
-  var $Object_FAIpriority   = "";
-  var $Object_FAIscript     = "";
-  var $Object_description   = "";
-  var $Object_status        = "new";
+  var $orig_cn          = "";
+  var $dn               = "";
+  var $cn               = "";
+  var $FAIpriority      = "";
+  var $FAIscript        = "";
+  var $description      = "";
+  var $status           = "new";
+  var $parent           = false;
+  var $is_parent_saved  = false;
   
-  function faiScriptEntry ($config, $dn= NULL,$object=false)
+  function faiScriptEntry ($config, $dn)
   {
+    /* Dn is dn currently assigned to this object 
+        'new' if object wasn't saved yet
+     */
     plugin::plugin ($config, $dn);
     if($dn != "new"){
-      $this->orig_cn= $object['cn'];
-      $this->dn=$object['dn'];
-      foreach($object as $name=>$value){
-        $oname = "Object_".$name;
-        $this->$oname=$value;
-      }
+      $this->orig_cn         = $this->cn;
     }else{
-      $this->Object_status = "new";
-      $this->orig_cn       = false;
+      $this->status          = "new";
+      $this->orig_cn         = false;
     }
   }
 
@@ -51,10 +50,9 @@ class faiScriptEntry extends plugin
         print_red(_("Selected file is empty."));
       }else{
         $str = utf8_encode(file_get_contents($_FILES['ImportFile']['tmp_name']));
-        $this->Object_FAIscript = $str;
+        $this->FAIscript = $str;
       }
     }
-
   
     foreach($this->attributes as $attrs){
       if(get_magic_quotes_gpc()){
@@ -65,12 +63,24 @@ class faiScriptEntry extends plugin
     }
 
     for($i =0 ; $i < 100 ; $i++){
-      $Object_FAIprioritys[$i]=$i;
+      $FAIprioritys[$i]=$i;
     }
-    $smarty->assign("Object_FAIprioritys",$Object_FAIprioritys);
+    $smarty->assign("FAIprioritys",$FAIprioritys);
     $display.= $smarty->fetch(get_template_path('faiScriptEntry.tpl', TRUE));
     return($display);
   }
+
+  /* Delete me, and all my subtrees
+  */
+  function remove_from_parent()
+  {
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd ($this->dn);
+    $ldap->rmdir_recursive($this->dn);
+    show_ldap_error($ldap->get_error());
+    $this->handle_post_events("remove");
+  }
+
 
   /* Save data to object */
   function save_object()
@@ -91,11 +101,11 @@ class faiScriptEntry extends plugin
   {
     $message= array();
   
-    if(empty($this->Object_cn)){
+    if(empty($this->cn)){
       $message[] = _("Please enter a name.");
     }
 
-    if(preg_match("/[^0-9a-z]/i",$this->Object_cn)){
+    if(preg_match("/[^0-9a-z]/i",$this->cn)){
       $message[] = _("Please enter a valid name. Only a-Z 0-9 are allowed.");
     }
  
@@ -104,20 +114,45 @@ class faiScriptEntry extends plugin
  
   function save()
   {
-    $tmp=array();
-    foreach($this->attributes as $attrs){ 
-      $attr = preg_replace("/^Object_/","",$attrs);
-      $tmp[$attr] = $this->$attrs;
+    plugin::save();
+
+    /* Get ldap connection */
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd ($this->config->current['BASE']);
+
+    /* First : Check if parent was already saved ... */
+    $ldap->cd($this->parent->dn);
+    $ldap->cat($this->parent->dn);
+    
+    /* no entry was found. So save our base object first */
+    if($ldap->count()==0){
+      $this->parent->save();
+    } 
+
+    /* Generate this->dn */ 
+      /* if !orig_dn -> This is a new object */
+    if($this->orig_cn == false){
+      $this->dn = "cn=".$this->cn.",".$this->parent->dn;
+      $mode = "add";
+    }else{
+      /* This is an already existing entry, check if cn was changed */
+      if($this->orig_cn != $this->cn ){
+        /* rename */
+        $ldap->cd($this->dn);
+        $ldap->rmdir($this->dn);
+        $this->dn = "cn=".$this->cn.",".$this->parent->dn;
+        $mode = "add";
+      }else{
+        /* modify */
+        $mode = "modify";
+      }
     }
 
-    if(($this->orig_cn)&&($tmp['cn']!=$this->orig_cn)){
-      $tmp['remove']['from']  = $this->orig_cn;
-      $tmp['remove']['to']    = $tmp['cn'];
-    }
-  
-    $tmp['dn']      = $this->dn;  
-    $tmp['status']  = $this->Object_status; 
-    return($tmp);
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->create_missing_trees($this->parent->dn);
+    $ldap->cd ($this->dn);
+    $ldap->$mode($this->attrs);
+    show_ldap_error($ldap->get_error());
   }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

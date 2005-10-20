@@ -4,16 +4,22 @@ class tabsScript extends tabs
 {
   var $base= "";
 
-  function tabsScript($config, $data, $dn)
+  function tabsScript($config, $data, $dn, $new_cn = "")
   {
 	tabs::tabs($config, $data, $dn);
+
+	/* Directly assign a valid dn 
+     * cn can't be changed anymore, since the object was created
+     */
+	$baseobject= $this->by_object['faiScript'];
+    $use_dn= 'cn='.$new_cn.",ou=scripts,ou=fai,ou=configs,ou=systems,".$_SESSION['faifilter']['base'];
+	$this->by_object['faiScript']->use_dn=$use_dn;
   }
 
   function check()
   {
 	return (tabs::check(TRUE));
   }
-  
 
   function save()
   {
