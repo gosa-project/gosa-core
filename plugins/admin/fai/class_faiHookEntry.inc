@@ -13,7 +13,9 @@ class faiHookEntry extends plugin
   var $objectclasses= array();
 
   var $orig_cn              = "";
-
+  var $tasks                = array("chboot", "configure", "debconf", "extrbase", "faiend", "finish",
+                                    "install", "instsoft", "mirror", "mountdisks", "partition", "prepareapt",
+                                    "savelog", "softupdate", "sysinfo"," updatebase");
   var $Object_dn            = "";
   var $Object_cn            = "";
   var $Object_FAItask       = "";
@@ -55,6 +57,7 @@ class faiHookEntry extends plugin
         $this->Object_FAIscript = $str;
       }
     }
+    $smarty->assign("tasks", $this->tasks);
 
      /* Magic quotes GPC, escapes every ' " \, to solve some security risks
      * If we post the escaped strings they will be escaped again
@@ -89,9 +92,6 @@ class faiHookEntry extends plugin
   function check()
   {
     $message= array();
-    if(empty($this->Object_FAItask)) {
-      $message[]=_("Please enter a value for task.");
-    }
     if(empty($this->Object_FAIscript)) {
       $message[]=_("Please enter a value for script.");
     }

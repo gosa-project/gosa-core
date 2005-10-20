@@ -31,11 +31,11 @@
 					<tr>
 						<td>
 							<LABEL for="Object_FAItask">
-							{t}Task{/t}{$must}&nbsp;
+							{t}Task{/t}&nbsp;
 							</LABEL>
-						</td>
-						<td>
-							<input type="text" name="Object_FAItask" value="{$Object_FAItask}" id="Object_FAItask" style="width:280px;">
+							<select name="Object_FAItask" title="{t}Choose a FAI task to hook{/t}">
+								{html_options values=$tasks output=$tasks selected=$Object_FAItask}
+							</select>
 						</td>
 					</tr>
 				</table>
