@@ -216,6 +216,10 @@ class faiProfile extends plugin
       $message[]=_("Please assign at least one class to this  profile.");
     }
  
+    if(empty($this->cn)){
+      $message[]=_("Please enter a valid name.");
+    }
+
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($_SESSION['faifilter']['base']);
     $ldap->search("(&(objectClass=FAIprofile)(cn=".$this->cn.")(!cn=".$this->old_cn."))",array("*"));
