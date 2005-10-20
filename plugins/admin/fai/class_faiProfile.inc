@@ -212,10 +212,6 @@ class faiProfile extends plugin
   {
     $message= array();
     
-    if((empty($this->cn))||(preg_match("/[^a-z0-9]/i",$this->cn))){
-      $message[]=_("Please enter a valid name. Only 0-9 a-Z are allowed here.");
-    }
-
     if(count($this->FAIclasses) == 0){
       $message[]=_("Please assign at least one class to this  profile.");
     }
