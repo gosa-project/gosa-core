@@ -88,9 +88,11 @@ class faiHook extends plugin
       $this->is_dialog=true;
     }
 
+    $_SESSION['objectinfo']= $this->dn;
     /* Edit selected Sub Object */
     if((isset($_POST['EditSubObject']))&&(isset($_POST['SubObject']))){
       $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$_POST['SubObject']]);
+      $_SESSION['objectinfo'] = $this->SubObjects[$_POST['SubObject']]['dn'];
       $this->is_dialog=true;
     }
     

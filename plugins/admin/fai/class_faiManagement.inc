@@ -263,6 +263,7 @@ class faiManagement extends plugin
 			$this->dialog= new $a_setup[0]($this->config,
 					$this->config->data['TABS'][$a_setup[2]],$this->dn);
 			$this->is_dialog = true;
+			$_SESSION['objectinfo'] = $this->dn;
 		}
 
 
@@ -342,8 +343,8 @@ class faiManagement extends plugin
 			unset($this->dialog);
 			$this->dialog=NULL;
 			$this->is_dialog = false;
+			unset($_SESSION['objectinfo']);
 		}
-
 
 		/* This check if the given tab could be saved 
 		 * If it was possible to save it, remove dialog object. 
@@ -360,9 +361,9 @@ class faiManagement extends plugin
 				unset($this->dialog);
 				$this->dialog=NULL;
 				$this->is_dialog=false;
+				unset($_SESSION['objectinfo']);
 			}
 		}
-
 
 		/* If dialog is set, but $this->is_dialog==false, then 
 		 *  only the "abort" button is shown, this are dialogs that must not be saved.  
