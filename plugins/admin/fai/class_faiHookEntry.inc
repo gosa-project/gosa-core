@@ -9,19 +9,19 @@ class faiHookEntry extends plugin
 
   /* attribute list for save action */
   var $ignore_account= TRUE;
-  var $attributes   = array("Object_cn","Object_description","Object_FAIscript","Object_FAItask");
+  var $attributes   = array("cn","description","FAIscript","FAItask");
   var $objectclasses= array();
 
   var $orig_cn              = "";
   var $tasks                = array("chboot", "configure", "debconf", "extrbase", "faiend", "finish",
                                     "install", "instsoft", "mirror", "mountdisks", "partition", "prepareapt",
                                     "savelog", "softupdate", "sysinfo"," updatebase");
-  var $Object_dn            = "";
-  var $Object_cn            = "";
-  var $Object_FAItask       = "";
-  var $Object_FAIscript     = "";
-  var $Object_description   = "";
-  var $Object_status        = "new";
+  var $dn            = "";
+  var $cn            = "";
+  var $FAItask       = "";
+  var $FAIscript     = "";
+  var $description   = "";
+  var $status        = "new";
   
   function faiHookEntry ($config, $dn= NULL,$object=false)
   {
@@ -30,11 +30,11 @@ class faiHookEntry extends plugin
       $this->orig_cn= $object['cn'];
       $this->dn=$object['dn'];
       foreach($object as $name=>$value){
-        $oname = "Object_".$name;
+        $oname = $name;
         $this->$oname=$value;
       }
     }else{
-      $this->Object_status = "new";
+      $this->status = "new";
       $this->orig_cn       = false;
     }
   }
@@ -54,7 +54,7 @@ class faiHookEntry extends plugin
         print_red(_("Selected file is empty."));
       }else{
         $str = utf8_encode(file_get_contents($_FILES['ImportFile']['tmp_name']));
-        $this->Object_FAIscript = $str;
+        $this->FAIscript = $str;
       }
     }
     $smarty->assign("tasks", $this->tasks);
@@ -92,15 +92,15 @@ class faiHookEntry extends plugin
   function check()
   {
     $message= array();
-    if(empty($this->Object_FAIscript)) {
+    if(empty($this->FAIscript)) {
       $message[]=_("Please enter a value for script.");
     }
 
-    if(empty($this->Object_cn)){
+    if(empty($this->cn)){
       $message[] = _("Please enter a name.");
     }
 
-    if(preg_match("/[^0-9a-z]/i",$this->Object_cn)){
+    if(preg_match("/[^0-9a-z]/i",$this->cn)){
       $message[] = _("Please enter a valid name. Only a-Z 0-9 are allowed.");
     }
   
@@ -111,8 +111,7 @@ class faiHookEntry extends plugin
   {
     $tmp=array();
     foreach($this->attributes as $attrs){ 
-      $attr = preg_replace("/^Object_/","",$attrs);
-      $tmp[$attr] = $this->$attrs;
+      $tmp[$attrs] = $this->$attrs;
     }
 
     if(($this->orig_cn)&&($tmp['cn']!=$this->orig_cn)){
@@ -121,7 +120,7 @@ class faiHookEntry extends plugin
     }
   
     $tmp['dn']      = $this->dn;  
-    $tmp['status']  = $this->Object_status;  
+    $tmp['status']  = $this->status;  
     return($tmp);
   }
 }

@@ -9,7 +9,7 @@
 							{t}Name{/t}{$must}&nbsp;
 						</td>
 						<td>
-							<input value="{$Object_cn}" name="Object_cn">
+							<input value="{$cn}" name="cn">
 						</td>
 					</tr>
 					<tr>
@@ -17,7 +17,7 @@
 							{t}Description{/t}&nbsp;
 						</td>
 						<td>
-							<input value="{$Object_description}" name="Object_description">
+							<input value="{$description}" name="description">
 						</td>
 					</tr>
 				</table>
@@ -30,11 +30,11 @@
 				<table width="100%">
 					<tr>
 						<td>
-							<LABEL for="Object_FAItask">
+							<LABEL for="FAItask">
 							{t}Task{/t}&nbsp;
 							</LABEL>
-							<select name="Object_FAItask" title="{t}Choose a FAI task to hook{/t}">
-								{html_options values=$tasks output=$tasks selected=$Object_FAItask}
+							<select name="FAItask" title="{t}Choose a FAI task to hook{/t}">
+								{html_options values=$tasks output=$tasks selected=$FAItask}
 							</select>
 						</td>
 					</tr>
@@ -46,14 +46,14 @@
 
 <p class="seperator">&nbsp;</p>
 <h2><img alt="" src="images/fai_hook.png" align="middle" title="{t}Hook attributes{/t}">&nbsp;
-    <LABEL for="Object_FAIscript">
+    <LABEL for="FAIscript">
         {t}Script{/t}
     </LABEL>
     </h2>
 <table width="99%">
     <tr>
         <td>
-            <textarea name="Object_FAIscript" style="width:100%;height:300px;" id="Object_FAIscript">{$Object_FAIscript}</textarea>
+            <textarea name="FAIscript" style="width:100%;height:300px;" id="FAIscript">{$FAIscript}</textarea>
         </td>
     </tr>
 </table>

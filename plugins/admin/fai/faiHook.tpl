@@ -49,3 +49,4 @@
 		</td>
 	</tr>
 </table>
+<input type="hidden" value="1" name="FAIhook_posted">
