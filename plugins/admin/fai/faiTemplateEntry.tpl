@@ -5,11 +5,11 @@
 <tr>
 	<td width="50%">
 		{t}Name{/t}{$must}&nbsp;
-		<input value="{$Object_cn}" name="Object_cn" size="13">&nbsp;&nbsp;
+		<input value="{$cn}" name="cn" size="13">&nbsp;&nbsp;
 	</td>
 	<td>
 		{t}Description{/t}&nbsp;
-		<input size="35" value="{$Object_description}" name="Object_description">
+		<input size="35" value="{$description}" name="description">
 	</td>
 </tr>
 </table>
@@ -25,30 +25,30 @@
    <table>
     <tr>
 		<td style="vertical-align:top">
-			<LABEL for="Object_FAItemplateFile">
+			<LABEL for="FAItemplateFile">
 				{t}File{/t}{$must}&nbsp;
 			</LABEL>
 			</td>
 		<td style="vertical-align:top">
 			{$status}
-			{if $Object_FAItemplatePath}
+			{if $FAItemplatePath}
 			  <a href="getbin.php?rand={$rand}"><img alt="{t}Save template{/t}..." title="{t}Save template{/t}..." src="images/save.png" border="0" align="center" /></a>
 			{/if}
 			<br>
 			<br>
-			<input type="file" name="FAItemplateFile" value="{$Object_FAItemplateFile}" id="Object_FAItemplateFile">
+			<input type="file" name="FAItemplateFile" value="{$FAItemplateFile}" id="FAItemplateFile">
 			&nbsp;<input type="submit" value="{t}Upload{/t}" name="TmpFileUpload">
 			<br>
 			<br>
 			</td>
 	</tr><tr>
 			<td>
-				<LABEL for="Object_FAItemplatePath">
+				<LABEL for="FAItemplatePath">
 					{t}Destination path{/t}{$must}&nbsp;
 				</LABEL>
 				</td>
 			<td>
-				<input type="text" name="Object_FAItemplatePath" value="{$Object_FAItemplatePath}" id="Object_FAItemplatePath" size="45">
+				<input type="text" name="FAItemplatePath" value="{$FAItemplatePath}" id="FAItemplatePath" size="45">
 				</td>
 		</tr>
 		</table>
@@ -58,21 +58,21 @@
 		<tr>
 	
 		<td>
-			<LABEL for="Object_user">
+			<LABEL for="user">
 				{t}Owner{/t}{$must}&nbsp;
 			</LABEL>
 			</td>
 		<td>
-			<input type="text" name="Object_user" value="{$Object_user}" id="Object_user" size="15">
+			<input type="text" name="user" value="{$user}" id="user" size="15">
 			</td>
 	</tr><tr>
 		<td style="vertical-align:top">
-			<LABEL for="Object_group">
+			<LABEL for="group">
 				{t}Group{/t}{$must}&nbsp;
 			</LABEL>
 			</td>
 		<td>
-			<input type="text" name="Object_group" value="{$Object_group}" id="Object_group" size="15">
+			<input type="text" name="group" value="{$group}" id="group" size="15">
 			<br>
 			<br>
 			</td>

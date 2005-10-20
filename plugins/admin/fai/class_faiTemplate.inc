@@ -194,10 +194,12 @@ class faiTemplate extends plugin
    */
   function save_object()
   {
-    plugin::save_object();
-    foreach($this->attributes as $attrs){
-      if(isset($_POST[$attrs])){
-        $this->$attrs = $_POST[$attrs];
+    if(isset($_POST['FAItemplate_posted'])){
+      plugin::save_object();
+      foreach($this->attributes as $attrs){
+        if(isset($_POST[$attrs])){
+          $this->$attrs = $_POST[$attrs];
+        } 
       }
     }
   }
