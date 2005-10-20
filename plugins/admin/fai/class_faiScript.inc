@@ -280,7 +280,11 @@ class faiScript extends plugin
           $obj['status']="modify";
         }
       }
- 
+
+      if(empty($tmp['FAIpriority'])){
+        $tmp['FAIpriority']  ="0";
+      }
+  
       if($obj['status'] == "delete"){
         $ldap->cd($sub_dn);
         $ldap->rmdir_recursive($sub_dn);

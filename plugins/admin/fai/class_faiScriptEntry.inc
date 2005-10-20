@@ -16,7 +16,7 @@ class faiScriptEntry extends plugin
 
   var $dn            = "";
   var $cn            = "";
-  var $FAIpriority   = "";
+  var $FAIpriority   = "0";
   var $FAIscript     = "";
   var $description   = "";
   var $status        = "new";
