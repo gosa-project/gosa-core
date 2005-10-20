@@ -319,7 +319,7 @@ class faiManagement extends plugin
 				$name = $this->dialog->save();
 
 				$this->dialog = new $a_setup[0]($this->config,
-						$this->config->data['TABS'][$a_setup[2]],$this->dn);
+						$this->config->data['TABS'][$a_setup[2]],$this->dn,$name);
 				$this->dialog->by_object[$a_setup[1]]->cn = $name;
 				$this->is_dialog = true;
 			}		
@@ -686,6 +686,15 @@ class faiManagement extends plugin
 		}
 		ksort($this->objects);
 		reset ($this->objects);
+	
+		/* use numeric index, thats a bit more secure */	
+		$tmp0 = array();
+		foreach($this->objects as $obj){
+			$tmp0[]= $obj;
+		}
+		$this->objects = array();
+		$this->objects = $tmp0;
+
 	}
 
 	function remove_lock()
