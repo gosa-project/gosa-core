@@ -9,7 +9,7 @@
 							{t}Name{/t}{$must}&nbsp;
 						</td>
 						<td>
-							<input value="{$cn}" name="cn">
+							<input value="{$Object_cn}" name="Object_cn">
 						</td>
 					</tr>
 					<tr>
@@ -17,7 +17,7 @@
 							{t}Description{/t}&nbsp;
 						</td>
 						<td>
-							<input size=40 value="{$description}" name="description">
+							<input size=40 value="{$Object_description}" name="Object_description">
 						</td>
 					</tr>
 				</table>
@@ -30,13 +30,13 @@
 				<table width="100%">
 					<tr>
 						<td>
-							<LABEL for="FAIpriority">
+							<LABEL for="Object_FAIpriority">
 							{t}Priority{/t}
 							</LABEL>
 						</td>
 						<td>
-						    <select name="FAIpriority" title="{t}Choose a priority{/t}" FAIpriority>
-                				{html_options values=$FAIprioritys output=$FAIprioritys selected=$FAIpriority}
+						    <select name="Object_FAIpriority" title="{t}Choose a priority{/t}" Object_FAIpriority>
+                				{html_options values=$Object_FAIprioritys output=$Object_FAIprioritys selected=$Object_FAIpriority}
             				</select>
 						</td>
 					</tr>
@@ -46,14 +46,14 @@
 </table>
 <p class="seperator">&nbsp;</p>
 <h2><img alt="" src="images/fai_script.png" align="middle" title="{t}Script attributes{/t}">&nbsp;
-	<LABEL for="FAIscript">
+	<LABEL for="Object_FAIscript">
 		{t}Script{/t}
 	</LABEL>
 	</h2>
 <table width="99%">
     <tr>
         <td>
-            <textarea name="FAIscript" style="width:100%;height:300px;" id="FAIscript">{$FAIscript}</textarea>
+            <textarea name="Object_FAIscript" style="width:100%;height:300px;" id="Object_FAIscript">{$Object_FAIscript}</textarea>
         </td>
     </tr>
 </table>
