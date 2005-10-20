@@ -9,15 +9,15 @@ class faiVariableEntry extends plugin
 
   /* attribute list for save action */
   var $ignore_account= TRUE;
-  var $attributes   = array("Object_cn","Object_description","Object_FAIvariableContent");
+  var $attributes   = array("cn","description","FAIvariableContent");
   var $objectclasses= array();
 
   var $orig_cn              = "";
-  var $Object_dn            = "";
-  var $Object_cn            = "";
-  var $Object_FAIvariableContent   = "";
-  var $Object_description   = "";
-  var $Object_status        = "new";
+  var $dn            = "";
+  var $cn            = "";
+  var $FAIvariableContent   = "";
+  var $description   = "";
+  var $status        = "new";
   
   function faiVariableEntry ($config, $dn= NULL,$object=false)
   {
@@ -26,11 +26,11 @@ class faiVariableEntry extends plugin
       $this->orig_cn= $object['cn'];
       $this->dn=$object['dn'];
       foreach($object as $name=>$value){
-        $oname = "Object_".$name;
+        $oname = $name;
         $this->$oname=addslashes($value);
       }
     }else{
-      $this->Object_status = "new";
+      $this->status = "new";
       $this->orig_cn       = false;
     }
   }
@@ -75,15 +75,15 @@ class faiVariableEntry extends plugin
   {
     $message= array();
     
-    if(empty($this->Object_FAIvariableContent)) {
+    if(empty($this->FAIvariableContent)) {
       $message[]=_("Please specify a value for the attribute 'content'."); 
     }
    
-    if(empty($this->Object_cn)){
+    if(empty($this->cn)){
       $message[] = _("Please enter a name.");
     }
 
-    if(preg_match("/[^0-9a-z_]/i",$this->Object_cn)){
+    if(preg_match("/[^0-9a-z_]/i",$this->cn)){
       $message[] = _("Please enter a valid name. Only a-Z 0-9 are allowed.");
     }
  
@@ -94,8 +94,7 @@ class faiVariableEntry extends plugin
   {
     $tmp=array();
     foreach($this->attributes as $attrs){ 
-      $attr = preg_replace("/^Object_/","",$attrs);
-      $tmp[$attr] = stripslashes( $this->$attrs);
+      $tmp[$attrs] = stripslashes( $this->$attrs);
     }
 
     if(($this->orig_cn)&&($tmp['cn']!=$this->orig_cn)){
@@ -104,7 +103,7 @@ class faiVariableEntry extends plugin
     }
   
     $tmp['dn']      = $this->dn;  
-    $tmp['status']  = $this->Object_status;  
+    $tmp['status']  = $this->status;  
     return($tmp);
   }
 }

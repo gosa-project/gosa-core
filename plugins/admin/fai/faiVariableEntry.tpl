@@ -9,7 +9,7 @@
 							{t}Name{/t}{$must}&nbsp;
 						</td>
 						<td>
-							<input value="{$Object_cn}" name="Object_cn">
+							<input value="{$cn}" name="cn">
 						</td>
 					</tr>
 					<tr>
@@ -17,7 +17,7 @@
 							{t}Description{/t}&nbsp;
 						</td>
 						<td>
-							<input size=40 value="{$Object_description}" name="Object_description">
+							<input size=40 value="{$description}" name="description">
 						</td>
 					</tr>
 				</table>
@@ -35,7 +35,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<input type="text" name="Object_FAIvariableContent" value="{$Object_FAIvariableContent}" id="Content" style="width:250px;">
+							<input type="text" name="FAIvariableContent" value="{$FAIvariableContent}" id="Content" style="width:250px;">
 						</td>
 					</tr>
 				</table>
