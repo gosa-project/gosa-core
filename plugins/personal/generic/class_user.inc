@@ -249,7 +249,7 @@ class user extends plugin
     $smarty->assign("gender_list", $sex);
 
     /* Assign prefered langage */
-    $language= array(0 => "&nbsp;", "fr_FR" => _("fr_FR"), "en_EN" => _("en_EN"), "de_DE" => _("de_DE"), "it_IT" => _("it_IT"));
+    $language= array(0 => "&nbsp;", "fr_FR" => _("fr_FR"), "en_EN" => _("en_EN"), "de_DE" => _("de_DE"), "it_IT" => _("it_IT"), "nl_NL" => _("nl_NL"));
     $smarty->assign("preferredLanguage_list", $language);
 
     /* Get random number for pictures */
