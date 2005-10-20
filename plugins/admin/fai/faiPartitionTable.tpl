@@ -49,3 +49,10 @@
 		</td>
 	</tr>
 </table>
+<!-- Place cursor -->
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+  document.mainform.description.focus();
+  -->
+</script>
+

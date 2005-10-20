@@ -29,3 +29,10 @@
 <input type="submit" name="SaveDisk" value="{t}Save{/t}" >
 <input type="submit" name="CancelDisk" value="{t}Cancel{/t}" >
 </div>
+<!-- Place cursor -->
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+  document.mainform.DISK_cn.focus();
+  -->
+</script>
+

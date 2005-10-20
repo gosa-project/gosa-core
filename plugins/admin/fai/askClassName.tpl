@@ -83,6 +83,8 @@
 	
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
+	<!--
 	document.mainform.UseTextInputName.select();
 	document.mainform.UseTextInputName.focus();
+	-->
 </script>

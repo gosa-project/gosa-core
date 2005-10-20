@@ -66,3 +66,10 @@
 	<input name="CancelSubObject" value="Cancel" type="submit">
 </div>
 <input type="hidden" name="ignore">
+<!-- Place cursor -->
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+  document.mainform.cn.focus();
+  -->
+</script>
+

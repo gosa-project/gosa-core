@@ -50,3 +50,10 @@
 	</tr>
 </table>
 <input type="hidden" value="1" name="FAIvariable_posted">
+<!-- Place cursor -->
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+  document.mainform.description.focus();
+  -->
+</script>
+
