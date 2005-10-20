@@ -129,7 +129,6 @@ class faiPartitionTableEntry extends plugin
       $this->partitions = $tmp;
     }
 
-
     /* To add a partitions we only append an empty 
      *  array to the already defined partitions.
      */
@@ -191,10 +190,16 @@ class faiPartitionTableEntry extends plugin
      * To be able to check the posts later, we append a key to each single postfield. like cn_1 ... cn_2
      */
     foreach($this->partitions as $key => $part){
+      
+      $dis = "";
+      if($part['FAIpartitionFlags'] == "preserve"){
+        $dis = " disabled ";
+      }
+
       if($part['status']!="delete"){
         /* Generate Partition select box  
          */
-        $PartitionType = "<select name='FAIpartitionType_".$key."'>";
+        $PartitionType = "<select name='FAIpartitionType_".$key."' id='FAIpartitionType_".$key."' ".$dis.">";
         foreach($PartitionTypes as $type){
           if($part['FAIpartitionType'] == $type){
             $PartitionType .="<option value='".$type."' selected >".$type."</option>";
@@ -207,7 +212,7 @@ class faiPartitionTableEntry extends plugin
 
         /* Generate fsType select box  
          */
-        $FAIfsType= "<select name='FAIfsType_".$key."'>";
+        $FAIfsType= "<select name='FAIfsType_".$key."' id='FAIfsType_".$key."' ".$dis.">";
         foreach($FAIfsTypes as $type){
           if($part['FAIfsType'] == $type){
             $FAIfsType  .="<option value='".$type."' selected >".$type."</option>";
@@ -217,20 +222,29 @@ class faiPartitionTableEntry extends plugin
         }        
         $FAIfsType.="</select>";   
 
-        $str .= "<tr>";
-        $str .= "<td>".$PartitionType."</td>";
-        $str .= "<td>".$FAIfsType."</td>";
-        $str .= "<td><input name='FAImountPoint_".$key."'     value='".$part['FAImountPoint']."'    ></td>";
-        $str .= "<td><input name='FAIpartitionSize_".$key."'  value='".$part['FAIpartitionSize']."' size=12></td>";
-        $str .= "<td><input name='FAImountOptions_".$key."'   value='".$part['FAImountOptions']."'  style='width:100px;'></td>";
-        $str .= "<td><input name='FAIfsOptions_".$key."'      value='".$part['FAIfsOptions']."'     style='width:100px;'></td>";
+        $str .= "\n<tr>";
+        $str .= "\n<td>".$PartitionType."</td>";
+        $str .= "\n<td>".$FAIfsType."</td>";
+        $str .= "\n<td><input name='FAImountPoint_".$key."'    ".$dis."  value='".$part['FAImountPoint']."'    id='FAImountPoint_".$key."'></td>";
+        $str .= "\n<td><input name='FAIpartitionSize_".$key."'  ".$dis." value='".$part['FAIpartitionSize']."' id='FAIpartitionSize_".$key."' size=12></td>";
+        $str .= "\n<td><input name='FAImountOptions_".$key."'  ".$dis."  value='".$part['FAImountOptions']."'  id='FAImountOptions_".$key."' style='width:100px;'></td>";
+        $str .= "\n<td><input name='FAIfsOptions_".$key."'     ".$dis."  value='".$part['FAIfsOptions']."'     id='FAIfsOptions_".$key."' style='width:100px;'></td>";
+
+        $changeState = "onClick=\"changeState('FAImountPoint_".$key."') ; ".
+                                 "changeState('FAIpartitionSize_".$key."') ; ".
+                                 "changeState('FAImountOptions_".$key."') ; ".
+                                 "changeState('FAIpartitionType_".$key."') ; ".
+                                 "changeState('FAIfsType_".$key."') ; ".
+                                 "changeState('FAIfsOptions_".$key."') ; \"";
+  
+
         if($part['FAIpartitionFlags']!=false){
-          $str .= "<td><input type='checkbox' name='FAIpartitionFlags_".$key."' value='preserve' checked></td>";
+          $str .= "\n<td><input type='checkbox' name='FAIpartitionFlags_".$key."' value='preserve' checked ".$changeState."></td>";
         }else{
-          $str .= "<td><input type='checkbox' name='FAIpartitionFlags_".$key."' value='preserve'></td>";
+          $str .= "\n<td><input type='checkbox' name='FAIpartitionFlags_".$key."' value='preserve' ".$changeState."></td>";
         }
-        $str .= "<td><input type='submit' name='Delete_".$key."' value='"._("Remove")."'></td>";
-        $str .= "</tr>";    
+        $str .= "\n<td><input type='submit' name='Delete_".$key."' value='"._("Remove")."'></td>";
+        $str .= "\n</tr>";    
       }
     }
     $str.="</table>";
@@ -310,7 +324,15 @@ class faiPartitionTableEntry extends plugin
     }      
 
     foreach($this->partitions as $key => $part){
-    
+  
+      /* Skip all checks, if preserve is set */ 
+      if($part['FAIpartitionFlags'] == "preserve"){
+        $this->partitions[$key]['FAIpartitionType'] = "preserve";
+        $this->partitions[$key]['FAIfsType']        = "preserve";
+        $this->partitions[$key]['FAIpartitionSize'] = "preserve";
+        continue;
+      }
+ 
       if((in_array($part['FAImountPoint'],$alreadyUsed['FAImountPoint']))&&($part['FAIfsType']!="swap")){
         $message[]=sprintf(_("please enter a unique mount point for partition %s"),($key));
       }
