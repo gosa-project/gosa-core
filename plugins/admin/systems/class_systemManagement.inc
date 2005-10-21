@@ -199,6 +199,7 @@ class systems extends plugin
           $this->systab->set_acl ($this->acl);
           $this->systab->by_object['termgeneric']->cn= "default";
           $this->systab->by_object['termservice']->cn= "default";
+          $this->systab->by_object['termgeneric']->base = $_SESSION['terminalfilter']['depselect'];  
           break;
 
         case 'workstation':
@@ -207,33 +208,41 @@ class systems extends plugin
           $this->systab->set_acl ($this->acl);
           $this->systab->by_object['workgeneric']->cn= "wdefault";
           $this->systab->by_object['workservice']->cn= "default";
+          $this->systab->by_object['workgeneric']->base = $_SESSION['terminalfilter']['depselect'];  
           break;
 
         case 'server':
           $this->systab= new servtabs($this->config,
               $this->config->data['TABS']['SERVTABS'], $this->dn);
           $this->systab->set_acl ($this->acl);
+          $this->systab->by_object['servgeneric']->base = $_SESSION['terminalfilter']['depselect'];  
           break;
 
         case 'printer':
           $this->systab= new printtabs($this->config,
               $this->config->data['TABS']['PRINTTABS'], $this->dn);
           $this->systab->set_acl ($this->acl);
+          $this->systab->by_object['printgeneric']->base = $_SESSION['terminalfilter']['depselect'];  
           break;
 
         case 'phone':
           $this->systab= new phonetabs($this->config,
               $this->config->data['TABS']['PHONETABS'], $this->dn);
           $this->systab->set_acl ($this->acl);
+          $this->systab->by_object['phonegeneric']->base = $_SESSION['terminalfilter']['depselect'];  
           break;
 
         case 'component':
           $this->systab= new componenttabs($this->config,
               $this->config->data['TABS']['COMPONENTTABS'], $this->dn);
           $this->systab->set_acl ($this->acl);
+          $this->systab->by_object['componentgeneric']->base = $_SESSION['terminalfilter']['depselect'];  
           break;
       }
+       
+      $this->systab->base = $_SESSION['terminalfilter']['depselect'];  
     }
+
 
     /* User wants to edit data? */
     if ($s_action == "edit"){
