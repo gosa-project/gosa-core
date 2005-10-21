@@ -214,11 +214,20 @@ class servgeneric extends plugin
       $ldap->add($this->attrs);
       $mode= "add";
     } else {
-      if ($this->orig_dn != $this->dn){
-        $this->move($this->orig_dn, $this->dn);
-        plugin::save();
+   
+      /* cn is not case sensitive for ldap, but for php it is!! */ 
+      if($this->config->current['DNMODE'] == "cn"){
+        if (strtolower($this->orig_dn) != (strtolower($this->dn))){
+          $this->move($this->orig_dn, $this->dn);
+          plugin::save();
+        }
+      }else{
+        if ($this->orig_dn != $this->dn){
+          $this->move($this->orig_dn, $this->dn);
+          plugin::save();
+        }
       }
-
+  
       $ldap->cd($this->dn);
       $ldap->modify($this->attrs);
       $mode= "modify";
