@@ -132,7 +132,7 @@ class faiPackage extends plugin
         unset($this->dialog);
         $this->dialog = false;
         $this->is_dialog=false;
-        //  $this->newDialogShown = true;
+        $this->newDialogShown = true;
       }
 
       /* Draw dialog */
