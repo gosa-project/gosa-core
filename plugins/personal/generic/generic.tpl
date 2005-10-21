@@ -14,7 +14,7 @@
   <td style="vertical-align:top">
    <img align="bottom" border="1" width="145" height="200" src="getbin.php?rand={$rand}" alt="{t}Personal picture{/t}">
    <br>
-   <input type=submit name="edit_picture" {$jpegPhotoACL} value="{t}Change picture{/t}...">
+   <input type="submit" name="edit_picture" {$jpegPhotoACL} value="{t}Change picture{/t}...">
   </td>
 
   <!-- Name, ... -->
@@ -70,9 +70,9 @@
        {html_options values=$years output=$years selected=$year}
       </select>
       <input type="hidden" name="dob" value="{$dob}">
-      <input type=submit name="set_dob" value="-" {$dobACL}>
+      <input type="submit" name="set_dob" value="-" {$dobACL}>
       {else}
-      <input type=submit name="set_dob" value="{t}Set{/t}" {$dobACL}>
+      <input type="submit" name="set_dob" value="{t}Set{/t}" {$dobACL}>
       {/if}
      </td>
     </tr>
@@ -119,7 +119,7 @@
    <table summary=""> 
     <tr>
      <td style="vertical-align:top;"><label for="homePostalAddress">{t}Address{/t}</label></td>
-     <td><textarea id="homePostalAddress" name="homePostalAddress" rows=3 cols=22 {$homePostalAddressACL}>{$homePostalAddress}</textarea></td>
+     <td><textarea id="homePostalAddress" name="homePostalAddress" rows="3" cols="22" {$homePostalAddressACL}>{$homePostalAddress}</textarea></td>
     </tr>
     <tr>
      <td><label for="homePhone">{t}Private phone{/t}</label></td>
@@ -147,12 +147,12 @@
     <tr>
      <td><label for="edit_cert">{t}Certificates{/t}</label></td>
      <td>
-      <input id="edit_cert" type=submit name="edit_cert" {$certificatesACL} value="{t}Edit certificates{/t}...">
+      <input id="edit_cert" type="submit" name="edit_cert" {$certificatesACL} value="{t}Edit certificates{/t}...">
      </td>
     </tr>
     <tr>
      <td><label for="edit_krb">{t}Kerberos{/t}</label></td>
-     <td><input id="edit_krb" type=submit name="edit_krb" disabled value="{t}Edit properties{/t}..."></td>
+     <td><input id="edit_krb" type="submit" name="edit_krb" disabled value="{t}Edit properties{/t}..."></td>
     </tr>
     {/if}
 
