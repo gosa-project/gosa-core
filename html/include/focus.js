@@ -125,7 +125,7 @@ if (netscape){
   document.captureEvents(Event.KEYPRESS);
 	document.onkeypress= keyPress;
 } else {
-	document.onkeypress= keyPress;
+	document.onkeydown= keyPress;
 }
 
 function hide(element) {
