@@ -22,7 +22,7 @@
 <tr>
 	<td height="30">
 		<h2>
-			<LABEL for="release">{t}Following releases are available{/t}</LABEL> : 
+			<LABEL for="release">{t}Following releases are available{/t}</LABEL>: 
 		</h2>
 	</td>
 	<td>
@@ -34,7 +34,7 @@
 {if $DisRelease neq false}
 <tr>
 	<td height="30">
-        <h2>{t}Sections for this release{/t} : </h2> 
+        <h2>{t}Sections for this release{/t}: </h2> 
 		
 	</td>
 	<td>
@@ -45,7 +45,7 @@
 {if $DisSection neq false}
 <tr>
 	<td height="30">
-		<h2><LABEL for="mirror">{t}Matching mirrors{/t}</LABEL> : </h2>
+		<h2><LABEL for="mirror">{t}Matching mirrors{/t}</LABEL>: </h2>
 	</td>
 	<td>
 		<select name="FAIdebianMirrorS" title="{t}mirror{/t}" {$MirrorACL}>

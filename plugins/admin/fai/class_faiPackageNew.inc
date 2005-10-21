@@ -177,12 +177,14 @@ class faiPackageNew extends plugin
   /* Save data to object */
   function save_object()
   {
-    /* Post handling for Section, Release and Mirror Setup */
-    if((isset($_POST['FAIdebianReleaseS']))&&(!empty($_POST['FAIdebianReleaseS']))){
-      $this->FAIdebianRelease = $_POST['FAIdebianReleaseS'];
-    }
-    if((isset($_POST['FAIdebianMirrorS']))&&(!empty($_POST['FAIdebianMirrorS']))){
-      $this->FAIdebianMirror = $_POST['FAIdebianMirrorS'];
+    if(isset($_POST['SetRepository'])){
+      /* Post handling for Section, Release and Mirror Setup */
+      if((isset($_POST['FAIdebianReleaseS']))&&(!empty($_POST['FAIdebianReleaseS']))){
+        $this->FAIdebianRelease = $_POST['FAIdebianReleaseS'];
+      }
+      if((isset($_POST['FAIdebianMirrorS']))&&(!empty($_POST['FAIdebianMirrorS']))){
+        $this->FAIdebianMirror = $_POST['FAIdebianMirrorS'];
+      }
     }
   }
 
