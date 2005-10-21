@@ -109,7 +109,6 @@ if (!$remove_lock){
   foreach ($connectivity->plugin_name as $name){
     $in_edit_mode|= $connectivity->plugin[$name]->is_account;
   }
-  $display.= "<p class=\"plugbottom\">";
   if ($in_edit_mode){
 
     if (isset($_SESSION['edit'])){
