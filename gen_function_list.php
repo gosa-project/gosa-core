@@ -1,4 +1,4 @@
-#!/usr/bin/php4 -q
+#!/usr/bin/php -q
 <?php
 /*
 /*
@@ -20,13 +20,14 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-include('include/functions_test.inc');
+$current_dir=trim(`pwd`);
+include($current_dir.'/include/functions_test.inc');
 
 // Build Array of called functions
-$array= test_defined_functions('./');
+$array= test_defined_functions();
 
 // Write List to file
-$file= 'include/functions_list.inc';
+$file= $current_dir.'/include/functions_list.inc';
 
 // If file does not exist, create it
 if(!file_exists($file)) {
