@@ -50,7 +50,6 @@
 	<LABEL for="description">
 	{t}Description{/t}
 	</LABEL>
-	{$must}
 	</td>
 	<td>
 	<input id="description" name="description" size=40 maxlength=60 {$descriptionACL} 
@@ -68,6 +67,7 @@
 	<tr>
 	<td>
 	{t}Phone number{/t}
+	{$must}
 	</td>
 	<td>
 	<input name="telephoneNumber" value="{$telephoneNumber}" size=15 {$telephoneNumberACL}>
