@@ -16,7 +16,7 @@ netscape= (ver.charAt(iln+1).toUpperCase() != "C");
 
 function keyPress(DnEvents) {
   // determines whether Netscape or Internet Explorer
-  k = (netscape) ? DnEvents.which : window.event.keyCode;
+  k = (netscape) ? DnEvents.keyCode : window.event.keyCode;
   if (k == 13) { // enter key pressed
 		if(typeof(nextfield)!='undefined') {
 			if(nextfield == 'login') {
@@ -63,6 +63,19 @@ function keyPress(DnEvents) {
 					return true;
 				}
 			}
+		}
+	} else if (k==9) {
+		// Tab key pressed
+		if(netscape) {
+			if(DnEvents.target.type == 'textarea') {
+				document.getElementById(DnEvents.target.id).value+="\t";
+		 		return false;
+			}
+		} else {
+		 	if(window.event.srcElement.type == 'textarea') {
+				document.getElementById(window.event.srcElement.id).value+="\t";
+		 		return false;
+		 	}
 		}
 	}
 }
