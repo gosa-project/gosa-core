@@ -95,6 +95,10 @@ class faiScriptEntry extends plugin
       $message[] = _("Please enter a name.");
     }
 
+    if(empty($this->FAIscript)){
+      $message[]=_("Please enter a script.");
+    }
+
     return ($message);
   }
  
