@@ -145,8 +145,13 @@ class printgeneric extends plugin
       }
     }
 
-
-
+    /* A printer was only saved if the printer belongs to a workstation. 
+     * If there was a new single printer created, it was never saved.
+     * -This allows new printers to be saved.
+     */
+    if($this->dn == "new"){
+      $this->is_account = true;
+    }
   }
 
   function execute()
