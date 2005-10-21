@@ -274,8 +274,8 @@ class workstartup extends plugin
         $a_share = $this->gotoAvailableShares[$_POST['gotoShareSelection']];
         $s_mount = $_POST['gotoShareMountPoint'];
         /* Preparing the new assignment */
-        $this->gotoShares[$a_share['name']]=$a_share;
-        $this->gotoShares[$a_share['name']]['mountPoint']=$s_mount;
+        $this->gotoShares[$a_share['name']."|".$a_share['server']]=$a_share;
+        $this->gotoShares[$a_share['name']."|".$a_share['server']]['mountPoint']=$s_mount;
       }
     }
 
@@ -506,6 +506,8 @@ class workstartup extends plugin
     /* prepare share settings */
     $tmp = array();
     foreach($this->gotoShares as $name => $settings){
+      $tmp2= split("\|",$name);
+      $name = $tmp2[0];
       $tmp[] = $settings['server']."|".$name."|".$settings['mountPoint'];
     }
     $this->attrs['gotoShare']=$tmp;
