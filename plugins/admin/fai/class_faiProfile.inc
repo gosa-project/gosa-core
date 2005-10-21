@@ -91,6 +91,11 @@ class faiProfile extends plugin
         $s_entry  = preg_replace("/_.*$/","",$s_entry);
       }elseif(preg_match("/Add_class/i",$name)){
         $s_action  = "add";
+      }elseif(preg_match("/DelClass/i",$name)){
+        $s_action  = "delete";
+        $s_entry = $_POST['FAIclass'];
+      }elseif(preg_match("/AddClass/i",$name)){
+        $s_action  = "add";
       }
     }
 
@@ -166,7 +171,8 @@ class faiProfile extends plugin
       $field3 = array("string"=> preg_replace("/%KEY%/",$usedClass,$actions),"attach"=>"style='border-right:none;'");
       $divlist->AddEntry(array($field1,$field2,$field3));
     }
-
+    
+    $smarty->assign("FAIclasses"  ,$this->FAIclasses);
     $smarty->assign("divlisthead" ,$listhead);
     $smarty->assign("divlist"     ,$divlist->DrawList());
 
