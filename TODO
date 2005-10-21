@@ -12,8 +12,6 @@ Things to fix before 2.4:
 
 * include/class_mail-methods-kolab.inc -> gosaMailQuota not defined when opening "cajus"
 
-* Check renaming of servers
-
 * Fix filter part of dialogs and remove long descriptive textx in front of the search
   fields
 
