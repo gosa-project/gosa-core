@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-10-21 10:30+0200\n"
+"PO-Revision-Date: 2005-10-21 10:35+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2776,9 +2776,8 @@ msgid "Logon script settings"
 msgstr "Anmeldungs-Skript-Einstellungen"
 
 #: plugins/personal/environment/logonManagement.tpl:10
-#, fuzzy
 msgid "Skript name"
-msgstr "Listenname"
+msgstr "Skriptname"
 
 #: plugins/personal/environment/logonManagement.tpl:17
 #: plugins/personal/environment/hotplugDialogNew.tpl:17
@@ -6795,9 +6794,8 @@ msgid "set"
 msgstr "setzen"
 
 #: plugins/admin/systems/workstationStartup.tpl:42
-#, fuzzy
 msgid "Assigned FAI classes"
-msgstr "Liste benutzter Klassen"
+msgstr "Zugewiesene FAI-Klassen"
 
 #: plugins/admin/systems/workstationStartup.tpl:65
 #: plugins/admin/systems/terminalStartup.tpl:53
@@ -8188,7 +8186,7 @@ msgstr "Sections f�r dieses Release"
 
 #: plugins/admin/fai/faiPackageNew.tpl:48
 msgid "Matching mirrors"
-msgstr ""
+msgstr "Passende Mirrors"
 
 #: plugins/gofon/phoneaccount/generic.tpl:33
 msgid "Voicemail PIN"
@@ -10171,18 +10169,18 @@ msgstr "Index"
 
 #~ msgid "Please enter a valid name. Only a-Z 0-9 are allowed."
 #~ msgstr ""
-#~ "Bitte geben Sie einen gÃŒltigen Namen ein (0-9 und a-Z sind erlaubt)."
+#~ "Bitte geben Sie einen gÃÅltigen Namen ein (0-9 und a-Z sind erlaubt)."
 
 #~ msgid "Please enter a valid name. Only 0-9 a-Z are allowed here."
 #~ msgstr ""
-#~ "Bitte geben Sie einen gÃŒltigen Namen ein (0-9 und a-z sind erlaubt)."
+#~ "Bitte geben Sie einen gÃÅltigen Namen ein (0-9 und a-z sind erlaubt)."
 
 #~ msgid "Please enter a value for task."
-#~ msgstr "Bitte geben Sie einen gÃŒltigen Wert fÃŒr 'Aufgabe' an."
+#~ msgstr "Bitte geben Sie einen gÃÅltigen Wert fÃÅr 'Aufgabe' an."
 
 #~ msgid "Please enter a valid class name. Only 0-9 a-z is allowed here."
 #~ msgstr ""
-#~ "Bitte geben Sie einen gÃŒltigen Klassen-Namen ein (0-9 und a-z sind "
+#~ "Bitte geben Sie einen gÃÅltigen Klassen-Namen ein (0-9 und a-z sind "
 #~ "erlaubt)."
 
 #~ msgid "GUID"
