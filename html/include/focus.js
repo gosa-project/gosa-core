@@ -14,17 +14,57 @@ for (iln = 0; iln < len; iln++){
 }
 netscape= (ver.charAt(iln+1).toUpperCase() != "C");
 
-function keyDown(DnEvents) {
+function keyPress(DnEvents) {
   // determines whether Netscape or Internet Explorer
   k = (netscape) ? DnEvents.which : window.event.keyCode;
   if (k == 13) { // enter key pressed
-    if (nextfield == 'login'){
-      return true; // submit, we finished all fields
-    } else { // we're not done yet, send focus to next box
-      eval('document.mainform.' + nextfield + '.focus()');
-      return false;
-    }
-  }
+		if(typeof(nextfield)!='undefined') {
+			if(nextfield == 'login') {
+    	  return true; // submit, we finished all fields
+    	} else { // we're not done yet, send focus to next box
+      	eval('document.mainform.' + nextfield + '.focus()');
+      	return false;
+    	}
+  	} else {
+			if(netscape) {
+				if(DnEvents.target.type == 'textarea') {
+					return true;
+				} else if (DnEvents.target.type != 'submit') {
+					// TAB
+					var thisfield = document.getElementById(DnEvents.target.id);
+					for (i = 0; i < document.forms[0].elements.length; i++) {
+						if(document.forms[0].elements[i].id==thisfield.id) {
+							// Last form element on page?
+							if(i!=document.forms[0].elements.length-1) {
+								document.forms[0].elements[i+1].focus();
+							}
+						}
+					}
+					return false;
+				} else {
+					return true;
+				}
+			} else {
+				if(window.event.srcElement.type == 'textarea') {
+					return true;
+				} else if (window.event.srcElement.type != 'submit') {
+					// TAB
+					var thisfield = document.getElementById(window.event.srcElement.id);
+					for (i = 0; i < document.forms[0].elements.length; i++) {
+						if(document.forms[0].elements[i].id==thisfield.id) {
+							// Last form element on page?
+							if(i!=document.forms[0].elements.length-1) {
+								document.forms[0].elements[i+1].focus();
+							}
+						}
+					}
+					return false;
+				} else {
+					return true;
+				}
+			}
+		}
+	}
 }
 
 function changeState(myField) {
@@ -67,10 +107,12 @@ function changeTripleSelectState_2nd_neg(firstTriggerField, secondTriggerField, 
 	  document.getElementById(myField).disabled= true;
   }
 }
-
-document.onkeydown= keyDown; // work together to analyze keystrokes
+// work together to analyze keystrokes
 if (netscape){
-  document.captureEvents(Event.KEYDOWN|Event.KEYUP);
+  document.captureEvents(Event.KEYPRESS);
+	document.onkeypress= keyPress;
+} else {
+	document.onkeypress= keyPress;
 }
 
 function hide(element) {
