@@ -156,7 +156,6 @@ class printgeneric extends plugin
 
   function execute()
   {
-
     $smarty= get_smarty();
     $display="";
     /* Template management.
