@@ -463,127 +463,6 @@ class groupManagement extends plugin
     return($smarty->fetch(get_template_path('headpage.tpl', TRUE)));
   }
 
-
-
-  function reload2()
-  {
-    /* Get config */
-    $groupfilter= get_global('groupfilter');
-
-    /* Set base for all searches */
-    $base= $groupfilter['depselect'];
-
-    /* Regex filter? */
-    if ($groupfilter['regex'] != ""){
-      $regex= $groupfilter['regex'];
-    } else {
-      $regex= "*";
-    }
-
-    /* User filter? */
-    $filter= "";
-    $error= "";
-    $error2= "";
-    $this->grouplist= array();
-
-    /* What are primary groups? */
-    $primaries= array();
-    $ldap= $this->config->get_ldap_link(TRUE);
-    $ldap->cd($base);
-    $ldap->search("(&(uid=$regex)(!(uid=*$))(objectClass=posixAccount)(gidNumber=*))", array("gidNumber", "cn"));
-    $error= $ldap->error;
-    while ($attrs= $ldap->fetch()){
-      $primaries[$attrs['gidNumber'][0]]= $attrs['cn'][0];
-    }
-
-    if ($groupfilter['primarygroups'] == "checked"){
-      $filter.= "(&(objectClass=posixGroup)(|";
-      foreach ($primaries as $gidNumber => $cn){
-        $filter.= "(gidNumber=$gidNumber)";
-      }
-      $filter.= "))";
-    } else {
-      $filter.= "(&(objectClass=posixGroup)(!(|";
-      foreach ($primaries as $gidNumber => $cn){
-        $filter.= "(gidNumber=$gidNumber)";
-      }
-      $filter.= ")))";
-    }
- /* Set filter depending on selection */
-    $sfilter= "";
-    if ($groupfilter['appgroups'] == "checked"){
-      $filter.= "(objectClass=gosaApplicationGroup)";
-    }
-    if ($this->config->current['SAMBAVERSION'] == 3){
-      if ($groupfilter['primarygroups'] != "checked"){
-        $sfilter= "(objectClass=sambaGroupMapping)";
-      } elseif ($groupfilter['sambagroups'] == "checked"){
-        $filter.= "(objectClass=sambaGroupMapping)";
-      }
-    }
-
-    if ($groupfilter['mailgroups'] == "checked"){
-      $filter.= "(objectClass=gosaMailAccount)";
-    }
-    if ($groupfilter['functionalgroups'] == "checked"){
-      $ldap->cd($base);
-      $ldap->set_size_limit($_SESSION['size_limit']);
-      $ldap->search("(&(cn=$regex)(objectClass=posixGroup)(!(|(objectClass=gosaMailAccount)(objectClass=gosaApplicationGroup)$sfilter)))", array("cn",      "gidNumber", "description"));
-      $error2= $ldap->error;
-      while ($attrs= $ldap->fetch()){
-        if (!isset($primaries[$attrs['gidNumber'][0]])){
-          if (isset($attrs["description"][0])){
-            $this->grouplist[$attrs["dn"]]= $attrs["cn"][0]." [".
-              $attrs["description"][0]."]";
-          } else {
-            $this->grouplist[$attrs["dn"]]= $attrs["cn"][0];
-          }
-        }
-      }
-    }
-
-    /* Generate grouplist */
-    if ($filter != ""){
-      $filter= "(&(cn=$regex)(objectClass=posixGroup)(|$filter))";
-      if ($groupfilter['guser'] != ""){
-        $filter= "(&(|(memberUID=" . $groupfilter['guser'] . ")(cn=" . $groupfilter['guser'] . "))$filter)";
-      }
-    }
-    if ($groupfilter['subsearch'] != "checked"){
-      $res= get_list($this->ui->subtreeACL, "$filter", FALSE, $base, array("cn", "description", "gidNumber"), TRUE);
-    } else {
-      $base= get_groups_ou().$base;
-     
-      $res= get_list($this->ui->subtreeACL, "$filter", FALSE, $base, array("cn", "description", "gidNumber"), TRUE);
-    }
-    if (preg_match("/size limit/i", $error) || preg_match("/size limit/i", $error2)){
-      $_SESSION['limit_exceeded']= TRUE;
-    }
-
-   foreach ($res as $value){
-      if (isset($value["description"][0])){
-        $this->grouplist[$value["dn"]]= $value["cn"][0]." [".
-          $value["description"][0]."]";
-      } else {
-        $this->grouplist[$value["dn"]]= $value["cn"][0];
-      }
-    }
-
-    natcasesort ($this->grouplist);
-    reset ($this->grouplist);
-  }
-
-
-
-
-
-
-
-
-
-
-
-
   function reload()
   {
     /* Get config */
@@ -607,10 +486,10 @@ class groupManagement extends plugin
 
     /* What are primary groups? */
     $primaries= array();
-    $ldap= $this->config->get_ldap_link(TRUE);
+    $ldap= $this->config->get_ldap_link();
     $ldap->cd($base);
-    $ldap->ls("(&(uid=$regex)(!(uid=*$))(objectClass=posixAccount)(gidNumber=*))", array("gidNumber", "cn"));
-    $error= $ldap->error;
+    $ldap->search("(&(uid=$regex)(!(uid=*$))(objectClass=posixAccount)(gidNumber=*))", array("gidNumber", "cn"));
+    show_ldap_error($ldap->get_error());
     while ($attrs= $ldap->fetch()){
       $primaries[$attrs['gidNumber'][0]]= $attrs['cn'][0];
     }
@@ -621,14 +500,7 @@ class groupManagement extends plugin
         $filter.= "(gidNumber=$gidNumber)";
       }
       $filter.= "))";
-    } else {
-      $filter.= "(&(objectClass=posixGroup)(!(|";
-      foreach ($primaries as $gidNumber => $cn){
-        $filter.= "(gidNumber=$gidNumber)";
-      }
-      $filter.= ")))";
     }
-
   
     /* Set filter depending on selection */
     $sfilter= "";
