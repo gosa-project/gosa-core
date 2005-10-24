@@ -148,7 +148,7 @@ class faiProfileEntry extends plugin
     $divlist->SetSummary(_("This list displays all assigned class names for this profile."));
     $divlist->SetEntriesPerPage(20);
     $divlist->SetHeader(array(array("string"=>"Class name"),
-                              array("string"=>"Objects")));
+                              array("string"=>"Objects","attach"=>"style='border-right:0px;'")));
 
     /* Action button allows us to delete an entry */
     $action = "<input type='hidden' name='ON_PAGE_%KEY%' value='1'>
@@ -197,7 +197,7 @@ class faiProfileEntry extends plugin
         
         /* Append to list */
         $field1 = array("string"=> preg_replace("/%KEY%/",$usedClass,$action_check).$usedClass,"attach"=>"");
-        $field2 = array("string"=> $str,"attach"=>"");
+        $field2 = array("string"=> $str,"attach"=>"style='border-right:0px;'");
         $divlist->AddEntry(array($field1,$field2));
       }
     }
