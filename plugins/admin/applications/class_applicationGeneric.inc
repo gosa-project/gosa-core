@@ -79,13 +79,13 @@ class application extends plugin
 	foreach($names as $index => $name){
 
 		// Fix length
-		if (strlen($name) < 35){
-			$name= sprintf("%.35s", $name);
+		for($i = strlen($name) ; $i < 30 ; $i ++){
+			$name= $name." ";
 		}
-		if(isset($values[$index])){
-			$str.= "# ".$name."\t\t(e.g. ".$values[$index].")\n";
+		if((isset($values[$index]))&&(!empty($values[$index]))){
+			$str.= "# ".$name."\t(e.g. '".$values[$index]."')\n";
 		}else{
-			$str.= "# ".$name."\n";
+			$str.= "# ".$name."\t(e.g. '' (empty))\n";
 		}
 	}
 	$str .= "#\n".
