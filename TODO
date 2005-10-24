@@ -20,6 +20,7 @@ Things to fix before 2.4:
 * Rework environment tab
 
 * Rework printer tabs
+  -> lpstat?
 
 * FAI management
   - Add package configuration dialog 

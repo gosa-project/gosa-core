@@ -709,7 +709,7 @@ class userManagement extends plugin
                     name='user_edit_%KEY%-user' title='"._("Edit generic properties")."'>";
     $posiximg = "<input type='image' src='images/select_user.png' alt='"._("Posix")."'  
                     name='user_edit_%KEY%-posixAccount' title='"._("Edit UNIX properties")."'>";
-    $eviroimg = "<input type='image' src='images/network.png' alt='"._("Environment")."'  
+    $eviroimg = "<input type='image' src='images/smallenv.png' alt='"._("Environment")."'  
                     name='user_edit_%KEY%-environment' title='"._("Edit environment properties")."'>";
     $mailimg  = "<input type='image' src='images/mailto.png' alt='"._("Mail")."'     
                     name='user_edit_%KEY%-mailAccount' title='"._("Edit mail properties")."'>";
