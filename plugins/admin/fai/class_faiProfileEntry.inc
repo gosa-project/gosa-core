@@ -62,12 +62,12 @@ class faiProfileEntry extends plugin
     /* If no search filter is set, create one */
     if (!is_global("SUBfaifilter")){
       $SUBfaifilter= array("base" => "ou=fai,ou=configs,ou=systems,".$base, "Sregex" => "*");
-      $SUBfaifilter['SShowTemplates'] = false;
-      $SUBfaifilter['SShowScripts']   = false;
-      $SUBfaifilter['SShowHooks']     = false;
-      $SUBfaifilter['SShowVariables'] = false;
-      $SUBfaifilter['SShowPackages']  = false;
-      $SUBfaifilter['SShowPartitions']= false;
+      $SUBfaifilter['SShowTemplates'] = true;
+      $SUBfaifilter['SShowScripts']   = true;
+      $SUBfaifilter['SShowHooks']     = true;
+      $SUBfaifilter['SShowVariables'] = true;
+      $SUBfaifilter['SShowPackages']  = true;
+      $SUBfaifilter['SShowPartitions']= true;
       register_global("SUBfaifilter", $SUBfaifilter);
     }
   }
@@ -116,7 +116,7 @@ class faiProfileEntry extends plugin
     $objTypes['FAItemplate']        = "<image src='images/fai_template.png' title='"._("Template bundle")."' alt=''>&nbsp;";
     $objTypes['FAIscript']          = "<image src='images/fai_script.png' title='"._("Script bundle")."' alt=''>&nbsp;";
     $objTypes['FAIvariable']        = "<image src='images/fai_variable.png' title='"._("Variable bundle")."' alt=''>&nbsp;";
-    $objTypes['FAIpackages']        = "<image src='images/fai_packages.png' title='"._("Package bundle")."' alt=''>&nbsp;";
+    $objTypes['FAIpackage']        = "<image src='images/fai_packages.png' title='"._("Package bundle")."' alt=''>&nbsp;";
     $objTypes['FAIpartitionTable']  = "<image src='images/fai_partitionTable.png' title='"._("Partition table")."' alt=''>&nbsp;";
 
     /* Magic quotes GPC, escapes every ' " \, to solve some security risks
@@ -159,27 +159,27 @@ class faiProfileEntry extends plugin
 
       $fi = str_replace("*",".*",$SUBfaifilter['Sregex']);  
  
-      $abort = false; 
+      $abort = true; 
       if(!preg_match("/".$fi."/",$usedClass)){
-        $abort = true;
+        $abort = false;
       }
-      if(($SUBfaifilter['SShowScripts'])&&(!in_array('FAIscript',$classes['objects']))){
-        $abort = true;
+      if((isset($classes['objects']['FAIscript']))&&($SUBfaifilter['SShowScripts'])){
+        $abort = false;
       }
-      if(($SUBfaifilter['SShowTemplates'])&&(!in_array('FAItemplate',$classes['objects']))){
-        $abort = true;
+      if((isset($classes['objects']['FAItemplate']))&&($SUBfaifilter['SShowTemplates'])){
+        $abort = false;
       }
-      if(($SUBfaifilter['SShowHooks'])&&(!in_array('FAIhook',$classes['objects']))){
-        $abort = true;
+      if((isset($classes['objects']['FAIhook']))&&($SUBfaifilter['SShowHooks'])){
+        $abort = false;
       }
-      if(($SUBfaifilter['SShowVariables'])&&(!in_array('FAIvariable',$classes['objects']))){
-        $abort = true;
+      if((isset($classes['objects']['FAIvariable']))&&($SUBfaifilter['SShowVariables'])){
+        $abort = false;
       }
-      if(($SUBfaifilter['SShowPartitions'])&&(!in_array('FAIpartitionTable',$classes['objects']))){
-        $abort = true;
+      if((isset($classes['objects']['FAIpartitionTable']))&&($SUBfaifilter['SShowPartitions'])){
+        $abort = false;
       }
-      if(($SUBfaifilter['SShowPackages'])&&(!in_array('FAIpackages',$classes['objects']))){
-        $abort = true;
+      if((isset($classes['objects']['FAIpackage']))&&($SUBfaifilter['SShowPackages'])){
+        $abort = false;
       }
 
       if(!$abort){
