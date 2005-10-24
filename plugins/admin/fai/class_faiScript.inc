@@ -25,7 +25,7 @@ class faiScript extends plugin
 
   /* Attributes to initialise for each subObject */
   var $subAttributes    = array("cn","description","FAIpriority","FAIscript"); 
-  var $sub64coded       = array("FAIscript");
+  var $sub64coded       = array();
 
   /* Specific attributes */
   var $cn               = "";       // The class name for this object

@@ -25,7 +25,7 @@ class faiVariable extends plugin
 
   /* Attributes to initialise for each subObject */
   var $subAttributes    = array("cn","description","FAIvariableContent"); 
-  var $sub64coded       = array("FAIvariableContent");  
+  var $sub64coded       = array();  
 
   /* Specific attributes */
   var $cn               = "";       // The class name for this object
