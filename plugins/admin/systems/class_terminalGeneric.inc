@@ -157,7 +157,10 @@ class termgeneric extends plugin
         $servername = $tmp3[0];
         $nfsname    = $tmp3[1];  
 
-        $path       = $tmp[4];  
+        $path ="";
+        if(isset($tmp[4])){
+          $path       = $tmp[4];  
+        }
 
         $tmp2[$servername.":".$path]= $servername.":".$path; 
       }else{
