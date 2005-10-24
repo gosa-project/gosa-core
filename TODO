@@ -1,26 +1,17 @@
 Things to fix before 2.4:
 =========================
 
-* All dialogs
-  - ALT not translated 
-
 * Fix filter part of dialogs and remove long descriptive textx in front of the search
   fields
-
-* Addressbook shows up with windows workstations
 
 * Rework printer tabs
   -> lpstat?
 
 * FAI management
   - Add package configuration dialog 
-  - Re-implement profile management, divlists look pretty ugly here
-  - Check base64_encoding/decoding is not needed everytime.
   - Make script entries binary
 
 * Add function to get GOto application templates -> filled variables, etc. (small fix)
-
-* Group Dialog : Primary group chkbox is broken, nothing is shown if it is checked.
 
 
 Target for 2.5:
