@@ -1,23 +1,13 @@
 Things to fix before 2.4:
 =========================
 
-* Finish kolab integration
-  - shared folders
-
-* Fix problem with winstation and invalid structural object class chain (inetOrgPerson/device)
-
 * All dialogs
   - ALT not translated 
-  - Image cleanup
-
-* include/class_mail-methods-kolab.inc -> gosaMailQuota not defined when opening "cajus"
 
 * Fix filter part of dialogs and remove long descriptive textx in front of the search
   fields
 
 * Addressbook shows up with windows workstations
-
-* Rework environment tab
 
 * Rework printer tabs
   -> lpstat?
@@ -26,17 +16,12 @@ Things to fix before 2.4:
   - Add package configuration dialog 
   - Re-implement profile management, divlists look pretty ugly here
   - Check base64_encoding/decoding is not needed everytime.
+  - Make script entries binary
 
-* Add function to get GOto application templates -> filled variables, etc.
+* Add function to get GOto application templates -> filled variables, etc. (small fix)
 
 * Group Dialog : Primary group chkbox is broken, nothing is shown if it is checked.
 
-* Base is not evaluated in several dialogs -> Creating an object in a special base
-  results in creation in the ldap root
-
-* Workstation is defect
-
-* Shares are not removable!
 
 Target for 2.5:
 ===============
@@ -92,10 +77,3 @@ Target for 2.5:
 
 * Object Groups should have member tabs depending of the grouped object types
 
-
-Target > 2.3:
-=============
-
-* OpenAFS support
-  Still completely missing...
-  
