@@ -315,11 +315,11 @@ class addressbook extends plugin
 	foreach ($bases as $base){
 		$ldap->cd ($base);
 		if ($phonefilter['object_type'] == '*'){
-			$ldap->search ("(&(objectClass=person)$filter(!(objectClass=gosaUserTemplate))".
+			$ldap->search ("(&(objectClass=person)$filter(!(objectClass=gosaUserTemplate))(!(uid=*$))".
 				"(|(uid=$s)(homePhone=$s)(telephoneNumber=$s)".
 				"(facsimileTelephoneNumber=$s)(mobile=$s)(givenName=$s)(sn=$s)))", array("sn", "givenName", "telephoneNumber", "facsimileTelephoneNumber", "mobile", "homePhone", "uid", "mail", "cn"));
 		} else {
-			$ldap->search ("(&$filter(!(objectClass=gosaUserTemplate))".
+			$ldap->search ("(&$filter(!(uid=*$))(!(objectClass=gosaUserTemplate))".
 				"(".$phonefilter['object_type']."=$s))", array("sn", "givenName", "telephoneNumber", "facsimileTelephoneNumber", "mobile", "homePhone", "uid", "mail", "cn"));
 		}
 
