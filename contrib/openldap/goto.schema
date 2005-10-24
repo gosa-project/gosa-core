@@ -389,7 +389,7 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.1 NAME 'gotoTerminal'
 	MUST ( cn )
 	MAY ( gotoSyslogServer $ gotoNtpServer $ gotoSwapServer $ gotoLpdServer $ 
 	      gotoFontPath $ gotoFilesystem $ gotoFloppyEnable $ gotoCdromEnable $
-	      gotoLpdEnable $ gotoScannerEnable $ gotoScannerClients $
+	      gotoLpdEnable $ gotoScannerEnable $ gotoScannerClients $ gotoShare $ 
 	      gotoRootPasswd $ gotoXdmcpServer $ gotoXMethod $ gotoSndModule $
               gotoLastUser $ gotoXMonitor $ gotoXHsync $ gotoXVsync $ gotoXResolution $
               gotoXColordepth $ gotoXMouseport $ gotoXMouseButtons $ gotoMode $ gotoXKbModel $ 
