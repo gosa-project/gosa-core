@@ -109,7 +109,7 @@ class workstartup extends plugin
 
     /* Search all FAI objects */
     $ldap->search("(| (objectClass=FAIpackageList)(objectClass=FAItemplate)
-                      (objectClass=FAIvariable)(objectClass=FAIscript')(objectClass=FAIhook)
+                      (objectClass=FAIvariable)(objectClass=FAIscript')(objectClass=FAIhook)(objectClass=FAIprofile)
                       (objectClass=FAIpartitionTable))",array("objectClass","cn"),true);
     /* Sort all entries, and attach elementtype.
      * To be able to show the types in the listbox.
@@ -118,7 +118,7 @@ class workstartup extends plugin
       $cn = $attr['cn'][0];
       if(in_array('FAIpackageList',$attr['objectClass'])){
         $tmp2[$cn]['FAIpackageList']['obj']   = 'FAIpackageList'; 
-        $tmp2[$cn]['FAIpackageList']['kzl']   = 'P';
+        $tmp2[$cn]['FAIpackageList']['kzl']   = 'Pl';
         $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
       }
       if(in_array('FAItemplate',$attr['objectClass'])){
@@ -144,6 +144,11 @@ class workstartup extends plugin
       if(in_array('FAIpartitionTable',$attr['objectClass'])){
         $tmp2[$cn]['FAIpartitionTable']['obj']= 'FAIpartitionTable'; 
         $tmp2[$cn]['FAIpartitionTable']['kzl']= 'Pt'; 
+        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+      }
+      if(in_array('FAIprofile',$attr['objectClass'])){
+        $tmp2[$cn]['FAIprofile']['obj']= 'FAIprofile'; 
+        $tmp2[$cn]['FAIprofile']['kzl']= 'P'; 
         $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
       }
     }
