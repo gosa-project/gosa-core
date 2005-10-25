@@ -12,13 +12,15 @@ class printerPPDDialog extends plugin
   var $attributes           = array();
   var $objectclasses        = array("whatever");
 
-  var $ppdList              = array();
-  var $ppdListHeader        = array();
+  var $ppdList              = array();  // Contains all Printer models
+  var $ppdListHeader        = array();  // Contains all printer vendors
 
-  var $dialog               = NULL;   
-  var $selectedPPD          = false;
+  var $dialog               = NULL;     
+  var $selectedPPD          = false;    // e.g. /var/spool/ppd/vendor/device.ppd
 
-  var $ppdManager     = false;
+  var $ppdManager           = false;    // new ppdManager;
+  var $ppdConfig            = false;    // $this->ppdManager->loadProperties($this->selectedPPD['link']);
+
   function printerPPDDialog ($config, $dn= NULL,$ppdfile=NULL )
   {
     plugin::plugin ($config, $dn);
@@ -36,13 +38,11 @@ class printerPPDDialog extends plugin
       if(!isset($this->ppdListHeader[$tmp2[0]])){
         $this->ppdListHeader[$tmp2[0]]=0;
       }
-      $tmp3['name']   =preg_replace("/^ -/","",$tmp2[1]);
+      $tmp3['name']   =preg_replace("/^ -/","",$tmp2[1]." - ".$tmp2[2]);
       $tmp3['link']   =$file;
       $tmp3['ppd']    =$ppd;
-  
       $this->ppdListHeader[$tmp2[0]]++;
-      
-      $this->ppdList[$tmp2[0]][preg_replace("/^ -/","",$tmp2[1])]=$tmp3;
+      $this->ppdList[$tmp2[0]][preg_replace("/^ -/","",$tmp2[1]." - ".$tmp2[2])]=$tmp3;
     }
 
    /* The user has already a valid PPD assigned
@@ -89,6 +89,7 @@ class printerPPDDialog extends plugin
         }
       }else{
         $this->selectedPPD = $this->dialog->save();
+        $this->ppdConfig = false;
         unset($this->dialog);
         $this->dialog=NULL;
       }
@@ -117,10 +118,25 @@ class printerPPDDialog extends plugin
     return $message;
   }
 
+  function save_object()
+  {
+    if(isset($_POST['PPDDisSubmitted'])){
+      foreach($this->ppdConfig as $cat => $obj){
+        foreach($obj as $attr => $attributes){
+          if(isset($_POST[base64_encode($attributes['_name'])])){
+            $this->ppdConfig[$cat][$attr]['_default'] = $_POST[base64_encode($attributes['_name'])];
+          }
+        }
+      }
+    }
+
+  }
+
   /* Save to LDAP */
   function save()
   {
     /* return the selected PPD, and in future the selected options too */
+    $this->ppdManager->saveProperties($this->selectedPPD['link'],$this->ppdConfig);
     return($this->selectedPPD['link']);
   }
 
@@ -142,7 +158,95 @@ class printerPPDDialog extends plugin
     /* In future there will be a schema parser that provide us all settings that can be made in the selected PPD file. 
      * This function will generate a userfriendly post based form with this informations
      */
-    return("<table><tr><td>adfasdf</td></tr></table/table>");
+  
+    $HeadLine  = "<h2>"._("Options")."&nbsp;:</h2>";
+
+    /* Set Headline */
+    $str = $HeadLine;
+
+    /* If ppd exists and is readable */
+    if((!empty($this->selectedPPD['link']))&&(file_exists($this->selectedPPD['link']))){
+    
+      /* If there is no initial Configuration, load it */
+      if($this->ppdConfig != false){
+        $this->ppdConfig = $this->ppdManager->loadProperties($this->selectedPPD['link']);
+      }
+
+      /* Create a table */
+      $str .= "<div style='padding-left:10px;'><table>";
+
+      /* Input all data to the table */
+      foreach($this->ppdConfig as $cat => $obj){
+    
+        /* Add new category */
+        $str .= "<tr><td colspan='2'><p class='seperator'>&nbsp;</p><br>";
+        $str .= "<b>".$cat."</b><br>";
+        $str .= "</tr></td>";       
+
+        /* Add attributes of the current category */
+        foreach($obj as $attr => $settings){
+        
+          /* Skip all entries beginning with _ */
+          if($attr[0] == "_") continue;  
+          
+          /* Prepare data */
+          $values   = array();
+          $name     = $settings['_name'];
+          $default  = $settings['_default'];
+          $type     = $settings['_type'];
+ 
+          /* Add name to table */ 
+          $str .= "<tr><td style='padding-left:10px;'>\n";
+          $str .= $name."<br>\n";
+          $str .= "</td><td>\n";
+   
+          /* Get all values */ 
+          foreach( $settings as $vname => $value){
+            if($vname[0] != "_"){
+              $values[$vname]= $vname;
+            }
+          }
+
+          /* preparing Html output
+           * Supported types are PickOne/Boolean
+           */
+
+          /* If type is PickOne, create a select box */
+          if(($type == "PickOne")||(($type=="Boolean")&&(count($values)>1))){
+
+            $str  .=  "<select name='".base64_encode($name)."'>\n";
+            foreach($values as $value){
+              $selected = "";
+              if($value == $default){
+                $selected = " selected ";
+              }
+              $str  .=  "<option value='".$value."' ".$selected.">".$value."</option>\n";
+            }
+            $str  .=  "</select>\n";
+
+          }elseif($type == "Boolean"){
+
+            /* If type is Boolean & no values are given */
+            $str  .=  "<select name='".base64_encode($name)."'>\n";
+            if($default == "False"){
+              $str  .=    "<option value='true' >True</option>\n";
+              $str  .=    "<option value='false' selected>False</option>\n";
+            }else{
+              $str  .=    "<option value='true' selected>True</option>\n";
+              $str  .=    "<option value='false' >False</option>\n";
+            }          
+            $str  .=  "</select>\n";
+
+          }else{
+            print_red(sprintf(_("Unsupported PPD type '%s' used for '%s' "),$type,$name));
+          }
+          $str .= "</td></tr>\n";
+        }
+      }
+      $str .= "</table></div>\n";
+
+    }
+    return($str);
   }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
