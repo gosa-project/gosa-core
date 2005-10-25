@@ -317,9 +317,6 @@
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
   <!-- 
-  // First input field on page
-  document.mainform.sambaHomePath.focus();
-
   // Populate expiery dialog
   populate(document.mainform,document.mainform.sambaPwdMustChange);
 
