@@ -168,7 +168,7 @@ class printerPPDDialog extends plugin
     if((!empty($this->selectedPPD['link']))&&(file_exists($this->selectedPPD['link']))){
     
       /* If there is no initial Configuration, load it */
-      if($this->ppdConfig != false){
+      if($this->ppdConfig == false){
         $this->ppdConfig = $this->ppdManager->loadProperties($this->selectedPPD['link']);
       }
 
@@ -229,11 +229,11 @@ class printerPPDDialog extends plugin
             /* If type is Boolean & no values are given */
             $str  .=  "<select name='".base64_encode($name)."'>\n";
             if($default == "False"){
-              $str  .=    "<option value='true' >True</option>\n";
-              $str  .=    "<option value='false' selected>False</option>\n";
+              $str  .=    "<option value='True' >"._("True")."</option>\n";
+              $str  .=    "<option value='False' selected>"._("False")."</option>\n";
             }else{
-              $str  .=    "<option value='true' selected>True</option>\n";
-              $str  .=    "<option value='false' >False</option>\n";
+              $str  .=    "<option value='True' selected>"._("True")."</option>\n";
+              $str  .=    "<option value='False' >"._("False")."</option>\n";
             }          
             $str  .=  "</select>\n";
 
