@@ -71,7 +71,7 @@ class faiScript extends plugin
           $this->SubObjects[$object['cn'][0]][$attrs]=addslashes($this->SubObjects[$object['cn'][0]][$attrs]);
         }
 
-        $this->SubObjects[$object['cn'][0]]['FAIscript']   = $this->readBinary("FAIscript",$object['dn']);
+        $this->SubObjects[$object['cn'][0]]['FAIscript']   = addslashes ($this->readBinary("FAIscript",$object['dn']));
  
         $this->SubObjects[$object['cn'][0]]['status']      = "edited";
         $this->SubObjects[$object['cn'][0]]['dn']          = $object['dn'];

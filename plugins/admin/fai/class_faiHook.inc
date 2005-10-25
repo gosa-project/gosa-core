@@ -72,7 +72,7 @@ class faiHook extends plugin
         foreach($this->subAttributes as $attrs){
           $this->SubObjects[$object['cn'][0]][$attrs]=addslashes($this->SubObjects[$object['cn'][0]][$attrs]);
         }
-        $this->SubObjects[$object['cn'][0]]['FAIscript']   = $this->readBinary("FAIscript",$object['dn']);
+        $this->SubObjects[$object['cn'][0]]['FAIscript']   = addslashes($this->readBinary("FAIscript",$object['dn']));
       }
     }
   }
