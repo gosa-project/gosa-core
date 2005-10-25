@@ -94,7 +94,7 @@ class ogrouptabs extends tabs
         $this->by_object['workstartup']= new workstartup($this->config, $this->dn);
         $this->by_object['workstartup']->acl = "#all#";
         $this->by_object['workstartup']->parent= &$this;
-        $this->by_name['workservice']= _("Service");
+        $this->by_name['workservice']= _("Devices");
         $this->by_object['workservice']= new workservice($this->config, $this->dn);
         $this->by_object['workservice']->acl = "#all#";
         $this->by_object['workservice']->parent= &$this;
