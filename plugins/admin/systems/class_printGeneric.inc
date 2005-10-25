@@ -254,12 +254,14 @@ class printgeneric extends plugin
     }
 
     if(isset($_POST['SavePPD'])){
+      $this->dialog->save_object();
       if(count($this->dialog->check())){
         foreach($this->dialog->check() as $msg){
           print_red($msg);
         }
       }else{
         $this->gotoPrinterPPD = array();
+        
         $this->gotoPrinterPPD = $this->dialog->save();
         unset($this->dialog);
         $this->dialog=NULL;
@@ -322,6 +324,7 @@ class printgeneric extends plugin
     }
 
     if($this->dialog != NULL){
+      $this->dialog->save_object();
       $display = $this->dialog->execute();
       return $display;
     }
