@@ -159,10 +159,8 @@ class printerPPDDialog extends plugin
      * This function will generate a userfriendly post based form with this informations
      */
   
-    $HeadLine  = "<h2>"._("Options")."&nbsp;:</h2>";
-
     /* Set Headline */
-    $str = $HeadLine;
+    $str = "";
 
     /* If ppd exists and is readable */
     if((!empty($this->selectedPPD['link']))&&(file_exists($this->selectedPPD['link']))){
@@ -173,14 +171,14 @@ class printerPPDDialog extends plugin
       }
 
       /* Create a table */
-      $str .= "<div style='padding-left:10px;'><table>";
+      $str .= "<div style='padding-left:30px;'><table>";
 
       /* Input all data to the table */
       foreach($this->ppdConfig as $cat => $obj){
     
         /* Add new category */
-        $str .= "<tr><td colspan='2'><p class='seperator'>&nbsp;</p><br>";
-        $str .= "<b>".$cat."</b><br>";
+        $str .= "<tr><td colspan='2'><br>";
+        $str .= "<b>".$cat."&nbsp;:&nbsp;</b><br>";
         $str .= "</tr></td>";       
 
         /* Add attributes of the current category */
@@ -196,7 +194,7 @@ class printerPPDDialog extends plugin
           $type     = $settings['_type'];
  
           /* Add name to table */ 
-          $str .= "<tr><td style='padding-left:10px;'>\n";
+          $str .= "<tr><td style='padding-left:40px;'>\n";
           $str .= $name."<br>\n";
           $str .= "</td><td>\n";
    

@@ -1,6 +1,6 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
 	<tr>
-		<td style="vertical-align:top;">
+		<td style="vertical-align:top;width=50%;">
 			<div class="contentboxh" style="height:20px;">
 				<p class="contentboxh" style="font-size:12px">
 					<b>{t}Select objects to add{/t}</b>
@@ -8,7 +8,7 @@
 			</div>
 			<div class="contentboxb">
 				<p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-					<select style="width:500px; height:450px; margin-top:4px;" name="PPDselection" size="15">
+					<select style="width:100%; height:450px; margin-top:4px;" name="PPDselection" size="15">
             {html_options values=$objectKeys options=$objects}
 					</select>
 					<input type=hidden name="edit_helper">
