@@ -83,18 +83,16 @@ class printerPPDDialog extends plugin
      * Perform a Check. If everything is fine, use the new PPD.
      */
     if(isset($_POST['SavePPDSelection'])){
-      if(count($this->dialog->check())>0){
-        foreach($this->dialog->check() as $msg){
-          print_red($msg);
-        }
+      if(!isset($_POST['PPDselection'])){
+        print_red(_("Please select a valid PPD."));
       }else{
-        $this->selectedPPD = $this->dialog->save();
-        $this->ppdConfig = false;
+        $this->selectedPPD['link'] = $_POST['PPDselection'];
+        $this->ppdConfig   = false;
         unset($this->dialog);
         $this->dialog=NULL;
       }
     }
-  
+ 
     /* if a dialog is open, print the dialog instead of this class
      */
     if($this->dialog!=NULL){
@@ -121,10 +119,12 @@ class printerPPDDialog extends plugin
   function save_object()
   {
     if(isset($_POST['PPDDisSubmitted'])){
-      foreach($this->ppdConfig as $cat => $obj){
-        foreach($obj as $attr => $attributes){
-          if(isset($_POST[base64_encode($attributes['_name'])])){
-            $this->ppdConfig[$cat][$attr]['_default'] = $_POST[base64_encode($attributes['_name'])];
+      if(is_array($this->ppdConfig)){
+        foreach($this->ppdConfig as $cat => $obj){
+          foreach($obj as $attr => $attributes){
+            if(isset($_POST[base64_encode($attributes['_name'])])){
+              $this->ppdConfig[$cat][$attr]['_default'] = $_POST[base64_encode($attributes['_name'])];
+            }
           }
         }
       }

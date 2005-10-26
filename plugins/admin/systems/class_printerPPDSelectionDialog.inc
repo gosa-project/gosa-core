@@ -36,6 +36,10 @@ class printerPPDSelectionDialog extends plugin
       }
     }
   
+    if(!isset($_SESSION['printerPPDSelectionDialog'])){
+      $_SESSION['printerPPDSelectionDialog']['regex'] = "*";
+    }  
+
     /* Order the manufacturers index */
     ksort($this->header);
   }
@@ -47,19 +51,19 @@ class printerPPDSelectionDialog extends plugin
     $display= "";
     $s_action = "none";
   
-    /* Links used to open/select an entry */ 
-    $LINK_openDir     = "<a href='?plug=".$_GET['plug']."&open=%s'>%s</a>";
-    $LINK_useThis     = "<a href='?plug=".$_GET['plug']."&use=%s'>%s</a>";
+    $regex = $_SESSION['printerPPDSelectionDialog']['regex'];
 
-    /* Open manufacturer */
-    if(isset($_GET['open'])){
-      $this->currentPos=base64_decode($_GET['open']);
+    if(isset($_GET['search'])){
+      $regex = $_GET['search']."*";
     }
- 
-    /* Select ppd */
-    if(isset($_GET['use'])){
-      $this->currentSel=base64_decode($_GET['use']);
+  
+    if(isset($_POST['regex'])){
+      $regex= $_POST['regex'];
     }
+    
+    $regex = str_replace("**","*",$regex);
+    $_SESSION['printerPPDSelectionDialog']['regex'] = $regex;
+  
 
     /* if manufacturer is selected and a ppd file 
      * Set this selected file to our return value.
@@ -68,73 +72,34 @@ class printerPPDSelectionDialog extends plugin
       $this->selectedPPD = $this->list[$this->currentPos][$this->currentSel];
     }
 
-    /* "Back" resets our selection
-     */
-    foreach($_POST as $post => $val){
-      if(preg_match("/dep_back/",$post)){
-        $s_action = "back";
-        $this->currentPos           = "";
-        $this->currentSel           = -1;
-      }
-    }
-
-    /* The listhead is shown on top of the list.
-     * It represents a menu that contains basic option for this dialog/list
-     */
-    $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
-      " <input type='image' align='middle' src='images/list_back.png' title='"._("Reset list")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
-      " <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-      " <input type='image' align='middle' src='images/list_new_user.png' title='"._("Upload PPD")."' alt='"._("Upload PPD")."' name='upload'>&nbsp;".
-      "</div>";
-
-    /* Create new list*/
-    $div = new divlist("PPD");
-    $div -> SetSummary(_("List with all available ppd files."));
-    $div -> SetEntriesPerPage(18);
-
-    /* If nothing is selected open manufacturers list */
-    if($this->currentPos==""){
-      $div -> SetHeader (array(
-            array("string"=>_("Name")),
-            array("string"=>_("Entries"),"attach"=>"style='border-right:none;width:100px;'")));
-      $options = "";
-
-      /* Append elements */
-      foreach($this->header as $header => $nums){
-        $field1 = array("string" => sprintf($LINK_openDir,base64_encode($header),$header),"attach"=>"style='border-right:none;height:26px;'");
-        $field2 = array("string" => $nums,"attach"=>"style='border-right:none;height:26px;'");
-        $div->AddEntry(array($field1,$field2));
-      }
-    
-    /* Display all ppds for the given manufacturer */
-    }else{
-      $div -> SetHeader (array(
-            array("string"=>_("Name")." - ".$this->currentPos   ,"attach"=>"style='border-right:none;'")));
-
-      /* Append elements */
-      foreach($this->list[$this->currentPos] as $pos => $ppd){
-        if($pos == $this->currentSel){
-          $field1 = array("string" => sprintf($LINK_useThis,base64_encode($pos),$ppd['name'])." - "._("selected"),"attach"=>"style='border-right:none;background:#99CCBB;height:25px;'");
-        }else{
-          $field1 = array("string" => sprintf($LINK_useThis,base64_encode($pos),$ppd['name']),"attach"=>"style='border-right:none;height:25px;'");
+    /** Added **/
+    $list = array();
+    foreach($this->list as $cat => $ppds){
+      foreach($ppds as $ppd){
+        if(preg_match("/^".str_replace("*",".*",$regex)."/i",$ppd['ppd'])){
+          $list[$ppd['link']] = $ppd['ppd'];
         }
-        $div->AddEntry(array($field1));
       }
     }
-    
-    /* print out template */
-    $smarty->assign("listhead",$listhead); 
-    $smarty->assign("list",$div->DrawList()); 
+
+    $smarty->assign("objects",      $list);
+    $smarty->assign("objectKeys",   array_flip($list));
+    $smarty->assign("search_image", get_template_path('images/search.png'));
+    $smarty->assign("launchimage",  get_template_path('images/small_filter.png'));
+    $smarty->assign("tree_image",   get_template_path('images/tree.png'));
+    $smarty->assign("alphabet",     generate_alphabet());
+    $smarty->assign("apply",        apply_filter());
+    $smarty->assign("regex",        $regex);
+  
     $display.= $smarty->fetch(get_template_path('printerPPDSelectionDialog.tpl', TRUE,dirname(__FILE__)));
     return($display);
   }
 
+  function save_object()
+  {
+  } 
+
   function check(){
-    $message=array();
-    if(empty($this->selectedPPD)){
-      $message[] = _("Please select a PPD or press cancel");
-    }
-    return $message;
   }
 
   /* Save to LDAP */
