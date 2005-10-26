@@ -199,7 +199,7 @@ class faiPartitionTableEntry extends plugin
       if($part['status']!="delete"){
         /* Generate Partition select box  
          */
-        $PartitionType = "<select name='FAIpartitionType_".$key."' id='FAIpartitionType_".$key."' ".$dis.">";
+        $PartitionType = "<select name='FAIpartitionType_".$key."' id='FAIpartitionType_".$key."' >";
         foreach($PartitionTypes as $type){
           if($part['FAIpartitionType'] == $type){
             $PartitionType .="<option value='".$type."' selected >".$type."</option>";
@@ -233,7 +233,6 @@ class faiPartitionTableEntry extends plugin
         $changeState = "onClick=\"changeState('FAImountPoint_".$key."') ; ".
                                  "changeState('FAIpartitionSize_".$key."') ; ".
                                  "changeState('FAImountOptions_".$key."') ; ".
-                                 "changeState('FAIpartitionType_".$key."') ; ".
                                  "changeState('FAIfsType_".$key."') ; ".
                                  "changeState('FAIfsOptions_".$key."') ; \"";
   
@@ -277,7 +276,6 @@ class faiPartitionTableEntry extends plugin
       $tmp['rename']['from']  = $this->old_cn;
       $tmp['rename']['to']    = $this->DISK_cn;
     }
-
     return($tmp);
   }
 
@@ -327,7 +325,6 @@ class faiPartitionTableEntry extends plugin
   
       /* Skip all checks, if preserve is set */ 
       if($part['FAIpartitionFlags'] == "preserve"){
-        $this->partitions[$key]['FAIpartitionType'] = "preserve";
         $this->partitions[$key]['FAIfsType']        = "preserve";
         $this->partitions[$key]['FAIpartitionSize'] = "preserve";
         continue;
