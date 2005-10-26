@@ -83,6 +83,7 @@ class faiScriptEntry extends plugin
           $this->$attrs = "";
         }
       }
+      $this->FAIscript= recode("DOS..LATIN1", $this->FAIscript);
     }
   }
 
