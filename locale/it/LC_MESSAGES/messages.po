@@ -132,7 +132,7 @@ msgid "ACL"
 msgstr "ACL"
 
 #: contrib/gosa.conf:86 plugins/admin/applications/generic.tpl:58
-#: plugins/admin/systems/class_printerPPDDialog.inc:162
+#: plugins/admin/systems/printerPPDDialog.tpl:14
 #: plugins/admin/ogroups/phonequeue.tpl:31
 #: plugins/gofon/conference/generic.tpl:87
 msgid "Options"
@@ -530,7 +530,7 @@ msgstr "Aggiungi"
 #: plugins/admin/departments/remove.tpl:15
 #: plugins/admin/systems/servservice.tpl:22
 #: plugins/admin/systems/servservice.tpl:48
-#: plugins/admin/systems/printer.tpl:85 plugins/admin/systems/printer.tpl:102
+#: plugins/admin/systems/printer.tpl:87 plugins/admin/systems/printer.tpl:104
 #: plugins/admin/systems/remove.tpl:15
 #: plugins/admin/systems/phonesettings.tpl:182
 #: plugins/admin/systems/phonesettings.tpl:197
@@ -699,10 +699,12 @@ msgstr "Esegui"
 #: plugins/admin/fai/class_faiManagement.inc:383
 #: plugins/admin/fai/class_faiManagement.inc:388
 #: plugins/admin/fai/faiPartitionTableEntry.tpl:30
+#: plugins/admin/fai/faiProfileEntry.tpl:72
 #: plugins/admin/fai/faiScriptEntry.tpl:68
 #: plugins/admin/fai/faiVariableEntry.tpl:49
 #: plugins/admin/fai/faiHookEntry.tpl:70
 #: plugins/admin/fai/faiTemplateEntry.tpl:133
+#: plugins/admin/fai/faiPackageEntry.tpl:66
 #: plugins/admin/fai/faiPackageNew.tpl:66
 #: plugins/gofon/phoneaccount/main.inc:106 plugins/gofon/macro/remove.tpl:16
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:302
@@ -733,7 +735,7 @@ msgstr ""
 #: plugins/gofax/faxaccount/generic.tpl:96
 #: plugins/gofax/faxaccount/main.inc:97 plugins/addons/logview/contents.tpl:62
 #: plugins/admin/systems/servservice.tpl:21
-#: plugins/admin/systems/printer.tpl:61
+#: plugins/admin/systems/printer.tpl:62
 #: plugins/admin/fai/faiPartitionTable.tpl:44
 #: plugins/admin/fai/faiVariable.tpl:44 plugins/admin/fai/faiScript.tpl:44
 #: plugins/admin/fai/faiTemplate.tpl:44 plugins/admin/fai/faiHook.tpl:44
@@ -765,6 +767,7 @@ msgstr "Seleziona gli indirizzi da aggiungere"
 #: plugins/admin/departments/headpage.tpl:29
 #: plugins/admin/systems/headpage.tpl:29
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:35
+#: plugins/admin/systems/printerPPDSelectionDialog.tpl:22
 #: plugins/admin/ogroups/ogroup_objects.tpl:20
 #: plugins/admin/ogroups/headpage.tpl:29
 #: plugins/admin/fai/faiProfileEntry.tpl:32 plugins/admin/fai/headpage.tpl:29
@@ -1825,8 +1828,6 @@ msgstr "Cambia foto"
 #: plugins/addons/addressbook/address_info.tpl:16
 #: plugins/addons/addressbook/class_addressbook.inc:504
 #: plugins/admin/users/template.tpl:19 plugins/admin/systems/servnfs.tpl:9
-#: plugins/admin/systems/class_printerPPDSelectionDialog.inc:98
-#: plugins/admin/systems/class_printerPPDSelectionDialog.inc:112
 #: plugins/admin/fai/faiPartitionTableEntry.tpl:6
 #: plugins/admin/fai/faiPartitionTable.tpl:9
 #: plugins/admin/fai/faiVariable.tpl:9 plugins/admin/fai/faiScriptEntry.tpl:9
@@ -2062,13 +2063,8 @@ msgstr "Elimina foto"
 #: plugins/personal/environment/logonManagement.tpl:75
 #: plugins/addons/addressbook/address_edit.tpl:114
 #: plugins/admin/systems/servnfs.tpl:91
-#: plugins/admin/systems/printerPPDDialog.tpl:23
-#: plugins/admin/systems/printerPPDSelectionDialog.tpl:18
+#: plugins/admin/systems/printerPPDDialog.tpl:19
 #: plugins/admin/fai/faiPartitionTableEntry.tpl:29
-#: plugins/admin/fai/faiScriptEntry.tpl:67
-#: plugins/admin/fai/faiVariableEntry.tpl:48
-#: plugins/admin/fai/faiHookEntry.tpl:69
-#: plugins/admin/fai/faiTemplateEntry.tpl:132
 msgid "Save"
 msgstr "Salva"
 
@@ -2084,10 +2080,11 @@ msgstr "Certificato standard"
 #: plugins/personal/environment/kioskManagement.tpl:14
 #: plugins/admin/groups/class_groupMail.inc:408
 #: plugins/admin/applications/class_applicationParameters.inc:94
+#: plugins/admin/systems/printer.tpl:63
 #: plugins/admin/systems/workstationStartup.tpl:93
 #: plugins/admin/systems/terminalStartup.tpl:81
 #: plugins/admin/fai/faiPackage.tpl:74
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:246
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:245
 #: ihtml/themes/altlinux/islocked.tpl:13 ihtml/themes/default/islocked.tpl:13
 msgid "Remove"
 msgstr "Rimuovi"
@@ -2854,8 +2851,8 @@ msgid "Browse"
 msgstr ""
 
 #: plugins/personal/environment/kioskManagement.tpl:22
-#: plugins/admin/systems/printerPPDDialog.tpl:24
-#: plugins/admin/systems/printerPPDSelectionDialog.tpl:19
+#: plugins/admin/systems/printerPPDDialog.tpl:20
+#: plugins/admin/systems/printerPPDSelectionDialog.tpl:58
 #, fuzzy
 msgid "Close"
 msgstr "Scegli"
@@ -3047,7 +3044,6 @@ msgstr "Mostra dipartimenti"
 #: plugins/admin/applications/class_applicationManagement.inc:323
 #: plugins/admin/departments/class_departmentManagement.inc:277
 #: plugins/admin/systems/class_systemManagement.inc:562
-#: plugins/admin/systems/class_printerPPDSelectionDialog.inc:85
 #: plugins/admin/ogroups/class_ogroupManagement.inc:356
 #: plugins/admin/ogroups/phonequeue.tpl:17
 #: plugins/admin/fai/class_faiManagement.inc:417
@@ -3425,7 +3421,13 @@ msgstr "Liste di blocco predefinite"
 
 #: plugins/gofax/faxaccount/lists.tpl:37
 #: plugins/admin/groups/application_options.tpl:8
-#: plugins/admin/groups/mail_admins.tpl:37 include/functions.inc:1276
+#: plugins/admin/groups/mail_admins.tpl:37
+#: plugins/admin/fai/faiProfileEntry.tpl:71
+#: plugins/admin/fai/faiScriptEntry.tpl:67
+#: plugins/admin/fai/faiVariableEntry.tpl:48
+#: plugins/admin/fai/faiHookEntry.tpl:69
+#: plugins/admin/fai/faiTemplateEntry.tpl:132
+#: plugins/admin/fai/faiPackageEntry.tpl:65 include/functions.inc:1276
 msgid "Apply"
 msgstr "Applica"
 
@@ -3503,7 +3505,7 @@ msgid "FAX ID"
 msgstr ""
 
 #: plugins/gofax/reports/detail.tpl:22 plugins/gofax/reports/contents.tpl:30
-#: plugins/admin/systems/class_printGeneric.inc:544
+#: plugins/admin/systems/class_printGeneric.inc:549
 #: plugins/admin/ogroups/class_ogroupManagement.inc:479
 #: plugins/admin/fai/faiTemplateEntry.tpl:94
 msgid "User"
@@ -4353,11 +4355,11 @@ msgstr "Mostra utenti del dipartimento"
 msgid "Regular expression for matching user names"
 msgstr ""
 
-#: plugins/admin/groups/class_groupAcl.inc:54
+#: plugins/admin/groups/class_groupAcl.inc:55
 msgid "This 'dn' is no acl container."
 msgstr ""
 
-#: plugins/admin/groups/class_groupAcl.inc:199
+#: plugins/admin/groups/class_groupAcl.inc:200
 msgid "All fields are writeable"
 msgstr "Tutti i campi sono scrivibili"
 
@@ -4496,7 +4498,7 @@ msgid "User administration"
 msgstr "Amministrazione utenti"
 
 #: plugins/admin/users/class_userManagement.inc:25
-#: plugins/admin/systems/printer.tpl:80
+#: plugins/admin/systems/printer.tpl:82
 msgid "Users"
 msgstr "Utenti"
 
@@ -5107,7 +5109,7 @@ msgstr ""
 #: plugins/admin/systems/class_terminalGeneric.inc:257
 #: plugins/admin/systems/class_servGeneric.inc:180
 #: plugins/admin/systems/class_workstationGeneric.inc:211
-#: plugins/admin/systems/class_printGeneric.inc:426
+#: plugins/admin/systems/class_printGeneric.inc:431
 #: plugins/admin/systems/class_componentGeneric.inc:133
 #: plugins/admin/systems/class_phoneGeneric.inc:299
 #, php-format
@@ -5534,40 +5536,40 @@ msgstr ""
 msgid "PPD"
 msgstr ""
 
-#: plugins/admin/systems/printer.tpl:71
+#: plugins/admin/systems/printer.tpl:73
 #, fuzzy
 msgid "Permissions"
 msgstr "Permessi dei membri"
 
-#: plugins/admin/systems/printer.tpl:79
+#: plugins/admin/systems/printer.tpl:81
 msgid "Following objects are assigned as user."
 msgstr ""
 
-#: plugins/admin/systems/printer.tpl:83
+#: plugins/admin/systems/printer.tpl:85
 #, fuzzy
 msgid "Add user"
 msgstr "Modifica contatto"
 
-#: plugins/admin/systems/printer.tpl:84
+#: plugins/admin/systems/printer.tpl:86
 #, fuzzy
 msgid "Add group"
 msgstr "gruppi"
 
-#: plugins/admin/systems/printer.tpl:96
+#: plugins/admin/systems/printer.tpl:98
 msgid "Following objects are assigned as admin."
 msgstr ""
 
-#: plugins/admin/systems/printer.tpl:97
+#: plugins/admin/systems/printer.tpl:99
 #, fuzzy
 msgid "Admins"
 msgstr "DN dell'amministratore"
 
-#: plugins/admin/systems/printer.tpl:100
+#: plugins/admin/systems/printer.tpl:102
 #, fuzzy
 msgid "Add admin user"
 msgstr "Utenti di Dominio"
 
-#: plugins/admin/systems/printer.tpl:101
+#: plugins/admin/systems/printer.tpl:103
 #, fuzzy
 msgid "Add admin group"
 msgstr "Gruppo Samba"
@@ -5850,27 +5852,27 @@ msgstr "Questa identità non possiede estensioni di posta."
 msgid "This 'dn' has no printer features."
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:341
+#: plugins/admin/systems/class_printGeneric.inc:346
 #, fuzzy
 msgid "Undefined"
 msgstr "non definito"
 
-#: plugins/admin/systems/class_printGeneric.inc:352
+#: plugins/admin/systems/class_printGeneric.inc:357
 #, php-format
 msgid "This printer belongs to terminal %s. You can't rename this printer."
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:354
+#: plugins/admin/systems/class_printGeneric.inc:359
 #, php-format
 msgid "This printer belongs to workstation %s. You can't rename this printer."
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:416
+#: plugins/admin/systems/class_printGeneric.inc:421
 msgid "You have no permissions to create a printer on this 'Base'."
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:539
-#: plugins/admin/systems/class_printGeneric.inc:541
+#: plugins/admin/systems/class_printGeneric.inc:544
+#: plugins/admin/systems/class_printGeneric.inc:546
 #: plugins/admin/ogroups/class_ogroupManagement.inc:480
 #: plugins/admin/fai/faiTemplateEntry.tpl:71
 #: plugins/admin/fai/faiTemplateEntry.tpl:103
@@ -6571,16 +6573,16 @@ msgstr ""
 msgid "Option"
 msgstr "Opzioni"
 
-#: plugins/admin/systems/printerPPDDialog.tpl:2
+#: plugins/admin/systems/printerPPDDialog.tpl:1
 msgid "Printer driver information file setup"
 msgstr ""
 
-#: plugins/admin/systems/printerPPDDialog.tpl:7
+#: plugins/admin/systems/printerPPDDialog.tpl:6
 #, fuzzy
-msgid "Current used information setup: "
+msgid "Current used information setup"
 msgstr "Informazioni generiche"
 
-#: plugins/admin/systems/printerPPDDialog.tpl:13
+#: plugins/admin/systems/printerPPDDialog.tpl:8
 #, fuzzy
 msgid "Select"
 msgstr "Rimuovi"
@@ -6622,53 +6624,58 @@ msgstr "Mostra utenti che corrispondono a"
 msgid "Regular expression for matching member names"
 msgstr "Espressioni regolare per selezionare il nome del gruppo"
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:232
-#: plugins/admin/systems/class_printerPPDDialog.inc:235
+#: plugins/admin/systems/class_printerPPDDialog.inc:87
+#, fuzzy
+msgid "Please select a valid PPD."
+msgstr "Prego inserire un numero di telefono valido!"
+
+#: plugins/admin/systems/class_printerPPDDialog.inc:230
+#: plugins/admin/systems/class_printerPPDDialog.inc:233
 #, fuzzy
 msgid "True"
 msgstr "Futuro"
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:233
-#: plugins/admin/systems/class_printerPPDDialog.inc:236
+#: plugins/admin/systems/class_printerPPDDialog.inc:231
+#: plugins/admin/systems/class_printerPPDDialog.inc:234
 #, fuzzy
 msgid "False"
 msgstr "femmina"
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:241
+#: plugins/admin/systems/class_printerPPDDialog.inc:239
 #, php-format
 msgid "Unsupported PPD type '%s' used for '%s' "
 msgstr ""
 
-#: plugins/admin/systems/class_printerPPDSelectionDialog.inc:85
-msgid "Reset list"
-msgstr ""
-
-#: plugins/admin/systems/class_printerPPDSelectionDialog.inc:87
-msgid "Upload PPD"
-msgstr ""
-
-#: plugins/admin/systems/class_printerPPDSelectionDialog.inc:92
-msgid "List with all available ppd files."
-msgstr ""
-
-#: plugins/admin/systems/class_printerPPDSelectionDialog.inc:99
-msgid "Entries"
-msgstr ""
-
-#: plugins/admin/systems/class_printerPPDSelectionDialog.inc:117
-#, fuzzy
-msgid "selected"
-msgstr "Rimuovi"
-
-#: plugins/admin/systems/class_printerPPDSelectionDialog.inc:135
-#, fuzzy
-msgid "Please select a PPD or press cancel"
-msgstr "Prego inserire un numero di telefono valido!"
-
 #: plugins/admin/systems/printerPPDSelectionDialog.tpl:6
+#: plugins/admin/ogroups/ogroup_objects.tpl:6
+msgid "Select objects to add"
+msgstr ""
+
+#: plugins/admin/systems/printerPPDSelectionDialog.tpl:33
+#: plugins/admin/ogroups/ogroup_objects.tpl:37
+msgid "Display objects of department"
+msgstr ""
+
+#: plugins/admin/systems/printerPPDSelectionDialog.tpl:41
+#: plugins/admin/ogroups/ogroup_objects.tpl:41
+#: plugins/admin/fai/faiProfileEntry.tpl:55
+#: plugins/admin/fai/faiProfileEntry.tpl:56 plugins/admin/fai/headpage.tpl:47
+#: plugins/admin/fai/faiPackageEntry.tpl:50
+msgid "Display objects matching"
+msgstr ""
+
+#: plugins/admin/systems/printerPPDSelectionDialog.tpl:45
+#: plugins/admin/ogroups/ogroup_objects.tpl:42
+#: plugins/admin/fai/faiProfileEntry.tpl:60 plugins/admin/fai/headpage.tpl:51
+#: plugins/admin/fai/faiPackageEntry.tpl:55
+msgid "Regular expression for matching object names"
+msgstr ""
+
+#: plugins/admin/systems/printerPPDSelectionDialog.tpl:56
+#: plugins/admin/fai/askClassName.tpl:70 plugins/admin/fai/askClassName.tpl:77
 #, fuzzy
-msgid "List of PPDs"
-msgstr "Lista degli utenti"
+msgid "Use"
+msgstr "Utenti"
 
 #: plugins/admin/systems/class_workstationStartup.inc:197
 #, fuzzy
@@ -6831,10 +6838,6 @@ msgstr "Numero di telefono"
 msgid "Terminals"
 msgstr "Terminali"
 
-#: plugins/admin/ogroups/ogroup_objects.tpl:6
-msgid "Select objects to add"
-msgstr ""
-
 #: plugins/admin/ogroups/ogroup_objects.tpl:27
 msgid "Select to see departments"
 msgstr ""
@@ -6885,23 +6888,6 @@ msgstr "Mostra stampanti"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:35
 msgid "Select to see phones"
-msgstr ""
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:37
-msgid "Display objects of department"
-msgstr ""
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:41
-#: plugins/admin/fai/faiProfileEntry.tpl:55
-#: plugins/admin/fai/faiProfileEntry.tpl:56 plugins/admin/fai/headpage.tpl:47
-#: plugins/admin/fai/faiPackageEntry.tpl:50
-msgid "Display objects matching"
-msgstr ""
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:42
-#: plugins/admin/fai/faiProfileEntry.tpl:60 plugins/admin/fai/headpage.tpl:51
-#: plugins/admin/fai/faiPackageEntry.tpl:55
-msgid "Regular expression for matching object names"
 msgstr ""
 
 #: plugins/admin/ogroups/termgroup.tpl:1
@@ -7580,7 +7566,7 @@ msgstr "Prego inserire un numero di telefono valido!"
 msgid "Selected file is empty."
 msgstr "Rimuovi"
 
-#: plugins/admin/fai/class_faiScriptEntry.inc:95
+#: plugins/admin/fai/class_faiScriptEntry.inc:96
 #: plugins/admin/fai/class_faiVariableEntry.inc:83
 #: plugins/admin/fai/class_faiHookEntry.inc:100
 #: plugins/admin/fai/class_faiTemplateEntry.inc:161
@@ -7588,7 +7574,7 @@ msgstr "Rimuovi"
 msgid "Please enter a name."
 msgstr "Inserisci la URI del server LDAP"
 
-#: plugins/admin/fai/class_faiScriptEntry.inc:99
+#: plugins/admin/fai/class_faiScriptEntry.inc:100
 #, fuzzy
 msgid "Please enter a script."
 msgstr "Prego inserire un numero di telefono valido!"
@@ -7797,40 +7783,40 @@ msgstr "Opzioni"
 msgid "Preserve"
 msgstr "server"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:337
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:334
 #, php-format
 msgid "please enter a unique mount point for partition %s"
 msgstr ""
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:342
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:339
 #, fuzzy, php-format
 msgid "Please enter a valid mount point for partition %s."
 msgstr "Inserire un nome cartella valido per il campo 'Home directory'."
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:347
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:344
 #, php-format
 msgid ""
 "File system type 'swap' is already used, change file system type for "
 "partition %s."
 msgstr ""
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:351
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:348
 msgid "Please use 'swap' as mount point, if 'swap' is used as fs-type."
 msgstr ""
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:357
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:361
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:354
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:358
 #, fuzzy, php-format
 msgid "Please enter a valid partition size for partition %s."
 msgstr "Inserire un nome cartella valido per il campo 'Home directory'."
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:367
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:369
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:364
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:366
 #, fuzzy, php-format
 msgid "Please enter a valid range for partition %s."
 msgstr "Inserire un nome cartella valido per il campo 'Home directory'."
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:374
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:371
 #, fuzzy, php-format
 msgid "Please enter a range for partition size for partition %s."
 msgstr "Inserire un nome cartella valido per il campo 'Home directory'."
@@ -7977,11 +7963,6 @@ msgstr ""
 #, fuzzy
 msgid "Choose class name"
 msgstr "Scegli il tuo numero di telefono personale"
-
-#: plugins/admin/fai/askClassName.tpl:70 plugins/admin/fai/askClassName.tpl:77
-#, fuzzy
-msgid "Use"
-msgstr "Utenti"
 
 #: plugins/admin/fai/askClassName.tpl:74
 msgid "A new class name.</b>"
@@ -9139,7 +9120,17 @@ msgstr "Supporto per gofon disabilitato. Manca il file di schema?"
 msgid "Support for gofon enabled"
 msgstr "Supporto per gofon abilitato."
 
+#: include/functions_setup.inc:231
+#, fuzzy
+msgid "Support for nagios disabled, no schema seems to be installed"
+msgstr "Supporto per gofon disabilitato. Manca il file di schema?"
+
 #: include/functions_setup.inc:236
+#, fuzzy
+msgid "Support for nagios enabled"
+msgstr "Supporto per gofon abilitato."
+
+#: include/functions_setup.inc:246
 msgid ""
 "Support for Kolab disabled, no schema seems to be installed, setting mail-"
 "method to cyrus"
@@ -9147,41 +9138,41 @@ msgstr ""
 "Supporto per Kolab disabilitato. Manca il file di schema?Il metodo di "
 "amministrazine della posta è impostato su cyrus"
 
-#: include/functions_setup.inc:243
+#: include/functions_setup.inc:253
 msgid "Support for Kolab enabled"
 msgstr "Supporto per Kolab abilitato."
 
-#: include/functions_setup.inc:261
+#: include/functions_setup.inc:271
 msgid "OK"
 msgstr "OK"
 
-#: include/functions_setup.inc:264
+#: include/functions_setup.inc:274
 msgid "Ignored"
 msgstr "Ignora"
 
-#: include/functions_setup.inc:266
+#: include/functions_setup.inc:276
 msgid "Failed"
 msgstr "Fallito"
 
-#: include/functions_setup.inc:283
+#: include/functions_setup.inc:293
 msgid "PHP setup inspection"
 msgstr "Ispezione della configurazione PHP"
 
-#: include/functions_setup.inc:284
+#: include/functions_setup.inc:294
 msgid "Checking for PHP version (>=4.1.0)"
 msgstr "Controllo della versione di PHP (>=4.1.0)"
 
-#: include/functions_setup.inc:285
+#: include/functions_setup.inc:295
 msgid ""
 "PHP must be of version 4.1.0 or above for some functions and known bugs in "
 "PHP language."
 msgstr "PHP deve essere la versione 4.1.0 o superiore."
 
-#: include/functions_setup.inc:288
+#: include/functions_setup.inc:298
 msgid "Checking if register_globals is set to 'off'"
 msgstr "Controllo se register_globals e impostato su 'off'"
 
-#: include/functions_setup.inc:289
+#: include/functions_setup.inc:299
 msgid ""
 "register_globals is a PHP mechanism to register all global varibales to be "
 "accessible from scripts without changing the scope. This may be a security "
@@ -9190,37 +9181,37 @@ msgstr ""
 "register_globals è un meccanismo PHP che può comportare maggiori rischi per "
 "la sicurezza. GOsa funziona in entrambe le modalità"
 
-#: include/functions_setup.inc:292
+#: include/functions_setup.inc:302
 msgid "Checking for ldap module"
 msgstr "Controllo il modulo ldap"
 
-#: include/functions_setup.inc:293
+#: include/functions_setup.inc:303
 msgid "This is the main module used by GOsa and therefore really required."
 msgstr ""
 "Questo è il modulo più importante usato da GOsa ed è quindi necessario."
 
-#: include/functions_setup.inc:296
+#: include/functions_setup.inc:306
 #, fuzzy
 msgid "Checking for XML functions"
 msgstr "Controllo il supporto per iconv"
 
-#: include/functions_setup.inc:297
+#: include/functions_setup.inc:307
 msgid "XML functions are required to parse the configuration file."
 msgstr ""
 
-#: include/functions_setup.inc:300
+#: include/functions_setup.inc:310
 msgid "Checking for gettext support"
 msgstr "Controllo il support per gettext"
 
-#: include/functions_setup.inc:301
+#: include/functions_setup.inc:311
 msgid "Gettext support is required for internationalized GOsa."
 msgstr "Gettext è necessario al supporto per le lingue."
 
-#: include/functions_setup.inc:304
+#: include/functions_setup.inc:314
 msgid "Checking for iconv support"
 msgstr "Controllo il supporto per iconv"
 
-#: include/functions_setup.inc:305
+#: include/functions_setup.inc:315
 msgid ""
 "This module is used by GOsa to convert samba munged dial informations and is "
 "therefore required."
@@ -9228,11 +9219,11 @@ msgstr ""
 "Questo modulo è usato da GOsa per convertire alcune informazioni usate da "
 "samba ed è necessario."
 
-#: include/functions_setup.inc:308
+#: include/functions_setup.inc:318
 msgid "Checking for mhash module"
 msgstr "Controllo il module mhash"
 
-#: include/functions_setup.inc:309
+#: include/functions_setup.inc:319
 msgid ""
 "To use SSHA encryption, you'll need this module. If you are just using crypt "
 "or md5 encryption, ignore this message. GOsa will run without it."
@@ -9241,21 +9232,21 @@ msgstr ""
 "gli schemi classici 'crypt' e 'md5' ignora queso messaggio. GOsa funziona "
 "correttamente anche senza."
 
-#: include/functions_setup.inc:312
+#: include/functions_setup.inc:322
 msgid "Checking for imap module"
 msgstr "Controllo il modulo imap"
 
-#: include/functions_setup.inc:313
+#: include/functions_setup.inc:323
 msgid ""
 "The IMAP module is needed to communicate with the IMAP server. It gets "
 "status informations, creates and deletes mail users."
 msgstr "Questo modulo è necessario per comunicare con il server di posta."
 
-#: include/functions_setup.inc:316
+#: include/functions_setup.inc:326
 msgid "Checking for getacl in imap"
 msgstr "Controllo il supporto per getacl"
 
-#: include/functions_setup.inc:317
+#: include/functions_setup.inc:327
 msgid ""
 "The getacl support is needed for shared folder permissions. The standard "
 "IMAP module is not capable of reading acl's. You need a recend PHP version "
@@ -9264,21 +9255,21 @@ msgstr ""
 "Il support per getacl serve a ottenere i permessi di accesso delle cartelle "
 "di posta sul server. GOsa funziona correttamente anche senza."
 
-#: include/functions_setup.inc:320
+#: include/functions_setup.inc:330
 msgid "Checking for mysql module"
 msgstr "Controllo il modulo mysql"
 
-#: include/functions_setup.inc:321
+#: include/functions_setup.inc:331
 msgid "MySQL support is needed for reading GOfax reports from databases."
 msgstr ""
 "Queso modulo serve a leggere i report di GOfax dal database.GOsa funziona "
 "correttamente anche senza."
 
-#: include/functions_setup.inc:324
+#: include/functions_setup.inc:334
 msgid "Checking for cups module"
 msgstr "Controllo il modulo cups"
 
-#: include/functions_setup.inc:325
+#: include/functions_setup.inc:335
 msgid ""
 "In order to read available printers from IPP protocol instead of printcap "
 "files, you've to install the CUPS module."
@@ -9286,11 +9277,11 @@ msgstr ""
 "Questo modulo serve a ottenere le informazioni sulle stampanti di rete. GOsa "
 "funziona correttamente anche senza."
 
-#: include/functions_setup.inc:328
+#: include/functions_setup.inc:338
 msgid "Checking for kadm5 module"
 msgstr "Controllo il modulo kadm5"
 
-#: include/functions_setup.inc:329
+#: include/functions_setup.inc:339
 msgid ""
 "Managing users in kerberos requires the kadm5 module which is downloadable "
 "via PEAR network."
@@ -9298,42 +9289,42 @@ msgstr ""
 "Questo modulo serve ad amministrare gli utenti in un dominio Kerberos. GOsa "
 "funziona correttamente anche senza."
 
-#: include/functions_setup.inc:332
+#: include/functions_setup.inc:342
 #, fuzzy
 msgid "Checking for snmp Module"
 msgstr "Controllo il modulo imap"
 
-#: include/functions_setup.inc:333
+#: include/functions_setup.inc:343
 msgid ""
 "Simple Network Management Protocol (SNMP) is required for client monitoring."
 msgstr ""
 
-#: include/functions_setup.inc:369
+#: include/functions_setup.inc:379
 #, fuzzy
 msgid "PHP detailed function inspection"
 msgstr "Ispezione della configurazione PHP"
 
-#: include/functions_setup.inc:373
+#: include/functions_setup.inc:383
 #, fuzzy, php-format
 msgid "Checking for function <b>%s</b>"
 msgstr "Controllo il supporto per iconv"
 
-#: include/functions_setup.inc:374
+#: include/functions_setup.inc:384
 #, php-format
 msgid ""
 "The function <b>%s</b> is used by GOsa. There is no information if it's "
 "optional or required yet."
 msgstr ""
 
-#: include/functions_setup.inc:385
+#: include/functions_setup.inc:395
 msgid "Checking for some additional programms"
 msgstr "Controllo la presenza di alcuni programmi addizionali"
 
-#: include/functions_setup.inc:394
+#: include/functions_setup.inc:404
 msgid "Checking for ImageMagick (>=5.4.0)"
 msgstr "Controllo per ImageMagick (>=5.4.0)"
 
-#: include/functions_setup.inc:395
+#: include/functions_setup.inc:405
 msgid ""
 "ImageMagick is used to convert user supplied images to fit the suggested "
 "size and the unified JPEG format."
@@ -9341,21 +9332,21 @@ msgstr ""
 "Il programma ImageMagick serve a convertire le immagini fornite dagli utenti "
 "nelle dimensioni e nel formato di default."
 
-#: include/functions_setup.inc:398
+#: include/functions_setup.inc:408
 msgid "Checking imagick module for PHP"
 msgstr ""
 
-#: include/functions_setup.inc:399
+#: include/functions_setup.inc:409
 msgid ""
 "Imagick is used to convert user supplied images to fit the suggested size "
 "and the unified JPEG format from PHP script."
 msgstr ""
 
-#: include/functions_setup.inc:406
+#: include/functions_setup.inc:416
 msgid "Checking for fping utility"
 msgstr "Controllo il supporto per fping"
 
-#: include/functions_setup.inc:407
+#: include/functions_setup.inc:417
 msgid ""
 "The fping utility is only used if you've got a thin client based terminal "
 "environment running."
@@ -9363,11 +9354,11 @@ msgstr ""
 "Il programma fping è usato solo nel caso di ambienti basati su terminali "
 "'thin client'."
 
-#: include/functions_setup.inc:422
+#: include/functions_setup.inc:432
 msgid "Checking for a way to generate LM/NT password hashes"
 msgstr "Controllo la possibilità di generare password con algoritmo LM/NT"
 
-#: include/functions_setup.inc:423
+#: include/functions_setup.inc:433
 msgid ""
 "In order to use SAMBA 2/3, you've to install some additional packages to "
 "generate password hashes."
@@ -9375,11 +9366,11 @@ msgstr ""
 "Un programma in grado di generare password con algoritmo LM/NT è necessario "
 "per poter usare Samba 2 o 3."
 
-#: include/functions_setup.inc:436
+#: include/functions_setup.inc:446
 msgid "php.ini check -> session.auto_register"
 msgstr "Controllo php.ini per session.auto_register"
 
-#: include/functions_setup.inc:437
+#: include/functions_setup.inc:447
 msgid ""
 "In Order to use GOsa without any trouble, the session.auto_register option "
 "in your php.ini must be set to 'Off'."
@@ -9387,11 +9378,11 @@ msgstr ""
 "Per non avere problemi con GOsa è necessario impostare l'opzione session."
 "auto_register su 'off' nel file php.ini"
 
-#: include/functions_setup.inc:440
+#: include/functions_setup.inc:450
 msgid "php.ini check -> implicit_flush"
 msgstr "Controllo php.ini per implicit_flush"
 
-#: include/functions_setup.inc:441
+#: include/functions_setup.inc:451
 msgid ""
 "This option influences the Output handling. Turn this Option off, to "
 "increase performance."
@@ -9399,11 +9390,11 @@ msgstr ""
 "Per motivi di performance è consigliato di impostare l'opzione "
 "implicit_flush su 'off' nel file php.ini."
 
-#: include/functions_setup.inc:448
+#: include/functions_setup.inc:458
 msgid "php.ini check -> max_execution_time"
 msgstr "Controllo php.ini per max_execution_time"
 
-#: include/functions_setup.inc:449
+#: include/functions_setup.inc:459
 msgid ""
 "The Execution time should be at least 30 seconds, because some actions may "
 "consume more time."
@@ -9411,11 +9402,11 @@ msgstr ""
 "Per non avere problemi con GOsa è necessario impostare l'opzione "
 "max_execution_time a 30 secondi o più nel file php.ini"
 
-#: include/functions_setup.inc:456
+#: include/functions_setup.inc:466
 msgid "php.ini check -> memory_limit"
 msgstr "Controllo php.ini per memory_limit"
 
-#: include/functions_setup.inc:457
+#: include/functions_setup.inc:467
 #, fuzzy
 msgid ""
 "GOsa needs at least 16MB of memory, less will cause unpredictable errors! "
@@ -9424,11 +9415,11 @@ msgstr ""
 "Per non avere problemi con GOsa è necessario impostare l'opzione "
 "memory_limit a 16MB o più nel file php.ini"
 
-#: include/functions_setup.inc:461
+#: include/functions_setup.inc:471
 msgid "php.ini check -> expose_php"
 msgstr "Controllo php.ini per expose_php"
 
-#: include/functions_setup.inc:462
+#: include/functions_setup.inc:472
 msgid ""
 "Increase the server security by setting expose_php to 'off'. PHP won't send "
 "any Information about the server you are running in this case."
@@ -9436,11 +9427,11 @@ msgstr ""
 "Per motivi di sicurezza è consigliato di impostare l'opzione expose_php su "
 "'off' nel file php.ini."
 
-#: include/functions_setup.inc:466
+#: include/functions_setup.inc:476
 msgid "php.ini check -> magic_quotes_gpc"
 msgstr "Controllo php.ini per magic_quotes_gpc"
 
-#: include/functions_setup.inc:467
+#: include/functions_setup.inc:477
 msgid ""
 "Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
 "escape all quotes in strings in this case."
@@ -9448,49 +9439,49 @@ msgstr ""
 "Per motivi di sicurezza è consigliato di impostare l'opzione "
 "magic_quotes_gpc su 'on' nel file php.ini."
 
-#: include/functions_setup.inc:710
+#: include/functions_setup.inc:720
 msgid "You've to specify an ldap server before continuing!"
 msgstr ""
 
-#: include/functions_setup.inc:719 include/functions_setup.inc:802
+#: include/functions_setup.inc:729 include/functions_setup.inc:812
 msgid ""
 "Can't connect to the specified LDAP server! Please make sure that is "
 "reachable for GOsa."
 msgstr ""
 
-#: include/functions_setup.inc:733 include/functions_setup.inc:807
-#: include/functions_setup.inc:812
+#: include/functions_setup.inc:743 include/functions_setup.inc:817
+#: include/functions_setup.inc:822
 msgid ""
 "Can't bind to the specified LDAP server! Please make sure that it is "
 "reachable for GOsa."
 msgstr ""
 
-#: include/functions_setup.inc:822
+#: include/functions_setup.inc:832
 msgid ""
 "Bind to server successful, but the server seems to be completly empty, "
 "please check all informations twice"
 msgstr ""
 
-#: include/functions_setup.inc:878
+#: include/functions_setup.inc:888
 #, php-format
 msgid ""
 "You're missing the required attribute '%s' from this formular. Please "
 "complete!"
 msgstr "Manca il campo obbligatorio '%s'. Completarlo, prego. "
 
-#: include/functions_setup.inc:909
+#: include/functions_setup.inc:919
 msgid ""
 "Can't read schema informations, GOsa needs to know your schema setup. Please "
 "verify that it is readable for GOsa"
 msgstr ""
 
-#: include/functions_setup.inc:918
+#: include/functions_setup.inc:928
 #, php-format
 msgid "Can't log into LDAP server. Reason was: %s."
 msgstr "Accesso al server LDAP fallito. La ragione è: %s."
 
-#: include/functions_setup.inc:1028 include/functions_setup.inc:1051
-#: include/functions_setup.inc:1060 html/index.php:172
+#: include/functions_setup.inc:1038 include/functions_setup.inc:1061
+#: include/functions_setup.inc:1070 html/index.php:172
 #: ihtml/themes/altlinux/setup_useradmin.tpl:6
 #: ihtml/themes/default/setup_useradmin.tpl:6
 msgid ""
@@ -10021,6 +10012,18 @@ msgid ""
 "versions. In some cases it would be helpful to enable the error reporting. "
 "(But it could be a security risk)  "
 msgstr ""
+
+#, fuzzy
+#~ msgid "selected"
+#~ msgstr "Rimuovi"
+
+#, fuzzy
+#~ msgid "Please select a PPD or press cancel"
+#~ msgstr "Prego inserire un numero di telefono valido!"
+
+#, fuzzy
+#~ msgid "List of PPDs"
+#~ msgstr "Lista degli utenti"
 
 #, fuzzy
 #~ msgid "Service"
