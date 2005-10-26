@@ -32,7 +32,8 @@ class acl extends plugin
 	/* WorkAround */
 	include "acl_definition.inc";
 	$this->objects= $ACLD;
-	$this->object= reset(array_keys($this->objects));
+	$tmp= array_keys($this->objects);
+	$this->object= reset($tmp);
 
 	$this->selfflag= FALSE;
 	if (isset($this->attrs['gosaSubtreeACL'][0])){
