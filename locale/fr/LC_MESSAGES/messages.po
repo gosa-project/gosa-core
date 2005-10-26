@@ -3,12 +3,13 @@
 # translation of messages.po to
 # translation of messages.po to
 # translation of messages.po to
+# translation of messages.po to
 # translation of messages.po to French
 # Benoit Mortier <benoit.mortier@opensides.be>, 2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
-"PO-Revision-Date: 2005-10-26 23:44+0200\n"
+"PO-Revision-Date: 2005-10-26 23:53+0200\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1676,26 +1677,6 @@ msgstr "féminin"
 #: plugins/personal/generic/class_user.inc:248
 msgid "male"
 msgstr "masculin"
-
-#: plugins/personal/generic/class_user.inc:252
-msgid "fr_FR"
-msgstr ""
-
-#: plugins/personal/generic/class_user.inc:252
-msgid "en_EN"
-msgstr ""
-
-#: plugins/personal/generic/class_user.inc:252
-msgid "de_DE"
-msgstr ""
-
-#: plugins/personal/generic/class_user.inc:252
-msgid "it_IT"
-msgstr ""
-
-#: plugins/personal/generic/class_user.inc:252
-msgid "nl_NL"
-msgstr ""
 
 #: plugins/personal/generic/class_user.inc:262
 msgid "This account has no valid GOsa extensions."
@@ -6798,9 +6779,8 @@ msgstr "Serveur FAI"
 
 #: plugins/admin/systems/workstationStartup.tpl:41
 #: plugins/admin/fai/faiPackage.tpl:57 plugins/admin/fai/faiPackageNew.tpl:59
-#, fuzzy
 msgid "set"
-msgstr "Activé"
+msgstr "activé"
 
 #: plugins/admin/systems/workstationStartup.tpl:42
 msgid "Assigned FAI classes"
@@ -9169,7 +9149,9 @@ msgstr "Le support de gofon est activé"
 
 #: include/functions_setup.inc:231
 msgid "Support for nagios disabled, no schema seems to be installed"
-msgstr "Le support de l'extension nagios est désactivé, aucun schéma ne semble installé"
+msgstr ""
+"Le support de l'extension nagios est désactivé, aucun schéma ne semble "
+"installé"
 
 #: include/functions_setup.inc:236
 msgid "Support for nagios enabled"

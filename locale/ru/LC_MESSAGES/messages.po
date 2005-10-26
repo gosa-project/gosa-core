@@ -1671,26 +1671,6 @@ msgstr "женский"
 msgid "male"
 msgstr "мужской"
 
-#: plugins/personal/generic/class_user.inc:252
-msgid "fr_FR"
-msgstr ""
-
-#: plugins/personal/generic/class_user.inc:252
-msgid "en_EN"
-msgstr ""
-
-#: plugins/personal/generic/class_user.inc:252
-msgid "de_DE"
-msgstr ""
-
-#: plugins/personal/generic/class_user.inc:252
-msgid "it_IT"
-msgstr ""
-
-#: plugins/personal/generic/class_user.inc:252
-msgid "nl_NL"
-msgstr ""
-
 #: plugins/personal/generic/class_user.inc:262
 msgid "This account has no valid GOsa extensions."
 msgstr "Для этой учетной записи нет корректных расширений GOsa."

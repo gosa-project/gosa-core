@@ -1679,26 +1679,6 @@ msgstr "weiblich"
 msgid "male"
 msgstr "männlich"
 
-#: plugins/personal/generic/class_user.inc:252
-msgid "fr_FR"
-msgstr "fr_FR"
-
-#: plugins/personal/generic/class_user.inc:252
-msgid "en_EN"
-msgstr "en_EN"
-
-#: plugins/personal/generic/class_user.inc:252
-msgid "de_DE"
-msgstr "de_DE"
-
-#: plugins/personal/generic/class_user.inc:252
-msgid "it_IT"
-msgstr "it_IT"
-
-#: plugins/personal/generic/class_user.inc:252
-msgid "nl_NL"
-msgstr "nl_NL"
-
 #: plugins/personal/generic/class_user.inc:262
 msgid "This account has no valid GOsa extensions."
 msgstr "Dieses Konto hat keine gültigen GOsa-Erweiterungen."
@@ -10186,6 +10166,21 @@ msgstr ""
 "GOsa kann Fehler im PHP-Interpreter erzeugen (insbesondere bei Beta-"
 "Versionen). In einigen Fällen ist es hilfreich, das 'error_reporting' zu "
 "aktivieren (dies kann jedoch ein Sicherheitsrisiko darstellen)."
+
+#~ msgid "fr_FR"
+#~ msgstr "fr_FR"
+
+#~ msgid "en_EN"
+#~ msgstr "en_EN"
+
+#~ msgid "de_DE"
+#~ msgstr "de_DE"
+
+#~ msgid "it_IT"
+#~ msgstr "it_IT"
+
+#~ msgid "nl_NL"
+#~ msgstr "nl_NL"
 
 #~ msgid "Reset list"
 #~ msgstr "Liste zurücksetzen"

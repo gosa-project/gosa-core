@@ -1676,26 +1676,6 @@ msgstr "vrouw"
 msgid "male"
 msgstr "man"
 
-#: plugins/personal/generic/class_user.inc:252
-msgid "fr_FR"
-msgstr "fr_FR"
-
-#: plugins/personal/generic/class_user.inc:252
-msgid "en_EN"
-msgstr "en_EN"
-
-#: plugins/personal/generic/class_user.inc:252
-msgid "de_DE"
-msgstr "de_DE"
-
-#: plugins/personal/generic/class_user.inc:252
-msgid "it_IT"
-msgstr "it_IT"
-
-#: plugins/personal/generic/class_user.inc:252
-msgid "nl_NL"
-msgstr "nl_NL"
-
 #: plugins/personal/generic/class_user.inc:262
 msgid "This account has no valid GOsa extensions."
 msgstr "Dit account heeft geen geldige GOsa extensies."
@@ -10123,6 +10103,21 @@ msgstr ""
 "Het kan, met name bij Beta versies, voorkomen dat GOsa PHP fouten genereerd. "
 "In sommige gevallen kan het handig zijn om foutrapportage aan te zetten "
 "(maar dit kan een veiligheidsrisico vormen) "
+
+#~ msgid "fr_FR"
+#~ msgstr "fr_FR"
+
+#~ msgid "en_EN"
+#~ msgstr "en_EN"
+
+#~ msgid "de_DE"
+#~ msgstr "de_DE"
+
+#~ msgid "it_IT"
+#~ msgstr "it_IT"
+
+#~ msgid "nl_NL"
+#~ msgstr "nl_NL"
 
 #~ msgid "Reset list"
 #~ msgstr "Herstel lijst"
