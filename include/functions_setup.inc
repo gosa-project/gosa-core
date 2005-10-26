@@ -226,6 +226,16 @@ function schema_check($server, $admin, $password, $aff=0,$CalledByIndexPhP=false
     $affich['phoneaccount']['msg']= _("Support for gofon enabled")."<td class=\"check\">gofon.schema</td>";
     $affich['phoneaccount']['status']= true;
   }
+
+  if (!isset($objectclasses['nagiosContact'])){
+    $messages['nagioscontact']['msg']= _("Support for nagios disabled, no schema seems to be installed");
+    $affich['nagioscontact']['msg']= $messages['nagioscontact']['msg']."<td class=\"check\">nagios.schema</td>";
+    $messages['nagioscontact']['status']= FALSE;
+    $affich['nagioscontact']['status']= FALSE;
+  }else{
+    $affich['nagioscontact']['msg']= _("Support for nagios enabled")."<td class=\"check\">nagios.schema</td>";
+    $affich['nagioscontact']['status']= true;
+  }
   
   /* Fix for PHP Fehler "Undefined index: ldapconf"
    * Ablaufverfolgung[1]: Funktion schema_check	Datei: /home/hickert/gosa/include/functions_setup.inc (Zeile 230)
