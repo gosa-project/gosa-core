@@ -58,7 +58,9 @@
 				<tr>	
 					<td>
 						<br>
-						{t}PPD{/t} : {$driverInfo}<br><input type="submit" name="EditDriver" value="{t}Edit{/t}">
+						{t}PPD{/t} : {$driverInfo}<br>
+							<input type="submit" name="EditDriver" value="{t}Edit{/t}">
+							<input type="submit" name="RemoveDriver" value="{t}Remove{/t}">
 					</td>
 				</tr>
 			</table>

@@ -252,6 +252,11 @@ class printgeneric extends plugin
       unset($this->dialog);
       $this->dialog= NULL;
     }
+    
+    if(isset($_POST['RemoveDriver'])){
+      
+      $this->gotoPrinterPPD = array();
+    }
 
     if(isset($_POST['SavePPD'])){
       $this->dialog->save_object();

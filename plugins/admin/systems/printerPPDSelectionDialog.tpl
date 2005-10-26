@@ -53,9 +53,9 @@
 </table>
 
 <p class="plugbottom">
-<input type="submit" name="SavePPDSelection" value="{t}use{/t}">
+<input type="submit" name="SavePPDSelection" value="{t}Use{/t}">
   &nbsp;
-<input type="submit" name="ClosePPDSelection" value="{t}close{/t}">
+<input type="submit" name="ClosePPDSelection" value="{t}Close{/t}">
 </p>
 <!--
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
