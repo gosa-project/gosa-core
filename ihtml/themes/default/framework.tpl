@@ -29,7 +29,7 @@
       </table>
     </td>
     <td align=right>
-      <div class=maintitlebar>
+      <div class=maintitlebar style="padding-right:10px">
         <a>{t}Signed in:{/t} <b>{$username}</b></a>
       </div>
     </td>
