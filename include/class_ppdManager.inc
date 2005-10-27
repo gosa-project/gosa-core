@@ -8,7 +8,6 @@ class ppdManager
 	function ppdManager($path)
 	{
 		$this->path= $path;
-		echo "Path set to $path<br>";
 	}
 
 
@@ -42,12 +41,69 @@ class ppdManager
 		return ($list);
 	}
 
+	
+	function updateAttribute($file, $section, $attribute, $value)
+	{
+		$fsection= false;
+		$fattribute= false;
+		$section= preg_replace('/^\*/', '', $section);
+		$attribute= preg_replace('/^\*/', '', $attribute);
+
+		$rp= fopen($file, "r");
+		$wp= fopen("$file.tmp", "w");
+
+		while (!feof($rp)){
+			$line= fgets($rp, 1024);
+
+			if (preg_match("/\*OpenGroup:*\s+\**$section\/*/", $line)){
+				$fsection= true;
+				continue;
+			}
+
+			if ($fsection){
+				if (preg_match("/^\*CloseGroup:*\s+\**$section\/*/", $line)){
+					$fsection= false;
+					fwrite ($wp, $line);
+					continue;
+				}
+
+				if (preg_match("/^\*OpenUI:*\s+\**$attribute\/*/", $line)){
+					$fattribute= true;
+					fwrite ($wp, $line);
+					continue;
+				}
+
+				if ($fattribute){
+					if (preg_match("/^\*CloseUI:*\s+\**$attribute\/*/", $line)){
+						$fattribute= false;
+						fwrite ($wp, $line);
+						continue;
+					}
+
+					if (preg_match("/^\*Default$attribute:*\s+/", $line)){
+						$line= "*Default$attribute: $value\n";
+					}
+				}
+			}
+			fwrite ($wp, $line);
+		}
+
+		fclose($wp);
+		fclose($rp);
+
+		echo "Move $file.tmp to $file<br>";
+	}
+
 
 	function saveProperties($ppdFile, $properties)
 	{
-		echo "<pre>";
-		print_r ($properties);
-		echo "</pre>";
+		foreach ($properties as $name => $section){
+			foreach ($section as $attribute => $value){
+				if (is_array($value)){
+					$this->updateAttribute($ppdFile, $name, $attribute, $value['_default']);
+				}
+			}
+		}
 	}
 	
 	
