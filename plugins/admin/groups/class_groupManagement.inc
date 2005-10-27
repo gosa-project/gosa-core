@@ -479,7 +479,7 @@ class groupManagement extends plugin
     }
 
     /* User filter? */
-    $filter= "";
+    $filter= "(objectclass=posixGroup)";
     $error= "";
     $error2= "";
     $this->grouplist= array();
@@ -494,14 +494,6 @@ class groupManagement extends plugin
       $primaries[$attrs['gidNumber'][0]]= $attrs['cn'][0];
     }
 
-    if ($groupfilter['primarygroups'] == "checked"){
-      $filter.= "(&(objectClass=posixGroup)(|";
-      foreach ($primaries as $gidNumber => $cn){
-        $filter.= "(gidNumber=$gidNumber)";
-      }
-      $filter.= "))";
-    }
-  
     /* Set filter depending on selection */
     $sfilter= "";
     if ($groupfilter['appgroups'] == "checked"){
@@ -518,15 +510,14 @@ class groupManagement extends plugin
     if ($groupfilter['mailgroups'] == "checked"){
       $filter.= "(objectClass=gosaMailAccount)";
     }
-    if ($groupfilter['functionalgroups'] == "checked"){
-      $ldap->cd($base);
-      $ldap->set_size_limit($_SESSION['size_limit']);
-      $ldap->ls("(&(cn=$regex)(objectClass=posixGroup)(!(|(objectClass=gosaMailAccount)(objectClass=gosaApplicationGroup)$sfilter)))", array("cn", "gidNumber", "description"));
-      $error2= $ldap->error;
-      while ($attrs= $ldap->fetch()){
-        if (!isset($primaries[$attrs['gidNumber'][0]])){
-          $this->grouplist[$attrs['gidNumber'][0]]= $attrs;
-        }
+    $functional= array();
+    $ldap->cd(get_groups_ou().$base);
+    $ldap->set_size_limit($_SESSION['size_limit']);
+    $ldap->search("(&(cn=$regex)(objectClass=posixGroup)(!(|(objectClass=gosaMailAccount)(objectClass=gosaApplicationGroup)$sfilter)))", array("cn", "gidNumber", "description"));
+    $error2= $ldap->error;
+    while ($attrs= $ldap->fetch()){
+      if (!isset($primaries[$attrs['gidNumber'][0]])){
+        $functional[$attrs['gidNumber'][0]]= $attrs['gidNumber'][0];
       }
     }
 
@@ -534,10 +525,8 @@ class groupManagement extends plugin
      * We also need to search for the departments
      * So we are able to navigate like in konquerer
      */
-    $base2 = preg_replace("/ou=people,/i","",$base);
-
     $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
-                              FALSE, $base2, array("ou", "description"), TRUE);
+                              FALSE, $base, array("ou", "description"), TRUE);
 
     $this->departments= array();
     $tmp = array();
@@ -563,7 +552,7 @@ class groupManagement extends plugin
     if ($groupfilter['subsearch'] == "checked"){
       $res= get_list($this->ui->subtreeACL, "$filter", FALSE, $base, array("cn", "description", "gidNumber"), TRUE);
     } else {
-     $base= get_groups_ou().$base;
+      $base= get_groups_ou().$base;
       $res= get_list($this->ui->subtreeACL, "$filter", FALSE, $base, array("cn", "description", "gidNumber"), TRUE);
     }
     if (preg_match("/size limit/i", $error) || preg_match("/size limit/i", $error2)){
@@ -571,12 +560,19 @@ class groupManagement extends plugin
     }
 
     foreach ($res as $value){
-      $this->grouplist[$value['gidNumber'][0]]= $value;
+      if ($groupfilter['functionalgroups'] != "checked" && isset($functional[$value['gidNumber'][0]])){
+        continue;
+      }
+      if ($groupfilter['primarygroups'] == "checked"){
+        $this->grouplist[$value['gidNumber'][0]]= $value;
+      } else {
+        if (!isset($primaries[$value['gidNumber'][0]])){
+          $this->grouplist[$value['gidNumber'][0]]= $value;
+        }
+      }
     }
 
-
-
-      $tmp=array();
+    $tmp=array();
     foreach($this->grouplist as $tkey => $val ){
       $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
     }
