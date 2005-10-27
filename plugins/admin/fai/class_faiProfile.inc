@@ -122,6 +122,7 @@ class faiProfile extends plugin
         $this->is_dialog=false;
         unset($this->dialog);
         $this->dialog=NULL;
+        ksort($this->FAIclasses);
       }
     }
 
