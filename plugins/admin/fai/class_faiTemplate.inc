@@ -72,6 +72,7 @@ class faiTemplate extends plugin
         $this->SubObjects[$object['cn'][0]]['status']      = "edited";
         $this->SubObjects[$object['cn'][0]]['dn']          = $object['dn'];
       }
+      ksort($this->SubObjects);
     }
   }
 
@@ -129,6 +130,7 @@ class faiTemplate extends plugin
         $this->is_dialog=false;
         unset($this->dialog);
         $this->dialog=NULL;
+        ksort($this->SubObjects);
       }
     }
 

@@ -74,6 +74,7 @@ class faiHook extends plugin
         }
         $this->SubObjects[$object['cn'][0]]['FAIscript']   = addslashes($this->readBinary("FAIscript",$object['dn']));
       }
+      ksort($this->SubObjects);
     }
   }
 
@@ -141,6 +142,7 @@ class faiHook extends plugin
         $this->is_dialog=false;
         unset($this->dialog);
         $this->dialog=NULL;
+        ksort($this->SubObjects);
       }
     }
 
