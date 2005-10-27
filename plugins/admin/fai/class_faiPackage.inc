@@ -70,6 +70,7 @@ class faiPackage extends plugin
       foreach($this->attrs['FAIpackage'] as $pkg){
         $this->usedPackages[$pkg] = $pkg;
       }
+      ksort($this->usedPackages);
     }else{
       $this->usedPackages = array();
     }  
@@ -200,6 +201,7 @@ class faiPackage extends plugin
         $this->usedPackages = $use;
         $this->dialog = false;
         $this->is_dialog=false;
+        ksort($this->usedPackages);
       }
     }
 

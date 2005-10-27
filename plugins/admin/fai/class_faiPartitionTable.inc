@@ -72,6 +72,7 @@ class faiPartitionTable extends plugin
         }  
       }
     }
+    ksort($this->disks);
   }
 
   function execute()
@@ -149,6 +150,7 @@ class faiPartitionTable extends plugin
         unset($this->dialog);
         $this->dialog = NULL;
         $this->is_dialog=false;
+        ksort($this->disks);
       }
     }
 
