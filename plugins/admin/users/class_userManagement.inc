@@ -457,15 +457,26 @@ class userManagement extends plugin
 
     /* Generate template list */
     if (($s_action=="new")||($s_action=="create_user_from_tpl")){
+
       $this->templates= array();
+
       $ldap= $this->config->get_ldap_link();
+
+      /* Create list of tempaltes */
       foreach ($this->config->departments as $key => $value){
+    
+        /* Get acls from different ou's */
         $acl= get_permissions (get_people_ou().$value, $this->ui->subtreeACL);
         $acl= get_module_permission($acl, "user", get_people_ou().$value);
+  
+        /* If creation of a new user is allowed, append this template */
         if (chkacl($acl, "create") == ""){
+          
+          /* Search all templates from the current dn */
           $ldap->cd (get_people_ou().$value);
           $ldap->search ("(objectClass=gosaUserTemplate)", array("uid"));
 
+          /* Append */
           if ($ldap->count() != 0){
             while ($attrs= $ldap->fetch()){
               $this->templates[$ldap->getDN()]=
@@ -475,6 +486,8 @@ class userManagement extends plugin
           }
         }
       }
+
+      /* Sort templates */
       natcasesort ($this->templates);
       reset ($this->templates);
     }
@@ -512,7 +525,7 @@ class userManagement extends plugin
         if ($s_action=="create_user_from_tpl"){
           $smarty->assign("template", $this->dn= $this->list[trim($s_entry)]['dn']);
         } else {
-          $smarty->assign("template", "");
+          $smarty->assign("template", "none");
         }
         $smarty->assign("edit_uid", "");
         return($smarty->fetch(get_template_path('template.tpl', TRUE)));
