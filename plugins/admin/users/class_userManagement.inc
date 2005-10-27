@@ -494,6 +494,7 @@ class userManagement extends plugin
       $this->usertab= new usertabs($this->config,
           $this->config->data['TABS']['USERTABS'], $this->dn);
       $this->usertab->set_acl(array(':all'));
+      $this->usertab->by_object['user']->base= $userfilter['depselect'];
 
       /* Take care about templates */
       if ($s_action=="new_tpl"){
