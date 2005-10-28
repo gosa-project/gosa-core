@@ -23,6 +23,38 @@
   Only function definition will follow here
 /*******************************************
 
+/* Define which tags musst be delete, header, navigation, banner */
+$replacements=array();
+$replacements['from']=array("@<!DOC.*<BODY >@si",
+    "/border=\".*\"/i",
+    "'<code.*code>'",
+//    "/alt=\".*\"/i",
+    "/<HR>/",
+    "@<ADDRESS[^>]*?>.*?ADDRESS>@si",
+    "@<\/BODY[^>]*?>.*?HTML>@si",
+    "'<TABLE.*>'",
+    "/src.*icons/i",
+    "/src=\"/i",
+    "/<H1 ALIGN=\"CENTER\">/",
+ /* picture replacements */
+ //  "",
+    );
+
+$replacements['to']=array("",
+    " border=\"0\" ",
+    "",
+  //  "",
+    "",
+    "",
+    "",
+    "<table border=1 cellspacing=0 bgcolor=\"#E0E0E0\" width=\"95%\" align=\"center\" cellpadding=\"3\" summary=\"\">",
+    "src=\"",
+    "src=\"images/",
+    "<H1>",
+ /* picture replacements */
+//    "",
+  );
+
 
 /* Reads all files in specified directory with contents an some inforations about the file */
 /* Read all files with contents*/
