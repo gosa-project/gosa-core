@@ -131,12 +131,15 @@ class printerPPDDialog extends plugin
     }
 
   }
+  
+  function save_ppd(){
+    $this->ppdManager->saveProperties($this->selectedPPD['link'],$this->ppdConfig);
+  }
 
   /* Save to LDAP */
   function save()
   {
     /* return the selected PPD, and in future the selected options too */
-    $this->ppdManager->saveProperties($this->selectedPPD['link'],$this->ppdConfig);
     return($this->selectedPPD['link']);
   }
 
@@ -183,7 +186,8 @@ class printerPPDDialog extends plugin
 
         /* Add attributes of the current category */
         foreach($obj as $attr => $settings){
-        
+  
+      
           /* Skip all entries beginning with _ */
           if($attr[0] == "_") continue;  
           
@@ -201,7 +205,7 @@ class printerPPDDialog extends plugin
           /* Get all values */ 
           foreach( $settings as $vname => $value){
             if($vname[0] != "_"){
-              $values[$vname]= $vname;
+              $values[$vname]= $value;
             }
           }
 

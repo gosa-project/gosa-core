@@ -13,8 +13,8 @@
 <br>
 <h2><img src="images/house.png">&nbsp;{t}Options{/t}</h2>
 {$properties}
-<p class="seperator">&nbsp;</p>
-<br>
-<input type="hidden" name="PPDDisSubmitted" value="1">
-<input type="submit" name="SavePPD" value="{t}Save{/t}">
-<input type="submit" name="ClosePPD" value="{t}Close{/t}">
+<p class="plugbottom">
+	<input type="hidden" name="PPDDisSubmitted" value="1">
+	<input type="submit" name="SavePPD" value="{t}Use{/t}">
+	<input type="submit" name="ClosePPD" value="{t}Close{/t}">
+</p>

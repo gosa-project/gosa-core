@@ -32,6 +32,8 @@ class printgeneric extends plugin
   var $AdminMemberKeys  =array();
 
   var $is_terminalBased = false; 
+
+  var $PPDdialogToSave  = NULL;
  
   var $member           =array();
   var $strings          = "";
@@ -245,7 +247,11 @@ class printgeneric extends plugin
     }
 
     if(isset($_POST['EditDriver'])){
-      $this->dialog = new printerPPDDialog($this->config, $this->dn,$this->gotoPrinterPPD);
+      if($this->PPDdialogToSave){
+        $this->dialog = $this->PPDdialogToSave;
+      }else{
+        $this->dialog = new printerPPDDialog($this->config, $this->dn,$this->gotoPrinterPPD);
+      }
     }
 
     if(isset($_POST['PrinterCancel'])){
@@ -254,8 +260,8 @@ class printgeneric extends plugin
     }
     
     if(isset($_POST['RemoveDriver'])){
-      
       $this->gotoPrinterPPD = array();
+      $this->PPDdialogToSave = NULL;
     }
 
     if(isset($_POST['SavePPD'])){
@@ -268,6 +274,7 @@ class printgeneric extends plugin
         $this->gotoPrinterPPD = array();
         
         $this->gotoPrinterPPD = $this->dialog->save();
+        $this->PPDdialogToSave = $this->dialog;
         unset($this->dialog);
         $this->dialog=NULL;
       }
@@ -445,7 +452,11 @@ class printgeneric extends plugin
     if (!$this->is_account){
       return;
     }
-    
+  
+    if($this->PPDdialogToSave){
+      $this->PPDdialogToSave->save_ppd();
+    }
+  
     $dn= $this->dn;
     plugin::save();
     $ldap= $this->config->get_ldap_link();
