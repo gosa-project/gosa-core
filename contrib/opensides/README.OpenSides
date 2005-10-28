@@ -1,0 +1,25 @@
+goSamba.pl - This script will help you populate your ldap tree with
+	     the correct attribute when using the smbldap-tools
+	     from idealx.
+
+goNagios.pl - This script will help you to manage the authentification
+              users inside of the cgi.cfg, contacts.cfg, contactgroups.cfg
+ldap :
+ 
+slapd.conf - The slapd.conf confg for openldap 2.2
+
+nagios.README - how to add the right entry to make the nagios plugin work
+
+xls-export.README - how to add the right entry to make the xls export xork
+
+The php_writeexcel library is coming from
+
+http://www.bettina-attack.de/jonny/projects/php_writeexcel/
+
+Author : <jonny@1409.org>
+
+LICENSE : GNU LESSER GENERAL PUBLIC LICENSE
+
+Benoit Mortier <benoit.mortier@opensides.be>
+Guillaume Delecourt <guillaume.delecourt@opensides.be>
+Vincent Seynhaeve <vincent.seynhaeve@opensides.be>
