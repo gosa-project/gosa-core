@@ -49,35 +49,6 @@
               {$apply}
 
       </div>
-      <br>
-      <br>
-      <div class="contentboxh" style="height:20px;">
-        <p class="contentboxh" style="font-size:12px">
-          <img src="{$launchimage}" align="right" alt="[U]">
-          <b>{t}Upload new PPD file{/t}</b>
-        </p>
-      </div>
-      <div class="contentboxb">
-        <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-          <tr>
-            <td >
-              <img alt="" src="{$tree_image}" align=middle>
-              &nbsp;{t}Select the PPD file you want to upload.{/t}
-            </td>
-          </tr>
-        </table>
-        <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-          <tr>
-            <td >
-              <input type="file" value="" name="PPDUpload">
-            </td>
-          </tr>
-        </table>
-        <div align="right">
-          <table summary="" style="border-top: 1px solid rgb(176, 176, 176); background: rgb(238, 238, 238) none repeat scroll 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;" width="100%"><tbody><tr><td align="right" width="100%">
-          <input type="submit" value="{t}Upload{/t}"></td></tr></tbody></table>
-        </div>
-      </div>
     </td>
   </tr>
 </table>
