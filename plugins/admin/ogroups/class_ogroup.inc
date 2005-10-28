@@ -528,11 +528,6 @@ class ogroup extends plugin
       $message[]= "The required field 'Name' is not set.";
     }
 
-    /* Need at least one member */
-    if (count($this->member) == 0){
-      $message[]= _("Object groups need at least one member!");
-    }
-
     /* To many different object types? */
     if (strlen($this->gosaGroupObjects) > 4){
       $message[]= _("You can combine two different object types at maximum only!");

@@ -10,9 +10,6 @@ Things to fix before 2.4:
 * FAI management
   - Add package configuration dialog 
 
-* Removing of the last element of objectgroups causes an error
-  -> simple solution: member should be defined as MAY in gosaGroupOfNames?
-
 
 Target for 2.5:
 ===============
