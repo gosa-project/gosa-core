@@ -48,13 +48,17 @@ class printerPPDDialog extends plugin
    /* The user has already a valid PPD assigned
     * Get some informations about this PPD
     */
-   if(($ppdfile!= NULL)&&(strlen($ppdfile)>0)){
-      $tmp2= split("\n", $this->ppdManager->loadDescription($ppdfile));
-      $tmp3['name']   =preg_replace("/^ -/","",$tmp2[1]);
-      $tmp3['link']   =$ppdfile;
-      $tmp3['ppd']    =$this->ppdManager->loadDescription($ppdfile);
-      $this->selectedPPD = $tmp3;
-   }
+    if(($ppdfile!= NULL)&&(strlen($ppdfile)>0))){
+      if(!file_exists($ppdfile)){
+        print_red(sprintf(_("Can't open '%s', ppd settings reseted."),$ppdfile));
+      }else{
+        $tmp2= split("\n", $this->ppdManager->loadDescription($ppdfile));
+        $tmp3['name']   =preg_replace("/^ -/","",$tmp2[1]);
+        $tmp3['link']   =$ppdfile;
+        $tmp3['ppd']    =$this->ppdManager->loadDescription($ppdfile);
+        $this->selectedPPD = $tmp3;
+      }
+    }
   }
 
   function getPrinterReload()
@@ -156,7 +160,7 @@ class printerPPDDialog extends plugin
      */
     if(isset($_POST['SavePPDSelection'])){
       if(!isset($_POST['PPDselection'])){
-        print_red(_("Please select a valid PPD."));
+        print_red(_("Please select a valid ppd."));
       }else{
         $this->selectedPPD['link'] = $_POST['PPDselection'];
         $this->ppdConfig   = false;
@@ -312,7 +316,7 @@ class printerPPDDialog extends plugin
             $str  .=  "</select>\n";
 
           }else{
-            print_red(sprintf(_("Unsupported PPD type '%s' used for '%s' "),$type,$name));
+            print_red(sprintf(_("Unsupported ppd type '%s' used for '%s' "),$type,$name));
           }
           $str .= "</td></tr>\n";
         }
