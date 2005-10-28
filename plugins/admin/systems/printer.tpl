@@ -1,15 +1,10 @@
 
 <table summary="" width="100%">
 	<tr>
-		<td style="vertical-align:top; width:50%;">
+		<td style="vertical-align:top; width:50%; border-right:1px solid #B0B0B0">
 {if $is_terminal ne 'true'}
 			<h2>{t}General{/t}</h2>
 			<table summary="">
-			 <tr>
-			  <td colspan=2>
-			   {$desc}
-			  </td>
-			 </tr>
 			 <tr>
 			  <td><LABEL for="cn" >{t}Printer name{/t}</LABEL>{$must}</td>
 			  <td><input name="cn" id="cn" size=20 maxlength=60 value="{$cn}" {$cnACL}></td>
@@ -18,10 +13,6 @@
 			  <td><LABEL for="description">{t}Description{/t}</LABEL></td>
 			  <td><input id="description" name="description" size=25 maxlength=80 value="{$description}"></td>
 			 </tr>
-			</table>
-		</td>
-		<td valign="top">
-			<table summary="">
 			 <tr>
 				  <td colspan=2>&nbsp;</td>
 			 </tr>
@@ -34,19 +25,12 @@
 			  </tr>
 			</table>
 		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<p class="seperator">&nbsp;</p>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
+		<td>
 {/if}
 			<h2>{t}Details{/t}</h2>
 			<table summary="">
 			 	<tr>
-			  		<td><LABEL for="l">{t}Location{/t}</LABEL></td>
+			  		<td><LABEL for="l">{t}Printer location{/t}</LABEL></td>
 			  		<td><input id="l" name="l" size=25 maxlength=80 value="{$l}"></td>
 			 	</tr>
 			 	<tr>
@@ -58,7 +42,7 @@
 				<tr>	
 					<td>
 						<br>
-						{t}PPD{/t} : {$driverInfo}<br>
+						{t}Driver{/t}: <i>{$driverInfo}</i>&nbsp;
 							<input type="submit" name="EditDriver" value="{t}Edit{/t}">
 							<input type="submit" name="RemoveDriver" value="{t}Remove{/t}">
 					</td>
@@ -70,16 +54,15 @@
 
 <p class="plugbottom" style="margin-bottom:0px; padding:0px;">&nbsp;</p>
 
-<h2>{t}Permissions{/t}</h2>
+<h2><img alt="" align="middle" src="images/closedlock.png"> {t}Permissions{/t}</h2>
 <table summary="" width="100%">
 	<tr>
-		<td>
-
-			<table>
+		<td style="border-right:1px solid #B0B0B0; width:50%">
+			<table style="width:100%">
 				<tr>
 					<td>
-						{t}Following objects are assigned as user.{/t}<br>
-		     				<select size="1" name="UserMember" title="{t}Users{/t}" style="width:350px;height:120px;"  multiple>
+						{t}Users which are allowed to use this printer{/t}<br>
+		     				<select size="1" name="UserMember" title="{t}Users{/t}" style="width:100%;height:120px;"  multiple>
                 				{html_options options=$UserMembers values=$UserMemberKeys}
                				</select><br>
 							<input type="submit" value="{t}Add user{/t}"  name="AddUser">
@@ -91,16 +74,15 @@
 	
 		</td>
 		<td>
-			
-			<table>
+			<table style="width:100%">
 				<tr>
 					<td>
-						{t}Following objects are assigned as admin.{/t}<br>
-		     				<select size="1" name="AdminMember" title="{t}Admins{/t}" style="width:350px;height:120px;"  multiple>
+						{t}Users which are allowed to administrate this printer{/t}<br>
+		     				<select size="1" name="AdminMember" title="{t}Admins{/t}" style="width:100%;height:120px;"  multiple>
                 				{html_options options=$AdminMembers values=$AdminMemberKeys}
                				</select><br>
-							<input type="submit" value="{t}Add admin user{/t}"  name="AddAdminUser">
-							<input type="submit" value="{t}Add admin group{/t}" name="AddAdminGroup">
+							<input type="submit" value="{t}Add user{/t}"  name="AddAdminUser">
+							<input type="submit" value="{t}Add group{/t}" name="AddAdminGroup">
 							<input type="submit" value="{t}Delete{/t}" name="DelAdmin">
 		
 					</td>

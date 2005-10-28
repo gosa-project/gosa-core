@@ -350,7 +350,7 @@ class printgeneric extends plugin
     if(!empty($this->gotoPrinterPPD)){
       $smarty->assign("driverInfo", $ppdManager->loadDescription($this->gotoPrinterPPD));
     }else{
-      $smarty->assign("driverInfo", _("Undefined"));
+      $smarty->assign("driverInfo", _("not defined"));
     }
 
     $list=$this->generateList();
