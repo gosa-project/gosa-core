@@ -91,7 +91,8 @@ class ppdManager
 		fclose($wp);
 		fclose($rp);
 
-		echo "Move $file.tmp to $file<br>";
+		copy("$file.tmp", "$file");
+		unlink("$file.tmp");
 	}
 
 
