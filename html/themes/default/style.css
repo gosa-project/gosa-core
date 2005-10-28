@@ -518,7 +518,7 @@ td.check {
 
 option.select {
         background-repeat:no-repeat;
-        background-position: top;
+        background-position: 0px top;
         border:0;
 	padding-left:20px;
 	padding-bottom:1px;
