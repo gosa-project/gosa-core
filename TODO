@@ -1,9 +1,6 @@
 Things to fix before 2.4:
 =========================
 
-* Fix filter part of dialogs and remove long descriptive textx in front of the search
-  fields
-
 * Rework printer tabs
   -> lpstat?
 
