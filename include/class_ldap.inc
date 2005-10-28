@@ -463,7 +463,7 @@ class LDAP{
     }
   }
 
-  function get_attribute($dn, $name)
+  function get_attribute($dn, $name,$r_array=0)
   {
     $data= "";
     if ($this->reconnect) $this->connect();
@@ -476,11 +476,18 @@ class LDAP{
         if ($info= @ldap_get_values_len($this->cid, $ei, "$name")){
           $data= $info[0];
         }
+
       }
     }
-
+    if($r_array==0)
     return ($data);
+    else
+    return ($info);
+	
+	
   }
+ 
+
 
   function get_additional_error()
   {
@@ -534,6 +541,27 @@ class LDAP{
     } else {
       $display.= $this->gen_one_entry($dn);
     }
+
+    return ($display);
+  }
+
+function gen_xls ($dn, $filter= "(objectClass=*)", $attributes= array('*'), $recursive= TRUE,$r_array=0)
+  {
+    $display= "";
+
+      $this->cd($dn);
+      $this->search("$filter");
+	$i=0;
+      while ($attrs= $this->fetch()){
+	$j=0;
+	foreach ($attributes as $at)
+        {
+// 	echo $at;
+	
+	$display[$i][$j]= $this->get_attribute($attrs['dn'], $at,$r_array);
+	$j++;}
+	$i++;
+      }
 
     return ($display);
   }
