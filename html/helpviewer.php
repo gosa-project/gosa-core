@@ -25,7 +25,10 @@ require_once ("functions.inc");
 require_once ("functions_helpviewer.inc");
 header("Content-type: text/html; charset=UTF-8");
 
+/* Start session */
 session_start ();
+
+/* Display all Errors/Warnings*/
 error_reporting(E_ALL);
 
 /* Language setup */
@@ -34,6 +37,7 @@ if ($config->data['MAIN']['LANG'] == ""){
 } else {
   $lang= $config->data['MAIN']['LANG'];
 }
+
 $lang.=".UTF-8";
 putenv("LANGUAGE=");
 putenv("LANG=$lang");
@@ -72,7 +76,7 @@ My PART ^^
 ##################
  */
 
-$helpdir                      = HELP_BASEDIR."/en/manual_gosa_en/"; // Folder to use for help files
+$helpdir                      = "/home/hickert/gosa/doc/guide/user/fr/html/"; // Folder to use for help files
 $defaultpage                  = "index.html";                       // alternative file, shown on error, or on first call
 $prefix                       = "node";                             // Prefix of the generated help files 
 $suffix                       = ".html";                            // Suffix of the generated helpfiles
@@ -89,39 +93,6 @@ $forwardlink                 = "<a href=\"?pg=%s\"  class=\"maintitlebar\">
                                   <img src='images/forward.png' align=\"middle\" alt=\""._("next")."\" border=\"0\">
                                  </a>";
 
-/* Define which tags musst be delete, header, navigation, banner */
-$replacements=array();
-$replacements['from']=array("@<!DOC.*<BODY >@si",
-    "/border=\".*\"/i",
-    "'<code.*code>'",
-//    "/alt=\".*\"/i",
-    "/<HR>/",
-    "@<ADDRESS[^>]*?>.*?ADDRESS>@si",
-    "@<\/BODY[^>]*?>.*?HTML>@si",
-    "'<TABLE.*>'",
-    "/src.*icons/i",
-    "/src=\"/i",
-    "/<H1 ALIGN=\"CENTER\">/",
- /* picture replacements */
- //  "",
-    );
-
-
-$replacements['to']=array("",
-    " border=\"0\" ",
-    "",
-  //  "",
-    "",
-    "",
-    "",
-    "<table border=1 cellspacing=0 bgcolor=\"#E0E0E0\" width=\"95%\" align=\"center\" cellpadding=\"3\" summary=\"\">",
-    "src=\"",
-    "src=\"images/",
-    "<H1>",
- /* picture replacements */
-//    "",
-  );
-
 
 /* Default pages */
 $backward =$defaultpage;
@@ -131,158 +102,75 @@ $forward  ="node1.html";
 /*
    Here it begins, the real function, above only definitions
  */
+/* Path exists ? */
+if((is_dir($helpdir))&&($fp = opendir($helpdir))){
 
-if(!file_exists(HELP_BASEDIR."/en/manual_gosa_en/")){
-  /* prevent php warning missing value ... or so*/
-  $smarty->assign("backward","");
-  $smarty->assign("index"   ,"");
-  $smarty->assign("forward" ,"");
-  $smarty->assign("search_string","");
-  $smarty->assign("help_contents","<br>".sprintf(_("Can't read any helpfiles from ' %s ', possibly there is no help available."),HELP_BASEDIR."/en/manual_gosa_en/"));
-
-  /* Output html ...*/
-  $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
-  $display= $header.$smarty->fetch(get_template_path('help.tpl'));
-  echo $display;
-
-}else{  
-
-  /* We prepare to search, all Document for the given keyword */
-  if(isset($_POST['search'])){
-
-    /* Get Keyword */
-    $keyword = $_POST['search_string'];  
-
-    /* Save Keyword to be able to show last searched word in template */
-    $_SESSION['search_string']= $keyword;
-
-    /* Read all files with contents*/
-    /*               |Folder="/var/ww...", 
-                     |        |Fileprefix="node"
-                     |        |       |Filesuffix=".html"
-                     |        |       |       |WithoutContent=false(This means : read content)
-                     |        |       |       |     |Singlepage=false(Means read all, if w want to read single, specify its filename)"*/
-    $arr = readfiles($helpdir,$prefix,$suffix,false,$singlepage=false);
-
-    /* Create Searchresult for our Keyword(s) */
-    $res = search($arr,$keyword); 
-
-    /* Tell smarty which pages to use for backward forwa.. */
-    $smarty->assign("backward","");
-    $smarty->assign("index"   ,$index);
-    $smarty->assign("forward" ,"");
-
-    /* Tell smarty the Keyword, to show it in the input field again */
-    $smarty->assign("search_string",$keyword);
-
-    /* Create result list */
-    $smarty->assign("help_contents",searchlist($arr,$res,$maxresults));
-
-    /* show some errors */
-    if (isset($_SESSION['errors'])){
-      $smarty->assign("errors", $_SESSION['errors']);
-    }
-    if ($error_collector != ""){
-      $smarty->assign("php_errors", $error_collector."</div>");
-    } else {
-      $smarty->assign("php_errors", "");
-    }
-
-    /* Output html ...*/
-    $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
-    $display= $header.$smarty->fetch(get_template_path('help.tpl'));
-    echo $display;
-
-    /*
-       Don't search, only show selected page
-     */
-  }else{
-
-    /* present last searched word(s)*/
-    if(!isset($_SESSION['search_string'])){
-      $_SESSION['search_string']="";
-    }
-
-
-    $smarty->assign("search_string",$_SESSION['search_string']);
-
-    /* Read all files, prepare to serach */
-    $helppages = readfiles($helpdir,$prefix,$suffix,true);
-
-    /* Get transmitted page */
-    if(isset($_GET['pg'])){
-      $page = $_GET['pg'];
-    }else{
-      $page = $defaultpage;
-    }
+  /* read all available directories */
+  while($dir = readdir($fp)){
     
-    /* test if this page exists, in our array of files */
-    if((!isset($helppages[$page]))&&($page!=$defaultpage))
-    {
-      //print "Requested helppage is unknown, redirekted to index"; // For debugging only
-      $page = $defaultpage;
+    /* Skip . / .. */
+    if(!in_array($dir,array(".","..","images"))){
+      $arr[$dir] = readfiles($helpdir."/".$dir."/",$prefix,$suffix,false,$singlepage=false);
     }
-
-    /* Check forward backward, funtionality*/
-    if($page != $defaultpage)
-    {
-      /* Extract Number of node page */
-      $number = str_replace($prefix,"",str_replace($suffix,"",$page));
-
-      /* Check if we can switch forward and/or backward*/ 
-      $bck = $prefix.($number-1).$suffix;
-      $fck = $prefix.($number+1).$suffix;
-
-      /* backward page exists ?, so allow it*/
-      if((isset($helppages[$bck]))) {
-        $backward = $bck;
-      }
-
-      $forward  = $fck;
-    }
-
-    $help_contents=readfiles($helpdir,$prefix,$suffix,false,$page);
-
-    /* Mark last searched words */
-    if(isset($_GET['mark'])){
-      $marks = ($_SESSION['lastresults']) ; 
-      $help_contents = markup_page($help_contents[$page]['content'],$marks[$page]);
-      $help_contents=$help_contents;  
-    }else{
-      $help_contents=$help_contents[$page]['content'];
-    }
-
-    $smarty->assign("help_contents",$help_contents);
-
-    /* Define our own navigation pages */
-    if($page == $defaultpage){
-      $smarty->assign("backward","");
-    }else{
-      $smarty->assign("backward",sprintf($backwardlink,$backward));
-    }
-    $smarty->assign("index"   ,$index);
-  
-    if(!(isset($helppages[$forward]))){
-      $smarty->assign("forward","");
-    }else{
-      $smarty->assign("forward",sprintf($forwardlink,$forward));
-    }
-
-    /* show some errors */
-    if (isset($_SESSION['errors'])){
-      $smarty->assign("errors", $_SESSION['errors']);
-    }
-    if ($error_collector != ""){
-      $smarty->assign("php_errors", $error_collector."</div>");
-    } else {
-      $smarty->assign("php_errors", "");
-    }
-
-    /* Fill page */
-    $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
-    $display= $header.$smarty->fetch(get_template_path('help.tpl'));
-    echo $display;
   }
+    
+  /* Handle posts */
+  if((isset($_GET['folder']))&&(is_dir($helpdir."/".$_GET['folder']."/"))){
+    $_SESSION['helpbrowser']['folder'] = $_GET['folder'];
+  }
+
+  if((isset($_GET['folder']))&&(empty($_GET['folder']))){
+    $_SESSION['helpbrowser']['folder']  = "";
+    $_SESSION['helpbrowser']['file']    = "";
+  }
+
+  if((isset($_GET['pg']))&&(empty($_GET['pg']))){
+    $_SESSION['helpbrowser']['folder']  = "";
+    $_SESSION['helpbrowser']['file']    = "";
+  }
+
+  if((isset($_GET['pg']))&&(is_file($helpdir."/".$_SESSION['helpbrowser']['folder']."/".$_GET['pg']))){
+    $_SESSION['helpbrowser']['file'] = $_GET['pg'];
+  }
+
+  /* Open helppage */
+  if(!empty($_SESSION['helpbrowser']['folder'])){
+    $folder = $_SESSION['helpbrowser']['folder'];
+    if(!empty($_SESSION['helpbrowser']['file'])){
+      $file = $_SESSION['helpbrowser']['file'];
+      $index = readfiles($helpdir."/".$folder."/",$prefix,"",false,$file);
+      $smarty->assign("help_contents",$index[$file]['content']);
+    }else{
+      $index = readfiles($helpdir."/".$folder."/",$prefix,"",false,$singlepage="index.html");
+      $smarty->assign("help_contents",$index['index.html']['content']);
+    }
+  }else{
+    $smarty->assign("help_contents",genIndex($arr));
+  }
+  $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
+  $display= utf8_encode(  $header.$smarty->fetch(get_template_path('help.tpl')));
+  echo $display;
+}else{
+  $smarty->assign("help_contents","<h2>".sprintf(_("Helpdir '%s' is not accessible, can't read any helpfiles."),$helpdir))."</h2><br>";
+  $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
+  $display= utf8_encode(  $header.$smarty->fetch(get_template_path('help.tpl')));
+  echo $display;
 }
+
+function genIndex($arr)
+{
+  $str = "<h2>"._("Index")."</h2>";
+  foreach($arr as $index => $obj){    
+    $nr   = preg_replace("/_.*$/i","",$index);
+    $name = preg_replace("/^.*_/i","",$index);
+    if(empty($name)){
+      $name = preg_replace("/_/","",$index);
+      $nr = "";
+    }
+    $str .= "<p style='padding-left:20px;'><a href='?folder=".$index."'><b>".$nr." - ".$name."</b></a></p>";
+  }
+  return $str;
+}
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

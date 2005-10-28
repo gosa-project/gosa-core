@@ -33,6 +33,7 @@ bindtextdomain($domain, "$BASE_DIR/locale");
 textdomain($domain);
 
 /* Remember everything we did after the last click */
+session_set_cookie_params(2*60*60);
 session_start ();
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
   @DEBUG (DEBUG_POST, __LINE__, __FUNCTION__, __FILE__, $_POST, "_POST");
@@ -57,6 +58,7 @@ if ($_SERVER['REMOTE_ADDR'] != $ui->ip){
   exit;
 }
 $config= $_SESSION['config'];
+
 @DEBUG (DEBUG_CONFIG, __LINE__, __FUNCTION__, __FILE__, $config->data, "config");
 
 /* Set template compile directory */
