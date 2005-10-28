@@ -57,3 +57,4 @@
 </table>
 
 <input type="hidden" name="ignore">
+<input type="hidden" name="Ogroup_dialog_posted">

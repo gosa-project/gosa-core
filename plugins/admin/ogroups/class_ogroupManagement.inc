@@ -82,7 +82,7 @@ class ogroupManagement extends plugin
         $ogroupfilter[$type]= $_POST[$type];
       }
     }
-    if (isset($_POST['regex'])){
+    if (isset($_POST['Ogroup_dialog_posted'])){
       foreach( array("usergroups", "groupgroups", "appgroups", "depgroups",
             "servergroups", "wsgroups", "prtgroups", "tcgroups", "fongroups") as $type){
 
