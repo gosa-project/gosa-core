@@ -55,8 +55,25 @@ class printerPPDDialog extends plugin
       $tmp3['ppd']    =$this->ppdManager->loadDescription($ppdfile);
       $this->selectedPPD = $tmp3;
    }
+  }
 
- 
+  function getPrinterReload()
+  {
+    $tmp = $this->ppdManager->getPrinterList(true);
+
+    /* Sort all available files, and create header (Vendor index) */
+    foreach($tmp as $file=>$ppd){
+      $tmp2 = split("\n",$ppd);
+      if(!isset($this->ppdListHeader[$tmp2[0]])){
+        $this->ppdListHeader[$tmp2[0]]=0;
+      }
+      $tmp3['name']   =preg_replace("/^ -/","",$tmp2[1]." - ".$tmp2[2]);
+      $tmp3['link']   =$file;
+      $tmp3['ppd']    =$ppd;
+      $this->ppdListHeader[$tmp2[0]]++;
+      $this->ppdList[$tmp2[0]][preg_replace("/^ -/","",$tmp2[1]." - ".$tmp2[2])]=$tmp3;
+    }
+
   }
 
   function execute()
@@ -64,6 +81,61 @@ class printerPPDDialog extends plugin
     /* Fill templating stuff */
     $smarty= get_smarty();
     $display= "";
+
+    /* Is there a new PPD file uploaded ? */
+    if((isset($_FILES['NewPPDFile']))&&(isset($_POST['SubmitNewPPDFile']))){
+      $file = ($_FILES['NewPPDFile']);
+      if($file['size'] != 0 ){
+        $res  = @$this->ppdManager->loadDescription($file['tmp_name']);
+        $name = (trim(preg_replace("/-/","",$res)));
+        if(!empty($name)){
+          $vendor = trim(preg_replace("/-.*$/i","",$res));
+          $model  = trim(preg_replace("/".$vendor."/","",$name));
+          if(!is_dir('/var/spool/ppd/'.$vendor)){
+            if(!(@mkdir('/var/spool/ppd/'.$vendor))){
+              print_red(sprintf(_("Cab't create folder '%s' for the uploaded ppd file."),$vendor));
+            }
+          }
+
+          if(!isset($this->ppdList[$vendor])){
+            $this->ppdList[$vendor] = array();
+          }
+  
+          if(is_dir('/var/spool/ppd/'.$vendor)){  
+            $found = false;
+            foreach($this->ppdList[$vendor] as $key => $val){
+              if(preg_match("/".$model.".*/i",$key)){
+                $found = true;
+                print_red(sprintf(_("There is already a ppd file for this kind of printer.")));
+              }
+            }// Foreach
+            if(!$found){
+              $filename = '/var/spool/ppd/'.$vendor."/".$vendor."-".preg_replace("/^[^ ]/","",str_replace("-","",$model)).".ppd";
+              $fp = @fopen($filename,"w+");
+              if(!$fp){
+                print_red(sprintf(_("Can't save file '%s'"),$filename));
+              }else{
+                $str = file_get_contents($file['tmp_name']);
+                fputs($fp,$str);
+                @fclose($fp);
+               
+                $tmp2= split("\n", $res);
+                $tmp3['name']   =preg_replace("/^ -/","",$tmp2[1]);
+                $tmp3['link']   =$filename;
+                $tmp3['ppd']    =$res;
+                $this->selectedPPD = $tmp3;
+                $this->getPrinterReload(); 
+              }
+            }
+          }// If dir
+        }else{
+          print_red(_("Please specify a valid ppd file."));
+        }
+      }else{
+        print_red(_("Please specify a valid ppd file."));
+      }
+  
+    }
 
 
     /* Open a dialog that allow us to select different PPDs
