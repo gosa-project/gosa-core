@@ -8,5 +8,10 @@ ldap :
  
 slapd.conf - The slapd.conf confg for openldap 2.2
 
+nagios.README - how to add the right entry to make the nagios plugin work
+
+xls-export.README - how to add the right entry to make the xls export xork
+
 Benoit Mortier <benoit.mortier@opensides.be>
 Guillaume Delecourt <guillaume.delecourt@opensides.be>
+vincent senave <vincent.senave@opensides.be>
