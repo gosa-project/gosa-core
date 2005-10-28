@@ -1,0 +1,5 @@
+for test the xls export add this :
+
+                <tab class="xlsexport" name="XLS export" />
+
+in your /etc/gosa/gosa.conf in <ldfitab>.
