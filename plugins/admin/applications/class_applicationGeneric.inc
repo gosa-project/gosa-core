@@ -59,13 +59,7 @@ class application extends plugin
 
 
   function generateTempalte(){
-	$str= "# This code is part of GOsa (https://gosa.gonicus.de)\n".
-	    "#\n".
-            "# This program is free software; you can redistribute it and/or modify\n".
-            "# it under the terms of the GNU General Public License as published by\n".
-            "# the Free Software Foundation; either version 2 of the License, or\n".
-            "# (at your option) any later version.\n".
-            "#\n";
+	$str= "# This code is part of GOsa (https://gosa.gonicus.de)\n#\n";
 
 	$names = $this->parent->by_object['applicationParameters']->option_name;
 	$values = $this->parent->by_object['applicationParameters']->option_value;
@@ -79,13 +73,13 @@ class application extends plugin
 	foreach($names as $index => $name){
 
 		// Fix length
-		for($i = strlen($name) ; $i < 30 ; $i ++){
+		for($i = strlen($name) ; $i < 30 ; $i++){
 			$name= $name." ";
 		}
 		if((isset($values[$index]))&&(!empty($values[$index]))){
 			$str.= "# ".$name."\t(e.g. '".$values[$index]."')\n";
 		}else{
-			$str.= "# ".$name."\t(e.g. '' (empty))\n";
+			$str.= "# ".$name."\t("._("no example").")\n";
 		}
 	}
 	$str .= "#\n".
@@ -104,7 +98,7 @@ class application extends plugin
 		 return ($display);
 	}
 
-	if(isset($_POST['ScriptTemplate'])){
+#	if(isset($_POST['ScriptTemplate'])){
 		$head = $this->generateTempalte();
 		$scr  = $this->gotoLogonScript; 
 		
@@ -115,7 +109,7 @@ class application extends plugin
 		}
 
 		$this->gotoLogonScript = $head.$scr;
-	}
+#	}
 	
 	if((isset($_POST['upLoad']))&&(isset($_FILES['ScriptFile']))){
 		$str = file_get_contents($_FILES['ScriptFile']['tmp_name']);

@@ -82,7 +82,6 @@
 			<textarea name="gotoLogonScript" style='width:99%;height:220px;'>{$gotoLogonScript}</textarea>
 			<input type="file" name="ScriptFile" value="{t}Import{/t}">
 			<input type="submit" name="upLoad" value="{t}Upload{/t}">
-			<input type="submit" name="ScriptTemplate" value="{t}Create template{/t}">
 		</td>
 	</tr>
 </table>

@@ -9,9 +9,6 @@ Things to fix before 2.4:
 
 * FAI management
   - Add package configuration dialog 
-  - Make script entries binary
-
-* Add function to get GOto application templates -> filled variables, etc. (small fix)
 
 * Removing of the last element of objectgroups causes an error
   -> simple solution: member should be defined as MAY in gosaGroupOfNames?
