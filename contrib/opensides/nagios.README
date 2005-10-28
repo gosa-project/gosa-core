@@ -1,9 +1,12 @@
-To test the plugin add this in gosa.conf
+To use the nagios plugin remove the comment in front of nagios in gosa.conf
 
-        <nagios>
+<!--    <nagios>
                 <tab class="nagiosAccount" />
-        </nagios>
+        </nagios> -->
 
-before <connectivity> eg.
 
-Guillaume.
+Guillaume Delecourt
+OpenSides October 2005
+
+
+

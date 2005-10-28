@@ -1,5 +1,6 @@
-for test the xls export add this :
+To use the xls export addon uncomment the following line in your gosa.conf :
 
-                <tab class="xlsexport" name="XLS export" />
+<!--            <tab class="xlsexport" name="Excel Export" />   -->
 
-in your /etc/gosa/gosa.conf in <ldfitab>.
+Guillaume
+OpenSides October 2005
