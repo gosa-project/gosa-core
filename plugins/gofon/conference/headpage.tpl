@@ -24,6 +24,7 @@
      {t}This menu allows you to create, delete and edit selected phone conferences. Having a large number of phone conferences, you might prefer the range selectors on top of the conferences list.{/t}
    </p>
    </div>
+   <br>
    <div class="contentboxh">
     <p class="contentboxh"><img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}</p>
    </div>
