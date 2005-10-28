@@ -57,6 +57,7 @@ class ppdManager
 
 			if (preg_match("/\*OpenGroup:*\s+\**$section\/*/", $line)){
 				$fsection= true;
+				fwrite ($wp, $line);
 				continue;
 			}
 
