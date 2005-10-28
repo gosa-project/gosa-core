@@ -48,7 +48,7 @@ class printerPPDDialog extends plugin
    /* The user has already a valid PPD assigned
     * Get some informations about this PPD
     */
-    if(($ppdfile!= NULL)&&(strlen($ppdfile)>0))){
+    if(($ppdfile!= NULL)&&(strlen($ppdfile)>0)){
       if(!file_exists($ppdfile)){
         print_red(sprintf(_("Can't open '%s', ppd settings reseted."),$ppdfile));
       }else{
