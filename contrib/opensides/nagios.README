@@ -1,5 +1,9 @@
 To use the nagios plugin remove the comment in front of nagios in gosa.conf
 
+<!--                     <plugin acl="default" class="nagiosAccount" icon="monitoring.png"
+                                path="plugins/personal/nagios" /> -->
+
+
 <!--    <nagios>
                 <tab class="nagiosAccount" />
         </nagios> -->
