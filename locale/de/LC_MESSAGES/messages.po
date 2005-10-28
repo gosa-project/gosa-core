@@ -11,12 +11,12 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-10-21 10:35+0200\n"
+"PO-Revision-Date: 2005-10-28 12:58+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: contrib/gosa.conf:4
 msgid "My account"
@@ -6685,26 +6685,23 @@ msgid "Regular expression for matching member names"
 msgstr "Regul�rer Ausdruck zum Erkennen von Mitgliedsnamen"
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:87
-#, fuzzy
 msgid "Please select a valid PPD."
-msgstr "Bitte w�hlen Sie eine g�ltige Datei."
+msgstr "Bitte w�hlen Sie eine g�ltige PPD."
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:230
 #: plugins/admin/systems/class_printerPPDDialog.inc:233
-#, fuzzy
 msgid "True"
 msgstr "wahr"
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:231
 #: plugins/admin/systems/class_printerPPDDialog.inc:234
-#, fuzzy
 msgid "False"
 msgstr "falsch"
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:239
 #, php-format
 msgid "Unsupported PPD type '%s' used for '%s' "
-msgstr ""
+msgstr "Nicht unterst�tzter PPD Typ '%s' verwendet von '%s'"
 
 #: plugins/admin/systems/printerPPDSelectionDialog.tpl:6
 #: plugins/admin/ogroups/ogroup_objects.tpl:6
@@ -9582,7 +9579,7 @@ msgstr ""
 "nicht in der Lage irgendetwas einzustellen!"
 
 #: include/class_ppdManager.inc:66 include/class_ppdManager.inc:184
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Parsing PPD file %s failed - line too long. Trailing characters have been "
 "ignored"
@@ -9596,9 +9593,8 @@ msgid "Nested groups are not supported!"
 msgstr "(Warnung: mehr als 16 Gruppen werden von NFS nicht unterst�tzt!)"
 
 #: include/class_ppdManager.inc:78
-#, fuzzy
 msgid "Group name not unique!"
-msgstr "Gruppenname"
+msgstr "Der Gruppenname ist nicht eindeutig!"
 
 #: include/class_ppdManager.inc:84 include/class_ppdManager.inc:114
 msgid "Symbol values are not supported yet!"
@@ -10183,38 +10179,38 @@ msgstr ""
 #~ msgstr "nl_NL"
 
 #~ msgid "Reset list"
-#~ msgstr "Liste zur�cksetzen"
+#~ msgstr "Liste zurücksetzen"
 
 #~ msgid "Upload PPD"
 #~ msgstr "PPD hochladen"
 
 #~ msgid "List with all available ppd files."
-#~ msgstr "Zeige verf�gbare PPD-Dateien"
+#~ msgstr "Zeige verfügbare PPD-Dateien"
 
 #~ msgid "Entries"
-#~ msgstr "Eintr�ge"
+#~ msgstr "Einträge"
 
 #~ msgid "selected"
-#~ msgstr "ausgew�hlt"
+#~ msgstr "ausgewählt"
 
 #~ msgid "Please select a PPD or press cancel"
-#~ msgstr "Bitte w�hlen Sie eine PPD oder Abbrechen"
+#~ msgstr "Bitte wählen Sie eine PPD oder Abbrechen"
 
 #~ msgid "List of PPDs"
 #~ msgstr "Liste der PPDs"
 
 #~ msgid "Automount devices (format: complete autofs entry)"
-#~ msgstr "Automount Ger�te (Format: kompletter autofs-Eintrag)"
+#~ msgstr "Automount Geräte (Format: kompletter autofs-Eintrag)"
 
 #~ msgid "Add additional automount entries"
-#~ msgstr "Zus�tzliche \"Automount-Eintr�ge\" hinzuf�gen"
+#~ msgstr "Zusätzliche \"Automount-Einträge\" hinzufügen"
 
 #~ msgid "Additional fstab entries"
-#~ msgstr "Zus�tzliche fstab-Eintr�ge"
+#~ msgstr "Zusätzliche fstab-Einträge"
 
 #~ msgid "Add additional filesystems to be mounted during startup"
 #~ msgstr ""
-#~ "Zus�tzliche Dateisysteme hinzuf�gen, die w�hrend des Starts gemountet "
+#~ "Zusätzliche Dateisysteme hinzufügen, die während des Starts gemountet "
 #~ "werden"
 
 #~ msgid "Service"
@@ -10224,16 +10220,16 @@ msgstr ""
 #~ msgstr "Liste benutzter FAI-Klassen"
 
 #~ msgid "Please enter a valid name. Only a-Z 0-9 are allowed."
-#~ msgstr "Bitte geben Sie einen gÃÅltigen Namen ein (0-9 und a-Z sind erlaubt)."
+#~ msgstr "Bitte geben Sie einen gÃÂÃÂltigen Namen ein (0-9 und a-Z sind erlaubt)."
 
 #~ msgid "Please enter a valid name. Only 0-9 a-Z are allowed here."
-#~ msgstr "Bitte geben Sie einen gÃÅltigen Namen ein (0-9 und a-z sind erlaubt)."
+#~ msgstr "Bitte geben Sie einen gÃÂÃÂltigen Namen ein (0-9 und a-z sind erlaubt)."
 
 #~ msgid "Please enter a value for task."
-#~ msgstr "Bitte geben Sie einen gÃÅltigen Wert fÃÅr 'Aufgabe' an."
+#~ msgstr "Bitte geben Sie einen gÃÂÃÂltigen Wert fÃÂÃÂr 'Aufgabe' an."
 
 #~ msgid "Please enter a valid class name. Only 0-9 a-z is allowed here."
-#~ msgstr "Bitte geben Sie einen gÃÅltigen Klassen-Namen ein (0-9 und a-z sind erlaubt)."
+#~ msgstr "Bitte geben Sie einen gÃÂÃÂltigen Klassen-Namen ein (0-9 und a-z sind erlaubt)."
 
 #~ msgid "GUID"
 #~ msgstr "GUID"
