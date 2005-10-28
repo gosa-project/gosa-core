@@ -44,6 +44,9 @@ function keyPress(DnEvents) {
 				} else {
 					return true;
 				}
+			// Check for konqueror
+			} else if(document.clientWidth) {
+				// do nothing ATM
 			} else {
 				if(window.event.srcElement.type == 'textarea') {
 					return true;
@@ -71,6 +74,9 @@ function keyPress(DnEvents) {
 				document.getElementById(DnEvents.target.id).value+="\t";
 		 		return false;
 			}
+		// Check for konqueror
+		} else if(document.clientWidth) {
+			// do nothing ATM
 		} else {
 		 	if(window.event.srcElement.type == 'textarea') {
 				document.getElementById(window.event.srcElement.id).value+="\t";
@@ -177,3 +183,5 @@ function popup(target, name) {
 function js_check(form) {
 	form.javascript.value = 'true';
 }
+
+// vim:ts=2:syntax

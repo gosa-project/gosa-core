@@ -52,10 +52,10 @@ class divlist {
 		$s_return = "";
 		
 		$s_return.= "<table summary='".$this->s_summary."' width='600' cellspacing='0'>";
-		
-		$s_return.= $this->_generateHeader();
-		
-		$s_return.= $this->_generatePage();
+    
+    $s_return.= "<thead>".$this->_generateHeader()."</thead>";
+    
+    $s_return.= "<tbody style='overflow:auto;height:480px;'>".$this->_generatePage()."</tbody>";
 		//$s_return.= nl2br(htmlentities($this->_generatePage()));
 		
 		$s_return.= "</table>";
@@ -86,23 +86,31 @@ class divlist {
 		$s_key 		= "";
 				
 		$s_return .= "\n<tr>";
+
+    $i_count = count($this->a_header[0])-1;
 		foreach($this->a_header[0] as $s_key => $s_value ){
 			if(!isset($s_value['attach'])){
 				$s_value['attach'] = "";
 			}
 			
-			$s_return .= "\n<td class='listheader' ".$s_value['attach'].">".$s_value['string']."</td>";
+      if($i_count == 0) {
+  			$s_return .= "\n<td class='listheader' style='border-right:0px;border-bottom:1px solid #b0b0b0;'".$s_value['attach'].">".$s_value['string']."</td>";
+      } else {
+  			$s_return .= "\n<td class='listheader' style='border-bottom:1px solid #b0b0b0;'".$s_value['attach'].">".$s_value['string']."</td>";
+      }
+      $i_count--;
 		}
 		
+    $s_return .= "<td class='listheader' style='border-right:0px;border-bottom:1px solid #b0b0b0;width:13px;'>&nbsp;</td>";
 		$s_return .= "\n</tr>";
 		return $s_return;
 	}
 	
-	function	 SetSummary($msg){
+	function SetSummary($msg){
 		$this->s_summary = $msg;
 	}
 
-	function  _generatePage(){
+	function _generatePage(){
 		
 		$s_value 	= "";
 		$s_key 		= "";
@@ -113,86 +121,128 @@ class divlist {
 		if(isset($_GET['start'])){
 			$_SESSION['start'.$this->pageid]=$_GET['start'];
 			$start = $_GET['start'];
-		}else{
+		} else {
 			if(isset($_SESSION['start'.$this->pageid])){
 				$start = $_SESSION['start'.$this->pageid];
-			}else{
+			} else {
 				$start=0;
 			}
 		}
 		
-		while($start > $this->_numentries()){
-			$start = $start - $this->i_entriesPerPage;
-		}	
-
-		$stop  = $start + $this->i_entriesPerPage;
-
-		$appendempty = ($this->_numentries() -$start);
-
-		for($i = $start ; $i < $stop;$i++){
-			
-			if(isset($this->a_entries[$i])){
-							
-				$s_value = $this->a_entries[$i];
-				
-				
-				if($i_alternate) $i_alternate=0; else $i_alternate=1;
-				
-				$s_return .= "\n<tr>";
-				
-				$cnt = 0; 					
-					
-				foreach($s_value as $s_key2 => $s_value2 ){				
-
-					$this->cols = count($s_value) ;						
-					$cnt++;					
-
-					if(!isset($s_value2['class'])){
-						$class = "list".$i_alternate; 
-					}else{
-						$class = $s_value2['class'];
-					}
-
-					if(!isset($s_value2['attach'])){
-						$style = "";
-					}else{
-						$style = " ".$s_value2['attach']." "	;
-					}
-
-					$s_return .= "\n<td ".$style." class='".$class."'>";
-					$s_return .= $s_value2['string'];
-					$s_return .= "\n</td>";
-				}
-				if($cnt == 0 ){
-					$s_return.="<td>&nbsp;</td>";
-				}
-				$s_return .= "\n</tr>";
-			}	
-		}
-
-		if(!(($stop)<$this->_numentries())){
-			$nums = $stop - $this->_numentries();// - $stop;
-			for($i = 0 ; $i < $nums ; $i ++ ){
-				$s_return.="<tr>";
-				$cnt=0;
-				for($a = 0 ; $a < (count($this->a_header[0])) ; $a ++ ) {
-					if($a ==(count($this->a_header[0])-1)){
-						$s_return.="<td class='list1' style='border:0px;' height='26'>&nbsp; </td>";
-					}else{
-						$s_return.="<td class='list1' height='26'>&nbsp; </td>";
-					}
-				}
-				$s_return.="</tr>";
-			}	
-		}
-
-		if($this->b_displayPageNums){
-			$s_return .= "<tr><td colspan='".$this->cols."' align='center'>".range_selector($this->_numentries(),$start,$this->i_entriesPerPage)."</td></tr>";
-		}
-
-		return $s_return;
-	}
-	
-	
+    if ($this->i_entriesPerPage > 0) {
+  		while($start > $this->_numentries()){
+  			$start = $start - $this->i_entriesPerPage;
+  		}	
+  
+  		$stop  = $start + $this->i_entriesPerPage;
+  
+  		$appendempty = ($this->_numentries() -$start);
+  
+  		for($i = $start ; $i < $stop;$i++){
+  			
+  			if(isset($this->a_entries[$i])){
+  							
+  				$s_value = $this->a_entries[$i];
+  				
+  				
+  				if($i_alternate) $i_alternate=0; else $i_alternate=1;
+  				
+  				$s_return .= "\n<tr>";
+  				
+  				$cnt = 0; 					
+  					
+  				foreach($s_value as $s_key2 => $s_value2 ){				
+  
+  					$this->cols = count($s_value) ;						
+  					$cnt++;					
+  
+  					if(!isset($s_value2['class'])){
+  						$class = "list".$i_alternate; 
+  					}else{
+  						$class = $s_value2['class'];
+  					}
+  
+  					if(!isset($s_value2['attach'])){
+  						$style = "";
+  					}else{
+  						$style = " ".$s_value2['attach']." "	;
+  					}
+  
+  					$s_return .= "\n<td ".$style." class='".$class."'>";
+  					$s_return .= $s_value2['string'];
+  					$s_return .= "\n</td>";
+  				}
+  				if($cnt == 0 ){
+  					$s_return.="<td>&nbsp;</td>";
+  				}
+  				$s_return .= "\n</tr>";
+  			}	
+  		}
+  
+  		if(!(($stop)<$this->_numentries())){
+  			$nums = $stop - $this->_numentries();// - $stop;
+  			for($i = 0 ; $i < $nums ; $i ++ ){
+  				$s_return.="<tr>";
+  				$cnt=0;
+  				for($a = 0 ; $a < (count($this->a_header[0])) ; $a ++ ) {
+  					if($a ==(count($this->a_header[0])-1)){
+  						$s_return.="<td class='list1' style='border:0px;' height='26'>&nbsp; </td>";
+  					} else {
+  						$s_return.="<td class='list1' height='26'>&nbsp; </td>";
+  					}
+  				}
+  				$s_return.="</tr>";
+  			}	
+  		}
+  
+  		if($this->b_displayPageNums){
+  			$s_return .= "<tr><td colspan='".$this->cols."' align='center'>".range_selector($this->_numentries(),$start,$this->i_entriesPerPage)."</td></tr>";
+  		}
+    } else {
+      // We should display all entries on one page
+  		foreach($this->a_entries as $s_key => $s_value){
+  			
+  			if($i_alternate){ 
+          $i_alternate=0; 
+        } else {
+          $i_alternate=1;
+        }
+  		
+        $s_return .= "\n<tr>";
+  				
+  	  	$cnt = 0; 					
+  					
+  			foreach($s_value as $s_key2 => $s_value2 ){				
+  
+  				$this->cols = count($s_value) ;						
+  				$cnt++;					
+  
+  				if(!isset($s_value2['class'])){
+  					$class = "list".$i_alternate; 
+  				} else {
+  					$class = $s_value2['class'];
+  				}
+  
+  				if(!isset($s_value2['attach'])){
+  					$style = "";
+  				} else {
+  					$style = " ".$s_value2['attach']." "	;
+  				}
+  
+  				$s_return .= "\n<td ".$style." class='".$class."'>";
+  				$s_return .= $s_value2['string'];
+  				$s_return .= "\n</td>";
+  			}
+  			
+        if($cnt == 0 ){
+  				$s_return.="<td>&nbsp;</td>";
+  			}
+  			$s_return .= "\n</tr>";
+  		}
+    }
+ 	  
+    return $s_return;
+  }
 }
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

@@ -588,7 +588,7 @@ class systems extends plugin
 
 
     $divlist->SetSummary(_("This table displays all systems, in the selected tree."));
-    $divlist->SetEntriesPerPage(20);
+    $divlist->SetEntriesPerPage(0);
 
     // Defining Links
     $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
