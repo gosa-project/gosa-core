@@ -10,6 +10,8 @@ Things to fix before 2.4:
 * FAI management
   - Add package configuration dialog 
 
+* Try to make session timeouts configurable via gosa.conf
+
 
 Target for 2.5:
 ===============
