@@ -35,9 +35,9 @@ function dump_ldap ($mode= 0)
     $dn=$d.$n;
     // 	echo $dn ;
     $fname = tempnam("/tmp", "demo.xls");
-    $workbook =& new writeexcel_workbook($fname);
+    $workbook= new writeexcel_workbook($fname);
 
-    $title_bold =& $workbook->addformat(array(
+    $title_bold= $workbook->addformat(array(
           bold    => 1,
           color   => 'black',
           size    => 10,
@@ -50,7 +50,7 @@ function dump_ldap ($mode= 0)
         $user= 				   $ldap->gen_xls($dn,"(objectClass=*)",array("uid","dateOfBirth","gender","givenName","preferredLanguage"));
       $intitul=array("Date de naissance:","Sexe:","Nom/prénom","Langue");
 
-      $worksheet =& $workbook->addworksheet('Users');
+      $worksheet= $workbook->addworksheet('Users');
       $worksheet->set_column('A:B', 32);
 
 
@@ -203,12 +203,12 @@ function dump_ldap ($mode= 0)
 
 
     $fname = tempnam("/tmp", "demo.xls");
-    $workbook =& new writeexcel_workbook($fname);
-    $worksheet =& $workbook->addworksheet('Users');
-    $worksheet2 =& $workbook->addworksheet('Groups');
-    $worksheet3 =& $workbook->addworksheet('Servers');
-    $worksheet4 =& $workbook->addworksheet('Computers');
-    $worksheet5 =& $workbook->addworksheet('Adressbook');
+    $workbook = new writeexcel_workbook($fname);
+    $worksheet = $workbook->addworksheet('Users');
+    $worksheet2 = $workbook->addworksheet('Groups');
+    $worksheet3 = $workbook->addworksheet('Servers');
+    $worksheet4 = $workbook->addworksheet('Computers');
+    $worksheet5 = $workbook->addworksheet('Adressbook');
 
     $worksheet->set_column('A:B', 32);
     $worksheet2->set_column('A:B', 32);
