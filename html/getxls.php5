@@ -2,8 +2,6 @@
 /*
    This code is part of GOsa (https://gosa.gonicus.de)
    Copyright (C) 2003  Cajus Pollmeier
-   Copyright (C) 2005  Guillaume Delecourt
-   Copyright (C) 2005  Vincent Seynhaeve
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -37,9 +35,9 @@ function dump_ldap ($mode= 0)
     $dn=$d.$n;
     // 	echo $dn ;
     $fname = tempnam("/tmp", "demo.xls");
-    $workbook=& new writeexcel_workbook($fname);
+    $workbook= new writeexcel_workbook($fname);
 
-    $title_bold=& $workbook->addformat(array(
+    $title_bold= $workbook->addformat(array(
           bold    => 1,
           color   => 'black',
           size    => 10,
@@ -52,7 +50,7 @@ function dump_ldap ($mode= 0)
         $user= 				   $ldap->gen_xls($dn,"(objectClass=*)",array("uid","dateOfBirth","gender","givenName","preferredLanguage"));
       $intitul=array("Date de naissance:","Sexe:","Nom/prénom","Langue");
 
-      $worksheet=& $workbook->addworksheet('Users');
+      $worksheet= $workbook->addworksheet('Users');
       $worksheet->set_column('A:B', 32);
 
 
@@ -180,11 +178,11 @@ function dump_ldap ($mode= 0)
     // It will be called demo.xls
     header('Content-Disposition: attachment; filename="demo.xls"');
 
-    // The source is in original.xls
+    // The PDF source is in original.xl
     readfile($fname);
 
   }
-  elseif($mode == 3){ // Full Export !
+  elseif($mode == 3){ // Full LDIF Export !
     $dn =  base64_decode($_GET['dn']);
 
     //data about users
@@ -205,12 +203,12 @@ function dump_ldap ($mode= 0)
 
 
     $fname = tempnam("/tmp", "demo.xls");
-    $workbook =& new writeexcel_workbook($fname);
-    $worksheet =& $workbook->addworksheet('Users');
-    $worksheet2 =& $workbook->addworksheet('Groups');
-    $worksheet3 =& $workbook->addworksheet('Servers');
-    $worksheet4 =& $workbook->addworksheet('Computers');
-    $worksheet5 =& $workbook->addworksheet('Adressbook');
+    $workbook = new writeexcel_workbook($fname);
+    $worksheet = $workbook->addworksheet('Users');
+    $worksheet2 = $workbook->addworksheet('Groups');
+    $worksheet3 = $workbook->addworksheet('Servers');
+    $worksheet4 = $workbook->addworksheet('Computers');
+    $worksheet5 = $workbook->addworksheet('Adressbook');
 
     $worksheet->set_column('A:B', 32);
     $worksheet2->set_column('A:B', 32);

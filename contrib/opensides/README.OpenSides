@@ -12,6 +12,7 @@ nagios.README - how to add the right entry to make the nagios plugin work
 
 xls-export.README - how to add the right entry to make the xls export xork
 
+
 The php_writeexcel library is coming from
 
 http://www.bettina-attack.de/jonny/projects/php_writeexcel/
@@ -19,6 +20,11 @@ http://www.bettina-attack.de/jonny/projects/php_writeexcel/
 Author : <jonny@1409.org>
 
 LICENSE : GNU LESSER GENERAL PUBLIC LICENSE
+
+Bug: 
+
+to make it work under php5 you have to copy the file getxls.php5 on getxls.php
+by default it only work with php4
 
 Benoit Mortier <benoit.mortier@opensides.be>
 Guillaume Delecourt <guillaume.delecourt@opensides.be>
