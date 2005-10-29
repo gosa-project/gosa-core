@@ -10,6 +10,7 @@ Things to fix before 2.4:
 * Try to make session timeouts configurable via gosa.conf
 
 
+
 Target for 2.5:
 ===============
 
