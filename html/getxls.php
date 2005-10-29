@@ -123,13 +123,13 @@ function dump_ldap ($mode= 0)
       case "ou=servers,ou=systems,": $servers= $ldap->gen_xls($dn,"(objectClass=*)",array("cn"));
       $intitul=array("cn:");
 
-      $worksheet =& $workbook->addworksheet('Servers');
+      $worksheet =& $workbook->addworksheet(_("Servers"));
       $worksheet->set_column('A:B', 32);
 
       //count number of servers
       $servers_nbr=count($servers);
       $r=1;
-      $worksheet->write('A'.$r++,"Servers : ",$title_bold);
+      $worksheet->write('A'.$r++,_("Servers").": ",$title_bold);
       for($i=1;$i<$servers_nbr;$i++)
       {
         for($j=0;$j<1;$j++)
@@ -144,9 +144,9 @@ function dump_ldap ($mode= 0)
       case "dc=addressbook,": //data about addressbook
         $address= $ldap->gen_xls($dn,"(objectClass=*)",array("cn","displayName","facsimileTelephoneNumber","givenName","homePhone","homePostalAddress","initials","l","mail","mobile","o","ou","pager","telephoneNumber","postalAddress","postalCode","sn","st","title"));
 
-      $intitul=array(_("Common name").":",_("Display Name").":",_("Fax").":",_("Name")."/"._("Firstname").":","Numero de telelphone:","Adresse du domicile:","Initiales:","Ville:","Adresse email:","GSM:","Societe:","Poste:","Pager:","Numero de telelphone:","Adresse:","Code postal:","Sn:","Pays:","Fonction:");
+      $intitul=array(_("Common name").":",_("Display Name").":",_("Fax").":",_("Name")."/"._("Firstname").":",_("Home phone").":",_("Home postal address").":",_("Initiales).":",_("Location").":",_("Mail address").":",_("Mobile phone").":",_("City").":",_("Postal address").":",_("Pager").":",_("Phone number").":",_("Adress").":",_("Postal code").":",_("Surename").":",_("State").":",_("Function").":");
 
-      $worksheet =& $workbook->addworksheet('Servers');
+      $worksheet =& $workbook->addworksheet(_("Servers"));
       $worksheet->set_column('A:B', 32);
 
       //count number of entries
