@@ -50,7 +50,7 @@ function dump_ldap ($mode= 0)
     switch ($d){
       case "ou=people," : 
         $user= 				   $ldap->gen_xls($dn,"(objectClass=*)",array("uid","dateOfBirth","gender","givenName","preferredLanguage"));
-      $intitul=array("Date de naissance:","Sexe:","Nom/prénom","Langue");
+      $intitul=array(_("Birthday").":", _("Sexe").":", _("Name")."/"._("Firstname").":",_("Language").":");
 
       $worksheet=& $workbook->addworksheet('Users');
       $worksheet->set_column('A:B', 32);
@@ -98,8 +98,8 @@ function dump_ldap ($mode= 0)
       break;
 
       case "ou=computers,": $computers= $ldap->gen_xls($dn,"(objectClass=*)",array("cn","description","uid"));
-      $intitul=array("Description:","Uid:");
-      $worksheet =& $workbook->addworksheet('Computers');
+      $intitul=array(_("Description").":",_("User ID").":");
+      $worksheet =& $workbook->addworksheet(_("Computers"));
       $worksheet->set_column('A:B', 32);
 
       //count number of computers
@@ -144,7 +144,7 @@ function dump_ldap ($mode= 0)
       case "dc=addressbook,": //data about addressbook
         $address= $ldap->gen_xls($dn,"(objectClass=*)",array("cn","displayName","facsimileTelephoneNumber","givenName","homePhone","homePostalAddress","initials","l","mail","mobile","o","ou","pager","telephoneNumber","postalAddress","postalCode","sn","st","title"));
 
-      $intitul=array("cn","DisplayName:","Fax:","Nom/prénom:","Numero de telelphone:","Adresse du domicile:","Initiales:","Ville:","Adresse email:","GSM:","Societe:","Poste:","Pager:","Numero de telelphone:","Adresse:","Code postal:","Sn:","Pays:","Fonction:");
+      $intitul=array(_("Common name").":",_("Display Name").":",_("Fax").":",_("Name")."/"._("Firstname").":","Numero de telelphone:","Adresse du domicile:","Initiales:","Ville:","Adresse email:","GSM:","Societe:","Poste:","Pager:","Numero de telelphone:","Adresse:","Code postal:","Sn:","Pays:","Fonction:");
 
       $worksheet =& $workbook->addworksheet('Servers');
       $worksheet->set_column('A:B', 32);
@@ -182,7 +182,7 @@ function dump_ldap ($mode= 0)
 
     // The source is in original.xls
     readfile($fname);
-
+    unlink ($fname);
   }
   elseif($mode == 3){ // Full Export !
     $dn =  base64_decode($_GET['dn']);
@@ -320,6 +320,7 @@ function dump_ldap ($mode= 0)
     // The PDF source is in original.xl
     readfile($fname);
 
+    unlink ($fname);
   }
   elseif($mode == 4){ // IVBB LDIF Export
     $dn =  base64_decode($_GET['dn']);
