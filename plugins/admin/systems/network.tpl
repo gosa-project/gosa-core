@@ -2,7 +2,7 @@
 
 <table summary="" width="100%">
  <tr>
-  <td>
+  <td style="border-right:1px solid #b0b0b0; width:50%">
    <table summary="">
     <tr>
      <td><LABEL for="ipHostNumber">{t}IP-address{/t}{$staticAddress}</LABEL></td>
