@@ -74,7 +74,7 @@ function dump_ldap ($mode= 0)
       break;
 
       case "ou=groups,": $groups= $ldap->gen_xls($dn,"(objectClass=*)",array("cn","memberUid"),TRUE,1);
-      $intitul=array("Membres:");
+      $intitul=array(_("Members:"));
       $worksheet =& $workbook->addworksheet('Groups');
       $worksheet->set_column('A:B', 32);
 
@@ -121,7 +121,7 @@ function dump_ldap ($mode= 0)
       break;
 
       case "ou=servers,ou=systems,": $servers= $ldap->gen_xls($dn,"(objectClass=*)",array("cn"));
-      $intitul=array("cn:");
+      $intitul=array(_("Server Name").":");
 
       $worksheet =& $workbook->addworksheet(_("Servers"));
       $worksheet->set_column('A:B', 32);
@@ -144,7 +144,7 @@ function dump_ldap ($mode= 0)
       case "dc=addressbook,": //data about addressbook
         $address= $ldap->gen_xls($dn,"(objectClass=*)",array("cn","displayName","facsimileTelephoneNumber","givenName","homePhone","homePostalAddress","initials","l","mail","mobile","o","ou","pager","telephoneNumber","postalAddress","postalCode","sn","st","title"));
 
-      $intitul=array(_("Common name").":",_("Display Name").":",_("Fax").":",_("Name")."/"._("Firstname").":",_("Home phone").":",_("Home postal address").":",_("Initiales).":",_("Location").":",_("Mail address").":",_("Mobile phone").":",_("City").":",_("Postal address").":",_("Pager").":",_("Phone number").":",_("Adress").":",_("Postal code").":",_("Surename").":",_("State").":",_("Function").":");
+      $intitul=array(_("Common name").":",_("Display Name").":",_("Fax").":",_("Name")."/"._("Firstname").":",_("Home phone").":",_("Home postal address").":",_("Initiales").":",_("Location").":",_("Mail address").":",_("Mobile phone").":",_("City").":",_("Postal address").":",_("Pager").":",_("Phone number").":",_("Adress").":",_("Postal code").":",_("Surename").":",_("State").":",_("Function").":");
 
       $worksheet =& $workbook->addworksheet(_("Servers"));
       $worksheet->set_column('A:B', 32);
@@ -189,19 +189,19 @@ function dump_ldap ($mode= 0)
 
     //data about users
     $user= $ldap->gen_xls("ou=people,".$dn,"(objectClass=*)",array("uid","dateOfBirth","gender","givenName","preferredLanguage"));
-    $user_intitul=array("Date de naissance:","Sexe:","Nom/prénom","Langue");
+    $user_intitul=array(_("BirthDate").":",_("Sex").":",_("Name")."/"._("Firstname").":",_("Language").":");
     //data about groups
     $groups= $ldap->gen_xls("ou=groups,".$dn,"(objectClass=*)",array("cn","memberUid"),TRUE,1);
-    $groups_intitul=array("Membres:");
+    $groups_intitul=array(_("Members").":");
     //data about computers
     $computers= $ldap->gen_xls("ou=computers,".$dn,"(objectClass=*)",array("cn","description","uid"));
-    $computers_intitul=array("Description:","Uid:");
+    $computers_intitul=array(_("Description").":",_("Uid").":");
     //data about servers
     $servers= $ldap->gen_xls("ou=servers,ou=systems,".$dn,"(objectClass=*)",array("cn"));
-    $servers_intitul=array("cn:");
+    $servers_intitul=array(_("Name").":");
     //data about addressbook
     $address= $ldap->gen_xls("dc=addressbook,".$dn,"(objectClass=*)",array("cn","displayName","facsimileTelephoneNumber","givenName","homePhone","homePostalAddress","initials","l","mail","mobile","o","ou","pager","telephoneNumber","postalAddress","postalCode","sn","st","title"));
-    $address_intitul=array("cn","DisplayName:","Fax:","Nom/prénom:","Numero de telelphone:","Adresse du domicile:","Initiales:","Ville:","Adresse email:","GSM:","Societe:","Poste:","Pager:","Numero de telelphone:","Adresse:","Code postal:","Sn:","Pays:","Fonction:");
+    $address_intitul=array("cn",_("DisplayName").":",_("Fax").":",_("Name")."/"._("Firstname").":",_("Phone Number").":",_("Postal Adress").":",_("Initials").":",_("City").":",_("Email address").":",_("mobile").":",_("Organization").":",_("Organizational Unit").":",_("Pager").":",_("Phone Number").":",_("Postal Address").":",_("Postal Code").":",_("Sn").":",_("st").":",_("Title").":");
 
 
     $fname = tempnam("/tmp", "demo.xls");
