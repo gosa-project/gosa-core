@@ -6,7 +6,7 @@
     <tr>
      <td><LABEL for="homeDirectory">{t}Home directory{/t}</LABEL>{$must}</td>
      <td>
-      <input id="homeDirectory" name="homeDirectory" size=25 maxlength=120 {$homeDirectoryACL} value="{$homeDirectory}">
+      <input id="homeDirectory" name="homeDirectory" size=40 maxlength=120 {$homeDirectoryACL} value="{$homeDirectory}">
      </td>
     </tr>
     <tr>
@@ -66,7 +66,7 @@
     <b style="color:red">{t}(Warning: more than 16 groups are not supported by NFS!){/t}</b>
     <br>
    {/if}
-   <select style="width:400px; height:130px;" name="group_list[]" size=16 multiple>
+   <select style="width:100%; height:130px;" name="group_list[]" size=16 multiple>
     {html_options options=$groupMembership}
    </select>
    <br>
@@ -92,7 +92,7 @@
     {t}Trust mode{/t}&nbsp;<select name="trustmode" id="trustmode" size=1 onchange="changeSelectState('trustmode', 'wslist'); changeSelectState('trustmode', 'add_ws'); changeSelectState('trustmode', 'del_ws');" {$trustmodeACL}>
       {html_options options=$trustmodes selected=$trustmode}
     </select>
-   <select style="width:350px;" id="wslist" name="workstation_list[]" size=5 multiple {$trustmodeACL} {$trusthide}>
+   <select style="width:100%" id="wslist" name="workstation_list[]" size=5 multiple {$trustmodeACL} {$trusthide}>
     {html_options values=$workstations output=$workstations}
 	{if $emptyArrAccess}
 		<option disabled>&nbsp;</option>
