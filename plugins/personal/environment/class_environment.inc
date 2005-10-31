@@ -447,6 +447,8 @@ class environment extends plugin
       /* We assign a share to this user, if we don't know where to mount the share */
       if((!isset($_POST['gotoShareMountPoint']))||(empty($_POST['gotoShareMountPoint']))||(preg_match("/[\|]/i",$_POST['gotoShareMountPoint']))){
         print_red(_("You must specify a valid mount point."));
+      }elseif($_POST['gotoShareMountPoint'][0] !="/" ){
+        print_red(_("You must specify a valid mount point.")); 
       }else{
         $a_share = $this->gotoAvailableShares[$_POST['gotoShareSelection']];
         $s_mount = $_POST['gotoShareMountPoint'];
@@ -952,7 +954,7 @@ class environment extends plugin
     $a_return = array();
     if(is_array($this->gotoShares)){
       foreach($this->gotoShares as $share){
-        $a_return[$share['name']."|".$share['server']]= $share['name']." '".$share['mountPoint']."' [".$share['server']."] ";
+        $a_return[$share['name']."|".$share['server']]= $share['server']."://".$share['name']." on ".$share['mountPoint'];
       }
     }
     return($a_return);
