@@ -67,7 +67,7 @@
 						<br>
 					</td>
 					<td>
-						<input type="text" name="gotoProfileQuota" value="{$gotoProfileQuota}" style="width:100px;" 
+						<input type="text" name="gotoProfileQuota" value="{$gotoProfileQuota}" size="6"
 							{$gotoProfileQuotaACL} id="gotoProfileQuota">{t}MB{/t}
 						<br>
 						<br>
@@ -101,10 +101,10 @@
   <tr>
    <td style="width:50%;border-right:1px solid #B0B0B0">
 	<h2><img alt="" src="images/fai_partitionTable.png" align="middle">&nbsp;<LABEL for="gotoShare">{t}Shares{/t}</LABEL></h2>
-	<table summary="">
+	<table summary="" style="width:100%">
 		<tr>
 			<td>
-			<select style="width:350px;" name="gotoShare" multiple size=4 {$gotoShareACL} id="gotoShare">
+			<select style="width:100%;" name="gotoShare" multiple size=4 {$gotoShareACL} id="gotoShare">
 	{html_options values=$gotoShareKeys output=$gotoShares}
 	<option disabled>&nbsp;</option>
 				</select>
@@ -122,10 +122,10 @@
    </td>
    <td>
 	<h2><img alt="" src="images/fai_script.png" align="middle">&nbsp;<LABEL for="gotoLogonScript">{t}Logon scripts{/t}</LABEL></h2>
-	<table summary="{t}Logon script management{/t}">
+	<table summary="{t}Logon script management{/t}" style="width:100%">
 		<tr>
 			<td>
-			<select style="width:350px;" name="gotoLogonScript" multiple size=4 {$gotoLogonScriptACL} id="gotoLogonScript">
+			<select style="width:100%;" name="gotoLogonScript" multiple size=4 {$gotoLogonScriptACL} id="gotoLogonScript">
 	{html_options values=$gotoLogonScriptKeys output=$gotoLogonScripts }
 	<option disabled>&nbsp;</option>
 				</select>
@@ -145,12 +145,12 @@
 
 <table summary="{t}Environment managment settings{/t}" width="100%">
   <tr>
-   <td style="border-right:1px solid #B0B0B0">
+   <td style="border-right:1px solid #B0B0B0; width:50%">
 	<h2><img alt="" src="images/hotplug.png" align="middle">&nbsp;<LABEL for="gotoHotplugDevice">{t}Hotplug devices{/t}</LABEL></h2>	
-	<table summary="{t}Hotplug device settings{/t}">
+	<table style="width:100%" summary="{t}Hotplug device settings{/t}">
 		<tr>
 			<td>
-				<select name="gotoHotplugDevice" {$gotoHotplugDeviceACL} size=4  style="width:350px;" id="gotoHotplugDevice">
+				<select name="gotoHotplugDevice" {$gotoHotplugDeviceACL} size=4  style="width:100%;" id="gotoHotplugDevice">
 	{html_options values=$gotoHotplugDeviceKeys output=$gotoHotplugDevices}
 	<option disabled>&nbsp;</option>
 			</td>
@@ -166,10 +166,10 @@
    </td>
    <td>
     <h2><img alt="" src="images/select_printer.png" align="middle">&nbsp;<LABEL for="gotoPrinter">{t}Printer{/t}</LABEL></h2>
-    <table summary="{t}Printer settings{/t}">
+    <table style="width:100%" summary="{t}Printer settings{/t}">
 	<tr>
 	    <td>
-		<select style="width:350px;" name="gotoPrinterSel" multiple size=4 {$gotoPrinterACL} id="gotoPrinter">
+		<select style="width:100%;" name="gotoPrinterSel" multiple size=4 {$gotoPrinterACL} id="gotoPrinter">
 		{html_options values=$gotoPrinterKeys output=$gotoPrinter}
 		<option disabled>&nbsp;</option>
 		</select>
