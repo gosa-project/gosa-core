@@ -178,7 +178,13 @@ class printerPPDDialog extends plugin
 
     /* Give smarty the information it needs */
     $smarty->assign("ppdString" ,$this->getPPDInformation());
-    $smarty->assign("properties",$this->generateProperties());
+    $tmp= $this->generateProperties();
+    if ($tmp == ""){
+      $smarty->assign("showOptions", 0);
+    } else {
+      $smarty->assign("showOptions", 1);
+      $smarty->assign("properties",$this->generateProperties());
+    }
   
     /* Print out template */
     $display.= $smarty->fetch(get_template_path('printerPPDDialog.tpl', TRUE,dirname(__FILE__)));
@@ -240,6 +246,7 @@ class printerPPDDialog extends plugin
   
     /* Set Headline */
     $str = "";
+    $feed= "";
 
     /* If ppd exists and is readable */
     if((!empty($this->selectedPPD['link']))&&(file_exists($this->selectedPPD['link']))){
@@ -256,8 +263,11 @@ class printerPPDDialog extends plugin
       foreach($this->ppdConfig as $cat => $obj){
     
         /* Add new category */
-        $str .= "<tr><td colspan='2'><br>";
-        $str .= "<b>".$cat."&nbsp;:&nbsp;</b><br>";
+        $str .= "<tr><td colspan='2'>$feed";
+        if ($feed == ""){
+          $feed= "<br>";
+        }
+        $str .= "<b>"._("Section")." '".$cat."'&nbsp;</b><br>";
         $str .= "</tr></td>";       
 
         /* Add attributes of the current category */
