@@ -952,7 +952,7 @@ class environment extends plugin
     $a_return = array();
     if(is_array($this->gotoShares)){
       foreach($this->gotoShares as $share){
-        $a_return[$share['name']."|".$share['server']]= $share['name']." [".$share['server']."]";
+        $a_return[$share['name']."|".$share['server']]= $share['name']." '".$share['mountPoint']."' [".$share['server']."] ";
       }
     }
     return($a_return);
