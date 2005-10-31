@@ -41,7 +41,7 @@ class faiPackageEntry extends plugin
 
     $divlist = new divlist("PackageEntry");
     $divlist->SetSummary(_("This list displays all assigned package names for this repository settings."));
-    $divlist->SetEntriesPerPage(20);
+    $divlist->SetEntriesPerPage(0);
     $divlist->SetHeader(array(array("string"=>"&nbsp;"),
                               array("string"=>"Name"),
                               array("string"=>"Version"),

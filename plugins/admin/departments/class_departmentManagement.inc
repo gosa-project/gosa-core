@@ -287,7 +287,7 @@ class departmentManagement extends plugin
 			/* Show main page */
 			$divlist = new divlist("departmenttabs");
 			$divlist->SetSummary(_("This table displays all departments, in the selected tree."));
-			$divlist->SetEntriesPerPage(20);
+			$divlist->SetEntriesPerPage(0);
 			$actions= "<input type='image' src='images/edit.png' 		 alt='"._("edit")."' 	name='dep_edit_%KEY%' title='"._("Edit this entry")."'>";
 			$actions.= "<input type='image' src='images/edittrash.png' alt='"._("delete")."' 	name='dep_del_%KEY%' title='"._("Delete this entry")."'>";
 

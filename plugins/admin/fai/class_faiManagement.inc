@@ -458,7 +458,7 @@ class faiManagement extends plugin
 
 		/* Create list with objects */
 		$divlist = new divlist("faiManagement"); 
-		$divlist->SetEntriesPerPage(20);
+		$divlist->SetEntriesPerPage(0);
 		$divlist->SetSummary(_("This table displays all systems, in the selected tree."));
 
 		$divlist->SetHeader(array(

@@ -140,7 +140,7 @@ class faiProfile extends plugin
 
     $divlist  =new divlist("Profile");
     $divlist->SetSummary(_("This list displays all assigned class names for this profile."));
-    $divlist->SetEntriesPerPage(10);
+    $divlist->SetEntriesPerPage(0);
 
     $divlist->SetHeader(array(array("string"=>"Class name"),
                               array("string"=>"Objects","attach"=>"style='width:120px;'"),

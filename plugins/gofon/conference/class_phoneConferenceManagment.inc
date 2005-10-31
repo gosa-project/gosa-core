@@ -306,7 +306,7 @@ class phoneConferenceManagment extends plugin
     /* Set Header */
     $divlist  = new divlist("conferenceTabs");
     $divlist->SetSummary(_("This table displays all available conference rooms."));
-    $divlist->SetEntriesPerPage(20);
+    $divlist->SetEntriesPerPage(0);
     $divlist->SetHeader(array(
           array("string" => "&nbsp;"),            
           array("string" =>_("Name - Number")),

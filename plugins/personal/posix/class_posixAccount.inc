@@ -397,7 +397,7 @@ class posixAccount extends plugin
       register_global("groupfilter", $groupfilter);
 
       /* Calculate actual groups */
-      $gd->reload2();
+      $gd->reload(true);
       $glist= array();
       foreach ($gd->grouplist as $key => $value){
         if (!isset($this->groupMembership[$key])){
