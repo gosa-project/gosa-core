@@ -74,6 +74,7 @@ msgstr ""
 #: plugins/addons/addressbook/contents.tpl:14
 #: plugins/admin/users/class_userManagement.inc:732
 #: plugins/admin/departments/generic.tpl:62 html/getxls.php:147
+#: html/getxls.php:204
 msgid "Fax"
 msgstr ""
 
@@ -119,7 +120,7 @@ msgid "ACL"
 msgstr ""
 
 #: contrib/gosa.conf:89 plugins/admin/applications/generic.tpl:58
-#: plugins/admin/systems/printerPPDDialog.tpl:18
+#: plugins/admin/systems/printerPPDDialog.tpl:17
 #: plugins/admin/ogroups/phonequeue.tpl:31
 #: plugins/gofon/conference/generic.tpl:87
 msgid "Options"
@@ -1773,6 +1774,7 @@ msgstr ""
 #: plugins/admin/fai/faiTemplate.tpl:9 plugins/admin/fai/faiHookEntry.tpl:9
 #: plugins/admin/fai/faiTemplateEntry.tpl:7 plugins/admin/fai/faiHook.tpl:9
 #: plugins/gofon/macro/parameter.tpl:5 html/getxls.php:53 html/getxls.php:147
+#: html/getxls.php:192 html/getxls.php:201 html/getxls.php:204
 msgid "Name"
 msgstr ""
 
@@ -1807,7 +1809,7 @@ msgstr ""
 msgid "Set"
 msgstr ""
 
-#: plugins/personal/generic/generic.tpl:81
+#: plugins/personal/generic/generic.tpl:81 html/getxls.php:192
 msgid "Sex"
 msgstr ""
 
@@ -1875,7 +1877,7 @@ msgstr ""
 msgid "Organizational information"
 msgstr ""
 
-#: plugins/personal/generic/generic.tpl:183
+#: plugins/personal/generic/generic.tpl:183 html/getxls.php:204
 msgid "Organization"
 msgstr ""
 
@@ -1920,19 +1922,20 @@ msgstr ""
 
 #: plugins/personal/generic/generic.tpl:235
 #: plugins/addons/addressbook/address_edit.tpl:102
-#: plugins/addons/addressbook/address_info.tpl:91
+#: plugins/addons/addressbook/address_info.tpl:91 html/getxls.php:147
+#: html/getxls.php:204
 msgid "Pager"
 msgstr ""
 
 #: plugins/personal/generic/generic.tpl:257
 #: plugins/admin/departments/generic.tpl:42
 #: plugins/admin/departments/generic.tpl:50
-#: plugins/admin/systems/workstation.tpl:18
+#: plugins/admin/systems/workstation.tpl:18 html/getxls.php:147
 msgid "Location"
 msgstr ""
 
 #: plugins/personal/generic/generic.tpl:261
-#: plugins/admin/departments/generic.tpl:46
+#: plugins/admin/departments/generic.tpl:46 html/getxls.php:147
 msgid "State"
 msgstr ""
 
@@ -1970,7 +1973,7 @@ msgstr ""
 
 #: plugins/personal/generic/generic.tpl:339
 #: plugins/addons/addressbook/address_edit.tpl:81
-#: plugins/addons/addressbook/address_info.tpl:70
+#: plugins/addons/addressbook/address_info.tpl:70 html/getxls.php:147
 msgid "Postal code"
 msgstr ""
 
@@ -2401,34 +2404,35 @@ msgid ""
 msgstr ""
 
 #: plugins/personal/environment/class_environment.inc:449
+#: plugins/personal/environment/class_environment.inc:451
 #: plugins/admin/systems/class_terminalStartup.inc:131
 #: plugins/admin/systems/class_workstationStartup.inc:277
 msgid "You must specify a valid mount point."
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:677
+#: plugins/personal/environment/class_environment.inc:679
 msgid "Please set a valid profile quota size."
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:684
+#: plugins/personal/environment/class_environment.inc:686
 msgid ""
 "You need to setup a valid posix extension in order to enable evironment "
 "features."
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:706
+#: plugins/personal/environment/class_environment.inc:708
 msgid "Can't save new kiosk profiles, possibly permission denied for folder"
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:799
+#: plugins/personal/environment/class_environment.inc:801
 msgid "Error while writing printer"
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:869
+#: plugins/personal/environment/class_environment.inc:871
 msgid "Error while writing printer settings"
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:984
+#: plugins/personal/environment/class_environment.inc:986
 msgid "Admin"
 msgstr ""
 
@@ -2643,6 +2647,7 @@ msgstr ""
 #: plugins/admin/fai/faiTemplateEntry.tpl:11 plugins/admin/fai/faiHook.tpl:19
 #: plugins/gofon/macro/generic.tpl:36 plugins/gofon/conference/generic.tpl:51
 #: plugins/generic/references/contents.tpl:11 html/getxls.php:101
+#: html/getxls.php:198
 msgid "Description"
 msgstr ""
 
@@ -3163,6 +3168,7 @@ msgstr ""
 
 #: plugins/gofax/faxaccount/generic.tpl:16
 #: plugins/admin/ogroups/phonequeue.tpl:35 html/getxls.php:53
+#: html/getxls.php:192
 msgid "Language"
 msgstr ""
 
@@ -3551,7 +3557,7 @@ msgid "Personal"
 msgstr ""
 
 #: plugins/addons/addressbook/address_edit.tpl:29
-#: plugins/addons/addressbook/address_info.tpl:19
+#: plugins/addons/addressbook/address_info.tpl:19 html/getxls.php:204
 msgid "Initials"
 msgstr ""
 
@@ -3571,7 +3577,8 @@ msgid "Company"
 msgstr ""
 
 #: plugins/addons/addressbook/address_edit.tpl:78
-#: plugins/addons/addressbook/address_info.tpl:67
+#: plugins/addons/addressbook/address_info.tpl:67 html/getxls.php:147
+#: html/getxls.php:204
 msgid "City"
 msgstr ""
 
@@ -4587,7 +4594,7 @@ msgid "Place entry in members startmenu"
 msgstr ""
 
 #: plugins/admin/applications/generic.tpl:84
-#: plugins/admin/systems/printerPPDDialog.tpl:12
+#: plugins/admin/systems/printerPPDDialog.tpl:11
 #: plugins/admin/fai/faiTemplateEntry.tpl:40
 msgid "Upload"
 msgstr ""
@@ -6166,6 +6173,7 @@ msgid "Keyboard"
 msgstr ""
 
 #: plugins/admin/systems/workstationService.tpl:7
+#: plugins/admin/systems/printerPPDDialog.tpl:5
 #: plugins/admin/systems/terminalService.tpl:7
 #: plugins/admin/systems/terminalService.tpl:210
 msgid "Model"
@@ -6329,21 +6337,17 @@ msgstr ""
 msgid "Option"
 msgstr ""
 
-#: plugins/admin/systems/printerPPDDialog.tpl:4
-msgid "Printer driver information file setup"
+#: plugins/admin/systems/printerPPDDialog.tpl:1
+msgid "Printer driver"
 msgstr ""
 
-#: plugins/admin/systems/printerPPDDialog.tpl:5
-msgid "Current used information setup"
-msgstr ""
-
-#: plugins/admin/systems/printerPPDDialog.tpl:7
+#: plugins/admin/systems/printerPPDDialog.tpl:6
 #: plugins/admin/systems/printerPPDSelectionDialog.tpl:57
 msgid "Select"
 msgstr ""
 
-#: plugins/admin/systems/printerPPDDialog.tpl:10
-msgid "Upload new PPD file"
+#: plugins/admin/systems/printerPPDDialog.tpl:9
+msgid "New driver"
 msgstr ""
 
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:8
@@ -6398,17 +6402,22 @@ msgstr ""
 msgid "Please select a valid ppd."
 msgstr ""
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:310
-#: plugins/admin/systems/class_printerPPDDialog.inc:313
+#: plugins/admin/systems/class_printerPPDDialog.inc:270
+#: plugins/admin/fai/faiPackage.tpl:41
+msgid "Section"
+msgstr ""
+
+#: plugins/admin/systems/class_printerPPDDialog.inc:320
+#: plugins/admin/systems/class_printerPPDDialog.inc:323
 msgid "True"
 msgstr ""
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:311
-#: plugins/admin/systems/class_printerPPDDialog.inc:314
+#: plugins/admin/systems/class_printerPPDDialog.inc:321
+#: plugins/admin/systems/class_printerPPDDialog.inc:324
 msgid "False"
 msgstr ""
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:319
+#: plugins/admin/systems/class_printerPPDDialog.inc:329
 #, php-format
 msgid "Unsupported ppd type '%s' used for '%s' "
 msgstr ""
@@ -6723,7 +6732,7 @@ msgid "UNIX accounts"
 msgstr ""
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:45 html/getxls.php:126
-#: html/getxls.php:132
+#: html/getxls.php:132 html/getxls.php:149
 msgid "Servers"
 msgstr ""
 
@@ -7329,10 +7338,6 @@ msgstr ""
 msgid "Release"
 msgstr ""
 
-#: plugins/admin/fai/faiPackage.tpl:41
-msgid "Section"
-msgstr ""
-
 #: plugins/admin/fai/faiPackage.tpl:50
 msgid "Mirror"
 msgstr ""
@@ -7528,8 +7533,14 @@ msgstr ""
 msgid "Choose a template to delete or edit"
 msgstr ""
 
-#: plugins/admin/fai/class_faiPartitionTable.inc:218
-#: plugins/admin/fai/class_faiPartitionTable.inc:220
+#: plugins/admin/fai/class_faiPartitionTable.inc:219
+#: plugins/admin/fai/class_faiPartitionTable.inc:225
+#, php-format
+msgid "%s partition"
+msgstr ""
+
+#: plugins/admin/fai/class_faiPartitionTable.inc:221
+#: plugins/admin/fai/class_faiPartitionTable.inc:227
 #, php-format
 msgid "%s partition(s)"
 msgstr ""
@@ -8142,7 +8153,7 @@ msgstr ""
 msgid "Lifetime (in days)"
 msgstr ""
 
-#: plugins/gofon/conference/generic.tpl:69
+#: plugins/gofon/conference/generic.tpl:69 html/getxls.php:147
 msgid "Phone number"
 msgstr ""
 
@@ -9087,12 +9098,21 @@ msgstr ""
 msgid "Sexe"
 msgstr ""
 
-#: html/getxls.php:53 html/getxls.php:147
+#: html/getxls.php:53 html/getxls.php:147 html/getxls.php:192
+#: html/getxls.php:204
 msgid "Firstname"
+msgstr ""
+
+#: html/getxls.php:77
+msgid "Members:"
 msgstr ""
 
 #: html/getxls.php:102
 msgid "Computers"
+msgstr ""
+
+#: html/getxls.php:124
+msgid "Server Name"
 msgstr ""
 
 #: html/getxls.php:147
@@ -9108,25 +9128,87 @@ msgid "Home postal address"
 msgstr ""
 
 #: html/getxls.php:147
-msgid "Initiales)."
+msgid "Initiales"
 msgstr ""
 
 #: html/getxls.php:147
-msgid ",_("
+msgid "Mail address"
 msgstr ""
 
 #: html/getxls.php:147
-msgid ")."
+msgid "Mobile phone"
 msgstr ""
 
-#: html/getxls.php:166
-msgid ""
-");\n"
-"      }\n"
-"\n"
-"      break;\n"
-"\n"
-"      default: echo "
+#: html/getxls.php:147
+msgid "Postal address"
+msgstr ""
+
+#: html/getxls.php:147
+msgid "Adress"
+msgstr ""
+
+#: html/getxls.php:147
+msgid "Surename"
+msgstr ""
+
+#: html/getxls.php:147
+msgid "Function"
+msgstr ""
+
+#: html/getxls.php:192
+msgid "BirthDate"
+msgstr ""
+
+#: html/getxls.php:195
+msgid "Members"
+msgstr ""
+
+#: html/getxls.php:198
+msgid "Uid"
+msgstr ""
+
+#: html/getxls.php:204
+msgid "DisplayName"
+msgstr ""
+
+#: html/getxls.php:204
+msgid "Phone Number"
+msgstr ""
+
+#: html/getxls.php:204
+msgid "Postal Adress"
+msgstr ""
+
+#: html/getxls.php:204
+msgid "Email address"
+msgstr ""
+
+#: html/getxls.php:204
+msgid "mobile"
+msgstr ""
+
+#: html/getxls.php:204
+msgid "Organizational Unit"
+msgstr ""
+
+#: html/getxls.php:204
+msgid "Postal Address"
+msgstr ""
+
+#: html/getxls.php:204
+msgid "Postal Code"
+msgstr ""
+
+#: html/getxls.php:204
+msgid "Sn"
+msgstr ""
+
+#: html/getxls.php:204
+msgid "st"
+msgstr ""
+
+#: html/getxls.php:204
+msgid "Title"
 msgstr ""
 
 #: html/getfax.php:53

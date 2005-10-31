@@ -94,6 +94,7 @@ msgstr "Konnektivität"
 #: plugins/addons/addressbook/contents.tpl:14
 #: plugins/admin/users/class_userManagement.inc:732
 #: plugins/admin/departments/generic.tpl:62 html/getxls.php:147
+#: html/getxls.php:204
 msgid "Fax"
 msgstr "Fax"
 
@@ -139,7 +140,7 @@ msgid "ACL"
 msgstr "Zugriffsregeln"
 
 #: contrib/gosa.conf:89 plugins/admin/applications/generic.tpl:58
-#: plugins/admin/systems/printerPPDDialog.tpl:18
+#: plugins/admin/systems/printerPPDDialog.tpl:17
 #: plugins/admin/ogroups/phonequeue.tpl:31
 #: plugins/gofon/conference/generic.tpl:87
 msgid "Options"
@@ -1877,6 +1878,7 @@ msgstr "Bild ändern"
 #: plugins/admin/fai/faiTemplate.tpl:9 plugins/admin/fai/faiHookEntry.tpl:9
 #: plugins/admin/fai/faiTemplateEntry.tpl:7 plugins/admin/fai/faiHook.tpl:9
 #: plugins/gofon/macro/parameter.tpl:5 html/getxls.php:53 html/getxls.php:147
+#: html/getxls.php:192 html/getxls.php:201 html/getxls.php:204
 msgid "Name"
 msgstr "Name"
 
@@ -1911,7 +1913,7 @@ msgstr "Geburtsdatum"
 msgid "Set"
 msgstr "Setzen"
 
-#: plugins/personal/generic/generic.tpl:81
+#: plugins/personal/generic/generic.tpl:81 html/getxls.php:192
 msgid "Sex"
 msgstr "Geschlecht"
 
@@ -1979,7 +1981,7 @@ msgstr "Eigenschaften bearbeiten"
 msgid "Organizational information"
 msgstr "Angabe zur Organisationseinheit"
 
-#: plugins/personal/generic/generic.tpl:183
+#: plugins/personal/generic/generic.tpl:183 html/getxls.php:204
 msgid "Organization"
 msgstr "Organisation"
 
@@ -2024,19 +2026,20 @@ msgstr "Mobiltelefon"
 
 #: plugins/personal/generic/generic.tpl:235
 #: plugins/addons/addressbook/address_edit.tpl:102
-#: plugins/addons/addressbook/address_info.tpl:91
+#: plugins/addons/addressbook/address_info.tpl:91 html/getxls.php:147
+#: html/getxls.php:204
 msgid "Pager"
 msgstr "Pager"
 
 #: plugins/personal/generic/generic.tpl:257
 #: plugins/admin/departments/generic.tpl:42
 #: plugins/admin/departments/generic.tpl:50
-#: plugins/admin/systems/workstation.tpl:18
+#: plugins/admin/systems/workstation.tpl:18 html/getxls.php:147
 msgid "Location"
 msgstr "Ort"
 
 #: plugins/personal/generic/generic.tpl:261
-#: plugins/admin/departments/generic.tpl:46
+#: plugins/admin/departments/generic.tpl:46 html/getxls.php:147
 msgid "State"
 msgstr "Land"
 
@@ -2074,7 +2077,7 @@ msgstr "Straße"
 
 #: plugins/personal/generic/generic.tpl:339
 #: plugins/addons/addressbook/address_edit.tpl:81
-#: plugins/addons/addressbook/address_info.tpl:70
+#: plugins/addons/addressbook/address_info.tpl:70 html/getxls.php:147
 msgid "Postal code"
 msgstr "Postleitzahl"
 
@@ -2528,16 +2531,17 @@ msgstr ""
 "zu aktivieren werden die UNIX-Erweiterungen benötigt. Aktivieren Sie diese."
 
 #: plugins/personal/environment/class_environment.inc:449
+#: plugins/personal/environment/class_environment.inc:451
 #: plugins/admin/systems/class_terminalStartup.inc:131
 #: plugins/admin/systems/class_workstationStartup.inc:277
 msgid "You must specify a valid mount point."
 msgstr "Bitte geben Sie einen gültigen Mount-Pfad an!"
 
-#: plugins/personal/environment/class_environment.inc:677
+#: plugins/personal/environment/class_environment.inc:679
 msgid "Please set a valid profile quota size."
 msgstr "Bitte wählen Sie eine gültige Kontingent-Grösse."
 
-#: plugins/personal/environment/class_environment.inc:684
+#: plugins/personal/environment/class_environment.inc:686
 msgid ""
 "You need to setup a valid posix extension in order to enable evironment "
 "features."
@@ -2545,19 +2549,19 @@ msgstr ""
 "Sie benötigen eine gültige UNIX-Erweiterung, um die Umgebungs-Erweiterung zu "
 "aktivieren."
 
-#: plugins/personal/environment/class_environment.inc:706
+#: plugins/personal/environment/class_environment.inc:708
 msgid "Can't save new kiosk profiles, possibly permission denied for folder"
 msgstr "Kann das neue Kiosk"
 
-#: plugins/personal/environment/class_environment.inc:799
+#: plugins/personal/environment/class_environment.inc:801
 msgid "Error while writing printer"
 msgstr "Fehler beim Speichern des Druckers"
 
-#: plugins/personal/environment/class_environment.inc:869
+#: plugins/personal/environment/class_environment.inc:871
 msgid "Error while writing printer settings"
 msgstr "Fehler beim Speichern der Drucker-Einstellungen"
 
-#: plugins/personal/environment/class_environment.inc:984
+#: plugins/personal/environment/class_environment.inc:986
 msgid "Admin"
 msgstr "Administrator"
 
@@ -2780,6 +2784,7 @@ msgstr "Skriptname"
 #: plugins/admin/fai/faiTemplateEntry.tpl:11 plugins/admin/fai/faiHook.tpl:19
 #: plugins/gofon/macro/generic.tpl:36 plugins/gofon/conference/generic.tpl:51
 #: plugins/generic/references/contents.tpl:11 html/getxls.php:101
+#: html/getxls.php:198
 msgid "Description"
 msgstr "Beschreibung"
 
@@ -3324,6 +3329,7 @@ msgstr "FAX-Nummer auf die GOfax reagieren soll"
 
 #: plugins/gofax/faxaccount/generic.tpl:16
 #: plugins/admin/ogroups/phonequeue.tpl:35 html/getxls.php:53
+#: html/getxls.php:192
 msgid "Language"
 msgstr "Sprache"
 
@@ -3726,7 +3732,7 @@ msgid "Personal"
 msgstr "Persönlich"
 
 #: plugins/addons/addressbook/address_edit.tpl:29
-#: plugins/addons/addressbook/address_info.tpl:19
+#: plugins/addons/addressbook/address_info.tpl:19 html/getxls.php:204
 msgid "Initials"
 msgstr "Initialien"
 
@@ -3746,7 +3752,8 @@ msgid "Company"
 msgstr "Firma"
 
 #: plugins/addons/addressbook/address_edit.tpl:78
-#: plugins/addons/addressbook/address_info.tpl:67
+#: plugins/addons/addressbook/address_info.tpl:67 html/getxls.php:147
+#: html/getxls.php:204
 msgid "City"
 msgstr "Stadt"
 
@@ -4838,7 +4845,7 @@ msgid "Place entry in members startmenu"
 msgstr "Platziere einen Eintrag im Startmenü der Gruppenmitglieder"
 
 #: plugins/admin/applications/generic.tpl:84
-#: plugins/admin/systems/printerPPDDialog.tpl:12
+#: plugins/admin/systems/printerPPDDialog.tpl:11
 #: plugins/admin/fai/faiTemplateEntry.tpl:40
 msgid "Upload"
 msgstr "Hochladen"
@@ -6518,6 +6525,7 @@ msgid "Keyboard"
 msgstr "Tastatur"
 
 #: plugins/admin/systems/workstationService.tpl:7
+#: plugins/admin/systems/printerPPDDialog.tpl:5
 #: plugins/admin/systems/terminalService.tpl:7
 #: plugins/admin/systems/terminalService.tpl:210
 msgid "Model"
@@ -6682,24 +6690,20 @@ msgstr "Pfad"
 msgid "Option"
 msgstr "Option"
 
-#: plugins/admin/systems/printerPPDDialog.tpl:4
-msgid "Printer driver information file setup"
-msgstr "Einrichtung der Informations-Datei des Drucker-Treibers"
-
-#: plugins/admin/systems/printerPPDDialog.tpl:5
+#: plugins/admin/systems/printerPPDDialog.tpl:1
 #, fuzzy
-msgid "Current used information setup"
-msgstr "Momentan genutzte Informationen: "
+msgid "Printer driver"
+msgstr "Drucker"
 
-#: plugins/admin/systems/printerPPDDialog.tpl:7
+#: plugins/admin/systems/printerPPDDialog.tpl:6
 #: plugins/admin/systems/printerPPDSelectionDialog.tpl:57
 msgid "Select"
 msgstr "Auswahl"
 
-#: plugins/admin/systems/printerPPDDialog.tpl:10
+#: plugins/admin/systems/printerPPDDialog.tpl:9
 #, fuzzy
-msgid "Upload new PPD file"
-msgstr "PPD hochladen"
+msgid "New driver"
+msgstr "Neuer Server"
 
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:8
 #, fuzzy
@@ -6762,17 +6766,22 @@ msgstr "Bitte geben Sie eine gültige ID ein!"
 msgid "Please select a valid ppd."
 msgstr "Bitte wählen Sie eine gültige PPD."
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:310
-#: plugins/admin/systems/class_printerPPDDialog.inc:313
+#: plugins/admin/systems/class_printerPPDDialog.inc:270
+#: plugins/admin/fai/faiPackage.tpl:41
+msgid "Section"
+msgstr "Section"
+
+#: plugins/admin/systems/class_printerPPDDialog.inc:320
+#: plugins/admin/systems/class_printerPPDDialog.inc:323
 msgid "True"
 msgstr "wahr"
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:311
-#: plugins/admin/systems/class_printerPPDDialog.inc:314
+#: plugins/admin/systems/class_printerPPDDialog.inc:321
+#: plugins/admin/systems/class_printerPPDDialog.inc:324
 msgid "False"
 msgstr "falsch"
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:319
+#: plugins/admin/systems/class_printerPPDDialog.inc:329
 #, fuzzy, php-format
 msgid "Unsupported ppd type '%s' used for '%s' "
 msgstr "Nicht unterstützter PPD Typ '%s' verwendet von '%s'"
@@ -7101,7 +7110,7 @@ msgid "UNIX accounts"
 msgstr "Unix-Konten"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:45 html/getxls.php:126
-#: html/getxls.php:132
+#: html/getxls.php:132 html/getxls.php:149
 msgid "Servers"
 msgstr "Server"
 
@@ -7733,10 +7742,6 @@ msgstr "Repository"
 msgid "Release"
 msgstr "Release"
 
-#: plugins/admin/fai/faiPackage.tpl:41
-msgid "Section"
-msgstr "Section"
-
 #: plugins/admin/fai/faiPackage.tpl:50
 msgid "Mirror"
 msgstr "Mirror"
@@ -7942,8 +7947,14 @@ msgstr "Liste der Vorlagen"
 msgid "Choose a template to delete or edit"
 msgstr "Wählen Sie eine Vorlage zum Entfernen oder Bearbeiten"
 
-#: plugins/admin/fai/class_faiPartitionTable.inc:218
-#: plugins/admin/fai/class_faiPartitionTable.inc:220
+#: plugins/admin/fai/class_faiPartitionTable.inc:219
+#: plugins/admin/fai/class_faiPartitionTable.inc:225
+#, fuzzy, php-format
+msgid "%s partition"
+msgstr "%s Partition(en)"
+
+#: plugins/admin/fai/class_faiPartitionTable.inc:221
+#: plugins/admin/fai/class_faiPartitionTable.inc:227
 #, php-format
 msgid "%s partition(s)"
 msgstr "%s Partition(en)"
@@ -8607,7 +8618,7 @@ msgstr "Wählen Sie den Unterbaum, in den die Konferenz eingepflegt werden soll"
 msgid "Lifetime (in days)"
 msgstr "Lebenszeit (in Tagen)"
 
-#: plugins/gofon/conference/generic.tpl:69
+#: plugins/gofon/conference/generic.tpl:69 html/getxls.php:147
 msgid "Phone number"
 msgstr "Telefonnummer"
 
@@ -9715,15 +9726,26 @@ msgstr ""
 msgid "Sexe"
 msgstr "Geschlecht"
 
-#: html/getxls.php:53 html/getxls.php:147
+#: html/getxls.php:53 html/getxls.php:147 html/getxls.php:192
+#: html/getxls.php:204
 #, fuzzy
 msgid "Firstname"
 msgstr "Listenname"
+
+#: html/getxls.php:77
+#, fuzzy
+msgid "Members:"
+msgstr "Zusammengefasste Objekte"
 
 #: html/getxls.php:102
 #, fuzzy
 msgid "Computers"
 msgstr "Zähle Benutzer"
+
+#: html/getxls.php:124
+#, fuzzy
+msgid "Server Name"
+msgstr "Server-Name"
 
 #: html/getxls.php:147
 #, fuzzy
@@ -9741,26 +9763,107 @@ msgstr ""
 
 #: html/getxls.php:147
 #, fuzzy
-msgid "Initiales)."
+msgid "Initiales"
 msgstr "Initialien"
 
 #: html/getxls.php:147
-msgid ",_("
-msgstr ""
+#, fuzzy
+msgid "Mail address"
+msgstr "MAC-Adresse"
 
 #: html/getxls.php:147
-msgid ")."
+#, fuzzy
+msgid "Mobile phone"
+msgstr "Telefon (zu Hause)"
+
+#: html/getxls.php:147
+#, fuzzy
+msgid "Postal address"
+msgstr "Postleitzahl"
+
+#: html/getxls.php:147
+#, fuzzy
+msgid "Adress"
+msgstr "Adresse"
+
+#: html/getxls.php:147
+#, fuzzy
+msgid "Surename"
+msgstr "Server-Name"
+
+#: html/getxls.php:147
+#, fuzzy
+msgid "Function"
+msgstr "Funktion"
+
+#: html/getxls.php:192
+#, fuzzy
+msgid "BirthDate"
+msgstr "Datum"
+
+#: html/getxls.php:195
+#, fuzzy
+msgid "Members"
+msgstr "Zusammengefasste Objekte"
+
+#: html/getxls.php:198
+msgid "Uid"
 msgstr ""
 
-#: html/getxls.php:166
-msgid ""
-");\n"
-"      }\n"
-"\n"
-"      break;\n"
-"\n"
-"      default: echo "
-msgstr ""
+#: html/getxls.php:204
+#, fuzzy
+msgid "DisplayName"
+msgstr "Angezeigter Name"
+
+#: html/getxls.php:204
+#, fuzzy
+msgid "Phone Number"
+msgstr "Telefonnummer"
+
+#: html/getxls.php:204
+#, fuzzy
+msgid "Postal Adress"
+msgstr "Postleitzahl"
+
+#: html/getxls.php:204
+#, fuzzy
+msgid "Email address"
+msgstr "Primäre Adresse"
+
+#: html/getxls.php:204
+#, fuzzy
+msgid "mobile"
+msgstr "Mobiltelefon"
+
+#: html/getxls.php:204
+#, fuzzy
+msgid "Organizational Unit"
+msgstr "Organisationsbezogen"
+
+#: html/getxls.php:204
+#, fuzzy
+msgid "Postal Address"
+msgstr "Postleitzahl"
+
+#: html/getxls.php:204
+#, fuzzy
+msgid "Postal Code"
+msgstr "Postleitzahl"
+
+#: html/getxls.php:204
+#, fuzzy
+msgid "Sn"
+msgstr "S"
+
+#: html/getxls.php:204
+#, fuzzy
+msgid "st"
+msgstr "setzen"
+
+#: html/getxls.php:204
+#, fuzzy
+msgid "Title"
+msgstr "Datei"
 
 #: html/getfax.php:53
 msgid "Could not connect to database server!"
@@ -10285,6 +10388,21 @@ msgstr ""
 "GOsa kann Fehler im PHP-Interpreter erzeugen (insbesondere bei Beta-"
 "Versionen). In einigen Fällen ist es hilfreich, das 'error_reporting' zu "
 "aktivieren (dies kann jedoch ein Sicherheitsrisiko darstellen)."
+
+#~ msgid "Printer driver information file setup"
+#~ msgstr "Einrichtung der Informations-Datei des Drucker-Treibers"
+
+#, fuzzy
+#~ msgid "Current used information setup"
+#~ msgstr "Momentan genutzte Informationen: "
+
+#, fuzzy
+#~ msgid "Upload new PPD file"
+#~ msgstr "PPD hochladen"
+
+#, fuzzy
+#~ msgid "Initiales)."
+#~ msgstr "Initialien"
 
 #~ msgid "Create template"
 #~ msgstr "Neue Vorlage erstellen"
