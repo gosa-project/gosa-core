@@ -66,7 +66,7 @@
 <h2><img alt="" align="middle" src="images/envelope.png"> {t}Mail options{/t}</h2>
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
  <tr style="padding-bottom:0px;">
-  <td style="width:45%">
+  <td style="width:50%">
    <input type=checkbox name="drop_own_mails" value="1" {$drop_own_mails}
 	{$gosaMailDeliveryModeACL} title="{t}Select if you want to forward mails without getting own copies of them{/t}"> {t}No delivery to own mailbox{/t}
    <br>
