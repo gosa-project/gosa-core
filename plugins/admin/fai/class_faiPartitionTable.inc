@@ -215,9 +215,17 @@ class faiPartitionTable extends plugin
           }
         }
         if(!empty($disk['description'])){
-          $a_return[$key]=  $disk['cn']." [".$disk['description']."], ".sprintf(_("%s partition(s)"), $cnt);
+          if($cnt == 1){
+            $a_return[$key]=  $disk['cn']." [".$disk['description']."], ".sprintf(_("%s partition"), $cnt);
+          }else{
+            $a_return[$key]=  $disk['cn']." [".$disk['description']."], ".sprintf(_("%s partition(s)"), $cnt);
+          }
         }else{
-          $a_return[$key]=  $disk['cn'].", ".sprintf(_("%s partition(s)"), $cnt);
+          if($cnt == 1){
+            $a_return[$key]=  $disk['cn'].", ".sprintf(_("%s partition"), $cnt);
+          }else{
+            $a_return[$key]=  $disk['cn'].", ".sprintf(_("%s partition(s)"), $cnt);
+          }
         }
       }
     }
