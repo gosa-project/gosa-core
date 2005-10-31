@@ -58,7 +58,7 @@ class divlist {
       $s_return.= "<thead>".$this->_generateHeader()."</thead>";
 
       // Define an alternate style for IE
-      $s_return.= "<!--[if IE]><style type='text/css'>tbody.scrollcontent {overflow-y:scroll;height:20em;}</style><![endif]-->";
+      $s_return.= "<!--[if IE]><style type='text/css'>tbody.scrollcontent {overflow-y:scroll;max-height:480px;}</style><![endif]-->";
     
       $s_return.= "<tbody class='scrollcontent'>".$this->_generatePage()."</tbody>";
     } else {
