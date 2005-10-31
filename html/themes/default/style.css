@@ -22,8 +22,15 @@ td.list0 {
 
 td.list1 {
 	background:white;
-    border-right:1px solid #C0C0C0;
+	border-right:1px solid #C0C0C0;
 	padding:3px;
+}
+
+tbody.scrollcontent {
+	overflow:auto;
+	overflow:-moz-scrollbars-vertical;
+	overflow-x:hidden;
+	max-height:480px;
 }
 
 body

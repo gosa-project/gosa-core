@@ -52,10 +52,20 @@ class divlist {
 		$s_return = "";
 		
 		$s_return.= "<table summary='".$this->s_summary."' width='600' cellspacing='0'>";
+
+    if($this->i_entriesPerPage==0) {
     
-    $s_return.= "<thead>".$this->_generateHeader()."</thead>";
+      $s_return.= "<thead>".$this->_generateHeader()."</thead>";
+
+      // Define an alternate style for IE
+      $s_return.= "<!--[if IE]><style type='text/css'>tbody.scrollcontent {overflow-y:scroll;height:20em;}</style><![endif]-->";
     
-    $s_return.= "<tbody style='overflow:auto;height:480px;'>".$this->_generatePage()."</tbody>";
+      $s_return.= "<tbody class='scrollcontent'>".$this->_generatePage()."</tbody>";
+    } else {
+      $s_return.=$this->_generateHeader();
+
+      $s_return.=$this->_generatePage();
+    }
 		//$s_return.= nl2br(htmlentities($this->_generatePage()));
 		
 		$s_return.= "</table>";
@@ -101,7 +111,10 @@ class divlist {
       $i_count--;
 		}
 		
-    $s_return .= "<td class='listheader' style='border-right:0px;border-bottom:1px solid #b0b0b0;width:13px;'>&nbsp;</td>";
+    // Only create additional column if we're using scrollbars
+    if($this->i_entriesPerPage==0) {
+      $s_return .= "<td class='listheader' style='border-right:0px;padding:0px;border-bottom:1px solid #b0b0b0;width:16px;'>&nbsp;</td>";
+    }
 		$s_return .= "\n</tr>";
 		return $s_return;
 	}
@@ -173,8 +186,9 @@ class divlist {
   					$s_return .= "\n</td>";
   				}
   				if($cnt == 0 ){
-  					$s_return.="<td>&nbsp;</td>";
+  					$s_return.="\n<td>&nbsp;</td>";
   				}
+
   				$s_return .= "\n</tr>";
   			}	
   		}
@@ -186,12 +200,12 @@ class divlist {
   				$cnt=0;
   				for($a = 0 ; $a < (count($this->a_header[0])) ; $a ++ ) {
   					if($a ==(count($this->a_header[0])-1)){
-  						$s_return.="<td class='list1' style='border:0px;' height='26'>&nbsp; </td>";
+  						$s_return.="\n<td class='list1' style='border:0px;' height='26'>&nbsp;</td>";
   					} else {
-  						$s_return.="<td class='list1' height='26'>&nbsp; </td>";
+  						$s_return.="\n<td class='list1' height='26'>&nbsp;</td>";
   					}
   				}
-  				$s_return.="</tr>";
+  				$s_return.="\n</tr>";
   			}	
   		}
   
@@ -231,12 +245,14 @@ class divlist {
   
   				$s_return .= "\n<td ".$style." class='".$class."'>";
   				$s_return .= $s_value2['string'];
-  				$s_return .= "\n</td>";
+  				$s_return .= "</td>";
   			}
   			
         if($cnt == 0 ){
-  				$s_return.="<td>&nbsp;</td>";
-  			}
+  				$s_return.="\n<td>&nbsp;</td>";
+  			} else {
+  				//$s_return.="\n<td style='border:0px;padding:0px;' class='list".$i_alternate."'>&nbsp;</td>";
+        }
   			$s_return .= "\n</tr>";
   		}
     }
