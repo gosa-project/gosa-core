@@ -5,7 +5,7 @@
    <table summary="">
     <tr>
      <td><LABEL for="mail">{t}Primary address{/t}</LABEL>{$must}</td>
-     <td><input id="mail" name="mail" size=25 maxlength=65 {$mailACL} value="{$mail}"></td>
+     <td><input id="mail" name="mail" size=35 maxlength=65 {$mailACL} value="{$mail}"></td>
     </tr>
     <tr>
      <td><LABEL for="gosaMailServer">{t}Server{/t}</LABEL></td>
@@ -46,7 +46,7 @@
 
   <td style="vertical-align:top;">
    <h2><img alt="" align="middle" src="images/alternatemail.png"><LABEL for="alternates_list"> {t}Alternative addresses{/t}</LABEL></h2>
-   <select id="alternates_list" style="width:350px; height:100px;" name="alternates_list[]" size=15
+   <select id="alternates_list" style="width:100%;height:100px;" name="alternates_list[]" size=15
 	 multiple title="{t}List of alternative mail addresses{/t}">
             {html_options values=$gosaMailAlternateAddress output=$gosaMailAlternateAddress}
 			<option disabled>&nbsp;</option>
@@ -100,7 +100,7 @@
    <p style="margin-bottom:0px;">
     <b><LABEL for="gosaVacationMessage">{t}Vacation message{/t}</LABEL></b>
    </p>
-   <textarea id="gosaVacationMessage" style="width:350px; height:100px;" name="gosaVacationMessage" rows="4" cols="512"
+   <textarea id="gosaVacationMessage" style="width:99%; height:100px;" name="gosaVacationMessage" rows="4" cols="512"
 	{$gosaVacationMessageACL}>{$gosaVacationMessage}</textarea>
    <br>
    {if $show_templates eq "true"}
@@ -117,7 +117,7 @@
    <p style="margin-bottom:0px;">
     <b><LABEL for="forwarder_list">{t}Forward messages to{/t}</LABEL></b>
    </p>
-   <select id="gosaMailForwardingAddress" style="width:350px; height:100px;" name="forwarder_list[]" size=15 multiple>
+   <select id="gosaMailForwardingAddress" style="width:100%; height:100px;" name="forwarder_list[]" size=15 multiple>
 			{html_options values=$gosaMailForwardingAddress output=$gosaMailForwardingAddress selected=$template}        
 			<option disabled>&nbsp;</option>
    </select>
