@@ -389,7 +389,7 @@ class groupManagement extends plugin
 
 
     $divlist->SetSummary(_("This table displays all groups, in the selected tree."));
-    $divlist->SetEntriesPerPage(20);
+    $divlist->SetEntriesPerPage(0);
 
     foreach($this->departments as $key=> $val){
 
