@@ -273,7 +273,7 @@
   {else} 
 
   <!-- Beschreibung, ... -->
-  <td style="vertical-align:top;">
+  <td style="vertical-align:top;border-right:1px solid #b0b0b0">
    <table summary=""> 
     <tr>
      <td><label for="vocation">{t}Vocation{/t}</label></td>
@@ -312,7 +312,7 @@
   </td>
   
   <!-- Phone, ... -->
-  <td style="vertical-align:top;">
+  <td style="vertical-align:top;border-right:1px solid #b0b0b0">
    <table summary=""> 
     <tr>
      <td><label for="gouvernmentOrganizationalPersonLocality">{t}Person locality{/t}</label></td>
