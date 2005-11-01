@@ -90,8 +90,8 @@ msgstr "Conectividad"
 #: plugins/gofax/faxaccount/generic.tpl:10
 #: plugins/addons/addressbook/contents.tpl:14
 #: plugins/admin/users/class_userManagement.inc:732
-#: plugins/admin/departments/generic.tpl:62 html/getxls.php:149
-#: html/getxls.php:206
+#: plugins/admin/departments/generic.tpl:62 html/getxls.php:150
+#: html/getxls.php:207
 msgid "Fax"
 msgstr "Fax"
 
@@ -1874,8 +1874,8 @@ msgstr "Cambiar foto"
 #: plugins/admin/fai/faiScript.tpl:9 plugins/admin/fai/faiVariableEntry.tpl:9
 #: plugins/admin/fai/faiTemplate.tpl:9 plugins/admin/fai/faiHookEntry.tpl:9
 #: plugins/admin/fai/faiTemplateEntry.tpl:7 plugins/admin/fai/faiHook.tpl:9
-#: plugins/gofon/macro/parameter.tpl:5 html/getxls.php:54 html/getxls.php:149
-#: html/getxls.php:194 html/getxls.php:203 html/getxls.php:206
+#: plugins/gofon/macro/parameter.tpl:5 html/getxls.php:54 html/getxls.php:150
+#: html/getxls.php:195 html/getxls.php:204 html/getxls.php:207
 msgid "Name"
 msgstr "Nombre"
 
@@ -1910,7 +1910,7 @@ msgstr "Fecha de nacimiento"
 msgid "Set"
 msgstr "por debajo"
 
-#: plugins/personal/generic/generic.tpl:81 html/getxls.php:194
+#: plugins/personal/generic/generic.tpl:81 html/getxls.php:195
 msgid "Sex"
 msgstr "Sexo"
 
@@ -1979,7 +1979,7 @@ msgstr "Editar propiedades"
 msgid "Organizational information"
 msgstr "Información organizativa"
 
-#: plugins/personal/generic/generic.tpl:183 html/getxls.php:206
+#: plugins/personal/generic/generic.tpl:183 html/getxls.php:207
 msgid "Organization"
 msgstr "Organización"
 
@@ -2024,20 +2024,20 @@ msgstr "Teléfono Móvil"
 
 #: plugins/personal/generic/generic.tpl:235
 #: plugins/addons/addressbook/address_edit.tpl:102
-#: plugins/addons/addressbook/address_info.tpl:91 html/getxls.php:149
-#: html/getxls.php:206
+#: plugins/addons/addressbook/address_info.tpl:91 html/getxls.php:150
+#: html/getxls.php:207
 msgid "Pager"
 msgstr "Dispositivo de aviso"
 
 #: plugins/personal/generic/generic.tpl:257
 #: plugins/admin/departments/generic.tpl:42
 #: plugins/admin/departments/generic.tpl:50
-#: plugins/admin/systems/workstation.tpl:18 html/getxls.php:149
+#: plugins/admin/systems/workstation.tpl:18 html/getxls.php:150
 msgid "Location"
 msgstr "Localización"
 
 #: plugins/personal/generic/generic.tpl:261
-#: plugins/admin/departments/generic.tpl:46 html/getxls.php:149
+#: plugins/admin/departments/generic.tpl:46 html/getxls.php:150
 msgid "State"
 msgstr "Estado"
 
@@ -2075,7 +2075,7 @@ msgstr "Calle"
 
 #: plugins/personal/generic/generic.tpl:339
 #: plugins/addons/addressbook/address_edit.tpl:81
-#: plugins/addons/addressbook/address_info.tpl:70 html/getxls.php:149
+#: plugins/addons/addressbook/address_info.tpl:70 html/getxls.php:150
 msgid "Postal code"
 msgstr "Código Postal"
 
@@ -2821,7 +2821,7 @@ msgstr "Nombre de la lista"
 #: plugins/admin/fai/faiTemplateEntry.tpl:11 plugins/admin/fai/faiHook.tpl:19
 #: plugins/gofon/macro/generic.tpl:36 plugins/gofon/conference/generic.tpl:51
 #: plugins/generic/references/contents.tpl:11 html/getxls.php:103
-#: html/getxls.php:200
+#: html/getxls.php:201
 msgid "Description"
 msgstr "Descripción"
 
@@ -3395,7 +3395,7 @@ msgstr "Numero de fax que activa GOfax"
 
 #: plugins/gofax/faxaccount/generic.tpl:16
 #: plugins/admin/ogroups/phonequeue.tpl:35 html/getxls.php:54
-#: html/getxls.php:194
+#: html/getxls.php:195
 msgid "Language"
 msgstr "Lenguaje"
 
@@ -3800,8 +3800,8 @@ msgid "Personal"
 msgstr "Personal"
 
 #: plugins/addons/addressbook/address_edit.tpl:29
-#: plugins/addons/addressbook/address_info.tpl:19 html/getxls.php:149
-#: html/getxls.php:206
+#: plugins/addons/addressbook/address_info.tpl:19 html/getxls.php:150
+#: html/getxls.php:207
 msgid "Initials"
 msgstr "Iniciales"
 
@@ -3821,8 +3821,8 @@ msgid "Company"
 msgstr "Compañia"
 
 #: plugins/addons/addressbook/address_edit.tpl:78
-#: plugins/addons/addressbook/address_info.tpl:67 html/getxls.php:149
-#: html/getxls.php:206
+#: plugins/addons/addressbook/address_info.tpl:67 html/getxls.php:150
+#: html/getxls.php:207
 msgid "City"
 msgstr "Ciudad"
 
@@ -3913,13 +3913,13 @@ msgstr "Teléfono del trabajo"
 msgid "Cell phone"
 msgstr "Móvil"
 
-#: plugins/addons/addressbook/class_addressbook.inc:506 html/getxls.php:149
+#: plugins/addons/addressbook/class_addressbook.inc:506 html/getxls.php:150
 msgid "Home phone"
 msgstr "Teléfono particular"
 
 #: plugins/addons/addressbook/class_addressbook.inc:506 html/getxls.php:66
-#: html/getxls.php:88 html/getxls.php:103 html/getxls.php:238
-#: html/getxls.php:253
+#: html/getxls.php:88 html/getxls.php:103 html/getxls.php:239
+#: html/getxls.php:254
 msgid "User ID"
 msgstr "Identificador (ID) de usuario"
 
@@ -4100,7 +4100,6 @@ msgid "Export successful"
 msgstr "Exportación completada"
 
 #: plugins/addons/ldapmanager/contentexport.tpl:59
-#: plugins/addons/ldapmanager/contentexportxls.tpl:62
 msgid "Click here to save the complete LDAP database to a file"
 msgstr "Pulse aquí para grabar la base de datos LDAP completa a un archivo"
 
@@ -4118,7 +4117,6 @@ msgid "CSV import"
 msgstr "Importar desde CSV"
 
 #: plugins/addons/ldapmanager/class_export.inc:35
-#: plugins/addons/ldapmanager/class_exportxls.inc:35
 msgid "You've no permission to do LDAP exports."
 msgstr "No tiene permisos para hacer exportaciones LDAP."
 
@@ -4150,13 +4148,23 @@ msgstr "Exportación del LDIF completada para"
 
 #: plugins/addons/ldapmanager/contentexportxls.tpl:62
 #, fuzzy
-msgid "Click here to save the LDAP Export to a xls file "
+msgid "Click here to save the complete LDAP database to a xls file"
+msgstr "Pulse aquí para grabar la base de datos LDAP completa a un archivo"
+
+#: plugins/addons/ldapmanager/contentexportxls.tpl:62
+#, fuzzy
+msgid "Click here to save the LDAP Export to a xls file"
 msgstr "Pulse aquí para exportar la base de datos LDAP"
 
 #: plugins/addons/ldapmanager/class_exportxls.inc:7
 #, fuzzy
-msgid "XLS import"
+msgid "XLS export"
 msgstr "Importar desde CSV"
+
+#: plugins/addons/ldapmanager/class_exportxls.inc:35
+#, fuzzy
+msgid "You've no permission to do XLS exports."
+msgstr "No tiene permisos para hacer exportaciones LDAP."
 
 #: plugins/addons/logview/class_logview.inc:6
 msgid "System logs"
@@ -4346,7 +4354,7 @@ msgstr "Administración de grupos"
 
 #: plugins/admin/groups/class_groupManagement.inc:25
 #: plugins/admin/ogroups/class_ogroupManagement.inc:42 html/getxls.php:80
-#: html/getxls.php:212
+#: html/getxls.php:213
 msgid "Groups"
 msgstr "Grupos"
 
@@ -4672,7 +4680,7 @@ msgid "User administration"
 msgstr "Administración de Usuarios"
 
 #: plugins/admin/users/class_userManagement.inc:25
-#: plugins/admin/systems/printer.tpl:65 html/getxls.php:56 html/getxls.php:211
+#: plugins/admin/systems/printer.tpl:65 html/getxls.php:56 html/getxls.php:212
 msgid "Users"
 msgstr "Usuarios"
 
@@ -7250,8 +7258,7 @@ msgid "UNIX accounts"
 msgstr "Cuentas UNIX"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:45 html/getxls.php:128
-#: html/getxls.php:134 html/getxls.php:151 html/getxls.php:213
-#: html/getxls.php:269
+#: html/getxls.php:134 html/getxls.php:214 html/getxls.php:270
 msgid "Servers"
 msgstr "Servidores"
 
@@ -8871,7 +8878,7 @@ msgstr "Elija el subárbol donde colocar el usuario"
 msgid "Lifetime (in days)"
 msgstr ""
 
-#: plugins/gofon/conference/generic.tpl:69 html/getxls.php:149
+#: plugins/gofon/conference/generic.tpl:69 html/getxls.php:150
 #, fuzzy
 msgid "Phone number"
 msgstr "Números de teléfonos"
@@ -9374,7 +9381,7 @@ msgstr ""
 "Actualmente no esta soportada la creación automática del tipo '%s'. Por "
 "favor, informe de esto al equipo de desarrollo de GOsa."
 
-#: include/class_ldap.inc:698
+#: include/class_ldap.inc:699
 #, php-format
 msgid ""
 "This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
@@ -9383,12 +9390,12 @@ msgstr ""
 "El DN: '%s' no es válido, Un bloque importado debería comenzar por 'dn:...' "
 "en la linea %s"
 
-#: include/class_ldap.inc:711
+#: include/class_ldap.inc:712
 #, php-format
 msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
 msgstr "El DN: '%s' (de la linea %s) ya existe en la base de datos LDAP."
 
-#: include/class_ldap.inc:727
+#: include/class_ldap.inc:728
 #, php-format
 msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
 msgstr ""
@@ -9992,24 +9999,24 @@ msgstr ""
 msgid "Sexe"
 msgstr "Sexo"
 
-#: html/getxls.php:54 html/getxls.php:149 html/getxls.php:194
-#: html/getxls.php:206
+#: html/getxls.php:54 html/getxls.php:150 html/getxls.php:195
+#: html/getxls.php:207
 #, fuzzy
 msgid "Firstname"
 msgstr "Nombre de la lista"
 
-#: html/getxls.php:79 html/getxls.php:197
+#: html/getxls.php:79 html/getxls.php:198
 #, fuzzy
 msgid "Members"
 msgstr "Objetos miembro"
 
-#: html/getxls.php:104 html/getxls.php:214
+#: html/getxls.php:104 html/getxls.php:215
 #, fuzzy
 msgid "Computers"
 msgstr "incompleto"
 
-#: html/getxls.php:114 html/getxls.php:161 html/getxls.php:287
-#: html/getxls.php:304
+#: html/getxls.php:114 html/getxls.php:162 html/getxls.php:288
+#: html/getxls.php:305
 #, fuzzy
 msgid "Common Name"
 msgstr "Nombre de la localización"
@@ -10019,117 +10026,117 @@ msgstr "Nombre de la localización"
 msgid "Server Name"
 msgstr "Nombre del servidor"
 
-#: html/getxls.php:149
+#: html/getxls.php:150
 #, fuzzy
 msgid "Common name"
 msgstr "Nombre de la localización"
 
-#: html/getxls.php:149
+#: html/getxls.php:150
 #, fuzzy
 msgid "Display Name"
 msgstr "Nombre mostrado"
 
-#: html/getxls.php:149
+#: html/getxls.php:150
 msgid "Home postal address"
 msgstr ""
 
-#: html/getxls.php:149
+#: html/getxls.php:150
 #, fuzzy
 msgid "Mail address"
 msgstr "Dirección MAC"
 
-#: html/getxls.php:149
+#: html/getxls.php:150
 #, fuzzy
 msgid "Mobile phone"
 msgstr "Teléfono particular"
 
-#: html/getxls.php:149
+#: html/getxls.php:150
 #, fuzzy
 msgid "Postal address"
 msgstr "Código Postal"
 
-#: html/getxls.php:149
+#: html/getxls.php:150
 #, fuzzy
 msgid "Adress"
 msgstr "Dirección"
 
-#: html/getxls.php:149
+#: html/getxls.php:150
 #, fuzzy
 msgid "Surename"
 msgstr "Nombre del servidor"
 
-#: html/getxls.php:149
+#: html/getxls.php:150
 #, fuzzy
 msgid "Function"
 msgstr "Función"
 
-#: html/getxls.php:194
+#: html/getxls.php:152 html/getxls.php:216
+#, fuzzy
+msgid "Adressbook"
+msgstr "Libreta de direcciones"
+
+#: html/getxls.php:195
 #, fuzzy
 msgid "BirthDate"
 msgstr "Fecha"
 
-#: html/getxls.php:200
+#: html/getxls.php:201
 msgid "Uid"
 msgstr ""
 
-#: html/getxls.php:206
+#: html/getxls.php:207
 #, fuzzy
 msgid "DisplayName"
 msgstr "Nombre mostrado"
 
-#: html/getxls.php:206
+#: html/getxls.php:207
 #, fuzzy
 msgid "Phone Number"
 msgstr "Números de teléfonos"
 
-#: html/getxls.php:206
+#: html/getxls.php:207
 #, fuzzy
 msgid "Postal Adress"
 msgstr "Código Postal"
 
-#: html/getxls.php:206
+#: html/getxls.php:207
 #, fuzzy
 msgid "Email address"
 msgstr "Cuenta Principal"
 
-#: html/getxls.php:206
+#: html/getxls.php:207
 #, fuzzy
 msgid "mobile"
 msgstr "Teléfono Móvil"
 
-#: html/getxls.php:206
+#: html/getxls.php:207
 #, fuzzy
 msgid "Organizational Unit"
 msgstr "De organización"
 
-#: html/getxls.php:206
+#: html/getxls.php:207
 #, fuzzy
 msgid "Postal Address"
 msgstr "Código Postal"
 
-#: html/getxls.php:206
+#: html/getxls.php:207
 #, fuzzy
 msgid "Postal Code"
 msgstr "Código Postal"
 
-#: html/getxls.php:206
+#: html/getxls.php:207
 msgid "Sn"
 msgstr ""
 
-#: html/getxls.php:206
+#: html/getxls.php:207
 #, fuzzy
 msgid "st"
 msgstr "Borrar"
 
-#: html/getxls.php:206
+#: html/getxls.php:207
 #, fuzzy
 msgid "Title"
 msgstr "Archivo"
-
-#: html/getxls.php:215
-#, fuzzy
-msgid "Adressbook"
-msgstr "Libreta de direcciones"
 
 #: html/getfax.php:53
 msgid "Could not connect to database server!"

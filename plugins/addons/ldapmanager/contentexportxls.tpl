@@ -59,7 +59,7 @@
 <br>
 	<div>
 		<img alt="" border="0" align=middle src="images/filesaveas.png">
-		<a href = "getxls.php{$para}" title="{t}Click here to save the complete LDAP database to a file{/t} ">{t}Click here to save the LDAP Export to a xls file {/t}</a>
+		<a href = "getxls.php{$para}" title="{t}Click here to save the complete LDAP database to a xls file{/t} ">{t}Click here to save the LDAP Export to a xls file{/t}</a>
 
 
 		<br>

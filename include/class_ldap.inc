@@ -483,8 +483,8 @@ class LDAP{
     return ($data);
     else
     return ($info);
-	
-	
+  
+  
   }
  
 
@@ -551,15 +551,17 @@ function gen_xls ($dn, $filter= "(objectClass=*)", $attributes= array('*'), $rec
 
       $this->cd($dn);
       $this->search("$filter");
-	$i=0;
+
+      $i=0;
       while ($attrs= $this->fetch()){
-	$j=0;
-	foreach ($attributes as $at)
-        {
-	
-	$display[$i][$j]= $this->get_attribute($attrs['dn'], $at,$r_array);
-	$j++;}
-	$i++;
+        $j=0;
+
+        foreach ($attributes as $at){
+          $display[$i][$j]= $this->get_attribute($attrs['dn'], $at,$r_array);
+          $j++;
+        }
+
+        $i++;
       }
 
     return ($display);
@@ -577,7 +579,7 @@ function gen_xls ($dn, $filter= "(objectClass=*)", $attributes= array('*'), $rec
     /* Searching Ldap Tree */
     $sr= @ldap_read($this->cid, $dn, $filter, $name);
 
-    /* Get the first entry */		
+    /* Get the first entry */   
     $entry= @ldap_first_entry($this->cid, $sr);
 
     /* Get all attributes related to that Objekt */
@@ -589,7 +591,7 @@ function gen_xls ($dn, $filter= "(objectClass=*)", $attributes= array('*'), $rec
 
     /* Reset index */
     $i = 1 ; 
-	$identifier = array();
+  $identifier = array();
     $attribute= @ldap_first_attribute($this->cid,$entry,$identifier);
     while ($attribute) {
       $i++;

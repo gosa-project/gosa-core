@@ -4,7 +4,7 @@
 class xlsexport extends plugin
 {
   /* Definitions */
-  var $plHeadline= "XLS import";
+  var $plHeadline= "XLS export";
   var $plDescription= "This does something";
   var $access= "";
 
@@ -19,7 +19,7 @@ class xlsexport extends plugin
 
     $ui= get_userinfo();
     $acl= get_permissions ($config->current['BASE'], $ui->subtreeACL);
-    $acl= get_module_permission($acl, "ldifexport", $config->current['BASE']);
+    $acl= get_module_permission($acl, "xlsexport", $config->current['BASE']);
     $this->access= $acl;
   }
 
@@ -32,7 +32,7 @@ class xlsexport extends plugin
     
     /* Check permissions for export */
     if ($this->access != '#all#'){
-      print_red(_("You've no permission to do LDAP exports."));
+      print_red(_("You've no permission to do XLS exports."));
     } else {
       // fill in old vars in the Export form
       if((isset($_POST['single']))&&(isset($_POST['sfrmgetsingle']))){
@@ -85,7 +85,7 @@ class xlsexport extends plugin
 	print_red (_("Error while exporting the requested entries!"));
       }
     }
-//     print_r($_POST);
+
     // Export a single LDAP entry
     if(isset($_POST['sfrmgetsingle']))
     {
