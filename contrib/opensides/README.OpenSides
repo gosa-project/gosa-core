@@ -4,7 +4,6 @@ goSamba.pl - This script will help you populate your ldap tree with
 
 goNagios.pl - This script will help you to manage the authentification
               users inside of the cgi.cfg, contacts.cfg, contactgroups.cfg
-ldap :
  
 slapd.conf - The slapd.conf confg for openldap 2.2
 
@@ -23,8 +22,7 @@ LICENSE : GNU LESSER GENERAL PUBLIC LICENSE
 
 Bug: 
 
-to make it work under php5 you have to copy the file getxls.php5 on getxls.php
-by default it only work with php4
+It doesn't work on php5 we are working on it.
 
 Benoit Mortier <benoit.mortier@opensides.be>
 Guillaume Delecourt <guillaume.delecourt@opensides.be>

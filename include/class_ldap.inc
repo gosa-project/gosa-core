@@ -556,7 +556,6 @@ function gen_xls ($dn, $filter= "(objectClass=*)", $attributes= array('*'), $rec
 	$j=0;
 	foreach ($attributes as $at)
         {
-// 	echo $at;
 	
 	$display[$i][$j]= $this->get_attribute($attrs['dn'], $at,$r_array);
 	$j++;}
