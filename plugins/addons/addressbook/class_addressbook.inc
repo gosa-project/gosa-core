@@ -466,11 +466,11 @@ $this->telephone_list[$attrs['sn'][0].$attrs['dn']]=
 			$storage= _("global addressbook");
 			$smarty->assign("internal", 0);
 		} else {
-			$storage= _("organizations user database");
+			$storage= _("user database");
 			$smarty->assign("internal", 1);
 		}
 		if ($_SESSION['show_info'] != "ADD"){
-			$smarty->assign("storage_info", sprintf(_("Contact stored in %s"), $storage));
+			$smarty->assign("storage_info", sprintf(_("Contact stored in '%s'"), $storage));
 		} else {
 			$smarty->assign("storage_info", _("Creating new entry in"));
 		}

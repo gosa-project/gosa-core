@@ -222,7 +222,7 @@ class phonequeue extends plugin
     $SQL = array();
 
     if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
-      return(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer).\nYour Settings can't be saved to asterisk Database."));
+      return(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). Your settings can't be saved to asterisk database."));
       return(false);
     }
 
@@ -236,7 +236,7 @@ class phonequeue extends plugin
     // Check if we are  connected correctly
     if(!$r_con){
       gosa_log(mysql_error());
-      return (sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
+      return (sprintf(_("The MySQL server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
           $a_SETUP['SERVER'],$a_SETUP['LOGIN']));
     }
 

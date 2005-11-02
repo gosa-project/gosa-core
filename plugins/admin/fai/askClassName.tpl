@@ -71,7 +71,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td><b>{t}A new class name.</b>{/t}
+		<td><b>{t}A new class name.{/t}</b>
 		</td>
 		<td>
 		<input type="submit" name="UseNewClass" value="{t}Use{/t}"> 

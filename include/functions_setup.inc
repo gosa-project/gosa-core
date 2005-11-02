@@ -380,8 +380,8 @@ function perform_additional_function_checks(&$faults) {
   /* Only print message, if function is not callable */
   foreach($functions as $key => $fn_name) {
     if(!is_callable($fn_name)) {
-      $msg.= check ($faults, sprintf(_("Checking for function <b>%s</b>"), get_link($fn_name)),
-        sprintf(_("The function <b>%s</b> is used by GOsa. There is no information if it's optional or required yet."),get_link($fn_name)),
+      $msg.= check ($faults, sprintf(_("Checking for function %s"), "<b>".get_link($fn_name)."</b>"),
+        sprintf(_("The function %s is used by GOsa. There is no information if it's optional or required yet."), "<b>".get_link($fn_name)."</b>"),
         is_callable($fn_name), false);
     }
   }

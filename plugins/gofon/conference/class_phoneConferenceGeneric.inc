@@ -219,7 +219,7 @@ class conference extends plugin
   function SQL_add_me($save){
 
     if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
-      $this->generate_error = _("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer).\nYour Settings can't be saved to asterisk Database.");
+      $this->generate_error = _("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). Your settings can't be saved to asterisk database.");
       return(false);
     }
   
@@ -231,7 +231,7 @@ class conference extends plugin
 
     // Check if we are  connected correctly
     if(!$r_con){
-      $this->generate_error = sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
+      $this->generate_error = sprintf(_("The MySQL server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
           $a_SETUP['SERVER'],$a_SETUP['LOGIN']);
       gosa_log(mysql_error());
       return false;

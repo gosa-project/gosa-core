@@ -241,7 +241,7 @@ class phoneAccount extends plugin
   function generate_mysql_entension_entries($save = false){
 
     if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
-      print_red(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer).\nYour Settings can't be saved to asterisk Database."));
+      print_red(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). Your settings can't be saved to asterisk database."));
       return(true);
     }
 
@@ -626,7 +626,7 @@ class phoneAccount extends plugin
 
     /* check if there is a FON server created */
     if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
-      print_red(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer).\nYour Settings can't be saved to asterisk Database."));
+      print_red(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). Your settings can't be saved to asterisk database."));
     }
 
     /* Create parameter table, skip if no parameters given */

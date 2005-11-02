@@ -165,14 +165,14 @@ class faiTemplateEntry extends plugin
       $message[] = _("Please enter a user.");
     }
     elseif(preg_match("/[^0-9a-z]/i",$this->user)){
-      $message[] = _("Please enter a valid user. Only a-Z 0-9 are allowed.");
+      $message[] = _("Please enter a valid user. Only a-z/0-9 are allowed.");
     }
 
     if(empty($this->group)){
       $message[] = _("Please enter a group.");
     }
     elseif(preg_match("/[^0-9a-z]/i",$this->group)){
-      $message[] = _("Please enter a valid group. Only a-Z 0-9 are allowed.");
+      $message[] = _("Please enter a valid group. Only a-z/0-9 are allowed.");
     }
 
     return ($message);

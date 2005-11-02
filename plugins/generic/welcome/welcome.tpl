@@ -5,7 +5,7 @@
 </p>
 
 <p>
-  {t}Use <b>Sign out</b> on the upper left to close the connection and <b>Main</b> to get back to the pictogram view.{/t}
+  {t}Use 'Sign out' on the upper left to close the connection and 'Main' to get back to the pictogram view.{/t}
 </p>
  
 {$iconmenu}
