@@ -33,7 +33,7 @@
 							<LABEL for="FAItask">
 							{t}Task{/t}&nbsp;
 							</LABEL>
-							<select name="FAItask" title="{t}Choose a FAI task to hook{/t}">
+							<select name="FAItask" title="{t}Choose an existing FAI task{/t}">
 								{html_options values=$tasks output=$tasks selected=$FAItask}
 							</select>
 						</td>
