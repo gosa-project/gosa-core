@@ -158,7 +158,7 @@ class phonequeue extends plugin
 
     $smarty= get_smarty();
 
-    $smarty->assign("goFonQueueLanguageOptions",array('de'=>_('German'),'ur'=>_('Uruguai')));
+    $smarty->assign("goFonQueueLanguageOptions",array('de'=>_('German')));
     $smarty->assign("goFonQueueStrategyOptions", $this->goFonQueueStrategyOptions);
 
     foreach($this->attributes as $key => $val){
