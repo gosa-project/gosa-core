@@ -7,9 +7,13 @@ goNagios.pl - This script will help you to manage the authentification
  
 slapd.conf - The slapd.conf confg for openldap 2.2
 
-nagios.README - how to add the right entry to make the nagios plugin work
+nagios.README - how to make the nagios plugin work
 
-xls-export.README - how to add the right entry to make the xls export xork
+pptp.README - how to make the pptp connectivity extension work
+
+phpscheduleit.README - how to make the phpscheduleit extension work
+
+xls-export.README - how to make the xls export xork
 
 
 The php_writeexcel library is coming from

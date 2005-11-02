@@ -1,4 +1,8 @@
-To use the nagios plugin remove the comment in front of nagios in gosa.conf
+To use the nagios plugin
+
+1) Add the nagios schema to your schema directory
+
+2) Remove the comment in front of nagiosAccount in gosa.conf
 
 <!--                     <plugin acl="default" class="nagiosAccount" icon="monitoring.png"
                                 path="plugins/personal/nagios" /> -->

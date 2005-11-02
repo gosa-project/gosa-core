@@ -18,7 +18,8 @@ documentation and additional help.
   Fixes for magic_quotes_qpc
 
 * Guillaume Delecourt <guillaume.delecourt@opensides.be>
-  Setup fixes, nagios tab plugin
+  Setup fixes, nagios tab plugin, xls addons ldapmanager
+  pptp connectivity option, phpscheduleit connectivity option
 
 * Dan Ellis <danellis@rushmore.com>
   Sieve lib is taken from him
