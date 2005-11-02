@@ -421,7 +421,7 @@ class user extends plugin
           $timeto   = $certificate->getvalidto_date();
           $timefrom = $certificate->getvalidfrom_date();
           $str = "<table summary=\"\" border=0><tr><td style='vertical-align:top'>CN</td><td>".preg_replace("/ /", "&nbsp;", $certificate->getname())."</td></tr></table><br>".
-                  sprintf(_("Certificate is valid from <b>%s</b> to <b>%s</b> and is currently <b>%s</b>."), date('d M Y',$timefrom),date('d M Y',$timeto), $certificate->isvalid()?"<font style='color:green'>"._("valid")."</font>":"<font style='color:red'>"._("invalid")."</font>");
+                  sprintf(_("Certificate is valid from %s to %s and is currently %s."), "<b>".date('d M Y',$timefrom)."</b>","<b>".date('d M Y',$timeto)."</b>", $certificate->isvalid()?"<b><font style='color:green'>"._("valid")."</font></b>":"<b><font style='color:red'>"._("invalid")."</font></b>");
           $smarty->assign($cert."info",$str);
           $smarty->assign($cert."_state","true");
         } else {

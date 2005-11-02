@@ -607,7 +607,7 @@ class oxchangeAccount extends plugin
         $obj= $this->parent->by_object['posixAccount'];
 	$obj2= $this->parent->by_object['mailAccount'];
         if (! $obj->is_account){
-          $display= "<BR><BR><CENTER>"._("This account has <b>OpenXchange</b> features disabled. Posix features are needed for openXchange accounts, enable them first.")."</CENTER><BR><BR>";
+          $display= "<BR><BR><CENTER>".sprintf(_("This account has %s features disabled. Posix features are needed for openXchange accounts, enable them first."), "<b>"._("OpenXchange")."</b>")."</CENTER><BR><BR>";
 
         } else {
 	  if (! $obj2->is_account){
