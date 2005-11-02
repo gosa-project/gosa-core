@@ -8,7 +8,7 @@
 </p>
 
 <p>
- {t}Best thing to do before performing this action would be to save the current contents of your LDAP tree in a file. So - if you've done so - press <i>Delete</i> to continue or <i>Cancel</i> to abort.{/t}
+ {t}Best thing to do before performing this action would be to save the current contents of your LDAP tree in a file. So - if you've done so - press 'Delete' to continue or 'Cancel' to abort.{/t}
 </p>
 
 <p class="plugbottom">
