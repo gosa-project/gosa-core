@@ -28,6 +28,7 @@ class pluglist {
   var $dirlist= array();
   var $ui= NULL;
   var $current= "";
+  var $headlines = array();
 
   function pluglist($config, $ui)
   {
@@ -77,6 +78,22 @@ class pluglist {
 	}
 
 	return (FALSE);
+  }
+
+  function gen_headlines()
+  {
+	  $ret = array();
+	  if(count($this->headlines) == 0){
+		  foreach($this->config->data['MENU'] as $headline => $plugins){
+			  foreach( $plugins as $id => $plug){
+				  $attrs = (get_class_vars($plug['CLASS']));
+				  $ret[$id]['HEADLINE'] = $headline;
+				  $ret[$id]['NAME']	  = _($attrs['plHeadline']);	
+			  }
+		  }
+		  $this->headlines = $ret;
+	  }
+	  return($this->headlines);
   }
 
   function gen_menu()
