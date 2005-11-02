@@ -314,8 +314,8 @@ class departmentManagement extends plugin
 	
 				$title = $this->config->departments[$key];
 				$field0 = array("string" => "<img src='images/".$non_empty."folder.png' title='"._("department")."' alt='department'>","attach"=>"style='width:20px;'");
-				$field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style='width:100%' title='".$title."'");
-				$field2 = array("string" => preg_replace("/%KEY%/", base64_encode($key), $actions),"attach"=>"style='text-align:right;border:none'");
+				$field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style='width:90%' title='".$title."'");
+				$field2 = array("string" => preg_replace("/%KEY%/", base64_encode($key), $actions),"attach"=>"style='text-align:left;border:none'");
 
 				$divlist->AddEntry( array($field0,$field1,$field2));
 
