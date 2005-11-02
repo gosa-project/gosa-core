@@ -611,7 +611,7 @@ class oxchangeAccount extends plugin
 
         } else {
 	  if (! $obj2->is_account){
-	    $display= "<BR><BR><CENTER>"._("This account has <b>OpenXchange</b> features disabled. Mail features are needed for openXchange accounts, enable them first.")."</CENTER><BR><BR>";
+	    $display= "<BR><BR><CENTER>".sprintf(_("This account has %s features disabled. Mail features are needed for openXchange accounts, enable them first."), "<b>"._("OpenXchange")."</b>")."</CENTER><BR><BR>";
             return ($display);
 	  }
         }
@@ -693,15 +693,15 @@ class oxchangeAccount extends plugin
       if(isset($this->oxconf["PGUSER"]) and isset($this->oxconf["PGHOST"]) and isset($this->oxconf["PGDBNAME"]) and isset($this->oxconf["PGPASSWD"])){
         $pgcon = pg_connect("host=".$this->oxconf["PGHOST"]." user=".$this->oxconf["PGUSER"]." password=".$this->oxconf["PGPASSWD"]." dbname=".$this->oxconf["PGDBNAME"]);
         if (! $pgcon){
-          print_red(_("Couldn't Connect To Postgresql Database"));
+          print_red(_("Couldn't connect to postgresql database!"));
           return;
         }
       }else{
-        print_red(_("Needed Parameters to openexchange connectivity plugin failed!"));
+        print_red(_("Needed parameters to openexchange connectivity plugin are missing!"));
         return;
       }
     }else{
-      print_red(_("PHP4 module for Postgresql Database Failed!"));
+      print_red(_("PHP4 module for postgresql database is missing!"));
       return;
     }
 
@@ -783,15 +783,15 @@ class oxchangeAccount extends plugin
         if(isset($this->oxconf["PGUSER"]) and isset($this->oxconf["PGHOST"]) and isset($this->oxconf["PGDBNAME"]) and isset($this->oxconf["PGPASSWD"])){
           $pgcon = pg_connect("host=".$this->oxconf["PGHOST"]." user=".$this->oxconf["PGUSER"]." password=".$this->oxconf["PGPASSWD"]." dbname=".$this->oxconf["PGDBNAME"]);
           if (! $pgcon){
-            print_red(_("Couldn't Connect To Postgresql Database"));
+            print_red(_("Couldn't connect to postgresql database!"));
             return;
           }
         }else{
-          print_red(_("Needed Parameters to openexchange connectivity plugin failed!"));
+          print_red(_("Needed parameters for openexchange connectivity plugin are missing!"));
           return;
         }
       }else{
-        print_red(_("PHP4 module for Postgresql Database Failed!"));
+        print_red(_("PHP4 module for postgresql database is missing!"));
         return;
       }
     }

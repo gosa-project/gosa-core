@@ -25,8 +25,7 @@
   	 			</div>
    				<div class="contentboxb">
    					<p class="contentboxb" style="background-color:#F8F8F8">
-    					{t}This menu allows you to create, edit and delete selected printers. 
-							Having a great number of printers, you may want to use the range selectors on top of the printers list.{/t}
+    					{t}This menu allows you to create, edit and delete selected printers. Having a great number of printers, you may want to use the range selectors on top of the printers list.{/t}
     				</p>
    				</div>
    				<br>
