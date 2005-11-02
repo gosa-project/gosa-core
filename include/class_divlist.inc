@@ -257,7 +257,15 @@ class divlist {
   		}
     }
  	  
-    return $s_return;
+    $fill= "";
+    for ($i= 1; $i <= $this->cols; $i++){
+      if ($i == $this->cols){
+        $fill.= "<td class='list1' style='height:100%;border-right:0px'>&nbsp;</td>";
+      } else {
+        $fill.= "<td class='list1' style='height:100%'>&nbsp;</td>";
+      }
+    }
+    return $s_return."\n<tr>$fill</tr>";
   }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

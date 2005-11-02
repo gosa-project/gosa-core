@@ -30,7 +30,7 @@ tbody.scrollcontent {
 	overflow:auto;
 	overflow:-moz-scrollbars-vertical;
 	overflow-x:hidden;
-	max-height:480px;
+	height:480px;
 }
 
 body
