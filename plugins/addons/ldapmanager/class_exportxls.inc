@@ -25,6 +25,8 @@ class xlsexport extends plugin
 
   function execute()
   {
+	/* Call parent execute */
+	plugin::execute();
     /* Set government mode */
     $smarty= get_smarty();
 

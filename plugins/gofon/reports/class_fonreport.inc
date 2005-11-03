@@ -52,6 +52,8 @@ class fonreport extends plugin
 
   function execute()
   {
+	/* Call parent execute */
+	plugin::execute();
 	  /* Get template engine */
 	  $smarty= get_smarty();
 	  $fonfilter= get_global("fonfilter");

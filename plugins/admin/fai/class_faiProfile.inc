@@ -76,6 +76,8 @@ class faiProfile extends plugin
 
   function execute()
   {
+	/* Call parent execute */
+	plugin::execute();
     /* Fill templating stuff */
     $smarty= get_smarty();
     $display= "";

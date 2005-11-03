@@ -20,6 +20,8 @@ class ldif extends plugin
 
   function execute()
   {
+	/* Call parent execute */
+	plugin::execute();
     /* Show main page */
     return ($this->ldif->execute());
   }

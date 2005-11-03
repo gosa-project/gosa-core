@@ -81,6 +81,8 @@ class faiPartitionTableEntry extends plugin
 
   function execute()
   {
+	/* Call parent execute */
+	plugin::execute();
     /* Fill templating stuff */
     $smarty     = get_smarty();
     $s_action   = "";

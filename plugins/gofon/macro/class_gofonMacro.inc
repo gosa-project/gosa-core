@@ -79,6 +79,8 @@ class macro extends plugin
   /*!  Execute this plugin */
   function execute()
   {
+	/* Call parent execute */
+	plugin::execute();
     /* Variables */
     $vars 	= "";
     $tmp  	= array();

@@ -52,6 +52,8 @@ class faiTemplateEntry extends plugin
 
   function execute()
   {
+	/* Call parent execute */
+	plugin::execute();
     /* Fill templating stuff */
     $smarty     = get_smarty();
     $smarty->assign("rand", rand(0, 10000));

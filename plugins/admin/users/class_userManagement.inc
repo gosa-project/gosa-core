@@ -59,6 +59,8 @@ class userManagement extends plugin
 
   function execute()
   {
+	/* Call parent execute */
+	plugin::execute();
     $smarty       = get_smarty();             // Smarty instance
     $userfilter   = get_global("userfilter"); // contains Filter Settings
     $s_action     = "";                       // Contains the action to proceed

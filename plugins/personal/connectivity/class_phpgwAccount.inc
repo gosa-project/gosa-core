@@ -26,6 +26,8 @@ class phpgwAccount extends plugin
 
   function execute()
   {
+	/* Call parent execute */
+	plugin::execute();
     /* Show tab dialog headers */
     $display= "";
 

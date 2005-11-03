@@ -49,6 +49,8 @@ class acl extends plugin
 
   function execute()
   {
+	/* Call parent execute */
+	plugin::execute();
 	/* Do we represent a valid group? */
 	if (!$this->is_account && $this->parent == NULL){
 		$display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".

@@ -65,6 +65,8 @@ class department extends plugin
 
   function execute()
   {
+	/* Call parent execute */
+	plugin::execute();
 	/* Reload departments */
 	$this->config->departments= get_departments($this->dn);
 	$this->config->make_idepartments();

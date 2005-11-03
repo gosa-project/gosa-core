@@ -173,6 +173,8 @@ class macroParameter extends plugin
   */
   function execute()
   {
+	/* Call parent execute */
+	plugin::execute();
     /* Variables */
     $vars 	= "";
     $tmp  	= array();

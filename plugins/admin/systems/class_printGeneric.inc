@@ -158,6 +158,8 @@ class printgeneric extends plugin
 
   function execute()
   {
+	/* Call parent execute */
+	plugin::execute();
     $smarty= get_smarty();
     $display="";
     /* Template management.

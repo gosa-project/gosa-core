@@ -27,6 +27,8 @@ class csvimport extends plugin
 
   function execute()
   {
+	/* Call parent execute */
+	plugin::execute();
     /* initiate smarty */
     $smarty= get_smarty();
     $smarty->assign("sorted",0);

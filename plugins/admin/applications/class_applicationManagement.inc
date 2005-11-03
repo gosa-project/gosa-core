@@ -48,6 +48,8 @@ class applicationManagement extends plugin
 
   function execute()
   {
+	/* Call parent execute */
+	plugin::execute();
 	  /* Save data */
 	  $appfilter    = get_global("appfilter");
 	  $smarty       = get_smarty();             // Smarty instance

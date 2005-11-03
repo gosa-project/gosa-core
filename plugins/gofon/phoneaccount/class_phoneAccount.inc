@@ -556,6 +556,8 @@ class phoneAccount extends plugin
 
   function execute()
   {
+	/* Call parent execute */
+	plugin::execute();
     $display = "";
 
     if(empty($this->macro)&&(!empty($this->goFonMacro))){

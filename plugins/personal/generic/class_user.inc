@@ -203,6 +203,8 @@ class user extends plugin
   /* execute generates the html output for this node */
   function execute()
   {
+	/* Call parent execute */
+	plugin::execute();
     $smarty= get_smarty();
 
     /* Fill calendar */

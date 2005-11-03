@@ -160,6 +160,8 @@ class mailgroup extends plugin
 
   function execute()
   {
+	/* Call parent execute */
+	plugin::execute();
     /* Load templating engine */
     $smarty= get_smarty();
     if ($_SESSION['js']==FALSE){
