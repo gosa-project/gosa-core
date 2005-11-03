@@ -4,8 +4,6 @@ Things to fix before 2.4:
 * FAI management
   - Add package configuration dialog 
 
-* Phones in ogroup's are not updated
-
 * Fix pictures in phone conferences
 
 * Fix problem with kolab hosts -> no multiple kolabHost attributes are written
