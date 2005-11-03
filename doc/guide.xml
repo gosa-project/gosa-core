@@ -151,7 +151,7 @@ specified for this class below.
 	<ENTRY NAME="sambaMungedDial" VALUE="" PATH="" FILE="" />
 	<ENTRY NAME="parseXml" VALUE="" PATH="" FILE="" />
 	<ENTRY NAME="divlist" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="LDAP{" VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="LDAP" VALUE="" PATH="" FILE="" />
 	<ENTRY NAME="ppdManager" VALUE="" PATH="" FILE="" />
 	<ENTRY NAME="mailMethodSendmailCyrus" VALUE="" PATH="" FILE="" />
 
