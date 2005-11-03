@@ -6,7 +6,9 @@ Things to fix before 2.4:
 
 * Fix pictures in phone conferences
 
-* Fix problem with kolab hosts -> no multiple kolabHost attributes are written
+* Fix PHP errors in nagios plugin
+
+* Integrate mail queue plugin
 
 
 Target for 2.5:
