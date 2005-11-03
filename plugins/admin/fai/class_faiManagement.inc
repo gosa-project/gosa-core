@@ -86,6 +86,7 @@ class faiManagement extends plugin
 	{
 	/* Call parent execute */
 	plugin::execute();
+
 		$display 	= "";
 		$smarty 	= get_smarty();
 		$s_action	= "";

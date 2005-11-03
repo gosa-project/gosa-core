@@ -60,6 +60,7 @@ class faxreport extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
 	/* Get template engine */
 	$smarty= get_smarty();
 	$faxfilter= get_global("faxreportfilter");

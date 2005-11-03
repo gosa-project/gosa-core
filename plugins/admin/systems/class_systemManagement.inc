@@ -67,6 +67,7 @@ class systems extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
     /* Save data */
     $terminalfilter= get_global("terminalfilter");
     foreach( array("depselect", "user", "regex") as $type){

@@ -54,6 +54,7 @@ class intranetAccount extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
 	$display= "";
 
 	$smarty= get_smarty();

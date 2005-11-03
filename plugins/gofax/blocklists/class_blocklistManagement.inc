@@ -50,6 +50,7 @@ class blocklist extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
     /* Get global smarty instance */
     $smarty= get_smarty();
     $blockfilter   = get_global("blockfilter"); // contains Filter Settings

@@ -49,6 +49,7 @@ class gofonMacro extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
     /* Save data */
     $macrofilter= get_global("macrofilter");
     foreach( array("depselect", "regex") as $type){

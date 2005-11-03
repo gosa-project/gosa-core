@@ -205,6 +205,7 @@ class user extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
     $smarty= get_smarty();
 
     /* Fill calendar */

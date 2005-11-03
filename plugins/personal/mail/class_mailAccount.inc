@@ -176,6 +176,7 @@ class mailAccount extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
     /* Load templating engine */
     $smarty= get_smarty();
     $display= "";

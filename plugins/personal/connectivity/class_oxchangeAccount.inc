@@ -600,6 +600,7 @@ class oxchangeAccount extends plugin
 	/* Call parent execute */
 	plugin::execute();
 
+
     /* Show tab dialog headers */
     $display="";
     if ($this->parent != NULL){

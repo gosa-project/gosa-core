@@ -72,6 +72,7 @@ class addressbook extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
 	$smarty= get_smarty();
 
 	#! Hickert

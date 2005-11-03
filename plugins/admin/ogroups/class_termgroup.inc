@@ -45,6 +45,7 @@ class termgroup extends plugin
 	/* Call parent execute */
 	plugin::execute();
 
+
     /* Watch for events */
     if (isset($_POST['action'])){
       $macaddresses="";

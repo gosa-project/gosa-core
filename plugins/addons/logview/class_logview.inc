@@ -88,6 +88,7 @@ class logview extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
   	/* Ignore if not defined */
   	if (!isset($this->config->data['SERVERS']['LOG'])){
 		return;

@@ -111,6 +111,7 @@ class conference extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
     //$acl= get_permissions ($this->dn, $this->ui->subtreeACL);
     //$this->acl= get_module_permission($acl, "goFonConference", $this->dn);
 

@@ -43,6 +43,7 @@ class connectivity extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
     $display= "";
 
     /* Prepare templating */

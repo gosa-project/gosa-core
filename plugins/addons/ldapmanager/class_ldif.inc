@@ -22,6 +22,7 @@ class ldif extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
     /* Show main page */
     return ($this->ldif->execute());
   }

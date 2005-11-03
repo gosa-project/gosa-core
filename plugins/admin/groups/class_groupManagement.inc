@@ -58,6 +58,7 @@ class groupManagement extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
     /* Save data */
     $groupfilter= get_global("groupfilter");
     $s_action   = "";

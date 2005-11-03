@@ -72,6 +72,7 @@ class ogroupManagement extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
     /* Prepare template */
     $smarty= get_smarty();
 

@@ -58,6 +58,7 @@ class departmentManagement extends plugin
 	{
 	/* Call parent execute */
 	plugin::execute();
+
 		/* Reload departments */
 		$this->config->departments	= get_departments();
 		$smarty						= get_smarty();

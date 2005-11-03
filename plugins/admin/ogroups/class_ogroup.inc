@@ -117,6 +117,7 @@ class ogroup extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
     
     $this->reload();
 

@@ -37,6 +37,7 @@ class applicationParameters extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
 	/* Do we need to flip is_account state? */
 	if (isset($_POST['modify_state'])){
 		$this->is_account= !$this->is_account;

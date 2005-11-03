@@ -76,6 +76,7 @@ class faiProfileEntry extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
     /* Fill templating stuff */
     $smarty     = get_smarty();
     $display = "";

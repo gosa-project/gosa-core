@@ -86,6 +86,7 @@ class gofaxAccount extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
     /* Load smarty stuff */
     $smarty= get_smarty();
 
