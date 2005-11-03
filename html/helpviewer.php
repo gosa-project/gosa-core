@@ -74,7 +74,8 @@ if(isset($_SESSION['helpobject'])){
   $helpobject['helpconf']     = $_SESSION['plist']->gen_headlines();
 }
 
-$lang =  preg_replace("/_.*$/","",get_browser_language());
+$lang =  get_browser_language();
+$lang = $lang[0].$lang[1];
 
 $helpobject['lang']           = $lang;  
 $defaultpage                  = "index.html";                       // alternative file, shown on error, or on first call
