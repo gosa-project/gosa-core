@@ -121,7 +121,7 @@ if (!$remove_lock){
   }
 
   /* Page header*/
-  $display= print_header(get_template_path('images/email.png'), _("User nagios settings"), $info).$display;
+  $display= print_header(get_template_path('images/monitoring.png'), _("Nagios settings"), $info).$display;
 
 }
 
