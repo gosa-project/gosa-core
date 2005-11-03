@@ -174,15 +174,7 @@ class plugin
    */
   function execute()
   {
-    /* Do we represent a valid account? */
-    if (!$this->is_account){
-      echo "<img alt=\"\" src=\"images/stop.png\" align=middle>&nbsp;<b>".
-        _("This 'dn' has no account extensions.")."</b>";
-      return;
-    }
-
-    /* Show dummy message */
-    echo _("This is an empty plugin.");
+    # This one is empty currently. Fabian - please fill in the docu code
   }
 
   /* remove object from parent */
