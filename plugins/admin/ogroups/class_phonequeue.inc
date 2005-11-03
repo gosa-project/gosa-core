@@ -222,7 +222,7 @@ class phonequeue extends plugin
     $SQL = array();
 
     if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
-      return(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). Your settings can't be saved to asterisk database."));
+      return(_("There is currently no asterisk server defined. Your settings can't be saved."));
       return(false);
     }
 
