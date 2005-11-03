@@ -223,7 +223,6 @@ class phonequeue extends plugin
 
     if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
       return(_("There is currently no asterisk server defined. Your settings can't be saved."));
-      return(false);
     }
 
     // Get Configuration for Mysql database Server
