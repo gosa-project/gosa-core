@@ -347,13 +347,6 @@ class environment extends plugin
      * Open management if post is transmitted
      */
 
-    /* Open Management Dialog */
-    if(isset($_POST['KioskManagementDialog'])){
-      $this->dialog = new kioskManagementDialog($this->config,$this->dn,$this->newKioskProfiles); 
-      $this->dialog->parent= $this;
-      $this->is_dialog = true;
-    }
-
     /* Save */
     if(isset($_POST['KioskClose'])){
       $this->newKioskProfiles = array_merge($this->newKioskProfiles,$this->dialog->save());
@@ -364,6 +357,16 @@ class environment extends plugin
     }
     $tmp = new kioskManagementDialog($this->config,$this->dn);
     $list = $tmp->getKioskProfiles($this->newKioskProfiles);
+
+    /* Reassign help class */
+    $_SESSION['current_class_for_help'] = get_class($this);
+ 
+    /* Open Management Dialog */
+    if(isset($_POST['KioskManagementDialog'])){
+      $this->dialog = new kioskManagementDialog($this->config,$this->dn,$this->newKioskProfiles); 
+      $this->dialog->parent= $this;
+      $this->is_dialog = true;
+    }
 
     $smarty->assign("gotoKioskProfiles",$list);
     $smarty->assign("gotoKioskProfileKeys",array_flip($list));
