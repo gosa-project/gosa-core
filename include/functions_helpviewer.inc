@@ -18,10 +18,87 @@
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+/* Simple class to parse the xml help file */
+class parseXml
+{
+  var $parser;
+  var $filename;
+  var $entries;
 
-/******************************************* 
-  Only function definition will follow here
-/*******************************************
+  function parseXml($file)
+  {
+    $this->parser   = xml_parser_create();
+    $this->filename = $file;
+    xml_set_object($this->parser, $this);
+    xml_set_element_handler($this->parser, "tag_open", "tag_close");
+    return($this->entries);
+  }
+  function parse()
+  {
+    $this->entries = array();
+    $fh= fopen($this->filename, "r");
+    $xmldata= fread($fh, 100000);
+    fclose($fh);
+    if(!xml_parse($this->parser, chop($xmldata))){
+        print(sprintf(_("XML error in guide.xml: %s at line %d"),
+            xml_error_string(xml_get_error_code($this->parser)),
+            xml_get_current_line_number($this->parser)));
+        exit;
+    }
+    return($this->entries);
+  }
+  function tag_open($parser,$tag,$attrs)
+  {
+    $this->entries[$attrs['NAME']]=$attrs;
+  }
+  function tag_close(){; }
+
+}
+
+
+/* This function genereates the Index */
+function genIndex($arr)
+{
+  global $helpobject;
+  $str = "";
+  $test = new pluglist($_SESSION['config'],NULL);
+  foreach($_SESSION['helpobject']['helpconf'] as $id => $attrs){
+    $path = $test -> get_path($id);
+    $exists = true;
+    $helpdir = "../doc/guide/user/".$helpobject['lang']."/html/".preg_replace("/^.*\//i","",$path)."/";
+    if(!is_dir($helpdir)){
+      $exists = false;
+    }
+    $print_hl = false;
+    if($current_hl != $attrs['HEADLINE']){
+      $current_hl = $attrs['HEADLINE'];
+      $str .= "<h1>"._($current_hl)."</h1>";
+    }
+    $name = $attrs['NAME'];
+    $file = "index.html";
+    $path = $plug;
+    if($exists){
+      $str .= "<p style='padding-left:20px;'><a href='?plug=".$id."'><b>".$name."</b></a></p>";
+    }else{
+      $str .= "<p style='padding-left:20px;'><b>".$name."</b> ("._("No help available for this plugin.").")</p>";
+    }
+  }
+  return utf8_decode($str);
+}
+
+
+/* Some replacements */
+$backwardlink  = "<a href=\"?pg=%s\"  class=\"maintitlebar\">
+                  <img src='images/back.png' align=\"middle\" alt=\""._("previous")."\" border=\"0\">
+                 </a>";
+
+$forwardlink   = "<a href=\"?pg=%s\"  class=\"maintitlebar\">
+                  <img src='images/forward.png' align=\"middle\" alt=\""._("next")."\" border=\"0\">
+                 </a>";
+
+$pre_mark                     = "<span style=\"background-color: #FFFC35;\">" ;                       // Sign words with this
+$suf_mark                     = "</span>";                          //  and this
+
 
 /* Define which tags musst be delete, header, navigation, banner */
 $replacements=array();
@@ -84,6 +161,10 @@ function readfiles($basedir,$prefix,$suffix,$onlyIndex,$singlepage=false)
 
     /* While theres is an unreaded file in our resource */
     while (($file = readdir($dir)) !== false) {
+      
+      if((is_dir($basedir."/".$file))&&($file != "..")&&($file[0]!=".")){
+        $str[$file]=(readfiles($basedir."/".$file."/",$prefix,$suffix,$onlyIndex,false));
+      }
 
       /* Filter all files which arn't intressting */
       if((strstr($file,$suffix))&&($file!=".")&&($file!="..")&&(strstr($file,$prefix))){
@@ -192,6 +273,8 @@ function search($arr,$word)
   unset($_SESSION['parsed_search_keyword']);
   $_SESSION['parsed_search_keyword']="";
 
+  error_reporting(E_ALL);
+
   /* prepare searchwords */
   $word   = trim($word);
 
@@ -211,44 +294,47 @@ function search($arr,$word)
   }
 
   /* Use words to search the content */
-  foreach($arr as $key=>$val)
+  foreach($arr as $keys=>$vals)
   {
-    /* overallhits counts hits per page */
-    $overallhits=0;
+    foreach($vals as $key=>$val){
+      /* overallhits counts hits per page */
+      $overallhits=0;
 
-    /* Search all words */
-    foreach($useablewords as $word)
-    {
-      /* Skip key global, it contains no file data - it is a summary info*/
-      if($key!="global")
+      /* Search all words */
+      foreach($useablewords as $word)
       {
-        /* Get all hits for the word in $matches*/
-        preg_match_all("/".$word."/i",$arr[$key]['content'], $matches,PREG_OFFSET_CAPTURE);
+        /* Skip key global, it contains no file data - it is a summary info*/
+        if($key!="global")
+        {
 
-        /* Filter in Tag results*/
-        if(count($matches[0])){
-          foreach($matches[0] as $num=>$hit){
-            if(is_in_tag($arr[$key]['content'],$hit[1]))  {
-              unset($matches[0][$num]);    
-            }    
+          /* Get all hits for the word in $matches*/
+          preg_match_all("/".$word."/i",$arr[$keys][$key]['content'], $matches,PREG_OFFSET_CAPTURE);
+
+          /* Filter in Tag results*/
+          if(count($matches[0])){
+            foreach($matches[0] as $num=>$hit){
+              if(is_in_tag($arr[$key]['content'],$hit[1]))  {
+                unset($matches[0][$num]);    
+              }    
+            }
           }
+
+          /* Count matches */
+          $overallhits=$overallhits + count($matches[0]);    
+
+          /* Save collected data */
+          $result[$keys][$key]['hits'][$word]    = count($matches[0]); 
+          $result[$keys][$key]['hits']['overall']= $overallhits;  
+
+          /* Save max hits for page */
+          if($overallhits > $result['global']['maxhit']){
+            $result['global']['maxhit']=$overallhits;  
+          }
+
+          /* Add results for word to return value*/
+          $result[$keys][$key]['match'][$word]=array();
+          $result[$keys][$key]['match'][$word]=$matches[0];
         }
-
-        /* Count matches */
-        $overallhits=$overallhits + count($matches[0]);    
-
-        /* Save collected data */
-        $result[$key]['hits'][$word]    = count($matches[0]); 
-        $result[$key]['hits']['overall']= $overallhits;  
-
-        /* Save max hits for page */
-        if($overallhits > $result['global']['maxhit']){
-          $result['global']['maxhit']=$overallhits;  
-        }
-
-        /* Add results for word to return value*/
-        $result[$key]['match'][$word]=array();
-        $result[$key]['match'][$word]=$matches[0];
       }
     }
   }
@@ -268,11 +354,11 @@ function searchlist($arr,$res,$maxresults)
   unset($res['global']);
 
   /* Detect 10 best Sites */
-  foreach($res as $key=>$val){
-
+  foreach($res as $key=>$resa)
+  foreach($resa as $keya=>$val){
     /* Skip results with no hits */
     if($val['hits']['overall']>0){
-      $topten[$key] = $val['hits']['overall']; 
+      $topten[$key."/".$keya] = $val['hits']['overall'];
     }
   }
 
@@ -281,10 +367,16 @@ function searchlist($arr,$res,$maxresults)
   $topten = array_reverse($topten);
   $topten = (array_slice($topten,0,$maxresults));
 
+
   /* We have a result, an array with all content, an array with hits and position and we have the 10 best hits */
   /* Foreach */  
-  foreach($topten as $name => $hits)  {
-    $ret.= createResultEntry($arr[$name],$res[$name],$name,$global['maxhit']);    
+  foreach($topten as $key => $hits)  {
+
+    $ks = split("\/",$key);
+    $k1 = $ks[0];
+    $k2 = $ks[1];
+    
+    $ret.= createResultEntry($arr[$k1][$k2],$res[$k1][$k2],$key,$global['maxhit']);    
   }
 
   /* appending footer message for resultlist */
@@ -315,7 +407,7 @@ function markup_page($arr,$res)
   }
 
   ksort($repl);
-
+  
   foreach($repl as $position=>$word)  {
     $pos1 = strlen($arr);
     $arr= markword($arr,($position+$posadd),$word,$pre_mark,$suf_mark);
@@ -357,7 +449,7 @@ function createResultEntry($entry,$res,$name,$max)
           <table summary=\"\"  width=\"98%\" align=\"center\">
             <tr>
               <td height=15>
-                <b>".$entry['headline']."</b> -".htmlentities( substr(strip_tags($entry['content']),0,120))."...
+                <b>".$entry['headline']."</b> -".htmlentities(substr(strip_tags($entry['content']),0,120))."...
               </td>
               <td width=50 valign=\"top\">".progressbar($percentage,50,8)."</td>
              </tr>
