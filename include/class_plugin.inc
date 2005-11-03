@@ -175,6 +175,7 @@ class plugin
   function execute()
   {
     # This one is empty currently. Fabian - please fill in the docu code
+    $_SESSION['current_class_for_help'] = get_class($this);
   }
 
   /* remove object from parent */
