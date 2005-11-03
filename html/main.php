@@ -243,6 +243,7 @@ $smarty->assign ("go_help", get_template_path('images/help.png'));
 if($reload_navigation){
   $plist->menu="";;
 }
+$plist->gen_headlines();
 $plist->gen_menu();
 $smarty->assign ("menu", $plist->menu);
 $smarty->assign ("plug", "$plug");
