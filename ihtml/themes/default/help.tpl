@@ -1,4 +1,4 @@
-<body style='background-color:white;background-image:none'>
+<body style='background-color:#F1F1F1;background-image:none'>
 {$php_errors}
 
 <form action='helpviewer.php' name='mainform' method='post' enctype='multipart/form-data'>
