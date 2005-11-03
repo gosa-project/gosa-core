@@ -60,11 +60,8 @@ if (isset ($config->data['MAIN']['COMPILE'])){
   $smarty->compile_dir= '/var/spool/gosa/';
 }
 
-
-
 /* HELP management starts here ...
  */
-
 
 /* Generate helpobject */
 if(isset($_SESSION['helpobject'])){
@@ -79,6 +76,7 @@ if(isset($_SESSION['helpobject'])){
 
 $lang =  preg_replace("/_.*$/","",get_browser_language());
 
+$helpobject['lang']           = $lang;  
 $defaultpage                  = "index.html";                       // alternative file, shown on error, or on first call
 $prefix                       = "node";                             // Prefix of the generated help files 
 $suffix                       = ".html";                            // Suffix of the generated helpfiles
