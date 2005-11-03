@@ -302,6 +302,7 @@ class environment extends plugin
       }
     }
  
+    $smarty->assign("useProfileACL","");
     if($this->acl != "#none#"){
       $smarty->assign("useProfileACL","");
     }else{
