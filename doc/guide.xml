@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+This xml file specifies which class is documented in which help file.
+
+If isset ( $_SESSION['current_class_for_help'] ) then open the helpfile which is  
+specified for this class below.
+-->
+	<!-- name="class name" value="displayed text" path="path to helpfiles" 
+		 Leave blank to display massage "There is no helpfile specified for this class."	
+	-->
+	<!-- Generic -->
+	<ENTRY name="generic"  			value="Generic" 		path="" file="" >
+	<!-- Administration -->
+	<ENTRY name="userManagement"	value="Users" 			path="../doc/guide/user/__LANG__/html/users" file="index.html" >
+	<ENTRY name="user"          	value="User"            path="../doc/guide/user/__LANG__/html/users" file="node2.html" >
+	<ENTRY name="posixAccount"     	value="Unix"            path="../doc/guide/user/__LANG__/html/users" file="node5.html" >
+	<ENTRY name="environment"   	value="Environment"     path="../doc/guide/user/__LANG__/html/users" file="node10.html" >
+	<ENTRY name="mailAccount"   	value="Mail"            path="../doc/guide/user/__LANG__/html/users" file="node17.html" >
+	<ENTRY name="sambaAccount"  	value="Samba"           path="../doc/guide/user/__LANG__/html/users" file="node22.html" >
+	<ENTRY name="connectivity"  	value="Connectivity"    path="../doc/guide/user/__LANG__/html/users" file="node26.html" >
+	<ENTRY name="gofaxAccount"  	value="Fax"             path="../doc/guide/user/__LANG__/html/users" file="node32.html" >
+	<ENTRY name="phoneAccount"  	value="Phone account"   path="../doc/guide/user/__LANG__/html/users" file="node37.html" >
+	
+	<!-- Addon -->
+	<ENTRY name="fonreport"  		value="Phone report"    path="" >
