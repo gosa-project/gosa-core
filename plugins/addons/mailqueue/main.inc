@@ -29,6 +29,7 @@ if (!$remove_lock){
 	$mailqueue= $_SESSION['mailqueue'];
 
 	/* Execute formular */
+	$mailqueue->save_object();
 	$display.= $mailqueue->execute ();
 	$display.= "<input type=\"hidden\" name=\"ignore\">\n";
 

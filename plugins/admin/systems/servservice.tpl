@@ -99,6 +99,14 @@
      <input type=checkbox name="goCupsServer" value="1" {$goCupsServer} {$goCupsServerACL}>
 
      <b>{t}Print Service{/t}</b>
+   	
+	<p class="seperator">&nbsp;</p>
+    <br>
+	
+
+     <input type=checkbox name="goMailServer" value="1" {$goMailServer} {$goMailServerACL}>
+
+     <b>{t}Mail server{/t}</b>
 	</td>	
  </tr>
 </table>

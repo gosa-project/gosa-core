@@ -18,19 +18,21 @@ class servservice extends plugin
   var $goTerminalServer = "";
   var $goSyslogServer   = "";
   var $goCupsServer     = "";
+  var $goMailServer     = "";
   var $o_subWindow      = NULL;
 
   /* attribute list for save action */
   var $ignore_account= TRUE;
   var $attributes       = array("goLdapBase","goXdmcpIsEnabled","goFontPath");
   var $possible_objectclasses= array( "goShareServer", "goNtpServer", "goServer", "goLdapServer",
-                                      "goTerminalServer", "goSyslogServer", "goCupsServer");
+                                      "goTerminalServer", "goSyslogServer", "goCupsServer","goMailServer");
   var $objectclasses    = array( "top","goServer"); 
   var $additionaloc     = array( "goShareServer"     => array("goExportEntry"),
                                  "goNtpServer"     => array("goTimeSource"),
                                  "goLdapServer"    => array("goLdapBase"),
                                  "goTerminalServer"=> array("goXdmcpIsEnabled", "goFontPath"),
                                  "goSyslogServer"  => array(),
+                                 "goMailServer"    => array(),
                                  "goCupsServer"    => array());
 
   function servservice ($config, $dn= NULL)
