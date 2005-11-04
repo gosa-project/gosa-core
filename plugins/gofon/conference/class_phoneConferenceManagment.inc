@@ -315,7 +315,7 @@ class phoneConferenceManagment extends plugin
           array("string" =>_("Name - Number")),
           array("string" => _("Owner")),
           array("string" => _("PIN")),
-          array("string" =>_("Actions"), "attach" => "style='text-align:  right;border:none'")));
+          array("string" =>_("Actions"), "attach" => "style='text-align:left;border:none'")));
 
     /* Insert departments in divlist*/
     foreach($this->departments as $key=> $val){
@@ -332,11 +332,11 @@ class phoneConferenceManagment extends plugin
       }
 
       /* Prepare and insert fields*/
-      $a_field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>","attach"=>"style='width:22px;'");
+      $a_field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>","attach"=>"style='text-align:center;width:20px;'");
       $a_field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
       $a_field3 = array("string" => "&nbsp;");
       $a_field4 = array("string" => "&nbsp;");
-      $a_field5 = array("string" => "&nbsp;",  "attach" => "style='text-align:  right;border:none'");
+      $a_field5 = array("string" => "&nbsp;",  "attach" => "style='text-align:right;border:none;width:48px;'");
 
       /* Add entries */
       $divlist->AddEntry(array($a_field1,$a_field2,$a_field3,$a_field4,$a_field5));
@@ -368,7 +368,7 @@ class phoneConferenceManagment extends plugin
       $data = $ldap->fetch($ldap->cat($conference['goFonConferenceOwner'][0]));
       $cn = $data['cn'][0];
  
-      $a_field1 = array("string"=>sprintf($userimg,_("Conference")));
+      $a_field1 = array("string"=>sprintf($userimg,_("Conference")),"attach"=>"style='text-align:center;width:20px;'");
 
       $acl= get_permissions ($conference['dn'], $this->ui->subtreeACL);
       $this->acl =  get_module_permission($acl, "goFonConference", $conference['dn']);
@@ -386,7 +386,7 @@ class phoneConferenceManagment extends plugin
       }elseif(chkacl($this->acl,"goFonConferenceOwner")==""){
         $a_field5 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions2), "attach" => "style='text-align:  right;border:none'");
       }else{
-        $a_field5 = array("string"=>"&nbsp;", "attach" => "style='text-align:  right;border:none'");
+        $a_field5 = array("string"=>"&nbsp;", "attach" => "style='text-align:right;border:none;width:48px;'");
       }
 
       $divlist->AddEntry(array($a_field1,$a_field2,$a_field3,$a_field4,$a_field5));
