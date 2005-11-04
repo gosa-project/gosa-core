@@ -388,10 +388,10 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
     // List Setup
     $divlist = new divlist("ogroubstab");
     $divlist->SetHeader(array(
-          array("string" => "&nbsp;","attach"=>"style='width:20px;'"),
+          array("string" => "&nbsp;"),
           array("string" => _("Name of object groups")." / "._("Departments")),
-          array("string" => _("Properties") ,"attach"=>"style='width:50px;'"),
-          array("string" => _("Actions")    ,"attach"=>"style='width:50px;border:none;'")
+          array("string" => _("Properties")),
+          array("string" => _("Actions"))
           ));
 
 
@@ -414,10 +414,10 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
 
 
 
-      $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='"._("Department")."'>");
+      $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='"._("Department")."'>","attach"=>"style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
-      $field3 = array("string" => "&nbsp;");
-      $field4 = array("string" => "&nbsp;","attach"=>"style='text-align:right;border:none'");
+      $field3 = array("string" => "&nbsp;","attach"=>"style='width:48;'");
+      $field4 = array("string" => "&nbsp;","attach"=>"style='width:48px;text-align:left;border:none'");
 
       $divlist->AddEntry(array($field1,$field2,$field3,$field4));
     }
