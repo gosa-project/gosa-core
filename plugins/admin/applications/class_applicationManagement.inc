@@ -376,9 +376,9 @@ class applicationManagement extends plugin
             }
           }
 
-          $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>");
+          $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>","attach"=>"style='width:20px;text-align:center;'");
           $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
-          $field3 = array("string" => "&nbsp;","attach"=>"style='text-align:right;border:none'");
+          $field3 = array("string" => "&nbsp;","attach"=>"style='width:48px;text-align:left;border:none'");
 
           $divlist->AddEntry(array($field1,$field2,$field3));
         }
@@ -391,9 +391,9 @@ class applicationManagement extends plugin
           }else{
             $desc = " - [ ".$val['description'][0]." ]";
           }
-          $field1 = array("string" => sprintf($applimg,$val['dn']),"attach"=>"style='width:20px;align:middle;'");
+          $field1 = array("string" => sprintf($applimg,$val['dn']),"attach"=>"style='width:20px;align:center;text-align:center;'");
           $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)),"attach"=>$title);
-          $field3 = array("string" => preg_replace("/%KEY%/", $key, $actions),"attach"=>"style='text-align:right;border:none'");
+          $field3 = array("string" => preg_replace("/%KEY%/", $key, $actions),"attach"=>"style='width:48px;text-align:right;border:none'");
 
           $divlist->AddEntry(array($field1,$field2,$field3));
         }

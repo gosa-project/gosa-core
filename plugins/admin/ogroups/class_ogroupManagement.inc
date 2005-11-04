@@ -416,7 +416,7 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
 
       $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='"._("Department")."'>","attach"=>"style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
-      $field3 = array("string" => "&nbsp;","attach"=>"style='width:48;'");
+      $field3 = array("string" => "&nbsp;","attach"=>"style='width:136px;'");
       $field4 = array("string" => "&nbsp;","attach"=>"style='width:48px;text-align:left;border:none'");
 
       $divlist->AddEntry(array($field1,$field2,$field3,$field4));
@@ -438,7 +438,7 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
       }else{
         $desc = " - [ ".$val['description'][0]." ]";
       }
-      $field1 = array("string" => "<img src='images/list_ogroup.png' alt='"._("Object group")."' ".$title.">");
+      $field1 = array("string" => "<img src='images/list_ogroup.png' alt='"._("Object group")."' ".$title.">","attach"=>"style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)),"attach"=>$title);
       $field3 = array("string" => $this->convert_list($val)."&nbsp;".$mail);
       $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions),"attach"=>"style='text-align:right;border:none'");

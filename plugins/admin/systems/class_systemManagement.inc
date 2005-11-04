@@ -610,9 +610,9 @@ class systems extends plugin
         }
       }
 
-      $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>");
+      $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>","attach"=>"style='width:20px;text-align:center;'");
       $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
-      $field3 = array("string" => "&nbsp;", "attach" => "style='border:none'");
+      $field3 = array("string" => "&nbsp;", "attach" => "style='border:none;width:48px;text-align:right;'");
       $divlist->AddEntry(array($field1,$field2,$field3));
     }
 
@@ -669,7 +669,7 @@ class systems extends plugin
 
       $img=$this->convert_list($val);
 
-      $field1 = array("string" => sprintf($img['img'],$val['dn']),"attach"=>"style='width:20px;align:middle;'");
+      $field1 = array("string" => sprintf($img['img'],$val['dn']),"attach"=>"style='width:20px;text-align:center;'");
       $field2 = array("string" => sprintf($editlink,$key,$display),"attach"=>"title='".$val['dn']."'");
       $field3 = array("string" => preg_replace("/%KEY%/", "$key", $action2.$action),"attach" => "style='border:none; text-align:right;width:48px'");
       $divlist->AddEntry( array($field1,$field2,$field3));

@@ -409,10 +409,10 @@ class groupManagement extends plugin
       }
 
 
-      $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>");
+      $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>","attach"=>"style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
       $field3 = array("string" => "&nbsp;");
-      $field4 = array("string" => "&nbsp;","attach"=>"style='text-align:right;border:none'");
+      $field4 = array("string" => "&nbsp;","attach"=>"style='text-align:right;border:none;width:48px;'");
 
       $divlist->AddEntry(array($field1,$field2,$field3,$field4));
     }
@@ -437,10 +437,10 @@ class groupManagement extends plugin
       }else{
         $desc = " - [ ".$val['description'][0]." ]";
       }      
-      $field1 = array("string" => sprintf($userimg,$val['dn']),"attach"=>"style='width:20px;align:middle;'");
+      $field1 = array("string" => sprintf($userimg,$val['dn']),"attach"=>"style='width:20px;text-align:center;'");
       $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)),"attach"=>$title);
-      $field3 = array("string" => $posix."&nbsp;".$enviro."&nbsp;".$mail."&nbsp;".$samba."&nbsp;".$appl."&nbsp;".$phone);  
-      $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions),"attach"=>"style='text-align:right;border:none;width:32px;'");
+      $field3 = array("string" => $posix."&nbsp;".$enviro."&nbsp;".$mail."&nbsp;".$samba."&nbsp;".$appl."&nbsp;".$phone,"attach"=>"style='text-align:left;width:136px;'");  
+      $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions),"attach"=>"style='text-align:right;border:none;width:48px;'");
       
       $divlist->AddEntry(array($field1,$field2,$field3,$field4));    
     }
