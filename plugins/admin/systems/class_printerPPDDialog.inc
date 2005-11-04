@@ -50,7 +50,7 @@ class printerPPDDialog extends plugin
     */
     if(($ppdfile!= NULL)&&(strlen($ppdfile)>0)){
       if(!file_exists($ppdfile)){
-        print_red(sprintf(_("Can't open '%s', ppd settings reseted."),$ppdfile));
+        print_red(sprintf(_("Can't open '%s', ppd settings resetted."),$ppdfile));
       }else{
         $tmp2= split("\n", $this->ppdManager->loadDescription($ppdfile));
         $tmp3['name']   =preg_replace("/^ -/","",$tmp2[1]);
@@ -100,7 +100,7 @@ class printerPPDDialog extends plugin
           $model  = trim(preg_replace("/".$vendor."/","",$name));
           if(!is_dir('/var/spool/ppd/'.$vendor)){
             if(!(@mkdir('/var/spool/ppd/'.$vendor))){
-              print_red(sprintf(_("Cab't create folder '%s' for the uploaded ppd file."),$vendor));
+              print_red(sprintf(_("Can't create folder '%s' for the uploaded ppd file."),$vendor));
             }
           }
 
@@ -120,7 +120,7 @@ class printerPPDDialog extends plugin
               $filename = '/var/spool/ppd/'.$vendor."/".$vendor."-".preg_replace("/^[^ ]/","",str_replace("-","",$model)).".ppd";
               $fp = @fopen($filename,"w+");
               if(!$fp){
-                print_red(sprintf(_("Can't save file '%s'"),$filename));
+                print_red(sprintf(_("Can't save file '%s'."),$filename));
               }else{
                 $str = file_get_contents($file['tmp_name']);
                 fputs($fp,$str);

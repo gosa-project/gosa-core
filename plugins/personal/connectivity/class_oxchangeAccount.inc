@@ -700,7 +700,7 @@ class oxchangeAccount extends plugin
           return;
         }
       }else{
-        print_red(_("Needed parameters to openexchange connectivity plugin are missing!"));
+        print_red(_("Needed parameters for openexchange connectivity plugin are missing!"));
         return;
       }
     }else{

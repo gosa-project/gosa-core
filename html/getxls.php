@@ -62,7 +62,7 @@ function dump_ldap ($mode= 0)
     switch ($d){
       case "ou=people," : 
         $user= 				   $ldap->gen_xls($dn,"(objectClass=*)",array("uid","dateOfBirth","gender","givenName","preferredLanguage"));
-      $intitul=array(_("Birthday").":", _("Sexe").":", _("Name")."/"._("Firstname").":",_("Language").":");
+      $intitul=array(_("Birthday").":", _("Sex").":", _("Surname")."/"._("Given Name").":",_("Language").":");
 
       //name of the xls file
       $name_section=_("Users");
@@ -171,7 +171,7 @@ function dump_ldap ($mode= 0)
       case "dc=addressbook,": //data about addressbook
         $address= $ldap->gen_xls($dn,"(objectClass=*)",array("cn","displayName","facsimileTelephoneNumber","givenName","homePhone","homePostalAddress","initials","l","mail","mobile","o","ou","pager","telephoneNumber","postalAddress","postalCode","sn","st","title"));
 
-      $intitul=array(_("Common name").":",_("Display Name").":",_("Fax").":",_("Name")."/"._("Firstname").":",_("Home phone").":",_("Home postal address").":",_("Initials").":",_("Location").":",_("Mail address").":",_("Mobile phone").":",_("City").":",_("Postal address").":",_("Pager").":",_("Phone number").":",_("Adress").":",_("Postal code").":",_("Surename").":",_("State").":",_("Function").":");
+      $intitul=array(_("Common name").":",_("Display Name").":",_("Fax").":",_("Name")."/"._("Given Name").":",_("Home phone").":",_("Home postal address").":",_("Initials").":",_("Location").":",_("Mail address").":",_("Mobile phone").":",_("City").":",_("Postal address").":",_("Pager").":",_("Phone number").":",_("Adress").":",_("Postal code").":",_("Surname").":",_("State").":",_("Function").":");
       
       //name of the xls file
       $name_section=_("Adressbook");
@@ -221,7 +221,7 @@ function dump_ldap ($mode= 0)
 
     //data about users
     $user= $ldap->gen_xls("ou=people,".$dn,"(objectClass=*)",array("uid","dateOfBirth","gender","givenName","preferredLanguage"));
-    $user_intitul=array(_("BirthDate").":",_("Sex").":",_("Name")."/"._("Firstname").":",_("Language").":");
+    $user_intitul=array(_("BirthDate").":",_("Sex").":",_("Surname")."/"._("Given Name").":",_("Language").":");
     //data about groups
     $groups= $ldap->gen_xls("ou=groups,".$dn,"(objectClass=*)",array("cn","memberUid"),TRUE,1);
     $groups_intitul=array(_("Members").":");
@@ -233,7 +233,7 @@ function dump_ldap ($mode= 0)
     $servers_intitul=array(_("Name").":");
     //data about addressbook
     $address= $ldap->gen_xls("dc=addressbook,".$dn,"(objectClass=*)",array("cn","displayName","facsimileTelephoneNumber","givenName","homePhone","homePostalAddress","initials","l","mail","mobile","o","ou","pager","telephoneNumber","postalAddress","postalCode","sn","st","title"));
-    $address_intitul=array("cn",_("DisplayName").":",_("Fax").":",_("Name")."/"._("Firstname").":",_("Phone Number").":",_("Postal Adress").":",_("Initials").":",_("City").":",_("Email address").":",_("mobile").":",_("Organization").":",_("Organizational Unit").":",_("Pager").":",_("Phone Number").":",_("Postal Address").":",_("Postal Code").":",_("Sn").":",_("st").":",_("Title").":");
+    $address_intitul=array("cn",_("DisplayName").":",_("Fax").":",_("Surname")."/"._("Given Name").":",_("Phone Number").":",_("Postal Adress").":",_("Initials").":",_("City").":",_("Email address").":",_("mobile").":",_("Organization").":",_("Organizational Unit").":",_("Pager").":",_("Phone Number").":",_("Postal Address").":",_("Postal Code").":",_("Sn").":",_("st").":",_("Title").":");
 
     //name of the xls file
     $name_section=_("Full");

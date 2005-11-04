@@ -1,5 +1,5 @@
 <p>
- {t}To change the terminal root password use the fields below. The changes take effect during next reboot. Please memorize the new password, because the you would't be able to log in.{/t}
+ {t}To change the terminal root password use the fields below. The changes take effect during the next reboot. Please memorize the new password, because you wouldn't be able to log in.{/t}
 </p>
 <p>
  <b>{t}Leave fields blank for password inheritance from default entries.{/t}</b>
