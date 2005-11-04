@@ -492,10 +492,10 @@ class faiManagement extends plugin
 
 
 			$title = $this->config->departments[$key];
-			$field0 = array("string" => "<img src='images/".$non_empty."folder.png' title='"._("department")."' alt='department'>",                     "attach"=>"style='width:20px;'");
+			$field0 = array("string" => "<img src='images/".$non_empty."folder.png' title='"._("department")."' alt='department'>",                     "attach"=>"style='text-align:center;width:20px;'");
 			$field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "title='".$title."'");
 			$field2 = array("string" => "");
-			$field3 = array("string" => "","attach"=>"style='text-align:right;border-right:none;'");
+			$field3 = array("string" => "","attach"=>"style='width:48px;text-align:right;border-right:none;'");
 
 			$divlist->AddEntry( array($field0,$field1,$field2,$field3));
 
@@ -571,10 +571,10 @@ class faiManagement extends plugin
 						$desc= "";
 					}
 
-					$field1 = array("string" => $img , "attach" => "style='height:26px;width=20px;'");
+					$field1 = array("string" => $img , "attach" => "style='text-align:center;width=20px;'");
 					$field2 = array("string" => preg_replace(array("/%KEY%/","/%NAME%/"),array($key,$value['cn'].$desc),$editlink) , "attach" => "");
 					$field3 = array("string" => $info, "attach" => "");
-					$field4 = array("string" => preg_replace("/%KEY%/",$key,$action) , "attach"=>"style='text-align:right;border:none'");
+					$field4 = array("string" => preg_replace("/%KEY%/",$key,$action) , "attach"=>"style='width:48px;text-align:right;border:none'");
 					$divlist->AddEntry(array($field1,$field2,$field3,$field4));
 
 			}

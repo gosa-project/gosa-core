@@ -54,7 +54,7 @@ class divlist {
       // TODO: Find a more convenient way to use the same functionality in both
       // MSIE and non-MSIE browsers. ATM we need to manually set entriesPerPage to
       // a non-zero value, because MSIE won't scroll the tbody properly.
-      if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE') == 0){
+      if((strpos($_SERVER['HTTP_USER_AGENT'],'MSIE') == 0) && (strpos($_SERVER['HTTP_USER_AGENT'],'KHTML') == 0)){
         $s_return.= "<thead>".$this->_generateHeader()."</thead>";
         // Define an alternate style for IE (not used ATM)
         // $s_return.= "<!--[if IE]><style type='text/css'>tbody.scrollcontent {overflow-y:scroll;max-height:480px;}</style><![endif]-->";
