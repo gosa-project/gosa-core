@@ -296,10 +296,10 @@ class departmentManagement extends plugin
 
 			$linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
 
-			$divlist->SetHeader(array(array("string" => "&nbsp;"),
-									  array("string"=>_("Department name")),
-                                      array("string" =>_("Actions"), "attach" => "style='text-align:  right;border:none'")));
-
+			$divlist->SetHeader(array(
+						array("string" => "&nbsp;"),
+						array("string"=>_("Department name")),
+						array("string" =>_("Actions"), "attach" => "style='border:none;'")));
 
 			foreach($this->departments as $key => $val) {
 				if(!isset($this->config->departments[trim($key)])){
@@ -313,12 +313,11 @@ class departmentManagement extends plugin
 						$non_empty="full";
 					}	
 				}
-			    
 	
 				$title = $this->config->departments[$key];
 				$field0 = array("string" => "<img src='images/".$non_empty."folder.png' title='"._("department")."' alt='department'>","attach"=>"style='width:20px;'");
-				$field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style='width:90%' title='".$title."'");
-				$field2 = array("string" => preg_replace("/%KEY%/", base64_encode($key), $actions),"attach"=>"style='text-align:left;border:none'");
+				$field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style='width:516px' title='".$title."'");
+				$field2 = array("string" => preg_replace("/%KEY%/", base64_encode($key), $actions),"attach"=>"style='text-align:left;border:none;width:48px;'");
 
 				$divlist->AddEntry( array($field0,$field1,$field2));
 
