@@ -29,6 +29,7 @@
 		<td><a href="{$plug}&sort=Sender"		>{t}Sender{/t}		{if $OrderBy == "Sender"}	{$SortType}{/if}</a></td>
 		<td><a href="{$plug}&sort=Recipient"	>{t}Recipient{/t}	{if $OrderBy == "Recipient"}{$SortType}{/if}</a></td>
 		<td><a href="{$plug}&sort=Error"		>{t}Error{/t}		{if $OrderBy == "Error"}	{$SortType}{/if}</a></td>
+		<td>&nbsp;</td>
 	</tr>
 
 {counter start=0 assign=i start=1}
@@ -45,6 +46,7 @@
 		<td>{$entries[$key].Sender}</td>
 		<td>{$entries[$key].Recipient}</td>
 		<td titel="{$entries[$key].Error}">{$entries[$key].Error}</td>
+		<td><a href="{$plug}&del={$entries[$key].MailID}"><img src="images/edittrash.png" border=0 alt="deleted"></a></td>
 	</tr>
 	{counter}
 {/foreach}
