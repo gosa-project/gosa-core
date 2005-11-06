@@ -194,7 +194,7 @@ msgstr "Bases de datos"
 msgid "Services"
 msgstr "Servicios"
 
-#: contrib/gosa.conf:176 plugins/addons/ldapmanager/contentexport.tpl:16
+#: contrib/gosa.conf:177 plugins/addons/ldapmanager/contentexport.tpl:16
 #: plugins/addons/ldapmanager/contentexport.tpl:29
 #: plugins/addons/ldapmanager/contentexport.tpl:44
 #: plugins/addons/ldapmanager/contentexportxls.tpl:19
@@ -203,12 +203,12 @@ msgstr "Servicios"
 msgid "Export"
 msgstr "Exportar"
 
-#: contrib/gosa.conf:177
+#: contrib/gosa.conf:178
 #, fuzzy
 msgid "Excel Export"
 msgstr "Exportar"
 
-#: contrib/gosa.conf:178 plugins/personal/mail/generic.tpl:112
+#: contrib/gosa.conf:179 plugins/personal/mail/generic.tpl:112
 #: plugins/personal/environment/logonManagement.tpl:65
 #: plugins/addons/ldapmanager/contentimport.tpl:49
 #: plugins/addons/ldapmanager/contentcsv.tpl:117
@@ -217,16 +217,16 @@ msgstr "Exportar"
 msgid "Import"
 msgstr "Importar"
 
-#: contrib/gosa.conf:179
+#: contrib/gosa.conf:180
 msgid "CSV Import"
 msgstr "Importación desde CVS"
 
-#: contrib/gosa.conf:183
+#: contrib/gosa.conf:184
 #, fuzzy
 msgid "Partitions"
 msgstr "Destino"
 
-#: contrib/gosa.conf:187 plugins/personal/environment/logonManagement.tpl:55
+#: contrib/gosa.conf:188 plugins/personal/environment/logonManagement.tpl:55
 #: plugins/admin/applications/generic.tpl:81
 #: plugins/admin/fai/faiScriptEntry.tpl:50
 #: plugins/admin/fai/faiHookEntry.tpl:50
@@ -234,62 +234,62 @@ msgstr "Destino"
 msgid "Script"
 msgstr "Ruta del Script"
 
-#: contrib/gosa.conf:191 plugins/admin/fai/class_faiManagement.inc:545
+#: contrib/gosa.conf:192 plugins/admin/fai/class_faiManagement.inc:545
 #: plugins/admin/fai/class_faiManagement.inc:546
 msgid "Hooks"
 msgstr ""
 
-#: contrib/gosa.conf:195 plugins/admin/fai/class_faiManagement.inc:538
+#: contrib/gosa.conf:196 plugins/admin/fai/class_faiManagement.inc:538
 #: plugins/admin/fai/class_faiManagement.inc:539
 #, fuzzy
 msgid "Variables"
 msgstr "Variable"
 
-#: contrib/gosa.conf:199 plugins/admin/fai/class_faiManagement.inc:559
+#: contrib/gosa.conf:200 plugins/admin/fai/class_faiManagement.inc:559
 #: plugins/admin/fai/class_faiManagement.inc:560
 #, fuzzy
 msgid "Templates"
 msgstr "Plantilla"
 
-#: contrib/gosa.conf:203 plugins/personal/environment/environment.tpl:7
+#: contrib/gosa.conf:204 plugins/personal/environment/environment.tpl:7
 #, fuzzy
 msgid "Profiles"
 msgstr "Ruta del Perfil"
 
-#: contrib/gosa.conf:207
+#: contrib/gosa.conf:208
 #, fuzzy
 msgid "Packages"
 msgstr "Mostrar teléfonos"
 
-#: contrib/gosa.conf:223
+#: contrib/gosa.conf:224
 msgid "{LOCATIONNAME}"
 msgstr "{LOCATIONNAME}"
 
-#: contrib/gosa.conf:240 plugins/admin/ogroups/class_phonequeue.inc:164
+#: contrib/gosa.conf:241 plugins/admin/ogroups/class_phonequeue.inc:164
 msgid "German"
 msgstr "Alemán"
 
-#: contrib/gosa.conf:241
+#: contrib/gosa.conf:242
 msgid "Russian"
 msgstr "Ruso"
 
-#: contrib/gosa.conf:242
+#: contrib/gosa.conf:243
 msgid "Spanish"
 msgstr "Español"
 
-#: contrib/gosa.conf:243
+#: contrib/gosa.conf:244
 msgid "French"
 msgstr "Francés"
 
-#: contrib/gosa.conf:244
+#: contrib/gosa.conf:245
 msgid "Dutch"
 msgstr "Holandés"
 
-#: contrib/gosa.conf:245
+#: contrib/gosa.conf:246
 msgid "English"
 msgstr "Inglés"
 
-#: contrib/gosa.conf:246
+#: contrib/gosa.conf:247
 msgid "Italian"
 msgstr "Italiano"
 
@@ -306,8 +306,9 @@ msgstr "Italiano"
 #: plugins/personal/connectivity/class_connectivity.inc:16
 #: plugins/personal/connectivity/class_proxyAccount.inc:6
 #: plugins/personal/connectivity/class_intranetAccount.inc:16
-#: plugins/personal/connectivity/class_phpscheduleitAccount.inc:7
-#: plugins/personal/connectivity/class_pptpAccount.inc:7
+#: plugins/personal/connectivity/class_phpscheduleitAccount.inc:28
+#: plugins/personal/connectivity/class_pptpAccount.inc:27
+#: plugins/personal/connectivity/class_glpiAccount.inc:26
 #: plugins/personal/environment/class_environment.inc:13
 #: plugins/personal/nagios/class_nagiosAccount.inc:19
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:6
@@ -2506,14 +2507,14 @@ msgstr "El valor de 'Tamaño de Cola' no es valido."
 msgid "Intranet"
 msgstr ""
 
-#: plugins/personal/connectivity/class_phpscheduleitAccount.inc:6
-msgid "PHPscheduleit Account"
-msgstr ""
-
-#: plugins/personal/connectivity/class_pptpAccount.inc:6
+#: plugins/personal/connectivity/class_phpscheduleitAccount.inc:27
 #, fuzzy
-msgid "PPTP Server"
-msgstr "Servidor NTP"
+msgid "PHPscheduleit"
+msgstr "Cuenta PHPGroupware"
+
+#: plugins/personal/connectivity/class_pptpAccount.inc:26
+msgid "PPTP"
+msgstr ""
 
 #: plugins/personal/connectivity/phpscheduleit.tpl:1
 #, fuzzy
@@ -2522,7 +2523,16 @@ msgstr "Cuenta PHPGroupware"
 
 #: plugins/personal/connectivity/pptp.tpl:1
 #, fuzzy
-msgid "PPTP Server account"
+msgid "PPTP account"
+msgstr "Cuenta FTP"
+
+#: plugins/personal/connectivity/class_glpiAccount.inc:25
+msgid "GLPI"
+msgstr ""
+
+#: plugins/personal/connectivity/glpi.tpl:1
+#, fuzzy
+msgid "GLPI account"
 msgstr "Cuenta FTP"
 
 #: plugins/personal/environment/main.inc:124
@@ -2957,17 +2967,17 @@ msgstr "Elige"
 msgid "Nagios settings"
 msgstr "Parametros del correo de usuarios"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:85
+#: plugins/personal/nagios/class_nagiosAccount.inc:86
 #, fuzzy
 msgid "This account has no nagios extensions."
 msgstr "Esta cuenta no tiene extensiones validas de correo."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:94
+#: plugins/personal/nagios/class_nagiosAccount.inc:95
 #, fuzzy
 msgid "Remove nagios account"
 msgstr "Borrar cuenta de correo"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:95
+#: plugins/personal/nagios/class_nagiosAccount.inc:96
 #, fuzzy
 msgid ""
 "This account has nagios features enabled. You can disable them by clicking "
@@ -2976,12 +2986,12 @@ msgstr ""
 "Esta cuenta tiene las características de correo activas. Puede desactivarlas "
 "apretando a continuación."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:97
+#: plugins/personal/nagios/class_nagiosAccount.inc:98
 #, fuzzy
 msgid "Create nagios account"
 msgstr "Crear cuenta de correo"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:97
+#: plugins/personal/nagios/class_nagiosAccount.inc:98
 #, fuzzy
 msgid ""
 "This account has nagios features disabled. You can enable them by clicking "
@@ -2990,18 +3000,18 @@ msgstr ""
 "Esta cuenta tiene las características de correo desactivadas.Puede "
 "activarlas pulsando aqui."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:172
+#: plugins/personal/nagios/class_nagiosAccount.inc:174
 #, fuzzy
 msgid "The required field 'NagiosAlias' is not set."
 msgstr "El campo requerido 'Nombre' no ha sido rellenado."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:175
+#: plugins/personal/nagios/class_nagiosAccount.inc:177
 #, fuzzy
 msgid "The required field 'NagiosMail' is not set."
 msgstr "El campo requerido 'Nombre' no ha sido rellenado."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:179
-#: plugins/personal/nagios/class_nagiosAccount.inc:183
+#: plugins/personal/nagios/class_nagiosAccount.inc:181
+#: plugins/personal/nagios/class_nagiosAccount.inc:185
 #, fuzzy
 msgid "Please enter a valid email address in 'NagiosMail' field."
 msgstr ""
@@ -10807,6 +10817,18 @@ msgid ""
 "versions. In some cases it would be helpful to enable the error reporting. "
 "(But it could be a security risk)  "
 msgstr ""
+
+#, fuzzy
+#~ msgid "PPTP Server account"
+#~ msgstr "Cuenta FTP"
+
+#, fuzzy
+#~ msgid "PPTP Server"
+#~ msgstr "Servidor NTP"
+
+#, fuzzy
+#~ msgid "GLPI Account"
+#~ msgstr "Cuenta"
 
 #, fuzzy
 #~ msgid "Firstname"

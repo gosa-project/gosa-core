@@ -2,7 +2,6 @@
 
 /*
   This code is part of GOsa (https://gosa.gonicus.de)
-  Copyright (C) 2005 Guillaume Delecourt
   Copyright (C) 2005 Benoit Mortier
 
   This program is free software; you can redistribute it and/or modify
@@ -20,22 +19,22 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-class pptpAccount extends plugin
+class glpiAccount extends plugin
 {
   /* Definitions */
-  var $plHeadline= "PPTP";
+  var $plHeadline= "GLPI";
   var $plDescription= "This does something";
 
   /* CLI vars */
-  var $cli_summary= "Manage users pptp account";
+  var $cli_summary= "Manage users gpli account";
   var $cli_description= "Some longer text\nfor help";
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* attribute list for save action */
   var $attributes= array();
-  var $objectclasses= array("pptpServerAccount");
+  var $objectclasses= array("glpiAccount");
 
-  function pptpAccount ($config, $dn= NULL)
+  function glpiAccount ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
   }
@@ -52,9 +51,9 @@ class pptpAccount extends plugin
     $smarty= get_smarty();
 
     if ($this->is_account){
-      $smarty->assign("pptpState", "checked");
+      $smarty->assign("glpiState", "checked");
     } else {
-      $smarty->assign("pptpState", "");
+      $smarty->assign("glpiState", "");
       $smarty->assign("wstate", "disabled");
     }
 
@@ -62,9 +61,9 @@ class pptpAccount extends plugin
       $smarty->assign("tabbed", 1);
     }
 
-    $smarty->assign('gosapptpACL', chkacl($this->acl, 'gosapptp'));
+    $smarty->assign('glpiACL', chkacl($this->acl, 'gosaglpi'));
 
-    $display.= $smarty->fetch (get_template_path('pptp.tpl', TRUE, dirname(__FILE__)));
+    $display.= $smarty->fetch (get_template_path('glpi.tpl', TRUE, dirname(__FILE__)));
     return ($display);
   }
 
@@ -94,8 +93,8 @@ class pptpAccount extends plugin
   {
     /* Do we need to flip is_account state? */
     if (isset($_POST['connectivityTab'])){
-      if (isset($_POST['pptp'])){
-        if (!$this->is_account && $_POST['pptp'] == "B"){
+      if (isset($_POST['glpi'])){
+        if (!$this->is_account && $_POST['glpi'] == "B"){
           $this->is_account= TRUE;
         }
       } else {
@@ -104,10 +103,10 @@ class pptpAccount extends plugin
     }
 
     plugin::save_object();
-    if (isset($_POST["pptpStatus"])){
-      $this->pptpStatus = "disabled";
+    if (isset($_POST["glpiStatus"])){
+      $this->glpiStatus = "disabled";
     } else {
-      $this->pptpStatus = "enabled";
+      $this->glpiStatus = "enabled";
     }
   }
 

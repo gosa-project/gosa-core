@@ -10,12 +10,13 @@
 # translation of messages.po to
 # translation of messages.po to
 # translation of messages.po to
+# translation of messages.po to
 # translation of messages.po to French
 # Benoit Mortier <benoit.mortier@opensides.be>, 2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
-"PO-Revision-Date: 2005-11-05 12:33+0100\n"
+"PO-Revision-Date: 2005-11-06 21:52+0100\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -201,7 +202,7 @@ msgstr "Base de données"
 msgid "Services"
 msgstr "Services"
 
-#: contrib/gosa.conf:176 plugins/addons/ldapmanager/contentexport.tpl:16
+#: contrib/gosa.conf:177 plugins/addons/ldapmanager/contentexport.tpl:16
 #: plugins/addons/ldapmanager/contentexport.tpl:29
 #: plugins/addons/ldapmanager/contentexport.tpl:44
 #: plugins/addons/ldapmanager/contentexportxls.tpl:19
@@ -210,11 +211,11 @@ msgstr "Services"
 msgid "Export"
 msgstr "Exporter"
 
-#: contrib/gosa.conf:177
+#: contrib/gosa.conf:178
 msgid "Excel Export"
 msgstr "Exporter en Excel"
 
-#: contrib/gosa.conf:178 plugins/personal/mail/generic.tpl:112
+#: contrib/gosa.conf:179 plugins/personal/mail/generic.tpl:112
 #: plugins/personal/environment/logonManagement.tpl:65
 #: plugins/addons/ldapmanager/contentimport.tpl:49
 #: plugins/addons/ldapmanager/contentcsv.tpl:117
@@ -223,73 +224,73 @@ msgstr "Exporter en Excel"
 msgid "Import"
 msgstr "Importer"
 
-#: contrib/gosa.conf:179
+#: contrib/gosa.conf:180
 msgid "CSV Import"
 msgstr "Importer un fichier CSV"
 
-#: contrib/gosa.conf:183
+#: contrib/gosa.conf:184
 msgid "Partitions"
 msgstr "Partitions"
 
-#: contrib/gosa.conf:187 plugins/personal/environment/logonManagement.tpl:55
+#: contrib/gosa.conf:188 plugins/personal/environment/logonManagement.tpl:55
 #: plugins/admin/applications/generic.tpl:81
 #: plugins/admin/fai/faiScriptEntry.tpl:50
 #: plugins/admin/fai/faiHookEntry.tpl:50
 msgid "Script"
 msgstr "Script"
 
-#: contrib/gosa.conf:191 plugins/admin/fai/class_faiManagement.inc:545
+#: contrib/gosa.conf:192 plugins/admin/fai/class_faiManagement.inc:545
 #: plugins/admin/fai/class_faiManagement.inc:546
 msgid "Hooks"
 msgstr "Connexions"
 
-#: contrib/gosa.conf:195 plugins/admin/fai/class_faiManagement.inc:538
+#: contrib/gosa.conf:196 plugins/admin/fai/class_faiManagement.inc:538
 #: plugins/admin/fai/class_faiManagement.inc:539
 msgid "Variables"
 msgstr "Variables"
 
-#: contrib/gosa.conf:199 plugins/admin/fai/class_faiManagement.inc:559
+#: contrib/gosa.conf:200 plugins/admin/fai/class_faiManagement.inc:559
 #: plugins/admin/fai/class_faiManagement.inc:560
 msgid "Templates"
 msgstr "Modèles"
 
-#: contrib/gosa.conf:203 plugins/personal/environment/environment.tpl:7
+#: contrib/gosa.conf:204 plugins/personal/environment/environment.tpl:7
 msgid "Profiles"
 msgstr "Profils"
 
-#: contrib/gosa.conf:207
+#: contrib/gosa.conf:208
 msgid "Packages"
 msgstr "Paquets"
 
-#: contrib/gosa.conf:223
+#: contrib/gosa.conf:224
 msgid "{LOCATIONNAME}"
 msgstr ""
 
-#: contrib/gosa.conf:240 plugins/admin/ogroups/class_phonequeue.inc:164
+#: contrib/gosa.conf:241 plugins/admin/ogroups/class_phonequeue.inc:164
 msgid "German"
 msgstr "Allemand"
 
-#: contrib/gosa.conf:241
+#: contrib/gosa.conf:242
 msgid "Russian"
 msgstr "Russe"
 
-#: contrib/gosa.conf:242
+#: contrib/gosa.conf:243
 msgid "Spanish"
 msgstr "Espagnol"
 
-#: contrib/gosa.conf:243
+#: contrib/gosa.conf:244
 msgid "French"
 msgstr "Français"
 
-#: contrib/gosa.conf:244
+#: contrib/gosa.conf:245
 msgid "Dutch"
 msgstr "Hollandais"
 
-#: contrib/gosa.conf:245
+#: contrib/gosa.conf:246
 msgid "English"
 msgstr "Anglais"
 
-#: contrib/gosa.conf:246
+#: contrib/gosa.conf:247
 msgid "Italian"
 msgstr "Italien"
 
@@ -306,8 +307,9 @@ msgstr "Italien"
 #: plugins/personal/connectivity/class_connectivity.inc:16
 #: plugins/personal/connectivity/class_proxyAccount.inc:6
 #: plugins/personal/connectivity/class_intranetAccount.inc:16
-#: plugins/personal/connectivity/class_phpscheduleitAccount.inc:7
-#: plugins/personal/connectivity/class_pptpAccount.inc:7
+#: plugins/personal/connectivity/class_phpscheduleitAccount.inc:28
+#: plugins/personal/connectivity/class_pptpAccount.inc:27
+#: plugins/personal/connectivity/class_glpiAccount.inc:26
 #: plugins/personal/environment/class_environment.inc:13
 #: plugins/personal/nagios/class_nagiosAccount.inc:19
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:6
@@ -2497,21 +2499,29 @@ msgstr "La valeur dans le champ 'Quota Setting' n'est pas valide."
 msgid "Intranet"
 msgstr "Intranet"
 
-#: plugins/personal/connectivity/class_phpscheduleitAccount.inc:6
-msgid "PHPscheduleit Account"
+#: plugins/personal/connectivity/class_phpscheduleitAccount.inc:27
+msgid "PHPscheduleit"
 msgstr "Compte PHPscheduleit"
 
-#: plugins/personal/connectivity/class_pptpAccount.inc:6
-msgid "PPTP Server"
-msgstr "Serveur PPTP"
+#: plugins/personal/connectivity/class_pptpAccount.inc:26
+msgid "PPTP"
+msgstr "Compte PPTP"
 
 #: plugins/personal/connectivity/phpscheduleit.tpl:1
 msgid "PHPscheduleit account"
 msgstr "Compte PHPscheduleit"
 
 #: plugins/personal/connectivity/pptp.tpl:1
-msgid "PPTP Server account"
+msgid "PPTP account"
 msgstr "Compte PPTP"
+
+#: plugins/personal/connectivity/class_glpiAccount.inc:25
+msgid "GLPI"
+msgstr "Compte GLPI"
+
+#: plugins/personal/connectivity/glpi.tpl:1
+msgid "GLPI account"
+msgstr "Compte GLPI"
 
 #: plugins/personal/environment/main.inc:124
 msgid "User environment settings"
@@ -2908,15 +2918,15 @@ msgstr "Fermer"
 msgid "Nagios settings"
 msgstr "Paramètres Nagios"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:85
+#: plugins/personal/nagios/class_nagiosAccount.inc:86
 msgid "This account has no nagios extensions."
 msgstr "Ce compte n'a pas d'extensions Nagios."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:94
+#: plugins/personal/nagios/class_nagiosAccount.inc:95
 msgid "Remove nagios account"
 msgstr "Supprimer l'extension Nagios"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:95
+#: plugins/personal/nagios/class_nagiosAccount.inc:96
 msgid ""
 "This account has nagios features enabled. You can disable them by clicking "
 "below."
@@ -2924,11 +2934,11 @@ msgstr ""
 "L'extension nagios est activée pour ce compte, vous pouvez la désactiver en "
 "cliquant sur le bouton ci-dessous."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:97
+#: plugins/personal/nagios/class_nagiosAccount.inc:98
 msgid "Create nagios account"
 msgstr "Créer un compte nagios"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:97
+#: plugins/personal/nagios/class_nagiosAccount.inc:98
 msgid ""
 "This account has nagios features disabled. You can enable them by clicking "
 "below."
@@ -2936,16 +2946,16 @@ msgstr ""
 "L'extension nagios est désactivée pour ce compte, vous pouvez l'activer en "
 "cliquant sur le bouton ci-dessous."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:172
+#: plugins/personal/nagios/class_nagiosAccount.inc:174
 msgid "The required field 'NagiosAlias' is not set."
 msgstr "Le champ obligatoire 'NagiosAlias' n'est pas rempli."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:175
+#: plugins/personal/nagios/class_nagiosAccount.inc:177
 msgid "The required field 'NagiosMail' is not set."
 msgstr "Le champ obligatoire 'NagiosMail' n'est pas rempli."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:179
-#: plugins/personal/nagios/class_nagiosAccount.inc:183
+#: plugins/personal/nagios/class_nagiosAccount.inc:181
+#: plugins/personal/nagios/class_nagiosAccount.inc:185
 msgid "Please enter a valid email address in 'NagiosMail' field."
 msgstr ""
 "Veuillez entrer une adresse de messagerie valide dans le champ 'Adresse "
@@ -4223,7 +4233,9 @@ msgstr "En bas"
 msgid ""
 "Please check your 'gosa.conf' the value for 'MAILQUEUE_QUERY_COMMAND' can't "
 "be executed."
-msgstr "Veuillez vérifier votre fichier 'gosa.conf' la valeur de la commande 'MAILQUEUE_QUERY_COMMAND' ne peut pas être exécutée."
+msgstr ""
+"Veuillez vérifier votre fichier 'gosa.conf' la valeur de la commande "
+"'MAILQUEUE_QUERY_COMMAND' ne peut pas être exécutée."
 
 #: plugins/addons/mailqueue/class_mailqueue.inc:75
 #: plugins/admin/users/class_userManagement.inc:488
@@ -7961,7 +7973,9 @@ msgstr ""
 
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:351
 msgid "Please use 'swap' as mount point, if 'swap' is used as fs-type."
-msgstr "Veuillez utiliser 'swap' comme point de montage, si 'swap' est utilisé comme type de fichier."
+msgstr ""
+"Veuillez utiliser 'swap' comme point de montage, si 'swap' est utilisé comme "
+"type de fichier."
 
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:357
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:361

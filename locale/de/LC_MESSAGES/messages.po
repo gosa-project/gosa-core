@@ -198,7 +198,7 @@ msgstr "Datenbanken"
 msgid "Services"
 msgstr "Dienste"
 
-#: contrib/gosa.conf:176 plugins/addons/ldapmanager/contentexport.tpl:16
+#: contrib/gosa.conf:177 plugins/addons/ldapmanager/contentexport.tpl:16
 #: plugins/addons/ldapmanager/contentexport.tpl:29
 #: plugins/addons/ldapmanager/contentexport.tpl:44
 #: plugins/addons/ldapmanager/contentexportxls.tpl:19
@@ -207,11 +207,11 @@ msgstr "Dienste"
 msgid "Export"
 msgstr "Export"
 
-#: contrib/gosa.conf:177
+#: contrib/gosa.conf:178
 msgid "Excel Export"
 msgstr "Excel-Export"
 
-#: contrib/gosa.conf:178 plugins/personal/mail/generic.tpl:112
+#: contrib/gosa.conf:179 plugins/personal/mail/generic.tpl:112
 #: plugins/personal/environment/logonManagement.tpl:65
 #: plugins/addons/ldapmanager/contentimport.tpl:49
 #: plugins/addons/ldapmanager/contentcsv.tpl:117
@@ -220,73 +220,73 @@ msgstr "Excel-Export"
 msgid "Import"
 msgstr "Importieren"
 
-#: contrib/gosa.conf:179
+#: contrib/gosa.conf:180
 msgid "CSV Import"
 msgstr "CSV Import"
 
-#: contrib/gosa.conf:183
+#: contrib/gosa.conf:184
 msgid "Partitions"
 msgstr "Partitionen"
 
-#: contrib/gosa.conf:187 plugins/personal/environment/logonManagement.tpl:55
+#: contrib/gosa.conf:188 plugins/personal/environment/logonManagement.tpl:55
 #: plugins/admin/applications/generic.tpl:81
 #: plugins/admin/fai/faiScriptEntry.tpl:50
 #: plugins/admin/fai/faiHookEntry.tpl:50
 msgid "Script"
 msgstr "Skript"
 
-#: contrib/gosa.conf:191 plugins/admin/fai/class_faiManagement.inc:545
+#: contrib/gosa.conf:192 plugins/admin/fai/class_faiManagement.inc:545
 #: plugins/admin/fai/class_faiManagement.inc:546
 msgid "Hooks"
 msgstr "Hooks"
 
-#: contrib/gosa.conf:195 plugins/admin/fai/class_faiManagement.inc:538
+#: contrib/gosa.conf:196 plugins/admin/fai/class_faiManagement.inc:538
 #: plugins/admin/fai/class_faiManagement.inc:539
 msgid "Variables"
 msgstr "Variablen"
 
-#: contrib/gosa.conf:199 plugins/admin/fai/class_faiManagement.inc:559
+#: contrib/gosa.conf:200 plugins/admin/fai/class_faiManagement.inc:559
 #: plugins/admin/fai/class_faiManagement.inc:560
 msgid "Templates"
 msgstr "Vorlagen"
 
-#: contrib/gosa.conf:203 plugins/personal/environment/environment.tpl:7
+#: contrib/gosa.conf:204 plugins/personal/environment/environment.tpl:7
 msgid "Profiles"
 msgstr "Profile"
 
-#: contrib/gosa.conf:207
+#: contrib/gosa.conf:208
 msgid "Packages"
 msgstr "Pakete"
 
-#: contrib/gosa.conf:223
+#: contrib/gosa.conf:224
 msgid "{LOCATIONNAME}"
 msgstr "{LOCATIONNAME}"
 
-#: contrib/gosa.conf:240 plugins/admin/ogroups/class_phonequeue.inc:164
+#: contrib/gosa.conf:241 plugins/admin/ogroups/class_phonequeue.inc:164
 msgid "German"
 msgstr "Deutsch"
 
-#: contrib/gosa.conf:241
+#: contrib/gosa.conf:242
 msgid "Russian"
 msgstr "Russisch"
 
-#: contrib/gosa.conf:242
+#: contrib/gosa.conf:243
 msgid "Spanish"
 msgstr "Spanisch"
 
-#: contrib/gosa.conf:243
+#: contrib/gosa.conf:244
 msgid "French"
 msgstr "Französisch"
 
-#: contrib/gosa.conf:244
+#: contrib/gosa.conf:245
 msgid "Dutch"
 msgstr "Niederländisch"
 
-#: contrib/gosa.conf:245
+#: contrib/gosa.conf:246
 msgid "English"
 msgstr "Englisch"
 
-#: contrib/gosa.conf:246
+#: contrib/gosa.conf:247
 msgid "Italian"
 msgstr "Italienisch"
 
@@ -303,8 +303,9 @@ msgstr "Italienisch"
 #: plugins/personal/connectivity/class_connectivity.inc:16
 #: plugins/personal/connectivity/class_proxyAccount.inc:6
 #: plugins/personal/connectivity/class_intranetAccount.inc:16
-#: plugins/personal/connectivity/class_phpscheduleitAccount.inc:7
-#: plugins/personal/connectivity/class_pptpAccount.inc:7
+#: plugins/personal/connectivity/class_phpscheduleitAccount.inc:28
+#: plugins/personal/connectivity/class_pptpAccount.inc:27
+#: plugins/personal/connectivity/class_glpiAccount.inc:26
 #: plugins/personal/environment/class_environment.inc:13
 #: plugins/personal/nagios/class_nagiosAccount.inc:19
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:6
@@ -2507,13 +2508,15 @@ msgstr ""
 msgid "Intranet"
 msgstr "Intranet"
 
-#: plugins/personal/connectivity/class_phpscheduleitAccount.inc:6
-msgid "PHPscheduleit Account"
-msgstr ""
+#: plugins/personal/connectivity/class_phpscheduleitAccount.inc:27
+#, fuzzy
+msgid "PHPscheduleit"
+msgstr "phpGroupware-Konto"
 
-#: plugins/personal/connectivity/class_pptpAccount.inc:6
-msgid "PPTP Server"
-msgstr "PPTP-Server"
+#: plugins/personal/connectivity/class_pptpAccount.inc:26
+#, fuzzy
+msgid "PPTP"
+msgstr "PT"
 
 #: plugins/personal/connectivity/phpscheduleit.tpl:1
 #, fuzzy
@@ -2521,8 +2524,18 @@ msgid "PHPscheduleit account"
 msgstr "phpGroupware-Konto"
 
 #: plugins/personal/connectivity/pptp.tpl:1
-msgid "PPTP Server account"
-msgstr "PPTP-Konto"
+#, fuzzy
+msgid "PPTP account"
+msgstr "FTP Konto"
+
+#: plugins/personal/connectivity/class_glpiAccount.inc:25
+msgid "GLPI"
+msgstr ""
+
+#: plugins/personal/connectivity/glpi.tpl:1
+#, fuzzy
+msgid "GLPI account"
+msgstr "FTP Konto"
 
 #: plugins/personal/environment/main.inc:124
 msgid "User environment settings"
@@ -2920,15 +2933,15 @@ msgstr "Schliessen"
 msgid "Nagios settings"
 msgstr "Nagios-Einstellungen"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:85
+#: plugins/personal/nagios/class_nagiosAccount.inc:86
 msgid "This account has no nagios extensions."
 msgstr "Dieses Konto besitzt keine Nagios-Erweiterungen."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:94
+#: plugins/personal/nagios/class_nagiosAccount.inc:95
 msgid "Remove nagios account"
 msgstr "Nagios-Konto entfernen"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:95
+#: plugins/personal/nagios/class_nagiosAccount.inc:96
 msgid ""
 "This account has nagios features enabled. You can disable them by clicking "
 "below."
@@ -2936,11 +2949,11 @@ msgstr ""
 "Dieses Konto besitzt aktivierte Nagios-Erweiterungen. Sie können diese "
 "deaktivieren, indem Sie auf die Schaltfläche unten klicken."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:97
+#: plugins/personal/nagios/class_nagiosAccount.inc:98
 msgid "Create nagios account"
 msgstr "Neues Nagios-Konto erzeugen"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:97
+#: plugins/personal/nagios/class_nagiosAccount.inc:98
 msgid ""
 "This account has nagios features disabled. You can enable them by clicking "
 "below."
@@ -2948,16 +2961,16 @@ msgstr ""
 "Dieses Konto besitzt keine aktivierten Nagios-Erweiterungen. Sie können "
 "diese aktivieren, indem Sie auf die Schaltfläche unten klicken."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:172
+#: plugins/personal/nagios/class_nagiosAccount.inc:174
 msgid "The required field 'NagiosAlias' is not set."
 msgstr "Das benötigte Feld 'NagiosAlias' ist nicht gesetzt."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:175
+#: plugins/personal/nagios/class_nagiosAccount.inc:177
 msgid "The required field 'NagiosMail' is not set."
 msgstr "Das benötigte Feld 'NagiosMail' ist nicht gesetzt."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:179
-#: plugins/personal/nagios/class_nagiosAccount.inc:183
+#: plugins/personal/nagios/class_nagiosAccount.inc:181
+#: plugins/personal/nagios/class_nagiosAccount.inc:185
 msgid "Please enter a valid email address in 'NagiosMail' field."
 msgstr ""
 "Bitte geben Sie eine gültige E-Mail-Adresse in das Feld 'NagiosMail' ein."
@@ -10541,6 +10554,16 @@ msgstr ""
 "GOsa kann Fehler im PHP-Interpreter erzeugen (insbesondere bei Beta-"
 "Versionen). In einigen Fällen ist es hilfreich, das 'error_reporting' zu "
 "aktivieren (dies kann jedoch ein Sicherheitsrisiko darstellen)."
+
+#~ msgid "PPTP Server account"
+#~ msgstr "PPTP-Konto"
+
+#~ msgid "PPTP Server"
+#~ msgstr "PPTP-Server"
+
+#, fuzzy
+#~ msgid "GLPI Account"
+#~ msgstr "Konto"
 
 #, fuzzy
 #~ msgid "Firstname"
