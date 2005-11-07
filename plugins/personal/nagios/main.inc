@@ -96,7 +96,7 @@ if (!$remove_lock){
 
   $info= "";
   /* Show page footer depending on the mode */
-  if (!$nagiosAccount->forward_dialog && $nagiosAccount->is_account){
+  if ($nagiosAccount->is_account){
     $display.= "<p class=\"plugbottom\">";
 
     /* Are we in edit mode? */
