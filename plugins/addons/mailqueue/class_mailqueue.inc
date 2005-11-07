@@ -27,6 +27,7 @@ class mailqueue extends plugin
     /* Include config object */
     $this->config= $config;
 
+    /* get the query cmd */
     $this->QueryCommand = search_config($this->config->data['MENU'], "mailqueue", "MAILQUEUE_QUERY_COMMAND");
     $this->RemoveCommand= search_config($this->config->data['MENU'], "mailqueue", "MAILQUEUE_REMOVE_COMMAND");
 
@@ -41,9 +42,13 @@ class mailqueue extends plugin
      
     $q_cmd = preg_replace("/%server/",$this->Server,$this->QueryCommand);
 
-    if($str = @shell_exec ($q_cmd)){	
+    /* Only display this if the query cmd is executeable */
+    if($str = @shell_exec ($q_cmd)){
+	
+      /* Parse returned data */
       $mailQueueParser = new parseMailQueue($str);
 
+      /* Delete entry if requested */
       if(isset($_GET['del'])){
         if($mailQueueParser->IDExists($_GET['del'])){
           $r_cmd = preg_replace("/%server/", $this->Server,$this->RemoveCommand);  
@@ -52,23 +57,27 @@ class mailqueue extends plugin
         }
       }
 
+      /* Filter data with the given */
       $mailQueueParser->OrderBy($this->OrderBy,$this->SortType);
       $mailQueueParser->OnlyDaysAgo($this->Time);
       $mailQueueParser->CreateDate();
       $mailQueueParser->Search($this->Search,array("MailID","Size","Sender","Recipient","Error","Arrival"));
 
+      /* */
       $entries = $mailQueueParser->GetAll(); 
-      $smarty->assign("entries",array_slice($entries,$this->Page,20));
-      $smarty->assign("plug","?plug=".$_GET['plug']);
-      $smarty->assign("p_server",$this->Server);
-      $smarty->assign("p_servers",$this->getServer());
-      $smarty->assign("p_serverKeys",array_flip($this->getServer()));
-      $smarty->assign("p_time", $this->Time);
-      $smarty->assign("p_times",$this->getTimes());
-      $smarty->assign("p_timeKeys",array_flip($this->getTimes()));
-      $smarty->assign("search_for",$this->Search);
+      $smarty->assign("entries"       , array_slice($entries,$this->Page,20));
+      $smarty->assign("plug"          , "?plug=".$_GET['plug']);
+      $smarty->assign("p_server"      , $this->Server);
+      $smarty->assign("p_servers"     , $this->getServer());
+      $smarty->assign("p_serverKeys"  , array_flip($this->getServer()));
+      $smarty->assign("p_time"        , $this->Time);
+      $smarty->assign("p_times"       , $this->getTimes());
+      $smarty->assign("p_timeKeys"    , array_flip($this->getTimes()));
+      $smarty->assign("search_for"    , $this->Search);
       $smarty->assign("range_selector", range_selector(count($entries), $this->Page, 20)); 
-      $smarty->assign("OrderBy",$this->OrderBy);
+      $smarty->assign("OrderBy"       , $this->OrderBy);
+
+      /* Display sort arrow */
       if($this->SortType == "up"){
         $smarty->assign("SortType","<img src='images/sort_up.png' alt='"._("up")."' border='0'>");
       }else{
@@ -82,6 +91,8 @@ class mailqueue extends plugin
     return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
   }
 
+
+  /* return selectable server */
   function getServer()
   {
     $ret= array("all"=>_("All"));
@@ -94,6 +105,7 @@ class mailqueue extends plugin
     return($ret);
   }
 
+  /* Return selectable times*/
   function getTimes()
   {
     $ret = array();
@@ -108,6 +120,7 @@ class mailqueue extends plugin
     return($ret);
   }
 
+  /* Save post values*/
   function save_object($save_current= FALSE)
   {
     if(isset($_POST['p_server'])){
