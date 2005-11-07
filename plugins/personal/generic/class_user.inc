@@ -437,11 +437,12 @@ class user extends plugin
     }
 
     /* Show us the edit screen */
-    $smarty->assign("bases", $this->config->idepartments);
+    $smarty->assign("bases", $this->allowedBasesToMoveTo());
+//  $smarty->assign("bases", $this->config->idepartments);
     $smarty->assign("base_select", $this->base);
-    $smarty->assign("selectmode", chkacl($this->acl, "create"));
-    $smarty->assign("certificatesACL", chkacl($this->acl, "certificates"));
-    $smarty->assign("jpegPhotoACL", chkacl($this->acl, "jpegPhoto"));
+    $smarty->assign("selectmode",       chkacl($this->acl, "create"));
+    $smarty->assign("certificatesACL",  chkacl($this->acl, "certificates"));
+    $smarty->assign("jpegPhotoACL",     chkacl($this->acl, "jpegPhoto"));
 
     /* Prepare password hashes */
     if ($this->pw_storage == ""){
@@ -499,9 +500,8 @@ class user extends plugin
         $smarty->assign("has_phoneaccount", "false");
       }
     } else {
-        $smarty->assign("has_phoneaccount", "false");
+      $smarty->assign("has_phoneaccount", "false");
     }
-
     return($smarty->fetch (get_template_path('generic.tpl', TRUE, dirname(__FILE__))));
   }
 
@@ -1144,6 +1144,42 @@ class user extends plugin
       $this->givenName= $this->parent->givenName;
     }
   }
+
+ 
+  /* This avoids that users move themselves out of their rights. 
+   */
+  function allowedBasesToMoveTo()
+  {
+    $allowed = array();
+    $ret_all = false;
+    if($this->uid == $_SESSION['ui']->username){
+      $ldap= $this->config->get_ldap_link(); 
+      $ldap->cd($this->config->current['BASE']); 
+      $ldap->search("(&(objectClass=posixGroup)(memberUid=".$_SESSION['ui']->username."))",array("gosaSubtreeACL"));
+       
+      while($attrs = $ldap->fetch()){
+        foreach($attrs['gosaSubtreeACL'] as $attr){
+          if((preg_match("/:user#/",$attr))||(preg_match("/:all/",$attr))){
+            $s =  preg_replace("/^.*ou=groups,/","",$attrs['dn']);
+
+            foreach($this->config->idepartments as $key => $dep) {
+              if(preg_match("/".$s."/i",$key)){
+                $allowed[$key] = $dep;
+              }
+            }
+          }
+        }
+      }
+      return($allowed);
+    }else{
+      return($this->config->idepartments);
+    }
+  } 
+
+
+
+
+
 
 }
 
