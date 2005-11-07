@@ -2461,6 +2461,7 @@ msgid "GB"
 msgstr "GB"
 
 #: plugins/personal/connectivity/class_proxyAccount.inc:82
+#: plugins/addons/mailqueue/class_mailqueue.inc:115
 msgid "hour"
 msgstr "uur"
 
@@ -2905,15 +2906,15 @@ msgstr "Sluiten"
 msgid "Nagios settings"
 msgstr "Nagios instellingen"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:86
+#: plugins/personal/nagios/class_nagiosAccount.inc:92
 msgid "This account has no nagios extensions."
 msgstr "Dit account heeft nagios mogelijkheden uitgeschakeld."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:95
+#: plugins/personal/nagios/class_nagiosAccount.inc:101
 msgid "Remove nagios account"
 msgstr "Nagios account verwijderen"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:96
+#: plugins/personal/nagios/class_nagiosAccount.inc:102
 msgid ""
 "This account has nagios features enabled. You can disable them by clicking "
 "below."
@@ -2921,11 +2922,11 @@ msgstr ""
 "Dit account heeft Nagios mogelijkheden ingeschakeld. U kunt deze "
 "uitschakelen door de knop hieronder te gebruiken."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:98
+#: plugins/personal/nagios/class_nagiosAccount.inc:104
 msgid "Create nagios account"
 msgstr "Nagios account aanmaken"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:98
+#: plugins/personal/nagios/class_nagiosAccount.inc:104
 msgid ""
 "This account has nagios features disabled. You can enable them by clicking "
 "below."
@@ -2933,16 +2934,16 @@ msgstr ""
 "Dit account heeft geen Nagios mogelijkheden. U kunt deze inschakelen door de "
 "knop hieronder te gebruiken."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:174
+#: plugins/personal/nagios/class_nagiosAccount.inc:163
 msgid "The required field 'NagiosAlias' is not set."
 msgstr "Het vereiste veld 'NagiosAlias' is leeg."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:177
+#: plugins/personal/nagios/class_nagiosAccount.inc:166
 msgid "The required field 'NagiosMail' is not set."
 msgstr "Het vereiste veld 'NagiosMail' is leeg."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:181
-#: plugins/personal/nagios/class_nagiosAccount.inc:185
+#: plugins/personal/nagios/class_nagiosAccount.inc:170
+#: plugins/personal/nagios/class_nagiosAccount.inc:174
 msgid "Please enter a valid email address in 'NagiosMail' field."
 msgstr "Geef a.u.b. een geldig E-mail adres voor het 'NagiosMail' veld op."
 
@@ -2986,7 +2987,7 @@ msgstr "Host notificatie commando's"
 msgid "Nagios authentification"
 msgstr "Nagios authenticatie"
 
-#: plugins/personal/nagios/nagios.tpl:68
+#: plugins/personal/nagios/nagios.tpl:69
 msgid "can view system informations"
 msgstr "mag systeem informatie bekijken"
 
@@ -3843,6 +3844,7 @@ msgstr "Maak record aan in"
 #: plugins/addons/addressbook/class_addressbook.inc:507
 #: plugins/addons/logview/class_logview.inc:63
 #: plugins/addons/logview/class_logview.inc:77
+#: plugins/addons/mailqueue/class_mailqueue.inc:98
 msgid "All"
 msgstr "Alle"
 
@@ -4194,15 +4196,15 @@ msgstr "Systeem log weergave"
 msgid "Mail queue"
 msgstr "Mail wachtrij"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:61
+#: plugins/addons/mailqueue/class_mailqueue.inc:82
 msgid "up"
 msgstr "omhoog"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:63
+#: plugins/addons/mailqueue/class_mailqueue.inc:84
 msgid "down"
 msgstr "omlaag"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:68
+#: plugins/addons/mailqueue/class_mailqueue.inc:89
 msgid ""
 "Please check your 'gosa.conf' the value for 'MAILQUEUE_QUERY_COMMAND' can't "
 "be executed."
@@ -4210,24 +4212,14 @@ msgstr ""
 "Controleer uw 'gosa.conf' a.u.b. De waarde voor 'MAILQUEUE_QUERY_COMMAND' "
 "kan niet uitgevoerd worden"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:75
-#: plugins/admin/users/class_userManagement.inc:488
-#: plugins/admin/systems/class_workstationStartup.inc:49
-#: plugins/admin/ogroups/class_ogroup.inc:235
-msgid "none"
-msgstr "geen"
+#: plugins/addons/mailqueue/class_mailqueue.inc:112
+msgid "no limit"
+msgstr ""
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:87
-msgid "all"
-msgstr "alle(s)"
-
-#: plugins/addons/mailqueue/class_mailqueue.inc:90
-msgid "day ago"
-msgstr "dag geleden"
-
-#: plugins/addons/mailqueue/class_mailqueue.inc:92
-msgid "days ago"
-msgstr "dagen geleden"
+#: plugins/addons/mailqueue/class_mailqueue.inc:117
+#, fuzzy
+msgid "hours"
+msgstr "uur"
 
 #: plugins/addons/mailqueue/contents.tpl:9
 msgid "Please enter a search string here."
@@ -4238,8 +4230,8 @@ msgid "Select a server"
 msgstr "Selecteer een server"
 
 #: plugins/addons/mailqueue/contents.tpl:14
-msgid "Select time periode"
-msgstr "Selecteer tijdsperiode"
+msgid "within the last"
+msgstr ""
 
 #: plugins/addons/mailqueue/contents.tpl:26
 msgid "ID"
@@ -4688,6 +4680,12 @@ msgstr "U staat op het punt gebruiker %s te verwijderen."
 #: plugins/admin/users/class_userManagement.inc:387
 msgid "You are not allowed to delete this user!"
 msgstr "U heeft geen toestemming om deze gebruiker te verwijderen!"
+
+#: plugins/admin/users/class_userManagement.inc:488
+#: plugins/admin/systems/class_workstationStartup.inc:49
+#: plugins/admin/ogroups/class_ogroup.inc:235
+msgid "none"
+msgstr "geen"
 
 #: plugins/admin/users/class_userManagement.inc:558
 msgid "A person with the choosen name is already used in this tree."
@@ -10428,6 +10426,18 @@ msgstr ""
 "Het kan, met name bij Beta versies, voorkomen dat GOsa PHP fouten genereerd. "
 "In sommige gevallen kan het handig zijn om foutrapportage aan te zetten "
 "(maar dit kan een veiligheidsrisico vormen) "
+
+#~ msgid "all"
+#~ msgstr "alle(s)"
+
+#~ msgid "day ago"
+#~ msgstr "dag geleden"
+
+#~ msgid "days ago"
+#~ msgstr "dagen geleden"
+
+#~ msgid "Select time periode"
+#~ msgstr "Selecteer tijdsperiode"
 
 #~ msgid "PPTP Server account"
 #~ msgstr "PPTP account"

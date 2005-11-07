@@ -18,7 +18,7 @@ msgstr ""
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: contrib/gosa.conf:4
 msgid "My account"
@@ -2480,6 +2480,7 @@ msgid "GB"
 msgstr "GB"
 
 #: plugins/personal/connectivity/class_proxyAccount.inc:82
+#: plugins/addons/mailqueue/class_mailqueue.inc:115
 msgid "hour"
 msgstr "Stunde"
 
@@ -2930,15 +2931,15 @@ msgstr "Schliessen"
 msgid "Nagios settings"
 msgstr "Nagios-Einstellungen"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:86
+#: plugins/personal/nagios/class_nagiosAccount.inc:92
 msgid "This account has no nagios extensions."
 msgstr "Dieses Konto besitzt keine Nagios-Erweiterungen."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:95
+#: plugins/personal/nagios/class_nagiosAccount.inc:101
 msgid "Remove nagios account"
 msgstr "Nagios-Konto entfernen"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:96
+#: plugins/personal/nagios/class_nagiosAccount.inc:102
 msgid ""
 "This account has nagios features enabled. You can disable them by clicking "
 "below."
@@ -2946,11 +2947,11 @@ msgstr ""
 "Dieses Konto besitzt aktivierte Nagios-Erweiterungen. Sie k�nnen diese "
 "deaktivieren, indem Sie auf die Schaltfl�che unten klicken."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:98
+#: plugins/personal/nagios/class_nagiosAccount.inc:104
 msgid "Create nagios account"
 msgstr "Neues Nagios-Konto erzeugen"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:98
+#: plugins/personal/nagios/class_nagiosAccount.inc:104
 msgid ""
 "This account has nagios features disabled. You can enable them by clicking "
 "below."
@@ -2958,16 +2959,16 @@ msgstr ""
 "Dieses Konto besitzt keine aktivierten Nagios-Erweiterungen. Sie k�nnen "
 "diese aktivieren, indem Sie auf die Schaltfl�che unten klicken."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:174
+#: plugins/personal/nagios/class_nagiosAccount.inc:163
 msgid "The required field 'NagiosAlias' is not set."
 msgstr "Das ben�tigte Feld 'NagiosAlias' ist nicht gesetzt."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:177
+#: plugins/personal/nagios/class_nagiosAccount.inc:166
 msgid "The required field 'NagiosMail' is not set."
 msgstr "Das ben�tigte Feld 'NagiosMail' ist nicht gesetzt."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:181
-#: plugins/personal/nagios/class_nagiosAccount.inc:185
+#: plugins/personal/nagios/class_nagiosAccount.inc:170
+#: plugins/personal/nagios/class_nagiosAccount.inc:174
 msgid "Please enter a valid email address in 'NagiosMail' field."
 msgstr ""
 "Bitte geben Sie eine g�ltige E-Mail-Adresse in das Feld 'NagiosMail' ein."
@@ -3012,7 +3013,7 @@ msgstr "Befehle f�r System-Meldungen"
 msgid "Nagios authentification"
 msgstr ""
 
-#: plugins/personal/nagios/nagios.tpl:68
+#: plugins/personal/nagios/nagios.tpl:69
 #, fuzzy
 msgid "can view system informations"
 msgstr "System-Information"
@@ -3315,7 +3316,8 @@ msgstr ""
 #: plugins/admin/users/remove.tpl:10 plugins/admin/applications/remove.tpl:9
 #: plugins/admin/ogroups/remove.tpl:10 plugins/gofon/macro/remove.tpl:9
 msgid "So - if you're sure - press 'Delete' to continue or 'Cancel' to abort."
-msgstr "Wenn Sie sicher sind, dr�cken Sie <i>L�schen</i> um fortzufahren oder "
+msgstr ""
+"Wenn Sie sicher sind, dr�cken Sie <i>L�schen</i> um fortzufahren oder "
 "<i>Abbrechen</i> zum Abbruch."
 
 #: plugins/gofax/blocklists/headpage.tpl:6
@@ -3875,6 +3877,7 @@ msgstr "Erzeugen eines neuen Eintrags in"
 #: plugins/addons/addressbook/class_addressbook.inc:507
 #: plugins/addons/logview/class_logview.inc:63
 #: plugins/addons/logview/class_logview.inc:77
+#: plugins/addons/mailqueue/class_mailqueue.inc:98
 msgid "All"
 msgstr "Alle"
 
@@ -4123,7 +4126,8 @@ msgstr "Exportiere vollst�ndige XLS-Datei f�r"
 
 #: plugins/addons/ldapmanager/contentexportxls.tpl:62
 msgid "Click here to save the complete LDAP database to a xls file"
-msgstr "Hier klicken, um die gesamte LDAP-Datenbank in eine xls-Datei zu exportieren."
+msgstr ""
+"Hier klicken, um die gesamte LDAP-Datenbank in eine xls-Datei zu exportieren."
 
 #: plugins/addons/ldapmanager/contentexportxls.tpl:62
 #, fuzzy
@@ -4235,42 +4239,29 @@ msgstr "Systemprotokolle"
 msgid "Mail queue"
 msgstr "Mail-Server"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:61
+#: plugins/addons/mailqueue/class_mailqueue.inc:82
 msgid "up"
 msgstr ""
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:63
+#: plugins/addons/mailqueue/class_mailqueue.inc:84
 #, fuzzy
 msgid "down"
 msgstr "Ab"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:68
+#: plugins/addons/mailqueue/class_mailqueue.inc:89
 msgid ""
 "Please check your 'gosa.conf' the value for 'MAILQUEUE_QUERY_COMMAND' can't "
 "be executed."
 msgstr ""
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:75
-#: plugins/admin/users/class_userManagement.inc:488
-#: plugins/admin/systems/class_workstationStartup.inc:49
-#: plugins/admin/ogroups/class_ogroup.inc:235
-msgid "none"
-msgstr "keine"
+#: plugins/addons/mailqueue/class_mailqueue.inc:112
+msgid "no limit"
+msgstr ""
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:87
+#: plugins/addons/mailqueue/class_mailqueue.inc:117
 #, fuzzy
-msgid "all"
-msgstr "Alle"
-
-#: plugins/addons/mailqueue/class_mailqueue.inc:90
-#, fuzzy
-msgid "day ago"
-msgstr "Tag"
-
-#: plugins/addons/mailqueue/class_mailqueue.inc:92
-#, fuzzy
-msgid "days ago"
-msgstr "Tage"
+msgid "hours"
+msgstr "Stunde"
 
 #: plugins/addons/mailqueue/contents.tpl:9
 #, fuzzy
@@ -4282,9 +4273,8 @@ msgid "Select a server"
 msgstr "W�hlen Sie einen Server"
 
 #: plugins/addons/mailqueue/contents.tpl:14
-#, fuzzy
-msgid "Select time periode"
-msgstr "W�hlen Sie den Terminal-Modus"
+msgid "within the last"
+msgstr ""
 
 #: plugins/addons/mailqueue/contents.tpl:26
 msgid "ID"
@@ -4737,6 +4727,12 @@ msgstr "Sie l�schen gerade den Benutzer %s."
 #: plugins/admin/users/class_userManagement.inc:387
 msgid "You are not allowed to delete this user!"
 msgstr "Sie haben keine Berechtigung, diesen Benutzer zu l�schen!"
+
+#: plugins/admin/users/class_userManagement.inc:488
+#: plugins/admin/systems/class_workstationStartup.inc:49
+#: plugins/admin/ogroups/class_ogroup.inc:235
+msgid "none"
+msgstr "keine"
 
 #: plugins/admin/users/class_userManagement.inc:558
 msgid "A person with the choosen name is already used in this tree."
@@ -10548,6 +10544,22 @@ msgstr ""
 "Versionen). In einigen F�llen ist es hilfreich, das 'error_reporting' zu "
 "aktivieren (dies kann jedoch ein Sicherheitsrisiko darstellen)."
 
+#, fuzzy
+#~ msgid "all"
+#~ msgstr "Alle"
+
+#, fuzzy
+#~ msgid "day ago"
+#~ msgstr "Tag"
+
+#, fuzzy
+#~ msgid "days ago"
+#~ msgstr "Tage"
+
+#, fuzzy
+#~ msgid "Select time periode"
+#~ msgstr "W�hlen Sie den Terminal-Modus"
+
 #~ msgid "PPTP Server account"
 #~ msgstr "PPTP-Konto"
 
@@ -10629,10 +10641,13 @@ msgstr ""
 #~ msgstr "Die folgenden Objekte sind als Administrator zugeordnet"
 
 #~ msgid "Add admin user"
-#~ msgstr "Administrator hinzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgen"
+#~ msgstr ""
+#~ "Administrator hinzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgen"
 
 #~ msgid "Add admin group"
-#~ msgstr "Administrator-Gruppe hinzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgen"
+#~ msgstr ""
+#~ "Administrator-Gruppe "
+#~ "hinzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgen"
 
 #~ msgid "Undefined"
 #~ msgstr "nicht definiert"
@@ -10643,14 +10658,18 @@ msgstr ""
 #~ "the you would't be able to log in. <b>Leave fields blank for password "
 #~ "inheritance from default entries.</b>"
 #~ msgstr ""
-#~ "Um das root-Passwort des Terminals zu ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ndern, benutzen Sie die unteren Felder. Die "
-#~ "VerÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬nderungen werden "
-#~ "wÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hrend des "
-#~ "nÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬chsten Starts des Terminals "
-#~ "wirksam. Bitte merken Sie sich dieses Passwort, da Sie sonst nicht in der "
-#~ "Lage sein werden, sich am entsprechenden System anzumelden. <b>Lassen Sie "
-#~ "das Feld leer, um das Passwort von den Standard-Einstellungen zu "
+#~ "Um das root-Passwort des Terminals zu "
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ndern, benutzen Sie die unteren Felder. "
+#~ "Die VerÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬nderungen werden "
+#~ "wÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hrend des "
+#~ "nÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬chsten Starts des Terminals wirksam. "
+#~ "Bitte merken Sie sich dieses Passwort, da Sie sonst nicht in der Lage "
+#~ "sein werden, sich am entsprechenden System anzumelden. <b>Lassen Sie das "
+#~ "Feld leer, um das Passwort von den Standard-Einstellungen zu "
 #~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂbernehmen.</b>"
 
 #~ msgid "Select entry"
@@ -10658,7 +10677,8 @@ msgstr ""
 
 #~ msgid "Select user/group to add"
 #~ msgstr ""
-#~ "WÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hlen Sie die "
+#~ "WÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hlen Sie die "
 #~ "hinzuzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgenden Benutzer/Gruppen"
 
 #~ msgid "Printer driver information file setup"
@@ -10677,37 +10697,46 @@ msgstr ""
 #~ msgstr "Zeige verfÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgbare PPD-Dateien"
 
 #~ msgid "Entries"
-#~ msgstr "EintrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ge"
+#~ msgstr ""
+#~ "EintrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ge"
 
 #~ msgid "selected"
-#~ msgstr "ausgewÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hlt"
+#~ msgstr ""
+#~ "ausgewÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hlt"
 
 #~ msgid "Please select a PPD or press cancel"
 #~ msgstr ""
-#~ "Bitte wÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hlen Sie eine PPD oder "
-#~ "Abbrechen"
+#~ "Bitte wÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hlen Sie eine PPD oder Abbrechen"
 
 #~ msgid "Automount devices (format: complete autofs entry)"
 #~ msgstr ""
-#~ "Automount-GerÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬te (Format: "
-#~ "kompletter autofs-Eintrag)"
+#~ "Automount-GerÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬te (Format: kompletter autofs-Eintrag)"
 
 #~ msgid "Add additional automount entries"
 #~ msgstr ""
-#~ "ZusÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬tzliche \"Automount-"
-#~ "EintrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ge\" "
+#~ "ZusÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬tzliche \"Automount-"
+#~ "EintrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ge\" "
 #~ "hinzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgen"
 
 #~ msgid "Additional fstab entries"
 #~ msgstr ""
-#~ "ZusÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬tzliche fstab-"
-#~ "EintrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ge"
+#~ "ZusÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬tzliche fstab-"
+#~ "EintrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ge"
 
 #~ msgid "Add additional filesystems to be mounted during startup"
 #~ msgstr ""
-#~ "ZusÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬tzliche Dateisysteme "
-#~ "hinzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgen, die wÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hrend des "
-#~ "Starts gemountet werden"
+#~ "ZusÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬tzliche Dateisysteme "
+#~ "hinzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgen, die wÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ�"
+#~ "�ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hrend des Starts gemountet werden"
 
 #~ msgid "Service"
 #~ msgstr "Dienst"
@@ -10722,7 +10751,9 @@ msgstr ""
 #~ msgstr "Liste benutzter FAI-Klassen"
 
 #~ msgid "Checking for function <b>%s</b>"
-#~ msgstr "PrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂfe auf VerfÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgbarkeit der Funktion <b>%s</b>"
+#~ msgstr ""
+#~ "PrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂfe auf "
+#~ "VerfÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgbarkeit der Funktion <b>%s</b>"
 
 #~ msgid ""
 #~ "Can't read any helpfiles from ' %s ', possibly there is no help available."

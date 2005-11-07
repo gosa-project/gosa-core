@@ -11,12 +11,13 @@
 # translation of messages.po to
 # translation of messages.po to
 # translation of messages.po to
+# translation of messages.po to
 # translation of messages.po to French
 # Benoit Mortier <benoit.mortier@opensides.be>, 2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
-"PO-Revision-Date: 2005-11-06 21:52+0100\n"
+"PO-Revision-Date: 2005-11-08 00:20+0100\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2472,6 +2473,7 @@ msgid "GB"
 msgstr "GB"
 
 #: plugins/personal/connectivity/class_proxyAccount.inc:82
+#: plugins/addons/mailqueue/class_mailqueue.inc:115
 msgid "hour"
 msgstr "heure"
 
@@ -2918,15 +2920,15 @@ msgstr "Fermer"
 msgid "Nagios settings"
 msgstr "Paramètres Nagios"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:86
+#: plugins/personal/nagios/class_nagiosAccount.inc:92
 msgid "This account has no nagios extensions."
 msgstr "Ce compte n'a pas d'extensions Nagios."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:95
+#: plugins/personal/nagios/class_nagiosAccount.inc:101
 msgid "Remove nagios account"
 msgstr "Supprimer l'extension Nagios"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:96
+#: plugins/personal/nagios/class_nagiosAccount.inc:102
 msgid ""
 "This account has nagios features enabled. You can disable them by clicking "
 "below."
@@ -2934,11 +2936,11 @@ msgstr ""
 "L'extension nagios est activée pour ce compte, vous pouvez la désactiver en "
 "cliquant sur le bouton ci-dessous."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:98
+#: plugins/personal/nagios/class_nagiosAccount.inc:104
 msgid "Create nagios account"
 msgstr "Créer un compte nagios"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:98
+#: plugins/personal/nagios/class_nagiosAccount.inc:104
 msgid ""
 "This account has nagios features disabled. You can enable them by clicking "
 "below."
@@ -2946,16 +2948,16 @@ msgstr ""
 "L'extension nagios est désactivée pour ce compte, vous pouvez l'activer en "
 "cliquant sur le bouton ci-dessous."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:174
+#: plugins/personal/nagios/class_nagiosAccount.inc:163
 msgid "The required field 'NagiosAlias' is not set."
 msgstr "Le champ obligatoire 'NagiosAlias' n'est pas rempli."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:177
+#: plugins/personal/nagios/class_nagiosAccount.inc:166
 msgid "The required field 'NagiosMail' is not set."
 msgstr "Le champ obligatoire 'NagiosMail' n'est pas rempli."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:181
-#: plugins/personal/nagios/class_nagiosAccount.inc:185
+#: plugins/personal/nagios/class_nagiosAccount.inc:170
+#: plugins/personal/nagios/class_nagiosAccount.inc:174
 msgid "Please enter a valid email address in 'NagiosMail' field."
 msgstr ""
 "Veuillez entrer une adresse de messagerie valide dans le champ 'Adresse "
@@ -3001,7 +3003,7 @@ msgstr "Commandes pour la notification des systèmes"
 msgid "Nagios authentification"
 msgstr "Authentification Nagios"
 
-#: plugins/personal/nagios/nagios.tpl:68
+#: plugins/personal/nagios/nagios.tpl:69
 msgid "can view system informations"
 msgstr "Information sur le système"
 
@@ -3868,6 +3870,7 @@ msgstr "Création d'une nouvelle entrée dans"
 #: plugins/addons/addressbook/class_addressbook.inc:507
 #: plugins/addons/logview/class_logview.inc:63
 #: plugins/addons/logview/class_logview.inc:77
+#: plugins/addons/mailqueue/class_mailqueue.inc:98
 msgid "All"
 msgstr "Tout"
 
@@ -4221,15 +4224,15 @@ msgstr "Affichage des logs système"
 msgid "Mail queue"
 msgstr "Queue du serveur de messagerie"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:61
+#: plugins/addons/mailqueue/class_mailqueue.inc:82
 msgid "up"
 msgstr "au dessus"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:63
+#: plugins/addons/mailqueue/class_mailqueue.inc:84
 msgid "down"
 msgstr "En bas"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:68
+#: plugins/addons/mailqueue/class_mailqueue.inc:89
 msgid ""
 "Please check your 'gosa.conf' the value for 'MAILQUEUE_QUERY_COMMAND' can't "
 "be executed."
@@ -4237,24 +4240,13 @@ msgstr ""
 "Veuillez vérifier votre fichier 'gosa.conf' la valeur de la commande "
 "'MAILQUEUE_QUERY_COMMAND' ne peut pas être exécutée."
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:75
-#: plugins/admin/users/class_userManagement.inc:488
-#: plugins/admin/systems/class_workstationStartup.inc:49
-#: plugins/admin/ogroups/class_ogroup.inc:235
-msgid "none"
-msgstr "aucun"
+#: plugins/addons/mailqueue/class_mailqueue.inc:112
+msgid "no limit"
+msgstr "pas de limites"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:87
-msgid "all"
-msgstr "tout"
-
-#: plugins/addons/mailqueue/class_mailqueue.inc:90
-msgid "day ago"
-msgstr "jour précédents"
-
-#: plugins/addons/mailqueue/class_mailqueue.inc:92
-msgid "days ago"
-msgstr "jours précédents"
+#: plugins/addons/mailqueue/class_mailqueue.inc:117
+msgid "hours"
+msgstr "heures"
 
 #: plugins/addons/mailqueue/contents.tpl:9
 msgid "Please enter a search string here."
@@ -4265,8 +4257,8 @@ msgid "Select a server"
 msgstr "Sélectionnez un serveurs"
 
 #: plugins/addons/mailqueue/contents.tpl:14
-msgid "Select time periode"
-msgstr "Sélectionnez une période dans le temps"
+msgid "within the last"
+msgstr "pendant la dernière"
 
 #: plugins/addons/mailqueue/contents.tpl:26
 msgid "ID"
@@ -4716,6 +4708,12 @@ msgstr "Vous êtes sur le point de supprimer l'utilisateur %s."
 #: plugins/admin/users/class_userManagement.inc:387
 msgid "You are not allowed to delete this user!"
 msgstr "Vous n'êtes pas autorisé à supprimer cette utilisateur!"
+
+#: plugins/admin/users/class_userManagement.inc:488
+#: plugins/admin/systems/class_workstationStartup.inc:49
+#: plugins/admin/ogroups/class_ogroup.inc:235
+msgid "none"
+msgstr "aucun"
 
 #: plugins/admin/users/class_userManagement.inc:558
 msgid "A person with the choosen name is already used in this tree."

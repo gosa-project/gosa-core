@@ -2355,6 +2355,7 @@ msgid "GB"
 msgstr ""
 
 #: plugins/personal/connectivity/class_proxyAccount.inc:82
+#: plugins/addons/mailqueue/class_mailqueue.inc:115
 msgid "hour"
 msgstr ""
 
@@ -2777,40 +2778,40 @@ msgstr ""
 msgid "Nagios settings"
 msgstr ""
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:86
+#: plugins/personal/nagios/class_nagiosAccount.inc:92
 msgid "This account has no nagios extensions."
 msgstr ""
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:95
+#: plugins/personal/nagios/class_nagiosAccount.inc:101
 msgid "Remove nagios account"
 msgstr ""
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:96
+#: plugins/personal/nagios/class_nagiosAccount.inc:102
 msgid ""
 "This account has nagios features enabled. You can disable them by clicking "
 "below."
 msgstr ""
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:98
+#: plugins/personal/nagios/class_nagiosAccount.inc:104
 msgid "Create nagios account"
 msgstr ""
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:98
+#: plugins/personal/nagios/class_nagiosAccount.inc:104
 msgid ""
 "This account has nagios features disabled. You can enable them by clicking "
 "below."
 msgstr ""
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:174
+#: plugins/personal/nagios/class_nagiosAccount.inc:163
 msgid "The required field 'NagiosAlias' is not set."
 msgstr ""
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:177
+#: plugins/personal/nagios/class_nagiosAccount.inc:166
 msgid "The required field 'NagiosMail' is not set."
 msgstr ""
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:181
-#: plugins/personal/nagios/class_nagiosAccount.inc:185
+#: plugins/personal/nagios/class_nagiosAccount.inc:170
+#: plugins/personal/nagios/class_nagiosAccount.inc:174
 msgid "Please enter a valid email address in 'NagiosMail' field."
 msgstr ""
 
@@ -2854,7 +2855,7 @@ msgstr ""
 msgid "Nagios authentification"
 msgstr ""
 
-#: plugins/personal/nagios/nagios.tpl:68
+#: plugins/personal/nagios/nagios.tpl:69
 msgid "can view system informations"
 msgstr ""
 
@@ -3687,6 +3688,7 @@ msgstr ""
 #: plugins/addons/addressbook/class_addressbook.inc:507
 #: plugins/addons/logview/class_logview.inc:63
 #: plugins/addons/logview/class_logview.inc:77
+#: plugins/addons/mailqueue/class_mailqueue.inc:98
 msgid "All"
 msgstr ""
 
@@ -4016,37 +4018,26 @@ msgstr ""
 msgid "Mail queue"
 msgstr ""
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:61
+#: plugins/addons/mailqueue/class_mailqueue.inc:82
 msgid "up"
 msgstr ""
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:63
+#: plugins/addons/mailqueue/class_mailqueue.inc:84
 msgid "down"
 msgstr ""
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:68
+#: plugins/addons/mailqueue/class_mailqueue.inc:89
 msgid ""
 "Please check your 'gosa.conf' the value for 'MAILQUEUE_QUERY_COMMAND' can't "
 "be executed."
 msgstr ""
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:75
-#: plugins/admin/users/class_userManagement.inc:488
-#: plugins/admin/systems/class_workstationStartup.inc:49
-#: plugins/admin/ogroups/class_ogroup.inc:235
-msgid "none"
+#: plugins/addons/mailqueue/class_mailqueue.inc:112
+msgid "no limit"
 msgstr ""
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:87
-msgid "all"
-msgstr ""
-
-#: plugins/addons/mailqueue/class_mailqueue.inc:90
-msgid "day ago"
-msgstr ""
-
-#: plugins/addons/mailqueue/class_mailqueue.inc:92
-msgid "days ago"
+#: plugins/addons/mailqueue/class_mailqueue.inc:117
+msgid "hours"
 msgstr ""
 
 #: plugins/addons/mailqueue/contents.tpl:9
@@ -4058,7 +4049,7 @@ msgid "Select a server"
 msgstr ""
 
 #: plugins/addons/mailqueue/contents.tpl:14
-msgid "Select time periode"
+msgid "within the last"
 msgstr ""
 
 #: plugins/addons/mailqueue/contents.tpl:26
@@ -4482,6 +4473,12 @@ msgstr ""
 #: plugins/admin/users/class_userManagement.inc:359
 #: plugins/admin/users/class_userManagement.inc:387
 msgid "You are not allowed to delete this user!"
+msgstr ""
+
+#: plugins/admin/users/class_userManagement.inc:488
+#: plugins/admin/systems/class_workstationStartup.inc:49
+#: plugins/admin/ogroups/class_ogroup.inc:235
+msgid "none"
 msgstr ""
 
 #: plugins/admin/users/class_userManagement.inc:558

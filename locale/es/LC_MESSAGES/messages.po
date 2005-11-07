@@ -2479,6 +2479,7 @@ msgid "GB"
 msgstr "Gb"
 
 #: plugins/personal/connectivity/class_proxyAccount.inc:82
+#: plugins/addons/mailqueue/class_mailqueue.inc:115
 msgid "hour"
 msgstr "hora"
 
@@ -2967,17 +2968,17 @@ msgstr "Elige"
 msgid "Nagios settings"
 msgstr "Parametros del correo de usuarios"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:86
+#: plugins/personal/nagios/class_nagiosAccount.inc:92
 #, fuzzy
 msgid "This account has no nagios extensions."
 msgstr "Esta cuenta no tiene extensiones validas de correo."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:95
+#: plugins/personal/nagios/class_nagiosAccount.inc:101
 #, fuzzy
 msgid "Remove nagios account"
 msgstr "Borrar cuenta de correo"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:96
+#: plugins/personal/nagios/class_nagiosAccount.inc:102
 #, fuzzy
 msgid ""
 "This account has nagios features enabled. You can disable them by clicking "
@@ -2986,12 +2987,12 @@ msgstr ""
 "Esta cuenta tiene las características de correo activas. Puede desactivarlas "
 "apretando a continuación."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:98
+#: plugins/personal/nagios/class_nagiosAccount.inc:104
 #, fuzzy
 msgid "Create nagios account"
 msgstr "Crear cuenta de correo"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:98
+#: plugins/personal/nagios/class_nagiosAccount.inc:104
 #, fuzzy
 msgid ""
 "This account has nagios features disabled. You can enable them by clicking "
@@ -3000,18 +3001,18 @@ msgstr ""
 "Esta cuenta tiene las características de correo desactivadas.Puede "
 "activarlas pulsando aqui."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:174
+#: plugins/personal/nagios/class_nagiosAccount.inc:163
 #, fuzzy
 msgid "The required field 'NagiosAlias' is not set."
 msgstr "El campo requerido 'Nombre' no ha sido rellenado."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:177
+#: plugins/personal/nagios/class_nagiosAccount.inc:166
 #, fuzzy
 msgid "The required field 'NagiosMail' is not set."
 msgstr "El campo requerido 'Nombre' no ha sido rellenado."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:181
-#: plugins/personal/nagios/class_nagiosAccount.inc:185
+#: plugins/personal/nagios/class_nagiosAccount.inc:170
+#: plugins/personal/nagios/class_nagiosAccount.inc:174
 #, fuzzy
 msgid "Please enter a valid email address in 'NagiosMail' field."
 msgstr ""
@@ -3068,7 +3069,7 @@ msgstr "Opciones de aplicaciones"
 msgid "Nagios authentification"
 msgstr "Estación de trabajo Windows"
 
-#: plugins/personal/nagios/nagios.tpl:68
+#: plugins/personal/nagios/nagios.tpl:69
 #, fuzzy
 msgid "can view system informations"
 msgstr "Información de sistema"
@@ -3946,6 +3947,7 @@ msgstr "Crear una nueva entrada en"
 #: plugins/addons/addressbook/class_addressbook.inc:507
 #: plugins/addons/logview/class_logview.inc:63
 #: plugins/addons/logview/class_logview.inc:77
+#: plugins/addons/mailqueue/class_mailqueue.inc:98
 msgid "All"
 msgstr "Todo"
 
@@ -4307,42 +4309,29 @@ msgstr "Ver registro del sistema"
 msgid "Mail queue"
 msgstr "Servidor"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:61
+#: plugins/addons/mailqueue/class_mailqueue.inc:82
 msgid "up"
 msgstr ""
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:63
+#: plugins/addons/mailqueue/class_mailqueue.inc:84
 #, fuzzy
 msgid "down"
 msgstr "Dominio"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:68
+#: plugins/addons/mailqueue/class_mailqueue.inc:89
 msgid ""
 "Please check your 'gosa.conf' the value for 'MAILQUEUE_QUERY_COMMAND' can't "
 "be executed."
 msgstr ""
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:75
-#: plugins/admin/users/class_userManagement.inc:488
-#: plugins/admin/systems/class_workstationStartup.inc:49
-#: plugins/admin/ogroups/class_ogroup.inc:235
-msgid "none"
-msgstr "ninguno"
+#: plugins/addons/mailqueue/class_mailqueue.inc:112
+msgid "no limit"
+msgstr ""
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:87
+#: plugins/addons/mailqueue/class_mailqueue.inc:117
 #, fuzzy
-msgid "all"
-msgstr "Todo"
-
-#: plugins/addons/mailqueue/class_mailqueue.inc:90
-#, fuzzy
-msgid "day ago"
-msgstr "día"
-
-#: plugins/addons/mailqueue/class_mailqueue.inc:92
-#, fuzzy
-msgid "days ago"
-msgstr "días"
+msgid "hours"
+msgstr "hora"
 
 #: plugins/addons/mailqueue/contents.tpl:9
 #, fuzzy
@@ -4355,9 +4344,8 @@ msgid "Select a server"
 msgstr "Seleccione para ver los servidores"
 
 #: plugins/addons/mailqueue/contents.tpl:14
-#, fuzzy
-msgid "Select time periode"
-msgstr "Seleccionar modo de terminal"
+msgid "within the last"
+msgstr ""
 
 #: plugins/addons/mailqueue/contents.tpl:26
 #, fuzzy
@@ -4817,6 +4805,12 @@ msgstr "Esta a punto de borrar el usuario %s"
 #: plugins/admin/users/class_userManagement.inc:387
 msgid "You are not allowed to delete this user!"
 msgstr "No le es permitido borrar este usuario"
+
+#: plugins/admin/users/class_userManagement.inc:488
+#: plugins/admin/systems/class_workstationStartup.inc:49
+#: plugins/admin/ogroups/class_ogroup.inc:235
+msgid "none"
+msgstr "ninguno"
 
 #: plugins/admin/users/class_userManagement.inc:558
 msgid "A person with the choosen name is already used in this tree."
@@ -10817,6 +10811,22 @@ msgid ""
 "versions. In some cases it would be helpful to enable the error reporting. "
 "(But it could be a security risk)  "
 msgstr ""
+
+#, fuzzy
+#~ msgid "all"
+#~ msgstr "Todo"
+
+#, fuzzy
+#~ msgid "day ago"
+#~ msgstr "día"
+
+#, fuzzy
+#~ msgid "days ago"
+#~ msgstr "días"
+
+#, fuzzy
+#~ msgid "Select time periode"
+#~ msgstr "Seleccionar modo de terminal"
 
 #, fuzzy
 #~ msgid "PPTP Server account"
