@@ -15,7 +15,7 @@
 
 	<tr>
 	<td><LABEL for="HostNotificationPeriod">{t}Host notification period{/t}</LABEL>{$must}</td>
-	<td><select name="HostNotificationPeriod" id="HostNotificationPeriod">
+	<td><select name="HostNotificationPeriod" id="HostNotificationPeriod" {$HostNotificationPeriodACL}>
 	{html_options options=$HostNotificationPeriodValues values=$HostNotificationPeriodValues selected=$HostNotificationPeriod }
 	</select>
 	</td>
@@ -23,14 +23,14 @@
 
 	<tr>
 	<td><LABEL for="ServiceNotificationPeriod">{t}Service notification period{/t}</LABEL>{$must}</td>
-	<td><select name="ServiceNotificationPeriod" id="ServiceNotificationPeriod">
+	<td><select name="ServiceNotificationPeriod" id="ServiceNotificationPeriod" {$ServiceNotificationPeriod}>
 	{html_options options=$ServiceNotificationPeriodValues values=$ServiceNotificationPeriodValues selected=$ServiceNotificationPeriod}
 	</select>
 	</td>
 	</tr>
 	<tr>
 	<td><LABEL for="ServiceNotificationOptions">{t}Service notification options{/t}</LABEL>{$must}</td>
-	<td><select name="ServiceNotificationOptions" id="ServiceNotificationOptions">
+	<td><select name="ServiceNotificationOptions" id="ServiceNotificationOptions" {$ServiceNotificationOptions}>
 	{html_options options=$ServiceNotificationOptionsValues values=$ServiceNotificationOptionsValues selected=$ServiceNotificationOptions}
 	</select>
 	</td>
@@ -39,7 +39,7 @@
 
 	<tr>
 	<td><LABEL for="HostNotificationOptions">{t}Host notification options{/t}</LABEL>{$must}</td>
-	<td><select name="HostNotificationOptions" id="HostNotificationOptions">
+	<td><select name="HostNotificationOptions" id="HostNotificationOptions" {$HostNotificationOptions}>
 	{html_options options=$HostNotificationOptionsValues values=$HostNotificationOptionsValues selected=$HostNotificationOptions }
 	</select>
 	</td>
