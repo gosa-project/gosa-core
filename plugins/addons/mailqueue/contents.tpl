@@ -9,9 +9,9 @@
 	<input name="search_for" size="25" maxlength="60" value="{$search_for}" title="{t}Please enter a search string here.{/t}" onchange="mainform.submit()">
 		&nbsp;in 
 	<select size="1" name="p_server" title="{t}Select a server{/t}" onchange="mainform.submit()">
-		{html_options values=$p_servers output=$p_servers selected=$p_server}
+		{html_options values=$p_serverKeys output=$p_servers selected=$p_server}
 	</select>
- 		&nbsp;{t}Select time periode{/t}
+ 		&nbsp;{t}within the last{/t}&nbsp;
 	<select size="1" name="p_time" onchange="mainform.submit()">
 		{html_options values=$p_timeKeys output=$p_times selected=$p_time}
  	</select>

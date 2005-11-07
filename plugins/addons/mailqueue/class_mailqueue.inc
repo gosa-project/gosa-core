@@ -13,7 +13,7 @@ class mailqueue extends plugin
   var $QueryCommand = "";
   var $RemoveCommand= "";
 
-  var $Server         = "none";
+  var $Server         = "all";
   var $Time           = 0;
   var $Search         = "*";
   var $Page           = 0;
@@ -30,7 +30,7 @@ class mailqueue extends plugin
     $this->QueryCommand = search_config($this->config->data['MENU'], "mailqueue", "MAILQUEUE_QUERY_COMMAND");
     $this->RemoveCommand= search_config($this->config->data['MENU'], "mailqueue", "MAILQUEUE_REMOVE_COMMAND");
 
-    $this->Server = "none";
+    $this->Server = "all";
   }
 
   function execute()
@@ -38,9 +38,20 @@ class mailqueue extends plugin
     /* Call parent execute */
     plugin::execute();
     $smarty= get_smarty();
+     
+    $q_cmd = preg_replace("/%server/",$this->Server,$this->QueryCommand);
 
-    if($str = @shell_exec ($this->QueryCommand)){	
+    if($str = @shell_exec ($q_cmd)){	
       $mailQueueParser = new parseMailQueue($str);
+
+      if(isset($_GET['del'])){
+        if($mailQueueParser->IDExists($_GET['del'])){
+          $r_cmd = preg_replace("/%server/", $this->Server,$this->RemoveCommand);  
+          $r_cmd = preg_replace("/%id/",     $_GET['del'] ,$r_cmd);  
+          print $r_cmd;
+        }
+      }
+
       $mailQueueParser->OrderBy($this->OrderBy,$this->SortType);
       $mailQueueParser->OnlyDaysAgo($this->Time);
       $mailQueueParser->CreateDate();
@@ -51,6 +62,7 @@ class mailqueue extends plugin
       $smarty->assign("plug","?plug=".$_GET['plug']);
       $smarty->assign("p_server",$this->Server);
       $smarty->assign("p_servers",$this->getServer());
+      $smarty->assign("p_serverKeys",array_flip($this->getServer()));
       $smarty->assign("p_time", $this->Time);
       $smarty->assign("p_times",$this->getTimes());
       $smarty->assign("p_timeKeys",array_flip($this->getTimes()));
@@ -72,7 +84,7 @@ class mailqueue extends plugin
 
   function getServer()
   {
-    $ret= array("none",_("none"));
+    $ret= array("all"=>_("All"));
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);    
     $ldap->search("(objectClass=goMailServer)",array("cn"));
@@ -84,12 +96,13 @@ class mailqueue extends plugin
 
   function getTimes()
   {
-    $ret = array("all"=>_("all"));
-    for($i = 0 ; $i < 10 ; $i ++ ){
+    $ret = array();
+    $ret['nolimit']=_("no limit"); 
+    foreach(array(1,2,4,8,12,24,36,48) as $i){
       if($i == 1){
-        $ret[$i] = $i."&nbsp;"._("day ago");
+        $ret[$i] = $i."&nbsp;"._("hour");
       }else{
-        $ret[$i] = $i."&nbsp;"._("days ago");
+        $ret[$i] = $i."&nbsp;"._("hours");
       }
     }
     return($ret);

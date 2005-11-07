@@ -18,8 +18,8 @@ class parseMailQueue
   function OnlyDaysAgo($str)
   {
     $cur = time();
-    if(is_numeric($str)){
-      $cur = $cur - ($str*(60*60*24));
+    if((is_numeric($str))&&($str != 0)){
+      $cur = $cur - ($str*(60*60));
       foreach($this->a_parsedData as $key => $data){
         if($data['Arrival'] < $cur){
           unset($this->a_parsedData[$key]);
