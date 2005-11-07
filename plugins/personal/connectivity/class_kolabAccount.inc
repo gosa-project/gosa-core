@@ -19,7 +19,7 @@ class kolabAccount extends plugin
 
   /* attribute list for save action */
   var $attributes= array( "kolabFreeBusyFuture", "unrestrictedMailSize", "calFBURL");
-  var $objectclasses= array();
+  var $objectclasses= array("kolab");
 
   /* Helper */
   var $imapping= array();
