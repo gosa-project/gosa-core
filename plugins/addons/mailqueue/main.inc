@@ -20,7 +20,7 @@
 
 if (!$remove_lock){
 	/* Page header*/
-	$display= print_header(get_template_path('images/logview.png'), _("Mail queue"));
+	$display= print_header(get_template_path('images/mailqueue.png'), _("Mail queue"));
 
 	/* Create mailqueue object on demand */
 	if (!isset($_SESSION['mailqueue']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
