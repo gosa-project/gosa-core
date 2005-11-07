@@ -15,8 +15,9 @@
      </td>
     </tr>
     <tr>
-     <td colspan=2></td>
+     <td colspan=2>&nbsp;</td>
     </tr>
+    <tr>
     <tr>
      <td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
      <td>
@@ -31,7 +32,7 @@
   <td style="border-left:1px solid #A0A0A0; padding-left:10px;">
    <b><LABEL for="members">{t}Member objects{/t}</LABEL></b>&nbsp;({$combinedObjects})
    <br>
-   <select style="width:400px; height:300px;" id="members" name="members[]" size="15" multiple>
+   <select style="width:100%; height:450px;" id="members" name="members[]" size="15" multiple>
     {$members}
    </select>
    <br>

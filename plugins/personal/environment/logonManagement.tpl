@@ -72,6 +72,6 @@
 
 	<p class="seperator">&nbsp;</p>
     <p align="right">
-    <input type="submit" name="LogonSave"     value="{t}Save{/t}">
+    <input type="submit" name="LogonSave"     value="{t}Apply{/t}">
     <input type="submit" name="LogonCancel"   value="{t}Cancel{/t}">
     </p>

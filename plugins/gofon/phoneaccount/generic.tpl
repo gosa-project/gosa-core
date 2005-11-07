@@ -2,7 +2,7 @@
  <tr>
   <td style="vertical-align:top; border-right:1px solid #A0A0A0; width:50%">
    <h2><img alt="" align="middle" src="images/banana.png"> {t}Phone numbers{/t}</h2>
-      <select style="width:380px;" name="phonenumber_list[]" size=4 multiple {$telephoneNumberACL}>
+      <select style="width:100%;" name="phonenumber_list[]" size=7 multiple {$telephoneNumberACL}>
        {html_options options=$phoneNumbers}
 		<option disabled>
 			&nbsp;

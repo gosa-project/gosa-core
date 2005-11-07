@@ -1,29 +1,26 @@
-<h2><img alt="" align="middle" src="images/select_phone.png"> {t}Specific Phone settings{/t}</h2>
+<h2><img alt="" align="middle" src="images/select_phone.png"> {t}Advanced phone settings{/t}</h2>
 
-<table summary="" width="100%" cellpadding=10>
+<table summary="" style="width:100%" border=0>
 	<tr>
-		<td colspan="3">
-			<table summary="" width="100%">
-			<tr>
-				<td>
-					<LABEL for="selected_categorie">{t}Phone type{/t}</LABEL>{$staticAddress}
-					<select id="selected_categorie" size="1" name="selected_categorie" title="{t}Choose a phone type{/t}" onchange="mainform.submit();">
-						{html_options options=$categories selected=$selected_categorie}
-					</select>
-					<input type="submit" value="{t}refresh{/t}" name="refresh">
-				</td>
-			</table>
+		<td colspan="2">
+		<LABEL for="selected_categorie">{t}Phone type{/t}</LABEL>{$staticAddress}
+		<select id="selected_categorie" size="1" name="selected_categorie" title="{t}Choose a phone type{/t}" onchange="mainform.submit();">
+			{html_options options=$categories selected=$selected_categorie}
+		</select>
+		<input type="submit" value="{t}refresh{/t}" name="refresh">
+		<br>
+		<br>
+	</td>
 	</tr>
-
 {if $selected_categorie eq '0'}
-	
 	<tr>
-		<td>
-			<table summary="">
+		<td style="width:50%; border-right:1px solid #A0A0A0">
+			<table summary="" border=0>
 			 <tr>
 				<td>
 					<LABEL for="goFonType">{t}Mode{/t}</LABEL>{$staticAddress}
-
+					
+				</td>
 				<td>
 					<select id="goFonType" size="1" name="goFonType" title="{t}Choose a phone type{/t}" style="width:200px;" {$goFonTypeUSED}>
 						{html_options options=$goFonTypes selected=$goFonType}
@@ -43,7 +40,7 @@
 		</table>
 	   </td>
 	   <td>
-		<table summary="">
+		<table summary="" border=0>
 			<tr>
 				<td >
 					<LABEL for="goFonDefaultIP">{t}Default IP{/t}</LABEL>
@@ -64,8 +61,6 @@
 			</tr>
 			</table>
 		</td>
-		<td>
-		</td>
 	 </tr>
 </table>
 {/if}
@@ -73,7 +68,7 @@
 {if $selected_categorie eq '1'}
 		
 	<tr>
-		<td style="vertical-align:top">
+		<td style="vertical-align:top; width:50%; border-right:1px solid #A0A0A0">
 			<table summary="" width="100%">
 			 <tr>
 				<td>
@@ -158,7 +153,7 @@
                     <LABEL for="goFonTrunk">{t}Trunk lines{/t}</LABEL>
                 </td>
                 <td>
-                     <select size="1" id="goFonTrunk" name="goFonTrunk" title="{t}Choose a phone type{/t}" style="width:200px;" {$goFonTrunkUSED}>
+                     <select size="1" id="goFonTrunk" name="goFonTrunk" title="{t}Choose a phone type{/t}" {$goFonTrunkUSED}>
                         {html_options options=$goFonTrunks selected=$goFonTrunk}
                      </select>
                  </td>
@@ -171,7 +166,7 @@
                <tr>
                     <td style="vertical-align:top;">
                         <LABEL for="goFonPermitS">{t}Hosts that are allowed to connect{/t}</LABEL><br>
-                        <select id="goFonPermitS" style="width:300px; height:80px;" name="goFonPermitS" size=15
+                        <select id="goFonPermitS" style="width:100%; height:80px;" name="goFonPermitS" size=15
                             multiple title="{t}List of alternative mail addresses{/t}">
                             {html_options values=$goFonPermit output=$goFonPermit}
                             <option disabled>&nbsp;</option>
@@ -186,7 +181,7 @@
 				<tr>
                     <td style="vertical-align:top;">
              	        <LABEL for="goFonDenyS">{t}Hosts that are not allowed to connect{/t}</LABEL><br>
-                        <select id="goFonDenyS" style="width:300px; height:80px;" name="goFonDenyS" size=15
+                        <select id="goFonDenyS" style="width:100%; height:80px;" name="goFonDenyS" size=15
                             multiple title="{t}List of alternative mail addresses{/t}">
                             {html_options values=$goFonDeny output=$goFonDeny}
                             <option disabled>&nbsp;</option>
@@ -203,7 +198,7 @@
 
 {if $selected_categorie eq '2'}
 	<tr>
-		<td>
+		<td style="width:50%">
 			<table summary="" width="100%">
 				<tr>
 					<td>

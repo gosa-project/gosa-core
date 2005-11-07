@@ -80,7 +80,7 @@
 
 <table summary="" style="width:100% ; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
-  <td style='width:50%'>
+  <td style='width:50%;vertical-align:top'>
    <h2><img alt="" align="middle" src="images/terminal_small.png"> {t}Account{/t}</h2>
    {include file="$pwmode.tpl"}
   </td>
@@ -92,7 +92,7 @@
     {t}Trust mode{/t}&nbsp;<select name="trustmode" id="trustmode" size=1 onchange="changeSelectState('trustmode', 'wslist'); changeSelectState('trustmode', 'add_ws'); changeSelectState('trustmode', 'del_ws');" {$trustmodeACL}>
       {html_options options=$trustmodes selected=$trustmode}
     </select>
-   <select style="width:100%" id="wslist" name="workstation_list[]" size=5 multiple {$trustmodeACL} {$trusthide}>
+   <select style="width:100%" id="wslist" name="workstation_list[]" size=8 multiple {$trustmodeACL} {$trusthide}>
     {html_options values=$workstations output=$workstations}
 	{if $emptyArrAccess}
 		<option disabled>&nbsp;</option>

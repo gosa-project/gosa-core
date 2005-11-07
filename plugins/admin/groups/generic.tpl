@@ -2,7 +2,7 @@
  <tr>
   <td style="width:50%; vertical-align:top;">
    <input type="hidden" name="groupedit" value="1">
-   <table summary="">
+   <table summary="" style="width:100%">
     <tr>
      <td><LABEL for="cn">{t}Group name{/t}</LABEL>{$must}</td>
      <td>
@@ -86,12 +86,12 @@
 
   <td style="vertical-align:top;">
 
-   <table summary="">
+   <table summary="" style="width:100%">
     <tr>
-     <td style="vertical-align:top;">
+     <td style="vertical-align:top; width:50%">
       <b><LABEL for="members">{t}Group members{/t}</LABEL></b>
       <br>
-      <select style="width:400px; height:300px;" id="members" name="members[]" size=15 multiple>
+      <select style="width:100%; height:450px;" id="members" name="members[]" size=15 multiple>
        {html_options options=$members}
 		<option disabled>&nbsp;</option>
       </select>

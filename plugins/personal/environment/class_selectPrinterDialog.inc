@@ -25,8 +25,8 @@ class selectPrinterDialog extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     /* Fill templating stuff */
     $smarty= get_smarty();
@@ -54,7 +54,7 @@ class selectPrinterDialog extends plugin
     $smarty->assign("search_image", get_template_path('images/search.png'));
     $smarty->assign("tree_image", get_template_path('images/tree.png'));
     $smarty->assign("infoimage", get_template_path('images/info.png'));
-    $smarty->assign("launchimage", get_template_path('images/launch.png'));
+    $smarty->assign("launchimage", get_template_path('images/small_filter.png'));
     $smarty->assign("deplist", $this->config->idepartments);
 
     $display.= $smarty->fetch(get_template_path('selectPrinterDialog.tpl', TRUE,dirname(__FILE__)));

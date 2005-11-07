@@ -104,7 +104,7 @@
 	<table summary="" style="width:100%">
 		<tr>
 			<td>
-			<select style="width:100%;" name="gotoShare" multiple size=4 {$gotoShareACL} id="gotoShare">
+			<select style="width:100%;" name="gotoShare" multiple size=5 {$gotoShareACL} id="gotoShare">
 	{html_options values=$gotoShareKeys output=$gotoShares}
 	<option disabled>&nbsp;</option>
 				</select>
@@ -125,7 +125,7 @@
 	<table summary="{t}Logon script management{/t}" style="width:100%">
 		<tr>
 			<td>
-			<select style="width:100%;" name="gotoLogonScript" multiple size=4 {$gotoLogonScriptACL} id="gotoLogonScript">
+			<select style="width:100%;" name="gotoLogonScript" multiple size=5 {$gotoLogonScriptACL} id="gotoLogonScript">
 	{html_options values=$gotoLogonScriptKeys output=$gotoLogonScripts }
 	<option disabled>&nbsp;</option>
 				</select>
@@ -150,7 +150,7 @@
 	<table style="width:100%" summary="{t}Hotplug device settings{/t}">
 		<tr>
 			<td>
-				<select name="gotoHotplugDevice" {$gotoHotplugDeviceACL} size=4  style="width:100%;" id="gotoHotplugDevice">
+				<select name="gotoHotplugDevice" {$gotoHotplugDeviceACL} size=5  style="width:100%;" id="gotoHotplugDevice">
 	{html_options values=$gotoHotplugDeviceKeys output=$gotoHotplugDevices}
 	<option disabled>&nbsp;</option>
 			</td>
@@ -169,7 +169,7 @@
     <table style="width:100%" summary="{t}Printer settings{/t}">
 	<tr>
 	    <td>
-		<select style="width:100%;" name="gotoPrinterSel" multiple size=4 {$gotoPrinterACL} id="gotoPrinter">
+		<select style="width:100%;" name="gotoPrinterSel" multiple size=5 {$gotoPrinterACL} id="gotoPrinter">
 		{html_options values=$gotoPrinterKeys output=$gotoPrinter}
 		<option disabled>&nbsp;</option>
 		</select>

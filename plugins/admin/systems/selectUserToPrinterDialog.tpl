@@ -2,7 +2,7 @@
 
   	<table summary="{t}Select printer to add{/t}" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
         <tr>
-            <td width="50%">
+            <td style="width:600px">
 	  			<div class="contentboxh" style="height:20px;">
     				<p class="contentboxh" style="font-size:12px">
      					<b><LABEL for="gotoPrinter">{t}Select entries to add{/t}</LABEL></b>
@@ -10,7 +10,7 @@
    				</div>
    				<div class="contentboxb">
     				<p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-		                <select style="width:500px;height:480px;" size=20 name="gotoPrinter[]" id="gotoPrinter" multiple>
+		                <select style="width:600px;height:450px;" size=20 name="gotoPrinter[]" id="gotoPrinter" multiple>
         		        {html_options values=$gotoPrinterKeys output=$gotoPrinters}
                 		<option disabled>&nbsp;</option>
                			 </select><br>
@@ -18,18 +18,8 @@
 				</div>
             </td>
             <td valign="top">
-				<div class="contentboxh">
-    				<p class="contentboxh"><img src="{$infoimage}" align="right" alt="[i]">{t}Information{/t}</p>
-  	 			</div>
-   				<div class="contentboxb">
-   					<p class="contentboxb" style="background-color:#F8F8F8">
-    					{t}This menu allows you to select one or multiple entries to be added to the printer object for specific tasks. Having a great number of entries, you may want to use the range selectors below.{/t}
-    				</p>
-   				</div>
-   				<br>
-
-		   		<div class="contentboxh">
-    				<p class="contentboxh"><img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}</p>
+		   		<div class="contentboxh" style="height:20px">
+    				<p class="contentboxh" style="font-size:12px"><img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}</p>
    				</div>
    				<div class="contentboxb">
      				<table summary="" style="width:100%;border-top:1px solid #B0B0B0;background-color:#F8F8F8">

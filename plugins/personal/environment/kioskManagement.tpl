@@ -5,7 +5,7 @@
 	<table summary="{t}Kiosk profile management{/t}" width="100%">
 		<tr>
 			<td>
-            	<select style="width:100%;" size=8 name="gotoKioskProfile" {$gotoKioskProfileACL} id="gotoKioskProfile">
+            	<select style="width:100%;" size=18 name="gotoKioskProfile" {$gotoKioskProfileACL} id="gotoKioskProfile">
                 {html_options values=$gotoKioskProfileKeys output=$gotoKioskProfiles}
                 <option disabled>&nbsp;</option>
                 </select><br>
@@ -18,7 +18,9 @@
 		</tr>
 	</table>
 
+    <p class="seperator">&nbsp;</p>
+
     <p align="right">
-    <input type="submit" name="KioskClose"     value="{t}Close{/t}">
+    <input type="submit" name="KioskClose"     value="{t}Back{/t}">
     </p>
 

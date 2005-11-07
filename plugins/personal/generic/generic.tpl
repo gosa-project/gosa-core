@@ -116,10 +116,10 @@
   <td style="vertical-align:top;">
 
    <!-- Address, ... -->
-   <table summary=""> 
+   <table summary="" style="width:100%"> 
     <tr>
      <td style="vertical-align:top;"><label for="homePostalAddress">{t}Address{/t}</label></td>
-     <td><textarea id="homePostalAddress" name="homePostalAddress" rows="3" cols="22" {$homePostalAddressACL}>{$homePostalAddress}</textarea></td>
+     <td><textarea id="homePostalAddress" name="homePostalAddress" rows="3" style="width:100%" {$homePostalAddressACL}>{$homePostalAddress}</textarea></td>
     </tr>
     <tr>
      <td><label for="homePhone">{t}Private phone{/t}</label></td>
@@ -252,7 +252,7 @@
 
   <!-- Location, ... -->
   <td style="vertical-align:top;">
-   <table summary=""> 
+   <table summary="" style="width:100%"> 
     <tr>
      <td><label for="l">{t}Location{/t}</l></td>
      <td><input id="l" name="l" size=22 maxlength=60 {$lACL} value="{$l}"></td>
@@ -264,7 +264,7 @@
     <tr>
      <td style="vertical-align:top;"><label for="postalAddress">{t}Address{/t}</label></td>
      <td>
-      <textarea id="postalAddress" name="postalAddress" rows=3 cols=22 {$postalAddressACL}>{$postalAddress}</textarea>
+      <textarea id="postalAddress" name="postalAddress" rows=3 style="width:100%" {$postalAddressACL}>{$postalAddress}</textarea>
      </td>
     </tr>
    </table>

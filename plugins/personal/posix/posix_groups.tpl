@@ -8,7 +8,7 @@
    </div>
    <div class="contentboxb">
     <p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-     <select style="width:500px; height:450px; margin-top:4px;" name="groups[]" size="15" multiple>
+     <select style="width:600px; height:450px; margin-top:4px;" name="groups[]" size="15" multiple>
 	{html_options options=$groups}
      </select>
      <input type=hidden name="edit_helper">
@@ -19,7 +19,7 @@
    <div class="contentboxh" style="height:20px;">
     <p class="contentboxh" style="font-size:12px"><img src="{$launchimage}" align="right" alt="[F]"><b>{t}Filters{/t}</b></p>
    </div>
-   <div class="contentboxb" style="background-color:#F8F8F8">
+   <div class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
      <table summary="" style="width:100%;">
       {$alphabet}
      </table>

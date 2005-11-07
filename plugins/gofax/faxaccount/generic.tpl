@@ -65,25 +65,21 @@
 
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
   <tr>
-    <td style="width:50%;">
+    <td style="width:50%; border-right:1px solid #A0A0A0">
     <h2><img alt="" align="middle" src="images/fax_small.png"> {t}Alternate fax numbers{/t}</h2>
-     <select style="width:350px; height:100px;" name="alternate_list[]" size=15 multiple {$facsimileAlternateTelephoneNumberACL}>
+    <select style="width:100%" name="alternate_list[]" size="10" multiple {$facsimileAlternateTelephoneNumberACL}>
 			{html_options values=$facsimileAlternateTelephoneNumber output=$facsimileAlternateTelephoneNumber}
 			<option disabled>&nbsp;</option>
-     </select><br>
-     <input name="forward_address" size=20 align="middle" maxlength=65 {$facsimileAlternateTelephoneNumberACL} value="">
-     <input type=submit value="{t}Add{/t}" name="add_alternate" {$facsimileAlternateTelephoneNumberACL}>&nbsp;
-     <input type=submit value="{t}Add local{/t}" name="add_local_alternate" {$facsimileAlternateTelephoneNumberACL}>&nbsp;
-     <input type=submit value="{t}Delete{/t}" name="delete_alternate" {$facsimileAlternateTelephoneNumberACL}>
-    </td>
-
-    <td style="border-left:1px solid #A0A0A0">
-     &nbsp;
-    </td>
-    
-    <td style="vertical-align:top; width:100%">
+    </select>
+    <br>
+    <input name="forward_address" size=20 align="middle" maxlength=65 {$facsimileAlternateTelephoneNumberACL} value="">
+    <input type=submit value="{t}Add{/t}" name="add_alternate" {$facsimileAlternateTelephoneNumberACL}>&nbsp;
+    <input type=submit value="{t}Add local{/t}" name="add_local_alternate" {$facsimileAlternateTelephoneNumberACL}>&nbsp;
+    <input type=submit value="{t}Delete{/t}" name="delete_alternate" {$facsimileAlternateTelephoneNumberACL}>
+   </td>
+   <td style="vertical-align:top; width:50%">
       <h2><img alt="" align="middle" src="images/false.png"> {t}Blocklists{/t}</h2>
-      <table summary="">
+      <table summary="" style="width:100%">
         <tr>
           <td>{t}Blocklists for incoming fax{/t}</td>
           <td>

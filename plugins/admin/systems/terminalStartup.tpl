@@ -52,7 +52,7 @@
    <h2>
     <img alt="" align="middle" src="images/hardware.png"> {t}Kernel modules (format: name parameters){/t}
    </h2>
-    <select style="width:100%; height:100px;" name="modules_list[]" size=15 multiple title="{t}Add additional modules to load on startup{/t}">
+    <select style="width:100%;" name="modules_list[]" size=15 multiple title="{t}Add additional modules to load on startup{/t}">
      {html_options values=$gotoModules output=$gotoModules}
 	 <option disabled>&nbsp;</option>
     </select>
@@ -62,12 +62,12 @@
     <input type=submit value="{t}Delete{/t}" name="delete_module" {$gotoModulesACL}>
   </td>
 
-  <td style="padding-left:10px;border-left:1px solid #A0A0A0" >
+  <td style="padding-left:10px;border-left:1px solid #A0A0A0;vertical-align:top">
         <h2><img alt="" src="images/fai_partitionTable.png" align="middle">&nbsp;<LABEL for="gotoShare">{t}Shares{/t}</LABEL></h2>
         <table summary="" style="width:100%">
                 <tr>
                         <td>
-                        <select style="width:100%;height:150px;" name="gotoShare" multiple size=4 {$gotoShareACL} id="gotoShare">
+                        <select style="width:100%;" name="gotoShare" multiple size=15 {$gotoShareACL} id="gotoShare">
         {html_options values=$gotoShareKeys output=$gotoShares}
         <option disabled>&nbsp;</option>
                                 </select>

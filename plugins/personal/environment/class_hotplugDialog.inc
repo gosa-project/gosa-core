@@ -67,8 +67,7 @@ class hotplugDialog extends plugin
       $smarty->assign("alphabet", generate_alphabet());
       $smarty->assign("search_image", get_template_path('images/search.png'));
       $smarty->assign("tree_image", get_template_path('images/tree.png'));
-      $smarty->assign("infoimage", get_template_path('images/info.png'));
-      $smarty->assign("launchimage", get_template_path('images/launch.png'));
+      $smarty->assign("launchimage", get_template_path('images/small_filter.png'));
       $smarty->assign("deplist", $this->config->idepartments);
 
 

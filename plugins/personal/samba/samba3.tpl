@@ -190,7 +190,7 @@
   <td style="border-left:1px solid #A0A0A0">
    &nbsp;
   </td>
-  <td style="vertical-align:top;">
+  <td style="vertical-align:top;width:50%">
    <i>{t}Miscellaneous{/t}</i>
    <table summary="">
     <tr>
@@ -300,7 +300,7 @@
   <td style="vertical-align:top;">
    <LABEL for="workstation_list">{t}Allow connection from these workstations only{/t}</LABEL>
    <br>
-   <select id="workstation_list" style="width:350px;" name="workstation_list[]" size=10 multiple {$sambaUserWorkstationACL}>
+   <select id="workstation_list" style="width:100%;" name="workstation_list[]" size=10 multiple {$sambaUserWorkstationACL}>
     {html_options values=$workstations output=$workstations}
    </select>
    <br>

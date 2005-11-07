@@ -1,6 +1,6 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
  <tr>
-   <td style="vertical-align:top;">
+   <td style="vertical-align:top; width:50%">
      <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Properties{/t}</h2>
      
      <table summary="">
@@ -41,7 +41,7 @@
    <td>
      <h2><img alt="" align="middle" src="images/house.png"> {t}Location{/t}</h2>
 
-     <table summary="">
+     <table summary="" style="width:100%">
       <tr>
        <td><LABEL for="st">{t}State{/t}</LABEL></td>
        <td><input id="st" name="st" size=25 maxlength=60 {$stACL} value="{$st}" title="{t}State where this subtree is located{/t}"></td>
@@ -52,7 +52,7 @@
       </tr>
       <tr>
        <td style="vertical-align:top;"><LABEL for="postalAddress">{t}Address{/t}</LABEL></td>
-       <td><textarea id="postalAddress" name="postalAddress" rows=3 cols=22 {$postalAddressACL} title="{t}Postal address of this subtree{/t}">{$postalAddress}</textarea>
+       <td><textarea id="postalAddress" name="postalAddress" style="width:100%" rows=3 cols=22 {$postalAddressACL} title="{t}Postal address of this subtree{/t}">{$postalAddress}</textarea>
       </tr>
       <tr>
        <td><LABEL for="telephoneNumber">{t}Phone{/t}</LABEL></td>
