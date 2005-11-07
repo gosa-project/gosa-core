@@ -1,6 +1,6 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
-  <td style="width:40%; vertical-align:top;">
+  <td style="width:50%; vertical-align:top;">
    <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Nagios Account{/t}</h2>
    <table summary="">
     <tr>
@@ -66,24 +66,24 @@
    <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Nagios authentification{/t}</h2>
    <table summary="">
 	<tr><td><input type="checkbox" name="AuthorizedSystemInformation" value="1" {$AuthorizedSystemInformationACL}  
-{$AuthorizedSystemInformationCHK}>{t}can view system informations{/t}</td></tr>
+{$AuthorizedSystemInformationCHK}>{t}view system informations{/t}</td></tr>
 	
 	<tr><td><input type="checkbox" name="AuthorizedConfigurationInformation" {$AuthorizedConfigurationInformationACL} value="1" 
-{$AuthorizedConfigurationInformationCHK}>authorized_for_configuration_information</td></tr>
+{$AuthorizedConfigurationInformationCHK}>{t}view configuration information{/t}</td></tr>
 	
 	<tr><td><input type="checkbox" name="AuthorizedSystemCommands" {$AuthorizedSystemCommandsACL} value="1" 
-{$AuthorizedSystemCommandsCHK}>authorized_for_system_commands</td></tr>
+{$AuthorizedSystemCommandsCHK}>{t}trigger system commands{/t}</td></tr>
 	
 	<tr><td><input type="checkbox" name="AuthorizedAllServices" {$AuthorizedAllServicesACL} value="1" 
-{$AuthorizedAllServicesCHK}>authorized_for_all_services</td></tr>
+{$AuthorizedAllServicesCHK}>{t}view all services{/t}</td></tr>
 	
 	<tr><td><input type="checkbox" name="AuthorizedAllHosts" {$AuthorizedAllHostsACL} value="1" 
-{$AuthorizedAllHostsCHK}>authorized_for_all_hosts</td></tr>
+{$AuthorizedAllHostsCHK}>{t}view all hosts{/t}</td></tr>
 	
-	<tr><td><input type="checkbox" name="AuthorizedAllServiceCommands" {$AuthorizedAllServiceCommandsACL} value="1" {$AuthorizedAllServiceCommandsCHK}>authorized_for_all_service_commands</td></tr>
+	<tr><td><input type="checkbox" name="AuthorizedAllServiceCommands" {$AuthorizedAllServiceCommandsACL} value="1" {$AuthorizedAllServiceCommandsCHK}>{t}trigger all service commands{/t}</td></tr>
 	
 	<tr><td><input type="checkbox" name="AuthorizedAllHostCommands" {$AuthorizedAllHostCommandsACL} value="1" 
-{$AuthorizedAllHostCommandsCHK}>authorized_for_all_host_commands</td></tr>
+{$AuthorizedAllHostCommandsCHK}>{t}trigger all host commands{/t}</td></tr>
 
    </table>
 </td>
