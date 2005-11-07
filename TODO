@@ -6,10 +6,8 @@ Things to fix before 2.4:
 
 * Fix pictures in phone conferences
 
-* Fix PHP errors in nagios plugin
-
 * Integrate mail queue plugin
-
+  - Server selection not implemented yet
 
 Target for 2.5:
 ===============
