@@ -15,11 +15,21 @@ class parseMailQueue
 	  $this->_parse();
   }
 
+
+  /* Remove all entries which are older than the last x hours
+   */
   function OnlyDaysAgo($str)
   {
+    /* Get current time */
     $cur = time();
+  
+    /* Only perform this filter, if the given parameter is valid */
     if((is_numeric($str))&&($str != 0)){
+
+      /* hours are given as parameter */
       $cur = $cur - ($str*(60*60));
+
+      /* Remove old entries */
       foreach($this->a_parsedData as $key => $data){
         if($data['Arrival'] < $cur){
           unset($this->a_parsedData[$key]);
@@ -28,9 +38,16 @@ class parseMailQueue
     }
   }
 
+
+  /* Only keep entries that contains the $filter
+   * in any of the given $fields
+   */
   function Search($filter,$fields)
   {
+    /* Go through all entries */
     foreach($this->a_parsedData as $key => $data){
+
+      /* not found yet */
       $found = false;
 
       foreach($fields as $attr){
@@ -38,12 +55,15 @@ class parseMailQueue
           $found= true;
         }
       }
+  
+      /* if nothing found, delete this entry */
       if($found == false){
         unset($this->a_parsedData[$key]);
       }
     }
   }
 
+  /* Convert date from timestamp to human readable */
   function CreateDate()
   {
     foreach($this->a_parsedData as $key => $data){
@@ -51,13 +71,18 @@ class parseMailQueue
     }
   }
 
+  /* Order by specified field */
   function OrderBy($str = "Arrival",$type = "up" )
   {
     $tmp = array();
+
+    /* If the given field is not valid */
     if(!in_array($str,array("MailID","Size","Sender","Recipient","Arrival","Error"))){
       return(false);
     }
 
+    /* Size need special handling, cause it contains numbers 
+     */
     if($str == "Size"){
       foreach($this->a_parsedData as $data){
         $struse = "";
@@ -87,6 +112,7 @@ class parseMailQueue
     return($this->a_parsedData);
   }
 
+  /* Checks if the given MailID exists */
   function IDExists($id)
   {
     return(((isset($this->a_parsedData[$id]))&&(is_array($this->a_parsedData[$id]))));
@@ -145,6 +171,7 @@ class parseMailQueue
       $s_Error      = $s_buffer[1];
       $s_Recipient  = $s_buffer[2];
 
+      /* Append data */
       $this->a_parsedData[$s_mailID]['MailID']     = $s_mailID; 
       $this->a_parsedData[$s_mailID]['Size']       = $s_Size; 
       $this->a_parsedData[$s_mailID]['Arrival']    = $s_Arrival; 
@@ -155,6 +182,7 @@ class parseMailQueue
     return($this->a_parsedData);
   }
 
+  /* Parse Error part of the entry */
   function _parseError($str)
   {
     $str   = trim(preg_replace("/[()]/","",$str));
