@@ -4,9 +4,6 @@ Things to fix before 2.4:
 * FAI management
   - Add package configuration dialog 
 
-
-* Fix PHP errors in nagios plugin
-
 * Add input focus for all new dialogs
 
 * Rework dialog to add various blocklists (fax account)
@@ -17,8 +14,6 @@ Things to fix before 2.4:
   in group dialog
 
 * "New" in conference indicator DN?
-
-* Problem when mail queue commands are not defined - massive errors
 
 
 Target for 2.5:
