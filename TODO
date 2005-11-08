@@ -8,6 +8,9 @@ Things to fix before 2.4:
 
 * Rework dialog to add aplications (group dialog)
 
+* Remove local path (/var/spool/ppd/) from ppd attribute in LDAP. The client is
+  not interested in this path
+
 
 Target for 2.5:
 ===============
