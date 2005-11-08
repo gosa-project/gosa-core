@@ -130,15 +130,6 @@ class faiPackageEntry extends plugin
       }
     }
 
-    /* Add an empty line if list is empty */
-    if($cnt ==0){
-      $divlist->AddEntry(array(array("string"=>"&nbsp;"),
-            array("string"=>"&nbsp;"),
-            array("string"=>"&nbsp;"),
-            array("string"=>"&nbsp;","attach"=>"style='border-right:0px'")));
-    }
-
-
     $_SESSION['searchStrPKG']       = $this->searchStrPKG;
     $smarty->assign("CHKS"          , $CHKS);
     $smarty->assign("searchStrPKG"  , $this->searchStrPKG);
