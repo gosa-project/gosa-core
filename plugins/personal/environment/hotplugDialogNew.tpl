@@ -38,3 +38,9 @@
 	<input type="submit" name="HotPlugSave" 	value="{t}save{/t}">
 	<input type="submit" name="HotPlugCancel" 	value="{t}Cancel{/t}">
 	</p>
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+  document.mainform.HOT_name.focus();
+  -->
+</script>
+

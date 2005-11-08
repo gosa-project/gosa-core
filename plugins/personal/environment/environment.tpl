@@ -183,5 +183,10 @@
    </td>
   </tr>
 </table>
-
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+  document.mainform.useProfile.focus();
+  -->
+</script>
 {/if}
+

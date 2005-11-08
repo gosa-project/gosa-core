@@ -60,4 +60,8 @@
     <input type="submit" name="PrinterSave"     value="{t}Add{/t}">
     <input type="submit" name="PrinterCancel"   value="{t}Cancel{/t}">
     </p>
-
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+  document.mainform.gotoPrinter.focus();
+  -->
+</script>

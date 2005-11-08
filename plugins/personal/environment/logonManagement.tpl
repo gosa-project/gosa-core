@@ -75,3 +75,10 @@
     <input type="submit" name="LogonSave"     value="{t}Apply{/t}">
     <input type="submit" name="LogonCancel"   value="{t}Cancel{/t}">
     </p>
+
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+  document.mainform.LogonName.focus();
+  -->
+</script>
+
