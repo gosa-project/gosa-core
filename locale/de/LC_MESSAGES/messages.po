@@ -639,7 +639,7 @@ msgstr "Nachrichten weiterleiten an"
 #: plugins/personal/mail/generic.tpl:129
 #: plugins/gofax/faxaccount/generic.tpl:76 plugins/admin/groups/mail.tpl:102
 msgid "Add local"
-msgstr "Gebietsschema hinzufügen"
+msgstr "Lokale hinzufügen"
 
 #: plugins/personal/mail/generic.tpl:139
 msgid "Advanced mail options"
