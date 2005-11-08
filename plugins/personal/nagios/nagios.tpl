@@ -95,7 +95,7 @@
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
-  document.mainform.mail.focus();
+  document.mainform.NagiosAlias.focus();
   -->
 </script>
 
