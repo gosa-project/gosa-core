@@ -117,7 +117,9 @@ class printgeneric extends plugin
       /* $this->members contains all members */
       $this->member[$type]=array();
 
-      unset($this->attrs[$attr]['count']);
+      if (isset($this->attrs[$attr]['count'])) {
+        unset($this->attrs[$attr]['count']);
+      }
 
       if(isset($this->attrs[$attr])){
         foreach($this->attrs[$attr] as $mem){
