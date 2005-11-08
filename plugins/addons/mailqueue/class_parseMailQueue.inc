@@ -9,10 +9,11 @@ class parseMailQueue
   /* Contructor
    * $s_data specifies the data that shuold be parse
    */
-	function parseMailQueue($s_data)
+	function parseMailQueue($s_data,$server)
 	{
     $this->s_dataToParse = $s_data;		
-	  $this->_parse();
+	  $this->a_parsedData = array();
+    $this->_parse($s_data,$server);
   }
 
 
@@ -75,9 +76,8 @@ class parseMailQueue
   function OrderBy($str = "Arrival",$type = "up" )
   {
     $tmp = array();
-
     /* If the given field is not valid */
-    if(!in_array($str,array("MailID","Size","Sender","Recipient","Arrival","Error"))){
+    if(!in_array($str,array("MailID","Size","Sender","Recipient","Arrival","Error","Server"))){
       return(false);
     }
 
@@ -89,12 +89,12 @@ class parseMailQueue
         for($i = strlen($data['Size']); $i < 10 ; $i++  ){
           $struse .="0";
         }
-        $struse .= $data[$str].$data['MailID'];
+        $struse .= $data[$str].$data['MailID'].$data['Server'];
         $tmp[$struse]= $data;
       }
     }else{
       foreach($this->a_parsedData as $data){
-        $tmp[strtolower($data[$str]).$data['MailID']]= $data;
+        $tmp[strtolower($data[$str]).$data['MailID']."-".$data['Server']]= $data;
       }
     } 
     ksort($tmp);
@@ -103,8 +103,9 @@ class parseMailQueue
     }
     $this->a_parsedData = array();
     foreach($tmp as $data){
-      $this->a_parsedData[$data['MailID']] = $data;
+      $this->a_parsedData[$data['MailID']."-".$data['Server']] = $data;
     }
+    return(true);
   }
   
   function GetAll()
@@ -118,10 +119,15 @@ class parseMailQueue
     return(((isset($this->a_parsedData[$id]))&&(is_array($this->a_parsedData[$id]))));
   }
 
+  function parseAdditionalQueue($str, $server)
+  {
+    $this->_parse($str, $server);
+  }
+
   /* This function parses the given data 
    * it creates an array with all given queue entries
    */
-  function _parse()
+  function _parse($str, $server)
   {
     $i              =  0;       // Temp var 
     $entries        = array();  // Contains an array with the raw data for every single entry
@@ -136,7 +142,7 @@ class parseMailQueue
 
     /* Remove header
      */
-    $this->s_dataToParse = preg_replace("/^.*------\n/","",$this->s_dataToParse);
+    $this->s_dataToParse = preg_replace("/^.*------\n/","",$str);
 
     /* Create array with single entries
      */
@@ -172,12 +178,13 @@ class parseMailQueue
       $s_Recipient  = $s_buffer[2];
 
       /* Append data */
-      $this->a_parsedData[$s_mailID]['MailID']     = $s_mailID; 
-      $this->a_parsedData[$s_mailID]['Size']       = $s_Size; 
-      $this->a_parsedData[$s_mailID]['Arrival']    = $s_Arrival; 
-      $this->a_parsedData[$s_mailID]['Sender']     = $s_Sender; 
-      $this->a_parsedData[$s_mailID]['Recipient']  = $s_Recipient; 
-      $this->a_parsedData[$s_mailID]['Error']      = $this->_parseError($s_Error); 
+      $this->a_parsedData[$s_mailID."-".$server]['Server']     = $server; 
+      $this->a_parsedData[$s_mailID."-".$server]['MailID']     = $s_mailID; 
+      $this->a_parsedData[$s_mailID."-".$server]['Size']       = $s_Size; 
+      $this->a_parsedData[$s_mailID."-".$server]['Arrival']    = $s_Arrival; 
+      $this->a_parsedData[$s_mailID."-".$server]['Sender']     = $s_Sender; 
+      $this->a_parsedData[$s_mailID."-".$server]['Recipient']  = $s_Recipient; 
+      $this->a_parsedData[$s_mailID."-".$server]['Error']      = $this->_parseError($s_Error); 
     }
     return($this->a_parsedData);
   }

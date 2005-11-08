@@ -20,10 +20,16 @@
  </p>
 </div>
 <br>
+
+{if $all_ok != "true"}
+<b>{t}Search returned no results{/t}...</b>
+{else}
+
 <table style="border: 1px solid rgb(176, 176, 176); width: 100%; vertical-align: top; text-align: left;"
  border="0" cellpadding="2" cellspacing="1" rules="cols">
 	<tr style="background-color: rgb(232, 232, 232); height: 26px; font-weight: bold;">
 		<td><a href="{$plug}&sort=MailID"		>{t}ID{/t}			{if $OrderBy == "MailID"}	{$SortType}{/if}</a></td>
+		<td><a href="{$plug}&sort=Server"		>{t}Server{/t}		{if $OrderBy == "Server"}	{$SortType}{/if}</a></td>
 		<td><a href="{$plug}&sort=Size"			>{t}Size{/t}		{if $OrderBy == "Size"}		{$SortType}{/if}</a></td>
 		<td><a href="{$plug}&sort=Arrival"		>{t}Arrival{/t}		{if $OrderBy == "Arrival"}	{$SortType}{/if}</a></td>
 		<td><a href="{$plug}&sort=Sender"		>{t}Sender{/t}		{if $OrderBy == "Sender"}	{$SortType}{/if}</a></td>
@@ -41,12 +47,13 @@
 		<tr style="height: 22px; background-color: rgb(245, 245, 245);">
 	{/if}
 		<td>{$entries[$key].MailID}</td>
+		<td>{$entries[$key].Server}</td>
 		<td>{$entries[$key].Size}</td>
 		<td>{$entries[$key].Arrival}</td>
 		<td>{$entries[$key].Sender}</td>
 		<td>{$entries[$key].Recipient}</td>
 		<td titel="{$entries[$key].Error}">{$entries[$key].Error}</td>
-		<td><a href="{$plug}&del={$entries[$key].MailID}"><img src="images/edittrash.png" border=0 alt="deleted"></a></td>
+		<td><a href="{$plug}&del={$key}"><img src="images/edittrash.png" border=0 alt="deleted"></a></td>
 	</tr>
 	{counter}
 {/foreach}
@@ -61,4 +68,5 @@
  &nbsp;
 </p>
 
+{/if}
 

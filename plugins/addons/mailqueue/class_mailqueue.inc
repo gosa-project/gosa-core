@@ -39,33 +39,100 @@ class mailqueue extends plugin
     /* Call parent execute */
     plugin::execute();
     $smarty= get_smarty();
-     
-    $q_cmd = preg_replace("/%server/",$this->Server,$this->QueryCommand);
 
-    /* Only display this if the query cmd is executeable */
-    if($str = @shell_exec ($q_cmd)){
-	
-      /* Parse returned data */
-      $mailQueueParser = new parseMailQueue($str);
+    $error =false;
 
-      /* Delete entry if requested */
-      if(isset($_GET['del'])){
-        if($mailQueueParser->IDExists($_GET['del'])){
-          $r_cmd = preg_replace("/%server/", $this->Server,$this->RemoveCommand);  
-          $r_cmd = preg_replace("/%id/",     $_GET['del'] ,$r_cmd);  
-          print $r_cmd;
+    if(empty($this->QueryCommand)){
+      print_red(_("Please check your 'gosa.conf', there is no 'MAILQUEUE_QUERY_COMMAND' specified."));
+      $error = true;
+    }else{
+
+      /* tell smarty to display the search results*/
+      $smarty->assign("all_ok"      , "true");
+
+      /* A single server is selected */
+      if($this->Server != "all"){    
+
+        /* Create Query cmd */ 
+        $q_cmd = preg_replace("/%server/",$this->Server,$this->QueryCommand);
+
+        /* Only display this if the query cmd is executeable */
+        if($str = @shell_exec ($q_cmd)){
+
+          /* Parse returned data */
+          $mailQueueParser = new parseMailQueue($str,$this->Server);
+
+        }else{
+
+          /* Can't Execute cmd */
+          print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$q_cmd));
+          $error = true;
+        }
+
+      }else{
+
+        $mailQueueParser = NULL;
+        foreach($this->getServer() as $ServerID=>$ServerName){
+          if($ServerID == "all") continue;
+
+          $q_cmd = preg_replace("/%server/",$ServerName,$this->QueryCommand);
+
+          if($str = @shell_exec ($q_cmd)){
+            if($mailQueueParser == NULL){
+              $mailQueueParser = new parseMailQueue($str,$ServerID);
+            }else{
+              $mailQueueParser->parseAdditionalQueue($str,$ServerID);
+            }
+          }else{
+            print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$q_cmd));
+            $error = true;
+          }
+        }
+
+      }     
+
+      if(!$error){
+
+        /* Delete entry if requested */
+        if(isset($_GET['del'])){
+          if($mailQueueParser->IDExists($_GET['del'])){
+            $r_cmd = preg_replace("/%server/", $this->Server,$this->RemoveCommand);  
+            $r_cmd = preg_replace("/%id/",     $_GET['del'] ,$r_cmd);  
+            print $r_cmd;
+          }
+        }
+
+        /* Filter data with the given */
+        $mailQueueParser->OrderBy($this->OrderBy,$this->SortType);
+        $mailQueueParser->OnlyDaysAgo($this->Time);
+        $mailQueueParser->CreateDate();
+        $mailQueueParser->Search($this->Search,array("MailID","Size","Sender","Recipient","Error","Arrival"));
+
+        /* */
+        $entries = $mailQueueParser->GetAll(); 
+        $smarty->assign("entries"       , array_slice($entries,$this->Page,20));
+        $smarty->assign("plug"          , "?plug=".$_GET['plug']);
+        $smarty->assign("p_server"      , $this->Server);
+        $smarty->assign("p_servers"     , $this->getServer());
+        $smarty->assign("p_serverKeys"  , array_flip($this->getServer()));
+        $smarty->assign("p_time"        , $this->Time);
+        $smarty->assign("p_times"       , $this->getTimes());
+        $smarty->assign("p_timeKeys"    , array_flip($this->getTimes()));
+        $smarty->assign("search_for"    , $this->Search);
+        $smarty->assign("range_selector", range_selector(count($entries), $this->Page, 20)); 
+        $smarty->assign("OrderBy"       , $this->OrderBy);
+
+        /* Display sort arrow */
+        if($this->SortType == "up"){
+          $smarty->assign("SortType","<img src='images/sort_up.png' alt='"._("up")."' border='0'>");
+        }else{
+          $smarty->assign("SortType","<img src='images/sort_down.png' alt='"._("down")."' border='0'>");
         }
       }
+    }
 
-      /* Filter data with the given */
-      $mailQueueParser->OrderBy($this->OrderBy,$this->SortType);
-      $mailQueueParser->OnlyDaysAgo($this->Time);
-      $mailQueueParser->CreateDate();
-      $mailQueueParser->Search($this->Search,array("MailID","Size","Sender","Recipient","Error","Arrival"));
-
-      /* */
-      $entries = $mailQueueParser->GetAll(); 
-      $smarty->assign("entries"       , array_slice($entries,$this->Page,20));
+    if($error){  
+      $smarty->assign("all_ok"        , "false");
       $smarty->assign("plug"          , "?plug=".$_GET['plug']);
       $smarty->assign("p_server"      , $this->Server);
       $smarty->assign("p_servers"     , $this->getServer());
@@ -74,19 +141,7 @@ class mailqueue extends plugin
       $smarty->assign("p_times"       , $this->getTimes());
       $smarty->assign("p_timeKeys"    , array_flip($this->getTimes()));
       $smarty->assign("search_for"    , $this->Search);
-      $smarty->assign("range_selector", range_selector(count($entries), $this->Page, 20)); 
       $smarty->assign("OrderBy"       , $this->OrderBy);
-
-      /* Display sort arrow */
-      if($this->SortType == "up"){
-        $smarty->assign("SortType","<img src='images/sort_up.png' alt='"._("up")."' border='0'>");
-      }else{
-        $smarty->assign("SortType","<img src='images/sort_down.png' alt='"._("down")."' border='0'>");
-      }
- 
-    }else{
-      $smarty->assign("entries",array());
-      print_red(_("Please check your 'gosa.conf' the value for 'MAILQUEUE_QUERY_COMMAND' can't be executed."));
     }
     return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
   }
