@@ -70,3 +70,8 @@
 
 {/if}
 
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+  document.mainform.search_for.focus();
+  -->
+</script>
