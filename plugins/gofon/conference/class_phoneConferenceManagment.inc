@@ -229,7 +229,7 @@ class phoneConferenceManagment extends plugin
       $this->acl= get_permissions ($this->conftab->dn, $this->ui->subtreeACL);
       $this->conftab->set_acl($this->acl);
       $this->conftab->set_acl(array(':all'));
-      $_SESSION['objectinfo']= $this->dn;
+      unset($_SESSION['objectinfo']);//
     }
 
     /* Edit finished, check and save changes */

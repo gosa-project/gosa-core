@@ -13,8 +13,6 @@ Things to fix before 2.4:
 * Check for Nagios and Übernahme gruppe before showing these options
   in group dialog
 
-* "New" in conference indicator DN?
-
 
 Target for 2.5:
 ===============
