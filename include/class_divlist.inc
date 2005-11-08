@@ -148,7 +148,17 @@ class divlist {
 				$start=0;
 			}
 		}
-		
+
+    /* If divlist is empty, append a single white entry */
+    if(count($this->a_entries)==0){
+      $str = "<tr>";
+      for($i = 0 ; $i < count($this->a_header[0]); $i++){
+        $str.="<td class='list1' style='height:100%';>&nbsp;</td>";
+      }
+      $str .="</tr>";
+      return($str);
+    }
+ 
     if ($this->i_entriesPerPage > 0) {
   		while($start > $this->_numentries()){
   			$start = $start - $this->i_entriesPerPage;
