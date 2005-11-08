@@ -64,13 +64,13 @@ class faiTemplate extends plugin
         }
 
         foreach($this->sub64coded as $codeIt){
-          $this->SubObjects[$object['cn'][0]][$codeIt]=base64_decode($this->SubObjects[$object['cn'][0]][$codeIt]);
+          $this->SubObjects[$object['cn'][0]][$codeIt]= base64_decode($this->SubObjects[$object['cn'][0]][$codeIt]);
         }       
 
-        $this->SubObjects[$object['cn'][0]]['FAItemplateFile'] =addslashes( $this->readBinary("FAItemplateFile",$object['dn']));
+        $this->SubObjects[$object['cn'][0]]['FAItemplateFile']= $this->readBinary("FAItemplateFile",$object['dn']);
        
-        $this->SubObjects[$object['cn'][0]]['status']      = "edited";
-        $this->SubObjects[$object['cn'][0]]['dn']          = $object['dn'];
+        $this->SubObjects[$object['cn'][0]]['status']= "edited";
+        $this->SubObjects[$object['cn'][0]]['dn']= $object['dn'];
       }
       ksort($this->SubObjects);
     }
