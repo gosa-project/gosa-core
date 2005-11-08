@@ -75,7 +75,7 @@ class faiPackage extends plugin
       $this->usedPackages = array();
     }  
 
-    if ($this->attrs['FAIdebianSection']['count']){
+    if (isset($this->attrs['FAIdebianSection']['count'])){
       unset($this->attrs['FAIdebianSection']['count']);
     }
     if((isset($this->attrs['FAIdebianSection']))&&(is_array($this->attrs['FAIdebianSection']))){
