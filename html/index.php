@@ -40,7 +40,7 @@ $_SESSION['errors']= "";
 /* Check for java script */
 if(isset($_POST['javascript']) && $_POST['javascript'] == "true") {
   $_SESSION['js']= TRUE;
-} else {
+}elseif(isset($_POST['javascript'])) {
   $_SESSION['js']= FALSE;
 }
 
