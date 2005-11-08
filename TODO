@@ -10,9 +10,6 @@ Things to fix before 2.4:
 
 * Rework dialog to add aplications (group dialog)
 
-* Check for Nagios and Übernahme gruppe before showing these options
-  in group dialog
-
 
 Target for 2.5:
 ===============
