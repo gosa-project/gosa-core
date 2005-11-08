@@ -109,6 +109,7 @@ class faiPackageEntry extends plugin
       }
     }
 
+    $cnt = 0; 
     foreach($pkgs as $pkg){
       if((preg_match("/^".str_replace("*",".*",$this->searchStrPKG)."/i",$pkg[0]))||
          (preg_match("/^".str_replace("*",".*",$this->searchStrPKG)."/i",$pkg[3]))){
@@ -118,6 +119,7 @@ class faiPackageEntry extends plugin
           }else{
             $check = "";
           }
+          $cnt ++ ;
           $chkbox = "<input type='checkbox' value='1' name='use_".base64_encode($pkg[0])."' ".$check." onclick='document.mainform.submit()'>
                    <input type='hidden' value='1' name='wasonpage_".base64_encode($pkg[0])."'>";
           $divlist->AddEntry(array(array("string"=>$chkbox),
@@ -127,6 +129,15 @@ class faiPackageEntry extends plugin
         }
       }
     }
+
+    /* Add an empty line if list is empty */
+    if($cnt ==0){
+      $divlist->AddEntry(array(array("string"=>"&nbsp;"),
+            array("string"=>"&nbsp;"),
+            array("string"=>"&nbsp;"),
+            array("string"=>"&nbsp;","attach"=>"style='border-right:0px'")));
+    }
+
 
     $_SESSION['searchStrPKG']       = $this->searchStrPKG;
     $smarty->assign("CHKS"          , $CHKS);
