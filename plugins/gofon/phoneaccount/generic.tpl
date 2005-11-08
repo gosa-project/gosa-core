@@ -76,4 +76,8 @@
 <input type="hidden" name="phoneTab" value="phoneTab">
 
 
-
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+  document.mainform.phonenumber.focus();
+  -->
+</script>
