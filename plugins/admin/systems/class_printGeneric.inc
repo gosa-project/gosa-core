@@ -519,9 +519,11 @@ class printgeneric extends plugin
     }else{
       $method="http://";
     }
-    
-    $str = $method.$_SERVER['SERVER_NAME']."/ppd/";
-    $this->attrs['gotoPrinterPPD'] = $str.$this->attrs['gotoPrinterPPD'];
+  
+    if(!is_array($this->attrs['gotoPrinterPPD'])) {
+      $str = $method.$_SERVER['SERVER_NAME']."/ppd";
+      $this->attrs['gotoPrinterPPD'] = $str.$this->attrs['gotoPrinterPPD'];
+    }
 
     /* Append printer user 
      */
