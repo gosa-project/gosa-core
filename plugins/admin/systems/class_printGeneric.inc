@@ -59,6 +59,9 @@ class printgeneric extends plugin
       $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,/", "", $this->dn);
     }
 
+    if(isset($this->gotoPrinterPPD)){
+      $this->gotoPrinterPPD = preg_replace("/http.*ppd\//i","",$this->gotoPrinterPPD);
+    }
 
     /* In case of gotoWorkstation this tab is calles from workstation plugin
      * in case of gotoTerminal it is called from a terminal tab
@@ -511,6 +514,9 @@ class printgeneric extends plugin
       $this->attrs= $attrs;
     }
 
+    print_a($_SERVER);
+    $str = preg_replace("/".$_SERVER['SERVER_NAME'].".*$/i",$_SERVER['SERVER_NAME']."/ppd/",$_SERVER['HTTP_REFERER']);
+    $this->attrs['gotoPrinterPPD'] = $str.$this->attrs['gotoPrinterPPD'];
 
     /* Append printer user 
      */
