@@ -21,6 +21,8 @@ class printerPPDDialog extends plugin
   var $ppdManager           = false;    // new ppdManager;
   var $ppdConfig            = false;    // $this->ppdManager->loadProperties($this->selectedPPD['link']);
 
+  var $pathToPPD            = "/var/spool/ppd/";
+
   function printerPPDDialog ($config, $dn= NULL,$ppdfile=NULL )
   {
     plugin::plugin ($config, $dn);
@@ -29,7 +31,7 @@ class printerPPDDialog extends plugin
     /* Load all available PPD files and sort them into an array 
      */
     require_once ("class_ppdManager.inc");
-    $this->ppdManager= new ppdManager('/var/spool/ppd/');
+    $this->ppdManager= new ppdManager($this->pathToPPD);
     $tmp = $this->ppdManager->getPrinterList();
 
     /* Sort all available files, and create header (Vendor index) */
@@ -39,7 +41,7 @@ class printerPPDDialog extends plugin
         $this->ppdListHeader[$tmp2[0]]=0;
       }
       $tmp3['name']   =preg_replace("/^ -/","",$tmp2[1]." - ".$tmp2[2]);
-      $tmp3['link']   =$file;
+      $tmp3['link']   =preg_replace("/".str_replace("/","\/",$this->pathToPPD)."/i","",$file);
       $tmp3['ppd']    =$ppd;
       $this->ppdListHeader[$tmp2[0]]++;
       $this->ppdList[$tmp2[0]][preg_replace("/^ -/","",$tmp2[1]." - ".$tmp2[2])]=$tmp3;
@@ -49,13 +51,13 @@ class printerPPDDialog extends plugin
     * Get some informations about this PPD
     */
     if(($ppdfile!= NULL)&&(strlen($ppdfile)>0)){
-      if(!file_exists($ppdfile)){
+      if(!file_exists($this->pathToPPD.$ppdfile)){
         print_red(sprintf(_("Can't open '%s', ppd settings resetted."),$ppdfile));
       }else{
-        $tmp2= split("\n", $this->ppdManager->loadDescription($ppdfile));
+        $tmp2= split("\n", $this->ppdManager->loadDescription($this->pathToPPD.$ppdfile));
         $tmp3['name']   =preg_replace("/^ -/","",$tmp2[1]);
         $tmp3['link']   =$ppdfile;
-        $tmp3['ppd']    =$this->ppdManager->loadDescription($ppdfile);
+        $tmp3['ppd']    =$this->ppdManager->loadDescription($this->pathToPPD.$ppdfile);
         $this->selectedPPD = $tmp3;
       }
     }
@@ -98,8 +100,8 @@ class printerPPDDialog extends plugin
         if(!empty($name)){
           $vendor = trim(preg_replace("/-.*$/i","",$res));
           $model  = trim(preg_replace("/".$vendor."/","",$name));
-          if(!is_dir('/var/spool/ppd/'.$vendor)){
-            if(!(@mkdir('/var/spool/ppd/'.$vendor))){
+          if(!is_dir($this->pathToPPD.$vendor)){
+            if(!(@mkdir($this->pathToPPD.$vendor))){
               print_red(sprintf(_("Can't create folder '%s' for the uploaded ppd file."),$vendor));
             }
           }
@@ -108,7 +110,7 @@ class printerPPDDialog extends plugin
             $this->ppdList[$vendor] = array();
           }
   
-          if(is_dir('/var/spool/ppd/'.$vendor)){  
+          if(is_dir($this->pathToPPD.$vendor)){  
             $found = false;
             foreach($this->ppdList[$vendor] as $key => $val){
               if(preg_match("/".$model.".*/i",$key)){
@@ -117,7 +119,7 @@ class printerPPDDialog extends plugin
               }
             }// Foreach
             if(!$found){
-              $filename = '/var/spool/ppd/'.$vendor."/".$vendor."-".preg_replace("/^[^ ]/","",str_replace("-","",$model)).".ppd";
+              $filename = $this->pathToPPD.$vendor."/".$vendor."-".preg_replace("/^[^ ]/","",str_replace("-","",$model)).".ppd";
               $fp = @fopen($filename,"w+");
               if(!$fp){
                 print_red(sprintf(_("Can't save file '%s'."),$filename));
@@ -218,7 +220,7 @@ class printerPPDDialog extends plugin
   }
   
   function save_ppd(){
-    $this->ppdManager->saveProperties($this->selectedPPD['link'],$this->ppdConfig);
+    $this->ppdManager->saveProperties($this->pathToPPD.$this->selectedPPD['link'],$this->ppdConfig);
   }
 
   /* Save to LDAP */
@@ -235,8 +237,7 @@ class printerPPDDialog extends plugin
      */
     $str = "none";
     if(!empty($this->selectedPPD)){
-      $str = $this->selectedPPD['link'];
-      $str = $this->ppdManager->loadDescription($this->selectedPPD['link']);
+      $str = $this->ppdManager->loadDescription($this->pathToPPD.$this->selectedPPD['link']);
     }
     return($str) ; 
   }
@@ -251,12 +252,14 @@ class printerPPDDialog extends plugin
     $str = "";
     $feed= "";
 
+    $s_ppd = $this->pathToPPD.$this->selectedPPD['link'];
+
     /* If ppd exists and is readable */
-    if((!empty($this->selectedPPD['link']))&&(file_exists($this->selectedPPD['link']))){
+    if((!empty($this->selectedPPD['link']))&&(file_exists($s_ppd))){
     
       /* If there is no initial Configuration, load it */
       if($this->ppdConfig == false){
-        $this->ppdConfig = $this->ppdManager->loadProperties($this->selectedPPD['link']);
+        $this->ppdConfig = $this->ppdManager->loadProperties($s_ppd);
       }
 
       /* Create a table */
