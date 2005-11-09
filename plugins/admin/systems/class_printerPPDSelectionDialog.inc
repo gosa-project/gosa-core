@@ -27,8 +27,9 @@ class printerPPDSelectionDialog extends plugin
     $this->depselect  = $this->config->current['BASE'];
     
     /* If there is already a ppd file selected, use this as preselected object in our ppds list
-     */
+     * /
     if(isset($ppd)){
+      print_a( $ppd);
       $tmp2 = split("\n",$ppd['ppd']);
       if(count($tmp2)==2){
         $this->currentPos = $tmp2[0];
@@ -36,6 +37,7 @@ class printerPPDSelectionDialog extends plugin
       }
     }
   
+     */
     if(!isset($_SESSION['printerPPDSelectionDialog'])){
       $_SESSION['printerPPDSelectionDialog']['regex'] = "*";
     }  
