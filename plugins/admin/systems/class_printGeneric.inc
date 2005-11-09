@@ -351,16 +351,22 @@ class printgeneric extends plugin
 
 
     require_once ("class_ppdManager.inc");
-    $ppdManager= new ppdManager('/var/spool/ppd/');
-    if(!empty($this->gotoPrinterPPD)){
-      if((!file_exists("/var/spool/ppd/".$this->gotoPrinterPPD))){
-        $smarty->assign("driverInfo", "<b>".sprintf(_("Your currently selected PPD file '%s' doesn't exist."),$this->gotoPrinterPPD))."</b>";
+
+    if((isset($_SESSION['config']->data['MAIN']['PPD_PATH']))&&(is_dir($_SESSION['config']->data['MAIN']['PPD_PATH']))){
+      $ppdManager= new ppdManager($_SESSION['config']->data['MAIN']['PPD_PATH']);
+      if(!empty($this->gotoPrinterPPD)){
+        if((!file_exists($_SESSION['config']->data['MAIN']['PPD_PATH'].$this->gotoPrinterPPD))){
+          $smarty->assign("driverInfo", "<b>".sprintf(_("Your currently selected PPD file '%s' doesn't exist."),$this->gotoPrinterPPD))."</b>";
+        }else{
+          $smarty->assign("driverInfo", $ppdManager->loadDescription($_SESSION['config']->data['MAIN']['PPD_PATH'].$this->gotoPrinterPPD));
+        }
       }else{
-        $smarty->assign("driverInfo", $ppdManager->loadDescription("/var/spool/ppd/".$this->gotoPrinterPPD));
+        $smarty->assign("driverInfo", _("not defined"));
       }
     }else{
-      $smarty->assign("driverInfo", _("not defined"));
+      $smarty->assign("driverInfo",_("can't get ppd informations."));
     }
+
 
     $list=$this->generateList();
     $userlist   = array_merge($list['AddUser'],$list['AddGroup']);
