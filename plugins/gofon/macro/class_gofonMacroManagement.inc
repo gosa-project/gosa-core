@@ -370,7 +370,7 @@ class gofonMacro extends plugin
       $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>","attach"=>"style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
       $field3 = array("string" => "&nbsp;");
-      $field4 = array("string" => "&nbsp;", "attach" => "style='border:none'","attach"=>"style='text-align:right;width:48px;'");
+      $field4 = array("string" => "&nbsp;", "attach"=>"style='border:none;text-align:right;width:48px;'");
       $divlist->AddEntry(array($field1,$field2,$field3,$field4));
     }
 
