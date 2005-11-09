@@ -514,8 +514,13 @@ class printgeneric extends plugin
       $this->attrs= $attrs;
     }
 
-    print_a($_SERVER);
-    $str = preg_replace("/".$_SERVER['SERVER_NAME'].".*$/i",$_SERVER['SERVER_NAME']."/ppd/",$_SERVER['HTTP_REFERER']);
+    if(preg_match("/https/i",$_SERVER['HTTP_REFERER'])){
+      $method="https://";
+    }else{
+      $method="http://";
+    }
+    
+    $str = $method.$_SERVER['SERVER_NAME']."/ppd/";
     $this->attrs['gotoPrinterPPD'] = $str.$this->attrs['gotoPrinterPPD'];
 
     /* Append printer user 
