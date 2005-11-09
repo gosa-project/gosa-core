@@ -84,6 +84,7 @@ class faiManagement extends plugin
 
 	function execute()
 	{
+
 	/* Call parent execute */
 	plugin::execute();
 
@@ -333,6 +334,11 @@ class faiManagement extends plugin
 		/* Search is set */
 		if(isset($_GET['search'])){
 			$faifilter['regex']=$_GET['search']."*";
+		}
+
+		/* Department select */
+		if(isset($_POST['base'])){
+			$faifilter['base']=$_POST['base'];
 		}
 
 		/* remove double asterisks and save new filter */
