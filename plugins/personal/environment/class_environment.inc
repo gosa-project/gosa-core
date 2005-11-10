@@ -175,14 +175,35 @@ class environment extends plugin
 	/* Call parent execute */
 	plugin::execute();
 
-    /* Fill templating stuff */
-    $smarty= get_smarty();
-    $display= "";
-    /* Is accout enabled | are we editing from usermenu or admin menu 
-       All these tab management is done here
-    */
+  /* Prepare all variables for smarty */
+  foreach($this->attributes as $s_attr){
+    /* Set value*/
+    $smarty->assign($s_attr,$this->$s_attr);
 
-    /* Working from Usermenu an the Account is currently disbled
+    /* Set checkbox state*/
+    if(empty($this->$s_attr)){
+      $smarty->assign($s_attr."CHK","");
+    }else{
+      $smarty->assign($s_attr."CHK"," checked ");
+    }
+
+    /* Prepare ACL settings*/
+    if(chkacl($this->acl,$s_attr)=="") {
+      $smarty->assign($s_attr."ACL","");
+    }else{
+      $smarty->assign($s_attr."ACL"," disabled ");
+    }
+
+  }
+
+  /* Fill templating stuff */
+  $smarty= get_smarty();
+  $display= "";
+  /* Is accout enabled | are we editing from usermenu or admin menu 
+     All these tab management is done here
+   */
+
+  /* Working from Usermenu an the Account is currently disbled
      * this->parent :  is only set if we are working in a list of tabs
      * is_account   :  is only true if the needed objectClass is given
     */
