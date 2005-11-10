@@ -53,7 +53,7 @@ class kioskManagementDialog extends plugin
      * Delete selected file form $this->baseDir
      */
     if((isset($_POST['profileDel']))&&(isset($_POST['gotoKioskProfile']))){
-      $filename = $this->baseDir."/".$_POST['gotoKioskProfile'];
+      $filename = $this->baseDir."/".preg_replace("/^.*\//i","",$_POST['gotoKioskProfile']);
   
       $res = @unlink($filename);
       if(!$res){
