@@ -210,6 +210,15 @@ class gofaxAccount extends plugin
       reset($this->current_blocklist);
     }
 
+    /* Add list to blocklist */
+    if (isset($_GET['add'])){
+      if(!is_array($this->current_blocklist)) $this->current_blocklist=array();
+      $this->current_blocklist= array_merge($this->current_blocklist, array( base64_decode($_GET['add'])));
+      $this->current_blocklist= array_unique($this->current_blocklist);
+      sort($this->current_blocklist);
+      reset($this->current_blocklist);
+    }
+
     /* Delete from blocklist */
     if (isset($_POST['delete_blocklist_number']) && isset($_POST['block_list'])){
       $tmp= array();
@@ -221,32 +230,38 @@ class gofaxAccount extends plugin
       $this->current_blocklist= $tmp;
     }
 
-    /* Blocklist edit finished */
+
+        /* Blocklist edit finished */
     if (isset($_POST['edit_blocklists_finish'])){
 
       /* Incoming or outgoing? */
       if ($this->in_blocklist_dialog){
-        $destlist="goFaxRBlocklist";
-        $destgroup="goFaxRBlockgroups";
+        $this->goFaxRBlocklist = array();
+        $this->goFaxRBlockgroups = array();
+
+        foreach ($this->current_blocklist as $val){
+          if (is_phone_nr($val)){
+            $this->goFaxRBlocklist[]=$val;
+          } else {
+            $this->goFaxRBlockgroups[]= $val;
+          }
+        }
       } else {
-        $destlist="goFaxSBlocklist";
-        $destgroup="goFaxSBlockgroups";
-      }
+        $this->goFaxSBlocklist = array();
+        $this->goFaxSBlockgroups = array();
 
-      /* Transfer values to ourself */
-      $this->$destlist= array();
-      $this->$destgroup= array();
-
-      foreach ($this->current_blocklist as $val){
-        if (is_phone_nr($val)){
-          array_push($this->$destlist, $val);
-        } else {
-          array_push($this->$destgroups, $val);
+        /* Transfer values to ourself */
+        foreach ($this->current_blocklist as $val){
+          if (is_phone_nr($val)){
+            $this->goFaxSBlocklist[]=$val;
+          } else {
+            $this->goFaxSBlockgroups[]= $val;
+          }
         }
       }
-
       $this->is_modified= TRUE;
     }
+
 
     /* Set departments */
     if ($this->locals_dialog ||
@@ -304,6 +319,7 @@ class gofaxAccount extends plugin
 
       $base= $faxfilter['depselect'];
       $acl= array($this->config->current['BASE'] => ":all");
+      print "(&(objectClass=goFaxAccount)$filter)";
       $res= get_list($acl, "(&(objectClass=goFaxAccount)$filter)", TRUE, $base, array("sn", "givenName", "facsimileTelephoneNumber"), TRUE);
 
       foreach ($res as $attrs){
@@ -312,6 +328,9 @@ class gofaxAccount extends plugin
           $attrs['givenName'][0]." [".
           $attrs['facsimileTelephoneNumber'][0]."]";
       }
+
+
+      
 
       /* Show dialog */
       $smarty->assign("search_image", get_template_path('images/search.png'));
@@ -336,21 +355,37 @@ class gofaxAccount extends plugin
       $display.= $smarty->fetch (get_template_path('locals.tpl', TRUE, dirname(__FILE__)));
       return ($display);
     }
-
+      
+    
     /* Manage incoming blocklists */
     if ($this->in_blocklist_dialog){
-      $ldap->search ("(objectClass=goFaxRBlock)");
+      $ldap->search ("(objectClass=goFaxRBlock)",array("cn","description"));
       while ($attrs= $ldap->fetch()){
         $list[$attrs['cn'][0]]=
           $attrs['description'][0].
           " [".$attrs['cn'][0]."]";
       }
 
+      $divSel = new divSelectBox("divSelectPredefined");
+      $divSel->setHeight(300);
+      $divSel->setWidth(350);
+      
+      foreach($list as $entry => $value){
+        $divSel->AddEntry(array(
+                            array("string"=>"<a href='?plug=".$_GET['plug']."&add=".base64_encode($entry)."'>
+                                            <img src='images/back.png' border=0 alt='<'>"._("Add")."</a>"),
+                            array("string"=>$entry),
+                            array("string"=>$value,"attach"=>"style='border:0px;'")
+                            ));
+      }
+              
+
+
       /* Show dialog */
       $smarty->assign("cblocklist", $this->current_blocklist);
       $smarty->assign("goFaxBlockListACL", chkacl($this->acl, "goFaxBlockList"));
       $smarty->assign("departments", $this->config->idepartments);
-      $smarty->assign("list", $list);
+      $smarty->assign("divSelectPredefined", $divSel->DrawList());
       
       if (isset($_POST['department'])){
         $smarty->assign("department", $_POST['department']);
@@ -376,11 +411,25 @@ class gofaxAccount extends plugin
         }
       }
 
+      $divSel = new divSelectBox("divSelectPredefined");
+      $divSel->setHeight(300);
+      $divSel->setWidth(350);
+
+      foreach($list as $entry => $value){
+        $divSel->AddEntry(array(
+                            array("string"=>"<a href='?plug=".$_GET['plug']."&add=".base64_encode($entry)."'>
+                                            <img src='images/back.png' border=0 alt='<'>"._("Add")."</a>"),
+                            array("string"=>$entry),
+                            array("string"=>$value,"attach"=>"style='border:0px;'")
+                            ));
+      }
+
+
       /* Show dialog */
       $smarty->assign("cblocklist", $this->current_blocklist);
       $smarty->assign("goFaxBlockListACL", chkacl($this->acl, "goFaxBlockList"));
       $smarty->assign("departments", $this->config->idepartments);
-      $smarty->assign("list", $list);
+      $smarty->assign("divSelectPredefined", $divSel->DrawList());
       if (isset($_POST['department'])){
         $smarty->assign("department", $_POST['department']);
       } else {
