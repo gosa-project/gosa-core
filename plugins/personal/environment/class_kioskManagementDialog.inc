@@ -89,14 +89,6 @@ class kioskManagementDialog extends plugin
       return ($a_return);
     }
     
-    if(preg_match("/https/i",$_SERVER['HTTP_REFERER'])){
-      $method="https://";
-    }else{
-      $method="http://";
-    }
-
-    $str = $method.$_SERVER['SERVER_NAME']."/kiosk/";
-
     $dir = @opendir($this->baseDir);
     if(!$dir){
       print_red(sprintf(_("Kiosk path '%s' is not accessible. Please check the permissions."),$this->baseDir));
@@ -105,25 +97,18 @@ class kioskManagementDialog extends plugin
       while($file = readdir($dir)){
         if(!(($file==".")||($file==".."))){
           $name = $file;
-          $a_return[$str.$name] = $name;
+          $a_return[$name] = $name;
         }
       }
     }
-    
-    if(preg_match("/https/i",$_SERVER['HTTP_REFERER'])){
-      $method="https://";
-    }else{
-      $method="http://";
-    }
 
-    $str = $method.$_SERVER['SERVER_NAME']."/kiosk/";
     foreach($this->filesToAttach as $file){
-      $a_return[$str.$file['name']] = $file['name'];
+      $a_return[$file['name']] = $file['name'];
     }
 
     if($attach){
       foreach($attach as $file){
-        $a_return[$str.$file['name']] = $file['name'];
+        $a_return[$file['name']] = $file['name'];
       }
     }
 

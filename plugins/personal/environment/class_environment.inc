@@ -83,6 +83,8 @@ class environment extends plugin
       $suffix="User";
     }
 
+    $this->gotoKioskProfile= preg_replace("/^.*\//i","",$this->gotoKioskProfile);
+
     /* Get all Printer assignments */
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
@@ -930,12 +932,19 @@ class environment extends plugin
     }
 
     if(!empty($this->gotoKioskProfile)){
-      $this->attrs['gotoKioskProfile']= $this->gotoKioskProfile;
+      if(preg_match("/https/i",$_SERVER['HTTP_REFERER'])){
+        $method="https://";
+      }else{
+        $method="http://";
+      }
+
+      $str = $method.$_SERVER['SERVER_NAME']."/kiosk/";
+      $this->attrs['gotoKioskProfile']= $str.$this->gotoKioskProfile;
     }else{
       $this->attrs['gotoKioskProfile']= array();
     }
 
-    $saveThis = array("gotoKioskProfile","gotoProfileQuota","gotoXResolution","gotoProfileServer");
+    $saveThis = array("gotoProfileQuota","gotoXResolution","gotoProfileServer");
   
     foreach($saveThis as $tosave){
       if(!empty($this->$tosave)){
