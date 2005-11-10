@@ -8,8 +8,6 @@ Things to fix before 2.4:
 
 * Rework dialog to add aplications (group dialog)
 
-* Make gotoKioskPath stored like the ppd files (i.e. http://vserver-01/kiosk/whatever.tar.gz)
-
 
 Target for 2.5:
 ===============
