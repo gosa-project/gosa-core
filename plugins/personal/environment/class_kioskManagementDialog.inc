@@ -34,6 +34,10 @@ class kioskManagementDialog extends plugin
     $smarty= get_smarty();
     $display= "";
 
+  foreach($this->attributes as $attr){
+    $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
+  }
+
     /* Add new kiosk profile 
      * in profile directory ($this->baseDir); 
      */
