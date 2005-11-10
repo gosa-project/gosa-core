@@ -14,7 +14,7 @@ class kioskManagementDialog extends plugin
   var $use_existing         = false;  
   var $filesToAttach        = array();
 
-  var $baseDir              = "../kioskProfiles/";
+  var $baseDir              = "../kiosk/";
 
   function kioskManagementDialog ($config, $dn= NULL,$attach=false )
   {
@@ -91,7 +91,7 @@ class kioskManagementDialog extends plugin
       $method="http://";
     }
 
-    $str = $method.$_SERVER['SERVER_NAME']."/kioskProfiles/";
+    $str = $method.$_SERVER['SERVER_NAME']."/kiosk/";
 
     $dir = @opendir($this->baseDir);
     if(!$dir){
@@ -112,7 +112,7 @@ class kioskManagementDialog extends plugin
       $method="http://";
     }
 
-    $str = $method.$_SERVER['SERVER_NAME']."/kioskProfiles/";
+    $str = $method.$_SERVER['SERVER_NAME']."/kiosk/";
     foreach($this->filesToAttach as $file){
       $a_return[$str.$file['name']] = $file['name'];
     }
