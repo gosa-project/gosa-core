@@ -55,7 +55,7 @@
 					</td>
 					<td>
 						<select name="gotoKioskProfile" {$gotoKioskProfileACL} id="gotoKioskProfile">
-                        {html_options values=$gotoKioskProfiles output=$gotoKioskProfiles selected=$gotoKioskProfile}
+                        {html_options values=$gotoKioskProfileKeys output=$gotoKioskProfiles selected=$gotoKioskProfile}
                         <option disabled>&nbsp;</option></select>&nbsp;
 						<input type="submit" name="KioskManagementDialog" value="{t}Manage{/t}" {$gotoKioskProfileACL}>
 					</td>
