@@ -175,6 +175,10 @@ class environment extends plugin
 	/* Call parent execute */
 	plugin::execute();
 
+  /* Fill templating stuff */
+  $smarty= get_smarty();
+  $display= "";
+
   /* Prepare all variables for smarty */
   foreach($this->attributes as $s_attr){
     /* Set value*/
@@ -196,9 +200,6 @@ class environment extends plugin
 
   }
 
-  /* Fill templating stuff */
-  $smarty= get_smarty();
-  $display= "";
   /* Is accout enabled | are we editing from usermenu or admin menu 
      All these tab management is done here
    */
