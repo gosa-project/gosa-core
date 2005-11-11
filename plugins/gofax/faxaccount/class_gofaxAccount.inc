@@ -11,6 +11,8 @@ class gofaxAccount extends plugin
   var $cli_description= "Some longer text\nfor help";
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
+
+  /* Department list shown in the divSelectList*/
   var $departments;
 
   /* Fax attributes */
@@ -46,6 +48,10 @@ class gofaxAccount extends plugin
     /* General initialization */
     plugin::plugin ($config, $dn);
 
+
+    /* Hickert : 11.11.05
+     * Added to be able to handle department selection in divSelelect
+     */
     if(!isset($_SESSION["Fax_Filter"])){
       $_SESSION['Fax_Filter']['depselect'] = $this->config->current['BASE'];
     }
@@ -90,17 +96,19 @@ class gofaxAccount extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
+    /* Hickert : 11.11.05
+     * Added to be able to handle department selection in divSelelect
+     */
+    if((isset($_GET['act']))&&($_GET['act']=="dep_open")){
 
-      if((isset($_GET['act']))&&($_GET['act']=="dep_open")){
-
-        if(strlen(base64_decode($_GET['dep_id']))>= strlen($this->config->current['BASE'])){
-          $_SESSION['Fax_Filter']['depselect']= base64_decode($_GET['dep_id']);
-        }else{
-          $_SESSION['Fax_Filter']['depselect']= $this->config->current['BASE'];
-        }
+      if(strlen(base64_decode($_GET['dep_id']))>= strlen($this->config->current['BASE'])){
+        $_SESSION['Fax_Filter']['depselect']= base64_decode($_GET['dep_id']);
+      }else{
+        $_SESSION['Fax_Filter']['depselect']= $this->config->current['BASE'];
       }
+    }
 
     /* Load smarty stuff */
     $smarty= get_smarty();
@@ -216,6 +224,9 @@ class gofaxAccount extends plugin
       }
     }
 
+    /* Hickert : 11.11.05
+     * Add selection from divSelelect to our Blocklist 
+     */
     /* Add list to blocklist */
     if (isset($_POST['add_blocklist'])){
       foreach($_POST as $name => $value){
@@ -227,7 +238,6 @@ class gofaxAccount extends plugin
       $this->current_blocklist= array_unique($this->current_blocklist);
       sort($this->current_blocklist);
       reset($this->current_blocklist);
-
     }
 
     /* Add list to blocklist */
@@ -251,7 +261,7 @@ class gofaxAccount extends plugin
     }
 
 
-        /* Blocklist edit finished */
+    /* Blocklist edit finished */
     if (isset($_POST['edit_blocklists_finish'])){
 
       /* Incoming or outgoing? */
@@ -372,16 +382,24 @@ class gofaxAccount extends plugin
       $display.= $smarty->fetch (get_template_path('locals.tpl', TRUE, dirname(__FILE__)));
       return ($display);
     }
-      
-    
+
+
     /* Manage incoming blocklists */
     if ($this->in_blocklist_dialog){
-    
+
+      /* This handles the divSelectBox */
+
+      /* The base specifies the current position in the ldap tree 
+       * The current base was specified by $_GET['dep_id'] before. Or contains the default value.
+       */
       $base = $_SESSION['Fax_Filter']['depselect'];
       $ldap->cd($base);
 
+      /* Ge all Blocklists */
       $ldap->search ("(objectClass=goFaxRBlock)",array("cn","description"));
       while ($attrs= $ldap->fetch()){
+
+        /* Generate list depending on description */
         if(isset($attrs['description'][0])){
           $list[$attrs['cn'][0]]=
             $attrs['description'][0].
@@ -391,6 +409,7 @@ class gofaxAccount extends plugin
         }
       }
 
+      /* Create our divselect box */
       $divSel = new divSelectBox("divSelectPredefined");
       $divSel->setHeight(300);
       $divSel->setWidth(350);
@@ -399,17 +418,21 @@ class gofaxAccount extends plugin
        * We also need to search for the departments
        * So we are able to navigate like in konquerer
        */
-
-      $tmp = array();
       $this->departments= array();
+   
+      /* Get all departments within the current department */ 
       $base = $_SESSION['Fax_Filter']['depselect'];
       $ldap->ls("(objectClass=gosaDepartment)",$base);
 
+      /* Base back is used to go one department up in our ldap tree */
       $base_back = preg_replace("/^[^,]+,/","",$base);
-    
+
+      /* Only show base_back if it is needed */
       if((strlen($base_back)>= strlen($this->config->current['BASE']))&&($base!=$this->config->current['BASE'])){
         $this->departments[preg_replace("/^[^,]+,/","",$base)] = ".. - ["._("back")."]"; 
       }
+
+      /* Fetch all returned departments an add them to our divlist */
       while($value = $ldap->fetch()){
         if($value["description"][0]!=".."){
           $this->departments[$value['dn']]=convert_department_dn($value['dn'])." - [".$value["description"][0]."]";
@@ -420,26 +443,25 @@ class gofaxAccount extends plugin
       /* END NEW LIST MANAGMENT
        */
 
-      // Defining Links
+      // This links specifies the department open link 
       $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
 
-      /* Insert departments in divlist*/
+      /* Insert departments in divsel */
       foreach($this->departments as $key=> $val){
-
         if(!isset($this->config->departments[trim($key)])){
           $this->config->departments[trim($key)]="";
         }
-
         $field1 = array("string" => "<img src='images/folder.png' alt='department'>","attach"=>"style='width:16px;text-align:center;'");
         $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val),"attach"=>" style='border:none'");
         $divSel->AddEntry(array($field1,$field2));
       }
 
+      /* Append predefined Blocklists */
       foreach($list as $entry => $value){
         $divSel->AddEntry(array(
-                            array("string"=>"<input type='checkbox' value='".base64_encode($entry)."' name='ADDLIST_".base64_encode($entry)."'>"),
-                            array("string"=>$value,"attach"=>"style='border:0px;'")
-                            ));
+              array("string"=>"<input type='checkbox' value='".base64_encode($entry)."' name='ADDLIST_".base64_encode($entry)."'>"),
+              array("string"=>$value,"attach"=>"style='border:0px;'")
+              ));
       }
 
       /* Show dialog */
@@ -447,13 +469,6 @@ class gofaxAccount extends plugin
       $smarty->assign("goFaxBlockListACL", chkacl($this->acl, "goFaxBlockList"));
       $smarty->assign("departments", $this->config->idepartments);
       $smarty->assign("divSelectPredefined", $divSel->DrawList());
-      
-      if (isset($_POST['department'])){
-        $smarty->assign("department", $_POST['department']);
-      } else {
-        $smarty->assign("department", "");
-      }
-
       $display.= $smarty->fetch (get_template_path('lists.tpl', TRUE, dirname(__FILE__)));
       return ($display);
     }
@@ -462,9 +477,15 @@ class gofaxAccount extends plugin
 
     if ($this->out_blocklist_dialog){
 
+      /* This handles the divSelectBox */
+
+      /* The base specifies the current position in the ldap tree
+       * The current base was specified by $_GET['dep_id'] before. Or contains the default value.
+       */
       $base = $_SESSION['Fax_Filter']['depselect'];
       $ldap->cd($base);
 
+      /* Ge all Blocklists */ 
       $ldap->search ("(objectClass=goFaxSBlock)",array("cn","description"));
       while ($attrs= $ldap->fetch()){
         if(isset($attrs['description'][0])){
@@ -476,6 +497,7 @@ class gofaxAccount extends plugin
         }
       }
 
+      /*Create DivSel*/
       $divSel = new divSelectBox("divSelectPredefined");
       $divSel->setHeight(300);
       $divSel->setWidth(350);
@@ -484,15 +506,16 @@ class gofaxAccount extends plugin
        * We also need to search for the departments
        * So we are able to navigate like in konquerer
        */
-      $tmp = array();
       $this->departments= array();
       $ldap->ls("(objectClass=gosaDepartment)",$base);
 
+      /* Generate Back url, and append if it is needed */
       $base_back = preg_replace("/^[^,]+,/","",$base);
-
       if((strlen($base_back)>= strlen($this->config->current['BASE']))&&($base!=$this->config->current['BASE'])){
         $this->departments[preg_replace("/^[^,]+,/","",$base)] = ".. - ["._("back")."]";
       }
+
+      /* Get all departments */
       while($value = $ldap->fetch()){
         if(isset($value["description"][0])){
           $this->departments[$value['dn']]=convert_department_dn($value['dn'])." - [".$value["description"][0]."]";
@@ -517,6 +540,7 @@ class gofaxAccount extends plugin
         $divSel->AddEntry(array($field1,$field2));
       }
 
+      /* Append Blocklits */
       foreach($list as $entry => $value){
         $divSel->AddEntry(array(
               array("string"=>"<input type='checkbox' value='".base64_encode($entry)."' name='ADDLIST_".base64_encode($entry)."'>"),
@@ -524,19 +548,11 @@ class gofaxAccount extends plugin
               ));
       }
 
-
       /* Show dialog */
       $smarty->assign("cblocklist", $this->current_blocklist);
       $smarty->assign("goFaxBlockListACL", chkacl($this->acl, "goFaxBlockList"));
       $smarty->assign("departments", $this->config->idepartments);
       $smarty->assign("divSelectPredefined", $divSel->DrawList());
-      if (isset($_POST['department'])){
-        $smarty->assign("department", $_POST['department']);
-      } else {
-        $smarty->assign("department", "");
-      }
-
-
       $display.= $smarty->fetch (get_template_path('lists.tpl', TRUE, dirname(__FILE__)));
       return ($display);
     }
@@ -637,7 +653,7 @@ class gofaxAccount extends plugin
         $message[]= _("The mail address you've entered is invalid.");
       }
     }
- 
+
     // IE Fix, IE lets you choose disabled option, stupid browser ... 
     if((empty($this->goFaxPrinter))&&($this->goFaxDeliveryMode & 64)){
       $message[]= _("Deliver fax to printer, is only possible if valid printer is given. Please correct your choice.");
@@ -685,7 +701,7 @@ class gofaxAccount extends plugin
       /* Write to object */
       if (chkacl ($this->acl, "goFaxDeliveryMode") == ""){
         if ($tmp != $this->goFaxDeliveryMode){
-            $this->is_modified= TRUE;
+          $this->is_modified= TRUE;
         }
         $this->goFaxDeliveryMode= "$tmp";
       }
