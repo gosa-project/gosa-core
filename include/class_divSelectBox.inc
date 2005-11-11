@@ -26,13 +26,13 @@ class divSelectBox {
 
   function DrawList(){
     $s_return  = "";
-    $s_return .= "<div style=\"height:2px; overflow:hidden;background:#888888;width:100%;margin-right:18px;\"></div>\n";
-    $s_return .= "<div style=\"padding-right:1px;padding-bottom:2px;;\" height='".$this->height."' width='100%'>\n";
-    $s_return .= "<div style=\"overflow: auto;width:100%;height:".$this->height."px;\">\n";
+    $s_return .= "<div style=\"height:2px; overflow:hidden;background:#888888;width:100%;margin-right:0px;\"></div>\n";
+    $s_return .= "<div style=\"padding-right:1px;padding-bottom:2px;\" height='".$this->height."' width='100%'>\n";
+    $s_return .= "<div style=\"overflow: auto;width:100%;height:".($this->height)."px;\">\n";
     $s_return .= "<table ".
                     "summary='".$this->s_summary."' ".
                     "width='100%' ".
-                    "height='100%' ".
+                    "height='".($this->height-2)."' ".
                     "cellspacing='0' ".
                     "style='overflow:scroll; ".
                     "padding-right:1px; ".
@@ -70,7 +70,6 @@ class divSelectBox {
     }
 
     $i = $this->_numEntries();
-    for($e = 0 ; $e < 10 ; $e ++)
     foreach($this->a_entries as $s_key => $s_value){
       $i--;
 
