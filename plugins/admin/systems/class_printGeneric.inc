@@ -1,5 +1,12 @@
 <?php
 
+
+
+
+
+
+
+
 class printgeneric extends plugin
 {
   /* CLI vars */
@@ -60,7 +67,7 @@ class printgeneric extends plugin
     }
 
     if(isset($this->gotoPrinterPPD)){
-      $this->gotoPrinterPPD = preg_replace("/http.*ppd\//i","",$this->gotoPrinterPPD);
+      $this->gotoPrinterPPD = preg_replace("/^http.*ppd\//i","",$this->gotoPrinterPPD);
     }
 
     /* In case of gotoWorkstation this tab is calles from workstation plugin
@@ -521,8 +528,9 @@ class printgeneric extends plugin
     }
   
     if(!is_array($this->attrs['gotoPrinterPPD'])) {
-      $str = $method.$_SERVER['SERVER_NAME']."/ppd";
+      $str = $method.$_SERVER['SERVER_NAME']."/ppd/";
       $this->attrs['gotoPrinterPPD'] = $str.$this->attrs['gotoPrinterPPD'];
+      $this->attrs['gotoPrinterPPD'] = str_replace("//","/",$this->attrs['gotoPrinterPPD']);
     }
 
     /* Append printer user 
