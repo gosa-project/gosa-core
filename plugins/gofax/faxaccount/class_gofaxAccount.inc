@@ -407,7 +407,7 @@ class gofaxAccount extends plugin
 
       $base_back = preg_replace("/^[^,]+,/","",$base);
     
-      if(strlen($base_back)>= strlen($this->config->current['BASE'])){
+      if((strlen($base_back)>= strlen($this->config->current['BASE']))&&($base!=$this->config->current['BASE'])){
         $this->departments[preg_replace("/^[^,]+,/","",$base)] = ".. - ["._("back")."]"; 
       }
       while($value = $ldap->fetch()){
@@ -431,14 +431,13 @@ class gofaxAccount extends plugin
         }
 
         $field1 = array("string" => "<img src='images/folder.png' alt='department'>","attach"=>"style='width:16px;text-align:center;'");
-        $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val),"attach"=>" colspan=2 style='border:none'");
+        $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val),"attach"=>" style='border:none'");
         $divSel->AddEntry(array($field1,$field2));
       }
 
       foreach($list as $entry => $value){
         $divSel->AddEntry(array(
                             array("string"=>"<input type='checkbox' value='".base64_encode($entry)."' name='ADDLIST_".base64_encode($entry)."'>"),
-                            array("string"=>$entry),
                             array("string"=>$value,"attach"=>"style='border:0px;'")
                             ));
       }
@@ -491,7 +490,7 @@ class gofaxAccount extends plugin
 
       $base_back = preg_replace("/^[^,]+,/","",$base);
 
-      if(strlen($base_back)>= strlen($this->config->current['BASE'])){
+      if((strlen($base_back)>= strlen($this->config->current['BASE']))&&($base!=$this->config->current['BASE'])){
         $this->departments[preg_replace("/^[^,]+,/","",$base)] = ".. - ["._("back")."]";
       }
       while($value = $ldap->fetch()){
@@ -514,14 +513,13 @@ class gofaxAccount extends plugin
         }
 
         $field1 = array("string" => "<img src='images/folder.png' alt='department'>","attach"=>"style='width:16px;text-align:center;'");
-        $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val),"attach"=>" colspan=2 style='border:none'");
+        $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val),"attach"=>" style='border:none'");
         $divSel->AddEntry(array($field1,$field2));
       }
 
       foreach($list as $entry => $value){
         $divSel->AddEntry(array(
               array("string"=>"<input type='checkbox' value='".base64_encode($entry)."' name='ADDLIST_".base64_encode($entry)."'>"),
-              array("string"=>$entry),
               array("string"=>$value,"attach"=>"style='border:0px;'")
               ));
       }
