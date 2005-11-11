@@ -11,6 +11,8 @@ class gofaxAccount extends plugin
   var $cli_description= "Some longer text\nfor help";
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
+  var $departments;
+
   /* Fax attributes */
   var $goFaxDeliveryMode= "";
   var $facsimileTelephoneNumber= "";
@@ -43,6 +45,10 @@ class gofaxAccount extends plugin
   {
     /* General initialization */
     plugin::plugin ($config, $dn);
+
+    if(!isset($_SESSION["Fax_Filter"])){
+      $_SESSION['Fax_Filter']['depselect'] = $this->config->current['BASE'];
+    }
 
     if ($dn != "new"){
       /* Get arrays */
@@ -86,6 +92,15 @@ class gofaxAccount extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
+      if((isset($_GET['act']))&&($_GET['act']=="dep_open")){
+
+        if(strlen(base64_decode($_GET['dep_id']))>= strlen($this->config->current['BASE'])){
+          $_SESSION['Fax_Filter']['depselect']= base64_decode($_GET['dep_id']);
+        }else{
+          $_SESSION['Fax_Filter']['depselect']= $this->config->current['BASE'];
+        }
+      }
 
     /* Load smarty stuff */
     $smarty= get_smarty();
@@ -202,12 +217,17 @@ class gofaxAccount extends plugin
     }
 
     /* Add list to blocklist */
-    if (isset($_POST['add_blocklist']) && isset($_POST['predefined_list'])){
-      $this->current_blocklist= array_merge($this->current_blocklist,
-          $_POST['predefined_list']);
+    if (isset($_POST['add_blocklist'])){
+      foreach($_POST as $name => $value){
+        if(preg_match("/ADDLIST_/i",$name)){
+          $this->current_blocklist= array_merge($this->current_blocklist, array(base64_decode($value)));
+
+        }
+      } 
       $this->current_blocklist= array_unique($this->current_blocklist);
       sort($this->current_blocklist);
       reset($this->current_blocklist);
+
     }
 
     /* Add list to blocklist */
@@ -329,9 +349,6 @@ class gofaxAccount extends plugin
           $attrs['facsimileTelephoneNumber'][0]."]";
       }
 
-
-      
-
       /* Show dialog */
       $smarty->assign("search_image", get_template_path('images/search.png'));
       $smarty->assign("usearch_image", get_template_path('images/search_user.png'));
@@ -359,54 +376,17 @@ class gofaxAccount extends plugin
     
     /* Manage incoming blocklists */
     if ($this->in_blocklist_dialog){
+    
+      $base = $_SESSION['Fax_Filter']['depselect'];
+      $ldap->cd($base);
+
       $ldap->search ("(objectClass=goFaxRBlock)",array("cn","description"));
       while ($attrs= $ldap->fetch()){
-        $list[$attrs['cn'][0]]=
-          $attrs['description'][0].
-          " [".$attrs['cn'][0]."]";
-      }
-
-      $divSel = new divSelectBox("divSelectPredefined");
-      $divSel->setHeight(300);
-      $divSel->setWidth(350);
-      
-      foreach($list as $entry => $value){
-        $divSel->AddEntry(array(
-                            array("string"=>"<a href='?plug=".$_GET['plug']."&add=".base64_encode($entry)."'>
-                                            <img src='images/back.png' border=0 alt='<'>"._("Add")."</a>"),
-                            array("string"=>$entry),
-                            array("string"=>$value,"attach"=>"style='border:0px;'")
-                            ));
-      }
-              
-
-
-      /* Show dialog */
-      $smarty->assign("cblocklist", $this->current_blocklist);
-      $smarty->assign("goFaxBlockListACL", chkacl($this->acl, "goFaxBlockList"));
-      $smarty->assign("departments", $this->config->idepartments);
-      $smarty->assign("divSelectPredefined", $divSel->DrawList());
-      
-      if (isset($_POST['department'])){
-        $smarty->assign("department", $_POST['department']);
-      } else {
-        $smarty->assign("department", "");
-      }
-
-
-
-      $display.= $smarty->fetch (get_template_path('lists.tpl', TRUE, dirname(__FILE__)));
-      return ($display);
-    }
-
-    /* Manage outgoing blocklists */
-    if ($this->out_blocklist_dialog){
-      $ldap->search ("(objectClass=goFaxSBlock)");
-      while ($attrs= $ldap->fetch()){
-        if (isset($attrs['description'][0])){
-          $list[$attrs['cn'][0]]= $attrs['cn'][0].
-            " [".$attrs['description'][0]."]";
-        } else {
+        if(isset($attrs['description'][0])){
+          $list[$attrs['cn'][0]]=
+            $attrs['description'][0].
+            " [".$attrs['cn'][0]."]";
+        }else{
           $list[$attrs['cn'][0]]= $attrs['cn'][0];
         }
       }
@@ -415,13 +395,135 @@ class gofaxAccount extends plugin
       $divSel->setHeight(300);
       $divSel->setWidth(350);
 
+      /* NEW LIST MANAGMENT
+       * We also need to search for the departments
+       * So we are able to navigate like in konquerer
+       */
+
+      $tmp = array();
+      $this->departments= array();
+      $base = $_SESSION['Fax_Filter']['depselect'];
+      $ldap->ls("(objectClass=gosaDepartment)",$base);
+
+      $base_back = preg_replace("/^[^,]+,/","",$base);
+    
+      if(strlen($base_back)>= strlen($this->config->current['BASE'])){
+        $this->departments[preg_replace("/^[^,]+,/","",$base)] = ".. - ["._("back")."]"; 
+      }
+      while($value = $ldap->fetch()){
+        if($value["description"][0]!=".."){
+          $this->departments[$value['dn']]=convert_department_dn($value['dn'])." - [".$value["description"][0]."]";
+        }else{
+          $this->departments[$value['dn']]=$value["description"][0];
+        }
+      }
+      /* END NEW LIST MANAGMENT
+       */
+
+      // Defining Links
+      $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
+
+      /* Insert departments in divlist*/
+      foreach($this->departments as $key=> $val){
+
+        if(!isset($this->config->departments[trim($key)])){
+          $this->config->departments[trim($key)]="";
+        }
+
+        $field1 = array("string" => "<img src='images/folder.png' alt='department'>","attach"=>"style='width:16px;text-align:center;'");
+        $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val),"attach"=>" colspan=2 style='border:none'");
+        $divSel->AddEntry(array($field1,$field2));
+      }
+
       foreach($list as $entry => $value){
         $divSel->AddEntry(array(
-                            array("string"=>"<a href='?plug=".$_GET['plug']."&add=".base64_encode($entry)."'>
-                                            <img src='images/back.png' border=0 alt='<'>"._("Add")."</a>"),
+                            array("string"=>"<input type='checkbox' value='".base64_encode($entry)."' name='ADDLIST_".base64_encode($entry)."'>"),
                             array("string"=>$entry),
                             array("string"=>$value,"attach"=>"style='border:0px;'")
                             ));
+      }
+
+      /* Show dialog */
+      $smarty->assign("cblocklist", $this->current_blocklist);
+      $smarty->assign("goFaxBlockListACL", chkacl($this->acl, "goFaxBlockList"));
+      $smarty->assign("departments", $this->config->idepartments);
+      $smarty->assign("divSelectPredefined", $divSel->DrawList());
+      
+      if (isset($_POST['department'])){
+        $smarty->assign("department", $_POST['department']);
+      } else {
+        $smarty->assign("department", "");
+      }
+
+      $display.= $smarty->fetch (get_template_path('lists.tpl', TRUE, dirname(__FILE__)));
+      return ($display);
+    }
+
+    /* Manage outgoing blocklists */
+
+    if ($this->out_blocklist_dialog){
+
+      $base = $_SESSION['Fax_Filter']['depselect'];
+      $ldap->cd($base);
+
+      $ldap->search ("(objectClass=goFaxSBlock)",array("cn","description"));
+      while ($attrs= $ldap->fetch()){
+        if(isset($attrs['description'][0])){
+          $list[$attrs['cn'][0]]=
+            $attrs['description'][0].
+            " [".$attrs['cn'][0]."]";
+        }else{
+          $list[$attrs['cn'][0]]= $attrs['cn'][0];
+        }
+      }
+
+      $divSel = new divSelectBox("divSelectPredefined");
+      $divSel->setHeight(300);
+      $divSel->setWidth(350);
+
+      /* NEW LIST MANAGMENT
+       * We also need to search for the departments
+       * So we are able to navigate like in konquerer
+       */
+      $tmp = array();
+      $this->departments= array();
+      $ldap->ls("(objectClass=gosaDepartment)",$base);
+
+      $base_back = preg_replace("/^[^,]+,/","",$base);
+
+      if(strlen($base_back)>= strlen($this->config->current['BASE'])){
+        $this->departments[preg_replace("/^[^,]+,/","",$base)] = ".. - ["._("back")."]";
+      }
+      while($value = $ldap->fetch()){
+        if(isset($value["description"][0])){
+          $this->departments[$value['dn']]=convert_department_dn($value['dn'])." - [".$value["description"][0]."]";
+        }else{
+          $this->departments[$value['dn']]=$value["description"][0];
+        }
+      }
+      /* END NEW LIST MANAGMENT
+       */
+
+      // Defining Links
+      $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
+
+      /* Insert departments in divlist*/
+      foreach($this->departments as $key=> $val){
+        if(!isset($this->config->departments[trim($key)])){
+          $this->config->departments[trim($key)]="";
+        }
+
+        $field1 = array("string" => "<img src='images/folder.png' alt='department'>","attach"=>"style='width:16px;text-align:center;'");
+        $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val),"attach"=>" colspan=2 style='border:none'");
+        $divSel->AddEntry(array($field1,$field2));
+      }
+
+      foreach($list as $entry => $value){
+        $divSel->AddEntry(array(
+              array("string"=>"<input type='checkbox' value='".base64_encode($entry)."' name='ADDLIST_".base64_encode($entry)."'>"),
+              array("string"=>$entry),
+              array("string"=>$value,"attach"=>"style='border:0px;'")
+              ));
       }
 
 
@@ -435,7 +537,7 @@ class gofaxAccount extends plugin
       } else {
         $smarty->assign("department", "");
       }
- 
+
 
       $display.= $smarty->fetch (get_template_path('lists.tpl', TRUE, dirname(__FILE__)));
       return ($display);
