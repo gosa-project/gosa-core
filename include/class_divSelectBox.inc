@@ -3,33 +3,18 @@
 class divSelectBox {
 
 	var $a_entries;
-	var $a_header;
-	var $b_displayPageNums; 	
 	var $summary;
 	var $cols;
 
 	// Members for page managment
-	var $i_currentPage;
-	var $i_entriesPerPage;
-
   var $width= 300;
   var $height=200;
 
 	// Added php 4 constructor
 	function divSelectBox(){
-
-		$this->i_currentPage    = 0;
-		$this->i_entriesPerPage = 10;
 		$this->s_summary                = "";
 		$this->a_entries                = array();
-		$this->a_header                 = array();
-		$this->b_displayPageNums= true;
 		$this->cols                     = 0;
-
-	}
-
-	function __destruct(){
-	
 	}
 
   function setWidth($w){
@@ -45,20 +30,24 @@ class divSelectBox {
 	}
 
   function DrawList(){
-    $s_return = "
-      <div style=\"background-color:#FFFFFF;".
-                  "padding-right:1px;".
-                  "padding-bottom:2px;".
-                  "border-left:solid 2px;".
-                  "border-top:solid 2px;".
-                  "border-color:#888888;\"".
-                  " height='".($this->height)."' width='".($this->width)."'>".
-      "\n<div style=\"overflow:auto; height:".$this->height."px;width:".($this->width)."px;\">";
-    $s_return.= "<table summary='".$this->s_summary."' width='".($this->width-18)."' height='".($this->height)."' cellspacing='0' style='overflow:scroll''>";
-
+    $s_return  = "";
+    $s_return .= "<div style=\"height:2px; overflow:hidden;background:#888888;width:".($this->width-18)."px;\"></div>\n";
+    $s_return .= "<div style=\"padding-right:1px;padding-bottom:2px;\" height='".($this->height)."' width='".($this->width)."'>\n";
+    $s_return .= "<div style=\"overflow: auto;height:".$this->height."px;width:".($this->width)."px;\">\n";
+    $s_return .= "<table ".
+                    "summary='".$this->s_summary."' ".
+                    "width='".($this->width-18)."' ".
+                    "height='".($this->height)."' ".
+                    "cellspacing='0' ".
+                    "style='overflow:scroll; ".
+                    "padding-right:1px; ".
+                    "padding-bottom:2px; ".
+                    "border-left:solid 2px; ".
+                    "border-top:solid 0px; ".
+                    "border-color:#888888; ".
+                    "'>\n";
     $s_return.=$this->_generatePage();
     $s_return.= "</table></div></div>";
-
     return ($s_return);
   }
 	
@@ -76,16 +65,11 @@ class divSelectBox {
 		$s_value 	= "";
 		$s_key 		= "";
 		$s_return 	= "";
-		
 		$i_alternate=0;
 	
     /* If divlist is empty, append a single white entry */
     if(count($this->a_entries)==0){
-      $str = "<tr>";
-      for($i = 0 ; $i < count($this->a_header[0]); $i++){
-        $str.="<td class='list1' style='height:100%';>&nbsp;</td>";
-      }
-      $str .="</tr>";
+      $str.="<tr><td class='list1' style='height:100%';>&nbsp;</td></tr>";
       return($str);
     }
 
@@ -104,7 +88,6 @@ class divSelectBox {
       $cnt = 0; 					
 
       foreach($s_value as $s_key2 => $s_value2 ){				
-
         $this->cols = count($s_value) ;						
         $cnt++;					
 
@@ -124,9 +107,8 @@ class divSelectBox {
         $s_return .= $s_value2['string'];
         $s_return .= "</td>";
       }
-
+      $s_return.="\n</tr>";
     }
-    $s_return.="<tr>";
     for($i = 0 ; $i < ($this->cols) ; $i ++){
       if($i >= ($this->cols-1)){
         $s_return .= "<td class='list1' height='100%' style='border:0px;'></td>";
