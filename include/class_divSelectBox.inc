@@ -31,13 +31,13 @@ class divSelectBox {
 
   function DrawList(){
     $s_return  = "";
-    $s_return .= "<div style=\"height:2px; overflow:hidden;background:#888888;width:".($this->width-18)."px;\"></div>\n";
-    $s_return .= "<div style=\"padding-right:1px;padding-bottom:2px;\" height='".($this->height)."' width='".($this->width)."'>\n";
-    $s_return .= "<div style=\"overflow: auto;height:".$this->height."px;width:".($this->width)."px;\">\n";
+    $s_return .= "<div style=\"height:2px; overflow:hidden;background:#888888;width:100%;margin-right:18px;\"></div>\n";
+    $s_return .= "<div style=\"padding-right:1px;padding-bottom:2px;\" height='100%' width='100%'>\n";
+    $s_return .= "<div style=\"overflow: auto;height:100%;width:100%;\">\n";
     $s_return .= "<table ".
                     "summary='".$this->s_summary."' ".
-                    "width='".($this->width-18)."' ".
-                    "height='".($this->height)."' ".
+                    "width='100%' ".
+                    "height='100%' ".
                     "cellspacing='0' ".
                     "style='overflow:scroll; ".
                     "padding-right:1px; ".

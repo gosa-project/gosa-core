@@ -411,8 +411,8 @@ class gofaxAccount extends plugin
 
       /* Create our divselect box */
       $divSel = new divSelectBox("divSelectPredefined");
-      $divSel->setHeight(300);
-      $divSel->setWidth(350);
+      $divSel->setHeight(150);
+      $divSel->setWidth(150);
 
       /* NEW LIST MANAGMENT
        * We also need to search for the departments

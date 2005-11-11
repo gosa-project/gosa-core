@@ -53,10 +53,20 @@ class mailMethodKolab extends mailMethodCyrus
 
   function fixAttributesOnLoad(&$mailObject)
   {
-    /* Convert attributes and objectClasses */
+    * Convert attributes and objectClasses */
     foreach ($this->attribute_map as $dest => $source){
+      /* Hickert 11.11.05 : Alternate email addresses were saved, but not displayed again.
       if (isset($mailObject->attrs[$source])){
         $mailObject->attrs[$dest]= $mailObject->attrs[$source];
+        unset ($mailObject->attrs[$source]);
+      */
+
+      if (isset($mailObject->attrs[$source])){
+        unset($mailObject->attrs[$source]['count']);
+        $mailObject->attrs[$dest]= $mailObject->attrs[$source];
+        $mailObject->$dest=        $mailObject->attrs[$source];
+
+        unset ($mailObject->$dest['count']);
         unset ($mailObject->attrs[$source]);
       }
     }

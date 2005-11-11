@@ -637,7 +637,7 @@ class mailAccount extends plugin
     $method->fixAttributesOnStore($this);
 
     /* Remove Mailquota if = "" */
-    if($this->attrs['gosaMailQuota']=="") {
+    if((isset($this->attrs['gosaMailQuota']))&&($this->attrs['gosaMailQuota']=="")) {
       $this->attrs['gosaMailQuota']=array();
     }
 
