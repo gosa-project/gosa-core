@@ -437,8 +437,8 @@ class user extends plugin
     }
 
     /* Show us the edit screen */
-    $smarty->assign("bases", $this->allowedBasesToMoveTo());
-//  $smarty->assign("bases", $this->config->idepartments);
+    @$smarty->assign("bases", $this->allowedBasesToMoveTo());
+#  $smarty->assign("bases", $this->config->idepartments);
     $smarty->assign("base_select", $this->base);
     $smarty->assign("selectmode",       chkacl($this->acl, "create"));
     $smarty->assign("certificatesACL",  chkacl($this->acl, "certificates"));
