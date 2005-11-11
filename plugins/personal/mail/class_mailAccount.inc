@@ -445,7 +445,7 @@ class mailAccount extends plugin
     }
 
     if (is_numeric($this->gosaMailQuota) && $this->gosaMailQuota != 0){
-      $smarty->assign("quotausage", progressbar(round(($this->quotaUsage * 100)/ $this->gosaMailQuota,100,15,true)));
+      $smarty->assign("quotausage", progressbar(round(($this->quotaUsage * 100)/ $this->gosaMailQuota),100,15,true));
       $smarty->assign("quotadefined", "true");
     } else {
       $smarty->assign("quotadefined", "false");
