@@ -13,12 +13,12 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-11-11 16:56+0100\n"
+"PO-Revision-Date: 2005-11-11 17:06+0100\n"
 "Last-Translator: Stefan Koehler <stefan.koehler@GONICUS.de>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: contrib/gosa.conf:4
 msgid "My account"
@@ -2325,7 +2325,7 @@ msgstr "Wählen Sie den Unterbaum, in den der Benutzer eingepflegt werden soll"
 #: plugins/addons/addressbook/address_edit.tpl:93
 #: plugins/addons/addressbook/address_info.tpl:33
 #: plugins/addons/addressbook/address_info.tpl:82
-#: plugins/admin/departments/generic.tpl:54
+#: plugins/admin/departments/generic.tpl:54 html/getxls.php:174
 msgid "Address"
 msgstr "Adresse"
 
@@ -3480,8 +3480,8 @@ msgid ""
 "This account has fax features enabled. You can disable them by clicking "
 "below."
 msgstr ""
-"Dieses Konto besitzt aktivierte die Fax-Erweiterungen. Sie können diese "
-"durch einen Klick auf die Schaltfläche unten deaktivieren."
+"Dieses Konto besitzt aktivierte Fax-Erweiterungen. Sie können diese durch "
+"einen Klick auf die Schaltfläche unten deaktivieren."
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:149
 msgid "Create fax account"
@@ -8614,7 +8614,7 @@ msgid ""
 "This account has phone features enabled. You can disable them by clicking "
 "below."
 msgstr ""
-"Dieses Konto besitzt aktivierte die Telefon-Erweiterungen. Sie können diese "
+"Dieses Konto besitzt aktivierte Telefon-Erweiterungen. Sie können diese "
 "durch einen Klick auf die untere Schaltfläche deaktivieren."
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:741
@@ -9290,28 +9290,6 @@ msgstr "GOsa Entwicklerversion (Rev %s)"
 msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
 msgstr "Kann SSHA nicht benutzen (Fehlende Funktion mhash / sha1)"
 
-#: include/class_pluglist.inc:91
-msgid "plHeadline"
-msgstr ""
-
-#: include/class_pluglist.inc:115
-msgid ""
-"Your gosa.conf information has changed partly. Please convert it using the "
-"contributed script fix_config.sh!"
-msgstr ""
-"Die Konfigurationsdatei gosa.conf hat sich teilweise geändert. Bitte "
-"konvertieren Sie diese mit dem beigefügten Skript fix_config.sh!"
-
-#: include/class_pluglist.inc:130 ihtml/themes/altlinux/framework.tpl:14
-#: ihtml/themes/altlinux/framework.tpl:24
-#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
-msgid ""
-"You are currently editing a database entry. Do you want to dismiss the "
-"changes?"
-msgstr ""
-"Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen "
-"werden?"
-
 #: include/class_config.inc:69
 #, php-format
 msgid "XML error in gosa.conf: %s at line %d"
@@ -9460,8 +9438,9 @@ msgstr "Unterstützung für GOfon aktiviert"
 
 #: include/functions_setup.inc:231
 msgid "Support for nagios disabled, no schema seems to be installed"
-msgstr "Die Unterstützung für Nagios wurde deaktiviert, das passende Schema ist nicht "
-"installiert."
+msgstr ""
+"Die Unterstützung für Nagios wurde deaktiviert, das passende Schema ist "
+"nicht installiert."
 
 #: include/functions_setup.inc:236
 msgid "Support for nagios enabled"
@@ -9851,6 +9830,24 @@ msgstr ""
 "In ihrem Setup fehlt ein administratives Konto für GOsa, Sie sind deshalb "
 "nicht in der Lage, irgendetwas einzustellen!"
 
+#: include/class_pluglist.inc:115
+msgid ""
+"Your gosa.conf information has changed partly. Please convert it using the "
+"contributed script fix_config.sh!"
+msgstr ""
+"Die Konfigurationsdatei gosa.conf hat sich teilweise geändert. Bitte "
+"konvertieren Sie diese mit dem beigefügten Skript fix_config.sh!"
+
+#: include/class_pluglist.inc:130 ihtml/themes/altlinux/framework.tpl:14
+#: ihtml/themes/altlinux/framework.tpl:24
+#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
+msgid ""
+"You are currently editing a database entry. Do you want to dismiss the "
+"changes?"
+msgstr ""
+"Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen "
+"werden?"
+
 #: html/helpviewer.php:113
 msgid "There is no helpfile specified for this class."
 msgstr "Für diese Klasse wurde keine Hilfedatei angegeben."
@@ -9976,9 +9973,8 @@ msgid "Given Name"
 msgstr "Vorname"
 
 #: html/getxls.php:74 html/getxls.php:276
-#, fuzzy
 msgid "User List of "
-msgstr "Liste der PPDs"
+msgstr "Benutzerliste von "
 
 #: html/getxls.php:74 html/getxls.php:104 html/getxls.php:156
 #: html/getxls.php:184 html/getxls.php:276 html/getxls.php:295
@@ -9996,9 +9992,8 @@ msgid "Groups of "
 msgstr "Gruppe des Benutzers"
 
 #: html/getxls.php:124 html/getxls.php:246
-#, fuzzy
 msgid "Computers"
-msgstr "Zähle Benutzer"
+msgstr "Systeme"
 
 #: html/getxls.php:133 html/getxls.php:190 html/getxls.php:336
 #: html/getxls.php:356
@@ -10025,20 +10020,14 @@ msgstr "Angezeigter Name"
 
 #: html/getxls.php:174
 msgid "Home postal address"
-msgstr ""
+msgstr "Private Adresse"
 
 #: html/getxls.php:174
 msgid "Mobile phone"
 msgstr "Mobiltelefon"
 
 #: html/getxls.php:174
-#, fuzzy
 msgid "Postal address"
-msgstr "Postleitzahl"
-
-#: html/getxls.php:174
-#, fuzzy
-msgid "Adress"
 msgstr "Adresse"
 
 #: html/getxls.php:174
@@ -10050,9 +10039,8 @@ msgid "Adressbook"
 msgstr "Adressbuch"
 
 #: html/getxls.php:184 html/getxls.php:349
-#, fuzzy
 msgid "Adressbook of "
-msgstr "Adressbuch"
+msgstr "Adressbuch von "
 
 #: html/getxls.php:224
 msgid "BirthDate"
@@ -10072,9 +10060,8 @@ msgid "Phone Number"
 msgstr "Telefonnummer"
 
 #: html/getxls.php:236
-#, fuzzy
 msgid "Postal Adress"
-msgstr "Postleitzahl"
+msgstr "Adresse"
 
 #: html/getxls.php:236
 msgid "Email address"
@@ -10113,12 +10100,11 @@ msgstr "Titel"
 
 #: html/getxls.php:239
 msgid "Full"
-msgstr ""
+msgstr "Voll"
 
 #: html/getxls.php:330
-#, fuzzy
 msgid "Computers of "
-msgstr "Zähle Benutzer"
+msgstr "Systeme von "
 
 #: ihtml/themes/altlinux/conflict.tpl:2 ihtml/themes/default/conflict.tpl:2
 msgid "Session conflict detected"

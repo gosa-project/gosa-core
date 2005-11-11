@@ -2307,7 +2307,7 @@ msgstr "Kies de subtree waaronder de gebruiker geplaatst wordt"
 #: plugins/addons/addressbook/address_edit.tpl:93
 #: plugins/addons/addressbook/address_info.tpl:33
 #: plugins/addons/addressbook/address_info.tpl:82
-#: plugins/admin/departments/generic.tpl:54
+#: plugins/admin/departments/generic.tpl:54 html/getxls.php:174
 msgid "Address"
 msgstr "Adres"
 
@@ -9210,28 +9210,6 @@ msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
 msgstr ""
 "Kan SSHA niet gebruiken voor encryptie. (Ontbrekende functie mhash / sha1)"
 
-#: include/class_pluglist.inc:91
-msgid "plHeadline"
-msgstr "plHeadline"
-
-#: include/class_pluglist.inc:115
-msgid ""
-"Your gosa.conf information has changed partly. Please convert it using the "
-"contributed script fix_config.sh!"
-msgstr ""
-"Uw gosa.conf is gedeeltelijk veranderd. Converteer het a.u.b. met het "
-"meegeleverde script fix_config.sh!"
-
-#: include/class_pluglist.inc:130 ihtml/themes/altlinux/framework.tpl:14
-#: ihtml/themes/altlinux/framework.tpl:24
-#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
-msgid ""
-"You are currently editing a database entry. Do you want to dismiss the "
-"changes?"
-msgstr ""
-"U bent momenteel database gegevens aan het bewerken. Wilt u eventuele "
-"wijzigingen ongedaan maken?"
-
 #: include/class_config.inc:69
 #, php-format
 msgid "XML error in gosa.conf: %s at line %d"
@@ -9769,6 +9747,24 @@ msgstr ""
 "Er is geen beheerders account voor GOsa. U zal niets kunnen beheren op dit "
 "moment!"
 
+#: include/class_pluglist.inc:115
+msgid ""
+"Your gosa.conf information has changed partly. Please convert it using the "
+"contributed script fix_config.sh!"
+msgstr ""
+"Uw gosa.conf is gedeeltelijk veranderd. Converteer het a.u.b. met het "
+"meegeleverde script fix_config.sh!"
+
+#: include/class_pluglist.inc:130 ihtml/themes/altlinux/framework.tpl:14
+#: ihtml/themes/altlinux/framework.tpl:24
+#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
+msgid ""
+"You are currently editing a database entry. Do you want to dismiss the "
+"changes?"
+msgstr ""
+"U bent momenteel database gegevens aan het bewerken. Wilt u eventuele "
+"wijzigingen ongedaan maken?"
+
 #: html/helpviewer.php:113
 msgid "There is no helpfile specified for this class."
 msgstr "Er is geen help-bestand aanwezig voor deze klasse."
@@ -9947,10 +9943,6 @@ msgstr "GSM nummer"
 #: html/getxls.php:174
 msgid "Postal address"
 msgstr "Adres thuis"
-
-#: html/getxls.php:174
-msgid "Adress"
-msgstr "Adres"
 
 #: html/getxls.php:174
 msgid "Function"
@@ -10446,6 +10438,12 @@ msgstr ""
 "Het kan, met name bij Beta versies, voorkomen dat GOsa PHP fouten genereerd. "
 "In sommige gevallen kan het handig zijn om foutrapportage aan te zetten "
 "(maar dit kan een veiligheidsrisico vormen) "
+
+#~ msgid "plHeadline"
+#~ msgstr "plHeadline"
+
+#~ msgid "Adress"
+#~ msgstr "Adres"
 
 #~ msgid "Display workstations matching"
 #~ msgstr "Toon de overeenkomende werkstations"

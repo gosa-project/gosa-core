@@ -2379,7 +2379,7 @@ msgstr "Elija el subárbol donde colocar el usuario"
 #: plugins/addons/addressbook/address_edit.tpl:93
 #: plugins/addons/addressbook/address_info.tpl:33
 #: plugins/addons/addressbook/address_info.tpl:82
-#: plugins/admin/departments/generic.tpl:54
+#: plugins/admin/departments/generic.tpl:54 html/getxls.php:174
 msgid "Address"
 msgstr "Dirección"
 
@@ -9577,28 +9577,6 @@ msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
 msgstr ""
 "No se puede usar sha para encriptación. (Falta la función mhash / sha1)"
 
-#: include/class_pluglist.inc:91
-msgid "plHeadline"
-msgstr ""
-
-#: include/class_pluglist.inc:115
-msgid ""
-"Your gosa.conf information has changed partly. Please convert it using the "
-"contributed script fix_config.sh!"
-msgstr ""
-"El contenido de la configuración 'gosa.conf' ha cambiado parcialmente. ¡Por "
-"favor actualízela usando el script 'fix_config.sh'!"
-
-#: include/class_pluglist.inc:130 ihtml/themes/altlinux/framework.tpl:14
-#: ihtml/themes/altlinux/framework.tpl:24
-#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
-msgid ""
-"You are currently editing a database entry. Do you want to dismiss the "
-"changes?"
-msgstr ""
-"Esta actualmente editando una entrada de la base de datos. ?Quiere quitar "
-"los cambios?"
-
 #: include/class_config.inc:69
 #, php-format
 msgid "XML error in gosa.conf: %s at line %d"
@@ -10144,6 +10122,24 @@ msgid ""
 msgstr ""
 "No tiene una cuenta administrativa para GOsa, no podrá administrar nada."
 
+#: include/class_pluglist.inc:115
+msgid ""
+"Your gosa.conf information has changed partly. Please convert it using the "
+"contributed script fix_config.sh!"
+msgstr ""
+"El contenido de la configuración 'gosa.conf' ha cambiado parcialmente. ¡Por "
+"favor actualízela usando el script 'fix_config.sh'!"
+
+#: include/class_pluglist.inc:130 ihtml/themes/altlinux/framework.tpl:14
+#: ihtml/themes/altlinux/framework.tpl:24
+#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
+msgid ""
+"You are currently editing a database entry. Do you want to dismiss the "
+"changes?"
+msgstr ""
+"Esta actualmente editando una entrada de la base de datos. ?Quiere quitar "
+"los cambios?"
+
 #: html/helpviewer.php:113
 #, fuzzy
 msgid "There is no helpfile specified for this class."
@@ -10331,11 +10327,6 @@ msgstr "Teléfono particular"
 #, fuzzy
 msgid "Postal address"
 msgstr "Código Postal"
-
-#: html/getxls.php:174
-#, fuzzy
-msgid "Adress"
-msgstr "Dirección"
 
 #: html/getxls.php:174
 #, fuzzy
@@ -10839,6 +10830,10 @@ msgid ""
 "versions. In some cases it would be helpful to enable the error reporting. "
 "(But it could be a security risk)  "
 msgstr ""
+
+#, fuzzy
+#~ msgid "Adress"
+#~ msgstr "Dirección"
 
 #~ msgid "Display workstations matching"
 #~ msgstr "Mostrar estaciones de trabajo que concuerden con"

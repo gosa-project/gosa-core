@@ -2325,7 +2325,7 @@ msgstr "Scegli il subtree per l'utente"
 #: plugins/addons/addressbook/address_edit.tpl:93
 #: plugins/addons/addressbook/address_info.tpl:33
 #: plugins/addons/addressbook/address_info.tpl:82
-#: plugins/admin/departments/generic.tpl:54
+#: plugins/admin/departments/generic.tpl:54 html/getxls.php:174
 msgid "Address"
 msgstr "Indirizzo"
 
@@ -9235,25 +9235,6 @@ msgstr "versione di sviluppo di GOsa (Rev %s)"
 msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
 msgstr ""
 
-#: include/class_pluglist.inc:91
-msgid "plHeadline"
-msgstr ""
-
-#: include/class_pluglist.inc:115
-msgid ""
-"Your gosa.conf information has changed partly. Please convert it using the "
-"contributed script fix_config.sh!"
-msgstr ""
-
-#: include/class_pluglist.inc:130 ihtml/themes/altlinux/framework.tpl:14
-#: ihtml/themes/altlinux/framework.tpl:24
-#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
-msgid ""
-"You are currently editing a database entry. Do you want to dismiss the "
-"changes?"
-msgstr ""
-"Stai modificando un campo del database. Vuoi abbandonare i cambiamenti?"
-
 #: include/class_config.inc:69
 #, php-format
 msgid "XML error in gosa.conf: %s at line %d"
@@ -9749,6 +9730,21 @@ msgstr ""
 "Manca un utente amministrativo per GOsa, non sarai in grado di amministrare "
 "niente!"
 
+#: include/class_pluglist.inc:115
+msgid ""
+"Your gosa.conf information has changed partly. Please convert it using the "
+"contributed script fix_config.sh!"
+msgstr ""
+
+#: include/class_pluglist.inc:130 ihtml/themes/altlinux/framework.tpl:14
+#: ihtml/themes/altlinux/framework.tpl:24
+#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
+msgid ""
+"You are currently editing a database entry. Do you want to dismiss the "
+"changes?"
+msgstr ""
+"Stai modificando un campo del database. Vuoi abbandonare i cambiamenti?"
+
 #: html/helpviewer.php:113
 #, fuzzy
 msgid "There is no helpfile specified for this class."
@@ -9925,11 +9921,6 @@ msgstr "Telefono privato"
 #, fuzzy
 msgid "Postal address"
 msgstr "CAP"
-
-#: html/getxls.php:174
-#, fuzzy
-msgid "Adress"
-msgstr "Indirizzo"
 
 #: html/getxls.php:174
 #, fuzzy
@@ -10402,6 +10393,10 @@ msgid ""
 "versions. In some cases it would be helpful to enable the error reporting. "
 "(But it could be a security risk)  "
 msgstr ""
+
+#, fuzzy
+#~ msgid "Adress"
+#~ msgstr "Indirizzo"
 
 #~ msgid "Display workstations matching"
 #~ msgstr "Mostra le worstation che corrispondono"

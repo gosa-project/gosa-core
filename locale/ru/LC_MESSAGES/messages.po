@@ -2367,7 +2367,7 @@ msgstr "Выберите ветку для пользователя"
 #: plugins/addons/addressbook/address_edit.tpl:93
 #: plugins/addons/addressbook/address_info.tpl:33
 #: plugins/addons/addressbook/address_info.tpl:82
-#: plugins/admin/departments/generic.tpl:54
+#: plugins/admin/departments/generic.tpl:54 html/getxls.php:174
 msgid "Address"
 msgstr "Адрес"
 
@@ -9585,27 +9585,6 @@ msgstr ""
 msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
 msgstr ""
 
-#: include/class_pluglist.inc:91
-msgid "plHeadline"
-msgstr ""
-
-#: include/class_pluglist.inc:115
-msgid ""
-"Your gosa.conf information has changed partly. Please convert it using the "
-"contributed script fix_config.sh!"
-msgstr ""
-"Ваш конфигурационный файл gosa.conf был частично изменен. Пожалуйста, "
-"сконвертиуйте его используя скрипт fix_config.sh"
-
-#: include/class_pluglist.inc:130 ihtml/themes/altlinux/framework.tpl:14
-#: ihtml/themes/altlinux/framework.tpl:24
-#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
-msgid ""
-"You are currently editing a database entry. Do you want to dismiss the "
-"changes?"
-msgstr ""
-"Вы сейчас редактируете объект базы данных. Хотите отказаться от изменений?"
-
 #: include/class_config.inc:69
 #, php-format
 msgid "XML error in gosa.conf: %s at line %d"
@@ -10114,6 +10093,23 @@ msgstr ""
 "У вас нет учетной записи администратора для GOsa, так что вы не сможете что-"
 "либо администрировать!"
 
+#: include/class_pluglist.inc:115
+msgid ""
+"Your gosa.conf information has changed partly. Please convert it using the "
+"contributed script fix_config.sh!"
+msgstr ""
+"Ваш конфигурационный файл gosa.conf был частично изменен. Пожалуйста, "
+"сконвертиуйте его используя скрипт fix_config.sh"
+
+#: include/class_pluglist.inc:130 ihtml/themes/altlinux/framework.tpl:14
+#: ihtml/themes/altlinux/framework.tpl:24
+#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
+msgid ""
+"You are currently editing a database entry. Do you want to dismiss the "
+"changes?"
+msgstr ""
+"Вы сейчас редактируете объект базы данных. Хотите отказаться от изменений?"
+
 #: html/helpviewer.php:113
 #, fuzzy
 msgid "There is no helpfile specified for this class."
@@ -10294,11 +10290,6 @@ msgstr "Домашний телефон"
 #, fuzzy
 msgid "Postal address"
 msgstr "Почтовый индекс"
-
-#: html/getxls.php:174
-#, fuzzy
-msgid "Adress"
-msgstr "Адрес"
 
 #: html/getxls.php:174
 #, fuzzy
@@ -10788,6 +10779,10 @@ msgid ""
 "versions. In some cases it would be helpful to enable the error reporting. "
 "(But it could be a security risk)  "
 msgstr ""
+
+#, fuzzy
+#~ msgid "Adress"
+#~ msgstr "Адрес"
 
 #~ msgid "Display workstations matching"
 #~ msgstr "Показать соответствующие рабочие станции"

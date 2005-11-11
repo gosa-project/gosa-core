@@ -88,7 +88,7 @@ class pluglist {
 			  foreach( $plugins as $id => $plug){
 				  $attrs = (get_class_vars($plug['CLASS']));
 				  $ret[$id]['HEADLINE'] = $headline;
-				  $ret[$id]['NAME']	  = _($attrs['plHeadline']);	
+				  $ret[$id]['NAME']	  = $attrs['plHeadline'];	
 			  }
 		  }
 		  $this->headlines = $ret;

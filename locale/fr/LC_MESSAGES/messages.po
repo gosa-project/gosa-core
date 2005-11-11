@@ -2341,7 +2341,7 @@ msgstr "Sélectionnez la branche où sera enregistrée l'utilisateur"
 #: plugins/addons/addressbook/address_edit.tpl:93
 #: plugins/addons/addressbook/address_info.tpl:33
 #: plugins/addons/addressbook/address_info.tpl:82
-#: plugins/admin/departments/generic.tpl:54
+#: plugins/admin/departments/generic.tpl:54 html/getxls.php:174
 msgid "Address"
 msgstr "Adresse"
 
@@ -9316,28 +9316,6 @@ msgstr ""
 "Impossible d'utiliser ssha pour l'encryption (Fonction mhash / sha1 "
 "manquante)"
 
-#: include/class_pluglist.inc:91
-msgid "plHeadline"
-msgstr ""
-
-#: include/class_pluglist.inc:115
-msgid ""
-"Your gosa.conf information has changed partly. Please convert it using the "
-"contributed script fix_config.sh!"
-msgstr ""
-"Votre fichier de configuration gosa.conf à changé partiellement . Veuillez "
-"le convertir en utilisant le script fix_config.sh!"
-
-#: include/class_pluglist.inc:130 ihtml/themes/altlinux/framework.tpl:14
-#: ihtml/themes/altlinux/framework.tpl:24
-#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
-msgid ""
-"You are currently editing a database entry. Do you want to dismiss the "
-"changes?"
-msgstr ""
-"Vous êtes actuellement en train d'éditer une entrée de la base de données. "
-"Voulez vous annuler les modifications?"
-
 #: include/class_config.inc:69
 #, php-format
 msgid "XML error in gosa.conf: %s at line %d"
@@ -9871,6 +9849,24 @@ msgstr ""
 "Le compte administrateur de GOsa n'existe pas, vous ne pourrez rien "
 "administrer!"
 
+#: include/class_pluglist.inc:115
+msgid ""
+"Your gosa.conf information has changed partly. Please convert it using the "
+"contributed script fix_config.sh!"
+msgstr ""
+"Votre fichier de configuration gosa.conf à changé partiellement . Veuillez "
+"le convertir en utilisant le script fix_config.sh!"
+
+#: include/class_pluglist.inc:130 ihtml/themes/altlinux/framework.tpl:14
+#: ihtml/themes/altlinux/framework.tpl:24
+#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
+msgid ""
+"You are currently editing a database entry. Do you want to dismiss the "
+"changes?"
+msgstr ""
+"Vous êtes actuellement en train d'éditer une entrée de la base de données. "
+"Voulez vous annuler les modifications?"
+
 #: html/helpviewer.php:113
 msgid "There is no helpfile specified for this class."
 msgstr "Il n'y a pas de fichier d'aide spécifiée pour cette classe."
@@ -10049,10 +10045,6 @@ msgstr "GSM"
 #: html/getxls.php:174
 msgid "Postal address"
 msgstr "Adresse postale"
-
-#: html/getxls.php:174
-msgid "Adress"
-msgstr "Addresse"
 
 #: html/getxls.php:174
 msgid "Function"
@@ -10551,3 +10543,6 @@ msgstr ""
 "GOsa peut provoquer des erreurs PHP, particulièrement dans le cas des Beta "
 "versions. Dans certains cas il peut être intéressant d'activer l'affichage "
 "des erreurs. (Cela peut représenter un risque de sécurité)  "
+
+#~ msgid "Adress"
+#~ msgstr "Addresse"
