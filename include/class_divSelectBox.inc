@@ -66,6 +66,7 @@ class divSelectBox {
 		$s_key 		= "";
 		$s_return 	= "";
 		$i_alternate=0;
+    $str = "";
 	
     /* If divlist is empty, append a single white entry */
     if(count($this->a_entries)==0){
