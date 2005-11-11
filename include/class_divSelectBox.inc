@@ -7,7 +7,6 @@ class divSelectBox {
 	var $cols;
 
 	// Members for page managment
-  var $width= 300;
   var $height=200;
 
 	// Added php 4 constructor
@@ -16,10 +15,6 @@ class divSelectBox {
 		$this->a_entries                = array();
 		$this->cols                     = 0;
 	}
-
-  function setWidth($w){
-    $this->width=$w;
-  }
 
   function setHeight($h){
     $this->height=$h;
@@ -32,8 +27,8 @@ class divSelectBox {
   function DrawList(){
     $s_return  = "";
     $s_return .= "<div style=\"height:2px; overflow:hidden;background:#888888;width:100%;margin-right:18px;\"></div>\n";
-    $s_return .= "<div style=\"padding-right:1px;padding-bottom:2px;\" height='100%' width='100%'>\n";
-    $s_return .= "<div style=\"overflow: auto;height:100%;width:100%;\">\n";
+    $s_return .= "<div style=\"padding-right:1px;padding-bottom:2px;;\" height='".$this->height."' width='100%'>\n";
+    $s_return .= "<div style=\"overflow: auto;width:100%;height:".$this->height."px;\">\n";
     $s_return .= "<table ".
                     "summary='".$this->s_summary."' ".
                     "width='100%' ".
@@ -75,6 +70,7 @@ class divSelectBox {
     }
 
     $i = $this->_numEntries();
+    for($e = 0 ; $e < 10 ; $e ++)
     foreach($this->a_entries as $s_key => $s_value){
       $i--;
 
@@ -87,7 +83,7 @@ class divSelectBox {
       $s_return .= "\n<tr>";
 
       $cnt = 0; 					
-
+    
       foreach($s_value as $s_key2 => $s_value2 ){				
         $this->cols = count($s_value) ;						
         $cnt++;					

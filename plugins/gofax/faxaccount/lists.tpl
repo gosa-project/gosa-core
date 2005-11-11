@@ -17,7 +17,7 @@
 	<b>{t}List of predefined blocklists{/t}</b><br>
 	<table height="300" style="width:100%">
 		<tr>
-			<td>
+			<td valign="top">
 					{$divSelectPredefined}
 			</td>
 		</tr>
