@@ -13,12 +13,12 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-11-07 15:12+0100\n"
+"PO-Revision-Date: 2005-11-11 14:23+0100\n"
 "Last-Translator: Stefan Koehler <stefan.koehler@GONICUS.de>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: contrib/gosa.conf:4
 msgid "My account"
@@ -287,16 +287,13 @@ msgid "Italian"
 msgstr "Italienisch"
 
 #: html/helpviewer.php:113
-#, fuzzy
 msgid "There is no helpfile specified for this class."
-msgstr ""
-"Die in ihrer gosa.conf angegebene Zustellungs-Methode '%s' ist nicht "
-"verf�gbar."
+msgstr "F�r diese Klasse wurde keine Hilfedatei angegeben."
 
 #: html/helpviewer.php:221
 #, php-format
 msgid "Helpdir '%s' is not accessible, can't read any helpfiles."
-msgstr ""
+msgstr "Auf das Hilfeverzeichnis '%s' kann nicht zugegriffen werden - kann daher keine Hilfedateien lesen."
 
 #: html/getxls.php:65
 msgid "Birthday"
@@ -347,9 +344,8 @@ msgid "User ID"
 msgstr "Benutzer-ID"
 
 #: html/getxls.php:94 html/getxls.php:227
-#, fuzzy
 msgid "Members"
-msgstr "Zusammengefasste Objekte"
+msgstr "Mitglieder"
 
 #: html/getxls.php:97 html/getxls.php:99 html/getxls.php:244
 #: plugins/admin/groups/class_groupManagement.inc:25
@@ -397,7 +393,6 @@ msgid "Common Name"
 msgstr ""
 
 #: html/getxls.php:146
-#, fuzzy
 msgid "Server Name"
 msgstr "Server-Name"
 
@@ -418,7 +413,6 @@ msgid "Common name"
 msgstr "Name des Standortes:"
 
 #: html/getxls.php:174
-#, fuzzy
 msgid "Display Name"
 msgstr "Angezeigter Name"
 
@@ -514,7 +508,6 @@ msgid "Function"
 msgstr "Funktion"
 
 #: html/getxls.php:177 html/getxls.php:247
-#, fuzzy
 msgid "Adressbook"
 msgstr "Adressbuch"
 
@@ -5822,9 +5815,8 @@ msgstr ""
 "Hier klicken, um die gesamte LDAP-Datenbank in eine xls-Datei zu exportieren."
 
 #: plugins/addons/ldapmanager/contentexportxls.tpl:62
-#, fuzzy
 msgid "Click here to save the LDAP Export to a xls file"
-msgstr "Hier klicken, um die exportierten Daten in eine Datei zu speichern"
+msgstr "Hier klicken, um die exportierten Daten in eine xls-Datei zu speichern"
 
 #: plugins/addons/ldapmanager/class_exportxls.inc:7
 msgid "XLS import"
@@ -5935,13 +5927,13 @@ msgstr "Mail-Server"
 msgid ""
 "Please check your 'gosa.conf', there is no 'MAILQUEUE_QUERY_COMMAND' "
 "specified."
-msgstr ""
+msgstr "Bitte �berpr�fen Sie Ihre 'gosa.conf' - der Eintrag 'MAILQUEUE_QUERY_COMMAND' wurde nicht gefunden."
 
 #: plugins/addons/mailqueue/class_mailqueue.inc:68
 #: plugins/addons/mailqueue/class_mailqueue.inc:87
 #, php-format
 msgid "Please check your 'gosa.conf' the given '%s' can't be executed."
-msgstr ""
+msgstr "Bitte �berpr�fen Sie Ihre 'gosa.conf' - '%s' kann nicht ausgef�hrt werden."
 
 #: plugins/addons/mailqueue/class_mailqueue.inc:127
 msgid "up"
@@ -5975,7 +5967,6 @@ msgid "within the last"
 msgstr ""
 
 #: plugins/addons/mailqueue/contents.tpl:25
-#, fuzzy
 msgid "Search returned no results"
 msgstr "Die Suche verlief ergebnislos..."
 
@@ -6833,15 +6824,14 @@ msgstr ""
 
 #: plugins/admin/departments/remove.tpl:10 plugins/admin/systems/remove.tpl:10
 #: plugins/admin/fai/remove.tpl:11 plugins/gofon/conference/remove.tpl:10
-#, fuzzy
 msgid ""
 "Best thing to do before performing this action would be to save the current "
 "contents of your LDAP tree in a file. So - if you've done so - press "
 "'Delete' to continue or 'Cancel' to abort."
 msgstr ""
-"Eine Sicherung der LDAP-Datenbank bietet sich an. Wenn Sie bereit sind, "
-"dr�cken Sie <i>Beenden</i> um Fortzufahren oder <i>Abbrechen</i>, um den "
-"Vorgang zu beenden."
+"Eine Sicherung der LDAP-Datenbank bietet sich an. Wenn Sie dies erledigt haben, "
+"dr�cken Sie <i>Entfernen</i> um Fortzufahren oder <i>Abbrechen</i>, um den "
+"Vorgang abzubrechen."
 
 #: plugins/admin/departments/headpage.tpl:6
 msgid "List of departments"
@@ -8128,7 +8118,7 @@ msgstr ""
 
 #: plugins/admin/systems/password.tpl:5
 msgid "Leave fields blank for password inheritance from default entries."
-msgstr ""
+msgstr "Lassen Sie die Felder leer, um das Passwort aus den Standard-Eintr�gen zu �bernehmen."
 
 #: plugins/admin/systems/password.tpl:9
 msgid "Changing the password impinges on authentification only."
@@ -8529,7 +8519,8 @@ msgstr "Kann '%s' nicht �ffnen, PPD-Einstellungen wurden  zur�ckgesetzt."
 msgid ""
 "The specified PPD_PATH='%s' in your gosa.conf is invalid, can't read any ppd "
 "informations."
-msgstr ""
+msgstr "Der in Ihrer 'gosa.conf' angegebene PPD-Pfad (PPD_PATH) '%s' ist ung�ltig - kann daher "
+"keine ppd-Informationen lesen."
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:105
 #, fuzzy
@@ -9093,7 +9084,7 @@ msgstr "Es ist mindestens eine Telefonnummer erforderlich."
 #: plugins/admin/ogroups/class_phonequeue.inc:228
 msgid ""
 "There is currently no asterisk server defined. Your settings can't be saved."
-msgstr ""
+msgstr "Im Moment ist kein Asterisk-Server definiert. Ihre Einstellungen k�nnen nicht gespeichert werden."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:241
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:237
@@ -9268,12 +9259,10 @@ msgid "Ring instead of playing background music"
 msgstr "Klingelton statt Hintergrund-Musik"
 
 #: plugins/admin/fai/remove.tpl:7
-#, fuzzy
 msgid ""
 "This includes 'all' object information. Please double check if your really "
 "want to do this since there is no way for GOsa to get your data back."
-msgstr ""
-"Dies umfasst <b>alle</b> Objekt-Informationen Bitte pr�fen Sie genau, da es "
+msgstr "Dies umfasst <b>alle</b> Objekt-Informationen Bitte pr�fen Sie genau, da es "
 "keine M�glichkeit f�r GOsa gibt, die Daten zu restaurieren. "
 
 #: plugins/admin/fai/main.inc:38 plugins/admin/fai/main.inc:40
@@ -9869,17 +9858,14 @@ msgid "Please enter a user."
 msgstr "Bitte geben Sie einen Benutzer ein."
 
 #: plugins/admin/fai/class_faiTemplateEntry.inc:171
-#, fuzzy
 msgid "Please enter a valid user. Only a-z/0-9 are allowed."
-msgstr ""
-"Bitte geben Sie einen g�ltigen Benutzer ein (0-9 und a-Z sind erlaubt)."
+msgstr "Bitte geben Sie einen g�ltigen Benutzer ein (0-9 und a-Z sind erlaubt)."
 
 #: plugins/admin/fai/class_faiTemplateEntry.inc:175
 msgid "Please enter a group."
 msgstr "Bitte geben Sie eine Gruppe ein."
 
 #: plugins/admin/fai/class_faiTemplateEntry.inc:178
-#, fuzzy
 msgid "Please enter a valid group. Only a-z/0-9 are allowed."
 msgstr "Bitte geben Sie eine g�ltige Gruppe ein (0-9 und a-Z sind erlaubt)."
 
@@ -10027,16 +10013,14 @@ msgstr "nicht definiert"
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:632
 #: plugins/gofon/macro/class_gofonMacro.inc:91
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:225
-#, fuzzy
 msgid ""
 "There is currently no asterisk server defined. Possibly you are missing a "
 "server that handles the asterisk management (goFonServer). Your settings "
 "can't be saved to asterisk database."
 msgstr ""
 "Momentan ist kein Asterisk-Server definiert. Wahrscheinlich fehlt Ihnen ein "
-"Server, der das Asterisk-Management (goFonServer) enth�lt.\n"
-"Ihre Einstellungen k�nnen daher nicht in der Asterisk-Datenbank gespeichert "
-"werden."
+"Server, der das Asterisk-Management (goFonServer) enth�lt. Ihre Einstellungen "
+"k�nnen daher nicht in der Asterisk-Datenbank gespeichert werden."
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:547
 msgid "Error while performing query:"
@@ -10569,16 +10553,16 @@ msgstr "Willkommen %s!"
 #~ "This menu allows you to select existing hotplug devices. All devices of "
 #~ "all users are choosable here."
 #~ msgstr ""
-#~ "Dieses Men� erlaubt es Ihnen, bestehende Hotplug-Ger�te zu verwenden. Es "
-#~ "werden alle Ger�te aller Benutzer angezeigt."
+#~ "Dieses Menü erlaubt es Ihnen, bestehende Hotplug-Geräte zu verwenden. Es "
+#~ "werden alle Geräte aller Benutzer angezeigt."
 
 #~ msgid ""
 #~ "This menu allows you to create, edit and delete selected printers. Having "
 #~ "a great number of printers, you may want to use the range selectors on "
 #~ "top of the printers list."
 #~ msgstr ""
-#~ "Dieses Men� erm�glicht es Ihnen Drucker hinzuzuf�gen, zu bearbeiten oder "
-#~ "zu entfernen. Bei einer gro�en Anzahl von Druckern bietet sich die "
+#~ "Dieses Menü ermöglicht es Ihnen Drucker hinzuzufügen, zu bearbeiten oder "
+#~ "zu entfernen. Bei einer großen Anzahl von Druckern bietet sich die "
 #~ "Verwendung der Bereichsauswahl an."
 
 #~ msgid "Specific Phone settings"
@@ -10590,8 +10574,8 @@ msgstr "Willkommen %s!"
 #~ "printer object for specific tasks. Having a great number of entries, you "
 #~ "may want to use the range selectors below."
 #~ msgstr ""
-#~ "Dieses Men� erm�glicht es Ihnen Benutzer oder Gruppen zu dem Drucker "
-#~ "hinzuzuf�gen oder zu entfernen. Bei einer gro�en Zahl von Benutzern "
+#~ "Dieses Menü ermöglicht es Ihnen Benutzer oder Gruppen zu dem Drucker "
+#~ "hinzuzufügen oder zu entfernen. Bei einer großen Zahl von Benutzern "
 #~ "bietet sich die Verwendung der Bereichsauswahl an."
 
 #, fuzzy
@@ -10608,7 +10592,7 @@ msgstr "Willkommen %s!"
 
 #, fuzzy
 #~ msgid "Select time periode"
-#~ msgstr "W�hlen Sie den Terminal-Modus"
+#~ msgstr "Wählen Sie den Terminal-Modus"
 
 #~ msgid "PPTP Server account"
 #~ msgstr "PPTP-Konto"
@@ -10629,7 +10613,7 @@ msgstr "Willkommen %s!"
 #~ msgstr "Geschlecht"
 
 #~ msgid "Needed parameters to openexchange connectivity plugin are missing!"
-#~ msgstr "Nicht alle benÃÂÃÂ¶tigten Parameter fÃÂÃÂr OpenXchange KonnektivitÃÂÃ¢ÂÂ¬tserweiterung wurden gefunden!"
+#~ msgstr "Nicht alle benÃÂÃÂÃÂÃÂ¶tigten Parameter fÃÂÃÂÃÂÃÂr OpenXchange KonnektivitÃÂÃÂÃÂ¢ÃÂÃÂ¬tserweiterung wurden gefunden!"
 
 #, fuzzy
 #~ msgid "XLS export"
@@ -10692,12 +10676,12 @@ msgstr "Willkommen %s!"
 
 #~ msgid "Add admin user"
 #~ msgstr ""
-#~ "Administrator hinzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgen"
+#~ "Administrator hinzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgen"
 
 #~ msgid "Add admin group"
 #~ msgstr ""
 #~ "Administrator-Gruppe "
-#~ "hinzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgen"
+#~ "hinzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgen"
 
 #~ msgid "Undefined"
 #~ msgstr "nicht definiert"
@@ -10709,27 +10693,27 @@ msgstr "Willkommen %s!"
 #~ "inheritance from default entries.</b>"
 #~ msgstr ""
 #~ "Um das root-Passwort des Terminals zu "
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ndern, benutzen Sie die unteren Felder. "
-#~ "Die VerÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬nderungen werden "
-#~ "wÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hrend des "
-#~ "nÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬chsten Starts des Terminals wirksam. "
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ndern, benutzen Sie die unteren Felder. "
+#~ "Die VerÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬nderungen werden "
+#~ "wÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hrend des "
+#~ "nÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬chsten Starts des Terminals wirksam. "
 #~ "Bitte merken Sie sich dieses Passwort, da Sie sonst nicht in der Lage "
 #~ "sein werden, sich am entsprechenden System anzumelden. <b>Lassen Sie das "
 #~ "Feld leer, um das Passwort von den Standard-Einstellungen zu "
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂbernehmen.</b>"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂbernehmen.</b>"
 
 #~ msgid "Select entry"
 #~ msgstr "Auswahl des Eintrags"
 
 #~ msgid "Select user/group to add"
 #~ msgstr ""
-#~ "WÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hlen Sie die "
-#~ "hinzuzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgenden Benutzer/Gruppen"
+#~ "WÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hlen Sie die "
+#~ "hinzuzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgenden Benutzer/Gruppen"
 
 #~ msgid "Printer driver information file setup"
 #~ msgstr "Einrichtung der Informations-Datei des Drucker-Treibers"
@@ -10738,55 +10722,55 @@ msgstr "Willkommen %s!"
 #~ msgstr "Momentan genutzte Informationen: "
 
 #~ msgid "Reset list"
-#~ msgstr "Liste zurÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂcksetzen"
+#~ msgstr "Liste zurÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂcksetzen"
 
 #~ msgid "Upload PPD"
 #~ msgstr "PPD hochladen"
 
 #~ msgid "List with all available ppd files."
-#~ msgstr "Zeige verfÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgbare PPD-Dateien"
+#~ msgstr "Zeige verfÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgbare PPD-Dateien"
 
 #~ msgid "Entries"
 #~ msgstr ""
-#~ "EintrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ge"
+#~ "EintrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ge"
 
 #~ msgid "selected"
 #~ msgstr ""
-#~ "ausgewÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hlt"
+#~ "ausgewÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hlt"
 
 #~ msgid "Please select a PPD or press cancel"
 #~ msgstr ""
-#~ "Bitte wÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hlen Sie eine PPD oder Abbrechen"
+#~ "Bitte wÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hlen Sie eine PPD oder Abbrechen"
 
 #~ msgid "Automount devices (format: complete autofs entry)"
 #~ msgstr ""
-#~ "Automount-GerÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬te (Format: kompletter autofs-Eintrag)"
+#~ "Automount-GerÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬te (Format: kompletter autofs-Eintrag)"
 
 #~ msgid "Add additional automount entries"
 #~ msgstr ""
-#~ "ZusÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬tzliche \"Automount-"
-#~ "EintrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ge\" "
-#~ "hinzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgen"
+#~ "ZusÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬tzliche \"Automount-"
+#~ "EintrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ge\" "
+#~ "hinzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgen"
 
 #~ msgid "Additional fstab entries"
 #~ msgstr ""
-#~ "ZusÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬tzliche fstab-"
-#~ "EintrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ge"
+#~ "ZusÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬tzliche fstab-"
+#~ "EintrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬ge"
 
 #~ msgid "Add additional filesystems to be mounted during startup"
 #~ msgstr ""
-#~ "ZusÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
-#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬tzliche Dateisysteme "
-#~ "hinzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgen, die wÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ�"
-#~ "�ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hrend des Starts gemountet werden"
+#~ "ZusÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢"
+#~ "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬tzliche Dateisysteme "
+#~ "hinzufÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgen, die wÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ"
+#~ "¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hrend des Starts gemountet werden"
 
 #~ msgid "Service"
 #~ msgstr "Dienst"
@@ -10802,11 +10786,11 @@ msgstr "Willkommen %s!"
 
 #~ msgid "Checking for function <b>%s</b>"
 #~ msgstr ""
-#~ "PrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂfe auf "
-#~ "VerfÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgbarkeit der Funktion <b>%s</b>"
+#~ "PrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂfe auf "
+#~ "VerfÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgbarkeit der Funktion <b>%s</b>"
 
 #~ msgid ""
 #~ "Can't read any helpfiles from ' %s ', possibly there is no help available."
 #~ msgstr ""
 #~ "Kann keine Hilfe-Dateien unter '%s' finden, wahrscheinlich ist keine "
-#~ "Hilfe verfÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgbar."
+#~ "Hilfe verfÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgbar."
