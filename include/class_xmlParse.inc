@@ -87,7 +87,7 @@ class xmlParse  {
 				$dir ="";
 			}
 			if(($ele['tag'] == "CATEGORY")&&(!empty($ele['value']))&&(isset($ele['value']))){
-				$current[$dir]['name'] = $ele['value'];
+				$current[preg_replace("/\/$/","",$dir)]['name'] = $ele['value'];
 			}
 			if(isset($current['type'])){
 				unset($current['type']);
@@ -96,10 +96,11 @@ class xmlParse  {
 				$dir .= preg_replace("/\.directory/","",$ele['value'])."/";
 			}
 			if(($ele['tag'] == "CATEGORY")&&(!empty($ele['value']))&&(isset($ele['value']))){
-				$current[$dir] = $ele['value'];
+				$current[preg_replace("/\/$/","",$dir)] = $ele['value'];
 			}
 			$curback = $current;	
 		}
+		
 	}
 
 
