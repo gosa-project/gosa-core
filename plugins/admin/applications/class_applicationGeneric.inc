@@ -35,7 +35,7 @@ class application extends plugin
 	$tmp = new xmlParse();
 	
 	if(!isset($this->config->data['MAIN']['KDE_APPLICATIONS_MENU']))	{
-		print_red(_("There is no value specified for 'KDE_APPLICATIONS_MENU' in your gosa.conf."));
+		print_red(_("There is no value for 'KDE_APPLICATIONS_MENU' specified in your gosa.conf."));
 		$this->Categories= array();
 	}else{
 		$path = $this->config->data['MAIN']['KDE_APPLICATIONS_MENU'];
@@ -43,7 +43,7 @@ class application extends plugin
 			$tmp->parseMenu($path);
 			$this->Categories = $tmp->GetData();
 		}else{
-			print_red(sprintf(_("The specified file '%s' for 'KDE_APPLICATIONS_MENU' n your gosa.conf is not accessable."),$path));
+			print_red(sprintf(_("The specified file '%s' for 'KDE_APPLICATIONS_MENU' in your gosa.conf is not accessable."),$path));
 		}
 	}
 
