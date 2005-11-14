@@ -144,7 +144,6 @@ class application extends plugin
 	}
  
 	/* Fill templating stuff */
-	$smarty= get_smarty();
 	$smarty->assign("cn", $this->cn);
 	$smarty->assign("bases", $this->config->idepartments);
 	if ($this->dn == "new"){
