@@ -65,6 +65,9 @@ class xmlParse  {
 		foreach($vals as $ele){
 			if($ele['tag'] =="INPUT") continue;
 			if($ele['tag'] =="INCLUDE") continue;
+
+			if(!in_array($ele['tag'],array("MENU","CATEGORY","DIRECTORY"))) continue;
+
 			if($ele['type'] == "open"){
 				$tag = $ele['tag'].$i;
 		
@@ -83,7 +86,7 @@ class xmlParse  {
 				if($ele['tag'] == "MENU")
 				$dir ="";
 			}
-			if($ele['tag'] == "CATEGORY"){
+			if(($ele['tag'] == "CATEGORY")&&(!empty($ele['value']))&&(isset($ele['value']))){
 				$current[$dir]['name'] = $ele['value'];
 			}
 			if(isset($current['type'])){
@@ -91,14 +94,13 @@ class xmlParse  {
 			}
 			if($ele['tag'] == "DIRECTORY"){
 				$dir .= preg_replace("/\.directory/","",$ele['value'])."/";
-//				$path= $ele['value'];
-//				$current[$dir]['path'] = $path;
 			}
-			if($ele['tag'] == "CATEGORY"){
+			if(($ele['tag'] == "CATEGORY")&&(!empty($ele['value']))&&(isset($ele['value']))){
 				$current[$dir] = $ele['value'];
 			}
 			$curback = $current;	
 		}
+		print_a($this->data);
 	}
 
 
