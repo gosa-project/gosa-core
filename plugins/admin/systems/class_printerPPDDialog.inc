@@ -136,6 +136,7 @@ class printerPPDDialog extends plugin
                 }
               }// Foreach
               if(!$found){
+                $ppdname = $vendor."/".$vendor."-".preg_replace("/^[^ ]/","",str_replace("-","",$model)).".ppd";
                 $filename = $this->pathToPPD.$vendor."/".$vendor."-".preg_replace("/^[^ ]/","",str_replace("-","",$model)).".ppd";
                 $fp = @fopen($filename,"w+");
                 if(!$fp){
@@ -147,8 +148,11 @@ class printerPPDDialog extends plugin
 
                   $tmp2= split("\n", $res);
                   $tmp3['name']   =preg_replace("/^ -/","",$tmp2[1]);
-                  $tmp3['link']   =$filename;
+                  $tmp3['link']   =$ppdname;
                   $tmp3['ppd']    =$res;
+
+                  print_a($tmp3);
+
                   $this->selectedPPD = $tmp3;
                   $this->getPrinterReload(); 
                 }
