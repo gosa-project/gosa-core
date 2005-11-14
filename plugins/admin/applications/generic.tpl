@@ -46,7 +46,9 @@
     <tr>
      <td><LABEL for="gosaApplicationCategory">{t}Category{/t}</LABEL></td>
      <td>
-      <input id="gosaApplicationCategory" name="gosaApplicationCategory" size=35 maxlength=60 {$gosaApplicationCategoryACL} value="{$gosaApplicationCategory}">
+       <select size="1" id="base" name="gosaApplicationCategory" title="">
+        {html_options options=$categories selected=$gosaApplicationCategory}
+       </select>
      </td>
     </tr>
     <tr><td colspan=2><div style="height:15px;"></div></td></tr>

@@ -17,6 +17,7 @@ class application extends plugin
   var $gosaApplicationCategory= "";
   var $gotoLogonScript	="";
   var $iconData;
+  var $Categories;
 
   /* Headpage attributes */
   var $last_sorting= "invalid";
@@ -30,6 +31,21 @@ class application extends plugin
   function application ($config, $dn= NULL)
   {
   	plugin::plugin ($config, $dn);
+
+	$tmp = new xmlParse();
+	
+	if(!isset($this->config->data['MAIN']['KDE_APPLICATIONS_MENU']))	{
+		print_red(_("There is no value specified for 'KDE_APPLICATIONS_MENU' in your gosa.conf."));
+		$this->Categories= array();
+	}else{
+		$path = $this->config->data['MAIN']['KDE_APPLICATIONS_MENU'];
+		if(file_exists($path)){
+			$tmp->parseMenu($path);
+			$this->Categories = $tmp->GetData();
+		}else{
+			print_red(sprintf(_("The specified file '%s' for 'KDE_APPLICATIONS_MENU' n your gosa.conf is not accessable."),$path));
+		}
+	}
 
 	/* Load icon */
 	$ldap= $config->get_ldap_link();
@@ -94,6 +110,9 @@ class application extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
+	$smarty= get_smarty();
+	$smarty->assign("categories",array_flip($this->Categories));
 
  	/* Do we represent a valid group? */
 	if (!$this->is_account && $this->parent == NULL){
