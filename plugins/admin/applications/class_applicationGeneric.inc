@@ -17,7 +17,7 @@ class application extends plugin
   var $gosaApplicationCategory= "";
   var $gotoLogonScript	="";
   var $iconData;
-  var $Categories;
+  var $Categories = array();;
 
   /* Headpage attributes */
   var $last_sorting= "invalid";
@@ -43,6 +43,7 @@ class application extends plugin
 			$tmp->parseMenu($path);
 			$this->Categories = $tmp->GetData();
 		}else{
+			$this->Categories= array();
 			print_red(sprintf(_("The specified file '%s' for 'KDE_APPLICATIONS_MENU' in your gosa.conf is not accessable."),$path));
 		}
 	}

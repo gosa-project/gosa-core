@@ -7,7 +7,12 @@ class ppdManager
 
 	function ppdManager($path)
 	{
+		if(is_dir($path)){
 		$this->path= $path;
+		}else{
+			print_red(sprintf(_("PPD manager : The specified path '%s' doesn't exists."),$path));
+			return (false);
+		}
 	}
 
 
@@ -234,7 +239,7 @@ class ppdManager
 		$manufacturer= "";
 		
 		$fh= fopen ($ppdFile, 'r');
-		while (!feof($fh)) {
+		while ((!feof($fh))&&($fh)) {
 
 			/* Read line */
 			$line= fgets($fh, 256);

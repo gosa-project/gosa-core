@@ -522,8 +522,7 @@ class printgeneric extends plugin
   
     if(!is_array($this->attrs['gotoPrinterPPD'])) {
       $this->attrs['gotoPrinterPPD'] = $this->attrs['gotoPrinterPPD'];
-      $this->attrs['gotoPrinterPPD'] = $method.$_SERVER['SERVER_NAME']."/ppd/".
-                                       str_replace("//","/",$this->attrs['gotoPrinterPPD']);
+      $this->attrs['gotoPrinterPPD'] = $method.str_replace("//","/",$_SERVER['SERVER_NAME']."/ppd/".$this->attrs['gotoPrinterPPD']);
     }
 
     /* Append printer user 
