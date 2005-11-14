@@ -100,7 +100,6 @@ class xmlParse  {
 			}
 			$curback = $current;	
 		}
-		print_a($this->data);
 	}
 
 
