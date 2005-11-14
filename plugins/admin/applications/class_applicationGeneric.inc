@@ -17,7 +17,7 @@ class application extends plugin
   var $gosaApplicationCategory= "";
   var $gotoLogonScript	="";
   var $iconData;
-  var $Categories = array();;
+  var $Categories = array();
 
   /* Headpage attributes */
   var $last_sorting= "invalid";
