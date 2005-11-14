@@ -938,7 +938,7 @@ class environment extends plugin
         $method="http://";
       }
 
-      $str = $method.$_SERVER['SERVER_NAME']."/kiosk/";
+      $str = $method.str_replace("//","/",$_SERVER['SERVER_NAME']."/kiosk/");
       $this->attrs['gotoKioskProfile']= $str.$this->gotoKioskProfile;
     }else{
       $this->attrs['gotoKioskProfile']= array();
