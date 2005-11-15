@@ -18,6 +18,8 @@ class appgroup extends plugin
   var $option_value= array();
   var $appoption= array();
   var $table= "";
+  
+  var $curbase   = "";
 
   /* attribute list for save action */
   var $attributes= array();
@@ -45,13 +47,19 @@ class appgroup extends plugin
         $this->appoption[$name]= $option;
       }
     }
-
+    $this->curbase = $this->config->current['BASE'];
   }
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+	  /* Call parent execute */
+  	plugin::execute();
+    if((isset($_GET['act']))&&($_GET['act']=="depopen")){
+      $dep = base64_decode($_GET['depid']);  
+      if(isset($this->config->idepartments[$dep])){
+        $this->curbase = $dep;
+      }
+    }
 
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
@@ -96,6 +104,13 @@ class appgroup extends plugin
         asort($this->used_apps);
         $this->addApp($value);
       }
+    }
+
+    /* Add group with post */
+    if((isset($_GET['act']))&&($_GET['act']=="add")){
+      $this->used_apps[$_GET['id']]= $_GET['id'];
+      asort($this->used_apps);
+      $this->addApp($_GET['id']);
     }
 
     /* Edit application options? */
@@ -174,6 +189,59 @@ class appgroup extends plugin
         $apps["$key"]= "$value";
       }
     }
+
+    $div = new DivSelectBox("appgroup");    
+
+    /* NEW LIST MANAGMENT
+     * We also need to search for the departments
+     * So we are able to navigate like in konquerer
+     */
+
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->curbase) ;
+    $ldap->ls("(objectClass=gosaDepartment)"); 
+    $departments= array();
+    $tmp = array();
+    while ($value = $ldap->fetch()){
+      $tmp[strtolower($value['dn']).$value['dn']]=$value;
+    }
+    ksort($tmp);
+    foreach($tmp as $value){
+      if($value["description"][0]!=".."){
+        $departments[$value['dn']]=convert_department_dn($value['dn'])." - [".$value["description"][0]."]";
+      }else{
+        $departments[$value['dn']]=convert_department_dn($value['dn']);
+      }
+    }
+    
+    /* END NEW LIST MANAGMENT
+     */
+
+    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=depopen&amp;depid=%s'>%s</a>";
+    $linkadd  = "<a href='?plug=".$_GET['plug']."&amp;act=add&amp;id=%s'>%s</a>";
+
+    $base_back = preg_replace("/^[^,]+,/","",$this->curbase);
+    if((strlen($base_back)>= strlen($this->config->current['BASE']))&&($this->curbase!=$this->config->current['BASE'])){
+      $div->AddEntry(array(
+            array("string"=>sprintf($linkopen,base64_encode($base_back),".. ["._("back")."]"),
+                  "attach"=>"style='border:0px;'")
+            ));
+    }
+    foreach($departments as $key => $app){
+      $div->AddEntry(array(
+                            array("string"=>"<img src='images/folder.png' alt='"._("department")."'>&nbsp;".sprintf($linkopen,base64_encode($key),$app),
+                                  "attach"=>"style='border:0px;'")
+                          ));
+    }
+    
+    foreach($apps as $key => $app){
+      $div->AddEntry(array(
+                            array("string"=>"<img src='images/select_application.png' alt='"._("application")."'>&nbsp;".sprintf($linkadd,$key,$app),
+                                  "attach"=>"style='border:0px;'")
+                          ));
+    }
+
+    $smarty->assign("List", $div->DrawList());
     $smarty->assign("apps", $apps);
 
     /* Show main page */
@@ -259,10 +327,11 @@ class appgroup extends plugin
     /* Generate applist */
     $this->apps= array();
     $ldap= $this->config->get_ldap_link();
-    $ldap->cd ($this->config->current['BASE']);
-    $ldap->search ("(objectClass=gosaApplication)");
+    $ldap->cd ("ou=apps,".$this->curbase);
+
+    $ldap->ls ("(objectClass=gosaApplication)","ou=apps,".$this->curbase);
     while ($attrs= $ldap->fetch()){
-      if (isset($attrs["description"][0])){
+      if (isset($attrs["description"][0])){    
         $this->apps[$attrs["cn"][0]]=
           $attrs["cn"][0]." (".
           $attrs["description"][0].")";
@@ -274,18 +343,8 @@ class appgroup extends plugin
     natcasesort ($this->apps);
     reset ($this->apps);
 
-    $this->used_apps= array();
-  
     foreach ($this->gosaMemberApplication as $value){
-      if(!isset($this->apps[$value])){
-        print_red(sprintf(_("The application named %s is no longer available and has been removed."),$value));
-        $test = $this->gosaMemberApplication;
-        $test = array_flip($test);
-        unset($test[$value]);
-        $this->gosaMemberApplication = array_flip($test);
-      }else{
-        $this->used_apps[$value]= $this->apps[$value];
-      }
+      $this->used_apps[$value]= $value;
     }
   }
 

@@ -20,10 +20,7 @@
   <td style="width:45%; vertical-align:top;">
   <b><LABEL for="apps">{t}Available applications{/t}</LABEL></b>
   <br>
-  <select style="width:350px; height:275px;" id="apps" name="apps[]" size=15 multiple>
-    {html_options options=$apps}
-	<option disabled>&nbsp;</option>
-  </select>
+   {$List}
  </td>
  </tr>
 </table>
