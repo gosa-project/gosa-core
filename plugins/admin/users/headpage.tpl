@@ -1,6 +1,6 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
 <tr>
-  <td style="vertical-align:top;width:50%;">
+  <td style="vertical-align:top;width:600px;">
   <div class="contentboxh">
     <p class="contentboxh">
      <LABEL for="userlist">{t}List of users{/t}</LABEL> {$hint}
