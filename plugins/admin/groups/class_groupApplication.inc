@@ -192,6 +192,8 @@ class appgroup extends plugin
 
     $div = new DivSelectBox("appgroup");    
 
+    $div->SetHeight(300);
+
     /* NEW LIST MANAGMENT
      * We also need to search for the departments
      * So we are able to navigate like in konquerer
