@@ -195,6 +195,22 @@ class printerPPDDialog extends plugin
         }
       }
 
+      /* Div Selection */ 
+      if((isset($_GET['act']))&&($_GET['act']=="use")){
+        $hit = false;
+        foreach($this->ppdList as $vendor => $ppds ){
+          foreach($ppds as $name => $ppd){
+            if($ppd['link']==$_GET['id']){
+              $hit = true;
+            }
+          }
+        } 
+        $this->selectedPPD['link'] = $_GET['id'];
+        $this->ppdConfig   = false;
+        unset($this->dialog);
+        $this->dialog=NULL;
+      }
+
       /* if a dialog is open, print the dialog instead of this class
        */
       if($this->dialog!=NULL){

@@ -8,9 +8,7 @@
 			</div>
 			<div class="contentboxb">
 				<p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-					<select style="width:100%; height:450px; margin-top:4px;" name="PPDselection" size="15">
-            {html_options values=$objectKeys options=$objects}
-					</select>
+          {$List}
 					<input type=hidden name="edit_helper">
 				</p>	
 			</div>

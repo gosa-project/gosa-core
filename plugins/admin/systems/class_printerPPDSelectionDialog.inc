@@ -9,15 +9,13 @@ class printerPPDSelectionDialog extends plugin
 
   /* attribute list for save action */
   var $ignore_account       = FALSE;
-  var $attributes           = array("currentPos","currentSel");
+  var $attributes           = array();
   var $objectclasses        = array("whatever");
 
   var $list                 =array();
   var $header               =array();
 
-  var $currentPos           = "";
-  var $currentSel           = -1;
-  var $selectedPPD          = "";
+  var $Vendor               = "";
 
   function printerPPDSelectionDialog ($config, $dn= NULL,$list=false,$headers=false,$ppd=false)
   {
@@ -26,18 +24,6 @@ class printerPPDSelectionDialog extends plugin
     $this->header     = $headers;
     $this->depselect  = $this->config->current['BASE'];
     
-    /* If there is already a ppd file selected, use this as preselected object in our ppds list
-     * /
-    if(isset($ppd)){
-      print_a( $ppd);
-      $tmp2 = split("\n",$ppd['ppd']);
-      if(count($tmp2)==2){
-        $this->currentPos = $tmp2[0];
-        $this->currentSel = preg_replace("/^ -/","",$tmp2[1]);
-      }
-    }
-  
-     */
     if(!isset($_SESSION['printerPPDSelectionDialog'])){
       $_SESSION['printerPPDSelectionDialog']['regex'] = "*";
     }  
@@ -69,26 +55,48 @@ class printerPPDSelectionDialog extends plugin
     $regex = str_replace("**","*",$regex);
     $_SESSION['printerPPDSelectionDialog']['regex'] = $regex;
   
-
-    /* if manufacturer is selected and a ppd file 
-     * Set this selected file to our return value.
-     */ 
-    if(isset($this->list[$this->currentPos][$this->currentSel])){
-      $this->selectedPPD = $this->list[$this->currentPos][$this->currentSel];
-    }
-
     /** Added **/
     $list = array();
     foreach($this->list as $cat => $ppds){
       foreach($ppds as $ppd){
         if(preg_match("/^".str_replace("*",".*",$regex)."/i",$ppd['ppd'])){
-          $list[$ppd['link']] = $ppd['ppd'];
+          $list[$ppd['link']] = $ppd;
+        }
+      }
+    }
+  
+    if((isset($_GET['act']))&&($_GET['act']=="open"))  {
+      $this->Vendor = $_GET['id'];
+    }
+
+    $div = new divSelectBox("printerPPDSelectionDialog");
+    $div ->SetHeight(400);
+    $div ->SetSummary(_("Printer ppd selection."));
+    
+    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=open&amp;id=%s'>%s</a>";
+    $uselink  = "<a href='?plug=".$_GET['plug']."&amp;act=use&amp;id=%s'>%s</a>";
+    
+
+    if(empty($this->Vendor)){
+      foreach($this-> header as $key => $entry){
+        $div ->AddEntry (array(
+              array("string"=>sprintf($linkopen,$key,$key))
+              ));
+      }
+    }else{
+      $div ->AddEntry (array(
+            array("string"=>sprintf($linkopen,"",".. ["._("back")."]"))
+            ));
+      foreach($list as $key => $ppd){
+        if(preg_match("/^".$this->Vendor."/",$ppd['ppd'])){
+          $div ->AddEntry (array(
+                array("string"=>sprintf($uselink,$key,$ppd['ppd']))
+                ));
         }
       }
     }
 
-    $smarty->assign("objects",      $list);
-    $smarty->assign("objectKeys",   array_flip($list));
+    $smarty->assign("List",         $div -> DrawList());
     $smarty->assign("search_image", get_template_path('images/search.png'));
     $smarty->assign("launchimage",  get_template_path('images/small_filter.png'));
     $smarty->assign("tree_image",   get_template_path('images/tree.png'));
