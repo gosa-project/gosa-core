@@ -70,7 +70,7 @@ class printerPPDSelectionDialog extends plugin
     }
 
     $div = new divSelectBox("printerPPDSelectionDialog");
-    $div ->SetHeight(400);
+    $div ->SetHeight(450);
     $div ->SetSummary(_("Printer ppd selection."));
     
     $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=open&amp;id=%s'>%s</a>";
