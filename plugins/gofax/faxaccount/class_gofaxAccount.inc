@@ -706,7 +706,7 @@ class gofaxAccount extends plugin
 
       /* Check if mail account is active and correct the internal
          reference to represent the current status. */
-      if ($this->parent->by_object['mailAccount']->is_account){
+      if (isset($this->parent)&&($this->parent->by_object['mailAccount']->is_account)){
         $this->has_mailAccount= TRUE;
       }
     }
