@@ -150,8 +150,8 @@ class faiProfileEntry extends plugin
     $divlist = new divlist("ProfileEntry");
     $divlist->SetSummary(_("This list displays all assigned class names for this profile."));
     $divlist->SetEntriesPerPage(0);
-    $divlist->SetHeader(array(array("string"=>"Class name"),
-                              array("string"=>"Objects","attach"=>"style='border-right:0px;'")));
+    $divlist->SetHeader(array(array("string"=> _("Class name")),
+                              array("string"=> _("Objects"),"attach"=>"style='border-right:0px;'")));
 
     /* Action button allows us to delete an entry */
     $action = "<input type='hidden' name='ON_PAGE_%KEY%' value='1'>
@@ -207,8 +207,8 @@ class faiProfileEntry extends plugin
 
     $smarty->assign("faihead"       , "");
     $smarty->assign("failist"       , $divlist->DrawList());
-    $smarty->assign("infoimage"     , get_template_path('images/info.png'));
-    $smarty->assign("launchimage"   , get_template_path('images/launch.png'));
+    $smarty->assign("infoimage"     , get_template_path('images/info_small.png'));
+    $smarty->assign("launchimage"   , get_template_path('images/small_filter.png'));
     $smarty->assign("alphabet"      , generate_alphabet());
     $smarty->assign("apply"         , apply_filter(TRUE));
     $smarty->assign("search_image"  , get_template_path('images/search.png'));

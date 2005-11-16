@@ -39,7 +39,7 @@ class xmlParse  {
 	function parseMenu($file)
 	{
 		if (!($fp = @fopen($file, "r"))) {
-			print_red(sprintf(_("could not open XML input '%s'."),$file));
+			print_red(sprintf(_("Could not open XML input '%s'."),$file));
 			$this->data = array();
 			return(false);
 		}

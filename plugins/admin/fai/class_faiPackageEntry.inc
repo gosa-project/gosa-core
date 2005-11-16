@@ -15,7 +15,7 @@ class faiPackageEntry extends plugin
 
   var $buffer       = array();
   var $categories   = array();
-  var $searchStrPKG = "Please enter your search string here";
+  var $searchStrPKG = "";
   var $selected     = array();
 
   /* Array with available class names */
@@ -31,6 +31,8 @@ class faiPackageEntry extends plugin
       $this->searchStrPKG=$_SESSION['searchStrPKG'];
     }
     $this->selected=$selected;
+
+    $this->searchStrPKG= _("Please enter your search string here");
   }
 
   function execute()

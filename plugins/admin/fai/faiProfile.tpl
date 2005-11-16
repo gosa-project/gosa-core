@@ -1,7 +1,7 @@
 <table width="100%">
 	<tr>
 		<td width="50%" valign="top">
-			<h2><img alt="" src="images/house.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
+			<h2><img alt="" src="images/forward.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
 			<table summary="" cellspacing="4">
 				<tr>
 					<td>
@@ -10,7 +10,7 @@
 						</LABEL>
 					</td>
 					<td>
-						<input value="{$cn}" id="cn" name="cn">
+						<input value="{$cn}" size="45" maxsize="80" id="cn" name="cn">
 					</td>
 				</tr>
 				<tr>
@@ -20,7 +20,7 @@
 						</LABEL>
 					</td>
 					<td>
-						<input value="{$description}" {$description} name="description" id="description">
+						<input value="{$description}" size="45" maxsize="80" {$description} name="description" id="description">
 					</td>
 				</tr>
 			</table>
@@ -29,8 +29,8 @@
 			<table summary="" style="vertical-align:top; text-align:left;" cellpadding=4 width="100%">
 				<tr>
 					<td style="vertical-align:top;">
-						<h2><img alt="" src="images/house.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}FAI classes{/t}</h2> 
-						<select name="FAIclass" title="{t}Choose a priority{/t}" size=15 style="width:100%;" multiple>
+						<h2><img alt="" src="images/fai_template.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}FAI classes{/t}</h2> 
+						<select name="FAIclass" title="{t}Choose a priority{/t}" size="20" style="width:100%;" multiple>
 							{html_options values=$FAIclasses output=$FAIclasses}
 						</select>
 						<br>

@@ -1,7 +1,7 @@
 <table width="100%">
 	<tr>
-		<td width="50%" valign="top">
-				<h2><img alt="" src="images/house.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
+		<td width="50%" valign="top" style="border-right:1px solid #A0A0A0">
+				<h2><img alt="" src="images/forward.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
 				<table summary="" cellspacing="4">
 					<tr>
 						<td>
@@ -10,7 +10,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<input value="{$cn}" disabled id="cn">
+							<input value="{$cn}" size="45" maxsize="80" disabled id="cn">
 						</td>
 					</tr>
 					<tr>
@@ -20,13 +20,13 @@
 							</LABEL>
 						</td>
 						<td>
-							<input value="{$description}" {$description} name="description" id="description">
+							<input value="{$description}" size="45" maxsize="80" {$description} name="description" id="description">
 						</td>
 					</tr>
 				</table>
 		</td>
 		<td width="50%" valign="top">
-			<h2><img alt="" src="images/house.png" align="middle" title="{t}Repository{/t}">&nbsp;{t}Repository{/t}</h2>
+			<h2><img alt="" src="images/network.png" align="middle" title="{t}Repository{/t}">&nbsp;{t}Repository{/t}</h2>
 				<table summary="" cellspacing="4">
 					<tr>
 						<td>
@@ -61,10 +61,11 @@
 		</td>
 	</tr>
 </table>
+<p class="seperator">&nbsp;</p>
 <table width="99%">
 	<tr>
 		<td> 
-			<h2><img alt="" src="images/house.png" align="middle" title="{t}Used packages{/t}">&nbsp;{t}Used packages{/t}</h2>
+			<h2><img alt="" src="images/fai_packages.png" align="middle" title="{t}Used packages{/t}">&nbsp;{t}Used packages{/t}</h2>
 			<br>
 			<select id="usedPackages" name="usedPackages" title="{t}Choosen packages{/t}" multiple style="width:100%;height:300px;">
        			{html_options options=$usedPackages}

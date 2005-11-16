@@ -39,13 +39,13 @@
   <td style='border-left:1px solid #909090'>
   </td>
   <td>
-   <table>
+   <table {$grey}>
     <tr>
      <td>
        <input type=radio name="classSelector" value="2" {$ClassNamesAvailable}>
      </td>
      <td>
-      <h1>{t}Choose FAI class name from a list of existing classes{/t}</h1>
+      <h1 {$grey}>{t}Choose FAI class name from a list of existing classes{/t}</h1>
      </td>
     </tr>
     <tr>

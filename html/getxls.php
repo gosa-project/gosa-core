@@ -62,7 +62,7 @@ function dump_ldap ($mode= 0)
     switch ($d){
       case "ou=people," : 
         $user= 				   $ldap->gen_xls($dn,"(objectClass=*)",array("uid","dateOfBirth","gender","givenName","preferredLanguage"));
-      $intitul=array(_("Birthday").":", _("Sex").":", _("Surname")."/"._("Given Name").":",_("Language").":");
+      $intitul=array(_("Birthday").":", _("Sex").":", _("Surname")."/"._("Given name").":",_("Language").":");
 
       //name of the xls file
       $name_section=_("Users");
@@ -71,7 +71,7 @@ function dump_ldap ($mode= 0)
       $worksheet->set_column('A:B', 51);
 
       $user_nbr=count($user);
-      $worksheet->write('A1',_("User List of ").$n._(" on ").$date,$title_title);
+      $worksheet->write('A1',sprintf(_("User list of %s on %s"),$n,$date),$title_title);
       $r=3;
       for($i=1;$i<$user_nbr;$i++)
       {
@@ -101,7 +101,7 @@ function dump_ldap ($mode= 0)
 
       //count number of groups
       $groups_nbr=count($groups);
-      $worksheet->write('A1',_("Groups of ").$n._(" on ").$date,$title_title);
+      $worksheet->write('A1', sprintf(_("Groups of %s on %s"), $n, $date),$title_title);
       $r=3;
       for($i=1;$i<$groups_nbr;$i++)
       {
@@ -130,7 +130,7 @@ function dump_ldap ($mode= 0)
       {
         if($i>1)
           $worksheet->write('A'.$r++,"");
-        $worksheet->write('A'.$r++,_("Common Name").": ".$computers[$i][0],$title_bold);
+        $worksheet->write('A'.$r++,_("Common name").": ".$computers[$i][0],$title_bold);
         for($j=1;$j<3;$j++)
         {
           $r++;
@@ -143,7 +143,7 @@ function dump_ldap ($mode= 0)
       break;
 
       case "ou=servers,ou=systems,": $servers= $ldap->gen_xls($dn,"(objectClass=*)",array("cn"));
-      $intitul=array(_("Server Name").":");
+      $intitul=array(_("Server name").":");
 
       //name of the xls file
       $name_section=_("Servers");
@@ -153,7 +153,7 @@ function dump_ldap ($mode= 0)
 
       //count number of servers
       $servers_nbr=count($servers);
-      $worksheet->write('A1',_("Servers of ").$n._(" on ").$date,$title_title);
+      $worksheet->write('A1',sprintf(_("Servers of %s on %s"), $n, $date),$title_title);
       $r=3;
       $worksheet->write('A'.$r++,_("Servers").": ",$title_bold);
       for($i=1;$i<$servers_nbr;$i++)
@@ -171,7 +171,7 @@ function dump_ldap ($mode= 0)
       case "dc=addressbook,": //data about addressbook
         $address= $ldap->gen_xls($dn,"(objectClass=*)",array("cn","displayName","facsimileTelephoneNumber","givenName","homePhone","homePostalAddress","initials","l","mail","mobile","o","ou","pager","telephoneNumber","postalAddress","postalCode","sn","st","title"));
 
-      $intitul=array(_("Common name").":",_("Display Name").":",_("Fax").":",_("Name")."/"._("Given Name").":",_("Home phone").":",_("Home postal address").":",_("Initials").":",_("Location").":",_("Mail address").":",_("Mobile phone").":",_("City").":",_("Postal address").":",_("Pager").":",_("Phone number").":",_("Address").":",_("Postal code").":",_("Surname").":",_("State").":",_("Function").":");
+      $intitul=array(_("Common name").":",_("Display name").":",_("Fax").":",_("Name")."/"._("Given name").":",_("Home phone").":",_("Home postal address").":",_("Initials").":",_("Location").":",_("Mail address").":",_("Mobile phone").":",_("City").":",_("Postal address").":",_("Pager").":",_("Phone number").":",_("Address").":",_("Postal code").":",_("Surname").":",_("State").":",_("Function").":");
       
       //name of the xls file
       $name_section=_("Adressbook");
@@ -181,7 +181,7 @@ function dump_ldap ($mode= 0)
 
       //count number of entries
       $address_nbr=count($address);
-      $worksheet->write('A1',_("Adressbook of ").$n._(" on ").$date,$title_title);
+      $worksheet->write('A1',sprintf(_("Adressbook of %s on %s"),$n, $date),$title_title);
       $r=3;
       for($i=1;$i<$address_nbr;$i++)
       {
@@ -221,19 +221,19 @@ function dump_ldap ($mode= 0)
 
     //data about users
     $user= $ldap->gen_xls("ou=people,".$dn,"(objectClass=*)",array("uid","dateOfBirth","gender","givenName","preferredLanguage"));
-    $user_intitul=array(_("BirthDate").":",_("Sex").":",_("Surname")."/"._("Given Name").":",_("Language").":");
+    $user_intitul=array(_("Day of birth").":",_("Sex").":",_("Surname")."/"._("Given name").":",_("Language").":");
     //data about groups
     $groups= $ldap->gen_xls("ou=groups,".$dn,"(objectClass=*)",array("cn","memberUid"),TRUE,1);
     $groups_intitul=array(_("Members").":");
     //data about computers
     $computers= $ldap->gen_xls("ou=computers,".$dn,"(objectClass=*)",array("cn","description","uid"));
-    $computers_intitul=array(_("Description").":",_("Uid").":");
+    $computers_intitul=array(_("Description").":",_("UID").":");
     //data about servers
     $servers= $ldap->gen_xls("ou=servers,ou=systems,".$dn,"(objectClass=*)",array("cn"));
     $servers_intitul=array(_("Name").":");
     //data about addressbook
     $address= $ldap->gen_xls("dc=addressbook,".$dn,"(objectClass=*)",array("cn","displayName","facsimileTelephoneNumber","givenName","homePhone","homePostalAddress","initials","l","mail","mobile","o","ou","pager","telephoneNumber","postalAddress","postalCode","sn","st","title"));
-    $address_intitul=array("cn",_("DisplayName").":",_("Fax").":",_("Surname")."/"._("Given Name").":",_("Phone Number").":",_("Postal Adress").":",_("Initials").":",_("City").":",_("Email address").":",_("mobile").":",_("Organization").":",_("Organizational Unit").":",_("Pager").":",_("Phone Number").":",_("Postal Address").":",_("Postal Code").":",_("Sn").":",_("st").":",_("Title").":");
+    $address_intitul=array("cn",_("Display name").":",_("Fax").":",_("Surname")."/"._("Given name").":",_("Phone number").":",_("Postal address").":",_("Initials").":",_("City").":",_("Email address").":",_("Mobile").":",_("Organization").":",_("Organizational unit").":",_("Pager").":",_("Phone number").":",_("Postal address").":",_("Postal Code").":",_("Surename").":",_("State").":",_("Title").":");
 
     //name of the xls file
     $name_section=_("Full");
@@ -273,7 +273,7 @@ function dump_ldap ($mode= 0)
 
     //count number of users
     $user_nbr=count($user);
-    $worksheet->write('A1',_("User List of ").$dn._(" on ").$date,$title_title);
+    $worksheet->write('A1',sprintf(_("User List of %s on %s"), $dn, $date),$title_title);
     $r=3;
     for($i=1;$i<$user_nbr;$i++)
     {
@@ -292,7 +292,7 @@ function dump_ldap ($mode= 0)
 
     //count number of groups
     $groups_nbr=count($groups);
-    $worksheet2->write('A1',_("Groups of ").$dn._(" on ").$date,$title_title);
+    $worksheet2->write('A1',sprintf(_("Groups of %s on %s"), $dn, $date),$title_title);
     $r=3;
     for($i=1;$i<$groups_nbr;$i++)
     {
@@ -311,7 +311,7 @@ function dump_ldap ($mode= 0)
 
     //count number of servers
     $servers_nbr=count($servers);
-    $worksheet3->write('A1',_("Servers of ").$dn._(" on ").$date,$title_title);
+    $worksheet3->write('A1',sprintf(_("Servers of %s on %s"),$dn,$date),$title_title);
     $r=3;
     $worksheet3->write('A'.$r++,_("Servers").": ",$title_bold);
     for($i=1;$i<$servers_nbr;$i++)
@@ -327,13 +327,13 @@ function dump_ldap ($mode= 0)
 
     //count number of computers
     $computers_nbr=count($computers);
-    $worksheet4->write('A1',_("Computers of ").$dn._(" on ").$date,$title_title);
+    $worksheet4->write('A1',sprintf(_("Computers of %s on %s"),$dn,$date),$title_title);
     $r=3;
     for($i=1;$i<$computers_nbr;$i++)
     {
       if($i>1)
         $worksheet->write('A'.$r++,"");
-      $worksheet4->write('A'.$r++,_("Common Name").": ".$computers[$i][0],$title_bold);
+      $worksheet4->write('A'.$r++,_("Common name").": ".$computers[$i][0],$title_bold);
       for($j=1;$j<3;$j++)
       {
         $r++;
@@ -346,14 +346,14 @@ function dump_ldap ($mode= 0)
 
     //count number of entries
     $address_nbr=count($address);
-    $worksheet5->write('A1',_("Adressbook of ").$dn._(" on ").$date,$title_title);
+    $worksheet5->write('A1',sprintf(_("Adressbook of %s on %s"),$dn, $date),$title_title);
 
     $r=3;
     for($i=1;$i<$address_nbr;$i++)
     {
       if($i>1)
         $worksheet5->write('A'.$r++,"");
-      $worksheet5->write('A'.$r++,_("Common Name").": ".$address[$i][0],$title_bold);
+      $worksheet5->write('A'.$r++,_("Common name").": ".$address[$i][0],$title_bold);
       for($j=1;$j<19;$j++)
       {
         $r++;

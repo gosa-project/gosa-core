@@ -94,8 +94,10 @@ class askClassName extends plugin
      */
     if(count ($used)==0){
       $smarty->assign("ClassNamesAvailable", " disabled ");
+      $smarty->assign("grey", 'style="color:#C0C0C0"');
     }else{
       $smarty->assign("ClassNamesAvailable", "");
+      $smarty->assign("grey", "");
     }
     $smarty->assign("ClassNames", $used);
     $smarty->assign("ClassNameKeys", $used);

@@ -5,12 +5,12 @@
 		<td style='width:50%;border-right:1px solid #909090;'><LABEL for="DISK_cn">
 			{t}Name{/t}
 			</LABEL>{$must}&nbsp;
-			<input value="{$DISK_cn}" size=20 name="DISK_cn" id="DISK_cn">
+			<input value="{$DISK_cn}" size="45" maxsize="80" name="DISK_cn" id="DISK_cn">
 		</td>
 		<td><LABEL for="DISK_description">
 			&nbsp;{t}Description{/t}
 			</LABEL>&nbsp;
-			<input value="{$DISK_description}" size=50 name="DISK_description" id="DISK_description">
+			<input value="{$DISK_description}" size="45" maxsize="80" name="DISK_description" id="DISK_description">
 		</td>
 	</tr>
 </table>

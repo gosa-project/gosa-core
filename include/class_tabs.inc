@@ -78,7 +78,7 @@ class tabs
 	$display.= "<tr><td>\n";
 
 	$obj= $this->by_object[$this->current];
-	$display.= $obj->execute ();
+	$display.= $obj->execute();
 	$this->by_object[$this->current]= $obj;
 
 	/* Footer for tabbed dialog */

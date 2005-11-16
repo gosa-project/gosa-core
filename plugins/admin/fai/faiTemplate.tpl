@@ -10,7 +10,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<input value="{$cn}" disabled id="cn">
+							<input value="{$cn}" size="45" maxsize="80" disabled id="cn">
 						</td>
 					</tr>
 					<tr>
@@ -20,7 +20,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<input value="{$description}" {$description} name="description" id="description">
+							<input value="{$description}" size="45" maxsize="80" {$description} name="description" id="description">
 						</td>
 					</tr>
 				</table>
@@ -37,7 +37,7 @@
 				<table width="100%">
 				<tr>
 					<td>
-						<select name="SubObject" title="{t}Choose a template to delete or edit{/t}" style="width:100%;" size=15 id="SubObject">
+						<select name="SubObject" title="{t}Choose a template to delete or edit{/t}" style="width:100%;" size="20" id="SubObject">
 							{html_options values=$SubObjectKeys output=$SubObjects}
 						</select><br>
 						<input type="submit" name="AddSubObject"     value="{t}Add{/t}"		title="{t}Add{/t}">

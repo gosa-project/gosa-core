@@ -9,7 +9,7 @@
 							{t}Name{/t}{$must}&nbsp;
 						</td>
 						<td>
-							<input value="{$cn}" name="cn">
+							<input value="{$cn}" size="45" maxsize="80" name="cn">
 						</td>
 					</tr>
 					<tr>
@@ -17,7 +17,7 @@
 							{t}Description{/t}&nbsp;
 						</td>
 						<td>
-							<input size=40 value="{$description}" name="description">
+							<input value="{$description}" size="45" maxsize="80" name="description">
 						</td>
 					</tr>
 				</table>

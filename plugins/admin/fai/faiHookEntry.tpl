@@ -2,14 +2,14 @@
 <table width="100%" summary="">
 	<tr>
 		<td valign="top" width="50%">
-			<h2><img alt="" src="images/house.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
+			<h2><img alt="" src="images/forward.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
 				<table>
 					<tr>
 						<td>
 							{t}Name{/t}{$must}&nbsp;
 						</td>
 						<td>
-							<input value="{$cn}" name="cn">
+							<input value="{$cn}" size="45" maxsize="80" name="cn">
 						</td>
 					</tr>
 					<tr>
@@ -17,7 +17,7 @@
 							{t}Description{/t}&nbsp;
 						</td>
 						<td>
-							<input value="{$description}" name="description">
+							<input value="{$description}" size="45" maxsize="80" name="description">
 						</td>
 					</tr>
 				</table>
@@ -25,7 +25,7 @@
 		<td style="border-left: 1px solid rgb(160, 160, 160);">
            &nbsp;
         </td>
-		<td>
+		<td style="vertical-align:top">
 				<h2><img alt="" src="images/fai_hook.png" align="middle" title="{t}Hook attributes{/t}">&nbsp;{t}Hook attributes{/t}</h2>
 				<table width="100%">
 					<tr>

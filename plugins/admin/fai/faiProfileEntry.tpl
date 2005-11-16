@@ -1,8 +1,8 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
 <tr>
   <td style="vertical-align:top;width:600px">
-	<div class="contentboxh">
-    	<p class="contentboxh">
+	<div class="contentboxh" style="height:20px">
+    	<p class="contentboxh" style="font-size:12px">
      		{t}List of FAI objects (Fully Automatic Installation){/t}
     	</p>
   	</div>
@@ -17,8 +17,8 @@
 	</div>
   </td>
   <td style="vertical-align:top;">
-   	<div class="contentboxh">
-    	<p class="contentboxh">
+   	<div class="contentboxh" style="height:20px;border-bottom:1px solid #B0B0B0">
+    	<p class="contentboxh" style="font-size:12px">
 			<img src="{$infoimage}" align="right" alt="[i]">{t}Information{/t}
 		</p>
    	</div>
@@ -28,8 +28,8 @@
    		</p>
    	</div>
    	<br>
-   	<div class="contentboxh">
-    	<p class="contentboxh"><img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}</p>
+   	<div class="contentboxh" style="height:20px">
+    	<p class="contentboxh" style="font-size:12px"><img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}</p>
    	</div>
    	<div class="contentboxb">
      	<table summary="" style="width:100%;border-top:1px solid #B0B0B0;">

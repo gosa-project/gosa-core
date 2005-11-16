@@ -1,15 +1,15 @@
 <input type="hidden" name="SubObjectFormSubmitted" value="1">
 
-<h2><img alt="" src="images/house.png" valign="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
+<h2><img alt="" src="images/forward.png" valign="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
 <table width="100%" summary="">
 <tr>
 	<td width="50%">
 		{t}Name{/t}{$must}&nbsp;
-		<input value="{$cn}" name="cn" size="13">&nbsp;&nbsp;
+		<input value="{$cn}" name="cn" size="45" maxsize="80">&nbsp;&nbsp;
 	</td>
 	<td>
 		{t}Description{/t}&nbsp;
-		<input size="35" value="{$description}" name="description">
+		<input size="45" maxsize="80" value="{$description}" name="description">
 	</td>
 </tr>
 </table>
