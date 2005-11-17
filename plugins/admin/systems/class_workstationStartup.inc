@@ -109,7 +109,7 @@ class workstartup extends plugin
 
     /* Search all FAI objects */
     $ldap->search("(| (objectClass=FAIpackageList)(objectClass=FAItemplate)
-                      (objectClass=FAIvariable)(objectClass=FAIscript')(objectClass=FAIhook)(objectClass=FAIprofile)
+                      (objectClass=FAIvariable)(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)
                       (objectClass=FAIpartitionTable))",array("objectClass","cn"),true);
     /* Sort all entries, and attach elementtype.
      * To be able to show the types in the listbox.
@@ -247,7 +247,7 @@ class workstartup extends plugin
         }
       }
 
-      if((isset($this->FAIclassInfo[$_POST['FAIclassesSel']]['FAIpackageList']))&&($found>0)){
+      if((isset($this->FAIclassInfo[$_POST['FAIclassesSel']]['FAIpartitionTable']))&&($found>0)){
         print_red(_("There is already a profile in your selection that contain partition table configuratons."));
       }else{
         $this->FAIclass[$_POST['FAIclassesSel']]=$_POST['FAIclassesSel'];
