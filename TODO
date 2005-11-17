@@ -15,12 +15,17 @@ Things to fix before 2.4:
 
 * Divlists are broken in firefox 1.5rc1 
 
+* Check Default IP setting in gofon tab.
+	It isn't saved correctly, if tab is edited after this phone was assigned to user.
+
 Target for 2.5:
 ===============
 
 * Bug submitter
 
 * Fix translation mode
+
+* Gofon -Asterisk-database name should be defined in database tab, currently this setting is hard coded in class_config.inc
 
 * Complete PHP5 compliance and optimization
 
