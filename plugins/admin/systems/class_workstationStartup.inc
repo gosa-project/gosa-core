@@ -155,20 +155,20 @@ class workstartup extends plugin
 
     $this->FAIclassInfo = $tmp2;
 
-    if(isset($this->attrs['FAIclass'])){
+    if((isset($this->FAIclass))&&(!is_array($this->FAIclass))){
       $tmp = array();
-      $tmp2 = $this->attrs['FAIclass'];
-      unset($tmp2['count']);
-      foreach($tmp2 as $class){
-        $tmp[$class] = $class;
+      $tmp = split(" ",$this->FAIclass);
+      $tmp2 =array();  
+    
+      foreach($tmp as $class){
+        $tmp2[$class] = $class;
       }
-      $this->FAIclass = $tmp;
+      $this->FAIclass = $tmp2;
     }
 
     if(!is_array($this->FAIclass)){
-      $this->FAIclass = array();
+      $this->FAIclass =array();
     }
-
 
     $this->orig_dn= $this->dn;
   }
@@ -465,14 +465,18 @@ class workstartup extends plugin
       $this->gotoKernelParameters.= " o ".$this->customParameters;
     }
 
-    /* Create numeric index for our classes */
-    $tmp = array();
-    foreach($this->FAIclass as $class){
-      $tmp[] = $class;
-    }
-    $this->FAIclass = $tmp;
-
     plugin::save();
+    
+    $str = "";
+    foreach($this->FAIclass as $class){
+      $str .= $class." ";
+    }
+    $this->attrs['FAIclass']= "";
+    $this->attrs['FAIclass']= trim($str);
+
+    if(empty($this->attrs['FAIclass'])){
+      $this->attrs['FAIclass'] = array();
+    }
 
     /* Add missing arrays */
     foreach (array("gotoFilesystem", "gotoAutoFs", "gotoModules") as $val){
@@ -486,13 +490,6 @@ class workstartup extends plugin
     if ($this->attrs['gotoLdapServer'] == "default"){
       unset ($this->attrs['gotoLdapServer']);
     }
-
-    $tmp = array();
-    foreach($this->FAIclass as $class){
-      $tmp[] = $class;
-    }
-    $this->attrs['FAIclass'] = $tmp;
-    /* Write back to ldap */
 
     /* if mirror == none stop saving this attribute */
     if($this->FAIdebianMirror == "none"){
