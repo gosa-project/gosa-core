@@ -13,6 +13,7 @@ Things to fix before 2.4:
 
 * Evaluate patches for certificate generation
 
+* Divlists are broken in firefox 1.5rc1 
 
 Target for 2.5:
 ===============
