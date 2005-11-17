@@ -14,7 +14,6 @@ class application extends plugin
   var $gosaApplicationName= "";
   var $gosaApplicationFlags= "";
   var $gosaApplicationIcon= "";
-  var $gosaApplicationCategory= "";
   var $gotoLogonScript	="";
   var $iconData;
   var $Categories = array();
@@ -25,7 +24,7 @@ class application extends plugin
 
   /* attribute list for save action */
   var $attributes= array("cn", "description", "gosaApplicationExecute", "gosaApplicationName",
-			"gosaApplicationFlags","gotoLogonScript", "gosaApplicationCategory");
+			"gosaApplicationFlags","gotoLogonScript");
   var $objectclasses= array("top", "gosaApplication");
 
   function application ($config, $dn= NULL)
@@ -159,8 +158,7 @@ class application extends plugin
 	$smarty->assign("rand", rand(0, 10000));
 
 	/* Variables */
-	foreach(array("description", "gosaApplicationExecute", "gosaApplicationName",
-		      "gosaApplicationCategory") as $val){
+	foreach(array("description", "gosaApplicationExecute", "gosaApplicationName") as $val){
 		$smarty->assign($val, $this->$val);
 		$smarty->assign($val."ACL", chkacl($this->acl, $val));
 	}

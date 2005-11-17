@@ -21,6 +21,12 @@ class appgroup extends plugin
   
   var $curbase   = "";
 
+
+  var $curCatDir;
+  var $curCatDepth=0;
+  var $Categories=array();
+
+
   /* attribute list for save action */
   var $attributes= array();
   var $objectclasses= array("gosaApplicationGroup");
@@ -47,6 +53,23 @@ class appgroup extends plugin
         $this->appoption[$name]= $option;
       }
     }
+
+    $tmp = array();
+    $tmp2 = array();
+    foreach($this->gosaMemberApplication as $memberApp){
+      if(preg_match("/\|/i",$memberApp)){
+        $tmp = split("\|",$memberApp);
+        $tmp2[$tmp[0]."|".$tmp[1]]['App'] = $tmp[0];
+        $tmp2[$tmp[0]."|".$tmp[1]]['Cat'] = $tmp[1];
+        $tmp2[$tmp[0]."|".$tmp[1]]['Pri'] = $tmp[2];
+      }else{
+        $tmp2[$memberApp."|"]['App'] = $memberApp;
+        $tmp2[$memberApp."|"]['Cat'] = "";
+        $tmp2[$memberApp."|"]['Pri'] = 100;
+      }
+    }
+    $this->gosaMemberApplication = $tmp2;
+  
     $this->curbase = $this->config->current['BASE'];
   }
 
@@ -58,6 +81,25 @@ class appgroup extends plugin
       $dep = base64_decode($_GET['depid']);  
       if(isset($this->config->idepartments[$dep])){
         $this->curbase = $dep;
+      }
+    }
+
+
+    if((isset($_GET['act']))&&($_GET['act']=="open")){
+      $this->curCatDir = $_GET['id'];
+
+      $found = false;
+      foreach($this->Categories as $key => $name ){
+        if($this->curCatDir==$name){
+          $tmp = array_flip(split("\/",$key));
+
+          $this->curCatDepth = ($tmp[$this->curCatDir]);
+          $found= true;
+        }
+      }
+      if(!$found){
+        $this->curCatDir = "";
+        $this->curCatDepth = 0;
       }
     }
 
@@ -86,25 +128,62 @@ class appgroup extends plugin
       }
     }
 
-    /* Check sorting variable */
     $this->reload();
+    foreach($_POST as $name => $value){
+      if(preg_match("/DelApp_/",$name)){
+        $app = preg_replace("/DelApp_/","",$name); 
+        unset($this->used_apps[$app]);
+        unset($this->gosaMemberApplication[$app."|".$this->curCatDir]);
+      }
+      if(preg_match("/EdiApp_/",$name)){
+        $appname = $value;
+        /* We've got the appname, get parameters from ldap */
+        $ldap= $this->config->get_ldap_link();
+        $ldap->cd($this->config->current['BASE']);
+        $ldap->search("(&(objectClass=gosaApplication)(cn=$appname))");
+        if ($ldap->count() != 1){
+          print_red (_("The selected application name is not uniq. Please check your LDAP."));
+        } else {
+          $attrs= $ldap->fetch();
+          if(isset($attrs['gosaApplicationParameter'])){
+            $this->dialog= TRUE;
 
-    /* Delete app from group */
-    if (isset($_POST['del_app']) && isset ($_POST['used_apps'])){
-      foreach ($_POST['used_apps'] as $value){
-        unset ($this->used_apps["$value"]);
-        $this->removeApp($value);
+            /* Fill name and value arrays */
+            for ($i= 0; $i<$attrs['gosaApplicationParameter']['count']; $i++){
+              $option= preg_replace('/^[^:]+:/', '',
+                  $attrs['gosaApplicationParameter'][$i]);
+              $name= preg_replace('/:.*$/', '', 
+                  $attrs['gosaApplicationParameter'][$i]);
+              $this->option_name[$i]= $name;
+
+              /* Fill with values from application, default should be
+                 loaded by the external scripts */
+              if (isset($this->appoption[$name])){
+                $this->option_value[$i]= $this->appoption[$name];
+              }
+            }
+
+            /* Create edit field */
+            $table= "<table summary=\"\">";
+            for ($i= 0; $i < count($this->option_name); $i++){
+              if (isset($this->option_value[$i])){
+                $value= $this->option_value[$i];
+              } else {
+                $value= "";
+              }
+              $table.="<tr><td>".$this->option_name[$i]."</td><td>".
+                "<input name=\"value$i\" size=60 maxlength=250 ".
+                "value=\"".$value."\"><br></td></tr>";
+            }
+            $table.= "</table>";
+            $this->table= $table;
+          } else {
+            print_red (_("The selected application has no options."));
+          }
+        }
       }
     }
-
-    /* Add app to group */
-    if (isset($_POST['add_app']) && isset($_POST['apps'])){
-      foreach ($_POST['apps'] as $value){
-        $this->used_apps["$value"]= $this->apps[$value];
-        asort($this->used_apps);
-        $this->addApp($value);
-      }
-    }
+    $this->reload();
 
     /* Add group with post */
     if((isset($_GET['act']))&&($_GET['act']=="add")){
@@ -113,55 +192,16 @@ class appgroup extends plugin
       $this->addApp($_GET['id']);
     }
 
-    /* Edit application options? */
-    if (isset($_POST['edit_options']) && isset($_POST['used_apps'])){
-      $appname= $_POST['used_apps'][0];
-
-      /* We've got the appname, get parameters from ldap */
-      $ldap= $this->config->get_ldap_link();
-      $ldap->cd($this->config->current['BASE']);
-      $ldap->search("(&(objectClass=gosaApplication)(cn=$appname))");
-      if ($ldap->count() != 1){
-        print_red (_("The selected application name is not uniq. Please check your LDAP."));
-      } else {
-        $attrs= $ldap->fetch();
-        if(isset($attrs['gosaApplicationParameter'])){
-          $this->dialog= TRUE;
-
-          /* Fill name and value arrays */
-          for ($i= 0; $i<$attrs['gosaApplicationParameter']['count']; $i++){
-            $option= preg_replace('/^[^:]+:/', '',
-                $attrs['gosaApplicationParameter'][$i]);
-            $name= preg_replace('/:.*$/', '', 
-                $attrs['gosaApplicationParameter'][$i]);
-            $this->option_name[$i]= $name;
-
-            /* Fill with values from application, default should be
-               loaded by the external scripts */
-            if (isset($this->appoption[$name])){
-              $this->option_value[$i]= $this->appoption[$name];
-            }
-          }
-
-          /* Create edit field */
-          $table= "<table summary=\"\">";
-          for ($i= 0; $i < count($this->option_name); $i++){
-            if (isset($this->option_value[$i])){
-              $value= $this->option_value[$i];
-            } else {
-              $value= "";
-            }
-            $table.="<tr><td>".$this->option_name[$i]."</td><td>".
-              "<input name=\"value$i\" size=60 maxlength=250 ".
-              "value=\"".$value."\"><br></td></tr>";
-          }
-          $table.= "</table>";
-          $this->table= $table;
-        } else {
-          print_red (_("The selected application has no options."));
+    /* Add multiple */
+    if(isset($_POST['AddApps'])){
+      foreach($_POST as $name => $value){
+        if(preg_match("/AddApp_/",$name)){
+          $app = preg_replace("/AddApp_/","",$name);
+          $this->addApp($app);
         }
       }
     }
+
 
     /* Cancel edit options? */
     if (isset($_POST['edit_options_cancel'])){
@@ -238,11 +278,66 @@ class appgroup extends plugin
     
     foreach($apps as $key => $app){
       $div->AddEntry(array(
-                            array("string"=>"<img src='images/select_application.png' alt='"._("application")."'>&nbsp;".sprintf($linkadd,$key,$app),
+                            array("string"=>sprintf("<input type='checkbox' value='1' name='AddApp_%s'>",$key).
+                                  "<img src='images/select_application.png' alt='"._("application")."'>&nbsp;".sprintf($linkadd,$key,$app),
                                   "attach"=>"style='border:0px;'")
                           ));
     }
 
+    if((isset($_GET['act']))&&(($_GET['act'] == "one_up")||($_GET['act']=="one_down"))){
+      if(isset($_GET['id'])){
+        $id   = $_GET['id'];
+        $act  = $_GET['act']; 
+        $found = false;
+        foreach($this->gosaMemberApplication as $key =>  $member){
+          if($id == $member['App']){
+            $found = $key;
+          }
+        }
+
+        if($found != false){
+          if($act == "one_up"){
+            $this->gosaMemberApplication[$found]['Pri'] = $this->gosaMemberApplication[$found]['Pri'] -1;
+          }elseif($act == "one_down")   { 
+            $this->gosaMemberApplication[$found]['Pri'] = $this->gosaMemberApplication[$found]['Pri'] +1;
+          }
+        }
+      }
+    }
+
+    $div2 = new DivSelectBox("appgroup");
+    $div2->SetHeight(300);
+
+    $menu           = $this->CreateCatMenu();
+    $str_noprio     = "&nbsp; [ "._("Priority: %s")." ] ";
+    $linkopen       = "<img src='images/folder.png'>            &nbsp;<a href='?plug=".$_GET['plug']."&amp;act=open&amp;id=%s'>%s</a>";
+    $app   = "<img src='images/select_application.png'>&nbsp;%s".$str_noprio;
+
+        /* append back entry */
+    if($menu["__BACK__"] != false){
+        $div2 ->AddEntry(array(
+                    array("string"=>sprintf($linkopen,$menu["__BACK__"],".. [ "._("back")." ]")),
+                    array("string"=>"&nbsp;","attach"=>"style='border-right:0px;'")
+                    ));
+    }
+
+    foreach($menu['__CATEGORY__'] as $path => $name){
+      $div2 ->AddEntry(array(array("string"=>sprintf($linkopen,$path,$name)),array("string"=>"&nbsp;","attach"=>"style='border-right:0px;'"))); 
+    }
+
+      /* Append entries */
+  
+    $upudown = "<a href='?plug=".$_GET['plug']."&amp;act=one_up&id=%s'>   <img src='images/sort_up.png' border=0></a>".
+          "&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=one_down&id=%s'> <img src='images/sort_down.png' border=0></a>".
+          "&nbsp;<input type='image' src='images/edittrash.png' name='DelApp_%s' value='%s'>".
+          "&nbsp;<input type='image' src='images/edit.png' name='EdiApp_%s' value='%s'>";
+ 
+    foreach($menu["__ENTRY__"] as $path => $entry){
+      $div2 ->AddEntry(array(array("string"=>sprintf($app,$entry['name'],$entry['prio'])),
+                             array("string"=>sprintf($upudown,$entry['name'],$entry['name'],$entry['name'],$entry['name'],$entry['name'],$entry['name']),"attach"=>"style='border-right:0px;'")));
+    }
+
+    $smarty->assign("UsedApps", $div2->DrawList());
     $smarty->assign("List", $div->DrawList());
     $smarty->assign("apps", $apps);
 
@@ -253,7 +348,6 @@ class appgroup extends plugin
     } else {
       $display.= $smarty->fetch (get_template_path('application.tpl', TRUE));
     }
-
     return ($display);
   }
 
@@ -289,7 +383,7 @@ class appgroup extends plugin
     /* Copy members */
     $this->attrs["gosaMemberApplication"]= array();
     foreach ($this->gosaMemberApplication as $val){
-      $this->attrs["gosaMemberApplication"][]= stripslashes($val);
+      $this->attrs["gosaMemberApplication"][]= $val['App']."|".$val['Cat']."|".$val['Pri'];
     }
 
     /* Are there application parameters to be saved */
@@ -346,17 +440,121 @@ class appgroup extends plugin
     reset ($this->apps);
 
     foreach ($this->gosaMemberApplication as $value){
-      $this->used_apps[$value]= $value;
+      $this->used_apps[$value['App']]= $value['App'];
     }
+  }
+
+
+
+
+
+
+
+
+
+
+  function CreateCatMenu()
+  {
+    /* The current category */
+    $na = $this->curCatDir;
+
+    /* the current folder depth */
+    $nd = $this->curCatDepth;
+
+    /* init array */
+    $return = array();
+
+    $return["__CATEGORY__"] = array();  // Categories
+    $return["__ENTRY__"]    = array();  // Entries in this category
+    $return["__BACK__"]     = false;    // The back entry
+
+    $tmp = new xmlParse();
+
+    $this->Categories= array();
+    if(!isset($this->config->data['MAIN']['KDE_APPLICATIONS_MENU']))    {
+        print_red(_("There is no value for 'KDE_APPLICATIONS_MENU' specified in your gosa.conf."));
+    }else{
+        $path = $this->config->data['MAIN']['KDE_APPLICATIONS_MENU'];
+        if(file_exists($path)){
+            if(is_readable($path)){
+                $tmp->parseMenu($path);
+                $this->Categories = $tmp->GetData();
+            }else{
+                print_red(sprintf(_("The specified file '%s' for 'KDE_APPLICATIONS_MENU' in your gosa.conf is not accessable."),$path));
+            }
+        }else{
+            print_red(sprintf(_("The specified file '%s' for 'KDE_APPLICATIONS_MENU' in your gosa.conf is not accessable."),$path));
+        }
+    }
+
+
+    /* Create new categories to return */
+    foreach($this->Categories as $key => $val){
+
+        /* Split categories by | to get name and priority */
+        $nk = split("\/",$key);
+
+        /* Check if this category must be shown */
+        if((isset($nk[$nd]))&&(is_array($nk))&&($nk[$nd] == $na)){
+
+            /* Add this to the list, if theres is a sub category */
+            if(isset($nk[($nd+1)])){
+                $return["__CATEGORY__"][$nk[($nd+1)]] = $nk[($nd+1)];
+            }
+
+            /* Create back entry */
+            if($nd !=0 ){
+                $return['__BACK__'] = $nk[($nd-1)];
+            }else{
+                $return['__BACK__'] = "..";
+            }
+
+        }elseif($na==""){
+            $return["__CATEGORY__"][$nk[0]] = $nk[0];
+        }
+
+
+
+    }
+
+    /* If back entry isn't set, set it to false (none) or to ..(base)*/
+    if($return["__BACK__"] == false){
+        $return['__BACK__'] = "..";
+        if($nd == 0 ){
+            $return['__BACK__'] = false;
+        }
+    }
+
+    foreach($this->gosaMemberApplication as $app){
+      if($app['Cat'] == $this->curCatDir){
+       $return["__ENTRY__"][$app['Pri']][$app['App']]  =  array("name"=>$app['App'],"prio" => $app['Pri']) ;
+      }
+    }    
+
+
+    ksort($return["__ENTRY__"]);
+ /* recreate array index */
+    $tmp = array();
+    foreach($return["__ENTRY__"] as $prio => $entries){
+        ksort($entries);
+        foreach($entries as $entry){
+            $tmp[$entry['name']] = $entry;
+        }
+    }
+
+    /* Assign sorted entries */
+    $return['__ENTRY__'] = ($tmp);
+
+    /* Return this all ..*/
+    return($return);
   }
 
   function addApp($cn)
   {
-    $this->gosaMemberApplication[]= $cn;
-    $this->gosaMemberApplication= array_unique($this->gosaMemberApplication);
+    $this->gosaMemberApplication[$cn."|".$this->curCatDir]= array("App"=>$cn,"Cat"=>$this->curCatDir,"Pri"=>"100");
+    $this->used_apps[$cn]=$cn;
     $this->is_modified= TRUE;
   }
-
 
   function removeApp($cn)
   {

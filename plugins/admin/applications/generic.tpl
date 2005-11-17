@@ -44,15 +44,6 @@
   <td style="vertical-align:top;">
    <table>
     <tr>
-     <td><LABEL for="gosaApplicationCategory">{t}Category{/t}</LABEL></td>
-     <td>
-       <select size="1" id="base" name="gosaApplicationCategory" title="">
-        {html_options options=$categories selected=$gosaApplicationCategory}
-       </select>
-     </td>
-    </tr>
-    <tr><td colspan=2><div style="height:15px;"></div></td></tr>
-    <tr>
     <td>
     <LABEL for="picture_file">{t}Icon{/t}</LABEL>
     <br>
