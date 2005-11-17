@@ -9,6 +9,10 @@ Things to fix before 2.4:
 * There are still several "Lock new" hints in FAI plugin
   headers
 
+* First name/Last name instead of Name/Given name
+
+* Evaluate patches for certificate generation
+
 
 Target for 2.5:
 ===============
