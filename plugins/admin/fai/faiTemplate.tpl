@@ -1,6 +1,6 @@
 <table width="100%">
 	<tr>
-		<td width="50%" valign="top">
+		<td valign="top" style="border-right:1px solid #A0A0A0; width:50%">
 				<h2><img alt="" src="images/fai_small.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
 				<table summary="" cellspacing="4">
 					<tr>
@@ -25,10 +25,7 @@
 					</tr>
 				</table>
 		</td>
-		<td style="border-left: 1px solid rgb(160, 160, 160);">
-		   &nbsp;
-	 	</td>
-		<td>
+		<td style="width:50%">
 				<h2><img alt="" src="images/fai_template.png" align="middle" title="{t}Objects{/t}">&nbsp;
 					<LABEL for="SubObject">
 						{t}List of template files{/t}
