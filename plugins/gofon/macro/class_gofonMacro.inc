@@ -21,7 +21,10 @@ class macro extends plugin
   
   /*! The name of the Macro in the openldap drirectory */
   var $cn               = ""; 
-  
+ 
+  /*! Display error once */
+  var $error_shown = false; 
+
   /*! This ist the variable that contains the description of the macro*/
   var $description      = "";
 
@@ -177,6 +180,14 @@ class macro extends plugin
   function generate_mysql_entension_entries($save = false,$delete_only=false,$remove_old_macroname=false){
 
     if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
+      return(true);
+    }
+
+    if(!is_callable("mysql_connect")){
+      if((!$this->error_shown)&&($save)){
+        print_red(_("There is no mysql extension available in your php setup, can't save any changes to asterisk db."));
+        $this->error_shown = true;
+      }
       return(true);
     }
 
