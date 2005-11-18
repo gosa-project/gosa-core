@@ -248,7 +248,7 @@ class workstartup extends plugin
       }
 
       if((isset($this->FAIclassInfo[$_POST['FAIclassesSel']]['FAIpartitionTable']))&&($found>0)){
-        print_red(_("There is already a profile in your selection that contain partition table configuratons."));
+        print_red(_("There is already a profile in your selection that contain partition table configurations."));
       }else{
         $this->FAIclass[$_POST['FAIclassesSel']]=$_POST['FAIclassesSel'];
       }
