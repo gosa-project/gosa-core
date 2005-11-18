@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alessandro Amici <a.amici@bopen.it>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-11-18 14:12+0100\n"
+"PO-Revision-Date: 2005-11-18 14:37+0100\n"
 "Last-Translator: Alessandro Amici <a.amici@bopen.it>\n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
@@ -517,27 +517,22 @@ msgid "Uid"
 msgstr ""
 
 #: html/getxls.php:236
-#, fuzzy
 msgid "DisplayName"
-msgstr "Mostra il nome"
+msgstr "Nome da mostrare"
 
 #: html/getxls.php:236
-#, fuzzy
 msgid "Phone Number"
-msgstr "Numeri di telefono"
+msgstr "Numero di telefono"
 
 #: html/getxls.php:236
-#, fuzzy
 msgid "Postal Adress"
 msgstr "CAP"
 
 #: html/getxls.php:236
-#, fuzzy
 msgid "Email address"
 msgstr "Indirizzo principale"
 
 #: html/getxls.php:236
-#, fuzzy
 msgid "mobile"
 msgstr "Cellulare"
 
@@ -546,17 +541,14 @@ msgid "Organization"
 msgstr "Organizzazione"
 
 #: html/getxls.php:236
-#, fuzzy
 msgid "Organizational Unit"
-msgstr "Organizzazione"
+msgstr "Unità del'organizzazione"
 
 #: html/getxls.php:236
-#, fuzzy
 msgid "Postal Address"
-msgstr "CAP"
+msgstr "Indirizzo"
 
 #: html/getxls.php:236
-#, fuzzy
 msgid "Postal Code"
 msgstr "CAP"
 
@@ -565,23 +557,20 @@ msgid "Sn"
 msgstr ""
 
 #: html/getxls.php:236
-#, fuzzy
 msgid "st"
-msgstr "reset"
+msgstr "mo"
 
 #: html/getxls.php:236
-#, fuzzy
 msgid "Title"
-msgstr "scrivere"
+msgstr "Titolo"
 
 #: html/getxls.php:239
 msgid "Full"
 msgstr ""
 
 #: html/getxls.php:330
-#, fuzzy
 msgid "Computers of "
-msgstr "incompleto"
+msgstr "Computer di"
 
 #: html/getfax.php:53
 msgid "Could not connect to database server!"
@@ -1061,9 +1050,8 @@ msgstr ""
 
 #: ihtml/themes/altlinux/setup_step4.tpl:39
 #: ihtml/themes/default/setup_step4.tpl:39
-#, fuzzy
 msgid "Base "
-msgstr "Base"
+msgstr "Base "
 
 #: ihtml/themes/altlinux/setup_step4.tpl:43
 #: ihtml/themes/default/setup_step4.tpl:43
@@ -1133,21 +1121,18 @@ msgstr ""
 
 #: ihtml/themes/altlinux/setup_step4.tpl:103
 #: ihtml/themes/default/setup_step4.tpl:104
-#, fuzzy
 msgid "Display PHP errors"
-msgstr "Errore PHP"
+msgstr "Mostra errori PHP"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:106
 #: ihtml/themes/default/setup_step4.tpl:107
-#, fuzzy
 msgid "true"
-msgstr "Futuro"
+msgstr "vero"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:107
 #: ihtml/themes/default/setup_step4.tpl:108
-#, fuzzy
 msgid "false"
-msgstr "femmina"
+msgstr "falso"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:115
 #: ihtml/themes/default/setup_step4.tpl:115
@@ -1565,9 +1550,8 @@ msgid "The Format must be PEM, to output certificate informations"
 msgstr ""
 
 #: include/class_certificate.inc:192
-#, fuzzy
 msgid "Can't create/open File"
-msgstr "File di configurazione"
+msgstr "Errore nella creazione/apertura del file"
 
 #: include/class_certificate.inc:199
 msgid "No valid certificate loaded"
@@ -1684,14 +1668,12 @@ msgid "Support for gofon enabled"
 msgstr "Supporto per gofon abilitato."
 
 #: include/functions_setup.inc:231
-#, fuzzy
 msgid "Support for nagios disabled, no schema seems to be installed"
-msgstr "Supporto per gofon disabilitato. Manca il file di schema?"
+msgstr "Supporto per nagios disabilitato. Manca il file di schema?"
 
 #: include/functions_setup.inc:236
-#, fuzzy
 msgid "Support for nagios enabled"
-msgstr "Supporto per gofon abilitato."
+msgstr "Supporto per nagios abilitato."
 
 #: include/functions_setup.inc:246
 msgid ""
@@ -1753,9 +1735,8 @@ msgid "This is the main module used by GOsa and therefore really required."
 msgstr "Questo è il modulo più importante usato da GOsa ed è quindi necessario."
 
 #: include/functions_setup.inc:306
-#, fuzzy
 msgid "Checking for XML functions"
-msgstr "Controllo il supporto per iconv"
+msgstr "Controllo le funzioni XML"
 
 #: include/functions_setup.inc:307
 msgid "XML functions are required to parse the configuration file."
@@ -1852,23 +1833,21 @@ msgstr ""
 "funziona correttamente anche senza."
 
 #: include/functions_setup.inc:342
-#, fuzzy
 msgid "Checking for snmp Module"
-msgstr "Controllo il modulo imap"
+msgstr "Controllo il modulo snmp"
 
 #: include/functions_setup.inc:343
 msgid "Simple Network Management Protocol (SNMP) is required for client monitoring."
 msgstr ""
 
 #: include/functions_setup.inc:379
-#, fuzzy
 msgid "PHP detailed function inspection"
-msgstr "Ispezione della configurazione PHP"
+msgstr "Ispezione dettagliata delle funzioni PHP"
 
 #: include/functions_setup.inc:383
-#, fuzzy, php-format
+#, php-format
 msgid "Checking for function %s"
-msgstr "Controllo il supporto per iconv"
+msgstr "Controllo il supporto per %s"
 
 #: include/functions_setup.inc:384
 #, fuzzy, php-format
@@ -2051,14 +2030,12 @@ msgid ""
 msgstr ""
 
 #: include/class_ppdManager.inc:132
-#, fuzzy
 msgid "Nested groups are not supported!"
-msgstr "(Attenzione: L'NFS non supporta più di 16 gruppi!)"
+msgstr "Gruppi ricorsivi non supportati!"
 
 #: include/class_ppdManager.inc:136
-#, fuzzy
 msgid "Group name not unique!"
-msgstr "Nome gruppo"
+msgstr "Nome del gruppo non unico!"
 
 #: include/class_ppdManager.inc:142 include/class_ppdManager.inc:172
 msgid "Symbol values are not supported yet!"
@@ -2830,13 +2807,12 @@ msgid "Remove posix account"
 msgstr "Elimina estensioni Unix"
 
 #: plugins/personal/posix/class_posixAccount.inc:244
-#, fuzzy
 msgid ""
 "This account has unix features enabled. To disable them, you'll need to "
 "remove the samba / environment account first."
 msgstr ""
 "Questa identià possiede estensioni Unix. Per eliminarle devi eliminare prima "
-"le estensioni Samba."
+"le estensioni Samba / ambiente."
 
 #: plugins/personal/posix/class_posixAccount.inc:247
 msgid ""
@@ -3352,9 +3328,8 @@ msgid "invalid"
 msgstr "invalido"
 
 #: plugins/personal/generic/class_user.inc:431
-#, fuzzy
 msgid "No certificate installed"
-msgstr "Modifica certificati"
+msgstr "Non ci sono certificati installati"
 
 #: plugins/personal/generic/class_user.inc:838
 msgid "Kerberos database communication failed"
@@ -3369,9 +3344,8 @@ msgid "Can't add user to kerberos database."
 msgstr ""
 
 #: plugins/personal/generic/class_user.inc:896
-#, fuzzy
 msgid "Invalid characters in uid."
-msgstr "Il valore specificato come '%s' contiene dei caratteri invalidi!"
+msgstr "L'uid contiene dei caratteri invalidi!"
 
 #: plugins/personal/generic/class_user.inc:910
 msgid "You have no permissions to create a user on this 'Base'."
@@ -3457,9 +3431,8 @@ msgid "The field 'Pager' contains an invalid phone number."
 msgstr ""
 
 #: plugins/personal/generic/class_user.inc:1106
-#, fuzzy
 msgid "Could not open specified certificate!"
-msgstr "Impossibile selezionare il database!"
+msgstr "Impossibile aprite il certificato selezionato!"
 
 #: plugins/personal/generic/password.tpl:2
 msgid ""
@@ -3509,9 +3482,8 @@ msgid "Date of birth"
 msgstr "Data di nascita"
 
 #: plugins/personal/generic/generic.tpl:91
-#, fuzzy
 msgid "Preferred langage"
-msgstr "Lingua predefinita"
+msgstr "Lingua preferita"
 
 #: plugins/personal/generic/generic.tpl:102
 #: plugins/gofax/blocklists/generic.tpl:14 plugins/admin/groups/generic.tpl:21
@@ -3989,7 +3961,7 @@ msgstr "Proxy"
 
 #: plugins/personal/connectivity/class_proxyAccount.inc:81
 msgid "KB"
-msgstr ""
+msgstr "KB"
 
 #: plugins/personal/connectivity/class_proxyAccount.inc:81
 msgid "GB"
