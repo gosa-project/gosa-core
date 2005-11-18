@@ -70,17 +70,47 @@ class appgroup extends plugin
     $this->curbase = $this->config->current['BASE'];
   }
 
-  function getOneUp($prio)
+  function getOneUp($appl)
   {
-    
-    
-  }
-  
-  function getOneDown(){
+    $prio = $this->gosaMemberApplication[$appl]['Pri'];
+    $prios = array();
+    $next = 0;
+    $key_use = false;
+    foreach($this->gosaMemberApplication as $key => $app){
+      if($app['Cat'] != $this->gosaMemberApplication[$appl]['Cat']) continue;
+      if($app['Pri']< $prio){
+        if($app['Pri'] > $next){
+          $next     = $app['Pri'];
+          $key_use  = $key;
+        }
+      }        
+    }
 
-  
+    if($next != 0){
+      $this->gosaMemberApplication[$appl]['Pri']= $next;
+      $this->gosaMemberApplication[$key_use]['Pri']= $prio;
+    }
   }
   
+  function getOneDown($prio){
+    return($prio); 
+  }
+  
+  function getNextFree($prio,$cat)
+  {
+    $ret = $prio;
+    $prios =array();
+    foreach($this->gosaMemberApplication as $app){
+      if($cat == $app['Cat']){
+        $prios[$app['Pri']]=$app['Pri'];
+      }
+    }
+    while(isset($prios[$ret])){
+      $ret ++;
+    }
+    return($ret);
+  }
+
 
   function execute()
   {
@@ -306,9 +336,9 @@ class appgroup extends plugin
 
         if($found != false){
           if($act == "one_up"){
-            $this->gosaMemberApplication[$found]['Pri'] = $this->gosaMemberApplication[$found]['Pri'] -1;
+            $this->getOneUp($found);
           }elseif($act == "one_down")   { 
-            $this->gosaMemberApplication[$found]['Pri'] = $this->gosaMemberApplication[$found]['Pri'] +1;
+            $this->getOneDown($found);
           }
         }
       }
@@ -318,7 +348,7 @@ class appgroup extends plugin
     $div2->SetHeight(300);
 
     $menu           = $this->CreateCatMenu();
-    $str_noprio     = "&nbsp; [ "._("Priority: %s")." ] ";
+    $str_noprio     = " %s ";
     $linkopen       = "<img src='images/folder.png'>            &nbsp;<a href='?plug=".$_GET['plug']."&amp;act=open&amp;id=%s'>%s</a>";
     $app   = "<img src='images/select_application.png'>&nbsp;%s".$str_noprio;
 
@@ -560,7 +590,7 @@ class appgroup extends plugin
 
   function addApp($cn)
   {
-    $this->gosaMemberApplication[$cn."|".$this->curCatDir]= array("App"=>$cn,"Cat"=>$this->curCatDir,"Pri"=>"100");
+    $this->gosaMemberApplication[$cn."|".$this->curCatDir]= array("App"=>$cn,"Cat"=>$this->curCatDir,"Pri"=>$this->getNextFree(1,$this->curCatDir));
     $this->used_apps[$cn]=$cn;
     $this->is_modified= TRUE;
   }
