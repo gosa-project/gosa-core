@@ -36,7 +36,11 @@ class logview extends plugin
 		print_red (_("No LOG servers defined!"));
 		return;
 	}
-	
+
+	if(!is_callable("mysql_connect")){
+		return;
+	}
+
 	$cfg= $this->config->data['SERVERS']['LOG'];
 	$tmp= set_error_handler('dummy_error_handler');
 	$link = @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
@@ -93,6 +97,13 @@ class logview extends plugin
   	if (!isset($this->config->data['SERVERS']['LOG'])){
 		return;
 	}
+
+    if(!is_callable("mysql_connect")){
+        print_red(_("There is no mysql extension available in your php setup, can't perform any query."));
+        return;
+    }
+
+
 
         /* Save data */
         $logfilter= get_global("logfilter");
