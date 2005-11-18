@@ -6,9 +6,6 @@ Things to fix before 2.4:
 
 * Rework dialog to add aplications (group dialog)
 
-* There are still several "Lock new" hints in FAI plugin
-  headers
-
 * First name/Last name instead of Name/Given name
 
 * Evaluate patches for certificate generation

@@ -95,7 +95,11 @@ class faiScript extends plugin
       $this->is_dialog=true;
     }
 
-    $_SESSION['objectinfo'] = $this->dn;
+    if($this->dn != "new"){
+      $_SESSION['objectinfo']= $this->dn;
+    }
+
+
     /* Edit selected Sub Object */
     if((isset($_POST['EditSubObject']))&&(isset($_POST['SubObject']))){
       $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$_POST['SubObject']]);

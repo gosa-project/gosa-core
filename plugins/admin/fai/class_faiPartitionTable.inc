@@ -100,7 +100,11 @@ class faiPartitionTable extends plugin
     /* Edit disk.
      * Open dialog which allows us to edit the selected entry 
      */    
-    $_SESSION['objectinfo'] = $this->dn;
+
+    if($this->dn != "new"){
+      $_SESSION['objectinfo']= $this->dn;
+    }
+
     if((isset($_POST['EditDisk']))&&(isset($_POST['disks']))){
       $usedDiskNames =array();
       foreach($this->disks  as $key=>$disk){

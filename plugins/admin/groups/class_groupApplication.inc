@@ -18,10 +18,7 @@ class appgroup extends plugin
   var $option_value= array();
   var $appoption= array();
   var $table= "";
-  
   var $curbase   = "";
-
-
   var $curCatDir;
   var $curCatDepth=0;
   var $Categories=array();
@@ -72,6 +69,18 @@ class appgroup extends plugin
   
     $this->curbase = $this->config->current['BASE'];
   }
+
+  function getOneUp($prio)
+  {
+    
+    
+  }
+  
+  function getOneDown(){
+
+  
+  }
+  
 
   function execute()
   {
