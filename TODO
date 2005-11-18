@@ -17,6 +17,9 @@ Things to fix before 2.4:
 Target for 2.5:
 ===============
 
+* Asterisk : Create entry like this #309,1,PickupChan(SIP/rainer), 
+			 to allow others to pickup the phone by pressing # and number of the phone.
+
 * Bug submitter
 
 * Fix translation mode
