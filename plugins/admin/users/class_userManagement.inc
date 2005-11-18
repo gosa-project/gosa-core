@@ -768,10 +768,14 @@ class userManagement extends plugin
       /* 
         If you want to disable the status pictures, just comment out the next line
       */
-      $r_con= @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
-      // Check if we are  connected correctly
-      if($r_con){
-        $r_db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
+      $r_con = false;
+      $r_db  = false;
+      if(is_callable("mysql_pconnect")){
+        $r_con= @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+        // Check if we are  connected correctly
+        if($r_con){
+          $r_db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
+        }
       }
     }
 
@@ -787,7 +791,7 @@ class userManagement extends plugin
         $fonac = preg_replace("/%title%/", "", $fonac);
 
         /* Database connection is ok ?*/
-        if($r_db){
+        if(($r_db)&&(is_callable("mysql_query"))){
           $res= @mysql_query("SELECT regseconds,name,port,ipaddr FROM ".$a_SETUP['SIP_TABLE']." WHERE (name='".$val['uid'][0]."')");
           $mysql_entry = @mysql_fetch_row($res);
           if(is_array($mysql_entry)){
@@ -913,7 +917,9 @@ class userManagement extends plugin
     $smarty->assign("alphabet", generate_alphabet());
     $smarty->assign("hint", print_sizelimit_warning());
 
-    @mysql_close($r_con);
+    if((is_callable("mysql_close"))&&($r_con)){
+      @mysql_close($r_con);
+    }
     return ($smarty->fetch(get_template_path('headpage.tpl', TRUE)));
   }
 
