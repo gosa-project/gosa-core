@@ -70,7 +70,9 @@ class phoneAccount extends plugin
     $a_SETUP= array();
     if(array_key_exists('config',$_SESSION) &&
        array_key_exists('SERVERS',$_SESSION['config']->data) &&
-       array_key_exists('FON',$_SESSION['config']->data['SERVERS'])) {
+       array_key_exists('FON',$_SESSION['config']->data['SERVERS']) &&
+       is_callable("mysql_connect")
+       ) {
       $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
       $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
       if(!$r_con){
@@ -215,13 +217,13 @@ class phoneAccount extends plugin
     }
 
 
-  /* Get voicemail PIN from MySQL DB 
-   * Because every user can change his PIN directly from the phone
-   *  without any update to the ldap
-   * This means, the PIN in the DB is up to date
-   */
+    /* Get voicemail PIN from MySQL DB 
+     * Because every user can change his PIN directly from the phone
+     *  without any update to the ldap
+     * This means, the PIN in the DB is up to date
+     */
     // Connect to DB server
-    if((isset($a_SETUP))&&(isset($a_SETUP['SERVER']))&&(isset($a_SETUP['LOGIN']))&&(isset($a_SETUP['PASSWORD']))){
+    if((is_callable("mysql_pconnect"))&&(isset($a_SETUP))&&(isset($a_SETUP['SERVER']))&&(isset($a_SETUP['LOGIN']))&&(isset($a_SETUP['PASSWORD']))){
       $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
       if($r_con){
         $r_db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
@@ -232,8 +234,11 @@ class phoneAccount extends plugin
         }
       }
     }
-  $this->lastmacro=$this->macro;
-  @mysql_close($r_con) ;
+    $this->lastmacro=$this->macro;
+
+    if(is_callable("mysql_close")&&($r_con)){
+      @mysql_close($r_con) ;
+    }
   }
 
 
@@ -241,10 +246,17 @@ class phoneAccount extends plugin
   function generate_mysql_entension_entries($save = false){
 
     if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
+      if($save)
       print_red(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). Your settings can't be saved to asterisk database."));
       return(true);
     }
 
+    if(!is_callable("mysql_pconnect")){
+      if($save)
+      print_red(_("Can't save any changes to asterisk database, there is no mysql extension available."));
+      return(true);
+    }
+  
     // Get Configuration for Mysql database Server
     $a_SETUP        = $_SESSION['config']->data['SERVERS']['FON'];  // DB Configuration
     $s_parameter    = "";                                           // Contains paramter for selected Macro 
