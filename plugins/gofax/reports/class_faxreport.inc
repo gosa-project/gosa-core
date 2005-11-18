@@ -95,6 +95,12 @@ class faxreport extends plugin
 
 		/* Connecting, selecting database */
 		$cfg= $this->config->data['SERVERS']['FAX'];
+
+		if(!is_callable("mysql_connect")){
+			print_red(_("There is no mysql extension available, please check your php setup."));	
+			return;	
+		}		
+
 		$link = @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
 		if ($link === FALSE){
 			print_red(_("Can't connect to fax database, no reports can be shown!"));
@@ -199,6 +205,11 @@ class faxreport extends plugin
 		$query = "SELECT id,uid,date_format(queuing_time, '%Y%m%d%H%i%s') as queuing_time,status,sender_id,receiver_id,pages FROM faxlog ".
 			"WHERE ( ".$this->userfilter." ) AND queuing_time <= $end AND ".
 			"queuing_time >= $start ORDER BY ".$this->fields[$this->sort]." $desc;";
+
+		if(!is_callable("mysql_connect")){
+			print_red("There is no mysql extension configured in your php setup.");
+			return;
+		}
 
 		/* Connecting, selecting database */
 		$cfg= $this->config->data['SERVERS']['FAX'];
