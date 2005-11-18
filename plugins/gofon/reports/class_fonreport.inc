@@ -138,6 +138,12 @@ class fonreport extends plugin
 	if (!isset($this->config->data['SERVERS']['FON'])){
 		return ("");
 	}
+
+	if(!is_callable("mysql_connect")){
+		print_red("There is no mysql extension available.");
+		return;
+	}
+
 	$cfg= $this->config->data['SERVERS']['FON'];
 	$link = @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
 	if ($link === FALSE){
