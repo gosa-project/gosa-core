@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alessandro Amici <a.amici@bopen.it>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-06-12 23:53+0200\n"
+"PO-Revision-Date: 2005-11-18 14:12+0100\n"
 "Last-Translator: Alessandro Amici <a.amici@bopen.it>\n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
@@ -116,7 +116,7 @@ msgstr "Telefono"
 
 #: contrib/gosa.conf:78 plugins/personal/nagios/class_nagiosAccount.inc:18
 msgid "Nagios"
-msgstr ""
+msgstr "Nagios"
 
 #: contrib/gosa.conf:79 contrib/gosa.conf:88 contrib/gosa.conf:94
 #: contrib/gosa.conf:99 contrib/gosa.conf:105 contrib/gosa.conf:114
@@ -144,9 +144,8 @@ msgid "Options"
 msgstr "Opzioni"
 
 #: contrib/gosa.conf:104 plugins/gofon/phoneaccount/class_phoneAccount.inc:640
-#, fuzzy
 msgid "Parameter"
-msgstr "Modifica parametri"
+msgstr "Parametro"
 
 #: contrib/gosa.conf:110 contrib/gosa.conf:128
 #: plugins/admin/ogroups/tabs_ogroups.inc:93
@@ -200,9 +199,8 @@ msgid "Export"
 msgstr "Esporta"
 
 #: contrib/gosa.conf:178
-#, fuzzy
 msgid "Excel Export"
-msgstr "Esporta"
+msgstr "Esporta in formato Excel"
 
 #: contrib/gosa.conf:179 plugins/personal/mail/generic.tpl:112
 #: plugins/personal/environment/logonManagement.tpl:65
@@ -218,17 +216,15 @@ msgid "CSV Import"
 msgstr "Importa da CSV"
 
 #: contrib/gosa.conf:184
-#, fuzzy
 msgid "Partitions"
-msgstr "Destinazione"
+msgstr "Partizioni"
 
 #: contrib/gosa.conf:188 plugins/personal/environment/logonManagement.tpl:55
 #: plugins/admin/applications/generic.tpl:96
 #: plugins/admin/fai/faiScriptEntry.tpl:50
 #: plugins/admin/fai/faiHookEntry.tpl:50
-#, fuzzy
 msgid "Script"
-msgstr "Script path"
+msgstr "Script"
 
 #: contrib/gosa.conf:192 plugins/admin/fai/class_faiManagement.inc:551
 #: plugins/admin/fai/class_faiManagement.inc:552
@@ -237,25 +233,21 @@ msgstr ""
 
 #: contrib/gosa.conf:196 plugins/admin/fai/class_faiManagement.inc:544
 #: plugins/admin/fai/class_faiManagement.inc:545
-#, fuzzy
 msgid "Variables"
-msgstr "Mostra terminali"
+msgstr "Variabili"
 
 #: contrib/gosa.conf:200 plugins/admin/fai/class_faiManagement.inc:565
 #: plugins/admin/fai/class_faiManagement.inc:566
-#, fuzzy
 msgid "Templates"
-msgstr "Mostra utenti template"
+msgstr "Template"
 
 #: contrib/gosa.conf:204 plugins/personal/environment/environment.tpl:7
-#, fuzzy
 msgid "Profiles"
-msgstr "Path del profilo"
+msgstr "Profili"
 
 #: contrib/gosa.conf:208
-#, fuzzy
 msgid "Packages"
-msgstr "Mostra telefoni"
+msgstr "Pacchetti"
 
 #: contrib/gosa.conf:225
 msgid "{LOCATIONNAME}"
@@ -290,9 +282,8 @@ msgid "Italian"
 msgstr "Italiano"
 
 #: html/helpviewer.php:113
-#, fuzzy
 msgid "There is no helpfile specified for this class."
-msgstr "Il metodo di posta '%s' non è definito in gosa.conf"
+msgstr ""
 
 #: html/helpviewer.php:221
 #, php-format
@@ -310,13 +301,11 @@ msgstr "Sesso"
 
 #: html/getxls.php:65 html/getxls.php:174 html/getxls.php:224
 #: html/getxls.php:236
-#, fuzzy
 msgid "Surname"
-msgstr "Script path"
+msgstr "Cognome"
 
 #: html/getxls.php:65 html/getxls.php:174 html/getxls.php:224
 #: html/getxls.php:236
-#, fuzzy
 msgid "Given Name"
 msgstr "Nome"
 
@@ -333,9 +322,8 @@ msgid "Users"
 msgstr "Utenti"
 
 #: html/getxls.php:74 html/getxls.php:276
-#, fuzzy
 msgid "User List of "
-msgstr "Lista degli utenti"
+msgstr "Lista degli utenti di"
 
 #: html/getxls.php:74 html/getxls.php:104 html/getxls.php:156
 #: html/getxls.php:184 html/getxls.php:276 html/getxls.php:295
@@ -350,9 +338,8 @@ msgid "User ID"
 msgstr ""
 
 #: html/getxls.php:94 html/getxls.php:227
-#, fuzzy
 msgid "Members"
-msgstr "Oggetti membri"
+msgstr "Membri"
 
 #: html/getxls.php:97 html/getxls.php:99 html/getxls.php:244
 #: plugins/admin/groups/class_groupManagement.inc:25
@@ -361,9 +348,8 @@ msgid "Groups"
 msgstr "Gruppi di utenti"
 
 #: html/getxls.php:104 html/getxls.php:295
-#, fuzzy
 msgid "Groups of "
-msgstr "Gruppo di utenti"
+msgstr "Gruppi di "
 
 #: html/getxls.php:123 html/getxls.php:230
 #: plugins/personal/environment/logonManagement.tpl:17
@@ -390,20 +376,17 @@ msgid "Description"
 msgstr "Descrizione"
 
 #: html/getxls.php:124 html/getxls.php:246
-#, fuzzy
 msgid "Computers"
-msgstr "incompleto"
+msgstr "Computer"
 
 #: html/getxls.php:133 html/getxls.php:190 html/getxls.php:336
 #: html/getxls.php:356
-#, fuzzy
 msgid "Common Name"
-msgstr "Nome locazione"
+msgstr "Nome comune"
 
 #: html/getxls.php:146
-#, fuzzy
 msgid "Server Name"
-msgstr "Server"
+msgstr "Nome del Server"
 
 #: html/getxls.php:149 html/getxls.php:151 html/getxls.php:158
 #: html/getxls.php:179 html/getxls.php:245 html/getxls.php:316
@@ -412,17 +395,14 @@ msgid "Servers"
 msgstr ""
 
 #: html/getxls.php:156 html/getxls.php:314
-#, fuzzy
 msgid "Servers of "
-msgstr "Server"
+msgstr "Server di"
 
 #: html/getxls.php:174
-#, fuzzy
 msgid "Common name"
-msgstr "Nome locazione"
+msgstr "Nome comune"
 
 #: html/getxls.php:174
-#, fuzzy
 msgid "Display Name"
 msgstr "Mostra il nome"
 
@@ -466,14 +446,12 @@ msgid "Location"
 msgstr "Località"
 
 #: html/getxls.php:174 plugins/personal/nagios/nagios.tpl:12
-#, fuzzy
 msgid "Mail address"
 msgstr "Indirizzo principale"
 
 #: html/getxls.php:174
-#, fuzzy
 msgid "Mobile phone"
-msgstr "Telefono privato"
+msgstr "Cellulare"
 
 #: html/getxls.php:174 html/getxls.php:236
 #: plugins/addons/addressbook/address_edit.tpl:78
@@ -482,7 +460,6 @@ msgid "City"
 msgstr "Città"
 
 #: html/getxls.php:174
-#, fuzzy
 msgid "Postal address"
 msgstr "CAP"
 
@@ -495,9 +472,8 @@ msgid "Pager"
 msgstr "Pager"
 
 #: html/getxls.php:174 plugins/gofon/conference/generic.tpl:69
-#, fuzzy
 msgid "Phone number"
-msgstr "Numeri di telefono"
+msgstr "Numero di telefono"
 
 #: html/getxls.php:174 plugins/personal/generic/generic.tpl:121
 #: plugins/personal/generic/generic.tpl:265
@@ -521,24 +497,20 @@ msgid "State"
 msgstr "Stato"
 
 #: html/getxls.php:174
-#, fuzzy
 msgid "Function"
-msgstr "funzione"
+msgstr "Funzione"
 
 #: html/getxls.php:177 html/getxls.php:247
-#, fuzzy
 msgid "Adressbook"
 msgstr "Rubrica"
 
 #: html/getxls.php:184 html/getxls.php:349
-#, fuzzy
 msgid "Adressbook of "
-msgstr "Rubrica"
+msgstr "Rubrica di"
 
 #: html/getxls.php:224
-#, fuzzy
 msgid "BirthDate"
-msgstr "Data"
+msgstr "Data di nascita"
 
 #: html/getxls.php:230
 msgid "Uid"
@@ -650,8 +622,7 @@ msgid "Can't find any plugin definitions for plugin '%s'!"
 msgstr ""
 
 #: html/main.php:316
-msgid ""
-"Generating this page caused the W3C conformance checker to raise some errors!"
+msgid "Generating this page caused the W3C conformance checker to raise some errors!"
 msgstr ""
 
 #: html/main.php:316 include/php_setup.inc:71
@@ -661,8 +632,7 @@ msgstr ""
 #: html/index.php:49
 #, php-format
 msgid "GOsa configuration %s/gosa.conf is not readable. Aborted."
-msgstr ""
-"Il file di configurazione di GOsa %s/gosa.conf non è leggibile. Abortisco."
+msgstr "Il file di configurazione di GOsa %s/gosa.conf non è leggibile. Abortisco."
 
 #: html/index.php:71
 #, php-format
@@ -671,8 +641,7 @@ msgstr ""
 
 #: html/index.php:136 include/class_config.inc:195
 msgid "Can't bind to LDAP. Please contact the system administrator."
-msgstr ""
-"Errore di connessione al server LDAP. Contatta l'amministratore del sistema."
+msgstr "Errore di connessione al server LDAP. Contatta l'amministratore del sistema."
 
 #: html/index.php:144
 msgid ""
@@ -681,8 +650,7 @@ msgid ""
 msgstr ""
 
 #: html/index.php:152
-msgid ""
-"Your ldap setup contains old schema definitions. Please re-run the setup."
+msgid "Your ldap setup contains old schema definitions. Please re-run the setup."
 msgstr ""
 
 #: html/index.php:172 ihtml/themes/altlinux/setup_useradmin.tpl:6
@@ -857,8 +825,7 @@ msgstr "Continua"
 msgid ""
 "You are currently editing a database entry. Do you want to dismiss the "
 "changes?"
-msgstr ""
-"Stai modificando un campo del database. Vuoi abbandonare i cambiamenti?"
+msgstr "Stai modificando un campo del database. Vuoi abbandonare i cambiamenti?"
 
 #: ihtml/themes/altlinux/framework.tpl:15
 #: ihtml/themes/default/framework.tpl:15
@@ -1041,8 +1008,7 @@ msgstr ""
 msgid ""
 "Please enter the server URI to allow the setup to connect your LDAP server "
 "<i>(Example: ldap://your.server:389).</i>"
-msgstr ""
-"Inserisci la URI del server LDAP <i>(Per esempio: ldap://mio.server:389).</i>"
+msgstr "Inserisci la URI del server LDAP <i>(Per esempio: ldap://mio.server:389).</i>"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:2
 #: ihtml/themes/default/setup_step4.tpl:2
@@ -1505,20 +1471,17 @@ msgstr ""
 
 #: include/class_plugin.inc:391
 #, php-format
-msgid ""
-"Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
 msgstr ""
 
 #: include/class_plugin.inc:419 include/class_password-methods.inc:181
 #, php-format
-msgid ""
-"Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
 msgstr ""
 
 #: include/class_plugin.inc:447
 #, php-format
-msgid ""
-"Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
 msgstr ""
 
 #: include/class_config.inc:69
@@ -1540,8 +1503,7 @@ msgid "Setting the password failed. LDAP server says '%s'."
 msgstr ""
 
 #: include/class_password-methods.inc:202
-msgid ""
-"Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
+msgid "Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
 msgstr ""
 
 #: include/class_password-methods-kerberos.inc:43
@@ -1655,8 +1617,7 @@ msgstr ""
 
 #: include/functions_setup.inc:140
 #, php-format
-msgid ""
-"Optional objectclass '%s' required by plugin '%s' does not have version %s"
+msgid "Optional objectclass '%s' required by plugin '%s' does not have version %s"
 msgstr ""
 
 #: include/functions_setup.inc:145
@@ -1789,8 +1750,7 @@ msgstr "Controllo il modulo ldap"
 
 #: include/functions_setup.inc:303
 msgid "This is the main module used by GOsa and therefore really required."
-msgstr ""
-"Questo è il modulo più importante usato da GOsa ed è quindi necessario."
+msgstr "Questo è il modulo più importante usato da GOsa ed è quindi necessario."
 
 #: include/functions_setup.inc:306
 #, fuzzy
@@ -1897,8 +1857,7 @@ msgid "Checking for snmp Module"
 msgstr "Controllo il modulo imap"
 
 #: include/functions_setup.inc:343
-msgid ""
-"Simple Network Management Protocol (SNMP) is required for client monitoring."
+msgid "Simple Network Management Protocol (SNMP) is required for client monitoring."
 msgstr ""
 
 #: include/functions_setup.inc:379
@@ -2200,8 +2159,7 @@ msgid ""
 msgstr "Questa identità non possiede estensioni di posta."
 
 #: plugins/personal/mail/class_mailAccount.inc:263
-msgid ""
-"You're trying to add an invalid email address to the list of forwarders."
+msgid "You're trying to add an invalid email address to the list of forwarders."
 msgstr ""
 "Stai tentandi di aggiungere un indirizzo di posta non valido alla lista "
 "degli inoltri"
@@ -2227,8 +2185,7 @@ msgid "The address you're trying to add is already used by user"
 msgstr "L'indirizzo che stai cercando di aggiungere  gi in uso"
 
 #: plugins/personal/mail/class_mailAccount.inc:693
-msgid ""
-"There is no valid mailserver specified, please add one in the system setup."
+msgid "There is no valid mailserver specified, please add one in the system setup."
 msgstr ""
 
 #: plugins/personal/mail/class_mailAccount.inc:698
@@ -2241,8 +2198,7 @@ msgstr "Il campo 'Indirizzo principale' non è stao inserito"
 #: plugins/addons/addressbook/class_addressbook.inc:573
 #: plugins/admin/ogroups/class_mailogroup.inc:70
 msgid "Please enter a valid email address in 'Primary address' field."
-msgstr ""
-"Inserire un indirizzo di posta valido nel campo 'Indirizzo principale'."
+msgstr "Inserire un indirizzo di posta valido nel campo 'Indirizzo principale'."
 
 #: plugins/personal/mail/class_mailAccount.inc:713
 #: plugins/admin/groups/class_groupMail.inc:623
@@ -2399,16 +2355,14 @@ msgstr "Opzioni di posta"
 
 #: plugins/personal/mail/generic.tpl:71
 msgid "Select if you want to forward mails without getting own copies of them"
-msgstr ""
-"Seleziona se intendi inoltrare le mail senza mantenerne una copia locale"
+msgstr "Seleziona se intendi inoltrare le mail senza mantenerne una copia locale"
 
 #: plugins/personal/mail/generic.tpl:71
 msgid "No delivery to own mailbox"
 msgstr "Non recapitare nella propria mailbox"
 
 #: plugins/personal/mail/generic.tpl:74
-msgid ""
-"Select to automatically response with the vacation message defined below"
+msgid "Select to automatically response with the vacation message defined below"
 msgstr "Seleziona per rispondere automaticamente con il messaggio seguente"
 
 #: plugins/personal/mail/generic.tpl:74
@@ -2425,8 +2379,7 @@ msgstr "Muovi mail marcate con un livello di Spam superiore a"
 
 #: plugins/personal/mail/generic.tpl:83
 msgid "Choose spam level - smaller values are more sensitive"
-msgstr ""
-"Scegli il livello si Spam - valori più bassi indicano maggiore sensibilità"
+msgstr "Scegli il livello si Spam - valori più bassi indicano maggiore sensibilità"
 
 #: plugins/personal/mail/generic.tpl:86
 msgid "to folder"
@@ -2677,8 +2630,7 @@ msgstr "La password immessa come 'Nuova password' è vuota"
 
 #: plugins/personal/password/main.inc:59
 msgid "The password used as new and current are too similar."
-msgstr ""
-"La password immessa come 'Nuova password' è troppo simile a quella attuale."
+msgstr "La password immessa come 'Nuova password' è troppo simile a quella attuale."
 
 #: plugins/personal/password/main.inc:64
 msgid "The password used as new is to short."
@@ -2732,8 +2684,7 @@ msgstr "Mostra gruppi samba"
 #: plugins/personal/posix/posix_groups.tpl:29
 #: plugins/admin/groups/headpage.tpl:48
 msgid "Select to see groups that have applications configured"
-msgstr ""
-"Seleziona per mostrare i gruppi che hanno configurate delle applicazioni"
+msgstr "Seleziona per mostrare i gruppi che hanno configurate delle applicazioni"
 
 #: plugins/personal/posix/posix_groups.tpl:29
 #: plugins/admin/groups/headpage.tpl:49
@@ -2906,8 +2857,7 @@ msgstr "Questa identità non possiede estensioni Unix"
 #: plugins/personal/posix/class_posixAccount.inc:435
 #, php-format
 msgid "Password can't be changed up to %s days after last change"
-msgstr ""
-"La password non può essere cambiata per %s giorni dall'ultimo cambiamento"
+msgstr "La password non può essere cambiata per %s giorni dall'ultimo cambiamento"
 
 #: plugins/personal/posix/class_posixAccount.inc:437
 #, php-format
@@ -3347,8 +3297,7 @@ msgstr "Il valore specificato come '%s' contiene dei caratteri invalidi!"
 
 #: plugins/personal/samba/class_sambaAccount.inc:646
 #, php-format
-msgid ""
-"The timeout property '%s' is checked and contains invalid or no characters!"
+msgid "The timeout property '%s' is checked and contains invalid or no characters!"
 msgstr ""
 
 #: plugins/personal/samba/class_sambaAccount.inc:652
@@ -3790,8 +3739,7 @@ msgid "Kolab"
 msgstr ""
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:105
-msgid ""
-"You're trying to add an invalid email address to the list of delegations."
+msgid "You're trying to add an invalid email address to the list of delegations."
 msgstr ""
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:113
@@ -4454,8 +4402,7 @@ msgid "Can't delete '%s'. Errow was: file doesn't exist."
 msgstr ""
 
 #: plugins/personal/environment/class_kioskManagementDialog.inc:88
-msgid ""
-"There is no KIOSKPATH defined in your gosa.conf. Can't manage kiosk profiles!"
+msgid "There is no KIOSKPATH defined in your gosa.conf. Can't manage kiosk profiles!"
 msgstr ""
 
 #: plugins/personal/environment/class_kioskManagementDialog.inc:94
@@ -4523,8 +4470,7 @@ msgstr "Il campo 'Indirizzo principale' non è stao inserito"
 #: plugins/personal/nagios/class_nagiosAccount.inc:174
 #, fuzzy
 msgid "Please enter a valid email address in 'NagiosMail' field."
-msgstr ""
-"Inserire un indirizzo di posta valido nel campo 'Indirizzo principale'."
+msgstr "Inserire un indirizzo di posta valido nel campo 'Indirizzo principale'."
 
 #: plugins/personal/nagios/nagios.tpl:4
 #, fuzzy
@@ -5404,13 +5350,11 @@ msgid "Cell phone"
 msgstr "Cellolare"
 
 #: plugins/addons/addressbook/class_addressbook.inc:581
-msgid ""
-"Cannot create a unique DN for your entry. Please fill more formular fields."
+msgid "Cannot create a unique DN for your entry. Please fill more formular fields."
 msgstr ""
 
 #: plugins/addons/addressbook/class_addressbook.inc:593
-msgid ""
-"You have no permissions to create or modify a global address book entry."
+msgid "You have no permissions to create or modify a global address book entry."
 msgstr ""
 
 #: plugins/addons/ldapmanager/class_csvimport.inc:6
@@ -5981,12 +5925,10 @@ msgstr "alla lista degli inoltri"
 
 #: plugins/admin/groups/class_groupMail.inc:617
 msgid "Please enter a valid email addres in 'Primary address' field."
-msgstr ""
-"Prego inserire un indirizzo email valido nel campo 'Indirizzo principale'"
+msgstr "Prego inserire un indirizzo email valido nel campo 'Indirizzo principale'"
 
 #: plugins/admin/groups/class_groupMail.inc:650
-msgid ""
-"Please choose valid permission settings. Default permission can't be emtpy."
+msgid "Please choose valid permission settings. Default permission can't be emtpy."
 msgstr ""
 
 #: plugins/admin/groups/class_groupMail.inc:654
@@ -6438,8 +6380,7 @@ msgid "Create options"
 msgstr ""
 
 #: plugins/admin/applications/class_applicationParameters.inc:54
-msgid ""
-"This application has options disabled. You can enable them by clicking below."
+msgid "This application has options disabled. You can enable them by clicking below."
 msgstr ""
 
 #: plugins/admin/applications/class_applicationParameters.inc:90
@@ -7558,8 +7499,7 @@ msgid "Remove DNS service"
 msgstr ""
 
 #: plugins/admin/systems/class_servDNS.inc:37
-msgid ""
-"This server has DNS features enabled. You can disable them by clicking below."
+msgid "This server has DNS features enabled. You can disable them by clicking below."
 msgstr ""
 
 #: plugins/admin/systems/class_servDNS.inc:39
@@ -7567,8 +7507,7 @@ msgid "Add DNS service"
 msgstr ""
 
 #: plugins/admin/systems/class_servDNS.inc:40
-msgid ""
-"This server has DNS features disabled. You can enable them by clicking below."
+msgid "This server has DNS features disabled. You can enable them by clicking below."
 msgstr ""
 
 #: plugins/admin/systems/workstation.tpl:9
@@ -8774,14 +8713,12 @@ msgstr ""
 
 #: plugins/admin/ogroups/class_mailogroup.inc:41
 #, fuzzy
-msgid ""
-"This group has mail features enabled. You can disable them by clicking below."
+msgid "This group has mail features enabled. You can disable them by clicking below."
 msgstr "Questa identià possiede estensioni di posta."
 
 #: plugins/admin/ogroups/class_mailogroup.inc:43
 #, fuzzy
-msgid ""
-"This group has mail features disabled. You can enable them by clicking below."
+msgid "This group has mail features disabled. You can enable them by clicking below."
 msgstr "Questa identità non possiede estensioni di posta."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:79
@@ -8817,8 +8754,7 @@ msgstr "Elimina estensioni telefoniche"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:114
 #, fuzzy
-msgid ""
-"Phone queue is enabled for this group. You can disable it by clicking below."
+msgid "Phone queue is enabled for this group. You can disable it by clicking below."
 msgstr "Questa identià possiede estensioni telefoniche."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:116
@@ -8854,8 +8790,7 @@ msgid "There must be least one queue number defined."
 msgstr ""
 
 #: plugins/admin/ogroups/class_phonequeue.inc:228
-msgid ""
-"There is currently no asterisk server defined. Your settings can't be saved."
+msgid "There is currently no asterisk server defined. Your settings can't be saved."
 msgstr ""
 
 #: plugins/admin/ogroups/class_phonequeue.inc:241
@@ -9771,8 +9706,7 @@ msgid "Choose a hook to delete or edit"
 msgstr ""
 
 #: plugins/admin/fai/class_faiPackageEntry.inc:46
-msgid ""
-"This list displays all assigned package names for this repository settings."
+msgid "This list displays all assigned package names for this repository settings."
 msgstr ""
 
 #: plugins/admin/fai/faiPackageEntry.tpl:6
@@ -9811,8 +9745,7 @@ msgid ""
 msgstr ""
 
 #: plugins/admin/fai/faiPackageNew.tpl:17
-msgid ""
-"First select the preferred release, then the section and finally the mirror."
+msgid "First select the preferred release, then the section and finally the mirror."
 msgstr ""
 
 #: plugins/admin/fai/faiPackageNew.tpl:25
@@ -10393,397 +10326,3 @@ msgstr "Il team di GOsa"
 msgid "Welcome %s!"
 msgstr "Benvenuto %s!"
 
-#, fuzzy
-#~ msgid "Adress"
-#~ msgstr "Indirizzo"
-
-#~ msgid "Display workstations matching"
-#~ msgstr "Mostra le worstation che corrispondono"
-
-#, fuzzy
-#~ msgid ""
-#~ "This menu allows you to create, edit and delete selected printers. Having "
-#~ "a great number of printers, you may want to use the range selectors on "
-#~ "top of the printers list."
-#~ msgstr ""
-#~ "Questo menù permette di creare, modificare e cancellare gli utenti "
-#~ "selezionati. Avendo un gran numero di utenti, puoi usare i selettori di "
-#~ "intervalli in cima alla lista degli utenti."
-
-#, fuzzy
-#~ msgid ""
-#~ "This menu allows you to select one or multiple entries to be added to the "
-#~ "printer object for specific tasks. Having a great number of entries, you "
-#~ "may want to use the range selectors below."
-#~ msgstr ""
-#~ "Questo menù permette di creare, modificare e cancellare gli utenti "
-#~ "selezionati. Avendo un gran numero di utenti, puoi usare i selettori di "
-#~ "intervalli in cima alla lista degli utenti."
-
-#, fuzzy
-#~ msgid "day ago"
-#~ msgstr "giorno"
-
-#, fuzzy
-#~ msgid "days ago"
-#~ msgstr "giorni"
-
-#, fuzzy
-#~ msgid "Select time periode"
-#~ msgstr "Selezioni utenti da aggiungere"
-
-#, fuzzy
-#~ msgid "PPTP Server account"
-#~ msgstr "Estenzioni FTP"
-
-#, fuzzy
-#~ msgid "PPTP Server"
-#~ msgstr "Server"
-
-#, fuzzy
-#~ msgid "GLPI Account"
-#~ msgstr "Sicurezza"
-
-#, fuzzy
-#~ msgid "Firstname"
-#~ msgstr "Liste di blocco"
-
-#, fuzzy
-#~ msgid "Sexe"
-#~ msgstr "Sesso"
-
-#, fuzzy
-#~ msgid "XLS export"
-#~ msgstr "Importa da formato CSV"
-
-#, fuzzy
-#~ msgid "You've no permission to do XLS exports."
-#~ msgstr "Non hai il permesso di cambiare la tua password."
-
-#, fuzzy
-#~ msgid "email"
-#~ msgstr "Indirizzo email"
-
-#, fuzzy
-#~ msgid "pager"
-#~ msgstr "Pager"
-
-#, fuzzy
-#~ msgid "Nagios Auth"
-#~ msgstr "Contatto"
-
-#, fuzzy
-#~ msgid "Checking for function <b>%s</b>"
-#~ msgstr "Controllo il supporto per iconv"
-
-#, fuzzy
-#~ msgid "Members:"
-#~ msgstr "Oggetti membri"
-
-#, fuzzy
-#~ msgid "Initiales"
-#~ msgstr "Iniziali"
-
-#, fuzzy
-#~ msgid "Upload new PPD file"
-#~ msgstr "File in upload / File in download"
-
-#, fuzzy
-#~ msgid "Initiales)."
-#~ msgstr "Iniziali"
-
-#, fuzzy
-#~ msgid "Create template"
-#~ msgstr "Nuovo template"
-
-#, fuzzy
-#~ msgid "Add admin user"
-#~ msgstr "Utenti di Dominio"
-
-#, fuzzy
-#~ msgid "Add admin group"
-#~ msgstr "Gruppo Samba"
-
-#, fuzzy
-#~ msgid "Undefined"
-#~ msgstr "non definito"
-
-#, fuzzy
-#~ msgid "Select user/group to add"
-#~ msgstr "Seleziona un gruppo da aggiungere"
-
-#, fuzzy
-#~ msgid "selected"
-#~ msgstr "Rimuovi"
-
-#, fuzzy
-#~ msgid "Please select a PPD or press cancel"
-#~ msgstr "Prego inserire un numero di telefono valido!"
-
-#, fuzzy
-#~ msgid "Service"
-#~ msgstr "Servizi"
-
-#, fuzzy
-#~ msgid "List of used class names"
-#~ msgstr "Scegli il tuo numero di telefono personale"
-
-#, fuzzy
-#~ msgid "Profile management"
-#~ msgstr "Riferimenti"
-
-#, fuzzy
-#~ msgid "Display hotplugs of department"
-#~ msgstr "Mostra gruppi di dipartimenti"
-
-#, fuzzy
-#~ msgid "Select printer entry"
-#~ msgstr "Rimuovi"
-
-#, fuzzy
-#~ msgid "Display printers of department"
-#~ msgstr "Mostra utenti del dipartimento"
-
-#, fuzzy
-#~ msgid "Logon management"
-#~ msgstr "Riferimenti"
-
-#, fuzzy
-#~ msgid "Please enter a valid name. Only 0-9 a-Z are allowed here."
-#~ msgstr "Specificare una dimenzione valida per le mail da rigettare."
-
-#, fuzzy
-#~ msgid "Please enter a value for task."
-#~ msgstr "Specificare una dimenzione valida per le mail da rigettare."
-
-#, fuzzy
-#~ msgid "Please enter a valid class name. Only 0-9 a-z is allowed here."
-#~ msgstr "Specificare una dimenzione valida per le mail da rigettare."
-
-#, fuzzy
-#~ msgid "release"
-#~ msgstr "reset"
-
-#, fuzzy
-#~ msgid "section"
-#~ msgstr "Azione"
-
-#, fuzzy
-#~ msgid "Profil server"
-#~ msgstr "Server"
-
-#, fuzzy
-#~ msgid "Please enter a valid description."
-#~ msgstr "Prego inserire un numero di telefono valido!"
-
-#, fuzzy
-#~ msgid "Please specify a script."
-#~ msgstr "Prego inserire un numero di telefono valido!"
-
-#, fuzzy
-#~ msgid "Invalid character in description. Please enter a valid description."
-#~ msgstr "Specificare una dimenzione valida per le mail da rigettare."
-
-#, fuzzy
-#~ msgid "Please specify a description for this profile."
-#~ msgstr "Specificare una dimenzione valida per le mail da rigettare."
-
-#, fuzzy
-#~ msgid "Please enter a description for your disk."
-#~ msgstr "Specificare una dimenzione valida per le mail da rigettare."
-
-#, fuzzy
-#~ msgid " name="
-#~ msgstr "Nome"
-
-#, fuzzy
-#~ msgid " type="
-#~ msgstr "Tipo"
-
-#~ msgid "Monitoring"
-#~ msgstr "Monitoraggio"
-
-#, fuzzy
-#~ msgid "FAI management"
-#~ msgstr "Nome gruppo"
-
-#, fuzzy
-#~ msgid "New script bundle"
-#~ msgstr "Stampante"
-
-#, fuzzy
-#~ msgid "New hook bundle"
-#~ msgstr "Telefono"
-
-#, fuzzy
-#~ msgid "New variable bundle"
-#~ msgstr "Mostra terminali"
-
-#, fuzzy
-#~ msgid "New template bundle"
-#~ msgstr "Nuovo template"
-
-#, fuzzy
-#~ msgid "Edit object"
-#~ msgstr "Oggetto corrispondente"
-
-#, fuzzy
-#~ msgid "Delete object"
-#~ msgstr "Oggetti membri"
-
-#, fuzzy
-#~ msgid "Please enter a valid name for partition %s."
-#~ msgstr "Specificare una dimenzione valida per le mail da rigettare."
-
-#, fuzzy
-#~ msgid "please enter a unique name for partition %s"
-#~ msgstr "Prego inserire un numero di telefono valido!"
-
-#, fuzzy
-#~ msgid "cancel"
-#~ msgstr "Annulla"
-
-#, fuzzy
-#~ msgid "Available class names."
-#~ msgstr "Applicazioni disponibili"
-
-#, fuzzy
-#~ msgid "Create new FAI object - set of scripts."
-#~ msgstr "Gruppo di oggetti"
-
-#, fuzzy
-#~ msgid "Create new FAI object - set of hooks."
-#~ msgstr "Gruppo di oggetti"
-
-#, fuzzy
-#~ msgid "Obtions"
-#~ msgstr "Opzioni"
-
-#, fuzzy
-#~ msgid "FAI script set"
-#~ msgstr "Impostazioni Unix"
-
-#, fuzzy
-#~ msgid ""
-#~ "This menu allows you to create, delete and edit selected FAI obejcts. "
-#~ "Having a large size of objects, you might prefer the range selectors on "
-#~ "top of this list."
-#~ msgstr ""
-#~ "Questo menù permette di creare, modificare e cancellare gli utenti "
-#~ "selezionati. Avendo un gran numero di utenti, puoi usare i selettori di "
-#~ "intervalli in cima alla lista degli utenti."
-
-#, fuzzy
-#~ msgid ""
-#~ "Please enter a valid description for your disk. Only a-Z 0-9 are allowed."
-#~ msgstr "Specificare una dimenzione valida per le mail da rigettare."
-
-#, fuzzy
-#~ msgid "Object type"
-#~ msgstr "Nome dell'oggetto"
-
-#, fuzzy
-#~ msgid "Set phone password"
-#~ msgstr "Cambia password"
-
-#, fuzzy
-#~ msgid "Set voicemail password"
-#~ msgstr "Cambia password"
-
-#~ msgid "Default printer"
-#~ msgstr "Stampante predefinita"
-
-#, fuzzy
-#~ msgid "Number"
-#~ msgstr "Novembre"
-
-#~ msgid "Forward calls to"
-#~ msgstr "Inoltra chiamate a"
-
-#~ msgid "Timeout (s)"
-#~ msgstr "Timeout"
-
-#, fuzzy
-#~ msgid "Yes"
-#~ msgstr "Sistemi"
-
-#, fuzzy
-#~ msgid "fill out"
-#~ msgstr "Termina la sessione"
-
-#, fuzzy
-#~ msgid "New system"
-#~ msgstr "Rimuovi"
-
-#, fuzzy
-#~ msgid "Germany"
-#~ msgstr "Tedesco"
-
-#~ msgid ""
-#~ "-Edit- and -New...- will execute an assistant to aid you in editing group "
-#~ "properties. -Delete- will ask for confirmation before removing groups."
-#~ msgstr ""
-#~ "-Modifica- e -Nuovo...- esegue un wizard per aiutarti ad amministrare le "
-#~ "informazioni sui tuoi gruppi. -Rimuovi- ti chiederà conferma prima di "
-#~ "rimuovere effettivamente il gruppo."
-
-#~ msgid "Dive into LDAP subtrees when searching"
-#~ msgstr "Cerca nei subtree di LDAP"
-
-#~ msgid "Search in subtrees"
-#~ msgstr "Cerca nei subtree"
-
-#~ msgid ""
-#~ "-Edit- and -New...- execute an assistant to aid you in managing your "
-#~ "account informations. -Delete- will ask for confirmation before deleting "
-#~ "users."
-#~ msgstr ""
-#~ "-Modifica- e -Nuovo...- esegue un wizard per aiutarti ad amministrare le "
-#~ "informazioni sui tuoi utenti. -Rimuovi- ti chiederà conferma prima di "
-#~ "rimuovere effettivamente l'utente."
-
-#, fuzzy
-#~ msgid ""
-#~ "-Edit- and -New...- will execute an assistant to aid you in editing "
-#~ "properties. -Delete- will ask for confirmation before removing macros."
-#~ msgstr ""
-#~ "-Modifica- e -Nuovo...- esegue un wizard per aiutarti ad amministrare le "
-#~ "informazioni sui tuoi gruppi. -Rimuovi- ti chiederà conferma prima di "
-#~ "rimuovere effettivamente il gruppo."
-
-#, fuzzy
-#~ msgid "Display macros of department"
-#~ msgstr "Mostra gruppi di dipartimenti"
-
-#, fuzzy
-#~ msgid "Telefon PIN"
-#~ msgstr "Telefono"
-
-#~ msgid "Show empty groups"
-#~ msgstr "Mostra gruppi vuoti"
-
-#, fuzzy
-#~ msgid "The given value for goFonQualify is not a valid number."
-#~ msgstr "Il valore di 'Dimensione quota' non è valido"
-
-#~ msgid "Answering machine"
-#~ msgstr "Segreteria telefonica"
-
-#~ msgid "Deliver missed calls as mail"
-#~ msgstr "Recapita le chiamate perse come mail"
-
-#~ msgid "Select to see users that have ftp settings"
-#~ msgstr "Seleziona per vedere gli utenti FTP"
-
-#~ msgid "Show FTP users"
-#~ msgstr "Mostra utenti FTP"
-
-#~ msgid "Select to see users that have FAX settings"
-#~ msgstr "Seleziona per vedere gli utenti FAX"
-
-#~ msgid "Show FAX users"
-#~ msgstr "Mostra utenti FAX"
-
-#, fuzzy
-#~ msgid "Phone category"
-#~ msgstr "Rapporti telefono"
