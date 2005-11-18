@@ -40,6 +40,8 @@ class conference extends plugin
 
   var $goFonConferenceOwner    = "";
 
+  var $error_shown = false;
+
   var $goFonConferenceOptionFormat 		= "";
   var $goFonConferenceOptionLifetime 	= "";
   var $telephoneNumber 		= "";
@@ -230,6 +232,15 @@ class conference extends plugin
     $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
 
     // Connect to DB server
+    $r_con = false;    
+
+    if(!is_callable("mysql_pconnect")){
+      if(!$this->error_shown){
+        print_red(_("Can't save any changes to asterisk database, there is currently no mysql extension available in your php setup."));
+        $this->error_shown = true;
+      }
+      return(true);
+    }
     $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
 
     // Check if we are  connected correctly
@@ -333,6 +344,13 @@ class conference extends plugin
   }
 
   function SQL_remove_me($save){
+    if(!is_callable("mysql_pconnect")){
+      if(!$this->error_shown){
+        print_red(_("Can't save any changes to asterisk database, there is currently no mysql extension available in your php setup."));
+        $this->error_shown = true;
+      }
+      return(true);
+    }
 
     if($this->old_tele_number){
       // Get Configuration for Mysql database Server
