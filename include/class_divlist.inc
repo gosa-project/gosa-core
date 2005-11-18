@@ -49,31 +49,10 @@ class divlist {
 	
 	function DrawList(){
 		$s_return = "";
-		$s_return.= "<table summary='".$this->s_summary."' width='600' height='500' cellspacing='0'>";
-    if($this->i_entriesPerPage==0) {
-      // TODO: Find a more convenient way to use the same functionality in both
-      // MSIE and non-MSIE browsers. ATM we need to manually set entriesPerPage to
-      // a non-zero value, because MSIE won't scroll the tbody properly.
-      $s_browser = isset($_SERVER['HTTP_USER_AGENT'])?$_SERVER['HTTP_USER_AGENT']:"";
-      if(is_numeric(strpos($s_browser,'Mozilla')) &&
-         !is_numeric(strpos($s_browser,'MSIE')) &&
-         !is_numeric(strpos($s_browser,'KHTML'))
-        ){
-        $s_return.= "<thead>".$this->_generateHeader()."</thead>";
-        // Define an alternate style for IE (not used ATM)
-        // $s_return.= "<!--[if IE]><style type='text/css'>tbody.scrollcontent {overflow-y:scroll;max-height:480px;}</style><![endif]-->";
-        $s_return.= "<tbody style='max-height:480px;overflow:auto;overflow:-moz-scrollbars-vertical;'>".$this->_generatePage()."</tbody>";
-      } else {
-        // Call ourself with i_entriesPerPage set to a default value
-        $this->SetEntriesPerPage(20);
-        $s_return.=$this->_generateHeader();
-        $s_return.=$this->_generatePage();
-      }
-    } else {
-        $s_return.=$this->_generateHeader();
-        $s_return.=$this->_generatePage();
-    }
-		//$s_return.= nl2br(htmlentities($this->_generatePage()));
+		$s_return.= "<table summary='".$this->s_summary."' style='width:600px;height:500px;' cellspacing='0'>";
+
+    $s_return.= $this->_generateHeader();
+    $s_return.=$this->_generatePage();
 		
 		$s_return.= "</table>";
 		
@@ -98,31 +77,34 @@ class divlist {
 	function _generateHeader(){
 		
 		$s_return = "";
-		
 		$s_value 	= "";
 		$s_key 		= "";
-				
+		
+    // Using scrolltable?
+    if($this->i_entriesPerPage == 0) {
+      $s_return .= "\n<tr><td class='scrollhead'><table style='width:600px;' cellspacing='0'>";
+    }
+
 		$s_return .= "\n<tr>";
 
-    $i_count = count($this->a_header[0])-1;
 		foreach($this->a_header[0] as $s_key => $s_value ){
 			if(!isset($s_value['attach'])){
 				$s_value['attach'] = "";
 			}
-	
-      if($i_count == 0) {
-  			$s_return .= "\n<td class='listheader' style='border-right:0px;border-bottom:1px solid #b0b0b0;' ".$s_value['attach'].">".$s_value['string']."</td>";
-      } else {
-  			$s_return .= "\n<td class='listheader' style='border-bottom:1px solid #b0b0b0;'".$s_value['attach'].">".$s_value['string']."</td>";
-      }
-      $i_count--;
+
+  		$s_return.= "\n<td class='listheader' ".$s_value['attach'].">".$s_value['string']."</td>";
 		}
 		
-    // Only create additional column if we're using scrollbars
-    if($this->i_entriesPerPage==0) {
-      $s_return .= "\n<td class='listheader' style='border-right:0px;padding:0px;border-bottom:1px solid #b0b0b0;width:16px;'>&nbsp;</td>";
+    // Attach a 18px-wide column (used as scrollbar space in body-table),
+    // but do this only if we are really using scrolltables.
+    if($this->i_entriesPerPage == 0) {
+      if($this->_numEntries()>20) {
+        $s_return .= "\n<td class='listheader' id='scrollbar'>&nbsp;</td>";
+      }
+      $s_return .= "\n</table></td></tr>";
     }
-		$s_return .= "\n</tr>";
+
+  	$s_return .= "\n</tr>";
 		return $s_return;
 	}
 	
@@ -135,7 +117,15 @@ class divlist {
 		$s_value 	= "";
 		$s_key 		= "";
 		$s_return 	= "";
-		
+   
+    // We need to construct a "body"-table that is width-of-scrollbar thinner than the "head"-table. I assume 18px as max.
+    $s_return .= "\n<tr><td class='scrollbody'><div style='align:left;width:600px;height:480px;overflow:auto;'>";
+    // Only reduce width if we need a scrollbar (>20 Entries)
+    if($this->_numEntries()>20) {
+      $s_return .= "<table style='height:100%;width:581px;' cellspacing='0'>";
+		} else {
+      $s_return .= "<table style='height:100%;width:600px;' cellspacing='0'>";
+    }
 		$i_alternate=0;
 	
 		if(isset($_GET['start'])){
@@ -230,6 +220,7 @@ class divlist {
   			$s_return .= "<tr><td colspan='".$this->cols."' align='center'>".range_selector($this->_numentries(),$start,$this->i_entriesPerPage)."</td></tr>";
   		}
     } else {
+      // $this->i_entriesPerPage <= 0
       // We should display all entries on one page
 
       $i = $this->_numEntries();
@@ -271,18 +262,19 @@ class divlist {
 		  }
     }
 
-    // if fewer than 22 Entries (list not full), print row to fill empty space
-    if($this->_numEntries()<22){
+    // if fewer than 20 Entries (list not full), print row to fill empty space
+    if($this->_numEntries()<20){
       $fill= "";
       for ($i= 1; $i <= $this->cols; $i++){
         if ($i == $this->cols){
-         $fill.= "<td class='list1' style='height:100%;border-right:0px';>&nbsp;</td>";
+         $fill.= "<td class='list1' id='fill' style='border-right:0px';>&nbsp;</td>";
         } else {
-         $fill.= "<td class='list1' style='height:100%';>&nbsp;</td>";
+         $fill.= "<td class='list1' id='fill'>&nbsp;</td>";
         }
       }
       $s_return.="\n<tr>$fill</tr>";
     }
+    $s_return .= "\n</table></div></td></tr>";
     return $s_return;
   }
 }

@@ -341,10 +341,10 @@ class gofonMacro extends plugin
 
     $divlist = new divlist("macrotabs");
     $divlist->SetHeader(array(
-                              array("string" => "&nbsp;"),
-                              array("string" => _("Username")." / "._("Department")),
-                              array("string" => _("Visible"), "attach" => "style='width:30px;'"),
-                              array("string" => _("Actions"), "attach" => "style='border:none'" )));
+                              array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
+                              array("string" => _("Username")." / "._("Department"), "attach" => "style=''"),
+                              array("string" => _("Visible"), "attach" => "style='width:50px;'"),
+                              array("string" => _("Actions"), "attach" => "style='width:52px;border-right:0px;text-align:right;'" )));
 
 
     $divlist->SetSummary(_("This table displays all phone macros, in the selected tree."));
@@ -367,10 +367,10 @@ class gofonMacro extends plugin
         }
       }
 
-      $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>","attach"=>"style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
-      $field3 = array("string" => "&nbsp;");
-      $field4 = array("string" => "&nbsp;", "attach"=>"style='border:none;text-align:right;width:48px;'");
+      $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
+      $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
+      $field3 = array("string" => "&nbsp;", "attach" => "style='width:50px;'");
+      $field4 = array("string" => "&nbsp;", "attach" => "style='width:52px;border-right:0px;text-align:right;'");
       $divlist->AddEntry(array($field1,$field2,$field3,$field4));
     }
 
@@ -397,10 +397,10 @@ class gofonMacro extends plugin
         $pic1 = $invisible;
       }
 
-      $field1 = array("string" => sprintf($macroimg,$val['dn']),"attach"=>"style='width:20px;text-align:center;'");
-      $field2 = array("string" => sprintf($editlink,$key,$display),"attach"=>"title='".$val['dn']."'");
-      $field3 = array("string" => $pic1, "attach" => "style='width:20px;text-align:right;'");
-      $field4 = array("string" => preg_replace("/%KEY%/", "$key", $action),"attach" => "style='border:none;text-align:right;width:48px;'");
+      $field1 = array("string" => sprintf($macroimg,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
+      $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='".$val['dn']."'");
+      $field3 = array("string" => $pic1, "attach" => "style='width:50px;'");
+      $field4 = array("string" => preg_replace("/%KEY%/", "$key", $action), "attach" => "style='width:52px;border-right:0px;text-align:right;'");
 
       $divlist->AddEntry(array($field1,$field2,$field3,$field4));
     }

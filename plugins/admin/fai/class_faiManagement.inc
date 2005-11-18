@@ -471,10 +471,10 @@ class faiManagement extends plugin
 		$divlist->SetSummary(_("This table displays all systems, in the selected tree."));
 
 		$divlist->SetHeader(array(
-					array("string" => "&nbsp;"),
-					array("string" => _("Name of FAI class")),
-					array("string" => _("Class type")),
-					array("string" => _("Actions"), "attach"=>"style='border-right:none;width:40px;'")));
+					array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
+					array("string" => _("Name of FAI class"), "attach" => "style=''"),
+					array("string" => _("Class type"), "attach" => "style='width:200px;'"),
+					array("string" => _("Actions"), "attach" => "style='width:52px;border-right:0px;text-align:right;'")));
 
 
 		$action  = "<input type='image' src='images/edit.png' 	alt='"._("edit")."'   name='entry_edit_%KEY%' title='"._("Edit class")."'>";
@@ -498,10 +498,10 @@ class faiManagement extends plugin
 
 
 			$title = $this->config->departments[$key];
-			$field0 = array("string" => "<img src='images/".$non_empty."folder.png' title='"._("department")."' alt='department'>",                     "attach"=>"style='text-align:center;width:20px;'");
-			$field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "title='".$title."'");
-			$field2 = array("string" => "");
-			$field3 = array("string" => "","attach"=>"style='width:48px;text-align:right;border-right:none;'");
+			$field0 = array("string" => "<img src='images/".$non_empty."folder.png' title='"._("department")."' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
+			$field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style='' title='".$title."'");
+			$field2 = array("string" => "&nbsp;", "attach" => "style='width:200px;'");
+			$field3 = array("string" => "&nbsp;", "attach" => "style='width:52px;border-right:0px;text-align:right;'");
 
 			$divlist->AddEntry( array($field0,$field1,$field2,$field3));
 
@@ -577,10 +577,10 @@ class faiManagement extends plugin
 						$desc= "";
 					}
 
-					$field1 = array("string" => $img , "attach" => "style='text-align:center;width=20px;'");
-					$field2 = array("string" => preg_replace(array("/%KEY%/","/%NAME%/"),array($key,$value['cn'].$desc),$editlink) , "attach" => "");
-					$field3 = array("string" => $info, "attach" => "");
-					$field4 = array("string" => preg_replace("/%KEY%/",$key,$action) , "attach"=>"style='width:48px;text-align:right;border:none'");
+					$field1 = array("string" => $img , "attach" => "style='text-align:center;width:20px;'");
+					$field2 = array("string" => preg_replace(array("/%KEY%/","/%NAME%/"),array($key,$value['cn'].$desc),$editlink) , "attach" => "style=''");
+					$field3 = array("string" => $info, "attach" => "style='width:200px;'");
+					$field4 = array("string" => preg_replace("/%KEY%/",$key,$action) , "attach" => "style='width:52px;border-right:0px;text-align:right;'");
 					$divlist->AddEntry(array($field1,$field2,$field3,$field4));
 
 			}

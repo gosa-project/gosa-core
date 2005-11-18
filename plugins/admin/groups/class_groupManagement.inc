@@ -384,12 +384,11 @@ class groupManagement extends plugin
 
     $divlist = new divlist("groupstab");
     $divlist->SetHeader(array(
-          array("string" => "&nbsp;"),
-          array("string" => _("Groupname")." / "._("Department")),
-          array("string" => _("Properties"), "attach" => "style='width:116px;'"),
-          array("string" => _("Actions")    ,"attach" => "style='border:none'")
+          array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
+          array("string" => _("Groupname")." / "._("Department"), "attach" => "style=''"),
+          array("string" => _("Properties"), "attach" => "style='width:136px;'"),
+          array("string" => _("Actions"), "attach" => "style='width:52px;border-right:0px;text-align:right;'")
           ));
-
 
     $divlist->SetSummary(_("This table displays all groups, in the selected tree."));
     $divlist->SetEntriesPerPage(0);
@@ -409,10 +408,10 @@ class groupManagement extends plugin
       }
 
 
-      $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>","attach"=>"style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val));
-      $field3 = array("string" => "&nbsp;");
-      $field4 = array("string" => "&nbsp;","attach"=>"style='text-align:right;border:none;width:48px;'");
+      $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
+      $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
+      $field3 = array("string" => "&nbsp;", "attach" => "style='width:136px;'");
+      $field4 = array("string" => "&nbsp;", "attach" => "style='width:52px;border-right:0px;text-align:right;'");
 
       $divlist->AddEntry(array($field1,$field2,$field3,$field4));
     }
@@ -437,10 +436,10 @@ class groupManagement extends plugin
       }else{
         $desc = " - [ ".$val['description'][0]." ]";
       }      
-      $field1 = array("string" => sprintf($userimg,$val['dn']),"attach"=>"style='width:20px;text-align:center;'");
-      $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)),"attach"=>$title);
-      $field3 = array("string" => $posix."&nbsp;".$enviro."&nbsp;".$mail."&nbsp;".$samba."&nbsp;".$appl."&nbsp;".$phone,"attach"=>"style='text-align:left;width:136px;'");  
-      $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions),"attach"=>"style='text-align:right;border:none;width:48px;'");
+      $field1 = array("string" => sprintf($userimg,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
+      $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)), "attach" => "style='' ".$title);
+      $field3 = array("string" => $posix."&nbsp;".$enviro."&nbsp;".$mail."&nbsp;".$samba."&nbsp;".$appl."&nbsp;".$phone, "attach" => "style='width:136px;'");  
+      $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:52px;border-right:0px;text-align:right;'");
       
       $divlist->AddEntry(array($field1,$field2,$field3,$field4));    
     }
