@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alessandro Amici <a.amici@bopen.it>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-11-18 14:47+0100\n"
+"PO-Revision-Date: 2005-11-18 15:26+0100\n"
 "Last-Translator: Alessandro Amici <a.amici@bopen.it>\n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
@@ -48,7 +48,7 @@ msgstr "Extra"
 #: plugins/personal/samba/samba2.tpl:6 plugins/personal/samba/samba3.tpl:6
 #: plugins/personal/posix/generic.tpl:4 plugins/personal/mail/generic.tpl:4
 msgid "Generic"
-msgstr "Generico"
+msgstr "Generale"
 
 #: contrib/gosa.conf:71
 msgid "Unix"
@@ -1704,7 +1704,9 @@ msgstr "Controllo il supporto per %s"
 msgid ""
 "The function %s is used by GOsa. There is no information if it's optional or "
 "required yet."
-msgstr "La funzione %s è usata da GOsa. Non è specificato se è opzionale o necessaria."
+msgstr ""
+"La funzione %s è usata da GOsa. Non è specificato se è opzionale o "
+"necessaria."
 
 #: include/functions_setup.inc:395
 msgid "Checking for some additional programms"
@@ -2070,7 +2072,6 @@ msgstr ""
 "cambiamenti sono applicati immediatamente al server LDAP."
 
 #: plugins/generic/welcome/welcome.tpl:8
-#, fuzzy
 msgid ""
 "Use 'Sign out' on the upper left to close the connection and 'Main' to get "
 "back to the pictogram view."
@@ -2277,9 +2278,8 @@ msgstr "Root"
 #: plugins/admin/users/class_userManagement.inc:671
 #: plugins/admin/groups/class_groupManagement.inc:353
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:296
-#, fuzzy
 msgid "Go to users department"
-msgstr "Mostra utenti del dipartimento"
+msgstr "Vai agli utenti del dipartimento"
 
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:293
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:329
@@ -2312,7 +2312,6 @@ msgstr "Nuova conferenza"
 #: plugins/admin/users/class_userManagement.inc:676
 #: plugins/admin/groups/class_groupManagement.inc:359
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:299
-#, fuzzy
 msgid "Current base"
 msgstr "Password attuale"
 
@@ -2326,9 +2325,8 @@ msgstr "Password attuale"
 #: plugins/admin/users/class_userManagement.inc:677
 #: plugins/admin/groups/class_groupManagement.inc:360
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:300
-#, fuzzy
 msgid "Submit department"
-msgstr "Mostra dipartimenti"
+msgstr "Imposta dipartimento"
 
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:298
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:334
@@ -2353,18 +2351,16 @@ msgstr ""
 #: plugins/admin/users/class_userManagement.inc:680
 #: plugins/admin/groups/class_groupManagement.inc:364
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:303
-#, fuzzy
 msgid "edit"
-msgstr "Modifica"
+msgstr "modifica"
 
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:302
 #: plugins/admin/ogroups/class_ogroupManagement.inc:372
 #: plugins/admin/departments/class_departmentManagement.inc:294
 #: plugins/admin/applications/class_applicationManagement.inc:337
 #: plugins/admin/groups/class_groupManagement.inc:364
-#, fuzzy
 msgid "Edit this entry"
-msgstr "Modifica contatto"
+msgstr "Modifica questo record"
 
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:303
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:305
@@ -2377,9 +2373,8 @@ msgstr "Modifica contatto"
 #: plugins/admin/users/class_userManagement.inc:682
 #: plugins/admin/groups/class_groupManagement.inc:365
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:304
-#, fuzzy
 msgid "delete"
-msgstr "Rimuovi"
+msgstr "elimina"
 
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:303
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:305
@@ -2387,18 +2382,16 @@ msgstr "Rimuovi"
 #: plugins/admin/departments/class_departmentManagement.inc:295
 #: plugins/admin/applications/class_applicationManagement.inc:338
 #: plugins/admin/groups/class_groupManagement.inc:365
-#, fuzzy
 msgid "Delete this entry"
-msgstr "Rimuovi"
+msgstr "Elimina questo record"
 
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:311
 msgid "This table displays all available conference rooms."
 msgstr ""
 
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:315
-#, fuzzy
 msgid "Name - Number"
-msgstr "Numero di telefono"
+msgstr "Nome - Numero"
 
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:316
 #: plugins/admin/fai/faiTemplateEntry.tpl:62
@@ -2425,9 +2418,8 @@ msgid "Actions"
 msgstr "Azioni"
 
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:371
-#, fuzzy
 msgid "Conference"
-msgstr "Riferimenti"
+msgstr "Conferenza"
 
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:193
 msgid ""
@@ -2709,9 +2701,8 @@ msgid "Conference management"
 msgstr "Riferimenti"
 
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:25
-#, fuzzy
 msgid "Phone macros"
-msgstr "Rapporti telefono"
+msgstr "Macro telefiche"
 
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:26
 #: plugins/gofon/reports/class_fonreport.inc:7
@@ -3431,9 +3422,8 @@ msgstr "Telefono"
 
 #: plugins/gofon/phoneaccount/generic.tpl:59
 #: plugins/gofon/phoneaccount/generic.tpl:60
-#, fuzzy
 msgid "Phone macro"
-msgstr "Rapporti telefono"
+msgstr "Macro telefonica"
 
 #: plugins/gofon/phoneaccount/generic.tpl:67
 #, fuzzy
@@ -4886,7 +4876,7 @@ msgstr "Impostazioni FAX"
 #: plugins/admin/ogroups/phonequeue.tpl:96
 #, fuzzy
 msgid "Generic queue Settings"
-msgstr "Informazioni generiche"
+msgstr "Impostazioni generali delle code"
 
 #: plugins/admin/ogroups/phonequeue.tpl:18
 #, fuzzy
@@ -5656,9 +5646,8 @@ msgid ""
 msgstr ""
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:106
-#, fuzzy
 msgid "Can't get ppd informations."
-msgstr "Informazioni generiche"
+msgstr ""
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:122
 #, php-format
@@ -5971,17 +5960,16 @@ msgid "Select action to execute for this terminal"
 msgstr ""
 
 #: plugins/admin/systems/printer.tpl:6
-#, fuzzy
 msgid "General"
-msgstr "Generico"
+msgstr "Generale"
 
 #: plugins/admin/systems/printer.tpl:9
 msgid "Printer name"
-msgstr ""
+msgstr "Nome della stampante"
 
 #: plugins/admin/systems/printer.tpl:30
 msgid "Details"
-msgstr ""
+msgstr "Dettagli"
 
 #: plugins/admin/systems/printer.tpl:33
 #, fuzzy
@@ -5990,18 +5978,17 @@ msgstr "Impostazioni Unix"
 
 #: plugins/admin/systems/printer.tpl:37
 msgid "Printer URL"
-msgstr ""
+msgstr "URL della stampante"
 
 #: plugins/admin/systems/printer.tpl:45
 #: plugins/admin/systems/workstationService.tpl:86
 #: plugins/admin/systems/terminalService.tpl:86
 msgid "Driver"
-msgstr ""
+msgstr "Driver"
 
 #: plugins/admin/systems/printer.tpl:57
-#, fuzzy
 msgid "Permissions"
-msgstr "Permessi dei membri"
+msgstr "Permessi"
 
 #: plugins/admin/systems/printer.tpl:64
 msgid "Users which are allowed to use this printer"
@@ -7748,9 +7735,8 @@ msgstr "Amministrazione dei gruppi di utenti"
 
 #: plugins/addons/mailqueue/class_mailqueue.inc:6
 #: plugins/addons/mailqueue/main.inc:23
-#, fuzzy
 msgid "Mail queue"
-msgstr "Server"
+msgstr "Coda della posta"
 
 #: plugins/addons/mailqueue/class_mailqueue.inc:46
 msgid ""
@@ -9743,7 +9729,7 @@ msgstr "Non hai il permesso di cambiare la tua password."
 
 #: plugins/personal/generic/main.inc:189
 msgid "Generic user information"
-msgstr "Informazioni generiche"
+msgstr "Informazioni generali"
 
 #: plugins/personal/samba/class_sambaAccount.inc:196
 msgid "This account has no samba extensions."
