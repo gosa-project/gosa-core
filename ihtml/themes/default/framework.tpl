@@ -5,24 +5,24 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#CDF6BD" summary="" >
   <tr>
     <td style="height:36px; width:140px; vertical-align:bottom; text-align:center">
-     <a href="main.php" style="vertical-align:bottom;"><img src='{$go_logo}' border="0" alt="GOSA2" align="bottom"></a>
+     <a href="main.php" style="vertical-align:bottom;"><img src='{$go_logo}' border="0" alt="GOSA2" style='vertical-align:bottom;'></a>
     </td>
     <td>
       <table style="margin-left:20px;" border=0 summary="">
        <tr>
         <td valign="middle">
 	 <a class=maintitlebar href='main.php?reset=1' onClick='return question("{t}You are currently editing a database entry. Do you want to dismiss the changes?{/t}", "main.php?reset=1");' style="vertical-align:middle;">
-	  <img src='{$go_home}' align="middle" border="0" alt="GOSA2">&nbsp;{t}Main{/t}
+	  <img src='{$go_home}' style='vertical-align:middle;text-align:center;' border="0" alt="GOSA2">&nbsp;{t}Main{/t}
 	 </a>
 	</td>
         <td>
 	 <a class=maintitlebar style="margin-left:35px; vertical-align:middle;" {$help_method}>
-          <img src='{$go_help}' align="middle" border="0" alt="GOSA2">&nbsp;{t}Help{/t}
+          <img src='{$go_help}' style='vertical-align:middle;text-align:center;' border="0" alt="GOSA2">&nbsp;{t}Help{/t}
          </a>
 	</td>
 	<td>
 	 <a class=maintitlebar href='logout.php' onClick='return question("{t}You are currently editing a database entry. Do you want to dismiss the changes?{/t}", "logout.php");' style="margin-left:35px; vertical-align:middle;">
-          <img src='{$go_out}' align="middle" border="0" alt="GOSA2">&nbsp;{t}Sign out{/t}
+          <img src='{$go_out}' style='vertical-align:middle;text-align:center;' border="0" alt="GOSA2">&nbsp;{t}Sign out{/t}
          </a>
 	</td>
        </tr>
