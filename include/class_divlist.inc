@@ -98,7 +98,7 @@ class divlist {
     // Attach a 18px-wide column (used as scrollbar space in body-table),
     // but do this only if we are really using scrolltables.
     if($this->i_entriesPerPage == 0) {
-      if($this->_numEntries()>20) {
+      if($this->_numEntries()>=20) {
         $s_return .= "\n<td class='listheader' id='scrollbar'>&nbsp;</td>";
       }
       $s_return .= "\n</table></td></tr>";
@@ -120,8 +120,8 @@ class divlist {
    
     // We need to construct a "body"-table that is width-of-scrollbar thinner than the "head"-table. I assume 18px as max.
     $s_return .= "\n<tr><td class='scrollbody'><div style='align:left;width:600px;height:480px;overflow:auto;'>";
-    // Only reduce width if we need a scrollbar (>20 Entries)
-    if($this->_numEntries()>20) {
+    // Only reduce width if we need a scrollbar (>19 Entries)
+    if($this->_numEntries()>=20) {
       $s_return .= "<table style='height:100%;width:581px;' cellspacing='0'>";
 		} else {
       $s_return .= "<table style='height:100%;width:600px;' cellspacing='0'>";
@@ -262,8 +262,8 @@ class divlist {
 		  }
     }
 
-    // if fewer than 20 Entries (list not full), print row to fill empty space
-    if($this->_numEntries()<20){
+    // if fewer than 19 Entries (list not full), print row to fill empty space
+    if($this->_numEntries()<19){
       $fill= "";
       for ($i= 1; $i <= $this->cols; $i++){
         if ($i == $this->cols){
