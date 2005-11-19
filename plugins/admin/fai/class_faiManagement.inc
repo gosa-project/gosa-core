@@ -474,7 +474,7 @@ class faiManagement extends plugin
 					array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
 					array("string" => _("Name of FAI class"), "attach" => "style=''"),
 					array("string" => _("Class type"), "attach" => "style='width:200px;'"),
-					array("string" => _("Actions"), "attach" => "style='width:52px;border-right:0px;text-align:right;'")));
+					array("string" => _("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'")));
 
 
 		$action  = "<input type='image' src='images/edit.png' 	alt='"._("edit")."'   name='entry_edit_%KEY%' title='"._("Edit class")."'>";
@@ -501,7 +501,7 @@ class faiManagement extends plugin
 			$field0 = array("string" => "<img src='images/".$non_empty."folder.png' title='"._("department")."' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
 			$field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style='' title='".$title."'");
 			$field2 = array("string" => "&nbsp;", "attach" => "style='width:200px;'");
-			$field3 = array("string" => "&nbsp;", "attach" => "style='width:52px;border-right:0px;text-align:right;'");
+			$field3 = array("string" => "&nbsp;", "attach" => "style='width:60px;border-right:0px;text-align:right;'");
 
 			$divlist->AddEntry( array($field0,$field1,$field2,$field3));
 
@@ -580,7 +580,7 @@ class faiManagement extends plugin
 					$field1 = array("string" => $img , "attach" => "style='text-align:center;width:20px;'");
 					$field2 = array("string" => preg_replace(array("/%KEY%/","/%NAME%/"),array($key,$value['cn'].$desc),$editlink) , "attach" => "style=''");
 					$field3 = array("string" => $info, "attach" => "style='width:200px;'");
-					$field4 = array("string" => preg_replace("/%KEY%/",$key,$action) , "attach" => "style='width:52px;border-right:0px;text-align:right;'");
+					$field4 = array("string" => preg_replace("/%KEY%/",$key,$action) , "attach" => "style='width:60px;border-right:0px;text-align:right;'");
 					$divlist->AddEntry(array($field1,$field2,$field3,$field4));
 
 			}

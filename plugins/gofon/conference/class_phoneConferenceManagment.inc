@@ -315,7 +315,7 @@ class phoneConferenceManagment extends plugin
           array("string" =>_("Name - Number"), "attach" => "style=''"),
           array("string" => _("Owner"), "attach" => "style='width:200px;'"),
           array("string" => _("PIN"), "attach" => "style='width:50px;'"),
-          array("string" =>_("Actions"), "attach" => "style='width:52px;border-right:0px;text-align:right;'")));
+          array("string" =>_("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'")));
 
     /* Insert departments in divlist*/
     foreach($this->departments as $key=> $val){
@@ -336,7 +336,7 @@ class phoneConferenceManagment extends plugin
       $a_field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
       $a_field3 = array("string" => "&nbsp;", "attach" => "style='width:200px;'");
       $a_field4 = array("string" => "&nbsp;", "attach" => "style='width:50px;'");
-      $a_field5 = array("string" => "&nbsp;",  "attach" => "style='width:52px;border-right:0px;text-align:right;'");
+      $a_field5 = array("string" => "&nbsp;",  "attach" => "style='width:60px;border-right:0px;text-align:right;'");
 
       /* Add entries */
       $divlist->AddEntry(array($a_field1,$a_field2,$a_field3,$a_field4,$a_field5));
@@ -382,7 +382,7 @@ class phoneConferenceManagment extends plugin
       $a_field4 = array("string"=> $pin, "attach" => "style='width:50px;'");
 
       if(($this->ui->dn==$conference['goFonConferenceOwner'][0])&&(chkacl($this->acl,"goFonConferenceOwner")=="")){
-        $a_field5 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions), "attach" => "style='width:52px;border-right:0px;text-align:right;'");
+        $a_field5 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions), "attach" => "style='width:60px;border-right:0px;text-align:right;'");
       }elseif(chkacl($this->acl,"goFonConferenceOwner")==""){
         $a_field5 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions2), "attach" => "style='width:52px;border-right:0px;text-align:right;'");
       }else{

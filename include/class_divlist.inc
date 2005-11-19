@@ -99,9 +99,9 @@ class divlist {
     // but do this only if we are really using scrolltables.
     if($this->i_entriesPerPage == 0) {
       if($this->_numEntries()>=20) {
-        $s_return .= "\n<td class='listheader' id='scrollbar'>&nbsp;</td>";
+        $s_return .= "\n<td class='listheader' style='width:13px;border-right:0px;'>&nbsp;</td>";
       }
-      $s_return .= "\n</table></td></tr>";
+      $s_return .= "\n</table></td>";
     }
 
   	$s_return .= "\n</tr>";
@@ -118,10 +118,11 @@ class divlist {
 		$s_key 		= "";
 		$s_return 	= "";
    
-    // We need to construct a "body"-table that is width-of-scrollbar thinner than the "head"-table. I assume 18px as max.
+    // We need to construct a "body"-table that is width-of-scrollbar thinner than the "head"-table.
     $s_return .= "\n<tr><td class='scrollbody'><div style='align:left;width:600px;height:480px;overflow:auto;'>";
+
     // Only reduce width if we need a scrollbar (>19 Entries)
-    if($this->_numEntries()>=20) {
+    if($this->_numEntries()>19) {
       $s_return .= "<table style='height:100%;width:581px;' cellspacing='0'>";
 		} else {
       $s_return .= "<table style='height:100%;width:600px;' cellspacing='0'>";
@@ -141,141 +142,142 @@ class divlist {
 
     /* If divlist is empty, append a single white entry */
     if(count($this->a_entries)==0){
-      $str = "<tr>";
-      for($i = 0 ; $i < count($this->a_header[0]); $i++){
-        $str.="<td class='list1' style='height:100%';>&nbsp;</td>";
-      }
-      $str .="</tr>";
+      $str = $s_return."<tr>";
+      //for($i = 0 ; $i < count($this->a_header[0]); $i++){
+        $str.="<td class='list1' style='height:100%;border-right:0px;'>&nbsp;</td>";
+      //}
+      $str.="</tr></table></div></td></tr>";
       return($str);
-    }
- 
-    if ($this->i_entriesPerPage > 0) {
-  		while($start > $this->_numentries()){
-  			$start = $start - $this->i_entriesPerPage;
-  		}	
-  
-  		$stop  = $start + $this->i_entriesPerPage;
-  
-  		$appendempty = ($this->_numentries() -$start);
-  
-  		for($i = $start ; $i < $stop;$i++){
-  			
-  			if(isset($this->a_entries[$i])){
-  							
-  				$s_value = $this->a_entries[$i];
-  				
-  				
-  				if($i_alternate) $i_alternate=0; else $i_alternate=1;
-  				
-  				$s_return .= "\n<tr>";
-  				
-  				$cnt = 0; 					
-  					
-  				foreach($s_value as $s_key2 => $s_value2 ){				
-  
-  					$this->cols = count($s_value) ;						
-  					$cnt++;					
-  
-  					if(!isset($s_value2['class'])){
-  						$class = "list".$i_alternate; 
-  					}else{
-  						$class = $s_value2['class'];
-  					}
-  
-  					if(!isset($s_value2['attach'])){
-  						$style = "";
-  					}else{
-  						$style = " ".$s_value2['attach']." "	;
-  					}
-  
-  					$s_return .= "\n<td ".$style." class='".$class."'>";
-  					$s_return .= $s_value2['string'];
-  					$s_return .= "\n</td>";
-  				}
-  				if($cnt == 0 ){
-  					$s_return.="\n<td>&nbsp;</td>";
-  				}
-
-  				$s_return .= "\n</tr>";
-  			}	
-  		}
-  
-  		if(!(($stop)<$this->_numentries())){
-  			$nums = $stop - $this->_numentries();// - $stop;
-  			for($i = 0 ; $i < $nums ; $i ++ ){
-  				$s_return.="<tr>";
-  				$cnt=0;
-  				for($a = 0 ; $a < (count($this->a_header[0])) ; $a ++ ) {
-  					if($a ==(count($this->a_header[0])-1)){
-  						$s_return.="\n<td class='list1' style='border:0px;' height='26'>&nbsp;</td>";
-  					} else {
-  						$s_return.="\n<td class='list1' height='26'>&nbsp;</td>";
-  					}
-  				}
-  				$s_return.="\n</tr>";
-  			}	
-  		}
-  
-  		if($this->b_displayPageNums){
-  			$s_return .= "<tr><td colspan='".$this->cols."' align='center'>".range_selector($this->_numentries(),$start,$this->i_entriesPerPage)."</td></tr>";
-  		}
     } else {
-      // $this->i_entriesPerPage <= 0
-      // We should display all entries on one page
-
-      $i = $this->_numEntries();
-	    foreach($this->a_entries as $s_key => $s_value){
-			  $i--;
-
-        if($i_alternate!=0){ 
-          $i_alternate=0; 
-        } else {
-          $i_alternate=1;
-        }
-		  
-        $s_return .= "\n<tr>";
-				  
-		    $cnt = 0; 					
-					  
-			  foreach($s_value as $s_key2 => $s_value2 ){				
-
-				  $this->cols = count($s_value) ;						
-				  $cnt++;					
-
-				  if(!isset($s_value2['class'])){
-					  $class = "list".$i_alternate; 
-				  } else {
-					  $class = $s_value2['class'];
-				  }
-
-				  if(!isset($s_value2['attach'])){
-					  $style = "";
-				  } else {
-					  $style = " ".$s_value2['attach']." "	;
-				  }
-          
-          $s_return .= "\n<td ".$style." class='".$class."'>";
-				  $s_return .= $s_value2['string'];
-				  $s_return .= "</td>";
-			  }
-			  $s_return .= "\n</tr>";
-		  }
-    }
-
-    // if fewer than 19 Entries (list not full), print row to fill empty space
-    if($this->_numEntries()<19){
-      $fill= "";
-      for ($i= 1; $i <= $this->cols; $i++){
-        if ($i == $this->cols){
-         $fill.= "<td class='list1' id='fill' style='border-right:0px';>&nbsp;</td>";
-        } else {
-         $fill.= "<td class='list1' id='fill'>&nbsp;</td>";
-        }
+    
+      if ($this->i_entriesPerPage > 0) {
+    		while($start > $this->_numentries()){
+    			$start = $start - $this->i_entriesPerPage;
+    		}	
+    
+    		$stop  = $start + $this->i_entriesPerPage;
+    
+    		$appendempty = ($this->_numentries() -$start);
+    
+    		for($i = $start ; $i < $stop;$i++){
+    			
+    			if(isset($this->a_entries[$i])){
+    							
+    				$s_value = $this->a_entries[$i];
+    				
+    				
+    				if($i_alternate) $i_alternate=0; else $i_alternate=1;
+    				
+    				$s_return .= "\n<tr>";
+    				
+    				$cnt = 0; 					
+    					
+    				foreach($s_value as $s_key2 => $s_value2 ){				
+    
+    					$this->cols = count($s_value) ;						
+    					$cnt++;					
+    
+    					if(!isset($s_value2['class'])){
+    						$class = "list".$i_alternate; 
+    					}else{
+    						$class = $s_value2['class'];
+    					}
+    
+    					if(!isset($s_value2['attach'])){
+    						$style = "";
+    					}else{
+    						$style = " ".$s_value2['attach']." "	;
+    					}
+    
+    					$s_return .= "\n<td ".$style." class='".$class."'>";
+    					$s_return .= $s_value2['string'];
+    					$s_return .= "\n</td>";
+    				}
+    				if($cnt == 0 ){
+    					$s_return.="\n<td>&nbsp;</td>";
+    				}
+  
+    				$s_return .= "\n</tr>";
+    			}	
+    		}
+    
+    		if(!(($stop)<$this->_numentries())){
+    			$nums = $stop - $this->_numentries();// - $stop;
+    			for($i = 0 ; $i < $nums ; $i ++ ){
+    				$s_return.="<tr>";
+    				$cnt=0;
+    				for($a = 0 ; $a < (count($this->a_header[0])) ; $a ++ ) {
+    					if($a ==(count($this->a_header[0])-1)){
+    						$s_return.="\n<td class='list1' style='border:0px;' height='26'>&nbsp;</td>";
+    					} else {
+    						$s_return.="\n<td class='list1' height='26'>&nbsp;</td>";
+    					}
+    				}
+    				$s_return.="\n</tr>";
+    			}	
+    		}
+    
+    		if($this->b_displayPageNums){
+    			$s_return .= "<tr><td colspan='".$this->cols."' align='center'>".range_selector($this->_numentries(),$start,$this->i_entriesPerPage)."</td></tr>";
+    		}
+      } else {
+        // $this->i_entriesPerPage <= 0
+        // We should display all entries on one page
+  
+        $i = $this->_numEntries();
+  	    foreach($this->a_entries as $s_key => $s_value){
+  			  $i--;
+  
+          if($i_alternate!=0){ 
+            $i_alternate=0; 
+          } else {
+            $i_alternate=1;
+          }
+  		  
+          $s_return .= "\n<tr>";
+  				  
+  		    $cnt = 0; 					
+  					  
+  			  foreach($s_value as $s_key2 => $s_value2 ){				
+  
+  				  $this->cols = count($s_value) ;						
+  				  $cnt++;					
+  
+  				  if(!isset($s_value2['class'])){
+  					  $class = "list".$i_alternate; 
+  				  } else {
+  					  $class = $s_value2['class'];
+  				  }
+  
+  				  if(!isset($s_value2['attach'])){
+  					  $style = "";
+  				  } else {
+  					  $style = " ".$s_value2['attach']." "	;
+  				  }
+            
+            $s_return .= "\n<td ".$style." class='".$class."'>";
+  				  $s_return .= $s_value2['string'];
+  				  $s_return .= "</td>";
+  			  }
+  			  $s_return .= "\n</tr>";
+  		  }
       }
-      $s_return.="\n<tr>$fill</tr>";
+  
+      // if fewer than 19 Entries (list not full), print row to fill empty space
+      if($this->_numEntries()<19){
+        $fill= "";
+        for ($i= 1; $i <= $this->cols; $i++){
+          if ($i == $this->cols){
+           $fill.= "<td class='list1' style='height:100%;border-right:0px';>&nbsp;</td>";
+          } else {
+           $fill.= "<td class='list1' style='height:100%;'>&nbsp;</td>";
+          }
+        }
+        $s_return.="\n<tr>$fill</tr>";
+      }
+      $s_return .= "\n</table></div></td></tr>";
+      return $s_return;
     }
-    $s_return .= "\n</table></div></td></tr>";
-    return $s_return;
   }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

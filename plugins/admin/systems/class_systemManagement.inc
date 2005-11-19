@@ -587,7 +587,7 @@ class systems extends plugin
     $divlist->SetHeader(array(
           array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
           array("string" => _("System")." / "._("Department"), "attach" => "style=''"),
-          array("string" => _("Actions"), "attach" => "style='width:52px;border-right:0px;text-align:right;'" )));
+          array("string" => _("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'" )));
 
     $divlist->SetSummary(_("This table displays all systems, in the selected tree."));
     $divlist->SetEntriesPerPage(0);
@@ -611,7 +611,7 @@ class systems extends plugin
 
       $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
-      $field3 = array("string" => "&nbsp;", "attach" => "style='width:52px;border-right:0px;text-align:right;'");
+      $field3 = array("string" => "&nbsp;", "attach" => "style='width:60px;border-right:0px;text-align:right;'");
       $divlist->AddEntry(array($field1,$field2,$field3));
     }
 
@@ -670,7 +670,7 @@ class systems extends plugin
 
       $field1 = array("string" => sprintf($img['img'],$val['dn']), "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='".$val['dn']."'");
-      $field3 = array("string" => preg_replace("/%KEY%/", "$key", $action2.$action), "attach" => "style='width:52px;border-right:0px;text-align:right;'");
+      $field3 = array("string" => preg_replace("/%KEY%/", "$key", $action2.$action), "attach" => "style='width:60px;border-right:0px;text-align:right;'");
       $divlist->AddEntry( array($field1,$field2,$field3));
     }
 

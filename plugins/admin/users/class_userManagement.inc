@@ -688,7 +688,7 @@ class userManagement extends plugin
           array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
           array("string" => _("Username")." / "._("Department"), "attach" => "style=''"),
           array("string" => _("Properties"), "attach" => "style='width:152px;'"),
-          array("string" => _("Actions"), "attach" => "style='width:52px;border-right:0px;text-align:right;'")));
+          array("string" => _("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'")));
 
 
     $divlist->SetSummary(_("This table displays all users, in the selected tree."));
@@ -715,7 +715,7 @@ class userManagement extends plugin
       $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
       $field3 = array("string" => "&nbsp;", "attach" => "style='width:152px;'");
-      $field4 = array("string" => "&nbsp;", "attach" => "style='width:52px;border-right:0px;text-align:right;'");
+      $field4 = array("string" => "&nbsp;", "attach" => "style='width:60px;border-right:0px;text-align:right;'");
 
 
       $divlist->AddEntry(array($field1,$field2,$field3,$field4));
@@ -868,7 +868,7 @@ class userManagement extends plugin
       $field1 = array("string" => sprintf($tpl,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($editlink,$key,$display).$ip_port, "attach" => "style='' title='".$val['dn']."'");
       $field3 = array("string" => $usrimg2."&nbsp;".$posix."&nbsp;".$enviro."&nbsp;".$maila."&nbsp;".$fonac."&nbsp;".$faxac."&nbsp;".$samba."&nbsp;".$s_img_create_from_template, "attach" => "style='width:152px;'");
-      $field4 = array("string" => preg_replace("/%KEY%/", "$key", $action),"attach" => "style='width:52px;border-right:0px;text-align:right;'");
+      $field4 = array("string" => preg_replace("/%KEY%/", "$key", $action),"attach" => "style='width:60px;border-right:0px;text-align:right;'");
 
       $add = array($field1,$field2,$field3,$field4);
 

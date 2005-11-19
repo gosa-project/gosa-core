@@ -355,7 +355,7 @@ class applicationManagement extends plugin
         $divlist->SetHeader(array(
               array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
               array("string" => _("Application name")." / "._("Department"), "attach" => "style=''"),
-              array("string" => _("Actions"), "attach" => "style='width:52px;border-right:0px;text-align:right;'")
+              array("string" => _("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'")
               ));
 
 
@@ -378,7 +378,7 @@ class applicationManagement extends plugin
 
           $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
           $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
-          $field3 = array("string" => "&nbsp;", "attach" => "style='width:52px;border-right:0px;text-align:right;'");
+          $field3 = array("string" => "&nbsp;", "attach" => "style='width:60px;border-right:0px;text-align:right;'");
 
           $divlist->AddEntry(array($field1,$field2,$field3));
         }
@@ -393,7 +393,7 @@ class applicationManagement extends plugin
           }
           $field1 = array("string" => sprintf($applimg,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
           $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)), "attach" => "style='' ".$title);
-          $field3 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:52px;border-right:0px;text-align:right;'");
+          $field3 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:60px;border-right:0px;text-align:right;'");
 
           $divlist->AddEntry(array($field1,$field2,$field3));
         }

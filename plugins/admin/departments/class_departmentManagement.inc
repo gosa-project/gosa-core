@@ -299,7 +299,7 @@ class departmentManagement extends plugin
 			$divlist->SetHeader(array(
 						array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
 						array("string"=>_("Department name"), "attach" => "style=''"),
-						array("string" =>_("Actions"), "attach" => "style='width:52px;border-right:0px;text-align:right;'")));
+						array("string" =>_("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'")));
 
 			foreach($this->departments as $key => $val) {
 				if(!isset($this->config->departments[trim($key)])){
@@ -317,7 +317,7 @@ class departmentManagement extends plugin
 				$title = $this->config->departments[$key];
 				$field0 = array("string" => "<img src='images/".$non_empty."folder.png' title='"._("department")."' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
 				$field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style='' title='".$title."'");
-				$field2 = array("string" => preg_replace("/%KEY%/", base64_encode($key), $actions), "attach" => "style='width:52px;border-right:0px;text-align:right;'");
+				$field2 = array("string" => preg_replace("/%KEY%/", base64_encode($key), $actions), "attach" => "style='width:60px;border-right:0px;text-align:right;'");
 
 				$divlist->AddEntry( array($field0,$field1,$field2));
 
