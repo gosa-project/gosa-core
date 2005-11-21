@@ -236,7 +236,7 @@ class phoneAccount extends plugin
     }
     $this->lastmacro=$this->macro;
 
-    if(is_callable("mysql_close")&&($r_con)){
+    if(is_callable("mysql_close")&&(isset($r_con))&&($r_con)){
       @mysql_close($r_con) ;
     }
   }
