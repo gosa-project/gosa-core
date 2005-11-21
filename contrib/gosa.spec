@@ -11,7 +11,7 @@
 #
 Summary: 		Web Based LDAP Administration Program 
 Name:			gosa
-Version: 		2.4beta1
+Version: 		2.4
 Release:		1
 License: 		GPL
 Source: 		ftp://oss.GONICUS.de/pub/gosa/beta/%{sourcename}.tar.bz2
@@ -121,10 +121,10 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,%{apacheuser},%{apachegroup})
-%doc %attr(-,root,root) AUTHORS TODO README manual/README.openxchange README.safemode Changelog COPYING INSTALL FAQ
+%doc %attr(-,root,root) AUTHORS TODO README manual/* README.safemode Changelog COPYING INSTALL FAQ
 %doc %attr(-,root,root) manual 
 %doc %attr(-,root,root) contrib/altlinux contrib/fix_config.sh contrib/gosa.conf contrib/mysql contrib/opensides
-%doc %attr(-,root,root) contrib/patches contrib/postgresql contrib/scripts contrib/vacation_example.txt
+%doc %attr(-,root,root) contrib/patches contrib/scripts contrib/vacation_example.txt
 
 %config(noreplace) %attr(0600,%{apacheuser},%{apachegroup}) %{webconf}/gosa_include.conf
 %config(noreplace) %attr(0700,%{apacheuser},%{apachegroup}) /etc/gosa
