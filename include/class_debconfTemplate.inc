@@ -94,6 +94,7 @@ class debconf
         if (!$got_local_description && preg_match("/^Description: /", $line)){
           $description= trim(preg_replace("/^Description: (.*)$/", "\\1", $line));
           $this->template[$name]['Topic']= $description;
+          $this->template[$name]['Description']= "";
           $in_description= TRUE;
           continue;
         }
@@ -148,7 +149,7 @@ class debconf
 
   function has_template()
   {
-    return ($has_template);
+    return ($this->has_template);
   }
 
 
@@ -297,8 +298,8 @@ class debconf
 }
 
 # Example:
-# $debconf= new debconf("xserver-xorg", "de");
-# echo $debconf->get_dialog();
+$debconf= new debconf("libnss-ldap", "de");
+echo $debconf->get_dialog();
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
