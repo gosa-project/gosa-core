@@ -53,19 +53,45 @@ class appgroup extends plugin
 
     $tmp = array();
     $tmp2 = array();
+  
+    $prios = array();
+
     foreach($this->gosaMemberApplication as $memberApp){
       if(preg_match("/\|/i",$memberApp)){
         $tmp = split("\|",$memberApp);
         $tmp2[$tmp[0]."|".$tmp[1]]['App'] = $tmp[0];
         $tmp2[$tmp[0]."|".$tmp[1]]['Cat'] = $tmp[1];
         $tmp2[$tmp[0]."|".$tmp[1]]['Pri'] = $tmp[2];
+    
+        $cats [$tmp[1]] = $tmp[1];
+        $prios[$tmp[1]][$tmp[2]] = $tmp[2];
       }else{
         $tmp2[$memberApp."|"]['App'] = $memberApp;
         $tmp2[$memberApp."|"]['Cat'] = "";
-        $tmp2[$memberApp."|"]['Pri'] = 100;
+        $tmp2[$memberApp."|"]['Pri'] = 1000;
       }
     }
+
     $this->gosaMemberApplication = $tmp2;
+    foreach($cats as $cat ){
+      $max = max($prios[$cat]);
+      $min = 1;//min($prios[$cat]);  
+      for($i = $min ; $i < $max ; $i++){
+        if(!isset($prios[$cat][$i])){
+          $this->gosaMemberApplication["__SEPARATOR__".$i."|".$cat]['Pri'] = $i;
+          $this->gosaMemberApplication["__SEPARATOR__".$i."|".$cat]['Cat'] = $this->curCatDir;
+          $this->gosaMemberApplication["__SEPARATOR__".$i."|".$cat]['App'] = "__SEPARATOR__".$i;
+        }
+      }
+    }
+
+    /* Append at last*/
+    foreach($this->gosaMemberApplication as $key => $app){
+      if($app['Pri'] == 1000){
+        $this->gosaMemberApplication[$key]['Pri'] = $this->getNextFree(1,$app['Cat']);
+      }
+    }
+  
   
     $this->curbase = $this->config->current['BASE'];
   }
@@ -111,11 +137,21 @@ class appgroup extends plugin
     return($ret);
   }
 
+  function AddSeperator()
+  {
+    $i = 1;
+    while(isset($this->gosaMemberApplication["__SEPARATOR__".$i."|".$this->curCatDir])){
+      $i ++;
+    }
+    $this->gosaMemberApplication["__SEPARATOR__".$i."|".$this->curCatDir]['Pri'] = $this->getNextFree(1,$this->curCatDir);
+    $this->gosaMemberApplication["__SEPARATOR__".$i."|".$this->curCatDir]['Cat'] = $this->curCatDir; 
+    $this->gosaMemberApplication["__SEPARATOR__".$i."|".$this->curCatDir]['App'] = "__SEPARATOR__".$i;
+  }
 
   function execute()
   {
 	  /* Call parent execute */
-  	plugin::execute();
+   	//plugin::execute();
     if((isset($_GET['act']))&&($_GET['act']=="depopen")){
       $dep = base64_decode($_GET['depid']);  
       if(isset($this->config->idepartments[$dep])){
@@ -123,6 +159,9 @@ class appgroup extends plugin
       }
     }
 
+    if(isset($_POST['AddSeperator'])){
+      $this->AddSeperator();
+    }
 
     if((isset($_GET['act']))&&($_GET['act']=="open")){
       $this->curCatDir = $_GET['id'];
@@ -365,15 +404,24 @@ class appgroup extends plugin
     }
 
       /* Append entries */
-  
+
+    $separator ="<hr height=1  size=1></hr>"; 
+ 
     $upudown = "<a href='?plug=".$_GET['plug']."&amp;act=one_up&id=%s'>   <img src='images/sort_up.png' border=0></a>".
           "&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=one_down&id=%s'> <img src='images/sort_down.png' border=0></a>".
-          "&nbsp;<input type='image' src='images/edittrash.png' name='DelApp_%s' value='%s'>".
-          "&nbsp;<input type='image' src='images/edit.png' name='EdiApp_%s' value='%s'>";
+          "&nbsp;<input type='image' src='images/edittrash.png' name='DelApp_%s' value='%s'>";
+    $edit=      "&nbsp;<input type='image' src='images/edit.png' name='EdiApp_%s' value='%s'>";
  
     foreach($menu["__ENTRY__"] as $path => $entry){
-      $div2 ->AddEntry(array(array("string"=>sprintf($app,$entry['name'],$entry['prio'])),
-                             array("string"=>sprintf($upudown,$entry['name'],$entry['name'],$entry['name'],$entry['name'],$entry['name'],$entry['name']),"attach"=>"style='border-right:0px;'")));
+
+      if(preg_match("/__SEPARATOR__/",$path)){
+        $div2 ->AddEntry(array(array("string"=>$separator),
+                         array("string"=>preg_replace("/\%s/",$entry['name'],$upudown),"attach"=>"style='border-right:0px;'")));
+
+      }else{
+        $div2 ->AddEntry(array(array("string"=>sprintf($app,$entry['name'],$entry['prio'])),
+                         array("string"=>preg_replace("/\%s/",$entry['name'],$upudown.$edit),"attach"=>"style='border-right:0px;'")));
+      }
     }
 
     $smarty->assign("UsedApps", $div2->DrawList());
@@ -420,9 +468,13 @@ class appgroup extends plugin
     plugin::save();
 
     /* Copy members */
+
+    print_a($this->attrs["gosaMemberApplication"]);
     $this->attrs["gosaMemberApplication"]= array();
     foreach ($this->gosaMemberApplication as $val){
-      $this->attrs["gosaMemberApplication"][]= $val['App']."|".$val['Cat']."|".$val['Pri'];
+      if(!preg_match("/__SEPARATOR__/i",$val['App'])){
+        $this->attrs["gosaMemberApplication"][]= $val['App']."|".$val['Cat']."|".$val['Pri'];
+      }
     }
 
     /* Are there application parameters to be saved */
