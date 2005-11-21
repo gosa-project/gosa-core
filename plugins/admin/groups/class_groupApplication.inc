@@ -118,8 +118,28 @@ class appgroup extends plugin
     }
   }
   
-  function getOneDown($prio){
-    return($prio); 
+  function getOneDown($appl){
+    $prio = $this->gosaMemberApplication[$appl]['Pri'];
+    $prios = array();
+    $next = 10000;
+    $key_use = false;
+    foreach($this->gosaMemberApplication as $key => $app){
+      if($app['Cat'] != $this->gosaMemberApplication[$appl]['Cat']) continue;
+
+      
+
+      if($app['Pri']> $prio){
+        if($app['Pri'] < $next){
+          $next     = $app['Pri'];
+          $key_use  = $key;
+        }
+      }
+    }
+
+    if($next != 0){
+      $this->gosaMemberApplication[$appl]['Pri']= $next;
+      $this->gosaMemberApplication[$key_use]['Pri']= $prio;
+    }
   }
   
   function getNextFree($prio,$cat)
@@ -468,8 +488,6 @@ class appgroup extends plugin
     plugin::save();
 
     /* Copy members */
-
-    print_a($this->attrs["gosaMemberApplication"]);
     $this->attrs["gosaMemberApplication"]= array();
     foreach ($this->gosaMemberApplication as $val){
       if(!preg_match("/__SEPARATOR__/i",$val['App'])){
