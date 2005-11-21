@@ -298,8 +298,8 @@ class debconf
 }
 
 # Example:
-$debconf= new debconf("libnss-ldap", "de");
-echo $debconf->get_dialog();
+#$debconf= new debconf("libnss-ldap", "de");
+#echo $debconf->get_dialog();
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
