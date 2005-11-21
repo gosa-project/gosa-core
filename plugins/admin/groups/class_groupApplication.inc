@@ -56,6 +56,8 @@ class appgroup extends plugin
   
     $prios = array();
 
+    $cats = array();
+
     foreach($this->gosaMemberApplication as $memberApp){
       if(preg_match("/\|/i",$memberApp)){
         $tmp = split("\|",$memberApp);
@@ -76,11 +78,18 @@ class appgroup extends plugin
     foreach($cats as $cat ){
       $max = max($prios[$cat]);
       $min = 1;//min($prios[$cat]);  
+      $last = false;
       for($i = $min ; $i < $max ; $i++){
         if(!isset($prios[$cat][$i])){
-          $this->gosaMemberApplication["__SEPARATOR__".$i."|".$cat]['Pri'] = $i;
-          $this->gosaMemberApplication["__SEPARATOR__".$i."|".$cat]['Cat'] = $this->curCatDir;
-          $this->gosaMemberApplication["__SEPARATOR__".$i."|".$cat]['App'] = "__SEPARATOR__".$i;
+          if($last == false){
+            $this->gosaMemberApplication["__SEPARATOR__".$i."|".$cat]['Pri'] = $i;
+            $this->gosaMemberApplication["__SEPARATOR__".$i."|".$cat]['Cat'] = $this->curCatDir;
+            $this->gosaMemberApplication["__SEPARATOR__".$i."|".$cat]['App'] = "__SEPARATOR__".$i;
+          
+            $last = true;
+          }
+        }else{
+          $last = false;
         }
       }
     }
@@ -229,7 +238,7 @@ class appgroup extends plugin
     $this->reload();
     foreach($_POST as $name => $value){
       if(preg_match("/DelApp_/",$name)){
-        $app = preg_replace("/DelApp_/","",$name); 
+        $app = $value; 
         unset($this->used_apps[$app]);
         unset($this->gosaMemberApplication[$app."|".$this->curCatDir]);
       }
