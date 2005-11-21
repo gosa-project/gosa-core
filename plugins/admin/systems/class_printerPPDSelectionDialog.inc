@@ -80,17 +80,17 @@ class printerPPDSelectionDialog extends plugin
     if(empty($this->Vendor)){
       foreach($this-> header as $key => $entry){
         $div ->AddEntry (array(
-              array("string"=>sprintf($linkopen,$key,$key))
+              array("string"=>sprintf($linkopen,$key,$key),"attach"=>"style='border-right:0px;'")
               ));
       }
     }else{
       $div ->AddEntry (array(
-            array("string"=>sprintf($linkopen,"",".. ["._("back")."]"))
+            array("string"=>sprintf($linkopen,"",".. ["._("back")."]"),"attach"=>"style='border-right:0px;'")
             ));
       foreach($list as $key => $ppd){
         if(preg_match("/^".$this->Vendor."/",$ppd['ppd'])){
           $div ->AddEntry (array(
-                array("string"=>sprintf($uselink,$key,$ppd['ppd']))
+                array("string"=>sprintf($uselink,$key,$ppd['ppd']),"attach"=>"style='border-right:0px;'")
                 ));
         }
       }
