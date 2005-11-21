@@ -137,6 +137,10 @@ rm -rf %{buildroot}
 /etc/openldap/schema/gosa
 
 %changelog
+* Mon Nov 21 2005 Lars Scheiter <lars.scheiter@GONICUS.de> 2.4
+- New upstream version
+- Removed %doc for postgresql and openexchange
+
 * Wed Jun 01 2005 Lars Scheiter <lars.scheiter@GONICUS.de> 2.4beta1
 - New upstream version
 - Added gosa.conf to contrib dir
