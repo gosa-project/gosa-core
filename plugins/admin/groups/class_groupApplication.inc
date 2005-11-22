@@ -225,6 +225,9 @@ class appgroup extends plugin
           foreach($cat as $key2 => $app){
             if($app['App'] == $value){
               unset($this->gosaMemberApplication[$key][$key2]);
+              if(isset($this->used_apps[$value])){
+                unset($this->used_apps[$value]);
+              }
             }
           }
         }
