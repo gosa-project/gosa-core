@@ -156,9 +156,9 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.12.25 NAME 'gosaSharedFolderTarget'
 
 attributetype ( 1.3.6.1.4.1.10098.1.1.12.26 NAME 'gosaMemberApplication'
         DESC 'Like memberUid, just for applications'
-        EQUALITY caseIgnoreIA5Match
-	SUBSTR caseIgnoreIA5SubstringsMatch
-        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+        EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15)
 
 attributetype ( 1.3.6.1.4.1.10098.1.1.12.27 NAME 'gosaApplicationParameter'
         DESC 'Store application parameters'
