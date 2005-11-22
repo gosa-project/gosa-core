@@ -451,37 +451,6 @@ class faiPackage extends plugin
       $this->attrs['FAIdebianSection'][] = $sec;
     }
 
-    /* Save Package configurations */
-    foreach($this->ConfiguredPackages as $pkgname => $attrs){
-      foreach($attrs as $name => $attr){
-
-        foreach($attr as $n=>$v){
-          if(empty($v)) $v = array();
-        }
-      
-        /* Set attributes */
-        $pkgattrs['objectClass']          = "FAIdebconfInfo";
-        $pkgattrs['FAIpackage']           = $pkgname;
-        $pkgattrs['FAIvariable']          = $name;
-        $pkgattrs['FAIvariableType']      = $attr['Type'];
-        $pkgattrs['FAIvariableContent']   = $attr['Value'];
-        $pkgdn =  "FAIvariable=".$name.",".$this->dn;
-       
-        /* cehck if object already exists */ 
-        $ldap->cat($pkgdn);
-        if($ldap->count()!=0){
-          $ldap->cd($pkgdn);
-          $ldap->modify($pkgattrs);
-        }else{
-          $ldap->cd($this->config->current['BASE']);
-          $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $pkgdn));
-          $ldap->cd($pkgdn);
-          $ldap->add($pkgattrs);
-        }
-        show_ldap_error($ldap->get_error());
-      }  
-    }
-
     $ldap->cat($this->dn);
     if($ldap->count()!=0){
       /* Write FAIscript to ldap*/
@@ -495,6 +464,41 @@ class faiPackage extends plugin
       $ldap->add($this->attrs);
     }
     show_ldap_error($ldap->get_error());
+
+      /* Save Package configurations */
+    foreach($this->ConfiguredPackages as $pkgname => $attrs){
+      foreach($attrs as $name => $attr){
+
+        foreach($attr as $n=>$v){
+          if(empty($v)) $v = array();
+        }
+
+        /* Set attributes */
+        $pkgattrs['objectClass']          = "FAIdebconfInfo";
+        $pkgattrs['FAIpackage']           = $pkgname;
+        $pkgattrs['FAIvariable']          = $name;
+        $pkgattrs['FAIvariableType']      = $attr['Type'];
+        $pkgattrs['FAIvariableContent']   = $attr['Value'];
+        $pkgdn =  "FAIvariable=".$name.",".$this->dn;
+
+        /* cehck if object already exists */
+        $ldap->cat($pkgdn);
+        if($ldap->count()!=0){
+          $ldap->cd($pkgdn);
+          $ldap->modify($pkgattrs);
+        }else{
+          $ldap->cd($this->config->current['BASE']);
+          $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $pkgdn));
+          $ldap->cd($pkgdn);
+          $ldap->add($pkgattrs);
+        }
+        show_ldap_error($ldap->get_error());
+      }
+    }
+
+
+    
+
   }
 }
 

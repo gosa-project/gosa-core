@@ -54,10 +54,11 @@ class debconf
       $this->template= array();
 
       /* Read template array */
-      $post_name= 0;
-      $langcode= $this->language.".UTF-8";
-      $in_description= FALSE;
+      $post_name              = 0;
+      $langcode             = $this->language.".UTF-8";
+      $in_description       = FALSE;
       $got_local_description= FALSE;
+
       $fh= fopen($filename, 'r');
 
       while (!feof($fh)){
@@ -71,9 +72,7 @@ class debconf
         /* Template header */
         if (preg_match("/^Template: /", $line)){
           $post_name ++; 
-  
           $name= trim(preg_replace("/^Template: (.*)$/", "\\1", $line));
-          
           $this->template[$post_name]['Name'] = $name;
           $this->template[$post_name]['Default'] ="";
          
@@ -168,10 +167,16 @@ class debconf
   }
 
 
+  /* Check if some fields are posted */
   function PostCheck()
   {
+    /* Walk through all template variables */
     foreach($this->template as $post_name => $entry){
+    
+      /* Check if this var is set*/
       if(isset($_POST[$entry['post_name']])){
+  
+        /* special handling for arrays */
         if(is_array($_POST[$entry['post_name']])){
           $str = "";
           foreach($_POST[$entry['post_name']] as $val){
@@ -187,6 +192,8 @@ class debconf
   
   }
 
+
+  /* This funtion sets the defualt value */
   function SetDefault($var,$val)
   {
     if($this->has_template){
@@ -198,6 +205,8 @@ class debconf
     }
   }
 
+
+  /* Display all possible options in html*/
   function get_dialog()
   {
     if ($this->has_template){
@@ -410,17 +419,6 @@ class debconf
     /* Ignore text messages, they are normally used for status hints. */
     return ("");
   }
-
-
-  function get_template_packages()
-  {
-  }
-
-
-  function set_default($default)
-  {
-  }
-
 
 }
 
