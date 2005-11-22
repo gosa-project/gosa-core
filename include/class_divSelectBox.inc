@@ -107,9 +107,9 @@ class divSelectBox {
     }
     for($i = 0 ; $i < ($this->cols) ; $i ++){
       if($i >= ($this->cols-1)){
-        $s_return .= "<td class='list1' height='100%' style='border:0px;'></td>";
+        $s_return .= "<td class='list1' style='height:100%;border:0px;'></td>";
       }else{
-        $s_return .= "<td class='list1' height='100%'></td>";
+        $s_return .= "<td class='list1' style='height:100%;' height='100%'></td>";
       }
       
     }
