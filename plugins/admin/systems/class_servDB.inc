@@ -192,11 +192,12 @@ class servdb extends plugin
     foreach($this->objectclasses as $oc){
       $objectclasses[]= $oc;
     }
-  
+    
+    /* Move cn to sieve server */
+    $this->goImapSieveServer= $this->cn;
+    
     plugin::save();
   
-
-
     $test = $this->objectclasses;
     $tmp = array_flip($this->attrs['objectClass']);
 
