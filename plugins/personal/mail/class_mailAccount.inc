@@ -105,8 +105,15 @@ class mailAccount extends plugin
         $id= $method->uattrib;
         if ($method->connect($this->attrs["gosaMailServer"][0])){
           $quota= $method->getQuota($this->folder_prefix.$this->$id);
-          $this->quotaUsage= $quota['quotaUsage'];
-          $this->gosaMailQuota= $quota['gosaMailQuota'];
+
+          /* Update quota values */
+          if ($quota['gosaMailQuota'] == 2147483647){
+            $this->quotaUsage= "";
+            $this->gosaMailQuota= "";
+          } else {
+            $this->quotaUsage= $quota['quotaUsage'];
+            $this->gosaMailQuota= $quota['gosaMailQuota'];
+          }
           $this->mailboxList= $method->getMailboxList(
               $this->folder_prefix.$this->$id,
               $this->$id);

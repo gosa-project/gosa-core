@@ -123,7 +123,7 @@ class mailMethodCyrus extends mailMethod
   {
     /* Workaround for the php imap extension */
     if ($gosaMailQuota == ""){
-      $gosaMailQuota= "-1";
+      $gosaMailQuota= "2147483647";
     }
 
     /* Write mail quota */

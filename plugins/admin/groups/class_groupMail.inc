@@ -119,8 +119,13 @@ class mailgroup extends plugin
           }
           
           /* Update quota values */
-          $this->quotaUsage= $quota['quotaUsage'];
-          $this->gosaMailQuota= $quota['gosaMailQuota'];
+          if ($quota['gosaMailQuota'] == 2147483647){
+            $this->quotaUsage= "";
+            $this->gosaMailQuota= "";
+          } else {
+            $this->quotaUsage= $quota['quotaUsage'];
+            $this->gosaMailQuota= $quota['gosaMailQuota'];
+          }
           $method->disconnect();
         }
 
