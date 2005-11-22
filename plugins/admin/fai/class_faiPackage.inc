@@ -27,6 +27,8 @@ class faiPackage extends plugin
   var $subAttributes    = array("cn","description"); 
   var $sub64coded       = array();
 
+  var $ConfiguredPackages = array();
+
   /* Specific attributes */
   var $cn               = "";       // The class name for this object
   var $description      = "";       // The description for this set of partitions
@@ -74,6 +76,28 @@ class faiPackage extends plugin
     }else{
       $this->usedPackages = array();
     }  
+  
+    $ldap = $this->config->get_ldap_link();
+    foreach($this->usedPackages as $name){
+      $ldap->search("(&(objectClass=FAIdebconfInfo)(FAIpackage=".$name."))");
+      while($attr = $ldap->fetch()){
+     
+        $tmp =array(); 
+        $tmp['Name']  = $attr['FAIvariable'][0];
+        $tmp['Type']  = $attr['FAIvariableType'][0];
+
+        if(!in_array($attr['FAIvariableType'],array("multiselect"))){
+          $tmp['Value'] = $attr['FAIvariableContent'][0];
+        }else{
+          $content = array();        
+          unset($attr['FAIvariableContent']['count']);
+          foreach($attr['FAIvariableContent'] as $attr){
+            $tmp['Value'][] = $attr;
+          }
+        }
+        $this->ConfiguredPackages[$attr['FAIpackage'][0]][$attr['FAIvariable'][0]]=$tmp;
+      }
+    }
 
     if (isset($this->attrs['FAIdebianSection']['count'])){
       unset($this->attrs['FAIdebianSection']['count']);
@@ -98,6 +122,7 @@ class faiPackage extends plugin
   function execute()
   {
 	/* Call parent execute */
+
 	plugin::execute();
 
     /* Fill templating stuff */
@@ -211,13 +236,20 @@ class faiPackage extends plugin
     }
 
     /* Configuration dialog open*/
-    if(isset($_POST['Conpkg'])){
-      $this->dialog = new faiPackageConfiguration($this->config, $this->dn,"none");
+    if((isset($_POST['Conpkg']))&&(isset($_POST['usedPackages']))&&(!empty($_POST['usedPackages']))){
+      $path = "/etc/gosa/fai/".preg_replace("#^[^/]+//([^/]+).*$#","\\1",$this->FAIdebianMirror)."/".$this->FAIdebianRelease."/".$sec;
+      $pkg_config = array();
+      if(isset($this->ConfiguredPackages[$_POST['usedPackages']])){
+        $pkg_config = $this->ConfiguredPackages[$_POST['usedPackages']];
+      }
+  
+      $this->dialog = new faiPackageConfiguration($this->config, $this->dn,$_POST['usedPackages'], $path, $pkg_config);
       $this->is_dialog =true;
     }
-   
+  
     /* Save Configuration */
     if(isset($_POST['SaveObjectConfig'])){
+      $this->ConfiguredPackages= array_merge($this->ConfiguredPackages,$this->dialog->save());
       $this->dialog = false;
       $this->is_dialog=false;
     }
@@ -417,6 +449,37 @@ class faiPackage extends plugin
     $this->attrs['FAIdebianSection'] = array();
     foreach($this->FAIdebianSection as $sec){
       $this->attrs['FAIdebianSection'][] = $sec;
+    }
+
+    /* Save Package configurations */
+    foreach($this->ConfiguredPackages as $pkgname => $attrs){
+      foreach($attrs as $name => $attr){
+
+        foreach($attr as $n=>$v){
+          if(empty($v)) $v = array();
+        }
+      
+        /* Set attributes */
+        $pkgattrs['objectClass']          = "FAIdebconfInfo";
+        $pkgattrs['FAIpackage']           = $pkgname;
+        $pkgattrs['FAIvariable']          = $name;
+        $pkgattrs['FAIvariableType']      = $attr['Type'];
+        $pkgattrs['FAIvariableContent']   = $attr['Value'];
+        $pkgdn =  "FAIvariable=".$name.",".$this->dn;
+       
+        /* cehck if object already exists */ 
+        $ldap->cat($pkgdn);
+        if($ldap->count()!=0){
+          $ldap->cd($pkgdn);
+          $ldap->modify($pkgattrs);
+        }else{
+          $ldap->cd($this->config->current['BASE']);
+          $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $pkgdn));
+          $ldap->cd($pkgdn);
+          $ldap->add($pkgattrs);
+        }
+        show_ldap_error($ldap->get_error());
+      }  
     }
 
     $ldap->cat($this->dn);
