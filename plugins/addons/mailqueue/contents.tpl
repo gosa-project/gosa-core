@@ -17,6 +17,9 @@
  	</select>
 	&nbsp;
  	<input name="search" value="Search" type="submit">
+ 	<input name="remove_all" 	value="{t}Remove all{/t}" type="submit">
+ 	<input name="requeue_all" 	value="{t}Requeue all{/t}" type="submit">
+ 	<input name="hold_all" 		value="{t}Hold all{/t}" type="submit">
  </p>
 </div>
 <br>
@@ -36,6 +39,8 @@
 		<td><a href="{$plug}&sort=Recipient"	>{t}Recipient{/t}	{if $OrderBy == "Recipient"}{$SortType}{/if}</a></td>
 		<td><a href="{$plug}&sort=Error"		>{t}Error{/t}		{if $OrderBy == "Error"}	{$SortType}{/if}</a></td>
 		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
 	</tr>
 
 {counter start=0 assign=i start=1}
@@ -53,7 +58,9 @@
 		<td>{$entries[$key].Sender}</td>
 		<td>{$entries[$key].Recipient}</td>
 		<td titel="{$entries[$key].Error}">{$entries[$key].Error}</td>
-		<td><a href="{$plug}&del={$key}"><img src="images/edittrash.png" border=0 alt="deleted"></a></td>
+		<td><a href="{$plug}&act=del&id={$entries[$key].MailID}&server={$entries[$key].Server}"><img src="images/edittrash.png" border=0 alt="deleted"></a></td>
+		<td><a href="{$plug}&act=hold&id={$entries[$key].MailID}&server={$entries[$key].Server}"><img src="images/edittrash.png" border=0 alt="deleted"></a></td>
+		<td><a href="{$plug}&act=requeue&id={$entries[$key].MailID}&server={$entries[$key].Server}"><img src="images/edittrash.png" border=0 alt="deleted"></a></td>
 	</tr>
 	{counter}
 {/foreach}

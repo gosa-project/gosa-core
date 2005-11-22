@@ -116,7 +116,10 @@ class parseMailQueue
   /* Checks if the given MailID exists */
   function IDExists($id)
   {
-    return(((isset($this->a_parsedData[$id]))&&(is_array($this->a_parsedData[$id]))));
+    foreach($this->a_parsedData as $entry){
+      if($entry['MailID'] == $id) return(true);
+    }
+    return(false);
   }
 
   function parseAdditionalQueue($str, $server)

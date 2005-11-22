@@ -10,8 +10,7 @@ class mailqueue extends plugin
   var $attributes= array();
   var $objectclasses= array();
 
-  var $QueryCommand = "";
-  var $RemoveCommand= "";
+  var $mailQueueScript = "";    
 
   var $Server         = "all";
   var $Time           = 0;
@@ -28,9 +27,8 @@ class mailqueue extends plugin
     $this->config= $config;
 
     /* get the query cmd */
-    $this->QueryCommand = search_config($this->config->data['MENU'], "mailqueue", "MAILQUEUE_QUERY_COMMAND");
-    $this->RemoveCommand= search_config($this->config->data['MENU'], "mailqueue", "MAILQUEUE_REMOVE_COMMAND");
-
+    $this->mailQueueScript = $this->config->current['MAILQUEUESCRIPTPATH'];    
+  
     $this->Server = "all";
   }
 
@@ -42,7 +40,7 @@ class mailqueue extends plugin
 
     $error =false;
 
-    if(empty($this->QueryCommand)){
+    if(empty($this->mailQueueScript)){
       print_red(_("Please check your 'gosa.conf', there is no 'MAILQUEUE_QUERY_COMMAND' specified."));
       $error = true;
     }else{
@@ -54,7 +52,9 @@ class mailqueue extends plugin
       if($this->Server != "all"){    
 
         /* Create Query cmd */ 
-        $q_cmd = preg_replace("/%server/",$this->Server,$this->QueryCommand);
+        $q_cmd = preg_replace("/%action/" ,"query"      ,$this->mailQueueScript);
+        $q_cmd = preg_replace("/%server/" ,$this->Server,$q_cmd);
+        $q_cmd = preg_replace("/%id/"     ,""           ,$q_cmd);
 
         /* Only display this if the query cmd is executeable */
         if($str = @shell_exec ($q_cmd)){
@@ -75,7 +75,9 @@ class mailqueue extends plugin
         foreach($this->getServer() as $ServerID=>$ServerName){
           if($ServerID == "all") continue;
 
-          $q_cmd = preg_replace("/%server/",$ServerName,$this->QueryCommand);
+          $q_cmd = preg_replace("/%action/" ,"query"      ,$this->mailQueueScript);
+          $q_cmd = preg_replace("/%server/" ,$ServerName  ,$q_cmd);
+          $q_cmd = preg_replace("/%id/"     ,""           ,$q_cmd);
 
           if($str = @shell_exec ($q_cmd)){
             if($mailQueueParser == NULL){
@@ -92,14 +94,56 @@ class mailqueue extends plugin
       }     
 
       if(!$error){
-
         /* Delete entry if requested */
-        if(isset($_GET['del'])){
-          if($mailQueueParser->IDExists($_GET['del'])){
-            $r_cmd = preg_replace("/%server/", $this->Server,$this->RemoveCommand);  
-            $r_cmd = preg_replace("/%id/",     $_GET['del'] ,$r_cmd);  
+        if((isset($_GET['act']))&&($_GET['act']=="del")){
+          if($mailQueueParser->IDExists($_GET['id'])){
+            $r_cmd = preg_replace("/%action/" ,"remove"      ,$this->mailQueueScript);
+            $r_cmd = preg_replace("/%server/" ,$_GET['server'] ,$r_cmd);
+            $r_cmd = preg_replace("/%id/"     ,$_GET['id']  ,$r_cmd);
             print $r_cmd;
           }
+        }
+
+        /* Hold entry if requested */
+        if((isset($_GET['act']))&&($_GET['act']=="hold")){
+          if($mailQueueParser->IDExists($_GET['id'])){
+            $r_cmd = preg_replace("/%action/" ,"hold"          ,$this->mailQueueScript);
+            $r_cmd = preg_replace("/%server/" ,$_GET['server'] ,$r_cmd);
+            $r_cmd = preg_replace("/%id/"     ,$_GET['id']     ,$r_cmd);
+            print $r_cmd;
+          }
+        }
+
+        /* Requeue entry if requested */
+        if((isset($_GET['act']))&&($_GET['act']=="requeue")){
+          if($mailQueueParser->IDExists($_GET['id'])){
+            $r_cmd = preg_replace("/%action/" ,"requeue"       ,$this->mailQueueScript);
+            $r_cmd = preg_replace("/%server/" ,$_GET['server'] ,$r_cmd);
+            $r_cmd = preg_replace("/%id/"     ,$_GET['id']     ,$r_cmd);
+            print $r_cmd;
+          }
+        }
+
+        if(isset($_POST['requeue_all'])){
+          $r_cmd = preg_replace("/%action/" ,"requeue"       ,$this->mailQueueScript);
+          $r_cmd = preg_replace("/%server/" ,$this->Server    ,$r_cmd);
+          $r_cmd = preg_replace("/%id/"     ,"all"           ,$r_cmd);
+          print $r_cmd;
+
+        }
+        if(isset($_POST['hold_all'])){
+          $r_cmd = preg_replace("/%action/" ,"hold"          ,$this->mailQueueScript);
+          $r_cmd = preg_replace("/%server/" ,$this->Server  ,$r_cmd);
+          $r_cmd = preg_replace("/%id/"     ,"all"           ,$r_cmd);
+          print $r_cmd;
+
+        }
+        if(isset($_POST['remove_all'])){
+          $r_cmd = preg_replace("/%action/" ,"remove"       ,$this->mailQueueScript);
+          $r_cmd = preg_replace("/%server/" ,$this->Server,$r_cmd);
+          $r_cmd = preg_replace("/%id/"     ,""              ,$r_cmd);
+          print $r_cmd;
+
         }
 
         /* Filter data with the given */
