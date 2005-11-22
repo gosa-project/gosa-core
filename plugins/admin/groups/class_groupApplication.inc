@@ -494,12 +494,18 @@ class appgroup extends plugin
     }
 
     $this->attrs["gosaMemberApplication"]= array();
+    $lastSEP = false;
     foreach ($this->gosaMemberApplication as $cat){
       foreach($cat as $val){
-      
         $cats[$val['Cat']] ++;
         if(!preg_match("/__SEPARATOR__/i",$val['App'])){
           $this->attrs["gosaMemberApplication"][]= $val['App']."|".$val['Cat']."|".$cats[$val['Cat']];
+          $lastSEP = false;
+        }else{
+          if($lastSEP){
+            $cats[$val['Cat']] --;
+          }
+          $lastSEP = true; 
         }
       }
     }
