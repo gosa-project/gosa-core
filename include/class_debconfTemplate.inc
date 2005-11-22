@@ -21,12 +21,12 @@ class debconf
     $this->package= $package;
     return ($this->load());
   }
-  
+
 
   function set_template_directory($directory)
   {
     if (is_dir($directory) && is_readable($directory)){
-      $this->template_directory($directory);
+      $this->template_directory = $directory;
       return TRUE;
     }
 
@@ -34,7 +34,7 @@ class debconf
     return FALSE;
   }
 
-  
+
   function set_language($language)
   {
     $this->language= $language;
@@ -54,7 +54,7 @@ class debconf
       $this->template= array();
 
       /* Read template array */
-      $name= "";
+      $post_name= 0;
       $langcode= $this->language.".UTF-8";
       $in_description= FALSE;
       $got_local_description= FALSE;
@@ -67,11 +67,16 @@ class debconf
         if ($in_description && !preg_match("/^ /", $line)){
           $in_description= FALSE;
         }
-        
+
         /* Template header */
         if (preg_match("/^Template: /", $line)){
+          $post_name ++; 
+  
           $name= trim(preg_replace("/^Template: (.*)$/", "\\1", $line));
-          $this->template[$name]= array();
+          
+          $this->template[$post_name]['Name'] = $name;
+          $this->template[$post_name]['Default'] ="";
+         
           $got_local_description= FALSE;
           continue;
         }
@@ -79,22 +84,24 @@ class debconf
         /* Get type */
         if (preg_match("/^Type: /", $line)){
           $type= trim(preg_replace("/^Type: (.*)$/", "\\1", $line));
-          $this->template[$name]['Type']= $type;
+          $this->template[$post_name]['Type']= $type;
           continue;
         }
 
         /* Get default */
         if (preg_match("/^Default: /", $line)){
+          $this->template[$post_name]['Default']= "";
           $default= trim(preg_replace("/^Default: (.*)$/", "\\1", $line));
-          $this->template[$name]['Default']= $default;
+          $this->template[$post_name]['Default']= $default;
           continue;
         }
 
         /* Get description */
         if (!$got_local_description && preg_match("/^Description: /", $line)){
+          $this->template[$post_name]['Description']= "";
           $description= trim(preg_replace("/^Description: (.*)$/", "\\1", $line));
-          $this->template[$name]['Topic']= $description;
-          $this->template[$name]['Description']= "";
+          $this->template[$post_name]['Topic']= $description;
+          $this->template[$post_name]['Description']= "";
           $in_description= TRUE;
           continue;
         }
@@ -102,43 +109,51 @@ class debconf
         /* Fill description */
         if (!$got_local_description && $in_description){
           $description= preg_replace("/^ (.*)$/", "\\1", $line);
-          $this->template[$name]['Description'].= $description;
+          $this->template[$post_name]['Description'].= $description;
           continue;
         }
 
         /* Get local description */
         if (preg_match("/^Description-$langcode: /", $line)){
           $description= trim(preg_replace("/^Description-$langcode: (.*)$/", "\\1", $line));
-          $this->template[$name]['Topic']= $description;
+          $this->template[$post_name]['Topic']= $description;
           $in_description= TRUE;
           $got_local_description= TRUE;
-          $this->template[$name]['Description']= "";
+          $this->template[$post_name]['Description']= "";
           continue;
         }
 
         /* Fill local description */
         if ($got_local_description && $in_description){
           $description= preg_replace("/^ (.*)$/", "\\1", $line);
-          $this->template[$name]['Description'].= $description;
+          $this->template[$post_name]['Description'].= $description;
           continue;
         }
 
         /* Get native choices */
         if (preg_match("/^Choices: /", $line)){
           $type= trim(preg_replace("/^Choices: (.*)$/", "\\1", $line));
-          $this->template[$name]['Choices']= $type;
+          $this->template[$post_name]['Choices']= $type;
         }
 
         /* Get local choices */
         if (preg_match("/^Choices-$langcode: /", $line)){
           $type= trim(preg_replace("/^Choices-$langcode: (.*)$/", "\\1", $line));
-          $this->template[$name]['Choices-local']= $type;
+          $this->template[$post_name]['Choices-local']= $type;
         }
 
       }
 
       fclose($fh);
       $this->has_template= TRUE;
+      
+      $tmp= array();
+      foreach($this->template as $post_name => $template){
+        $template['post_name'] = "post_".$post_name;
+        $tmp[] = $template;
+      }
+      $this->template = $tmp;
+
       return (TRUE);
     }
 
@@ -153,28 +168,58 @@ class debconf
   }
 
 
+  function PostCheck()
+  {
+    foreach($this->template as $post_name => $entry){
+      if(isset($_POST[$entry['post_name']])){
+        if(is_array($_POST[$entry['post_name']])){
+          $str = "";
+          foreach($_POST[$entry['post_name']] as $val){
+            $str.= $val.", ";
+          }
+          $str = preg_replace("/\,\ $/","",$str);
+          $this->template[$post_name]['Default'] = $str;
+        }else{
+          $this->template[$post_name]['Default'] = $_POST[$entry['post_name']];
+        }
+      }
+    }
+  
+  }
+
+  function SetDefault($var,$val)
+  {
+    if($this->has_template){
+      foreach($this->template as $key => $tmp){
+        if($tmp['Name'] == $var ){
+          $this->template[$key]['Default'] = $val;
+        }
+      }
+    }
+  }
+
   function get_dialog()
   {
     if ($this->has_template){
       $result= "";
 
-      foreach ($this->template as $name => $entry){
+      foreach ($this->template as $post_name => $entry){
 
         $types= array("boolean" => "", "multiselect" => "", "note" => "",
-                      "password" => "", "select" => "", "string" => "", "text" => "", "title" => "");
-        
+            "password" => "", "select" => "", "string" => "", "text" => "", "title" => "");
+
         /* Check if type is available */
-        if (isset($types[$entry['Type']])){
+        if ((isset($entry['Type']))&&(isset($types[$entry['Type']]))){
 
           /* Produce type specific output */
           $fn= "render_".$entry['Type'];
           $result.= $this->$fn($entry);
-          
         } else {
-          php_error(E_WARNING, "An unknown type has been specified in the debconf template. Please fix.");
+          //php_error(E_WARNING, "An unknown type has been specified in the debconf template. Please fix.");
         }
       }
-      
+
+      $result .= "<input type='hidden' post_name='check_post' value='1'>";
       return ($result);
     } else {
       return _("This package has no debconf options.");
@@ -184,34 +229,80 @@ class debconf
 
   function render_boolean($data)
   {
-    $result=  "<table width='100%' border=1>";
-    $result.= "<tr><td valign='top'>";
-    $result.= "<b>".$data['Topic']."</b><br><br>";
-    $result.= $data['Description'];
-    $result.= "</td><td width='10%' valign='top'>O Yes<br>O No</td>";
-    $result.= "</table>";
 
+    $post_name= $data['post_name'];
+    $result="
+      <table width='100%' border=0>
+      <tr>
+      <td valign='top'>
+      <b>".$data['Topic']."</b>
+      </td>
+      <td width='10%' valign='top'>";
+
+    foreach(array("true","false") as $value){
+      if($data['Default'] == $value){
+        $result.="<input type='radio' name='".$data['post_name']."' value='".$value."' checked>".$value."</option>";
+      }else{
+        $result.="<input type='radio' name='".$data['post_name']."' value='".$value."' >".$value."</option>";
+      }
+    }
+
+    $result.= "
+      </td>
+      </tr>
+      <tr>
+      <td colspan=2>".$data['Description']."
+      </td>
+      </tr>
+      </table>";
+
+          $result.= "<p class='seperator'>&nbsp;</p>";
     return ($result);
   }
 
 
   function render_multiselect($data)
   {
+    $post_name= $data['post_name'];
     if (preg_match('/\$\{/', $data['Choices'])){
-      $choices= "Need to use some text...";
+      $choices= array("Need to use some text...");
     } else {
       $choices= "";
       foreach (split(", ", $data['Choices']) as $choice){
-        $choices.= "[ ] ".$choice."<br>";
+        $choices[]= $choice;
       }
     }
+
+
+    $result="
+      <table width='100%' border=0>
+      <tr>
+      <td valign='top'>
+      <b>".$data['Topic']."</b>
+      </td>
+      <td width='10%' valign='top'>
+      <select name='".$post_name."[]'  multiple size=5>";
+
+    $defs = split(", ",$data['Default']);
   
-    $result=  "<table width='100%' border=1>";
-    $result.= "<tr><td valign='top'>";
-    $result.= "<b>".$data['Topic']."</b><br><br>";
-    $result.= $data['Description'];
-    $result.= "</td><td width='30%' valign='top'>$choices</td>";
-    $result.= "</table>";
+    foreach($choices as $value){
+      if(in_array($value,$defs)){
+        $result.="\n<option value='".htmlentities($value)."' selected>".htmlentities($value)."</option>";
+      }else{
+        $result.="\n<option value='".htmlentities($value)."'>".htmlentities($value)."</option>";
+      }
+    }
+
+    $result.= "
+      </select>
+      </td>
+      </tr>
+      <tr>
+      <td colspan=2>".$data['Description']."
+      </td>
+      </tr>
+      </table>";
+          $result.= "<p class='seperator'>&nbsp;</p>";
 
     return ($result);
   }
@@ -227,11 +318,12 @@ class debconf
 
   function render_password($data)
   {
-    $result=  "<table width='100%' border=1>";
+    $result=  "<table width='100%' border=0>";
     $result.= "<tr><td valign='top'>";
-    $result.= "<b>".$data['Topic']."&nbsp;[......................]</b><br><br>";
+    $result.= "<b>".$data['Topic']."&nbsp;<input type='text' name='".$data['post_name']."' value='".$data['Default']."'></b><br><br>";
     $result.= $data['Description'];
     $result.= "</td></table>";
+          $result.= "<p class='seperator'>&nbsp;</p>";
 
     return ($result);
   }
@@ -239,21 +331,45 @@ class debconf
 
   function render_select($data)
   {
+    $post_name= $data['post_name'];
+
     if (preg_match('/\$\{/', $data['Choices'])){
-      $choices= "Need to use some text...";
+      $choices= array("Need to use some text...");
     } else {
       $choices= "";
       foreach (split(", ", $data['Choices']) as $choice){
-        $choices.= "[ ] ".$choice."<br>";
+        $choices[]= $choice;
       }
     }
-  
-    $result=  "<table width='100%' border=1>";
-    $result.= "<tr><td valign='top'>";
-    $result.= "<b>".$data['Topic']."</b><br><br>";
-    $result.= $data['Description'];
-    $result.= "</td><td width='30%' valign='top'>$choices</td>";
-    $result.= "</table>";
+
+
+    $result="
+      <table width='100%' border=0>
+      <tr>
+      <td valign='top'>
+      <b>".$data['Topic']."</b>
+      </td>
+      <td width='10%' valign='top'>
+      <select name='".$post_name."'>";
+
+    foreach($choices as $value){
+      if($data['Default'] == $value){
+        $result.="\n<option value='".htmlentities($value)."' selected>".htmlentities($value)."</option>";
+      }else{
+        $result.="\n<option value='".htmlentities($value)."'>".htmlentities($value)."</option>";
+      }
+    }
+
+    $result.= "
+      </select>
+      </td>
+      </tr>
+      <tr>
+      <td colspan=2>".$data['Description']."
+      </td>
+      </tr>
+      </table>";
+          $result.= "<p class='seperator'>&nbsp;</p>";
 
     return ($result);
   }
@@ -261,11 +377,22 @@ class debconf
 
   function render_string($data)
   {
-    $result=  "<table width='100%' border=1>";
-    $result.= "<tr><td valign='top'>";
-    $result.= "<b>".$data['Topic']."&nbsp;[......................]</b><br><br>";
-    $result.= $data['Description'];
-    $result.= "</td></table>";
+    $result=  "<table width='100%' border=0>
+                <tr>
+                  <td valign='top'>
+                    <b>".$data['Topic']."</b>&nbsp;
+                  </td>
+                  <td width='10%'>
+                    <input type='text' name='".$data['post_name']."' value='".$data['Default']."'>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan='2'>
+                      ".$data['Description']."
+                  </td>
+                </tr>
+              </td></table>";
+          $result.= "<p class='seperator'>&nbsp;</p>";
 
     return ($result);
   }
@@ -289,7 +416,7 @@ class debconf
   {
   }
 
-  
+
   function set_default($default)
   {
   }
