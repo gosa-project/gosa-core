@@ -78,7 +78,7 @@ class mailqueue extends plugin
 
           $q_cmd = preg_replace("/%action/" ,"query"      ,$this->mailQueueScript);
           $q_cmd = preg_replace("/%server/" ,$ServerName  ,$q_cmd);
-          $q_cmd = preg_replace("/%id/"     ,"all"           ,$q_cmd);
+          $q_cmd = preg_replace("/%id/"     ,"ALL"           ,$q_cmd);
 
           if($str = @shell_exec ($q_cmd)){
             if($mailQueueParser == NULL){
@@ -117,37 +117,14 @@ class mailqueue extends plugin
           $se_str .= $server." ";
         }
 
-        if(isset($_POST['requeue_all'])){
-          $r_cmd = preg_replace("/%action/" , "requeue"       ,$this->mailQueueScript);
-          $r_cmd = preg_replace("/%server/" , $se_str         ,$r_cmd);
-          $r_cmd = preg_replace("/%id/"     , "all"           ,$r_cmd);
-          if(!shell_exec($r_cmd)){
-            print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
-          }
-        }
-        if(isset($_POST['hold_all'])){
-          $r_cmd = preg_replace("/%action/" , "hold"          ,$this->mailQueueScript);
-          $r_cmd = preg_replace("/%server/" , $se_str         ,$r_cmd);
-          $r_cmd = preg_replace("/%id/"     , "all"           ,$r_cmd);
-          if(!shell_exec($r_cmd)){
-            print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
-          }
-
-        }
-        if(isset($_POST['unhold_all'])){
-          $r_cmd = preg_replace("/%action/" , "unhold"          ,$this->mailQueueScript);
-          $r_cmd = preg_replace("/%server/" , $se_str         ,$r_cmd);
-          $r_cmd = preg_replace("/%id/"     , "all"           ,$r_cmd);
-          if(!shell_exec($r_cmd)){
-            print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
-          }
-        }
-        if(isset($_POST['remove_all'])){
-          $r_cmd = preg_replace("/%action/" , "remove"        ,$this->mailQueueScript);
-          $r_cmd = preg_replace("/%server/" , $se_str         ,$r_cmd);
-          $r_cmd = preg_replace("/%id/"     , "all"              ,$r_cmd);
-          if(!shell_exec($r_cmd)){
-            print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
+        foreach (array("requeue", "unhold", "hold", "del") as $type){
+          if(isset($_POST[$type.'_all'])){
+            $r_cmd = preg_replace("/%action/" , "$type"       ,$this->mailQueueScript);
+            $r_cmd = preg_replace("/%server/" , $se_str         ,$r_cmd);
+            $r_cmd = preg_replace("/%id/"     , "ALL"           ,$r_cmd);
+            if(!shell_exec($r_cmd)){
+              print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
+            }
           }
         }
 
