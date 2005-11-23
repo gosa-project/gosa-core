@@ -220,6 +220,9 @@ class mailqueue extends plugin
 
     if($error){  
       $smarty->assign("all_ok"        , "false");
+      $smarty->assign("r_stats"         , $this->getStats());
+      $smarty->assign("stats"       , array_flip($this->getStats()));
+      $smarty->assign("stat"          , $this->Stat);
       $smarty->assign("plug"          , "?plug=".$_GET['plug']);
       $smarty->assign("p_server"      , $this->Server);
       $smarty->assign("p_servers"     , $this->getServer());
