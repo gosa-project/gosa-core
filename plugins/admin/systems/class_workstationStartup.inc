@@ -388,9 +388,9 @@ class workstartup extends plugin
     $i = 1;
     foreach($this->FAIclass as $class){
       if($i==1){
-        $str = $str_down.$str_empty.$str_remove;
+        $str = $str_empty.$str_down.$str_remove;
       }elseif($i == count($this->FAIclass)){
-        $str = $str_empty.$str_up.$str_remove;
+        $str = $str_up.$str_empty.$str_remove;
       }else{
         $str = $str_up.$str_down.$str_remove;
       }
