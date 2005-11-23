@@ -2,9 +2,9 @@ Things to fix before 2.4:
 =========================
 
 * FAI management
-  - Add package configuration dialog 
+  - Verify and check layout for package configuration dialog 
 
-* Rework dialog to add aplications (group dialog)
+* Check dialog to add aplications (group dialog)
 
 * First name/Last name instead of Name/Given name
 
