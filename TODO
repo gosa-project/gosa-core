@@ -12,6 +12,8 @@ Things to fix before 2.4:
 
 * Divlists are broken in firefox 1.5rc1 
 
+* FAI Hooks are only assignable once per hook bundle - check this
+
 
 Target for 2.5:
 ===============

@@ -79,7 +79,7 @@
 		<td>{$entries[$key].Sender}</td>
 		<td>{$entries[$key].Recipient}</td>
 		<td titel="{$entries[$key].Error}">{$entries[$key].Error}</td>
-		<td>
+		<td style="text-align:right">
 			<a href="{$plug}&act=del&id={$entries[$key].MailID}&server={$entries[$key].Server}">
 				<img src="images/edittrash.png" border=0 alt="{t}delete{/t}" title="{t}Delete this message{/t}">
 			</a>
