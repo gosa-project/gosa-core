@@ -55,7 +55,7 @@ class mailqueue extends plugin
         /* Create Query cmd */ 
         $q_cmd = preg_replace("/%action/" ,"query"      ,$this->mailQueueScript);
         $q_cmd = preg_replace("/%server/" ,$this->Server,$q_cmd);
-        $q_cmd = preg_replace("/%id/"     ,""           ,$q_cmd);
+        $q_cmd = preg_replace("/%id/"     ,"all"        ,$q_cmd);
 
         /* Only display this if the query cmd is executeable */
         if($str = @shell_exec ($q_cmd)){
@@ -78,7 +78,7 @@ class mailqueue extends plugin
 
           $q_cmd = preg_replace("/%action/" ,"query"      ,$this->mailQueueScript);
           $q_cmd = preg_replace("/%server/" ,$ServerName  ,$q_cmd);
-          $q_cmd = preg_replace("/%id/"     ,""           ,$q_cmd);
+          $q_cmd = preg_replace("/%id/"     ,"all"           ,$q_cmd);
 
           if($str = @shell_exec ($q_cmd)){
             if($mailQueueParser == NULL){
