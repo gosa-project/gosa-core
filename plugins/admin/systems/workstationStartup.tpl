@@ -37,13 +37,10 @@
 		<select name="FAIdebianMirror" {$FAIdebianMirrorACL}>
         {html_options options=$FAIdebianMirrors output=$FAIdebianMirrors selected=$FAIdebianMirror}
         <option disabled>&nbsp;</option>
-		</select>	
+		</select>
 		<!--<input type="submit" value="{t}set{/t}" name="refresh">-->
 	<h2><img alt="" align="middle" src="images/fai_profile.png">&nbsp;{t}Assigned FAI classes{/t}</h2>
-		<select name="FAIclassSel" {$FAIclassACL} multiple style="width:100%;height:100px;">
-        {html_options values=$FAIclass output=$FAIclassKeys}
-        <option disabled>&nbsp;</option>
-		</select>	
+		{$FAIScriptlist}	
 
     <br>
 		<select name="FAIclassesSel" {$FAIclassACL}>

@@ -254,6 +254,71 @@ class workstartup extends plugin
       }
     }
 
+    $sort = false;
+    foreach($_POST as $name => $val){
+      
+      $sort_type = false;
+      if((preg_match("/sort_up/",$name))&&(!$sort)){
+        $sort_type = "sort_up_";
+      }
+      if((preg_match("/sort_down/",$name))&&(!$sort)){
+        $sort_type = "sort_down_";
+      }
+    
+      if(($sort_type)&&(!$sort)){
+        $value = preg_replace("/_.*$/i","",preg_replace("/".$sort_type."/i","",$name));
+        $sort = true;
+        
+        $last = -1;
+        $change_down  = -1;
+ 
+        /* Create array with numeric index */ 
+        $tmp = array();
+        foreach($this->FAIclass as $class){
+          $tmp [] = $class;
+        }
+
+        /* Walk trough array */
+        foreach($tmp as $key => $faiName){
+          if($faiName == $value){
+            if($sort_type == "sort_up_"){
+              if($last != -1){
+                 $change_down= $last;
+              }
+            }else{
+              if(isset($tmp[$key+1])){
+                $change_down = $key;
+              }
+            }
+          }
+          $last = $key;
+        }
+ 
+        $tmp2 = array();
+        $skip = false;    
+  
+        foreach($tmp as $ky => $vl){
+
+          if($ky == $change_down){
+            $skip = $vl;
+          }else{
+            $tmp2[$vl] = $vl;
+          }
+          if(($skip != false)&&($ky != $change_down)){
+            $tmp2[$skip]  = $skip;
+            $skip =false;
+          }
+        }   
+        $this->FAIclass = $tmp2; 
+      }
+  
+
+      if(preg_match("/fai_remove/i",$name)){
+        $value = preg_replace("/_.*$/i","",preg_replace("/fai_remove_/i","",$name));
+        unset($this->FAIclass[$value]);
+      }
+    }
+
     /* Delete selected class from our list */
     if((isset($_POST['DelClass']))&&(isset($_POST['FAIclassSel']))){
       if(isset($this->FAIclass[$_POST['FAIclassSel']])){
@@ -310,7 +375,34 @@ class workstartup extends plugin
       $smarty->assign($val, $this->$val);
       $smarty->assign($val."ACL", chkacl($this->acl, $val));
     }
-  
+
+    $div = new divSelectBox("WSFAIscriptClasses");
+    
+    $div -> SetHeight("110");
+
+    $str_up     = " &nbsp;<input type='image' src='images/sort_up.png'    name='sort_up_%s'    value='%s'>";
+    $str_down   = " &nbsp;<input type='image' src='images/sort_down.png'  name='sort_down_%s'  value='%s'>";
+    $str_remove = " &nbsp;<input type='image' src='images/edittrash.png'  name='fai_remove_%s' value='%s'>";
+    $str_empty  = " &nbsp;<img src='images/empty.png'i width='7'>"; 
+
+    $i = 1;
+    foreach($this->FAIclass as $class){
+      if($i==1){
+        $str = $str_down.$str_empty.$str_remove;
+      }elseif($i == count($this->FAIclass)){
+        $str = $str_empty.$str_up.$str_remove;
+      }else{
+        $str = $str_up.$str_down.$str_remove;
+      }
+      $i ++ ; 
+    
+      $div->AddEntry(array(
+                            array("string"=>$class),
+                            array("string"=>preg_replace("/\%s/",$class,$str),"attach"=>"style='width:50px;border-right:none;'")
+                          ));
+    }  
+
+    $smarty->assign("FAIScriptlist",$div->DrawList()); 
     $smarty->assign("FAIdebianMirrors",$this->FAIdebianMirrors);
     $smarty->assign("FAIclasses",$this->selectFriendlyClasses());
     $smarty->assign("FAIclassesKeys",array_flip($this->selectFriendlyClasses()));
