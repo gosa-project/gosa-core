@@ -59,8 +59,6 @@
 		<td><a href="{$plug}&sort=Recipient"	>{t}Recipient{/t}	{if $OrderBy == "Recipient"}{$SortType}{/if}</a></td>
 		<td><a href="{$plug}&sort=Error"		>{t}Error{/t}		{if $OrderBy == "Error"}	{$SortType}{/if}</a></td>
 		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
 	</tr>
 
 {counter start=0 assign=i start=1}
@@ -85,21 +83,15 @@
 			<a href="{$plug}&act=del&id={$entries[$key].MailID}&server={$entries[$key].Server}">
 				<img src="images/edittrash.png" border=0 alt="{t}delete{/t}" title="{t}Delete this message{/t}">
 			</a>
-		</td>
 		{if $entries[$key].Hold == true}
-		<td>
 			<a href="{$plug}&act=unhold&id={$entries[$key].MailID}&server={$entries[$key].Server}">
 				<img src="images/mailq_unhold.png" border=0 alt="{t}unhold{/t}" title="{t}Release message{/t}">
 			</a>
-		</td>
 		{else}
-		<td>
 			<a href="{$plug}&act=hold&id={$entries[$key].MailID}&server={$entries[$key].Server}">
 				<img src="images/mailq_hold.png" border=0 alt="{t}hold{/t}" title="{t}Hold message{/t}">
 			</a>
-		</td>
 		{/if}
-		<td>
 			<a href="{$plug}&act=requeue&id={$entries[$key].MailID}&server={$entries[$key].Server}">
 				<img src="images/mailq_requeue.png" border=0 alt="{t}requeue{/t}" title="{t}Requeue this message{/t}">
 			</a>
