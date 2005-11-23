@@ -18,6 +18,7 @@ class fonreport extends plugin
   var $userfilter= "";
   var $ui= NULL;
   var $fields= array("calldate", "src", "dst", "channel", "lastapp", "disposition", "duration");
+  var $range = 20;
 
   /* attribute list for save action */
   var $attributes= array();
@@ -54,6 +55,10 @@ class fonreport extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
+	if(isset($_POST['EntryPerPage'])){
+		$this->range = $_POST['EntryPerPage'];
+	}
 
 	  /* Get template engine */
 	  $smarty= get_smarty();
@@ -197,7 +202,7 @@ class fonreport extends plugin
 			$mod++;
 			continue;
 		}
-		if ($mod >= ($this->start + 20)){
+		if ($mod >= ($this->start + $this->range)){
 			$mod++;
 			break;
 		}
@@ -229,7 +234,7 @@ class fonreport extends plugin
 
 	if ($output != ""){
 		$smarty->assign("search_result", $output);
-		$smarty->assign("range_selector", range_selector(count($this->report_list), $this->start, 20));
+		$smarty->assign("range_selector", range_selector(count($this->report_list), $this->start,$this->range,"EntryPerPage"));
 	} else {
 		$smarty->assign("search_result", "");
 	}

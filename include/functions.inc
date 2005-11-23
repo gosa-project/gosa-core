@@ -1186,7 +1186,7 @@ function get_global($name)
 }
 
 
-function range_selector($dcnt,$start,$range=25)
+function range_selector($dcnt,$start,$range=25,$post_var=false)
 {
 
   /* Entries shown left and right from the selected entry */
@@ -1196,6 +1196,10 @@ function range_selector($dcnt,$start,$range=25)
   $output="";
   if ($max_entries & 1){
     $max_entries++;
+  }
+  
+  if((!empty($post_var))&&(isset($_POST[$post_var]))){
+    $range= $_POST[$post_var];
   }
 
   /* Prevent output to start or end out of range */
@@ -1210,7 +1214,7 @@ function range_selector($dcnt,$start,$range=25)
   if(((int)($numpages))!=($numpages)){
     $numpages = (int)$numpages + 1;
   }
-  if (((int)$numpages) <= 1 ){
+  if ((((int)$numpages) <= 1 )&&(!$post_var)){
     return ("");
   }
   $ppage= (int)(($start / $range) + 0.5);
@@ -1233,7 +1237,12 @@ function range_selector($dcnt,$start,$range=25)
     $begin= $end - $max_entries;
   }
 
-  $output.= "<div style='border:1px solid #E0E0E0; background-color:#FFFFFF;'>";
+  if($post_var){
+    $output.= "<div style='border:1px solid #E0E0E0; background-color:#FFFFFF;'>
+              <table width='100%'><tr><td width='200'></td><td style='align:center;'>";
+  }else{
+    $output.= "<div style='border:1px solid #E0E0E0; background-color:#FFFFFF;'>";
+  }
 
   /* Draw decrement */
   if ($start > 0 ) {
@@ -1261,7 +1270,24 @@ function range_selector($dcnt,$start,$range=25)
       "<img alt=\"\" src=\"images/forward.png\" border=0 align=\"middle\"></a>";
   }
 
-  $output.= "</div>";
+  if($post_var){
+    $output.= "</td><td width='200'>&nbsp;"._("Entries per page")."&nbsp;:&nbsp;<select name='".$post_var."' onChange='javascript:document.mainform.submit()'>";
+    foreach(array(20,50,100,200,"all") as $num){
+      if($num == "all"){
+        $var = 10000;
+      }else{
+        $var = $num;
+      }
+      if($var == $range){
+        $output.="\n<option selected value='".$var."'>".$num."</option>";
+      }else{  
+        $output.="\n<option value='".$var."'>".$num."</option>";
+      }
+    }
+    $output.=  "</select></td></tr></table></div>";
+  }else{
+    $output.= "</div>";
+  }
 
   return($output);
 }
