@@ -21,13 +21,13 @@
   <td style="vertical-align:top;">
    <table summary=""> 
     <tr>
-     <td><label for="sn">{t}Name{/t}{$must}</label></td>
+     <td><label for="sn">{t}First name{/t}{$must}</label></td>
      <td><input id="sn" name="sn" size=25 maxlength=60 {$snACL} value="{$sn}"></td>
     </tr>
 
     {if $is_template ne "true"}
     <tr>
-     <td><label for="givenName">{t}Given name{/t}{$must}</label></td>
+     <td><label for="givenName">{t}Last name{/t}{$must}</label></td>
      <td><input id="givenName" name="givenName" size=25 maxlength=60 {$givenNameACL} value="{$givenName}"></td>
     </tr>
     <tr>
