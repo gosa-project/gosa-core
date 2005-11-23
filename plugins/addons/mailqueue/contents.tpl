@@ -10,7 +10,7 @@
 			<td>
 	<img alt="{t}Search{/t}" src="images/search.png" align="middle" border="0">
 	 &nbsp;{t}Search for{/t}
-    <input name="search_for" size="25" maxlength="60" value="{$search_for}" title="{t}Please enter a search string here.{/t}" onchange="mainform.submit()">
+    <input name="search_for" size="12" maxlength="60" value="{$search_for}" title="{t}Please enter a search string here.{/t}" onchange="mainform.submit()">
  	 &nbsp;in 
 	<select size="1" name="p_server" title="{t}Select a server{/t}" onchange="mainform.submit()">
 	 {html_options values=$p_serverKeys output=$p_servers selected=$p_server}
@@ -24,17 +24,17 @@
 	 {html_options values=$p_timeKeys output=$p_times selected=$p_time}
 	</select>
 	 &nbsp;
-	<input name="search" value="Search" type="submit">
+	<input name="search" value="{t}Search{/t}" type="submit">
 			</td>
-			<td width="10%">	
-				<input name="remove_all"  src="images/edittrash.png"		value="{t}Remove all{/t}" 	type="image" 
-					title="{t}Remove all shown entries from queue.{/t}">
-				<input name="requeue_all" src="images/mailq_requeue.png"	value="{t}Requeue all{/t}" 	type="image"
-					title="{t}Requeue all shown entries.{/t}">
-				<input name="hold_all"    src="images/mailq_hold.png"		value="{t}Hold all{/t}" 	type="image"
-					title="{t}Set all shown entries to status hold.{/t}">
-				<input name="unhold_all"    src="images/mailq_unhold.png"		value="{t}Hold all{/t}" 	type="image"
-					title="{t}Set all shown entries to status unhold.{/t}">
+			<td style="border-left:1px solid #A0A0A0; text-align:right;">&nbsp;
+				<input name="remove_all"  src="images/edittrash.png"		value="{t}Remove all messages{/t}" 	type="image" 
+					title="{t}Remove all messages from selected servers queue{/t}">
+				<input name="hold_all"    src="images/mailq_hold.png"		value="{t}Hold all messages{/t}" 	type="image"
+					title="{t}Hold all messages in selected servers queue{/t}">
+				<input name="unhold_all"    src="images/mailq_unhold.png"		value="{t}Release all messages{/t}" 	type="image"
+					title="{t}Release all messages in selected servers queue{/t}">
+				<input name="requeue_all" src="images/mailq_requeue.png"	value="{t}Requeue all messages{/t}" 	type="image"
+					title="{t}Requeue all messages in selected servers queue{/t}">
    			</td>
 		<tr>
 	</table>
@@ -72,7 +72,7 @@
 		<tr style="height: 22px; background-color: rgb(245, 245, 245);">
 	{/if}
 		<td>{if $entries[$key].Active == true}
-				<img src="images/mailq_active.png" border=0 alt="{t}active{/t}">
+				<img src="images/mailq_active.png" border=0 alt="{t}Active{/t}">
 			{/if}
 			{$entries[$key].MailID}</td>
 		<td>{$entries[$key].Server}</td>
@@ -83,25 +83,25 @@
 		<td titel="{$entries[$key].Error}">{$entries[$key].Error}</td>
 		<td>
 			<a href="{$plug}&act=del&id={$entries[$key].MailID}&server={$entries[$key].Server}">
-				<img src="images/edittrash.png" border=0 alt="{t}delete{/t}" title="{t}Delete this entry.{/t}">
+				<img src="images/edittrash.png" border=0 alt="{t}delete{/t}" title="{t}Delete this message{/t}">
 			</a>
 		</td>
 		{if $entries[$key].Hold == true}
 		<td>
 			<a href="{$plug}&act=unhold&id={$entries[$key].MailID}&server={$entries[$key].Server}">
-				<img src="images/mailq_unhold.png" border=0 alt="{t}unhold{/t}" title="{t}Set status to unhold.{/t}">
+				<img src="images/mailq_unhold.png" border=0 alt="{t}unhold{/t}" title="{t}Release message{/t}">
 			</a>
 		</td>
 		{else}
 		<td>
 			<a href="{$plug}&act=hold&id={$entries[$key].MailID}&server={$entries[$key].Server}">
-				<img src="images/mailq_hold.png" border=0 alt="{t}hold{/t}" title="{t}Set status to hold.{/t}">
+				<img src="images/mailq_hold.png" border=0 alt="{t}hold{/t}" title="{t}Hold message{/t}">
 			</a>
 		</td>
 		{/if}
 		<td>
 			<a href="{$plug}&act=requeue&id={$entries[$key].MailID}&server={$entries[$key].Server}">
-				<img src="images/mailq_requeue.png" border=0 alt="{t}requeue{/t}" title="{t}requeue this entry.{/t}">
+				<img src="images/mailq_requeue.png" border=0 alt="{t}requeue{/t}" title="{t}Requeue this message{/t}">
 			</a>
 		</td>
 	</tr>
