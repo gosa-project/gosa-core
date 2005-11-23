@@ -4,25 +4,45 @@
 </div>
 <div class="contentboxb">
  <p class="contentboxb" style="border-top: 1px solid rgb(176, 176, 176); padding-top: 5px;">
- 	<img alt="" src="images/search.png" align="middle" border="0">
-		&nbsp;{t}Search for{/t}
-	<input name="search_for" size="25" maxlength="60" value="{$search_for}" title="{t}Please enter a search string here.{/t}" onchange="mainform.submit()">
-		&nbsp;in 
+  <div >
+	<table width="100%">
+		<tr>
+			<td>
+	<img alt="{t}Search{/t}" src="images/search.png" align="middle" border="0">
+	 &nbsp;{t}Search for{/t}
+    <input name="search_for" size="25" maxlength="60" value="{$search_for}" title="{t}Please enter a search string here.{/t}" onchange="mainform.submit()">
+ 	 &nbsp;in 
 	<select size="1" name="p_server" title="{t}Select a server{/t}" onchange="mainform.submit()">
-		{html_options values=$p_serverKeys output=$p_servers selected=$p_server}
+	 {html_options values=$p_serverKeys output=$p_servers selected=$p_server}
 	</select>
- 		&nbsp;{t}within the last{/t}&nbsp;
+	{t}with status{/t} : 
+	<select size="1" name="Stat" onchange="mainform.submit()">
+	 {html_options values=$stats output=$r_stats selected=$stat}
+	</select>
+	 &nbsp;{t}within the last{/t}&nbsp;
 	<select size="1" name="p_time" onchange="mainform.submit()">
-		{html_options values=$p_timeKeys output=$p_times selected=$p_time}
- 	</select>
-	&nbsp;
- 	<input name="search" value="Search" type="submit">
- 	<input name="remove_all" 	value="{t}Remove all{/t}" type="submit">
- 	<input name="requeue_all" 	value="{t}Requeue all{/t}" type="submit">
- 	<input name="hold_all" 		value="{t}Hold all{/t}" type="submit">
+	 {html_options values=$p_timeKeys output=$p_times selected=$p_time}
+	</select>
+	 &nbsp;
+	<input name="search" value="Search" type="submit">
+			</td>
+			<td width="10%">	
+				<input name="remove_all"  src="images/edittrash.png"		value="{t}Remove all{/t}" 	type="image" 
+					title="{t}Remove all shown entries from queue.{/t}">
+				<input name="requeue_all" src="images/mailq_requeue.png"	value="{t}Requeue all{/t}" 	type="image"
+					title="{t}Requeue all shown entries.{/t}">
+				<input name="hold_all"    src="images/mailq_hold.png"		value="{t}Hold all{/t}" 	type="image"
+					title="{t}Set all shown entries to status hold.{/t}">
+				<input name="unhold_all"    src="images/mailq_unhold.png"		value="{t}Hold all{/t}" 	type="image"
+					title="{t}Set all shown entries to status unhold.{/t}">
+   			</td>
+		<tr>
+	</table>
+	</div>
  </p>
 </div>
 <br>
+
 
 {if $all_ok != "true"}
 <b>{t}Search returned no results{/t}...</b>
@@ -51,16 +71,39 @@
 	{else}
 		<tr style="height: 22px; background-color: rgb(245, 245, 245);">
 	{/if}
-		<td>{$entries[$key].MailID}</td>
+		<td>{if $entries[$key].Active == true}
+				<img src="images/mailq_active.png" border=0 alt="{t}active{/t}">
+			{/if}
+			{$entries[$key].MailID}</td>
 		<td>{$entries[$key].Server}</td>
 		<td>{$entries[$key].Size}</td>
 		<td>{$entries[$key].Arrival}</td>
 		<td>{$entries[$key].Sender}</td>
 		<td>{$entries[$key].Recipient}</td>
 		<td titel="{$entries[$key].Error}">{$entries[$key].Error}</td>
-		<td><a href="{$plug}&act=del&id={$entries[$key].MailID}&server={$entries[$key].Server}"><img src="images/edittrash.png" border=0 alt="deleted"></a></td>
-		<td><a href="{$plug}&act=hold&id={$entries[$key].MailID}&server={$entries[$key].Server}"><img src="images/edittrash.png" border=0 alt="deleted"></a></td>
-		<td><a href="{$plug}&act=requeue&id={$entries[$key].MailID}&server={$entries[$key].Server}"><img src="images/edittrash.png" border=0 alt="deleted"></a></td>
+		<td>
+			<a href="{$plug}&act=del&id={$entries[$key].MailID}&server={$entries[$key].Server}">
+				<img src="images/edittrash.png" border=0 alt="{t}delete{/t}">
+			</a>
+		</td>
+		{if $entries[$key].Hold == true}
+		<td>
+			<a href="{$plug}&act=unhold&id={$entries[$key].MailID}&server={$entries[$key].Server}">
+				<img src="images/mailq_unhold.png" border=0 alt="{t}unhold{/t}">
+			</a>
+		</td>
+		{else}
+		<td>
+			<a href="{$plug}&act=hold&id={$entries[$key].MailID}&server={$entries[$key].Server}">
+				<img src="images/mailq_hold.png" border=0 alt="{t}hold{/t}">
+			</a>
+		</td>
+		{/if}
+		<td>
+			<a href="{$plug}&act=requeue&id={$entries[$key].MailID}&server={$entries[$key].Server}">
+				<img src="images/mailq_requeue.png" border=0 alt="{t}requeue{/t}">
+			</a>
+		</td>
 	</tr>
 	{counter}
 {/foreach}

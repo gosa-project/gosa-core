@@ -18,6 +18,7 @@ class mailqueue extends plugin
   var $Page           = 0;
   var $EntriesPerPage = 20;
 
+  var $Stat           = "all";
   var $OrderBy        = "Arrival";
   var $SortType       = "up";
 
@@ -28,7 +29,7 @@ class mailqueue extends plugin
 
     /* get the query cmd */
     $this->mailQueueScript = $this->config->current['MAILQUEUESCRIPTPATH'];    
-  
+
     $this->Server = "all";
   }
 
@@ -100,7 +101,9 @@ class mailqueue extends plugin
             $r_cmd = preg_replace("/%action/" ,"remove"      ,$this->mailQueueScript);
             $r_cmd = preg_replace("/%server/" ,$_GET['server'] ,$r_cmd);
             $r_cmd = preg_replace("/%id/"     ,$_GET['id']  ,$r_cmd);
-            print $r_cmd;
+            if(!shell_exec($r_cmd)){
+              print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
+            }
           }
         }
 
@@ -110,7 +113,9 @@ class mailqueue extends plugin
             $r_cmd = preg_replace("/%action/" ,"hold"          ,$this->mailQueueScript);
             $r_cmd = preg_replace("/%server/" ,$_GET['server'] ,$r_cmd);
             $r_cmd = preg_replace("/%id/"     ,$_GET['id']     ,$r_cmd);
-            print $r_cmd;
+            if(!shell_exec($r_cmd)){
+              print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
+            }
           }
         }
 
@@ -120,42 +125,80 @@ class mailqueue extends plugin
             $r_cmd = preg_replace("/%action/" ,"requeue"       ,$this->mailQueueScript);
             $r_cmd = preg_replace("/%server/" ,$_GET['server'] ,$r_cmd);
             $r_cmd = preg_replace("/%id/"     ,$_GET['id']     ,$r_cmd);
-            print $r_cmd;
+            if(!shell_exec($r_cmd)){
+              print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
+            }
           }
         }
 
-        if(isset($_POST['requeue_all'])){
-          $r_cmd = preg_replace("/%action/" ,"requeue"       ,$this->mailQueueScript);
-          $r_cmd = preg_replace("/%server/" ,$this->Server    ,$r_cmd);
-          $r_cmd = preg_replace("/%id/"     ,"all"           ,$r_cmd);
-          print $r_cmd;
+        $se = $this->getServer();
+        unset($se['all']);
+        $se_str = "";
+        foreach($se as $server) {
+          $se_str .= $server." ";
+        }
 
+        if(isset($_POST['requeue_all'])){
+          $r_cmd = preg_replace("/%action/" , "requeue"       ,$this->mailQueueScript);
+          $r_cmd = preg_replace("/%server/" , $se_str         ,$r_cmd);
+          $r_cmd = preg_replace("/%id/"     , "all"           ,$r_cmd);
+          if(!shell_exec($r_cmd)){
+            print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
+          }
         }
         if(isset($_POST['hold_all'])){
-          $r_cmd = preg_replace("/%action/" ,"hold"          ,$this->mailQueueScript);
-          $r_cmd = preg_replace("/%server/" ,$this->Server  ,$r_cmd);
-          $r_cmd = preg_replace("/%id/"     ,"all"           ,$r_cmd);
-          print $r_cmd;
+          $r_cmd = preg_replace("/%action/" , "hold"          ,$this->mailQueueScript);
+          $r_cmd = preg_replace("/%server/" , $se_str         ,$r_cmd);
+          $r_cmd = preg_replace("/%id/"     , "all"           ,$r_cmd);
+          if(!shell_exec($r_cmd)){
+            print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
+          }
 
         }
+        if(isset($_POST['unhold_all'])){
+          $r_cmd = preg_replace("/%action/" , "unhold"          ,$this->mailQueueScript);
+          $r_cmd = preg_replace("/%server/" , $se_str         ,$r_cmd);
+          $r_cmd = preg_replace("/%id/"     , "all"           ,$r_cmd);
+          if(!shell_exec($r_cmd)){
+            print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
+          }
+        }
         if(isset($_POST['remove_all'])){
-          $r_cmd = preg_replace("/%action/" ,"remove"       ,$this->mailQueueScript);
-          $r_cmd = preg_replace("/%server/" ,$this->Server,$r_cmd);
-          $r_cmd = preg_replace("/%id/"     ,""              ,$r_cmd);
-          print $r_cmd;
-
+          $r_cmd = preg_replace("/%action/" , "remove"        ,$this->mailQueueScript);
+          $r_cmd = preg_replace("/%server/" , $se_str         ,$r_cmd);
+          $r_cmd = preg_replace("/%id/"     , "all"              ,$r_cmd);
+          if(!shell_exec($r_cmd)){
+            print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
+          }
         }
 
         /* Filter data with the given */
         $mailQueueParser->OrderBy($this->OrderBy,$this->SortType);
         $mailQueueParser->OnlyDaysAgo($this->Time);
         $mailQueueParser->CreateDate();
+     
+        if($this->Stat == "hold"){
+          $mailQueueParser->Search(true,array("Hold"),true);
+        }
+        if($this->Stat == "unhold"){
+          $mailQueueParser->Search(false,array("Hold"),true);
+        }
+        if($this->Stat == "active"){
+          $mailQueueParser->Search(true,array("Active"),true);
+        }
+        if($this->Stat == "nonactive"){
+          $mailQueueParser->Search(false,array("Active"),true);
+        }
+
         $mailQueueParser->Search($this->Search,array("MailID","Size","Sender","Recipient","Error","Arrival"));
 
         /* */
         $entries = $mailQueueParser->GetAll(); 
         $smarty->assign("entries"       , array_slice($entries,$this->Page,20));
         $smarty->assign("plug"          , "?plug=".$_GET['plug']);
+        $smarty->assign("r_stats"         , $this->getStats());
+        $smarty->assign("stats"       , array_flip($this->getStats()));
+        $smarty->assign("stat"          , $this->Stat);
         $smarty->assign("p_server"      , $this->Server);
         $smarty->assign("p_servers"     , $this->getServer());
         $smarty->assign("p_serverKeys"  , array_flip($this->getServer()));
@@ -199,7 +242,7 @@ class mailqueue extends plugin
     $ldap->cd($this->config->current['BASE']);    
     $ldap->search("(objectClass=goMailServer)",array("cn"));
     while($tmp = $ldap->fetch()){
-     $ret[$tmp['cn'][0]]= $tmp['cn'][0];
+      $ret[$tmp['cn'][0]]= $tmp['cn'][0];
     }
     return($ret);
   }
@@ -231,6 +274,9 @@ class mailqueue extends plugin
     if(isset($_POST['search_for'])){
       $this->Search = $_POST['search_for'];
     }
+    if(isset($_POST['Stat'])){
+      $this->Stat = $_POST['Stat'];
+    }
     if((isset($_GET['start']))&&(is_numeric($_GET['start']))&&($_GET['start']>=0)){
       $this->Page = $_GET['start'];
     }
@@ -248,6 +294,17 @@ class mailqueue extends plugin
       }
     }
 
+  }
+
+  function getStats()
+  {
+    return(array(
+                  "all"     =>_("All"),
+                  "hold"    =>_("Hold"),
+                  "unhold"  =>_("Un hold"),
+                  "active"  =>_("Active"),
+                  "nonactive"  =>_("Not active")
+                ));
   }
 
 }

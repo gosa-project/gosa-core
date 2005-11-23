@@ -43,7 +43,7 @@ class parseMailQueue
   /* Only keep entries that contains the $filter
    * in any of the given $fields
    */
-  function Search($filter,$fields)
+  function Search($filter,$fields,$bool = false)
   {
     /* Go through all entries */
     foreach($this->a_parsedData as $key => $data){
@@ -52,7 +52,9 @@ class parseMailQueue
       $found = false;
 
       foreach($fields as $attr){
-        if(preg_match("/".str_replace("*",".*",$filter)."/i",$data[$attr])){
+        if(($bool)&&($data[$attr]==$filter)){
+          $found = true;
+        }elseif(preg_match("/".str_replace("*",".*",$filter)."/i",$data[$attr])){
           $found= true;
         }
       }
@@ -180,6 +182,27 @@ class parseMailQueue
       $s_Error      = $s_buffer[1];
       $s_Recipient  = $s_buffer[2];
 
+      /*
+              *      The message is in the active queue, i.e. the  message  is
+                     selected for delivery.
+
+              !      The  message is in the hold queue, i.e. no further deliv-delivery
+                     ery attempt will be made until  the  mail  is  taken  off
+                     hold.
+      */
+
+      $s_Hold = false;
+      if(preg_match("/\!/",$s_mailID)){
+        $s_mailID = preg_replace("/\!/","",$s_mailID);
+        $s_Hold = "true";
+      }
+      
+      $s_Active = false;
+      if(preg_match("/\*/",$s_mailID)){
+        $s_mailID = preg_replace("/\*/","",$s_mailID);
+        $s_Active = true;
+      }
+
       /* Append data */
       $this->a_parsedData[$s_mailID."-".$server]['Server']     = $server; 
       $this->a_parsedData[$s_mailID."-".$server]['MailID']     = $s_mailID; 
@@ -187,6 +210,8 @@ class parseMailQueue
       $this->a_parsedData[$s_mailID."-".$server]['Arrival']    = $s_Arrival; 
       $this->a_parsedData[$s_mailID."-".$server]['Sender']     = $s_Sender; 
       $this->a_parsedData[$s_mailID."-".$server]['Recipient']  = $s_Recipient; 
+      $this->a_parsedData[$s_mailID."-".$server]['Hold']       = $s_Hold; 
+      $this->a_parsedData[$s_mailID."-".$server]['Active']     = $s_Active; 
       $this->a_parsedData[$s_mailID."-".$server]['Error']      = $this->_parseError($s_Error); 
     }
     return($this->a_parsedData);
