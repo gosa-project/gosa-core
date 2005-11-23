@@ -95,38 +95,17 @@ class mailqueue extends plugin
       }     
 
       if(!$error){
-        /* Delete entry if requested */
-        if((isset($_GET['act']))&&($_GET['act']=="del")){
-          if($mailQueueParser->IDExists($_GET['id'])){
-            $r_cmd = preg_replace("/%action/" ,"remove"      ,$this->mailQueueScript);
-            $r_cmd = preg_replace("/%server/" ,$_GET['server'] ,$r_cmd);
-            $r_cmd = preg_replace("/%id/"     ,$_GET['id']  ,$r_cmd);
-            if(!shell_exec($r_cmd)){
-              print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
-            }
-          }
-        }
 
-        /* Hold entry if requested */
-        if((isset($_GET['act']))&&($_GET['act']=="hold")){
-          if($mailQueueParser->IDExists($_GET['id'])){
-            $r_cmd = preg_replace("/%action/" ,"hold"          ,$this->mailQueueScript);
-            $r_cmd = preg_replace("/%server/" ,$_GET['server'] ,$r_cmd);
-            $r_cmd = preg_replace("/%id/"     ,$_GET['id']     ,$r_cmd);
-            if(!shell_exec($r_cmd)){
-              print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
-            }
-          }
-        }
-
-        /* Requeue entry if requested */
-        if((isset($_GET['act']))&&($_GET['act']=="requeue")){
-          if($mailQueueParser->IDExists($_GET['id'])){
-            $r_cmd = preg_replace("/%action/" ,"requeue"       ,$this->mailQueueScript);
-            $r_cmd = preg_replace("/%server/" ,$_GET['server'] ,$r_cmd);
-            $r_cmd = preg_replace("/%id/"     ,$_GET['id']     ,$r_cmd);
-            if(!shell_exec($r_cmd)){
-              print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
+        /* Check for actions */
+        foreach (array("requeue", "unhold", "hold", "del") as $type){
+          if((isset($_GET['act']))&&($_GET['act']=="$type")){
+            if($mailQueueParser->IDExists($_GET['id'])){
+              $r_cmd = preg_replace("/%action/" ,"$type"        ,$this->mailQueueScript);
+              $r_cmd = preg_replace("/%server/" ,$_GET['server'] ,$r_cmd);
+              $r_cmd = preg_replace("/%id/"     ,$_GET['id']     ,$r_cmd);
+              if(!shell_exec($r_cmd)){
+                print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
+              }
             }
           }
         }
