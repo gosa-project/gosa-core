@@ -83,25 +83,25 @@
 		<td titel="{$entries[$key].Error}">{$entries[$key].Error}</td>
 		<td>
 			<a href="{$plug}&act=del&id={$entries[$key].MailID}&server={$entries[$key].Server}">
-				<img src="images/edittrash.png" border=0 alt="{t}delete{/t}">
+				<img src="images/edittrash.png" border=0 alt="{t}delete{/t}" title="{t}Delete this entry.{/t}">
 			</a>
 		</td>
 		{if $entries[$key].Hold == true}
 		<td>
 			<a href="{$plug}&act=unhold&id={$entries[$key].MailID}&server={$entries[$key].Server}">
-				<img src="images/mailq_unhold.png" border=0 alt="{t}unhold{/t}">
+				<img src="images/mailq_unhold.png" border=0 alt="{t}unhold{/t}" title="{t}Set status to unhold.{/t}">
 			</a>
 		</td>
 		{else}
 		<td>
 			<a href="{$plug}&act=hold&id={$entries[$key].MailID}&server={$entries[$key].Server}">
-				<img src="images/mailq_hold.png" border=0 alt="{t}hold{/t}">
+				<img src="images/mailq_hold.png" border=0 alt="{t}hold{/t}" title="{t}Set status to hold.{/t}">
 			</a>
 		</td>
 		{/if}
 		<td>
 			<a href="{$plug}&act=requeue&id={$entries[$key].MailID}&server={$entries[$key].Server}">
-				<img src="images/mailq_requeue.png" border=0 alt="{t}requeue{/t}">
+				<img src="images/mailq_requeue.png" border=0 alt="{t}requeue{/t}" title="{t}requeue this entry.{/t}">
 			</a>
 		</td>
 	</tr>
