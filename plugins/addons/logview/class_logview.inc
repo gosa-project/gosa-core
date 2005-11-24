@@ -16,6 +16,7 @@ class logview extends plugin
   var $loglevellist= array();
   var $tilist= array();
   var $fields= array("log_level", "host", "time_stamp", "message");
+  var $range = 25;
 
   function logview ($config, $dn= NULL)
   {
@@ -93,6 +94,10 @@ class logview extends plugin
 	/* Call parent execute */
 	plugin::execute();
 
+	if(isset($_POST['EntriesPerPage'])){
+		$this->range = $_POST['EntriesPerPage'];
+	}
+
   	/* Ignore if not defined */
   	if (!isset($this->config->data['SERVERS']['LOG'])){
 		return;
@@ -158,7 +163,7 @@ class logview extends plugin
 			$line= mysql_fetch_array($result, MYSQL_ASSOC);
 			$count= $line['COUNT(*)'];
 			if ($count > 25){
-				$smarty->assign("range_selector", range_selector($count, $this->start, 25));
+				$smarty->assign("range_selector", range_selector($count, $this->start, $this->range,"EntriesPerPage"));
 			}
 
 			/* Assemble time query */
