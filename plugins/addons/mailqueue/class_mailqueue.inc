@@ -14,7 +14,6 @@ class mailqueue extends plugin
   var $Time           = 0;
   var $Search         = "*";
   var $Page           = 0;
-  var $EntriesPerPage = 20;
   var $Stat           = "all";
   var $OrderBy        = "Arrival";
   var $SortType       = "up";
@@ -216,7 +215,7 @@ class mailqueue extends plugin
         /* */
         $entries = $mailQueueParser->GetAll();
  
-        $smarty->assign("entries"       , array_slice($entries,$this->Page,20));
+        $smarty->assign("entries"       , array_slice($entries,$this->Page,$this->range));
         $smarty->assign("plug"          , "?plug=".$_GET['plug']);
         $smarty->assign("r_stats"       , $this->getStats());
         $smarty->assign("stats"         , array_flip($this->getStats()));
