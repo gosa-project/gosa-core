@@ -1,0 +1,26 @@
+FAI support for GOsa
+====================
+
+Please note, that FAI support is work in progress. Anyway here's a quick
+guide how it works:
+
+1) Preparing FAI
+
+ a) adjust the secrets file to match the password of your terminal-admin
+    ldap user
+ b) build the debian package in goto-fai (i.e. using dpkg-buidpackage)
+ c) add the resulting package to your fai nfs-root
+
+2) Preparing GOsa
+
+ a) use the get-packages.pl script to generate a stripped down list of your
+    packages lists, move them to /etc/gosa/fai/servername/dist/.
+
+ b) use the get-debconf.sh script to extract the debconf templates from
+    your mirror, move the resulting debconf.d directory to
+	/etc/gosa/fai/servername/dist/debconf.d
+
+3) Create classes/etc in GOsa, follow the ordinary fai documentation to
+   get your clients booted
+
+
