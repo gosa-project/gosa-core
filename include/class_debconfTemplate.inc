@@ -286,35 +286,36 @@ class debconf
   {
     $post_name= $data['post_name'];
     if (preg_match('/\$\{/', $data['Choices'])){
-      $choices= array("Need to use some text...");
+      $result= $this->render_string($data);
     } else {
       $choices= "";
       foreach (split(", ", $data['Choices']) as $choice){
         $choices[]= $choice;
       }
-    }
 
-    $result="
-      <tr>
-      <td valign='top'>
-      <h2>".$data['Topic']."</h2>".$data['Description']."
-      </td>
-      <td valign='top'  style=\"white-space:nowrap; border-left: 1px solid rgb(160, 160, 160);\">
-        <input type='hidden' name='multi-".$post_name."' value='1'>
-      ";
-      
-    $defs = split(", ",$data['Default']);
-    foreach($choices as $value){
-      if(in_array($value,$defs)){
-        $result.="\n<input name='".$post_name."-multi-".$value."' type='checkbox' value='".htmlentities($value)."' checked>".$value."<br>";
-      }else{
-        $result.="\n<input name='".$post_name."-multi-".$value."' type='checkbox' value='".htmlentities($value)."'>".$value."<br>";
+
+      $result="
+        <tr>
+        <td valign='top'>
+        <h2>".$data['Topic']."</h2>".$data['Description']."
+        </td>
+        <td valign='top'  style=\"white-space:nowrap; border-left: 1px solid rgb(160, 160, 160);\">
+          <input type='hidden' name='multi-".$post_name."' value='1'>
+        ";
+        
+      $defs = split(", ",$data['Default']);
+      foreach($choices as $value){
+        if(in_array($value,$defs)){
+          $result.="\n<input name='".$post_name."-multi-".$value."' type='checkbox' value='".htmlentities($value)."' checked>".$value."<br>";
+        }else{
+          $result.="\n<input name='".$post_name."-multi-".$value."' type='checkbox' value='".htmlentities($value)."'>".$value."<br>";
+        }
       }
-    }
 
-  $result .=    "</td>
-      </tr>
-      ";
+    $result .=    "</td>
+        </tr>
+        ";
+    }    
 
     return ($result);
   }
@@ -388,8 +389,8 @@ class debconf
                   <td valign='top'>
                     <h2>".$data['Topic']."</h2>".$data['Description']."
                   </td>
-                  <td  style=\"white-space:nowrap; border-left: 1px solid rgb(160, 160, 160);\">
-                    <input type='text' name='".$data['post_name']."' value='".$data['Default']."'>
+                  <td  style=\"white-space:nowrap; border-left: 1px solid rgb(160, 160, 160);\" valign='top'>
+                    <input type='text' name='".$data['post_name']."' value='".$data['Default']."' style='width:300px;'>
                   </td>
                 </tr>
               ";
