@@ -78,10 +78,13 @@ class faiHook extends plugin
     }
   }
 
-  function getUsedFAItask()
+  function getUsedFAItask($cn)
   {
     $ret = array();
     foreach($this->SubObjects as $name => $class){
+      if($class['cn'] == $cn){
+        continue;
+      } 
       if($class['status'] != "delete"){
         $ret[$class['FAItask']] = $class['FAItask'];
       }
