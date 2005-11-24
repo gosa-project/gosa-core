@@ -17,6 +17,8 @@ class addressbook extends plugin
   var $storage_base= "";
   var $orig_storage_base= "";
 
+  var $range = 20;
+
   var $sn= "";
   var $cn= "";
   var $givenName= "";
@@ -478,7 +480,12 @@ $this->telephone_list[$attrs['sn'][0].$attrs['dn']]=
 			$smarty->assign("storage_info", _("Creating new entry in"));
 		}
 	} else {
-		$range= 20;
+
+	
+		if(isset($_POST['EntryPerPage'])){
+			$this->range = $_POST['EntryPerPage'];
+		}
+		$range = $this->range;	
 		$smarty->assign("internal", 1);
 	}
 	if (isset($_GET['start'])){
@@ -500,10 +507,15 @@ $this->telephone_list[$attrs['sn'][0].$attrs['dn']]=
 		}
 		$output.= "<tr $col>\n$val</tr>\n";
 	}
+
 	$smarty->assign("search_result", $output);
 	$smarty->assign("apply", apply_filter());
 	$smarty->assign("alphabet", $alphabet);
-	$smarty->assign("range_selector", range_selector(count($this->telephone_list), $this->start, $range));
+	if($range < 20){
+		$smarty->assign("range_selector", range_selector(count($this->telephone_list), $this->start, $range));
+	}else{
+		$smarty->assign("range_selector", range_selector(count($this->telephone_list), $this->start, $range, "EntryPerPage"));
+	}
 	$tmp= array("*" => _("All"), "sn" => _("Name"), "givenName" => _("Given name"),
 			"telephoneNumber" => _("Work phone"), "mobile" => _("Cell phone"),
 			"homePhone" => _("Home phone"), "uid" => _("User ID"));
