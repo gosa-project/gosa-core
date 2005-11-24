@@ -19,7 +19,7 @@ class mailqueue extends plugin
   var $OrderBy        = "Arrival";
   var $SortType       = "up";
   var $disp_header    = false;
-
+  var $range          = 20;   
 
   function mailqueue($config, $dn= NULL)
   {
@@ -40,6 +40,11 @@ class mailqueue extends plugin
   {
     /* Call parent execute */
     plugin::execute();
+
+    if(isset($_POST['EntriesPerPage'])){
+      $this->range = $_POST['EntriesPerPage'];
+    }
+
     $smarty= get_smarty();
     $error =false;
 
@@ -223,7 +228,7 @@ class mailqueue extends plugin
         $smarty->assign("p_times"       , $this->getTimes());
         $smarty->assign("p_timeKeys"    , array_flip($this->getTimes()));
         $smarty->assign("search_for"    , $this->Search);
-        $smarty->assign("range_selector", range_selector(count($entries), $this->Page, 20)); 
+        $smarty->assign("range_selector", range_selector(count($entries), $this->Page, $this->range,"EntriesPerPage")); 
         $smarty->assign("OrderBy"       , $this->OrderBy);
 
         /* Display sort arrow */
