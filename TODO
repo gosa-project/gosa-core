@@ -1,9 +1,11 @@
 Things to fix before 2.4:
 =========================
 
-* Divlists are broken in firefox 1.5rc1 
+* Divlists are broken in firefox 1.5rc1 - check it
 
-* Fix fai package divlist
+* Fix fai -> package lists -> add -> divlist which is totaly broken
+
+* Don't show "Entries per page" if the list is empty
 
 
 Target for 2.5:
