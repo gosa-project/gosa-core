@@ -60,7 +60,15 @@ class faiHookEntry extends plugin
         $this->FAIscript = $str;
       }
     }
-    $smarty->assign("tasks", $this->tasks);
+
+    $used_tasks = $this->parent->getUsedFAItask();
+    $tasks = $this->tasks;
+    foreach($this->tasks as $id => $task){
+      if(in_array($task,$used_tasks)){
+        unset($tasks[$id]);
+      }
+    }
+    $smarty->assign("tasks", $tasks);
 
      /* Magic quotes GPC, escapes every ' " \, to solve some security risks
      * If we post the escaped strings they will be escaped again

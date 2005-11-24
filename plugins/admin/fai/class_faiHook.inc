@@ -78,6 +78,17 @@ class faiHook extends plugin
     }
   }
 
+  function getUsedFAItask()
+  {
+    $ret = array();
+    foreach($this->SubObjects as $name => $class){
+      if($class['status'] != "delete"){
+        $ret[$class['FAItask']] = $class['FAItask'];
+      }
+    }
+    return($ret);
+  }
+
   function execute()
   {
 	/* Call parent execute */
@@ -90,6 +101,7 @@ class faiHook extends plugin
     /* Add new sub object */
     if(isset($_POST['AddSubObject'])){
       $this->dialog= new $this->subClassName($this->config,"new");
+      $this->dialog->parent = &$this;
       $this->is_dialog=true;
     }
   
@@ -99,6 +111,7 @@ class faiHook extends plugin
     /* Edit selected Sub Object */
     if((isset($_POST['EditSubObject']))&&(isset($_POST['SubObject']))){
       $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$_POST['SubObject']]);
+      $this->dialog->parent = &$this;
       $_SESSION['objectinfo'] = $this->SubObjects[$_POST['SubObject']]['dn'];
       $this->is_dialog=true;
     }
