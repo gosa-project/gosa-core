@@ -18,6 +18,8 @@ class faxreport extends plugin
   var $userfilter= "";
   var $ui= NULL;
 
+  var $range = 20;
+
   /* Constant stuff */
   var $status= array( "SENT", "MAILED", "SERROR", "RERROR", "SBLOCK", "RBLOCK",
 			"DELETED", "REQUEUED", "DISABLED", "PRINTED", "DIVERTED",
@@ -60,6 +62,10 @@ class faxreport extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+
+	if(isset($_POST['EntriesPerPage'])){
+		$this->range = $_POST['EntriesPerPage'];
+	}
 
 	/* Get template engine */
 	$smarty= get_smarty();
@@ -266,7 +272,7 @@ class faxreport extends plugin
 			$mod++;
 			continue;
 		}
-		if ($mod >= ($this->start + 20)){
+		if ($mod >= ($this->start + $this->range)){
 			$mod++;
 			break;
 		}
@@ -298,7 +304,7 @@ class faxreport extends plugin
 
 	if (isset($fax_users) && count($fax_users)){
 		$smarty->assign("search_result", $output);
-        	$smarty->assign("range_selector", range_selector(count($this->report_list), $this->start, 20));
+        	$smarty->assign("range_selector", range_selector(count($this->report_list), $this->start, $this->range,"EntriesPerPage"));
 	}else{
 		$smarty->assign("search_result", "");
 	}
