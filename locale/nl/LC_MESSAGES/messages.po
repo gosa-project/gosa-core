@@ -102,11 +102,11 @@ msgstr "Fax"
 
 #: contrib/gosa.conf:77 plugins/personal/generic/generic.tpl:224
 #: plugins/personal/generic/generic.tpl:362
-#: plugins/addons/addressbook/address_edit.tpl:48
-#: plugins/addons/addressbook/address_edit.tpl:96
 #: plugins/addons/addressbook/contents.tpl:14
 #: plugins/addons/addressbook/address_info.tpl:37
 #: plugins/addons/addressbook/address_info.tpl:85
+#: plugins/addons/addressbook/address_edit.tpl:48
+#: plugins/addons/addressbook/address_edit.tpl:96
 #: plugins/admin/groups/class_groupManagement.inc:377
 #: plugins/admin/users/class_userManagement.inc:733
 #: plugins/admin/departments/generic.tpl:58
@@ -411,8 +411,8 @@ msgstr "Opslaan"
 #: plugins/gofax/faxaccount/locals.tpl:62
 #: plugins/gofax/faxaccount/lists.tpl:33 plugins/gofax/faxaccount/main.inc:91
 #: plugins/addons/addressbook/dial.tpl:10
-#: plugins/addons/addressbook/address_edit.tpl:115
 #: plugins/addons/addressbook/remove.tpl:16
+#: plugins/addons/addressbook/address_edit.tpl:115
 #: plugins/admin/fai/class_faiManagement.inc:392
 #: plugins/admin/fai/class_faiManagement.inc:397
 #: plugins/admin/fai/faiProfileEntry.tpl:72
@@ -516,8 +516,8 @@ msgstr "Host notificatie opties"
 
 #: plugins/personal/nagios/nagios.tpl:48
 #: plugins/personal/generic/generic.tpl:235
-#: plugins/addons/addressbook/address_edit.tpl:102
-#: plugins/addons/addressbook/address_info.tpl:91 html/getxls.php:174
+#: plugins/addons/addressbook/address_info.tpl:91
+#: plugins/addons/addressbook/address_edit.tpl:102 html/getxls.php:174
 #: html/getxls.php:236
 msgid "Pager"
 msgstr "Pieper"
@@ -568,7 +568,7 @@ msgid "Primary address"
 msgstr "Primair adres"
 
 #: plugins/personal/mail/generic.tpl:11
-#: plugins/addons/mailqueue/contents.tpl:32 plugins/admin/groups/mail.tpl:14
+#: plugins/addons/mailqueue/contents.tpl:55 plugins/admin/groups/mail.tpl:14
 #: plugins/admin/systems/class_systemManagement.inc:709
 #: plugins/admin/ogroups/class_ogroupManagement.inc:486
 #: plugins/generic/references/class_reference.inc:44
@@ -629,7 +629,7 @@ msgstr "Lijst met alternatieve E-mail adressen"
 #: plugins/admin/fai/faiProfile.tpl:37 plugins/admin/fai/faiScript.tpl:43
 #: plugins/admin/fai/faiTemplate.tpl:40 plugins/admin/fai/faiHook.tpl:43
 #: plugins/admin/groups/mail.tpl:51 plugins/admin/groups/mail.tpl:95
-#: plugins/admin/groups/class_groupMail.inc:408
+#: plugins/admin/groups/class_groupMail.inc:413
 #: plugins/admin/groups/application.tpl:14
 #: plugins/admin/groups/group_objects.tpl:47
 #: plugins/admin/groups/generic.tpl:103
@@ -637,9 +637,9 @@ msgstr "Lijst met alternatieve E-mail adressen"
 #: plugins/admin/systems/servservice.tpl:20
 #: plugins/admin/systems/servservice.tpl:47
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:60
-#: plugins/admin/systems/workstationStartup.tpl:53
-#: plugins/admin/systems/workstationStartup.tpl:73
-#: plugins/admin/systems/workstationStartup.tpl:92
+#: plugins/admin/systems/workstationStartup.tpl:50
+#: plugins/admin/systems/workstationStartup.tpl:70
+#: plugins/admin/systems/workstationStartup.tpl:89
 #: plugins/admin/systems/phonesettings.tpl:176
 #: plugins/admin/systems/phonesettings.tpl:191
 #: plugins/admin/systems/terminalStartup.tpl:61
@@ -674,8 +674,8 @@ msgstr "Toevoegen"
 #: plugins/admin/departments/remove.tpl:14
 #: plugins/admin/systems/servservice.tpl:22
 #: plugins/admin/systems/servservice.tpl:48
-#: plugins/admin/systems/workstationStartup.tpl:54
-#: plugins/admin/systems/workstationStartup.tpl:74
+#: plugins/admin/systems/workstationStartup.tpl:51
+#: plugins/admin/systems/workstationStartup.tpl:71
 #: plugins/admin/systems/printer.tpl:70 plugins/admin/systems/printer.tpl:86
 #: plugins/admin/systems/phonesettings.tpl:177
 #: plugins/admin/systems/phonesettings.tpl:192
@@ -779,22 +779,22 @@ msgstr "schakelt alle E-mail opties uit!"
 msgid "There is no mail method '%s' specified in your gosa.conf available."
 msgstr "De E-mail methode '%s' opgegeven in uw gosa.conf is niet beschikbaar."
 
-#: plugins/personal/mail/class_mailAccount.inc:163
+#: plugins/personal/mail/class_mailAccount.inc:170
 msgid "No DESC tag in vacation file:"
 msgstr "Er is geen DESC variabele aanwezig in het afwezigheidsbestand:"
 
-#: plugins/personal/mail/class_mailAccount.inc:203
+#: plugins/personal/mail/class_mailAccount.inc:210
 msgid "This account has no mail extensions."
 msgstr "Dit account heeft E-mail mogelijkheden uitgeschakeld."
 
-#: plugins/personal/mail/class_mailAccount.inc:212
-#: plugins/admin/groups/class_groupMail.inc:190
+#: plugins/personal/mail/class_mailAccount.inc:219
+#: plugins/admin/groups/class_groupMail.inc:195
 #: plugins/admin/ogroups/class_mailogroup.inc:40
 msgid "Remove mail account"
 msgstr "E-mail account verwijderen"
 
-#: plugins/personal/mail/class_mailAccount.inc:213
-#: plugins/admin/groups/class_groupMail.inc:191
+#: plugins/personal/mail/class_mailAccount.inc:220
+#: plugins/admin/groups/class_groupMail.inc:196
 msgid ""
 "This account has mail features enabled. You can disable them by clicking "
 "below."
@@ -802,14 +802,14 @@ msgstr ""
 "Dit account heeft E-mail mogelijkheden ingeschakeld. U kunt deze "
 "uitschakelen door de knop hieronder te gebruiken."
 
-#: plugins/personal/mail/class_mailAccount.inc:215
-#: plugins/admin/groups/class_groupMail.inc:193
+#: plugins/personal/mail/class_mailAccount.inc:222
+#: plugins/admin/groups/class_groupMail.inc:198
 #: plugins/admin/ogroups/class_mailogroup.inc:43
 msgid "Create mail account"
 msgstr "E-mail account aanmaken"
 
-#: plugins/personal/mail/class_mailAccount.inc:215
-#: plugins/admin/groups/class_groupMail.inc:194
+#: plugins/personal/mail/class_mailAccount.inc:222
+#: plugins/admin/groups/class_groupMail.inc:199
 msgid ""
 "This account has mail features disabled. You can enable them by clicking "
 "below."
@@ -817,22 +817,22 @@ msgstr ""
 "Dit account heeft geen E-mail mogelijkheden. U kunt deze inschakelen door de "
 "knop hieronder te gebruiken."
 
-#: plugins/personal/mail/class_mailAccount.inc:263
+#: plugins/personal/mail/class_mailAccount.inc:270
 msgid ""
 "You're trying to add an invalid email address to the list of forwarders."
 msgstr ""
 "U probeert een ongeldig email adres toe te voegen aan de doorstuurlijst."
 
-#: plugins/personal/mail/class_mailAccount.inc:269
-#: plugins/admin/groups/class_groupMail.inc:253
+#: plugins/personal/mail/class_mailAccount.inc:276
+#: plugins/admin/groups/class_groupMail.inc:258
 msgid "Adding your one of your own addresses to the forwarders makes no sense."
 msgstr ""
 "Het toevoegen van een van uw eigen adressen aan de lijst met doorstuur "
 "adressen is niet logisch."
 
-#: plugins/personal/mail/class_mailAccount.inc:304
-#: plugins/personal/mail/class_mailAccount.inc:309
-#: plugins/admin/groups/class_groupMail.inc:281
+#: plugins/personal/mail/class_mailAccount.inc:311
+#: plugins/personal/mail/class_mailAccount.inc:316
+#: plugins/admin/groups/class_groupMail.inc:286
 msgid ""
 "You're trying to add an invalid email address to the list of alternate "
 "addresses."
@@ -840,55 +840,55 @@ msgstr ""
 "U probeert een ongeldig E-mail adres toe te voegen aan de lijst met "
 "alternatieve adressen."
 
-#: plugins/personal/mail/class_mailAccount.inc:319
-#: plugins/admin/groups/class_groupMail.inc:286
+#: plugins/personal/mail/class_mailAccount.inc:326
+#: plugins/admin/groups/class_groupMail.inc:291
 msgid "The address you're trying to add is already used by user"
 msgstr ""
 "Het adres dat u probeert toe te voegen wordt al gebruikt door gebruiker"
 
-#: plugins/personal/mail/class_mailAccount.inc:693
+#: plugins/personal/mail/class_mailAccount.inc:700
 msgid ""
 "There is no valid mailserver specified, please add one in the system setup."
 msgstr ""
 "Er is geen geldige mailserver gespecificeerd. Voeg er a.u.b. een toe in de "
 "systeem instellingen."
 
-#: plugins/personal/mail/class_mailAccount.inc:698
-#: plugins/admin/groups/class_groupMail.inc:614
+#: plugins/personal/mail/class_mailAccount.inc:705
+#: plugins/admin/groups/class_groupMail.inc:619
 msgid "The required field 'Primary address' is not set."
 msgstr "Het vereiste veld 'Primair adres' is leeg."
 
-#: plugins/personal/mail/class_mailAccount.inc:702
-#: plugins/personal/mail/class_mailAccount.inc:706
-#: plugins/addons/addressbook/class_addressbook.inc:573
+#: plugins/personal/mail/class_mailAccount.inc:709
+#: plugins/personal/mail/class_mailAccount.inc:713
+#: plugins/addons/addressbook/class_addressbook.inc:585
 #: plugins/admin/ogroups/class_mailogroup.inc:70
 msgid "Please enter a valid email address in 'Primary address' field."
 msgstr "Geef a.u.b. een geldig E-mail adres voor het 'Primair adres' op."
 
-#: plugins/personal/mail/class_mailAccount.inc:713
-#: plugins/admin/groups/class_groupMail.inc:623
+#: plugins/personal/mail/class_mailAccount.inc:720
+#: plugins/admin/groups/class_groupMail.inc:628
 #: plugins/admin/ogroups/class_mailogroup.inc:77
 msgid "The primary address you've entered is already in use."
 msgstr "Het primaire adres dat u opgegeven heeft wordt al gebruikt."
 
-#: plugins/personal/mail/class_mailAccount.inc:719
-#: plugins/admin/groups/class_groupMail.inc:629
+#: plugins/personal/mail/class_mailAccount.inc:726
+#: plugins/admin/groups/class_groupMail.inc:634
 msgid "Value in 'Quota size' is not valid."
 msgstr "De waarde opgegeven bij 'Quota grootte' is niet geldig."
 
-#: plugins/personal/mail/class_mailAccount.inc:728
-#: plugins/admin/groups/class_groupMail.inc:638
+#: plugins/personal/mail/class_mailAccount.inc:735
+#: plugins/admin/groups/class_groupMail.inc:643
 msgid "Please specify a vaild mail size for mails to be rejected."
 msgstr "Geef a.u.b. een geldige E-mail grootte op voor af te wijzen E-mails."
 
-#: plugins/personal/mail/class_mailAccount.inc:738
-#: plugins/admin/groups/class_groupMail.inc:646
+#: plugins/personal/mail/class_mailAccount.inc:745
+#: plugins/admin/groups/class_groupMail.inc:651
 msgid "You need to set the maximum mail size in order to reject anything."
 msgstr ""
 "U moet de maximale E-mail grootte instellen om uberhaupt iets af te kunnen "
 "afwijzen."
 
-#: plugins/personal/mail/class_mailAccount.inc:742
+#: plugins/personal/mail/class_mailAccount.inc:749
 msgid "You specified Spam settings, but there is no Folder specified."
 msgstr "U heeft Spam instellingen opgegeven, maar geen mailfolder opgegeven."
 
@@ -1032,7 +1032,7 @@ msgstr ""
 #: plugins/addons/ldapmanager/contentexportxls.tpl:69
 #: plugins/addons/ldapmanager/contentimport.tpl:44
 #: plugins/addons/ldapmanager/contentcsv.tpl:122
-#: plugins/addons/ldapmanager/contentexport.tpl:66 include/functions.inc:1285
+#: plugins/addons/ldapmanager/contentexport.tpl:66 include/functions.inc:1311
 #: ihtml/themes/altlinux/setup_useradmin.tpl:40
 #: ihtml/themes/altlinux/setup_step2.tpl:12
 #: ihtml/themes/altlinux/setup_step3.tpl:17
@@ -1330,8 +1330,8 @@ msgstr "Waarschuw de gebruiker %s dagen voordat het wachtwoord verloopt"
 #: plugins/personal/samba/class_sambaAccount.inc:391
 #: plugins/personal/samba/class_sambaAccount.inc:409
 #: plugins/personal/generic/class_user.inc:240
-#: plugins/gofax/reports/class_faxreport.inc:286
-#: plugins/gofon/reports/class_fonreport.inc:217
+#: plugins/gofax/reports/class_faxreport.inc:292
+#: plugins/gofon/reports/class_fonreport.inc:222
 msgid "January"
 msgstr "Januari"
 
@@ -1341,8 +1341,8 @@ msgstr "Januari"
 #: plugins/personal/samba/class_sambaAccount.inc:391
 #: plugins/personal/samba/class_sambaAccount.inc:409
 #: plugins/personal/generic/class_user.inc:240
-#: plugins/gofax/reports/class_faxreport.inc:286
-#: plugins/gofon/reports/class_fonreport.inc:217
+#: plugins/gofax/reports/class_faxreport.inc:292
+#: plugins/gofon/reports/class_fonreport.inc:222
 msgid "February"
 msgstr "Februari"
 
@@ -1352,8 +1352,8 @@ msgstr "Februari"
 #: plugins/personal/samba/class_sambaAccount.inc:391
 #: plugins/personal/samba/class_sambaAccount.inc:409
 #: plugins/personal/generic/class_user.inc:240
-#: plugins/gofax/reports/class_faxreport.inc:286
-#: plugins/gofon/reports/class_fonreport.inc:217
+#: plugins/gofax/reports/class_faxreport.inc:292
+#: plugins/gofon/reports/class_fonreport.inc:222
 msgid "March"
 msgstr "Maart"
 
@@ -1363,8 +1363,8 @@ msgstr "Maart"
 #: plugins/personal/samba/class_sambaAccount.inc:391
 #: plugins/personal/samba/class_sambaAccount.inc:409
 #: plugins/personal/generic/class_user.inc:240
-#: plugins/gofax/reports/class_faxreport.inc:286
-#: plugins/gofon/reports/class_fonreport.inc:217
+#: plugins/gofax/reports/class_faxreport.inc:292
+#: plugins/gofon/reports/class_fonreport.inc:222
 msgid "April"
 msgstr "April"
 
@@ -1374,8 +1374,8 @@ msgstr "April"
 #: plugins/personal/samba/class_sambaAccount.inc:392
 #: plugins/personal/samba/class_sambaAccount.inc:410
 #: plugins/personal/generic/class_user.inc:241
-#: plugins/gofax/reports/class_faxreport.inc:287
-#: plugins/gofon/reports/class_fonreport.inc:218
+#: plugins/gofax/reports/class_faxreport.inc:293
+#: plugins/gofon/reports/class_fonreport.inc:223
 msgid "May"
 msgstr "Mei"
 
@@ -1385,8 +1385,8 @@ msgstr "Mei"
 #: plugins/personal/samba/class_sambaAccount.inc:392
 #: plugins/personal/samba/class_sambaAccount.inc:410
 #: plugins/personal/generic/class_user.inc:241
-#: plugins/gofax/reports/class_faxreport.inc:287
-#: plugins/gofon/reports/class_fonreport.inc:218
+#: plugins/gofax/reports/class_faxreport.inc:293
+#: plugins/gofon/reports/class_fonreport.inc:223
 msgid "June"
 msgstr "Juni"
 
@@ -1396,8 +1396,8 @@ msgstr "Juni"
 #: plugins/personal/samba/class_sambaAccount.inc:392
 #: plugins/personal/samba/class_sambaAccount.inc:410
 #: plugins/personal/generic/class_user.inc:241
-#: plugins/gofax/reports/class_faxreport.inc:287
-#: plugins/gofon/reports/class_fonreport.inc:218
+#: plugins/gofax/reports/class_faxreport.inc:293
+#: plugins/gofon/reports/class_fonreport.inc:223
 msgid "July"
 msgstr "Juli"
 
@@ -1407,8 +1407,8 @@ msgstr "Juli"
 #: plugins/personal/samba/class_sambaAccount.inc:392
 #: plugins/personal/samba/class_sambaAccount.inc:410
 #: plugins/personal/generic/class_user.inc:241
-#: plugins/gofax/reports/class_faxreport.inc:287
-#: plugins/gofon/reports/class_fonreport.inc:218
+#: plugins/gofax/reports/class_faxreport.inc:293
+#: plugins/gofon/reports/class_fonreport.inc:223
 msgid "August"
 msgstr "Augustus"
 
@@ -1418,8 +1418,8 @@ msgstr "Augustus"
 #: plugins/personal/samba/class_sambaAccount.inc:392
 #: plugins/personal/samba/class_sambaAccount.inc:410
 #: plugins/personal/generic/class_user.inc:241
-#: plugins/gofax/reports/class_faxreport.inc:288
-#: plugins/gofon/reports/class_fonreport.inc:219
+#: plugins/gofax/reports/class_faxreport.inc:294
+#: plugins/gofon/reports/class_fonreport.inc:224
 msgid "September"
 msgstr "September"
 
@@ -1429,8 +1429,8 @@ msgstr "September"
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/generic/class_user.inc:242
-#: plugins/gofax/reports/class_faxreport.inc:288
-#: plugins/gofon/reports/class_fonreport.inc:219
+#: plugins/gofax/reports/class_faxreport.inc:294
+#: plugins/gofon/reports/class_fonreport.inc:224
 msgid "October"
 msgstr "Oktober"
 
@@ -1440,8 +1440,8 @@ msgstr "Oktober"
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/generic/class_user.inc:242
-#: plugins/gofax/reports/class_faxreport.inc:288
-#: plugins/gofon/reports/class_fonreport.inc:219
+#: plugins/gofax/reports/class_faxreport.inc:294
+#: plugins/gofon/reports/class_fonreport.inc:224
 msgid "November"
 msgstr "November"
 
@@ -1451,8 +1451,8 @@ msgstr "November"
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/generic/class_user.inc:242
-#: plugins/gofax/reports/class_faxreport.inc:288
-#: plugins/gofon/reports/class_fonreport.inc:219
+#: plugins/gofax/reports/class_faxreport.inc:294
+#: plugins/gofon/reports/class_fonreport.inc:224
 msgid "December"
 msgstr "December"
 
@@ -1887,7 +1887,7 @@ msgstr ""
 #: plugins/personal/environment/class_environment.inc:485
 #: plugins/personal/environment/class_environment.inc:487
 #: plugins/admin/systems/class_terminalStartup.inc:134
-#: plugins/admin/systems/class_workstationStartup.inc:280
+#: plugins/admin/systems/class_workstationStartup.inc:345
 msgid "You must specify a valid mount point."
 msgstr "U moet een geldig mountpunt opgeven."
 
@@ -1997,13 +1997,13 @@ msgid "Resolution"
 msgstr "Resolutie"
 
 #: plugins/personal/environment/environment.tpl:103
-#: plugins/admin/systems/workstationStartup.tpl:78
+#: plugins/admin/systems/workstationStartup.tpl:75
 #: plugins/admin/systems/terminalStartup.tpl:66
 msgid "Shares"
 msgstr "Shares"
 
 #: plugins/personal/environment/environment.tpl:116
-#: plugins/admin/systems/workstationStartup.tpl:91
+#: plugins/admin/systems/workstationStartup.tpl:88
 #: plugins/admin/systems/terminalStartup.tpl:79
 msgid "Mountpoint"
 msgstr "Koppelpunt"
@@ -2016,9 +2016,9 @@ msgstr "Koppelpunt"
 #: plugins/personal/connectivity/class_kolabAccount.inc:206
 #: plugins/admin/fai/faiPackage.tpl:75
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:248
-#: plugins/admin/groups/class_groupMail.inc:412
+#: plugins/admin/groups/class_groupMail.inc:417
 #: plugins/admin/applications/class_applicationParameters.inc:97
-#: plugins/admin/systems/workstationStartup.tpl:93
+#: plugins/admin/systems/workstationStartup.tpl:90
 #: plugins/admin/systems/printer.tpl:47
 #: plugins/admin/systems/terminalStartup.tpl:81
 #: ihtml/themes/altlinux/islocked.tpl:13 ihtml/themes/default/islocked.tpl:13
@@ -2135,7 +2135,7 @@ msgstr "Login script"
 #: plugins/admin/fai/faiTemplateEntry.tpl:132
 #: plugins/admin/groups/mail_admins.tpl:37
 #: plugins/admin/groups/application_options.tpl:8
-#: plugins/admin/systems/printerPPDDialog.tpl:22 include/functions.inc:1276
+#: plugins/admin/systems/printerPPDDialog.tpl:22 include/functions.inc:1302
 msgid "Apply"
 msgstr "Toepassen"
 
@@ -2233,36 +2233,25 @@ msgstr "Verander plaatje"
 
 #: plugins/personal/generic/generic.tpl:24
 #: plugins/addons/addressbook/address_edit.tpl:22
-#: plugins/addons/addressbook/contents.tpl:14
-#: plugins/addons/addressbook/class_addressbook.inc:507
-#: plugins/addons/addressbook/address_info.tpl:16
-#: plugins/admin/fai/faiPartitionTable.tpl:9
-#: plugins/admin/fai/faiVariable.tpl:9 plugins/admin/fai/faiScriptEntry.tpl:9
-#: plugins/admin/fai/faiPackage.tpl:9 plugins/admin/fai/faiProfile.tpl:9
-#: plugins/admin/fai/faiPartitionTableEntry.tpl:6
-#: plugins/admin/fai/faiScript.tpl:9 plugins/admin/fai/faiVariableEntry.tpl:9
-#: plugins/admin/fai/faiTemplate.tpl:9 plugins/admin/fai/faiHookEntry.tpl:9
-#: plugins/admin/fai/faiTemplateEntry.tpl:7 plugins/admin/fai/faiHook.tpl:9
-#: plugins/admin/users/template.tpl:19 plugins/admin/systems/servnfs.tpl:9
-#: plugins/gofon/macro/parameter.tpl:5 html/getxls.php:174 html/getxls.php:233
-msgid "Name"
-msgstr "Naam"
+#: plugins/admin/users/template.tpl:19
+#, fuzzy
+msgid "First name"
+msgstr "Lijstnaam"
 
 #: plugins/personal/generic/generic.tpl:30
 #: plugins/addons/addressbook/address_edit.tpl:22
-#: plugins/addons/addressbook/class_addressbook.inc:507
-#: plugins/admin/users/template.tpl:23 html/getxls.php:65 html/getxls.php:174
-#: html/getxls.php:224 html/getxls.php:236
-msgid "Given name"
-msgstr "Voornaam"
+#: plugins/admin/users/template.tpl:23
+#, fuzzy
+msgid "Last name"
+msgstr "Lijstnaam"
 
 #: plugins/personal/generic/generic.tpl:34 plugins/admin/users/template.tpl:28
 msgid "Login"
 msgstr "Inlognaam"
 
 #: plugins/personal/generic/generic.tpl:42
-#: plugins/addons/addressbook/address_edit.tpl:33
 #: plugins/addons/addressbook/address_info.tpl:22
+#: plugins/addons/addressbook/address_edit.tpl:33
 msgid "Personal title"
 msgstr "Persoonlijke titel"
 
@@ -2309,10 +2298,10 @@ msgstr "Kies de subtree waaronder de gebruiker geplaatst wordt"
 
 #: plugins/personal/generic/generic.tpl:121
 #: plugins/personal/generic/generic.tpl:265
-#: plugins/addons/addressbook/address_edit.tpl:44
-#: plugins/addons/addressbook/address_edit.tpl:93
 #: plugins/addons/addressbook/address_info.tpl:33
 #: plugins/addons/addressbook/address_info.tpl:82
+#: plugins/addons/addressbook/address_edit.tpl:44
+#: plugins/addons/addressbook/address_edit.tpl:93
 #: plugins/admin/departments/generic.tpl:54 html/getxls.php:174
 msgid "Address"
 msgstr "Adres"
@@ -2356,8 +2345,8 @@ msgstr "Organisatie"
 
 #: plugins/personal/generic/generic.tpl:187
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:310
-#: plugins/addons/addressbook/address_edit.tpl:75
 #: plugins/addons/addressbook/address_info.tpl:64
+#: plugins/addons/addressbook/address_edit.tpl:75
 #: plugins/admin/groups/class_groupManagement.inc:386
 #: plugins/admin/users/class_userManagement.inc:689
 #: plugins/admin/applications/class_applicationManagement.inc:357
@@ -2387,9 +2376,9 @@ msgid "Room No."
 msgstr "Kamer nr."
 
 #: plugins/personal/generic/generic.tpl:231
-#: plugins/addons/addressbook/address_edit.tpl:51
 #: plugins/addons/addressbook/contents.tpl:15
-#: plugins/addons/addressbook/address_info.tpl:40 html/getxls.php:236
+#: plugins/addons/addressbook/address_info.tpl:40
+#: plugins/addons/addressbook/address_edit.tpl:51 html/getxls.php:236
 msgid "Mobile"
 msgstr "GSM"
 
@@ -2439,8 +2428,8 @@ msgid "Street"
 msgstr "Straat"
 
 #: plugins/personal/generic/generic.tpl:339
-#: plugins/addons/addressbook/address_edit.tpl:81
-#: plugins/addons/addressbook/address_info.tpl:70 html/getxls.php:174
+#: plugins/addons/addressbook/address_info.tpl:70
+#: plugins/addons/addressbook/address_edit.tpl:81 html/getxls.php:174
 msgid "Postal code"
 msgstr "Postcode"
 
@@ -2542,7 +2531,7 @@ msgstr ""
 "'Basis'."
 
 #: plugins/personal/generic/class_user.inc:921
-#: plugins/addons/addressbook/class_addressbook.inc:530
+#: plugins/addons/addressbook/class_addressbook.inc:542
 #: plugins/admin/users/class_userManagement.inc:546
 msgid "The required field 'Name' is not set."
 msgstr "Het vereiste veld '(Achter)naam' is leeg."
@@ -2552,7 +2541,7 @@ msgid "There's already a person with this 'Login' in the database."
 msgstr "Er bestaat al een account met deze 'Inlog naam' in de database."
 
 #: plugins/personal/generic/class_user.inc:936
-#: plugins/addons/addressbook/class_addressbook.inc:534
+#: plugins/addons/addressbook/class_addressbook.inc:546
 #: plugins/admin/users/class_userManagement.inc:549
 msgid "The required field 'Given name' is not set."
 msgstr "Het vereiste veld 'Voornaam' is leeg."
@@ -2583,40 +2572,40 @@ msgstr "Het veld 'Website' bevat een ongeldige URL."
 
 #: plugins/personal/generic/class_user.inc:959
 #: plugins/personal/generic/class_user.inc:987
-#: plugins/addons/addressbook/class_addressbook.inc:540
-#: plugins/addons/addressbook/class_addressbook.inc:568
+#: plugins/addons/addressbook/class_addressbook.inc:552
+#: plugins/addons/addressbook/class_addressbook.inc:580
 #: plugins/admin/departments/class_departmentGeneric.inc:169
 msgid "The field 'Name' contains invalid characters."
 msgstr "Het veld 'Naam' bevat ongeldige karakters."
 
 #: plugins/personal/generic/class_user.inc:962
 #: plugins/personal/generic/class_user.inc:984
-#: plugins/addons/addressbook/class_addressbook.inc:543
-#: plugins/addons/addressbook/class_addressbook.inc:565
+#: plugins/addons/addressbook/class_addressbook.inc:555
+#: plugins/addons/addressbook/class_addressbook.inc:577
 msgid "The field 'Given name' contains invalid characters."
 msgstr "Het veld 'Voornaam' bevat ongeldige karakters."
 
 #: plugins/personal/generic/class_user.inc:967
 #: plugins/personal/generic/class_user.inc:970
-#: plugins/addons/addressbook/class_addressbook.inc:548
-#: plugins/addons/addressbook/class_addressbook.inc:551
+#: plugins/addons/addressbook/class_addressbook.inc:560
+#: plugins/addons/addressbook/class_addressbook.inc:563
 #: plugins/admin/departments/class_departmentGeneric.inc:172
 msgid "The field 'Phone' contains an invalid phone number."
 msgstr "Het veld 'Telefoon' bevat een ongeldig telefoonnummer."
 
 #: plugins/personal/generic/class_user.inc:973
-#: plugins/addons/addressbook/class_addressbook.inc:554
+#: plugins/addons/addressbook/class_addressbook.inc:566
 #: plugins/admin/departments/class_departmentGeneric.inc:175
 msgid "The field 'Fax' contains an invalid phone number."
 msgstr "Het veld 'Fax' bevat een ongeldig Faxnummer."
 
 #: plugins/personal/generic/class_user.inc:976
-#: plugins/addons/addressbook/class_addressbook.inc:557
+#: plugins/addons/addressbook/class_addressbook.inc:569
 msgid "The field 'Mobile' contains an invalid phone number."
 msgstr "Het veld 'GSM' bevat een ongeldig telefoonnummer"
 
 #: plugins/personal/generic/class_user.inc:979
-#: plugins/addons/addressbook/class_addressbook.inc:560
+#: plugins/addons/addressbook/class_addressbook.inc:572
 msgid "The field 'Pager' contains an invalid phone number."
 msgstr "Het veld 'Pieper' bevat een ongeldig telefoonnummer."
 
@@ -2742,7 +2731,7 @@ msgid "Files"
 msgstr "Bestanden"
 
 #: plugins/personal/connectivity/pureftpd.tpl:39
-#: plugins/addons/mailqueue/contents.tpl:33
+#: plugins/addons/mailqueue/contents.tpl:56
 msgid "Size"
 msgstr "Grootte"
 
@@ -2812,7 +2801,7 @@ msgid "GB"
 msgstr "GB"
 
 #: plugins/personal/connectivity/class_proxyAccount.inc:82
-#: plugins/addons/mailqueue/class_mailqueue.inc:170
+#: plugins/addons/mailqueue/class_mailqueue.inc:283
 msgid "hour"
 msgstr "uur"
 
@@ -3156,6 +3145,7 @@ msgid "Edit user"
 msgstr "Bewerk gebruiker"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:304
+#: plugins/addons/mailqueue/contents.tpl:95
 #: plugins/admin/fai/class_faiManagement.inc:481
 #: plugins/admin/groups/class_groupManagement.inc:363
 #: plugins/admin/users/class_userManagement.inc:682
@@ -3437,8 +3427,8 @@ msgid "FAX settings"
 msgstr "Fax instellingen"
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:6
-#: plugins/addons/addressbook/address_edit.tpl:99
 #: plugins/addons/addressbook/address_info.tpl:88
+#: plugins/addons/addressbook/address_edit.tpl:99
 #: plugins/generic/references/class_reference.inc:30
 msgid "FAX"
 msgstr "Fax"
@@ -3477,8 +3467,9 @@ msgstr "U probeert een ongeldig telefoonnummer toe te voegen."
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:431
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:513
-#: plugins/admin/groups/class_groupApplication.inc:375
-#: plugins/admin/groups/class_groupApplication.inc:426
+#: plugins/addons/mailqueue/header.tpl:5
+#: plugins/admin/groups/class_groupApplication.inc:365
+#: plugins/admin/groups/class_groupApplication.inc:416
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:88
 #, fuzzy
 msgid "back"
@@ -3563,33 +3554,33 @@ msgstr "# pagina's"
 msgid "FAX Reports"
 msgstr "Fax rapporten"
 
-#: plugins/gofax/reports/class_faxreport.inc:100
+#: plugins/gofax/reports/class_faxreport.inc:106
 msgid "There is no mysql extension available, please check your php setup."
 msgstr ""
 
-#: plugins/gofax/reports/class_faxreport.inc:106
-#: plugins/gofax/reports/class_faxreport.inc:218
+#: plugins/gofax/reports/class_faxreport.inc:112
+#: plugins/gofax/reports/class_faxreport.inc:224
 msgid "Can't connect to fax database, no reports can be shown!"
 msgstr ""
 "Kan niet verbinden met de Fax database. Rapporten kunnen niet getoond worden!"
 
-#: plugins/gofax/reports/class_faxreport.inc:110
-#: plugins/gofax/reports/class_faxreport.inc:222
+#: plugins/gofax/reports/class_faxreport.inc:116
+#: plugins/gofax/reports/class_faxreport.inc:228
 msgid "Can't select fax database for report generation!"
 msgstr "Kan de Fax database voor rapportage niet selecteren!"
 
-#: plugins/gofax/reports/class_faxreport.inc:118
-#: plugins/gofax/reports/class_faxreport.inc:230
+#: plugins/gofax/reports/class_faxreport.inc:124
+#: plugins/gofax/reports/class_faxreport.inc:236
 msgid "Query for fax database failed!"
 msgstr "De zoekopdracht op de Fax database is mislukt!"
 
-#: plugins/gofax/reports/class_faxreport.inc:126
+#: plugins/gofax/reports/class_faxreport.inc:132
 msgid "You have no permission to retrieve informations about this fax id!"
 msgstr "U heeft geen toestemming om informatie over dit Fax ID op te vragen!"
 
-#: plugins/gofax/reports/class_faxreport.inc:146
-#: plugins/gofax/reports/class_faxreport.inc:238
-#: plugins/gofon/reports/class_fonreport.inc:170
+#: plugins/gofax/reports/class_faxreport.inc:152
+#: plugins/gofax/reports/class_faxreport.inc:244
+#: plugins/gofon/reports/class_fonreport.inc:175
 msgid "Y-M-D"
 msgstr "J-M-D"
 
@@ -3600,7 +3591,7 @@ msgstr "Filter"
 
 #: plugins/gofax/reports/contents.tpl:6
 #: plugins/addons/addressbook/contents.tpl:102
-#: plugins/addons/mailqueue/contents.tpl:8
+#: plugins/addons/mailqueue/contents.tpl:12
 #: plugins/addons/logview/contents.tpl:47 plugins/gofon/reports/contents.tpl:6
 msgid "Search for"
 msgstr "Zoek naar"
@@ -3623,6 +3614,8 @@ msgid "during"
 msgstr "gedurende"
 
 #: plugins/gofax/reports/contents.tpl:21
+#: plugins/addons/mailqueue/contents.tpl:11
+#: plugins/addons/mailqueue/contents.tpl:27
 #: plugins/addons/logview/contents.tpl:67
 #: plugins/gofon/reports/contents.tpl:21 ihtml/themes/default/help.tpl:21
 msgid "Search"
@@ -3635,7 +3628,7 @@ msgid "Date"
 msgstr "Datum"
 
 #: plugins/gofax/reports/contents.tpl:33
-#: plugins/addons/mailqueue/contents.tpl:35
+#: plugins/addons/mailqueue/contents.tpl:58
 msgid "Sender"
 msgstr "Afzender"
 
@@ -3658,59 +3651,33 @@ msgid "Dial connection..."
 msgstr "Bel..."
 
 #: plugins/addons/addressbook/dial.tpl:10
-#: plugins/addons/addressbook/class_addressbook.inc:362
-#: plugins/addons/addressbook/class_addressbook.inc:369
-#: plugins/addons/addressbook/class_addressbook.inc:373
-#: plugins/addons/addressbook/class_addressbook.inc:457
+#: plugins/addons/addressbook/class_addressbook.inc:364
+#: plugins/addons/addressbook/class_addressbook.inc:371
+#: plugins/addons/addressbook/class_addressbook.inc:375
+#: plugins/addons/addressbook/class_addressbook.inc:459
 msgid "Dial"
 msgstr "Kies"
 
-#: plugins/addons/addressbook/address_edit.tpl:7
-msgid "Choose the department to store entry in"
-msgstr "Selecteer de afdeling waarin de invoer bewaard wordt."
+#: plugins/addons/addressbook/contents.tpl:14
+#: plugins/addons/addressbook/class_addressbook.inc:519
+#: plugins/addons/addressbook/address_info.tpl:16
+#: plugins/admin/fai/faiPartitionTable.tpl:9
+#: plugins/admin/fai/faiVariable.tpl:9 plugins/admin/fai/faiScriptEntry.tpl:9
+#: plugins/admin/fai/faiPackage.tpl:9 plugins/admin/fai/faiProfile.tpl:9
+#: plugins/admin/fai/faiPartitionTableEntry.tpl:6
+#: plugins/admin/fai/faiScript.tpl:9 plugins/admin/fai/faiVariableEntry.tpl:9
+#: plugins/admin/fai/faiTemplate.tpl:9 plugins/admin/fai/faiHookEntry.tpl:9
+#: plugins/admin/fai/faiTemplateEntry.tpl:7 plugins/admin/fai/faiHook.tpl:9
+#: plugins/admin/systems/servnfs.tpl:9 plugins/gofon/macro/parameter.tpl:5
+#: html/getxls.php:174 html/getxls.php:233
+msgid "Name"
+msgstr "Naam"
 
-#: plugins/addons/addressbook/address_edit.tpl:18
-#: plugins/addons/addressbook/address_info.tpl:12
-msgid "Personal"
-msgstr "Persoonlijk"
-
-#: plugins/addons/addressbook/address_edit.tpl:29
-#: plugins/addons/addressbook/address_info.tpl:19 html/getxls.php:174
-#: html/getxls.php:236
-msgid "Initials"
-msgstr "Initialen"
-
-#: plugins/addons/addressbook/address_edit.tpl:40
 #: plugins/addons/addressbook/contents.tpl:15
 #: plugins/addons/addressbook/address_info.tpl:29
+#: plugins/addons/addressbook/address_edit.tpl:40
 msgid "Private"
 msgstr "Privé"
-
-#: plugins/addons/addressbook/address_edit.tpl:54
-#: plugins/addons/addressbook/address_info.tpl:43
-msgid "Email"
-msgstr "E-mail"
-
-#: plugins/addons/addressbook/address_edit.tpl:64
-#: plugins/addons/addressbook/address_info.tpl:53
-msgid "Organizational"
-msgstr "Bedrijfsmatig"
-
-#: plugins/addons/addressbook/address_edit.tpl:72
-#: plugins/addons/addressbook/address_info.tpl:61
-msgid "Company"
-msgstr "Bedrijf"
-
-#: plugins/addons/addressbook/address_edit.tpl:78
-#: plugins/addons/addressbook/address_info.tpl:67 html/getxls.php:174
-#: html/getxls.php:236
-msgid "City"
-msgstr "Plaats"
-
-#: plugins/addons/addressbook/address_edit.tpl:84
-#: plugins/addons/addressbook/address_info.tpl:73
-msgid "Country"
-msgstr "Land"
 
 #: plugins/addons/addressbook/contents.tpl:15
 msgid "Contact"
@@ -3789,12 +3756,12 @@ msgstr "Adresboek"
 msgid "Addressbook"
 msgstr "Adresboek"
 
-#: plugins/addons/addressbook/class_addressbook.inc:152
+#: plugins/addons/addressbook/class_addressbook.inc:154
 #, php-format
 msgid "Dial from %s to %s now?"
 msgstr "Nu van %s naar %s bellen?"
 
-#: plugins/addons/addressbook/class_addressbook.inc:156
+#: plugins/addons/addressbook/class_addressbook.inc:158
 msgid ""
 "You have no personal phone number set. Please change that in order to "
 "perform direct dials."
@@ -3802,88 +3769,135 @@ msgstr ""
 "U heeft geen privé telefoonnummer opgegeven. Verander dit a.u.b. om direkt "
 "te kunnen kiezen"
 
-#: plugins/addons/addressbook/class_addressbook.inc:185
-#: plugins/addons/addressbook/class_addressbook.inc:289
+#: plugins/addons/addressbook/class_addressbook.inc:187
+#: plugins/addons/addressbook/class_addressbook.inc:291
 msgid "You are not allowed to delete this entry!"
 msgstr "U heeft geen toestemming om deze gegevens te verwijderen!"
 
-#: plugins/addons/addressbook/class_addressbook.inc:283
+#: plugins/addons/addressbook/class_addressbook.inc:285
 #, php-format
 msgid "You're about to delete the entry %s."
 msgstr "U staat op het punt de invoer %s te verwijderen."
 
-#: plugins/addons/addressbook/class_addressbook.inc:379
+#: plugins/addons/addressbook/class_addressbook.inc:381
 #, php-format
 msgid "Save contact for %s as vcard"
 msgstr "Sla contact voor %s op als vcard"
 
-#: plugins/addons/addressbook/class_addressbook.inc:383
+#: plugins/addons/addressbook/class_addressbook.inc:385
 #, php-format
 msgid "Send mail to %s"
 msgstr "Stuur E-mail naar %s"
 
-#: plugins/addons/addressbook/class_addressbook.inc:469
+#: plugins/addons/addressbook/class_addressbook.inc:471
 msgid "global addressbook"
 msgstr "globaal adresboek"
 
-#: plugins/addons/addressbook/class_addressbook.inc:472
+#: plugins/addons/addressbook/class_addressbook.inc:474
 msgid "user database"
 msgstr "gebruiker database"
 
-#: plugins/addons/addressbook/class_addressbook.inc:476
+#: plugins/addons/addressbook/class_addressbook.inc:478
 #, php-format
 msgid "Contact stored in '%s'"
 msgstr "Contact opgeslagen in '%s'"
 
-#: plugins/addons/addressbook/class_addressbook.inc:478
+#: plugins/addons/addressbook/class_addressbook.inc:480
 msgid "Creating new entry in"
 msgstr "Maak record aan in"
 
-#: plugins/addons/addressbook/class_addressbook.inc:507
-#: plugins/addons/mailqueue/class_mailqueue.inc:153
-#: plugins/addons/logview/class_logview.inc:67
-#: plugins/addons/logview/class_logview.inc:81
+#: plugins/addons/addressbook/class_addressbook.inc:519
+#: plugins/addons/mailqueue/class_mailqueue.inc:265
+#: plugins/addons/mailqueue/class_mailqueue.inc:330
+#: plugins/addons/logview/class_logview.inc:68
+#: plugins/addons/logview/class_logview.inc:82
 msgid "All"
 msgstr "Alle"
 
-#: plugins/addons/addressbook/class_addressbook.inc:508
+#: plugins/addons/addressbook/class_addressbook.inc:519 html/getxls.php:65
+#: html/getxls.php:174 html/getxls.php:224 html/getxls.php:236
+msgid "Given name"
+msgstr "Voornaam"
+
+#: plugins/addons/addressbook/class_addressbook.inc:520
 msgid "Work phone"
 msgstr "Telefoon Werk"
 
-#: plugins/addons/addressbook/class_addressbook.inc:508
+#: plugins/addons/addressbook/class_addressbook.inc:520
 msgid "Cell phone"
 msgstr "GSM"
 
-#: plugins/addons/addressbook/class_addressbook.inc:509 html/getxls.php:174
+#: plugins/addons/addressbook/class_addressbook.inc:521 html/getxls.php:174
 msgid "Home phone"
 msgstr "Telefoon Privé"
 
-#: plugins/addons/addressbook/class_addressbook.inc:509 html/getxls.php:80
+#: plugins/addons/addressbook/class_addressbook.inc:521 html/getxls.php:80
 #: html/getxls.php:108 html/getxls.php:123 html/getxls.php:282
 #: html/getxls.php:299
 msgid "User ID"
 msgstr "Gebruikers ID"
 
-#: plugins/addons/addressbook/class_addressbook.inc:581
+#: plugins/addons/addressbook/class_addressbook.inc:593
 msgid ""
 "Cannot create a unique DN for your entry. Please fill more formular fields."
 msgstr ""
 "Kan geen unieke DN aanmaken voor uw invoer. Vul a.u.b. meer formulier velden "
 "in."
 
-#: plugins/addons/addressbook/class_addressbook.inc:593
+#: plugins/addons/addressbook/class_addressbook.inc:605
 msgid ""
 "You have no permissions to create or modify a global address book entry."
 msgstr ""
 "U heeft geen toestemming om globale adresboek invoeren te wijzigen of aan te "
 "maken."
 
+#: plugins/addons/addressbook/address_info.tpl:12
+#: plugins/addons/addressbook/address_edit.tpl:18
+msgid "Personal"
+msgstr "Persoonlijk"
+
+#: plugins/addons/addressbook/address_info.tpl:19
+#: plugins/addons/addressbook/address_edit.tpl:29 html/getxls.php:174
+#: html/getxls.php:236
+msgid "Initials"
+msgstr "Initialen"
+
+#: plugins/addons/addressbook/address_info.tpl:43
+#: plugins/addons/addressbook/address_edit.tpl:54
+msgid "Email"
+msgstr "E-mail"
+
+#: plugins/addons/addressbook/address_info.tpl:53
+#: plugins/addons/addressbook/address_edit.tpl:64
+msgid "Organizational"
+msgstr "Bedrijfsmatig"
+
+#: plugins/addons/addressbook/address_info.tpl:61
+#: plugins/addons/addressbook/address_edit.tpl:72
+msgid "Company"
+msgstr "Bedrijf"
+
+#: plugins/addons/addressbook/address_info.tpl:67
+#: plugins/addons/addressbook/address_edit.tpl:78 html/getxls.php:174
+#: html/getxls.php:236
+msgid "City"
+msgstr "Plaats"
+
+#: plugins/addons/addressbook/address_info.tpl:73
+#: plugins/addons/addressbook/address_edit.tpl:84
+msgid "Country"
+msgstr "Land"
+
+#: plugins/addons/addressbook/address_edit.tpl:7
+msgid "Choose the department to store entry in"
+msgstr "Selecteer de afdeling waarin de invoer bewaard wordt."
+
 #: plugins/addons/mailqueue/class_mailqueue.inc:6
 #: plugins/addons/mailqueue/main.inc:23
 msgid "Mail queue"
 msgstr "Mail wachtrij"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:46
+#: plugins/addons/mailqueue/class_mailqueue.inc:51
 msgid ""
 "Please check your 'gosa.conf', there is no 'MAILQUEUE_QUERY_COMMAND' "
 "specified."
@@ -3891,61 +3905,164 @@ msgstr ""
 "Controleer uw 'gosa.conf' a.u.b. Er is geen 'MAILQUEUE_QUERY_COMMAND' "
 "gespecificeerd"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:68
-#: plugins/addons/mailqueue/class_mailqueue.inc:87
+#: plugins/addons/mailqueue/class_mailqueue.inc:81
+#: plugins/addons/mailqueue/class_mailqueue.inc:105
+#: plugins/addons/mailqueue/class_mailqueue.inc:159
+#: plugins/addons/mailqueue/class_mailqueue.inc:186
 #, php-format
 msgid "Please check your 'gosa.conf' the given '%s' can't be executed."
 msgstr ""
 "Controleer uw 'gosa.conf' a.u.b. De opgegeven '%s' kan niet uitgevoerd "
 "worden."
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:127
+#: plugins/addons/mailqueue/class_mailqueue.inc:235
 msgid "up"
 msgstr "omhoog"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:129
+#: plugins/addons/mailqueue/class_mailqueue.inc:237
 msgid "down"
 msgstr "omlaag"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:167
+#: plugins/addons/mailqueue/class_mailqueue.inc:280
 msgid "no limit"
 msgstr "geen limiet"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:172
+#: plugins/addons/mailqueue/class_mailqueue.inc:285
 msgid "hours"
 msgstr "uren"
 
-#: plugins/addons/mailqueue/contents.tpl:9
+#: plugins/addons/mailqueue/class_mailqueue.inc:331
+msgid "Hold"
+msgstr ""
+
+#: plugins/addons/mailqueue/class_mailqueue.inc:332
+#, fuzzy
+msgid "Un hold"
+msgstr "Wachtstand muziek"
+
+#: plugins/addons/mailqueue/class_mailqueue.inc:333
+#: plugins/addons/mailqueue/contents.tpl:78
+#, fuzzy
+msgid "Active"
+msgstr "Geactiveerd"
+
+#: plugins/addons/mailqueue/class_mailqueue.inc:334
+msgid "Not active"
+msgstr ""
+
+#: plugins/addons/mailqueue/contents.tpl:13
 msgid "Please enter a search string here."
 msgstr "Geef hier a.u.b. een zoekwaarde op."
 
-#: plugins/addons/mailqueue/contents.tpl:11
+#: plugins/addons/mailqueue/contents.tpl:15
 msgid "Select a server"
 msgstr "Selecteer een server"
 
-#: plugins/addons/mailqueue/contents.tpl:14
+#: plugins/addons/mailqueue/contents.tpl:18
+#, fuzzy
+msgid "with status"
+msgstr "status"
+
+#: plugins/addons/mailqueue/contents.tpl:22
 msgid "within the last"
 msgstr "binnen de laatste"
 
-#: plugins/addons/mailqueue/contents.tpl:25
+#: plugins/addons/mailqueue/contents.tpl:30
+msgid "Remove all messages"
+msgstr ""
+
+#: plugins/addons/mailqueue/contents.tpl:31
+msgid "Remove all messages from selected servers queue"
+msgstr ""
+
+#: plugins/addons/mailqueue/contents.tpl:32
+#, fuzzy
+msgid "Hold all messages"
+msgstr "Stuur berichten door naar"
+
+#: plugins/addons/mailqueue/contents.tpl:33
+msgid "Hold all messages in selected servers queue"
+msgstr ""
+
+#: plugins/addons/mailqueue/contents.tpl:34
+msgid "Release all messages"
+msgstr ""
+
+#: plugins/addons/mailqueue/contents.tpl:35
+msgid "Release all messages in selected servers queue"
+msgstr ""
+
+#: plugins/addons/mailqueue/contents.tpl:36
+msgid "Requeue all messages"
+msgstr ""
+
+#: plugins/addons/mailqueue/contents.tpl:37
+msgid "Requeue all messages in selected servers queue"
+msgstr ""
+
+#: plugins/addons/mailqueue/contents.tpl:48
 msgid "Search returned no results"
 msgstr "De zoekopdracht gaf geen resultaten terug"
 
-#: plugins/addons/mailqueue/contents.tpl:31
+#: plugins/addons/mailqueue/contents.tpl:54
 msgid "ID"
 msgstr "ID"
 
-#: plugins/addons/mailqueue/contents.tpl:34
+#: plugins/addons/mailqueue/contents.tpl:57
 msgid "Arrival"
 msgstr "Aankomst"
 
-#: plugins/addons/mailqueue/contents.tpl:36
+#: plugins/addons/mailqueue/contents.tpl:59
 msgid "Recipient"
 msgstr "Ontvanger"
 
-#: plugins/addons/mailqueue/contents.tpl:37
+#: plugins/addons/mailqueue/contents.tpl:60
 msgid "Error"
 msgstr "Fout"
+
+#: plugins/addons/mailqueue/contents.tpl:95
+#, fuzzy
+msgid "Delete this message"
+msgstr "Verwijder deze invoer"
+
+#: plugins/addons/mailqueue/contents.tpl:99
+#, fuzzy
+msgid "unhold"
+msgstr "Wachtstand muziek"
+
+#: plugins/addons/mailqueue/contents.tpl:99
+#, fuzzy
+msgid "Release message"
+msgstr "Status bericht"
+
+#: plugins/addons/mailqueue/contents.tpl:103
+#, fuzzy
+msgid "hold"
+msgstr "methode"
+
+#: plugins/addons/mailqueue/contents.tpl:103
+#, fuzzy
+msgid "Hold message"
+msgstr "Website"
+
+#: plugins/addons/mailqueue/contents.tpl:107
+#, fuzzy
+msgid "requeue"
+msgstr "Telefoonwachtrij"
+
+#: plugins/addons/mailqueue/contents.tpl:107
+msgid "Requeue this message"
+msgstr ""
+
+#: plugins/addons/mailqueue/contents.tpl:110
+#, fuzzy
+msgid "header"
+msgstr "Afzender"
+
+#: plugins/addons/mailqueue/contents.tpl:110
+#, fuzzy
+msgid "Display header from this message"
+msgstr "Toon de overeenkomende leden"
 
 #: plugins/addons/ldapmanager/contentexportxls.tpl:3
 msgid ""
@@ -4170,60 +4287,60 @@ msgstr "CSV import"
 msgid "System logs"
 msgstr "Systeem logs"
 
-#: plugins/addons/logview/class_logview.inc:36
+#: plugins/addons/logview/class_logview.inc:37
 msgid "No LOG servers defined!"
 msgstr "Geen LOG servers gedefiniëerd!"
 
-#: plugins/addons/logview/class_logview.inc:52
-#: plugins/addons/logview/class_logview.inc:152
+#: plugins/addons/logview/class_logview.inc:53
+#: plugins/addons/logview/class_logview.inc:157
 msgid "Can't select log database for log generation!"
 msgstr "Kan de log database voor log generatie niet selecteren!"
 
-#: plugins/addons/logview/class_logview.inc:61
-#: plugins/addons/logview/class_logview.inc:75
-#: plugins/addons/logview/class_logview.inc:224
+#: plugins/addons/logview/class_logview.inc:62
+#: plugins/addons/logview/class_logview.inc:76
+#: plugins/addons/logview/class_logview.inc:229
 msgid "Query for log database failed!"
 msgstr "Zoekopdracht binnen de log database is mislukt!"
 
-#: plugins/addons/logview/class_logview.inc:85
+#: plugins/addons/logview/class_logview.inc:86
 msgid "one hour"
 msgstr "1 uur"
 
-#: plugins/addons/logview/class_logview.inc:85
+#: plugins/addons/logview/class_logview.inc:86
 msgid "6 hours"
 msgstr "6 uur"
 
-#: plugins/addons/logview/class_logview.inc:86
+#: plugins/addons/logview/class_logview.inc:87
 msgid "12 hours"
 msgstr "12 uur"
 
-#: plugins/addons/logview/class_logview.inc:86
+#: plugins/addons/logview/class_logview.inc:87
 msgid "24 hours"
 msgstr "24 uur"
 
-#: plugins/addons/logview/class_logview.inc:87
+#: plugins/addons/logview/class_logview.inc:88
 msgid "2 days"
 msgstr "2 dagen"
 
-#: plugins/addons/logview/class_logview.inc:87
+#: plugins/addons/logview/class_logview.inc:88
 msgid "one week"
 msgstr "1 week"
 
-#: plugins/addons/logview/class_logview.inc:88
+#: plugins/addons/logview/class_logview.inc:89
 msgid "2 weeks"
 msgstr "2 weken"
 
-#: plugins/addons/logview/class_logview.inc:88
+#: plugins/addons/logview/class_logview.inc:89
 msgid "one month"
 msgstr "1 maand"
 
-#: plugins/addons/logview/class_logview.inc:102
+#: plugins/addons/logview/class_logview.inc:107
 msgid ""
 "There is no mysql extension available in your php setup, can't perform any "
 "query."
 msgstr ""
 
-#: plugins/addons/logview/class_logview.inc:149
+#: plugins/addons/logview/class_logview.inc:154
 msgid "Can't connect to log database, no logs can be shown!"
 msgstr ""
 "Kan niet met de log database verbinden. Logs kunnen niet getoond worden!"
@@ -4392,7 +4509,7 @@ msgid "Delete class"
 msgstr "Verwijder klasse"
 
 #: plugins/admin/fai/class_faiManagement.inc:501
-#: plugins/admin/groups/class_groupApplication.inc:381
+#: plugins/admin/groups/class_groupApplication.inc:371
 #: plugins/admin/departments/class_departmentManagement.inc:318
 msgid "department"
 msgstr "afdeling"
@@ -4514,7 +4631,7 @@ msgstr "Het opgegeven bestand is leeg."
 
 #: plugins/admin/fai/class_faiScriptEntry.inc:99
 #: plugins/admin/fai/class_faiVariableEntry.inc:86
-#: plugins/admin/fai/class_faiHookEntry.inc:104
+#: plugins/admin/fai/class_faiHookEntry.inc:112
 #: plugins/admin/fai/class_faiTemplateEntry.inc:164
 msgid "Please enter a name."
 msgstr "Kies a.u.b. een naam."
@@ -4556,25 +4673,30 @@ msgstr "Kies een prioriteit"
 msgid "Import script"
 msgstr "Importeer script"
 
-#: plugins/admin/fai/class_faiPackage.inc:123
+#: plugins/admin/fai/class_faiPackage.inc:148
 msgid "There is no useable package list defined."
 msgstr "Er is geen bruikbare pakketlijst gedefinieerd."
 
-#: plugins/admin/fai/class_faiPackage.inc:261
+#: plugins/admin/fai/class_faiPackage.inc:293
 #, php-format
 msgid "Can't read configuration folder '%s'."
 msgstr "Kan configuratie directory '%s' niet lezen."
 
-#: plugins/admin/fai/class_faiPackage.inc:343
+#: plugins/admin/fai/class_faiPackage.inc:375
 msgid "Please select a least one Package."
 msgstr "Selecteer a.u.b. tenminste een pakket."
 
-#: plugins/admin/fai/class_faiPackage.inc:347
+#: plugins/admin/fai/class_faiPackage.inc:379
 msgid "Please choose a valid combination for your repository setup."
 msgstr ""
 "Kies a.u.b. een geldige combinatie voor uw verzamelplaats instellingen."
 
-#: plugins/admin/fai/class_faiPackage.inc:378
+#: plugins/admin/fai/class_faiPackage.inc:400
+#, fuzzy
+msgid "package is configured"
+msgstr "niet geconfigureerd"
+
+#: plugins/admin/fai/class_faiPackage.inc:424
 #, php-format
 msgid "Package file '%s' does not exist."
 msgstr "Pakketbestand '%s' bestaat niet."
@@ -4908,7 +5030,7 @@ msgstr "%s partitie"
 msgid "%s partition(s)"
 msgstr "%s partitie(s)"
 
-#: plugins/admin/fai/class_faiHookEntry.inc:100
+#: plugins/admin/fai/class_faiHookEntry.inc:108
 msgid "Please enter a value for script."
 msgstr "Geef a.u.b. een waarde voor script op"
 
@@ -5297,50 +5419,50 @@ msgstr ""
 "of verwijderen. Indien u veel groepen heeft, dan is het aan te raden de "
 "selectie mogelijkheden te gebruiken."
 
-#: plugins/admin/groups/class_groupMail.inc:153
+#: plugins/admin/groups/class_groupMail.inc:158
 msgid "read"
 msgstr "lezen"
 
-#: plugins/admin/groups/class_groupMail.inc:154
+#: plugins/admin/groups/class_groupMail.inc:159
 msgid "post"
 msgstr "plaatsen"
 
-#: plugins/admin/groups/class_groupMail.inc:155
+#: plugins/admin/groups/class_groupMail.inc:160
 msgid "external post"
 msgstr "extern plaatsen"
 
-#: plugins/admin/groups/class_groupMail.inc:156
+#: plugins/admin/groups/class_groupMail.inc:161
 msgid "append"
 msgstr "toevoegen"
 
-#: plugins/admin/groups/class_groupMail.inc:157
+#: plugins/admin/groups/class_groupMail.inc:162
 msgid "write"
 msgstr "schrijven"
 
-#: plugins/admin/groups/class_groupMail.inc:182
+#: plugins/admin/groups/class_groupMail.inc:187
 msgid "This 'dn' has no valid mail extensions."
 msgstr "Deze 'dn' heeft geen geldige E-mail mogelijkheden."
 
-#: plugins/admin/groups/class_groupMail.inc:247
+#: plugins/admin/groups/class_groupMail.inc:252
 msgid "You're trying to add an invalid email address "
 msgstr "U probeert een ongeldig E-mail adres toe te voegen"
 
-#: plugins/admin/groups/class_groupMail.inc:248
+#: plugins/admin/groups/class_groupMail.inc:253
 msgid "to the list of forwarders."
 msgstr "aan de lijst met doorstuur adressen."
 
-#: plugins/admin/groups/class_groupMail.inc:617
+#: plugins/admin/groups/class_groupMail.inc:622
 msgid "Please enter a valid email addres in 'Primary address' field."
 msgstr "Geef a.u.b. een geldig email adres op in het 'Primair adres' veld."
 
-#: plugins/admin/groups/class_groupMail.inc:650
+#: plugins/admin/groups/class_groupMail.inc:655
 msgid ""
 "Please choose valid permission settings. Default permission can't be emtpy."
 msgstr ""
 "Kies a.u.b. geldige permissie instellingen. Standaard permissies kunnen niet "
 "leeg zijn."
 
-#: plugins/admin/groups/class_groupMail.inc:654
+#: plugins/admin/groups/class_groupMail.inc:659
 msgid "Please select a valid mail server."
 msgstr "Selecteer a.u.b. een geldig mailserver"
 
@@ -5459,15 +5581,15 @@ msgstr "Toon adressen van afdeling"
 msgid "Display addresses matching"
 msgstr "Toon overeenkomende adressen"
 
-#: plugins/admin/groups/class_groupApplication.inc:221
+#: plugins/admin/groups/class_groupApplication.inc:202
 msgid "This 'dn' is no appgroup."
 msgstr "Deze 'dn' is geen programmagroep"
 
-#: plugins/admin/groups/class_groupApplication.inc:229
+#: plugins/admin/groups/class_groupApplication.inc:210
 msgid "Remove applications"
 msgstr "Programma's verwijderen"
 
-#: plugins/admin/groups/class_groupApplication.inc:230
+#: plugins/admin/groups/class_groupApplication.inc:211
 msgid ""
 "This group has application features enabled. You can disable them by "
 "clicking below."
@@ -5475,11 +5597,11 @@ msgstr ""
 "Deze groep heeft programma mogelijkheden ingeschakeld. U kunt deze "
 "uitschakelen door de knop hieronder te gebruiken."
 
-#: plugins/admin/groups/class_groupApplication.inc:232
+#: plugins/admin/groups/class_groupApplication.inc:213
 msgid "Create applications"
 msgstr "Programma's aanmaken"
 
-#: plugins/admin/groups/class_groupApplication.inc:233
+#: plugins/admin/groups/class_groupApplication.inc:214
 msgid ""
 "This group has application features disabled. You can enable them by "
 "clicking below."
@@ -5487,29 +5609,29 @@ msgstr ""
 "Deze groep heeft programma mogelijkheden uitgeschakeld. U kunt deze "
 "inschakelen door de knop hieronder te gebruiken."
 
-#: plugins/admin/groups/class_groupApplication.inc:252
+#: plugins/admin/groups/class_groupApplication.inc:242
 msgid "The selected application name is not uniq. Please check your LDAP."
 msgstr ""
 "De geselecteerde programma naam is niet uniek. Controleeer uw LDAP database."
 
-#: plugins/admin/groups/class_groupApplication.inc:288
+#: plugins/admin/groups/class_groupApplication.inc:278
 msgid "The selected application has no options."
 msgstr "Het geselecteerde programma heeft geen opties."
 
-#: plugins/admin/groups/class_groupApplication.inc:389
+#: plugins/admin/groups/class_groupApplication.inc:379
 #, fuzzy
 msgid "application"
 msgstr "programma's"
 
-#: plugins/admin/groups/class_groupApplication.inc:593
+#: plugins/admin/groups/class_groupApplication.inc:595
 #: plugins/admin/applications/class_applicationGeneric.inc:38
 #, fuzzy
 msgid ""
 "There is no value for 'KDE_APPLICATIONS_MENU' specified in your gosa.conf."
 msgstr "De E-mail methode '%s' opgegeven in uw gosa.conf is niet beschikbaar."
 
-#: plugins/admin/groups/class_groupApplication.inc:601
-#: plugins/admin/groups/class_groupApplication.inc:604
+#: plugins/admin/groups/class_groupApplication.inc:603
+#: plugins/admin/groups/class_groupApplication.inc:606
 #: plugins/admin/applications/class_applicationGeneric.inc:46
 #: plugins/admin/applications/class_applicationGeneric.inc:49
 #, php-format
@@ -6800,12 +6922,12 @@ msgstr "FAI server"
 msgid "Assigned FAI classes"
 msgstr "Toegekende FAI klasses"
 
-#: plugins/admin/systems/workstationStartup.tpl:65
+#: plugins/admin/systems/workstationStartup.tpl:62
 #: plugins/admin/systems/terminalStartup.tpl:53
 msgid "Kernel modules (format: name parameters)"
 msgstr "Kernel modules (formaat: naam parameters)"
 
-#: plugins/admin/systems/workstationStartup.tpl:67
+#: plugins/admin/systems/workstationStartup.tpl:64
 #: plugins/admin/systems/terminalStartup.tpl:55
 msgid "Add additional modules to load on startup"
 msgstr "Voeg additioneel te laden modules toe bij het opstarten"
@@ -8831,17 +8953,17 @@ msgstr "Conferentie beheer"
 msgid "Phone Reports"
 msgstr "Telefoon rapporten"
 
-#: plugins/gofon/reports/class_fonreport.inc:150
+#: plugins/gofon/reports/class_fonreport.inc:155
 msgid "Can't connect to phone database, no reports can be shown!"
 msgstr ""
 "Kan niet verbinden met de telefoon database. Rapporten kunnen niet getoond "
 "worden!"
 
-#: plugins/gofon/reports/class_fonreport.inc:154
+#: plugins/gofon/reports/class_fonreport.inc:159
 msgid "Can't select phone database for report generation!"
 msgstr "Kan de telefoon database voor rapportage niet selecteren!"
 
-#: plugins/gofon/reports/class_fonreport.inc:163
+#: plugins/gofon/reports/class_fonreport.inc:168
 msgid "Query for phone database failed!"
 msgstr "De zoekopdracht binnen de telefoon database is mislukt!"
 
@@ -9769,11 +9891,15 @@ msgstr ""
 msgid "LDAP error:"
 msgstr "LDAP fout:"
 
-#: include/functions.inc:1550
+#: include/functions.inc:1274
+msgid "Entries per page"
+msgstr ""
+
+#: include/functions.inc:1576
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-#: include/functions.inc:1593
+#: include/functions.inc:1619
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "GOsa ontwikkelversie (Revisie %s)"
@@ -9846,7 +9972,7 @@ msgstr ""
 "Fout bij het importeren van dn: '%s', controleer uw LDIF bestand a.u.b. "
 "vanaf regel %s!"
 
-#: include/class_debconfTemplate.inc:180
+#: include/class_debconfTemplate.inc:251
 #, fuzzy
 msgid "This package has no debconf options."
 msgstr "Dit account heeft geen telefoon mogelijkheden."
@@ -10490,6 +10616,10 @@ msgstr ""
 "Het kan, met name bij Beta versies, voorkomen dat GOsa PHP fouten genereerd. "
 "In sommige gevallen kan het handig zijn om foutrapportage aan te zetten "
 "(maar dit kan een veiligheidsrisico vormen) "
+
+#, fuzzy
+#~ msgid "First Name"
+#~ msgstr "Lijstnaam"
 
 #~ msgid "Given Name"
 #~ msgstr "Voornaam"

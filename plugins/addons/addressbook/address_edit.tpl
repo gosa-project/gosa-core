@@ -19,7 +19,7 @@
  
  <table summary="" width="100%">
   <tr>
-   <td><LABEL for="sn">{t}First Name{/t}{$must}</LABEL>, <LABEL for="givenName">{t}Last name{/t}{$must}</LABEL></td>
+   <td><LABEL for="sn">{t}First name{/t}{$must}</LABEL>, <LABEL for="givenName">{t}Last name{/t}{$must}</LABEL></td>
    <td>	
 		
 		<input id="sn" name="sn" size=10 maxlength=60 value="{$info_sn}">, 
