@@ -223,7 +223,7 @@ class debconf
   function get_dialog()
   {
     if ($this->has_template){
-      $result= "<table><tr><td width='50%'>&nbsp;</td><td>&nbsp;</td></tr>";
+      $result= "<table>";
 
       foreach ($this->template as $post_name => $entry){
 
@@ -259,17 +259,18 @@ class debconf
     $post_name= $data['post_name'];
     $result="
       <tr>
-      <td valign='top'>
-      <b>".$data['Topic']."</b><br>".$data['Description']."
+      <td valign='top' style='width:100%'>
+      <h2>".$data['Topic']."</h2>".$data['Description']."
       </td>
-      <td valign='top'  style=\"border-left: 1px solid rgb(160, 160, 160);\">";
+      <td style=\"white-space:nowrap; vertical-align:top; border-left: 1px solid rgb(160, 160, 160);\">";
 
     foreach(array("true","false") as $value){
       if($data['Default'] == $value){
-        $result.="<input type='radio' name='".$data['post_name']."' value='".$value."' checked>".$value."</option>";
+        $result.="<input type='radio' name='".$data['post_name']."' value='".$value."' checked>"._($value);
       }else{
-        $result.="<input type='radio' name='".$data['post_name']."' value='".$value."' >".$value."</option>";
+        $result.="<input type='radio' name='".$data['post_name']."' value='".$value."' >"._($value);
       }
+      $result.="<br>";
     }
 
     $result.= "
@@ -296,9 +297,9 @@ class debconf
     $result="
       <tr>
       <td valign='top'>
-      <b>".$data['Topic']."</b><br>".$data['Description']."
+      <h2>".$data['Topic']."</h2>".$data['Description']."
       </td>
-      <td valign='top'  style=\"border-left: 1px solid rgb(160, 160, 160);\">
+      <td valign='top'  style=\"white-space:nowrap; border-left: 1px solid rgb(160, 160, 160);\">
         <input type='hidden' name='multi-".$post_name."' value='1'>
       ";
       
@@ -331,7 +332,7 @@ class debconf
   {
     $result=  "";
     $result.= "<tr><td valign='top'>";
-    $result.= "<b>".$data['Topic']."<br>".$data['Description']."</td><td style=\"border-left: 1px solid rgb(160, 160, 160);\">&nbsp;<input type='text' name='".$data['post_name']."' value='".$data['Default']."'></b><br><br>";
+    $result.= "<h2>".$data['Topic']."</h2>".$data['Description']."</td><td style=\"white-space:nowrap; border-left: 1px solid rgb(160, 160, 160);\">&nbsp;<input type='text' name='".$data['post_name']."' value='".$data['Default']."'></b><br><br>";
     $result.= $data['Description'];
     $result.= "</td>";
 
@@ -357,9 +358,9 @@ class debconf
       
       <tr>
       <td valign='top'>
-      <b>".$data['Topic']."</b><br>".$data['Description']."
+      <h2>".$data['Topic']."</h2>".$data['Description']."
       </td>
-      <td  valign='top'  style=\"border-left: 1px solid rgb(160, 160, 160);\">
+      <td  valign='top'  style=\"white-space:nowrap; border-left: 1px solid rgb(160, 160, 160);\">
       ";
 
     foreach($choices as $value){
@@ -385,9 +386,9 @@ class debconf
     $result=  "
                 <tr>
                   <td valign='top'>
-                    <b>".$data['Topic']."</b>&nbsp;<br>".$data['Description']."
+                    <h2>".$data['Topic']."</h2>".$data['Description']."
                   </td>
-                  <td  style=\"border-left: 1px solid rgb(160, 160, 160);\">
+                  <td  style=\"white-space:nowrap; border-left: 1px solid rgb(160, 160, 160);\">
                     <input type='text' name='".$data['post_name']."' value='".$data['Default']."'>
                   </td>
                 </tr>
@@ -412,9 +413,6 @@ class debconf
 
 }
 
-# Example:
-#$debconf= new debconf("libnss-ldap", "de");
-#echo $debconf->get_dialog();
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

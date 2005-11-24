@@ -38,7 +38,8 @@ class faiPackageConfiguration extends plugin
 
     /* Fill templating stuff */
     $smarty     = get_smarty();
-    $display = "$this->obj";
+    $display = "";
+    $smarty->assign("headline", sprintf(_("Debconf information for package '%s'"), $this->obj));
 
     $this->Debconf_handle -> PostCheck();
 

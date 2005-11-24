@@ -1,8 +1,8 @@
-<h2><img alt="" src="images/forward.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
-
+<h1><img alt="" src="images/forward.png" align="middle" title="{t}Package{/t}">&nbsp;{$headline}</h1>
+<p class="seperator">&nbsp;</p>
 {$Config}
 <div align="right" style="align:right;">
-    <input name="SaveObjectConfig" value="Use" type="submit">
-    <input name="CancelObjectConfig" value="Cancel" type="submit">
+    <input name="SaveObjectConfig" value="{t}Apply{/t}" type="submit">
+    <input name="CancelObjectConfig" value="{t}Cancel{/t}" type="submit">
 </div>
 

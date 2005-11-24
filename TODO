@@ -6,13 +6,7 @@ Things to fix before 2.4:
 
 * Check dialog to add aplications (group dialog)
 
-* First name/Last name instead of Name/Given name
-
-* Evaluate patches for certificate generation
-
 * Divlists are broken in firefox 1.5rc1 
-
-* FAI Hooks are only assignable once per hook bundle - check this
 
 
 Target for 2.5:
@@ -20,6 +14,8 @@ Target for 2.5:
 
 * Asterisk : Create entry like this #309,1,PickupChan(SIP/rainer), 
 			 to allow others to pickup the phone by pressing # and number of the phone.
+
+* Evaluate patches for certificate generation
 
 * Bug submitter
 
