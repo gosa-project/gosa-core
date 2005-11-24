@@ -7,38 +7,39 @@ class mailqueue extends plugin
   var $plDescription= "This does something";
 
   /* attribute list for save action */
-  var $attributes= array();
-  var $objectclasses= array();
-
-  var $mailQueueScript = "";    
-
+  var $attributes     = array();
+  var $objectclasses  = array();
+  var $mailQueueScript= "";    
   var $Server         = "all";
   var $Time           = 0;
   var $Search         = "*";
   var $Page           = 0;
   var $EntriesPerPage = 20;
-
   var $Stat           = "all";
   var $OrderBy        = "Arrival";
   var $SortType       = "up";
+  var $disp_header    = false;
+
 
   function mailqueue($config, $dn= NULL)
   {
-    /* Include config object */
-    $this->config= $config;
-
-    /* get the query cmd */
-    $this->mailQueueScript = $this->config->current['MAILQUEUESCRIPTPATH'];    
-
-    $this->Server = "all";
+    $this->config           = $config;
+    $this->mailQueueScript  = $this->config->current['MAILQUEUESCRIPTPATH'];    
+    $this->Server           = "all";
   }
+
+
+  function pass_cmd($str)
+  {
+    return(shell_exec($str));
+  }
+
 
   function execute()
   {
     /* Call parent execute */
     plugin::execute();
     $smarty= get_smarty();
-
     $error =false;
 
     if(empty($this->mailQueueScript)){
@@ -46,9 +47,96 @@ class mailqueue extends plugin
       $error = true;
     }else{
 
+      /* If we have more than one server selected (all), 
+         create a string with all servers separated by ', '
+       */ 
+      if($this->Server=="all"){
+        $se = $this->getServer();
+        unset($se['all']);
+        $se_str = "";
+        foreach($se as $server) {
+          $se_str .= $server." ";
+        }
+      }else{
+        /* We have only one server selected */
+        $se_str = $this->Server;
+      }
+
+      /* Check all post that will effect all entries */
+      $only_once = true;
+      foreach(array("unhold_all","hold_all","remove_all","requeue_all") as $attr){
+        foreach($_POST as $name => $value){
+          if((preg_match("/".$attr."/",$name))&&($only_once)){
+            $only_once = false;
+            $act = preg_replace("/_.*$/i","",$attr);
+            $r_cmd = preg_replace("/%action/" , $act           ,$this->mailQueueScript);
+            $r_cmd = preg_replace("/%server/" , $se_str         ,$r_cmd);
+            $r_cmd = preg_replace("/%id/"     , "all"           ,$r_cmd);
+            if(!$this->pass_cmd($r_cmd)){
+              print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
+            }
+          }
+        }
+      }        
+
+      /* Check single entry manipulation  posts */
+      $only_once = true;
+
+      /* act specifies the command to execute */
+      if(isset($_GET['act'])){
+        $opt = $_GET['act'];  
+  
+        /* The option to exec should be one of these */
+        if(in_array($opt,array("unhold","hold","del","requeue","query","header"))){
+          $only_once = false;
+
+          /* Create cmd */
+          $r_cmd = preg_replace("/%action/" , $opt            ,$this->mailQueueScript);
+          $r_cmd = preg_replace("/%server/" , $this->Server   ,$r_cmd);
+          $r_cmd = preg_replace("/%id/"     , $_GET['id']     ,$r_cmd);
+
+          /* Execute cmd */
+          if(!$str = $this->pass_cmd($r_cmd)){
+            print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
+          }else{
+          
+            /* Special handling for option='header' */
+            if($opt == "header"){
+        
+              /* Create table which displays the header informations */
+              $this->disp_header ="\n<table width='80%'>";
+              foreach(split("\n",$str) as $line){
+                $line = trim($line);
+                if(empty($line)) {
+                  continue;
+                }
+                $this->disp_header .= "\n<tr>";
+                $tmp0 = preg_replace("/:.*$/","",$line);
+                $tmp1 = preg_replace("/^.*:/","",$line);
+                $this->disp_header .= "\n<td style='background-color:#EEEEEE;'>".$tmp0."</td><td>".$tmp1."</td>"; 
+                $this->disp_header .= "\n</tr>";
+              }              
+              $this->disp_header .= "\n</table>";
+            }
+          }
+        }
+      }        
+
+
+      /* Back is posted from the header display page */
+      if(isset($_POST['back'])){
+        $this->disp_header = false;
+      }
+
+      /* If there is a header in disp_header, then display it */
+      if($this->disp_header){
+        $smarty->assign("header",$this->disp_header);
+        return ($smarty->fetch (get_template_path('header.tpl', TRUE)));
+      }
+
       /* tell smarty to display the search results*/
       $smarty->assign("all_ok"      , "true");
-
+      
       /* A single server is selected */
       if($this->Server != "all"){    
 
@@ -58,34 +146,37 @@ class mailqueue extends plugin
         $q_cmd = preg_replace("/%id/"     ,"all"        ,$q_cmd);
 
         /* Only display this if the query cmd is executeable */
-        if($str = @shell_exec ($q_cmd)){
-
+        if($str = @$this->pass_cmd ($q_cmd)){
           /* Parse returned data */
           $mailQueueParser = new parseMailQueue($str,$this->Server);
-
         }else{
-
-          /* Can't Execute cmd */
+          /* On error/ no return value / false return value */
           print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$q_cmd));
           $error = true;
         }
 
       }else{
-
         $mailQueueParser = NULL;
         foreach($this->getServer() as $ServerID=>$ServerName){
+  
+          /* Don't query the server named all :) */
           if($ServerID == "all") continue;
 
+          /* Prepare query cmd */
           $q_cmd = preg_replace("/%action/" ,"query"      ,$this->mailQueueScript);
           $q_cmd = preg_replace("/%server/" ,$ServerName  ,$q_cmd);
           $q_cmd = preg_replace("/%id/"     ,"ALL"           ,$q_cmd);
 
-          if($str = @shell_exec ($q_cmd)){
+          /* Shell exec this cmd */
+          if($str = @$this->pass_cmd ($q_cmd)){
+    
+            /* If there is no parser available, create one  */
             if($mailQueueParser == NULL){
               $mailQueueParser = new parseMailQueue($str,$ServerID);
             }else{
               $mailQueueParser->parseAdditionalQueue($str,$ServerID);
             }
+          /* On error/ no return value / false return value */
           }else{
             print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$q_cmd));
             $error = true;
@@ -95,38 +186,6 @@ class mailqueue extends plugin
       }     
 
       if(!$error){
-
-        /* Check for actions */
-        foreach (array("requeue", "unhold", "hold", "del") as $type){
-          if((isset($_GET['act']))&&($_GET['act']=="$type")){
-            if($mailQueueParser->IDExists($_GET['id'])){
-              $r_cmd = preg_replace("/%action/" ,"$type"        ,$this->mailQueueScript);
-              $r_cmd = preg_replace("/%server/" ,$_GET['server'] ,$r_cmd);
-              $r_cmd = preg_replace("/%id/"     ,$_GET['id']     ,$r_cmd);
-              if(!shell_exec($r_cmd)){
-                print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
-              }
-            }
-          }
-        }
-
-        $se = $this->getServer();
-        unset($se['all']);
-        $se_str = "";
-        foreach($se as $server) {
-          $se_str .= $server." ";
-        }
-
-        foreach (array("requeue", "unhold", "hold", "del") as $type){
-          if(isset($_POST[$type.'_all'])){
-            $r_cmd = preg_replace("/%action/" , "$type"       ,$this->mailQueueScript);
-            $r_cmd = preg_replace("/%server/" , $se_str         ,$r_cmd);
-            $r_cmd = preg_replace("/%id/"     , "ALL"           ,$r_cmd);
-            if(!shell_exec($r_cmd)){
-              print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
-            }
-          }
-        }
 
         /* Filter data with the given */
         $mailQueueParser->OrderBy($this->OrderBy,$this->SortType);
@@ -149,11 +208,12 @@ class mailqueue extends plugin
         $mailQueueParser->Search($this->Search,array("MailID","Size","Sender","Recipient","Error","Arrival"));
 
         /* */
-        $entries = $mailQueueParser->GetAll(); 
+        $entries = $mailQueueParser->GetAll();
+ 
         $smarty->assign("entries"       , array_slice($entries,$this->Page,20));
         $smarty->assign("plug"          , "?plug=".$_GET['plug']);
-        $smarty->assign("r_stats"         , $this->getStats());
-        $smarty->assign("stats"       , array_flip($this->getStats()));
+        $smarty->assign("r_stats"       , $this->getStats());
+        $smarty->assign("stats"         , array_flip($this->getStats()));
         $smarty->assign("stat"          , $this->Stat);
         $smarty->assign("p_server"      , $this->Server);
         $smarty->assign("p_servers"     , $this->getServer());
@@ -174,10 +234,11 @@ class mailqueue extends plugin
       }
     }
 
+    /* In case of an error */
     if($error){  
       $smarty->assign("all_ok"        , "false");
-      $smarty->assign("r_stats"         , $this->getStats());
-      $smarty->assign("stats"       , array_flip($this->getStats()));
+      $smarty->assign("r_stats"       , $this->getStats());
+      $smarty->assign("stats"         , array_flip($this->getStats()));
       $smarty->assign("stat"          , $this->Stat);
       $smarty->assign("plug"          , "?plug=".$_GET['plug']);
       $smarty->assign("p_server"      , $this->Server);
@@ -206,6 +267,7 @@ class mailqueue extends plugin
     return($ret);
   }
 
+
   /* Return selectable times*/
   function getTimes()
   {
@@ -220,6 +282,7 @@ class mailqueue extends plugin
     }
     return($ret);
   }
+
 
   /* Save post values*/
   function save_object($save_current= FALSE)
@@ -255,15 +318,16 @@ class mailqueue extends plugin
 
   }
 
+  /* Return stats */
   function getStats()
   {
     return(array(
-                  "all"     =>_("All"),
-                  "hold"    =>_("Hold"),
-                  "unhold"  =>_("Un hold"),
-                  "active"  =>_("Active"),
-                  "nonactive"  =>_("Not active")
-                ));
+          "all"     =>_("All"),
+          "hold"    =>_("Hold"),
+          "unhold"  =>_("Un hold"),
+          "active"  =>_("Active"),
+          "nonactive"  =>_("Not active")
+          ));
   }
 
 }

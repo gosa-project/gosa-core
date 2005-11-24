@@ -27,13 +27,13 @@
 	<input name="search" value="{t}Search{/t}" type="submit">
 			</td>
 			<td style="border-left:1px solid #A0A0A0; text-align:right;">&nbsp;
-				<input name="remove_all"  src="images/edittrash.png"		value="{t}Remove all messages{/t}" 	type="image" 
+				<input name="remove_all"  src="images/edittrash.png"			value="{t}Remove all messages{/t}" 		type="image" 
 					title="{t}Remove all messages from selected servers queue{/t}">
-				<input name="hold_all"    src="images/mailq_hold.png"		value="{t}Hold all messages{/t}" 	type="image"
+				<input name="hold_all"    src="images/mailq_hold.png"			value="{t}Hold all messages{/t}" 		type="image"
 					title="{t}Hold all messages in selected servers queue{/t}">
 				<input name="unhold_all"    src="images/mailq_unhold.png"		value="{t}Release all messages{/t}" 	type="image"
 					title="{t}Release all messages in selected servers queue{/t}">
-				<input name="requeue_all" src="images/mailq_requeue.png"	value="{t}Requeue all messages{/t}" 	type="image"
+				<input name="requeue_all" src="images/mailq_requeue.png"		value="{t}Requeue all messages{/t}" 	type="image"
 					title="{t}Requeue all messages in selected servers queue{/t}">
    			</td>
 		<tr>
@@ -62,22 +62,33 @@
 	</tr>
 
 {counter start=0 assign=i start=1}
+	<input type="hidden" name="header_server" value="">
+	<input type="hidden" name="header_id" value="">
 {foreach from=$entries item=val key=key}
-	
+			
 	{if ($i%2)== 0 }
 		<tr style="height: 22px; background-color: rgb(236, 236, 236);">
 	{else}
 		<tr style="height: 22px; background-color: rgb(245, 245, 245);">
 	{/if}
-		<td>{if $entries[$key].Active == true}
+		<td onlick="javascript:	document.mainform.header_server.value='{$entries[$key].Server}';
+								document.mainform.header_id.value='{$entries[$key].MailID}';
+								document.mainform.submit();">	
+			{if $entries[$key].Active == true}
 				<img src="images/mailq_active.png" border=0 alt="{t}Active{/t}">
 			{/if}
+			
 			{$entries[$key].MailID}</td>
-		<td>{$entries[$key].Server}</td>
-		<td>{$entries[$key].Size}</td>
-		<td>{$entries[$key].Arrival}</td>
-		<td>{$entries[$key].Sender}</td>
-		<td>{$entries[$key].Recipient}</td>
+		<td onclick="javascript: document.location.href='{$plug}&act=header&id={$entries[$key].MailID}&server={$entries[$key].Server}'">
+			{$entries[$key].Server}</td>
+		<td>
+			{$entries[$key].Size}</td>
+		<td>
+			{$entries[$key].Arrival}</td>
+		<td>
+			{$entries[$key].Sender}</td>
+		<td>
+			{$entries[$key].Recipient}</td>
 		<td titel="{$entries[$key].Error}">{$entries[$key].Error}</td>
 		<td style="text-align:right">
 			<a href="{$plug}&act=del&id={$entries[$key].MailID}&server={$entries[$key].Server}">
@@ -94,6 +105,9 @@
 		{/if}
 			<a href="{$plug}&act=requeue&id={$entries[$key].MailID}&server={$entries[$key].Server}">
 				<img src="images/mailq_requeue.png" border=0 alt="{t}requeue{/t}" title="{t}Requeue this message{/t}">
+			</a>
+			<a href="{$plug}&act=header&id={$entries[$key].MailID}&server={$entries[$key].Server}">
+				<img src="images/mailq_header.png" border=0 alt="{t}header{/t}" title="{t}Display header from this message{/t}">
 			</a>
 		</td>
 	</tr>
