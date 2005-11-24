@@ -172,10 +172,10 @@ class debconf
   {
     /* Walk through all template variables */
     foreach($this->template as $post_name => $entry){
-    
+
       /* Check if this var is set*/
       if(isset($_POST[$entry['post_name']])){
-  
+
         /* special handling for arrays */
         if(is_array($_POST[$entry['post_name']])){
           $str = "";
@@ -189,7 +189,20 @@ class debconf
         }
       }
     }
-  
+    
+    foreach($this->template as $post_name => $entry){
+      if(isset($_POST["multi-".$entry['post_name']])){ 
+        $this->template[$post_name]['Default']= "";
+        foreach($_POST as $name => $value){
+          if(preg_match("/".$entry['post_name']."-multi-/",$name)){
+            $this->template[$post_name]['Default'] .= $value.", ";
+          }
+        } 
+        $this->template[$post_name]['Default'] = preg_replace("/, $/","",$this->template[$post_name]['Default']);
+      }
+    }
+
+
   }
 
 
@@ -210,7 +223,7 @@ class debconf
   function get_dialog()
   {
     if ($this->has_template){
-      $result= "";
+      $result= "<table><tr><td width='50%'>&nbsp;</td><td>&nbsp;</td></tr>";
 
       foreach ($this->template as $post_name => $entry){
 
@@ -222,13 +235,17 @@ class debconf
 
           /* Produce type specific output */
           $fn= "render_".$entry['Type'];
-          $result.= $this->$fn($entry);
+          $str = $this->$fn($entry);
+          if(!empty($str)){
+            $result.=$str."<tr><td colspan='2'><p class='seperator'>&nbsp;</p></td></tr>";
+          }
         } else {
           //php_error(E_WARNING, "An unknown type has been specified in the debconf template. Please fix.");
         }
       }
 
-      $result .= "<input type='hidden' post_name='check_post' value='1'>";
+    
+      $result .= "<input type='hidden' post_name='check_post' value='1'></table>";
       return ($result);
     } else {
       return _("This package has no debconf options.");
@@ -241,12 +258,11 @@ class debconf
 
     $post_name= $data['post_name'];
     $result="
-      <table width='100%' border=0>
       <tr>
       <td valign='top'>
-      <b>".$data['Topic']."</b>
+      <b>".$data['Topic']."</b><br>".$data['Description']."
       </td>
-      <td width='10%' valign='top'>";
+      <td valign='top'  style=\"border-left: 1px solid rgb(160, 160, 160);\">";
 
     foreach(array("true","false") as $value){
       if($data['Default'] == $value){
@@ -259,13 +275,8 @@ class debconf
     $result.= "
       </td>
       </tr>
-      <tr>
-      <td colspan=2>".$data['Description']."
-      </td>
-      </tr>
-      </table>";
+      ";
 
-          $result.= "<p class='seperator'>&nbsp;</p>";
     return ($result);
   }
 
@@ -282,36 +293,27 @@ class debconf
       }
     }
 
-
     $result="
-      <table width='100%' border=0>
       <tr>
       <td valign='top'>
-      <b>".$data['Topic']."</b>
+      <b>".$data['Topic']."</b><br>".$data['Description']."
       </td>
-      <td width='10%' valign='top'>
-      <select name='".$post_name."[]'  multiple size=5>";
-
+      <td valign='top'  style=\"border-left: 1px solid rgb(160, 160, 160);\">
+        <input type='hidden' name='multi-".$post_name."' value='1'>
+      ";
+      
     $defs = split(", ",$data['Default']);
-  
     foreach($choices as $value){
       if(in_array($value,$defs)){
-        $result.="\n<option value='".htmlentities($value)."' selected>".htmlentities($value)."</option>";
+        $result.="\n<input name='".$post_name."-multi-".$value."' type='checkbox' value='".htmlentities($value)."' checked>".$value."<br>";
       }else{
-        $result.="\n<option value='".htmlentities($value)."'>".htmlentities($value)."</option>";
+        $result.="\n<input name='".$post_name."-multi-".$value."' type='checkbox' value='".htmlentities($value)."'>".$value."<br>";
       }
     }
 
-    $result.= "
-      </select>
-      </td>
+  $result .=    "</td>
       </tr>
-      <tr>
-      <td colspan=2>".$data['Description']."
-      </td>
-      </tr>
-      </table>";
-          $result.= "<p class='seperator'>&nbsp;</p>";
+      ";
 
     return ($result);
   }
@@ -327,12 +329,11 @@ class debconf
 
   function render_password($data)
   {
-    $result=  "<table width='100%' border=0>";
+    $result=  "";
     $result.= "<tr><td valign='top'>";
-    $result.= "<b>".$data['Topic']."&nbsp;<input type='text' name='".$data['post_name']."' value='".$data['Default']."'></b><br><br>";
+    $result.= "<b>".$data['Topic']."<br>".$data['Description']."</td><td style=\"border-left: 1px solid rgb(160, 160, 160);\">&nbsp;<input type='text' name='".$data['post_name']."' value='".$data['Default']."'></b><br><br>";
     $result.= $data['Description'];
-    $result.= "</td></table>";
-          $result.= "<p class='seperator'>&nbsp;</p>";
+    $result.= "</td>";
 
     return ($result);
   }
@@ -353,32 +354,27 @@ class debconf
 
 
     $result="
-      <table width='100%' border=0>
+      
       <tr>
       <td valign='top'>
-      <b>".$data['Topic']."</b>
+      <b>".$data['Topic']."</b><br>".$data['Description']."
       </td>
-      <td width='10%' valign='top'>
-      <select name='".$post_name."'>";
+      <td  valign='top'  style=\"border-left: 1px solid rgb(160, 160, 160);\">
+      ";
 
     foreach($choices as $value){
       if($data['Default'] == $value){
-        $result.="\n<option value='".htmlentities($value)."' selected>".htmlentities($value)."</option>";
+        $result.="\n<input type='radio' name='".$post_name."' value='".htmlentities($value)."' checked >".htmlentities($value)."<br>";
       }else{
-        $result.="\n<option value='".htmlentities($value)."'>".htmlentities($value)."</option>";
+        $result.="\n<input type='radio' name='".$post_name."' value='".htmlentities($value)."'>".htmlentities($value)."<br>";
       }
     }
 
     $result.= "
-      </select>
+      
       </td>
       </tr>
-      <tr>
-      <td colspan=2>".$data['Description']."
-      </td>
-      </tr>
-      </table>";
-          $result.= "<p class='seperator'>&nbsp;</p>";
+      ";
 
     return ($result);
   }
@@ -386,22 +382,16 @@ class debconf
 
   function render_string($data)
   {
-    $result=  "<table width='100%' border=0>
+    $result=  "
                 <tr>
                   <td valign='top'>
-                    <b>".$data['Topic']."</b>&nbsp;
+                    <b>".$data['Topic']."</b>&nbsp;<br>".$data['Description']."
                   </td>
-                  <td width='10%'>
+                  <td  style=\"border-left: 1px solid rgb(160, 160, 160);\">
                     <input type='text' name='".$data['post_name']."' value='".$data['Default']."'>
                   </td>
                 </tr>
-                <tr>
-                  <td colspan='2'>
-                      ".$data['Description']."
-                  </td>
-                </tr>
-              </td></table>";
-          $result.= "<p class='seperator'>&nbsp;</p>";
+              ";
 
     return ($result);
   }
