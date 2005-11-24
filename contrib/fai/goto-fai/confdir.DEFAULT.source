@@ -1,0 +1,19 @@
+# undef default shell subroutine get_fai_dir
+# instead the new script get_fai_dir will be used
+
+setterm -cursor off >/dev/tty3
+/usr/sbin/faimond >/dev/tty3 & 
+chvt 3
+unset get_fai_dir
+unset sndmon
+
+sndmon() {
+	# send message to monitor daemon
+	[ "$faimond" -eq 0 ] && return 0
+	if [ "$debug" ];then
+		echo "$sndhostname $*" | nc localhost 4711
+	else
+		echo "$sndhostname $*" | nc localhost 4711 2>/dev/null
+	fi
+	return $?
+}
