@@ -1,9 +1,12 @@
 Things to fix before 2.4:
 =========================
 
-* Check dialog to add aplications (group dialog)
-
 * Divlists are broken in firefox 1.5rc1 
+
+* Check for double accounts (mail addresses) which are listed in the
+  address book, also
+
+* Fix fai package divlist
 
 
 Target for 2.5:
