@@ -146,7 +146,7 @@ class faxreport extends plugin
 		$queuing_time= $line['queuing_time'];
 
 		$_SESSION['fuserfilter']= $this->userfilter;
- 	    $smarty->assign("plug", validate($_GET['plug']));
+ 	    $smarty->assign("plug", "?plug=".validate($_GET['plug']));
 	    $smarty->assign("detail", validate($_GET['detail']));
 
 		$format= _("Y-M-D");
