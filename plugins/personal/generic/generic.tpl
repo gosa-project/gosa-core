@@ -20,10 +20,17 @@
   <!-- Name, ... -->
   <td style="vertical-align:top;">
    <table summary=""> 
+    {if $is_template ne "true"}
     <tr>
      <td><label for="sn">{t}Last name{/t}{$must}</label></td>
      <td><input id="sn" name="sn" size=25 maxlength=60 {$snACL} value="{$sn}"></td>
     </tr>
+    {else}
+    <tr>
+     <td><label for="sn">{t}Template name{/t}{$must}</label></td>
+     <td><input id="sn" name="sn" size=25 maxlength=60 {$snACL} value="{$sn}"></td>
+    </tr>
+    {/if}
 
     {if $is_template ne "true"}
     <tr>
