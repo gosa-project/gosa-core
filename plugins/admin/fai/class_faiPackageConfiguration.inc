@@ -12,8 +12,6 @@ class faiPackageConfiguration extends plugin
   var $attributes     = array();
   var $objectclasses  = array();
 
-  var $path;  
-
   var $Debconf_handle = NULL;
   var $pkg_config ;
   var $obj;
@@ -22,8 +20,10 @@ class faiPackageConfiguration extends plugin
   {
     plugin::plugin ($config, $dn);
     $this->obj = $obj;
-    $this->Debconf_handle = new debconf($this->obj, "de");
-    $this->Debconf_handle->set_template_directory($this->path);
+    $this->Debconf_handle = new debconf();
+    $this->Debconf_handle->set_template_directory($path);
+    $this->Debconf_handle->set_package($this->obj);
+    $this->Debconf_handle->set_language(preg_replace('/_.*$/', '', get_browser_language()));
     $this->pkg_config = $pkg_config;
 
     foreach($this->pkg_config as $var){
@@ -41,7 +41,7 @@ class faiPackageConfiguration extends plugin
     $display = "";
     $smarty->assign("headline", sprintf(_("Debconf information for package '%s'"), $this->obj));
 
-    $this->Debconf_handle -> PostCheck();
+    $this->Debconf_handle->PostCheck();
 
     $smarty->assign("Config",$this->Debconf_handle->get_dialog());
 
@@ -63,9 +63,7 @@ class faiPackageConfiguration extends plugin
 
   function save()
   {
-    $this->Debconf_handle->set_template_directory($this->path);
-
-    $this->Debconf_handle  -> PostCheck();
+    $this->Debconf_handle->PostCheck();
     $pkgs = $this->Debconf_handle->template;
 
     $tmp = array();

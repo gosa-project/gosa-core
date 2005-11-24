@@ -237,7 +237,7 @@ class faiPackage extends plugin
 
     /* Configuration dialog open*/
     if((isset($_POST['Conpkg']))&&(isset($_POST['usedPackages']))&&(!empty($_POST['usedPackages']))){
-      $path = "/etc/gosa/fai/".preg_replace("#^[^/]+//([^/]+).*$#","\\1",$this->FAIdebianMirror)."/".$this->FAIdebianRelease."/".$sec;
+      $path = "/etc/gosa/fai/".preg_replace("#^[^/]+//([^/]+).*$#","\\1",$this->FAIdebianMirror)."/".$this->FAIdebianRelease."/debconf.d";
       $pkg_config = array();
       if(isset($this->ConfiguredPackages[$_POST['usedPackages']])){
         $pkg_config = $this->ConfiguredPackages[$_POST['usedPackages']];

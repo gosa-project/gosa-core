@@ -5,7 +5,7 @@ class debconf
   var $package= "";
   var $language= "";
   var $has_template= FALSE;
-  var $template_directory= "/var/lib/dpkg/info";
+  var $template_directory= "";
   var $template= array();
 
 
