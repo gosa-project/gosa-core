@@ -1,9 +1,6 @@
 Things to fix before 2.4:
 =========================
 
-* FAI management
-  - Verify and check layout for package configuration dialog 
-
 * Check dialog to add aplications (group dialog)
 
 * Divlists are broken in firefox 1.5rc1 
