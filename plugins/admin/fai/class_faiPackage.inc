@@ -386,10 +386,24 @@ class faiPackage extends plugin
     $a_ret=array(); 
     if(is_array($this->usedPackages)) {
       foreach($this->usedPackages as $usedName){
+      
+        $config = 0;
+   
+        foreach($this->ConfiguredPackages as $name => $value){
+          if($name == $usedName){
+            $config ++;
+          }
+        }
+      
+        $c_str ="";
+        if($config){
+          $c_str = " - "._("package is configured");
+        }
+     
         if(isset($this->list[$usedName][1])){
-          $a_ret[$usedName] = $usedName." [".$this->list[$usedName][1]."]";
+          $a_ret[$usedName] = $usedName." [".$this->list[$usedName][1]."]".$c_str;
         }else{
-          $a_ret[$usedName] = $usedName;
+          $a_ret[$usedName] = $usedName.$c_str;
         }
       }
     }
