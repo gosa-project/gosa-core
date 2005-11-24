@@ -27,7 +27,7 @@
 	<input name="search" value="{t}Search{/t}" type="submit">
 			</td>
 			<td style="border-left:1px solid #A0A0A0; text-align:right;">&nbsp;
-				<input name="remove_all"  src="images/edittrash.png"			value="{t}Remove all messages{/t}" 		type="image" 
+				<input name="del_all"  src="images/edittrash.png"			value="{t}Remove all messages{/t}" 		type="image" 
 					title="{t}Remove all messages from selected servers queue{/t}">
 				<input name="hold_all"    src="images/mailq_hold.png"			value="{t}Hold all messages{/t}" 		type="image"
 					title="{t}Hold all messages in selected servers queue{/t}">

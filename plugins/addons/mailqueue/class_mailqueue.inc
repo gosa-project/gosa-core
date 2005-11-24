@@ -31,6 +31,7 @@ class mailqueue extends plugin
 
   function pass_cmd($str)
   {
+//    print_red($str);
     return(shell_exec($str));
   }
 
@@ -64,15 +65,15 @@ class mailqueue extends plugin
 
       /* Check all post that will effect all entries */
       $only_once = true;
-      foreach(array("unhold_all","hold_all","remove_all","requeue_all") as $attr){
+      foreach(array("unhold_all","hold_all","del_all","requeue_all") as $attr){
         foreach($_POST as $name => $value){
           if((preg_match("/".$attr."/",$name))&&($only_once)){
             $only_once = false;
             $act = preg_replace("/_.*$/i","",$attr);
             $r_cmd = preg_replace("/%action/" , $act           ,$this->mailQueueScript);
             $r_cmd = preg_replace("/%server/" , $se_str         ,$r_cmd);
-            $r_cmd = preg_replace("/%id/"     , "all"           ,$r_cmd);
-            if(!$this->pass_cmd($r_cmd)){
+            $r_cmd = preg_replace("/%id/"     , "ALL"           ,$r_cmd);
+            if($this->pass_cmd($r_cmd)==false){
               print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
             }
           }
