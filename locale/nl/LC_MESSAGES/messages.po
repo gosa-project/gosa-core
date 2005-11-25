@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schröder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-11-25 15:57+0100\n"
+"PO-Revision-Date: 2005-11-26 01:39+0100\n"
 "Last-Translator: Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>\n"
 "Language-Team:  CareWorks ICT Services <info@careworks.nl>\n"
 "MIME-Version: 1.0\n"
@@ -3157,7 +3157,7 @@ msgstr "Schrijven"
 #: plugins/admin/ogroups/termgroup.tpl:13
 #: plugins/admin/applications/generic.tpl:17
 msgid "Execute"
-msgstr "Uitvoeren"
+msgstr "Commando"
 
 #: plugins/admin/fai/faiTemplateEntry.tpl:91
 msgid "Special"
@@ -4314,7 +4314,8 @@ msgstr "programma"
 #: plugins/admin/applications/class_applicationGeneric.inc:38
 msgid ""
 "There is no value for 'KDE_APPLICATIONS_MENU' specified in your gosa.conf."
-msgstr "Er is geen waarde voor 'KDE_APPLICATIONS_MENU' opgegeven in uw gosa.conf."
+msgstr ""
+"Er is geen waarde voor 'KDE_APPLICATIONS_MENU' opgegeven in uw gosa.conf."
 
 #: plugins/admin/groups/class_groupApplication.inc:603
 #: plugins/admin/groups/class_groupApplication.inc:606
@@ -4325,8 +4326,8 @@ msgid ""
 "The specified file '%s' for 'KDE_APPLICATIONS_MENU' in your gosa.conf is not "
 "accessable."
 msgstr ""
-"Het bestand '%s', dat u opgegeven heeft voor 'KDE_APPLICATIONS_MENU' in uw gosa.conf "
-"is niet toegankelijk."
+"Het bestand '%s', dat u opgegeven heeft voor 'KDE_APPLICATIONS_MENU' in uw "
+"gosa.conf is niet toegankelijk."
 
 #: plugins/admin/groups/group_objects.tpl:6
 msgid "Select users to add"
@@ -5090,7 +5091,7 @@ msgstr ""
 
 #: plugins/admin/systems/headpage.tpl:6
 msgid "List of systems"
-msgstr "Lijst van systemen"
+msgstr "Lijst met systemen"
 
 #: plugins/admin/systems/headpage.tpl:24
 msgid ""
@@ -5780,7 +5781,7 @@ msgstr ""
 
 #: plugins/admin/systems/phone.tpl:6
 msgid "Phone name"
-msgstr "Telefoon naam"
+msgstr "Telefoonnaam"
 
 #: plugins/admin/systems/class_phoneGeneric.inc:105
 msgid "This 'dn' has no phone features."
@@ -6123,7 +6124,7 @@ msgstr "Standaard IP"
 #: plugins/admin/systems/phonesettings.tpl:56
 #: plugins/admin/systems/phonesettings.tpl:93
 msgid "Response timeout"
-msgstr "Beantwoord timeout"
+msgstr "Reageer timeout"
 
 #: plugins/admin/systems/phonesettings.tpl:75
 msgid "Modus"
@@ -6222,6 +6223,8 @@ msgid ""
 "The specified PPD_PATH='%s' in your gosa.conf is invalid, can't read any ppd "
 "informations."
 msgstr ""
+"Het opgegeven PPD_PATH='%s' in uw gosa.conf is ongeldig. Kan geen PPD "
+"informatie lezen."
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:106
 msgid "Can't get ppd informations."
@@ -7135,7 +7138,8 @@ msgstr "Fax rapporten"
 
 #: plugins/gofax/reports/class_faxreport.inc:106
 msgid "There is no mysql extension available, please check your php setup."
-msgstr "Er is geen MySQL extensie beschikbaar. Controleer uw PHP installatie a.u.b."
+msgstr ""
+"Er is geen MySQL extensie beschikbaar. Controleer uw PHP installatie a.u.b."
 
 #: plugins/gofax/reports/class_faxreport.inc:112
 #: plugins/gofax/reports/class_faxreport.inc:224
@@ -7456,7 +7460,7 @@ msgstr "Dit account heeft geen Fax mogelijkheden."
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:146
 msgid "Remove fax account"
-msgstr "Verwijder Fax account"
+msgstr "Fax account verwijderen"
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:147
 msgid ""
@@ -7468,7 +7472,7 @@ msgstr ""
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:149
 msgid "Create fax account"
-msgstr "Maak Fax account aan"
+msgstr "Fax account aanmaken"
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:150
 msgid ""
@@ -7763,6 +7767,8 @@ msgid ""
 "There is no mysql extension available in your php setup, can't save any "
 "changes to asterisk db."
 msgstr ""
+"Kan geen veranderingen opslaan in de Asterisk database. Er is geen MySQL "
+"extensie beschikbaar. Controleer uw PHP installatie."
 
 #: plugins/gofon/macro/class_gofonMacro.inc:258
 #, php-format
@@ -8117,6 +8123,8 @@ msgid ""
 "Can't save any changes to asterisk database, there is currently no mysql "
 "extension available in your php setup."
 msgstr ""
+"Kan geen veranderingen opslaan in de Asterisk database. Er is geen MySQL "
+"extensie beschikbaar. Controleer uw PHP installatie."
 
 #: plugins/gofon/conference/headpage.tpl:6
 msgid "List of conference rooms"
@@ -8175,7 +8183,7 @@ msgstr "Conferentie"
 
 #: plugins/gofon/conference/generic.tpl:13
 msgid "Conference name"
-msgstr "Conferentie naam"
+msgstr "Conferentienaam"
 
 #: plugins/gofon/conference/generic.tpl:18
 msgid "Name of conference to create"
@@ -8212,11 +8220,11 @@ msgstr "Activeer sessiemenu"
 
 #: plugins/gofon/conference/generic.tpl:150
 msgid "Announce users joining or leaving the conference"
-msgstr "Kondig gebruikers aan die de conferentie binnenkomen of verlaten"
+msgstr "Kondig binnenkomende en verlatende gebruikers aan"
 
 #: plugins/gofon/conference/generic.tpl:156
 msgid "Count users"
-msgstr "Tel gebruikers"
+msgstr "Tel het aantal gebruikers"
 
 #: plugins/addons/logview/main.inc:23
 msgid "System log view"
@@ -8286,7 +8294,8 @@ msgid ""
 "There is no mysql extension available in your php setup, can't perform any "
 "query."
 msgstr ""
-"Kan geen zoekopdracht uitvoeren. Er is geen mysql extensie beschikbaar. Controleer uw PHP installatie."
+"Kan geen zoekopdracht uitvoeren. Er is geen mysql extensie beschikbaar. "
+"Controleer uw PHP installatie."
 
 #: plugins/addons/logview/class_logview.inc:154
 msgid "Can't connect to log database, no logs can be shown!"
@@ -8860,7 +8869,8 @@ msgstr "Plaats alle berichten in wachtstand"
 
 #: plugins/addons/mailqueue/contents.tpl:33
 msgid "Hold all messages in selected servers queue"
-msgstr "Plaats alle berichten in de geselecteerde server wachtrij in de wachtstand"
+msgstr ""
+"Plaats alle berichten in de geselecteerde server wachtrij in de wachtstand"
 
 #: plugins/addons/mailqueue/contents.tpl:34
 msgid "Release all messages"
@@ -9060,7 +9070,7 @@ msgstr "Selecteer indien u E-mail berichten wilt filteren m.b.v. spamassassin"
 
 #: plugins/personal/mail/generic.tpl:81
 msgid "Move mails tagged with spam level greater than"
-msgstr "Verplaats E-mails met een spam nivo groter dan"
+msgstr "Verplaats E-mails met spam nivo groter dan"
 
 #: plugins/personal/mail/generic.tpl:83
 msgid "Choose spam level - smaller values are more sensitive"
@@ -9068,11 +9078,11 @@ msgstr "Selecteer een spam nivo - kleinere waardes zijn gevoeliger"
 
 #: plugins/personal/mail/generic.tpl:86
 msgid "to folder"
-msgstr "naar IMAP directory"
+msgstr "naar map"
 
 #: plugins/personal/mail/generic.tpl:93
 msgid "Reject mails bigger than"
-msgstr "Afwijzing van E-mails groter dan"
+msgstr "Wijs E-mail af indien groter dan"
 
 #: plugins/personal/mail/generic.tpl:95
 #: plugins/personal/environment/environment.tpl:71
@@ -9101,7 +9111,7 @@ msgstr ""
 
 #: plugins/personal/mail/generic.tpl:145
 msgid "User is only allowed to send and receive local mails"
-msgstr "De gebruiker mag alleen lokaal E-mails versturen en ontvangen"
+msgstr "De gebruiker mag alleen lokale E-mails versturen en ontvangen"
 
 #: plugins/personal/mail/generic.tpl:152
 msgid "Use custom sieve script"
@@ -9150,8 +9160,8 @@ msgid ""
 "This account has posix features enabled. You can disable them by clicking "
 "below."
 msgstr ""
-"Dit account heeft POSIX mogelijkheden ingeschakeld. U kunt deze "
-"uitschakelend door de knop hieronder te gebruiken."
+"Dit account heeft POSIX mogelijkheden ingeschakeld. U kunt deze uitschakelen "
+"door de knop hieronder te gebruiken."
 
 #: plugins/personal/posix/class_posixAccount.inc:250
 msgid "Create posix account"
@@ -9169,19 +9179,18 @@ msgstr ""
 #, php-format
 msgid "Password can't be changed up to %s days after last change"
 msgstr ""
-"Het wachtwoord kan pas veranderd worden op %s dag(en) na de laatste "
-"verandering"
+"Het wachtwoord kan pas %s dag(en) na de laatste wijziging gewijzigd worden"
 
 #: plugins/personal/posix/class_posixAccount.inc:437
 #, php-format
 msgid "Password must be changed after %s days"
-msgstr "Het wachtwoord moet veranderd worden na %s dag(en)"
+msgstr "Het wachtwoord moet na %s dag(en) gewijzigd worden"
 
 #: plugins/personal/posix/class_posixAccount.inc:439
 #, php-format
 msgid "Disable account after %s days of inactivity after password expiery"
 msgstr ""
-"Schakel het account uit na %s dagen inactiviteit nadat het wachtwoord "
+"Blokkeer het account na %s dag(en) inactiviteit nadat het wachtwoord "
 "verlopen is"
 
 #: plugins/personal/posix/class_posixAccount.inc:441
@@ -9203,11 +9212,11 @@ msgstr "Mislukt: Blokkering wordt overschreven"
 
 #: plugins/personal/posix/class_posixAccount.inc:877
 msgid "The required field 'Home directory' is not set."
-msgstr "Het vereiste veld 'Home directory' is leeg."
+msgstr "Het vereiste veld 'Persoonlijke map' is leeg."
 
 #: plugins/personal/posix/class_posixAccount.inc:880
 msgid "Please enter a valid path in 'Home directory' field."
-msgstr "Geef a.u.b. een geldige directory op in het 'Home directory' veld."
+msgstr "Geef a.u.b. een geldige map op in het 'Persoonlijke map' veld."
 
 #: plugins/personal/posix/class_posixAccount.inc:888
 msgid "Value specified as 'UID' is not valid."
@@ -9270,18 +9279,18 @@ msgstr "Toon systemen van afdeling"
 
 #: plugins/personal/posix/posix_shadow.tpl:5
 msgid "User must change password on first login"
-msgstr "Gebruiker moet het wachtwoord bij de eerste aanmelding veranderen"
+msgstr "Het wachtwoord moet bij de eerste aanmelding gewijzigd worden"
 
 #: plugins/personal/posix/posix_shadow.tpl:14
 #: plugins/personal/samba/samba2.tpl:68 plugins/personal/samba/samba3.tpl:245
 msgid "Password expires on"
-msgstr "Het wachtwoord verloopt op"
+msgstr "Wachtwoord verloopt op"
 
 #: plugins/personal/posix/generic.tpl:7 plugins/personal/samba/samba3.tpl:13
 #: plugins/personal/samba/samba3.tpl:85
 #: plugins/personal/samba/class_sambaAccount.inc:633
 msgid "Home directory"
-msgstr "Home directory"
+msgstr "Persoonlijke map"
 
 #: plugins/personal/posix/generic.tpl:13
 msgid "Shell"
@@ -9317,7 +9326,7 @@ msgstr "Systeem vertrouwen"
 
 #: plugins/personal/posix/generic.tpl:92
 msgid "Trust mode"
-msgstr "Vertrouwen modus"
+msgstr "Vertrouwensmodus"
 
 #: plugins/personal/samba/samba2.tpl:13
 msgid "Samba home"
@@ -9325,7 +9334,7 @@ msgstr "Samba home"
 
 #: plugins/personal/samba/samba2.tpl:30 plugins/personal/samba/samba3.tpl:38
 msgid "Script path"
-msgstr "Script"
+msgstr "Inlogscript"
 
 #: plugins/personal/samba/samba2.tpl:36 plugins/personal/samba/samba3.tpl:44
 #: plugins/personal/samba/samba3.tpl:95
@@ -9339,17 +9348,15 @@ msgstr "Toegangsopties"
 
 #: plugins/personal/samba/samba2.tpl:54 plugins/personal/samba/samba3.tpl:236
 msgid "Allow user to change password from client"
-msgstr ""
-"Sta de gebruiker toe om zijn wachtwoord te veranderen vanaf het werkstation"
+msgstr "Gebruiker mag zijn wachtwoord vanaf een werkstation wijzigen"
 
 #: plugins/personal/samba/samba2.tpl:57 plugins/personal/samba/samba3.tpl:239
 msgid "Login from windows client requires no password"
-msgstr ""
-"Er is geen wachtwoord vereist voor het inloggen vanaf een Windows werkstation"
+msgstr "Inloggen op Windows werkstation zonder wachtwoord toestaan"
 
 #: plugins/personal/samba/samba2.tpl:60
 msgid "Temporary disable samba account"
-msgstr "Schakel Samba account tijdelijk uit"
+msgstr "Schakel het Samba/Windows account tijdelijk uit"
 
 #: plugins/personal/samba/samba3.tpl:23
 msgid "Domain"
@@ -9361,11 +9368,11 @@ msgstr "Terminal Server"
 
 #: plugins/personal/samba/samba3.tpl:82
 msgid "Allow login on terminal server"
-msgstr "Sta inloggen op de terminal server toe"
+msgstr "Sta inloggen op de Terminal Server toe"
 
 #: plugins/personal/samba/samba3.tpl:107
 msgid "Inherit client config"
-msgstr "Client configuratie overnemen"
+msgstr "Client configuratie voor initieel programma overnemen"
 
 #: plugins/personal/samba/samba3.tpl:110
 msgid "Initial program"
@@ -9373,75 +9380,75 @@ msgstr "Initiëel programma"
 
 #: plugins/personal/samba/samba3.tpl:116
 msgid "Working directory"
-msgstr "Werk directory"
+msgstr "Werkdirectory"
 
 #: plugins/personal/samba/samba3.tpl:131
 msgid "Timeout settings (in minutes)"
-msgstr "Timeout instellingen (in minuten)"
+msgstr "Terminal Service timeouts (in minuten)"
 
 #: plugins/personal/samba/samba3.tpl:136
 #: plugins/personal/samba/class_sambaAccount.inc:641
 msgid "Connection"
-msgstr "Verbinding"
+msgstr "Max. verbindingsduur"
 
 #: plugins/personal/samba/samba3.tpl:145
 #: plugins/personal/samba/class_sambaAccount.inc:642
 msgid "Disconnection"
-msgstr "Verbreking"
+msgstr "Max. verbrekingsduur"
 
 #: plugins/personal/samba/samba3.tpl:154
 #: plugins/personal/samba/class_sambaAccount.inc:643
 msgid "IDLE"
-msgstr "IDLE"
+msgstr "Max. inactiviteitsduur"
 
 #: plugins/personal/samba/samba3.tpl:167
 msgid "Client devices"
-msgstr "Client apparaten"
+msgstr "Terminal Service client apparaten"
 
 #: plugins/personal/samba/samba3.tpl:172
 msgid "Connect client drives at logon"
-msgstr "Verbindt werkstation schijfletters bij inloggen"
+msgstr "Verbindt client schijven bij inloggen"
 
 #: plugins/personal/samba/samba3.tpl:178
 msgid "Connect client printers at logon"
-msgstr "Verbindt werkstation printers bij inloggen"
+msgstr "Verbindt client printers bij inloggen"
 
 #: plugins/personal/samba/samba3.tpl:184
 msgid "Default to main client printer"
-msgstr "Gebruik standaard de hoofd werkstation printer"
+msgstr "Standaard printer als client printer"
 
 #: plugins/personal/samba/samba3.tpl:194
 #: plugins/personal/connectivity/pureftpd.tpl:64
 msgid "Miscellaneous"
-msgstr "Diverse"
+msgstr "Terminal Service diverse"
 
 #: plugins/personal/samba/samba3.tpl:198
 msgid "Shadowing"
-msgstr "Shadowing"
+msgstr "Schaduwen van andere sessie"
 
 #: plugins/personal/samba/samba3.tpl:207
 msgid "On broken or timed out"
-msgstr "Indien verbroken of bij timeout"
+msgstr "Bij verbroken verbinding of timeout"
 
 #: plugins/personal/samba/samba3.tpl:215
 msgid "Reconnect if disconnected"
-msgstr "Herstel verbinding indien verbroken"
+msgstr "Herstel sessie indien verbroken"
 
 #: plugins/personal/samba/samba3.tpl:242
 msgid "Lock samba account"
-msgstr "Het samba account blokkeren"
+msgstr "Blokkeer het Samba/Windows account"
 
 #: plugins/personal/samba/samba3.tpl:257
 msgid "Limit Logon Time"
-msgstr "Limiteer de inlogduur tot"
+msgstr "Stel laatste inlogtijd in op"
 
 #: plugins/personal/samba/samba3.tpl:269
 msgid "Limit Logoff Time"
-msgstr "Limiteer de uitlogduur tot"
+msgstr "Stel laatste uitlogtijd in op"
 
 #: plugins/personal/samba/samba3.tpl:281
 msgid "Account expires after"
-msgstr "Het account verloopt na"
+msgstr "Het account verloopt op"
 
 #: plugins/personal/samba/samba3.tpl:301
 msgid "Allow connection from these workstations only"
@@ -9486,19 +9493,19 @@ msgstr ""
 
 #: plugins/personal/samba/class_sambaAccount.inc:454
 msgid "input on, notify on"
-msgstr "invoer AAN, melden AAN"
+msgstr "invoer met notificatie"
 
 #: plugins/personal/samba/class_sambaAccount.inc:455
 msgid "input on, notify off"
-msgstr "invoer AAN, Melden UIT"
+msgstr "invoer zonder notificatie"
 
 #: plugins/personal/samba/class_sambaAccount.inc:456
 msgid "input off, notify on"
-msgstr "invoer UIT, Melden AAN"
+msgstr "geen invoer met notificatie"
 
 #: plugins/personal/samba/class_sambaAccount.inc:457
 msgid "input off, nofify off"
-msgstr "invoer UIT, Melden UIT"
+msgstr "geen invoer zonder notificatie"
 
 #: plugins/personal/samba/class_sambaAccount.inc:459
 msgid "disconnect"
@@ -9506,7 +9513,7 @@ msgstr "verbreken"
 
 #: plugins/personal/samba/class_sambaAccount.inc:460
 msgid "reset"
-msgstr "reset"
+msgstr "sluiten"
 
 #: plugins/personal/samba/class_sambaAccount.inc:462
 msgid "from any client"
@@ -9786,7 +9793,7 @@ msgstr "Geboortedatum"
 
 #: plugins/personal/generic/generic.tpl:98
 msgid "Preferred langage"
-msgstr "Voorkeur taal"
+msgstr "Voorkeurstaal"
 
 #: plugins/personal/generic/generic.tpl:113
 msgid "Choose subtree to place user in"
@@ -9798,15 +9805,15 @@ msgstr "Telefoon privé"
 
 #: plugins/personal/generic/generic.tpl:136
 msgid "Homepage"
-msgstr "Website"
+msgstr "Homepage"
 
 #: plugins/personal/generic/generic.tpl:145
 msgid "Password storage"
-msgstr "Wachtwoord opslag"
+msgstr "Wachtwoord encryptie"
 
 #: plugins/personal/generic/generic.tpl:157
 msgid "Edit certificates"
-msgstr "Certificaten bewerken"
+msgstr "Bewerk certificaten"
 
 #: plugins/personal/generic/generic.tpl:161
 msgid "Kerberos"
@@ -9814,7 +9821,7 @@ msgstr "Kerberos"
 
 #: plugins/personal/generic/generic.tpl:162
 msgid "Edit properties"
-msgstr "Eigenschappen bewerken"
+msgstr "Bewerk eigenschappen"
 
 #: plugins/personal/generic/generic.tpl:178
 msgid "Organizational information"
@@ -9830,7 +9837,7 @@ msgstr "Personeel nr."
 
 #: plugins/personal/generic/generic.tpl:210
 msgid "Employee type"
-msgstr "Werknemer type"
+msgstr "Functie"
 
 #: plugins/personal/generic/generic.tpl:226
 #: plugins/personal/generic/generic.tpl:365
@@ -10102,11 +10109,11 @@ msgstr "Profiel beheer"
 
 #: plugins/personal/environment/environment.tpl:18
 msgid "Use profile managment"
-msgstr "Gebruik profiel beheer"
+msgstr "Gebruik profielbeheer"
 
 #: plugins/personal/environment/environment.tpl:25
 msgid "Profile server managment"
-msgstr "Profiel server beheer"
+msgstr "Profielserver beheer"
 
 #: plugins/personal/environment/environment.tpl:28
 msgid "Profil path"
@@ -10135,7 +10142,7 @@ msgstr "Quota"
 
 #: plugins/personal/environment/environment.tpl:79
 msgid "Resolution changeable on runtime"
-msgstr "Resolutie is runtime aanpasbaar"
+msgstr "Resolutie is door gebruiker te veranderen"
 
 #: plugins/personal/environment/environment.tpl:124
 msgid "Logon scripts"
@@ -10311,7 +10318,7 @@ msgstr "Selecteer om Ftp toegang uit te schakelen"
 
 #: plugins/personal/connectivity/pureftpd.tpl:67
 msgid "Temporary disable FTP access"
-msgstr "Schakel Ftp toegang tijdelijk uit"
+msgstr "Schakel FTP toegang tijdelijk uit"
 
 #: plugins/personal/connectivity/phpscheduleit.tpl:1
 msgid "PHPscheduleit account"
@@ -10605,7 +10612,7 @@ msgstr ""
 
 #: plugins/personal/connectivity/proxy.tpl:35
 msgid "Limit proxy access to working time"
-msgstr "Beperk proxy gebruik tot werktijd"
+msgstr "Beperk proxy gebruik tot tijd"
 
 #: plugins/personal/connectivity/proxy.tpl:69
 msgid "Restrict proxy usage by quota"
