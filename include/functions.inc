@@ -1270,7 +1270,7 @@ function range_selector($dcnt,$start,$range=25,$post_var=false)
       "<img alt=\"\" src=\"images/forward.png\" border=0 align=\"middle\"></a>";
   }
 
-  if($post_var){
+  if(($post_var)&&($numpages)){
     $output.= "</td><td style='width:20%;text-align:right'>&nbsp;"._("Entries per page")."&nbsp;<select name='".$post_var."' onChange='javascript:document.mainform.submit()'>";
     foreach(array(20,50,100,200,"all") as $num){
       if($num == "all"){
