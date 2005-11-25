@@ -55,7 +55,6 @@ msgstr "Extensions"
 #: plugins/gofax/blocklists/generic.tpl:1
 #: plugins/gofax/faxaccount/generic.tpl:6
 #: plugins/admin/fai/faiPartitionTable.tpl:4
-#: plugins/admin/fai/faiPackageConfiguration.tpl:1
 #: plugins/admin/fai/faiVariable.tpl:4 plugins/admin/fai/faiScriptEntry.tpl:5
 #: plugins/admin/fai/faiPackage.tpl:4 plugins/admin/fai/faiProfile.tpl:4
 #: plugins/admin/fai/faiProfile.tpl:32
@@ -75,14 +74,14 @@ msgstr "Unix"
 #: contrib/gosa.conf:72 contrib/gosa.conf:84
 #: plugins/personal/environment/class_environment.inc:12
 #: plugins/admin/groups/class_groupManagement.inc:378
-#: plugins/admin/users/class_userManagement.inc:729
+#: plugins/admin/users/class_userManagement.inc:730
 msgid "Environment"
 msgstr "Environnement"
 
 #: contrib/gosa.conf:73 contrib/gosa.conf:86
 #: plugins/personal/mail/class_mailAccount.inc:22
 #: plugins/admin/groups/class_groupManagement.inc:374
-#: plugins/admin/users/class_userManagement.inc:731
+#: plugins/admin/users/class_userManagement.inc:732
 #: plugins/admin/ogroups/tabs_ogroups.inc:73
 #: plugins/admin/ogroups/tabs_ogroups.inc:161
 #: plugins/admin/ogroups/class_ogroupManagement.inc:383
@@ -92,7 +91,7 @@ msgstr "Messagerie"
 
 #: contrib/gosa.conf:74 plugins/personal/samba/class_sambaAccount.inc:24
 #: plugins/admin/groups/class_groupManagement.inc:375
-#: plugins/admin/users/class_userManagement.inc:737
+#: plugins/admin/users/class_userManagement.inc:738
 #: plugins/generic/references/class_reference.inc:26
 #: plugins/generic/references/class_reference.inc:28
 msgid "Samba"
@@ -103,25 +102,25 @@ msgstr "Samba"
 msgid "Connectivity"
 msgstr "Connectivité"
 
-#: contrib/gosa.conf:76 plugins/personal/generic/generic.tpl:241
-#: plugins/personal/generic/generic.tpl:372
+#: contrib/gosa.conf:76 plugins/personal/generic/generic.tpl:248
+#: plugins/personal/generic/generic.tpl:379
 #: plugins/gofax/faxaccount/generic.tpl:10
 #: plugins/addons/addressbook/contents.tpl:14
-#: plugins/admin/users/class_userManagement.inc:735
+#: plugins/admin/users/class_userManagement.inc:736
 #: plugins/admin/departments/generic.tpl:62 html/getxls.php:174
 #: html/getxls.php:236
 msgid "Fax"
 msgstr "Fax"
 
-#: contrib/gosa.conf:77 plugins/personal/generic/generic.tpl:224
-#: plugins/personal/generic/generic.tpl:362
+#: contrib/gosa.conf:77 plugins/personal/generic/generic.tpl:231
+#: plugins/personal/generic/generic.tpl:369
 #: plugins/addons/addressbook/contents.tpl:14
 #: plugins/addons/addressbook/address_info.tpl:37
 #: plugins/addons/addressbook/address_info.tpl:85
 #: plugins/addons/addressbook/address_edit.tpl:48
 #: plugins/addons/addressbook/address_edit.tpl:96
 #: plugins/admin/groups/class_groupManagement.inc:377
-#: plugins/admin/users/class_userManagement.inc:733
+#: plugins/admin/users/class_userManagement.inc:734
 #: plugins/admin/departments/generic.tpl:58
 #: plugins/admin/systems/chooser.tpl:12
 #: plugins/admin/systems/class_systemManagement.inc:708
@@ -393,7 +392,7 @@ msgstr ""
 #: plugins/gofax/faxaccount/main.inc:89
 #: plugins/admin/fai/class_faiManagement.inc:390
 #: plugins/admin/groups/class_groupManagement.inc:331
-#: plugins/admin/users/class_userManagement.inc:632
+#: plugins/admin/users/class_userManagement.inc:633
 #: plugins/admin/applications/class_applicationManagement.inc:304
 #: plugins/admin/departments/class_departmentManagement.inc:350
 #: plugins/admin/systems/class_systemManagement.inc:539
@@ -431,11 +430,12 @@ msgstr "Terminé"
 #: plugins/admin/fai/class_faiManagement.inc:392
 #: plugins/admin/fai/class_faiManagement.inc:397
 #: plugins/admin/fai/faiProfileEntry.tpl:72
+#: plugins/admin/fai/faiPackageConfiguration.tpl:6
 #: plugins/admin/fai/faiScriptEntry.tpl:68
 #: plugins/admin/fai/faiPartitionTableEntry.tpl:30
 #: plugins/admin/fai/faiPackageNew.tpl:66
 #: plugins/admin/fai/faiVariableEntry.tpl:49
-#: plugins/admin/fai/faiPackageEntry.tpl:66 plugins/admin/fai/remove.tpl:17
+#: plugins/admin/fai/faiPackageEntry.tpl:64 plugins/admin/fai/remove.tpl:17
 #: plugins/admin/fai/faiHookEntry.tpl:70
 #: plugins/admin/fai/faiTemplateEntry.tpl:133
 #: plugins/admin/groups/class_groupManagement.inc:333
@@ -444,7 +444,7 @@ msgstr "Terminé"
 #: plugins/admin/groups/mail_admins.tpl:39
 #: plugins/admin/groups/application_options.tpl:10
 #: plugins/admin/groups/mail_locals.tpl:68 plugins/admin/users/password.tpl:23
-#: plugins/admin/users/class_userManagement.inc:634
+#: plugins/admin/users/class_userManagement.inc:635
 #: plugins/admin/users/template.tpl:46 plugins/admin/users/remove.tpl:16
 #: plugins/admin/applications/remove.tpl:15
 #: plugins/admin/applications/class_applicationManagement.inc:306
@@ -531,7 +531,7 @@ msgid "Host notification options"
 msgstr "Options pour la notification des systèmes"
 
 #: plugins/personal/nagios/nagios.tpl:48
-#: plugins/personal/generic/generic.tpl:235
+#: plugins/personal/generic/generic.tpl:242
 #: plugins/addons/addressbook/address_info.tpl:91
 #: plugins/addons/addressbook/address_edit.tpl:102 html/getxls.php:174
 #: html/getxls.php:236
@@ -937,7 +937,7 @@ msgstr "Sélectionner les adresses à ajouter"
 #: plugins/gofax/faxaccount/locals.tpl:19
 #: plugins/addons/addressbook/contents.tpl:58
 #: plugins/admin/fai/faiProfileEntry.tpl:32
-#: plugins/admin/fai/faiPackageEntry.tpl:34 plugins/admin/fai/headpage.tpl:29
+#: plugins/admin/fai/faiPackageEntry.tpl:32 plugins/admin/fai/headpage.tpl:29
 #: plugins/admin/groups/headpage.tpl:30
 #: plugins/admin/groups/group_objects.tpl:20
 #: plugins/admin/groups/mail_locals.tpl:22 plugins/admin/users/headpage.tpl:29
@@ -997,7 +997,7 @@ msgstr "Mot de passe"
 
 #: plugins/personal/password/password.tpl:2
 #: plugins/personal/password/changed.tpl:2
-#: plugins/admin/users/class_userManagement.inc:681
+#: plugins/admin/users/class_userManagement.inc:682
 msgid "Change password"
 msgstr "Modifier le mot de passe"
 
@@ -2179,14 +2179,15 @@ msgstr "Script de démarrage"
 #: plugins/personal/environment/kioskManagement.tpl:24
 #: plugins/gofax/faxaccount/lists.tpl:31
 #: plugins/admin/fai/faiProfileEntry.tpl:71
+#: plugins/admin/fai/faiPackageConfiguration.tpl:5
 #: plugins/admin/fai/faiScriptEntry.tpl:67
 #: plugins/admin/fai/faiVariableEntry.tpl:48
-#: plugins/admin/fai/faiPackageEntry.tpl:65
+#: plugins/admin/fai/faiPackageEntry.tpl:63
 #: plugins/admin/fai/faiHookEntry.tpl:69
 #: plugins/admin/fai/faiTemplateEntry.tpl:132
 #: plugins/admin/groups/mail_admins.tpl:37
 #: plugins/admin/groups/application_options.tpl:8
-#: plugins/admin/systems/printerPPDDialog.tpl:22 include/functions.inc:1302
+#: plugins/admin/systems/printerPPDDialog.tpl:22
 msgid "Apply"
 msgstr "Appliquer"
 
@@ -2284,54 +2285,59 @@ msgstr "Informations personnelles"
 msgid "Change picture"
 msgstr "Changer la photo"
 
-#: plugins/personal/generic/generic.tpl:24
-#: plugins/addons/addressbook/address_edit.tpl:22
-#: plugins/admin/users/template.tpl:19
-#, fuzzy
-msgid "First name"
-msgstr "Liste des noms"
-
-#: plugins/personal/generic/generic.tpl:30
+#: plugins/personal/generic/generic.tpl:25
 #: plugins/addons/addressbook/address_edit.tpl:22
 #: plugins/admin/users/template.tpl:23
 #, fuzzy
 msgid "Last name"
 msgstr "Liste des noms"
 
-#: plugins/personal/generic/generic.tpl:34 plugins/admin/users/template.tpl:28
+#: plugins/personal/generic/generic.tpl:30
+#, fuzzy
+msgid "Template name"
+msgstr "Ensemble de modèles"
+
+#: plugins/personal/generic/generic.tpl:37
+#: plugins/addons/addressbook/address_edit.tpl:22
+#: plugins/admin/users/template.tpl:19
+#, fuzzy
+msgid "First name"
+msgstr "Liste des noms"
+
+#: plugins/personal/generic/generic.tpl:41 plugins/admin/users/template.tpl:28
 msgid "Login"
 msgstr "Identifiant"
 
-#: plugins/personal/generic/generic.tpl:42
+#: plugins/personal/generic/generic.tpl:49
 #: plugins/addons/addressbook/address_info.tpl:22
 #: plugins/addons/addressbook/address_edit.tpl:33
 msgid "Personal title"
 msgstr "Titre Personnel"
 
-#: plugins/personal/generic/generic.tpl:50
+#: plugins/personal/generic/generic.tpl:57
 msgid "Academic title"
 msgstr "Titre Universitaire"
 
-#: plugins/personal/generic/generic.tpl:58
+#: plugins/personal/generic/generic.tpl:65
 msgid "Date of birth"
 msgstr "Date de naissance"
 
-#: plugins/personal/generic/generic.tpl:75
+#: plugins/personal/generic/generic.tpl:82
 #: ihtml/themes/altlinux/sizelimit.tpl:14
 #: ihtml/themes/default/sizelimit.tpl:14
 msgid "Set"
 msgstr "Activer"
 
-#: plugins/personal/generic/generic.tpl:81 html/getxls.php:65
+#: plugins/personal/generic/generic.tpl:88 html/getxls.php:65
 #: html/getxls.php:224
 msgid "Sex"
 msgstr "Sexe"
 
-#: plugins/personal/generic/generic.tpl:91
+#: plugins/personal/generic/generic.tpl:98
 msgid "Preferred langage"
 msgstr "Langue préferée"
 
-#: plugins/personal/generic/generic.tpl:102
+#: plugins/personal/generic/generic.tpl:109
 #: plugins/gofax/blocklists/generic.tpl:14 plugins/admin/groups/generic.tpl:21
 #: plugins/admin/applications/generic.tpl:32
 #: plugins/admin/departments/generic.tpl:27
@@ -2345,12 +2351,12 @@ msgstr "Langue préferée"
 msgid "Base"
 msgstr "Base"
 
-#: plugins/personal/generic/generic.tpl:106
+#: plugins/personal/generic/generic.tpl:113
 msgid "Choose subtree to place user in"
 msgstr "Sélectionnez la branche où sera enregistrée l'utilisateur"
 
-#: plugins/personal/generic/generic.tpl:121
-#: plugins/personal/generic/generic.tpl:265
+#: plugins/personal/generic/generic.tpl:128
+#: plugins/personal/generic/generic.tpl:272
 #: plugins/addons/addressbook/address_info.tpl:33
 #: plugins/addons/addressbook/address_info.tpl:82
 #: plugins/addons/addressbook/address_edit.tpl:44
@@ -2359,49 +2365,49 @@ msgstr "Sélectionnez la branche où sera enregistrée l'utilisateur"
 msgid "Address"
 msgstr "Adresse"
 
-#: plugins/personal/generic/generic.tpl:125
+#: plugins/personal/generic/generic.tpl:132
 msgid "Private phone"
 msgstr "Numéro de téléphone privé"
 
-#: plugins/personal/generic/generic.tpl:129
+#: plugins/personal/generic/generic.tpl:136
 msgid "Homepage"
 msgstr "Page d'accueil"
 
-#: plugins/personal/generic/generic.tpl:138
+#: plugins/personal/generic/generic.tpl:145
 msgid "Password storage"
 msgstr "Format de stockage des mots de passe"
 
-#: plugins/personal/generic/generic.tpl:148
+#: plugins/personal/generic/generic.tpl:155
 #: plugins/personal/generic/generic_certs.tpl:3
 msgid "Certificates"
 msgstr "Certificats"
 
-#: plugins/personal/generic/generic.tpl:150
+#: plugins/personal/generic/generic.tpl:157
 msgid "Edit certificates"
 msgstr "Modification des certificats"
 
-#: plugins/personal/generic/generic.tpl:154
+#: plugins/personal/generic/generic.tpl:161
 msgid "Kerberos"
 msgstr "Kerberos"
 
-#: plugins/personal/generic/generic.tpl:155
+#: plugins/personal/generic/generic.tpl:162
 msgid "Edit properties"
 msgstr "Modifier les propriétés"
 
-#: plugins/personal/generic/generic.tpl:171
+#: plugins/personal/generic/generic.tpl:178
 msgid "Organizational information"
 msgstr "Informations sur l'entreprise"
 
-#: plugins/personal/generic/generic.tpl:183 html/getxls.php:236
+#: plugins/personal/generic/generic.tpl:190 html/getxls.php:236
 msgid "Organization"
 msgstr "Entreprise"
 
-#: plugins/personal/generic/generic.tpl:187
+#: plugins/personal/generic/generic.tpl:194
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:310
 #: plugins/addons/addressbook/address_info.tpl:64
 #: plugins/addons/addressbook/address_edit.tpl:75
 #: plugins/admin/groups/class_groupManagement.inc:386
-#: plugins/admin/users/class_userManagement.inc:689
+#: plugins/admin/users/class_userManagement.inc:690
 #: plugins/admin/applications/class_applicationManagement.inc:357
 #: plugins/admin/systems/class_systemManagement.inc:589
 #: plugins/admin/ogroups/class_ogroupManagement.inc:417
@@ -2411,94 +2417,94 @@ msgstr "Entreprise"
 msgid "Department"
 msgstr "Département"
 
-#: plugins/personal/generic/generic.tpl:191
+#: plugins/personal/generic/generic.tpl:198
 msgid "Department No."
 msgstr "No. du département."
 
-#: plugins/personal/generic/generic.tpl:197
+#: plugins/personal/generic/generic.tpl:204
 msgid "Employee No."
 msgstr "No. de l'employé."
 
-#: plugins/personal/generic/generic.tpl:203
+#: plugins/personal/generic/generic.tpl:210
 msgid "Employee type"
 msgstr "Type de l'employé"
 
-#: plugins/personal/generic/generic.tpl:219
-#: plugins/personal/generic/generic.tpl:358
+#: plugins/personal/generic/generic.tpl:226
+#: plugins/personal/generic/generic.tpl:365
 msgid "Room No."
 msgstr "No. de bureau."
 
-#: plugins/personal/generic/generic.tpl:231
+#: plugins/personal/generic/generic.tpl:238
 #: plugins/addons/addressbook/contents.tpl:15
 #: plugins/addons/addressbook/address_info.tpl:40
 #: plugins/addons/addressbook/address_edit.tpl:51 html/getxls.php:236
 msgid "Mobile"
 msgstr "GSM"
 
-#: plugins/personal/generic/generic.tpl:257
+#: plugins/personal/generic/generic.tpl:264
 #: plugins/admin/departments/generic.tpl:42
 #: plugins/admin/departments/generic.tpl:50
 #: plugins/admin/systems/workstation.tpl:18 html/getxls.php:174
 msgid "Location"
 msgstr "Lieu"
 
-#: plugins/personal/generic/generic.tpl:261
+#: plugins/personal/generic/generic.tpl:268
 #: plugins/admin/departments/generic.tpl:46 html/getxls.php:174
 #: html/getxls.php:236
 msgid "State"
 msgstr "Département"
 
-#: plugins/personal/generic/generic.tpl:279
+#: plugins/personal/generic/generic.tpl:286
 msgid "Vocation"
 msgstr "Travail"
 
-#: plugins/personal/generic/generic.tpl:283
+#: plugins/personal/generic/generic.tpl:290
 msgid "Unit description"
 msgstr "Description de l'unité"
 
-#: plugins/personal/generic/generic.tpl:291
+#: plugins/personal/generic/generic.tpl:298
 msgid "Subject area"
 msgstr "Zone de sujet"
 
-#: plugins/personal/generic/generic.tpl:299
+#: plugins/personal/generic/generic.tpl:306
 msgid "Functional title"
 msgstr "Fonction"
 
-#: plugins/personal/generic/generic.tpl:306
+#: plugins/personal/generic/generic.tpl:313
 msgid "Role"
 msgstr "Rôle"
 
-#: plugins/personal/generic/generic.tpl:318
+#: plugins/personal/generic/generic.tpl:325
 msgid "Person locality"
 msgstr "Lieu de résidence"
 
-#: plugins/personal/generic/generic.tpl:326
+#: plugins/personal/generic/generic.tpl:333
 msgid "Unit"
 msgstr "Unité"
 
-#: plugins/personal/generic/generic.tpl:333
+#: plugins/personal/generic/generic.tpl:340
 msgid "Street"
 msgstr "Rue"
 
-#: plugins/personal/generic/generic.tpl:339
+#: plugins/personal/generic/generic.tpl:346
 #: plugins/addons/addressbook/address_info.tpl:70
 #: plugins/addons/addressbook/address_edit.tpl:81 html/getxls.php:174
 msgid "Postal code"
 msgstr "Code postal"
 
-#: plugins/personal/generic/generic.tpl:345
+#: plugins/personal/generic/generic.tpl:352
 msgid "House identifier"
 msgstr "Identifiant du batiment"
 
-#: plugins/personal/generic/generic.tpl:367
+#: plugins/personal/generic/generic.tpl:374
 msgid "Please use the phone tab"
 msgstr "Veuillez utiliser l'onglet téléphone"
 
-#: plugins/personal/generic/generic.tpl:380
+#: plugins/personal/generic/generic.tpl:387
 msgid "Last delivery"
 msgstr "Dernière distribution"
 
-#: plugins/personal/generic/generic.tpl:387
+#: plugins/personal/generic/generic.tpl:394
 msgid "Public visible"
 msgstr "Visible par tous"
 
@@ -2584,7 +2590,7 @@ msgstr ""
 
 #: plugins/personal/generic/class_user.inc:921
 #: plugins/addons/addressbook/class_addressbook.inc:542
-#: plugins/admin/users/class_userManagement.inc:546
+#: plugins/admin/users/class_userManagement.inc:547
 msgid "The required field 'Name' is not set."
 msgstr "Le champ obligatoire 'Nom' n'est pas rempli."
 
@@ -2594,7 +2600,7 @@ msgstr "Une personne ayant ce 'Identifiant' existe déjà dans l'annuaire."
 
 #: plugins/personal/generic/class_user.inc:936
 #: plugins/addons/addressbook/class_addressbook.inc:546
-#: plugins/admin/users/class_userManagement.inc:549
+#: plugins/admin/users/class_userManagement.inc:550
 msgid "The required field 'Given name' is not set."
 msgstr "Le champ obligatoire 'Nom Complet' n'est pas rempli."
 
@@ -2849,7 +2855,7 @@ msgid "GB"
 msgstr "GB"
 
 #: plugins/personal/connectivity/class_proxyAccount.inc:82
-#: plugins/addons/mailqueue/class_mailqueue.inc:283
+#: plugins/addons/mailqueue/class_mailqueue.inc:287
 msgid "hour"
 msgstr "heure"
 
@@ -3066,7 +3072,7 @@ msgstr "Veuillez entrer un numéro de téléphone valide."
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:294
 #: plugins/admin/fai/class_faiManagement.inc:426
 #: plugins/admin/groups/class_groupManagement.inc:351
-#: plugins/admin/users/class_userManagement.inc:669
+#: plugins/admin/users/class_userManagement.inc:670
 #: plugins/admin/applications/class_applicationManagement.inc:326
 #: plugins/admin/departments/class_departmentManagement.inc:280
 #: plugins/admin/systems/class_systemManagement.inc:565
@@ -3079,7 +3085,7 @@ msgstr "Monter d'un département"
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:294
 #: plugins/admin/fai/class_faiManagement.inc:426
 #: plugins/admin/groups/class_groupManagement.inc:351
-#: plugins/admin/users/class_userManagement.inc:669
+#: plugins/admin/users/class_userManagement.inc:670
 #: plugins/admin/applications/class_applicationManagement.inc:326
 #: plugins/admin/departments/class_departmentManagement.inc:280
 #: plugins/admin/systems/class_systemManagement.inc:565
@@ -3093,7 +3099,7 @@ msgstr "Au dessus"
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:295
 #: plugins/admin/fai/class_faiManagement.inc:429
 #: plugins/admin/groups/class_groupManagement.inc:352
-#: plugins/admin/users/class_userManagement.inc:670
+#: plugins/admin/users/class_userManagement.inc:671
 #: plugins/admin/applications/class_applicationManagement.inc:327
 #: plugins/admin/departments/class_departmentManagement.inc:281
 #: plugins/admin/systems/class_systemManagement.inc:566
@@ -3106,7 +3112,7 @@ msgstr "Aller au département de base"
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:295
 #: plugins/admin/fai/class_faiManagement.inc:429
 #: plugins/admin/groups/class_groupManagement.inc:352
-#: plugins/admin/users/class_userManagement.inc:670
+#: plugins/admin/users/class_userManagement.inc:671
 #: plugins/admin/applications/class_applicationManagement.inc:327
 #: plugins/admin/departments/class_departmentManagement.inc:281
 #: plugins/admin/systems/class_systemManagement.inc:566
@@ -3118,7 +3124,7 @@ msgstr "Racine"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:296
 #: plugins/admin/groups/class_groupManagement.inc:353
-#: plugins/admin/users/class_userManagement.inc:671
+#: plugins/admin/users/class_userManagement.inc:672
 #: plugins/admin/applications/class_applicationManagement.inc:328
 #: plugins/admin/systems/class_systemManagement.inc:567
 #: plugins/admin/ogroups/class_ogroupManagement.inc:362
@@ -3130,7 +3136,7 @@ msgstr "Aller au département des utilisateurs"
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:296
 #: plugins/admin/fai/class_faiManagement.inc:432
 #: plugins/admin/groups/class_groupManagement.inc:353
-#: plugins/admin/users/class_userManagement.inc:671
+#: plugins/admin/users/class_userManagement.inc:672
 #: plugins/admin/applications/class_applicationManagement.inc:328
 #: plugins/admin/departments/class_departmentManagement.inc:282
 #: plugins/admin/systems/class_systemManagement.inc:567
@@ -3151,7 +3157,7 @@ msgstr "Nouvelle liste rouge"
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:299
 #: plugins/admin/fai/class_faiManagement.inc:461
 #: plugins/admin/groups/class_groupManagement.inc:357
-#: plugins/admin/users/class_userManagement.inc:676
+#: plugins/admin/users/class_userManagement.inc:677
 #: plugins/admin/applications/class_applicationManagement.inc:332
 #: plugins/admin/departments/class_departmentManagement.inc:286
 #: plugins/admin/systems/class_systemManagement.inc:576
@@ -3164,7 +3170,7 @@ msgstr "Base actuelle"
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:300
 #: plugins/admin/fai/class_faiManagement.inc:462
 #: plugins/admin/groups/class_groupManagement.inc:358
-#: plugins/admin/users/class_userManagement.inc:677
+#: plugins/admin/users/class_userManagement.inc:678
 #: plugins/admin/applications/class_applicationManagement.inc:333
 #: plugins/admin/departments/class_departmentManagement.inc:287
 #: plugins/admin/systems/class_systemManagement.inc:577
@@ -3177,7 +3183,7 @@ msgstr "Soumettre le département"
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:300
 #: plugins/admin/fai/class_faiManagement.inc:462
 #: plugins/admin/groups/class_groupManagement.inc:358
-#: plugins/admin/users/class_userManagement.inc:677
+#: plugins/admin/users/class_userManagement.inc:678
 #: plugins/admin/applications/class_applicationManagement.inc:333
 #: plugins/admin/departments/class_departmentManagement.inc:287
 #: plugins/admin/systems/class_systemManagement.inc:577
@@ -3190,7 +3196,7 @@ msgstr "Soumettre"
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:303
 #: plugins/admin/fai/class_faiManagement.inc:480
 #: plugins/admin/groups/class_groupManagement.inc:362
-#: plugins/admin/users/class_userManagement.inc:680
+#: plugins/admin/users/class_userManagement.inc:681
 #: plugins/admin/applications/class_applicationManagement.inc:337
 #: plugins/admin/departments/class_departmentManagement.inc:294
 #: plugins/admin/systems/class_systemManagement.inc:582
@@ -3201,7 +3207,7 @@ msgid "edit"
 msgstr "éditer"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:303
-#: plugins/admin/users/class_userManagement.inc:680
+#: plugins/admin/users/class_userManagement.inc:681
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:339
 msgid "Edit user"
 msgstr "Editer un utilisateur"
@@ -3210,7 +3216,7 @@ msgstr "Editer un utilisateur"
 #: plugins/addons/mailqueue/contents.tpl:95
 #: plugins/admin/fai/class_faiManagement.inc:481
 #: plugins/admin/groups/class_groupManagement.inc:363
-#: plugins/admin/users/class_userManagement.inc:682
+#: plugins/admin/users/class_userManagement.inc:683
 #: plugins/admin/applications/class_applicationManagement.inc:338
 #: plugins/admin/departments/class_departmentManagement.inc:295
 #: plugins/admin/systems/class_systemManagement.inc:583
@@ -3222,7 +3228,7 @@ msgid "delete"
 msgstr "supprimer"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:304
-#: plugins/admin/users/class_userManagement.inc:682
+#: plugins/admin/users/class_userManagement.inc:683
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:340
 msgid "Delete user"
 msgstr "Supprimer un utilisateur"
@@ -3235,7 +3241,7 @@ msgstr "Nom de la liste rouge"
 #: plugins/addons/addressbook/contents.tpl:42
 #: plugins/admin/fai/class_faiManagement.inc:477
 #: plugins/admin/groups/class_groupManagement.inc:388
-#: plugins/admin/users/class_userManagement.inc:691
+#: plugins/admin/users/class_userManagement.inc:692
 #: plugins/admin/applications/class_applicationManagement.inc:358
 #: plugins/admin/departments/class_departmentManagement.inc:302
 #: plugins/admin/systems/class_systemManagement.inc:590
@@ -3883,8 +3889,8 @@ msgid "Creating new entry in"
 msgstr "Création d'une nouvelle entrée dans"
 
 #: plugins/addons/addressbook/class_addressbook.inc:519
-#: plugins/addons/mailqueue/class_mailqueue.inc:265
-#: plugins/addons/mailqueue/class_mailqueue.inc:330
+#: plugins/addons/mailqueue/class_mailqueue.inc:269
+#: plugins/addons/mailqueue/class_mailqueue.inc:334
 #: plugins/addons/logview/class_logview.inc:68
 #: plugins/addons/logview/class_logview.inc:82
 msgid "All"
@@ -3991,38 +3997,38 @@ msgstr ""
 "Veuillez vérifier votre fichier 'gosa.conf' la commande %s ne peut pas être "
 "exécutée."
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:235
+#: plugins/addons/mailqueue/class_mailqueue.inc:239
 msgid "up"
 msgstr "au dessus"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:237
+#: plugins/addons/mailqueue/class_mailqueue.inc:241
 msgid "down"
 msgstr "En bas"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:280
+#: plugins/addons/mailqueue/class_mailqueue.inc:284
 msgid "no limit"
 msgstr "pas de limites"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:285
+#: plugins/addons/mailqueue/class_mailqueue.inc:289
 msgid "hours"
 msgstr "heures"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:331
+#: plugins/addons/mailqueue/class_mailqueue.inc:335
 msgid "Hold"
 msgstr ""
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:332
+#: plugins/addons/mailqueue/class_mailqueue.inc:336
 #, fuzzy
 msgid "Un hold"
 msgstr "Musique d'attente"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:333
+#: plugins/addons/mailqueue/class_mailqueue.inc:337
 #: plugins/addons/mailqueue/contents.tpl:78
 #, fuzzy
 msgid "Active"
 msgstr "Activé"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:334
+#: plugins/addons/mailqueue/class_mailqueue.inc:338
 msgid "Not active"
 msgstr ""
 
@@ -4690,18 +4696,23 @@ msgstr "Montrer seulement les classes avec des partitions"
 
 #: plugins/admin/fai/faiProfileEntry.tpl:55
 #: plugins/admin/fai/faiProfileEntry.tpl:56
-#: plugins/admin/fai/faiPackageEntry.tpl:50 plugins/admin/fai/headpage.tpl:47
+#: plugins/admin/fai/faiPackageEntry.tpl:48 plugins/admin/fai/headpage.tpl:47
 #: plugins/admin/systems/printerPPDSelectionDialog.tpl:30
 #: plugins/admin/ogroups/ogroup_objects.tpl:41
 msgid "Display objects matching"
 msgstr "Afficher les objets correspondants"
 
 #: plugins/admin/fai/faiProfileEntry.tpl:60
-#: plugins/admin/fai/faiPackageEntry.tpl:55 plugins/admin/fai/headpage.tpl:51
+#: plugins/admin/fai/faiPackageEntry.tpl:53 plugins/admin/fai/headpage.tpl:51
 #: plugins/admin/systems/printerPPDSelectionDialog.tpl:34
 #: plugins/admin/ogroups/ogroup_objects.tpl:42
 msgid "Regular expression for matching object names"
 msgstr "Expression régulière pour trouver les objets correspondants"
+
+#: plugins/admin/fai/faiPackageConfiguration.tpl:1
+#, fuzzy
+msgid "Package"
+msgstr "Paquets"
 
 #: plugins/admin/fai/class_faiScriptEntry.inc:51
 #: plugins/admin/fai/class_faiHookEntry.inc:54
@@ -4734,7 +4745,7 @@ msgstr "Choisissez une variable à effacer ou éditer"
 
 #: plugins/admin/fai/faiScriptEntry.tpl:29
 #: plugins/admin/groups/class_groupManagement.inc:387
-#: plugins/admin/users/class_userManagement.inc:690
+#: plugins/admin/users/class_userManagement.inc:691
 #: plugins/admin/departments/generic.tpl:4
 #: plugins/admin/systems/terminal.tpl:1
 #: plugins/admin/systems/workstation.tpl:1
@@ -5037,7 +5048,7 @@ msgstr "Choisissez le modèle à effacer où éditer"
 msgid "List of available packages"
 msgstr "Liste des paquets disponibles"
 
-#: plugins/admin/fai/faiPackageEntry.tpl:27
+#: plugins/admin/fai/faiPackageEntry.tpl:26
 msgid ""
 "This menu allows you to select multiple packages to add them to the "
 "currently edited package list."
@@ -5137,6 +5148,11 @@ msgstr "Tâche"
 #: plugins/admin/fai/faiHookEntry.tpl:36
 msgid "Choose an existing FAI task"
 msgstr "Choisissez une tâche FAI existante"
+
+#: plugins/admin/fai/class_faiPackageConfiguration.inc:42
+#, php-format
+msgid "Debconf information for package '%s'"
+msgstr ""
 
 #: plugins/admin/fai/class_askClassName.inc:71
 msgid "Create new FAI object - partition table."
@@ -5408,7 +5424,7 @@ msgid "Delete this entry"
 msgstr "Supprimer cette entrée"
 
 #: plugins/admin/groups/class_groupManagement.inc:373
-#: plugins/admin/users/class_userManagement.inc:727
+#: plugins/admin/users/class_userManagement.inc:728
 msgid "Posix"
 msgstr "Posix"
 
@@ -5771,31 +5787,31 @@ msgstr "Vous n'êtes pas autorisé à supprimer cette utilisateur!"
 msgid "none"
 msgstr "aucun"
 
-#: plugins/admin/users/class_userManagement.inc:558
+#: plugins/admin/users/class_userManagement.inc:559
 msgid "A person with the choosen name is already used in this tree."
 msgstr "Une personne ayant ce nom existe déjà dans l'annuaire."
 
-#: plugins/admin/users/class_userManagement.inc:673
+#: plugins/admin/users/class_userManagement.inc:674
 msgid "Create new user"
 msgstr "Création d'un nouvel utilisateur"
 
-#: plugins/admin/users/class_userManagement.inc:673
+#: plugins/admin/users/class_userManagement.inc:674
 msgid "New user"
 msgstr "Nouvel utilisateur"
 
-#: plugins/admin/users/class_userManagement.inc:674
+#: plugins/admin/users/class_userManagement.inc:675
 msgid "Create new template"
 msgstr "Créer un nouveau modèle"
 
-#: plugins/admin/users/class_userManagement.inc:674
+#: plugins/admin/users/class_userManagement.inc:675
 msgid "New template"
 msgstr "Nouveau modèle"
 
-#: plugins/admin/users/class_userManagement.inc:681
+#: plugins/admin/users/class_userManagement.inc:682
 msgid "password"
 msgstr "mot de passe"
 
-#: plugins/admin/users/class_userManagement.inc:689
+#: plugins/admin/users/class_userManagement.inc:690
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:345
 #: ihtml/themes/altlinux/setup_useradmin.tpl:22
 #: ihtml/themes/altlinux/login.tpl:26 ihtml/themes/altlinux/login.tpl:30
@@ -5804,59 +5820,59 @@ msgstr "mot de passe"
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: plugins/admin/users/class_userManagement.inc:694
+#: plugins/admin/users/class_userManagement.inc:695
 msgid "This table displays all users, in the selected tree."
 msgstr "Ce tableau montre toutes les utilisateurs, dans l'arbre sélectionné."
 
-#: plugins/admin/users/class_userManagement.inc:725
+#: plugins/admin/users/class_userManagement.inc:726
 msgid "GOsa"
 msgstr "GOsa"
 
-#: plugins/admin/users/class_userManagement.inc:726
+#: plugins/admin/users/class_userManagement.inc:727
 msgid "Edit generic properties"
 msgstr "Modifier les propriétés de base"
 
-#: plugins/admin/users/class_userManagement.inc:728
+#: plugins/admin/users/class_userManagement.inc:729
 msgid "Edit UNIX properties"
 msgstr "Modifier les propriétés UNIX"
 
-#: plugins/admin/users/class_userManagement.inc:730
+#: plugins/admin/users/class_userManagement.inc:731
 msgid "Edit environment properties"
 msgstr "Modifier les propriétés d'environnement"
 
-#: plugins/admin/users/class_userManagement.inc:732
+#: plugins/admin/users/class_userManagement.inc:733
 msgid "Edit mail properties"
 msgstr "Modifier les propriétés de messagerie"
 
-#: plugins/admin/users/class_userManagement.inc:734
+#: plugins/admin/users/class_userManagement.inc:735
 msgid "Edit phone properties"
 msgstr "Modifier les propriétés téléphoniques"
 
-#: plugins/admin/users/class_userManagement.inc:736
+#: plugins/admin/users/class_userManagement.inc:737
 msgid "Edit fax properies"
 msgstr "Modifier les propriétés fax"
 
-#: plugins/admin/users/class_userManagement.inc:738
+#: plugins/admin/users/class_userManagement.inc:739
 msgid "Edit samba properties"
 msgstr "Modifier les propriétés samba"
 
-#: plugins/admin/users/class_userManagement.inc:739
+#: plugins/admin/users/class_userManagement.inc:740
 msgid "Create user from template"
 msgstr "Créer un nouvel utilisateur depuis un modèle"
 
-#: plugins/admin/users/class_userManagement.inc:740
+#: plugins/admin/users/class_userManagement.inc:741
 msgid "Create user with this template"
 msgstr "Créer un nouvel utilisateur avec ce modèle"
 
-#: plugins/admin/users/class_userManagement.inc:799
+#: plugins/admin/users/class_userManagement.inc:800
 msgid "Online"
 msgstr "En ligne"
 
-#: plugins/admin/users/class_userManagement.inc:806
+#: plugins/admin/users/class_userManagement.inc:807
 msgid "Offline"
 msgstr "Hors-ligne"
 
-#: plugins/admin/users/class_userManagement.inc:1019
+#: plugins/admin/users/class_userManagement.inc:1020
 #: plugins/admin/users/template.tpl:11
 #: plugins/admin/systems/class_systemManagement.inc:705
 msgid "Template"
@@ -10027,6 +10043,10 @@ msgstr "Erreur LDAP :"
 
 #: include/functions.inc:1274
 msgid "Entries per page"
+msgstr ""
+
+#: include/functions.inc:1302
+msgid "Apply filter"
 msgstr ""
 
 #: include/functions.inc:1576
