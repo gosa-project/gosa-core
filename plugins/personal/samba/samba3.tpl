@@ -1,16 +1,16 @@
-<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding="0" border="0">
 
  <!-- Headline container -->
  <tr>
-  <td colspan=2 style="width:50%; vertical-align:top;">
-   <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
+  <td colspan="2" style="width:50%; vertical-align:top;">
+   <h2><p class="center"><img class="center" alt="" align="middle" src="images/rightarrow.png"/>&nbsp;{t}Generic{/t}</p></h2>
   </td>
  </tr>
  <tr>
   <td style="vertical-align:top;">
    <table summary="">
     <tr>
-     <td><LABEL for="sambaHomePath">{t}Home directory{/t}</LABEL></td>
+     <td><label for="sambaHomePath">{t}Home directory{/t}</label></td>
      <td>
       <input id="sambaHomePath" name="sambaHomePath" size=30 maxlength=60 {$sambaHomePathACL} value="{$sambaHomePath}">
       <select size="1" name="sambaHomeDrive" {$sambaHomeDriveACL}>
@@ -20,7 +20,7 @@
      </td>
     </tr>
     <tr>
-     <td><LABEL for="sambaDomainName">{t}Domain{/t}</LABEL></td>
+     <td><label for="sambaDomainName">{t}Domain{/t}</label></td>
      <td>
       <select id="sambaDomainName" size="1" name="sambaDomainName" {$sambaDomainNameACL}>
        {html_options values=$domains output=$domains selected=$sambaDomainName}
@@ -35,13 +35,13 @@
   <td style="vertical-align:top;">
    <table summary="">
     <tr>
-     <td><LABEL for="">{t}Script path{/t}</LABEL></td>
+     <td><label for="">{t}Script path{/t}</label></td>
      <td>
       <input id="sambaLogonScript" name="sambaLogonScript" size=35 maxlength=60 {$sambaLogonScriptACL} value="{$sambaLogonScript}">
      </td>
     </tr>
     <tr>
-     <td><LABEL for="">{t}Profile path{/t}</LABEL></td>
+     <td><label for="">{t}Profile path{/t}</label></td>
      <td>
       <input id="sambaProfilePath" name="sambaProfilePath" size=35 maxlength=60 {$sambaProfilePathACL} value="{$sambaProfilePath}">
      </td>
@@ -53,7 +53,7 @@
 
 <p class="seperator">&nbsp;</p>
 
-<h2><img alt="" align="middle" src="images/display.png"> {t}Terminal Server{/t}</h2>
+<h2><p class="center"><img class="center" alt="" align="middle" src="images/display.png" />&nbsp;{t}Terminal Server{/t}</p></h2>
 
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
@@ -82,7 +82,7 @@
    <i>{t}Allow login on terminal server{/t}</i>
    <table summary="">
     <tr>
-     <td><LABEL for="CtxWFHomeDir">{t}Home directory{/t}</LABEL></td>
+     <td><label for="CtxWFHomeDir">{t}Home directory{/t}</label></td>
      <td>
       <input id="CtxWFHomeDir" name="CtxWFHomeDir" size=30 maxlength=60 {$CtxWFHomeDirACL} value="{$CtxWFHomeDir}" {$tsloginstate}>
       <select size="1" id="CtxWFHomeDirDrive" name="CtxWFHomeDirDrive" {$CtxWFHomeDirDriveACL} {$tsloginstate}>
@@ -92,7 +92,7 @@
      </td>
     </tr>
     <tr>
-     <td><LABEL for="CtxWFProfilePath">{t}Profile path{/t}</LABEL></td>
+     <td><label for="CtxWFProfilePath">{t}Profile path{/t}</label></td>
      <td>
       <input id="CtxWFProfilePath" name="CtxWFProfilePath" size=35 maxlength=60 {$CtxWFProfilePathACL} value="{$CtxWFProfilePath}" {$tsloginstate}>
      </td>
@@ -107,13 +107,13 @@
    <i>{t}Inherit client config{/t}</i>
    <table summary="">
     <tr>
-     <td><LABEL for="CtxInitialProgram">{t}Initial program{/t}</LABEL></td>
+     <td><label for="CtxInitialProgram">{t}Initial program{/t}</label></td>
      <td>
       <input id="CtxInitialProgram" name="CtxInitialProgram" size=35 maxlength=60 {if $CtxInitialProgramACL==""}{$CtxInitialProgramMode}{/if} value="{$CtxInitialProgram}" {$CtxInitialProgramACL} {$tsloginstate} {$inheritstate}>
      </td>
     </tr>
     <tr>
-     <td><LABEL for="CtxWorkDirectory">{t}Working directory{/t}</LABEL></td>
+     <td><label for="CtxWorkDirectory">{t}Working directory{/t}</label></td>
      <td>
       <input id="CtxWorkDirectory" name="CtxWorkDirectory" size=35 maxlength=60 {if $CtxWorkDirectoryACL==""}{$CtxInitialProgramMode}{/if} value="{$CtxWorkDirectory}" {$CtxInitialProgramACL} {$tsloginstate} {$inheritstate}>
      </td>
@@ -133,7 +133,7 @@
     <tr>
      <td>
       <input id="CtxMaxConnectionTimeF" type=checkbox name="CtxMaxConnectionTimeF" value="1" {$CtxMaxConnectionTimeF} {$CtxMaxConnectionTimeACL} onclick="changeSubselectState('CtxMaxConnectionTimeF','CtxMaxConnectionTime')" {$tsloginstate}>
-      <LABEL for="CtxMaxConnectionTimeF">{t}Connection{/t}</LABEL>
+      <label for="CtxMaxConnectionTimeF">{t}Connection{/t}</label>
      </td>
      <td>
       <input name="CtxMaxConnectionTime" id="CtxMaxConnectionTime" size=5 maxlength=5 {if $CtxMaxConnectionTimeACL==""}{$CtxMaxConnectionTimeMode}{/if} value="{$CtxMaxConnectionTime}" {$CtxMaxConnectionTimeACL} {$tsloginstate}>
@@ -142,7 +142,7 @@
     <tr>
      <td>
       <input id="CtxMaxDisconnectionTimeF" type=checkbox name="CtxMaxDisconnectionTimeF" value="1" {$CtxMaxDisconnectionTimeF} {$CtxMaxDisconnectionTimeACL} onclick="changeState('CtxMaxDisconnectionTime')" {$tsloginstate}>
-      <LABEL for="CtxMaxDisconnectionTimeF">{t}Disconnection{/t}</LABEL>
+      <label for="CtxMaxDisconnectionTimeF">{t}Disconnection{/t}</label>
      </td>
      <td>
       <input name="CtxMaxDisconnectionTime" id="CtxMaxDisconnectionTime" size=5 maxlength=5 {if $CtxMaxDisconnectionTimeACL ==""}{$CtxMaxDisconnectionTimeMode}{/if} value="{$CtxMaxDisconnectionTime}" {$CtxMaxDisconnectionTimeACL} {$tsloginstate}>
@@ -151,7 +151,7 @@
     <tr>
      <td>
       <input id="CtxMaxIdleTimeF" type=checkbox name="CtxMaxIdleTimeF" value="1" {$CtxMaxIdleTimeF} {$CtxMaxIdleTimeACL} onclick="changeState('CtxMaxIdleTime')" {$tsloginstate}>
-      <LABEL for="CtxMaxIdleTimeF">{t}IDLE{/t}</LABEL>
+      <label for="CtxMaxIdleTimeF">{t}IDLE{/t}</label>
      </td>
      <td>
       <input name="CtxMaxIdleTime" id="CtxMaxIdleTime" size=5 maxlength=5 {if $CtxMaxIdleTimeACL==""}{$CtxMaxIdleTimeMode}{/if} value="{$CtxMaxIdleTime}" {$CtxMaxIdleTimeACL} {$tsloginstate}>
@@ -169,19 +169,19 @@
     <tr>
      <td>
       <input id="connectclientdrives" type=checkbox name="connectclientdrives" value="1" {$connectclientdrives} {$connectclientdrivesACL} {$tsloginstate}>
-      <LABEL for="connectclientdrives">{t}Connect client drives at logon{/t}</LABEL>
+      <label for="connectclientdrives">{t}Connect client drives at logon{/t}</label>
      </td>
     </tr>
     <tr>
      <td>
       <input id="connectclientprinters" type=checkbox name="connectclientprinters" value="1" {$connectclientprinters} {$connectclientprintersACL} {$tsloginstate}>
-      <LABEL for="connectclientprinters">{t}Connect client printers at logon{/t}</LABEL>
+      <label for="connectclientprinters">{t}Connect client printers at logon{/t}</label>
      </td>
     </tr>
     <tr>
      <td>
       <input id="defaultprinter" type=checkbox name="defaultprinter" value="1" {$defaultprinter} {$defaultprinterACL} {$tsloginstate}>
-      <LABEL for="defaultprinter">{t}Default to main client printer{/t}</LABEL>
+      <label for="defaultprinter">{t}Default to main client printer{/t}</label>
      </td>
     </tr>
    </table>
@@ -195,7 +195,7 @@
    <table summary="">
     <tr>
      <td>
-      <LABEL for="shadow">{t}Shadowing{/t}</LABEL>
+      <label for="shadow">{t}Shadowing{/t}</label>
      </td>
      <td>
       <select id="shadow" size="1" name="shadow" {$shadowACL} {$tsloginstate}>
@@ -204,7 +204,7 @@
      </td>
     </tr>
     <tr>
-     <td><LABEL for="brokenconn">{t}On broken or timed out{/t}</LABEL></td>
+     <td><label for="brokenconn">{t}On broken or timed out{/t}</label></td>
      <td>
       <select id="brokenconn" size="1" name="brokenconn" {$brokenconnACL} {$tsloginstate}>
        {html_options options=$brokenconn selected=$brokenconnmode}
@@ -212,7 +212,7 @@
      </td>
     </tr>
     <tr>
-     <td><LABEL for="reconn">{t}Reconnect if disconnected{/t}</LABEL></td>
+     <td><label for="reconn">{t}Reconnect if disconnected{/t}</label></td>
      <td>
       <select id="reconn" size="1" name="reconn" {$reconnACL} {$tsloginstate}>
        {html_options options=$reconn selected=$reconnmode}
@@ -227,22 +227,22 @@
 
 <p class="seperator">&nbsp;</p>
 
-<h2><img alt="" align="middle" src="images/certs.png"> {t}Access options{/t}</h2>
+<h2><p class="center"><img class="center" alt="" align="middle" src="images/certs.png" />&nbsp;{t}Access options{/t}</p></h2>
 
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
  <tr>
   <td style="width:50%; vertical-align:top;">
    <input id="allow_pwchange" type=checkbox name="allow_pwchange" value="1" {$flagsP} {$allow_pwchangeACL}>
-   <LABEL for="allow_pwchange">{t}Allow user to change password from client{/t}</LABEL>
+   <label for="allow_pwchange">{t}Allow user to change password from client{/t}</label>
    <br>
    <input id="no_password_required" type=checkbox name="no_password_required" value="1" {$flagsN}  {$no_password_requiredACL}>
-   <LABEL for="no_password_required">{t}Login from windows client requires no password{/t}</LABEL>
+   <label for="no_password_required">{t}Login from windows client requires no password{/t}</label>
    <br>
    <input id="temporary_disable" type=checkbox name="temporary_disable" value="1" {$flagsD} {$temporary_disableACL}>
-   <LABEL for="temporary_disable">{t}Lock samba account{/t}</LABEL>
+   <label for="temporary_disable">{t}Lock samba account{/t}</label>
    <br>
    <input id="password_expires" type=checkbox name="password_expires" value="1" {$flagsC} {$password_expiresACL}>
-   <LABEL for="password_expires">{t}Password expires on{/t}</LABEL>
+   <label for="password_expires">{t}Password expires on{/t}</label>
    <select name=day onChange="createResult(this.form,this.form.sambaPwdMustChange);" {$sambaPwdMustChangeACL}>
     {html_options values=$days output=$days selected=$day}
    </select>
@@ -254,7 +254,7 @@
    </select>
    <br>
    <input id="logon_time_set" type=checkbox name="logon_time_set" value="1" {$flagsT} {$logon_time_setACL}>
-   <LABEL for="logon_time_set">{t}Limit Logon Time{/t}</LABEL>
+   <label for="logon_time_set">{t}Limit Logon Time{/t}</label>
    <select name=sambaLogonTime_day onChange="createResult_sambaLogonTime(this.form,this.form.sambaLogonTime);" {$sambaLogonTimeACL}>
    {html_options values=$sambaLogonTime_days output=$sambaLogonTime_days selected=$sambaLogonTime_day}
    </select>
@@ -266,7 +266,7 @@
    </select>
    <br>
    <input id="logoff_time_set" type=checkbox name="logoff_time_set" value="1" {$flagsO} {$logoff_time_setACL}>
-   <LABEL for="logoff_time_set">{t}Limit Logoff Time{/t}</LABEL>
+   <label for="logoff_time_set">{t}Limit Logoff Time{/t}</label>
    <select name=sambaLogoffTime_day onChange="createResult_sambaLogoffTime(this.form,this.form.sambaLogoffTime);" {$sambaLogoffTimeACL}>
    {html_options values=$sambaLogoffTime_days output=$sambaLogoffTime_days selected=$sambaLogoffTime_day}
    </select>
@@ -278,7 +278,7 @@
    </select>
    <br>
    <input id="kickoff_time_set" type=checkbox name="kickoff_time_set" value="1" {$flagsK} {$kickoff_time_setACL}>
-   <LABEL for="kickoff_time_set">{t}Account expires after{/t}</LABEL>
+   <label for="kickoff_time_set">{t}Account expires after{/t}</label>
    <select name=sambaKickoffTime_day onChange="createResult_sambaKickoffTime(this.form,this.form.sambaKickoffTime);" {$sambaKickoffTimeACL}>
    {html_options values=$sambaKickoffTime_days output=$sambaKickoffTime_days selected=$sambaKickoffTime_day}
    </select>
@@ -298,7 +298,7 @@
    &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <LABEL for="workstation_list">{t}Allow connection from these workstations only{/t}</LABEL>
+   <label for="workstation_list">{t}Allow connection from these workstations only{/t}</label>
    <br>
    <select id="workstation_list" style="width:100%;" name="workstation_list[]" size=10 multiple {$sambaUserWorkstationACL}>
     {html_options values=$workstations output=$workstations}

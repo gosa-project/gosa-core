@@ -1,16 +1,16 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td style="width:50%; vertical-align:top;">
-   <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
+   <h2><p class="center"><img class="center" alt="" align="middle" src="images/rightarrow.png" /> {t}Generic{/t}</p></h2>
    <table summary="">
     <tr>
-     <td><LABEL for="homeDirectory">{t}Home directory{/t}</LABEL>{$must}</td>
+     <td><label for="homeDirectory">{t}Home directory{/t}</label>{$must}</td>
      <td>
       <input id="homeDirectory" name="homeDirectory" size=40 maxlength=120 {$homeDirectoryACL} value="{$homeDirectory}">
      </td>
     </tr>
     <tr>
-     <td><LABEL for="loginShell">{t}Shell{/t}</LABEL></td>
+     <td><label for="loginShell">{t}Shell{/t}</label></td>
      <td>
       <select id="loginShell" size="1" name="loginShell" {$loginShellACL}>
        {html_options values=$shells output=$shells selected=$loginShell}
@@ -18,7 +18,7 @@
      </td>
     </tr>
     <tr>
-     <td><LABEL for="">{t}Primary group{/t}</LABEL></td>
+     <td><label for="">{t}Primary group{/t}</label></td>
      <td>
       <select id="primaryGroup" size="1" name="primaryGroup" {$gidNumberACL}>
        {html_options options=$secondaryGroups selected=$primaryGroup}
@@ -36,11 +36,11 @@
       <input id="force_ids" type=checkbox name="force_ids" value="1" {$force_ids} {$force_idsACL} onclick="changeState('uidNumber'); changeState('gidNumber');">
 					</td>
 					<td>
-      <LABEL for="force_ids">{t}Force UID/GID{/t}</LABEL>
+      <label for="force_ids">{t}Force UID/GID{/t}</label>
      </td>
 					<td style="width:20px;"></td>
 					<td>
-						<LABEL for="uidNumber">{t}UID{/t}</LABEL>
+						<label for="uidNumber">{t}UID{/t}</label>
 					</td>
 					<td>
 						<input id="uidNumber" name="uidNumber" size=5 maxlength=5 {$forceMode} {$uidNumberACL} value="{$uidNumber}">
@@ -49,7 +49,7 @@
 				<tr>
 					<td colspan="3"></td>
 					<td>
-						<LABEL for="gidNumber">{t}GID{/t}</LABEL>
+						<label for="gidNumber">{t}GID{/t}</label>
 					</td>
      <td>
 						<input id="gidNumber" name="gidNumber" size=5 maxlength=5 {$forceMode} {$gidNumberACL} value="{$gidNumber}">
@@ -61,7 +61,7 @@
     &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <h2><img alt="" align="middle" src="images/members.png"> {t}Group membership{/t}</h2>
+   <h2><p class="center"><img alt="" class="center" align="middle" src="images/members.png" /> {t}Group membership{/t}</p></h2>
    {if $groups eq "too_many_for_nfs"}
     <b style="color:red">{t}(Warning: more than 16 groups are not supported by NFS!){/t}</b>
     <br>
@@ -81,14 +81,14 @@
 <table summary="" style="width:100% ; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td style='width:50%;vertical-align:top'>
-   <h2><img alt="" align="middle" src="images/terminal_small.png"> {t}Account{/t}</h2>
+   <h2><p class="center"><img alt="" class="center" align="middle" src="images/terminal_small.png" /> {t}Account{/t}</p></h2>
    {include file="$pwmode.tpl"}
   </td>
   <td style="border-left:1px solid #A0A0A0">
     &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <h2><img alt="" align="middle" src="images/closedlock.png" style="margin-bottom:10px;"> {t}System trust{/t}</h2>
+   <h2><p class="center"><img alt="" class="center" align="middle" src="images/closedlock.png" /> {t}System trust{/t}</p></h2>
     {t}Trust mode{/t}&nbsp;<select name="trustmode" id="trustmode" size=1 onchange="changeSelectState('trustmode', 'wslist'); changeSelectState('trustmode', 'add_ws'); changeSelectState('trustmode', 'del_ws');" {$trustmodeACL}>
       {html_options options=$trustmodes selected=$trustmode}
     </select>

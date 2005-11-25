@@ -4,18 +4,18 @@
 {else}
 <input type="hidden" name="iamposted" value="1">
 
-<h2><img alt="" src="images/fai_profile.png" align="middle">&nbsp;{t}Profiles{/t}</h2>
+<h2><p class="center"><img class="center" alt="" src="images/fai_profile.png" align="middle" /> {t}Profiles{/t}</p></h2>
 <table summary="{t}Environment managment settings{/t}" width="100%">
   <tr>
    <td style="width:50%;border-right:1px solid #B0B0B0;vertical-align:top;">
 			<table summary="{t}Profile managment{/t}">
 				<tr>
 					<td style="vertical-align:top">
-						<input type="checkbox" value="1" {$useProfileCHK} name="useProfile" {$useProfileACL} id="useProfile"
+						<input class="center" type="checkbox" value="1" {$useProfileCHK} name="useProfile" {$useProfileACL} id="useProfile"
 									onclick="changeState('gotoProfileServer');changeState('gotoProfileFlag_C');">
 					</td>
-					<td valign="top">
-						<LABEL for="useProfile">{t}Use profile managment{/t}</LABEL>
+					<td style="vertical-align:middle;">
+						<label for="useProfile">{t}Use profile managment{/t}</label>
 					</td>
 				</tr>
 				<tr>
@@ -25,7 +25,7 @@
 						<table summary="{t}Profile server managment{/t}">
 							<tr>
 								<td>	
-									<LABEL for="gotoProfileServer">{t}Profil path{/t}</LABEL>
+									<label for="gotoProfileServer">{t}Profil path{/t}</label>
 								</td>
 								<td>
 									<select id="gotoProfileServer" 
@@ -37,9 +37,9 @@
 							</tr>
 							<tr>
 								<td colspan=2>	
-									<input type="checkbox" name="gotoProfileFlag_C" value="C" 
+									<input class="center" type="checkbox" name="gotoProfileFlag_C" value="C" 
 										id="gotoProfileFlag_C" {$gotoProfileACL} {$gotoProfileFlag_CCHK}>&nbsp;
-									<LABEL for="gotoProfileFlag_C">{t}Cache profile localy{/t}</LABEL>
+									<label for="gotoProfileFlag_C">{t}Cache profile localy{/t}</label>
 								</td>
 							</tr>
 						</table>
@@ -51,7 +51,7 @@
 			<table summary="{t}Kiosk profile settings{/t}">
 				<tr>
 					<td>
-						<LABEL for="gotoKioskProfile">{t}Kiosk profile{/t}</LABEL>
+						<label for="gotoKioskProfile">{t}Kiosk profile{/t}</label>
 					</td>
 					<td>
 						<select name="gotoKioskProfile" {$gotoKioskProfileACL} id="gotoKioskProfile">
@@ -62,7 +62,7 @@
 				</tr>
 				<tr>
 					<td>
-						<LABEL for="gotoProfileQuota">{t}Quota{/t}</LABEL> 
+						<label for="gotoProfileQuota">{t}Quota{/t}</label> 
 						<br>
 						<br>
 					</td>
@@ -76,12 +76,12 @@
 				<tr>
 					<td colspan=2>
 						<input type="checkbox" name="gotoProfileFlag_L" id="gotoProfileFlag_L" value="L" {$gotoProfileACL} {$gotoProfileFlag_LCHK}>
-						<LABEL for="gotoProfileFlag_L">{t}Resolution changeable on runtime{/t}</LABEL>
+						<label for="gotoProfileFlag_L">{t}Resolution changeable on runtime{/t}</label>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<LABEL for="gotoXResolution">{t}Resolution{/t}</LABEL>
+						<label for="gotoXResolution">{t}Resolution{/t}</label>
 					</td>
 					<td>
 						<select name="gotoXResolution" {$gotoXResolutionACL} id="gotoXResolution">
@@ -100,7 +100,7 @@
 <table summary="{t}Environment managment settings{/t}" width="100%">
   <tr>
    <td style="width:50%;border-right:1px solid #B0B0B0">
-	<h2><img alt="" src="images/fai_partitionTable.png" align="middle">&nbsp;<LABEL for="gotoShare">{t}Shares{/t}</LABEL></h2>
+	<h2><p class="center"><img class="center" alt="" src="images/fai_partitionTable.png" align="middle" />&nbsp;<label for="gotoShare">{t}Shares{/t}</label></p></h2>
 	<table summary="" style="width:100%">
 		<tr>
 			<td>
@@ -121,7 +121,7 @@
 	</table>
    </td>
    <td>
-	<h2><img alt="" src="images/fai_script.png" align="middle">&nbsp;<LABEL for="gotoLogonScript">{t}Logon scripts{/t}</LABEL></h2>
+	<h2><p class="center"><img class="center" alt="" src="images/fai_script.png" align="middle" />&nbsp;<label for="gotoLogonScript">{t}Logon scripts{/t}</label></p></h2>
 	<table summary="{t}Logon script management{/t}" style="width:100%">
 		<tr>
 			<td>
@@ -131,7 +131,7 @@
 				</select>
 	
 				<br>
-				<input type="submit" {$gotoLogonScriptACL} name="gotoLogonScriptNew"		value="{t}Add{/t}">
+				<input type="submit" {$gotoLogonScriptACL} name="gotoLogonScriptNew"	value="{t}Add{/t}">
 				<input type="submit" {$gotoLogonScriptACL} name="gotoLogonScriptDel" 	value="{t}Delete{/t}"> 
 				<input type="submit" {$gotoLogonScriptACL} name="gotoLogonScriptEdit" 	value="{t}Edit{/t}"> 
 			</td>
@@ -146,7 +146,7 @@
 <table summary="{t}Environment managment settings{/t}" width="100%">
   <tr>
    <td style="border-right:1px solid #B0B0B0; width:50%">
-	<h2><img alt="" src="images/hotplug.png" align="middle">&nbsp;<LABEL for="gotoHotplugDevice">{t}Hotplug devices{/t}</LABEL></h2>	
+	<h2><p class="center"><img alt="" src="images/hotplug.png" align="middle" class="center" />&nbsp;<label for="gotoHotplugDevice">{t}Hotplug devices{/t}</label></p></h2>	
 	<table style="width:100%" summary="{t}Hotplug device settings{/t}">
 		<tr>
 			<td>
@@ -165,7 +165,7 @@
 	</table>
    </td>
    <td>
-    <h2><img alt="" src="images/select_printer.png" align="middle">&nbsp;<LABEL for="gotoPrinter">{t}Printer{/t}</LABEL></h2>
+    <h2><p class="center"<img alt="" src="images/select_printer.png" align="middle" class="center" />&nbsp;<label for="gotoPrinter">{t}Printer{/t}</label></p></h2>
     <table style="width:100%" summary="{t}Printer settings{/t}">
 	<tr>
 	    <td>

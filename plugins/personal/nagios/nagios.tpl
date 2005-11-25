@@ -1,20 +1,20 @@
-<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding="0" border="0">
  <tr>
   <td style="width:50%; vertical-align:top;">
-   <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Nagios Account{/t}</h2>
+   <h2><p class="center"><img class="center" alt="" align="middle" src="images/rightarrow.png" />&nbsp;{t}Nagios Account{/t}</p></h2>
    <table summary="">
     <tr>
-     <td><LABEL for="NagiosAlias">{t}Alias{/t}</LABEL>{$must}</td>
+     <td><label for="NagiosAlias">{t}Alias{/t}</label>{$must}</td>
      <td><input id="NagiosAlias" name="NagiosAlias" size=25 maxlength=65 {$NagiosAliasACL} value="{$NagiosAlias}"></td>
     </tr>
 
     <tr>
-     <td><LABEL for="NagiosMail">{t}Mail address{/t}</LABEL>{$must}</td>
+     <td><label for="NagiosMail">{t}Mail address{/t}</label>{$must}</td>
      <td><input id="NagiosMail" name="NagiosMail" size=25 maxlength=65 {$NagiosMailACL} value="{$NagiosMail}"></td>
     </tr>
 
 	<tr>
-	<td><LABEL for="HostNotificationPeriod">{t}Host notification period{/t}</LABEL>{$must}</td>
+	<td><label for="HostNotificationPeriod">{t}Host notification period{/t}</label>{$must}</td>
 	<td><select name="HostNotificationPeriod" id="HostNotificationPeriod" {$HostNotificationPeriodACL}>
 	{html_options options=$HostNotificationPeriodValues values=$HostNotificationPeriodValues selected=$HostNotificationPeriod }
 	</select>
@@ -22,14 +22,14 @@
 	</tr>
 
 	<tr>
-	<td><LABEL for="ServiceNotificationPeriod">{t}Service notification period{/t}</LABEL>{$must}</td>
+	<td><label for="ServiceNotificationPeriod">{t}Service notification period{/t}</label>{$must}</td>
 	<td><select name="ServiceNotificationPeriod" id="ServiceNotificationPeriod" {$ServiceNotificationPeriodACL}>
 	{html_options options=$ServiceNotificationPeriodValues values=$ServiceNotificationPeriodValues selected=$ServiceNotificationPeriod}
 	</select>
 	</td>
 	</tr>
 	<tr>
-	<td><LABEL for="ServiceNotificationOptions">{t}Service notification options{/t}</LABEL>{$must}</td>
+	<td><label for="ServiceNotificationOptions">{t}Service notification options{/t}</label>{$must}</td>
 	<td><select name="ServiceNotificationOptions" id="ServiceNotificationOptions" {$ServiceNotificationOptionsACL}>
 	{html_options options=$ServiceNotificationOptionsValues values=$ServiceNotificationOptionsValues selected=$ServiceNotificationOptions}
 	</select>
@@ -38,23 +38,23 @@
 
 
 	<tr>
-	<td><LABEL for="HostNotificationOptions">{t}Host notification options{/t}</LABEL>{$must}</td>
+	<td><label for="HostNotificationOptions">{t}Host notification options{/t}</label>{$must}</td>
 	<td><select name="HostNotificationOptions" id="HostNotificationOptions" {$HostNotificationOptionsACL}>
 	{html_options options=$HostNotificationOptionsValues values=$HostNotificationOptionsValues selected=$HostNotificationOptions }
 	</select>
 	</td>
 	</tr>
     <tr>
-     <td><LABEL for="NagiosPager">{t}Pager{/t}</LABEL></td>
+     <td><label for="NagiosPager">{t}Pager{/t}</label></td>
      <td><input id="NagiosPager" name="NagiosPager" size=25 maxlength=65 {$NagiosPagerACL} value="{$NagiosPager}"></td>
     </tr>
 
     <tr>
-     <td><LABEL for="ServiceNotificationCommands">{t}Service notification commands{/t}</LABEL></td>
+     <td><label for="ServiceNotificationCommands">{t}Service notification commands{/t}</label></td>
      <td><input id="ServiceNotificationCommands" disabled name="ServiceNotificationCommands" size=25 maxlength=65 {$ServiceNotificationCommandsACL} value="{$ServiceNotificationCommands}"></td>
     </tr>
     <tr>
-     <td><LABEL for="HostNotificationCommands">{t}Host notification commands{/t}</LABEL></td>
+     <td><label for="HostNotificationCommands">{t}Host notification commands{/t}</label></td>
      <td><input id="HostNotificationCommands" disabled name="HostNotificationCommands" size=25 maxlength=65 {$HostNotificationCommandsACL} value="{$HostNotificationCommands}"></td>
     </tr>
 </table>
@@ -63,7 +63,7 @@
    &nbsp;
   </td>
 <td style="width:100%; vertical-align:top;">
-   <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Nagios authentification{/t}</h2>
+   <h2><p align="center"><img class="center" alt="" align="middle" src="images/rightarrow.png" />&nbsp;{t}Nagios authentification{/t}</p></h2>
    <table summary="">
 	<tr><td><input type="checkbox" name="AuthorizedSystemInformation" value="1" {$AuthorizedSystemInformationACL}  
 {$AuthorizedSystemInformationCHK}>{t}view system informations{/t}</td></tr>

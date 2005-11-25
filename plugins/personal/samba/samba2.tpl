@@ -1,16 +1,16 @@
-<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding="0" border="0">
 
  <!-- Headline container -->
  <tr>
-  <td colspan=2 style="width:50%; vertical-align:top;">
-   <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
+  <td colspan="2" style="width:50%; vertical-align:top;">
+   <h2><p class="center"><img class="center" alt="" align="middle" src="images/rightarrow.png" />&nbsp;{t}Generic{/t}</p></h2>
   </td>
  </tr>
  <tr>
   <td style="vertical-align:top;">
    <table summary="">
     <tr>
-     <td><LABEL for="smbHome">{t}Samba home{/t}</LABEL></td>
+     <td><label for="smbHome">{t}Samba home{/t}</label></td>
      <td>
       <input id="smbHome" name="smbHome" size=30 maxlength=60 {$smbHomeACL} value="{$smbHome}">
       <select size="1" name="homeDrive" {$homeDriveACL}>
@@ -27,13 +27,13 @@
   <td style="vertical-align:top;">
    <table summary="">
     <tr>
-     <td><LABEL for="scriptPath">{t}Script path{/t}</LABEL></td>
+     <td><label for="scriptPath">{t}Script path{/t}</label></td>
      <td>
       <input id="scriptPath" name="scriptPath" size=35 maxlength=60 {$scriptPathACL} value="{$scriptPath}">
      </td>
     </tr>
     <tr>
-     <td><LABEL for="profilePath">{t}Profile path{/t}</LABEL></td>
+     <td><label for="profilePath">{t}Profile path{/t}</label></td>
      <td>
       <input id="profilePath" name="profilePath" size=35 maxlength=60 {$profilePathACL} value="{$profilePath}">
      </td>
@@ -45,19 +45,19 @@
 
 <p class="seperator">&nbsp;</p>
 
-<h2><img  alt="" align="middle" src="images/certs.png"> {t}Access options{/t}</h2>
+<h2><p class="center"><img class="center" alt="" align="middle" src="images/certs.png" />&nbsp;{t}Access options{/t}</p></h2>
 
-<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding="4" border="0">
  <tr>
   <td style="width:50%;">
    <input id="allow_pwchange" type=checkbox name="allow_pwchange" value="1" {$flagsP} {$allow_pwchangeACL}>
-   <LABEL for="allow_pwchange">{t}Allow user to change password from client{/t}</LABEL>
+   <label for="allow_pwchange">{t}Allow user to change password from client{/t}</label>
    <br>
    <input id="no_password_required" type=checkbox name="no_password_required" value="1" {$flagsN}  {$no_password_requiredACL}>
-   <LABEL for="no_password_required">{t}Login from windows client requires no password{/t}</LABEL>
+   <label for="no_password_required">{t}Login from windows client requires no password{/t}</label>
    <br>
    <input id="temporary_disable" type=checkbox name="temporary_disable" value="1" {$flagsD} {$temporary_disableACL}>
-   <LABEL for="temporary_disable">{t}Temporary disable samba account{/t}</LABEL>
+   <label for="temporary_disable">{t}Temporary disable samba account{/t}</label>
    <br>
   </td>
   <td style="border-left:1px solid #A0A0A0">
@@ -65,7 +65,7 @@
   </td>
   <td style="vertical-align:top; width:50%">
    <input type=checkbox name="password_expires" value="1" {$flagsC} {$password_expiresACL}>
-   <LABEL for="day">{t}Password expires on{/t}</LABEL>
+   <label for="day">{t}Password expires on{/t}</label>
    <select id="day" name=day onChange="createResult(this.form,this.form.sambaPwdMustChange);" {$sambaPwdMustChangeACL}>
     {html_options values=$days output=$days selected=$day}
    </select>

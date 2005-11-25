@@ -1,19 +1,19 @@
-<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding="0" border="0">
 
  <!-- Headline container -->
  <tr>
    <td style="width:50%; vertical-align:top;">
-     <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
+     <h2><p class="center"><img class="center" alt="" align="middle" src="images/rightarrow.png" />&nbsp;{t}Generic{/t}</p></h2>
 
      <table summary="">
        <tr>
-         <td><LABEL for="facsimileTelephoneNumber">{t}Fax{/t}</LABEL>{$must}</td>
+         <td><label for="facsimileTelephoneNumber">{t}Fax{/t}</label>{$must}</td>
          <td>
            <input name="facsimileTelephoneNumber" id="facsimileTelephoneNumber" size=20 maxlength=65 {$facsimileTelephoneNumberACL} value="{$facsimileTelephoneNumber}" title="{t}Fax number for GOfax to trigger on{/t}">
          </td>
        </tr>
        <tr>
-         <td><LABEL for="goFaxLanguage">{t}Language{/t}</LABEL></td>
+         <td><label for="goFaxLanguage">{t}Language{/t}</label></td>
 	 <td>
            <select size="1" name="goFaxLanguage" id="goFaxLanguage" {$goFaxLanguageACL} title="{t}Specify the GOfax communication language for fax to mail gateway{/t}">
 	    {html_options values=$languages output=$languages selected=$goFaxLanguage}
@@ -21,7 +21,7 @@
          </td>
        </tr>
        <tr>
-         <td><LABEL for="goFaxFormat">{t}Delivery format{/t}</LABEL></td>
+         <td><label for="goFaxFormat">{t}Delivery format{/t}</label></td>
          <td>
            <select id="goFaxFormat" size="1" name="goFaxFormat" {$goFaxFormatACL} title="{t}Specify delivery format for fax to mail gateway{/t}">
 	    {html_options values=$formats output=$formats selected=$goFaxFormat}
@@ -35,14 +35,14 @@
     &nbsp;
    </td>
    <td style="vertical-align:top; width:100%">
-     <h2><img alt="" align="middle" src="images/printer.png"> {t}Delivery methods{/t}</h2>
+     <h2><p class="center"><img class="center" alt="" align="middle" src="images/printer.png" />&nbsp;{t}Delivery methods{/t}</p></h2>
 
      <input type=checkbox name="goFaxIsEnabled" value="1" {$goFaxIsEnabled} {$goFaxIsEnabledACL}>
      {t}Temporary disable fax usage{/t}<br>
 
      {if $has_mailaccount eq "false"}
      <input type=checkbox name="fax_to_mail" value="1" {$fax_to_mail} {$goFaxDeliveryModeACL}>
-      <LABEL for="mail">{t}Deliver fax as mail to{/t}</LABEL>&nbsp;
+      <label for="mail">{t}Deliver fax as mail to{/t}</label>&nbsp;
       <input name="mail" id="mail" size=25 maxlength=65 {$goFaxDeliveryModeACL} value="{$mail}">
      {else}
      <input type=checkbox name="fax_to_mail" value="1" {$fax_to_mail} {$goFaxDeliveryModeACL}>
@@ -66,7 +66,7 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
   <tr>
     <td style="width:50%; border-right:1px solid #A0A0A0">
-    <h2><img alt="" align="middle" src="images/fax_small.png"> {t}Alternate fax numbers{/t}</h2>
+    <h2><p class="center"<img class="center" alt="" align="middle" src="images/fax_small.png">&nbsp;{t}Alternate fax numbers{/t}</p></h2>
     <select style="width:100%" name="alternate_list[]" size="10" multiple {$facsimileAlternateTelephoneNumberACL}>
 			{html_options values=$facsimileAlternateTelephoneNumber output=$facsimileAlternateTelephoneNumber}
 			<option disabled>&nbsp;</option>
@@ -78,7 +78,7 @@
     <input type=submit value="{t}Delete{/t}" name="delete_alternate" {$facsimileAlternateTelephoneNumberACL}>
    </td>
    <td style="vertical-align:top; width:50%">
-      <h2><img alt="" align="middle" src="images/false.png"> {t}Blocklists{/t}</h2>
+      <h2><p class="center"><img class="center" alt="" align="middle" src="images/false.png" />&nbsp;{t}Blocklists{/t}</p></h2>
       <table summary="" style="width:100%">
         <tr>
           <td>{t}Blocklists for incoming fax{/t}</td>

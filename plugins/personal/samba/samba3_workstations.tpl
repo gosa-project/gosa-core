@@ -1,9 +1,9 @@
-<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding="4">
 <tr>
   <td style="vertical-align:top;width:600px">
    <div class="contentboxh" style="height:20px;">
     <p class="contentboxh" style="font-size:12px">
-     <b><LABEL for="wslist">{t}Select workstations to add{/t}</LABEL> {$hint}</b><br>
+     <b><label for="wslist">{t}Select workstations to add{/t}</label> {$hint}</b><br />
     </p>
    </div>
    <div class="contentboxb">

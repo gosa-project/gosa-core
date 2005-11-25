@@ -1,9 +1,9 @@
-<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
+<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding="4" border="0">
 
  <!-- Headline container -->
  <tr>
-  <td colspan=4>
-   <h2><img alt="" align="middle" src="images/head.png"> {t}Personal information{/t}</h2>
+  <td colspan="4">
+   <h2><p class="center"><img alt="" align="middle" src="images/head.png" class="center"> {t}Personal information{/t}</p></h2>
   </td>
  </tr>
 
@@ -170,12 +170,12 @@
 
 <p class="seperator">&nbsp;</p>
 
-<table summary="" class="line" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
+<table summary="" class="line" style="width:100%; vertical-align:top; text-align:left;" cellpadding="4" border="0">
 
  <!-- Headline container -->
  <tr>
-  <td colspan=3>
-   <h2><img alt="" align="middle" src="images/house.png"> {t}Organizational information{/t}</h2>
+  <td colspan="3">
+   <h2><p class="center"><img alt="" align="middle" src="images/house.png" class="center"> {t}Organizational information{/t}</p></h2>
   </td>
  </tr>
 
