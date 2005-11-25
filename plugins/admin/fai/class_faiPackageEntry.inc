@@ -46,11 +46,11 @@ class faiPackageEntry extends plugin
 
     $divlist = new divlist("PackageEntry");
     $divlist->SetSummary(_("This list displays all assigned package names for this repository settings."));
-    $divlist->SetEntriesPerPage(20);
-    $divlist->SetHeader(array(array("string"=>"&nbsp;"),
-                              array("string"=>"Name"),
-                              array("string"=>"Version"),
-                              array("string"=>"Description","attach"=>"style='border-right:0px;'")));
+    $divlist->SetEntriesPerPage(0);
+    $divlist->SetHeader(array(array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
+                              array("string"=>"Name", "attach" => "style=''"),
+                              array("string"=>"Version", "attach", "style='width:152px;'"),
+                              array("string"=>"Description", "attach" => "style='width:60px;border-right:0px;text-align:right;'")));
 
     if(isset($_GET['search'])){
       $this->searchStrPKG= $_GET['search']."*";
@@ -124,10 +124,10 @@ class faiPackageEntry extends plugin
           $cnt ++ ;
           $chkbox = "<input type='checkbox' value='1' name='use_".base64_encode($pkg[0])."' ".$check." onclick='document.mainform.submit()'>
                    <input type='hidden' value='1' name='wasonpage_".base64_encode($pkg[0])."'>";
-          $divlist->AddEntry(array(array("string"=>$chkbox),
-                                 array("string"=>$pkg[0]),
-                               array("string"=>$pkg[1]),
-                               array("string"=>$pkg[3],"attach"=>"style='border-right:0px'")));
+          $divlist->AddEntry(array(array("string"=>$chkbox, "attach" => "style='text-align:center;width:20px;'"),
+                                 array("string"=>$pkg[0], "attach" => "style=''"),
+                               array("string"=>$pkg[1], "attach" => "style='width:152px;'"),
+                               array("string"=>$pkg[3], "attach" => "style='width:60px;border-right:0px;text-align:right;'")));
         }
       }
     }
