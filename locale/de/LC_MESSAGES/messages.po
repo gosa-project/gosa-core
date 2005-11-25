@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-11-24 12:52+0100\n"
+"PO-Revision-Date: 2005-11-25 11:42+0100\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -4759,7 +4759,7 @@ msgstr "Gew�hlte Pakete"
 
 #: plugins/admin/fai/faiPackage.tpl:76 include/functions.inc:587
 msgid "Configure"
-msgstr "Einstellen"
+msgstr "Konfigurieren"
 
 #: plugins/admin/fai/class_faiProfile.inc:145
 #: plugins/admin/fai/class_faiProfileEntry.inc:151
@@ -10698,5 +10698,5 @@ msgstr ""
 #~ msgid ""
 #~ "The application named %s is no longer available and has been removed."
 #~ msgstr ""
-#~ "Die Applikation mit dem Namen %s ist nicht mehr verfÃÅgbar und wurde aus "
+#~ "Die Applikation mit dem Namen %s ist nicht mehr verfÃÂÃÂgbar und wurde aus "
 #~ "der Liste entfernt."
