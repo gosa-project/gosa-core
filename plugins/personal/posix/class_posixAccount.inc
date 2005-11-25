@@ -1015,6 +1015,17 @@ class posixAccount extends plugin
     if ($ldap->count() != 1){
       $this->primaryGroup= $this->gidNumber;
     }
+
+	
+    /* Adjust shadow checkboxes */
+    foreach (array("shadowMin", "shadowMax", "shadowWarning", "shadowInactive",
+          "shadowExpire") as $val){
+
+      if ($this->$val != 0){
+        $oval= "use_".$val;
+        $this->$oval= "1";
+      }
+    }
   }
 
   function get_next_id($attrib)
