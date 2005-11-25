@@ -27,6 +27,13 @@ class usertabs extends tabs
         $this->by_object[$name]= $obj;
       }
 
+      /* Copy mail if needed */
+      if ($name == "gofaxAccount"){
+        if (isset($this->by_object['mailAccount']) && $this->by_object['mailAccount']->is_account){
+          $obj->mail= $this->by_object['mailAccount']->mail;
+        }
+      }
+
       /* Update parent in base object */
       $this->by_object['user']->parent= &$this;
     }
