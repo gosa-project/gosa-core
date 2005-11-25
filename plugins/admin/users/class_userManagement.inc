@@ -521,7 +521,8 @@ class userManagement extends plugin
       }
 
       /* Use template if there are any of them */
-      if ((count($this->templates) && !isset($_POST['new_template']))||($s_action=="create_user_from_tpl")){
+  
+      if ((count($this->templates) && ($s_action!='new_tpl'))||($s_action=="create_user_from_tpl")){
         foreach(array("sn", "givenName", "uid", "got_uid", "templates") as $attr){
           $smarty->assign("$attr", $this->$attr);
         }
