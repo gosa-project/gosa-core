@@ -214,6 +214,10 @@ class mailqueue extends plugin
 
         /* */
         $entries = $mailQueueParser->GetAll();
+  
+        if(count($entries) ==0 ){
+          $smarty->assign("all_ok",false);
+        }
  
         $smarty->assign("entries"       , array_slice($entries,$this->Page,$this->range));
         $smarty->assign("plug"          , "?plug=".$_GET['plug']);

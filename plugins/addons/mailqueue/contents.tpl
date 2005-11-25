@@ -120,9 +120,7 @@
    <td>{$range_selector}</td>
   </tr>
  </table>
-<p class="plugbottom">
- &nbsp;
-</p>
+<p class="plugbottom">&nbsp;</p>
 
 {/if}
 
