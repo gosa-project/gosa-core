@@ -530,12 +530,17 @@ a.tab_near_active, input.tab_near_active {
 	font-weight:bold;
 }
 
-img {
+img.center {
 	text-align:center;
 	vertical-align:middle;
 }
 
-input {
+input.center {
+	text-align:left;
+	vertical-align:middle;
+}
+
+a.center {
 	text-align:left;
 	vertical-align:middle;
 }
