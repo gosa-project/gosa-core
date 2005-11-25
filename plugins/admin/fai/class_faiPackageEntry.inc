@@ -49,8 +49,8 @@ class faiPackageEntry extends plugin
     $divlist->SetEntriesPerPage(0);
     $divlist->SetHeader(array(array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
                               array("string" => "Name", "attach" => "style=''"),
-                              array("string" => "Version", "attach" => "style='width:140px;'"),
-                              array("string" => "Description", "attach" => "style='width:260px;border-right:0px;text-align:left;'")));
+                              array("string" => "Version", "attach" => "style='width:100px;'"),
+                              array("string" => "Description", "attach" => "style='width:240px;border-right:0px;text-align:left;'")));
 
     if(isset($_GET['search'])){
       $this->searchStrPKG= $_GET['search']."*";
@@ -125,9 +125,9 @@ class faiPackageEntry extends plugin
           $chkbox = "<input type='checkbox' value='1' name='use_".base64_encode($pkg[0])."' ".$check." onclick='document.mainform.submit()'>
                    <input type='hidden' value='1' name='wasonpage_".base64_encode($pkg[0])."'>";
           $divlist->AddEntry(array(array("string"=>$chkbox, "attach" => "style='text-align:center;width:20px;'"),
-                                 array("string"=>$pkg[0], "attach" => "style=''"),
-                               array("string"=>$pkg[1], "attach" => "style='width:140px;'"),
-                               array("string"=>$pkg[3], "attach" => "style='width:260px;border-right:0px;text-align:left;'")));
+                               array("string"=>$pkg[0], "attach" => "style=''"),
+                               array("string"=>$pkg[1], "attach" => "style='width:100px;'"),
+                               array("string"=>$pkg[3], "attach" => "style='width:240px;border-right:0px;text-align:left;'")));
         }
       }
     }

@@ -13,7 +13,7 @@
 		</div>
   		<div class="contentboxb" style="border-top:1px solid #B0B0B0;">
       		{$failist}
-    		<input type=hidden name="edit_helper">
+    		<input type="hidden" name="edit_helper">
   		</div>
   	</td>
   	<td style="vertical-align:top;">
@@ -50,7 +50,7 @@
      				</td>
      				<td width="99%">
      					<input type='text' name='searchStrPKG' maxlength='40' style='width:99%' value='{$searchStrPKG}' id='filter' 
-					     title='{t}Regular expression for matching object names{/t}' onChange="mainform.submit()">
+					     title='{t}Regular expression for matching object names{/t}' onClick="mainform.filter.value='';" onChange="mainform.submit()">
     	 			</td>
      			</tr>
      		</table>
@@ -60,14 +60,14 @@
 </tr>
 </table>
 <div align="right" style="align:right;">
-	<input name="SaveSubObject" value="{t}Apply{/t}" type="submit">
-	<input name="CancelSubObject" value="{t}Cancel{/t}" type="submit">
+	<input id="SaveSubObject" name="SaveSubObject" value="{t}Apply{/t}" type="submit">
+	<input id="CancelSubObject" name="CancelSubObject" value="{t}Cancel{/t}" type="submit">
 </div>
 <input type="hidden" name="ignore">
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
-  document.mainform.cn.focus();
+  document.mainform.filter.focus();
   -->
 </script>
 
