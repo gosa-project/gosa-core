@@ -1299,7 +1299,7 @@ function apply_filter()
 
   $apply= ''.
     '<table summary=""  width="100%"  style="background:#EEEEEE;border-top:1px solid #B0B0B0;"><tr><td width="100%" align="right">'.
-    '<input type="submit" name="apply" value="'._("Apply").'"></td></tr></table>';
+    '<input type="submit" name="apply" value="'._("Apply filter").'"></td></tr></table>';
 
   return ($apply);
 }
