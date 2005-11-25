@@ -47,6 +47,7 @@ class faiPackageEntry extends plugin
     $divlist = new divlist("PackageEntry");
     $divlist->SetSummary(_("This list displays all assigned package names for this repository settings."));
     $divlist->SetEntriesPerPage(0);
+    $divlist->SetHeight("650px;");
     $divlist->SetHeader(array(array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
                               array("string" => "Name", "attach" => "style=''"),
                               array("string" => "Version", "attach" => "style='width:100px;'"),

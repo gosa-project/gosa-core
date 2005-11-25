@@ -7,10 +7,10 @@
 </p>
 
 <p>
-  <b style="color:red">{t}Ignoring this message will change/destroy the data you're currently editing, so please close multiple windows and log in again.{/t}</b>
+  <b style="color:red;">{t}Ignoring this message will change/destroy the data you're currently editing, so please close multiple windows and log in again.{/t}</b>
 </p>
 
 <p class="plugbottom">
-  <input type=submit name="reset_session" value="{t}Logout{/t}">
+  <input type="submit" name="reset_session" value="{t}Logout{/t}">
 </p>
 

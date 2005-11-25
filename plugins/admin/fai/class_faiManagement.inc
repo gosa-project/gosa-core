@@ -422,44 +422,44 @@ class faiManagement extends plugin
 		$faihead = 
 			"<div style='background:#F0F0F9;padding:5px;'>&nbsp;".
 
-			"<input type='image' src='images/list_up.png' align='middle' 
+			"<input class='center' type='image' src='images/list_up.png' align='middle' 
 			title='"._("Go up one department")."' name='dep_back' alt='"._("Up"). "'>&nbsp;".
 
-			"<input type='image' src='images/list_root.png' align='middle' 
+			"<input class='center' type='image' src='images/list_root.png' align='middle' 
 			title='"._("Go to root department")."' name='dep_root' alt='".      _("Root")."'>&nbsp;".
 
-			"<input type='image' src='images/list_home.png' align='middle' 
+			"<input class='center' type='image' src='images/list_home.png' align='middle' 
 			title='"._("Go to users home department")."' name='dep_home' alt='"._("Home")."'>&nbsp;".
 
-			"<img src=\"images/list_seperator.png\" alt=\"\" align=\"middle\" height=\"16\" width=\"1\">&nbsp;".
+			"<img class='center' src=\"images/list_seperator.png\" alt=\"\" align=\"middle\" height=\"16\" width=\"1\">&nbsp;".
 			
-			" <input type='image' src='images/fai_new_profile.png' align='middle' 
+			" <input class='center' type='image' src='images/fai_new_profile.png' align='middle' 
 			title='"._("New profile")."' name='Create_profile' alt='"._("P")."'>&nbsp;".
 			
-			"<img src=\"images/list_seperator.png\" alt=\"\" align=\"middle\" height=\"16\" width=\"1\">&nbsp;".
+			"<img class='center' src=\"images/list_seperator.png\" alt=\"\" align=\"middle\" height=\"16\" width=\"1\">&nbsp;".
 				
-			" <input type='image' src='images/fai_new_partitionTable.png' align='middle' 
+			" <input class='center' type='image' src='images/fai_new_partitionTable.png' align='middle' 
 			title='"._("New partition table")."' name='Create_partition' alt='"._("PT")."'>&nbsp;".
 
-			" <input type='image' src='images/fai_new_script.png' align='middle' 
+			" <input class='center' type='image' src='images/fai_new_script.png' align='middle' 
 			title='"._("New scripts")."' name='Create_script' alt='"._("S")."'>&nbsp;".
 
-			" <input type='image' src='images/fai_new_hook.png' align='middle' 
+			" <input class='center' type='image' src='images/fai_new_hook.png' align='middle' 
 			title='"._("New hooks")."' name='Create_hook' alt='"._("H")."'>&nbsp;".
 
-			" <input type='image' src='images/fai_new_variable.png' align='middle' 
+			" <input class='center' type='image' src='images/fai_new_variable.png' align='middle' 
 			title='"._("New variables")."' name='Create_variable' alt='"._("V")."'>&nbsp;".
 			
-			" <input type='image' src='images/fai_new_template.png' align='middle' 
+			" <input class='center' type='image' src='images/fai_new_template.png' align='middle' 
 			title='"._("New templates")."' name='Create_template' alt='"._("T")."'>&nbsp;".
 
-			" <input type='image' src='images/fai_new_packages.png' align='middle' 
+			" <input class='center' type='image' src='images/fai_new_packages.png' align='middle' 
 			title='"._("New package list")."' name='Create_package' alt='"._("PK")."'>&nbsp;".
 
-			" <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
+			" <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
 
 			_("Current base")."&nbsp;<select name='base' onChange='mainform.submit()'>$options</select>".
-			" <input type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
+			" <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
 			
 			"</div>";
 

@@ -3,7 +3,7 @@
   <td style="vertical-align:top;">
   <div class="contentboxh">
     <p class="contentboxh">
-     <LABEL for="grouplist">{t}List of groups{/t}</LABEL> {$hint}
+     <label for="grouplist">{t}List of groups{/t}</label> {$hint}
     </p>
   </div>
   <div class="contentboxb">
@@ -36,33 +36,33 @@
 	<table summary="" style="width:100%;border-top:1px solid #B0B0B0;">	
 		<tr>
 			<td>
-	<input type=checkbox id="primarygroups" name="primarygroups" value="1" {$primarygroups} onClick="mainform.submit()" 
+	<input type="checkbox" id="primarygroups" name="primarygroups" value="1" {$primarygroups} onClick="mainform.submit()" 
 			title="{t}Select to see groups that are primary groups of users{/t}">
-		<LABEL for="primarygroups">{t}Show primary groups{/t}</LABEL>
-		<br>
-    <input type=checkbox id="sambagroups" name="sambagroups" value="1" {$sambagroups} onClick="mainform.submit()" 
+		<label for="primarygroups">{t}Show primary groups{/t}</label>
+		<br />
+    <input type='checkbox' id="sambagroups" name="sambagroups" value="1" {$sambagroups} onClick="mainform.submit()" 
 		title="{t}Select to see groups that have samba groups mappings{/t}">
-		<LABEL for="sambagroups">{t}Show samba groups{/t}</LABEL>
-		<br>
-    <input type=checkbox id="appgroups" name="appgroups" value="1" {$appgroups} onClick="mainform.submit()" 
+		<label for="sambagroups">{t}Show samba groups{/t}</label>
+		<br />
+    <input type='checkbox' id="appgroups" name="appgroups" value="1" {$appgroups} onClick="mainform.submit()" 
 		title="{t}Select to see groups that have applications configured{/t}">
-		<LABEL for="appgroups">{t}Show application groups{/t}</LABEL>
-		<br>
-    <input type=checkbox id="mailgroups" name="mailgroups" value="1" {$mailgroups} onClick="mainform.submit()" 
+		<label for="appgroups">{t}Show application groups{/t}</label>
+		<br />
+    <input type='checkbox' id="mailgroups" name="mailgroups" value="1" {$mailgroups} onClick="mainform.submit()" 
 		title="{t}Select to see groups that have mail settings{/t}">
-		<LABEL for="mailgroups">{t}Show mail groups{/t}</LABEL>
-		<br>
-    <input type=checkbox id="functionalgroups" name="functionalgroups" value="1" {$functionalgroups} onClick="mainform.submit()" 
+		<label for="mailgroups">{t}Show mail groups{/t}</label>
+		<br />
+    <input type='checkbox' id="functionalgroups" name="functionalgroups" value="1" {$functionalgroups} onClick="mainform.submit()" 
 		title='{t}Select to see normal groups that have only functional aspects{/t}'>
-		<LABEL for="functionalgroups">{t}Show functional groups{/t}</LABEL>
-		<br>
+		<label for="functionalgroups">{t}Show functional groups{/t}</label>
+		<br />
             </td>
         </tr>
     </table>
 
     <table summary=""  style="width:100%;border-top:1px solid #B0B0B0;">
 		<tr>
-			<td><LABEL for="regex"><img alt="{t}Display groups matching{/t}" src="{$search_image}" align="left"></LABEL></td>
+			<td><label for="regex"><img alt="{t}Display groups matching{/t}" src="{$search_image}" align="left"></label></td>
     			<td style='width:99%'>
 				<input type='text' id="regex" name='regex' maxlength='20' style="width:99%;" value='{$regex}' title='{t}Regular expression for matching group names{/t}' onChange="mainform.submit()">
 			</td>
@@ -70,7 +70,7 @@
 	</table>
 	<table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
 		<tr>
-			<td><LABEL for="guser"><img alt="{t}Display groups of user{/t}" src="{$searchu_image}" align="left"></LABEL></td>
+			<td><label for="guser"><img alt="{t}Display groups of user{/t}" src="{$searchu_image}" align="left"></label></td>
     			<td style='width:99%'>
 				<input id="guser" type='text' name='guser' maxlength='20' style="width:99%;" value='{$guser}' 
 					title='{t}User name of which groups are shown{/t}' onChange="mainform.submit()">

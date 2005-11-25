@@ -6,9 +6,9 @@
 <!-- Spacer for some browsers -->
 <div class='gosaLoginSpacer'></div>
 
-<table summary="" class='gosaLoginMask' align='center'>
+<table summary="" class='gosaLoginMask' style="text-align:right;" align='center'>
  <tr>
-  <td class='gosaLoginBack' width="606">
+  <td class='gosaLoginBack' style="width:606px;">
    <div class='gosaLoginBack'>
        
     <p class='gosaLoginHeader'>
@@ -20,7 +20,7 @@
 
     <!-- Formular data, containing a table to center fields -->
     <form action='index.php' method='post' name='mainform' onSubmit='js_check(this);return true;'>
-     <table summary="" style='align:center; text-align:left;' cellspacing='7' align='center'>
+     <table summary="" style='vertical-align:middle; text-align:left;' cellspacing='7' align='center'>
       <tr>
         <td>
           <img src='{$personal_img}' alt='{t}Username{/t}' title='{t}Username{/t}'>
@@ -51,7 +51,7 @@
       </tr>
       <tr>
         <td colspan='2' style='text-align:right;'>
-	  <br>
+	  <br />
 	  <input type='submit' name='login' value='{t}Sign in{/t}'
 	  	 title='{t}Click here to log in{/t}'>
 	</td>

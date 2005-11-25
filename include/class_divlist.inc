@@ -18,6 +18,8 @@ class divlist {
 
 		$this->i_currentPage    = 0;
 		$this->i_entriesPerPage = 10;
+    $this->s_height         = "500";
+    $this->s_width          = "600";
 		$this->s_summary                = "";
 		$this->a_entries                = array();
 		$this->a_header                 = array();
@@ -42,6 +44,14 @@ class divlist {
 	function SetHeader($a_headerdata) {
 		$this->a_header[] = $a_headerdata ;
 	}
+	
+  function SetHeight($s_height) {
+		$this->s_height= $s_height;
+	}
+  
+  function SetWidth($s_width) {
+		$this->s_width= $s_width;
+	}
 
 	function SetEntriesPerPage($i_num){
 		$this->i_entriesPerPage=$i_num;
@@ -49,7 +59,7 @@ class divlist {
 	
 	function DrawList(){
 		$s_return = "";
-		$s_return.= "<table summary='".$this->s_summary."' style='width:600px;height:500px;' cellspacing='0'>";
+		$s_return.= "<table summary='".$this->s_summary."' style='width:".$this->s_width."px;height:".$this->s_height."px;' cellspacing='0'>";
 
     $s_return.= $this->_generateHeader();
     $s_return.=$this->_generatePage();
@@ -82,7 +92,7 @@ class divlist {
 		
     // Using scrolltable?
     if($this->i_entriesPerPage == 0) {
-      $s_return .= "\n<tr><td class='scrollhead'><table style='width:600px;' cellspacing='0'>";
+      $s_return .= "\n<tr><td class='scrollhead'><table style='width:".$this->s_width."px;' cellspacing='0'>";
     }
 
 		$s_return .= "\n<tr>";
@@ -119,7 +129,7 @@ class divlist {
 		$s_return 	= "";
    
     // We need to construct a "body"-table that is width-of-scrollbar thinner than the "head"-table.
-    $s_return .= "\n<tr><td class='scrollbody'><div style='align:left;width:600px;height:480px;overflow:auto;'>";
+    $s_return .= "\n<tr><td class='scrollbody'><div style='align:left;width:".$this->s_width."px;height:".($this->s_height-20)."px;overflow:auto;'>";
 
     // Only reduce width if we need a scrollbar (>19 Entries)
     if($this->_numEntries()>19) {

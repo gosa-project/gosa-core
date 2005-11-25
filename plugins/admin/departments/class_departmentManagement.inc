@@ -277,14 +277,14 @@ class departmentManagement extends plugin
 
 			/* Generate list head */
 			$listhead = "<div style='background:#F0F0F9;padding:5px;'>".
-						" <input type='image' src='images/list_up.png' align='middle' title='"._("Go up one department")."' name='dep_back' alt='"._("Up")."'>&nbsp;".
-						" <input type='image' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
-						" <input type='image' src='images/list_home.png' align='middle' title='"._("Go to users home department")."' name='dep_home' alt='"._("Home")."'>&nbsp;".
-						" <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-						" <input type='image' src='images/list_new_department.png' align='middle' alt='"._("Create new department")."' name='dep_new'>&nbsp;".
-						" <img src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
+						" <input type='image' class='center' src='images/list_up.png' align='middle' title='"._("Go up one department")."' name='dep_back' alt='"._("Up")."'>&nbsp;".
+						" <input type='image' class='center' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
+						" <input type='image' class='center' src='images/list_home.png' align='middle' title='"._("Go to users home department")."' name='dep_home' alt='"._("Home")."'>&nbsp;".
+						" <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
+						" <input class='center' type='image' src='images/list_new_department.png' align='middle' alt='"._("Create new department")."' name='dep_new'>&nbsp;".
+						" <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
 						_("Current base")."&nbsp;<select name='depselect' onChange='mainform.submit()'>$options</select>".
-						" <input type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
+						" <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
 						"</div>";
 
 			/* Show main page */
