@@ -23,7 +23,9 @@ class mailqueue extends plugin
   function mailqueue($config, $dn= NULL)
   {
     $this->config           = $config;
-    $this->mailQueueScript  = $this->config->current['MAILQUEUESCRIPTPATH'];    
+    if (isset($this->config->current['MAILQUEUESCRIPTPATH'])){
+      $this->mailQueueScript  = $this->config->current['MAILQUEUESCRIPTPATH'];    
+    }
     $this->Server           = "all";
   }
 
