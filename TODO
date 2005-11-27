@@ -16,8 +16,6 @@ face these:
   "Uninitialized string offset: 0". Clicking there a second time, does
   not produce errors
 
-* Default help to english, if no other language is available
-
 
 Target for 2.5:
 ===============

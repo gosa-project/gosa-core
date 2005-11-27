@@ -67,7 +67,10 @@ function genIndex($arr)
     $exists = true;
     $helpdir = "../doc/guide/user/".$helpobject['lang']."/html/".preg_replace("/^.*\//i","",$path)."/";
     if(!is_dir($helpdir)){
-      $exists = false;
+      $helpdir = "../doc/guide/user/en/html/".preg_replace("/^.*\//i","",$path)."/";
+      if(!is_dir($helpdir)){
+        $exists = false;
+      }
     }
     $print_hl = false;
     if($current_hl != $attrs['HEADLINE']){
