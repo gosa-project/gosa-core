@@ -99,11 +99,7 @@ contact
 
 \end_inset 
 
- la possibilité d'enregistrer l'entrée sous le format vcard 
-\color red
-?
-\color default
- ,
+ la possibilité d'enregistrer l'entrée sous le format vcard,
 \layout Itemize
 
 
@@ -240,7 +236,7 @@ Afficher les entrées du carnet d'adresses
 
 \end_inset 
 
-, il symbolise la recherche d'un item.
+, il symbolise la recherche d'un / des utilisateur(s).
  Cliquez sur le bouton Appliquer pour faire apparaître le(s) utilisateur(s)
  recherché(s).
 \end_deeper 
@@ -645,7 +641,7 @@ Insérez le numéro de Bip de l'utilisateur
 Modifier une entrée
 \layout Standard
 
-La modification des entrées ne peut s'oppérer que sur des entrées créées
+La modification des entrées ne peut s'opérer que sur des entrées créées
  via le carnet d'adresses.
 \layout Standard
 
