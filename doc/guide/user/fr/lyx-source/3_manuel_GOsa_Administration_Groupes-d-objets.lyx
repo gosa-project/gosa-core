@@ -61,6 +61,15 @@ ADMINISTRATION
 Groupes d'objets
 \layout Standard
 
+Un Groupe d'objets est un groupe hétérogène.
+ C'est la possibilité qu'a l'administrateur de créer des combinaisons d'objets
+ de nature différente dans un même groupe pour répondre à la problématique
+ d'une situation donnée.
+ C'est ce qu'on appelle le Groupe d'objets.
+ Cela permet une gestion plus souple et plus appropriée que la création
+ de groupes classiques.
+\layout Standard
+
 L'administrateur peut ajouter et configurer les Groupes d'objets à partir
  du bouton 
 \series bold 
@@ -122,7 +131,7 @@ C'est à partir de la page
 \family sans 
 Groupes d'objets
 \family default 
- que l'administrateur gère les Groupes d'objets instaurées dans la société.
+ que l'administrateur gère les Groupes d'objets créés pour la société.
 \layout Standard
 
 Il est possible de modifier l'affichage de la liste des Groupes en utilisant
@@ -168,7 +177,11 @@ Ou encore la recherche rapide
 \end_inset 
 
  : remplissez le champ par le nom du Groupes d'objets recherché et ensuite
- cliquez sur le bouton Appliquer.
+ cliquez sur le bouton 
+\emph on 
+Appliquer
+\emph default 
+.
 \layout Standard
 \added_space_top medskip 
 Pour créer, configurer ou modifier un Groupe d'objets, l'administrateur
@@ -182,22 +195,7 @@ Pour créer, configurer ou modifier un Groupe d'objets, l'administrateur
  
 \layout Standard
 
-Apparaît alors l'espace de configuration.
- Les onglets sont les extensions apportées à GOsa.
- L'administrateur configure ces extensions pour chaque groupe.
- A chaque extension configurée, pour enregistrer les modifications, cliquer
- sur le bouton Terminé et pour revenir à la page précédente cliquer sur
- le bouton Annuler.
-\layout Standard
-
 Tous les champs précédés d'une astérisque doivent être remplis obligatoirement.
-\layout Standard
-
-Le premier onglet est l'onglet 
-\series bold 
-informations générales
-\series default 
-.
 \layout Subsection
 \pagebreak_top 
 Informations générales
@@ -225,7 +223,7 @@ Nom du groupe
 
 \layout Standard
 
-Insérez le nom du groupe.
+Introduisez le nom du groupe à créer
 \end_inset 
 </cell>
 </row>
@@ -243,7 +241,7 @@ Description
 
 \layout Standard
 
-Rédigez une petite description sur le groupe.
+Introduisez une description, un commentaire sur le groupe
 \end_inset 
 </cell>
 </row>
@@ -263,8 +261,7 @@ Base
 
 \layout Standard
 
-Sélectionnez dans le menu déroulant le département auquel sera associé le
- groupe.
+Faites votre sélection dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -282,10 +279,13 @@ Objets membres
 
 \layout Standard
 
-?.
- Le bouton Ajouter renvoie à la liste des objets à sélectionner, utilisez
- le bouton Supprimer après avoir sélectionné dans le champ les objets à
- effacer.
+
+\color black
+L'objet membre reprend la liste des objets associés au Groupe d'objets cré
+\color default
+e.
+ Le bouton Ajouter renvoie à la liste des objets existants, utilisez le
+ bouton Supprimer pour effacer.
 \end_inset 
 </cell>
 </row>
@@ -299,7 +299,5 @@ Objets membres
 Références
 \layout Standard
 
-
-\color red
-?
+Les références résument les relations existantes entre objets.
 \the_end

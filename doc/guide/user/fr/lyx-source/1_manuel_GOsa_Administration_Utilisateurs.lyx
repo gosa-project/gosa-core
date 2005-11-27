@@ -55,7 +55,7 @@
 
 
 \series bold 
-ADMINISTRATION
+ADMINISTRATION DES UTILISATEURS
 \layout Section
 
 Utilisateurs
@@ -72,7 +72,7 @@ utilisateurs
 \series bold 
 Administration
 \series default 
- du menu de gauche.
+ dans le menu à gauche.
  La page
 \family sans 
 \color black
@@ -85,9 +85,9 @@ Administration
  
 \layout Standard
 
-Les deux dernières colonnes comportent des icônes qui dans la deuxième colonne
- sont des raccourcis vers les propriétés de chaque utilisateur et dans la
- troisième les actions à executer sur l'utilisateur.
+Les deux dernières colonnes comportent des icônes qui sont des raccourcis
+ vers les propriétés de chaque utilisateur et les actions à exécuter sur
+ l'utilisateur.
  Les flèches en entête ( 
 \begin_inset Graphics
 	filename images/list_back.png
@@ -117,7 +117,7 @@ Administration des utilisateurs
 \family default 
 \color default
  que l'administrateur système aura une vue globale et pourra gérer la liste
- des utilisateurs du parc informatique de la société.
+ des utilisateurs.
  
 \layout Standard
 
@@ -135,19 +135,20 @@ Dans la partie droite de la page se trouve un tableau intitulé Filtres
 
 
 \color black
-Ce tableau sert à modifier l'affichage des utilisateurs :
+Ce tableau sert à modifier l'affichage de la liste des utilisateurs :
 \begin_deeper 
 \layout Standard
 
 
 \color black
-- Cliquer sur une lettre, par exemple la lettre L, pour que s'affichent
- tous les utilisateurs dont le nom commence par la lettre L;
+- Cliquer sur une lettre pour que s'affichent tous les utilisateurs dont
+ le nom commence par la lettre sélectionnée;
 \layout Standard
 
 
 \color black
-- Cliquez sur l'astérisque et tous les noms d'utilisateurs apparaîtront.
+- Cliquez sur l'astérisque et tous les noms d'utilisateurs apparaîtront
+ classés alphabétiquement.
 \end_deeper 
 \layout Itemize
 
@@ -155,17 +156,17 @@ Plus bas d'autres possibilités d'affichage sont possibles :
 \begin_deeper 
 \layout Standard
 
-- Cochez une ou plusieurs propositions pour un affichage;
+- Cochez une ou plusieurs propositions pour un affichage ciblé;
 \layout Standard
 
-- Insérez une lettre, un numéro suivi de l'astérisque ou un nom d'utilisateur
- dans le champ précédé d'une loupe 
+- Insérez soit une lettre soit un numéro tous deux suivis de l'astérisque
+ soit un nom d'utilisateur dans le champ précédé d'une loupe 
 \begin_inset Graphics
 	filename images/search.png
 
 \end_inset 
 
-, il symbolise la recherche d'un item.
+, cette icône symbolise la recherche d'un item.
  Cliquez sur le bouton Appliquer pour faire apparaître le(s) utilisateur(s)
  recherché(s).
 \end_deeper 
@@ -181,15 +182,18 @@ Pour créer un compte cliquez sur
  Si le compte est déjà créé cliquez sur le compte lui-même.
 \layout Standard
 
-Apparait alors l'espace de configuration avec dans la partie supérieure
- des onglets.
+Apparaît alors l'espace de configuration munie d'onglets qui représentent
+ chacun un espace de configuration.
  Ces onglets sont des extensions apportées à GOsa.
  L'administrateur configure ces extensions pour chaque utilisateur.
 \layout Standard
-
-Pour terminer la configuration de chaque extension, cliquez sur le bouton
- Terminé en bas à droite.
- Pour revenir à la page précédente cliquez sur le bouton Annuler.
+\added_space_bottom medskip 
+Pour terminer la configuration, cliquez sur le bouton Terminé en bas à droite.
+ Pour revenir à 
+\color black
+la liste des utilisateurs
+\color default
+ cliquez sur le bouton Annuler.
  
 \newline 
 
@@ -198,11 +202,8 @@ Pour terminer la configuration de chaque extension, cliquez sur le bouton
 Tous les champs précédés d'une astérisque doivent être remplis obligatoirement.
 \layout Standard
 
-Dans le haut à droite vous avez à la fois l'id de l'utilisateur sur lequel
- vous travaillez mais aussi sa place dans l'arbre LDAP.
- 
-\color red
-?
+Dans le haut à droite vous avez à la fois l'identitée de l'utilisateur sur
+ lequel vous travaillez mais aussi sa place dans l'arbre LDAP.
 \layout Standard
 
 L'image 
@@ -211,7 +212,8 @@ L'image
 
 \end_inset 
 
- signale que vous êtes en mode sécurisé.
+ signale que l'utilisateur est en mode verrouillé.
+ Ce mode pemet d'éviter les modifications simultanées.
 \layout Subsection
 \pagebreak_top 
 Informations générales
@@ -219,10 +221,10 @@ Informations générales
 
 Informations personnelles
 \layout Standard
-
+\added_space_bottom medskip 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="14" columns="2">
+<lyxtabular version="3" rows="15" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
@@ -242,7 +244,7 @@ Nom
 
 \layout Standard
 
-Insérez le nom de l'utilisateur
+Introduisez le nom de l'utilisateur 
 \end_inset 
 </cell>
 </row>
@@ -262,7 +264,7 @@ Prénom
 
 \layout Standard
 
-Insérez le prénom de l'utilisateur
+Introduisez le prénom de l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -282,9 +284,7 @@ Identifiant
 
 \layout Standard
 
-
-\color red
-?
+Introduisez l'identificateur de l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -302,7 +302,10 @@ Titre personnel
 
 \layout Standard
 
-Fonction dans la société
+Introduisez le titre (Madame, Mademoiselle ou Monsieur) de l'utilisateur
+ 
+\color red
+?
 \end_inset 
 </cell>
 </row>
@@ -320,7 +323,7 @@ Titre Universitaire
 
 \layout Standard
 
-Titre ou diplôme obtenu
+Introduisez le diplome obtenu
 \end_inset 
 </cell>
 </row>
@@ -338,7 +341,15 @@ Date de naissance
 
 \layout Standard
 
-Cliquez sur le bouton pour voir apparaître une liste déroulante
+Cliquez sur le bouton 
+\begin_inset Quotes erd
+\end_inset 
+
+ Remplir
+\begin_inset Quotes erd
+\end_inset 
+
+ pour voir apparaître une liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -356,7 +367,25 @@ Sexe
 
 \layout Standard
 
-Cliquez sur le bouton pour voir apparaître une liste déroulante
+Faites votre séléction dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Langue
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Faites votre séléction dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -374,8 +403,8 @@ Base
 
 \layout Standard
 
-Choix du département; la création de départements se fait à partir du bouton
- 
+Choix du département.
+ (la création de départements se fait à partir du bouton 
 \series bold 
 \color blue
 département
@@ -389,7 +418,7 @@ auche
 \series bold 
 Administration
 \series default 
-.
+).
 \end_inset 
 </cell>
 </row>
@@ -407,7 +436,7 @@ Adresse
 
 \layout Standard
 
-Adresse personnelle
+Introduisez l'adresse personnelle de l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -425,7 +454,8 @@ Numéro de téléphone privé
 
 \layout Standard
 
-Insérez le numéro privé selon la nomenclature nationale ou internationale
+Introduisez le numéro privé selon la nomenclature nationale ou internationale.
+ (veillez à garder la même nomenclature pour tous les utilisateurs)
 \end_inset 
 </cell>
 </row>
@@ -443,7 +473,7 @@ Page d'accueil
 
 \layout Standard
 
-Insérez l'URL complète du site Web de la société 
+Introduisez l'url de la page personnelle de l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -453,7 +483,7 @@ Insérez l'URL complète du site Web de la société
 
 \layout Standard
 
-Format de stockage des mots de passe
+Format de stockage des mots de passe 
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -461,10 +491,7 @@ Format de stockage des mots de passe
 
 \layout Standard
 
-Choix dans le menu déroulant entre crypt, clear, sha, md5, ssha, smd5.
- 
-\color red
-?
+Faites votre séléction dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -483,8 +510,27 @@ Certificats
 \layout Standard
 
 
-\color red
-?
+\color black
+Cliquez sur le bouton
+\begin_inset Quotes erd
+\end_inset 
+
+ Modification des certificats
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ GOsa vous propose trois types de certificats à rechercher dans l' arborescence
+ de votre ordinateur.
+ Pour enregistrer cliquez sur le bouton
+\begin_inset Quotes erd
+\end_inset 
+
+ Terminé
+\begin_inset Quotes erd
+\end_inset 
+
+.
 \end_inset 
 </cell>
 </row>
@@ -503,6 +549,17 @@ Kerberos
 \layout Standard
 
 
+\color black
+Cliquez sur le bouton
+\begin_inset Quotes erd
+\end_inset 
+
+ Modifier les propriétés
+\begin_inset Quotes erd
+\end_inset 
+
+.
+ 
 \color red
 ?
 \end_inset 
@@ -548,7 +605,7 @@ Entreprise
 
 \layout Standard
 
-Insérez le nom de la société
+Introduisez le nom de la société
 \end_inset 
 </cell>
 </row>
@@ -566,7 +623,7 @@ Département
 
 \layout Standard
 
-Insérez le nom du département auquel appartient l'utilisateur 
+Introduisez le nom du département auquel appartient l'utilisateur 
 \end_inset 
 </cell>
 </row>
@@ -584,7 +641,7 @@ N° du département
 
 \layout Standard
 
-Insérez le numéro du département si il y a une numérotation
+Introduisez le numéro du département
 \end_inset 
 </cell>
 </row>
@@ -602,8 +659,7 @@ N° de l'employé
 
 \layout Standard
 
-Insérez le numéro attribué à l'utilisateur si il possède une carte ou un
- pass dans la société
+Introduisez le numéro attribué à l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -621,9 +677,7 @@ Type de l'employé
 
 \layout Standard
 
-
-\color red
-?
+Précisez son statut dans la société
 \end_inset 
 </cell>
 </row>
@@ -641,7 +695,7 @@ N° du bureau
 
 \layout Standard
 
-Insérez le numéro du bureau dans lequel travaille l'utilisateur
+Introduisez le numéro du bureau dans lequel travaille l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -659,7 +713,7 @@ Téléphone
 
 \layout Standard
 
-Insérez le numéro de téléphone professionnel de l'utilisateur
+Introduisez le numéro de téléphone de l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -677,7 +731,7 @@ Portable
 
 \layout Standard
 
-Insérez le numéro du mobile ou GSM de l'utilisateur
+Introduisez le numéro du mobile ou GSM de l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -695,7 +749,7 @@ Bip
 
 \layout Standard
 
-Insérez le numéro du bipeur de l'utilisateur si il en possède
+Introduisez le numéro du bipeur de l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -713,7 +767,7 @@ Fax
 
 \layout Standard
 
-Insérez le numéro de Fax de l'utilisateur
+Introduisez le numéro de Fax de l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -731,7 +785,8 @@ Lieu
 
 \layout Standard
 
-Insérez le lieu du bureau de l'utilisateur si la société est sur un campus
+Introduisez la localisation du bureau de l'utilisateur si la société possède
+ des succursales
 \end_inset 
 </cell>
 </row>
@@ -749,8 +804,9 @@ Département
 
 \layout Standard
 
-Insérez le nom de la province ou de la région où la société est localisée
- 
+Introduisez le nom de la région où la société est localisée 
+\color red
+?
 \end_inset 
 </cell>
 </row>
@@ -768,7 +824,7 @@ Adresse
 
 \layout Standard
 
-Insérez l'adresse de l'entreprise
+Introduisez l'adresse de l'entreprise
 \end_inset 
 </cell>
 </row>
@@ -810,7 +866,7 @@ Répertoire home
 
 \layout Standard
 
-Indiquez la racine du compte
+Introduisez le chemin vers le répertoire de l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -828,7 +884,7 @@ Shell
 
 \layout Standard
 
-Choisir dans la liste déroulante le type de shell utilisé
+Choisir dans la liste déroulante le type de shell (console) utilisé
 \end_inset 
 </cell>
 </row>
@@ -847,7 +903,7 @@ Groupe principal
 \layout Standard
 
 Indiquez le groupe principal auquel appartient l'utilisateur.
- Pour la création de groupe allez au bouton 
+ (Pour la création de groupe allez au bouton 
 \series bold 
 \color blue
 Groupes
@@ -857,7 +913,7 @@ Groupes
 \series bold 
 Administration
 \series default 
-.
+)
 \end_inset 
 </cell>
 </row>
@@ -875,16 +931,7 @@ Statut
 
 \layout Standard
 
-Indique si le compte est activé ou non.
- (
-\shape italic 
-\color blue
-où l'activer
-\shape default 
-\color red
-?
-\color default
-)
+Indique si le compte est activé ou non
 \end_inset 
 </cell>
 </row>
@@ -894,7 +941,7 @@ où l'activer
 
 \layout Standard
 
-UID/GID
+Forcer l'UID/GID
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -902,9 +949,8 @@ UID/GID
 
 \layout Standard
 
-
-\color red
-?
+Cochez si vous désirez forcer l'uid/gid de l'utilisateur à une certaine
+ valeur
 \end_inset 
 </cell>
 </row>
@@ -918,12 +964,21 @@ UID/GID
 Appartient aux groupes
 \layout Standard
 
-L'utilisateur peut appartenir à un ou plusieurs Groupes.
- Appartenir à un groupe permet ou ne permet pas à l'utilisateur d'avoir
- des droits d'accès sur une ou des parties du serveur de fichier.
- Utilisez les boutons Ajouter et Supprimer pour insérer les groupes dans
- le champ.
- Le bouton Ajouter renvoie à la liste des utilisateurs.
+Utilisez les boutons 
+\emph on 
+Ajouter
+\emph default 
+ et 
+\emph on 
+Supprimer
+\emph default 
+ pour insérer ou effacer les groupes dans le champ vide.
+ Le bouton 
+\emph on 
+Ajouter
+\emph default 
+ renvoie à la liste des groupes crées par l'administrateur.
+ L'utilisateur peut appartenir à un ou plusieurs groupes.
 \layout Subsubsection
 \added_space_top medskip 
 Compte
@@ -938,25 +993,39 @@ Il s'agit de la gestion du mot de passe de l'utilisateur.
 Système de confiance
 \layout Standard
 
-Le système de confiance sert à accorder ou à limiter l'accès de l'utilisateur
- aux différents systèmes du parc informatique de la société.
+Le système de confiance sert à gèrer l'accès de l'utilisateur aux différents
+ systèmes, phériphériques, etc...
+ .
  Le système de confiance peut être en mode :
 \layout Itemize
 
 désactivé, 
 \layout Itemize
 
-accès complet, l'utilisateur à l'accès complet aux systèmes,
+accès complet : l'utilisateur à l'accès complet aux systèmes,
 \layout Itemize
 
-permettre l'accès à ces hôtes, utilisez alors les boutons Ajouter et Supprimer
- pour faire apparaître les systèmes auxquels l'utilisateur peut avoir accès.
- Le bouton Ajouter renvoie à la liste des hôtes.
+permettre l'accès à ces hôtes : 
+\begin_deeper 
+\layout Standard
+
+- Utilisez le bouton 
+\emph on 
+Ajouter
+\emph default 
+ pour faire apparaître la liste des hôtes auxquels l'utilisateur pourrait
+ avoir accès, 
+\layout Standard
+
+- Utilisez le bouton 
+\emph on 
+Supprimer
+\emph default 
+ pour effacer les hôtes auxquels l'utilisateur n'a plus accès.
+\end_deeper 
 \layout Subsection
 \added_space_top bigskip 
-Environnement 
-\color red
-?
+Environnement
 \layout Standard
 
 Cliquez sur le bouton 
@@ -988,11 +1057,10 @@ Imprimante
 Mail
 \layout Standard
 
-Le compte email est lié au serveur de mail.
- Pour activer le compte email pour un utilisateur sur le serveur cliquez
- sur 
+Le compte émail est lié au serveur de messagerie.
+ Pour activer le compte de messagerie d'un utilisateur cliquez sur 
 \shape italic 
-Créer un compte email
+Créer un compte émail
 \shape default 
 .
 \layout Subsubsection
@@ -1022,7 +1090,7 @@ Adresse principale
 
 \layout Standard
 
-Insérez l'adresse email de l'utilisateur 
+Introduisez l'adresse de messagerie de l'utilisateur 
 \end_inset 
 </cell>
 </row>
@@ -1040,7 +1108,7 @@ Serveur
 
 \layout Standard
 
-séléctionnez le serveur de l'utilisateur
+Sélectionnez le serveur ou est stockée le compte de messagerie de l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -1050,7 +1118,7 @@ séléctionnez le serveur de l'utilisateur
 
 \layout Standard
 
-Utilisation des Quota
+Utilisation des quota
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1058,6 +1126,8 @@ Utilisation des Quota
 
 \layout Standard
 
+Précisez si vous désirez appliquer un quota au niveau du compte de messagerie
+ de l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -1067,7 +1137,7 @@ Utilisation des Quota
 
 \layout Standard
 
-Tailles des Quota
+Tailles du quota
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1075,6 +1145,7 @@ Tailles des Quota
 
 \layout Standard
 
+Précisez en KB la taille du quota
 \end_inset 
 </cell>
 </row>
@@ -1089,57 +1160,114 @@ Alternative addresses
 \layout Standard
 
 L'utilisateur peut être en possession d'alias.
- Ces alias sont à insérer dans le champ 
+ Ces alias sont à insérer dans le champ adresses alternatives.
+ 
+\layout Standard
+
+Utilisez le bouton 
 \emph on 
-adresses alternatives
+Ajouter
+\emph default 
+ pour insérer les alias.
+ L'alias doit être introduit dans le champ vide précédant le bouton 
+\emph on 
+Ajouter
 \emph default 
 .
- Utilisez les boutons Ajouter et Supprimer pour insérer les alias.
- L'alias doit être introduit dans le champ précédent le bouton Ajouter.
+ Utilisez le bouton 
+\emph on 
+Supprimer
+\emph default 
+ pour effacer les alias.
 \layout Subsubsection
 \added_space_top medskip 
-Options email
+Options du compte de messagerie
 \layout Standard
 
-Cette option est destinée à la gestion des emails de l'utilisateur.
+Gestion des options du compte de messagerie de l'utilisateur :
 \layout Itemize
 
-Message d'absence :
-\layout Standard
-
-L'administrateur a le choix entre bloquer les messages vers la boîte de
- l'utilisateur ou activer le message d'absence.
-\layout Standard
-
-Le message d'absence est envoyé automatiquement en réponse aux email reçus
- pendant les absences ou congés de l'utilisateur.
+Aucune distribution des messages dans la boite de l'utilisateur : envoie
+ une copie à l'adresse mentionnée dans 
+\emph on 
+transférer les messages vers
+\emph default 
+ , sans en mettre une copie dans la messagerie de l'utilisateur.
 \layout Itemize
 
-Transférer les messages vers :
-\layout Standard
+Activer la notification d'absence : envoie le message écrit dans 
+\emph on 
+message d'absence
+\emph default 
+.
+\layout Itemize
 
-Les messages qui sont refusés en raison de leur contenu ou de leur taille
- sont directement redirigés vers une ou plusieurs adresses email insérées
- dans ce champ par l'administrateur.
- Utilisez les boutons Ajouter, Ajouter en local 
-\color red
-? 
+Déplacer les messages ayant un niveau de spam supérieur à (a) vers le répertoire
+ (b) : envoie les messages ayant un score supérieur à (a) dans le répertoire
+ (b).
+\layout Itemize
+
+Rejeter les messages plus gros que (c) MB : ne pas accepter les messages
+ plus gros que (c) MB.
+\layout Itemize
+
+Utilisez les boutons 
+\emph on 
+Ajouter
+\emph default 
+ ou 
+\emph on 
+Ajouter en local
+\emph default 
 \color black
-et Supprimer pour la gestion des adresses.
- Le bouton Ajouter en local renvoie à la liste d'adresses déjà configurées
- dans GOsa.
- Le bouton Ajouter permet l'ajout d'adresses extérieures au système.
+ pour la gestion des adresses : 
+\begin_deeper 
+\layout Standard
+
+
+\color black
+- Le bouton 
+\emph on 
+Ajouter en local
+\emph default 
+ permet de sélectionner parmis la liste des adresses locales.
+ 
+\layout Standard
+
+
+\color black
+- Le bouton 
+\emph on 
+Ajouter
+\emph default 
+ permet l'ajout d'adresses extérieures au système.
+\layout Standard
+
+
+\color black
+- Utilisez le bouton 
+\emph on 
+Supprimer
+\emph default 
+ pour effacer les adresses de messagerie.
+\end_deeper 
 \layout Subsubsection
 \added_space_top medskip 
-Options email avancées
+Options de messagerie avancées
 \layout Itemize
 
-L'administrateur peut restreindre l'utilisateur dans l'envoi et la réception
- de ces messages.
+Les utilisateurs ne sont autorisés qu'a envoyé et recevoir des emails locaux
+ : l'administrateur peut forcer l'envoi et la reception des messages en
+ local uniquement.
 \layout Itemize
 
-L'administrateur peut aussi écrire un script sieve qui établit les règles
- de gestion du mail qui remplace alors les options email décrites ci-dessus.
+Utiliser des scripts sieve personnalisés : l'administrateur peut écrire
+ des scripts sieve qui établissent les règles de gestion de la messagerie.
+ 
+\emph on 
+Attention ! cela désactive toutes les options de messagerie
+\emph default 
+.
 \layout Subsection
 \added_space_top bigskip 
 Samba
@@ -1184,7 +1312,9 @@ SERVER
 \backslash 
 homes
 \backslash 
-user
+utilisateur.
+ Choisissez dans la liste déroulante la lettre associée au répertoire personnel
+ de l'utilisateur.
 \end_inset 
 </cell>
 </row>
@@ -1202,7 +1332,7 @@ Domaine
 
 \layout Standard
 
-Précisez le domaine auquel appartient l'utilisateur
+Séléctionnez le domaine dans lequel se trouve la machine de l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -1220,8 +1350,7 @@ Chemin du Script
 
 \layout Standard
 
-Indiquez le chemin pour accéder au script de démarrage de la station de
- l'utilisateur
+Indiquez le script de démarrage de l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -1253,11 +1382,7 @@ Indiquez le chemin pour accéder au profile de l'utilisateur
 Serveur de terminal
 \layout Itemize
 
-
-\color red
-?
-\color default
- Permet la connexion sur un serveur de terminal
+Permet la connexion sur un serveur de terminal
 \layout Standard
 
 
@@ -1280,6 +1405,18 @@ Répertoire Home
 
 \layout Standard
 
+Indiquez le chemin du répertoire personnel de l'utilisateur en notation
+ UNC ex: 
+\backslash 
+
+\backslash 
+SERVER
+\backslash 
+homes
+\backslash 
+utilisateur.
+ Choisissez dans la liste déroulante la lettre associée au répertoire personnel
+ de l'utilisateur.
 \end_inset 
 </cell>
 </row>
@@ -1297,6 +1434,7 @@ Chemin du Profile
 
 \layout Standard
 
+Indiquez le chemin pour accéder au profile de l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -1305,15 +1443,9 @@ Chemin du Profile
 \end_inset 
 
 
-\newline 
-
 \layout Itemize
 
-
-\color red
-?
-\color default
- Hérite de la configuration du client
+Hérite de la configuration du client
 \layout Standard
 
 
@@ -1336,6 +1468,7 @@ Programme initial
 
 \layout Standard
 
+Indiquez le chemin vers l'application par défaut
 \end_inset 
 </cell>
 </row>
@@ -1353,6 +1486,79 @@ Répertoire Home
 
 \layout Standard
 
+Indiquez le chemin pour accéder au repertoire de base de l'application 
+\color red
+?
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+ 
+\layout Itemize
+
+Configuration du temps d'attente (en minutes) :
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Connexion
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Cochez afin d'indiquer le temps d'attente maximum lors d'une connexion
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Déconnexion
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Cochez afin d'indiquer le temps d'attente maximum lors d'une déconnexion
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+En attente
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Cochez afin d'indiquer le temps d'attente maximum lors d'une requête
 \end_inset 
 </cell>
 </row>
@@ -1361,52 +1567,146 @@ Répertoire Home
 \end_inset 
 
 
-\newline 
-Configuration du temps d'attente (en minutes) :
-\layout Standard
+\layout Itemize
 
 Périphériques clients :
 \layout Standard
 
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Connecter les lecteurs clients à l'identification
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Cochez afin de connecter les lecteurs de l'utilisateur lors de l'identification
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Connecter les imprimantes clients à l'identification
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Cochez afin de connecter les imprimantes de l'utilisateur lors de l'identificati
+on
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Imprimante par défaut
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Cochez afin de définir l'imprimante par défaut de l'utilisateur lors de
+ l'identification
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Itemize
+
 Divers :
+\begin_deeper 
+\layout Standard
+
+- Masquer : 
+\color red
+?
+\layout Standard
+
+- Sur interrompu ou temps d'attente dépassé : permet de choisir si il faut
+ déconnecter le client ou faire une remise à zéro.
+\layout Standard
+
+- Reconnexion si déconnecté : permet de choisir si la reconnexion doit être
+ faite depuis le même client, ou si elle peut être effectuée depuis un autre
+ client.
+\end_deeper 
 \layout Subsubsection
 \added_space_top medskip 
 Options d'accès
 \layout Itemize
 
-Tout comme dans la création du compte Unix l'administrateur a la possibilité
- de gérer la manière dont l'utilisateur dispose de son mot de passe.
- L'administrateur doit veiller à faire un choix cohérent pour éviter les
- conflits entre les différentes propositions.
- 
+Il s'agit de la gestion du mot de passe de l'utilisateur.
+ Différentes propositions peuvent être cochées à la fois mais l'administrateur
+ doit veiller à rester cohérent pour éviter les conflits dans l'application
+ de ses choix.
 \layout Itemize
 
 Le champ à droite doit être rempli par les noms de stations à partir desquelles
- l'utilisateur peut se connecter au serveur.
- L'administrateur doit utiliser les boutons Ajouter et Supprimer pour y
- faire apparaître les noms de stations.
- Le bouton Ajouter renvoie à la liste des stations.
+ l'utilisateur peut se connecter.
+ L'administrateur doit utiliser les boutons 
+\emph on 
+Ajouter
+\emph default 
+ pour y insérer les noms de stations.
+ Le bouton 
+\emph on 
+Ajouter
+\emph default 
+ renvoie à la liste des stations.
+ Utilisez le bouton 
+\emph on 
+Supprimer
+\emph default 
+ pour effacer des stations.
 \layout Subsection
 \added_space_top bigskip 
 Connectivité
 \layout Standard
 
-L'administrateur peut afiner la gestion du compte de l'utilisateur en configuran
-t les services supplémentaires auquel il peut se connecter.
+L'administrateur peut affiner la gestion du compte de l'utilisateur en configura
+nt les services supplémentaires auquel il peut se connecter.
 \layout Subparagraph*
 
 Compte Proxy
 \layout Standard
 
-Si vous activez le compte Proxy pour l'utilisateur vous pouvez filtrer sur
+Si vous activez l'option Proxy pour l'utilisateur vous pouvez filtrer sur
  le contenu, limité l'accès à certaines heures et restreindre le téléchargement.
 \layout Subparagraph
 \added_space_top smallskip 
 Compte FTP
 \layout Standard
 
-Si vous activez le compte FTP, vous pouvez régler la bande passante montante
- et descendante, le Ratio des données et le Quota à ne pas dépasser pour
+Si vous activez l'option FTP, vous pouvez régler la bande passante montante
+ et descendante, le ratio des données et le quota à ne pas dépasser pour
  le transfert de fichiers .
  Vous pouvez aussi à partir de cet endroit désactiver le compte FTP.
 \layout Subparagraph
@@ -1414,24 +1714,50 @@ Si vous activez le compte FTP, vous pouvez régler la bande passante montante
 Compte WebDAV
 \layout Standard
 
-Si vous activez le compte WebDav, l'utilisateur aura accès au serveur WebDAV
+Si vous activez l'option WebDav, l'utilisateur aura accès au serveur WebDAV
  
 \layout Subparagraph
 \added_space_top smallskip 
 Compte PHPGroupware
 \layout Standard
 
-
-\color red
-?
+Si vous activez l'option PHPGroupware, l'utilisateur aura accès au logiciel
+ PHPGroupware
 \layout Subparagraph
 \added_space_top smallskip 
-Intranet account 
+Compte Intranet 
+\layout Standard
+\added_space_bottom smallskip 
+Si vous activez l'option Intranet, l'utilisateur aura accès au serveur Intranet
 \layout Standard
 
 
-\color red
-?
+\series bold 
+Compte PPTP
+\layout Standard
+\added_space_bottom smallskip 
+Si vous activez l'option PPTP, l'utilisateur aura accès au serveur PPTP
+\layout Standard
+
+
+\series bold 
+Compte PHPScheduleIt
+\series default 
+ 
+\layout Standard
+\added_space_bottom smallskip 
+Si vous activez l'option PHPScheduleIt, l'utilisateur aura accès au logiciel
+ PHPScheduleIt
+\layout Standard
+
+
+\series bold 
+Compte GLPI
+\series default 
+ 
+\layout Standard
+
+Si vous activez l'option GLPI, l'utilisateur aura accès au logiciel GLPI
 \layout Subsection
 \added_space_top bigskip 
 Fax
@@ -1485,7 +1811,7 @@ Langue
 
 \layout Standard
 
-Cliquez pour voir apparaître la liste déroulante pour le choix de la langue
+Faites votre sélection dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -1503,8 +1829,7 @@ Format de distribution
 
 \layout Standard
 
-Cliquez pour voir apparaître une liste déroulante qui donne le choix du
- format de stockage des fax à envoyer ou à réceptionner 
+Faites votre sélection dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -1518,14 +1843,16 @@ Cliquez pour voir apparaître une liste déroulante qui donne le choix du
 Méthodes de distribution
 \layout Itemize
 
-L'utilisation du fax peut être suspendu temporairement.
- 
+Desactiver temporairement l'utilisation du fax : interdit l'utilisation
+ du fax par cet utilisateur.
 \layout Itemize
 
-Les fax peuvent être redirigés sous forme de mail à une adresse mail.
+Délivrer les fax comme des mails : envoie les fax sous le format de distribution
+ défini dans la messagerie de l'utilisateur
 \layout Itemize
 
-Les fax peuvent être envoyés directement au télécopieur et imprimés.
+Imprimer directement les fax : permet de sélectionner l'imprimante à laquelle
+ envoyer les fax reçus par cet utilisateur
 \layout Subsubsection
 \added_space_top medskip 
 Numéros de fax alternatif
@@ -1533,11 +1860,30 @@ Numéros de fax alternatif
 
 L'administrateur peut compléter la configuration du fax par une série d'autres
  numéros de fax utilisés dans la société.
- Utilisez les boutons Ajouter, Ajouter en local et Supprimer pour remplir
- le champ.
- Ajouter en local renvoie à la liste des numéros de fax.
- Le bouton Ajouter permet d'insérez des numéros de fax autres que ceux de
- la liste.
+ Utilisez les boutons Ajouter, Ajouter en local pour remplir le champ.
+\layout Itemize
+
+Le bouton 
+\emph on 
+Ajouter en local
+\emph default 
+ renvoie à la liste des numéros de fax.
+ 
+\layout Itemize
+
+Le bouton 
+\emph on 
+Ajouter
+\emph default 
+ permet d'insérer des numéros de fax autres que ceux de la liste.
+ 
+\layout Standard
+
+Utilisez le bouton 
+\emph on 
+Supprimer
+\emph default 
+ pour effacer des numéros de fax.
 \layout Subsubsection
 \added_space_top medskip 
 Listes rouges
@@ -1545,17 +1891,27 @@ Listes rouges
 
 Le fax est aujourd'hui fréquemment utilisé pour distribuer des messages
  publicitaires.
- On peut les apparenter au spam.
+ Certains peuvent être apparentés à des spams.
  Pour éviter que les utilisateurs soient submergés par ces messages, l'administr
 ateur peut instaurer une liste rouge reprenant les numéros de fax indésirables
  qu'ils soient entrant ou sortant.
 \layout Standard
 
-En cliquant sur le bouton Edit vous faites apparaître une page avec du côté
- droit le champ avec la liste rouge prédéfinie dans laquelle vous devez
- sélectionné les numéros et les ajouter dans le champ à gauche.
- La liste des numéros indésirables peuvent varier selon les utilisateurs.
- Pour terminer, cliquez sur le bouton Appliquer.
+En cliquant sur le bouton 
+\emph on 
+Edit
+\emph default 
+ vous faites apparaître une page comprenant deux listes, du côté gauche
+ on trouve les numéros refusés pour cet utilisateur, du côte droit on retrouve
+ les listes rouges prédefinies par l'administrateur.
+\layout Standard
+
+Selectionnez la ou les listes que vous désirez utiliser dans la liste de
+ droite et cliquer sur 
+\emph on 
+Ajouter à la liste rouge
+\emph default 
+ pour l'activer.
 \layout Subsection
 \added_space_top bigskip 
 Téléphone
@@ -1572,10 +1928,13 @@ Créer un compte téléphone
 Numéros de téléphone
 \layout Standard
 
-Insérez le ou les numéro(s) de l'utilisateur en utilisant les boutons Ajouter
- et Supprimer.
- Le bouton Ajouter fonctionne que si le champ précédent est rempli par un
- numéro.
+Insérez le ou les numéro(s) de téléphone de l'utilisateur en utilisant le
+ bouton 
+\emph on 
+Ajouter
+\emph default 
+.
+ 
 \layout Subsubsection
 \added_space_top medskip 
 Matériel téléphonique
@@ -1601,7 +1960,7 @@ Téléphone
 
 \layout Standard
 
-Spécifier le type de téléphone dans la liste déroulante
+Faites votre sélection dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -1622,8 +1981,12 @@ VoicemailPIN
 \layout Standard
 
 
+\color black
+Introduisez le code PIN utilisé par l'utilisateur pour atteindre sa boîte
+ vocale.
+
 \color red
-?
+ 
 \end_inset 
 </cell>
 </row>
@@ -1644,8 +2007,9 @@ Phone PIN
 \layout Standard
 
 
-\color red
-?
+\color black
+Introduisez le code PIN utilisé par l'utilisateur pour déverouiller son
+ téléphone.
 \end_inset 
 </cell>
 </row>
@@ -1659,15 +2023,13 @@ Phone PIN
 Phone macro
 \layout Standard
 
-
-\color red
-?
+Permet de séléctionner une macro à mettre dans le téléphone de l'utilisateur.
 \layout Subsection
 \added_space_top bigskip 
 Références
 \layout Standard
 
-Les références présentent les groupes auxquels appartient l'utilisateur.
+Les références présentent les propriétés de l'utilisateur.
  Cela permet à l'administrateur d'avoir une information rapide sur la situation
  de l'utilisateur dans la société.
 \the_end

@@ -55,7 +55,7 @@
 
 
 \series bold 
-ADMINISTRATION
+ADMINISTRATION DES MACROS TELEPHONIQUES
 \layout Section
 
 Phone macros
@@ -83,14 +83,14 @@ Phone macro management
 La page est divisée en trois colonnes :
 \layout Standard
 
-- la première colonne est destinée à afficher les _,
+- la première colonne est destinée à afficher les noms des macros téléphoniques,
 \layout Standard
 
-- la deuxième 
+- la deuxième colonne indique si la macro est visible ou non par l'utilisateur,
 \layout Standard
 
 - la troisième colonne contient les icônes qui sont les actions que l'on
- peut executer sur ces _.
+ peut executer sur ces macros téléphoniques.
 \layout Standard
 
 Les flêches en entête ( 
@@ -136,15 +136,16 @@ Il est possible de modifier l'affichage des phone macros en utilisant le
 L'administrateur peut faire une recherche sur le nom :
 \layout Standard
 
-- cliquez sur l'astérisque (étoile : *) pour voir apparaître toutes _;
+- cliquez sur l'astérisque (étoile : *) pour voir apparaître toutes les
+ macros téléphoniques;
 \layout Standard
 
-- cliquez sur une lettre et tous les noms des _ débutant par cette lettre
- s'afficheront;
+- cliquez sur une lettre et tous les noms des macros téléphoniques débutant
+ par cette lettre s'afficheront;
 \layout Standard
 
-- cliquez sur un numéro et tous les noms des _ débutant par ce numéro s'afficher
-ont;
+- cliquez sur un numéro et tous les noms des macros téléphoniques débutant
+ par ce numéro s'afficheront;
 \layout Standard
 
 - recherche rapide 
@@ -153,12 +154,16 @@ ont;
 
 \end_inset 
 
- : remplissez le champ par le nom de _ et ensuite cliquez sur le bouton
- Appliquer.
+ : remplissez le champ par le nom de la macro et ensuite cliquez sur le
+ bouton 
+\emph on 
+Appliquer
+\emph default 
+.
 \layout Standard
 \added_space_top medskip 
-Pour créer et configurer _, l'administrateur doit cliquer sur le bouton
- 
+Pour créer et configurer une macro téléphonique, l'administrateur doit cliquer
+ sur le bouton 
 \begin_inset Graphics
 	filename images/list_new_macro.png
 
@@ -170,8 +175,15 @@ Pour créer et configurer _, l'administrateur doit cliquer sur le bouton
 Apparaît l'espace de configuration.
 \layout Standard
 
-Pour enregistrer la configuration, cliquez sur le bouton Terminé, pour revenir
- à la page précédente cliquez sur le bouton Annuler.
+Pour enregistrer la configuration, cliquez sur le bouton 
+\emph on 
+Terminé
+\emph default 
+, pour revenir à la page précédente cliquez sur le bouton 
+\emph on 
+Annuler
+\emph default 
+.
 \layout Subsection
 \pagebreak_top 
 Informations générales
@@ -179,7 +191,7 @@ Informations générales
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="5" columns="2">
+<lyxtabular version="3" rows="6" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
@@ -189,7 +201,9 @@ Informations générales
 
 \layout Standard
 
-Macro name
+
+\color black
+Nom de la macro
 \color red
 *
 \end_inset 
@@ -199,7 +213,7 @@ Macro name
 
 \layout Standard
 
-Insérez le nom de la macro
+Introduisez le nom de la macro
 \end_inset 
 </cell>
 </row>
@@ -209,7 +223,9 @@ Insérez le nom de la macro
 
 \layout Standard
 
-Afficher le nom
+
+\color black
+Nom à afficher
 \color red
 *
 \end_inset 
@@ -219,9 +235,7 @@ Afficher le nom
 
 \layout Standard
 
-
-\color red
-?
+Introduisez le nom qui sera visible par l'utilisateur
 \end_inset 
 </cell>
 </row>
@@ -232,6 +246,8 @@ Afficher le nom
 \layout Standard
 
 Base
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -239,9 +255,7 @@ Base
 
 \layout Standard
 
-
-\color red
-?
+Faites votre sélection dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -259,9 +273,26 @@ Description
 
 \layout Standard
 
+Introduisez une description, un commentaire sur la macro téléphonique
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
 
-\color red
-?
+\layout Standard
+
+Visible pour l'utilisateur
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Cochez si vous voulez que la macro apparaisse lors de la séléction des macros
+ téléphoniques
 \end_inset 
 </cell>
 </row>
@@ -271,7 +302,7 @@ Description
 
 \layout Standard
 
-Visible for user
+Texte de la macro
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -279,9 +310,7 @@ Visible for user
 
 \layout Standard
 
-
-\color red
-?
+Contenu de la macro à exécuter
 \end_inset 
 </cell>
 </row>
@@ -290,23 +319,13 @@ Visible for user
 \end_inset 
 
 
-\layout Itemize
-\added_space_top medskip 
-Macro text
 \layout Subsection
 \added_space_top bigskip 
-Parameter
-\layout Standard
-
-
-\color red
-?
+Paramètres
 \layout Subsection
 \added_space_top bigskip 
 Références
 \layout Standard
 
-
-\color red
-?
+Les références résument les relations existantes entre objets.
 \the_end

@@ -50,8 +50,8 @@
 
 
 \series bold 
-EXTENSIONS
+GERER LDAP
 \layout Section
 
-LDAP manager
+GERER LDAP
 \the_end

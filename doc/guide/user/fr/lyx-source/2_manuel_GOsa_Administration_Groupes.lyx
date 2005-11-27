@@ -55,7 +55,7 @@
 
 
 \series bold 
-ADMINISTRATION
+ADMINISTRATION DES GROUPES
 \layout Section
 
 Groupes
@@ -74,7 +74,7 @@ Administration
  La page 
 \family sans 
 \color black
-Administration du groupe
+Administration des groupes
 \family default 
  s'affiche.
  
@@ -87,14 +87,15 @@ La page est divisée en trois colonnes :
 
 
 \color black
--La première colonne est destinée à afficher la liste des groupes, 
+-La première colonne est destinée à afficher la liste des groupes ou des
+ départements, 
 \layout Standard
 
 
 \color black
--les deux dernières colonnes contiennent des icônes qui sont d'une part
- les raccourcis vers les propriétés du groupe et d'autre part les actions
- à executer sur le groupe.
+-les deux dernières colonnes contiennent des icônes.
+ Elles représentent les raccourcis vers les propriétés du groupe et les
+ actions à exécuter sur le groupe.
 \layout Standard
 
 
@@ -118,7 +119,7 @@ La page est divisée en trois colonnes :
 \end_inset 
 
  ) servent à modifier l'affichage selon le département, elles prédominent
- sur toutes autres formes de séléction d'affichage.
+ sur toutes autres formes de sélection d'affichage.
 \layout Standard
 \added_space_top medskip 
 C'est à partir de la page 
@@ -127,7 +128,7 @@ C'est à partir de la page
 Administration du groupe
 \family default 
 \color default
- que l'administrateur gère la liste des groupes constitués pour la société.
+ que l'administrateur gère la liste des groupes de la société.
 \layout Standard
 
 Comme pour les utilisateurs, il est possible de modifier l'affichage des
@@ -146,12 +147,12 @@ Pour la recherche sur les noms :
 \begin_deeper 
 \layout Standard
 
-- cliquer sur l'astérisque (étoile : *) pour voir apparaître tous les groupes;
- 
+- cliquer sur l'astérisque (ou étoile : *) pour voir apparaître tous les
+ groupes; 
 \layout Standard
 
-- cliquez sur une lettre, la lettre L par exemple et tous les groupes commençant
- par la lettre L seront affichés; 
+- cliquez sur une lettre et tous les groupes commençant par cette lettre
+ seront affichés; 
 \layout Standard
 
 - cliquez sur un numéro, les groupes ayant un nom débutant par le numéro
@@ -164,9 +165,20 @@ Pour la recherche à partir des propriétés du groupe il suffit :
 \layout Standard
 
 - de cocher une ou plusieurs propositions; 
+\end_deeper 
+\layout Itemize
+
+Pour la recherche d'un nom à partir d'une lettre :
+\begin_deeper 
 \layout Standard
 
-- de remplir les champs et de cliquer sur le bouton Appliquer.
+- remplir le premier champ avec une lettre suivi de l'astérisque, cliquer
+ sur le bouton Appliquer, tous les noms débutant par cettre lettre seront
+ affichés,
+\layout Standard
+
+- remplir le deuxième champ avec une lettre suivi de l'astérisque, cliquer
+ sur le bouton Appliquer, tous les noms contenant cette lettre seront affichés.
 \end_deeper 
 \layout Standard
 
@@ -180,9 +192,11 @@ Pour créer un groupe l'administrateur doit cliquer sur le bouton
 \layout Standard
 
 Apparaît alors l'espace de configuration.
- Les onglets sont les extensions apportées à GOsa.
- L'administrateur configure ces extensions pour chaque groupe.
- A chaque extension configurée, pour enregistrer les modifications, cliquer
+ L'administrateur configure les extensions pour chaque groupe.
+ 
+\layout Standard
+
+A chaque extension configurée, pour enregistrer les modifications, cliquer
  sur le bouton Terminé et pour revenir à la page précédente cliquer sur
  le bouton Annuler.
 \layout Standard
@@ -191,23 +205,7 @@ Tous les champs précédés d'une astérisque doivent être remplis obligatoirement.
 \layout Standard
 
 En haut à droite une série d'information vous est donnée : le nom du groupe
- sur lequel vous êtes occupés, et sa place dans l'arbre LDAP.
-\layout Standard
-
-L'image 
-\begin_inset Graphics
-	filename images/closedlock.png
-
-\end_inset 
-
- signale que vous êtes en mode sécurisé.
-\layout Standard
-
-Le premier onglet est l'onglet 
-\series bold 
-informations générales
-\series default 
-.
+ sur lequel vous êtes occupé, et sa place dans l'arbre LDAP.
 \layout Subsection
 \pagebreak_top 
 Informations générales
@@ -235,7 +233,7 @@ Nom du groupe
 
 \layout Standard
 
-Insérez le nom du groupe.
+Introduisez le nom du groupe
 \end_inset 
 </cell>
 </row>
@@ -253,7 +251,7 @@ Description
 
 \layout Standard
 
-Insérez une description, un commentaire sur le groupe
+Introduisez une description, un commentaire sur le groupe
 \end_inset 
 </cell>
 </row>
@@ -273,7 +271,7 @@ Base
 
 \layout Standard
 
-Dans la liste déroulante faites le choix d'un département.
+Faites votre sélection dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -284,30 +282,31 @@ Dans la liste déroulante faites le choix d'un département.
 
 \layout Itemize
 
-Forcer le GID 
-\color red
-?
+Forcer le GID : Forcer le groupe à utiliser le numéro inscrit dans le champ.
 \layout Itemize
 
-Domaine 
-\color red
-?
+Groupe / Domaine Samba : Met les membres dans un groupe et un domaine samba
 \layout Itemize
 
-Groupe téléphonique 
-\color red
-?
+Groupe téléphonique : Met les membres dans un groupe téléphonique
 \layout Itemize
 
-Membre du groupe.
+Groupe Nagios : Met les membres dans un groupe nagios 
 \layout Standard
 
 L'administrateur insère les membres du personnel devant faire partie de
  ce groupe.
- Il suffit d'utiliser le bouton Ajouter qui renvoie à la liste des utilisateurs
- parmi lesquels l'administrateur doit sélectionner les futurs membres du
- groupe.
- Pour supprimer un membre, utiliser le bouton Supprimer.
+ Il suffit d'utiliser le bouton 
+\emph on 
+Ajouter
+\emph default 
+ qui renvoie à la liste des utilisateurs.
+ L'administrateur doit sélectionner les futurs membres du groupe.
+ Pour enlever un membre, utiliser le bouton 
+\emph on 
+Supprimer
+\emph default 
+.
 \layout Subsection
 \added_space_top bigskip 
 Environnement
@@ -317,7 +316,7 @@ Pour activer l'extension Environnement cliquer sur
 \shape italic 
 Ajouter l'extension environnement
 \shape default 
-.(en anglais dans Gosa)
+.
 \layout Subsubsection
 
 Profiles
@@ -348,13 +347,23 @@ Créer des applications
 .
 \layout Standard
 
-Les applications disponibles sont les applications existantes au sein de
- la société.
- L'administrateur dispose de la liste des applications dans le champ droit.
+L'administrateur dispose de la liste des applications dans la colonne Applicatio
+ns disponibles.
  Il peut attribuer une ou plusieurs applications à un groupe.
- Il suffit de cliquer sur le nom d'une application et d'utiliser les flèches
- pour faire voyager l'application d'un champ à l'autre.
- Pour terminé cliquer sur le bouton Editer les paramètres.
+ Il suffit de cliquer sur le nom d'une application celle ci apparaît dans
+ la colonne Applications utilisées.
+\layout Standard
+
+A l'aide du bouton Séparateur l'administrateur peut séparer de manière visuelle
+ une application par rapport aux autres.
+ 
+\layout Standard
+
+Pour terminer cliquer sur le bouton 
+\emph on 
+Terminer
+\emph default 
+.
 \layout Subsection
 \added_space_top bigskip 
 Mail
@@ -362,8 +371,12 @@ Mail
 
 Pour activer un compte mail cliquez sur 
 \shape italic 
-Créer un compte email
+Créer un compte
+\emph on 
+ 
 \shape default 
+de messagerie
+\emph default 
 .
 \layout Subsubsection
 
@@ -393,8 +406,10 @@ Adresse principale
 \layout Standard
 
 
+\color black
+Introduisez l'adresse principale du groupe
 \color red
-?
+ 
 \end_inset 
 </cell>
 </row>
@@ -413,8 +428,8 @@ Serveur
 \layout Standard
 
 
-\color red
-?
+\color black
+Sélectionnez le nom du serveur associé à cette adresse
 \end_inset 
 </cell>
 </row>
@@ -433,8 +448,13 @@ Utilisation des Quota
 \layout Standard
 
 
+\color black
+Précisez si vous désirez établir une limite au niveau de la quantité de
+ mail
 \color red
-?
+ 
+\color black
+entrant.
 \end_inset 
 </cell>
 </row>
@@ -453,8 +473,8 @@ Taille des Quota
 \layout Standard
 
 
-\color red
-?
+\color black
+Précisez en kb la taille du quota
 \end_inset 
 </cell>
 </row>
@@ -465,7 +485,23 @@ Taille des Quota
 
 \layout Subsubsection
 \added_space_top medskip 
-Alternative addresses
+Adresses alternatives
+\layout Standard
+
+Le mail peut être redirigé vers une ou plusieurs autres adresses.
+ Ces adresses sont des alias à insérer dans Adresses alternatives.
+ 
+\layout Standard
+
+Utilisez les boutons 
+\emph on 
+Ajouter
+\emph default 
+ ou 
+\emph on 
+Supprimer 
+\emph default 
+pour gérer les alias.
 \layout Subsubsection
 \added_space_top medskip 
 Répertoire partagé IMAP
@@ -491,8 +527,8 @@ Permission par défaut
 
 \layout Standard
 
-Choisissez dans la lise déroulante le type d'accès par défaut au répertoire
- IMAP
+Faites votre sélection dans la liste déroulante du type d'accès par défaut
+ au dossier IMAP
 \end_inset 
 </cell>
 </row>
@@ -510,8 +546,8 @@ Permission des membres
 
 \layout Standard
 
-Choisissez dans la liste déroulante le type d'accès accordés aux membres
- au répertoire IMAP
+Faites votre sélection dans la liste déroulante du type d'accès accordé
+ aux membres au dossier IMAP
 \end_inset 
 </cell>
 </row>
@@ -521,9 +557,6 @@ Choisissez dans la liste déroulante le type d'accès accordés aux membres
 
 \layout Standard
 
-
-\color red
-?
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -531,6 +564,8 @@ Choisissez dans la liste déroulante le type d'accès accordés aux membres
 
 \layout Standard
 
+L'administrateur peut ajouter à partir de ce champ d'autres adresses de
+ messagerie avec un droit d'accès au dossier IMAP
 \end_inset 
 </cell>
 </row>
@@ -541,28 +576,42 @@ Choisissez dans la liste déroulante le type d'accès accordés aux membres
 
 \layout Subsubsection
 \added_space_top medskip 
-Transférer le messages vers un membre n'appartenant pas au groupe
+Transférer les messages vers un membre n'appartenant pas au groupe
 \layout Standard
 
 Des utilisateurs peuvent recevoir les messages d'un groupe sans pour autant
  en être membre.
- Il suffit d'insérez les adresses de ces utilisateurs dans le champ qui
- précède les boutons Ajouter, Ajouter en local et Supprimer.
- Le bouton Ajouter en local renvoie aux adresses déjà configurées dans GOsa.
+ Il suffit d'insérer les adresses de ces utilisateurs dans le champ qui
+ précède les boutons 
+\emph on 
+Ajouter
+\emph default 
+, 
+\emph on 
+Ajouter en local
+\emph default 
+ et 
+\emph on 
+Supprimer
+\emph default 
+.
+ Le bouton 
+\emph on 
+Ajouter en local
+\emph default 
+ renvoie aux adresses déjà enregistrées dans GOsa.
 \layout Subsection
 \added_space_top bigskip 
 ACL
 \layout Standard
 
-
-\color red
-?
+Cette partie permet à l'administrateur de configurer les droits d'accès
+ de l'utilisateur ou du groupe aux différentes parties de GOsa.
+ 
 \layout Subsection
 \added_space_top bigskip 
 Références
 \layout Standard
 
-
-\color red
-?
+Les références résument les relations existantes entre objets.
 \the_end

@@ -55,7 +55,7 @@
 
 
 \series bold 
-ADMINISTRATION
+ADMINISTRATION DES LISTES ROUGES DE FAX
 \layout Section
 
 Liste Rouge des Fax
@@ -190,7 +190,9 @@ Informations générales
 
 \layout Standard
 
-Liste des noms
+
+\color black
+Nom de la liste
 \color red
 *
 \end_inset 
@@ -200,10 +202,7 @@ Liste des noms
 
 \layout Standard
 
-Insérez le nom de la liste des fax.
- 
-\color red
-ambigu ?
+Insérez le nom de la liste rouge des fax
 \end_inset 
 </cell>
 </row>
@@ -221,7 +220,8 @@ Base
 
 \layout Standard
 
-Choisissez dans la liste déroulante le département associé à la liste.
+Faites votre sélection dans la liste déroulante du département associé à
+ la liste
 \end_inset 
 </cell>
 </row>
@@ -240,7 +240,7 @@ Type
 \layout Standard
 
 Choisissez dans la liste déroulante si la liste rouge des fax s'applique
- en sortie ou en entrée.
+ en sortie ou en entrée
 \end_inset 
 </cell>
 </row>
@@ -274,13 +274,13 @@ Numéros bloqués
 
 L'administrateur doit insérer dans le champ inférieur les numéros de fax
  qui seront liés à la nouvelle liste rouge créee.
- Utilisez les boutons Ajouter et Supprimer pour la gestion de ces numéros.
-\layout Subsection
-\added_space_top bigskip 
-Information
-\layout Standard
-
-
-\color red
-?
+ Utilisez les boutons 
+\emph on 
+Ajouter
+\emph default 
+ et 
+\emph on 
+Supprimer
+\emph default 
+ pour la gestion de ces numéros.
 \the_end

@@ -55,17 +55,17 @@
 
 
 \series bold 
-ADMINISTRATION
+ADMINISTRATION DES CONFERENCES TELEPHONIQUES
 \layout Section
 
-Phone conferences
+Conférences téléphoniques
 \layout Standard
 
 L'administrateur peut configurer les phone conferences à partir du bouton
  
 \series bold 
 \color blue
-Phone conferences
+Conférences téléphoniques
 \series default 
 \color default
  dans le menu de gauche dans la partie 
@@ -75,7 +75,7 @@ Administration
 .
  La page 
 \family sans 
-Conference management
+Gestion des conférences
 \family default 
  s'affiche.
  
@@ -84,17 +84,17 @@ Conference management
 La page est divisée en quatre colonnes :
 \layout Standard
 
-- la première colonne est destinée à afficher les _,
+- la première colonne est destinée à afficher les noms ou numéros de conférence,
 \layout Standard
 
-- la deuxième _____
+- la deuxième colonne affiche le nom du propriétaire de la conférence,
 \layout Standard
 
-- la troisième _____
+- la troisième indique si il existe un code PIN pour la conférence,
 \layout Standard
 
 - la dernière colonne contient les icônes qui sont les actions que l'on
- peut executer sur ces _.
+ peut executer sur ces conférences.
 \layout Standard
 
 Les flêches en entête ( 
@@ -122,13 +122,14 @@ Les flêches en entête (
 \added_space_top medskip 
 C'est à partir de la page 
 \family sans 
-Conference management
+Gestion des conférences
 \family default 
- que l'administrateur gère les _ instaurées dans la société.
+ que l'administrateur gère les conférences téléphoniques organisées dans
+ la société.
 \layout Standard
 
-Il est possible de modifier l'affichage des _ en utilisant le tableau intitulé
- Filtres 
+Il est possible de modifier l'affichage des noms ou des numéros en utilisant
+ le tableau intitulé Filtres 
 \begin_inset Graphics
 	filename images/rocket.png
 
@@ -140,15 +141,16 @@ Il est possible de modifier l'affichage des _ en utilisant le tableau intitulé
 L'administrateur peut faire une recherche sur le nom :
 \layout Standard
 
-- cliquez sur l'astérisque (étoile : *) pour voir apparaître toutes _;
+- cliquez sur l'astérisque (étoile : *) pour voir apparaître tous les noms
+ et numéros;
 \layout Standard
 
-- cliquez sur une lettre et tous les noms des _ débutant par cette lettre
- s'afficheront;
+- cliquez sur une lettre et tous les noms des conférences téléphoniques
+ débutant par cette lettre s'afficheront;
 \layout Standard
 
-- cliquez sur un numéro et tous les noms des _ débutant par ce numéro s'afficher
-ont;
+- cliquez sur un numéro et tous les numéros des conférences téléponiques
+ débutant par ce numéro s'afficheront;
 \layout Standard
 
 - recherche rapide 
@@ -157,14 +159,18 @@ ont;
 
 \end_inset 
 
- : remplissez le champ par le nom de _ et ensuite cliquez sur le bouton
- Appliquer.
+ : remplissez le champ par le nom ou le numéro d'une conférence téléphonique
+ et ensuite cliquez sur le bouton 
+\emph on 
+Appliquer
+\emph default 
+.
 \layout Standard
 \added_space_top medskip 
-Pour créer et configurer _, l'administrateur doit cliquer sur le bouton
- 
+Pour créer et configurer une conférence téléphonique, l'administrateur doit
+ cliquer sur le bouton 
 \begin_inset Graphics
-	filename images/list_new_user.png
+	filename images/conference.png
 
 \end_inset 
 
@@ -174,8 +180,15 @@ Pour créer et configurer _, l'administrateur doit cliquer sur le bouton
 Apparaît l'espace de configuration.
 \layout Standard
 
-Pour enregistrer la configuration, cliquez sur le bouton Terminé, pour revenir
- à la page précédente cliquez sur le bouton Annuler.
+Pour enregistrer la configuration, cliquez sur le bouton 
+\emph on 
+Terminé
+\emph default 
+, pour revenir à la page précédente cliquez sur le bouton 
+\emph on 
+Annuler
+\emph default 
+.
 \layout Subsection
 \pagebreak_top 
 Informations générales
@@ -196,7 +209,9 @@ Propriétés
 
 \layout Standard
 
-Conference name
+
+\color black
+Nom de la conférence
 \color red
 *
 \end_inset 
@@ -206,9 +221,7 @@ Conference name
 
 \layout Standard
 
-Insérez le nom _ 
-\color red
-?
+Introduisez le nom de la conférence
 \end_inset 
 </cell>
 </row>
@@ -228,9 +241,7 @@ Type
 
 \layout Standard
 
-
-\color red
-?
+Faites votre sélection dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -250,9 +261,7 @@ Base
 
 \layout Standard
 
-
-\color red
-?
+Faites votre sélection dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -272,9 +281,7 @@ Description
 
 \layout Standard
 
-
-\color red
-?
+Introduisez une description, un commentaire sur la conférence
 \end_inset 
 </cell>
 </row>
@@ -284,7 +291,7 @@ Description
 
 \layout Standard
 
-Lifetime (in days)
+Durée (en jours)
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -292,9 +299,7 @@ Lifetime (in days)
 
 \layout Standard
 
-
-\color red
-?
+Introduisez la validité de la conférence
 \end_inset 
 </cell>
 </row>
@@ -304,7 +309,9 @@ Lifetime (in days)
 
 \layout Standard
 
-Numéros de téléphone
+Numéro de téléphone
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -312,9 +319,7 @@ Numéros de téléphone
 
 \layout Standard
 
-
-\color red
-?
+Introduisez le numéro de téléphone de la conférence
 \end_inset 
 </cell>
 </row>
@@ -328,74 +333,59 @@ Numéros de téléphone
 Options
 \layout Itemize
 
-Preset PIN
+Code PIN présélectionné
 \begin_deeper 
 \layout Standard
 
-
-\color red
-?
+Cochez si vous désirez qu'un code PIN prédéfini soit utilisé pour cette
+ conférence.
 \end_deeper 
 \layout Itemize
 
-Record conference
+Enregistrer la conférence
 \begin_deeper 
 \layout Standard
 
 Cochez si vous désirez enregistrer la conférence.
- 
-\color red
-?
 \end_deeper 
 \layout Itemize
 
-Play music on hold
+Musique d'attente
 \begin_deeper 
 \layout Standard
 
-
-\color red
-?
+Cochez si vous désirez activer la musique d'attente.
 \end_deeper 
 \layout Itemize
 
-Activate session menu
+Activer le menu de session
 \begin_deeper 
 \layout Standard
 
-
-\color red
-?
+Cochez si vous désirez activer le menu de session.
 \end_deeper 
 \layout Itemize
 
-Announce users joining or leaving the conference
+Annoncer les nouveaux utilisateurs et ceux qui quittent
 \begin_deeper 
 \layout Standard
 
 Cochez si vous désirez qu'une annonce soit faite lorsque un participant
  rejoint ou quitte la conférence.
- 
-\color red
-?
 \end_deeper 
 \layout Itemize
 
-Count users
+Compter les utilisateurs
 \begin_deeper 
 \layout Standard
 
-Cochez si vous désirez compter ls participants.
- 
-\color red
-?
+Cochez si vous désirez compter les participants.
 \end_deeper 
 \layout Subsection
 \added_space_top bigskip 
 Références
 \layout Standard
 
-
-\color red
-?
+Les références résument les relations existantes entre objets.
+ 
 \the_end

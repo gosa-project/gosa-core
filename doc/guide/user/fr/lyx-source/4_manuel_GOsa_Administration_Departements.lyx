@@ -55,7 +55,7 @@
 
 
 \series bold 
-ADMINISTRATION
+ADMINISTRATION DES DEPARTEMENTS
 \layout Section
 
 Départements
@@ -215,7 +215,7 @@ Nom du département
 
 \layout Standard
 
-Insérez le nom du département.
+Introduisez le nom du département.
 \end_inset 
 </cell>
 </row>
@@ -234,10 +234,8 @@ Description
 \begin_inset Text
 
 \layout Standard
-
-
-\color red
-Quel type de description, pourquoi est-elle obligatoire?
+\align left 
+Introduisez une description, un commentaire sur le département
 \end_inset 
 </cell>
 </row>
@@ -255,9 +253,6 @@ Catégorie
 
 \layout Standard
 
-
-\color red
-?
 \end_inset 
 </cell>
 </row>
@@ -277,11 +272,7 @@ Base
 
 \layout Standard
 
-
-\color red
-?
-\color default
- (on peut l'associer à un autre département ?)
+Faites votre sélection dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -295,7 +286,7 @@ Base
 Lieu
 \layout Standard
 
-Dans le cas d'une société possedant plusieurs départements sur des sites
+Dans le cas d'une société possédant plusieurs départements sur des sites
  séparés.
 \layout Standard
 
@@ -319,7 +310,7 @@ Département
 
 \layout Standard
 
-Nom du département
+Introduisez le nom du département
 \end_inset 
 </cell>
 </row>
@@ -337,7 +328,7 @@ Lieu
 
 \layout Standard
 
-Endroit ou est situé le département
+Introduisez l'endroit ou est situé le département
 \end_inset 
 </cell>
 </row>
@@ -355,7 +346,7 @@ Adresse
 
 \layout Standard
 
-Insérez l'adresse du département
+Introduisez l'adresse du département
 \end_inset 
 </cell>
 </row>
@@ -373,7 +364,7 @@ Téléphone
 
 \layout Standard
 
-Téléphone central du département
+Introduisez le téléphone central du département
 \end_inset 
 </cell>
 </row>
@@ -391,7 +382,7 @@ Fax
 
 \layout Standard
 
-Fax central du département
+Introduisez le fax central du département
 \end_inset 
 </cell>
 </row>
@@ -405,4 +396,5 @@ Fax central du département
 Références
 \layout Standard
 
+Les références résument les relations existantes entre objets.
 \the_end

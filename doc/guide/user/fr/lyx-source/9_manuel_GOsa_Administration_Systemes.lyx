@@ -50,7 +50,7 @@
 
 
 \series bold 
-ADMINISTRATION
+ADMINISTRATION DES SYSTEMES
 \layout Section
 
 Systèmes
@@ -1053,9 +1053,7 @@ Cet onglet donne un compte rendu de l'état du système.
 Références
 \layout Standard
 
-
-\color red
-?
+Les références résument les relations existantes entre objets.
 \layout Subsection
 \pagebreak_top 
 Configurer une station de travail
@@ -1881,9 +1879,7 @@ Cet onglet donne un compte rendu de l'état du système.
 Références
 \layout Standard
 
-
-\color red
-?
+Les références résument les relations existantes entre objets.
 \layout Subsection
 \pagebreak_top 
 Configurer un serveur
@@ -2507,9 +2503,7 @@ Cet onglet donne un compte rendu de l'état du système.
 Références
 \layout Standard
 
-
-\color red
-?
+Les références résument les relations existantes entre objets.
 \layout Subsection
 \pagebreak_top 
 Configurer une imprimante
@@ -2519,6 +2513,9 @@ Informations générales
 \layout Subsubsection
 \added_space_top bigskip 
 Références
+\layout Standard
+
+Les références résument les relations existantes entre objets.
 \layout Subsection
 \pagebreak_top 
 Configurer un téléphone
@@ -3029,9 +3026,7 @@ Adresse MAC
 Références
 \layout Standard
 
-
-\color red
-?
+Les références résument les relations existantes entre objets.
 \layout Subsection
 \pagebreak_top 
 Configuration d'un composant
@@ -3175,7 +3170,5 @@ Adresse MAC
 Références
 \layout Standard
 
-
-\color red
-?
+Les références résument les relations existantes entre objets.
 \the_end
