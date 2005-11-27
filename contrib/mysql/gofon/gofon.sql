@@ -1,4 +1,5 @@
 create database asteriskcdrdb;
+use asteriskcdrdb;
 
 create table cdr (
   calldate datetime NOT NULL default '0000-00-00 00:00:00',
@@ -18,4 +19,6 @@ create table cdr (
   uniqueid varchar(32) NOT NULL default '',
   userfield varchar(255) NOT NULL default ''
 );
+
+GRANT INSERT,SELECT ON asteriskcdrdb.cdr TO asterisk@localhost IDENTIFIED BY 'somemysqlpass';
 

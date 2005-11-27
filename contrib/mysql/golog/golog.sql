@@ -1,5 +1,6 @@
 
-create database golog with owner gomon;
+create database golog;
+use golog;
 
 create table golog (
 	time_stamp DATETIME,
@@ -10,4 +11,4 @@ create table golog (
 	matched_ts DATETIME
 	);
 
-GRANT ALL PRIVILEGES ON golog TO gomon WITH GRANT OPTION;
+GRANT INSERT,SELECT,DELETE ON golog.golog TO gomon@localhost IDENTIFIED BY 'somemysqlpass';
