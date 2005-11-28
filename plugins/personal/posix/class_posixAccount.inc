@@ -63,7 +63,7 @@ class posixAccount extends plugin
   /* attribute list for save action */
   var $attributes= array("homeDirectory", "loginShell", "uidNumber", "gidNumber", "gecos",
       "shadowMin", "shadowMax", "shadowWarning", "shadowInactive", "shadowLastChange",
-      "shadowExpire", "gosaDefaultPrinter", "gosaDefaultLanguage", "uid");
+      "shadowExpire", "gosaDefaultPrinter", "gosaDefaultLanguage", "uid","accessTo","trustModel");
   var $objectclasses= array("posixAccount", "shadowAccount");
 
 
@@ -96,6 +96,8 @@ class posixAccount extends plugin
         $this->was_trust_account= FALSE;
         $this->trustModel= "";
       }
+	 
+	  $this->accessTo = array(); 
       if ($this->is_account && isset($this->attrs['accessTo'])){
         for ($i= 0; $i<$this->attrs['accessTo']['count']; $i++){
           $tmp= $this->attrs['accessTo'][$i];
@@ -572,11 +574,11 @@ class posixAccount extends plugin
     if (!$this->initially_was_account){
       return;
     }
-    
+
     /* include global link_info */
     $ldap= $this->config->get_ldap_link();
-
-    /* Remove and write to LDAP */
+    
+	/* Remove and write to LDAP */
     plugin::remove_from_parent();
 
     /* Zero out array */
@@ -584,6 +586,7 @@ class posixAccount extends plugin
 
     /* Keep uid, because we need it for authentification! */
     unset($this->attrs['uid']);
+    unset($this->attrs['trustModel']);
 
     @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
         $this->attributes, "Save");
@@ -1016,6 +1019,13 @@ class posixAccount extends plugin
       $this->primaryGroup= $this->gidNumber;
     }
 
+	$ldap->cd($this->config->current['BASE']);
+    $ldap->search("(&(objectClass=gosaUserTemplate)(uid=".$template."))", array("cn","accessTo"));
+	while($attr = $ldap->fetch()){
+		$tmp = $attr['accessTo'];
+		unset ($tmp['count']);
+		$this->accessTo = $tmp;	
+	}
 	
     /* Adjust shadow checkboxes */
     foreach (array("shadowMin", "shadowMax", "shadowWarning", "shadowInactive",
