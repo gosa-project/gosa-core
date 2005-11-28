@@ -978,6 +978,48 @@ class sambaAccount extends plugin
     plugin::adapt_from_template($dn);
     $this->sambaSID= "";
     $this->sambaPrimaryGroupSID= "";
+
+      /* Fill mungedDial field */
+    if ($this->samba3 && isset($this->attrs['sambaMungedDial'])){
+      $this->mungedObject->load($this->sambaMungedDial);
+    }
+
+    /* Password expiery */
+    if(isset($this->attrs['sambaPwdMustChange']) &&
+        $this->attrs['sambaPwdMustChange'][0] != 0){
+      $this->password_expires= 1;
+    }
+
+    if(isset($this->attrs['sambaLogonTime']) && ! (
+        $this->attrs['sambaLogonTime'][0] == 0 ||
+        $this->attrs['sambaLogonTime'][0] == 2147483647
+      )){
+      $this->logon_time_set= 1;
+    }
+    if(isset($this->attrs['sambaLogoffTime']) && ! (
+        $this->attrs['sambaLogoffTime'][0] == 0 ||
+        $this->attrs['sambaLogoffTime'][0] == 2147483647
+      )){
+      $this->logoff_time_set= 1;
+    }
+
+    /* Account expiery */
+    if(isset($this->attrs['sambaKickoffTime']) && ! (
+        $this->attrs['sambaKickoffTime'][0] == 0 ||
+        $this->attrs['sambaKickoffTime'][0] == 2147483647
+      )){
+      $this->kickoff_time_set= 1;
+    }
+
+    /* Get global filter config */
+    if (!is_global("sambafilter")){
+      $ui= get_userinfo();
+      $base= get_base_from_people($ui->dn);
+      $sambafilter= array( "depselect" => $base, "regex" => "*");
+      register_global("sambafilter", $sambafilter);
+    }
+
+
   }
 
 }
