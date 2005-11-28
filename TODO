@@ -15,6 +15,10 @@ face these:
   "Uninitialized string offset: 0". Clicking there a second time, does
   not produce errors
 
+* Check "rgrep FIXME *", especially the ACL issues
+
+* Fix problem with non-existing entries in the package list
+
 
 Target for 2.5:
 ===============
