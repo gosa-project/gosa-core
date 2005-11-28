@@ -6,6 +6,7 @@ face these:
 
 * Make "Fax reports", "Phone reports", "Syslog" and "Mailqueue" look
   identical if nothing is defined. Mailqueue is the reference.
+	(if nothing is defined ?)
 
 * Check the LDAP manager. The "Back" links are not working (logout) and
   should be replaced by a "Back" button.

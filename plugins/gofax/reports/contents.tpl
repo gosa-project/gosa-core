@@ -42,14 +42,14 @@
    <td>{$range_selector}</td>
   </tr>
  </table>
+<p class="plugbottom">
+ &nbsp;
+</p>
 
 {else}
   <b>{t}Search returned no results...{/t}</b>
 {/if}
 
-<p class="plugbottom">
- &nbsp;
-</p>
 
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">

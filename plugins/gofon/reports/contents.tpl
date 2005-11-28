@@ -44,13 +44,12 @@
   </tr>
  </table>
 
-{else}
-  <b>{t}Search returned no results...{/t}</b>
-{/if}
-
 <p class="plugbottom">
  &nbsp;
 </p>
+{else}
+  <b>{t}Search returned no results...{/t}</b>
+{/if}
 
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
