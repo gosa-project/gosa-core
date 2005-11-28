@@ -81,9 +81,9 @@ function genIndex($arr)
     $file = "index.html";
     $path = $plug;
     if($exists){
-      $str .= "<p style='padding-left:20px;'><a href='?plug=".$id."'><b>".$name."</b></a></p>";
+      $str .= "<p style='padding-left:20px;'><a href='?plug=".$id."'><b>"._($name)."</b></a></p>";
     }else{
-      $str .= "<p style='padding-left:20px;'><b>".$name."</b> ("._("No help available for this plugin.").")</p>";
+      $str .= "<p style='padding-left:20px;'><b>"._($name)."</b> ("._("No help available for this plugin.").")</p>";
     }
   }
   return utf8_decode($str);
