@@ -103,7 +103,7 @@ if(isset($_SESSION['current_class_for_help'])){
   
   /* Generate help array */
   $str = $xml->parse();
-  
+
   /* __LANG__ is used as placeholder for the used language*/
   $helpdir= preg_replace("/__LANG__/i",$lang,$str[($_SESSION['current_class_for_help'])]['PATH']);
 
@@ -125,7 +125,9 @@ if(isset($_SESSION['current_class_for_help'])){
   $helpobject['currentplug']  = $helpdir;
   
   /* Avoid displaying the same help every time */
-  unset($_SESSION['current_class_for_help']);
+  if(isset($_GET['pg'])){
+    unset($_SESSION['current_class_for_help']);
+  }
 
 }elseif(isset($_GET['plug'])){
   /* This displays helpfiles depending on the current $_GET[plug] */
