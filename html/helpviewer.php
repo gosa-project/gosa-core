@@ -186,7 +186,7 @@ if(isset($_POST['search'])){
   $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
 
   /* I don't know why, but we must use utf8_encode to avoid dispplay errors */
-  $display= utf8_encode(  $header.$smarty->fetch(get_template_path('help.tpl')));
+  $display= (  $header.$smarty->fetch(get_template_path('help.tpl')));
   echo $display;
 }elseif(((empty($helpdir)))||($helpdir=="/")){
   /* Generate Index and display it */

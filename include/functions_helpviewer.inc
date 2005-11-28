@@ -86,7 +86,7 @@ function genIndex($arr)
       $str .= "<p style='padding-left:20px;'><b>"._($name)."</b> ("._("No help available for this plugin.").")</p>";
     }
   }
-  return utf8_decode($str);
+  return (utf8_decode($str));
 }
 
 
@@ -452,14 +452,14 @@ function createResultEntry($entry,$res,$name,$max)
           <table summary=\"\"  width=\"98%\" align=\"center\">
             <tr>
               <td height=15>
-                <b>".$entry['headline']."</b> -".htmlentities(substr(strip_tags($entry['content']),0,120))."...
+                <b>".utf8_encode($entry['headline'])."</b> -".utf8_encode(substr(strip_tags($entry['content']),0,120))."...
               </td>
               <td width=50 valign=\"top\">".progressbar($percentage,50,8)."</td>
              </tr>
              <tr>
               <td colspan=2>
                 <b>
-                  ".htmlentities(sprintf(_("%s%% hit rate in file %s"),$percentage,$name))."
+                  ".(sprintf(_("%s%% hit rate in file %s"),$percentage,$name))."
                 </b>
               </td>
             </tr>
