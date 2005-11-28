@@ -1,5 +1,4 @@
 <?php
-error_reporting(0);
 /*
    This code is part of GOsa (https://gosa.gonicus.de)
    Copyright (C) 2003  Cajus Pollmeier, Fabian Hickert
@@ -20,10 +19,11 @@ error_reporting(0);
  */
 
 /* Include classes and configs */
-require_once ("../include/php_setup.inc");
-require_once ("functions.inc");
-require_once ("functions_helpviewer.inc");
+@require_once ("../include/php_setup.inc");
+@require_once ("functions.inc");
+@require_once ("functions_helpviewer.inc");
 
+error_reporting(0);
 header("Content-type: text/html; charset=UTF-8");
 session_start();
 
@@ -117,7 +117,7 @@ if(isset($_SESSION['current_class_for_help'])){
     unset($_SESSION['current_class_for_help']);
     exit();  
   }
-  
+ 
   /* Save filename */
   $helpobject['file']= $str[($_SESSION['current_class_for_help'])]['FILE'];
   
