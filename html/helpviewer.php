@@ -112,7 +112,7 @@ if(isset($_SESSION['current_class_for_help'])){
     
     $smarty->assign("help_contents","<br><h2>"._("There is no helpfile specified for this class."))."</h2>";
     $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
-    $display= utf8_encode(  $header.$smarty->fetch(get_template_path('help.tpl')));
+    $display= (  $header.$smarty->fetch(get_template_path('help.tpl')));
     echo $display;
     unset($_SESSION['current_class_for_help']);
     exit();  
@@ -222,7 +222,7 @@ if(isset($_POST['search'])){
   /* There was a file requested which actually doesn't exists */
   $smarty->assign("help_contents","<h2>".sprintf(_("Helpdir '%s' is not accessible, can't read any helpfiles."),$helpdir))."</h2><br>";
   $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
-  $display= utf8_encode(  $header.$smarty->fetch(get_template_path('help.tpl')));
+  $display= (  $header.$smarty->fetch(get_template_path('help.tpl')));
   echo $display;
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
