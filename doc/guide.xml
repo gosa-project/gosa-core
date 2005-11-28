@@ -9,150 +9,129 @@ specified for this class below.
 		 Leave blank to display massage "There is no helpfile specified for this class."	
 	-->
 	<!-- Generic -->
-	<ENTRY name="generic"  			value="Generic" 		path="" file="" >
+<ENTRIES>
+	<ENTRY name="generic"  			value="Generic" 		path="" file="" />
 	<!-- Administration -->
-	<ENTRY name="userManagement"	value="Users" 			path="../doc/guide/user/__LANG__/html/users" file="index.html" >
-	<ENTRY name="user"          	value="User"            path="../doc/guide/user/__LANG__/html/users" file="node2.html" >
-	<ENTRY name="posixAccount"     	value="Unix"            path="../doc/guide/user/__LANG__/html/users" file="node5.html" >
-	<ENTRY name="environment"   	value="Environment"     path="../doc/guide/user/__LANG__/html/users" file="node10.html" >
-	<ENTRY name="mailAccount"   	value="Mail"            path="../doc/guide/user/__LANG__/html/users" file="node17.html" >
-	<ENTRY name="sambaAccount"  	value="Samba"           path="../doc/guide/user/__LANG__/html/users" file="node22.html" >
-	<ENTRY name="connectivity"  	value="Connectivity"    path="../doc/guide/user/__LANG__/html/users" file="node26.html" >
-	<ENTRY name="gofaxAccount"  	value="Fax"             path="../doc/guide/user/__LANG__/html/users" file="node32.html" >
-	<ENTRY name="phoneAccount"  	value="Phone account"   path="../doc/guide/user/__LANG__/html/users" file="node37.html" >
+	<ENTRY name="userManagement"	value="Users" 			path="../doc/guide/user/__LANG__/html/users" file="index.html" />
+	<ENTRY name="user"          	value="User"            path="../doc/guide/user/__LANG__/html/users" file="node2.html" />
+	<ENTRY name="posixAccount"     	value="Unix"            path="../doc/guide/user/__LANG__/html/users" file="node5.html" />
+	<ENTRY name="environment"   	value="Environment"     path="../doc/guide/user/__LANG__/html/users" file="node10.html" />
+	<ENTRY name="mailAccount"   	value="Mail"            path="../doc/guide/user/__LANG__/html/users" file="node17.html" />
+	<ENTRY name="sambaAccount"  	value="Samba"           path="../doc/guide/user/__LANG__/html/users" file="node22.html" />
+	<ENTRY name="connectivity"  	value="Connectivity"    path="../doc/guide/user/__LANG__/html/users" file="node26.html" />
+	<ENTRY name="gofaxAccount"  	value="Fax"             path="../doc/guide/user/__LANG__/html/users" file="node32.html" />
+	<ENTRY name="phoneAccount"  	value="Phone account"   path="../doc/guide/user/__LANG__/html/users" file="node37.html" />
 
-	<ENTRY NAME="password" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="webdavAccount" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="intranetAccount" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="proxyAccount" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="pureftpdAccount" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="phpgwAccount" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="kolabAccount" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="oxchangeAccount" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="pptpAccount" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="phpscheduleitAccount" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="hotplugDialog" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="kioskManagementDialog" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="selectPrinterDialog" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="logonManagementDialog" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="nagiosAccount" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="blocklist" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="faxreport" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="addressbook" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="csvimport" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="ldiftab" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="ldifimport" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="ldif" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="ldifexport" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="xlsexport" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="logview" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="group" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="mailgroup" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="acl" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="grouptabs" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="appgroup" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="groupManagement" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="usertabs" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="apptabs" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="applicationParameters" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="applicationManagement" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="application" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="deptabs" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="departmentManagement" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="department" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="terminfo" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="wintabs" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="componenttabs" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="servtabs" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="servservice" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="wingeneric" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="printtabs" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="termservice" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="termstartup" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="termtabs" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="servdb" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="selectUserToPrinterDialog" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="printerPPDDialog" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="termgeneric" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="servgeneric" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="servdhcp" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="workgeneric" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="systems" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="printgeneric" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="servdns" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="servnfs" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="servkolab" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="worktabs" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="phonetabs" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="componentGeneric" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="workstartup" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="phoneGeneric" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="printerPPDSelectionDialog" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="workservice" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="termgroup" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="ogrouptabs" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="phonequeue" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="ogroup" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="ogroupManagement" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="mailogroup" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="faiPackageNew" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="faiScript" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="tabsHook" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="faiPackageEntry" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="faiTemplate" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="faiManagement" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="tabsPartition" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="faiScriptEntry" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="faiHookEntry" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="tabsVariable" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="faiPackage" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="faiProfile" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="tabsPackage" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="faiHook" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="faiPartitionTableEntry" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="tabsProfile" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="faiVariableEntry" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="tabsScript" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="tabsTemplate" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="faiPartitionTable" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="faiProfileEntry" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="askClassName" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="faiPackageConfiguration" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="faiVariable" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="faiTemplateEntry" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="gofonMacro" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="macrotabs" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="macro" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="macroParameter" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="fonreport" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="conference" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="conferencetabs" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="phoneConferenceManagment" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="reference" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="mailMethodCyrus" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="certificate" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="mailMethod" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="config" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="passwordMethodMd5" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="passwordMethodClear" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="tabs" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="Print_a_class" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="userinfo" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="plugin" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="passwordMethodssha" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="passwordMethodCrypt" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="passwordMethod" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="pluglist" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="passwordMethodkerberos" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="passwordMethodsmd5" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="mailMethodKolab" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="sieve" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="passwordMethodsha" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="sambaMungedDial" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="parseXml" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="divlist" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="LDAP" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="ppdManager" VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="mailMethodSendmailCyrus" VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="faiPackageNew" 				VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="faiScript" 					VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="faiPackageEntry" 				VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="faiTemplate" 					VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="faiManagement" 				VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="faiScriptEntry" 				VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="faiHookEntry" 					VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="faiPackage" 					VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="faiProfile" 					VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="faiHook" 						VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="faiPartitionTableEntry" 		VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="faiVariableEntry" 				VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="faiPartitionTable" 			VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="faiProfileEntry" 				VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="askClassName" 					VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="faiPackageConfiguration" 		VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="faiVariable" 					VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="faiTemplateEntry" 				VALUE="" PATH="" FILE="" />
 
+	<ENTRY NAME="ppdManager" 					VALUE="" PATH="" FILE="" />
+
+	<ENTRY NAME="password" 						VALUE="Password" 			PATH="../doc/guide/user/__LANG__/html/users" FILE="node41.html" />
+
+	<ENTRY NAME="hotplugDialog" 				VALUE="Hotplug device" 		PATH="../doc/guide/user/__LANG__/html/users" FILE="node15.html" />
+	<ENTRY NAME="kioskManagementDialog" 		VALUE="Kiosk profile"		PATH="../doc/guide/user/__LANG__/html/users" FILE="node12.html" />
+	<ENTRY NAME="selectPrinterDialog" 			VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="logonManagementDialog" 		VALUE="Logon scripts"		PATH="../doc/guide/user/__LANG__/html/users" FILE="node13.html" />
+	<ENTRY NAME="nagiosAccount" 				VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="blocklist" 					VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="faxreport" 					VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="addressbook" 					VALUE="" PATH="" FILE="" />
+
+	<ENTRY NAME="csvimport" 					VALUE="CSV import" 			PATH="../doc/guide/user/__LANG__/html/ldapmanager" FILE="index.html" />
+	<ENTRY NAME="ldifimport" 					VALUE="Ldif import" 		PATH="../doc/guide/user/__LANG__/html/ldapmanager" FILE="index.html" />
+	<ENTRY NAME="ldifexport" 					VALUE="Ldif export" 		PATH="../doc/guide/user/__LANG__/html/ldapmanager" FILE="index.html" />
+	<ENTRY NAME="xlsexport" 					VALUE="Xls export" 			PATH="../doc/guide/user/__LANG__/html/ldapmanager" FILE="index.html" />
+
+	<ENTRY NAME="logview" 						VALUE="Log view" 			PATH="../doc/guide/user/__LANG__/html/logview" FILE="logview.html" />
+
+	<ENTRY NAME="mailgroup" 					VALUE="Mail group" 			PATH="../doc/guide/user/__LANG__/html/groups" FILE="node11.html" />
+	
+	<ENTRY NAME="appgroup" 						VALUE="Application group"   PATH="../doc/guide/user/__LANG__/html/groups" FILE="node11.html" />
+	<ENTRY NAME="groupManagement" 				VALUE="Groups" 				PATH="../doc/guide/user/__LANG__/html/groups" FILE="index.html" />
+	<ENTRY NAME="applicationParameters" 		VALUE="Application" 		PATH="../doc/guide/user/__LANG__/html/applications" FILE="index.html" />
+	<ENTRY NAME="applicationManagement" 		VALUE="Application"	 		PATH="../doc/guide/user/__LANG__/html/applications" FILE="index.html" />
+	<ENTRY NAME="application" 					VALUE="Application" 		PATH="../doc/guide/user/__LANG__/html/applications" FILE="index.html" />
+
+	<ENTRY NAME="departmentManagement" 			VALUE="Department" 			PATH="../doc/guide/user/__LANG__/html/departments" FILE="index.html" />
+	<ENTRY NAME="department" 					VALUE="Department" 			PATH="../doc/guide/user/__LANG__/html/departments" FILE="index.html" />
+
+	<ENTRY NAME="terminfo" 						VALUE="Terminal info" 		PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
+	<ENTRY NAME="termservice" 					VALUE="Terminal service" 	PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
+	<ENTRY NAME="termgeneric" 					VALUE="Terminal generic" 	PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
+	<ENTRY NAME="termgroup" 					VALUE="Terminal group" 		PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
+	<ENTRY NAME="termstartup" 					VALUE="Terminal startup" 	PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
+
+	<ENTRY NAME="servservice" 					VALUE="Service" 			PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
+	<ENTRY NAME="servdb" 						VALUE="Datebases"		 	PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
+	<ENTRY NAME="servgeneric" 					VALUE="Generic" 			PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
+	<ENTRY NAME="servdhcp" 						VALUE="DHCP" 				PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
+	<ENTRY NAME="servdns" 						VALUE="DNS" 				PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
+	<ENTRY NAME="servnfs" 						VALUE="NFS" 				PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
+	<ENTRY NAME="servkolab" 					VALUE="Kolab" 				PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
+	
+	<ENTRY NAME="workgeneric" 					VALUE="Generic" 			PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
+	<ENTRY NAME="workstartup" 					VALUE="Startup" 			PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
+	<ENTRY NAME="workservice" 					VALUE="Service" 			PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
+	
+	<ENTRY NAME="wingeneric" 					VALUE="Generic" 			PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
+
+	<ENTRY NAME="phoneGeneric" 					VALUE="Generic" 			PATH="../doc/guide/user/__LANG__/html/users"   FILE="node37.html" />
+	<ENTRY NAME="phonequeue" 					VALUE="Phone queue" 		PATH="../doc/guide/user/__LANG__/html/ogroups" FILE="index.html" />
+	<ENTRY NAME="conference" 					VALUE="Phone conference" 	PATH="../doc/guide/user/__LANG__/html/conference" FILE="index.html" />
+	<ENTRY NAME="phoneConferenceManagment" 		VALUE="Phone conference" 	PATH="../doc/guide/user/__LANG__/html/conference" FILE="index.html" />
+
+	<ENTRY NAME="gofonMacro" 					VALUE="Phone macro" 		PATH="../doc/guide/user/__LANG__/html/macro" FILE="index.html" />
+	<ENTRY NAME="macro" 						VALUE="Phone macro" 		PATH="../doc/guide/user/__LANG__/html/macro" FILE="index.html" />
+	<ENTRY NAME="macroParameter" 				VALUE="Phone macro" 		PATH="../doc/guide/user/__LANG__/html/macro" FILE="index.html" />
+
+	<ENTRY NAME="ogroup" 						VALUE="Object group" 		PATH="../doc/guide/user/__LANG__/html/ogroups" FILE="index.html" />
+	<ENTRY NAME="ogroupManagement" 				VALUE="Object group" 		PATH="../doc/guide/user/__LANG__/html/ogroups" FILE="index.html" />
+	<ENTRY NAME="mailogroup" 					VALUE="Object group" 		PATH="../doc/guide/user/__LANG__/html/ogroups" FILE="index.html" />
+	
+	<ENTRY NAME="selectUserToPrinterDialog" 	VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="printerPPDSelectionDialog" 	VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="printerPPDDialog" 				VALUE="" PATH="" FILE="" />
+
+	<ENTRY NAME="printgeneric" 					VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="componentGeneric" 				VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="fonreport" 					VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="reference" 					VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="certificate" 					VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="config" 						VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="userinfo" 						VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="sieve" 						VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="sambaMungedDial" 				VALUE="" PATH="" FILE="" />
+
+
+	<ENTRY NAME="passwordMethodssha" 				VALUE="Passwort" PATH="../doc/guide/user/__LANG__/html/users" FILE="node41.html" />
+	<ENTRY NAME="passwordMethodCrypt" 				VALUE="Passwort" PATH="../doc/guide/user/__LANG__/html/users" FILE="node41.html" />
+	<ENTRY NAME="passwordMethod" 					VALUE="Passwort" PATH="../doc/guide/user/__LANG__/html/users" FILE="node41.html" />
+	<ENTRY NAME="passwordMethodsha" 				VALUE="Passwort" PATH="../doc/guide/user/__LANG__/html/users" FILE="node41.html" />
+	<ENTRY NAME="passwordMethodsmd5" 				VALUE="Passwort" PATH="../doc/guide/user/__LANG__/html/users" FILE="node41.html" />
+	<ENTRY NAME="passwordMethodkerberos" 			VALUE="Passwort" PATH="../doc/guide/user/__LANG__/html/users" FILE="node41.html" />
+	<ENTRY NAME="passwordMethodMd5" 				VALUE="Passwort" PATH="../doc/guide/user/__LANG__/html/users" FILE="node41.html" />
+	<ENTRY NAME="passwordMethodClear" 				VALUE="Passwort" PATH="../doc/guide/user/__LANG__/html/users" FILE="node41.html" />
+
+	<ENTRY NAME="mailMethod" 						VALUE="Mail" PATH="../doc/guide/user/__LANG__/html/users" FILE="node17.html" />
+	<ENTRY NAME="mailMethodKolab" 					VALUE="Mail" PATH="../doc/guide/user/__LANG__/html/users" FILE="node17.html" />
+	<ENTRY NAME="mailMethodSendmailCyrus" 			VALUE="Mail" PATH="../doc/guide/user/__LANG__/html/users" FILE="node17.html" />
+	<ENTRY NAME="mailMethodCyrus" 					VALUE="Mail" PATH="../doc/guide/user/__LANG__/html/users" FILE="node17.html" />
+</ENTRIES>
 
