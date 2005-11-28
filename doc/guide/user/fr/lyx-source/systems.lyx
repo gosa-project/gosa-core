@@ -79,11 +79,11 @@ Administration du système
 La page est divisée en deux colonnes :
 \layout Standard
 
-- la première colonne est destinée à afficher les _,
+- la première colonne est destinée à afficher les systèmes,
 \layout Standard
 
 - la deuxième colonne contient les icônes qui sont les actions que l'on
- peut executer sur ces _.
+ peut exécuter sur ces systèmes.
 \layout Standard
 
 Les flêches en entête ( 
@@ -113,11 +113,11 @@ C'est à partir de la page
 \family sans 
 Administration du système
 \family default 
- que l'administrateur gère les _ instaurées dans la société.
+ que l'administrateur gère les systèmes.
 \layout Standard
 
-Il est possible de modifier l'affichage des _ en utilisant le tableau intitulé
- Filtres 
+Il est possible de modifier l'affichage des systèmes en utilisant le tableau
+ intitulé Filtres 
 \begin_inset Graphics
 	filename images/rocket.png
 
@@ -129,15 +129,15 @@ Il est possible de modifier l'affichage des _ en utilisant le tableau intitulé
 L'administrateur peut faire une recherche sur le nom :
 \layout Standard
 
-- cliquez sur l'astérisque (étoile : *) pour voir apparaître toutes _;
+- cliquez sur l'astérisque (étoile : *) pour voir apparaître tous les systèmes;
 \layout Standard
 
-- cliquez sur une lettre et tous les noms des _ débutant par cette lettre
- s'afficheront;
+- cliquez sur une lettre et tous les noms de systèmes débutant par cette
+ lettre s'afficheront;
 \layout Standard
 
-- cliquez sur un numéro et tous les noms des _ débutant par ce numéro s'afficher
-ont.
+- cliquez sur un numéro et tous les noms de systèmes débutant par ce numéro
+ s'afficheront.
 \layout Standard
 
 L'administrateur peut faire une recherche à partir du type de système :
@@ -152,17 +152,12 @@ Ou encore la recherche rapide
 
 \end_inset 
 
- : remplissez le champ par le nom de _ et ensuite cliquez sur le bouton
- Appliquer.
-\layout Standard
-
-Et aussi le bouton 
-\color red
-?
-\color default
- display systems 
-\color red
-?
+ : remplissez le champ par le nom du système et ensuite cliquez sur le bouton
+ 
+\emph on 
+Appliquer
+\emph default 
+.
 \layout Standard
 \added_space_top medskip 
 Pour sélectionner un système à configurer, l'administrateur doit cliquer
@@ -220,14 +215,21 @@ Pour sélectionner un système à configurer, l'administrateur doit cliquer
 
 \end_inset 
 
- pour ouvrire, créer ou configurer un composant.
+ pour ouvrir, créer ou configurer un composant réseau.
 \layout Standard
 
 Apparaît l'espace de configuration pour ces systèmes.
 \layout Standard
 
-Pour enregistrer la configuration, cliquez sur le bouton Terminé, pour revenir
- à la page précédente cliquez sur le bouton Annuler.
+Pour enregistrer la configuration, cliquez sur le bouton 
+\emph on 
+Terminé
+\emph default 
+, pour revenir à la page précédente cliquez sur le bouton 
+\emph on 
+Annuler
+\emph default 
+.
 \layout Subsection
 \pagebreak_top 
 Configurer un terminal
@@ -259,11 +261,6 @@ Modèle de terminaux
 
 \layout Standard
 
-
-\color red
-?
-\color black
- Y a-t-il un choix à faire.
 \end_inset 
 </cell>
 </row>
@@ -283,7 +280,7 @@ Base
 
 \layout Standard
 
-Sélection d'un département dans la liste déroulante.
+Faites votre séléction dans la liste déroulante.
  Le terminal sera associé à ce département.
 \end_inset 
 </cell>
@@ -294,7 +291,7 @@ Sélection d'un département dans la liste déroulante.
 
 \layout Standard
 
-Serveur Root
+Serveur Primaire
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -302,9 +299,7 @@ Serveur Root
 
 \layout Standard
 
-
-\color red
-?
+Sélectionnez le serveur primaire dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -322,9 +317,7 @@ Serveur de Swap
 
 \layout Standard
 
-
-\color red
-?
+Sélectionnez le serveur de swap dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -342,7 +335,7 @@ Mode
 
 \layout Standard
 
-Sélection du mode dans la liste déroulante.
+Faites votre séléction dans la liste déroulante.
  L'administrateur peut désactiver le terminal ou choisir le mode d'affichage
  adéquat.
 \end_inset 
@@ -362,9 +355,7 @@ Serveur de logs systèmes
 
 \layout Standard
 
-
-\color red
-?
+Sélectionnez le serveur de logs dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -382,9 +373,7 @@ Seveur NTP
 
 \layout Standard
 
-
-\color red
-?
+Sélectionnez le serveur de temps dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -418,9 +407,7 @@ Adresse IP
 
 \layout Standard
 
-
-\color red
-?
+Adresse IP du terminal
 \end_inset 
 </cell>
 </row>
@@ -438,9 +425,7 @@ Adresse MAC
 
 \layout Standard
 
-
-\color red
-?
+Adresse MAC du terminal
 \end_inset 
 </cell>
 </row>
@@ -454,12 +439,10 @@ Adresse MAC
 Action
 \layout Standard
 
-
-\color red
-?
+Choisissez l'action à exécuter sur le terminal.
 \layout Subsubsection
 \added_space_top bigskip 
-Equipements
+Périphériques
 \layout Subsubsection*
 
 Clavier
@@ -485,7 +468,7 @@ Modèle
 
 \layout Standard
 
-Sélectionnez le modèle du clavier dans la liste déroulante.
+Sélectionnez le modèle du clavier dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -503,7 +486,7 @@ Disposition
 
 \layout Standard
 
-Sélectionnez la langue du clavier dans la liste déroulante.
+Sélectionnez la langue du clavier dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -521,9 +504,7 @@ Variante
 
 \layout Standard
 
-
-\color red
-?
+Sélectionnez la particularité du clavier
 \end_inset 
 </cell>
 </row>
@@ -557,7 +538,7 @@ Type
 
 \layout Standard
 
-Sélectionnez le modèle de la souris dans la liste déroulante.
+Sélectionnez le modèle de la souris dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -575,10 +556,7 @@ Port
 
 \layout Standard
 
-Sélectionnez le port sur lequel sera branché la souris dans la liste déroulante.
- 
-\color red
-?
+Sélectionnez le port sur lequel sera branchée la souris dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -593,10 +571,10 @@ Matériel téléphonique
 \layout Standard
 
 Précisez de quel type de téléphone il s'agit.
- (pour un terminal ?)
+ 
 \layout Subsubsection*
 \added_space_top medskip 
-Périphérique graphique
+Carte graphique
 \layout Standard
 
 
@@ -619,9 +597,7 @@ Pilote
 
 \layout Standard
 
-
-\color red
-?
+Sélectionner le pilote de la carte graphique
 \end_inset 
 </cell>
 </row>
@@ -657,9 +633,7 @@ Profondeur des couleurs
 
 \layout Standard
 
-
-\color red
-?
+Sélectionner le nombre de couleurs à afficher
 \end_inset 
 </cell>
 </row>
@@ -693,9 +667,6 @@ Type
 
 \layout Standard
 
-
-\color red
-?
 \end_inset 
 </cell>
 </row>
@@ -713,9 +684,7 @@ Fréquence de synchronisation Horizontale
 
 \layout Standard
 
-
-\color red
-?
+Indiquez la fréquence
 \end_inset 
 </cell>
 </row>
@@ -725,7 +694,7 @@ Fréquence de synchronisation Horizontale
 
 \layout Standard
 
-VSync
+Fréquence de synchronisation Verticale
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -733,9 +702,7 @@ VSync
 
 \layout Standard
 
-
-\color red
-?
+Indiquez la fréquence
 \end_inset 
 </cell>
 </row>
@@ -769,9 +736,7 @@ Méthode de connexion
 
 \layout Standard
 
-
-\color red
-?
+Sélectionnez le protocole utilisé dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -789,9 +754,7 @@ Serveur de terminaux
 
 \layout Standard
 
-
-\color red
-?
+Sélectionnez le serveur du terminal dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -809,9 +772,7 @@ Police du serveur
 
 \layout Standard
 
-
-\color red
-?
+Sélectionnez le serveur de police dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -845,9 +806,7 @@ Fournir un service d'impression
 
 \layout Standard
 
-
-\color red
-?
+Cochez pour indiquer si le terminal peut imprimer
 \end_inset 
 </cell>
 </row>
@@ -865,9 +824,7 @@ Serveur de file d'attente
 
 \layout Standard
 
-
-\color red
-?
+Sélectionnez le serveur d'impression dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -901,9 +858,7 @@ Fournir un service de scanner
 
 \layout Standard
 
-
-\color red
-?
+Cochez pour indiquer si le terminal peut scanner
 \end_inset 
 </cell>
 </row>
@@ -921,7 +876,7 @@ Modèle
 
 \layout Standard
 
-Sélectionnez le modèle du scanner dans la liste déroulante.
+Sélectionnez le modèle du scanner dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -958,7 +913,7 @@ Serveur LDAP
 
 \layout Standard
 
-?
+Sélectionnez le serveur ldap correspondant dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -976,7 +931,7 @@ Kernel utilisé au démarrage
 
 \layout Standard
 
-?
+Nom du kernel utilisé au démarrage
 \end_inset 
 </cell>
 </row>
@@ -994,7 +949,7 @@ Options personnalisées
 
 \layout Standard
 
-?
+Options à passer au kernel lors du démarrage
 \end_inset 
 </cell>
 </row>
@@ -1003,48 +958,250 @@ Options personnalisées
 \end_inset 
 
 
-\layout Standard
+\layout Itemize
 
-Trois points à expliquer
+Cochez pour sélectionnez le mode de démarrage, par défaut le mode graphique
+ est activé.
 \layout Subsubsection*
 \added_space_top medskip 
 Modules du kernel (format : nom paramètre)
 \layout Standard
 
-
-\color red
-?
-\layout Standard
-
-Utiliser le bouton Ajouter après avoir rempli le champ qui le précède et
- le bouton Supprimer après avoir séléctionné dans la liste.
+Introduisez le nom du module à charger au démarrage suivi de ses paramètres,
+ ensuite cliquez sur 
+\emph on 
+Ajouter
+\emph default 
+.
+ Utilisez le bouton 
+\emph on 
+Supprimer
+\emph default 
+ après avoir sélectionné le module.
 \layout Subsubsection*
 \added_space_top medskip 
-Périphérique Automount (format : entrée complète de autofs)
+Partages
 \layout Standard
 
-
-\color red
-?
-\layout Standard
-
-Utiliser le bouton Ajouter après avoir rempli le champ qui le précède et
- le bouton Supprimer après avoir séléctionné dans la liste.
-\layout Subsubsection*
-\added_space_top medskip 
-Entrée fstab supplémentaire
-\layout Standard
-
-
-\color red
-?
-\layout Standard
-
-Utiliser le bouton Ajouter après avoir rempli le champ qui le précède et
- le bouton Supprimer après avoir séléctionné dans la liste.
+Utilisez le bouton 
+\emph on 
+Supprimer
+\emph default 
+ après avoir sélectionné le partage.
 \layout Subsubsection
 \added_space_top bigskip 
-Surveillance
+Imprimante
+\layout Subsubsection*
+
+Général
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Nom de l'imprimante
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le nom de l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Description
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez une description, un commentaire sur l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Base
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Faites votre sélection dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Détails
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="7cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="8cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+\align left 
+Localisation de l'imprimante
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Indiquez le lieu où se trouve physiquement l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+URL de l'imprimante
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'url qui permet d'accéder à l'imprimante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Itemize
+
+Le bouton 
+\emph on 
+Editer
+\emph default 
+ permet de télécharger un pilote d'imprimante depuis votre arborescence.
+ Utilisez le bouton 
+\emph on 
+Supprimer
+\emph default 
+ pour effacer le pilote choisi.
+\layout Subsubsection*
+\added_space_top medskip 
+Permissions
+\layout Standard
+
+L'administrateur peut donner la permission à un utilisateur ou à un groupe
+ d'utiliser et/ou d'administrer une imprimante.
+\layout Standard
+
+Le bouton 
+\emph on 
+Ajouter un utilisateur
+\emph default 
+ renvoie à la liste des utilisateurs et le bouton 
+\emph on 
+Ajouter un groupe
+\emph default 
+ renvoie à la liste des groupes.
+\layout Subsubsection*
+\added_space_top medskip 
+Configuration réseau
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse IP
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'adresse IP de l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse MAC
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'adresse MAC de l'imprimante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection
+\added_space_top bigskip 
+Information
 \layout Standard
 
 Cet onglet donne un compte rendu de l'état du système.
@@ -1067,7 +1224,7 @@ Propriétés
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="7" columns="2">
+<lyxtabular version="3" rows="5" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
@@ -1085,11 +1242,6 @@ Modèle de station de travail
 
 \layout Standard
 
-
-\color red
-?
-\color black
- Y a-t-il un choix à faire.
 \end_inset 
 </cell>
 </row>
@@ -1110,47 +1262,7 @@ Base
 \layout Standard
 
 Sélection d'un département dans la liste déroulante.
- Le terminal sera associé à ce département.
-\end_inset 
-</cell>
-</row>
-<row topline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Serveur Root
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-
-\color red
-?
-\end_inset 
-</cell>
-</row>
-<row topline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Serveur de Swap
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-
-\color red
-?
+ La station de travail sera associée à ce département.
 \end_inset 
 </cell>
 </row>
@@ -1169,8 +1281,8 @@ Mode
 \layout Standard
 
 Sélection du mode dans la liste déroulante.
- L'administrateur peut désactiver le terminal ou choisir le mode d'affichage
- adéquat.
+ L'administrateur peut activer la station, verrouiller la station ou effectuer
+ un test mémoire.
 \end_inset 
 </cell>
 </row>
@@ -1188,9 +1300,7 @@ Serveur de logs systèmes
 
 \layout Standard
 
-
-\color red
-?
+Sélectionnez le serveur de logs dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -1208,9 +1318,7 @@ Seveur NTP
 
 \layout Standard
 
-
-\color red
-?
+Sélectionnez le serveur de temps dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -1244,9 +1352,7 @@ Adresse IP
 
 \layout Standard
 
-
-\color red
-?
+Adresse IP de la station de travail
 \end_inset 
 </cell>
 </row>
@@ -1264,9 +1370,7 @@ Adresse MAC
 
 \layout Standard
 
-
-\color red
-?
+Adresse MAC de la station de travail
 \end_inset 
 </cell>
 </row>
@@ -1280,12 +1384,10 @@ Adresse MAC
 Action
 \layout Standard
 
-
-\color red
-?
+Choisissez l'action à exécuter sur le poste de travail.
 \layout Subsubsection
 \added_space_top bigskip 
-Equipements
+Périphériques
 \layout Subsubsection*
 
 Clavier
@@ -1311,7 +1413,7 @@ Modèle
 
 \layout Standard
 
-Sélectionnez le modèle du clavier dans la liste déroulante.
+Sélectionnez le modèle du clavier dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -1329,7 +1431,7 @@ Disposition
 
 \layout Standard
 
-Sélectionnez la langue du clavier dans la liste déroulante.
+Sélectionnez la langue du clavier dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -1347,9 +1449,7 @@ Variante
 
 \layout Standard
 
-
-\color red
-?
+Sélectionnez la particularité du clavier
 \end_inset 
 </cell>
 </row>
@@ -1383,7 +1483,7 @@ Type
 
 \layout Standard
 
-Sélectionnez le modèle de la souris dans la liste déroulante.
+Sélectionnez le modèle de la souris dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -1401,10 +1501,7 @@ Port
 
 \layout Standard
 
-Sélectionnez le port sur lequel sera branché la souris dans la liste déroulante.
- 
-\color red
-?
+Sélectionnez le port sur lequel sera branchée la souris dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -1419,10 +1516,10 @@ Matériel téléphonique
 \layout Standard
 
 Précisez de quel type de téléphone il s'agit.
- (pour un terminal ?)
+ 
 \layout Subsubsection*
 \added_space_top medskip 
-Périphérique graphique
+Carte graphique
 \layout Standard
 
 
@@ -1445,9 +1542,7 @@ Pilote
 
 \layout Standard
 
-
-\color red
-?
+Sélectionner le pilote de la carte graphique
 \end_inset 
 </cell>
 </row>
@@ -1465,7 +1560,8 @@ Résolution
 
 \layout Standard
 
-Sélectionnez la résolution de l'écran du terminal dans la liste déroulante.
+Sélectionnez la résolution de l'écran de la station de travail dans la liste
+ déroulante.
 \end_inset 
 </cell>
 </row>
@@ -1483,9 +1579,7 @@ Profondeur des couleurs
 
 \layout Standard
 
-
-\color red
-?
+Sélectionner le nombre de couleurs à afficher
 \end_inset 
 </cell>
 </row>
@@ -1519,9 +1613,6 @@ Type
 
 \layout Standard
 
-
-\color red
-?
 \end_inset 
 </cell>
 </row>
@@ -1539,9 +1630,7 @@ Fréquence de synchronisation Horizontale
 
 \layout Standard
 
-
-\color red
-?
+Indiquez la fréquence
 \end_inset 
 </cell>
 </row>
@@ -1551,7 +1640,7 @@ Fréquence de synchronisation Horizontale
 
 \layout Standard
 
-VSync
+Fréquence de synchronisation Verticale
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1559,141 +1648,7 @@ VSync
 
 \layout Standard
 
-
-\color red
-?
-\end_inset 
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset 
-
-
-\layout Subsubsection*
-\added_space_top medskip 
-Bureau distant
-\layout Standard
-
-
-\begin_inset  Tabular
-<lyxtabular version="3" rows="3" columns="2">
-<features>
-<column alignment="block" valignment="top" leftline="true" width="5cm">
-<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
-<row topline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Méthode de connexion
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-
-\color red
-?
-\end_inset 
-</cell>
-</row>
-<row topline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Serveur de terminaux
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-
-\color red
-?
-\end_inset 
-</cell>
-</row>
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Police du serveur
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-
-\color red
-?
-\end_inset 
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset 
-
-
-\layout Subsubsection*
-\added_space_top medskip 
-Imprimante
-\layout Standard
-
-
-\begin_inset  Tabular
-<lyxtabular version="3" rows="2" columns="2">
-<features>
-<column alignment="block" valignment="top" leftline="true" width="6cm">
-<column alignment="block" valignment="top" leftline="true" rightline="true" width="9cm">
-<row topline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Fournir un service d'impression
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-
-\color red
-?
-\end_inset 
-</cell>
-</row>
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Serveur de file d'attente
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-
-\color red
-?
+Indiquez la fréquence
 \end_inset 
 </cell>
 </row>
@@ -1709,11 +1664,11 @@ Scanner
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="2" columns="2">
+<lyxtabular version="3" rows="1" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="6cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="9cm">
-<row topline="true">
+<row topline="true" bottomline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
@@ -1727,27 +1682,7 @@ Fournir un service de scanner
 
 \layout Standard
 
-
-\color red
-?
-\end_inset 
-</cell>
-</row>
-<row topline="true" bottomline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Modèle
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Sélectionnez le modèle du scanner dans la liste déroulante.
+Cochez pour indiquer si la station de travail peut scanner
 \end_inset 
 </cell>
 </row>
@@ -1784,7 +1719,7 @@ Serveur LDAP
 
 \layout Standard
 
-?
+Sélectionnez le serveur ldap correspondant dans la liste déroulante
 \end_inset 
 </cell>
 </row>
@@ -1802,7 +1737,7 @@ Kernel utilisé au démarrage
 
 \layout Standard
 
-?
+Nom du kernel utilisé au démarrage
 \end_inset 
 </cell>
 </row>
@@ -1820,7 +1755,7 @@ Options personnalisées
 
 \layout Standard
 
-?
+Options à passer au kernel lors du démarrage
 \end_inset 
 </cell>
 </row>
@@ -1829,48 +1764,268 @@ Options personnalisées
 \end_inset 
 
 
+\layout Itemize
+
+Cochez pour sélectionnez le mode de démarrage, par défaut le mode graphique
+ est activé.
+\layout Subsubsection*
+\added_space_top medskip 
+Serveur FAI
 \layout Standard
 
-Trois points à expliquer ...
+Sélectionnez le serveur FAI dans la liste déroulante pour le démarrage initial
+ de la station de travail.
+\layout Subsubsection*
+\added_space_top medskip 
+Liste des classes FAI utilisées
+\layout Standard
+
+Utilisez le bouton 
+\emph on 
+Ajouter
+\emph default 
+ pour sélectionner la liste des classes FAI utilisées pour cette station
+ de travail.
 \layout Subsubsection*
 \added_space_top medskip 
 Modules du kernel (format : nom paramètre)
 \layout Standard
 
-
-\color red
-?
-\layout Standard
-
-Utiliser le bouton Ajouter après avoir rempli le champ qui le précède et
- le bouton Supprimer après avoir séléctionné dans la liste.
+Introduisez le nom du module à charger au démarrage suivi de ses paramètres,
+ ensuite cliquez sur 
+\emph on 
+Ajouter
+\emph default 
+.
+ Utilisez le bouton 
+\emph on 
+Supprimer
+\emph default 
+ après avoir sélectionné le module.
 \layout Subsubsection*
 \added_space_top medskip 
-Périphérique Automount (format : entrée complète de autofs)
+Partages
 \layout Standard
 
-
-\color red
-?
-\layout Standard
-
-Utiliser le bouton Ajouter après avoir rempli le champ qui le précède et
- le bouton Supprimer après avoir séléctionné dans la liste.
-\layout Subsubsection*
-\added_space_top medskip 
-Entrée fstab supplémentaire
-\layout Standard
-
-
-\color red
-?
-\layout Standard
-
-Utiliser le bouton Ajouter après avoir rempli le champ qui le précède et
- le bouton Supprimer après avoir séléctionné dans la liste.
+Utilisez le bouton 
+\emph on 
+Supprimer
+\emph default 
+ après avoir sélectionné le partage.
 \layout Subsubsection
 \added_space_top bigskip 
-Surveillance
+Imprimante
+\layout Subsubsection*
+
+Général
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Nom de l'imprimante
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le nom de l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Description
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez une description, un commentaire sur l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Base
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Faites votre sélection dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Détails
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="7cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="8cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+\align left 
+Localisation de l'imprimante
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Indiquez le lieu où se trouve physiquement l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+URL de l'imprimante
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'url qui permet d'accéder à l'imprimante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Itemize
+
+Le bouton 
+\emph on 
+Editer
+\emph default 
+ permet de télécharger un pilote d'imprimante depuis votre arborescence.
+ Utilisez le bouton 
+\emph on 
+Supprimer
+\emph default 
+ pour effacer le pilote choisi.
+\layout Subsubsection*
+\added_space_top medskip 
+Permissions
+\layout Standard
+
+L'administrateur peut donner la permission à un utilisateur ou à un groupe
+ d'utiliser et/ou d'administrer une imprimante.
+\layout Standard
+
+Le bouton 
+\emph on 
+Ajouter un utilisateur
+\emph default 
+ renvoie à la liste des utilisateurs et le bouton 
+\emph on 
+Ajouter un groupe
+\emph default 
+ renvoie à la liste des groupes.
+\layout Subsubsection*
+\added_space_top medskip 
+Configuration réseau
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse IP
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'adresse IP de l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse MAC
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'adresse MAC de l'imprimante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection
+\added_space_top bigskip 
+Information
 \layout Standard
 
 Cet onglet donne un compte rendu de l'état du système.
