@@ -4,8 +4,6 @@ Things to fix before 2.4:
 Showed up by a small review. Since we've time until the doc is ready,
 face these:
 
-* Check templates for variables that are not taken over
-
 * Make "Fax reports", "Phone reports", "Syslog" and "Mailqueue" look
   identical if nothing is defined. Mailqueue is the reference.
 
