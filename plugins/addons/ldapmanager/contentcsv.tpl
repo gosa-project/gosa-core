@@ -36,19 +36,18 @@
     	 <b style="color:red">{t}Oups. There was an error during the import of your data.{/t}</b>
 	{/if}
 
-<b>{t}Here is the status report for the import:{/t}</b>
+<b>{t}Here is the status report for the import{/t} : </b>
 <br>
 <br>
 
 
 	<table summary="" cellspacing="1" border=0 cellpadding="4"  bgcolor="#FEFEFE">
 		<tr>
-			{section name=head loop=$head}
+			{foreach from=$head item=h}
 			<td bgcolor="#BBBBBB">
-				<b>{$head[$i]}</b>
+				<b>{$h}</b>
 			</td>
-			<!--{$i++}-->
-			{/section}
+			{/foreach}
 		</tr>
 		{if $pointsbefore == TRUE}
 		<tr>
@@ -58,21 +57,15 @@
 		</tr>
 		{/if}
 		
-		
-		
-		
-		{section name=row loop=$rows}
-		
+		{foreach from=$data item=row key=key}	
 		<tr>
-			{section name=coll loop=$cols}
+			{foreach from=$data[$key] item=col key=key2}
 			<td bgcolor="#EEEEEE">
-				{$data[$ie]}
+				{$data[$key][$key2]}
 			</td>
-			<!--{$ie++}-->
-			{/section}
-			
+			{/foreach}
 		</tr>
-		{/section}
+		{/foreach}
 	    {if $pointsafter == TRUE}
 	    <tr>
 	        <td colspan={$i} bgcolor = "#EEEEEE">
@@ -89,24 +82,23 @@
 <br>
 	<table summary="" cellspacing="1" border=0 cellpadding="4" bgcolor="#FEFEFE">
 		<tr>
-			{section name=attr loop=$anz}
+			{foreach from=$data[0] item=item key=key}
 			<td bgcolor="#BBBBBB">
-				<select name="row{$ia++}" size="1" title="">
-		    		 {html_options options=$attrs selected=$selectedattrs[$ia]}
+				<select name="row{$key}" size="1" title="">
+		    		 {html_options options=$attrs selected=$selectedattrs[$key]}
 				</select>
 			</td>
-			{/section}
+			{/foreach}
 		</tr>
-		{section name=row loop=$rows}
+		{foreach from=$data item=val key=key}
 		<tr>
-			{section name=coll loop=$anz}
+			{foreach from=$data[$key] item=val2 key=key2}
 			<td bgcolor="#EEEEEE">
-				{$data[$i]}&nbsp;
+				{$data[$key][$key2]}&nbsp;
 			</td>
-			<!--{$i++}-->
-			{/section}
+			{/foreach}
 		</tr>
-		{/section}
+		{/foreach}
 		
 	</table>
 

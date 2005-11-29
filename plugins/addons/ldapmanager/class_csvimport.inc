@@ -32,6 +32,9 @@ class csvimport extends plugin
 
     /* initiate smarty */
     $smarty= get_smarty();
+    $smarty->assign("selectedattrs",array(0=>""));
+    $smarty->assign("data",array(0=>""));
+    $smarty->assign("head",array(0=>""));
     $smarty->assign("sorted",0);
     $smarty->assign("fileup",0);
 
@@ -86,7 +89,7 @@ class csvimport extends plugin
     }
 
     $arr_temp  = array_flip($this->csvinfo['attr']);
-    $this->csvinfo['arr_selected']= array(0,0,$arr_temp['uid'],$arr_temp['sn'],$arr_temp['givenName'],$arr_temp['userPassword']);
+    $this->csvinfo['arr_selected']= array($arr_temp['uid'],$arr_temp['sn'],$arr_temp['givenName'],$arr_temp['userPassword']);
 
     $smarty->assign("templates",$this->csvinfo['arrtemplates']);
     $smarty->assign("attrs",$this->csvinfo['attr']);
@@ -109,16 +112,16 @@ class csvimport extends plugin
         $this->csvinfo['sorteddata'][$i]=array(); 
 
         /* Go through every col */
-        for($a = 1; $a <= ($this->csvinfo['cols']+1); $a ++) {
+        for($a = 0; $a <= ($this->csvinfo['cols']); $a ++) {
           /* Append a status col at last, to show possibly errors */
-          if($a==($this->csvinfo['cols']+1)){
+          if($a==($this->csvinfo['cols'])){
             $this->csvinfo['sorteddata'][$i]["status"]="-";            
           } else {
             $cc = ($i * ($this->csvinfo['cols']))+$a;
 
             /* If theres a Attribut given for this col */
-            if(!empty($_POST[('row'.$a)])) {
-              $this->csvinfo['sorteddata'][$i][$this->csvinfo['attr'][$_POST[('row'.$a)]]]=$this->csvinfo['data'][($cc-1)]; 
+            if(!empty($_POST[('row'.($a))])) {
+              $this->csvinfo['sorteddata'][$i][$this->csvinfo['attr'][$_POST[('row'.($a))]]]=$this->csvinfo['data'][($cc)]; 
             }
           }
         }
@@ -147,7 +150,6 @@ class csvimport extends plugin
           /* Get elemenet */
           $dat = $this->csvinfo['sorteddata'][$i];
 
-
           /* If not all needed vars set .... */
           if(         ( empty($dat['sn']))||( empty($dat['givenName']))||( empty($dat['uid']))||
                       (!isset($dat['sn']))||(!isset($dat['givenName']))||(!isset($dat['uid']))){
@@ -163,6 +165,7 @@ class csvimport extends plugin
 
 
             /* Set all submitted vars  */
+            if(is_array($keys))
             foreach($keys as $key) {
               if($key != "status"){
                 $this->usertab->$key = $dat[$key];
@@ -176,6 +179,7 @@ class csvimport extends plugin
             } else {
 
               /* Reset vars */
+              if(is_array($keys))
               foreach($keys as $key) {
                 if($key != "status"){
                   $this->usertab->by_object['user']->$key = $dat[$key];
@@ -216,7 +220,7 @@ class csvimport extends plugin
 
         /* Get Attributs for Tableheadline  */
         $this->csvinfo['colsstr'] = array();
-        for($i =1; $i <= $this->csvinfo['cols']; $i++) {
+        for($i =0; $i <= $this->csvinfo['cols']; $i++) {
           if(!empty($_POST[('row'.$i)])){
             $this->csvinfo['colsstr'][$i] = $this->csvinfo['attr'][$_POST[('row'.$i)]];
           }
@@ -224,9 +228,13 @@ class csvimport extends plugin
 
         /*Create array with data for the template */
         if($failing == FALSE){
+
+          $dataouts= array();
           for($i =1; $i <= $this->csvinfo['shownrowscount']; $i++) {
-            foreach($this->csvinfo['sorteddata'][($i-1)] as $dat){
-              $dataouts[]=$dat;
+            if(is_array($this->csvinfo['sorteddata'][($i-1)])){
+              foreach($this->csvinfo['sorteddata'][($i-1)] as $dat){
+                $dataouts[]=$dat;
+              }
             }
           }
 
@@ -254,9 +262,12 @@ class csvimport extends plugin
 
           if($this->csvinfo['shownrowscount']> $this->csvinfo['rows'])$this->csvinfo['shownrowscount']=$this->csvinfo['rows'];
 
+          $dataouts = array(); 
           for($i =$begin; $i <= $end; $i++) {
-            foreach($this->csvinfo['sorteddata'][($i-1)] as $dat){
-              $dataouts[]=$dat;
+            if(is_array($this->csvinfo['sorteddata'][($i-1)])){
+              foreach($this->csvinfo['sorteddata'][($i-1)] as $dat){
+                $dataouts[]=$dat;
+              }
             }
           }
         }
@@ -274,8 +285,21 @@ class csvimport extends plugin
         $smarty->assign("anz" ,$this->csvinfo['count']);
         $smarty->assign("rows",$this->csvinfo['shownrowscount']);
 
+
+      $cnt = 0 ;
+      $tmp2 = $tmp3 = array();
+      if(is_array($dataouts))
+      foreach($dataouts as $tmp){
+        $tmp2[] = $tmp;
+        $cnt ++ ;
+        if($cnt >= count($tmparr2)){
+          $tmp3[] = $tmp2;
+          $tmp2= array();
+          $cnt = 0; 
+        }
+      }  
         $smarty->assign("head",$tmparr2);
-        $smarty->assign("data",$dataouts);
+        $smarty->assign("data",$tmp3);
 
         /* Set other vars  */
         $smarty->assign("i",1);
@@ -338,6 +362,7 @@ class csvimport extends plugin
           $data = array();
 
           /* check colum count */
+          if(is_array($lines))
           foreach($lines as $line) {
             /* continue if theres a comment */
             if(substr(trim($line),0,1)=="#"){
@@ -356,6 +381,7 @@ class csvimport extends plugin
           if($anz >1) {
 
             /* Generate array with outpu info  */
+          if(is_array($lines))
             foreach($lines as $line) {
               $rest = 0;
               $cnt  = 0;
@@ -372,6 +398,7 @@ class csvimport extends plugin
               $cells  = split(",",$line )  ;
 
               /* attach all elements to data array */
+              if(is_array($cells))
               foreach($cells as $cell) {
                 if(!empty($cell)) {
                   $cnt++; 
@@ -412,6 +439,20 @@ class csvimport extends plugin
             $this->csvinfo['count']       = count($this->csvinfo['data']);
             $this->csvinfo['rows']        = (count($this->csvinfo['data'])/$anz);
 
+            $i =  0; 
+            $tmp = $tmp2= array();
+            if(is_array($this->csvinfo['dataout']))
+            foreach($this->csvinfo['dataout'] as $dat){
+              $tmp[]= $dat;
+              $i++;
+              if($i >=$this->csvinfo['cols']){
+                $i = 0;
+                $tmp2[] = $tmp;
+                $tmp = array();
+              }
+
+            }
+
             /* Set Templateid  */
             $smarty->assign("tplid",$this->csvinfo['tplid']);
 
@@ -430,16 +471,14 @@ class csvimport extends plugin
 
             for($i  = 0 ; $i < $anz; $i ++)
               $this->csvinfo['arr_selected'][]="0";
-
-
+  
             $smarty->assign("selectedattrs",$this->csvinfo['arr_selected']);
-
 
             /* Entrie count5 */
             $smarty->assign("anz",$this->csvinfo['cols']);                                                    
 
             /* Array with data */
-            $smarty->assign("data",$this->csvinfo['dataout']);   
+            $smarty->assign("data",$tmp2);   
 
             @fclose($handle);
           } else {
