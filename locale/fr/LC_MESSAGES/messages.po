@@ -21,12 +21,13 @@
 # translation of messages.po to
 # translation of messages.po to
 # translation of messages.po to
+# translation of messages.po to
 # translation of messages.po to French
 # Benoit Mortier <benoit.mortier@opensides.be>, 2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
-"PO-Revision-Date: 2005-11-27 14:13+0100\n"
+"PO-Revision-Date: 2005-11-29 14:23+0100\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -223,8 +224,8 @@ msgstr "Exporter en Excel"
 #: contrib/gosa.conf:179 plugins/personal/mail/generic.tpl:112
 #: plugins/personal/environment/logonManagement.tpl:65
 #: plugins/addons/ldapmanager/contentimport.tpl:49
-#: plugins/addons/ldapmanager/contentcsv.tpl:117
-#: plugins/addons/ldapmanager/contentcsv.tpl:120
+#: plugins/addons/ldapmanager/contentcsv.tpl:109
+#: plugins/addons/ldapmanager/contentcsv.tpl:112
 #: plugins/admin/applications/generic.tpl:91
 msgid "Import"
 msgstr "Importer"
@@ -303,7 +304,7 @@ msgstr "Italien"
 msgid "There is no helpfile specified for this class."
 msgstr "Il n'y a pas de fichier d'aide spécifiée pour cette classe."
 
-#: html/helpviewer.php:221
+#: html/helpviewer.php:223
 #, php-format
 msgid "Helpdir '%s' is not accessible, can't read any helpfiles."
 msgstr ""
@@ -653,7 +654,7 @@ msgstr ""
 "Impossible de se connecter à l'annuaire LDAP. Veuillez contacter "
 "l'administrateur du système."
 
-#: html/index.php:144
+#: html/index.php:145
 msgid ""
 "GOsa cannot retrieve information about the installed schema files. Please "
 "make sure, that this is possible."
@@ -661,7 +662,7 @@ msgstr ""
 "GOsa ne peut pas obtenir d'informations sur les schémas installés. Veuillez "
 "vous assurez qu'il puisse les obtenir."
 
-#: html/index.php:152
+#: html/index.php:153
 msgid "Your ldap setup contains old schema definitions. Please re-run the setup."
 msgstr ""
 "Votre installation LDAP contient de vieux schémas. Veuillez recommencer "
@@ -689,7 +690,7 @@ msgstr "Veuillez introduire votre mot de passe!"
 msgid "Please check the username/password combination."
 msgstr "Veuillez vérifier le nom d'utilisateur et le mot de passe."
 
-#: html/index.php:227 ihtml/themes/altlinux/conflict.tpl:6
+#: html/index.php:227 html/index.php:287 ihtml/themes/altlinux/conflict.tpl:6
 #: ihtml/themes/altlinux/islocked.tpl:6 ihtml/themes/default/conflict.tpl:6
 #: ihtml/themes/default/islocked.tpl:6 plugins/gofax/blocklists/remove.tpl:2
 #: plugins/addons/addressbook/remove.tpl:2 plugins/admin/groups/remove.tpl:2
@@ -700,12 +701,16 @@ msgstr "Veuillez vérifier le nom d'utilisateur et le mot de passe."
 msgid "Warning"
 msgstr "Avertissement"
 
-#: html/index.php:227
+#: html/index.php:227 html/index.php:287
 msgid "Session will not be encrypted."
 msgstr "La session ne sera pas cryptée."
 
 #: html/index.php:227
 msgid "Enter SSL session"
+msgstr "Démarrer une session SSL"
+
+#: html/index.php:287
+msgid "Enter         SSL         session"
 msgstr "Démarrer une session SSL"
 
 #: ihtml/themes/altlinux/sizelimit.tpl:3 ihtml/themes/default/sizelimit.tpl:3
@@ -911,11 +916,9 @@ msgstr ""
 #: ihtml/themes/default/setup_step4.tpl:114
 #: ihtml/themes/default/setup_finish.tpl:30 include/functions.inc:1311
 #: plugins/personal/password/changed.tpl:12
-#: plugins/personal/generic/main.inc:169 plugins/gofax/reports/detail.tpl:68
-#: plugins/addons/ldapmanager/contentimport.tpl:44
-#: plugins/addons/ldapmanager/contentcsv.tpl:122
-#: plugins/addons/ldapmanager/contentexport.tpl:66
-#: plugins/addons/ldapmanager/contentexportxls.tpl:69
+#: plugins/personal/generic/main.inc:169
+#: plugins/gofax/faxreports/detail.tpl:68
+#: plugins/addons/ldapmanager/contentcsv.tpl:114
 msgid "Back"
 msgstr "Retour"
 
@@ -1169,7 +1172,7 @@ msgstr "Méthode de messagerie"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:91
 #: ihtml/themes/default/setup_step4.tpl:91
-#: plugins/personal/posix/class_posixAccount.inc:548
+#: plugins/personal/posix/class_posixAccount.inc:550
 #: plugins/personal/samba/class_sambaAccount.inc:453
 #: plugins/admin/systems/class_terminalGeneric.inc:62
 msgid "disabled"
@@ -1270,11 +1273,11 @@ msgstr "Aide en ligne de GOsa"
 msgid "Index"
 msgstr "Index"
 
-#: ihtml/themes/default/help.tpl:21 plugins/gofax/reports/contents.tpl:21
+#: ihtml/themes/default/help.tpl:21 plugins/gofax/faxreports/contents.tpl:21
 #: plugins/addons/logview/contents.tpl:67
 #: plugins/addons/mailqueue/contents.tpl:11
 #: plugins/addons/mailqueue/contents.tpl:27
-#: plugins/gofon/reports/contents.tpl:21
+#: plugins/gofon/fonreports/contents.tpl:21
 msgid "Search"
 msgstr "Recherche"
 
@@ -1685,24 +1688,24 @@ msgstr "Pas de certificat valide chargé"
 msgid "XML error in guide.xml: %s at line %d"
 msgstr "Erreur XML dans guide.xml: %s à la ligne %d"
 
-#: include/functions_helpviewer.inc:83
+#: include/functions_helpviewer.inc:86
 msgid "No help available for this plugin."
 msgstr "L'aide n'est pas disponible pour cette extension."
 
-#: include/functions_helpviewer.inc:92
+#: include/functions_helpviewer.inc:95
 msgid "previous"
 msgstr "précédent"
 
-#: include/functions_helpviewer.inc:96
+#: include/functions_helpviewer.inc:99
 msgid "next"
 msgstr "suivant"
 
-#: include/functions_helpviewer.inc:384
+#: include/functions_helpviewer.inc:387
 #, php-format
 msgid "%s results for your search with the keyword %s interpreted as %s"
 msgstr "%s résultats de votre recherche avec le mot %s interprété comme %s"
 
-#: include/functions_helpviewer.inc:459
+#: include/functions_helpviewer.inc:462
 #, php-format
 msgid "%s%% hit rate in file %s"
 msgstr "%s%% trouvés dans le fichier %s"
@@ -2252,7 +2255,7 @@ msgstr "Erreur XML dans %s: %s à la ligne %d"
 #: plugins/personal/nagios/class_nagiosAccount.inc:19
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:6
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:7
-#: plugins/gofax/reports/class_faxreport.inc:7
+#: plugins/gofax/faxreports/class_faxreport.inc:7
 #: plugins/addons/addressbook/class_addressbook.inc:7
 #: plugins/addons/ldapmanager/class_csvimport.inc:7
 #: plugins/addons/ldapmanager/class_import.inc:7
@@ -2268,8 +2271,8 @@ msgstr "Erreur XML dans %s: %s à la ligne %d"
 #: plugins/admin/systems/class_systemManagement.inc:33
 #: plugins/admin/ogroups/class_ogroupManagement.inc:26
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:7
-#: plugins/gofon/reports/class_fonreport.inc:7
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:26
+#: plugins/gofon/fonreports/class_fonreport.inc:7
 msgid "This does something"
 msgstr "Ceci fait quelque chose"
 
@@ -2944,8 +2947,10 @@ msgstr "Shell"
 msgid "Primary group"
 msgstr "Groupe principal"
 
-#: plugins/personal/posix/generic.tpl:29 plugins/gofax/reports/detail.tpl:46
-#: plugins/gofax/reports/contents.tpl:32 plugins/gofon/reports/contents.tpl:35
+#: plugins/personal/posix/generic.tpl:29
+#: plugins/gofax/faxreports/detail.tpl:46
+#: plugins/gofax/faxreports/contents.tpl:32
+#: plugins/gofon/fonreports/contents.tpl:35
 msgid "Status"
 msgstr "Statut"
 
@@ -2986,32 +2991,32 @@ msgstr "Paramètres unix"
 msgid "UNIX"
 msgstr "UNIX"
 
-#: plugins/personal/posix/class_posixAccount.inc:133
-#: plugins/personal/posix/class_posixAccount.inc:963
+#: plugins/personal/posix/class_posixAccount.inc:135
+#: plugins/personal/posix/class_posixAccount.inc:966
 msgid "Group of user"
 msgstr "Groupe d'utilisateurs"
 
-#: plugins/personal/posix/class_posixAccount.inc:173
+#: plugins/personal/posix/class_posixAccount.inc:175
 msgid "unconfigured"
 msgstr "non configuré"
 
-#: plugins/personal/posix/class_posixAccount.inc:191
+#: plugins/personal/posix/class_posixAccount.inc:193
 #: plugins/admin/systems/class_terminalService.inc:122
 #: plugins/admin/systems/class_workstationService.inc:107
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:211
 msgid "automatic"
 msgstr "automatique"
 
-#: plugins/personal/posix/class_posixAccount.inc:222
+#: plugins/personal/posix/class_posixAccount.inc:224
 msgid "This account has no unix extensions."
 msgstr "Ce compte n'a pas d'extension unix."
 
-#: plugins/personal/posix/class_posixAccount.inc:243
-#: plugins/personal/posix/class_posixAccount.inc:246
+#: plugins/personal/posix/class_posixAccount.inc:245
+#: plugins/personal/posix/class_posixAccount.inc:248
 msgid "Remove posix account"
 msgstr "Supprimer le compte posix"
 
-#: plugins/personal/posix/class_posixAccount.inc:244
+#: plugins/personal/posix/class_posixAccount.inc:246
 msgid ""
 "This account has unix features enabled. To disable them, you'll need to "
 "remove the samba / environment account first."
@@ -3019,7 +3024,7 @@ msgstr ""
 "Ce compte possède l'extension unix. Pour le désactiver vous devez au "
 "préalable supprimer le(s) compte samba / environnement."
 
-#: plugins/personal/posix/class_posixAccount.inc:247
+#: plugins/personal/posix/class_posixAccount.inc:249
 msgid ""
 "This account has posix features enabled. You can disable them by clicking "
 "below."
@@ -3027,11 +3032,11 @@ msgstr ""
 "Ce compte possède l'extension posix. Vous pouvez le supprimer en cliquant "
 "sur le bouton ci-dessous."
 
-#: plugins/personal/posix/class_posixAccount.inc:250
+#: plugins/personal/posix/class_posixAccount.inc:252
 msgid "Create posix account"
 msgstr "Créer un compte posix"
 
-#: plugins/personal/posix/class_posixAccount.inc:251
+#: plugins/personal/posix/class_posixAccount.inc:253
 msgid ""
 "This account has posix features disabled. You can enable them by clicking "
 "below."
@@ -3039,246 +3044,246 @@ msgstr ""
 "Aucune extension posix n'existe pour ce compte. Vous pouvez en créer une en "
 "cliquant sur le bouton ci-dessous."
 
-#: plugins/personal/posix/class_posixAccount.inc:435
+#: plugins/personal/posix/class_posixAccount.inc:437
 #, php-format
 msgid "Password can't be changed up to %s days after last change"
 msgstr ""
 "Les mots de passe ne peuvent être changé qu'après %s jours à compter de la "
 "dernière modification de celui-ci"
 
-#: plugins/personal/posix/class_posixAccount.inc:437
+#: plugins/personal/posix/class_posixAccount.inc:439
 #, php-format
 msgid "Password must be changed after %s days"
 msgstr "Le mot de passe doit être changé après %s jours"
 
-#: plugins/personal/posix/class_posixAccount.inc:439
+#: plugins/personal/posix/class_posixAccount.inc:441
 #, php-format
 msgid "Disable account after %s days of inactivity after password expiery"
 msgstr ""
 "Désactiver le compte après %s jours d'inactivité après l'expiration du mot "
 "de passe"
 
-#: plugins/personal/posix/class_posixAccount.inc:441
+#: plugins/personal/posix/class_posixAccount.inc:443
 #, php-format
 msgid "Warn user %s days before password expiery"
 msgstr "Avertir l'utilisateur %s jours avant l'expiration de son mot de passe"
 
-#: plugins/personal/posix/class_posixAccount.inc:465
+#: plugins/personal/posix/class_posixAccount.inc:467
 #: plugins/personal/samba/class_sambaAccount.inc:355
 #: plugins/personal/samba/class_sambaAccount.inc:373
 #: plugins/personal/samba/class_sambaAccount.inc:391
 #: plugins/personal/samba/class_sambaAccount.inc:409
 #: plugins/personal/generic/class_user.inc:240
-#: plugins/gofax/reports/class_faxreport.inc:292
-#: plugins/gofon/reports/class_fonreport.inc:222
+#: plugins/gofax/faxreports/class_faxreport.inc:67
+#: plugins/gofon/fonreports/class_fonreport.inc:63
 msgid "January"
 msgstr "Janvier"
 
-#: plugins/personal/posix/class_posixAccount.inc:465
+#: plugins/personal/posix/class_posixAccount.inc:467
 #: plugins/personal/samba/class_sambaAccount.inc:355
 #: plugins/personal/samba/class_sambaAccount.inc:373
 #: plugins/personal/samba/class_sambaAccount.inc:391
 #: plugins/personal/samba/class_sambaAccount.inc:409
 #: plugins/personal/generic/class_user.inc:240
-#: plugins/gofax/reports/class_faxreport.inc:292
-#: plugins/gofon/reports/class_fonreport.inc:222
+#: plugins/gofax/faxreports/class_faxreport.inc:67
+#: plugins/gofon/fonreports/class_fonreport.inc:63
 msgid "February"
 msgstr "Février"
 
-#: plugins/personal/posix/class_posixAccount.inc:465
+#: plugins/personal/posix/class_posixAccount.inc:467
 #: plugins/personal/samba/class_sambaAccount.inc:355
 #: plugins/personal/samba/class_sambaAccount.inc:373
 #: plugins/personal/samba/class_sambaAccount.inc:391
 #: plugins/personal/samba/class_sambaAccount.inc:409
 #: plugins/personal/generic/class_user.inc:240
-#: plugins/gofax/reports/class_faxreport.inc:292
-#: plugins/gofon/reports/class_fonreport.inc:222
+#: plugins/gofax/faxreports/class_faxreport.inc:67
+#: plugins/gofon/fonreports/class_fonreport.inc:63
 msgid "March"
 msgstr "Mars"
 
-#: plugins/personal/posix/class_posixAccount.inc:465
+#: plugins/personal/posix/class_posixAccount.inc:467
 #: plugins/personal/samba/class_sambaAccount.inc:355
 #: plugins/personal/samba/class_sambaAccount.inc:373
 #: plugins/personal/samba/class_sambaAccount.inc:391
 #: plugins/personal/samba/class_sambaAccount.inc:409
 #: plugins/personal/generic/class_user.inc:240
-#: plugins/gofax/reports/class_faxreport.inc:292
-#: plugins/gofon/reports/class_fonreport.inc:222
+#: plugins/gofax/faxreports/class_faxreport.inc:67
+#: plugins/gofon/fonreports/class_fonreport.inc:63
 msgid "April"
 msgstr "Avril"
 
-#: plugins/personal/posix/class_posixAccount.inc:466
+#: plugins/personal/posix/class_posixAccount.inc:468
 #: plugins/personal/samba/class_sambaAccount.inc:356
 #: plugins/personal/samba/class_sambaAccount.inc:374
 #: plugins/personal/samba/class_sambaAccount.inc:392
 #: plugins/personal/samba/class_sambaAccount.inc:410
 #: plugins/personal/generic/class_user.inc:241
-#: plugins/gofax/reports/class_faxreport.inc:293
-#: plugins/gofon/reports/class_fonreport.inc:223
+#: plugins/gofax/faxreports/class_faxreport.inc:68
+#: plugins/gofon/fonreports/class_fonreport.inc:64
 msgid "May"
 msgstr "Mai"
 
-#: plugins/personal/posix/class_posixAccount.inc:466
+#: plugins/personal/posix/class_posixAccount.inc:468
 #: plugins/personal/samba/class_sambaAccount.inc:356
 #: plugins/personal/samba/class_sambaAccount.inc:374
 #: plugins/personal/samba/class_sambaAccount.inc:392
 #: plugins/personal/samba/class_sambaAccount.inc:410
 #: plugins/personal/generic/class_user.inc:241
-#: plugins/gofax/reports/class_faxreport.inc:293
-#: plugins/gofon/reports/class_fonreport.inc:223
+#: plugins/gofax/faxreports/class_faxreport.inc:68
+#: plugins/gofon/fonreports/class_fonreport.inc:64
 msgid "June"
 msgstr "Juin"
 
-#: plugins/personal/posix/class_posixAccount.inc:466
+#: plugins/personal/posix/class_posixAccount.inc:468
 #: plugins/personal/samba/class_sambaAccount.inc:356
 #: plugins/personal/samba/class_sambaAccount.inc:374
 #: plugins/personal/samba/class_sambaAccount.inc:392
 #: plugins/personal/samba/class_sambaAccount.inc:410
 #: plugins/personal/generic/class_user.inc:241
-#: plugins/gofax/reports/class_faxreport.inc:293
-#: plugins/gofon/reports/class_fonreport.inc:223
+#: plugins/gofax/faxreports/class_faxreport.inc:68
+#: plugins/gofon/fonreports/class_fonreport.inc:64
 msgid "July"
 msgstr "Juillet"
 
-#: plugins/personal/posix/class_posixAccount.inc:466
+#: plugins/personal/posix/class_posixAccount.inc:468
 #: plugins/personal/samba/class_sambaAccount.inc:356
 #: plugins/personal/samba/class_sambaAccount.inc:374
 #: plugins/personal/samba/class_sambaAccount.inc:392
 #: plugins/personal/samba/class_sambaAccount.inc:410
 #: plugins/personal/generic/class_user.inc:241
-#: plugins/gofax/reports/class_faxreport.inc:293
-#: plugins/gofon/reports/class_fonreport.inc:223
+#: plugins/gofax/faxreports/class_faxreport.inc:68
+#: plugins/gofon/fonreports/class_fonreport.inc:64
 msgid "August"
 msgstr "Aôut"
 
-#: plugins/personal/posix/class_posixAccount.inc:466
+#: plugins/personal/posix/class_posixAccount.inc:468
 #: plugins/personal/samba/class_sambaAccount.inc:356
 #: plugins/personal/samba/class_sambaAccount.inc:374
 #: plugins/personal/samba/class_sambaAccount.inc:392
 #: plugins/personal/samba/class_sambaAccount.inc:410
 #: plugins/personal/generic/class_user.inc:241
-#: plugins/gofax/reports/class_faxreport.inc:294
-#: plugins/gofon/reports/class_fonreport.inc:224
+#: plugins/gofax/faxreports/class_faxreport.inc:69
+#: plugins/gofon/fonreports/class_fonreport.inc:65
 msgid "September"
 msgstr "Septembre"
 
-#: plugins/personal/posix/class_posixAccount.inc:467
+#: plugins/personal/posix/class_posixAccount.inc:469
 #: plugins/personal/samba/class_sambaAccount.inc:357
 #: plugins/personal/samba/class_sambaAccount.inc:375
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/generic/class_user.inc:242
-#: plugins/gofax/reports/class_faxreport.inc:294
-#: plugins/gofon/reports/class_fonreport.inc:224
+#: plugins/gofax/faxreports/class_faxreport.inc:69
+#: plugins/gofon/fonreports/class_fonreport.inc:65
 msgid "October"
 msgstr "Octobre"
 
-#: plugins/personal/posix/class_posixAccount.inc:467
+#: plugins/personal/posix/class_posixAccount.inc:469
 #: plugins/personal/samba/class_sambaAccount.inc:357
 #: plugins/personal/samba/class_sambaAccount.inc:375
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/generic/class_user.inc:242
-#: plugins/gofax/reports/class_faxreport.inc:294
-#: plugins/gofon/reports/class_fonreport.inc:224
+#: plugins/gofax/faxreports/class_faxreport.inc:69
+#: plugins/gofon/fonreports/class_fonreport.inc:65
 msgid "November"
 msgstr "Novembre"
 
-#: plugins/personal/posix/class_posixAccount.inc:467
+#: plugins/personal/posix/class_posixAccount.inc:469
 #: plugins/personal/samba/class_sambaAccount.inc:357
 #: plugins/personal/samba/class_sambaAccount.inc:375
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/generic/class_user.inc:242
-#: plugins/gofax/reports/class_faxreport.inc:294
-#: plugins/gofon/reports/class_fonreport.inc:224
+#: plugins/gofax/faxreports/class_faxreport.inc:69
+#: plugins/gofon/fonreports/class_fonreport.inc:65
 msgid "December"
 msgstr "Décembre"
 
-#: plugins/personal/posix/class_posixAccount.inc:548
+#: plugins/personal/posix/class_posixAccount.inc:550
 msgid "full access"
 msgstr "accès complet"
 
-#: plugins/personal/posix/class_posixAccount.inc:549
+#: plugins/personal/posix/class_posixAccount.inc:551
 msgid "allow access to these hosts"
 msgstr "permettre l'accès a ces hôtes"
 
-#: plugins/personal/posix/class_posixAccount.inc:718
+#: plugins/personal/posix/class_posixAccount.inc:721
 msgid "Failed: overriding lock"
 msgstr "Échoué: réécriture du verrou"
 
-#: plugins/personal/posix/class_posixAccount.inc:877
+#: plugins/personal/posix/class_posixAccount.inc:880
 msgid "The required field 'Home directory' is not set."
 msgstr "Le champ obligatoire 'Répertoire Home' n'est pas renseigné."
 
-#: plugins/personal/posix/class_posixAccount.inc:880
+#: plugins/personal/posix/class_posixAccount.inc:883
 msgid "Please enter a valid path in 'Home directory' field."
 msgstr "Veuillez indiquer un chemin d'accès valide dans le champ 'Répertoire Home'."
 
-#: plugins/personal/posix/class_posixAccount.inc:888
+#: plugins/personal/posix/class_posixAccount.inc:891
 msgid "Value specified as 'UID' is not valid."
 msgstr "La valeur de l''UID' spécifiée n'est pas valide."
 
-#: plugins/personal/posix/class_posixAccount.inc:891
+#: plugins/personal/posix/class_posixAccount.inc:894
 msgid "Value specified as 'UID' is too small."
 msgstr "La valeur de l''UID' spécifiée est trop petite."
 
-#: plugins/personal/posix/class_posixAccount.inc:895
+#: plugins/personal/posix/class_posixAccount.inc:898
 #: plugins/admin/groups/class_groupGeneric.inc:657
 msgid "Value specified as 'GID' is not valid."
 msgstr "La valeur du 'GID' n'est pas valide."
 
-#: plugins/personal/posix/class_posixAccount.inc:898
+#: plugins/personal/posix/class_posixAccount.inc:901
 #: plugins/admin/groups/class_groupGeneric.inc:660
 msgid "Value specified as 'GID' is too small."
 msgstr "La valeur spécifiée comme 'GID' est trop petite."
 
-#: plugins/personal/posix/class_posixAccount.inc:906
+#: plugins/personal/posix/class_posixAccount.inc:909
 #, fuzzy
 msgid "Value specified as 'shadowMin' is not valid."
 msgstr "La valeur de 'shadowMin' spécifiée n'est pas valide."
 
-#: plugins/personal/posix/class_posixAccount.inc:911
+#: plugins/personal/posix/class_posixAccount.inc:914
 #, fuzzy
 msgid "Value specified as 'shadowMax' is not valid."
 msgstr "La valeur de 'shadowMax' spécifiée n'est pas valide."
 
-#: plugins/personal/posix/class_posixAccount.inc:916
+#: plugins/personal/posix/class_posixAccount.inc:919
 #, fuzzy
 msgid "Value specified as 'shadowWarning' is not valid."
 msgstr "La valeur de 'shadowWarning' spécifiée n'est pas valide."
 
-#: plugins/personal/posix/class_posixAccount.inc:919
+#: plugins/personal/posix/class_posixAccount.inc:922
 #, fuzzy
 msgid "'shadowWarning' without 'shadowMax' makes no sense."
 msgstr "'shadowWarning' sans 'shadowMax' n'a pas de sens."
 
-#: plugins/personal/posix/class_posixAccount.inc:922
+#: plugins/personal/posix/class_posixAccount.inc:925
 #, fuzzy
 msgid "Value specified as 'shadowWarning' should be smaller than 'shadowMax'."
 msgstr "La valeur de 'shadowWarning' doit être inférieure à celle de 'shadowMax'."
 
-#: plugins/personal/posix/class_posixAccount.inc:925
+#: plugins/personal/posix/class_posixAccount.inc:928
 #, fuzzy
 msgid "Value specified as 'shadowWarning' should be greater than 'shadowMin'."
 msgstr "La valeur de 'shadowWarning' doit être supérieure à celle de 'shadowMin'."
 
-#: plugins/personal/posix/class_posixAccount.inc:930
+#: plugins/personal/posix/class_posixAccount.inc:933
 #, fuzzy
 msgid "Value specified as 'shadowInactive' is not valid."
 msgstr "La valeur de 'shadowInactive' spécifiée n'est pas valide."
 
-#: plugins/personal/posix/class_posixAccount.inc:933
+#: plugins/personal/posix/class_posixAccount.inc:936
 #, fuzzy
 msgid "'shadowInactive' without 'shadowMax' makes no sense."
 msgstr "'shadowInactive' sans 'shadowMax' n'a pas de sens."
 
-#: plugins/personal/posix/class_posixAccount.inc:938
+#: plugins/personal/posix/class_posixAccount.inc:941
 #, fuzzy
 msgid "Value specified as 'shadowMin' should be smaller than 'shadowMax'."
 msgstr "La valeur pour 'shadowMin' doit être inférieure à celle de 'shadowMax'."
 
-#: plugins/personal/posix/class_posixAccount.inc:1053
+#: plugins/personal/posix/class_posixAccount.inc:1063
 #: plugins/admin/groups/class_groupGeneric.inc:691
 msgid "Too many users, can't allocate a free ID!"
 msgstr "Trop d'utilisateurs, impossible d'assigner un ID libre!"
@@ -4289,8 +4294,8 @@ msgstr "Enlever l'extension d'environnement"
 #: plugins/personal/environment/class_environment.inc:283
 msgid "Environment extension enabled. You can disable it by clicking below."
 msgstr ""
-"Extension d'environnement activée. Vous pouvez la désactiver "
-"en cliquant sur le bouton ci-dessous."
+"Extension d'environnement activée. Vous pouvez la désactiver en cliquant sur "
+"le bouton ci-dessous."
 
 #: plugins/personal/environment/class_environment.inc:256
 #: plugins/personal/environment/class_environment.inc:261
@@ -4303,8 +4308,8 @@ msgstr "Ajouter une extension d'environnement"
 #: plugins/personal/environment/class_environment.inc:290
 msgid "Environment extension disabled. You can enable it by clicking below."
 msgstr ""
-"Extension d'environnement désactivé. Vous pouvez l'activer en "
-"cliquant sur le bouton ci-dessous."
+"Extension d'environnement désactivé. Vous pouvez l'activer en cliquant sur "
+"le bouton ci-dessous."
 
 #: plugins/personal/environment/class_environment.inc:262
 #: plugins/personal/environment/class_environment.inc:295
@@ -4312,8 +4317,8 @@ msgid ""
 "Environment extension disabled. You have to setup a posix account before you "
 "can enable this feature."
 msgstr ""
-"Extension d'environnement désactivée. Vous devez d'abord "
-"créer un compte posix avant de pouvoir activer cette extension."
+"Extension d'environnement désactivée. Vous devez d'abord créer un compte "
+"posix avant de pouvoir activer cette extension."
 
 #: plugins/personal/environment/class_environment.inc:485
 #: plugins/personal/environment/class_environment.inc:487
@@ -5204,6 +5209,9 @@ msgstr "Vous essayez d'ajouter un numéro de téléphone invalide."
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:431
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:513
+#: plugins/addons/ldapmanager/contentimport.tpl:44
+#: plugins/addons/ldapmanager/contentexport.tpl:66
+#: plugins/addons/ldapmanager/contentexportxls.tpl:69
 #: plugins/addons/mailqueue/header.tpl:5
 #: plugins/admin/groups/class_groupApplication.inc:365
 #: plugins/admin/groups/class_groupApplication.inc:416
@@ -5235,148 +5243,167 @@ msgstr ""
 "La réception d'un fax sur une imprimante ne fonctionnera que si une "
 "imprimante valable est mentionnée. Veuillez corriger votre choix."
 
-#: plugins/gofax/reports/detail.tpl:6
+#: plugins/gofax/faxreports/detail.tpl:6
 msgid "FAX preview - please wait"
 msgstr "prévisualisation du FAX - Veuillez attendre"
 
-#: plugins/gofax/reports/detail.tpl:9
+#: plugins/gofax/faxreports/detail.tpl:9
 msgid "Click on fax to download"
 msgstr "Cliquez sur le fax pour le télécharger"
 
-#: plugins/gofax/reports/detail.tpl:18
+#: plugins/gofax/faxreports/detail.tpl:18
 msgid "FAX ID"
 msgstr "FAX ID"
 
-#: plugins/gofax/reports/detail.tpl:22 plugins/gofax/reports/contents.tpl:30
+#: plugins/gofax/faxreports/detail.tpl:22
+#: plugins/gofax/faxreports/contents.tpl:30
 #: plugins/admin/systems/class_printGeneric.inc:587
 #: plugins/admin/ogroups/class_ogroupManagement.inc:482
 #: plugins/admin/fai/faiTemplateEntry.tpl:94
 msgid "User"
 msgstr "Utilisateur"
 
-#: plugins/gofax/reports/detail.tpl:26
+#: plugins/gofax/faxreports/detail.tpl:26
 msgid "Date / Time"
 msgstr "Date / Heure"
 
-#: plugins/gofax/reports/detail.tpl:30
+#: plugins/gofax/faxreports/detail.tpl:30
 msgid "Sender MSN"
 msgstr "MSN de l'expéditeur"
 
-#: plugins/gofax/reports/detail.tpl:34
+#: plugins/gofax/faxreports/detail.tpl:34
 msgid "Sender ID"
 msgstr "ID de l'expéditeur"
 
-#: plugins/gofax/reports/detail.tpl:38
+#: plugins/gofax/faxreports/detail.tpl:38
 msgid "Receiver MSN"
 msgstr "MSN du correspondant"
 
-#: plugins/gofax/reports/detail.tpl:42
+#: plugins/gofax/faxreports/detail.tpl:42
 msgid "Receiver ID"
 msgstr "ID du correspondant"
 
-#: plugins/gofax/reports/detail.tpl:50
+#: plugins/gofax/faxreports/detail.tpl:50
 msgid "Status message"
 msgstr "Statut"
 
-#: plugins/gofax/reports/detail.tpl:54
+#: plugins/gofax/faxreports/detail.tpl:54
 msgid "Transfer time"
 msgstr "Temps de transfert"
 
-#: plugins/gofax/reports/detail.tpl:58 plugins/gofax/reports/contents.tpl:35
+#: plugins/gofax/faxreports/detail.tpl:58
+#: plugins/gofax/faxreports/contents.tpl:35
 msgid "# pages"
 msgstr "# pages"
 
-#: plugins/gofax/reports/contents.tpl:2 plugins/addons/logview/contents.tpl:2
-#: plugins/gofon/reports/contents.tpl:2
+#: plugins/gofax/faxreports/contents.tpl:2
+#: plugins/addons/logview/contents.tpl:2
+#: plugins/gofon/fonreports/contents.tpl:2
 msgid "Filter"
 msgstr "Filtre"
 
-#: plugins/gofax/reports/contents.tpl:6
+#: plugins/gofax/faxreports/contents.tpl:6
 #: plugins/addons/addressbook/contents.tpl:102
 #: plugins/addons/logview/contents.tpl:47
 #: plugins/addons/mailqueue/contents.tpl:12
-#: plugins/gofon/reports/contents.tpl:6
+#: plugins/gofon/fonreports/contents.tpl:6
 msgid "Search for"
 msgstr "Recherche de"
 
-#: plugins/gofax/reports/contents.tpl:7 plugins/gofon/reports/contents.tpl:7
+#: plugins/gofax/faxreports/contents.tpl:7
+#: plugins/gofon/fonreports/contents.tpl:7
 msgid "Enter user name to search for"
 msgstr "Entrez le nom recherché"
 
-#: plugins/gofax/reports/contents.tpl:8 plugins/gofax/reports/contents.tpl:16
-#: plugins/gofon/reports/contents.tpl:8 plugins/gofon/reports/contents.tpl:16
+#: plugins/gofax/faxreports/contents.tpl:8
+#: plugins/gofax/faxreports/contents.tpl:16
+#: plugins/gofon/fonreports/contents.tpl:8
+#: plugins/gofon/fonreports/contents.tpl:16
 msgid "in"
 msgstr "dans"
 
-#: plugins/gofax/reports/contents.tpl:9 plugins/gofon/reports/contents.tpl:9
+#: plugins/gofax/faxreports/contents.tpl:9
+#: plugins/gofon/fonreports/contents.tpl:9
 msgid "Select subtree to base search on"
 msgstr "Sélectionnez la branche de l'annuaire où sera effectuée la recherche"
 
-#: plugins/gofax/reports/contents.tpl:12 plugins/gofon/reports/contents.tpl:12
+#: plugins/gofax/faxreports/contents.tpl:12
+#: plugins/gofon/fonreports/contents.tpl:12
 msgid "during"
 msgstr "pendant"
 
-#: plugins/gofax/reports/contents.tpl:31
+#: plugins/gofax/faxreports/contents.tpl:31
 #: plugins/addons/logview/contents.tpl:84
-#: plugins/gofon/reports/contents.tpl:30
+#: plugins/gofon/fonreports/contents.tpl:30
 msgid "Date"
 msgstr "Date"
 
-#: plugins/gofax/reports/contents.tpl:33
+#: plugins/gofax/faxreports/contents.tpl:33
 #: plugins/addons/mailqueue/contents.tpl:58
 msgid "Sender"
 msgstr "Expéditeur"
 
-#: plugins/gofax/reports/contents.tpl:34
+#: plugins/gofax/faxreports/contents.tpl:34
 msgid "Receiver"
 msgstr "Correspondant"
 
-#: plugins/gofax/reports/contents.tpl:47
+#: plugins/gofax/faxreports/contents.tpl:50
 #: plugins/addons/logview/contents.tpl:97
-#: plugins/gofon/reports/contents.tpl:48
+#: plugins/gofon/fonreports/contents.tpl:51
 msgid "Search returned no results..."
 msgstr "La recherche n'a renvoyé aucun résultat..."
 
-#: plugins/gofax/reports/class_faxreport.inc:6
+#: plugins/gofax/faxreports/class_faxreport.inc:6
 msgid "FAX Reports"
 msgstr "Rapports des Fax"
 
-#: plugins/gofax/reports/class_faxreport.inc:106
+#: plugins/gofax/faxreports/class_faxreport.inc:91
+msgid "There is no fax database defined in your config. Can't query anything."
+msgstr "Il n'y a pas de base de données définie dans votre configuration. Je ne peut pas faire de recherche."
+
+#: plugins/gofax/faxreports/class_faxreport.inc:94
 msgid "There is no mysql extension available, please check your php setup."
 msgstr "Il n'y a pas d'extension msql disponible, vérifiez votre configuration php."
 
-#: plugins/gofax/reports/class_faxreport.inc:112
-#: plugins/gofax/reports/class_faxreport.inc:224
-msgid "Can't connect to fax database, no reports can be shown!"
-msgstr ""
-"Impossible de se connecter à la base de données des fax, aucun rapport ne "
-"peut être affiché!"
+#: plugins/gofax/faxreports/class_faxreport.inc:101
+msgid ""
+"Can't connect to fax database, no reports can be shown!. Check username, "
+"password and server settings."
+msgstr "Impossible de se connecter à la base de données des fax, aucun rapport ne peut être affiché! Vérifiez l'identification, mot de passe ainsi que les paramètres du serveur."
 
-#: plugins/gofax/reports/class_faxreport.inc:116
-#: plugins/gofax/reports/class_faxreport.inc:228
+#: plugins/gofax/faxreports/class_faxreport.inc:105
+#: plugins/gofax/faxreports/class_faxreport.inc:155
+#: plugins/gofax/faxreports/class_faxreport.inc:267
 msgid "Can't select fax database for report generation!"
 msgstr ""
 "Impossible de sélectionner la base de données fax pour la génération de "
 "rapports!"
 
-#: plugins/gofax/reports/class_faxreport.inc:124
-#: plugins/gofax/reports/class_faxreport.inc:236
+#: plugins/gofax/faxreports/class_faxreport.inc:151
+#: plugins/gofax/faxreports/class_faxreport.inc:263
+msgid "Can't connect to fax database, no reports can be shown!"
+msgstr ""
+"Impossible de se connecter à la base de données des fax, aucun rapport ne "
+"peut être affiché!"
+
+#: plugins/gofax/faxreports/class_faxreport.inc:163
+#: plugins/gofax/faxreports/class_faxreport.inc:275
 msgid "Query for fax database failed!"
 msgstr "La requête sur la base de données des fax a échoué!"
 
-#: plugins/gofax/reports/class_faxreport.inc:132
+#: plugins/gofax/faxreports/class_faxreport.inc:171
 msgid "You have no permission to retrieve informations about this fax id!"
 msgstr ""
 "Vous n'avez pas l'autorisation de récupérer les informations à propos de "
 "l'identifiant de ce fax!"
 
-#: plugins/gofax/reports/class_faxreport.inc:152
-#: plugins/gofax/reports/class_faxreport.inc:244
-#: plugins/gofon/reports/class_fonreport.inc:175
+#: plugins/gofax/faxreports/class_faxreport.inc:191
+#: plugins/gofax/faxreports/class_faxreport.inc:283
+#: plugins/gofon/fonreports/class_fonreport.inc:204
 msgid "Y-M-D"
 msgstr "A-M-J"
 
-#: plugins/gofax/reports/main.inc:5
+#: plugins/gofax/faxreports/main.inc:5
 msgid "FAX reports"
 msgstr "Rapports des Fax"
 
@@ -5556,8 +5583,8 @@ msgid "Creating new entry in"
 msgstr "Création d'une nouvelle entrée dans"
 
 #: plugins/addons/addressbook/class_addressbook.inc:519
-#: plugins/addons/logview/class_logview.inc:68
-#: plugins/addons/logview/class_logview.inc:82
+#: plugins/addons/logview/class_logview.inc:94
+#: plugins/addons/logview/class_logview.inc:111
 #: plugins/addons/mailqueue/class_mailqueue.inc:271
 #: plugins/addons/mailqueue/class_mailqueue.inc:336
 msgid "All"
@@ -5588,51 +5615,51 @@ msgstr ""
 msgid "LDIF export"
 msgstr "Exportation LDIF"
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:96
+#: plugins/addons/ldapmanager/class_csvimport.inc:99
 msgid "You've no permission to do CSV imports."
 msgstr "Vous n'avez pas les droits nécessaires pour effectuer des importations CSV."
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:157
+#: plugins/addons/ldapmanager/class_csvimport.inc:159
 msgid "Need 'sn','givenName' and 'uid' to create user."
 msgstr "J'ai besoin d'un 'sn','givenName' et 'uid' pour créer un utilisateur."
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:203
+#: plugins/addons/ldapmanager/class_csvimport.inc:207
 msgid "failed"
 msgstr "échec"
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:207
+#: plugins/addons/ldapmanager/class_csvimport.inc:211
 msgid "ok"
 msgstr "ok"
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:264
+#: plugins/addons/ldapmanager/class_csvimport.inc:275
 msgid "status"
 msgstr "statut"
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:268
+#: plugins/addons/ldapmanager/class_csvimport.inc:279
 #, php-format
 msgid "An Error Occured while inserting entry %s - process aborted"
 msgstr ""
 "Une erreur s'est produite lors de l'insertion de l'entrée %s -  le processus "
 "à été interrompu"
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:293
+#: plugins/addons/ldapmanager/class_csvimport.inc:317
 msgid "Nothing to import!"
 msgstr "Rien à importer !"
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:305
-#: plugins/addons/ldapmanager/class_csvimport.inc:316
-#: plugins/addons/ldapmanager/class_csvimport.inc:321
+#: plugins/addons/ldapmanager/class_csvimport.inc:329
+#: plugins/addons/ldapmanager/class_csvimport.inc:340
+#: plugins/addons/ldapmanager/class_csvimport.inc:345
 #: plugins/addons/ldapmanager/class_import.inc:62
 #: plugins/addons/ldapmanager/class_import.inc:70
 msgid "There is no file uploaded."
 msgstr "Pas de fichier téléchargé."
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:310
+#: plugins/addons/ldapmanager/class_csvimport.inc:334
 #: plugins/addons/ldapmanager/class_import.inc:55
 msgid "The specified file is empty."
 msgstr "Le fichier spécifié est vide."
 
-#: plugins/addons/ldapmanager/class_csvimport.inc:449
+#: plugins/addons/ldapmanager/class_csvimport.inc:488
 msgid "The selected file does not contain any CSV Data..."
 msgstr "Le fichier spécifié ne contient pas de données CSV valide..."
 
@@ -5694,10 +5721,10 @@ msgid "Oups. There was an error during the import of your data."
 msgstr "Oups. Il à eu une erreur lors de l'importation de vos données."
 
 #: plugins/addons/ldapmanager/contentcsv.tpl:39
-msgid "Here is the status report for the import:"
-msgstr "Voici le rapport de l'état de votre importation:"
+msgid "Here is the status report for the import"
+msgstr "Voici le rapport de l'état de votre importation"
 
-#: plugins/addons/ldapmanager/contentcsv.tpl:87
+#: plugins/addons/ldapmanager/contentcsv.tpl:80
 msgid "Selected Template"
 msgstr "Sélectionnez le modèle"
 
@@ -5807,64 +5834,65 @@ msgstr "Importer un fichier XLS"
 msgid "System logs"
 msgstr "Logs systèmes"
 
-#: plugins/addons/logview/class_logview.inc:37
+#: plugins/addons/logview/class_logview.inc:63
 msgid "No LOG servers defined!"
 msgstr "Pas de LOG serveurs définis!"
 
-#: plugins/addons/logview/class_logview.inc:53
-#: plugins/addons/logview/class_logview.inc:157
+#: plugins/addons/logview/class_logview.inc:66
+msgid "No mysql extension loaded, can't connect to mysql server."
+msgstr "Pas d'extension mysql, impossible de se connecter au serveur mysql."
+
+#: plugins/addons/logview/class_logview.inc:73
+msgid ""
+"Can't connect to mysql server, please check username, password and server "
+"settings."
+msgstr "Impossible de se connecter au serveur msyql, veuillez vérifier l'identifiant, le mot de passe et les paramètres du serveur."
+
+#: plugins/addons/logview/class_logview.inc:77
+#: plugins/addons/logview/class_logview.inc:171
 msgid "Can't select log database for log generation!"
 msgstr ""
 "Impossible de sélectionner la base de données des logs afin de générer les "
 "logs!"
 
-#: plugins/addons/logview/class_logview.inc:62
-#: plugins/addons/logview/class_logview.inc:76
-#: plugins/addons/logview/class_logview.inc:229
+#: plugins/addons/logview/class_logview.inc:86
+#: plugins/addons/logview/class_logview.inc:103
 msgid "Query for log database failed!"
 msgstr "La requête sur la base de données des logs a échoué!"
 
-#: plugins/addons/logview/class_logview.inc:86
+#: plugins/addons/logview/class_logview.inc:118
 msgid "one hour"
 msgstr "Une heure"
 
-#: plugins/addons/logview/class_logview.inc:86
+#: plugins/addons/logview/class_logview.inc:118
 msgid "6 hours"
 msgstr "6 heures"
 
-#: plugins/addons/logview/class_logview.inc:87
+#: plugins/addons/logview/class_logview.inc:119
 msgid "12 hours"
 msgstr "12 heures"
 
-#: plugins/addons/logview/class_logview.inc:87
+#: plugins/addons/logview/class_logview.inc:119
 msgid "24 hours"
 msgstr "24 heures"
 
-#: plugins/addons/logview/class_logview.inc:88
+#: plugins/addons/logview/class_logview.inc:120
 msgid "2 days"
 msgstr "2 jours"
 
-#: plugins/addons/logview/class_logview.inc:88
+#: plugins/addons/logview/class_logview.inc:120
 msgid "one week"
 msgstr "une semaine"
 
-#: plugins/addons/logview/class_logview.inc:89
+#: plugins/addons/logview/class_logview.inc:121
 msgid "2 weeks"
 msgstr "2 semaines"
 
-#: plugins/addons/logview/class_logview.inc:89
+#: plugins/addons/logview/class_logview.inc:121
 msgid "one month"
 msgstr "un mois"
 
-#: plugins/addons/logview/class_logview.inc:107
-msgid ""
-"There is no mysql extension available in your php setup, can't perform any "
-"query."
-msgstr ""
-"Il n'y a pas d'extension mysql disponible dans votre configuration php, "
-"impossible d'effectuer des requêtes."
-
-#: plugins/addons/logview/class_logview.inc:154
+#: plugins/addons/logview/class_logview.inc:168
 msgid "Can't connect to log database, no logs can be shown!"
 msgstr ""
 "Impossible de se connecter à la base de données des logs, aucun log ne peut "
@@ -6196,7 +6224,7 @@ msgstr "Posix"
 #: plugins/admin/groups/class_groupManagement.inc:376
 #: plugins/admin/applications/class_applicationManagement.inc:348
 #: plugins/admin/ogroups/class_ogroupManagement.inc:484
-#: plugins/gofon/reports/contents.tpl:34
+#: plugins/gofon/fonreports/contents.tpl:34
 #: plugins/generic/references/class_reference.inc:42
 msgid "Application"
 msgstr "Applications"
@@ -7096,7 +7124,7 @@ msgstr "Vous n'avez pas l'autorisation de créer un composant sur cette 'Base'."
 #: plugins/admin/systems/class_winGeneric.inc:166
 #: plugins/admin/systems/class_terminalGeneric.inc:260
 #: plugins/admin/systems/class_servGeneric.inc:183
-#: plugins/admin/systems/class_workstationGeneric.inc:214
+#: plugins/admin/systems/class_workstationGeneric.inc:216
 #: plugins/admin/systems/class_printGeneric.inc:456
 #: plugins/admin/systems/class_componentGeneric.inc:136
 #: plugins/admin/systems/class_phoneGeneric.inc:302
@@ -7425,7 +7453,7 @@ msgstr "Aucune définition de WAKECMD n'est présente dans gosa.conf"
 #: plugins/admin/systems/class_servGeneric.inc:66
 #: plugins/admin/systems/class_servGeneric.inc:78
 #: plugins/admin/systems/class_servGeneric.inc:90
-#: plugins/admin/systems/class_workstationGeneric.inc:101
+#: plugins/admin/systems/class_workstationGeneric.inc:102
 #: plugins/admin/ogroups/class_termgroup.inc:66
 #: plugins/admin/ogroups/class_termgroup.inc:78
 #: plugins/admin/ogroups/class_termgroup.inc:90
@@ -7447,21 +7475,21 @@ msgstr "Aucune définition de HALTCMD n'est présente dans gosa.conf"
 
 #: plugins/admin/systems/class_terminalGeneric.inc:147
 #: plugins/admin/systems/class_servGeneric.inc:115
-#: plugins/admin/systems/class_workstationGeneric.inc:126
+#: plugins/admin/systems/class_workstationGeneric.inc:127
 #: plugins/admin/ogroups/class_termgroup.inc:102
 msgid "Switch off"
 msgstr "Eteindre"
 
 #: plugins/admin/systems/class_terminalGeneric.inc:147
 #: plugins/admin/systems/class_servGeneric.inc:115
-#: plugins/admin/systems/class_workstationGeneric.inc:126
+#: plugins/admin/systems/class_workstationGeneric.inc:127
 #: plugins/admin/ogroups/class_termgroup.inc:102
 msgid "Reboot"
 msgstr "Redémarrer"
 
 #: plugins/admin/systems/class_terminalGeneric.inc:149
 #: plugins/admin/systems/class_servGeneric.inc:117
-#: plugins/admin/systems/class_workstationGeneric.inc:131
+#: plugins/admin/systems/class_workstationGeneric.inc:133
 #: plugins/admin/ogroups/class_termgroup.inc:102
 msgid "Wake up"
 msgstr "Réveiller"
@@ -7572,34 +7600,42 @@ msgstr "Verrouillé"
 msgid "Memory test"
 msgstr "Test mémoire"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:97
+#: plugins/admin/systems/class_workstationGeneric.inc:71
+msgid "System analysis"
+msgstr "Analyse du système"
+
+#: plugins/admin/systems/class_workstationGeneric.inc:98
 msgid "No ACTIONCMD definition found in your gosa.conf"
 msgstr "Aucune définition de ACTIONCMD n'est présente dans gosa.conf"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:109
+#: plugins/admin/systems/class_workstationGeneric.inc:110
 msgid "This 'dn' has no workstation features."
 msgstr "Ce 'dn' ne comporte pas d'extensions stations de travail."
 
-#: plugins/admin/systems/class_workstationGeneric.inc:127
+#: plugins/admin/systems/class_workstationGeneric.inc:128
 msgid "Instant update"
 msgstr "Mise à jour immédiate"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:128
-#: plugins/admin/systems/class_workstationGeneric.inc:132
+#: plugins/admin/systems/class_workstationGeneric.inc:129
+#: plugins/admin/systems/class_workstationGeneric.inc:134
 msgid "Scheduled update"
 msgstr "Mise à jour programmée"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:129
+#: plugins/admin/systems/class_workstationGeneric.inc:130
+msgid "Reinstall"
+msgstr "Reinstaller"
+
+#: plugins/admin/systems/class_workstationGeneric.inc:131
 msgid "Rescan hardware"
 msgstr "Recherche du matériel"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:197
+#: plugins/admin/systems/class_workstationGeneric.inc:199
 msgid "You have no permissions to create a workstation on this 'Base'."
 msgstr ""
 "Vous n'avez pas les droits nécessaires pour créer une station de travail "
 "dans cette 'Base'."
 
-#: plugins/admin/systems/class_workstationGeneric.inc:201
+#: plugins/admin/systems/class_workstationGeneric.inc:203
 msgid "The required field 'Workstation name' is not set."
 msgstr "Le champ obligatoire 'Nom de la station de travail' n'est pas renseigné."
 
@@ -8056,7 +8092,9 @@ msgstr "Préférences des options de disponibilités"
 
 #: plugins/admin/systems/servkolab.tpl:102
 msgid "Allow unauthenticated downloading of Free/Busy information"
-msgstr "Permettre le téléchargement des informations de disponibilités de manière anonyme"
+msgstr ""
+"Permettre le téléchargement des informations de disponibilités de manière "
+"anonyme"
 
 #: plugins/admin/systems/servkolab.tpl:117
 msgid "SMTP privileged networks"
@@ -10193,8 +10231,8 @@ msgid ""
 "The specified Voicemail PIN contains invalid characters, only numeric values "
 "are allowed here."
 msgstr ""
-"Le code pin de la boîte vocale contient des caractères invalides, seul "
-"les chiffres sont autorisés."
+"Le code pin de la boîte vocale contient des caractères invalides, seul les "
+"chiffres sont autorisés."
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:895
 msgid "Phone PIN must be 4 characters long."
@@ -10246,46 +10284,6 @@ msgstr "Macro téléphoniques"
 #: plugins/gofon/phoneaccount/generic.tpl:67
 msgid "Refresh"
 msgstr "Rafraichir"
-
-#: plugins/gofon/reports/class_fonreport.inc:6
-msgid "Phone Reports"
-msgstr "Rapports téléphoniques"
-
-#: plugins/gofon/reports/class_fonreport.inc:155
-msgid "Can't connect to phone database, no reports can be shown!"
-msgstr ""
-"Impossible de se connecter à la base de données des téléphones, aucun "
-"rapport ne peut être affiché!"
-
-#: plugins/gofon/reports/class_fonreport.inc:159
-msgid "Can't select phone database for report generation!"
-msgstr ""
-"Impossible de sélectionner la base de données des téléphones pour la "
-"création de rapports!"
-
-#: plugins/gofon/reports/class_fonreport.inc:168
-msgid "Query for phone database failed!"
-msgstr "La requête sur la base de données des téléphones a échoué!"
-
-#: plugins/gofon/reports/contents.tpl:31
-msgid "Source"
-msgstr "Emetteur"
-
-#: plugins/gofon/reports/contents.tpl:32
-msgid "Destination"
-msgstr "Destinataire"
-
-#: plugins/gofon/reports/contents.tpl:33
-msgid "Channel"
-msgstr "Canal"
-
-#: plugins/gofon/reports/contents.tpl:36
-msgid "Duration"
-msgstr "Durée"
-
-#: plugins/gofon/reports/main.inc:5
-msgid "Phone reports"
-msgstr "Rapports téléphoniques"
 
 #: plugins/gofon/macro/class_gofonMacro.inc:100
 #: plugins/gofon/macro/class_gofonMacroParameters.inc:194
@@ -10624,6 +10622,46 @@ msgstr ""
 #: plugins/gofon/conference/main.inc:38 plugins/gofon/conference/main.inc:40
 msgid "Conference management"
 msgstr "Gestion des conférences"
+
+#: plugins/gofon/fonreports/class_fonreport.inc:6
+msgid "Phone Reports"
+msgstr "Rapports téléphoniques"
+
+#: plugins/gofon/fonreports/class_fonreport.inc:98
+msgid ""
+"Can't connect to phone database, no reports can be shown!. Check server,"
+"username and password combination."
+msgstr "Impossible de se connecter à la base de données des téléphones, aucun rapport ne peut être affiché! Vérifier l'identifiant, le mot de passe et le serveur."
+
+#: plugins/gofon/fonreports/class_fonreport.inc:102
+msgid "Can't select phone (gophone) database for report generation!"
+msgstr ""
+"Impossible de sélectionner la base de données des téléphones pour la "
+"création de rapports!"
+
+#: plugins/gofon/fonreports/class_fonreport.inc:197
+msgid "Query for phone database failed!"
+msgstr "La requête sur la base de données des téléphones a échoué!"
+
+#: plugins/gofon/fonreports/contents.tpl:31
+msgid "Source"
+msgstr "Emetteur"
+
+#: plugins/gofon/fonreports/contents.tpl:32
+msgid "Destination"
+msgstr "Destinataire"
+
+#: plugins/gofon/fonreports/contents.tpl:33
+msgid "Channel"
+msgstr "Canal"
+
+#: plugins/gofon/fonreports/contents.tpl:36
+msgid "Duration"
+msgstr "Durée"
+
+#: plugins/gofon/fonreports/main.inc:5
+msgid "Phone reports"
+msgstr "Rapports téléphoniques"
 
 #: plugins/generic/references/class_reference.inc:46
 msgid "Thin Client"
