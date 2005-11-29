@@ -22,12 +22,13 @@
 # translation of messages.po to
 # translation of messages.po to
 # translation of messages.po to
+# translation of messages.po to
 # translation of messages.po to French
 # Benoit Mortier <benoit.mortier@opensides.be>, 2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
-"PO-Revision-Date: 2005-11-29 14:23+0100\n"
+"PO-Revision-Date: 2005-11-29 20:43+0100\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -221,7 +222,7 @@ msgstr "Exporter"
 msgid "Excel Export"
 msgstr "Exporter en Excel"
 
-#: contrib/gosa.conf:179 plugins/personal/mail/generic.tpl:112
+#: contrib/gosa.conf:179 plugins/personal/mail/generic.tpl:113
 #: plugins/personal/environment/logonManagement.tpl:65
 #: plugins/addons/ldapmanager/contentimport.tpl:49
 #: plugins/addons/ldapmanager/contentcsv.tpl:109
@@ -2410,41 +2411,41 @@ msgstr "Adresse principale"
 msgid "Server"
 msgstr "Serveur"
 
-#: plugins/personal/mail/generic.tpl:13
+#: plugins/personal/mail/generic.tpl:14
 msgid "Specify the mail server where the user will be hosted on"
 msgstr "Indiquez le serveur de messagerie de l'utilisateur"
 
-#: plugins/personal/mail/generic.tpl:22 plugins/admin/groups/mail.tpl:25
+#: plugins/personal/mail/generic.tpl:23 plugins/admin/groups/mail.tpl:25
 msgid "Quota usage"
 msgstr "Utilisation des Quota"
 
-#: plugins/personal/mail/generic.tpl:29 plugins/admin/groups/mail.tpl:32
+#: plugins/personal/mail/generic.tpl:30 plugins/admin/groups/mail.tpl:32
 #: plugins/admin/systems/class_terminalInfo.inc:150
 #: plugins/admin/systems/class_printGeneric.inc:367
 msgid "not defined"
 msgstr "non défini"
 
-#: plugins/personal/mail/generic.tpl:34 plugins/admin/groups/mail.tpl:37
+#: plugins/personal/mail/generic.tpl:35 plugins/admin/groups/mail.tpl:37
 msgid "Quota size"
 msgstr "Taille des Quota"
 
-#: plugins/personal/mail/generic.tpl:48 plugins/admin/groups/mail.tpl:44
+#: plugins/personal/mail/generic.tpl:49 plugins/admin/groups/mail.tpl:44
 msgid "Alternative addresses"
 msgstr "Adresses alternatives"
 
-#: plugins/personal/mail/generic.tpl:50 plugins/admin/groups/mail.tpl:45
+#: plugins/personal/mail/generic.tpl:51 plugins/admin/groups/mail.tpl:45
 #: plugins/admin/systems/phonesettings.tpl:170
 #: plugins/admin/systems/phonesettings.tpl:185
 msgid "List of alternative mail addresses"
 msgstr "Liste des adresses de messagerie alternatives"
 
-#: plugins/personal/mail/generic.tpl:56 plugins/personal/mail/generic.tpl:127
+#: plugins/personal/mail/generic.tpl:57 plugins/personal/mail/generic.tpl:128
 #: plugins/personal/mail/mail_locals.tpl:41
 #: plugins/personal/posix/trust_machines.tpl:39
 #: plugins/personal/posix/posix_groups.tpl:72
 #: plugins/personal/posix/generic.tpl:73
 #: plugins/personal/posix/generic.tpl:102
-#: plugins/personal/samba/samba3.tpl:307
+#: plugins/personal/samba/samba3.tpl:308
 #: plugins/personal/samba/samba3_workstations.tpl:39
 #: plugins/personal/connectivity/class_kolabAccount.inc:203
 #: plugins/personal/connectivity/kolab.tpl:18
@@ -2486,10 +2487,10 @@ msgstr "Liste des adresses de messagerie alternatives"
 msgid "Add"
 msgstr "Ajouter"
 
-#: plugins/personal/mail/generic.tpl:58 plugins/personal/mail/generic.tpl:131
+#: plugins/personal/mail/generic.tpl:59 plugins/personal/mail/generic.tpl:132
 #: plugins/personal/posix/generic.tpl:74
 #: plugins/personal/posix/generic.tpl:104
-#: plugins/personal/samba/samba3.tpl:309
+#: plugins/personal/samba/samba3.tpl:310
 #: plugins/personal/connectivity/kolab.tpl:20
 #: plugins/personal/environment/environment.tpl:135
 #: plugins/personal/environment/environment.tpl:162
@@ -2522,93 +2523,93 @@ msgstr "Ajouter"
 msgid "Delete"
 msgstr "Supprimer"
 
-#: plugins/personal/mail/generic.tpl:66
+#: plugins/personal/mail/generic.tpl:67
 msgid "Mail options"
 msgstr "Options de messagerie"
 
-#: plugins/personal/mail/generic.tpl:71
+#: plugins/personal/mail/generic.tpl:72
 msgid "Select if you want to forward mails without getting own copies of them"
 msgstr ""
 "Sélectionnez ceci si vous souhaitez relayer les messages sans garder de "
 "copie de ceux-ci"
 
-#: plugins/personal/mail/generic.tpl:71
+#: plugins/personal/mail/generic.tpl:72
 msgid "No delivery to own mailbox"
 msgstr "Aucune distribution des messages dans la boite de l'utilisateur"
 
-#: plugins/personal/mail/generic.tpl:74
+#: plugins/personal/mail/generic.tpl:75
 msgid "Select to automatically response with the vacation message defined below"
 msgstr ""
 "Indiquez la réponse automatique en remplissant le message d'absence ci-"
 "dessous"
 
-#: plugins/personal/mail/generic.tpl:74
+#: plugins/personal/mail/generic.tpl:75
 msgid "Activate vacation message"
 msgstr "Activer la notification d'absence"
 
-#: plugins/personal/mail/generic.tpl:81
+#: plugins/personal/mail/generic.tpl:82
 msgid "Select if you want to filter this mails through spamassassin"
 msgstr "Sélectionner ceci si vous voulez que spamassassin filtre les mails"
 
-#: plugins/personal/mail/generic.tpl:81
+#: plugins/personal/mail/generic.tpl:82
 msgid "Move mails tagged with spam level greater than"
 msgstr "Déplacer les messages ayant un niveau de spam supérieur à"
 
-#: plugins/personal/mail/generic.tpl:83
+#: plugins/personal/mail/generic.tpl:84
 msgid "Choose spam level - smaller values are more sensitive"
 msgstr ""
 "Sélectionnez le niveau de spam - une valeur basse implique une plus grande "
 "sélectivité"
 
-#: plugins/personal/mail/generic.tpl:86
+#: plugins/personal/mail/generic.tpl:87
 msgid "to folder"
 msgstr "vers le répertoire"
 
-#: plugins/personal/mail/generic.tpl:93
+#: plugins/personal/mail/generic.tpl:94
 msgid "Reject mails bigger than"
 msgstr "Rejeter les messages plus gros que"
 
-#: plugins/personal/mail/generic.tpl:95
+#: plugins/personal/mail/generic.tpl:96
 #: plugins/personal/connectivity/pureftpd.tpl:40
 #: plugins/personal/connectivity/class_proxyAccount.inc:81
 #: plugins/personal/environment/environment.tpl:71
 msgid "MB"
 msgstr "MB"
 
-#: plugins/personal/mail/generic.tpl:101
+#: plugins/personal/mail/generic.tpl:102
 msgid "Vacation message"
 msgstr "Message d'absence"
 
-#: plugins/personal/mail/generic.tpl:118
+#: plugins/personal/mail/generic.tpl:119
 msgid "Forward messages to"
 msgstr "Transférer les messages vers"
 
-#: plugins/personal/mail/generic.tpl:129
+#: plugins/personal/mail/generic.tpl:130
 #: plugins/gofax/faxaccount/generic.tpl:77 plugins/admin/groups/mail.tpl:96
 msgid "Add local"
 msgstr "Ajouter en local"
 
-#: plugins/personal/mail/generic.tpl:139
+#: plugins/personal/mail/generic.tpl:140
 msgid "Advanced mail options"
 msgstr "Options de messagerie avancées"
 
-#: plugins/personal/mail/generic.tpl:144
+#: plugins/personal/mail/generic.tpl:145
 msgid "Select if user can only send and receive inside his own domain"
 msgstr ""
 "Sélectionnez si vous voulez que les utilisateurs puissent envoyer et "
 "recevoir des messages uniquement dans son propre domaine"
 
-#: plugins/personal/mail/generic.tpl:145
+#: plugins/personal/mail/generic.tpl:146
 msgid "User is only allowed to send and receive local mails"
 msgstr ""
 "Les utilisateurs ne sont autorisés qu'à envoyer et recevoir des messages "
 "locaux"
 
-#: plugins/personal/mail/generic.tpl:152
+#: plugins/personal/mail/generic.tpl:153
 msgid "Use custom sieve script"
 msgstr "Utiliser des scripts sieve personnalisés"
 
-#: plugins/personal/mail/generic.tpl:152
+#: plugins/personal/mail/generic.tpl:153
 msgid "disables all Mail options!"
 msgstr "désactive toutes les options de messagerie!"
 
@@ -3299,6 +3300,7 @@ msgstr "Chemin du Script"
 #: plugins/personal/samba/samba2.tpl:36 plugins/personal/samba/samba3.tpl:44
 #: plugins/personal/samba/samba3.tpl:95
 #: plugins/personal/samba/class_sambaAccount.inc:634
+#: plugins/admin/groups/acl_definition.inc:177
 msgid "Profile path"
 msgstr "Chemin du Profile"
 
@@ -3313,6 +3315,7 @@ msgstr ""
 "cliente"
 
 #: plugins/personal/samba/samba2.tpl:57 plugins/personal/samba/samba3.tpl:239
+#: plugins/admin/groups/acl_definition.inc:180
 msgid "Login from windows client requires no password"
 msgstr "L'identification sur une station windows ne nécessite pas de mot de passe"
 
@@ -3333,6 +3336,7 @@ msgid "Allow login on terminal server"
 msgstr "Permet la connexion sur un serveur de terminaux"
 
 #: plugins/personal/samba/samba3.tpl:107
+#: plugins/admin/groups/acl_definition.inc:189
 msgid "Inherit client config"
 msgstr "Hérite de la configuration du client"
 
@@ -3368,14 +3372,17 @@ msgid "Client devices"
 msgstr "Périphériques clients"
 
 #: plugins/personal/samba/samba3.tpl:172
+#: plugins/admin/groups/acl_definition.inc:183
 msgid "Connect client drives at logon"
 msgstr "Connecter les lecteurs clients à l'identification"
 
 #: plugins/personal/samba/samba3.tpl:178
+#: plugins/admin/groups/acl_definition.inc:184
 msgid "Connect client printers at logon"
 msgstr "Connecter les imprimantes clients à l'identification"
 
 #: plugins/personal/samba/samba3.tpl:184
+#: plugins/admin/groups/acl_definition.inc:185
 msgid "Default to main client printer"
 msgstr "Imprimante par défaut"
 
@@ -3385,14 +3392,17 @@ msgid "Miscellaneous"
 msgstr "Divers"
 
 #: plugins/personal/samba/samba3.tpl:198
+#: plugins/admin/groups/acl_definition.inc:186
 msgid "Shadowing"
 msgstr "Masquer"
 
 #: plugins/personal/samba/samba3.tpl:207
+#: plugins/admin/groups/acl_definition.inc:187
 msgid "On broken or timed out"
 msgstr "Sur interrompu ou temps d'attente dépassé"
 
 #: plugins/personal/samba/samba3.tpl:215
+#: plugins/admin/groups/acl_definition.inc:188
 msgid "Reconnect if disconnected"
 msgstr "Reconnexion si déconnecté"
 
@@ -3401,18 +3411,21 @@ msgid "Lock samba account"
 msgstr "Verrouiller le compte Samba"
 
 #: plugins/personal/samba/samba3.tpl:257
+#: plugins/admin/groups/acl_definition.inc:169
 msgid "Limit Logon Time"
 msgstr "Limiter les temps d'accès"
 
 #: plugins/personal/samba/samba3.tpl:269
+#: plugins/admin/groups/acl_definition.inc:170
 msgid "Limit Logoff Time"
 msgstr "Limiter les heures de deconnections"
 
-#: plugins/personal/samba/samba3.tpl:281
+#: plugins/personal/samba/samba3.tpl:282
 msgid "Account expires after"
 msgstr "Le compte expire après"
 
-#: plugins/personal/samba/samba3.tpl:301
+#: plugins/personal/samba/samba3.tpl:302
+#: plugins/admin/groups/acl_definition.inc:182
 msgid "Allow connection from these workstations only"
 msgstr "Permet la connections depuis ces stations seulement"
 
@@ -4320,18 +4333,18 @@ msgstr ""
 "Extension d'environnement désactivée. Vous devez d'abord créer un compte "
 "posix avant de pouvoir activer cette extension."
 
-#: plugins/personal/environment/class_environment.inc:485
-#: plugins/personal/environment/class_environment.inc:487
+#: plugins/personal/environment/class_environment.inc:486
+#: plugins/personal/environment/class_environment.inc:488
 #: plugins/admin/systems/class_terminalStartup.inc:134
 #: plugins/admin/systems/class_workstationStartup.inc:345
 msgid "You must specify a valid mount point."
 msgstr "Veuillez indiquer un point de montage valide."
 
-#: plugins/personal/environment/class_environment.inc:716
+#: plugins/personal/environment/class_environment.inc:717
 msgid "Please set a valid profile quota size."
 msgstr "Veuillez indiquer un quota valide pour le profil."
 
-#: plugins/personal/environment/class_environment.inc:723
+#: plugins/personal/environment/class_environment.inc:724
 msgid ""
 "You need to setup a valid posix extension in order to enable evironment "
 "features."
@@ -4339,23 +4352,23 @@ msgstr ""
 "Vous devez configurer correctement l'extension posix pour activer "
 "l'extension d'environnement."
 
-#: plugins/personal/environment/class_environment.inc:745
+#: plugins/personal/environment/class_environment.inc:746
 msgid "Can't save new kiosk profiles, possibly permission denied for folder"
 msgstr ""
 "Impossible de sauver de nouveaux profiles kiosk, je n'ai pas les droits sur "
 "le répertoire"
 
-#: plugins/personal/environment/class_environment.inc:838
+#: plugins/personal/environment/class_environment.inc:839
 msgid "Error while writing printer"
 msgstr "Une erreur s'est produite lors de la sauvegarde de l'imprimante"
 
-#: plugins/personal/environment/class_environment.inc:908
+#: plugins/personal/environment/class_environment.inc:909
 msgid "Error while writing printer settings"
 msgstr ""
 "Une erreur s'est produite lors de la sauvegarde des paramètres de "
 "l'imprimante"
 
-#: plugins/personal/environment/class_environment.inc:1030
+#: plugins/personal/environment/class_environment.inc:1031
 msgid "Admin"
 msgstr "Administrateur"
 
@@ -4559,6 +4572,7 @@ msgid "Script can be replaced by user"
 msgstr "Le script peut être remplacé par l'utilisateur"
 
 #: plugins/personal/environment/logonManagement.tpl:56
+#: plugins/admin/groups/acl_definition.inc:176
 msgid "Logon script"
 msgstr "Script de démarrage"
 
@@ -5359,7 +5373,9 @@ msgstr "Rapports des Fax"
 
 #: plugins/gofax/faxreports/class_faxreport.inc:91
 msgid "There is no fax database defined in your config. Can't query anything."
-msgstr "Il n'y a pas de base de données définie dans votre configuration. Je ne peut pas faire de recherche."
+msgstr ""
+"Il n'y a pas de base de données définie dans votre configuration. Je ne peut "
+"pas faire de recherche."
 
 #: plugins/gofax/faxreports/class_faxreport.inc:94
 msgid "There is no mysql extension available, please check your php setup."
@@ -5369,7 +5385,10 @@ msgstr "Il n'y a pas d'extension msql disponible, vérifiez votre configuration 
 msgid ""
 "Can't connect to fax database, no reports can be shown!. Check username, "
 "password and server settings."
-msgstr "Impossible de se connecter à la base de données des fax, aucun rapport ne peut être affiché! Vérifiez l'identification, mot de passe ainsi que les paramètres du serveur."
+msgstr ""
+"Impossible de se connecter à la base de données des fax, aucun rapport ne "
+"peut être affiché! Vérifiez l'identification, mot de passe ainsi que les "
+"paramètres du serveur."
 
 #: plugins/gofax/faxreports/class_faxreport.inc:105
 #: plugins/gofax/faxreports/class_faxreport.inc:155
@@ -5846,7 +5865,9 @@ msgstr "Pas d'extension mysql, impossible de se connecter au serveur mysql."
 msgid ""
 "Can't connect to mysql server, please check username, password and server "
 "settings."
-msgstr "Impossible de se connecter au serveur msyql, veuillez vérifier l'identifiant, le mot de passe et les paramètres du serveur."
+msgstr ""
+"Impossible de se connecter au serveur msyql, veuillez vérifier "
+"l'identifiant, le mot de passe et les paramètres du serveur."
 
 #: plugins/addons/logview/class_logview.inc:77
 #: plugins/addons/logview/class_logview.inc:171
@@ -6142,6 +6163,38 @@ msgstr ""
 #: plugins/admin/groups/class_groupGeneric.inc:649
 msgid "Value specified as 'Name' is already used."
 msgstr "La valeur spécifiée dans le champs 'Nom' existe déjà."
+
+#: plugins/admin/groups/acl_definition.inc:171
+msgid "Account expiry"
+msgstr "Expiration du compte"
+
+#: plugins/admin/groups/acl_definition.inc:172
+msgid "Can change password"
+msgstr "Peut modifier le mot de passe"
+
+#: plugins/admin/groups/acl_definition.inc:173
+msgid "Password expiry"
+msgstr "Expiration du mot de passe"
+
+#: plugins/admin/groups/acl_definition.inc:174
+msgid "Home path"
+msgstr "Répertoire personnel"
+
+#: plugins/admin/groups/acl_definition.inc:175
+msgid "Home drive"
+msgstr "Lettre assignée au répertoire personnel"
+
+#: plugins/admin/groups/acl_definition.inc:178
+msgid "Samba domain name"
+msgstr "Nom du du domaine Samba"
+
+#: plugins/admin/groups/acl_definition.inc:179
+msgid "Allow password change"
+msgstr "Permettre de changer le mot de passe"
+
+#: plugins/admin/groups/acl_definition.inc:181
+msgid "Lock account"
+msgstr "Verrouiller le compte"
 
 #: plugins/admin/groups/mail.tpl:11
 msgid "Primary mail address for this shared folder"
@@ -7124,7 +7177,7 @@ msgstr "Vous n'avez pas l'autorisation de créer un composant sur cette 'Base'."
 #: plugins/admin/systems/class_winGeneric.inc:166
 #: plugins/admin/systems/class_terminalGeneric.inc:260
 #: plugins/admin/systems/class_servGeneric.inc:183
-#: plugins/admin/systems/class_workstationGeneric.inc:216
+#: plugins/admin/systems/class_workstationGeneric.inc:217
 #: plugins/admin/systems/class_printGeneric.inc:456
 #: plugins/admin/systems/class_componentGeneric.inc:136
 #: plugins/admin/systems/class_phoneGeneric.inc:302
@@ -7617,11 +7670,12 @@ msgid "Instant update"
 msgstr "Mise à jour immédiate"
 
 #: plugins/admin/systems/class_workstationGeneric.inc:129
-#: plugins/admin/systems/class_workstationGeneric.inc:134
+#: plugins/admin/systems/class_workstationGeneric.inc:135
 msgid "Scheduled update"
 msgstr "Mise à jour programmée"
 
 #: plugins/admin/systems/class_workstationGeneric.inc:130
+#: plugins/admin/systems/class_workstationGeneric.inc:134
 msgid "Reinstall"
 msgstr "Reinstaller"
 
@@ -7629,13 +7683,13 @@ msgstr "Reinstaller"
 msgid "Rescan hardware"
 msgstr "Recherche du matériel"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:199
+#: plugins/admin/systems/class_workstationGeneric.inc:200
 msgid "You have no permissions to create a workstation on this 'Base'."
 msgstr ""
 "Vous n'avez pas les droits nécessaires pour créer une station de travail "
 "dans cette 'Base'."
 
-#: plugins/admin/systems/class_workstationGeneric.inc:203
+#: plugins/admin/systems/class_workstationGeneric.inc:204
 msgid "The required field 'Workstation name' is not set."
 msgstr "Le champ obligatoire 'Nom de la station de travail' n'est pas renseigné."
 
@@ -10631,7 +10685,10 @@ msgstr "Rapports téléphoniques"
 msgid ""
 "Can't connect to phone database, no reports can be shown!. Check server,"
 "username and password combination."
-msgstr "Impossible de se connecter à la base de données des téléphones, aucun rapport ne peut être affiché! Vérifier l'identifiant, le mot de passe et le serveur."
+msgstr ""
+"Impossible de se connecter à la base de données des téléphones, aucun "
+"rapport ne peut être affiché! Vérifier l'identifiant, le mot de passe et le "
+"serveur."
 
 #: plugins/gofon/fonreports/class_fonreport.inc:102
 msgid "Can't select phone (gophone) database for report generation!"
