@@ -32,61 +32,7 @@ class logview extends plugin
                 register_global("logfilter", $logfilter);
         }
 
-	/* Get list of hosts and log levels */
-	if (!isset($this->config->data['SERVERS']['LOG'])){
-		print_red (_("No LOG servers defined!"));
-		return;
-	}
 
-	if(!is_callable("mysql_connect")){
-		return;
-	}
-
-	$cfg= $this->config->data['SERVERS']['LOG'];
-	$tmp= set_error_handler('dummy_error_handler');
-	$link = @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
-	set_error_handler($tmp);
-	if ($link === FALSE){
-		return;
-	}
-	if (! @mysql_select_db("gomon")){
-		print_red(_("Can't select log database for log generation!"));
-		return;
-	}
-
-	/* Host list */
-	$query= "SELECT DISTINCT host FROM golog LIMIT 200;";
-	@DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__, $query, "Database query");
-	$result = @mysql_query($query);
-	if ($result === false){
-		print_red(_("Query for log database failed!"));
-		return;
-	}
-	while ($line = mysql_fetch_array($result, MYSQL_ASSOC)){
-		$this->hostlist[$line['host']]= $line['host'];
-	}
-	$this->hostlist['!All']= _("All");
-	ksort($this->hostlist);
-
-	/* Log level list */
-	$query= "SELECT DISTINCT log_level FROM golog LIMIT 200;";
-	@DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__, $query, "Database query");
-	$result = @mysql_query($query);
-	if ($result === false){
-		print_red(_("Query for log database failed!"));
-		return;
-	}
-	while ($line = mysql_fetch_array($result, MYSQL_ASSOC)){
-		$this->loglevellist[$line['log_level']]= $line['log_level'];
-	}
-	$this->loglevellist['!All']= _("All");
-	ksort($this->loglevellist);
-
-	/* Time interval */
-	$this->tilist= array("0" => _("one hour"), "1" => _("6 hours"),
-			"2" => _("12 hours"), "3" => _("24 hours"),
-			"4" => _("2 days"), "5" => _("one week"),
-			"6" => _("2 weeks"), "7" => _("one month"));
   }
 
   function execute()
@@ -94,55 +40,123 @@ class logview extends plugin
 	/* Call parent execute */
 	plugin::execute();
 
+	$logfilter= get_global("logfilter");
+	$smarty= get_smarty();
+	$smarty->assign("search_result", "");
+	$smarty->assign("plug", "?plug=".validate($_GET['plug']));
+	$smarty->assign("search_image", get_template_path('images/search.png'));
+	$smarty->assign("time_image", get_template_path('images/time.png'));
+	$smarty->assign("server_image", get_template_path('images/server.png'));
+	$smarty->assign("log_image", get_template_path('images/log_warning.png'));
+	$smarty->assign("ruleset_image", get_template_path('images/edit.png'));
+	$smarty->assign("launchimage", get_template_path('images/launch.png'));
+	$smarty->assign("hostlist", $this->hostlist);
+	$smarty->assign("loglevellist", $this->loglevellist);
+	$smarty->assign("tilist", $this->tilist);
+
+	$logfilter['regex']= preg_replace('/\%/', '*', $logfilter['regex']);
+	foreach( array("host", "log_level", "time", "regex") as $type){
+		$smarty->assign("$type", $logfilter[$type]);
+	}
+
+	if (!isset($this->config->data['SERVERS']['LOG'])){
+		print_red (_("No LOG servers defined!"));
+		return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
+	}elseif(!is_callable("mysql_connect")){
+		print_red(_("No mysql extension loaded, can't connect to mysql server."));
+		return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
+	}else{
+		$cfg= $this->config->data['SERVERS']['LOG'];
+		
+		$link = @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
+		if ($link === FALSE){
+			print_red(_("Can't connect to mysql server, please check username, password and server settings."));
+			return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
+		}
+		if (! @mysql_select_db("gomon")){
+			print_red(_("Can't select log database for log generation!"));
+			return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
+		}
+
+		/* Host list */
+		$query= "SELECT DISTINCT host FROM golog LIMIT 200;";
+		@DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__, $query, "Database query");
+		$result = @mysql_query($query);
+		if ($result === false){
+			print_red(_("Query for log database failed!"));
+			return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
+		}
+		
+		if(count($this->hostlist) == 0){
+			while ($line = mysql_fetch_array($result, MYSQL_ASSOC)){
+				$this->hostlist[$line['host']]= $line['host'];
+			}
+			$this->hostlist['!All']= _("All");
+			ksort($this->hostlist);
+		}
+
+		/* Log level list */
+		$query= "SELECT DISTINCT log_level FROM golog LIMIT 200;";
+		@DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__, $query, "Database query");
+		$result = @mysql_query($query);
+		if ($result === false){
+			print_red(_("Query for log database failed!"));
+			return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
+		}
+		
+		if(count($this->loglevellist)){
+			while ($line = mysql_fetch_array($result, MYSQL_ASSOC)){
+				$this->loglevellist[$line['log_level']]= $line['log_level'];
+			}
+			$this->loglevellist['!All']= _("All");
+			ksort($this->loglevellist);
+		}
+	}
+
+	if(count($this->tilist) == 0){
+		/* Time interval */
+		$this->tilist= array("0" => _("one hour"), "1" => _("6 hours"),
+				"2" => _("12 hours"), "3" => _("24 hours"),
+				"4" => _("2 days"), "5" => _("one week"),
+				"6" => _("2 weeks"), "7" => _("one month"));
+	}
+	
 	if(isset($_POST['EntriesPerPage'])){
 		$this->range = $_POST['EntriesPerPage'];
 	}
 
-  	/* Ignore if not defined */
-  	if (!isset($this->config->data['SERVERS']['LOG'])){
-		return;
+	/* Save data */
+	$logfilter= get_global("logfilter");
+	foreach( array("host", "time", "log_level", "regex") as $type){
+		if (isset($_POST[$type])){
+			$logfilter[$type]= $_POST[$type];
+		}
 	}
-
-    if(!is_callable("mysql_connect")){
-        print_red(_("There is no mysql extension available in your php setup, can't perform any query."));
-        return;
-    }
-
-
-
-        /* Save data */
-        $logfilter= get_global("logfilter");
-        foreach( array("host", "time", "log_level", "regex") as $type){
-                if (isset($_POST[$type])){
-                        $logfilter[$type]= $_POST[$type];
-                }
-        }
 	if ($logfilter['regex'] == ""){
 		$logfilter['regex']= '%';
 	} else {
 		$logfilter['regex']= preg_replace('/\*/', '%', $logfilter['regex']);
 	}
-        register_global("logfilter", $logfilter);
+	register_global("logfilter", $logfilter);
 
-	$smarty= get_smarty();
 	if (isset($_GET['start'])){
-                $this->start= (int)$_GET['start'];
-        }
+		$this->start= (int)$_GET['start'];
+	}
 
-        /* Adapt sorting */
-        if (isset($_GET['sort'])){
-                if ($this->sort == (int)$_GET['sort']){
-                        if ($this->sort_direction == "down"){
-                                $this->sort_direction= "up";
-                        } else {
-                                $this->sort_direction= "down";
-                        }
-                }
-                $this->sort= (int)$_GET['sort'];
-                if ($this->sort < 0 || $this->sort > 3){
-                        $this->sort= 0;
-                }
-        }
+	/* Adapt sorting */
+	if (isset($_GET['sort'])){
+		if ($this->sort == (int)$_GET['sort']){
+			if ($this->sort_direction == "down"){
+				$this->sort_direction= "up";
+			} else {
+				$this->sort_direction= "down";
+			}
+		}
+		$this->sort= (int)$_GET['sort'];
+		if ($this->sort < 0 || $this->sort > 3){
+			$this->sort= 0;
+		}
+	}
 
 	/* Query stuff */
 	$res= "";
@@ -225,10 +239,6 @@ class logview extends plugin
 			$query= "SELECT * FROM golog WHERE message like '".$logfilter['regex']."' $ll $hf AND time_stamp <= $end AND time_stamp >= $start ORDER BY ".$this->fields[$this->sort]." $desc LIMIT ".$this->start.",25;";
 			@DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__, $query, "Database query");
 			$result = @mysql_query($query);
-			if ($result === false){
-				print_red(_("Query for log database failed!"));
-				return;
-			}
 
 			/* Display results */
 			$mod= 0;
@@ -241,7 +251,7 @@ class logview extends plugin
 
 				$res.="<tr style=\"$col\">\n";
 				$res.="<td style=\"text-align:center\">
-						<img alt=\"\" src=\"".get_template_path('images/log_'.strtolower($line['log_level'])).".png\" title=\"Log level is '".$line['log_level']."'\"></td><td>".$line['host']."</td>";
+					<img alt=\"\" src=\"".get_template_path('images/log_'.strtolower($line['log_level'])).".png\" title=\"Log level is '".$line['log_level']."'\"></td><td>".$line['host']."</td>";
 				$res.="<td>".$line['time_stamp']."</td><td width=\"100%\">".$line['message']."</td>";
 				$res.="</tr>\n";
 			}
@@ -250,28 +260,6 @@ class logview extends plugin
 	}
 
 	/* Show main page */
-	$smarty->assign("search_result", $res);
-	$smarty->assign("plug", "?plug=".validate($_GET['plug']));
-	$smarty->assign("search_image", get_template_path('images/search.png'));
-	$smarty->assign("time_image", get_template_path('images/time.png'));
-	$smarty->assign("server_image", get_template_path('images/server.png'));
-	$smarty->assign("log_image", get_template_path('images/log_warning.png'));
-	$smarty->assign("ruleset_image", get_template_path('images/edit.png'));
-	$smarty->assign("launchimage", get_template_path('images/launch.png'));
-
-
-	$smarty->assign("hostlist", $this->hostlist);
-
-	$smarty->assign("loglevellist", $this->loglevellist);
-
-	$smarty->assign("tilist", $this->tilist);
-	
-	$logfilter['regex']= preg_replace('/\%/', '*', $logfilter['regex']);
-	foreach( array("host", "log_level", "time", "regex") as $type){
-                $smarty->assign("$type", $logfilter[$type]);
-        }
-	$smarty->assign("mode".$this->sort, "<img alt=\"\" src=\"images/sort_".$this->sort_direction.
-                        ".png\" border=0 align=middle>");
 	return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
   }
 
