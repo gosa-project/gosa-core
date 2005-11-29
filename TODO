@@ -4,13 +4,6 @@ Things to fix before 2.4:
 Showed up by a small review. Since we've time until the doc is ready,
 face these:
 
-* Make "Fax reports", "Phone reports", "Syslog" and "Mailqueue" look
-  identical if nothing is defined. Mailqueue is the reference.
-	(if nothing is defined ?)
-
-* Check the LDAP manager. The "Back" links are not working (logout) and
-  should be replaced by a "Back" button.
-
 * Check "rgrep FIXME *", especially the ACL issues
 
 * Fix problem with non-existing entries in the package list
