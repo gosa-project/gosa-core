@@ -12,7 +12,7 @@
 				<tr>
 					<td style="vertical-align:top">
 						<input class="center" type="checkbox" value="1" {$useProfileCHK} name="useProfile" {$useProfileACL} id="useProfile"
-									onclick="changeState('gotoProfileServer');changeState('gotoProfileFlag_C');">
+									onclick="changeState('gotoProfileServer');changeState('gotoProfileFlag_C');" {$gotoProfileFlagsACL}>
 					</td>
 					<td style="vertical-align:middle;">
 						<label for="useProfile">{t}Use profile managment{/t}</label>
@@ -38,7 +38,7 @@
 							<tr>
 								<td colspan=2>	
 									<input class="center" type="checkbox" name="gotoProfileFlag_C" value="C" 
-										id="gotoProfileFlag_C" {$gotoProfileACL} {$gotoProfileFlag_CCHK}>&nbsp;
+										id="gotoProfileFlag_C" {$useProfileACL} {$gotoProfileFlagsACL} {$gotoProfileFlag_CCHK}>&nbsp;
 									<label for="gotoProfileFlag_C">{t}Cache profile localy{/t}</label>
 								</td>
 							</tr>
@@ -75,7 +75,7 @@
 				</tr>
 				<tr>
 					<td colspan=2>
-						<input type="checkbox" name="gotoProfileFlag_L" id="gotoProfileFlag_L" value="L" {$gotoProfileACL} {$gotoProfileFlag_LCHK}>
+						<input type="checkbox" name="gotoProfileFlag_L" id="gotoProfileFlag_L" value="L" {$gotoProfileFlagsACL} {$gotoProfileFlag_LCHK}>
 						<label for="gotoProfileFlag_L">{t}Resolution changeable on runtime{/t}</label>
 					</td>
 				</tr>
