@@ -208,5 +208,8 @@ $ACLD['gotoEnvironment']=array(
 					);
 
 
+$ACLD['goFonAccount'] = array("goFonDeliveryMode", "goFonFormat",
+      "goFonHardware","goFonPIN","goFonVoicemailPIN","telephoneNumber", "goFonMacro","macro");
+
 $ACLD['global-addressbook']=  array("create", "delete");
 ?>
