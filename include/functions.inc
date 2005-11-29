@@ -1239,7 +1239,7 @@ function range_selector($dcnt,$start,$range=25,$post_var=false)
 
   if($post_var){
     $output.= "<div style='border:1px solid #E0E0E0; background-color:#FFFFFF;'>
-              <table width='100%'><tr><td style='width:20%'></td><td style='align:center;'>";
+              <table width='100%'><tr><td style='width:25%'></td><td style='align:center;'>";
   }else{
     $output.= "<div style='border:1px solid #E0E0E0; background-color:#FFFFFF;'>";
   }
@@ -1271,7 +1271,7 @@ function range_selector($dcnt,$start,$range=25,$post_var=false)
   }
 
   if(($post_var)&&($numpages)){
-    $output.= "</td><td style='width:20%;text-align:right'>&nbsp;"._("Entries per page")."&nbsp;<select name='".$post_var."' onChange='javascript:document.mainform.submit()'>";
+    $output.= "</td><td style='width:25%;text-align:right'>&nbsp;"._("Entries per page")."&nbsp;<select name='".$post_var."' onChange='javascript:document.mainform.submit()'>";
     foreach(array(20,50,100,200,"all") as $num){
       if($num == "all"){
         $var = 10000;
