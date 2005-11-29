@@ -11,10 +11,6 @@ face these:
 * Check the LDAP manager. The "Back" links are not working (logout) and
   should be replaced by a "Back" button.
 
-* Clicking on "CSV Import" produces tons of PHP errors on PHP5
-  "Uninitialized string offset: 0". Clicking there a second time, does
-  not produce errors
-
 * Check "rgrep FIXME *", especially the ACL issues
 
 * Fix problem with non-existing entries in the package list
