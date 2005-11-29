@@ -62,13 +62,56 @@ class faxreport extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
+	
+	$months= array();
+	$months[1]= _("January"); $months[2]= _("February"); $months[3]= _("March"); $months[4]= _("April");
+	$months[5]= _("May"); $months[6]= _("June"); $months[7]= _("July"); $months[8]= _("August");
+	$months[9]= _("September"); $months[10]= _("October"); $months[11]= _("November"); $months[12]= _("December");
+
+	$current= date("Y");
+	$years= array();
+	for ($y= $current - 5; $y<=$current; $y++){
+		$years[]= $y;
+	}
+
+	$smarty= get_smarty();
+	$smarty->assign("launchimage"		, get_template_path('images/launch.png'));
+	$smarty->assign("search_image"		, get_template_path('images/search.png'));
+	$smarty->assign("search_for"		, $this->search_for);
+    $smarty->assign("bases"				, $this->config->idepartments);
+    $smarty->assign("base_select"		, $this->search_base);
+    $smarty->assign("months"			, $months);
+	$smarty->assign("month_select"		, $this->month);
+    $smarty->assign("years"				, $years);
+	$smarty->assign("year_select"		, $this->year);
+	$smarty->assign("search_result"		, "");
+
+	/* Some checks */
+	if(!isset($this->config->data['SERVERS']['FAX'])){
+		print_red(_("There is no fax database defined in your config. Can't query anything."));
+		return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
+	}elseif(!is_callable("mysql_connect")){
+		print_red(_("There is no mysql extension available, please check your php setup."));	
+		return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
+	}else{
+		/* Connecting, selecting database */
+		$cfg	= $this->config->data['SERVERS']['FAX'];
+		$link 	= @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
+		if ($link === FALSE){
+			print_red(_("Can't connect to fax database, no reports can be shown!. Check username, password and server settings."));
+			return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
+		}
+		if (! @mysql_select_db("gofax")){
+			print_red(_("Can't select fax database for report generation!"));
+			return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
+		}
+	}		
 
 	if(isset($_POST['EntriesPerPage'])){
 		$this->range = $_POST['EntriesPerPage'];
 	}
 
 	/* Get template engine */
-	$smarty= get_smarty();
 	$faxfilter= get_global("faxreportfilter");
         foreach( array("year", "month", "search_for", "search_base") as $type){
                 if (isset($_POST[$type])){
@@ -102,10 +145,6 @@ class faxreport extends plugin
 		/* Connecting, selecting database */
 		$cfg= $this->config->data['SERVERS']['FAX'];
 
-		if(!is_callable("mysql_connect")){
-			print_red(_("There is no mysql extension available, please check your php setup."));	
-			return;	
-		}		
 
 		$link = @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
 		if ($link === FALSE){
@@ -284,23 +323,6 @@ class faxreport extends plugin
 		$output.= "<tr style=\"height:22px; $col\">$val</tr>";
 	}
 
-	/* Prepare template */
-	$smarty->assign("search_for", $this->search_for);
-        $smarty->assign("bases", $this->config->idepartments);
-        $smarty->assign("base_select", $this->search_base);
-	$months= array();
-	$months[1]= _("January"); $months[2]= _("February"); $months[3]= _("March"); $months[4]= _("April");
-	$months[5]= _("May"); $months[6]= _("June"); $months[7]= _("July"); $months[8]= _("August");
-	$months[9]= _("September"); $months[10]= _("October"); $months[11]= _("November"); $months[12]= _("December");
-        $smarty->assign("months", $months);
-	$smarty->assign("month_select", $this->month);
-	$current= date("Y");
-	$years= array();
-	for ($y= $current - 5; $y<=$current; $y++){
-		$years[]= $y;
-	}
-        $smarty->assign("years", $years);
-	$smarty->assign("year_select", $this->year);
 
 	if (isset($fax_users) && count($fax_users)){
 		$smarty->assign("search_result", $output);
@@ -313,14 +335,12 @@ class faxreport extends plugin
 
 	/* Show main page */
     $smarty->assign("plug", "?plug=".validate($_GET['plug']));
-	$smarty->assign("launchimage", get_template_path('images/launch.png'));
-	$smarty->assign("search_image", get_template_path('images/search.png'));
 	for($i= 0; $i<7; $i++){
 		$smarty->assign("mode$i", "");
 	}
 	$smarty->assign("mode".$this->sort, "<img alt=\"\" src=\"images/sort_".$this->sort_direction.
 			".png\" border=0 align=middle>");
-        return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
+    return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
   }
 
 }
