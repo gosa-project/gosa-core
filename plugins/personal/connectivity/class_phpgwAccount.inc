@@ -107,21 +107,22 @@ class phpgwAccount extends plugin
   function save()
   {
     plugin::save();
+    if ($this->parent != NULL){
+      /* Write back to ldap */
+      $ldap= $this->config->get_ldap_link();
+      $ldap->cd($this->dn);
+      $ldap->modify($this->attrs);
+      show_ldap_error($ldap->get_error());
 
-    /* Write back to ldap */
-    $ldap= $this->config->get_ldap_link();
-    $ldap->cd($this->dn);
-    $ldap->modify($this->attrs);
-    show_ldap_error($ldap->get_error());
-
-    /* Optionally execute a command after we're done */
-    if ($this->initially_was_account == $this->is_account){
-      if ($this->is_modified){
-        $this->handle_post_events("mofify");
+      /* Optionally execute a command after we're done */
+      if ($this->initially_was_account == $this->is_account){
+        if ($this->is_modified){
+          $this->handle_post_events("mofify");
+        }
+      } else {
+        $this->handle_post_events("add");
       }
-    } else {
-      $this->handle_post_events("add");
-    }
+      }
   }
 
 }
