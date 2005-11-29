@@ -56,12 +56,59 @@ class fonreport extends plugin
 	/* Call parent execute */
 	plugin::execute();
 
+	/* Get template engine */
+	$smarty= get_smarty();
+
+	$months= array();
+	$months[1]= _("January"); $months[2]= _("February"); $months[3]= _("March"); $months[4]= _("April");
+	$months[5]= _("May"); $months[6]= _("June"); $months[7]= _("July"); $months[8]= _("August");
+	$months[9]= _("September"); $months[10]= _("October"); $months[11]= _("November"); $months[12]= _("December");
+
+	/* Prepare template */
+	$current= date("Y");
+	$years= array();
+	for ($y= $current - 5; $y<=$current; $y++){
+		$years[]= $y;
+	}
+
+	$smarty->assign("plug"			, "?plug=".validate($_GET['plug']));
+	$smarty->assign("launchimage"	, get_template_path('images/launch.png'));
+	$smarty->assign("search_image"	, get_template_path('images/search.png'));
+	$smarty->assign("search_for"	, $this->search_for);
+	$smarty->assign("bases"			, $this->config->idepartments);
+	$smarty->assign("base_select"	, $this->search_base);
+	$smarty->assign("months"		, $months);
+	$smarty->assign("month_select"	, $this->month);
+	$smarty->assign("years"			, $years);
+	$smarty->assign("year_select"	, $this->year);
+	$smarty->assign("search_result"	, "");
+ 	
+	/* Connecting, selecting database */
+	if (!isset($this->config->data['SERVERS']['FON'])){
+		print_red("There is no asterisk database defined. Can't query anything.");
+		return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
+	}elseif(!is_callable("mysql_connect")){
+		print_red("There is no mysql extension available. Can't establish database connection.");
+		return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
+	}else{
+
+		$cfg= $this->config->data['SERVERS']['FON'];
+		$link = @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
+		if ($link === FALSE){
+			print_red(_("Can't connect to phone database, no reports can be shown!. Check server,username and password combination."));
+			return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
+		}
+		if (! @mysql_select_db("gophone")){
+			print_red(_("Can't select phone (gophone) database for report generation!"));
+			return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
+		}
+	}
+
+
 	if(isset($_POST['EntryPerPage'])){
 		$this->range = $_POST['EntryPerPage'];
 	}
 
-	  /* Get template engine */
-	  $smarty= get_smarty();
 	  $fonfilter= get_global("fonfilter");
 	  foreach( array("year", "month", "search_for", "search_base") as $type){
 		  if (isset($_POST[$type])){
@@ -139,26 +186,8 @@ class fonreport extends plugin
 		"WHERE calldate <= $end AND ".
 		"calldate >= $start ORDER BY ".$this->fields[$this->sort]." $desc;";
 
-	/* Connecting, selecting database */
-	if (!isset($this->config->data['SERVERS']['FON'])){
-		return ("");
-	}
-
-	if(!is_callable("mysql_connect")){
-		print_red("There is no mysql extension available.");
-		return;
-	}
-
 	$cfg= $this->config->data['SERVERS']['FON'];
 	$link = @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
-	if ($link === FALSE){
-		print_red(_("Can't connect to phone database, no reports can be shown!"));
-		return;
-	}
-	if (! @mysql_select_db("gophone")){
-		print_red(_("Can't select phone database for report generation!"));
-		return;
-	}
 
 	@DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__,
 			$query, "Database query");
@@ -166,7 +195,7 @@ class fonreport extends plugin
 	$result = @mysql_query($query);
 	if ($result === false){
 		print_red(_("Query for phone database failed!"));
-		return;
+		return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 	}
 	$report_list= array();
 	while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
@@ -187,8 +216,8 @@ class fonreport extends plugin
 	}
 
 	$this->report_list= $report_list;
-	mysql_close($link);
-#        }
+	@mysql_close($link);
+#   }
 
 	/* Generate output */
 	$mod= 0;
@@ -214,23 +243,6 @@ class fonreport extends plugin
 		$output.= "<tr style=\"height:22px; $col\">$val</tr>";
 	}
 
-	/* Prepare template */
-	$smarty->assign("search_for", $this->search_for);
-	$smarty->assign("bases", $this->config->idepartments);
-	$smarty->assign("base_select", $this->search_base);
-	$months= array();
-	$months[1]= _("January"); $months[2]= _("February"); $months[3]= _("March"); $months[4]= _("April");
-	$months[5]= _("May"); $months[6]= _("June"); $months[7]= _("July"); $months[8]= _("August");
-	$months[9]= _("September"); $months[10]= _("October"); $months[11]= _("November"); $months[12]= _("December");
-	$smarty->assign("months", $months);
-	$smarty->assign("month_select", $this->month);
-	$current= date("Y");
-	$years= array();
-	for ($y= $current - 5; $y<=$current; $y++){
-		$years[]= $y;
-	}
-	$smarty->assign("years", $years);
-	$smarty->assign("year_select", $this->year);
 
 	if ($output != ""){
 		$smarty->assign("search_result", $output);
@@ -240,9 +252,6 @@ class fonreport extends plugin
 	}
 
 	/* Show main page */
-	$smarty->assign("plug", "?plug=".validate($_GET['plug']));
-	$smarty->assign("launchimage", get_template_path('images/launch.png'));
-	$smarty->assign("search_image", get_template_path('images/search.png'));
         for($i= 0; $i<7; $i++){
                 $smarty->assign("mode$i", "");
         }
