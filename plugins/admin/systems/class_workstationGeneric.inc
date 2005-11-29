@@ -68,6 +68,7 @@ class workgeneric extends plugin
     $this->modes["active"]= _("Activated");
     $this->modes["locked"]= _("Locked");
     $this->modes["memcheck"]= _("Memory test");
+    $this->modes["recovery"]= _("Recovery");
 
     /* Set base */
     if ($this->dn == "new"){
