@@ -10,7 +10,8 @@
     <tr>
      <td><label for="gosaMailServer">{t}Server{/t}</label></td>
      <td>
-      <select size="1" id="gosaMailServer" name="gosaMailServer" {$gosaMailServerACL} title="{t}Specify the mail server where the user will be hosted on{/t}">
+      <select size="1" id="gosaMailServer" name="gosaMailServer" {$gosaMailServerACL} 
+			title="{t}Specify the mail server where the user will be hosted on{/t}">
 		    {html_options values=$mailServers output=$mailServers selected=$gosaMailServer}
 			<option disabled>&nbsp;</option>
       </select>
@@ -47,7 +48,7 @@
   <td style="vertical-align:top;">
    <h2><p class="center"<img class="center" alt="" align="middle" src="images/alternatemail.png" /><label for="alternates_list"> {t}Alternative addresses{/t}</label></p></h2>
    <select id="alternates_list" style="width:100%;height:100px;" name="alternates_list[]" size="15"
-	 multiple title="{t}List of alternative mail addresses{/t}">
+		 multiple title="{t}List of alternative mail addresses{/t}" {$gosaMailAlternateAddressACL}>
             {html_options values=$gosaMailAlternateAddress output=$gosaMailAlternateAddress}
 			<option disabled>&nbsp;</option>
    </select>
@@ -117,7 +118,7 @@
    <p style="margin-bottom:0px;">
     <b><label for="forwarder_list">{t}Forward messages to{/t}</label></b>
    </p>
-   <select id="gosaMailForwardingAddress" style="width:100%; height:100px;" name="forwarder_list[]" size=15 multiple>
+   <select id="gosaMailForwardingAddress" style="width:100%; height:100px;" name="forwarder_list[]" size=15 multiple {$gosaMailForwardingAddressACL}>
 			{html_options values=$gosaMailForwardingAddress output=$gosaMailForwardingAddress selected=$template}        
 			<option disabled>&nbsp;</option>
    </select>
