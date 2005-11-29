@@ -135,6 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
   if (is_null($ldap) || (is_int($ldap) && $ldap == 0)){
     print_red (_("Can't bind to LDAP. Please contact the system administrator."));
     echo $_SESSION['errors'];
+    $smarty->display(get_template_path('login.tpl'));
     exit();
   }
 
@@ -168,10 +169,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
   $ldap->cd($config->current['BASE']);
   $ldap->search("(&(objectClass=gosaObject)(gosaSubtreeACL=:all))");
   if ($ldap->count() < 1){
-#FIXME: -> ldapsetup.tpl would be better
     print_red(_("You're missing an administrative account for GOsa, you'll not be able to administrate anything!"));
-    echo $_SESSION['errors'];
-    exit;
+    displayLogin();
+    exit();
   }
 
   /* Check for valid input */
@@ -254,6 +254,71 @@ if ($error_collector != ""){
   $smarty->assign("php_errors", "");
 }
 $smarty->display (get_template_path('login.tpl'));
+
+
+
+
+
+
+
+function displayLogin()
+{
+  global $smarty,$message,$config,$ssl,$error_collector;
+  error_reporting(E_ALL);
+    /* Fill template with required values */
+    $username = "";
+    if(isset($_POST["username"])){
+      $username= $_POST["username"];
+    }
+    $smarty->assign ('date', gmdate("D, d M Y H:i:s"));
+    $smarty->assign ('username', $username);
+    $smarty->assign ('personal_img', get_template_path('images/personal.png'));
+    $smarty->assign ('password_img', get_template_path('images/password.png'));
+    $smarty->assign ('directory_img', get_template_path('images/ldapserver.png'));
+
+    /* Some error to display? */
+    if (!isset($message)){
+      $message= "";
+    }
+    $smarty->assign ("message", $message);
+
+    /* Displasy SSL mode warning? */
+    if ($ssl != "" && $config->data['MAIN']['WARNSSL'] == 'true'){
+      $smarty->assign ("ssl", "<b>"._("Warning").":</b> "._("Session will not be encrypted.")." <a style=\"color:red;\" href=\"$ssl\"><b>"._("Enter         SSL         session")."</b></a>!");
+    } else {
+      $smarty->assign ("ssl", "");
+    }
+
+    /* Generate server list */
+    $servers= array();
+    if (isset($_POST['server'])){
+      $selected= validate($_POST['server']);
+    } else {
+      $selected= $config->data['MAIN']['DEFAULT'];
+    }
+    foreach ($config->data['LOCATIONS'] as $key => $ignored){
+      $servers[$key]= $key;
+    }
+    $smarty->assign ("server_options", $servers);
+    $smarty->assign ("server_id", $selected);
+
+    /* show login screen */
+    $smarty->display (get_template_path('headers.tpl'));
+    $smarty->assign ("PHPSESSID", session_id());
+    if (isset($_SESSION['errors'])){
+      $smarty->assign("errors", $_SESSION['errors']);
+    }
+    if ($error_collector != ""){
+      $smarty->assign("php_errors", $error_collector."</div>");
+    } else {
+      $smarty->assign("php_errors", "");
+    }
+
+    $smarty->display(get_template_path('login.tpl'));
+    exit();
+}
+
+
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
