@@ -63,7 +63,7 @@
 		<br>
 	</div>
 	<div align="right">
-		<a href="">{t}Back{/t}</a>&nbsp;
+		<input type="submit" value="{t}back{/t}" name='back'>
 	</div>
 {/if}
 <p class="plugbottom">
