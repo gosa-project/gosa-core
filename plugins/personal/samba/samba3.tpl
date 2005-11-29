@@ -241,7 +241,7 @@
    <input id="temporary_disable" type=checkbox name="temporary_disable" value="1" {$flagsD} {$temporary_disableACL}>
    <label for="temporary_disable">{t}Lock samba account{/t}</label>
    <br>
-   <input id="password_expires" type=checkbox name="password_expires" value="1" {$flagsC} {$password_expiresACL}>
+   <input id="password_expires" type=checkbox name="password_expires" value="1" {$flagsC} {$sambaPwdMustChangeACL}>
    <label for="password_expires">{t}Password expires on{/t}</label>
    <select name=day onChange="createResult(this.form,this.form.sambaPwdMustChange);" {$sambaPwdMustChangeACL}>
     {html_options values=$days output=$days selected=$day}
@@ -253,7 +253,7 @@
     {html_options values=$years output=$years selected=$year}
    </select>
    <br>
-   <input id="logon_time_set" type=checkbox name="logon_time_set" value="1" {$flagsT} {$logon_time_setACL}>
+   <input id="logon_time_set" type=checkbox name="logon_time_set" value="1" {$flagsT} {$sambaLogonTimeACL}>
    <label for="logon_time_set">{t}Limit Logon Time{/t}</label>
    <select name=sambaLogonTime_day onChange="createResult_sambaLogonTime(this.form,this.form.sambaLogonTime);" {$sambaLogonTimeACL}>
    {html_options values=$sambaLogonTime_days output=$sambaLogonTime_days selected=$sambaLogonTime_day}
@@ -265,7 +265,7 @@
    {html_options values=$sambaLogonTime_years output=$sambaLogonTime_years selected=$sambaLogonTime_year}
    </select>
    <br>
-   <input id="logoff_time_set" type=checkbox name="logoff_time_set" value="1" {$flagsO} {$logoff_time_setACL}>
+   <input id="logoff_time_set" type=checkbox name="logoff_time_set" value="1" {$flagsO} {$sambaLogoffTimeACL}>
    <label for="logoff_time_set">{t}Limit Logoff Time{/t}</label>
    <select name=sambaLogoffTime_day onChange="createResult_sambaLogoffTime(this.form,this.form.sambaLogoffTime);" {$sambaLogoffTimeACL}>
    {html_options values=$sambaLogoffTime_days output=$sambaLogoffTime_days selected=$sambaLogoffTime_day}
@@ -277,7 +277,8 @@
    {html_options values=$sambaLogoffTime_years output=$sambaLogoffTime_years selected=$sambaLogoffTime_year}
    </select>
    <br>
-   <input id="kickoff_time_set" type=checkbox name="kickoff_time_set" value="1" {$flagsK} {$kickoff_time_setACL}>
+   
+   <input id="kickoff_time_set" type=checkbox name="kickoff_time_set" value="1" {$flagsK} {$sambaKickoffTimeACL}>
    <label for="kickoff_time_set">{t}Account expires after{/t}</label>
    <select name=sambaKickoffTime_day onChange="createResult_sambaKickoffTime(this.form,this.form.sambaKickoffTime);" {$sambaKickoffTimeACL}>
    {html_options values=$sambaKickoffTime_days output=$sambaKickoffTime_days selected=$sambaKickoffTime_day}

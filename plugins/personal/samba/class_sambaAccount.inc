@@ -512,7 +512,7 @@ class sambaAccount extends plugin
 
 
       $smarty->assign("workstations", $ws);
-      $smarty->assign("sambaUserWorkstationACL", chkacl($this->acl,"sambauserworkstation"));
+      $smarty->assign("sambaUserWorkstationACL", chkacl($this->acl,"sambaUserWorkstation"));
     }
 
     /* Variables */
