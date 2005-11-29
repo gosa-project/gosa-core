@@ -131,6 +131,7 @@ class workgeneric extends plugin
                                        "rescan" => _("Rescan hardware")));
     } else {
       $smarty->assign("actions", array("wake" => _("Wake up"),
+                                       "reinstall" => _("Reinstall"),
                                        "update" => _("Scheduled update")));
     }
     /* Arrays */
