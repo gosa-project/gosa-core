@@ -126,6 +126,7 @@ class workgeneric extends plugin
       $smarty->assign("actions", array("halt" => _("Switch off"), "reboot" => _("Reboot"),
                                        "instant_update" => _("Instant update"),
                                        "update" => _("Scheduled update"),
+                                       "update" => _("Reinstall"),
                                        "rescan" => _("Rescan hardware")));
     } else {
       $smarty->assign("actions", array("wake" => _("Wake up"),
