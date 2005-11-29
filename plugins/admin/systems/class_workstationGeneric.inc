@@ -26,6 +26,8 @@ class workgeneric extends plugin
   var $ghSoundAdapter= "-";
   var $gotoLastUser= "-";
 
+  var $didAction= FALSE;
+
   /* Needed values and lists */
   var $base= "";
   var $cn= "";
@@ -100,6 +102,8 @@ class workgeneric extends plugin
         exec ($cmd." ".$this->macAddress." ".escapeshellarg($_POST['saction']), $dummy, $retval);
         if ($retval != 0){
           print_red(sprintf(_("Execution of '%s' failed!"), $cmd));
+        } else {
+          $this->didAction= TRUE;
         }
       }
     }
@@ -265,14 +269,18 @@ class workgeneric extends plugin
       $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
       $ldap->cd($this->dn);
       $ldap->add($this->attrs);
-      $this->handle_post_events("add");
+      if(!$this->didAction){
+        $this->handle_post_events("add");
+      }
     } else {
       if ($this->orig_dn != $this->dn){
         $this->move($this->orig_dn, $this->dn);
       }
       $ldap->cd($this->dn);
       $ldap->modify($this->attrs);
-      $this->handle_post_events("modify");
+      if(!$this->didAction){
+        $this->handle_post_events("modify");
+      }
     }
     show_ldap_error($ldap->get_error());
 
