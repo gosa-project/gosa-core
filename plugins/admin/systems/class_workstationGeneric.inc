@@ -97,7 +97,7 @@ class workgeneric extends plugin
       if ($cmd == ""){
         print_red(_("No ACTIONCMD definition found in your gosa.conf"));
       } else {
-        exec ($cmd." ".$this->macAddress." ".escapeshellarg($_POST['action']), $dummy, $retval);
+        exec ($cmd." ".$this->macAddress." ".escapeshellarg($_POST['saction']), $dummy, $retval);
         if ($retval != 0){
           print_red(sprintf(_("Execution of '%s' failed!"), $cmd));
         }
