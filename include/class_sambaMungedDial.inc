@@ -272,6 +272,13 @@ class sambaMungedDial
 		} else {
 			$result['CtxInitialProgramMode'] = "";
 		}
+	}else{
+		foreach ($this->timeParams as $value) {
+			$result[$value."Mode"]= "";
+		}
+		
+		$result['CtxInitialProgramMode'] = "";
+
 	}
 
 	return $result;

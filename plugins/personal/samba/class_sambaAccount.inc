@@ -579,7 +579,7 @@ class sambaAccount extends plugin
 
 
     /* In case of javascript, disable some fields on demand */
-    if ($this->samba3 && $_SESSION['js']){
+    if ($this->samba3){
       foreach($this->mungedObject->getOnDemandFlags() as $key => $value) {
         $smarty->assign("$key", "$value");
       }
