@@ -93,7 +93,7 @@ class workgeneric extends plugin
     }
 
     if (isset($_POST['action'])){
-      $cmd= search_config($this->config->data['TABS'], "terminfo", "ACTIONCMD");
+      $cmd= search_config($this->config->data['TABS'], "workgeneric", "ACTIONCMD");
       if ($cmd == ""){
         print_red(_("No ACTIONCMD definition found in your gosa.conf"));
       } else {
