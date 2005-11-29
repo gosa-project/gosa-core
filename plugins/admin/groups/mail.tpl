@@ -8,7 +8,7 @@
    <table summary="">
     <tr>
      <td><LABEL for="mail">{t}Primary address{/t}</LABEL>{$must}</td>
-     <td><input id="mail" name="mail" size=25 maxlength=65 {$mailACL} value="{$mail}" title="{t}Primary mail address for this shared folder{/t}"></td>
+     <td><input id="mail" name="mail" size="25" maxlength="65" {$mailACL} value="{$mail}" title="{t}Primary mail address for this shared folder{/t}"></td>
     </tr>
     <tr>
      <td><LABEL for="gosaMailServer">{t}Server{/t}</LABEL></td>
@@ -35,7 +35,7 @@
     </tr>
     <tr>
      <td>{t}Quota size{/t}</td>
-     <td><input id="gosaMailQuota" name="gosaMailQuota" size=6 align=middle maxlength=30 {$gosaMailQuotaACL} value="{$gosaMailQuota}"> KB</td>
+     <td><input id="gosaMailQuota" name="gosaMailQuota" size="6" align=middle maxlength="30" {$gosaMailQuotaACL} value="{$gosaMailQuota}"> KB</td>
     </tr>
    </table>
      
@@ -47,7 +47,7 @@
 	<option disabled>&nbsp;</option>
    </select>
    <br>
-   <input name="alternate_address" size=30 align=middle maxlength=30 {$gosaMailAlternateAddressACL} value="">
+   <input name="alternate_address" size="30" align=middle maxlength="60" {$gosaMailAlternateAddressACL} value="">
    <input type=submit value="{t}Add{/t}" name="add_alternate" {$gosaMailAlternateAddressACL}>&nbsp;
    <input type=submit value="{t}Delete{/t}" name="delete_alternate" {$gosaMailAlternateAddressACL}>
   </td>

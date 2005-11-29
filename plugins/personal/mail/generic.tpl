@@ -33,7 +33,7 @@
     <tr>
      <td><label for="gosaMailQuota">{t}Quota size{/t}</label></td>
      <td>
-      <input id="gosaMailQuota" name="gosaMailQuota" size="6" align="middle" maxlength="30" {$gosaMailQuotaACL}
+      <input id="gosaMailQuota" name="gosaMailQuota" size="6" align="middle" maxlength="60" {$gosaMailQuotaACL}
 		value="{$gosaMailQuota}"> KB
      </td>
     </tr>
@@ -52,7 +52,7 @@
 			<option disabled>&nbsp;</option>
    </select>
    <br />
-   <input name="alternate_address" size=30 align="middle" maxlength="65" {$gosaMailAlternateAddressACL} value="">
+   <input name="alternate_address" size="30" align="middle" maxlength="65" {$gosaMailAlternateAddressACL} value="">
    <input type=submit value="{t}Add{/t}" name="add_alternate"
 	{$gosaMailAlternateAddressACL}>&nbsp;
    <input type=submit value="{t}Delete{/t}" name="delete_alternate"
@@ -91,7 +91,7 @@
    <br>
    <input type=checkbox name="use_mailsize_limit" value="1" {$use_mailsize_limit}
 	{$gosaMailMaxSizeACL}> <label for="gosaMailMaxSize">{t}Reject mails bigger than{/t}</label> 
-   <input id="gosaMailMaxSize" name="gosaMailMaxSize" size=6 align="middle" maxlength="30" {$gosaMailMaxSizeACL}
+   <input id="gosaMailMaxSize" name="gosaMailMaxSize" size="6" align="middle" maxlength="30" {$gosaMailMaxSizeACL}
 	value="{$gosaMailMaxSize}"> {t}MB{/t}
   </td>
  </tr>
