@@ -49,6 +49,8 @@ class phpgwAccount extends plugin
 
     if ($this->parent != NULL){
       $smarty->assign("tabbed", 1);
+    }else{
+      $smarty->assign("tabbed", 0);
     }
 
     $smarty->assign('phpgwAccountACL', chkacl($this->acl, 'phpgwAccount'));
