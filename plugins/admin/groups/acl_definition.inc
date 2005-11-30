@@ -245,8 +245,8 @@ $ACLD['intranetAccount']		=array("intranetAccount" 		);
 $ACLD['pptpAccount']			=array("gosapptp" 	  			);
 $ACLD['phpscheduleitAccount']	=array("gosaphpscheduleit" 	  	);
 
-$ACLD['goFonAccount'] = array("goFonDeliveryMode", "goFonFormat",
-      "goFonHardware","goFonPIN","goFonVoicemailPIN","telephoneNumber", "goFonMacro","macro");
+$ACLD['phoneAccount'] = array("goFonDeliveryMode",
+      "goFonHardware","goFonPIN","goFonVoicemailPIN","telephoneNumber", "goFonMacro");
 
 $ACLD['global-addressbook']=  array("create", "delete");
 ?>
