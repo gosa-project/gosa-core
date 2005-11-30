@@ -53,7 +53,11 @@ class pureftpdAccount extends plugin
       $smarty->assign("fstate", "");
     } else {
       $smarty->assign("pureftpdState", "");
-      $smarty->assign("fstate", "disabled");
+      if($_SESSION['js']==1){
+        $smarty->assign("fstate", "disabled");
+      }else{
+        $smarty->assign("fstate", "");
+      }
     }
     $smarty->assign("use_FTPStatus", ($this->FTPStatus == "disabled") ? "checked" : "");
 
