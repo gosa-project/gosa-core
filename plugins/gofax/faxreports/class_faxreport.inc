@@ -88,17 +88,17 @@ class faxreport extends plugin
 
 	/* Some checks */
 	if(!isset($this->config->data['SERVERS']['FAX'])){
-		print_red(_("There is no fax database defined in your config. Can't query anything."));
+		print_red(_("Can't connect to fax database, no reports can be shown!"));
 		return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 	}elseif(!is_callable("mysql_connect")){
-		print_red(_("There is no mysql extension available, please check your php setup."));	
+		print_red(_("There is no mysql extension available, please check your php setup."));
 		return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 	}else{
 		/* Connecting, selecting database */
 		$cfg	= $this->config->data['SERVERS']['FAX'];
 		$link 	= @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
 		if ($link === FALSE){
-			print_red(_("Can't connect to fax database, no reports can be shown!. Check username, password and server settings."));
+			print_red(_("Can't connect to fax database, no reports can be shown!"));
 			return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 		}
 		if (! @mysql_select_db("gofax")){
