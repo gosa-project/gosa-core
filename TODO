@@ -22,6 +22,11 @@ face these:
 
 * No error message if fax server is configured and database configuration is missing
 
+* please check what happened to sizelimit buttons after moving to another list box
+
+* Problem with FAI-Profiles which don't show up with _all_ available classes
+
+
 Target for 2.5:
 ===============
 
