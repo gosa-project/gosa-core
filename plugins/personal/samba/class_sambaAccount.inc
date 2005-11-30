@@ -565,17 +565,17 @@ class sambaAccount extends plugin
       $smarty->assign("flagsK", "");
     }
     
-    $smarty->assign("allow_pwchangeACL", chkacl($this->acl, "allow_pwchange"));
-    $smarty->assign("password_expiresACL", chkacl($this->acl, "password_expires"));
-    $smarty->assign("no_password_requiredACL", chkacl($this->acl, "no_password_required"));
-    $smarty->assign("temporary_disableACL", chkacl($this->acl, "temporary_disable"));
-    $smarty->assign("sambaDomainNameACL", chkacl($this->acl, "sambaDomainName"));
-    $smarty->assign("logon_time_setACL", chkacl($this->acl, "logon_time_set"));
-    $smarty->assign("logoff_time_setACL", chkacl($this->acl, "logoff_time_set"));
-    $smarty->assign("kickoff_time_setACL", chkacl($this->acl, "kickoff_time_set"));
-    $smarty->assign("sambaLogonTimeACL", chkacl($this->acl, "sambaLogonTime"));
-    $smarty->assign("sambaLogoffTimeACL", chkacl($this->acl, "sambaLogoffTime"));
-    $smarty->assign("sambaKickoffTimeACL", chkacl($this->acl, "sambaKickoffTime"));
+    $smarty->assign("allow_pwchangeACL",        chkacl($this->acl, "allow_pwchange"));
+    $smarty->assign("password_expiresACL",      chkacl($this->acl, "password_expires"));
+    $smarty->assign("no_password_requiredACL",  chkacl($this->acl, "no_password_required"));
+    $smarty->assign("temporary_disableACL",     chkacl($this->acl, "temporary_disable"));
+    $smarty->assign("sambaDomainNameACL",       chkacl($this->acl, "sambaDomainName"));
+    $smarty->assign("logon_time_setACL",        chkacl($this->acl, "logon_time_set"));
+    $smarty->assign("logoff_time_setACL",       chkacl($this->acl, "logoff_time_set"));
+    $smarty->assign("kickoff_time_setACL",      chkacl($this->acl, "kickoff_time_set"));
+    $smarty->assign("sambaLogonTimeACL",        chkacl($this->acl, "sambaLogonTime"));
+    $smarty->assign("sambaLogoffTimeACL",       chkacl($this->acl, "sambaLogoffTime"));
+    $smarty->assign("sambaKickoffTimeACL",      chkacl($this->acl, "sambaKickoffTime"));
 
 
     /* In case of javascript, disable some fields on demand */

@@ -60,24 +60,33 @@
   <td style="vertical-align:top;width:50%">
    <input type=checkbox name="tslogin" id="tslogin" value="1" {$tslogin} {$tsloginACL}
    	onclick="
-		changeState('CtxWFHomeDir');
-		changeState('CtxWFHomeDirDrive');
-		changeState('CtxWFProfilePath');
-		changeState('inherit');
+		
+		{if $connectclientdrivesACL==""}	changeState('CtxWFHomeDir');		{/if}
+		{if $CtxWFHomeDirDriveACL==""} 		changeState('CtxWFHomeDirDrive');	{/if}
+		{if $CtxWFProfilePathACL==""} 		changeState('CtxWFProfilePath'); 	{/if}
+
+		{if $inheritACL==""}				
+		changeState('inherit');				
 		changeTripleSelectState_2nd_neg('tslogin','inherit','CtxInitialProgram');
 		changeTripleSelectState_2nd_neg('tslogin','inherit','CtxWorkDirectory');
-		changeState('CtxMaxConnectionTimeF');
-		changeState('CtxMaxDisconnectionTimeF');
-		changeState('CtxMaxIdleTimeF');
+		{/if}
+		
+		{if $CtxMaxConnectionTimeACL==""}      	changeState('CtxMaxConnectionTimeF'); 	{/if}
+		{if $CtxMaxDisconnectionTimeACL==""}   	changeState('CtxMaxDisconnectionTimeF');{/if}
+		{if $CtxMaxIdleTimeACL==""}      		changeState('CtxMaxIdleTimeF');			{/if}
+	
+		
 		changeTripleSelectState('tslogin','CtxMaxConnectionTimeF','CtxMaxConnectionTime');
 		changeTripleSelectState('tslogin','CtxMaxDisconnectionTimeF','CtxMaxDisconnectionTime');
 		changeTripleSelectState('tslogin','CtxMaxIdleTimeF','CtxMaxIdleTime');
-		changeState('connectclientdrives');
-		changeState('connectclientprinters');
-		changeState('defaultprinter');
-		changeState('shadow');
-		changeState('brokenconn');
-		changeState('reconn');
+	
+		{if $connectclientdrivesACL==""}	changeState('connectclientdrives');		{/if}
+		{if $connectclientprintersACL==""}	changeState('connectclientprinters');	{/if}
+		{if $defaultprinterACL==""}			changeState('defaultprinter');			{/if}
+		
+		{if $shadowACL == "" }				changeState('shadow'); 				{/if}
+		{if $brokenconnACL == "" }          changeState('brokenconn');			{/if}
+		{if $reconnACL == "" }              changeState('reconn');				{/if}
 	">
    <i>{t}Allow login on terminal server{/t}</i>
    <table summary="">
@@ -103,13 +112,15 @@
    &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <input type=checkbox id="inherit" name="inherit" {$inherit} {$inheritACL} onclick="changeState('CtxInitialProgram'); changeState('CtxWorkDirectory')" {$tsloginstate}>
+   <input type=checkbox id="inherit" name="inherit" {$inherit} {$inheritACL} 
+	onclick="{if $CtxInitialProgramACL ==""}changeState('CtxInitialProgram');{/if}
+			 {if $CtxWorkDirectoryACL ==""}changeState('CtxWorkDirectory');{/if}" {$tsloginstate}>
    <i>{t}Inherit client config{/t}</i>
    <table summary="">
     <tr>
      <td><label for="CtxInitialProgram">{t}Initial program{/t}</label></td>
      <td>
-      <input id="CtxInitialProgram" name="CtxInitialProgram" size=35 maxlength=60 {if $CtxInitialProgramACL==""}{$CtxInitialProgramMode}{/if} value="{$CtxInitialProgram}" {$CtxInitialProgramACL} {$tsloginstate} {$inheritstate}>
+      <input id="CtxInitialProgram" name="CtxInitialProgram" size=35 maxlength=60 {if $CtxInitialProgramACL==""}{$CtxInitialProgramMode}{/if} value="{$CtxInitialProgram}" {$CtxInitialProgramACL} .  {$tsloginstate} . {$inheritstate}>
      </td>
     </tr>
     <tr>
