@@ -284,7 +284,7 @@ function displayLogin()
 
     /* Displasy SSL mode warning? */
     if ($ssl != "" && $config->data['MAIN']['WARNSSL'] == 'true'){
-      $smarty->assign ("ssl", "<b>"._("Warning").":</b> "._("Session will not be encrypted.")." <a style=\"color:red;\" href=\"$ssl\"><b>"._("Enter         SSL         session")."</b></a>!");
+      $smarty->assign ("ssl", "<b>"._("Warning").":</b> "._("Session will not be encrypted.")." <a style=\"color:red;\" href=\"$ssl\"><b>"._("Enter SSL session")."</b></a>!");
     } else {
       $smarty->assign ("ssl", "");
     }
