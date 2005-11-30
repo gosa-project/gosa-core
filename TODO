@@ -6,8 +6,21 @@ face these:
 
 * Check "rgrep FIXME *", especially the ACL issues
 
+* Set default help to english
+
+* Check all fixme, acl ... (Fabian)
+
+* Check Lock entries for FAI dialogs, some dialogs can be aborted without any warning.
+
+* When editing MyAccount->Generic, the base is empty possibly acls incorrect.
+
+* applications -> new application -> editieren -> options hinzu -> Generic -> skript wird nicht aktualisiert
+
+* man kann keine gruppenzuordnungen im drucker dialog löschen
+
 * Fix problem with non-existing entries in the package list
 
+* No error message if fax server is configured and database configuration is missing
 
 Target for 2.5:
 ===============
