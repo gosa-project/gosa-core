@@ -63,14 +63,14 @@ class logview extends plugin
 		print_red (_("No LOG servers defined!"));
 		return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
 	}elseif(!is_callable("mysql_connect")){
-		print_red(_("No mysql extension loaded, can't connect to mysql server."));
+		print_red(_("There is no mysql extension available, please check your php setup."));
 		return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
 	}else{
 		$cfg= $this->config->data['SERVERS']['LOG'];
 		
 		$link = @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
 		if ($link === FALSE){
-			print_red(_("Can't connect to mysql server, please check username, password and server settings."));
+			print_red(_("Can't connect to log database, no logs can be shown!"));
 			return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
 		}
 		if (! @mysql_select_db("gomon")){
