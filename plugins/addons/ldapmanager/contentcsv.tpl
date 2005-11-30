@@ -36,7 +36,7 @@
     	 <b style="color:red">{t}Oups. There was an error during the import of your data.{/t}</b>
 	{/if}
 
-<b>{t}Here is the status report for the import{/t} : </b>
+<b>{t}Here is the status report for the import:{/t} </b>
 <br>
 <br>
 
