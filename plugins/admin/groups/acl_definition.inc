@@ -156,16 +156,15 @@ $ACLD['posix']=      array("allowedHosts",
 			"shadowMin",
 			"shadowWarning",
 			"uidNumber");
-$ACLD['samba']=      array("acctFlags",
-			"allow_pwchange",
-			"homeDrive",
-			"no_password_required",
-			"profilePath",
-			"scriptPath",
-			"smbHome",
-			"temporary_disable");
-
-$ACLD['samba'] = array (
+$ACLD['samba']=      
+			array("acctFlags" => "samba2:acctFlags", 
+			"allow_pwchange" => "samba2:allow_pwchange",
+			"homeDrive" 	=> "samba2:homeDrive",
+			"no_password_required" => "samba2:no_password_required",
+			"profilePath"		=> "samba2:profilePath",
+			"scriptPath" => "samba2:scriptPath",
+			"smbHome" => "samba2:smbHome",
+			"temporary_disable" => "samba2:temporary_disable",
 			 	        "sambaHomePath"		,//=> _("Home path"), 
 						"sambaHomeDrive"	,//=> _("Home drive"), 
 						"sambaDomainName"	,//=> _("Samba domain name"),
