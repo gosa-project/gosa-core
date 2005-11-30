@@ -37,18 +37,11 @@ class proxyAccount extends plugin
 
     /* Prepare templating */
     $smarty= get_smarty();
-    $smarty->assign("proxyAccountACL", chkacl($this->acl, "proxyAccount"));
-    $smarty->assign("gosaProxyAcctFlagsACL", chkacl($this->acl, "gosaProxyAcctFlags"));
+    $smarty->assign("proxyAccountACL",          chkacl($this->acl, "proxyAccount"));
+    $smarty->assign("gosaProxyAcctFlagsACL",    chkacl($this->acl, "gosaProxyAcctFlags"));
     $smarty->assign("gosaProxyWorkingStartACL", chkacl($this->acl, "gosaProxyWorkingStart"));
-    $smarty->assign("gosaProxyWorkingStopACL", chkacl($this->acl, "gosaProxyWorkingStop"));
-    $smarty->assign("gosaProxyQuotaACL", chkacl($this->acl, "gosaProxyQuota"));
-
-    /* Show checkbox? */
-    if ($this->parent != NULL){
-      $smarty->assign("tabbed", "1");
-    } else {
-      $smarty->assign("tabbed", "0");
-    }
+    $smarty->assign("gosaProxyWorkingStopACL",  chkacl($this->acl, "gosaProxyWorkingStop"));
+    $smarty->assign("gosaProxyQuotaACL",        chkacl($this->acl, "gosaProxyQuota"));
 
     /* Assign radio boxes */
     foreach (array("F", "T", "B", "N") as $val){
@@ -62,7 +55,11 @@ class proxyAccount extends plugin
         $smarty->assign("filter$val", "");
 
         /* Same as above */
-        $smarty->assign($val."state", "disabled");
+        if($_SESSION['js']==1){
+          $smarty->assign($val."state", "disabled");
+        }else{
+          $smarty->assign($val."state", "");
+        }
       }
     }
 
@@ -194,6 +191,12 @@ class proxyAccount extends plugin
           $this->is_account= FALSE;
         }
       }
+    }
+
+    if(isset($_POST['proxy'])){
+      $this->is_account = TRUE; 
+    }else{
+      $this->is_account = FALSE;
     }
 
     /* Save flag value */

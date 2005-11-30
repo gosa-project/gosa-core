@@ -2,6 +2,7 @@
 		<input type="checkbox" id="proxy" name="proxy" value="B" {$proxyState} {$proxyAccountACL} 
 			onClick="
 				{$changeA}
+				
 				changeTripleSelectState('proxy', 'filterB', 'quota_size'); 
 				changeTripleSelectState('proxy', 'filterB', 'quota_unit'); 
 				changeTripleSelectState('proxy', 'filterB', 'gosaProxyQuotaPeriod');
