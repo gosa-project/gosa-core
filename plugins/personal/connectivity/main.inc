@@ -110,7 +110,7 @@ if (!$remove_lock){
     $in_edit_mode|= $connectivity->plugin[$name]->is_account;
   }
   if ($in_edit_mode){
-
+    $display.="<div align='right'>";
     if (isset($_SESSION['edit'])){
       $display.= "<input type=submit name=\"edit_finish\" value=\""._("Finish")."\">\n";
       $display.= "&nbsp;";
@@ -127,6 +127,7 @@ if (!$remove_lock){
       }
       $display.= "<input type=\"hidden\" name=\"ignore\">\n";
     }
+    $display.="</div>";
   }
   $display.= "</p>\n";
 
