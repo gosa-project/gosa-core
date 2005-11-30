@@ -62,7 +62,7 @@ if (!$remove_lock){
 	} else {
 		$acl= get_permissions ($ui->dn, $ui->subtreeACL);
 		$editacl= get_module_permission($acl, "phoneAccount", $ui->dn);
-		$phoneAccount->acl= "#none#";
+		$phoneAccount->acl="#none#"; 
 	}
 
 	/* save changes to LDAP and disable edit mode */
@@ -74,12 +74,13 @@ if (!$remove_lock){
 		/* No errors, save object */
 		if (count ($message) == 0){
 			$phoneAccount->save ();
+
+			$phoneAccount->acl="#none#"; 
 			gosa_log ("User/phone object'".$ui->dn."' has been saved");
-			$phoneAccount->acl= "#none#";
 			del_lock ($ui->dn);
 			sess_del ('edit');
 
-                        /* Write back to session */
+			/* Write back to session */
 			$_SESSION['phoneAccount']= $phoneAccount;
 		} else {
 			/* Errors found, show message */

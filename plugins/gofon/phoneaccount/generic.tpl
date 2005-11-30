@@ -60,7 +60,7 @@
 		<table summary="{t}Phone macro{/t}">
 			<tr>
 				<td colspan=2>
-					 <select name="macro" onchange="document.mainform.submit()" {$telephoneNumberACL}>
+					 <select name="macro" onchange="document.mainform.submit()" {$goFonMacroACL}>
 					   {html_options options=$macros selected=$macro}
 				<option disabled>&nbsp;</option>
 					 </select>

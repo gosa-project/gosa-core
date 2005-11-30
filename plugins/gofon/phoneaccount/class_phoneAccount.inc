@@ -781,7 +781,7 @@ class phoneAccount extends plugin
 
     /* Transfer ACL's */
     foreach($this->attributes as $val){
-      $smarty->assign($val."ACL", chkacl($this->acl, "$val"));
+      $smarty->assign($val."ACL", chkacl($this->acl,$val));
       if(isset($this->$val)){
         $smarty->assign($val,$this->$val);
       }else{
