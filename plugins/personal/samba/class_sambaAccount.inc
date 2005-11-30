@@ -475,10 +475,15 @@ class sambaAccount extends plugin
       $smarty->assign("reconnmode", $this->mungedObject->getReConn());
       $smarty->assign("reconnACL", chkacl($this->acl,"reconn"));
 
-      /* Set form elements to disabled/enable state */
-      $smarty->assign("tsloginstate", $this->mungedObject->getTsLogin()?"":"disabled");
-      $smarty->assign("inheritstate", $this->mungedObject->getInheritMode()?"disabled":"");
-      
+      if($_SESSION['js']){
+        /* Set form elements to disabled/enable state */
+        $smarty->assign("tsloginstate", $this->mungedObject->getTsLogin()?"":"disabled");
+        $smarty->assign("inheritstate", $this->mungedObject->getInheritMode()?"disabled":"");
+      }else{
+        $smarty->assign("tsloginstate", "");
+        $smarty->assign("inheritstate", "");
+      }      
+
       /* Set checkboxes to checked or unchecked state */
       $smarty->assign("tslogin", $this->mungedObject->getTsLogin()?"checked":"");
       $smarty->assign("tsloginACL", chkacl($this->acl,"tslogin"));
