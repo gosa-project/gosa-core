@@ -41,7 +41,7 @@
 <br>
 
 <div align="right">
-		<input type="submit" value="{t}back{/t}" name='back'>
+		<input type="submit" value="{t}Back{/t}" name='back'>
 </div>
 		
 {/if}
