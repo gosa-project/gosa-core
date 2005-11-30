@@ -190,14 +190,20 @@ $ACLD['samba'] = array (
 						) ;
 
 
-$ACLD['proxy']=      array("gosaProxyAcctFlags",
+$ACLD['proxyAccount']=      array(
+			"proxyAccount",
+			"gosaProxyAcctFlags",
+			"gosaProxyQuota",
 			"gosaProxyWorkingStart",
 			"gosaProxyWorkingStop");
 
-$ACLD['pureftpd']=   array("FTPUploadBandwidth",
+$ACLD['pureftpdAccount']=   array(
+			"pureftpd",	
+			"FTPUploadBandwidth",
+			"FTPStatus",
 			"FTPDownloadBandwidth",
 			"FTPQuotaFiles",
-			"FTPQuotaFiles",
+			"FTPQuotaMBytes",
 			"FTPUploadRatio",
 			"FTPDownloadRatio");
 $ACLD['goFonConference']= array(
@@ -233,6 +239,11 @@ $ACLD['gotoEnvironment']=array(
 					"gotoHotplugDevice"
 					);
 
+$ACLD['phpgwAccount']			=array("phpgwAccount" 			);
+$ACLD['webdavAccount']			=array("webdavAccount" 			);
+$ACLD['intranetAccount']		=array("intranetAccount" 		);
+$ACLD['pptpAccount']			=array("gosapptp" 	  			);
+$ACLD['phpscheduleitAccount']	=array("gosaphpscheduleit" 	  	);
 
 $ACLD['goFonAccount'] = array("goFonDeliveryMode", "goFonFormat",
       "goFonHardware","goFonPIN","goFonVoicemailPIN","telephoneNumber", "goFonMacro","macro");
