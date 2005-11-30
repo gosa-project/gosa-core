@@ -37,6 +37,7 @@ class proxyAccount extends plugin
 
     /* Prepare templating */
     $smarty= get_smarty();
+    $smarty->assign("proxyAccountACL", chkacl($this->acl, "proxyAccount"));
     $smarty->assign("gosaProxyAcctFlagsACL", chkacl($this->acl, "gosaProxyAcctFlags"));
     $smarty->assign("gosaProxyWorkingStartACL", chkacl($this->acl, "gosaProxyWorkingStart"));
     $smarty->assign("gosaProxyWorkingStopACL", chkacl($this->acl, "gosaProxyWorkingStop"));
@@ -95,6 +96,44 @@ class proxyAccount extends plugin
     } else {
       $smarty->assign("pstate", "");
     }
+
+    $changeA = "";
+  
+    if(chkacl($this->acl,"gosaProxyAcctFlags")==""){
+      $changeA .="changeState('filterF');\n";
+    }
+    $smarty->assign("Working_allowedACL","disabled");
+    if((chkacl($this->acl,"gosaProxyWorkingStart")=="")||(chkacl($this->acl,"gosaProxyWorkingStop")=="")){
+      $smarty->assign("Working_allowedACL","");
+      $changeA .= "changeState('filterT');\n";
+    }
+
+    $ProxyWorkingStateChange ="";
+    if(chkacl($this->acl,"gosaProxyWorkingStart")==""){
+      $ProxyWorkingStateChange.=  "changeState('startHour');\n";
+      $ProxyWorkingStateChange.=  "changeState('startMinute');\n";
+    }
+
+    if(chkacl($this->acl,"gosaProxyWorkingStop")=="")  {
+      $ProxyWorkingStateChange.=  "changeState('stopHour');\n";
+      $ProxyWorkingStateChange.=  "changeState('stopMinute');\n";
+    }
+    
+    $changeA .= $ProxyWorkingStateChange;
+  
+    $smarty->assign("ProxyWorkingStateChange",$ProxyWorkingStateChange);
+
+    $changeB = "";
+    if(chkacl($this->acl,"gosaProxyQuota")==""){
+      $changeA .= "changeState('filterB');";
+      $changeB = 
+        "changeSubselectState('filterB', 'quota_size');
+         changeSubselectState('filterB', 'quota_unit');
+         changeSubselectState('filterB', 'gosaProxyQuotaPeriod');";
+    }
+
+    $smarty->assign("changeB",$changeB);
+    $smarty->assign("changeA",$changeA);
 
     /* Show main page */
     $display.= $smarty->fetch(get_template_path('proxy.tpl', TRUE, dirname(__FILE__)));
@@ -173,10 +212,13 @@ class proxyAccount extends plugin
       }
 
       /* Save time values */
-      if (chkacl ($this->acl, "gosaProxyWorkingTime") == "" && isset($_POST['startMinute'])){
+      if ((chkacl ($this->acl, "gosaProxyWorkingStart") == "")&&(isset($_POST['startMinute']))){
         $old= $this->gosaProxyWorkingStart;
         $this->gosaProxyWorkingStart= $_POST["startHour"] * 60 + $_POST["startMinute"];
         $this->is_modified= ($old != $this->gosaProxyWorkingStart)?TRUE:$this->is_modified;
+      }
+      
+      if ((chkacl ($this->acl, "gosaProxyWorkingStop") == "")&&(isset($_POST['stopMinute']))){
         $old= $this->gosaProxyWorkingStop;
         $this->gosaProxyWorkingStop = $_POST["stopHour"]  * 60 + $_POST["stopMinute"];
         $this->is_modified= ($old != $this->gosaProxyWorkingStop)?TRUE:$this->is_modified;

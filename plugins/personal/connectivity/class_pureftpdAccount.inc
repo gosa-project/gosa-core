@@ -57,15 +57,16 @@ class pureftpdAccount extends plugin
     }
     $smarty->assign("use_FTPStatus", ($this->FTPStatus == "disabled") ? "checked" : "");
 
-    # Hickert, Added Else. Smarty have to know the variable in both cases
-    if ($this->parent != NULL){
-      $smarty->assign("tabbed", 1);
-    }else {
-      $smarty->assign("tabbed", 0);
-    }
-    
     $smarty->assign("pureftpdACL", chkacl($this->acl, 'pureftpd'));
 
+    $changeState = "";
+    foreach($this->attributes as $attr){
+      $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
+      if(chkacl($this->acl,$attr)==""){
+        $changeState .= "changeState('".$attr."');\n";
+      }
+    }
+    $smarty->assign("changeState",$changeState);
     $display.= $smarty->fetch (get_template_path('pureftpd.tpl', TRUE, dirname(__FILE__)));
     return ($display);
   }
@@ -124,19 +125,19 @@ class pureftpdAccount extends plugin
 
     /* Check for positive integer values */
     if ($this->is_account){
-      if (!is_id($this->FTPUploadBandwidth)){
+      if ((!is_id($this->FTPUploadBandwidth))&&(chkacl($this->acl,"FTPUploadBandwidth")=="")){
         $message[]= _("Value specified as 'Upload bandwidth' is not valid.");
       }
-      if (!is_id($this->FTPDownloadBandwidth)){
+      if ((!is_id($this->FTPDownloadBandwidth))&&(chkacl($this->acl,"FTPDownloadBandwidth")=="")){
         $message[]= _("Value specified as 'Download bandwidth' is not valid.");
       }
-      if (!is_id($this->FTPQuotaFiles)){
+      if ((!is_id($this->FTPQuotaFiles))&&(chkacl($this->acl,"FTPQuotaFiles")=="")){
         $message[]= _("Value specified as 'Files' is not valid.");
       }
-      if (!is_id($this->FTPQuotaMBytes)){
+      if ((!is_id($this->FTPQuotaMBytes))&&(chkacl($this->acl,"FTPQuotaMBytes")=="")){
         $message[]= _("Value specified as 'Size' is not valid.");
       }
-      if (!is_id($this->FTPUploadRatio) || !is_id($this->FTPDownloadRatio)){
+      if ((!is_id($this->FTPUploadRatio) || !is_id($this->FTPDownloadRatio))&&(chkacl($this->acl,"FTPUploadRatio")=="")&&(chkacl($this->acl,"FTPDownloadRatio")=="")){
         $message[]= _("Value specified as 'Ratio' is not valid.");
       }
     }
@@ -149,6 +150,12 @@ class pureftpdAccount extends plugin
   function save()
   {
     plugin::save();
+
+    foreach($this->attributes as $attr){
+      if(chkacl($this->acl,$attr)!=""){
+        unset($this->attrs[$attr]);
+      }
+    }
 
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();

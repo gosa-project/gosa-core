@@ -58,10 +58,6 @@ class pptpAccount extends plugin
       $smarty->assign("wstate", "disabled");
     }
 
-    if ($this->parent != NULL){
-      $smarty->assign("tabbed", 1);
-    }
-
     $smarty->assign('gosapptpACL', chkacl($this->acl, 'gosapptp'));
 
     $display.= $smarty->fetch (get_template_path('pptp.tpl', TRUE, dirname(__FILE__)));
@@ -70,22 +66,24 @@ class pptpAccount extends plugin
 
   function remove_from_parent()
   {
-    /* Cancel if there's nothing to do here */
-    if (!$this->initially_was_account){
-      return;
+    if(chkacl($this->acl, 'gosapptp') == ""){
+      /* Cancel if there's nothing to do here */
+      if (!$this->initially_was_account){
+        return;
+      }
+
+      plugin::remove_from_parent();
+      $ldap= $this->config->get_ldap_link();
+
+      $ldap->cd($this->dn);
+      @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
+          $this->attributes, "Save");
+      $ldap->modify($this->attrs);
+      show_ldap_error($ldap->get_error());
+
+      /* Optionally execute a command after we're done */
+      $this->handle_post_events('remove');
     }
-
-    plugin::remove_from_parent();
-    $ldap= $this->config->get_ldap_link();
-
-    $ldap->cd($this->dn);
-    @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
-        $this->attributes, "Save");
-    $ldap->modify($this->attrs);
-    show_ldap_error($ldap->get_error());
-
-    /* Optionally execute a command after we're done */
-    $this->handle_post_events('remove');
   }
 
 
@@ -115,23 +113,24 @@ class pptpAccount extends plugin
   /* Save to LDAP */
   function save()
   {
-    plugin::save();
+    if(chkacl($this->acl, 'gosapptp') == ""){
+      plugin::save();
 
-    /* Write back to ldap */
-    $ldap= $this->config->get_ldap_link();
-    $ldap->cd($this->dn);
-    $ldap->modify($this->attrs);
-    show_ldap_error($ldap->get_error());
+      /* Write back to ldap */
+      $ldap= $this->config->get_ldap_link();
+      $ldap->cd($this->dn);
+      $ldap->modify($this->attrs);
+      show_ldap_error($ldap->get_error());
 
-    /* Optionally execute a command after we're done */
-    if ($this->initially_was_account == $this->is_account){
-      if ($this->is_modified){
-        $this->handle_post_events("mofify");
+      /* Optionally execute a command after we're done */
+      if ($this->initially_was_account == $this->is_account){
+        if ($this->is_modified){
+          $this->handle_post_events("mofify");
+        }
+      } else {
+        $this->handle_post_events("add");
       }
-    } else {
-      $this->handle_post_events("add");
     }
-
   }
 
 }

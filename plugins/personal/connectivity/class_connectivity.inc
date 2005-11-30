@@ -76,7 +76,6 @@ class connectivity extends plugin
     /* Execude  objects */
     $is_first= true;
     foreach ($this->plugin_name as $name){
-      if (!$this->plugin[$name]->is_account && $this->parent == NULL) continue;
       if (!$is_first){
         $display.= '<p class="seperator">&nbsp;</p>';
       } else {

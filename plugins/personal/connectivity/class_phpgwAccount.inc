@@ -28,7 +28,7 @@ class phpgwAccount extends plugin
   {
 	/* Call parent execute */
 //	plugin::execute();
-
+  
     /* Show tab dialog headers */
     $display= "";
 
@@ -44,13 +44,6 @@ class phpgwAccount extends plugin
       $smarty->assign("phpgwState", "checked");
     } else {
       $smarty->assign("phpgwState", "");
-      $smarty->assign("fstate", "disabled");
-    }
-
-    if ($this->parent != NULL){
-      $smarty->assign("tabbed", 1);
-    }else{
-      $smarty->assign("tabbed", 0);
     }
 
     $smarty->assign('phpgwAccountACL', chkacl($this->acl, 'phpgwAccount'));
@@ -61,7 +54,7 @@ class phpgwAccount extends plugin
 
   function remove_from_parent()
   {
-    if ($this->parent != NULL){
+    if(chkacl($this->acl,"phpgwAccount") == ""){
       /* Cancel if there's nothing to do here */
       if (!$this->initially_was_account){
         return;
@@ -108,8 +101,9 @@ class phpgwAccount extends plugin
   /* Save to LDAP */
   function save()
   {
-    plugin::save();
-    if ($this->parent != NULL){
+    if(chkacl($this->acl,"phpgwAccount") == ""){
+      plugin::save();
+      
       /* Write back to ldap */
       $ldap= $this->config->get_ldap_link();
       $ldap->cd($this->dn);
@@ -124,9 +118,8 @@ class phpgwAccount extends plugin
       } else {
         $this->handle_post_events("add");
       }
-      }
+    }
   }
-
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

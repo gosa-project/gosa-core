@@ -1,19 +1,12 @@
 <h2>
-	{if $tabbed eq 1}
-		<input type="checkbox" id="proxy" name="proxy" value="B" {$proxyState} {$gosaProxyAcctFlagsACL} 
+		<input type="checkbox" id="proxy" name="proxy" value="B" {$proxyState} {$proxyAccountACL} 
 			onClick="
-				changeState('filterF'); 
-				changeState('filterT'); 
-				changeState('filterB');
-				changeTripleSelectState('proxy', 'filterT', 'startHour'); 
-				changeTripleSelectState('proxy', 'filterT', 'startMinute'); 
-				changeTripleSelectState('proxy', 'filterT', 'stopHour'); 
-				changeTripleSelectState('proxy', 'filterT', 'stopMinute'); 
+				{$changeA}
 				changeTripleSelectState('proxy', 'filterB', 'quota_size'); 
 				changeTripleSelectState('proxy', 'filterB', 'quota_unit'); 
 				changeTripleSelectState('proxy', 'filterB', 'gosaProxyQuotaPeriod');
 			">
-	{/if}{t}Proxy account{/t}</h2>
+	{t}Proxy account{/t}</h2>
 
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
@@ -25,13 +18,8 @@
     </td></tr>
      <tr>
       <td width="50%">
-    <input type="checkbox" name="filterT" id="filterT" value="T" {$filterT} {$gosaProxyAcctFlagsACL} {$pstate}
-    	onClick="
-		changeSubselectState('filterT', 'startHour');
-		changeSubselectState('filterT', 'startMinute');
-		changeSubselectState('filterT', 'stopHour');
-		changeSubselectState('filterT', 'stopMinute');
-	">
+    <input type="checkbox" name="filterT" id="filterT" value="T" {$filterT} {$Working_allowedACL} {$pstate}
+    	onClick="{$ProxyWorkingStateChange}">
     <LABEL for="startHour">{t}Limit proxy access to working time{/t}</LABEL>
     <br>
     <table summary="" style="margin-left:20px;">
@@ -60,12 +48,8 @@
      &nbsp;
    </td>
       <td>
-    <input type="checkbox" id="filterB" name="filterB" value="B" {$filterB} {$pstate} {$gosaProxyAcctFlagsACL}
-    	onClick="
-		changeSubselectState('filterB', 'quota_size');
-		changeSubselectState('filterB', 'quota_unit');
-		changeSubselectState('filterB', 'gosaProxyQuotaPeriod');
-	">
+    <input type="checkbox" id="filterB" name="filterB" value="B" {$filterB} {$pstate} {$gosaProxyAcctFlagsACL} {$gosaProxyQuotaACL}
+    	onClick="{$changeB}">
     <LABEL for="quota_size">{t}Restrict proxy usage by quota{/t}</LABEL>
     <br>
     <table summary="" style="margin-left:20px;">

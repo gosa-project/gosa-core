@@ -59,10 +59,6 @@ class phpscheduleitAccount extends plugin
       $smarty->assign("wstate", "disabled");
     }
 
-    if ($this->parent != NULL){
-      $smarty->assign("tabbed", 1);
-    }
-
     $smarty->assign('gosaphpscheduleitACL', chkacl($this->acl, 'gosaphpscheduleit'));
 
     $display.= $smarty->fetch (get_template_path('phpscheduleit.tpl', TRUE, dirname(__FILE__)));

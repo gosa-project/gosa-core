@@ -89,17 +89,19 @@ class intranetAccount extends plugin
   */
   function remove_from_parent()
   {
-	plugin::remove_from_parent();
-	$ldap= $this->config->get_ldap_link();
+	  if(chkacl($this->acl, 'intranetAccount') == ""){
+		  plugin::remove_from_parent();
+		  $ldap= $this->config->get_ldap_link();
 
-        $ldap->cd($this->dn);
-        @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
-                $this->attributes, "Save");
-	$ldap->modify($this->attrs);
-	show_ldap_error($ldap->get_error());
+		  $ldap->cd($this->dn);
+		  @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
+				  $this->attributes, "Save");
+		  $ldap->modify($this->attrs);
+		  show_ldap_error($ldap->get_error());
 
-	/* Optionally execute a command after we're done */
-	$this->postremove();
+		  /* Optionally execute a command after we're done */
+		  $this->postremove();
+	  }
   }
 
 
@@ -141,16 +143,18 @@ class intranetAccount extends plugin
 	*/
   function save()
   {
-	plugin::save();
+	  if(chkacl($this->acl, 'intranetAccount') == ""){
+		  plugin::save();
+			
+		  /* Write back to ldap */
+		  $ldap= $this->config->get_ldap_link();
+		  $ldap->cd($this->dn);
+		  $ldap->modify($this->attrs);
+		  show_ldap_error($ldap->get_error());
 
-	/* Write back to ldap */
-	$ldap= $this->config->get_ldap_link();
-	$ldap->cd($this->dn);
-	$ldap->modify($this->attrs);
-	show_ldap_error($ldap->get_error());
-
-	/* Optionally execute a command after we're done */
-	$this->postcreate();
+		  /* Optionally execute a command after we're done */
+		  $this->postcreate();
+	  }
   }
 
 }
