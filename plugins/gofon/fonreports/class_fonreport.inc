@@ -85,21 +85,21 @@ class fonreport extends plugin
  	
 	/* Connecting, selecting database */
 	if (!isset($this->config->data['SERVERS']['FON'])){
-		print_red("There is no asterisk database defined. Can't query anything.");
+		print_red(_("Can't connect to phone database, no reports can be shown!"));
 		return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 	}elseif(!is_callable("mysql_connect")){
-		print_red("There is no mysql extension available. Can't establish database connection.");
+		print_red(_("There is no mysql extension available, please check your php setup."));
 		return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 	}else{
 
 		$cfg= $this->config->data['SERVERS']['FON'];
 		$link = @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
 		if ($link === FALSE){
-			print_red(_("Can't connect to phone database, no reports can be shown!. Check server,username and password combination."));
+			print_red(_("Can't connect to phone database, no reports can be shown!"));
 			return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 		}
 		if (! @mysql_select_db("gophone")){
-			print_red(_("Can't select phone (gophone) database for report generation!"));
+			print_red(_("Can't select phone database for report generation!"));
 			return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 		}
 	}
