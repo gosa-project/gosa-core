@@ -248,5 +248,22 @@ $ACLD['phpscheduleitAccount']	=array("gosaphpscheduleit" 	  	);
 $ACLD['phoneAccount'] = array("goFonDeliveryMode",
       "goFonHardware","goFonPIN","goFonVoicemailPIN","telephoneNumber", "goFonMacro");
 
+$ACLD['nagiosAccount'] = array("NagiosAlias"
+, "NagiosPager"
+, "NagiosMail"
+, "HostNotificationPeriod"
+, "ServiceNotificationPeriod"
+, "HostNotificationCommands"
+, "ServiceNotificationCommands"
+, "HostNotificationOptions"
+, "ServiceNotificationOptions"
+, "AuthorizedAllHosts"
+, "AuthorizedAllServices"
+, "AuthorizedSystemCommands"
+, "AuthorizedAllHostCommands"
+, "AuthorizedAllServiceCommands"
+, "AuthorizedConfigurationInformation"
+, "AuthorizedSystemInformation");
+
 $ACLD['global-addressbook']=  array("create", "delete");
 ?>

@@ -57,10 +57,10 @@ if (!$remove_lock){
   /* Adjust acl's to mode */
   if (isset($_SESSION['edit'])){
     $acl= get_permissions ($ui->dn, $ui->subtreeACL);
-    $nagiosAccount->acl= get_module_permission($acl, "nagios", $ui->dn);
+    $nagiosAccount->acl= get_module_permission($acl, "nagiosAccount", $ui->dn);
   } else {
     $acl= get_permissions ($ui->dn, $ui->subtreeACL);
-    $editacl= get_module_permission($acl, "nagios", $ui->dn);
+    $editacl= get_module_permission($acl, "nagiosAccount", $ui->dn);
     $nagiosAccount->acl= "#none#";
   }
 
