@@ -304,6 +304,8 @@ class group extends plugin
     }
     if ($this->force_gid != "1"){
       $smarty->assign("forceMode", "disabled");
+    }else{
+      $smarty->assign("forceMode", "");
     }
     $smarty->assign("force_gidACL", chkacl($this->acl, "gidNumber"));
     $smarty->assign("sambaDomainNameACL", chkacl($this->acl, "sambaDomainName"));
