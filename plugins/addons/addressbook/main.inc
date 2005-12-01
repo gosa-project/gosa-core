@@ -28,6 +28,10 @@ if (!$remove_lock){
 	}
 	$addressbook= $_SESSION['addressbook'];
 
+	/* set permissions */	
+	$acl= get_permissions ($ui->dn, $ui->subtreeACL);
+    $addressbook->acl= get_module_permission($acl, "addressbook", $ui->dn);
+	
 	/* Execute formular */
 	$display.= $addressbook->execute ();
 	$display.= "<input type=\"hidden\" name=\"ignore\">\n";
