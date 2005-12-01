@@ -81,8 +81,12 @@ class application extends plugin
   function generateTempalte(){
 	$str= "# This code is part of GOsa (https://gosa.gonicus.de)\n#\n";
 
-	$names = $this->parent->by_object['applicationParameters']->option_name;
-	$values = $this->parent->by_object['applicationParameters']->option_value;
+	$values = array();
+	$names 	= array();
+	if($this->parent->by_object['applicationParameters']->is_account){
+		$names = $this->parent->by_object['applicationParameters']->option_name;
+		$values = $this->parent->by_object['applicationParameters']->option_value;
+	}
 
 	if (count($names)){
 		$str .="# This plugin handles these environment variables:\n";
