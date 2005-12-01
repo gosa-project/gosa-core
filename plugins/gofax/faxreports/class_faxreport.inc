@@ -28,7 +28,7 @@ class faxreport extends plugin
   var $fields= array("uid", "queuing_time", "status", "sender_id", "receiver_id", "pages");
 
   /* attribute list for save action */
-  var $attributes= array();
+  var $attributes= array("search_for","search_base","month","year");
   var $objectclasses= array();
 
   function faxreport ($config, $ui)
@@ -55,7 +55,16 @@ class faxreport extends plugin
 				"search_base" => $base,
 				"search_for" => "*");
                 register_global("faxreportfilter", $faxfilter);
-        }
+				$this->year = date("Y");
+				$this->month = date("m");
+				$this->search_base = $base;
+				$this->search_for = "*";
+        }else{
+			$this->year 		= $_SESSION['faxreportfilter']['year'];
+			$this->month 		= $_SESSION['faxreportfilter']['month'];
+			$this->search_base 	= $_SESSION['faxreportfilter']['search_base'];
+			$this->search_for 	= $_SESSION['faxreportfilter']['search_for'];
+		}
   }
 
   function execute()
@@ -74,6 +83,15 @@ class faxreport extends plugin
 		$years[]= $y;
 	}
 
+	/* Get template engine */
+	$faxfilter= get_global("faxreportfilter");
+        foreach( array("year", "month", "search_for", "search_base") as $type){
+                if (isset($_POST[$type])){
+                        $faxfilter[$type]= $_POST[$type];
+                }
+		$this->$type= $faxfilter[$type];
+        }
+	register_global("faxreportfilter", $faxfilter);
 	$smarty= get_smarty();
 	$smarty->assign("launchimage"		, get_template_path('images/launch.png'));
 	$smarty->assign("search_image"		, get_template_path('images/search.png'));
@@ -105,21 +123,17 @@ class faxreport extends plugin
 			print_red(_("Can't select fax database for report generation!"));
 			return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 		}
+  
+		if (! mysql_query("SELECT * FROM faxlog;")){
+			print_red(_("Can't select fax database for report generation!"));
+			return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
+		}
 	}		
 
 	if(isset($_POST['EntriesPerPage'])){
 		$this->range = $_POST['EntriesPerPage'];
 	}
 
-	/* Get template engine */
-	$faxfilter= get_global("faxreportfilter");
-        foreach( array("year", "month", "search_for", "search_base") as $type){
-                if (isset($_POST[$type])){
-                        $faxfilter[$type]= $_POST[$type];
-                }
-		$this->$type= $faxfilter[$type];
-        }
-	register_global("faxreportfilter", $faxfilter);
   
 	/* Adapt sorting */
 	if (isset($_GET['sort'])){
@@ -169,7 +183,7 @@ class faxreport extends plugin
 
 		if (!preg_match ("/'".$line["uid"]."'/", $this->userfilter)){
 			print_red (_("You have no permission to retrieve informations about this fax id!"));
-			return;
+			return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 		}
 
 		$parts= array( "id", "uid", "queuing_time", "status", "sender_id", "sender_msn",
@@ -221,10 +235,8 @@ class faxreport extends plugin
 
 		$fax_users= array();
 		while ($attrs= $ldap->fetch()){
-			$acl= get_permissions ($ldap->getDN(), $this->ui->subtreeACL);
-			$acl= get_module_permission($acl, "fax", $ldap->getDN());
 
-			if (chkacl ($acl, "faxReport") == ""){
+			if (chkacl ($this->acl, "faxreport") == ""){
 				$fax_users[]= $attrs["uid"][0];
 			}
 		}
@@ -236,7 +248,6 @@ class faxreport extends plugin
 		}
 		$this->userfilter= preg_replace("/OR $/", "", $this->userfilter);
 	}
-
 
 	/* Perform SQL query */
 	if ($this->userfilter){
@@ -344,5 +355,5 @@ class faxreport extends plugin
   }
 
 }
-
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
