@@ -6,8 +6,6 @@ face these:
 
 * Check "rgrep FIXME *", especially the ACL issues
 
-* Set default help to english
-
 * When editing MyAccount->Generic, the base is empty possibly acls incorrect.
 
 * Fix problem with non-existing entries in the package list
