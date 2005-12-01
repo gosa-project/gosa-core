@@ -29,7 +29,7 @@ class faiProfileEntry extends plugin
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($base);
     $ldap->search("(| (objectClass=FAIscript)(objectClass=FAItemplate)(objectClass=FAIhook)(objectClass=FAIvariable)
-                      (objectClass=FAIpartitionTable)(objectClass=FAIpackage))",array("*"));
+                      (objectClass=FAIpartitionTable)(objectClass=FAIpackageList))",array("*"));
     
     $sort=array();
     while($attrs = $ldap->fetch()){
