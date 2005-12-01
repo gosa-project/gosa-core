@@ -119,7 +119,7 @@ class faxreport extends plugin
 			print_red(_("Can't connect to fax database, no reports can be shown!"));
 			return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 		}
-		if (! @mysql_select_db("gofax")){
+		if (! @mysql_select_db("gofaxd")){
 			print_red(_("Can't select fax database for report generation!"));
 			return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 		}
@@ -163,11 +163,11 @@ class faxreport extends plugin
 		$link = @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
 		if ($link === FALSE){
 			print_red(_("Can't connect to fax database, no reports can be shown!"));
-			return;
+			return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 		}
 		if (! @mysql_select_db("gofax")){
 			print_red(_("Can't select fax database for report generation!"));
-			return;
+			return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 		}
 
 		@DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__,
@@ -175,7 +175,7 @@ class faxreport extends plugin
 		$result = @mysql_query($query);
 		if ($result === false){
 			print_red(_("Query for fax database failed!"));
-			return;
+			return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 		}
 
 		$line = mysql_fetch_array($result, MYSQL_ASSOC);
@@ -264,7 +264,7 @@ class faxreport extends plugin
 
 		if(!is_callable("mysql_connect")){
 			print_red("There is no mysql extension configured in your php setup.");
-			return;
+      return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 		}
 
 		/* Connecting, selecting database */
@@ -272,11 +272,11 @@ class faxreport extends plugin
 		$link = @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
 		if ($link === FALSE){
 			print_red(_("Can't connect to fax database, no reports can be shown!"));
-			return;
+      return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 		}
 		if (! @mysql_select_db("gofax")){
 			print_red(_("Can't select fax database for report generation!"));
-			return;
+      return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 		}
 
 		@DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__,
@@ -284,7 +284,7 @@ class faxreport extends plugin
 		$result = @mysql_query($query);
 		if ($result === false){
 			print_red(_("Query for fax database failed!"));
-			return;
+      return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 		}
 
 		$report_list= array();
