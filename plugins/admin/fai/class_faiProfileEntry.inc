@@ -155,7 +155,7 @@ class faiProfileEntry extends plugin
 
     /* Action button allows us to delete an entry */
     $action = "<input type='hidden' name='ON_PAGE_%KEY%' value='1'>
-              <input type='checkbox' name='USE_%KEY%' value='%KEY%' onChange='document.mainform.submit();' %CHECK%>";
+              <input type='checkbox' name='USE_%KEY%' value='%KEY%' onClick='document.mainform.submit();' %CHECK%>";
 
     /* Check every single class name to match the current search filter */
     foreach($this->FAIAllclasses as $usedClass => $classes){
