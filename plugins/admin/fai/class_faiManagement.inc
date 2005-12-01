@@ -263,6 +263,7 @@ class faiManagement extends plugin
 			$a_setup = ($this->get_type($entry));
 		
 			$this->dn = $entry['dn'];
+			add_lock ($this->dn, $this->ui->dn);
 
 			$this->dialog= new $a_setup[0]($this->config,
 					$this->config->data['TABS'][$a_setup[2]],$this->dn);
@@ -353,6 +354,7 @@ class faiManagement extends plugin
 			$this->dialog=NULL;
 			$this->is_dialog = false;
 			unset($_SESSION['objectinfo']);
+			del_lock ($this->dn);
 		}
 
 		/* This check if the given tab could be saved 
@@ -366,6 +368,7 @@ class faiManagement extends plugin
 					print_red($msg);
 				}
 			}else{
+				del_lock ($this->dn);
 				$this->dialog->save();
 				unset($this->dialog);
 				$this->dialog=NULL;
