@@ -59,6 +59,7 @@ class xmlParse  {
 		$level = array();
 		
 		$this->data = array();	
+		$this->depth = array();	
 		$i = 0 ; 
 		$current ="";
 		$dir = "";
