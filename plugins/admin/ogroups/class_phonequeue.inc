@@ -187,9 +187,6 @@ class phonequeue extends plugin
   function check()
   {
     $message= array();
-  #fixme workaround : Tab is not initialised correct
-	  if(!$this->is_account) return($message);
-
     if($this->is_number_used()){
       $message[] = $this->is_number_used();
     }

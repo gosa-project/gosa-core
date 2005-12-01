@@ -172,7 +172,7 @@ class ogrouptabs extends tabs
 
   function check()
   {
-    return (tabs::check(TRUE));
+    return (tabs::check(FALSE));
   }
 
 
