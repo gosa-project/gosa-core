@@ -293,6 +293,8 @@ $ACLD['logview']	=  array("logview");
 $ACLD['mailqueue']	=  array("mailqueue","unhold_all","hold_all","del_all","requeue_all","unhold","hold","del","requeue","query","header");
 $ACLD['ldapmanager']=  array("ldapmanager","import","export","xlsexport","csvimport");
 
+$ACLD['goFonConference']	= 	array("goFonConference" => "goFonConference");
+
 $ACLD['FAIclass']	= 	array(
 								"FAIclass"							=> "FAIclass"
 /*								,"FAIhook-View" 						=> "FAIhook : View",

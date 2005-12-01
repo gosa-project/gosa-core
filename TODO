@@ -8,8 +8,6 @@ face these:
 
 * Set default help to english
 
-* Check Lock entries for FAI dialogs, some dialogs can be aborted without any warning.
-
 * When editing MyAccount->Generic, the base is empty possibly acls incorrect.
 
 * applications -> new application -> editieren -> options hinzu -> Generic -> skript wird nicht aktualisiert
