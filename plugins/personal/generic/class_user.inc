@@ -565,11 +565,13 @@ class user extends plugin
       /* Save base and pw_storage, since these are no LDAP attributes */
       if (isset($_POST['base'])){
         foreach(array("base", "pw_storage") as $val){
-          $data= validate($_POST[$val]);
-          if ($data != $this->$val){
-            $this->is_modified= TRUE;
+          if(isset($_POST[$val])){
+            $data= validate($_POST[$val]);
+            if ($data != $this->$val){
+              $this->is_modified= TRUE;
+            }
+            $this->$val= $data;
           }
-          $this->$val= $data;
         }
       }
     }
@@ -1170,7 +1172,16 @@ class user extends plugin
           }
         }
       }
+      if(count($allowed) == 0){
+        foreach($this->config->idepartments as $key => $dep) {
+          if($this->base==$key){
+            $allowed[$key] = $dep;
+          }
+        }
+      }  
+  
       return($allowed);
+      
     }else{
       return($this->config->idepartments);
     }
