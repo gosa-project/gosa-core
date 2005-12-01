@@ -4,17 +4,9 @@ Things to fix before 2.4:
 Showed up by a small review. Since we've time until the doc is ready,
 face these:
 
-* Check "rgrep FIXME *", especially the ACL issues
-
-* When editing MyAccount->Generic, the base is empty possibly acls incorrect.
-
 * Fix problem with non-existing entries in the package list
 
-* No error message if fax server is configured and database configuration is missing
-
 * please check what happened to sizelimit buttons after moving to another list box
-
-* Problem with FAI-Profiles which don't show up with _all_ available classes
 
 * Can't assign rights on primary groups, or something like that ... 
 
