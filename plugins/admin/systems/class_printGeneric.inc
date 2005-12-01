@@ -294,6 +294,8 @@ class printgeneric extends plugin
       $this->dialog=NULL;
     }
 
+  
+
     if((isset($_POST['DelUser']))&&(isset($_POST['UserMember']))){
       if(isset($this->member['AddUser'][$_POST['UserMember']])){
         unset($this->member['AddUser'][$_POST['UserMember']]);
@@ -313,7 +315,7 @@ class printgeneric extends plugin
     }
 
     if((isset($_POST['DelAdmin']))&&(isset($_POST['AdminMember']))){
-      if(isset($this->member['AddAdmingroup'][$_POST['AdminMember']])){
+      if(isset($this->member['AddAdminGroup'][$_POST['AdminMember']])){
         unset($this->member['AddAdminGroup'][$_POST['AdminMember']]);
       }
     }
