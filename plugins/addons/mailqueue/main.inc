@@ -28,6 +28,10 @@ if (!$remove_lock){
 	}
 	$mailqueue= $_SESSION['mailqueue'];
 
+ /* set permissions */
+    $acl= get_permissions ($ui->dn, $ui->subtreeACL);
+    $mailqueue->acl= get_module_permission($acl, "mailqueue", $ui->dn);
+
 	/* Execute formular */
 	$mailqueue->save_object();
 	$display.= $mailqueue->execute ();

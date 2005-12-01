@@ -74,13 +74,19 @@ class mailqueue extends plugin
       foreach(array("unhold_all","hold_all","del_all","requeue_all") as $attr){
         foreach($_POST as $name => $value){
           if((preg_match("/".$attr."/",$name))&&($only_once)){
-            $only_once = false;
-            $act = preg_replace("/_.*$/i","",$attr);
-            $r_cmd = preg_replace("/%action/" , $act           ,$this->mailQueueScript);
-            $r_cmd = preg_replace("/%server/" , $se_str         ,$r_cmd);
-            $r_cmd = preg_replace("/%id/"     , "ALL"           ,$r_cmd);
-            if($this->pass_cmd($r_cmd)==false){
-              print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
+            if(chkacl($this->acl,$attr)!=""){
+              $only_once = false;
+              #FIXME Please choose a better error msg, if release is released
+              print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$attr));
+            }else{
+              $only_once = false;
+              $act = preg_replace("/_.*$/i","",$attr);
+              $r_cmd = preg_replace("/%action/" , $act           ,$this->mailQueueScript);
+              $r_cmd = preg_replace("/%server/" , $se_str         ,$r_cmd);
+              $r_cmd = preg_replace("/%id/"     , "ALL"           ,$r_cmd);
+              if($this->pass_cmd($r_cmd)==false){
+                print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
+              }
             }
           }
         }
@@ -97,33 +103,37 @@ class mailqueue extends plugin
         if(in_array($opt,array("unhold","hold","del","requeue","query","header"))){
           $only_once = false;
 
-          /* Create cmd */
-          $r_cmd = preg_replace("/%action/" , $opt            ,$this->mailQueueScript);
-          $r_cmd = preg_replace("/%server/" , $this->Server   ,$r_cmd);
-          $r_cmd = preg_replace("/%id/"     , $_GET['id']     ,$r_cmd);
-
-          /* Execute cmd */
-          if(!$str = $this->pass_cmd($r_cmd)){
-            print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
+          if(chkacl($this->acl,$opt)!=""){
+              print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$opt));
           }else{
+            /* Create cmd */
+            $r_cmd = preg_replace("/%action/" , $opt            ,$this->mailQueueScript);
+            $r_cmd = preg_replace("/%server/" , $this->Server   ,$r_cmd);
+            $r_cmd = preg_replace("/%id/"     , $_GET['id']     ,$r_cmd);
+
+            /* Execute cmd */
+            if(!$str = $this->pass_cmd($r_cmd)){
+              print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
+            }else{
+            
+              /* Special handling for option='header' */
+              if($opt == "header"){
           
-            /* Special handling for option='header' */
-            if($opt == "header"){
-        
-              /* Create table which displays the header informations */
-              $this->disp_header ="\n<table width='80%'>";
-              foreach(split("\n",$str) as $line){
-                $line = trim($line);
-                if(empty($line)) {
-                  continue;
-                }
-                $this->disp_header .= "\n<tr>";
-                $tmp0 = preg_replace("/:.*$/","",$line);
-                $tmp1 = preg_replace("/^.*:/","",$line);
-                $this->disp_header .= "\n<td style='background-color:#EEEEEE;'>".$tmp0."</td><td>".$tmp1."</td>"; 
-                $this->disp_header .= "\n</tr>";
-              }              
-              $this->disp_header .= "\n</table>";
+                /* Create table which displays the header informations */
+                $this->disp_header ="\n<table width='80%'>";
+                foreach(split("\n",$str) as $line){
+                  $line = trim($line);
+                  if(empty($line)) {
+                    continue;
+                  }
+                  $this->disp_header .= "\n<tr>";
+                  $tmp0 = preg_replace("/:.*$/","",$line);
+                  $tmp1 = preg_replace("/^.*:/","",$line);
+                  $this->disp_header .= "\n<td style='background-color:#EEEEEE;'>".$tmp0."</td><td>".$tmp1."</td>"; 
+                  $this->disp_header .= "\n</tr>";
+                }              
+                $this->disp_header .= "\n</table>";
+              }
             }
           }
         }
