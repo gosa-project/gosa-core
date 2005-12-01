@@ -52,11 +52,6 @@ class addressbook extends plugin
 		/* Include config object */
 		$this->config= $config;
 
-		print $dn;
-
-#FIXME: ACL is set to default for testing
-		$this->acl= "#all#";
-
 		/* Get global filter config */
 		if (!is_global("phonefilter")){
 			$ui= get_userinfo();
@@ -75,7 +70,12 @@ class addressbook extends plugin
 		/* Call parent execute */
 		plugin::execute();
 
-		$smarty= get_smarty();
+    $smarty= get_smarty();
+
+    foreach($this->attributes as $attr){
+      $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
+    }
+
 
 #! Hickert
 		/*prevent empty variables for smarty*/
@@ -268,10 +268,6 @@ class addressbook extends plugin
 				$this->load();
 				/* Load permissions for selected 'dn' and check if
 				   we're allowed to remove this 'dn' */
-				$ui= get_userinfo();
-				$dn= preg_replace("/,dc=addressbook,/", "", $this->dn);
-				$acl= get_permissions ($dn, $ui->subtreeACL);
-				$this->acl= get_module_permission($acl, "global-addressbook", $dn);
 				if (chkacl($this->acl, "delete") == ""){
 
 					/* Check locking, save current plugin in 'back_plugin', so
@@ -281,6 +277,7 @@ class addressbook extends plugin
 					}
 
 					/* Lock the current entry, so nobody will edit it during deletion */
+          $ui= get_userinfo();
 					add_lock ($this->dn, $ui->dn);
 					$smarty->assign("info", sprintf(_("You're about to delete the entry %s."), $this->dn));
 					return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
@@ -443,7 +440,6 @@ class addressbook extends plugin
 			}
 
 			/* Fill variables from LDAP */
-# FIXME: Missing ACL support for addressbook yet
 			if ($_SESSION['show_info'] != "ADD"){
 				$ldap->cat($_SESSION['show_info']);
 				$info= $ldap->fetch();
@@ -532,6 +528,15 @@ class addressbook extends plugin
 		return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 	}
 
+  function save_object()
+  {
+    plugin::save_object();
+    foreach($this->attributes as $attr){
+      if(isset($_POST[$attr])){
+        $this->$attr = $_POST[$attr];
+      }
+    }
+  }
 
 	function check()
 	{
@@ -597,11 +602,7 @@ class addressbook extends plugin
 		$this->new_dn= $this->dn;
 	}
 
-	$ui= get_userinfo();
-	$dn= preg_replace("/,dc=addressbook,/", "", $this->new_dn);
-	$acl= get_permissions ($dn, $ui->subtreeACL);
-	$acl= get_module_permission($acl, "global-addressbook", $this->dn);
-	if ($_SESSION['show_info'] == "ADD" && chkacl($acl, "create") != ""){
+	if ($_SESSION['show_info'] == "ADD" && chkacl($this->acl, "add") != ""){
 		$message[]= _("You have no permissions to create or modify a global address book entry.");
 	}
 
