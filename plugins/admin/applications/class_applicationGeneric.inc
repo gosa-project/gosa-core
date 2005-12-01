@@ -119,7 +119,6 @@ class application extends plugin
 	plugin::execute();
 
 	$smarty= get_smarty();
-	$smarty->assign("categories",array_flip($this->Categories));
 
  	/* Do we represent a valid group? */
 	if (!$this->is_account && $this->parent == NULL){
