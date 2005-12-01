@@ -281,7 +281,12 @@ $ACLD['nagiosAccount'] = array("NagiosAlias"
 , "AuthorizedConfigurationInformation"
 , "AuthorizedSystemInformation");
 
-$ACLD['addressbook']=  array("addressbook","create", "delete");
+$ACLD['addressbook']=  array("addressbook","add", "delete",
+	  "sn", "givenName", "mail", "title",
+      "initials", "homePostalAddress", "displayName",
+      "homePhone", "mobile", "o", "postalAddress", "l",
+      "postalCode", "st", "ou", "telephoneNumber",
+      "facsimileTelephoneNumber", "pager");
 $ACLD['fonreport']	=  array("fonreport");
 $ACLD['faxreport']	=  array("faxreport");
 ?>
