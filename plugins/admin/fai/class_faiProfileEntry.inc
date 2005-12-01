@@ -23,7 +23,7 @@ class faiProfileEntry extends plugin
     $base = "ou=fai,ou=configs,ou=systems,".$_SESSION['faifilter']['base'];
 
     /* Create array with categories to be able to sort different types of objects */
-    $categories = array("FAIscript","FAItemplate","FAIhook","FAIvariable","FAIpartitionTable","FAIpackage");
+    $categories = array("FAIscript","FAItemplate","FAIhook","FAIvariable","FAIpartitionTable","FAIpackageList");
 
     /* Read out all objects from fai tree */
     $ldap= $this->config->get_ldap_link();
@@ -119,7 +119,7 @@ class faiProfileEntry extends plugin
     $objTypes['FAItemplate']        = "<image src='images/fai_template.png' title='"._("Template bundle")."' alt=''>&nbsp;";
     $objTypes['FAIscript']          = "<image src='images/fai_script.png' title='"._("Script bundle")."' alt=''>&nbsp;";
     $objTypes['FAIvariable']        = "<image src='images/fai_variable.png' title='"._("Variable bundle")."' alt=''>&nbsp;";
-    $objTypes['FAIpackage']        = "<image src='images/fai_packages.png' title='"._("Package bundle")."' alt=''>&nbsp;";
+    $objTypes['FAIpackageList']     = "<image src='images/fai_packages.png' title='"._("Package bundle")."' alt=''>&nbsp;";
     $objTypes['FAIpartitionTable']  = "<image src='images/fai_partitionTable.png' title='"._("Partition table")."' alt=''>&nbsp;";
 
     /* Magic quotes GPC, escapes every ' " \, to solve some security risks
@@ -181,7 +181,7 @@ class faiProfileEntry extends plugin
       if((isset($classes['objects']['FAIpartitionTable']))&&($SUBfaifilter['SShowPartitions'])){
         $abort = false;
       }
-      if((isset($classes['objects']['FAIpackage']))&&($SUBfaifilter['SShowPackages'])){
+      if((isset($classes['objects']['FAIpackageList']))&&($SUBfaifilter['SShowPackages'])){
         $abort = false;
       }
 
