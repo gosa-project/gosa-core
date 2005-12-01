@@ -52,6 +52,7 @@ class applicationParameters extends plugin
 		} else {
 			$display= $this->show_header(_("Create options"),
 				_("This application has options disabled. You can enable them by clicking below."));
+			$this->parent->by_object['application']->generateTemplate();
 			return ($display);
 		}
 	}
@@ -104,6 +105,7 @@ class applicationParameters extends plugin
 	$smarty= get_smarty();
 	$smarty->assign("table", $table);
 	$display.= $smarty->fetch(get_template_path('parameters.tpl', TRUE));
+	$this->parent->by_object['application']->generateTemplate();
 	return ($display);
   }
 

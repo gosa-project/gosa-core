@@ -78,7 +78,7 @@ class application extends plugin
   }
 
 
-  function generateTempalte(){
+  function generateTemplate(){
 	$str= "# This code is part of GOsa (https://gosa.gonicus.de)\n#\n";
 
 	$values = array();
@@ -129,7 +129,7 @@ class application extends plugin
 	}
 
 #	if(isset($_POST['ScriptTemplate'])){
-		$head = $this->generateTempalte();
+		$head = $this->generateTemplate();
 		$scr  = $this->gotoLogonScript; 
 		
 		if(preg_match("/### END HEADER ###/",$scr)){
