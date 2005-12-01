@@ -291,5 +291,5 @@ $ACLD['fonreport']	=  array("fonreport", "src", "dst", "channel", "lastapp", "di
 $ACLD['faxreport']	=  array("faxreport");
 $ACLD['logview']	=  array("logview");
 $ACLD['mailqueue']	=  array("mailqueue");
-$ACLD['ldapmanager']=  array("ldapmanager");
+$ACLD['ldapmanager']=  array("ldapmanager","import","export","xlsexport","csvimport");
 ?>

@@ -16,16 +16,16 @@ class ldifimport extends plugin
     /* Include config object */
     $this->config= $config;
 
+    /* set permissions */
     $ui= get_userinfo();
-    $acl= get_permissions ($config->current['BASE'], $ui->subtreeACL);
-    $acl= get_module_permission($acl, "ldifimport", $config->current['BASE']);
-    $this->access= $acl;
+    $acl= get_permissions ($ui->dn, $ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "ldapmanager", $ui->dn);
   }
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     /* Set government mode */
     $smarty= get_smarty();
@@ -37,7 +37,7 @@ class ldifimport extends plugin
     $smarty->assign("type",FALSE);
 
     /* Check permissions for export */
-    if ($this->access != '#all#'){
+    if (chkacl($this->acl,"import")!=""){
       print_red(_("You've no permission to do LDAP imports."));
     } else { 
       if((isset($_FILES['userfile']['name']))&&(isset($_POST['fileup'])))
@@ -45,8 +45,8 @@ class ldifimport extends plugin
 
 
         $smarty->assign("type","importfile");
-			
-		$handle = NULL;
+
+        $handle = NULL;
 
         // Check if there is a file submitted
 
@@ -91,7 +91,7 @@ class ldifimport extends plugin
           if(!empty($_POST['cleanup']))   $cleanup   = true; else $cleanup = false;
 
           //
-		  $ErrorStr="";
+          $ErrorStr="";
           $check = $ldap->import_complete_ldif($str,$ErrorStr,$overwrite,$cleanup);
 
           if($check == INSERT_OK  )
@@ -111,7 +111,7 @@ class ldifimport extends plugin
       }
     }
     return ($smarty->fetch (get_template_path('contentimport.tpl', TRUE)));
-    
+
   }
 
 }

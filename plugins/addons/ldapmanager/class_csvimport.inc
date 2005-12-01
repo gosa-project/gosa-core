@@ -19,16 +19,18 @@ class csvimport extends plugin
     /* Include config object */
     $this->config= $config;
 
+    /* set permissions */
     $ui= get_userinfo();
-    $acl= get_permissions ($config->current['BASE'], $ui->subtreeACL);
-    $acl= get_module_permission($acl, "all", $config->current['BASE']);
-    $this->access= $acl;
+    $acl= get_permissions ($ui->dn, $ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "ldapmanager", $ui->dn);
+
+
   }
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     /* initiate smarty */
     $smarty= get_smarty();
@@ -95,7 +97,7 @@ class csvimport extends plugin
     $smarty->assign("attrs",$this->csvinfo['attr']);
 
     /* Check permissions for import */
-    if ($this->access != '#all#'){
+    if (chkacl($this->acl,"csvimport")!=""){
       print_red(_("You've no permission to do CSV imports."));
       return ($smarty->fetch (get_template_path('contentcsv.tpl', TRUE)));
     }
@@ -152,10 +154,10 @@ class csvimport extends plugin
 
           /* If not all needed vars set .... */
           if(         ( empty($dat['sn']))||( empty($dat['givenName']))||( empty($dat['uid']))||
-                      (!isset($dat['sn']))||(!isset($dat['givenName']))||(!isset($dat['uid']))){
+              (!isset($dat['sn']))||(!isset($dat['givenName']))||(!isset($dat['uid']))){
 
             /* Output Error */
-            
+
             print_red (_("Need 'sn','givenName' and 'uid' to create user."));
           } else {
 
@@ -166,11 +168,11 @@ class csvimport extends plugin
 
             /* Set all submitted vars  */
             if(is_array($keys))
-            foreach($keys as $key) {
-              if($key != "status"){
-                $this->usertab->$key = $dat[$key];
+              foreach($keys as $key) {
+                if($key != "status"){
+                  $this->usertab->$key = $dat[$key];
+                }
               }
-            }
 
             /* Initialize template */
             if($this->csvinfo['tplid']!=0){
@@ -180,11 +182,11 @@ class csvimport extends plugin
 
               /* Reset vars */
               if(is_array($keys))
-              foreach($keys as $key) {
-                if($key != "status"){
-                  $this->usertab->by_object['user']->$key = $dat[$key];
+                foreach($keys as $key) {
+                  if($key != "status"){
+                    $this->usertab->by_object['user']->$key = $dat[$key];
+                  }
                 }
-              }
             }
 
             // Setting user Password 
@@ -192,7 +194,7 @@ class csvimport extends plugin
               $password = $dat['userPassword']; 
             else
             {
-            $rand_str="";
+              $rand_str="";
               $feed = "0123456789abcdefghijklmnopqrstuvwxyz";
               for ($i=0; $i < 8; $i++)
               {
@@ -286,18 +288,18 @@ class csvimport extends plugin
         $smarty->assign("rows",$this->csvinfo['shownrowscount']);
 
 
-      $cnt = 0 ;
-      $tmp2 = $tmp3 = array();
-      if(is_array($dataouts))
-      foreach($dataouts as $tmp){
-        $tmp2[] = $tmp;
-        $cnt ++ ;
-        if($cnt >= count($tmparr2)){
-          $tmp3[] = $tmp2;
-          $tmp2= array();
-          $cnt = 0; 
-        }
-      }  
+        $cnt = 0 ;
+        $tmp2 = $tmp3 = array();
+        if(is_array($dataouts))
+          foreach($dataouts as $tmp){
+            $tmp2[] = $tmp;
+            $cnt ++ ;
+            if($cnt >= count($tmparr2)){
+              $tmp3[] = $tmp2;
+              $tmp2= array();
+              $cnt = 0; 
+            }
+          }  
         $smarty->assign("head",$tmparr2);
         $smarty->assign("data",$tmp3);
 
@@ -321,9 +323,9 @@ class csvimport extends plugin
     } else {
       /* Check if theres a file uploaded */
       if(!empty($_FILES['userfile']['name'])){
-      	
-      	$handle = NULL;
-      	
+
+        $handle = NULL;
+
         if((!isset($_FILES['userfile']['name']))||(!isset($_POST['fileup'])))
         {
           print_red(_("There is no file uploaded."));
@@ -349,7 +351,7 @@ class csvimport extends plugin
         {
           $smarty->assign("fileup",TRUE);
           $str = "";
-			
+
 
           /* Reading content */
           while(!feof($handle)) {
@@ -363,57 +365,57 @@ class csvimport extends plugin
 
           /* check colum count */
           if(is_array($lines))
-          foreach($lines as $line) {
-            /* continue if theres a comment */
-            if(substr(trim($line),0,1)=="#"){
-              continue;
-            }
+            foreach($lines as $line) {
+              /* continue if theres a comment */
+              if(substr(trim($line),0,1)=="#"){
+                continue;
+              }
 
-            $line= str_replace ("\t","",$line);
-            $cells  = split(",",$line )  ;
+              $line= str_replace ("\t","",$line);
+              $cells  = split(",",$line )  ;
 
-            if(count($cells)> $anz ){
-              $anz = count($cells);
+              if(count($cells)> $anz ){
+                $anz = count($cells);
+              }
             }
-          }
 
           /* At least one entry */
           if($anz >1) {
 
             /* Generate array with outpu info  */
-          if(is_array($lines))
-            foreach($lines as $line) {
-              $rest = 0;
-              $cnt  = 0;
+            if(is_array($lines))
+              foreach($lines as $line) {
+                $rest = 0;
+                $cnt  = 0;
 
-              /* dont use comments or empty lines */
-              if((substr(trim($line),0,1)=="#")||(empty($line))){
-                continue;
-              }
-
-              /* replace \t to , */
-              $line= str_replace ("\t"  ,"" ,$line);
-
-              /* get all elements  */
-              $cells  = split(",",$line )  ;
-
-              /* attach all elements to data array */
-              if(is_array($cells))
-              foreach($cells as $cell) {
-                if(!empty($cell)) {
-                  $cnt++; 
-                  $data[]=trim($cell);
+                /* dont use comments or empty lines */
+                if((substr(trim($line),0,1)=="#")||(empty($line))){
+                  continue;
                 }
-              }
 
-              /* cell count less than anz, attach some empty fields */
-              if(($cnt != $anz)&&(!empty($cnt))) {
-                $rest = $anz - $cnt;
-                for($i = 0 ; $i < $rest ; $i ++){
-                  $data[] = " ";
+                /* replace \t to , */
+                $line= str_replace ("\t"  ,"" ,$line);
+
+                /* get all elements  */
+                $cells  = split(",",$line )  ;
+
+                /* attach all elements to data array */
+                if(is_array($cells))
+                  foreach($cells as $cell) {
+                    if(!empty($cell)) {
+                      $cnt++; 
+                      $data[]=trim($cell);
+                    }
+                  }
+
+                /* cell count less than anz, attach some empty fields */
+                if(($cnt != $anz)&&(!empty($cnt))) {
+                  $rest = $anz - $cnt;
+                  for($i = 0 ; $i < $rest ; $i ++){
+                    $data[] = " ";
+                  }
                 }
-              }
-            }    
+              }    
 
             unset($this->csvinfo['sorteddata']);
             unset($this->csvinfo['colsstr']);
@@ -442,16 +444,16 @@ class csvimport extends plugin
             $i =  0; 
             $tmp = $tmp2= array();
             if(is_array($this->csvinfo['dataout']))
-            foreach($this->csvinfo['dataout'] as $dat){
-              $tmp[]= $dat;
-              $i++;
-              if($i >=$this->csvinfo['cols']){
-                $i = 0;
-                $tmp2[] = $tmp;
-                $tmp = array();
-              }
+              foreach($this->csvinfo['dataout'] as $dat){
+                $tmp[]= $dat;
+                $i++;
+                if($i >=$this->csvinfo['cols']){
+                  $i = 0;
+                  $tmp2[] = $tmp;
+                  $tmp = array();
+                }
 
-            }
+              }
 
             /* Set Templateid  */
             $smarty->assign("tplid",$this->csvinfo['tplid']);
@@ -471,7 +473,7 @@ class csvimport extends plugin
 
             for($i  = 0 ; $i < $anz; $i ++)
               $this->csvinfo['arr_selected'][]="0";
-  
+
             $smarty->assign("selectedattrs",$this->csvinfo['arr_selected']);
 
             /* Entrie count5 */

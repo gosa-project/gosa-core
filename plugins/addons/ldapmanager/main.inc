@@ -30,12 +30,13 @@ if (!$remove_lock){
 
 	#print_red(_("Warning: Please check the SIZELIMIT option set on your LDAP server. You may not get all entries, if this value is to low!"));
 
+    /* set permissions */
+    $acl= get_permissions ($ui->dn, $ui->subtreeACL);
+    $ldif->acl= get_module_permission($acl, "ldapmanager", $ui->dn);
+	
 	/* Execute formular */
 	$display.= $ldif->execute ();
 
-	#$ldap= $config->get_ldap_link();
-	#$display.= $ldap->gen_ldif("ou=People,ou=Technik,dc=gonicus,dc=de");
-	
 	$display.= "<input type=\"hidden\" name=\"ignore\">\n";
 
 	/* Store changes  in session */

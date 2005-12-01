@@ -1,12 +1,10 @@
 <?php
 
-
 class ldifexport extends plugin
 {
   /* Definitions */
   var $plHeadline= "CSV import";
   var $plDescription= "This does something";
-  var $access= "";
 
   /* attribute list for save action */
   var $attributes= array();
@@ -17,24 +15,26 @@ class ldifexport extends plugin
     /* Include config object */
     $this->config= $config;
 
+    /* set permissions */
     $ui= get_userinfo();
-    $acl= get_permissions ($config->current['BASE'], $ui->subtreeACL);
-    $acl= get_module_permission($acl, "ldifexport", $config->current['BASE']);
-    $this->access= $acl;
+    $acl= get_permissions ($ui->dn, $ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "ldapmanager", $ui->dn);
+
   }
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     /* Set government mode */
     $smarty= get_smarty();
 
     $smarty->assign("type",FALSE);
+    $smarty->assign("depselectivbb","");
 
     /* Check permissions for export */
-    if ($this->access != '#all#'){
+    if (chkacl($this->acl,"export")!=""){
       print_red(_("You've no permission to do LDAP exports."));
     } else {
       // fill in old vars in the Export form
