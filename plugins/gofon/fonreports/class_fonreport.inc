@@ -56,8 +56,16 @@ class fonreport extends plugin
 	/* Call parent execute */
 	plugin::execute();
 
-	/* Get template engine */
+	/* GVet template engine */
 	$smarty= get_smarty();
+
+	foreach($this->fields as $field){
+		if(chkacl($this->acl,$field)==""){
+			$smarty->assign($field."ACL","");	
+		}else{
+			$smarty->assign($field."ACL"," disabled ");	
+		}
+	}
 
 	$months= array();
 	$months[1]= _("January"); $months[2]= _("February"); $months[3]= _("March"); $months[4]= _("April");
@@ -171,9 +179,17 @@ class fonreport extends plugin
 		  $this->userfilter= preg_replace("/OR $/", "", $this->userfilter);
 	  }
 
-	  /* Perform SQL query */
-##### FIXME ACL, FILTER ######
-#        if ($this->userfilter){
+	$fields_str = "calldate, ";
+
+	foreach($this->fields as $field){
+		if($field == "calldate") continue;	
+		if(chkacl($this->acl,$field)==""){
+			$fields_str .= $field.", ";
+		}
+	}
+
+	$fields_str = preg_replace("/, $/","",$fields_str);
+
 	if ($this->sort_direction == "down"){
 		$desc= "DESC";
 	} else {
@@ -181,8 +197,7 @@ class fonreport extends plugin
 	}
 	$start= date ("YmdHis", mktime(0,0,0,$this->month,1,$this->year));
 	$end=   date ("YmdHis", mktime(23,59,59,$this->month+1,0,$this->year));
-	$query = "SELECT calldate, channel, src, clid, lastapp, lastdata, dst, ".
-		"disposition, duration FROM cdr ".
+	$query = "SELECT ".$fields_str." FROM cdr ".
 		"WHERE calldate <= $end AND ".
 		"calldate >= $start ORDER BY ".$this->fields[$this->sort]." $desc;";
 
@@ -199,20 +214,23 @@ class fonreport extends plugin
 	}
 	$report_list= array();
 	while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
+		$append_str = "";
 		$hour=  substr($line["calldate"], 11, 2);
 		$minute=substr($line["calldate"], 14, 2);
 		$format= _("Y-M-D");
 		$date= preg_replace("/Y/", substr($line["calldate"], 0, 4), $format);
 		$date= preg_replace("/M/", substr($line["calldate"], 5, 2), $date);
 		$date= preg_replace("/D/", substr($line["calldate"], 8, 2), $date);
-
-		$report_list[]= "<td>$date $hour:$minute</td>".
-			"<td>".$line["src"]."</td>".
-			"<td>".$line["dst"]."</td>".
-			"<td>".$line["channel"]."</td>".
-			"<td>".$line["lastapp"]."</td>".
-			"<td>".$line["disposition"]."</td>".
-			"<td>".$this->gen_duration($line["duration"])."</td>";
+		$append_str .= 	"<td>$date $hour:$minute</td>";
+		foreach(array("src","dst","channel","lastapp","disposition") as $atr){
+			if(isset($line[$atr])){
+				$append_str .= 	"<td>".$line[$atr]."</td>";
+			}
+		}
+		if(isset($line['duration'])){
+			$append_str .= 	"<td>".$this->gen_duration($line["duration"])."</td>";
+		}
+		$report_list[] = $append_str;
 	}
 
 	$this->report_list= $report_list;

@@ -287,6 +287,6 @@ $ACLD['addressbook']=  array("addressbook","add", "delete",
       "homePhone", "mobile", "o", "postalAddress", "l",
       "postalCode", "st", "ou", "telephoneNumber",
       "facsimileTelephoneNumber", "pager");
-$ACLD['fonreport']	=  array("fonreport");
+$ACLD['fonreport']	=  array("fonreport", "src", "dst", "channel", "lastapp", "disposition", "duration");
 $ACLD['faxreport']	=  array("faxreport");
 ?>
