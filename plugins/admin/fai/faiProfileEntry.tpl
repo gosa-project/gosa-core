@@ -72,9 +72,3 @@
 	<input name="CancelSubObject" value="{t}Cancel{/t}" type="submit">
 </div>
 <!-- Place cursor -->
-<script language="JavaScript" type="text/javascript">
-  <!-- // First input field on page
-  document.mainform.cn.focus();
-  -->
-</script>
-
