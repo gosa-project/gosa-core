@@ -26,7 +26,6 @@ class conference extends plugin
   var $base 				  = "";
   var $ou 						= "";
   var $goFonPIN				= "";
-  var $acl = "";
   var $old_cn         = "";
 
   var $goFonConferenceOption   	= "";
@@ -84,7 +83,7 @@ class conference extends plugin
     }
 
     $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
-    $this->acl= get_module_permission($acl, "goFonConference", $this->dn);
+    $this->acl= get_module_permission($acl, "conference", $this->dn);
     $this->goFonConferenceOwner=$this->ui->dn;
 
     /* Parse Options ... 
@@ -113,9 +112,6 @@ class conference extends plugin
   {
 	/* Call parent execute */
 	plugin::execute();
-
-    //$acl= get_permissions ($this->dn, $this->ui->subtreeACL);
-    //$this->acl= get_module_permission($acl, "goFonConference", $this->dn);
 
     $this->config->departments    = get_departments($this->dn);
     $this->config->make_idepartments();
