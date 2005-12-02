@@ -313,18 +313,7 @@ $ACLD['conference']	= 	array(
 
 
 $ACLD['FAIclass']	= 	array(
-								"FAIclass"							=> "FAIclass"
-/*								,"FAIhook-View" 						=> "FAIhook : View",
-								"FAIhook-Create" 					=> "FAIhook : Create",
-								"FAIhook-Delete" 					=> "FAIhook : Delete",
-								"FAIhook-cn" 						=> "FAIhook : cn",
-								"FAIhook-description" 				=> "FAIhook : description",
-								"FAIhookEntry-View" 				=> "FAIhookEntry : View",
-								"FAIhookEntry-Create" 				=> "FAIhookEntry : Create",
-								"FAIhookEntry-Delete" 				=> "FAIhookEntry : Delete",
-								"FAIhookEntry-cn" 					=> "FAIhookEntry : cn",
-								"FAIhookEntry-description" 			=> "FAIhookEntry : description"*/
-										
-								);
+								// Allow displaying of FAI menu element
+								"FAIclass"	=> "FAI management enabled");
 
 ?>
