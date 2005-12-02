@@ -129,7 +129,7 @@ class divlist {
 		$s_return 	= "";
    
     // We need to construct a "body"-table that is width-of-scrollbar thinner than the "head"-table.
-    $s_return .= "\n<tr><td class='scrollbody'><div style='align:left;width:".$this->s_width."px;height:".($this->s_height-20)."px;overflow:auto;'>";
+    $s_return .= "\n<tr><td colspan=".$this->cols." class='scrollbody'><div style='align:left;width:".$this->s_width."px;height:".($this->s_height-20)."px;overflow:auto;'>";
 
     // Only reduce width if we need a scrollbar (>19 Entries)
     if($this->_numEntries()>19) {
