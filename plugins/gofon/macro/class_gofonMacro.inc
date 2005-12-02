@@ -77,6 +77,9 @@ class macro extends plugin
       $this->orig_cn=$this->cn;
       $this->base= dn2base($this->dn);
     }
+    $ui= get_userinfo();
+    $acl= get_permissions ($ui->dn, $ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "goFonMacro", $ui->dn);
   }
 
   /*!  Execute this plugin */
@@ -327,7 +330,11 @@ class macro extends plugin
   {
     if (isset($_POST['displayName'])){
       plugin::save_object();
-
+    }
+    foreach($this->attributes as $attr){
+      if(isset($_POST[$attr])){
+        $this->$attr= $_POST [$attr];
+      }
     }
   }
 
@@ -360,7 +367,7 @@ class macro extends plugin
     }
  
     foreach($this->attributes as $attr){
-      if(chkacl($this->acl,$attr)){
+      if(chkacl($this->acl,"edit")){
         $str =  sprintf( _("Insufficient permissions, can't change attribute '%s' in goFonMacro"),$attr) ;
         return(array($str));
         }

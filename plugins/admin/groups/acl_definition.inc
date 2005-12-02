@@ -315,5 +315,6 @@ $ACLD['conference']	= 	array(
 $ACLD['FAIclass']	= 	array(
 								// Allow displaying of FAI menu element
 								"FAIclass"	=> "FAI management enabled");
+$ACLD['goFonMacro']	=array("goFonMacro","edit","delete");
 
 ?>

@@ -43,6 +43,9 @@ class gofonMacro extends plugin
       $macrofilter= array("depselect" => $base,  "regex" => "*");
       register_global("macrofilter", $macrofilter);
     }
+
+    $acl= get_permissions ($ui->dn, $ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "goFonMacro", $ui->dn);
   }
 
   function execute()
@@ -154,7 +157,6 @@ class gofonMacro extends plugin
 
       /* Create new usertab object */
       $this->macrotabs= new macrotabs($this->config,$this->config->data['TABS']['MACROTABS'], $this->dn);
-      $this->macrotabs->set_acl(array(':all'));
     }
 
     /* Cancel dialogs */
@@ -216,14 +218,9 @@ class gofonMacro extends plugin
       /* Lock the current entry, so everyone will get the
          above dialog */
       add_lock ($this->dn, $this->ui->dn);
-
-      /* Set up the users ACL's for this 'dn' */
-      $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
-
       /* Register macrotabs to trigger edit dialog */
       $this->macrotabs= new macrotabs($this->config,
-          $this->config->data['TABS']['MACROTABS'], $this->dn);
-      $this->macrotabs->set_acl($acl);
+      $this->config->data['TABS']['MACROTABS'], $this->dn);
       $_SESSION['objectinfo']= $this->dn;
     }
 
@@ -236,7 +233,7 @@ class gofonMacro extends plugin
       /* Load permissions for selected 'dn' and check if
          we're allowed to remove this 'dn' */
       $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
-      $this->acl= get_module_permission($acl, "macro", $this->dn);
+      $this->acl= get_module_permission($acl, "goFonMacro", $this->dn);
       if (chkacl($this->acl, "delete") == ""){
 
         /* Check locking, save current plugin in 'back_plugin', so

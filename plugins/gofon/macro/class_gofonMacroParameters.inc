@@ -101,7 +101,10 @@ class macroParameter extends plugin
     $this->goFonMacroParameter = $tmp2;
 
     $this->para_count = count ($tmp2);
-    
+   
+    $ui= get_userinfo();
+    $acl= get_permissions ($ui->dn, $ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "goFonMacro", $ui->dn);
   }
 
   //! Perform Parameter check 
@@ -320,7 +323,7 @@ class macroParameter extends plugin
     $message = array();
 
     foreach($this->attributes as $attr){
-      if(chkacl($this->acl,$attr)){
+      if(chkacl($this->acl,"edit")){
         $str =  sprintf( _("Insufficient permissions, can't change attribute '%s' in goFonMacro."),$attr) ;
         return(array($str));
       }
