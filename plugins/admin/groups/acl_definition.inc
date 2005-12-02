@@ -33,7 +33,6 @@ $ACLD['gofax']=      array("cn",
 			"gosaMailForwardingAddress");
 $ACLD['blocklists']= array("cn",
 			"create",
-			"type",
 			"delete",
 			"description",
 			"goFaxBlocklist");
