@@ -692,7 +692,10 @@ function get_module_permission($acl_array, $module, $dn)
     foreach ($tmp as $mod){
       if (preg_match("/$module#/", $mod)){
         $final= strstr($mod, "#")."#";
-        continue;
+
+        // HICKERT 
+        // old source : continue;
+        return($final);
       }
       if (preg_match("/[^#]$module$/", $mod)){
         return ("#all#");
