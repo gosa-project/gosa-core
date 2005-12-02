@@ -8,11 +8,15 @@ $ACLD['application']=array("cn" => "LDAP name",
 			"gosaApplicationExecute" => "Execute",
 			"gosaApplicationFlags" => "Modify flags",
 			"gosaApplicationName" => "Visible name");
-$ACLD['department']= array("businessCategory",
+$ACLD['department']= array(
+			"businessCategory",
 			"description",
 			"facsimileTelephoneNumber",
 			"l",
 			"ou",
+			"create",
+			"delete",
+			"base",
 			"postalAddress",
 			"st",
 			"telephoneNumber");

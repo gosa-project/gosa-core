@@ -142,12 +142,9 @@ class departmentManagement extends plugin
 		/* New Entry if Posted action (s_action) == new
 		 */
 		if ($s_action=="new"){
-			$this->acl= array(":all");
 			$this->dn= "new";
-
 			$this->deptabs= new deptabs($this->config,
 					$this->config->data['TABS']['DEPTABS'], $this->dn);
-			$this->deptabs->set_acl($this->acl);
 		}
 
 		/* Edit Entry if Posted action (s_action) == edit 
@@ -197,7 +194,7 @@ class departmentManagement extends plugin
 		if (isset($_POST['delete_department_confirm'])){
 			$acl= get_permissions ($this->dn, $this->ui->subtreeACL);
 			$acl= get_module_permission($acl, "department", $this->dn);
-			if (chkacl($acl, "all") == ""){
+			if (chkacl($acl, "delete") == ""){
 				$this->remove_from_parent();
 				gosa_log ("Department object'".$this->dn."' has been removed");
 				$this->reload ();

@@ -43,75 +43,84 @@ class department extends plugin
 
   function department ($config, $dn)
   {
-  	plugin::plugin($config, $dn);
-	$this->is_account= TRUE;
-	$this->ui= get_userinfo();
-	$this->dn= $dn;
-	$this->orig_dn= $dn;
-	$this->config= $config;
 
-	/* Set base */
-    if ($this->dn == "new"){
-		$ui= get_userinfo();
-		if(isset($_SESSION['depfilter']['depselect'])){
-			$this->base = $_SESSION['depfilter']['depselect'];
-		}else{
-			$this->base= dn2base($ui->dn);
-		}
-	} else {
-                $this->base= preg_replace ("/^[^,]+,/", "", $this->dn);
-        }
+	  plugin::plugin($config, $dn);
+	  $this->is_account= TRUE;
+	  $this->ui= get_userinfo();
+	  $this->dn= $dn;
+	  $this->orig_dn= $dn;
+	  $this->config= $config;
+
+	  /* Set base */
+	  if ($this->dn == "new"){
+		  $ui= get_userinfo();
+		  if(isset($_SESSION['depfilter']['depselect'])){
+			  $this->base = $_SESSION['depfilter']['depselect'];
+		  }else{
+			  $this->base= dn2base($ui->dn);
+		  }
+	  } else {
+		  $this->base= preg_replace ("/^[^,]+,/", "", $this->dn);
+	  }
+	  /* set permissions */
+	  $ui= get_userinfo();
+	  $acl= get_permissions ($ui->dn, $ui->subtreeACL);
+	  $this->acl= get_module_permission($acl, "department", $ui->dn);
   }
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+	  /* Call parent execute */
+	  plugin::execute();
 
-	/* Reload departments */
-	$this->config->departments= get_departments($this->dn);
-	$this->config->make_idepartments();
-	$smarty= get_smarty();
+	  /* Reload departments */
+	  $this->config->departments= get_departments($this->dn);
+	  $this->config->make_idepartments();
+	  $smarty= get_smarty();
 
-	/* Hide all departments, that are subtrees of this department */
-	$bases 	= $this->config->idepartments;
-	$tmp	= array();	
-	foreach($bases as $dn=>$base){
-		$fixed = str_replace("/","\\",$this->dn);
-		/* Only attach departments which are not a subtree of this one */
-		if(!preg_match("/".$fixed."/",$dn)){
-			$tmp[$dn]=$base;
+	  /* Hide all departments, that are subtrees of this department */
+	  $bases 	= $this->config->idepartments;
+	  if(($this->dn == "new")||($this->dn == "")){
+		$tmp = $bases;
+	  }else{
+		  $tmp	= array();	
+		  foreach($bases as $dn=>$base){
+			  $fixed = str_replace("/","\\",$this->dn);
+			  /* Only attach departments which are not a subtree of this one */
+			  if(!preg_match("/".$fixed."/",$dn)){
+				  $tmp[$dn]=$base;
+			  }
+		  }
 		}
-	}
-	$smarty->assign("bases", $tmp);
+	  $smarty->assign("bases", $tmp);
 
-	foreach ($this->attributes as $val){
-		$smarty->assign("$val", $this->$val);
-		$smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
-	}
-	$smarty->assign("base_select", $this->base);
-	return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
+	  foreach ($this->attributes as $val){
+		  $smarty->assign("$val", $this->$val);
+		  $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
+	  }
+	  $smarty->assign("base_select", $this->base);
+	  return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }
 
   function clear_fields()
   {
-	$this->dn= "";
-	$this->base= "";
-	$this->acl= "#none#";
+	  $this->dn= "";
+	  $this->base= "";
+	  $this->acl= "#none#";
 
-	foreach ($this->attributes as $val){
-		$this->$val= "";
-	}
+	  foreach ($this->attributes as $val){
+		  $this->$val= "";
+	  }
   }
 
 
   function remove_from_parent()
   {
-	$ldap= $this->config->get_ldap_link();
-	$ldap->cd ($this->dn);
-	$ldap->recursive_remove();
+	  $ldap= $this->config->get_ldap_link();
+	  $ldap->cd ($this->dn);
+	  $ldap->recursive_remove();
 
-	/* Optionally execute a command after we're done */
+	  /* Optionally execute a command after we're done */
 	$this->handle_post_events('remove');
   }
 
@@ -136,10 +145,8 @@ class department extends plugin
 	$message= array();
 
 	/* Permissions for that base? */
-	$this->dn= "ou=$this->ou,".$this->base;
-	$acl= get_permissions ($this->dn, $this->ui->subtreeACL);
-	$acl= get_module_permission($acl, "department", $this->dn);
-	if (chkacl($acl, "create") != ""){
+//	$this->dn= "ou=$this->ou,".$this->base;
+	if (chkacl($this->acl, "create") != ""){
 		$message[]= _("You have no permissions to create a department on this 'Base'.");
 	}
 
