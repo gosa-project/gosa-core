@@ -161,7 +161,7 @@ class application extends plugin
 	$smarty->assign("rand", rand(0, 10000));
 
 	/* Variables */
-	foreach(array("description", "gosaApplicationExecute", "gosaApplicationName") as $val){
+	foreach(array("description", "gosaApplicationExecute", "gosaApplicationName","cn") as $val){
 		$smarty->assign($val, $this->$val);
 		$smarty->assign($val."ACL", chkacl($this->acl, $val));
 	}

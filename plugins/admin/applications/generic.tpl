@@ -5,7 +5,7 @@
    <table summary="">
      <tr>
       <td><LABEL for="cn">{t}Application name{/t}{$must}</LABEL></td>
-      <td><input id="cn" name="cn" size=25 maxlength=60 value="{$cn}" title="{t}Application name{/t}"></td>
+      <td><input id="cn" name="cn" size=25 maxlength=60 value="{$cn}" title="{t}Application name{/t}" {$cnACL}></td>
     </tr>
     <tr>
      <td><LABEL for="gosaApplicationName">{t}Display name{/t}</LABEL></td>
