@@ -2055,7 +2055,9 @@ Informations générales
 
 \layout Standard
 
-Server name
+
+\color black
+Nom du serveur
 \color red
 *
 \end_inset 
@@ -2065,9 +2067,7 @@ Server name
 
 \layout Standard
 
-Insérez le nom ou le chemin du serveur 
-\color red
-?
+Introduisez le nom du serveur
 \end_inset 
 </cell>
 </row>
@@ -2088,7 +2088,7 @@ Base
 \layout Standard
 
 Sélectionnez dans la liste déroulante le département auquel le serveur sera
- associé.
+ associé
 \end_inset 
 </cell>
 </row>
@@ -2106,7 +2106,7 @@ Description
 
 \layout Standard
 
-Insérez une description sur le serveur.
+Introduisez une description, un commentaire sur le serveur
 \end_inset 
 </cell>
 </row>
@@ -2140,6 +2140,7 @@ Adresse IP
 
 \layout Standard
 
+Introduisez l'adresse IP du serveur
 \end_inset 
 </cell>
 </row>
@@ -2157,6 +2158,7 @@ Adresse MAC
 
 \layout Standard
 
+Introduisez l'adresse MAC du serveur
 \end_inset 
 </cell>
 </row>
@@ -2170,25 +2172,20 @@ Adresse MAC
 Action
 \layout Standard
 
-
-\color red
-?
+Choisissez l'action à exécuter sur le serveur.
 \layout Subsubsection
 \added_space_top bigskip 
 Databases
 \layout Standard
 
-Ce point regroupe toutes les bases de données qui peuvent être associés
- au serveur.
- L'administrateur peut cocher une ou plusieurs propositions de bases de
- données selon la configuration du système et les droits d'accès des utilisateur
-s.
+Ce point regroupe toutes les bases de données qui peuvent être associées
+ à certaines fonctionnalités de GOsa.
 \layout Standard
 
 L'administrateur à le choix entre :
 \layout Itemize
 
-Kerberos kadmin access
+Accès kadmin Kerberos
 \begin_deeper 
 \layout Standard
 
@@ -2204,7 +2201,7 @@ Kerberos kadmin access
 
 \layout Standard
 
-Kerberos Realm
+Realm Kerberos 
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2212,6 +2209,7 @@ Kerberos Realm
 
 \layout Standard
 
+Introduisez le realm Kerberos
 \end_inset 
 </cell>
 </row>
@@ -2221,7 +2219,7 @@ Kerberos Realm
 
 \layout Standard
 
-Admin user
+Administrateur
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2229,6 +2227,7 @@ Admin user
 
 \layout Standard
 
+Introduisez le login de l'administrateur Kerberos
 \end_inset 
 </cell>
 </row>
@@ -2246,6 +2245,7 @@ Mot de passe
 
 \layout Standard
 
+Introduisez le mot de passe de l'administrateur Kerberos
 \end_inset 
 </cell>
 </row>
@@ -2257,7 +2257,7 @@ Mot de passe
 \end_deeper 
 \layout Itemize
 \added_space_top medskip 
-FAX database
+Base de données des FAX
 \begin_deeper 
 \layout Standard
 
@@ -2273,7 +2273,7 @@ FAX database
 
 \layout Standard
 
-FAX DB user
+Utilisateur 
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2281,6 +2281,7 @@ FAX DB user
 
 \layout Standard
 
+Introduisez le login du propriétaire de la base de données
 \end_inset 
 </cell>
 </row>
@@ -2298,6 +2299,7 @@ Mot de passe
 
 \layout Standard
 
+Introduisez le mot de passe du propriétaire de la base de données
 \end_inset 
 </cell>
 </row>
@@ -2309,7 +2311,7 @@ Mot de passe
 \end_deeper 
 \layout Itemize
 \added_space_top medskip 
-Asterisk Management
+Administration d'Asterisk 
 \begin_deeper 
 \layout Standard
 
@@ -2325,7 +2327,7 @@ Asterisk Management
 
 \layout Standard
 
-Asterisk DB user
+Utilisateur
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2333,6 +2335,7 @@ Asterisk DB user
 
 \layout Standard
 
+Introduisez le login du propriétaire de la base de données
 \end_inset 
 </cell>
 </row>
@@ -2350,6 +2353,7 @@ Mot de passe
 
 \layout Standard
 
+Introduisez le mot de passe du propriétaire de la base de données
 \end_inset 
 </cell>
 </row>
@@ -2359,7 +2363,7 @@ Mot de passe
 
 \layout Standard
 
-Country dial prefix
+Préfixe du pays
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2367,6 +2371,7 @@ Country dial prefix
 
 \layout Standard
 
+Introduisez le préfixe du pays
 \end_inset 
 </cell>
 </row>
@@ -2376,7 +2381,7 @@ Country dial prefix
 
 \layout Standard
 
-Local dial prefix
+Préfixe local
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2384,6 +2389,7 @@ Local dial prefix
 
 \layout Standard
 
+Introduisez le préfixe local
 \end_inset 
 </cell>
 </row>
@@ -2395,7 +2401,7 @@ Local dial prefix
 \end_deeper 
 \layout Itemize
 \added_space_top medskip 
-IMAP admin access
+Accès administrateur IMAP
 \begin_deeper 
 \layout Standard
 
@@ -2411,7 +2417,25 @@ IMAP admin access
 
 \layout Standard
 
-Server identifier 
+Nom du serveur
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le nom complet du serveur en notation internet (smtp.acme.com)
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+URL de connexion
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2428,7 +2452,7 @@ Server identifier
 
 \layout Standard
 
-Connect URL
+Administrateur
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2436,23 +2460,7 @@ Connect URL
 
 \layout Standard
 
-\end_inset 
-</cell>
-</row>
-<row topline="true">
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
-Admin user
-\end_inset 
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\layout Standard
-
+Introduisez le login de l'administrateur du serveur imap
 \end_inset 
 </cell>
 </row>
@@ -2470,6 +2478,7 @@ Mot de passe
 
 \layout Standard
 
+Introduisez le mot de passe de l'administrateur du serveur imap
 \end_inset 
 </cell>
 </row>
@@ -2479,7 +2488,7 @@ Mot de passe
 
 \layout Standard
 
-Sieve port
+port Sieve
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2487,6 +2496,7 @@ Sieve port
 
 \layout Standard
 
+Introduisez le port sur lequel Sieve répond
 \end_inset 
 </cell>
 </row>
@@ -2498,7 +2508,7 @@ Sieve port
 \end_deeper 
 \layout Itemize
 \added_space_top medskip 
-Logging database
+Base de données des logs
 \begin_deeper 
 \layout Standard
 
@@ -2514,7 +2524,7 @@ Logging database
 
 \layout Standard
 
-Logging DB user
+Utilisateur
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2522,6 +2532,7 @@ Logging DB user
 
 \layout Standard
 
+Introduisez le login du propriétaire de la base de données
 \end_inset 
 </cell>
 </row>
@@ -2539,6 +2550,7 @@ Mot de passe
 
 \layout Standard
 
+Introduisez le mot de passe du propriétaire de la base de données
 \end_inset 
 </cell>
 </row>
@@ -2553,36 +2565,23 @@ Mot de passe
 Services
 \layout Itemize
 
-Nfs Export
+Exportation Nfs
 \layout Standard
-
-
-\color red
-?
-\layout Itemize
-\added_space_top medskip 
-Time Service
-\layout Standard
-
-
-\color red
-?
-\layout Itemize
-\added_space_top medskip 
-LDAP Service
-\layout Standard
-
-
-\color red
-?
-\layout Itemize
-\added_space_top medskip 
-Terminal Service
+\added_space_bottom smallskip 
+Utilisez le bouton 
+\emph on 
+Ajouter 
+\emph default 
+pour pouvoir configurer les exports Nfs.
+ 
+\layout Subsubsection*
+\added_space_bottom smallskip 
+Freigabe bearbeiten
 \layout Standard
 
 
 \begin_inset  Tabular
-<lyxtabular version="3" rows="2" columns="2">
+<lyxtabular version="3" rows="6" columns="2">
 <features>
 <column alignment="block" valignment="top" leftline="true" width="5cm">
 <column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
@@ -2592,7 +2591,9 @@ Terminal Service
 
 \layout Standard
 
-Temporary disable login
+Nom
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2600,9 +2601,79 @@ Temporary disable login
 
 \layout Standard
 
+Introduisez le nom du partage
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
 
-\color red
-?
+\layout Standard
+
+Description
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez une description, un commentaire sur le partage
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Type
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Faites votre sélection dans la liste déroulante du type de partage
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Type de caractères
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Faites votre sélection dans la liste déroulante du type d'encodage
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Chemin
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Indiquez le répertoire correspondant au partage
 \end_inset 
 </cell>
 </row>
@@ -2612,7 +2683,7 @@ Temporary disable login
 
 \layout Standard
 
-Font path
+Option
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2620,9 +2691,85 @@ Font path
 
 \layout Standard
 
+Indiquez les options éventuelles pour ce partage
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
 
-\color red
-?
+\end_inset 
+
+
+\layout Standard
+\added_space_top smallskip 
+Cliquez sur le bouton 
+\emph on 
+Enregistrer
+\emph default 
+ pour terminer la configuration du partage.
+\layout Itemize
+\added_space_top medskip 
+Services de temps
+\layout Standard
+
+Utilisez le bouton 
+\emph on 
+Ajouter
+\emph default 
+ pour pouvoir introduire l'adresse du serveur de temps.
+\layout Itemize
+\added_space_top medskip 
+Service LDAP
+\layout Standard
+
+Cochez pour pouvoir introduire l'adresse du serveur ldap
+\layout Itemize
+\added_space_top medskip 
+Services de terminaux
+\layout Standard
+\added_space_bottom smallskip 
+Cochez pour indiquer que ce serveur est un serveur de terminaux.
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="7cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="8cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Désactiver temporairement le login
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Cochez pour empêcher les terminaux de se connecter temporairement
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Répertoire des polices de caractères
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le répertoire de polices de caractères utilisé par les terminaux
 \end_inset 
 </cell>
 </row>
@@ -2633,23 +2780,25 @@ Font path
 
 \layout Itemize
 \added_space_top medskip 
-Syslog Service
+Service de logs systèmes
 \layout Standard
 
-
-\color red
-?
+Cochez pour indiquer que le serveur comprend un service de logs systèmes.
 \layout Itemize
 \added_space_top medskip 
-Print Service
+Services d'impression
 \layout Standard
 
+Cochez pour indiquer que le serveur comprend un service d'impression.
+\layout Itemize
+\added_space_top medskip 
+Serveur de messagerie
+\layout Standard
 
-\color red
-?
+Cochez pour indiquer que le serveur comprend un service de messagerie.
 \layout Subsubsection
 \added_space_top bigskip 
-Surveillance
+Information
 \layout Standard
 
 Cet onglet donne un compte rendu de l'état du système.
@@ -2664,7 +2813,215 @@ Les références résument les relations existantes entre objets.
 Configurer une imprimante
 \layout Subsubsection
 
-Informations générales
+Informations
+\layout Subsubsection*
+
+Général
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Nom de l'imprimante
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le nom de l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Description
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez une description, un commentaire sur l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Base
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Faites votre sélection dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Détails
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="7cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="8cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+\align left 
+Localisation de l'imprimante
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Indiquez le lieu où se trouve physiquement l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+URL de l'imprimante
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'url qui permet d'accéder à l'imprimante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Itemize
+
+Le bouton 
+\emph on 
+Editer
+\emph default 
+ permet de télécharger un pilote d'imprimante depuis votre arborescence.
+ Utilisez le bouton 
+\emph on 
+Supprimer
+\emph default 
+ pour effacer le pilote choisi.
+\layout Subsubsection*
+\added_space_top medskip 
+Permissions
+\layout Standard
+
+L'administrateur peut donner la permission à un utilisateur ou à un groupe
+ d'utiliser et/ou d'administrer une imprimante.
+\layout Standard
+
+Le bouton 
+\emph on 
+Ajouter un utilisateur
+\emph default 
+ renvoie à la liste des utilisateurs et le bouton 
+\emph on 
+Ajouter un groupe
+\emph default 
+ renvoie à la liste des groupes.
+\layout Subsubsection*
+\added_space_top medskip 
+Configuration réseau
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse IP
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'adresse IP de l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse MAC
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'adresse MAC de l'imprimante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
 \layout Subsubsection
 \added_space_top bigskip 
 Références
@@ -2701,7 +3058,7 @@ Nom du téléphone
 
 \layout Standard
 
-Insérez le nom du téléphone.
+Introduisez le nom du téléphone
 \end_inset 
 </cell>
 </row>
@@ -2722,7 +3079,7 @@ Base
 \layout Standard
 
 Choisissez dans la liste déroulante le nom du département auquel sera associé
- le téléphone.
+ le téléphone
 \end_inset 
 </cell>
 </row>
@@ -2740,7 +3097,7 @@ Description
 
 \layout Standard
 
-Rédigez une description à propos du téléphone.
+Introduisez une description, un commentaire sur le téléphone
 \end_inset 
 </cell>
 </row>
@@ -2751,7 +3108,7 @@ Rédigez une description à propos du téléphone.
 
 \layout Subsubsection*
 \added_space_top medskip 
-Specific Phone settings
+Configuration avancée du téléphone
 \layout Standard
 
 
@@ -2766,7 +3123,9 @@ Specific Phone settings
 
 \layout Standard
 
-Phone type
+Type
+\color black
+ de téléphone
 \color red
 *
 \end_inset 
@@ -2795,8 +3154,8 @@ Si SIP est sélectionné vous devez remplir les champs suivants :
 \begin_inset  Tabular
 <lyxtabular version="3" rows="4" columns="2">
 <features>
-<column alignment="block" valignment="top" leftline="true" width="4cm">
-<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<column alignment="block" valignment="top" leftline="true" width="6cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="9cm">
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -2813,6 +3172,7 @@ Mode
 
 \layout Standard
 
+Choisissez dans la liste déroulante le mode de fonctionnement du téléphone
 \end_inset 
 </cell>
 </row>
@@ -2822,7 +3182,7 @@ Mode
 
 \layout Standard
 
-DTMF mode
+Mode DTMF 
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2830,6 +3190,8 @@ DTMF mode
 
 \layout Standard
 
+Choisissez dans la liste déroulante le type de modulation DTMF utilisé par
+ le téléphone
 \end_inset 
 </cell>
 </row>
@@ -2838,8 +3200,8 @@ DTMF mode
 \begin_inset Text
 
 \layout Standard
-
-Default IP
+\align left 
+Adresse IP par défaut
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2847,6 +3209,8 @@ Default IP
 
 \layout Standard
 
+Choisissez dans la liste déroulante le type de configuration de l'adresse
+ IP
 \end_inset 
 </cell>
 </row>
@@ -2855,8 +3219,8 @@ Default IP
 \begin_inset Text
 
 \layout Standard
-
-Response timeout
+\align left 
+Temps de réponse maximum
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2864,6 +3228,7 @@ Response timeout
 
 \layout Standard
 
+Introduisez le délai d'attente maximum
 \end_inset 
 </cell>
 </row>
@@ -2883,15 +3248,17 @@ Si IAX est sélectionné vous devez remplir les champs suivants :
 \begin_inset  Tabular
 <lyxtabular version="3" rows="9" columns="2">
 <features>
-<column alignment="block" valignment="top" leftline="true" width="4cm">
-<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<column alignment="block" valignment="top" leftline="true" width="6cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="9cm">
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \layout Standard
 
-Modus
+
+\color black
+Mode
 \color red
 *
 \end_inset 
@@ -2901,9 +3268,7 @@ Modus
 
 \layout Standard
 
-
-\color red
-?
+Choisissez dans la liste déroulante le mode de fonctionnement du téléphone
 \end_inset 
 </cell>
 </row>
@@ -2913,7 +3278,7 @@ Modus
 
 \layout Standard
 
-Default IP
+Adresse IP par défaut
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2933,7 +3298,7 @@ Default IP
 
 \layout Standard
 
-Response timeout
+Temps de réponse maximum
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2941,9 +3306,7 @@ Response timeout
 
 \layout Standard
 
-
-\color red
-?
+Introduisez le délai d'attente maximum
 \end_inset 
 </cell>
 </row>
@@ -2953,7 +3316,7 @@ Response timeout
 
 \layout Standard
 
-Authtype
+Type d'authentification
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -2961,9 +3324,7 @@ Authtype
 
 \layout Standard
 
-
-\color red
-?
+Choisissez dans la liste déroulante la méthode d'authentification du téléphone
 \end_inset 
 </cell>
 </row>
@@ -2981,9 +3342,7 @@ Secret
 
 \layout Standard
 
-
-\color red
-?
+Introduisez le secret utilisé lors de l'authentification du téléphone
 \end_inset 
 </cell>
 </row>
@@ -2993,7 +3352,7 @@ Secret
 
 \layout Standard
 
-Account code
+Code du compte téléphonique
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -3013,7 +3372,7 @@ Account code
 
 \layout Standard
 
-Trunk lines
+Regrouper des lignes
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -3021,9 +3380,8 @@ Trunk lines
 
 \layout Standard
 
-
-\color red
-?
+Choisissez dans la liste déroulante si il faut grouper des lignes téléphoniques
+ ou pas
 \end_inset 
 </cell>
 </row>
@@ -3033,7 +3391,7 @@ Trunk lines
 
 \layout Standard
 
-Hosts that are allowed to connect
+Machines qui peuvent se connecter
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -3041,11 +3399,16 @@ Hosts that are allowed to connect
 
 \layout Standard
 
-Utilisez le bouton Ajouter pour insérer le nom d'hôte pouvant se connecter.
- Le bouton Supprimer sert à effacer le nom d'hôte sélectionné.
- 
-\color red
-?
+Utilisez le bouton 
+\emph on 
+Ajouter
+\emph default 
+ pour insérer le nom d'hôte pouvant se connecter.
+ Le bouton 
+\emph on 
+Supprimer
+\emph default 
+ sert à effacer le nom d'hôte sélectionné.
 \end_inset 
 </cell>
 </row>
@@ -3055,7 +3418,7 @@ Utilisez le bouton Ajouter pour insérer le nom d'hôte pouvant se connecter.
 
 \layout Standard
 
-Hosts that are not allowed to connect
+Machines qui ne peuvent pas se connecter
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -3063,12 +3426,16 @@ Hosts that are not allowed to connect
 
 \layout Standard
 
-Utilisez le bouton Ajouter pour insérer le nom d'hôte ne pouvant pas se
- connecter.
- Le bouton Supprimer sert à effacer le nom d'hôte sélectionné.
- 
-\color red
-?
+Utilisez le bouton 
+\emph on 
+Ajouter
+\emph default 
+ pour insérer le nom d'hôte ne pouvant pas se connecter.
+ Le bouton 
+\emph on 
+Supprimer
+\emph default 
+ sert à effacer le nom d'hôte sélectionné.
 \end_inset 
 </cell>
 </row>
@@ -3104,9 +3471,7 @@ MSN
 
 \layout Standard
 
-
-\color red
-?
+Introduisez le numéro MSN de la ligne téléphonique
 \end_inset 
 </cell>
 </row>
@@ -3143,9 +3508,7 @@ Adresse IP
 
 \layout Standard
 
-
-\color red
-?
+Introduisez l'adresse IP du téléphone
 \end_inset 
 </cell>
 </row>
@@ -3165,9 +3528,7 @@ Adresse MAC
 
 \layout Standard
 
-
-\color red
-?
+Introduisez l'adresse MAC du téléphone
 \end_inset 
 </cell>
 </row>
@@ -3202,7 +3563,9 @@ Informations générales
 
 \layout Standard
 
-Device name
+
+\color black
+Nom du périphérique
 \color red
 *
 \end_inset 
@@ -3287,9 +3650,7 @@ Adresse IP
 
 \layout Standard
 
-
-\color red
-?
+Introduisez l'adresse IP du composant
 \end_inset 
 </cell>
 </row>
@@ -3309,9 +3670,7 @@ Adresse MAC
 
 \layout Standard
 
-
-\color red
-?
+Introduisez l'adresse MAC du composant
 \end_inset 
 </cell>
 </row>

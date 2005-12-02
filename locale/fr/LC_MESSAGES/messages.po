@@ -24,12 +24,13 @@
 # translation of messages.po to
 # translation of messages.po to
 # translation of messages.po to
+# translation of messages.po to
 # translation of messages.po to French
 # Benoit Mortier <benoit.mortier@opensides.be>, 2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
-"PO-Revision-Date: 2005-12-01 22:19+0100\n"
+"PO-Revision-Date: 2005-12-02 17:34+0100\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -77,24 +78,24 @@ msgstr "Unix"
 
 #: contrib/gosa.conf:72 contrib/gosa.conf:84
 #: plugins/personal/environment/class_environment.inc:12
-#: plugins/admin/groups/class_groupManagement.inc:378
+#: plugins/admin/groups/class_groupManagement.inc:377
 #: plugins/admin/users/class_userManagement.inc:730
 msgid "Environment"
 msgstr "Environnement"
 
 #: contrib/gosa.conf:73 contrib/gosa.conf:86
 #: plugins/personal/mail/class_mailAccount.inc:22
-#: plugins/admin/groups/class_groupManagement.inc:374
+#: plugins/admin/groups/class_groupManagement.inc:373
 #: plugins/admin/users/class_userManagement.inc:732
 #: plugins/admin/ogroups/tabs_ogroups.inc:73
 #: plugins/admin/ogroups/tabs_ogroups.inc:161
-#: plugins/admin/ogroups/class_ogroupManagement.inc:383
+#: plugins/admin/ogroups/class_ogroupManagement.inc:382
 #: plugins/generic/references/class_reference.inc:24
 msgid "Mail"
 msgstr "Messagerie"
 
 #: contrib/gosa.conf:74 plugins/personal/samba/class_sambaAccount.inc:24
-#: plugins/admin/groups/class_groupManagement.inc:375
+#: plugins/admin/groups/class_groupManagement.inc:374
 #: plugins/admin/users/class_userManagement.inc:738
 #: plugins/generic/references/class_reference.inc:26
 #: plugins/generic/references/class_reference.inc:28
@@ -123,13 +124,13 @@ msgstr "Fax"
 #: plugins/addons/addressbook/address_edit.tpl:195
 #: plugins/addons/addressbook/address_info.tpl:37
 #: plugins/addons/addressbook/address_info.tpl:85
-#: plugins/admin/groups/class_groupManagement.inc:377
+#: plugins/admin/groups/class_groupManagement.inc:376
 #: plugins/admin/users/class_userManagement.inc:734
 #: plugins/admin/departments/generic.tpl:58
 #: plugins/admin/systems/class_systemManagement.inc:708
 #: plugins/admin/systems/chooser.tpl:12
 #: plugins/admin/ogroups/class_ogroupManagement.inc:48
-#: plugins/admin/ogroups/class_ogroupManagement.inc:487
+#: plugins/admin/ogroups/class_ogroupManagement.inc:486
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:6
 #: plugins/generic/references/class_reference.inc:40
 msgid "Phone"
@@ -182,7 +183,7 @@ msgstr "Périphériques"
 #: plugins/personal/environment/environment.tpl:168
 #: plugins/admin/systems/class_systemManagement.inc:714
 #: plugins/admin/ogroups/class_ogroupManagement.inc:49
-#: plugins/admin/ogroups/class_ogroupManagement.inc:490
+#: plugins/admin/ogroups/class_ogroupManagement.inc:489
 #: plugins/generic/references/class_reference.inc:52
 msgid "Printer"
 msgstr "Imprimante"
@@ -790,7 +791,7 @@ msgstr ""
 #: ihtml/themes/default/login.tpl:26 ihtml/themes/default/login.tpl:30
 #: ihtml/themes/default/setup_useradmin.tpl:22
 #: plugins/admin/users/class_userManagement.inc:690
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:345
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:342
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
@@ -912,7 +913,7 @@ msgstr ""
 #: ihtml/themes/default/setup_step2.tpl:12
 #: ihtml/themes/default/setup_step3.tpl:17
 #: ihtml/themes/default/setup_step4.tpl:114
-#: ihtml/themes/default/setup_finish.tpl:30 include/functions.inc:1311
+#: ihtml/themes/default/setup_finish.tpl:30 include/functions.inc:1314
 #: plugins/personal/password/changed.tpl:12
 #: plugins/personal/generic/main.inc:169
 #: plugins/gofax/faxreports/detail.tpl:68
@@ -979,7 +980,7 @@ msgstr "Supprimer"
 #: plugins/addons/addressbook/dial.tpl:10
 #: plugins/addons/addressbook/address_edit.tpl:234
 #: plugins/addons/addressbook/remove.tpl:16
-#: plugins/admin/groups/class_groupManagement.inc:333
+#: plugins/admin/groups/class_groupManagement.inc:332
 #: plugins/admin/groups/remove.tpl:16
 #: plugins/admin/groups/application_options.tpl:10
 #: plugins/admin/groups/group_objects.tpl:49
@@ -990,14 +991,14 @@ msgstr "Supprimer"
 #: plugins/admin/users/remove.tpl:16 plugins/admin/applications/remove.tpl:15
 #: plugins/admin/applications/class_applicationManagement.inc:306
 #: plugins/admin/departments/remove.tpl:16
-#: plugins/admin/departments/class_departmentManagement.inc:352
+#: plugins/admin/departments/class_departmentManagement.inc:349
 #: plugins/admin/systems/class_systemManagement.inc:541
 #: plugins/admin/systems/remove.tpl:16 plugins/admin/systems/password.tpl:30
 #: plugins/admin/systems/chooser.tpl:18 plugins/admin/systems/servnfs.tpl:92
 #: plugins/admin/systems/printerPPDDialog.tpl:23
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:61
 #: plugins/admin/ogroups/ogroup_objects.tpl:52
-#: plugins/admin/ogroups/class_ogroupManagement.inc:341
+#: plugins/admin/ogroups/class_ogroupManagement.inc:340
 #: plugins/admin/ogroups/remove.tpl:16 plugins/admin/fai/remove.tpl:17
 #: plugins/admin/fai/class_faiManagement.inc:395
 #: plugins/admin/fai/class_faiManagement.inc:400
@@ -1011,8 +1012,8 @@ msgstr "Supprimer"
 #: plugins/admin/fai/faiPackageConfiguration.tpl:6
 #: plugins/admin/fai/faiPackageNew.tpl:66
 #: plugins/gofon/phoneaccount/main.inc:107 plugins/gofon/macro/remove.tpl:15
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:305
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:274
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:302
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:268
 #: plugins/gofon/conference/remove.tpl:16
 msgid "Cancel"
 msgstr "Annuler"
@@ -1452,7 +1453,7 @@ msgstr "Configurer"
 msgid "incomplete"
 msgstr "incomplet"
 
-#: include/functions.inc:997
+#: include/functions.inc:1000
 #, php-format
 msgid ""
 "You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
@@ -1462,23 +1463,23 @@ msgstr ""
 "d'utilisation par '%s'. Veuillez contacter cette personne afin de clarifier "
 "la situation."
 
-#: include/functions.inc:1096
+#: include/functions.inc:1099
 msgid "LDAP error:"
 msgstr "Erreur LDAP :"
 
-#: include/functions.inc:1274
+#: include/functions.inc:1277
 msgid "Entries per page"
 msgstr "Entrées par page"
 
-#: include/functions.inc:1302
+#: include/functions.inc:1305
 msgid "Apply filter"
 msgstr "Appliquer le filtre"
 
-#: include/functions.inc:1576
+#: include/functions.inc:1579
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-#: include/functions.inc:1619
+#: include/functions.inc:1622
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "Version de développement de GOsa (Rev %s)"
@@ -2406,7 +2407,7 @@ msgstr "Adresse principale"
 #: plugins/personal/mail/generic.tpl:11
 #: plugins/addons/mailqueue/contents.tpl:55 plugins/admin/groups/mail.tpl:14
 #: plugins/admin/systems/class_systemManagement.inc:709
-#: plugins/admin/ogroups/class_ogroupManagement.inc:486
+#: plugins/admin/ogroups/class_ogroupManagement.inc:485
 #: plugins/generic/references/class_reference.inc:44
 msgid "Server"
 msgstr "Serveur"
@@ -2622,16 +2623,16 @@ msgstr "désactive toutes les options de messagerie!"
 #: plugins/personal/nagios/main.inc:104
 #: plugins/gofax/blocklists/generic.tpl:80
 #: plugins/gofax/faxaccount/main.inc:89
-#: plugins/admin/groups/class_groupManagement.inc:331
+#: plugins/admin/groups/class_groupManagement.inc:330
 #: plugins/admin/users/class_userManagement.inc:633
 #: plugins/admin/applications/class_applicationManagement.inc:304
-#: plugins/admin/departments/class_departmentManagement.inc:350
+#: plugins/admin/departments/class_departmentManagement.inc:347
 #: plugins/admin/systems/class_systemManagement.inc:539
-#: plugins/admin/ogroups/class_ogroupManagement.inc:339
+#: plugins/admin/ogroups/class_ogroupManagement.inc:338
 #: plugins/admin/fai/class_faiManagement.inc:393
 #: plugins/gofon/phoneaccount/main.inc:105
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:303
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:272
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:300
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:266
 msgid "Finish"
 msgstr "Terminé"
 
@@ -3230,12 +3231,12 @@ msgid "Value specified as 'UID' is too small."
 msgstr "La valeur de l''UID' spécifiée est trop petite."
 
 #: plugins/personal/posix/class_posixAccount.inc:898
-#: plugins/admin/groups/class_groupGeneric.inc:659
+#: plugins/admin/groups/class_groupGeneric.inc:662
 msgid "Value specified as 'GID' is not valid."
 msgstr "La valeur du 'GID' n'est pas valide."
 
 #: plugins/personal/posix/class_posixAccount.inc:901
-#: plugins/admin/groups/class_groupGeneric.inc:662
+#: plugins/admin/groups/class_groupGeneric.inc:665
 msgid "Value specified as 'GID' is too small."
 msgstr "La valeur spécifiée comme 'GID' est trop petite."
 
@@ -3285,7 +3286,7 @@ msgid "Value specified as 'shadowMin' should be smaller than 'shadowMax'."
 msgstr "La valeur pour 'shadowMin' doit être inférieure à celle de 'shadowMax'."
 
 #: plugins/personal/posix/class_posixAccount.inc:1063
-#: plugins/admin/groups/class_groupGeneric.inc:693
+#: plugins/admin/groups/class_groupGeneric.inc:696
 msgid "Too many users, can't allocate a free ID!"
 msgstr "Trop d'utilisateurs, impossible d'assigner un ID libre!"
 
@@ -3639,7 +3640,7 @@ msgstr "Le champ 'Page d'accueil' contient une URL invalide."
 #: plugins/personal/generic/class_user.inc:989
 #: plugins/addons/addressbook/class_addressbook.inc:557
 #: plugins/addons/addressbook/class_addressbook.inc:585
-#: plugins/admin/departments/class_departmentGeneric.inc:169
+#: plugins/admin/departments/class_departmentGeneric.inc:176
 msgid "The field 'Name' contains invalid characters."
 msgstr "Le champ 'Nom' contient des caractères invalides."
 
@@ -3654,13 +3655,13 @@ msgstr "Le champ 'Nom complet' contient des caractères invalides."
 #: plugins/personal/generic/class_user.inc:972
 #: plugins/addons/addressbook/class_addressbook.inc:565
 #: plugins/addons/addressbook/class_addressbook.inc:568
-#: plugins/admin/departments/class_departmentGeneric.inc:172
+#: plugins/admin/departments/class_departmentGeneric.inc:179
 msgid "The field 'Phone' contains an invalid phone number."
 msgstr "Le champ 'Téléphone' contient un numéro invalide."
 
 #: plugins/personal/generic/class_user.inc:975
 #: plugins/addons/addressbook/class_addressbook.inc:571
-#: plugins/admin/departments/class_departmentGeneric.inc:175
+#: plugins/admin/departments/class_departmentGeneric.inc:182
 msgid "The field 'Fax' contains an invalid phone number."
 msgstr "Le champ 'Fax' contient un numéro invalide."
 
@@ -3790,16 +3791,16 @@ msgid "Organizational information"
 msgstr "Informations sur l'entreprise"
 
 #: plugins/personal/generic/generic.tpl:194
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:310
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:307
 #: plugins/addons/addressbook/address_edit.tpl:138
 #: plugins/addons/addressbook/address_info.tpl:64
-#: plugins/admin/groups/class_groupManagement.inc:386
+#: plugins/admin/groups/class_groupManagement.inc:385
 #: plugins/admin/users/class_userManagement.inc:690
 #: plugins/admin/applications/class_applicationManagement.inc:357
 #: plugins/admin/systems/class_systemManagement.inc:589
-#: plugins/admin/ogroups/class_ogroupManagement.inc:417
-#: plugins/admin/ogroups/class_ogroupManagement.inc:485
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:345
+#: plugins/admin/ogroups/class_ogroupManagement.inc:416
+#: plugins/admin/ogroups/class_ogroupManagement.inc:484
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:342
 #: plugins/generic/references/class_reference.inc:38
 msgid "Department"
 msgstr "Département"
@@ -4443,8 +4444,8 @@ msgid "Hotplug device settings"
 msgstr "Paramètre des périphériques Hotplug"
 
 #: plugins/personal/environment/environment.tpl:160
-#: plugins/admin/groups/class_groupManagement.inc:355
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:331
+#: plugins/admin/groups/class_groupManagement.inc:354
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:328
 msgid "New"
 msgstr "Nouveau"
 
@@ -4790,226 +4791,226 @@ msgstr "Liste Rouge des Fax"
 msgid "You're about to delete the blocklist '%s'."
 msgstr "Vous êtes sur le point de supprimer la liste rouge '%s'."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:220
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:218
 msgid "You have no permission to remove this blocklist."
 msgstr "Vous n'avez pas l'autorisation de supprimer cette liste rouge."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:238
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:236
 msgid "Please specify a valid phone number."
 msgstr "Veuillez entrer un numéro de téléphone valide."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:294
-#: plugins/admin/groups/class_groupManagement.inc:351
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:291
+#: plugins/admin/groups/class_groupManagement.inc:350
 #: plugins/admin/users/class_userManagement.inc:670
 #: plugins/admin/applications/class_applicationManagement.inc:326
-#: plugins/admin/departments/class_departmentManagement.inc:280
+#: plugins/admin/departments/class_departmentManagement.inc:277
 #: plugins/admin/systems/class_systemManagement.inc:565
-#: plugins/admin/ogroups/class_ogroupManagement.inc:359
+#: plugins/admin/ogroups/class_ogroupManagement.inc:358
 #: plugins/admin/fai/class_faiManagement.inc:429
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:327
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:291
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:324
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:285
 msgid "Go up one department"
 msgstr "Monter d'un département"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:294
-#: plugins/admin/groups/class_groupManagement.inc:351
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:291
+#: plugins/admin/groups/class_groupManagement.inc:350
 #: plugins/admin/users/class_userManagement.inc:670
 #: plugins/admin/applications/class_applicationManagement.inc:326
-#: plugins/admin/departments/class_departmentManagement.inc:280
+#: plugins/admin/departments/class_departmentManagement.inc:277
 #: plugins/admin/systems/class_systemManagement.inc:565
-#: plugins/admin/ogroups/class_ogroupManagement.inc:359
+#: plugins/admin/ogroups/class_ogroupManagement.inc:358
 #: plugins/admin/ogroups/phonequeue.tpl:17
 #: plugins/admin/fai/class_faiManagement.inc:429
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:327
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:291
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:324
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:285
 msgid "Up"
 msgstr "Au dessus"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:295
-#: plugins/admin/groups/class_groupManagement.inc:352
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:292
+#: plugins/admin/groups/class_groupManagement.inc:351
 #: plugins/admin/users/class_userManagement.inc:671
 #: plugins/admin/applications/class_applicationManagement.inc:327
-#: plugins/admin/departments/class_departmentManagement.inc:281
+#: plugins/admin/departments/class_departmentManagement.inc:278
 #: plugins/admin/systems/class_systemManagement.inc:566
-#: plugins/admin/ogroups/class_ogroupManagement.inc:360
+#: plugins/admin/ogroups/class_ogroupManagement.inc:359
 #: plugins/admin/fai/class_faiManagement.inc:432
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:328
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:292
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:325
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:286
 msgid "Go to root department"
 msgstr "Aller au département de base"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:295
-#: plugins/admin/groups/class_groupManagement.inc:352
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:292
+#: plugins/admin/groups/class_groupManagement.inc:351
 #: plugins/admin/users/class_userManagement.inc:671
 #: plugins/admin/applications/class_applicationManagement.inc:327
-#: plugins/admin/departments/class_departmentManagement.inc:281
+#: plugins/admin/departments/class_departmentManagement.inc:278
 #: plugins/admin/systems/class_systemManagement.inc:566
-#: plugins/admin/ogroups/class_ogroupManagement.inc:361
+#: plugins/admin/ogroups/class_ogroupManagement.inc:360
 #: plugins/admin/fai/class_faiManagement.inc:432
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:328
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:292
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:325
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:286
 msgid "Root"
 msgstr "Racine"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:296
-#: plugins/admin/groups/class_groupManagement.inc:353
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:293
+#: plugins/admin/groups/class_groupManagement.inc:352
 #: plugins/admin/users/class_userManagement.inc:672
 #: plugins/admin/applications/class_applicationManagement.inc:328
 #: plugins/admin/systems/class_systemManagement.inc:567
-#: plugins/admin/ogroups/class_ogroupManagement.inc:362
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:329
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:293
+#: plugins/admin/ogroups/class_ogroupManagement.inc:361
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:326
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:287
 msgid "Go to users department"
 msgstr "Aller au département des utilisateurs"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:296
-#: plugins/admin/groups/class_groupManagement.inc:353
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:293
+#: plugins/admin/groups/class_groupManagement.inc:352
 #: plugins/admin/users/class_userManagement.inc:672
 #: plugins/admin/applications/class_applicationManagement.inc:328
-#: plugins/admin/departments/class_departmentManagement.inc:282
+#: plugins/admin/departments/class_departmentManagement.inc:279
 #: plugins/admin/systems/class_systemManagement.inc:567
-#: plugins/admin/ogroups/class_ogroupManagement.inc:363
+#: plugins/admin/ogroups/class_ogroupManagement.inc:362
 #: plugins/admin/fai/class_faiManagement.inc:435
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:329
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:293
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:326
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:287
 msgid "Home"
 msgstr "Acceuil"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:298
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:295
 msgid "Create new blocklist"
 msgstr "Création d'un nouvelle liste rouge"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:298
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:295
 msgid "New Blocklist"
 msgstr "Nouvelle liste rouge"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:299
-#: plugins/admin/groups/class_groupManagement.inc:357
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:296
+#: plugins/admin/groups/class_groupManagement.inc:356
 #: plugins/admin/users/class_userManagement.inc:677
 #: plugins/admin/applications/class_applicationManagement.inc:332
-#: plugins/admin/departments/class_departmentManagement.inc:286
+#: plugins/admin/departments/class_departmentManagement.inc:283
 #: plugins/admin/systems/class_systemManagement.inc:576
-#: plugins/admin/ogroups/class_ogroupManagement.inc:367
+#: plugins/admin/ogroups/class_ogroupManagement.inc:366
 #: plugins/admin/fai/class_faiManagement.inc:464
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:333
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:297
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:330
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:291
 msgid "Current base"
 msgstr "Base actuelle"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:300
-#: plugins/admin/groups/class_groupManagement.inc:358
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:297
+#: plugins/admin/groups/class_groupManagement.inc:357
 #: plugins/admin/users/class_userManagement.inc:678
 #: plugins/admin/applications/class_applicationManagement.inc:333
-#: plugins/admin/departments/class_departmentManagement.inc:287
+#: plugins/admin/departments/class_departmentManagement.inc:284
 #: plugins/admin/systems/class_systemManagement.inc:577
-#: plugins/admin/ogroups/class_ogroupManagement.inc:368
+#: plugins/admin/ogroups/class_ogroupManagement.inc:367
 #: plugins/admin/fai/class_faiManagement.inc:465
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:334
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:298
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:331
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:292
 msgid "Submit department"
 msgstr "Soumettre le département"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:300
-#: plugins/admin/groups/class_groupManagement.inc:358
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:297
+#: plugins/admin/groups/class_groupManagement.inc:357
 #: plugins/admin/users/class_userManagement.inc:678
 #: plugins/admin/applications/class_applicationManagement.inc:333
-#: plugins/admin/departments/class_departmentManagement.inc:287
+#: plugins/admin/departments/class_departmentManagement.inc:284
 #: plugins/admin/systems/class_systemManagement.inc:577
-#: plugins/admin/ogroups/class_ogroupManagement.inc:368
+#: plugins/admin/ogroups/class_ogroupManagement.inc:367
 #: plugins/admin/fai/class_faiManagement.inc:465
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:334
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:298
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:331
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:292
 msgid "Submit"
 msgstr "Soumettre"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:303
-#: plugins/admin/groups/class_groupManagement.inc:362
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:300
+#: plugins/admin/groups/class_groupManagement.inc:361
 #: plugins/admin/users/class_userManagement.inc:681
 #: plugins/admin/applications/class_applicationManagement.inc:337
-#: plugins/admin/departments/class_departmentManagement.inc:294
+#: plugins/admin/departments/class_departmentManagement.inc:291
 #: plugins/admin/systems/class_systemManagement.inc:582
-#: plugins/admin/ogroups/class_ogroupManagement.inc:372
+#: plugins/admin/ogroups/class_ogroupManagement.inc:371
 #: plugins/admin/fai/class_faiManagement.inc:483
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:339
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:302
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:336
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:296
 msgid "edit"
 msgstr "éditer"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:303
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:300
 #: plugins/admin/users/class_userManagement.inc:681
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:339
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:336
 msgid "Edit user"
 msgstr "Editer un utilisateur"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:304
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:301
 #: plugins/addons/mailqueue/contents.tpl:95
-#: plugins/admin/groups/class_groupManagement.inc:363
+#: plugins/admin/groups/class_groupManagement.inc:362
 #: plugins/admin/users/class_userManagement.inc:683
 #: plugins/admin/applications/class_applicationManagement.inc:338
-#: plugins/admin/departments/class_departmentManagement.inc:295
+#: plugins/admin/departments/class_departmentManagement.inc:292
 #: plugins/admin/systems/class_systemManagement.inc:583
-#: plugins/admin/ogroups/class_ogroupManagement.inc:373
+#: plugins/admin/ogroups/class_ogroupManagement.inc:372
 #: plugins/admin/fai/class_faiManagement.inc:484
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:340
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:303
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:305
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:337
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:297
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:299
 msgid "delete"
 msgstr "supprimer"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:304
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:301
 #: plugins/admin/users/class_userManagement.inc:683
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:340
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:337
 msgid "Delete user"
 msgstr "Supprimer un utilisateur"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:310
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:307
 msgid "Blocklist name"
 msgstr "Nom de la liste rouge"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:311
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:308
 #: plugins/addons/addressbook/contents.tpl:42
-#: plugins/admin/groups/class_groupManagement.inc:388
+#: plugins/admin/groups/class_groupManagement.inc:387
 #: plugins/admin/users/class_userManagement.inc:692
 #: plugins/admin/applications/class_applicationManagement.inc:358
-#: plugins/admin/departments/class_departmentManagement.inc:302
+#: plugins/admin/departments/class_departmentManagement.inc:299
 #: plugins/admin/systems/class_systemManagement.inc:590
-#: plugins/admin/ogroups/class_ogroupManagement.inc:394
+#: plugins/admin/ogroups/class_ogroupManagement.inc:393
 #: plugins/admin/fai/class_faiManagement.inc:480
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:347
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:318
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:344
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:312
 msgid "Actions"
 msgstr "Actions"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:314
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:311
 msgid "This table displays faxblocklists for the selected tree."
 msgstr "Ce tableau montre toutes les listes rouges, dans l'arbre sélectionné."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:382
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:379
 msgid "send"
 msgstr "envoyer"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:382
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:379
 msgid "receive"
 msgstr "recevoir"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:528
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:516
 msgid "You have no permissions to create a blocklist on this 'Base'."
 msgstr "Vous n'avez pas l'autorisation de créer une liste rouge sur cette 'Base'."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:534
-#: plugins/admin/departments/class_departmentGeneric.inc:157
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:522
+#: plugins/admin/departments/class_departmentGeneric.inc:164
 msgid "Required field 'Name' is not set."
 msgstr "Le champ obligatoire 'Nom' n'est pas rempli."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:537
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:525
 msgid "Required field 'Name' contains invalid characters"
 msgstr "Le champ obligatoire 'Nom' contient des caractères invalides"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:545
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:533
 msgid "Specified name is already used."
 msgstr "Le nom spécifié est déjà utilisé."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:552
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:540
 msgid "No permission to create a blocklist on this base."
 msgstr "Vous n'avez pas l'autorisation de créer des listes rouge sur cette base."
 
@@ -5256,7 +5257,7 @@ msgstr "FAX ID"
 #: plugins/gofax/faxreports/detail.tpl:22
 #: plugins/gofax/faxreports/contents.tpl:30
 #: plugins/admin/systems/class_printGeneric.inc:589
-#: plugins/admin/ogroups/class_ogroupManagement.inc:482
+#: plugins/admin/ogroups/class_ogroupManagement.inc:481
 #: plugins/admin/fai/faiTemplateEntry.tpl:94
 msgid "User"
 msgstr "Utilisateur"
@@ -6086,37 +6087,37 @@ msgstr ""
 "Impossible de trouver le SID de ce groupe dans l'annuaire LDAP ou dans le "
 "fichier de configuration!"
 
-#: plugins/admin/groups/class_groupGeneric.inc:164
+#: plugins/admin/groups/class_groupGeneric.inc:167
 msgid "This 'dn' is no group."
 msgstr "Ce 'dn' n'est pas un groupe."
 
-#: plugins/admin/groups/class_groupGeneric.inc:281
+#: plugins/admin/groups/class_groupGeneric.inc:284
 msgid "Samba group"
 msgstr "Groupe Samba"
 
-#: plugins/admin/groups/class_groupGeneric.inc:281
+#: plugins/admin/groups/class_groupGeneric.inc:284
 msgid "Domain admins"
 msgstr "Administrateurs du domaine"
 
-#: plugins/admin/groups/class_groupGeneric.inc:281
+#: plugins/admin/groups/class_groupGeneric.inc:284
 msgid "Domain users"
 msgstr "Utilisateurs du domaine"
 
-#: plugins/admin/groups/class_groupGeneric.inc:282
+#: plugins/admin/groups/class_groupGeneric.inc:285
 msgid "Domain guests"
 msgstr "Invités du domaine"
 
-#: plugins/admin/groups/class_groupGeneric.inc:287
+#: plugins/admin/groups/class_groupGeneric.inc:290
 #, php-format
 msgid "Special group (%d)"
 msgstr "Groupe spécial (%d)"
 
-#: plugins/admin/groups/class_groupGeneric.inc:623
-#: plugins/admin/ogroups/class_ogroup.inc:526
+#: plugins/admin/groups/class_groupGeneric.inc:626
+#: plugins/admin/ogroups/class_ogroup.inc:531
 msgid "You have no permissions to create a group on this 'Base'."
 msgstr "Vous n'avez pas l'autorisation de créer un groupe dans cette 'Base'."
 
-#: plugins/admin/groups/class_groupGeneric.inc:633
+#: plugins/admin/groups/class_groupGeneric.inc:636
 msgid ""
 "The field 'Name' contains invalid characters. Lowercase, numbers and dashes "
 "are allowed."
@@ -6124,8 +6125,8 @@ msgstr ""
 "Le champ 'Nom' contient des caractères invalides. Minuscule, chiffre et "
 "tirets sont valides."
 
-#: plugins/admin/groups/class_groupGeneric.inc:644
-#: plugins/admin/groups/class_groupGeneric.inc:651
+#: plugins/admin/groups/class_groupGeneric.inc:647
+#: plugins/admin/groups/class_groupGeneric.inc:654
 msgid "Value specified as 'Name' is already used."
 msgstr "La valeur spécifiée dans le champs 'Nom' existe déjà."
 
@@ -6171,68 +6172,68 @@ msgstr ""
 msgid "Group administration"
 msgstr "Administration du groupe"
 
-#: plugins/admin/groups/class_groupManagement.inc:276
+#: plugins/admin/groups/class_groupManagement.inc:275
 #, php-format
 msgid "You're about to delete the group '%s'."
 msgstr "Vous êtes sur le point de supprimer le groupe '%s'."
 
-#: plugins/admin/groups/class_groupManagement.inc:282
-#: plugins/admin/groups/class_groupManagement.inc:308
+#: plugins/admin/groups/class_groupManagement.inc:281
+#: plugins/admin/groups/class_groupManagement.inc:307
 msgid "You are not allowed to delete this group!"
 msgstr "Vous n'êtes pas autorisé à supprimer ce groupe!"
 
-#: plugins/admin/groups/class_groupManagement.inc:355
+#: plugins/admin/groups/class_groupManagement.inc:354
 msgid "Create new group"
 msgstr "Créer un nouveau groupe"
 
-#: plugins/admin/groups/class_groupManagement.inc:362
+#: plugins/admin/groups/class_groupManagement.inc:361
 #: plugins/admin/applications/class_applicationManagement.inc:337
-#: plugins/admin/departments/class_departmentManagement.inc:294
-#: plugins/admin/ogroups/class_ogroupManagement.inc:372
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:302
+#: plugins/admin/departments/class_departmentManagement.inc:291
+#: plugins/admin/ogroups/class_ogroupManagement.inc:371
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:296
 msgid "Edit this entry"
 msgstr "Modifier cette entrée"
 
-#: plugins/admin/groups/class_groupManagement.inc:363
+#: plugins/admin/groups/class_groupManagement.inc:362
 #: plugins/admin/applications/class_applicationManagement.inc:338
-#: plugins/admin/departments/class_departmentManagement.inc:295
-#: plugins/admin/ogroups/class_ogroupManagement.inc:373
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:303
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:305
+#: plugins/admin/departments/class_departmentManagement.inc:292
+#: plugins/admin/ogroups/class_ogroupManagement.inc:372
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:297
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:299
 msgid "Delete this entry"
 msgstr "Supprimer cette entrée"
 
-#: plugins/admin/groups/class_groupManagement.inc:373
+#: plugins/admin/groups/class_groupManagement.inc:372
 #: plugins/admin/users/class_userManagement.inc:728
 msgid "Posix"
 msgstr "Posix"
 
-#: plugins/admin/groups/class_groupManagement.inc:376
+#: plugins/admin/groups/class_groupManagement.inc:375
 #: plugins/admin/applications/class_applicationManagement.inc:348
-#: plugins/admin/ogroups/class_ogroupManagement.inc:484
+#: plugins/admin/ogroups/class_ogroupManagement.inc:483
 #: plugins/gofon/fonreports/contents.tpl:34
 #: plugins/generic/references/class_reference.inc:42
 msgid "Application"
 msgstr "Applications"
 
-#: plugins/admin/groups/class_groupManagement.inc:386
+#: plugins/admin/groups/class_groupManagement.inc:385
 msgid "Groupname"
 msgstr "Nom du groupe"
 
-#: plugins/admin/groups/class_groupManagement.inc:387
+#: plugins/admin/groups/class_groupManagement.inc:386
 #: plugins/admin/users/class_userManagement.inc:691
 #: plugins/admin/departments/generic.tpl:4
 #: plugins/admin/systems/terminal.tpl:1
 #: plugins/admin/systems/workstation.tpl:1
-#: plugins/admin/ogroups/class_ogroupManagement.inc:393
+#: plugins/admin/ogroups/class_ogroupManagement.inc:392
 #: plugins/admin/fai/faiScriptEntry.tpl:29
 #: plugins/gofon/conference/generic.tpl:4
 msgid "Properties"
 msgstr "Propriétés"
 
-#: plugins/admin/groups/class_groupManagement.inc:391
+#: plugins/admin/groups/class_groupManagement.inc:390
 #: plugins/admin/applications/class_applicationManagement.inc:362
-#: plugins/admin/ogroups/class_ogroupManagement.inc:398
+#: plugins/admin/ogroups/class_ogroupManagement.inc:397
 msgid "This table displays all groups, in the selected tree."
 msgstr "Ce tableau montre tous les groupes, dans l'arbre sélectionné."
 
@@ -6446,7 +6447,7 @@ msgid "The selected application has no options."
 msgstr "L'application sélectionnée n'a pas d'options."
 
 #: plugins/admin/groups/class_groupApplication.inc:371
-#: plugins/admin/departments/class_departmentManagement.inc:318
+#: plugins/admin/departments/class_departmentManagement.inc:315
 #: plugins/admin/fai/class_faiManagement.inc:504
 msgid "department"
 msgstr "département"
@@ -6499,7 +6500,7 @@ msgstr ""
 "Sélectionnez 'aucun' afin de ne pas utiliser les modèles."
 
 #: plugins/admin/users/template.tpl:11
-#: plugins/admin/users/class_userManagement.inc:1020
+#: plugins/admin/users/class_userManagement.inc:1028
 #: plugins/admin/systems/class_systemManagement.inc:705
 msgid "Template"
 msgstr "Modèle"
@@ -6525,7 +6526,7 @@ msgstr "Vous n'êtes pas autorisé à supprimer cette utilisateur!"
 
 #: plugins/admin/users/class_userManagement.inc:488
 #: plugins/admin/systems/class_workstationStartup.inc:49
-#: plugins/admin/ogroups/class_ogroup.inc:235
+#: plugins/admin/ogroups/class_ogroup.inc:240
 msgid "none"
 msgstr "aucun"
 
@@ -6825,7 +6826,7 @@ msgid "You are not allowed to delete this application!"
 msgstr "Vous n'êtes pas autorisé à supprimer cette application!"
 
 #: plugins/admin/applications/class_applicationManagement.inc:330
-#: plugins/admin/ogroups/class_ogroupManagement.inc:365
+#: plugins/admin/ogroups/class_ogroupManagement.inc:364
 msgid "new"
 msgstr "nouveau"
 
@@ -6977,62 +6978,62 @@ msgstr "Gestion des départements"
 
 #: plugins/admin/departments/class_departmentManagement.inc:25
 #: plugins/admin/ogroups/class_ogroupManagement.inc:43
-#: plugins/admin/ogroups/class_ogroupManagement.inc:392
+#: plugins/admin/ogroups/class_ogroupManagement.inc:391
 msgid "Departments"
 msgstr "Départements"
 
-#: plugins/admin/departments/class_departmentManagement.inc:188
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:178
+#: plugins/admin/departments/class_departmentManagement.inc:185
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:182
 #, php-format
 msgid "You're about to delete the whole LDAP subtree placed under '%s'."
 msgstr ""
 "Vous êtes sur le point de supprimer la branche complète de l'annuaire LDAP "
 "placé sous '%s'."
 
-#: plugins/admin/departments/class_departmentManagement.inc:205
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:195
+#: plugins/admin/departments/class_departmentManagement.inc:202
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:197
 msgid "You have no permission to remove this department."
 msgstr "Vous n'avez pas les droits nécessaires pour supprimer ce département."
 
-#: plugins/admin/departments/class_departmentManagement.inc:282
+#: plugins/admin/departments/class_departmentManagement.inc:279
 #: plugins/admin/fai/class_faiManagement.inc:435
 msgid "Go to users home department"
 msgstr "Aller au département de base des utilisateurs"
 
-#: plugins/admin/departments/class_departmentManagement.inc:284
+#: plugins/admin/departments/class_departmentManagement.inc:281
 msgid "Create new department"
 msgstr "Créer un nouveau département"
 
-#: plugins/admin/departments/class_departmentManagement.inc:292
+#: plugins/admin/departments/class_departmentManagement.inc:289
 msgid "This table displays all departments, in the selected tree."
 msgstr "Ce tableau montre tous les départements, dans l'arbre sélectionné."
 
-#: plugins/admin/departments/class_departmentManagement.inc:301
+#: plugins/admin/departments/class_departmentManagement.inc:298
 msgid "Department name"
 msgstr "Nom du département"
 
-#: plugins/admin/departments/class_departmentManagement.inc:395
+#: plugins/admin/departments/class_departmentManagement.inc:392
 msgid ".."
 msgstr ".."
 
-#: plugins/admin/departments/class_departmentGeneric.inc:143
+#: plugins/admin/departments/class_departmentGeneric.inc:150
 msgid "You have no permissions to create a department on this 'Base'."
 msgstr "Vous n'avez pas l'autorisation pour créer un département sur cette 'Base'."
 
-#: plugins/admin/departments/class_departmentGeneric.inc:150
-#: plugins/admin/departments/class_departmentGeneric.inc:152
+#: plugins/admin/departments/class_departmentGeneric.inc:157
+#: plugins/admin/departments/class_departmentGeneric.inc:159
 msgid "Department with that 'Name' already exists."
 msgstr "Un département ayant ce 'Nom' existe déjà."
 
-#: plugins/admin/departments/class_departmentGeneric.inc:160
+#: plugins/admin/departments/class_departmentGeneric.inc:167
 msgid "Required field 'Description' is not set."
 msgstr "Le champ obligatoire 'Description' n'est pas rempli."
 
-#: plugins/admin/departments/class_departmentGeneric.inc:165
+#: plugins/admin/departments/class_departmentGeneric.inc:172
 msgid "The field 'Name' contains the reserved word 'incoming'."
 msgstr "Le champ 'Nom' contient le mot réservé 'incoming'."
 
-#: plugins/admin/departments/class_departmentGeneric.inc:166
+#: plugins/admin/departments/class_departmentGeneric.inc:173
 msgid " Please choose another name."
 msgstr " Veuillez choisir un autre nom."
 
@@ -7754,12 +7755,12 @@ msgid "Set root password"
 msgstr "Indiquez le mot de passe administrateur"
 
 #: plugins/admin/systems/class_systemManagement.inc:706
-#: plugins/admin/ogroups/class_ogroupManagement.inc:489
+#: plugins/admin/ogroups/class_ogroupManagement.inc:488
 msgid "Terminal"
 msgstr "Terminal"
 
 #: plugins/admin/systems/class_systemManagement.inc:707
-#: plugins/admin/ogroups/class_ogroupManagement.inc:488
+#: plugins/admin/ogroups/class_ogroupManagement.inc:487
 #: plugins/generic/references/class_reference.inc:48
 msgid "Workstation"
 msgstr "Stations de travail"
@@ -7874,7 +7875,7 @@ msgstr "Vous n'avez pas l'autorisation de créer une imprimante sur cette 'Base'
 
 #: plugins/admin/systems/class_printGeneric.inc:584
 #: plugins/admin/systems/class_printGeneric.inc:586
-#: plugins/admin/ogroups/class_ogroupManagement.inc:483
+#: plugins/admin/ogroups/class_ogroupManagement.inc:482
 #: plugins/admin/fai/faiTemplateEntry.tpl:71
 #: plugins/admin/fai/faiTemplateEntry.tpl:103
 #: plugins/generic/references/class_reference.inc:36
@@ -8300,12 +8301,12 @@ msgid "This 'dn' has no phone features."
 msgstr "Ce 'dn' n'a pas d'extensions téléphoniques."
 
 #: plugins/admin/systems/class_phoneGeneric.inc:177
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:382
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:379
 msgid "yes"
 msgstr "oui"
 
 #: plugins/admin/systems/class_phoneGeneric.inc:177
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:383
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:380
 msgid "no"
 msgstr "non"
 
@@ -8380,7 +8381,7 @@ msgstr "Temps de réponse maximum"
 
 #: plugins/admin/systems/phonesettings.tpl:75
 msgid "Modus"
-msgstr "Moins"
+msgstr "Mode"
 
 #: plugins/admin/systems/phonesettings.tpl:106
 msgid "Authtype"
@@ -8941,59 +8942,59 @@ msgstr ""
 msgid "Select action to execute for this   group of terminals"
 msgstr "Sélectionnez l'opération à exécuter pour ce groupe de terminaux"
 
-#: plugins/admin/ogroups/class_ogroup.inc:127
+#: plugins/admin/ogroups/class_ogroup.inc:132
 msgid "This 'dn' is no object group."
 msgstr "Ce 'dn' n'est pas un groupe objet."
 
-#: plugins/admin/ogroups/class_ogroup.inc:237
+#: plugins/admin/ogroups/class_ogroup.inc:242
 msgid "too many different objects!"
 msgstr "nombre d'objets différents trop important!"
 
-#: plugins/admin/ogroups/class_ogroup.inc:239
+#: plugins/admin/ogroups/class_ogroup.inc:244
 msgid "users"
 msgstr "utilisateurs"
 
-#: plugins/admin/ogroups/class_ogroup.inc:240
+#: plugins/admin/ogroups/class_ogroup.inc:245
 msgid "groups"
 msgstr "groupes"
 
-#: plugins/admin/ogroups/class_ogroup.inc:241
+#: plugins/admin/ogroups/class_ogroup.inc:246
 msgid "applications"
 msgstr "applications"
 
-#: plugins/admin/ogroups/class_ogroup.inc:242
+#: plugins/admin/ogroups/class_ogroup.inc:247
 msgid "departments"
 msgstr "départements"
 
-#: plugins/admin/ogroups/class_ogroup.inc:243
+#: plugins/admin/ogroups/class_ogroup.inc:248
 msgid "servers"
 msgstr "serveurs"
 
-#: plugins/admin/ogroups/class_ogroup.inc:244
+#: plugins/admin/ogroups/class_ogroup.inc:249
 msgid "workstations"
 msgstr "stations de travail"
 
-#: plugins/admin/ogroups/class_ogroup.inc:245
+#: plugins/admin/ogroups/class_ogroup.inc:250
 msgid "terminals"
 msgstr "terminaux"
 
-#: plugins/admin/ogroups/class_ogroup.inc:246
+#: plugins/admin/ogroups/class_ogroup.inc:251
 msgid "phones"
 msgstr "téléphones"
 
-#: plugins/admin/ogroups/class_ogroup.inc:247
+#: plugins/admin/ogroups/class_ogroup.inc:252
 msgid "printers"
 msgstr "imprimantes"
 
-#: plugins/admin/ogroups/class_ogroup.inc:254
+#: plugins/admin/ogroups/class_ogroup.inc:259
 msgid "and"
 msgstr "et"
 
-#: plugins/admin/ogroups/class_ogroup.inc:405
+#: plugins/admin/ogroups/class_ogroup.inc:410
 msgid "Non existing dn: "
 msgstr "le dn suivant n'existe pas : "
 
-#: plugins/admin/ogroups/class_ogroup.inc:536
+#: plugins/admin/ogroups/class_ogroup.inc:541
 msgid "You can combine two different object types at maximum only!"
 msgstr "Vous pouvez combiner au maximum deux objets différents !"
 
@@ -9014,25 +9015,25 @@ msgstr "Clients légers"
 msgid "Workstations"
 msgstr "Stations de travail"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:218
+#: plugins/admin/ogroups/class_ogroupManagement.inc:217
 #, php-format
 msgid "You're about to delete the object group '%s'."
 msgstr "Vous êtes sur le point de supprimer le groupe objet '%s'."
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:224
-#: plugins/admin/ogroups/class_ogroupManagement.inc:250
+#: plugins/admin/ogroups/class_ogroupManagement.inc:223
+#: plugins/admin/ogroups/class_ogroupManagement.inc:249
 msgid "You are not allowed to delete this object group!"
 msgstr "Vous n'êtes pas autorisé à supprimer le groupe objet!"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:365
+#: plugins/admin/ogroups/class_ogroupManagement.inc:364
 msgid "Create new object group"
 msgstr "Créer un nouveau groupe d'objets"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:392
+#: plugins/admin/ogroups/class_ogroupManagement.inc:391
 msgid "Name of object groups"
 msgstr "Nom du groupe d'objets"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:441
+#: plugins/admin/ogroups/class_ogroupManagement.inc:440
 #: plugins/generic/references/class_reference.inc:50
 msgid "Object group"
 msgstr "Groupes d'objets"
@@ -9193,7 +9194,7 @@ msgstr ""
 "peuvent pas être sauvés."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:238
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:248
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:245
 #, php-format
 msgid ""
 "The MySQL server '%s' isn't reachable as user '%s', check GOsa log for mysql "
@@ -9207,9 +9208,9 @@ msgstr ""
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:86
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:306
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1045
-#: plugins/gofon/macro/class_gofonMacro.inc:213
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:259
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:375
+#: plugins/gofon/macro/class_gofonMacro.inc:216
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:256
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:372
 #, php-format
 msgid "Can't select database %s on %s."
 msgstr "Impossible de sélectionner la base de données %s située sur %s."
@@ -9225,8 +9226,8 @@ msgstr "Impossible d'effacer dans la base de données %s située sur le serveur 
 #: plugins/admin/ogroups/class_phonequeue.inc:525
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1146
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1148
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:415
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:417
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:412
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:414
 #, php-format
 msgid "The specified telephonenumber '%s' is already assigned to '%s'."
 msgstr "Le numéro de téléphone %s est déjà utilisé par '%s'."
@@ -9235,8 +9236,8 @@ msgstr "Le numéro de téléphone %s est déjà utilisé par '%s'."
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:79
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:295
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1034
-#: plugins/gofon/macro/class_gofonMacro.inc:202
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:364
+#: plugins/gofon/macro/class_gofonMacro.inc:205
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:361
 #, php-format
 msgid ""
 "The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql "
@@ -9993,7 +9994,7 @@ msgid "Destination path"
 msgstr "Répertoire de destination"
 
 #: plugins/admin/fai/faiTemplateEntry.tpl:62
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:316
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:310
 msgid "Owner"
 msgstr "Propriétaire"
 
@@ -10132,8 +10133,8 @@ msgstr "non défini"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:250
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:644
-#: plugins/gofon/macro/class_gofonMacro.inc:94
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:227
+#: plugins/gofon/macro/class_gofonMacro.inc:97
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:224
 msgid ""
 "There is currently no asterisk server defined. Possibly you are missing a "
 "server that handles the asterisk management (goFonServer). Your settings "
@@ -10239,7 +10240,7 @@ msgid "You need to specify at least one phone number!"
 msgstr "Vous devez au moins indiquer un numéro de téléphone!"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:915
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:332
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:335
 #, php-format
 msgid "The parameter %s contains invalid char. '!,#' is used as delimiter"
 msgstr ""
@@ -10272,12 +10273,12 @@ msgstr "Macro téléphoniques"
 msgid "Refresh"
 msgstr "Rafraichir"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:100
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:194
+#: plugins/gofon/macro/class_gofonMacro.inc:103
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:197
 msgid "This 'dn' is no phone macro."
 msgstr "Ce 'dn' n'est pas une macro téléphonique."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:156
+#: plugins/gofon/macro/class_gofonMacro.inc:159
 msgid ""
 "This macro ist still in use. To delete this Macro ensure that nobody has "
 "selected this Macro."
@@ -10285,7 +10286,7 @@ msgstr ""
 "Cette macro est toujours utilisée. Pour effacer cette macro, veuillez vous "
 "assurer que personne ne l'utilise."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:188
+#: plugins/gofon/macro/class_gofonMacro.inc:191
 msgid ""
 "There is no mysql extension available in your php setup, can't save any "
 "changes to asterisk db."
@@ -10293,54 +10294,54 @@ msgstr ""
 "Il n'y a pas d'extension mysql disponible dans votre configuration de php, "
 "je ne peut pas sauver les changement dans votre base de données asterisk."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:258
+#: plugins/gofon/macro/class_gofonMacro.inc:261
 #, php-format
 msgid "Unable to parse macro contents on line: %s"
 msgstr "Impossible de lire le contenu de la macro à la ligne: %s"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:276
+#: plugins/gofon/macro/class_gofonMacro.inc:279
 #, php-format
 msgid "Can't perform SELECT query in DB '%s'"
 msgstr "Impossible d'exécuter une requête SELECT sur la base de données '%s'"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:285
-#: plugins/gofon/macro/class_gofonMacro.inc:293
+#: plugins/gofon/macro/class_gofonMacro.inc:288
+#: plugins/gofon/macro/class_gofonMacro.inc:296
 #, php-format
 msgid "Can't perform DELETE query in DB '%s'"
 msgstr "Impossible d'exécuter une requête DELETE sur la base de données '%s'"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:307
+#: plugins/gofon/macro/class_gofonMacro.inc:310
 #, php-format
 msgid "Can't perform INSERT query in DB '%s'"
 msgstr "Impossible d'exécuter une requête INSERT sur la base de données '%s'"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:350
+#: plugins/gofon/macro/class_gofonMacro.inc:357
 #, php-format
 msgid "The given cn '%s' already exists."
 msgstr "Le cn indiqué '%s' existe déjà."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:355
+#: plugins/gofon/macro/class_gofonMacro.inc:362
 msgid "You must specify the 'Display Name' in order to save this macro"
 msgstr "Vous devez spécifier le 'Nom d'affichage' pour pouvoir sauver cette macro"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:359
+#: plugins/gofon/macro/class_gofonMacro.inc:366
 msgid "The given cn is too long, to create a Makro entry, maximum 20 chars."
 msgstr ""
 "Le cn introduit est trop long, pour créer une macro le maximum est de 20 "
 "caractères."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:364
+#: plugins/gofon/macro/class_gofonMacro.inc:371
 #, php-format
 msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro"
 msgstr ""
 "Permissions insuffisantes, vous ne pouvez pas changer l'attribut '%s' dans "
 "la macro goFonMacro"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:370
+#: plugins/gofon/macro/class_gofonMacro.inc:377
 msgid "Makro length must be lower than 100 lines"
 msgstr "La longueur de la macro doit être plus petite que 100 lignes"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:375
+#: plugins/gofon/macro/class_gofonMacro.inc:382
 msgid "Please choose a valid  base."
 msgstr "Veuillez choisir une base valide."
 
@@ -10394,35 +10395,35 @@ msgstr "Expression régulière correspondant à des noms de macro"
 msgid "Phone macro management"
 msgstr "Administration des macros téléphoniques"
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:242
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:245
 msgid "String"
 msgstr "Chaîne de caractère"
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:243
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:246
 msgid "Combobox"
 msgstr "Boite à choix multiple"
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:244
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:247
 msgid "Bool"
 msgstr "Booléen"
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:250
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:253
 msgid "Delete unused"
 msgstr "Supprimer les paramètres inutilisés"
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:324
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:327
 #, php-format
 msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro."
 msgstr ""
 "Permissions insuffisantes, impossible de changer l'attribut '%s' dans la "
 "macro téléphonique."
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:337
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:340
 #, php-format
 msgid "The parameter %s has incorrect value for type bool."
 msgstr "Le paramètre %s à des valeurs incorrectes par rapport au type booléen."
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:366
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:369
 #, php-format
 msgid ""
 "Parameter count of the macro changed, you must update each user which are "
@@ -10435,37 +10436,37 @@ msgstr ""
 msgid "Phone macros"
 msgstr "Macros téléphoniques"
 
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:251
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:248
 #, php-format
 msgid "You're about to delete the macro '%s'."
 msgstr "Vous êtes sur le point de supprimer la macro '%s'."
 
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:257
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:282
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:254
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:279
 msgid "You are not allowed to delete this macro!"
 msgstr "Vous n'êtes pas autorisé à supprimer cette macro!"
 
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:331
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:328
 msgid "Create new phone macro"
 msgstr "Créer une nouvelle macro téléphonique"
 
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:346
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:343
 msgid "Visible"
 msgstr "Visible"
 
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:350
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:347
 msgid "This table displays all phone macros, in the selected tree."
 msgstr "Ce tableau montre toutes les macros téléphoniques, dans l'arbre sélectionné."
 
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:381
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:378
 msgid "Macro"
 msgstr "Macro"
 
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:382
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:379
 msgid "visible"
 msgstr "visible"
 
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:383
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:380
 msgid "invisible"
 msgstr "invisible"
 
@@ -10499,7 +10500,7 @@ msgid "Preset PIN"
 msgstr "Code PIN préselectionné"
 
 #: plugins/gofon/conference/generic.tpl:107
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:317
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:311
 msgid "PIN"
 msgstr "Code PIN"
 
@@ -10535,23 +10536,23 @@ msgstr "Conférences téléphoniques"
 msgid "Management"
 msgstr "Gestion"
 
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:295
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:289
 msgid "Create new conference"
 msgstr "Création d'une nouvelle conférence"
 
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:295
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:289
 msgid "New conference"
 msgstr "Nouvelle conférence"
 
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:311
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:305
 msgid "This table displays all available conference rooms."
 msgstr "Ce tableau montre toutes les salles de conférence disponibles."
 
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:315
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:309
 msgid "Name - Number"
 msgstr "Nom - numéro"
 
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:371
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:365
 msgid "Conference"
 msgstr "Conférence"
 
@@ -10573,7 +10574,7 @@ msgstr ""
 msgid "Regular expression for        matching user names"
 msgstr "Expression régulière concordant avec les noms des utilisateurs"
 
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:193
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:190
 msgid ""
 "You have specified a conference 'without PIN' ... please leave the PIN "
 "fields empty."
@@ -10581,24 +10582,24 @@ msgstr ""
 "Vous avez spécifié une conférence 'sans code PIN' ...veuillez laisser le "
 "champ code pin vide."
 
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:197
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:194
 msgid "Please enter a PIN."
 msgstr " Veuillez entrer un code pin."
 
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:201
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:198
 msgid "Please enter a name for the conference."
 msgstr "Veuillez entrer un nom pour la conférence."
 
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:205
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:202
 msgid "Only numeric chars are allowed in Number field."
 msgstr "Seul des chiffres sont permis dans le champ numéro."
 
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:209
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:206
 msgid "Only numbers are allowed in Lifetime."
 msgstr "Seul des nombres sont autorisés dans la durée."
 
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:239
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:349
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:236
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:346
 msgid ""
 "Can't save any changes to asterisk database, there is currently no mysql "
 "extension available in your php setup."
@@ -10617,11 +10618,15 @@ msgstr "Rapports téléphoniques"
 #: plugins/gofon/fonreports/class_fonreport.inc:96
 #: plugins/gofon/fonreports/class_fonreport.inc:106
 msgid "Can't connect to phone database, no reports can be shown!"
-msgstr "Impossible de se connecter à la base de données des téléphones, aucun rapport ne peut être affiché!"
+msgstr ""
+"Impossible de se connecter à la base de données des téléphones, aucun "
+"rapport ne peut être affiché!"
 
 #: plugins/gofon/fonreports/class_fonreport.inc:110
 msgid "Can't select phone database for report generation!"
-msgstr "Impossible de sélectionner la base de données des téléphones pour la génération de rapports!"
+msgstr ""
+"Impossible de sélectionner la base de données des téléphones pour la "
+"génération de rapports!"
 
 #: plugins/gofon/fonreports/class_fonreport.inc:212
 msgid "Query for phone database failed!"
