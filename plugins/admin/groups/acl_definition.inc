@@ -40,6 +40,7 @@ $ACLD['blocklists']= array("cn",
 			"delete",
 			"description",
 			"goFaxBlocklist");
+$ACLD['ogroup']=   array("ogroup","create","delete","cn", "description", "gosaGroupObjects","base");
 $ACLD['group']=      array("cn",
 			"create",
 			"delete",
@@ -47,7 +48,6 @@ $ACLD['group']=      array("cn",
 			"force_gid",
 			"password",
 			"gidNumber");
-$ACLD['ogroup']=   array("ogroup","create","delete","cn", "description", "gosaGroupObjects","base");
 $ACLD['appgroup']=   array();
 $ACLD['all']=        array();
 $ACLD['mailgroup']=  array("default_permission",

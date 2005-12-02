@@ -182,7 +182,6 @@ class groupManagement extends plugin
       /* Create new usertab object */
       $this->grouptab= new grouptabs($this->config,
           $this->config->data['TABS']['GROUPTABS'], $this->dn);
-      $this->grouptab->set_acl(array(':all'));
     }
 
     /* Cancel dialogs */

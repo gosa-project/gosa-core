@@ -158,7 +158,10 @@ class group extends plugin
 	/* Call parent execute */
 	plugin::execute();
 
-    /* Do we represent a valid group? */
+  $ui= get_userinfo();
+  $acla= get_permissions ($ui->dn, $ui->subtreeACL);
+  $this->acl= get_module_permission($acla, "group", $ui->dn);
+  /* Do we represent a valid group? */
     if (!$this->is_account && $this->parent == NULL){
       $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
         _("This 'dn' is no group.")."</b>";
@@ -617,9 +620,9 @@ class group extends plugin
     }
 
     $ui= get_userinfo();
-    $acl= get_permissions ($new_dn, $ui->subtreeACL);
-    $acl= get_module_permission($acl, "group", $new_dn);
-    if (chkacl($acl, "create") != ""){
+    $acl= get_permissions ($ui->dn, $ui->subtreeACL);
+    $acl= get_module_permission($acl, "group", $ui->dn);
+    if (chkacl($this->acl, "create") != ""){
       $message[]= _("You have no permissions to create a group on this 'Base'.");
     }
 
