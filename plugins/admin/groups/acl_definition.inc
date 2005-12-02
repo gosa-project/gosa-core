@@ -43,6 +43,7 @@ $ACLD['group']=      array("cn",
 			"force_gid",
 			"password",
 			"gidNumber");
+$ACLD['ogroup']=   array("ogroup","create","delete","cn", "description", "gosaGroupObjects","base");
 $ACLD['appgroup']=   array();
 $ACLD['all']=        array();
 $ACLD['mailgroup']=  array("default_permission",

@@ -32,12 +32,12 @@
   <td style="border-left:1px solid #A0A0A0; padding-left:10px;">
    <b><LABEL for="members">{t}Member objects{/t}</LABEL></b>&nbsp;({$combinedObjects})
    <br>
-   <select style="width:100%; height:450px;" id="members" name="members[]" size="15" multiple>
+   <select style="width:100%; height:450px;" id="members" name="members[]" size="15" multiple {$gosaGroupObjectsACL}>
     {$members}
    </select>
    <br>
-   <input type=submit value="{t}Add{/t}" name="edit_membership" {$membersACL}>&nbsp;
-   <input type=submit value="{t}Delete{/t}" name="delete_membership" {$membersACL}>
+   <input type=submit value="{t}Add{/t}" name="edit_membership" {$gosaGroupObjectsACL}>&nbsp;
+   <input type=submit value="{t}Delete{/t}" name="delete_membership" {$gosaGroupObjectsACL}>
   </td>
  </tr>
 </table>

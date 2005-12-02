@@ -83,6 +83,12 @@ class ogroup extends plugin
      $this->base = $_SESSION['ogroupfilter']['depselect'];
     }
 
+     /* set permissions */
+    $ui= get_userinfo();
+    $acl= get_permissions ($ui->dn, $ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "ogroup", $ui->dn);
+
+
     /* Load member data */
     $this->reload();
   }
@@ -118,6 +124,7 @@ class ogroup extends plugin
 	/* Call parent execute */
 	plugin::execute();
 
+    print $this->acl;
     
     $this->reload();
 

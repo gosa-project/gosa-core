@@ -192,8 +192,7 @@ class ogroupManagement extends plugin
 
       /* Create new usertab object */
       $this->ogroup= new ogrouptabs($this->config,
-          $this->config->data['TABS']['OGROUPTABS'], $this->dn);
-      $this->ogroup->set_acl(array(':all'));
+      $this->config->data['TABS']['OGROUPTABS'], $this->dn);
     }
 
     if ($s_action=="del"){
@@ -234,7 +233,7 @@ class ogroupManagement extends plugin
 
         /* Delete request is permitted, perform LDAP action */
         $this->ogroup= new ogrouptabs($this->config,
-            $this->config->data['TABS']['OGROUPTABS'], $this->dn);
+        $this->config->data['TABS']['OGROUPTABS'], $this->dn);
         $this->ogroup->set_acl(array($this->acl));
         $this->ogroup->delete ();
         gosa_log ("Object group'".$this->dn."' has been removed");
