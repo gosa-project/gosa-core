@@ -346,8 +346,8 @@ class phoneConferenceManagment extends plugin
 
     /* Insert conferneces*/
     foreach($this->conferences as $conferencekey => $conference ){
-  
-      if((isset($conference['goFonPIN'][0]))&&($this->ui->dn==$conference['goFonConferenceOwner'][0])){
+
+      if((isset($conference['goFonPIN'][0]))&&(($this->ui->dn==$conference['goFonConferenceOwner'][0])||($this->acl=="#all#"))){
         $pin = "<img src='images/list_password.png' title='PIN : ".$conference['goFonPIN'][0]."' alt='PIN'>";
       }else{
         $pin = "&nbsp;";
@@ -366,7 +366,7 @@ class phoneConferenceManagment extends plugin
  
       $a_field1 = array("string"=>sprintf($userimg,_("Conference")), "attach" => "style='text-align:center;width:20px;'");
 
-      if(($this->ui->dn==$conference['goFonConferenceOwner'][0])&&(chkacl($this->acl,"goFonConferenceOwner")=="")){
+      if(($this->acl=="#all#")||(($this->ui->dn==$conference['goFonConferenceOwner'][0])&&(chkacl($this->acl,"goFonConferenceOwner")==""))){
         $a_field2 = array("string"=>sprintf($editlink,$conferencekey,$conference['cn'][0].$number), "attach" => "style=''");
       }else{  
         $a_field2 = array("string"=>$conference['cn'][0].$number, "attach" => "style=''");
