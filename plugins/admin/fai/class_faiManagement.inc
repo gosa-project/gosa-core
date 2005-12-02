@@ -338,7 +338,7 @@ class faiManagement extends plugin
 		}
 
 		/* Department select */
-		if(isset($_POST['base'])){
+		if((isset($_POST['base']))&&($s_action=="")){
 			$faifilter['base']=$_POST['base'];
 		}
 
