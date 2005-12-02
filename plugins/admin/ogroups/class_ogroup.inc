@@ -124,8 +124,6 @@ class ogroup extends plugin
 	/* Call parent execute */
 	plugin::execute();
 
-    print $this->acl;
-    
     $this->reload();
 
     /* Do we represent a valid group? */
