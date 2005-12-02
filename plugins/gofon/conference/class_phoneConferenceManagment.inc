@@ -47,6 +47,9 @@ class phoneConferenceManagment extends plugin
     $this->dn			= "";
     $this->config		= $config;
 
+    $acl= get_permissions ($ui->dn, $ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "conference", $ui->dn);
+
     /* Get global filter config */
     if (!isset($_SESSION["conferencefilter"])){
       $base= get_base_from_people($ui->dn);
@@ -60,6 +63,7 @@ class phoneConferenceManagment extends plugin
   /* Execute class and display something */
   function execute()
   {
+
 	/* Call parent execute */
 	plugin::execute();
 
@@ -186,7 +190,7 @@ class phoneConferenceManagment extends plugin
      */
     if (isset($_POST['delete_department_confirm'])){
       $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
-      $acl= get_module_permission($acl, "goFonConference", $this->dn);
+      $acl= get_module_permission($acl, "conference", $this->dn);
       if (chkacl($acl, "all") == ""){
         $this->remove_from_parent();
         gosa_log ("Department object'".$this->dn."' has been removed");
@@ -210,9 +214,6 @@ class phoneConferenceManagment extends plugin
       /* Lock the current entry, so everyone will get the  above dialog */
       add_lock ($this->dn, $this->ui->dn);
 
-      /* Set up the users ACL's for this 'dn' */
-      $this->acl= get_permissions ($this->dn, $this->ui->subtreeACL);
-
       /* Register conftab to trigger edit dialog */
       $this->conftab= new conferencetabs($this->config,$this->config->data['TABS']['CONFERENCETABS'], $this->dn);
       $this->conftab->set_acl($this->acl);
@@ -223,12 +224,9 @@ class phoneConferenceManagment extends plugin
     if($s_action == "new"){
       $this->dn= "new";
       /* Set up the users ACL's for this 'dn' */
-      $this->acl= get_permissions ($this->dn, $this->ui->subtreeACL);
       $this->dn= "new";
       $this->conftab= new conferencetabs($this->config,$this->config->data['TABS']['CONFERENCETABS'], $this->dn);
-      $this->acl= get_permissions ($this->conftab->dn, $this->ui->subtreeACL);
       $this->conftab->set_acl($this->acl);
-      $this->conftab->set_acl(array(':all'));
       unset($_SESSION['objectinfo']);//
     }
 
@@ -369,9 +367,6 @@ class phoneConferenceManagment extends plugin
       $cn = $data['cn'][0];
  
       $a_field1 = array("string"=>sprintf($userimg,_("Conference")), "attach" => "style='text-align:center;width:20px;'");
-
-      $acl= get_permissions ($conference['dn'], $this->ui->subtreeACL);
-      $this->acl =  get_module_permission($acl, "goFonConference", $conference['dn']);
 
       if(($this->ui->dn==$conference['goFonConferenceOwner'][0])&&(chkacl($this->acl,"goFonConferenceOwner")=="")){
         $a_field2 = array("string"=>sprintf($editlink,$conferencekey,$conference['cn'][0].$number), "attach" => "style=''");

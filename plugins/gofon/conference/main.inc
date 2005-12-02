@@ -40,6 +40,9 @@ if ($remove_lock){
 		$display= print_header(get_template_path('images/conference.png'), _("Conference management"));
 	}
 
+	$acl= get_permissions ($ui->dn, $ui->subtreeACL);
+    $conference->acl= get_module_permission($acl, "conference", $ui->dn);
+
 	/* Reset requested? */
 	if (isset($_GET['reset']) && $_GET['reset'] == 1){
 		del_lock ($ui->dn);

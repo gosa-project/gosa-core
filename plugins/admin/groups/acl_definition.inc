@@ -293,7 +293,24 @@ $ACLD['logview']	=  array("logview");
 $ACLD['mailqueue']	=  array("mailqueue","unhold_all","hold_all","del_all","requeue_all","unhold","hold","del","requeue","query","header");
 $ACLD['ldapmanager']=  array("ldapmanager","import","export","xlsexport","csvimport");
 
-$ACLD['goFonConference']	= 	array("goFonConference" => "goFonConference");
+$ACLD['conference']	= 	array(	
+								"conference",
+								"cn",
+								"base", 
+								"description", 
+								"goFonPIN",
+								"goFonConferenceOption_P",
+								"goFonConferenceOption_r",
+      							"goFonConferenceOption_M",
+								"goFonConferenceOption_s",
+								"goFonConferenceOption_i",
+								"goFonConferenceOption_c",
+      							"goFonConferenceOption_D",
+								"goFonConferenceOptionFormat",
+								"goFonConferenceOptionLifetime",
+								"telephoneNumber",	
+								"goFonConferenceOwner");
+
 
 $ACLD['FAIclass']	= 	array(
 								"FAIclass"							=> "FAIclass"
