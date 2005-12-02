@@ -32,7 +32,7 @@ class blocklist extends plugin
 
     /* Get global filter config */
     if (!is_global("blockfilter")){
-      $uii= get_userinfo();
+      $ui= get_userinfo();
       $base= get_base_from_people($ui->dn);
       $blockfilter= array("sendlists" => "checked",
           "receivelists" => "checked",
@@ -44,6 +44,9 @@ class blocklist extends plugin
       $blockfilter = $_SESSION["blockfilter"];
       $this->base = $blockfilter['depselect'];
     }
+    $ui= get_userinfo();
+    $acl= get_permissions ($ui->dn, $ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "blocklists", $ui->dn);
   }
 
   function execute()
@@ -164,7 +167,6 @@ class blocklist extends plugin
     /* Create new blocklist? */
     if ($s_action=="new"){
       $this->clear_fields();
-      $this->acl= "#all#";
       $this->dn= "new";
       plugin::plugin ($this->config, $this->dn);
     }
@@ -173,8 +175,6 @@ class blocklist extends plugin
     if ($s_action=="edit"){
       $this->clear_fields();
       $this->dn=$this->blocklists[$s_entry]['dn']; 
-      $this->acl= get_permissions ($this->dn, $this->ui->subtreeACL);
-      $this->acl= get_module_permission($this->acl, "blocklists", $this->dn);
       plugin::plugin ($this->config, $this->dn);
 
       /* Load missing lists */
@@ -210,9 +210,7 @@ class blocklist extends plugin
 
     /* Finally delete blocklist */
     if (isset($_POST['delete_blocklist_confirm'])){
-      $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
-      $acl= get_module_permission($acl, "blocklists", $this->dn);
-      if (chkacl($acl, "all") == ""){
+      if (chkacl($this->acl, "delete") == ""){
         $this->remove_from_parent();
         gosa_log ("Blocklist object'".$this->dn."' has been removed");
         $this->reload ();
@@ -258,7 +256,6 @@ class blocklist extends plugin
 
         $this->save ();
         gosa_log ("Blocklist object'".$this->dn."' has been saved");
-        $this->acl= "#none#";
         $this->dn= "";
         del_lock ($this->ui->dn);
         unset($_SESSION['objectinfo']);
@@ -408,7 +405,6 @@ class blocklist extends plugin
     $this->cn= "";
     $this->base= "";
     $this->goFaxBlocklist= array();
-    $this->acl= "#none#";
   }
 
   function reload()
@@ -497,17 +493,12 @@ class blocklist extends plugin
   {
     plugin::save_object();
 
-    /* Save type, needed to detect objectClass */
-    if (isset($_POST['type']) && chkacl($this->acl, "cn") == ""){
-      $this->type= $_POST['type'];
-    }
-
-    /* Save base, since this is no LDAP attribute */
-    if (isset($_POST['base']) && chkacl($this->acl, "create") == ""){
-      $this->base= $_POST['base'];
+    foreach($this->attributes as $attr){
+      if(isset($_POST[$attr])){
+        $this->$attr = $_POST[$attr];
+      }
     }
   }
-
 
   /* Check values */
   function check()
@@ -521,10 +512,7 @@ class blocklist extends plugin
       $new_dn= $this->dn;
     }
 
-    $ui= get_userinfo();
-    $acl= get_permissions ($new_dn, $ui->subtreeACL);
-    $acl= get_module_permission($acl, "blocklist", $new_dn);
-    if (chkacl($acl, "create") != ""){
+    if (chkacl($this->acl, "create") != ""){
       $message[]= _("You have no permissions to create a blocklist on this 'Base'.");
     }
 

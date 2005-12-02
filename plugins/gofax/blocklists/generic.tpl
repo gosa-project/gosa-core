@@ -31,7 +31,7 @@
      <tr>
        <td><LABEL for="type">{t}Type{/t}</LABEL></td>
        <td>
-        <select size="1" id="type" name="type" {$typeACL} title="{t}Select wether to filter incoming or outgoing calls{/t}">
+        <select size="1" id="type" name="type" {$goFaxBlocklistACL} title="{t}Select wether to filter incoming or outgoing calls{/t}">
         {html_options options=$types selected=$type}
 		<option disabled>&nbsp;</option>
         </select>
