@@ -223,10 +223,11 @@ $ACLD['pureftpdAccount']=   array(
 			"FTPQuotaMBytes",
 			"FTPUploadRatio",
 			"FTPDownloadRatio");
-$ACLD['goFonConference']= array(
+$ACLD['conference']= array(
 			"goFonConference",
 			"goFonPIN",
 			"base",
+			"delete",
 			"cn",
 			"description",
 			"telephoneNumber",			
@@ -293,25 +294,6 @@ $ACLD['faxreport']	=  array("faxreport");
 $ACLD['logview']	=  array("logview");
 $ACLD['mailqueue']	=  array("mailqueue","unhold_all","hold_all","del_all","requeue_all","unhold","hold","del","requeue","query","header");
 $ACLD['ldapmanager']=  array("ldapmanager","import","export","xlsexport","csvimport");
-
-$ACLD['conference']	= 	array(	
-								"conference",
-								"cn",
-								"base", 
-								"description", 
-								"goFonPIN",
-								"goFonConferenceOption_P",
-								"goFonConferenceOption_r",
-      							"goFonConferenceOption_M",
-								"goFonConferenceOption_s",
-								"goFonConferenceOption_i",
-								"goFonConferenceOption_c",
-      							"goFonConferenceOption_D",
-								"goFonConferenceOptionFormat",
-								"goFonConferenceOptionLifetime",
-								"telephoneNumber",	
-								"goFonConferenceOwner");
-
 
 $ACLD['FAIclass']	= 	array(
 								// Allow displaying of FAI menu element
