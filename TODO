@@ -10,8 +10,6 @@ face these:
 
 * Can't assign rights on primary groups, or something like that ... 
 
-* Problem with undefined 'description' after get_list2 in all headpages
-
 Target for 2.5:
 ===============
 
