@@ -82,8 +82,9 @@ class conference extends plugin
       $this->base= preg_replace ("/^[^,]+,/", "", $this->dn);
     }
 
-    $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
-    $this->acl= get_module_permission($acl, "conference", $this->dn);
+    $ui= get_userinfo();
+    $acl= get_permissions ($ui->dn, $this->ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "conference", $ui->dn);
     $this->goFonConferenceOwner=$this->ui->dn;
 
     /* Parse Options ... 
@@ -148,7 +149,7 @@ class conference extends plugin
 
   function remove_from_parent()
   {
-     $this->SQL_remove_me(true); 
+    $this->SQL_remove_me(true); 
 
     $ldap= $this->config->get_ldap_link();
     $ldap->cd ($this->dn);

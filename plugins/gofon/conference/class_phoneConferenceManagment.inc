@@ -189,9 +189,7 @@ class phoneConferenceManagment extends plugin
      * Finally delete department
      */
     if (isset($_POST['delete_department_confirm'])){
-      $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
-      $acl= get_module_permission($acl, "conference", $this->dn);
-      if (chkacl($acl, "all") == ""){
+      if (chkacl($this->acl, "delete") == ""){
         $this->remove_from_parent();
         gosa_log ("Department object'".$this->dn."' has been removed");
         $this->reload ();
@@ -434,6 +432,7 @@ class phoneConferenceManagment extends plugin
   function remove_from_parent()
   {
     $cfg = new conference($this->config, $this->dn);
+
     $cfg->remove_from_parent();
     $ldap= $this->config->get_ldap_link();
     $ldap->cd ($this->dn);
