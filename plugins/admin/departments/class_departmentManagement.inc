@@ -409,10 +409,10 @@ class departmentManagement extends plugin
 
 		$this->departments= array();
 		foreach ($res as $value){
-			if($value["description"][0]!=".."){
+			if(isset($value["description"][0])){
 				$this->departments[$value['dn']]= convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
 			}else{
-				$this->departments[$value['dn']]=$value["description"][0];
+				$this->departments[$value['dn']]= convert_department_dn2($value['dn']);//$value["description"][0];
 			}
 		}
 		natcasesort ($this->departments);

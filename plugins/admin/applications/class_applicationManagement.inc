@@ -450,8 +450,6 @@ class applicationManagement extends plugin
         $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
             TRUE, $base2, array("ou", "description"), TRUE);
 
-
-
         $this->departments= array();
         $tmp = array();
         foreach ($res3 as $value){
@@ -459,10 +457,10 @@ class applicationManagement extends plugin
         }
         ksort($tmp);
         foreach($tmp as $value){
-          if($value["description"][0]!=".."){
+          if(isset($value["description"][0])){
             $this->departments[$value['dn']]=convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
           }else{
-            $this->departments[$value['dn']]=$value["description"][0];
+            $this->departments[$value['dn']]=convert_department_dn2($value['dn']);//$value["description"][0];
           }
         }
 

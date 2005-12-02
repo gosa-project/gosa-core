@@ -989,23 +989,31 @@ class userManagement extends plugin
      * We also need to search for the departments
      * So we are able to navigate like in konquerer 
      */
+
+    /* Create base to search in */
     $base2 = preg_replace("/ou=people,/i","",$base);
 
+    /* Get all departments within this subtree */
     $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
         TRUE, $base2, array("ou", "description"), TRUE);
 
     $this->departments= array();
 
+    /* Create array with results */
     $tmp = array();
     foreach ($res3 as $value){
       $tmp[strtolower($value['dn']).$value['dn']]=$value;
     }
+
+    /* Sort array */
     ksort($tmp);
+
+    /* Create result array */
     foreach($tmp as $value){
-      if(isset($value['description'][0]) && $value["description"][0]!=".."){
+      if(isset($value['description'][0])){
         $this->departments[$value['dn']]=convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
       }else{
-        $this->departments[$value['dn']]=$value["description"][0];
+        $this->departments[$value['dn']]=convert_department_dn2($value['dn']);
       }
     }
     /* END NEW LIST MANAGMENT 
