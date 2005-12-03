@@ -1,4 +1,4 @@
-<h2><img alt="" src="images/select_phone.png" align="middle">&nbsp;Freigabe bearbeiten</h2>
+<h2><img alt="" src="images/fai_partitionTable.png" align="middle">&nbsp;{t}Edit share{/t}</h2>
 <table summary="{t}NFS setup{/t}" width="100%">
 	<tr>
 		<td width="45%">
@@ -17,12 +17,20 @@
 						{t}Description{/t}
 					</td>
 					<td>
-						<input type="text" name="description" value="{$description}">
+						<input type="text" size="40" name="description" value="{$description}">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						{t}Path{/t}
+					</td>
+					<td>
+						<input type="text" size="40" name="path" value="{$path}">
 					</td>
 				</tr>
 			</table>
 		</td>
-		<td>
+		<td style="border-left:1px solid #A0A0A0">
 
 		<!--Table right-top-->
 			<table>
@@ -46,39 +54,15 @@
 						</select>	
 					</td>
 				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td colspan=2>
-			<p class="seperator">&nbsp;</p>
-		</td>
-	</tr>
-	<tr>
-		<td>
-		<!--Table bottom-->
-			<table>
 				<tr>
-					<td>
-						{t}Path{/t}
-					</td>
-					<td>
-						<input type="text" name="path" value="{$path}">
-					</td>
+				    <td>
+					{t}Option{/t}
+				    </td>
+				    <td>
+								<input type="text" name="option" value="{$option}">
+				    </td>
 				</tr>
 			</table>
-		</td>
-		<td>
-			<table>
-                <tr>
-                    <td>
-                        {t}Option{/t}
-                    </td>
-                    <td>
-						<input type="text" name="option" value="{$option}">
-                    </td>
-                </tr>
-            </table>
 		</td>
 	</tr>
 	<tr>

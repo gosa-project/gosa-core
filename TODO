@@ -4,10 +4,6 @@ Things to fix before 2.4:
 Showed up by a small review. Since we've time until the doc is ready,
 face these:
 
-* When selecting who can manage printers the list of the windows pc is show with the users
-
-* In system, server nfs export the text is still in german "Freigabe bearbeiten" and the icon is a phone
-
 * When using help with gosa in english with gosa.conf lang="en_EN" but my browser said fr_FR 
   i got gosa in english but the help in french
   

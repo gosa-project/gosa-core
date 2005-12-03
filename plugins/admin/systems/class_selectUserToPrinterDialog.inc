@@ -27,7 +27,7 @@ class selectUserToPrinterDialog extends plugin
 
     switch($type){
       case "AddUser" : 
-        $this->searchObjects = "(objectClass=person)(objectClass=inetOrgPerson)";
+        $this->searchObjects = "(objectClass=person)(objectClass=inetOrgPerson)(!(uid=*$))";
         $this->searchAttrs   = array("cn","uid");
         $this->searchAppend  = "uid"; 
           ;break;
@@ -37,7 +37,7 @@ class selectUserToPrinterDialog extends plugin
         $this->searchAppend  = "cn"; 
           ;break;
       case "AddAdminUser" : 
-        $this->searchObjects = "(objectClass=person)(objectClass=inetOrgPerson)";
+        $this->searchObjects = "(objectClass=person)(objectClass=inetOrgPerson)(!(uid=*$))";
         $this->searchAttrs   = array("cn","uid");
         $this->searchAppend  = "uid"; 
           ;break;
