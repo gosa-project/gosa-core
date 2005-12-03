@@ -8,7 +8,12 @@ face these:
 
 * please check what happened to sizelimit buttons after moving to another list box
 
-* Can't assign rights on primary groups, or something like that ... 
+* Can't assign rights on primary groups, or something like that ...
+
+* When selecting who can manage printers the list of the windows pc is show with the users
+
+* In system, server nfs export the text is still in german "Freigabe bearbeiten" and the icon is a phone
+
 
 Target for 2.5:
 ===============
