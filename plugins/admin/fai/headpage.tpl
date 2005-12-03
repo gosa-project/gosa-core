@@ -3,7 +3,7 @@
   <td style="vertical-align:top;width:600px">
   <div class="contentboxh">
     <p class="contentboxh">
-     {t}List of FAI classes{/t}
+     {t}List of FAI classes{/t} {$hint}
     </p>
   </div>
   <div class="contentboxb">

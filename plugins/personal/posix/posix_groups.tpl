@@ -1,12 +1,12 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
 <tr>
   <td style="vertical-align:top;">
-   <div class="contentboxh" style="height:20px;">
+   <div class="contentboxh" style="width:610px; height:20px;">
     <p class="contentboxh" style="font-size:12px">
      <b>{t}Select groups to add{/t} {$hint}</b>
     </p>
    </div>
-   <div class="contentboxb">
+   <div class="contentboxb" style="width:610px;">
     <p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
      <select style="width:600px; height:450px; margin-top:4px;" name="groups[]" size="15" multiple>
 	{html_options options=$groups}

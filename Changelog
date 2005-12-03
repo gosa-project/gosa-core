@@ -1,6 +1,17 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.4
+  - Updated layout to work cleanly with IE6+, Firefox 1.0.4+, khtml 3.4+
+  - Added FAI (Fully Automatted Installation) support
+  - Added mail queue management
+  - Added many missing acl informations
+  - Added help browser
+  - Fixed templating for samba and unix users
+  - Applied hundreds of smaller bugfixes
+  - Improved speed by switching to directory style dialogs and performing
+    sub searches.
+
 * gosa 2.4beta3
   - Updated layout
   - Fixed application removal

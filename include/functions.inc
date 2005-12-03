@@ -143,6 +143,14 @@ function get_browser_language()
 {
   global $BASE_DIR;
 
+  /* Try to use users primary language */
+  $ui= get_userinfo();
+  if ($ui != NULL){
+    if ($ui->language != ""){
+      return ($ui->language);
+    }
+  }
+
   /* Get list of languages */
   if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])){
     $lang= preg_replace("/\s+/", "", $_SERVER['HTTP_ACCEPT_LANGUAGE']);

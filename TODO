@@ -4,12 +4,6 @@ Things to fix before 2.4:
 Showed up by a small review. Since we've time until the doc is ready,
 face these:
 
-* Fix problem with non-existing entries in the package list
-
-* please check what happened to sizelimit buttons after moving to another list box
-
-* Can't assign rights on primary groups, or something like that ...
-
 * When selecting who can manage printers the list of the windows pc is show with the users
 
 * In system, server nfs export the text is still in german "Freigabe bearbeiten" and the icon is a phone

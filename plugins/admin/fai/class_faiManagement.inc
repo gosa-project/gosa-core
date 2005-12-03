@@ -25,7 +25,6 @@ require "tabsScript.inc";
 require "tabsProfile.inc";
 require "tabsPackage.inc";
 
-
 class faiManagement extends plugin
 {
 	/* Definitions */
@@ -606,6 +605,7 @@ class faiManagement extends plugin
 		$smarty->assign("alphabet"		, generate_alphabet());
 		$smarty->assign("apply"			, apply_filter());
 		$smarty->assign("search_image"	, get_template_path('images/search.png'));
+		$smarty->assign("hint", print_sizelimit_warning());
 
 		$display 	= $smarty->fetch(get_template_path('headpage.tpl', TRUE, dirname(__FILE__)));
 		return ($display);

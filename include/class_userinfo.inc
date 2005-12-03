@@ -24,6 +24,8 @@ class userinfo
   var $ip;
   var $username;
   var $cn;
+  var $gidNumber= -1;
+  var $language= "";
   var $config;
   var $subtreeACL= array();
 
@@ -40,6 +42,14 @@ class userinfo
     } else {
       $this->cn= $attrs['uid'][0];
     }
+    if (isset($attrs['gidNumber'][0])){
+      $this->gidNumber= $attrs['gidNumber'][0];
+    }
+
+    /* Assign user language */
+    if (isset($attrs['preferredLanguage'][0])){
+      $this->language= $attrs['preferredLanguage'][0];
+    }
 
     $this->dn= $userdn;
     $this->ip= $_SERVER['REMOTE_ADDR'];
@@ -53,8 +63,13 @@ class userinfo
     /* Load ACL's from all groups we're in */
     $this->subtreeACL= array();
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(&(objectClass=posixGroup)(objectClass=gosaObject)".
-        "(|(memberUid=$this->username)(cn=$this->username)))");
+    if ($this->gidNumber == -1){
+      $ldap->search("(&(objectClass=posixGroup)(objectClass=gosaObject)".
+          "(memberUid=$this->username))");
+    } else {
+      $ldap->search("(&(objectClass=posixGroup)(objectClass=gosaObject)".
+          "(|(memberUid=$this->username)(gidNumber=$this->gidNumber)))");
+    }
 
     while($attrs = $ldap->fetch()){
       $base= preg_replace('/^[^,]+,ou=[^,]+,/i', "",$ldap->getDN());
