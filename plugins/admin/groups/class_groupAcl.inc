@@ -112,7 +112,7 @@ class acl extends plugin
 	if ($this->object == "all"){
 		$this->current_acl= preg_replace ( "/[,]?all[,]?/", "", $this->current_acl);
 	}
-	$this->current_acl= preg_replace ( "/[,]?$this->object#[^,]*[,]?/", "", $this->current_acl);
+	$this->current_acl= preg_replace ( "/[^a-z0-9A-Z]$this->object#[^,]*[,]?/", "", $this->current_acl);
 
 	/* assemble new attributes */
 	$attrs= "";

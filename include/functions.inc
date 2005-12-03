@@ -698,12 +698,11 @@ function get_module_permission($acl_array, $module, $dn)
        all allowed submodules specified in the ACL */
     $tmp= split(",", $acl);
     foreach ($tmp as $mod){
-      if (preg_match("/$module#/", $mod)){
+echo "Compare $module# with $mod<br>";
+      if (preg_match("/^$module#/", $mod)){
         $final= strstr($mod, "#")."#";
-
-        // HICKERT 
-        // old source : continue;
-        return($final);
+echo "Hit while comparing $mod --- $module<br>";
+        continue;
       }
       if (preg_match("/[^#]$module$/", $mod)){
         return ("#all#");
