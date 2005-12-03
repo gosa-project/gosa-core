@@ -1,13 +1,3 @@
-Things to fix before 2.4:
-=========================
-
-Showed up by a small review. Since we've time until the doc is ready,
-face these:
-
-* When using help with gosa in english with gosa.conf lang="en_EN" but my browser said fr_FR 
-  i got gosa in english but the help in french
-  
-
 Target for 2.5:
 ===============
 
