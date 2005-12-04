@@ -59,24 +59,24 @@ msgstr "Unix"
 
 #: contrib/gosa.conf:72 contrib/gosa.conf:84
 #: plugins/personal/environment/class_environment.inc:12
-#: plugins/admin/groups/class_groupManagement.inc:378
+#: plugins/admin/groups/class_groupManagement.inc:377
 #: plugins/admin/users/class_userManagement.inc:730
 msgid "Environment"
 msgstr "Omgeving"
 
 #: contrib/gosa.conf:73 contrib/gosa.conf:86
 #: plugins/personal/mail/class_mailAccount.inc:22
-#: plugins/admin/groups/class_groupManagement.inc:374
+#: plugins/admin/groups/class_groupManagement.inc:373
 #: plugins/admin/users/class_userManagement.inc:732
 #: plugins/admin/ogroups/tabs_ogroups.inc:73
 #: plugins/admin/ogroups/tabs_ogroups.inc:161
-#: plugins/admin/ogroups/class_ogroupManagement.inc:383
+#: plugins/admin/ogroups/class_ogroupManagement.inc:382
 #: plugins/generic/references/class_reference.inc:24
 msgid "Mail"
 msgstr "E-mail"
 
 #: contrib/gosa.conf:74 plugins/personal/samba/class_sambaAccount.inc:24
-#: plugins/admin/groups/class_groupManagement.inc:375
+#: plugins/admin/groups/class_groupManagement.inc:374
 #: plugins/admin/users/class_userManagement.inc:738
 #: plugins/generic/references/class_reference.inc:26
 #: plugins/generic/references/class_reference.inc:28
@@ -105,13 +105,13 @@ msgstr "Fax"
 #: plugins/addons/addressbook/address_edit.tpl:195
 #: plugins/addons/addressbook/address_info.tpl:37
 #: plugins/addons/addressbook/address_info.tpl:85
-#: plugins/admin/groups/class_groupManagement.inc:377
+#: plugins/admin/groups/class_groupManagement.inc:376
 #: plugins/admin/users/class_userManagement.inc:734
 #: plugins/admin/departments/generic.tpl:58
 #: plugins/admin/systems/class_systemManagement.inc:708
 #: plugins/admin/systems/chooser.tpl:12
 #: plugins/admin/ogroups/class_ogroupManagement.inc:48
-#: plugins/admin/ogroups/class_ogroupManagement.inc:487
+#: plugins/admin/ogroups/class_ogroupManagement.inc:486
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:6
 #: plugins/generic/references/class_reference.inc:40
 msgid "Phone"
@@ -164,7 +164,7 @@ msgstr "Apparaten"
 #: plugins/personal/environment/environment.tpl:168
 #: plugins/admin/systems/class_systemManagement.inc:714
 #: plugins/admin/ogroups/class_ogroupManagement.inc:49
-#: plugins/admin/ogroups/class_ogroupManagement.inc:490
+#: plugins/admin/ogroups/class_ogroupManagement.inc:489
 #: plugins/generic/references/class_reference.inc:52
 msgid "Printer"
 msgstr "Printer"
@@ -229,18 +229,18 @@ msgstr "Partities"
 msgid "Script"
 msgstr "Script"
 
-#: contrib/gosa.conf:192 plugins/admin/fai/class_faiManagement.inc:554
-#: plugins/admin/fai/class_faiManagement.inc:555
+#: contrib/gosa.conf:192 plugins/admin/fai/class_faiManagement.inc:553
+#: plugins/admin/fai/class_faiManagement.inc:554
 msgid "Hooks"
 msgstr "Inhakers"
 
-#: contrib/gosa.conf:196 plugins/admin/fai/class_faiManagement.inc:547
-#: plugins/admin/fai/class_faiManagement.inc:548
+#: contrib/gosa.conf:196 plugins/admin/fai/class_faiManagement.inc:546
+#: plugins/admin/fai/class_faiManagement.inc:547
 msgid "Variables"
 msgstr "Variabelen"
 
-#: contrib/gosa.conf:200 plugins/admin/fai/class_faiManagement.inc:568
-#: plugins/admin/fai/class_faiManagement.inc:569
+#: contrib/gosa.conf:200 plugins/admin/fai/class_faiManagement.inc:567
+#: plugins/admin/fai/class_faiManagement.inc:568
 msgid "Templates"
 msgstr "Sjablonen"
 
@@ -770,7 +770,7 @@ msgstr "Voer uw <i>gebruikersnaam</i> en <i>wachtwoord</i> in"
 #: ihtml/themes/default/login.tpl:26 ihtml/themes/default/login.tpl:30
 #: ihtml/themes/default/setup_useradmin.tpl:22
 #: plugins/admin/users/class_userManagement.inc:690
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:345
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:342
 msgid "Username"
 msgstr "Gebruikersnaam"
 
@@ -830,7 +830,7 @@ msgstr ""
 #: ihtml/themes/default/setup_useradmin.tpl:41
 #: ihtml/themes/default/setup_step2.tpl:13
 #: ihtml/themes/default/setup_step3.tpl:18 plugins/admin/users/template.tpl:44
-#: plugins/admin/fai/class_faiManagement.inc:399
+#: plugins/admin/fai/class_faiManagement.inc:398
 #: plugins/admin/fai/faiPackageNew.tpl:65
 msgid "Continue"
 msgstr "Doorgaan"
@@ -893,7 +893,7 @@ msgstr ""
 #: ihtml/themes/default/setup_step2.tpl:12
 #: ihtml/themes/default/setup_step3.tpl:17
 #: ihtml/themes/default/setup_step4.tpl:114
-#: ihtml/themes/default/setup_finish.tpl:30 include/functions.inc:1311
+#: ihtml/themes/default/setup_finish.tpl:30 include/functions.inc:1321
 #: plugins/personal/password/changed.tpl:12
 #: plugins/personal/generic/main.inc:169
 #: plugins/gofax/faxreports/detail.tpl:68
@@ -959,7 +959,7 @@ msgstr "Verwijderen"
 #: plugins/addons/addressbook/dial.tpl:10
 #: plugins/addons/addressbook/address_edit.tpl:234
 #: plugins/addons/addressbook/remove.tpl:16
-#: plugins/admin/groups/class_groupManagement.inc:333
+#: plugins/admin/groups/class_groupManagement.inc:332
 #: plugins/admin/groups/remove.tpl:16
 #: plugins/admin/groups/application_options.tpl:10
 #: plugins/admin/groups/group_objects.tpl:49
@@ -970,17 +970,17 @@ msgstr "Verwijderen"
 #: plugins/admin/users/remove.tpl:16 plugins/admin/applications/remove.tpl:15
 #: plugins/admin/applications/class_applicationManagement.inc:306
 #: plugins/admin/departments/remove.tpl:16
-#: plugins/admin/departments/class_departmentManagement.inc:352
+#: plugins/admin/departments/class_departmentManagement.inc:349
 #: plugins/admin/systems/class_systemManagement.inc:541
 #: plugins/admin/systems/remove.tpl:16 plugins/admin/systems/password.tpl:30
-#: plugins/admin/systems/chooser.tpl:18 plugins/admin/systems/servnfs.tpl:92
+#: plugins/admin/systems/chooser.tpl:18 plugins/admin/systems/servnfs.tpl:76
 #: plugins/admin/systems/printerPPDDialog.tpl:23
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:61
 #: plugins/admin/ogroups/ogroup_objects.tpl:52
-#: plugins/admin/ogroups/class_ogroupManagement.inc:341
+#: plugins/admin/ogroups/class_ogroupManagement.inc:340
 #: plugins/admin/ogroups/remove.tpl:16 plugins/admin/fai/remove.tpl:17
-#: plugins/admin/fai/class_faiManagement.inc:395
-#: plugins/admin/fai/class_faiManagement.inc:400
+#: plugins/admin/fai/class_faiManagement.inc:394
+#: plugins/admin/fai/class_faiManagement.inc:399
 #: plugins/admin/fai/faiPartitionTableEntry.tpl:30
 #: plugins/admin/fai/faiProfileEntry.tpl:72
 #: plugins/admin/fai/faiScriptEntry.tpl:68
@@ -988,11 +988,11 @@ msgstr "Verwijderen"
 #: plugins/admin/fai/faiHookEntry.tpl:70
 #: plugins/admin/fai/faiTemplateEntry.tpl:133
 #: plugins/admin/fai/faiPackageEntry.tpl:64
-#: plugins/admin/fai/faiPackageConfiguration.tpl:6
+#: plugins/admin/fai/faiPackageConfiguration.tpl:7
 #: plugins/admin/fai/faiPackageNew.tpl:66
 #: plugins/gofon/phoneaccount/main.inc:107 plugins/gofon/macro/remove.tpl:15
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:305
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:274
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:302
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:268
 #: plugins/gofon/conference/remove.tpl:16
 msgid "Cancel"
 msgstr "Annuleren"
@@ -1331,7 +1331,7 @@ msgstr "Regel"
 #: include/php_setup.inc:122 plugins/gofax/blocklists/generic.tpl:32
 #: plugins/admin/systems/workstationService.tpl:42
 #: plugins/admin/systems/workstationService.tpl:120
-#: plugins/admin/systems/servnfs.tpl:31
+#: plugins/admin/systems/servnfs.tpl:39
 #: plugins/admin/systems/terminalService.tpl:42
 #: plugins/admin/systems/terminalService.tpl:120
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:179
@@ -1343,21 +1343,21 @@ msgstr "Type"
 msgid "Arguments"
 msgstr "Argumenten"
 
-#: include/functions.inc:282
+#: include/functions.inc:290
 #, php-format
 msgid "Error when connecting the LDAP. Server said '%s'."
 msgstr "Fout bij het verbinden met de LDAP server. De server meldt: '%s'."
 
-#: include/functions.inc:303
+#: include/functions.inc:311
 #, php-format
 msgid "User login failed. LDAP server said '%s'."
 msgstr "Gebruikers inlog mislukt. De LDAP server meldt: '%s'."
 
-#: include/functions.inc:322
+#: include/functions.inc:330
 msgid "Username / UID is not unique. Please check your LDAP database."
 msgstr "Gebruikersnaam / UID is niet uniek. Controleer uw LDAP database a.u.b."
 
-#: include/functions.inc:360
+#: include/functions.inc:368
 msgid ""
 "Error while adding a lock. Parameters are not set correctly, please check "
 "the source!"
@@ -1365,7 +1365,7 @@ msgstr ""
 "Fout bij het plaatsen van een blokkade. Parameters zijn niet goed ingesteld. "
 "Controleer de bron!"
 
-#: include/functions.inc:370
+#: include/functions.inc:378
 #, php-format
 msgid ""
 "Can't set locking information in LDAP database. Please check the 'config' "
@@ -1374,17 +1374,17 @@ msgstr ""
 "Kan de blokkade informatie niet instellen in de LDAP database. Controleer a."
 "u.b. de 'config' regel in gosa.conf! De LDAP server meldt: '%s'."
 
-#: include/functions.inc:385
+#: include/functions.inc:393
 #, php-format
 msgid "Adding a lock failed. LDAP server says '%s'."
 msgstr "Plaatsen van een blokkade mislukt. De LDAP server meldt: '%s'."
 
-#: include/functions.inc:411
+#: include/functions.inc:419
 #, php-format
 msgid "Removing a lock failed. LDAP server says '%s'."
 msgstr "Verwijderen van een blokkade mislukt. De LDAP server meldt: '%s'."
 
-#: include/functions.inc:441
+#: include/functions.inc:449
 msgid ""
 "Getting the lock from LDAP failed. Parameters are not set correctly, please "
 "check the source!"
@@ -1392,7 +1392,7 @@ msgstr ""
 "Ophalen van de blokkade uit de LDAP database is mislukt. Parameters zijn "
 "niet goed ingesteld. Controleer de bron!"
 
-#: include/functions.inc:451
+#: include/functions.inc:459
 msgid ""
 "Can't get locking information in LDAP database. Please check the 'config' "
 "entry in gosa.conf!"
@@ -1400,7 +1400,7 @@ msgstr ""
 "Kan de blokkade informatie niet ophalen uit de LDAP database. Controleer a.u."
 "b. de 'config' regel in gosa.conf!"
 
-#: include/functions.inc:459
+#: include/functions.inc:467
 msgid ""
 "Found multiple locks for object to be locked. This should not be possible - "
 "cleaning up multiple references."
@@ -1408,12 +1408,12 @@ msgstr ""
 "Er zijn meerdere blokkades voor het te blokkeren object gevonden. Dat zou "
 "niet mogelijk moeten zijn. Meervoudige verwijzingen worden opgeschoond."
 
-#: include/functions.inc:573
+#: include/functions.inc:581
 #, php-format
 msgid "The size limit of %d entries is exceed!"
 msgstr "De hoeveelheidslimiet van %d invoeren is overschreden!"
 
-#: include/functions.inc:575
+#: include/functions.inc:583
 #, php-format
 msgid ""
 "Set the new size limit to %s and show me this message if the limit still "
@@ -1422,15 +1422,15 @@ msgstr ""
 "Stel de nieuwe hoeveelheidslimiet in op %s en toon me dit bericht indien de "
 "limiet nog steeds overschreden wordt."
 
-#: include/functions.inc:587 plugins/admin/fai/faiPackage.tpl:76
+#: include/functions.inc:595 plugins/admin/fai/faiPackage.tpl:76
 msgid "Configure"
 msgstr "Instellen"
 
-#: include/functions.inc:592
+#: include/functions.inc:600
 msgid "incomplete"
 msgstr "onvolledig"
 
-#: include/functions.inc:997
+#: include/functions.inc:1007
 #, php-format
 msgid ""
 "You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
@@ -1440,23 +1440,23 @@ msgstr ""
 "gebruiker '%s'. Neem a.u.b. contact op met deze persoon om eea kort te "
 "sluiten."
 
-#: include/functions.inc:1096
+#: include/functions.inc:1106
 msgid "LDAP error:"
 msgstr "LDAP fout:"
 
-#: include/functions.inc:1274
+#: include/functions.inc:1284
 msgid "Entries per page"
 msgstr "Regels per pagina"
 
-#: include/functions.inc:1302
+#: include/functions.inc:1312
 msgid "Apply filter"
 msgstr "Filter toepassen"
 
-#: include/functions.inc:1576
+#: include/functions.inc:1586
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-#: include/functions.inc:1619
+#: include/functions.inc:1629
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "GOsa ontwikkelversie (Revisie %s)"
@@ -2396,7 +2396,7 @@ msgstr "Primair adres"
 #: plugins/personal/mail/generic.tpl:11
 #: plugins/addons/mailqueue/contents.tpl:55 plugins/admin/groups/mail.tpl:14
 #: plugins/admin/systems/class_systemManagement.inc:709
-#: plugins/admin/ogroups/class_ogroupManagement.inc:486
+#: plugins/admin/ogroups/class_ogroupManagement.inc:485
 #: plugins/generic/references/class_reference.inc:44
 msgid "Server"
 msgstr "Server"
@@ -2607,16 +2607,16 @@ msgstr "schakelt alle E-mail opties uit!"
 #: plugins/personal/nagios/main.inc:104
 #: plugins/gofax/blocklists/generic.tpl:80
 #: plugins/gofax/faxaccount/main.inc:89
-#: plugins/admin/groups/class_groupManagement.inc:331
+#: plugins/admin/groups/class_groupManagement.inc:330
 #: plugins/admin/users/class_userManagement.inc:633
 #: plugins/admin/applications/class_applicationManagement.inc:304
-#: plugins/admin/departments/class_departmentManagement.inc:350
+#: plugins/admin/departments/class_departmentManagement.inc:347
 #: plugins/admin/systems/class_systemManagement.inc:539
-#: plugins/admin/ogroups/class_ogroupManagement.inc:339
-#: plugins/admin/fai/class_faiManagement.inc:393
+#: plugins/admin/ogroups/class_ogroupManagement.inc:338
+#: plugins/admin/fai/class_faiManagement.inc:392
 #: plugins/gofon/phoneaccount/main.inc:105
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:303
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:272
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:300
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:266
 msgid "Finish"
 msgstr "Opslaan"
 
@@ -3213,12 +3213,12 @@ msgid "Value specified as 'UID' is too small."
 msgstr "De opgegeven 'UID' waarde is te klein."
 
 #: plugins/personal/posix/class_posixAccount.inc:898
-#: plugins/admin/groups/class_groupGeneric.inc:659
+#: plugins/admin/groups/class_groupGeneric.inc:662
 msgid "Value specified as 'GID' is not valid."
 msgstr "De opgegeven 'GID' waarde is niet geldig."
 
 #: plugins/personal/posix/class_posixAccount.inc:901
-#: plugins/admin/groups/class_groupGeneric.inc:662
+#: plugins/admin/groups/class_groupGeneric.inc:665
 msgid "Value specified as 'GID' is too small."
 msgstr "De opgegeven 'GID' waarde is te klein."
 
@@ -3262,7 +3262,7 @@ msgstr ""
 "De waarde opgegeven voor 'shadowMin' moet kleiner zijn dan 'shadowMax'."
 
 #: plugins/personal/posix/class_posixAccount.inc:1063
-#: plugins/admin/groups/class_groupGeneric.inc:693
+#: plugins/admin/groups/class_groupGeneric.inc:696
 msgid "Too many users, can't allocate a free ID!"
 msgstr ""
 "Er zitten te veel gebruikers in de database. Kan geen vrij ID toewijzen!"
@@ -3619,7 +3619,7 @@ msgstr "Het veld 'Website' bevat een ongeldige URL."
 #: plugins/personal/generic/class_user.inc:989
 #: plugins/addons/addressbook/class_addressbook.inc:557
 #: plugins/addons/addressbook/class_addressbook.inc:585
-#: plugins/admin/departments/class_departmentGeneric.inc:169
+#: plugins/admin/departments/class_departmentGeneric.inc:176
 msgid "The field 'Name' contains invalid characters."
 msgstr "Het veld 'Naam' bevat ongeldige karakters."
 
@@ -3634,13 +3634,13 @@ msgstr "Het veld 'Voornaam' bevat ongeldige karakters."
 #: plugins/personal/generic/class_user.inc:972
 #: plugins/addons/addressbook/class_addressbook.inc:565
 #: plugins/addons/addressbook/class_addressbook.inc:568
-#: plugins/admin/departments/class_departmentGeneric.inc:172
+#: plugins/admin/departments/class_departmentGeneric.inc:179
 msgid "The field 'Phone' contains an invalid phone number."
 msgstr "Het veld 'Telefoon' bevat een ongeldig telefoonnummer."
 
 #: plugins/personal/generic/class_user.inc:975
 #: plugins/addons/addressbook/class_addressbook.inc:571
-#: plugins/admin/departments/class_departmentGeneric.inc:175
+#: plugins/admin/departments/class_departmentGeneric.inc:182
 msgid "The field 'Fax' contains an invalid phone number."
 msgstr "Het veld 'Fax' bevat een ongeldig Faxnummer."
 
@@ -3770,16 +3770,16 @@ msgid "Organizational information"
 msgstr "Organisatie informatie"
 
 #: plugins/personal/generic/generic.tpl:194
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:310
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:307
 #: plugins/addons/addressbook/address_edit.tpl:138
 #: plugins/addons/addressbook/address_info.tpl:64
-#: plugins/admin/groups/class_groupManagement.inc:386
+#: plugins/admin/groups/class_groupManagement.inc:385
 #: plugins/admin/users/class_userManagement.inc:690
 #: plugins/admin/applications/class_applicationManagement.inc:357
 #: plugins/admin/systems/class_systemManagement.inc:589
-#: plugins/admin/ogroups/class_ogroupManagement.inc:417
-#: plugins/admin/ogroups/class_ogroupManagement.inc:485
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:345
+#: plugins/admin/ogroups/class_ogroupManagement.inc:416
+#: plugins/admin/ogroups/class_ogroupManagement.inc:484
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:342
 #: plugins/generic/references/class_reference.inc:38
 msgid "Department"
 msgstr "Afdeling"
@@ -3855,7 +3855,7 @@ msgstr "Plaatje verwijderen"
 
 #: plugins/personal/generic/generic_picture.tpl:29
 #: plugins/addons/addressbook/address_edit.tpl:233
-#: plugins/admin/systems/servnfs.tpl:91
+#: plugins/admin/systems/servnfs.tpl:75
 #: plugins/admin/fai/faiPartitionTableEntry.tpl:29
 msgid "Save"
 msgstr "Opslaan"
@@ -4411,8 +4411,8 @@ msgid "Hotplug device settings"
 msgstr "Hotplug apparaat instellingen"
 
 #: plugins/personal/environment/environment.tpl:160
-#: plugins/admin/groups/class_groupManagement.inc:355
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:331
+#: plugins/admin/groups/class_groupManagement.inc:354
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:328
 msgid "New"
 msgstr "Nieuw"
 
@@ -4540,7 +4540,7 @@ msgstr "Login script"
 #: plugins/admin/fai/faiHookEntry.tpl:69
 #: plugins/admin/fai/faiTemplateEntry.tpl:132
 #: plugins/admin/fai/faiPackageEntry.tpl:63
-#: plugins/admin/fai/faiPackageConfiguration.tpl:5
+#: plugins/admin/fai/faiPackageConfiguration.tpl:6
 msgid "Apply"
 msgstr "Toepassen"
 
@@ -4752,227 +4752,227 @@ msgstr "Fax blokkeerlijsten"
 msgid "You're about to delete the blocklist '%s'."
 msgstr "U staat op het punt blokkeerlijst '%s' te verwijderen."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:220
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:218
 msgid "You have no permission to remove this blocklist."
 msgstr "U heeft geen toestemming om deze blokkeerlijst te verwijderen."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:238
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:236
 msgid "Please specify a valid phone number."
 msgstr "Geef a.u.b. een geldig telefoonnummer op."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:294
-#: plugins/admin/groups/class_groupManagement.inc:351
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:291
+#: plugins/admin/groups/class_groupManagement.inc:350
 #: plugins/admin/users/class_userManagement.inc:670
 #: plugins/admin/applications/class_applicationManagement.inc:326
-#: plugins/admin/departments/class_departmentManagement.inc:280
+#: plugins/admin/departments/class_departmentManagement.inc:277
 #: plugins/admin/systems/class_systemManagement.inc:565
-#: plugins/admin/ogroups/class_ogroupManagement.inc:359
-#: plugins/admin/fai/class_faiManagement.inc:429
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:327
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:291
+#: plugins/admin/ogroups/class_ogroupManagement.inc:358
+#: plugins/admin/fai/class_faiManagement.inc:428
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:324
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:285
 msgid "Go up one department"
 msgstr "Ga een afdeling omhoog"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:294
-#: plugins/admin/groups/class_groupManagement.inc:351
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:291
+#: plugins/admin/groups/class_groupManagement.inc:350
 #: plugins/admin/users/class_userManagement.inc:670
 #: plugins/admin/applications/class_applicationManagement.inc:326
-#: plugins/admin/departments/class_departmentManagement.inc:280
+#: plugins/admin/departments/class_departmentManagement.inc:277
 #: plugins/admin/systems/class_systemManagement.inc:565
-#: plugins/admin/ogroups/class_ogroupManagement.inc:359
+#: plugins/admin/ogroups/class_ogroupManagement.inc:358
 #: plugins/admin/ogroups/phonequeue.tpl:17
-#: plugins/admin/fai/class_faiManagement.inc:429
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:327
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:291
+#: plugins/admin/fai/class_faiManagement.inc:428
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:324
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:285
 msgid "Up"
 msgstr "Omhoog"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:295
-#: plugins/admin/groups/class_groupManagement.inc:352
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:292
+#: plugins/admin/groups/class_groupManagement.inc:351
 #: plugins/admin/users/class_userManagement.inc:671
 #: plugins/admin/applications/class_applicationManagement.inc:327
-#: plugins/admin/departments/class_departmentManagement.inc:281
+#: plugins/admin/departments/class_departmentManagement.inc:278
 #: plugins/admin/systems/class_systemManagement.inc:566
-#: plugins/admin/ogroups/class_ogroupManagement.inc:360
-#: plugins/admin/fai/class_faiManagement.inc:432
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:328
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:292
+#: plugins/admin/ogroups/class_ogroupManagement.inc:359
+#: plugins/admin/fai/class_faiManagement.inc:431
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:325
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:286
 msgid "Go to root department"
 msgstr "Ga naar basis afdelingen"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:295
-#: plugins/admin/groups/class_groupManagement.inc:352
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:292
+#: plugins/admin/groups/class_groupManagement.inc:351
 #: plugins/admin/users/class_userManagement.inc:671
 #: plugins/admin/applications/class_applicationManagement.inc:327
-#: plugins/admin/departments/class_departmentManagement.inc:281
+#: plugins/admin/departments/class_departmentManagement.inc:278
 #: plugins/admin/systems/class_systemManagement.inc:566
-#: plugins/admin/ogroups/class_ogroupManagement.inc:361
-#: plugins/admin/fai/class_faiManagement.inc:432
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:328
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:292
+#: plugins/admin/ogroups/class_ogroupManagement.inc:360
+#: plugins/admin/fai/class_faiManagement.inc:431
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:325
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:286
 msgid "Root"
 msgstr "Basis"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:296
-#: plugins/admin/groups/class_groupManagement.inc:353
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:293
+#: plugins/admin/groups/class_groupManagement.inc:352
 #: plugins/admin/users/class_userManagement.inc:672
 #: plugins/admin/applications/class_applicationManagement.inc:328
 #: plugins/admin/systems/class_systemManagement.inc:567
-#: plugins/admin/ogroups/class_ogroupManagement.inc:362
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:329
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:293
+#: plugins/admin/ogroups/class_ogroupManagement.inc:361
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:326
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:287
 msgid "Go to users department"
 msgstr "Ga naar gebruikers afdeling"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:296
-#: plugins/admin/groups/class_groupManagement.inc:353
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:293
+#: plugins/admin/groups/class_groupManagement.inc:352
 #: plugins/admin/users/class_userManagement.inc:672
 #: plugins/admin/applications/class_applicationManagement.inc:328
-#: plugins/admin/departments/class_departmentManagement.inc:282
+#: plugins/admin/departments/class_departmentManagement.inc:279
 #: plugins/admin/systems/class_systemManagement.inc:567
-#: plugins/admin/ogroups/class_ogroupManagement.inc:363
-#: plugins/admin/fai/class_faiManagement.inc:435
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:329
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:293
+#: plugins/admin/ogroups/class_ogroupManagement.inc:362
+#: plugins/admin/fai/class_faiManagement.inc:434
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:326
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:287
 msgid "Home"
 msgstr "Home"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:298
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:295
 msgid "Create new blocklist"
 msgstr "Nieuwe blokkeerlijst aanmaken"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:298
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:295
 msgid "New Blocklist"
 msgstr "Nieuwe Blokkeerlijst"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:299
-#: plugins/admin/groups/class_groupManagement.inc:357
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:296
+#: plugins/admin/groups/class_groupManagement.inc:356
 #: plugins/admin/users/class_userManagement.inc:677
 #: plugins/admin/applications/class_applicationManagement.inc:332
-#: plugins/admin/departments/class_departmentManagement.inc:286
+#: plugins/admin/departments/class_departmentManagement.inc:283
 #: plugins/admin/systems/class_systemManagement.inc:576
-#: plugins/admin/ogroups/class_ogroupManagement.inc:367
-#: plugins/admin/fai/class_faiManagement.inc:464
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:333
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:297
+#: plugins/admin/ogroups/class_ogroupManagement.inc:366
+#: plugins/admin/fai/class_faiManagement.inc:463
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:330
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:291
 msgid "Current base"
 msgstr "Huidige basis"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:300
-#: plugins/admin/groups/class_groupManagement.inc:358
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:297
+#: plugins/admin/groups/class_groupManagement.inc:357
 #: plugins/admin/users/class_userManagement.inc:678
 #: plugins/admin/applications/class_applicationManagement.inc:333
-#: plugins/admin/departments/class_departmentManagement.inc:287
+#: plugins/admin/departments/class_departmentManagement.inc:284
 #: plugins/admin/systems/class_systemManagement.inc:577
-#: plugins/admin/ogroups/class_ogroupManagement.inc:368
-#: plugins/admin/fai/class_faiManagement.inc:465
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:334
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:298
+#: plugins/admin/ogroups/class_ogroupManagement.inc:367
+#: plugins/admin/fai/class_faiManagement.inc:464
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:331
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:292
 msgid "Submit department"
 msgstr "Verwerk afdeling"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:300
-#: plugins/admin/groups/class_groupManagement.inc:358
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:297
+#: plugins/admin/groups/class_groupManagement.inc:357
 #: plugins/admin/users/class_userManagement.inc:678
 #: plugins/admin/applications/class_applicationManagement.inc:333
-#: plugins/admin/departments/class_departmentManagement.inc:287
+#: plugins/admin/departments/class_departmentManagement.inc:284
 #: plugins/admin/systems/class_systemManagement.inc:577
-#: plugins/admin/ogroups/class_ogroupManagement.inc:368
-#: plugins/admin/fai/class_faiManagement.inc:465
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:334
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:298
+#: plugins/admin/ogroups/class_ogroupManagement.inc:367
+#: plugins/admin/fai/class_faiManagement.inc:464
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:331
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:292
 msgid "Submit"
 msgstr "Verwerk"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:303
-#: plugins/admin/groups/class_groupManagement.inc:362
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:300
+#: plugins/admin/groups/class_groupManagement.inc:361
 #: plugins/admin/users/class_userManagement.inc:681
 #: plugins/admin/applications/class_applicationManagement.inc:337
-#: plugins/admin/departments/class_departmentManagement.inc:294
+#: plugins/admin/departments/class_departmentManagement.inc:291
 #: plugins/admin/systems/class_systemManagement.inc:582
-#: plugins/admin/ogroups/class_ogroupManagement.inc:372
-#: plugins/admin/fai/class_faiManagement.inc:483
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:339
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:302
+#: plugins/admin/ogroups/class_ogroupManagement.inc:371
+#: plugins/admin/fai/class_faiManagement.inc:482
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:336
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:296
 msgid "edit"
 msgstr "Bewerk"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:303
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:300
 #: plugins/admin/users/class_userManagement.inc:681
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:339
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:336
 msgid "Edit user"
 msgstr "Bewerk gebruiker"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:304
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:301
 #: plugins/addons/mailqueue/contents.tpl:95
-#: plugins/admin/groups/class_groupManagement.inc:363
+#: plugins/admin/groups/class_groupManagement.inc:362
 #: plugins/admin/users/class_userManagement.inc:683
 #: plugins/admin/applications/class_applicationManagement.inc:338
-#: plugins/admin/departments/class_departmentManagement.inc:295
+#: plugins/admin/departments/class_departmentManagement.inc:292
 #: plugins/admin/systems/class_systemManagement.inc:583
-#: plugins/admin/ogroups/class_ogroupManagement.inc:373
-#: plugins/admin/fai/class_faiManagement.inc:484
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:340
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:303
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:305
+#: plugins/admin/ogroups/class_ogroupManagement.inc:372
+#: plugins/admin/fai/class_faiManagement.inc:483
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:337
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:297
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:299
 msgid "delete"
 msgstr "Verwijder"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:304
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:301
 #: plugins/admin/users/class_userManagement.inc:683
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:340
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:337
 msgid "Delete user"
 msgstr "Verwijder gebruiker"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:310
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:307
 msgid "Blocklist name"
 msgstr "Blokkeerlijst naam"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:311
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:308
 #: plugins/addons/addressbook/contents.tpl:42
-#: plugins/admin/groups/class_groupManagement.inc:388
+#: plugins/admin/groups/class_groupManagement.inc:387
 #: plugins/admin/users/class_userManagement.inc:692
 #: plugins/admin/applications/class_applicationManagement.inc:358
-#: plugins/admin/departments/class_departmentManagement.inc:302
+#: plugins/admin/departments/class_departmentManagement.inc:299
 #: plugins/admin/systems/class_systemManagement.inc:590
-#: plugins/admin/ogroups/class_ogroupManagement.inc:394
-#: plugins/admin/fai/class_faiManagement.inc:480
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:347
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:318
+#: plugins/admin/ogroups/class_ogroupManagement.inc:393
+#: plugins/admin/fai/class_faiManagement.inc:479
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:344
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:312
 msgid "Actions"
 msgstr "Acties"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:314
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:311
 msgid "This table displays faxblocklists for the selected tree."
 msgstr "Deze tabel toont Fax blokeerlijsten voor de geselecteerde tree"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:382
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:379
 msgid "send"
 msgstr "versturen"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:382
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:379
 msgid "receive"
 msgstr "ontvangen"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:528
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:516
 msgid "You have no permissions to create a blocklist on this 'Base'."
 msgstr ""
 "U heeft geen toestemming een blokkeerlijst aan te maken onder deze 'basis'."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:534
-#: plugins/admin/departments/class_departmentGeneric.inc:157
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:522
+#: plugins/admin/departments/class_departmentGeneric.inc:164
 msgid "Required field 'Name' is not set."
 msgstr "Vereist veld 'Naam' is leeg."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:537
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:525
 msgid "Required field 'Name' contains invalid characters"
 msgstr "Vereist veld 'Naam' bevat ongeldige karakters"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:545
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:533
 msgid "Specified name is already used."
 msgstr "De opgegeven naam wordt al gebruikt."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:552
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:540
 msgid "No permission to create a blocklist on this base."
 msgstr "Geen toestemming om een blokkeerlijst aan te maken onder deze basis."
 
@@ -5214,7 +5214,7 @@ msgstr "Fax ID"
 #: plugins/gofax/faxreports/detail.tpl:22
 #: plugins/gofax/faxreports/contents.tpl:30
 #: plugins/admin/systems/class_printGeneric.inc:589
-#: plugins/admin/ogroups/class_ogroupManagement.inc:482
+#: plugins/admin/ogroups/class_ogroupManagement.inc:481
 #: plugins/admin/fai/faiTemplateEntry.tpl:94
 msgid "User"
 msgstr "Gebruiker"
@@ -6039,37 +6039,37 @@ msgstr ""
 "Kan de SID van deze groep niet vinden in de LDAP database of in uw "
 "configuratie bestand."
 
-#: plugins/admin/groups/class_groupGeneric.inc:164
+#: plugins/admin/groups/class_groupGeneric.inc:167
 msgid "This 'dn' is no group."
 msgstr "Deze 'dn' is geen groep."
 
-#: plugins/admin/groups/class_groupGeneric.inc:281
+#: plugins/admin/groups/class_groupGeneric.inc:284
 msgid "Samba group"
 msgstr "Samba groep"
 
-#: plugins/admin/groups/class_groupGeneric.inc:281
+#: plugins/admin/groups/class_groupGeneric.inc:284
 msgid "Domain admins"
 msgstr "Windows beheerders"
 
-#: plugins/admin/groups/class_groupGeneric.inc:281
+#: plugins/admin/groups/class_groupGeneric.inc:284
 msgid "Domain users"
 msgstr "Windows gebruikers"
 
-#: plugins/admin/groups/class_groupGeneric.inc:282
+#: plugins/admin/groups/class_groupGeneric.inc:285
 msgid "Domain guests"
 msgstr "Windows gasten"
 
-#: plugins/admin/groups/class_groupGeneric.inc:287
+#: plugins/admin/groups/class_groupGeneric.inc:290
 #, php-format
 msgid "Special group (%d)"
 msgstr "Speciale groep (%d)"
 
-#: plugins/admin/groups/class_groupGeneric.inc:623
-#: plugins/admin/ogroups/class_ogroup.inc:526
+#: plugins/admin/groups/class_groupGeneric.inc:626
+#: plugins/admin/ogroups/class_ogroup.inc:531
 msgid "You have no permissions to create a group on this 'Base'."
 msgstr "U heeft geen toestemming een groep aan te maken onder deze 'Basis'."
 
-#: plugins/admin/groups/class_groupGeneric.inc:633
+#: plugins/admin/groups/class_groupGeneric.inc:636
 msgid ""
 "The field 'Name' contains invalid characters. Lowercase, numbers and dashes "
 "are allowed."
@@ -6077,8 +6077,8 @@ msgstr ""
 "Het veld 'Naam' bevat ongeldige karakters. Kleine letters, cijfers en "
 "liggende streepjes zijn toegestaan."
 
-#: plugins/admin/groups/class_groupGeneric.inc:644
-#: plugins/admin/groups/class_groupGeneric.inc:651
+#: plugins/admin/groups/class_groupGeneric.inc:647
+#: plugins/admin/groups/class_groupGeneric.inc:654
 msgid "Value specified as 'Name' is already used."
 msgstr "De waarde die opgegeven is voor de naam wordt al gebruikt."
 
@@ -6124,68 +6124,68 @@ msgstr ""
 msgid "Group administration"
 msgstr "Groepen beheer"
 
-#: plugins/admin/groups/class_groupManagement.inc:276
+#: plugins/admin/groups/class_groupManagement.inc:275
 #, php-format
 msgid "You're about to delete the group '%s'."
 msgstr "U staat op het punt de groep '%s' te verwijderen."
 
-#: plugins/admin/groups/class_groupManagement.inc:282
-#: plugins/admin/groups/class_groupManagement.inc:308
+#: plugins/admin/groups/class_groupManagement.inc:281
+#: plugins/admin/groups/class_groupManagement.inc:307
 msgid "You are not allowed to delete this group!"
 msgstr "U heeft geen toestemming om deze groep te verwijderen!"
 
-#: plugins/admin/groups/class_groupManagement.inc:355
+#: plugins/admin/groups/class_groupManagement.inc:354
 msgid "Create new group"
 msgstr "Nieuwe groep aanmaken"
 
-#: plugins/admin/groups/class_groupManagement.inc:362
+#: plugins/admin/groups/class_groupManagement.inc:361
 #: plugins/admin/applications/class_applicationManagement.inc:337
-#: plugins/admin/departments/class_departmentManagement.inc:294
-#: plugins/admin/ogroups/class_ogroupManagement.inc:372
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:302
+#: plugins/admin/departments/class_departmentManagement.inc:291
+#: plugins/admin/ogroups/class_ogroupManagement.inc:371
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:296
 msgid "Edit this entry"
 msgstr "Bewerk deze invoer"
 
-#: plugins/admin/groups/class_groupManagement.inc:363
+#: plugins/admin/groups/class_groupManagement.inc:362
 #: plugins/admin/applications/class_applicationManagement.inc:338
-#: plugins/admin/departments/class_departmentManagement.inc:295
-#: plugins/admin/ogroups/class_ogroupManagement.inc:373
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:303
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:305
+#: plugins/admin/departments/class_departmentManagement.inc:292
+#: plugins/admin/ogroups/class_ogroupManagement.inc:372
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:297
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:299
 msgid "Delete this entry"
 msgstr "Verwijder deze invoer"
 
-#: plugins/admin/groups/class_groupManagement.inc:373
+#: plugins/admin/groups/class_groupManagement.inc:372
 #: plugins/admin/users/class_userManagement.inc:728
 msgid "Posix"
 msgstr "Posix"
 
-#: plugins/admin/groups/class_groupManagement.inc:376
+#: plugins/admin/groups/class_groupManagement.inc:375
 #: plugins/admin/applications/class_applicationManagement.inc:348
-#: plugins/admin/ogroups/class_ogroupManagement.inc:484
+#: plugins/admin/ogroups/class_ogroupManagement.inc:483
 #: plugins/gofon/fonreports/contents.tpl:34
 #: plugins/generic/references/class_reference.inc:42
 msgid "Application"
 msgstr "Programma"
 
-#: plugins/admin/groups/class_groupManagement.inc:386
+#: plugins/admin/groups/class_groupManagement.inc:385
 msgid "Groupname"
 msgstr "Groepnaam"
 
-#: plugins/admin/groups/class_groupManagement.inc:387
+#: plugins/admin/groups/class_groupManagement.inc:386
 #: plugins/admin/users/class_userManagement.inc:691
 #: plugins/admin/departments/generic.tpl:4
 #: plugins/admin/systems/terminal.tpl:1
 #: plugins/admin/systems/workstation.tpl:1
-#: plugins/admin/ogroups/class_ogroupManagement.inc:393
+#: plugins/admin/ogroups/class_ogroupManagement.inc:392
 #: plugins/admin/fai/faiScriptEntry.tpl:29
 #: plugins/gofon/conference/generic.tpl:4
 msgid "Properties"
 msgstr "Eigenschappen"
 
-#: plugins/admin/groups/class_groupManagement.inc:391
+#: plugins/admin/groups/class_groupManagement.inc:390
 #: plugins/admin/applications/class_applicationManagement.inc:362
-#: plugins/admin/ogroups/class_ogroupManagement.inc:398
+#: plugins/admin/ogroups/class_ogroupManagement.inc:397
 msgid "This table displays all groups, in the selected tree."
 msgstr "Deze tabel geeft alle groepen binnen de geselecteerde tree weer"
 
@@ -6397,8 +6397,8 @@ msgid "The selected application has no options."
 msgstr "Het geselecteerde programma heeft geen opties."
 
 #: plugins/admin/groups/class_groupApplication.inc:371
-#: plugins/admin/departments/class_departmentManagement.inc:318
-#: plugins/admin/fai/class_faiManagement.inc:504
+#: plugins/admin/departments/class_departmentManagement.inc:315
+#: plugins/admin/fai/class_faiManagement.inc:503
 msgid "department"
 msgstr "afdeling"
 
@@ -6450,7 +6450,7 @@ msgstr ""
 "gebruik van sjablonen over te slaan."
 
 #: plugins/admin/users/template.tpl:11
-#: plugins/admin/users/class_userManagement.inc:1020
+#: plugins/admin/users/class_userManagement.inc:1028
 #: plugins/admin/systems/class_systemManagement.inc:705
 msgid "Template"
 msgstr "Sjabloon"
@@ -6477,7 +6477,7 @@ msgstr "U heeft geen toestemming om deze gebruiker te verwijderen!"
 
 #: plugins/admin/users/class_userManagement.inc:488
 #: plugins/admin/systems/class_workstationStartup.inc:49
-#: plugins/admin/ogroups/class_ogroup.inc:235
+#: plugins/admin/ogroups/class_ogroup.inc:240
 msgid "none"
 msgstr "geen"
 
@@ -6775,7 +6775,7 @@ msgid "You are not allowed to delete this application!"
 msgstr "U heeft geen toestemming dit programma te verwijderen"
 
 #: plugins/admin/applications/class_applicationManagement.inc:330
-#: plugins/admin/ogroups/class_ogroupManagement.inc:365
+#: plugins/admin/ogroups/class_ogroupManagement.inc:364
 msgid "new"
 msgstr "nieuw"
 
@@ -6922,61 +6922,61 @@ msgstr "Afdeling beheer"
 
 #: plugins/admin/departments/class_departmentManagement.inc:25
 #: plugins/admin/ogroups/class_ogroupManagement.inc:43
-#: plugins/admin/ogroups/class_ogroupManagement.inc:392
+#: plugins/admin/ogroups/class_ogroupManagement.inc:391
 msgid "Departments"
 msgstr "Afdelingen"
 
-#: plugins/admin/departments/class_departmentManagement.inc:188
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:178
+#: plugins/admin/departments/class_departmentManagement.inc:185
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:182
 #, php-format
 msgid "You're about to delete the whole LDAP subtree placed under '%s'."
 msgstr "U staat op het punt de hele LDAP subtree onder '%s' te verwijderen."
 
-#: plugins/admin/departments/class_departmentManagement.inc:205
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:195
+#: plugins/admin/departments/class_departmentManagement.inc:202
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:197
 msgid "You have no permission to remove this department."
 msgstr "U heeft geen toestemming om deze afdeling te verwijderen."
 
-#: plugins/admin/departments/class_departmentManagement.inc:282
-#: plugins/admin/fai/class_faiManagement.inc:435
+#: plugins/admin/departments/class_departmentManagement.inc:279
+#: plugins/admin/fai/class_faiManagement.inc:434
 msgid "Go to users home department"
 msgstr "Ga naar de afdeling van de gebruiker"
 
-#: plugins/admin/departments/class_departmentManagement.inc:284
+#: plugins/admin/departments/class_departmentManagement.inc:281
 msgid "Create new department"
 msgstr "Nieuwe afdeling aanmaken"
 
-#: plugins/admin/departments/class_departmentManagement.inc:292
+#: plugins/admin/departments/class_departmentManagement.inc:289
 msgid "This table displays all departments, in the selected tree."
 msgstr "Deze tabel toont alle afdelingen in de geselecteerde tree."
 
-#: plugins/admin/departments/class_departmentManagement.inc:301
+#: plugins/admin/departments/class_departmentManagement.inc:298
 msgid "Department name"
 msgstr "Afdelingnaam"
 
-#: plugins/admin/departments/class_departmentManagement.inc:395
+#: plugins/admin/departments/class_departmentManagement.inc:392
 msgid ".."
 msgstr ".."
 
-#: plugins/admin/departments/class_departmentGeneric.inc:143
+#: plugins/admin/departments/class_departmentGeneric.inc:150
 msgid "You have no permissions to create a department on this 'Base'."
 msgstr ""
 "U heeft geen toestemming om een afdeling aan te maken onder deze 'Basis'."
 
-#: plugins/admin/departments/class_departmentGeneric.inc:150
-#: plugins/admin/departments/class_departmentGeneric.inc:152
+#: plugins/admin/departments/class_departmentGeneric.inc:157
+#: plugins/admin/departments/class_departmentGeneric.inc:159
 msgid "Department with that 'Name' already exists."
 msgstr "Er bestaat al een afdeling met deze 'Naam'."
 
-#: plugins/admin/departments/class_departmentGeneric.inc:160
+#: plugins/admin/departments/class_departmentGeneric.inc:167
 msgid "Required field 'Description' is not set."
 msgstr "Vereist veld 'Omschrijving' is leeg."
 
-#: plugins/admin/departments/class_departmentGeneric.inc:165
+#: plugins/admin/departments/class_departmentGeneric.inc:172
 msgid "The field 'Name' contains the reserved word 'incoming'."
 msgstr "Het veld 'Naam' bevat het gereserveerde woord 'incoming'."
 
-#: plugins/admin/departments/class_departmentGeneric.inc:166
+#: plugins/admin/departments/class_departmentGeneric.inc:173
 msgid " Please choose another name."
 msgstr "Kies a.u.b. een andere naam."
 
@@ -7598,8 +7598,8 @@ msgstr ""
 
 #: plugins/admin/systems/class_systemManagement.inc:413
 #: plugins/admin/systems/class_systemManagement.inc:477
-#: plugins/admin/fai/class_faiManagement.inc:211
-#: plugins/admin/fai/class_faiManagement.inc:250
+#: plugins/admin/fai/class_faiManagement.inc:210
+#: plugins/admin/fai/class_faiManagement.inc:249
 msgid "You are not allowed to delete this component!"
 msgstr "U heeft geen toestemming om dit component te verwijderen!"
 
@@ -7650,7 +7650,7 @@ msgid "System"
 msgstr "Systeem"
 
 #: plugins/admin/systems/class_systemManagement.inc:592
-#: plugins/admin/fai/class_faiManagement.inc:474
+#: plugins/admin/fai/class_faiManagement.inc:473
 msgid "This table displays all systems, in the selected tree."
 msgstr "Deze tabel toont alle systemen in de geselecteerde tree"
 
@@ -7699,12 +7699,12 @@ msgid "Set root password"
 msgstr "root wachtwoord instellen"
 
 #: plugins/admin/systems/class_systemManagement.inc:706
-#: plugins/admin/ogroups/class_ogroupManagement.inc:489
+#: plugins/admin/ogroups/class_ogroupManagement.inc:488
 msgid "Terminal"
 msgstr "Terminal"
 
 #: plugins/admin/systems/class_systemManagement.inc:707
-#: plugins/admin/ogroups/class_ogroupManagement.inc:488
+#: plugins/admin/ogroups/class_ogroupManagement.inc:487
 #: plugins/generic/references/class_reference.inc:48
 msgid "Workstation"
 msgstr "Werkstation"
@@ -7818,7 +7818,7 @@ msgstr ""
 
 #: plugins/admin/systems/class_printGeneric.inc:584
 #: plugins/admin/systems/class_printGeneric.inc:586
-#: plugins/admin/ogroups/class_ogroupManagement.inc:483
+#: plugins/admin/ogroups/class_ogroupManagement.inc:482
 #: plugins/admin/fai/faiTemplateEntry.tpl:71
 #: plugins/admin/fai/faiTemplateEntry.tpl:103
 #: plugins/generic/references/class_reference.inc:36
@@ -8242,12 +8242,12 @@ msgid "This 'dn' has no phone features."
 msgstr "Deze 'dn' heeft geen telefoon mogelijkheden."
 
 #: plugins/admin/systems/class_phoneGeneric.inc:177
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:382
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:379
 msgid "yes"
 msgstr "ja"
 
 #: plugins/admin/systems/class_phoneGeneric.inc:177
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:383
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:380
 msgid "no"
 msgstr "nee"
 
@@ -8516,19 +8516,24 @@ msgstr "Het pad bevat ongeldige karakters."
 msgid "Option contains invalid characters."
 msgstr "De optie bevat ongeldige karakters."
 
+#: plugins/admin/systems/servnfs.tpl:1
+#, fuzzy
+msgid "Edit share"
+msgstr "Bewerk gebruiker"
+
 #: plugins/admin/systems/servnfs.tpl:2
 msgid "NFS setup"
 msgstr "NFS instellingen"
 
-#: plugins/admin/systems/servnfs.tpl:41
-msgid "Charset"
-msgstr "Karakterset"
-
-#: plugins/admin/systems/servnfs.tpl:63
+#: plugins/admin/systems/servnfs.tpl:25
 msgid "Path"
 msgstr "Pad"
 
-#: plugins/admin/systems/servnfs.tpl:75
+#: plugins/admin/systems/servnfs.tpl:49
+msgid "Charset"
+msgstr "Karakterset"
+
+#: plugins/admin/systems/servnfs.tpl:59
 msgid "Option"
 msgstr "Optie"
 
@@ -8883,59 +8888,59 @@ msgstr ""
 msgid "Select action to execute for this   group of terminals"
 msgstr "Selecteer de voor deze terminal-groep uit te voeren actie"
 
-#: plugins/admin/ogroups/class_ogroup.inc:127
+#: plugins/admin/ogroups/class_ogroup.inc:132
 msgid "This 'dn' is no object group."
 msgstr "Deze 'dn' is geen objectgroep."
 
-#: plugins/admin/ogroups/class_ogroup.inc:237
+#: plugins/admin/ogroups/class_ogroup.inc:242
 msgid "too many different objects!"
 msgstr "te veel verschillende object tpyes!"
 
-#: plugins/admin/ogroups/class_ogroup.inc:239
+#: plugins/admin/ogroups/class_ogroup.inc:244
 msgid "users"
 msgstr "gebruikers"
 
-#: plugins/admin/ogroups/class_ogroup.inc:240
+#: plugins/admin/ogroups/class_ogroup.inc:245
 msgid "groups"
 msgstr "groepen"
 
-#: plugins/admin/ogroups/class_ogroup.inc:241
+#: plugins/admin/ogroups/class_ogroup.inc:246
 msgid "applications"
 msgstr "programma's"
 
-#: plugins/admin/ogroups/class_ogroup.inc:242
+#: plugins/admin/ogroups/class_ogroup.inc:247
 msgid "departments"
 msgstr "afdelingen"
 
-#: plugins/admin/ogroups/class_ogroup.inc:243
+#: plugins/admin/ogroups/class_ogroup.inc:248
 msgid "servers"
 msgstr "servers"
 
-#: plugins/admin/ogroups/class_ogroup.inc:244
+#: plugins/admin/ogroups/class_ogroup.inc:249
 msgid "workstations"
 msgstr "werkstations"
 
-#: plugins/admin/ogroups/class_ogroup.inc:245
+#: plugins/admin/ogroups/class_ogroup.inc:250
 msgid "terminals"
 msgstr "terminals"
 
-#: plugins/admin/ogroups/class_ogroup.inc:246
+#: plugins/admin/ogroups/class_ogroup.inc:251
 msgid "phones"
 msgstr "telefoons"
 
-#: plugins/admin/ogroups/class_ogroup.inc:247
+#: plugins/admin/ogroups/class_ogroup.inc:252
 msgid "printers"
 msgstr "printers"
 
-#: plugins/admin/ogroups/class_ogroup.inc:254
+#: plugins/admin/ogroups/class_ogroup.inc:259
 msgid "and"
 msgstr "en"
 
-#: plugins/admin/ogroups/class_ogroup.inc:405
+#: plugins/admin/ogroups/class_ogroup.inc:410
 msgid "Non existing dn: "
 msgstr "Niet bestaande dn: "
 
-#: plugins/admin/ogroups/class_ogroup.inc:536
+#: plugins/admin/ogroups/class_ogroup.inc:541
 msgid "You can combine two different object types at maximum only!"
 msgstr "U kunt maximaal twee verschillende object types tegelijk combineren!"
 
@@ -8956,25 +8961,25 @@ msgstr "Thin Clients"
 msgid "Workstations"
 msgstr "Werkstations"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:218
+#: plugins/admin/ogroups/class_ogroupManagement.inc:217
 #, php-format
 msgid "You're about to delete the object group '%s'."
 msgstr "U staat op het punt de objectgroep '%s' te verwijderen."
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:224
-#: plugins/admin/ogroups/class_ogroupManagement.inc:250
+#: plugins/admin/ogroups/class_ogroupManagement.inc:223
+#: plugins/admin/ogroups/class_ogroupManagement.inc:249
 msgid "You are not allowed to delete this object group!"
 msgstr "U heeft geen toestemming deze objectgroep te verwijderen!"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:365
+#: plugins/admin/ogroups/class_ogroupManagement.inc:364
 msgid "Create new object group"
 msgstr "Nieuwe objectgroep aanmaken"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:392
+#: plugins/admin/ogroups/class_ogroupManagement.inc:391
 msgid "Name of object groups"
 msgstr "Naam van objectgroepen"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:441
+#: plugins/admin/ogroups/class_ogroupManagement.inc:440
 #: plugins/generic/references/class_reference.inc:50
 msgid "Object group"
 msgstr "Objectgroep"
@@ -9138,7 +9143,7 @@ msgstr ""
 "niet opgeslagen worden."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:238
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:248
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:245
 #, php-format
 msgid ""
 "The MySQL server '%s' isn't reachable as user '%s', check GOsa log for mysql "
@@ -9152,9 +9157,9 @@ msgstr ""
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:86
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:306
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1045
-#: plugins/gofon/macro/class_gofonMacro.inc:213
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:259
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:375
+#: plugins/gofon/macro/class_gofonMacro.inc:216
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:256
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:372
 #, php-format
 msgid "Can't select database %s on %s."
 msgstr "Kan de database %s op %s niet selecteren."
@@ -9170,8 +9175,8 @@ msgstr "Kan de database %s op Server %s niet verwijderen."
 #: plugins/admin/ogroups/class_phonequeue.inc:525
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1146
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1148
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:415
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:417
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:412
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:414
 #, php-format
 msgid "The specified telephonenumber '%s' is already assigned to '%s'."
 msgstr "Het opgegeven telefoonnummer '%s' is al toegekend aan '%s'."
@@ -9180,8 +9185,8 @@ msgstr "Het opgegeven telefoonnummer '%s' is al toegekend aan '%s'."
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:79
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:295
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1034
-#: plugins/gofon/macro/class_gofonMacro.inc:202
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:364
+#: plugins/gofon/macro/class_gofonMacro.inc:205
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:361
 #, php-format
 msgid ""
 "The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql "
@@ -9321,112 +9326,112 @@ msgstr ""
 msgid "Fully Automatic Installation"
 msgstr "Fully Automatic Installation"
 
-#: plugins/admin/fai/class_faiManagement.inc:32
+#: plugins/admin/fai/class_faiManagement.inc:31
 msgid "FAI"
 msgstr "FAI"
 
-#: plugins/admin/fai/class_faiManagement.inc:33
+#: plugins/admin/fai/class_faiManagement.inc:32
 msgid "Fully Automatic Installation - management"
 msgstr "Fully Automatic Installation - beheer"
 
-#: plugins/admin/fai/class_faiManagement.inc:205
+#: plugins/admin/fai/class_faiManagement.inc:204
 #, php-format
 msgid "You're about to delete all information about the FAI class at '%s'."
 msgstr ""
 "U staat op het punt alle informatie over deze FAI klasse op '%s' te "
 "verwijderen."
 
-#: plugins/admin/fai/class_faiManagement.inc:440
+#: plugins/admin/fai/class_faiManagement.inc:439
 msgid "New profile"
 msgstr "Nieuw profiel"
 
-#: plugins/admin/fai/class_faiManagement.inc:440
+#: plugins/admin/fai/class_faiManagement.inc:439
 msgid "P"
 msgstr "PR"
 
-#: plugins/admin/fai/class_faiManagement.inc:445
+#: plugins/admin/fai/class_faiManagement.inc:444
 msgid "New partition table"
 msgstr "Nieuwe partitietabel"
 
-#: plugins/admin/fai/class_faiManagement.inc:445
+#: plugins/admin/fai/class_faiManagement.inc:444
 msgid "PT"
 msgstr "PT"
 
-#: plugins/admin/fai/class_faiManagement.inc:448
+#: plugins/admin/fai/class_faiManagement.inc:447
 msgid "New scripts"
 msgstr "Nieuwe scripts"
 
-#: plugins/admin/fai/class_faiManagement.inc:448
+#: plugins/admin/fai/class_faiManagement.inc:447
 msgid "S"
 msgstr "SC"
 
-#: plugins/admin/fai/class_faiManagement.inc:451
+#: plugins/admin/fai/class_faiManagement.inc:450
 msgid "New hooks"
 msgstr "Nieuwe inhakers"
 
-#: plugins/admin/fai/class_faiManagement.inc:451
+#: plugins/admin/fai/class_faiManagement.inc:450
 msgid "H"
 msgstr "H"
 
-#: plugins/admin/fai/class_faiManagement.inc:454
+#: plugins/admin/fai/class_faiManagement.inc:453
 msgid "New variables"
 msgstr "Nieuwe variabelen"
 
-#: plugins/admin/fai/class_faiManagement.inc:454
+#: plugins/admin/fai/class_faiManagement.inc:453
 msgid "V"
 msgstr "V"
 
-#: plugins/admin/fai/class_faiManagement.inc:457
+#: plugins/admin/fai/class_faiManagement.inc:456
 msgid "New templates"
 msgstr "Nieuwe sjablonen"
 
-#: plugins/admin/fai/class_faiManagement.inc:457
+#: plugins/admin/fai/class_faiManagement.inc:456
 msgid "T"
 msgstr "SJ"
 
-#: plugins/admin/fai/class_faiManagement.inc:460
+#: plugins/admin/fai/class_faiManagement.inc:459
 msgid "New package list"
 msgstr "Nieuwe pakketlijst"
 
-#: plugins/admin/fai/class_faiManagement.inc:460
+#: plugins/admin/fai/class_faiManagement.inc:459
 msgid "PK"
 msgstr "PK"
 
-#: plugins/admin/fai/class_faiManagement.inc:478
+#: plugins/admin/fai/class_faiManagement.inc:477
 msgid "Name of FAI class"
 msgstr "Naam van de FAI klasse"
 
-#: plugins/admin/fai/class_faiManagement.inc:479
+#: plugins/admin/fai/class_faiManagement.inc:478
 msgid "Class type"
 msgstr "Klasse type"
 
-#: plugins/admin/fai/class_faiManagement.inc:483
+#: plugins/admin/fai/class_faiManagement.inc:482
 msgid "Edit class"
 msgstr "Bewerk klasse"
 
-#: plugins/admin/fai/class_faiManagement.inc:484
+#: plugins/admin/fai/class_faiManagement.inc:483
 msgid "Delete class"
 msgstr "Verwijder klasse"
 
+#: plugins/admin/fai/class_faiManagement.inc:525
 #: plugins/admin/fai/class_faiManagement.inc:526
-#: plugins/admin/fai/class_faiManagement.inc:527
 #: plugins/admin/fai/class_faiProfile.inc:161
 #: plugins/admin/fai/class_faiProfileEntry.inc:123
 msgid "Partition table"
 msgstr "Partitietabel"
 
+#: plugins/admin/fai/class_faiManagement.inc:532
 #: plugins/admin/fai/class_faiManagement.inc:533
-#: plugins/admin/fai/class_faiManagement.inc:534
 msgid "Package list"
 msgstr "Pakketlijst"
 
+#: plugins/admin/fai/class_faiManagement.inc:539
 #: plugins/admin/fai/class_faiManagement.inc:540
-#: plugins/admin/fai/class_faiManagement.inc:541
 msgid "Scripts"
 msgstr "Scripts"
 
+#: plugins/admin/fai/class_faiManagement.inc:560
 #: plugins/admin/fai/class_faiManagement.inc:561
-#: plugins/admin/fai/class_faiManagement.inc:562
 msgid "Profile"
 msgstr "Profiel"
 
@@ -9537,29 +9542,29 @@ msgstr "Kies een prioriteit"
 msgid "Import script"
 msgstr "Importeer script"
 
-#: plugins/admin/fai/class_faiPackage.inc:148
+#: plugins/admin/fai/class_faiPackage.inc:150
 msgid "There is no useable package list defined."
 msgstr "Er is geen bruikbare pakketlijst gedefinieerd."
 
-#: plugins/admin/fai/class_faiPackage.inc:293
+#: plugins/admin/fai/class_faiPackage.inc:295
 #, php-format
 msgid "Can't read configuration folder '%s'."
 msgstr "Kan configuratie directory '%s' niet lezen."
 
-#: plugins/admin/fai/class_faiPackage.inc:375
+#: plugins/admin/fai/class_faiPackage.inc:377
 msgid "Please select a least one Package."
 msgstr "Selecteer a.u.b. tenminste een pakket."
 
-#: plugins/admin/fai/class_faiPackage.inc:379
+#: plugins/admin/fai/class_faiPackage.inc:381
 msgid "Please choose a valid combination for your repository setup."
 msgstr ""
 "Kies a.u.b. een geldige combinatie voor uw verzamelplaats instellingen."
 
-#: plugins/admin/fai/class_faiPackage.inc:400
+#: plugins/admin/fai/class_faiPackage.inc:402
 msgid "package is configured"
 msgstr "pakket is geconfigureerd"
 
-#: plugins/admin/fai/class_faiPackage.inc:424
+#: plugins/admin/fai/class_faiPackage.inc:426
 #, php-format
 msgid "Package file '%s' does not exist."
 msgstr "Pakketbestand '%s' bestaat niet."
@@ -9936,7 +9941,7 @@ msgid "Destination path"
 msgstr "Doelpad"
 
 #: plugins/admin/fai/faiTemplateEntry.tpl:62
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:316
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:310
 msgid "Owner"
 msgstr "Eigenaar"
 
@@ -10081,8 +10086,8 @@ msgstr "niet gedefiniëerd"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:250
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:644
-#: plugins/gofon/macro/class_gofonMacro.inc:94
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:227
+#: plugins/gofon/macro/class_gofonMacro.inc:97
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:224
 msgid ""
 "There is currently no asterisk server defined. Possibly you are missing a "
 "server that handles the asterisk management (goFonServer). Your settings "
@@ -10188,7 +10193,7 @@ msgid "You need to specify at least one phone number!"
 msgstr "U dient tenminste één telefoonnummer op te geven!"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:915
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:332
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:335
 #, php-format
 msgid "The parameter %s contains invalid char. '!,#' is used as delimiter"
 msgstr ""
@@ -10221,12 +10226,12 @@ msgstr "Telefoon macro"
 msgid "Refresh"
 msgstr "Ververs"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:100
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:194
+#: plugins/gofon/macro/class_gofonMacro.inc:103
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:197
 msgid "This 'dn' is no phone macro."
 msgstr "Deze 'dn' is geen telefoonmacro."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:156
+#: plugins/gofon/macro/class_gofonMacro.inc:159
 msgid ""
 "This macro ist still in use. To delete this Macro ensure that nobody has "
 "selected this Macro."
@@ -10234,7 +10239,7 @@ msgstr ""
 "Deze macro is nog steeds in gebruik. Verzeker uzelf ervan dat geen enkele "
 "gebruiker deze macro geselecteerd heeft."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:188
+#: plugins/gofon/macro/class_gofonMacro.inc:191
 msgid ""
 "There is no mysql extension available in your php setup, can't save any "
 "changes to asterisk db."
@@ -10242,53 +10247,53 @@ msgstr ""
 "Kan geen veranderingen opslaan in de Asterisk database. Er is geen MySQL "
 "extensie beschikbaar. Controleer uw PHP installatie."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:258
+#: plugins/gofon/macro/class_gofonMacro.inc:261
 #, php-format
 msgid "Unable to parse macro contents on line: %s"
 msgstr "Kon de macro-inhoud op regel %s niet verwerken"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:276
+#: plugins/gofon/macro/class_gofonMacro.inc:279
 #, php-format
 msgid "Can't perform SELECT query in DB '%s'"
 msgstr "Kan SELECT zoekopdracht in DB '%s' niet uitvoeren"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:285
-#: plugins/gofon/macro/class_gofonMacro.inc:293
+#: plugins/gofon/macro/class_gofonMacro.inc:288
+#: plugins/gofon/macro/class_gofonMacro.inc:296
 #, php-format
 msgid "Can't perform DELETE query in DB '%s'"
 msgstr "Kan DELETE opdracht in DB '%s' niet uitvoeren"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:307
+#: plugins/gofon/macro/class_gofonMacro.inc:310
 #, php-format
 msgid "Can't perform INSERT query in DB '%s'"
 msgstr "Kan INSERT opdracht in DB '%s' niet uitvoeren"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:350
+#: plugins/gofon/macro/class_gofonMacro.inc:357
 #, php-format
 msgid "The given cn '%s' already exists."
 msgstr "De opgegeven cn '%s' bestaat al."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:355
+#: plugins/gofon/macro/class_gofonMacro.inc:362
 msgid "You must specify the 'Display Name' in order to save this macro"
 msgstr "U moet de 'Display Naam' opgeven om deze macro op te slaan"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:359
+#: plugins/gofon/macro/class_gofonMacro.inc:366
 msgid "The given cn is too long, to create a Makro entry, maximum 20 chars."
 msgstr ""
 "De opgegeven cn is te lang om een Macro invoer te maken. Maximaal 20 "
 "karakters."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:364
+#: plugins/gofon/macro/class_gofonMacro.inc:371
 #, php-format
 msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro"
 msgstr ""
 "Onvoldoende permissies. Kan attribuut '%s' in goFonMacro niet veranderen."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:370
+#: plugins/gofon/macro/class_gofonMacro.inc:377
 msgid "Makro length must be lower than 100 lines"
 msgstr "De macro lengte moet minder dan 100 regels zijn"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:375
+#: plugins/gofon/macro/class_gofonMacro.inc:382
 msgid "Please choose a valid  base."
 msgstr "Geef a.u.b. een geldige basis op."
 
@@ -10342,34 +10347,34 @@ msgstr "Reguliere expressie voor overeenkomende macronamen"
 msgid "Phone macro management"
 msgstr "Telefoon macrobeheer"
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:242
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:245
 msgid "String"
 msgstr "Tekstregel"
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:243
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:246
 msgid "Combobox"
 msgstr "Combobox"
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:244
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:247
 msgid "Bool"
 msgstr "Bool"
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:250
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:253
 msgid "Delete unused"
 msgstr "Verwijder ongebruikte"
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:324
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:327
 #, php-format
 msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro."
 msgstr ""
 "Onvoldoende permissies. Kan attribuut '%s' in goFonMacro niet veranderen."
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:337
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:340
 #, php-format
 msgid "The parameter %s has incorrect value for type bool."
 msgstr "De parameter %s heeft een incorrecte waarde voor het type boolean."
 
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:366
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:369
 #, php-format
 msgid ""
 "Parameter count of the macro changed, you must update each user which are "
@@ -10382,37 +10387,37 @@ msgstr ""
 msgid "Phone macros"
 msgstr "Telefoon macro's"
 
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:251
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:248
 #, php-format
 msgid "You're about to delete the macro '%s'."
 msgstr "U staat op het punt de macro '%s' te verwijderen."
 
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:257
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:282
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:254
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:279
 msgid "You are not allowed to delete this macro!"
 msgstr "U heeft geen toestemming om deze macro te verwijderen!"
 
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:331
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:328
 msgid "Create new phone macro"
 msgstr "Nieuwe telefoonmacro aanmaken"
 
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:346
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:343
 msgid "Visible"
 msgstr "Zichtbaar"
 
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:350
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:347
 msgid "This table displays all phone macros, in the selected tree."
 msgstr "Deze tabel toont alle telefoonmacro's in de geselecteerde tree"
 
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:381
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:378
 msgid "Macro"
 msgstr "Macro"
 
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:382
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:379
 msgid "visible"
 msgstr "zichtbaar"
 
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:383
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:380
 msgid "invisible"
 msgstr "onzichtbaar"
 
@@ -10446,7 +10451,7 @@ msgid "Preset PIN"
 msgstr "Voorgedefinieerde PIN-code"
 
 #: plugins/gofon/conference/generic.tpl:107
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:317
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:311
 msgid "PIN"
 msgstr "PIN-code"
 
@@ -10482,23 +10487,23 @@ msgstr "Telefoon conferenties"
 msgid "Management"
 msgstr "Beheer"
 
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:295
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:289
 msgid "Create new conference"
 msgstr "Maak nieuwe conferentie aan"
 
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:295
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:289
 msgid "New conference"
 msgstr "Nieuwe conferentie"
 
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:311
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:305
 msgid "This table displays all available conference rooms."
 msgstr "Deze tabel geeft alle beschikbaare conferentie-kamers weer"
 
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:315
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:309
 msgid "Name - Number"
 msgstr "Naam - nummer"
 
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:371
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:365
 msgid "Conference"
 msgstr "Conferentie"
 
@@ -10520,7 +10525,7 @@ msgstr ""
 msgid "Regular expression for        matching user names"
 msgstr "Reguliere expressie voor       overeenkomende gebruikersnamen"
 
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:193
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:190
 msgid ""
 "You have specified a conference 'without PIN' ... please leave the PIN "
 "fields empty."
@@ -10528,24 +10533,24 @@ msgstr ""
 "U heeft een conferentie 'zonder PIN-code' gespecificeerd ... laat a.u.b. de "
 "PIN-code velden leeg."
 
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:197
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:194
 msgid "Please enter a PIN."
 msgstr "Voer a.u.b. een PIN-code in."
 
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:201
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:198
 msgid "Please enter a name for the conference."
 msgstr "Voer a.u.b. een naam voor de conferentie in."
 
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:205
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:202
 msgid "Only numeric chars are allowed in Number field."
 msgstr "Alleen nummerieke karakters zijn toegestaan in het nummer veld."
 
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:209
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:206
 msgid "Only numbers are allowed in Lifetime."
 msgstr "Alleen nummerieke waardes zijn toegestaan in geldigheidsduur"
 
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:239
-#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:349
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:236
+#: plugins/gofon/conference/class_phoneConferenceGeneric.inc:346
 msgid ""
 "Can't save any changes to asterisk database, there is currently no mysql "
 "extension available in your php setup."

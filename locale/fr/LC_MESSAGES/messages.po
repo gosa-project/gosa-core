@@ -25,12 +25,13 @@
 # translation of messages.po to
 # translation of messages.po to
 # translation of messages.po to
+# translation of messages.po to
 # translation of messages.po to French
 # Benoit Mortier <benoit.mortier@opensides.be>, 2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
-"PO-Revision-Date: 2005-12-02 17:34+0100\n"
+"PO-Revision-Date: 2005-12-03 19:27+0100\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -248,18 +249,18 @@ msgstr "Partitions"
 msgid "Script"
 msgstr "Script"
 
-#: contrib/gosa.conf:192 plugins/admin/fai/class_faiManagement.inc:554
-#: plugins/admin/fai/class_faiManagement.inc:555
+#: contrib/gosa.conf:192 plugins/admin/fai/class_faiManagement.inc:553
+#: plugins/admin/fai/class_faiManagement.inc:554
 msgid "Hooks"
 msgstr "Connexions"
 
-#: contrib/gosa.conf:196 plugins/admin/fai/class_faiManagement.inc:547
-#: plugins/admin/fai/class_faiManagement.inc:548
+#: contrib/gosa.conf:196 plugins/admin/fai/class_faiManagement.inc:546
+#: plugins/admin/fai/class_faiManagement.inc:547
 msgid "Variables"
 msgstr "Variables"
 
-#: contrib/gosa.conf:200 plugins/admin/fai/class_faiManagement.inc:568
-#: plugins/admin/fai/class_faiManagement.inc:569
+#: contrib/gosa.conf:200 plugins/admin/fai/class_faiManagement.inc:567
+#: plugins/admin/fai/class_faiManagement.inc:568
 msgid "Templates"
 msgstr "Modèles"
 
@@ -850,7 +851,7 @@ msgstr ""
 #: ihtml/themes/default/setup_useradmin.tpl:41
 #: ihtml/themes/default/setup_step2.tpl:13
 #: ihtml/themes/default/setup_step3.tpl:18 plugins/admin/users/template.tpl:44
-#: plugins/admin/fai/class_faiManagement.inc:399
+#: plugins/admin/fai/class_faiManagement.inc:398
 #: plugins/admin/fai/faiPackageNew.tpl:65
 msgid "Continue"
 msgstr "Continuer"
@@ -913,7 +914,7 @@ msgstr ""
 #: ihtml/themes/default/setup_step2.tpl:12
 #: ihtml/themes/default/setup_step3.tpl:17
 #: ihtml/themes/default/setup_step4.tpl:114
-#: ihtml/themes/default/setup_finish.tpl:30 include/functions.inc:1314
+#: ihtml/themes/default/setup_finish.tpl:30 include/functions.inc:1321
 #: plugins/personal/password/changed.tpl:12
 #: plugins/personal/generic/main.inc:169
 #: plugins/gofax/faxreports/detail.tpl:68
@@ -994,14 +995,14 @@ msgstr "Supprimer"
 #: plugins/admin/departments/class_departmentManagement.inc:349
 #: plugins/admin/systems/class_systemManagement.inc:541
 #: plugins/admin/systems/remove.tpl:16 plugins/admin/systems/password.tpl:30
-#: plugins/admin/systems/chooser.tpl:18 plugins/admin/systems/servnfs.tpl:92
+#: plugins/admin/systems/chooser.tpl:18 plugins/admin/systems/servnfs.tpl:76
 #: plugins/admin/systems/printerPPDDialog.tpl:23
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:61
 #: plugins/admin/ogroups/ogroup_objects.tpl:52
 #: plugins/admin/ogroups/class_ogroupManagement.inc:340
 #: plugins/admin/ogroups/remove.tpl:16 plugins/admin/fai/remove.tpl:17
-#: plugins/admin/fai/class_faiManagement.inc:395
-#: plugins/admin/fai/class_faiManagement.inc:400
+#: plugins/admin/fai/class_faiManagement.inc:394
+#: plugins/admin/fai/class_faiManagement.inc:399
 #: plugins/admin/fai/faiPartitionTableEntry.tpl:30
 #: plugins/admin/fai/faiProfileEntry.tpl:72
 #: plugins/admin/fai/faiScriptEntry.tpl:68
@@ -1009,7 +1010,7 @@ msgstr "Supprimer"
 #: plugins/admin/fai/faiHookEntry.tpl:70
 #: plugins/admin/fai/faiTemplateEntry.tpl:133
 #: plugins/admin/fai/faiPackageEntry.tpl:64
-#: plugins/admin/fai/faiPackageConfiguration.tpl:6
+#: plugins/admin/fai/faiPackageConfiguration.tpl:7
 #: plugins/admin/fai/faiPackageNew.tpl:66
 #: plugins/gofon/phoneaccount/main.inc:107 plugins/gofon/macro/remove.tpl:15
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:302
@@ -1351,7 +1352,7 @@ msgstr "Ligne"
 #: include/php_setup.inc:122 plugins/gofax/blocklists/generic.tpl:32
 #: plugins/admin/systems/workstationService.tpl:42
 #: plugins/admin/systems/workstationService.tpl:120
-#: plugins/admin/systems/servnfs.tpl:31
+#: plugins/admin/systems/servnfs.tpl:39
 #: plugins/admin/systems/terminalService.tpl:42
 #: plugins/admin/systems/terminalService.tpl:120
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:179
@@ -1363,23 +1364,23 @@ msgstr "Type"
 msgid "Arguments"
 msgstr "Arguments"
 
-#: include/functions.inc:282
+#: include/functions.inc:290
 #, php-format
 msgid "Error when connecting the LDAP. Server said '%s'."
 msgstr "Erreur lors de la connexion au serveur LDAP. Le serveur répond '%s'."
 
-#: include/functions.inc:303
+#: include/functions.inc:311
 #, php-format
 msgid "User login failed. LDAP server said '%s'."
 msgstr "Echec de l'authentification. Le serveur LDAP répond '%s'."
 
-#: include/functions.inc:322
+#: include/functions.inc:330
 msgid "Username / UID is not unique. Please check your LDAP database."
 msgstr ""
 "Le nom de l'utilisateur / UID n'est pas unique. Veuillez vérifier votre base "
 "de données LDAP."
 
-#: include/functions.inc:360
+#: include/functions.inc:368
 msgid ""
 "Error while adding a lock. Parameters are not set correctly, please check "
 "the source!"
@@ -1387,7 +1388,7 @@ msgstr ""
 "Erreur lors de la création d'un verrou. Les paramètres sont incorrects. "
 "Veuillez vérifier la source!"
 
-#: include/functions.inc:370
+#: include/functions.inc:378
 #, php-format
 msgid ""
 "Can't set locking information in LDAP database. Please check the 'config' "
@@ -1397,17 +1398,17 @@ msgstr ""
 "l'annuaire LDAP. Veuillez vérifier l'entrée 'config' dans gosa.conf! Le "
 "serveur LDAP répond '%s'."
 
-#: include/functions.inc:385
+#: include/functions.inc:393
 #, php-format
 msgid "Adding a lock failed. LDAP server says '%s'."
 msgstr "Echec lors de l'ajout d'un verrou. Le serveur LDAP répond '%s'."
 
-#: include/functions.inc:411
+#: include/functions.inc:419
 #, php-format
 msgid "Removing a lock failed. LDAP server says '%s'."
 msgstr "Echec lors de la suppression d'un verrou. Le serveur LDAP répond '%s'."
 
-#: include/functions.inc:441
+#: include/functions.inc:449
 msgid ""
 "Getting the lock from LDAP failed. Parameters are not set correctly, please "
 "check the source!"
@@ -1415,7 +1416,7 @@ msgstr ""
 "Echec lors de la récupération du verrou depuis l'annuaire LDAP. Les "
 "paramètres ne sont pas corrects. Veuillez vérifier la source!"
 
-#: include/functions.inc:451
+#: include/functions.inc:459
 msgid ""
 "Can't get locking information in LDAP database. Please check the 'config' "
 "entry in gosa.conf!"
@@ -1423,7 +1424,7 @@ msgstr ""
 "Impossible d'obtenir les informations de verrouillage dans l'annuaire LDAP. "
 "Veuillez vérifier l'entrée 'config' dans gosa.conf!"
 
-#: include/functions.inc:459
+#: include/functions.inc:467
 msgid ""
 "Found multiple locks for object to be locked. This should not be possible - "
 "cleaning up multiple references."
@@ -1431,12 +1432,12 @@ msgstr ""
 "Détection de verrou multiple pour un même objet. Ceci ne devrait pas être "
 "possible. Effacement des références multiples."
 
-#: include/functions.inc:573
+#: include/functions.inc:581
 #, php-format
 msgid "The size limit of %d entries is exceed!"
 msgstr "La taille limite de %d entrées est dépassée!"
 
-#: include/functions.inc:575
+#: include/functions.inc:583
 #, php-format
 msgid ""
 "Set the new size limit to %s and show me this message if the limit still "
@@ -1445,15 +1446,15 @@ msgstr ""
 "Mettre la nouvelle limite à %s et me montrer ce message si la limite est "
 "toujours dépassée"
 
-#: include/functions.inc:587 plugins/admin/fai/faiPackage.tpl:76
+#: include/functions.inc:595 plugins/admin/fai/faiPackage.tpl:76
 msgid "Configure"
 msgstr "Configurer"
 
-#: include/functions.inc:592
+#: include/functions.inc:600
 msgid "incomplete"
 msgstr "incomplet"
 
-#: include/functions.inc:1000
+#: include/functions.inc:1007
 #, php-format
 msgid ""
 "You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
@@ -1463,23 +1464,23 @@ msgstr ""
 "d'utilisation par '%s'. Veuillez contacter cette personne afin de clarifier "
 "la situation."
 
-#: include/functions.inc:1099
+#: include/functions.inc:1106
 msgid "LDAP error:"
 msgstr "Erreur LDAP :"
 
-#: include/functions.inc:1277
+#: include/functions.inc:1284
 msgid "Entries per page"
 msgstr "Entrées par page"
 
-#: include/functions.inc:1305
+#: include/functions.inc:1312
 msgid "Apply filter"
 msgstr "Appliquer le filtre"
 
-#: include/functions.inc:1579
+#: include/functions.inc:1586
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-#: include/functions.inc:1622
+#: include/functions.inc:1629
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "Version de développement de GOsa (Rev %s)"
@@ -2629,7 +2630,7 @@ msgstr "désactive toutes les options de messagerie!"
 #: plugins/admin/departments/class_departmentManagement.inc:347
 #: plugins/admin/systems/class_systemManagement.inc:539
 #: plugins/admin/ogroups/class_ogroupManagement.inc:338
-#: plugins/admin/fai/class_faiManagement.inc:393
+#: plugins/admin/fai/class_faiManagement.inc:392
 #: plugins/gofon/phoneaccount/main.inc:105
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:300
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:266
@@ -3876,7 +3877,7 @@ msgstr "Suppression de l'image personnelle"
 
 #: plugins/personal/generic/generic_picture.tpl:29
 #: plugins/addons/addressbook/address_edit.tpl:233
-#: plugins/admin/systems/servnfs.tpl:91
+#: plugins/admin/systems/servnfs.tpl:75
 #: plugins/admin/fai/faiPartitionTableEntry.tpl:29
 msgid "Save"
 msgstr "Enregistrer"
@@ -4576,7 +4577,7 @@ msgstr "Script de démarrage"
 #: plugins/admin/fai/faiHookEntry.tpl:69
 #: plugins/admin/fai/faiTemplateEntry.tpl:132
 #: plugins/admin/fai/faiPackageEntry.tpl:63
-#: plugins/admin/fai/faiPackageConfiguration.tpl:5
+#: plugins/admin/fai/faiPackageConfiguration.tpl:6
 msgid "Apply"
 msgstr "Appliquer"
 
@@ -4806,7 +4807,7 @@ msgstr "Veuillez entrer un numéro de téléphone valide."
 #: plugins/admin/departments/class_departmentManagement.inc:277
 #: plugins/admin/systems/class_systemManagement.inc:565
 #: plugins/admin/ogroups/class_ogroupManagement.inc:358
-#: plugins/admin/fai/class_faiManagement.inc:429
+#: plugins/admin/fai/class_faiManagement.inc:428
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:324
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:285
 msgid "Go up one department"
@@ -4820,7 +4821,7 @@ msgstr "Monter d'un département"
 #: plugins/admin/systems/class_systemManagement.inc:565
 #: plugins/admin/ogroups/class_ogroupManagement.inc:358
 #: plugins/admin/ogroups/phonequeue.tpl:17
-#: plugins/admin/fai/class_faiManagement.inc:429
+#: plugins/admin/fai/class_faiManagement.inc:428
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:324
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:285
 msgid "Up"
@@ -4833,7 +4834,7 @@ msgstr "Au dessus"
 #: plugins/admin/departments/class_departmentManagement.inc:278
 #: plugins/admin/systems/class_systemManagement.inc:566
 #: plugins/admin/ogroups/class_ogroupManagement.inc:359
-#: plugins/admin/fai/class_faiManagement.inc:432
+#: plugins/admin/fai/class_faiManagement.inc:431
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:325
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:286
 msgid "Go to root department"
@@ -4846,7 +4847,7 @@ msgstr "Aller au département de base"
 #: plugins/admin/departments/class_departmentManagement.inc:278
 #: plugins/admin/systems/class_systemManagement.inc:566
 #: plugins/admin/ogroups/class_ogroupManagement.inc:360
-#: plugins/admin/fai/class_faiManagement.inc:432
+#: plugins/admin/fai/class_faiManagement.inc:431
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:325
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:286
 msgid "Root"
@@ -4870,7 +4871,7 @@ msgstr "Aller au département des utilisateurs"
 #: plugins/admin/departments/class_departmentManagement.inc:279
 #: plugins/admin/systems/class_systemManagement.inc:567
 #: plugins/admin/ogroups/class_ogroupManagement.inc:362
-#: plugins/admin/fai/class_faiManagement.inc:435
+#: plugins/admin/fai/class_faiManagement.inc:434
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:326
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:287
 msgid "Home"
@@ -4891,7 +4892,7 @@ msgstr "Nouvelle liste rouge"
 #: plugins/admin/departments/class_departmentManagement.inc:283
 #: plugins/admin/systems/class_systemManagement.inc:576
 #: plugins/admin/ogroups/class_ogroupManagement.inc:366
-#: plugins/admin/fai/class_faiManagement.inc:464
+#: plugins/admin/fai/class_faiManagement.inc:463
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:330
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:291
 msgid "Current base"
@@ -4904,7 +4905,7 @@ msgstr "Base actuelle"
 #: plugins/admin/departments/class_departmentManagement.inc:284
 #: plugins/admin/systems/class_systemManagement.inc:577
 #: plugins/admin/ogroups/class_ogroupManagement.inc:367
-#: plugins/admin/fai/class_faiManagement.inc:465
+#: plugins/admin/fai/class_faiManagement.inc:464
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:331
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:292
 msgid "Submit department"
@@ -4917,7 +4918,7 @@ msgstr "Soumettre le département"
 #: plugins/admin/departments/class_departmentManagement.inc:284
 #: plugins/admin/systems/class_systemManagement.inc:577
 #: plugins/admin/ogroups/class_ogroupManagement.inc:367
-#: plugins/admin/fai/class_faiManagement.inc:465
+#: plugins/admin/fai/class_faiManagement.inc:464
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:331
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:292
 msgid "Submit"
@@ -4930,7 +4931,7 @@ msgstr "Soumettre"
 #: plugins/admin/departments/class_departmentManagement.inc:291
 #: plugins/admin/systems/class_systemManagement.inc:582
 #: plugins/admin/ogroups/class_ogroupManagement.inc:371
-#: plugins/admin/fai/class_faiManagement.inc:483
+#: plugins/admin/fai/class_faiManagement.inc:482
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:336
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:296
 msgid "edit"
@@ -4950,7 +4951,7 @@ msgstr "Editer un utilisateur"
 #: plugins/admin/departments/class_departmentManagement.inc:292
 #: plugins/admin/systems/class_systemManagement.inc:583
 #: plugins/admin/ogroups/class_ogroupManagement.inc:372
-#: plugins/admin/fai/class_faiManagement.inc:484
+#: plugins/admin/fai/class_faiManagement.inc:483
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:337
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:297
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:299
@@ -4975,7 +4976,7 @@ msgstr "Nom de la liste rouge"
 #: plugins/admin/departments/class_departmentManagement.inc:299
 #: plugins/admin/systems/class_systemManagement.inc:590
 #: plugins/admin/ogroups/class_ogroupManagement.inc:393
-#: plugins/admin/fai/class_faiManagement.inc:480
+#: plugins/admin/fai/class_faiManagement.inc:479
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:344
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:312
 msgid "Actions"
@@ -6448,7 +6449,7 @@ msgstr "L'application sélectionnée n'a pas d'options."
 
 #: plugins/admin/groups/class_groupApplication.inc:371
 #: plugins/admin/departments/class_departmentManagement.inc:315
-#: plugins/admin/fai/class_faiManagement.inc:504
+#: plugins/admin/fai/class_faiManagement.inc:503
 msgid "department"
 msgstr "département"
 
@@ -6996,7 +6997,7 @@ msgid "You have no permission to remove this department."
 msgstr "Vous n'avez pas les droits nécessaires pour supprimer ce département."
 
 #: plugins/admin/departments/class_departmentManagement.inc:279
-#: plugins/admin/fai/class_faiManagement.inc:435
+#: plugins/admin/fai/class_faiManagement.inc:434
 msgid "Go to users home department"
 msgstr "Aller au département de base des utilisateurs"
 
@@ -7654,8 +7655,8 @@ msgstr ""
 
 #: plugins/admin/systems/class_systemManagement.inc:413
 #: plugins/admin/systems/class_systemManagement.inc:477
-#: plugins/admin/fai/class_faiManagement.inc:211
-#: plugins/admin/fai/class_faiManagement.inc:250
+#: plugins/admin/fai/class_faiManagement.inc:210
+#: plugins/admin/fai/class_faiManagement.inc:249
 msgid "You are not allowed to delete this component!"
 msgstr "Vous n'êtes pas autorisé à supprimer ce composant!"
 
@@ -7706,7 +7707,7 @@ msgid "System"
 msgstr "Système"
 
 #: plugins/admin/systems/class_systemManagement.inc:592
-#: plugins/admin/fai/class_faiManagement.inc:474
+#: plugins/admin/fai/class_faiManagement.inc:473
 msgid "This table displays all systems, in the selected tree."
 msgstr "Ce tableau montre toutes les systèmes, dans l'arbre sélectionné."
 
@@ -8575,19 +8576,23 @@ msgstr "Le chemin contient des caractères invalides."
 msgid "Option contains invalid characters."
 msgstr "L'option contient des caractères invalides."
 
+#: plugins/admin/systems/servnfs.tpl:1
+msgid "Edit share"
+msgstr "Editer un partage"
+
 #: plugins/admin/systems/servnfs.tpl:2
 msgid "NFS setup"
 msgstr "Préférences NFS"
 
-#: plugins/admin/systems/servnfs.tpl:41
-msgid "Charset"
-msgstr "Type de caractères"
-
-#: plugins/admin/systems/servnfs.tpl:63
+#: plugins/admin/systems/servnfs.tpl:25
 msgid "Path"
 msgstr "Chemin"
 
-#: plugins/admin/systems/servnfs.tpl:75
+#: plugins/admin/systems/servnfs.tpl:49
+msgid "Charset"
+msgstr "Type de caractères"
+
+#: plugins/admin/systems/servnfs.tpl:59
 msgid "Option"
 msgstr "Option"
 
@@ -9378,112 +9383,112 @@ msgstr ""
 msgid "Fully Automatic Installation"
 msgstr "Installation entièrement automatique (FAI)"
 
-#: plugins/admin/fai/class_faiManagement.inc:32
+#: plugins/admin/fai/class_faiManagement.inc:31
 msgid "FAI"
 msgstr "FAI"
 
-#: plugins/admin/fai/class_faiManagement.inc:33
+#: plugins/admin/fai/class_faiManagement.inc:32
 msgid "Fully Automatic Installation - management"
 msgstr "Gestion de - Fully Automatic Installation"
 
-#: plugins/admin/fai/class_faiManagement.inc:205
+#: plugins/admin/fai/class_faiManagement.inc:204
 #, php-format
 msgid "You're about to delete all information about the FAI class at '%s'."
 msgstr ""
 "Vous êtes sur le point de supprimer toute les informations relatives au "
 "composant FAI '%s'."
 
-#: plugins/admin/fai/class_faiManagement.inc:440
+#: plugins/admin/fai/class_faiManagement.inc:439
 msgid "New profile"
 msgstr "Nouveau profil"
 
-#: plugins/admin/fai/class_faiManagement.inc:440
+#: plugins/admin/fai/class_faiManagement.inc:439
 msgid "P"
 msgstr "P"
 
-#: plugins/admin/fai/class_faiManagement.inc:445
+#: plugins/admin/fai/class_faiManagement.inc:444
 msgid "New partition table"
 msgstr "Nouvelle table des partitions"
 
-#: plugins/admin/fai/class_faiManagement.inc:445
+#: plugins/admin/fai/class_faiManagement.inc:444
 msgid "PT"
 msgstr "PT"
 
-#: plugins/admin/fai/class_faiManagement.inc:448
+#: plugins/admin/fai/class_faiManagement.inc:447
 msgid "New scripts"
 msgstr "Nouveau scripts"
 
-#: plugins/admin/fai/class_faiManagement.inc:448
+#: plugins/admin/fai/class_faiManagement.inc:447
 msgid "S"
 msgstr "S"
 
-#: plugins/admin/fai/class_faiManagement.inc:451
+#: plugins/admin/fai/class_faiManagement.inc:450
 msgid "New hooks"
 msgstr "Nouvelles connexions"
 
-#: plugins/admin/fai/class_faiManagement.inc:451
+#: plugins/admin/fai/class_faiManagement.inc:450
 msgid "H"
 msgstr "H"
 
-#: plugins/admin/fai/class_faiManagement.inc:454
+#: plugins/admin/fai/class_faiManagement.inc:453
 msgid "New variables"
 msgstr "Nouvelles variables"
 
-#: plugins/admin/fai/class_faiManagement.inc:454
+#: plugins/admin/fai/class_faiManagement.inc:453
 msgid "V"
 msgstr "V"
 
-#: plugins/admin/fai/class_faiManagement.inc:457
+#: plugins/admin/fai/class_faiManagement.inc:456
 msgid "New templates"
 msgstr "Nouveau modèles"
 
-#: plugins/admin/fai/class_faiManagement.inc:457
+#: plugins/admin/fai/class_faiManagement.inc:456
 msgid "T"
 msgstr "T"
 
-#: plugins/admin/fai/class_faiManagement.inc:460
+#: plugins/admin/fai/class_faiManagement.inc:459
 msgid "New package list"
 msgstr "Nouvelle liste des paquets"
 
-#: plugins/admin/fai/class_faiManagement.inc:460
+#: plugins/admin/fai/class_faiManagement.inc:459
 msgid "PK"
 msgstr "PK"
 
-#: plugins/admin/fai/class_faiManagement.inc:478
+#: plugins/admin/fai/class_faiManagement.inc:477
 msgid "Name of FAI class"
 msgstr "Nom de la classe FAI"
 
-#: plugins/admin/fai/class_faiManagement.inc:479
+#: plugins/admin/fai/class_faiManagement.inc:478
 msgid "Class type"
 msgstr "Type de la classe"
 
-#: plugins/admin/fai/class_faiManagement.inc:483
+#: plugins/admin/fai/class_faiManagement.inc:482
 msgid "Edit class"
 msgstr "Editer la classe"
 
-#: plugins/admin/fai/class_faiManagement.inc:484
+#: plugins/admin/fai/class_faiManagement.inc:483
 msgid "Delete class"
 msgstr "Effacer la classe"
 
+#: plugins/admin/fai/class_faiManagement.inc:525
 #: plugins/admin/fai/class_faiManagement.inc:526
-#: plugins/admin/fai/class_faiManagement.inc:527
 #: plugins/admin/fai/class_faiProfile.inc:161
 #: plugins/admin/fai/class_faiProfileEntry.inc:123
 msgid "Partition table"
 msgstr "Table des partitions"
 
+#: plugins/admin/fai/class_faiManagement.inc:532
 #: plugins/admin/fai/class_faiManagement.inc:533
-#: plugins/admin/fai/class_faiManagement.inc:534
 msgid "Package list"
 msgstr "Liste des paquets"
 
+#: plugins/admin/fai/class_faiManagement.inc:539
 #: plugins/admin/fai/class_faiManagement.inc:540
-#: plugins/admin/fai/class_faiManagement.inc:541
 msgid "Scripts"
 msgstr "Scripts"
 
+#: plugins/admin/fai/class_faiManagement.inc:560
 #: plugins/admin/fai/class_faiManagement.inc:561
-#: plugins/admin/fai/class_faiManagement.inc:562
 msgid "Profile"
 msgstr "Profil"
 
@@ -9594,30 +9599,30 @@ msgstr "Sélectionnez une priorité"
 msgid "Import script"
 msgstr "Importez un script"
 
-#: plugins/admin/fai/class_faiPackage.inc:148
+#: plugins/admin/fai/class_faiPackage.inc:150
 msgid "There is no useable package list defined."
 msgstr "Il n'y a pas de liste de paquets utilisable définie."
 
-#: plugins/admin/fai/class_faiPackage.inc:293
+#: plugins/admin/fai/class_faiPackage.inc:295
 #, php-format
 msgid "Can't read configuration folder '%s'."
 msgstr "Impossible de lire la configuration du répertoire '%s'."
 
-#: plugins/admin/fai/class_faiPackage.inc:375
+#: plugins/admin/fai/class_faiPackage.inc:377
 msgid "Please select a least one Package."
 msgstr "Veuillez sélectionner au moins un paquet."
 
-#: plugins/admin/fai/class_faiPackage.inc:379
+#: plugins/admin/fai/class_faiPackage.inc:381
 msgid "Please choose a valid combination for your repository setup."
 msgstr ""
 "Veuillez choisir une combinaison valable pour la création de votre dépôt de "
 "paquets."
 
-#: plugins/admin/fai/class_faiPackage.inc:400
+#: plugins/admin/fai/class_faiPackage.inc:402
 msgid "package is configured"
 msgstr "le paquet est configuré"
 
-#: plugins/admin/fai/class_faiPackage.inc:424
+#: plugins/admin/fai/class_faiPackage.inc:426
 #, php-format
 msgid "Package file '%s' does not exist."
 msgstr "Le paquets '%s' n'existe pas."
