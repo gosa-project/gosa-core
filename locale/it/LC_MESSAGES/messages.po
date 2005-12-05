@@ -42,9 +42,9 @@ msgstr "Extra"
 #: plugins/admin/fai/faiVariable.tpl:4 plugins/admin/fai/faiScriptEntry.tpl:5
 #: plugins/admin/fai/faiPackage.tpl:4 plugins/admin/fai/faiProfile.tpl:4
 #: plugins/admin/fai/faiProfile.tpl:32 plugins/admin/fai/faiScript.tpl:4
-#: plugins/admin/fai/faiVariableEntry.tpl:5
+#: plugins/admin/fai/faiHook.tpl:4 plugins/admin/fai/faiVariableEntry.tpl:5
 #: plugins/admin/fai/faiTemplate.tpl:4 plugins/admin/fai/faiHookEntry.tpl:5
-#: plugins/admin/fai/faiTemplateEntry.tpl:3 plugins/admin/fai/faiHook.tpl:4
+#: plugins/admin/fai/faiTemplateEntry.tpl:3
 #: plugins/generic/references/class_reference.inc:20
 msgid "Generic"
 msgstr "Generale"
@@ -84,13 +84,13 @@ msgstr "Samba"
 msgid "Connectivity"
 msgstr "Connettività"
 
-#: contrib/gosa.conf:76 html/getxls.php:174 html/getxls.php:236
-#: plugins/personal/generic/generic.tpl:248
+#: contrib/gosa.conf:76 plugins/personal/generic/generic.tpl:248
 #: plugins/personal/generic/generic.tpl:379
 #: plugins/gofax/faxaccount/generic.tpl:10
 #: plugins/addons/addressbook/contents.tpl:14
 #: plugins/admin/users/class_userManagement.inc:736
-#: plugins/admin/departments/generic.tpl:62
+#: plugins/admin/departments/generic.tpl:62 html/getxls.php:174
+#: html/getxls.php:236
 msgid "Fax"
 msgstr "Fax"
 
@@ -173,7 +173,7 @@ msgstr "Stampante"
 #: plugins/admin/applications/headpage.tpl:20
 #: plugins/admin/departments/headpage.tpl:20
 #: plugins/admin/systems/headpage.tpl:20 plugins/admin/ogroups/headpage.tpl:20
-#: plugins/admin/fai/faiProfileEntry.tpl:22 plugins/admin/fai/headpage.tpl:20
+#: plugins/admin/fai/headpage.tpl:20 plugins/admin/fai/faiProfileEntry.tpl:22
 #: plugins/admin/fai/faiPackageEntry.tpl:22
 #: plugins/gofon/macro/headpage.tpl:20
 #: plugins/gofon/conference/headpage.tpl:20
@@ -280,1795 +280,6 @@ msgstr "Inglese"
 msgid "Italian"
 msgstr "Italiano"
 
-#: html/helpviewer.php:113
-msgid "There is no helpfile specified for this class."
-msgstr ""
-
-#: html/helpviewer.php:223
-#, php-format
-msgid "Helpdir '%s' is not accessible, can't read any helpfiles."
-msgstr ""
-
-#: html/getxls.php:65
-msgid "Birthday"
-msgstr ""
-
-#: html/getxls.php:65 html/getxls.php:224
-#: plugins/personal/generic/generic.tpl:88
-msgid "Sex"
-msgstr "Sesso"
-
-#: html/getxls.php:65 html/getxls.php:174 html/getxls.php:224
-#: html/getxls.php:236
-msgid "Surname"
-msgstr "Cognome"
-
-#: html/getxls.php:65 html/getxls.php:174 html/getxls.php:224
-#: html/getxls.php:236 plugins/addons/addressbook/class_addressbook.inc:515
-msgid "Given name"
-msgstr "Nome"
-
-#: html/getxls.php:65 html/getxls.php:224
-#: plugins/gofax/faxaccount/generic.tpl:16
-#: plugins/admin/ogroups/phonequeue.tpl:35
-msgid "Language"
-msgstr "Lingua"
-
-#: html/getxls.php:68 html/getxls.php:70 html/getxls.php:243
-#: plugins/admin/users/class_userManagement.inc:25
-#: plugins/admin/systems/printer.tpl:65
-msgid "Users"
-msgstr "Utenti"
-
-#: html/getxls.php:74
-#, php-format
-msgid "User list of %s on %s"
-msgstr "Lista degli utenti di %s su %s"
-
-#: html/getxls.php:80 html/getxls.php:108 html/getxls.php:123
-#: html/getxls.php:282 html/getxls.php:299
-#: plugins/addons/addressbook/class_addressbook.inc:517
-msgid "User ID"
-msgstr ""
-
-#: html/getxls.php:94 html/getxls.php:227
-msgid "Members"
-msgstr "Membri"
-
-#: html/getxls.php:97 html/getxls.php:99 html/getxls.php:244
-#: plugins/admin/groups/class_groupManagement.inc:25
-#: plugins/admin/ogroups/class_ogroupManagement.inc:42
-msgid "Groups"
-msgstr "Gruppi di utenti"
-
-#: html/getxls.php:104 html/getxls.php:295
-#, php-format
-msgid "Groups of %s on %s"
-msgstr "Gruppi di %s su %s"
-
-#: html/getxls.php:123 html/getxls.php:230
-#: plugins/personal/environment/logonManagement.tpl:17
-#: plugins/personal/environment/hotplugDialogNew.tpl:17
-#: plugins/gofax/blocklists/generic.tpl:41 plugins/admin/groups/generic.tpl:13
-#: plugins/admin/applications/generic.tpl:23
-#: plugins/admin/departments/generic.tpl:12
-#: plugins/admin/systems/server.tpl:24 plugins/admin/systems/phone.tpl:24
-#: plugins/admin/systems/printer.tpl:13
-#: plugins/admin/systems/wingeneric.tpl:24
-#: plugins/admin/systems/component.tpl:24 plugins/admin/systems/servnfs.tpl:17
-#: plugins/admin/ogroups/generic.tpl:13
-#: plugins/admin/fai/faiPartitionTableEntry.tpl:11
-#: plugins/admin/fai/faiPartitionTable.tpl:19
-#: plugins/admin/fai/faiVariable.tpl:19
-#: plugins/admin/fai/faiScriptEntry.tpl:17 plugins/admin/fai/faiPackage.tpl:19
-#: plugins/admin/fai/faiProfile.tpl:19 plugins/admin/fai/faiScript.tpl:19
-#: plugins/admin/fai/faiVariableEntry.tpl:17
-#: plugins/admin/fai/faiTemplate.tpl:19 plugins/admin/fai/faiHookEntry.tpl:17
-#: plugins/admin/fai/faiTemplateEntry.tpl:11 plugins/admin/fai/faiHook.tpl:19
-#: plugins/gofon/macro/generic.tpl:36 plugins/gofon/conference/generic.tpl:51
-#: plugins/generic/references/contents.tpl:11
-msgid "Description"
-msgstr "Descrizione"
-
-#: html/getxls.php:124 html/getxls.php:246
-msgid "Computers"
-msgstr "Computer"
-
-#: html/getxls.php:133 html/getxls.php:174 html/getxls.php:336
-#: html/getxls.php:356
-msgid "Common name"
-msgstr "Nome comune"
-
-#: html/getxls.php:146 plugins/admin/systems/server.tpl:6
-msgid "Server name"
-msgstr ""
-
-#: html/getxls.php:149 html/getxls.php:151 html/getxls.php:158
-#: html/getxls.php:179 html/getxls.php:245 html/getxls.php:316
-#: plugins/admin/ogroups/class_ogroupManagement.inc:45
-msgid "Servers"
-msgstr ""
-
-#: html/getxls.php:156 html/getxls.php:314
-#, php-format
-msgid "Servers of %s on %s"
-msgstr "Server di %s su %s"
-
-#: html/getxls.php:174 html/getxls.php:236
-#: plugins/admin/applications/generic.tpl:11
-#: plugins/gofon/macro/generic.tpl:10
-msgid "Display name"
-msgstr "Mostra il nome"
-
-#: html/getxls.php:174 html/getxls.php:233
-#: plugins/addons/addressbook/contents.tpl:14
-#: plugins/addons/addressbook/address_info.tpl:16
-#: plugins/addons/addressbook/class_addressbook.inc:515
-#: plugins/admin/systems/servnfs.tpl:9
-#: plugins/admin/fai/faiPartitionTableEntry.tpl:6
-#: plugins/admin/fai/faiPartitionTable.tpl:9
-#: plugins/admin/fai/faiVariable.tpl:9 plugins/admin/fai/faiScriptEntry.tpl:9
-#: plugins/admin/fai/faiPackage.tpl:9 plugins/admin/fai/faiProfile.tpl:9
-#: plugins/admin/fai/faiScript.tpl:9 plugins/admin/fai/faiVariableEntry.tpl:9
-#: plugins/admin/fai/faiTemplate.tpl:9 plugins/admin/fai/faiHookEntry.tpl:9
-#: plugins/admin/fai/faiTemplateEntry.tpl:7 plugins/admin/fai/faiHook.tpl:9
-#: plugins/gofon/macro/parameter.tpl:5
-msgid "Name"
-msgstr "Cognome"
-
-#: html/getxls.php:174 plugins/addons/addressbook/class_addressbook.inc:517
-msgid "Home phone"
-msgstr "Telefono privato"
-
-#: html/getxls.php:174
-msgid "Home postal address"
-msgstr ""
-
-#: html/getxls.php:174 html/getxls.php:236
-#: plugins/addons/addressbook/address_edit.tpl:44
-#: plugins/addons/addressbook/address_info.tpl:19
-msgid "Initials"
-msgstr "Iniziali"
-
-#: html/getxls.php:174 plugins/personal/generic/generic.tpl:264
-#: plugins/admin/departments/generic.tpl:42
-#: plugins/admin/departments/generic.tpl:50
-#: plugins/admin/systems/workstation.tpl:18
-msgid "Location"
-msgstr "Località"
-
-#: html/getxls.php:174 plugins/personal/nagios/nagios.tpl:12
-msgid "Mail address"
-msgstr "Indirizzo principale"
-
-#: html/getxls.php:174
-msgid "Mobile phone"
-msgstr "Cellulare"
-
-#: html/getxls.php:174 html/getxls.php:236
-#: plugins/addons/addressbook/address_edit.tpl:148
-#: plugins/addons/addressbook/address_info.tpl:67
-msgid "City"
-msgstr "Città"
-
-#: html/getxls.php:174 html/getxls.php:236
-msgid "Postal address"
-msgstr "CAP"
-
-#: html/getxls.php:174 html/getxls.php:236
-#: plugins/personal/generic/generic.tpl:242
-#: plugins/personal/nagios/nagios.tpl:48
-#: plugins/addons/addressbook/address_edit.tpl:217
-#: plugins/addons/addressbook/address_info.tpl:91
-msgid "Pager"
-msgstr "Pager"
-
-#: html/getxls.php:174 html/getxls.php:236
-#: plugins/gofon/conference/generic.tpl:69
-msgid "Phone number"
-msgstr "Numero di telefono"
-
-#: html/getxls.php:174 plugins/personal/generic/generic.tpl:128
-#: plugins/personal/generic/generic.tpl:272
-#: plugins/addons/addressbook/address_edit.tpl:72
-#: plugins/addons/addressbook/address_edit.tpl:182
-#: plugins/addons/addressbook/address_info.tpl:33
-#: plugins/addons/addressbook/address_info.tpl:82
-#: plugins/admin/departments/generic.tpl:54
-msgid "Address"
-msgstr "Indirizzo"
-
-#: html/getxls.php:174 plugins/personal/generic/generic.tpl:346
-#: plugins/addons/addressbook/address_edit.tpl:158
-#: plugins/addons/addressbook/address_info.tpl:70
-msgid "Postal code"
-msgstr "CAP"
-
-#: html/getxls.php:174 html/getxls.php:236
-#: plugins/personal/generic/generic.tpl:268
-#: plugins/admin/departments/generic.tpl:46
-msgid "State"
-msgstr "Stato"
-
-#: html/getxls.php:174
-msgid "Function"
-msgstr "Funzione"
-
-#: html/getxls.php:177 html/getxls.php:247
-msgid "Adressbook"
-msgstr "Rubrica"
-
-#: html/getxls.php:184 html/getxls.php:349
-#, php-format
-msgid "Adressbook of %s on %s"
-msgstr "Rubrica di %s su %s"
-
-#: html/getxls.php:190
-msgid "Common Name"
-msgstr "Nome comune"
-
-#: html/getxls.php:224
-msgid "Day of birth"
-msgstr "Data di nascita"
-
-#: html/getxls.php:230 plugins/personal/posix/generic.tpl:43
-msgid "UID"
-msgstr "UID"
-
-#: html/getxls.php:236
-msgid "Email address"
-msgstr "Indirizzo principale"
-
-#: html/getxls.php:236 plugins/personal/generic/generic.tpl:238
-#: plugins/addons/addressbook/contents.tpl:15
-#: plugins/addons/addressbook/address_edit.tpl:95
-#: plugins/addons/addressbook/address_info.tpl:40
-msgid "Mobile"
-msgstr "Cellulare"
-
-#: html/getxls.php:236 plugins/personal/generic/generic.tpl:190
-msgid "Organization"
-msgstr "Organizzazione"
-
-#: html/getxls.php:236
-msgid "Organizational unit"
-msgstr "Unità del'organizzazione"
-
-#: html/getxls.php:236
-msgid "Postal Code"
-msgstr "CAP"
-
-#: html/getxls.php:236
-msgid "Surename"
-msgstr "Cognome"
-
-#: html/getxls.php:236
-msgid "Title"
-msgstr "Titolo"
-
-#: html/getxls.php:239
-msgid "Full"
-msgstr ""
-
-#: html/getxls.php:276
-#, php-format
-msgid "User List of %s on %s"
-msgstr "Lista degli utenti di %s su %s"
-
-#: html/getxls.php:330
-#, php-format
-msgid "Computers of %s on %s"
-msgstr "Computer di %s su %s"
-
-#: html/getfax.php:53
-msgid "Could not connect to database server!"
-msgstr "Impossibile connettersi al server del database!"
-
-#: html/getfax.php:55
-msgid "Could not select database!"
-msgstr "Impossibile selezionare il database!"
-
-#: html/getfax.php:60 html/getfax.php:68
-msgid "Database query failed!"
-msgstr "La query al database è fallita!"
-
-#: html/getvcard.php:36
-msgid "Error: getcvard.php needs a parameter to export a vcard!"
-msgstr ""
-
-#: html/setup.php:86
-#, php-format
-msgid ""
-"Directory '%s' specified as smarty compile directory is not accessible, "
-"please check existence and rights of this directory!"
-msgstr ""
-
-#: html/main.php:114
-msgid ""
-"Register globals is on. GOsa will refuse to login unless this is fixed by an "
-"administrator."
-msgstr ""
-
-#: html/main.php:157
-msgid "Warning: memory is getting low - please increase the memory_limit!"
-msgstr ""
-
-#: html/main.php:287
-#, php-format
-msgid "Can't find any plugin definitions for plugin '%s'!"
-msgstr ""
-
-#: html/main.php:316
-msgid ""
-"Generating this page caused the W3C conformance checker to raise some errors!"
-msgstr ""
-
-#: html/main.php:316 include/php_setup.inc:71
-msgid "Toggle information"
-msgstr ""
-
-#: html/index.php:49
-#, php-format
-msgid "GOsa configuration %s/gosa.conf is not readable. Aborted."
-msgstr "Il file di configurazione di GOsa %s/gosa.conf non è legibile."
-
-#: html/index.php:71
-#, php-format
-msgid "Directory '%s' specified as compile directory is not accessable!"
-msgstr ""
-
-#: html/index.php:136 include/class_config.inc:195
-msgid "Can't bind to LDAP. Please contact the system administrator."
-msgstr ""
-"Errore di connessione al server LDAP. Contatta l'amministratore del sistema."
-
-#: html/index.php:145
-msgid ""
-"GOsa cannot retrieve information about the installed schema files. Please "
-"make sure, that this is possible."
-msgstr ""
-
-#: html/index.php:153
-msgid ""
-"Your ldap setup contains old schema definitions. Please re-run the setup."
-msgstr ""
-
-#: html/index.php:172 ihtml/themes/altlinux/setup_useradmin.tpl:6
-#: ihtml/themes/default/setup_useradmin.tpl:6 include/functions_setup.inc:1038
-#: include/functions_setup.inc:1061 include/functions_setup.inc:1070
-msgid ""
-"You're missing an administrative account for GOsa, you'll not be able to "
-"administrate anything!"
-msgstr ""
-"Manca un utente amministrativo per GOsa, non sarai in grado di amministrare "
-"niente!"
-
-#: html/index.php:180
-msgid "Please specify a valid username!"
-msgstr ""
-
-#: html/index.php:182
-msgid "Please specify your password!"
-msgstr ""
-
-#: html/index.php:189
-msgid "Please check the username/password combination."
-msgstr ""
-
-#: html/index.php:227 html/index.php:287 ihtml/themes/altlinux/conflict.tpl:6
-#: ihtml/themes/altlinux/islocked.tpl:6 ihtml/themes/default/conflict.tpl:6
-#: ihtml/themes/default/islocked.tpl:6 plugins/gofax/blocklists/remove.tpl:2
-#: plugins/addons/addressbook/remove.tpl:2 plugins/admin/groups/remove.tpl:2
-#: plugins/admin/users/remove.tpl:2 plugins/admin/applications/remove.tpl:2
-#: plugins/admin/departments/remove.tpl:2 plugins/admin/systems/remove.tpl:2
-#: plugins/admin/ogroups/remove.tpl:2 plugins/admin/fai/remove.tpl:2
-#: plugins/gofon/macro/remove.tpl:2 plugins/gofon/conference/remove.tpl:2
-msgid "Warning"
-msgstr "Attenzione"
-
-#: html/index.php:227 html/index.php:287
-msgid "Session will not be encrypted."
-msgstr ""
-
-#: html/index.php:227 html/index.php:287
-msgid "Enter SSL session"
-msgstr ""
-
-#: ihtml/themes/altlinux/sizelimit.tpl:3 ihtml/themes/default/sizelimit.tpl:3
-msgid ""
-"The size limit option makes LDAP operations faster and saves the LDAP server "
-"from getting too much load. The easiest way to handle big databases without "
-"long timeouts would be to limit your search to smaller values and use "
-"filters to get the entries you are looking for."
-msgstr ""
-
-#: ihtml/themes/altlinux/sizelimit.tpl:6 ihtml/themes/default/sizelimit.tpl:6
-msgid "Please choose the way to react for this session"
-msgstr ""
-
-#: ihtml/themes/altlinux/sizelimit.tpl:9 ihtml/themes/default/sizelimit.tpl:9
-msgid "ignore this error and show all entries the LDAP server returns"
-msgstr ""
-
-#: ihtml/themes/altlinux/sizelimit.tpl:10
-#: ihtml/themes/default/sizelimit.tpl:10
-msgid ""
-"ignore this error and show all entries that fit into the defined sizelimit "
-"and let me use filters instead"
-msgstr ""
-
-#: ihtml/themes/altlinux/sizelimit.tpl:14
-#: ihtml/themes/default/sizelimit.tpl:14
-#: plugins/personal/generic/generic.tpl:82
-msgid "Set"
-msgstr "Imposta"
-
-#: ihtml/themes/altlinux/conflict.tpl:2 ihtml/themes/default/conflict.tpl:2
-msgid "Session conflict detected"
-msgstr "Rilevato un conflitto di sessione"
-
-#: ihtml/themes/altlinux/conflict.tpl:6 ihtml/themes/default/conflict.tpl:6
-msgid ""
-"Probably there's another active instance of your session. Multiple window "
-"operation is technical not possible and heavily depends on the browser "
-"you're using. Usage of different browsers at a time (i.e. IE and Mozilla) is "
-"possible. Pressing the <b>Logout</b> button will close this session."
-msgstr ""
-
-#: ihtml/themes/altlinux/conflict.tpl:10 ihtml/themes/default/conflict.tpl:10
-msgid ""
-"Ignoring this message will change/destroy the data you're currently editing, "
-"so please close multiple windows and log in again."
-msgstr ""
-
-#: ihtml/themes/altlinux/conflict.tpl:14 ihtml/themes/default/conflict.tpl:14
-msgid "Logout"
-msgstr "Termina sessione"
-
-#: ihtml/themes/altlinux/login.tpl:15 ihtml/themes/default/login.tpl:15
-msgid "Please use your <i>username</i> and <i>password</i> to log in"
-msgstr "Usa il tuo <i>nome utente</i> e <i>password</i> per connetterti"
-
-#: ihtml/themes/altlinux/login.tpl:26 ihtml/themes/altlinux/login.tpl:30
-#: ihtml/themes/altlinux/setup_useradmin.tpl:22
-#: ihtml/themes/default/login.tpl:26 ihtml/themes/default/login.tpl:30
-#: ihtml/themes/default/setup_useradmin.tpl:22
-#: plugins/admin/users/class_userManagement.inc:690
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:342
-msgid "Username"
-msgstr "Nome utente"
-
-#: ihtml/themes/altlinux/login.tpl:35 ihtml/themes/altlinux/login.tpl:39
-#: ihtml/themes/altlinux/setup_useradmin.tpl:30
-#: ihtml/themes/default/login.tpl:35 ihtml/themes/default/login.tpl:39
-#: ihtml/themes/default/setup_useradmin.tpl:30
-#: plugins/personal/password/class_password.inc:5
-#: plugins/admin/systems/class_systemManagement.inc:660
-#: plugins/admin/systems/servdb.tpl:18 plugins/admin/systems/servdb.tpl:34
-#: plugins/admin/systems/servdb.tpl:50 plugins/admin/systems/servdb.tpl:86
-#: plugins/admin/systems/servdb.tpl:109
-msgid "Password"
-msgstr "Password"
-
-#: ihtml/themes/altlinux/login.tpl:44 ihtml/themes/altlinux/login.tpl:47
-#: ihtml/themes/default/login.tpl:44 ihtml/themes/default/login.tpl:47
-msgid "Directory"
-msgstr "Directory"
-
-#: ihtml/themes/altlinux/login.tpl:55 ihtml/themes/default/login.tpl:55
-msgid "Sign in"
-msgstr "Entra"
-
-#: ihtml/themes/altlinux/login.tpl:56 ihtml/themes/default/login.tpl:56
-msgid "Click here to log in"
-msgstr "Clicca qui per connetterti"
-
-#: ihtml/themes/altlinux/setup_introduction.tpl:1
-#: ihtml/themes/default/setup_introduction.tpl:1
-msgid "Welcome to the GOsa setup!"
-msgstr "Benvenuto nel setup di GOsa!"
-
-#: ihtml/themes/altlinux/setup_introduction.tpl:4
-#: ihtml/themes/default/setup_introduction.tpl:4
-msgid ""
-"It looks like you're calling GOsa for the first time - no configuration was "
-"found. This setup like script will try to aid you in creating a working "
-"configuration by performing three major steps: first we'll check the PHP "
-"installation for required modules, than we're going to check for optional/"
-"needed programms and after you've provided basic informations for your LDAP "
-"connectivity, we're going to check your LDAP setup."
-msgstr ""
-"Il file di configurazione di GOsa non è stato trovato - questo è normale se "
-"è la prima volta che ti connetti. Questa procedura di setup cercherà di "
-"guidarti nella creazione della configurazione in tre passaggi: per prima "
-"cosa controlleremo l'installazione dei moduli PHP necessari, poi cercheremo "
-"i programmi necessari e opzionali, e in fine passeremo alle impostazioni del "
-"server LDAP."
-
-#: ihtml/themes/altlinux/setup_introduction.tpl:12
-#: ihtml/themes/altlinux/setup_step2.tpl:13
-#: ihtml/themes/altlinux/setup_useradmin.tpl:41
-#: ihtml/themes/altlinux/setup_step3.tpl:18
-#: ihtml/themes/default/setup_introduction.tpl:12
-#: ihtml/themes/default/setup_useradmin.tpl:41
-#: ihtml/themes/default/setup_step2.tpl:13
-#: ihtml/themes/default/setup_step3.tpl:18 plugins/admin/users/template.tpl:44
-#: plugins/admin/fai/class_faiManagement.inc:398
-#: plugins/admin/fai/faiPackageNew.tpl:65
-msgid "Continue"
-msgstr "Continua"
-
-#: ihtml/themes/altlinux/framework.tpl:14
-#: ihtml/themes/altlinux/framework.tpl:24
-#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
-#: include/class_pluglist.inc:130
-msgid ""
-"You are currently editing a database entry. Do you want to dismiss the "
-"changes?"
-msgstr ""
-"Stai modificando un campo del database. Vuoi abbandonare i cambiamenti?"
-
-#: ihtml/themes/altlinux/framework.tpl:15
-#: ihtml/themes/default/framework.tpl:15
-msgid "Main"
-msgstr "Principale"
-
-#: ihtml/themes/altlinux/framework.tpl:20
-#: ihtml/themes/default/framework.tpl:20
-msgid "Help"
-msgstr "Aiuto"
-
-#: ihtml/themes/altlinux/framework.tpl:25
-#: ihtml/themes/default/framework.tpl:25
-msgid "Sign out"
-msgstr "Termina la sessione"
-
-#: ihtml/themes/altlinux/framework.tpl:33
-#: ihtml/themes/default/framework.tpl:33
-msgid "Signed in:"
-msgstr "Connesso:"
-
-#: ihtml/themes/altlinux/setup_step2.tpl:1
-#: ihtml/themes/altlinux/setup_step3.tpl:1
-#: ihtml/themes/altlinux/setup_step4.tpl:1
-#: ihtml/themes/default/setup_step2.tpl:1
-#: ihtml/themes/default/setup_step3.tpl:1
-#: ihtml/themes/default/setup_step4.tpl:1
-msgid "Setup continued..."
-msgstr "Configurazione continua..."
-
-#: ihtml/themes/altlinux/setup_step2.tpl:4
-#: ihtml/themes/default/setup_step2.tpl:4
-msgid ""
-"Step two looks for a set of helper programms and checks if they have the "
-"correct minimum version."
-msgstr "In questo secondo passo cercheremo i programmi necessari e opzionali."
-
-#: ihtml/themes/altlinux/setup_step2.tpl:12
-#: ihtml/themes/altlinux/setup_useradmin.tpl:40
-#: ihtml/themes/altlinux/setup_step3.tpl:17
-#: ihtml/themes/altlinux/setup_step4.tpl:114
-#: ihtml/themes/altlinux/setup_finish.tpl:30
-#: ihtml/themes/default/setup_useradmin.tpl:40
-#: ihtml/themes/default/setup_step2.tpl:12
-#: ihtml/themes/default/setup_step3.tpl:17
-#: ihtml/themes/default/setup_step4.tpl:114
-#: ihtml/themes/default/setup_finish.tpl:30 include/functions.inc:1321
-#: plugins/personal/password/changed.tpl:12
-#: plugins/personal/generic/main.inc:169
-#: plugins/gofax/faxreports/detail.tpl:68
-#: plugins/addons/ldapmanager/contentimport.tpl:44
-#: plugins/addons/ldapmanager/contentcsv.tpl:114
-#: plugins/addons/ldapmanager/contentexport.tpl:66
-#: plugins/addons/ldapmanager/contentexportxls.tpl:69
-msgid "Back"
-msgstr "Indietro"
-
-#: ihtml/themes/altlinux/islocked.tpl:2 ihtml/themes/default/islocked.tpl:2
-msgid "Locking conflict detected"
-msgstr "Rilevato un conflitto di accesso"
-
-#: ihtml/themes/altlinux/islocked.tpl:9 ihtml/themes/default/islocked.tpl:9
-msgid ""
-"If this lock detection is false, the other person has obviously closed the "
-"webbrowser during the edit operation. You may delete the lockfile in this "
-"case by pressing the <i>Remove</i> button."
-msgstr ""
-
-#: ihtml/themes/altlinux/islocked.tpl:13 ihtml/themes/default/islocked.tpl:13
-#: plugins/personal/generic/generic_certs.tpl:17
-#: plugins/personal/generic/generic_certs.tpl:37
-#: plugins/personal/generic/generic_certs.tpl:57
-#: plugins/personal/connectivity/class_kolabAccount.inc:206
-#: plugins/personal/environment/environment.tpl:118
-#: plugins/personal/environment/kioskManagement.tpl:14
-#: plugins/admin/groups/class_groupMail.inc:417
-#: plugins/admin/applications/class_applicationParameters.inc:98
-#: plugins/admin/systems/printer.tpl:47
-#: plugins/admin/systems/workstationStartup.tpl:90
-#: plugins/admin/systems/terminalStartup.tpl:81
-#: plugins/admin/fai/faiPackage.tpl:75
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:248
-msgid "Remove"
-msgstr "Rimuovi"
-
-#: ihtml/themes/altlinux/islocked.tpl:15 ihtml/themes/default/islocked.tpl:15
-#: plugins/personal/mail/main.inc:106 plugins/personal/mail/mail_locals.tpl:43
-#: plugins/personal/posix/trust_machines.tpl:41
-#: plugins/personal/posix/posix_groups.tpl:74
-#: plugins/personal/posix/main.inc:112 plugins/personal/samba/main.inc:106
-#: plugins/personal/samba/samba3_workstations.tpl:41
-#: plugins/personal/generic/password.tpl:19
-#: plugins/personal/generic/generic_picture.tpl:31
-#: plugins/personal/generic/generic_certs.tpl:78
-#: plugins/personal/generic/main.inc:160
-#: plugins/personal/connectivity/main.inc:117
-#: plugins/personal/environment/main.inc:106
-#: plugins/personal/environment/hotplugDialog.tpl:64
-#: plugins/personal/environment/selectPrinterDialog.tpl:61
-#: plugins/personal/environment/logonManagement.tpl:76
-#: plugins/personal/environment/hotplugDialogNew.tpl:39
-#: plugins/personal/nagios/main.inc:106
-#: plugins/gofax/blocklists/generic.tpl:82
-#: plugins/gofax/blocklists/remove.tpl:16
-#: plugins/gofax/faxaccount/locals.tpl:62
-#: plugins/gofax/faxaccount/lists.tpl:33 plugins/gofax/faxaccount/main.inc:91
-#: plugins/addons/addressbook/dial.tpl:10
-#: plugins/addons/addressbook/address_edit.tpl:234
-#: plugins/addons/addressbook/remove.tpl:16
-#: plugins/admin/groups/class_groupManagement.inc:332
-#: plugins/admin/groups/remove.tpl:16
-#: plugins/admin/groups/application_options.tpl:10
-#: plugins/admin/groups/group_objects.tpl:49
-#: plugins/admin/groups/mail_admins.tpl:39
-#: plugins/admin/groups/mail_locals.tpl:68 plugins/admin/users/password.tpl:23
-#: plugins/admin/users/template.tpl:46
-#: plugins/admin/users/class_userManagement.inc:635
-#: plugins/admin/users/remove.tpl:16 plugins/admin/applications/remove.tpl:15
-#: plugins/admin/applications/class_applicationManagement.inc:306
-#: plugins/admin/departments/remove.tpl:16
-#: plugins/admin/departments/class_departmentManagement.inc:349
-#: plugins/admin/systems/class_systemManagement.inc:541
-#: plugins/admin/systems/remove.tpl:16 plugins/admin/systems/password.tpl:30
-#: plugins/admin/systems/chooser.tpl:18 plugins/admin/systems/servnfs.tpl:76
-#: plugins/admin/systems/printerPPDDialog.tpl:23
-#: plugins/admin/systems/selectUserToPrinterDialog.tpl:61
-#: plugins/admin/ogroups/ogroup_objects.tpl:52
-#: plugins/admin/ogroups/class_ogroupManagement.inc:340
-#: plugins/admin/ogroups/remove.tpl:16 plugins/admin/fai/remove.tpl:17
-#: plugins/admin/fai/class_faiManagement.inc:394
-#: plugins/admin/fai/class_faiManagement.inc:399
-#: plugins/admin/fai/faiPartitionTableEntry.tpl:30
-#: plugins/admin/fai/faiProfileEntry.tpl:72
-#: plugins/admin/fai/faiScriptEntry.tpl:68
-#: plugins/admin/fai/faiVariableEntry.tpl:49
-#: plugins/admin/fai/faiHookEntry.tpl:70
-#: plugins/admin/fai/faiTemplateEntry.tpl:133
-#: plugins/admin/fai/faiPackageEntry.tpl:64
-#: plugins/admin/fai/faiPackageConfiguration.tpl:7
-#: plugins/admin/fai/faiPackageNew.tpl:66
-#: plugins/gofon/phoneaccount/main.inc:107 plugins/gofon/macro/remove.tpl:15
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:302
-#: plugins/gofon/conference/class_phoneConferenceManagment.inc:268
-#: plugins/gofon/conference/remove.tpl:16
-msgid "Cancel"
-msgstr "Annulla"
-
-#: ihtml/themes/altlinux/setup_useradmin.tpl:3
-#: ihtml/themes/default/setup_useradmin.tpl:3
-msgid "You already have an Administrative Account and a Group."
-msgstr ""
-
-#: ihtml/themes/altlinux/setup_useradmin.tpl:10
-#: ihtml/themes/default/setup_useradmin.tpl:10
-msgid ""
-"To provide full administrative access to GOsa, you need to create a special "
-"group which contains the administrative user. The setup program can assist "
-"you with this task. Enter the desired username and the password below to "
-"create the missing entries."
-msgstr ""
-"Per amministrare GOsa devi creare un gruppo speciale che contine l'utente "
-"aministrativo. La procedura di setup ti aiuterà nel compito.Immetti il nome "
-"utente e la password per creare le entrate mancanti."
-
-#: ihtml/themes/altlinux/setup_step3.tpl:4
-#: ihtml/themes/default/setup_step3.tpl:4
-msgid ""
-"Now we're going include your LDAP server and create an initial "
-"configuration. After you've entered the server URI below, a quick check is "
-"performed if required LDAP schemas are in place. Samba versions are "
-"autodetected by the installed objectclasses. Details on how your LDAP tree "
-"is organized will be asked later on."
-msgstr ""
-"Adesso ci occuperemo del server LDAP e creeremo al configurazione iniziale. "
-"Dopo che avrai inserito la URI del server verrà eseguito un rapido controllo "
-"per verificare che tutti gli schemi necessari siano presenti. La versione di "
-"Samba verrà riconosciuta automaticamente. I dettagli sul DIT della tua "
-"organizzazione sarammo chiesti in seguito."
-
-#: ihtml/themes/altlinux/setup_step3.tpl:10
-#: ihtml/themes/default/setup_step3.tpl:10
-msgid ""
-"Please enter the server URI to allow the setup to connect your LDAP server "
-"<i>(Example: ldap://your.server:389).</i>"
-msgstr ""
-"Inserisci la URI del server LDAP <i>(Per esempio: ldap://mio.server:389).</i>"
-
-#: ihtml/themes/altlinux/setup_step4.tpl:2
-#: ihtml/themes/default/setup_step4.tpl:2
-msgid ""
-"The following fields allow the basic configuration of GOsa's behaviour and "
-"affect various properties in your main configuration."
-msgstr "I campi seguenti permettono una configurazione base di GOsa."
-
-#: ihtml/themes/altlinux/setup_step4.tpl:7
-#: ihtml/themes/default/setup_step4.tpl:7
-msgid "Enter a description for the location you're configuring here"
-msgstr "Inserisci una descrizione della locazione che vuoi configurare"
-
-#: ihtml/themes/altlinux/setup_step4.tpl:11
-#: ihtml/themes/default/setup_step4.tpl:11
-msgid "Location name"
-msgstr "Nome locazione"
-
-#: ihtml/themes/altlinux/setup_step4.tpl:18
-#: ihtml/themes/default/setup_step4.tpl:18
-msgid ""
-"GOsa always acts as admin and manages access rights internally. This is a "
-"workaround till OpenLDAP's in directory ACI's are fully implemented. For "
-"this to work, we need the admin DN and the corresponding password."
-msgstr ""
-"GOsa agisce sul DIT tramite l'utente di amministrazione e possiede uno "
-"schema di permessi interno. Questo è un workaround finché non sarà "
-"completato il supportp per le ACL all'interno del DIT in OpenLDAP."
-
-#: ihtml/themes/altlinux/setup_step4.tpl:23
-#: ihtml/themes/default/setup_step4.tpl:23
-msgid "Admin DN"
-msgstr "DN dell'amministratore"
-
-#: ihtml/themes/altlinux/setup_step4.tpl:27
-#: ihtml/themes/default/setup_step4.tpl:27
-msgid "Admin password"
-msgstr "Password dell'amministratore"
-
-#: ihtml/themes/altlinux/setup_step4.tpl:34
-#: ihtml/themes/default/setup_step4.tpl:34
-msgid ""
-"Some basic LDAP parameters are tunable and affect the locations where GOsa "
-"saves people and groups, including the way accounts get created. Check the "
-"values below if the fit your needs."
-msgstr ""
-"Alcuni parametri di LDAP sono selezionabili e influenzano il posto in cui "
-"GOsa salva le identità e i gruppi. Controlla che i valori riportati "
-"corrispondano alle impostaioni del tuo DIT."
-
-#: ihtml/themes/altlinux/setup_step4.tpl:39
-#: ihtml/themes/default/setup_step4.tpl:39
-msgid "Base "
-msgstr "Base "
-
-#: ihtml/themes/altlinux/setup_step4.tpl:43
-#: ihtml/themes/default/setup_step4.tpl:43
-msgid "People storage ou"
-msgstr "Ou delle persone"
-
-#: ihtml/themes/altlinux/setup_step4.tpl:47
-#: ihtml/themes/default/setup_step4.tpl:47
-msgid "People dn attribute"
-msgstr "Attributo DN delle persone"
-
-#: ihtml/themes/altlinux/setup_step4.tpl:55
-#: ihtml/themes/default/setup_step4.tpl:55
-msgid "Group storage ou"
-msgstr "Ou dei gruppi"
-
-#: ihtml/themes/altlinux/setup_step4.tpl:59
-#: ihtml/themes/default/setup_step4.tpl:59
-msgid "ID base for users/groups"
-msgstr "UID di base per utenti/gruppi"
-
-#: ihtml/themes/altlinux/setup_step4.tpl:67
-#: ihtml/themes/default/setup_step4.tpl:67
-msgid ""
-"GOsa supports several encryption types for your passwords. Normally this is "
-"adjustable via user templates, but you can specify a default method to be "
-"used here, too."
-msgstr ""
-"GOsa supporta numerosi algoritmi di criptaggio per le password. Imposta "
-"quello di default."
-
-#: ihtml/themes/altlinux/setup_step4.tpl:72
-#: ihtml/themes/default/setup_step4.tpl:72
-msgid "Encryption algorithm"
-msgstr "Algoritmo di criptaggio"
-
-#: ihtml/themes/altlinux/setup_step4.tpl:83
-#: ihtml/themes/default/setup_step4.tpl:83
-msgid ""
-"GOsa has modular support for several mail methods. These methods provide "
-"interfaces to users mailboxes and general handling for quotas. You can "
-"choose the dummy plugin to leave all your mail settings untouched."
-msgstr ""
-"GOsa supporta numerosi metodi per amministrare la posta. Questi metodi "
-"possiedono interfacce per impostare opzioni come ad esempio la quota. Puoi "
-"impostare il metodo 'dummy' per mantenere tutte le impostazioni."
-
-#: ihtml/themes/altlinux/setup_step4.tpl:88
-#: ihtml/themes/default/setup_step4.tpl:88
-msgid "Mail method"
-msgstr "Metodo di amministrazione della posta"
-
-#: ihtml/themes/altlinux/setup_step4.tpl:91
-#: ihtml/themes/default/setup_step4.tpl:91
-#: plugins/personal/posix/class_posixAccount.inc:550
-#: plugins/personal/samba/class_sambaAccount.inc:453
-#: plugins/admin/systems/class_terminalGeneric.inc:62
-msgid "disabled"
-msgstr "disabilitato"
-
-#: ihtml/themes/altlinux/setup_step4.tpl:99
-msgid ""
-"GOsa may cause PHP interpreter errors, particularly in case of Beta "
-"versions. In some cases it would be helpful to enable the error reporting. "
-"(But it  could be a security risk)  "
-msgstr ""
-
-#: ihtml/themes/altlinux/setup_step4.tpl:103
-#: ihtml/themes/default/setup_step4.tpl:104
-msgid "Display PHP errors"
-msgstr "Mostra errori PHP"
-
-#: ihtml/themes/altlinux/setup_step4.tpl:106
-#: ihtml/themes/default/setup_step4.tpl:107
-msgid "true"
-msgstr "vero"
-
-#: ihtml/themes/altlinux/setup_step4.tpl:107
-#: ihtml/themes/default/setup_step4.tpl:108
-msgid "false"
-msgstr "falso"
-
-#: ihtml/themes/altlinux/setup_step4.tpl:115
-#: ihtml/themes/default/setup_step4.tpl:115
-msgid "Check"
-msgstr "Continua"
-
-#: ihtml/themes/altlinux/setup_finish.tpl:1
-#: ihtml/themes/default/setup_finish.tpl:1
-msgid "Setup finished"
-msgstr "Setup completato"
-
-#: ihtml/themes/altlinux/setup_finish.tpl:3
-#: ihtml/themes/default/setup_finish.tpl:3
-msgid ""
-"Basically the setup is finished. You can check the result of the schema "
-"check here and download the autogenerated gosa.conf below."
-msgstr ""
-"La configurazione di GOsa è terminata. Puoi verificare il risultato del "
-"controllo degli schemi e scaricare il file di configurazione autogenerto."
-
-#: ihtml/themes/altlinux/setup_finish.tpl:7
-#: ihtml/themes/default/setup_finish.tpl:7
-msgid "Schema Configuration"
-msgstr "Configurazione delgi schemi"
-
-#: ihtml/themes/altlinux/setup_finish.tpl:12
-#: ihtml/themes/default/setup_finish.tpl:12
-msgid "Configuration File"
-msgstr "File di configurazione"
-
-#: ihtml/themes/altlinux/setup_finish.tpl:14
-#: ihtml/themes/default/setup_finish.tpl:14
-msgid ""
-"GOsa setup has collected all data needed to create an initial configuration "
-"file. Save the the link below as your gosa.conf and place that file in /etc/"
-"gosa. Change it as needed."
-msgstr ""
-"La procedura di configurazione di GOsa ha raccoolto le informazioni "
-"necessarie a creare un file di configurazione iniziale. Scarica il file e "
-"salvalo dentro /etc/gosa/ col nome gosa.conf."
-
-#: ihtml/themes/altlinux/setup_finish.tpl:17
-#: ihtml/themes/default/setup_finish.tpl:17
-msgid "Download configuration"
-msgstr "Scarica il file di  configurazione"
-
-#: ihtml/themes/altlinux/setup_finish.tpl:20
-#: ihtml/themes/default/setup_finish.tpl:20
-msgid ""
-"After placing the file under /etc/gosa, place make sure that the webserver "
-"user is able to read gosa.conf, while other users shouldn't. You may want to "
-"execute these commands to achieve this requirement:"
-msgstr ""
-"Dopo averlo scaricato dentro /etc/gosa/, assicurati che l'utente del "
-"webserver sia in grado di leggerlo mentre tutti gli altri utenti non "
-"possono. In molti casi è sufficiente eseguire i comandi seguenti."
-
-#: ihtml/themes/altlinux/setup_finish.tpl:31
-#: ihtml/themes/default/setup_finish.tpl:31
-#: plugins/admin/ogroups/phonequeue.tpl:54
-msgid "Retry"
-msgstr "Riprova"
-
-#: ihtml/themes/default/help.tpl:9
-msgid "GOsa help viewer"
-msgstr ""
-
-#: ihtml/themes/default/help.tpl:15
-msgid "Index"
-msgstr ""
-
-#: ihtml/themes/default/help.tpl:21 plugins/gofax/faxreports/contents.tpl:21
-#: plugins/addons/logview/contents.tpl:67
-#: plugins/addons/mailqueue/contents.tpl:11
-#: plugins/addons/mailqueue/contents.tpl:27
-#: plugins/gofon/fonreports/contents.tpl:21
-msgid "Search"
-msgstr "Cerca"
-
-#: ihtml/themes/default/setup_introduction.tpl:17
-msgid ""
-"You can also use the new and more-advanced way of inspecting your PHP-"
-"installation. It will give you information about the exact function that "
-"could not be found (functions that could be found are not mentioned). This "
-"is useful if you know what you're doing."
-msgstr ""
-
-#: ihtml/themes/default/setup_introduction.tpl:19
-msgid "Toggle Show/Hide"
-msgstr ""
-
-#: ihtml/themes/default/setup_step4.tpl:100
-msgid ""
-"GOsa may cause PHP interpreter errors, particularly in case of Beta "
-"versions. In some cases it would be helpful to enable the error reporting. "
-"(But it could be a security risk)  "
-msgstr ""
-
-#: include/php_setup.inc:71
-msgid "Generating this page caused the PHP interpreter to raise some errors!"
-msgstr ""
-
-#: include/php_setup.inc:76
-msgid "PHP error"
-msgstr "Errore PHP"
-
-#: include/php_setup.inc:87
-msgid "class"
-msgstr "classe"
-
-#: include/php_setup.inc:93
-msgid "function"
-msgstr "funzione"
-
-#: include/php_setup.inc:98
-msgid "static"
-msgstr "statico"
-
-#: include/php_setup.inc:102
-msgid "method"
-msgstr "metodo"
-
-#: include/php_setup.inc:121
-msgid "Trace"
-msgstr ""
-
-#: include/php_setup.inc:122 plugins/admin/fai/faiTemplateEntry.tpl:29
-msgid "File"
-msgstr ""
-
-#: include/php_setup.inc:122
-msgid "Line"
-msgstr ""
-
-#: include/php_setup.inc:122 plugins/gofax/blocklists/generic.tpl:32
-#: plugins/admin/systems/workstationService.tpl:42
-#: plugins/admin/systems/workstationService.tpl:120
-#: plugins/admin/systems/servnfs.tpl:39
-#: plugins/admin/systems/terminalService.tpl:42
-#: plugins/admin/systems/terminalService.tpl:120
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:179
-#: plugins/gofon/conference/generic.tpl:22
-msgid "Type"
-msgstr "Tipo"
-
-#: include/php_setup.inc:123
-msgid "Arguments"
-msgstr "Argomenti"
-
-#: include/functions.inc:290
-#, php-format
-msgid "Error when connecting the LDAP. Server said '%s'."
-msgstr "Errore durante la connessione al server LDAP. Il server dice: '%s'"
-
-#: include/functions.inc:311
-#, php-format
-msgid "User login failed. LDAP server said '%s'."
-msgstr ""
-
-#: include/functions.inc:330
-msgid "Username / UID is not unique. Please check your LDAP database."
-msgstr ""
-
-#: include/functions.inc:368
-msgid ""
-"Error while adding a lock. Parameters are not set correctly, please check "
-"the source!"
-msgstr ""
-
-#: include/functions.inc:378
-#, php-format
-msgid ""
-"Can't set locking information in LDAP database. Please check the 'config' "
-"entry in gosa.conf! LDAP server says '%s'."
-msgstr ""
-
-#: include/functions.inc:393
-#, php-format
-msgid "Adding a lock failed. LDAP server says '%s'."
-msgstr ""
-
-#: include/functions.inc:419
-#, php-format
-msgid "Removing a lock failed. LDAP server says '%s'."
-msgstr ""
-
-#: include/functions.inc:449
-msgid ""
-"Getting the lock from LDAP failed. Parameters are not set correctly, please "
-"check the source!"
-msgstr ""
-
-#: include/functions.inc:459
-msgid ""
-"Can't get locking information in LDAP database. Please check the 'config' "
-"entry in gosa.conf!"
-msgstr ""
-
-#: include/functions.inc:467
-msgid ""
-"Found multiple locks for object to be locked. This should not be possible - "
-"cleaning up multiple references."
-msgstr ""
-
-#: include/functions.inc:581
-#, php-format
-msgid "The size limit of %d entries is exceed!"
-msgstr ""
-
-#: include/functions.inc:583
-#, php-format
-msgid ""
-"Set the new size limit to %s and show me this message if the limit still "
-"exceeds"
-msgstr ""
-
-#: include/functions.inc:595 plugins/admin/fai/faiPackage.tpl:76
-msgid "Configure"
-msgstr "Configura"
-
-#: include/functions.inc:600
-msgid "incomplete"
-msgstr "incompleto"
-
-#: include/functions.inc:1007
-#, php-format
-msgid ""
-"You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
-"Please contact the person in order to clarify proceedings."
-msgstr ""
-"Stai per modificare il record LDAP '%s' che sembra essere in uso da '%s'. "
-"Contatta la persona interessata."
-
-#: include/functions.inc:1106
-msgid "LDAP error:"
-msgstr "Errore LDAP"
-
-#: include/functions.inc:1284
-msgid "Entries per page"
-msgstr ""
-
-#: include/functions.inc:1312
-msgid "Apply filter"
-msgstr ""
-
-#: include/functions.inc:1586
-msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-msgstr ""
-
-#: include/functions.inc:1629
-#, php-format
-msgid "GOsa development snapshot (Rev %s)"
-msgstr "versione di sviluppo di GOsa (Rev %s)"
-
-#: include/class_mail-methods-cyrus.inc:39
-msgid ""
-"Warning: Account has an invalid mailserver string! Please check the mail "
-"server settings in the mail tab."
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:52
-msgid ""
-"Warning: IMAP Server cannot be reached! If you save this account, some mail "
-"settings will not be stored on your server!"
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:115
-#, php-format
-msgid "Can't create IMAP mailbox. Server says '%s'."
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:131
-#, php-format
-msgid "Can't write IMAP quota. Server says '%s'."
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:155
-msgid "Warning: imap_getacl is not implemented, can't remove acl informations."
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:173
-msgid "Warning: imap_getacl is not available, can't get imap permissions!"
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:195
-#, php-format
-msgid "Can't remove IMAP mailbox. Server says '%s'."
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:223
-#, php-format
-msgid "Can't log into SIEVE server. Server says '%s'."
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:236
-#, php-format
-msgid "Can't get sieve script. Server says '%s'."
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:307
-#, php-format
-msgid "Can't send sieve script. Server says '%s'."
-msgstr ""
-
-#: include/class_mail-methods-cyrus.inc:311
-#, php-format
-msgid "Can't activate GOsa sieve script. Server says '%s'."
-msgstr ""
-
-#: include/class_pluglist.inc:115
-msgid ""
-"Your gosa.conf information has changed partly. Please convert it using the "
-"contributed script fix_config.sh!"
-msgstr ""
-
-#: include/class_plugin.inc:391
-#, php-format
-msgid ""
-"Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
-msgstr ""
-
-#: include/class_plugin.inc:419 include/class_password-methods.inc:181
-#, php-format
-msgid ""
-"Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
-msgstr ""
-
-#: include/class_plugin.inc:447
-#, php-format
-msgid ""
-"Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
-msgstr ""
-
-#: include/class_config.inc:69
-#, php-format
-msgid "XML error in gosa.conf: %s at line %d"
-msgstr ""
-
-#: include/class_config.inc:433
-msgid "SID and/or RIDBASE missing in your configuration!"
-msgstr ""
-
-#: include/class_password-methods-ssha.inc:51
-msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
-msgstr ""
-
-#: include/class_password-methods.inc:165
-#, php-format
-msgid "Setting the password failed. LDAP server says '%s'."
-msgstr ""
-
-#: include/class_password-methods.inc:202
-msgid ""
-"Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
-msgstr ""
-
-#: include/class_password-methods-kerberos.inc:43
-msgid ""
-"Warning: Can't set kerberos password. Your PHP version has no kerberos "
-"support, password has not been changed."
-msgstr ""
-
-#: include/class_password-methods-kerberos.inc:52
-msgid "Kerberos database communication failed!"
-msgstr ""
-
-#: include/class_password-methods-kerberos.inc:59
-msgid "Changing password in kerberos database failed!"
-msgstr ""
-
-#: include/class_password-methods-sha.inc:50
-msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
-msgstr ""
-
-#: include/class_ldap.inc:437
-#, php-format
-msgid ""
-"Autocreation of type '%s' is currently not supported. Please report to the "
-"GOsa team."
-msgstr ""
-
-#: include/class_ldap.inc:699
-#, php-format
-msgid ""
-"This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
-"in line %s"
-msgstr ""
-
-#: include/class_ldap.inc:712
-#, php-format
-msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
-msgstr ""
-
-#: include/class_ldap.inc:728
-#, php-format
-msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
-msgstr ""
-
-#: include/class_certificate.inc:35
-msgid "Can't open specified file, check accessibility and or existence"
-msgstr ""
-
-#: include/class_certificate.inc:53
-msgid "Can't read specified certificate / or empty string given"
-msgstr ""
-
-#: include/class_certificate.inc:80
-msgid "Can't load certificate, possibly unsupported format (use PEM/DER) "
-msgstr ""
-
-#: include/class_certificate.inc:95
-msgid "The Format must be PEM, to output certificate informations"
-msgstr ""
-
-#: include/class_certificate.inc:192
-msgid "Can't create/open File"
-msgstr "Errore nella creazione/apertura del file"
-
-#: include/class_certificate.inc:199
-msgid "No valid certificate loaded"
-msgstr ""
-
-#: include/functions_helpviewer.inc:43
-#, php-format
-msgid "XML error in guide.xml: %s at line %d"
-msgstr ""
-
-#: include/functions_helpviewer.inc:86
-msgid "No help available for this plugin."
-msgstr ""
-
-#: include/functions_helpviewer.inc:95
-msgid "previous"
-msgstr ""
-
-#: include/functions_helpviewer.inc:99
-msgid "next"
-msgstr ""
-
-#: include/functions_helpviewer.inc:387
-#, php-format
-msgid "%s results for your search with the keyword %s interpreted as %s"
-msgstr ""
-
-#: include/functions_helpviewer.inc:462
-#, php-format
-msgid "%s%% hit rate in file %s"
-msgstr ""
-
-#: include/functions_setup.inc:98
-msgid "Can't bind to LDAP. No schema check possible!"
-msgstr ""
-
-#: include/functions_setup.inc:107 include/functions_setup.inc:116
-msgid "Can't get schema information from server. No schema check possible!"
-msgstr ""
-
-#: include/functions_setup.inc:136
-#, php-format
-msgid ""
-"Optional objectclass '%s' required by plugin '%s' is not present in LDAP "
-"setup"
-msgstr ""
-
-#: include/functions_setup.inc:140
-#, php-format
-msgid ""
-"Optional objectclass '%s' required by plugin '%s' does not have version %s"
-msgstr ""
-
-#: include/functions_setup.inc:145
-#, php-format
-msgid "Support for '%s' enabled"
-msgstr "Supporto per '%s' abilitato."
-
-#: include/functions_setup.inc:155
-#, php-format
-msgid "Required objectclass '%s' is not present in LDAP setup"
-msgstr ""
-
-#: include/functions_setup.inc:159
-#, php-format
-msgid "Required objectclass '%s' does not have version %s"
-msgstr ""
-
-#: include/functions_setup.inc:170
-msgid "SAMBA 3 support disabled, no schema seems to be installed"
-msgstr "Supporto per Samba 3 disabilitato. Manca il file di schema?"
-
-#: include/functions_setup.inc:175
-msgid "SAMBA 3 support enabled"
-msgstr "Support per Samba 3 abilitato."
-
-#: include/functions_setup.inc:180
-msgid "SAMBA 2 support disabled, no schema seems to be installed"
-msgstr "Supporto per Samba 2 disabilitato. Manca il file di schema?"
-
-#: include/functions_setup.inc:185
-msgid "SAMBA 2 support enabled"
-msgstr "Supporto per Samba 2 abilitato."
-
-#: include/functions_setup.inc:191
-msgid "Support for pureftp disabled, no schema seems to be installed"
-msgstr "Supporto per pureftp disabilitato. Manca il file di schema?"
-
-#: include/functions_setup.inc:196
-msgid "Support for pureftp enabled"
-msgstr "Supporto per pureftp abilitato."
-
-#: include/functions_setup.inc:201
-msgid "Support for WebDAV disabled, no schema seems to be installed"
-msgstr "Supporto per WebDAV disabilitato. Manca il file di schema?"
-
-#: include/functions_setup.inc:206
-msgid "Support for WebDAV enabled"
-msgstr "Supporto per WebDAV abilitato."
-
-#: include/functions_setup.inc:211
-msgid "Support for phpgroupware disabled, no schema seems to be installed"
-msgstr "Supporto per phpgroupware disabilitato. Manca il file di schema?"
-
-#: include/functions_setup.inc:216
-msgid "Support for phpgroupware enabled"
-msgstr "Supporto per phpgroupware abilitato."
-
-#: include/functions_setup.inc:221
-msgid "Support for gofon disabled, no schema seems to be installed"
-msgstr "Supporto per gofon disabilitato. Manca il file di schema?"
-
-#: include/functions_setup.inc:226
-msgid "Support for gofon enabled"
-msgstr "Supporto per gofon abilitato."
-
-#: include/functions_setup.inc:231
-msgid "Support for nagios disabled, no schema seems to be installed"
-msgstr "Supporto per nagios disabilitato. Manca il file di schema?"
-
-#: include/functions_setup.inc:236
-msgid "Support for nagios enabled"
-msgstr "Supporto per nagios abilitato."
-
-#: include/functions_setup.inc:246
-msgid ""
-"Support for Kolab disabled, no schema seems to be installed, setting mail-"
-"method to cyrus"
-msgstr ""
-"Supporto per Kolab disabilitato. Manca il file di schema?Il metodo di "
-"amministrazine della posta è impostato su cyrus"
-
-#: include/functions_setup.inc:253
-msgid "Support for Kolab enabled"
-msgstr "Supporto per Kolab abilitato."
-
-#: include/functions_setup.inc:271
-msgid "OK"
-msgstr "OK"
-
-#: include/functions_setup.inc:274
-msgid "Ignored"
-msgstr "Ignora"
-
-#: include/functions_setup.inc:276
-msgid "Failed"
-msgstr "Fallito"
-
-#: include/functions_setup.inc:293
-msgid "PHP setup inspection"
-msgstr "Ispezione della configurazione PHP"
-
-#: include/functions_setup.inc:294
-msgid "Checking for PHP version (>=4.1.0)"
-msgstr "Controllo della versione di PHP (>=4.1.0)"
-
-#: include/functions_setup.inc:295
-msgid ""
-"PHP must be of version 4.1.0 or above for some functions and known bugs in "
-"PHP language."
-msgstr "PHP deve essere la versione 4.1.0 o superiore."
-
-#: include/functions_setup.inc:298
-msgid "Checking if register_globals is set to 'off'"
-msgstr "Controllo se register_globals e impostato su 'off'"
-
-#: include/functions_setup.inc:299
-msgid ""
-"register_globals is a PHP mechanism to register all global varibales to be "
-"accessible from scripts without changing the scope. This may be a security "
-"risk. GOsa will run in both modes."
-msgstr ""
-"register_globals è un meccanismo PHP che può comportare maggiori rischi per "
-"la sicurezza. GOsa funziona in entrambe le modalità"
-
-#: include/functions_setup.inc:302
-msgid "Checking for ldap module"
-msgstr "Controllo il modulo ldap"
-
-#: include/functions_setup.inc:303
-msgid "This is the main module used by GOsa and therefore really required."
-msgstr ""
-"Questo è il modulo più importante usato da GOsa ed è quindi necessario."
-
-#: include/functions_setup.inc:306
-msgid "Checking for XML functions"
-msgstr "Controllo le funzioni XML"
-
-#: include/functions_setup.inc:307
-msgid "XML functions are required to parse the configuration file."
-msgstr ""
-
-#: include/functions_setup.inc:310
-msgid "Checking for gettext support"
-msgstr "Controllo il support per gettext"
-
-#: include/functions_setup.inc:311
-msgid "Gettext support is required for internationalized GOsa."
-msgstr "Gettext è necessario al supporto per le lingue."
-
-#: include/functions_setup.inc:314
-msgid "Checking for iconv support"
-msgstr "Controllo il supporto per iconv"
-
-#: include/functions_setup.inc:315
-msgid ""
-"This module is used by GOsa to convert samba munged dial informations and is "
-"therefore required."
-msgstr ""
-"Questo modulo è usato da GOsa per convertire alcune informazioni usate da "
-"samba ed è necessario."
-
-#: include/functions_setup.inc:318
-msgid "Checking for mhash module"
-msgstr "Controllo il module mhash"
-
-#: include/functions_setup.inc:319
-msgid ""
-"To use SSHA encryption, you'll need this module. If you are just using crypt "
-"or md5 encryption, ignore this message. GOsa will run without it."
-msgstr ""
-"Questo modulo fornisce lo schema SSHA di criptaggio delle password. Se usi "
-"gli schemi classici 'crypt' e 'md5' ignora queso messaggio. GOsa funziona "
-"correttamente anche senza."
-
-#: include/functions_setup.inc:322
-msgid "Checking for imap module"
-msgstr "Controllo il modulo imap"
-
-#: include/functions_setup.inc:323
-msgid ""
-"The IMAP module is needed to communicate with the IMAP server. It gets "
-"status informations, creates and deletes mail users."
-msgstr "Questo modulo è necessario per comunicare con il server di posta."
-
-#: include/functions_setup.inc:326
-msgid "Checking for getacl in imap"
-msgstr "Controllo il supporto per getacl"
-
-#: include/functions_setup.inc:327
-msgid ""
-"The getacl support is needed for shared folder permissions. The standard "
-"IMAP module is not capable of reading acl's. You need a recend PHP version "
-"for this feature."
-msgstr ""
-"Il support per getacl serve a ottenere i permessi di accesso delle cartelle "
-"di posta sul server. GOsa funziona correttamente anche senza."
-
-#: include/functions_setup.inc:330
-msgid "Checking for mysql module"
-msgstr "Controllo il modulo mysql"
-
-#: include/functions_setup.inc:331
-msgid "MySQL support is needed for reading GOfax reports from databases."
-msgstr ""
-"Queso modulo serve a leggere i report di GOfax dal database.GOsa funziona "
-"correttamente anche senza."
-
-#: include/functions_setup.inc:334
-msgid "Checking for cups module"
-msgstr "Controllo il modulo cups"
-
-#: include/functions_setup.inc:335
-msgid ""
-"In order to read available printers from IPP protocol instead of printcap "
-"files, you've to install the CUPS module."
-msgstr ""
-"Questo modulo serve a ottenere le informazioni sulle stampanti di rete. GOsa "
-"funziona correttamente anche senza."
-
-#: include/functions_setup.inc:338
-msgid "Checking for kadm5 module"
-msgstr "Controllo il modulo kadm5"
-
-#: include/functions_setup.inc:339
-msgid ""
-"Managing users in kerberos requires the kadm5 module which is downloadable "
-"via PEAR network."
-msgstr ""
-"Questo modulo serve ad amministrare gli utenti in un dominio Kerberos. GOsa "
-"funziona correttamente anche senza."
-
-#: include/functions_setup.inc:342
-msgid "Checking for snmp Module"
-msgstr "Controllo il modulo snmp"
-
-#: include/functions_setup.inc:343
-msgid ""
-"Simple Network Management Protocol (SNMP) is required for client monitoring."
-msgstr ""
-
-#: include/functions_setup.inc:379
-msgid "PHP detailed function inspection"
-msgstr "Ispezione dettagliata delle funzioni PHP"
-
-#: include/functions_setup.inc:383
-#, php-format
-msgid "Checking for function %s"
-msgstr "Controllo il supporto per %s"
-
-#: include/functions_setup.inc:384
-#, php-format
-msgid ""
-"The function %s is used by GOsa. There is no information if it's optional or "
-"required yet."
-msgstr ""
-"La funzione %s è usata da GOsa. Non è specificato se è opzionale o "
-"necessaria."
-
-#: include/functions_setup.inc:395
-msgid "Checking for some additional programms"
-msgstr "Controllo la presenza di alcuni programmi addizionali"
-
-#: include/functions_setup.inc:404
-msgid "Checking for ImageMagick (>=5.4.0)"
-msgstr "Controllo per ImageMagick (>=5.4.0)"
-
-#: include/functions_setup.inc:405
-msgid ""
-"ImageMagick is used to convert user supplied images to fit the suggested "
-"size and the unified JPEG format."
-msgstr ""
-"Il programma ImageMagick serve a convertire le immagini fornite dagli utenti "
-"nelle dimensioni e nel formato di default."
-
-#: include/functions_setup.inc:408
-msgid "Checking imagick module for PHP"
-msgstr ""
-
-#: include/functions_setup.inc:409
-msgid ""
-"Imagick is used to convert user supplied images to fit the suggested size "
-"and the unified JPEG format from PHP script."
-msgstr ""
-
-#: include/functions_setup.inc:416
-msgid "Checking for fping utility"
-msgstr "Controllo il supporto per fping"
-
-#: include/functions_setup.inc:417
-msgid ""
-"The fping utility is only used if you've got a thin client based terminal "
-"environment running."
-msgstr ""
-"Il programma fping è usato solo nel caso di ambienti basati su terminali "
-"'thin client'."
-
-#: include/functions_setup.inc:432
-msgid "Checking for a way to generate LM/NT password hashes"
-msgstr "Controllo la possibilità di generare password con algoritmo LM/NT"
-
-#: include/functions_setup.inc:433
-msgid ""
-"In order to use SAMBA 2/3, you've to install some additional packages to "
-"generate password hashes."
-msgstr ""
-"Un programma in grado di generare password con algoritmo LM/NT è necessario "
-"per poter usare Samba 2 o 3."
-
-#: include/functions_setup.inc:446
-msgid "php.ini check -> session.auto_register"
-msgstr "Controllo php.ini per session.auto_register"
-
-#: include/functions_setup.inc:447
-msgid ""
-"In Order to use GOsa without any trouble, the session.auto_register option "
-"in your php.ini must be set to 'Off'."
-msgstr ""
-"Per non avere problemi con GOsa è necessario impostare l'opzione session."
-"auto_register su 'off' nel file php.ini"
-
-#: include/functions_setup.inc:450
-msgid "php.ini check -> implicit_flush"
-msgstr "Controllo php.ini per implicit_flush"
-
-#: include/functions_setup.inc:451
-msgid ""
-"This option influences the Output handling. Turn this Option off, to "
-"increase performance."
-msgstr ""
-"Per motivi di performance è consigliato di impostare l'opzione "
-"implicit_flush su 'off' nel file php.ini."
-
-#: include/functions_setup.inc:458
-msgid "php.ini check -> max_execution_time"
-msgstr "Controllo php.ini per max_execution_time"
-
-#: include/functions_setup.inc:459
-msgid ""
-"The Execution time should be at least 30 seconds, because some actions may "
-"consume more time."
-msgstr ""
-"Per non avere problemi con GOsa è necessario impostare l'opzione "
-"max_execution_time a 30 secondi o più nel file php.ini"
-
-#: include/functions_setup.inc:466
-msgid "php.ini check -> memory_limit"
-msgstr "Controllo php.ini per memory_limit"
-
-#: include/functions_setup.inc:467
-msgid ""
-"GOsa needs at least 16MB of memory, less will cause unpredictable errors! "
-"Increase it for larger setups."
-msgstr ""
-"Per non avere problemi con GOsa è necessario impostare l'opzione "
-"memory_limit a 16MB o più nel file php.ini"
-
-#: include/functions_setup.inc:471
-msgid "php.ini check -> expose_php"
-msgstr "Controllo php.ini per expose_php"
-
-#: include/functions_setup.inc:472
-msgid ""
-"Increase the server security by setting expose_php to 'off'. PHP won't send "
-"any Information about the server you are running in this case."
-msgstr ""
-"Per motivi di sicurezza è consigliato di impostare l'opzione expose_php su "
-"'off' nel file php.ini."
-
-#: include/functions_setup.inc:476
-msgid "php.ini check -> magic_quotes_gpc"
-msgstr "Controllo php.ini per magic_quotes_gpc"
-
-#: include/functions_setup.inc:477
-msgid ""
-"Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
-"escape all quotes in strings in this case."
-msgstr ""
-"Per motivi di sicurezza è consigliato di impostare l'opzione "
-"magic_quotes_gpc su 'on' nel file php.ini."
-
-#: include/functions_setup.inc:720
-msgid "You've to specify an ldap server before continuing!"
-msgstr ""
-
-#: include/functions_setup.inc:729 include/functions_setup.inc:812
-msgid ""
-"Can't connect to the specified LDAP server! Please make sure that is "
-"reachable for GOsa."
-msgstr ""
-
-#: include/functions_setup.inc:743 include/functions_setup.inc:817
-#: include/functions_setup.inc:822
-msgid ""
-"Can't bind to the specified LDAP server! Please make sure that it is "
-"reachable for GOsa."
-msgstr ""
-
-#: include/functions_setup.inc:832
-msgid ""
-"Bind to server successful, but the server seems to be completly empty, "
-"please check all informations twice"
-msgstr ""
-
-#: include/functions_setup.inc:888
-#, php-format
-msgid ""
-"You're missing the required attribute '%s' from this formular. Please "
-"complete!"
-msgstr "Manca il campo obbligatorio '%s'. Completarlo, prego. "
-
-#: include/functions_setup.inc:919
-msgid ""
-"Can't read schema informations, GOsa needs to know your schema setup. Please "
-"verify that it is readable for GOsa"
-msgstr ""
-
-#: include/functions_setup.inc:928
-#, php-format
-msgid "Can't log into LDAP server. Reason was: %s."
-msgstr "Accesso al server LDAP fallito. La ragione è: %s."
-
-#: include/class_ppdManager.inc:13
-#, php-format
-msgid "PPD manager : The specified path '%s' doesn't exists."
-msgstr ""
-
-#: include/class_ppdManager.inc:129 include/class_ppdManager.inc:247
-#, php-format
-msgid ""
-"Parsing PPD file %s failed - line too long. Trailing characters have been "
-"ignored"
-msgstr ""
-
-#: include/class_ppdManager.inc:137
-msgid "Nested groups are not supported!"
-msgstr "Gruppi ricorsivi non supportati!"
-
-#: include/class_ppdManager.inc:141
-msgid "Group name not unique!"
-msgstr "Nome del gruppo non unico!"
-
-#: include/class_ppdManager.inc:147 include/class_ppdManager.inc:177
-msgid "Symbol values are not supported yet!"
-msgstr ""
-
-#: include/class_ppdManager.inc:171
-msgid "Nested options are not supported!"
-msgstr ""
-
-#: include/class_ppdManager.inc:196
-msgid "PickMany is not supported yet!"
-msgstr ""
-
-#: include/class_ppdManager.inc:268
-#, php-format
-msgid "Parsing PPD file %s failed - no information found."
-msgstr ""
-
-#: include/class_debconfTemplate.inc:251
-#, fuzzy
-msgid "This package has no debconf options."
-msgstr "Questa identità non possiede estensioni telefoniche"
-
-#: include/class_xmlParse.inc:42
-#, php-format
-msgid "Could not open XML input '%s'."
-msgstr ""
-
-#: include/class_xmlParse.inc:117
-#, php-format
-msgid "XML error in %s : %s at line %d"
-msgstr ""
-
 #: plugins/personal/mail/class_mailAccount.inc:23
 #: plugins/personal/password/class_password.inc:6
 #: plugins/personal/posix/class_posixAccount.inc:17
@@ -2082,9 +293,9 @@ msgstr ""
 #: plugins/personal/connectivity/class_connectivity.inc:16
 #: plugins/personal/connectivity/class_proxyAccount.inc:6
 #: plugins/personal/connectivity/class_intranetAccount.inc:16
-#: plugins/personal/connectivity/class_phpscheduleitAccount.inc:28
 #: plugins/personal/connectivity/class_pptpAccount.inc:27
 #: plugins/personal/connectivity/class_glpiAccount.inc:26
+#: plugins/personal/connectivity/class_phpscheduleitAccount.inc:28
 #: plugins/personal/environment/class_environment.inc:13
 #: plugins/personal/nagios/class_nagiosAccount.inc:19
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:6
@@ -2271,11 +482,11 @@ msgstr "Lista degli indirizzi alternativi"
 #: plugins/personal/samba/samba3_workstations.tpl:39
 #: plugins/personal/connectivity/class_kolabAccount.inc:203
 #: plugins/personal/connectivity/kolab.tpl:18
+#: plugins/personal/environment/hotplugDialog.tpl:63
+#: plugins/personal/environment/selectPrinterDialog.tpl:60
 #: plugins/personal/environment/environment.tpl:117
 #: plugins/personal/environment/environment.tpl:134
 #: plugins/personal/environment/environment.tpl:177
-#: plugins/personal/environment/hotplugDialog.tpl:63
-#: plugins/personal/environment/selectPrinterDialog.tpl:60
 #: plugins/personal/environment/kioskManagement.tpl:13
 #: plugins/gofax/blocklists/generic.tpl:63
 #: plugins/gofax/faxaccount/generic.tpl:76
@@ -2289,14 +500,14 @@ msgstr "Lista degli indirizzi alternativi"
 #: plugins/admin/groups/mail_locals.tpl:66
 #: plugins/admin/systems/servservice.tpl:20
 #: plugins/admin/systems/servservice.tpl:47
-#: plugins/admin/systems/phonesettings.tpl:176
-#: plugins/admin/systems/phonesettings.tpl:191
-#: plugins/admin/systems/selectUserToPrinterDialog.tpl:60
 #: plugins/admin/systems/workstationStartup.tpl:50
 #: plugins/admin/systems/workstationStartup.tpl:70
 #: plugins/admin/systems/workstationStartup.tpl:89
+#: plugins/admin/systems/phonesettings.tpl:176
+#: plugins/admin/systems/phonesettings.tpl:191
 #: plugins/admin/systems/terminalStartup.tpl:61
 #: plugins/admin/systems/terminalStartup.tpl:80
+#: plugins/admin/systems/selectUserToPrinterDialog.tpl:60
 #: plugins/admin/ogroups/ogroup_objects.tpl:50
 #: plugins/admin/ogroups/generic.tpl:39
 #: plugins/admin/ogroups/phonequeue.tpl:24
@@ -2304,7 +515,7 @@ msgstr "Lista degli indirizzi alternativi"
 #: plugins/admin/fai/faiVariable.tpl:43 plugins/admin/fai/faiPackage.tpl:74
 #: plugins/admin/fai/class_faiProfile.inc:153
 #: plugins/admin/fai/faiProfile.tpl:37 plugins/admin/fai/faiScript.tpl:43
-#: plugins/admin/fai/faiTemplate.tpl:40 plugins/admin/fai/faiHook.tpl:43
+#: plugins/admin/fai/faiHook.tpl:43 plugins/admin/fai/faiTemplate.tpl:40
 #: plugins/gofon/phoneaccount/generic.tpl:13
 msgid "Add"
 msgstr "Aggiungi"
@@ -2328,20 +539,21 @@ msgstr "Aggiungi"
 #: plugins/admin/departments/remove.tpl:14
 #: plugins/admin/systems/servservice.tpl:22
 #: plugins/admin/systems/servservice.tpl:48
-#: plugins/admin/systems/printer.tpl:70 plugins/admin/systems/printer.tpl:86
-#: plugins/admin/systems/remove.tpl:14
-#: plugins/admin/systems/phonesettings.tpl:177
-#: plugins/admin/systems/phonesettings.tpl:192
 #: plugins/admin/systems/workstationStartup.tpl:51
 #: plugins/admin/systems/workstationStartup.tpl:71
+#: plugins/admin/systems/printer.tpl:70 plugins/admin/systems/printer.tpl:86
+#: plugins/admin/systems/phonesettings.tpl:177
+#: plugins/admin/systems/phonesettings.tpl:192
+#: plugins/admin/systems/remove.tpl:14
 #: plugins/admin/systems/terminalStartup.tpl:62
 #: plugins/admin/ogroups/generic.tpl:40 plugins/admin/ogroups/remove.tpl:14
 #: plugins/admin/ogroups/phonequeue.tpl:25 plugins/admin/fai/remove.tpl:15
 #: plugins/admin/fai/faiPartitionTable.tpl:45
 #: plugins/admin/fai/faiVariable.tpl:45 plugins/admin/fai/faiProfile.tpl:38
-#: plugins/admin/fai/faiScript.tpl:45 plugins/admin/fai/faiTemplate.tpl:42
-#: plugins/admin/fai/faiHook.tpl:45 plugins/gofon/phoneaccount/generic.tpl:15
-#: plugins/gofon/macro/remove.tpl:13 plugins/gofon/conference/remove.tpl:14
+#: plugins/admin/fai/faiScript.tpl:45 plugins/admin/fai/faiHook.tpl:45
+#: plugins/admin/fai/faiTemplate.tpl:42
+#: plugins/gofon/phoneaccount/generic.tpl:15 plugins/gofon/macro/remove.tpl:13
+#: plugins/gofon/conference/remove.tpl:14
 msgid "Delete"
 msgstr "Rimuovi"
 
@@ -2452,6 +664,68 @@ msgstr "disabilita tutte le opzioni di posta!"
 msgid "Finish"
 msgstr "Esegui"
 
+#: plugins/personal/mail/main.inc:106 plugins/personal/mail/mail_locals.tpl:43
+#: plugins/personal/posix/trust_machines.tpl:41
+#: plugins/personal/posix/posix_groups.tpl:74
+#: plugins/personal/posix/main.inc:112 plugins/personal/samba/main.inc:106
+#: plugins/personal/samba/samba3_workstations.tpl:41
+#: plugins/personal/generic/password.tpl:19
+#: plugins/personal/generic/generic_picture.tpl:31
+#: plugins/personal/generic/generic_certs.tpl:78
+#: plugins/personal/generic/main.inc:160
+#: plugins/personal/connectivity/main.inc:117
+#: plugins/personal/environment/main.inc:106
+#: plugins/personal/environment/hotplugDialog.tpl:64
+#: plugins/personal/environment/selectPrinterDialog.tpl:61
+#: plugins/personal/environment/logonManagement.tpl:76
+#: plugins/personal/environment/hotplugDialogNew.tpl:39
+#: plugins/personal/nagios/main.inc:106
+#: plugins/gofax/blocklists/generic.tpl:82
+#: plugins/gofax/blocklists/remove.tpl:16
+#: plugins/gofax/faxaccount/locals.tpl:62
+#: plugins/gofax/faxaccount/lists.tpl:33 plugins/gofax/faxaccount/main.inc:91
+#: plugins/addons/addressbook/dial.tpl:10
+#: plugins/addons/addressbook/address_edit.tpl:234
+#: plugins/addons/addressbook/remove.tpl:16
+#: plugins/admin/groups/class_groupManagement.inc:332
+#: plugins/admin/groups/remove.tpl:16
+#: plugins/admin/groups/application_options.tpl:10
+#: plugins/admin/groups/group_objects.tpl:49
+#: plugins/admin/groups/mail_admins.tpl:39
+#: plugins/admin/groups/mail_locals.tpl:68 plugins/admin/users/password.tpl:23
+#: plugins/admin/users/template.tpl:46
+#: plugins/admin/users/class_userManagement.inc:635
+#: plugins/admin/users/remove.tpl:16 plugins/admin/applications/remove.tpl:15
+#: plugins/admin/applications/class_applicationManagement.inc:306
+#: plugins/admin/departments/remove.tpl:16
+#: plugins/admin/departments/class_departmentManagement.inc:349
+#: plugins/admin/systems/printerPPDDialog.tpl:23
+#: plugins/admin/systems/class_systemManagement.inc:541
+#: plugins/admin/systems/servnfs.tpl:76 plugins/admin/systems/remove.tpl:16
+#: plugins/admin/systems/password.tpl:30 plugins/admin/systems/chooser.tpl:18
+#: plugins/admin/systems/selectUserToPrinterDialog.tpl:61
+#: plugins/admin/ogroups/ogroup_objects.tpl:52
+#: plugins/admin/ogroups/class_ogroupManagement.inc:340
+#: plugins/admin/ogroups/remove.tpl:16 plugins/admin/fai/remove.tpl:17
+#: plugins/admin/fai/faiPartitionTableEntry.tpl:30
+#: plugins/admin/fai/class_faiManagement.inc:394
+#: plugins/admin/fai/class_faiManagement.inc:399
+#: plugins/admin/fai/faiProfileEntry.tpl:72
+#: plugins/admin/fai/faiScriptEntry.tpl:68
+#: plugins/admin/fai/faiVariableEntry.tpl:49
+#: plugins/admin/fai/faiHookEntry.tpl:70
+#: plugins/admin/fai/faiTemplateEntry.tpl:133
+#: plugins/admin/fai/faiPackageConfiguration.tpl:7
+#: plugins/admin/fai/faiPackageEntry.tpl:64
+#: plugins/admin/fai/faiPackageNew.tpl:66
+#: plugins/gofon/phoneaccount/main.inc:107 plugins/gofon/macro/remove.tpl:15
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:302
+#: plugins/gofon/conference/class_phoneConferenceManagment.inc:268
+#: plugins/gofon/conference/remove.tpl:16
+#: ihtml/themes/altlinux/islocked.tpl:15 ihtml/themes/default/islocked.tpl:15
+msgid "Cancel"
+msgstr "Annulla"
+
 #: plugins/personal/mail/main.inc:114 plugins/personal/posix/main.inc:120
 #: plugins/personal/samba/main.inc:114 plugins/personal/generic/main.inc:179
 #: plugins/personal/connectivity/main.inc:125
@@ -2476,7 +750,7 @@ msgstr ""
 #: plugins/admin/systems/printer.tpl:46
 #: plugins/admin/fai/faiPartitionTable.tpl:44
 #: plugins/admin/fai/faiVariable.tpl:44 plugins/admin/fai/faiScript.tpl:44
-#: plugins/admin/fai/faiTemplate.tpl:41 plugins/admin/fai/faiHook.tpl:44
+#: plugins/admin/fai/faiHook.tpl:44 plugins/admin/fai/faiTemplate.tpl:41
 #: plugins/gofon/phoneaccount/main.inc:113
 msgid "Edit"
 msgstr "Modifica"
@@ -2503,12 +777,12 @@ msgstr "Seleziona gli indirizzi da aggiungere"
 #: plugins/admin/groups/mail_locals.tpl:22 plugins/admin/users/headpage.tpl:29
 #: plugins/admin/applications/headpage.tpl:29
 #: plugins/admin/departments/headpage.tpl:29
+#: plugins/admin/systems/printerPPDSelectionDialog.tpl:20
 #: plugins/admin/systems/headpage.tpl:29
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:22
-#: plugins/admin/systems/printerPPDSelectionDialog.tpl:20
 #: plugins/admin/ogroups/ogroup_objects.tpl:20
-#: plugins/admin/ogroups/headpage.tpl:29
-#: plugins/admin/fai/faiProfileEntry.tpl:32 plugins/admin/fai/headpage.tpl:29
+#: plugins/admin/ogroups/headpage.tpl:29 plugins/admin/fai/headpage.tpl:29
+#: plugins/admin/fai/faiProfileEntry.tpl:32
 #: plugins/admin/fai/faiPackageEntry.tpl:32
 #: plugins/gofon/macro/headpage.tpl:29
 #: plugins/gofon/conference/headpage.tpl:29
@@ -2545,6 +819,18 @@ msgstr "Mostra l'indirizzo dell'utente"
 #: plugins/admin/groups/mail_locals.tpl:55
 msgid "User name of which addresses are shown"
 msgstr "Nome dell'utente del quale mostrare gli indirizzi"
+
+#: plugins/personal/password/class_password.inc:5
+#: plugins/admin/systems/class_systemManagement.inc:660
+#: plugins/admin/systems/servdb.tpl:18 plugins/admin/systems/servdb.tpl:34
+#: plugins/admin/systems/servdb.tpl:50 plugins/admin/systems/servdb.tpl:86
+#: plugins/admin/systems/servdb.tpl:109 ihtml/themes/altlinux/login.tpl:35
+#: ihtml/themes/altlinux/login.tpl:39
+#: ihtml/themes/altlinux/setup_useradmin.tpl:30
+#: ihtml/themes/default/login.tpl:35 ihtml/themes/default/login.tpl:39
+#: ihtml/themes/default/setup_useradmin.tpl:30
+msgid "Password"
+msgstr "Password"
 
 #: plugins/personal/password/password.tpl:2
 #: plugins/personal/password/changed.tpl:2
@@ -2604,6 +890,26 @@ msgid ""
 msgstr ""
 "Hai cambiato con successo la tua password. Ricorda di cambiare tutto i "
 "programmmi configurati per usarla."
+
+#: plugins/personal/password/changed.tpl:12
+#: plugins/personal/generic/main.inc:169
+#: plugins/gofax/faxreports/detail.tpl:68
+#: plugins/addons/ldapmanager/contentimport.tpl:44
+#: plugins/addons/ldapmanager/contentcsv.tpl:114
+#: plugins/addons/ldapmanager/contentexport.tpl:66
+#: plugins/addons/ldapmanager/contentexportxls.tpl:69
+#: include/functions.inc:1319 ihtml/themes/altlinux/setup_step2.tpl:12
+#: ihtml/themes/altlinux/setup_useradmin.tpl:40
+#: ihtml/themes/altlinux/setup_step3.tpl:17
+#: ihtml/themes/altlinux/setup_step4.tpl:114
+#: ihtml/themes/altlinux/setup_finish.tpl:30
+#: ihtml/themes/default/setup_useradmin.tpl:40
+#: ihtml/themes/default/setup_step2.tpl:12
+#: ihtml/themes/default/setup_step3.tpl:17
+#: ihtml/themes/default/setup_step4.tpl:114
+#: ihtml/themes/default/setup_finish.tpl:30
+msgid "Back"
+msgstr "Indietro"
 
 #: plugins/personal/password/main.inc:40
 msgid ""
@@ -2769,6 +1075,10 @@ msgstr "Stato"
 #: plugins/personal/posix/generic.tpl:39
 msgid "Force UID/GID"
 msgstr "Forza UID/GID"
+
+#: plugins/personal/posix/generic.tpl:43 html/getxls.php:230
+msgid "UID"
+msgstr "UID"
 
 #: plugins/personal/posix/generic.tpl:52
 msgid "GID"
@@ -3006,6 +1316,14 @@ msgstr "Novembre"
 #: plugins/gofon/fonreports/class_fonreport.inc:73
 msgid "December"
 msgstr "Dicembre"
+
+#: plugins/personal/posix/class_posixAccount.inc:550
+#: plugins/personal/samba/class_sambaAccount.inc:453
+#: plugins/admin/systems/class_terminalGeneric.inc:62
+#: ihtml/themes/altlinux/setup_step4.tpl:91
+#: ihtml/themes/default/setup_step4.tpl:91
+msgid "disabled"
+msgstr "disabilitato"
 
 #: plugins/personal/posix/class_posixAccount.inc:550
 msgid "full access"
@@ -3517,6 +1835,17 @@ msgstr "Titolo di studio"
 msgid "Date of birth"
 msgstr "Data di nascita"
 
+#: plugins/personal/generic/generic.tpl:82
+#: ihtml/themes/altlinux/sizelimit.tpl:14
+#: ihtml/themes/default/sizelimit.tpl:14
+msgid "Set"
+msgstr "Imposta"
+
+#: plugins/personal/generic/generic.tpl:88 html/getxls.php:65
+#: html/getxls.php:224
+msgid "Sex"
+msgstr "Sesso"
+
 #: plugins/personal/generic/generic.tpl:98
 msgid "Preferred langage"
 msgstr "Lingua preferita"
@@ -3537,6 +1866,16 @@ msgstr "Base"
 #: plugins/personal/generic/generic.tpl:113
 msgid "Choose subtree to place user in"
 msgstr "Scegli il subtree per l'utente"
+
+#: plugins/personal/generic/generic.tpl:128
+#: plugins/personal/generic/generic.tpl:272
+#: plugins/addons/addressbook/address_edit.tpl:72
+#: plugins/addons/addressbook/address_edit.tpl:182
+#: plugins/addons/addressbook/address_info.tpl:33
+#: plugins/addons/addressbook/address_info.tpl:82
+#: plugins/admin/departments/generic.tpl:54 html/getxls.php:174
+msgid "Address"
+msgstr "Indirizzo"
 
 #: plugins/personal/generic/generic.tpl:132
 msgid "Private phone"
@@ -3571,6 +1910,10 @@ msgstr "Modifica proprietà"
 msgid "Organizational information"
 msgstr "Informazioni organizzazione"
 
+#: plugins/personal/generic/generic.tpl:190 html/getxls.php:236
+msgid "Organization"
+msgstr "Organizzazione"
+
 #: plugins/personal/generic/generic.tpl:194
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:307
 #: plugins/addons/addressbook/address_edit.tpl:138
@@ -3602,6 +1945,34 @@ msgstr "Qualifica"
 #: plugins/personal/generic/generic.tpl:365
 msgid "Room No."
 msgstr "Stanza No."
+
+#: plugins/personal/generic/generic.tpl:238
+#: plugins/addons/addressbook/contents.tpl:15
+#: plugins/addons/addressbook/address_edit.tpl:95
+#: plugins/addons/addressbook/address_info.tpl:40 html/getxls.php:236
+msgid "Mobile"
+msgstr "Cellulare"
+
+#: plugins/personal/generic/generic.tpl:242
+#: plugins/personal/nagios/nagios.tpl:48
+#: plugins/addons/addressbook/address_edit.tpl:217
+#: plugins/addons/addressbook/address_info.tpl:91 html/getxls.php:174
+#: html/getxls.php:236
+msgid "Pager"
+msgstr "Pager"
+
+#: plugins/personal/generic/generic.tpl:264
+#: plugins/admin/departments/generic.tpl:42
+#: plugins/admin/departments/generic.tpl:50
+#: plugins/admin/systems/workstation.tpl:18 html/getxls.php:174
+msgid "Location"
+msgstr "Località"
+
+#: plugins/personal/generic/generic.tpl:268
+#: plugins/admin/departments/generic.tpl:46 html/getxls.php:174
+#: html/getxls.php:236
+msgid "State"
+msgstr "Stato"
 
 #: plugins/personal/generic/generic.tpl:286
 msgid "Vocation"
@@ -3635,6 +2006,12 @@ msgstr "Unità"
 msgid "Street"
 msgstr "Strada"
 
+#: plugins/personal/generic/generic.tpl:346
+#: plugins/addons/addressbook/address_edit.tpl:158
+#: plugins/addons/addressbook/address_info.tpl:70 html/getxls.php:174
+msgid "Postal code"
+msgstr "CAP"
+
 #: plugins/personal/generic/generic.tpl:352
 msgid "House identifier"
 msgstr "Identificativo della casa"
@@ -3665,6 +2042,23 @@ msgstr "Salva"
 #: plugins/personal/generic/generic_certs.tpl:8
 msgid "Standard certificate"
 msgstr "Certificato standard"
+
+#: plugins/personal/generic/generic_certs.tpl:17
+#: plugins/personal/generic/generic_certs.tpl:37
+#: plugins/personal/generic/generic_certs.tpl:57
+#: plugins/personal/connectivity/class_kolabAccount.inc:206
+#: plugins/personal/environment/environment.tpl:118
+#: plugins/personal/environment/kioskManagement.tpl:14
+#: plugins/admin/groups/class_groupMail.inc:417
+#: plugins/admin/applications/class_applicationParameters.inc:98
+#: plugins/admin/systems/workstationStartup.tpl:90
+#: plugins/admin/systems/printer.tpl:47
+#: plugins/admin/systems/terminalStartup.tpl:81
+#: plugins/admin/fai/faiPackage.tpl:75
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:248
+#: ihtml/themes/altlinux/islocked.tpl:13 ihtml/themes/default/islocked.tpl:13
+msgid "Remove"
+msgstr "Rimuovi"
 
 #: plugins/personal/generic/generic_certs.tpl:28
 msgid "S/MIME certificate"
@@ -3975,11 +2369,6 @@ msgstr ""
 msgid "User Timezone"
 msgstr ""
 
-#: plugins/personal/connectivity/intranet.tpl:3
-#, fuzzy
-msgid "Intranet account"
-msgstr "Crea estensioni telefoniche"
-
 #: plugins/personal/connectivity/class_connectivity.inc:63
 msgid "This account has no connectivity extensions."
 msgstr "Questa identità non possiede estensioni di connettività"
@@ -4023,14 +2412,24 @@ msgstr ""
 msgid "Numerical value for Quota Setting is not valid."
 msgstr "Il valore di 'Dimensione quota' non è valido"
 
+#: plugins/personal/connectivity/intranet.tpl:3
+#, fuzzy
+msgid "Intranet account"
+msgstr "Crea estensioni telefoniche"
+
+#: plugins/personal/connectivity/pptp.tpl:3
+#, fuzzy
+msgid "PPTP account"
+msgstr "Estenzioni FTP"
+
+#: plugins/personal/connectivity/glpi.tpl:1
+#, fuzzy
+msgid "GLPI account"
+msgstr "Estenzioni FTP"
+
 #: plugins/personal/connectivity/class_intranetAccount.inc:14
 msgid "Intranet"
 msgstr ""
-
-#: plugins/personal/connectivity/class_phpscheduleitAccount.inc:27
-#, fuzzy
-msgid "PHPscheduleit"
-msgstr "Estenzioni PHPGroupware"
 
 #: plugins/personal/connectivity/class_pptpAccount.inc:26
 msgid "PPTP"
@@ -4041,24 +2440,81 @@ msgstr ""
 msgid "PHPscheduleit account"
 msgstr "Estenzioni PHPGroupware"
 
-#: plugins/personal/connectivity/pptp.tpl:3
-#, fuzzy
-msgid "PPTP account"
-msgstr "Estenzioni FTP"
-
 #: plugins/personal/connectivity/class_glpiAccount.inc:25
 msgid "GLPI"
 msgstr ""
 
-#: plugins/personal/connectivity/glpi.tpl:1
+#: plugins/personal/connectivity/class_phpscheduleitAccount.inc:27
 #, fuzzy
-msgid "GLPI account"
-msgstr "Estenzioni FTP"
+msgid "PHPscheduleit"
+msgstr "Estenzioni PHPGroupware"
 
 #: plugins/personal/environment/main.inc:124
 #, fuzzy
 msgid "User environment settings"
 msgstr "Opzioni di posta dell'identità"
+
+#: plugins/personal/environment/class_hotplugDialog.inc:111
+#, fuzzy
+msgid "Please specify a valid name. Only 0-9 a-Z is allowed."
+msgstr "Specificare una dimenzione valida per le mail da rigettare."
+
+#: plugins/personal/environment/class_hotplugDialog.inc:114
+#, fuzzy
+msgid "Invalid character in description. Please specify a valid description."
+msgstr "Specificare una dimenzione valida per le mail da rigettare."
+
+#: plugins/personal/environment/class_hotplugDialog.inc:117
+#, fuzzy
+msgid "Please specify a valid id."
+msgstr "Prego inserire un numero di telefono valido!"
+
+#: plugins/personal/environment/class_hotplugDialog.inc:123
+msgid "An Entry with this name already exists."
+msgstr ""
+
+#: plugins/personal/environment/class_hotplugDialog.inc:128
+#, fuzzy
+msgid "Please select an entry or press cancel."
+msgstr "Prego inserire un numero di telefono valido!"
+
+#: plugins/personal/environment/hotplugDialog.tpl:1
+#, fuzzy
+msgid "Add hotplug devices"
+msgstr "Dispositivi del client"
+
+#: plugins/personal/environment/hotplugDialog.tpl:5
+#, fuzzy
+msgid "Hotplug management"
+msgstr "Riferimenti"
+
+#: plugins/personal/environment/hotplugDialog.tpl:10
+#, fuzzy
+msgid "Select hotplug device to add"
+msgstr "Rimuovi"
+
+#: plugins/personal/environment/hotplugDialog.tpl:34
+#, fuzzy
+msgid "Choose the department the search will be based    on"
+msgstr "Scegli il dipartimento di base per la ricerca"
+
+#: plugins/personal/environment/hotplugDialog.tpl:43
+#: plugins/admin/groups/group_objects.tpl:38
+#: plugins/admin/users/headpage.tpl:48
+#: plugins/gofon/conference/headpage.tpl:35
+msgid "Display users matching"
+msgstr "Mostra utenti che corrispondono a"
+
+#: plugins/personal/environment/hotplugDialog.tpl:48
+#, fuzzy
+msgid "Regular expression for        matching hotplugs"
+msgstr "Espressioni regolare per selezionare il nome del gruppo"
+
+#: plugins/personal/environment/class_selectPrinterDialog.inc:67
+#: plugins/admin/systems/class_selectUserToPrinterDialog.inc:95
+#, fuzzy
+msgid "Please select a printer or press cancel."
+msgstr "Prego inserire un numero di telefono valido!"
 
 #: plugins/personal/environment/class_environment.inc:246
 #: plugins/personal/environment/class_environment.inc:282
@@ -4127,6 +2583,28 @@ msgstr ""
 #, fuzzy
 msgid "Admin"
 msgstr "DN dell'amministratore"
+
+#: plugins/personal/environment/selectPrinterDialog.tpl:1
+#, fuzzy
+msgid "Add printer devcies"
+msgstr "Dispositivi del client"
+
+#: plugins/personal/environment/selectPrinterDialog.tpl:5
+#: plugins/personal/environment/selectPrinterDialog.tpl:10
+#: plugins/admin/systems/selectUserToPrinterDialog.tpl:3
+#, fuzzy
+msgid "Select printer to add"
+msgstr "Seleziona il numero da aggiungere"
+
+#: plugins/personal/environment/selectPrinterDialog.tpl:43
+#, fuzzy
+msgid "Display printers matching"
+msgstr "Mostra utenti che corrispondono a"
+
+#: plugins/personal/environment/selectPrinterDialog.tpl:48
+#, fuzzy
+msgid "Regular expression for matching printer names"
+msgstr "Espressioni regolare per selezionare il nome del gruppo"
 
 #: plugins/personal/environment/environment.tpl:3
 msgid "The environment extension is currently disabled."
@@ -4242,90 +2720,6 @@ msgstr "Impostazioni Unix"
 msgid "Admin Toggle"
 msgstr "DN dell'amministratore"
 
-#: plugins/personal/environment/class_hotplugDialog.inc:111
-#, fuzzy
-msgid "Please specify a valid name. Only 0-9 a-Z is allowed."
-msgstr "Specificare una dimenzione valida per le mail da rigettare."
-
-#: plugins/personal/environment/class_hotplugDialog.inc:114
-#, fuzzy
-msgid "Invalid character in description. Please specify a valid description."
-msgstr "Specificare una dimenzione valida per le mail da rigettare."
-
-#: plugins/personal/environment/class_hotplugDialog.inc:117
-#, fuzzy
-msgid "Please specify a valid id."
-msgstr "Prego inserire un numero di telefono valido!"
-
-#: plugins/personal/environment/class_hotplugDialog.inc:123
-msgid "An Entry with this name already exists."
-msgstr ""
-
-#: plugins/personal/environment/class_hotplugDialog.inc:128
-#, fuzzy
-msgid "Please select an entry or press cancel."
-msgstr "Prego inserire un numero di telefono valido!"
-
-#: plugins/personal/environment/hotplugDialog.tpl:1
-#, fuzzy
-msgid "Add hotplug devices"
-msgstr "Dispositivi del client"
-
-#: plugins/personal/environment/hotplugDialog.tpl:5
-#, fuzzy
-msgid "Hotplug management"
-msgstr "Riferimenti"
-
-#: plugins/personal/environment/hotplugDialog.tpl:10
-#, fuzzy
-msgid "Select hotplug device to add"
-msgstr "Rimuovi"
-
-#: plugins/personal/environment/hotplugDialog.tpl:34
-#, fuzzy
-msgid "Choose the department the search will be based    on"
-msgstr "Scegli il dipartimento di base per la ricerca"
-
-#: plugins/personal/environment/hotplugDialog.tpl:43
-#: plugins/admin/groups/group_objects.tpl:38
-#: plugins/admin/users/headpage.tpl:48
-#: plugins/gofon/conference/headpage.tpl:35
-msgid "Display users matching"
-msgstr "Mostra utenti che corrispondono a"
-
-#: plugins/personal/environment/hotplugDialog.tpl:48
-#, fuzzy
-msgid "Regular expression for        matching hotplugs"
-msgstr "Espressioni regolare per selezionare il nome del gruppo"
-
-#: plugins/personal/environment/class_selectPrinterDialog.inc:67
-#: plugins/admin/systems/class_selectUserToPrinterDialog.inc:95
-#, fuzzy
-msgid "Please select a printer or press cancel."
-msgstr "Prego inserire un numero di telefono valido!"
-
-#: plugins/personal/environment/selectPrinterDialog.tpl:1
-#, fuzzy
-msgid "Add printer devcies"
-msgstr "Dispositivi del client"
-
-#: plugins/personal/environment/selectPrinterDialog.tpl:5
-#: plugins/personal/environment/selectPrinterDialog.tpl:10
-#: plugins/admin/systems/selectUserToPrinterDialog.tpl:3
-#, fuzzy
-msgid "Select printer to add"
-msgstr "Seleziona il numero da aggiungere"
-
-#: plugins/personal/environment/selectPrinterDialog.tpl:43
-#, fuzzy
-msgid "Display printers matching"
-msgstr "Mostra utenti che corrispondono a"
-
-#: plugins/personal/environment/selectPrinterDialog.tpl:48
-#, fuzzy
-msgid "Regular expression for matching printer names"
-msgstr "Espressioni regolare per selezionare il nome del gruppo"
-
 #: plugins/personal/environment/logonManagement.tpl:8
 #, fuzzy
 msgid "Logon script settings"
@@ -4335,6 +2729,29 @@ msgstr "Impostazioni Unix"
 #, fuzzy
 msgid "Skript name"
 msgstr "Script path"
+
+#: plugins/personal/environment/logonManagement.tpl:17
+#: plugins/personal/environment/hotplugDialogNew.tpl:17
+#: plugins/gofax/blocklists/generic.tpl:41 plugins/admin/groups/generic.tpl:13
+#: plugins/admin/applications/generic.tpl:23
+#: plugins/admin/departments/generic.tpl:12
+#: plugins/admin/systems/server.tpl:24 plugins/admin/systems/phone.tpl:24
+#: plugins/admin/systems/printer.tpl:13 plugins/admin/systems/servnfs.tpl:17
+#: plugins/admin/systems/wingeneric.tpl:24
+#: plugins/admin/systems/component.tpl:24 plugins/admin/ogroups/generic.tpl:13
+#: plugins/admin/fai/faiPartitionTableEntry.tpl:11
+#: plugins/admin/fai/faiPartitionTable.tpl:19
+#: plugins/admin/fai/faiVariable.tpl:19
+#: plugins/admin/fai/faiScriptEntry.tpl:17 plugins/admin/fai/faiPackage.tpl:19
+#: plugins/admin/fai/faiProfile.tpl:19 plugins/admin/fai/faiScript.tpl:19
+#: plugins/admin/fai/faiHook.tpl:19 plugins/admin/fai/faiVariableEntry.tpl:17
+#: plugins/admin/fai/faiTemplate.tpl:19 plugins/admin/fai/faiHookEntry.tpl:17
+#: plugins/admin/fai/faiTemplateEntry.tpl:11
+#: plugins/gofon/macro/generic.tpl:36 plugins/gofon/conference/generic.tpl:51
+#: plugins/generic/references/contents.tpl:11 html/getxls.php:123
+#: html/getxls.php:230
+msgid "Description"
+msgstr "Descrizione"
 
 #: plugins/personal/environment/logonManagement.tpl:24
 #: plugins/admin/fai/faiScriptEntry.tpl:34
@@ -4369,8 +2786,8 @@ msgstr ""
 #: plugins/admin/fai/faiVariableEntry.tpl:48
 #: plugins/admin/fai/faiHookEntry.tpl:69
 #: plugins/admin/fai/faiTemplateEntry.tpl:132
-#: plugins/admin/fai/faiPackageEntry.tpl:63
 #: plugins/admin/fai/faiPackageConfiguration.tpl:6
+#: plugins/admin/fai/faiPackageEntry.tpl:63
 msgid "Apply"
 msgstr "Applica"
 
@@ -4502,6 +2919,10 @@ msgstr "Contatto"
 msgid "Alias"
 msgstr "Italiano"
 
+#: plugins/personal/nagios/nagios.tpl:12 html/getxls.php:174
+msgid "Mail address"
+msgstr "Indirizzo principale"
+
 #: plugins/personal/nagios/nagios.tpl:17
 #, fuzzy
 msgid "Host notification period"
@@ -4577,6 +2998,17 @@ msgstr ""
 #: plugins/gofax/blocklists/generic.tpl:16
 msgid "Select subtree to place blocklist in"
 msgstr ""
+
+#: plugins/gofax/blocklists/generic.tpl:32
+#: plugins/admin/systems/workstationService.tpl:42
+#: plugins/admin/systems/workstationService.tpl:120
+#: plugins/admin/systems/servnfs.tpl:39
+#: plugins/admin/systems/terminalService.tpl:42
+#: plugins/admin/systems/terminalService.tpl:120
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:179
+#: plugins/gofon/conference/generic.tpl:22 include/php_setup.inc:122
+msgid "Type"
+msgstr "Tipo"
 
 #: plugins/gofax/blocklists/generic.tpl:34
 msgid "Select wether to filter incoming or outgoing calls"
@@ -4831,6 +3263,18 @@ msgstr ""
 msgid "No permission to create a blocklist on this base."
 msgstr ""
 
+#: plugins/gofax/blocklists/remove.tpl:2
+#: plugins/addons/addressbook/remove.tpl:2 plugins/admin/groups/remove.tpl:2
+#: plugins/admin/users/remove.tpl:2 plugins/admin/applications/remove.tpl:2
+#: plugins/admin/departments/remove.tpl:2 plugins/admin/systems/remove.tpl:2
+#: plugins/admin/ogroups/remove.tpl:2 plugins/admin/fai/remove.tpl:2
+#: plugins/gofon/macro/remove.tpl:2 plugins/gofon/conference/remove.tpl:2
+#: html/index.php:227 html/index.php:287 ihtml/themes/altlinux/conflict.tpl:6
+#: ihtml/themes/altlinux/islocked.tpl:6 ihtml/themes/default/conflict.tpl:6
+#: ihtml/themes/default/islocked.tpl:6
+msgid "Warning"
+msgstr "Attenzione"
+
 #: plugins/gofax/blocklists/remove.tpl:6
 msgid ""
 "Please double check if your really want to do this since there is no way for "
@@ -4889,6 +3333,12 @@ msgstr ""
 #: plugins/gofax/faxaccount/generic.tpl:12
 msgid "Fax number for GOfax to trigger on"
 msgstr ""
+
+#: plugins/gofax/faxaccount/generic.tpl:16
+#: plugins/admin/ogroups/phonequeue.tpl:35 html/getxls.php:65
+#: html/getxls.php:224
+msgid "Language"
+msgstr "Lingua"
 
 #: plugins/gofax/faxaccount/generic.tpl:18
 msgid "Specify the GOfax communication language for fax to mail gateway"
@@ -5135,6 +3585,14 @@ msgstr ""
 msgid "during"
 msgstr ""
 
+#: plugins/gofax/faxreports/contents.tpl:21
+#: plugins/addons/logview/contents.tpl:67
+#: plugins/addons/mailqueue/contents.tpl:11
+#: plugins/addons/mailqueue/contents.tpl:27
+#: plugins/gofon/fonreports/contents.tpl:21 ihtml/themes/default/help.tpl:21
+msgid "Search"
+msgstr "Cerca"
+
 #: plugins/gofax/faxreports/contents.tpl:31
 #: plugins/addons/logview/contents.tpl:84
 #: plugins/gofon/fonreports/contents.tpl:30
@@ -5198,6 +3656,22 @@ msgstr ""
 #: plugins/gofax/faxreports/main.inc:5
 msgid "FAX reports"
 msgstr "Rapporti FAX"
+
+#: plugins/addons/addressbook/contents.tpl:14
+#: plugins/addons/addressbook/address_info.tpl:16
+#: plugins/addons/addressbook/class_addressbook.inc:515
+#: plugins/admin/systems/servnfs.tpl:9
+#: plugins/admin/fai/faiPartitionTableEntry.tpl:6
+#: plugins/admin/fai/faiPartitionTable.tpl:9
+#: plugins/admin/fai/faiVariable.tpl:9 plugins/admin/fai/faiScriptEntry.tpl:9
+#: plugins/admin/fai/faiPackage.tpl:9 plugins/admin/fai/faiProfile.tpl:9
+#: plugins/admin/fai/faiScript.tpl:9 plugins/admin/fai/faiHook.tpl:9
+#: plugins/admin/fai/faiVariableEntry.tpl:9
+#: plugins/admin/fai/faiTemplate.tpl:9 plugins/admin/fai/faiHookEntry.tpl:9
+#: plugins/admin/fai/faiTemplateEntry.tpl:7
+#: plugins/gofon/macro/parameter.tpl:5 html/getxls.php:174 html/getxls.php:233
+msgid "Name"
+msgstr "Cognome"
 
 #: plugins/addons/addressbook/contents.tpl:15
 #: plugins/addons/addressbook/address_edit.tpl:66
@@ -5284,6 +3758,12 @@ msgstr ""
 msgid "Personal"
 msgstr "Personale"
 
+#: plugins/addons/addressbook/address_edit.tpl:44
+#: plugins/addons/addressbook/address_info.tpl:19 html/getxls.php:174
+#: html/getxls.php:236
+msgid "Initials"
+msgstr "Iniziali"
+
 #: plugins/addons/addressbook/address_edit.tpl:105
 #: plugins/addons/addressbook/address_info.tpl:43
 msgid "Email"
@@ -5298,6 +3778,12 @@ msgstr "Organizzazione"
 #: plugins/addons/addressbook/address_info.tpl:61
 msgid "Company"
 msgstr "Azienda"
+
+#: plugins/addons/addressbook/address_edit.tpl:148
+#: plugins/addons/addressbook/address_info.tpl:67 html/getxls.php:174
+#: html/getxls.php:236
+msgid "City"
+msgstr "Città"
 
 #: plugins/addons/addressbook/address_edit.tpl:168
 #: plugins/addons/addressbook/address_info.tpl:73
@@ -5376,6 +3862,11 @@ msgstr "Crea in"
 msgid "All"
 msgstr ""
 
+#: plugins/addons/addressbook/class_addressbook.inc:515 html/getxls.php:65
+#: html/getxls.php:174 html/getxls.php:224 html/getxls.php:236
+msgid "Given name"
+msgstr "Nome"
+
 #: plugins/addons/addressbook/class_addressbook.inc:516
 msgid "Work phone"
 msgstr "Telefono del lavoro"
@@ -5383,6 +3874,16 @@ msgstr "Telefono del lavoro"
 #: plugins/addons/addressbook/class_addressbook.inc:516
 msgid "Cell phone"
 msgstr "Cellolare"
+
+#: plugins/addons/addressbook/class_addressbook.inc:517 html/getxls.php:174
+msgid "Home phone"
+msgstr "Telefono privato"
+
+#: plugins/addons/addressbook/class_addressbook.inc:517 html/getxls.php:80
+#: html/getxls.php:108 html/getxls.php:123 html/getxls.php:282
+#: html/getxls.php:299
+msgid "User ID"
+msgstr ""
 
 #: plugins/addons/addressbook/class_addressbook.inc:598
 msgid ""
@@ -5949,6 +4450,12 @@ msgstr ""
 msgid "Group administration"
 msgstr "Amministrazione dei gruppi di utenti"
 
+#: plugins/admin/groups/class_groupManagement.inc:25
+#: plugins/admin/ogroups/class_ogroupManagement.inc:42 html/getxls.php:97
+#: html/getxls.php:99 html/getxls.php:244
+msgid "Groups"
+msgstr "Gruppi di utenti"
+
 #: plugins/admin/groups/class_groupManagement.inc:275
 #, php-format
 msgid "You're about to delete the group '%s'."
@@ -6271,9 +4778,29 @@ msgstr ""
 msgid "Template"
 msgstr ""
 
+#: plugins/admin/users/template.tpl:44
+#: plugins/admin/fai/class_faiManagement.inc:398
+#: plugins/admin/fai/faiPackageNew.tpl:65
+#: ihtml/themes/altlinux/setup_introduction.tpl:12
+#: ihtml/themes/altlinux/setup_step2.tpl:13
+#: ihtml/themes/altlinux/setup_useradmin.tpl:41
+#: ihtml/themes/altlinux/setup_step3.tpl:18
+#: ihtml/themes/default/setup_introduction.tpl:12
+#: ihtml/themes/default/setup_useradmin.tpl:41
+#: ihtml/themes/default/setup_step2.tpl:13
+#: ihtml/themes/default/setup_step3.tpl:18
+msgid "Continue"
+msgstr "Continua"
+
 #: plugins/admin/users/main.inc:40 plugins/admin/users/main.inc:46
 msgid "User administration"
 msgstr "Amministrazione utenti"
+
+#: plugins/admin/users/class_userManagement.inc:25
+#: plugins/admin/systems/printer.tpl:65 html/getxls.php:68 html/getxls.php:70
+#: html/getxls.php:243
+msgid "Users"
+msgstr "Utenti"
 
 #: plugins/admin/users/class_userManagement.inc:247
 #: plugins/admin/users/class_userManagement.inc:317
@@ -6323,6 +4850,15 @@ msgstr "Nuovo template"
 #, fuzzy
 msgid "password"
 msgstr "Password"
+
+#: plugins/admin/users/class_userManagement.inc:690
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:342
+#: ihtml/themes/altlinux/login.tpl:26 ihtml/themes/altlinux/login.tpl:30
+#: ihtml/themes/altlinux/setup_useradmin.tpl:22
+#: ihtml/themes/default/login.tpl:26 ihtml/themes/default/login.tpl:30
+#: ihtml/themes/default/setup_useradmin.tpl:22
+msgid "Username"
+msgstr "Nome utente"
 
 #: plugins/admin/users/class_userManagement.inc:695
 msgid "This table displays all users, in the selected tree."
@@ -6460,6 +4996,11 @@ msgstr "Mostra utenti proxy"
 #: plugins/admin/applications/class_applicationManagement.inc:357
 msgid "Application name"
 msgstr "Nome applicazione"
+
+#: plugins/admin/applications/generic.tpl:11
+#: plugins/gofon/macro/generic.tpl:10 html/getxls.php:174 html/getxls.php:236
+msgid "Display name"
+msgstr "Mostra il nome"
 
 #: plugins/admin/applications/generic.tpl:13
 msgid "Application name to be displayed (i.e. below icons)"
@@ -6797,9 +5338,9 @@ msgstr "presente"
 #: plugins/admin/systems/class_terminalInfo.inc:65
 #: plugins/admin/systems/class_terminalService.inc:139
 #: plugins/admin/systems/class_terminalStartup.inc:99
-#: plugins/admin/systems/class_terminalGeneric.inc:130
 #: plugins/admin/systems/class_workstationService.inc:124
 #: plugins/admin/systems/class_workstationStartup.inc:215
+#: plugins/admin/systems/class_terminalGeneric.inc:130
 msgid "This 'dn' has no terminal features."
 msgstr ""
 
@@ -7058,32 +5599,251 @@ msgstr ""
 msgid "Please specify a valid HSync range."
 msgstr ""
 
-#: plugins/admin/systems/class_servDB.inc:134
-#: plugins/admin/systems/class_servDB.inc:150
-#: plugins/admin/systems/class_servDB.inc:160
-#: plugins/admin/systems/class_servDB.inc:165
-#: plugins/admin/systems/class_servDB.inc:171
+#: plugins/admin/systems/printerPPDSelectionDialog.tpl:6
+#: plugins/admin/ogroups/ogroup_objects.tpl:6
+msgid "Select objects to add"
+msgstr ""
+
+#: plugins/admin/systems/printerPPDSelectionDialog.tpl:30
+#: plugins/admin/ogroups/ogroup_objects.tpl:41
+#: plugins/admin/fai/headpage.tpl:47 plugins/admin/fai/faiProfileEntry.tpl:55
+#: plugins/admin/fai/faiProfileEntry.tpl:56
+#: plugins/admin/fai/faiPackageEntry.tpl:48
+msgid "Display objects matching"
+msgstr ""
+
+#: plugins/admin/systems/printerPPDSelectionDialog.tpl:34
+#: plugins/admin/ogroups/ogroup_objects.tpl:42
+#: plugins/admin/fai/headpage.tpl:51 plugins/admin/fai/faiProfileEntry.tpl:60
+#: plugins/admin/fai/faiPackageEntry.tpl:53
+msgid "Regular expression for matching object names"
+msgstr ""
+
+#: plugins/admin/systems/printerPPDSelectionDialog.tpl:46
+#: plugins/admin/systems/printerPPDDialog.tpl:6
+#, fuzzy
+msgid "Select"
+msgstr "Rimuovi"
+
+#: plugins/admin/systems/printerPPDSelectionDialog.tpl:48
+#, fuzzy
+msgid "Close"
+msgstr "Scegli"
+
+#: plugins/admin/systems/workstationService.tpl:4
+#: plugins/admin/systems/terminalService.tpl:4
+msgid "Keyboard"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:7
+#: plugins/admin/systems/printerPPDDialog.tpl:5
+#: plugins/admin/systems/terminalService.tpl:7
+#: plugins/admin/systems/terminalService.tpl:210
+msgid "Model"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:9
+#: plugins/admin/systems/terminalService.tpl:9
+msgid "Choose keyboard model"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:15
+#: plugins/admin/systems/terminalService.tpl:15
+msgid "Layout"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:17
+#: plugins/admin/systems/terminalService.tpl:17
+msgid "Choose keyboard layout"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:23
+#: plugins/admin/systems/terminalService.tpl:23
+msgid "Variant"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:25
+#: plugins/admin/systems/terminalService.tpl:25
+msgid "Choose keyboard variant"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:39
+#: plugins/admin/systems/terminalService.tpl:39
+msgid "Mouse"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:44
+#: plugins/admin/systems/terminalService.tpl:44
+msgid "Choose mouse type"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:50
+#: plugins/admin/systems/terminalService.tpl:50
+msgid "Port"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:52
+#: plugins/admin/systems/terminalService.tpl:52
+msgid "Choose mouse port"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:66
+#: plugins/admin/systems/terminalService.tpl:66
+#: plugins/gofon/phoneaccount/generic.tpl:24
+msgid "Telephone hardware"
+msgstr "Dispositivo telefonico"
+
+#: plugins/admin/systems/workstationService.tpl:69
+#: plugins/admin/systems/terminalService.tpl:69
+#: plugins/gofon/phoneaccount/generic.tpl:26
+#: plugins/gofon/phoneaccount/generic.tpl:28
+msgid "Telephone"
+msgstr "Telefono"
+
+#: plugins/admin/systems/workstationService.tpl:86
+#: plugins/admin/systems/printer.tpl:45
+#: plugins/admin/systems/terminalService.tpl:86
+msgid "Driver"
+msgstr "Driver"
+
+#: plugins/admin/systems/workstationService.tpl:88
+#: plugins/admin/systems/terminalService.tpl:88
+msgid "Choose graphic driver that is needed by the installed graphic board"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:96
+#: plugins/admin/systems/terminalService.tpl:96
+msgid "Choose screen resolution used in graphic mode"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:102
+#: plugins/admin/systems/terminalService.tpl:102
+msgid "Color depth"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:104
+#: plugins/admin/systems/terminalService.tpl:104
+msgid "Choose colordepth used in graphic mode"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:117
+#: plugins/admin/systems/terminalService.tpl:117
+msgid "Display device"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:124
+#: plugins/admin/systems/terminalService.tpl:124
+msgid "HSync"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:126
+#: plugins/admin/systems/terminalService.tpl:126
+msgid "Horizontal refresh frequency for installed monitor"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:129
+#: plugins/admin/systems/terminalService.tpl:129
+msgid "VSync"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:131
+#: plugins/admin/systems/terminalService.tpl:131
+msgid "Vertical refresh frequency for installed monitor"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:143
+#: plugins/admin/systems/terminalService.tpl:203
+msgid "Scan device"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:144
+#: plugins/admin/systems/terminalService.tpl:204
+msgid "Select to start SANE scan service on terminal"
+msgstr ""
+
+#: plugins/admin/systems/workstationService.tpl:145
+#: plugins/admin/systems/terminalService.tpl:205
+msgid "Provide scan services"
+msgstr ""
+
+#: plugins/admin/systems/class_workstationStartup.inc:197
+#, fuzzy
+msgid "Please select a 'FAI server' or remove the 'FAI classes'."
+msgstr "Prego inserire un numero di telefono valido!"
+
+#: plugins/admin/systems/class_workstationStartup.inc:251
+msgid ""
+"There is already a profile in your selection that contain partition table "
+"configurations."
+msgstr ""
+
+#: plugins/admin/systems/class_printerPPDDialog.inc:64
 #, php-format
-msgid "The attribute '%s' is empty or contains invalid characters."
+msgid "Can't open '%s', ppd settings resetted."
 msgstr ""
 
-#: plugins/admin/systems/class_servDB.inc:140
+#: plugins/admin/systems/class_printerPPDDialog.inc:105
 #, php-format
-msgid "The imap connect string needs to be in the form '%s'."
+msgid ""
+"The specified PPD_PATH='%s' in your gosa.conf is invalid, can't read any ppd "
+"informations."
 msgstr ""
 
-#: plugins/admin/systems/class_servDB.inc:144
-msgid "The sieve port needs to be numeric."
+#: plugins/admin/systems/class_printerPPDDialog.inc:106
+msgid "Can't get ppd informations."
 msgstr ""
 
-#: plugins/admin/systems/class_servDB.inc:155
+#: plugins/admin/systems/class_printerPPDDialog.inc:122
+#, php-format
+msgid "Can't create folder '%s' for the uploaded ppd file."
+msgstr ""
+
+#: plugins/admin/systems/class_printerPPDDialog.inc:135
+#, php-format
+msgid "There is already a ppd file for this kind of printer."
+msgstr ""
+
+#: plugins/admin/systems/class_printerPPDDialog.inc:143
 #, fuzzy, php-format
-msgid "The specified kerberos password is empty."
-msgstr "La password immessa come 'Nuova password' è vuota"
+msgid "Can't save file '%s'."
+msgstr "Rimuovi"
 
-#: plugins/admin/systems/class_servDB.inc:179
+#: plugins/admin/systems/class_printerPPDDialog.inc:162
+#: plugins/admin/systems/class_printerPPDDialog.inc:165
+#, fuzzy
+msgid "Please specify a valid ppd file."
+msgstr "Prego inserire un numero di telefono valido!"
+
+#: plugins/admin/systems/class_printerPPDDialog.inc:189
+#, fuzzy
+msgid "Please select a valid ppd."
+msgstr "Prego inserire un numero di telefono valido!"
+
+#: plugins/admin/systems/class_printerPPDDialog.inc:313
+#: plugins/admin/fai/faiPackage.tpl:41
+#, fuzzy
+msgid "Section"
+msgstr "Azione"
+
+#: plugins/admin/systems/class_printerPPDDialog.inc:363
+#: plugins/admin/systems/class_printerPPDDialog.inc:366
+#, fuzzy
+msgid "True"
+msgstr "Futuro"
+
+#: plugins/admin/systems/class_printerPPDDialog.inc:364
+#: plugins/admin/systems/class_printerPPDDialog.inc:367
+#, fuzzy
+msgid "False"
+msgstr "femmina"
+
+#: plugins/admin/systems/class_printerPPDDialog.inc:372
 #, php-format
-msgid "The imap name string needs to be a hostname or an IP-address."
+msgid "Unsupported ppd type '%s' used for '%s' "
+msgstr ""
+
+#: plugins/admin/systems/server.tpl:6 html/getxls.php:146
+msgid "Server name"
 msgstr ""
 
 #: plugins/admin/systems/server.tpl:15 plugins/admin/systems/phone.tpl:15
@@ -7102,70 +5862,6 @@ msgstr "Azione"
 
 #: plugins/admin/systems/server.tpl:42
 msgid "Select action to execute for this server"
-msgstr ""
-
-#: plugins/admin/systems/phone.tpl:6
-msgid "Phone name"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:9
-msgid "Terminal template"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:11
-msgid "Terminal name"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:36
-#: plugins/admin/systems/workstation.tpl:45
-#: plugins/admin/systems/phonesettings.tpl:21
-msgid "Mode"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:38
-#: plugins/admin/systems/workstation.tpl:47
-msgid "Select terminal mode"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:52
-msgid "Root server"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:54
-msgid "Select NFS root filesystem to use"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:60
-msgid "Swap server"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:62
-msgid "Choose NFS filesystem to place swap files on"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:74
-#: plugins/admin/systems/workstation.tpl:54
-msgid "Syslog server"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:76
-#: plugins/admin/systems/workstation.tpl:56
-msgid "Choose server to use for logging"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:82
-#: plugins/admin/systems/workstation.tpl:62
-msgid "NTP server"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:84
-#: plugins/admin/systems/workstation.tpl:64
-msgid "Choose server to use for synchronizing time"
-msgstr ""
-
-#: plugins/admin/systems/terminal.tpl:103
-#: plugins/admin/systems/workstation.tpl:82
-msgid "Select action to execute for this terminal"
 msgstr ""
 
 #: plugins/admin/systems/class_terminalGeneric.inc:63
@@ -7237,6 +5933,83 @@ msgstr ""
 msgid "The required field 'Terminal name' is not set."
 msgstr ""
 
+#: plugins/admin/systems/printerPPDDialog.tpl:1
+#, fuzzy
+msgid "Printer driver"
+msgstr "Stampante"
+
+#: plugins/admin/systems/printerPPDDialog.tpl:9
+#, fuzzy
+msgid "New driver"
+msgstr "Server"
+
+#: plugins/admin/systems/workstationStartup.tpl:4
+#: plugins/admin/systems/terminalStartup.tpl:1
+msgid "Boot parameters"
+msgstr ""
+
+#: plugins/admin/systems/workstationStartup.tpl:8
+#: plugins/admin/systems/terminalStartup.tpl:8
+msgid "LDAP server"
+msgstr ""
+
+#: plugins/admin/systems/workstationStartup.tpl:10
+#: plugins/admin/systems/terminalStartup.tpl:10
+msgid "Choose LDAP server to use for accounts and terminal management"
+msgstr ""
+
+#: plugins/admin/systems/workstationStartup.tpl:17
+#: plugins/admin/systems/terminalStartup.tpl:17
+msgid "Boot kernel"
+msgstr ""
+
+#: plugins/admin/systems/workstationStartup.tpl:19
+#: plugins/admin/systems/terminalStartup.tpl:19
+msgid "Enter the filename of the kernel to use"
+msgstr ""
+
+#: plugins/admin/systems/workstationStartup.tpl:22
+#: plugins/admin/systems/terminalStartup.tpl:22
+msgid "Custom options"
+msgstr ""
+
+#: plugins/admin/systems/workstationStartup.tpl:24
+#: plugins/admin/systems/terminalStartup.tpl:24
+msgid ""
+"Enter any parameters that should be passed to the kernel as append line "
+"during bootup"
+msgstr ""
+
+#: plugins/admin/systems/workstationStartup.tpl:35
+#, fuzzy
+msgid "FAI server"
+msgstr "server"
+
+#: plugins/admin/systems/workstationStartup.tpl:41
+#: plugins/admin/fai/faiPackage.tpl:57 plugins/admin/fai/faiPackageNew.tpl:59
+#, fuzzy
+msgid "set"
+msgstr "reset"
+
+#: plugins/admin/systems/workstationStartup.tpl:42
+#, fuzzy
+msgid "Assigned FAI classes"
+msgstr "Scegli il tuo numero di telefono personale"
+
+#: plugins/admin/systems/workstationStartup.tpl:62
+#: plugins/admin/systems/terminalStartup.tpl:53
+msgid "Kernel modules (format: name parameters)"
+msgstr ""
+
+#: plugins/admin/systems/workstationStartup.tpl:64
+#: plugins/admin/systems/terminalStartup.tpl:55
+msgid "Add additional modules to load on startup"
+msgstr ""
+
+#: plugins/admin/systems/phone.tpl:6
+msgid "Phone name"
+msgstr ""
+
 #: plugins/admin/systems/class_servGeneric.inc:52
 msgid "This 'dn' has no server features."
 msgstr ""
@@ -7248,6 +6021,66 @@ msgstr "Il campo 'Indirizzo principale' non è stao inserito"
 
 #: plugins/admin/systems/class_servGeneric.inc:173
 msgid "You have no permissions to create a server on this 'Base'."
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:9
+msgid "Terminal template"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:11
+msgid "Terminal name"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:36
+#: plugins/admin/systems/workstation.tpl:45
+#: plugins/admin/systems/phonesettings.tpl:21
+msgid "Mode"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:38
+#: plugins/admin/systems/workstation.tpl:47
+msgid "Select terminal mode"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:52
+msgid "Root server"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:54
+msgid "Select NFS root filesystem to use"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:60
+msgid "Swap server"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:62
+msgid "Choose NFS filesystem to place swap files on"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:74
+#: plugins/admin/systems/workstation.tpl:54
+msgid "Syslog server"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:76
+#: plugins/admin/systems/workstation.tpl:56
+msgid "Choose server to use for logging"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:82
+#: plugins/admin/systems/workstation.tpl:62
+msgid "NTP server"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:84
+#: plugins/admin/systems/workstation.tpl:64
+msgid "Choose server to use for synchronizing time"
+msgstr ""
+
+#: plugins/admin/systems/terminal.tpl:103
+#: plugins/admin/systems/workstation.tpl:82
+msgid "Select action to execute for this terminal"
 msgstr ""
 
 #: plugins/admin/systems/class_servDHCP.inc:36
@@ -7270,6 +6103,34 @@ msgid ""
 "below."
 msgstr ""
 
+#: plugins/admin/systems/class_servDB.inc:134
+#: plugins/admin/systems/class_servDB.inc:150
+#: plugins/admin/systems/class_servDB.inc:160
+#: plugins/admin/systems/class_servDB.inc:165
+#: plugins/admin/systems/class_servDB.inc:171
+#, php-format
+msgid "The attribute '%s' is empty or contains invalid characters."
+msgstr ""
+
+#: plugins/admin/systems/class_servDB.inc:140
+#, php-format
+msgid "The imap connect string needs to be in the form '%s'."
+msgstr ""
+
+#: plugins/admin/systems/class_servDB.inc:144
+msgid "The sieve port needs to be numeric."
+msgstr ""
+
+#: plugins/admin/systems/class_servDB.inc:155
+#, fuzzy, php-format
+msgid "The specified kerberos password is empty."
+msgstr "La password immessa come 'Nuova password' è vuota"
+
+#: plugins/admin/systems/class_servDB.inc:179
+#, php-format
+msgid "The imap name string needs to be a hostname or an IP-address."
+msgstr ""
+
 #: plugins/admin/systems/printer.tpl:6
 msgid "General"
 msgstr "Generale"
@@ -7290,12 +6151,6 @@ msgstr "Impostazioni Unix"
 #: plugins/admin/systems/printer.tpl:37
 msgid "Printer URL"
 msgstr "URL della stampante"
-
-#: plugins/admin/systems/printer.tpl:45
-#: plugins/admin/systems/workstationService.tpl:86
-#: plugins/admin/systems/terminalService.tpl:86
-msgid "Driver"
-msgstr "Driver"
 
 #: plugins/admin/systems/printer.tpl:57
 msgid "Permissions"
@@ -7671,6 +6526,36 @@ msgstr ""
 msgid "Workstation name"
 msgstr ""
 
+#: plugins/admin/systems/class_servNfs.inc:104
+#, fuzzy
+msgid "Please specify a valid path for your setup."
+msgstr "Specificare una dimenzione valida per le mail da rigettare."
+
+#: plugins/admin/systems/class_servNfs.inc:110
+#, fuzzy
+msgid "Please specify a valid name for your setup."
+msgstr "Specificare una dimenzione valida per le mail da rigettare."
+
+#: plugins/admin/systems/class_servNfs.inc:113
+#, fuzzy
+msgid "Please specify a name for your setup."
+msgstr "Prego inserire un numero di telefono valido!"
+
+#: plugins/admin/systems/class_servNfs.inc:118
+#, fuzzy
+msgid "Description contains invalid characters."
+msgstr "Il valore specificato come '%s' contiene dei caratteri invalidi!"
+
+#: plugins/admin/systems/class_servNfs.inc:122
+#, fuzzy
+msgid "Path contains invalid characters."
+msgstr "Il valore specificato come '%s' contiene dei caratteri invalidi!"
+
+#: plugins/admin/systems/class_servNfs.inc:126
+#, fuzzy
+msgid "Option contains invalid characters."
+msgstr "Il valore specificato come '%s' contiene dei caratteri invalidi!"
+
 #: plugins/admin/systems/servdb.tpl:6
 msgid "Kerberos kadmin access"
 msgstr ""
@@ -7731,6 +6616,29 @@ msgstr ""
 msgid "Logging DB user"
 msgstr ""
 
+#: plugins/admin/systems/servnfs.tpl:1
+#, fuzzy
+msgid "Edit share"
+msgstr "Modifica contatto"
+
+#: plugins/admin/systems/servnfs.tpl:2
+msgid "NFS setup"
+msgstr ""
+
+#: plugins/admin/systems/servnfs.tpl:25
+msgid "Path"
+msgstr ""
+
+#: plugins/admin/systems/servnfs.tpl:49
+#, fuzzy
+msgid "Charset"
+msgstr "reset"
+
+#: plugins/admin/systems/servnfs.tpl:59
+#, fuzzy
+msgid "Option"
+msgstr "Opzioni"
+
 #: plugins/admin/systems/class_servKolab.inc:115
 msgid "Remove Kolab extension"
 msgstr ""
@@ -7787,6 +6695,88 @@ msgstr ""
 
 #: plugins/admin/systems/class_servKolab.inc:242
 msgid "No SMTP smarthost/relayhost set."
+msgstr ""
+
+#: plugins/admin/systems/phonesettings.tpl:1
+#, fuzzy
+msgid "Advanced phone settings"
+msgstr "Opzioni di posta avanzate"
+
+#: plugins/admin/systems/phonesettings.tpl:6
+#, fuzzy
+msgid "Phone type"
+msgstr "Telefono"
+
+#: plugins/admin/systems/phonesettings.tpl:7
+#: plugins/admin/systems/phonesettings.tpl:25
+#: plugins/admin/systems/phonesettings.tpl:35
+#: plugins/admin/systems/phonesettings.tpl:49
+#: plugins/admin/systems/phonesettings.tpl:78
+#: plugins/admin/systems/phonesettings.tpl:109
+#: plugins/admin/systems/phonesettings.tpl:156
+#, fuzzy
+msgid "Choose a phone type"
+msgstr "Scegli il tuo numero di telefono personale"
+
+#: plugins/admin/systems/phonesettings.tpl:10
+msgid "refresh"
+msgstr ""
+
+#: plugins/admin/systems/phonesettings.tpl:32
+msgid "DTMF mode"
+msgstr ""
+
+#: plugins/admin/systems/phonesettings.tpl:46
+#: plugins/admin/systems/phonesettings.tpl:85
+#, fuzzy
+msgid "Default IP"
+msgstr "Stampante predefinita"
+
+#: plugins/admin/systems/phonesettings.tpl:56
+#: plugins/admin/systems/phonesettings.tpl:93
+msgid "Response timeout"
+msgstr ""
+
+#: plugins/admin/systems/phonesettings.tpl:75
+msgid "Modus"
+msgstr ""
+
+#: plugins/admin/systems/phonesettings.tpl:106
+msgid "Authtype"
+msgstr ""
+
+#: plugins/admin/systems/phonesettings.tpl:116
+#, fuzzy
+msgid "Secret"
+msgstr "Strada"
+
+#: plugins/admin/systems/phonesettings.tpl:124
+msgid "GoFonInkeys"
+msgstr ""
+
+#: plugins/admin/systems/phonesettings.tpl:132
+msgid "GoFonOutKeys"
+msgstr ""
+
+#: plugins/admin/systems/phonesettings.tpl:145
+#, fuzzy
+msgid "Account code"
+msgstr "Sicurezza"
+
+#: plugins/admin/systems/phonesettings.tpl:153
+msgid "Trunk lines"
+msgstr ""
+
+#: plugins/admin/systems/phonesettings.tpl:168
+msgid "Hosts that are allowed to connect"
+msgstr ""
+
+#: plugins/admin/systems/phonesettings.tpl:183
+msgid "Hosts that are not allowed to connect"
+msgstr ""
+
+#: plugins/admin/systems/phonesettings.tpl:205
+msgid "MSN"
 msgstr ""
 
 #: plugins/admin/systems/servkolab.tpl:14
@@ -7863,6 +6853,58 @@ msgstr ""
 
 #: plugins/admin/systems/servkolab.tpl:169
 msgid "Accept mail from other domains over non-authenticated SMTP"
+msgstr ""
+
+#: plugins/admin/systems/terminalService.tpl:141
+msgid "Remote desktop"
+msgstr ""
+
+#: plugins/admin/systems/terminalService.tpl:145
+msgid "Connect method"
+msgstr ""
+
+#: plugins/admin/systems/terminalService.tpl:147
+msgid "Choose method to connect to terminal server"
+msgstr ""
+
+#: plugins/admin/systems/terminalService.tpl:154
+msgid "Terminal server"
+msgstr ""
+
+#: plugins/admin/systems/terminalService.tpl:156
+msgid "Select specific terminal server to use"
+msgstr ""
+
+#: plugins/admin/systems/terminalService.tpl:163
+msgid "Font server"
+msgstr ""
+
+#: plugins/admin/systems/terminalService.tpl:165
+msgid "Select specific font server to use"
+msgstr ""
+
+#: plugins/admin/systems/terminalService.tpl:181
+msgid "Print device"
+msgstr ""
+
+#: plugins/admin/systems/terminalService.tpl:182
+msgid "Select to start IPP based printing service on terminal"
+msgstr ""
+
+#: plugins/admin/systems/terminalService.tpl:183
+msgid "Provide print services"
+msgstr ""
+
+#: plugins/admin/systems/terminalService.tpl:189
+msgid "Spool server"
+msgstr ""
+
+#: plugins/admin/systems/terminalService.tpl:191
+msgid "Select NFS filesystem to place spool files on"
+msgstr ""
+
+#: plugins/admin/systems/terminalService.tpl:212
+msgid "Select scanner driver to use"
 msgstr ""
 
 #: plugins/admin/systems/wingeneric.tpl:6
@@ -7979,18 +7021,6 @@ msgstr ""
 msgid "Changing the password impinges on authentification only."
 msgstr ""
 
-#: plugins/admin/systems/class_componentGeneric.inc:116
-#: plugins/admin/systems/class_phoneGeneric.inc:279
-#, fuzzy
-msgid "The required field 'MAC-address' is not set."
-msgstr "Il campo 'Indirizzo principale' non è stao inserito"
-
-#: plugins/admin/systems/class_componentGeneric.inc:119
-#: plugins/admin/systems/class_phoneGeneric.inc:282
-#, fuzzy
-msgid "The required field 'IP-address' is not set."
-msgstr "Il campo 'Indirizzo principale' non è stao inserito"
-
 #: plugins/admin/systems/chooser.tpl:1
 msgid "Choose the kind of system component you want to create"
 msgstr ""
@@ -8032,6 +7062,42 @@ msgstr ""
 #: plugins/admin/systems/chooser.tpl:16
 msgid "Create"
 msgstr "Creare"
+
+#: plugins/admin/systems/class_componentGeneric.inc:116
+#: plugins/admin/systems/class_phoneGeneric.inc:279
+#, fuzzy
+msgid "The required field 'MAC-address' is not set."
+msgstr "Il campo 'Indirizzo principale' non è stao inserito"
+
+#: plugins/admin/systems/class_componentGeneric.inc:119
+#: plugins/admin/systems/class_phoneGeneric.inc:282
+#, fuzzy
+msgid "The required field 'IP-address' is not set."
+msgstr "Il campo 'Indirizzo principale' non è stao inserito"
+
+#: plugins/admin/systems/terminalStartup.tpl:35
+msgid "Select if terminal supports graphical startup with progress bar"
+msgstr ""
+
+#: plugins/admin/systems/terminalStartup.tpl:36
+msgid "use graphical bootup"
+msgstr ""
+
+#: plugins/admin/systems/terminalStartup.tpl:38
+msgid "Select if terminal should boot in text mode"
+msgstr ""
+
+#: plugins/admin/systems/terminalStartup.tpl:39
+msgid "use standard linux textual bootup"
+msgstr ""
+
+#: plugins/admin/systems/terminalStartup.tpl:41
+msgid "Select to get more verbose output during startup"
+msgstr ""
+
+#: plugins/admin/systems/terminalStartup.tpl:42
+msgid "use debug mode for startup"
+msgstr ""
 
 #: plugins/admin/systems/class_phoneGeneric.inc:105
 msgid "This 'dn' has no phone features."
@@ -8082,287 +7148,6 @@ msgstr ""
 msgid "You have no permissions to create a phone on this 'Base'."
 msgstr ""
 
-#: plugins/admin/systems/phonesettings.tpl:1
-#, fuzzy
-msgid "Advanced phone settings"
-msgstr "Opzioni di posta avanzate"
-
-#: plugins/admin/systems/phonesettings.tpl:6
-#, fuzzy
-msgid "Phone type"
-msgstr "Telefono"
-
-#: plugins/admin/systems/phonesettings.tpl:7
-#: plugins/admin/systems/phonesettings.tpl:25
-#: plugins/admin/systems/phonesettings.tpl:35
-#: plugins/admin/systems/phonesettings.tpl:49
-#: plugins/admin/systems/phonesettings.tpl:78
-#: plugins/admin/systems/phonesettings.tpl:109
-#: plugins/admin/systems/phonesettings.tpl:156
-#, fuzzy
-msgid "Choose a phone type"
-msgstr "Scegli il tuo numero di telefono personale"
-
-#: plugins/admin/systems/phonesettings.tpl:10
-msgid "refresh"
-msgstr ""
-
-#: plugins/admin/systems/phonesettings.tpl:32
-msgid "DTMF mode"
-msgstr ""
-
-#: plugins/admin/systems/phonesettings.tpl:46
-#: plugins/admin/systems/phonesettings.tpl:85
-#, fuzzy
-msgid "Default IP"
-msgstr "Stampante predefinita"
-
-#: plugins/admin/systems/phonesettings.tpl:56
-#: plugins/admin/systems/phonesettings.tpl:93
-msgid "Response timeout"
-msgstr ""
-
-#: plugins/admin/systems/phonesettings.tpl:75
-msgid "Modus"
-msgstr ""
-
-#: plugins/admin/systems/phonesettings.tpl:106
-msgid "Authtype"
-msgstr ""
-
-#: plugins/admin/systems/phonesettings.tpl:116
-#, fuzzy
-msgid "Secret"
-msgstr "Strada"
-
-#: plugins/admin/systems/phonesettings.tpl:124
-msgid "GoFonInkeys"
-msgstr ""
-
-#: plugins/admin/systems/phonesettings.tpl:132
-msgid "GoFonOutKeys"
-msgstr ""
-
-#: plugins/admin/systems/phonesettings.tpl:145
-#, fuzzy
-msgid "Account code"
-msgstr "Sicurezza"
-
-#: plugins/admin/systems/phonesettings.tpl:153
-msgid "Trunk lines"
-msgstr ""
-
-#: plugins/admin/systems/phonesettings.tpl:168
-msgid "Hosts that are allowed to connect"
-msgstr ""
-
-#: plugins/admin/systems/phonesettings.tpl:183
-msgid "Hosts that are not allowed to connect"
-msgstr ""
-
-#: plugins/admin/systems/phonesettings.tpl:205
-msgid "MSN"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:4
-#: plugins/admin/systems/terminalService.tpl:4
-msgid "Keyboard"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:7
-#: plugins/admin/systems/printerPPDDialog.tpl:5
-#: plugins/admin/systems/terminalService.tpl:7
-#: plugins/admin/systems/terminalService.tpl:210
-msgid "Model"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:9
-#: plugins/admin/systems/terminalService.tpl:9
-msgid "Choose keyboard model"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:15
-#: plugins/admin/systems/terminalService.tpl:15
-msgid "Layout"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:17
-#: plugins/admin/systems/terminalService.tpl:17
-msgid "Choose keyboard layout"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:23
-#: plugins/admin/systems/terminalService.tpl:23
-msgid "Variant"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:25
-#: plugins/admin/systems/terminalService.tpl:25
-msgid "Choose keyboard variant"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:39
-#: plugins/admin/systems/terminalService.tpl:39
-msgid "Mouse"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:44
-#: plugins/admin/systems/terminalService.tpl:44
-msgid "Choose mouse type"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:50
-#: plugins/admin/systems/terminalService.tpl:50
-msgid "Port"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:52
-#: plugins/admin/systems/terminalService.tpl:52
-msgid "Choose mouse port"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:66
-#: plugins/admin/systems/terminalService.tpl:66
-#: plugins/gofon/phoneaccount/generic.tpl:24
-msgid "Telephone hardware"
-msgstr "Dispositivo telefonico"
-
-#: plugins/admin/systems/workstationService.tpl:69
-#: plugins/admin/systems/terminalService.tpl:69
-#: plugins/gofon/phoneaccount/generic.tpl:26
-#: plugins/gofon/phoneaccount/generic.tpl:28
-msgid "Telephone"
-msgstr "Telefono"
-
-#: plugins/admin/systems/workstationService.tpl:88
-#: plugins/admin/systems/terminalService.tpl:88
-msgid "Choose graphic driver that is needed by the installed graphic board"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:96
-#: plugins/admin/systems/terminalService.tpl:96
-msgid "Choose screen resolution used in graphic mode"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:102
-#: plugins/admin/systems/terminalService.tpl:102
-msgid "Color depth"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:104
-#: plugins/admin/systems/terminalService.tpl:104
-msgid "Choose colordepth used in graphic mode"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:117
-#: plugins/admin/systems/terminalService.tpl:117
-msgid "Display device"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:124
-#: plugins/admin/systems/terminalService.tpl:124
-msgid "HSync"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:126
-#: plugins/admin/systems/terminalService.tpl:126
-msgid "Horizontal refresh frequency for installed monitor"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:129
-#: plugins/admin/systems/terminalService.tpl:129
-msgid "VSync"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:131
-#: plugins/admin/systems/terminalService.tpl:131
-msgid "Vertical refresh frequency for installed monitor"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:143
-#: plugins/admin/systems/terminalService.tpl:203
-msgid "Scan device"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:144
-#: plugins/admin/systems/terminalService.tpl:204
-msgid "Select to start SANE scan service on terminal"
-msgstr ""
-
-#: plugins/admin/systems/workstationService.tpl:145
-#: plugins/admin/systems/terminalService.tpl:205
-msgid "Provide scan services"
-msgstr ""
-
-#: plugins/admin/systems/class_servNfs.inc:104
-#, fuzzy
-msgid "Please specify a valid path for your setup."
-msgstr "Specificare una dimenzione valida per le mail da rigettare."
-
-#: plugins/admin/systems/class_servNfs.inc:110
-#, fuzzy
-msgid "Please specify a valid name for your setup."
-msgstr "Specificare una dimenzione valida per le mail da rigettare."
-
-#: plugins/admin/systems/class_servNfs.inc:113
-#, fuzzy
-msgid "Please specify a name for your setup."
-msgstr "Prego inserire un numero di telefono valido!"
-
-#: plugins/admin/systems/class_servNfs.inc:118
-#, fuzzy
-msgid "Description contains invalid characters."
-msgstr "Il valore specificato come '%s' contiene dei caratteri invalidi!"
-
-#: plugins/admin/systems/class_servNfs.inc:122
-#, fuzzy
-msgid "Path contains invalid characters."
-msgstr "Il valore specificato come '%s' contiene dei caratteri invalidi!"
-
-#: plugins/admin/systems/class_servNfs.inc:126
-#, fuzzy
-msgid "Option contains invalid characters."
-msgstr "Il valore specificato come '%s' contiene dei caratteri invalidi!"
-
-#: plugins/admin/systems/servnfs.tpl:1
-#, fuzzy
-msgid "Edit share"
-msgstr "Modifica contatto"
-
-#: plugins/admin/systems/servnfs.tpl:2
-msgid "NFS setup"
-msgstr ""
-
-#: plugins/admin/systems/servnfs.tpl:25
-msgid "Path"
-msgstr ""
-
-#: plugins/admin/systems/servnfs.tpl:49
-#, fuzzy
-msgid "Charset"
-msgstr "reset"
-
-#: plugins/admin/systems/servnfs.tpl:59
-#, fuzzy
-msgid "Option"
-msgstr "Opzioni"
-
-#: plugins/admin/systems/printerPPDDialog.tpl:1
-#, fuzzy
-msgid "Printer driver"
-msgstr "Stampante"
-
-#: plugins/admin/systems/printerPPDDialog.tpl:6
-#: plugins/admin/systems/printerPPDSelectionDialog.tpl:46
-#, fuzzy
-msgid "Select"
-msgstr "Rimuovi"
-
-#: plugins/admin/systems/printerPPDDialog.tpl:9
-#, fuzzy
-msgid "New driver"
-msgstr "Server"
-
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:8
 #, fuzzy
 msgid "Select entries to add"
@@ -8383,250 +7168,10 @@ msgstr "Mostra utenti che corrispondono a"
 msgid "Regular expression for matching member names"
 msgstr "Espressioni regolare per selezionare il nome del gruppo"
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:64
-#, php-format
-msgid "Can't open '%s', ppd settings resetted."
-msgstr ""
-
-#: plugins/admin/systems/class_printerPPDDialog.inc:105
-#, php-format
-msgid ""
-"The specified PPD_PATH='%s' in your gosa.conf is invalid, can't read any ppd "
-"informations."
-msgstr ""
-
-#: plugins/admin/systems/class_printerPPDDialog.inc:106
-msgid "Can't get ppd informations."
-msgstr ""
-
-#: plugins/admin/systems/class_printerPPDDialog.inc:122
-#, php-format
-msgid "Can't create folder '%s' for the uploaded ppd file."
-msgstr ""
-
-#: plugins/admin/systems/class_printerPPDDialog.inc:135
-#, php-format
-msgid "There is already a ppd file for this kind of printer."
-msgstr ""
-
-#: plugins/admin/systems/class_printerPPDDialog.inc:143
-#, fuzzy, php-format
-msgid "Can't save file '%s'."
-msgstr "Rimuovi"
-
-#: plugins/admin/systems/class_printerPPDDialog.inc:162
-#: plugins/admin/systems/class_printerPPDDialog.inc:165
-#, fuzzy
-msgid "Please specify a valid ppd file."
-msgstr "Prego inserire un numero di telefono valido!"
-
-#: plugins/admin/systems/class_printerPPDDialog.inc:189
-#, fuzzy
-msgid "Please select a valid ppd."
-msgstr "Prego inserire un numero di telefono valido!"
-
-#: plugins/admin/systems/class_printerPPDDialog.inc:313
-#: plugins/admin/fai/faiPackage.tpl:41
-#, fuzzy
-msgid "Section"
-msgstr "Azione"
-
-#: plugins/admin/systems/class_printerPPDDialog.inc:363
-#: plugins/admin/systems/class_printerPPDDialog.inc:366
-#, fuzzy
-msgid "True"
-msgstr "Futuro"
-
-#: plugins/admin/systems/class_printerPPDDialog.inc:364
-#: plugins/admin/systems/class_printerPPDDialog.inc:367
-#, fuzzy
-msgid "False"
-msgstr "femmina"
-
-#: plugins/admin/systems/class_printerPPDDialog.inc:372
-#, php-format
-msgid "Unsupported ppd type '%s' used for '%s' "
-msgstr ""
-
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:74
 #, fuzzy
 msgid "Printer ppd selection."
 msgstr "Impostazioni Unix"
-
-#: plugins/admin/systems/printerPPDSelectionDialog.tpl:6
-#: plugins/admin/ogroups/ogroup_objects.tpl:6
-msgid "Select objects to add"
-msgstr ""
-
-#: plugins/admin/systems/printerPPDSelectionDialog.tpl:30
-#: plugins/admin/ogroups/ogroup_objects.tpl:41
-#: plugins/admin/fai/faiProfileEntry.tpl:55
-#: plugins/admin/fai/faiProfileEntry.tpl:56 plugins/admin/fai/headpage.tpl:47
-#: plugins/admin/fai/faiPackageEntry.tpl:48
-msgid "Display objects matching"
-msgstr ""
-
-#: plugins/admin/systems/printerPPDSelectionDialog.tpl:34
-#: plugins/admin/ogroups/ogroup_objects.tpl:42
-#: plugins/admin/fai/faiProfileEntry.tpl:60 plugins/admin/fai/headpage.tpl:51
-#: plugins/admin/fai/faiPackageEntry.tpl:53
-msgid "Regular expression for matching object names"
-msgstr ""
-
-#: plugins/admin/systems/printerPPDSelectionDialog.tpl:48
-#, fuzzy
-msgid "Close"
-msgstr "Scegli"
-
-#: plugins/admin/systems/class_workstationStartup.inc:197
-#, fuzzy
-msgid "Please select a 'FAI server' or remove the 'FAI classes'."
-msgstr "Prego inserire un numero di telefono valido!"
-
-#: plugins/admin/systems/class_workstationStartup.inc:251
-msgid ""
-"There is already a profile in your selection that contain partition table "
-"configurations."
-msgstr ""
-
-#: plugins/admin/systems/workstationStartup.tpl:4
-#: plugins/admin/systems/terminalStartup.tpl:1
-msgid "Boot parameters"
-msgstr ""
-
-#: plugins/admin/systems/workstationStartup.tpl:8
-#: plugins/admin/systems/terminalStartup.tpl:8
-msgid "LDAP server"
-msgstr ""
-
-#: plugins/admin/systems/workstationStartup.tpl:10
-#: plugins/admin/systems/terminalStartup.tpl:10
-msgid "Choose LDAP server to use for accounts and terminal management"
-msgstr ""
-
-#: plugins/admin/systems/workstationStartup.tpl:17
-#: plugins/admin/systems/terminalStartup.tpl:17
-msgid "Boot kernel"
-msgstr ""
-
-#: plugins/admin/systems/workstationStartup.tpl:19
-#: plugins/admin/systems/terminalStartup.tpl:19
-msgid "Enter the filename of the kernel to use"
-msgstr ""
-
-#: plugins/admin/systems/workstationStartup.tpl:22
-#: plugins/admin/systems/terminalStartup.tpl:22
-msgid "Custom options"
-msgstr ""
-
-#: plugins/admin/systems/workstationStartup.tpl:24
-#: plugins/admin/systems/terminalStartup.tpl:24
-msgid ""
-"Enter any parameters that should be passed to the kernel as append line "
-"during bootup"
-msgstr ""
-
-#: plugins/admin/systems/workstationStartup.tpl:35
-#, fuzzy
-msgid "FAI server"
-msgstr "server"
-
-#: plugins/admin/systems/workstationStartup.tpl:41
-#: plugins/admin/fai/faiPackage.tpl:57 plugins/admin/fai/faiPackageNew.tpl:59
-#, fuzzy
-msgid "set"
-msgstr "reset"
-
-#: plugins/admin/systems/workstationStartup.tpl:42
-#, fuzzy
-msgid "Assigned FAI classes"
-msgstr "Scegli il tuo numero di telefono personale"
-
-#: plugins/admin/systems/workstationStartup.tpl:62
-#: plugins/admin/systems/terminalStartup.tpl:53
-msgid "Kernel modules (format: name parameters)"
-msgstr ""
-
-#: plugins/admin/systems/workstationStartup.tpl:64
-#: plugins/admin/systems/terminalStartup.tpl:55
-msgid "Add additional modules to load on startup"
-msgstr ""
-
-#: plugins/admin/systems/terminalService.tpl:141
-msgid "Remote desktop"
-msgstr ""
-
-#: plugins/admin/systems/terminalService.tpl:145
-msgid "Connect method"
-msgstr ""
-
-#: plugins/admin/systems/terminalService.tpl:147
-msgid "Choose method to connect to terminal server"
-msgstr ""
-
-#: plugins/admin/systems/terminalService.tpl:154
-msgid "Terminal server"
-msgstr ""
-
-#: plugins/admin/systems/terminalService.tpl:156
-msgid "Select specific terminal server to use"
-msgstr ""
-
-#: plugins/admin/systems/terminalService.tpl:163
-msgid "Font server"
-msgstr ""
-
-#: plugins/admin/systems/terminalService.tpl:165
-msgid "Select specific font server to use"
-msgstr ""
-
-#: plugins/admin/systems/terminalService.tpl:181
-msgid "Print device"
-msgstr ""
-
-#: plugins/admin/systems/terminalService.tpl:182
-msgid "Select to start IPP based printing service on terminal"
-msgstr ""
-
-#: plugins/admin/systems/terminalService.tpl:183
-msgid "Provide print services"
-msgstr ""
-
-#: plugins/admin/systems/terminalService.tpl:189
-msgid "Spool server"
-msgstr ""
-
-#: plugins/admin/systems/terminalService.tpl:191
-msgid "Select NFS filesystem to place spool files on"
-msgstr ""
-
-#: plugins/admin/systems/terminalService.tpl:212
-msgid "Select scanner driver to use"
-msgstr ""
-
-#: plugins/admin/systems/terminalStartup.tpl:35
-msgid "Select if terminal supports graphical startup with progress bar"
-msgstr ""
-
-#: plugins/admin/systems/terminalStartup.tpl:36
-msgid "use graphical bootup"
-msgstr ""
-
-#: plugins/admin/systems/terminalStartup.tpl:38
-msgid "Select if terminal should boot in text mode"
-msgstr ""
-
-#: plugins/admin/systems/terminalStartup.tpl:39
-msgid "use standard linux textual bootup"
-msgstr ""
-
-#: plugins/admin/systems/terminalStartup.tpl:41
-msgid "Select to get more verbose output during startup"
-msgstr ""
-
-#: plugins/admin/systems/terminalStartup.tpl:42
-msgid "use debug mode for startup"
-msgstr ""
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:59
 #: plugins/admin/ogroups/tabs_ogroups.inc:151
@@ -8638,6 +7183,18 @@ msgstr "Numero di telefono"
 #: plugins/admin/ogroups/tabs_ogroups.inc:131
 msgid "Terminals"
 msgstr "Terminali"
+
+#: plugins/admin/ogroups/class_mailogroup.inc:41
+#, fuzzy
+msgid ""
+"This group has mail features enabled. You can disable them by clicking below."
+msgstr "Questa identià possiede estensioni di posta."
+
+#: plugins/admin/ogroups/class_mailogroup.inc:43
+#, fuzzy
+msgid ""
+"This group has mail features disabled. You can enable them by clicking below."
+msgstr "Questa identità non possiede estensioni di posta."
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:27
 msgid "Select to see departments"
@@ -8771,6 +7328,12 @@ msgstr "Gruppi di oggetti"
 msgid "UNIX accounts"
 msgstr "Account Unix"
 
+#: plugins/admin/ogroups/class_ogroupManagement.inc:45 html/getxls.php:149
+#: html/getxls.php:151 html/getxls.php:158 html/getxls.php:179
+#: html/getxls.php:245 html/getxls.php:316
+msgid "Servers"
+msgstr ""
+
 #: plugins/admin/ogroups/class_ogroupManagement.inc:46
 msgid "Thin Clients"
 msgstr ""
@@ -8872,18 +7435,6 @@ msgstr ""
 #: plugins/admin/ogroups/mail.tpl:11
 msgid "Primary mail address for this distribution list"
 msgstr ""
-
-#: plugins/admin/ogroups/class_mailogroup.inc:41
-#, fuzzy
-msgid ""
-"This group has mail features enabled. You can disable them by clicking below."
-msgstr "Questa identià possiede estensioni di posta."
-
-#: plugins/admin/ogroups/class_mailogroup.inc:43
-#, fuzzy
-msgid ""
-"This group has mail features disabled. You can enable them by clicking below."
-msgstr "Questa identità non possiede estensioni di posta."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:79
 #, fuzzy
@@ -9035,6 +7586,12 @@ msgstr "Dominio"
 msgid "Timeout"
 msgstr "Timeout"
 
+#: plugins/admin/ogroups/phonequeue.tpl:54
+#: ihtml/themes/altlinux/setup_finish.tpl:31
+#: ihtml/themes/default/setup_finish.tpl:31
+msgid "Retry"
+msgstr "Riprova"
+
 #: plugins/admin/ogroups/phonequeue.tpl:62
 #, fuzzy
 msgid "Strategy"
@@ -9136,14 +7693,67 @@ msgstr ""
 msgid "Ring instead of playing background music"
 msgstr ""
 
+#: plugins/admin/fai/headpage.tpl:6
+#, fuzzy
+msgid "List of FAI classes"
+msgstr "Scegli il tuo numero di telefono personale"
+
+#: plugins/admin/fai/headpage.tpl:24
+msgid "This menu allows you to create, delete and edit FAI classes."
+msgstr ""
+
+#: plugins/admin/fai/headpage.tpl:36
+#, fuzzy
+msgid "Show profiles"
+msgstr "Mostra stampanti"
+
+#: plugins/admin/fai/headpage.tpl:38
+#, fuzzy
+msgid "Show scripts"
+msgstr "Mostra stampanti"
+
+#: plugins/admin/fai/headpage.tpl:39
+#, fuzzy
+msgid "Show hooks"
+msgstr "Mostra telefoni"
+
+#: plugins/admin/fai/headpage.tpl:40
+#, fuzzy
+msgid "Show variables"
+msgstr "Mostra terminali"
+
+#: plugins/admin/fai/headpage.tpl:41
+#, fuzzy
+msgid "Show packages"
+msgstr "Mostra telefoni"
+
+#: plugins/admin/fai/headpage.tpl:42
+#, fuzzy
+msgid "Show partitions"
+msgstr "Mostra workstation"
+
+#: plugins/admin/fai/main.inc:38 plugins/admin/fai/main.inc:40
+msgid "Fully Automatic Installation"
+msgstr ""
+
 #: plugins/admin/fai/remove.tpl:7
 msgid ""
 "This includes 'all' object information. Please double check if your really "
 "want to do this since there is no way for GOsa to get your data back."
 msgstr ""
 
-#: plugins/admin/fai/main.inc:38 plugins/admin/fai/main.inc:40
-msgid "Fully Automatic Installation"
+#: plugins/admin/fai/faiPartitionTableEntry.tpl:2
+#, fuzzy
+msgid "Device"
+msgstr "Dispositivi"
+
+#: plugins/admin/fai/faiPartitionTableEntry.tpl:20
+#, fuzzy
+msgid "Partition entries"
+msgstr "Destinazione"
+
+#: plugins/admin/fai/faiPartitionTableEntry.tpl:23
+msgid "Add partition"
 msgstr ""
 
 #: plugins/admin/fai/class_faiManagement.inc:31
@@ -9265,25 +7875,23 @@ msgstr "Script path"
 msgid "Profile"
 msgstr "Path del profilo"
 
-#: plugins/admin/fai/faiPartitionTableEntry.tpl:2
+#: plugins/admin/fai/class_faiVariableEntry.inc:82
 #, fuzzy
-msgid "Device"
-msgstr "Dispositivi"
+msgid "Please specify a value for the attribute 'content'."
+msgstr "Specificare una dimenzione valida per le mail da rigettare."
 
-#: plugins/admin/fai/faiPartitionTableEntry.tpl:20
+#: plugins/admin/fai/class_faiVariableEntry.inc:86
+#: plugins/admin/fai/class_faiScriptEntry.inc:99
+#: plugins/admin/fai/class_faiHookEntry.inc:112
+#: plugins/admin/fai/class_faiTemplateEntry.inc:164
 #, fuzzy
-msgid "Partition entries"
-msgstr "Destinazione"
-
-#: plugins/admin/fai/faiPartitionTableEntry.tpl:23
-msgid "Add partition"
-msgstr ""
+msgid "Please enter a name."
+msgstr "Inserisci la URI del server LDAP"
 
 #: plugins/admin/fai/faiPartitionTable.tpl:32
 #: plugins/admin/fai/faiVariable.tpl:32 plugins/admin/fai/faiScript.tpl:32
-#: plugins/admin/fai/faiTemplate.tpl:29
+#: plugins/admin/fai/faiHook.tpl:32 plugins/admin/fai/faiTemplate.tpl:29
 #: plugins/admin/fai/class_faiProfileEntry.inc:154
-#: plugins/admin/fai/faiHook.tpl:32
 #, fuzzy
 msgid "Objects"
 msgstr "Oggetto"
@@ -9354,14 +7962,6 @@ msgstr "Prego inserire un numero di telefono valido!"
 #, fuzzy
 msgid "Selected file is empty."
 msgstr "Rimuovi"
-
-#: plugins/admin/fai/class_faiScriptEntry.inc:99
-#: plugins/admin/fai/class_faiVariableEntry.inc:86
-#: plugins/admin/fai/class_faiHookEntry.inc:112
-#: plugins/admin/fai/class_faiTemplateEntry.inc:164
-#, fuzzy
-msgid "Please enter a name."
-msgstr "Inserisci la URI del server LDAP"
 
 #: plugins/admin/fai/class_faiScriptEntry.inc:103
 #, fuzzy
@@ -9442,6 +8042,10 @@ msgstr "Mostra telefoni"
 msgid "Choosen packages"
 msgstr "Mostra telefoni"
 
+#: plugins/admin/fai/faiPackage.tpl:76 include/functions.inc:595
+msgid "Configure"
+msgstr "Configura"
+
 #: plugins/admin/fai/class_faiProfile.inc:145
 #: plugins/admin/fai/class_faiProfileEntry.inc:151
 msgid "This list displays all assigned class names for this profile."
@@ -9499,44 +8103,23 @@ msgstr ""
 msgid "FAI classes"
 msgstr "Scegli il tuo numero di telefono personale"
 
-#: plugins/admin/fai/headpage.tpl:6
+#: plugins/admin/fai/faiScript.tpl:34
 #, fuzzy
-msgid "List of FAI classes"
-msgstr "Scegli il tuo numero di telefono personale"
+msgid "List of scripts"
+msgstr "Lista degli utenti"
 
-#: plugins/admin/fai/headpage.tpl:24
-msgid "This menu allows you to create, delete and edit FAI classes."
+#: plugins/admin/fai/faiScript.tpl:40
+msgid "Choose a script to delete or edit"
 msgstr ""
 
-#: plugins/admin/fai/headpage.tpl:36
+#: plugins/admin/fai/faiHook.tpl:34
 #, fuzzy
-msgid "Show profiles"
-msgstr "Mostra stampanti"
+msgid "List of hook scripts"
+msgstr "Lista delle liste di blocchi"
 
-#: plugins/admin/fai/headpage.tpl:38
-#, fuzzy
-msgid "Show scripts"
-msgstr "Mostra stampanti"
-
-#: plugins/admin/fai/headpage.tpl:39
-#, fuzzy
-msgid "Show hooks"
-msgstr "Mostra telefoni"
-
-#: plugins/admin/fai/headpage.tpl:40
-#, fuzzy
-msgid "Show variables"
-msgstr "Mostra terminali"
-
-#: plugins/admin/fai/headpage.tpl:41
-#, fuzzy
-msgid "Show packages"
-msgstr "Mostra telefoni"
-
-#: plugins/admin/fai/headpage.tpl:42
-#, fuzzy
-msgid "Show partitions"
-msgstr "Mostra workstation"
+#: plugins/admin/fai/faiHook.tpl:40
+msgid "Choose a hook to delete or edit"
+msgstr ""
 
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:180
 #, fuzzy
@@ -9606,19 +8189,10 @@ msgstr "Inserire un nome cartella valido per il campo 'Home directory'."
 msgid "Please enter a range for partition size for partition %s."
 msgstr "Inserire un nome cartella valido per il campo 'Home directory'."
 
-#: plugins/admin/fai/faiScript.tpl:34
+#: plugins/admin/fai/class_faiHookEntry.inc:108
 #, fuzzy
-msgid "List of scripts"
-msgstr "Lista degli utenti"
-
-#: plugins/admin/fai/faiScript.tpl:40
-msgid "Choose a script to delete or edit"
-msgstr ""
-
-#: plugins/admin/fai/class_faiVariableEntry.inc:82
-#, fuzzy
-msgid "Please specify a value for the attribute 'content'."
-msgstr "Specificare una dimenzione valida per le mail da rigettare."
+msgid "Please enter a value for script."
+msgstr "Prego inserire un numero di telefono valido!"
 
 #: plugins/admin/fai/faiVariableEntry.tpl:29
 #, fuzzy
@@ -9651,11 +8225,6 @@ msgstr "Mostra workstation"
 #, fuzzy, php-format
 msgid "%s partition(s)"
 msgstr "Mostra workstation"
-
-#: plugins/admin/fai/class_faiHookEntry.inc:108
-#, fuzzy
-msgid "Please enter a value for script."
-msgstr "Prego inserire un numero di telefono valido!"
 
 #: plugins/admin/fai/class_faiProfileEntry.inc:122
 msgid "Package bundle"
@@ -9810,6 +8379,10 @@ msgstr "Specificare una dimenzione valida per le mail da rigettare."
 msgid "Template attributes"
 msgstr "Attributo DN delle persone"
 
+#: plugins/admin/fai/faiTemplateEntry.tpl:29 include/php_setup.inc:122
+msgid "File"
+msgstr ""
+
 #: plugins/admin/fai/faiTemplateEntry.tpl:35
 #, fuzzy
 msgid "Save template"
@@ -9870,15 +8443,6 @@ msgstr "Filtri"
 msgid "sticky"
 msgstr "statico"
 
-#: plugins/admin/fai/faiHook.tpl:34
-#, fuzzy
-msgid "List of hook scripts"
-msgstr "Lista delle liste di blocchi"
-
-#: plugins/admin/fai/faiHook.tpl:40
-msgid "Choose a hook to delete or edit"
-msgstr ""
-
 #: plugins/admin/fai/class_faiPackageEntry.inc:35
 #, fuzzy
 msgid "Please enter your search string here"
@@ -9888,6 +8452,11 @@ msgstr "Prego inserire un numero di telefono valido!"
 msgid ""
 "This list displays all assigned package names for this repository settings."
 msgstr ""
+
+#: plugins/admin/fai/faiPackageConfiguration.tpl:1
+#, fuzzy
+msgid "Package"
+msgstr "Pacchetti"
 
 #: plugins/admin/fai/faiPackageEntry.tpl:6
 #, fuzzy
@@ -9899,11 +8468,6 @@ msgid ""
 "This menu allows you to select multiple packages to add them to the "
 "currently edited package list."
 msgstr ""
-
-#: plugins/admin/fai/faiPackageConfiguration.tpl:1
-#, fuzzy
-msgid "Package"
-msgstr "Pacchetti"
 
 #: plugins/admin/fai/class_faiPackageConfiguration.inc:42
 #, php-format
@@ -10091,71 +8655,15 @@ msgstr "Macro telefonica"
 msgid "Refresh"
 msgstr "Riferimenti"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:103
-#: plugins/gofon/macro/class_gofonMacroParameters.inc:197
+#: plugins/gofon/macro/parameter.tpl:3
 #, fuzzy
-msgid "This 'dn' is no phone macro."
-msgstr "Questa identità non possiede estensioni telefoniche"
+msgid "Argument"
+msgstr "Argomenti"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:159
-msgid ""
-"This macro ist still in use. To delete this Macro ensure that nobody has "
-"selected this Macro."
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:191
-msgid ""
-"There is no mysql extension available in your php setup, can't save any "
-"changes to asterisk db."
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:261
-#, php-format
-msgid "Unable to parse macro contents on line: %s"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:279
-#, php-format
-msgid "Can't perform SELECT query in DB '%s'"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:288
-#: plugins/gofon/macro/class_gofonMacro.inc:296
-#, php-format
-msgid "Can't perform DELETE query in DB '%s'"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:310
-#, php-format
-msgid "Can't perform INSERT query in DB '%s'"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:357
-#, php-format
-msgid "The given cn '%s' already exists."
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:362
-msgid "You must specify the 'Display Name' in order to save this macro"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:366
-msgid "The given cn is too long, to create a Makro entry, maximum 20 chars."
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:371
-#, php-format
-msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:377
-msgid "Makro length must be lower than 100 lines"
-msgstr ""
-
-#: plugins/gofon/macro/class_gofonMacro.inc:382
+#: plugins/gofon/macro/parameter.tpl:7
 #, fuzzy
-msgid "Please choose a valid  base."
-msgstr "Prego inserire un numero di telefono valido!"
+msgid "type"
+msgstr "Tipo"
 
 #: plugins/gofon/macro/generic.tpl:6 plugins/gofon/macro/generic.tpl:7
 #, fuzzy
@@ -10215,6 +8723,12 @@ msgstr "Espressioni regolare per selezionare il nome del gruppo"
 #: plugins/gofon/macro/main.inc:38 plugins/gofon/macro/main.inc:40
 msgid "Phone macro management"
 msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacroParameters.inc:197
+#: plugins/gofon/macro/class_gofonMacro.inc:103
+#, fuzzy
+msgid "This 'dn' is no phone macro."
+msgstr "Questa identità non possiede estensioni telefoniche"
 
 #: plugins/gofon/macro/class_gofonMacroParameters.inc:245
 #, fuzzy
@@ -10295,15 +8809,65 @@ msgstr "Pubblico"
 msgid "invisible"
 msgstr "Pubblico"
 
-#: plugins/gofon/macro/parameter.tpl:3
-#, fuzzy
-msgid "Argument"
-msgstr "Argomenti"
+#: plugins/gofon/macro/class_gofonMacro.inc:159
+msgid ""
+"This macro ist still in use. To delete this Macro ensure that nobody has "
+"selected this Macro."
+msgstr ""
 
-#: plugins/gofon/macro/parameter.tpl:7
+#: plugins/gofon/macro/class_gofonMacro.inc:191
+msgid ""
+"There is no mysql extension available in your php setup, can't save any "
+"changes to asterisk db."
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:261
+#, php-format
+msgid "Unable to parse macro contents on line: %s"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:279
+#, php-format
+msgid "Can't perform SELECT query in DB '%s'"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:288
+#: plugins/gofon/macro/class_gofonMacro.inc:296
+#, php-format
+msgid "Can't perform DELETE query in DB '%s'"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:310
+#, php-format
+msgid "Can't perform INSERT query in DB '%s'"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:357
+#, php-format
+msgid "The given cn '%s' already exists."
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:362
+msgid "You must specify the 'Display Name' in order to save this macro"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:366
+msgid "The given cn is too long, to create a Makro entry, maximum 20 chars."
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:371
+#, php-format
+msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:377
+msgid "Makro length must be lower than 100 lines"
+msgstr ""
+
+#: plugins/gofon/macro/class_gofonMacro.inc:382
 #, fuzzy
-msgid "type"
-msgstr "Tipo"
+msgid "Please choose a valid  base."
+msgstr "Prego inserire un numero di telefono valido!"
 
 #: plugins/gofon/conference/generic.tpl:13
 #, fuzzy
@@ -10324,6 +8888,11 @@ msgstr "Scegli il subtree per l'utente"
 #: plugins/gofon/conference/generic.tpl:61
 msgid "Lifetime (in days)"
 msgstr ""
+
+#: plugins/gofon/conference/generic.tpl:69 html/getxls.php:174
+#: html/getxls.php:236
+msgid "Phone number"
+msgstr "Numero di telefono"
 
 #: plugins/gofon/conference/generic.tpl:99
 #, fuzzy
@@ -10527,6 +9096,1436 @@ msgstr "Il team di GOsa"
 #, php-format
 msgid "Welcome %s!"
 msgstr "Benvenuto %s!"
+
+#: include/php_setup.inc:71
+msgid "Generating this page caused the PHP interpreter to raise some errors!"
+msgstr ""
+
+#: include/php_setup.inc:71 html/main.php:316
+msgid "Toggle information"
+msgstr ""
+
+#: include/php_setup.inc:76
+msgid "PHP error"
+msgstr "Errore PHP"
+
+#: include/php_setup.inc:87
+msgid "class"
+msgstr "classe"
+
+#: include/php_setup.inc:93
+msgid "function"
+msgstr "funzione"
+
+#: include/php_setup.inc:98
+msgid "static"
+msgstr "statico"
+
+#: include/php_setup.inc:102
+msgid "method"
+msgstr "metodo"
+
+#: include/php_setup.inc:121
+msgid "Trace"
+msgstr ""
+
+#: include/php_setup.inc:122
+msgid "Line"
+msgstr ""
+
+#: include/php_setup.inc:123
+msgid "Arguments"
+msgstr "Argomenti"
+
+#: include/class_mail-methods-cyrus.inc:39
+msgid ""
+"Warning: Account has an invalid mailserver string! Please check the mail "
+"server settings in the mail tab."
+msgstr ""
+
+#: include/class_mail-methods-cyrus.inc:52
+msgid ""
+"Warning: IMAP Server cannot be reached! If you save this account, some mail "
+"settings will not be stored on your server!"
+msgstr ""
+
+#: include/class_mail-methods-cyrus.inc:115
+#, php-format
+msgid "Can't create IMAP mailbox. Server says '%s'."
+msgstr ""
+
+#: include/class_mail-methods-cyrus.inc:131
+#, php-format
+msgid "Can't write IMAP quota. Server says '%s'."
+msgstr ""
+
+#: include/class_mail-methods-cyrus.inc:155
+msgid "Warning: imap_getacl is not implemented, can't remove acl informations."
+msgstr ""
+
+#: include/class_mail-methods-cyrus.inc:173
+msgid "Warning: imap_getacl is not available, can't get imap permissions!"
+msgstr ""
+
+#: include/class_mail-methods-cyrus.inc:195
+#, php-format
+msgid "Can't remove IMAP mailbox. Server says '%s'."
+msgstr ""
+
+#: include/class_mail-methods-cyrus.inc:223
+#, php-format
+msgid "Can't log into SIEVE server. Server says '%s'."
+msgstr ""
+
+#: include/class_mail-methods-cyrus.inc:236
+#, php-format
+msgid "Can't get sieve script. Server says '%s'."
+msgstr ""
+
+#: include/class_mail-methods-cyrus.inc:307
+#, php-format
+msgid "Can't send sieve script. Server says '%s'."
+msgstr ""
+
+#: include/class_mail-methods-cyrus.inc:311
+#, php-format
+msgid "Can't activate GOsa sieve script. Server says '%s'."
+msgstr ""
+
+#: include/class_pluglist.inc:115
+msgid ""
+"Your gosa.conf information has changed partly. Please convert it using the "
+"contributed script fix_config.sh!"
+msgstr ""
+
+#: include/class_pluglist.inc:130 ihtml/themes/altlinux/framework.tpl:14
+#: ihtml/themes/altlinux/framework.tpl:24
+#: ihtml/themes/default/framework.tpl:14 ihtml/themes/default/framework.tpl:24
+msgid ""
+"You are currently editing a database entry. Do you want to dismiss the "
+"changes?"
+msgstr ""
+"Stai modificando un campo del database. Vuoi abbandonare i cambiamenti?"
+
+#: include/functions.inc:290
+#, php-format
+msgid "Error when connecting the LDAP. Server said '%s'."
+msgstr "Errore durante la connessione al server LDAP. Il server dice: '%s'"
+
+#: include/functions.inc:311
+#, php-format
+msgid "User login failed. LDAP server said '%s'."
+msgstr ""
+
+#: include/functions.inc:330
+msgid "Username / UID is not unique. Please check your LDAP database."
+msgstr ""
+
+#: include/functions.inc:368
+msgid ""
+"Error while adding a lock. Parameters are not set correctly, please check "
+"the source!"
+msgstr ""
+
+#: include/functions.inc:378
+#, php-format
+msgid ""
+"Can't set locking information in LDAP database. Please check the 'config' "
+"entry in gosa.conf! LDAP server says '%s'."
+msgstr ""
+
+#: include/functions.inc:393
+#, php-format
+msgid "Adding a lock failed. LDAP server says '%s'."
+msgstr ""
+
+#: include/functions.inc:419
+#, php-format
+msgid "Removing a lock failed. LDAP server says '%s'."
+msgstr ""
+
+#: include/functions.inc:449
+msgid ""
+"Getting the lock from LDAP failed. Parameters are not set correctly, please "
+"check the source!"
+msgstr ""
+
+#: include/functions.inc:459
+msgid ""
+"Can't get locking information in LDAP database. Please check the 'config' "
+"entry in gosa.conf!"
+msgstr ""
+
+#: include/functions.inc:467
+msgid ""
+"Found multiple locks for object to be locked. This should not be possible - "
+"cleaning up multiple references."
+msgstr ""
+
+#: include/functions.inc:581
+#, php-format
+msgid "The size limit of %d entries is exceed!"
+msgstr ""
+
+#: include/functions.inc:583
+#, php-format
+msgid ""
+"Set the new size limit to %s and show me this message if the limit still "
+"exceeds"
+msgstr ""
+
+#: include/functions.inc:600
+msgid "incomplete"
+msgstr "incompleto"
+
+#: include/functions.inc:1005
+#, php-format
+msgid ""
+"You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
+"Please contact the person in order to clarify proceedings."
+msgstr ""
+"Stai per modificare il record LDAP '%s' che sembra essere in uso da '%s'. "
+"Contatta la persona interessata."
+
+#: include/functions.inc:1104
+msgid "LDAP error:"
+msgstr "Errore LDAP"
+
+#: include/functions.inc:1282
+msgid "Entries per page"
+msgstr ""
+
+#: include/functions.inc:1310
+msgid "Apply filter"
+msgstr ""
+
+#: include/functions.inc:1584
+msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+msgstr ""
+
+#: include/functions.inc:1627
+#, php-format
+msgid "GOsa development snapshot (Rev %s)"
+msgstr "versione di sviluppo di GOsa (Rev %s)"
+
+#: include/class_plugin.inc:391
+#, php-format
+msgid ""
+"Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
+msgstr ""
+
+#: include/class_plugin.inc:419 include/class_password-methods.inc:181
+#, php-format
+msgid ""
+"Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
+msgstr ""
+
+#: include/class_plugin.inc:447
+#, php-format
+msgid ""
+"Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
+msgstr ""
+
+#: include/class_config.inc:69
+#, php-format
+msgid "XML error in gosa.conf: %s at line %d"
+msgstr ""
+
+#: include/class_config.inc:195 html/index.php:136
+msgid "Can't bind to LDAP. Please contact the system administrator."
+msgstr ""
+"Errore di connessione al server LDAP. Contatta l'amministratore del sistema."
+
+#: include/class_config.inc:433
+msgid "SID and/or RIDBASE missing in your configuration!"
+msgstr ""
+
+#: include/class_password-methods-ssha.inc:51
+msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
+msgstr ""
+
+#: include/class_password-methods.inc:165
+#, php-format
+msgid "Setting the password failed. LDAP server says '%s'."
+msgstr ""
+
+#: include/class_password-methods.inc:202
+msgid ""
+"Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
+msgstr ""
+
+#: include/class_password-methods-kerberos.inc:43
+msgid ""
+"Warning: Can't set kerberos password. Your PHP version has no kerberos "
+"support, password has not been changed."
+msgstr ""
+
+#: include/class_password-methods-kerberos.inc:52
+msgid "Kerberos database communication failed!"
+msgstr ""
+
+#: include/class_password-methods-kerberos.inc:59
+msgid "Changing password in kerberos database failed!"
+msgstr ""
+
+#: include/class_password-methods-sha.inc:50
+msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
+msgstr ""
+
+#: include/class_ldap.inc:437
+#, php-format
+msgid ""
+"Autocreation of type '%s' is currently not supported. Please report to the "
+"GOsa team."
+msgstr ""
+
+#: include/class_ldap.inc:699
+#, php-format
+msgid ""
+"This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
+"in line %s"
+msgstr ""
+
+#: include/class_ldap.inc:712
+#, php-format
+msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
+msgstr ""
+
+#: include/class_ldap.inc:728
+#, php-format
+msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
+msgstr ""
+
+#: include/class_certificate.inc:35
+msgid "Can't open specified file, check accessibility and or existence"
+msgstr ""
+
+#: include/class_certificate.inc:53
+msgid "Can't read specified certificate / or empty string given"
+msgstr ""
+
+#: include/class_certificate.inc:80
+msgid "Can't load certificate, possibly unsupported format (use PEM/DER) "
+msgstr ""
+
+#: include/class_certificate.inc:95
+msgid "The Format must be PEM, to output certificate informations"
+msgstr ""
+
+#: include/class_certificate.inc:192
+msgid "Can't create/open File"
+msgstr "Errore nella creazione/apertura del file"
+
+#: include/class_certificate.inc:199
+msgid "No valid certificate loaded"
+msgstr ""
+
+#: include/functions_helpviewer.inc:43
+#, php-format
+msgid "XML error in guide.xml: %s at line %d"
+msgstr ""
+
+#: include/functions_helpviewer.inc:86
+msgid "No help available for this plugin."
+msgstr ""
+
+#: include/functions_helpviewer.inc:95
+msgid "previous"
+msgstr ""
+
+#: include/functions_helpviewer.inc:99
+msgid "next"
+msgstr ""
+
+#: include/functions_helpviewer.inc:387
+#, php-format
+msgid "%s results for your search with the keyword %s interpreted as %s"
+msgstr ""
+
+#: include/functions_helpviewer.inc:462
+#, php-format
+msgid "%s%% hit rate in file %s"
+msgstr ""
+
+#: include/functions_setup.inc:98
+msgid "Can't bind to LDAP. No schema check possible!"
+msgstr ""
+
+#: include/functions_setup.inc:107 include/functions_setup.inc:116
+msgid "Can't get schema information from server. No schema check possible!"
+msgstr ""
+
+#: include/functions_setup.inc:136
+#, php-format
+msgid ""
+"Optional objectclass '%s' required by plugin '%s' is not present in LDAP "
+"setup"
+msgstr ""
+
+#: include/functions_setup.inc:140
+#, php-format
+msgid ""
+"Optional objectclass '%s' required by plugin '%s' does not have version %s"
+msgstr ""
+
+#: include/functions_setup.inc:145
+#, php-format
+msgid "Support for '%s' enabled"
+msgstr "Supporto per '%s' abilitato."
+
+#: include/functions_setup.inc:155
+#, php-format
+msgid "Required objectclass '%s' is not present in LDAP setup"
+msgstr ""
+
+#: include/functions_setup.inc:159
+#, php-format
+msgid "Required objectclass '%s' does not have version %s"
+msgstr ""
+
+#: include/functions_setup.inc:170
+msgid "SAMBA 3 support disabled, no schema seems to be installed"
+msgstr "Supporto per Samba 3 disabilitato. Manca il file di schema?"
+
+#: include/functions_setup.inc:175
+msgid "SAMBA 3 support enabled"
+msgstr "Support per Samba 3 abilitato."
+
+#: include/functions_setup.inc:180
+msgid "SAMBA 2 support disabled, no schema seems to be installed"
+msgstr "Supporto per Samba 2 disabilitato. Manca il file di schema?"
+
+#: include/functions_setup.inc:185
+msgid "SAMBA 2 support enabled"
+msgstr "Supporto per Samba 2 abilitato."
+
+#: include/functions_setup.inc:191
+msgid "Support for pureftp disabled, no schema seems to be installed"
+msgstr "Supporto per pureftp disabilitato. Manca il file di schema?"
+
+#: include/functions_setup.inc:196
+msgid "Support for pureftp enabled"
+msgstr "Supporto per pureftp abilitato."
+
+#: include/functions_setup.inc:201
+msgid "Support for WebDAV disabled, no schema seems to be installed"
+msgstr "Supporto per WebDAV disabilitato. Manca il file di schema?"
+
+#: include/functions_setup.inc:206
+msgid "Support for WebDAV enabled"
+msgstr "Supporto per WebDAV abilitato."
+
+#: include/functions_setup.inc:211
+msgid "Support for phpgroupware disabled, no schema seems to be installed"
+msgstr "Supporto per phpgroupware disabilitato. Manca il file di schema?"
+
+#: include/functions_setup.inc:216
+msgid "Support for phpgroupware enabled"
+msgstr "Supporto per phpgroupware abilitato."
+
+#: include/functions_setup.inc:221
+msgid "Support for gofon disabled, no schema seems to be installed"
+msgstr "Supporto per gofon disabilitato. Manca il file di schema?"
+
+#: include/functions_setup.inc:226
+msgid "Support for gofon enabled"
+msgstr "Supporto per gofon abilitato."
+
+#: include/functions_setup.inc:231
+msgid "Support for nagios disabled, no schema seems to be installed"
+msgstr "Supporto per nagios disabilitato. Manca il file di schema?"
+
+#: include/functions_setup.inc:236
+msgid "Support for nagios enabled"
+msgstr "Supporto per nagios abilitato."
+
+#: include/functions_setup.inc:246
+msgid ""
+"Support for Kolab disabled, no schema seems to be installed, setting mail-"
+"method to cyrus"
+msgstr ""
+"Supporto per Kolab disabilitato. Manca il file di schema?Il metodo di "
+"amministrazine della posta è impostato su cyrus"
+
+#: include/functions_setup.inc:253
+msgid "Support for Kolab enabled"
+msgstr "Supporto per Kolab abilitato."
+
+#: include/functions_setup.inc:271
+msgid "OK"
+msgstr "OK"
+
+#: include/functions_setup.inc:274
+msgid "Ignored"
+msgstr "Ignora"
+
+#: include/functions_setup.inc:276
+msgid "Failed"
+msgstr "Fallito"
+
+#: include/functions_setup.inc:293
+msgid "PHP setup inspection"
+msgstr "Ispezione della configurazione PHP"
+
+#: include/functions_setup.inc:294
+msgid "Checking for PHP version (>=4.1.0)"
+msgstr "Controllo della versione di PHP (>=4.1.0)"
+
+#: include/functions_setup.inc:295
+msgid ""
+"PHP must be of version 4.1.0 or above for some functions and known bugs in "
+"PHP language."
+msgstr "PHP deve essere la versione 4.1.0 o superiore."
+
+#: include/functions_setup.inc:298
+msgid "Checking if register_globals is set to 'off'"
+msgstr "Controllo se register_globals e impostato su 'off'"
+
+#: include/functions_setup.inc:299
+msgid ""
+"register_globals is a PHP mechanism to register all global varibales to be "
+"accessible from scripts without changing the scope. This may be a security "
+"risk. GOsa will run in both modes."
+msgstr ""
+"register_globals è un meccanismo PHP che può comportare maggiori rischi per "
+"la sicurezza. GOsa funziona in entrambe le modalità"
+
+#: include/functions_setup.inc:302
+msgid "Checking for ldap module"
+msgstr "Controllo il modulo ldap"
+
+#: include/functions_setup.inc:303
+msgid "This is the main module used by GOsa and therefore really required."
+msgstr ""
+"Questo è il modulo più importante usato da GOsa ed è quindi necessario."
+
+#: include/functions_setup.inc:306
+msgid "Checking for XML functions"
+msgstr "Controllo le funzioni XML"
+
+#: include/functions_setup.inc:307
+msgid "XML functions are required to parse the configuration file."
+msgstr ""
+
+#: include/functions_setup.inc:310
+msgid "Checking for gettext support"
+msgstr "Controllo il support per gettext"
+
+#: include/functions_setup.inc:311
+msgid "Gettext support is required for internationalized GOsa."
+msgstr "Gettext è necessario al supporto per le lingue."
+
+#: include/functions_setup.inc:314
+msgid "Checking for iconv support"
+msgstr "Controllo il supporto per iconv"
+
+#: include/functions_setup.inc:315
+msgid ""
+"This module is used by GOsa to convert samba munged dial informations and is "
+"therefore required."
+msgstr ""
+"Questo modulo è usato da GOsa per convertire alcune informazioni usate da "
+"samba ed è necessario."
+
+#: include/functions_setup.inc:318
+msgid "Checking for mhash module"
+msgstr "Controllo il module mhash"
+
+#: include/functions_setup.inc:319
+msgid ""
+"To use SSHA encryption, you'll need this module. If you are just using crypt "
+"or md5 encryption, ignore this message. GOsa will run without it."
+msgstr ""
+"Questo modulo fornisce lo schema SSHA di criptaggio delle password. Se usi "
+"gli schemi classici 'crypt' e 'md5' ignora queso messaggio. GOsa funziona "
+"correttamente anche senza."
+
+#: include/functions_setup.inc:322
+msgid "Checking for imap module"
+msgstr "Controllo il modulo imap"
+
+#: include/functions_setup.inc:323
+msgid ""
+"The IMAP module is needed to communicate with the IMAP server. It gets "
+"status informations, creates and deletes mail users."
+msgstr "Questo modulo è necessario per comunicare con il server di posta."
+
+#: include/functions_setup.inc:326
+msgid "Checking for getacl in imap"
+msgstr "Controllo il supporto per getacl"
+
+#: include/functions_setup.inc:327
+msgid ""
+"The getacl support is needed for shared folder permissions. The standard "
+"IMAP module is not capable of reading acl's. You need a recend PHP version "
+"for this feature."
+msgstr ""
+"Il support per getacl serve a ottenere i permessi di accesso delle cartelle "
+"di posta sul server. GOsa funziona correttamente anche senza."
+
+#: include/functions_setup.inc:330
+msgid "Checking for mysql module"
+msgstr "Controllo il modulo mysql"
+
+#: include/functions_setup.inc:331
+msgid "MySQL support is needed for reading GOfax reports from databases."
+msgstr ""
+"Queso modulo serve a leggere i report di GOfax dal database.GOsa funziona "
+"correttamente anche senza."
+
+#: include/functions_setup.inc:334
+msgid "Checking for cups module"
+msgstr "Controllo il modulo cups"
+
+#: include/functions_setup.inc:335
+msgid ""
+"In order to read available printers from IPP protocol instead of printcap "
+"files, you've to install the CUPS module."
+msgstr ""
+"Questo modulo serve a ottenere le informazioni sulle stampanti di rete. GOsa "
+"funziona correttamente anche senza."
+
+#: include/functions_setup.inc:338
+msgid "Checking for kadm5 module"
+msgstr "Controllo il modulo kadm5"
+
+#: include/functions_setup.inc:339
+msgid ""
+"Managing users in kerberos requires the kadm5 module which is downloadable "
+"via PEAR network."
+msgstr ""
+"Questo modulo serve ad amministrare gli utenti in un dominio Kerberos. GOsa "
+"funziona correttamente anche senza."
+
+#: include/functions_setup.inc:342
+msgid "Checking for snmp Module"
+msgstr "Controllo il modulo snmp"
+
+#: include/functions_setup.inc:343
+msgid ""
+"Simple Network Management Protocol (SNMP) is required for client monitoring."
+msgstr ""
+
+#: include/functions_setup.inc:379
+msgid "PHP detailed function inspection"
+msgstr "Ispezione dettagliata delle funzioni PHP"
+
+#: include/functions_setup.inc:383
+#, php-format
+msgid "Checking for function %s"
+msgstr "Controllo il supporto per %s"
+
+#: include/functions_setup.inc:384
+#, php-format
+msgid ""
+"The function %s is used by GOsa. There is no information if it's optional or "
+"required yet."
+msgstr ""
+"La funzione %s è usata da GOsa. Non è specificato se è opzionale o "
+"necessaria."
+
+#: include/functions_setup.inc:395
+msgid "Checking for some additional programms"
+msgstr "Controllo la presenza di alcuni programmi addizionali"
+
+#: include/functions_setup.inc:404
+msgid "Checking for ImageMagick (>=5.4.0)"
+msgstr "Controllo per ImageMagick (>=5.4.0)"
+
+#: include/functions_setup.inc:405
+msgid ""
+"ImageMagick is used to convert user supplied images to fit the suggested "
+"size and the unified JPEG format."
+msgstr ""
+"Il programma ImageMagick serve a convertire le immagini fornite dagli utenti "
+"nelle dimensioni e nel formato di default."
+
+#: include/functions_setup.inc:408
+msgid "Checking imagick module for PHP"
+msgstr ""
+
+#: include/functions_setup.inc:409
+msgid ""
+"Imagick is used to convert user supplied images to fit the suggested size "
+"and the unified JPEG format from PHP script."
+msgstr ""
+
+#: include/functions_setup.inc:416
+msgid "Checking for fping utility"
+msgstr "Controllo il supporto per fping"
+
+#: include/functions_setup.inc:417
+msgid ""
+"The fping utility is only used if you've got a thin client based terminal "
+"environment running."
+msgstr ""
+"Il programma fping è usato solo nel caso di ambienti basati su terminali "
+"'thin client'."
+
+#: include/functions_setup.inc:432
+msgid "Checking for a way to generate LM/NT password hashes"
+msgstr "Controllo la possibilità di generare password con algoritmo LM/NT"
+
+#: include/functions_setup.inc:433
+msgid ""
+"In order to use SAMBA 2/3, you've to install some additional packages to "
+"generate password hashes."
+msgstr ""
+"Un programma in grado di generare password con algoritmo LM/NT è necessario "
+"per poter usare Samba 2 o 3."
+
+#: include/functions_setup.inc:446
+msgid "php.ini check -> session.auto_register"
+msgstr "Controllo php.ini per session.auto_register"
+
+#: include/functions_setup.inc:447
+msgid ""
+"In Order to use GOsa without any trouble, the session.auto_register option "
+"in your php.ini must be set to 'Off'."
+msgstr ""
+"Per non avere problemi con GOsa è necessario impostare l'opzione session."
+"auto_register su 'off' nel file php.ini"
+
+#: include/functions_setup.inc:450
+msgid "php.ini check -> implicit_flush"
+msgstr "Controllo php.ini per implicit_flush"
+
+#: include/functions_setup.inc:451
+msgid ""
+"This option influences the Output handling. Turn this Option off, to "
+"increase performance."
+msgstr ""
+"Per motivi di performance è consigliato di impostare l'opzione "
+"implicit_flush su 'off' nel file php.ini."
+
+#: include/functions_setup.inc:458
+msgid "php.ini check -> max_execution_time"
+msgstr "Controllo php.ini per max_execution_time"
+
+#: include/functions_setup.inc:459
+msgid ""
+"The Execution time should be at least 30 seconds, because some actions may "
+"consume more time."
+msgstr ""
+"Per non avere problemi con GOsa è necessario impostare l'opzione "
+"max_execution_time a 30 secondi o più nel file php.ini"
+
+#: include/functions_setup.inc:466
+msgid "php.ini check -> memory_limit"
+msgstr "Controllo php.ini per memory_limit"
+
+#: include/functions_setup.inc:467
+msgid ""
+"GOsa needs at least 16MB of memory, less will cause unpredictable errors! "
+"Increase it for larger setups."
+msgstr ""
+"Per non avere problemi con GOsa è necessario impostare l'opzione "
+"memory_limit a 16MB o più nel file php.ini"
+
+#: include/functions_setup.inc:471
+msgid "php.ini check -> expose_php"
+msgstr "Controllo php.ini per expose_php"
+
+#: include/functions_setup.inc:472
+msgid ""
+"Increase the server security by setting expose_php to 'off'. PHP won't send "
+"any Information about the server you are running in this case."
+msgstr ""
+"Per motivi di sicurezza è consigliato di impostare l'opzione expose_php su "
+"'off' nel file php.ini."
+
+#: include/functions_setup.inc:476
+msgid "php.ini check -> magic_quotes_gpc"
+msgstr "Controllo php.ini per magic_quotes_gpc"
+
+#: include/functions_setup.inc:477
+msgid ""
+"Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
+"escape all quotes in strings in this case."
+msgstr ""
+"Per motivi di sicurezza è consigliato di impostare l'opzione "
+"magic_quotes_gpc su 'on' nel file php.ini."
+
+#: include/functions_setup.inc:720
+msgid "You've to specify an ldap server before continuing!"
+msgstr ""
+
+#: include/functions_setup.inc:729 include/functions_setup.inc:812
+msgid ""
+"Can't connect to the specified LDAP server! Please make sure that is "
+"reachable for GOsa."
+msgstr ""
+
+#: include/functions_setup.inc:743 include/functions_setup.inc:817
+#: include/functions_setup.inc:822
+msgid ""
+"Can't bind to the specified LDAP server! Please make sure that it is "
+"reachable for GOsa."
+msgstr ""
+
+#: include/functions_setup.inc:832
+msgid ""
+"Bind to server successful, but the server seems to be completly empty, "
+"please check all informations twice"
+msgstr ""
+
+#: include/functions_setup.inc:888
+#, php-format
+msgid ""
+"You're missing the required attribute '%s' from this formular. Please "
+"complete!"
+msgstr "Manca il campo obbligatorio '%s'. Completarlo, prego. "
+
+#: include/functions_setup.inc:919
+msgid ""
+"Can't read schema informations, GOsa needs to know your schema setup. Please "
+"verify that it is readable for GOsa"
+msgstr ""
+
+#: include/functions_setup.inc:928
+#, php-format
+msgid "Can't log into LDAP server. Reason was: %s."
+msgstr "Accesso al server LDAP fallito. La ragione è: %s."
+
+#: include/functions_setup.inc:1038 include/functions_setup.inc:1061
+#: include/functions_setup.inc:1070 html/index.php:172
+#: ihtml/themes/altlinux/setup_useradmin.tpl:6
+#: ihtml/themes/default/setup_useradmin.tpl:6
+msgid ""
+"You're missing an administrative account for GOsa, you'll not be able to "
+"administrate anything!"
+msgstr ""
+"Manca un utente amministrativo per GOsa, non sarai in grado di amministrare "
+"niente!"
+
+#: include/class_ppdManager.inc:13
+#, php-format
+msgid "PPD manager : The specified path '%s' doesn't exists."
+msgstr ""
+
+#: include/class_ppdManager.inc:129 include/class_ppdManager.inc:247
+#, php-format
+msgid ""
+"Parsing PPD file %s failed - line too long. Trailing characters have been "
+"ignored"
+msgstr ""
+
+#: include/class_ppdManager.inc:137
+msgid "Nested groups are not supported!"
+msgstr "Gruppi ricorsivi non supportati!"
+
+#: include/class_ppdManager.inc:141
+msgid "Group name not unique!"
+msgstr "Nome del gruppo non unico!"
+
+#: include/class_ppdManager.inc:147 include/class_ppdManager.inc:177
+msgid "Symbol values are not supported yet!"
+msgstr ""
+
+#: include/class_ppdManager.inc:171
+msgid "Nested options are not supported!"
+msgstr ""
+
+#: include/class_ppdManager.inc:196
+msgid "PickMany is not supported yet!"
+msgstr ""
+
+#: include/class_ppdManager.inc:268
+#, php-format
+msgid "Parsing PPD file %s failed - no information found."
+msgstr ""
+
+#: include/class_xmlParse.inc:42
+#, php-format
+msgid "Could not open XML input '%s'."
+msgstr ""
+
+#: include/class_xmlParse.inc:117
+#, php-format
+msgid "XML error in %s : %s at line %d"
+msgstr ""
+
+#: include/class_debconfTemplate.inc:251
+#, fuzzy
+msgid "This package has no debconf options."
+msgstr "Questa identità non possiede estensioni telefoniche"
+
+#: html/helpviewer.php:113
+msgid "There is no helpfile specified for this class."
+msgstr ""
+
+#: html/helpviewer.php:223
+#, php-format
+msgid "Helpdir '%s' is not accessible, can't read any helpfiles."
+msgstr ""
+
+#: html/getxls.php:65
+msgid "Birthday"
+msgstr ""
+
+#: html/getxls.php:65 html/getxls.php:174 html/getxls.php:224
+#: html/getxls.php:236
+msgid "Surname"
+msgstr "Cognome"
+
+#: html/getxls.php:74
+#, php-format
+msgid "User list of %s on %s"
+msgstr "Lista degli utenti di %s su %s"
+
+#: html/getxls.php:94 html/getxls.php:227
+msgid "Members"
+msgstr "Membri"
+
+#: html/getxls.php:104 html/getxls.php:295
+#, php-format
+msgid "Groups of %s on %s"
+msgstr "Gruppi di %s su %s"
+
+#: html/getxls.php:124 html/getxls.php:246
+msgid "Computers"
+msgstr "Computer"
+
+#: html/getxls.php:133 html/getxls.php:174 html/getxls.php:336
+#: html/getxls.php:356
+msgid "Common name"
+msgstr "Nome comune"
+
+#: html/getxls.php:156 html/getxls.php:314
+#, php-format
+msgid "Servers of %s on %s"
+msgstr "Server di %s su %s"
+
+#: html/getxls.php:174
+msgid "Home postal address"
+msgstr ""
+
+#: html/getxls.php:174
+msgid "Mobile phone"
+msgstr "Cellulare"
+
+#: html/getxls.php:174 html/getxls.php:236
+msgid "Postal address"
+msgstr "CAP"
+
+#: html/getxls.php:174
+msgid "Function"
+msgstr "Funzione"
+
+#: html/getxls.php:177 html/getxls.php:247
+msgid "Adressbook"
+msgstr "Rubrica"
+
+#: html/getxls.php:184 html/getxls.php:349
+#, php-format
+msgid "Adressbook of %s on %s"
+msgstr "Rubrica di %s su %s"
+
+#: html/getxls.php:190
+msgid "Common Name"
+msgstr "Nome comune"
+
+#: html/getxls.php:224
+msgid "Day of birth"
+msgstr "Data di nascita"
+
+#: html/getxls.php:236
+msgid "Email address"
+msgstr "Indirizzo principale"
+
+#: html/getxls.php:236
+msgid "Organizational unit"
+msgstr "Unità del'organizzazione"
+
+#: html/getxls.php:236
+msgid "Postal Code"
+msgstr "CAP"
+
+#: html/getxls.php:236
+msgid "Surename"
+msgstr "Cognome"
+
+#: html/getxls.php:236
+msgid "Title"
+msgstr "Titolo"
+
+#: html/getxls.php:239
+msgid "Full"
+msgstr ""
+
+#: html/getxls.php:276
+#, php-format
+msgid "User List of %s on %s"
+msgstr "Lista degli utenti di %s su %s"
+
+#: html/getxls.php:330
+#, php-format
+msgid "Computers of %s on %s"
+msgstr "Computer di %s su %s"
+
+#: html/getfax.php:53
+msgid "Could not connect to database server!"
+msgstr "Impossibile connettersi al server del database!"
+
+#: html/getfax.php:55
+msgid "Could not select database!"
+msgstr "Impossibile selezionare il database!"
+
+#: html/getfax.php:60 html/getfax.php:68
+msgid "Database query failed!"
+msgstr "La query al database è fallita!"
+
+#: html/getvcard.php:36
+msgid "Error: getcvard.php needs a parameter to export a vcard!"
+msgstr ""
+
+#: html/setup.php:86
+#, php-format
+msgid ""
+"Directory '%s' specified as smarty compile directory is not accessible, "
+"please check existence and rights of this directory!"
+msgstr ""
+
+#: html/main.php:114
+msgid ""
+"Register globals is on. GOsa will refuse to login unless this is fixed by an "
+"administrator."
+msgstr ""
+
+#: html/main.php:157
+msgid "Warning: memory is getting low - please increase the memory_limit!"
+msgstr ""
+
+#: html/main.php:287
+#, php-format
+msgid "Can't find any plugin definitions for plugin '%s'!"
+msgstr ""
+
+#: html/main.php:316
+msgid ""
+"Generating this page caused the W3C conformance checker to raise some errors!"
+msgstr ""
+
+#: html/index.php:49
+#, php-format
+msgid "GOsa configuration %s/gosa.conf is not readable. Aborted."
+msgstr "Il file di configurazione di GOsa %s/gosa.conf non è legibile."
+
+#: html/index.php:71
+#, php-format
+msgid "Directory '%s' specified as compile directory is not accessable!"
+msgstr ""
+
+#: html/index.php:145
+msgid ""
+"GOsa cannot retrieve information about the installed schema files. Please "
+"make sure, that this is possible."
+msgstr ""
+
+#: html/index.php:153
+msgid ""
+"Your ldap setup contains old schema definitions. Please re-run the setup."
+msgstr ""
+
+#: html/index.php:180
+msgid "Please specify a valid username!"
+msgstr ""
+
+#: html/index.php:182
+msgid "Please specify your password!"
+msgstr ""
+
+#: html/index.php:189
+msgid "Please check the username/password combination."
+msgstr ""
+
+#: html/index.php:227 html/index.php:287
+msgid "Session will not be encrypted."
+msgstr ""
+
+#: html/index.php:227 html/index.php:287
+msgid "Enter SSL session"
+msgstr ""
+
+#: ihtml/themes/altlinux/sizelimit.tpl:3 ihtml/themes/default/sizelimit.tpl:3
+msgid ""
+"The size limit option makes LDAP operations faster and saves the LDAP server "
+"from getting too much load. The easiest way to handle big databases without "
+"long timeouts would be to limit your search to smaller values and use "
+"filters to get the entries you are looking for."
+msgstr ""
+
+#: ihtml/themes/altlinux/sizelimit.tpl:6 ihtml/themes/default/sizelimit.tpl:6
+msgid "Please choose the way to react for this session"
+msgstr ""
+
+#: ihtml/themes/altlinux/sizelimit.tpl:9 ihtml/themes/default/sizelimit.tpl:9
+msgid "ignore this error and show all entries the LDAP server returns"
+msgstr ""
+
+#: ihtml/themes/altlinux/sizelimit.tpl:10
+#: ihtml/themes/default/sizelimit.tpl:10
+msgid ""
+"ignore this error and show all entries that fit into the defined sizelimit "
+"and let me use filters instead"
+msgstr ""
+
+#: ihtml/themes/altlinux/conflict.tpl:2 ihtml/themes/default/conflict.tpl:2
+msgid "Session conflict detected"
+msgstr "Rilevato un conflitto di sessione"
+
+#: ihtml/themes/altlinux/conflict.tpl:6 ihtml/themes/default/conflict.tpl:6
+msgid ""
+"Probably there's another active instance of your session. Multiple window "
+"operation is technical not possible and heavily depends on the browser "
+"you're using. Usage of different browsers at a time (i.e. IE and Mozilla) is "
+"possible. Pressing the <b>Logout</b> button will close this session."
+msgstr ""
+
+#: ihtml/themes/altlinux/conflict.tpl:10 ihtml/themes/default/conflict.tpl:10
+msgid ""
+"Ignoring this message will change/destroy the data you're currently editing, "
+"so please close multiple windows and log in again."
+msgstr ""
+
+#: ihtml/themes/altlinux/conflict.tpl:14 ihtml/themes/default/conflict.tpl:14
+msgid "Logout"
+msgstr "Termina sessione"
+
+#: ihtml/themes/altlinux/login.tpl:15 ihtml/themes/default/login.tpl:15
+msgid "Please use your <i>username</i> and <i>password</i> to log in"
+msgstr "Usa il tuo <i>nome utente</i> e <i>password</i> per connetterti"
+
+#: ihtml/themes/altlinux/login.tpl:44 ihtml/themes/altlinux/login.tpl:47
+#: ihtml/themes/default/login.tpl:44 ihtml/themes/default/login.tpl:47
+msgid "Directory"
+msgstr "Directory"
+
+#: ihtml/themes/altlinux/login.tpl:55 ihtml/themes/default/login.tpl:55
+msgid "Sign in"
+msgstr "Entra"
+
+#: ihtml/themes/altlinux/login.tpl:56 ihtml/themes/default/login.tpl:56
+msgid "Click here to log in"
+msgstr "Clicca qui per connetterti"
+
+#: ihtml/themes/altlinux/setup_introduction.tpl:1
+#: ihtml/themes/default/setup_introduction.tpl:1
+msgid "Welcome to the GOsa setup!"
+msgstr "Benvenuto nel setup di GOsa!"
+
+#: ihtml/themes/altlinux/setup_introduction.tpl:4
+#: ihtml/themes/default/setup_introduction.tpl:4
+msgid ""
+"It looks like you're calling GOsa for the first time - no configuration was "
+"found. This setup like script will try to aid you in creating a working "
+"configuration by performing three major steps: first we'll check the PHP "
+"installation for required modules, than we're going to check for optional/"
+"needed programms and after you've provided basic informations for your LDAP "
+"connectivity, we're going to check your LDAP setup."
+msgstr ""
+"Il file di configurazione di GOsa non è stato trovato - questo è normale se "
+"è la prima volta che ti connetti. Questa procedura di setup cercherà di "
+"guidarti nella creazione della configurazione in tre passaggi: per prima "
+"cosa controlleremo l'installazione dei moduli PHP necessari, poi cercheremo "
+"i programmi necessari e opzionali, e in fine passeremo alle impostazioni del "
+"server LDAP."
+
+#: ihtml/themes/altlinux/framework.tpl:15
+#: ihtml/themes/default/framework.tpl:15
+msgid "Main"
+msgstr "Principale"
+
+#: ihtml/themes/altlinux/framework.tpl:20
+#: ihtml/themes/default/framework.tpl:20
+msgid "Help"
+msgstr "Aiuto"
+
+#: ihtml/themes/altlinux/framework.tpl:25
+#: ihtml/themes/default/framework.tpl:25
+msgid "Sign out"
+msgstr "Termina la sessione"
+
+#: ihtml/themes/altlinux/framework.tpl:33
+#: ihtml/themes/default/framework.tpl:33
+msgid "Signed in:"
+msgstr "Connesso:"
+
+#: ihtml/themes/altlinux/setup_step2.tpl:1
+#: ihtml/themes/altlinux/setup_step3.tpl:1
+#: ihtml/themes/altlinux/setup_step4.tpl:1
+#: ihtml/themes/default/setup_step2.tpl:1
+#: ihtml/themes/default/setup_step3.tpl:1
+#: ihtml/themes/default/setup_step4.tpl:1
+msgid "Setup continued..."
+msgstr "Configurazione continua..."
+
+#: ihtml/themes/altlinux/setup_step2.tpl:4
+#: ihtml/themes/default/setup_step2.tpl:4
+msgid ""
+"Step two looks for a set of helper programms and checks if they have the "
+"correct minimum version."
+msgstr "In questo secondo passo cercheremo i programmi necessari e opzionali."
+
+#: ihtml/themes/altlinux/islocked.tpl:2 ihtml/themes/default/islocked.tpl:2
+msgid "Locking conflict detected"
+msgstr "Rilevato un conflitto di accesso"
+
+#: ihtml/themes/altlinux/islocked.tpl:9 ihtml/themes/default/islocked.tpl:9
+msgid ""
+"If this lock detection is false, the other person has obviously closed the "
+"webbrowser during the edit operation. You may delete the lockfile in this "
+"case by pressing the <i>Remove</i> button."
+msgstr ""
+
+#: ihtml/themes/altlinux/setup_useradmin.tpl:3
+#: ihtml/themes/default/setup_useradmin.tpl:3
+msgid "You already have an Administrative Account and a Group."
+msgstr ""
+
+#: ihtml/themes/altlinux/setup_useradmin.tpl:10
+#: ihtml/themes/default/setup_useradmin.tpl:10
+msgid ""
+"To provide full administrative access to GOsa, you need to create a special "
+"group which contains the administrative user. The setup program can assist "
+"you with this task. Enter the desired username and the password below to "
+"create the missing entries."
+msgstr ""
+"Per amministrare GOsa devi creare un gruppo speciale che contine l'utente "
+"aministrativo. La procedura di setup ti aiuterà nel compito.Immetti il nome "
+"utente e la password per creare le entrate mancanti."
+
+#: ihtml/themes/altlinux/setup_step3.tpl:4
+#: ihtml/themes/default/setup_step3.tpl:4
+msgid ""
+"Now we're going include your LDAP server and create an initial "
+"configuration. After you've entered the server URI below, a quick check is "
+"performed if required LDAP schemas are in place. Samba versions are "
+"autodetected by the installed objectclasses. Details on how your LDAP tree "
+"is organized will be asked later on."
+msgstr ""
+"Adesso ci occuperemo del server LDAP e creeremo al configurazione iniziale. "
+"Dopo che avrai inserito la URI del server verrà eseguito un rapido controllo "
+"per verificare che tutti gli schemi necessari siano presenti. La versione di "
+"Samba verrà riconosciuta automaticamente. I dettagli sul DIT della tua "
+"organizzazione sarammo chiesti in seguito."
+
+#: ihtml/themes/altlinux/setup_step3.tpl:10
+#: ihtml/themes/default/setup_step3.tpl:10
+msgid ""
+"Please enter the server URI to allow the setup to connect your LDAP server "
+"<i>(Example: ldap://your.server:389).</i>"
+msgstr ""
+"Inserisci la URI del server LDAP <i>(Per esempio: ldap://mio.server:389).</i>"
+
+#: ihtml/themes/altlinux/setup_step4.tpl:2
+#: ihtml/themes/default/setup_step4.tpl:2
+msgid ""
+"The following fields allow the basic configuration of GOsa's behaviour and "
+"affect various properties in your main configuration."
+msgstr "I campi seguenti permettono una configurazione base di GOsa."
+
+#: ihtml/themes/altlinux/setup_step4.tpl:7
+#: ihtml/themes/default/setup_step4.tpl:7
+msgid "Enter a description for the location you're configuring here"
+msgstr "Inserisci una descrizione della locazione che vuoi configurare"
+
+#: ihtml/themes/altlinux/setup_step4.tpl:11
+#: ihtml/themes/default/setup_step4.tpl:11
+msgid "Location name"
+msgstr "Nome locazione"
+
+#: ihtml/themes/altlinux/setup_step4.tpl:18
+#: ihtml/themes/default/setup_step4.tpl:18
+msgid ""
+"GOsa always acts as admin and manages access rights internally. This is a "
+"workaround till OpenLDAP's in directory ACI's are fully implemented. For "
+"this to work, we need the admin DN and the corresponding password."
+msgstr ""
+"GOsa agisce sul DIT tramite l'utente di amministrazione e possiede uno "
+"schema di permessi interno. Questo è un workaround finché non sarà "
+"completato il supportp per le ACL all'interno del DIT in OpenLDAP."
+
+#: ihtml/themes/altlinux/setup_step4.tpl:23
+#: ihtml/themes/default/setup_step4.tpl:23
+msgid "Admin DN"
+msgstr "DN dell'amministratore"
+
+#: ihtml/themes/altlinux/setup_step4.tpl:27
+#: ihtml/themes/default/setup_step4.tpl:27
+msgid "Admin password"
+msgstr "Password dell'amministratore"
+
+#: ihtml/themes/altlinux/setup_step4.tpl:34
+#: ihtml/themes/default/setup_step4.tpl:34
+msgid ""
+"Some basic LDAP parameters are tunable and affect the locations where GOsa "
+"saves people and groups, including the way accounts get created. Check the "
+"values below if the fit your needs."
+msgstr ""
+"Alcuni parametri di LDAP sono selezionabili e influenzano il posto in cui "
+"GOsa salva le identità e i gruppi. Controlla che i valori riportati "
+"corrispondano alle impostaioni del tuo DIT."
+
+#: ihtml/themes/altlinux/setup_step4.tpl:39
+#: ihtml/themes/default/setup_step4.tpl:39
+msgid "Base "
+msgstr "Base "
+
+#: ihtml/themes/altlinux/setup_step4.tpl:43
+#: ihtml/themes/default/setup_step4.tpl:43
+msgid "People storage ou"
+msgstr "Ou delle persone"
+
+#: ihtml/themes/altlinux/setup_step4.tpl:47
+#: ihtml/themes/default/setup_step4.tpl:47
+msgid "People dn attribute"
+msgstr "Attributo DN delle persone"
+
+#: ihtml/themes/altlinux/setup_step4.tpl:55
+#: ihtml/themes/default/setup_step4.tpl:55
+msgid "Group storage ou"
+msgstr "Ou dei gruppi"
+
+#: ihtml/themes/altlinux/setup_step4.tpl:59
+#: ihtml/themes/default/setup_step4.tpl:59
+msgid "ID base for users/groups"
+msgstr "UID di base per utenti/gruppi"
+
+#: ihtml/themes/altlinux/setup_step4.tpl:67
+#: ihtml/themes/default/setup_step4.tpl:67
+msgid ""
+"GOsa supports several encryption types for your passwords. Normally this is "
+"adjustable via user templates, but you can specify a default method to be "
+"used here, too."
+msgstr ""
+"GOsa supporta numerosi algoritmi di criptaggio per le password. Imposta "
+"quello di default."
+
+#: ihtml/themes/altlinux/setup_step4.tpl:72
+#: ihtml/themes/default/setup_step4.tpl:72
+msgid "Encryption algorithm"
+msgstr "Algoritmo di criptaggio"
+
+#: ihtml/themes/altlinux/setup_step4.tpl:83
+#: ihtml/themes/default/setup_step4.tpl:83
+msgid ""
+"GOsa has modular support for several mail methods. These methods provide "
+"interfaces to users mailboxes and general handling for quotas. You can "
+"choose the dummy plugin to leave all your mail settings untouched."
+msgstr ""
+"GOsa supporta numerosi metodi per amministrare la posta. Questi metodi "
+"possiedono interfacce per impostare opzioni come ad esempio la quota. Puoi "
+"impostare il metodo 'dummy' per mantenere tutte le impostazioni."
+
+#: ihtml/themes/altlinux/setup_step4.tpl:88
+#: ihtml/themes/default/setup_step4.tpl:88
+msgid "Mail method"
+msgstr "Metodo di amministrazione della posta"
+
+#: ihtml/themes/altlinux/setup_step4.tpl:99
+msgid ""
+"GOsa may cause PHP interpreter errors, particularly in case of Beta "
+"versions. In some cases it would be helpful to enable the error reporting. "
+"(But it  could be a security risk)  "
+msgstr ""
+
+#: ihtml/themes/altlinux/setup_step4.tpl:103
+#: ihtml/themes/default/setup_step4.tpl:104
+msgid "Display PHP errors"
+msgstr "Mostra errori PHP"
+
+#: ihtml/themes/altlinux/setup_step4.tpl:106
+#: ihtml/themes/default/setup_step4.tpl:107
+msgid "true"
+msgstr "vero"
+
+#: ihtml/themes/altlinux/setup_step4.tpl:107
+#: ihtml/themes/default/setup_step4.tpl:108
+msgid "false"
+msgstr "falso"
+
+#: ihtml/themes/altlinux/setup_step4.tpl:115
+#: ihtml/themes/default/setup_step4.tpl:115
+msgid "Check"
+msgstr "Continua"
+
+#: ihtml/themes/altlinux/setup_finish.tpl:1
+#: ihtml/themes/default/setup_finish.tpl:1
+msgid "Setup finished"
+msgstr "Setup completato"
+
+#: ihtml/themes/altlinux/setup_finish.tpl:3
+#: ihtml/themes/default/setup_finish.tpl:3
+msgid ""
+"Basically the setup is finished. You can check the result of the schema "
+"check here and download the autogenerated gosa.conf below."
+msgstr ""
+"La configurazione di GOsa è terminata. Puoi verificare il risultato del "
+"controllo degli schemi e scaricare il file di configurazione autogenerto."
+
+#: ihtml/themes/altlinux/setup_finish.tpl:7
+#: ihtml/themes/default/setup_finish.tpl:7
+msgid "Schema Configuration"
+msgstr "Configurazione delgi schemi"
+
+#: ihtml/themes/altlinux/setup_finish.tpl:12
+#: ihtml/themes/default/setup_finish.tpl:12
+msgid "Configuration File"
+msgstr "File di configurazione"
+
+#: ihtml/themes/altlinux/setup_finish.tpl:14
+#: ihtml/themes/default/setup_finish.tpl:14
+msgid ""
+"GOsa setup has collected all data needed to create an initial configuration "
+"file. Save the the link below as your gosa.conf and place that file in /etc/"
+"gosa. Change it as needed."
+msgstr ""
+"La procedura di configurazione di GOsa ha raccoolto le informazioni "
+"necessarie a creare un file di configurazione iniziale. Scarica il file e "
+"salvalo dentro /etc/gosa/ col nome gosa.conf."
+
+#: ihtml/themes/altlinux/setup_finish.tpl:17
+#: ihtml/themes/default/setup_finish.tpl:17
+msgid "Download configuration"
+msgstr "Scarica il file di  configurazione"
+
+#: ihtml/themes/altlinux/setup_finish.tpl:20
+#: ihtml/themes/default/setup_finish.tpl:20
+msgid ""
+"After placing the file under /etc/gosa, place make sure that the webserver "
+"user is able to read gosa.conf, while other users shouldn't. You may want to "
+"execute these commands to achieve this requirement:"
+msgstr ""
+"Dopo averlo scaricato dentro /etc/gosa/, assicurati che l'utente del "
+"webserver sia in grado di leggerlo mentre tutti gli altri utenti non "
+"possono. In molti casi è sufficiente eseguire i comandi seguenti."
+
+#: ihtml/themes/default/help.tpl:9
+msgid "GOsa help viewer"
+msgstr ""
+
+#: ihtml/themes/default/help.tpl:15
+msgid "Index"
+msgstr ""
+
+#: ihtml/themes/default/setup_introduction.tpl:17
+msgid ""
+"You can also use the new and more-advanced way of inspecting your PHP-"
+"installation. It will give you information about the exact function that "
+"could not be found (functions that could be found are not mentioned). This "
+"is useful if you know what you're doing."
+msgstr ""
+
+#: ihtml/themes/default/setup_introduction.tpl:19
+msgid "Toggle Show/Hide"
+msgstr ""
+
+#: ihtml/themes/default/setup_step4.tpl:100
+msgid ""
+"GOsa may cause PHP interpreter errors, particularly in case of Beta "
+"versions. In some cases it would be helpful to enable the error reporting."
+msgstr ""
 
 #, fuzzy
 #~ msgid "Account expiry"
