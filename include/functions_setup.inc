@@ -504,8 +504,8 @@ function parse_contrib_conf()
   }
 
   /* Look for samba password generation method */
-  if(file_exists("/usr/lib/gosa/mkntpasswd")){
-    $pwdhash  = "/usr/lib/gosa/mkntpasswd";
+  if(file_exists("/usr/bin/mkntpasswd")){
+    $pwdhash  = "/usr/bin/mkntpasswd";
   } elseif (preg_match("/^Usage: mkntpwd /", shell_exec ("mkntpwd 2>&1"))){
     $pwdhash= "mkntpwd";
   } else {

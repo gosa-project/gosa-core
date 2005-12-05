@@ -56,11 +56,12 @@ install-stamp:
 	-rm -rf debian/gosa/usr/share/gosa/doc
 	-rm debian/gosa/usr/share/gosa/bin/gosa
 	-mkdir -p debian/gosa/usr/lib/gosa
-	-mv debian/gosa/usr/share/gosa/bin/* debian/gosa/usr/lib/gosa
+	-mv debian/gosa/usr/share/gosa/bin/* debian/gosa/usr/bin
 	-rm -rf debian/gosa/usr/share/gosa/bin
 	-find debian/gosa -type f -exec chmod -x {} \;
 	-chmod +x debian/gosa/usr/lib/gosa/*
 	-rm -rf debian/gosa/usr/share/gosa/gen_locale.sh
+	-rm -rf debian/gosa/usr/share/gosa/gen_function_list.php
 	-rm -rf debian/gosa/usr/share/gosa/update.sh
 	-mkdir -p debian/gosa/usr/share/php/smarty/libs/plugins
 	-cp include/smarty/plugins/block.t.php debian/gosa/usr/share/php/smarty/libs/plugins
