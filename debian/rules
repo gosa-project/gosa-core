@@ -59,6 +59,7 @@ install-stamp:
 	-mv debian/gosa/usr/share/gosa/bin/* debian/gosa/usr/bin
 	-rm -rf debian/gosa/usr/share/gosa/bin
 	-find debian/gosa -type f -exec chmod -x {} \;
+	-chmod +x debian/gosa/usr/bin/mkntpasswd
 	-chmod +x debian/gosa/usr/lib/gosa/*
 	-rm -rf debian/gosa/usr/share/gosa/gen_locale.sh
 	-rm -rf debian/gosa/usr/share/gosa/gen_function_list.php

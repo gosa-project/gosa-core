@@ -1,4 +1,5 @@
 etc/gosa
+usr/bin
 usr/share/gosa
 usr/share/doc/gosa
 usr/share/doc/gosa/contrib
