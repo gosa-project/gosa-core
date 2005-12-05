@@ -1,6 +1,11 @@
 gosa (2.4-1) unstable; urgency=low
 
   * New upstream release 
+  * Fixed problem with pre selecting base for user templates (Closes: #297901)
+  * Included sieve templates (Closes: #303038)
+  * Added some more documentation hints to the contributed slapd.conf to
+    make installation easier (Closes: #334202)
+  * Supplied wwwcommon function with correct include file (Closes: #322393)
 
  -- Cajus Pollmeier <cajus@debian.org>  Fri,  2 Dec 2005 14:52:18 +0100
 
