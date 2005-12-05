@@ -26,6 +26,7 @@
 error_reporting(0);
 header("Content-type: text/html; charset=UTF-8");
 session_start();
+$config= $_SESSION['config'];
 
 /* If no config object is found in the session, abort help */
 if (!isset($_SESSION['config'])){
@@ -39,6 +40,10 @@ if ($config->data['MAIN']['LANG'] == ""){
   $lang= get_browser_language();
 } else {
   $lang= $config->data['MAIN']['LANG'];
+}
+
+if(isset($_SESSION['ui']->language)){
+  $lang = $_SESSION['ui']->language;
 }
 
 $lang.=".UTF-8";
@@ -67,14 +72,13 @@ if (isset ($config->data['MAIN']['COMPILE'])){
 if(isset($_SESSION['helpobject'])){
   $helpobject = $_SESSION['helpobject'];
 }else{
-  $helpobject['lang']         = "en"; 
+  $helpobject['lang']         = $lang; 
   $helpobject['helpconf']     = array();  
   $helpobject['currentplug']  = "";
   $helpobject['file']         = "index.html";
   $helpobject['helpconf']     = $_SESSION['plist']->gen_headlines();
 }
 
-$lang =  get_browser_language();
 $lang = $lang[0].$lang[1];
 
 $helpobject['lang']           = $lang;  
@@ -89,7 +93,6 @@ $allowed_chars_in_searchword  = "'[^a-z0-9 %_-]'i";                 // Remove al
 $backward =$defaultpage;
 $index    =$defaultpage;
 $forward  ="node1.html";
-
 
 /* Every class which is called within a tab, stores its name in the Session.
  * If $_SESSION['current_class_for_help'] isset, 
