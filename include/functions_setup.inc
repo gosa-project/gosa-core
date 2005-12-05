@@ -512,11 +512,13 @@ function parse_contrib_conf()
     $pwdhash=('perl -MCrypt::SmbHash -e "ntlmgen \"\$ARGV[0]\", \$lm, \$nt; print \"\${lm}:\${nt}\n\";" $1');
   }
 
+
   /* Define which variables will be replaced */
   $replacements['{LOCATIONNAME}']  = $ldapconf['location'];
   $replacements['{SAMBAVERSION}']  = $used_samba_version;
   $replacements['{LDAPBASE}']      = $ldapconf['base'];
   $replacements['{LDAPADMIN}']     = $ldapconf['admin'];
+  $replacements['{UIDBASE}']       = $ldapconf['uidbase'];
   $replacements['{DNMODE}']        = $ldapconf['peopledn'];
   $replacements['{LDAPHOST}']      = $ldapconf['uri'];
   $replacements['{PASSWORD}']      = $ldapconf['password'];
