@@ -6,11 +6,13 @@ GOsa2 changelog
   - Added FAI (Fully Automatted Installation) support
   - Added mail queue management
   - Added many missing acl informations
-  - Added help browser
+  - Added help browser and initial french help
   - Fixed templating for samba and unix users
   - Applied hundreds of smaller bugfixes
   - Improved speed by switching to directory style dialogs and performing
     sub searches.
+  - Per user language selector in generic tab
+  - New connectivity plugins (PHPscheduleit/PPTP/glpi)
 
 * gosa 2.4beta3
   - Updated layout
