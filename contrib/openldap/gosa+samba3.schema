@@ -276,8 +276,8 @@ objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.11 NAME 'gosaUserTemplate' SUP top AUXI
 
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.12 NAME 'gosaGroupOfNames'
         DESC 'GOsa object grouping (v2.4)'
-		SUP groupOfNames STRUCTURAL
-		MUST ( cn $ gosaGroupObjects ) MAY ( member ) )
+		SUP top STRUCTURAL
+		MUST ( cn $ gosaGroupObjects ) MAY ( member $ description ) )
 
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.13 NAME 'gosaWebdavAccount'
         DESC 'GOsa webdav enabling account (v2.4)'
