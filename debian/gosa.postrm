@@ -24,13 +24,14 @@ case "$1" in
 	# Adapt server configs
         for server in $servers ; do
 		# remove GOsa include
-		includefile=/etc/gosa/apache.conf
+		includefile=/etc/$server/conf.d/gosa.conf
 
 		case "$1" in
 			purge)
 				if [ -e /usr/share/wwwconfig-common/apache-uninclude_all.sh ] ; then
 					. /usr/share/wwwconfig-common/apache-uninclude_all.sh
 					if [ "$status" = "purge" ] ; then
+						[ -L /etc/$server/conf.d/gosa.conf ] && rm /etc/$server/conf.d/gosa.conf
 						restart="$restart $server"
 					fi
 				else
