@@ -524,6 +524,16 @@ class ogroup extends plugin
       $new_dn= $this->dn;
     }
 
+
+    $ldap = $this->config->get_ldap_link();
+    if($this->dn != $new_dn){
+      $ldap->cat ($new_dn);
+    }
+    
+    if($ldap->count() !=0){
+      $message[]= _("There is already an object with this cn.");
+    } 
+
     $ui= get_userinfo();
     $acl= get_permissions ($new_dn, $ui->subtreeACL);
     $acl= get_module_permission($acl, "group", $new_dn);

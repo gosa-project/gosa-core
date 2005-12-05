@@ -563,6 +563,7 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
     if ($ogroupfilter['fongroups'] == "checked"){
       $filter.= "(gosaGroupObjects=*F*)";
     }
+    $filter.= "(gosaGroupObjects=[])";
 
     if ($filter != ""){
       $filter= "(&(cn=$regex)(objectClass=gosaGroupOfNames)(|$filter))";
