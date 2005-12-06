@@ -108,9 +108,9 @@ class divlist {
     // Attach a 18px-wide column (used as scrollbar space in body-table),
     // but do this only if we are really using scrolltables.
     if($this->i_entriesPerPage == 0) {
-      if($this->_numEntries()>=20) {
+    //  if($this->_numEntries()>=20) {
         $s_return .= "\n<td class='listheader' style='width:13px;border-right:0px;'>&nbsp;</td>";
-      }
+    //  }
       $s_return .= "\n</table></td>";
     }
 
@@ -129,14 +129,14 @@ class divlist {
 		$s_return 	= "";
    
     // We need to construct a "body"-table that is width-of-scrollbar thinner than the "head"-table.
-    $s_return .= "\n<tr><td colspan=".$this->cols." class='scrollbody'><div style='align:left;width:".$this->s_width."px;height:".($this->s_height-20)."px;overflow:auto;'>";
+    $s_return .= "\n<tr><td colspan=".$this->cols." class='scrollbody'><div style='align:left;width:".$this->s_width."px;height:".($this->s_height-20)."px;overflow:auto;background-color:#ffffff;'>";
 
     // Only reduce width if we need a scrollbar (>19 Entries)
-    if($this->_numEntries()>19) {
+    //if($this->_numEntries()>=20) {
       $s_return .= "<table style='height:100%;width:581px;' cellspacing='0'>";
-		} else {
-      $s_return .= "<table style='height:100%;width:600px;' cellspacing='0'>";
-    }
+		//} else {
+    //  $s_return .= "<table style='height:100%;width:600px;' cellspacing='0'>";
+    //}
 		$i_alternate=0;
 	
 		if(isset($_GET['start'])){
@@ -274,7 +274,7 @@ class divlist {
       }
   
       // if fewer than 19 Entries (list not full), print row to fill empty space
-      if($this->_numEntries()<19){
+      //if($this->_numEntries()<=18){
         $fill= "";
         for ($i= 1; $i <= $this->cols; $i++){
           if ($i == $this->cols){
@@ -284,7 +284,7 @@ class divlist {
           }
         }
         $s_return.="\n<tr>$fill</tr>";
-      }
+      //}
       $s_return .= "\n</table></div></td></tr>";
       return $s_return;
     }
