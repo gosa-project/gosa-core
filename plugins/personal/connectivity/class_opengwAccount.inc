@@ -15,68 +15,169 @@ class opengwAccount extends plugin
   var $attributes= array();
   var $objectclasses= array("gosaWebdavAccount");
 
+  var $attrsToUse    = array( "salutation"  =>"vocation",
+                              "name"        =>"sn",
+                              "firstname"   =>"givenName",
+                              "login"       =>"uid",
+                              "degree"      =>"academicTitle",
+                              "birthday"    =>"dateOfBirth",
+                              "sex"         =>"gender",
+                              "street"      =>"street",
+                              "zip"         =>"postalCode",
+                              "value_string"=>"mail",
+                              "number"      =>"telephoneNumber"
+                            );
+  var $serverCon =  false;
+
   var $handle   = NULL;
+  var $is_account  = false;
 
   function opengwAccount ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
-    $this->handle = new ogw("ogo","","vserver-18","ogo");//username,$password,$host,$db
-    $info['login'] = $this->uid;
-    if($this->handle->CheckExistence()){
-      $this->info = $this->handle->GetInfo();
+
+    $this->info=array();
+
+    $this->initialy_was_account = false;
+    $this->is_account= false;
+    if(!is_callable("pg_connect")){
+//      print_red(_("Your configuration is missing a postgresql extension. Can't perform any database queries."));
+    }elseif(!isset($this->config->data['SERVERS']['OPENGROUPWARE'])){
+//      print_red(_("Missing database configuration for opengroupware. Can't get or set any informations."));
     }else{
-      /* Generic attributes */
-      $info['salutation']         = $this->attrs['vocation'];
-      $info['name']               = $this->attrs['sn'];
-      $info['firstname']          = $this->attrs['givenName'];
-      $info['login']              = $this->attrs['uid'];
-      $info['description']        = $info['firstname']." ".$info['name'];
-      $info['degree']             = $this->attrs['academicTitle'];
-      $info['birthday']           = $this->attrs['dateOfBirth'];
-      
-      if($this->attrs['gender'] == "F"){
-        $info['sex']                = "female";
+      $this->serverCon = $this->config->data['SERVERS']['OPENGROUPWARE'];
+      $this->handle = new ogw($this->serverCon['LOGIN'],$this->serverCon['PASSWORD'],$this->serverCon['SERVER'],$this->serverCon['DB']);
+
+      if(!$this->handle->connected){
+//        print_red(_("Can't connect to specified database. Please check given configuration twice."));
       }else{
-        $info['sex']                = "male";
+        $this->handle->info['login'] = $this->attrs['uid'][0];
+        if($this->handle->CheckExistence()){
+          $this->info = $this->handle->GetInfos($this->attrs['uid'][0]);
+          $this->initialy_was_account = true;
+          $this->is_account= true;
+        }else{
+          $this->initialy_was_account = false;
+          $this->is_account= false;
+
+          foreach($this->attrsToUse as $name=>$attr){
+            if(isset($this->attrs[$attr][0])){
+              $this->info[$name] = $this->attrs[$attr][0];
+            }else{
+              $this->info[$name] = false;
+            }
+          } 
+          $this->info['description']        = $this->info['firstname']." ".$this->info['name'];
+          if($this->info['sex'] == "F"){
+            $this->info['sex']                = "female";
+          }else{
+            $this->info['sex']                = "male";
+          }
+
+          /* Selectable in GOsa */
+          $this->info['template_user_id']   = 0;
+          $this->info['is_locked']          = 0;
+          $this->info['LocationTeamID']     = 0;
+          $this->info['TeamIDis']           = array();
+        }
+
+        if(!is_array($this->info['TeamIDis'])){
+          $this->info['TeamIDis'] = array();
+        }
+        $this->handle->SetInfos($this->info);
       }
-
-      /* address settings */
-      $info['street']             = $this->attrs['street'];//"iweg 2";
-      $info['zip']                = $this->attrs['postalCode'];//"59821";
-//      $info['country']            = $this->attrs[''];//"Arnbserg";
-      $info['zipcity']            = $info['zip']." ".$info['country'];
-//      $info['state']              = $this->attrs[''];//"Germany";
-
-      /* the email address*/
-      $info['value_string']       = $this->attrs['mail'];
-
-      /* telephone number */
-      $info['number']             = $this->attrs['telephoneNumber'];
-
-      /* Selectable in GOsa */
-      $info['template_user_id']   = 10130;
-      $info['is_locked']          = 0;
-      $info['LocationTeamID']     = "";
-      $info['TeamIDis']           = array();
     }
-    $this->info = $info;
-    $this->handle->SetInfos($info);
   }
 
   function execute()
   {
     /* Show tab dialog headers */
     $display= "";
-
-    print_a($this->info);
-
-    /* Show main page */
     $smarty= get_smarty();
+    foreach(array("validLocationTeam","validTemplateUser","validLocationTeams","validTemplateUsers") as $ar){
+      $smarty->assign($ar,array());
+    }
 
-    if ($this->is_account){
-      $smarty->assign("is_account", "true");
-    } else {
-      $smarty->assign("is_account", "false");
+    $smarty->assign("OGWstate"," disabled ");
+    foreach(array("LocationTeam","TemplateUser","is_locked","validTeams","opengwAccount") as $ar){
+      $smarty->assign($ar,"");
+      $smarty->assign($ar."CHK","");
+      $smarty->assign($ar."ACL"," disabled ");
+    }
+
+    
+    if(!is_callable("pg_connect")){
+      print_red(_("OpenGroupware: Your configuration is missing a postgresql extension. Can't perform any database queries."));
+    }elseif(!isset($this->config->data['SERVERS']['OPENGROUPWARE'])){
+      print_red(_("OpenGroupware: Missing database configuration for opengroupware. Can't get or set any informations."));
+    }else{
+      $this->serverCon = $this->config->data['SERVERS']['OPENGROUPWARE'];
+      $this->handle = new ogw($this->serverCon['LOGIN'],$this->serverCon['PASSWORD'],$this->serverCon['SERVER'],$this->serverCon['DB']);
+      if(!$this->handle->connected){
+        print_red(_("OpenGroupware: Can't connect to specified database. Please check given configuration twice."));
+      }else{
+        $this->handle = new ogw($this->serverCon['LOGIN'],$this->serverCon['PASSWORD'],$this->serverCon['SERVER'],$this->serverCon['DB']);
+        /* Show main page */
+
+        $smarty->assign("OGWstate"," disabled ");
+        foreach(array("LocationTeam","TemplateUser","is_locked","validTeams","opengwAccount") as $ar){
+          $smarty->assign($ar."ACL",chkacl($this->acl,$ar));
+        }
+
+        $tmp = array(""=>"none");
+        foreach($this->handle->validLocationTeam as $id){
+          $tmp[$id['company_id']] = $id['description']; 
+        }
+        $smarty->assign("validLocationTeam",$tmp);
+        $smarty->assign("validLocationTeams",array_flip($tmp));
+        $smarty->assign("LocationTeam",$this->info['LocationTeamID']);
+
+        $tmp = array();
+        foreach($this->handle->validTemplateUser as $id){
+          $tmp[$id['company_id']] = $id['name']; 
+        }
+        $smarty->assign("validTemplateUser",$tmp);
+        $smarty->assign("validTemplateUsers",array_flip($tmp));
+        $smarty->assign("TemplateUser",$this->info['template_user_id']);
+        
+
+        $this->handle->CheckExistence();
+        $str = "";
+        if($this->is_account){
+          $dis = "";
+        }else{
+          $dis = " disabled ";
+        }
+
+        foreach($this->handle->validTeams as $id){
+          if(in_array($id['company_id'],$this->info['TeamIDis'])){
+            $str .= "<input ".$dis." type='checkbox' value='".$id['company_id']."' checked name='team_".base64_encode($id['description'])."'>".$id['description']."<br>";
+          }else{
+            $str .= "<input ".$dis." type='checkbox' value='".$id['company_id']."' name='team_".base64_encode($id['description'])."'>".$id['description']."<br>";
+          }
+        }
+        $smarty->assign("validTeams",$str);
+
+        if($this->is_account){
+          $smarty->assign("OGWstate","");
+          $smarty->assign("is_account", " checked ");
+        }else{
+          $smarty->assign("is_account", " ");
+          $smarty->assign("OGWstate"," disabled ");
+        }
+
+        foreach(array("LocationTeam","TemplateUser","Teams","is_locked") as $atr){
+          $smarty->assign($atr."ACL",chkacl($this->acl,$atr));
+        }
+
+        if($this->info['is_locked']){
+          $smarty->assign("is_lockedCHK", " checked ");
+        }else{
+          $smarty->assign("is_lockedCHK", "  ");
+        }
+
+        $smarty->assign("is_locked", $this->info['is_locked']);
+      } 
     }
     $display.= $smarty->fetch (get_template_path('opengw.tpl', TRUE, dirname(__FILE__)));
     return ($display);
@@ -84,23 +185,10 @@ class opengwAccount extends plugin
 
   function remove_from_parent()
   {
-    if(chkacl($this->acl,"webdavAccount")==""){
-      /* Cancel if there's nothing to do here */
-      if (!$this->initially_was_account){
-        return;
-      }
-
-      plugin::remove_from_parent();
-      $ldap= $this->config->get_ldap_link();
-
-      $ldap->cd($this->dn);
-      @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
-          $this->attributes, "Save");
-      $ldap->modify($this->attrs);
-      show_ldap_error($ldap->get_error());
-
-      /* Optionally execute a command after we're done */
-      $this->handle_post_events('remove');
+    if($this->initialy_was_account){
+      $this->handle = new ogw($this->serverCon['LOGIN'],$this->serverCon['PASSWORD'],$this->serverCon['SERVER'],$this->serverCon['DB']);
+      $this->handle->SetInfos($this->info);
+      $this->handle->Perform("REMOVE");
     }
   }
 
@@ -108,46 +196,49 @@ class opengwAccount extends plugin
   /* Save data to object */
   function save_object()
   {
-    /* Do we need to flip is_account state? */
-    if (isset($_POST['connectivityTab'])){
-      if (isset($_POST['webdav'])){
-        if (!$this->is_account && $_POST['webdav'] == "B"){
-          $this->is_account= TRUE;
+    if($this->is_account){
+      $this->info['TeamIDis'] = array();
+      foreach($_POST as $name => $value ){
+        if(preg_match("/team_/i",$name)){
+          if(!in_array($value,$this->info['TeamIDis'])){
+            $this->info['TeamIDis'][]=$value;
+          }
         }
-      } else {
-        $this->is_account= FALSE;
+      }
+      if(isset($_POST['LocationTeam'])){
+        $this->info['LocationTeamID'] = $_POST['LocationTeam'];
+      }
+      
+      if(isset($_POST['TemplateUser'])){
+        $this->info['template_user_id'] = $_POST['TemplateUser'];
+      }
+      
+      if(isset($_POST['is_locked'])){
+        $this->info['is_locked'] = $_POST['is_locked'];
+      }else{
+        $this->info['is_locked'] = 0;
       }
     }
-
-    plugin::save_object();
-    if (isset($_POST["WEBDAVStatus"])){
-      $this->WEBDAVStatus = "disabled";
-    } else {
-      $this->WEBDAVStatus = "enabled";
+ 
+    if(isset($_POST['is_account'])){
+      $this->is_account = $_POST['is_account'];
+    }else{
+      $this->is_account = false;//$_POST['is_account'];
     }
+
   }
 
 
   /* Save to LDAP */
   function save()
-  {
-    if(chkacl($this->acl,"webdavAccount")==""){
-      plugin::save();
-
-      /* Write back to ldap */
-      $ldap= $this->config->get_ldap_link();
-      $ldap->cd($this->dn);
-      $ldap->modify($this->attrs);
-      show_ldap_error($ldap->get_error());
-
-      /* Optionally execute a command after we're done */
-      if ($this->initially_was_account == $this->is_account){
-        if ($this->is_modified){
-          $this->handle_post_events("mofify");
-        }
-      } else {
-        $this->handle_post_events("add");
-      }
+  { 
+    $this->handle = new ogw($this->serverCon['LOGIN'],$this->serverCon['PASSWORD'],$this->serverCon['SERVER'],$this->serverCon['DB']);
+    $this->handle->SetInfos($this->info);
+    $this->handle->checkInfos();
+    if($this->initialy_was_account){
+      $this->handle->Perform("EDIT");
+    }else{
+      $this->handle->Perform("ADD");
     }
   }
 

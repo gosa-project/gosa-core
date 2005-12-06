@@ -19,22 +19,20 @@ class pgre_sql{
 
     if($this->_connect()){
       $this->is_connected = true;
-    }
-
-    return($this->is_connected);
+    }else{
+      $this->is_connected = false;
+	}
   }
 
   function _connect()
   {
 	error_reporting(E_ALL);
 	if(is_callable("pg_connect")){
-		$this->handle = pg_connect("dbname=".$this->db." host=".$this->server." user=".$this->user);
+		$this->handle = @pg_connect("dbname=".$this->db." host=".$this->server." user=".$this->user);
 		if(!$this->handle){
-			print "can't connect to pgsql :";
-			exit();
+			$this->handle = false;
 		}
 	}else{
-		print "Extension fpr pgsql is missing";
 		$this->handle = false;
 	}
 	return($this->handle);
@@ -111,8 +109,12 @@ function gen_syntax($array,$tablename,$act,$ist)
 		$company_id = $ist[0]['company_id'];
 
 		foreach($array as $name => $value){
-			if(empty($value)) continue;
-		
+			if((empty($value))&&(!preg_match("/^is_/i",$name))) continue;
+	
+			if((empty($value))&&(preg_match("/^is_/i",$name))){
+				$value= 0;
+			}
+
 			if(!is_numeric($value)){
 				$str.= " ".$name."='".$value."', ";
 			}else{
@@ -128,8 +130,11 @@ function gen_syntax($array,$tablename,$act,$ist)
 		$attrs  = "";
 		$values = "";
 		foreach($array as $name => $attribute){
-
-			if(empty($attribute)) continue;
+			if((empty($attribute))&&(!preg_match("/^is_/i",$name))) continue;
+	
+			if((empty($attribute))&&(preg_match("/^is_/i",$name))){
+				$attribute= 0;
+			}
 
 			if(is_numeric($attribute)){
 				$attrs  .= $name.", ";

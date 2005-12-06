@@ -22,25 +22,71 @@ class ogw{
 
   var $LastError  = "";
   var $option     = "";
+  var $connected = false;
 
   function ogw($username,$password,$host,$db)
   {
     $this->ogo  = new pgre_sql($username,$password,$host,$db);
 
-    $this->validLocationTeam  = $this->ogo->GetLocationTeam();
-    $this->validTemplateUser  = $this->ogo->GetTemplateUser();
-    $this->validTeams         = $this->ogo->GetTeams();
+    if($this->ogo->is_connected){
+      $this->validLocationTeam  = $this->ogo->GetLocationTeam();
+      $this->validTemplateUser  = $this->ogo->GetTemplateUser();
+      $this->validTeams         = $this->ogo->GetTeams();
+      $this->connected = true;
+    }else{
+      $this->validLocationTeam  = array();//$this->ogo->GetLocationTeam();
+      $this->validTemplateUser  = array();//$this->ogo->GetTemplateUser();
+      $this->validTeams         = array();//$this->ogo->GetTeams();
+      $this->connected = false;
+    }
   }
  
   function SetInfos($infos)
   {   
+    $infos['name1']              = $infos['name'];
     $this->info = $infos;
-    $info['name1']              = $info['name'];
   }
 
-  function GetInfos()
-  {   
-    return("NIY");
+  function GetInfos($uid)
+  {  
+    $ret = array();
+    $qry = "SELECT  is_person,is_account,is_intra_account,is_extra_account,  
+                    number,owner_id,object_version,company_id,template_user_id,is_locked,
+                    name,firstname,description,salutation,login,degree,birthday,sex 
+            FROM person WHERE login='".$uid."';";
+    $res = $this->ogo->FetchAllRows($this->ogo->Query($qry));
+    $ret = $res[0];
+
+    $qry = "SELECT street,zip,zipcity,country,state FROM address WHERE company_id = ".$ret['company_id']." limit 1;";
+    $res = $this->ogo->FetchAllRows($this->ogo->Query($qry));
+    $ret = array_merge($ret,$res[0]); 
+
+    $qry = "SELECT company_id FROM company_assignment 
+            WHERE (sub_company_id=".$ret['company_id'].") 
+              AND company_id IN 
+                (SELECT company_id FROM team  WHERE  (is_team=1) 
+                AND 
+                  company_id NOT IN (SELECT company_id FROM team WHERE is_location_team=1));";    
+    $res = $this->ogo->FetchAllRows($this->ogo->Query($qry));
+    if(is_array($res)){
+      foreach($res as $r){
+        $ret['TeamIDis'][]=$r['company_id']; 
+      }
+    }else{
+      $ret['TeamIDis']=array();
+    }
+
+    $qry = "SELECT value_string from company_value WHERE company_id=".$ret['company_id'].";";
+    $res = $this->ogo->FetchAllRows($this->ogo->Query($qry));
+    $ret = array_merge($ret,$res[0]); 
+
+    $qry ="SELECT company_id FROM company_assignment 
+           WHERE (sub_company_id=".$ret['company_id'].") 
+              AND company_id IN (SELECT company_id FROM team  WHERE  (is_location_team=1));";
+    $res = $this->ogo->FetchAllRows($this->ogo->Query($qry));
+    $ret['LocationTeamID'] = $res[0]['company_id'];
+
+    return($ret);
   }
 
   function Perform($option)
@@ -110,7 +156,7 @@ class ogw{
   function CheckExistence()
   {
     /* Check if thios entry already exists */
-    $qry = "SELECT * FROM person WHERE login='".$this->info['login']."';";
+    $qry = "SELECT login,name FROM person WHERE login='".$this->info['login']."';";
     $ist = $this->ogo->FetchAllRows($this->ogo->Query($qry));
     if($ist){
       return(true);
@@ -130,7 +176,7 @@ class ogw{
 
     foreach($this->MAY as $name){
       if((!isset($this->info[$name]))||(empty($this->info[$name]))){
-        $info[$name] = false;
+        $this->info[$name] = false;
       }
     }
 
@@ -196,7 +242,7 @@ class ogw{
                   "number","description","is_locked","login","name","name","firstname",
                   "salutation","degree","birthday","sex","db_status");
     $this->info['company_id']  = $this->ogo->gen_id();
-    $userID             = "OGo".$this->info['company_id'];
+    $this->info['userID']             = "OGo".$this->info['company_id'];
     foreach($arr as $attr){
       if($attr == "number"){
         $add_user[$attr]  = $this->info['userID'];
@@ -370,13 +416,14 @@ class ogw{
     /* 
        Create entries for company value 
      */
+    $QUERY[] = "DELETE FROM company_value WHERE company_id=".$ist[0]['company_id']." AND attribute='mail1';";
     $arr = array("db_status","value_string","attribute","company_id","company_value_id");
     $this->info['attribute']        = "email1";
     $this->info['company_value_id'] = $this->ogo->gen_id();
     foreach($arr as $attr){
       $add_company_value[$attr]  = $this->info[$attr];
     }
-    $QUERY[] = gen_syntax($add_company_value,"company_value","EDIT",$ist);
+    $QUERY[] = gen_syntax($add_company_value,"company_value","ADD",false);
 
 
     /* 
