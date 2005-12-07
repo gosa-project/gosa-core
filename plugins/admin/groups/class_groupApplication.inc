@@ -78,18 +78,20 @@ class appgroup extends plugin
     $this->gosaMemberApplication = $tmp2;
     $cats[""]="";
     foreach($cats as $cat ){
-      $max = max($prios[$cat]);
-      $min = 1;//min($prios[$cat]);  
-      $last = false;
-      for($i = $min ; $i < $max ; $i++){
-        if(!isset($prios[$cat][$i])){
-          if($last == false){
-            $this->gosaMemberApplication[$cat][$i]['App'] = "__SEPARATOR__".$i;
-          
-            $last = true;
+      if((isset($prios[$cat]))&&(count($prios[$cat]))){
+        $max = max($prios[$cat]);
+        $min = 1;//min($prios[$cat]);  
+        $last = false;
+        for($i = $min ; $i < $max ; $i++){
+          if(!isset($prios[$cat][$i])){
+            if($last == false){
+              $this->gosaMemberApplication[$cat][$i]['App'] = "__SEPARATOR__".$i;
+            
+              $last = true;
+            }
+          }else{
+            $last = false;
           }
-        }else{
-          $last = false;
         }
       }
     }
