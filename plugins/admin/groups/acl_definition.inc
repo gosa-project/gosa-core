@@ -301,6 +301,7 @@ $ACLD['addressbook']=  array("addressbook","add", "delete",
       "facsimileTelephoneNumber", "pager");
 $ACLD['fonreport']	=  array("fonreport", "src", "dst", "channel", "lastapp", "disposition", "duration");
 $ACLD['faxreport']	=  array("faxreport");
+$ACLD['connectivity']=  array("connectivity");
 $ACLD['logview']	=  array("logview");
 $ACLD['mailqueue']	=  array("mailqueue","unhold_all","hold_all","del_all","requeue_all","unhold","hold","del","requeue","query","header");
 $ACLD['ldapmanager']=  array("ldapmanager","import","export","xlsexport","csvimport");

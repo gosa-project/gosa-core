@@ -107,7 +107,10 @@ if (!$remove_lock){
   /* Are we in edit mode? */
   $in_edit_mode= false;
   foreach ($connectivity->plugin_name as $name){
-    $in_edit_mode|= $connectivity->plugin[$name]->is_account;
+    $acls = get_module_permission($acl, "$name", $ui->dn);
+    if($acls != "#none#"){
+      $in_edit_mode|= true;
+    }
   }
   if ($in_edit_mode){
     $display.="<div align='right'>";

@@ -51,7 +51,7 @@ class connectivity extends plugin
 
     /* Do we represent a valid account? */
     if ($this->parent == NULL){
-      $enabled= false;
+      $enabled= true;
       foreach ($this->plugin_name as $name){
         if ($this->plugin[$name]->is_account){
           $enabled= true;
