@@ -890,7 +890,6 @@ class phoneAccount extends plugin
       }
     }
 
-
     if((strlen($this->goFonPIN)!=4)){
       $message[]=(_("Phone PIN must be 4 characters long."));
     }else{

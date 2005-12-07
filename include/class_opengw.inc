@@ -99,12 +99,29 @@ class ogw{
       if(($this->option == "EDIT")||($this->option=="ADD")){
 
         /* Static variables */
-        $this->info['is_person']          = 1;
-        $this->info['is_account']         = 1;
-        $this->info['is_intra_account']   = 1;
-        $this->info['is_extra_account']   = 0;
-        $this->info['owner_id']           = 10000;
-        $this->info['is_team']            = 0;
+        if(!isset($this->info['is_person'])){
+          $this->info['is_person']          = 1;  
+        }
+        
+        if(!isset($this->is_account)){
+          $this->info['is_account']         = 1;  
+        }
+        
+        if(!isset($this->info['is_intra_account'])){
+          $this->info['is_intra_account']   = 1;
+        }
+
+        if(!isset($this->info['is_extra_account'])){
+          $this->info['is_extra_account']   = 0;
+        }
+
+        if(!isset($this->info['owner_id'])){
+          $this->info['owner_id']           = 10000;
+        }
+
+        if(!isset($this->info['is_team'])){
+          $this->info['is_team']            = 0;
+        }
 
         $this->InfoOK = $this->checkInfos();
 
@@ -126,7 +143,7 @@ class ogw{
               $this->LastError="Can't edit entry, entry doesn't exists.";
               return(false);
             }else{
-              $this->info['db_status']          = "edited";
+              $this->info['db_status']          = "updated";
               $this->info['object_version']     = $ist[0]['object_version']++;
               return($this->EDIT());
             }
@@ -220,7 +237,12 @@ class ogw{
       $this->LastError(sprintf("Can't get company id for login %s",$this->info['login']));
       return(false);
     }else{
+
       $company_id     = $ist[0]['company_id'];
+
+      $qry = "UPDATE person SET login='SKY".$company_id.$this->info['login']."', is_account=0, is_intra_account=0 WHERE company_id=".$company_id.";";
+      $this->ogo->Query($qry);
+      /*
       $this->ogo->Query("DELETE FROM telephone WHERE company_id=".$company_id.";");
       $this->ogo->Query("DELETE FROM address  WHERE company_id=".$company_id.";");
       $this->ogo->Query("DELETE FROM company_info WHERE company_id=".$company_id.";");
@@ -228,6 +250,7 @@ class ogw{
       $this->ogo->Query("DELETE FROM company_assignment WHERE sub_company_id=".$company_id.";");
       $this->ogo->Query("DELETE FROM person WHERE company_id=".$company_id.";");
       $this->ogo->Query("DELETE FROM staff WHERE company_id=".$company_id.";");
+      */
       return(true);
     }
   }
