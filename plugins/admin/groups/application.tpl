@@ -4,6 +4,8 @@
    <b><LABEL for="used_apps">{t}Used applications{/t}</LABEL></b>
   	 {$UsedApps} 
 	<input type="submit" value="{t}Seperator{/t}" name='AddSeperator'>
+	<input type="text" value="" name='CatName'>
+	<input type="submit" value="{t}Add categorie{/t}" name='AddCat'>
   </td>
   <td>&nbsp;
   </td>

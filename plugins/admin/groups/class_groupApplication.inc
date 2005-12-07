@@ -10,19 +10,18 @@ class appgroup extends plugin
   var $gosaMemberApplication= array();
 
   /* Helpers */
-  var $department= "";
-  var $apps= array();
-  var $used_apps= array();
-  var $opt_edit= FALSE;
-  var $option_name= array();
-  var $option_value= array();
-  var $appoption= array();
-  var $table= "";
-  var $curbase   = "";
-  var $curCatDir;
-  var $curCatDepth=0;
-  var $Categories=array();
+  var $departments        = "";       // All departments within $this->curbase;
+  var $apps               = array();  // All available applications
+  var $used_apps          = array();  // Specifies which applications are currently assigned 
 
+  var $option_name  = array();
+  var $option_value = array();
+  var $appoption    = array();
+
+  var $table          = "";
+  var $curbase        = "";
+  var $curCatDir      ;
+  var $curCatDepth    =0;         //
 
   /* attribute list for save action */
   var $attributes= array();
@@ -51,26 +50,33 @@ class appgroup extends plugin
       }
     }
 
+    /* Parse MemberApplication*/
     $tmp = array();
     $tmp2 = array();
-  
     $prios = array();
-
     $cats = array();
 
     foreach($this->gosaMemberApplication as $memberApp){
       if(preg_match("/\|/i",$memberApp)){
+    
         $tmp = split("\|",$memberApp);
-        $tmp2[$tmp[1]][$tmp[2]] = array("App"=>$tmp[0],"Cat"=>$tmp[1]);
-        $cats [$tmp[1]] = $tmp[1];
+ 
+        if(!empty($tmp[0])){
+          $tmp2[$tmp[1]][$tmp[2]] = array("App"=>$tmp[0]);
+        }
+        if(!empty($tmp[1])){
+          $cats [$tmp[1]] = $tmp[1];
+        }
         $prios[$tmp[1]][$tmp[2]] = $tmp[2];
       }else{
         $tmp2[]['App'] = $memberApp;
-        $tmp2[]['Cat'] = "";
       }
     }
 
+    $this->Categories = $cats;
+
     $this->gosaMemberApplication = $tmp2;
+    $cats[""]="";
     foreach($cats as $cat ){
       $max = max($prios[$cat]);
       $min = 1;//min($prios[$cat]);  
@@ -78,7 +84,6 @@ class appgroup extends plugin
       for($i = $min ; $i < $max ; $i++){
         if(!isset($prios[$cat][$i])){
           if($last == false){
-            $this->gosaMemberApplication[$cat][$i]['Cat'] = $cat;
             $this->gosaMemberApplication[$cat][$i]['App'] = "__SEPARATOR__".$i;
           
             $last = true;
@@ -97,7 +102,6 @@ class appgroup extends plugin
       }
     }
     $this->gosaMemberApplication = $tmp;
-
     $this->curbase = $this->config->current['BASE'];
   }
 
@@ -153,7 +157,7 @@ class appgroup extends plugin
   {
     $cat = $this->curCatDir;
     $cnt = count($this->gosaMemberApplication[$cat]);
-    $tmp = array("Cat" => $cat , "App" => "__SEPARATOR__".($cnt+1));
+    $tmp = array("App" => "__SEPARATOR__".($cnt+1));
     $this->gosaMemberApplication[$cat][] = $tmp;
   }
 
@@ -175,20 +179,6 @@ class appgroup extends plugin
 
     if((isset($_GET['act']))&&($_GET['act']=="open")){
       $this->curCatDir = $_GET['id'];
-
-      $found = false;
-      foreach($this->Categories as $key => $name ){
-        if($this->curCatDir==$name){
-          $tmp = array_flip(split("\/",$key));
-
-          $this->curCatDepth = ($tmp[$this->curCatDir]);
-          $found= true;
-        }
-      }
-      if(!$found){
-        $this->curCatDir = "";
-        $this->curCatDepth = 0;
-      }
     }
 
     /* Do we need to flip is_account state? */
@@ -215,6 +205,17 @@ class appgroup extends plugin
         return ($display);
       }
     }
+
+
+    /* Add Categorie */
+    if((isset($_POST['AddCat']))&&(isset($_POST['CatName']))&&(!empty($_POST['CatName']))){
+      if(empty($this->curCatDir)){
+        $this->Categories[$_POST['CatName']]=$_POST['CatName'];
+      }else{
+        $this->Categories[$this->curCatDir."/".$_POST['CatName']]=$_POST['CatName'];
+      }
+    }
+
 
     $this->reload();
     foreach($_POST as $name => $value){
@@ -386,9 +387,11 @@ class appgroup extends plugin
         $id   = $_GET['id'];
         $act  = $_GET['act']; 
         $found = -1;
-        foreach($this->gosaMemberApplication[$this->curCatDir] as $key =>  $member){
-          if($id == $member['App']){
-            $found = $key;
+        if(isset($this->gosaMemberApplication[$this->curCatDir])){
+          foreach($this->gosaMemberApplication[$this->curCatDir] as $key =>  $member){
+            if($id == $member['App']){
+              $found = $key;
+            }
           }
         }
 
@@ -405,21 +408,32 @@ class appgroup extends plugin
     $div2 = new DivSelectBox("appgroup");
     $div2->SetHeight(300);
 
-    $menu           = $this->CreateCatMenu();
-    $str_noprio     = " %s ";
-    $linkopen       = "<img src='images/folder.png'>            &nbsp;<a href='?plug=".$_GET['plug']."&amp;act=open&amp;id=%s'>%s</a>";
-    $app   = "<img src='images/select_application.png'>&nbsp;%s";
+    $linkopen       = "<img src='images/folder.png'>&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=open&amp;id=%s'>%s</a>";
+    $catremove      = "<a href='?plug=".$_GET['plug']."&amp;act=idelcat&amp;id=%s'><input type='image' src='images/edittrash.png' ></a>";
+    $app            = "<img src='images/select_application.png'>&nbsp;%s";
 
-        /* append back entry */
-    if($menu["__BACK__"] != false){
-        $div2 ->AddEntry(array(
-                    array("string"=>sprintf($linkopen,$menu["__BACK__"],".. [ "._("back")." ]")),
-                    array("string"=>"&nbsp;","attach"=>"style='border-right:0px;'")
-                    ));
+    if(empty($this->curCatDir)){
+      $cnt =0;
+    }else{
+      $cnt = count(split("/",$this->curCatDir));
+      $tmp = split("/",$this->curCatDir);
+      $bbk = "";
+      for($i = 0 ; $i < ($cnt -1 ) ; $i++){
+        $bbk .= $tmp[$i];
+      }
+      $div2 ->AddEntry(array(array("string"=>sprintf($linkopen,$bbk,"..")),array("string"=>"&nbsp;","attach"=>"style='border-right:0px;'")));
     }
-
-    foreach($menu['__CATEGORY__'] as $path => $name){
-      $div2 ->AddEntry(array(array("string"=>sprintf($linkopen,$path,$name)),array("string"=>"&nbsp;","attach"=>"style='border-right:0px;'"))); 
+    
+    foreach($this->Categories as $path => $name){
+      $depth = count(split("/",$path));
+      if(($depth == ($cnt)+1)){
+        
+        $div2 ->AddEntry(array( 
+                              array("string"=>sprintf($linkopen,$path,$name)),
+                              array("string"=>sprintf($catremove,$path).
+                                "<img src='images/empty.png' width='19px'>",
+                                    "attach"=>"align='right' style='width:80px;border-right:0px;'"))); 
+      }
     }
 
       /* Append entries */
@@ -430,19 +444,19 @@ class appgroup extends plugin
           "&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=one_down&id=%s'> <img src='images/sort_down.png' border=0></a>".
           "&nbsp;<input type='image' src='images/edittrash.png' name='DelApp_%s' value='%s'>";
     $edit=      "&nbsp;<input type='image' src='images/edit.png' name='EdiApp_%s' value='%s'>";
- 
-    foreach($menu["__ENTRY__"] as $path => $entry){
 
-      if(preg_match("/__SEPARATOR__/",$path)){
-        $div2 ->AddEntry(array(array("string"=>$separator),
-                         array("string"=>preg_replace("/\%s/",$entry['name'],$upudown),"attach"=>"style='border-right:0px;'")));
-
-      }else{
-        $div2 ->AddEntry(array(array("string"=>sprintf($app,$entry['name'])),
-                         array("string"=>preg_replace("/\%s/",$entry['name'],$upudown.$edit),"attach"=>"style='border-right:0px;'")));
+    if(isset($this->gosaMemberApplication[$this->curCatDir])){
+      foreach($this->gosaMemberApplication[$this->curCatDir] as $cat => $entry){
+        if(preg_match("/__SEPARATOR__/",$entry['App'])){
+          $div2 ->AddEntry(array(array("string"=>$separator),
+                array("string"=>preg_replace("/\%s/",$entry['App'],$upudown."<img src='images/empty.png' width='19px'>"),"attach"=>"align='right' style='border-right:0px;'")));
+        }else{
+          $div2 ->AddEntry(array(array("string"=>sprintf($app,$entry['App'])),
+                array("string"=>preg_replace("/\%s/",$entry['App'],$upudown.$edit),"attach"=>"align='right' style='border-right:0px;'")));
+        }
       }
     }
-
+  
     $smarty->assign("UsedApps", $div2->DrawList());
     $smarty->assign("List", $div->DrawList());
     $smarty->assign("apps", $apps);
@@ -474,39 +488,27 @@ class appgroup extends plugin
   }
 
 
-  /* Save data to object */
-#  function save_object()
-#  {
-#    plugin::save_object();
-#  }
-
-
   /* Save to LDAP */
   function save()
   {
     plugin::save();
 
     /* Copy members */
-
-    $cats = array(""=>0);
-    foreach($this->gosaMemberApplication as $mem => $entries){
-      $cats[$mem]= 0;
-    }
-
+    $this->Categories[""]=""; 
     $this->attrs["gosaMemberApplication"]= array();
-    $lastSEP = false;
-    foreach ($this->gosaMemberApplication as $cat){
-      foreach($cat as $val){
-        $cats[$val['Cat']] ++;
-        if(!preg_match("/__SEPARATOR__/i",$val['App'])){
-          $this->attrs["gosaMemberApplication"][]= $val['App']."|".$val['Cat']."|".$cats[$val['Cat']];
-          $lastSEP = false;
-        }else{
-          if($lastSEP){
-            $cats[$val['Cat']] --;
+    $cats = array();
+    foreach($this->Categories as $name => $cats){
+      $cats[$name] =0;
+      if(isset($this->gosaMemberApplication[$name])){
+        foreach($this->gosaMemberApplication[$name] as $entry){
+          if(!preg_match("/__SEPARATOR__/",$entry['App'])){
+            $this->attrs["gosaMemberApplication"][]= $entry['App']."|".$name."|".$cats[$name];
           }
-          $lastSEP = true; 
+          $cats[$name] = $cats[$name] + 1;
         }
+      }
+      if(($cats[$name]==0)&&(!empty($name))){
+        $this->attrs["gosaMemberApplication"][]= "|".$name."|".$cats[$name];
       }
     }
 
@@ -573,100 +575,18 @@ class appgroup extends plugin
   }
 
 
-  function CreateCatMenu()
-  {
-    /* The current category */
-    $na = $this->curCatDir;
-
-    /* the current folder depth */
-    $nd = $this->curCatDepth;
-
-    /* init array */
-    $return = array();
-
-    $return["__CATEGORY__"] = array();  // Categories
-    $return["__ENTRY__"]    = array();  // Entries in this category
-    $return["__BACK__"]     = false;    // The back entry
-
-    $tmp = new xmlParse();
-
-    $this->Categories= array();
-    if(!isset($this->config->data['MAIN']['KDE_APPLICATIONS_MENU']))    {
-        print_red(_("There is no value for 'KDE_APPLICATIONS_MENU' specified in your gosa.conf."));
-    }else{
-        $path = $this->config->data['MAIN']['KDE_APPLICATIONS_MENU'];
-        if(file_exists($path)){
-            if(is_readable($path)){
-                $tmp->parseMenu($path);
-                $this->Categories = $tmp->GetData();
-            }else{
-                print_red(sprintf(_("The specified file '%s' for 'KDE_APPLICATIONS_MENU' in your gosa.conf is not accessable."),$path));
-            }
-        }else{
-            print_red(sprintf(_("The specified file '%s' for 'KDE_APPLICATIONS_MENU' in your gosa.conf is not accessable."),$path));
-        }
-    }
-
-
-    /* Create new categories to return */
-    foreach($this->Categories as $key => $val){
-
-        /* Split categories by | to get name and priority */
-        $nk = split("\/",$key);
-
-        /* Check if this category must be shown */
-        if((isset($nk[$nd]))&&(is_array($nk))&&($nk[$nd] == $na)){
-
-            /* Add this to the list, if theres is a sub category */
-            if(isset($nk[($nd+1)])){
-                $return["__CATEGORY__"][$nk[($nd+1)]] = $nk[($nd+1)];
-            }
-
-            /* Create back entry */
-            if($nd !=0 ){
-                $return['__BACK__'] = $nk[($nd-1)];
-            }else{
-                $return['__BACK__'] = "..";
-            }
-
-        }elseif($na==""){
-            $return["__CATEGORY__"][$nk[0]] = $nk[0];
-        }
-
-
-
-    }
-
-    /* If back entry isn't set, set it to false (none) or to ..(base)*/
-    if($return["__BACK__"] == false){
-        $return['__BACK__'] = "..";
-        if($nd == 0 ){
-            $return['__BACK__'] = false;
-        }
-    }
-    if((isset($this->gosaMemberApplication[$this->curCatDir]))&&(is_array($this->gosaMemberApplication[$this->curCatDir]))){
-      foreach($this->gosaMemberApplication[$this->curCatDir] as $app){
-        if($app['Cat'] == $this->curCatDir){
-         $return["__ENTRY__"][$app['App']]  =  array("name"=>$app['App']) ;
-        }
-      }    
-    }
-    /* Return this all ..*/
-    return($return);
-  }
-
   function addApp($cn)
   {
-
     if((isset($this->gosaMemberApplication[$this->curCatDir]))&&(is_array($this->gosaMemberApplication[$this->curCatDir]))){
       foreach($this->gosaMemberApplication[$this->curCatDir] as $entry){
         if($entry['App'] == $cn) return;
       }
     }
-    $this->gosaMemberApplication[$this->curCatDir][]= array("App"=>$cn,"Cat"=>$this->curCatDir);
+    $this->gosaMemberApplication[$this->curCatDir][]= array("App"=>$cn);
     $this->used_apps[$cn]=$cn;
     $this->is_modified= TRUE;
   }
+
 
   function removeApp($cn)
   {
