@@ -209,12 +209,21 @@ class appgroup extends plugin
     }
 
 
-    /* Add Categorie */
+    /* Add Categorie */ 
+  
+    
     if((isset($_POST['AddCat']))&&(isset($_POST['CatName']))&&(!empty($_POST['CatName']))){
-      if(empty($this->curCatDir)){
-        $this->Categories[$_POST['CatName']]=$_POST['CatName'];
+      
+      if(preg_match("/[^0-9a-z,\.-;:_#\+\- ]/i",$_POST['CatName'])){
+        print_red(_("Invalid character in category name."));
+      }elseif(!in_array($_POST['CatName'],$this->Categories)){ 
+        if(empty($this->curCatDir)){
+          $this->Categories[$_POST['CatName']]=$_POST['CatName'];
+        }else{
+          $this->Categories[$this->curCatDir."/".$_POST['CatName']]=$_POST['CatName'];
+        }
       }else{
-        $this->Categories[$this->curCatDir."/".$_POST['CatName']]=$_POST['CatName'];
+        print_red(_("The specified category already exists."));
       }
     }
 
