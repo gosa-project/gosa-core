@@ -21,7 +21,7 @@ class phoneGeneric extends plugin
   var $goFonType        = "";
   var $goFonDmtfMode    = "";
   var $goFonHost        = "";
-  var $goFonDefaultIP   = "";
+  var $goFonDefaultIP   = "dynamic";
   var $goFonQualify     = "";
   var $goFonAuth        = "";
   var $goFonSecret      = "";
@@ -283,6 +283,11 @@ class phoneGeneric extends plugin
     }
     if (!preg_match("/^$num\\.$num\\.$num\\.$num$/", $this->ipHostNumber)){
        $message[]= _("Wrong IP format in field IP-address.");
+    }
+    
+    $tr = count(split(":",$this->macAddress));
+    if($tr!=6){
+      $message[]=(_("The given macaddress is invalid. There must be 6 2byte segments seperated by ':'."));
     }
 
     $ui= get_userinfo();
