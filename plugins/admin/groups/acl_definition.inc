@@ -267,6 +267,11 @@ $ACLD['webdavAccount']			=array("webdavAccount" 			);
 $ACLD['intranetAccount']		=array("intranetAccount" 		);
 $ACLD['pptpAccount']			=array("gosapptp" 	  			);
 $ACLD['phpscheduleitAccount']	=array("gosaphpscheduleit" 	  	);
+$ACLD['opengwAccount']			=array(	"opengwAccount"	=>"Enable/disable account",	
+										"LocationTeam"	=>"Location team",
+										"TemplateUser"	=>"Template user",
+										"is_locked"		=>"Lock status",
+										"TeamIDs"		=>"Teams");
 
 $ACLD['phoneAccount'] = array("goFonDeliveryMode",
       "goFonHardware","goFonPIN","goFonVoicemailPIN","telephoneNumber", "goFonMacro");
