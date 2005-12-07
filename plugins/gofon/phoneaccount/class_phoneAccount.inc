@@ -890,11 +890,11 @@ class phoneAccount extends plugin
       }
     }
 
-    if((strlen($this->goFonPIN)!=4)){
-      $message[]=(_("Phone PIN must be 4 characters long."));
+    if((strlen($this->goFonPIN)<=0)){
+      $message[]=(_("Phone PIN must be at least one character long."));
     }else{
-      if(preg_match("/[^0-9]/",$this->goFonPIN)){
-        $message[]=(_("The specified phone PIN contains invalid characters, only numeric values are allowed here."));
+      if(preg_match("/[^0-9a-z]/i",$this->goFonPIN)){
+        $message[]=(_("The specified phone PIN contains invalid characters, only aphanumeric values are allowed here."));
       }
     }
 
