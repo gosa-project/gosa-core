@@ -16,7 +16,6 @@ class application extends plugin
   var $gosaApplicationIcon= "";
   var $gotoLogonScript	="";
   var $iconData;
-  var $Categories = array();
 
   /* Headpage attributes */
   var $last_sorting= "invalid";
@@ -30,25 +29,6 @@ class application extends plugin
   function application ($config, $dn= NULL)
   {
   	plugin::plugin ($config, $dn);
-
-	$tmp = new xmlParse();
-	
-	$this->Categories= array();
-	if(!isset($this->config->data['MAIN']['KDE_APPLICATIONS_MENU']))	{
-		print_red(_("There is no value for 'KDE_APPLICATIONS_MENU' specified in your gosa.conf."));
-	}else{
-		$path = $this->config->data['MAIN']['KDE_APPLICATIONS_MENU'];
-		if(file_exists($path)){
-			if(is_readable($path)){
-				$tmp->parseMenu($path);
-				$this->Categories = $tmp->GetData();
-			}else{
-				print_red(sprintf(_("The specified file '%s' for 'KDE_APPLICATIONS_MENU' in your gosa.conf is not accessable."),$path));
-			}
-		}else{
-			print_red(sprintf(_("The specified file '%s' for 'KDE_APPLICATIONS_MENU' in your gosa.conf is not accessable."),$path));
-		}
-	}
 
 	/* Load icon */
 	$ldap= $config->get_ldap_link();
