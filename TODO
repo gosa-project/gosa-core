@@ -4,6 +4,8 @@ Target for 2.5:
 * Asterisk : Create entry like this #309,1,PickupChan(SIP/rainer), 
 			 to allow others to pickup the phone by pressing # and number of the phone.
 
+* Rework group->application assignment.
+
 * Evaluate patches for certificate generation
 
 * Bug submitter
