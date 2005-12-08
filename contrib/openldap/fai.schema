@@ -52,6 +52,7 @@
 # FAIdebconfInfo       | FAIvariable, FAIvariableContent, FAIvariableType
 # FAIobject            | FAIclass, FAIstatus, macAddress
 # FAIrepository        | FAIdebianMirror, FAIdebianRelease, FAIdebianSection
+# FAIrepositoryServer  | FAIrepository
 #
 # Rem.: Except of FAIdebconfInfo and FAIobject, all object classes are inherited
 #       from FAIclass, so ALL cn's MUST be unique in your tree.
@@ -290,6 +291,12 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.5.26 NAME 'FAIdebianSection'
 		EQUALITY caseIgnoreIA5Match
 		SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
 
+# Name       : FAIrepository
+# Description: Used to store repository settings 
+attributetype ( 1.3.6.1.4.1.10098.1.1.5.27 NAME 'FAIrepository'
+		DESC 'TODO'
+		SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+		
 ##
 ## Object class definitions (allocated from the GONICUS oid space)
 ##
@@ -420,5 +427,12 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.40.17 NAME 'FAIrepository'
 	SUP top AUXILIARY
 	DESC 'Provides per object repository informations.'
 	MUST ( FAIdebianMirror $ FAIdebianRelease $ FAIdebianSection ) )
+
+# Name       : FAIrepositoryServer
+# Description: FAIrepositoryServer stores information about repository settings.
+objectclass (1.3.6.1.4.1.10098.1.2.1.40.18 NAME 'FAIrepositoryServer'
+	SUP top AUXILIARY
+	DESC 'Provides repository informations.'
+	MAY ( FAIrepository ) )
 
 ### END of FAI schema file
