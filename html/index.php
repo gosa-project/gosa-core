@@ -122,7 +122,7 @@ if ($config->data['MAIN']['FORCESSL'] == 'true' && $ssl != ''){
 }
 
 /* Got a formular answer, validate and try to log in */
-if ($_SERVER["REQUEST_METHOD"] == "POST"){
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
 
   /* Reset error messages */
   $message= "";
