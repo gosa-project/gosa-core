@@ -65,7 +65,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
 
   /* Create header as needed */
   if ($error_collector == ""){
-    if ($_SESSION['js']==FALSE){
+    if (isset($_SESSION['js']) && $_SESSION['js']==FALSE){
       $error_collector= "<div>";
     } else {
       $error_collector= "<table summary=\"\" width=\"100%\" style='background-color:#E0E0E0;border-bottom:1px solid black'><tr><td><img alt=\"\" align=\"middle\" src='".get_template_path('images/warning.png')."'>&nbsp;<font style='font-size:14px;font-weight:bold'>"._("Generating this page caused the PHP interpreter to raise some errors!")."</font></td><td align=right><button onClick='toggle(\"errorbox\")'>"._("Toggle information")."</button></td></tr></table><div id='errorbox' style='position:absolute; z-index:0; visibility: hidden'>";
