@@ -459,7 +459,7 @@ class appgroup extends plugin
 
     $div = new DivSelectBox("appgroup");    
 
-    $div->SetHeight(300);
+    $div->SetHeight(400);
 
     /* NEW LIST MANAGMENT
      * We also need to search for the departments
@@ -544,7 +544,7 @@ class appgroup extends plugin
     }
 
     $div2 = new DivSelectBox("appgroup");
-    $div2->SetHeight(300);
+    $div2->SetHeight(400);
 
     $linkopen       = "<img src='images/folder.png'>&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=open&amp;id=%s'>%s</a>";
     $catremove      = "&nbsp;<input type='image' src='images/edittrash.png' name='DelCat_%s' value='%s'>";
@@ -571,8 +571,7 @@ class appgroup extends plugin
     foreach($this->GetSubdirs($this->curCatDir) as $path => $name){
       $div2 ->AddEntry(array( 
             array("string"=>sprintf($linkopen,$path,$name)),
-            array("string"=>preg_replace("/%s/",$path,$catupdown.$catremove).
-              "<img src='images/empty.png' width='19px'>",
+            array("string"=>preg_replace("/%s/",$path,$catupdown.$catremove),
               "attach"=>"align='right' style='width:80px;border-right:0px;'"))); 
     }
 
@@ -591,10 +590,10 @@ class appgroup extends plugin
       foreach($this->gosaMemberApplication[$this->curCatDir] as $cat => $entry){
         if(preg_match("/__SEPARATOR__/",$entry['App'])){
           $div2 ->AddEntry(array(array("string"=>$separator),
-                array("string"=>preg_replace("/\%s/",$entry['App'],$upudown."<img src='images/empty.png' width='19px'>"),"attach"=>"align='right' style='border-right:0px;'")));
+                array("string"=>preg_replace("/\%s/",$entry['App'],$upudown),"attach"=>"align='right' style='border-right:0px;'")));
         }else{
           $div2 ->AddEntry(array(array("string"=>sprintf($app,$entry['App'])),
-                array("string"=>preg_replace("/\%s/",$entry['App'],$sep.$upudown.$edit),"attach"=>"align='right' style='border-right:0px;'")));
+                array("string"=>preg_replace("/\%s/",$entry['App'],$sep.$edit.$upudown),"attach"=>"align='right' style='border-right:0px;'")));
         }
       }
     }
