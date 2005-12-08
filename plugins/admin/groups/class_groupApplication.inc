@@ -65,7 +65,9 @@ class appgroup extends plugin
           $tmp2[$tmp[1]][$tmp[2]] = array("App"=>$tmp[0]);
         }
         if(!empty($tmp[1])){
-          $cats [$tmp[1]] = $tmp[1];
+          $n = split("/",$tmp[1]);
+          $c = count($n);
+          $cats [$tmp[1]] = $n[$c-1];
         }
         $prios[$tmp[1]][$tmp[2]] = $tmp[2];
       }else{
@@ -105,6 +107,118 @@ class appgroup extends plugin
     }
     $this->gosaMemberApplication = $tmp;
     $this->curbase = $this->config->current['BASE'];
+  }
+
+  function catDown($id){
+  
+   /* Get all cats depinding on current dir */
+    $cats = $this->GetSubdirs($this->curCatDir);
+
+    $ret = array();
+
+    if((in_array($id,array_flip($cats)))&&(count($cats)>1)){
+      if(count($cats) == 2){
+        $ret = array_reverse($cats);
+      }else{
+        $cnt = 0;
+        $hit = 0;
+        foreach($cats as $cat=>$name){
+          if($cat  == $id){
+            $hit = $cnt;
+          }
+          $cnt ++;
+        }
+          
+        
+        if($hit == 0){ 
+          $first  = array_slice($cats,0,0);
+          $middle = array_slice($cats,0,2);
+          $last   = array_slice($cats,$hit+2,$cnt);
+        }else{
+          $first  = array_slice($cats,0,$hit);
+          $middle = array_slice($cats,$hit,2);
+          $last   = array_slice($cats,$hit+2,$cnt);
+        }
+/*        print "first";
+        print_a($first);
+        print "middle";
+        print_a($middle);
+        print "last";
+        print_a($last);
+*/
+        foreach($first as $cat => $name){
+          $ret[$cat]=$name;
+        }
+        foreach(array_reverse($middle) as $cat => $name){
+          $ret[$cat]=$name;
+        }
+        foreach($last as $cat => $name){
+          $ret[$cat]=$name;
+        }
+      }
+
+
+      foreach($cats as $cat => $name){
+        unset($this->Categories[$cat]);
+      }
+      foreach($ret as $cat => $name){
+        $this->Categories[$cat]=$name;
+      }
+      
+    }
+  }
+
+  function catUp($id)
+  {
+    /* Get all cats depinding on current dir */
+    $cats = $this->GetSubdirs($this->curCatDir);
+
+    $ret = array();
+
+    if((in_array($id,array_flip($cats)))&&(count($cats)>1)){
+      if(count($cats) == 2){
+        $ret = array_reverse($cats);
+      }else{
+        $cnt = 0;
+        $hit = 0;
+        foreach($cats as $cat => $name){
+          $cnt ++;
+          if($cat  == $id){
+            $hit = $cnt;
+          }
+        }
+
+        if($hit>1){
+          if($hit == 2){ 
+            $first  = array_slice($cats,0,$hit-2);
+            $middle = array_slice($cats,$hit-2,$hit);
+            $last   = array_slice($cats,$hit,$cnt); 
+          }else{
+            $first  = array_slice($cats,0,$hit-2);
+            $middle = array_slice($cats,$hit-2,2);
+            $last   = array_slice($cats,$hit,$cnt); 
+          }
+          foreach($first as $cat => $name){
+            $ret[$cat]=$name;
+          }
+          foreach(array_reverse($middle) as $cat => $name){
+            $ret[$cat]=$name;
+          }
+          foreach($last as $cat => $name){
+            $ret[$cat]=$name;
+          }
+        }
+      }
+
+      foreach($cats as $cat => $name){
+        unset($this->Categories[$cat]);
+      } 
+      foreach($ret as $cat => $name){
+        $this->Categories[$cat]=$name;
+      }
+    }
+    
+
   }
 
   function getOneUp($appl)
@@ -244,6 +358,14 @@ class appgroup extends plugin
           }
         }
       }
+      if(preg_match("/DelCat_/",$name)){
+        $app = $value; 
+        foreach($this->Categories as $key =>  $cat){
+          if($cat == $value){
+            unset($this->Categories[$key]);
+          }
+        }
+      }
       if(preg_match("/EdiApp_/",$name)){
         $appname = $value;
         /* We've got the appname, get parameters from ldap */
@@ -364,7 +486,7 @@ class appgroup extends plugin
         $departments[$value['dn']]=convert_department_dn($value['dn']);
       }
     }
-    
+
     /* END NEW LIST MANAGMENT
      */
 
@@ -375,22 +497,31 @@ class appgroup extends plugin
     if((strlen($base_back)>= strlen($this->config->current['BASE']))&&($this->curbase!=$this->config->current['BASE'])){
       $div->AddEntry(array(
             array("string"=>sprintf($linkopen,base64_encode($base_back),".. ["._("back")."]"),
-                  "attach"=>"style='border:0px;'")
+              "attach"=>"style='border:0px;'")
             ));
     }
     foreach($departments as $key => $app){
       $div->AddEntry(array(
-                            array("string"=>"<img src='images/folder.png' alt='"._("department")."'>&nbsp;".sprintf($linkopen,base64_encode($key),$app),
-                                  "attach"=>"style='border:0px;'")
-                          ));
+            array("string"=>"<img src='images/folder.png' alt='"._("department")."'>&nbsp;".sprintf($linkopen,base64_encode($key),$app),
+              "attach"=>"style='border:0px;'")
+            ));
     }
-    
+
     foreach($apps as $key => $app){
       $div->AddEntry(array(
-                            array("string"=>sprintf("<input type='checkbox' value='1' name='AddApp_%s'>",$key).
-                                  "<img src='images/select_application.png' alt='"._("application")."'>&nbsp;".sprintf($linkadd,$key,$app),
-                                  "attach"=>"style='border:0px;'")
-                          ));
+            array("string"=>sprintf("<input type='checkbox' value='1' name='AddApp_%s'>",$key).
+              "<img src='images/select_application.png' alt='"._("application")."'>&nbsp;".sprintf($linkadd,$key,$app),
+              "attach"=>"style='border:0px;'")
+            ));
+    }
+
+    if((isset($_GET['act']))&&(($_GET['act'] == "cat_up")||($_GET['act']=="cat_down"))){
+      if($_GET['act']=="cat_up"){
+        $this->catUp($_GET['id']);
+      }
+      if($_GET['act']=="cat_down"){
+        $this->catDown($_GET['id']);
+      }
     }
 
     if((isset($_GET['act']))&&(($_GET['act'] == "one_up")||($_GET['act']=="one_down"))){
@@ -420,8 +551,12 @@ class appgroup extends plugin
     $div2->SetHeight(300);
 
     $linkopen       = "<img src='images/folder.png'>&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=open&amp;id=%s'>%s</a>";
-    $catremove      = "<a href='?plug=".$_GET['plug']."&amp;act=idelcat&amp;id=%s'><input type='image' src='images/edittrash.png' ></a>";
+    $catremove      = "&nbsp;<input type='image' src='images/edittrash.png' name='DelCat_%s' value='%s'>";
     $app            = "<img src='images/select_application.png'>&nbsp;%s";
+    
+    $catupdown        = "<a href='?plug=".$_GET['plug']."&amp;act=cat_up&id=%s'>
+                       <img src='images/sort_up.png' border=0></a>&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=cat_down&id=%s'> 
+                       <img src='images/sort_down.png' border=0></a>";
 
     if(empty($this->curCatDir)){
       $cnt =0;
@@ -434,26 +569,24 @@ class appgroup extends plugin
       }
       $div2 ->AddEntry(array(array("string"=>sprintf($linkopen,$bbk,"..")),array("string"=>"&nbsp;","attach"=>"style='border-right:0px;'")));
     }
-    
-    foreach($this->Categories as $path => $name){
-      $depth = count(split("/",$path));
-      if(($depth == ($cnt)+1)){
-        
-        $div2 ->AddEntry(array( 
-                              array("string"=>sprintf($linkopen,$path,$name)),
-                              array("string"=>sprintf($catremove,$path).
-                                "<img src='images/empty.png' width='19px'>",
-                                    "attach"=>"align='right' style='width:80px;border-right:0px;'"))); 
-      }
+
+    $this->GetSubdirs($this->curCatDir);
+
+    foreach($this->GetSubdirs($this->curCatDir) as $path => $name){
+      $div2 ->AddEntry(array( 
+            array("string"=>sprintf($linkopen,$path,$name)),
+            array("string"=>preg_replace("/%s/",$path,$catupdown.$catremove).
+              "<img src='images/empty.png' width='19px'>",
+              "attach"=>"align='right' style='width:80px;border-right:0px;'"))); 
     }
 
-      /* Append entries */
+    /* Append entries */
 
     $separator ="<hr height=1  size=1></hr>"; 
- 
+
     $upudown = "<a href='?plug=".$_GET['plug']."&amp;act=one_up&id=%s'>   <img src='images/sort_up.png' border=0></a>".
-          "&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=one_down&id=%s'> <img src='images/sort_down.png' border=0></a>".
-          "&nbsp;<input type='image' src='images/edittrash.png' name='DelApp_%s' value='%s'>";
+      "&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=one_down&id=%s'> <img src='images/sort_down.png' border=0></a>".
+      "&nbsp;<input type='image' src='images/edittrash.png' name='DelApp_%s' value='%s'>";
     $edit=      "&nbsp;<input type='image' src='images/edit.png' name='EdiApp_%s' value='%s'>";
 
     if(isset($this->gosaMemberApplication[$this->curCatDir])){
@@ -467,7 +600,7 @@ class appgroup extends plugin
         }
       }
     }
-  
+
     $smarty->assign("UsedApps", $div2->DrawList());
     $smarty->assign("List", $div->DrawList());
     $smarty->assign("apps", $apps);
@@ -577,12 +710,12 @@ class appgroup extends plugin
     reset ($this->apps);
 
     if(is_array($this->gosaMemberApplication))
-    foreach ($this->gosaMemberApplication as $cat){   
-      if(is_array($cat))
-      foreach($cat as $entry){
-        $this->used_apps[$entry['App']]= $entry['App'];
+      foreach ($this->gosaMemberApplication as $cat){   
+        if(is_array($cat))
+          foreach($cat as $entry){
+            $this->used_apps[$entry['App']]= $entry['App'];
+          }
       }
-    }
   }
 
 
@@ -609,6 +742,33 @@ class appgroup extends plugin
     }
     $this->gosaMemberApplication= $temp;
     $this->is_modified= TRUE;
+  }
+
+  function GetSubdirs($dir)
+  {
+    $ret = array();
+    $tmp1 = split("/",$this->curCatDir);
+ 
+    foreach($this->Categories as $path=>$cat){
+      $tmp2 = split("/",$path);
+      
+      if((empty($this->curCatDir))&&(!preg_match("/\//",$path))){
+        $abort = false;
+      }elseif(((count($tmp1))+1) == (count($tmp2))){
+        $abort = false;
+        for($i = 0 ; $i < count($tmp1) ; $i++){
+          if($tmp1[$i] != $tmp2[$i]){
+            $abort = true;
+          }
+        }
+      }else{
+        $abort= true;
+      }
+      if(!$abort){
+        $ret[$path]=$cat;
+      } 
+    }
+  return($ret);
   }
 
 }
