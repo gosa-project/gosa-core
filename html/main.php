@@ -42,8 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
 /* Logged in? Simple security check */
 if (!isset($_SESSION['config'])){
-  gosa_log ("main.php called without session");
-  header ("Location: index.php");
+  gosa_log ("main.php called without session - logging out");
+  header ("Location: logout.php");
   exit;
 } 
 
