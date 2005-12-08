@@ -110,12 +110,9 @@ class appgroup extends plugin
   }
 
   function catDown($id){
-  
    /* Get all cats depinding on current dir */
     $cats = $this->GetSubdirs($this->curCatDir);
-
     $ret = array();
-
     if((in_array($id,array_flip($cats)))&&(count($cats)>1)){
       if(count($cats) == 2){
         $ret = array_reverse($cats);
@@ -128,8 +125,6 @@ class appgroup extends plugin
           }
           $cnt ++;
         }
-          
-        
         if($hit == 0){ 
           $first  = array_slice($cats,0,0);
           $middle = array_slice($cats,0,2);
@@ -139,13 +134,6 @@ class appgroup extends plugin
           $middle = array_slice($cats,$hit,2);
           $last   = array_slice($cats,$hit+2,$cnt);
         }
-/*        print "first";
-        print_a($first);
-        print "middle";
-        print_a($middle);
-        print "last";
-        print_a($last);
-*/
         foreach($first as $cat => $name){
           $ret[$cat]=$name;
         }
@@ -156,15 +144,12 @@ class appgroup extends plugin
           $ret[$cat]=$name;
         }
       }
-
-
       foreach($cats as $cat => $name){
         unset($this->Categories[$cat]);
       }
       foreach($ret as $cat => $name){
         $this->Categories[$cat]=$name;
       }
-      
     }
   }
 
@@ -285,11 +270,6 @@ class appgroup extends plugin
     if($found){
       $this->gosaMemberApplication[$this->curCatDir]=$tmp;
     }
-    return;
-    $cat = $this->curCatDir;
-    $cnt = count($this->gosaMemberApplication[$cat]);
-    $tmp = array("App" => "__SEPARATOR__".($cnt+1));
-    $this->gosaMemberApplication[$cat][] = $tmp;
   }
 
   function execute()
