@@ -547,12 +547,12 @@ class appgroup extends plugin
     $div2->SetHeight(400);
 
     $linkopen       = "<img src='images/folder.png'>&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=open&amp;id=%s'>%s</a>";
-    $catremove      = "&nbsp;<input type='image' src='images/edittrash.png' name='DelCat_%s' value='%s'>";
+    $catremove      = "&nbsp;<input type='image' src='images/edittrash.png' title='"._("Delete entry")."' name='DelCat_%s' value='%s'>";
     $app            = "<img src='images/select_application.png'>&nbsp;%s";
     
     $catupdown        = "<a href='?plug=".$_GET['plug']."&amp;act=cat_up&id=%s'>
-                       <img src='images/sort_up.png' border=0></a>&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=cat_down&id=%s'> 
-                       <img src='images/sort_down.png' border=0></a>";
+                       <img align='top' src='images/sort_up.png' border=0 title='"._("Move up")."'></a>&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=cat_down&id=%s'> 
+                       <img src='images/sort_down.png' title='"._("Move down")."' border=0></a>";
 
     if(empty($this->curCatDir)){
       $cnt =0;
@@ -579,12 +579,12 @@ class appgroup extends plugin
 
     $separator ="<hr height=1  size=1></hr>"; 
 
-    $sep = "<input type='image' src='images/back.png' value='%s' name='AddSep_%s'>";
+    $sep = "<input type='image' src='images/back.png' title='"._("Insert seperator")."' value='%s' name='AddSep_%s'>";
   
-    $upudown ="<a href='?plug=".$_GET['plug']."&amp;act=one_up&id=%s'>   <img src='images/sort_up.png' border=0></a>".
-      "&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=one_down&id=%s'> <img src='images/sort_down.png' border=0></a>".
-      "&nbsp;<input type='image' src='images/edittrash.png' name='DelApp_%s' value='%s'>";
-    $edit=      "&nbsp;<input type='image' src='images/edit.png' name='EdiApp_%s' value='%s'>";
+    $upudown ="<a href='?plug=".$_GET['plug']."&amp;act=one_up&id=%s'>   <img align='top' src='images/sort_up.png' title='"._("Move up")."' border=0></a>".
+      "&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=one_down&id=%s'> <img src='images/sort_down.png' title='"._("Move down")."' border=0></a>".
+      "&nbsp;<input type='image' src='images/edittrash.png' title='"._("Delete entry")."' name='DelApp_%s' value='%s'>";
+    $edit=      "&nbsp;<input type='image' src='images/edit.png' title='"._("Edit entry")."' name='EdiApp_%s' value='%s'>";
 
     if(isset($this->gosaMemberApplication[$this->curCatDir])){
       foreach($this->gosaMemberApplication[$this->curCatDir] as $cat => $entry){

@@ -148,6 +148,7 @@ class application extends plugin
 
 	/* Checkboxes */
 	foreach (array("G" => "exec_for_groupmembers", "O" => "overwrite_config",
+		        "L" => "place_on_kicker",
 			"D" => "place_on_desktop", "M" => "place_in_startmenu") as $key => $val){
 		if (preg_match("/$key/", $this->gosaApplicationFlags)){
 			$smarty->assign("$val", "checked");
@@ -204,6 +205,9 @@ class application extends plugin
 		}
 		if (isset($_POST['place_on_desktop']) && $_POST['place_on_desktop'] == 1){
 			$flag.= "D";
+		}
+		if (isset($_POST['place_on_kicker']) && $_POST['place_on_kicker'] == 1){
+			$flag.= "L";
 		}
 		if (isset($_POST['place_in_startmenu']) && $_POST['place_in_startmenu'] == 1){
 			$flag.= "M";

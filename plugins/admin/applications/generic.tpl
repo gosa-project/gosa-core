@@ -66,7 +66,7 @@
 <h2><img src="images/lamp.png" alt="{t}Options{/t}" align="center">&nbsp;{t}Options{/t}</h2>
 <table summary="" style="width:100%;">
   <tr>
-    <td style="width:50%;border-right:1px solid #B0B0B0">
+    <td style="width:50%;border-right:1px solid #B0B0B0; vertical-align:top">
       <input type=checkbox name="exec_for_groupmembers" value="1" {$gosaApplicationFlagsACL} {$exec_for_groupmembers}>{t}Only executable for members{/t}
       <br>
       <input type=checkbox name="overwrite_config" value="1" {$gosaApplicationFlagsACL} {$overwrite_config}>{t}Replace user configuration on startup{/t}
@@ -77,6 +77,9 @@
       <br>
       <input type=checkbox name="place_in_startmenu" value="1" {$gosaApplicationFlagsACL} {$place_in_startmenu}>
       {t}Place entry in members startmenu{/t}
+      <br>
+      <input type=checkbox name="place_on_kicker" value="1" {$gosaApplicationFlagsACL} {$place_on_kicker}>
+      {t}Place entry in members launch bar{/t}
     </td>
   </tr>
 </table>
