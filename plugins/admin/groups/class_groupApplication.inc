@@ -269,8 +269,23 @@ class appgroup extends plugin
     $this->gosaMemberApplication[$cat] =$tmp;
   }
   
-  function AddSeperator()
+  function AddSeperator($id)
   {
+    $found  = false;
+    $cat    = "";
+    $tmp = array();
+    foreach($this->gosaMemberApplication[$this->curCatDir] as $appID => $app){  
+      $tmp[] = $app;    
+      if(($app['App'] == $id)&&(!$found)){
+        $cnt = count($this->gosaMemberApplication[$this->curCatDir]);
+        $tmp[] = array("App" => "__SEPARATOR__".($cnt+1));
+        $found = true;
+      }
+    }
+    if($found){
+      $this->gosaMemberApplication[$this->curCatDir]=$tmp;
+    }
+    return;
     $cat = $this->curCatDir;
     $cnt = count($this->gosaMemberApplication[$cat]);
     $tmp = array("App" => "__SEPARATOR__".($cnt+1));
@@ -287,10 +302,6 @@ class appgroup extends plugin
       if(isset($this->config->idepartments[$dep])){
         $this->curbase = $dep;
       }
-    }
-
-    if(isset($_POST['AddSeperator'])){
-      $this->AddSeperator();
     }
 
     if((isset($_GET['act']))&&($_GET['act']=="open")){
@@ -344,6 +355,11 @@ class appgroup extends plugin
 
     $this->reload();
     foreach($_POST as $name => $value){
+      if(preg_match("/AddSep_/",$name)){
+        $this->AddSeperator($value);
+      }
+    
+
       if(preg_match("/DelApp_/",$name)){
         $app = $value; 
 
@@ -584,7 +600,9 @@ class appgroup extends plugin
 
     $separator ="<hr height=1  size=1></hr>"; 
 
-    $upudown = "<a href='?plug=".$_GET['plug']."&amp;act=one_up&id=%s'>   <img src='images/sort_up.png' border=0></a>".
+    $sep = "<input type='image' src='images/back.png' value='%s' name='AddSep_%s'>";
+  
+    $upudown ="<a href='?plug=".$_GET['plug']."&amp;act=one_up&id=%s'>   <img src='images/sort_up.png' border=0></a>".
       "&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=one_down&id=%s'> <img src='images/sort_down.png' border=0></a>".
       "&nbsp;<input type='image' src='images/edittrash.png' name='DelApp_%s' value='%s'>";
     $edit=      "&nbsp;<input type='image' src='images/edit.png' name='EdiApp_%s' value='%s'>";
@@ -596,7 +614,7 @@ class appgroup extends plugin
                 array("string"=>preg_replace("/\%s/",$entry['App'],$upudown."<img src='images/empty.png' width='19px'>"),"attach"=>"align='right' style='border-right:0px;'")));
         }else{
           $div2 ->AddEntry(array(array("string"=>sprintf($app,$entry['App'])),
-                array("string"=>preg_replace("/\%s/",$entry['App'],$upudown.$edit),"attach"=>"align='right' style='border-right:0px;'")));
+                array("string"=>preg_replace("/\%s/",$entry['App'],$sep.$upudown.$edit),"attach"=>"align='right' style='border-right:0px;'")));
         }
       }
     }
