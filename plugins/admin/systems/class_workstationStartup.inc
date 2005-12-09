@@ -52,6 +52,7 @@ class workstartup extends plugin
     $ldap->search("(objectClass=FAIrepository)",array("FAIdebianMirror"));
     
     /* attach all attributes with "index => cn" to avoid multiple entries */
+    $this->FAIdebianMirrors['auto']=_("automatic");
     while($attr = $ldap->fetch()){
       if(isset($attr['FAIdebianMirror'])){
         $this->FAIdebianMirrors[$attr['FAIdebianMirror'][0]]=$attr['FAIdebianMirror'][0];
@@ -587,7 +588,7 @@ class workstartup extends plugin
     if($this->FAIdebianMirror == "none"){
       $this->FAIdebianMirror = "";
     }
-   
+    
     if((count($this->attrs['FAIclass'])==0)&&(empty($this->FAIdebianMirror))){
       $tmp = array();
       foreach($this->attrs['objectClass'] as $class){
