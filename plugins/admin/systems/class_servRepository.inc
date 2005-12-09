@@ -25,6 +25,7 @@ class servrepository extends plugin
   function servrepository ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
+
     $this->repositories = array();
     if(isset($this->attrs['FAIrepository'])){
       for($i = 0; $i < $this->attrs['FAIrepository']['count']; $i++){
@@ -191,12 +192,6 @@ class servrepository extends plugin
       $ldap->cd($this->dn);
       $ldap->modify($this->attrs);      
       $this->handle_post_events("modify");
-    }else{
-      $ldap->cd ($this->config->current['BASE']);
-      $ldap->create_missing_trees($this->dn);
-      $ldap->cd($this->dn);
-      $ldap->add($this->attrs);
-      $this->handle_post_events("add");
     }
   }
 
