@@ -1,7 +1,7 @@
 <table width="100%">
 	<tr>
 		<td width="50%" valign="top">
-				<h2><img alt="" src="images/fai_small.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
+				<h2><img class="center" alt="" src="images/fai_small.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
 				<table summary="" cellspacing="4">
 					<tr>
 						<td>
@@ -29,7 +29,7 @@
 		   &nbsp;
 	 	</td>
 		<td>
-				<h2><img alt="" src="images/fai_variable.png" align="middle" title="{t}Objects{/t}">&nbsp;
+				<h2><img class="center" alt="" src="images/fai_variable.png" align="middle" title="{t}Objects{/t}">&nbsp;
 					<LABEL for="SubObject">
 						{t}List of assigned variables{/t}
 					</LABEL>

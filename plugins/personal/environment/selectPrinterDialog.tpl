@@ -1,4 +1,4 @@
-<h2><img alt="" src="images/select_printer.png" align="middle">&nbsp;{t}Add printer devcies{/t}</h2>
+<h2><img class="center" alt="" src="images/select_printer.png" align="middle">&nbsp;{t}Add printer devcies{/t}</h2>
 
     <input type="hidden" name="dialogissubmitted" value="1">
 
@@ -30,7 +30,7 @@
 				<table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 					<tr>
 						<td>
-							<img alt="" src="{$tree_image}" align=middle>&nbsp;
+							<img class="center" alt="" src="{$tree_image}" align=middle>&nbsp;
 							<select name="depselectPrinter" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
 							  {html_options options=$deplistPrinter selected=$depselectPrinter}
 							</select>
@@ -40,7 +40,7 @@
     					<table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 							<tr>
 								<td>
-									<LABEL for='filter'><img alt="Search" src="{$search_image}" align="middle" title="{t}Display printers matching{/t}">
+									<LABEL for='filter'><img class="center" alt="Search" src="{$search_image}" align="middle" title="{t}Display printers matching{/t}">
 									</LABEL>
 								</td>
     							<td width="99%">

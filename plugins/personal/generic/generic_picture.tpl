@@ -3,7 +3,7 @@
  <!-- Headline container -->
  <tr>
    <td colspan=2>
-     <h2><img alt="" align="middle" src="images/head.png"> {t}Personal picture{/t}</h2>
+     <h2><img alt="" class="center" align="middle" src="images/head.png"> {t}Personal picture{/t}</h2>
    </td>
  </tr>
 
@@ -12,7 +12,7 @@
 
    <!-- Image container -->
    <td>
-     <img alt="" align="bottom" border="1" width="145" height="200" src="getbin.php?rand=$rand">
+     <img alt="" class="center" align="bottom" border="1" width="145" height="200" src="getbin.php?rand=$rand">
    </td>
 
    <!-- Name, ... -->

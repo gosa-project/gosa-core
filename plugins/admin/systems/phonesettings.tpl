@@ -1,4 +1,4 @@
-<h2><img alt="" align="middle" src="images/select_phone.png"> {t}Advanced phone settings{/t}</h2>
+<h2><img class="center" alt="" align="middle" src="images/select_phone.png"> {t}Advanced phone settings{/t}</h2>
 
 <table summary="" style="width:100%" border=0>
 	<tr>

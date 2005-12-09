@@ -25,7 +25,7 @@
     <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 		<tr>
 			<td>
-				<img alt="" src="{$tree_image}" align="middle" title="{t}Display numbers of department{/t}">&nbsp;
+				<img class="center" alt="" src="{$tree_image}" align="middle" title="{t}Display numbers of department{/t}">&nbsp;
 				<select name="depselect" size="1" onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
 			      {html_options options=$deplist selected=$depselect}
 			    </select>
@@ -35,7 +35,7 @@
     <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 		<tr>
 			<td width="18px">
-				<img alt="" src="{$search_image}" align="middle" title="{t}Display numbers matching{/t}">
+				<img class="center" alt="" src="{$search_image}" align="middle" title="{t}Display numbers matching{/t}">
 			</td>
     		<td>
 				<input type='text' name='regex' maxlength='20' value='{$regex}' style="width:99%" title='{t}Regular expression for matching numbers{/t}' onChange="mainform.submit()">	</td>
@@ -44,7 +44,7 @@
     <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 		<tr>
 			<td width="18px">
-				<img alt="" src="{$usearch_image}" align="middle" title="{t}Display numbers of user{/t}">
+				<img class="center" alt="" src="{$usearch_image}" align="middle" title="{t}Display numbers of user{/t}">
 			</td>
 		    <td>
 				<input type='text' name='fuser' style="width:99%" maxlength='20' value='{$fuser}' title='{t}User name of which numbers are shown{/t}' onChange="mainform.submit()">	</td>

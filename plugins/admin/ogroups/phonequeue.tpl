@@ -1,7 +1,7 @@
 <table summary="{t}Queue Settings{/t}" style="width: 100%; vertical-align: top; text-align: left;" border="0" cellpadding="4">
 <tr>
 <td valign='top'>
-		<h2><img alt="" src="images/select_phone.png" align="middle">&nbsp;{t}Phone numbers{/t}</h2>
+		<h2><img class="center" alt="" src="images/select_phone.png" align="middle">&nbsp;{t}Phone numbers{/t}</h2>
 		<table summary="">
 		<tr>
 		<td colspan=2>
@@ -28,7 +28,7 @@
 		</table>
 		</tr>
 		<tr>
-		  <td colspan=2><h2><img alt="" src="images/select_ogroup.png" align="middle">&nbsp;{t}Options{/t}</h2></td>
+		  <td colspan=2><h2><img class="center" alt="" src="images/select_ogroup.png" align="middle">&nbsp;{t}Options{/t}</h2></td>
 		</tr>
 		<tr>
 		<td>
@@ -90,7 +90,7 @@
 </td>
 <td valign='top' style="border-left: 1px solid rgb(160, 160, 160);">
 	<h2>
-    <img alt="" src="images/sound.png" align="middle">
+    <img class="center" alt="" src="images/sound.png" align="middle">
     {t}Queue sound setup{/t}
     </h2>
 	<table summary="{t}Generic queue Settings{/t}">
@@ -201,7 +201,7 @@
 	</td>
 </tr>
 <tr>
-<td colspan=2><h2 style='margin-bottom:0px;'><img alt="" src="images/select_ogroup.png" align="middle">&nbsp;{t}Phone attributes {/t}</h2></td>
+<td colspan=2><h2 style='margin-bottom:0px;'><img class="center" alt="" src="images/select_ogroup.png" align="middle">&nbsp;{t}Phone attributes {/t}</h2></td>
 </tr>
 <tr>
 <td>

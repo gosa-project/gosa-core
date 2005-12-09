@@ -4,7 +4,7 @@
  <!-- Headline container -->
  <tr>
   <td style="width:50%; border-right:1px solid #A0A0A0; vertical-align:top">
-   <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
+   <h2><img class="center" alt="" align="middle" src="images/rightarrow.png"> {t}Generic{/t}</h2>
    <table summary="">
     <tr>
      <td><LABEL for="mail">{t}Primary address{/t}</LABEL>{$must}</td>
@@ -41,7 +41,7 @@
      
   </td>
   <td style="vertical-align:top;padding-left:2px;">
-   <h2><img alt="" align="middle" src="images/alternatemail.png"> {t}Alternative addresses{/t}</h2>
+   <h2><img class="center" alt="" align="middle" src="images/alternatemail.png"> {t}Alternative addresses{/t}</h2>
    <select style="width:100%;" name="alternates_list[]" size=10 multiple title="{t}List of alternative mail addresses{/t}">
     {html_options values=$gosaMailAlternateAddress output=$gosaMailAlternateAddress}
 	<option disabled>&nbsp;</option>
@@ -60,7 +60,7 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
  <tr>
   <td style="vertical-align:top;width:50%; border-right:1px solid #A0A0A0">
-   <h2><img alt="" align="middle" src="images/members.png"> {t}IMAP shared folders{/t}</h2>
+   <h2><img class="center" alt="" align="middle" src="images/members.png"> {t}IMAP shared folders{/t}</h2>
 
    <table summary="" cellpadding=0 border=0>
     <tr>
@@ -85,7 +85,7 @@
       
   </td>
   <td style="vertical-align:top;width:50%">
-   <h2><img alt="" align="middle" src="images/envelope.png"> {t}Forward messages to non group members{/t}</h2>
+   <h2><img class="center" alt="" align="middle" src="images/envelope.png"> {t}Forward messages to non group members{/t}</h2>
    <select style="width:100%;" name="forwarder_list[]" size=10 multiple>
     {html_options values=$gosaMailForwardingAddress output=$gosaMailForwardingAddress}
 	<option disabled>&nbsp;</option>

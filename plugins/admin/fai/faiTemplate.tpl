@@ -1,7 +1,7 @@
 <table width="100%">
 	<tr>
 		<td valign="top" style="border-right:1px solid #A0A0A0; width:50%">
-				<h2><img alt="" src="images/fai_small.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
+				<h2><img class="center" alt="" src="images/fai_small.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
 				<table summary="" cellspacing="4">
 					<tr>
 						<td>
@@ -26,7 +26,7 @@
 				</table>
 		</td>
 		<td style="width:50%">
-				<h2><img alt="" src="images/fai_template.png" align="middle" title="{t}Objects{/t}">&nbsp;
+				<h2><img class="center" alt="" src="images/fai_template.png" align="middle" title="{t}Objects{/t}">&nbsp;
 					<LABEL for="SubObject">
 						{t}List of template files{/t}
 					</LABEL>

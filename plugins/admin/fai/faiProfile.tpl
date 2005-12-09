@@ -1,7 +1,7 @@
 <table width="100%">
 	<tr>
 		<td width="50%" valign="top">
-			<h2><img alt="" src="images/forward.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
+			<h2><img class="center" alt="" src="images/forward.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
 			<table summary="" cellspacing="4">
 				<tr>
 					<td>
@@ -29,7 +29,7 @@
 			<table summary="" style="vertical-align:top; text-align:left;" cellpadding=4 width="100%">
 				<tr>
 					<td style="vertical-align:top;">
-						<h2><img alt="" src="images/fai_template.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}FAI classes{/t}</h2> 
+						<h2><img class="center" alt="" src="images/fai_template.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}FAI classes{/t}</h2> 
 						<select name="FAIclass" title="{t}Choose a priority{/t}" size="20" style="width:100%;" multiple>
 							{html_options values=$FAIclasses output=$FAIclasses}
 						</select>

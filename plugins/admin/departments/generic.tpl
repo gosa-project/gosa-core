@@ -1,7 +1,7 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
  <tr>
    <td style="vertical-align:top; width:50%">
-     <h2><img alt="" align="middle" src="images/rightarrow.png"> {t}Properties{/t}</h2>
+     <h2><img class="center" alt="" align="middle" src="images/rightarrow.png"> {t}Properties{/t}</h2>
      
      <table summary="">
       <tr>
@@ -39,7 +39,7 @@
     &nbsp;
    </td>
    <td>
-     <h2><img alt="" align="middle" src="images/house.png"> {t}Location{/t}</h2>
+     <h2><img class="center" alt="" align="middle" src="images/house.png"> {t}Location{/t}</h2>
 
      <table summary="" style="width:100%">
       <tr>

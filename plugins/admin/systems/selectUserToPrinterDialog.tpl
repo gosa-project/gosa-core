@@ -28,7 +28,7 @@
 				<table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 					<tr>
 						<td>
-							<label for="dspselectPrinter"><img alt="" src="{$tree_image}" align="middle" title="{t}Display members of department{/t}"></label>
+							<label for="dspselectPrinter"><img class="center" alt="" src="{$tree_image}" align="middle" title="{t}Display members of department{/t}"></label>
 						</td>
 						<td style="width:99%">
 							<select style="width:99%" name="depselectPrinter" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
@@ -40,7 +40,7 @@
     					<table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 							<tr>
 								<td>
-									<LABEL for='filter'><img alt="Search" src="{$search_image}" align="middle" title="{t}Display members matching{/t}">
+									<LABEL for='filter'><img class="center" alt="Search" src="{$search_image}" align="middle" title="{t}Display members matching{/t}">
 									</LABEL>
 								</td>
     							<td width="99%">

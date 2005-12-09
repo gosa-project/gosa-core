@@ -8,7 +8,7 @@
    <td width="33%">
     <table summary="">
      <tr>
-      <td><img alt="" align="middle" border=0 src="{$server_image}">&nbsp;<LABEL FOR="host">{t}Show hosts{/t}</LABEL></td>
+      <td><img class="center" alt="" align="middle" border=0 src="{$server_image}">&nbsp;<LABEL FOR="host">{t}Show hosts{/t}</LABEL></td>
       <td>
        <select id="host" name="host" size=1 onChange="mainform.submit()">
 		       {html_options options=$hostlist selected=$host}
@@ -17,7 +17,7 @@
       </td>
      </tr>
      <tr>
-      <td><img alt="" align="middle" border=0 src="{$log_image}">&nbsp;<LABEL for="log_level">{t}Log level{/t}</label></td>
+      <td><img class="center" alt="" align="middle" border=0 src="{$log_image}">&nbsp;<LABEL for="log_level">{t}Log level{/t}</label></td>
       <td>
        <select id="log_level" name="log_level" size=1 onChange="mainform.submit()">
         	{html_options options=$loglevellist selected=$log_level}
@@ -35,7 +35,7 @@
    <td width="33%">
     <table summary="">
      <tr>
-      <td><img alt="" align="middle" border=0 src="{$time_image}">&nbsp;<LABEL for="time" >{t}Time interval{/t}</LABEL></td>
+      <td><img class="center" alt="" align="middle" border=0 src="{$time_image}">&nbsp;<LABEL for="time" >{t}Time interval{/t}</LABEL></td>
       <td>
        <select id="time" name="time" size=1 onChange="mainform.submit()">
         	{html_options options=$tilist selected=$time}
@@ -44,7 +44,7 @@
       </td>
      </tr>
      <tr>
-      <td><img alt="" align="middle" border=0 src="{$search_image}">&nbsp;<LABEL for="regex">{t}Search for{/t}</LABEL></td>
+      <td><img class="center" alt="" align="middle" border=0 src="{$search_image}">&nbsp;<LABEL for="regex">{t}Search for{/t}</LABEL></td>
       <td><input id="regex" name="regex" size=25 maxlength=60 value="{$regex}" title="{t}Enter string to search for{/t}"></td>
      </tr>
     </table>
@@ -57,7 +57,7 @@
    <td>
     <table summary="" width="100%">
      <tr>
-      <td><img alt="" align="middle" border=0 src="{$ruleset_image}">&nbsp;<LABEL for="edit_rules">{t}Ruleset{/t}</LABEL></td>
+      <td><img class="center" alt="" align="middle" border=0 src="{$ruleset_image}">&nbsp;<LABEL for="edit_rules">{t}Ruleset{/t}</LABEL></td>
       <td width="100%">
        <input id="edit_rules" name="edit_rules" type="submit" value="{t}Edit{/t}" disabled>
       </td>

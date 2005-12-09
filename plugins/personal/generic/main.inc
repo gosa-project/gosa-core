@@ -160,7 +160,7 @@ if (!$remove_lock){
       $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
       $display.="<script language='javascript'>";
 
-      $info= "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png').
+      $info= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png').
              "\"> ".$ui->dn."&nbsp;";
     } else {
       /* 'viewid' may be set by i.e. the phonelist plugin. This
@@ -171,11 +171,11 @@ if (!$remove_lock){
       } else {
         $str= _("Edit");
         $fn = "edit";
-        $info= "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/openlock.png').
+        $info= "<img class\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/openlock.png').
                "\"> ".$ui->dn."&nbsp;";
       }
       if ($fn == "edit" && isset($editacl) && $editacl != "#none#"){
-        $info.= "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/lamp.png')."\"> ".
+        $info.= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/lamp.png')."\"> ".
                 _("Click the 'Edit' button below to change informations in this dialog");
         $display.= "<input type=submit name=\"$fn\" value=\"$str\">\n";
       }

@@ -1,4 +1,4 @@
-<h2><img src="images/select_printer.png" align="middle">&nbsp;{t}Printer driver{/t}</h2>
+<h2><img class="center" src="images/select_printer.png" align="middle">&nbsp;{t}Printer driver{/t}</h2>
 <table summary="" width="100%">
 	<tr>
 		<td width="50%" style="vertical-align:top">
@@ -14,7 +14,7 @@
 </table>
 {if $showOptions eq 1}
 <p class="seperator">&nbsp;</p>
-<h2><img src="images/lamp.png" align="middle">&nbsp;{t}Options{/t}</h2>
+<h2><img class="center" src="images/lamp.png" align="middle">&nbsp;{t}Options{/t}</h2>
 {$properties}
 {/if}
 <p class="plugbottom">

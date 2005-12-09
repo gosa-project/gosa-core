@@ -1,5 +1,5 @@
 <div class="plugtop">
-  <img alt="" src="{$headimage}" align="middle">{t}Change password{/t}
+  <img class="center" alt="" src="{$headimage}" align="middle">{t}Change password{/t}
 </div>
 
 <p>

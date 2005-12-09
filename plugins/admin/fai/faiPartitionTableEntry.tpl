@@ -1,5 +1,5 @@
 <input type="hidden" name="TableEntryFrameSubmitted" value="1">
-<h2><img alt="" src="images/fai_partitionTable.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Device{/t}</h2>
+<h2><img class="center" alt="" src="images/fai_partitionTable.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Device{/t}</h2>
 <table style='width:100%'>
 	<tr>
 		<td style='width:50%;border-right:1px solid #909090;'><LABEL for="DISK_cn">
@@ -17,7 +17,7 @@
 <br>
 <p class="seperator">&nbsp;</p>
 <br>
-<h2><img alt="" src="images/editpaste.png" align="middle" title="{t}Partition entries{/t}">&nbsp;{t}Partition entries{/t}</h2>
+<h2><img class="center" alt="" src="images/editpaste.png" align="middle" title="{t}Partition entries{/t}">&nbsp;{t}Partition entries{/t}</h2>
 {$setup}
 <br>
 <input type="submit" name="AddPartition" value="{t}Add partition{/t}" >

@@ -1,4 +1,4 @@
-<h2><img alt="" src="images/fai_partitionTable.png" align="middle">&nbsp;{t}Edit share{/t}</h2>
+<h2><img class="center" alt="" src="images/fai_partitionTable.png" align="middle">&nbsp;{t}Edit share{/t}</h2>
 <table summary="{t}NFS setup{/t}" width="100%">
 	<tr>
 		<td width="45%">

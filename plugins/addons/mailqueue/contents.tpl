@@ -8,7 +8,7 @@
 	<table width="100%">
 		<tr>
 			<td>
-	<img alt="{t}Search{/t}" src="images/search.png" align="middle" border="0">
+	<img class="center" alt="{t}Search{/t}" src="images/search.png" align="middle" border="0">
 	 &nbsp;{t}Search for{/t}
     <input name="search_for" size="12" maxlength="60" value="{$search_for}" title="{t}Please enter a search string here.{/t}" onchange="mainform.submit()">
  	 &nbsp;in 
@@ -75,7 +75,7 @@
 								document.mainform.header_id.value='{$entries[$key].MailID}';
 								document.mainform.submit();">	
 			{if $entries[$key].Active == true}
-				<img src="images/mailq_active.png" border=0 alt="{t}Active{/t}">
+				<img class="center" src="images/mailq_active.png" border=0 alt="{t}Active{/t}">
 			{/if}
 			
 			{$entries[$key].MailID}</td>
@@ -92,22 +92,22 @@
 		<td titel="{$entries[$key].Error}">{$entries[$key].Error}</td>
 		<td style="text-align:right">
 			<a href="{$plug}&act=del&id={$entries[$key].MailID}&server={$entries[$key].Server}">
-				<img src="images/edittrash.png" border=0 alt="{t}delete{/t}" title="{t}Delete this message{/t}">
+				<img class="center" src="images/edittrash.png" border=0 alt="{t}delete{/t}" title="{t}Delete this message{/t}">
 			</a>
 		{if $entries[$key].Hold == true}
 			<a href="{$plug}&act=unhold&id={$entries[$key].MailID}&server={$entries[$key].Server}">
-				<img src="images/mailq_unhold.png" border=0 alt="{t}unhold{/t}" title="{t}Release message{/t}">
+				<img class="center" src="images/mailq_unhold.png" border=0 alt="{t}unhold{/t}" title="{t}Release message{/t}">
 			</a>
 		{else}
 			<a href="{$plug}&act=hold&id={$entries[$key].MailID}&server={$entries[$key].Server}">
-				<img src="images/mailq_hold.png" border=0 alt="{t}hold{/t}" title="{t}Hold message{/t}">
+				<img class="center" src="images/mailq_hold.png" border=0 alt="{t}hold{/t}" title="{t}Hold message{/t}">
 			</a>
 		{/if}
 			<a href="{$plug}&act=requeue&id={$entries[$key].MailID}&server={$entries[$key].Server}">
-				<img src="images/mailq_requeue.png" border=0 alt="{t}requeue{/t}" title="{t}Requeue this message{/t}">
+				<img class="center" src="images/mailq_requeue.png" border=0 alt="{t}requeue{/t}" title="{t}Requeue this message{/t}">
 			</a>
 			<a href="{$plug}&act=header&id={$entries[$key].MailID}&server={$entries[$key].Server}">
-				<img src="images/mailq_header.png" border=0 alt="{t}header{/t}" title="{t}Display header from this message{/t}">
+				<img class="center" src="images/mailq_header.png" border=0 alt="{t}header{/t}" title="{t}Display header from this message{/t}">
 			</a>
 		</td>
 	</tr>

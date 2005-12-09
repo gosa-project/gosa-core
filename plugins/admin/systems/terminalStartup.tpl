@@ -1,4 +1,4 @@
-<h2><img alt="" align="middle" src="images/penguin.png"> {t}Boot parameters{/t}</h2>
+<h2><img class="center" alt="" align="middle" src="images/penguin.png"> {t}Boot parameters{/t}</h2>
 <table summary="" style="width:100%;">
  <tr>
   <td style="width:50%; vertical-align:top;">
@@ -50,7 +50,7 @@
  <tr>
   <td style="width:50%; vertical-align:top;">
    <h2>
-    <img alt="" align="middle" src="images/hardware.png"> {t}Kernel modules (format: name parameters){/t}
+    <img class="center" alt="" align="middle" src="images/hardware.png"> {t}Kernel modules (format: name parameters){/t}
    </h2>
     <select style="width:100%;" name="modules_list[]" size=15 multiple title="{t}Add additional modules to load on startup{/t}">
      {html_options values=$gotoModules output=$gotoModules}
@@ -63,7 +63,7 @@
   </td>
 
   <td style="padding-left:10px;border-left:1px solid #A0A0A0;vertical-align:top">
-        <h2><img alt="" src="images/fai_partitionTable.png" align="middle">&nbsp;<LABEL for="gotoShare">{t}Shares{/t}</LABEL></h2>
+        <h2><img class="center" alt="" src="images/fai_partitionTable.png" align="middle">&nbsp;<LABEL for="gotoShare">{t}Shares{/t}</LABEL></h2>
         <table summary="" style="width:100%">
                 <tr>
                         <td>

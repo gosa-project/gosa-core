@@ -1,4 +1,4 @@
-<h2><img alt="" src="images/hotplug.png" align="middle">&nbsp;{t}Create new hotplug entry{/t}</h2>
+<h2><img class="center" alt="" src="images/hotplug.png" align="middle">&nbsp;{t}Create new hotplug entry{/t}</h2>
 	
 	<input type="hidden" name="dialogissubmitted" value="1">
 	

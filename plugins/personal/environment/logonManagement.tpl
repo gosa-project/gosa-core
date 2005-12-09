@@ -1,4 +1,4 @@
-<h2><img alt="" src="images/fai_script.png" align="middle">&nbsp;{t}Logon script management{/t}</h2>
+<h2><img class="center" alt="" src="images/fai_script.png" align="middle">&nbsp;{t}Logon script management{/t}</h2>
 
     <input type="hidden" name="dialogissubmitted" value="1">
 
@@ -52,7 +52,7 @@
 	<table width=100%>
 		<tr>
 			<td colspan="2">
-			<h2><img alt="" src="images/fai_script.png" align="middle">&nbsp;{t}Script{/t}</h2>
+			<h2><img class="center" alt="" src="images/fai_script.png" align="middle">&nbsp;{t}Script{/t}</h2>
 					<table width="100%" summary="{t}Logon script{/t}">
 						<tr>
 							<td>

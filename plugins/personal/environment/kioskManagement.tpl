@@ -1,4 +1,4 @@
-<h2><img alt="" src="images/house.png" align="middle">&nbsp;<LABEL for="gotoKioskProfile">{t}Kiosk profile management{/t}</LABEL></h2>
+<h2><img alt="" class="center" src="images/house.png" align="middle">&nbsp;<LABEL for="gotoKioskProfile">{t}Kiosk profile management{/t}</LABEL></h2>
 
     <input type="hidden" name="dialogissubmitted" value="1">
 

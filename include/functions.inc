@@ -1256,7 +1256,7 @@ function range_selector($dcnt,$start,$range=25,$post_var=false)
   if ($start > 0 ) {
     $output.="  <a href= \"main.php?plug=".validate($_GET['plug'])."&amp;start=".
       (($start-$range))."\">".
-      "<img alt=\"\" src=\"images/back.png\" border=0 align=\"middle\"></a>";
+      "<img class=\"center\" alt=\"\" src=\"images/back.png\" border=0 align=\"middle\"></a>";
   }
 
   /* Draw pages */
@@ -1275,7 +1275,7 @@ function range_selector($dcnt,$start,$range=25,$post_var=false)
   if($start < ($dcnt-$range)) {
     $output.="  <a href= \"main.php?plug=".validate($_GET['plug'])."&amp;start=".
       (($start+($range)))."\">".
-      "<img alt=\"\" src=\"images/forward.png\" border=0 align=\"middle\"></a>";
+      "<img class=\"center\" alt=\"\" src=\"images/forward.png\" border=0 align=\"middle\"></a>";
   }
 
   if(($post_var)&&($numpages)){
