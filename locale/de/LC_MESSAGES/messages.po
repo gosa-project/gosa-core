@@ -12,13 +12,12 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2005-12-08 16:26+0100\n"
+"PO-Revision-Date: 2005-12-09 12:15+0100\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
-"Language-Team: Deutsch <de@li.org>\n"
+"Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.1\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: contrib/gosa.conf:4
 msgid "My account"
@@ -6749,7 +6748,7 @@ msgstr "Ungültige IP-Adresse in Feld IP-Adresse"
 msgid ""
 "The given macaddress is invalid. There must be 6 2byte segments seperated by "
 "':'."
-msgstr ""
+msgstr "Die angebene MAC-Adresse ist nicht korrekt. Es müssen sechs 2-Byte Segmente angegeben werden (getrennt durch ':')."
 
 #: plugins/admin/systems/class_phoneGeneric.inc:297
 msgid "You have no permissions to create a phone on this 'Base'."
@@ -7147,19 +7146,17 @@ msgid "Release"
 msgstr "Release"
 
 #: plugins/admin/systems/servRepositorySetup.tpl:15
-#, fuzzy
 msgid "Parent server"
-msgstr "Druck-Dienst"
+msgstr "Parent-Server"
 
 #: plugins/admin/systems/servRepositorySetup.tpl:24
 msgid "Url"
-msgstr ""
+msgstr "URL"
 
 #: plugins/admin/systems/servRepositorySetup.tpl:33
 #: plugins/admin/systems/class_servRepository.inc:152
-#, fuzzy
 msgid "Sections"
-msgstr "Section"
+msgstr "Sections"
 
 #: plugins/admin/systems/workstationStartup.tpl:4
 #: plugins/admin/systems/terminalStartup.tpl:1
@@ -7304,45 +7301,38 @@ msgid "use debug mode for startup"
 msgstr "benutze Fehlersuch-Modus"
 
 #: plugins/admin/systems/class_servRepository.inc:73
-#, fuzzy
 msgid "Remove FAI repository extension."
-msgstr "Drucker-Erweiterung entfernen"
+msgstr "FAI-Repository-Erweiterung entfernen"
 
 #: plugins/admin/systems/class_servRepository.inc:74
-#, fuzzy
 msgid ""
 "This server has FAI repository features enabled. You can disable them by "
 "clicking below."
 msgstr ""
-"Dieser Server besitzt aktivierte die Kolab-Funtionen. Sie können diese durch "
+"Dieser Server besitzt aktivierte FAI-Repository-Erweiterungen. Sie können diese durch "
 "einen Klick auf die Schaltfläche unten deaktivieren."
 
 #: plugins/admin/systems/class_servRepository.inc:76
-#, fuzzy
 msgid "Add FAI repository extension."
-msgstr "Drucker-Erweiterung hinzufügen"
+msgstr "FAI-Repository-Erweiterung hinzufügen"
 
 #: plugins/admin/systems/class_servRepository.inc:77
-#, fuzzy
 msgid ""
 "This server has FAI repository features disabled. You can enable them by "
 "clicking below."
 msgstr ""
-"Aktuell besitzt dieser Server keine aktivierten Kolab-Funktionen. Sie können "
+"Aktuell besitzt dieser Server keine aktivierten FAI-Repository-Erweiterungen. Sie können "
 "diese durch einen Klick auf die Schaltfläche unten aktivieren."
 
 #: plugins/admin/systems/class_servRepository.inc:109
-#, fuzzy
 msgid "This name is already in use."
 msgstr "Der angegebene Name wird bereits verwendet."
 
 #: plugins/admin/systems/servRepository.tpl:7
-#, fuzzy
 msgid "Repositories"
-msgstr "Repository"
+msgstr "Repositories"
 
 #: plugins/admin/systems/servRepository.tpl:40
-#, fuzzy
 msgid "Search filter"
 msgstr "Suche nach"
 
