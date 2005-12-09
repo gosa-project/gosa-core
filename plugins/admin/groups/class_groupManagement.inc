@@ -358,25 +358,25 @@ class groupManagement extends plugin
       "</div>";
 
     
-    $actions = "<input type='image' src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
-    $actions.= "<input type='image' src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
+    $actions = "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
+    $actions.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
 
     // Defining Links
     $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
 
     // image Buttons 
     $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
-    $userimg  = "<img src='images/select_groups.png' alt='User'    title='%s'>";
+    $userimg  = "<img class='center' src='images/select_groups.png' alt='User'    title='%s'>";
 
     // Extension images 
-    $posiximg = "<img src='images/select_groups.png'        alt='P'  title='"._("Posix")  ."'>";
-    $mailimg  = "<img src='images/mailto.png'             alt='M'  title='"._("Mail")   ."'>";
-    $sambaimg = "<img src='images/select_winstation.png'  alt='S'  title='"._("Samba")  ."'>";
-    $applimg  = "<img src='images/select_application.png' alt='A'  title='"._("Application")."'>"; 
-    $phoneimg = "<img src='images/select_phone.png'      alt='Ph' title='"._("Phone")  ."'>"; 
-    $envimg   = "<img src='images/network.png'      alt='E' title='"._("Environment")  ."'>"; 
+    $posiximg = "<img class='center' src='images/select_groups.png'        alt='P'  title='"._("Posix")  ."'>";
+    $mailimg  = "<img class='center' src='images/mailto.png'             alt='M'  title='"._("Mail")   ."'>";
+    $sambaimg = "<img class='center' src='images/select_winstation.png'  alt='S'  title='"._("Samba")  ."'>";
+    $applimg  = "<img class='center' src='images/select_application.png' alt='A'  title='"._("Application")."'>"; 
+    $phoneimg = "<img class='center' src='images/select_phone.png'      alt='Ph' title='"._("Phone")  ."'>"; 
+    $envimg   = "<img class='center' src='images/network.png'      alt='E' title='"._("Environment")  ."'>"; 
     // Space
-    $empty    = "<img src='images/empty.png' style='width:16px;height:16px;' alt=''>";
+    $empty    = "<img class='center' src='images/empty.png' style='width:16px;height:16px;' alt=''>";
 
 
     $divlist = new divlist("groupstab");

@@ -301,9 +301,9 @@ class applicationManagement extends plugin
                 /* Don't show buttons if tab dialog requests this */
                 if (!$this->apptabs->by_object[$this->apptabs->current]->dialog){
                         $display.= "<p style=\"text-align:right\">\n";
-                        $display.= "<input type=submit name=\"edit_finish\" value=\""._("Finish")."\">\n";
+                        $display.= "<input type=\"submit\" name=\"edit_finish\" value=\""._("Finish")."\">\n";
                         $display.= "&nbsp;\n";
-                        $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
+                        $display.= "<input type=\"submit\" name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
                         $display.= "</p>";
                 }
                 return ($display);
@@ -315,7 +315,7 @@ class applicationManagement extends plugin
         $options= "";
         foreach ($this->config->idepartments as $key => $value){
           if ($appfilter['depselect'] == $key){
-            $options.= "<option selected value='$key'>$value</option>";
+            $options.= "<option selected='selected' value='$key'>$value</option>";
           } else {
             $options.= "<option value='$key'>$value</option>";
           }
@@ -334,21 +334,21 @@ class applicationManagement extends plugin
           "</div>";
 
 
-        $actions = "<input type='image' src='images/edit.png' alt='"._("edit")."' name='appl_edit_%KEY%' title='"._("Edit this entry")."'>";
-        $actions.= "<input type='image' src='images/edittrash.png' alt='"._("delete")."' name='appl_del_%KEY%' title='"._("Delete this entry")."'>";
+        $actions = "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."' name='appl_edit_%KEY%' title='"._("Edit this entry")."'>";
+        $actions.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."' name='appl_del_%KEY%' title='"._("Delete this entry")."'>";
 
         // Defining Links
         $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
 
         // image Buttons
         $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
-        $userimg  = "<img src='images/select_groups.png' alt='User'    title='%s'>";
+        $userimg  = "<img class='center' src='images/select_groups.png' alt='User'    title='%s'>";
 
         // Extension images
-        $applimg  = "<img src='images/select_application.png' alt='A'  title='"._("Application")."'>";
+        $applimg  = "<img class='center' src='images/select_application.png' alt='A'  title='"._("Application")."'>";
 
         // Space
-        $empty    = "<img src='images/empty.png' style='width:16px;height:16px;' alt=''>";
+        $empty    = "<img class='center' src='images/empty.png' style='width:16px;height:16px;' alt=''>";
 
 
         $divlist = new divlist("applicationtabs");

@@ -1279,7 +1279,7 @@ function range_selector($dcnt,$start,$range=25,$post_var=false)
   }
 
   if(($post_var)&&($numpages)){
-    $output.= "</td><td style='width:25%;text-align:right'>&nbsp;"._("Entries per page")."&nbsp;<select name='".$post_var."' onChange='javascript:document.mainform.submit()'>";
+    $output.= "</td><td style='width:25%;text-align:right;vertical-align:middle;'>&nbsp;"._("Entries per page")."&nbsp;<select style='vertical-align:middle;' name='".$post_var."' onChange='javascript:document.mainform.submit()'>";
     foreach(array(20,50,100,200,"all") as $num){
       if($num == "all"){
         $var = 10000;
@@ -1287,7 +1287,7 @@ function range_selector($dcnt,$start,$range=25,$post_var=false)
         $var = $num;
       }
       if($var == $range){
-        $output.="\n<option selected value='".$var."'>".$num."</option>";
+        $output.="\n<option selected='selected' value='".$var."'>".$num."</option>";
       }else{  
         $output.="\n<option value='".$var."'>".$num."</option>";
       }

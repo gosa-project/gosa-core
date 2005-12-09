@@ -297,8 +297,8 @@ class blocklist extends plugin
         " <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
         "</div>";
 
-      $action= "<input type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit user")."'>";
-      $action.= "<input type='image' src='images/edittrash.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete user")."'>";
+      $action= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit user")."'>";
+      $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete user")."'>";
 
 
       $divlist = new divlist("faxtabs");
@@ -333,7 +333,7 @@ class blocklist extends plugin
       }
 
       // User and Template  Images
-      $blockimg = "<img src='images/list_blocklist.png' alt='User' title='%s'>";
+      $blockimg = "<img class='center' src='images/list_blocklist.png' alt='User' title='%s'>";
       $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
 
       foreach($this->blocklists as $key => $val){

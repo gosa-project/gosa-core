@@ -389,14 +389,14 @@ class faiManagement extends plugin
 				
 			}elseif(((isset($this->dialog->current))&&(!$this->dialog->by_object[$this->dialog->current]->is_dialog))){
 				$display.= "<p style=\"text-align:right\">\n";
-				$display.= "<input type=submit name=\"edit_finish\" value=\""._("Finish")."\">\n";
+				$display.= "<input type=\"submit\" name=\"edit_finish\" value=\""._("Finish")."\">\n";
 				$display.= "&nbsp;\n";
-				$display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
+				$display.= "<input type=\"submit\" name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
 				$display.= "</p>";
 			}elseif(!isset($this->dialog->current)){
 				$display.= "<p style=\"text-align:right\">\n";
-				$display.= "<input type=submit name=\"edit_continue\" value=\""._("Continue")."\">&nbsp;";
-				$display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
+				$display.= "<input type=\"submit\" name=\"edit_continue\" value=\""._("Continue")."\">&nbsp;";
+				$display.= "<input type=\"submit\" name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
 				$display.= "</p>";
 			}
 			return($display);
@@ -412,7 +412,7 @@ class faiManagement extends plugin
 		$options= "";
 		foreach ($this->config->idepartments as $key => $value){
 			if ($faifilter['base'] == $key){
-				$options.= "<option selected value='$key'>$value</option>";
+				$options.= "<option selected='selected' value='$key'>$value</option>";
 			} else {
 				$options.= "<option value='$key'>$value</option>";
 			}
@@ -479,8 +479,8 @@ class faiManagement extends plugin
 					array("string" => _("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'")));
 
 
-		$action  = "<input type='image' src='images/edit.png' 	alt='"._("edit")."'   name='entry_edit_%KEY%' title='"._("Edit class")."'>";
-		$action .= "<input type='image' src='images/edittrash.png' alt='"._("delete")."' name='entry_delete_%KEY%' title='"._("Delete class")."'>";
+		$action  = "<input class='center' type='image' src='images/edit.png' 	alt='"._("edit")."'   name='entry_edit_%KEY%' title='"._("Edit class")."'>";
+		$action .= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."' name='entry_delete_%KEY%' title='"._("Delete class")."'>";
 
 		$editlink ="<a href='?plug=".$_GET['plug']."&edit_entry=%KEY%'>%NAME%</a>"; 		
 		$linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
@@ -522,53 +522,53 @@ class faiManagement extends plugin
 						if(!$faifilter['ShowPartitions']){ 
 							$abort = true;
 						}
-					$img="<img src='images/fai_partitionTable.png' title='"._("Partition table")."' alt='PT'>";
+					$img="<img class='center' src='images/fai_partitionTable.png' title='"._("Partition table")."' alt='PT'>";
 					$info = _("Partition table");
 					break;
 					case "FAIpackageList"		: 
 						if(!$faifilter['ShowPackages']){ 
 							$abort = true;
 						}
-					$img="<img src='images/fai_packages.png' title='"._("Package list")."' alt='PL'>";
+					$img="<img class='center' src='images/fai_packages.png' title='"._("Package list")."' alt='PL'>";
 					$info = _("Package list");
 					break;
 					case "FAIscript"			: 
 						if(!$faifilter['ShowScripts']){ 
 							$abort = true;
 						}
-					$img="<img src='images/fai_script.png' title='"._("Scripts")."' alt='S'>";
+					$img="<img class='center' src='images/fai_script.png' title='"._("Scripts")."' alt='S'>";
 					$info = _("Scripts");
 					break;
 					case "FAIvariable"			: 
 						if(!$faifilter['ShowVariables']){ 
 							$abort = true;
 						}
-					$img="<img src='images/fai_variable.png' title='"._("Variables")."' alt='V'>";
+					$img="<img class='center' src='images/fai_variable.png' title='"._("Variables")."' alt='V'>";
 					$info = _("Variables");
 					break;
 					case "FAIhook"				:
 						if(!$faifilter['ShowHooks']){ 
 							$abort = true;
 						}
-					$img="<img src='images/fai_hook.png' title='"._("Hooks")."' alt='H'>";
+					$img="<img class='center' src='images/fai_hook.png' title='"._("Hooks")."' alt='H'>";
 					$info = _("Hooks");
 					break;
 					case "FAIprofile"			: 
 						if(!$faifilter['ShowProfiles']){ 
 							$abort = true;
 						}
-					$img="<img src='images/fai_profile.png' title='"._("Profile")."' alt='P'>";
+					$img="<img class='center' src='images/fai_profile.png' title='"._("Profile")."' alt='P'>";
 					$info = _("Profile");
 					break;
 					case "FAItemplate"			: 
 						if(!$faifilter['ShowTemplates']){ 
 							$abort = true;
 						}
-					$img="<img src='images/fai_template.png' title='"._("Templates")."' alt='T'>";
+					$img="<img class='center' src='images/fai_template.png' title='"._("Templates")."' alt='T'>";
 					$info = _("Templates");
 					break;
 					default 					: 
-					$img="<img src='images/empty.png' alt=''>";$info = "";break;
+					$img="<img class='center' src='images/empty.png' alt=''>";$info = "";break;
 
 				}
 				

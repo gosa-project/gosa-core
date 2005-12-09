@@ -263,9 +263,9 @@ class phoneConferenceManagment extends plugin
       /* Don't show buttons if tab dialog requests this */
       if (!$this->conftab->by_object[$this->conftab->current]->dialog){
         $display.= "<p style=\"text-align:right\">\n";
-        $display.= "<input type=submit name=\"edit_finish\" value=\""._("Finish")."\">\n";
+        $display.= "<input type=\"submit\" name=\"edit_finish\" value=\""._("Finish")."\">\n";
         $display.= "&nbsp;\n";
-        $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
+        $display.= "<input type=\"submit\" name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
         $display.= "</p>";
       }
       return ($display);
@@ -275,7 +275,7 @@ class phoneConferenceManagment extends plugin
     $options= "";
     foreach ($this->config->idepartments as $key => $value){
       if ($conferencefilter['depselect'] == $key){
-        $options.= "<option selected value='$key'>$value</option>";
+        $options.= "<option selected='selected' value='$key'>$value</option>";
       } else {
         $options.= "<option value='$key'>$value</option>";
       }
@@ -293,10 +293,10 @@ class phoneConferenceManagment extends plugin
       "</div>";
 
     /* Images for delete / edit */
-    $actions = "<input type='image' src='images/edit.png' 		 alt='"._("edit")."' 	  name='conf_edit_%KEY%' title='"._("Edit this entry")."'>";
-    $actions.= "<input type='image' src='images/edittrash.png' alt='"._("delete")."' 	name='conf_del_%KEY%'  title='"._("Delete this entry")."'>";
+    $actions = "<input class='center' type='image' src='images/edit.png' 		 alt='"._("edit")."' 	  name='conf_edit_%KEY%' title='"._("Edit this entry")."'>";
+    $actions.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."' 	name='conf_del_%KEY%'  title='"._("Delete this entry")."'>";
     
-    $actions2= "<input type='image' src='images/edittrash.png' alt='"._("delete")."' 	name='conf_del_%KEY%'  title='"._("Delete this entry")."'>";
+    $actions2= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."' 	name='conf_del_%KEY%'  title='"._("Delete this entry")."'>";
     /* open an entry */
     $linkopen= "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
 
@@ -337,7 +337,7 @@ class phoneConferenceManagment extends plugin
     }
 
     /* Image shown in divlist */
-    $userimg  = "<img src='images/select_conference.png' alt='User' title='%s'>";
+    $userimg  = "<img class='center' src='images/select_conference.png' alt='User' title='%s'>";
 
     /* Edit entry link*/
     $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
@@ -346,7 +346,7 @@ class phoneConferenceManagment extends plugin
     foreach($this->conferences as $conferencekey => $conference ){
 
       if((isset($conference['goFonPIN'][0]))&&(($this->ui->dn==$conference['goFonConferenceOwner'][0])||($this->acl=="#all#"))){
-        $pin = "<img src='images/list_password.png' title='PIN : ".$conference['goFonPIN'][0]."' alt='PIN'>";
+        $pin = "<img class='center' src='images/list_password.png' title='PIN : ".$conference['goFonPIN'][0]."' alt='PIN'>";
       }else{
         $pin = "&nbsp;";
       }

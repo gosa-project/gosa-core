@@ -297,9 +297,9 @@ class gofonMacro extends plugin
       /* Don't show buttons if tab dialog requests this */
       if (!$this->macrotabs->by_object[$this->macrotabs->current]->dialog){
         $display.= "<p style=\"text-align:right\">\n";
-        $display.= "<input type=submit name=\"edit_finish\" value=\""._("Finish")."\">\n";
+        $display.= "<input type=\"submit\" name=\"edit_finish\" value=\""._("Finish")."\">\n";
         $display.= "&nbsp;\n";
-        $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
+        $display.= "<input type=\"submit\" name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
         $display.= "</p>";
       }
       return ($display);
@@ -312,7 +312,7 @@ class gofonMacro extends plugin
     $options= "";
     foreach ($this->config->idepartments as $key => $value){
             if ($macrofilter['depselect'] == $key){
-                    $options.= "<option selected value='$key'>$value</option>";
+                    $options.= "<option selected='selected' value='$key'>$value</option>";
             } else {
                     $options.= "<option value='$key'>$value</option>";
             }
@@ -333,8 +333,8 @@ class gofonMacro extends plugin
 
 
     /* Options */
-    $action= "<input type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit user")."'>";
-    $action.= "<input type='image' src='images/edittrash.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete user")."'>";
+    $action= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit user")."'>";
+    $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete user")."'>";
 
     $divlist = new divlist("macrotabs");
     $divlist->SetHeader(array(
@@ -372,12 +372,12 @@ class gofonMacro extends plugin
     }
 
     // Pictures for Extensions
-    $empty    = "<img src='images/nothing.png' style='width:16px;height:16px;' alt=''>";
+    $empty    = "<img class='center' src='images/nothing.png' style='width:16px;height:16px;' alt=''>";
 
     // User and Template  Images
-    $macroimg   = "<img src='images/list_macro.png' alt='"._("Macro")."' title='%s'>";
-    $visible    = "<img src='images/true.png' alt='"._("yes")."' title='"._("visible")."'>";
-    $invisible  = "<img src='images/false.png' alt='"._("no")."'title='"._("invisible")."'>";
+    $macroimg   = "<img class='center' src='images/list_macro.png' alt='"._("Macro")."' title='%s'>";
+    $visible    = "<img class='center' src='images/true.png' alt='"._("yes")."' title='"._("visible")."'>";
+    $invisible  = "<img class='center' src='images/false.png' alt='"._("no")."'title='"._("invisible")."'>";
 
     // Link for edit
     $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";

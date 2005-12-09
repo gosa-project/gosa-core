@@ -368,21 +368,21 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
       "</div>";
 
 
-    $actions = "<input type='image' src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
-    $actions.= "<input type='image' src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
+    $actions = "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
+    $actions.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
 
     // Defining Links
     $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
 
     // image Buttons
     $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
-    $userimg  = "<img src='images/select_groups.png' alt='User'    title='%s'>";
+    $userimg  = "<img class='center' src='images/select_groups.png' alt='User'    title='%s'>";
 
     // Extension images
-    $mailimg  = "<img src='images/mailto.png'             alt='M'  title='"._("Mail")   ."'>";
+    $mailimg  = "<img class='center' src='images/mailto.png'             alt='M'  title='"._("Mail")   ."'>";
 
     // Space
-    $empty    = "<img src='images/empty.png' style='width:16px;height:16px;' alt=''>";
+    $empty    = "<img class='center' src='images/empty.png' style='width:16px;height:16px;' alt=''>";
 
     // List Setup
     $divlist = new divlist("ogroubstab");
@@ -509,8 +509,8 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
       $p2['alt']= "";
       $p2['tit']= "";
     }
-    $temp = "<img src='images/".$p1['pic']."' alt='".$p1['alt']."' title='".$p1['tit']."'>";
-    $temp.= "<img src='images/".$p2['pic']."' alt='".$p2['alt']."' title='".$p2['tit']."'>";
+    $temp = "<img class='center' src='images/".$p1['pic']."' alt='".$p1['alt']."' title='".$p1['tit']."'>";
+    $temp.= "<img class='center' src='images/".$p2['pic']."' alt='".$p2['alt']."' title='".$p2['tit']."'>";
     return ($temp);
   }
 

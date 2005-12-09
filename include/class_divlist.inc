@@ -273,8 +273,8 @@ class divlist {
   		  }
       }
   
-      // if fewer than 19 Entries (list not full), print row to fill empty space
-      //if($this->_numEntries()<=18){
+      // if fewer than 22 Entries (list not full), print row to fill empty space
+      if($this->_numEntries()<=22){
         $fill= "";
         for ($i= 1; $i <= $this->cols; $i++){
           if ($i == $this->cols){
@@ -284,7 +284,7 @@ class divlist {
           }
         }
         $s_return.="\n<tr>$fill</tr>";
-      //}
+      }
       $s_return .= "\n</table></div></td></tr>";
       return $s_return;
     }

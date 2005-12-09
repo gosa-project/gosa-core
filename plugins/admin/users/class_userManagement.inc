@@ -678,9 +678,9 @@ class userManagement extends plugin
       " <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
       "</div>";
 
-    $action= "<input type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit user")."'>";
-    $action.= "<input type='image' src='images/list_password.png' alt='"._("password")."' name='user_chgpw_%KEY%' title='"._("Change password")."'>";
-    $action.= "<input type='image' src='images/edittrash.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete user")."'>";
+    $action= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit user")."'>";
+    $action.= "<input class='center' type='image' src='images/list_password.png' alt='"._("password")."' name='user_chgpw_%KEY%' title='"._("Change password")."'>";
+    $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete user")."'>";
 
 
 
@@ -723,29 +723,29 @@ class userManagement extends plugin
     }
 
     /* Pictures for Extensions */
-    $usrimg   ="<input type='image' src='images/penguin.png' alt='"._("GOsa")."'   
+    $usrimg   ="<input class='center' type='image' src='images/penguin.png' alt='"._("GOsa")."'   
                     name='user_edit_%KEY%-user' title='"._("Edit generic properties")."'>";
-    $posiximg = "<input type='image' src='images/select_user.png' alt='"._("Posix")."'  
+    $posiximg = "<input class='center' type='image' src='images/select_user.png' alt='"._("Posix")."'  
                     name='user_edit_%KEY%-posixAccount' title='"._("Edit UNIX properties")."'>";
-    $eviroimg = "<input type='image' src='images/smallenv.png' alt='"._("Environment")."'  
+    $eviroimg = "<input class='center' type='image' src='images/smallenv.png' alt='"._("Environment")."'  
                     name='user_edit_%KEY%-environment' title='"._("Edit environment properties")."'>";
-    $mailimg  = "<input type='image' src='images/mailto.png' alt='"._("Mail")."'     
+    $mailimg  = "<input class='center' type='image' src='images/mailto.png' alt='"._("Mail")."'     
                     name='user_edit_%KEY%-mailAccount' title='"._("Edit mail properties")."'>";
-    $fonimg   = "<input type='image' src='images/%image%' alt='"._("Phone")."'     
+    $fonimg   = "<input class='center' type='image' src='images/%image%' alt='"._("Phone")."'     
                     name='user_edit_%KEY%-phoneAccount' title='"._("Edit phone properties")."%title%'>";
-    $faximg   = "<input type='image' src='images/fax_small.png' alt='"._("Fax")."'     
+    $faximg   = "<input class='center' type='image' src='images/fax_small.png' alt='"._("Fax")."'     
                     name='user_edit_%KEY%-gofaxAccount' title='"._("Edit fax properies")."'>";
-    $sambaimg = "<input type='image' src='images/select_winstation.png' alt='"._("Samba")."'     
+    $sambaimg = "<input class='center' type='image' src='images/select_winstation.png' alt='"._("Samba")."'     
                     name='user_edit_%KEY%-sambaAccount' title='"._("Edit samba properties")."'>"; 
-    $tplcreateuserimg  = "<input type='image' src='images/list_new.png' alt='"._("Create user from template")."'
+    $tplcreateuserimg  = "<input type='image' class='center' src='images/list_new.png' alt='"._("Create user from template")."'
                     name='userfrom_tpl_%KEY%' title='"._("Create user with this template")."'>";   
     
 
-    $empty    = "<img src='images/empty.png' style='width:16px;height:16px;' alt=''>"; 
+    $empty    = "<img class='center' src='images/empty.png' style='width:16px;height:16px;' alt=''>"; 
 
     // User and Template  Images  
-    $userimg  = "<img src='images/select_user.png' alt='User' title='%s'>";   
-    $tplimg   = "<img src='images/select_template.png' alt='Template' title='%s'>";   
+    $userimg  = "<img class='center' src='images/select_user.png' alt='User' title='%s'>";   
+    $tplimg   = "<img class='center' src='images/select_template.png' alt='Template' title='%s'>";   
     $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
 
     // Defines Arrays to save User and Templates

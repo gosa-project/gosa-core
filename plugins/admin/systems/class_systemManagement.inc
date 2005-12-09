@@ -537,9 +537,9 @@ class systems extends plugin
       /* Don't show buttons if tab dialog requests this */
       if (!$this->systab->by_object[$this->systab->current]->dialog){
         $display.= "<p style=\"text-align:right\">\n";
-        $display.= "<input type=submit name=\"edit_finish\" value=\""._("Finish")."\">\n";
+        $display.= "<input type=\"submit\" name=\"edit_finish\" value=\""._("Finish")."\">\n";
         $display.= "&nbsp;\n";
-        $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
+        $display.= "<input type=\"submit\" name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
         $display.= "</p>";
       }
       return ($display);
@@ -554,7 +554,7 @@ class systems extends plugin
     $options= "";
     foreach ($this->config->idepartments as $key => $value){
             if ($terminalfilter['depselect'] == $key){
-                    $options.= "<option selected value='$key'>$value</option>";
+                    $options.= "<option selected='selected' value='$key'>$value</option>";
             } else {
                     $options.= "<option value='$key'>$value</option>";
             }
@@ -580,8 +580,8 @@ class systems extends plugin
 
 
 
-    $action= "<input type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit system")."'>";
-    $action.= "<input type='image' src='images/edittrash.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete system")."'>";
+    $action= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit system")."'>";
+    $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete system")."'>";
 
 
     $divlist = new divlist("systemstab");
@@ -623,16 +623,16 @@ class systems extends plugin
     $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
 
     // Pictures for Extensions
-    $img1  = "<img src='images/printer.png'            alt='C' title='"._("Cups Server")  ."'>";
-    $img2  = "<img src='images/scanner.png'            alt='L' title='"._("Log Db") ."'>";
-    $img3  = "<img src='images/select_terminal.png'    alt='L' title='"._("Syslog Server") ."'>";
-    $img4  = "<img src='images/mailto.png'             alt='M' title='"._("Mail Server")  ."'>";
-    $img5  = "<img src='images/select_phone.png'       alt='I' title='"._("Imap Server") ."'>";
-    $img6  = "<img src='images/fax_small.png'          alt='F' title='"._("Nfs Server")   ."'>";
-    $img7  = "<img src='images/select_winstation.png'  alt='K' title='"._("Kerberos Server") ."'>";
-    $img8  = "<img src='images/select_phone.png'       alt='A' title='"._("Asterisk Server") ."'>";
-    $img9  = "<img src='images/fax_small.png'          alt='F' title='"._("Fax Server") ."'>";
-    $img10 = "<img src='images/save.png'               alt='L' title='"._("Ldap Server") ."'>";
+    $img1  = "<img class='center' src='images/printer.png'            alt='C' title='"._("Cups Server")  ."'>";
+    $img2  = "<img class='center' src='images/scanner.png'            alt='L' title='"._("Log Db") ."'>";
+    $img3  = "<img class='center' src='images/select_terminal.png'    alt='L' title='"._("Syslog Server") ."'>";
+    $img4  = "<img class='center' src='images/mailto.png'             alt='M' title='"._("Mail Server")  ."'>";
+    $img5  = "<img class='center' src='images/select_phone.png'       alt='I' title='"._("Imap Server") ."'>";
+    $img6  = "<img class='center' src='images/fax_small.png'          alt='F' title='"._("Nfs Server")   ."'>";
+    $img7  = "<img class='center' src='images/select_winstation.png'  alt='K' title='"._("Kerberos Server") ."'>";
+    $img8  = "<img class='center' src='images/select_phone.png'       alt='A' title='"._("Asterisk Server") ."'>";
+    $img9  = "<img class='center' src='images/fax_small.png'          alt='F' title='"._("Fax Server") ."'>";
+    $img10 = "<img class='center' src='images/save.png'               alt='L' title='"._("Ldap Server") ."'>";
 
     // Test Every Entry and generate divlist Array
     foreach($this->terminals as $key => $val){
@@ -658,7 +658,7 @@ class systems extends plugin
       }
 
       if((in_array("gotoTerminal",$val['objectClass']))||(in_array("gotoWorkstation",$val['objectClass']))){
-        $action2 = "<input type='image' src='images/certs.png' alt='"._("Password")."'   name='user_setpwd_%KEY%' title='"._("Set root password")."'>";
+        $action2 = "<input class='center' type='image' src='images/certs.png' alt='"._("Password")."'   name='user_setpwd_%KEY%' title='"._("Set root password")."'>";
       }else{
         $action2 = "";
       }
@@ -719,7 +719,7 @@ class systems extends plugin
    }
    foreach ($conv  as $key => $value){
       if($input['type']==$key){
-        $tmp['img'] ="<img src='images/".$value[0]."' alt='".$key."' title='".$value['1']."'>";
+        $tmp['img'] ="<img class='center' src='images/".$value[0]."' alt='".$key."' title='".$value['1']."'>";
         $tmp['class']=$key;
         return $tmp;
       }
