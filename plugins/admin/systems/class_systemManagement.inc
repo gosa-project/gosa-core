@@ -462,7 +462,8 @@ class systems extends plugin
           $this->systab= new $tabtype($this->config,
              $this->config->data['TABS']['TERMTABS'], $this->dn);
           $this->systab->set_acl(array($this->acl));
-          $this->systab->by_object['termgeneric']->remove_from_parent ();
+          $this->systab->delete();
+          #$this->systab->by_object['termgeneric']->remove_from_parent ();
         }
         unset ($this->systab);
         gosa_log ("System object'".$this->dn."' has been removed");

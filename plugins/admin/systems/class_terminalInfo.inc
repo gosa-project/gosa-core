@@ -223,9 +223,6 @@ class terminfo extends plugin
 
   function remove_from_parent()
   {
-    $ldap= $this->config->get_ldap_link();
-    $ldap->rmdir($this->dn);
-    show_ldap_error($ldap->get_error());
   }
 
 
