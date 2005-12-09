@@ -24,26 +24,25 @@ require_once ("../include/php_setup.inc");
 require_once ("functions.inc");
 session_start ();
 
-/* Language setup */
-if ($config->data['MAIN']['LANG'] == ""){
-  $lang= get_browser_language();
-} else {
-  $lang= $config->data['MAIN']['LANG'];
-}
-$lang.=".UTF-8";
-putenv("LANGUAGE=");
-putenv("LANG=$lang");
-setlocale(LC_ALL, $lang);
-$GLOBALS['t_language']= $lang;
-$GLOBALS['t_gettext_message_dir'] = $BASE_DIR.'/locale/';
-
-/* Set the text domain as 'messages' */
-$domain = 'messages';
-bindtextdomain($domain, "$BASE_DIR/locale");
-textdomain($domain);
-
 /* Do logout-logging and destroy session */
 if (!isset($_SESSION["ui"])){
+  /* Language setup */
+  if ($config->data['MAIN']['LANG'] == ""){
+    $lang= get_browser_language();
+  } else {
+    $lang= $config->data['MAIN']['LANG'];
+  }
+  $lang.=".UTF-8";
+  putenv("LANGUAGE=");
+  putenv("LANG=$lang");
+  setlocale(LC_ALL, $lang);
+  $GLOBALS['t_language']= $lang;
+  $GLOBALS['t_gettext_message_dir'] = $BASE_DIR.'/locale/';
+
+  /* Set the text domain as 'messages' */
+  $domain = 'messages';
+  bindtextdomain($domain, "$BASE_DIR/locale");
+  textdomain($domain);
     
   /* Set template compile directory */
   $smarty= new smarty();
