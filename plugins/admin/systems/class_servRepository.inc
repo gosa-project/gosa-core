@@ -8,7 +8,7 @@ class servrepository extends plugin
   var $cli_parameters       = array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* attribute list for save action */
-//  var $ignore_account         = TRUE;
+  //  var $ignore_account         = TRUE;
   var $attributes             = array("FAIrepository");
   var $objectclasses          = array("FAIrepositoryServer");
   
@@ -26,22 +26,26 @@ class servrepository extends plugin
   {
     plugin::plugin ($config, $dn);
     $this->repositories = array();
-    for($i = 0; $i < $this->attrs['FAIrepository']['count']; $i++){
-      $tmp = split("\|",$this->attrs['FAIrepository'][$i]);
-      $tmp2 = array();  
-      $tmp3 = array();   
- 
-      $tmp2['ParentServer'] = $tmp[1];
-      $tmp2['Url']          = $tmp[0];
-      $tmp2['Release']      = $tmp[2];
-      
-      $tmp3 = split(",",$tmp[3]);
-    
-      foreach($tmp3 as $sec){
-        $tmp2['Sections'][$sec]=$sec;
-      }    
-      $this->repositories[$tmp[2]]=$tmp2;      
-      
+    if(isset($this->attrs['FAIrepository'])){
+      for($i = 0; $i < $this->attrs['FAIrepository']['count']; $i++){
+        $tmp = split("\|",$this->attrs['FAIrepository'][$i]);
+        $tmp2 = array();  
+        $tmp3 = array();   
+
+        $tmp2['ParentServer'] = $tmp[1];
+        if(empty($tmp[1])){
+          $tmp2['ParentServer'] = "none";
+        }
+        $tmp2['Url']          = $tmp[0];
+        $tmp2['Release']      = $tmp[2];
+
+        $tmp3 = split(",",$tmp[3]);
+
+        foreach($tmp3 as $sec){
+          $tmp2['Sections'][$sec]=$sec;
+        }    
+        $this->repositories[$tmp[2]]=$tmp2;      
+      }
     }
   }
 
@@ -85,6 +89,13 @@ class servrepository extends plugin
     
     $once = false;
     foreach($_POST as $name => $value){
+      if((preg_match("/^delete_/",$name))&&(!$once)){
+        if(isset($this->repositories[$value])){
+          $once = true;
+          unset($this->repositories[$value]);
+        }
+      }
+
       if((preg_match("/^edit_/",$name))&&(!$once)){
         if(isset($this->repositories[$value])){
           $once = true;
@@ -96,6 +107,13 @@ class servrepository extends plugin
           $this->dialog->acl = $this->acl;
         }
       }
+    }
+
+    if((isset($_GET['act']))&&($_GET['act']=="open")&&(isset($_GET['id']))){
+      $obj = $this->repositories[$_GET['id']];
+      $obj['initialy_was'] = $obj['Release'];
+      $this->dialog = new servRepositorySetup($this->config,$this->dn,$obj);
+      $this->dialog->acl = $this->acl;
     }
  
     if(isset($_POST['AddRepository'])){
@@ -138,8 +156,9 @@ class servrepository extends plugin
 
     $divlist = new divSelectBox("repositories");
     $divlist->setHeight(400);
-
-    $edit = "<input type='image' value='%s' name='edit_%s' src='images/edit.png'>";
+    $link   = "<a href='?plug=".$_GET['plug']."&act=open&id=%s'>%s</a>";
+    $edit   = "<input type='image' value='%s' name='edit_%s'   src='images/edit.png'>&nbsp;";
+    $delete = "<input type='image' value='%s' name='delete_%s' src='images/edittrash.png'>";
    
     foreach($this->repositories as $name => $reps){
       $str = " ";
@@ -148,9 +167,9 @@ class servrepository extends plugin
       }    
   
       $divlist->AddEntry(array(
-                              array("string"=>$name),
-                              array("string"=>_("Sections")." :".$str),
-                              array("string"=>preg_replace("/%s/",$name,$edit),"attach"=>"style='border-right:0px;'")
+                              array("string"=>preg_replace("/%s/",$name,$link)),
+                              array("string"=>sprintf($link,$name,_("Sections")." :".$str)),
+                              array("string"=>preg_replace("/%s/",$name,$edit.$delete),"attach"=>"style='border-right:0px;'")
                               ));
     }
  
@@ -162,7 +181,23 @@ class servrepository extends plugin
 
   function remove_from_parent()
   {
-    /* This cannot be removed... */
+    plugin::remove_from_parent();    
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd ($this->config->current['BASE']);
+    
+    $ldap->cat($this->dn);
+    
+    if($ldap->count()){
+      $ldap->cd($this->dn);
+      $ldap->modify($this->attrs);      
+      $this->handle_post_events("modify");
+    }else{
+      $ldap->cd ($this->config->current['BASE']);
+      $ldap->create_missing_trees($this->dn);
+      $ldap->cd($this->dn);
+      $ldap->add($this->attrs);
+      $this->handle_post_events("add");
+    }
   }
 
 
@@ -193,6 +228,11 @@ class servrepository extends plugin
         $str.=$sec.",";
       }
       $str=preg_replace("/,$/","",$str);
+        
+      if($conf['ParentServer']=="none"){
+        $conf['ParentServer'] ="";
+      }    
+    
       $arr[]=$conf['Url']."|".$conf['ParentServer']."|".$conf['Release']."|".$str;
     }
     $this->attrs['FAIrepository'] = $arr;

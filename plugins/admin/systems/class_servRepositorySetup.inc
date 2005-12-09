@@ -13,24 +13,21 @@ class servRepositorySetup  extends plugin
   var $objectclasses    = array("whatever");
 
   /* Attributes */
-  var $Release;
-  var $ParentServer;
-  var $Url;
-  var $Sections=array();
-  var $ParentServers;
-
+  var $Release          ="";
+  var $ParentServer     ="";
+  var $Url              ="";   
+  var $Sections         =array();
+  var $ParentServers    ="";
   var $initialy_was=false;
 
   function servRepositorySetup ($config, $dn= NULL,$data = false)
   {
     plugin::plugin ($config, $dn);
     if($data != false){
-      $this->Sections= $data['Sections'];
-      $this->Url= $data['Url'];
-      $this->Release= $data['Release'];
-      $this->ParentServer= $data['ParentServer'];
-      if(isset($data['initialy_was'])){
-        $this->initialy_was= $data['initialy_was'];
+      foreach(array("Sections","Release","Url","ParentServer","initialy_was") as $atr){
+        if(isset($data[$atr])){
+          $this->$atr = $data[$atr];
+        }
       }
     }
   }
@@ -111,8 +108,12 @@ class servRepositorySetup  extends plugin
   {
     $message= array();
 
-    if(!isset($this->Release)){
+    if(empty($this->Release)){
       $message[]=_("Please enter a value for 'release'.");
+    }
+
+    if(empty($this->Url)){
+      $message[] = _("Please specify a valid value for 'url'.");
     }
 
     return ($message);
@@ -132,13 +133,9 @@ class servRepositorySetup  extends plugin
 
   function getParentServers()
   {
-
     $ret = array();
-    
     $ldap = $this->config->get_ldap_link();
-        
     $ldap->cd($this->config->current['BASE']);
-    
     $ldap->search("(objectClass=FAIrepositoryServer)",array("*"));
     while($attr = $ldap->fetch()){
       $ret[$attr['cn'][0]]= $attr['cn'][0];   
