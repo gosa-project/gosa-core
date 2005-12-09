@@ -1247,7 +1247,7 @@ function range_selector($dcnt,$start,$range=25,$post_var=false)
 
   if($post_var){
     $output.= "<div style='border:1px solid #E0E0E0; background-color:#FFFFFF;'>
-              <table width='100%'><tr><td style='width:25%'></td><td style='align:center;'>";
+              <table width='100%'><tr><td style='width:25%'></td><td style='text-align:center;'>";
   }else{
     $output.= "<div style='border:1px solid #E0E0E0; background-color:#FFFFFF;'>";
   }
@@ -1262,11 +1262,11 @@ function range_selector($dcnt,$start,$range=25,$post_var=false)
   /* Draw pages */
   for ($i= $begin; $i < $end; $i++) {
     if ($ppage == $i){
-      $output.= "<a style=\"background-color:#D0D0D0;\" href=\"main.php?plug=".
+      $output.= "<a style=\"vertical-align:middle;background-color:#D0D0D0;\" href=\"main.php?plug=".
         validate($_GET['plug'])."&amp;start=".
         ($i*$range)."\">&nbsp;".($i+1)."&nbsp;</a>";
     } else {
-      $output.= "<a href=\"main.php?plug=".validate($_GET['plug']).
+      $output.= "<a style=\"vertical-align:middle;\" href=\"main.php?plug=".validate($_GET['plug']).
         "&amp;start=".($i*$range)."\">&nbsp;".($i+1)."&nbsp;</a>";
     }
   }
@@ -1275,7 +1275,7 @@ function range_selector($dcnt,$start,$range=25,$post_var=false)
   if($start < ($dcnt-$range)) {
     $output.="  <a href= \"main.php?plug=".validate($_GET['plug'])."&amp;start=".
       (($start+($range)))."\">".
-      "<img class=\"center\" alt=\"\" src=\"images/forward.png\" border=0 align=\"middle\"></a>";
+      "<img class=\"center\" alt=\"\" src=\"images/forward.png\" border=\"0\" align=\"middle\"></a>";
   }
 
   if(($post_var)&&($numpages)){
