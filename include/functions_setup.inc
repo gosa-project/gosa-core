@@ -40,7 +40,7 @@ function is_schema_readable($server, $admin, $password)
   $r= ldap_bind ($ds, $admin, $password);
 
   /* Get base to look for schema */
-  $sr  = @ldap_read ($ds, "", "objectClass=*", array("subschemaSubentry"));
+  $sr  = @ldap_read ($ds, NULL, "objectClass=*", array("subschemaSubentry"));
   $attr= @ldap_get_entries($ds,$sr);
   if (!isset($attr[0]['subschemasubentry'][0])){
     return (false);
@@ -101,7 +101,7 @@ function schema_check($server, $admin, $password, $aff=0,$CalledByIndexPhP=false
   $r= ldap_bind ($ds, $admin, $password);
 
   /* Get base to look for schema */
-  $sr  = @ldap_read ($ds, "", "objectClass=*", array("subschemaSubentry"));
+  $sr  = @ldap_read ($ds, NULL, "objectClass=*", array("subschemaSubentry"));
   $attr= @ldap_get_entries($ds,$sr);
   if (!isset($attr[0]['subschemasubentry'][0])){
     return (array(array("msg" => _("Can't get schema information from server. No schema check possible!"), "status" => FALSE)));
@@ -824,14 +824,14 @@ function show_setup_page4($withoutput = true)
       print_red (_("Can't bind to the specified LDAP server! Please make sure that it is reachable for GOsa."));
     }
   } else {
-    $sr=   @ldap_search ($ds, "", "objectClass=*", array("namingContexts"));
+    $sr=   @ldap_search ($ds, NULL, "objectClass=*", array("namingContexts"));
     $attr= @ldap_get_entries($ds,$sr);
 
     if((empty($attr))) {
       $base= "dc=example,dc=net";
 
       if($withoutput){
-        print_red(_("Bind to server successful, but the server seems to be completly empty, please check all informations twice"));
+        print_red(_("Bind to server successful, but the server seems to be completly empty, please check all information twice"));
       }
 
     } else {
