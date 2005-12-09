@@ -12,183 +12,115 @@ class faiPackageNew extends plugin
   var $attributes         = array();
   var $objectclasses      = array();
  
-  var $mirrors            = array(); // The possible mirror,release and section combinations
-  var $servers            = array(); // All available server
   var $sections           = array(); // All sections
   var $releases           = array(); // Releases 
 
-  var $FAIdebianRelease   = "";     // The selected release
-  var $FAIdebianSection   = array();     // selected section
-  var $FAIdebianMirror    = "";     // selected mirror
-
+  var $FAIdebianRelease   = "";           // The selected release
+  var $FAIdebianSection   = array();      // selected section
 
   var $obj;
 
-  function faiPackageNew ($config, $dn= NULL,$mirrors,$servers,$sections,$releases)
+  function faiPackageNew ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
-    $this->mirrors  = $mirrors;
-    $this->servers  = $servers;
-    $this->sections = $sections;
-    $this->releases = $releases;
-
-    foreach($this->sections as $sec){
-      $this->sections[$sec]  =false;
-    }
   }
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+	  /* Call parent execute */
+	  plugin::execute();
+    $display = "";
+    $smarty = get_smarty(); 
+    $atr = $this->getServerInfos(); 
+    foreach($atr as $release => $sections){
+      $releases[$release]=$release;
+    }
+    if(!empty($this->FAIdebianRelease)){
+      $sections = $atr[$this->FAIdebianRelease] ;
+    }else{
+      $sections = array();
+    }
 
     /* Fill templating stuff */
-    $smarty     = get_smarty();
-    $display = "";
-
-    // reset grayout options 
-    $disableRelease   = false;
-    $disableMirror    = false;
-    $disableContinue  = false;
-    $disableSection   = false;
-
-    /* Post handling for Section, Release and Mirror Setup */
-    if(isset($_POST['SetRepository'])){
-      foreach($this->sections as $sec => $val){
-        if(isset($_POST[$sec])){
-          $this->sections[$sec]=true;
-          $this->FAIdebianSection[$sec]=$sec;
-        }else{
-          $this->sections[$sec]=false;
-        }
-      }
-    
-    }
-
-    /* Grayout settings */    
-    if(empty($this->FAIdebianRelease)){
-      $disableSection = $disableMirror  = $disableContinue = true;
-    }elseif(empty($this->FAIdebianSection)){
-      $disableRelease = $disableMirror  = $disableContinue = true;
-    }elseif(empty($this->FAIdebianMirror)){
-      $disableRelease = $disableSection =  true;
+    if((empty($this->FAIdebianRelease))||(count($this->FAIdebianSection)==0)){
+      $smarty->assign("goon"," disabled ");
     }else{
-      $disableRelease = $disableSection =  true;
+      $smarty->assign("goon"," ");
     }
 
-    /* check servers matching release and section settings */
-    $availableServer = array();
-    foreach($this->mirrors as $mir){
-    
-      /* Check if release and section match */
-      if($mir['release'] == $this->FAIdebianRelease){
-        $pass = true;
-    
-        foreach($this->FAIdebianSection as $sec){
-
-        /* If a mirror match, attach */
-          if($sec != $mir['section']){
-            $pass = false;
-          }
-
-        /* Save all matching */ 
-        if($pass){
-            $availableServer[$mir['mirror']]=$mir['mirror'];
-          }
-        }
-      }
-    }
-
-    /* If no servers matching the settings, allow setting release and section again */
-    if(($disableMirror==false)&&(count($availableServer)==0)){
-      $this->FAIdebianRelease = $this->FAIdebianMirror = "";
-      $this->FAIdebianSection = array();
-      $disableSection = $disableMirror  = $disableContinue = true;
-      $disableRelease = false;
-    }
-
-    /* Create checkboxes for the avaliable sections */
-    $strsec = "<table><tr>";
-    foreach($this->sections as $sec => $val){
-
-      /* Only add this section if it is supported by the selected release */
-      $goon = false;
-      foreach($this->mirrors as $mir){
-
-        /* Is there a release with this section ? */
-        if((($mir['release'] == $this->FAIdebianRelease )&&($mir['section'] == $sec))){
-          $goon = true; 
-        }
-      }
-
-      if($goon){
-        if($this->sections[$sec] == true ){
-          $chk = " checked ";
-        }else{
-          $chk = "";
-        }
-
-        /* Add disabled if needed */
-        if($disableSection){
-          $strsec .= "<td><input type='checkbox' name='".$sec."' disabled ".$chk.">".$sec."</td>";
-        }else{
-          $strsec .= "<td><input type='checkbox' name='".$sec."' ".$chk.">".$sec."</td>";
-        }
-      }
-    }
-    $strsec .= "</table>";
-    
-    /* Add --- to mirror selectbox if it is empty */
-    if(count($availableServer)==0){
-      $availableServer=array("---");
-    }
-
-    /* Tell smarty the grayout settigs */
-    $smarty->assign("ReleaseACL"  , "");
-    $smarty->assign("MirrorACL"   , "");
-    $smarty->assign("ContinueACL" , "");
-    $smarty->assign("SectionACL"  , "");
-
-    if($disableContinue){
-      $smarty->assign("ContinueACL"," disabled ");
-    }
-    if($disableRelease){
-      $smarty->assign("ReleaseACL"," disabled ");
-    }
-    if($disableMirror){
-      $smarty->assign("MirrorACL"," disabled ");
-    }
-    if($disableSection){
-      $smarty->assign("SectionACL"," disabled ");
-    }
-
-
-    $smarty->assign("DisSection",!empty($this->FAIdebianSection));
-    $smarty->assign("DisRelease",!empty($this->FAIdebianRelease));
-
-    $smarty->assign("mirrors" ,$availableServer);
-    $smarty->assign("mirror"  ,$this->FAIdebianMirror);
-    $smarty->assign("releases",$this->releases);
+    $smarty->assign("releases"    ,$releases);
+    $smarty->assign("releaseKeys" ,array_flip($releases));
     $smarty->assign("release" ,$this->FAIdebianRelease);
-    $smarty->assign("sections",$strsec);
-    $smarty->assign("section" ,$this->FAIdebianSection);
+    $smarty->assign("sections",$this->generateSections($sections));
 
     $display.= $smarty->fetch(get_template_path('faiPackageNew.tpl', TRUE));
     return($display);
   }
 
+  function generateSections($secs)
+  {
+    $str = "";
+    if(is_array($secs)){
+      $rel  = " onClick='document.mainform.submit();' ";
+      foreach($secs as $section){
+        if(in_array($section,$this->FAIdebianSection)){
+          $str .= "<input ".$rel." type='checkbox' value='".$section."' name='section_".$section."' checked>".$section."<br>";
+        }else{
+          $str .= "<input ".$rel." type='checkbox' value='".$section."' name='section_".$section."'>".$section."<br>";
+        }
+      }
+    }
+    return($str); 
+  }
+
+  function getServerInfos()
+  {
+    $ret = array();
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(objectClass=FAIrepositoryServer)",array("*"));
+    while($attrs = $ldap->fetch()){
+      if(isset($attrs['FAIrepository'])){
+        for($i =0 ; $i < $attrs['FAIrepository']['count']; $i++){
+          $obj = $attrs['FAIrepository'][$i];
+          $tmp = split("\|",$obj);
+          if(count($tmp)==4){
+            foreach(split(",",$tmp[3]) as $sec){
+              if(!empty($sec)){
+                $ret[$tmp[2]][] =  $sec;
+              }
+            }
+          }
+        } 
+      }
+    }
+    return($ret);
+  }
+
+
   /* Save data to object */
   function save_object()
   {
-    if(isset($_POST['SetRepository'])){
-      /* Post handling for Section, Release and Mirror Setup */
-      if((isset($_POST['FAIdebianReleaseS']))&&(!empty($_POST['FAIdebianReleaseS']))){
-        $this->FAIdebianRelease = $_POST['FAIdebianReleaseS'];
-      }
-      if((isset($_POST['FAIdebianMirrorS']))&&(!empty($_POST['FAIdebianMirrorS']))){
-        $this->FAIdebianMirror = $_POST['FAIdebianMirrorS'];
+    /* Post handling for Section, Release  Setup */
+    if((isset($_POST['FAIdebianReleaseS']))&&(!empty($_POST['FAIdebianReleaseS']))){
+      $this->FAIdebianRelease = $_POST['FAIdebianReleaseS'];
+    }
+
+    /* Get Sections */
+    foreach($_POST as $name => $value){
+      if(preg_match("/^section_/",$name)){
+        $this->FAIdebianSection[$value] = $value;
       }
     }
+
+    /* Remove all section that are not available at the currently selected server */ 
+    $atr = $this->getServerInfos();
+    foreach($this->FAIdebianSection as $section){
+      if(!in_array($section,$atr[$this->FAIdebianRelease])){
+        unset($this->FAIdebianSection[$section]);
+      }
+    }
+
   }
 
   /* Check supplied data */
@@ -200,6 +132,7 @@ class faiPackageNew extends plugin
 
   function save()
   {
+    return(array("FAIdebianRelease"=>$this->FAIdebianRelease,"FAIdebianSection"=>$this->FAIdebianSection));
   }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

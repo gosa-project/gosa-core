@@ -11,7 +11,7 @@ class faiPackage extends plugin
   var $ignore_account   = TRUE;
 
   /* Attributes for this Object */
-  var $attributes       = array("cn","description","FAIpackage","FAIdebianRelease","FAIdebianSection","FAIdebianMirror");
+  var $attributes       = array("cn","description","FAIpackage","FAIdebianRelease","FAIdebianSection");
 
   /* ObjectClasses for this Object*/
   var $objectclasses    = array("top","FAIclass","FAIpackageList","FAIrepository");
@@ -38,7 +38,6 @@ class faiPackage extends plugin
 
   var $FAIdebianRelease          = ""; // The selected release
   var $FAIdebianSection          = ""; // selected section
-  var $FAIdebianMirror           = ""; // selected mirror
   var $mirror                    = ""; // selected mirror
 
   var $servers          = array();  // All available servers
@@ -116,9 +115,6 @@ class faiPackage extends plugin
     }
     $this->confDir = CONFIG_DIR."/fai/";
     $this->FAIpackage = array();
-
-    /* Extract mirror location */
-    $this->mirror= preg_replace("!^[^/]+//([^/]+).*$!", '$1', $this->FAIdebianMirror);
   }
 
   function execute()
@@ -130,8 +126,6 @@ class faiPackage extends plugin
     /* Fill templating stuff */
     $smarty= get_smarty();
     $display= "";
-
-    $this->genMirror();
 
     /* Check if we exist already - no need to ask for revisions, etc. then */
     if ($this->dn != "new"){
@@ -145,23 +139,16 @@ class faiPackage extends plugin
         $this->is_dialog =true;
       }
 
-      /* alert possible missconfigurations */ 
-      if((count($this->releases)==0)||(count($this->servers)==0)||(count($this->sections)==0)){
-        print_red(_("There is no useable package list defined."));
-      }
-
       /* Assign posible changes, for mirror combinations */
       $this->dialog->save_object();
-      $this->dialog->releases = $this->releases;
-      $this->dialog->servers  = $this->servers;
-      $this->dialog->sections = $this->sections;
-      $this->dialog->mirrors  = $this->mirrors;
 
       /* Assign Repository settings*/ 
       if(isset($_POST['SaveObjectNew'])){
-        $this->FAIdebianRelease = $this->dialog->FAIdebianRelease;
-        $this->FAIdebianSection = $this->dialog->FAIdebianSection;
-        $this->FAIdebianMirror  = $this->dialog->FAIdebianMirror;
+        $obj = $this->dialog->save();
+      
+        $this->FAIdebianSection = $obj['FAIdebianSection'];
+        $this->FAIdebianRelease = $obj['FAIdebianRelease'];
+    
         unset($this->dialog);
         $this->dialog = false;
         $this->is_dialog=false;
@@ -180,27 +167,6 @@ class faiPackage extends plugin
       $smarty->assign($attrs,$this->$attrs);
     }
   
-    /* Set mirror if changed */
-    if((isset($_POST['FAIdebianMirrorS']))&&(!empty($_POST['FAIdebianMirrorS']))){
-      $this->FAIdebianMirror = $_POST['FAIdebianMirrorS'];
-    }
-  
-    /* check servers matching release and section settings */
-    $availableServer = array();
-    foreach($this->mirrors as $mir){
-      if($mir['release'] == $this->FAIdebianRelease){
-        $pass = true;
-        foreach($this->FAIdebianSection as $sec){
-          if($sec != $mir['section']){
-            $pass = false;
-          }
-        if($pass){
-            $availableServer[$mir['mirror']]=$mir['mirror'];
-          }
-        }
-      }
-    }
- 
     /* Generate package list */
     $this->list=$this->genPkgs();
 
@@ -239,7 +205,7 @@ class faiPackage extends plugin
 
     /* Configuration dialog open*/
     if((isset($_POST['Conpkg']))&&(isset($_POST['usedPackages']))&&(!empty($_POST['usedPackages']))){
-      $path = "/etc/gosa/fai/".preg_replace("#^[^/]+//([^/]+).*$#","\\1",$this->FAIdebianMirror)."/".$this->FAIdebianRelease."/debconf.d";
+      $path = "/etc/gosa/fai/".$this->FAIdebianRelease."/debconf.d";
       $pkg_config = array();
       if(isset($this->ConfiguredPackages[$_POST['usedPackages']])){
         $pkg_config = $this->ConfiguredPackages[$_POST['usedPackages']];
@@ -274,12 +240,7 @@ class faiPackage extends plugin
     }
 
     $smarty->assign("OptionsACL","");
-    if(empty($this->FAIdebianMirror)){
-      $smarty->assign("OptionsACL"," disabled ");
-    }
 
-    $smarty->assign("mirrors" ,$availableServer);
-    $smarty->assign("mirror"  ,$this->FAIdebianMirror);
     $smarty->assign("releases",$this->releases);
     $smarty->assign("release" ,$this->FAIdebianRelease);
     $smarty->assign("sections",$this->sections);
@@ -287,60 +248,6 @@ class faiPackage extends plugin
     $smarty->assign("usedPackages",$this->printUsedPackages());
     $display.= $smarty->fetch(get_template_path('faiPackage.tpl', TRUE));
     return($display);
-  }
-
-  function genMirror(){
-    $confDir = $this->confDir; 
-    if(!is_readable($confDir)){
-      print_red(sprintf(_("Can't read configuration folder '%s'."),$confDir));
-    }else{
-      
-      /* Try to catch all available mirrors 
-         Possibly check if each server is reachable
-       */
-
-      $this->servers= array();
-      $this->releases=array();  
-      $this->sections=array(); 
-      $this->mirrors= array();
-      $fd = opendir($confDir);
-      while($mirror = readdir($fd)){
-        if((is_dir($confDir.$mirror."/"))&&(($mirror != "." )&&($mirror!=".."))){
-
-          $mirrorDir = $confDir.$mirror."/";
-
-          $fe = opendir($mirrorDir);
-          while($release = readdir($fe)){
-            if((is_dir($mirrorDir.$release))&&(($release != "." )&&($release!=".."))){
-
-              $releaseDir = $mirrorDir.$release."/";
-
-              $ff = opendir($releaseDir);
-              while($section = readdir($ff)){
-                if((is_file($releaseDir.$section))&&(($section != "." )&&($section!="..")&&(!preg_match("/.*\.in$/",$section)))){
-              
-                  $this->servers[$mirror]=$mirror;
-                  $this->releases[$release]=$release;
-                  $this->sections[$section]=$section;
-
-                  $arr=array();
-                  $arr['mirror'] = $mirror;
-                  $arr['release']= $release; 
-                  $arr['section']= $section;
- 
-                  $this->mirrors[] = $arr ;
-                }
-              }
-              fclose($ff);
-            }
-          }
-          fclose($fe);
-        }
-      }
-      fclose($fd);
-    }
-
-
   }
 
   /* Delete me, and all my subtrees
@@ -377,7 +284,7 @@ class faiPackage extends plugin
       $message[]=_("Please select a least one Package.");
     }
   
-    if((empty($this->FAIdebianRelease))||(empty($this->FAIdebianSection))||(empty($this->FAIdebianMirror))){
+    if((empty($this->FAIdebianRelease))||(empty($this->FAIdebianSection))){
       $message[]=_("Please choose a valid combination for your repository setup.");
     }
 
@@ -420,11 +327,10 @@ class faiPackage extends plugin
       $this->buffer=array();
       $a_ret = array();
       foreach($this->FAIdebianSection as $sec){
-        $strID= "/etc/gosa/fai/".preg_replace("#^[^/]+//([^/]+).*$#","\\1",$this->FAIdebianMirror)."/".$this->FAIdebianRelease."/".$sec;
+        $strID= "/etc/gosa/fai/".$this->FAIdebianRelease."/".$sec;
         
         if(!is_file($strID)){
           print_red(sprintf(_("Package file '%s' does not exist."),$strID));
-          $this->FAIdebianMirror="";
           unset($this->buffer);
           return(array());
         }

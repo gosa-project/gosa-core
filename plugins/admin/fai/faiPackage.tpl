@@ -44,19 +44,6 @@
 							{$section}
 						</td>
 					</tr>
-					<tr>
-						<td>
-							<LABEL for="mirror">
-							{t}Mirror{/t}
-							</LABEL>
-						</td>
-						<td>
-							<select name="FAIdebianMirrorS" title="{t}mirror{/t}">
-								{html_options options=$mirrors selected=$mirror}
-							</select>
-							<input type="submit" value="{t}set{/t}" name="SetMirror">
-						</td>
-					</tr>
 				</table>
 		</td>
 	</tr>

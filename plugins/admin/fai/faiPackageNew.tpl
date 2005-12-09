@@ -26,12 +26,11 @@
 		</h2>
 	</td>
 	<td>
-		<select name="FAIdebianReleaseS" title="{t}Release{/t}" {$ReleaseACL}>
-			{html_options options=$releases selected=$release}
+		<select name="FAIdebianReleaseS" title="{t}Release{/t}">
+			{html_options options=$releases values=$releaseKeys selected=$release}
 		</select>
 	</td>
 </tr>
-{if $DisRelease neq false}
 <tr>
 	<td height="30">
         <h2>{t}Sections for this release{/t}: </h2> 
@@ -39,30 +38,15 @@
 	</td>
 	<td>
 		{$sections} 
+		<input type="submit" value="{t}set{/t}" name="SetRepository">
 	</td>
 </tr>
-{/if}
-{if $DisSection neq false}
-<tr>
-	<td height="30">
-		<h2><LABEL for="mirror">{t}Matching mirrors{/t}</LABEL>: </h2>
-	</td>
-	<td>
-		<select name="FAIdebianMirrorS" title="{t}mirror{/t}" {$MirrorACL}>
-			{html_options options=$mirrors selected=$mirror}
-		</select>
-	</td>
-</tr>
-{/if}
 </table>
-{if $ContinueACL neq ""}
-<input type="submit" value="{t}set{/t}" name="SetRepository">
-{/if}
 <p class="seperator">&nbsp;
 </p>
 
 <div align="right" style="align:right;">
-    <input name="SaveObjectNew" value="{t}Continue{/t}" type="submit" {$ContinueACL}>
+    <input name="SaveObjectNew" value="{t}Continue{/t}" type="submit" {$goon}>
     <input name="edit_cancel" value="{t}Cancel{/t}" type="submit">
 </div>
 
