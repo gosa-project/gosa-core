@@ -46,7 +46,7 @@ class workstartup extends plugin
     /* Creating a list of valid Mirrors 
      * none will not be saved to ldap.
      */
-    $this->FAIdebianMirrors   = array("none"=>_("none"));
+    $this->FAIdebianMirrors   = array();
     $ldap   = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
     $ldap->search("(objectClass=FAIrepository)",array("FAIdebianMirror"));

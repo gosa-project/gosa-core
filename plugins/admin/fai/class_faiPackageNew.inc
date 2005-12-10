@@ -61,6 +61,8 @@ class faiPackageNew extends plugin
   {
     $str = "";
     if(is_array($secs)){
+      sort($secs);
+      $secs= array_unique($secs);
       $rel  = " onClick='document.mainform.submit();' ";
       foreach($secs as $section){
         if(in_array($section,$this->FAIdebianSection)){

@@ -32,11 +32,9 @@
     		
 				<table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 					<tr>
-						<td width="50%">
-							<img alt="" src="{$search_image}" align=middle>&nbsp;{t}Display groups of user{/t}
-						</td>
-						<td>
-							<input type='text' name='regex' maxlength='20' value='{$regex}' 
+						<td width="100%">
+							<img alt="" src="{$search_image}" align=middle>&nbsp;
+							<input type='text' name='regex' style='width:90%' maxlength='20' value='{$regex}' 
 								title='{t}Search filter{/t}' onChange="mainform.submit()">
 						</td>
 					</tr>

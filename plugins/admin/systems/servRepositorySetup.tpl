@@ -2,17 +2,17 @@
 
 <table width="100%">
 	<tr>
-		<td width="50%" valign="top">
+		<td width="50%" valign="top" style="border-right:1px solid #A0A0A0">
 			<table>
 				<tr>
-					<td>{t}Release{/t} :
+					<td>{t}Release{/t}
 					</td>
 					<td>
 						<input type="text" value="{$Release}" name="Release" {$ReleaseACL}>
 					</td>
 				</tr>
 				<tr>
-					<td>{t}Parent server{/t} :
+					<td>{t}Parent server{/t}
 					</td>
 					<td>
 						<select name="ParentServer" {$ParentServerACL}>
@@ -21,16 +21,16 @@
 					</td>
 				</tr>
 				<tr>
-					<td>{t}Url{/t} :
+					<td>{t}URL{/t}
 					</td>
 					<td>
-						<input type="text" value="{$Url}" name="Url" {$UrlACL}>
+						<input type="text" size="40" value="{$Url}" name="Url" {$UrlACL}>
 					</td>
 				</tr>
 			</table>
 		</td>
 		<td>
-			{t}Sections{/t} :<br>
+			{t}Sections{/t}<br>
 			{$Sections}
 			<input type="text" 		name="SectionName" value="">
 			<input type="submit" 	name="AddSection"  value="{t}Add{/t}">
@@ -38,9 +38,8 @@
 	</tr>
 </table>
 <p class="plugbottom">
-  <input type=submit name="repository_setup_save" value="{t}Save{/t}">
+  <input type=submit name="repository_setup_save" value="{t}Apply{/t}">
   &nbsp;
   <input type=submit name="repository_setup_cancel" value="{t}Cancel{/t}">
 </p>
 
-		

@@ -72,7 +72,7 @@ class servRepositorySetup  extends plugin
     }
 
     $divlist = new divSelectBox("servRepositorySetup");
-    $divlist->setHeight("120");
+    $divlist->setHeight("220");
 
     $dellink = "<input type='image' src='images/edittrash.png' title='delete' alt='delete' name='delete_%s' value='%s'>";
 
@@ -140,7 +140,7 @@ class servRepositorySetup  extends plugin
     while($attr = $ldap->fetch()){
       $ret[$attr['cn'][0]]= $attr['cn'][0];   
     }
-    $ret['none']=_("Master");
+    $ret['none']= "";
     return($ret);
   }
 

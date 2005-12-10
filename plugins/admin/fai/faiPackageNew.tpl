@@ -1,7 +1,4 @@
-<div style="font-size: 18px;">
-    {t}Repository settings{/t}
-</div>
-<br>
+<h1>{t}Repository settings{/t}</h1>
 <p class="seperator">
 {t}To add packages to your package list you have to setup the repository settings first.{/t}
 <br>
@@ -21,9 +18,7 @@
 <table>
 <tr>
 	<td height="30">
-		<h2>
-			<LABEL for="release">{t}Following releases are available{/t}</LABEL>: 
-		</h2>
+		<b><LABEL for="release">{t}Following releases are available{/t}</LABEL></b>
 	</td>
 	<td>
 		<select name="FAIdebianReleaseS" title="{t}Release{/t}">
@@ -32,9 +27,8 @@
 	</td>
 </tr>
 <tr>
-	<td height="30">
-        <h2>{t}Sections for this release{/t}: </h2> 
-		
+	<td height="30" style="vertical-align:top">
+        <b>{t}Sections for this release{/t}</b>
 	</td>
 	<td>
 		{$sections} 
