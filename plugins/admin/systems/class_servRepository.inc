@@ -60,8 +60,9 @@ class servrepository extends plugin
     $display= "";
 
     /* Smarty vars*/
+    $smarty->assign("infoimage",    get_template_path('images/info.png'));
     $smarty->assign("search_image", get_template_path('images/search.png'));
-    $smarty->assign("launchimage",  get_template_path('images/small_filter.png'));
+    $smarty->assign("launchimage",  get_template_path('images/launch.png'));
     $smarty->assign("tree_image",   get_template_path('images/tree.png'));
     $smarty->assign("alphabet",     generate_alphabet());
     $smarty->assign("apply",        apply_filter());
@@ -155,23 +156,36 @@ class servrepository extends plugin
       Repository setup dialog handling /END
     */
 
-    $divlist = new divSelectBox("repositories");
+    $divlist = new divList("repositories");
+    $divlist->SetEntriesPerPage(12);
     $divlist->setHeight(400);
+
+    $divlist->setHeader(array(array("string"=>_("Release"),"attach"=>"style='width:80px;'"),
+                              array("string"=>_("Sections")),
+                              array("string"=>_("Options"),"attach"=>"style='border-right:0px;width:69px;'")
+                       )     );
+
     $link   = "<a href='?plug=".$_GET['plug']."&act=open&id=%s'>%s</a>";
     $edit   = "<input type='image' value='%s' name='edit_%s'   src='images/edit.png'>&nbsp;";
     $delete = "<input type='image' value='%s' name='delete_%s' src='images/edittrash.png'>";
    
     foreach($this->repositories as $name => $reps){
+
       $str = " ";
+
+      if(preg_match("/".str_replace("*",".*",$this->regex)."/",$reps['Release'])){
+    
+
       foreach($reps['Sections'] as $sec){
         $str.=$sec." ";  
       }    
   
       $divlist->AddEntry(array(
-                              array("string"=>preg_replace("/%s/",$name,$link)),
+                              array("string"=>preg_replace("/%s/",$name,$link),"attach"=>"style='width:80px;'"),
                               array("string"=>sprintf($link,$name,_("Sections")." :".$str)),
-                              array("string"=>preg_replace("/%s/",$name,$edit.$delete),"attach"=>"style='border-right:0px;'")
+                              array("string"=>preg_replace("/%s/",$name,$edit.$delete),"attach"=>"style='border-right:0px;width:50px;text-align:right;'")
                               ));
+      }
     }
  
     $smarty -> assign("Repositories",$divlist->DrawList());
@@ -200,6 +214,9 @@ class servrepository extends plugin
   function save_object()
   {
     plugin::save_object();
+    if(isset($_POST['regex'])){
+      $this->regex = $_POST['regex'];
+    }
   }
 
 
