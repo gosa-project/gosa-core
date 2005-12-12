@@ -18,14 +18,15 @@
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
 /* Basic setup, remove eventually registered sessions */
 require_once ("../include/php_setup.inc");
 require_once ("functions.inc");
+header("Content-type: text/html; charset=UTF-8");
+get_dir_list("$BASE_DIR/plugins");
 session_start ();
 
 /* Do logout-logging and destroy session */
-if (!isset($_SESSION["ui"])){
+if (!isset($_SESSION["config"])){
   /* Language setup */
   if ($config->data['MAIN']['LANG'] == ""){
     $lang= get_browser_language();
@@ -53,6 +54,7 @@ if (!isset($_SESSION["ui"])){
   }
   $smarty->display (get_template_path('headers.tpl'));
   $smarty->display (get_template_path('logout.tpl'));
+  @session_destroy ();
   exit;
 }
 $ui= $_SESSION["ui"];
