@@ -17,7 +17,7 @@
    </div>
    <div class="contentboxb" style="padding:0px;margin:0px;" >
    <p class="contentboxb">
-     {t}This menu allows you to create, delete and edit FAI classes.{/t}
+     {t}This menu allows you to create, delete and edit repository settings.{/t}
    </p>
    </div>
    <br>
