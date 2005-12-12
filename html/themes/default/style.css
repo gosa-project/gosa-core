@@ -26,6 +26,12 @@ td.scrollbody {
 	padding:0px;
 }
 
+div.scrollbody {
+	background-color:#ffffff;
+	overflow:auto;
+	text-align:left;
+}
+
 td.listheader#icon {
 	width:20px;
 }

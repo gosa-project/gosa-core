@@ -132,7 +132,7 @@ class divlist {
    
     if($this->i_entriesPerPage == 0) {
       // We need to construct a "body"-table that is width-of-scrollbar thinner than the "head"-table.
-      $s_return .= "\n<tr><td colspan='".$this->cols."' class='scrollbody'><div style='align:left;width:".$this->s_width."px;height:".($this->s_height-20)."px;overflow:auto;background-color:#ffffff;'>";
+      $s_return .= "\n<tr><td colspan='".$this->cols."' class='scrollbody'><div style='width:".$this->s_width."px;height:".($this->s_height-20)."px;' class='scrollbody'>";
 
       $s_return .= "<table style='height:100%;width:581px;' cellspacing='0'>";
   	}
