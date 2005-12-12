@@ -8,6 +8,7 @@
   </div>
   <div class="contentboxb" style="border-top:1px solid #B0B0B0;">
 {$Repositories}
+<input type="submit" value="{t}Add{/t}" name="AddRepository">
     <input type=hidden name="edit_helper">
   </div>
   </td>
