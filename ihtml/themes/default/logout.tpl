@@ -1,6 +1,6 @@
 <body style="background-color: white;background-image:none;">
 
-<form action='index.php' method='post' name='mainform' onSubmit='js_check(this);return true;'>
+<form action='index.php' method='post' name='mainform'>
 <div style="margin-left:10%; margin-right:10%; margin-top:5%; border:2px solid red;padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:20px;">
  <h1>{t}Your GOsa session has expired!{/t}</h1>
  <p>
