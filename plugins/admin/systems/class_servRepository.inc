@@ -33,18 +33,36 @@ class servrepository extends plugin
         $tmp2 = array();  
         $tmp3 = array();   
 
-        $tmp2['ParentServer'] = $tmp[1];
-        if(empty($tmp[1])){
+        if(isset($tmp[1])){
+          $tmp2['ParentServer'] = $tmp[1];
+          if(empty($tmp[1])){
+            $tmp2['ParentServer'] = "none";
+          }
+        }else{
           $tmp2['ParentServer'] = "none";
         }
-        $tmp2['Url']          = $tmp[0];
-        $tmp2['Release']      = $tmp[2];
 
-        $tmp3 = split(",",$tmp[3]);
+        if(isset($tmp[0])){
+          $tmp2['Url']          = $tmp[0];
+        }else{
+          $tmp2['Url']          = "";
+        }
+  
+        if(isset($tmp[2])){
+          $tmp2['Release']      = $tmp[2];
+        }else{
+          $tmp2['Release']      = "";
+        }
 
-        foreach($tmp3 as $sec){
-          $tmp2['Sections'][$sec]=$sec;
-        }    
+        if(isset($tmp[3])){
+          $tmp3 = split(",",$tmp[3]);
+          foreach($tmp3 as $sec){
+            $tmp2['Sections'][$sec]=$sec;
+          }    
+        }else{
+          $tmp['Section']=array();
+        }
+
         $this->repositories[$tmp[2]]=$tmp2;      
       }
     }
@@ -168,7 +186,15 @@ class servrepository extends plugin
     $link   = "<a href='?plug=".$_GET['plug']."&act=open&id=%s'>%s</a>";
     $edit   = "<input type='image' value='%s' name='edit_%s'   src='images/edit.png'>&nbsp;";
     $delete = "<input type='image' value='%s' name='delete_%s' src='images/edittrash.png'>";
-   
+  
+    if(count($this->repositories)==0){
+      $divlist->AddEntry(array(
+                                array("string"=>"&nbsp;","attach"=>"style='width:80px;'"),
+                                array("string"=>"&nbsp;"),
+                                array("string"=>"&nbsp;","attach"=>"style='border-right:0px;width:50px;text-align:right;'")
+                                ));
+    }
+ 
     foreach($this->repositories as $name => $reps){
 
       $str = " ";
