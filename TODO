@@ -5,6 +5,11 @@ Target for 2.4.1:
 
 * Group mail is not initially add-able?
 
+* Make schema check configurable from gosa.conf
+
+* Check all image buttons, if their posts are handled correctly.
+	IE and Konqueror post different values.... as firefox.
+
 
 Target for 2.5:
 ===============
