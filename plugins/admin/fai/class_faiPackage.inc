@@ -85,7 +85,7 @@ class faiPackage extends plugin
         $tmp['Name']  = $attr['FAIvariable'][0];
         $tmp['Type']  = $attr['FAIvariableType'][0];
 
-        if (isset($attrs['FAIvariableContent'][0])){
+        if (isset($attr['FAIvariableContent'][0])){
           if(!in_array($attr['FAIvariableType'],array("multiselect"))){
             $tmp['Value'] = $attr['FAIvariableContent'][0];
           }else{
