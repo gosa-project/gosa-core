@@ -129,10 +129,9 @@ class mailgroup extends plugin
           $method->disconnect();
         }
 
+        /* Adapt attributes if needed */
+        $method->fixAttributesOnLoad($this);
       }
-
-      /* Adapt attributes if needed */
-      $method->fixAttributesOnLoad($this);
     }
 
     /* Get global filter config */

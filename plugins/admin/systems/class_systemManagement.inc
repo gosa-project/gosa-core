@@ -578,11 +578,8 @@ class systems extends plugin
     " <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='".           _("Submit")."'>&nbsp;".
     "</div>";
 
-
-
     $action= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit system")."'>";
     $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete system")."'>";
-
 
     $divlist = new divlist("systemstab");
     $divlist->SetHeader(array(
