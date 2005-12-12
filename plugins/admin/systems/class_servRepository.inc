@@ -187,14 +187,6 @@ class servrepository extends plugin
     $edit   = "<input type='image' value='%s' name='edit_%s'   src='images/edit.png'>&nbsp;";
     $delete = "<input type='image' value='%s' name='delete_%s' src='images/edittrash.png'>";
   
-    if(count($this->repositories)==0){
-      $divlist->AddEntry(array(
-                                array("string"=>"&nbsp;","attach"=>"style='width:80px;'"),
-                                array("string"=>"&nbsp;"),
-                                array("string"=>"&nbsp;","attach"=>"style='border-right:0px;width:50px;text-align:right;'")
-                                ));
-    }
- 
     foreach($this->repositories as $name => $reps){
 
       $str = " ";
