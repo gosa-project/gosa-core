@@ -62,7 +62,7 @@ class servrepository extends plugin
     /* Smarty vars*/
     $smarty->assign("infoimage",    get_template_path('images/info.png'));
     $smarty->assign("search_image", get_template_path('images/search.png'));
-    $smarty->assign("launchimage",  get_template_path('images/launch.png'));
+    $smarty->assign("launchimage",  get_template_path('images/small_filter.png'));
     $smarty->assign("tree_image",   get_template_path('images/tree.png'));
     $smarty->assign("alphabet",     generate_alphabet());
     $smarty->assign("apply",        apply_filter());

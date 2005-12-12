@@ -15,8 +15,7 @@
    <div class="contentboxh">
     <p class="contentboxh"><img src="{$infoimage}" align="right" alt="[i]">{t}Information{/t}</p>
    </div>
-   <div class="contentboxb" style="padding:0px;margin:0px;" >
-   <p class="contentboxb">
+   <div class="contentboxb" style="padding:0px;margin:0px;" ><p class="contentboxb">
      {t}This menu allows you to create, delete and edit repository settings.{/t}
    </p>
    </div>
