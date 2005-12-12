@@ -103,14 +103,16 @@ class divlist {
 			}
 
   		$s_return.= "\n<td class='listheader' ".$s_value['attach'].">".$s_value['string']."</td>";
+
+      // Increment column counter
+      $this->cols++;
+
 		}
 		
     // Attach a 18px-wide column (used as scrollbar space in body-table),
     // but do this only if we are really using scrolltables.
     if($this->i_entriesPerPage == 0) {
-    //  if($this->_numEntries()>=20) {
-        $s_return .= "\n<td class='listheader' style='width:13px;border-right:0px;'>&nbsp;</td>";
-    //  }
+      $s_return .= "\n<td class='listheader' style='width:13px;border-right:0px;'>&nbsp;</td>";
       $s_return .= "\n</table></td>";
     }
 
@@ -128,17 +130,14 @@ class divlist {
 		$s_key 		= "";
 		$s_return 	= "";
    
-    // We need to construct a "body"-table that is width-of-scrollbar thinner than the "head"-table.
-    $s_return .= "\n<tr><td colspan=".$this->cols." class='scrollbody'><div style='align:left;width:".$this->s_width."px;height:".($this->s_height-20)."px;overflow:auto;background-color:#ffffff;'>";
+    if($this->i_entriesPerPage == 0) {
+      // We need to construct a "body"-table that is width-of-scrollbar thinner than the "head"-table.
+      $s_return .= "\n<tr><td colspan='".$this->cols."' class='scrollbody'><div style='align:left;width:".$this->s_width."px;height:".($this->s_height-20)."px;overflow:auto;background-color:#ffffff;'>";
 
-    // Only reduce width if we need a scrollbar (>19 Entries)
-    //if($this->_numEntries()>=20) {
       $s_return .= "<table style='height:100%;width:581px;' cellspacing='0'>";
-		//} else {
-    //  $s_return .= "<table style='height:100%;width:600px;' cellspacing='0'>";
-    //}
-		$i_alternate=0;
-	
+  	}
+ 
+    $i_alternate=0;
 		if(isset($_GET['start'])){
 			$_SESSION['start'.$this->pageid]=$_GET['start'];
 			$start = $_GET['start'];
@@ -153,10 +152,11 @@ class divlist {
     /* If divlist is empty, append a single white entry */
     if(count($this->a_entries)==0){
       $str = $s_return."<tr>";
-      //for($i = 0 ; $i < count($this->a_header[0]); $i++){
-        $str.="<td class='list1' style='height:100%;border-right:0px;'>&nbsp;</td>";
-      //}
-      $str.="</tr></table></div></td></tr>";
+      $str.="<td class='list1' colspan='".$this->cols."' style='height:100%;border-right:0px;width:100%;'>&nbsp;</td>";
+      $str.="</tr>";
+      if($this->i_entriesPerPage == 0) {
+        $str.="</table></div></td></tr>";
+      }
       return($str);
     } else {
     
@@ -184,7 +184,6 @@ class divlist {
     					
     				foreach($s_value as $s_key2 => $s_value2 ){				
     
-    					$this->cols = count($s_value) ;						
     					$cnt++;					
     
     					if(!isset($s_value2['class'])){
@@ -285,7 +284,10 @@ class divlist {
         }
         $s_return.="\n<tr>$fill</tr>";
       }
-      $s_return .= "\n</table></div></td></tr>";
+      if($this->i_entriesPerPage == 0) {
+        $s_return .= "\n</table></div></td>";
+      }
+      $s_return .= "</tr>";
       return $s_return;
     }
   }
