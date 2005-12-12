@@ -542,6 +542,11 @@ input.center {
 	vertical-align:middle;
 }
 
+select.center {
+	text-align:center;
+	vertical-align:middle;
+}
+
 a.center {
 	text-align:left;
 	vertical-align:middle;
