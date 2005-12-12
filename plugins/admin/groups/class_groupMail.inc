@@ -131,6 +131,8 @@ class mailgroup extends plugin
 
       }
 
+      /* Adapt attributes if needed */
+      $method->fixAttributesOnLoad($this);
     }
 
     /* Get global filter config */
@@ -474,6 +476,7 @@ class mailgroup extends plugin
         $method->deleteMailbox($this->uid);
         $method->disconnect();
       }
+      $method->fixAttributesOnRemove($this);
     }
 
     /* Optionally execute a command after we're done */
@@ -579,6 +582,7 @@ class mailgroup extends plugin
     /* Only do IMAP actions if we are not a template */
     if (!$this->is_template){
       $method= new $this->method($this->config);
+      $method->fixAttributesOnStore($this);
       if ($method->connect($this->gosaMailServer)){
         $method->updateMailbox($this->uid);
         $method->setQuota($this->uid, $this->gosaMailQuota);

@@ -124,6 +124,9 @@ class mailMethodKolab extends mailMethodCyrus
     $mailObject->attrs['kolabHomeServer']= preg_replace('%imap://%', '', $mailObject->attrs['kolabHomeServer']);
     $mailObject->attrs['gosaMailServer']= $mailObject->attrs['kolabHomeServer'];
     $mailObject->attrs['kolabDeleteFlag']= array();
+
+    echo "Reached";
+    print_a ($mailObject->attrs);
   }
 
 
