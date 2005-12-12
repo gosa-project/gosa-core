@@ -7,9 +7,17 @@ function pngLoadPngs()
 	var rslt = navigator.appVersion.match(/MSIE (\d+\.\d+)/, '');
 	var itsAllGood = (rslt != null && Number(rslt[1]) > 5.5);
 
-	if (itsAllGood)
-		for (var i = 0; i < document.images.length; i++)
+	if (itsAllGood) {
+		for (var i = 0; i < document.images.length; i++) {
 			pngLoad(document.images[i]);
+		}
+		for (var i = 0; i < document.getElementsByTagName("input").length; i++) {
+			var img = document.getElementsByTagName("input")[i];
+			if(typeof img.type == "string" && img.type == "image") {
+				pngLoad(img);
+			}
+		}
+	}
 }
 
 // loads an image, src is optional // public
@@ -40,6 +48,10 @@ function pngLoad(img,src)
 		{
 				// no src arameter, but its png -> simply swap
 				pngSwapPrepare(img);
+		}
+	} else if (typeof img.tagName == "string" && img.tagName == "INPUT") {
+		if(img.src.match(/\.png$/i) != null) {
+			pngSwapPrepare(img);
 		}
 	}
 
