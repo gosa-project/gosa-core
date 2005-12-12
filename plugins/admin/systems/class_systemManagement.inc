@@ -650,6 +650,9 @@ class systems extends plugin
   
       $pics = $cups.$logdb.$syslog.$imap.$samba.$nfs.$krb.$fon.$fax.$ldap;
       $pics = "";
+    
+      $val['cn'][0]= preg_replace('/\$$/', '', $val['cn'][0]);
+
       // Generate Array to Add
       if((isset($val['is_new']))&&(!empty($val['is_new']))){
         $display= "".$val["cn"][0]." ".$val['is_new'];
@@ -981,11 +984,11 @@ class systems extends plugin
           } else {
             $domain= "";
           }
-            $terminal=$value;
-            $terminal['type']     ="W";
-            $terminal['domain']   = $name.$domain;
+          $terminal=$value;
+          $terminal['type']     ="W";
+          $terminal['domain']   = $name.$domain;
         }
-      $this->terminals[]=$terminal;
+        $this->terminals[]=$terminal;
       }
     }
 
