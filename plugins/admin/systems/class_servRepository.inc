@@ -73,6 +73,8 @@ class servrepository extends plugin
     /* Call parent execute */
     plugin::execute();
 
+    print_a($_POST);
+
     /* Fill templating stuff */
     $smarty= get_smarty();
     $display= "";
@@ -109,7 +111,12 @@ class servrepository extends plugin
     
     $once = false;
     foreach($_POST as $name => $value){
+
       if((preg_match("/^delete_/",$name))&&(!$once)){
+
+        $value = preg_replace("/delete_/","",$name);
+        $value = preg_replace("/_.$/","",$value);
+
         if(isset($this->repositories[$value])){
           $once = true;
           unset($this->repositories[$value]);
@@ -117,6 +124,8 @@ class servrepository extends plugin
       }
 
       if((preg_match("/^edit_/",$name))&&(!$once)){
+        $value = preg_replace("/edit_/","",$name);
+        $value = preg_replace("/_.$/","",$value);
         if(isset($this->repositories[$value])){
           $once = true;
           $obj = $this->repositories[$value];
