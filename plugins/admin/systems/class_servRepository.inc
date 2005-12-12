@@ -73,8 +73,6 @@ class servrepository extends plugin
     /* Call parent execute */
     plugin::execute();
 
-    print_a($_POST);
-
     /* Fill templating stuff */
     $smarty= get_smarty();
     $display= "";
