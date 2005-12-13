@@ -180,7 +180,11 @@ class faiTemplate extends plugin
     $a_return=array();
     foreach($this->SubObjects as $obj){
       if($obj['status'] != "delete"){
+      
         if((isset($obj['description']))&&(!empty($obj['description']))){
+          if(strlen($obj['description']) > 60){
+            $obj['description'] = substr($obj['description'],0,60)."...";
+          }
           $a_return[$obj['cn']]= $obj['cn']." [".$obj['description']."]";
         }else{
           $a_return[$obj['cn']]= $obj['cn'];
