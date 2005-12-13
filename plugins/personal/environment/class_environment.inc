@@ -65,7 +65,7 @@ class environment extends plugin
                                     "gotoPrinter",
                                     "gotoShares","gotoShare",
                                     "gotoKioskProfile","gotoKioskProfiles",
-                                    "gotoHotplugDevices");
+                                    "gotoHotplugDevice");
   var $objectclasses      = array("gotoEnvironment"); // Specifies the objectClass which contains the attributes edited here 
   var $cn;
 
