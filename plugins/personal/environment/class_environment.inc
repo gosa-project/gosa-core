@@ -48,7 +48,7 @@ class environment extends plugin
   var $gotoAvailableShares= array();// Available Shares for this account
   
   /* Kiosk profile */
-  var $gotoKioskProfile   = "";     // The selected Kiosk Profile
+  var $gotoKioskProfile   = "none";     // The selected Kiosk Profile
   var $gotoKioskProfiles  = array();// All available Kiosk profiles
   VAR $newKioskProfiles   = array();
 
@@ -391,6 +391,10 @@ class environment extends plugin
     }
     $tmp = new kioskManagementDialog($this->config,$this->dn);
     $list = $tmp->getKioskProfiles($this->newKioskProfiles);
+
+    $list['none']=_("None");
+
+    $list = array_reverse($list);
 
     /* Reassign help class */
     $_SESSION['current_class_for_help'] = get_class($this);
@@ -932,7 +936,7 @@ class environment extends plugin
       $this->attrs['gotoShare'][] =$share['server']."|".$share['name']."|".$share['mountPoint']."|".$share['OtherStuff'];
     }
 
-    if(!empty($this->gotoKioskProfile)){
+    if((!empty($this->gotoKioskProfile))&&($this->gotoKioskProfile != "none")){
       if(preg_match("/https/i",$_SERVER['HTTP_REFERER'])){
         $method="https://";
       }else{
