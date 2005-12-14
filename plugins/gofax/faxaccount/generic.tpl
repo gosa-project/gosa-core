@@ -3,7 +3,7 @@
  <!-- Headline container -->
  <tr>
    <td style="width:50%; vertical-align:top;">
-     <h2><p class="center"><img class="center" alt="" align="middle" src="images/rightarrow.png" />&nbsp;{t}Generic{/t}</p></h2>
+     <h2><img class="center" alt="" align="middle" src="images/rightarrow.png" />&nbsp;{t}Generic{/t}</h2>
 
      <table summary="">
        <tr>
@@ -35,7 +35,7 @@
     &nbsp;
    </td>
    <td style="vertical-align:top; width:100%">
-     <h2><p class="center"><img class="center" alt="" align="middle" src="images/printer.png" />&nbsp;{t}Delivery methods{/t}</p></h2>
+     <h2><img class="center" alt="" align="middle" src="images/printer.png" />&nbsp;{t}Delivery methods{/t}</h2>
 
      <input type=checkbox name="goFaxIsEnabled" value="1" {$goFaxIsEnabled} {$goFaxIsEnabledACL}>
      {t}Temporary disable fax usage{/t}<br>
@@ -66,7 +66,7 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
   <tr>
     <td style="width:50%; border-right:1px solid #A0A0A0">
-    <h2><p class="center"<img class="center" alt="" align="middle" src="images/fax_small.png">&nbsp;{t}Alternate fax numbers{/t}</p></h2>
+    <h2><img class="center" alt="" align="middle" src="images/fax_small.png">&nbsp;{t}Alternate fax numbers{/t}</h2>
     <select style="width:100%" name="alternate_list[]" size="10" multiple {$facsimileAlternateTelephoneNumberACL}>
 			{html_options values=$facsimileAlternateTelephoneNumber output=$facsimileAlternateTelephoneNumber}
 			<option disabled>&nbsp;</option>
@@ -78,7 +78,7 @@
     <input type=submit value="{t}Delete{/t}" name="delete_alternate" {$facsimileAlternateTelephoneNumberACL}>
    </td>
    <td style="vertical-align:top; width:50%">
-      <h2><p class="center"><img class="center" alt="" align="middle" src="images/false.png" />&nbsp;{t}Blocklists{/t}</p></h2>
+      <h2><img class="center" alt="" align="middle" src="images/false.png" />&nbsp;{t}Blocklists{/t}</h2>
       <table summary="" style="width:100%">
         <tr>
           <td>{t}Blocklists for incoming fax{/t}</td>
