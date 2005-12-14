@@ -448,7 +448,13 @@ class blocklist extends plugin
      * We also need to search for the departments
      * So we are able to navigate like in konquerer
      */
-    $base2 = preg_replace("/ou=people,/i","",$base);
+    $peopleBase = get_people_ou();
+    if(empty($peopleBase)){
+      $base2 = $base;
+    }else{
+      $base2 = preg_replace("/".$peopleBase.",/i","",$base);
+    }
+   
     $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
         TRUE, $base2, array("ou", "description"), TRUE);
 

@@ -65,7 +65,7 @@ class xlsexport extends plugin
 
     // Set values for optionlist in form
      $smarty->assign("deplist", $this->config->idepartments);
-     $smarty->assign("choicelist",array("ou=people,"=>"users" ,"ou=groups,"=>"groups" ,"ou=computers,ou=systems,"=>"computers","ou=servers,ou=systems,"=>"servers","dc=addressbook,"=>"addressbook"));
+     $smarty->assign("choicelist",array(get_people_ou()=>"users" ,"ou=groups,"=>"groups" ,"ou=computers,ou=systems,"=>"computers","ou=servers,ou=systems,"=>"servers","dc=addressbook,"=>"addressbook"));
 
     // Get the LDAP link, to generate the Export
     $ldap = $this->config->get_ldap_link();
