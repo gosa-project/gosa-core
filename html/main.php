@@ -319,7 +319,7 @@ $display= $header.$smarty->fetch(get_template_path('framework.tpl'));
 */
 
 if ((isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->data['MAIN']['W3CTEST']))&&(!empty($display))) {
-  tidy_parse_string($display);
+  tidy_parse_string(utf8_decode($display));
   $err = nl2br(htmlentities(tidy_get_error_buffer()));
   
   if($err){
@@ -331,6 +331,10 @@ if ((isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->d
 }
 
 /* Show page... */
+$f = fopen("/tmp/OgerMonokel.html","w+");
+fwrite($f,$display);
+fclose($f);
+
 echo $display;
 
 /* Save plist */
