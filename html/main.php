@@ -223,7 +223,7 @@ if (isset($plug)){
 }
 if ($_SESSION['js']==FALSE){
   $smarty->assign("javascript", "false");
-  $smarty->assign("help_method", "href='helpviewer.php$plug' target='_new'");
+  $smarty->assign("help_method", "href='helpviewer.php$plug' target='_blank'");
 } else {
   $smarty->assign("javascript", "true");
   $smarty->assign("help_method"," onclick=\"return popup('helpviewer.php$plug','GOsa help');\"");
@@ -301,14 +301,11 @@ if ($error_collector != ""){
 }
 $display= $header.$smarty->fetch(get_template_path('framework.tpl'));
 
-/* For development, perform a W3C conformance check if specified in gosa.conf */
-if (isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->data['MAIN']['W3CTEST'])) {
-
-  /* Use PHP tidy for debugging */
+/*if (isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->data['MAIN']['W3CTEST'])) {
   $tidy = new tidy();
   $config = array('indent' => TRUE,
-               'output-xhtml' => TRUE,
-               'wrap' => 200);
+      'output-xhtml' => TRUE,
+      'wrap' => 200);
   $display = tidy_parse_string($display, $config, 'UTF8');
   tidy_clean_repair($display);
   $cnt =  (tidy_error_count($display))+(tidy_warning_count($display));
@@ -317,6 +314,19 @@ if (isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->da
 
     echo nl2br(htmlentities($display->errorBuffer))."</div>";
   }
+  tidy_clean_repair($display);
+}
+*/
+
+if ((isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->data['MAIN']['W3CTEST']))&&(!empty($display))) {
+  tidy_parse_string($display);
+  $err = nl2br(htmlentities(tidy_get_error_buffer()));
+  
+  if($err){
+    echo "<table summary=\"\" width=\"100%\" style='background-color:#E0E0E0;border-bottom:1px solid black'><tr><td><img alt=\"W3C\"            align=\"middle\" src='images/warning.png'>&nbsp;<font style='font-size:14px;font-weight:bold'>"._("Generating this page caused the W3C          conformance checker to raise some errors!")."</font></td><td align=right><button onClick='toggle(\"w3cbox\")'>"._("Toggle information")."</     button></td></tr></table><div id='w3cbox' style='width:100%; position:absolute; z-index:0; visibility: hidden; background-color:white; border-  bottom:1px solid black;'>";
+  }
+
+  echo $err."</div>";
   tidy_clean_repair($display);
 }
 
