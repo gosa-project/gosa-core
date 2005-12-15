@@ -894,10 +894,6 @@ class user extends plugin
     /* Assemble cn */
     $this->cn= $this->givenName." ".$this->sn;
 
-    if(preg_match("/[^a-z0-9]/",$this->uid)){
-      $message[]=_("Invalid characters in uid.") ;
-    }
-
     /* Permissions for that base? */
     if (isset($this->config->current['DNMODE']) && $this->config->current['DNMODE'] == "uid"){
       $new_dn= 'uid='.$this->uid.','.get_people_ou().$this->base;
