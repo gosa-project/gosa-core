@@ -314,7 +314,7 @@ class appgroup extends plugin
     
     if((isset($_POST['AddCat']))&&(isset($_POST['CatName']))&&(!empty($_POST['CatName']))){
       
-      if(preg_match("/[^0-9a-z,\.-;:_#\+\- ]/i",$_POST['CatName'])){
+      if(preg_match("/[\\\\\/]/i",$_POST['CatName'])){
         print_red(_("Invalid character in category name."));
       }elseif(!in_array($_POST['CatName'],$this->Categories)){ 
         if(empty($this->curCatDir)){
