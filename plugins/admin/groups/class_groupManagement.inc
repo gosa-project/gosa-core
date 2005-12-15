@@ -235,7 +235,10 @@ class groupManagement extends plugin
 
       /* Check locking, save current plugin in 'back_plugin', so
          the dialog knows where to return. */
-      if (($user= get_lock($this->dn)) != ""){
+
+      $user = get_lock($this->dn);
+
+      if ($user != ""){
         return(gen_locked_message ($user, $this->dn));
       }
 
