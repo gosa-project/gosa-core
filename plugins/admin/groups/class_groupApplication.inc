@@ -27,6 +27,7 @@ class appgroup extends plugin
   var $attributes= array();
   var $objectclasses= array("gosaApplicationGroup");
 
+
   function appgroup ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
@@ -109,150 +110,144 @@ class appgroup extends plugin
     $this->curbase = $this->config->current['BASE'];
   }
 
-  function catDown($id){
-   /* Get all cats depinding on current dir */
-    $cats = $this->GetSubdirs($this->curCatDir);
+
+  /* Combine new array */
+  function combineArrays($ar0,$ar1,$ar2)
+  {
     $ret = array();
-    if((in_array($id,array_flip($cats)))&&(count($cats)>1)){
-      if(count($cats) == 2){
-        $ret = array_reverse($cats);
-      }else{
-        $cnt = 0;
-        $hit = 0;
-        foreach($cats as $cat=>$name){
-          if($cat  == $id){
-            $hit = $cnt;
-          }
-          $cnt ++;
-        }
-        if($hit == 0){ 
-          $first  = array_slice($cats,0,0);
-          $middle = array_slice($cats,0,2);
-          $last   = array_slice($cats,$hit+2,$cnt);
-        }else{
-          $first  = array_slice($cats,0,$hit);
-          $middle = array_slice($cats,$hit,2);
-          $last   = array_slice($cats,$hit+2,$cnt);
-        }
-        foreach($first as $cat => $name){
-          $ret[$cat]=$name;
-        }
-        foreach(array_reverse($middle) as $cat => $name){
-          $ret[$cat]=$name;
-        }
-        foreach($last as $cat => $name){
-          $ret[$cat]=$name;
-        }
-      }
-      foreach($cats as $cat => $name){
-        unset($this->Categories[$cat]);
-      }
-      foreach($ret as $cat => $name){
-        $this->Categories[$cat]=$name;
+    if(is_array($ar0))
+    foreach($ar0 as $ar => $a){
+        $ret[$ar]=$a;
+    }
+    if(is_array($ar1))
+    foreach($ar1 as $ar => $a){
+        $ret[$ar]=$a;
+    }
+    if(is_array($ar2))
+    foreach($ar2 as $ar => $a){
+        $ret[$ar]=$a;
+    }
+    return($ret);
+  }
+
+  function getpos($atr,$attrs)
+  {
+    $i = 0;
+    foreach($attrs as $attr => $name)    {
+      $i++;
+      if($attr == $atr){
+        return($i);
       }
     }
+    return(-1);
   }
+
+
+  /* TRansports the geiven Arraykey one position up*/
+  function ArrayUp($atr,$attrs)
+  {
+    $ret = $attrs;
+    $pos = $this->getpos($atr,$attrs) ;
+    $cn = count($attrs);
+    if(!(($pos == -1)||($pos == 1))){
+      $before = array_slice($attrs,0,($pos-2));
+      $mitte  = array_reverse(array_slice($attrs,($pos-2),2));
+      $unten  = array_slice($attrs,$pos);
+      $ret = array();
+      $ret = $this->combineArrays($before,$mitte,$unten);
+    }
+    return($ret);
+  }
+
+
+  /* TRansports the geiven Arraykey one position up*/
+  function ArrayDown($atr,$attrs)
+  {
+    $ret = $attrs;
+    $pos = $this->getpos($atr,$attrs) ;
+    $cn = count($attrs);
+    if(!(($pos == -1)||($pos == $cn))){
+      $before = array_slice($attrs,0,($pos-1));
+      $mitte  = array_reverse(array_slice($attrs,($pos-1),2));
+      $unten  = array_slice($attrs,($pos+1));
+      $ret = array();
+      $ret = $this->combineArrays($before,$mitte,$unten);
+    }
+    return($ret);
+  }
+
 
   function catUp($id)
   {
     /* Get all cats depinding on current dir */
     $cats = $this->GetSubdirs($this->curCatDir);
+    $newcats =$this->ArrayUp($id,$cats);
 
-    $ret = array();
-
-    if((in_array($id,array_flip($cats)))&&(count($cats)>1)){
-      if(count($cats) == 2){
-        $ret = array_reverse($cats);
-      }else{
-        $cnt = 0;
-        $hit = 0;
-        foreach($cats as $cat => $name){
-          $cnt ++;
-          if($cat  == $id){
-            $hit = $cnt;
-          }
-        }
-
-        if($hit>1){
-          if($hit == 2){ 
-            $first  = array_slice($cats,0,$hit-2);
-            $middle = array_slice($cats,$hit-2,$hit);
-            $last   = array_slice($cats,$hit,$cnt); 
-          }else{
-            $first  = array_slice($cats,0,$hit-2);
-            $middle = array_slice($cats,$hit-2,2);
-            $last   = array_slice($cats,$hit,$cnt); 
-          }
-          foreach($first as $cat => $name){
-            $ret[$cat]=$name;
-          }
-          foreach(array_reverse($middle) as $cat => $name){
-            $ret[$cat]=$name;
-          }
-          foreach($last as $cat => $name){
-            $ret[$cat]=$name;
-          }
-        }
-      }
-
-      foreach($cats as $cat => $name){
-        unset($this->Categories[$cat]);
-      } 
-      foreach($ret as $cat => $name){
-        $this->Categories[$cat]=$name;
-      }
+    foreach($newcats as $cat => $name){
+      unset($this->Categories[$cat]);
     }
-    
-
+    foreach($newcats as $cat => $name){
+      $this->Categories[$cat]=$name;
+    }
   }
+
+  
+  function catDown($id)
+  {
+   /* Get all cats depinding on current dir */
+    $cats = $this->GetSubdirs($this->curCatDir);
+     
+    $newcats =$this->ArrayDown($id,$cats);
+
+    foreach($newcats as $cat => $name){
+      unset($this->Categories[$cat]);
+    }
+    foreach($newcats as $cat => $name){
+      $this->Categories[$cat]=$name;
+    }
+  }
+
 
   function getOneUp($appl)
+  { 
+    $cat  = $this->curCatDir;
+    $apps = $this->gosaMemberApplication[$cat];
+
+    $appsA = array();
+    foreach ($apps as $appkey => $name){
+      $appsA[$name['App']] =$name['App'];
+    }
+ 
+    $result = $this->ArrayUp($appl,$appsA);
+
+    $ret = array();
+    foreach($result as $app){
+      $ret[]=array("App"=>$app);
+    }
+    $this->gosaMemberApplication[$cat] = $ret;
+  }
+
+
+  function getOneDown($appl)
   {
-    $cat = $this->curCatDir;
-    if(!isset($this->gosaMemberApplication[$cat][($appl-1)])) return;
-    $f = 1;
-    if($appl == 1 ){
-      $f = 0;
+    $cat  = $this->curCatDir;
+    $apps = $this->gosaMemberApplication[$cat];
+
+    $appsA = array();
+    foreach ($apps as $appkey => $name){
+      $appsA[$name['App']] =$name['App'];
     }
-    $first  = array_slice($this->gosaMemberApplication[$cat],0,($appl-1));
-    $middle = array_slice($this->gosaMemberApplication[$cat],$appl-1,(($appl+1)-$f));
-    $last   = array_slice($this->gosaMemberApplication[$cat],($appl+1));
-    $tmp = array();
-    foreach($first as $entry){
-      $tmp[] = $entry;
+
+    $result = $this->ArrayDown($appl,$appsA);
+
+    $ret = array();
+    foreach($result as $app){
+      $ret[]=array("App"=>$app);
     }
-    foreach(array_reverse($middle) as $entry){
-      $tmp[] = $entry;
-    }
-    foreach($last as $entry){
-      $tmp[] = $entry;
-    }
-    $this->gosaMemberApplication[$cat] =$tmp;
-  }
-  
-  function getOneDown($appl){
-    $cat = $this->curCatDir;
-    if(!isset($this->gosaMemberApplication[$cat][($appl+1)])) return;
-    $f = 0;
-    if($appl == 0 ){
-      $f = 1;
-    }
-    $first  = array_slice($this->gosaMemberApplication[$cat],0,($appl));
-    $middle = array_slice($this->gosaMemberApplication[$cat],$appl,(($appl+1+$f)));
-    $last   = array_slice($this->gosaMemberApplication[$cat],($appl+2));
-  
-    $tmp = array();
-    foreach($first as $entry){
-      $tmp[] = $entry;
-    }
-    foreach(array_reverse($middle) as $entry){
-      $tmp[] = $entry;
-    }
-    foreach($last as $entry){
-      $tmp[] = $entry;
-    }
-    $this->gosaMemberApplication[$cat] =$tmp;
-  }
+    $this->gosaMemberApplication[$cat] = $ret;
+  } 
+
+   
   
   function AddSeperator($id)
   {
@@ -524,21 +519,11 @@ class appgroup extends plugin
       if(isset($_GET['id'])){
         $id   = $_GET['id'];
         $act  = $_GET['act']; 
-        $found = -1;
-        if(isset($this->gosaMemberApplication[$this->curCatDir])){
-          foreach($this->gosaMemberApplication[$this->curCatDir] as $key =>  $member){
-            if($id == $member['App']){
-              $found = $key;
-            }
-          }
-        }
 
-        if($found != -1){
-          if($act == "one_up"){
-            $this->getOneUp($found);
-          }elseif($act == "one_down")   { 
-            $this->getOneDown($found);
-          }
+        if($act == "one_up"){
+          $this->getOneUp($id);
+        }elseif($act == "one_down")   { 
+          $this->getOneDown($id);
         }
       }
     }
