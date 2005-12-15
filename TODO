@@ -1,6 +1,8 @@
 Target for 2.4.1:
 =================
 
+* Encoding für Serverfreigaben in Datei /etc/gosa/encodings auslagern, class_servNfs.inc
+
 * Add online help (english/german)
 
 * Group mail is not initially add-able?
