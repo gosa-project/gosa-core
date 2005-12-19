@@ -115,12 +115,12 @@ class faiProfileEntry extends plugin
     }
 
     /* Create different picture for each object type */
-    $objTypes['FAIhook']            = "<image src='images/fai_hook.png' title='"._("Hook bundle")."' alt=''>&nbsp;";
-    $objTypes['FAItemplate']        = "<image src='images/fai_template.png' title='"._("Template bundle")."' alt=''>&nbsp;";
-    $objTypes['FAIscript']          = "<image src='images/fai_script.png' title='"._("Script bundle")."' alt=''>&nbsp;";
-    $objTypes['FAIvariable']        = "<image src='images/fai_variable.png' title='"._("Variable bundle")."' alt=''>&nbsp;";
-    $objTypes['FAIpackageList']     = "<image src='images/fai_packages.png' title='"._("Package bundle")."' alt=''>&nbsp;";
-    $objTypes['FAIpartitionTable']  = "<image src='images/fai_partitionTable.png' title='"._("Partition table")."' alt=''>&nbsp;";
+    $objTypes['FAIhook']            = "<img src='images/fai_hook.png' title='"._("Hook bundle")."' alt=''>&nbsp;";
+    $objTypes['FAItemplate']        = "<img src='images/fai_template.png' title='"._("Template bundle")."' alt=''>&nbsp;";
+    $objTypes['FAIscript']          = "<img src='images/fai_script.png' title='"._("Script bundle")."' alt=''>&nbsp;";
+    $objTypes['FAIvariable']        = "<img src='images/fai_variable.png' title='"._("Variable bundle")."' alt=''>&nbsp;";
+    $objTypes['FAIpackageList']     = "<img src='images/fai_packages.png' title='"._("Package bundle")."' alt=''>&nbsp;";
+    $objTypes['FAIpartitionTable']  = "<img src='images/fai_partitionTable.png' title='"._("Partition table")."' alt=''>&nbsp;";
 
     /* Magic quotes GPC, escapes every ' " \, to solve some security risks
      * If we post the escaped strings they will be escaped again

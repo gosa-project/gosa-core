@@ -1,4 +1,4 @@
-<table width="100%">
+<table width="100%" summary="">
 	<tr>
 		<td width="50%" valign="top">
 			<h2><img class="center" alt="" src="images/forward.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
@@ -10,7 +10,7 @@
 						</LABEL>
 					</td>
 					<td>
-						<input value="{$cn}" size="45" maxsize="80" id="cn" name="cn">
+						<input value="{$cn}" size="45" id="cn" name="cn">
 					</td>
 				</tr>
 				<tr>
@@ -20,7 +20,7 @@
 						</LABEL>
 					</td>
 					<td>
-						<input value="{$description}" size="45" maxsize="80" {$description} name="description" id="description">
+						<input value="{$description}" size="45" name="description" id="description">
 					</td>
 				</tr>
 			</table>

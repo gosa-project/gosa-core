@@ -10,10 +10,9 @@
       	{$faihead}
   	</div>
   	<div style='height:4px;'></div>
-  		<div class="contentboxb" style="border-top:1px solid #B0B0B0;">
-      		{$failist}
-    		<input type=hidden name="edit_helper">
-  		</div>
+	<div class="contentboxb" style="border-top:1px solid #B0B0B0;">
+    	{$failist}
+   		<input type=hidden name="edit_helper">
 	</div>
   </td>
   <td style="vertical-align:top;">
@@ -52,8 +51,8 @@
     	 <table summary=""  style="width:100%;border-top:1px solid #B0B0B0;">
      		<tr>
      			<td>
-     					<LABEL for "regex"><img alt="{t}Display objects matching{/t}" src="{$search_image}" 
-							align=middle title='{t}Display objects matching{/t}'></LABEL>
+     					<img alt="{t}Display objects matching{/t}" src="{$search_image}" 
+							align=middle title='{t}Display objects matching{/t}'>
      			</td>
      			<td width="99%">
      					<input type='text' name='Sregex' maxlength='20' style='width:99%' value='{$Sregex}' id='filter' 
