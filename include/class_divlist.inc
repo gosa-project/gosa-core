@@ -217,9 +217,9 @@ class divlist {
     				$cnt=0;
     				for($a = 0 ; $a < (count($this->a_header[0])) ; $a ++ ) {
     					if($a ==(count($this->a_header[0])-1)){
-    						$s_return.="\n<td class='list1' style='border:0px;' height='26'>&nbsp;</td>";
+    						$s_return.="\n<td class='list1' style='border:0px;height:26px;'>&nbsp;</td>";
     					} else {
-    						$s_return.="\n<td class='list1' height='26'>&nbsp;</td>";
+    						$s_return.="\n<td class='list1' style='height:26px;'>&nbsp;</td>";
     					}
     				}
     				$s_return.="\n</tr>";
