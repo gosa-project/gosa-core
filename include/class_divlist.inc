@@ -282,7 +282,7 @@ class divlist {
            $fill.= "<td class='list1' style='height:100%;'>&nbsp;</td>";
           }
         }
-        $s_return.="\n<tr>$fill</tr>";
+        $s_return.="\n<tr>$fill";
       }
       if($this->i_entriesPerPage == 0) {
         $s_return .= "\n</table></div></td>";
