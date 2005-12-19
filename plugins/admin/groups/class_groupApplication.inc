@@ -337,7 +337,6 @@ class appgroup extends plugin
 
       if(preg_match("/DelApp_/",$name)){
         $app = $value; 
-
         foreach($this->gosaMemberApplication as $key =>  $cat){
           foreach($cat as $key2 => $app){
             if($app['App'] == $value){
@@ -350,9 +349,10 @@ class appgroup extends plugin
         }
       }
       if(preg_match("/DelCat_/",$name)){
-        $app = $value; 
+        $n = preg_replace("/DelCat_/","",$name);
+        $app = base64_decode( preg_replace("/_.*$/","",$n));
         foreach($this->Categories as $key =>  $cat){
-          if($cat == $value){
+          if($cat == $app){
             unset($this->Categories[$key]);
           }
         }
@@ -508,10 +508,10 @@ class appgroup extends plugin
 
     if((isset($_GET['act']))&&(($_GET['act'] == "cat_up")||($_GET['act']=="cat_down"))){
       if($_GET['act']=="cat_up"){
-        $this->catUp($_GET['id']);
+        $this->catUp(base64_decode($_GET['id']));
       }
       if($_GET['act']=="cat_down"){
-        $this->catDown($_GET['id']);
+        $this->catDown(base64_decode($_GET['id']));
       }
     }
 
@@ -531,13 +531,13 @@ class appgroup extends plugin
     $div2 = new DivSelectBox("appgroup");
     $div2->SetHeight(400);
 
-    $linkopen       = "<img src='images/folder.png'>&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=open&amp;id=%s'>%s</a>";
+    $linkopen       = "<img src='images/folder.png' alt=\"\">&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=open&amp;id=%s'>%s</a>";
     $catremove      = "&nbsp;<input type='image' src='images/edittrash.png' title='"._("Delete entry")."' name='DelCat_%s' value='%s'>";
-    $app            = "<img src='images/select_application.png'>&nbsp;%s";
+    $app            = "<img src='images/select_application.png' alt=\"\">&nbsp;%s";
     
-    $catupdown        = "<a href='?plug=".$_GET['plug']."&amp;act=cat_up&id=%s'>
-                       <img align='top' src='images/sort_up.png' border=0 title='"._("Move up")."'></a>&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=cat_down&id=%s'> 
-                       <img src='images/sort_down.png' title='"._("Move down")."' border=0></a>";
+    $catupdown        = "<a href='?plug=".$_GET['plug']."&amp;act=cat_up&amp;id=%s'>
+                       <img align='top' alt=\"\" src='images/sort_up.png' border=0 title='"._("Move up")."'></a>&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=cat_down&amp;id=%s'> 
+                       <img alt=\"\" src='images/sort_down.png' title='"._("Move down")."' border=0></a>";
 
     if(empty($this->curCatDir)){
       $cnt =0;
@@ -555,8 +555,8 @@ class appgroup extends plugin
 
     foreach($this->GetSubdirs($this->curCatDir) as $path => $name){
       $div2 ->AddEntry(array( 
-            array("string"=>sprintf($linkopen,$path,$name)),
-            array("string"=>preg_replace("/%s/",$path,$catupdown.$catremove),
+            array("string"=>sprintf($linkopen,base64_encode($path),$name)),
+            array("string"=>preg_replace("/%s/",base64_encode($path),$catupdown.$catremove),
               "attach"=>"align='right' style='width:80px;border-right:0px;'"))); 
     }
 
@@ -566,19 +566,19 @@ class appgroup extends plugin
 
     $sep = "<input type='image' src='images/back.png' title='"._("Insert seperator")."' value='%s' name='AddSep_%s'>";
   
-    $upudown ="<a href='?plug=".$_GET['plug']."&amp;act=one_up&id=%s'>   <img align='top' src='images/sort_up.png' title='"._("Move up")."' border=0></a>".
-      "&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=one_down&id=%s'> <img src='images/sort_down.png' title='"._("Move down")."' border=0></a>".
-      "&nbsp;<input type='image' src='images/edittrash.png' title='"._("Delete entry")."' name='DelApp_%s' value='%s'>";
-    $edit=      "&nbsp;<input type='image' src='images/edit.png' title='"._("Edit entry")."' name='EdiApp_%s' value='%s'>";
+    $upudown ="<a href='?plug=".$_GET['plug']."&amp;act=one_up&amp;id=%s'>   <img alt='{t}sort{/t}' align='top' src='images/sort_up.png' title='"._("Move up")."' border=0></a>".
+      "&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=one_down&amp;id=%s'> <img alt='{t}sort{/t}' src='images/sort_down.png' title='"._("Move down")."' border=0></a>".
+      "&nbsp;<input type='image' src='images/edittrash.png' title='"._("Delete entry")."' name='DelApp_%s' value='%s' alt='{t}delete{/t}' >";
+    $edit=      "&nbsp;<input type='image' src='images/edit.png' title='"._("Edit entry")."' name='EdiApp_%s' value='%s' alt='{t}edit{/t}' >";
 
     if(isset($this->gosaMemberApplication[$this->curCatDir])){
       foreach($this->gosaMemberApplication[$this->curCatDir] as $cat => $entry){
         if(preg_match("/__SEPARATOR__/",$entry['App'])){
           $div2 ->AddEntry(array(array("string"=>$separator),
-                array("string"=>preg_replace("/\%s/",$entry['App'],$upudown),"attach"=>"align='right' style='border-right:0px;'")));
+                array("string"=>preg_replace("/\%s/",htmlentities($entry['App']),$upudown),"attach"=>"align='right' style='border-right:0px;'")));
         }else{
           $div2 ->AddEntry(array(array("string"=>sprintf($app,$entry['App'])),
-                array("string"=>preg_replace("/\%s/",$entry['App'],$sep.$edit.$upudown),"attach"=>"align='right' style='border-right:0px;'")));
+                array("string"=>preg_replace("/\%s/",htmlentities($entry['App']),$sep.$edit.$upudown),"attach"=>"align='right' style='border-right:0px;'")));
         }
       }
     }
