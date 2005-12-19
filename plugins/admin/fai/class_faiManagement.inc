@@ -482,7 +482,7 @@ class faiManagement extends plugin
 		$action  = "<input class='center' type='image' src='images/edit.png' 	alt='"._("edit")."'   name='entry_edit_%KEY%' title='"._("Edit class")."'>";
 		$action .= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."' name='entry_delete_%KEY%' title='"._("Delete class")."'>";
 
-		$editlink ="<a href='?plug=".$_GET['plug']."&edit_entry=%KEY%'>%NAME%</a>"; 		
+		$editlink ="<a href='?plug=".$_GET['plug']."&amp;edit_entry=%KEY%'>%NAME%</a>"; 		
 		$linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
 
 		foreach($this->departments as $key => $val) {
