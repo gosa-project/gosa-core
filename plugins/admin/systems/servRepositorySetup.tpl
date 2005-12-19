@@ -1,9 +1,9 @@
-<h2><img src="images/fai_small.png" >&nbsp;{t}Repository{/t}</h2>
+<h2><img src="images/fai_small.png" alt=''>&nbsp;{t}Repository{/t}</h2>
 
-<table width="100%">
+<table width="100%" summary=''>
 	<tr>
 		<td width="50%" valign="top" style="border-right:1px solid #A0A0A0">
-			<table>
+			<table summary=''>
 				<tr>
 					<td>{t}Release{/t}
 					</td>

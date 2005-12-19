@@ -140,7 +140,7 @@ class servRepositorySetup  extends plugin
     while($attr = $ldap->fetch()){
       $ret[$attr['cn'][0]]= $attr['cn'][0];   
     }
-    $ret['none']= "";
+    $ret['none']= "&nbsp;";
     return($ret);
   }
 
