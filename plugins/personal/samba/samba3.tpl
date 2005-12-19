@@ -3,7 +3,7 @@
  <!-- Headline container -->
  <tr>
   <td colspan="2" style="width:50%; vertical-align:top;">
-   <h2><p class="center"><img class="center" alt="" align="middle" src="images/rightarrow.png"/>&nbsp;{t}Generic{/t}</p></h2>
+   <h2><img class="center" alt="" align="middle" src="images/rightarrow.png"/>&nbsp;{t}Generic{/t}</h2>
   </td>
  </tr>
  <tr>
@@ -53,7 +53,7 @@
 
 <p class="seperator">&nbsp;</p>
 
-<h2><p class="center"><img class="center" alt="" align="middle" src="images/display.png" />&nbsp;{t}Terminal Server{/t}</p></h2>
+<h2><img class="center" alt="" align="middle" src="images/display.png" />&nbsp;{t}Terminal Server{/t}</h2>
 
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
@@ -120,13 +120,24 @@
     <tr>
      <td><label for="CtxInitialProgram">{t}Initial program{/t}</label></td>
      <td>
-      <input id="CtxInitialProgram" name="CtxInitialProgram" size=35 maxlength=60 {if $CtxInitialProgramACL==""}{$CtxInitialProgramMode}{/if} value="{$CtxInitialProgram}" {$CtxInitialProgramACL} .  {$tsloginstate} . {$inheritstate}>
+      <input id="CtxInitialProgram" name="CtxInitialProgram" size=35 maxlength=60 {if $CtxInitialProgramACL==""}{$CtxInitialProgramMode}{/if} value="{$CtxInitialProgram}" 
+		{if $CtxInitialProgramACL=="disabled" || $tsloginstate=="disabled" || $inheritstate=="disabled"}
+			disabled 
+		{/if}
+		>
      </td>
     </tr>
     <tr>
      <td><label for="CtxWorkDirectory">{t}Working directory{/t}</label></td>
      <td>
-      <input id="CtxWorkDirectory" name="CtxWorkDirectory" size=35 maxlength=60 {if $CtxWorkDirectoryACL==""}{$CtxInitialProgramMode}{/if} value="{$CtxWorkDirectory}" {$CtxInitialProgramACL} {$tsloginstate} {$inheritstate}>
+      <input id="CtxWorkDirectory" name="CtxWorkDirectory" size=35 maxlength=60 
+		{if $CtxWorkDirectoryACL==""}
+			{$CtxInitialProgramMode}
+		{/if} value="{$CtxWorkDirectory}" 
+		{if $CtxInitialProgramACL=="disabled" || $tsloginstate=="disabled" || $inheritstate=="disabled"}
+			disabled 
+		{/if}
+		>
      </td>
     </tr>
    </table>
@@ -238,7 +249,7 @@
 
 <p class="seperator">&nbsp;</p>
 
-<h2><p class="center"><img class="center" alt="" align="middle" src="images/certs.png" />&nbsp;{t}Access options{/t}</p></h2>
+<h2><img class="center" alt="" align="middle" src="images/certs.png" />&nbsp;{t}Access options{/t}</h2>
 
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
  <tr>
