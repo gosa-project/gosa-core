@@ -171,7 +171,7 @@ if (!$remove_lock){
       } else {
         $str= _("Edit");
         $fn = "edit";
-        $info= "<img class\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/openlock.png').
+        $info= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/openlock.png').
                "\"> ".$ui->dn."&nbsp;";
       }
       if ($fn == "edit" && isset($editacl) && $editacl != "#none#"){
