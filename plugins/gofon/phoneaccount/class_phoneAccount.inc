@@ -697,7 +697,7 @@ class phoneAccount extends plugin
         switch ($type){
 
           case "combo":
-            $str= "<select name='".$var."' ".chkacl($this->acl, "goFonMacro")."  ".chkacl($this->acl, "goFonMacro").">";
+            $str= "<select name='".$var."' ".chkacl($this->acl, "goFonMacro")." >";
           foreach(split(":",$default) as $choice){
             if($choosen==$choice){
               $str.= "\n<option value='".$choice."' selected>".$choice."&nbsp;</option>";

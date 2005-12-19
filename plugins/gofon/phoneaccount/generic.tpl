@@ -1,7 +1,7 @@
 <table summary="{t}Phone numbers{/t}" style="width:100%">
  <tr>
   <td style="vertical-align:top; border-right:1px solid #A0A0A0; width:50%">
-   <h2><p class="center"><img class="center" alt="" align="middle" src="images/banana.png" />&nbsp;{t}Phone numbers{/t}</p></h2>
+   <h2><img class="center" alt="" align="middle" src="images/banana.png" />&nbsp;{t}Phone numbers{/t}</h2>
       <select style="width:100%;" name="phonenumber_list[]" size=7 multiple {$telephoneNumberACL}>
        {html_options options=$phoneNumbers}
 		<option disabled>
@@ -20,8 +20,8 @@
 <table summary="" style="width:100%" border=0>
  <tr>
 
-  <td tyle="vertical-align:top;">
-   <h2><p class="center"><img class="center" alt="" align="middle" src="images/hardware.png" />&nbsp;{t}Telephone hardware{/t}</p></h2>
+  <td style="vertical-align:top;">
+   <h2><img class="center" alt="" align="middle" src="images/hardware.png" />&nbsp;{t}Telephone hardware{/t}</h2>
 
    <table summary="{t}Telephone{/t}" border=0>
     <tr>
@@ -56,7 +56,7 @@
  </tr>
  <tr style="vertical-align:top; border-top:1px solid #A0A0A0;">
 	<td colspan=2 style="vertical-align:top;width:50%">
-		<h2><p class="center"><img class="center" alt="" src="images/select_macro.png" align="middle" />&nbsp;{t}Phone macro{/t}</p></h2>
+		<h2><img class="center" alt="" src="images/select_macro.png" align="middle" />&nbsp;{t}Phone macro{/t}</h2>
 		<table summary="{t}Phone macro{/t}">
 			<tr>
 				<td colspan=2>
