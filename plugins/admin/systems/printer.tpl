@@ -58,7 +58,7 @@
 <table summary="" width="100%">
 	<tr>
 		<td style="border-right:1px solid #B0B0B0; width:50%">
-			<table style="width:100%">
+			<table style="width:100%" summary=''>
 				<tr>
 					<td>
 						{t}Users which are allowed to use this printer{/t}<br>
@@ -74,7 +74,7 @@
 	
 		</td>
 		<td>
-			<table style="width:100%">
+			<table style="width:100%" summary=''>
 				<tr>
 					<td>
 						{t}Users which are allowed to administrate this printer{/t}<br>
