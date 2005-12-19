@@ -4,7 +4,7 @@
 {else}
 <input type="hidden" name="iamposted" value="1">
 
-<h2><p class="center"><img class="center" alt="" src="images/fai_profile.png" align="middle" /> {t}Profiles{/t}</p></h2>
+<h2><img class="center" alt="" src="images/fai_profile.png" align="middle" /> {t}Profiles{/t}</h2>
 <table summary="{t}Environment managment settings{/t}" width="100%">
   <tr>
    <td style="width:50%;border-right:1px solid #B0B0B0;vertical-align:top;">
@@ -12,7 +12,7 @@
 				<tr>
 					<td style="vertical-align:top">
 						<input class="center" type="checkbox" value="1" {$useProfileCHK} name="useProfile" {$useProfileACL} id="useProfile"
-									onclick="changeState('gotoProfileServer');changeState('gotoProfileFlag_C');" {$gotoProfileFlagsACL}>
+									onclick="changeState('gotoProfileServer');changeState('gotoProfileFlag_C');">
 					</td>
 					<td style="vertical-align:middle;">
 						<label for="useProfile">{t}Use profile managment{/t}</label>
@@ -29,7 +29,7 @@
 								</td>
 								<td>
 									<select id="gotoProfileServer" 
-											name="gotoProfileServer" {$gotoProfileServerACL} id="gotoProfileServer">
+											name="gotoProfileServer" {$gotoProfileServerACL}>
 										{html_options values=$gotoProfileServerKeys output=$gotoProfileServers selected=$gotoProfileServer}
 										<option disabled>&nbsp;</option>
 									</select>
@@ -38,7 +38,7 @@
 							<tr>
 								<td colspan=2>	
 									<input class="center" type="checkbox" name="gotoProfileFlag_C" value="C" 
-										id="gotoProfileFlag_C" {$useProfileACL} {$gotoProfileFlagsACL} {$gotoProfileFlag_CCHK}>&nbsp;
+										id="gotoProfileFlag_C" {$gotoProfileFlagsACL}>&nbsp;
 									<label for="gotoProfileFlag_C">{t}Cache profile localy{/t}</label>
 								</td>
 							</tr>
@@ -100,7 +100,7 @@
 <table summary="{t}Environment managment settings{/t}" width="100%">
   <tr>
    <td style="width:50%;border-right:1px solid #B0B0B0">
-	<h2><p class="center"><img class="center" alt="" src="images/fai_partitionTable.png" align="middle" />&nbsp;<label for="gotoShare">{t}Shares{/t}</label></p></h2>
+	<h2><img class="center" alt="" src="images/fai_partitionTable.png" align="middle" />&nbsp;<label for="gotoShare">{t}Shares{/t}</label></h2>
 	<table summary="" style="width:100%">
 		<tr>
 			<td>
@@ -121,7 +121,7 @@
 	</table>
    </td>
    <td>
-	<h2><p class="center"><img class="center" alt="" src="images/fai_script.png" align="middle" />&nbsp;<label for="gotoLogonScript">{t}Logon scripts{/t}</label></p></h2>
+	<h2><img class="center" alt="" src="images/fai_script.png" align="middle" />&nbsp;<label for="gotoLogonScript">{t}Logon scripts{/t}</label></h2>
 	<table summary="{t}Logon script management{/t}" style="width:100%">
 		<tr>
 			<td>
@@ -146,13 +146,14 @@
 <table summary="{t}Environment managment settings{/t}" width="100%">
   <tr>
    <td style="border-right:1px solid #B0B0B0; width:50%">
-	<h2><p class="center"><img alt="" src="images/hotplug.png" align="middle" class="center" />&nbsp;<label for="gotoHotplugDevice">{t}Hotplug devices{/t}</label></p></h2>	
+	<h2><img alt="" src="images/hotplug.png" align="middle" class="center" />&nbsp;<label for="gotoHotplugDevice">{t}Hotplug devices{/t}</label></h2>	
 	<table style="width:100%" summary="{t}Hotplug device settings{/t}">
 		<tr>
 			<td>
 				<select name="gotoHotplugDevice" {$gotoHotplugDeviceACL} size=5  style="width:100%;" id="gotoHotplugDevice">
 	{html_options values=$gotoHotplugDeviceKeys output=$gotoHotplugDevices}
 	<option disabled>&nbsp;</option>
+				</select>
 			</td>
 		</tr>
 		<tr>
@@ -165,7 +166,7 @@
 	</table>
    </td>
    <td>
-    <h2><p class="center"<img alt="" src="images/select_printer.png" align="middle" class="center" />&nbsp;<label for="gotoPrinter">{t}Printer{/t}</label></p></h2>
+    <h2><img alt="" src="images/select_printer.png" align="middle" class="center" />&nbsp;<label for="gotoPrinter">{t}Printer{/t}</label></h2>
     <table style="width:100%" summary="{t}Printer settings{/t}">
 	<tr>
 	    <td>
