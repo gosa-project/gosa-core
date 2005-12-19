@@ -35,7 +35,7 @@
      <table summary=""  style="width:100%;border-top:1px solid #B0B0B0;">
      <tr>
      <td>
-     <LABEL for "regex"><img alt="{t}Display departments matching{/t}" src="{$search_image}" align=middle title='{t}Display departments matching{/t}'></LABEL>
+     <LABEL for="regex"><img alt="{t}Display departments matching{/t}" src="{$search_image}" align=middle title='{t}Display departments matching{/t}'></LABEL>
      </td>
      <td width="99%">
      <input type='text' name='regex' maxlength='20' style='width:99%' value='{$regex}' id='filter' 
