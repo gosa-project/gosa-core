@@ -1,4 +1,4 @@
-<table width="100%">
+<table width="100%" summary="">
 	<tr>
 		<td width="50%" valign="top" style="border-right:1px solid #A0A0A0">
 				<h2><img class="center" alt="" src="images/forward.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
@@ -10,7 +10,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<input value="{$cn}" size="45" maxsize="80" disabled id="cn">
+							<input value="{$cn}" size="45" disabled id="cn">
 						</td>
 					</tr>
 					<tr>
@@ -20,7 +20,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<input value="{$description}" size="45" maxsize="80" {$description} name="description" id="description">
+							<input value="{$description}" size="45" {$description} name="description" id="description">
 						</td>
 					</tr>
 				</table>
@@ -49,7 +49,7 @@
 	</tr>
 </table>
 <p class="seperator">&nbsp;</p>
-<table width="99%">
+<table width="99%" summary="">
 	<tr>
 		<td> 
 			<h2><img class="center" alt="" src="images/fai_packages.png" align="middle" title="{t}Used packages{/t}">&nbsp;{t}Used packages{/t}</h2>
