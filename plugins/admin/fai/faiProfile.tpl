@@ -10,7 +10,7 @@
 						</LABEL>
 					</td>
 					<td>
-						<input value="{$cn}" size="45" id="cn" name="cn">
+						<input value="{$cn}" size="45" maxlength="80" id="cn" name="cn">
 					</td>
 				</tr>
 				<tr>
@@ -20,7 +20,7 @@
 						</LABEL>
 					</td>
 					<td>
-						<input value="{$description}" size="45" name="description" id="description">
+						<input value="{$description}" size="45" maxlength="80" name="description" id="description">
 					</td>
 				</tr>
 			</table>
