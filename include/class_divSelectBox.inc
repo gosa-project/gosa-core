@@ -27,14 +27,14 @@ class divSelectBox {
   function DrawList(){
     $s_return  = "";
     $s_return .= "<div style=\"height:2px; overflow:hidden;background:#888888;width:100%;margin-right:0px;\"></div>\n";
-    $s_return .= "<div style=\"padding-right:1px;padding-bottom:2px;\" height='".$this->height."' width='100%'>\n";
+    $s_return .= "<div style=\"padding-right:1px;padding-bottom:2px;height:".$this->height.";width:100%\">\n";
     $s_return .= "<div style=\"overflow: auto;width:100%;height:".($this->height)."px;\">\n";
     $s_return .= "<table ".
                     "summary='".$this->s_summary."' ".
                     "width='100%' ".
-                    "height='".($this->height-2)."' ".
                     "cellspacing='0' ".
                     "style='overflow:scroll; ".
+                    "height:".($this->height-2).";".
                     "padding-right:1px; ".
                     "padding-bottom:2px; ".
                     "border-left:solid 2px; ".
@@ -105,6 +105,7 @@ class divSelectBox {
       }
       $s_return.="\n</tr>";
     }
+    $s_return.="\n<tr>";
     for($i = 0 ; $i < ($this->cols) ; $i ++){
       if($i >= ($this->cols-1)){
         $s_return .= "<td class='list1' style='height:100%;border:0px;'></td>";
