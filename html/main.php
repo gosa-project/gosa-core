@@ -331,10 +331,6 @@ if ((isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->d
 }
 
 /* Show page... */
-$f = fopen("/tmp/OgerMonokel.html","w+");
-fwrite($f,$display);
-fclose($f);
-
 echo $display;
 
 /* Save plist */
