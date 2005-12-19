@@ -3,7 +3,7 @@
  <!-- Headline container -->
  <tr>
   <td colspan="4">
-   <h2><p class="center"><img alt="" align="middle" src="images/head.png" class="center"> {t}Personal information{/t}</p></h2>
+   <h2><img alt="" align="middle" src="images/head.png" class="center"> {t}Personal information{/t}</h2>
   </td>
  </tr>
 
@@ -175,7 +175,7 @@
  <!-- Headline container -->
  <tr>
   <td colspan="3">
-   <h2><p class="center"><img alt="" align="middle" src="images/house.png" class="center"> {t}Organizational information{/t}</p></h2>
+   <h2><img alt="" align="middle" src="images/house.png" class="center">&nbsp;{t}Organizational information{/t}</h2>
   </td>
  </tr>
 
