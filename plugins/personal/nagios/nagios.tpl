@@ -1,7 +1,7 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding="0" border="0">
  <tr>
   <td style="width:50%; vertical-align:top;">
-   <h2><p class="center"><img class="center" alt="" align="middle" src="images/rightarrow.png" />&nbsp;{t}Nagios Account{/t}</p></h2>
+   <h2><img class="center" alt="" align="middle" src="images/rightarrow.png" />&nbsp;{t}Nagios Account{/t}</h2>
    <table summary="">
     <tr>
      <td><label for="NagiosAlias">{t}Alias{/t}</label>{$must}</td>
@@ -51,11 +51,11 @@
 
     <tr>
      <td><label for="ServiceNotificationCommands">{t}Service notification commands{/t}</label></td>
-     <td><input id="ServiceNotificationCommands" disabled name="ServiceNotificationCommands" size=25 maxlength=65 {$ServiceNotificationCommandsACL} value="{$ServiceNotificationCommands}"></td>
+     <td><input id="ServiceNotificationCommands" disabled name="ServiceNotificationCommands" size=25 maxlength=65  value="{$ServiceNotificationCommands}"></td>
     </tr>
     <tr>
      <td><label for="HostNotificationCommands">{t}Host notification commands{/t}</label></td>
-     <td><input id="HostNotificationCommands" disabled name="HostNotificationCommands" size=25 maxlength=65 {$HostNotificationCommandsACL} value="{$HostNotificationCommands}"></td>
+     <td><input id="HostNotificationCommands" disabled name="HostNotificationCommands" size=25 maxlength=65  value="{$HostNotificationCommands}"></td>
     </tr>
 </table>
 </td>
@@ -63,7 +63,7 @@
    &nbsp;
   </td>
 <td style="width:100%; vertical-align:top;">
-   <h2><p align="center"><img class="center" alt="" align="middle" src="images/rightarrow.png" />&nbsp;{t}Nagios authentification{/t}</p></h2>
+   <h2><img class="center" alt="" align="middle" src="images/rightarrow.png" />&nbsp;{t}Nagios authentification{/t}</h2>
    <table summary="">
 	<tr><td><input type="checkbox" name="AuthorizedSystemInformation" value="1" {$AuthorizedSystemInformationACL}  
 {$AuthorizedSystemInformationCHK}>{t}view system informations{/t}</td></tr>
