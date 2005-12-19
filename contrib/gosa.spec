@@ -12,7 +12,7 @@
 Summary: 		Web Based LDAP Administration Program 
 Name:			gosa
 Version: 		2.4
-Release:		1
+Release:		2
 License: 		GPL
 Source: 		ftp://oss.GONICUS.de/pub/gosa/beta/%{sourcename}.tar.bz2
 URL: 			http://oss.GONICUS.de/project/?group_id=6
@@ -21,7 +21,7 @@ Vendor:			GONICUS GmbH
 Packager:		Lars Scheiter <lars.scheiter@GONICUS.de>
 Buildarch: 		noarch
 %if %{suse}
-Requires:		apache2,php4,php4-gd,php4-ldap,php4-mcrypt,php4-imap,php4-iconv,ImageMagick,perl-Crypt-SmbHash
+Requires:		apache2,apache2-mod_php5,php5,php5-gd,php5-ldap,php5-mcrypt,php5-mysql,php5-imap,php5-iconv,php5-mbstring,php5-gettext,ImageMagick,perl-Crypt-SmbHash
 %else
 Requires: 		httpd,php,php-ldap,php-imap,perl-Crypt-SmbHash >= 0.02,ImageMagick
 %endif
@@ -137,6 +137,9 @@ rm -rf %{buildroot}
 /etc/openldap/schema/gosa
 
 %changelog
+* Mon Dec 19 2005 Lars Scheiter <lars.scheiter@GONICUS.de> 2.4-2
+- Updated SuSE dependencies to php5
+
 * Mon Nov 21 2005 Lars Scheiter <lars.scheiter@GONICUS.de> 2.4
 - New upstream version
 - Removed %doc for postgresql and openexchange
