@@ -42,7 +42,7 @@
    &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <table>
+   <table summary="">
     <tr>
     <td>
     <LABEL for="picture_file">{t}Icon{/t}</LABEL>
@@ -63,7 +63,7 @@
 
 <p class="plugbottom" style="height:4px; margin-bottom:0px;">&nbsp;</p>
 
-<h2><img src="images/lamp.png" alt="{t}Options{/t}" align="center">&nbsp;{t}Options{/t}</h2>
+<h2><img src="images/lamp.png" alt="{t}Options{/t}" align="middle">&nbsp;{t}Options{/t}</h2>
 <table summary="" style="width:100%;">
   <tr>
     <td style="width:50%;border-right:1px solid #B0B0B0; vertical-align:top">
@@ -86,10 +86,10 @@
 
 <p class="plugbottom" style="height:4px; margin-bottom:0px;">&nbsp;</p>
 
-<table width="99%">
+<table width="99%" summary="">
 	<tr>
 		<td>
-			<h2><img src="images/fai_script.png" alt="{t}Script{/t}" align="center">&nbsp;{t}Script{/t}</h2>
+			<h2><img src="images/fai_script.png" alt="{t}Script{/t}" align="middle">&nbsp;{t}Script{/t}</h2>
 			<textarea name="gotoLogonScript" style='width:99%;height:220px;'>{$gotoLogonScript}</textarea>
 			<input type="file" name="ScriptFile" value="{t}Import{/t}">
 			<input type="submit" name="upLoad" value="{t}Upload{/t}">

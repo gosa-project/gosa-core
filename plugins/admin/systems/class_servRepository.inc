@@ -182,7 +182,7 @@ class servrepository extends plugin
     */
 
     $divlist = new divList("repositories");
-    $divlist->SetEntriesPerPage(12);
+    $divlist->SetEntriesPerPage(0);
     $divlist->setHeight(400);
 
     $divlist->setHeader(array(array("string"=>_("Release"),"attach"=>"style='width:80px;'"),

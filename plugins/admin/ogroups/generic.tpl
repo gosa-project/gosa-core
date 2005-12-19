@@ -18,7 +18,6 @@
      <td colspan=2>&nbsp;</td>
     </tr>
     <tr>
-    <tr>
      <td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
      <td>
       <select size="1" id="base" name="base" {$baseACL} title="{t}Choose subtree to place group in{/t}">
