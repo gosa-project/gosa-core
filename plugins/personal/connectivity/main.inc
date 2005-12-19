@@ -132,7 +132,7 @@ if (!$remove_lock){
     }
     $display.="</div>";
   }
-  $display.= "</p>\n";
+//  $display.= "</p>\n";
 
   /* Page header*/
   $display= print_header(get_template_path('images/proxy.png'),

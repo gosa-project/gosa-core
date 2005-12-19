@@ -26,19 +26,31 @@
     <table summary="" style="margin-left:20px;">
      <tr>
       <td>
-        <select size="1" id="startHour" name="startHour" {$gosaProxyWorkingStartACL} {$Tstate}>
+        <select size="1" id="startHour" name="startHour"
+			{if $gosaProxyWorkingStartACL!="" || $Tstate!=""}
+				disabled 	
+			{/if}>
          {html_options values=$hours output=$hours selected=$starthour}
         </select>
         &nbsp;:&nbsp;
-        <select size="1" id="startMinute" name="startMinute" {$gosaProxyWorkingStartACL} {$Tstate}>
+        <select size="1" id="startMinute" name="startMinute"
+			{if $gosaProxyWorkingStartACL!="" || $Tstate!=""}
+				disabled 	
+			{/if}>
          {html_options values=$minutes output=$minutes selected=$startminute}
         </select>
         &nbsp;-&nbsp;
-        <select size="1" id="stopHour" name="stopHour" {$gosaProxyWorkingStopACL} {$Tstate}>
-         {html_options values=$hours output=$hours selected=$stophour}
+        <select size="1" id="stopHour" name="stopHour"
+			{if $gosaProxyWorkingStopACL!="" || $Tstate!=""}
+				disabled 	
+			{/if}>
+			{html_options values=$hours output=$hours selected=$stophour}
         </select>
         &nbsp;:&nbsp;
-        <select size="1" id="stopMinute" name="stopMinute" {$gosaProxyWorkingStopACL} {$Tstate}>
+        <select size="1" id="stopMinute" name="stopMinute" 
+			{if $gosaProxyWorkingStopACL!="" || $Tstate!=""}
+				disabled 	
+			{/if}>
          {html_options values=$minutes output=$minutes selected=$stopminute}
         </select>
       </td>
@@ -49,21 +61,33 @@
      &nbsp;
    </td>
       <td>
-    <input type="checkbox" id="filterB" name="filterB" value="B" {$filterB} {$pstate} {$gosaProxyAcctFlagsACL} {$gosaProxyQuotaACL}
+    <input type="checkbox" id="filterB" name="filterB" value="B" {$filterB} 
+		{if $pstate=="disabled" || $gosaProxyAcctFlagsACL=="disabled" || $gosaProxyQuotaACL=="disabled"}
+			disabled 
+		{/if} 
     	onClick="{$changeB}">
     <LABEL for="quota_size">{t}Restrict proxy usage by quota{/t}</LABEL>
     <br>
     <table summary="" style="margin-left:20px;">
      <tr>
       <td>
-       <input name="quota_size" id="quota_size" size=7 maxlength=10 {$Bstate} {$gosaProxyQuotaACL} value="{$quota_size}">
+       <input name="quota_size" id="quota_size" size=7 maxlength=10 value="{$quota_size}"
+		{if $Bstate=="disabled" || $gosaProxyQuotaACL=="disabled"}
+			disabled 
+		{/if}>
        &nbsp;
-       <select size="1" name="quota_unit" id="quota_unit" {$Bstate} {$gosaProxyQuotaACL}>
-	{html_options options=$quota_unit selected=$quota_u}
+       <select size="1" name="quota_unit" id="quota_unit"
+		{if $Bstate=="disabled" || $gosaProxyQuotaACL=="disabled"}
+            disabled
+        {/if}>
+		{html_options options=$quota_unit selected=$quota_u}
        </select>
 	   
        <LABEL for="gosaProxyQuotaPeriod">{t}per{/t}</LABEL>
-       <select size="1" name="gosaProxyQuotaPeriod" id="gosaProxyQuotaPeriod" {$Bstate} {$gosaProxyQuotaACL}>
+       <select size="1" name="gosaProxyQuotaPeriod" id="gosaProxyQuotaPeriod"
+		{if $Bstate=="disabled" || $gosaProxyQuotaACL=="disabled"}
+            disabled
+        {/if}>
         {html_options options=$quota_time selected=$gosaProxyQuotaPeriod}
        </select>
       </td>

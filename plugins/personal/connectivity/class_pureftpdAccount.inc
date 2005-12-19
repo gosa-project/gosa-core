@@ -48,12 +48,14 @@ class pureftpdAccount extends plugin
       $smarty->assign("$val", $this->$val);
       $smarty->assign($val."ACL", chkacl($this->acl, "$val"));
     }
+    $smarty->assign("fstate", "");
     if ($this->is_account){
       $smarty->assign("pureftpdState", "checked");
       $smarty->assign("fstate", "");
     } else {
       $smarty->assign("pureftpdState", "");
       if($_SESSION['js']==1){
+        if($this->acl!="#none#")
         $smarty->assign("fstate", "disabled");
       }else{
         $smarty->assign("fstate", "");
