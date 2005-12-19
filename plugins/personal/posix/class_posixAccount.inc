@@ -502,6 +502,7 @@ class posixAccount extends plugin
       }
     } else {
       if ($_SESSION['js']){
+		if($this->acl != "#none#")
         $smarty->assign("forceMode", "disabled");
       }
       $smarty->assign("force_ids", "");

@@ -1,7 +1,7 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td style="width:50%; vertical-align:top;">
-   <h2><p class="center"><img class="center" alt="" align="middle" src="images/rightarrow.png" /> {t}Generic{/t}</p></h2>
+   <h2><img class="center" alt="" align="middle" src="images/rightarrow.png" /> {t}Generic{/t}</h2>
    <table summary="">
     <tr>
      <td><label for="homeDirectory">{t}Home directory{/t}</label>{$must}</td>
@@ -61,7 +61,7 @@
     &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <h2><p class="center"><img alt="" class="center" align="middle" src="images/members.png" /> {t}Group membership{/t}</p></h2>
+   <h2><img alt="" class="center" align="middle" src="images/members.png" /> {t}Group membership{/t}</h2>
    {if $groups eq "too_many_for_nfs"}
     <b style="color:red">{t}(Warning: more than 16 groups are not supported by NFS!){/t}</b>
     <br>
@@ -81,14 +81,14 @@
 <table summary="" style="width:100% ; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td style='width:50%;vertical-align:top'>
-   <h2><p class="center"><img alt="" class="center" align="middle" src="images/terminal_small.png" /> {t}Account{/t}</p></h2>
+   <h2><img alt="" class="center" align="middle" src="images/terminal_small.png" /> {t}Account{/t}</h2>
    {include file="$pwmode.tpl"}
   </td>
   <td style="border-left:1px solid #A0A0A0">
     &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <h2><p class="center"><img alt="" class="center" align="middle" src="images/closedlock.png" /> {t}System trust{/t}</p></h2>
+   <h2><img alt="" class="center" align="middle" src="images/closedlock.png" /> {t}System trust{/t}</h2>
     {t}Trust mode{/t}&nbsp;<select name="trustmode" id="trustmode" size=1 onchange="changeSelectState('trustmode', 'wslist'); changeSelectState('trustmode', 'add_ws'); changeSelectState('trustmode', 'del_ws');" {$trustmodeACL}>
       {html_options options=$trustmodes selected=$trustmode}
     </select>
