@@ -377,7 +377,7 @@ class groupManagement extends plugin
     $sambaimg = "<img class='center' src='images/select_winstation.png'  alt='S'  title='"._("Samba")  ."'>";
     $applimg  = "<img class='center' src='images/select_application.png' alt='A'  title='"._("Application")."'>"; 
     $phoneimg = "<img class='center' src='images/select_phone.png'      alt='Ph' title='"._("Phone")  ."'>"; 
-    $envimg   = "<img class='center' src='images/network.png'      alt='E' title='"._("Environment")  ."'>"; 
+    $envimg   = "<img class='center' src='images/smallenv.png'      alt='E' title='"._("Environment")  ."'>"; 
     // Space
     $empty    = "<img class='center' src='images/empty.png' style='width:16px;height:16px;' alt=''>";
 
