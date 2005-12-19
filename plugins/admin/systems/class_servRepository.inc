@@ -190,7 +190,7 @@ class servrepository extends plugin
                               array("string"=>_("Options"),"attach"=>"style='border-right:0px;width:69px;'")
                        )     );
 
-    $link   = "<a href='?plug=".$_GET['plug']."&act=open&id=%s'>%s</a>";
+    $link   = "<a href='?plug=".$_GET['plug']."&amp;act=open&amp;id=%s'>%s</a>";
     $edit   = "<input type='image' value='%s' name='edit_%s'   src='images/edit.png'>&nbsp;";
     $delete = "<input type='image' value='%s' name='delete_%s' src='images/edittrash.png'>";
   
