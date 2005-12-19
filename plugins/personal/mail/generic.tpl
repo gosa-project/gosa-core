@@ -1,7 +1,7 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding="0" border="0">
  <tr>
   <td style="width:50%; vertical-align:top;">
-   <h2><p class="center"><img class="center" alt="" align="middle" src="images/rightarrow.png" />&nbsp;{t}Generic{/t}</p></h2>
+   <h2><img class="center" alt="" align="middle" src="images/rightarrow.png" />&nbsp;{t}Generic{/t}</h2>
    <table summary="">
     <tr>
      <td><label for="mail">{t}Primary address{/t}</label>{$must}</td>
@@ -46,7 +46,7 @@
   </td>
 
   <td style="vertical-align:top;">
-   <h2><p class="center"<img class="center" alt="" align="middle" src="images/alternatemail.png" /><label for="alternates_list"> {t}Alternative addresses{/t}</label></p></h2>
+   <h2><img class="center" alt="" align="middle" src="images/alternatemail.png" /><label for="alternates_list"> {t}Alternative addresses{/t}</label></h2>
    <select id="alternates_list" style="width:100%;height:100px;" name="alternates_list[]" size="15"
 		 multiple title="{t}List of alternative mail addresses{/t}" {$gosaMailAlternateAddressACL}>
             {html_options values=$gosaMailAlternateAddress output=$gosaMailAlternateAddress}
@@ -64,7 +64,7 @@
 
 <p class="seperator">&nbsp;</p>
 
-<h2><p class="center"><img class="center" alt="" align="middle" src="images/envelope.png" />&nbsp;{t}Mail options{/t}</p></h2>
+<h2><img class="center" alt="" align="middle" src="images/envelope.png" />&nbsp;{t}Mail options{/t}</h2>
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
  <tr style="padding-bottom:0px;">
   <td style="width:50%">
@@ -137,7 +137,7 @@
 
 <p class="seperator">&nbsp;</p>
 
-<h2><p class="center"><img class="center" alt="" align="middle" src="images/false.png" />&nbsp;{t}Advanced mail options{/t}</p></h2>
+<h2><img class="center" alt="" align="middle" src="images/false.png" />&nbsp;{t}Advanced mail options{/t}</h2>
 
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding="4" border="0">
  <tr>
