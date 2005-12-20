@@ -3,13 +3,13 @@
 	<tr>
 		<td valign="top" width="50%">
 			<h2><img class="center" alt="" src="images/fai_small.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
-				<table>
+				<table summary="">
 					<tr>
 						<td>
 							{t}Name{/t}{$must}&nbsp;
 						</td>
 						<td>
-							<input value="{$cn}" size="45" maxsize="80" name="cn">
+							<input value="{$cn}" size="45" maxlength="80" name="cn">
 						</td>
 					</tr>
 					<tr>
@@ -17,7 +17,7 @@
 							{t}Description{/t}&nbsp;
 						</td>
 						<td>
-							<input value="{$description}" size="45" maxsize="80" name="description">
+							<input value="{$description}" size="45" maxlength="80" name="description">
 						</td>
 					</tr>
 				</table>
@@ -27,7 +27,7 @@
         </td>
 		<td valign="top">
 				<h2><img class="center" alt="" src="images/fai_variable.png" align="middle" title="{t}Variable attributes{/t}">&nbsp;{t}Variable attributes{/t}</h2>
-				<table width="100%">
+				<table  summary="" width="100%">
 					<tr>
 						<td>
 							<LABEL for="Content">

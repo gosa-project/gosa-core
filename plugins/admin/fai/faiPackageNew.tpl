@@ -15,7 +15,7 @@
 <br>
 <br>
 </p>
-<table>
+<table summary="">
 <tr>
 	<td height="30">
 		<b><LABEL for="release">{t}Following releases are available{/t}</LABEL></b>

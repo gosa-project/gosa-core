@@ -14,10 +14,10 @@
 <br>
 </p>
 <br>
-<table style='width:100%'>
+<table summary="" style='width:100%'>
  <tr>
   <td style='width:49%'>
-   <table>
+   <table summary="">
     <tr>
      <td>
        <input type=radio name="classSelector" value="1" checked>
@@ -39,7 +39,7 @@
   <td style='border-left:1px solid #909090'>
   </td>
   <td>
-   <table {$grey}>
+   <table summary="" {$grey}>
     <tr>
      <td>
        <input type=radio name="classSelector" value="2" {$ClassNamesAvailable}>
@@ -64,7 +64,7 @@
 </table>
 
 <!--
-<table>
+<table summary="">
 	<tr>
 		<td>
 		<input type="submit" name="UseSelectedClass" value="{t}Use{/t}" {$ClassNamesAvailable}> 

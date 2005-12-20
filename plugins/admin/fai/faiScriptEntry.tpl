@@ -3,13 +3,13 @@
 	<tr>
 		<td valign="top" width="50%">
 			<h2><img class="center" alt="" src="images/forward.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
-				<table>
+				<table summary="">
 					<tr>
 						<td>
 							{t}Name{/t}{$must}&nbsp;
 						</td>
 						<td>
-							<input value="{$cn}" size="45" maxsize="80" name="cn">
+							<input value="{$cn}" size="45" maxlength="80" name="cn">
 						</td>
 					</tr>
 					<tr>
@@ -17,7 +17,7 @@
 							{t}Description{/t}&nbsp;
 						</td>
 						<td>
-							<input size="45" maxsize="80" value="{$description}" name="description">
+							<input size="45" maxlength="80" value="{$description}" name="description">
 						</td>
 					</tr>
 				</table>
@@ -27,7 +27,7 @@
         </td>
 		<td valign="top">
 				<h2><img class="center" alt="" src="images/fai_script.png" align="middle" title="{t}Properties{/t}">&nbsp;{t}Script attributes{/t}</h2>
-				<table width="100%">
+				<table summary="" width="100%">
 					<tr>
 						<td>
 							<LABEL for="FAIpriority">
@@ -50,7 +50,7 @@
 		{t}Script{/t}
 	</LABEL>
 	</h2>
-<table width="99%">
+<table summary="" width="99%">
     <tr>
         <td>
             <textarea name="FAIscript" style="width:100%;height:300px;" id="FAIscript">{$FAIscript}</textarea>

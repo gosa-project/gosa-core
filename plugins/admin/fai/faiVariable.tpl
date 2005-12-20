@@ -1,4 +1,4 @@
-<table width="100%">
+<table summary="" width="100%">
 	<tr>
 		<td width="50%" valign="top">
 				<h2><img class="center" alt="" src="images/fai_small.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
@@ -10,7 +10,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<input value="{$cn}" size="45" maxsize="80" disabled id="cn">
+							<input value="{$cn}" size="45" maxlength="80" disabled id="cn">
 						</td>
 					</tr>
 					<tr>
@@ -20,7 +20,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<input size="45" maxsize="80" value="{$description}" {$description} name="description" id="description">
+							<input size="45" maxlength="80" value="{$description}" {$description} name="description" id="description">
 						</td>
 					</tr>
 				</table>
@@ -34,7 +34,7 @@
 						{t}List of assigned variables{/t}
 					</LABEL>
 				</h2>
-				<table width="100%">
+				<table summary="" width="100%">
 				<tr>
 					<td>
 						<select name="SubObject" title="{t}Choose a variable to delete or edit{/t}" style="width:100%;" size="20" id="SubObject">

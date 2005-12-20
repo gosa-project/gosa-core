@@ -5,11 +5,11 @@
 <tr>
 	<td width="50%">
 		{t}Name{/t}{$must}&nbsp;
-		<input value="{$cn}" name="cn" size="45" maxsize="80">&nbsp;&nbsp;
+		<input value="{$cn}" name="cn" size="45" maxlength="80">&nbsp;&nbsp;
 	</td>
 	<td>
 		{t}Description{/t}&nbsp;
-		<input size="45" maxsize="80" value="{$description}" name="description">
+		<input size="45" maxlength="80" value="{$description}" name="description">
 	</td>
 </tr>
 </table>
@@ -22,7 +22,7 @@
 </tr>
 <tr>
   <td style="vertical-align:top;width:50%;border-right:1px solid #B0B0B0">
-   <table>
+   <table summary="">
     <tr>
 		<td style="vertical-align:top">
 			<LABEL for="FAItemplateFile">
@@ -54,7 +54,7 @@
 		</table>
 	</td>
 	<td>
-	  <table>
+	  <table summary="">
 		<tr>
 	
 		<td>
@@ -79,7 +79,7 @@
 	</tr><tr>
 		<td style="vertical-align:top">{t}Access{/t}{$must}&nbsp; </td>
 		<td>
-	  <table style="border:1px solid #B0B0B0">
+	  <table summary="" style="border:1px solid #B0B0B0">
 	       <colgroup width="55" span="3">
 	        </colgroup>
 		<tr>
