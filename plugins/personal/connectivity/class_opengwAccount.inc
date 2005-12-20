@@ -64,7 +64,11 @@ class opengwAccount extends plugin
 			if($this->handle->connected){
 
 				/* Set login name, to check if this is_account */
-				$this->handle->info['login'] = $this->attrs['uid'][0];
+				if(isset($this->attrs['uid'][0])){
+					$this->handle->info['login'] = $this->attrs['uid'][0];
+				}else{
+					$this->handle->info['login'] = ""; 
+				}
 
 				/* If this is account get data from database first */
 				if($this->handle->CheckExistence()){
