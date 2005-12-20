@@ -1247,7 +1247,7 @@ function range_selector($dcnt,$start,$range=25,$post_var=false)
 
   if($post_var){
     $output.= "<div style='border:1px solid #E0E0E0; background-color:#FFFFFF;'>
-              <table width='100%'><tr><td style='width:25%'></td><td style='text-align:center;'>";
+              <table summary='' width='100%'><tr><td style='width:25%'></td><td style='text-align:center;'>";
   }else{
     $output.= "<div style='border:1px solid #E0E0E0; background-color:#FFFFFF;'>";
   }
