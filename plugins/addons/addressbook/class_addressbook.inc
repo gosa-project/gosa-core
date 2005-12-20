@@ -71,7 +71,6 @@ class addressbook extends plugin
 		plugin::execute();
 
     $smarty= get_smarty();
-
     foreach($this->attributes as $attr){
       $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
     }
@@ -382,7 +381,7 @@ class addressbook extends plugin
 						$dest= sprintf(_("Send mail to %s"), $attrs['mail'][0]);
 						$this->telephone_list[$attrs['sn'][0].$attrs['dn']].=
 
-							"<a href=\"mailto:".$attrs['mail'][0]."\">".
+							"<a href=\"mailto:".htmlentities($attrs['mail'][0])."\">".
 							"<img  align=\"top\" border=0 src=\"images/mailto.png\" ".
 							"alt=\"vcf\" title=\"$dest\"></a>";
 					}

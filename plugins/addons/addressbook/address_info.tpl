@@ -40,7 +40,7 @@
    <td>{t}Mobile{/t}</td><td><i>{$info_mobile}</i></td>
   </tr>
   <tr>
-   <td>{t}Email{/t}</td><td><i><a href="mailto:{$info_givenName} {$info_sn} <{$info_mail}>">{$info_mail}</a></i></td>
+   <td>{t}Email{/t}</td><td><i><a href="mailto:{$info_givenName}%20{$info_sn}%20%3C{$info_mail}%3E">{$info_mail}</a></i></td>
   </tr>
  </table>
 
