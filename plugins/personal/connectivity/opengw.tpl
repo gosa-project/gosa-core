@@ -5,7 +5,7 @@
 			<table summary="">
 				<tr>
 					<td>
-						{t}Location team{/t} :&nbsp;
+						{t}Location team{/t} &nbsp;
 					</td>
 					<td>
 						<select size="1" id="LocationTeam" name="LocationTeam"
@@ -18,7 +18,7 @@
 				</tr>
 				<tr>
 					<td>
-						{t}Template user{/t} :&nbsp;
+						{t}Template user{/t} &nbsp;
 					</td>
 					<td>
 						<select size="1" id="TemplateUser" name="TemplateUser"
@@ -31,10 +31,10 @@
 				</tr>	
 				<tr>
 					<td valign="top">
-						{t}Locked{/t} :&nbsp; 
+						{t}Locked{/t} &nbsp; 
 					</td>
 					<td valign="top">
-						<input type="checkbox" value="1" name="is_locked" 
+						<input type="checkbox" value="1" name="is_locked" {$is_lockedCHK}  
 						   {if $is_lockedACL!="" || $OGWstate!=""}
                                 disabled
                            {/if}>
@@ -46,7 +46,7 @@
 			<table summary="">
 				<tr>
 					<td valign="top">
-						{t}Teams{/t} :&nbsp; 
+						{t}Teams{/t} &nbsp; 
 					</td>
 					<td valign="top">
 						{$validTeams}	
