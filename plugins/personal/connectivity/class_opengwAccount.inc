@@ -112,7 +112,7 @@ class opengwAccount extends plugin
       $smarty->assign($ar,array());
     }
     $smarty->assign("OGWstate"," disabled ");
-    foreach(array("LocationTeam","TemplateUser","is_locked","validTeams","opengwAccount") as $ar){
+    foreach(array("LocationTeam","TemplateUser","is_locked","validTeams","opengwAccount","is_account") as $ar){
       $smarty->assign($ar,"");
       $smarty->assign($ar."CHK","");
       $smarty->assign($ar."ACL"," disabled ");
