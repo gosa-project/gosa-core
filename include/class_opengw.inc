@@ -42,8 +42,10 @@ class ogw{
   }
  
   function SetInfos($infos)
-  {   
-    $infos['name1']              = $infos['name'];
+  { 
+    if(isset($infos['name']))  {
+      $infos['name1']              = $infos['name'];
+    }
     $this->info = $infos;
   }
 
