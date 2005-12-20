@@ -20,7 +20,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<input size="45" maxlength="80" value="{$description}" {$description} name="description" id="description">
+							<input size="45" maxlength="80" value="{$description}" name="description" id="description">
 						</td>
 					</tr>
 				</table>
