@@ -341,12 +341,6 @@ class config  {
 						'PASSWORD' => $attrs['goFaxPassword'][0]);
 	}
 
-	$this->data['SERVERS']['OPENGROUPWARE']= array( 
-			'SERVER' 	=> "vserver-18",
-			'LOGIN' 	=> "ogo",
-			'PASSWORD' 	=> "",
-			'DB'		=> "ogo");
-
 	/* Get asterisk servers */
 	$ldap->cd ($this->current['BASE']);
 	$ldap->search ("(objectClass=goFonServer)");
