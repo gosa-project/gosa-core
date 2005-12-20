@@ -1,6 +1,6 @@
 <input type="hidden" name="SubObjectFormSubmitted" value="1">
 
-<h2><img class="center" alt="" src="images/forward.png" valign="middle" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
+<h2><img class="middle" alt="" src="images/forward.png" title="{t}Generic{/t}">&nbsp;{t}Generic{/t}</h2>
 <table width="100%" summary="">
 <tr>
 	<td width="50%">
@@ -18,7 +18,7 @@
 
 <table width="100%" summary="">
 <tr>
-  <td colspan=2><h2><img class="center" alt="" src="images/fai_template.png" valign="middle" title="{t}Template attributes{/t}">&nbsp;{t}Template attributes{/t}</h2></td>
+  <td colspan=2><h2><img class="middle" alt="" src="images/fai_template.png" title="{t}Template attributes{/t}">&nbsp;{t}Template attributes{/t}</h2></td>
 </tr>
 <tr>
   <td style="vertical-align:top;width:50%;border-right:1px solid #B0B0B0">
@@ -32,7 +32,7 @@
 		<td style="vertical-align:top">
 			{$status}
 			{if $FAItemplatePath}
-			  <a href="getbin.php?rand={$rand}"><img class="center" alt="{t}Save template{/t}..." title="{t}Save template{/t}..." src="images/save.png" border="0" align="center" /></a>
+			  <a href="getbin.php?rand={$rand}"><img class="middle" alt="{t}Save template{/t}..." title="{t}Save template{/t}..." src="images/save.png" border="0" /></a>
 			{/if}
 			<br>
 			<br>
@@ -116,8 +116,6 @@
 			<td>&nbsp;</td>
 			<td align="center"><input type="checkbox" name="s1" value="1" {$s1}></td>
 			<td>({t}sticky{/t})</td>
-		</tr>
-		</td>
 	</tr></table>
 	
 		</td></tr></table>
