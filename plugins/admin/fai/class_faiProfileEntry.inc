@@ -104,8 +104,9 @@ class faiProfileEntry extends plugin
     /* Check if we used a checkboxe from the list, to select dselect an entry */
     foreach($_POST as $name => $value){
       foreach($this->FAIAllclasses as $class => $obj){
-        if(isset($_POST["ON_PAGE_".$class])){
-          if(isset($_POST['USE_'.$class])){
+        $bclass = base64_encode($class);
+        if(isset($_POST["ON_PAGE_".$bclass])){
+          if(isset($_POST['USE_'.$bclass])){
             $this->FAIAllclasses[$class]['status']=true;  
           }else{
             $this->FAIAllclasses[$class]['status']=false;  
@@ -199,7 +200,7 @@ class faiProfileEntry extends plugin
         }      
         
         /* Append to list */
-        $field1 = array("string"=> preg_replace("/%KEY%/",$usedClass,$action_check).$usedClass,"attach"=>"");
+        $field1 = array("string"=> str_replace("%KEY%",base64_encode($usedClass),$action_check).$usedClass,"attach"=>"");
         $field2 = array("string"=> $str,"attach"=>"style='border-right:0px;'");
         $divlist->AddEntry(array($field1,$field2));
       }
