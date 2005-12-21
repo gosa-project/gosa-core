@@ -187,7 +187,7 @@ class servrepository extends plugin
 
     $divlist->setHeader(array(array("string"=>_("Release"),"attach"=>"style='width:80px;'"),
                               array("string"=>_("Sections")),
-                              array("string"=>_("Options"),"attach"=>"style='border-right:0px;width:69px;'")
+                              array("string"=>_("Options"),"attach"=>"style='border-right:0px;width:55px;'")
                        )     );
 
     $link   = "<a href='?plug=".$_GET['plug']."&amp;act=open&amp;id=%s'>%s</a>";
@@ -208,7 +208,7 @@ class servrepository extends plugin
       $divlist->AddEntry(array(
                               array("string"=>preg_replace("/%s/",$name,$link),"attach"=>"style='width:80px;'"),
                               array("string"=>sprintf($link,$name,_("Sections")." :".$str)),
-                              array("string"=>preg_replace("/%s/",$name,$edit.$delete),"attach"=>"style='border-right:0px;width:50px;text-align:right;'")
+                              array("string"=>preg_replace("/%s/",$name,$edit.$delete),"attach"=>"style='border-right:0px;width:55px;text-align:right;'")
                               ));
       }
     }

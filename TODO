@@ -3,6 +3,12 @@ Target for 2.4.1:
 
 * Encoding für Serverfreigaben in Datei /etc/gosa/encodings auslagern, class_servNfs.inc
 
+* Create a status-bar/-display for FAI installations 
+	(Use notes from 0.5.12.2005)
+
+* Create backend for glpi object documentation.
+	(Use notes from 0.5.12.2005)
+
 * Add online help (english/german)
 
 * Group mail is not initially add-able?
