@@ -570,7 +570,7 @@ class appgroup extends plugin
 
     /* Append entries */
 
-    $separator ="<hr height=1  size=1></hr>"; 
+    $separator ="<hr size=1>"; 
 
     $sep = "<input type='image' src='images/back.png' title='"._("Insert seperator")."' value='%s' name='AddSep_%s'>";
   
