@@ -65,7 +65,7 @@ class divSelectBox {
 	
     /* If divlist is empty, append a single white entry */
     if(count($this->a_entries)==0){
-      $str.="<tr><td class='list1' style='height:100%';>&nbsp;</td></tr>";
+      $str.="<tr><td class='list1' style='height:100%;'>&nbsp;</td></tr>";
       return($str);
     }
 
