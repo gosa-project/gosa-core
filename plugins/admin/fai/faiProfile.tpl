@@ -30,9 +30,10 @@
 				<tr>
 					<td style="vertical-align:top;">
 						<h2><img class="center" alt="" src="images/fai_template.png" align="middle" title="{t}Generic{/t}">&nbsp;{t}FAI classes{/t}</h2> 
-						<select name="FAIclass" title="{t}Choose a priority{/t}" size="20" style="width:100%;" multiple>
+<!--						<select name="FAIclass" title="{t}Choose a priority{/t}" size="20" style="width:100%;" multiple>
 							{html_options values=$FAIclasses output=$FAIclasses}
-						</select>
+						</select>-->
+						{$divlist}
 						<br>
 						<input type="submit" name="AddClass" value="{t}Add{/t}">
 						<input type="submit" name="DelClass" value="{t}Delete{/t}">
