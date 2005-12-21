@@ -273,14 +273,15 @@ class appgroup extends plugin
    	plugin::execute();
 
     if((isset($_GET['act']))&&($_GET['act']=="depopen")){
-      $dep = base64_decode($_GET['depid']);  
+      print $_GET['id'];
+      $dep = base64_decode($_GET['id']);  
       if(isset($this->config->idepartments[$dep])){
-        $this->curbase = $dep;
+        $this->curbase =$dep;
       }
     }
 
     if((isset($_GET['act']))&&($_GET['act']=="open")){
-      $this->curCatDir = $_GET['id'];
+      $this->curCatDir = base64_decode($_GET['id']);
     }
 
     /* Do we need to flip is_account state? */
@@ -313,7 +314,7 @@ class appgroup extends plugin
   
     
     if((isset($_POST['AddCat']))&&(isset($_POST['CatName']))&&(!empty($_POST['CatName']))){
-      
+
       if(preg_match("/[\\\\\/]/i",$_POST['CatName'])){
         print_red(_("Invalid character in category name."));
       }elseif(!in_array($_POST['CatName'],$this->Categories)){ 
@@ -330,6 +331,7 @@ class appgroup extends plugin
 
     $this->reload();
     foreach($_POST as $name => $value){
+      
       if(preg_match("/AddSep_/",$name)){
         $this->AddSeperator($value);
       }
@@ -348,15 +350,22 @@ class appgroup extends plugin
           }
         }
       }
+
       if(preg_match("/DelCat_/",$name)){
         $n = preg_replace("/DelCat_/","",$name);
         $app = base64_decode( preg_replace("/_.*$/","",$n));
         foreach($this->Categories as $key =>  $cat){
           if($cat == $app){
+            foreach($this->Categories as $p => $n){
+              if(preg_match("/^".$key."\/.*/",$p)){
+                unset($this->Categories[$p]);    
+              }
+            }
             unset($this->Categories[$key]);
           }
         }
       }
+      
       if(preg_match("/EdiApp_/",$name)){
         $appname = $value;
         /* We've got the appname, get parameters from ldap */
@@ -406,7 +415,6 @@ class appgroup extends plugin
       }
     }
     $this->reload();
-
     /* Add group with post */
     if((isset($_GET['act']))&&($_GET['act']=="add")){
       $this->used_apps[$_GET['id']]= $_GET['id'];
