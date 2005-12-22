@@ -357,6 +357,18 @@ class config  {
 						'QUEUE_TABLE'	=> "queues",
 						'QUEUE_MEMBER_TABLE'	=> "queue_members");
 	}
+	
+	/* Get asterisk servers */
+	$ldap->cd ($this->current['BASE']);
+	$ldap->search ("(objectClass=goiGlpiServer)");
+	if ($ldap->count()){
+		$attrs= $ldap->fetch();
+		$this->data['SERVERS']['GLPI']= array( 
+						'SERVER' 	=> $attrs['cn'][0],
+						'LOGIN' 	=> $attrs['goGlpiAdmin'][0],
+						'PASSWORD' 	=> $attrs['goGlpiPassword'][0],
+						'DB'		=> $attrs['goGpliDatabase'][0]);
+	}
 	/* Get logdb server */
 	$ldap->cd ($this->current['BASE']);
 	$ldap->search ("(objectClass=goLogDBServer)");
