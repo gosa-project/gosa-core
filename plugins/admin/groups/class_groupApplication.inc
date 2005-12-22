@@ -330,27 +330,40 @@ class appgroup extends plugin
 
 
     $this->reload();
+    $only_once = false;
     foreach($_POST as $name => $value){
       
-      if(preg_match("/AddSep_/",$name)){
-        $this->AddSeperator($value);
+      if((preg_match("/AddSep_/",$name))&&(!$only_once)){
+        $only_once = true;
+        $n = preg_replace("/AddSep_/","",$name);
+        $val= preg_replace("/_.*$/","",$n);
+        $this->AddSeperator($val);
       }
-    
 
-      if(preg_match("/DelApp_/",$name)){
-        $app = $value; 
+      if((preg_match("/DelApp_/",$name))&&(!$only_once)){
+        $only_once = true;
+   
+
+        if(preg_match("/DelApp___SEPARATOR__/",$name)) {
+          $n=  preg_replace("/DelApp___SEPARATOR__/","",$name);
+          $val= "__SEPARATOR__".preg_replace("/_.*$/","",$n);
+        }else{
+          $n = preg_replace("/DelApp_/","",$name);
+          $val= preg_replace("/_.*$/","",$n);
+        }
+
         foreach($this->gosaMemberApplication as $key =>  $cat){
           foreach($cat as $key2 => $app){
-            if($app['App'] == $value){
+            if($app['App'] == $val){
               unset($this->gosaMemberApplication[$key][$key2]);
-              if(isset($this->used_apps[$value])){
-                unset($this->used_apps[$value]);
+              if(isset($this->used_apps[$val])){
+                unset($this->used_apps[$val]);
               }
             }
           }
         }
       }
-
+  
       if(preg_match("/DelCat_/",$name)){
         $n = preg_replace("/DelCat_/","",$name);
         $app = base64_decode( preg_replace("/_.*$/","",$n));
