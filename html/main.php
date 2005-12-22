@@ -318,7 +318,7 @@ $display= $header.$smarty->fetch(get_template_path('framework.tpl'));
 }
 */
 
-if ((isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->data['MAIN']['W3CTEST']))&&(!empty($display))) {
+if ((isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->data['MAIN']['W3CTEST']))&&(!empty($display))&&(is_callable("tidy_parse_string"))) {
   tidy_parse_string(utf8_decode($display));
   $err = nl2br(htmlentities(tidy_get_error_buffer()));
   
