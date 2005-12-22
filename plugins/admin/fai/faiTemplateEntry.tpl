@@ -94,7 +94,7 @@
 		<tr><td>{t}User{/t}</td>
 			<td align="center"><input type="checkbox" name="u4" value="4" {$u4}></td>
 			<td align="center"><input type="checkbox" name="u2" value="2" {$u2}></td>
-			<td align="center"><input type="checkbox" name="u1" value="1"> {$u1}</td>
+			<td align="center"><input type="checkbox" name="u1" value="1" {$u1}></td>
 			<td>&nbsp;</td>
 			<td align="center"><input type="checkbox" name="s4" value="4" {$s4}></td>
 			<td>({t}SUID{/t})</td>
