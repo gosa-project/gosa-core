@@ -12,24 +12,87 @@ class glpiAccount extends plugin
   var $attributes= array();
   var $objectclasses= array("whatever");
 
+  var $initialy_was_account = false;
+
+  var $data;
+  var $handle = NULL;
+
   /* Contructor 
      Sets default values and checks if we already hae an existing glpi account
   */
   function glpiAccount ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
-    print $this->is_account;
-    print $this->initialy_was_account;
+
+    if(!isset($this->config->data['SERVERS']['GLPI'])){
+      return;
+    }
+    
+    $this->data = $this->config->data['SERVERS']['GLPI'];
+    
+    if(!is_callable("mysql_connect")){
+      return;
+    }
+    
+    $this->handle = new glpiDB($this->data['SERVER'],$this->data['LOGIN'],$this->data['PASSWORD'],$this->data['DB']);
+    
+    if(!$this->handle->is_connected){
+      return;
+    } 
+
+    if($this->handle->is_account($this->dn)){
+      $this->is_account = true;
+    }else{
+      $this->is_account = false;
+    }
+
+    $this->initialy_was_account = $this->is_account;
   }
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+  	/* Call parent execute */
+	  plugin::execute();
 
     /* Fill templating stuff */
     $smarty= get_smarty();
     $display= "";
+
+    /* Assign smarty defaults */ 
+    foreach(array("SystemTypes","Manufacturers","OSs","TechnicalResponsibles","InstalledDevices","Attachments") as $attr){
+      $smarty->assign($attr,array());
+      $smarty->assign($attr."ACL"," disabled ");
+    }
+
+    foreach(array("SystemType","Manufacturer","OS","TechnicalResponsible") as $attr){
+      $smarty->assign($attr,"");
+      $smarty->assign($attr."ACL"," disabled ");
+    }
+
+    /* Perform some checks
+     *  arround the database
+     */ 
+    if(!isset($this->config->data['SERVERS']['GLPI'])){
+      print_red(_("There is no valid configuration for glpi database available."));
+      return($smarty->fetch(get_template_path('glpi.tpl', TRUE)));
+    }
+    $this->data = $this->config->data['SERVERS']['GLPI'];
+
+    if(!is_callable("mysql_connect")){
+      print_red(_("The php mysql extension is missing. Can't perform any queries."));
+      return($smarty->fetch(get_template_path('glpi.tpl', TRUE)));
+    }
+
+    $this->handle = new glpiDB($this->data['SERVER'],$this->data['LOGIN'],$this->data['PASSWORD'],$this->data['DB']);
+
+    if(!$this->handle->is_connected){
+      print_red(_("Can't copnnect to specified database."));
+      return($smarty->fetch(get_template_path('glpi.tpl', TRUE)));
+    }
+
+    /* If we reach this this 
+     * the database connection seams to ok
+     */
 
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
@@ -45,6 +108,26 @@ class glpiAccount extends plugin
           _("This server has DNS features disabled. You can enable them by clicking below."));
       return ($display);
     }
+
+
+    foreach(array("SystemType","Manufacturer","OS","TechnicalResponsible","InstalledDevices","Attachments") as $attr){
+      $smarty->assign($attr,"");
+      $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
+    }
+    
+
+    $smarty->assign("SystemTypes",$this->handle->getSystemTypes());
+    $smarty->assign("SystemType","os");
+
+    $smarty->assign("OSs",$this->handle->getOSTypes());
+    $smarty->assign("OS","is");
+
+    $smarty->assign("Manufacturers",$this->handle->getEnterprisesTypes());
+    $smarty->assign("Manufacturer","still");
+
+    $smarty->assign("TechnicalResponsibles",array("os","is","still","missing"));
+    $smarty->assign("TechnicalResponsible","missing");
+
 
     $display.= $smarty->fetch(get_template_path('glpi.tpl', TRUE));
     return($display);

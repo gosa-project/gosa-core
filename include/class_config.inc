@@ -367,7 +367,7 @@ class config  {
 						'SERVER' 	=> $attrs['cn'][0],
 						'LOGIN' 	=> $attrs['goGlpiAdmin'][0],
 						'PASSWORD' 	=> $attrs['goGlpiPassword'][0],
-						'DB'		=> $attrs['goGpliDatabase'][0]);
+						'DB'		=> $attrs['goGlpiDatabase'][0]);
 	}
 	/* Get logdb server */
 	$ldap->cd ($this->current['BASE']);
