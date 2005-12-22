@@ -258,5 +258,5 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.36 NAME 'goMailServer' SUP top AUXILIARY
 # Glpi Server description
 objectclass (1.3.6.1.4.1.10098.1.2.1.37 NAME 'goGlpiServer' SUP top AUXILIARY
 	DESC 'Glpi server definition (v2.4)'
-	MUST ( cn $ goGlpiPassword $ goGlpiAdmin $ goGlpiDatabase)
-	MAY  ( description ) )
+	MUST ( cn $ goGlpiAdmin $ goGlpiDatabase)
+	MAY  ( description $ goGlpiPassword) )
