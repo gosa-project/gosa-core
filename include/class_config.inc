@@ -360,7 +360,7 @@ class config  {
 	
 	/* Get asterisk servers */
 	$ldap->cd ($this->current['BASE']);
-	$ldap->search ("(objectClass=goiGlpiServer)");
+	$ldap->search ("(objectClass=goGlpiServer)");
 	if ($ldap->count()){
 		$attrs= $ldap->fetch();
 		$this->data['SERVERS']['GLPI']= array( 
