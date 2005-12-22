@@ -27,6 +27,10 @@ class servdb extends plugin
   var $goFonAreaCode= "";
   var $goFonCountryCode= "";
   var $ignore_account= TRUE;
+  var $goGlpiAdmin="";
+  var $goGlpiDatabase = "";
+  var $goGlpiPassword ="";
+  
 
   /* attribute list for save action */
   var $attributes= array("goImapName", "goImapConnect", "goImapAdmin", "goImapPassword",
@@ -128,6 +132,14 @@ class servdb extends plugin
   {
     $message= array();
 
+    if(in_array("goGlpiServer",$this->objectclasses)){
+      foreach(array("goGlpiAdmin","goGlpiDatabase") as $attr){
+        if(empty($this->$attr)){
+          $message[]= sprintf(_("The attribute '%s' is empty or contains invalid characters."), $attr);
+        }
+      }
+    }
+
     /* All fields are marked as *must* */
     if (in_array("goImapServer", $this->objectclasses)){
       foreach (array("goImapAdmin", "goImapName") as $attr){
@@ -135,6 +147,7 @@ class servdb extends plugin
           $message[]= sprintf(_("The attribute '%s' is empty or contains invalid characters."), $attr);
         }
       }
+
 
       /* Check connect string */
       if (!preg_match('/^\{[^:]+:[0-9]+.*\}$/', $this->goImapConnect)){
