@@ -15,9 +15,6 @@ Target for 2.4.1:
 
 * Make schema check configurable from gosa.conf
 
-* Check all image buttons, if their posts are handled correctly.
-	IE and Konqueror post different values.... as firefox.
-
 * Check virenschleuder/Winstations in Admin->Systems 
 	LDAP-Fehler: Cannot modify object class (structural object class modification from 'person' to 'inetOrgPerson' not allowed)
 
