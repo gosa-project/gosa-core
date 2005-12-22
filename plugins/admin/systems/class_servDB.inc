@@ -33,7 +33,7 @@ class servdb extends plugin
                          "goImapSieveServer", "goImapSievePort", "goKrbRealm", 
                          "goKrbAdmin", "goKrbPassword", "goFaxAdmin", "goFaxPassword",
                          "goLogAdmin", "goLogPassword", "goFonAdmin", "goFonPassword",
-                         "goFonAreaCode", "goFonCountryCode");
+                         "goFonAreaCode", "goFonCountryCode","goGlpiAdmin","goGlpiDatabase","goGlpiPassword");
   var $objectclasses= array("top", "goServer");
   var $additionaloc= array("goImapServer" => array("goImapName", "goImapConnect",
                                                 "goImapAdmin", "goImapPassword",
@@ -43,6 +43,7 @@ class servdb extends plugin
                                                 "goKrbPassword"),
                           "goFaxServer" => array("goFaxAdmin", "goFaxPassword"),
                           "goLogDBServer" => array("goLogAdmin", "goLogPassword"),
+                          "goGlpiServer" => array("goGlpiAdmin","goGlpiDatabase","goGlpiPassword"),
                           "goFonServer" => array("goFonAdmin", "goFonPassword",
                                                 "goFonAreaCode", "goFonCountryCode"));
 

@@ -112,6 +112,30 @@ value="{$goLogPassword}" {$goLogDBServerState}></td>
 	</tr>
    </table>
   
+   <p class="seperator">&nbsp;</p>
+   <br>
+
+
+   <input type=checkbox name="goGlpiServer" value="1" {$goGlpiServer} {$goGlpiServerACL} onclick="changeState('goGlpiAdmin');changeState('goGlpiPassword');changeState('goGlpiDatabase');"> <b>{t}Glpi database{/t}</b>
+  
+   <table summary="">
+    <tr>
+	 <td>{t}Logging DB user{/t}</td>
+	 <td><input name="goGlpiAdmin" id="goGlpiAdmin" size=30 maxlength=60 {$goGlpiAdminACL}
+value="{$goGlpiAdmin}" {$goGlpiServerState}></td>
+	</tr>
+    <tr>
+	 <td>{t}Password{/t}</td>
+	 <td><input type="password" name="goGlpiPassword" id="goGlpiPassword" size=30 maxlength=60 {$goGlpiPasswordACL}
+value="{$goGlpiPassword}" {$goGlpiServerState}></td>
+	</tr>
+    <tr>
+	 <td>{t}Database{/t}</td>
+	 <td><input name="goGlpiDatabase" id="goGlpiDatabase" size=30 maxlength=60 {$goGlpiDatabaseACL}
+value="{$goGlpiDatabase}" {$goGlpiServerState}></td>
+	</tr>
+   </table>
+  
   </td>
   
  </tr>
