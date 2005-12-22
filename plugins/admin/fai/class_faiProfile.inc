@@ -37,22 +37,10 @@ class faiProfile extends plugin
     $ldap=$this->config->get_ldap_link();
 
     $tmp = split(" ",$this->FAIclass);
-    $tmp3 = $tmp2 = array();
+    $tmp2 = array();
     foreach($tmp as $class){
       if(!empty($class)){
-        if(preg_match("/|/",$class)){
-          $o = split("\|",$class);
-          $tmp3[$o[1]] = trim($o[0]);
-        }else{
-          $tmp2[trim($class)] = trim($class);
-        }
-      }
-    }
-    $this->FAIclasses = array();
-    ksort($tmp3);
-    if(is_array($tmp3)){
-      foreach($tmp3 as $class){
-        $this->FAIclasses[$class]=$class;
+        $tmp2[trim($class)] = trim($class);
       }
     }
     
@@ -184,7 +172,7 @@ class faiProfile extends plugin
       if(preg_match("/DEL_/i",$name)){
         $s_action = "delete";
         $s_entry  = preg_replace("/DEL_/","",$name);
-        $s_entry  = preg_replace("/_.*$/","",$s_entry);
+        $s_entry  = base64_decode(preg_replace("/_.*$/","",$s_entry));
       }elseif(preg_match("/Add_class/i",$name)){
         $s_action  = "add";
       }elseif(preg_match("/DelClass/i",$name)){
@@ -280,7 +268,7 @@ class faiProfile extends plugin
   
       $field1 = array("string"=> $usedClass,"attach"=>"");
       $field2 = array("string"=> $str,"attach"=>"");
-      $field3 = array("string"=> preg_replace("/%KEY%/",$usedClass,$actions).preg_replace("/%s/",base64_encode($usedClass),$linkupdown),"attach"=>"style='border-right:none;'");
+      $field3 = array("string"=> preg_replace("/%KEY%/",base64_encode($usedClass),$actions).preg_replace("/%s/",base64_encode($usedClass),$linkupdown),"attach"=>"style='border-right:none;'");
       $divlist->AddEntry(array($field1,$field2,$field3));
     }
 
@@ -357,10 +345,8 @@ class faiProfile extends plugin
     $ldap = $this->config->get_ldap_link();
 
     $this->FAIclass = "";
-    $i = 0 ; 
     foreach($this->FAIclasses as $class){
-      $i ++ ; 
-      $this->FAIclass.=$class."|".$i." ";
+      $this->FAIclass.=$class." ";
     }
 
     $this->attrs['FAIclass']=trim($this->FAIclass);
