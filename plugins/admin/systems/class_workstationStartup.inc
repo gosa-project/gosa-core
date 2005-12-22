@@ -384,7 +384,7 @@ class workstartup extends plugin
     $str_up     = " &nbsp;<input type='image' src='images/sort_up.png'    name='sort_up_%s'    value='%s'>";
     $str_down   = " &nbsp;<input type='image' src='images/sort_down.png'  name='sort_down_%s'  value='%s'>";
     $str_remove = " &nbsp;<input type='image' src='images/edittrash.png'  name='fai_remove_%s' value='%s'>";
-    $str_empty  = " &nbsp;<img src='images/empty.png'i width='7'>"; 
+    $str_empty  = " &nbsp;<img src='images/empty.png' alt=\"\" width='7'>"; 
 
     $i = 1;
     foreach($this->FAIclass as $class){

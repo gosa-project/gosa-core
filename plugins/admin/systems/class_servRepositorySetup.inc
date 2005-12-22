@@ -65,8 +65,12 @@ class servRepositorySetup  extends plugin
     
     foreach($_POST as $name => $value){
       if(preg_match("/^delete_/",$name)){
-        if(isset($this->Sections[$value])){
-          unset($this->Sections[$value]);
+
+        $val = preg_replace("/^delete_/","",$name);
+        $val = base64_decode(preg_replace("/_.*$/","",$val));
+
+        if(isset($this->Sections[$val])){
+          unset($this->Sections[$val]);
         }
       }
     }
@@ -79,7 +83,7 @@ class servRepositorySetup  extends plugin
     foreach($this->Sections as $sec){
       $divlist->AddEntry(array(
                               array("string"=>$sec),
-                              array("string"=>sprintf($dellink,$sec,$sec),"attach"=>"style='border-right:0px;width:20px;'")
+                              array("string"=>sprintf($dellink,base64_encode($sec),$sec),"attach"=>"style='border-right:0px;width:20px;'")
                               ));
     }
   
