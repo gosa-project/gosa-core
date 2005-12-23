@@ -11,7 +11,7 @@ class faiPackage extends plugin
   var $ignore_account   = TRUE;
 
   /* Attributes for this Object */
-  var $attributes       = array("cn","description","FAIpackage","FAIdebianRelease","FAIdebianSection");
+  var $attributes       = array("cn","description","FAIpackage","FAIdebianRelease","FAIdebianSection", "FAIinstallMethod");
 
   /* ObjectClasses for this Object*/
   var $objectclasses    = array("top","FAIclass","FAIpackageList","FAIrepository");
@@ -38,6 +38,7 @@ class faiPackage extends plugin
 
   var $FAIdebianRelease          = ""; // The selected release
   var $FAIdebianSection          = ""; // selected section
+  var $FAIinstallMethod          = "aptitude"; // hard coded
   var $mirror                    = ""; // selected mirror
 
   var $servers          = array();  // All available servers
@@ -372,6 +373,8 @@ class faiPackage extends plugin
     foreach($this->FAIdebianSection as $sec){
       $this->attrs['FAIdebianSection'][] = $sec;
     }
+
+    $this->attrs["FAIinstallMethod"]= "aptitude";
 
     $ldap->cat($this->dn);
     if($ldap->count()!=0){
