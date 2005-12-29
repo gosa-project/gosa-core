@@ -33,7 +33,8 @@ class servnfs extends plugin
         "ISO8859-2"=>"ISO8859-2 (Latin 2)",
         "ISO8859-3"=>"ISO8859-3 (Latin 3)",
         "ISO8859-4"=>"ISO8859-4 (Latin 4)",
-        "ISO8859-5"=>"ISO8859-5 (Latin 5)");
+        "ISO8859-5"=>"ISO8859-5 (Latin 5)",
+        "cp850"=>"CP850 (Europe)");
 
     if($entry){
       $tmp = split("\|",$entry);

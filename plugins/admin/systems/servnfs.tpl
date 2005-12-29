@@ -46,7 +46,7 @@
 				</tr>
 				<tr>
 					<td>
-						{t}Charset{/t}
+						{t}Codepage{/t}
 					</td>
 					<td>
 						<select size="1" name="charset">
