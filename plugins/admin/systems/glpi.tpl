@@ -6,39 +6,40 @@
 			<h2>{t}Generic{/t}</h2>
 			<table summary="">
 				<tr>
-					<td>{t}System type{/t}
+					<td width="150">{t}System type{/t}
 					</td>
 					<td>
-						<select name="SystemType" {$SystemTypeACL}>
-							{html_options values=$SystemTypes output=$SystemTypes selected=$SystemType}
-						</select>	
+						<select name="type" {$typeACL}>
+							{html_options values=$SystemTypeKeys output=$SystemTypes selected=$type}
+						</select>
+						<input type="submit" value="{t}edit{/t}" name="edit_type">	
 					</td>
 				</tr>
 				<tr>
 					<td>{t}Operating system{/t}
 					</td>
 					<td>
-						<select name="OS" {$OSACL}>
-							{html_options values=$OSs output=$OSs selected=$OS}
+						<select name="os" {$osACL}>
+							{html_options values=$OSKeys output=$OSs selected=$os}
 						</select>	
+						<input type="submit" value="{t}edit{/t}" name="edit_os">	
 					</td>
 				</tr>
 				<tr>
 					<td>{t}Manufacturer{/t}
 					</td>
 					<td>
-						<select name="Manufacturer" {$ManufacturerACL}>
-							{html_options values=$Manufacturers output=$Manufacturers selected=$Manufacturer}
+						<select name="FK_glpi_enterprise" {$FK_glpi_enterpriseACL}>
+							{html_options values=$ManufacturerKeys output=$Manufacturers selected=$FK_glpi_enterprise}
 						</select>	
+						<input type="submit" value="{t}edit{/t}" name="edit_manufacturer">	
 					</td>
 				</tr>
 				<tr>
-					<td>{t}Technicalresposible{/t}
+					<td>{t}Technicalresposible{/t}&nbsp;
 					</td>
 					<td>
-						<select name="TechnicalResponsible" {$TechnicalResponsibleACL}>
-							{html_options values=$TechnicalResponsibles output=$TechnicalResponsibles selected=$TechnicalResponsible}
-						</select>	
+						<i>{$tech_num}</i>&nbsp;<input type="submit" value="{t}Choose{/t}" name="SelectTechPerson">
 					</td>
 				</tr>
 			</table>
@@ -73,10 +74,10 @@
 				</tr>
 				<tr>
 					<td>
-						{t}Comments{/t}
+						{t}Coments{/t}
 					</td>
 					<td>
-						<textarea name="Comments" style="width:100%;height:110px;" ></textarea>
+						<textarea name="comments" style="width:100%;height:110px;" >{$comments}</textarea>
 					</td>
 				</tr>
 			</table>
