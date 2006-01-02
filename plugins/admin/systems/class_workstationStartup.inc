@@ -49,15 +49,27 @@ class workstartup extends plugin
     $this->FAIdebianMirrors   = array();
     $ldap   = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(objectClass=FAIrepository)",array("FAIdebianMirror"));
+    $ldap->search("(objectClass=FAIrepositoryServer)",array("FAIrepository"));
     
     /* attach all attributes with "index => cn" to avoid multiple entries */
-    $this->FAIdebianMirrors['auto']=_("automatic");
+    $ret = array();
     while($attr = $ldap->fetch()){
-      if(isset($attr['FAIdebianMirror'])){
-        $this->FAIdebianMirrors[$attr['FAIdebianMirror'][0]]=$attr['FAIdebianMirror'][0];
+      if(isset($attr['FAIrepository'])){
+        
+        unset($attr['FAIrepository']['count']);
+
+        foreach($attr['FAIrepository'] as $rep){
+          $tmp = split("\|",$rep);
+          $str = "";
+          if(count($tmp)==4){
+            $sections = split(",",$tmp[3]);
+            $str = $tmp[0];
+            $ret[$str]=$sections;
+          }
+        }
       }
     } 
+    $this->FAIdebianMirrors = $ret;
  
     /* Get arrays */
     foreach (array("gotoModules", "gotoAutoFs", "gotoFilesystem") as $val){
@@ -111,7 +123,7 @@ class workstartup extends plugin
     /* Search all FAI objects */
     $ldap->search("(| (objectClass=FAIpackageList)(objectClass=FAItemplate)
                       (objectClass=FAIvariable)(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)
-                      (objectClass=FAIpartitionTable))",array("objectClass","cn"),true);
+                      (objectClass=FAIpartitionTable))",array("*"),true);
     /* Sort all entries, and attach elementtype.
      * To be able to show the types in the listbox.
      */
@@ -120,6 +132,7 @@ class workstartup extends plugin
       if(in_array('FAIpackageList',$attr['objectClass'])){
         $tmp2[$cn]['FAIpackageList']['obj']   = 'FAIpackageList'; 
         $tmp2[$cn]['FAIpackageList']['kzl']   = 'Pl';
+        $tmp2[$cn]['FAIpackageList']['sec']   = $attr['FAIdebianSection'];
         $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
       }
       if(in_array('FAItemplate',$attr['objectClass'])){
@@ -183,6 +196,7 @@ class workstartup extends plugin
     foreach($this->FAIclasses as $class){
       $str    = "";
       $skip = false;
+
       if(isset($this->FAIclassInfo[$class])){
         foreach($this->FAIclassInfo[$class] as $objs){
           $str .= $objs['kzl']." "; 
@@ -411,7 +425,7 @@ class workstartup extends plugin
     }  
 
     $smarty->assign("FAIScriptlist",$div->DrawList()); 
-    $smarty->assign("FAIdebianMirrors",$this->FAIdebianMirrors);
+    $smarty->assign("FAIdebianMirrors",$this->getFAIdebianMirrors());
     $smarty->assign("FAIclasses",$this->selectFriendlyClasses());
     $smarty->assign("FAIclassesKeys",array_flip($this->selectFriendlyClasses()));
     $smarty->assign("FAIclassKeys",$this->FAIclass);
@@ -447,6 +461,36 @@ class workstartup extends plugin
     $this->handle_post_events("remove");
   }
 
+
+  function getFAIdebianMirrors()
+  {
+    $ret = array();
+
+    foreach($this->FAIclass as $classes){
+      if(isset($this->FAIclassInfo[ $classes]['FAIpackageList']['sec'])){
+        if(isset($this->FAIclassInfo[ $classes]['FAIpackageList']['sec']['count'])){
+          unset($this->FAIclassInfo[ $classes]['FAIpackageList']['sec']['count']);
+        }
+    
+        foreach($this->FAIclassInfo[ $classes]['FAIpackageList']['sec'] as $sec => $value){
+          $secs[$value]= $value;
+        }
+      }
+    }
+    foreach($this->FAIdebianMirrors as $mirr=>$sections){
+      $allok = true;
+      foreach($secs as $sec){
+        if(!in_array($sec,$sections)){
+          $allok = false;
+        }
+      }
+      if($allok){
+        $ret[$mirr]=$mirr;
+      }
+    }
+    $ret['auto']=_("automatic");
+    return($ret);
+  }
 
   /* Save data to object */
   function save_object()
