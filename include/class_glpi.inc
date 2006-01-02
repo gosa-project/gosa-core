@@ -86,7 +86,11 @@ class glpiDB{
         }else{
 			$qry = "SELECT * FROM glpi_computers WHERE name='".$dn."';";
 			$res = $this->query($qry);
-			print_a($res);
+			if(count($res)==0){
+				return(false);
+			}else{
+				return(true);
+			}
 		}
 	}
 
@@ -174,23 +178,6 @@ class glpiDB{
 		}
 	}
 
-	/* System types */
-	function removeSystemType_byNAME($name)
-	{
-		if($this->is_connected){
-			$tmp = $this->query("SELECT * FROM glpi_type_computers WHERE name='".$name."';");
-			if(isset($tmp[0])){
-				return($this->query("DELETE FROM glpi_type_computers WHERE name='".$name."';"));	
-			}else{
-				echo "can't remove not existing entry";
-				return(false);	
-			}
-		}else{
-			echo "not connected";
-			return(false);
-		}
-	}
-
 	/* Manufacturer */	
 	function getEnterprisesTypes()
 	{
@@ -207,13 +194,26 @@ class glpiDB{
 		}
 	}
 
+	/* Manufacturer */	
+	function getEnterprise($id)
+	{
+		if($this->is_connected){
+			$ret = array();
+			$tmp = $this->query("SELECT * FROM glpi_enterprises WHERE ID=".$id.";");
+			return($tmp);
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
 	/* System types */
 	function updateEnterprisesType($array,$id)
 	{
 		if(!is_array($array)){
 			echo "updateEnterprisesType: first paraeter must be an array";
 		}elseif($this->is_connected){
-			$tmp = $this->query("SELECT * FROM glpi_enterprises WHERE ID=".$id.";");
+			$tmp = $this->query("SELECT * FROM glpi_enterprises WHERE ID='".$id."';");
 			if(isset($tmp[0])){
 				$atr = array("ID","name","type","address","website","phonenumber","comments","deleted","fax","email");
 
@@ -228,7 +228,7 @@ class glpiDB{
 					return(false);
 				}else{
 					$v = preg_replace("/, $/","",$v);
-					return($this->query("UPDATE glpi_enterprises SET ".$v." WHERE ID=".$id.";"));	
+					return($this->query("UPDATE glpi_enterprises SET ".$v." WHERE ID='".$id."';"));	
 				}
 			}else{
 				echo "can't update not existing entry";
@@ -239,6 +239,38 @@ class glpiDB{
 			return(false);
 		}
 	}
+
+	function addEnterprisesType($array)
+	{
+		if(!is_array($array)){
+			echo "addUser: first paraeter must be an array";
+		}elseif($this->is_connected){
+			$atr = array("ID","name","type","address","website","phonenumber","comments","deleted","fax","email");
+			$v = "";
+			$a = "";
+			foreach($atr as $at){
+				if(isset($array[$at])){
+					$a .= $at.", ";
+					$v .= "'".$array[$at]."', ";
+				}
+			}
+			if(empty($v)){
+				echo "addUser: no attributes given ";
+				return(false);
+			}else{
+				$a = preg_replace("/, $/","",$a);
+				$v = preg_replace("/, $/","",$v);
+				return($this->query("INSERT INTO glpi_enterprises (".$a.") VALUES (".$v.");"));
+			}
+		
+		}else{
+			echo "not connected";
+			return(false);
+		}
+
+	}
+
+
 
 	function removeEnterprisesType($id)
 	{
@@ -276,16 +308,144 @@ class glpiDB{
 		}
 	}
 
-	/* Technical / Responsible person / glpi users  */
-	function getUsers()
+	/* os */
+    function addOS($name)
+    {
+        if($this->is_connected){
+            $tmp = $this->query("SELECT * FROM glpi_dropdown_os WHERE name='".$name."';");
+            if(isset($tmp[0])){
+                echo "such an entry already exists";
+                return(false);
+            }else{
+                return($this->query("INSERT INTO glpi_dropdown_os (name) VALUES ('".$name."');"));
+            }
+        }else{
+            echo "not connected";
+            return(false);
+        }
+    }
+
+	   /* System types */
+    function removeOS_byID($id)
+    {
+        if($this->is_connected){
+            $tmp = $this->query("SELECT * FROM glpi_dropdown_os WHERE ID=".$id.";");
+            if(is_array($tmp[0])){
+                return($this->query("DELETE FROM glpi_dropdown_os WHERE ID=".$id.";"));
+            }else{
+                echo "can't remove not existing entry";
+                return(false);
+            }
+        }else{
+            echo "not connected";
+            return(false);
+        }
+    }
+
+
+	
+	/* System types */
+	function updateOS($name,$id)
 	{
+
 		if($this->is_connected){
-			return($this->query("SELECT * FROM glpi_users"));
+			$tmp = $this->query("SELECT * FROM glpi_dropdown_os WHERE ID=".$id.";");
+			if(isset($tmp[0])){
+				return($this->query("UPDATE glpi_dropdown_os SET name='".$name."' WHERE ID=".$id.";"));	
+			}else{
+				echo "can't update not existing entry";
+				return(false);	
+			}
 		}else{
 			echo "not connected";
 			return(false);
 		}
 	}
+
+
+	/* Technical / Responsible person / glpi users  */
+	function getUsers()
+	{
+		if($this->is_connected){
+			$ret = array();
+			$tmp = ($this->query("SELECT * FROM glpi_users"));
+			foreach($tmp as $user){
+				$ret[$user['ID']]=$user['name'];
+			}
+			return($ret);
+
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+	
+	function addUser($array,$dn)
+	{
+		if(!is_array($array)){
+			echo "addUser: first paraeter must be an array";
+		}elseif($this->is_connected){
+			$array['name']=$dn;
+			$atr = array("name","phone","email");
+			$v = "";
+			$a = "";
+			foreach($atr as $at){
+				if(isset($array[$at])){
+					$a .= $at.", ";
+					$v .= "'".$array[$at]."', ";
+				}
+			}
+			if(empty($v)){
+				echo "addUser: no attributes given ";
+				return(false);
+			}else{
+				$a = preg_replace("/, $/","",$a);
+				$v = preg_replace("/, $/","",$v);
+				return($this->query("INSERT INTO glpi_users (".$a.") VALUES (".$v.");"));
+			}
+		
+		}else{
+			echo "not connected";
+			return(false);
+		}
+
+	}
+
+	function updateUser($array,$dn)
+	{
+		if(!is_array($array)){
+            echo "updateUser: first paraeter must be an array";
+        }elseif($this->is_connected){
+            $tmp = $this->query("SELECT * FROM  glpi_users WHERE name='".$dn."';");
+            if(isset($tmp[0])){
+
+				$atr = array("name","phone","email");
+                $v = "";
+                foreach($atr as $at){
+                    if(isset($array[$at])){
+                        $v .= " ".$at."='".$array[$at]."', ";
+                    }
+                }
+                if(empty($v)){
+                    echo "UpdateUser: no attributes given ";
+                    return(false);
+                }else{
+                    $v = preg_replace("/, $/","",$v);
+                    return($this->query("UPDATE glpi_users SET ".$v." WHERE name='".$dn."';"));
+                }
+            }else{
+                echo "can't update not existing entry";
+                return(false);
+            }
+        }else{
+            echo "not connected";
+            return(false);
+        }
+
+	}
+
+
 
 	/* Gets all pulldown and needed tableinformations */
 	function getDevices()
@@ -311,9 +471,10 @@ class glpiDB{
 		}
 	}
 
-	function getComputerInformations($id)
+	function getComputerInformations($name)
 	{
 		if($this->is_connected){	
+			/*
 			$ret							= $this->query(	'	
 					SELECT
 					c.ID,
@@ -331,6 +492,8 @@ class glpiDB{
 					left join   glpi_users          as u    on (c.tech_num              = u.ID)
 
 					WHERE c.Name!="" AND c.ID='.$id.';');
+		*/
+			$ret = $this->query("SELECT * FROM glpi_computers WHERE name='".$name."';");
 			return($ret);		
 		}else{
 			echo "not connected";
@@ -338,15 +501,15 @@ class glpiDB{
 		}
 	}
 
-	function updateComputerInformations($array,$id)
+	function updateComputerInformations($array,$name)
 	{
 		if(!is_array($array)){
 			echo "updateComputerInformations: first paraeter must be an array";
 		}elseif($this->is_connected){
-			$tmp = $this->query("SELECT * FROM  glpi_computers WHERE ID=".$id.";");
+			$tmp = $this->query("SELECT * FROM  glpi_computers WHERE name='".$name."';");
 			if(isset($tmp[0])){
 
-				$atr = array(	"Id","name","serial","otherserial","contact","contact_num",
+				$atr = array(	"ID","name","serial","otherserial","contact","contact_num",
 						"tech_num","comments","date_mod","os","location","domain","network",
 						"model","type","is_template","tplname","FK_glpi_enterprise","deleted");
 				$v = "";
@@ -360,7 +523,7 @@ class glpiDB{
 					return(false);
 				}else{
 					$v = preg_replace("/, $/","",$v);
-					return($this->query("UPDATE glpi_computers SET ".$v." WHERE ID=".$id.";"));
+					return($this->query("UPDATE glpi_computers SET ".$v." WHERE name='".$name."';"));
 				}
 			}else{
 				echo "can't update not existing entry";
@@ -378,7 +541,7 @@ class glpiDB{
 		if(!is_array($array)){
 			echo "updateComputerInformations: first paraeter must be an array";
 		}elseif($this->is_connected){
-			$atr = array(	"Id","name","serial","otherserial","contact","contact_num",
+			$atr = array(	"ID","name","serial","otherserial","contact","contact_num",
 					"tech_num","comments","date_mod","os","location","domain","network",
 					"model","type","is_template","tplname","FK_glpi_enterprise","deleted");
 			$v = "";
@@ -407,7 +570,7 @@ class glpiDB{
 
 	function removeComputerInformations($id)
 	{
-		if($this->is_connected){
+/*		if($this->is_connected){
 			$tmp = $this->query("SELECT * FROM glpi_computers WHERE ID=".$id.";");
 			if(isset($tmp[0])){
 				return($this->query("DELETE FROM glpi_computers WHERE ID=".$id.";"));
@@ -419,7 +582,7 @@ class glpiDB{
 			echo "not connected";
 			return(false);
 		}
-
+*/
 	}
 
 	function is_connected()
