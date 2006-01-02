@@ -153,6 +153,9 @@ class workstartup extends plugin
         $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
       }
     }
+    if(is_array($this->FAIclasses)){
+      natcasesort($this->FAIclasses);
+    }
 
     $this->FAIclassInfo = $tmp2;
 
@@ -387,6 +390,10 @@ class workstartup extends plugin
     $str_empty  = " &nbsp;<img src='images/empty.png' alt=\"\" width='7'>"; 
 
     $i = 1;
+    if(is_array($this->FAIclass)){
+      natcasesort($this->FAIclass);
+    }
+
     foreach($this->FAIclass as $class){
       if($i==1){
         $str = $str_empty.$str_down.$str_remove;
