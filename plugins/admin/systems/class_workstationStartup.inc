@@ -465,27 +465,32 @@ class workstartup extends plugin
   function getFAIdebianMirrors()
   {
     $ret = array();
-
-    foreach($this->FAIclass as $classes){
-      if(isset($this->FAIclassInfo[ $classes]['FAIpackageList']['sec'])){
-        if(isset($this->FAIclassInfo[ $classes]['FAIpackageList']['sec']['count'])){
-          unset($this->FAIclassInfo[ $classes]['FAIpackageList']['sec']['count']);
-        }
-    
-        foreach($this->FAIclassInfo[ $classes]['FAIpackageList']['sec'] as $sec => $value){
-          $secs[$value]= $value;
+    $secs  = array();
+    if(is_array($this->FAIclass)){
+      foreach($this->FAIclass as $classes){
+        if(isset($this->FAIclassInfo[ $classes]['FAIpackageList']['sec'])){
+          if(isset($this->FAIclassInfo[ $classes]['FAIpackageList']['sec']['count'])){
+            unset($this->FAIclassInfo[ $classes]['FAIpackageList']['sec']['count']);
+          }
+          if(is_array($this->FAIclassInfo[ $classes]['FAIpackageList']['sec'])){
+            foreach($this->FAIclassInfo[ $classes]['FAIpackageList']['sec'] as $sec => $value){
+              $secs[$value]= $value;
+            }
+          }
         }
       }
     }
-    foreach($this->FAIdebianMirrors as $mirr=>$sections){
-      $allok = true;
-      foreach($secs as $sec){
-        if(!in_array($sec,$sections)){
-          $allok = false;
+    if(is_array($this->FAIdebianMirrors)){
+      foreach($this->FAIdebianMirrors as $mirr=>$sections){
+        $allok = true;
+        foreach($secs as $sec){
+          if(!in_array($sec,$sections)){
+            $allok = false;
+          }
         }
-      }
-      if($allok){
-        $ret[$mirr]=$mirr;
+        if($allok){
+          $ret[$mirr]=$mirr;
+        }
       }
     }
     $ret['auto']=_("automatic");
