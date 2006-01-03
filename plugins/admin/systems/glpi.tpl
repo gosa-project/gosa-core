@@ -36,7 +36,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>{t}Technicalresposible{/t}&nbsp;
+					<td>{t}Technical responsible{/t}&nbsp;
 					</td>
 					<td>
 						<i>{$tech_num}</i>&nbsp;<input type="submit" value="{t}Choose{/t}" name="SelectTechPerson">
@@ -74,7 +74,7 @@
 				</tr>
 				<tr>
 					<td>
-						{t}Coments{/t}
+						{t}Comments{/t}
 					</td>
 					<td>
 						<textarea name="comments" style="width:100%;height:110px;" >{$comments}</textarea>

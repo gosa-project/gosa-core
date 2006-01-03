@@ -96,9 +96,9 @@ cat << EOF
 
 ---------------------------------------------------------------------
 
-Now edit all files that have been replaced above (i.e. using kbabel)
-and mail the changes to gosa@oss.gonicus.de to be included in the
-next release.
+Now edit all files that have been replaced above (i.e. using kbabel
+or gtranslator) and mail the changes to gosa@oss.gonicus.de to be 
+included in the next release.
 
 To see the changes you've made in GOsa, run "msgfmt messages.po" on
 your freshly edited files and restart your apache after that. Set
