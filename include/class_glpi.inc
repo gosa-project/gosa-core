@@ -1,50 +1,5 @@
 <?php
-/*  This class is used for glpi account management.
-	ADD // EDIT // DELETE of computers or changng 
-	something else in the glpi database should be done here.
 
-
-	function glpiDB($server,$user,$pwd,$db){
-	function SelectDB()
-	function query($qry)
-
-// return all available Sytemtypes 
-function getSystemTypes()
-
-// Update system type specifid by id
-function updateSystemType($name,$id)
-
-// Add system type
-function addSystemType($name)
-
-// Delete system type by name / id 
-function removeSystemType_byID($id)
-function removeSystemType_byNAME($name)
-
-// Get all manufacturer 
-function getEnterprisesTypes()
-
-// Update with specified attributes, on entry $id
-function updateEnterprisesType($array,$id)
-
-// remove entry with id=$id
-function removeEnterprisesType($id)
-
-// return all os types 
-function getOSTypes()
-
-// return all users 
-function getUsers()
-
-// Return available devices 
-function getDevices()
-
-// return computer informations  (phone, terminal,ws ...)
-function getComputerInformations_byID($id)
-function getComputerInformations_byNAME($name)
-
-
- */
 class glpiDB{
 
 	var $user		="";
@@ -308,6 +263,7 @@ class glpiDB{
 		}
 	}
 
+
 	/* os */
     function addOS($name)
     {
@@ -446,31 +402,6 @@ class glpiDB{
 	}
 
 
-
-	/* Gets all pulldown and needed tableinformations */
-	function getDevices()
-	{
-		if($this->is_connected){
-			$ret = array();
-			$ret['devices']['glpi_device_moboard'] 		= $this->query("SELECT * FROM glpi_device_moboard;");
-			$ret['devices']['glpi_device_case'] 		= $this->query("SELECT * FROM glpi_device_case;");
-			$ret['devices']['glpi_device_control'] 		= $this->query("SELECT * FROM glpi_device_control;");
-			$ret['devices']['glpi_device_drive'] 		= $this->query("SELECT * FROM glpi_device_drive;");
-			$ret['devices']['glpi_device_gfxcard'] 		= $this->query("SELECT * FROM glpi_device_gfxcard;");
-			$ret['devices']['glpi_device_hdd'] 			= $this->query("SELECT * FROM glpi_device_hdd;");
-			$ret['devices']['glpi_device_iface'] 		= $this->query("SELECT * FROM glpi_device_iface;");
-			$ret['devices']['glpi_device_pci'] 			= $this->query("SELECT * FROM glpi_device_pci;");
-			$ret['devices']['glpi_device_power'] 		= $this->query("SELECT * FROM glpi_device_power;");
-			$ret['devices']['glpi_device_processor'] 	= $this->query("SELECT * FROM glpi_device_processor;");
-			$ret['devices']['glpi_device_ram'] 			= $this->query("SELECT * FROM glpi_device_ram;");
-			$ret['devices']['glpi_device_sndcard'] 		= $this->query("SELECT * FROM glpi_device_sndcard;");
-			return($ret);
-		}else{
-			echo "not connected";
-			return(false);
-		}
-	}
-
 	function getComputerInformations($name)
 	{
 		if($this->is_connected){	
@@ -568,9 +499,225 @@ class glpiDB{
 
 	}
 
+	function deviceExists($attr)
+	{
+		if($this->is_connected){	
+			$arr = array_flip(array(	"glpi_device_case"		=> "case",
+						"glpi_device_control"	=> "control",	
+						"glpi_device_drive"		=> "drive",
+						"glpi_device_gfxcard"	=> "gfxcard",	
+						"glpi_device_hdd"		=> "hdd",		
+						"glpi_device_iface"		=> "iface",
+						"glpi_device_moboard"	=> "moboard",
+						"glpi_device_pci"		=> "pci",
+						"glpi_device_power"		=> "power",
+						"glpi_device_processor"	=> "processor",
+						"glpi_device_ram"		=> "ram",
+						"glpi_device_sndcard"	=> "sndcard"));
+
+			$tbl_name = $arr[$attr['device_type']];
+			if(!isset($attr['ID'])){
+				return(false);
+			}else{
+				$qry = "SELECT * FROM ".$tbl_name." WHERE ID=".$attr['ID'].";";
+				$res = $this->query($qry);
+				if(count($res) != 0){
+					return(true);
+				}
+			}
+		}else{
+			echo "not connected";
+			return(false);
+		}
+
+		return(false);
+	}
+
+	function deleteDevice($attr)
+	{
+		if($this->is_connected){
+			$arr = array_flip(array(	"glpi_device_case"		=> "case",
+						"glpi_device_control"	=> "control",	
+						"glpi_device_drive"		=> "drive",
+						"glpi_device_gfxcard"	=> "gfxcard",	
+						"glpi_device_hdd"		=> "hdd",		
+						"glpi_device_iface"		=> "iface",
+						"glpi_device_moboard"	=> "moboard",
+						"glpi_device_pci"		=> "pci",
+						"glpi_device_power"		=> "power",
+						"glpi_device_processor"	=> "processor",
+						"glpi_device_ram"		=> "ram",
+						"glpi_device_sndcard"	=> "sndcard"));
+			
+			$device_type = $attr['device_type'];
+			unset($attr['device_type']);			
+
+			$tbl_name = $arr[$device_type];
+
+			$this->query("DELETE FROM ".$tbl_name." WHERE ID=".$attr['ID'].";");	
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+	function updateDevices($attr)
+	{
+		if($this->is_connected){
+			$arr = array_flip(array(	"glpi_device_case"		=> "case",
+						"glpi_device_control"	=> "control",	
+						"glpi_device_drive"		=> "drive",
+						"glpi_device_gfxcard"	=> "gfxcard",	
+						"glpi_device_hdd"		=> "hdd",		
+						"glpi_device_iface"		=> "iface",
+						"glpi_device_moboard"	=> "moboard",
+						"glpi_device_pci"		=> "pci",
+						"glpi_device_power"		=> "power",
+						"glpi_device_processor"	=> "processor",
+						"glpi_device_ram"		=> "ram",
+						"glpi_device_sndcard"	=> "sndcard"));
+			
+			$device_type = $attr['device_type'];
+			unset($attr['device_type']);			
+
+			$tbl_name = $arr[$device_type];
+
+			$str = "UPDATE ".$tbl_name." SET ";
+			foreach($attr as $name => $value){
+				$str.=$name."='".$value."', ";
+			}
+			$str = preg_replace("/, $/","",$str);
+			$str .= " WHERE ID=".$attr['ID'].";";
+			$this->query($str);	
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+	function getRAMTypes()
+	{
+		if($this->is_connected){
+			$ret = array();
+			$tmp = ($this->query("SELECT * FROM glpi_dropdown_ram_type;"));
+			foreach($tmp as $t){
+				$ret[$t['ID']]=$t['name'];
+			}
+			return($ret);
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+	
+
+	function getGlpiDeviceControlTypes()
+	{
+		if($this->is_connected){
+			$ret = array();
+			$tmp = ($this->query("SELECT * FROM glpi_dropdown_hdd_type;"));
+			foreach($tmp as $t){
+				$ret[$t['ID']]=$t['name'];
+			}
+			return($ret);
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+	
+	function getGlpiGfxControlTypes()
+	{
+		if($this->is_connected){
+			$ret = array();
+			$tmp = ($this->query("SELECT * FROM glpi_dropdown_hdd_type;"));
+			foreach($tmp as $t){
+				$ret[$t['ID']]=$t['name'];
+			}
+			return($ret);
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+	
+	
+	function addDevice($attr)
+	{
+		if($this->is_connected){	
+			$arr = array_flip(array(	"glpi_device_case"		=> "case",
+						"glpi_device_control"	=> "control",	
+						"glpi_device_drive"		=> "drive",
+						"glpi_device_gfxcard"	=> "gfxcard",	
+						"glpi_device_hdd"		=> "hdd",		
+						"glpi_device_iface"		=> "iface",
+						"glpi_device_moboard"	=> "moboard",
+						"glpi_device_pci"		=> "pci",
+						"glpi_device_power"		=> "power",
+						"glpi_device_processor"	=> "processor",
+						"glpi_device_ram"		=> "ram",
+						"glpi_device_sndcard"	=> "sndcard"));
+			
+			$device_type = $attr['device_type'];
+			unset($attr['device_type']);			
+
+			$tbl_name = $arr[$device_type];
+            $v = "";
+            $a = "";
+            foreach($attr as $name => $value){
+            	$a .= $name.", ";
+            	$v .= "'".$value."', ";
+            }
+            if(empty($v)){
+                echo "addDevice: no attributes given ";
+                return(false);
+            }else{
+                $a = preg_replace("/, $/","",$a);
+                $v = preg_replace("/, $/","",$v);
+                return($this->query("INSERT INTO ".$tbl_name." (".$a.") VALUES (".$v.");"));
+            }
+
+        }else{
+            echo "not connected";
+            return(false);
+        }
+	}
+
+	function getDevices()
+	{
+		if($this->is_connected){
+			$arr = array(	"glpi_device_case"		=> "case",
+							"glpi_device_control"	=> "control",	
+							"glpi_device_drive"		=> "drive",
+							"glpi_device_gfxcard"	=> "gfxcard",	
+							"glpi_device_hdd"		=> "hdd",		
+							"glpi_device_iface"		=> "iface",
+							"glpi_device_moboard"	=> "moboard",
+							"glpi_device_pci"		=> "pci",
+							"glpi_device_power"		=> "power",
+							"glpi_device_processor"	=> "processor",
+							"glpi_device_ram"		=> "ram",
+							"glpi_device_sndcard"	=> "sndcard");
+		
+			$res = array();
+			foreach($arr as $glpi => $gosa){
+				$qry = "SELECT * FROM ".$glpi.";";
+				$ret = $this->query($qry);
+				foreach($ret as $id => $entry){
+					$entry['device_type'] = $gosa;
+					$res[$entry['designation']."-".$gosa] = $entry;
+				}
+			}
+			return($res);
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
 	function removeComputerInformations($id)
 	{
-/*		if($this->is_connected){
+/*		
+		if($this->is_connected){
 			$tmp = $this->query("SELECT * FROM glpi_computers WHERE ID=".$id.";");
 			if(isset($tmp[0])){
 				return($this->query("DELETE FROM glpi_computers WHERE ID=".$id.";"));
