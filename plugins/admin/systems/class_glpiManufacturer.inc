@@ -78,13 +78,21 @@ class glpiManufacturer extends plugin
         $tmp[$attrs]=$this->$attrs;
       }
 
-      if($this->Edit_Add == "add"){
-        $this->parent->handle->addEnterprisesType($tmp);
-      }else{
-        $this->parent->handle->updateEnterprisesType($tmp,$this->ID);
+      $allok = true;
+      if(empty($tmp['name'])){
+        print_red(_("Please specify a name."));
+        $allok = false;
       }
 
-      $this->editMode=false;
+      if($allok){
+        if($this->Edit_Add == "add"){
+          $this->parent->handle->addEnterprisesType($tmp);
+          $this->editMode=false;
+        }else{
+          $this->parent->handle->updateEnterprisesType($tmp,$this->ID);
+          $this->editMode=false;
+        }
+      }
     }
 
     if($this->editMode == true){

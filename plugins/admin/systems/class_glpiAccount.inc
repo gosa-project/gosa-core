@@ -10,8 +10,8 @@ class glpiAccount extends plugin
   /* attribute list for save action */
   var $ignore_account= TRUE;
   var $attributes= array("ID","name","contact",
-                         "tech_num","comments","date_mod","os","location","domain","network",
-                         "model","type","is_template","FK_glpi_enterprise","deleted");
+      "tech_num","comments","date_mod","os","location","domain","network",
+      "model","type","is_template","FK_glpi_enterprise","deleted");
 
   var $ID                 ;
   var $name               ="";
@@ -49,7 +49,7 @@ class glpiAccount extends plugin
 
   /* Contructor 
      Sets default values and checks if we already have an existing glpi account
-  */
+   */
   function glpiAccount ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
@@ -58,15 +58,15 @@ class glpiAccount extends plugin
     if(!isset($this->config->data['SERVERS']['GLPI'])){
       return;
     }
-    
+
     $this->data = $this->config->data['SERVERS']['GLPI'];
-    
+
     if(!is_callable("mysql_connect")){
       return;
     }
-    
+
     $this->handle = new glpiDB($this->data['SERVER'],$this->data['LOGIN'],$this->data['PASSWORD'],$this->data['DB']);
-    
+
     if(!$this->handle->is_connected){
       return;
     } 
@@ -90,8 +90,8 @@ class glpiAccount extends plugin
 
   function execute()
   {
-  	/* Call parent execute */
-	  plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     /* Fill templating stuff */
     $smarty= get_smarty();
@@ -99,93 +99,103 @@ class glpiAccount extends plugin
 
     // #fixme
     // Check if mysql a.s.o. is available.
-    
+
 
     $this->handle = new glpiDB($this->data['SERVER'],$this->data['LOGIN'],$this->data['PASSWORD'],$this->data['DB']);
     $users = ($this->handle->getUsers());
 
     $ldap= $this->config->get_ldap_link();
 
+    if(isset($_POST['AddDevice'])){
+      $this->dialog =true;
+      $this->cur_dialog = new glpiDeviceManagement($this->config,$this->dn);
+    }
 
-  /* System type management
-   */
-  if(isset($_POST['edit_type'])){
-    $this->dialog = true;
-    $this->edit_type=true;
-  }
 
-  if(isset($_POST['close_edit_type'])){
-    $this->edit_type=false;
-    $this->dialog = false;
-  }
+    /* System type management
+     */
+    if(isset($_POST['edit_type'])){
+      $this->dialog = true;
+      $this->edit_type=true;
+    }
 
-  if((isset($_POST['add_type']))&&(!empty($_POST['type_string']))){
-    $this->handle->addSystemType($_POST['type_string']);  
-  }
+    if(isset($_POST['close_edit_type'])){
+      $this->edit_type=false;
+      $this->dialog = false;
+    }
 
-  if((isset($_POST['del_type']))&&(!empty($_POST['select_type']))){
-    $this->handle->removeSystemType_byID($_POST['select_type']);  
-  }
+    if((isset($_POST['add_type']))&&(!empty($_POST['type_string']))){
+      $this->handle->addSystemType($_POST['type_string']);  
+    }
 
-  if((isset($_POST['rename_type']))&&(!empty($_POST['select_type']))&&(!empty($_POST['type_string']))){
-    $this->handle->updateSystemType($_POST['type_string'],$_POST['select_type']);
-  }
+    if((isset($_POST['del_type']))&&(!empty($_POST['select_type']))){
+      $this->handle->removeSystemType_byID($_POST['select_type']);  
+    }
 
-  if($this->edit_type){
-    $smarty->assign("SystemTypes",            $this->handle->getSystemTypes());
-    $smarty->assign("SystemTypeKeys",         array_flip($this->handle->getSystemTypes()));
+    if((isset($_POST['rename_type']))&&(!empty($_POST['select_type']))&&(!empty($_POST['type_string']))){
+      $this->handle->updateSystemType($_POST['type_string'],$_POST['select_type']);
+    }
 
-    $display= $smarty->fetch(get_template_path('glpi_edit_type.tpl', TRUE));
-    return($display);
-  }
+    if($this->edit_type){
+      $smarty->assign("SystemTypes",            $this->handle->getSystemTypes());
+      $smarty->assign("SystemTypeKeys",         array_flip($this->handle->getSystemTypes()));
 
-  /*  ENDE, Systemtype management.
-   */
-  
-  /* System os management
-   */
-  if(isset($_POST['edit_os'])){
-    $this->dialog = true;
-    $this->edit_os=true;
-  }
+      $display= $smarty->fetch(get_template_path('glpi_edit_type.tpl', TRUE));
+      return($display);
+    }
 
-  if(isset($_POST['close_edit_os'])){
-    $this->edit_os=false;
-    $this->dialog = false;
-  }
+    /*  ENDE, Systemtype management.
+     */
 
-  if((isset($_POST['add_os']))&&(!empty($_POST['is_string']))){
-    $this->handle->addOS($_POST['is_string']);  
-  }
+    /* System os management
+     */
+    if(isset($_POST['edit_os'])){
+      $this->dialog = true;
+      $this->edit_os=true;
+    }
 
-  if((isset($_POST['del_os']))&&(!empty($_POST['select_os']))){
-    $this->handle->removeOS_byID($_POST['select_os']);  
-  }
+    if(isset($_POST['close_edit_os'])){
+      $this->edit_os=false;
+      $this->dialog = false;
+    }
 
-  if((isset($_POST['rename_os']))&&(!empty($_POST['select_os']))&&(!empty($_POST['is_string']))){
-    $this->handle->updateOS($_POST['is_string'],$_POST['select_os']);
-  }
+    if((isset($_POST['add_os']))&&(!empty($_POST['is_string']))){
+      $this->handle->addOS($_POST['is_string']);  
+    }
 
-  if($this->edit_os){
-    $smarty->assign("OSKeys",                 array_flip($this->handle->getOSTypes()));
-    $smarty->assign("OSs",                    $this->handle->getOSTypes());
+    if((isset($_POST['del_os']))&&(!empty($_POST['select_os']))){
+      $this->handle->removeOS_byID($_POST['select_os']);  
+    }
 
-    $display= $smarty->fetch(get_template_path('glpi_edit_os.tpl', TRUE));
-    return($display);
-  }
+    if((isset($_POST['rename_os']))&&(!empty($_POST['select_os']))&&(!empty($_POST['is_string']))){
+      $this->handle->updateOS($_POST['is_string'],$_POST['select_os']);
+    }
 
-  /*  ENDE, os management.
-   */
-  
-  if(isset($_POST['edit_manufacturer'])){
-    $this->cur_dialog = new glpiManufacturer($this->config,$this->dn);
-    $this->cur_dialog->parent = &$this;
-  }
+    if($this->edit_os){
+      $smarty->assign("OSKeys",                 array_flip($this->handle->getOSTypes()));
+      $smarty->assign("OSs",                    $this->handle->getOSTypes());
 
-  if(isset($_POST['close_edit_manufacturer'])){
-    $this->cur_dialog = false;
-  }
+      $display= $smarty->fetch(get_template_path('glpi_edit_os.tpl', TRUE));
+      return($display);
+    }
 
+    /*  ENDE, os management.
+     */
+
+    if(isset($_POST['edit_manufacturer'])){
+      $this->cur_dialog = new glpiManufacturer($this->config,$this->dn);
+      $this->dialog = true;
+    }
+
+    if(isset($_POST['close_edit_manufacturer'])){
+      $this->dialog = false;
+      $this->cur_dialog = false;
+    }
+
+    if(isset($_POST['SelectUserCancel'])){
+      $this->dialog = false;
+      $this->cur_dialog = false;
+    }
 
     if(isset($_POST['SelectTechPerson'])){
       $this->cur_dialog= new glpiSelectUser($this->config,$this->dn);
@@ -204,8 +214,8 @@ class glpiAccount extends plugin
         $atr = $ldap->fetch($ldap->cat($id));
         $tmp = array();
         $use = array( "cn"              =>"name",
-                      "mail"            =>"email",
-                      "telephoneNumber" =>"phone");
+            "mail"            =>"email",
+            "telephoneNumber" =>"phone");
 
         /* Create array */
         foreach($use as $gosa => $glpi){
@@ -213,18 +223,18 @@ class glpiAccount extends plugin
             $tmp[$glpi]= $atr[$gosa][0];
           }
         }
-      
+
         /* Add this user */
         $this->handle->addUser($tmp,$id);
       }
-      
+
       /* Re-read users */
       $users = ($this->handle->getUsers());
 
       /* Get user */
       $tmp = array_flip($users);
       $id=$tmp[$id];
-    
+
       /* Use user id, close dialog */
       $this->tech_num = $id;
       $this->cur_dialog   = false;
@@ -234,6 +244,7 @@ class glpiAccount extends plugin
     if($this->cur_dialog){
       $this->cur_dialog->save_object();
       $this->dialog=true;
+      $this->cur_dialog->parent = &$this;
       return($this->cur_dialog->execute());
     }
 
@@ -280,10 +291,10 @@ class glpiAccount extends plugin
 
     /* Show tab dialog headers */
     if ($this->is_account){
-      $display= $this->show_header(_("Remove DNS service"),
+      $display= $this->show_header(_("Remove inventory service"),
           _("This server has inventory features enabled. You can disable them by clicking below."));
     } else {
-      $display= $this->show_header(_("Add DNS service"),
+      $display= $this->show_header(_("Add inventory service"),
           _("This server has inventory features disabled. You can enable them by clicking below."));
       return ($display);
     }
@@ -293,7 +304,7 @@ class glpiAccount extends plugin
       $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
     }
 
-    
+
     $smarty->assign("SystemTypeKeys",         array_flip($this->handle->getSystemTypes()));
     $smarty->assign("SystemTypes",            $this->handle->getSystemTypes());
     $smarty->assign("type",                   $this->type);
@@ -316,7 +327,7 @@ class glpiAccount extends plugin
       if(isset($tr['sn'][0])){
         $str .= $tr['sn'][0]." ";
       }
-  
+
       if(isset($tr['uid'][0])){
         $str .= "[".$tr['uid'][0]."]";
       }
@@ -354,9 +365,9 @@ class glpiAccount extends plugin
   {
     $message= array();
 
-//    if($this->TechnicalResponsible == ""){
-//      $message[] = _("Please select a technical responsible person for this entry.");
-//    }
+    //    if($this->TechnicalResponsible == ""){
+    //      $message[] = _("Please select a technical responsible person for this entry.");
+    //    }
 
     return ($message);
   }

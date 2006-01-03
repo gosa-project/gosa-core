@@ -9,25 +9,25 @@
 						<input type="text" name="name" value="{$name}">
 					</td>
 				</tr>
-				<tr>
+<!--				<tr>
 					<td>{t}Type{/t}
 					</td>
 					<td>
 						<input type="text" name="type" value="{$type}">
+					</td>
+				</tr>-->
+				<tr>
+					<td>{t}Website{/t}
+					</td>
+					<td>
+						<input type="text" name="website" value="{$website}">
 					</td>
 				</tr>
 				<tr>
 					<td>{t}Address{/t}
 					</td>
 					<td>
-						<input type="text" name="address" value="{$address}">
-					</td>
-				</tr>
-				<tr>
-					<td>{t}Website{/t}
-					</td>
-					<td>
-						<input type="text" name="website" value="{$website}">
+						<textarea  name="address">{$address}</textarea>
 					</td>
 				</tr>
 			</table>
@@ -42,13 +42,6 @@
 					</td>
 				</tr>
 				<tr>
-					<td>{t}Comments{/t}
-					</td>
-					<td>
-						<input type="text" name="comments" value="{$comments}">
-					</td>
-				</tr>
-				<tr>
 					<td>{t}Fax{/t}
 					</td>
 					<td>
@@ -60,6 +53,13 @@
 					</td>
 					<td>
 						<input type="text" name="email" value="{$email}">
+					</td>
+				</tr>
+				<tr>
+					<td>{t}Comments{/t}
+					</td>
+					<td>
+						<textarea name="comments">{$comments}</textarea>
 					</td>
 				</tr>
 			</table>
