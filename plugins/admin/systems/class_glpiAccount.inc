@@ -111,6 +111,21 @@ class glpiAccount extends plugin
       $this->cur_dialog = new glpiDeviceManagement($this->config,$this->dn);
     }
 
+    /* We have selected some devices and pressed use button */
+    if(isset($_POST['SelectDeviceSave'])){
+      $this->cur_dialog->save_object();
+      print_a($this->cur_dialog->getSelected());
+      $this->cur_dialog = false;
+      $this->dialog = false;
+      $this->edit_type=false;
+    }
+
+    /* Aborted Device selction */
+    if(isset($_POST['SelectDeviceCancel'])){
+      $this->dialog = false;
+      $this->cur_dialog = false;
+      $this->edit_type=false;
+    }
 
     /* System type management
      */

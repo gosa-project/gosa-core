@@ -49,5 +49,6 @@
 <input type="hidden" name="ignore">
 <p class="seperator">&nbsp;</p>
 <div align="right">
-	<input type="submit" name="SelectUserCancel" value="{t}Cancel{/t}">
+	<input type="submit" name="SelectDeviceSave" value="{t}Use{/t}">
+	<input type="submit" name="SelectDeviceCancel" value="{t}Cancel{/t}">
 </div>

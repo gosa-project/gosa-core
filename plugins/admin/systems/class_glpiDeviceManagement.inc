@@ -22,6 +22,7 @@ class glpiDeviceManagement extends plugin
   var $DeviceAttrs = array();
   var $AllowedDevices = array();
 
+  var $Selected = array();
 
   function glpiDeviceManagement ($config, $dn= NULL)
   {
@@ -147,10 +148,17 @@ class glpiDeviceManagement extends plugin
     $editdel = "<a href='?plug=".$_GET['plug']."&amp;act=edit_device&amp;id=%s'><img src='images/edit.png' alt='"._("Edit")."' border=0></a>";
     $editdel.= "<a href='?plug=".$_GET['plug']."&amp;act=del_device&amp;id=%s'><img src='images/edittrash.png' alt='"._("Delete")."' border=0></a>";
     
-    $useDevice = "<input type='checkbox' value='%s' name='useDevice_%s' >";
+    $useDevice = "<input type='hidden' name='wasOnPage_%s' value='%s'><input type='checkbox' value='%s' name='useDevice_%s' %USE%>";
 
     foreach($this->devices as $key=>$user){
-      $field1 = array("string" => sprintf($useDevice,base64_encode($key),base64_encode($key)), "attach" => "style='text-align:center;width:20px;'");
+
+      if(isset($this->Selected[$user['device_type']][$user['designation']])){
+        $use = " checked ";
+      }else{
+        $use ="";
+      }
+
+      $field1 = array("string" => preg_replace("/%s/",base64_encode($key),preg_replace("/%USE%/",$use,$useDevice)), "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($edit,base64_encode($key),$user['designation']."&nbsp;[".$user['comment']."]"), "attach" => "style=''");
       $field3 = array("string" => sprintf($editdel,base64_encode($key),base64_encode($key)), 
         "attach" => "style='width:60px;border-right:0px;text-align:right;'");
@@ -226,6 +234,24 @@ class glpiDeviceManagement extends plugin
   */
   function save_object()
   {
+    foreach($_POST as $name => $value){
+      if(preg_match("/wasOnPage_/",$name)){
+        $dN = base64_decode($value);
+
+        $device = $this->devices[$dN];
+        $type   = $device['device_type'];  
+            
+
+        if(isset($_POST['useDevice_'.$value])){
+          $this->Selected[$type][$device['designation']] = $device;
+        }else{
+          if(isset($this->Selected[$type][$device['designation']])){
+            unset($this->Selected[$type][$device['designation']]);
+          }
+        }
+      }
+    }
+
     if(is_array($this->EditEntry)){
       foreach($this->EditEntry as $name => $value){
         if(isset($_POST[$name])){
@@ -234,6 +260,12 @@ class glpiDeviceManagement extends plugin
 
       }
     }
+  }
+
+  /* returns the selected devices */
+  function getSelected()
+  {
+    return($this->Selected); 
   }
 
   /* This function cehck all created devices if you wan't to create device specific check 
@@ -245,6 +277,23 @@ class glpiDeviceManagement extends plugin
     if(empty($attr['designation'])){
       $message[]=(_("You have to specify a valid name for this device."));
     }
+
+    /* Avoid same name twice */
+    $devices = ($this->parent->handle->getDevices());
+    foreach($devices as $dev){
+      if($dev['designation']==$attr['designation']){
+
+        /* Entries with ['ID'] already exists, and are only edited, if ID is missing we are currently creating a new entry */
+        if(isset($attr['ID'])){
+          if(!(($dev['ID'] == $attr['ID'])&&($dev['device_type']==$attr['device_type']))){
+            $message[] = _("This device name is already in use.");
+          }
+        }else{
+          $message[] = _("This device name is already in use.");
+        }
+      }
+    }
+
     return($message);
   }
 
