@@ -90,7 +90,7 @@ msgstr "Подключение"
 #: plugins/addons/addressbook/contents.tpl:14
 #: plugins/admin/users/class_userManagement.inc:736
 #: plugins/admin/departments/generic.tpl:62
-#: plugins/admin/systems/glpiManufacturerAdd.tpl:52 html/getxls.php:174
+#: plugins/admin/systems/glpiManufacturerAdd.tpl:45 html/getxls.php:174
 #: html/getxls.php:236
 msgid "Fax"
 msgstr "Факс"
@@ -180,6 +180,7 @@ msgstr "Принтер"
 #: plugins/admin/systems/headpage.tpl:20
 #: plugins/admin/systems/servRepository.tpl:17
 #: plugins/admin/systems/glpiSelectUser.tpl:20
+#: plugins/admin/systems/glpiDeviceManagement.tpl:20
 #: plugins/admin/ogroups/headpage.tpl:20 plugins/gofon/macro/headpage.tpl:20
 #: plugins/gofon/conference/headpage.tpl:20
 msgid "Information"
@@ -469,6 +470,8 @@ msgstr "Готово"
 #: plugins/admin/systems/password.tpl:30
 #: plugins/admin/systems/servRepositorySetup.tpl:43
 #: plugins/admin/systems/glpiSelectUser.tpl:52
+#: plugins/admin/systems/glpiDeviceManagement.tpl:53
+#: plugins/admin/systems/glpi_devices.tpl:643
 #: plugins/admin/ogroups/ogroup_objects.tpl:52
 #: plugins/admin/ogroups/class_ogroupManagement.inc:340
 #: plugins/admin/ogroups/remove.tpl:16
@@ -505,7 +508,10 @@ msgstr "Нажмите 'Изменить' чтобы отредактирова�
 #: plugins/admin/systems/servservice.tpl:21
 #: plugins/admin/systems/printer.tpl:46
 #: plugins/admin/systems/glpiManufacturer.tpl:7
-#: plugins/admin/systems/glpi.tpl:72 plugins/gofon/phoneaccount/main.inc:113
+#: plugins/admin/systems/glpi.tpl:55 plugins/admin/systems/glpi.tpl:74
+#: plugins/admin/systems/glpi.tpl:94
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:153
+#: plugins/gofon/phoneaccount/main.inc:113
 msgid "Edit"
 msgstr "Изменить"
 
@@ -689,8 +695,7 @@ msgstr "Список альтернативных адресов эл. почт�
 #: plugins/admin/systems/servRepository.tpl:11
 #: plugins/admin/systems/glpi_edit_type.tpl:6
 #: plugins/admin/systems/glpiManufacturer.tpl:6
-#: plugins/admin/systems/glpi_edit_os.tpl:6 plugins/admin/systems/glpi.tpl:54
-#: plugins/admin/systems/glpi.tpl:92
+#: plugins/admin/systems/glpi_edit_os.tpl:6
 #: plugins/admin/ogroups/ogroup_objects.tpl:50
 #: plugins/admin/ogroups/generic.tpl:38
 #: plugins/admin/ogroups/phonequeue.tpl:24
@@ -730,6 +735,7 @@ msgstr "Добавить"
 #: plugins/admin/systems/terminalStartup.tpl:62
 #: plugins/admin/systems/glpi_edit_type.tpl:8
 #: plugins/admin/systems/glpi_edit_os.tpl:8
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:154
 #: plugins/admin/ogroups/generic.tpl:39 plugins/admin/ogroups/remove.tpl:14
 #: plugins/admin/ogroups/phonequeue.tpl:25 plugins/gofon/macro/remove.tpl:13
 #: plugins/gofon/phoneaccount/generic.tpl:15
@@ -784,6 +790,7 @@ msgstr "Отклонять сообщения размером больше"
 #: plugins/personal/environment/environment.tpl:71
 #: plugins/personal/connectivity/pureftpd.tpl:44
 #: plugins/personal/connectivity/class_proxyAccount.inc:79
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:176
 msgid "MB"
 msgstr "Мб"
 
@@ -965,6 +972,7 @@ msgstr "Выберите адреса для добавления"
 #: plugins/admin/systems/headpage.tpl:29
 #: plugins/admin/systems/servRepository.tpl:26
 #: plugins/admin/systems/glpiSelectUser.tpl:29
+#: plugins/admin/systems/glpiDeviceManagement.tpl:29
 #: plugins/admin/ogroups/ogroup_objects.tpl:20
 #: plugins/admin/ogroups/headpage.tpl:29 plugins/gofon/macro/headpage.tpl:29
 #: plugins/gofon/conference/headpage.tpl:29
@@ -1948,6 +1956,7 @@ msgstr ""
 "ниже."
 
 #: plugins/personal/environment/class_environment.inc:395
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:333
 #, fuzzy
 msgid "None"
 msgstr "нет"
@@ -2319,6 +2328,7 @@ msgstr "Удалить изображение"
 #: plugins/admin/fai/faiPartitionTableEntry.tpl:29
 #: plugins/admin/systems/servnfs.tpl:75
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:86
+#: plugins/admin/systems/glpi_devices.tpl:642
 msgid "Save"
 msgstr "Сохранить"
 
@@ -2408,7 +2418,7 @@ msgstr "Выберите ветку для пользователя"
 #: plugins/addons/addressbook/address_edit.tpl:72
 #: plugins/addons/addressbook/address_edit.tpl:182
 #: plugins/admin/departments/generic.tpl:54
-#: plugins/admin/systems/glpiManufacturerAdd.tpl:20 html/getxls.php:174
+#: plugins/admin/systems/glpiManufacturerAdd.tpl:27 html/getxls.php:174
 msgid "Address"
 msgstr "Адрес"
 
@@ -2820,6 +2830,7 @@ msgid "FTP account"
 msgstr "Аккаунт FTP"
 
 #: plugins/personal/connectivity/pureftpd.tpl:15
+#: plugins/admin/systems/glpi_devices.tpl:484
 msgid "Bandwidth"
 msgstr "Пропускная способность"
 
@@ -2842,6 +2853,9 @@ msgstr "Файлы"
 
 #: plugins/personal/connectivity/pureftpd.tpl:43
 #: plugins/addons/mailqueue/contents.tpl:56
+#: plugins/admin/systems/glpi_devices.tpl:192
+#: plugins/admin/systems/glpi_devices.tpl:315
+#: plugins/admin/systems/glpi_devices.tpl:378
 msgid "Size"
 msgstr "Размер"
 
@@ -3426,6 +3440,9 @@ msgstr "Выберите ветку стоп-листа"
 #: plugins/admin/systems/terminalService.tpl:42
 #: plugins/admin/systems/terminalService.tpl:120
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:13
+#: plugins/admin/systems/glpi_devices.tpl:322
+#: plugins/admin/systems/glpi_devices.tpl:385
+#: plugins/admin/systems/glpi_devices.tpl:433
 #: plugins/gofon/conference/generic.tpl:22 include/php_setup.inc:122
 msgid "Type"
 msgstr "Тип"
@@ -3877,6 +3894,18 @@ msgstr "Звонок"
 #: plugins/admin/fai/faiTemplateEntry.tpl:7 plugins/admin/fai/faiHook.tpl:9
 #: plugins/admin/systems/servnfs.tpl:9
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:6
+#: plugins/admin/systems/glpi_devices.tpl:10
+#: plugins/admin/systems/glpi_devices.tpl:49
+#: plugins/admin/systems/glpi_devices.tpl:102
+#: plugins/admin/systems/glpi_devices.tpl:156
+#: plugins/admin/systems/glpi_devices.tpl:212
+#: plugins/admin/systems/glpi_devices.tpl:274
+#: plugins/admin/systems/glpi_devices.tpl:344
+#: plugins/admin/systems/glpi_devices.tpl:406
+#: plugins/admin/systems/glpi_devices.tpl:450
+#: plugins/admin/systems/glpi_devices.tpl:501
+#: plugins/admin/systems/glpi_devices.tpl:553
+#: plugins/admin/systems/glpi_devices.tpl:597
 #: plugins/gofon/macro/parameter.tpl:5 html/getxls.php:174 html/getxls.php:233
 msgid "Name"
 msgstr "Фамилия"
@@ -4071,7 +4100,7 @@ msgstr "Отчество"
 
 #: plugins/addons/addressbook/address_info.tpl:43
 #: plugins/addons/addressbook/address_edit.tpl:105
-#: plugins/admin/systems/glpiManufacturerAdd.tpl:59
+#: plugins/admin/systems/glpiManufacturerAdd.tpl:52
 msgid "Email"
 msgstr "Email"
 
@@ -4656,6 +4685,7 @@ msgid "New profile"
 msgstr "Управление системами"
 
 #: plugins/admin/fai/class_faiManagement.inc:443
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:178
 msgid "P"
 msgstr ""
 
@@ -5394,6 +5424,8 @@ msgstr "Выберите тип мыши"
 
 #: plugins/admin/fai/askClassName.tpl:70 plugins/admin/fai/askClassName.tpl:77
 #: plugins/admin/systems/class_glpiSelectUser.inc:95
+#: plugins/admin/systems/glpiDeviceManagement.tpl:52
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:150
 #, fuzzy
 msgid "Use"
 msgstr "Пользователь"
@@ -5761,7 +5793,7 @@ msgid "Object"
 msgstr "Объект"
 
 #: plugins/admin/groups/acl.tpl:12 plugins/admin/groups/mail_admins.tpl:30
-#: plugins/admin/systems/glpi.tpl:42
+#: plugins/admin/systems/glpi.tpl:43
 msgid "Choose"
 msgstr "Выбрать"
 
@@ -5982,6 +6014,7 @@ msgid "You are not allowed to delete this user!"
 msgstr "У вас недостаточно прав для удаления этого пользователя!"
 
 #: plugins/admin/users/class_userManagement.inc:488
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:320
 #: plugins/admin/ogroups/class_ogroup.inc:240
 msgid "none"
 msgstr "нет"
@@ -6480,6 +6513,7 @@ msgstr " Введите другое имя."
 
 #: plugins/admin/departments/class_departmentManagement.inc:25
 #: plugins/admin/systems/class_glpiSelectUser.inc:94
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:149
 #: plugins/admin/ogroups/class_ogroupManagement.inc:43
 #: plugins/admin/ogroups/class_ogroupManagement.inc:391
 msgid "Departments"
@@ -7433,26 +7467,26 @@ msgstr "Выбрать объекты для добавления"
 msgid "Close"
 msgstr "Выбрать"
 
-#: plugins/admin/systems/class_glpiAccount.inc:255
-msgid "There is no valid configuration for glpi database available."
+#: plugins/admin/systems/class_glpiAccount.inc:124
+msgid "There is no server with valid glpi database service."
 msgstr ""
 
-#: plugins/admin/systems/class_glpiAccount.inc:261
-msgid "The php mysql extension is missing. Can't perform any queries."
-msgstr ""
-
-#: plugins/admin/systems/class_glpiAccount.inc:268
+#: plugins/admin/systems/class_glpiAccount.inc:134
 #, fuzzy
-msgid "Can't connect to specified database."
-msgstr "Невозможно подключиться к серверу базы данных!"
+msgid "Can't connect to glpi database, the php-mysql extension is missing."
+msgstr "Не удается подключиться к базе журналов, отчеты показаны не будут!"
 
-#: plugins/admin/systems/class_glpiAccount.inc:283
-#: plugins/admin/systems/class_servDNS.inc:36
-#: plugins/admin/systems/class_inventory.inc:36
-msgid "Remove DNS service"
+#: plugins/admin/systems/class_glpiAccount.inc:144
+#, fuzzy
+msgid "Can't connect to glpi database, check configuration twice."
+msgstr "Не удается подключиться к базе журналов, отчеты показаны не будут!"
+
+#: plugins/admin/systems/class_glpiAccount.inc:374
+#, fuzzy
+msgid "Remove inventory service"
 msgstr "Удалить сервис DNS"
 
-#: plugins/admin/systems/class_glpiAccount.inc:284
+#: plugins/admin/systems/class_glpiAccount.inc:375
 #, fuzzy
 msgid ""
 "This server has inventory features enabled. You can disable them by clicking "
@@ -7461,13 +7495,12 @@ msgstr ""
 "В этой учетной записи есть настройки факса. Вы можете удалить их, щелкнув "
 "ниже."
 
-#: plugins/admin/systems/class_glpiAccount.inc:286
-#: plugins/admin/systems/class_servDNS.inc:39
-#: plugins/admin/systems/class_inventory.inc:39
-msgid "Add DNS service"
+#: plugins/admin/systems/class_glpiAccount.inc:377
+#, fuzzy
+msgid "Add inventory service"
 msgstr "Добавить сервис DNS"
 
-#: plugins/admin/systems/class_glpiAccount.inc:287
+#: plugins/admin/systems/class_glpiAccount.inc:378
 #, fuzzy
 msgid ""
 "This server has inventory features disabled. You can enable them by clicking "
@@ -7476,7 +7509,8 @@ msgstr ""
 "В этой учетной записи нет настроек факса. Вы можете добавить их, щелкнув "
 "ниже."
 
-#: plugins/admin/systems/class_glpiAccount.inc:327
+#: plugins/admin/systems/class_glpiAccount.inc:420
+#: plugins/admin/systems/class_glpiAccount.inc:434
 msgid "N/A"
 msgstr ""
 
@@ -7756,6 +7790,11 @@ msgstr "У вас недостаточно прав для удаления эт
 msgid "Admins"
 msgstr "DN администратора"
 
+#: plugins/admin/systems/class_servDNS.inc:36
+#: plugins/admin/systems/class_inventory.inc:36
+msgid "Remove DNS service"
+msgstr "Удалить сервис DNS"
+
 #: plugins/admin/systems/class_servDNS.inc:37
 #: plugins/admin/systems/class_inventory.inc:37
 #, fuzzy
@@ -7764,6 +7803,11 @@ msgid ""
 msgstr ""
 "В этой учетной записи есть настройки факса. Вы можете удалить их, щелкнув "
 "ниже."
+
+#: plugins/admin/systems/class_servDNS.inc:39
+#: plugins/admin/systems/class_inventory.inc:39
+msgid "Add DNS service"
+msgstr "Добавить сервис DNS"
 
 #: plugins/admin/systems/class_servDNS.inc:40
 #: plugins/admin/systems/class_inventory.inc:40
@@ -8559,7 +8603,7 @@ msgid ""
 "This dialog allows you to select a user as technical responsible person."
 msgstr ""
 
-#: plugins/admin/systems/glpiManufacturerAdd.tpl:27
+#: plugins/admin/systems/glpiManufacturerAdd.tpl:20
 #, fuzzy
 msgid "Website"
 msgstr "запись"
@@ -8571,11 +8615,16 @@ msgstr "запись"
 msgid "Phone number"
 msgstr "Телефонные номера"
 
-#: plugins/admin/systems/glpiManufacturerAdd.tpl:45
-#: plugins/admin/systems/glpi.tpl:77
+#: plugins/admin/systems/glpiManufacturerAdd.tpl:59
+#: plugins/admin/systems/glpi.tpl:79
 #, fuzzy
 msgid "Comments"
 msgstr "Контакт"
+
+#: plugins/admin/systems/class_glpiManufacturer.inc:83
+#, fuzzy
+msgid "Please specify a name."
+msgstr "Введите корректное имя пользователя!"
 
 #: plugins/admin/systems/glpi.tpl:9
 #, fuzzy
@@ -8587,7 +8636,18 @@ msgstr "Системы"
 msgid "Operating system"
 msgstr "Удалить"
 
-#: plugins/admin/systems/glpi.tpl:29
+#: plugins/admin/systems/glpi.tpl:29 plugins/admin/systems/glpi_devices.tpl:28
+#: plugins/admin/systems/glpi_devices.tpl:67
+#: plugins/admin/systems/glpi_devices.tpl:120
+#: plugins/admin/systems/glpi_devices.tpl:174
+#: plugins/admin/systems/glpi_devices.tpl:230
+#: plugins/admin/systems/glpi_devices.tpl:292
+#: plugins/admin/systems/glpi_devices.tpl:362
+#: plugins/admin/systems/glpi_devices.tpl:424
+#: plugins/admin/systems/glpi_devices.tpl:468
+#: plugins/admin/systems/glpi_devices.tpl:519
+#: plugins/admin/systems/glpi_devices.tpl:571
+#: plugins/admin/systems/glpi_devices.tpl:615
 msgid "Manufacturer"
 msgstr ""
 
@@ -8595,45 +8655,341 @@ msgstr ""
 msgid "Technical responsible"
 msgstr ""
 
-#: plugins/admin/systems/glpi.tpl:47
+#: plugins/admin/systems/glpi.tpl:48
 #, fuzzy
 msgid "Installed devices"
 msgstr "Клиентские устройства"
 
-#: plugins/admin/systems/glpi.tpl:59
+#: plugins/admin/systems/glpi.tpl:60
 #, fuzzy
 msgid "Trading"
 msgstr "Затенение"
 
-#: plugins/admin/systems/glpi.tpl:60
+#: plugins/admin/systems/glpi.tpl:61
 #, fuzzy
 msgid "Software"
 msgstr "Адм. единица"
 
-#: plugins/admin/systems/glpi.tpl:61
+#: plugins/admin/systems/glpi.tpl:62
 #, fuzzy
 msgid "Contracts"
 msgstr "Контакт"
 
-#: plugins/admin/systems/glpi.tpl:65
+#: plugins/admin/systems/glpi.tpl:66
 #, fuzzy
 msgid "Contacts"
 msgstr "Контакт"
 
-#: plugins/admin/systems/glpi.tpl:69
+#: plugins/admin/systems/glpi.tpl:70
 #, fuzzy
 msgid "Contact person"
 msgstr "Контакт"
 
-#: plugins/admin/systems/glpi.tpl:72
+#: plugins/admin/systems/glpi.tpl:74
 #, fuzzy
 msgid "mailto"
 msgstr "Email"
 
-#: plugins/admin/systems/glpi.tpl:85
+#: plugins/admin/systems/glpi.tpl:87
 #, fuzzy
 msgid "Attachments"
 msgstr "подразделения"
+
+#: plugins/admin/systems/glpiDeviceManagement.tpl:6
+#, fuzzy
+msgid "List of devices"
+msgstr "Список пользователей"
+
+#: plugins/admin/systems/glpiDeviceManagement.tpl:24
+msgid ""
+"This dialog allows you to attach a device to your currently edited computer."
+msgstr ""
+
+#: plugins/admin/systems/glpiDeviceManagement.tpl:37
+#, fuzzy
+msgid "Display devices matching"
+msgstr "Показать подходяшие адреса"
+
+#: plugins/admin/systems/glpiDeviceManagement.tpl:39
+#, fuzzy
+msgid "Regular expression for matching device names"
+msgstr "Регулярное выражение, соответствующее именам пользователей"
+
+#: plugins/admin/systems/glpi_devices.tpl:4
+#, fuzzy
+msgid "Other devices"
+msgstr "Сетевые устройства"
+
+#: plugins/admin/systems/glpi_devices.tpl:17
+#: plugins/admin/systems/glpi_devices.tpl:56
+#: plugins/admin/systems/glpi_devices.tpl:109
+#: plugins/admin/systems/glpi_devices.tpl:163
+#: plugins/admin/systems/glpi_devices.tpl:219
+#: plugins/admin/systems/glpi_devices.tpl:281
+#: plugins/admin/systems/glpi_devices.tpl:351
+#: plugins/admin/systems/glpi_devices.tpl:413
+#: plugins/admin/systems/glpi_devices.tpl:457
+#: plugins/admin/systems/glpi_devices.tpl:508
+#: plugins/admin/systems/glpi_devices.tpl:560
+#: plugins/admin/systems/glpi_devices.tpl:604
+#, fuzzy
+msgid "Comment"
+msgstr "Контакт"
+
+#: plugins/admin/systems/glpi_devices.tpl:43
+msgid "Power supply"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:76
+msgid "Atx"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:79
+#: plugins/admin/systems/glpi_devices.tpl:195
+#: plugins/admin/systems/glpi_devices.tpl:258
+#, fuzzy
+msgid "Yes"
+msgstr "Системы"
+
+#: plugins/admin/systems/glpi_devices.tpl:80
+#: plugins/admin/systems/glpi_devices.tpl:196
+#: plugins/admin/systems/glpi_devices.tpl:259
+#, fuzzy
+msgid "No"
+msgstr "нет"
+
+#: plugins/admin/systems/glpi_devices.tpl:84
+#, fuzzy
+msgid "Power"
+msgstr "Порт"
+
+#: plugins/admin/systems/glpi_devices.tpl:96
+msgid "Gfxcard"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:129
+#: plugins/admin/systems/glpi_devices.tpl:183
+#: plugins/admin/systems/glpi_devices.tpl:246
+msgid "Interface"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:138
+#, fuzzy
+msgid "Ram"
+msgstr "Имя сервера"
+
+#: plugins/admin/systems/glpi_devices.tpl:150
+#, fuzzy
+msgid "Controllers"
+msgstr "Страна"
+
+#: plugins/admin/systems/glpi_devices.tpl:206
+#, fuzzy
+msgid "Drive"
+msgstr "Драйвер"
+
+#: plugins/admin/systems/glpi_devices.tpl:239
+#, fuzzy
+msgid "Speed"
+msgstr "Пол"
+
+#: plugins/admin/systems/glpi_devices.tpl:255
+#, fuzzy
+msgid "Writeable"
+msgstr "запись"
+
+#: plugins/admin/systems/glpi_devices.tpl:268
+#, fuzzy
+msgid "Hdd"
+msgstr "Добавить"
+
+#: plugins/admin/systems/glpi_devices.tpl:301
+msgid "Rpm"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:308
+#, fuzzy
+msgid "Cache"
+msgstr "Отмена"
+
+#: plugins/admin/systems/glpi_devices.tpl:338
+msgid "RAM"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:371
+#: plugins/admin/systems/glpi_devices.tpl:528
+#, fuzzy
+msgid "Frequenz"
+msgstr "Номер телефона"
+
+#: plugins/admin/systems/glpi_devices.tpl:400
+msgid "Soundcard"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:444
+#, fuzzy
+msgid "Network interface"
+msgstr "Сетевой принтер"
+
+#: plugins/admin/systems/glpi_devices.tpl:477
+#, fuzzy
+msgid "MAC address"
+msgstr "MAC-адрес"
+
+#: plugins/admin/systems/glpi_devices.tpl:495
+msgid "Processor"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:535
+#, fuzzy
+msgid "Default frequenz"
+msgstr "По умолчанию"
+
+#: plugins/admin/systems/glpi_devices.tpl:547
+#, fuzzy
+msgid "Motherboard"
+msgstr "Клавиатура"
+
+#: plugins/admin/systems/glpi_devices.tpl:580
+#, fuzzy
+msgid "Chipset"
+msgstr "сброс"
+
+#: plugins/admin/systems/glpi_devices.tpl:591
+#, fuzzy
+msgid "Computer case"
+msgstr "не полный"
+
+#: plugins/admin/systems/glpi_devices.tpl:624
+#, fuzzy
+msgid "format"
+msgstr "Порт"
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:87
+#, php-format
+msgid "Internal Error can't create device of type '%s'"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:149
+#, fuzzy
+msgid "devices"
+msgstr "Устройства"
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:176
+#, fuzzy
+msgid "New mainbord"
+msgstr "Новый пароль"
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:178
+#, fuzzy
+msgid "New processor"
+msgstr "Новый пароль"
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:180
+#, fuzzy
+msgid "New case"
+msgstr "пользователи"
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:180
+msgid "C"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:182
+#, fuzzy
+msgid "New network interface"
+msgstr "Сетевой принтер"
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:182
+#, fuzzy
+msgid "NI"
+msgstr "Unix"
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:184
+#, fuzzy
+msgid "New ram"
+msgstr "пользователи"
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:184
+msgid "R"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:186
+#, fuzzy
+msgid "New hard disk drive"
+msgstr "Сервер"
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:186
+msgid "HDD"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:188
+#, fuzzy
+msgid "New drives"
+msgstr "Сервер"
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:188
+#, fuzzy
+msgid "D"
+msgstr "UID"
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:190
+#, fuzzy
+msgid "New controllers"
+msgstr "Номер телефона"
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:190
+msgid "CS"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:192
+msgid "New graphics card"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:192
+msgid "GC"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:194
+#, fuzzy
+msgid "New sound card"
+msgstr "Новый пароль"
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:194
+msgid "SC"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:196
+msgid "New power supply"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:196
+msgid "PS"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:198
+#, fuzzy
+msgid "New other peripherals"
+msgstr "Сетевой принтер"
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:198
+msgid "OC"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:283
+#, fuzzy
+msgid "You have to specify a valid name for this device."
+msgstr "Укажите корректный номер телефона."
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:294
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:297
+#, fuzzy
+msgid "This device name is already in use."
+msgstr "Указанное имя уже используется."
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:333
+#, fuzzy
+msgid "Other"
+msgstr "Фильтры"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:59
 #: plugins/admin/ogroups/tabs_ogroups.inc:151
@@ -11325,6 +11681,10 @@ msgid "Sign in again"
 msgstr "Войти"
 
 #, fuzzy
+#~ msgid "Can't connect to specified database."
+#~ msgstr "Невозможно подключиться к серверу базы данных!"
+
+#, fuzzy
 #~ msgid "Coments"
 #~ msgstr "Контакт"
 
@@ -11335,10 +11695,6 @@ msgstr "Войти"
 #, fuzzy
 #~ msgid "Append new class names"
 #~ msgstr "Доступные приложения"
-
-#, fuzzy
-#~ msgid "Charset"
-#~ msgstr "сброс"
 
 #, fuzzy
 #~ msgid "Master"
@@ -11531,10 +11887,6 @@ msgstr "Войти"
 #, fuzzy
 #~ msgid "GLPI Account"
 #~ msgstr "Учетная запись"
-
-#, fuzzy
-#~ msgid "Sexe"
-#~ msgstr "Пол"
 
 #, fuzzy
 #~ msgid "XLS export"
@@ -11854,10 +12206,6 @@ msgstr "Войти"
 #~ msgstr "Ноябрь"
 
 #, fuzzy
-#~ msgid "Format"
-#~ msgstr "Порт"
-
-#, fuzzy
 #~ msgid "Additional phone attributes "
 #~ msgstr "Дополнительные записи в fstab"
 
@@ -11869,10 +12217,6 @@ msgstr "Войти"
 
 #~ msgid "The number '%s' is no valid phone number!"
 #~ msgstr "Неправильный номер телефона '%s'"
-
-#, fuzzy
-#~ msgid "Yes"
-#~ msgstr "Системы"
 
 #, fuzzy
 #~ msgid "fill out"

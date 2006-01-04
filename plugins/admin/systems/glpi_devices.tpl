@@ -525,14 +525,14 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>{t}Frequenz{/t}
+                        <td>{t}Frequence{/t}
                         </td>
                         <td>
                             <input type="text" name="frequence" value="{$frequence}">
                         </td>
                     </tr>
                     <tr>
-                        <td>{t}Default frequenz{/t}
+                        <td>{t}Default frequence{/t}
                         </td>
                         <td>
                             <input type="text" name="specif_default" value="{$specif_default}">

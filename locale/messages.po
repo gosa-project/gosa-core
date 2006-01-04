@@ -74,7 +74,7 @@ msgstr ""
 #: plugins/addons/addressbook/contents.tpl:14
 #: plugins/admin/users/class_userManagement.inc:736
 #: plugins/admin/departments/generic.tpl:62
-#: plugins/admin/systems/glpiManufacturerAdd.tpl:52 html/getxls.php:174
+#: plugins/admin/systems/glpiManufacturerAdd.tpl:45 html/getxls.php:174
 #: html/getxls.php:236
 msgid "Fax"
 msgstr ""
@@ -163,6 +163,7 @@ msgstr ""
 #: plugins/admin/systems/headpage.tpl:20
 #: plugins/admin/systems/servRepository.tpl:17
 #: plugins/admin/systems/glpiSelectUser.tpl:20
+#: plugins/admin/systems/glpiDeviceManagement.tpl:20
 #: plugins/admin/ogroups/headpage.tpl:20 plugins/gofon/macro/headpage.tpl:20
 #: plugins/gofon/conference/headpage.tpl:20
 msgid "Information"
@@ -431,6 +432,8 @@ msgstr ""
 #: plugins/admin/systems/password.tpl:30
 #: plugins/admin/systems/servRepositorySetup.tpl:43
 #: plugins/admin/systems/glpiSelectUser.tpl:52
+#: plugins/admin/systems/glpiDeviceManagement.tpl:53
+#: plugins/admin/systems/glpi_devices.tpl:643
 #: plugins/admin/ogroups/ogroup_objects.tpl:52
 #: plugins/admin/ogroups/class_ogroupManagement.inc:340
 #: plugins/admin/ogroups/remove.tpl:16
@@ -467,7 +470,10 @@ msgstr ""
 #: plugins/admin/systems/servservice.tpl:21
 #: plugins/admin/systems/printer.tpl:46
 #: plugins/admin/systems/glpiManufacturer.tpl:7
-#: plugins/admin/systems/glpi.tpl:72 plugins/gofon/phoneaccount/main.inc:113
+#: plugins/admin/systems/glpi.tpl:55 plugins/admin/systems/glpi.tpl:74
+#: plugins/admin/systems/glpi.tpl:94
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:153
+#: plugins/gofon/phoneaccount/main.inc:113
 msgid "Edit"
 msgstr ""
 
@@ -636,8 +642,7 @@ msgstr ""
 #: plugins/admin/systems/servRepository.tpl:11
 #: plugins/admin/systems/glpi_edit_type.tpl:6
 #: plugins/admin/systems/glpiManufacturer.tpl:6
-#: plugins/admin/systems/glpi_edit_os.tpl:6 plugins/admin/systems/glpi.tpl:54
-#: plugins/admin/systems/glpi.tpl:92
+#: plugins/admin/systems/glpi_edit_os.tpl:6
 #: plugins/admin/ogroups/ogroup_objects.tpl:50
 #: plugins/admin/ogroups/generic.tpl:38
 #: plugins/admin/ogroups/phonequeue.tpl:24
@@ -677,6 +682,7 @@ msgstr ""
 #: plugins/admin/systems/terminalStartup.tpl:62
 #: plugins/admin/systems/glpi_edit_type.tpl:8
 #: plugins/admin/systems/glpi_edit_os.tpl:8
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:154
 #: plugins/admin/ogroups/generic.tpl:39 plugins/admin/ogroups/remove.tpl:14
 #: plugins/admin/ogroups/phonequeue.tpl:25 plugins/gofon/macro/remove.tpl:13
 #: plugins/gofon/phoneaccount/generic.tpl:15
@@ -729,6 +735,7 @@ msgstr ""
 #: plugins/personal/environment/environment.tpl:71
 #: plugins/personal/connectivity/pureftpd.tpl:44
 #: plugins/personal/connectivity/class_proxyAccount.inc:79
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:176
 msgid "MB"
 msgstr ""
 
@@ -899,6 +906,7 @@ msgstr ""
 #: plugins/admin/systems/headpage.tpl:29
 #: plugins/admin/systems/servRepository.tpl:26
 #: plugins/admin/systems/glpiSelectUser.tpl:29
+#: plugins/admin/systems/glpiDeviceManagement.tpl:29
 #: plugins/admin/ogroups/ogroup_objects.tpl:20
 #: plugins/admin/ogroups/headpage.tpl:29 plugins/gofon/macro/headpage.tpl:29
 #: plugins/gofon/conference/headpage.tpl:29
@@ -1820,6 +1828,7 @@ msgid ""
 msgstr ""
 
 #: plugins/personal/environment/class_environment.inc:395
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:333
 msgid "None"
 msgstr ""
 
@@ -2154,6 +2163,7 @@ msgstr ""
 #: plugins/admin/fai/faiPartitionTableEntry.tpl:29
 #: plugins/admin/systems/servnfs.tpl:75
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:86
+#: plugins/admin/systems/glpi_devices.tpl:642
 msgid "Save"
 msgstr ""
 
@@ -2239,7 +2249,7 @@ msgstr ""
 #: plugins/addons/addressbook/address_edit.tpl:72
 #: plugins/addons/addressbook/address_edit.tpl:182
 #: plugins/admin/departments/generic.tpl:54
-#: plugins/admin/systems/glpiManufacturerAdd.tpl:20 html/getxls.php:174
+#: plugins/admin/systems/glpiManufacturerAdd.tpl:27 html/getxls.php:174
 msgid "Address"
 msgstr ""
 
@@ -2632,6 +2642,7 @@ msgid "FTP account"
 msgstr ""
 
 #: plugins/personal/connectivity/pureftpd.tpl:15
+#: plugins/admin/systems/glpi_devices.tpl:484
 msgid "Bandwidth"
 msgstr ""
 
@@ -2654,6 +2665,9 @@ msgstr ""
 
 #: plugins/personal/connectivity/pureftpd.tpl:43
 #: plugins/addons/mailqueue/contents.tpl:56
+#: plugins/admin/systems/glpi_devices.tpl:192
+#: plugins/admin/systems/glpi_devices.tpl:315
+#: plugins/admin/systems/glpi_devices.tpl:378
 msgid "Size"
 msgstr ""
 
@@ -3199,6 +3213,9 @@ msgstr ""
 #: plugins/admin/systems/terminalService.tpl:42
 #: plugins/admin/systems/terminalService.tpl:120
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:13
+#: plugins/admin/systems/glpi_devices.tpl:322
+#: plugins/admin/systems/glpi_devices.tpl:385
+#: plugins/admin/systems/glpi_devices.tpl:433
 #: plugins/gofon/conference/generic.tpl:22 include/php_setup.inc:122
 msgid "Type"
 msgstr ""
@@ -3631,6 +3648,18 @@ msgstr ""
 #: plugins/admin/fai/faiTemplateEntry.tpl:7 plugins/admin/fai/faiHook.tpl:9
 #: plugins/admin/systems/servnfs.tpl:9
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:6
+#: plugins/admin/systems/glpi_devices.tpl:10
+#: plugins/admin/systems/glpi_devices.tpl:49
+#: plugins/admin/systems/glpi_devices.tpl:102
+#: plugins/admin/systems/glpi_devices.tpl:156
+#: plugins/admin/systems/glpi_devices.tpl:212
+#: plugins/admin/systems/glpi_devices.tpl:274
+#: plugins/admin/systems/glpi_devices.tpl:344
+#: plugins/admin/systems/glpi_devices.tpl:406
+#: plugins/admin/systems/glpi_devices.tpl:450
+#: plugins/admin/systems/glpi_devices.tpl:501
+#: plugins/admin/systems/glpi_devices.tpl:553
+#: plugins/admin/systems/glpi_devices.tpl:597
 #: plugins/gofon/macro/parameter.tpl:5 html/getxls.php:174 html/getxls.php:233
 msgid "Name"
 msgstr ""
@@ -3814,7 +3843,7 @@ msgstr ""
 
 #: plugins/addons/addressbook/address_info.tpl:43
 #: plugins/addons/addressbook/address_edit.tpl:105
-#: plugins/admin/systems/glpiManufacturerAdd.tpl:59
+#: plugins/admin/systems/glpiManufacturerAdd.tpl:52
 msgid "Email"
 msgstr ""
 
@@ -4345,6 +4374,7 @@ msgid "New profile"
 msgstr ""
 
 #: plugins/admin/fai/class_faiManagement.inc:443
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:178
 msgid "P"
 msgstr ""
 
@@ -4991,6 +5021,8 @@ msgstr ""
 
 #: plugins/admin/fai/askClassName.tpl:70 plugins/admin/fai/askClassName.tpl:77
 #: plugins/admin/systems/class_glpiSelectUser.inc:95
+#: plugins/admin/systems/glpiDeviceManagement.tpl:52
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:150
 msgid "Use"
 msgstr ""
 
@@ -5319,7 +5351,7 @@ msgid "Object"
 msgstr ""
 
 #: plugins/admin/groups/acl.tpl:12 plugins/admin/groups/mail_admins.tpl:30
-#: plugins/admin/systems/glpi.tpl:42
+#: plugins/admin/systems/glpi.tpl:43
 msgid "Choose"
 msgstr ""
 
@@ -5522,6 +5554,7 @@ msgid "You are not allowed to delete this user!"
 msgstr ""
 
 #: plugins/admin/users/class_userManagement.inc:488
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:320
 #: plugins/admin/ogroups/class_ogroup.inc:240
 msgid "none"
 msgstr ""
@@ -5966,6 +5999,7 @@ msgstr ""
 
 #: plugins/admin/departments/class_departmentManagement.inc:25
 #: plugins/admin/systems/class_glpiSelectUser.inc:94
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:149
 #: plugins/admin/ogroups/class_ogroupManagement.inc:43
 #: plugins/admin/ogroups/class_ogroupManagement.inc:391
 msgid "Departments"
@@ -6856,43 +6890,40 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: plugins/admin/systems/class_glpiAccount.inc:255
-msgid "There is no valid configuration for glpi database available."
+#: plugins/admin/systems/class_glpiAccount.inc:124
+msgid "There is no server with valid glpi database service."
 msgstr ""
 
-#: plugins/admin/systems/class_glpiAccount.inc:261
-msgid "The php mysql extension is missing. Can't perform any queries."
+#: plugins/admin/systems/class_glpiAccount.inc:134
+msgid "Can't connect to glpi database, the php-mysql extension is missing."
 msgstr ""
 
-#: plugins/admin/systems/class_glpiAccount.inc:268
-msgid "Can't connect to specified database."
+#: plugins/admin/systems/class_glpiAccount.inc:144
+msgid "Can't connect to glpi database, check configuration twice."
 msgstr ""
 
-#: plugins/admin/systems/class_glpiAccount.inc:283
-#: plugins/admin/systems/class_servDNS.inc:36
-#: plugins/admin/systems/class_inventory.inc:36
-msgid "Remove DNS service"
+#: plugins/admin/systems/class_glpiAccount.inc:374
+msgid "Remove inventory service"
 msgstr ""
 
-#: plugins/admin/systems/class_glpiAccount.inc:284
+#: plugins/admin/systems/class_glpiAccount.inc:375
 msgid ""
 "This server has inventory features enabled. You can disable them by clicking "
 "below."
 msgstr ""
 
-#: plugins/admin/systems/class_glpiAccount.inc:286
-#: plugins/admin/systems/class_servDNS.inc:39
-#: plugins/admin/systems/class_inventory.inc:39
-msgid "Add DNS service"
+#: plugins/admin/systems/class_glpiAccount.inc:377
+msgid "Add inventory service"
 msgstr ""
 
-#: plugins/admin/systems/class_glpiAccount.inc:287
+#: plugins/admin/systems/class_glpiAccount.inc:378
 msgid ""
 "This server has inventory features disabled. You can enable them by clicking "
 "below."
 msgstr ""
 
-#: plugins/admin/systems/class_glpiAccount.inc:327
+#: plugins/admin/systems/class_glpiAccount.inc:420
+#: plugins/admin/systems/class_glpiAccount.inc:434
 msgid "N/A"
 msgstr ""
 
@@ -7132,10 +7163,20 @@ msgstr ""
 msgid "Admins"
 msgstr ""
 
+#: plugins/admin/systems/class_servDNS.inc:36
+#: plugins/admin/systems/class_inventory.inc:36
+msgid "Remove DNS service"
+msgstr ""
+
 #: plugins/admin/systems/class_servDNS.inc:37
 #: plugins/admin/systems/class_inventory.inc:37
 msgid ""
 "This server has DNS features enabled. You can disable them by clicking below."
+msgstr ""
+
+#: plugins/admin/systems/class_servDNS.inc:39
+#: plugins/admin/systems/class_inventory.inc:39
+msgid "Add DNS service"
 msgstr ""
 
 #: plugins/admin/systems/class_servDNS.inc:40
@@ -7830,7 +7871,7 @@ msgid ""
 "This dialog allows you to select a user as technical responsible person."
 msgstr ""
 
-#: plugins/admin/systems/glpiManufacturerAdd.tpl:27
+#: plugins/admin/systems/glpiManufacturerAdd.tpl:20
 msgid "Website"
 msgstr ""
 
@@ -7840,9 +7881,13 @@ msgstr ""
 msgid "Phone number"
 msgstr ""
 
-#: plugins/admin/systems/glpiManufacturerAdd.tpl:45
-#: plugins/admin/systems/glpi.tpl:77
+#: plugins/admin/systems/glpiManufacturerAdd.tpl:59
+#: plugins/admin/systems/glpi.tpl:79
 msgid "Comments"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiManufacturer.inc:83
+msgid "Please specify a name."
 msgstr ""
 
 #: plugins/admin/systems/glpi.tpl:9
@@ -7853,7 +7898,18 @@ msgstr ""
 msgid "Operating system"
 msgstr ""
 
-#: plugins/admin/systems/glpi.tpl:29
+#: plugins/admin/systems/glpi.tpl:29 plugins/admin/systems/glpi_devices.tpl:28
+#: plugins/admin/systems/glpi_devices.tpl:67
+#: plugins/admin/systems/glpi_devices.tpl:120
+#: plugins/admin/systems/glpi_devices.tpl:174
+#: plugins/admin/systems/glpi_devices.tpl:230
+#: plugins/admin/systems/glpi_devices.tpl:292
+#: plugins/admin/systems/glpi_devices.tpl:362
+#: plugins/admin/systems/glpi_devices.tpl:424
+#: plugins/admin/systems/glpi_devices.tpl:468
+#: plugins/admin/systems/glpi_devices.tpl:519
+#: plugins/admin/systems/glpi_devices.tpl:571
+#: plugins/admin/systems/glpi_devices.tpl:615
 msgid "Manufacturer"
 msgstr ""
 
@@ -7861,36 +7917,293 @@ msgstr ""
 msgid "Technical responsible"
 msgstr ""
 
-#: plugins/admin/systems/glpi.tpl:47
+#: plugins/admin/systems/glpi.tpl:48
 msgid "Installed devices"
 msgstr ""
 
-#: plugins/admin/systems/glpi.tpl:59
+#: plugins/admin/systems/glpi.tpl:60
 msgid "Trading"
 msgstr ""
 
-#: plugins/admin/systems/glpi.tpl:60
+#: plugins/admin/systems/glpi.tpl:61
 msgid "Software"
 msgstr ""
 
-#: plugins/admin/systems/glpi.tpl:61
+#: plugins/admin/systems/glpi.tpl:62
 msgid "Contracts"
 msgstr ""
 
-#: plugins/admin/systems/glpi.tpl:65
+#: plugins/admin/systems/glpi.tpl:66
 msgid "Contacts"
 msgstr ""
 
-#: plugins/admin/systems/glpi.tpl:69
+#: plugins/admin/systems/glpi.tpl:70
 msgid "Contact person"
 msgstr ""
 
-#: plugins/admin/systems/glpi.tpl:72
+#: plugins/admin/systems/glpi.tpl:74
 msgid "mailto"
 msgstr ""
 
-#: plugins/admin/systems/glpi.tpl:85
+#: plugins/admin/systems/glpi.tpl:87
 msgid "Attachments"
+msgstr ""
+
+#: plugins/admin/systems/glpiDeviceManagement.tpl:6
+msgid "List of devices"
+msgstr ""
+
+#: plugins/admin/systems/glpiDeviceManagement.tpl:24
+msgid ""
+"This dialog allows you to attach a device to your currently edited computer."
+msgstr ""
+
+#: plugins/admin/systems/glpiDeviceManagement.tpl:37
+msgid "Display devices matching"
+msgstr ""
+
+#: plugins/admin/systems/glpiDeviceManagement.tpl:39
+msgid "Regular expression for matching device names"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:4
+msgid "Other devices"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:17
+#: plugins/admin/systems/glpi_devices.tpl:56
+#: plugins/admin/systems/glpi_devices.tpl:109
+#: plugins/admin/systems/glpi_devices.tpl:163
+#: plugins/admin/systems/glpi_devices.tpl:219
+#: plugins/admin/systems/glpi_devices.tpl:281
+#: plugins/admin/systems/glpi_devices.tpl:351
+#: plugins/admin/systems/glpi_devices.tpl:413
+#: plugins/admin/systems/glpi_devices.tpl:457
+#: plugins/admin/systems/glpi_devices.tpl:508
+#: plugins/admin/systems/glpi_devices.tpl:560
+#: plugins/admin/systems/glpi_devices.tpl:604
+msgid "Comment"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:43
+msgid "Power supply"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:76
+msgid "Atx"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:79
+#: plugins/admin/systems/glpi_devices.tpl:195
+#: plugins/admin/systems/glpi_devices.tpl:258
+msgid "Yes"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:80
+#: plugins/admin/systems/glpi_devices.tpl:196
+#: plugins/admin/systems/glpi_devices.tpl:259
+msgid "No"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:84
+msgid "Power"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:96
+msgid "Gfxcard"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:129
+#: plugins/admin/systems/glpi_devices.tpl:183
+#: plugins/admin/systems/glpi_devices.tpl:246
+msgid "Interface"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:138
+msgid "Ram"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:150
+msgid "Controllers"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:206
+msgid "Drive"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:239
+msgid "Speed"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:255
+msgid "Writeable"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:268
+msgid "Hdd"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:301
+msgid "Rpm"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:308
+msgid "Cache"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:338
+msgid "RAM"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:371
+#: plugins/admin/systems/glpi_devices.tpl:528
+msgid "Frequenz"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:400
+msgid "Soundcard"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:444
+msgid "Network interface"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:477
+msgid "MAC address"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:495
+msgid "Processor"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:535
+msgid "Default frequenz"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:547
+msgid "Motherboard"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:580
+msgid "Chipset"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:591
+msgid "Computer case"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:624
+msgid "format"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:87
+#, php-format
+msgid "Internal Error can't create device of type '%s'"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:149
+msgid "devices"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:176
+msgid "New mainbord"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:178
+msgid "New processor"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:180
+msgid "New case"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:180
+msgid "C"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:182
+msgid "New network interface"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:182
+msgid "NI"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:184
+msgid "New ram"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:184
+msgid "R"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:186
+msgid "New hard disk drive"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:186
+msgid "HDD"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:188
+msgid "New drives"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:188
+msgid "D"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:190
+msgid "New controllers"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:190
+msgid "CS"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:192
+msgid "New graphics card"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:192
+msgid "GC"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:194
+msgid "New sound card"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:194
+msgid "SC"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:196
+msgid "New power supply"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:196
+msgid "PS"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:198
+msgid "New other peripherals"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:198
+msgid "OC"
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:283
+msgid "You have to specify a valid name for this device."
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:294
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:297
+msgid "This device name is already in use."
+msgstr ""
+
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:333
+msgid "Other"
 msgstr ""
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:59
