@@ -12,6 +12,14 @@ sn: Upload user
 description: GOto Upload Benutzer
 userPassword:: e2tlcmJlcm9zfXRlcm1pbmFsYWRtaW5AR09OSUNVUy5MT0NBTAo=
 
+dn: ou=groups,dc=gonicus,dc=de
+objectClass: organizationalUnit
+ou: groups
+
+dn: ou=people,dc=gonicus,dc=de
+objectClass: organizationalUnit
+ou: people
+
 dn: cn=admin,ou=people,dc=gonicus,dc=de
 objectClass: person
 objectClass: organizationalPerson
