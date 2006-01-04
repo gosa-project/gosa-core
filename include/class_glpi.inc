@@ -824,6 +824,30 @@ class glpiDB{
 		return($this->is_connected);
 	}
 
+	function deleteAttachment($id)
+	{
+		if($this->is_connected){
+			$qry = "DELETE FROM glpi_docs WHERE ID=".$id."";
+			$this->query($qry);
+		}else{
+            echo "not connected";
+            return(false);
+        }
+	}
+	
+	function getAttachments()
+	{
+		if($this->is_connected){
+			$qry = "SELECT * FROM glpi_docs WHERE name!='';";
+			$ret = $this->query($qry);
+			return($ret);
+		}else{
+            echo "not connected";
+            return(false);
+        }
+	}
+	
+
 }
 //$s = new glpiDB("vserver-01","glpi","tester","glpi");
 //print_r($s->query("SELECT * FROM glpi_computers"));
