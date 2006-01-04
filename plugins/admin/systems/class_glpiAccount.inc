@@ -10,12 +10,13 @@ class glpiAccount extends plugin
   /* attribute list for save action */
   var $ignore_account= TRUE;
   var $attributes= array("ID","name","contact",
-      "tech_num","comments","date_mod","os","location","domain","network",
+      "tech_num","comments","date_mod","os","location","domain","network","contact_num",
       "model","type","is_template","FK_glpi_enterprise","deleted");
 
   var $ID                 ;
   var $name               ="";
   var $contact            ="";
+  var $contact_num        ="";
 
   var $tech_num           ="";
   var $comments           ="";
@@ -46,6 +47,9 @@ class glpiAccount extends plugin
 
   var $orig_dn;
   var $ui;
+  
+  var $usedDevices = array();
+
 
   /* Contructor 
      Sets default values and checks if we already have an existing glpi account
@@ -78,6 +82,7 @@ class glpiAccount extends plugin
       foreach(array("tech_num","os","FK_glpi_enterprise","type","comments") as $attr){
         $this->$attr = $tmp[0][$attr];
       }
+      $this->usedDevices = $this->handle->getUsedDevices($tmp[0]['ID']);
 
     }else{
       $this->is_account = false;
@@ -97,9 +102,37 @@ class glpiAccount extends plugin
     $smarty= get_smarty();
     $display= "";
 
-    // #fixme
-    // Check if mysql a.s.o. is available.
+    /* Assign smarty defaults */ 
+    foreach(array("SystemTypes","SystemTypeKeys","Manufacturers",
+                  "OSs","TechnicalResponsibles","InstalledDevices","Attachments",
+                  "OSKeys","OSs","ManufacturerKeys","InstalledDeviceKeys") as $attr){
+      $smarty->assign($attr,array());
+      $smarty->assign($attr."ACL"," disabled ");
+    }
 
+    foreach(array("type","FK_glpi_enterprise","os","tech_num","comments","contact_num") as $attr){
+      $smarty->assign($attr,"");
+      $smarty->assign($attr."ACL"," disabled ");
+    }
+
+    if(!isset($this->config->data['SERVERS']['GLPI'])){
+      print_red(_("There is no server with valid glpi database service."));
+      return($smarty->fetch(get_template_path('glpi.tpl', TRUE)));
+    }
+
+    $this->data = $this->config->data['SERVERS']['GLPI'];
+
+    if(!is_callable("mysql_connect")){
+      print_red(_("Can't connect to glpi database, the php-mysql extension is missing."));
+      return($smarty->fetch(get_template_path('glpi.tpl', TRUE)));
+    }
+
+    $this->handle = new glpiDB($this->data['SERVER'],$this->data['LOGIN'],$this->data['PASSWORD'],$this->data['DB']);
+
+    if(!$this->handle->is_connected){
+      print_red(_("Can't connect to glpi database, check configuration twice."));
+      return($smarty->fetch(get_template_path('glpi.tpl', TRUE)));
+    } 
 
     $this->handle = new glpiDB($this->data['SERVER'],$this->data['LOGIN'],$this->data['PASSWORD'],$this->data['DB']);
     $users = ($this->handle->getUsers());
@@ -108,13 +141,13 @@ class glpiAccount extends plugin
 
     if(isset($_POST['AddDevice'])){
       $this->dialog =true;
-      $this->cur_dialog = new glpiDeviceManagement($this->config,$this->dn);
+      $this->cur_dialog = new glpiDeviceManagement($this->config,$this->dn,$this->usedDevices);
     }
 
     /* We have selected some devices and pressed use button */
     if(isset($_POST['SelectDeviceSave'])){
       $this->cur_dialog->save_object();
-      print_a($this->cur_dialog->getSelected());
+      $this->usedDevices= ($this->cur_dialog->getSelected());
       $this->cur_dialog = false;
       $this->dialog = false;
       $this->edit_type=false;
@@ -144,7 +177,7 @@ class glpiAccount extends plugin
     }
 
     if((isset($_POST['del_type']))&&(!empty($_POST['select_type']))){
-      $this->handle->removeSystemType_byID($_POST['select_type']);  
+      $this->handle->removeSystemType($_POST['select_type']);  
     }
 
     if((isset($_POST['rename_type']))&&(!empty($_POST['select_type']))&&(!empty($_POST['type_string']))){
@@ -266,12 +299,12 @@ class glpiAccount extends plugin
     /* Assign smarty defaults */ 
     foreach(array("SystemTypes","SystemTypeKeys","Manufacturers","OSs","TechnicalResponsibles","InstalledDevices","Attachments") as $attr){
       $smarty->assign($attr,array());
-      $smarty->assign($attr."ACL"," disabled ");
+      $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
     }
 
     foreach(array("type","FK_glpi_enterprise","os","tech_num") as $attr){
       $smarty->assign($attr,"");
-      $smarty->assign($attr."ACL"," disabled ");
+      $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
     }
 
     /* Perform some checks
@@ -328,8 +361,12 @@ class glpiAccount extends plugin
     $smarty->assign("OSs",                    $this->handle->getOSTypes());
     $smarty->assign("os",                     $this->os);
 
-    $smarty->assign("ManufacturerKeys",       array_flip($this->handle->getEnterprisesTypes()));
-    $smarty->assign("Manufacturers",          $this->handle->getEnterprisesTypes());
+    $smarty->assign("InstalledDevices"        ,$this->getDevices());
+    $smarty->assign("InstalledDeviceKeys"     ,array_flip($this->getDevices()));
+
+
+    $smarty->assign("ManufacturerKeys",       array_flip($this->handle->getEnterprises()));
+    $smarty->assign("Manufacturers",          $this->handle->getEnterprises());
     $smarty->assign("FK_glpi_enterprise",     $this->FK_glpi_enterprise);
 
     if(isset($users[$this->tech_num])){
@@ -362,6 +399,16 @@ class glpiAccount extends plugin
   {
   }
 
+  function getDevices(){
+    $ret = array();
+    foreach($this->usedDevices as $type => $entries){
+      foreach($entries as $ent){
+        $ret[] = $ent['designation']." [".$type."]";
+      }
+    }
+    return($ret); 
+  }
+
 
   /* Save data to object */
   function save_object()
@@ -390,18 +437,22 @@ class glpiAccount extends plugin
   /* Save to LDAP */
   function save()
   {
-    $attrs = array();
-    $this->date_mod = date("Y-m-d H:i:s");
-    foreach($this->attributes as $attr){
-      $attrs[$attr] = $this->$attr;
-    }
-    $attrs['name'] = $this->dn;
-    unset($attrs['ID']);
-    $this->handle = new glpiDB($this->data['SERVER'],$this->data['LOGIN'],$this->data['PASSWORD'],$this->data['DB']);
-    if($this->initialy_was_account&&$this->is_account){
-      $this->handle->updateComputerInformations($attrs,$this->dn);
-    }elseif($this->is_account){
-      $this->handle->addComputerInformations($attrs,$this->dn);
+    if($this->is_account){
+        $attrs = array();
+      $this->date_mod = date("Y-m-d H:i:s");
+      foreach($this->attributes as $attr){
+        $attrs[$attr] = $this->$attr;
+      }
+      $attrs['name'] = $this->dn;
+      unset($attrs['ID']);
+      $this->handle = new glpiDB($this->data['SERVER'],$this->data['LOGIN'],$this->data['PASSWORD'],$this->data['DB']);
+      if($this->initialy_was_account&&$this->is_account){
+        $this->handle->updateComputerInformations($attrs,$this->dn);
+      }elseif($this->is_account){
+        $this->handle->addComputerInformations($attrs,$this->dn);
+      }
+      $tmp = ($this->handle->getComputerInformations($this->dn));
+      $this->handle->addDevicesToComputer($this->usedDevices,$tmp[0]['ID']);
     }
   }
 

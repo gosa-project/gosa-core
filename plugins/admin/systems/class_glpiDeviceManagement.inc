@@ -24,7 +24,7 @@ class glpiDeviceManagement extends plugin
 
   var $Selected = array();
 
-  function glpiDeviceManagement ($config, $dn= NULL)
+  function glpiDeviceManagement ($config, $dn= NULL,$used=NULL)
   {
     plugin::plugin ($config, $dn);
 
@@ -33,6 +33,10 @@ class glpiDeviceManagement extends plugin
       $_SESSION['glpiDeviceRegex'] = $tmp;
     }
     $this->ui = get_userinfo();  
+
+    if(isset($used)){
+    $this->Selected = $used;
+    }
  
     /* Specify which vars are allowed for a sepcific type of device */ 
     $this->DeviceAttrs['case']      = array("designation","format","comment","FK_glpi_enterprise");
@@ -53,6 +57,7 @@ class glpiDeviceManagement extends plugin
 
   function execute()
   {
+    print_a($this->Selected);
     /* Call parent execute */
     plugin::execute();
 
@@ -313,7 +318,7 @@ class glpiDeviceManagement extends plugin
     $smarty->assign("device_type",$entry['device_type']);
 
     $none = array(0 => _("none"));
-    $manufacturer = array_merge($none,$this->parent->handle->getEnterprisesTypes());
+    $manufacturer = array_merge($none,$this->parent->handle->getEnterprises());
 
     $ramtypes = $this->parent->handle->getRAMTypes();
 

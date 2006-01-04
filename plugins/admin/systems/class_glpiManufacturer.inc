@@ -40,7 +40,7 @@ class glpiManufacturer extends plugin
     $display = "";
 
     if((isset($_POST['remove_manu']))&&(isset($_POST['manufacturer']))){
-      $this->parent->handle->removeEnterprisesType($_POST['manufacturer']);
+      $this->parent->handle->removeEnterprise($_POST['manufacturer']);
     }
 
     if(isset($_POST['add_manu'])){
@@ -86,10 +86,10 @@ class glpiManufacturer extends plugin
 
       if($allok){
         if($this->Edit_Add == "add"){
-          $this->parent->handle->addEnterprisesType($tmp);
+          $this->parent->handle->addEnterprise($tmp);
           $this->editMode=false;
         }else{
-          $this->parent->handle->updateEnterprisesType($tmp,$this->ID);
+          $this->parent->handle->updateEnterprise($tmp,$this->ID);
           $this->editMode=false;
         }
       }
@@ -106,8 +106,8 @@ class glpiManufacturer extends plugin
     }
 
 
-    $smarty->assign("Manus",    $this->parent->handle->getEnterprisesTypes());
-    $smarty->assign("ManuKeys", array_flip($this->parent->handle->getEnterprisesTypes()));
+    $smarty->assign("Manus",    $this->parent->handle->getEnterprises());
+    $smarty->assign("ManuKeys", array_flip($this->parent->handle->getEnterprises()));
     $display.= $smarty->fetch(get_template_path('glpiManufacturer.tpl', TRUE));
     return($display);
   }

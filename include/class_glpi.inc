@@ -1,5 +1,6 @@
 <?php
 
+
 class glpiDB{
 
 	var $user		="";
@@ -11,6 +12,9 @@ class glpiDB{
 	var $handle 			= NULL;
 
 	var $lasterror	="";
+
+	var $deviceMappingGOsaGlpi;
+	var $deviceMappingTableNameID;
 
 	function glpiDB($server,$user,$pwd,$db){
 		$this->server 	= $server;
@@ -24,6 +28,34 @@ class glpiDB{
 			$this->is_connected = true;
 			$this->SelectDB($this->db);
 		}	
+		$this->deviceMappingGOsaGlpi = array(
+				"glpi_device_case"      => "case",
+				"glpi_device_control"   => "control",
+				"glpi_device_drive"     => "drive",
+				"glpi_device_gfxcard"   => "gfxcard",
+				"glpi_device_hdd"       => "hdd",
+				"glpi_device_iface"     => "iface",
+				"glpi_device_moboard"   => "moboard",
+				"glpi_device_pci"       => "pci",
+				"glpi_device_power"     => "power",
+				"glpi_device_processor" => "processor",
+				"glpi_device_ram"       => "ram",
+				"glpi_device_sndcard"   => "sndcard");
+
+		$this->deviceMappingTableNameID = array(		"moboard"	=> 1,										
+				"processor"	=> 2,										
+				"ram"		=> 3,										
+				"hdd"		=> 4,										
+				"iface"		=> 5,										
+				"drive"		=> 6,										
+				"control"	=> 7,										
+				"gfxcard"	=> 8,										
+				"sndcard"	=> 9,										
+				"pci"		=> 10,										
+				"case"		=> 11,										
+				"power"		=> 12);
+
+
 	}
 
 	function SelectDB()
@@ -33,12 +65,16 @@ class glpiDB{
 		}
 	}
 
+
+	/* This functions checks if the selected computer/network 
+	   device is already available in the db
+	 */
 	function is_account($dn)
 	{
 		if(!$this->is_connected){
-            $this->lasterror ="Can't query anything, if we aren't connected.";
-            return(false);
-        }else{
+			$this->lasterror ="Can't query anything, if we aren't connected.";
+			return(false);
+		}else{
 			$qry = "SELECT * FROM glpi_computers WHERE name='".$dn."';";
 			$res = $this->query($qry);
 			if(count($res)==0){
@@ -49,6 +85,8 @@ class glpiDB{
 		}
 	}
 
+	/* this function queries everything 
+	 */
 	function query($qry)
 	{
 		if(!$this->is_connected){
@@ -65,7 +103,9 @@ class glpiDB{
 		}
 	}
 
-	/* System types */
+	/* System types 
+       Returns all defined system types 
+	 */
 	function getSystemTypes()
 	{
 		if($this->is_connected){
@@ -81,7 +121,9 @@ class glpiDB{
 		}
 	}
 
-	/* System types */
+	/* System types 
+	   Update a system type 	
+	*/
 	function updateSystemType($name,$id)
 	{
 
@@ -99,7 +141,9 @@ class glpiDB{
 		}
 	}
 
-	/* System types */
+	/* System types 
+       Add one entry to the system types 
+     */
 	function addSystemType($name)
 	{
 		if($this->is_connected){
@@ -116,8 +160,10 @@ class glpiDB{
 		}
 	}
 
-	/* System types */
-	function removeSystemType_byID($id)
+	/* System types 
+       Remove one entry from the system types (specified by ID=$id)
+     */
+	function removeSystemType($id)
 	{
 		if($this->is_connected){
 			$tmp = $this->query("SELECT * FROM glpi_type_computers WHERE ID=".$id.";");
@@ -133,8 +179,10 @@ class glpiDB{
 		}
 	}
 
-	/* Manufacturer */	
-	function getEnterprisesTypes()
+	/* Manufacturer 
+	   Returns all defined manufacturers
+	*/	
+	function getEnterprises()
 	{
 		if($this->is_connected){
 			$ret = array();
@@ -149,7 +197,9 @@ class glpiDB{
 		}
 	}
 
-	/* Manufacturer */	
+	/* Manufacturer 
+	   Returns single manufacturer
+	*/	
 	function getEnterprise($id)
 	{
 		if($this->is_connected){
@@ -162,8 +212,10 @@ class glpiDB{
 		}
 	}
 
-	/* System types */
-	function updateEnterprisesType($array,$id)
+	/* Manufacturer 
+       Updates already existing manufacturer
+    */
+	function updateEnterprise($array,$id)
 	{
 		if(!is_array($array)){
 			echo "updateEnterprisesType: first paraeter must be an array";
@@ -195,7 +247,10 @@ class glpiDB{
 		}
 	}
 
-	function addEnterprisesType($array)
+	/* Manufacturer
+	   Add new manufacturer
+	 */
+	function addEnterprise($array)
 	{
 		if(!is_array($array)){
 			echo "addUser: first paraeter must be an array";
@@ -225,9 +280,10 @@ class glpiDB{
 
 	}
 
-
-
-	function removeEnterprisesType($id)
+	/*	Manufacturer
+		remove manufacturer
+	 */
+	function removeEnterprise($id)
 	{
 		if($this->is_connected){
 			$tmp = $this->query("SELECT * FROM glpi_enterprises WHERE ID=".$id.";");
@@ -243,8 +299,9 @@ class glpiDB{
 		}
 	}
 
-
-	/* Operating systems */
+	/* Operating systems 
+	   Returns all OSs
+	 */
 	function getOSTypes()
 	{
 		if($this->is_connected){
@@ -263,8 +320,9 @@ class glpiDB{
 		}
 	}
 
-
-	/* os */
+	/*  Operating systems
+		Add a new operating system to the dropdown menus   
+	 */
     function addOS($name)
     {
         if($this->is_connected){
@@ -281,7 +339,9 @@ class glpiDB{
         }
     }
 
-	   /* System types */
+    /* Operating systems 
+       remove one OS entry
+     */
     function removeOS_byID($id)
     {
         if($this->is_connected){
@@ -298,9 +358,9 @@ class glpiDB{
         }
     }
 
-
-	
-	/* System types */
+	/* Operating systems 
+	   Update existing OS entry
+	*/
 	function updateOS($name,$id)
 	{
 
@@ -318,8 +378,8 @@ class glpiDB{
 		}
 	}
 
-
-	/* Technical / Responsible person / glpi users  */
+	/* This returns all available glpi users 
+     */
 	function getUsers()
 	{
 		if($this->is_connected){
@@ -336,7 +396,8 @@ class glpiDB{
 		}
 	}
 
-	
+	/* this function adds a new glpi user
+     */
 	function addUser($array,$dn)
 	{
 		if(!is_array($array)){
@@ -368,6 +429,9 @@ class glpiDB{
 
 	}
 
+	/* This function updates a glpi user 
+       with the given data
+     */
 	function updateUser($array,$dn)
 	{
 		if(!is_array($array)){
@@ -401,29 +465,12 @@ class glpiDB{
 
 	}
 
-
+	/* This function returns all available data 
+       from a specified dn
+     */
 	function getComputerInformations($name)
 	{
 		if($this->is_connected){	
-			/*
-			$ret							= $this->query(	'	
-					SELECT
-					c.ID,
-					c.name      as "Name",
-					c.comments  as "Commets",
-					d.name      as "OS",
-					e.name      as "Manufacturer",
-					dc.name     as "Type",
-					u.name      as "Technical responsible"
-					FROM
-					glpi_computers as c
-					left join   glpi_dropdown_os    as d    on (c.os                    = d.ID)
-					left join   glpi_enterprises    as e    on (c.FK_glpi_enterprise    = e.ID)
-					left join   glpi_type_computers as dc   on (c.type                  = dc.ID)
-					left join   glpi_users          as u    on (c.tech_num              = u.ID)
-
-					WHERE c.Name!="" AND c.ID='.$id.';');
-		*/
 			$ret = $this->query("SELECT * FROM glpi_computers WHERE name='".$name."';");
 			return($ret);		
 		}else{
@@ -432,6 +479,8 @@ class glpiDB{
 		}
 	}
 
+	/*  This fucntions updates an already existing entry 
+     */
 	function updateComputerInformations($array,$name)
 	{
 		if(!is_array($array)){
@@ -467,6 +516,8 @@ class glpiDB{
 
 	}
 
+	/* This function adds a new inventory device (computer phone etc)
+     */
 	function addComputerInformations($array)
 	{
 		if(!is_array($array)){
@@ -499,21 +550,14 @@ class glpiDB{
 
 	}
 
+	/* this functions checks if the given Device 
+     * already exists 
+     */
 	function deviceExists($attr)
 	{
+		$deviceMappingGOsaGlpi = $this->deviceMappingGOsaGlpi;
 		if($this->is_connected){	
-			$arr = array_flip(array(	"glpi_device_case"		=> "case",
-						"glpi_device_control"	=> "control",	
-						"glpi_device_drive"		=> "drive",
-						"glpi_device_gfxcard"	=> "gfxcard",	
-						"glpi_device_hdd"		=> "hdd",		
-						"glpi_device_iface"		=> "iface",
-						"glpi_device_moboard"	=> "moboard",
-						"glpi_device_pci"		=> "pci",
-						"glpi_device_power"		=> "power",
-						"glpi_device_processor"	=> "processor",
-						"glpi_device_ram"		=> "ram",
-						"glpi_device_sndcard"	=> "sndcard"));
+			$arr = array_flip($deviceMappingGOsaGlpi);
 
 			$tbl_name = $arr[$attr['device_type']];
 			if(!isset($attr['ID'])){
@@ -533,21 +577,14 @@ class glpiDB{
 		return(false);
 	}
 
+	/* This functions deletes a specified entry 
+     * from our device tables 
+     */
 	function deleteDevice($attr)
 	{
+		$deviceMappingGOsaGlpi = $this->deviceMappingGOsaGlpi;
 		if($this->is_connected){
-			$arr = array_flip(array(	"glpi_device_case"		=> "case",
-						"glpi_device_control"	=> "control",	
-						"glpi_device_drive"		=> "drive",
-						"glpi_device_gfxcard"	=> "gfxcard",	
-						"glpi_device_hdd"		=> "hdd",		
-						"glpi_device_iface"		=> "iface",
-						"glpi_device_moboard"	=> "moboard",
-						"glpi_device_pci"		=> "pci",
-						"glpi_device_power"		=> "power",
-						"glpi_device_processor"	=> "processor",
-						"glpi_device_ram"		=> "ram",
-						"glpi_device_sndcard"	=> "sndcard"));
+			$arr = array_flip($deviceMappingGOsaGlpi);
 			
 			$device_type = $attr['device_type'];
 			unset($attr['device_type']);			
@@ -560,21 +597,14 @@ class glpiDB{
 			return(false);
 		}
 	}
+
+	/* This funtions updated an already existing device
+     */
 	function updateDevices($attr)
 	{
+		$deviceMappingGOsaGlpi = $this->deviceMappingGOsaGlpi;
 		if($this->is_connected){
-			$arr = array_flip(array(	"glpi_device_case"		=> "case",
-						"glpi_device_control"	=> "control",	
-						"glpi_device_drive"		=> "drive",
-						"glpi_device_gfxcard"	=> "gfxcard",	
-						"glpi_device_hdd"		=> "hdd",		
-						"glpi_device_iface"		=> "iface",
-						"glpi_device_moboard"	=> "moboard",
-						"glpi_device_pci"		=> "pci",
-						"glpi_device_power"		=> "power",
-						"glpi_device_processor"	=> "processor",
-						"glpi_device_ram"		=> "ram",
-						"glpi_device_sndcard"	=> "sndcard"));
+			$arr = array_flip($deviceMappingGOsaGlpi);
 			
 			$device_type = $attr['device_type'];
 			unset($attr['device_type']);			
@@ -594,6 +624,9 @@ class glpiDB{
 		}
 	}
 
+	/* Returns all possible RAM types 
+     * like SDRAM , DIMM .....
+     */
 	function getRAMTypes()
 	{
 		if($this->is_connected){
@@ -609,7 +642,9 @@ class glpiDB{
 		}
 	}
 	
-
+	/* Returns all possible HDD connection types 
+     * like IDE SCSI ...
+     */
 	function getGlpiDeviceControlTypes()
 	{
 		if($this->is_connected){
@@ -625,6 +660,9 @@ class glpiDB{
 		}
 	}
 	
+	/* Returns all possible gfx card connection types
+     * like PCI-X PCI AGP ....
+ 	 */
 	function getGlpiGfxControlTypes()
 	{
 		if($this->is_connected){
@@ -640,22 +678,14 @@ class glpiDB{
 		}
 	}
 	
-	
+	/* Devices 
+       Adds a new single device to our db
+    */	
 	function addDevice($attr)
 	{
+		$deviceMappingGOsaGlpi = $this->deviceMappingGOsaGlpi;
 		if($this->is_connected){	
-			$arr = array_flip(array(	"glpi_device_case"		=> "case",
-						"glpi_device_control"	=> "control",	
-						"glpi_device_drive"		=> "drive",
-						"glpi_device_gfxcard"	=> "gfxcard",	
-						"glpi_device_hdd"		=> "hdd",		
-						"glpi_device_iface"		=> "iface",
-						"glpi_device_moboard"	=> "moboard",
-						"glpi_device_pci"		=> "pci",
-						"glpi_device_power"		=> "power",
-						"glpi_device_processor"	=> "processor",
-						"glpi_device_ram"		=> "ram",
-						"glpi_device_sndcard"	=> "sndcard"));
+			$arr = array_flip($deviceMappingGOsaGlpi);
 			
 			$device_type = $attr['device_type'];
 			unset($attr['device_type']);			
@@ -682,21 +712,13 @@ class glpiDB{
         }
 	}
 
+	/* Return all available devices 
+     */
 	function getDevices()
 	{
+		$deviceMappingGOsaGlpi = $this->deviceMappingGOsaGlpi;
 		if($this->is_connected){
-			$arr = array(	"glpi_device_case"		=> "case",
-							"glpi_device_control"	=> "control",	
-							"glpi_device_drive"		=> "drive",
-							"glpi_device_gfxcard"	=> "gfxcard",	
-							"glpi_device_hdd"		=> "hdd",		
-							"glpi_device_iface"		=> "iface",
-							"glpi_device_moboard"	=> "moboard",
-							"glpi_device_pci"		=> "pci",
-							"glpi_device_power"		=> "power",
-							"glpi_device_processor"	=> "processor",
-							"glpi_device_ram"		=> "ram",
-							"glpi_device_sndcard"	=> "sndcard");
+			$arr = $deviceMappingGOsaGlpi; 
 		
 			$res = array();
 			foreach($arr as $glpi => $gosa){
@@ -712,6 +734,71 @@ class glpiDB{
 			echo "not connected";
 			return(false);
 		}
+	}
+
+	/* This function returns all used devices 
+     */
+	function getUsedDevices($computerID)
+	{
+		$deviceMappingGOsaGlpi = array_flip($this->deviceMappingGOsaGlpi);
+		$deviceMappingTableNameID	= $this->deviceMappingTableNameID;
+	
+		if($this->is_connected){
+			$qry = "SELECT * FROM glpi_computer_device WHERE FK_computers=".$computerID.";";
+			$res = $this->query($qry);
+		
+			$ret = array();
+			foreach($deviceMappingGOsaGlpi as $GOsa => $glpi){
+				$ret[$GOsa] = array();
+			}
+
+			$tbls = array_flip($deviceMappingTableNameID);
+
+			foreach($res as $device){
+				$devtype = $tbls[$device['device_type']];
+				$tbl_name = $deviceMappingGOsaGlpi[$devtype];
+				$qry = ("SELECT * FROM ".$tbl_name." WHERE ID=".$device['FK_device'].";");
+				$res2 = $this->query($qry);
+				if(count($res2)!=0){
+					$ret[$devtype][$res2[0]['designation']]=$res2[0];
+				}
+			}
+			return($ret);
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+	/* This function removes all given devices from a computer, specified by $id
+       In the next step all devices specified by devices will be added.
+	 */
+	function addDevicesToComputer($devices, $id)
+	{
+		$deviceMappingGOsaGlpi = array_flip($this->deviceMappingGOsaGlpi);
+		$deviceMappingTableNameID	= $this->deviceMappingTableNameID;
+	
+		if(($id == "" )||(!is_numeric($id))){
+			return (false); 
+		}
+		if($this->is_connected){
+			$qry = "DELETE FROM glpi_computer_device WHERE FK_computers=".$id.";";
+			$this->query($qry);	
+		
+			foreach($devices as $type => $entries){
+				foreach($entries as $entry){
+					$str = "INSERT INTO glpi_computer_device (device_type,FK_device,FK_computers) 
+					VALUES (".$deviceMappingTableNameID[$type].",".$entry['ID'].",".$id.");";
+					$this->query($str);
+				}
+			}
+		
+
+		}else{
+			echo "not connected";
+			return(false);
+		}
+
 	}
 
 	function removeComputerInformations($id)
