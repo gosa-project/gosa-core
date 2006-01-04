@@ -21,6 +21,8 @@ class glpiAccount extends plugin
   var $tech_num           ="";
   var $comments           ="";
 
+  var $addUser            ="";
+
   var $date_mod           ="";
   var $os                 =0;
   var $location           =0;
@@ -79,7 +81,7 @@ class glpiAccount extends plugin
       $this->is_account = true;
       $tmp = ($this->handle->getComputerInformations($this->dn));
 
-      foreach(array("tech_num","os","FK_glpi_enterprise","type","comments") as $attr){
+      foreach(array("tech_num","os","FK_glpi_enterprise","type","comments","contact_num") as $attr){
         $this->$attr = $tmp[0][$attr];
       }
       $this->usedDevices = $this->handle->getUsedDevices($tmp[0]['ID']);
@@ -230,6 +232,11 @@ class glpiAccount extends plugin
     /*  ENDE, os management.
      */
 
+    if(isset($_POST['SelectContactPerson'])){
+      $this->addUser = "contact";
+      $this->cur_dialog= new glpiSelectUser($this->config,$this->dn);
+    }
+
     if(isset($_POST['edit_manufacturer'])){
       $this->cur_dialog = new glpiManufacturer($this->config,$this->dn);
       $this->dialog = true;
@@ -242,10 +249,13 @@ class glpiAccount extends plugin
 
     if(isset($_POST['SelectUserCancel'])){
       $this->dialog = false;
+      $this->addUser ="";
       $this->cur_dialog = false;
     }
 
+
     if(isset($_POST['SelectTechPerson'])){
+      $this->addUser ="tech";
       $this->cur_dialog= new glpiSelectUser($this->config,$this->dn);
     }
 
@@ -284,7 +294,11 @@ class glpiAccount extends plugin
       $id=$tmp[$id];
 
       /* Use user id, close dialog */
-      $this->tech_num = $id;
+      if($this->addUser == "tech"){
+        $this->tech_num = $id;
+      }else{
+        $this->contact_num = $id;
+      }
       $this->cur_dialog   = false;
       $this->dialog= false;
     }
@@ -302,7 +316,7 @@ class glpiAccount extends plugin
       $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
     }
 
-    foreach(array("type","FK_glpi_enterprise","os","tech_num") as $attr){
+    foreach(array("type","FK_glpi_enterprise","os","tech_num","contact_num") as $attr){
       $smarty->assign($attr,"");
       $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
     }
@@ -368,6 +382,27 @@ class glpiAccount extends plugin
     $smarty->assign("ManufacturerKeys",       array_flip($this->handle->getEnterprises()));
     $smarty->assign("Manufacturers",          $this->handle->getEnterprises());
     $smarty->assign("FK_glpi_enterprise",     $this->FK_glpi_enterprise);
+
+    if(isset($users[$this->contact_num])){
+      $tr = $ldap->fetch($ldap->cat($users[$this->contact_num]));
+      $str = "";
+      if(isset($tr['givenName'][0])){
+        $str .= $tr['givenName'][0]." ";
+      }
+
+      if(isset($tr['sn'][0])){
+        $str .= $tr['sn'][0]." ";
+      }
+
+      if(isset($tr['uid'][0])){
+        $str .= "[".$tr['uid'][0]."]";
+      }
+
+
+      $smarty->assign("contact_num",               $str);
+    }else{
+      $smarty->assign("contact_num",               _("N/A"));
+    }
 
     if(isset($users[$this->tech_num])){
       $tr = $ldap->fetch($ldap->cat($users[$this->tech_num]));

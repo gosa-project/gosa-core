@@ -71,7 +71,7 @@
 					</td>
 					<td>
 						<i>{$contact_num}&nbsp; </i>&nbsp;
-						<input {$contact_numACL} type="submit" value="{t}Edit{/t}"><img src="images/mailto.png" class="center" alt="{t}mailto{/t}">	
+						<input {$contact_numACL} type="submit" name="SelectContactPerson" value="{t}Edit{/t}"><img src="images/mailto.png" class="center" alt="{t}mailto{/t}">	
 					</td>
 				</tr>
 				<tr>
