@@ -36,6 +36,7 @@ class glpiManufacturer extends plugin
 
   function execute()
   {
+    plugin::execute();
     $smarty  = get_smarty();
     $display = "";
 

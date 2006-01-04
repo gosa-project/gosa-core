@@ -159,6 +159,43 @@ class glpiAccount extends plugin
       $this->cur_dialog = new glpiDeviceManagement($this->config,$this->dn,$this->usedDevices);
     }
 
+
+
+
+    /* Attachment pool was closed with use
+     */
+    if(isset($_POST['UseAttachment'])){
+      if(count($this->cur_dialog->check())){
+        foreach($this->cur_dialog->check() as $msg){
+          print_red($msg);
+        }
+      }else{
+        /****/
+        echo "blabla attaching something ..... ";
+
+      }
+    }
+   
+    /* Attachment pool was closed with abort
+     */ 
+    if(isset($_POST['AbortAttachment'])){
+      $this->cur_dialog = false;
+      $this->edit_type = false; 
+    }
+
+    /* Open Attachment pool to add/edit Attachments
+     */
+    if(isset($_POST['AddAttachment'])){
+      $this->cur_dialog = new glpiAttachmentPool($this->config,$this->dn);
+      $this->dialog = true;
+    }
+    
+    /* Remove Attachment fro this tab 
+     */
+    if(isset($_POST['RemoveAttachment'])){
+        
+    }
+
     /* We have selected some devices and pressed use button 
      */
     if(isset($_POST['SelectDeviceSave'])){
