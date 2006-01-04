@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2006-01-04 13:56+0100\n"
+"PO-Revision-Date: 2006-01-04 15:15+0100\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -3711,9 +3711,7 @@ msgstr ""
 #: plugins/gofax/faxreports/class_faxreport.inc:169
 #: plugins/gofax/faxreports/class_faxreport.inc:278
 msgid "Can't select fax database for report generation!"
-msgstr ""
-"Die Fax-Datenbank kann bez�glich der Berichtgenerierung nicht ausgew�hlt "
-"werden!"
+msgstr "Kann die Fax-Datenbank zur Berichterstellung nicht �ffnen!"
 
 #: plugins/gofax/faxreports/class_faxreport.inc:177
 #: plugins/gofax/faxreports/class_faxreport.inc:286
@@ -8365,7 +8363,6 @@ msgid "Contact person"
 msgstr "Kontaktperson"
 
 #: plugins/admin/systems/glpi.tpl:74
-#, fuzzy
 msgid "mailto"
 msgstr "Email"
 
@@ -8482,9 +8479,8 @@ msgid "PS"
 msgstr "PS"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:198
-#, fuzzy
 msgid "New other peripherals"
-msgstr "Netzwerk-Drucker"
+msgstr "Neues 'anderes' Ger�t"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:198
 msgid "OC"
@@ -8543,9 +8539,8 @@ msgid "No"
 msgstr "nein"
 
 #: plugins/admin/systems/glpi_devices.tpl:84
-#, fuzzy
 msgid "Power"
-msgstr "Anschluss"
+msgstr "Strom"
 
 #: plugins/admin/systems/glpi_devices.tpl:96
 msgid "Gfxcard"
@@ -8634,9 +8629,8 @@ msgid "Computer case"
 msgstr "Computergeh�use"
 
 #: plugins/admin/systems/glpi_devices.tpl:624
-#, fuzzy
 msgid "format"
-msgstr "Information"
+msgstr "Format"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:59
 #: plugins/admin/ogroups/tabs_ogroups.inc:151
@@ -11363,7 +11357,7 @@ msgstr "Erneut anmelden"
 #~ msgid "The php mysql extension is missing. Can't perform any queries."
 #~ msgstr ""
 #~ "Die PHP-MySQL-Erweiterung wurde nicht gefunden! Kann daher keine Abfragen "
-#~ "ausfÃŒhren."
+#~ "ausfÃÂÃÂhren."
 
 #~ msgid "Can't connect to specified database."
 #~ msgstr "Kann nicht zur angebenen Datenbank verbinden."
@@ -11372,13 +11366,13 @@ msgstr "Erneut anmelden"
 #~ msgstr "Kommentare"
 
 #~ msgid "Invalid characters in uid."
-#~ msgstr "Das Feld 'UID' enthÃÂÃÂÃÂ¢ÃÂÃÂ¬lt ungÃÂÃÂÃÂÃÂltige Zeichen."
+#~ msgstr "Das Feld 'UID' enthÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬lt ungÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂltige Zeichen."
 
 #~ msgid "GLPI"
 #~ msgstr "GLPI"
 
 #~ msgid "Append new class names"
-#~ msgstr "Neue Klassen-Namen anfÃÂÃÂÃÂÃÂgen"
+#~ msgstr "Neue Klassen-Namen anfÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂgen"
 
 #~ msgid "Master"
 #~ msgstr "Master"
@@ -11394,7 +11388,7 @@ msgstr "Erneut anmelden"
 
 #~ msgid "There is no useable package list defined."
 #~ msgstr ""
-#~ "Es wurde keine gebrauchsfÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ¬hige Paketliste definiert."
+#~ "Es wurde keine gebrauchsfÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¬hige Paketliste definiert."
 
 #~ msgid "Can't read configuration folder '%s'."
 #~ msgstr "Kann das Konfigurationsverzeichnis '%s' nicht lesen."
