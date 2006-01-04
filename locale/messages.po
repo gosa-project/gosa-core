@@ -7966,136 +7966,6 @@ msgstr ""
 msgid "Regular expression for matching device names"
 msgstr ""
 
-#: plugins/admin/systems/glpi_devices.tpl:4
-msgid "Other devices"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:17
-#: plugins/admin/systems/glpi_devices.tpl:56
-#: plugins/admin/systems/glpi_devices.tpl:109
-#: plugins/admin/systems/glpi_devices.tpl:163
-#: plugins/admin/systems/glpi_devices.tpl:219
-#: plugins/admin/systems/glpi_devices.tpl:281
-#: plugins/admin/systems/glpi_devices.tpl:351
-#: plugins/admin/systems/glpi_devices.tpl:413
-#: plugins/admin/systems/glpi_devices.tpl:457
-#: plugins/admin/systems/glpi_devices.tpl:508
-#: plugins/admin/systems/glpi_devices.tpl:560
-#: plugins/admin/systems/glpi_devices.tpl:604
-msgid "Comment"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:43
-msgid "Power supply"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:76
-msgid "Atx"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:79
-#: plugins/admin/systems/glpi_devices.tpl:195
-#: plugins/admin/systems/glpi_devices.tpl:258
-msgid "Yes"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:80
-#: plugins/admin/systems/glpi_devices.tpl:196
-#: plugins/admin/systems/glpi_devices.tpl:259
-msgid "No"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:84
-msgid "Power"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:96
-msgid "Gfxcard"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:129
-#: plugins/admin/systems/glpi_devices.tpl:183
-#: plugins/admin/systems/glpi_devices.tpl:246
-msgid "Interface"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:138
-msgid "Ram"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:150
-msgid "Controllers"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:206
-msgid "Drive"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:239
-msgid "Speed"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:255
-msgid "Writeable"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:268
-msgid "Hdd"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:301
-msgid "Rpm"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:308
-msgid "Cache"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:338
-msgid "RAM"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:371
-#: plugins/admin/systems/glpi_devices.tpl:528
-msgid "Frequenz"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:400
-msgid "Soundcard"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:444
-msgid "Network interface"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:477
-msgid "MAC address"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:495
-msgid "Processor"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:535
-msgid "Default frequenz"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:547
-msgid "Motherboard"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:580
-msgid "Chipset"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:591
-msgid "Computer case"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:624
-msgid "format"
-msgstr ""
-
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:87
 #, php-format
 msgid "Internal Error can't create device of type '%s'"
@@ -8204,6 +8074,139 @@ msgstr ""
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:333
 msgid "Other"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:4
+msgid "Other devices"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:17
+#: plugins/admin/systems/glpi_devices.tpl:56
+#: plugins/admin/systems/glpi_devices.tpl:109
+#: plugins/admin/systems/glpi_devices.tpl:163
+#: plugins/admin/systems/glpi_devices.tpl:219
+#: plugins/admin/systems/glpi_devices.tpl:281
+#: plugins/admin/systems/glpi_devices.tpl:351
+#: plugins/admin/systems/glpi_devices.tpl:413
+#: plugins/admin/systems/glpi_devices.tpl:457
+#: plugins/admin/systems/glpi_devices.tpl:508
+#: plugins/admin/systems/glpi_devices.tpl:560
+#: plugins/admin/systems/glpi_devices.tpl:604
+msgid "Comment"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:43
+msgid "Power supply"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:76
+msgid "Atx"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:79
+#: plugins/admin/systems/glpi_devices.tpl:195
+#: plugins/admin/systems/glpi_devices.tpl:258
+msgid "Yes"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:80
+#: plugins/admin/systems/glpi_devices.tpl:196
+#: plugins/admin/systems/glpi_devices.tpl:259
+msgid "No"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:84
+msgid "Power"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:96
+msgid "Gfxcard"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:129
+#: plugins/admin/systems/glpi_devices.tpl:183
+#: plugins/admin/systems/glpi_devices.tpl:246
+msgid "Interface"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:138
+msgid "Ram"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:150
+msgid "Controllers"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:206
+msgid "Drive"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:239
+msgid "Speed"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:255
+msgid "Writeable"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:268
+msgid "Hdd"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:301
+msgid "Rpm"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:308
+msgid "Cache"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:338
+msgid "RAM"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:371
+msgid "Frequenz"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:400
+msgid "Soundcard"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:444
+msgid "Network interface"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:477
+msgid "MAC address"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:495
+msgid "Processor"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:528
+msgid "Frequence"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:535
+msgid "Default frequence"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:547
+msgid "Motherboard"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:580
+msgid "Chipset"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:591
+msgid "Computer case"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:624
+msgid "format"
 msgstr ""
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:59

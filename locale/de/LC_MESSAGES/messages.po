@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2006-01-04 13:32+0100\n"
+"PO-Revision-Date: 2006-01-04 13:56+0100\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -7252,12 +7252,15 @@ msgstr "Es wurde kein Server mit einer g�ltigen glpi-Datenbank gefunden."
 
 #: plugins/admin/systems/class_glpiAccount.inc:134
 msgid "Can't connect to glpi database, the php-mysql extension is missing."
-msgstr "Die MySQL-Erweiterung wurde nicht gefunden - kann daher nicht zur "
-"glpi-Datenbank verbinden."
+msgstr ""
+"Die MySQL-Erweiterung wurde nicht gefunden - kann daher nicht zur glpi-"
+"Datenbank verbinden."
 
 #: plugins/admin/systems/class_glpiAccount.inc:144
 msgid "Can't connect to glpi database, check configuration twice."
-msgstr "Kann nicht zur glpi-Datenbank verbinden - bitte �berpr�fen Sie Ihre Konfiguration."
+msgstr ""
+"Kann nicht zur glpi-Datenbank verbinden - bitte �berpr�fen Sie Ihre "
+"Konfiguration."
 
 #: plugins/admin/systems/class_glpiAccount.inc:374
 msgid "Remove inventory service"
@@ -8306,9 +8309,8 @@ msgid "Comments"
 msgstr "Kommentare"
 
 #: plugins/admin/systems/class_glpiManufacturer.inc:83
-#, fuzzy
 msgid "Please specify a name."
-msgstr "Bitte geben Sie eine g�ltige ID ein!"
+msgstr "Bitte geben Sie einen Namen ein!"
 
 #: plugins/admin/systems/glpi.tpl:9
 msgid "System type"
@@ -8376,164 +8378,19 @@ msgid "List of devices"
 msgstr "Liste der Ger�te"
 
 #: plugins/admin/systems/glpiDeviceManagement.tpl:24
-#, fuzzy
 msgid ""
 "This dialog allows you to attach a device to your currently edited computer."
 msgstr ""
-"Dieses Men� erlaubt es Ihnen, Pakete auszuw�hlen und zur gegenw�rtig "
-"bearbeiteten Paketliste hinzuzuf�gen."
+"Dieser Dialog erlaubt es Ihnen, ein Ger�t zum momentan ausgew�hlten "
+"Computer hinzuzuf�gen."
 
 #: plugins/admin/systems/glpiDeviceManagement.tpl:37
-#, fuzzy
 msgid "Display devices matching"
-msgstr "Zeige die Adressen, auf die das Folgende passt"
+msgstr "Zeige die Ger�te, auf die das Folgende passt"
 
 #: plugins/admin/systems/glpiDeviceManagement.tpl:39
-#, fuzzy
 msgid "Regular expression for matching device names"
-msgstr "Regul�rer Ausdruck zum Erkennen von Mitgliedsnamen"
-
-#: plugins/admin/systems/glpi_devices.tpl:4
-#, fuzzy
-msgid "Other devices"
-msgstr "Netzwerk-Ger�te"
-
-#: plugins/admin/systems/glpi_devices.tpl:17
-#: plugins/admin/systems/glpi_devices.tpl:56
-#: plugins/admin/systems/glpi_devices.tpl:109
-#: plugins/admin/systems/glpi_devices.tpl:163
-#: plugins/admin/systems/glpi_devices.tpl:219
-#: plugins/admin/systems/glpi_devices.tpl:281
-#: plugins/admin/systems/glpi_devices.tpl:351
-#: plugins/admin/systems/glpi_devices.tpl:413
-#: plugins/admin/systems/glpi_devices.tpl:457
-#: plugins/admin/systems/glpi_devices.tpl:508
-#: plugins/admin/systems/glpi_devices.tpl:560
-#: plugins/admin/systems/glpi_devices.tpl:604
-msgid "Comment"
-msgstr "Kommentar"
-
-#: plugins/admin/systems/glpi_devices.tpl:43
-msgid "Power supply"
-msgstr "Netzteil"
-
-#: plugins/admin/systems/glpi_devices.tpl:76
-msgid "Atx"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:79
-#: plugins/admin/systems/glpi_devices.tpl:195
-#: plugins/admin/systems/glpi_devices.tpl:258
-msgid "Yes"
-msgstr "ja"
-
-#: plugins/admin/systems/glpi_devices.tpl:80
-#: plugins/admin/systems/glpi_devices.tpl:196
-#: plugins/admin/systems/glpi_devices.tpl:259
-msgid "No"
-msgstr "nein"
-
-#: plugins/admin/systems/glpi_devices.tpl:84
-#, fuzzy
-msgid "Power"
-msgstr "Anschluss"
-
-#: plugins/admin/systems/glpi_devices.tpl:96
-msgid "Gfxcard"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:129
-#: plugins/admin/systems/glpi_devices.tpl:183
-#: plugins/admin/systems/glpi_devices.tpl:246
-#, fuzzy
-msgid "Interface"
-msgstr "Intranet"
-
-#: plugins/admin/systems/glpi_devices.tpl:138
-#, fuzzy
-msgid "Ram"
-msgstr "Umbenennen"
-
-#: plugins/admin/systems/glpi_devices.tpl:150
-#, fuzzy
-msgid "Controllers"
-msgstr "Z�hle Benutzer"
-
-#: plugins/admin/systems/glpi_devices.tpl:206
-#, fuzzy
-msgid "Drive"
-msgstr "Treiber"
-
-#: plugins/admin/systems/glpi_devices.tpl:239
-msgid "Speed"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:255
-#, fuzzy
-msgid "Writeable"
-msgstr "Schreiben"
-
-#: plugins/admin/systems/glpi_devices.tpl:268
-#, fuzzy
-msgid "Hdd"
-msgstr "Hinzuf�gen"
-
-#: plugins/admin/systems/glpi_devices.tpl:301
-msgid "Rpm"
-msgstr "Upm"
-
-#: plugins/admin/systems/glpi_devices.tpl:308
-#, fuzzy
-msgid "Cache"
-msgstr "Abbrechen"
-
-#: plugins/admin/systems/glpi_devices.tpl:338
-msgid "RAM"
-msgstr "RAM"
-
-#: plugins/admin/systems/glpi_devices.tpl:371
-#: plugins/admin/systems/glpi_devices.tpl:528
-#, fuzzy
-msgid "Frequenz"
-msgstr "wieder einreihen"
-
-#: plugins/admin/systems/glpi_devices.tpl:400
-msgid "Soundcard"
-msgstr "Soundkarte"
-
-#: plugins/admin/systems/glpi_devices.tpl:444
-msgid "Network interface"
-msgstr "Netzwerk-Interface"
-
-#: plugins/admin/systems/glpi_devices.tpl:477
-msgid "MAC address"
-msgstr "MAC-Adresse"
-
-#: plugins/admin/systems/glpi_devices.tpl:495
-msgid "Processor"
-msgstr "Prozessor"
-
-#: plugins/admin/systems/glpi_devices.tpl:535
-#, fuzzy
-msgid "Default frequenz"
-msgstr "Standardwert"
-
-#: plugins/admin/systems/glpi_devices.tpl:547
-msgid "Motherboard"
-msgstr "Motherboard"
-
-#: plugins/admin/systems/glpi_devices.tpl:580
-msgid "Chipset"
-msgstr "Chipsatz"
-
-#: plugins/admin/systems/glpi_devices.tpl:591
-msgid "Computer case"
-msgstr "Computergeh�use"
-
-#: plugins/admin/systems/glpi_devices.tpl:624
-#, fuzzy
-msgid "format"
-msgstr "Information"
+msgstr "Regul�rer Ausdruck zum Erkennen von Ger�tenamen"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:87
 #, php-format
@@ -8558,16 +8415,15 @@ msgstr "Neues Geh�use"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:180
 msgid "C"
-msgstr ""
+msgstr "C"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:182
 msgid "New network interface"
 msgstr "Neues Netzwerk-Interface"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:182
-#, fuzzy
 msgid "NI"
-msgstr "UNIX"
+msgstr "NI"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:184
 msgid "New ram"
@@ -8575,7 +8431,7 @@ msgstr "Neuer Arbeitsspeicher"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:184
 msgid "R"
-msgstr ""
+msgstr "R"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:186
 msgid "New hard disk drive"
@@ -8586,24 +8442,20 @@ msgid "HDD"
 msgstr "HDD"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:188
-#, fuzzy
 msgid "New drives"
-msgstr "Neuer Treiber"
+msgstr "Neue Laufwerke"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:188
-#, fuzzy
 msgid "D"
-msgstr "ID"
+msgstr "D"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:190
-#, fuzzy
 msgid "New controllers"
-msgstr "Neue Konferenz"
+msgstr "Neue Controller"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:190
-#, fuzzy
 msgid "CS"
-msgstr "S"
+msgstr "CS"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:192
 msgid "New graphics card"
@@ -8611,26 +8463,23 @@ msgstr "Neue Grafikkarte"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:192
 msgid "GC"
-msgstr ""
+msgstr "GC"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:194
-#, fuzzy
 msgid "New sound card"
-msgstr "Neues Passwort"
+msgstr "Neue Soundkarte"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:194
-#, fuzzy
 msgid "SC"
-msgstr "S"
+msgstr "SC"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:196
 msgid "New power supply"
 msgstr "Neues Netzteil"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:196
-#, fuzzy
 msgid "PS"
-msgstr "S"
+msgstr "PS"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:198
 #, fuzzy
@@ -8639,23 +8488,155 @@ msgstr "Netzwerk-Drucker"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:198
 msgid "OC"
-msgstr ""
+msgstr "OC"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:283
-#, fuzzy
 msgid "You have to specify a valid name for this device."
-msgstr "Bitte geben Sie einen g�ltigen Namen an."
+msgstr "Bitte geben Sie einen g�ltigen Namen f�r dieses Ger�t an."
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:294
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:297
-#, fuzzy
 msgid "This device name is already in use."
-msgstr "Der angegebene Name wird bereits verwendet."
+msgstr "Der angegebene Ger�tename wird bereits verwendet."
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:333
-#, fuzzy
 msgid "Other"
 msgstr "Andere"
+
+#: plugins/admin/systems/glpi_devices.tpl:4
+msgid "Other devices"
+msgstr "Andere Ger�te"
+
+#: plugins/admin/systems/glpi_devices.tpl:17
+#: plugins/admin/systems/glpi_devices.tpl:56
+#: plugins/admin/systems/glpi_devices.tpl:109
+#: plugins/admin/systems/glpi_devices.tpl:163
+#: plugins/admin/systems/glpi_devices.tpl:219
+#: plugins/admin/systems/glpi_devices.tpl:281
+#: plugins/admin/systems/glpi_devices.tpl:351
+#: plugins/admin/systems/glpi_devices.tpl:413
+#: plugins/admin/systems/glpi_devices.tpl:457
+#: plugins/admin/systems/glpi_devices.tpl:508
+#: plugins/admin/systems/glpi_devices.tpl:560
+#: plugins/admin/systems/glpi_devices.tpl:604
+msgid "Comment"
+msgstr "Kommentar"
+
+#: plugins/admin/systems/glpi_devices.tpl:43
+msgid "Power supply"
+msgstr "Netzteil"
+
+#: plugins/admin/systems/glpi_devices.tpl:76
+msgid "Atx"
+msgstr "ATX"
+
+#: plugins/admin/systems/glpi_devices.tpl:79
+#: plugins/admin/systems/glpi_devices.tpl:195
+#: plugins/admin/systems/glpi_devices.tpl:258
+msgid "Yes"
+msgstr "ja"
+
+#: plugins/admin/systems/glpi_devices.tpl:80
+#: plugins/admin/systems/glpi_devices.tpl:196
+#: plugins/admin/systems/glpi_devices.tpl:259
+msgid "No"
+msgstr "nein"
+
+#: plugins/admin/systems/glpi_devices.tpl:84
+#, fuzzy
+msgid "Power"
+msgstr "Anschluss"
+
+#: plugins/admin/systems/glpi_devices.tpl:96
+msgid "Gfxcard"
+msgstr "Grafikkarte"
+
+#: plugins/admin/systems/glpi_devices.tpl:129
+#: plugins/admin/systems/glpi_devices.tpl:183
+#: plugins/admin/systems/glpi_devices.tpl:246
+msgid "Interface"
+msgstr "Interface"
+
+#: plugins/admin/systems/glpi_devices.tpl:138
+msgid "Ram"
+msgstr "RAM"
+
+#: plugins/admin/systems/glpi_devices.tpl:150
+msgid "Controllers"
+msgstr "Controller"
+
+#: plugins/admin/systems/glpi_devices.tpl:206
+msgid "Drive"
+msgstr "Laufwerk"
+
+#: plugins/admin/systems/glpi_devices.tpl:239
+msgid "Speed"
+msgstr "Taktung"
+
+#: plugins/admin/systems/glpi_devices.tpl:255
+msgid "Writeable"
+msgstr "Beschreibbar"
+
+#: plugins/admin/systems/glpi_devices.tpl:268
+msgid "Hdd"
+msgstr "HDD"
+
+#: plugins/admin/systems/glpi_devices.tpl:301
+msgid "Rpm"
+msgstr "Upm"
+
+#: plugins/admin/systems/glpi_devices.tpl:308
+msgid "Cache"
+msgstr "Cache"
+
+#: plugins/admin/systems/glpi_devices.tpl:338
+msgid "RAM"
+msgstr "RAM"
+
+#: plugins/admin/systems/glpi_devices.tpl:371
+msgid "Frequenz"
+msgstr "Frequenz"
+
+#: plugins/admin/systems/glpi_devices.tpl:400
+msgid "Soundcard"
+msgstr "Soundkarte"
+
+#: plugins/admin/systems/glpi_devices.tpl:444
+msgid "Network interface"
+msgstr "Netzwerk-Interface"
+
+#: plugins/admin/systems/glpi_devices.tpl:477
+msgid "MAC address"
+msgstr "MAC-Adresse"
+
+#: plugins/admin/systems/glpi_devices.tpl:495
+msgid "Processor"
+msgstr "Prozessor"
+
+#: plugins/admin/systems/glpi_devices.tpl:528
+msgid "Frequence"
+msgstr "Frequenz"
+
+#: plugins/admin/systems/glpi_devices.tpl:535
+msgid "Default frequence"
+msgstr "Standardfrequenz"
+
+#: plugins/admin/systems/glpi_devices.tpl:547
+msgid "Motherboard"
+msgstr "Motherboard"
+
+#: plugins/admin/systems/glpi_devices.tpl:580
+msgid "Chipset"
+msgstr "Chipsatz"
+
+#: plugins/admin/systems/glpi_devices.tpl:591
+msgid "Computer case"
+msgstr "Computergeh�use"
+
+#: plugins/admin/systems/glpi_devices.tpl:624
+#, fuzzy
+msgid "format"
+msgstr "Information"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:59
 #: plugins/admin/ogroups/tabs_ogroups.inc:151
@@ -11382,7 +11363,7 @@ msgstr "Erneut anmelden"
 #~ msgid "The php mysql extension is missing. Can't perform any queries."
 #~ msgstr ""
 #~ "Die PHP-MySQL-Erweiterung wurde nicht gefunden! Kann daher keine Abfragen "
-#~ "ausführen."
+#~ "ausfÃŒhren."
 
 #~ msgid "Can't connect to specified database."
 #~ msgstr "Kann nicht zur angebenen Datenbank verbinden."
@@ -11391,13 +11372,13 @@ msgstr "Erneut anmelden"
 #~ msgstr "Kommentare"
 
 #~ msgid "Invalid characters in uid."
-#~ msgstr "Das Feld 'UID' enthÃÂÃ¢ÂÂ¬lt ungÃÂÃÂltige Zeichen."
+#~ msgstr "Das Feld 'UID' enthÃÂÃÂÃÂ¢ÃÂÃÂ¬lt ungÃÂÃÂÃÂÃÂltige Zeichen."
 
 #~ msgid "GLPI"
 #~ msgstr "GLPI"
 
 #~ msgid "Append new class names"
-#~ msgstr "Neue Klassen-Namen anfÃÂÃÂgen"
+#~ msgstr "Neue Klassen-Namen anfÃÂÃÂÃÂÃÂgen"
 
 #~ msgid "Master"
 #~ msgstr "Master"
@@ -11412,7 +11393,8 @@ msgstr "Erneut anmelden"
 #~ msgstr "Suche nach"
 
 #~ msgid "There is no useable package list defined."
-#~ msgstr "Es wurde keine gebrauchsfÃÂÃÂÃÂ¢ÃÂÃÂ¬hige Paketliste definiert."
+#~ msgstr ""
+#~ "Es wurde keine gebrauchsfÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ¬hige Paketliste definiert."
 
 #~ msgid "Can't read configuration folder '%s'."
 #~ msgstr "Kann das Konfigurationsverzeichnis '%s' nicht lesen."

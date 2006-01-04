@@ -8694,156 +8694,6 @@ msgstr "Mostrar direcciones que concuerden con"
 msgid "Regular expression for matching device names"
 msgstr "Expresiones regulares que concuerden con nombres de usuarios"
 
-#: plugins/admin/systems/glpi_devices.tpl:4
-#, fuzzy
-msgid "Other devices"
-msgstr "Dispositivos de Red"
-
-#: plugins/admin/systems/glpi_devices.tpl:17
-#: plugins/admin/systems/glpi_devices.tpl:56
-#: plugins/admin/systems/glpi_devices.tpl:109
-#: plugins/admin/systems/glpi_devices.tpl:163
-#: plugins/admin/systems/glpi_devices.tpl:219
-#: plugins/admin/systems/glpi_devices.tpl:281
-#: plugins/admin/systems/glpi_devices.tpl:351
-#: plugins/admin/systems/glpi_devices.tpl:413
-#: plugins/admin/systems/glpi_devices.tpl:457
-#: plugins/admin/systems/glpi_devices.tpl:508
-#: plugins/admin/systems/glpi_devices.tpl:560
-#: plugins/admin/systems/glpi_devices.tpl:604
-#, fuzzy
-msgid "Comment"
-msgstr "Contacto"
-
-#: plugins/admin/systems/glpi_devices.tpl:43
-msgid "Power supply"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:76
-msgid "Atx"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:79
-#: plugins/admin/systems/glpi_devices.tpl:195
-#: plugins/admin/systems/glpi_devices.tpl:258
-#, fuzzy
-msgid "Yes"
-msgstr "Sistemas"
-
-#: plugins/admin/systems/glpi_devices.tpl:80
-#: plugins/admin/systems/glpi_devices.tpl:196
-#: plugins/admin/systems/glpi_devices.tpl:259
-#, fuzzy
-msgid "No"
-msgstr "ninguno"
-
-#: plugins/admin/systems/glpi_devices.tpl:84
-#, fuzzy
-msgid "Power"
-msgstr "Puerto"
-
-#: plugins/admin/systems/glpi_devices.tpl:96
-msgid "Gfxcard"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:129
-#: plugins/admin/systems/glpi_devices.tpl:183
-#: plugins/admin/systems/glpi_devices.tpl:246
-msgid "Interface"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:138
-#, fuzzy
-msgid "Ram"
-msgstr "Nombre del servidor"
-
-#: plugins/admin/systems/glpi_devices.tpl:150
-#, fuzzy
-msgid "Controllers"
-msgstr "Pais"
-
-#: plugins/admin/systems/glpi_devices.tpl:206
-#, fuzzy
-msgid "Drive"
-msgstr "Controlador"
-
-#: plugins/admin/systems/glpi_devices.tpl:239
-#, fuzzy
-msgid "Speed"
-msgstr "Sexo"
-
-#: plugins/admin/systems/glpi_devices.tpl:255
-#, fuzzy
-msgid "Writeable"
-msgstr "escribir"
-
-#: plugins/admin/systems/glpi_devices.tpl:268
-#, fuzzy
-msgid "Hdd"
-msgstr "Añadir"
-
-#: plugins/admin/systems/glpi_devices.tpl:301
-msgid "Rpm"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:308
-#, fuzzy
-msgid "Cache"
-msgstr "Cancelar"
-
-#: plugins/admin/systems/glpi_devices.tpl:338
-msgid "RAM"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:371
-#: plugins/admin/systems/glpi_devices.tpl:528
-#, fuzzy
-msgid "Frequenz"
-msgstr "Número de teléfono"
-
-#: plugins/admin/systems/glpi_devices.tpl:400
-msgid "Soundcard"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:444
-#, fuzzy
-msgid "Network interface"
-msgstr "Impresora de Red"
-
-#: plugins/admin/systems/glpi_devices.tpl:477
-#, fuzzy
-msgid "MAC address"
-msgstr "Dirección MAC"
-
-#: plugins/admin/systems/glpi_devices.tpl:495
-msgid "Processor"
-msgstr ""
-
-#: plugins/admin/systems/glpi_devices.tpl:535
-#, fuzzy
-msgid "Default frequenz"
-msgstr "Valor por defecto"
-
-#: plugins/admin/systems/glpi_devices.tpl:547
-#, fuzzy
-msgid "Motherboard"
-msgstr "Teclado"
-
-#: plugins/admin/systems/glpi_devices.tpl:580
-#, fuzzy
-msgid "Chipset"
-msgstr "Borrar"
-
-#: plugins/admin/systems/glpi_devices.tpl:591
-#, fuzzy
-msgid "Computer case"
-msgstr "incompleto"
-
-#: plugins/admin/systems/glpi_devices.tpl:624
-#, fuzzy
-msgid "format"
-msgstr "Puerto"
-
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:87
 #, php-format
 msgid "Internal Error can't create device of type '%s'"
@@ -8969,6 +8819,160 @@ msgstr "El nombre especificado ya esta siendo usado"
 #, fuzzy
 msgid "Other"
 msgstr "Filtros"
+
+#: plugins/admin/systems/glpi_devices.tpl:4
+#, fuzzy
+msgid "Other devices"
+msgstr "Dispositivos de Red"
+
+#: plugins/admin/systems/glpi_devices.tpl:17
+#: plugins/admin/systems/glpi_devices.tpl:56
+#: plugins/admin/systems/glpi_devices.tpl:109
+#: plugins/admin/systems/glpi_devices.tpl:163
+#: plugins/admin/systems/glpi_devices.tpl:219
+#: plugins/admin/systems/glpi_devices.tpl:281
+#: plugins/admin/systems/glpi_devices.tpl:351
+#: plugins/admin/systems/glpi_devices.tpl:413
+#: plugins/admin/systems/glpi_devices.tpl:457
+#: plugins/admin/systems/glpi_devices.tpl:508
+#: plugins/admin/systems/glpi_devices.tpl:560
+#: plugins/admin/systems/glpi_devices.tpl:604
+#, fuzzy
+msgid "Comment"
+msgstr "Contacto"
+
+#: plugins/admin/systems/glpi_devices.tpl:43
+msgid "Power supply"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:76
+msgid "Atx"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:79
+#: plugins/admin/systems/glpi_devices.tpl:195
+#: plugins/admin/systems/glpi_devices.tpl:258
+#, fuzzy
+msgid "Yes"
+msgstr "Sistemas"
+
+#: plugins/admin/systems/glpi_devices.tpl:80
+#: plugins/admin/systems/glpi_devices.tpl:196
+#: plugins/admin/systems/glpi_devices.tpl:259
+#, fuzzy
+msgid "No"
+msgstr "ninguno"
+
+#: plugins/admin/systems/glpi_devices.tpl:84
+#, fuzzy
+msgid "Power"
+msgstr "Puerto"
+
+#: plugins/admin/systems/glpi_devices.tpl:96
+msgid "Gfxcard"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:129
+#: plugins/admin/systems/glpi_devices.tpl:183
+#: plugins/admin/systems/glpi_devices.tpl:246
+msgid "Interface"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:138
+#, fuzzy
+msgid "Ram"
+msgstr "Nombre del servidor"
+
+#: plugins/admin/systems/glpi_devices.tpl:150
+#, fuzzy
+msgid "Controllers"
+msgstr "Pais"
+
+#: plugins/admin/systems/glpi_devices.tpl:206
+#, fuzzy
+msgid "Drive"
+msgstr "Controlador"
+
+#: plugins/admin/systems/glpi_devices.tpl:239
+#, fuzzy
+msgid "Speed"
+msgstr "Sexo"
+
+#: plugins/admin/systems/glpi_devices.tpl:255
+#, fuzzy
+msgid "Writeable"
+msgstr "escribir"
+
+#: plugins/admin/systems/glpi_devices.tpl:268
+#, fuzzy
+msgid "Hdd"
+msgstr "Añadir"
+
+#: plugins/admin/systems/glpi_devices.tpl:301
+msgid "Rpm"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:308
+#, fuzzy
+msgid "Cache"
+msgstr "Cancelar"
+
+#: plugins/admin/systems/glpi_devices.tpl:338
+msgid "RAM"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:371
+#, fuzzy
+msgid "Frequenz"
+msgstr "Número de teléfono"
+
+#: plugins/admin/systems/glpi_devices.tpl:400
+msgid "Soundcard"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:444
+#, fuzzy
+msgid "Network interface"
+msgstr "Impresora de Red"
+
+#: plugins/admin/systems/glpi_devices.tpl:477
+#, fuzzy
+msgid "MAC address"
+msgstr "Dirección MAC"
+
+#: plugins/admin/systems/glpi_devices.tpl:495
+msgid "Processor"
+msgstr ""
+
+#: plugins/admin/systems/glpi_devices.tpl:528
+#, fuzzy
+msgid "Frequence"
+msgstr "Número de teléfono"
+
+#: plugins/admin/systems/glpi_devices.tpl:535
+#, fuzzy
+msgid "Default frequence"
+msgstr "Valor por defecto"
+
+#: plugins/admin/systems/glpi_devices.tpl:547
+#, fuzzy
+msgid "Motherboard"
+msgstr "Teclado"
+
+#: plugins/admin/systems/glpi_devices.tpl:580
+#, fuzzy
+msgid "Chipset"
+msgstr "Borrar"
+
+#: plugins/admin/systems/glpi_devices.tpl:591
+#, fuzzy
+msgid "Computer case"
+msgstr "incompleto"
+
+#: plugins/admin/systems/glpi_devices.tpl:624
+#, fuzzy
+msgid "format"
+msgstr "Puerto"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:59
 #: plugins/admin/ogroups/tabs_ogroups.inc:151
