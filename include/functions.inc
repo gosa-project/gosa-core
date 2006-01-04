@@ -1159,7 +1159,7 @@ function check_command($cmdline)
 function print_header($image, $headline, $info= "")
 {
   $display= "<div class=\"plugtop\">\n";
-  $display.= "  <img src=\"$image\" align=\"middle\" alt=\"*\">&nbsp;$headline\n";
+  $display.= "  <p class=\"center\" style=\"margin:0px;padding:0px;font-size:24px;\"><img class=\"center\" src=\"$image\" align=\"middle\" alt=\"*\">&nbsp;$headline</p>\n";
   $display.= "</div>\n";
 
   if ($info != ""){
