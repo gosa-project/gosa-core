@@ -380,7 +380,7 @@ class appgroup extends plugin
       
       if((preg_match("/EdiApp_/",$name))&&(!$only_once)){
 
-        $only_once = false;
+        $only_once = true;
         $appname = $value;
         $appname = preg_replace("/EdiApp_/","",$name);  
         $appname = preg_replace("/_.*$/","",$appname);
