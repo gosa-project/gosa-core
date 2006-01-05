@@ -57,7 +57,6 @@ class glpiDeviceManagement extends plugin
 
   function execute()
   {
-    print_a($this->Selected);
     /* Call parent execute */
     plugin::execute();
 

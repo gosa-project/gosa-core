@@ -824,6 +824,40 @@ class glpiDB{
 		return($this->is_connected);
 	}
 
+	function addAttachmentsToComputer($attr,$id)
+	{
+        if(($id == "" )||(!is_numeric($id))){
+            return (false);
+        }
+        if($this->is_connected){
+            $qry = "DELETE FROM glpi_doc_device WHERE (FK_device=".$id.") AND (device_type=1);";
+            $this->query($qry);
+			
+			foreach($attr as $aid => $entry){
+				$str = "INSERT INTO glpi_doc_device (FK_doc,FK_device,device_type,is_template) 
+												VALUES
+													($aid,$id,1,'0');";
+				$this->query($str);
+			}
+        }else{
+            echo "not connected";
+            return(false);
+        }
+	}
+
+	function getAssignAttachments($id)
+	{
+
+		if($this->is_connected){
+			$qry= "SELECT * FROM glpi_doc_device WHERE (device_type=1) AND (FK_device=".$id.");";
+			$ret = $this->query($qry);
+			return($ret);
+		}else{
+            echo "not connected";
+            return(false);
+        }
+	}
+
 	function deleteAttachment($id)
 	{
 		if($this->is_connected){
@@ -847,6 +881,57 @@ class glpiDB{
         }
 	}
 	
+	function saveAttachments($attrs,$id = -1)
+	{
+		if($this->is_connected){
+			$atr = array("name","filename","rubrique","mime","date_mod","comment","deleted","link");
+			$tmp = array();
+			foreach($atr as $at){
+				if(isset($attrs[$at])){
+					$tmp[$at] = $attrs[$at];
+				}
+			}
+			if(count($tmp)==0){
+				return(false);
+			}else{
+
+				// Add
+				if($id == -1){
+					$str = "INSERT INTO glpi_docs ";
+					$namen = "";
+					$values= "";
+					foreach($tmp as $name => $value){	
+						$namen .= $name.", ";
+						if(is_numeric($value)){
+							$values .= $value.", ";
+						}else{
+							$values .= "'".$value."', ";
+						}
+					}
+					$values = preg_replace("/, $/","",$values);
+					$namen  = preg_replace("/, $/","",$namen);
+					$str .= "(".$namen.") VALUES (".$values.");";
+					print $str;
+				}else{
+					$str = "UPDATE glpi_docs SET ";
+					foreach($tmp as $name => $value){	
+						$str .= $name."= ";
+						if(is_numeric($value)){
+							$str .= $value.", ";
+						}else{
+							$str .= "'".$value."', ";
+						}
+					}
+					$str = preg_replace("/, $/","",$str);
+					$str .= " WHERE ID=".$id.";";
+				}
+				$this->query($str);
+			}
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
 
 }
 //$s = new glpiDB("vserver-01","glpi","tester","glpi");

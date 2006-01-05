@@ -50,8 +50,8 @@ class glpiAccount extends plugin
   var $orig_dn;
   var $ui;
   
-  var $usedDevices = array();
-
+  var $usedDevices      = array();
+  var $usedAttachments  = array();
 
   /* Contructor 
      Sets default values and checks if we already have an existing glpi account
@@ -85,7 +85,11 @@ class glpiAccount extends plugin
         $this->$attr = $tmp[0][$attr];
       }
       $this->usedDevices = $this->handle->getUsedDevices($tmp[0]['ID']);
-
+      $atts = $this->handle->getAssignAttachments($tmp[0]['ID']);
+      foreach($atts as $attachment){
+        
+        $this->usedAttachments[$attachment['FK_doc']]=$attachment['FK_doc']; 
+      }
     }else{
       $this->is_account = false;
     }
@@ -93,6 +97,8 @@ class glpiAccount extends plugin
     $this->name = $this->dn;
     $this->orig_dn = $this->dn;
     $this->initialy_was_account = $this->is_account;
+
+
   }
 
   function execute()
@@ -159,9 +165,6 @@ class glpiAccount extends plugin
       $this->cur_dialog = new glpiDeviceManagement($this->config,$this->dn,$this->usedDevices);
     }
 
-
-
-
     /* Attachment pool was closed with use
      */
     if(isset($_POST['UseAttachment'])){
@@ -170,9 +173,10 @@ class glpiAccount extends plugin
           print_red($msg);
         }
       }else{
-        /****/
-        echo "blabla attaching something ..... ";
-
+        $this->cur_dialog->save_object();
+        $this->usedAttachments = $this->cur_dialog->save();
+        $this->cur_dialog = false;
+        $this->edit_type = false; 
       }
     }
    
@@ -186,14 +190,16 @@ class glpiAccount extends plugin
     /* Open Attachment pool to add/edit Attachments
      */
     if(isset($_POST['AddAttachment'])){
-      $this->cur_dialog = new glpiAttachmentPool($this->config,$this->dn);
+      $this->cur_dialog = new glpiAttachmentPool($this->config,$this->dn,$this->usedAttachments);
       $this->dialog = true;
     }
     
     /* Remove Attachment fro this tab 
      */
-    if(isset($_POST['RemoveAttachment'])){
-        
+    if((isset($_POST['RemoveAttachment']))&&(isset($_POST['Attachments']))){
+      if(isset($this->usedAttachments[$_POST['Attachments']])){
+        unset($this->usedAttachments[$_POST['Attachments']]);
+      }
     }
 
     /* We have selected some devices and pressed use button 
@@ -386,6 +392,8 @@ class glpiAccount extends plugin
       $this->dialog=true;
       $this->cur_dialog->parent = &$this;
       return($this->cur_dialog->execute());
+    }else{
+      $this->dialog= false;
     }
 
     /* Assign smarty defaults */ 
@@ -442,6 +450,11 @@ class glpiAccount extends plugin
     $smarty->assign("ManufacturerKeys",       array_flip($this->handle->getEnterprises()));
     $smarty->assign("Manufacturers",          $this->handle->getEnterprises());
     $smarty->assign("FK_glpi_enterprise",     $this->FK_glpi_enterprise);
+
+    /* Assign used Attachments
+    */
+    $smarty->assign("Attachments",            $this->getUsedAttachments());
+    $smarty->assign("AttachmentKeys",         array_flip($this->getUsedAttachments()));
 
     /* Handle contact person 
        Assign name ... to smarty, if set
@@ -532,10 +545,33 @@ class glpiAccount extends plugin
       }elseif($this->is_account){
         $this->handle->addComputerInformations($attrs,$this->dn);
       }
-      $tmp = ($this->handle->getComputerInformations($this->dn));
+      $tmp = $this->handle->getComputerInformations($this->dn);
       $this->handle->addDevicesToComputer($this->usedDevices,$tmp[0]['ID']);
+      $this->handle->addAttachmentsToComputer($this->usedAttachments,$tmp[0]['ID']);
     }
   }
+
+  function getUsedAttachments()
+  {
+    $atts =$this->handle->getAttachments();
+    $ret = array();
+    foreach($atts as $entry){
+      if(in_array($entry['ID'],$this->usedAttachments)){
+
+        $cm ="";
+        if(isset($entry['comment'])){
+          $cm=" [".$entry['comment']."]";
+        }
+        if(isset($entry['mime'])){
+          $cm.=" -".$entry['mime']."";
+        }
+
+        $ret[$entry['ID']]= $entry['name'].$cm;
+      }
+    }
+    return($ret);
+  }
+  
 
 }
 
