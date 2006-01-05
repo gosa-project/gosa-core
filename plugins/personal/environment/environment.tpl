@@ -37,8 +37,8 @@
 							</tr>
 							<tr>
 								<td colspan=2>	
-									<input class="center" type="checkbox" name="gotoProfileFlag_C" value="C" 
-										id="gotoProfileFlag_C" {$gotoProfileFlagsACL}>&nbsp;
+									<input class="center" type="checkbox" name="gotoProfileFlag_C" value="C" {$gotoProfileFlag_CCHK}
+										id="gotoProfileFlag_C" {$gotoProfileFlag_CACL}>&nbsp;
 									<label for="gotoProfileFlag_C">{t}Cache profile localy{/t}</label>
 								</td>
 							</tr>

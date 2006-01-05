@@ -330,6 +330,15 @@ class environment extends plugin
         $smarty->assign($s_attr."ACL"," disabled ");
       }
     }
+
+    if(empty($this->useProfile)){
+      $smarty->assign("gotoProfileACL","disabled");
+      $smarty->assign("useProfileCHK","");
+    }else{
+      $smarty->assign("gotoProfileACL","");
+      $smarty->assign("useProfileCHK"," checked ");
+    }
+
  
     $smarty->assign("useProfileACL","");
     if($this->acl != "#none#"){
@@ -357,14 +366,6 @@ class environment extends plugin
       $smarty->assign("gotoProfileFlag_CCHK"," ");
     }else{
       $smarty->assign("gotoProfileFlag_CCHK"," checked ");
-    }
-
-    if(empty($this->useProfile)){
-      $smarty->assign("gotoProfileACL","disabled"); 
-      $smarty->assign("useProfileCHK",""); 
-    }else{
-      $smarty->assign("gotoProfileACL",""); 
-      $smarty->assign("useProfileCHK"," checked "); 
     }
 
     $this->gotoXResolutions = array("640x480","800x600","1024x768","1280x768","1280x1024");
@@ -684,9 +685,9 @@ class environment extends plugin
  
     if(isset($_POST['iamposted'])){
       if(isset($_POST['useProfile'])){
-        $this->useProfile = $_POST['useProfile'];
-      }else{
         $this->useProfile = true;
+      }else{
+        $this->useProfile = false;
       }
       if(isset($_POST['gotoProfileFlag_C'])){
         $this->gotoProfileFlag_C = $_POST['gotoProfileFlag_C'];
