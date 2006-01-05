@@ -151,13 +151,31 @@ class glpiAccount extends plugin
       return($smarty->fetch(get_template_path('glpi.tpl', TRUE)));
     } 
 
-    /*  All check are ok
+    /*  All checks are ok
         Lets handle Posts, templates etc below ...
      */
     
     $users = $this->handle->getUsers();
     $ldap= $this->config->get_ldap_link();
-  
+ 
+    /* Check for Trading button Post
+     */
+    if(isset($_POST['Trading'])){
+      print_red(_("This feature is not implemented yet."));
+    }
+
+    /* Check for Software button Post
+     */
+    if(isset($_POST['Software'])){
+      print_red(_("This feature is not implemented yet."));
+    }
+
+    /* Check for Contract button Post
+     */
+    if(isset($_POST['Contracts'])){
+      print_red(_("This feature is not implemented yet."));
+    }
+ 
     /* Add Device was requested, open new dialog
      */
     if(isset($_POST['AddDevice'])){

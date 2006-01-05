@@ -1,0 +1,277 @@
+<?php
+
+class glpiAttachmentPool extends plugin
+{
+  /* CLI vars */
+  var $cli_summary= "Manage server basic objects";
+  var $cli_description= "Some longer text\nfor help";
+  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
+
+  /* attribute list for save action */
+  var $ignore_account = TRUE;
+  var $attributes     = array("name","comment","mime","filename");
+  var $objectclasses  = array("whatever");
+
+  var $parent;
+  var $edit = false;
+  var $entry = false;
+
+  var $name     ="";
+  var $comment  ="";
+  var $mime     ="";
+  var $filename ="";  
+
+  var $Selected = array();
+
+  function glpiAttachmentPool ($config, $dn= NULL,$used=NULL)
+  {
+    plugin::plugin ($config, $dn);
+    if(!isset($_SESSION['GlpiAttachmentFilter'])){
+      $_SESSION['GlpiAttachmentFilter'] = array("filter"=>"*");
+    }
+    if($used != NULL){
+      $this->Selected = $used;
+    }
+  }
+
+  function execute()
+  {
+    plugin::execute();
+    $attach = $this->parent->handle->getAttachments();
+    /* Fill templating stuff */
+    $smarty= get_smarty();
+    $display= "";
+    $only_once = true; 
+    foreach($_POST as $name => $value){
+
+      if(preg_match("/new_attach/",$name)){
+        $this->edit = true;
+        $this->entry=array();
+        foreach($this->attributes as $attr) {
+          $this->$attr = "";
+          $this->entry[$attr]="";
+        }
+      }
+  
+      if((preg_match("/^delAttach_/",$name))&&($only_once)){
+        $only_once = false;
+        $str = preg_replace("/^delAttach_/","",$name);
+        $str = base64_decode(preg_replace("/_.*$/","",$str));
+        $this->parent->handle->deleteAttachment($str);
+      }
+      
+      if((preg_match("/^editAttach_/",$name))&&($only_once)){
+        $only_once = false;
+        $str = preg_replace("/^editAttach_/","",$name);
+        $str = base64_decode(preg_replace("/_.*$/","",$str));
+          
+        $this->edit = true;
+        foreach($attach as $att ){
+      
+          if($att['ID'] == $str ){
+            $this->entry  = $att;        
+          } 
+        }
+      }
+    }
+
+    if(($this->edit == true)&&(isset($_POST['upload']))){
+      if(!isset($_FILES['filename'])){
+        print_red(_("There is no valid file uploaded."));
+      }else{
+        $FILE = $_FILES['filename'];  
+        if(!isset($FILE['name'])){
+          print_red(_("There is no valid file uploaded."));
+        }else{
+          if($FILE['error']!=0) {
+            print_red(_("Upload wasn't successfull."));
+          }else{
+            if(!is_dir("/etc/gosa/glpi/")){
+              print_red(_("Missing directory '/etc/gosa/glpi/' to store glpi uploads."));
+            }else{
+              $filen = "/etc/gosa/glpi/".$FILE['name'];
+              $fh = fopen($filen,"w");
+              if(!$fh){
+                print_red(sprintf(_("Can't create file '%s'."),$filen));
+              }else{
+                $str = file_get_contents($FILE['tmp_name']);
+                fwrite($fh,$str,strlen($str));
+                fclose($fh);
+                $this->mime     = $FILE['type'];   
+                $this->filename = $FILE['name'];   
+              }
+            }
+          } // Check if any error occured
+        } // check if valid filename was uploaded
+      } // ende check if file was uploaded 
+    }// upload post
+
+    if(($this->edit == true)&&(isset($_POST['SaveAttachment']))){
+      if(count($this->check())==0){
+        $this->save_entry();
+        $this->edit= false;
+        $this->entry = array();
+        $attach = $this->parent->handle->getAttachments();
+      }else{
+        foreach($this->check() as $msg){
+          print_red($msg);
+        }
+      }
+    }
+
+    if(($this->edit == true)&&(isset($_POST['CancelAttachment']))){
+      $this->edit  = false;
+      $this->entry = array();
+    }
+
+    if($this->edit == true){
+      foreach($this->attributes as $attr){
+        $smarty->assign($attr,$this->$attr);
+      }
+      if(!empty($this->filename)){
+        if(is_readable("/etc/gosa/glpi/".$this->filename)){
+          $status =_("File is available.");
+        }else{
+          $status =_("File is not readable, possibly the file is missing.");
+        }
+      }else{
+        $status = _("Currently no file uploaded.");
+      }
+      $smarty->assign("status",$status); 
+      return($smarty->fetch(get_template_path('glpiAttachmentEdit.tpl', TRUE)));
+    }
+
+
+
+
+
+    $divlist = new divlist("Attachment");  
+    $divlist->SetHeader(array(
+          array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
+          array("string" => _("Name")),
+          array("string" => _("Mime"),"attach"=>"style='width:200px;'"),
+          array("string" => _("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'" )));
+
+    $divlist->SetSummary(_("This table displays all available attachments."));
+    $divlist->SetEntriesPerPage(0);
+
+    $editdel = "<input type='image' name='editAttach_%s' src='images/edit.png'>";
+    $editdel.= "<input type='image' name='delAttach_%s'  src='images/edittrash.png'>";
+
+    foreach($attach as $entry){
+      
+        if((empty($entry['name']))||(empty($entry['comment']))){
+          
+          if(empty($entry['name'])){
+            $str1 = "<i>"._("empty")."</i>";
+          }else{ 
+            $str1 = $entry['name'];
+          }
+          
+          if(!empty($entry['comment'])){
+            $str1.= " [".$entry['comment']."]";
+          }
+        }else{
+          $str1 = $entry['name']." [".$entry['comment']."]";
+        }
+
+        $edit = str_replace("%s",base64_encode($entry['ID']),$editdel);
+        $str2 = $entry['mime']."&nbsp;";      
+
+        $chkbox = "<input type='hidden' name='wasOnPage_%s'>".
+                  "<input type='checkbox' name='useMe_%s' value='%s' %CHECKED%>";
+        
+        if(in_array($entry['ID'],$this->Selected)){
+          $chkbox = preg_replace("/%CHECKED%/"," checked ",$chkbox);
+        }else {
+          $chkbox = preg_replace("/%CHECKED%/"," ",$chkbox);
+        }
+        $chkbox = preg_replace("/%s/",$entry['ID'],$chkbox);
+        $divlist->AddEntry(array(
+                                  array("string" => $chkbox, 
+                                        "attach" => "style='text-align:center;width:20px;'"),
+                                  array("string"=> $str1),
+                                  array("string"=> $str2,"attach"=>"style='width:200px;'"),
+                                  array("string"=> $edit ,"attach" => "style='width:60px;border-right:0px;text-align:right;'")
+                                ));
+ 
+    }
+
+    $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
+              "   <input class='center' type='image' 
+                    src='images/new.png' align='middle' title='"._("Create new attachment")."' 
+                    name='new_attach' alt='"._("New Attachment"). "'>&nbsp;".
+              "</div>";
+
+
+    $smarty->assign("attachments",      $divlist->DrawList());
+    $smarty->assign("attachmenthead",   $listhead);
+    $smarty->assign("search_image",     get_template_path('images/search.png'));
+    $smarty->assign("searchu_image",    get_template_path('images/search_user.png'));
+    $smarty->assign("tree_image",       get_template_path('images/tree.png'));
+    $smarty->assign("infoimage",        get_template_path('images/info.png'));
+    $smarty->assign("launchimage",      get_template_path('images/launch.png'));
+    $smarty->assign("apply",            apply_filter());
+    $smarty->assign("alphabet",         generate_alphabet());
+    $smarty->assign("attachment_regex", $_SESSION['GlpiAttachmentFilter']['filter']);
+
+
+    $display.= $smarty->fetch(get_template_path('glpiAttachmentPool.tpl', TRUE));
+    return($display);
+  }
+
+  function save()
+  {
+    return($this->Selected);
+  }
+
+  function save_entry()
+  {
+    if($this->edit){
+      $tmp = array();
+      foreach($this->attributes as $attr){
+        $tmp[$attr] = $this->$attr;
+      } 
+      $id = -1;
+      if(isset($this->entry['ID'])){
+        $id = $this->entry['ID'];
+      }
+      $this->parent->handle->saveAttachments($tmp,$id);
+    }
+  }
+
+  function save_object()
+  {
+    foreach($this->attributes as $attr){
+      if(isset($_POST[$attr])){
+        $this->$attr = $_POST[$attr];
+      }
+    }
+
+    foreach($_POST as $name => $value){
+      if(preg_match("/wasOnPage_/",$name)){
+        $id=preg_replace("/wasOnPage_/","",$name);
+        if(isset($_POST["useMe_".$id])){
+          $this->Selected[$id]=$id;
+        }else{
+          if(isset($this->Selected[$id])){
+            unset($this->Selected[$id]);
+          }
+        }
+      }
+    }
+  }
+
+  function check()
+  {
+    $message = array();
+    if($this->edit){
+      if(empty($this->name)){
+        $message[] = _("Please specify a valid name for this attachment.");
+      }
+    }
+    return($message);
+  }
+
+}// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+?>

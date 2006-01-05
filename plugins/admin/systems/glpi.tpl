@@ -4,7 +4,7 @@
 			<!--Upper left-->	
 			
 			<h2>{t}Generic{/t}</h2>
-			<table summary="">
+			<table summary="" cellpadding=5>
 				<tr>
 					<td width="150">{t}System type{/t}
 					</td>
@@ -71,7 +71,7 @@
 					</td>
 					<td>
 						<i>{$contact_num}&nbsp; </i>&nbsp;
-						<input {$contact_numACL} type="submit" name="SelectContactPerson" value="{t}Edit{/t}"><img src="images/mailto.png" class="center" alt="{t}mailto{/t}">	
+						<input {$contact_numACL} type="submit" name="SelectContactPerson" value="{t}Edit{/t}">
 					</td>
 				</tr>
 				<tr>

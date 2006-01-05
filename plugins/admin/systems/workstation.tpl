@@ -80,7 +80,7 @@
  <tr>
   <td>
    <select size="1" name="saction" {$actionACL} title="{t}Select action to execute for this terminal{/t}">
-    <option disabled>&nbsp;</option>
+    <option>&nbsp;</option>
     {html_options options=$actions}
    </select>
   </td>
