@@ -273,8 +273,7 @@ class appgroup extends plugin
    	plugin::execute();
 
     if((isset($_GET['act']))&&($_GET['act']=="depopen")){
-      print $_GET['id'];
-      $dep = base64_decode($_GET['id']);  
+      $dep = base64_decode($_GET['depid']);  
       if(isset($this->config->idepartments[$dep])){
         $this->curbase =$dep;
       }
@@ -378,8 +377,8 @@ class appgroup extends plugin
           }
         }
       }
-      $only_once = true; 
-      if((preg_match("/EdiApp_/",$name))&&($only_once)){
+      
+      if((preg_match("/EdiApp_/",$name))&&(!$only_once)){
 
         $only_once = false;
         $appname = $value;
