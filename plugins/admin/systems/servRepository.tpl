@@ -46,5 +46,3 @@
   </td>
 </tr>
 </table>
-
-<input type="hidden" name="ignore">
