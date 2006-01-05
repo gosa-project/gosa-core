@@ -343,6 +343,7 @@ class environment extends plugin
     $smarty->assign("useProfileACL","");
     if($this->acl != "#none#"){
       $smarty->assign("useProfileACL","");
+      $smarty->assign("gotoProfileFlag_CACL"," ");
     }else{
       $smarty->assign("gotoProfileFlag_CACL"," disabled ");
       $smarty->assign("useProfileACL","disabled");
