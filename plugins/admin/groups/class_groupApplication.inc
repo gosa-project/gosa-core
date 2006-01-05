@@ -378,9 +378,13 @@ class appgroup extends plugin
           }
         }
       }
-      
-      if(preg_match("/EdiApp_/",$name)){
+      $only_once = true; 
+      if((preg_match("/EdiApp_/",$name))&&($only_once)){
+
+        $only_once = false;
         $appname = $value;
+        $appname = preg_replace("/EdiApp_/","",$name);  
+        $appname = preg_replace("/_.*$/","",$appname);
         /* We've got the appname, get parameters from ldap */
         $ldap= $this->config->get_ldap_link();
         $ldap->cd($this->config->current['BASE']);
