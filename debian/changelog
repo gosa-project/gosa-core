@@ -1,3 +1,10 @@
+gosa (2.4.1-1) unstable; urgency=low
+
+  * New upstream release
+  * Fixed install script to create symlinks only if they're missing
+
+ -- Cajus Pollmeier <cajus@debian.org>  Thu,  5 Jan 2006 14:20:39 +0100
+
 gosa (2.4-1) unstable; urgency=low
 
   * New upstream release 
