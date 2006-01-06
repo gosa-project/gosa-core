@@ -15,6 +15,8 @@ class opengwAccount extends plugin
 	var $attributes       = array();
 	var $objectclasses    = array();
 
+  var $SetPassword   = false;
+
 	/* Attribute mapping opengroupware->ldap  */
 	var $attrsToUse    = array( "salutation"  =>"vocation",
 			"name"        =>"sn",
@@ -33,6 +35,7 @@ class opengwAccount extends plugin
 	var $handle               = NULL;
 	var $is_account           = false;
 	var $initialy_was_account = false;
+  var $OGWPassword          = "";
 
 	function opengwAccount ($config, $dn= NULL)
 	{
@@ -125,7 +128,7 @@ class opengwAccount extends plugin
 			$smarty->assign($ar,array());
 		}
 		$smarty->assign("OGWstate"," disabled ");
-		foreach(array("LocationTeam","TemplateUser","is_locked","validTeams","opengwAccount","is_account") as $ar){
+		foreach(array("LocationTeam","TemplateUser","is_locked","validTeams","opengwAccount","is_account","OGWPassword") as $ar){
 			$smarty->assign($ar,"");
 			$smarty->assign($ar."CHK","");
 			$smarty->assign($ar."ACL"," disabled ");
@@ -151,7 +154,7 @@ class opengwAccount extends plugin
 
 					/* Show main page */
 					$smarty->assign("OGWstate"," disabled ");
-					foreach(array("LocationTeam","TemplateUser","is_locked","validTeams","opengwAccount") as $ar){
+					foreach(array("LocationTeam","TemplateUser","is_locked","validTeams","opengwAccount","OGWPassword") as $ar){
 						$smarty->assign($ar."ACL",chkacl($this->acl,$ar));
 					}
 
@@ -216,6 +219,19 @@ class opengwAccount extends plugin
 
 				} 
 			}
+      if($this->SetPassword == false){
+        if($_SESSION['js'] == 1){
+          $smarty->assign("OGWPasswordACL"," disabled ");
+        }else{
+          $smarty->assign("OGWPasswordACL","");
+        }
+        $smarty->assign("OGWPassword","");
+        $smarty->assign("OGWPasswordCHK"," ");
+      }else{
+        $smarty->assign("OGWPasswordACL","");
+        $smarty->assign("OGWPassword",$this->OGWPassword);
+        $smarty->assign("OGWPasswordCHK"," checked ");
+      }
 		$display.= $smarty->fetch (get_template_path('opengw.tpl', TRUE, dirname(__FILE__)));
 		return ($display);
 	}
@@ -236,6 +252,23 @@ class opengwAccount extends plugin
 	{
 		/* get post data */
 		if($this->is_account){
+
+      if(isset($_POST['SetPassword'])){
+        $this->SetPassword =true;
+      }else{
+        $this->SetPassword = false;
+      }
+
+      if((isset($_POST['OGWPassword']))&&($this->SetPassword)){
+        $this->OGWPassword      = $_POST['OGWPassword'];
+        $pwd = new passwordMethodCrypt($this->config);
+        
+        $this->info['password'] = preg_replace("/^{crypt}/","",$pwd->generate_hash($_POST['OGWPassword']));
+      }else{
+        if(isset($this->info['password'])){
+          unset($this->info['password']);
+        }
+      }
 
 			/* Get selected team chkboxes */
 			$this->info['TeamIDis'] = array();

@@ -18,7 +18,7 @@ class ogw{
   var $MAY = array( "salutation","firstname","description","degree",
                     "birthday","sex","street","zip","country","zipcity",
                     "state","name1","value_string","number","db_status",
-                    "object_version","is_locked","LocationTeamID","TeamIDis");
+                    "object_version","is_locked","LocationTeamID","TeamIDis","password");
 
   var $LastError  = "";
   var $option     = "";
@@ -54,7 +54,7 @@ class ogw{
     $ret = array();
     $qry = "SELECT  is_person,is_account,is_intra_account,is_extra_account,  
                     number,owner_id,object_version,company_id,template_user_id,is_locked,
-                    name,firstname,description,salutation,login,degree,birthday,sex 
+                    name,firstname,description,salutation,login,degree,birthday,sex  
             FROM person WHERE login='".$uid."';";
     $res = $this->ogo->FetchAllRows($this->ogo->Query($qry));
     $ret = $res[0];
@@ -265,7 +265,7 @@ class ogw{
     $arr = array( "company_id","object_version","owner_id","template_user_id",
                   "is_person","is_account","is_intra_account","is_extra_account",
                   "number","description","is_locked","login","name","name","firstname",
-                  "salutation","degree","birthday","sex","db_status");
+                  "salutation","degree","birthday","sex","db_status","password");
     $this->info['company_id']  = $this->ogo->gen_id();
     $this->info['userID']             = "OGo".$this->info['company_id'];
     foreach($arr as $attr){
@@ -403,7 +403,7 @@ class ogw{
     $arr = array( "company_id","object_version","owner_id",
                   "template_user_id","is_person","is_account","is_intra_account",
                   "is_extra_account","number","description","is_locked","login","name",
-                  "firstname","salutation","degree","birthday","sex","db_status");
+                  "firstname","salutation","degree","birthday","sex","db_status","password");
     $this->info['company_id'] = $ist[0]['company_id'];
     $this->info['userID']     = "OGo".$this->info['company_id'];
     foreach($arr as $attr){

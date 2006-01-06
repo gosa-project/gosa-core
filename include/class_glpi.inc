@@ -933,6 +933,91 @@ class glpiDB{
 		}
 	}
 
+
+	/* Monitor handling 
+     */
+    function getMonitors()
+	{
+		if($this->is_connected){
+			$qry= "SELECT * FROM glpi_monitors;";
+			return($this->query($qry));	
+		
+		}else{
+            echo "not connected";
+            return(false);
+        }
+	}
+
+    function updatedMonitor()
+	{
+		if($this->is_connected){
+//			$qry= "SELECT * FROM glpi_monitors;";
+//			return($this->query($qry));	
+		
+		}else{
+            echo "not connected";
+            return(false);
+        }
+	}
+
+    function addMonitor()
+	{
+		if($this->is_connected){
+//			$qry= "SELECT * FROM glpi_monitors;";
+//			return($this->query($qry));	
+		
+		}else{
+            echo "not connected";
+            return(false);
+        }
+	}
+
+    function removeMonitor($id)
+	{
+		if($this->is_connected){
+			$qry= "DELETE FROM glpi_monitors WHERE ID=".$id.";";
+			$this->query($qry);	
+		}else{
+            echo "not connected";
+            return(false);
+        }
+	}
+
+    function getMonitorTypes()
+	{
+		if($this->is_connected){
+			$qry= "SELECT * FROM glpi_type_monitors;";
+			return($this->query($qry));	
+		
+		}else{
+            echo "not connected";
+            return(false);
+        }
+	}
+
+    function getLocationTypes()
+	{
+		if($this->is_connected){
+			$qry= "SELECT * FROM glpi_dropdown_locations;";
+			return($this->query($qry));	
+		
+		}else{
+            echo "not connected";
+            return(false);
+        }
+	}
+
+    function getStateTypes()
+	{
+		if($this->is_connected){
+			$qry= "SELECT * FROM glpi_dropdown_state;";
+			return($this->query($qry));	
+		}else{
+            echo "not connected";
+            return(false);
+        }
+	}
+
 }
 //$s = new glpiDB("vserver-01","glpi","tester","glpi");
 //print_r($s->query("SELECT * FROM glpi_computers"));
