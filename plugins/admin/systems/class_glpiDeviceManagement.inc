@@ -182,11 +182,11 @@ class glpiDeviceManagement extends plugin
       " <input class='center' type='image' align='middle' 
       src='mages/list_back.png' title='"._("New ram")."' alt='"._("R")."' name='new_ram'>&nbsp;".
       " <input class='center' type='image' align='middle' 
-      src='mages/list_back.png' title='"._("New hard disk drive")."' alt='"._("HDD")."' name='new_hdd'>&nbsp;".
+      src='mages/list_back.png' title='"._("New hard disk")."' alt='"._("HDD")."' name='new_hdd'>&nbsp;".
       " <input class='center' type='image' align='middle' 
-      src='mages/list_back.png' title='"._("New drives")."' alt='"._("D")."' name='new_drive'>&nbsp;".
+      src='mages/list_back.png' title='"._("New drive")."' alt='"._("D")."' name='new_drive'>&nbsp;".
       " <input class='center' type='image' align='middle' 
-      src='mages/list_back.png' title='"._("New controllers")."' alt='"._("CS")."' name='new_control'>&nbsp;".
+      src='mages/list_back.png' title='"._("New controller")."' alt='"._("CS")."' name='new_control'>&nbsp;".
       " <input class='center' type='image' align='middle' 
       src='mages/list_back.png' title='"._("New graphics card")."' alt='"._("GC")."' name='new_gfxcard'>&nbsp;".
       " <input class='center' type='image' align='middle' 
@@ -194,7 +194,7 @@ class glpiDeviceManagement extends plugin
       " <input class='center' type='image' align='middle' 
       src='mages/list_back.png' title='"._("New power supply")."' alt='"._("PS")."' name='new_power'>&nbsp;".
       " <input class='center' type='image' align='middle' 
-      src='mages/list_back.png' title='"._("New other peripherals")."' alt='"._("OC")."' name='new_pci'>&nbsp;".
+      src='mages/list_back.png' title='"._("New misc device")."' alt='"._("OC")."' name='new_pci'>&nbsp;".
       "</div>";
     $filter= $_SESSION['glpiDeviceRegex'];
     $smarty->assign("devicehead", $listhead);
