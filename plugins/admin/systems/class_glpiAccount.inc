@@ -8,7 +8,7 @@ class glpiAccount extends plugin
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* attribute list for save action */
-  var $ignore_account= TRUE;
+  var $ignore_account= FALSE;
   var $attributes= array("ID","name","contact",
       "tech_num","comments","date_mod","os","location","domain","network","contact_num",
       "model","type","is_template","FK_glpi_enterprise","deleted");
@@ -509,6 +509,11 @@ class glpiAccount extends plugin
 
   function remove_from_parent()
   {
+    $this->handle = new glpiDB($this->data['SERVER'],$this->data['LOGIN'],$this->data['PASSWORD'],$this->data['DB']);
+    if($this->initialy_was_account){
+      $this->handle->removeComputerInformations($this->dn); 
+    }
+  
   }
 
   function getDevices(){
