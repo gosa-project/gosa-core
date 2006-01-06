@@ -34,7 +34,7 @@ class divSelectBox {
                     "width='100%' ".
                     "cellspacing='0' ".
                     "style='overflow:scroll; ".
-                    "height:".($this->height-2).";".
+                    "height:".($this->height-2)."px;".
                     "padding-right:1px; ".
                     "padding-bottom:2px; ".
                     "border-left:solid 2px; ".
