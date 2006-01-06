@@ -1,5 +1,96 @@
+{if $device_type=="monitor"}
+	<h2>{t}Monitor{/t}</h2>
+	<table summary="" width="100%">
+		<tr>
+			<td width="50%" style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;">
+				<table summary="" width="100%">
+					<tr>
+						<td>{t}Name{/t}
+						</td>	
+						<td>	
+							<input name="name" value="{$name}">
+						</td>
+					</tr>
+					<tr>
+						<td style="vertical-align:top;">{t}Comments{/t}
+						</td>	
+						<td>	
+							<textarea name="comments">{$comments}</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>{t}Manufacturer{/t}
+						</td>	
+						<td>	
+							<select name="FK_glpi_enterprise">
+								{html_options values=$FK_glpi_enterpriseKeys output=$FK_glpi_enterprises selected=$FK_glpi_enterprise}
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td style="vertical-align:top;">{t}Monitor size{/t}
+						</td>	
+						<td>	
+							<input name="size" value="{$size}">"
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td>
+				<table summary="" width="100%">
+  					<tr>
+                        <td>{t}Integrated microphone{/t}
+                        </td>
+                        <td>
+                            <input type="radio" name="flags_micro" value="1" {if $flags_micro == "1"}checked {/if}>{t}Yes{/t}
+                            <input type="radio" name="flags_micro" value="0" {if ($flags_micro == "0")||($flags_micro=="")}checked {/if}>{t}No{/t}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{t}Integrated speakers{/t}
+                        </td>
+                        <td>
+                            <input type="radio" name="flags_speaker" value="1" {if $flags_speaker == "1"}checked {/if}>{t}Yes{/t}
+                            <input type="radio" name="flags_speaker" value="0" {if ($flags_speaker == "0")||($flags_speaker=="")}checked {/if}>{t}No{/t}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{t}Sub-D{/t}
+                        </td>
+                        <td>
+                            <input type="radio" name="flags_subd" value="1" {if $flags_subd == "1"}checked {/if}>{t}Yes{/t}
+                            <input type="radio" name="flags_subd" value="0" {if ($flags_subd == "0")||($flags_subd=="")}checked {/if}>{t}No{/t}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{t}BNC{/t}
+                        </td>
+                        <td>
+                            <input type="radio" name="flags_bnc" value="1" {if $flags_bnc == "1"}checked {/if}>{t}Yes{/t}
+                            <input type="radio" name="flags_bnc" value="0" {if ($flags_bnc == "0")||($flags_bnc=="")}checked {/if}>{t}No{/t}
+                        </td>
+                    </tr>
+					<tr>
+						<td style="vertical-align:top;">{t}Serial number{/t}
+						</td>	
+						<td>	
+							<input name="serial" value="{$serial}">
+						</td>
+					</tr>
+					<tr>
+						<td style="vertical-align:top;">{t}Additional serial number{/t}
+						</td>	
+						<td>	
+							<input name="otherserial" value="{$otherserial}">
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
 
-{if $device_type=="pci"}
+
+{elseif $device_type=="pci"}
 
 	<h2>{t}Other devices{/t}</h2>
 	<table summary="" width="100%">

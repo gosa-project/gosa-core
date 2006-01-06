@@ -40,6 +40,7 @@ class glpiDB{
 				"glpi_device_power"     => "power",
 				"glpi_device_processor" => "processor",
 				"glpi_device_ram"       => "ram",
+				"glpi_monitors"       => "monitor",
 				"glpi_device_sndcard"   => "sndcard");
 
 		$this->deviceMappingTableNameID = array(		"moboard"	=> 1,										
@@ -726,7 +727,12 @@ class glpiDB{
 				$ret = $this->query($qry);
 				foreach($ret as $id => $entry){
 					$entry['device_type'] = $gosa;
-					$res[$entry['designation']."-".$gosa] = $entry;
+	
+					if(isset($entry['designation'])){
+						$res[$entry['designation']."-".$gosa] = $entry;
+					}else{
+						$res[$entry['name']."-".$gosa] = $entry;
+					}
 				}
 			}
 			return($res);
@@ -762,6 +768,19 @@ class glpiDB{
 				if(count($res2)!=0){
 					$ret[$devtype][$res2[0]['designation']]=$res2[0];
 				}
+
+			$qry = "SELECT * FROM glpi_connect_wire WHERE type=4 AND end2=".$computerID.";";
+			$res2 = $this->query($qry);
+			foreach($res2 as $monitor){
+				$qry = "SELECT * FROM glpi_monitors WHERE ID=".$monitor['end1'].";";
+				$res3 = $this->query($qry);
+				foreach($res3 as $moni){
+					$ret['monitor'][$moni['name']]=$moni;
+				}
+			}
+
+
+
 			}
 			return($ret);
 		}else{
@@ -787,8 +806,13 @@ class glpiDB{
 		
 			foreach($devices as $type => $entries){
 				foreach($entries as $entry){
-					$str = "INSERT INTO glpi_computer_device (device_type,FK_device,FK_computers) 
-					VALUES (".$deviceMappingTableNameID[$type].",".$entry['ID'].",".$id.");";
+					if($type=="monitor"){
+						$str = "INSERT INTO glpi_connect_wire (end1,end2,type) 
+						VALUES (".$entry['ID'].",".$id.",4);";
+					}else{
+						$str = "INSERT INTO glpi_computer_device (device_type,FK_device,FK_computers) 
+						VALUES (".$deviceMappingTableNameID[$type].",".$entry['ID'].",".$id.");";
+					}
 					$this->query($str);
 				}
 			}

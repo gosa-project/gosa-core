@@ -51,8 +51,11 @@ class glpiDeviceManagement extends plugin
     $this->DeviceAttrs['sndcard']   = array("designation","type","comment","FK_glpi_enterprise","specif_default");
     $this->DeviceAttrs['power']     = array("designation","power","comment","FK_glpi_enterprise","atx");
     $this->DeviceAttrs['pci']       = array("designation","comment","FK_glpi_enterprise","specif_default");
+    $this->DeviceAttrs['monitor']   = array("name","comments","serial","otherserial","size",
+                                            "flags_micro","flags_speaker","flags_subd","flags_bnc",
+                                            "location","type","FK_glpi_enterprise","is_global","deleted","is_template","tplname");
 
-    $this->AllowedDevices=array("case","moboard","sndcard","processor","iface","ram","hdd","drive","control","gfxcard","power","pci");
+    $this->AllowedDevices=array("case","moboard","sndcard","processor","iface","ram","hdd","drive","control","gfxcard","power","pci","monitor");
   }
 
   function execute()
@@ -156,14 +159,25 @@ class glpiDeviceManagement extends plugin
 
     foreach($this->devices as $key=>$user){
 
-      if(isset($this->Selected[$user['device_type']][$user['designation']])){
+      if(isset($user['designation'])){
+        $str = "designation";
+      }else{
+        $str = "name";
+      }
+
+      if(isset($this->Selected[$user['device_type']][$user[$str]])){
         $use = " checked ";
       }else{
         $use ="";
       }
 
+      /* Dawn databse struckture ....*/
+      if(empty($user['comment'])) {
+        $user['comment'] = $user['comments'];
+      }
+
       $field1 = array("string" => preg_replace("/%s/",base64_encode($key),preg_replace("/%USE%/",$use,$useDevice)), "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($edit,base64_encode($key),$user['designation']."&nbsp;[".$user['comment']."]"), "attach" => "style=''");
+      $field2 = array("string" => sprintf($edit,base64_encode($key),$user[$str]."&nbsp;[".$user['comment']."]"), "attach" => "style=''");
       $field3 = array("string" => sprintf($editdel,base64_encode($key),base64_encode($key)), 
         "attach" => "style='width:60px;border-right:0px;text-align:right;'");
       $divlist->AddEntry(array($field1,$field2,$field3));
@@ -171,6 +185,8 @@ class glpiDeviceManagement extends plugin
     }
     
   $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
+      " <input class='center' type='image' align='middle' 
+      src='images/monitor.png'  title='"._("New monitor")."' alt='"._("M")."' name='new_monitor'>&nbsp;".
       " <input class='center' type='image' align='middle' 
       src='images/keyboard.png' title='"._("New mainbord")."' alt='"._("MB")."' name='new_moboard'>&nbsp;".
       " <input class='center' type='image' align='middle' 
@@ -239,18 +255,24 @@ class glpiDeviceManagement extends plugin
   function save_object()
   {
     foreach($_POST as $name => $value){
+
       if(preg_match("/wasOnPage_/",$name)){
         $dN = base64_decode($value);
 
         $device = $this->devices[$dN];
         $type   = $device['device_type'];  
             
+        if(isset($device['designation'])){
+          $str = "designation";
+        }else{
+          $str = "name";
+        }
 
         if(isset($_POST['useDevice_'.$value])){
-          $this->Selected[$type][$device['designation']] = $device;
+          $this->Selected[$type][$device[$str]] = $device;
         }else{
-          if(isset($this->Selected[$type][$device['designation']])){
-            unset($this->Selected[$type][$device['designation']]);
+          if(isset($this->Selected[$type][$device[$str]])){
+            unset($this->Selected[$type][$device[$str]]);
           }
         }
       }
@@ -278,14 +300,26 @@ class glpiDeviceManagement extends plugin
   function check($attr)
   {
     $message = array();
-    if(empty($attr['designation'])){
+    
+    if(isset($attr['designation'])){
+      $str2 = "designation";
+    }else{
+      $str2 = "name";
+    }
+    if(empty($attr[$str2])){
       $message[]=(_("You have to specify a valid name for this device."));
     }
 
     /* Avoid same name twice */
     $devices = ($this->parent->handle->getDevices());
     foreach($devices as $dev){
-      if($dev['designation']==$attr['designation']){
+      if(isset($dev['designation'])){
+        $str = "designation";
+      }else{
+        $str = "name";
+      }
+
+      if($dev[$str]==$attr[$str2]){
 
         /* Entries with ['ID'] already exists, and are only edited, if ID is missing we are currently creating a new entry */
         if(isset($attr['ID'])){
@@ -336,6 +370,9 @@ class glpiDeviceManagement extends plugin
     
     $smarty->assign("FK_glpi_enterpriseKeys",array_flip($manufacturer));
     $smarty->assign("FK_glpi_enterprises", $manufacturer);
+
+    $smarty->assign("formats",array("Large","Medium","Micro"));
+    $smarty->assign("formats",array("Large","Medium","Micro"));
 
     $smarty->assign("formats",array("Large","Medium","Micro"));
     $smarty->assign("formatKeys",array('Grand','Moyen','Micro'));

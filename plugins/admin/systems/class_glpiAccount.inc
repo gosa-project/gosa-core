@@ -515,7 +515,11 @@ class glpiAccount extends plugin
     $ret = array();
     foreach($this->usedDevices as $type => $entries){
       foreach($entries as $ent){
-        $ret[] = $ent['designation']." [".$type."]";
+        if(isset($ent['designation'])){
+          $ret[] = $ent['designation']." [".$type."]";
+        }else{
+          $ret[] = $ent['name']." [".$type."]";
+        }
       }
     }
     return($ret); 
