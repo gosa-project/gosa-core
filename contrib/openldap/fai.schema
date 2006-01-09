@@ -297,6 +297,11 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.5.27 NAME 'FAIrepository'
 		DESC 'TODO'
 		SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
 		
+# Name       : FAIstate
+# Description: Used to store repository state (branched/freezed)
+attributetype ( 1.3.6.1.4.1.10098.1.1.5.28 NAME 'FAIstate'
+		DESC 'TODO'
+		SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
 ##
 ## Object class definitions (allocated from the GONICUS oid space)
 ##
@@ -434,5 +439,12 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.40.18 NAME 'FAIrepositoryServer'
 	SUP top AUXILIARY
 	DESC 'Provides repository informations.'
 	MAY ( FAIrepository ) )
+
+# Name       : FAIbranch
+# Description: FAIbranch stores information about the state of a set of FAI classes.
+objectclass (1.3.6.1.4.1.10098.1.2.1.40.19 NAME 'FAIbranch'
+	SUP top AUXILIARY
+	DESC 'Provides information for versioning.'
+	MAY ( FAIstate ) )
 
 ### END of FAI schema file
