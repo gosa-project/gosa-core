@@ -320,96 +320,104 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.40.1 NAME 'FAIclass'
 #              to simplify administration tasks for so called junior
 #              administrators.
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.2 NAME 'FAIprofile'
-	SUP FAIclass STRUCTURAL
+	SUP top STRUCTURAL
 	DESC 'FAI profile container for multiple class objects' 
-	MUST ( FAIclass ) )
+	MUST ( cn $ FAIclass ) MAY  ( FAIstate $ description ) )
 
-# Name       : FAIpartition
+# Name       : FAIpartitionTable
 # Description: Each installation profile should contain a partition
 #              table in order to perform well. FAIpartitionTable is
 #              a container for partition entries.
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.3 NAME 'FAIpartitionTable'
-	SUP FAIclass STRUCTURAL
-	DESC 'Stores FAI partition tables' )
+	SUP top STRUCTURAL
+	DESC 'Stores FAI partition tables'
+	MUST ( cn ) MAY  ( FAIstate $ description ) )
 
 # Name       : FAIpartitionDisk
 # Description: Each installation profile should contain a partition
 #              table in order to perform well. FAIpartitionTable is
 #              a container for partition entries.
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.4 NAME 'FAIpartitionDisk'
-	SUP FAIclass STRUCTURAL
-	DESC 'Stores FAI partition tables' )
+	SUP top STRUCTURAL
+	DESC 'Stores FAI partition tables' 
+	MUST ( cn ) MAY  ( FAIstate $ description ) )
 
 # Name       : FAIpartitionEntry
 # Description: This object defines a single partition entry for the
 #              FAI partitioner.
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.5 NAME 'FAIpartitionEntry'
-	SUP FAIpartitionTable STRUCTURAL
+	SUP top STRUCTURAL
 	DESC 'One partition table entry'
 	MUST ( FAIpartitionType $ FAIpartitionNr $ FAIfsType $
-	       FAImountPoint $ FAIpartitionSize )
-	MAY  ( FAImountOptions $ FAIfsOptions $ FAIpartitionFlags ) )
+	       FAImountPoint $ FAIpartitionSize $ cn )
+	MAY  ( FAImountOptions $ FAIfsOptions $ FAIpartitionFlags $
+	       description $ FAIstate ) )
 
 # Name       : FAIhook
 # Description: Container for hooks
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.6 NAME 'FAIhook'
-	SUP FAIclass STRUCTURAL
-	DESC 'Stores FAI partition tables' )
+	SUP top STRUCTURAL
+	DESC 'Stores FAI partition tables'
+	MUST ( cn ) MAY  ( FAIstate $ description ) )
 
 # Name       : FAIhookEntry
 # Description: Hooks are stored with their FAI task inside the
 #              FAIhook object.
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.7 NAME 'FAIhookEntry'
-	SUP FAIclass STRUCTURAL
+	SUP top STRUCTURAL
 	DESC 'FAI hook storage'
-	MUST ( FAIscript $ FAItask ) )
+	MUST ( cn $ FAIscript $ FAItask ) MAY ( FAIstate $ description ) )
 
 # Name       : FAIscriptEntry
 # Description: Container for scripts
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.8 NAME 'FAIscriptEntry'
-	SUP FAIclass STRUCTURAL
+	SUP top STRUCTURAL
 	DESC 'FAI script storage'
-	MUST ( FAIscript $ FAIpriority ) )
+	MUST ( cn $ FAIscript $ FAIpriority ) MAY ( FAIstate $ description ) )
 
 # Name       : FAIscript
 # Description: Hooks and scripts are somewhat similar.
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.9 NAME 'FAIscript'
-	SUP FAIclass STRUCTURAL
-	DESC 'FAI script storage' )
+	SUP top STRUCTURAL
+	DESC 'FAI script storage'
+	MUST ( cn ) MAY  ( FAIstate $ description ) )
 
 # Name       : FAIvariable
 # Description: Store a set of variables in this container.
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.10 NAME 'FAIvariable'
-	SUP FAIclass STRUCTURAL
-	DESC 'Stores FAI variables sub entries' )
+	SUP top STRUCTURAL
+	DESC 'Stores FAI variables sub entries'
+	MUST ( cn ) MAY  ( FAIstate $ description ) )
 
 # Name       : FAIvariableEntry
 # Description: Stores a single variable.
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.11 NAME 'FAIvariableEntry'
-	SUP FAIvariable STRUCTURAL
+	SUP top STRUCTURAL
 	DESC 'Stores single variable entries'
-	MUST ( FAIvariableContent ) )
+	MUST ( cn $ FAIvariableContent ) MAY ( FAIstate $ description ) )
 
 # Name       : FAIpackagelist
 # Description: Stores a complete package list and is container
 #              for several FAIdebconfInfo scripts
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.12 NAME 'FAIpackageList'
-	SUP FAIclass STRUCTURAL
+	SUP top STRUCTURAL
 	DESC 'Stores complete package lists'
-	MUST ( FAIpackage ) MAY ( FAIpackagelistDependency $ FAIinstallMethod ) )
+	MUST ( cn $ FAIpackage ) MAY ( FAIpackagelistDependency $ FAIinstallMethod $ description $ FAIstate ) )
 
 # Name       : FAItemplate
 # Description: Container for template objects.
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.13 NAME 'FAItemplate'
-	SUP FAIclass STRUCTURAL
-	DESC 'Container for template objects' )
+	SUP top STRUCTURAL
+	DESC 'Container for template objects' 
+	MUST ( cn ) MAY  ( FAIstate $ description ) )
 
 # Name       : FAItemplateEntry
 # Description: Stores FAI templates and the corresponding path.
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.14 NAME 'FAItemplateEntry'
-	SUP FAItemplate STRUCTURAL
+	SUP top STRUCTURAL
 	DESC 'Stores real file templates'
-	MUST ( FAItemplateFile $ FAItemplatePath $ FAIowner $ FAImode ) )
+	MUST ( cn $ FAItemplateFile $ FAItemplatePath $ FAIowner $ FAImode ) 
+	MAY ( FAIstate $ description ) )
 	
 # Name       : FAIdebconfInfo
 # Description: Stores debconf information like shown in
