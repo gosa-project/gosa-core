@@ -320,11 +320,16 @@ class faiManagement extends plugin
         /* Create it know */
         $ldap = $this->config->get_ldap_link();
 
-        $ldap->cd ("ou=".$name.",".$base);
+        $baseToUse = $base;
+        if($_SESSION['faifilter']['branch']!="main"){
+          $baseToUse = $_SESSION['faifilter']['branch'];
+        }
+
+        $ldap->cd ("ou=".$name.",".$baseToUse);
         $ldap->recursive_remove();
         
         $ldap->cd ($this->config->current['BASE']);
-        $ldap->copy_FAI_resource_recursive($base,"ou=".$name.",".$base,"branch",true);
+        $ldap->copy_FAI_resource_recursive($baseToUse,"ou=".$name.",".$baseToUse,"branch",true);
         
         $this->dispNewBranch = false; 
       }
@@ -392,11 +397,16 @@ class faiManagement extends plugin
         /* Create it know */
         $ldap = $this->config->get_ldap_link();
 
-        $ldap->cd ("ou=".$name.",".$base);
+        $baseToUse = $base;
+        if($_SESSION['faifilter']['branch']!="main"){
+          $baseToUse = $_SESSION['faifilter']['branch'];
+        }
+        
+        $ldap->cd ("ou=".$name.",".$baseToUse);
         $ldap->recursive_remove();
         
         $ldap->cd ($this->config->current['BASE']);
-        $ldap->copy_FAI_resource_recursive($base,"ou=".$name.",".$base,"freeze",true);
+        $ldap->copy_FAI_resource_recursive($baseToUse,"ou=".$name.",".$baseToUse,"freeze",true);
         
         $this->dispNewFreeze = false; 
       }
@@ -776,7 +786,7 @@ class faiManagement extends plugin
       
       if((isset($attrs['ou']))&&($attrs['dn']!=$base)){
         $ret[$attrs['dn']]= $prefix.$attrs['ou'][0];
-        $ret = array_merge($ret,$this->getBranches($attrs['dn'],$prefix."/".$attrs['ou'][0]));
+        $ret = array_merge($ret,$this->getBranches($attrs['dn'],$prefix.$attrs['ou'][0]."/"));
       }
     }
     return($ret);
