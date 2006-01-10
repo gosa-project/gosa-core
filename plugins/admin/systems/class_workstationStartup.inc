@@ -404,9 +404,6 @@ class workstartup extends plugin
     $str_empty  = " &nbsp;<img src='images/empty.png' alt=\"\" width='7'>"; 
 
     $i = 1;
-    if(is_array($this->FAIclass)){
-      natcasesort($this->FAIclass);
-    }
 
     foreach($this->FAIclass as $class){
       if($i==1){
