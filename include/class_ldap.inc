@@ -367,46 +367,91 @@ class LDAP{
   /* Copy given attributes and sub-dns with attributes to destination dn 
       
   */
-  function copy_recursive($sourcedn,$destinationdn,$filter="(objectClass=FAIclass)")
+  function copy_FAI_resource_recursive($sourcedn,$destinationdn,$type="branch",$is_first = false)
   {
     error_reporting(E_ALL);
     if($this->hascon){
       if ($this->reconnect) $this->connect();
 
+      /* Save base dn */
       $basedn= $this->basedn;
-
       $delarray= array();
-        
+      
+      /* Check if destination entry already exists */
       if($this->count($this->fetch($this->cat($destinationdn)))){
         return;
       }else{
+
+        /* Get source entrie */
         $this->cd($basedn);
         $attr = $this->fetch($this->cat($sourcedn));
 
+        /* check if this is a department */
         if(in_array("organizationalUnit",$attr['objectClass'])){
           $attr['dn'] = $destinationdn;
           $this->cd($basedn);
           $this->create_missing_trees($destinationdn);
           $this->cd($destinationdn);
+
+          /* If is first entry, append FAIbranch to department entry */
+          if($is_first){
+            $attr= $this->fetch($this->cat($destinationdn));
+
+            /* Filter unneeded informations */
+            foreach($attr as $key => $value){
+              if(is_numeric($key)) unset($attr[$key]);
+              if(isset($attr[$key]['count'])){
+                if(($attr[$key]['count']==1)&&($key!="objectClass")){
+                  $attr[$key] = $attr[$key][0];
+                }
+              }
+              if(isset($attr[$key]['count'])) unset($attr[$key]['count']);
+            }
+            unset($attr['count']);
+            unset($attr['dn']);
+
+            /* Add marking attribute */
+            $attr['objectClass'][] = "FAIbranch";
+            
+            /* Add this entry */
+            $this->modify($attr);
+            //echo $this->error;
+          }
+          
         }else{
+        /* If this is no department */
           foreach($attr as $key => $value){
             if(is_numeric($key)) unset($attr[$key]);
-            if((isset($attr[$key][count]))&&($attr[$key]['count']==1)){
-              $attr[$key] = $attr[$key][0];
+            if(isset($attr[$key]['count'])){
+              if(($attr[$key]['count']==1)&&($key!="objectClass")){
+                $attr[$key] = $attr[$key][0];
+              }
             }
-            if(isset($value['count'])) unset($attr[$key]['count']); 
+            if(isset($attr[$key]['count'])) unset($attr[$key]['count']); 
           }
           unset($attr['count']);
           unset($attr['dn']);
-
+ 
+          if($type=="branch"){
+            $attr['FAIstate'] ="branch";
+          }elseif($type=="freeze"){
+            $attr['FAIstate'] ="freeze";
+          }else{
+            print_red(_("Unknown FAIsate %s"),$type);
+          }
+ 
+          /* Add entry */
           $this->cd($destinationdn);
           $a = $this->fetch($this->cat($destinationdn));
           if(!count($a)){
             $this->add($attr);
           }
-          echo $this->error;
+          //echo $this->error;
 
           if($this->error != "Success"){
+            /* Some error occured */
+            print "---------------------------------------------";
+            print $this->get_error()."<br>";
             print $sourcedn."<br>";
             print $destinationdn."<br>";
             print_a( $attr);
@@ -424,7 +469,15 @@ class LDAP{
       reset ($delarray);
 
       foreach($delarray as $dn => $bla){
-        $this->copy_recursive($dn,preg_replace("/".$sourcedn."/i",$destinationdn,$dn),$filter);
+        if($dn != $destinationdn){
+          $this->cd($basedn);
+          $item = $this->fetch($this->cat($dn));
+          if(!in_array("FAIbranch",$item['objectClass'])){
+            $this->copy_FAI_resource_recursive($dn,str_replace($sourcedn,$destinationdn,$dn),$type);
+          } 
+        }
+      //  $this->cd($basedn);
+      //  $this->copy_recursive($dn,preg_replace("/".$sourcedn."/i",$destinationdn,$dn),$filter);
       }
     }
   }
@@ -432,7 +485,7 @@ class LDAP{
   function modify($attrs)
   {
     if($this->hascon){
-      if ($this->meconnect) $this->connect();
+      if ($this->reconnect) $this->connect();
       $r = @ldap_modify($this->cid, $this->basedn, $attrs);
       $this->error = @ldap_error($this->cid);
       return($r ? $r : 0);
