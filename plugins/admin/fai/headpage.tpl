@@ -28,6 +28,25 @@
    <div class="contentboxh">
     <p class="contentboxh"><img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}</p>
    </div>
+   <div class="contentboxb" style="padding:3px;">
+   	
+	<select name="select_branch" >
+		{html_options values=$branchKeys output=$branches }
+	</select>
+	<br>
+	{t}Delete this branch.{/t}
+	<input type="image" value="delete" name="remove_branch" src="images/edittrash.png"> 
+	<br>
+	{t}Create a new branch{/t}
+	<input type="image" value="delete" name="branch_branch" src="images/crossref.png">
+	<br>
+	{t}Freeze this{/t}
+	<input type="image" value="delete" name="freeze_branch" src="images/flag.png">
+   </div>
+   <br>
+   <div class="contentboxh">
+    <p class="contentboxh"><img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}</p>
+   </div>
    <div class="contentboxb">
      <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
       {$alphabet}

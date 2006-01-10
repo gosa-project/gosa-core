@@ -48,7 +48,10 @@ class faiManagement extends plugin
 	var $dialog				= array();	// 	This object contains every dialog we have currently opened
 
 	var $objects			= array();	// 	This array contains all available objects shown in divlist
-	var $is_dialog			= false;
+	var $is_dialog		= false;
+
+  var $dispNewBranch= false;
+  var $dispNewFreeze= false;
 
 	/* construction/reconstruction 
 	 * The Filter ($faifilter stored in $_SESSION['faifilter']) defines the last 
@@ -115,7 +118,13 @@ class faiManagement extends plugin
 		 * Create new tab ich new_xx is posted
 		 */
 		foreach($_POST as $key => $val){
-			if(preg_match("/create_partition/i",$key)){
+      if(preg_match("/remove_branch/",$key)){
+        $s_action = "remove_branch";
+      }elseif(preg_match("/branch_branch/",$key)){
+        $s_action = "branch_branch";
+      }elseif(preg_match("/freeze_branch/",$key)){
+        $s_action = "freeze_branch";
+			}elseif(preg_match("/create_partition/i",$key)){
 				$s_action = "new_partition";
 			}elseif(preg_match("/create_script/i",$key)){
 				$s_action = "new_script";
@@ -275,7 +284,109 @@ class faiManagement extends plugin
 		}
 
 
-		/* Dialog handling */
+    /*  Branch handling 
+        09.01.2006
+    */
+
+    /* Create new branch */
+    if((isset($_POST['UseBranchName']))&&($this->dispNewBranch)){
+      
+      /* Check branch name */
+      $name = $_POST['BranchName'];
+      $is_ok = true;
+
+		  $base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
+      
+      /* Check used characters */
+      if(preg_match("/[^0-9a-z]/i",$name)){
+        print_red(_("Specified branch name is invalid."));
+        $is_ok = false;
+      }
+   
+      /* Check if this name is already in use */
+      if(!$this->CheckNewBranchName($_POST['BranchName'])){
+        print_red(_("This name is already in use."));
+        $this->is_ok = false;
+      }
+     
+      if($is_ok){
+        /* Create it know */
+
+        $ldap = $this->config->get_ldap_link();
+        
+//        $ldap->cd ("ou=".$name.",".$base);
+//        $ldap->recursive_remove();
+        
+        $ldap->cd ($this->config->current['BASE']);
+        $ldap->copy_recursive($base,"ou=".$name.",".$base);
+
+        
+        
+        print "created new branch .... bla";
+        $this->dispNewBranch = false; 
+      }
+    }
+
+    /* Abort creating new branch */
+    if(isset($_POST['CancelBranchName'])){
+      $this->dispNewBranch = false;
+    }
+
+    /* Open dialog to insert new branch name */
+    if(($s_action == "branch_branch")||($this->dispNewBranch)){
+      $this->dispNewBranch=true;
+		  $base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
+		  $display 	.= $smarty->fetch(get_template_path('faiNewBranch.tpl', TRUE, dirname(__FILE__)));
+      return($display);
+    }
+
+    /* Remove branch */
+    if($s_action == "remove_branch"){
+      $base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
+      /* Load permissions for selected 'dn' and check if
+         we're allowed to remove this 'dn' */
+      $acl= get_permissions ($base, $this->ui->subtreeACL);
+      $this->acl= get_module_permission($acl, "fai", $base);
+      if (chkacl($this->acl, "delete") == ""){
+        $smarty->assign("warning", sprintf(_("You're about to delete a fai branch / freeze  '%s'."), $base));
+        return($smarty->fetch(get_template_path('remove_branch.tpl',TRUE)));
+      } else {
+        print_red (_("You are not allowed to delete this user!"));
+      }
+    }
+
+    /* Delete this entry */
+    if(isset($_POST['delete_branch_confirm'])){
+      print "branch removed ";
+    }
+
+    if($s_action == "freeze_branch"){
+      $base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cd ($base);
+  
+      $attrs = $ldap->fetch($ldap->cat ($base));
+
+      if(!in_array("FAIbranch",$attrs)){
+        $attrs['objectClass'][] = "FAIbranch";
+      }
+     
+      if((!isset($attrs['FAIstate']))||($attrs['FAIstate'] != "frozen")){
+        $attrs['FAIstate']= "frozen";
+      }
+    
+      print "Freeze ";
+
+      
+
+      
+    
+    }
+
+    /* ENDE Branch handling 
+     */
+
+    /* Dialog handling */
 		if($s_action == "new_partition"){
 			$this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIpartitionTable");
 		}
@@ -601,6 +712,10 @@ class faiManagement extends plugin
 		}
 
 		/* Assign all reguired vars to template engine */
+
+    $smarty->assign("branchKeys",array());
+    $smarty->assign("branches",array());
+    
 		$smarty->assign("faihead"		, $faihead);	
 		$smarty->assign("failist"		, $divlist->DrawList());
 		$smarty->assign("regex"			, $faifilter['regex']);	
@@ -615,6 +730,18 @@ class faiManagement extends plugin
 		return ($display);
 	}
 
+  function getBranches()
+  {
+    $ldap = $this->config->get_ldap_link();
+  
+    $ldap->cd($this->config->current['BASE']);
+
+    $ldap->search("(objectClass=FAIbranch)",array("FAIstate","cn","ou"));
+
+    while($attrs = $ldap->fetch()){
+      print_a($attrs);
+    }
+  }
 
 	function reload()
 	{
@@ -746,6 +873,11 @@ class faiManagement extends plugin
 		}
 	}
 
-}
+  function checknewbranchname($name){
+  
+    return(true);
+  }
 
+}
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
