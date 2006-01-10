@@ -312,7 +312,7 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.5.28 NAME 'FAIstate'
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.1 NAME 'FAIclass'
 	SUP top STRUCTURAL
 	DESC 'Generic class parent for FAI objects'
-	MUST ( cn ) MAY  ( description ) )
+	MUST ( cn ) MAY  ( FAIstate $ description ) )
 
 # Name       : FAIprofile
 # Description: FAIprofile which bundles a set of FAIclass entries
@@ -417,14 +417,14 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.40.14 NAME 'FAItemplateEntry'
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.15 NAME 'FAIdebconfInfo'
 	SUP top STRUCTURAL
 	DESC 'Stores debconf informations for single packages'
-	MUST ( FAIpackage $ FAIvariable $ FAIvariableType ) MAY ( FAIvariableContent ) )
+	MUST ( FAIpackage $ FAIvariable $ FAIvariableType ) MAY ( FAIvariableContent $ FAIstate ) )
 
 # Name       : FAIobject
 # Description: Marks objects to have a set of FAI classes.
 objectclass (1.3.6.1.4.1.10098.1.2.1.40.16 NAME 'FAIobject'
 	SUP top AUXILIARY
 	DESC 'Marks an object as an FAI object.'
-	MAY ( FAIstatus $ FAIclass $ FAIdebianMirror $ macAddress) )
+	MAY ( FAIstate $ FAIstatus $ FAIclass $ FAIdebianMirror $ macAddress) )
 
 # Name       : FAIrepository
 # Description: Marks objects to have a set of FAI classes.
