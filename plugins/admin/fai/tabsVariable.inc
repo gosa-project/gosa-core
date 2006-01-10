@@ -19,13 +19,12 @@ class tabsVariable extends tabs
   {
   	$baseobject= $this->by_object['faiVariable'];
 
-	$branch = "";
-	if($_SESSION['faifilter']['branch']!="main"){
-		$branch = "ou=".$_SESSION['faifilter']['branch'].",";
-	}
-
-	$new_dn= 'cn='.$baseobject->cn.",ou=variables,".$branch."ou=fai,ou=configs,ou=systems,".$_SESSION['faifilter']['base'];
+	$new_dn= 'cn='.$baseobject->cn.",ou=variables,ou=fai,ou=configs,ou=systems,".$_SESSION['faifilter']['base'];
 	
+	if($_SESSION['faifilter']['branch']!="main"){
+		$new_dn ='cn='.$baseobject->cn.",ou=variables,".$_SESSION['faifilter']['branch'];
+	}
+			
  	if ($this->dn != $new_dn && $this->dn != "new"){
 		
 		/* if( new_dn is subtree of this->dn ) */

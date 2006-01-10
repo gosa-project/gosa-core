@@ -19,13 +19,12 @@ class tabsTemplate extends tabs
   {
   	$baseobject= $this->by_object['faiTemplate'];
 	
-	$branch = "";
+	$new_dn= 'cn='.$baseobject->cn.",ou=templates,ou=fai,ou=configs,ou=systems,".$_SESSION['faifilter']['base'];
+
 	if($_SESSION['faifilter']['branch']!="main"){
-		$branch = "ou=".$_SESSION['faifilter']['branch'].",";
+		$new_dn ='cn='.$baseobject->cn.",ou=templates,".$_SESSION['faifilter']['branch'];
 	}
-					     
-	$new_dn= 'cn='.$baseobject->cn.",ou=templates,".$branch."ou=fai,ou=configs,ou=systems,".$_SESSION['faifilter']['base'];
-	
+
  	if ($this->dn != $new_dn && $this->dn != "new"){
 		
 		/* if( new_dn is subtree of this->dn ) */

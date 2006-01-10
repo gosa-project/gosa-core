@@ -19,12 +19,11 @@ class tabsScript extends tabs
   {
   	$baseobject= $this->by_object['faiScript'];
 
-	$branch = "";
+	$new_dn= 'cn='.$baseobject->cn.",ou=scripts,ou=fai,ou=configs,ou=systems,".$_SESSION['faifilter']['base'];
+
 	if($_SESSION['faifilter']['branch']!="main"){
-		$branch = "ou=".$_SESSION['faifilter']['branch'].",";
+		$new_dn ='cn='.$baseobject->cn.",ou=scripts,".$_SESSION['faifilter']['branch'];
 	}
-				     
-	$new_dn= 'cn='.$baseobject->cn.",ou=scripts,".$branch."ou=fai,ou=configs,ou=systems,".$_SESSION['faifilter']['base'];
 	
  	if ($this->dn != $new_dn && $this->dn != "new"){
 		

@@ -17,6 +17,7 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+
 require "tabsPartition.inc";
 require "tabsVariable.inc";
 require "tabsHook.inc";
@@ -363,27 +364,44 @@ class faiManagement extends plugin
     }
 
     if($s_action == "freeze_branch"){
-      $base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
-      $ldap = $this->config->get_ldap_link();
-      $ldap->cd ($base);
-  
-      $attrs = $ldap->fetch($ldap->cat ($base));
+      $this->dispNewFreeze = true;
+		  $display 	.= $smarty->fetch(get_template_path('faiNewBranch.tpl', TRUE, dirname(__FILE__)));
+      return($display);
+    }
 
-      if(!in_array("FAIbranch",$attrs)){
-        $attrs['objectClass'][] = "FAIbranch";
+    if((isset($_POST['UseBranchName']))&&($this->dispNewFreeze)){
+      /* Check branch name */
+      $name = $_POST['BranchName'];
+      $is_ok = true;
+
+		  $base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
+      
+      /* Check used characters */
+      if(preg_match("/[^0-9a-z]/i",$name)){
+        print_red(_("Specified branch name is invalid."));
+        $is_ok = false;
+      }
+   
+      /* Check if this name is already in use */
+      if(!$this->CheckNewBranchName($_POST['BranchName'])){
+        print_red(_("This name is already in use."));
+        $this->is_ok = false;
       }
      
-      if((!isset($attrs['FAIstate']))||($attrs['FAIstate'] != "frozen")){
-        $attrs['FAIstate']= "frozen";
+      if($is_ok){
+        /* Create it know */
+        $ldap = $this->config->get_ldap_link();
+
+        $ldap->cd ("ou=".$name.",".$base);
+        $ldap->recursive_remove();
+        
+        $ldap->cd ($this->config->current['BASE']);
+        $ldap->copy_FAI_resource_recursive($base,"ou=".$name.",".$base,"freeze",true);
+        
+        $this->dispNewFreeze = false; 
       }
-    
-      print "Freeze ";
-
-      
-
-      
-    
     }
+    
 
     /* ENDE Branch handling 
      */
@@ -446,7 +464,6 @@ class faiManagement extends plugin
 				$this->is_dialog = true;
 			}		
 		}	
-
 
 		/* Search is set */
 		if(isset($_GET['search'])){
@@ -695,14 +712,16 @@ class faiManagement extends plugin
 						$desc= "";
 					}
 
-          if($value['FAIstate'] == "branch"){
+          if($value['FAIstate'] == "freeze"){
             $acti = "";
+            $edi  = "%NAME%";
           }else{
             $acti = $action;
+            $edi = $editlink;
           }
 
 					$field1 = array("string" => $img , "attach" => "style='text-align:center;width:20px;'");
-					$field2 = array("string" => preg_replace(array("/%KEY%/","/%NAME%/"),array($key,$value['cn'].$desc),$editlink) , "attach" => "style=''");
+					$field2 = array("string" => preg_replace(array("/%KEY%/","/%NAME%/"),array($key,$value['cn'].$desc),$edi) , "attach" => "style=''");
 					$field3 = array("string" => $info, "attach" => "style='width:200px;'");
 					$field4 = array("string" => preg_replace("/%KEY%/",$key,$acti) , "attach" => "style='width:60px;border-right:0px;text-align:right;'");
 					$divlist->AddEntry(array($field1,$field2,$field3,$field4));
@@ -737,7 +756,7 @@ class faiManagement extends plugin
 		return ($display);
 	}
 
-  function getBranches()
+  function getBranches($base = false,$prefix = "")
   {
     $ret = array("main"=>_("main"));
     $ldap = $this->config->get_ldap_link();
@@ -745,14 +764,19 @@ class faiManagement extends plugin
     $ldap->cd($this->config->current['BASE']);
 
     $faifilter = $_SESSION['faifilter'];
-		$base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
+
+
+    if(!$base){
+  		$base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
+    }
     $ldap->cd($base);
-    $ldap->search("(objectClass=FAIbranch)",array("*"));
+    $ldap->ls("(objectClass=FAIbranch)",$base);
 
     while($attrs = $ldap->fetch()){
-      if(isset($attrs['ou'])){
-        $ou = $attrs['ou'][0];
-        $ret[$ou]=$ou;
+      
+      if((isset($attrs['ou']))&&($attrs['dn']!=$base)){
+        $ret[$attrs['dn']]= $prefix.$attrs['ou'][0];
+        $ret = array_merge($ret,$this->getBranches($attrs['dn'],$prefix."/".$attrs['ou'][0]));
       }
     }
     return($ret);
@@ -771,7 +795,7 @@ class faiManagement extends plugin
 		$base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
 
     if($faifilter['branch'] !="main"){
-      $base = "ou=".$faifilter['branch'].",".$base;
+      $base = $faifilter['branch'];
     }
    
 		$regex = $faifilter['regex'];	
@@ -899,8 +923,10 @@ class faiManagement extends plugin
 		}
 	}
 
-  function checknewbranchname($name){
-  
+  function CheckNewBranchName($name){
+    if(in_array($name,$this->getBranches())) {
+      return(false);
+    }
     return(true);
   }
 

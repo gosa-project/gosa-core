@@ -19,13 +19,11 @@ class tabsPackage extends tabs
   {
   	$baseobject= $this->by_object['faiPackage'];
 
-	$branch = "";
+	$new_dn= 'cn='.$baseobject->cn.",ou=packages,ou=fai,ou=configs,ou=systems,".$_SESSION['faifilter']['base'];
 	if($_SESSION['faifilter']['branch']!="main"){
-		$branch = "ou=".$_SESSION['faifilter']['branch'].",";
+		$new_dn ='cn='.$baseobject->cn.",ou=packages,".$_SESSION['faifilter']['branch'];
 	}
-
-	$new_dn= 'cn='.$baseobject->cn.",ou=packages,".$branch."ou=fai,ou=configs,ou=systems,".$_SESSION['faifilter']['base'];
-	
+			
  	if ($this->dn != $new_dn && $this->dn != "new"){
 		
 		/* if( new_dn is subtree of this->dn ) */
