@@ -364,11 +364,75 @@ class LDAP{
     }
   }
 
+  /* Copy given attributes and sub-dns with attributes to destination dn 
+      
+  */
+  function copy_recursive($sourcedn,$destinationdn,$filter="(objectClass=FAIclass)")
+  {
+    error_reporting(E_ALL);
+    if($this->hascon){
+      if ($this->reconnect) $this->connect();
+
+      $basedn= $this->basedn;
+
+      $delarray= array();
+        
+      if($this->count($this->fetch($this->cat($destinationdn)))){
+        return;
+      }else{
+        $this->cd($basedn);
+        $attr = $this->fetch($this->cat($sourcedn));
+
+        if(in_array("organizationalUnit",$attr['objectClass'])){
+          $attr['dn'] = $destinationdn;
+          $this->cd($basedn);
+          $this->create_missing_trees($destinationdn);
+          $this->cd($destinationdn);
+        }else{
+          foreach($attr as $key => $value){
+            if(is_numeric($key)) unset($attr[$key]);
+            if((isset($attr[$key][count]))&&($attr[$key]['count']==1)){
+              $attr[$key] = $attr[$key][0];
+            }
+            if(isset($value['count'])) unset($attr[$key]['count']); 
+          }
+          unset($attr['count']);
+          unset($attr['dn']);
+
+          $this->cd($destinationdn);
+          $a = $this->fetch($this->cat($destinationdn));
+          if(!count($a)){
+            $this->add($attr);
+          }
+          echo $this->error;
+
+          if($this->error != "Success"){
+            print $sourcedn."<br>";
+            print $destinationdn."<br>";
+            print_a( $attr);
+            exit();
+          }          
+        }
+      }
+
+      $this->ls ("(objectClass=*)",$sourcedn);
+      while ($this->fetch()){
+        $deldn= $this->getDN();
+        $delarray[$deldn]= strlen($deldn);
+      }
+      asort ($delarray);
+      reset ($delarray);
+
+      foreach($delarray as $dn => $bla){
+        $this->copy_recursive($dn,preg_replace("/".$sourcedn."/i",$destinationdn,$dn),$filter);
+      }
+    }
+  }
 
   function modify($attrs)
   {
     if($this->hascon){
-      if ($this->reconnect) $this->connect();
+      if ($this->meconnect) $this->connect();
       $r = @ldap_modify($this->cid, $this->basedn, $attrs);
       $this->error = @ldap_error($this->cid);
       return($r ? $r : 0);
