@@ -30,8 +30,8 @@
    </div>
    <div class="contentboxb" style="padding:3px;">
    	
-	<select name="select_branch" >
-		{html_options values=$branchKeys output=$branches }
+	<select name="select_branch" onChange="document.mainform.submit();">
+		{html_options values=$branchKeys output=$branches selected=$select_branch}
 	</select>
 	<br>
 	{t}Delete this branch.{/t}

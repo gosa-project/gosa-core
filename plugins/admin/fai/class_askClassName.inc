@@ -41,7 +41,12 @@ class askClassName extends plugin
     /* First search for every ou, in given fai base
      * With a second search detect all object that belong to the different ous. 
      */
-    $base = "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
+
+    $bb ="";
+    if($faifilter['branch'] != "main"){
+      $bb = "ou=".$faifilter['branch'].",";
+    }
+    $base = $bb."ou=fai,ou=configs,ou=systems,".$faifilter['base'];
     $ldap = $this->config->get_ldap_link();
     $res  = get_list($this->ui->subtreeACL, "(objectClass=organizationalUnit)",FALSE, $base, array("cn","description","objectClass"),TRUE);
     $used = array();
@@ -59,7 +64,9 @@ class askClassName extends plugin
     
         /* Skip profiles */
         if(!in_array("FAIprofile",$object['objectClass'])){
-          $used[$object['cn'][0]]= $object['cn'][0];
+          if(isset($object['cn'])){
+            $used[$object['cn'][0]]= $object['cn'][0];
+          }
         }
       }
     }

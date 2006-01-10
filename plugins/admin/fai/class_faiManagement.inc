@@ -72,7 +72,7 @@ class faiManagement extends plugin
 		if (!is_global("faifilter")){
 			$base	= get_base_from_people($ui->dn);
 			$faifilter= array("base" => $base,
-					"regex" => "*");
+					"regex" => "*","branch" => "main");
 			$faifilter['ShowProfiles'] 	= true;
 			$faifilter['ShowTemplates'] = true;
 			$faifilter['ShowScripts'] 	= true;
@@ -113,6 +113,12 @@ class faiManagement extends plugin
 				}
 			}
 		}
+
+    if((isset($_POST['select_branch']))&&(!empty($_POST['select_branch']))){
+      $faifilter['branch'] = $_POST['select_branch'];
+    }
+    
+    $smarty->assign("select_branch",$_SESSION['faifilter']['branch']);
 
 		/* Check ImageButton posts
 		 * Create new tab ich new_xx is posted
@@ -311,18 +317,14 @@ class faiManagement extends plugin
      
       if($is_ok){
         /* Create it know */
-
         $ldap = $this->config->get_ldap_link();
-        
-//        $ldap->cd ("ou=".$name.",".$base);
-//        $ldap->recursive_remove();
+
+        $ldap->cd ("ou=".$name.",".$base);
+        $ldap->recursive_remove();
         
         $ldap->cd ($this->config->current['BASE']);
-        $ldap->copy_recursive($base,"ou=".$name.",".$base);
-
+        $ldap->copy_FAI_resource_recursive($base,"ou=".$name.",".$base,"branch",true);
         
-        
-        print "created new branch .... bla";
         $this->dispNewBranch = false; 
       }
     }
@@ -623,8 +625,7 @@ class faiManagement extends plugin
 			$divlist->AddEntry( array($field0,$field1,$field2,$field3));
 
 		}
-
-
+    
 		/* Attach objects */
 		foreach($this->objects as $key => $value){
 				$info= "";
@@ -694,10 +695,16 @@ class faiManagement extends plugin
 						$desc= "";
 					}
 
+          if($value['FAIstate'] == "branch"){
+            $acti = "";
+          }else{
+            $acti = $action;
+          }
+
 					$field1 = array("string" => $img , "attach" => "style='text-align:center;width:20px;'");
 					$field2 = array("string" => preg_replace(array("/%KEY%/","/%NAME%/"),array($key,$value['cn'].$desc),$editlink) , "attach" => "style=''");
 					$field3 = array("string" => $info, "attach" => "style='width:200px;'");
-					$field4 = array("string" => preg_replace("/%KEY%/",$key,$action) , "attach" => "style='width:60px;border-right:0px;text-align:right;'");
+					$field4 = array("string" => preg_replace("/%KEY%/",$key,$acti) , "attach" => "style='width:60px;border-right:0px;text-align:right;'");
 					$divlist->AddEntry(array($field1,$field2,$field3,$field4));
 
 			}
@@ -713,8 +720,8 @@ class faiManagement extends plugin
 
 		/* Assign all reguired vars to template engine */
 
-    $smarty->assign("branchKeys",array());
-    $smarty->assign("branches",array());
+    $smarty->assign("branchKeys",array_flip($this->getBranches()));
+    $smarty->assign("branches",$this->getBranches());
     
 		$smarty->assign("faihead"		, $faihead);	
 		$smarty->assign("failist"		, $divlist->DrawList());
@@ -732,15 +739,23 @@ class faiManagement extends plugin
 
   function getBranches()
   {
+    $ret = array("main"=>_("main"));
     $ldap = $this->config->get_ldap_link();
   
     $ldap->cd($this->config->current['BASE']);
 
-    $ldap->search("(objectClass=FAIbranch)",array("FAIstate","cn","ou"));
+    $faifilter = $_SESSION['faifilter'];
+		$base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
+    $ldap->cd($base);
+    $ldap->search("(objectClass=FAIbranch)",array("*"));
 
     while($attrs = $ldap->fetch()){
-      print_a($attrs);
+      if(isset($attrs['ou'])){
+        $ou = $attrs['ou'][0];
+        $ret[$ou]=$ou;
+      }
     }
+    return($ret);
   }
 
 	function reload()
@@ -754,6 +769,11 @@ class faiManagement extends plugin
 
 		/* Set base for all searches */
 		$base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
+
+    if($faifilter['branch'] !="main"){
+      $base = "ou=".$faifilter['branch'].",".$base;
+    }
+   
 		$regex = $faifilter['regex'];	
 
 		/* Array to save objects */
@@ -793,7 +813,7 @@ class faiManagement extends plugin
 
 		foreach($res as $objecttypes){
 			$res2 = get_list($this->ui->subtreeACL, "(&(objectClass=*)(cn=".$regex."))",
-					FALSE, $objecttypes['dn'], array("cn","description","objectClass","FAIclass"),TRUE);
+					FALSE, $objecttypes['dn'], array("cn","description","objectClass","FAIclass","FAIstate"),TRUE);
 			foreach($res2 as $object){
 				$type= "";	
 				unset($object['objectClass']['count']);
@@ -806,6 +826,12 @@ class faiManagement extends plugin
 				$obj['dn'] 			= $object['dn'];
 				$obj['description'] = $object['description'][0];
 				$obj['objectClass'] = $object['objectClass'];
+
+        if(isset($object['FAIstate'])){
+          $obj['FAIstate'] = $object['FAIstate'][0];
+        }else{
+          $obj['FAIstate'] ="";
+        }
 
 				if(in_array("FAIpartitionTable",$obj['objectClass'])){
 					$type = "FAIpartitionTable";
