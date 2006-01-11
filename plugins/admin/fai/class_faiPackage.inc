@@ -179,7 +179,11 @@ class faiPackage extends plugin
 
     /* Delte selected package */ 
     if(isset($_POST['Delpkg'])){
-      unset($this->usedPackages[$_POST['usedPackages']]);
+      foreach($_POST['usedPackages'] as $del){
+        if(isset($this->usedPackages[$del])){
+          unset($this->usedPackages[$del]);
+        }
+      }
     }
 
     /* Abort package selection dialog */ 
@@ -208,11 +212,13 @@ class faiPackage extends plugin
     if((isset($_POST['Conpkg']))&&(isset($_POST['usedPackages']))&&(!empty($_POST['usedPackages']))){
       $path = "/etc/gosa/fai/".$this->FAIdebianRelease."/debconf.d";
       $pkg_config = array();
-      if(isset($this->ConfiguredPackages[$_POST['usedPackages']])){
-        $pkg_config = $this->ConfiguredPackages[$_POST['usedPackages']];
+      $pkg = $_POST['usedPackages'][0];
+      
+      if(isset($this->ConfiguredPackages[$pkg])){
+        $pkg_config = $this->ConfiguredPackages[$pkg];
       }
   
-      $this->dialog = new faiPackageConfiguration($this->config, $this->dn,$_POST['usedPackages'], $path, $pkg_config);
+      $this->dialog = new faiPackageConfiguration($this->config, $this->dn,$pkg, $path, $pkg_config);
       $this->is_dialog =true;
     }
   
