@@ -775,8 +775,10 @@ class faiManagement extends plugin
 
 		/* Assign all reguired vars to template engine */
 
-    $smarty->assign("branchKeys",array_flip($this->getBranches()));
-    $smarty->assign("branches",$this->getBranches());
+    $branches = $this->getBranches();
+    asort($branches);
+    $smarty->assign("branchKeys",array_flip($branches));
+    $smarty->assign("branches",$branches);
     
 		$smarty->assign("faihead"		, $faihead);	
 		$smarty->assign("failist"		, $divlist->DrawList());
