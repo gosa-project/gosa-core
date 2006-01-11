@@ -20,7 +20,7 @@ class workstartup extends plugin
   var $FAIclass             = array();
   var $FAIclasses           = array();
   var $FAIclassInfo         = array();
-  var $FAIdebianMirror      = array();
+  var $FAIdebianMirror      = "auto";
 
 
   /* attribute list for save action */
@@ -68,9 +68,10 @@ class workstartup extends plugin
           }
         }
       }
-    } 
+    }
+    ksort($ret);
     $this->FAIdebianMirrors = $ret;
- 
+
     /* Get arrays */
     foreach (array("gotoModules", "gotoAutoFs", "gotoFilesystem") as $val){
       if (isset($this->attrs["$val"]["count"])){
@@ -462,6 +463,7 @@ class workstartup extends plugin
   function getFAIdebianMirrors()
   {
     $ret = array();
+    $ret['auto']=_("automatic");
     $secs  = array();
     if(is_array($this->FAIclass)){
       foreach($this->FAIclass as $classes){
@@ -490,7 +492,6 @@ class workstartup extends plugin
         }
       }
     }
-    $ret['auto']=_("automatic");
     return($ret);
   }
 
