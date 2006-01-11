@@ -101,17 +101,22 @@ class faiScript extends plugin
 
     /* Edit selected Sub Object */
     if((isset($_POST['EditSubObject']))&&(isset($_POST['SubObject']))){
-      $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$_POST['SubObject']]);
-      $_SESSION['objectinfo'] = $this->SubObjects[$_POST['SubObject']]['dn'];
+      $script = $_POST['SubObject'][0];
+    
+      $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$script]);
+      $_SESSION['objectinfo'] = $this->SubObjects[$script]['dn'];
       $this->is_dialog=true;
     }
     
     /* Remove Sub object */
     if((isset($_POST['DelSubObject']))&&(isset($_POST['SubObject']))){
-      if($this->SubObjects[$_POST['SubObject']]['status'] == "edited"){
-        $this->SubObjects[$_POST['SubObject']]['status']= "delete";
-      }else{
-        unset($this->SubObjects[$_POST['SubObject']]);
+
+      foreach($_POST['SubObject'] as $script){
+        if($this->SubObjects[$script]['status'] == "edited"){
+          $this->SubObjects[$script]['status']= "delete";
+        }else{
+          unset($this->SubObjects[$script]);
+        }
       }
     }
 

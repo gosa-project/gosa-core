@@ -37,7 +37,7 @@
 				<table width="100%" summary="">
 				<tr>
 					<td>
-						<select name="SubObject" title="{t}Choose a script to delete or edit{/t}" style="width:100%;" size="20" id="SubObject">
+						<select name="SubObject[]" title="{t}Choose a script to delete or edit{/t}" style="width:100%;" size="20" id="SubObject" multiple>
 							{html_options values=$SubObjectKeys output=$SubObjects}
 						</select><br>
 						<input type="submit" name="AddSubObject"     value="{t}Add{/t}"		title="{t}Add{/t}">
