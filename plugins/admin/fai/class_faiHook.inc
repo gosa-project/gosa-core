@@ -112,18 +112,22 @@ class faiHook extends plugin
     }
     /* Edit selected Sub Object */
     if((isset($_POST['EditSubObject']))&&(isset($_POST['SubObject']))){
-      $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$_POST['SubObject']]);
+      $hook = $_POST['SubObject'][0];
+    
+      $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$hook]);
       $this->dialog->parent = &$this;
-      $_SESSION['objectinfo'] = $this->SubObjects[$_POST['SubObject']]['dn'];
+      $_SESSION['objectinfo'] = $this->SubObjects[$hook]['dn'];
       $this->is_dialog=true;
     }
     
     /* Remove Sub object */
     if((isset($_POST['DelSubObject']))&&(isset($_POST['SubObject']))){
-      if($this->SubObjects[$_POST['SubObject']]['status'] == "edited"){
-        $this->SubObjects[$_POST['SubObject']]['status']= "delete";
-      }else{
-        unset($this->SubObjects[$_POST['SubObject']]);
+      foreach($_POST['SubObject'] as $hook){
+        if($this->SubObjects[$hook]['status'] == "edited"){
+          $this->SubObjects[$hook]['status']= "delete";
+        }else{
+          unset($this->SubObjects[$hook]);
+        }
       }
     }
 
@@ -203,7 +207,6 @@ class faiHook extends plugin
         $smarty->assign($attrs,($this->$attrs));
       }
     }
-
 
     $display.= $smarty->fetch(get_template_path('faiHook.tpl', TRUE));
     return($display);
