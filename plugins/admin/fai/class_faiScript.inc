@@ -76,7 +76,6 @@ class faiScript extends plugin
         $this->SubObjects[$object['cn'][0]]['status']      = "edited";
         $this->SubObjects[$object['cn'][0]]['dn']          = $object['dn'];
       }
-      ksort($this->SubObjects);
     }
   }
 
@@ -142,8 +141,18 @@ class faiScript extends plugin
         unset($this->dialog);
         $this->dialog=NULL;
       }
-    ksort($this->SubObjects);
     }
+
+    /* Sort entries */
+    $tmp = $keys = array();
+    foreach($this->SubObjects as $key => $entry){
+      $keys[$key]=$key;
+    }
+    natcasesort($keys);
+    foreach($keys as $key){
+      $tmp[$key]=$this->SubObjects[$key];
+    }
+    $this->SubObjects = $tmp;
 
     /* Cancel Dialog */
     if(isset($_POST['CancelSubObject'])){
