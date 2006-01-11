@@ -25,7 +25,7 @@ class workgeneric extends plugin
   var $ghGfxAdapter= "-";
   var $ghSoundAdapter= "-";
   var $gotoLastUser= "-";
-
+  var $FAIscript="";
   var $didAction= FALSE;
 
   /* Needed values and lists */
@@ -42,8 +42,8 @@ class workgeneric extends plugin
   var $attributes= array("gotoMode", "macAddress", "gotoSyslogServer", "gotoNtpServer",
       "gotoFloppyEnable", "gotoCdromEnable", "cn", "gotoSndModule",
       "ghCpuType", "ghMemSize", "ghUsbSupport", "ipHostNumber",
-      "ghGfxAdapter", "ghSoundAdapter", "gotoLastUser", "l");
-  var $objectclasses= array("top", "gotoWorkstation", "GOhard");
+      "ghGfxAdapter", "ghSoundAdapter", "gotoLastUser", "l","FAIscript");
+  var $objectclasses= array("top", "gotoWorkstation", "GOhard","FAIobject");
 
   function workgeneric ($config, $dn= NULL)
   {
