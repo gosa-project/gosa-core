@@ -95,17 +95,22 @@ class faiVariable extends plugin
 
     /* Edit selected Sub Object */
     if((isset($_POST['EditSubObject']))&&(isset($_POST['SubObject']))){
-      $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$_POST['SubObject']]);
-      $_SESSION['objectinfo'] = $this->SubObjects[$_POST['SubObject']]['dn'];
+
+      $var = $_POST['SubObject'][0];
+    
+      $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$var]);
+      $_SESSION['objectinfo'] = $this->SubObjects[$var]['dn'];
       $this->is_dialog=true;
     }
     
     /* Remove Sub object */
     if((isset($_POST['DelSubObject']))&&(isset($_POST['SubObject']))){
-      if($this->SubObjects[$_POST['SubObject']]['status'] == "edited"){
-        $this->SubObjects[$_POST['SubObject']]['status']= "delete";
-      }else{
-        unset($this->SubObjects[$_POST['SubObject']]);
+      foreach($_POST['SubObject'] as $var){
+        if($this->SubObjects[$var]['status'] == "edited"){
+          $this->SubObjects[$var]['status']= "delete";
+        }else{
+          unset($this->SubObjects[$var]);
+        }
       }
     }
 
