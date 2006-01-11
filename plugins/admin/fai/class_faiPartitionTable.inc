@@ -107,13 +107,16 @@ class faiPartitionTable extends plugin
 
     if((isset($_POST['EditDisk']))&&(isset($_POST['disks']))){
       $usedDiskNames =array();
+
+      $Udisk = $_POST['disks'][0];
+      
       foreach($this->disks  as $key=>$disk){
-        if($key != $_POST['disks']){
+        if($key != $Udisk){
           $usedDiskNames[]= $key;
         }
       }
-      $this->dialog = new faiPartitionTableEntry($this->config,$this->dn,$usedDiskNames,$this->disks[$_POST['disks']]); 
-      $_SESSION['objectinfo'] = $this->disks[$_POST['disks']]['dn'];
+      $this->dialog = new faiPartitionTableEntry($this->config,$this->dn,$usedDiskNames,$this->disks[$Udisk]); 
+      $_SESSION['objectinfo'] = $this->disks[$Udisk]['dn'];
       $this->is_dialog = true;
     }
 
@@ -165,21 +168,23 @@ class faiPartitionTable extends plugin
      * Assign delete status for all its partitions      
      */
     if((isset($_POST['DelDisk']))&&(!empty($_POST['disks']))){
-      $disk = $_POST['disks'];
-      if($this->disks[$disk]['status']=="edited"){
-        $this->disks[$disk."-delete"]=$this->disks[$disk];
-        unset($this->disks[$disk]);
-        $disk = $disk."-delete";        
-        $this->disks[$disk]['status']="delete";
-        foreach($this->disks[$disk]['partitions'] as $name => $value ){
-          if($value['status']=="edited"){
-            $this->disks[$disk]['partitions'][$name]['status']="delete"; 
-          }else{
-            unset($this->disks[$disk]['partitions'][$name]);
+
+      foreach($_POST['disks'] as $disk) {
+        if($this->disks[$disk]['status']=="edited"){
+          $this->disks[$disk."-delete"]=$this->disks[$disk];
+          unset($this->disks[$disk]);
+          $disk = $disk."-delete";        
+          $this->disks[$disk]['status']="delete";
+          foreach($this->disks[$disk]['partitions'] as $name => $value ){
+            if($value['status']=="edited"){
+              $this->disks[$disk]['partitions'][$name]['status']="delete"; 
+            }else{
+              unset($this->disks[$disk]['partitions'][$name]);
+            }
           }
+        }else{
+          unset($this->disks[$disk]);
         }
-      }else{
-        unset($this->disks[$disk]);
       }
     }
 
