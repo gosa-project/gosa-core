@@ -476,8 +476,6 @@ class LDAP{
             $this->copy_FAI_resource_recursive($dn,str_replace($sourcedn,$destinationdn,$dn),$type);
           } 
         }
-      //  $this->cd($basedn);
-      //  $this->copy_recursive($dn,preg_replace("/".$sourcedn."/i",$destinationdn,$dn),$filter);
       }
     }
   }
