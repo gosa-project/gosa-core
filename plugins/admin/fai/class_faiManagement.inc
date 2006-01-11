@@ -93,13 +93,18 @@ class faiManagement extends plugin
 
 		$display 	= "";
 		$smarty 	= get_smarty();
-		$s_action	= "";
+		$smarty->assign("BranchName","");
+    $s_action	= "";
 		$s_entry 	= "";
 		/* filter management 
 		 * Filter will be changed if POST['regex'] or $_GET['search'] isset
 		 * New Filter will be stored in session and is used to generate list contents
 		 */	
 		$faifilter = $_SESSION['faifilter'];
+    
+    if((isset($_POST['select_branch']))&&(!empty($_POST['select_branch']))){
+      $faifilter['branch'] = $_POST['select_branch'];
+    }
 
 		/* Filter is posted by apply button 
 		 * Check every single chkbox 
@@ -115,11 +120,6 @@ class faiManagement extends plugin
 			}
 		}
 
-    if((isset($_POST['select_branch']))&&(!empty($_POST['select_branch']))){
-      $faifilter['branch'] = $_POST['select_branch'];
-    }
-    
-    $smarty->assign("select_branch",$_SESSION['faifilter']['branch']);
 
 		/* Check ImageButton posts
 		 * Create new tab ich new_xx is posted
@@ -154,16 +154,19 @@ class faiManagement extends plugin
 			}elseif(preg_match("/^entry_delete_.*/",$key)){
 				$s_entry = preg_replace("/^entry_delete_/","",$key);
 				$s_entry = preg_replace("/_.*$/","",$s_entry);
-				$s_action = "delete";
-			}elseif(preg_match("/dep_back.*/i",$key)){
-                $s_action="back";
-            }elseif(preg_match("/dep_home.*/i",$key)){
-                $s_action="home";
-            }elseif(preg_match("/dep_root.*/i",$key)){
-                $s_action="root";
-			}
+        $s_action = "delete";
+      }elseif(preg_match("/dep_back.*/i",$key)){
+        $faifilter['branch'] = "main";
+        $s_action="back";
+      }elseif(preg_match("/dep_home.*/i",$key)){
+        $faifilter['branch'] = "main";
+        $s_action="home";
+      }elseif(preg_match("/dep_root.*/i",$key)){
+        $faifilter['branch'] = "main";
+        $s_action="root";
+      }
 
-		}
+    }
 
 		if($s_action=="root"){
 			$faifilter['base']=($this->config->current['BASE']);
@@ -297,23 +300,24 @@ class faiManagement extends plugin
 
     /* Create new branch */
     if((isset($_POST['UseBranchName']))&&($this->dispNewBranch)){
-      
+     
       /* Check branch name */
       $name = $_POST['BranchName'];
       $is_ok = true;
 
+      $smarty->assign("BranchName",$name);
 		  $base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
       
       /* Check used characters */
-      if(preg_match("/[^0-9a-z]/i",$name)){
+      if(preg_match("/[^0-9a-z \ö\ä\ü\.-_:,]/i",$name)){
         print_red(_("Specified branch name is invalid."));
         $is_ok = false;
       }
    
       /* Check if this name is already in use */
-      if(!$this->CheckNewBranchName($_POST['BranchName'])){
+      if(!$this->CheckNewBranchName($_POST['BranchName'],$faifilter['branch'])){
         print_red(_("This name is already in use."));
-        $this->is_ok = false;
+        $is_ok = false;
       }
      
       if($is_ok){
@@ -338,6 +342,7 @@ class faiManagement extends plugin
     /* Abort creating new branch */
     if(isset($_POST['CancelBranchName'])){
       $this->dispNewBranch = false;
+      $this->dispNewFreeze = false;
     }
 
     /* Open dialog to insert new branch name */
@@ -350,13 +355,13 @@ class faiManagement extends plugin
 
     /* Remove branch */
     if($s_action == "remove_branch"){
-      $base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
+      $base= $faifilter['branch'];
       /* Load permissions for selected 'dn' and check if
          we're allowed to remove this 'dn' */
-      $acl= get_permissions ($base, $this->ui->subtreeACL);
+      $acl= get_permissions ($faifilter['base'], $this->ui->subtreeACL);
       $this->acl= get_module_permission($acl, "fai", $base);
       if (chkacl($this->acl, "delete") == ""){
-        $smarty->assign("warning", sprintf(_("You're about to delete a fai branch / freeze  '%s'."), $base));
+        $smarty->assign("info", sprintf(_("You're about to delete a fai branch / freeze  '%s'."), $faifilter['branch']));
         return($smarty->fetch(get_template_path('remove_branch.tpl',TRUE)));
       } else {
         print_red (_("You are not allowed to delete this user!"));
@@ -365,32 +370,40 @@ class faiManagement extends plugin
 
     /* Delete this entry */
     if(isset($_POST['delete_branch_confirm'])){
-      print "branch removed ";
+      $bb =  $faifilter['branch'];
+      if(!isset($ldap)){
+        $ldap = $this->config->get_ldap_link();
+      }
+
+      $br = $this->getBranches();
+
+      if(isset($br[$bb])){
+        $ldap->cd($bb);
+        $ldap->recursive_remove();
+        $faifilter['branch'] = "main";
+      }
     }
 
-    if($s_action == "freeze_branch"){
-      $this->dispNewFreeze = true;
-		  $display 	.= $smarty->fetch(get_template_path('faiNewBranch.tpl', TRUE, dirname(__FILE__)));
-      return($display);
-    }
 
     if((isset($_POST['UseBranchName']))&&($this->dispNewFreeze)){
       /* Check branch name */
       $name = $_POST['BranchName'];
       $is_ok = true;
 
+      $smarty->assign("BranchName",$name);
+
 		  $base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
       
       /* Check used characters */
-      if(preg_match("/[^0-9a-z]/i",$name)){
+      if(preg_match("/[^0-9a-z \ö\ä\ü\.-_:,]/i",$name)){
         print_red(_("Specified branch name is invalid."));
         $is_ok = false;
       }
    
       /* Check if this name is already in use */
-      if(!$this->CheckNewBranchName($_POST['BranchName'])){
+      if(!$this->CheckNewBranchName($_POST['BranchName'],$faifilter['branch'])){
         print_red(_("This name is already in use."));
-        $this->is_ok = false;
+        $is_ok = false;
       }
      
       if($is_ok){
@@ -412,6 +425,11 @@ class faiManagement extends plugin
       }
     }
     
+    if(($s_action == "freeze_branch")||($this->dispNewFreeze)){
+      $this->dispNewFreeze = true;
+		  $display 	.= $smarty->fetch(get_template_path('faiNewBranch.tpl', TRUE, dirname(__FILE__)));
+      return($display);
+    }
 
     /* ENDE Branch handling 
      */
@@ -484,6 +502,14 @@ class faiManagement extends plugin
 		if((isset($_POST['base']))&&($s_action=="")){
 			$faifilter['base']=$_POST['base'];
 		}
+  
+
+    $br = $this->getBranches();
+    if(!isset($br[$faifilter['branch']])){
+      $faifilter['branch'] = "main";
+    }
+   
+    $smarty->assign("select_branch",$faifilter['branch']);
 
 		/* remove double asterisks and save new filter */
 		$faifilter['regex'] = preg_replace("/\*\*/","*",$faifilter['regex']);
@@ -756,6 +782,7 @@ class faiManagement extends plugin
 		$smarty->assign("failist"		, $divlist->DrawList());
 		$smarty->assign("regex"			, $faifilter['regex']);	
 		$smarty->assign("infoimage"		, get_template_path('images/info.png'));
+		$smarty->assign("branchimage"		, get_template_path('images/action.png'));
 		$smarty->assign("launchimage"	, get_template_path('images/launch.png'));
 		$smarty->assign("alphabet"		, generate_alphabet());
 		$smarty->assign("apply"			, apply_filter());
@@ -933,8 +960,18 @@ class faiManagement extends plugin
 		}
 	}
 
-  function CheckNewBranchName($name){
-    if(in_array($name,$this->getBranches())) {
+  function CheckNewBranchName($name,$base){
+    $f = $_SESSION['faifilter']['branch'];
+
+    if($f == "main"){
+      $f = $_SESSION['faifilter']['base'];
+    } 
+    
+    if(in_array($name,$this->getBranches($f))) {
+      return(false);
+    }
+
+    if(empty($name)){
       return(false);
     }
     return(true);

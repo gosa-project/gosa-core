@@ -22,7 +22,7 @@
    </tr>
    <tr>
      <td>
-      {t}Branch name{/t}&nbsp;<input type="text"	 name="BranchName" value="" style="width:120px;">
+      {t}Branch name{/t}&nbsp;<input type="text"	 name="BranchName" value="{$BranchName}" style="width:120px;">
      </td>
     </tr>
    </table>

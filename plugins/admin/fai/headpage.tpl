@@ -26,21 +26,26 @@
    </div>
    <br>
    <div class="contentboxh">
-    <p class="contentboxh"><img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}</p>
+    <p class="contentboxh"><img src="{$branchimage}" align="right" alt="[F]">{t}Branches{/t}</p>
    </div>
    <div class="contentboxb" style="padding:3px;">
-   	
+   	{t}Selected branch{/t}&nbsp;
 	<select name="select_branch" onChange="document.mainform.submit();">
 		{html_options values=$branchKeys output=$branches selected=$select_branch}
 	</select>
+	{if $select_branch != "main"}
 	<br>
 	{t}Delete this branch.{/t}
+	&nbsp;
 	<input type="image" value="delete" name="remove_branch" src="images/edittrash.png"> 
+	{/if}	
 	<br>
 	{t}Create a new branch{/t}
+	&nbsp;
 	<input type="image" value="delete" name="branch_branch" src="images/crossref.png">
 	<br>
 	{t}Freeze this{/t}
+	&nbsp;
 	<input type="image" value="delete" name="freeze_branch" src="images/flag.png">
    </div>
    <br>
