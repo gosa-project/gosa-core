@@ -397,7 +397,7 @@ class sieve
         return false;
     $this->script=stripslashes($script);
     $len=strlen($this->script);
-    fputs($this->fp, "PUTSCRIPT \"$scriptname\" \{$len+}\r\n");
+    fputs($this->fp, "PUTSCRIPT \"$scriptname\" {".$len."+}\r\n");
     fputs($this->fp, "$this->script\r\n");
   
     return sieve::get_response();
