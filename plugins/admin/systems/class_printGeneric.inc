@@ -358,12 +358,18 @@ class printgeneric extends plugin
     require_once ("class_ppdManager.inc");
 
     if((isset($_SESSION['config']->data['MAIN']['PPD_PATH']))&&(is_dir($_SESSION['config']->data['MAIN']['PPD_PATH']))){
-      $ppdManager= new ppdManager($_SESSION['config']->data['MAIN']['PPD_PATH']);
+
+      $path = $_SESSION['config']->data['MAIN']['PPD_PATH'];
+      if(!preg_match("/\/$/",$path)){
+        $path = $path."/";
+      }
+
+      $ppdManager= new ppdManager($path);
       if(!empty($this->gotoPrinterPPD)){
-        if((!file_exists($_SESSION['config']->data['MAIN']['PPD_PATH'].$this->gotoPrinterPPD))){
+        if((!file_exists($path.$this->gotoPrinterPPD))){
           $smarty->assign("driverInfo", "<b>".sprintf(_("Your currently selected PPD file '%s' doesn't exist."),$this->gotoPrinterPPD))."</b>";
         }else{
-          $smarty->assign("driverInfo", $ppdManager->loadDescription($_SESSION['config']->data['MAIN']['PPD_PATH'].$this->gotoPrinterPPD));
+          $smarty->assign("driverInfo", $ppdManager->loadDescription($path.$this->gotoPrinterPPD));
         }
       }else{
         $smarty->assign("driverInfo", _("not defined"));

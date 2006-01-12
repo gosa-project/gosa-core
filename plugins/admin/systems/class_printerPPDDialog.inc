@@ -31,6 +31,9 @@ class printerPPDDialog extends plugin
     if(isset($_SESSION['config']->data['MAIN']['PPD_PATH'])){
       $this->pathToPPD = $_SESSION['config']->data['MAIN']['PPD_PATH'];
       $this->pathToPPD= preg_replace("/\/\//", "/", $this->pathToPPD);
+      if(!preg_match("/\/$/",$this->pathToPPD)){
+        $this->pathToPPD = $this->pathToPPD."/";
+      }
     }else{
       $this->pathToPPD = "";
     }
