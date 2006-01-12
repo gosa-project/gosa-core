@@ -415,7 +415,6 @@ class LDAP{
             
             /* Add this entry */
             $this->modify($attr);
-            //echo $this->error;
           }
           
         }else{
@@ -446,7 +445,6 @@ class LDAP{
           if(!count($a)){
             $this->add($attr);
           }
-          //echo $this->error;
 
           if($this->error != "Success"){
             /* Some error occured */
