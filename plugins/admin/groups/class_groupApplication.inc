@@ -572,7 +572,7 @@ class appgroup extends plugin
       for($i = 0 ; $i < ($cnt -1 ) ; $i++){
         $bbk .= $tmp[$i];
       }
-      $div2 ->AddEntry(array(array("string"=>sprintf($linkopen,$bbk,"..")),array("string"=>"&nbsp;","attach"=>"style='border-right:0px;'")));
+      $div2 ->AddEntry(array(array("string"=>sprintf($linkopen,base64_encode($bbk),"..")),array("string"=>"&nbsp;","attach"=>"style='border-right:0px;'")));
     }
 
     $this->GetSubdirs($this->curCatDir);
