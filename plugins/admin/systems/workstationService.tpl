@@ -118,7 +118,13 @@
    <table summary="">
     <tr>
      <td>{t}Type{/t}</td>
-     <td>{$gotoXMonitor}</td>
+     <td>{if $gotoXMonitor==""}{t}unknown{/t}{/if}{$gotoXMonitor}</td>
+    </tr>
+    <tr>
+    	<td><input type="checkbox" name="AutoSync" value="1" {$AutoSyncACL} {$AutoSyncCHK}>
+	</td>
+	<td>{t}Automatic modelines{/t}
+	</td>
     </tr>
     <tr>
      <td><LABEL for="gotoXHsync">{t}HSync{/t}</LABEL></td>
