@@ -484,7 +484,7 @@ class sieve
             $auth=base64_encode("$this->user\0$this->auth\0$this->pass");
    
             $this->len=strlen($auth);			
-            fputs($this->fp, "AUTHENTICATE \"PLAIN\" {$this->len+}\r\n");
+            fputs($this->fp, "AUTHENTICATE \"PLAIN\" {".$this->len."+}\r\n");
             fputs($this->fp, "$auth\r\n");
 
             $this->line=fgets($this->fp,1024);		
