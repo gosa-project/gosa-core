@@ -79,7 +79,7 @@ class faiPackage extends plugin
   
     $ldap = $this->config->get_ldap_link();
     foreach($this->usedPackages as $name){
-      $ldap->search("(&(objectClass=FAIdebconfInfo)(FAIpackage=".$name."))");
+      $ldap->search("(&(objectClass=FAIdebconfInfo)(FAIpackage=".$name."))",array("FAIvariable","FAIvariableType","FAIvariableContent","FAIpackage","FAIdebianSection",""));
       while($attr = $ldap->fetch()){
      
         $tmp =array(); 
