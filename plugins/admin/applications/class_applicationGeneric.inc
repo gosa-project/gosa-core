@@ -322,7 +322,7 @@ class application extends plugin
 	/* Check for existing application */
 	$ldap= $this->config->get_ldap_link();
 	$ldap->cd($this->config->current["BASE"]);
-	$ldap->search("(&(objectClass=gosaApplication)(cn=$this->cn))");
+	$ldap->search("(&(objectClass=gosaApplication)(cn=$this->cn))",array("cn"));
 	$ldap->fetch();
 	if ($ldap->count() != 0 && $this->dn == "new"){
 		$message[]= _("There's already an application with this 'Name'.");

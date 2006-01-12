@@ -387,7 +387,7 @@ class appgroup extends plugin
         /* We've got the appname, get parameters from ldap */
         $ldap= $this->config->get_ldap_link();
         $ldap->cd($this->config->current['BASE']);
-        $ldap->search("(&(objectClass=gosaApplication)(cn=$appname))");
+        $ldap->search("(&(objectClass=gosaApplication)(cn=$appname))",array("gosaApplicationParameter"));
         if ($ldap->count() != 1){
           print_red (_("The selected application name is not uniq. Please check your LDAP."));
         } else {

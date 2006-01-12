@@ -93,7 +93,7 @@ class group extends plugin
       $this->SID= preg_replace ("/-[^-]+$/", "", $this->sambaSID);
       $ldap= $this->config->get_ldap_link();
       $ldap->cd($this->config->current['BASE']);
-      $ldap->search ("(&(objectClass=sambaDomain)(sambaSID=$this->SID))");
+      $ldap->search ("(&(objectClass=sambaDomain)(sambaSID=$this->SID))",array("sambaAlgorithmicRidBase"));
       if ($ldap->count() != 0){
         $attrs= $ldap->fetch();
         $this->ridBase= $attrs['sambaAlgorithmicRidBase'][0];
@@ -521,7 +521,7 @@ class group extends plugin
           while(TRUE){
             $sid= $this->SID."-".($gidNumber*2 + $this->ridBase+1);
             $ldap->cd($this->config->current['BASE']);
-            $ldap->search("(sambaSID=$sid)");
+            $ldap->search("(sambaSID=$sid)",array("sambaSID"));
             if ($ldap->count() == 0){
               break;
             }
@@ -635,7 +635,7 @@ class group extends plugin
     /* Check for used 'cn' */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(&(|(objectClass=gosaGroupOfNames)(objectClass=posixGroup))(cn=$this->cn))");
+    $ldap->search("(&(|(objectClass=gosaGroupOfNames)(objectClass=posixGroup))(cn=$this->cn))",array("cn"));
     if ($ldap->count() != 0){
 
       /* New entry? */
@@ -673,7 +673,7 @@ class group extends plugin
     $ldap= $this->config->get_ldap_link();
 
     $ldap->cd ($this->config->current['BASE']);
-    $ldap->search ("($attrib=*)");
+    $ldap->search ("($attrib=*)",array($attrib));
 
     /* Get list of ids */
     while ($attrs= $ldap->fetch()){

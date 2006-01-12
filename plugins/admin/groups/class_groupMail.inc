@@ -625,8 +625,7 @@ class mailgroup extends plugin
       $message[]= _("Please enter a valid email addres in 'Primary address' field.");
     }
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search ("(&(!(objectClass=gosaUserTemplate))(objectClass=gosaMailAccount)(|(mail=".$this->mail.")(gosaMailAlternateAddress=".
-        $this->mail."))(!(uid=".$this->cn."))(!(cn=".$this->cn.")))");
+    $ldap->search ("(&(!(objectClass=gosaUserTemplate))(objectClass=gosaMailAccount)(|(mail=".$this->mail.")(gosaMailAlternateAddress=".$this->mail."))(!(uid=".$this->cn."))(!(cn=".$this->cn.")))",array("uid"));
     if ($ldap->count() != 0){
       $message[]= _("The primary address you've entered is already in use.");
     }
@@ -715,8 +714,7 @@ class mailgroup extends plugin
 
     /* Is this address already assigned in LDAP? */
     $ldap->cd ($this->config->current['BASE']);
-    $ldap->search ("(&(objectClass=gosaMailAccount)(|(mail=$address)".
-        "(gosaMailAlternateAddress=$address)))");
+    $ldap->search ("(&(objectClass=gosaMailAccount)(|(mail=$address)"."(gosaMailAlternateAddress=$address)))",array("uid"));
 
     if ($ldap->count() > 0){
       $attrs= $ldap->fetch ();
