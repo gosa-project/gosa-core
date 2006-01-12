@@ -17,7 +17,7 @@
   		</div>
   	</td>
   	<td style="vertical-align:top;">
-		<div class="contentboxh">
+		<div class="contentboxh" style="border-bottom:1px solid #B0B0B0;">
     		<p class="contentboxh">
 				<img src="{$infoimage}" align="right" alt="[i]">{t}Information{/t}
 			</p>

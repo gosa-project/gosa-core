@@ -66,7 +66,7 @@
   <td style="border-left:1px solid #A0A0A0">
    &nbsp;
   </td>
-   <td style="vertical-align:top;">
+   <td style="vertical-align:top;" >
      <h2><img class="center" alt="" align="middle" src="images/info_small.png"> {t}Information{/t}</h2>
      <p>
       {t}Numbers can also contain wild cards.{/t}
