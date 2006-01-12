@@ -28,25 +28,36 @@
    <div class="contentboxh" style="border-bottom:1px solid #B0B0B0;">
     <p class="contentboxh"><img src="{$branchimage}" align="right" alt="[F]">{t}Branches{/t}</p>
    </div>
-   <div class="contentboxb" style="padding:3px;">
-   	{t}Selected branch{/t}&nbsp;
+   <div class="contentboxb">
+        <table summary="" style="width:100%;border-bottom:1px solid #B0B0B0;">
+	 <tr>
+	  <td>
+   	{t}Current release{/t}&nbsp;
 	<select name="select_branch" onChange="document.mainform.submit();">
 		{html_options values=$branchKeys output=$branches selected=$select_branch}
 	</select>
+	  </td>
+	 </tr>
+        </table>
+        <table summary="" style="width:100%;border-bottom:1px solid #B0B0B0;">
+	 <tr>
+	  <td>
+	<input type="image" align="center" value="branch" name="branch_branch" src="images/branch_small.png">
+	&nbsp;
+	{t}Create new branch using the current release{/t}
+	<br>
+	<input type="image" align="center" value="freeze" name="freeze_branch" src="images/closedlock.png">
+	&nbsp;
+	{t}Create a locked version of the current release{/t}
 	{if $select_branch != "main"}
 	<br>
-	{t}Delete this branch.{/t}
+	<input type="image" align="center" value="delete" name="remove_branch" src="images/edittrash.png"> 
 	&nbsp;
-	<input type="image" value="delete" name="remove_branch" src="images/edittrash.png"> 
+	{t}Delete current release{/t}
 	{/if}	
-	<br>
-	{t}Create a new branch{/t}
-	&nbsp;
-	<input type="image" value="delete" name="branch_branch" src="images/crossref.png">
-	<br>
-	{t}Freeze this{/t}
-	&nbsp;
-	<input type="image" value="delete" name="freeze_branch" src="images/flag.png">
+	  </td>
+	 </tr>
+        </table>
    </div>
    <br>
    <div class="contentboxh">

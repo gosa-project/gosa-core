@@ -786,7 +786,7 @@ class faiManagement extends plugin
 		$smarty->assign("failist"		, $divlist->DrawList());
 		$smarty->assign("regex"			, $faifilter['regex']);	
 		$smarty->assign("infoimage"		, get_template_path('images/info.png'));
-		$smarty->assign("branchimage"		, get_template_path('images/action.png'));
+		$smarty->assign("branchimage"		, get_template_path('images/branch.png'));
 		$smarty->assign("launchimage"	, get_template_path('images/launch.png'));
 		$smarty->assign("alphabet"		, generate_alphabet());
 		$smarty->assign("apply"			, apply_filter());
@@ -799,7 +799,7 @@ class faiManagement extends plugin
 
   function getBranches($base = false,$prefix = "")
   {
-    $ret = array("main"=>_("main"));
+    $ret = array("main"=>"/");
     $ldap = $this->config->get_ldap_link();
   
     $ldap->cd($this->config->current['BASE']);
@@ -817,7 +817,7 @@ class faiManagement extends plugin
       
       if((isset($attrs['ou']))&&($attrs['dn']!=$base)){
         $ret[$attrs['dn']]= $prefix.$attrs['ou'][0];
-        $ret = array_merge($ret,$this->getBranches($attrs['dn'],$prefix.$attrs['ou'][0]."/"));
+        $ret = array_merge($ret,$this->getBranches($attrs['dn'],"".$prefix.$attrs['ou'][0]."/"));
       }
     }
     return($ret);
