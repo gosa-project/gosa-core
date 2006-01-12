@@ -344,10 +344,12 @@ class environment extends plugin
     if($this->acl != "#none#"){
       $smarty->assign("useProfileACL","");
       $smarty->assign("gotoProfileFlag_CACL"," ");
+      $smarty->assign("gotoProfileQuotaACL"," ");
     }else{
       $smarty->assign("gotoProfileFlag_CACL"," disabled ");
       $smarty->assign("useProfileACL","disabled");
       $smarty->assign("gotoProfileServer"," disabled ");
+      $smarty->assign("gotoProfileQuotaACL"," disabled ");
     }
 
     /* HANDLE Profile Settings here 
@@ -637,11 +639,13 @@ class environment extends plugin
     }else{
       $smarty->assign("gotoProfileFlag_CACL"," disabled ");
       $smarty->assign("gotoProfileServerACL"," disabled ");
+      $smarty->assign("gotoProfileQuotaACL"," disabled ");
     }
 
     if(!$this->useProfile){
       $smarty->assign("gotoProfileFlag_CACL"," disabled ");
       $smarty->assign("gotoProfileServerACL"," disabled ");
+      $smarty->assign("gotoProfileQuotaACL"," disabled ");
     }
 
     /* Als smarty vars are set. Get smarty template and generate output */

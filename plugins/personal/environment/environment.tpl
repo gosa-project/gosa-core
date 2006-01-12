@@ -12,7 +12,7 @@
 				<tr>
 					<td style="vertical-align:top">
 						<input class="center" type="checkbox" value="1" {$useProfileCHK} name="useProfile" {$useProfileACL} id="useProfile"
-									onclick="changeState('gotoProfileServer');changeState('gotoProfileFlag_C');">
+									onclick="changeState('gotoProfileServer');changeState('gotoProfileFlag_C');changeState('gotoProfileQuota');">
 					</td>
 					<td style="vertical-align:middle;">
 						<label for="useProfile">{t}Use profile managment{/t}</label>
@@ -42,8 +42,7 @@
 									<br>
 								</td>
 								<td>
-									<input type="text" name="gotoProfileQuota" value="{$gotoProfileQuota}" size="6"
-										{$gotoProfileQuotaACL} id="gotoProfileQuota">{t}MB{/t}
+									<input type="text" name="gotoProfileQuota" value="{$gotoProfileQuota}" size="6"	{$gotoProfileQuotaACL} id="gotoProfileQuota">{t}MB{/t}
 									<br>
 									<br>
 								</td>
