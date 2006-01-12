@@ -533,8 +533,7 @@ class blocklist extends plugin
       if ($this->dn == 'new'){
         $ldap= $this->config->get_ldap_link();
         $ldap->cd ("ou=gofax,ou=systems,".$this->config->current["BASE"]);
-        $ldap->search ("(&(|(objectClass=goFaxSBlock)(objectClass=goFaxRBlock))".
-            "(cn=".$this->cn."))", array("cn"));
+        $ldap->search ("(&(|(objectClass=goFaxSBlock)(objectClass=goFaxRBlock))(cn=".$this->cn."))", array("cn"));
         if ($ldap->count() != 0){
           $message[]= _("Specified name is already used.");
         }
@@ -571,7 +570,7 @@ class blocklist extends plugin
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($ldap->getParentDir($this->dn));
-    $ldap->search("cn=$this->cn");
+    $ldap->search("cn=$this->cn",array("cn"));
     $a= $ldap->fetch();
     if (count($a)){
       if (!isset($this->attrs["$type"."list"])){

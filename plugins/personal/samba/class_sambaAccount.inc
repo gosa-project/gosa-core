@@ -118,7 +118,7 @@ class sambaAccount extends plugin
       $this->SID= preg_replace ("/-[^-]+$/", "", $this->sambaSID);
       $ldap= $this->config->get_ldap_link();
       $ldap->cd($this->config->current['BASE']);
-      $ldap->search ("(&(objectClass=sambaDomain)(sambaSID=$this->SID))");
+      $ldap->search ("(&(objectClass=sambaDomain)(sambaSID=$this->SID))",array("sambaAlgorithmicRidBase","sambaDomainName"));
       if ($ldap->count() != 0){
         $attrs= $ldap->fetch();
         $this->ridBase= $attrs['sambaAlgorithmicRidBase'][0];
@@ -860,8 +860,7 @@ class sambaAccount extends plugin
 
         /* Check for users primary group */
         $ldap->cd($this->config->current['BASE']);
-        $ldap->search("(&(objectClass=posixGroup)(gidNumber=".$this->gidNumber."))",
-                      array("cn"));
+        $ldap->search("(&(objectClass=posixGroup)(gidNumber=".$this->gidNumber."))", array("cn"));
         if ($ldap->count() != 1){
           print_red(_("Warning: Can't identify users primary group - no conversion to a samba group possible!"));
         } else {

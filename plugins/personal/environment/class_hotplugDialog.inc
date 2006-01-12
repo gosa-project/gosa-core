@@ -118,7 +118,7 @@ class hotplugDialog extends plugin
       }
 
     $ldap = $this->config->get_ldap_link();
-    $ldap->search("(&(objectClass=gotoEnvironment)(gotoHotplugDevice=".$this->HOT_name."*))");
+    $ldap->search("(&(objectClass=gotoEnvironment)(gotoHotplugDevice=".$this->HOT_name."*))",array("gotoHotplugDevice"));
     if($ldap->count()){
       $message[]=_("An Entry with this name already exists.");
     }

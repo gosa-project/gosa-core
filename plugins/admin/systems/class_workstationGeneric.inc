@@ -52,7 +52,7 @@ class workgeneric extends plugin
     /* Load available modes */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd ($this->config->current['BASE']);
-    $ldap->search ("(objectClass=gotoInstallProfile)");
+    $ldap->search ("(objectClass=gotoInstallProfile)",array("cn"));
     while ($attrs= $ldap->fetch()){
       $this->modes[]= $attrs["cn"][0];
     }

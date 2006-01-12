@@ -316,11 +316,11 @@ class addressbook extends plugin
 		foreach ($bases as $base){
 			$ldap->cd ($base);
 			if ($phonefilter['object_type'] == '*'){
-				$ldap->search ("(&(objectClass=person)$filter(!(objectClass=gosaUserTemplate))(!(uid=*$))".
+				$ldap->search ("(&(objectClass=person)$filter(!(objectClass=gosaUserTemplate))(!(uid=*$))". //array
 						"(|(uid=$s)(homePhone=$s)(telephoneNumber=$s)".
 						"(facsimileTelephoneNumber=$s)(mobile=$s)(givenName=$s)(sn=$s)))", array("sn", "givenName", "telephoneNumber", "facsimileTelephoneNumber", "mobile", "homePhone", "uid", "mail", "cn"));
 			} else {
-				$ldap->search ("(&$filter(!(uid=*$))(!(objectClass=gosaUserTemplate))".
+				$ldap->search ("(&$filter(!(uid=*$))(!(objectClass=gosaUserTemplate))".                     //array
 						"(".$phonefilter['object_type']."=$s))", array("sn", "givenName", "telephoneNumber", "facsimileTelephoneNumber", "mobile", "homePhone", "uid", "mail", "cn"));
 			}
 

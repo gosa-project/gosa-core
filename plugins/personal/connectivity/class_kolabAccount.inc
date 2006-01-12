@@ -108,7 +108,7 @@ class kolabAccount extends plugin
 
           $ldap= $this->config->get_ldap_link();
           $ldap->cd ($this->config->current['BASE']);
-          $ldap->search('(mail='.$address.')');
+          $ldap->search('(mail='.$address.')',array("mail"));
           if ($ldap->count() == 0){
             print_red (_("The mail address you're trying to add is no primary mail address of an existing user."));
           } else {
@@ -254,7 +254,7 @@ class kolabAccount extends plugin
 
         $ldap= $this->config->get_ldap_link();
         $ldap->cd ($this->config->current['BASE']);
-        $ldap->search('(mail='.$address.')');
+        $ldap->search('(mail='.$address.')',array("mail"));
         if ($ldap->count() == 0){
           $message[]= sprintf(_("There's no mail user with address '%s' for your invitation policy!"), $address);
         } else {
