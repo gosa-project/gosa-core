@@ -36,6 +36,19 @@
 								</td>
 							</tr>
 							<tr>
+								<td>
+									<label for="gotoProfileQuota">{t}Profil quota{/t}</label> 
+									<br>
+									<br>
+								</td>
+								<td>
+									<input type="text" name="gotoProfileQuota" value="{$gotoProfileQuota}" size="6"
+										{$gotoProfileQuotaACL} id="gotoProfileQuota">{t}MB{/t}
+									<br>
+									<br>
+								</td>
+							</tr>
+							<tr>
 								<td colspan=2>	
 									<input class="center" type="checkbox" name="gotoProfileFlag_C" value="C" {$gotoProfileFlag_CCHK}
 										id="gotoProfileFlag_C" {$gotoProfileFlag_CACL}>&nbsp;
@@ -58,19 +71,6 @@
                         {html_options values=$gotoKioskProfileKeys output=$gotoKioskProfiles selected=$gotoKioskProfile}
                         <option disabled>&nbsp;</option></select>&nbsp;
 						<input type="submit" name="KioskManagementDialog" value="{t}Manage{/t}" {$gotoKioskProfileACL}>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="gotoProfileQuota">{t}Quota{/t}</label> 
-						<br>
-						<br>
-					</td>
-					<td>
-						<input type="text" name="gotoProfileQuota" value="{$gotoProfileQuota}" size="6"
-							{$gotoProfileQuotaACL} id="gotoProfileQuota">{t}MB{/t}
-						<br>
-						<br>
 					</td>
 				</tr>
 				<tr>
