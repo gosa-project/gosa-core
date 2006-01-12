@@ -18,14 +18,14 @@
   </div>
   </td>
 		<td style="vertical-align:top;">
-   			<div class="contentboxh" style="height:20px">
+   			<div class="contentboxh" style="height:20px;border-bottom:1px solid #B0B0B0">
     				<p class="contentboxh" style="font-size:12px">
 					<img src="images/info_small.png" align="right" alt="[i]">
 					{t}Information{/t}
 				</p>
 	   		</div>
-   			<div class="contentboxb" style="padding:0px;margin:0px;background:#f8f8f8;">
-   				<p class="contentboxb" style="border-color:#f8f8f8;">
+   			<div class="contentboxb" style="padding:0px;margin:0px;background:#f0f0f0;">
+   				<p class="contentboxb" style="border-color:#f0f0f0;">
      					{t}This menu allows you to create, delete and edit repository settings.{/t}
    				</p>
    			</div>
