@@ -30,7 +30,7 @@ class printerPPDDialog extends plugin
 
     if(isset($_SESSION['config']->data['MAIN']['PPD_PATH'])){
       $this->pathToPPD = $_SESSION['config']->data['MAIN']['PPD_PATH'];
-       $this->pathToPPD= preg_replace("/\/*$/", "/", $this->pathToPPD);
+      $this->pathToPPD= preg_replace("/\/\//", "/", $this->pathToPPD);
     }else{
       $this->pathToPPD = "";
     }
@@ -151,8 +151,6 @@ class printerPPDDialog extends plugin
                   $tmp3['link']   =$ppdname;
                   $tmp3['ppd']    =$res;
 
-                  print_a($tmp3);
-
                   $this->selectedPPD = $tmp3;
                   $this->getPrinterReload(); 
                 }
@@ -204,11 +202,14 @@ class printerPPDDialog extends plugin
               $hit = true;
             }
           }
-        } 
-        $this->selectedPPD['link'] = $_GET['id'];
-        $this->ppdConfig   = false;
+        }
+        if($hit == true){
+          $this->selectedPPD['link'] = str_replace($this->pathToPPD,"",$_GET['id']);
+          $this->ppdConfig   = false;
+        }
         unset($this->dialog);
         $this->dialog=NULL;
+        
       }
 
       /* if a dialog is open, print the dialog instead of this class
@@ -257,7 +258,9 @@ class printerPPDDialog extends plugin
   }
 
   function save_ppd(){
-    $this->ppdManager->saveProperties($this->pathToPPD.$this->selectedPPD['link'],$this->ppdConfig);
+    if($this->ppdManager){
+      $this->ppdManager->saveProperties($this->pathToPPD.$this->selectedPPD['link'],$this->ppdConfig);
+    }
   }
 
   /* Save to LDAP */
@@ -274,7 +277,7 @@ class printerPPDDialog extends plugin
      */
     $str = "none";
     if(!empty($this->selectedPPD)){
-      $str = $this->ppdManager->loadDescription($this->pathToPPD.$this->selectedPPD['link']);
+      $str = $this->ppdManager->loadDescription($this->pathToPPD."/".$this->selectedPPD['link']);
     }
     return($str) ; 
   }
