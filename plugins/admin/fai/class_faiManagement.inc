@@ -260,7 +260,6 @@ class faiManagement extends plugin
 				$this->dialog= NULL;
 
 				/* Terminal list has changed, reload it. */
-				$this->reload ();
 			} else {
 
 				/* Normally this shouldn't be reached, send some extra
@@ -329,6 +328,8 @@ class faiManagement extends plugin
           $baseToUse = $_SESSION['faifilter']['branch'];
         }
 
+        $ldap->cd($this->config->current['BASE']);
+        $ldap->create_missing_trees($baseToUse);
         $ldap->cd ("ou=".$name.",".$baseToUse);
         $ldap->recursive_remove();
         
@@ -502,9 +503,10 @@ class faiManagement extends plugin
 		if((isset($_POST['base']))&&($s_action=="")){
 			$faifilter['base']=$_POST['base'];
 		}
-  
 
-    $br = $this->getBranches();
+    $base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
+
+    $br = $this->getBranches($base);
     if(!isset($br[$faifilter['branch']])){
       $faifilter['branch'] = "main";
     }
