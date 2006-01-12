@@ -110,6 +110,12 @@ class servrepository extends plugin
     $once = false;
     foreach($_POST as $name => $value){
 
+      if(preg_match("/AddRepository/",$name)){
+        $once = true;
+        $this->dialog = new servRepositorySetup($this->config,$this->dn);
+        $this->dialog->acl = $this->acl;
+      }
+
       if((preg_match("/^delete_/",$name))&&(!$once)){
 
         $value = preg_replace("/delete_/","",$name);
@@ -142,11 +148,13 @@ class servrepository extends plugin
       $this->dialog = new servRepositorySetup($this->config,$this->dn,$obj);
       $this->dialog->acl = $this->acl;
     }
- 
+
+    /*
     if(isset($_POST['AddRepository'])){
       $this->dialog = new servRepositorySetup($this->config,$this->dn);
       $this->dialog->acl = $this->acl;
     }
+    */
 
     if(isset($_POST['repository_setup_save'])){
       $this->dialog->save_object();
