@@ -164,5 +164,10 @@ $smarty->template_dir = $BASE_DIR.'/ihtml/';
 $smarty->caching= false;
 $smarty->php_handling= SMARTY_PHP_REMOVE;
 
+/* Set timezone */
+if (function_exists("date_default_timezone_set")){
+  date_default_timezone_set("GMT");
+}
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
