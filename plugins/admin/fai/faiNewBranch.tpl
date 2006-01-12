@@ -1,6 +1,6 @@
 <br>
 <p class="seperator">
-{t}Please enter a name for the branch. Names like 'scripts', 'hooks', 'partitions', 'variables', 'templates', 'fai' and aöready existing names are not allowed.{/t}
+{t}Please enter a name for the branch/freeze. Names like 'scripts', 'hooks', 'partitions', 'variables', 'templates', 'fai' and already existing names are not allowed.{/t}
 <br>
 <br>
 </p>
