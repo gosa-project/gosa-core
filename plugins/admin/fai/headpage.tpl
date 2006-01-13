@@ -39,14 +39,14 @@
 	  </td>
 	 </tr>
         </table>
-        <table summary="" style="width:100%;border-bottom:1px solid #B0B0B0;">
+        <table summary="" style="width:100%;">
 	 <tr>
 	  <td>
-	<input type="image" align="center" value="branch" name="branch_branch" src="images/branch_small.png">
+	<input type="image" align="middle" value="branch" name="branch_branch" src="images/branch_small.png">
 	&nbsp;
 	{t}Create new branch using the current release{/t}
 	<br>
-	<input type="image" align="center" value="freeze" name="freeze_branch" src="images/closedlock.png">
+	<input type="image" align="middle" value="freeze" name="freeze_branch" src="images/closedlock.png">
 	&nbsp;
 	{t}Create a locked version of the current release{/t}
 	{if $select_branch != "main"}
