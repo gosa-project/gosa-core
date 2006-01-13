@@ -405,7 +405,12 @@ class LDAP{
                   $attr[$key] = $attr[$key][0];
                 }
               }
-              if(isset($attr[$key]['count'])) unset($attr[$key]['count']);
+              
+              if(isset($attr[$key]['count'])){
+                if(is_array($attr[$key])){
+                  unset($attr[$key]['count']);
+                }
+              }
             }
             unset($attr['count']);
             unset($attr['dn']);
@@ -426,7 +431,11 @@ class LDAP{
                 $attr[$key] = $attr[$key][0];
               }
             }
-            if(isset($attr[$key]['count'])) unset($attr[$key]['count']); 
+            if(isset($attr[$key]['count'])){
+              if(is_array($attr[$key])){
+                unset($attr[$key]['count']);
+              }
+            }
           }
           unset($attr['count']);
           unset($attr['dn']);
