@@ -51,7 +51,7 @@
 	{t}Create a locked version of the current release{/t}
 	{if $select_branch != "main"}
 	<br>
-	<input type="image" align="center" value="delete" name="remove_branch" src="images/edittrash.png"> 
+	<input type="image" align="middle" value="delete" name="remove_branch" src="images/edittrash.png"> 
 	&nbsp;
 	{t}Delete current release{/t}
 	{/if}	
