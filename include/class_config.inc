@@ -456,17 +456,79 @@ class config  {
 
   function make_idepartments($max_size= 28)
   {
+	global $config;
+	$base = $config->current['BASE'];
+		
+	$arr = array();
+	
   	$this->idepartments= array();
 	foreach ($this->departments as $key => $val){
-		if (strlen($key) > $max_size){
-			$this->idepartments[$val]= substr($key, 0, $max_size/2 - 3)."...".substr($key, -$max_size/2);
-		} else {
-			$this->idepartments[$val]= $key;
+
+		$val2 = str_replace($base,"",$val);
+
+		$str = preg_replace("/ou=/","|ou=",$val2);	
+		$elements = array_reverse(split("\|",$str)); 		
+
+		$last = &$arr;
+		$cnt = count($elements);
+		foreach($elements as $key => $ele){
+		
+			if(empty($ele)) continue;
+			$elestr = preg_replace("/^ou=/","", $ele);
+			$elestr = preg_replace("/,$/","",$elestr);	
+			if($key == ($cnt-2)){
+				$last[$elestr]['ENTRY'] = $val;
+			}
+			$last = &$last[$elestr]['SUB'];
 		}
 	}
-
-	asort($this->idepartments);
+	$ret["/"]["ENTRY"] 	= $base;
+	$ret["/"]["SUB"]	= $arr;
+	
+	$this->idepartments= $this->generateDepartmentArray($ret,-1,$max_size);
   }
+
+	function generateDepartmentArray($arr,$depth = -1,$max_size){
+		$ret = array();
+		$depth ++;
+
+		foreach($arr as $name => $entries){
+
+			if(count($entries['SUB'])==0){
+				unset($entries['SUB']);
+			}
+			if(strlen($name)> $max_size){
+				$name = substr($name,0,($max_size-3))." ...";
+			}
+	
+			if(isset($entries['ENTRY'])){
+				$a = "";
+				for($i = 0 ; $i < $depth ; $i ++){
+					$a.="&nbsp;";
+				}
+				$ret[$entries['ENTRY']]=$a."&nbsp;".$name;
+			}	
+			/* For debugging 	
+			if(isset($entries['ENTRY'])){
+				$a = "";
+				for($i = 0 ; $i < $depth ; $i ++){
+					$a.="&nbsp;|";
+				}
+			
+				if(!isset($entries['SUB'])){
+					$ret[$entries['ENTRY']]=$a."-&nbsp;".$name;
+				}else{
+					$ret[$entries['ENTRY']]=$a."#"."&nbsp;".$name;
+				}
+			}	
+			*/
+			if(isset($entries['SUB'])){
+				$ret = array_merge($ret,$this->generateDepartmentArray($entries['SUB'],$depth,$max_size));
+			}
+		}
+		
+		return($ret);
+	}
 
   /* This function returns all available Shares defined in this ldap
   * There are two ways to call this function, if listboxEntry is true
