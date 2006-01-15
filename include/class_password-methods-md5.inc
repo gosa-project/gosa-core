@@ -28,7 +28,7 @@ class passwordMethodMd5 extends passwordMethod
 
 	function is_available()
 	{
-		if (function_exists('crypt')){
+		if (function_exists('md5')){
 			return(true);
 		}else{
 			return false;
@@ -38,7 +38,7 @@ class passwordMethodMd5 extends passwordMethod
 
 	function generate_hash($pwd)
 	{
-		return  "{crypt}".crypt($pwd, substr(session_id(),0,2));       
+		return  "{md5}".base64_encode( pack('H*', md5($pwd))));
 	}
 }
 
