@@ -29,6 +29,8 @@ class glpiAttachmentPool extends plugin
     if(!isset($_SESSION['GlpiAttachmentFilter'])){
       $_SESSION['GlpiAttachmentFilter'] = array("filter"=>"*");
     }
+
+    /* Assign used attributes */
     if($used != NULL){
       $this->Selected = $used;
     }
@@ -37,44 +39,60 @@ class glpiAttachmentPool extends plugin
   function execute()
   {
     plugin::execute();
-    $attach = $this->parent->handle->getAttachments();
+    $attach     = $this->parent->handle->getAttachments();
     /* Fill templating stuff */
-    $smarty= get_smarty();
-    $display= "";
-    $only_once = true; 
+    $smarty     = get_smarty();
+    $display    = "";
+    $only_once  = true; 
+
+    /* walk through all posted objects */
     foreach($_POST as $name => $value){
 
+      /* Open dialog to create a new entry */
       if(preg_match("/new_attach/",$name)){
         $this->edit = true;
         $this->entry=array();
+
+        /* Set default values */
         foreach($this->attributes as $attr) {
           $this->$attr = "";
           $this->entry[$attr]="";
         }
       }
   
+      /* Remove attach*/ 
       if((preg_match("/^delAttach_/",$name))&&($only_once)){
         $only_once = false;
         $str = preg_replace("/^delAttach_/","",$name);
         $str = base64_decode(preg_replace("/_.*$/","",$str));
+
+        /* remove attach from db */
         $this->parent->handle->deleteAttachment($str);
       }
-      
+     
+      /* Start editing entry */ 
       if((preg_match("/^editAttach_/",$name))&&($only_once)){
         $only_once = false;
         $str = preg_replace("/^editAttach_/","",$name);
         $str = base64_decode(preg_replace("/_.*$/","",$str));
-          
-        $this->edit = true;
+        
+        /* Check if we have an attachment with given ID */ 
         foreach($attach as $att ){
-      
           if($att['ID'] == $str ){
-            $this->entry  = $att;        
+
+            /* Entry was found, show dialog */          
+            $this->edit = true;
+            $this->entry  = $att;       
+
+            foreach($att as $name => $value){
+              $this->$name = $value;
+            } 
           } 
         }
       }
     }
 
+    /* Someone tries to upload a file */
     if(($this->edit == true)&&(isset($_POST['upload']))){
       if(!isset($_FILES['filename'])){
         print_red(_("There is no valid file uploaded."));
@@ -106,6 +124,7 @@ class glpiAttachmentPool extends plugin
       } // ende check if file was uploaded 
     }// upload post
 
+    /* save attachment*/
     if(($this->edit == true)&&(isset($_POST['SaveAttachment']))){
       if(count($this->check())==0){
         $this->save_entry();
@@ -119,11 +138,14 @@ class glpiAttachmentPool extends plugin
       }
     }
 
+    /* Abort editing/adding  attachment*/
     if(($this->edit == true)&&(isset($_POST['CancelAttachment']))){
       $this->edit  = false;
       $this->entry = array();
     }
 
+    /* If edit == true, we have to show a dialog to edit or add an attach 
+     */
     if($this->edit == true){
       foreach($this->attributes as $attr){
         $smarty->assign($attr,$this->$attr);
@@ -141,10 +163,7 @@ class glpiAttachmentPool extends plugin
       return($smarty->fetch(get_template_path('glpiAttachmentEdit.tpl', TRUE)));
     }
 
-
-
-
-
+    /* Create list with checkboxes to select / deselect some attachents */
     $divlist = new divlist("Attachment");  
     $divlist->SetHeader(array(
           array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
@@ -158,50 +177,57 @@ class glpiAttachmentPool extends plugin
     $editdel = "<input type='image' name='editAttach_%s' src='images/edit.png'>";
     $editdel.= "<input type='image' name='delAttach_%s'  src='images/edittrash.png'>";
 
+    /* Add all given attachments to divlist 
+     */ 
     foreach($attach as $entry){
-      
-        if((empty($entry['name']))||(empty($entry['comment']))){
-          
-          if(empty($entry['name'])){
-            $str1 = "<i>"._("empty")."</i>";
-          }else{ 
-            $str1 = $entry['name'];
-          }
-          
-          if(!empty($entry['comment'])){
-            $str1.= " [".$entry['comment']."]";
-          }
-        }else{
-          $str1 = $entry['name']." [".$entry['comment']."]";
+
+      /* Create display name*/
+      if((empty($entry['name']))||(empty($entry['comment']))){
+
+        /* In glpi it is possible to add entries without name 
+           so i've added this block 
+         */ 
+        if(empty($entry['name'])){
+          $str1 = "<i>"._("empty")."</i>";
+        }else{ 
+          $str1 = $entry['name'];
         }
 
-        $edit = str_replace("%s",base64_encode($entry['ID']),$editdel);
-        $str2 = $entry['mime']."&nbsp;";      
-
-        $chkbox = "<input type='hidden' name='wasOnPage_%s'>".
-                  "<input type='checkbox' name='useMe_%s' value='%s' %CHECKED%>";
-        
-        if(in_array($entry['ID'],$this->Selected)){
-          $chkbox = preg_replace("/%CHECKED%/"," checked ",$chkbox);
-        }else {
-          $chkbox = preg_replace("/%CHECKED%/"," ",$chkbox);
+        if(!empty($entry['comment'])){
+          $str1.= " [".$entry['comment']."]";
         }
-        $chkbox = preg_replace("/%s/",$entry['ID'],$chkbox);
-        $divlist->AddEntry(array(
-                                  array("string" => $chkbox, 
-                                        "attach" => "style='text-align:center;width:20px;'"),
-                                  array("string"=> $str1),
-                                  array("string"=> $str2,"attach"=>"style='width:200px;'"),
-                                  array("string"=> $edit ,"attach" => "style='width:60px;border-right:0px;text-align:right;'")
-                                ));
- 
+      }else{
+        /* Both attributes given */
+        $str1 = $entry['name']." [".$entry['comment']."]";
+      }
+
+      $edit = str_replace("%s",base64_encode($entry['ID']),$editdel);
+      $str2 = $entry['mime']."&nbsp;";      
+
+      $chkbox = "<input type='hidden' name='wasOnPage_%s'>".
+        "<input type='checkbox' name='useMe_%s' value='%s' %CHECKED%>";
+
+      if(in_array($entry['ID'],$this->Selected)){
+        $chkbox = preg_replace("/%CHECKED%/"," checked ",$chkbox);
+      }else {
+        $chkbox = preg_replace("/%CHECKED%/"," ",$chkbox);
+      }
+      $chkbox = preg_replace("/%s/",$entry['ID'],$chkbox);
+      $divlist->AddEntry(array(
+            array("string" => $chkbox, 
+              "attach" => "style='text-align:center;width:20px;'"),
+            array("string"=> $str1),
+            array("string"=> $str2,"attach"=>"style='width:200px;'"),
+            array("string"=> $edit ,"attach" => "style='width:60px;border-right:0px;text-align:right;'")
+            ));
+
     }
 
     $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
-              "   <input class='center' type='image' 
-                    src='images/new.png' align='middle' title='"._("Create new attachment")."' 
-                    name='new_attach' alt='"._("New Attachment"). "'>&nbsp;".
-              "</div>";
+      "   <input class='center' type='image' 
+      src='images/new.png' align='middle' title='"._("Create new attachment")."' 
+      name='new_attach' alt='"._("New Attachment"). "'>&nbsp;".
+      "</div>";
 
 
     $smarty->assign("attachments",      $divlist->DrawList());
@@ -225,6 +251,7 @@ class glpiAttachmentPool extends plugin
     return($this->Selected);
   }
 
+  /* Adds new or saves edited entries */
   function save_entry()
   {
     if($this->edit){
@@ -248,6 +275,11 @@ class glpiAttachmentPool extends plugin
       }
     }
 
+    /* Checkboxes are only posted, if they are checked
+     * To check if it was deselected, we check if wasOnPage 
+     * was posted with given name, so we can deselect this entry
+     */  
+
     foreach($_POST as $name => $value){
       if(preg_match("/wasOnPage_/",$name)){
         $id=preg_replace("/wasOnPage_/","",$name);
@@ -262,6 +294,7 @@ class glpiAttachmentPool extends plugin
     }
   }
 
+  /* Simple check */
   function check()
   {
     $message = array();
