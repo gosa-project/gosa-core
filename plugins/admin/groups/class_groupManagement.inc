@@ -182,6 +182,9 @@ class groupManagement extends plugin
       /* Create new usertab object */
       $this->grouptab= new grouptabs($this->config,
           $this->config->data['TABS']['GROUPTABS'], $this->dn);
+      /* Set up the users ACL's for this 'dn' */
+      $acl= get_permissions ($groupfilter['depselect'], $this->ui->subtreeACL);
+      $this->grouptab->set_acl($acl);
     }
 
     /* Cancel dialogs */
