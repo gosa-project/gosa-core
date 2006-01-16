@@ -251,7 +251,7 @@ class environment extends plugin
          If theres is no posixAccount enabled, you won't be able to enable 
          environment extensions
        */
-        if((isset($this->attrs['objectClass']))&&((in_array("posixAccount",$this->attrs['objectClass'])))){
+        if((isset($this->parent->by_object['group']))||(isset($this->attrs['objectClass']))&&((in_array("posixAccount",$this->attrs['objectClass'])))){
           // 4. There is a PosixAccount
           $display= $this->show_header(_("Add environment extension"),
               _("Environment extension disabled. You can enable it by clicking below."));
@@ -277,14 +277,14 @@ class environment extends plugin
       }
 
       if(isset($this->parent)){
+
         // 3. Account enabled . Editing from adminmenu
         if ($this->is_account){
           $display= $this->show_header(_("Remove environment extension"),
               _("Environment extension enabled. You can disable it by clicking below."));
         } else {
-          if((isset($this->attrs['objectClass']))
-                &&((in_array("posixAccount",$this->attrs['objectClass'])))
-                  ||($this->parent->by_object['posixAccount']->is_account==true)){
+
+          if($this->parent->by_object['posixAccount']->is_account==true){
             // 4. There is a PosixAccount
             $display= $this->show_header(_("Add environment extension"),
                 _("Environment extension disabled. You can enable it by clicking below."));
