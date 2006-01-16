@@ -41,9 +41,12 @@ class faiManagement extends plugin
 	/* Headpage attributes */
 	var $departments= array();
 	var $deptabs= NULL;
+  var $lock_type    = "";    // should be branch/freeze
+  var $lock_name    = "";
+  var $lock_dn      = "";  
 
 	/* attribute list for save action */
-	var $attributes			= array(); 	// 	Attributes Managed by this plugin, none, 
+	var $attributes			= array("lock_type","lock_name","lock_dn"); 	// 	Attributes Managed by this plugin, none, 
 	//	because this is only an overview over all objects already defined in FAI.
 	var $objectclasses		= array();	// 	ObjectClasses which the attributes are related to
 	var $dialog				= array();	// 	This object contains every dialog we have currently opened
@@ -335,7 +338,14 @@ class faiManagement extends plugin
         
         $ldap->cd ($this->config->current['BASE']);
         $ldap->copy_FAI_resource_recursive($baseToUse,"ou=".$name.",".$baseToUse,"branch",true);
-        
+
+        /* Postcreate */ 
+
+        /* Assign possible attributes */
+        $this->lock_type  = "branch"; 
+        $this->lock_name  = $name; 
+        $this->lock_dn    = "ou=".$name.",".$baseToUse; 
+        $this->postcreate();
         $this->dispNewBranch = false; 
       }
     }
@@ -379,9 +389,20 @@ class faiManagement extends plugin
       $br = $this->getBranches();
 
       if(isset($br[$bb])){
+
+        $name = $br[$bb];
+
         $ldap->cd($bb);
         $ldap->recursive_remove();
         $faifilter['branch'] = "main";
+
+        /* Post remove */
+                
+//        $this->lock_type is set from this->reload
+        $this->lock_name   = $name;
+        $this->lock_dn     = $bb;
+
+        $this->postremove();
       }
     }
 
@@ -423,6 +444,14 @@ class faiManagement extends plugin
         $ldap->copy_FAI_resource_recursive($baseToUse,"ou=".$name.",".$baseToUse,"freeze",true);
         
         $this->dispNewFreeze = false; 
+        
+        /* Postcreate */ 
+
+        /* Assign possible attributes */
+        $this->lock_type  = "branch"; 
+        $this->lock_name  = $name; 
+        $this->lock_dn    = "ou=".$name.",".$baseToUse; 
+        $this->postcreate();
       }
     }
     
@@ -876,6 +905,8 @@ class faiManagement extends plugin
 		$res= get_list($this->ui->subtreeACL, "(objectClass=organizationalUnit)", 
 				FALSE, $base, array("cn","description","objectClass"),TRUE);
 
+    $str = "";
+
 		foreach($res as $objecttypes){
 			$res2 = get_list($this->ui->subtreeACL, "(&(objectClass=*)(cn=".$regex."))",
 					FALSE, $objecttypes['dn'], array("cn","description","objectClass","FAIclass","FAIstate"),TRUE);
@@ -894,6 +925,11 @@ class faiManagement extends plugin
 
         if(isset($object['FAIstate'])){
           $obj['FAIstate'] = $object['FAIstate'][0];
+
+          /* Append type to this string, to be able to check if the selected 
+           * entry is of type 'freeze' or 'branch'
+           */
+          $str.="|".$obj['FAIstate'];
         }else{
           $obj['FAIstate'] ="";
         }
@@ -919,6 +955,18 @@ class faiManagement extends plugin
  
 			}
 		}
+
+    /* Tell class what we have currently opened 
+        'main' has type '' 
+     */
+    if(preg_match("/freeze/",$str)){
+      $this->lock_type = "freeze";
+    }elseif(preg_match("/branch/",$str)){
+      $this->lock_type = "branch";
+    }else{
+      $this->lock_type = "";
+    }
+
 		ksort($this->objects);
 		reset ($this->objects);
 	
