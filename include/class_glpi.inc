@@ -825,12 +825,14 @@ class glpiDB{
 
 	}
 
-	function removeComputerInformations($id)
+	function removeComputerInformations($name)
 	{
-/*		
 		if($this->is_connected){
-			$tmp = $this->query("SELECT * FROM glpi_computers WHERE ID=".$id.";");
+			$tmp = $this->query("SELECT * FROM glpi_computers WHERE name='".$name."';");
 			if(isset($tmp[0])){
+				$id = $tmp[0]['ID'];
+				$this->query("DELETE FROM glpi_connect_wire WHERE end2=".$id.";");
+				$this->query("DELETE FROM glpi_computer_device WHERE FK_computers=".$id.";");
 				return($this->query("DELETE FROM glpi_computers WHERE ID=".$id.";"));
 			}else{
 				echo "can't remove not existing entry";
@@ -840,7 +842,6 @@ class glpiDB{
 			echo "not connected";
 			return(false);
 		}
-*/
 	}
 
 	function is_connected()
