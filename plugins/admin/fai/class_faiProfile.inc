@@ -51,10 +51,17 @@ class faiProfile extends plugin
     }
 
     $categories = array("FAIscript","FAItemplate","FAIhook","FAIvariable","FAIpartitionTAble","FAIpackage");
+
+    /* Build filter */
+    $filter= "";
+    foreach ($categories as $cat){
+      $filter.= "(objectClass=$cat)";
+    }
+    
     $sort = array();
     $base = $_SESSION['faifilter']['base'];
     $ldap->cd($base);
-    $ldap->search("(objectClass=*)",array("*"));
+    $ldap->search("(|$filter)",array("*"));
     while($attrs = $ldap->fetch()){
       foreach($categories as $cat){
         if(in_array($cat,$attrs['objectClass'])){
