@@ -22,7 +22,7 @@ function getkiosk ($id)
 {
 
   if(!file_exists($id)){
-    echo sprintf(_("Can't open file '%s', possibly the file does not exists."),$id);
+    echo sprintf(_("Can't open file '%s', possibly the file does not exist."),$id);
     exit();
   }
 

@@ -445,7 +445,7 @@ class LDAP{
           }elseif($type=="freeze"){
             $attr['FAIstate'] ="freeze";
           }else{
-            print_red(_("Unknown FAIsate %s"),$type);
+            print_red(_("Unknown FAIstate %s"),$type);
           }
  
           /* Add entry */
