@@ -107,18 +107,8 @@ class application extends plugin
 		 return ($display);
 	}
 
-#	if(isset($_POST['ScriptTemplate'])){
-		$head = $this->generateTemplate();
-		$scr  = $this->gotoLogonScript; 
-		
-		if(preg_match("/### END HEADER ###/",$scr)){
-			$pos = strrpos($scr,"### END HEADER ###");
-			$pos = $pos + strlen("### END HEADER ###");
-			$scr=substr($scr,$pos,(strlen($scr)));
-		}
-
-		$this->gotoLogonScript = $head.$scr;
-#	}
+	$head = $this->generateTemplate();
+	$this->gotoLogonScript= $this->generateTemplate().preg_replace('/.*### END HEADER ###/s', '', $this->gotoLogonScript);
 	
 	if((isset($_POST['upLoad']))&&(isset($_FILES['ScriptFile']))){
 		$str = file_get_contents($_FILES['ScriptFile']['tmp_name']);
