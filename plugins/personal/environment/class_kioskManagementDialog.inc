@@ -36,9 +36,9 @@ class kioskManagementDialog extends plugin
 
     $smarty->assign("gotoKioskProfileACL",chkacl($this->acl,"gotoKioskProfile"));
 
-  foreach($this->attributes as $attr){
-    $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
-  }
+    foreach($this->attributes as $attr){
+      $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
+    }
 
     /* Add new kiosk profile 
      * in profile directory ($this->baseDir); 
@@ -50,7 +50,29 @@ class kioskManagementDialog extends plugin
         $this->filesToAttach[$file['name']]['contents'] = file_get_contents($file['tmp_name']);
       }
     }
+     
+    $only_once = true;
+    foreach($_POST as $name => $value){
       
+      if((preg_match("/^delkiosk_/",$name))&&($only_once)){
+        $only_once = false;
+        $id  = preg_replace("/^delkiosk_/","",$name);
+        $id = preg_replace("/_.*$/","",$id);
+
+        $filename = $this->baseDir."/".preg_replace("/^.*\//i","",base64_decode($id));
+
+        $res = unlink($filename);
+        if(!$res){
+          if(!is_writeable($filename)){
+            print_red(sprintf(_("Can't delete '%s'. Error was: permission denied."), $filename));
+          }
+          if(!file_exists($filename)){
+            print_red(sprintf(_("Can't delete '%s'. Errow was: file doesn't exist."), $filename));
+          }
+        }
+      }
+    }
+
     /* Delete profile
      * Delete selected file form $this->baseDir
      */
@@ -69,7 +91,25 @@ class kioskManagementDialog extends plugin
       }
     }
 
+    $divlist = new divSelectBox("KioskProfiles");
+    $divlist -> SetHeight (300);
+
+    $tmp = $this->getKioskProfiles();
+
+    foreach($tmp as $val ){
+      $divlist->AddEntry(array(
+                          array("string"=>"<a target='_blank' href='getkiosk.php?id=".$val."'>".$val."</a>"),
+                          array("string"=>"<input type='image' src='images/edittrash.png' class='center' alt='delete' name='delkiosk_".base64_encode($val)."'>" , 
+                                "attach"=>" style='border-right: 0px;width:24px; text-align:center;' ")
+                              )); 
+    }
+      
+
     /*Assign all existing profiles to smarty*/
+
+
+    $smarty->assign("divlist",$divlist->DrawList());
+
     $smarty->assign("gotoKioskProfiles",$this->getKioskProfiles());
     $smarty->assign("gotoKioskProfileKeys",array_flip($this->getKioskProfiles()));
 

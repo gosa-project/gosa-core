@@ -407,6 +407,7 @@ class environment extends plugin
     if(isset($_POST['KioskManagementDialog'])){
       $this->dialog = new kioskManagementDialog($this->config,$this->dn,$this->newKioskProfiles); 
       $this->dialog->parent= $this;
+      $this->dialog->acl = $this->acl;
       $this->is_dialog = true;
     }
 

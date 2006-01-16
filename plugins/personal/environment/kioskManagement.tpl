@@ -5,13 +5,14 @@
 	<table summary="{t}Kiosk profile management{/t}" width="100%">
 		<tr>
 			<td>
-            	<select style="width:100%;" size=18 name="gotoKioskProfile" {$gotoKioskProfileACL} id="gotoKioskProfile">
+				{$divlist}
+<!--            	<select style="width:100%;" size=18 name="gotoKioskProfile" {$gotoKioskProfileACL} id="gotoKioskProfile">
                 {html_options values=$gotoKioskProfileKeys output=$gotoKioskProfiles}
                 <option disabled>&nbsp;</option>
-                </select><br>
+                </select>-->
 		<input type="file" size=50 name="newProfile" value="{t}Browse{/t}">			
     		<input type="submit" name="profileAdd" value="{t}Add{/t}">
-			  <input type="submit" name="profileDel" value="{t}Remove{/t}">
+		<!--	  <input type="submit" name="profileDel" value="{t}Remove{/t}">-->
 			</td>
 			<td>
 			</td>
