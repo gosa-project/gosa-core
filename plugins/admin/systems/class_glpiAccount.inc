@@ -13,45 +13,49 @@ class glpiAccount extends plugin
       "tech_num","comments","date_mod","os","location","domain","network","contact_num",
       "model","type","is_template","FK_glpi_enterprise","deleted");
 
-  var $ID                 ;
-  var $name               ="";
-  var $contact            ="";
-  var $contact_num        ="";
+  var $ID                 ;       // Is set if this entry is edited 
+  var $name               = "";    // This should be the dn of this entry 
+  var $contact            = "";    // Empty
+    
+  var $comments           = "";    // Comment
+  
+  var $contact_num        = "";    // Contact person
+  var $tech_num           = "";    // Technical responsible person
+  
+  var $addUser            = "";    // This is used to remember if a dialog was opened for tech_num or contact_num 
 
-  var $tech_num           ="";
-  var $comments           ="";
+  var $date_mod           = "";    // Modification timestamp
+  var $os                 = 0;     // Operating system
+  var $location           = 0;     // Not used yet
+  var $domain             = 0;     // ? Set to 0
+  var $network            = 0;     // ? Set to 0 
 
-  var $addUser            ="";
+  var $model              = 0;     // ? Can't remember this, it isn't used in GOsa 
+  var $type               = 0;     // System type id
+  var $is_template        = 0;     // Used as template ?
+  var $FK_glpi_enterprise = 0;     // Manufacturer id
+  var $deleted            = "N";   // Deleted entries should have this set to Y
 
-  var $date_mod           ="";
-  var $os                 =0;
-  var $location           =0;
-  var $domain             =0;
-  var $network            =0; 
-
-  var $model              =0;
-  var $type               =0;
-  var $is_template        =0;
-  var $FK_glpi_enterprise =0;
-  var $deleted            ="N";
-
+  /* Not necessary, cause we use mysql databse */
   var $objectclasses= array("whatever");
 
+  /* Used to remember if this was an account (simply: is this an edited entry) */
   var $initialy_was_account = false;
 
-  var $edit_type    =false;
-  var $edit_os    =false;
+  /* Remember current dialog */
+  var $edit_type            = false;
+  var $edit_os              = false;
 
   var $data;
-  var $handle = NULL;
+  var $handle = NULL;               // Glpi class handle used to query database
 
-  var $cur_dialog = NULL;
+  var $cur_dialog = NULL;           // This contains the sub dialog handle
 
-  var $orig_dn;
-  var $ui;
+  var $orig_dn;                     // To check if dn, has changed 
+  var $ui;                          // Some GOsa specific user informations 
   
-  var $usedDevices      = array();
-  var $usedAttachments  = array();
+  var $usedDevices      = array();  // Which devices are currently selected 
+  var $usedAttachments  = array();  // Used Attachments 
 
   /* Contructor 
      Sets default values and checks if we already have an existing glpi account
@@ -61,22 +65,27 @@ class glpiAccount extends plugin
     plugin::plugin ($config, $dn);
     $this->ui= get_userinfo();
 
+    /* Abort class construction, if no db is defined */
     if(!isset($this->config->data['SERVERS']['GLPI'])){
       return;
     }
 
+    // Get informations about databse connection
     $this->data = $this->config->data['SERVERS']['GLPI'];
 
+    // Abort if mysql extension is missing 
     if(!is_callable("mysql_connect")){
       return;
     }
 
+    // Create handle of glpi class, and check if database connection is established 
     $this->handle = new glpiDB($this->data['SERVER'],$this->data['LOGIN'],$this->data['PASSWORD'],$this->data['DB']);
 
     if(!$this->handle->is_connected){
       return;
     } 
 
+    // If this dn is already used in database, then get all informations for this entry 
     if($this->handle->is_account($this->dn)){
       $this->is_account = true;
       $tmp = ($this->handle->getComputerInformations($this->dn));
@@ -94,8 +103,9 @@ class glpiAccount extends plugin
       $this->is_account = false;
     }
 
-    $this->name = $this->dn;
-    $this->orig_dn = $this->dn;
+    /* set defaults */
+    $this->name                 = $this->dn;
+    $this->orig_dn              = $this->dn;
     $this->initialy_was_account = $this->is_account;
 
 
@@ -578,6 +588,7 @@ class glpiAccount extends plugin
     }
   }
 
+  /* Return used attachments */
   function getUsedAttachments()
   {
     $atts =$this->handle->getAttachments();
