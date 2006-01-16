@@ -365,7 +365,7 @@ EOF
 
 	# Insert IDE-Devices
 	for f in /proc/ide/ide?/hd?/model; do
-		[ -f $f ] && echo "ghIdeDev: "$(cat $f)
+		[ -f $f ] && echo "ghIdeDev: "$(echo $f | cut -d/ -f5)" ("$(cat $f)")"
 	done
 
 	(cat /proc/scsi/scsi | sed -ne 's/.*Vendor: \([^ ]*\) *Model: \([^ ]*\) *.*$/\1 \2/p') 2> /dev/null|while read line; do
