@@ -52,7 +52,7 @@
 			<table summary="" width="100%">
 				<tr>
 					<td width="20">
-						<input type="checkbox" name="flags_serial" {if $flags_serial=="1"} checked {/if} value="1" {flags_serialACL}>
+						<input type="checkbox" name="flags_serial" {if $flags_serial=="1"} checked {/if} value="1" {$flags_serialACL}>
 					</td>
 					<td>
 						{t}Serial{/t}
@@ -60,7 +60,7 @@
 				</tr>
 				<tr>
 					<td width="20">
-						<input type="checkbox" name="flags_par" {if $flags_par=="1"} checked {/if} value="1" {flags_parACL}>
+						<input type="checkbox" name="flags_par" {if $flags_par=="1"} checked {/if} value="1" {$flags_parACL}>
 					</td>
 					<td>
 						{t}Parallel{/t}
@@ -68,7 +68,7 @@
 				</tr>
 				<tr>
 					<td width="20">
-						<input type="checkbox" name="flags_usb" {if $flags_usb=="1"} checked {/if} value="1" {flags_usbACL}>
+						<input type="checkbox" name="flags_usb" {if $flags_usb=="1"} checked {/if} value="1" {$flags_usbACL}>
 					</td>
 					<td>
 						{t}USB{/t}
