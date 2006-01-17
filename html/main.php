@@ -32,9 +32,13 @@ $domain = 'messages';
 bindtextdomain($domain, "$BASE_DIR/locale");
 textdomain($domain);
 
+/* Set cookie lifetime to one day */
+session_set_cookie_params(24*60*60);
+
 /* Remember everything we did after the last click */
-session_set_cookie_params(2*60*60);
 session_start ();
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
   @DEBUG (DEBUG_POST, __LINE__, __FUNCTION__, __FILE__, $_POST, "_POST");
 }
@@ -58,6 +62,36 @@ if ($_SERVER['REMOTE_ADDR'] != $ui->ip){
   exit;
 }
 $config= $_SESSION['config'];
+
+
+/* Check for invalid sessions */
+if(empty($_SESSION['_LAST_PAGE_REQUEST'])){
+  $_SESSION['_LAST_PAGE_REQUEST']= time();
+}else{
+
+  /* check GOsa.conf for defined session lifetime */
+  if(isset($config->data['MAIN']['SESSION_LIFETIME'])){
+    $max_life = $config->data['MAIN']['SESSION_LIFETIME'];
+  }else{
+    $max_life = 60*60*2;
+  }
+
+  /* get time difference between last page reload */
+  $request_time = (time()-$_SESSION['_LAST_PAGE_REQUEST']);
+
+  /* If page wasn't reloaded for more than max_life seconds 
+   * kill session
+   */
+  if($request_time > $max_life){
+    session_unset();
+    gosa_log ("main.php called without session - logging out");
+    header ("Location: logout.php");
+    exit;
+  }
+  //echo "Session was ".$request_time." s inactive";
+  $_SESSION['_LAST_PAGE_REQUEST'] = time();
+}
+
 
 @DEBUG (DEBUG_CONFIG, __LINE__, __FUNCTION__, __FILE__, $config->data, "config");
 
