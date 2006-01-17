@@ -124,7 +124,7 @@ class glpiAccount extends plugin
         To avoid undefined indexes, if there is an error with the glpi db
      */ 
     foreach(array("SystemTypes","SystemTypeKeys","Manufacturers",
-                  "OSs","TechnicalResponsibles","InstalledDevices","Attachments",
+                  "OSs","TechnicalResponsibles","InstalledDevices","Attachments","AttachmentKeys",
                   "OSKeys","OSs","ManufacturerKeys","InstalledDeviceKeys") as $attr){
       $smarty->assign($attr,array());
       $smarty->assign($attr."ACL"," disabled ");
