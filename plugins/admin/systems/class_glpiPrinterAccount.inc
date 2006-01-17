@@ -60,6 +60,7 @@ class glpiPrinterAccount extends plugin
   var $usedDevices      = array();  // Which devices are currently selected 
   var $usedAttachments  = array();  // Used Attachments 
 
+
   /* Contructor 
      Sets default values and checks if we already have an existing glpi account
    */
@@ -67,6 +68,8 @@ class glpiPrinterAccount extends plugin
   {
     plugin::plugin ($config, $dn);
     $this->ui= get_userinfo();
+
+    $this->is_account = false;
 
     /* Abort class construction, if no db is defined */
     if(!isset($this->config->data['SERVERS']['GLPI'])){
@@ -123,11 +126,11 @@ class glpiPrinterAccount extends plugin
     /*  Assign smarty defaults 
         To avoid undefined indexes, if there is an error with the glpi db
      */ 
-    foreach(array("PrinterTypeKeys","PrinterTypes") as $attr){
+    foreach(array("PrinterTypeKeys","PrinterTypes","ManufacturerKeys","Manufacturers","Attachments","AttachmentKeys") as $attr){
       $smarty->assign($attr,array());
       $smarty->assign($attr."ACL"," disabled ");
     }
-    foreach(array("type") as $attr){
+    foreach(array("type","FK_glpi_enterprise","tech_num","contact_num","comments","flags_serial","flags_par","flags_usb") as $attr){
       $smarty->assign($attr,"");
       $smarty->assign($attr."ACL"," disabled ");
     }
