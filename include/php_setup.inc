@@ -157,6 +157,12 @@ ini_set("display_errors",1);
 ini_set("report_memleaks",1);
 ini_set("include_path",".:$BASE_DIR/include");
 
+/* This specifies, how old a session file must be, before it is deleted 
+   Don't change this value, use gosa.conf session_lifetime instead
+   ^ Value in seconds  = 1 day, php.ini default is 1440 ~ 24 min
+*/
+ini_set("session.gc_maxlifetime",8640);
+
 /* Do smarty setup */
 require("smarty/Smarty.class.php");
 $smarty = new Smarty;
