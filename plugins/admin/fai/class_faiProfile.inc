@@ -36,6 +36,7 @@ class faiProfile extends plugin
     plugin::plugin ($config, $dn);
     $ldap=$this->config->get_ldap_link();
 
+    /* Parse ldap attribute to get all assigned classes */
     $tmp = split(" ",$this->FAIclass);
     $tmp2 = array();
     foreach($tmp as $class){
@@ -43,14 +44,15 @@ class faiProfile extends plugin
         $tmp2[trim($class)] = trim($class);
       }
     }
-    
+   
+    /* Sort assigned classes */ 
     if(is_array($tmp2)){
       foreach($tmp2 as $class){
         $this->FAIclasses[$class]=$class;
       }
     }
 
-    $categories = array("FAIscript","FAItemplate","FAIhook","FAIvariable","FAIpartitionTAble","FAIpackage");
+    $categories = array("FAIscript","FAItemplate","FAIhook","FAIvariable","FAIpartitionTable","FAIpackage");
 
     /* Build filter */
     $filter= "";
@@ -58,22 +60,37 @@ class faiProfile extends plugin
       $filter.= "(objectClass=$cat)";
     }
     
-    $sort = array();
+    /* Get ldap connection */ 
     $base = $_SESSION['faifilter']['base'];
     $ldap->cd($base);
+    $sort = array();
+
+    /* search all FAI classes */
     $ldap->search("(|$filter)",array("*"));
     while($attrs = $ldap->fetch()){
+
+      /* Sort by categorie */
       foreach($categories as $cat){
         if(in_array($cat,$attrs['objectClass'])){
+
+          /* Append entry */
           $this->FAIAllclasses[$attrs['cn'][0]][$cat]=$attrs;
+  
+          /* Create sort array, because the array above is a multidimensional array, and can't be sorted by php sorting functions*/
           $sort[strtolower($attrs['cn'][0])] = $attrs['cn'][0];
         }
       }
     } 
+
+    /* Sort the sort array */
     ksort($sort);
+
+    /* Reorder the FAIclasses array */
     foreach($sort as $name){
       $tmp[$name] =$this->FAIAllclasses[$name];
     }
+
+    /* Assign sorted classes */
     $this->FAIAllclasses = array();
     $this->FAIAllclasses = $tmp;
 
@@ -84,7 +101,7 @@ class faiProfile extends plugin
   }
 
 
-  /* Combine new array */
+  /* Combine new array, used for up down buttons */
   function combineArrays($ar0,$ar1,$ar2)
   {
     $ret = array();
@@ -103,6 +120,7 @@ class faiProfile extends plugin
     return($ret);
   }
 
+  /* returns position in array */
   function getpos($atr,$attrs)
   {
     $i = 0;
@@ -115,7 +133,7 @@ class faiProfile extends plugin
     return(-1);
   }
 
-  /* TRansports the geiven Arraykey one position up*/
+  /* Transports the given Arraykey one position up*/
   function ArrayUp($atr,$attrs)
   {
     $ret = $attrs;
@@ -132,7 +150,7 @@ class faiProfile extends plugin
   }
 
 
-  /* TRansports the geiven Arraykey one position up*/
+  /* Transports the given Arraykey one position down*/
   function ArrayDown($atr,$attrs)
   {
     $ret = $attrs;
@@ -148,6 +166,7 @@ class faiProfile extends plugin
     return($ret);
   }
 
+  /* class one position up */
   function catUp($id)
   {
     /* Get all cats depinding on current dir */
@@ -155,6 +174,7 @@ class faiProfile extends plugin
     $this->FAIclasses =$this->ArrayUp($id,$cats);
   }
 
+  /* Class one position down */
   function catDown($id)
   {
     /* Get all cats depinding on current dir */
@@ -189,6 +209,7 @@ class faiProfile extends plugin
         $s_action  = "add";
       }
 
+      /* Check if a list element should be pushed one position up */
       if((preg_match("/sortup_/",$name))&&(!$sort_once)){
         $sort_once = true;
         $val = preg_replace("/sortup_/","",$name);
@@ -197,6 +218,7 @@ class faiProfile extends plugin
         $this->catUp($val);
       }
       
+      /* Check if a list element should be pushed one position down */
       if((preg_match("/sortdown_/",$name))&&(!$sort_once)){
         $sort_once = true;
         $val = preg_replace("/sortdown_/","",$name);
@@ -249,6 +271,7 @@ class faiProfile extends plugin
     $divlist  =new divSelectBox("Profile");
     $divlist->SetSummary(_("This list displays all assigned class names for this profile."));
 
+    /* item images */
     $objTypes['FAIhook']            = "<img src='images/fai_hook.png' title='"._("Hook bundle")."' alt=''>";
     $objTypes['FAItemplate']        = "<img src='images/fai_template.png' title='"._("Template bundle")."' alt=''>";
     $objTypes['FAIscript']          = "<img src='images/fai_script.png' title='"._("Script bundle")."' alt=''>";
@@ -256,22 +279,22 @@ class faiProfile extends plugin
     $objTypes['FAIpackages']        = "<img src='images/fai_packages.png' title='"._("Packages bundle")."' alt=''>";
     $objTypes['FAIpartitionTable']  = "<img src='images/fai_partitionTable.png' title='"._("Partition table")."' alt=''>";
 
+    /* Delete button */
     $actions = "<input type='image' src='images/edittrash.png' title='"._("Remove class from profile")."' name='DEL_%KEY%'>"; 
-
+    
+    /* Up down buttons */
     $linkupdown = "&nbsp;<input type='image' name='sortup_%s'   alt='up'    title='"._("Up")."'   src='images/sort_up.png' align='top' >";
     $linkupdown.= "<input type='image' name='sortdown_%s' alt='down'  title='"._("Down")."' src='images/sort_down.png' >";
 
+    /* Append fai classes to divlist */
     foreach($this->FAIclasses as $usedClass){
       $str = "&nbsp;";
-
 
       if(isset($this->FAIAllclasses[$usedClass])){
         foreach($this->FAIAllclasses[$usedClass] as $class => $obj){
           $str.= $objTypes[$class]; 
         }
       }
-
-          
   
       $field1 = array("string"=> $usedClass,"attach"=>"");
       $field2 = array("string"=> $str,"attach"=>"");
