@@ -283,9 +283,6 @@ class workgeneric extends plugin
       }
     }
     show_ldap_error($ldap->get_error());
-
-    /* Optionally execute a command after we're done */
-    $this->postcreate();
   }
 
 }
