@@ -212,6 +212,7 @@ class glpiDeviceManagement extends plugin
       " <input class='center' type='image' align='middle' 
       src='mages/list_back.png' title='"._("New misc device")."' alt='"._("OC")."' name='new_pci'>&nbsp;".
       "</div>";
+    
     $filter= $_SESSION['glpiDeviceRegex'];
     $smarty->assign("devicehead", $listhead);
     $smarty->assign("devices", $divlist->DrawList());
@@ -223,7 +224,6 @@ class glpiDeviceManagement extends plugin
     $smarty->assign("apply", apply_filter());
     $smarty->assign("alphabet", generate_alphabet());
     $smarty->assign("device_regex", $filter['device_regex']);
-
 
     $display.= $smarty->fetch(get_template_path('glpiDeviceManagement.tpl', TRUE));
     return($display);
@@ -335,8 +335,8 @@ class glpiDeviceManagement extends plugin
     return($message);
   }
 
-  /* This funtions displays the tempalte for all available devices 
-   * This funtion is also used if we create a new device
+  /* This functions displays the template for all available devices 
+   * This function is also used if we create a new device
    */
   function editDevice($entry)
   {

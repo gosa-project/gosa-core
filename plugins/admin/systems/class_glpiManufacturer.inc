@@ -40,10 +40,12 @@ class glpiManufacturer extends plugin
     $smarty  = get_smarty();
     $display = "";
 
+    /* Remove enterprise from db */
     if((isset($_POST['remove_manu']))&&(isset($_POST['manufacturer']))){
       $this->parent->handle->removeEnterprise($_POST['manufacturer']);
     }
 
+    /* Add new Manufactuer : Open dialog with empty fields */
     if(isset($_POST['add_manu'])){
       $this->editMode = true;
       $this->Edit_Add = "add";
@@ -52,6 +54,7 @@ class glpiManufacturer extends plugin
       }
     }
 
+    /* Edit existing manuatctuerer data */
     if((isset($_POST['edit_manu']))&&(isset($_POST['manufacturer']))){
       $this->editMode = true;
       $this->Edit_Add = "edit";
@@ -68,12 +71,13 @@ class glpiManufacturer extends plugin
       $this->ID = $_POST['manufacturer'];
     }
 
+    /* close Dialog without saving */
     if(isset($_POST['close_manufacturer'])){
       $this->editMode=false;
     }
 
+    /* close dialog an save all changes / adds */
     if(isset($_POST['save_manufacturer'])){
-
       $tmp = array();
       foreach($this->attributes as $attrs){
         $tmp[$attrs]=$this->$attrs;
@@ -85,6 +89,7 @@ class glpiManufacturer extends plugin
         $allok = false;
       }
 
+      /* all checks are ok , so save changes */
       if($allok){
         if($this->Edit_Add == "add"){
           $this->parent->handle->addEnterprise($tmp);
@@ -96,6 +101,7 @@ class glpiManufacturer extends plugin
       }
     }
 
+    /* As long as this war is true, we have to display the edit dialog */
     if($this->editMode == true){
       $this->save_object();
       foreach($this->attributes as $attrs){
