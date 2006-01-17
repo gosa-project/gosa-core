@@ -1043,6 +1043,247 @@ class glpiDB{
         }
 	}
 
+	
+	/* Printer functions
+     */
+
+
+	/* This functions checks if the selected computer/network 
+	   device is already available in the db
+	 */
+	function is_printer_account($dn)
+	{
+		if(!$this->is_connected){
+			$this->lasterror ="Can't query anything, if we aren't connected.";
+			return(false);
+		}else{
+			$qry = "SELECT * FROM glpi_printers WHERE name='".$dn."';";
+			$res = $this->query($qry);
+			if(count($res)==0){
+				return(false);
+			}else{
+				return(true);
+			}
+		}
+	}
+
+	/* This function returns all available data 
+       from a specified dn
+     */
+	function getPrinterInformations($name)
+	{
+		if($this->is_connected){	
+			$ret = $this->query("SELECT * FROM glpi_printers WHERE name='".$name."';");
+			return($ret);		
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+	/* Get Printer attachments
+     */
+	function getAssignPrinterAttachments($id)
+	{
+
+		if($this->is_connected){
+			$qry= "SELECT * FROM glpi_doc_device WHERE (device_type=3) AND (FK_device=".$id.");";
+			$ret = $this->query($qry);
+			return($ret);
+		}else{
+            echo "not connected";
+            return(false);
+        }
+	}
+
+	/* Printer types 
+       Returns all defined printer types 
+	 */
+	function getPrinterTypes()
+	{
+		if($this->is_connected){
+			$ret = array();
+			$tmp = ($this->query("SELECT * FROM glpi_type_printers;"));
+			foreach($tmp as $t){
+				$ret[$t['ID']]=$t['name'];
+			}
+			return($ret);
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+	/* Add pritner types 
+       Add one entry to the printer types 
+     */
+	function addPrinterType($name)
+	{
+		if($this->is_connected){
+			$tmp = $this->query("SELECT * FROM glpi_type_printers WHERE name='".$name."';");
+			if(isset($tmp[0])){
+				//echo "such an entry already exists";
+				return(false);
+			}else{	
+				return($this->query("INSERT INTO glpi_type_printers (name) VALUES ('".$name."');"));
+			}
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+	/* remove printer types 
+       Remove one entry from the printer types (specified by ID=$id)
+     */
+	function removePrinterType($id)
+	{
+		if($this->is_connected){
+			$tmp = $this->query("SELECT * FROM glpi_type_printers WHERE ID=".$id.";");
+			if(isset($tmp[0])){
+				return($this->query("DELETE FROM glpi_type_printers WHERE ID=".$id.";"));	
+			}else{
+				echo "can't remove not existing entry";
+				return(false);	
+			}
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+	/* Update printer types 
+	   Update a printer type 	
+	*/
+	function updatePrinterType($name,$id)
+	{
+
+		if($this->is_connected){
+			$tmp = $this->query("SELECT * FROM glpi_type_printers WHERE ID=".$id.";");
+			if(isset($tmp[0])){
+				return($this->query("UPDATE glpi_type_printers SET name='".$name."' WHERE ID=".$id.";"));	
+			}else{
+				echo "can't update not existing entry";
+				return(false);	
+			}
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+
+	/*  This fucntions updates an already existing entry 
+     */
+	function updatePrinterInformations($array,$name)
+	{
+		if(!is_array($array)){
+			echo "updatePrinterInformations: first paraeter must be an array";
+		}elseif($this->is_connected){
+			$tmp = $this->query("SELECT * FROM  glpi_printers WHERE name='".$name."';");
+			if(isset($tmp[0])){
+
+				$atr = array(	"ID","name","serial","otherserial","contact","contact_num",
+						"tech_num","comments","date_mod","location","domain","network","ramSize","flags_serial","flags_par","flags_usb",
+						"model","type","is_template","tplname","FK_glpi_enterprise","deleted");
+				$v = "";
+				foreach($atr as $at){
+					if(isset($array[$at])){
+						$v .= " ".$at."='".$array[$at]."', ";
+					}
+				}
+				if(empty($v)){
+					echo "updateSystemInformations: no attributes given ";
+					return(false);
+				}else{
+					$v = preg_replace("/, $/","",$v);
+					return($this->query("UPDATE glpi_printers SET ".$v." WHERE name='".$name."';"));
+				}
+			}else{
+				echo "can't update not existing entry";
+				return(false);
+			}
+		}else{
+			echo "not connected";
+			return(false);
+		}
+
+	}
+
+	/* This function adds a new inventory settings for printers
+     */
+	function addPrinterInformations($array)
+	{
+		if(!is_array($array)){
+			echo "updateComputerInformations: first paraeter must be an array";
+		}elseif($this->is_connected){
+			$atr = array(	"ID","name","serial","otherserial","contact","contact_num",
+					"tech_num","comments","date_mod","os","location","domain","network","ramSize","flags_serial","flags_par","flags_usb",
+					"model","type","is_template","tplname","FK_glpi_enterprise","deleted");
+			$v = "";
+			$a = "";
+			foreach($atr as $at){
+				if(isset($array[$at])){
+					$a .= $at.", ";
+					$v .= "'".$array[$at]."', ";
+				}
+			}
+			if(empty($v)){
+				echo "updateComputerInformations: no attributes given ";
+				return(false);
+			}else{
+				$a = preg_replace("/, $/","",$a);
+				$v = preg_replace("/, $/","",$v);
+				return($this->query("INSERT INTO glpi_printers (".$a.") VALUES (".$v.");"));
+			}
+		
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+	/* add atachment to given printer */
+	function addAttachmentsToPrinter($attr,$id)
+	{
+        if(($id == "" )||(!is_numeric($id))){
+            return (false);
+        }
+        if($this->is_connected){
+            $qry = "DELETE FROM glpi_doc_device WHERE (FK_device=".$id.") AND (device_type=3);";
+            $this->query($qry);
+			
+			foreach($attr as $aid => $entry){
+				$str = "INSERT INTO glpi_doc_device (FK_doc,FK_device,device_type,is_template) 
+												VALUES
+													($aid,$id,3,'0');";
+				$this->query($str);
+			}
+        }else{
+            echo "not connected";
+            return(false);
+        }
+	}
+
+	function removePrinterInformations($name)
+	{
+		if($this->is_connected){
+			$tmp = $this->query("SELECT * FROM glpi_printers WHERE name='".$name."';");
+			if(isset($tmp[0])){
+				$id = $tmp[0]['ID'];
+//				$this->query("DELETE FROM glpi_connect_wire WHERE end2=".$id.";");
+				$this->query("DELETE FROM glpi_doc_device WHERE FK_device=".$id." AND device_type=3;");
+				return($this->query("DELETE FROM glpi_printers WHERE ID=".$id.";"));
+			}else{
+				echo "can't remove not existing entry";
+				return(false);
+			}
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
 }
 //$s = new glpiDB("vserver-01","glpi","tester","glpi");
 //print_r($s->query("SELECT * FROM glpi_computers"));
