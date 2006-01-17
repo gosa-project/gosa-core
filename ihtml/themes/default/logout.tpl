@@ -7,7 +7,6 @@
  {t}The last interaction with the GOsa web interface has been some time ago in the past. For security reasons, the session has been closed. To continue with administrative tasks, please sign in again.{/t}
  </p>
  <br>
-{$kmsg}
  <center><input type="submit" name="dummy" value="{t}Sign in again{/t}"></center>
 </div>
 </form>

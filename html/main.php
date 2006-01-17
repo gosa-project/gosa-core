@@ -83,7 +83,7 @@ if(empty($_SESSION['_LAST_PAGE_REQUEST'])){
    * kill session
    */
   if($request_time > $max_life){
-    $_SESSION['kick_message'] = sprintf(_("The session timeout configuration is set to '%s' seconds. But have been inactive for '%s' seconds."),$max_life,$request_time)."<br>"._("You can change the value for session_lifetime in your gosa.conf.")."<br>";
+    session_unset();
     gosa_log ("main.php called without session - logging out");
     header ("Location: logout.php");
     exit;
