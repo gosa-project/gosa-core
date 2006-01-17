@@ -70,10 +70,8 @@ class selectUserToPrinterDialog extends plugin
       $this->regex=preg_replace("/\*\*/","*",$this->regex);
     }
 
-    $this->deplist=array_flip($this->config->departments);
-
     $smarty->assign("regexPrinter"        , $this->regex);
-    $smarty->assign("deplistPrinter"      , $this->deplist);
+    $smarty->assign("deplistPrinter"      , $this->config->idepartments);//deplist);
     $smarty->assign("depselectPrinter"    , $this->depselect);
     $smarty->assign("gotoPrinters"        , $this->getPrinter());
     $smarty->assign("gotoPrinterKeys"     , array_flip($this->getPrinter()));
