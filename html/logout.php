@@ -25,6 +25,18 @@ header("Content-type: text/html; charset=UTF-8");
 get_dir_list("$BASE_DIR/plugins");
 session_start ();
 
+/* This message will be set if the logout was caused by main.php- 
+ *  if inactivity of user was > than the defined value in gosa.conf (session_lifetime)
+ * This Message will be displayed in the logout template.
+ * To force displaying the logout template, we have to unset the session.
+ */
+if(isset($_SESSION['kick_message'])){
+  $kmsg = $_SESSION['kick_message'];
+  @session_unset();
+}else{
+  $kmsg = "";
+}
+
 /* Do logout-logging and destroy session */
 if (!isset($_SESSION["config"])){
   /* Language setup */
@@ -52,6 +64,7 @@ if (!isset($_SESSION["config"])){
   } else {
     $smarty->compile_dir= '/var/spool/gosa/';
   }
+  $smarty->assign("kmsg",$kmsg);
   $smarty->display (get_template_path('headers.tpl'));
   $smarty->display (get_template_path('logout.tpl'));
   @session_destroy ();
