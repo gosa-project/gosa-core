@@ -23,6 +23,8 @@ class glpiAttachmentPool extends plugin
 
   var $Selected = array();
 
+  var $delAttach= "";
+
   function glpiAttachmentPool ($config, $dn= NULL,$used=NULL)
   {
     plugin::plugin ($config, $dn);
@@ -67,9 +69,11 @@ class glpiAttachmentPool extends plugin
         $str = base64_decode(preg_replace("/_.*$/","",$str));
 
         /* remove attach from db */
-        $this->parent->handle->deleteAttachment($str);
+        $this->delAttach = $str;
+        $smarty->assign("warning", sprintf(_("You're about to delete the glpi attachment component '%s'."), $attach[$str]['name']));
+        return($smarty->fetch(get_template_path('remove_glpi.tpl', TRUE)));
       }
-     
+ 
       /* Start editing entry */ 
       if((preg_match("/^editAttach_/",$name))&&($only_once)){
         $only_once = false;
@@ -90,6 +94,11 @@ class glpiAttachmentPool extends plugin
           } 
         }
       }
+    }
+
+    if((isset($_POST['delete_glpi_confirm']))&&(isset($attach[$this->delAttach]))){
+      $this->parent->handle->deleteAttachment($this->delAttach);
+      $attach     = $this->parent->handle->getAttachments();
     }
 
     /* Someone tries to upload a file */
