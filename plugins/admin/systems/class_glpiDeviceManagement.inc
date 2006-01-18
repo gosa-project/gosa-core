@@ -72,14 +72,16 @@ class glpiDeviceManagement extends plugin
     $smarty= get_smarty();
     $display= "";
 
-    /* Check if we should create a new entry .... */
+    /* this var is used to ensure that every post is only performed once */
     $only_once = true;
+
+    /* Check Post for some actions */
     foreach($_POST as $name => $value){
       
-      /* All Post vars starts with new */
+      /* If new_ then we should create an new device */
       if((preg_match("/^new_/",$name))&&($only_once)){
     
-        /* do this twice */
+        /* don't do this twice */
         $only_once = false;
 
         /*extract device device_type */
@@ -100,7 +102,7 @@ class glpiDeviceManagement extends plugin
       }
     }
 
-    /* Open entry for editing if requested */
+    /* delete was requested ... show dialog   */
     if((isset($_GET['act']))&&($_GET['act']=="del_device")){
       $id = base64_decode($_GET['id']);
       $tmp = $this->devices[$id];
@@ -118,10 +120,14 @@ class glpiDeviceManagement extends plugin
       return($smarty->fetch(get_template_path('remove_glpi.tpl', TRUE)));
     }
 
-
+    /* Delete entry, but check if this device is in currently in use */
     if(isset($_POST['delete_glpi_confirm'])){
-      $this->parent->handle->deleteDevice($this->delete);
-      $this->reload();
+      if($this->parent->handle->is_deviceUsed($this->delete)){
+        print_red(_("Can't delete this device, it is actually in use by some glpi accounts. Remove this relation first."));
+      }else{
+        $this->parent->handle->deleteDevice($this->delete);
+        $this->reload();
+      }
     }
 
     /* Open entry for editing if requested */
@@ -314,11 +320,11 @@ class glpiDeviceManagement extends plugin
 
   /* This function cehck all created devices if you wan't to create device specific check 
       use >>if($attr['device_type']=="moboard")<< to create a device type depending check
-  */
+   */
   function check($attr)
   {
     $message = array();
-    
+
     if(isset($attr['designation'])){
       $str2 = "designation";
     }else{
@@ -331,6 +337,9 @@ class glpiDeviceManagement extends plugin
     /* Avoid same name twice */
     $devices = ($this->parent->handle->getDevices());
     foreach($devices as $dev){
+
+      /* Some devices use designation some name for name
+       */
       if(isset($dev['designation'])){
         $str = "designation";
       }else{
@@ -338,7 +347,7 @@ class glpiDeviceManagement extends plugin
       }
 
       if($dev[$str]==$attr[$str2]){
-
+        
         /* Entries with ['ID'] already exists, and are only edited, if ID is missing we are currently creating a new entry */
         if(isset($attr['ID'])){
           if(!(($dev['ID'] == $attr['ID'])&&($dev['device_type']==$attr['device_type']))){
@@ -362,7 +371,7 @@ class glpiDeviceManagement extends plugin
 
     /* Transfer given data to smarty */
     foreach($this->EditEntry as $name => $value){
-      $smarty->assign($name,htmlentities($value));
+      $smarty->assign($name,htmlentities(utf8_decode($value)));
     }
   
     /* Set default select boxes, manufacturers ... */
