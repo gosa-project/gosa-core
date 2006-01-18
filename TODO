@@ -1,8 +1,6 @@
 Target for 2.4.1:
 =================
 
-* Encoding für Serverfreigaben in Datei /etc/gosa/encodings auslagern, class_servNfs.inc
-
 * Create a status-bar/-display for FAI installations 
 	(Use notes from 0.5.12.2005)
 
