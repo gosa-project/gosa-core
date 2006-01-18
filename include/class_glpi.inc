@@ -578,6 +578,33 @@ class glpiDB{
 		return(false);
 	}
 
+		
+	/* Check if given device is used by some accounts
+     *  (helpfull to avoid removement of used devices)
+     */
+	function is_deviceUsed($item)
+	{
+
+		$deviceMappingGOsaGlpi 		= array_flip($this->deviceMappingGOsaGlpi);
+		$deviceMappingTableNameID 	= $this->deviceMappingTableNameID;
+		if($this->is_connected){
+			$tablename =  $deviceMappingGOsaGlpi[$item['device_type']];
+			$type = $item['device_type'];
+
+			if($type=="monitor"){
+				$str = "SELECT * FROM glpi_connect_wire WHERE end1=".$item['ID']." AND type=4;";
+			}else{
+				$str = "SELECT * FROM glpi_computer_device WHERE device_type=".$deviceMappingTableNameID[$type]." AND FK_device=".$item['ID'].";";
+			}
+			return(count($this->query($str)));
+		}else{
+			echo "not connected";
+			return(false);
+		}
+			
+	}
+
+
 	/* This functions deletes a specified entry 
      * from our device tables 
      */
@@ -978,7 +1005,7 @@ class glpiDB{
         }
 	}
 
-
+		
 	/* Monitor handling 
      */
     function getMonitors()
