@@ -462,45 +462,73 @@ class config  {
 	$arr = array();
 	
   	$this->idepartments= array();
+
+	/* Create multidimensional array, with all departments.
+     */
 	foreach ($this->departments as $key => $val){
 
+		/* remove base from dn */
 		$val2 = str_replace($base,"",$val);
 
+		/* Get every single ou */
 		$str = preg_replace("/ou=/","|ou=",$val2);	
 		$elements = array_reverse(split("\|",$str)); 		
 
+		/* Save last array position */
 		$last = &$arr;
+
+		/* Get array depth  */
 		$cnt = count($elements);
+
+		/* Add last ou element of current dn to our array */
 		foreach($elements as $key => $ele){
 		
+			/* skip enpty */
 			if(empty($ele)) continue;
+
+			/* Extract department name */		
 			$elestr = preg_replace("/^ou=/","", $ele);
 			$elestr = preg_replace("/,$/","",$elestr);	
+
+			/* Add to array */	
 			if($key == ($cnt-2)){
 				$last[$elestr]['ENTRY'] = $val;
 			}
+
+			/* Set next array appending position */
 			$last = &$last[$elestr]['SUB'];
 		}
 	}
+	
+	/* Add base entry */
 	$ret["/"]["ENTRY"] 	= $base;
 	$ret["/"]["SUB"]	= $arr;
 	
 	$this->idepartments= $this->generateDepartmentArray($ret,-1,$max_size);
   }
 
+	/* Creates display friendly output from make_idepartments
+     */
 	function generateDepartmentArray($arr,$depth = -1,$max_size){
 		$ret = array();
 		$depth ++;
-
+	
+		/* Walk through array */	
 		foreach($arr as $name => $entries){
 
+			/* If this department is the last in the current tree position 
+             * remove it, to avoid generating output for it 
+             */
 			if(count($entries['SUB'])==0){
 				unset($entries['SUB']);
 			}
+
+			/* Check if current name is too long, then cut it */
 			if(strlen($name)> $max_size){
 				$name = substr($name,0,($max_size-3))." ...";
 			}
-	
+
+			/* Append the name to the list */	
 			if(isset($entries['ENTRY'])){
 				$a = "";
 				for($i = 0 ; $i < $depth ; $i ++){
@@ -522,6 +550,8 @@ class config  {
 				}
 			}	
 			*/
+
+			/* recursive add of subdepartments */
 			if(isset($entries['SUB'])){
 				$ret = array_merge($ret,$this->generateDepartmentArray($entries['SUB'],$depth,$max_size));
 			}
