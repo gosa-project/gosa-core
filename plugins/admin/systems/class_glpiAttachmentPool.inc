@@ -157,7 +157,7 @@ class glpiAttachmentPool extends plugin
      */
     if($this->edit == true){
       foreach($this->attributes as $attr){
-        $smarty->assign($attr,$this->$attr);
+        $smarty->assign($attr,htmlentities($this->$attr));
       }
       if(!empty($this->filename)){
         if(is_readable("/etc/gosa/glpi/".$this->filename)){
