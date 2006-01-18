@@ -311,7 +311,19 @@ class glpiAttachmentPool extends plugin
   {
     $message = array();
     if($this->edit){
+    
+      /* check if given name is already in use */
+      $att = $this->parent->handle->getAttachments();
+      $ok = true;
       $this->name=trim($this->name);
+      foreach($att as $val){
+        if($val['name'] == $this->name){
+          $ok = false;
+        }
+      }
+      if(!$ok){
+        $message[] = _("This name is already in use.");
+      }
       if(empty($this->name)){
         $message[] = _("Please specify a valid name for this attachment.");
       }
