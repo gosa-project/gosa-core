@@ -896,9 +896,15 @@ class glpiDB{
 	
 	function getAttachments()
 	{
+		$ret = array();
 		if($this->is_connected){
 			$qry = "SELECT * FROM glpi_docs WHERE name!='';";
-			$ret = $this->query($qry);
+			$re = $this->query($qry);
+
+			foreach($re as $entry){
+				$ret[$entry['ID']]=$entry;
+			}
+
 			return($ret);
 		}else{
             echo "not connected";
@@ -936,7 +942,6 @@ class glpiDB{
 					$values = preg_replace("/, $/","",$values);
 					$namen  = preg_replace("/, $/","",$namen);
 					$str .= "(".$namen.") VALUES (".$values.");";
-					print $str;
 				}else{
 					$str = "UPDATE glpi_docs SET ";
 					foreach($tmp as $name => $value){	
@@ -956,6 +961,21 @@ class glpiDB{
 			echo "not connected";
 			return(false);
 		}
+	}
+
+	
+	/* Check if given attachment id is used in any Device 
+		( - avoid removing of used attachments)
+     */
+	function is_attachmentUsed($id)
+	{
+		if($this->is_connected){
+			$qry = "SELECT * FROM glpi_doc_device WHERE FK_doc =".$id." LIMIT 1; ";
+			return(count($this->query($qry)));
+		}else{
+            echo "not connected";
+            return(false);
+        }
 	}
 
 

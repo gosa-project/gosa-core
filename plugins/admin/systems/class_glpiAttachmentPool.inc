@@ -9,13 +9,13 @@ class glpiAttachmentPool extends plugin
 
   /* attribute list for save action */
   var $ignore_account = TRUE;
-  var $attributes     = array("name","comment","mime","filename");
+  var $attributes     = array("name","comment","mime","filename","date_mod");
   var $objectclasses  = array("whatever");
 
   var $parent;
   var $edit = false;
   var $entry = false;
-
+  var $date_mod ="";
   var $name     ="";
   var $comment  ="";
   var $mime     ="";
@@ -97,8 +97,12 @@ class glpiAttachmentPool extends plugin
     }
 
     if((isset($_POST['delete_glpi_confirm']))&&(isset($attach[$this->delAttach]))){
-      $this->parent->handle->deleteAttachment($this->delAttach);
-      $attach     = $this->parent->handle->getAttachments();
+      if($this->parent->handle->is_attachmentUsed($this->delAttach)){
+        print_red(_("Can't delete this attachment, it is still in use."));
+      }else{
+        $this->parent->handle->deleteAttachment($this->delAttach);
+        $attach     = $this->parent->handle->getAttachments();
+      }
     }
 
     /* Someone tries to upload a file */
@@ -136,6 +140,7 @@ class glpiAttachmentPool extends plugin
     /* save attachment*/
     if(($this->edit == true)&&(isset($_POST['SaveAttachment']))){
       if(count($this->check())==0){
+        $this->date_mod = date("Y-m-d H:i:s");
         $this->save_entry();
         $this->edit= false;
         $this->entry = array();
