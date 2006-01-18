@@ -140,23 +140,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
   }
 
   /* Check for schema file presence */
-  require_once("functions_setup.inc");
-  if(!is_schema_readable($config->current['SERVER'],$config->current['ADMIN'],$config->current['PASSWORD'])){
-    print_red(_("GOsa cannot retrieve information about the installed schema files. Please make sure, that this is possible."));
-    echo $_SESSION['errors'];
-    exit();
-  }else{
-    $str = (schema_check($config->current['SERVER'],$config->current['ADMIN'],$config->current['PASSWORD'],0,TRUE));
-    $checkarr = array();
-    foreach($str as $tr){
-      if(isset($tr['needonstartup'])){
-        print_red($tr['msg']."<br>"._("Your ldap setup contains old schema definitions. Please re-run the setup."));
-        print $_SESSION['errors'];
-        exit();
+  if(preg_match("/true/i",$config->data['MAIN']['SCHEMA_CHECK'])){
+    require_once("functions_setup.inc");
+    if(!is_schema_readable($config->current['SERVER'],$config->current['ADMIN'],$config->current['PASSWORD'])){
+      print_red(_("GOsa cannot retrieve information about the installed schema files. Please make sure, that this is possible."));
+      echo $_SESSION['errors'];
+      exit();
+    }else{
+      $str = (schema_check($config->current['SERVER'],$config->current['ADMIN'],$config->current['PASSWORD'],0,TRUE));
+      $checkarr = array();
+      foreach($str as $tr){
+        if(isset($tr['needonstartup'])){
+          print_red($tr['msg']."<br>"._("Your ldap setup contains old schema definitions. Please re-run the setup."));
+          print $_SESSION['errors'];
+          exit();
+        }
       }
     }
   }
-
   /* Check for locking area */
   $ldap->cat($config->current['CONFIG']);
   $attrs= $ldap->fetch();
