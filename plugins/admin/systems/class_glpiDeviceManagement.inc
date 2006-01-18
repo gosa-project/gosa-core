@@ -24,6 +24,8 @@ class glpiDeviceManagement extends plugin
 
   var $Selected = array();
 
+  var $delete = array();
+
   function glpiDeviceManagement ($config, $dn= NULL,$used=NULL)
   {
     plugin::plugin ($config, $dn);
@@ -102,7 +104,23 @@ class glpiDeviceManagement extends plugin
     if((isset($_GET['act']))&&($_GET['act']=="del_device")){
       $id = base64_decode($_GET['id']);
       $tmp = $this->devices[$id];
-      $this->parent->handle->deleteDevice($tmp);
+
+      $this->delete = $tmp;
+
+      if(isset($tmp['name'])){
+        $smarty->assign("warning", sprintf(_("You're about to delete the glpi device '%s'."), $tmp['name']));
+      }elseif(isset($tmp['designation'])){
+        $smarty->assign("warning", sprintf(_("You're about to delete the glpi device '%s'."), $tmp['designation']));
+      }else{
+        print_a(_("Can't detect object name."));
+      }
+      
+      return($smarty->fetch(get_template_path('remove_glpi.tpl', TRUE)));
+    }
+
+
+    if(isset($_POST['delete_glpi_confirm'])){
+      $this->parent->handle->deleteDevice($this->delete);
       $this->reload();
     }
 
