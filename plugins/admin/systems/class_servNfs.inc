@@ -28,13 +28,33 @@ class servnfs extends plugin
   {
     plugin::plugin ($config, $dn);
     $this->types   = array("NFS"=>"NFS","samba"=>"samba","NCP"=>"NCP");
-    $this->charsets = array("UTF-8" => "UTF-8",
-        "ISO8859-1"=>"ISO8859-1 (Latin 1)",
-        "ISO8859-2"=>"ISO8859-2 (Latin 2)",
-        "ISO8859-3"=>"ISO8859-3 (Latin 3)",
-        "ISO8859-4"=>"ISO8859-4 (Latin 4)",
-        "ISO8859-5"=>"ISO8859-5 (Latin 5)",
-        "cp850"=>"CP850 (Europe)");
+
+    $this->charsets = array();
+
+    if(!file_exists("/etc/gosa/encodings")){
+      print_red(_("The file '/etc/gosa/encodings' does not exist, can't get supported charsets."));
+    }else{
+      if(!is_readable("/etc/gosa/encodings")){
+        print_red(_("Can't read '/etc/gosa/encodings', please check permissions."));
+      }else{
+        $fp = fopen("/etc/gosa/encodings","r");
+        $i = 100;
+        while(!feof($fp)&&$i){
+          $i -- ;
+          $str = trim(fgets($fp,256));
+      
+          /* Skip comments */
+          if(!preg_match("/^#/",$str)){
+            $arr = split("\=",$str);
+            if(count($arr)==2){
+              $this->charsets[$arr[0]]=$arr[1];
+            }
+          }
+        }
+
+    
+      }
+    }
 
     if($entry){
       $tmp = split("\|",$entry);
