@@ -306,6 +306,7 @@ class glpiAttachmentPool extends plugin
   {
     $message = array();
     if($this->edit){
+      $this->name=trim($this->name);
       if(empty($this->name)){
         $message[] = _("Please specify a valid name for this attachment.");
       }
