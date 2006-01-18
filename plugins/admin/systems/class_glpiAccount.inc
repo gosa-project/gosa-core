@@ -427,6 +427,9 @@ class glpiAccount extends plugin
     /* Assign smarty defaults */ 
     foreach(array("SystemTypes","SystemTypeKeys","Manufacturers","OSs","TechnicalResponsibles","InstalledDevices","Attachments") as $attr){
       $smarty->assign($attr,array());
+    }
+
+    foreach($this->attributes as $attr){
       $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
     }
 
