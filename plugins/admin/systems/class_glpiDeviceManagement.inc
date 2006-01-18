@@ -362,7 +362,7 @@ class glpiDeviceManagement extends plugin
 
     /* Transfer given data to smarty */
     foreach($this->EditEntry as $name => $value){
-      $smarty->assign($name,$value);
+      $smarty->assign($name,htmlentities($value));
     }
   
     /* Set default select boxes, manufacturers ... */
