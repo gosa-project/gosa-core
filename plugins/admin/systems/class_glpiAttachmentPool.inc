@@ -316,9 +316,16 @@ class glpiAttachmentPool extends plugin
       $att = $this->parent->handle->getAttachments();
       $ok = true;
       $this->name=trim($this->name);
+
       foreach($att as $val){
-        if($val['name'] == $this->name){
-          $ok = false;
+        if(!isset($this->entry['ID'])){
+          if($val['name'] == $this->name){
+            $ok = false;
+          }
+        }else{
+          if(($val['name'] == $this->name)&&($this->entry['ID'] != $val['ID'])){
+            $ok = false;
+          }
         }
       }
       if(!$ok){
