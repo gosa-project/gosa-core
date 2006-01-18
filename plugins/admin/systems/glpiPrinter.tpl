@@ -75,6 +75,7 @@
 					</td>
 				</tr>
 			</table>
+			<input name="glpiPrinterFlagsPosted" value="1" type="hidden">
 		</td>
 		<td style="border-left: 1px solid rgb(160, 160, 160); vertical-align: top; padding-right: 5px;">
 			<h2>{t}Information{/t}</h2>

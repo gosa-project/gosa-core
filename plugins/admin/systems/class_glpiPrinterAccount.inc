@@ -485,11 +485,13 @@ class glpiPrinterAccount extends plugin
       }
     }
 
-    foreach(array("flags_serial","flags_par","flags_usb") as $checkboxes){
-      if(isset($_POST[$checkboxes])){
-        $this->$checkboxes = 1;
-      }else{
-        $this->$checkboxes = 0;
+    if(isset($_POST['glpiPrinterFlagsPosted'])){
+      foreach(array("flags_serial","flags_par","flags_usb") as $checkboxes){
+        if(isset($_POST[$checkboxes])){
+          $this->$checkboxes = 1;
+        }else{
+          $this->$checkboxes = 0;
+        }
       }
     }
 
