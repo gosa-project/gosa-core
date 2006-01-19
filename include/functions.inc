@@ -372,7 +372,7 @@ function add_lock ($object, $user)
   /* Check for existing entries in lock area */
   $ldap= $config->get_ldap_link();
   $ldap->cd ($config->current['CONFIG']);
-  $ldap->search("(&(objectClass=gosaLockEntry)(gosaUser=$user)(gosaObject=$object))",
+  $ldap->search("(&(objectClass=gosaLockEntry)(gosaUser=$user)(gosaObject=".base64encode($object)."))",
       array("gosaUser"));
   if (!preg_match("/Success/i", $ldap->error)){
     print_red (sprintf(_("Can't set locking information in LDAP database. Please check the 'config' entry in gosa.conf! LDAP server says '%s'."), $ldap->get_error()));
@@ -386,7 +386,7 @@ function add_lock ($object, $user)
     $ldap->cd("cn=$name,".$config->current['CONFIG']);
     $attrs["objectClass"] = "gosaLockEntry";
     $attrs["gosaUser"] = $user;
-    $attrs["gosaObject"] = $object;
+    $attrs["gosaObject"] = base64_encode($object);
     $attrs["cn"] = "$name";
     $ldap->add($attrs);
     if (!preg_match("/Success/i", $ldap->error)){
@@ -410,7 +410,7 @@ function del_lock ($object)
   /* Check for existance and remove the entry */
   $ldap= $config->get_ldap_link();
   $ldap->cd ($config->current['CONFIG']);
-  $ldap->search ("(&(objectClass=gosaLockEntry)(gosaObject=$object))", array("gosaObject"));
+  $ldap->search ("(&(objectClass=gosaLockEntry)(gosaObject=".base64_encode($object)."))", array("gosaObject"));
   $attrs= $ldap->fetch();
   if ($ldap->getDN() != "" && preg_match("/Success/i", $ldap->error)){
     $ldap->rmdir ($ldap->getDN());
@@ -454,7 +454,7 @@ function get_lock ($object)
   $user= "";
   $ldap= $config->get_ldap_link();
   $ldap->cd ($config->current['CONFIG']);
-  $ldap->search("(&(objectClass=gosaLockEntry)(gosaObject=$object))", array("gosaUser"));
+  $ldap->search("(&(objectClass=gosaLockEntry)(gosaObject=".base64_encode($object)."))", array("gosaUser"));
   if (!preg_match("/Success/i", $ldap->error)){
     print_red (_("Can't get locking information in LDAP database. Please check the 'config' entry in gosa.conf!"));
     return("");
@@ -509,7 +509,7 @@ function get_list2($subtreeACL, $filter, $subsearch= TRUE, $base="", $attrs= arr
   /* Crawl through reslut entries and perform the migration to the
      result array */
   while($attrs = $ldap->fetch()) {
-    $dn= preg_replace("/[ ]*,[ ]*/", ",", $ldap->getDN());
+    $dn= clean_dn($ldap->getDN());
     foreach ($subtreeACL as $key => $value){
       if (preg_match("/$key/", $dn)){
         $attrs["dn"]= convert_department_dn($dn);
@@ -554,7 +554,7 @@ function get_list($subtreeACL, $filter, $subsearch= TRUE, $base="", $attrs= arra
      result array */
   $result= array();
   while($attrs = $ldap->fetch()) {
-    $dn= preg_replace("/[ ]*,[ ]*/", ",", $ldap->getDN());
+    $dn= clean_dn($ldap->getDN());
     foreach ($subtreeACL as $key => $value){
       if (preg_match("/$key/", $dn)){
         $attrs["dn"]= $dn;
@@ -652,8 +652,10 @@ function get_permissions ($dn, $subtreeACL)
 
   /* Successively remove leading parts of the dn's until
      it doesn't contain commas anymore */
-  while (preg_match('/,/', $tmp)){
-    $tmp= ltrim(strstr($tmp, ","), ",");
+  $tmp_dn= preg_replace('/\\\\,/', '<GOSA#REPLACED#KOMMA>', $tmp);
+  while (preg_match('/,/', $tmp_dn)){
+    $tmp_dn= ltrim(strstr($tmp_dn, ","), ",");
+    $tmp= preg_replace('/\<GOSA#REPLACED#KOMMA\>/', '\\,', $tmp);
 
     /* Check for acl that may apply */
     foreach ($sacl as $key => $value){
@@ -743,16 +745,16 @@ function convert_department_dn($dn)
 
   /* Build a sub-directory style list of the tree level
      specified in $dn */
-  foreach (split (",", $dn) as $val){
+  foreach (dn_split ($dn) as $val){
 
     /* We're only interested in organizational units... */
     if (preg_match ("/ou=/", $val)){
-      $dep= preg_replace("/ou=([^,]+)/", "\\1", $val)."/$dep";
+      $dep= substr($val,3)."/$dep";
     }
 
     /* ... and location objects */
     if (preg_match ("/l=/", $val)){
-      $dep= preg_replace("/l=([^,]+)/", "\\1", $val)."/$dep";
+      $dep= substr($val,2)."/$dep";
     }
   }
 
@@ -770,10 +772,10 @@ function convert_department_dn2($dn)
 
   if(isset($deps[$dn])){
     $dn= $deps[$dn];
-    $tmp = split (",", $dn);
+    $tmp = dn_split ($dn);
     $dep = preg_replace("/^.*=/","",$tmp[0]);
   }else{
-    $tmp = split (",", $dn);
+    $tmp = dn_split ($dn);
     $dep= preg_replace("%^.*/([^/]+)$%", "\\1", $tmp[0]);
   }
 
@@ -1826,6 +1828,42 @@ function search_config($arr, $name, $return)
   return ("");
 }
 
+
+function dn_split($dn)
+{
+  $ret= array();
+  $tmp_dn= preg_replace('/\\\\,/', '##', $dn);
+  if (!preg_match('/,/', $tmp_dn)){
+    $ret[]= $dn;
+    return $ret;
+  }
+
+  while (1){
+
+    # Get next position of comma, exit if there
+    # are none left
+    $pos= strpos($tmp_dn, ',');
+    if ($pos === false){
+      break;
+    }
+
+    # Assign element
+    $ret[]= substr($dn, 0, $pos);
+    $tmp_dn= substr($tmp_dn, $pos + 1);
+    $dn= substr($dn, $pos + 1);
+  }
+  
+  return ($ret);
+}
+
+
+function clean_dn($dn)
+{
+  $tmp_dn= preg_replace('/\\\\,/', '<GOSA#REPLACED#KOMMA>', $dn);
+  $tmp_dn= preg_replace('/[ ]*,[ ]*/', ",", $tmp_dn);
+  $tmp_dn= preg_replace('/\<GOSA#REPLACED#KOMMA\>/', '\\,', $tmp_dn);
+  return ($tmp_dn);
+}
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

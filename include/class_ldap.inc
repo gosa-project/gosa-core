@@ -250,7 +250,7 @@ class LDAP{
           $rv = @ldap_get_dn($this->cid, $this->re);
         
           $this->error = @ldap_error($this->cid);
-          $rv= preg_replace("/[ ]*,[ ]*/", ",", $rv);
+          $rv= clean_dn($rv);
           return($rv);
            }
       }else{
