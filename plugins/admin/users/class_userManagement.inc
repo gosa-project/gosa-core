@@ -674,7 +674,7 @@ class userManagement extends plugin
       " <input class='center' type='image' align='middle' src='images/list_new_user.png' title='"._("Create new user")."' alt='"._("New user")."' name='user_new'>&nbsp;".
       " <input class='center' type='image' align='middle' src='images/list_new.png' title='"._("Create new template")."' alt='"._("New template")."' name='user_tplnew'>&nbsp;".
       " <img   class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-      _("Current base")."&nbsp;<select name='depselect' onChange='mainform.submit()' class='center'>$options</select>".
+      _("Base")."&nbsp;<select name='depselect' onChange='mainform.submit()' class='center'>$options</select>".
       " <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
       "</div>";
 

@@ -8,7 +8,7 @@
   </div>
   <div class="contentboxb">
   	<div style='background:#F0F0F9;padding:5px;'>
-<input type="image" src="images/edittrash.png" name="AddRepository">
+<input type="image" src="images/fai_new_packages.png.png" title="{t}Add repository{/t}" name="AddRepository">
 	</div>
 </div>
 <div style='height:4px;'></div>	  
