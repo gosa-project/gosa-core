@@ -372,7 +372,7 @@ function add_lock ($object, $user)
   /* Check for existing entries in lock area */
   $ldap= $config->get_ldap_link();
   $ldap->cd ($config->current['CONFIG']);
-  $ldap->search("(&(objectClass=gosaLockEntry)(gosaUser=$user)(gosaObject=".base64encode($object)."))",
+  $ldap->search("(&(objectClass=gosaLockEntry)(gosaUser=$user)(gosaObject=".base64_encode($object)."))",
       array("gosaUser"));
   if (!preg_match("/Success/i", $ldap->error)){
     print_red (sprintf(_("Can't set locking information in LDAP database. Please check the 'config' entry in gosa.conf! LDAP server says '%s'."), $ldap->get_error()));
