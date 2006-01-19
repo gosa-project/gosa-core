@@ -47,7 +47,18 @@
 					</td>
 				</tr>
 			</table>
+<br>
 			<p class="seperator" >&nbsp;</p>
+			<h2>{t}Information{/t}</h2>
+			<table summary="" width="100%">
+				<tr>
+					<td>
+						<textarea name="comments" style="width:100%;height:100px;" {$commentsACL}>{$comments}</textarea>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td style="border-left: 1px solid rgb(160, 160, 160); vertical-align: top; padding-right: 5px;">
 			<h2>{t}Supported interfaces{/t}</h2>
 			<table summary="" width="100%">
 				<tr>
@@ -76,29 +87,29 @@
 				</tr>
 			</table>
 			<input name="glpiPrinterFlagsPosted" value="1" type="hidden">
-		</td>
-		<td style="border-left: 1px solid rgb(160, 160, 160); vertical-align: top; padding-right: 5px;">
-			<h2>{t}Information{/t}</h2>
-			<table summary="" width="100%">
-				<tr>
-					<td style="vertical-align: top;">
-						{t}Comments{/t}
-					</td>
-					<td>
-						<textarea name="comments" style="width:100%;height:110px;" {$commentsACL}>{$comments}</textarea>
-					</td>
-				</tr>
-			</table>
 			<p class="seperator" >&nbsp;</p>
 			<h2>{t}Attachments{/t}</h2>
 			<table summary="" width="100%">	
 				<tr>
 					<td>
-						<select name="Attachments" {$AttachmentsACL} style="height:120px;width:100%;" multiple>
+						<select name="Attachments" {$AttachmentsACL} style="height:100px;width:100%;" multiple>
 							{html_options values=$AttachmentKeys output=$Attachments}
 						</select>
 						<input name="AddAttachment" 	value="{t}Add{/t}" type="submit">	
 						<input name="RemoveAttachment" 	value="{t}Remove{/t}" type="submit">	
+					</td>
+				</tr>
+			</table>
+			<p class="seperator" >&nbsp;</p>
+			<h2>{t}Installed cartridges{/t}</h2>
+			<table summary="" width="100%">	
+				<tr>
+					<td>
+						<select name="Cartridges" {$CartridgesACL} style="height:100px;width:100%;" multiple>
+							{html_options values=$CartridgeKeys output=$Cartridges}
+						</select>
+						<input name="AddCartridge" 	value="{t}Add{/t}" type="submit">	
+						<input name="RemoveCartridge" 	value="{t}Remove{/t}" type="submit">	
 					</td>
 				</tr>
 			</table>

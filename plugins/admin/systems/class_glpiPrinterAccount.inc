@@ -21,7 +21,7 @@ class glpiPrinterAccount extends plugin
   
   var $comments           = "";    // Comment
   
-  var $type               = 0;     // System type id
+  var $type               = 0;     // printer type id
   var $serial             = "";   
   var $otherserial        = "";  
   var $ramSize            = 0;
@@ -59,7 +59,7 @@ class glpiPrinterAccount extends plugin
   
   var $usedDevices      = array();  // Which devices are currently selected 
   var $usedAttachments  = array();  // Used Attachments 
-
+  var $usedCartridges   = array();  // Used Cartridges
 
   /* Contructor 
      Sets default values and checks if we already have an existing glpi account
@@ -104,6 +104,14 @@ class glpiPrinterAccount extends plugin
       foreach($atts as $attachment){
         $this->usedAttachments[$attachment['FK_doc']]=$attachment['FK_doc']; 
       }
+
+      $cart= $this->handle->getUsedCartridges($tmp[0]['ID']);
+      foreach($cart as $key => $cartridge){
+        $this->usedCartridges[$key]=$cartridge; 
+        $this->usedCartridges[$key]['status']="exists"; 
+      }
+
+
     }else{
       $this->is_account = false;
     }
@@ -122,6 +130,8 @@ class glpiPrinterAccount extends plugin
     /* Fill templating stuff */
     $smarty= get_smarty();
     $display= "";
+
+    $smarty->assign("CartridgesACL",chkacl($this->acl,"Cartridges"));
 
     /*  Assign smarty defaults 
         To avoid undefined indexes, if there is an error with the glpi db
@@ -374,6 +384,50 @@ class glpiPrinterAccount extends plugin
     }
 
     /*  ##########################################################################
+     *  Printer Cartridge handling 
+     */
+
+    /* Abort cartridge select dialog
+     */
+    if(isset($_POST['SelectCartridgeCancel'])){
+      $this->cur_dialog = false;
+      $this->edit_type = false; 
+    }
+
+    /* Get selected cartridges and add them to our list 
+     */ 
+    if(isset($_POST['SelectCartridgeSave'])){
+      $this->cur_dialog->save_object();
+      $carts = $this->cur_dialog->save();
+      foreach($carts as $cart){
+        $cart['status'] = "new";
+        $this->usedCartridges[] = $cart;
+      }
+      $this->cur_dialog = false;
+      $this->edit_type = false; 
+    }
+
+    /* Remove cartridge  
+     */
+    if((isset($_POST['RemoveCartridge']))&&(isset($_POST['Cartridges']))){
+      if(isset($this->usedCartridges[$_POST['Cartridges']])){
+        if($this->usedCartridges[$_POST['Cartridges']]['status'] == "exists"){
+          $this->usedCartridges[$_POST['Cartridges']]['status'] = "deleted";
+        }else{
+          unset($this->usedCartridges[$_POST['Cartridges']]);
+        }
+      }
+    }
+
+    /* Open Attachment pool to add/edit Attachments
+     */
+    if(isset($_POST['AddCartridge'])){
+      $this->cur_dialog = new glpiPrinterCartridges($this->config,$this->dn,$this->type);
+      $this->dialog = true;
+    }
+
+
+    /*  ##########################################################################
      *  Draw Dialogs
      */
     /* if( cur_dialog != false || cur_dialog != NULL) 
@@ -433,6 +487,10 @@ class glpiPrinterAccount extends plugin
     $smarty->assign("Attachments",            $this->getUsedAttachments());
     $smarty->assign("AttachmentKeys",         array_flip($this->getUsedAttachments()));
 
+    /* Assign Cartridges 
+     */
+    $smarty->assign("Cartridges",            $this->getUsedCartridges());
+    $smarty->assign("CartridgeKeys",         $this->getUsedCartridges(true));
 
     /*  ##########################################################################
      *  Assign contact and technical responsible person 
@@ -529,6 +587,14 @@ class glpiPrinterAccount extends plugin
       }
       $tmp = $this->handle->getPrinterInformations($this->dn);
       $this->handle->addAttachmentsToPrinter($this->usedAttachments,$tmp[0]['ID']);
+
+      foreach($this->usedCartridges as $cart){
+        if($cart['status'] == "deleted"){
+          $this->handle->removeCartridgeFromPrinter($cart['ID']);
+        }elseif($cart['status'] == "new"){
+          $this->handle->addCartridgeFromPrinter($tmp[0]['ID'],$cart['type_ID']);
+        }
+      }
     }
   }
 
@@ -553,7 +619,20 @@ class glpiPrinterAccount extends plugin
     }
     return($ret);
   }
-  
+
+  function getUsedCartridges($flip = false)
+  {
+    $ret = array();
+    foreach($this->usedCartridges as $key => $value){
+      if($value['status'] == "deleted") continue;
+      if($flip){
+        $ret[$key] = $key;    
+      }else{
+        $ret[$key] = $value['name']." [".$value['type_name']."] "._("since")." :".$value['date_use'];
+      }
+    }
+    return($ret);
+  }  
 
 }
 
