@@ -173,14 +173,14 @@ class faiVariable extends plugin
       /* Magic quotes GPC, escapes every ' " \, to solve some security risks
      * If we post the escaped strings they will be escaped again
      */
+
     foreach($this->attributes as $attrs){
       if(get_magic_quotes_gpc()){
-        $smarty->assign($attrs,stripslashes($this->$attrs));
+        $smarty->assign($attrs,htmlentities (stripslashes(utf8_decode($this->$attrs))));
       }else{
-        $smarty->assign($attrs,($this->$attrs));
+        $smarty->assign($attrs,htmlentities (utf8_decode($this->$attrs)));
       }
     }
-
 
     $display.= $smarty->fetch(get_template_path('faiVariable.tpl', TRUE));
     return($display);
