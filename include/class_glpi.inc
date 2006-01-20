@@ -1637,6 +1637,20 @@ class glpiDB{
 		}
 	}
 
+	function getUsedDropdownTypes($id=false)
+	{
+		if($this->is_connected){
+			if($id){
+				$qry = "SELECT distinct(type) FROM glpi_cartridges_type WHERE type = ".$id.";";
+			}else{
+				$qry = "SELECT distinct(type) FROM glpi_cartridges_type;";
+			}
+			return($this->query($qry));
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
 
 }
 //$s = new glpiDB("vserver-01","glpi","tester","glpi");

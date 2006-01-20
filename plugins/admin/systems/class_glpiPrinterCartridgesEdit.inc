@@ -111,7 +111,12 @@ class glpiPrinterCartridgesEdit extends plugin
     /* Remove selected type from our printer types list
      */
     if((isset($_POST['del_cartridge_type']))&&(!empty($_POST['select_type_cartridge']))){
-      $this->parent->handle->removeCartridgeDropdownType($_POST['select_type_cartridge']);
+      $used = $this->parent->handle->getUsedDropdownTypes($_POST['select_type_cartridge']);
+      if(!count($used)){
+        $this->parent->handle->removeCartridgeDropdownType($_POST['select_type_cartridge']);
+      }else{
+        print_red(_("Can't delete this entry, it is still in use."));
+      }
     }
 
     /* Rename selected printer type to given string
