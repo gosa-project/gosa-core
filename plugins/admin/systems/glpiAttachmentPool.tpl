@@ -50,7 +50,7 @@
 <p class="seperator">&nbsp;</p>
 <div align="right">
 	<p>
-	<input type="submit" name="UseAttachment" value="{t}Use{/t}">
-	<input type="submit" name="AbortAttachment" value="{t}Cancel{/t}">
+		<input type="submit" name="UseAttachment" value="{t}Use{/t}">
+		<input type="submit" name="AbortAttachment" value="{t}Cancel{/t}">
 	</p>
 </div>

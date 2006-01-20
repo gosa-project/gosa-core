@@ -11,7 +11,7 @@ class glpiAccount extends plugin
   var $ignore_account= FALSE;
   var $attributes= array("ID","name","contact",
       "tech_num","comments","date_mod","os","location","domain","network","contact_num",
-      "model","type","is_template","FK_glpi_enterprise","deleted","InstalledDevices","Attachments");
+      "model","type","is_template","FK_glpi_enterprise","deleted");
 
   var $ID                 ;       // Is set if this entry is edited 
   var $name               = "";    // This should be the dn of this entry 
@@ -225,8 +225,10 @@ class glpiAccount extends plugin
     /* Remove Attachment fro this tab 
      */
     if((isset($_POST['RemoveAttachment']))&&(isset($_POST['Attachments']))){
-      if(isset($this->usedAttachments[$_POST['Attachments']])){
-        unset($this->usedAttachments[$_POST['Attachments']]);
+      foreach($_POST['Attachments'] as $entry){
+        if(isset($this->usedAttachments[$entry])){
+          unset($this->usedAttachments[$entry]);
+        }
       }
     }
 
@@ -436,7 +438,7 @@ class glpiAccount extends plugin
 
     /* Assign some vars to smarty 
      */
-    foreach(array("type","FK_glpi_enterprise","os","tech_num","contact_num") as $attr){
+    foreach(array("type","FK_glpi_enterprise","os","tech_num","contact_num","Attachments","InstalledDevices") as $attr){
       $smarty->assign($attr,"");
       $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
     }
