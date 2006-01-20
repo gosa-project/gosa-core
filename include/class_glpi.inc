@@ -1331,6 +1331,313 @@ class glpiDB{
 		}
 	}
 
+
+	/* Cartridges 
+     */
+
+	/* return all assigned cartridges */
+	function getUsedCartridges($printerID)
+	{
+		if($this->is_connected){
+			$ret = array();
+			$qry = "SELECT 
+						c.date_use			as date_use,
+						c.ID 				as ID, 
+						t.ID 				as type_ID,
+						t.name				as name, 
+						c.FK_glpi_printers	as FK_glpi_printers, 
+						d.name 				as type_name 
+					FROM 
+						glpi_dropdown_cartridge_type as d,
+						glpi_cartridges as c, 
+						glpi_cartridges_type as t 
+					WHERE 	c.FK_glpi_cartridges_type = t.ID 
+						AND t.type = d.ID 
+						AND c.FK_glpi_printers = ".$printerID.";"; 
+			$res = $this->query($qry);
+			foreach($res as $entry){
+				$ret[$entry['ID']] = $entry;
+			}
+			return($ret);
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+	/* return all assigned cartridges */
+	function getAvailableCartridgeTypes($printerTypeID)
+	{
+		if($this->is_connected){
+			$ret = array();
+			$qry= "
+	SELECT 	
+			ct.ID 			as cartridgeID,
+			ct.name 		as cartridgeName,
+			pt.ID 			as printerTypeID,
+			pt.name 		as printerTypeName,
+			ct.type 		as cartridgeTypeID,
+			dt.name 		as cartridgeTypeName 
+	FROM 	
+			glpi_type_printers 				as pt, 
+			glpi_cartridges_type 			as ct, 
+			glpi_dropdown_cartridge_type 	as dt, 
+			glpi_cartridges_assoc 			as ac
+	 WHERE 
+				ac.FK_glpi_type_printer = pt.ID 
+			AND ac.FK_glpi_cartridges_type = ct.ID 
+			AND ct.type=dt.ID 
+			AND pt.ID=".$printerTypeID.";";
+			$res = $this->query($qry);
+			foreach($res as $entry){
+				$ret[$entry['cartridgeID']] = $entry;
+			}
+			return($ret);
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+	function removeCartridgeFromPrinter($cartridgeID)
+	{
+		if($this->is_connected){
+			$qry = "DELETE FROM glpi_cartridges WHERE ID=".$cartridgeID.";";
+			return($this->query($qry));
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+	function addCartridgeFromPrinter($printerID,$cartridgeID)
+	{
+		if($this->is_connected){
+			$qry ="INSERT INTO 
+						glpi_cartridges (FK_glpi_cartridges_type,FK_glpi_printers,date_in,date_use) 
+				   VALUES 
+						(".$cartridgeID.",".$printerID.",'".date("Y-m-d")."','".date("Y-m-d")."');";	
+			return($this->query($qry));
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+	function getCartridgeTypeInformations($id = "all"){
+		if($this->is_connected){
+			$ret = array();			
+			if($id != "all"){
+				$qry = "SELECT * FROM glpi_cartridges_type WHERE ID = ".$id.";";
+			}else{
+				$qry = "SELECT * FROM glpi_cartridges_type;";
+			}
+		
+			$res = ($this->query($qry));
+			foreach($res as $entry){
+				$ret[$entry['ID']] = $entry;
+			}	
+			return($ret);
+
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+	function getCartridgeTypes(){
+		if($this->is_connected){
+			$ret = array();			
+			$qry = "SELECT * FROM glpi_dropdown_cartridge_type;";
+			$res = ($this->query($qry));
+			foreach($res as $entry){
+				$ret[$entry['ID']] = $entry['name'];
+			}	
+			return($ret);
+
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+
+	/* Manufacturer 
+	   Updates already existing manufacturer
+	 */
+	function Add_UpdateCatrigdeType($array,$array_printer_types)
+	{
+		if(!is_array($array)){
+			echo "Add_UpdateCatrigdeType: first paraeter must be an array";
+		}elseif($this->is_connected){
+
+
+			$atr = array("name","ref","location","type","FK_glpi_enterprise","tech_num","deleted","comments","alarm");
+
+			/* Entry was edited */
+			if($array['ID']>0){
+				$qry = "DELETE FROM glpi_cartridges_assoc WHERE FK_glpi_cartridges_type=".$array['ID'].";";
+
+				$v = "";
+				foreach($atr as $at){
+					if(isset($array[$at])){
+						$v .= " ".$at."='".$array[$at]."', ";
+					}
+				}
+				if(empty($v)){
+					echo "Add_UpdateCatrigdeType: no attributes given ";
+					return(false);
+				}else{
+					$v = preg_replace("/, $/","",$v);
+					$qry = "UPDATE glpi_cartridges_type SET ".$v." WHERE ID='".$array['ID']."';";
+					$this->query($qry);	
+				}
+			}else{
+
+				/* skip if name is in use*/
+				$qry = "SELECT * FROM glpi_cartridges_type WHERE name='".$array['name']."';";
+				if(count($this->query($qry))){
+					return;
+				}
+
+				$str = "INSERT INTO glpi_cartridges_type ";
+				$namen = "";
+				$values= "";
+				foreach($array as $name => $value){	
+					$namen .= $name.", ";
+					if(is_numeric($value)){
+						$values .= $value.", ";
+					}else{
+						$values .= "'".$value."', ";
+					}
+				}
+				$values = preg_replace("/, $/","",$values);
+				$namen  = preg_replace("/, $/","",$namen);
+				$str .= "(".$namen.") VALUES (".$values.");";
+				$this->query($str);	
+				$IDs = $this->query("SELECT ID FROM glpi_cartridges_type WHERE name='".$array['name']."';");
+				if(count($IDs) > 1){
+					echo "internal db error";
+					return;
+				}
+				$array['ID'] = $IDs[0]['ID'];
+			}
+
+			foreach($array_printer_types as $id){
+				$qry = "INSERT INTO glpi_cartridges_assoc 
+					(FK_glpi_cartridges_type,FK_glpi_type_printer) 
+					VALUES 
+					(".$array['ID'].",".$id.")";
+
+				$this->query($qry);
+			}
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+	function getSupportedPrinterTypeIDsForCartridge($cid)
+	{
+		if($this->is_connected){
+			$ret = array();
+			$qry = "SELECT FK_glpi_type_printer FROM glpi_cartridges_assoc WHERE FK_glpi_cartridges_type = ".$cid.";";	
+			$res = $this->query($qry);
+				
+			foreach($res as $entry => $value){
+				$ret[$value['FK_glpi_type_printer']] = $value['FK_glpi_type_printer'];
+			}
+			return($ret);
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+	function removeCartridgeType($id){
+		if($this->is_connected){
+			$qry = "DELETE FROM glpi_cartridges_assoc WHERE FK_glpi_cartridges_type=".$id.";";
+			$this->query($qry);	
+			$qry = "DELETE FROM glpi_cartridges_type WHERE ID=".$id.";";
+			return($this->query($qry));	
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+	function getCartridgesWhichUseThisType($id)
+	{
+		if($this->is_connected){
+			$qry = "SELECT * FROM glpi_cartridges WHERE FK_glpi_cartridges_type=".$id.";";
+			$ret  = $this->query($qry);
+			return($ret);
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+
+	/* Add pritner types 
+       Add one entry to the cartridgeType types 
+     */
+	function addCartridgeDropdownType($name)
+	{
+		if($this->is_connected){
+			$tmp = $this->query("SELECT * FROM glpi_dropdown_cartridge_type WHERE name='".$name."';");
+			if(isset($tmp[0])){
+				//echo "such an entry already exists";
+				return(false);
+			}else{	
+				return($this->query("INSERT INTO glpi_dropdown_cartridge_type (name) VALUES ('".$name."');"));
+			}
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+	/* remove cartridgeType types 
+       Remove one entry from the cartridgeType types (specified by ID=$id)
+     */
+	function removeCartridgeDropdownType($id)
+	{
+		if($this->is_connected){
+			$tmp = $this->query("SELECT * FROM glpi_dropdown_cartridge_type WHERE ID=".$id.";");
+			if(isset($tmp[0])){
+				return($this->query("DELETE FROM glpi_dropdown_cartridge_type WHERE ID=".$id.";"));	
+			}else{
+				echo "can't remove not existing entry";
+				return(false);	
+			}
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+	/* Update cartridgeType  
+	   Update a cartridgeType  	
+	*/
+	function updateCartridgeDropdownType($name,$id)
+	{
+
+		if($this->is_connected){
+			$tmp = $this->query("SELECT * FROM glpi_dropdown_cartridge_type WHERE ID=".$id.";");
+			if(isset($tmp[0])){
+				return($this->query("UPDATE glpi_dropdown_cartridge_type SET name='".$name."' WHERE ID=".$id.";"));	
+			}else{
+				echo "can't update not existing entry";
+				return(false);	
+			}
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+
 }
 //$s = new glpiDB("vserver-01","glpi","tester","glpi");
 //print_r($s->query("SELECT * FROM glpi_computers"));
