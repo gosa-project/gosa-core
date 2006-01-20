@@ -336,7 +336,7 @@ class glpiAccount extends plugin
      */
     if(isset($_POST['SelectContactPerson'])){
       $this->addUser = "contact";
-      $this->cur_dialog= new glpiSelectUser($this->config,$this->dn);
+      $this->cur_dialog= new glpiSelectUser($this->config,$this->dn,"user_tech_num");
     }
 
     /* Open dialog which allows to edit the manufacturers
@@ -355,6 +355,7 @@ class glpiAccount extends plugin
 
     /* Abort user selection
      */
+    $smarty->assign("AbortSelectUser","SelectUserCancel");
     if(isset($_POST['SelectUserCancel'])){
       $this->dialog = false;
       $this->addUser ="";
@@ -365,7 +366,7 @@ class glpiAccount extends plugin
      */
     if(isset($_POST['SelectTechPerson'])){
       $this->addUser ="tech";
-      $this->cur_dialog= new glpiSelectUser($this->config,$this->dn);
+      $this->cur_dialog= new glpiSelectUser($this->config,$this->dn,"user_tech_num");
     }
 
     /* Technical responsible person selected*/

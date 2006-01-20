@@ -49,5 +49,7 @@
 <input type="hidden" name="ignore">
 <p class="seperator">&nbsp;</p>
 <div align="right">
-	<input type="submit" name="SelectUserCancel" value="{t}Cancel{/t}">
+	<p>
+	<input type="submit" name="{$AbortSelectUser}" value="{t}Cancel{/t}">
+</p>
 </div>

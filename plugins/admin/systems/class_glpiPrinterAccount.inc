@@ -39,6 +39,8 @@ class glpiPrinterAccount extends plugin
   var $contact            = "";    // Empty
   var $deleted            = "N";   // Deleted entries should have this set to Y
 
+  var $editManufacturer   = false;
+
   /* Not necessary, cause we use mysql databse */
   var $objectclasses= array("whatever");
 
@@ -258,13 +260,15 @@ class glpiPrinterAccount extends plugin
     if(isset($_POST['edit_manufacturer'])){
       $this->cur_dialog = new glpiManufacturer($this->config,$this->dn);
       $this->dialog = true;
+      $this->editManufacturer =true;
     }
 
     /* Close manufacturer editing dialog
      */
-    if(isset($_POST['close_edit_manufacturer'])){
+    if((isset($_POST['close_edit_manufacturer']))&&($this->editManufacturer)){
       $this->dialog = false;
       $this->cur_dialog = false;
+      $this->editManufacturer=false;
     }
 
 
@@ -279,18 +283,19 @@ class glpiPrinterAccount extends plugin
      */
     if(isset($_POST['SelectContactPerson'])){
       $this->addUser = "contact";
-      $this->cur_dialog= new glpiSelectUser($this->config,$this->dn);
+      $this->cur_dialog= new glpiSelectUser($this->config,$this->dn,"user_tech_num");
     }
 
     /* Selecte technical responsible person
      */
     if(isset($_POST['SelectTechPerson'])){
       $this->addUser ="tech";
-      $this->cur_dialog= new glpiSelectUser($this->config,$this->dn);
+      $this->cur_dialog= new glpiSelectUser($this->config,$this->dn,"user_tech_num");
     }
 
     /* Abort user selection
      */
+    $smarty->assign("AbortSelectUser","SelectUserCancel");
     if(isset($_POST['SelectUserCancel'])){
       $this->dialog = false;
       $this->addUser ="";
@@ -536,14 +541,14 @@ class glpiPrinterAccount extends plugin
   /* Save data to object */
   function save_object()
   {
-    plugin::save_object();
-    foreach($this->attributes as $attrs){
-      if(isset($_POST[$attrs])){
-        $this->$attrs = $_POST[$attrs];
-      }
-    }
-
     if(isset($_POST['glpiPrinterFlagsPosted'])){
+      plugin::save_object();
+      foreach($this->attributes as $attrs){
+        if(isset($_POST[$attrs])){
+          $this->$attrs = $_POST[$attrs];
+        }
+      }
+
       foreach(array("flags_serial","flags_par","flags_usb") as $checkboxes){
         if(isset($_POST[$checkboxes])){
           $this->$checkboxes = 1;

@@ -49,6 +49,8 @@
 <input type="hidden" name="ignore">
 <p class="seperator">&nbsp;</p>
 <div align="right">
+	<p>
 	<input type="submit" name="SelectCartridgeSave" value="{t}Use{/t}">
 	<input type="submit" name="SelectCartridgeCancel" value="{t}Cancel{/t}">
+	</p>
 </div>

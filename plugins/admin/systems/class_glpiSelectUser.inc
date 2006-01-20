@@ -17,9 +17,13 @@ class glpiSelectUser extends plugin
 
   var $ui;
 
-  function glpiSelectUser ($config, $dn= NULL)
+  var $PostVarName      = "";
+
+  function glpiSelectUser ($config, $dn= NULL,$postvar)
   {
     plugin::plugin ($config, $dn);
+
+    $this->PostVarName = $postvar;
 
     if(!isset($_SESSION['glpi_user_filter'])){
       $tmp['users_regex'] = "*";
@@ -37,8 +41,18 @@ class glpiSelectUser extends plugin
 
     $filter = $_SESSION['glpi_user_filter'];
 
-    $s_action="";
+    /* Filter settings, remove double* */
+    if(isset($_GET['search'])){
+      $filter['users_regex'] = preg_replace("/\*\**/","*",$_GET['search']."*");
+    }elseif(isset($_POST['regex'])){
+      $filter['users_regex'] = preg_replace("/\*\**/","*",$_POST['regex']);
+    }
+    if(empty($filter['users_regex'])) {
+      $filter = "*";
+    }
 
+
+    $s_action="";
     /* Test Posts */
     foreach($_POST as $key => $val){
       // Post for delete
@@ -114,7 +128,7 @@ class glpiSelectUser extends plugin
       $divlist->AddEntry(array($field1,$field2,$field3));
     }
 
-    $useruse = "<a href='?plug=".$_GET['plug']."&amp;act=user_tech_num&amp;id=%s'>%s</a>";
+    $useruse = "<a href='?plug=".$_GET['plug']."&amp;act=".$this->PostVarName."&amp;id=%s'>%s</a>";
     
     foreach($this->users as $key=>$user){
       $field1 = array("string" => "<img src='images/select_user.png' alt='user'>", "attach" => "style='text-align:center;width:20px;'");
@@ -124,14 +138,6 @@ class glpiSelectUser extends plugin
       $divlist->AddEntry(array($field1,$field2,$field3));
       
     }
-
-
-
-
-
-
-
-
 
     $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
       " <input class='center' type='image' align='middle' 
@@ -181,7 +187,7 @@ class glpiSelectUser extends plugin
      * So we are able to navigate like in konquerer
      */
 
-    $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
+    $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=*)(description=*))(objectClass=gosaDepartment))",
         TRUE, $base, array("ou", "description"), TRUE);
 
     $this->departments= array();

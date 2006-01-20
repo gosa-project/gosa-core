@@ -16,7 +16,14 @@ class glpiPrinterCartridges extends plugin
   var $usedCartridges   = array();    // IDs of used cartridges for this printer 
   var $PrinterType      = 0;          // Specifies which cartridge types are available
 
-  function glpiPrinterCartridges ($config, $dn= NULL,$type)
+  var $cur_dialog       = false;
+  var $cur_sub_dialog   = false;
+
+  var $editManufacturer = false;
+  var $del              = 0;
+
+
+  function glpiPrinterCartridges ($config,$dn,$type)
   {
     plugin::plugin ($config, $dn);
 
@@ -36,6 +43,34 @@ class glpiPrinterCartridges extends plugin
     plugin::execute();
     $display ="";
     $smarty = get_smarty();
+    $filter = $_SESSION['glpiCartridgeRegex'];
+
+    /* Filter settings, remove double* */
+    if(isset($_GET['search'])){
+      $filter = preg_replace("/\*\**/","*",$_GET['search']."*");
+    }elseif(isset($_POST['cartridge_regex'])){
+      $filter = preg_replace("/\*\**/","*",$_POST['cartridge_regex']);
+    }
+    if(empty($filter)) {
+      $filter = "*";
+    }
+    $_SESSION['glpiCartridgeRegex']= $filter;
+
+    /* Open dialog which allows to edit the manufacturers
+     */
+    if(isset($_POST['edit_manufacturer_cartridges'])){
+      $this->cur_sub_dialog = new glpiManufacturer($this->config,$this->dn);
+      $this->dialog = true;
+      $this->editManufacturer =true;
+    }
+
+    /* Close manufacturer editing dialog
+     */
+    if((isset($_POST['close_edit_manufacturer']))&&($this->editManufacturer)){
+      $this->dialog = false;
+      $this->cur_sub_dialog = false;
+      $this->editManufacturer=false;
+    }
 
     /* Check poted vars and do the requested job, but only once */
     $only_once = true;
@@ -43,22 +78,72 @@ class glpiPrinterCartridges extends plugin
 
       /* We have to create a new cartridge */
       if(preg_match("/^newcartridge/",$name)&&($only_once)){
-        echo "new Cartridge";
-        
+        $this->cur_dialog = new glpiPrinterCartridgesEdit($this->config,$this->dn,$this->PrinterType); 
         $only_once = false;
       }
     }
   
     /* Edit cartridge */
     if(isset($_GET['act'])&&$_GET['act']=="edit_cartridge"){
-      print_a($this->parent->handle->getCartridgeTypeInformations($_GET['id']));
-      echo "edit";
+      $val = ($this->parent->handle->getCartridgeTypeInformations($_GET['id']));
+      $this->cur_dialog = new glpiPrinterCartridgesEdit($this->config,$this->dn,$this->PrinterType,$val[$_GET['id']]); 
     }
  
     /* remove cartridge */ 
     if(isset($_GET['act'])&&$_GET['act']=="del_cartridge"){
-      print_a($this->parent->handle->getCartridgeTypeInformations($_GET['id']));
-      echo "remove";
+        /* remove attach from db */
+        $this->del = $_GET['id'];
+        $val = ($this->parent->handle->getCartridgeTypeInformations($_GET['id']));
+        $smarty->assign("warning", sprintf(_("You're about to delete the glpi cartridge type '%s'."), $val[$this->del]['name']));
+        return($smarty->fetch(get_template_path('remove_glpi.tpl', TRUE)));
+    }
+
+    if(isset($_POST['delete_cancel'])){
+      $this->del = false;
+    }
+
+    /* Delete this entry */
+    if(isset($_POST['delete_glpi_confirm'])&&($this->del)) {
+      if(count($this->parent->handle->getCartridgesWhichUseThisType($this->del))){
+        print_red(_("You can't delete this cartridge type, it is still in use."));
+      }else{
+        $val = ($this->parent->handle->getCartridgeTypeInformations($this->del));
+        $this->cur_dialog = new glpiPrinterCartridgesEdit($this->config,$this->dn,$this->PrinterType,$val[$this->del]); 
+        $this->cur_dialog->parent = $this->parent;
+        $this->cur_dialog->remove_from_parent();
+        $this->cur_dialog= false;
+      } 
+    }
+
+    /* Abort edit / add dialog */
+    if(isset($_POST['CancelCartridge'])){
+      $this->cur_dialog = false;
+    }
+  
+    /* Save changes if check is ok */
+    if(isset($_POST['SaveCartridge'])){
+      if(count($this->cur_dialog->check())) {
+        foreach($this->cur_dialog->check() as $checks){
+          print_red($checks);
+        }
+      }else{
+        $this->cur_dialog->save_object();
+        $this->cur_dialog->save();
+        $this->cur_dialog = false;
+      }
+    }
+
+    /* If we have a dialog open, display it */
+    if($this->cur_sub_dialog){
+      $this->cur_sub_dialog->parent = $this->parent;
+      $this->cur_sub_dialog->save_object();
+      return($this->cur_sub_dialog->execute());
+    }
+    /* If we have a dialog open, display it */
+    if($this->cur_dialog){
+      $this->cur_dialog->parent = $this->parent;
+      $this->cur_dialog->save_object();
+      return($this->cur_dialog->execute());
     }
 
     /* Create divlist */
@@ -79,7 +164,19 @@ class glpiPrinterCartridges extends plugin
 
     /* Add cartridges */ 
     $cart = $this->getCartridgeTypes();
+
+    /* Remove typically error possibilities */
+    $f = str_replace("/","\/",$filter);
+    $f = str_replace(".","\.",$f);
+    $f = str_replace("*",".*",$f);
+
+    /* Assign cartridges */
     foreach($cart as $key=>$cartr){
+
+      /* Skip if filter doesn't match*/
+      if(!preg_match("/^".$f."$/i",$cartr['cartridgeName'])){
+        continue;
+      }
 
       /* check if this cartridge is selected */
       $chk = "";
@@ -88,10 +185,13 @@ class glpiPrinterCartridges extends plugin
       }
 
       /* Add fields */
-      $field1 = array("string" => preg_replace("/%s/",($key),preg_replace("/%CHECKED%/",$chk,$useCartridge)), "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($edit,($key),$cartr['cartridgeName']."&nbsp;[".$cartr['cartridgeTypeName']."]"), "attach" => "style=''");
+      $field1 = array("string" => preg_replace("/%s/",($key),preg_replace("/%CHECKED%/",$chk,$useCartridge)), 
+                      "attach" => "style='text-align:center;width:20px;'");
+      $field2 = array("string" => sprintf($edit,($key),$cartr['cartridgeName']."&nbsp;[".$cartr['cartridgeTypeName']."]"), 
+                      "attach" => "style=''");
       $field3 = array("string" => sprintf($editdel,($key),($key)), 
-        "attach" => "style='width:60px;border-right:0px;text-align:right;'");
+                      "attach" => "style='width:60px;border-right:0px;text-align:right;'");
+
       $divlist->AddEntry(array($field1,$field2,$field3));
       
     }
@@ -113,7 +213,7 @@ class glpiPrinterCartridges extends plugin
     $smarty->assign("launchimage", get_template_path('images/launch.png'));
     $smarty->assign("apply", apply_filter());
     $smarty->assign("alphabet", generate_alphabet());
-    $smarty->assign("cartridge_regex", $filter['device_regex']);
+    $smarty->assign("cartridge_regex", $filter);
 
     $display.= $smarty->fetch(get_template_path('glpiPrinterCartridges.tpl', TRUE));
     return($display);
