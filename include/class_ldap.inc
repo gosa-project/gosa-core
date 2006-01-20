@@ -144,14 +144,14 @@ class LDAP{
     }
   }
 
-  function ls($filter = "(objectclass=*)", $basedn = "")
+  function ls($filter = "(objectclass=*)", $basedn = "",$attrs = array("*"))
   {
     if($this->hascon){
       if ($this->reconnect) $this->connect();
       $this->clearResult();
       if ($basedn == "")
         $basedn = $this->basedn;
-      $this->sr = @ldap_list($this->cid, $basedn, $filter);
+      $this->sr = @ldap_list($this->cid, $basedn, $filter,$attrs);
       $this->error = @ldap_error($this->cid);
       $this->resetResult();
       $this->hasres=true;
