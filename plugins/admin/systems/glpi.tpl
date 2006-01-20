@@ -69,13 +69,13 @@
 					<td>
 						{t}Contact person{/t}
 					</td>
-					<td>
+					<td width="100%">
 						<i>{$contact_num}&nbsp; </i>&nbsp;
 						<input {$contact_numACL} type="submit" name="SelectContactPerson" value="{t}Edit{/t}">
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td valign="top">
 						{t}Comments{/t}
 					</td>
 					<td>

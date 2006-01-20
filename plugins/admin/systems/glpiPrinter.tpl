@@ -52,7 +52,7 @@
 			<h2>{t}Information{/t}</h2>
 			<table summary="" width="100%">
 				<tr>
-					<td>
+					<td width="100%">
 						<textarea name="comments" style="width:100%;height:100px;" {$commentsACL}>{$comments}</textarea>
 					</td>
 				</tr>

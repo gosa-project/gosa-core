@@ -11,7 +11,7 @@ class glpiAccount extends plugin
   var $ignore_account= FALSE;
   var $attributes= array("ID","name","contact",
       "tech_num","comments","date_mod","os","location","domain","network","contact_num",
-      "model","type","is_template","FK_glpi_enterprise","deleted");
+      "model","type","is_template","FK_glpi_enterprise","deleted","InstalledDevices","Attachments");
 
   var $ID                 ;       // Is set if this entry is edited 
   var $name               = "";    // This should be the dn of this entry 
