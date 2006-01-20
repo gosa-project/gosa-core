@@ -105,7 +105,7 @@
 			<table summary="" width="100%">	
 				<tr>
 					<td>
-						<select name="Cartridges" {$CartridgesACL} style="height:100px;width:100%;" multiple>
+						<select name="Cartridges[]" {$CartridgesACL} style="height:100px;width:100%;" multiple>
 							{html_options values=$CartridgeKeys output=$Cartridges}
 						</select>
 						<input name="AddCartridge" 	value="{t}Add{/t}" type="submit">	

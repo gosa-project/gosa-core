@@ -415,11 +415,15 @@ class glpiPrinterAccount extends plugin
     /* Remove cartridge  
      */
     if((isset($_POST['RemoveCartridge']))&&(isset($_POST['Cartridges']))){
-      if(isset($this->usedCartridges[$_POST['Cartridges']])){
-        if($this->usedCartridges[$_POST['Cartridges']]['status'] == "exists"){
-          $this->usedCartridges[$_POST['Cartridges']]['status'] = "deleted";
-        }else{
-          unset($this->usedCartridges[$_POST['Cartridges']]);
+
+      foreach($_POST['Cartridges'] as $cartID){
+
+        if(isset($this->usedCartridges[$cartID])){
+          if($this->usedCartridges[$cartID]['status'] == "exists"){
+            $this->usedCartridges[$cartID]['status'] = "deleted";
+          }else{
+            unset($this->usedCartridges[$cartID]);
+          }
         }
       }
     }
@@ -523,6 +527,19 @@ class glpiPrinterAccount extends plugin
       $smarty->assign("tech_num",               $str);
     }else{
       $smarty->assign("tech_num",               _("N/A"));
+    }
+
+    /* If theres a cartridge selected, you can't change the printer type.
+     */ 
+    $disp = true;
+
+    foreach($this->usedCartridges as $cart){
+      if($cart['status'] != "deleted"){
+        $disp = false;
+      }
+    }
+    if($disp==false){
+      $smarty->assign("typeACL","disabled");
     }
 
     $display.= $smarty->fetch(get_template_path('glpiPrinter.tpl', TRUE));
