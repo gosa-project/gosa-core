@@ -619,19 +619,27 @@ class glpiDB{
      */
 	function is_deviceUsed($item)
 	{
-
 		$deviceMappingGOsaGlpi 		= array_flip($this->deviceMappingGOsaGlpi);
 		$deviceMappingTableNameID 	= $this->deviceMappingTableNameID;
 		if($this->is_connected){
 			$tablename =  $deviceMappingGOsaGlpi[$item['device_type']];
 			$type = $item['device_type'];
 
+			$ret = array();
+
 			if($type=="monitor"){
-				$str = "SELECT * FROM glpi_connect_wire WHERE end1=".$item['ID']." AND type=4;";
+				$str = "SELECT c.name FROM glpi_connect_wire as w, glpi_computers as c WHERE w.end1=".$item['ID']." AND w.end2 = c.ID AND w.type=4;"; 
 			}else{
-				$str = "SELECT * FROM glpi_computer_device WHERE device_type=".$deviceMappingTableNameID[$type]." AND FK_device=".$item['ID'].";";
+				$str = "SELECT c.name FROM glpi_computer_device as d, glpi_computers as c WHERE d.FK_computers=c.ID AND FK_device=".$item['ID']." AND device_type=".$deviceMappingTableNameID[$type]." ;";
 			}
-			return(count($this->query($str)));
+
+			$res = $this->query($str);
+	
+			foreach($res as $val){
+				$ret[$val['name']] = $val['name'];
+			}	
+
+			return($ret);//count($this->query($str)));
 		}else{
 			echo "not connected";
 			return(false);
@@ -1032,8 +1040,13 @@ class glpiDB{
 	function is_attachmentUsed($id)
 	{
 		if($this->is_connected){
-			$qry = "SELECT * FROM glpi_doc_device WHERE FK_doc =".$id." LIMIT 1; ";
-			return(count($this->query($qry)));
+			$ret = array();
+			$qry = "SELECT t.name FROM glpi_computers as t, glpi_doc_device WHERE t.ID = glpi_doc_device.FK_device AND FK_doc =".$id." LIMIT 3;";
+			$res = $this->query($qry);
+			foreach($res as $val){
+				$ret[$val['name']] = $val['name'];
+			}
+			return($ret);
 		}else{
             echo "not connected";
             return(false);

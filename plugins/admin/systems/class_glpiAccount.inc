@@ -344,7 +344,6 @@ class glpiAccount extends plugin
         }
         print_red(sprintf(_("You can't delete this operating system, it is still in use by these system(s) '%s'"),$names));
 
-
       }else{
         $this->handle->removeOS_byID($_POST['select_os']);  
       }

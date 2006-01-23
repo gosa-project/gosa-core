@@ -98,7 +98,19 @@ class glpiAttachmentPool extends plugin
 
     if((isset($_POST['delete_glpi_confirm']))&&(isset($attach[$this->delAttach]))){
       if($this->parent->handle->is_attachmentUsed($this->delAttach)){
-        print_red(_("Can't delete this attachment, it is still in use."));
+        $tmp = $this->parent->handle->is_attachmentUsed($this->delAttach);
+        
+        $names = "";
+        foreach($tmp as $name){
+          $names .= ", ".$name;
+        }
+        $names = preg_replace("/^, /","",$names);
+        $names = trim($names);
+        if(count($tmp) == 3){
+          $names .= " ...";
+        }
+        print_red(sprintf(_("You can't delete this attachment, it is still in use by these system(s) '%s'"),$names));
+
       }else{
         $this->parent->handle->deleteAttachment($this->delAttach);
         $attach     = $this->parent->handle->getAttachments();

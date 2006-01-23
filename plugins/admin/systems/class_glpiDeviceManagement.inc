@@ -122,8 +122,20 @@ class glpiDeviceManagement extends plugin
 
     /* Delete entry, but check if this device is in currently in use */
     if(isset($_POST['delete_glpi_confirm'])){
-      if($this->parent->handle->is_deviceUsed($this->delete)){
-        print_red(_("Can't delete this device, it is actually in use by some glpi accounts. Remove this relation first."));
+      if(count($this->parent->handle->is_deviceUsed($this->delete))){
+
+        $tmp = $this->parent->handle->is_deviceUsed($this->delete);    
+  
+        $names = "";
+        foreach($tmp as $name){
+          $names .= ", ".$name;
+        }
+        $names = preg_replace("/^, /","",$names);
+        $names = trim($names);
+        if(count($tmp) == 3){
+          $names .= " ...";
+        }
+        print_red(sprintf(_("You can't delete this device, it is still in use by these system(s) '%s'"),$names));
       }else{
         $this->parent->handle->deleteDevice($this->delete);
         $this->reload();
