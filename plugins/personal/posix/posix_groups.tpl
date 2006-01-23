@@ -23,13 +23,6 @@
      <table summary="" style="width:100%;">
       {$alphabet}
      </table>
-    <p class="contentboxb" style="border-top:1px solid #B0B0B0; background-color:#F8F8F8">
-    <input type=checkbox name="primarygroups" value="1" {$primarygroups} onClick="mainform.submit()" title="{t}Select to see groups that are primary groups of users{/t}">{t}Show primary groups{/t}<br>
-    <input type=checkbox name="sambagroups" value="1" {$sambagroups} onClick="mainform.submit()" title="{t}Select to see groups that have samba groups mappings{/t}">{t}Show samba groups{/t}<br>
-    <input type=checkbox name="appgroups" value="1" {$appgroups} onClick="mainform.submit()" title="{t}Select to see groups that have applications configured{/t}">{t}Show application groups{/t}<br>
-    <input type=checkbox name="mailgroups" value="1" {$mailgroups} onClick="mainform.submit()" title="{t}Select to see groups that have mail settings{/t}">{t}Show mail groups{/t}<br>
-    <input type=checkbox name="functionalgroups" value="1" {$functionalgroups} onClick="mainform.submit()" title='{t}Select to see normal groups that have only functional aspects{/t}'>{t}Show functional groups{/t}
- </p>
     <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 		<tr>
 			<td width="50%">

@@ -59,6 +59,8 @@ class posixAccount extends plugin
   var $primaryGroup= 0;
   var $was_trust_account= FALSE;
 
+  var $grouplist  = array();
+  var $ui         = array();
 
   /* attribute list for save action */
   var $attributes= array("homeDirectory", "loginShell", "uidNumber", "gidNumber", "gecos",
@@ -204,6 +206,7 @@ class posixAccount extends plugin
           "regex"           => "*");
       register_global("sysfilter", $sysfilter);
     }
+    $this->ui = get_userinfo();
   }
 
 
@@ -372,7 +375,6 @@ class posixAccount extends plugin
 
     /* Manage group add dialog */
     if ($this->group_dialog){
-      $gd= new groupManagement($this->config, get_userinfo());
 
       /* Save data */
       $groupfilter= get_global("groupfilter");
@@ -402,9 +404,10 @@ class posixAccount extends plugin
       register_global("groupfilter", $groupfilter);
 
       /* Calculate actual groups */
-      $gd->reload(true);
+		
+      $this->reload();
       $glist= array();
-      foreach ($gd->grouplist as $key => $value){
+      foreach ($this->grouplist as $key => $value){
         if (!isset($this->groupMembership[$key])){
           $glist[$key]= $value;
         }
@@ -1067,14 +1070,57 @@ class posixAccount extends plugin
 
   }
 
+ function reload()
+  {
 
+    /* Get config */
+    $groupfilter= get_global('groupfilter');
 
+    /* Set base for all searches */
+    $base= $groupfilter['depselect'];
+
+    /* Regex filter? */
+    if ($groupfilter['regex'] != ""){
+      $regex= $groupfilter['regex'];
+    } else {
+      $regex= "*";
+    }
+
+    $error = "";
+    $ldap = $this->config->get_ldap_link();    
+
+    $base= get_groups_ou().$base;
+    $res= get_list($this->ui->subtreeACL, "(objectClass=posixGroup)", FALSE, $base, array("cn", "description", "gidNumber"), TRUE);
+    if (preg_match("/size limit/i", $error)){
+      $_SESSION['limit_exceeded']= TRUE;
+    }
+
+    $error = $ldap->error;
+    $this->grouplist = array();
+    foreach ($res as $value){
+        $this->grouplist[$value['gidNumber'][0]]= $value;
+    }
+
+    $tmp=array();
+    foreach($this->grouplist as $tkey => $val ){
+      $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
+    }
+
+    /* Sort index */
+    ksort($tmp);
+
+    /* Recreate index array[dn]=cn[description]*/
+    $this->grouplist=array();
+    foreach($tmp as $val){
+      if(isset($val['description'])){
+        $this->grouplist[$val['dn']]=$val['cn'][0]."&nbsp;[".$val['description'][0]."]";
+      }else{
+        $this->grouplist[$val['dn']]=$val['cn'][0];
+      }
+    }
+    reset ($this->grouplist);
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-
-
-
-
-
 ?>

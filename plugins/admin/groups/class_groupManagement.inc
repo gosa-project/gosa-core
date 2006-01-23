@@ -526,20 +526,11 @@ class groupManagement extends plugin
       }
     }
 
-
-
-
-
-
-
-
     /*
      * We also need to search for the departments
      * So we are able to navigate like in konquerer
      */
 
-    /* Only needed if we are in GroupManagement */
-    if(!$CreatePosixsList){
       $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
           FALSE, $base, array("ou", "description"), TRUE);
       $this->departments= array();
@@ -555,7 +546,6 @@ class groupManagement extends plugin
           $this->departments[$value['dn']]= convert_department_dn2($value['dn']);//$value["description"][0];
         }
       }
-    }
     /*  Ende department generation
      */
 
@@ -594,39 +584,16 @@ class groupManagement extends plugin
 
     $tmp=array();
 
-    /* If true ; this result is used for posix tab, group membership selection. */
-    if($CreatePosixsList){
-
-      /* Addd to array */
-      foreach($this->grouplist as $tkey => $val ){
-        $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
-      }
-      
-      /* Sort index */
-      ksort($tmp);
-
-      /* Recreate index array[dn]=cn[description]*/
-      $this->grouplist=array();
-      foreach($tmp as $val){
-        if(isset($val['description'])){
-          $this->grouplist[$val['dn']]=$val['cn'][0]."&nbsp;[".$val['description'][0]."]";
-        }else{
-          $this->grouplist[$val['dn']]=$val['cn'][0];
-        }
-      }
-    }else{
-  
-      /* Create result for group management listbox*/
-      foreach($this->grouplist as $tkey => $val ){
-        $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
-      }
-      ksort($tmp);
-      $this->grouplist=array();
-      foreach($tmp as $val){
-        $this->grouplist[]=$val;
-      }
-      reset ($this->grouplist);
+    /* Create result for group management listbox*/
+    foreach($this->grouplist as $tkey => $val ){
+      $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
     }
+    ksort($tmp);
+    $this->grouplist=array();
+    foreach($tmp as $val){
+      $this->grouplist[]=$val;
+    }
+    reset ($this->grouplist);
   }
 
   function remove_from_parent()
