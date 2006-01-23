@@ -1,6 +1,11 @@
 Target for 2.4.1:
 =================
 
+Please fix till 25.01.06:
+* Create/Edit a terminal template and save it; then also a printer named default is created. 
+	This should not happen. (It is also created if there is no printer enabled on printer tab !!!).
+	If you try to delete this entry, some errors are shown. 
+
 * Create a status-bar/-display for FAI installations 
 	(Use notes from 0.5.12.2005)
 
