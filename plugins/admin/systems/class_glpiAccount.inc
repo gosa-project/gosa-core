@@ -329,7 +329,25 @@ class glpiAccount extends plugin
     /* Delete selected os from list and db
      */
     if((isset($_POST['del_os']))&&(!empty($_POST['select_os']))){
-      $this->handle->removeOS_byID($_POST['select_os']);  
+      $tmp = $this->handle->is_osUsed($_POST['select_os']);
+  
+      if(count($tmp)){
+
+        $names = "";
+        foreach($tmp as $name){
+          $names .= ", ".$name;
+        }
+        $names = preg_replace("/^, /","",$names);
+        $names = trim($names);
+        if(count($tmp) == 3){
+          $names .= " ...";
+        }
+        print_red(sprintf(_("You can't delete this operating system, it is still in use by these system(s) '%s'"),$names));
+
+
+      }else{
+        $this->handle->removeOS_byID($_POST['select_os']);  
+      }
     }
 
     /* Rename selected os to given string

@@ -339,6 +339,23 @@ class glpiDB{
 		}
 	}
 
+	/* Operating system is used ? */
+	function is_osUsed($ID){
+		if($this->is_connected){
+			$ret = array();
+			$qry="SELECT name,type FROM glpi_computers WHERE os=".$ID." LIMIT 3;";
+			$res = $this->query($qry);
+			foreach($res as $val){
+				$ret[$val['name']] = $val['name'];
+			}
+			return($ret);
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
+
 	/*  Operating systems
 		Add a new operating system to the dropdown menus   
 	 */
