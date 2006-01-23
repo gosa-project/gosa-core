@@ -117,7 +117,8 @@ class mailgroup extends plugin
             }
             
           }
-          
+         
+ 
           /* Update quota values */
           if ($quota['gosaMailQuota'] == 2147483647){
             $this->quotaUsage= "";
@@ -145,12 +146,46 @@ class mailgroup extends plugin
     }
 
     /* Load permissions */
-    if (isset($this->attrs['acl'])){
-      for ($i= 0; $i<$this->attrs['acl']['count']; $i++){
-        list($user, $permission)= split(' ', $this->attrs['acl'][$i]);
-        $this->imapacl[$user]= $permission;
-        if ($user != "anyone" && $user != "%members%"){
-          unset($this->imapacl['']);
+    if(preg_match("/kolab/i",$this->config->current['MAILMETHOD'])){
+
+
+      /* In case of kolab, we save the permissions in this style 
+
+            mailaddressfromuser rights
+
+         But we need the userID, so we search for a user, with this mail address.
+       */
+      $ldap = $this->config->get_ldap_link();
+      if (isset($this->attrs['acl'])){
+        for ($i= 0; $i<$this->attrs['acl']['count']; $i++){
+          list($user, $permission)= split(' ', $this->attrs['acl'][$i]);
+          
+          /* Skip entry anyone and %members %*/
+          if ($user != "anyone" && $user != "%members%"){
+            $mail = $ldap->search("(&(objectClass=person)(|(mail=".$user.")(uid=".$user.")))",array("uid"));
+            $mail = $ldap->fetch();
+            if(isset($mail['uid'][0])){
+              $user = $mail['uid'][0];
+            }
+          }
+      
+          /* Add to list */
+          $this->imapacl[$user]= $permission;
+
+          #fixme  What is that ?
+          if ($user != "anyone" && $user != "%members%"){
+            unset($this->imapacl['']);
+          }
+        }
+      }
+    }else{
+      if (isset($this->attrs['acl'])){
+        for ($i= 0; $i<$this->attrs['acl']['count']; $i++){
+          list($user, $permission)= split(' ', $this->attrs['acl'][$i]);
+          $this->imapacl[$user]= $permission;
+          if ($user != "anyone" && $user != "%members%"){
+            unset($this->imapacl['']);
+          }
         }
       }
     }
@@ -564,20 +599,37 @@ class mailgroup extends plugin
     /* Save shared folder target */
     $this->attrs['gosaSharedFolderTarget']= "share+".$this->uid;
 
-    /* Save acl's */
-    $this->attrs['acl']= array();
-    foreach ($this->imapacl as $user => $acl){
-      if ($user == ""){
-        continue;
+    if(preg_match("/kolab/i",$this->config->current['MAILMETHOD'])){
+      /* Save acl's */
+      $this->attrs['acl']= array();
+      foreach ($this->imapacl as $user => $acl){
+        if ($user == ""){
+          continue;
+        }
+        $ldap->search("(&(objectClass=person)(uid=".$user."))",array("mail"));
+        $mail = $ldap->fetch();
+        if($mail){
+          if(isset($mail['mail'][0])){
+            $this->attrs['acl'][]= $mail['mail'][0]." $acl";
+          }
+        }else{
+          $this->attrs['acl'][]= "$user $acl";
+        }
       }
-      $this->attrs['acl'][]= "$user $acl";
+    }else{
+      /* Save acl's */
+      $this->attrs['acl']= array();
+      foreach ($this->imapacl as $user => $acl){
+        if ($user == ""){
+          continue;
+        }
+        $this->attrs['acl'][]= "$user $acl";
+      }
     }
-
     /* Save data to LDAP */
     $ldap->cd($this->dn);
     $ldap->modify($this->attrs);
     show_ldap_error($ldap->get_error());
-
     /* Only do IMAP actions if we are not a template */
     if (!$this->is_template){
       $method= new $this->method($this->config);
