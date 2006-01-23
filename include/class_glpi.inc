@@ -115,6 +115,7 @@ class glpiDB{
 			foreach($tmp as $t){
 				$ret[$t['ID']]=$t['name'];
 			}
+			sort($ret);
 			return($ret);
 		}else{
 			echo "not connected";
@@ -179,6 +180,23 @@ class glpiDB{
 			return(false);
 		}
 	}
+
+	/* System type is used */
+	function is_systemTypeUsed($ID){
+		if($this->is_connected){
+			$ret = array();
+			$qry="SELECT name,type FROM glpi_computers WHERE type=".$ID." LIMIT 3;";
+			$res = $this->query($qry);
+			foreach($res as $val){
+				$ret[$val['name']] = $val['name'];
+			}
+			return($ret);
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
 
 	/* Manufacturer 
 	   Returns all defined manufacturers

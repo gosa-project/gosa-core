@@ -273,7 +273,21 @@ class glpiAccount extends plugin
     /* Remove selected type from our system types list
      */
     if((isset($_POST['del_type']))&&(!empty($_POST['select_type']))){
-      $this->handle->removeSystemType($_POST['select_type']);  
+      $tmp = $this->handle->is_systemTypeUsed($_POST['select_type']);
+      if(count($tmp)){
+        $names = "";
+        foreach($tmp as $name){
+          $names .= ", ".$name;
+        }
+        $names = preg_replace("/^, /","",$names); 
+        $names = trim($names);
+        if(count($tmp) == 3){
+          $names .= " ...";
+        }
+        print_red(sprintf(_("You can't delete this system type, it is still in use by these system(s) '%s'"),$names));
+      }else{
+        $this->handle->removeSystemType($_POST['select_type']); 
+      } 
     }
 
     /* Rename selected system type to given string
