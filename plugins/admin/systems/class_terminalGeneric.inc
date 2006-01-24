@@ -193,22 +193,27 @@ class termgeneric extends plugin
 
   function remove_from_parent()
   {
+    
     $ldap= $this->config->get_ldap_link();
-    $ldap->rmdir($this->dn);
-    show_ldap_error($ldap->get_error());
+    $ldap->cd($this->dn);
+    $ldap->cat($this->dn);
+    if($ldap->count()){
 
-    /* Optionally execute a command after we're done */
-    $this->handle_post_events("remove");
+      $ldap->rmdir($this->dn);
+      show_ldap_error($ldap->get_error());
 
-    /* Delete references to object groups */
-    $ldap->cd ($this->config->current['BASE']);
-    $ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))", array("cn"));
-    while ($ldap->fetch()){
-      $og= new ogroup($this->config, $ldap->getDN());
-      unset($og->member[$this->dn]);
-      $og->save ();
+      /* Optionally execute a command after we're done */
+      $this->handle_post_events("remove");
+
+      /* Delete references to object groups */
+      $ldap->cd ($this->config->current['BASE']);
+      $ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))", array("cn"));
+      while ($ldap->fetch()){
+        $og= new ogroup($this->config, $ldap->getDN());
+        unset($og->member[$this->dn]);
+        $og->save ();
+      }
     }
-
   }
 
 

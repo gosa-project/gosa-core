@@ -429,24 +429,28 @@ class printgeneric extends plugin
 
   function remove_from_parent()
   {
-    $this->dn= preg_replace('/ou=workstations,/', 'ou=printers,', $this->dn);
-    $ldap= $this->config->get_ldap_link();
-    $ldap->rmdir($this->dn);
-    show_ldap_error($ldap->get_error());
-    $this->handle_post_events("remove");
+    if($this->initially_was_account){
+      $ldap= $this->config->get_ldap_link();
+      $ldap->cat($this->dn);
+      if(count($ldap->fetch()) ){
 
-    /* Delete references to object groups */
-    $ldap->cd ($this->config->current['BASE']);
-    $ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))", array("cn"));
-    while ($ldap->fetch()){
-      $og= new ogroup($this->config, $ldap->getDN());
-      unset($og->member[$this->dn]);
-      $og->save ();
+        $ldap->rmdir($this->dn);
+        show_ldap_error($ldap->get_error());
+        $this->handle_post_events("remove");
+
+        /* Delete references to object groups */
+        $ldap->cd ($this->config->current['BASE']);
+        $ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))", array("cn"));
+        while ($ldap->fetch()){
+          $og= new ogroup($this->config, $ldap->getDN());
+          unset($og->member[$this->dn]);
+          $og->save ();
+        }
+      }
     }
   }
-
-  /* Save data to object */
-  function save_object()
+    /* Save data to object */
+    function save_object()
   {
     plugin::save_object();
 
