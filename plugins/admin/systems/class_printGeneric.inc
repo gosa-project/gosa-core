@@ -168,6 +168,12 @@ class printgeneric extends plugin
 
     if(isset($this->parent->by_name['workgeneric'])){
 //      echo "workstation";
+      if($this->parent->by_object['workgeneric']->cn == "wdefault"){
+        $display= $this->show_header(_("Add printer extension"),
+            _("This is a workstation template, printer tab is disabled."),TRUE,TRUE);
+        $this->is_account= false;
+        return $display;
+      }
     }elseif(isset($this->parent->by_name['termgeneric'])){
       if($this->parent->by_object['termgeneric']->cn == "default"){
         $display= $this->show_header(_("Add printer extension"),
@@ -454,6 +460,17 @@ class printgeneric extends plugin
   function check()
   {
     $message= array();
+
+    if(isset($this->parent->by_name['workgeneric'])){
+      if($this->parent->by_object['workgeneric']->cn == "wdefault"){
+        return $message;
+      }
+    }elseif(isset($this->parent->by_name['termgeneric'])){
+      if($this->parent->by_object['termgeneric']->cn == "default"){
+        return $message;
+      }
+    }
+
     $this->dn= "cn=".$this->cn.",ou=printers,ou=systems,".$this->base;
 
     /* must: cn */
@@ -492,7 +509,16 @@ class printgeneric extends plugin
     if (!$this->is_account){
       return;
     }
-  
+    if(isset($this->parent->by_name['workgeneric'])){
+      if($this->parent->by_object['workgeneric']->cn == "wdefault"){
+        return;
+      }
+    }elseif(isset($this->parent->by_name['termgeneric'])){
+      if($this->parent->by_object['termgeneric']->cn == "default"){
+        return;
+      }
+    }
+
     if($this->PPDdialogToSave){
       $this->PPDdialogToSave->save_ppd();
     }
