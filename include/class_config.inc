@@ -395,7 +395,10 @@ class config  {
 	/* Load Terminalservers */
 	$ldap->cd ($this->current['BASE']);
 	$ldap->search ("(objectClass=goTerminalServer)");
+	$this->data['SERVERS']['TERMINAL']= array();
 	$this->data['SERVERS']['TERMINAL'][]= "default";
+
+	$this->data['SERVERS']['FONT']= array();
 	$this->data['SERVERS']['FONT'][]= "default";
 	while ($attrs= $ldap->fetch()){
 		$this->data['SERVERS']['TERMINAL'][]= $attrs["cn"][0];
