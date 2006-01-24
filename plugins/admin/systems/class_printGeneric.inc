@@ -166,6 +166,20 @@ class printgeneric extends plugin
 	/* Call parent execute */
 	plugin::execute();
 
+    if(isset($this->parent->by_name['workgeneric'])){
+//      echo "workstation";
+    }elseif(isset($this->parent->by_name['termgeneric'])){
+      if($this->parent->by_object['termgeneric']->cn == "default"){
+        $display= $this->show_header(_("Add printer extension"),
+            _("This is a terminal template, printer tab is disabled."),TRUE,TRUE);
+        $this->is_account= false;
+        return $display;
+      }
+    }elseif(isset($this->parent->by_name['printgeneric'])){
+//      echo "printer";
+    }
+
+
     $smarty= get_smarty();
     $display="";
     /* Template management.
