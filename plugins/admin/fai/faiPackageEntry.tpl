@@ -44,9 +44,7 @@
      		<table summary=""  style="width:100%;">
      			<tr>
      				<td>
-     					<LABEL for "regex">
-							<img alt="{t}Display objects matching{/t}" src="{$search_image}" align=middle title='{t}Display objects matching{/t}'>
-						</LABEL>
+						<img alt="{t}Display objects matching{/t}" src="{$search_image}" align=middle title='{t}Display objects matching{/t}'>
      				</td>
      				<td width="99%">
      					<input type='text' name='searchStrPKG' maxlength='40' style='width:99%' value='{$searchStrPKG}' id='filter' 

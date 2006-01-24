@@ -77,13 +77,14 @@ class faiPackageEntry extends plugin
       } 
     }
 
-    ksort($this->categories);
+        @ksort($this->categories);
 
-    $CHKS = "<table><tr><input type='hidden' value='chkchange' name='chkchange'>";
-    $i = 0; 
+    $CHKS = "<table summary=''><tr><td><input type='hidden' value='chkchange' name='chkchange'>";
+    $i = 0;
+    if(is_array($this->categories)) 
     foreach($this->categories as $cat => $selected){
       if($i == 3){
-        $CHKS .="</tr><tr>";
+        $CHKS .="</td></tr><tr><td>";
         $i = 0;
       }
       $i ++ ;
