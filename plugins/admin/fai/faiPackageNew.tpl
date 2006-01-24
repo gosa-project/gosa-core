@@ -36,6 +36,7 @@
 	</td>
 </tr>
 </table>
+<input type="hidden" name="YesItIsPostedPackages" value="1">
 <p class="seperator">&nbsp;
 </p>
 

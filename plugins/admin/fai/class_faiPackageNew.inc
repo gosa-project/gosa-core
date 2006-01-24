@@ -70,6 +70,7 @@ class faiPackageNew extends plugin
         }else{
           $str .= "<input ".$rel." type='checkbox' value='".$section."' name='section_".$section."'>".$section."<br>";
         }
+        $str .="<input type='hidden' name='wasOnPage_".$section."'>";
       }
     }
     return($str); 
@@ -104,17 +105,25 @@ class faiPackageNew extends plugin
   function save_object()
   {
     /* Post handling for Section, Release  Setup */
-    if((isset($_POST['FAIdebianReleaseS']))&&(!empty($_POST['FAIdebianReleaseS']))){
-      $this->FAIdebianRelease = $_POST['FAIdebianReleaseS'];
-    }
+    if(isset($_POST['YesItIsPostedPackages'])){
 
-    /* Get Sections */
-    foreach($_POST as $name => $value){
-      if(preg_match("/^section_/",$name)){
-        $this->FAIdebianSection[$value] = $value;
+      if((isset($_POST['FAIdebianReleaseS']))&&(!empty($_POST['FAIdebianReleaseS']))){
+        $this->FAIdebianRelease = $_POST['FAIdebianReleaseS'];
+      }
+        
+      foreach($_POST as $name => $value){
+        if(preg_match("/wasOnPage_/",$name)){
+          $nm = preg_replace("/wasOnPage_/","",$name);
+          if(isset($_POST['section_'.$nm])){
+            $this->FAIdebianSection[$nm] = $nm; 
+          }else{
+            if(isset($this->FAIdebianSection[$nm])){
+              unset($this->FAIdebianSection[$nm]);
+            }
+          }
+        }
       }
     }
-
     /* Remove all section that are not available at the currently selected server */ 
     $atr = $this->getServerInfos();
     foreach($this->FAIdebianSection as $section){
