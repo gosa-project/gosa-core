@@ -86,7 +86,7 @@ class printgeneric extends plugin
       }else{
         $this->type = "terminal";
         $this->is_terminal = "true";
-        $this->dn   = preg_replace("/ou=terminal/","ou=printers",$this->dn);
+        $this->dn   = preg_replace("/ou=terminals/","ou=printers",$this->dn);
       }
     }else{
       /* Save dn for later references */
