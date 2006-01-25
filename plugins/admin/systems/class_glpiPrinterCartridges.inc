@@ -104,8 +104,16 @@ class glpiPrinterCartridges extends plugin
 
     /* Delete this entry */
     if(isset($_POST['delete_glpi_confirm'])&&($this->del)) {
-      if(count($this->parent->handle->getCartridgesWhichUseThisType($this->del))){
-        print_red(_("You can't delete this cartridge type, it is still in use."));
+      $tmp = $this->parent->handle->is_cartridgeTypeUsed($this->del);
+      if(count($tmp)){
+
+        $str = "";
+        foreach($tmp as $id => $name){
+          $str .= $name.", "; 
+        }
+        $str = preg_replace("/, $/","",$str);
+
+        print_red(sprintf(_("You can't delete this cartridge type, it is still in use by this printer(s) '%s'."),$str));
       }else{
         $val = ($this->parent->handle->getCartridgeTypeInformations($this->del));
         $this->cur_dialog = new glpiPrinterCartridgesEdit($this->config,$this->dn,$this->PrinterType,$val[$this->del]); 
@@ -122,12 +130,12 @@ class glpiPrinterCartridges extends plugin
   
     /* Save changes if check is ok */
     if(isset($_POST['SaveCartridge'])){
+      $this->cur_dialog->save_object();
       if(count($this->cur_dialog->check())) {
         foreach($this->cur_dialog->check() as $checks){
           print_red($checks);
         }
       }else{
-        $this->cur_dialog->save_object();
         $this->cur_dialog->save();
         $this->cur_dialog = false;
       }
@@ -209,8 +217,8 @@ class glpiPrinterCartridges extends plugin
     $smarty->assign("search_image", get_template_path('images/search.png'));
     $smarty->assign("searchu_image", get_template_path('images/search_user.png'));
     $smarty->assign("tree_image", get_template_path('images/tree.png'));
-    $smarty->assign("infoimage", get_template_path('images/info.png'));
-    $smarty->assign("launchimage", get_template_path('images/launch.png'));
+    $smarty->assign("infoimage", get_template_path('images/info_small.png'));
+    $smarty->assign("launchimage", get_template_path('images/small_filter.png'));
     $smarty->assign("apply", apply_filter());
     $smarty->assign("alphabet", generate_alphabet());
     $smarty->assign("cartridge_regex", $filter);
