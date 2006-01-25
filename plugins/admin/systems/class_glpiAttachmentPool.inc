@@ -260,8 +260,8 @@ class glpiAttachmentPool extends plugin
     $smarty->assign("search_image",     get_template_path('images/search.png'));
     $smarty->assign("searchu_image",    get_template_path('images/search_user.png'));
     $smarty->assign("tree_image",       get_template_path('images/tree.png'));
-    $smarty->assign("infoimage",        get_template_path('images/info.png'));
-    $smarty->assign("launchimage",      get_template_path('images/launch.png'));
+    $smarty->assign("infoimage",        get_template_path('images/info_small.png'));
+    $smarty->assign("launchimage",      get_template_path('images/small_filter.png'));
     $smarty->assign("apply",            apply_filter());
     $smarty->assign("alphabet",         generate_alphabet());
     $smarty->assign("attachment_regex", $_SESSION['GlpiAttachmentFilter']['filter']);
