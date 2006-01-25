@@ -129,7 +129,7 @@ class glpiAccount extends plugin
       $smarty->assign($attr,array());
       $smarty->assign($attr."ACL"," disabled ");
     }
-    foreach(array("type","FK_glpi_enterprise","os","tech_num","comments","contact_num") as $attr){
+    foreach(array("type","FK_glpi_enterprise","os","tech_num","comments","contact_num","AttachmentsDiv") as $attr){
       $smarty->assign($attr,"");
       $smarty->assign($attr."ACL"," disabled ");
     }

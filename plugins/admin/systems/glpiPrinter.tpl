@@ -90,7 +90,7 @@
 				<tr>
 					<td>
 						{$AttachmentsDiv}
-						<input name="AddAttachment" 	value="{t}Add{/t}" type="submit">	
+						<input name="AddAttachment" 	value="{t}Add{/t}" type="submit" {$AttachmentsACL}>	
 					</td>
 				</tr>
 			</table>
@@ -118,8 +118,8 @@
 						<select name="Cartridges[]" {$CartridgesACL} style="height:100px;width:100%;" multiple>
 							{html_options values=$CartridgeKeys output=$Cartridges}
 						</select>
-						<input name="AddCartridge" 	value="{t}Add{/t}" type="submit">	
-						<input name="RemoveCartridge" 	value="{t}Remove{/t}" type="submit">	
+						<input name="AddCartridge" 	value="{t}Add{/t}" type="submit" {$CartridgesACL}>	
+						<input name="RemoveCartridge" 	value="{t}Remove{/t}" type="submit" {$CartridgesACL}>	
 					</td>
 				</tr>
 			</table>

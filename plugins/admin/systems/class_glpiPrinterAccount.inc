@@ -138,11 +138,11 @@ class glpiPrinterAccount extends plugin
     /*  Assign smarty defaults 
         To avoid undefined indexes, if there is an error with the glpi db
      */ 
-    foreach(array("PrinterTypeKeys","PrinterTypes","ManufacturerKeys","Manufacturers","Attachments","AttachmentKeys") as $attr){
+    foreach(array("PrinterTypeKeys","PrinterTypes","ManufacturerKeys","Manufacturers","Attachments","AttachmentKeys","CartridgeKeys","Cartridges") as $attr){
       $smarty->assign($attr,array());
       $smarty->assign($attr."ACL"," disabled ");
     }
-    foreach(array("type","FK_glpi_enterprise","tech_num","contact_num","comments","flags_serial","flags_par","flags_usb") as $attr){
+    foreach(array("type","FK_glpi_enterprise","tech_num","contact_num","comments","flags_serial","flags_par","flags_usb","AttachmentsDiv") as $attr){
       $smarty->assign($attr,"");
       $smarty->assign($attr."ACL"," disabled ");
     }
@@ -500,7 +500,7 @@ class glpiPrinterAccount extends plugin
      *  Assign listbox / checkbox .... values to smarty  
      */
     /* Assign smarty defaults */ 
-    foreach(array("PrinterTypes","PrinterTypeKeys","Manufacturers","TechnicalResponsibles","Attachments") as $attr){
+    foreach(array("PrinterTypes","PrinterTypeKeys","Manufacturers","TechnicalResponsibles","Attachments","Cartridges") as $attr){
       $smarty->assign($attr,array());
       $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
     }
