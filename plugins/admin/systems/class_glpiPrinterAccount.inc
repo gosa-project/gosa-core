@@ -224,19 +224,52 @@ class glpiPrinterAccount extends plugin
     /* This appends a new printer to our sytem types
      */
     if((isset($_POST['add_type']))&&(!empty($_POST['type_string']))){
-      $this->handle->addPrinterType($_POST['type_string']);  
+    
+      $tmp = $this->handle->getPrinterTypes();
+      $allok = true;
+      foreach($tmp as $id => $name){
+        if(trim($name) == trim($_POST['type_string'])){
+          $allok = false;
+        }
+      }
+      if($allok){
+        $this->handle->addPrinterType($_POST['type_string']);  
+      }else{
+        print_red(sprintf(_("Can't rename given printer type to '%s', because this type name already exists."),$_POST['type_string']));
+      }
     }
 
     /* Remove selected type from our printer types list
      */
     if((isset($_POST['del_type']))&&(!empty($_POST['select_type']))){
-      $this->handle->removePrinterType($_POST['select_type']);  
+      $tmp = $this->handle->is_printerTypeUsed($_POST['select_type']);
+      if(count($tmp)){
+        $str = "";
+        foreach($tmp as $id => $name){
+          $str .= $name.", ";
+        }
+        $str = preg_replace("/, $/","",$str); 
+        print_red(sprintf(_("Can't delete printer type, it is still in use by '%s'."),$str));
+      }else{
+        $this->handle->removePrinterType($_POST['select_type']);  
+      }
     }
 
     /* Rename selected printer type to given string
      */
     if((isset($_POST['rename_type']))&&(!empty($_POST['select_type']))&&(!empty($_POST['type_string']))){
-      $this->handle->updatePrinterType($_POST['type_string'],$_POST['select_type']);
+      $tmp = $this->handle->getPrinterTypes();
+      $allok = true;
+      foreach($tmp as $id => $name){
+        if(trim($name) == trim($_POST['type_string'])){
+          $allok = false;
+        }
+      }
+      if($allok){
+        $this->handle->updatePrinterType($_POST['type_string'],$_POST['select_type']);
+      }else{
+        print_red(sprintf(_("Can't rename given printer type to '%s', because this type name already exists."),$_POST['type_string']));
+      }
     }
 
     /* Someone wants to edit the printer types ... 
