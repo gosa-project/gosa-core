@@ -1,7 +1,7 @@
 <table summary="" width="100%">
 	<tr>
 		<td width="50%">
-			<table summary="" width="100%">
+			<table summary=""> 
 				<tr>
 					<td>{t}Name{/t}
 					</td>
@@ -17,7 +17,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>{t}Address{/t}
+					<td style="vertical-align:top;">{t}Address{/t}
 					</td>
 					<td>
 						<textarea  name="address">{$address}</textarea>
@@ -26,7 +26,7 @@
 			</table>
 		</td>
 		<td>
-			<table summary="" width="100%">
+			<table summary="" >
 				<tr>
 					<td>{t}Phone number{/t}
 					</td>
@@ -49,7 +49,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>{t}Comments{/t}
+					<td style="vertical-align:top;">{t}Comments{/t}
 					</td>
 					<td>
 						<textarea name="comments">{$comments}</textarea>

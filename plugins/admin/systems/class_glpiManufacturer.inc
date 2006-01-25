@@ -159,7 +159,7 @@ class glpiManufacturer extends plugin
   {
     foreach($this->attributes as $attr){
       if(isset($_POST[$attr])){
-        $this->$attr = $_POST[$attr];
+        $this->$attr = stripslashes($_POST[$attr]);
       }
     }
   }
