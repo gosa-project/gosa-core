@@ -108,3 +108,4 @@
 		</td>
 	</tr>
 </table>
+<input type="hidden" name="glpi_tpl_posted" value="1">

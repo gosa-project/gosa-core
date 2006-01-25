@@ -601,6 +601,9 @@ class glpiAccount extends plugin
   /* Save data to object */
   function save_object()
   {
+    if(!isset($_POST['glpi_tpl_posted'])) {
+      return ;
+    }
     plugin::save_object();
     foreach($this->attributes as $attrs){
       if(isset($_POST[$attrs])){
