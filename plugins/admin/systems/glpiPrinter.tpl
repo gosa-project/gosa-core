@@ -70,7 +70,7 @@
 					</td>
 					<td>
 						<i>{$tech_num}&nbsp; </i>&nbsp;
-						<input type="submit" value="{t}Choose{/t}" name="SelectTechPerson" {$tech_numACL}>
+						<input type="submit" value="{t}Edit{/t}" name="SelectTechPerson" {$tech_numACL}>
 					</td>
 				</tr>
 				<tr>
