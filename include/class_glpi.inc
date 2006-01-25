@@ -128,7 +128,6 @@ class glpiDB{
 	*/
 	function updateSystemType($name,$id)
 	{
-
 		if($this->is_connected){
 			$tmp = $this->query("SELECT * FROM glpi_type_computers WHERE ID=".$id.";");
 			if(isset($tmp[0])){
@@ -321,18 +320,23 @@ class glpiDB{
 	/* Operating systems 
 	   Returns all OSs
 	 */
-	function getOSTypes()
+	function getOSTypes($keys = false)
 	{
 		if($this->is_connected){
 			$ret = array();
-			$tmp=($this->query("SELECT * FROM glpi_dropdown_os;"));
+			$tmp=($this->query("SELECT * FROM glpi_dropdown_os ORDER by name;"));
 
-			foreach($tmp as $t){
-				$ret[$t['ID']]=$t['name'];
+			if($keys){
+				foreach($tmp as $t){
+					$ret[$t['name']]=$t['ID'];
+				}
+			}else{
+				foreach($tmp as $t){
+					$ret[$t['ID']]=$t['name'];
+				}
 			}
-
 			return($ret);
-				
+
 		}else{
 			echo "not connected";
 			return(false);
@@ -399,7 +403,6 @@ class glpiDB{
 	*/
 	function updateOS($name,$id)
 	{
-
 		if($this->is_connected){
 			$tmp = $this->query("SELECT * FROM glpi_dropdown_os WHERE ID=".$id.";");
 			if(isset($tmp[0])){
@@ -1509,6 +1512,28 @@ class glpiDB{
 		}
 	}
 
+
+
+	/* check if given manufacturer ID ist still in use.
+	   The problem is, that nearly every table uses manufacturers .... 
+     */
+	function is_manufacturerUsed($id)
+	{
+		$tables = array();
+		foreach($this->deviceMappingGOsaGlpi as $table => $entry){
+			$tables[] = $entry;
+		}
+		$tables[] ="sdf";
+		print_a($tables);
+		exit();
+
+		if($this->is_connected){
+			$ret = array();
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
 
 	/* Manufacturer 
 	   Updates already existing manufacturer

@@ -267,7 +267,12 @@ class glpiAccount extends plugin
     /* This appends a new system to our sytem types
      */
     if((isset($_POST['add_type']))&&(!empty($_POST['type_string']))){
-      $this->handle->addSystemType($_POST['type_string']);  
+      $attr = $this->handle->getSystemTypes();
+      if(in_array(trim($_POST['type_string']),$attr)){
+        print_red(_("Adding new sytem type failed, this system type name is already used.")) ;
+      }else{
+        $this->handle->addSystemType(trim($_POST['type_string']));  
+      }
     }
 
     /* Remove selected type from our system types list
@@ -293,7 +298,12 @@ class glpiAccount extends plugin
     /* Rename selected system type to given string
      */
     if((isset($_POST['rename_type']))&&(!empty($_POST['select_type']))&&(!empty($_POST['type_string']))){
-      $this->handle->updateSystemType($_POST['type_string'],$_POST['select_type']);
+      $attr = $this->handle->getSystemTypes();
+      if(in_array(trim($_POST['type_string']),$attr)){
+        print_red(_("Rename failed, this system type name is already used.")) ;
+      }else{
+        $this->handle->updateSystemType($_POST['type_string'],trim($_POST['select_type']));
+      }
     }
 
     /* Someone wants to edit the system types ... 
@@ -323,7 +333,12 @@ class glpiAccount extends plugin
     /* Add new os to the db
      */
     if((isset($_POST['add_os']))&&(!empty($_POST['is_string']))){
-      $this->handle->addOS($_POST['is_string']);  
+      $attr = $this->handle->getOSTypes();
+      if(in_array(trim($_POST['is_string']),$attr)){
+        print_red(_("Adding new operating system failed, specifed name is already used.")) ;
+      }else{
+        $this->handle->addOS(trim($_POST['is_string']));  
+      }
     }
 
     /* Delete selected os from list and db
@@ -352,7 +367,12 @@ class glpiAccount extends plugin
     /* Rename selected os to given string
      */
     if((isset($_POST['rename_os']))&&(!empty($_POST['select_os']))&&(!empty($_POST['is_string']))){
-      $this->handle->updateOS($_POST['is_string'],$_POST['select_os']);
+      $attr = $this->handle->getOSTypes();
+      if(in_array(trim($_POST['is_string']),$attr)){
+        print_red(_("Updating operating system failed, specifed name is already used.")) ;
+      }else{
+        $this->handle->updateOS($_POST['is_string'],$_POST['select_os']);
+      }
     }
 
     /* Open dialog to edit os types 
