@@ -115,7 +115,7 @@ class glpiDB{
 			foreach($tmp as $t){
 				$ret[$t['ID']]=$t['name'];
 			}
-			sort($ret);
+			asort($ret);
 			return($ret);
 		}else{
 			echo "not connected";
