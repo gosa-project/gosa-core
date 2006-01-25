@@ -133,16 +133,20 @@ class glpiAttachmentPool extends plugin
               print_red(_("Missing directory '/etc/gosa/glpi/' to store glpi uploads."));
             }else{
               $filen = "/etc/gosa/glpi/".$FILE['name'];
-              $fh = fopen($filen,"w");
-              if(!$fh){
-                print_red(sprintf(_("Can't create file '%s'."),$filen));
+              if(file_exists($filen)){
+                print_red(_("There is already a file with the same name uploaded."));
               }else{
-                $str = file_get_contents($FILE['tmp_name']);
-                fwrite($fh,$str,strlen($str));
-                fclose($fh);
-                $this->mime     = $FILE['type'];   
-                $this->filename = $FILE['name'];   
-              }
+                $fh = fopen($filen,"w");
+                if(!$fh){
+                  print_red(sprintf(_("Can't create file '%s'."),$filen));
+                }else{
+                  $str = file_get_contents($FILE['tmp_name']);
+                  fwrite($fh,$str,strlen($str));
+                  fclose($fh);
+                  $this->mime     = $FILE['type'];   
+                  $this->filename = $FILE['name'];   
+                }
+              } // File already exists
             }
           } // Check if any error occured
         } // check if valid filename was uploaded
