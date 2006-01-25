@@ -10,6 +10,6 @@
 <p class="seperator">&nbsp;</p>
 <div align="right">
 <p>
-<input name="close_edit_type_cartridge" value="{t}close{/t}" type="submit">
+<input name="close_edit_type_cartridge" value="{t}Close{/t}" type="submit">
 </p>
 </div>
