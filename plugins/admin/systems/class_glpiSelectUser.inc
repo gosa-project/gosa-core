@@ -131,9 +131,9 @@ class glpiSelectUser extends plugin
     $useruse = "<a href='?plug=".$_GET['plug']."&amp;act=".$this->PostVarName."&amp;id=%s'>%s</a>";
     
     foreach($this->users as $key=>$user){
-      $field1 = array("string" => "<img src='images/select_user.png' alt='user'>", "attach" => "style='text-align:center;width:20px;'");
+      $field1 = array("string" => "<img src='images/select_user.png' alt='user' >", "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($useruse,base64_encode($key),$user), "attach" => "style=''");
-      $field3 = array("string" => sprintf($useruse,base64_encode($key),"<img border=0 src='images/crossref.png' alt='"._("use")."'>"), 
+      $field3 = array("string" => sprintf($useruse,base64_encode($key),"<img title='"._("Use")."' border=0 src='images/crossref.png' alt='"._("use")."'>"), 
         "attach" => "style='width:60px;border-right:0px;text-align:right;'");
       $divlist->AddEntry(array($field1,$field2,$field3));
       
@@ -155,8 +155,8 @@ class glpiSelectUser extends plugin
     $smarty->assign("search_image", get_template_path('images/search.png'));
     $smarty->assign("searchu_image", get_template_path('images/search_user.png'));
     $smarty->assign("tree_image", get_template_path('images/tree.png'));
-    $smarty->assign("infoimage", get_template_path('images/info.png'));
-    $smarty->assign("launchimage", get_template_path('images/launch.png'));
+    $smarty->assign("infoimage", get_template_path('images/info_small.png'));
+    $smarty->assign("launchimage", get_template_path('images/small_filter.png'));
     $smarty->assign("apply", apply_filter());
     $smarty->assign("alphabet", generate_alphabet());
     $smarty->assign("users_regex", $filter['users_regex']);

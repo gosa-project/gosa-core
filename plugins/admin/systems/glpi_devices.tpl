@@ -31,7 +31,7 @@
 						<td style="vertical-align:top;">{t}Monitor size{/t}
 						</td>	
 						<td>	
-							<input name="size" value="{$size}">"
+							<input name="size" value="{$size}"> {t}Inch{/t}
 						</td>
 					</tr>
 				</table>
