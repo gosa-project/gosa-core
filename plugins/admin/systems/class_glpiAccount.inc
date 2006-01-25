@@ -224,7 +224,6 @@ class glpiAccount extends plugin
     
     /* Remove Attachment fro this tab 
      */
-
     $once = true;
     foreach($_POST as $name => $value){
       if((preg_match("/^delAttachment_/",$name))&&($once)){
@@ -672,7 +671,6 @@ class glpiAccount extends plugin
       }
       $tmp = $this->handle->getComputerInformations($this->dn);
       $this->handle->addDevicesToComputer($this->usedDevices,$tmp[0]['ID']);
-      $this->handle->addAttachmentsToComputer($this->usedAttachments,$tmp[0]['ID']);
     }
   }
 

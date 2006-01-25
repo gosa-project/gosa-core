@@ -113,6 +113,7 @@ class glpiAttachmentPool extends plugin
 
       }else{
         $this->parent->handle->deleteAttachment($this->delAttach);
+        @unlink("/etc/gosa/glpi/".$this->filename);
         $attach     = $this->parent->handle->getAttachments();
       }
     }
