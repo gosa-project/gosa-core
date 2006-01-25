@@ -87,7 +87,7 @@ class termgeneric extends plugin
     if (isset($_POST['action'])){
       switch($_POST['saction']){
         case 'wake':
-          $cmd= search_config($this->config->data['TABS'], "termgeneric", "WAKECMD");
+          $cmd= search_config($this->config->data['TABS'], "terminfo", "WAKECMD");
           if ($cmd == ""){
             print_red(_("No WAKECMD definition found in your gosa.conf"));
           } else {
@@ -99,7 +99,7 @@ class termgeneric extends plugin
           break;
 
         case 'reboot':
-          $cmd= search_config($this->config->data['TABS'], "termgeneric", "REBOOTCMD");
+          $cmd= search_config($this->config->data['TABS'], "terminfo", "REBOOTCMD");
           if ($cmd == ""){
             print_red(_("No REBOOTCMD definition found in your gosa.conf"));
           } else {
@@ -111,7 +111,7 @@ class termgeneric extends plugin
           break;
 
         case 'halt':
-          $cmd= search_config($this->config->data['TABS'], "termgeneric", "HALTCMD");
+          $cmd= search_config($this->config->data['TABS'], "terminfo", "HALTCMD");
           if ($cmd == ""){
             print_red(_("No HALTCMD definition found in your gosa.conf"));
           } else {
