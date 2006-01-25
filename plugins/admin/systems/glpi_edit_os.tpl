@@ -1,5 +1,5 @@
 <br>
-     <select name="select_os" size="8" style="width:80%">
+     <select name="select_os" size="12" style="width:100%">
                             {html_options values=$OSKeys output=$OSs}
      </select><br>
 	 <input name="is_string">

@@ -1,5 +1,5 @@
 <br>
-     <select name="select_type" size="8" style="width:80%">
+     <select name="select_type" size="12" style="width:100%">
                             {html_options values=$SystemTypeKeys output=$SystemTypes}
      </select><br>
 	 <input name="type_string">

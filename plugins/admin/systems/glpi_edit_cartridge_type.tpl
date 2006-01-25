@@ -1,5 +1,5 @@
 <br>
-     <select name="select_type_cartridge" size="8" style="width:80%">
+     <select name="select_type_cartridge" size="12" style="width:100%">
                             {html_options values=$PrinterTypeKeys output=$PrinterTypes}
      </select><br>
 	 <input name="cartridge_type_string">
