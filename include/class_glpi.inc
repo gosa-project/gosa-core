@@ -204,10 +204,11 @@ class glpiDB{
 	{
 		if($this->is_connected){
 			$ret = array();
-			$tmp = $this->query("SELECT * FROM glpi_enterprises;");
+			$tmp = $this->query("SELECT * FROM glpi_enterprises ORDER BY name;");
 			foreach($tmp as $t){
 				$ret[$t['ID']]=$t['name'];
 			}
+			
 			return($ret);
 		}else{
 			echo "not connected";
@@ -1145,6 +1146,23 @@ class glpiDB{
 	/* Printer functions
      */
 
+	/* is printer type used ? 
+     */
+	function is_printerTypeUsed($id)
+	{
+		if($this->is_connected){
+			$qry = "SELECT * FROM glpi_printers WHERE type=".$id.";";
+			$res = $this->query( $qry);
+			$ret =array();
+			foreach($res as $entry){
+				$ret[$entry['ID']] = $entry['name'];
+			}
+			return($ret);
+		}else{
+            echo "not connected";
+            return(false);
+        }
+	}
 
 	/* This functions checks if the selected computer/network 
 	   device is already available in the db
@@ -1201,7 +1219,7 @@ class glpiDB{
 	{
 		if($this->is_connected){
 			$ret = array();
-			$tmp = ($this->query("SELECT * FROM glpi_type_printers;"));
+			$tmp = ($this->query("SELECT * FROM glpi_type_printers ORDER BY name; "));
 			foreach($tmp as $t){
 				$ret[$t['ID']]=$t['name'];
 			}
@@ -1385,7 +1403,6 @@ class glpiDB{
 
 	/* Cartridges 
      */
-
 	/* return all assigned cartridges */
 	function getUsedCartridges($printerID)
 	{
@@ -1475,6 +1492,21 @@ class glpiDB{
 		}
 	}
 
+	function is_cartridgeTypeUsed($id){
+		if($this->is_connected){
+			$qry = "SELECT p.ID,p.name as name FROM glpi_cartridges as c,glpi_printers as p WHERE p.ID=c.FK_glpi_printers AND c.FK_glpi_cartridges_type=".$id.";";
+			$res = $this->query($qry);
+			$ret =array();
+			foreach($res as $entry){
+				$ret[$entry['ID']] = $entry['name'];
+			}
+			return($ret);
+		}else{
+			echo "not connected";
+			return(false);
+		}
+	}
+
 	function getCartridgeTypeInformations($id = "all"){
 		if($this->is_connected){
 			$ret = array();			
@@ -1519,16 +1551,29 @@ class glpiDB{
      */
 	function is_manufacturerUsed($id)
 	{
-		$tables = array();
-		foreach($this->deviceMappingGOsaGlpi as $table => $entry){
-			$tables[] = $entry;
-		}
-		$tables[] ="sdf";
-		print_a($tables);
-		exit();
-
 		if($this->is_connected){
+			$tables = array();
+			foreach($this->deviceMappingGOsaGlpi as $entry => $table){
+				$tables[] = $entry;
+			}
+			$tables[] ="glpi_computers";
+			$tables[] ="glpi_cartridges_type";
 			$ret = array();
+			$i = 3;
+			foreach($tables as $tbl){
+				if($i <= 0 ) continue;
+				$qry = "SELECT * FROM ".$tbl." WHERE FK_glpi_enterprise = ".$id.";";
+				$res = $this->query($qry);
+				foreach($res as $entry){
+					if($i <= 0 ) continue;
+					if(isset($entry['designation'])){
+						$entry['name'] = $entry['designation'];
+					}
+					$i --;
+						$ret[] = $entry['name'];
+				}
+			}
+			return($ret);
 		}else{
 			echo "not connected";
 			return(false);
