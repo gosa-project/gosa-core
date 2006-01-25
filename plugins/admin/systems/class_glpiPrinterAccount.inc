@@ -506,7 +506,7 @@ class glpiPrinterAccount extends plugin
     */
 
     $divlist = new divSelectBox("glpiAttachmentsList");
-    $divlist-> SetHeight(150);
+    $divlist-> SetHeight(120);
     $atts = $this->getUsedAttachments(true);
     $downlink = "<a href='get_attachment.php?id=%s' target='_blank'>%s</a>";
     $del_link = "<input type='image' src='images/edittrash.png' name='delAttachment_%s'>";

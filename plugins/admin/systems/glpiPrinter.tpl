@@ -26,37 +26,6 @@
 					</td>
 				</tr>
 			</table>
-			<p class="seperator" >&nbsp;</p>
-			<h2>{t}Contacts{/t}</h2>
-			<table summary="" cellpadding=5>
-				<tr>
-					<td>{t}Technical responsible{/t}&nbsp;
-					</td>
-					<td>
-						<i>{$tech_num}&nbsp; </i>&nbsp;
-						<input type="submit" value="{t}Choose{/t}" name="SelectTechPerson" {$tech_numACL}>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						{t}Contact person{/t}
-					</td>
-					<td>
-						<i>{$contact_num}&nbsp; </i>&nbsp;
-						<input {$contact_numACL} type="submit" name="SelectContactPerson" value="{t}Edit{/t}">
-					</td>
-				</tr>
-			</table>
-<br>
-			<p class="seperator" >&nbsp;</p>
-			<h2>{t}Information{/t}</h2>
-			<table summary="" width="100%">
-				<tr>
-					<td width="100%">
-						<textarea name="comments" style="width:100%;height:100px;" {$commentsACL}>{$comments}</textarea>
-					</td>
-				</tr>
-			</table>
 		</td>
 		<td style="border-left: 1px solid rgb(160, 160, 160); vertical-align: top; padding-right: 5px;">
 			<h2>{t}Supported interfaces{/t}</h2>
@@ -87,7 +56,35 @@
 				</tr>
 			</table>
 			<input name="glpiPrinterFlagsPosted" value="1" type="hidden">
-			<p class="seperator" >&nbsp;</p>
+		</td>
+	</tr>
+</table>
+<p class="seperator" >&nbsp;</p>
+<table summary="" style="width:100%;">
+	<tr>
+		<td style="width:50%;vertical-align: top;">
+			<h2>{t}Contacts{/t}</h2>
+			<table summary="" cellpadding=5>
+				<tr>
+					<td>{t}Technical responsible{/t}&nbsp;
+					</td>
+					<td>
+						<i>{$tech_num}&nbsp; </i>&nbsp;
+						<input type="submit" value="{t}Choose{/t}" name="SelectTechPerson" {$tech_numACL}>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						{t}Contact person{/t}
+					</td>
+					<td>
+						<i>{$contact_num}&nbsp; </i>&nbsp;
+						<input {$contact_numACL} type="submit" name="SelectContactPerson" value="{t}Edit{/t}">
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td style="border-left: 1px solid rgb(160, 160, 160); vertical-align: top; padding-right: 5px;">
 			<h2>{t}Attachments{/t}</h2>
 			<table summary="" width="100%">	
 				<tr>
@@ -97,7 +94,23 @@
 					</td>
 				</tr>
 			</table>
-			<p class="seperator" >&nbsp;</p>
+		</td>
+	</tr>
+</table>
+<p class="seperator" >&nbsp;</p>
+<table summary="" style="width:100%;">
+	<tr>
+		<td style="width:50%;vertical-align: top;">
+			<h2>{t}Information{/t}</h2>
+			<table summary="" width="100%">
+				<tr>
+					<td width="100%">
+						<textarea name="comments" style="width:100%;height:100px;" {$commentsACL}>{$comments}</textarea>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td style="border-left: 1px solid rgb(160, 160, 160); vertical-align: top; padding-right: 5px;">
 			<h2>{t}Installed cartridges{/t}</h2>
 			<table summary="" width="100%">	
 				<tr>
