@@ -1,5 +1,5 @@
 <br>
-<select name="manufacturer" style="width:600px;" size="8">
+<select name="manufacturer" style="width:100%;" size="12">
   {html_options values=$ManuKeys output=$Manus}
 </select>
 <br>

@@ -9,13 +9,6 @@
 						<input type="text" name="name" value="{$name}">
 					</td>
 				</tr>
-<!--				<tr>
-					<td>{t}Type{/t}
-					</td>
-					<td>
-						<input type="text" name="type" value="{$type}">
-					</td>
-				</tr>-->
 				<tr>
 					<td>{t}Website{/t}
 					</td>

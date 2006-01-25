@@ -105,6 +105,21 @@ class glpiManufacturer extends plugin
         $allok = false;
       }
 
+      $attr = $this->parent->handle->getEnterprises();
+
+      if($this->ID == -1 ){
+        if(in_array($tmp['name'],$attr)){
+          $allok = false;
+          print_red(_("Specified name is already in use, please choose another one."));
+        }
+      }else{
+        unset($attr[$this->ID]);
+        if(in_array($tmp['name'],$attr)){
+          $allok = false;
+          print_red(_("Specified name is already in use, please choose another one."));
+        }
+      }
+
       /* all checks are ok , so save changes */
       if($allok){
         if($this->Edit_Add == "add"){
