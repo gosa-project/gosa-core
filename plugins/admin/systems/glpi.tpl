@@ -6,7 +6,7 @@
 			<h2>{t}Generic{/t}</h2>
 			<table summary="" cellpadding=5>
 				<tr>
-					<td width="150">{t}System type{/t}
+					<td >{t}System type{/t}
 					</td>
 					<td>
 						<select name="type" {$typeACL}>
@@ -40,28 +40,13 @@
 					</td>
 					<td>
 						<i>{$tech_num}&nbsp; </i>&nbsp;
-						<input type="submit" value="{t}Choose{/t}" name="SelectTechPerson" {$tech_numACL}>
+						<input type="submit" value="{t}Edit{/t}" name="SelectTechPerson" {$tech_numACL}>
 					</td>
 				</tr>
 			</table>
-			<p class="seperator" >&nbsp;</p>
-			<h2>{t}Installed devices{/t}</h2>
-			<table summary="" width="100%">	
-				<tr>
-					<td>
-						<select name="InstalledDevices" {$InstalledDevicesACL} style="height:120px;width:100%;" multiple>
-							{html_options values=$InstalledDeviceKeys output=$InstalledDevices}
-						</select>
-						<input name="AddDevice" value="{t}Edit{/t}" type="submit" {$InstalledDevicesACL}>	
-					</td>
-				</tr>
-			</table>
-			<p class="seperator" >&nbsp;</p>
-			<input type="submit" value="{t}Trading{/t}" name="Trading">	
-			<input type="submit" value="{t}Software{/t}" name="Software">	
-			<input type="submit" value="{t}Contracts{/t}" name="Contracts">	
 		</td>
 		<td style="border-left: 1px solid rgb(160, 160, 160); vertical-align: top; padding-right: 5px;">
+
 			<!--Upper right-->
 			<h2>{t}Contacts{/t}</h2>
 			<table summary="" width="100%">
@@ -83,7 +68,30 @@
 					</td>
 				</tr>
 			</table>
+		</td>
+	</tr>
+</table>
+<p class="seperator" >&nbsp;</p>
+<table summary="" style="width:100%;">
+	<tr>
+		<td style="width:50%;">
+			<h2>{t}Installed devices{/t}</h2>
+			<table summary="" width="100%">	
+				<tr>
+					<td>
+						<select name="InstalledDevices" {$InstalledDevicesACL} style="height:120px;width:100%;" multiple>
+							{html_options values=$InstalledDeviceKeys output=$InstalledDevices}
+						</select>
+						<input name="AddDevice" value="{t}Edit{/t}" type="submit" {$InstalledDevicesACL}>	
+					</td>
+				</tr>
+			</table>
 			<p class="seperator" >&nbsp;</p>
+			<input type="submit" value="{t}Trading{/t}" name="Trading">	
+			<input type="submit" value="{t}Software{/t}" name="Software">	
+			<input type="submit" value="{t}Contracts{/t}" name="Contracts">	
+		</td>
+		<td style="border-left: 1px solid rgb(160, 160, 160); vertical-align: top; padding-right: 5px;">
 			<h2>{t}Attachments{/t}</h2>
 			<table summary="" width="100%">	
 				<tr>

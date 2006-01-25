@@ -42,7 +42,23 @@ class glpiManufacturer extends plugin
 
     /* Remove enterprise from db */
     if((isset($_POST['remove_manu']))&&(isset($_POST['manufacturer']))){
-      $this->parent->handle->removeEnterprise($_POST['manufacturer']);
+
+      $tmp = $this->parent->handle->is_manufacturerUsed($_POST['manufacturer']);
+      if(count($tmp)){
+
+        $names = "";
+        foreach($tmp as $name){
+          $names .= ", ".$name;
+        }
+        $names = preg_replace("/^, /","",$names);
+        $names = trim($names);
+        if(count($tmp) == 3){
+          $names .= " ...";
+        }
+        print_red(sprintf(_("You can't delete this manufacturer, it is still in use by these system(s) '%s'"),$names));
+      }else{
+        //$this->parent->handle->removeEnterprise($_POST['manufacturer']);
+      }
     }
 
     /* Add new Manufactuer : Open dialog with empty fields */
