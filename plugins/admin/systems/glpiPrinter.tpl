@@ -92,11 +92,8 @@
 			<table summary="" width="100%">	
 				<tr>
 					<td>
-						<select name="Attachments" {$AttachmentsACL} style="height:100px;width:100%;" multiple>
-							{html_options values=$AttachmentKeys output=$Attachments}
-						</select>
+						{$AttachmentsDiv}
 						<input name="AddAttachment" 	value="{t}Add{/t}" type="submit">	
-						<input name="RemoveAttachment" 	value="{t}Remove{/t}" type="submit">	
 					</td>
 				</tr>
 			</table>

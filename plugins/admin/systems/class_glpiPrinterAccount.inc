@@ -382,6 +382,17 @@ class glpiPrinterAccount extends plugin
     
     /* Remove Attachment from this tab 
      */
+    $once = true;
+    foreach($_POST as $name => $value){
+      if((preg_match("/^delAttachment_/",$name))&&($once)){
+        $once= false;
+        $name = preg_replace("/^delAttachment_/","",$name);
+        $entry = preg_replace("/_.*$/","",$name);
+        if(isset($this->usedAttachments[$entry])){
+          unset($this->usedAttachments[$entry]);
+        }
+      }
+    }
     if((isset($_POST['RemoveAttachment']))&&(isset($_POST['Attachments']))){
       if(isset($this->usedAttachments[$_POST['Attachments']])){
         unset($this->usedAttachments[$_POST['Attachments']]);
@@ -493,6 +504,25 @@ class glpiPrinterAccount extends plugin
 
     /* Assign used Attachments
     */
+
+    $divlist = new divSelectBox("glpiAttachmentsList");
+    $divlist-> SetHeight(150);
+    $atts = $this->getUsedAttachments(true);
+    $downlink = "<a href='get_attachment.php?id=%s' target='_blank'>%s</a>";
+    $del_link = "<input type='image' src='images/edittrash.png' name='delAttachment_%s'>";
+    foreach($atts as $id => $attachment){
+      $divlist->AddEntry
+          (
+        array(
+            array("string"=>$attachment['name']),
+            array("string"=>$attachment['mime']),
+            array("string"=>sprintf($downlink,$id,$attachment['filename'])),
+            array("string"=>sprintf($del_link,$attachment['ID']),"attach"=>"style='border-right:0px;'"),
+             )
+          );
+    }
+
+    $smarty->assign("AttachmentsDiv"          ,$divlist->DrawList());
     $smarty->assign("Attachments",            $this->getUsedAttachments());
     $smarty->assign("AttachmentKeys",         array_flip($this->getUsedAttachments()));
 
@@ -621,22 +651,25 @@ class glpiPrinterAccount extends plugin
   }
 
   /* Return used attachments */
-  function getUsedAttachments()
+  function getUsedAttachments($divlist = false)
   {
     $atts =$this->handle->getAttachments();
     $ret = array();
     foreach($atts as $entry){
       if(in_array($entry['ID'],$this->usedAttachments)){
+        if($divlist){
+          $ret[$entry['ID']] = $entry;
+        }else{
+          $cm ="";
+          if(isset($entry['comment'])){
+            $cm=" [".$entry['comment']."]";
+          }
+          if(isset($entry['mime'])){
+            $cm.=" -".$entry['mime']."";
+          }
 
-        $cm ="";
-        if(isset($entry['comment'])){
-          $cm=" [".$entry['comment']."]";
+          $ret[$entry['ID']]= $entry['name'].$cm;
         }
-        if(isset($entry['mime'])){
-          $cm.=" -".$entry['mime']."";
-        }
-
-        $ret[$entry['ID']]= $entry['name'].$cm;
       }
     }
     return($ret);
