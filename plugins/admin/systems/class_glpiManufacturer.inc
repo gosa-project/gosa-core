@@ -57,7 +57,7 @@ class glpiManufacturer extends plugin
         }
         print_red(sprintf(_("You can't delete this manufacturer, it is still in use by these system(s) '%s'"),$names));
       }else{
-        //$this->parent->handle->removeEnterprise($_POST['manufacturer']);
+        $this->parent->handle->removeEnterprise($_POST['manufacturer']);
       }
     }
 
