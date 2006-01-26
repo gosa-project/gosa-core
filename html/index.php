@@ -127,6 +127,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
   /* Reset error messages */
   $message= "";
 
+  /* Destroy old sessions, they cause a successfull login to relog again ...*/
+  if(isset($_SESSION['_LAST_PAGE_REQUEST'])){
+    $_SESSION['_LAST_PAGE_REQUEST'] = time();
+  }
+
   $server= validate($_POST["server"]);
   $config->set_current($server);
 
