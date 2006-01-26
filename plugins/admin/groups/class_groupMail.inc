@@ -60,6 +60,13 @@ class mailgroup extends plugin
       }
     }
 
+    /* Load Mailserver string, only in case of kolab ???? */
+    if(preg_match("/kolab/i",$this->config->current['MAILMETHOD'])){
+      if(isset($this->attrs['gosaMailServer'][0])){
+        $this->gosaMailServer =  $this->attrs['gosaMailServer'][0];
+      }
+    } 
+
     /* Convert cn to uid in case of existing entries */
     if (isset($this->attrs['cn'][0])){
       $this->uid= $this->attrs['cn'][0];
@@ -115,10 +122,9 @@ class mailgroup extends plugin
                 unset($this->imapacl[$user]);
               }
             }
-            
+
           }
-         
- 
+
           /* Update quota values */
           if ($quota['gosaMailQuota'] == 2147483647){
             $this->quotaUsage= "";
@@ -146,39 +152,67 @@ class mailgroup extends plugin
     }
 
     /* Load permissions */
+    $tmp = array();
     if(preg_match("/kolab/i",$this->config->current['MAILMETHOD'])){
-
-
-      /* In case of kolab, we save the permissions in this style 
-
-            mailaddressfromuser rights
-
-         But we need the userID, so we search for a user, with this mail address.
-       */
       $ldap = $this->config->get_ldap_link();
       if (isset($this->attrs['acl'])){
         for ($i= 0; $i<$this->attrs['acl']['count']; $i++){
           list($user, $permission)= split(' ', $this->attrs['acl'][$i]);
-          
-          /* Skip entry anyone and %members %*/
-          if ($user != "anyone" && $user != "%members%"){
-            $mail = $ldap->search("(&(objectClass=person)(|(mail=".$user.")(uid=".$user.")))",array("uid"));
-            $mail = $ldap->fetch();
-            if(isset($mail['uid'][0])){
-              $user = $mail['uid'][0];
-            }
-          }
-      
+
           /* Add to list */
           $this->imapacl[$user]= $permission;
 
-          #fixme  What is that ?
+          /* Get all user permissions sorted by acl, to detect the most used acl
+             This acl is then used for %members%
+          */
+          $tmp[$permission][] = $user;
+
+          /* There is an entry in $this->imapacl like this this ... 
+                $this->attrs['imapacl']['anyone'] = "p";
+                $this->attrs['imapacl']['%members%'] = "lprs";
+                $this->attrs['imapacl'][''] = ""; <------ This is used to diplay an empty 
+                                                          Field for special acls in our template.
+                                                          If there is at least one special acl in out imapacl,
+                                                           we don't need this entry anymore, because it is already displayed. 
+          */
           if ($user != "anyone" && $user != "%members%"){
             unset($this->imapacl['']);
           }
         }
       }
+
+      /* In this section we dectect which acl is tho most used 
+         This will be used as %members% acl  
+      */
+      $tmp2 = array(); 
+      foreach($tmp as $acl => $user){
+        $tmp2[count($tmp[$acl])]=$acl;
+      }
+      /* Most used at last */
+      ksort($tmp2);      
+    
+      /* Assign last (most used acl) to %members% acl */ 
+      $this->imapacl['%members%']=array_pop($tmp2);
+
+      /* Open ldap connection */
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cd($this->config->current['BASE']);
+
+      /* Remove those users, that use %members% acl && are member of this group. */
+      foreach($this->imapacl as $mail => $permission){
+        $ldap->search("(&(objectClass=person)(mail=".$mail."))",array("uid"));
+        $atr = $ldap->fetch();
+        if((isset($atr['uid'][0]))&&(in_array($atr['uid'][0],$this->attrs['memberUid']))&&($permission == $this->imapacl['%members%'])){
+          unset($this->imapacl[$mail]);
+        }
+      }
+
+      /* Append an empty entry, for special acl handling */
+      if(count($this->imapacl)==2){
+        $this->imapacl[''] ="";
+      }
     }else{
+      /* Load permissions */ 
       if (isset($this->attrs['acl'])){
         for ($i= 0; $i<$this->attrs['acl']['count']; $i++){
           list($user, $permission)= split(' ', $this->attrs['acl'][$i]);
@@ -189,7 +223,6 @@ class mailgroup extends plugin
         }
       }
     }
-
     /* Fill translations */
     $this->perms["lrs"]= _("read");
     $this->perms["lrsp"]= _("post");
@@ -201,8 +234,8 @@ class mailgroup extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    //plugin::execute();
 
     /* Load templating engine */
     $smarty= get_smarty();
@@ -306,7 +339,7 @@ class mailgroup extends plugin
 
     /* Delete forward email addresses */
     if (isset($_POST['delete_forwarder'])){
-      if (count($_POST['forwarder_list']) 
+      if (count($_POST['forwarder_list'])
           && chkacl ($this->acl, "gosaMailForwardingAddress") == ""){
 
         $this->delForwarder ($_POST['forwarder_list']);
@@ -471,7 +504,7 @@ class mailgroup extends plugin
       $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
     }
     if (is_numeric($this->gosaMailQuota) && $this->gosaMailQuota != 0){
-      $smarty->assign("quotausage", progressbar(round(($this->quotaUsage * 100)/ $this->gosaMailQuota),100,15,true));
+      $smarty->assign("quotausage", progressbar(round(($this->quotaUsage * 100)/ $this->gosaMailQuota,100,15,true)));
       $smarty->assign("quotadefined", "true");
     } else {
       $smarty->assign("quotadefined", "false");
@@ -485,6 +518,14 @@ class mailgroup extends plugin
   /* remove object from parent */
   function remove_from_parent()
   {
+    /* Added these ObjectClass and Attributes, because they were not 
+       removed correctly, only in case of kolab ... 
+     */
+    if(preg_match("/kolab/i",$this->config->current['MAILMETHOD'])){
+      $this->attributes[]="acl";
+      $this->attributes[]="kolabHomeServer";
+      $this->objectclasses[] = "kolabSharedFolder";
+    }
     /* include global link_info */
     $ldap= $this->config->get_ldap_link();
 
@@ -572,7 +613,7 @@ class mailgroup extends plugin
           if (!isset($_POST["user_$nr"])){
             continue;
           }
-          if ($_POST["user_$nr"] != $user || 
+          if ($_POST["user_$nr"] != $user ||
               $_POST["perm_$nr"] != $this->indexed_acl[$nr]){
             $this->is_modified= TRUE;
           }
@@ -582,6 +623,88 @@ class mailgroup extends plugin
     }
 
   }
+
+
+  /*  
+      Backup for function save 
+      Änderungen :  fixAttributesOnStore($this) wurde erst nach dem ldap->modify
+                    Ausgeführt, deshalb wurden die gemappten Attribute auch nicht 
+                    gespeichert.
+
+      Von        : Fabian Hickert
+      Datum      : 15.12.2005
+
+      Alter Quellcode :
+
+  /* Save data to LDAP, depending on is_account we save or delete * /
+  function save()
+  {
+    $ldap= $this->config->get_ldap_link();
+
+    /* Call parents save to prepare $this->attrs * /
+    plugin::save();
+
+    /* Save arrays * /
+    $this->attrs['gosaMailAlternateAddress']= $this->gosaMailAlternateAddress;
+    $this->attrs['gosaMailForwardingAddress']= $this->gosaMailForwardingAddress;
+
+    /* Save shared folder target * /
+    $this->attrs['gosaSharedFolderTarget']= "share+".$this->uid;
+
+    /* Save acl's * /
+    $this->attrs['acl']= array();
+    foreach ($this->imapacl as $user => $acl){
+      if ($user == ""){
+        continue;
+      }
+      $this->attrs['acl'][]= "$user $acl";
+    }
+
+    /* Save data to LDAP * /
+    $ldap->cd($this->dn);
+    $ldap->modify($this->attrs);
+    show_ldap_error($ldap->get_error());
+
+    /* Only do IMAP actions if we are not a template * /
+    if (!$this->is_template){
+      $method= new $this->method($this->config);
+      $method->fixAttributesOnStore($this);
+      if ($method->connect($this->gosaMailServer)){
+        $method->updateMailbox($this->uid);
+        $method->setQuota($this->uid, $this->gosaMailQuota);
+
+        /* Exchange '%member%' pseudo entry * /
+        $memberacl= $this->imapacl['%members%'];
+        unset ($this->imapacl['%members%']);
+        foreach ($this->members as $user){
+          if (!isset($this->imapacl[$user])){
+            $this->imapacl[$user]= $memberacl;
+          }
+        }
+
+        $method->setSharedFolderPermissions($this->uid, $this->imapacl);
+        $method->disconnect();
+      }
+    }
+
+    /* Optionally execute a command after we're done * /
+    if ($this->initially_was_account == $this->is_account){
+      if ($this->is_modified){
+        $this->handle_post_events("mofify");
+      }
+    } else {
+      $this->handle_post_events("add");
+    }
+  }
+      
+  ENDE Alter Quellcode
+  */
+
+
+
+
+
+
 
 
   /* Save data to LDAP, depending on is_account we save or delete */
@@ -626,12 +749,17 @@ class mailgroup extends plugin
         $this->attrs['acl'][]= "$user $acl";
       }
     }
-    /* Save data to LDAP */
-    $ldap->cd($this->dn);
-    $ldap->modify($this->attrs);
-    show_ldap_error($ldap->get_error());
+
     /* Only do IMAP actions if we are not a template */
-    if (!$this->is_template){
+    if(preg_match("/kolab/i",$this->config->current['MAILMETHOD'])){
+      if (empty($this->gosaMailServer)||is_array($this->gosaMailServer)){
+        if(isset($this->attrs['gosaMailServer'][0])){
+          $this->gosaMailServer = $this->attrs['gosaMailServer'][0];
+        }
+      }
+    }  
+ 
+    if ((!$this->is_template)&&(!empty($this->gosaMailServer))){
       $method= new $this->method($this->config);
       $method->fixAttributesOnStore($this);
       if ($method->connect($this->gosaMailServer)){
@@ -646,11 +774,16 @@ class mailgroup extends plugin
             $this->imapacl[$user]= $memberacl;
           }
         }
-        
+
         $method->setSharedFolderPermissions($this->uid, $this->imapacl);
         $method->disconnect();
       }
     }
+
+    /* Save data to LDAP */
+    $ldap->cd($this->dn);
+    $ldap->modify($this->attrs);
+    show_ldap_error($ldap->get_error());
 
     /* Optionally execute a command after we're done */
     if ($this->initially_was_account == $this->is_account){
@@ -677,7 +810,8 @@ class mailgroup extends plugin
       $message[]= _("Please enter a valid email addres in 'Primary address' field.");
     }
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search ("(&(!(objectClass=gosaUserTemplate))(objectClass=gosaMailAccount)(|(mail=".$this->mail.")(gosaMailAlternateAddress=".$this->mail."))(!(uid=".$this->cn."))(!(cn=".$this->cn.")))",array("uid"));
+    $ldap->search ("(&(!(objectClass=gosaUserTemplate))(objectClass=gosaMailAccount)(|(mail=".$this->mail.")(gosaMailAlternateAddress=".
+        $this->mail."))(!(uid=".$this->cn."))(!(cn=".$this->cn.")))");
     if ($ldap->count() != 0){
       $message[]= _("The primary address you've entered is already in use.");
     }
@@ -704,7 +838,7 @@ class mailgroup extends plugin
     if (is_integer(strpos($this->gosaMailDeliveryMode, "reject")) && $this->gosaMailMaxSize == ""){
       $message[]= _("You need to set the maximum mail size in order to reject anything.");
     }
-    
+
     if(ord($this->imapacl['anyone'][0])==194){
       $message[] = _("Please choose valid permission settings. Default permission can't be emtpy.");
     }
@@ -766,7 +900,8 @@ class mailgroup extends plugin
 
     /* Is this address already assigned in LDAP? */
     $ldap->cd ($this->config->current['BASE']);
-    $ldap->search ("(&(objectClass=gosaMailAccount)(|(mail=$address)"."(gosaMailAlternateAddress=$address)))",array("uid"));
+    $ldap->search ("(&(objectClass=gosaMailAccount)(|(mail=$address)".
+        "(gosaMailAlternateAddress=$address)))");
 
     if ($ldap->count() > 0){
       $attrs= $ldap->fetch ();
