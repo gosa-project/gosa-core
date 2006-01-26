@@ -22,7 +22,7 @@
 				<img src="{$infoimage}" align="right" alt="[i]">{t}Information{/t}
 			</p>
    		</div>
-   		<div class="contentboxb" style="padding:4px;border-top:1px solid #B0B0B0;">
+   		<div class="contentboxb" style="padding:4px;">
 			{t}This menu allows you to select multiple packages to add them to the currently edited package list.{/t}
    		</div>
    		<br>

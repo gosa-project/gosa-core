@@ -46,7 +46,7 @@ class faiPackageEntry extends plugin
 
     $divlist = new divlist("PackageEntry");
     $divlist->SetSummary(_("This list displays all assigned package names for this repository settings."));
-    $divlist->SetEntriesPerPage(20);
+    $divlist->SetEntriesPerPage(0);
     $divlist->SetHeight("650px;");
     $divlist->SetHeader(array(array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
                               array("string" => "Name", "attach" => "style='width:180px;'"),
@@ -128,8 +128,8 @@ $CHKS = "<input type='hidden' value='chkchange' name='chkchange'><table summary=
                    <input type='hidden' value='1' name='wasonpage_".base64_encode($pkg[0])."'>";
           $divlist->AddEntry(array(array("string"=>$chkbox, "attach" => "style='text-align:center;width:20px;'"),
                                array("string"=>$pkg[0], "attach" => "style='width:180px;'"),
-                               array("string"=>$pkg[1]),
-                               array("string"=>$pkg[3], "attach" => "style='width:221px;border-right:0px;text-align:left;'")));
+                               array("string"=>htmlentities($pkg[1])),
+                               array("string"=>htmlentities($pkg[3]), "attach" => "style='width:221px;border-right:0px;text-align:left;'")));
         }
       }
     }
