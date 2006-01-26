@@ -3,7 +3,7 @@
 	<tr>
 		<td width="45%">
 		<!--Table left-top-->
-			<table >
+			<table summary="">
 				<tr>
 					<td>
 						{t}Name{/t} {$must}
@@ -33,7 +33,7 @@
 		<td style="border-left:1px solid #A0A0A0">
 
 		<!--Table right-top-->
-			<table>
+			<table summary="">
 				<tr>
 					<td>
 						{t}Type{/t}

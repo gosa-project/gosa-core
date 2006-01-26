@@ -2,7 +2,7 @@
 	
 	<input type="hidden" name="dialogissubmitted" value="1">
 	
-<table width="100%">
+<table width="100%" summary="">
  <tr>
   <td width="50%">
 	<table summary="{t}Create new hotplug device{/t}" style="border-right:1px solid #B0B0B0;width:100%">
@@ -23,7 +23,7 @@
 	</table>
    </td>
    <td style="vertical-align:top">
-	<table>
+	<table summary="">
 		<tr>
 			<td><LABEL for="HOT_id">{t}Device ID{/t}</LABEL>
 			</td>

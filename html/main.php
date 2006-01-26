@@ -19,6 +19,7 @@
  */
 
 /* Basic setup, remove eventually registered sessions */
+$start = microtime();
 $timing= array();
 require_once ("../include/php_setup.inc");
 require_once ("functions.inc");
@@ -353,5 +354,21 @@ echo $display;
 /* Save plist */
 $_SESSION['plist']= $plist;
 
+/* Echo compilation time */
+$r = split(" ",$start);
+$ms = $r[0];
+$s= $r[1];
+
+$re = split(" ",microtime());
+$mse = $re[0];
+$se= $re[1];
+
+$add = 0;
+if(($mse -$ms)<0){
+  $se --;
+  $add = 1;
+}
+echo ($se -$s).",";
+echo (int)(($add+($mse -$ms))*1000)." s";
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

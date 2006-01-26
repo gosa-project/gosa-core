@@ -49,7 +49,7 @@
 		</tr>
 	</table>
 	<p class="seperator">&nbsp;</p>
-	<table width=100%>
+	<table width="100%" summary="">
 		<tr>
 			<td colspan="2">
 			<h2><img class="center" alt="" src="images/fai_script.png" align="middle">&nbsp;{t}Script{/t}</h2>
@@ -68,7 +68,7 @@
 					</table>
 			</td>
 		</tr>
-	<table>	
+	</table>	
 
 	<p class="seperator">&nbsp;</p>
     <p align="right">

@@ -83,6 +83,7 @@ class mailMethodKolab extends mailMethodCyrus
 
   function fixAttributesOnStore(&$mailObject)
   {
+    global $config;
     /* Convert attributes and objectClasses */
     foreach ($this->attribute_map as $source => $dest){
       if (isset($mailObject->attrs[$source])){
@@ -98,20 +99,70 @@ class mailMethodKolab extends mailMethodCyrus
     }
     $mailObject->attrs['objectClass']= $objectclasses;
     if (in_array("posixGroup", $mailObject->attrs['objectClass'])){
+  
+      /* Add kolabSharedFoleder Class */
       $mailObject->attrs['objectClass'][]= 'kolabSharedFolder';
 
       /* Work on acl attribute */
       $new_acl= array();
       foreach ($mailObject->attrs['acl'] as $uacl){
+
+        /* Get user=(mail) & acls  */
         list($user, $acl) = split(" ", $uacl);
+      
+        /* Add al users which have seperated acls 
+           %members% are all users in this group, 
+           which have the standard group acl
+        */
         if ($user != "%members%"){
           $new_acl[$user]= $uacl;
         } else {
+        
+          /* All groupmembers will be added */
+          $ldap = $config->get_ldap_link();
+          $ldap->cd($config->current['BASE']);
           foreach ($mailObject->members as $member){
-            $new_acl[$member]= "$member $acl";
+
+            /* Get user mail address .... */
+            $ldap->search("(&(objectClass=person)(|(uid=".$member.")(mail=".$member.")))",array("mail"));
+            $res = $ldap->fetch();
+
+            /* Default mail address is set to uid - 
+               So if there is no mail address defined the uid is added 
+             */
+            $mail = $member;
+
+            /* Use mail address if it is available */
+            if(isset($res['mail'][0])){
+              $mail = $res['mail'][0];
+            }
+
+            /* only append this mail/permission string to acl,
+               if there arn't already some (special) configs for this user */
+            $found =false;
+            foreach($mailObject->imapacl as $mailA => $acl){
+              if(strtolower(trim($mailA))==strtolower(trim($mail))){
+                $found = true;
+              }
+            }
+
+            /* Skipp user, with no email adress too */     
+            if($member == $mail){
+              $found = true;
+            }
+   
+            /* Append new user acl */
+            if(!$found){
+              $new_acl[$member]= "$mail $acl";
+            }
+
+            /* Old line */
+            //  $new_acl[$member]= "$member $acl";
           }
         }
       }
+  
+      /* Assign new acls */
       $mailObject->attrs['acl']= array();
       foreach ($new_acl as $key => $value){
         $mailObject->attrs['acl'][]= $value;
@@ -125,7 +176,6 @@ class mailMethodKolab extends mailMethodCyrus
     $mailObject->attrs['gosaMailServer']= $mailObject->attrs['kolabHomeServer'];
     $mailObject->attrs['kolabDeleteFlag']= array();
   }
-
 
   function fixAttributesOnRemove(&$mailObject)
   {

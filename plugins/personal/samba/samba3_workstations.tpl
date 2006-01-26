@@ -27,7 +27,7 @@
     <select name="depselect" size=1 onChange="mainform.submit()" title="{t}Choose the department the search will be based on{/t}">
       {html_options options=$deplist selected=$depselect}
     </select></td></tr></table>
-    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8"><tr><td width="18px"><img class="center" alt="" src="{$search_image}" align="middle">&nbsp;</td>
+    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8"><tr><td width="18"><img class="center" alt="" src="{$search_image}" align="middle">&nbsp;</td>
     <td><input type='text' name='regex' maxlength='20' style="width:99%" value='{$regex}' title='{t}Regular expression for matching addresses{/t}' onChange="mainform.submit()"></td></tr></table>
    {$apply}
    </div>

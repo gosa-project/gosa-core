@@ -306,7 +306,7 @@ class printerPPDDialog extends plugin
       }
 
       /* Create a table */
-      $str .= "<div style='padding-left:30px;'><table>";
+      $str .= "<div style='padding-left:30px;'><table summary=''>";
 
       /* Input all data to the table */
       foreach($this->ppdConfig as $cat => $obj){
