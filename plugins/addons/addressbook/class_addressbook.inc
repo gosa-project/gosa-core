@@ -382,8 +382,7 @@ class addressbook extends plugin
 						$this->telephone_list[$attrs['sn'][0].$attrs['dn']].=
 
 							"<a href=\"mailto:".htmlentities($attrs['mail'][0])."\">".
-							"<img  align=\"top\" border=0 src=\"images/mailto.png\" ".
-							"alt=\"vcf\" title=\"$dest\"></a>";
+							"<img  align=\"top\" border=0 src=\"images/mailto.png\" alt=\"vcf\" title=\"$dest\"></a>";
 					}
 					$this->telephone_list[$attrs['sn'][0].$attrs['dn']].= "</td>";
 				}
