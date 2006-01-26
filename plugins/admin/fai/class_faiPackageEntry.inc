@@ -79,12 +79,12 @@ class faiPackageEntry extends plugin
 
         @ksort($this->categories);
 
-    $CHKS = "<table summary=''><tr><td><input type='hidden' value='chkchange' name='chkchange'>";
+$CHKS = "<input type='hidden' value='chkchange' name='chkchange'><table summary=''><tr>";
     $i = 0;
     if(is_array($this->categories)) 
     foreach($this->categories as $cat => $selected){
       if($i == 3){
-        $CHKS .="</td></tr><tr><td>";
+        $CHKS .="</tr><tr>";
         $i = 0;
       }
       $i ++ ;
@@ -94,7 +94,7 @@ class faiPackageEntry extends plugin
         $CHKS .="<td><input type='checkbox' value='1' name='CAT".$cat."' onclick='document.mainform.submit()'>&nbsp;".$cat."&nbsp;</td>";
       }
     }
-    $CHKS .= "</td></tr></table>";
+    $CHKS .= "</tr></table>";
 
 
     foreach($_POST as $name => $value){
