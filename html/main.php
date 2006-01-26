@@ -354,7 +354,7 @@ echo $display;
 /* Save plist */
 $_SESSION['plist']= $plist;
 
-/* Echo compilation time */
+/* Echo compilation time * /
 $r = split(" ",$start);
 $ms = $r[0];
 $s= $r[1];
@@ -370,5 +370,6 @@ if(($mse -$ms)<0){
 }
 echo ($se -$s).",";
 echo (int)(($add+($mse -$ms))*1000)." s";
+*/
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
