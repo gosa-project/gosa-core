@@ -1,6 +1,6 @@
 <table summary="" style="width:100%;">
 	<tr>
-		<td style="width:50%;">
+		<td style="width:50%;vertical-align:top;" >
 			<!--Upper left-->	
 			
 			<h2>{t}Generic{/t}</h2>
@@ -35,6 +35,19 @@
 						<input type="submit" value="{t}edit{/t}" name="edit_manufacturer" {$FK_glpi_enterpriseACL}>	
 					</td>
 				</tr>
+			<!--</table>
+			<p class="seperator">&nbsp;</p>
+			<h2>{t}Contacts{/t}</h2>
+			<table summary="" width="100%">-->
+				<tr>
+					<td>
+						{t}Contact person{/t}
+					</td>
+					<td>
+						<i>{$contact_num}&nbsp; </i>&nbsp;
+						<input {$contact_numACL} type="submit" name="SelectContactPerson" value="{t}Edit{/t}">
+					</td>
+				</tr>
 				<tr>
 					<td>{t}Technical responsible{/t}&nbsp;
 					</td>
@@ -46,25 +59,12 @@
 			</table>
 		</td>
 		<td style="border-left: 1px solid rgb(160, 160, 160); vertical-align: top; padding-right: 5px;">
-
 			<!--Upper right-->
-			<h2>{t}Contacts{/t}</h2>
+			<h2>{t}Comments{/t}</h2>
 			<table summary="" width="100%">
 				<tr>
-					<td>
-						{t}Contact person{/t}
-					</td>
-					<td width="100%">
-						<i>{$contact_num}&nbsp; </i>&nbsp;
-						<input {$contact_numACL} type="submit" name="SelectContactPerson" value="{t}Edit{/t}">
-					</td>
-				</tr>
-				<tr>
-					<td valign="top">
-						{t}Comments{/t}
-					</td>
-					<td>
-						<textarea name="comments" style="width:100%;height:110px;" {$commentsACL}>{$comments}</textarea>
+					<td valign="top" colspan="2">
+						<textarea name="comments" style="width:100%;height:140px;" {$commentsACL}>{$comments}</textarea>
 					</td>
 				</tr>
 			</table>
@@ -79,15 +79,15 @@
 			<table summary="" width="100%">	
 				<tr>
 					<td>
-						<select name="InstalledDevices" {$InstalledDevicesACL} style="height:120px;width:100%;" multiple>
+						<select name="InstalledDevices" {$InstalledDevicesACL} style="height:130px;width:100%;" multiple>
 							{html_options values=$InstalledDeviceKeys output=$InstalledDevices}
 						</select>
 						<input name="AddDevice" value="{t}Edit{/t}" type="submit" {$InstalledDevicesACL}>	
 					</td>
 				</tr>
 			</table>
-			<p class="seperator" >&nbsp;</p>
-<!--			<input type="submit" value="{t}Trading{/t}" name="Trading">	
+<!--			<p class="seperator" >&nbsp;</p>
+			<input type="submit" value="{t}Trading{/t}" name="Trading">	
 			<input type="submit" value="{t}Software{/t}" name="Software">	
 			<input type="submit" value="{t}Contracts{/t}" name="Contracts">	-->
 		</td>

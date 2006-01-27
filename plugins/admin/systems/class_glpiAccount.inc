@@ -551,7 +551,7 @@ class glpiAccount extends plugin
     */
 
     $divlist = new divSelectBox("glpiAttachmentsList");
-    $divlist-> SetHeight(120); 
+    $divlist-> SetHeight(130); 
     $atts = $this->getUsedAttachments(true);
     $downlink = "<a href='get_attachment.php?id=%s' target='_blank'>%s</a>";
     $del_link = "<input type='image' src='images/edittrash.png' name='delAttachment_%s'>";
