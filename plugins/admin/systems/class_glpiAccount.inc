@@ -513,10 +513,10 @@ class glpiAccount extends plugin
     /* Show tab dialog headers */
     if ($this->is_account){
       $display= $this->show_header(_("Remove inventory service"),
-          _("This server has inventory features enabled. You can disable them by clicking below."));
+          _("This device has inventory informations enabled. You can disable them by clicking below."));
     } else {
       $display= $this->show_header(_("Add inventory service"),
-          _("This server has inventory features disabled. You can enable them by clicking below."));
+          _("This device has inventory informations disabled. You can enable them by clicking below."));
       return ($display);
     }
 
