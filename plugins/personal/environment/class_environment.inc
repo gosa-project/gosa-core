@@ -508,9 +508,9 @@ class environment extends plugin
         $s_mount = $_POST['gotoShareMountPoint'];
         $s_user  = $_POST['ShareUser'];
         /* Preparing the new assignment */ 
-        $this->gotoShares[$a_share['name']]=$a_share;
-        $this->gotoShares[$a_share['name']]['Username']=$s_user;
-        $this->gotoShares[$a_share['name']]['mountPoint']=$s_mount;
+        $this->gotoShares[$a_share['name']."|".$a_share['server']]=$a_share;
+        $this->gotoShares[$a_share['name']."|".$a_share['server']]['Username']=$s_user;
+        $this->gotoShares[$a_share['name']."|".$a_share['server']]['mountPoint']=$s_mount;
       }
     }  
 
