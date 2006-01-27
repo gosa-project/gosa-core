@@ -146,7 +146,12 @@ class environment extends plugin
         $tmp2['name']        =$tmp[1];
         $tmp2['mountPoint']  =$tmp[2];
         if(isset($tmp[3])){
-          $tmp2['Username']  =$tmp[3];
+          $tmp2['OtherStuff']  =$tmp[3];
+        }else{
+          $tmp2['OtherStuff']  ="";
+        }
+        if(isset($tmp[4])){
+          $tmp2['Username']  =$tmp[4];
         }else{
           $tmp2['Username']  ="";
         }
@@ -510,6 +515,7 @@ class environment extends plugin
         /* Preparing the new assignment */ 
         $this->gotoShares[$a_share['name']."|".$a_share['server']]=$a_share;
         $this->gotoShares[$a_share['name']."|".$a_share['server']]['Username']=$s_user;
+        $this->gotoShares[$a_share['name']."|".$a_share['server']]['OtherStuff']="";
         $this->gotoShares[$a_share['name']."|".$a_share['server']]['mountPoint']=$s_mount;
       }
     }  
@@ -949,7 +955,7 @@ class environment extends plugin
     /* Prepare Shares */
     $this->attrs['gotoShare']=array();
     foreach($this->gotoShares as $name => $share){
-      $this->attrs['gotoShare'][] =$share['server']."|".$share['name']."|".$share['mountPoint']."|".$share['Username'];
+      $this->attrs['gotoShare'][] =$share['server']."|".$share['name']."|".$share['mountPoint']."|".$share['OtherStuff']."|".$share['Username'];
     }
 
     if((!empty($this->gotoKioskProfile))&&($this->gotoKioskProfile != "none")){
