@@ -116,6 +116,7 @@
 	<option disabled>&nbsp;</option>
 				</select>
 				<input type="text" size=15 {$gotoShareACL} name="gotoShareMountPoint" value="{t}Mountpoint{/t}">
+				<input type="text" size=15 {$gotoShareACL} name="ShareUser" value="ShareUser">
 				<input type="submit" {$gotoShareACL} name="gotoShareAdd" value="{t}Add{/t}"> 
 				<input type="submit" {$gotoShareACL} name="gotoShareDel" value="{t}Remove{/t}"> 
 			</td>
