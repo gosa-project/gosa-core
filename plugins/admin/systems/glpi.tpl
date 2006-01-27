@@ -87,9 +87,9 @@
 				</tr>
 			</table>
 			<p class="seperator" >&nbsp;</p>
-			<input type="submit" value="{t}Trading{/t}" name="Trading">	
+<!--			<input type="submit" value="{t}Trading{/t}" name="Trading">	
 			<input type="submit" value="{t}Software{/t}" name="Software">	
-			<input type="submit" value="{t}Contracts{/t}" name="Contracts">	
+			<input type="submit" value="{t}Contracts{/t}" name="Contracts">	-->
 		</td>
 		<td style="border-left: 1px solid rgb(160, 160, 160); vertical-align: top; padding-right: 5px;">
 			<h2>{t}Attachments{/t}</h2>

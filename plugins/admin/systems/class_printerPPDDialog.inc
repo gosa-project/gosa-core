@@ -317,7 +317,7 @@ class printerPPDDialog extends plugin
           $feed= "<br>";
         }
         $str .= "<b>"._("Section")." '".$cat."'&nbsp;</b><br>";
-        $str .= "</tr></td>";       
+        $str .= "</td></tr>";       
 
         /* Add attributes of the current category */
         foreach($obj as $attr => $settings){

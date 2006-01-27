@@ -7,10 +7,8 @@
 				</p>
 			</div>
 			<div class="contentboxb">
-				<p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
           {$List}
 					<input type=hidden name="edit_helper">
-				</p>	
 			</div>
 		</td>
 		<td style="vertical-align:top;">
