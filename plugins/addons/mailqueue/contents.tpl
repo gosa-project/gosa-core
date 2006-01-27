@@ -3,9 +3,8 @@
  <p class="contentboxh"><img src="images/launch.png" alt="[F]" align="right">Filter</p>
 </div>
 <div class="contentboxb">
- <p class="contentboxb" style="border-top: 1px solid rgb(176, 176, 176); padding-top: 5px;">
   <div >
-	<table width="100%">
+	<table width="100%" summary="">
 		<tr>
 			<td>
 	<img class="center" alt="{t}Search{/t}" src="images/search.png" align="middle" border="0">
@@ -36,10 +35,9 @@
 				<input name="requeue_all" src="images/mailq_requeue.png"		value="{t}Requeue all messages{/t}" 	type="image"
 					title="{t}Requeue all messages in selected servers queue{/t}">
    			</td>
-		<tr>
+		</tr>
 	</table>
 	</div>
- </p>
 </div>
 <br>
 
@@ -48,7 +46,7 @@
 <b>{t}Search returned no results{/t}...</b>
 {else}
 
-<table style="border: 1px solid rgb(176, 176, 176); width: 100%; vertical-align: top; text-align: left;"
+<table style="border: 1px solid rgb(176, 176, 176); width: 100%; vertical-align: top; text-align: left;" summary=""
  border="0" cellpadding="2" cellspacing="1" rules="cols">
 	<tr style="background-color: rgb(232, 232, 232); height: 26px; font-weight: bold;">
 		<td><a href="{$plug}&sort=MailID"		>{t}ID{/t}			{if $OrderBy == "MailID"}	{$SortType}{/if}</a></td>
