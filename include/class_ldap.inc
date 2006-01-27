@@ -129,7 +129,8 @@ class LDAP{
 
   function search($filter, $attrs= array())
   {
-    
+    $start = microtime();
+
     if($this->hascon){
       if ($this->reconnect) $this->connect();
       $this->clearResult();
@@ -137,6 +138,31 @@ class LDAP{
       $this->error = @ldap_error($this->cid);
       $this->resetResult();
       $this->hasres=true;
+  
+      /* Time management */
+      $r = split(" ",$start);
+      $ms = $r[0];
+      $s= $r[1];
+
+      $re = split(" ",microtime());
+      $mse = $re[0];
+      $se= $re[1];
+
+      $add = 0;
+      if(($mse -$ms)<0){
+        $se --;
+        $add = 1;
+      }
+      $secs =  ($se -$s);
+      $msecs = (int)(($add+($mse -$ms))*1000);
+      $time = $secs +($msecs/1000);
+      if($time > .2){
+        $Sattrs = "";
+        foreach($attrs as $att){
+          $Sattrs .= " ".$att;
+        }
+        print_red(sprintf(_("Ldap search took about %s seconds, used filter '%s' with following attributes '%s '. Please check for performance improvements."),$time,htmlentities($filter),$Sattrs));
+      }
       return($this->sr);
     }else{
       $this->error = "Could not connect to LDAP server";
