@@ -350,7 +350,7 @@ class userManagement extends plugin
 
         /* Lock the current entry, so nobody will edit it during deletion */
         add_lock ($this->dn, $this->ui->dn);
-        $smarty->assign("info", sprintf(_("You're about to delete the user %s."), $this->dn));
+        $smarty->assign("info", sprintf(_("You're about to delete the user %s."), LDAP::fix($this->dn)));
         return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
       } else {
 

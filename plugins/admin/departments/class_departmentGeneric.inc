@@ -172,7 +172,7 @@ class department extends plugin
 		$message[]= _("The field 'Name' contains the reserved word 'incoming'.".
 				" Please choose another name.");
 	}
-	if (preg_match ('/[,#+:=>\\\\\/]/', $this->ou)){
+	if (preg_match ('/[#+:=>\\\\\/]/', $this->ou)){
 		$message[]= _("The field 'Name' contains invalid characters.");
 	}
 	if (!is_phone_nr($this->telephoneNumber)){

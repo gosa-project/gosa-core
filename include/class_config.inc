@@ -526,6 +526,9 @@ class config  {
 				unset($entries['SUB']);
 			}
 
+			/* Fix name, if it contains a replace tag */
+                        $name= preg_replace('/###GOSAREPLACED###/', ',', $name);
+
 			/* Check if current name is too long, then cut it */
 			if(strlen($name)> $max_size){
 				$name = substr($name,0,($max_size-3))." ...";

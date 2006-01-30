@@ -19,7 +19,9 @@ class deptabs extends tabs
   function save()
   {
   	$baseobject= $this->by_object['department'];
-	$new_dn= 'ou='.$baseobject->ou.','.$baseobject->base;
+	$new_dn= 'ou='.preg_replace('/,/', '\\\\2C', $baseobject->ou).','.$baseobject->base;
+	echo $new_dn."<br>";
+	echo $baseobject->ou;
 
  	if ($this->dn != $new_dn && $this->dn != "new"){
 		

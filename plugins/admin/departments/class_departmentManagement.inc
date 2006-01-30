@@ -182,7 +182,7 @@ class departmentManagement extends plugin
 				return(gen_locked_message($user, $this->dn));
 			} else {
 				add_lock ($this->dn, $this->ui->dn);
-				$smarty->assign("info", sprintf(_("You're about to delete the whole LDAP subtree placed under '%s'."), $this->dn));
+				$smarty->assign("info", sprintf(_("You're about to delete the whole LDAP subtree placed under '%s'."), LDAP::fix($this->dn)));
 				$display.= $smarty->fetch (get_template_path('remove.tpl', TRUE));
 				return ($display);
 			}

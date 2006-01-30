@@ -572,9 +572,9 @@ class Smarty_Compiler extends Smarty {
             default:
                 if ($this->_compile_compiler_tag($tag_command, $tag_args, $output)) {
                     return $output;
-                } else if ($this->_compile_block_tag($tag_command, $tag_args, $tag_modifier, $output)) {
+                } else if (@$this->_compile_block_tag($tag_command, $tag_args, $tag_modifier, $output)) {
                     return $output;
-                } else if ($this->_compile_custom_tag($tag_command, $tag_args, $tag_modifier, $output)) {
+                } else if (@$this->_compile_custom_tag($tag_command, $tag_args, $tag_modifier, $output)) {
                     return $output;                    
                 } else {
                     $this->_syntax_error("unrecognized tag '$tag_command'", E_USER_ERROR, __FILE__, __LINE__);

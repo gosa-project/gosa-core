@@ -247,7 +247,7 @@ class applicationManagement extends plugin
 			/* Lock the current entry, so nobody will edit it during deletion */
 			add_lock ($this->dn, $this->ui->dn);
 			$smarty= get_smarty();
-			$smarty->assign("intro", sprintf(_("You're about to delete the application '%s'."), $this->dn));
+			$smarty->assign("intro", sprintf(_("You're about to delete the application '%s'."), LDAP::fix($this->dn)));
 			return($smarty->fetch (get_template_path('remove.tpl', TRUE)));
 		} else {
 

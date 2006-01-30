@@ -509,7 +509,7 @@ function get_list2($subtreeACL, $filter, $subsearch= TRUE, $base="", $attrs= arr
   /* Crawl through reslut entries and perform the migration to the
      result array */
   while($attrs = $ldap->fetch()) {
-    $dn= clean_dn($ldap->getDN());
+    $dn= $ldap->getDN();
     foreach ($subtreeACL as $key => $value){
       if (preg_match("/$key/", $dn)){
         $attrs["dn"]= convert_department_dn($dn);
@@ -554,7 +554,7 @@ function get_list($subtreeACL, $filter, $subsearch= TRUE, $base="", $attrs= arra
      result array */
   $result= array();
   while($attrs = $ldap->fetch()) {
-    $dn= clean_dn($ldap->getDN());
+    $dn= $ldap->getDN();
     foreach ($subtreeACL as $key => $value){
       if (preg_match("/$key/", $dn)){
         $attrs["dn"]= $dn;
@@ -745,7 +745,7 @@ function convert_department_dn($dn)
 
   /* Build a sub-directory style list of the tree level
      specified in $dn */
-  foreach (dn_split ($dn) as $val){
+  foreach (split (',', $dn) as $val){
 
     /* We're only interested in organizational units... */
     if (preg_match ("/ou=/", $val)){
@@ -757,6 +757,9 @@ function convert_department_dn($dn)
       $dep= substr($val,2)."/$dep";
     }
   }
+
+  /* Fix name, if it contains a replace tag */
+  $dep= preg_replace('/###GOSAREPLACED###/', ',', $dep);
 
   /* Return and remove accidently trailing slashes */
   return rtrim($dep, "/");
@@ -772,11 +775,9 @@ function convert_department_dn2($dn)
 
   if(isset($deps[$dn])){
     $dn= $deps[$dn];
-    $tmp = dn_split ($dn);
-    $dep = preg_replace("/^.*=/","",$tmp[0]);
+    $dep = preg_replace("/^.*=/","",$dn);
   }else{
-    $tmp = dn_split ($dn);
-    $dep= preg_replace("%^.*/([^/]+)$%", "\\1", $tmp[0]);
+    $dep= preg_replace("%^.*/([^/]+)$%", "\\1", $dn);
   }
 
   /* Return and remove accidently trailing slashes */
@@ -1826,43 +1827,6 @@ function search_config($arr, $name, $return)
     }
   }
   return ("");
-}
-
-
-function dn_split($dn)
-{
-  $ret= array();
-  $tmp_dn= preg_replace('/\\\\,/', '##', $dn);
-  if (!preg_match('/,/', $tmp_dn)){
-    $ret[]= $dn;
-    return $ret;
-  }
-
-  while (1){
-
-    # Get next position of comma, exit if there
-    # are none left
-    $pos= strpos($tmp_dn, ',');
-    if ($pos === false){
-      break;
-    }
-
-    # Assign element
-    $ret[]= substr($dn, 0, $pos);
-    $tmp_dn= substr($tmp_dn, $pos + 1);
-    $dn= substr($dn, $pos + 1);
-  }
-  
-  return ($ret);
-}
-
-
-function clean_dn($dn)
-{
-  $tmp_dn= preg_replace('/\\\\,/', '<GOSA#REPLACED#KOMMA>', $dn);
-  $tmp_dn= preg_replace('/[ ]*,[ ]*/', ",", $tmp_dn);
-  $tmp_dn= preg_replace('/\<GOSA#REPLACED#KOMMA\>/', '\\,', $tmp_dn);
-  return ($tmp_dn);
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
