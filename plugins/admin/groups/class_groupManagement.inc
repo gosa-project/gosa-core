@@ -492,11 +492,13 @@ class groupManagement extends plugin
     /* What are primary groups? */
     $primaries= array();
     $ldap= $this->config->get_ldap_link();
-    $ldap->cd($base);
-    $ldap->search("(&(uid=$regex)(!(uid=*$))(objectClass=posixAccount)(gidNumber=*))", array("gidNumber", "cn"));
-    show_ldap_error($ldap->get_error());
-    while ($attrs= $ldap->fetch()){
-      $primaries[$attrs['gidNumber'][0]]= $attrs['cn'][0];
+    if (!isset($this->config->data['MAIN']['NOPRIMARYGROUP'])){
+      $ldap->cd($base);
+      $ldap->search("(&(uid=$regex)(!(uid=*$))(objectClass=posixAccount)(gidNumber=*))", array("gidNumber", "cn"));
+      show_ldap_error($ldap->get_error());
+      while ($attrs= $ldap->fetch()){
+        $primaries[$attrs['gidNumber'][0]]= $attrs['cn'][0];
+      }
     }
 
     /* Set filter depending on selection */

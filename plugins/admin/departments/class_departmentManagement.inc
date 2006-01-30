@@ -414,6 +414,9 @@ class departmentManagement extends plugin
 		}
 		natcasesort ($this->departments);
 		reset ($this->departments);
+
+		/* Unset global department list */
+		unset($_SESSION['cached_departments']);
 	}
 
 	function remove_from_parent()

@@ -18,6 +18,7 @@ class selectUserToPrinterDialog extends plugin
   var $searchObjects        = "";
   var $searchAttrs          = "";
   var $searchAppend         = "";
+  var $baseAddition         = "";
   var $type                 = "";
   
   function selectUserToPrinterDialog ($config, $dn= NULL,$type=false )
@@ -30,21 +31,25 @@ class selectUserToPrinterDialog extends plugin
         $this->searchObjects = "(objectClass=gosaAccount)(!(uid=*$))";
         $this->searchAttrs   = array("cn","uid");
         $this->searchAppend  = "uid"; 
+        $this->baseAddition  = get_people_ou(); 
           ;break;
       case "AddGroup" :
         $this->searchObjects = "(objectClass=posixGroup)";
         $this->searchAttrs   = array("cn","description");
         $this->searchAppend  = "cn"; 
+        $this->baseAddition  = get_groups_ou(); 
           ;break;
       case "AddAdminUser" : 
         $this->searchObjects = "(objectClass=gosaAccount)(!(uid=*$))";
         $this->searchAttrs   = array("cn","uid");
         $this->searchAppend  = "uid"; 
+        $this->baseAddition  = get_people_ou(); 
           ;break;
       case "AddAdminGroup" :
         $this->searchObjects = "(objectClass=posixGroup)";
         $this->searchAttrs   = array("cn","description");
         $this->searchAppend  = "cn"; 
+        $this->baseAddition  = get_groups_ou(); 
           ;break;
     }
     $this->type = $type;
@@ -70,11 +75,12 @@ class selectUserToPrinterDialog extends plugin
       $this->regex=preg_replace("/\*\*/","*",$this->regex);
     }
 
+    $tmp_printers= $this->getPrinter();
     $smarty->assign("regexPrinter"        , $this->regex);
     $smarty->assign("deplistPrinter"      , $this->config->idepartments);//deplist);
     $smarty->assign("depselectPrinter"    , $this->depselect);
-    $smarty->assign("gotoPrinters"        , $this->getPrinter());
-    $smarty->assign("gotoPrinterKeys"     , array_flip($this->getPrinter()));
+    $smarty->assign("gotoPrinters"        , $tmp_printers);
+    $smarty->assign("gotoPrinterKeys"     , array_flip($tmp_printers));
     $smarty->assign("apply"               , apply_filter());
     $smarty->assign("alphabet"            , generate_alphabet());
     $smarty->assign("search_image"        , get_template_path('images/search.png'));
@@ -115,7 +121,8 @@ class selectUserToPrinterDialog extends plugin
     $a_return=array();
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->depselect);
-    $ldap->search("(&".$this->searchObjects."(cn=".$this->regex."))",$this->searchAttrs);
+    #$ldap->search("(&".$this->searchObjects."(cn=".$this->regex."))", $this->depselect, $this->searchAttrs);
+    $ldap->ls("(&".$this->searchObjects."(cn=".$this->regex."))", $this->baseAddition.$this->depselect, $this->searchAttrs);
     while($printer = $ldap->fetch()){
       if(($detailed ==true)){
         if(isset($printer[$this->searchAppend])){
@@ -134,10 +141,6 @@ class selectUserToPrinterDialog extends plugin
     return($a_return);
   }
 }
-
-
-
-
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

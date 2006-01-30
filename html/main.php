@@ -229,7 +229,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 /* Load department list when plugin has changed. That is some kind of
    compromise between speed and beeing up to date */
 if (isset($_GET['reset'])){
-  $config->departments= get_departments();
+  if (!isset($_SESSION['cached_departments'])){
+    $_SESSION['cached_departments']= get_departments();
+  }
+  $config->departments= $_SESSION['cached_departments'];
   $config->make_idepartments ();
   if (isset($_SESSION['objectinfo'])){
     unset ($_SESSION['objectinfo']);
