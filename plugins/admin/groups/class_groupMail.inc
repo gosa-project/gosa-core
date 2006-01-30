@@ -455,6 +455,7 @@ class mailgroup extends plugin
     if (isset($this->imapacl['anyone'])){
       $smarty->assign("default_permissions", $this->imapacl['anyone']);
     }
+    $smarty->assign("member_permissions", "lrsp");
     if (isset($this->imapacl['%members%'])){
       $smarty->assign("member_permissions", $this->imapacl['%members%']);
     }
