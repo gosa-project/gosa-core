@@ -36,10 +36,12 @@
 	<table summary="" style="width:100%;border-top:1px solid #B0B0B0;">	
 		<tr>
 			<td>
+{if $showprimary == "true"}
 	<input type="checkbox" id="primarygroups" name="primarygroups" value="1" {$primarygroups} onClick="mainform.submit()" 
 			title="{t}Select to see groups that are primary groups of users{/t}">
 		<label for="primarygroups">{t}Show primary groups{/t}</label>
 		<br />
+{/if}
     <input type='checkbox' id="sambagroups" name="sambagroups" value="1" {$sambagroups} onClick="mainform.submit()" 
 		title="{t}Select to see groups that have samba groups mappings{/t}">
 		<label for="sambagroups">{t}Show samba groups{/t}</label>

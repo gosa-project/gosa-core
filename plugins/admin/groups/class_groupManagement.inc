@@ -464,6 +464,11 @@ class groupManagement extends plugin
     $smarty->assign("apply", apply_filter());
     $smarty->assign("alphabet", generate_alphabet());
     $smarty->assign("hint", print_sizelimit_warning());
+    if (isset($this->config->data['MAIN']['NOPRIMARYGROUP'])){
+      $smarty->assign("showprimary", "");
+    } else {
+      $smarty->assign("showprimary", "true");
+    }
 
     return($smarty->fetch(get_template_path('headpage.tpl', TRUE)));
   }
