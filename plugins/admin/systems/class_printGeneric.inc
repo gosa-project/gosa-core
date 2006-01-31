@@ -14,8 +14,6 @@ class printgeneric extends plugin
   /* Needed values and lists */
   var $base             = "";
   var $cn               = "";
-  var $macAddress       = "";
-  var $ipHostNumber     = "";
   var $l                = "";
   var $description      = "";
   var $labeledURI       = "";
@@ -40,14 +38,19 @@ class printgeneric extends plugin
   var $type             = "";
   var $dialog           =NULL;
 
+  var $netConfigDNS;
+
   /* attribute list for save action */
-  var $attributes     = array("cn", "description", "l", "labeledURI", "macAddress", "ipHostNumber","gotoPrinterPPD");
+  var $attributes     = array("cn", "description", "l", "labeledURI", "gotoPrinterPPD");
   var $objectclasses  = array("top", "gotoPrinter");
 
   function printgeneric ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
     $ldap= $this->config->get_ldap_link();
+    
+    $this->netConfigDNS = new termDNS($this->config, $this->dn,$this->objectclasses);
+
 
     /* Set base */
     if ($this->dn == "new"){
@@ -371,10 +374,6 @@ class printgeneric extends plugin
       return $display;
     }
 
-    /* Don't show Asterisk for non-required attribute ipHostNumber and macAddress */
-    $smarty->assign("staticAddress", "");
-
-
     require_once ("class_ppdManager.inc");
 
     if((isset($_SESSION['config']->data['MAIN']['PPD_PATH']))&&(is_dir($_SESSION['config']->data['MAIN']['PPD_PATH']))){
@@ -422,7 +421,7 @@ class printgeneric extends plugin
     $smarty->assign("AdminMember"    ,$this->AdminMember);
     $smarty->assign("AdminMembers"   ,$adminlist);
     $smarty->assign("AdminMemberKeys",array_flip($adminlist));
-    $smarty->assign("netconfig", dirname(__FILE__)."/network.tpl");
+    $smarty->assign("netconfig", $this->netConfigDNS->execute());
 
     return($display.$smarty->fetch (get_template_path('printer.tpl', TRUE)));
   }
@@ -446,14 +445,16 @@ class printgeneric extends plugin
           unset($og->member[$this->dn]);
           $og->save ();
         }
+    
+        $this->netConfigDNS->remove_from_parent();
       }
     }
   }
-    /* Save data to object */
-    function save_object()
+  /* Save data to object */
+  function save_object()
   {
     plugin::save_object();
-
+    $this->netConfigDNS->save_object();
     /* Save base, since this is no LDAP attribute */
     if (isset($_POST['base']) && chkacl($this->acl, "create") == ""){
       $this->base= $_POST['base'];
@@ -463,7 +464,7 @@ class printgeneric extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    $message= $this->netConfigDNS->check();
 
     if(isset($this->parent->by_name['workgeneric'])){
       if($this->parent->by_object['workgeneric']->cn == "wdefault"){
@@ -619,6 +620,8 @@ class printgeneric extends plugin
       $this->handle_post_events("modify");
     }
     show_ldap_error($ldap->get_error());
+
+    $this->netConfigDNS->save($this->dn);
 
     /* Optionally execute a command after we're done */
     $this->postcreate();

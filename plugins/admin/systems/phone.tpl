@@ -33,7 +33,7 @@
 {include file="$phonesettings"}
 
 <p class="plugbottom" style="margin-bottom:0px; padding:0px;">&nbsp;</p>
-{include file="$netconfig"}
+{$netconfig}
 
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">

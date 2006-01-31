@@ -15,14 +15,14 @@ class servgeneric extends plugin
   var $base= "";
   var $cn= "";
   var $l= "";
-  var $macAddress= "";
-  var $ipHostNumber= "";
   var $description= "";
   var $orig_dn= "";
 
   /* attribute list for save action */
-  var $attributes= array("cn", "description", "macAddress", "ipHostNumber");
+  var $attributes= array("cn", "description");
   var $objectclasses= array("top", "goServer");
+
+  var $netConfigDNS;
 
   function servgeneric ($config, $dn= NULL)
   {
@@ -36,7 +36,7 @@ class servgeneric extends plugin
     } else {
       $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,/", "", $this->dn);
     }
-
+    $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
     /* Save dn for later references */
     $this->orig_dn= $this->dn;
   }
@@ -61,7 +61,7 @@ class servgeneric extends plugin
           if ($cmd == ""){
             print_red(_("No WAKECMD definition found in your gosa.conf"));
           } else {
-            exec ($cmd." ".$this->macAddress, $dummy, $retval);
+            exec ($cmd." ".$this->netConfigDNS->macAddress, $dummy, $retval);
             if ($retval != 0){
               print_red(sprintf(_("Execution of '%s' failed!"), $cmd));
             }
@@ -119,7 +119,7 @@ class servgeneric extends plugin
 
 
     /* Show main page */
-    $smarty->assign("netconfig", dirname(__FILE__)."/network.tpl");
+    $smarty->assign("netconfig", $this->netConfigDNS->execute());
 
     return($smarty->fetch (get_template_path('server.tpl', TRUE)));
   }
@@ -138,7 +138,7 @@ class servgeneric extends plugin
       unset($og->member[$this->dn]);
       $og->save ();
     }
-
+    $this->netConfigDNS->remove_from_parent();
     $this->handle_post_events("remove");
   }
 
@@ -147,7 +147,7 @@ class servgeneric extends plugin
   function save_object()
   {
     plugin::save_object();
-
+    $this->netConfigDNS->save_object();
     /* Save base, since this is no LDAP attribute */
     if (isset($_POST['base']) && chkacl($this->acl, "create") == ""){
       $this->base= $_POST['base'];
@@ -158,7 +158,7 @@ class servgeneric extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    $message= $this->netConfigDNS->check();
     $this->dn= "cn=".$this->cn.",ou=servers,ou=systems,".$this->base;
 
     /* must: cn */
@@ -235,6 +235,7 @@ class servgeneric extends plugin
       $ldap->modify($this->attrs);
       $mode= "modify";
     }
+    $this->netConfigDNS->save($this->dn);
     show_ldap_error($ldap->get_error());
 
     /* Optionally execute a command after we're done */

@@ -72,7 +72,7 @@
 </table>
 <p class="plugbottom" style="margin-bottom:0px; padding:0px;">&nbsp;</p>
 
-{include file="$netconfig"}
+{$netconfig}
 
 <p class="plugbottom" style="margin-bottom:0px; padding:0px;">&nbsp;</p>
 <h2><img class="center" alt="" align="middle" src="images/rocket.png"> {t}Action{/t}</h2>

@@ -14,14 +14,13 @@ class componentGeneric extends plugin
   /* Needed values and lists */
   var $base= "";
   var $cn= "";
-  var $macAddress= "";
-  var $ipHostNumber= "";
   var $description= "";
   var $orig_dn= "";
 
   /* attribute list for save action */
-  var $attributes= array("cn", "description", "macAddress", "ipHostNumber");
+  var $attributes= array("cn", "description");
   var $objectclasses= array("top", "device", "ipHost", "ieee802Device");
+  var $netConfigDNS;
 
   function componentgeneric ($config, $dn= NULL)
   {
@@ -35,7 +34,7 @@ class componentGeneric extends plugin
     } else {
       $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,/", "", $this->dn);
     }
-
+    $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
     /* Save dn for later references */
     $this->orig_dn= $this->dn;
   }
@@ -63,11 +62,8 @@ class componentGeneric extends plugin
     }
     $smarty->assign("base_select", $this->base);
 
-    /* Show Asterisk for required attribute ipHostNumber and macAddress */
-    $smarty->assign("staticAddress", "<font class=\"must\">*</font>");
-    
     /* Show main page */
-    $smarty->assign("netconfig", dirname(__FILE__)."/network.tpl");
+    $smarty->assign("netconfig", $this->netConfigDNS->execute());
     return($smarty->fetch (get_template_path('component.tpl', TRUE)));
   }
 
@@ -86,7 +82,7 @@ class componentGeneric extends plugin
       unset($og->member[$this->dn]);
       $og->save ();
     }
-
+    $this->netConfigDNS->remove_from_parent();
   }
 
 
@@ -94,6 +90,8 @@ class componentGeneric extends plugin
   function save_object()
   {
     plugin::save_object();
+
+    $this->netConfigDNS->save_object();
 
     /* Save base, since this is no LDAP attribute */
     if (isset($_POST['base']) && chkacl($this->acl, "create") == ""){
@@ -106,17 +104,13 @@ class componentGeneric extends plugin
   function check()
   {
     $message= array();
+
+    $message = array_merge($message,$this->netConfigDNS->check());
+
     $this->dn= "cn=".$this->cn.",ou=netdevices,ou=systems,".$this->base;
 
-    /* must: cn, macAddress, ipHostNumber */
     if ($this->cn == "" && chkacl ($this->acl, "cn") == ""){
       $message[]= _("The required field 'Component name' is not set.");
-    }
-    if ($this->macAddress == "" && chkacl ($this->acl, "macAddress") == ""){
-      $message[]= _("The required field 'MAC-address' is not set.");
-    }
-    if ($this->ipHostNumber == "" && chkacl ($this->acl, "ipHostNumber") == ""){
-      $message[]= _("The required field 'IP-address' is not set.");
     }
 
     $ui= get_userinfo();
@@ -178,6 +172,9 @@ class componentGeneric extends plugin
       $ldap->modify($this->attrs);
       $this->handle_post_events("modify");
     }
+
+    $this->netConfigDNS->save($this->dn);
+
     show_ldap_error($ldap->get_error());
 
     /* Optionally execute a command after we're done */

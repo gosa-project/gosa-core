@@ -14,8 +14,6 @@ class phoneGeneric extends plugin
   /* Needed values and lists */
   var $base             = "";
   var $cn               = "";
-  var $macAddress       = "";
-  var $ipHostNumber     = "";
   var $description      = "";
   var $orig_dn          = "";
   var $goFonType        = "";
@@ -33,23 +31,24 @@ class phoneGeneric extends plugin
   var $goFonAccountCode = "";
   var $goFonMSN         = "";
   var $selected_categorie    = 0;
+  var $netConfigDNS;
 
   /* attribute list for save action */
-  var $attributes= array("cn", "description", "macAddress", "ipHostNumber"
-                         ,"goFonType","goFonDmtfMode","goFonHost","goFonDefaultIP",
+  var $attributes= array("cn", "description", 
+                          "goFonType","goFonDmtfMode","goFonHost","goFonDefaultIP",
                           "goFonQualify","goFonAuth","goFonSecret","goFonInkeys","goFonOutkey",
                           "goFonTrunk","goFonAccountCode","goFonMSN","selected_categorie","goFonPermit","goFonDeny" 
                          );
 
   /* this array defines which attributes are schown / saved for the different type of phones */ 
-  var $usedattrs =    array( "0"=>array("cn", "description", "macAddress", "ipHostNumber",
+  var $usedattrs =    array( "0"=>array("cn", "description", 
                                   "goFonType","goFonDmtfMode","goFonHost","goFonDefaultIP",
                                   "goFonQualify"),
-                             "1"=>array("cn", "description", "macAddress", "ipHostNumber",
+                             "1"=>array("cn", "description", 
                                   "goFonType","goFonHost","goFonDefaultIP",
                                   "goFonQualify","goFonAuth","goFonSecret","goFonInkeys","goFonOutkey",
                                   "goFonTrunk","goFonAccountCode","selected_categorie","goFonPermit","goFonDeny"),
-                             "2"=>array("cn", "description", "macAddress", "ipHostNumber","goFonMSN"));
+                             "2"=>array("cn", "description", "goFonMSN"));
   
 
   var $objectclasses= array("top", "goFonHardware");
@@ -57,6 +56,7 @@ class phoneGeneric extends plugin
   function phonegeneric ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
+    $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
 
     /* Set base */
     if ($this->dn == "new"){
@@ -197,11 +197,8 @@ class phoneGeneric extends plugin
    
     $smarty->assign("goFonDefaultIPs",array("dynamic"=>_("dynamic"),"network"=>_("Networksettings")));
  
-    /* Show Asterisk for required attribute ipHostNumber and macAddress */
-    $smarty->assign("staticAddress", "<font class=\"must\">*</font>");
-        
     /* Show main page */
-    $smarty->assign("netconfig", dirname(__FILE__)."/network.tpl");
+    $smarty->assign("netconfig", $this->netConfigDNS->execute());
     $smarty->assign("phonesettings", dirname(__FILE__)."/phonesettings.tpl");
     return($smarty->fetch (get_template_path('phone.tpl', TRUE)));
   }
@@ -230,7 +227,7 @@ class phoneGeneric extends plugin
       unset($og->member[$this->dn]);
       $og->save ();
     }
-
+    $this->netConfigDNS->remove_from_parent();
   }
 
 
@@ -238,7 +235,7 @@ class phoneGeneric extends plugin
   function save_object()
   {
     plugin::save_object();
-
+    $this->netConfigDNS->save_object();
     /* Save base, since this is no LDAP attribute */
     if (isset($_POST['base']) && chkacl($this->acl, "create") == ""){
       $this->base= $_POST['base'];
@@ -249,7 +246,7 @@ class phoneGeneric extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    $message= $this->netConfigDNS->check();
     $this->dn= "cn=".$this->cn.",ou=phones,ou=systems,".$this->base;
 
     /* To check for valid ip*/
@@ -268,26 +265,11 @@ class phoneGeneric extends plugin
 //      } 
 //    }
 
-    /* must: cn, macAddress, ipHostNumber */
     if ($this->cn == "" && chkacl ($this->acl, "cn") == ""){
       $message[]= _("The required field 'Phone name' is not set.");
     }
     if ($this->cn == "0" && chkacl ($this->acl, "cn") == ""){
       $message[]= _("The 'Phone name' '0' is reserved and cannot be used.");
-    }
-    if ($this->macAddress == "" && chkacl ($this->acl, "macAddress") == ""){
-      $message[]= _("The required field 'MAC-address' is not set.");
-    }
-    if ($this->ipHostNumber == "" && chkacl ($this->acl, "ipHostNumber") == ""){
-      $message[]= _("The required field 'IP-address' is not set.");
-    }
-    if (!preg_match("/^$num\\.$num\\.$num\\.$num$/", $this->ipHostNumber)){
-       $message[]= _("Wrong IP format in field IP-address.");
-    }
-    
-    $tr = count(split(":",$this->macAddress));
-    if($tr!=6){
-      $message[]=(_("The given macaddress is invalid. There must be 6 2byte segments seperated by ':'."));
     }
 
     $ui= get_userinfo();
@@ -354,7 +336,7 @@ class phoneGeneric extends plugin
     }
 
     if($this->goFonDefaultIP!="dynamic"){
-      $this->attrs['goFonDefaultIP'] = $this->ipHostNumber;
+      $this->attrs['goFonDefaultIP'] = $this->netConfigDNS->ipHostNumber;
     }    
 
     /* Write back to ldap */
@@ -383,6 +365,9 @@ class phoneGeneric extends plugin
       }
       $this->handle_post_events("modify");
     }
+    
+    $this->netConfigDNS->save($this->dn);
+
     show_ldap_error($ldap->get_error());
     /* Optionally execute a command after we're done */
     $this->postcreate();

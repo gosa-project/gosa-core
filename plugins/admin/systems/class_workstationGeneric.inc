@@ -16,8 +16,6 @@ class workgeneric extends plugin
   var $gotoCdromEnable= "";
   var $ghCpuType= "-";
   var $ghMemSize= "-";
-  var $macAddress= "";
-  var $ipHostNumber= "";
   var $ghUsbSupport= "-";
   var $ghNetNic= array();
   var $ghIdeDev= array();
@@ -37,18 +35,20 @@ class workgeneric extends plugin
   /* Plugin side filled */
   var $modes= array();
 
+  var $netConfigDNS;
+
   /* attribute list for save action */
   var $ignore_account= TRUE;
-  var $attributes= array("gotoMode", "macAddress", "gotoSyslogServer", "gotoNtpServer",
+  var $attributes= array("gotoMode", "gotoSyslogServer", "gotoNtpServer",
       "gotoFloppyEnable", "gotoCdromEnable", "cn", "gotoSndModule",
-      "ghCpuType", "ghMemSize", "ghUsbSupport", "ipHostNumber",
+      "ghCpuType", "ghMemSize", "ghUsbSupport",
       "ghGfxAdapter", "ghSoundAdapter", "gotoLastUser", "l","FAIscript");
   var $objectclasses= array("top", "gotoWorkstation", "GOhard","FAIobject");
 
   function workgeneric ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
-
+    $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
     /* Load available modes */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd ($this->config->current['BASE']);
@@ -99,7 +99,7 @@ class workgeneric extends plugin
       if ($cmd == ""){
         print_red(_("No ACTIONCMD definition found in your gosa.conf"));
       } else {
-        exec ($cmd." ".$this->macAddress." ".escapeshellarg($_POST['saction']), $dummy, $retval);
+        exec ($cmd." ".$this->netConfigDNS->macAddress." ".escapeshellarg($_POST['saction']), $dummy, $retval);
         if ($retval != 0){
           print_red(sprintf(_("Execution of '%s' failed!"), $cmd));
         } else {
@@ -149,12 +149,10 @@ class workgeneric extends plugin
       $smarty->assign($val."_select", $this->$val);
       $smarty->assign($val."ACL", chkacl($this->acl, $val));
     }
-    $smarty->assign("ipHostNumber", $this->ipHostNumber);
-    $smarty->assign("macAddress", $this->macAddress);
     $smarty->assign("actionACL", chkacl($this->acl, 'action'));
 
     /* Show main page */
-    $smarty->assign("netconfig", dirname(__FILE__)."/network.tpl");
+    $smarty->assign("netconfig", $this->netConfigDNS->execute());
     return($smarty->fetch (get_template_path('workstation.tpl', TRUE)));
   }
 
@@ -175,7 +173,7 @@ class workgeneric extends plugin
       unset($og->member[$this->dn]);
       $og->save ();
     }
-
+    $this->netConfigDNS->remove_from_parent();
   }
 
 
@@ -188,13 +186,14 @@ class workgeneric extends plugin
     if (isset($_POST['base']) && chkacl($this->acl, "create") == ""){
       $this->base= $_POST['base'];
     }
+    $this->netConfigDNS->save_object();
   }
 
 
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    $message=$this->netConfigDNS->check();
 
     $ui= get_userinfo();
     $this->dn= "cn=".$this->cn.",ou=workstations,ou=systems,".$this->base;
@@ -282,6 +281,7 @@ class workgeneric extends plugin
         $this->handle_post_events("modify");
       }
     }
+    $this->netConfigDNS->save($this->dn);
     show_ldap_error($ldap->get_error());
   }
 

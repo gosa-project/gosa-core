@@ -18,8 +18,6 @@ class termgeneric extends plugin
   var $gotoCdromEnable= "";
   var $ghCpuType= "-";
   var $ghMemSize= "-";
-  var $macAddress= "";
-  var $ipHostNumber= "";
   var $ghUsbSupport= "-";
   var $ghNetNic= array();
   var $ghIdeDev= array();
@@ -27,7 +25,7 @@ class termgeneric extends plugin
   var $ghGfxAdapter= "-";
   var $ghSoundAdapter= "-";
   var $gotoLastUser= "-";
-
+  var $netConfigDNS;
   /* Needed values and lists */
   var $base= "";
   var $cn= "";
@@ -38,17 +36,17 @@ class termgeneric extends plugin
 
   /* attribute list for save action */
   var $ignore_account= TRUE;
-  var $attributes= array("gotoMode", "gotoTerminalPath", "macAddress",
+  var $attributes= array("gotoMode", "gotoTerminalPath", 
       "gotoSwapServer", "gotoSyslogServer", "gotoNtpServer",
       "gotoFloppyEnable", "gotoCdromEnable", "cn", "gotoSndModule",
-      "ghCpuType", "ghMemSize", "ipHostNumber", "ghUsbSupport",
+      "ghCpuType", "ghMemSize","ghUsbSupport",
       "ghGfxAdapter", "ghSoundAdapter", "gotoLastUser");
   var $objectclasses= array("top", "gotoTerminal", "GOhard");
 
   function termgeneric ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
-
+    $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
     /* Read arrays */
     foreach (array("ghNetNic", "ghIdeDev", "ghScsiDev") as $val){
       if (!isset($this->attrs[$val])){
@@ -91,7 +89,7 @@ class termgeneric extends plugin
           if ($cmd == ""){
             print_red(_("No WAKECMD definition found in your gosa.conf"));
           } else {
-            exec ($cmd." ".$this->macAddress, $dummy, $retval);
+            exec ($cmd." ".$this->netConfigDNS->macAddress, $dummy, $retval);
             if ($retval != 0){
               print_red(sprintf(_("Execution of '%s' failed!"), $cmd));
             }
@@ -182,11 +180,9 @@ class termgeneric extends plugin
       $smarty->assign($val."_select", $this->$val);
       $smarty->assign($val."ACL", chkacl($this->acl, $val));
     }
-    $smarty->assign("ipHostNumber", $this->ipHostNumber);
-    $smarty->assign("macAddress", $this->macAddress);
 
     /* Show main page */
-    $smarty->assign("netconfig", dirname(__FILE__)."/network.tpl");
+    $smarty->assign("netconfig", $this->netConfigDNS->execute());
     $smarty->assign("actionACL", chkacl($this->acl, 'action'));
     return($smarty->fetch (get_template_path('terminal.tpl', TRUE)));
   }
@@ -213,6 +209,7 @@ class termgeneric extends plugin
         unset($og->member[$this->dn]);
         $og->save ();
       }
+      $this->netConfigDNS->remove_from_parent();
     }
   }
 
@@ -221,7 +218,7 @@ class termgeneric extends plugin
   function save_object()
   {
     plugin::save_object();
-
+    $this->netConfigDNS->save_object();
     /* Save base, since this is no LDAP attribute */
     if (isset($_POST['base']) && chkacl($this->acl, "create") == ""){
       $this->base= $_POST['base'];
@@ -236,7 +233,7 @@ class termgeneric extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    $message= $this->netConfigDNS->check();
 
     /* Permissions for that base? */
     $this->dn= "cn=".$this->cn."ou=terminals,ou=systems,".$this->base;
@@ -322,6 +319,7 @@ class termgeneric extends plugin
       $ldap->modify($this->attrs);
       $this->handle_post_events("modify");
     }
+    $this->netConfigDNS->save($this->dn);
     show_ldap_error($ldap->get_error());
 
     /* Optionally execute a command after we're done */

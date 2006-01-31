@@ -34,7 +34,7 @@ class wingeneric extends plugin
   var $sambaNTPassword="";
   var $sambaPwdLastSet="";
   var $sambaAcctFlags="";
-
+  var $netConfigDNS;
   /* attribute list for save action */
   var $ignore_account= TRUE;
   var $attributes   = array("cn", "description","shadowLastChange",
@@ -48,7 +48,7 @@ class wingeneric extends plugin
   function wingeneric ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
-
+    $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
     /* Set base */
     if ($this->dn == "new"){
       $ui= get_userinfo();
@@ -78,9 +78,6 @@ class wingeneric extends plugin
     $smarty= get_smarty();
 
     // Undefined index in wingeneric.tpl ... 
-    $smarty->assign("macAddress","");
-    $smarty->assign("ipHostNumber","");
-
     $smarty->assign("bases", $this->config->idepartments);
 
     /* Assign attributes */
@@ -89,13 +86,10 @@ class wingeneric extends plugin
       $smarty->assign("$attr", $this->$attr);
     }
     
-    /* Show Asterisk for required attribute ipHostNumber and macAddress */
-    $smarty->assign("staticAddress", "<font class=\"must\">*</font>");
-    
     $smarty->assign("base_select", $this->base);
 
     /* Show main page */
-    $smarty->assign("netconfig", dirname(__FILE__)."/network.tpl");
+    $smarty->assign("netconfig", $this->netConfigDNS->execute());
     return($smarty->fetch (get_template_path('wingeneric.tpl', TRUE)));
   }
 
@@ -114,7 +108,7 @@ class wingeneric extends plugin
       unset($og->member[$this->dn]);
       $og->save ();
     }
-
+    $this->netConfigDNS->remove_from_parent();
   }
 
 
@@ -122,7 +116,7 @@ class wingeneric extends plugin
   function save_object()
   {
     plugin::save_object();
-
+    $this->netConfigDNS->save_object();
     /* Save base, since this is no LDAP attribute */
     if (isset($_POST['base']) && chkacl($this->acl, "create") == ""){
       $this->base= $_POST['base'];
@@ -133,22 +127,9 @@ class wingeneric extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    $message=$this->netConfigDNS->check();
     $this->dn= "cn=".$this->cn.",ou=netdevices,ou=systems,".$this->base;
 
-
-    /* must: cn, macAddress */
-    if ($this->cn == "" && chkacl ($this->acl, "cn") == ""){
-      $message[]= _("The required field 'Component name' is not set.");
-    }
-
-/*    if ($this->macAddress == "" && chkacl ($this->acl, "macAddress") == ""){
-      $message[]= _("The required field 'MAC-address' is not set.");
-    }
-    if ($this->ipHostNumber == "" && chkacl ($this->acl, "ipHostNumber") == ""){
-      $message[]= _("The required field 'IP-address' is not set.");
-    }
-*/
     $ui= get_userinfo();
     $acl= get_permissions ($this->dn, $ui->subtreeACL);
     $acl= get_module_permission($acl, "component", $this->dn);
@@ -208,6 +189,7 @@ class wingeneric extends plugin
       $ldap->modify($this->attrs);
       $this->handle_post_events("modify");
     }
+    $this->netConfigDNS->save($this->dn);
     show_ldap_error($ldap->get_error());
 
     /* Optionally execute a command after we're done */
