@@ -673,7 +673,12 @@ class group extends plugin
     $ldap= $this->config->get_ldap_link();
 
     $ldap->cd ($this->config->current['BASE']);
-    $ldap->search ("($attrib=*)",array($attrib));
+    if (preg_match('/gidNumber/i', $attrib)){
+      $oc= "posixGroup";
+    } else {
+      $oc= "posixAccount";
+    }
+    $ldap->search ("(&(objectClass=$oc)($attrib=*))", array("$attrib"));
 
     /* Get list of ids */
     while ($attrs= $ldap->fetch()){
