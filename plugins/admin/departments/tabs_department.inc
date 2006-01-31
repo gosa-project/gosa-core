@@ -20,9 +20,6 @@ class deptabs extends tabs
   {
   	$baseobject= $this->by_object['department'];
 	$new_dn= 'ou='.preg_replace('/,/', '\\\\2C', $baseobject->ou).','.$baseobject->base;
-	echo $new_dn."<br>";
-	echo $baseobject->ou;
-
  	if ($this->dn != $new_dn && $this->dn != "new"){
 		
 		/* if( new_dn is subtree of this->dn ) */
