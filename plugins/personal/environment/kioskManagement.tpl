@@ -22,7 +22,7 @@
     <p class="seperator">&nbsp;</p>
 
     <p align="right">
-    <input type="submit" name="KioskClose"     value="{t}Apply{/t}">
+    <input type="submit" name="KioskClose"     value="{t}Close{/t}">
     </p>
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
