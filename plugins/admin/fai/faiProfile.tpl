@@ -36,7 +36,6 @@
 						{$divlist}
 						<br>
 						<input type="submit" name="AddClass" value="{t}Add{/t}">
-						<input type="submit" name="DelClass" value="{t}Delete{/t}">
 						<input type="hidden" name="edit_helper">
 					</td>
 				</tr>
