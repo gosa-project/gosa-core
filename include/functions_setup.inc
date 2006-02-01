@@ -216,6 +216,16 @@ function schema_check($server, $admin, $password, $aff=0,$CalledByIndexPhP=false
     $affich['phpgroupware']['msg']= _("Support for phpgroupware enabled")."<td class=\"check\">phpgwaccount.schema</td>";
     $affich['phpgroupware']['status']= TRUE;
   }
+  
+  if (!isset($objectclasses['trustAccount'])){
+    $messages['trustAccount']['msg']= _("Support for trustAccount disabled, no schema seems to be installed");
+    $affich['trustAccount']['msg']= $messages['trustAccount']['msg']."<td class=\"check\">trust.schema</td>";
+    $messages['trustAccount']['status']= FALSE;
+    $affich['trustAccount']['status']= FALSE;
+  }else{
+    $affich['trustAccount']['msg']= _("Support for trustAccount enabled")."<td class=\"check\">trust.schema</td>";
+    $affich['trustAccount']['status']= TRUE;
+  }
 
   if (!isset($objectclasses['goFonAccount'])){
     $messages['phoneaccount']['msg']= _("Support for gofon disabled, no schema seems to be installed");
