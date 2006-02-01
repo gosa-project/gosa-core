@@ -344,7 +344,7 @@ class faiManagement extends plugin
         /* Assign possible attributes */
         $this->lock_type  = "branch"; 
         $this->lock_name  = $name; 
-        $this->lock_dn    = "ou=".$name.",".$baseToUse; 
+        $this->lock_dn    = $baseToUse; 
         $this->postcreate();
         $this->dispNewBranch = false; 
       }
