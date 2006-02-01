@@ -74,8 +74,8 @@
 				</tr>
 				<tr>
 					<td colspan=2>
-						<input type="checkbox" name="gotoProfileFlag_L" id="gotoProfileFlag_L" value="L" 
-							{if $gotoProfileFlagsACL=="disabled" || $gotoProfileFlag_LCHK=="disabled"}
+						<input type="checkbox" name="gotoProfileFlag_L" id="gotoProfileFlag_L" value="L"  {$gotoProfileFlag_LCHK}
+							{if $gotoProfileFlagsACL=="disabled"}
 								disabled 
 							{/if}>
 						<label for="gotoProfileFlag_L">{t}Resolution changeable on runtime{/t}</label>
