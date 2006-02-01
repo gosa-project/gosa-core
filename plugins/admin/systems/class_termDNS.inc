@@ -33,32 +33,32 @@ class termDNS extends plugin
     /* We need to know which objectClasses are used, to store the ip/mac*/
     $this->objectclasses= $objectClasses;
     plugin::plugin ($config, $dn);
-    
+
     /* All types with required attrs */
-    $this->RecordTypes['aRecord']       ="aRecord";
-    $this->RecordTypes['MDRecord']      ="";
-    $this->RecordTypes['mXRecord']      ="mXRecord";
-    $this->RecordTypes['nSRecord']      ="nSRecord";
-    $this->RecordTypes['pTRRecord']     ="relativeDomainName";
-    $this->RecordTypes['HINFORecord']   ="";
-    $this->RecordTypes['MINFORecord']   ="";
-    $this->RecordTypes['cNAMERecord']   ="relativeDomainName";
-    $this->RecordTypes['tXTRecord']     ="tXTRecord";
-    $this->RecordTypes['AFSDBRecord']   ="";
-    $this->RecordTypes['SIGRecord']     ="";
-    $this->RecordTypes['KEYRecord']     ="";
-    $this->RecordTypes['AAAARecord']    ="";
-    $this->RecordTypes['LOCRecord']     ="";
-    $this->RecordTypes['NXTRecord']     ="";
-    $this->RecordTypes['SRVRecord']     ="";
-    $this->RecordTypes['NAPTRRecord']   ="";
-    $this->RecordTypes['KXRecord']      ="";
-    $this->RecordTypes['CERTRecord']    ="";
-    $this->RecordTypes['A6Record']      ="";
-    $this->RecordTypes['DSRecord']      ="";
-    $this->RecordTypes['SSHFPRecord']   ="";
-    $this->RecordTypes['RRSIGRecord']   ="";
-    $this->RecordTypes['NSECRecord']    ="";
+    $this->RecordTypes['aRecord']       = "aRecord";           // ok
+    $this->RecordTypes['mDRecord']      = "mDRecord";          // ok
+    $this->RecordTypes['mXRecord']      = "mXRecord";          // ok
+    $this->RecordTypes['nSRecord']      = "nSRecord";          // ok 
+    $this->RecordTypes['pTRRecord']     = "relativeDomainName";// ok
+    $this->RecordTypes['hInfoRecord']   = "hInfoRecord";       // ok
+    $this->RecordTypes['mInfoRecord']   = "mInfoRecord";       // ok
+    $this->RecordTypes['cNAMERecord']   = "relativeDomainName";// ok
+    $this->RecordTypes['tXTRecord']     = "tXTRecord";         // ok
+    $this->RecordTypes['aFSDBRecord']   = "aFSDBRecord";       // ok
+    $this->RecordTypes['SigRecord']     = "SigRecord";         // ok
+    $this->RecordTypes['KeyRecord']     = "KeyRecord";         // ok 
+    $this->RecordTypes['aAAARecord']    = "aAAARecord";        // ok
+    $this->RecordTypes['LocRecord']     = "LocRecord";         // ok 
+    $this->RecordTypes['nXTRecord']     = "nXTRecord";         // ok
+    $this->RecordTypes['sRVRecord']     = "sRVRecord";         // ok
+    $this->RecordTypes['nAPTRRecord']   = "nAPTRRecord";       // ok
+    $this->RecordTypes['kXRecord']      = "kXRecord";          // ok
+    $this->RecordTypes['certRecord']    = "certRecord";        // ok
+    $this->RecordTypes['a6Record']      = "a6Record";          // ok
+    $this->RecordTypes['dSRecord']      = "dSRecord";          // ok
+    $this->RecordTypes['sSHFPRecord']   = "sSHFPRecord";       // ok
+    $this->RecordTypes['rRSIGRecord']   = "rRSIGRecord";       // ok
+    $this->RecordTypes['nSECRecord']    = "nSECRecord";        // ok 
 
     /* Get all available zones */ 
     $this->cn = $this->attrs['cn'][0];
@@ -97,7 +97,7 @@ class termDNS extends plugin
     
           /* get all entries */
           for($i = 0 ; $i < $attrs[$value]['count']; $i ++){
-            $types[] =array("type"=>$name,"value"=>$attrs[$value][$i],"status"=>"edited","dn"=>$attrs['dn']);
+            $types[] =array("type"=>$name,"inittype"=>$name,"value"=>$attrs[$value][$i],"status"=>"edited","dn"=>$attrs['dn']);
           }
         }
       }
@@ -261,10 +261,14 @@ class termDNS extends plugin
      */ 
     if(!$this->DNS_is_account){
       if($this->DNSinitially_was_account){
+        $tmp = array();
         foreach($this->types as $type){
           $dn = $type['dn'];
-          $ldap->cd($dn);
-          $ldap->rmDir($dn);
+          if(!isset($tmp[$dn])) {
+            $ldap->cd($dn);
+            $ldap->rmDir($dn);
+          }
+          $tmp[$dn]=$dn;
         }
       }
     }else{
@@ -298,7 +302,7 @@ class termDNS extends plugin
       }
     }
     if($ldap->get_error() != "Success"){
-      print_red($ldap->get_error());
+      show_ldap_error($ldap->get_error()); 
     }
     
   }
@@ -411,6 +415,59 @@ class termDNS extends plugin
         $entries[$dn]['tXTRecord'][] = $type['value'];
       }
     }
+
+    /* Generate mDRecord */
+    $aRecords = array();
+    foreach($this->types as $type){
+      if(($type['type'] == "mDRecord")&&($type['status']!="deleted")){
+        $entries[$dn]['mDRecord'][] = $type['value'];
+      }
+    }
+
+    /* Generate mXRecord */
+    $aRecords = array();
+    foreach($this->types as $type){
+      if(($type['type'] == "mXRecord")&&($type['status']!="deleted")){
+        $entries[$dn]['mXRecord'][] = $type['value'];
+      }
+    }
+ 
+    /* Generate hInfoRecord */
+    $aRecords = array();
+    foreach($this->types as $type){
+      if(($type['type'] == "hInfoRecord")&&($type['status']!="deleted")){
+        $entries[$dn]['hInfoRecord'][] = $type['value'];
+      }
+    }
+
+    /* Generate mInfoRecord */
+    $aRecords = array();
+    foreach($this->types as $type){
+      if(($type['type'] == "mInfoRecord")&&($type['status']!="deleted")){
+        $entries[$dn]['mInfoRecord'][] = $type['value'];
+      }
+    }
+ 
+    /* Generate aFSDBRecord */
+    $aRecords = array();
+    foreach($this->types as $type){
+      if(($type['type'] == "aFSDBRecord")&&($type['status']!="deleted")){
+        $entries[$dn]['aFSDBRecord'][] = $type['value'];
+      }
+    }
+ 
+    /* Generate some attrs  */
+    $arr = array("SigRecord","KeyRecord","aAAARecord","nSRecord",
+        "LocRecord","nXTRecord","sRVRecord","nAPTRRecord","kXRecord","certRecord","a6Record","dSRecord","sSHFPRecord","rRSIGRecord","nSECRecord");
+    $aRecords = array();
+    foreach($arr as $ar){
+      foreach($this->types as $type){
+        if(($type['type'] == $ar)&&($type['status']!="deleted")){
+          $entries[$dn][$ar][] = $type['value'];
+        }
+      }
+    }
+ 
  
     /* Generate A Records (IP Address relation) */
     $aRecords = array();
@@ -445,6 +502,14 @@ class termDNS extends plugin
     foreach($entries as $key => $entry ){
       $entries[$key]['objectClass']=array("top","dNSZone");
       $entries[$key] = array_reverse($entries[$key]);
+    }
+
+    foreach($this->types as $type){
+      if(isset($type['inittype'])){
+        if(!isset($entries[$dn][$type['inittype']])){
+          $entries[$dn][$type['inittype']] = array();
+        }
+      }
     }
 
     return($entries); 
