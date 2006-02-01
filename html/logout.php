@@ -23,10 +23,29 @@ require_once ("../include/php_setup.inc");
 require_once ("functions.inc");
 header("Content-type: text/html; charset=UTF-8");
 get_dir_list("$BASE_DIR/plugins");
-session_start ();
-
+@session_start();
 /* Do logout-logging and destroy session */
-if (!isset($_SESSION["config"])){
+
+if(isset($_SESSION['logout_was_posted_several_times'])){
+  header ("Location: index.php");
+}
+
+if (isset($_SESSION['config'])){
+  $ui= $_SESSION["ui"];
+  $config= $_SESSION["config"];
+
+  /* Remove all locks of this user */
+  del_user_locks($ui->dn);
+
+  @session_unset ();
+  @session_destroy ();
+  @session_start();
+  $_SESSION['logout_was_posted_several_times'] = 1;
+  gosa_log ("User \"".$ui->username."\" logged out".$_SESSION['logout_was_posted_several_times']);
+  /* Go back to the base via header */
+  header ("Location: index.php");
+
+}else{
   /* Language setup */
   if ($config->data['MAIN']['LANG'] == ""){
     $lang= get_browser_language();
@@ -55,20 +74,9 @@ if (!isset($_SESSION["config"])){
   $smarty->display (get_template_path('headers.tpl'));
   $smarty->display (get_template_path('logout.tpl'));
   @session_destroy ();
+  @session_unset ();
   exit;
 }
-$ui= $_SESSION["ui"];
-$config= $_SESSION["config"];
-gosa_log ("User \"".$ui->username."\" logged out");
-
-/* Remove all locks of this user */
-del_user_locks($ui->dn);
-
-@session_destroy ();
-
-/* Go back to the base via header */
-header ("Location: index.php");
-
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
 </html>
