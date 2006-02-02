@@ -20,8 +20,9 @@ class faiScriptEntry extends plugin
   var $FAIscript     = "";
   var $description   = "";
   var $status        = "new";
+
   
-  function faiScriptEntry ($config, $dn= NULL,$object=false)
+  function faiHookEntry ($config, $dn= NULL,$object=false)
   {
     plugin::plugin ($config, $dn);
     if($dn != "new"){
@@ -32,8 +33,18 @@ class faiScriptEntry extends plugin
         $this->$oname=$value;
       }
     }else{
-      $this->status = "new";
-      $this->orig_cn       = false;
+      if(count($object)){
+        $this->orig_cn= $object['cn'];
+        $this->dn=$object['dn'];
+        foreach($object as $name=>$value){
+          $oname = $name;
+          $this->$oname=$value;
+        }
+      }else{
+
+        $this->status = "new";
+        $this->orig_cn       = false;
+      }
     }
   }
 

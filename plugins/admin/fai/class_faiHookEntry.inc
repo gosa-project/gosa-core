@@ -34,8 +34,18 @@ class faiHookEntry extends plugin
         $this->$oname=$value;
       }
     }else{
-      $this->status = "new";
-      $this->orig_cn       = false;
+      if(count($object)){
+        $this->orig_cn= $object['cn'];
+        $this->dn=$object['dn'];
+        foreach($object as $name=>$value){
+          $oname = $name;
+          $this->$oname=$value;
+        }
+      }else{
+
+        $this->status = "new";
+        $this->orig_cn       = false;
+      }
     }
   }
 
