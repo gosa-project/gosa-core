@@ -146,10 +146,9 @@ class application extends plugin
 			$smarty->assign("$val", "");
 		}
 	}
-	$smarty->assign("gotoLogonScript",$this->gotoLogonScript);
+	$smarty->assign("gotoLogonScript",htmlentities($this->gotoLogonScript));
 	$smarty->assign("base_select", $this->base);
 	$smarty->assign("gosaApplicationFlagsACL", chkacl($this->acl, "gosaApplicationFlags"));
-
 	/* Show main page */
 	return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }
