@@ -29,7 +29,7 @@
 				<tr>
 					<td>{t}Subnet{/t}
 					</td>
-					<td><input type="text" name="subNet" value="">
+					<td><input type="text" name="ReverseZone" value="{$ReverseZone}">
 					</td>
 				</tr>
 			</table>
@@ -94,6 +94,7 @@
 </table>
 
 <p class="seperator">&nbsp;</p>
+<br>
 <table summary="" width="100%">
 	<tr>
 		<td style="vertical-align:top;width:50%;">
@@ -123,4 +124,10 @@
 		</td>
 	</tr>
 </table>
+<div style="text-algin:right;" align="right">
+	<p>
+		<input type="submit" name="SaveZoneChanges" value="{t}Save{/t}">
+		<input type="submit" name="CancelZoneChanges" value="{t}Cancel{/t}">
+	</p>
+</div>
 {/if}
