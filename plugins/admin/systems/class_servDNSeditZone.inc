@@ -55,7 +55,11 @@ class servdnseditZone extends plugin
       foreach($this->attributes as $value){
         $this->$value = $attrs[$value];
       }
-      $this->Records = $attrs['Records']; 
+      if(isset($attrs['Records'])){
+        $this->Records = $attrs['Records']; 
+      }else{
+        $this->Records = array();
+      }
     }
   }
 

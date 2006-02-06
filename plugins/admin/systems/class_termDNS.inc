@@ -372,7 +372,9 @@ class termDNS extends plugin
 
     $tmp  =array();
     foreach($ret as $name => $entry){
-      $tmp[$entry['addr']]=$entry['name'];
+      if((isset($entry['addr']))&&(isset($entry['name']))){
+        $tmp[$entry['addr']]=$entry['name'];
+      }
     }
     $ret = $tmp;
     return($ret); 

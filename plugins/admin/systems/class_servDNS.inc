@@ -8,7 +8,7 @@ class servdns extends plugin
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* attribute list for save action */
-  var $ignore_account= TRUE;
+  var $ignore_account   = FALSE;
   var $attributes       = array(""); 
   var $objectclasses    = array("whatever");
 
@@ -60,7 +60,7 @@ class servdns extends plugin
       /* If relative domainname == cn
        * Try to read dnsclass / TTl / zone
        */
-      $this->usedDNS[$attrs['dn']] = $attrs;
+      $this->usedDNS[$attrs['dn']] = $attrs['dn'];
       if((isset($attrs['tXTRecord'][0]))&&(preg_match("/zoneName\=/",$attrs['tXTRecord'][0]))){
         $zoneName= preg_replace("/zoneName\=/","",$attrs['tXTRecord'][0]);  
         $types[$zoneName]['ReverseZone']  = preg_replace("/\.in\-addr\.arpa/","",$attrs['zoneName'][0]);
@@ -98,16 +98,13 @@ class servdns extends plugin
           $types[$attrs['zoneName'][0]]['zoneName'] = $attrs['zoneName'][0];
         }
 
-        /* Set status */
-//        $types[$attrs['zoneName'][0]]['status']   ="edited"; 
-//        $types[$attrs['zoneName'][0]]['Reversestatus']   ="edited"; 
-//        $types[$attrs['zoneName'][0]]['ReverseDN']= $attrs['dn']; 
-
         /* Create list with all used records */
         foreach($this->RecordTypes as $name => $value){
 
           /* If there is a record attribute  */
           if(isset($attrs[$name])){
+
+            $types[$attrs['zoneName'][0]]['Records']=array();
 
             /* get all entries */
             for($i = 0 ; $i < $attrs[$value]['count']; $i ++){
@@ -160,7 +157,7 @@ class servdns extends plugin
 
     if(isset($_POST['SaveZoneChanges'])){
       $this->dialog->save_object();
-    
+
       if(count($this->dialog->check())){
         foreach($this->dialog->check() as $msgs){
           print_red($msgs); 
@@ -170,64 +167,36 @@ class servdns extends plugin
         $ret = $this->dialog->save();
         unset($this->Zones[$this->dialog->InitiallyZoneName]);
         $this->Zones[$ret['zoneName']]                  = $ret;
-
-        /*
-        if($this->dialog->isNew == true){
-          $this->Zones[$ret['zoneName']] = $ret;
-          $this->Zones[$ret['zoneName']] = "new";
-        }else{
-
-          if(!$this->dialog->isNew){
-    
-            $ForStatus = $this->Zones[$this->dialog->InitiallyZoneName]['status'];
-            $RevStatus = $this->Zones[$this->dialog->InitiallyZoneName]['Reversestatus'];
-  
-            if($ret['zoneName'] != $this->dialog->InitiallyZoneName){
-              if($this->Zones[$this->dialog->InitiallyZoneName]['status'] != "new"){
-                $this->Zones[$this->dialog->InitiallyZoneName]['status'] = "deleted";
-              }else{
-                unset($this->Zones[$this->dialog->InitiallyZoneName]);
-              }
-              $this->Zones[$ret['zoneName']]                  = $ret;
-              $this->Zones[$ret['zoneName']]['status']        = "new";
-              $this->Zones[$ret['zoneName']]['Reversestatus'] = $RevStatus;
-
-            }elseif($ret['ReverseZone'] != $this->dialog->InitiallyReverseZone){
-              if($this->Zones[$this->dialog->InitiallyZoneName]['Reversestatus'] != "new"){
-                $this->Zones[$this->dialog->InitiallyZoneName]['Reversestatus'] = "deleted";
-              }else{
-                unset($this->Zones[$this->dialog->InitiallyZoneName]);
-              }
-              $this->Zones[$ret['zoneName']]                  = $ret;
-              $this->Zones[$ret['zoneName']]['Reversestatus'] = "new";
-              $this->Zones[$ret['zoneName']]['status']        = $ForStatus;
-
-            }else{
-              $this->Zones[$ret['zoneName']]                  = $ret;
-              $this->Zones[$ret['zoneName']]['status']        = $ForStatus;
-              $this->Zones[$ret['zoneName']]['Reversestatus'] = $RevStatus;
-            }
-          }
-        }
-      */
         $this->dialog = NULL;
       }
     }
+
+    /* Cancel zone edit / new */
     if(isset($_POST['CancelZoneChanges'])){
       $this->dialog = NULL;
     }
+
     /* Add empty new zone */
     if(isset($_POST['AddZone'])){
       $this->dialog = new servdnseditZone($this->config,$this->dn,$this->RecordTypes);
     }
 
+    /* Check for edit zone request */
     $once = false;
     foreach( $_POST as $name => $value){
+
       if(preg_match("/^editZone_/",$name)&&!$once){
         $once =true;
         $tmp = preg_replace("/^editZone_/","",$name);
         $tmp = base64_decode(preg_replace("/_.*$/","",$tmp));
         $this->dialog= new servdnseditZone($this->config,$this->dn,$this->RecordTypes,$this->Zones[$tmp]);
+      }
+
+      if(preg_match("/^delZone_/",$name)&&!$once){
+        $once =true;
+        $tmp = preg_replace("/^delZone_/","",$name);
+        $tmp = base64_decode(preg_replace("/_.*$/","",$tmp));
+        unset($this->Zones[$tmp]);
       }
     }
 
@@ -242,15 +211,16 @@ class servdns extends plugin
     $ZoneList -> SetHeight(254);
 
     /* Add entries to divlist*/
-    $editImg = "<input type='image' src='images/edit.png' name='editZone_%s'>";
+    $editImg = "<input type='image' src='images/edit.png' name='editZone_%s'>
+      <input type='image' src='images/edittrash.png' name='delZone_%s'>";
     foreach($this->Zones as $zone => $values ){
       $ZoneList->AddEntry(array(
-                                array("string" => $zone),
-                                array("string" => _("Reverse zone")." : ".$values['ReverseZone']),
-                                array("string" => _("TTL")." : ".$values['dNSTTL']),
-                                array("string" => _("Class")." : ".$values['dNSClass']),
-                                array("string" =>str_replace("%s",base64_encode($zone),$editImg))
-                          ));
+            array("string" => $zone),
+            array("string" => _("Reverse zone")." : ".$values['ReverseZone']),
+            array("string" => _("TTL")." : ".$values['dNSTTL']),
+            array("string" => _("Class")." : ".$values['dNSClass']),
+            array("string" =>str_replace("%s",base64_encode($zone),$editImg))
+            ));
     }    
 
     /* Display tempalte */
@@ -261,6 +231,13 @@ class servdns extends plugin
 
   function remove_from_parent()
   {
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    foreach($this->usedDNS as $dn){
+      $ldap->cd($dn);
+      $ldap->rmdir_recursive($dn);
+    }
+    show_ldap_error($ldap->get_error());
   }
 
 
@@ -303,12 +280,12 @@ class servdns extends plugin
 
     foreach($actions['delete'] as $dn => $attrs){
       $ldap->cd($dn);
-      $ldap->rmDir($dn);
+      $ldap->rmdir_recursive($dn);
     }
 
     foreach($actions['add'] as $dn => $attrs){
       $ldap->cd($this->config->current['BASE']);
-//      $ldap->create_missing_trees($dn);
+      //      $ldap->create_missing_trees($dn);
       $ldap->cd($dn);
       $ldap->add($attrs);
     }
@@ -341,13 +318,15 @@ class servdns extends plugin
         "LocRecord","nXTRecord","sRVRecord","nAPTRRecord","kXRecord","certRecord","a6Record","dSRecord","sSHFPRecord","rRSIGRecord","nSECRecord");
     $aRecords = array();
     foreach($arr as $ar){
-      foreach($zone['Records'] as $type){
-        if(($type['type'] == $ar)&&($type['status']!="deleted")){
-          $tmp[$ar][] = $type['value'];
+      if((isset($zone['Records']))&&(is_array($zone['Records']))){
+        foreach($zone['Records'] as $type){
+          if(($type['type'] == $ar)&&($type['status']!="deleted")){
+            $tmp[$ar][] = $type['value'];
+          }
         }
       }
     }
-    if(is_array($zone['Records'])){
+    if((isset($zone['Records']))&&(is_array($zone['Records']))){
       foreach($zone['Records'] as $type){
         if(isset($type['inittype'])){
           if($type['type'] != $type['inittype']){
