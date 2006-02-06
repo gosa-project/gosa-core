@@ -131,6 +131,8 @@ class servdns extends plugin
 
   function execute()
   {
+
+  print_a($this->Zones);
 	/* Call parent execute */
 	plugin::execute();
 

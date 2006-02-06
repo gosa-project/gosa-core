@@ -68,7 +68,7 @@ class termDNS extends plugin
     /* Get all records */
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->dn); 
-    $ldap->search("(&(objectClass=dNSZone)(zoneName=*))",array("*"));
+    $ldap->search("(&(objectClass=dNSZone)(zoneName=*)(!(relativeDomainName=@)))",array("*"));
 
     while($attrs = $ldap->fetch()){
       /* If relative domainname == cn 
