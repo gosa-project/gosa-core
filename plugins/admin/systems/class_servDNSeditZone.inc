@@ -164,14 +164,25 @@ class servdnseditZone extends plugin
     while($attr = $ldap->fetch()){
       if(preg_match("/in-addr\.arpa/",$attr['zoneName'][0])){
         $zn = preg_replace("/zoneName\=/","",$attr['tXTRecord'][0]);
-        $ret[$zn] = preg_replace("/\.in-addr\.arpa/","",$attr['zoneName'][0]);
+        $ret[$zn] = $this->FlipIp(preg_replace("/\.in-addr\.arpa/","",$attr['zoneName'][0]));
       }else{
         $ret[$attr['zoneName'][0]]="";
       }
     }
     return($ret);
   }
-  
+
+ 
+  function FlipIp($ip)
+  {
+    $tmp = array_reverse(split("\.",$ip));
+    $new = "";
+    foreach($tmp as $section){
+      $new .= $section.".";
+    }
+    return(preg_replace("/.$/","",$new));
+  }
+
 
   /* Save to LDAP */
   function save()
