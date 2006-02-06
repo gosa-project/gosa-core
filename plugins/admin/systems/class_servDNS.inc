@@ -17,6 +17,7 @@ class servdns extends plugin
   var $Zones  = array();
   var $dialog = NULL;
 
+  var $usedDNS    = array();
   function servdns ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
@@ -59,9 +60,10 @@ class servdns extends plugin
       /* If relative domainname == cn
        * Try to read dnsclass / TTl / zone
        */
+      $this->usedDNS[$attrs['dn']] = $attrs;
       if((isset($attrs['tXTRecord'][0]))&&(preg_match("/zoneName\=/",$attrs['tXTRecord'][0]))){
         $zoneName= preg_replace("/zoneName\=/","",$attrs['tXTRecord'][0]);  
-        $types[$zoneName]['ReverseZone']  = $attrs['zoneName'][0];
+        $types[$zoneName]['ReverseZone']  = preg_replace("/\.in\-addr\.arpa/","",$attrs['zoneName'][0]);
         $types[$zoneName]['ReverseDN']    = $attrs['dn']; 
       }else{
 
@@ -97,8 +99,9 @@ class servdns extends plugin
         }
 
         /* Set status */
-        $types[$attrs['zoneName'][0]]['status']   ="edited"; 
-        $types[$attrs['zoneName'][0]]['ReverseDN']= $attrs['dn']; 
+//        $types[$attrs['zoneName'][0]]['status']   ="edited"; 
+//        $types[$attrs['zoneName'][0]]['Reversestatus']   ="edited"; 
+//        $types[$attrs['zoneName'][0]]['ReverseDN']= $attrs['dn']; 
 
         /* Create list with all used records */
         foreach($this->RecordTypes as $name => $value){
@@ -163,36 +166,50 @@ class servdns extends plugin
           print_red($msgs); 
         }
       }else{
+
         $ret = $this->dialog->save();
+        unset($this->Zones[$this->dialog->InitiallyZoneName]);
+        $this->Zones[$ret['zoneName']]                  = $ret;
+
+        /*
         if($this->dialog->isNew == true){
           $this->Zones[$ret['zoneName']] = $ret;
           $this->Zones[$ret['zoneName']] = "new";
         }else{
 
           if(!$this->dialog->isNew){
+    
+            $ForStatus = $this->Zones[$this->dialog->InitiallyZoneName]['status'];
+            $RevStatus = $this->Zones[$this->dialog->InitiallyZoneName]['Reversestatus'];
+  
+            if($ret['zoneName'] != $this->dialog->InitiallyZoneName){
+              if($this->Zones[$this->dialog->InitiallyZoneName]['status'] != "new"){
+                $this->Zones[$this->dialog->InitiallyZoneName]['status'] = "deleted";
+              }else{
+                unset($this->Zones[$this->dialog->InitiallyZoneName]);
+              }
+              $this->Zones[$ret['zoneName']]                  = $ret;
+              $this->Zones[$ret['zoneName']]['status']        = "new";
+              $this->Zones[$ret['zoneName']]['Reversestatus'] = $RevStatus;
 
-            /* Edited but not renamed */
-            if($ret['zoneName'] == $this->dialog->InitiallyZoneName){
-              $this->Zones[$ret['zoneName']] = $ret;
+            }elseif($ret['ReverseZone'] != $this->dialog->InitiallyReverseZone){
+              if($this->Zones[$this->dialog->InitiallyZoneName]['Reversestatus'] != "new"){
+                $this->Zones[$this->dialog->InitiallyZoneName]['Reversestatus'] = "deleted";
+              }else{
+                unset($this->Zones[$this->dialog->InitiallyZoneName]);
+              }
+              $this->Zones[$ret['zoneName']]                  = $ret;
+              $this->Zones[$ret['zoneName']]['Reversestatus'] = "new";
+              $this->Zones[$ret['zoneName']]['status']        = $ForStatus;
 
             }else{
-              /* Edited and renamed, we have to check if we must delete the old entry from ldap */
-
-              if($this->Zones[$this->dialog->InitiallyZoneName]['status'] == "new"){
-                /* this was a new entry (currently not saved to ldap) so we can simply unset the zone */
-                unset($this->Zones[$this->dialog->InitiallyZoneName]);
-              
-              }elseif($this->Zones[$this->dialog->InitiallyZoneName]['status'] == "edited") {
-                $this->Zones[$this->dialog->InitiallyZoneName]['status'] = "deleted";
-              } 
-              $this->Zones[$ret['zoneName']] = $ret;
-              $this->Zones[$ret['zoneName']]['status'] = "new";
+              $this->Zones[$ret['zoneName']]                  = $ret;
+              $this->Zones[$ret['zoneName']]['status']        = $ForStatus;
+              $this->Zones[$ret['zoneName']]['Reversestatus'] = $RevStatus;
             }
-          }else{
-            $this->Zones[$ret['zoneName']] = $ret;
-            $this->Zones[$ret['zoneName']]['status'] = "new";
           }
         }
+      */
         $this->dialog = NULL;
       }
     }
@@ -227,8 +244,13 @@ class servdns extends plugin
     /* Add entries to divlist*/
     $editImg = "<input type='image' src='images/edit.png' name='editZone_%s'>";
     foreach($this->Zones as $zone => $values ){
-      if($values['status'] == "deleted") continue;
-      $ZoneList->AddEntry(array(array("string" => $zone.str_replace("%s",base64_encode($zone),$editImg))));
+      $ZoneList->AddEntry(array(
+                                array("string" => $zone),
+                                array("string" => _("Reverse zone")." : ".$values['ReverseZone']),
+                                array("string" => _("TTL")." : ".$values['dNSTTL']),
+                                array("string" => _("Class")." : ".$values['dNSClass']),
+                                array("string" =>str_replace("%s",base64_encode($zone),$editImg))
+                          ));
     }    
 
     /* Display tempalte */
@@ -259,60 +281,90 @@ class servdns extends plugin
   /* Save to LDAP */
   function save()
   {
-  return(true);
-//    plugin::save();
-    foreach($this->Zones as $zone){
-      $tmp = array();
-      if($zone['status'] == "deleted"){
-        echo "deleted";
-      }elseif($zone['status'] == "new" ){
-        echo "new";
-      }elseif($zone['status'] == "edited"){  
-        echo "edit";
-      }else{
-        echo "undefined type";
-      }
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
 
-      //$tmp = $this->generate_LDAP_entries($tmp,$zone,$delete);
+    $actions =array("update"=>array(),"add"=>array(),"delete"=>array());
+
+    foreach($this->Zones as $zone){
+      $tmp = $this->generate_LDAP_entries($zone);
+      foreach($tmp as $key => $values){
+        if(isset($this->usedDNS[$key])){
+          $actions['update'][$key]=$values;
+          unset($this->usedDNS[$key]);
+        }else{
+          $actions['add'][$key] = $values;
+        }
+      }
     }
+    foreach($this->usedDNS as $key => $values){
+      $actions['delete'][$key] = $values;
+    }
+
+    foreach($actions['delete'] as $dn => $attrs){
+      $ldap->cd($dn);
+      $ldap->rmDir($dn);
+    }
+
+    foreach($actions['add'] as $dn => $attrs){
+      $ldap->cd($this->config->current['BASE']);
+//      $ldap->create_missing_trees($dn);
+      $ldap->cd($dn);
+      $ldap->add($attrs);
+    }
+
+    foreach($actions['update'] as $dn => $attrs){
+      $ldap->cd($dn);
+      $ldap->modify($attrs);
+    }
+    show_ldap_error($ldap->get_error());
   }
 
-  function generate_LDAP_entries($tmp,$zone,$delete)
-  {
-    $delete  = array();
 
+  function generate_LDAP_entries($zone)
+  {
+    $tmp = array();
     $tmp['objectClass']           = array("top","dNSZone");
     $tmp['dNSTTL']                = $zone['dNSTTL']; 
     $tmp['dNSClass']              = $zone['dNSClass']; 
-    $tmp['relativeDomainName']    = $zone['relativeDomainName']; 
+    $tmp['relativeDomainName']    = "@";//$zone['relativeDomainName']; 
 
     $str = "";
-    foreach($zone['sOARecord'] as $name => $value){
-      $str .= $value." "; 
+    foreach(array("sOAprimary","sOAmail","sOAserial","sOArefresh","sOAretry","sOAexpire","sOAttl") as $name){
+      $str .= $zone[$name]." "; 
     }
     $tmp['sOARecord'] = $str;
 
-    $dn = "zoneName=".$zone['zoneName'].",".$this->dn;
 
     /* Generate some attrs  */
     $arr = array("SigRecord","KeyRecord","aAAARecord","nSRecord","iaFSDBRecord","mInfoRecord","hInfoRecord","mXRecord","mDRecord","tXTRecord",
         "LocRecord","nXTRecord","sRVRecord","nAPTRRecord","kXRecord","certRecord","a6Record","dSRecord","sSHFPRecord","rRSIGRecord","nSECRecord");
     $aRecords = array();
     foreach($arr as $ar){
-      foreach($zone['types'] as $type){
+      foreach($zone['Records'] as $type){
         if(($type['type'] == $ar)&&($type['status']!="deleted")){
           $tmp[$ar][] = $type['value'];
         }
       }
     }
-    foreach($zone['types'] as $type){
-      if(isset($type['inittype'])){
-        if($type['type'] != $type['inittype']){
-          $tmp[$type['inittype']] = array();
+    if(is_array($zone['Records'])){
+      foreach($zone['Records'] as $type){
+        if(isset($type['inittype'])){
+          if($type['type'] != $type['inittype']){
+            $tmp[$type['inittype']] = array();
+          }
         }
       }
     }
-    return($tmp);
+    $dn = "zoneName=".$zone['zoneName'].",".$this->dn; 
+    $tmp2[$dn] = $tmp;
+    $tmp2[$dn]['zoneName'] = $zone['zoneName'];
+    $dn = "zoneName=".$zone['ReverseZone'].".in-addr.arpa,".$this->dn;
+    $tmp2[$dn] = $tmp;
+    $tmp2[$dn]['tXTRecord'] ="zoneName=".$zone['zoneName'];
+    $tmp2[$dn]['zoneName'] = $zone['ReverseZone'].".in-addr.arpa";
+
+    return($tmp2);
   }
 
 

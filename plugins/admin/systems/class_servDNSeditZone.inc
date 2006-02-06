@@ -32,7 +32,8 @@ class servdnseditZone extends plugin
 
   var $Records                  = array();
 
-  var $InitiallyZoneName      = "";
+  var $InitiallyZoneName        = "";
+  var $InitiallyReverseZone     = "";
   var $isNew                    = true;
 
   function servdnseditZone ($config, $dn= NULL,$recordtypes,$attrs = array())
@@ -43,11 +44,13 @@ class servdnseditZone extends plugin
     $this->RecordTypes = $recordtypes; 
 
     if(!count($attrs)){
-      $this->InitiallyZoneName  = "";
-      $this->isNew              = true;
+      $this->InitiallyZoneName      = "";
+      $this->InitiallyReverseZone   = "";
+      $this->isNew                  = true;
     }else{
-      $this->InitiallyZoneName  = $attrs['zoneName'];
-      $this->isNew              = false;
+      $this->InitiallyZoneName      = $attrs['zoneName'];
+      $this->InitiallyReverseZone   = $attrs['ReverseZone'];
+      $this->isNew                  = false;
 
       foreach($this->attributes as $value){
         $this->$value = $attrs[$value];
@@ -130,11 +133,11 @@ class servdnseditZone extends plugin
     $message= array();
     /* Check if zoneName is already in use */
     $usedZones = $this->getUsedZoneNames();
-    if(($this->isNew == true)||($this->zoneName  != $this->InitiallyZoneName)){
-      if(isset($usedZones[$this->zoneName])){
+    if(($this->isNew == true)||($this->zoneName  != $this->InitiallyZoneName)||($this->ReverseZone != $this->InitiallyReverseZone)){
+      if((isset($usedZones[$this->zoneName]))&&($this->zoneName  != $this->InitiallyZoneName)){
         $message[] =_("This zoneName is already in use");
       }
-      if(in_array($this->ReverseZone,$usedZones)){
+      if((in_array($this->ReverseZone,$usedZones))&&($this->ReverseZone != $this->InitiallyReverseZone)){
         $message[] =_("This reverse zone is already in use");
       }
     }
