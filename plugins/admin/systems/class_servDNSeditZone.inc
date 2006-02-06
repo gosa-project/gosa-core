@@ -27,7 +27,7 @@ class servdnseditZone extends plugin
   var $sOAserial                = "";
   var $sOArefresh               = "3600";
   var $sOAretry                 = "1800";
-  var $sOAexpire                = "";
+  var $sOAexpire                = "720000";
   var $sOAttl                   = "6400";
 
   var $Records                  = array();

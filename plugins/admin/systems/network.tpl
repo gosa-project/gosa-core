@@ -10,7 +10,7 @@
 				</tr>
       </table> 
     </td>
-		<td	style="border-right:1px	solid	#b0b0b0;	width:50%">
+		<td	style="width:50%">
 			<table	summary="">
 				<tr>
 					<td><LABEL	for="macAddress">{t}MAC-address{/t}</LABEL>{$staticAddress}</td>
@@ -62,7 +62,7 @@
 				</tr>
       </table> 
     </td>
-		<td	style="border-right:1px	solid	#b0b0b0;	width:50%; vertical-align:top;">
+		<td	style="vertical-align:top;">
       <h2>{t}Records{/t}</h2>
 		  {$records}
     </td>
