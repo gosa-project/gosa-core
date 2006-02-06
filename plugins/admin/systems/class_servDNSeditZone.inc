@@ -47,6 +47,7 @@ class servdnseditZone extends plugin
       $this->InitiallyZoneName      = "";
       $this->InitiallyReverseZone   = "";
       $this->isNew                  = true;
+      $this->sOAserial = date("Ymd")."1";
     }else{
       $this->InitiallyZoneName      = $attrs['zoneName'];
       $this->InitiallyReverseZone   = $attrs['ReverseZone'];
@@ -59,6 +60,12 @@ class servdnseditZone extends plugin
         $this->Records = $attrs['Records']; 
       }else{
         $this->Records = array();
+      }
+      $str = date("Ymd");
+      if(preg_match("/^".$str."/",$this->sOAserial)){
+        $this->sOAserial = $this->sOAserial + 1;
+      }else{
+        $this->sOAserial = date("Ymd")."01";
       }
     }
   }

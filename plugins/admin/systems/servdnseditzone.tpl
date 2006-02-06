@@ -42,7 +42,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>{t}Serialnumber (automatically generated){/t}
+					<td>{t}Serial number (automatically incremented){/t}
 					</td>
 					<td><input type="text" name="sOAserial" value="{$sOAserial}">
 					</td>
