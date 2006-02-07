@@ -370,12 +370,12 @@ class faiManagement extends plugin
       /* Load permissions for selected 'dn' and check if
          we're allowed to remove this 'dn' */
       $acl= get_permissions ($faifilter['base'], $this->ui->subtreeACL);
-      $this->acl= get_module_permission($acl, "fai", $base);
+      $this->acl= get_module_permission($acl, "FAIclass", $base);
       if (chkacl($this->acl, "delete") == ""){
         $smarty->assign("info", sprintf(_("You're about to delete a fai branch / freeze  '%s'."), $faifilter['branch']));
         return($smarty->fetch(get_template_path('remove_branch.tpl',TRUE)));
       } else {
-        print_red (_("You are not allowed to delete this user!"));
+        print_red (_("You are not allowed to delete this release!"));
       }
     }
 
