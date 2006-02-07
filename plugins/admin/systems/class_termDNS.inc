@@ -17,7 +17,7 @@ class termDNS extends plugin
   var $macAddress   ="";    // Mac address 
   var $cn           ="";    // CN of currently edited device 
 
-  var $Zones      = array();      // All Available Zones like array("3.2.1.in-addr.arpa"=>"MyServer.de")
+  var $Zones      = array();      // All Available Zones like array("3.2.1"=>"MyServer.de")
   var $RecordTypes= array();      // Possible record types 
     
   var $dNSClass   = "IN";         // dNSClass name 
@@ -94,9 +94,13 @@ class termDNS extends plugin
     
         /* If there is a record attribute  */
         if(isset($attrs[$name])){
-    
+  
+ 
           /* get all entries */
           for($i = 0 ; $i < $attrs[$value]['count']; $i ++){
+            if(($value == "aRecord")&&($this->ipHostNumber==$attrs[$value][$i])){
+             continue; 
+            }
             $types[] =array("type"=>$name,"inittype"=>$name,"value"=>$attrs[$value][$i],"status"=>"edited","dn"=>$attrs['dn']);
           }
         }
@@ -229,6 +233,37 @@ class termDNS extends plugin
   function check()
   {
     $message= array();
+
+    /* Check if mac is empty */
+    if ($this->macAddress == "" && chkacl ($this->acl, "macAddress") == ""){
+      $message[]= _("The required field 'MAC-address' is not set.");
+    }
+
+    /* Check if ip is empty */
+    if ($this->ipHostNumber == "" && chkacl ($this->acl, "ipHostNumber") == ""){
+      $message[]= _("The required field 'IP-address' is not set.");
+    }
+
+    /* check if given ip is valid ip*/
+    $num="(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])";
+    if (!preg_match("/^$num\\.$num\\.$num\\.$num$/", $this->ipHostNumber)){
+      $message[]= _("Wrong IP format in field IP-address.");
+    }
+
+    /* Check if given mac is valid mac */
+    $tr = count(split(":",$this->macAddress));
+    if($tr!=6){
+      $message[]=(_("The given macaddress is invalid. There must be 6 1byte segments seperated by ':'."));
+    }
+
+    if($this->DNS_is_account){
+      foreach($this->types as $name => $values){
+        if(($values['type'] == "aRecord")&&($values['value'] == $this->ipHostNumber)&&($values['status']!="deleted")){
+          $message[]=sprintf(_("The device IP '%s' is added as 'A Record', this will be done automatically, please remove the record."),$this->ipHostNumber);
+        }
+      }
+    }
+  
     return ($message);
   }
 
@@ -479,6 +514,10 @@ class termDNS extends plugin
       }
     }
     if(count($aRecords)){
+      
+      /* Add ipHostNumber as default aRecord */
+      $aRecords[] = $this->ipHostNumber;
+
       $dn = "relativeDomainName=".$this->cn.",".$this->dn;
       foreach($aRecords as $rec){
         $entries[$dn]['aRecord'][] = $rec;      
