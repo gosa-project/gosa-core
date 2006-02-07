@@ -124,7 +124,7 @@ class ogroup extends plugin
 	/* Call parent execute */
 	plugin::execute();
 
-    $this->reload();
+//    $this->reload();
 
     /* Do we represent a valid group? */
     if (!$this->is_account){
@@ -305,115 +305,192 @@ class ogroup extends plugin
   /* (Re-)Load objects */
   function reload()
   {
-    /* Generate object list */
-    $this->objects= array();
-    $this->allobjects= array();
+    /*###########
+      Variable initialisation 
+      ###########*/
+
+    $this->objects                = array();
+    $this->ui                     = get_userinfo();
+    $filter                       = "";
+    $objectClasses                = array();
+    
+    $ogfilter               = get_global("ogfilter");
+    $regex                  = $ogfilter['regex'];
+
+    /* Get ldap connection */
     $ldap= $this->config->get_ldap_link();
-
-    /* Assemble filter */
-    $ogfilter= get_global("ogfilter");
-
     $ldap->cd ($ogfilter['dselect']);
 
-    $filter= "";
+
+    /*###########
+      Generate Filter 
+      ###########*/
+
+    /* Assemble filter */
     if ($ogfilter['accounts'] == "checked"){
       $filter.= "(objectClass=gosaAccount)";
+      $objectClasses["gosaAccount"]     = get_people_ou();
     }
     if ($ogfilter['groups'] == "checked"){
       $filter.= "(objectClass=posixGroup)";
+      $objectClasses["posixGroup"]      = get_groups_ou();
     }
     if ($ogfilter['applications'] == "checked"){
       $filter.= "(objectClass=gosaApplication)";
+      $objectClasses["gosaApplication"] = "ou=apps,";
     }
     if ($ogfilter['departments'] == "checked"){
       $filter.= "(objectClass=gosaDepartment)";
+      $objectClasses["gosaDepartment"]  = "";
     }
     if ($ogfilter['servers'] == "checked"){
       $filter.= "(objectClass=goServer)";
+      $objectClasses["goServer"]        = "ou=servers,ou=systems,";
     }
     if ($ogfilter['workstations'] == "checked"){
       $filter.= "(objectClass=gotoWorkstation)";
+      $objectClasses["gotoWorkstation"] = "ou=workstations,ou=systems,";
     }
     if ($ogfilter['terminals'] == "checked"){
       $filter.= "(objectClass=gotoTerminal)";
+      $objectClasses["gotoTerminal"]    = "ou=terminals,ou=systems,";
     }
     if ($ogfilter['printers'] == "checked"){
       $filter.= "(objectClass=gotoPrinter)";
+
+      $objectClasses["gotoPrinter"]     = "ou=printers,ou=systems,";
     }
     if ($ogfilter['phones'] == "checked"){
       $filter.= "(objectClass=goFonHardware)";
+      $objectClasses["goFonHardware"]   = "ou=phones,ou=systems,";
     }
-    $regex= $ogfilter['regex'];
 
-    $ldap->search ("(&(|$filter)(|(uid=$regex)(cn=$regex)(ou=$regex)))", array("dn", "cn", "ou", "description", "objectClass", "sn", "givenName", "uid"));
-    while ($attrs= $ldap->fetch()){
 
-      /* Get type */
-      $type= $this->getObjectType($attrs);
-      $name= $this->getObjectName($attrs);
+    /*###########
+      Perform search for selected objectClasses & regex to fill list with objects   
+      ###########*/
 
-      /* Fill array */
-      if (isset($attrs["description"][0])){
-        $this->objects[$attrs["dn"]]= array("text" => "$name [".$attrs["description"][0]."]", "type" => "$type");
-      } elseif (isset($attrs["uid"][0])) {
-        $this->objects[$attrs["dn"]]= array("text" => "$name [".$attrs["uid"][0]."]", "type" => "$type");
-      } else {
-        $this->objects[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
+    /* Perform search for selected objectClasses */
+    foreach($objectClasses as $class=> $basedn){
+      $ldap->ls("(&(objectClass=".$class.")(|(uid=$regex)(cn=$regex)(ou=$regex)))",$basedn.$ogfilter['dselect'] ,
+          array("dn", "cn", "description", "objectClass", "sn", "givenName", "uid","ou"));
+      
+      /* fetch results and append them to the list */
+      while($attrs = $ldap->fetch()){
+
+        $type= $this->getObjectType($attrs);
+        $name= $this->getObjectName($attrs);
+
+        /* Fill array */
+        if (isset($attrs["description"][0])){
+          $this->objects[$attrs["dn"]]= array("text" => "$name [".$attrs["description"][0]."]", "type" => "$type");
+        } elseif (isset($attrs["uid"][0])) {
+          $this->objects[$attrs["dn"]]= array("text" => "$name [".$attrs["uid"][0]."]", "type" => "$type");
+        } else {
+          $this->objects[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
+        }
       }
     }
     uasort ($this->objects, 'sort_list');
     reset ($this->objects);
 
-    $ldap->cd ($this->config->current['BASE']);
-    $filter= "(objectClass=gosaAccount)(objectClass=posixGroup)(objectClass=gosaApplication)(objectClass=gosaDepartment)(objectClass=goServer)(objectClass=gotoWorkstation)(objectClass=gotoTerminal)(objectClass=gotoPrinter)(objectClass=goFonHardware)";
-    $regex= "*";
+    /*###########
+      Get a list with all possible objects, to detect objects which doesn't exists anymore ... 
+      ###########*/
 
-    $ldap->search ("(&(|$filter)(|(uid=$regex)(cn=$regex)(ou=$regex)))", array("dn", "cn", "ou", "description", "objectClass", "sn", "givenName", "uid"));
-    while ($attrs= $ldap->fetch()){
+    /* Only do this, if this wasn't already done */
+    if(count($this->allobjects) == 0){
+      $ldap->cd ($this->config->current['BASE']);
+      $filter="(objectClass=gosaAccount)".        
+              "(objectClass=posixGroup)".
+              "(objectClass=gosaApplication)".
+              "(objectClass=gosaDepartment)".
+              "(objectClass=goServer)".
+              "(objectClass=gotoWorkstation)".
+              "(objectClass=gotoTerminal)".
+              "(objectClass=gotoPrinter)".
+              "(objectClass=goFonHardware)";
+      $regex= "*";
 
-      /* Get type */
-      $type= $this->getObjectType($attrs);
-      $name= $this->getObjectName($attrs);
+      $ldap->search ("(&(|$filter)(|(uid=$regex)(cn=$regex)(ou=$regex)))", array("dn", "cn", "ou", "description", "objectClass", "sn", "givenName", "uid"));
+      while ($attrs= $ldap->fetch()){
 
-      /* Fill array */
-      if (isset($attrs["description"][0])){
-        $this->allobjects[$attrs["dn"]]= array("text" => "$name [".$attrs["description"][0]."]", "type" => "$type");
-      } elseif (isset($attrs["uid"][0])) {
-        $this->allobjects[$attrs["dn"]]= array("text" => "$name [".$attrs["uid"][0]."]", "type" => "$type");
-      } else {
-        $this->allobjects[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
+        $type= $this->getObjectType($attrs);
+        $name= $this->getObjectName($attrs);
+
+        if (isset($attrs["description"][0])){
+          $this->allobjects[$attrs["dn"]]= array("text" => "$name [".$attrs["description"][0]."]", "type" => "$type");
+        } elseif (isset($attrs["uid"][0])) {
+          $this->allobjects[$attrs["dn"]]= array("text" => "$name [".$attrs["uid"][0]."]", "type" => "$type");
+        } else {
+          $this->allobjects[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
+        }
+        $this->allobjects[$attrs["dn"]]['objectClass']  = $attrs['objectClass'];
+        if(isset($attrs['uid'])){
+          $this->allobjects[$attrs["dn"]]['uid']          = $attrs['uid'];
+        }
       }
-      $this->allobjects[$attrs["dn"]]['objectClass']  = $attrs['objectClass'];
-      if(isset($attrs['uid'])){
-        $this->allobjects[$attrs["dn"]]['uid']          = $attrs['uid'];
-      }
-    }
-    uasort ($this->allobjects, 'sort_list');
-    reset ($this->allobjects);
+      uasort ($this->allobjects, 'sort_list');
+      reset ($this->allobjects);
+    }      
 
-    /* Build member list */
-    $this->memberList= array();
+    
+    /*###########
+      Build member list and try to detect obsolete entries 
+      ###########*/
+
+    $this->memberList = array();
+  
+    /* Walk through all single member entry */
     foreach($this->member as $dn){
 
       /* Object in object list? */
       if (isset($this->allobjects[$dn])){
+        
+        /* Add this entry to member list, its dn is in allobjects
+            this means it still exists 
+         */
         $this->memberList[$dn]= $this->allobjects[$dn];
+
+        /* Remove this from selectable entries */
         if (isset ($this->objects[$dn])){
           unset ($this->objects[$dn]);
         }
 
+      
       } else {
 
-        /* No, try to ge informations from LDAP */
+        /* The dn for the current member can't be resolved 
+            it seams that this entry was removed 
+         */ 
+        /* Try to resolv the entry again, if it still fails, display error msg */
         $ldap->cat($dn, array("cn", "sn", "givenName", "ou", "description", "objectClass"));
+
+        /* It has failed, add entry with type flag I (Invalid)*/
         if ($ldap->error != "success"){
-          $this->memberList[$dn]= array('text' => _("Non existing dn: ")."$dn",
-              "type" => "I");
+          $this->memberList[$dn]= array('text' => _("Non existing dn: ")."$dn","type" => "I");
+
         } else {
-          $ldap->cat($dn);
+          
+          /* Append this entry to our all object list */
+    
+          /* Fetch object */
           $attrs= $ldap->fetch();
+
           $type= $this->getObjectType($attrs);
           $name= $this->getObjectName($attrs);
+
+          if (isset($attrs["description"][0])){
+            $this->allobjects[$attrs["dn"]]= array("text" => "$name [".$attrs["description"][0]."]", "type" => "$type");
+          } elseif (isset($attrs["uid"][0])) {
+            $this->allobjects[$attrs["dn"]]= array("text" => "$name [".$attrs["uid"][0]."]", "type" => "$type");
+          } else {
+            $this->allobjects[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
+          }
+          $this->allobjects[$attrs["dn"]]['objectClass']  = $attrs['objectClass'];
+          if(isset($attrs['uid'])){
+            $this->allobjects[$attrs["dn"]]['uid']          = $attrs['uid'];
+          }
 
           /* Fill array */
           if (isset($attrs["description"][0])){
@@ -421,7 +498,6 @@ class ogroup extends plugin
           } else {
             $this->objects[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
           }
-
         }
       }
     }
@@ -495,6 +571,7 @@ class ogroup extends plugin
   function getObjectName($attrs)
   {
     /* Person? */
+    $name =""; 
     if (in_array('gosaAccount', $attrs['objectClass'])){
       if(isset($attrs['sn']) && isset($attrs['givenName'])){
         $name= $attrs['sn'][0].", ".$attrs['givenName'][0];
