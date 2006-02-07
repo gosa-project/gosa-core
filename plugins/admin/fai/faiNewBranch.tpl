@@ -7,7 +7,7 @@
 <p class="seperator">
 <br>
 <b>{t}Please enter a name for the branch{/t}</b> &nbsp;
-<input type="text"	 name="BranchName" value="{$BranchName}" style="width:120px;">
+<input type="text" id="BranchName" name="BranchName" value="{$BranchName}" style="width:120px;">
 <br>
 <br>
 </p>
@@ -29,8 +29,8 @@
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
 	<!--
-	document.mainform.UseTextInputName.select();
-	document.mainform.UseTextInputName.focus();
+	document.mainform.BranchName.select();
+	document.mainform.BranchName.focus();
 	-->
 </script>
 
