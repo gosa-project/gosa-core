@@ -134,6 +134,12 @@ class servdns extends plugin
     $this->DNSinitially_was_account = $this->is_account;
   }
 
+
+  /* this is used to flip the ip address for example 
+      12.3.45  ->  54.3.12     
+     Because some entries (like zones) are store like that 54.3.12.in-addr.arpa
+      but we want to display 12.3.45.
+  */
   function FlipIp($ip)
   {
     $tmp = array_reverse(split("\.",$ip));
@@ -211,10 +217,30 @@ class servdns extends plugin
 
       /* check posts for delete zone */
       if(preg_match("/^delZone_/",$name)&&!$once){
+
+
         $once =true;
         $tmp = preg_replace("/^delZone_/","",$name);
         $tmp = base64_decode(preg_replace("/_.*$/","",$tmp));
-        unset($this->Zones[$tmp]);
+  
+        $zones =  $this->getUsedZoneNames();
+        $rev = $this->Zones[$tmp]['ReverseZone'];
+        $res = array_merge(($zones[$tmp]),($zones[$rev.".in-addr.arpa"]));
+        
+        if(count($res)){
+          $i = 2;
+          $str ="";
+          foreach($res as $dn){
+            if($i > 0 ){
+              $i --;
+              $str.=$dn." ";
+            }
+          }
+          if(count($res)> 2) $str .=" ... ";
+          print_red(sprintf(_("Can't delete the selected zone, because it is still in use by these entry/entries '%s'"),trim($str)));
+        }else{
+          unset($this->Zones[$tmp]);
+        }
       }
     }
 
@@ -247,6 +273,25 @@ class servdns extends plugin
     $display.= $smarty->fetch(get_template_path('servdns.tpl', TRUE));
     return($display);
   }
+
+
+  /* This funtion returns all used Zonenames */
+  function getUsedZoneNames()
+  {
+    $ret = array();
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(&(objectClass=dNSZone)(!(relativeDomainName=@))(zoneName=*))",array("zoneName","relativeDomainName","tXTRecord"));
+    while($attr = $ldap->fetch()){
+      if(preg_match("/in-addr\.arpa/",$attr['zoneName'][0])){
+        $ret[$attr['zoneName'][0]][] = $attr['dn'];
+      }else{
+        $ret[$attr['zoneName'][0]][] = $attr['dn'];
+      }
+    }
+    return($ret);
+  }
+
 
   /* Remove dns service */
   function remove_from_parent()

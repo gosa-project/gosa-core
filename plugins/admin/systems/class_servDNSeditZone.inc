@@ -155,6 +155,7 @@ class servdnseditZone extends plugin
     return ($message);
   }
 
+  /* This funtion returns all used Zonenames */
   function getUsedZoneNames()
   {
     $ret = array();
@@ -172,7 +173,11 @@ class servdnseditZone extends plugin
     return($ret);
   }
 
- 
+  /* this is used to flip the ip address for example
+      12.3.45  ->  54.3.12
+     Because some entries (like zones) are store like that 54.3.12.in-addr.arpa
+      but we want to display 12.3.45.
+  */
   function FlipIp($ip)
   {
     $tmp = array_reverse(split("\.",$ip));
@@ -195,6 +200,12 @@ class servdnseditZone extends plugin
     return($ret);
   }
 
+  
+  /* This function generate a table row for each used record.
+     This table row displays the recordtype in a select box
+      and the specified value for the record, and a remove button.
+     The last element of the table also got an 'add' button.
+   */
   function generateRecordsList($changeStateForRecords="")
   {
     $changeStateForRecords = "";
@@ -223,6 +234,10 @@ class servdnseditZone extends plugin
     return($str);
   }
 
+  /* This function generates a select box out of $this->RecordTypes options.
+     The Parameter $selected is used to predefine an attribute.
+     $name is used to specify a post name
+   */
   function generateRecordListBox($selected,$name)
   {
     $str = "<select name='".$name."' id='".$name."'>";
