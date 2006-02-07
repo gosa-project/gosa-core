@@ -23,12 +23,11 @@ class ogrouptabs extends tabs
       unset($this->by_object['phonequeue']);
       unset($this->by_name['phonequeue']);
     }
-
     /* Remove mail group if there is no user anymore */
-    if((!preg_match("/U/",$objects))&&(isset($this->by_object['mailgroup']))){
-      $this->by_object['mailgroup']->remove_from_parent();
-      unset($this->by_object['mailgroup']);
-      unset($this->by_name['mailgroup']);
+    if((!preg_match("/U/",$objects))&&(isset($this->by_object['mailogroup']))){
+      $this->by_object['mailogroup']->remove_from_parent();
+      unset($this->by_object['mailogroup']);
+      unset($this->by_name['mailogroup']);
     }
     
     /* Remove terminal group, if theres no terminal left in the object list */
