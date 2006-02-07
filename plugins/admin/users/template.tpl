@@ -16,11 +16,11 @@
     </td>
   </tr>
   <tr>
-    <td><b><LABEL for="sn">{t}First name{/t}</LABEL></b></td>
+    <td><b><LABEL for="sn">{t}Last name{/t}</LABEL></b></td>
     <td><input name="sn" id="sn" size="30" maxlength="40" value="{$sn}"></td>
   </tr>
   <tr>
-    <td><b><LABEL for="givenName">{t}Last name{/t}</LABEL></b></td>
+    <td><b><LABEL for="givenName">{t}First name{/t}</LABEL></b></td>
     <td><input name="givenName" id="givenName" size="30" maxlength="40" value="{$givenName}"></td>
   </tr>
   {if $got_uid eq "true"}
