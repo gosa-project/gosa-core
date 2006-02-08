@@ -22,7 +22,7 @@ class faiScriptEntry extends plugin
   var $status        = "new";
 
   
-  function faiHookEntry ($config, $dn= NULL,$object=false)
+  function faiScriptEntry ($config, $dn= NULL,$object=false)
   {
     plugin::plugin ($config, $dn);
     if($dn != "new"){
