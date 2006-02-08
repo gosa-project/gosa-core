@@ -256,10 +256,19 @@ class termDNS extends plugin
       $message[]=(_("The given macaddress is invalid. There must be 6 1byte segments seperated by ':'."));
     }
 
+    /* only perfrom this checks if this is a valid DNS account */
     if($this->DNS_is_account){
       foreach($this->types as $name => $values){
+
+        /* Check if there is an aRecord defined which uses the same IP as used in IPhostAddress */
         if(($values['type'] == "aRecord")&&($values['value'] == $this->ipHostNumber)&&($values['status']!="deleted")){
-          $message[]=sprintf(_("The device IP '%s' is added as 'A Record', this will be done automatically, please remove the record."),$this->ipHostNumber);
+          $message[]=sprintf(_("The device IP '%s' is added as 'A Record', this will be done automatically, please remove the record."), 
+               $this->ipHostNumber);
+        }
+
+        /* only lower-case is allowed in record entries ... */
+        if($values['value'] != strtolower($values['value'])){
+          $message[] = sprintf(_("Only lowercase is allowed, please check your '%ss'."),$values['type']);
         }
       }
     }
@@ -342,7 +351,8 @@ class termDNS extends plugin
     
   }
 
-
+  /*  Create html table with all used record types
+   */
   function generateRecordsList($changeStateForRecords)
   {
     $changeStateForRecords = "";
@@ -376,6 +386,7 @@ class termDNS extends plugin
     return($str);
   }
 
+  /* Create a html select box which allows us to select different types of records */
   function generateRecordListBox($selected,$name)
   {
     $str = "<select name='".$name."' id='".$name."'>";
@@ -390,6 +401,7 @@ class termDNS extends plugin
     return($str); 
   }
 
+  /* return all Zone names */
   function get_Zones()
   {
     $ret = array();
@@ -415,11 +427,12 @@ class termDNS extends plugin
     return($ret); 
   } 
 
+  /* this is used to generate ldap friendly output of our 
+     dns configuration
+  */
   function generate_LDAP_entries($delete)
   {
-
     $entries = array();    
-
     $delete  = array();
 
     /* Generate Main Entry */
@@ -540,11 +553,13 @@ class termDNS extends plugin
       }
     }
 
+    /* add ObjectClasses */
     foreach($entries as $key => $entry ){
       $entries[$key]['objectClass']=array("top","dNSZone");
       $entries[$key] = array_reverse($entries[$key]);
     }
 
+    /* Check if record type has changed, and if we need to delete this record attribute from ldap entry */
     foreach($this->types as $type){
       if(isset($type['inittype'])){
         if(!isset($entries[$dn][$type['inittype']])){
