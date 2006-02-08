@@ -14,6 +14,13 @@ Target for 2.4.1:
 * Check virenschleuder/Winstations in Admin->Systems 
 	LDAP-Fehler: Cannot modify object class (structural object class modification from 'person' to 'inetOrgPerson' not allowed)
 
+* Add glpi pictures (Monitor/HDD ...)
+
+* Test DNS plugin. Add some more checks 
+
+* LabeledURI fix 
+
+
 Target for 2.5:
 ===============
 
