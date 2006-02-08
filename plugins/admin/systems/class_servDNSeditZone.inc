@@ -152,6 +152,37 @@ class servdnseditZone extends plugin
         $message[] =_("This reverse zone is already in use");
       }
     }
+
+    if($this->zoneName != strtolower($this->zoneName)){
+      $message[] = _("Only lowercase strings are allowed as zone name.");
+    }
+
+    if(!is_numeric($this->sOAserial)){
+      $message[] = _("Please specify a numeric value for serial number.");
+    }
+
+    if(!is_numeric($this->sOArefresh)){
+      $message[] = _("Please specify a numeric value for refresh.");
+    }
+
+    if(!is_numeric($this->sOAttl)){
+      $message[] = _("Please specify a numeric value for ttl.");
+    }
+
+    if(!is_numeric($this->sOAexpire)){
+      $message[] = _("Please specify a numeric value for expire.");
+    }
+
+    if(!is_numeric($this->sOAretry)){
+      $message[] = _("Please specify a numeric value for retry.");
+    }
+
+    foreach($this->Records as $name => $values){
+      /* only lower-case is allowed in record entries ... */
+      if($values['value'] != strtolower($values['value'])){
+        $message[] = sprintf(_("Only lowercase is allowed, please check your '%ss'."),$values['type']);
+      }
+    }
     return ($message);
   }
 
