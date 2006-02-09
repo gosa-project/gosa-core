@@ -425,20 +425,21 @@ class servdns extends plugin
         }
       }
     }
-    
+   
     /* Check if there are records removed,
         if there are some removed records, the append an array        
         to ensure that these record types are deleted 
      */
     if((isset($zone['Records']))&&(is_array($zone['Records']))){
       foreach($zone['Records'] as $type){
-        if(isset($type['inittype'])){
+        if((isset($type['inittype']))&&($type['inittype']!="")){
           if($type['type'] != $type['inittype']){
             $tmp[$type['inittype']] = array();
           }
         }
       }
     }
+    
     /* generate forward entry */
     $dn = "zoneName=".$zone['zoneName'].",".$this->dn; 
     $tmp2[$dn] = $tmp;
