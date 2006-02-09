@@ -93,29 +93,39 @@ class ogroup extends plugin
     $this->reload();
   }
 
-  function AddDelMembership(){
-     /* Delete objects from group */
-    if (isset($_POST['delete_membership']) && isset($_POST['members'])){
-      foreach ($_POST['members'] as $value){
-        $this->objects["$value"]= $this->memberList[$value];
-        unset ($this->memberList["$value"]);
-        unset ($this->member["$value"]);
-        uasort ($this->objects, 'sort_list');
-        reset ($this->objects);
-      }
-      $this->reload();
-    }
+  function AddDelMembership($NewMember = false){
 
-    /* Add objects to group */
-    if (isset($_POST['add_object_finish']) && isset($_POST['objects'])){
-      foreach ($_POST['objects'] as $value){
-        $this->memberList["$value"]= $this->objects[$value];
-        $this->member["$value"]= $value;
-        unset ($this->objects[$value]);
-        uasort ($this->memberList, 'sort_list');
-        reset ($this->memberList);
-      }
+    if($NewMember){
+      $this->memberList[$NewMember]= $this->allobjects[$NewMember];
+      $this->member[$NewMember]= $NewMember;
+      unset ($this->objects[$NewMember]);
+      uasort ($this->memberList, 'sort_list');
+      reset ($this->memberList);
       $this->reload();
+    }else{
+      /* Delete objects from group */
+      if (isset($_POST['delete_membership']) && isset($_POST['members'])){
+        foreach ($_POST['members'] as $value){
+          $this->objects["$value"]= $this->memberList[$value];
+          unset ($this->memberList["$value"]);
+          unset ($this->member["$value"]);
+          uasort ($this->objects, 'sort_list');
+          reset ($this->objects);
+        }
+        $this->reload();
+      }
+
+      /* Add objects to group */
+      if (isset($_POST['add_object_finish']) && isset($_POST['objects'])){
+        foreach ($_POST['objects'] as $value){
+          $this->memberList["$value"]= $this->objects[$value];
+          $this->member["$value"]= $value;
+          unset ($this->objects[$value]);
+          uasort ($this->memberList, 'sort_list');
+          reset ($this->memberList);
+        }
+        $this->reload();
+      }
     }
   }
 
