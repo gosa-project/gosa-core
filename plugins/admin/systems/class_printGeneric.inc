@@ -166,7 +166,7 @@ class printgeneric extends plugin
      * If there was a new single printer created, it was never saved.
      * -This allows new printers to be saved.
      */
-    if($this->dn == "new"){
+    if(($this->dn == "new")&&(!$this->is_terminal)){
       $this->is_account = true;
     }
   }

@@ -916,6 +916,8 @@ class systems extends plugin
         "S" => array("select_server.png",_("Server")),
         "W" => array("select_winstation.png",_("Winstation")),
         "C" => array("select_component.png",_("Network Device")),
+        "NT"=> array("select_new_terminal.png",_("New Terminal")),
+        "NL"=> array("select_new_workstation.png",_("New Workstation")),
         "P" => array("select_printer.png",_("Printer")));
 
    if((isset($input['is_new']))&&(!empty($input['is_new']))){
@@ -1135,7 +1137,11 @@ class systems extends plugin
         $tmp= $value["dn"];
       }
       if (preg_match ("/,ou=incoming,/i", $tmp)){
-        if (in_array('GOhard', $value['objectClass'])){
+         if (in_array('gotoTerminal', $value['objectClass'])){
+          $add= "- "._("New terminal");
+        }elseif (in_array('gotoWorkstation', $value['objectClass'])){
+          $add= "- "._("New workstation");
+        }elseif (in_array('GOhard', $value['objectClass'])){
           $add= "- "._("New Device");
         }
       } else {
