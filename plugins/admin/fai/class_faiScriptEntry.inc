@@ -96,7 +96,6 @@ class faiScriptEntry extends plugin
           $this->$attrs = "";
         }
       }
-      $this->FAIscript= recode("DOS..LATIN1", $this->FAIscript);
     }
   }
 
@@ -122,6 +121,9 @@ class faiScriptEntry extends plugin
     foreach($this->attributes as $attrs){ 
       $tmp[$attrs] = $this->$attrs;
     }
+
+    /* Strip out dos newlines */
+    $tmp['FAIscript']= strtr($this->FAIscript, array("\x0D" => ""));
 
     if(($this->orig_cn)&&($tmp['cn']!=$this->orig_cn)){
       $tmp['remove']['from']  = $this->orig_cn;
