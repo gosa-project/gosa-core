@@ -440,6 +440,7 @@ class printgeneric extends plugin
       $ldap->cat($this->dn);
       if(count($ldap->fetch()) ){
 
+        $this->netConfigDNS->remove_from_parent();
         $ldap->rmdir($this->dn);
         show_ldap_error($ldap->get_error());
         $this->handle_post_events("remove");
@@ -452,8 +453,6 @@ class printgeneric extends plugin
           unset($og->member[$this->dn]);
           $og->save ();
         }
-    
-        $this->netConfigDNS->remove_from_parent();
       }
     }
   }
@@ -628,6 +627,7 @@ class printgeneric extends plugin
     }
     show_ldap_error($ldap->get_error());
 
+    $this->netConfigDNS->cn = $this->cn;
     $this->netConfigDNS->save($this->dn);
 
     /* Optionally execute a command after we're done */

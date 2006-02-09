@@ -126,6 +126,7 @@ class servgeneric extends plugin
 
   function remove_from_parent()
   {
+    $this->netConfigDNS->remove_from_parent();
     $ldap= $this->config->get_ldap_link();
     $ldap->rmdir($this->dn);
     show_ldap_error($ldap->get_error());
@@ -138,7 +139,6 @@ class servgeneric extends plugin
       unset($og->member[$this->dn]);
       $og->save ();
     }
-    $this->netConfigDNS->remove_from_parent();
     $this->handle_post_events("remove");
   }
 
@@ -180,8 +180,10 @@ class servgeneric extends plugin
       if ($ldap->count() != 0){
         while ($attrs= $ldap->fetch()){
           if ($attrs['dn'] != $this->orig_dn){
+            if(!preg_match("/,ou=incoming,/",$attrs['dn'])){
             $message[]= sprintf (_("There is already an entry '%s' in the base choosen by you"), $this->cn);
             break;
+            }
           }
         }
       }
@@ -235,6 +237,7 @@ class servgeneric extends plugin
       $ldap->modify($this->attrs);
       $mode= "modify";
     }
+    $this->netConfigDNS->cn = $this->cn;
     $this->netConfigDNS->save($this->dn);
     show_ldap_error($ldap->get_error());
 

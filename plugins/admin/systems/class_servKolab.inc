@@ -178,7 +178,8 @@ class servkolab extends plugin {
       /* Only modify kolabHost */
       $hosts= array();
       foreach ($this->kolabHost as $host){
-        if ($host != $this->cn){
+        
+        if (isset($this->cn)&&($host != $this->cn)){
           $hosts[]= $host;
         }
       }

@@ -158,6 +158,7 @@ class workgeneric extends plugin
 
   function remove_from_parent()
   {
+    $this->netConfigDNS->remove_from_parent();
     $ldap= $this->config->get_ldap_link();
     $ldap->rmdir($this->dn);
     show_ldap_error($ldap->get_error());
@@ -173,7 +174,6 @@ class workgeneric extends plugin
       unset($og->member[$this->dn]);
       $og->save ();
     }
-    $this->netConfigDNS->remove_from_parent();
   }
 
 
@@ -281,6 +281,7 @@ class workgeneric extends plugin
         $this->handle_post_events("modify");
       }
     }
+    $this->netConfigDNS->cn = $this->cn;
     $this->netConfigDNS->save($this->dn);
     show_ldap_error($ldap->get_error());
   }

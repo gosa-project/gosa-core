@@ -5,7 +5,7 @@
 		<td	style="border-right:1px	solid	#b0b0b0;	width:50%; vertical-align: top;">
 			<table	summary="">
 				<tr>
-					<td><LABEL	for="ipHostNumber">{t}IP-address{/t}{$staticAddress}</LABEL></td>
+					<td><LABEL	for="ipHostNumber">{t}IP-address{/t}{if $IPisMust}{$staticAddress}{/if}</LABEL></td>
 					<td><input	id="ipHostNumber"	name="ipHostNumber"	size=25	maxlength=80	value="{$ipHostNumber}"></td>
 				</tr>
       </table> 

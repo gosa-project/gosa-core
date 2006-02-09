@@ -28,12 +28,21 @@ class termDNS extends plugin
   var $types = array();
   var $DNSinitially_was_account = false;
 
-  function termDNS ($config, $dn,$objectClasses)
+  var $orig_dn     ="";
+
+  var $IPisMust = false;
+  var $MACisMust= false;
+
+  function termDNS ($config, $dn,$objectClasses,$IPisMust = false)
   {
     /* We need to know which objectClasses are used, to store the ip/mac*/
     $this->objectclasses= $objectClasses;
     plugin::plugin ($config, $dn);
 
+    $this->orig_dn= $dn;
+ 
+    $this->IPisMust = $IPisMust;
+ 
     /* All types with required attrs */
     $this->RecordTypes['aRecord']       = "aRecord";           // ok
     $this->RecordTypes['mDRecord']      = "mDRecord";          // ok
@@ -60,8 +69,11 @@ class termDNS extends plugin
     $this->RecordTypes['rRSIGRecord']   = "rRSIGRecord";       // ok
     $this->RecordTypes['nSECRecord']    = "nSECRecord";        // ok 
 
-    /* Get all available zones */ 
-    $this->cn = $this->attrs['cn'][0];
+    echo $this->cn;
+    /* Get all available zones */
+    if(empty($this->cn)&&(isset($this->attrs['cn'][0]))){ 
+      $this->cn = $this->attrs['cn'][0];
+    }
     $this->Zones = $this->get_Zones();
     $types = array();
 
@@ -169,6 +181,7 @@ class termDNS extends plugin
     $smarty->assign("DNSAccount",$this->DNS_is_account);
     $smarty->assign("Zones",$this->Zones);
     $smarty->assign("ZoneKeys",($this->Zones));
+    $smarty->assign("IPisMust",(($this->IPisMust)||($this->DNS_is_account)));
     $changeStateForRecords ="";
     $smarty->assign("records",$this->generateRecordsList(&$changeStateForRecords));
     $smarty->assign("changeStateForRecords",$changeStateForRecords);
@@ -180,7 +193,13 @@ class termDNS extends plugin
 
   function remove_from_parent()
   {
-    /* This cannot be removed...    */
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->orig_dn);
+    $ldap->search("(&(objectClass=dNSZone)(zoneName=*)(!(relativeDomainName=@)))",array("relativeDomainName","zoneName"));
+    while($attr = $ldap->fetch()){  
+      $ldap->cd($attr['dn']);
+      $ldap->rmDir($attr['dn']);
+    }
   }
 
   /* Save data to object */
@@ -234,20 +253,23 @@ class termDNS extends plugin
   {
     $message= array();
 
+    
+    if(($this->IPisMust)||($this->DNS_is_account)){
+      /* Check if ip is empty */
+      if ($this->ipHostNumber == "" && chkacl ($this->acl, "ipHostNumber") == ""){
+        $message[]= _("The required field 'IP-address' is not set.");
+      }
+
+      /* check if given ip is valid ip*/
+      $num="(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])";
+      if (!preg_match("/^$num\\.$num\\.$num\\.$num$/", $this->ipHostNumber)){
+        $message[]= _("Wrong IP format in field IP-address.");
+      }
+    }
+
     /* Check if mac is empty */
     if ($this->macAddress == "" && chkacl ($this->acl, "macAddress") == ""){
       $message[]= _("The required field 'MAC-address' is not set.");
-    }
-
-    /* Check if ip is empty */
-    if ($this->ipHostNumber == "" && chkacl ($this->acl, "ipHostNumber") == ""){
-      $message[]= _("The required field 'IP-address' is not set.");
-    }
-
-    /* check if given ip is valid ip*/
-    $num="(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])";
-    if (!preg_match("/^$num\\.$num\\.$num\\.$num$/", $this->ipHostNumber)){
-      $message[]= _("Wrong IP format in field IP-address.");
     }
 
     /* Check if given mac is valid mac */

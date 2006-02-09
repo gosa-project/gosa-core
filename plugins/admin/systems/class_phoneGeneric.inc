@@ -215,6 +215,7 @@ class phoneGeneric extends plugin
       return;
     }
 
+    $this->netConfigDNS->remove_from_parent();
     $ldap->rmdir($this->dn);
     show_ldap_error($ldap->get_error());
     $this->handle_post_events("remove");
@@ -227,7 +228,6 @@ class phoneGeneric extends plugin
       unset($og->member[$this->dn]);
       $og->save ();
     }
-    $this->netConfigDNS->remove_from_parent();
   }
 
 
@@ -365,7 +365,7 @@ class phoneGeneric extends plugin
       }
       $this->handle_post_events("modify");
     }
-    
+    $this->netConfigDNS->cn = $this->cn;    
     $this->netConfigDNS->save($this->dn);
 
     show_ldap_error($ldap->get_error());

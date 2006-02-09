@@ -70,6 +70,7 @@ class componentGeneric extends plugin
   function remove_from_parent()
   {
     $ldap= $this->config->get_ldap_link();
+    $this->netConfigDNS->remove_from_parent();
     $ldap->rmdir($this->dn);
     show_ldap_error($ldap->get_error());
     $this->handle_post_events("remove");
@@ -82,7 +83,6 @@ class componentGeneric extends plugin
       unset($og->member[$this->dn]);
       $og->save ();
     }
-    $this->netConfigDNS->remove_from_parent();
   }
 
 
@@ -173,6 +173,7 @@ class componentGeneric extends plugin
       $this->handle_post_events("modify");
     }
 
+    $this->netConfigDNS->cn = $this->cn;
     $this->netConfigDNS->save($this->dn);
 
     show_ldap_error($ldap->get_error());

@@ -47,8 +47,8 @@ class systems extends plugin
 
     /* Get global filter config */
     if (!is_global("terminalfilter")){
-      $ui= get_userinfo();
-      $base= get_base_from_people($ui->dn);
+      $ui   = get_userinfo();
+      $base = get_base_from_people($ui->dn);
       $terminalfilter= array("workstations" => "checked",
           "thins" => "checked",
           "winstations" => "checked",
@@ -65,19 +65,24 @@ class systems extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
-    /* Save data */
+    /********************
+      Filter handling, check posted filter options and store them in our Session obejct
+     ********************/
+  
+    /* Save posted filter data */
     $terminalfilter= get_global("terminalfilter");
     foreach( array("depselect", "user", "regex") as $type){
       if (isset($_POST[$type])){
         $terminalfilter[$type]= $_POST[$type];
       }
     }
+
+    /* Check if filter checkboxes are selected */
     if (isset($_POST['depselect'])){
       foreach( array("workstations", "thins", "winstations", "printers", "phones", "servers", "netdev") as $type){
-
         if (isset($_POST[$type])) {
           $terminalfilter[$type]= "checked";
         } else {
@@ -85,6 +90,8 @@ class systems extends plugin
         }
       }
     }
+
+    /* Check for search post */
     if (isset($_GET['search'])){
       $s= mb_substr($_GET['search'], 0, 1, "UTF8")."*";
       if ($s == "**"){
@@ -93,12 +100,16 @@ class systems extends plugin
       $terminalfilter['regex']= $s;
     }
 
+
+    /********************
+      Check for functional posts, edit|delete|add|... system devices 
+     ********************/
     $s_action     = "";                       // Contains the action to proceed
     $s_entry      = "";                       // The value for s_action
     $base_back    = "";                       // The Link for Backbutton
     $smarty       = get_smarty();
 
-    /* Start for New List Managment */
+    /* check if base was changed */
     if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
             $s_action="open";
             $s_entry = base64_decode($_GET['dep_id']);
@@ -136,12 +147,24 @@ class systems extends plugin
       }
     }
 
-     if((isset($_GET['act']))&&($_GET['act']=="edit_entry")){
+    /* 09.02.2006 : New incoming handling ; hickert
+     * If someone made a systemtype and ogroup selection 
+     * Display the new requested entry type ... servtab  in case of server and so on.
+     */
+    if(isset($_POST['SystemTypeChoosen'])){
+      $s_action = "SelectedSystemType";
+      $s_entry  = $_POST['SystemType'];
+      $this->systab = NULL;
+    }
+
+    /* remove image tags from posted entry  (posts looks like this 'name_x')*/
+    $s_entry  = preg_replace("/_.$/","",$s_entry);
+
+    /* Edit was requested by pressing the name(link) of an item */
+    if((isset($_GET['act']))&&($_GET['act']=="edit_entry")){
       $s_action ="edit";
       $s_entry  = $_GET['id'];
     }
-
-    $s_entry  = preg_replace("/_.$/","",$s_entry);
 
     /* Department changed? */
     if(isset($_POST['depselect']) && $_POST['depselect']){
@@ -154,10 +177,10 @@ class systems extends plugin
       $terminalfilter['depselect']=(preg_replace("/^[^,]+,/","",$terminalfilter['depselect']));
     }
 
+    /* back to the roots ^^ */
     if($s_action=="root"){
       $terminalfilter['depselect']=($this->config->current['BASE']);
     }
-
 
     /* If Backbutton is Posted */
     if($s_action=="back"){
@@ -171,9 +194,10 @@ class systems extends plugin
       }
     }
 
+    /* Save Termfilter .... */
     register_global("terminalfilter", $terminalfilter);
     $this->reload();
-
+    
     /* Check for exeeded sizelimit */
     if (($message= check_sizelimit()) != ""){
       return($message);
@@ -184,16 +208,32 @@ class systems extends plugin
       return ($smarty->fetch(get_template_path('chooser.tpl', TRUE)));
     }
 
-    /* Create new default terminal */
-    if (isset($_POST['create_system'])||$s_action=="newsystem") {
+    /********************
+     Create new system ...   
+     ********************/
+    /* Create new default terminal 
+     *
+     * 09.02.2006 ; New incoming handling ; hickert
+     * Or create specified object of selected system type, from given incoming object  
+     */
+    if (isset($_POST['create_system'])||$s_action=="newsystem"||$s_action == "SelectedSystemType") {
+
+      /* If the current entry is an incoming object 
+       * $sw = System type as posted in new incoming handling dialog 
+       */ 
+      if($s_action == "SelectedSystemType") {
+        $sw         = $s_entry;
+        $dn_backup  = $this->dn;
+      }else{
+        if(isset($_POST['system'])){
+          $sw = $_POST['system'];
+        }else{
+          $sw = $s_entry;
+        }
+      }
+
       $this->dn= "new";
       $this->acl= array(":all");
-
-      if(isset($_POST['system'])){
-        $sw = $_POST['system'];
-      }else{
-        $sw = $s_entry;
-      }
 
       switch ($sw){
         case 'terminal':
@@ -242,15 +282,56 @@ class systems extends plugin
           $this->systab->by_object['componentgeneric']->base = $_SESSION['terminalfilter']['depselect'];  
           break;
       }
-       
+     
+      /* 09.02.2006 ; New incoming handling ; hickert.
+       * We must create a NEW object of given system type (Posted from SelectDeviceType).
+       * But we have to use the same attributes as used in incoming object, thats
+       * what we do here. 
+       */ 
+      if($s_action == "SelectedSystemType"){
+    
+        /* Store some informations, to be able to add this object to 
+         * To specified objectgroup and delete incoming object
+         */
+        $_SESSION['SelectedSystemType']['dn']     = $this->dn;
+        $_SESSION['SelectedSystemType']['server'] = $s_entry;
+        $_SESSION['SelectedSystemType']['ogroup'] = $_POST['ObjectGroup'];
+        
+        /* restore dn */
+        $this->dn = $dn_backup;
+
+        /* Get properties from incoming object */
+        $ldap = $this->config->get_ldap_link();
+        $ldap->cd($this->dn);
+        $ldap->cat($this->dn);
+        $res = $ldap->fetch();
+      
+        /* Unset not needed attributes */
+        unset($res['dn']);
+        unset($res['objectClass']);
+    
+        /* Walk through all tabs and set attributes if available */
+        foreach($this->systab->by_object as $name => $value){
+          foreach($this->systab->by_object[$name]->attributes as $atr){
+            if((isset($value))&&(isset($res[$atr]))){
+              $this->systab->by_object[$name]->$atr = $res[$atr][0];
+            }
+          }
+        }
+      }
+  
+      /* set base ... of current divlist position */
       $this->systab->base = $_SESSION['terminalfilter']['depselect'];  
     }
 
 
+    /********************
+     Edit system ...   
+     ********************/
+
     /* User wants to edit data? */
     if ($s_action == "edit"){
 
-      /* Get 'dn' from posted 'cn', must be unique */
       $this->dn= $this->terminals[$s_entry]['dn'];
 
       /* Check locking, save current plugin in 'back_plugin', so
@@ -270,72 +351,86 @@ class systems extends plugin
 
       /* Lock the current entry, so everyone will get the
          above dialog */
-      add_lock ($this->dn, $this->ui->dn);
 
       switch ($type){
+        case "NewDevice" :
+          $this->systab = new SelectDeviceType($this->config,$this->dn) ;
+        break;
         case "terminal":
           /* Register systab to trigger edit dialog */
           $this->systab= new termtabs($this->config,
               $this->config->data['TABS']['TERMTABS'], $this->dn);
-          $this->systab->set_acl($acl);
-          $_SESSION['objectinfo']= $this->dn;
-          break;
+        $this->systab->set_acl($acl);
+        $_SESSION['objectinfo']= $this->dn;
+        add_lock ($this->dn, $this->ui->dn);
+        break;
 
         case "server":
+
           /* Register systab to trigger edit dialog */
-          $this->systab= new servtabs($this->config,
-              $this->config->data['TABS']['SERVTABS'], $this->dn);
-          $this->systab->set_acl($acl);
-          $_SESSION['objectinfo']= $this->dn;
-          break;
+          $this->systab= new servtabs($this->config,$this->config->data['TABS']['SERVTABS'], $this->dn);
+        $this->systab->set_acl($acl);
+        $_SESSION['objectinfo']= $this->dn;
+        add_lock ($this->dn, $this->ui->dn);
+        break;
 
         case "workstation":
           /* Register systab to trigger edit dialog */
           $this->systab= new worktabs($this->config,
               $this->config->data['TABS']['WORKTABS'], $this->dn);
-          $this->systab->set_acl($acl);
-          $_SESSION['objectinfo']= $this->dn;
-          break;
+        $this->systab->set_acl($acl);
+        $_SESSION['objectinfo']= $this->dn;
+        add_lock ($this->dn, $this->ui->dn);
+        break;
 
         case "printer":
           /* Register systab to trigger edit dialog */
           $this->systab= new printtabs($this->config,
               $this->config->data['TABS']['PRINTTABS'], $this->dn);
-          $this->systab->set_acl($acl);
-          $_SESSION['objectinfo']= $this->dn;
-          break;
+        $this->systab->set_acl($acl);
+        $_SESSION['objectinfo']= $this->dn;
+        add_lock ($this->dn, $this->ui->dn);
+        break;
 
         case "phone":
           /* Register systab to trigger edit dialog */
           $this->systab= new phonetabs($this->config,
               $this->config->data['TABS']['PHONETABS'], $this->dn);
-          $this->systab->set_acl($acl);
-          $_SESSION['objectinfo']= $this->dn;
-          break;
+        $this->systab->set_acl($acl);
+        $_SESSION['objectinfo']= $this->dn;
+        add_lock ($this->dn, $this->ui->dn);
+        break;
 
         case "component":
           /* Register systab to trigger edit dialog */
           $this->systab= new componenttabs($this->config,
               $this->config->data['TABS']['COMPONENTTABS'], $this->dn);
-          $this->systab->set_acl($acl);
-          $_SESSION['objectinfo']= $this->dn;
-          break;
-       
+        $this->systab->set_acl($acl);
+        $_SESSION['objectinfo']= $this->dn;
+        add_lock ($this->dn, $this->ui->dn);
+        break;
+
         case "winstation":
           /* Register systab to trigger edit dialog */
           $this->systab= new wintabs($this->config,
               $this->config->data['TABS']['WINTABS'], $this->dn);
-          $this->systab->set_acl($acl);
-          $_SESSION['objectinfo']= $this->dn;
-          break;
+        $this->systab->set_acl($acl);
+        $_SESSION['objectinfo']= $this->dn;
+        add_lock ($this->dn, $this->ui->dn);
+        break;
 
 
         default:
-          print_red (_("You can't edit this object type yet!"));
-          del_lock($this->dn);
-          break;
+        print_red (_("You can't edit this object type yet!"));
+        del_lock($this->dn);
+        break;
       }
     }
+    
+
+    /********************
+     Change password ...   
+     ********************/
 
     /* Set terminals root password */
     if ($s_action=="change_pw"){
@@ -344,6 +439,11 @@ class systems extends plugin
       return ($smarty->fetch(get_template_path('password.tpl', TRUE)));
     }
 
+
+    /********************
+      Password cahnge finish, but check if entered data is ok 
+     ********************/
+
     /* Correctly specified? */
     if (isset($_POST['password_finish'])){
       if ($_POST['new_password'] != $_POST['repeated_password']){
@@ -351,6 +451,10 @@ class systems extends plugin
         return($smarty->fetch(get_template_path('password.tpl', TRUE)));
       }
     }
+
+    /********************
+      Password change finish
+     ********************/
 
     /* Change terminal password */
     if (isset($_POST['password_finish']) && 
@@ -378,11 +482,21 @@ class systems extends plugin
       unset($_SESSION['objectinfo']);
     }
 
+
+    /********************
+      Delete system cancel
+     ********************/
+
     /* Delete terminal canceled? */
     if (isset($_POST['delete_cancel']) || isset($_POST['password_cancel'])){
       del_lock ($this->dn);
       unset($_SESSION['objectinfo']);
     }
+
+
+    /********************
+      Delete system, confirm dialog
+     ********************/
 
     /* Remove terminal was requested */
     if ($s_action=="del"){
@@ -414,6 +528,10 @@ class systems extends plugin
       }
     }
 
+  
+    /********************
+      Delete system, confirmed
+     ********************/
     /* Confirmation for deletion has been passed. Terminal should be deleted. */
     if (isset($_POST['delete_terminal_confirm'])){
 
@@ -429,38 +547,40 @@ class systems extends plugin
 
         switch ($type){
           case "terminal":
-            $tabtype= "termtabs";
+            $tabtype  = "termtabs";
+            $tabobj   = "TERMTABS";
           break;
 
           case "workstation":
-            $tabtype= "worktabs";
+            $tabtype  = "worktabs";
+            $tabobj   = "WORKTABS";
           break;
-          
+
           case "phone":
-            $tabtype= "phonetabs";
+            $tabtype  = "phonetabs";
+            $tabobj   = "PHONETABS";
           break;
 
           case "server":
-            $tabtype= "servtabs";
+            $tabtype  = "servtabs";
+            $tabobj   = "SERVTABS";
           break;
 
           default:
-#print_red (_("You can't remove this object type yet!"));
-#del_lock($this->dn);
-#return;
-          $tabtype= "termtabs";
+            $tabtype  = "termtabs";
+            $tabobj   = "TERMTABS";
           break;
         }
 
         /* Delete request is permitted, perform LDAP action */
         if($tabtype=="phonetabs"){
           $this->systab= new $tabtype($this->config,
-             $this->config->data['TABS']['PHONETABS'], $this->dn);
+             $this->config->data['TABS'][$tabobj], $this->dn);
           $this->systab->set_acl(array($this->acl));
           $this->systab->by_object['phonegeneric']->remove_from_parent ();
         }else{  
           $this->systab= new $tabtype($this->config,
-             $this->config->data['TABS']['TERMTABS'], $this->dn);
+             $this->config->data['TABS'][$tabobj], $this->dn);
           $this->systab->set_acl(array($this->acl));
           $this->systab->delete();
           #$this->systab->by_object['termgeneric']->remove_from_parent ();
@@ -484,6 +604,10 @@ class systems extends plugin
       del_lock ($this->dn);
     }
 
+
+    /********************
+      Edit system type finished, check if everything went ok 
+     ********************/
     /* Finish user edit is triggered by the tabulator dialog, so
        the user wants to save edited data. Check and save at this
        point. */
@@ -501,6 +625,39 @@ class systems extends plugin
 
         /* Terminal has been saved successfully, remove lock from
            LDAP. */
+
+        /* 09.02.2006 Hickert 
+         * New System incoming behavior; you can select a system type and an ogroup membership. 
+         * If this object is an Incoming object, $_SESSION['SelectedSystemType'] isset.
+         * Check if we must add the new object to an object group.
+         * !! Don't forget to unset the $_SESSION['SelectedSystemType']... else all edited objects 
+         * !! will be added to  the object group.
+         * 
+         * If this is done, delete the old incoming entry... it is still there, because this is a new 
+         * entry and not an edited one.
+         */
+        if(isset($_SESSION['SelectedSystemType'])){
+          $SelectedSystemType= $_SESSION['SelectedSystemType'];
+          unset($_SESSION['SelectedSystemType']);
+          if($SelectedSystemType['ogroup'] != "none"){
+            $og = new ogroup($this->config,$SelectedSystemType['ogroup']);
+            if($og){
+              $og->AddDelMembership($this->systab->dn);
+            }
+            $og->save();
+          }
+          if(!isset($ldap)){
+            $ldap = $this->config->get_ldap_link();
+          }
+          $ldap->cd ($this->dn);
+          $ldap->cat($this->dn);  
+          if(count($ldap->fetch())){
+            $ldap->cd($this->dn);
+            $ldap->rmDir($this->dn);
+          }
+          $ldap->cd($this->config->current['BASE']);
+        }
+
         if ($this->dn != "new"){
           del_lock ($this->dn);
         }
@@ -520,22 +677,40 @@ class systems extends plugin
 
     }
 
+
+    /********************
+      Edit system was canceled 
+     ********************/
     /* Cancel dialogs */
-    if (isset($_POST['edit_cancel']) || isset($_POST['password_cancel'])){
+    if (isset($_POST['edit_cancel']) || isset($_POST['password_cancel']) || isset($_POST['SystemTypeAborted'])){
       if (isset($this->systab)){
         del_lock ($this->systab->dn);
         unset ($this->systab);
       }
       $this->systab= NULL;
       unset($_SESSION['objectinfo']);
+
+      /* 09.02.2006 ; New incoming handling ; hickert 
+       * remove session object which stores our ogroup selection 
+       * for the new incoming handling
+       */
+      if(isset($_SESSION['SelectedSystemType'])){
+        unset($_SESSION['SelectedSystemType']);
+      }
     }
+
+
+    /********************
+      Display edit dialog, or some other  
+     ********************/
 
     /* Show tab dialog if object is present */
     if ($this->systab){
       $display= $this->systab->execute();
 
+      
       /* Don't show buttons if tab dialog requests this */
-      if (!$this->systab->by_object[$this->systab->current]->dialog){
+      if ((isset($this->systab->by_object))&&(!$this->systab->by_object[$this->systab->current]->dialog)){
         $display.= "<p style=\"text-align:right\">\n";
         $display.= "<input type=\"submit\" name=\"edit_finish\" value=\""._("Finish")."\">\n";
         $display.= "&nbsp;\n";
@@ -546,59 +721,84 @@ class systems extends plugin
     }
 
 
-
-
-
-
-    /* Prepare departments */
+    /********************
+      Entry handling finished (edit delete ... )
+      Now the list generation is the next part of this script.
+     ********************/
+    
+    /* Prepare departments, 
+       which are shown in the listbox on top of the listbox 
+     */
     $options= "";
     foreach ($this->config->idepartments as $key => $value){
-            if ($terminalfilter['depselect'] == $key){
-                    $options.= "<option selected='selected' value='$key'>$value</option>";
-            } else {
-                    $options.= "<option value='$key'>$value</option>";
-            }
+      if ($terminalfilter['depselect'] == $key){
+        $options.= "<option selected='selected' value='$key'>$value</option>";
+      } else {
+        $options.= "<option value='$key'>$value</option>";
+      }
     }
 
 
-  /* NEW LIST MANAGMENT */
+    /* NEW LIST MANAGMENT */
+
+    /* Create list header
+     */
     $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
-    " <input class='center' type='image' align='middle' src='images/list_back.png' title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
-    " <input class='center' type='image' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
-    " <input class='center' type='image' align='middle' src='images/list_home.png' title='"._("Go to users department")."' alt='"._("Home")."'                     name='dep_home'>&nbsp;".
+    " <input class='center' type='image' align='middle' src='images/list_back.png' 
+        title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
+    " <input class='center' type='image' src='images/list_root.png' align='middle' 
+        title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
+    " <input class='center' type='image' align='middle' src='images/list_home.png' 
+        title='"._("Go to users department")."' alt='"._("Home")."'                     name='dep_home'>&nbsp;".
     " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-    " <input class='center' type='image' align='middle' src='images/select_new_terminal.png'   name='newsystem_terminal'    alt='"._("New Terminal template")."' title='"._("New Terminal")."'>".
-    " <input class='center' type='image' align='middle' src='images/select_new_workstation.png' name='newsystem_workstation' alt='"._("New Workstation template")."' title='"._("New Workstation")."'>".
-    " <input class='center' type='image' align='middle' src='images/select_new_server.png'     name='newsystem_server'      alt='"._("New Server")."' title='"._("New Server")."'>".
-    " <input class='center' type='image' align='middle' src='images/select_new_printer.png'    name='newsystem_printer'     alt='"._("New Printer")."' title='"._("New Printer")."'>".
-    " <input class='center' type='image' align='middle' src='images/select_new_phone.png'      name='newsystem_phone'       alt='"._("New Phone")."' title='"._("New Phone")."'>".
-    " <input class='center' type='image' align='middle' src='images/select_new_component.png'  name='newsystem_component'   alt='"._("New Component")."' title='"._("New Component")."'>".
-    " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-    _("Base")."&nbsp;<select name='depselect' onChange='mainform.submit()' class='center'>$options</select>".
-    " <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='".           _("Submit")."'>&nbsp;".
+    " <input class='center' type='image' align='middle' src='images/select_new_terminal.png'   
+        name='newsystem_terminal'    alt='"._("New Terminal template")."' title='"._("New Terminal")."'>".
+    " <input class='center' type='image' align='middle' src='images/select_new_workstation.png' 
+        name='newsystem_workstation' alt='"._("New Workstation template")."' title='"._("New Workstation")."'>".
+    " <input class='center' type='image' align='middle' src='images/select_new_server.png'     name='newsystem_server'      alt='"._("New Server")."' 
+        title='"._("New Server")."'>".
+    " <input class='center' type='image' align='middle' src='images/select_new_printer.png'    name='newsystem_printer'     alt='"._("New Printer")."' 
+        title='"._("New Printer")."'>".
+    " <input class='center' type='image' align='middle' src='images/select_new_phone.png'      name='newsystem_phone'       alt='"._("New Phone")."' 
+        title='"._("New Phone")."'>".
+    " <input class='center' type='image' align='middle' src='images/select_new_component.png'  name='newsystem_component'   alt='"._("New Component")."' 
+        title='"._("New Component")."'>".
+    " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;"._("Base")."&nbsp;".
+    " <select name='depselect' onChange='mainform.submit()' class='center'>$options</select>".
+    " <input class='center' type='image' src='images/list_submit.png' align='middle' 
+        title='"._("Submit department")."' name='submit_department' alt='".           _("Submit")."'>&nbsp;".
     "</div>";
 
+
+    /* Edit delete link for system types 
+     */
     $action= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit system")."'>";
     $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete system")."'>";
+    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
 
+    /* Create new divlist, and add the header elements 
+     */
     $divlist = new divlist("systemstab");
+    $divlist->SetSummary(_("This table displays all systems, in the selected tree."));
+    $divlist->SetEntriesPerPage(0);
     $divlist->SetHeader(array(
           array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
           array("string" => _("System")." / "._("Department"), "attach" => "style=''"),
           array("string" => _("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'" )));
 
-    $divlist->SetSummary(_("This table displays all systems, in the selected tree."));
-    $divlist->SetEntriesPerPage(0);
 
-    // Defining Links
-    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
-
+    /* Add departments, to be able to switch into them
+     */
     foreach($this->departments as $key=> $val){
-
+      
+      /* Add missing entries ... */
       if(!isset($this->config->departments[trim($key)])){
         $this->config->departments[trim($key)]="";
       }
 
+      /* check if this department contains sub-departments 
+         Display different image in this case 
+       */ 
       $non_empty="";
       $keys= str_replace("/","\/",$key);
       foreach($this->config->departments as $keyd=>$vald ){
@@ -607,13 +807,14 @@ class systems extends plugin
         }
       }
 
+      /* Add to divlist */
       $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
       $field3 = array("string" => "&nbsp;", "attach" => "style='width:60px;border-right:0px;text-align:right;'");
       $divlist->AddEntry(array($field1,$field2,$field3));
     }
 
-    // Space
+    // Iamge spacer 
     $empty    ="&nbsp;";
 
     // User and Template  Images
@@ -634,6 +835,11 @@ class systems extends plugin
     // Test Every Entry and generate divlist Array
     foreach($this->terminals as $key => $val){
       // Specify Pics for Extensions
+      if(in_array("goLdapServer"    ,$val['objectClass'])){
+        
+      }
+
+      /* Generate picture list, which is currently disabled */     
       if(in_array("goCupsServer"    ,$val['objectClass'])) $cups    = $img1;   else $cups  =$empty;
       if(in_array("goLogDBServer"   ,$val['objectClass'])) $logdb   = $img2;   else $logdb =$empty;
       if(in_array("goSyslogServer"  ,$val['objectClass'])) $syslog  = $img3;   else $syslog=$empty;
@@ -644,7 +850,6 @@ class systems extends plugin
       if(in_array("goFonServer"     ,$val['objectClass'])) $fon     = $img8;   else $fon   =$empty;
       if(in_array("goFaxServer"     ,$val['objectClass'])) $fax     = $img9;   else $fax   =$empty;
       if(in_array("goLdapServer"    ,$val['objectClass'])) $ldap     = $img10;   else $ldap   =$empty;
-  
       $pics = $cups.$logdb.$syslog.$imap.$samba.$nfs.$krb.$fon.$fax.$ldap;
       $pics = "";
     
@@ -703,13 +908,12 @@ class systems extends plugin
   {
     $temp= "";
     $conv= array(	
+        "NQ" => array("select_newsystem.png",_("New System from incoming")),
         "D" => array("select_default.png",_("Template")),
         "T" => array("select_terminal.png",_("Terminal")),
         "L" => array("select_workstation.png",_("Workstation")),
         "F" => array("select_phone.png",_("Phone")),
         "S" => array("select_server.png",_("Server")),
-        "NT"=> array("select_new_terminal.png",_("New Terminal")),
-        "NL"=> array("select_new_workstation.png",_("New Workstation")),
         "W" => array("select_winstation.png",_("Winstation")),
         "C" => array("select_component.png",_("Network Device")),
         "P" => array("select_printer.png",_("Printer")));
@@ -789,7 +993,7 @@ class systems extends plugin
 
     /* Get list of terminals to be shown */
     if ($terminalfilter['thins'] == "checked"){
-      $termfilter= "(&(objectClass=gotoTerminal)(cn=$regex))";
+      $termfilter= "(&(objectClass=goHard)(cn=$regex))";
     } else {
       $termfilter= "";
     }
@@ -864,10 +1068,6 @@ class systems extends plugin
         array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE));
 
     $res= array_merge($res,
-          get_list($this->ui->subtreeACL, "(|$workfilter)", FALSE, "ou=incoming,".$base, 
-        array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE));
-
-    $res= array_merge($res,
           get_list($this->ui->subtreeACL, "(|$winfilter)", FALSE, "ou=winstations,ou=systems,".$base, 
         array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE));
 
@@ -935,11 +1135,8 @@ class systems extends plugin
         $tmp= $value["dn"];
       }
       if (preg_match ("/,ou=incoming,/i", $tmp)){
-        if (in_array('gotoTerminal', $value['objectClass'])){
-          $add= "- "._("New terminal");
-        }
-        if (in_array('gotoWorkstation', $value['objectClass'])){
-          $add= "- "._("New workstation");
+        if (in_array('GOhard', $value['objectClass'])){
+          $add= "- "._("New Device");
         }
       } else {
         $add= "";
@@ -970,6 +1167,10 @@ class systems extends plugin
             $terminal['location'] = array_search($tmp, $this->config->departments);
             $terminal['message']  = _("Workstation template for");
           }
+        }elseif (in_array("GOhard",$value['objectClass'])){
+          $terminal = $value;
+          $terminal['type']   = "Q";
+          $terminal['is_new'] = $add;
         } elseif (in_array('gotoPrinter', $value["objectClass"])){
             $terminal             = $value;
             $terminal['type']     = "P";
@@ -1023,22 +1224,25 @@ class systems extends plugin
 
     if (in_array('ieee802Device', $classes)){
       $type= "component";
-    }
+    }else
     if (in_array('gotoTerminal', $classes)){
       $type= "terminal";
-    }
+    }else
     if (in_array('gotoWorkstation', $classes)){
       $type= "workstation";
-    }
+    }else
     if (in_array('gotoPrinter', $classes)){
       $type= "printer";
-    }
+    }else
     if (in_array('goFonHardware', $classes)){
       $type= "phone";
-    }
+    }else
     if (in_array('goServer', $classes)){
       $type= "server";
-    }
+    }else
+    if (in_array('GOhard', $classes)){
+      $type= "NewDevice";
+    }else
     if (in_array('sambaAccount', $classes) ||
         in_array('sambaSamAccount', $classes)){
       $type= "winstation";

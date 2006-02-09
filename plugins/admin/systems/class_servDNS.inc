@@ -18,9 +18,17 @@ class servdns extends plugin
   var $dialog = NULL;
 
   var $usedDNS    = array();
+
+  var $orig_dn = "";
+
+  var $DNSinitially_was_account;
+
+
   function servdns ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
+
+    $this->orig_dn = $dn;
 
     /* All types with required attrs */
     $this->RecordTypes['aRecord']       = "aRecord";           // ok
@@ -47,7 +55,6 @@ class servdns extends plugin
     $this->RecordTypes['rRSIGRecord']   = "rRSIGRecord";       // ok
     $this->RecordTypes['nSECRecord']    = "nSECRecord";        // ok
 
-    $this->cn = $this->attrs['cn'][0];
     $types = array();
 
     /* Get all records */
@@ -56,7 +63,7 @@ class servdns extends plugin
     $ldap->search("(&(objectClass=dNSZone)(relativeDomainName=@))",array("*"));
 
     while($attrs = $ldap->fetch()){
-      /* If relative domainname == cn
+      /* If relative domainname 
        * Try to read dnsclass / TTl / zone
        */
       $this->usedDNS[$attrs['dn']] = $attrs['dn'];
@@ -296,12 +303,26 @@ class servdns extends plugin
   /* Remove dns service */
   function remove_from_parent()
   {
+    if(!$this->DNSinitially_was_account){
+      return;
+    }
+
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
     foreach($this->usedDNS as $dn){
       $ldap->cd($dn);
       $ldap->rmdir_recursive($dn);
     }
+
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->orig_dn);
+    $ldap->search("(&(objectClass=dNSZone)(zoneName=*)(relativeDomainName=@))",array("relativeDomainName","zoneName"));
+    while($attr = $ldap->fetch()){
+      $ldap->cd($attr['dn']);
+      $ldap->rmDir($attr['dn']);
+    }
+
+
     show_ldap_error($ldap->get_error());
   }
 

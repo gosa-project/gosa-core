@@ -194,8 +194,8 @@ class termgeneric extends plugin
     $ldap->cd($this->dn);
     $ldap->cat($this->dn);
     if($ldap->count()){
-
-      $ldap->rmdir($this->dn);
+      $this->netConfigDNS->remove_from_parent();
+      $ldap->rmDir($this->dn);
       show_ldap_error($ldap->get_error());
 
       /* Optionally execute a command after we're done */
@@ -209,7 +209,6 @@ class termgeneric extends plugin
         unset($og->member[$this->dn]);
         $og->save ();
       }
-      $this->netConfigDNS->remove_from_parent();
     }
   }
 
@@ -319,6 +318,7 @@ class termgeneric extends plugin
       $ldap->modify($this->attrs);
       $this->handle_post_events("modify");
     }
+    $this->netConfigDNS->cn = $this->cn;
     $this->netConfigDNS->save($this->dn);
     show_ldap_error($ldap->get_error());
 
