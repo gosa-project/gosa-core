@@ -691,7 +691,7 @@ class posixAccount extends plugin
       $this->shadowExpire= "0";
     } else {
       /* Transform seconds to days here */
-      $this->shadowExpire= (int)($this->shadowExpire / (60 * 60 * 24)) + 1;
+      $this->shadowExpire= (int)($this->shadowExpire / (60 * 60 * 24)) ;
     }
     if (!$this->use_shadowMax){
       $this->shadowMax= "0";
@@ -764,11 +764,14 @@ class posixAccount extends plugin
     /* Fill gecos */
     if (isset($this->parent) && $this->parent != NULL){
       $this->gecos= rewrite($this->parent->by_object['user']->cn);
-	  if (!preg_match('/[a-z0-9 -]/i', $this->gecos)){
-		  $this->gecos= "";
-	  }
+      if (!preg_match('/[a-z0-9 -]/i', $this->gecos)){
+        $this->gecos= "";
+      }
     }
 
+	foreach(array("shadowMin","shadowMax","shadowWarning","shadowInactive","shadowExpire") as $attr){
+		$this->$attr = (int) $this->$attr;
+	}
     /* Call parents save to prepare $this->attrs */
     plugin::save();
 
@@ -801,9 +804,6 @@ class posixAccount extends plugin
       $thid->attrs['gosaDefaultPrinter']=array();
     }
 
-	foreach(array("shadowMin","shadowMax","shadowWarning","shadowInactive") as $attr){
-		$this->attrs[$attr] = (int) $this->attrs[$attr];
-	}
 
     /* Save data to LDAP */
     $ldap->cd($this->dn);
