@@ -543,7 +543,9 @@ class mailgroup extends plugin
     /* Keep uid */
     unset ($this->attrs['uid']);
     $ldap->cd($this->dn);
-    $ldap->modify($this->attrs);
+    $this->cleanup();
+$ldap->modify ($this->attrs); 
+
     show_ldap_error($ldap->get_error());
 
     /* Connect to IMAP server for account deletion */
@@ -630,7 +632,9 @@ class mailgroup extends plugin
 
   /*  
       Backup for function save 
-      Änderungen :  fixAttributesOnStore($this) wurde erst nach dem ldap->modify
+      Änderungen :  fixAttributesOnStore($this) wurde erst nach dem this->cleanup();
+$ldap->modify  
+
                     Ausgeführt, deshalb wurden die gemappten Attribute auch nicht 
                     gespeichert.
 
@@ -665,7 +669,9 @@ class mailgroup extends plugin
 
     /* Save data to LDAP * /
     $ldap->cd($this->dn);
-    $ldap->modify($this->attrs);
+    $this->cleanup();
+$ldap->modify ($this->attrs); 
+
     show_ldap_error($ldap->get_error());
 
     /* Only do IMAP actions if we are not a template * /
@@ -785,7 +791,9 @@ class mailgroup extends plugin
 
     /* Save data to LDAP */
     $ldap->cd($this->dn);
-    $ldap->modify($this->attrs);
+    $this->cleanup();
+$ldap->modify ($this->attrs); 
+
     show_ldap_error($ldap->get_error());
 
     /* Optionally execute a command after we're done */

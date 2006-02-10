@@ -615,7 +615,9 @@ class printgeneric extends plugin
       }
 
       $ldap->cd($this->dn);
-      $ldap->modify($this->attrs);
+      $this->cleanup();
+$ldap->modify ($this->attrs); 
+
       $this->handle_post_events("modify");
     }
     show_ldap_error($ldap->get_error());

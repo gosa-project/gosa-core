@@ -315,7 +315,9 @@ class termgeneric extends plugin
         $this->move($this->orig_dn, $this->dn);
       }
       $ldap->cd($this->dn);
-      $ldap->modify($this->attrs);
+      $this->cleanup();
+$ldap->modify ($this->attrs); 
+
       $this->handle_post_events("modify");
     }
     $this->netConfigDNS->cn = $this->cn;

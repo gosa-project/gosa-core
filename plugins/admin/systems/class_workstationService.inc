@@ -290,7 +290,9 @@ class workservice extends plugin
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
-    $ldap->modify($this->attrs);
+    $this->cleanup();
+$ldap->modify ($this->attrs); 
+
     show_ldap_error($ldap->get_error());
     $this->handle_post_events("modify");
   }

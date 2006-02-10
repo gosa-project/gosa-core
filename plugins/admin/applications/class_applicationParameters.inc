@@ -120,7 +120,9 @@ class applicationParameters extends plugin
         $ldap->cd($this->dn);
         @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
                 $this->attributes, "Save");
-	$ldap->modify($this->attrs);
+	$this->cleanup();
+$ldap->modify ($this->attrs); 
+
 	show_ldap_error($ldap->get_error());
 
 	/* Optionally execute a command after we're done */
@@ -179,7 +181,9 @@ class applicationParameters extends plugin
 	$ldap->cd($this->dn);
         @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
                 $this->attributes, "Save");
-	$ldap->modify($this->attrs);
+	$this->cleanup();
+$ldap->modify ($this->attrs); 
+
 	show_ldap_error($ldap->get_error());
 
 	/* Optionally execute a command after we're done */

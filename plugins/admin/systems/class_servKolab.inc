@@ -185,7 +185,9 @@ class servkolab extends plugin {
       }
       $attrs= array('kolabHost' => $hosts);
       $ldap->cd($this->dn);
-      $ldap->modify($attrs);
+      $this->cleanup();
+$ldap->modify ($attrs); 
+
       show_ldap_error($ldap->get_error());
     }
 

@@ -234,7 +234,9 @@ class servgeneric extends plugin
       }
   
       $ldap->cd($this->dn);
-      $ldap->modify($this->attrs);
+      $this->cleanup();
+$ldap->modify ($this->attrs); 
+
       $mode= "modify";
     }
     $this->netConfigDNS->cn = $this->cn;

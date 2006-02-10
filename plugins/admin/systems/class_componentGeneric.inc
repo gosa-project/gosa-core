@@ -169,7 +169,9 @@ class componentGeneric extends plugin
       }
 
       $ldap->cd($this->dn);
-      $ldap->modify($this->attrs);
+      $this->cleanup();
+$ldap->modify ($this->attrs); 
+
       $this->handle_post_events("modify");
     }
 

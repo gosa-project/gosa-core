@@ -388,7 +388,9 @@ class servdns extends plugin
     /* Update existing entries */
     foreach($actions['update'] as $dn => $attrs){
       $ldap->cd($dn);
-      $ldap->modify($attrs);
+      $this->cleanup();
+$ldap->modify ($attrs); 
+
     }
     show_ldap_error($ldap->get_error());
   }

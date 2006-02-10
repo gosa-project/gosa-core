@@ -619,7 +619,9 @@ class sambaAccount extends plugin
     @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
         $this->attributes, "Save");
     $ldap->cd($this->dn);
-    $ldap->modify($this->attrs);
+    $this->cleanup();
+$ldap->modify ($this->attrs); 
+
     show_ldap_error($ldap->get_error());
 
     /* Optionally execute a command after we're done */
@@ -963,7 +965,9 @@ class sambaAccount extends plugin
 
     /* Write back to ldap */
     $ldap->cd($this->dn);
-    $ldap->modify($this->attrs);
+    $this->cleanup();
+$ldap->modify ($this->attrs); 
+
     show_ldap_error($ldap->get_error());
 
     /* Optionally execute a command after we're done */

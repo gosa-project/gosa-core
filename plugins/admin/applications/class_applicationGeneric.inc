@@ -333,7 +333,9 @@ class application extends plugin
         $a= $ldap->fetch();
         if (count($a)){
         	$ldap->cd($this->dn);
-			$ldap->modify($this->attrs);
+			$this->cleanup();
+$ldap->modify ($this->attrs); 
+
 			$this->handle_post_events("modify");
         } else {
 			$ldap->cd($this->config->current['BASE']);

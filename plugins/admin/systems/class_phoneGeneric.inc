@@ -353,7 +353,9 @@ class phoneGeneric extends plugin
       }
 
       $ldap->cd($this->dn);
-      $ldap->modify($this->attrs);
+      $this->cleanup();
+$ldap->modify ($this->attrs); 
+
       // $user_phone_reload   
       $ldap->cd ($this->config->current['BASE']); 
       $user_phone_assignment = $ldap->fetch($ldap->search("(&(objectClass=goFonAccount)(goFonHardware=".$this->cn."))",array("uid")));

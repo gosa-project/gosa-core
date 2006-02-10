@@ -686,7 +686,9 @@ class environment extends plugin
     @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,$this->attributes, "Save");
 
     $ldap->cd($this->dn);
-    $ldap->modify($this->attrs);
+    $this->cleanup();
+$ldap->modify ($this->attrs); 
+
 
     show_ldap_error($ldap->get_error());
 
@@ -875,7 +877,9 @@ class environment extends plugin
       /* Save changes */
       $ldap->cd($attr['dn']);
       unset($attr['dn']);
-      $ldap->modify($attr);
+      $this->cleanup();
+$ldap->modify ($attr); 
+
       if($ldap->get_error()!="Success"){
         print_red(_("Error while writing printer")." : ".$ldap->get_error());
       }
@@ -945,7 +949,9 @@ class environment extends plugin
 
       $ldap->cd($attrs['dn']);
       unset($attrs['dn']);
-      $ldap->modify($attrs);
+      $this->cleanup();
+$ldap->modify ($attrs); 
+
       if($ldap->get_error()!="Success"){
         print_red(_("Error while writing printer settings")." : ".$ldap->get_error());
       }

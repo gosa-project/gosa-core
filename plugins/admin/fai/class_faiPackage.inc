@@ -386,7 +386,9 @@ class faiPackage extends plugin
     if($ldap->count()!=0){
       /* Write FAIscript to ldap*/
       $ldap->cd($this->dn);
-      $ldap->modify($this->attrs);
+      $this->cleanup();
+$ldap->modify ($this->attrs); 
+
     }else{
       /* Write FAIscript to ldap*/
       $ldap->cd($this->config->current['BASE']);
@@ -416,7 +418,9 @@ class faiPackage extends plugin
         $ldap->cat($pkgdn);
         if($ldap->count()!=0){
           $ldap->cd($pkgdn);
-          $ldap->modify($pkgattrs);
+          $this->cleanup();
+$ldap->modify ($pkgattrs); 
+
         }else{
           $ldap->cd($this->config->current['BASE']);
           $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $pkgdn));

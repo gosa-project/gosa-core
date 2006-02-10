@@ -316,7 +316,9 @@ class termDNS extends plugin
 
     /* Write back to ldap */
     $ldap->cd($this->dn);
-    $ldap->modify($this->attrs);
+    $this->cleanup();
+$ldap->modify ($this->attrs); 
+
 
     /****************/ 
     /* DNS HANDLING */
@@ -360,7 +362,9 @@ class termDNS extends plugin
         
         if(count($ldap->fetch())){
           $ldap->cd($dn);
-          $ldap->modify($attrs);
+          $this->cleanup();
+$ldap->modify ($attrs); 
+
         }else{
           $ldap->cd($dn);
           $ldap->add($attrs);

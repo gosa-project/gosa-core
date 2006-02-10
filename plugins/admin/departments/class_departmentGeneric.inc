@@ -197,7 +197,9 @@ class department extends plugin
 	$a= $ldap->fetch();
 	$ldap->cd($this->dn);
 	if (count($a)){
-		$ldap->modify($this->attrs);
+		$this->cleanup();
+$ldap->modify ($this->attrs); 
+
 		$this->handle_post_events('modify');
 	} else {
 		$ldap->add($this->attrs);

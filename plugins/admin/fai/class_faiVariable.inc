@@ -256,7 +256,9 @@ class faiVariable extends plugin
     if($ldap->count()!=0){
       /* Write FAIscript to ldap*/
       $ldap->cd($this->dn);
-      $ldap->modify($this->attrs);
+      $this->cleanup();
+$ldap->modify ($this->attrs); 
+
     }else{
       /* Write FAIscript to ldap*/
       $ldap->cd(preg_replace('/^[^,]+,[^,]+,/', '', $this->dn));
@@ -314,7 +316,9 @@ class faiVariable extends plugin
         $this->handle_post_events("remove");
       }elseif($obj['status'] == "edited"){
         $ldap->cd($sub_dn);
-        $ldap->modify($tmp);
+        $this->cleanup();
+$ldap->modify ($tmp); 
+
         $this->handle_post_events("modify");
       }elseif($obj['status']=="new"){
 

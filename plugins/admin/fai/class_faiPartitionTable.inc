@@ -303,7 +303,9 @@ class faiPartitionTable extends plugin
       /* Add partition table to ldap
        */
       $ldap->cd($this->dn);
-      $ldap->modify($this->attrs);
+      $this->cleanup();
+$ldap->modify ($this->attrs); 
+
       show_ldap_error($ldap->get_error());
     }
   
@@ -343,7 +345,9 @@ class faiPartitionTable extends plugin
           $disk_attrs['description']=array();
         }
         $ldap->cd($disk_dn);
-        $ldap->modify($disk_attrs);
+        $this->cleanup();
+$ldap->modify ($disk_attrs); 
+
       }elseif($disk['status']== "new"){
         if(empty($disk_attrs['description'])){
           unset($disk_attrs['description']);
@@ -404,7 +408,9 @@ class faiPartitionTable extends plugin
             $partition_attrs['description']=array();
           }
           $ldap->cd($partition_dn);
-          $ldap->modify($partition_attrs);
+          $this->cleanup();
+$ldap->modify ($partition_attrs); 
+
         } 
       show_ldap_error($ldap->get_error());
       }

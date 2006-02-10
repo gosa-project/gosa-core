@@ -385,7 +385,9 @@ class faiProfile extends plugin
     if($ldap->count()!=0){
       /* Write FAIscript to ldap*/
       $ldap->cd($this->dn);
-      $ldap->modify($this->attrs);
+      $this->cleanup();
+$ldap->modify ($this->attrs); 
+
     }else{
       /* Write FAIscript to ldap*/
       $ldap->cd($this->config->current['BASE']);
