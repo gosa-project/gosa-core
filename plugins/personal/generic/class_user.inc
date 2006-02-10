@@ -42,10 +42,10 @@ class user extends plugin
   var $l= "";
   var $st= "";
   var $postalAddress= "";
-  var $dob= "0";
+  var $dateOfBirth;
   var $use_dob= "0";
-  var $gender= "0";
-  var $preferredLanguage= "";
+  var $gender="0";
+  var $preferredLanguage="0";
 
   var $jpegPhoto= "*removed*";
   var $photoData= "";
@@ -83,7 +83,7 @@ class user extends plugin
 
   /* attribute list for save action */
   var $attributes= array("sn", "givenName", "uid", "personalTitle", "academicTitle",
-      "homePostalAddress", "homePhone", "labeledURI", "o", "ou", "dob", "gender","preferredLanguage",
+      "homePostalAddress", "homePhone", "labeledURI", "o", "ou", "dateOfBirth", "gender","preferredLanguage",
       "departmentNumber", "employeeNumber", "employeeType", "l", "st",
       "roomNumber", "telephoneNumber", "mobile", "pager", "cn", "userPKCS12",
       "postalAddress", "facsimileTelephoneNumber", "userSMIMECertificate");
@@ -182,12 +182,12 @@ class user extends plugin
       $this->last_pw_storage= $this->pw_storage;
     }
 
-    /* Generate dob entry */
+    /* Generate dateOfBirth entry */
     if (isset ($this->attrs['dateOfBirth'])){
       /* This entry is ISO 8601 conform */
       list($year, $month, $day)= split("-", $this->attrs['dateOfBirth'][0], 3);
     
-      $this->dob=array( 'mon'=> $month,"mday"=> $day,"year"=> $year);
+      $this->dateOfBirth=array( 'mon'=> $month,"mday"=> $day,"year"=> $year);
       $this->use_dob= "1";
     } else {
       $this->use_dob= "0";
@@ -209,13 +209,13 @@ class user extends plugin
     $smarty= get_smarty();
 
     /* Fill calendar */
-    if ($this->dob == "0"){
+    if ($this->dateOfBirth == "0"){
       $date= getdate();
     } else {
-      if(is_array($this->dob)){
-        $date = $this->dob;
+      if(is_array($this->dateOfBirth)){
+        $date = $this->dateOfBirth;
       }else{
-        $date = getdate($this->dob);
+        $date = getdate($this->dateOfBirth);
       } 
     }
 
@@ -318,7 +318,7 @@ class user extends plugin
       $this->dialog= FALSE;
     }
 
-    /* Toggle dob information */
+    /* Toggle dateOfBirth information */
     if (isset($_POST['set_dob'])){
       $this->use_dob= ($this->use_dob == "0")?"1":"0";
     }
@@ -594,6 +594,16 @@ class user extends plugin
   /* Save data to LDAP, depending on is_account we save or delete */
   function save()
   {
+    /* Only force save of changes .... 
+       If this attributes aren't changed, avoid saving.
+     */
+    if ($this->use_dob == "1"){
+      $this->dateOfBirth= date("Y-m-d", $this->dateOfBirth);
+    }
+    if($this->gender=="0") $this->gender ="";
+    if($this->preferredLanguage=="0") $this->preferredLanguage ="";
+    
+ 
     /* First use parents methods to do some basic fillup in $this->attrs */
     plugin::save ();
 
@@ -655,24 +665,22 @@ class user extends plugin
       $remove_userCertificate= true;
     }
 
-    /* Special handling for dob value */
-    if ($this->use_dob == "1"){
-      $this->attrs["dob"]= date("Y-m-d", $this->dob);
-    } else {
+    /* Special handling for dateOfBirth value */
+    if ($this->use_dob != "1"){
       if ($this->new) {
-        unset($this->attrs["dob"]);
+        unset($this->attrs["dateOfBirth"]);
       } else {
-        $this->attrs["dob"]= array();
+        $this->attrs["dateOfBirth"]= array();
       }
     }
-    if ($this->gender == "0"){
+    if (!$this->gender){
       if ($this->new) {
         unset($this->attrs["gender"]);
       } else {
         $this->attrs["gender"]= array();
       }
     }
-      if ($this->preferredLanguage == "0"){
+    if (!$this->preferredLanguage){
       if ($this->new) {
         unset($this->attrs["preferredLanguage"]);
       } else {
