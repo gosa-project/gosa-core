@@ -315,6 +315,10 @@ class plugin
       }
     }
 
+  }
+
+  function cleanup()
+  {
     /* Clean up */
     foreach ($this->attrs as $index => $value){
       if (is_array($this->attrs[$index]) && count($this->attrs[$index]) == 0 && !isset($this->saved_attributes[$index])){
@@ -334,10 +338,11 @@ class plugin
         continue;
       }
     }
-#################################
-; echo "--- DEBUG: changes ---" ;
-; print_a ($this->attrs)        ;
-#################################
+
+    #################################
+    ; echo "--- DEBUG: changes ---" ;
+    ; print_a ($this->attrs)        ;
+    #################################
   }
 
   /* Check formular input */
