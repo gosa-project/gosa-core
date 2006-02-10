@@ -77,7 +77,12 @@ class faiPackageEntry extends plugin
       } 
     }
 
-        @ksort($this->categories);
+    $this->searchStrPKG = preg_replace("/^\+/","",$this->searchStrPKG);
+    if(empty($this->searchStrPKG)){
+      $this->searchStrPKG = "*";
+    }
+
+    @ksort($this->categories);
 
 $CHKS = "<input type='hidden' value='chkchange' name='chkchange'><table summary=''><tr>";
     $i = 0;
@@ -115,6 +120,10 @@ $CHKS = "<input type='hidden' value='chkchange' name='chkchange'><table summary=
 
     $cnt = 0; 
     foreach($pkgs as $pkg){
+      if($cnt > 200) {
+        print_red(sprintf(_("Your specified search string '%s' returned too many results. Only the first 200 entries are shown, to keep the memory usage low."),$this->searchStrPKG));
+        break;
+      }
       if((preg_match("/^".str_replace("*",".*",$this->searchStrPKG)."/i",$pkg[0]))||
          (preg_match("/^".str_replace("*",".*",$this->searchStrPKG)."/i",$pkg[3]))){
         if($this->categories[$pkg[2]]){
@@ -124,7 +133,7 @@ $CHKS = "<input type='hidden' value='chkchange' name='chkchange'><table summary=
             $check = "";
           }
           $cnt ++ ;
-          $chkbox = "<input type='checkbox' value='1' name='use_".base64_encode($pkg[0])."' ".$check." onclick='document.mainform.submit()'>
+          $chkbox = "<input type='checkbox' value='1' name='use_".base64_encode($pkg[0])."' ".$check.">
                    <input type='hidden' value='1' name='wasonpage_".base64_encode($pkg[0])."'>";
           $divlist->AddEntry(array(array("string"=>$chkbox, "attach" => "style='text-align:center;width:20px;'"),
                                array("string"=>$pkg[0], "attach" => "style='width:180px;'"),

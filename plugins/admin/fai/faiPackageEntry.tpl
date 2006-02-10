@@ -32,11 +32,6 @@
 				{t}Filters{/t}
 			</p>
    		</div>
-   		<div class="contentboxb">
-     		<table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
-      			{$alphabet}
-     		</table>
-  	 	</div>
    		<div class="contentboxb"> 
 	 	 	{$CHKS}
 		</div>
