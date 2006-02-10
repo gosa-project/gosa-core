@@ -20,6 +20,9 @@ Target for 2.4.1:
 
 * LabeledURI fix 
 
+* Phone account is not removable if the mysql database is not reachable.
+  This is no real problem, but I'd like to see the hint message for it.
+
 
 Target for 2.5:
 ===============

@@ -28,6 +28,7 @@ class mailgroup extends plugin
   var $mailusers= array();
   var $perms= array();
   var $imapacl= array('anyone' => 'p', '%members%' => 'lrsp', '' => 'p');
+  var $mmethod= "";
 
   /* Helper */
   var $indexed_acl= array();
@@ -52,16 +53,17 @@ class mailgroup extends plugin
 
     /* Set mailMethod to the one defined in gosa.conf */
     if (isset($this->config->current['MAILMETHOD'])){
-      $method= $this->config->current['MAILMETHOD'];
-      if (class_exists("mailMethod$method")){
-        $this->method= "mailMethod$method";
-      } else {
-        print_red(sprintf(_("There is no mail method '%s' specified in your gosa.conf available."), $method));
-      }
+      $this->mmethod= $this->config->current['MAILMETHOD'];
+    }
+   
+    if (class_exists("mailMethod$this->mmethod")){
+      $this->method= "mailMethod$this->mmethod";
+    } else {
+      print_red(sprintf(_("There is no mail method '%s' specified in your gosa.conf available."), $this->mmethod));
     }
 
     /* Load Mailserver string, only in case of kolab ???? */
-    if(preg_match("/kolab/i",$this->config->current['MAILMETHOD'])){
+    if(preg_match("/kolab/i",$this->mmethod)){
       if(isset($this->attrs['gosaMailServer'][0])){
         $this->gosaMailServer =  $this->attrs['gosaMailServer'][0];
       }
@@ -153,7 +155,7 @@ class mailgroup extends plugin
 
     /* Load permissions */
     $tmp = array();
-    if(preg_match("/kolab/i",$this->config->current['MAILMETHOD'])){
+    if(preg_match("/kolab/i",$this->mmethod)){
       $ldap = $this->config->get_ldap_link();
       if (isset($this->attrs['acl'])){
         for ($i= 0; $i<$this->attrs['acl']['count']; $i++){
@@ -723,7 +725,7 @@ class mailgroup extends plugin
     /* Save shared folder target */
     $this->attrs['gosaSharedFolderTarget']= "share+".$this->uid;
 
-    if(preg_match("/kolab/i",$this->config->current['MAILMETHOD'])){
+    if(preg_match("/kolab/i",$this->mmethod)){
       /* Save acl's */
       $this->attrs['acl']= array();
       foreach ($this->imapacl as $user => $acl){
@@ -752,7 +754,7 @@ class mailgroup extends plugin
     }
 
     /* Only do IMAP actions if we are not a template */
-    if(preg_match("/kolab/i",$this->config->current['MAILMETHOD'])){
+    if(preg_match("/kolab/i",$this->mmethod)){
       if (empty($this->gosaMailServer)||is_array($this->gosaMailServer)){
         if(isset($this->attrs['gosaMailServer'][0])){
           $this->gosaMailServer = $this->attrs['gosaMailServer'][0];

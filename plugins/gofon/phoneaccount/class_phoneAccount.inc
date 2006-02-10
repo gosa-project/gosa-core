@@ -1010,7 +1010,6 @@ class phoneAccount extends plugin
 
   function remove_from_parent()
   {
-  
     foreach($this->attributes as $key=>$val){
       if(in_array($val,array("uid","cn","mail"))){
         unset($this->attributes[$key]);
@@ -1070,7 +1069,6 @@ class phoneAccount extends plugin
       $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$this->uid."';\n";
       $SQL[] = "DELETE FROM ".$a_SETUP['SIP_TABLE']." WHERE name='".$this->uid."';\n";
 
-
       foreach($SQL as $query){
         if(!@mysql_query($query,$r_con)){
           print_red(_("Stop".mysql_error()));
@@ -1078,7 +1076,6 @@ class phoneAccount extends plugin
         }
       }
     }
-
 
     /* unset macro attr, it will cause an error */
     $tmp = array_flip($this->attributes);

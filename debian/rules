@@ -50,6 +50,7 @@ install-stamp:
 	-rm -rf debian/gosa/usr/share/gosa/compile
 	-mkdir -p debian/gosa/etc/gosa/vacation
 	-cp -R debian/apache.conf debian/gosa/etc/gosa/apache.conf
+	-cp -R contrib/encodings debian/gosa/etc/gosa/encodings
 	-cp -R plugins/personal/mail/sieve-*.txt debian/gosa/etc/gosa
 	-cp contrib/shells debian/gosa/etc/gosa
 	-rm -rf debian/gosa/usr/share/gosa/contrib

@@ -100,6 +100,7 @@ class plugin
   var $attributes= array();
   var $objectclasses= array();
   var $new= TRUE;
+  var $saved_attributes= array();
 
   /*! \brief plugin constructor
 
@@ -129,8 +130,10 @@ class plugin
 
       /* Copy needed attributes */
       foreach ($this->attributes as $val){
-        if (isset($this->attrs["$val"][0])){
-          $this->$val= $this->attrs["$val"][0];
+        #if (isset($this->attrs["$val"][0])){
+        $found= array_key_ics($val, $this->attrs);
+        if ($found != ""){
+          $this->$val= $this->attrs["$found"][0];
         }
       }
 
@@ -161,6 +164,27 @@ class plugin
         $this->is_account= TRUE;
         @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,
             "found", "Object check");
+      }
+
+      /* Prepare saved attributes */
+      $this->saved_attributes= $this->attrs;
+      foreach ($this->saved_attributes as $index => $value){
+        if (preg_match('/^[0-9]+$/', $index)){
+          unset($this->saved_attributes[$index]);
+          continue;
+        }
+        if (!in_array($index, $this->attributes) && $index != "objectClass"){
+          unset($this->saved_attributes[$index]);
+          continue;
+        }
+        if ($this->saved_attributes[$index]["count"] == 1){
+          $tmp= $this->saved_attributes[$index][0];
+          unset($this->saved_attributes[$index]);
+          $this->saved_attributes[$index]= $tmp;
+          continue;
+        }
+
+        unset($this->saved_attributes["$index"]["count"]);
       }
     }
 
@@ -291,6 +315,29 @@ class plugin
       }
     }
 
+    /* Clean up */
+    foreach ($this->attrs as $index => $value){
+      if (is_array($this->attrs[$index]) && count($this->attrs[$index]) == 0 && !isset($this->saved_attributes[$index])){
+        unset ($this->attrs[$index]);
+        continue;
+      }
+
+      if (!is_array($this->attrs[$index]) && isset($this->saved_attributes[$index])
+          && !is_array($this->saved_attributes[$index]) && $value == $this->saved_attributes[$index]){
+        unset ($this->attrs[$index]);
+        continue;
+      }
+
+      if (is_array($this->attrs[$index]) && is_array($this->saved_attributes[$index]) && 
+          count(array_diff($this->attrs[$index], $this->saved_attributes[$index]))==0 && $index != "objectClass"){
+        unset ($this->attrs[$index]);
+        continue;
+      }
+    }
+#################################
+; echo "--- DEBUG: changes ---" ;
+; print_a ($this->attrs)        ;
+#################################
   }
 
   /* Check formular input */
@@ -660,7 +707,6 @@ class plugin
       break;
     }
   }
-
 
 }
 

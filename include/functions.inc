@@ -1806,6 +1806,22 @@ height:".$height."px;
 }
 
 
+function array_key_ics($ikey, $items)
+{
+  /* Gather keys, make them lowercase */
+  $tmp= array();
+  foreach ($items as $key => $value){
+    $tmp[strtolower($key)]= $key;
+  }
+
+  if (isset($tmp[strtolower($ikey)])){
+    return($tmp[strtolower($ikey)]);
+  }
+
+  return ("");
+}
+
+
 function search_config($arr, $name, $return)
 {
   if (is_array($arr)){
