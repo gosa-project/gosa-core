@@ -1019,6 +1019,7 @@ $ldap->modify ($attrs);
     }
 
     $ldap->cd($this->dn);
+    $this->cleanup();
     $ldap->$mode($this->attrs);
     if($ldap->get_error()!="Success"){
       print_red($ldap->get_error());

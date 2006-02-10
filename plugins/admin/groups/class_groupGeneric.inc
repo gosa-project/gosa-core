@@ -588,6 +588,7 @@ class group extends plugin
 
     /* Write back to ldap */
     $ldap->cd($this->dn);
+    $this->cleanup();
     $ldap->$mode($this->attrs);
 
     $ret= 0;

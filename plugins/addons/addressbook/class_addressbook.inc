@@ -644,6 +644,7 @@ class addressbook extends plugin
 
 		/* Finally write data with selected 'mode' */
 		$ldap->cd ($this->dn);
+    $this->cleanup();
 		$ldap->$mode ($this->attrs);
 		if (show_ldap_error($ldap->get_error())){
 			return (1);
