@@ -757,11 +757,26 @@ class environment extends plugin
   /* Save to LDAP */
   function save()
   {
+  
+    /* only save changed variables ....*/
+    if ($this->gotoKioskProfile =="none") $this->gotoKioskProfile ="";
+    if((!empty($this->gotoKioskProfile))&&($this->gotoKioskProfile != "none")){
+      if(preg_match("/https/i",$_SERVER['HTTP_REFERER'])){
+        $method="https://";
+      }else{
+        $method="http://";
+      }
+
+      $str = $method.str_replace("//","/",$_SERVER['SERVER_NAME']."/kiosk/");
+      $this->gotoKioskProfile= $str.$this->gotoKioskProfile;
+    }else{
+      $this->gotoKioskProfile= array();
+    }
+    
     plugin::save();
     $ldap= $this->config->get_ldap_link();
 
     $realyUsedAttrs= array();
-
 
     $path = search_config($this->config->data,"environment", "KIOSKPATH"); 
     /* Creating Kiosk Profiles */
@@ -958,18 +973,6 @@ class environment extends plugin
       $this->attrs['gotoShare'][] =$share['server']."|".$share['name']."|".$share['mountPoint']."|".$share['OtherStuff']."|".$share['Username'];
     }
 
-    if((!empty($this->gotoKioskProfile))&&($this->gotoKioskProfile != "none")){
-      if(preg_match("/https/i",$_SERVER['HTTP_REFERER'])){
-        $method="https://";
-      }else{
-        $method="http://";
-      }
-
-      $str = $method.str_replace("//","/",$_SERVER['SERVER_NAME']."/kiosk/");
-      $this->attrs['gotoKioskProfile']= $str.$this->gotoKioskProfile;
-    }else{
-      $this->attrs['gotoKioskProfile']= array();
-    }
 
     $saveThis = array("gotoProfileQuota","gotoXResolution","gotoProfileServer");
   
