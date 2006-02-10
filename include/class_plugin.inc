@@ -332,17 +332,17 @@ class plugin
         continue;
       }
 
-      if (is_array($this->attrs[$index]) && is_array($this->saved_attributes[$index]) && 
-          count(array_diff($this->attrs[$index], $this->saved_attributes[$index]))==0 && $index != "objectClass"){
+      if (is_array($this->attrs[$index]) && isset($this->saved_attributes[$index]) && is_array($this->saved_attributes[$index]) && count(array_diff($this->attrs[$index], $this->saved_attributes[$index]))==0 ){
         unset ($this->attrs[$index]);
         continue;
       }
     }
 
-    #################################
-    ; echo "--- DEBUG: changes ---" ;
-    ; print_a ($this->attrs)        ;
-    #################################
+    #######################################################
+    ; echo "--- DEBUG: changes ---<br>"                   ;
+    ; print_a ($this->attrs)                              ;
+    ; if (count($this->attrs)==0)echo "<b>Skipped</b><br>";
+    #######################################################
   }
 
   /* Check formular input */

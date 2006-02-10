@@ -520,6 +520,9 @@ class LDAP{
 
   function modify($attrs)
   {
+    if(count($attrs) == 0){
+      return (0);
+    }
     if($this->hascon){
       if ($this->reconnect) $this->connect();
       $r = @ldap_modify($this->cid, $this->fix($this->basedn), $attrs);
