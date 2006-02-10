@@ -796,6 +796,7 @@ class user extends plugin
         $this->attributes, "Save via $mode");
 
     /* Finally write data with selected 'mode' */
+    $this->cleanup();
     $ldap->cd ($this->dn);
     $ldap->$mode ($this->attrs);
     if (show_ldap_error($ldap->get_error())){
