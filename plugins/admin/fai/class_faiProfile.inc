@@ -83,7 +83,7 @@ class faiProfile extends plugin
     } 
 
     /* Sort the sort array */
-    ksort($sort);
+    //ksort($sort);
 
     /* Reorder the FAIclasses array */
     foreach($sort as $name){
@@ -252,7 +252,7 @@ class faiProfile extends plugin
         $this->is_dialog=false;
         unset($this->dialog);
         $this->dialog=NULL;
-        ksort($this->FAIclasses);
+        //ksort($this->FAIclasses);
       }
     }
 
