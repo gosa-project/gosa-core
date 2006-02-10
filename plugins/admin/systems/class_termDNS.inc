@@ -185,7 +185,7 @@ class termDNS extends plugin
     $changeStateForRecords ="";
     $smarty->assign("records",$this->generateRecordsList(&$changeStateForRecords));
     $smarty->assign("changeStateForRecords",$changeStateForRecords);
-    $smarty->assign("dNSClasses",array("IN"=>"IN"));
+//    $smarty->assign("dNSClasses",array("IN"=>"IN"));
     $smarty->assign("staticAddress","<font class=\"must\">*</font>");
     $display.= $smarty->fetch(get_template_path('network.tpl', TRUE));
     return($display);
@@ -384,7 +384,7 @@ class termDNS extends plugin
       return $str;
     }
  
-    $str = "<table summary=''>";
+    $str = "<table summary='' width='100%'>";
     foreach($this->types as $key => $entry){
         if($entry['status'] == "deleted") continue;
 
@@ -400,7 +400,7 @@ class termDNS extends plugin
     }
 
     $str.= "  <tr>".
-           "    <td colspan=2></td><td>".
+           "    <td colspan=2 width='50%'></td><td>".
            "      <input type='submit' value='"._("Add")."' name='AddNewRecord'>".
            "    </td>".
            "  </tr>".
