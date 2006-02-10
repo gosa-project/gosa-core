@@ -155,13 +155,6 @@ class printgeneric extends plugin
       }
     }
 
-    /* This attributes is sometimes written with Uri instead of URI
-       In RFC 2079 it is defined with URI ...
-     */
-    if(isset($this->attrs['labeledUri'])){
-      $this->labeledURI = $this->attrs['labeledUri'][0];
-    }
-
     /* A printer was only saved if the printer belongs to a workstation. 
      * If there was a new single printer created, it was never saved.
      * -This allows new printers to be saved.
