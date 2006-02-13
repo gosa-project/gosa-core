@@ -39,7 +39,7 @@ class gofaxAccount extends plugin
   var $current_blocklist= array();
 
   /* attribute list for save action */
-  var $attributes= array("goFaxDeliveryMode", "goFaxIsEnabled",
+  var $attributes= array("goFaxDeliveryMode", "goFaxIsEnabled","goFaxRBlockgroups","facsimileAlternateTelephoneNumber",
       "goFaxPrinter", "goFaxDivertNumber", "goFaxLanguage", "goFaxFormat", "mail");
   var $objectclasses= array("goFaxAccount");
 
@@ -60,7 +60,7 @@ class gofaxAccount extends plugin
       /* Get arrays */
       foreach (array("goFaxRBlocklist", "goFaxRBlockgroups", "goFaxSBlocklist",
             "goFaxSBlockgroups", "facsimileAlternateTelephoneNumber") as $val){
-
+        $this->$val =array();
         if (isset($this->attrs["$val"]["count"])){
           for ($i= 0; $i<$this->attrs["$val"]["count"]; $i++){
             array_push($this->$val, $this->attrs["$val"][$i]);
