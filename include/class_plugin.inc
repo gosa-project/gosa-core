@@ -332,14 +332,55 @@ class plugin
         continue;
       }
 
-      if (is_array($this->attrs[$index]) && isset($this->saved_attributes[$index]) && is_array($this->saved_attributes[$index]) && count(array_diff($this->attrs[$index], $this->saved_attributes[$index]))==0 ){
+      /* Array checks */
+      if(is_array($this->attrs[$index]) && isset($this->saved_attributes[$index]) && is_array($this->saved_attributes[$index])){
+
+          /* Different number of elements, so this attribute has changed 
+             We must do this, because array_diff only shows differnces between 
+              array1 -> array2 
+            and not 
+              array2 -> array1  
+           */
+          if(count($this->attrs[$index])!= count($this->saved_attributes[$index])){
+            continue; 
+          }elseif(
+
+          /* Same number of elements, so we must check if all elements contain the same value 
+           */
+            count(
+              array_diff(
+                array_change_key_case(
+                  array_flip(
+                    $this->attrs[$index]),
+                  CASE_UPPER),
+                array_change_key_case(
+                  array_flip(
+                    $this->saved_attributes[$index]),
+                  CASE_UPPER)
+                )
+              ) ==0 
+            ){
+          unset ($this->attrs[$index]);
+          continue;
+          }
+      }
+    
+      /* Check for this combination, one value is an array and one is string.
+         Both contain the same value (nothing changed). 
+      
+        Example : check for
+          $this->attrs['name']= "test";
+          $this->saved_attributes['name'][0]= "test";
+      
+        noting changed, but one is string and one is array;
+      */ 
+      if(is_array($this->attrs[$index])&&  count($this->attrs[$index])==1 && isset($this->saved_attributes[$index]) && (!is_array($this->saved_attributes[$index])) && $this->attrs[$index][0] == $this->saved_attributes[$index]){
         unset ($this->attrs[$index]);
-        continue;
       }
     }
 
     #######################################################
-    ; echo "--- DEBUG: changes ---<br>"                   ;
+    ; echo "--- DEBUG: changes ---<b>".get_class($this)."</b><br>"                   ;
     ; print_a ($this->attrs)                              ;
     ; if (count($this->attrs)==0)echo "<b>Skipped</b><br>";
     #######################################################
