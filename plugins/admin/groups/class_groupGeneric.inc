@@ -33,6 +33,8 @@ class group extends plugin
   var $has_mailAccount= FALSE;
   var $group_dialog= FALSE;
   var $nagios_group =FALSE;
+  var $sambaGroupType;
+
 
   /* attribute list for save action */
   var $attributes= array("cn", "description", "gidNumber","memberUid","sambaGroupType","sambaSID");
