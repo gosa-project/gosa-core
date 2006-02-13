@@ -35,7 +35,7 @@ class group extends plugin
   var $nagios_group =FALSE;
 
   /* attribute list for save action */
-  var $attributes= array("cn", "description", "gidNumber");
+  var $attributes= array("cn", "description", "gidNumber","memberUid","sambaGroupType","sambaSID");
   var $objectclasses= array("top", "posixGroup");
 
   function group ($config, $dn= NULL)

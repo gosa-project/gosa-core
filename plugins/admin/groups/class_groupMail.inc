@@ -21,7 +21,7 @@ class mailgroup extends plugin
   var $gosaVacationMessage= "";
   var $gosaSpamSortLevel= "";
   var $gosaSpamMailbox= "";
-
+  var $gosaSharedFolderTarget;
   var $quotaUsage= 0;
   var $forward_dialog= FALSE;
   var $members= array();
@@ -35,8 +35,8 @@ class mailgroup extends plugin
   var $indexed_user= array();
 
   /* attribute list for save action */
-  var $attributes= array("mail", "gosaMailServer", "gosaMailQuota", "gosaMailMaxSize",
-      "gosaMailDeliveryMode", "gosaSpamSortLevel", "gosaSpamMailbox",
+  var $attributes= array("mail", "gosaMailServer", "gosaMailQuota", "gosaMailMaxSize","gosaMailAlternateAddress","gosaMailForwardingAddress",
+      "gosaMailDeliveryMode", "gosaSpamSortLevel", "gosaSpamMailbox","acl","gosaSharedFolderTarget",
       "gosaVacationMessage");
   var $objectclasses= array("gosaMailAccount");
 
@@ -78,6 +78,7 @@ class mailgroup extends plugin
 
       /* Load attributes containing arrays */
       foreach (array("gosaMailAlternateAddress", "gosaMailForwardingAddress") as $val){
+        $this->$val = array();
         if (isset($this->attrs["$val"]["count"])){
           for ($i= 0; $i<$this->attrs["$val"]["count"]; $i++){
             array_push($this->$val, $this->attrs["$val"][$i]);
@@ -507,7 +508,7 @@ class mailgroup extends plugin
       $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
     }
     if (is_numeric($this->gosaMailQuota) && $this->gosaMailQuota != 0){
-      $smarty->assign("quotausage", progressbar(round(($this->quotaUsage * 100)/ $this->gosaMailQuota,100,15,true)));
+      $smarty->assign("quotausage", progressbar(round(($this->quotaUsage * 100)/ $this->gosaMailQuota),100,15,true));
       $smarty->assign("quotadefined", "true");
     } else {
       $smarty->assign("quotadefined", "false");
@@ -524,7 +525,7 @@ class mailgroup extends plugin
     /* Added these ObjectClass and Attributes, because they were not 
        removed correctly, only in case of kolab ... 
      */
-    if(preg_match("/kolab/i",$this->config->current['MAILMETHOD'])){
+    if(isset($this->config->current['MAILMETHOD'])&&preg_match("/kolab/i",$this->config->current['MAILMETHOD'])){
       $this->attributes[]="acl";
       $this->attributes[]="kolabHomeServer";
       $this->objectclasses[] = "kolabSharedFolder";

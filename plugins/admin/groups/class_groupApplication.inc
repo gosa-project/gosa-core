@@ -24,7 +24,7 @@ class appgroup extends plugin
   var $curCatDepth    =0;         //
 
   /* attribute list for save action */
-  var $attributes= array();
+  var $attributes= array("gosaMemberApplication");
   var $objectclasses= array("gosaApplicationGroup");
 
 
@@ -34,6 +34,7 @@ class appgroup extends plugin
 
     /* Load member applications */
     if (isset ($this->attrs["gosaMemberApplication"][0])){
+      $this->gosaMemberApplication = array();
       for ($i= 0; $i<$this->attrs["gosaMemberApplication"]["count"]; $i++){
         $this->gosaMemberApplication[]=
           $this->attrs["gosaMemberApplication"][$i];

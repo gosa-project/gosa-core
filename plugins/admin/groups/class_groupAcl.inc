@@ -22,7 +22,7 @@ class acl extends plugin
 
 
   /* attribute list for save action */
-  var $attributes= array();
+  var $attributes= array("gosaSubtreeACL");
   var $objectclasses= array("gosaObject");
 
   function acl ($config, $dn= NULL)
