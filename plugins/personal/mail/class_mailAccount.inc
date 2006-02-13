@@ -54,8 +54,8 @@ class mailAccount extends plugin
       "lrswipcd" => "write", "lrswipcda" => "all" );
 
   /* attribute list for save action */
-  var $attributes= array("mail", "gosaMailServer", "gosaMailQuota", "gosaMailMaxSize",
-      "gosaMailDeliveryMode", "gosaSpamSortLevel", "gosaSpamMailbox",
+  var $attributes= array("mail", "gosaMailServer", "gosaMailQuota", "gosaMailMaxSize","gosaMailForwardingAddress",
+      "gosaMailDeliveryMode", "gosaSpamSortLevel", "gosaSpamMailbox","gosaMailAlternateAddress",
       "gosaVacationMessage", "uid");
   var $objectclasses= array("gosaMailAccount");
 
@@ -92,6 +92,7 @@ class mailAccount extends plugin
 
       /* Load attributes containing arrays */
       foreach (array("gosaMailAlternateAddress", "gosaMailForwardingAddress") as $val){
+        $this->$val = array();
         if (isset($this->attrs["$val"]["count"])){
           for ($i= 0; $i<$this->attrs["$val"]["count"]; $i++){
             array_push($this->$val, $this->attrs["$val"][$i]);
