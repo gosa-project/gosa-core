@@ -11,12 +11,14 @@ class applicationParameters extends plugin
   var $option_value= array();
 
   /* attribute list for save action */
-  var $attributes= array();
+  var $attributes= array("gosaApplicationParameter");
   var $objectclasses= array();
 
   function applicationParameters ($config, $dn= NULL)
   {
 	plugin::plugin ($config, $dn);
+
+	$this->gosaApplicationParameter = array();
 
 	if (isset($this->attrs['gosaApplicationParameter'])){
 		$this->is_account= TRUE;
