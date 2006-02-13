@@ -103,27 +103,30 @@ class user extends plugin
      'dn' from LDAP */
   function user ($config, $dn= NULL)
   {
-    /* Configuration is fine, allways */
     $this->config= $config;
+    /* Configuration is fine, allways */
+    if ($this->config->current['GOVERNMENTMODE']){
+      $this->attributes=array_merge($this->attributes,$this->govattrs);
+    }
 
     /* Load base attributes */
     plugin::plugin ($config, $dn);
 
+    if ($this->config->current['GOVERNMENTMODE']){
+      /* Fix public visible attribute if unset */
+      if (!isset($this->attrs['publicVisible'])){
+        $this->publicVisible == "nein";
+      }
+    }
+
     /* Load government mode attributes */
     if ($this->config->current['GOVERNMENTMODE']){
-
       /* Copy all attributs */
       foreach ($this->govattrs as $val){
         if (isset($this->attrs["$val"][0])){
           $this->$val= $this->attrs["$val"][0];
         }
       }
-
-      /* Fix public visible attribute if unset */
-      if (!isset($this->attrs['publicVisible'])){
-        $this->publicVisible == "nein";
-      }
-
     }
 
     /* Create me for new accounts */
@@ -970,9 +973,6 @@ class user extends plugin
     }
 
     /* Check phone numbers */
-    if (!is_phone_nr($this->homePhone)){
-      $message[]= _("The field 'Phone' contains an invalid phone number.");
-    }
     if (!is_phone_nr($this->telephoneNumber)){
       $message[]= _("The field 'Phone' contains an invalid phone number.");
     }
