@@ -25,9 +25,9 @@ Target for 2.4.1:
 
 * Enhance the export xls to export the whole three with a maximum of attributes in each sheet ( OpenSides )
 
-* Enhance the pptp plugin 
+* Enhance the pptp plugin (OpenSides ) 
 
-* Add support for nagios in the system part
+* Add support for nagios in the system part ( OpenSides )
 
 * Update the french manual ( OpenSides )
 
