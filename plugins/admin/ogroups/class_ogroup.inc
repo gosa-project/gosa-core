@@ -32,13 +32,15 @@ class ogroup extends plugin
   var $group_dialog= FALSE;
 
   /* attribute list for save action */
-  var $attributes= array("cn", "description", "gosaGroupObjects");
+  var $attributes= array("cn", "description", "gosaGroupObjects","member");
   var $objectclasses= array("top", "gosaGroupOfNames");
 
   function ogroup ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
     $this->orig_dn= $dn;
+
+    $this->member = array();
 
     /* Load member objects */
     if (isset($this->attrs['member'])){
@@ -648,6 +650,7 @@ class ogroup extends plugin
     plugin::save();
 
     /* Move members to target array */
+    $this->attrs['member'] =array();
     foreach ($this->member as $key => $desc){
       $this->attrs['member'][]= $key;
     }
