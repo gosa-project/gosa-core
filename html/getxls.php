@@ -378,7 +378,7 @@ function dump_ldap ($mode= 0)
   }
   elseif($mode == 4){ // IVBB LDIF Export
     $dn =  base64_decode($_GET['dn']);
-    /*$display= $ldap->gen_ldif($dn,"(objectClass=ivbbEntry)",array(
+    /*$display= $ldap->gen_ldif($dn,"(objectClass=ivbbentry)",array(
       "GouvernmentOrganizationalUnit","houseIdentifier","vocation",
       "ivbbLastDeliveryCollective","gouvernmentOrganizationalPersonLocality",
       "gouvernmentOrganizationalUnitDescription","gouvernmentOrganizationalUnitSubjectArea",

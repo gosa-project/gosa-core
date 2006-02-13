@@ -600,7 +600,7 @@ function parse_contrib_conf()
     }
 
     /* Data readed, types replaced, samba version detected and checked if
-       we need to add SID and RIDBASE. Check if there is an ivbbEntry in
+       we need to add SID and RIDBASE. Check if there is an ivbbentry in
        the LDAP tree, in this case we will set the governmentmode to true.
        Create LDAP connection, to check if theres a domain Objekt definen
        in the LDAP schema. */
@@ -609,7 +609,7 @@ function parse_contrib_conf()
     }
 
     /* Try to find a Samba Domain Objekt */
-    $ldap->search("(objectClass=ivbbEntry)");
+    $ldap->search("(objectClass=ivbbentry)");
 
     /* Something found ??? so we need to define ridbase an SID by ourselfs */
     if($ldap->count()> 0) {

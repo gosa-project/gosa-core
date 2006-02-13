@@ -614,7 +614,7 @@ class user extends plugin
     $tmp= array();
     foreach ($this->attrs['objectClass'] as $key => $set){
       $found= false;
-      foreach (array("ivbbEntry", "gosaUserTemplate") as $val){
+      foreach (array("ivbbentry", "gosaUserTemplate") as $val){
         if (preg_match ("/^$set$/i", $val)){
           $found= true;
           break;
@@ -636,7 +636,7 @@ class user extends plugin
 
     /* Hard coded government mode? */
     if ($this->config->current['GOVERNMENTMODE'] != 'false'){
-      $this->attrs['objectClass'][]= "ivbbEntry";
+      $this->attrs['objectClass'][]= "ivbbentry";
 
       /* Copy standard attributes */
       foreach ($this->govattrs as $val){
