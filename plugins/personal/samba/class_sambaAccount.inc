@@ -58,7 +58,7 @@ class sambaAccount extends plugin
   var $sambaLogonTime= "0";
   var $sambaLogoffTime= "2147483647";
   var $sambaKickoffTime= "2147483647";
-  var $sambaPwdCanChange= "0";
+  var $sambaPwdCanChange= "";
   var $sambaPwdMustChange= "0";
   var $sambaAcctFlags= "[UX        ]";
   var $sambaHomePath= "";
