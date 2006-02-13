@@ -41,7 +41,7 @@ class printgeneric extends plugin
   var $netConfigDNS;
 
   /* attribute list for save action */
-  var $attributes     = array("cn", "description", "l", "labeledURI", "gotoPrinterPPD");
+  var $attributes     = array("cn", "description", "l", "labeledURI", "gotoPrinterPPD","gotoUserPrinter");
   var $objectclasses  = array("top", "gotoPrinter");
 
   function printgeneric ($config, $dn= NULL)
@@ -579,6 +579,9 @@ class printgeneric extends plugin
 
     /* Append printer user 
      */
+    if(is_string( $this->attrs['gotoUserPrinter'])){
+       $this->attrs['gotoUserPrinter']=array();
+    }
     foreach($this->member['AddUser'] as $mem){
       $this->attrs['gotoUserPrinter'][]=$mem['uid'][0];
     }

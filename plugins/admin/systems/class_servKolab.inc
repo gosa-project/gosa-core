@@ -312,7 +312,7 @@ $ldap->modify ($attrs);
 
     /* Perform LDAP action */
     $ldap->cd($this->dn);
-    $this->cleanup();
+    $this->cleanup();;
     $ldap->$mode($this->attrs);
     show_ldap_error($ldap->get_error());
     

@@ -362,8 +362,8 @@ $ldap->modify ($this->attrs);
         
         if(count($ldap->fetch())){
           $ldap->cd($dn);
-          $this->cleanup();
-$ldap->modify ($attrs); 
+//          $this->cleanup();
+          $ldap->modify ($attrs); 
 
         }else{
           $ldap->cd($dn);

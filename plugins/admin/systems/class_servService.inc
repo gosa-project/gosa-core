@@ -23,7 +23,7 @@ class servservice extends plugin
 
   /* attribute list for save action */
   var $ignore_account= TRUE;
-  var $attributes       = array("goLdapBase","goXdmcpIsEnabled","goFontPath");
+  var $attributes       = array("goLdapBase","goXdmcpIsEnabled","goFontPath","goExportEntry","goTimeSource");
   var $possible_objectclasses= array( "goShareServer", "goNtpServer", "goServer", "goLdapServer",
                                       "goTerminalServer", "goSyslogServer", "goCupsServer","goMailServer");
   var $objectclasses    = array( "top","goServer"); 
@@ -56,6 +56,7 @@ class servservice extends plugin
       }
       $this->$name= $tmp;
     }
+
 
     $tmp =array();
     $tmp2=array();

@@ -9,7 +9,7 @@ class servdns extends plugin
 
   /* attribute list for save action */
   var $ignore_account   = FALSE;
-  var $attributes       = array(""); 
+  var $attributes       = array(); 
   var $objectclasses    = array("whatever");
 
   var $RecordTypes      = array();
@@ -388,8 +388,8 @@ class servdns extends plugin
     /* Update existing entries */
     foreach($actions['update'] as $dn => $attrs){
       $ldap->cd($dn);
-      $this->cleanup();
-$ldap->modify ($attrs); 
+      //$this->cleanup();
+      $ldap->modify ($attrs); 
 
     }
     show_ldap_error($ldap->get_error());
