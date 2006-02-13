@@ -348,9 +348,10 @@ class plugin
     }
 
     #######################################################
-    ; echo "--- DEBUG: changes ---<br>"                   ;
-    ; print_a ($this->attrs)                              ;
-    ; if (count($this->attrs)==0)echo "<b>Skipped</b><br>";
+    ; if (count($this->attrs)!=0){                        ;
+    ;   echo "--- DEBUG: changes ---<br>"                 ;
+    ;   print_a ($this->attrs)                            ;
+    ; }                                                   ;
     #######################################################
   }
 
