@@ -8,7 +8,7 @@
 			changeState('DelNfsEntId');
 			changeState('NewNfsAddId');"> 
 
-		<b>{t}Nfs Export{/t}</b>
+		<b>{t}Shares{/t}</b>
    <table summary="">
     <tr>
      <td>
