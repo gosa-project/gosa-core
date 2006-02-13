@@ -22,7 +22,7 @@ class application extends plugin
   var $applications= array();
 
   /* attribute list for save action */
-  var $attributes= array("cn", "description", "gosaApplicationExecute", "gosaApplicationName",
+  var $attributes= array("cn", "description", "gosaApplicationExecute", "gosaApplicationName","gosaApplicationIcon",
 			"gosaApplicationFlags","gotoLogonScript");
   var $objectclasses= array("top", "gosaApplication");
 
@@ -34,6 +34,7 @@ class application extends plugin
 	$ldap= $config->get_ldap_link();
 	if ($dn != 'new'){
 		$this->iconData= $ldap->get_attribute($dn, "gosaApplicationIcon");
+		$this->saved_attributes['gosaApplicationIcon'] = $this->iconData;
 	}
 	if ($this->iconData == ""){
 		$this->set_picture("");
