@@ -20,6 +20,7 @@ class acl extends plugin
   var $current_acl= "";
   var $selfflag= FALSE;
 
+	var $gosaSubtreeACL;
 
   /* attribute list for save action */
   var $attributes= array("gosaSubtreeACL");
