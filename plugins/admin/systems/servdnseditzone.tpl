@@ -1,7 +1,7 @@
 <h2>{t}Zone settings{/t}</h2>
 <table summary="" width="100%">
 	<tr>
-		<td style="width:50%;vertical-align:top;">
+		<td style="width:50%;vertical-align:top;border-right:1px	solid	#b0b0b0;">
 			<table summary="">
 				<tr>
 					<td>{t}Zone name{/t}
@@ -27,7 +27,7 @@
 <h2>{t}SOA record for this zone{/t}</h2>
 <table summary="" width="100%">
 	<tr>
-		<td style="vertical-align:top;width:50%">
+		<td style="vertical-align:top;width:50%;border-right:1px	solid	#b0b0b0;">
 			<table summary="">
 				<tr>
 					<td>{t}Primary dns server for this zone{/t}
@@ -84,7 +84,7 @@
 <br>
 <table summary="" width="100%">
 	<tr>
-		<td style="vertical-align:top;width:50%;">
+		<td style="vertical-align:top;width:50%;border-right:1px	solid	#b0b0b0;">
 			<h2>{t}Parameter{/t}</h2>
 			<table summary="">
 				<tr>

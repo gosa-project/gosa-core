@@ -69,7 +69,6 @@ class termDNS extends plugin
     $this->RecordTypes['rRSIGRecord']   = "rRSIGRecord";       // ok
     $this->RecordTypes['nSECRecord']    = "nSECRecord";        // ok 
 
-    echo $this->cn;
     /* Get all available zones */
     if(empty($this->cn)&&(isset($this->attrs['cn'][0]))){ 
       $this->cn = $this->attrs['cn'][0];
@@ -421,7 +420,7 @@ $ldap->modify ($this->attrs);
       if($type == $selected){
         $use = " selected ";
       }
-      $str.="\n <option value='".$type."' ".$use.">".$type."</option>";
+      $str.="\n <option value='".$type."' ".$use.">".strtoupper(preg_replace("/record/i","",$type))."</option>";
     }
     $str.="</select>";
     return($str); 

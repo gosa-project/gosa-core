@@ -277,7 +277,7 @@ class servdnseditZone extends plugin
       if($type == $selected){
         $use = " selected ";
       }
-      $str.="\n <option value='".$type."' ".$use.">".$type."</option>";
+      $str.="\n <option value='".$type."' ".$use.">".strtoupper(preg_replace("/record/i","",$type))."</option>";
     }
     $str.="</select>";
     return($str);
