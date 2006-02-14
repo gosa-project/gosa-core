@@ -33,7 +33,7 @@ class faiHookEntry extends plugin
         $oname = $name;
         $this->$oname=$value;
       }
-    }else{
+    }elseif(is_array($object)){
       if(count($object)){
         $this->orig_cn= $object['cn'];
         $this->dn=$object['dn'];
