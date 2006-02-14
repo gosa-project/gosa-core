@@ -336,23 +336,19 @@ class plugin
 
       /* Remove arrays that do not differ */
       if (is_array($this->attrs[$index]) && isset($this->saved_attributes[$index]) && is_array($this->saved_attributes[$index])){
-        $dst= $this->attrs[$index];
-        $src= $this->saved_attributes[$index];
-        sort($dst);
-        sort($src);
-        if (count(array_diff($src, $dst))==0 ){
+        if (count(array_diff($this->attrs[$index],$this->saved_attributes[$index]))==0 ){
           unset ($this->attrs[$index]);
           continue;
         }
       }
     }
 
-    #######################################################
-    ; if (count($this->attrs)!=0){                        ;
-    ;   echo "--- DEBUG: changes ---<br>"                 ;
-    ;   print_a ($this->attrs)                            ;
-    ; }                                                   ;
-    #######################################################
+    #######################################
+    ; if (count($this->attrs)!=0){        ;
+    ;   echo "--- DEBUG: changes ---<br>" ;
+    ;   print_a ($this->attrs)            ;
+    ; }                                   ;
+    #######################################
   }
 
   /* Check formular input */
