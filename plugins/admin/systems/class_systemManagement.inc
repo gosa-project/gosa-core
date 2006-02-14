@@ -1173,10 +1173,6 @@ class systems extends plugin
             $terminal['location'] = array_search($tmp, $this->config->departments);
             $terminal['message']  = _("Workstation template for");
           }
-        }elseif (in_array("GOhard",$value['objectClass'])){
-          $terminal = $value;
-          $terminal['type']   = "Q";
-          $terminal['is_new'] = $add;
         } elseif (in_array('gotoPrinter', $value["objectClass"])){
             $terminal             = $value;
             $terminal['type']     = "P";
@@ -1186,6 +1182,10 @@ class systems extends plugin
         } elseif (in_array('goFonHardware', $value["objectClass"])){
             $terminal             = $value;
             $terminal['type']     = "F";
+        }elseif (in_array("GOhard",$value['objectClass'])){
+          $terminal = $value;
+          $terminal['type']   = "Q";
+          $terminal['is_new'] = $add;
         } elseif (in_array('ieee802Device', $value["objectClass"])){
             $terminal             = $value;
             $terminal['type']     = "C";
