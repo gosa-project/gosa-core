@@ -33,17 +33,18 @@ class blocklist extends plugin
     /* Get global filter config */
     if (!is_global("blockfilter")){
       $ui= get_userinfo();
-      $base= get_base_from_people($ui->dn);
+      $this->base= get_base_from_people($ui->dn);
       $blockfilter= array("sendlists" => "checked",
           "receivelists" => "checked",
           "entry" => "*",
-          "depselect" => $base,
+          "depselect" => $this->base,
           "regex" => "*");
       register_global("blockfilter", $blockfilter);
     }else{
       $blockfilter = $_SESSION["blockfilter"];
       $this->base = $blockfilter['depselect'];
     }
+
     $ui= get_userinfo();
     $acl= get_permissions ($ui->dn, $ui->subtreeACL);
     $this->acl= get_module_permission($acl, "blocklists", $ui->dn);
@@ -375,7 +376,7 @@ class blocklist extends plugin
 
     /* Fill templating stuff */
     $smarty->assign("bases", $this->config->idepartments);
-    $smarty->assign("base_select", $_SESSION['blockfilter']['depselect']);//$this->base);
+    $smarty->assign("base_select", $this->base);
     $smarty->assign("types", array(0 => _("send"), 1 => _("receive")));
     if ($this->dn == "new" || preg_match ("/,ou=incoming,/", $this->dn)){
       $smarty->assign("selectmode", "");
@@ -403,7 +404,7 @@ class blocklist extends plugin
     $this->dn= "";
     $this->description= "";
     $this->cn= "";
-    $this->base= "";
+    $this->base= $_SESSION['blockfilter']['depselect'];
     $this->goFaxBlocklist= array();
   }
 
@@ -499,6 +500,10 @@ class blocklist extends plugin
   {
     plugin::save_object();
 
+    if(isset($_POST['base'])){
+      $this->base = $_POST['base'];
+    }
+ 
     foreach($this->attributes as $attr){
       if(isset($_POST[$attr])){
         $this->$attr = $_POST[$attr];
@@ -553,6 +558,7 @@ class blocklist extends plugin
   function save()
   {
     plugin::save();
+    
 
     /* Type selection */
     if ($this->type == 0){
@@ -569,14 +575,17 @@ class blocklist extends plugin
 
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
-    $ldap->cd($ldap->getParentDir($this->dn));
+    $ldap->cd($this->base);
     $ldap->search("cn=$this->cn",array("cn"));
+    $ldap->cat($this->dn);
     $a= $ldap->fetch();
+    
     if (count($a)){
       if (!isset($this->attrs["$type"."list"])){
         $this->attrs["$type"."list"]= array();
       }
       $ldap->cd($this->dn);
+      $this->cleanup();
       $ldap->modify($this->attrs);
       $this->handle_post_events("modify");
     } else {
