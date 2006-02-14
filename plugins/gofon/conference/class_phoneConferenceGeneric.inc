@@ -118,7 +118,7 @@ class conference extends plugin
     $this->config->make_idepartments();
     $smarty= get_smarty();
 
-    $smarty->assign("bases" ,array_flip($this->config->departments));
+    $smarty->assign("bases" ,$this->config->idepartments);
     $smarty->assign("base"  ,$this->base);
 
     $smarty->assign("goFonConferenceOptions",		    array("D"=>"Conference ","d"=>"Conference without PIN"));
