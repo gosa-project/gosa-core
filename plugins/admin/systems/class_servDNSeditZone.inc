@@ -153,6 +153,22 @@ class servdnseditZone extends plugin
       }
     }
 
+    if(!preg_match("/\.$/",$this->sOAprimary)){
+      $message[] = _("Primary dns server must end with '.' to be a valid entry.");
+    }
+
+    if(!preg_match("/\.$/",$this->sOAmail)){
+      $message[] = _("Your soecified mail address must end with '.' to be a valid record.");
+    }
+
+    if(preg_match("/@/",$this->sOAmail)){
+      $message[] = _("Your mail address contains '@' replace this with '.' to enable GOsa to create a valid SOA record.");
+    }
+
+    if(preg_match("/@/",$this->sOAmail)){
+      $message[] = _("Your mail address contains '@' replace this with '.' to enable GOsa to create a valid SOA record.");
+    }
+
     if($this->zoneName != strtolower($this->zoneName)){
       $message[] = _("Only lowercase strings are allowed as zone name.");
     }

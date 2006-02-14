@@ -30,19 +30,19 @@
 		<td style="vertical-align:top;width:50%;border-right:1px	solid	#b0b0b0;">
 			<table summary="">
 				<tr>
-					<td>{t}Primary dns server for this zone{/t}
+					<td>{t}Primary dns server for this zone{/t}{$must}
 					</td>
 					<td><input type="text" name="sOAprimary" value="{$sOAprimary}">
 					</td>
 				</tr>
 				<tr>
-					<td>{t}Mail address{/t}
+					<td>{t}Mail address{/t}{$must}
 					</td>
 					<td><input type="text" name="sOAmail" value="{$sOAmail}">
 					</td>
 				</tr>
 				<tr>
-					<td>{t}Serial number (automatically incremented){/t}
+					<td>{t}Serial number (automatically incremented){/t}{$must}
 					</td>
 					<td><input type="text" name="sOAserial" value="{$sOAserial}">
 					</td>
@@ -52,25 +52,25 @@
 		<td style="vertical-align:top;">
 			<table summary="">
 				<tr>
-					<td>{t}Refresh{/t}
+					<td>{t}Refresh{/t}{$must}
 					</td>
 					<td><input type="text" name="sOArefresh" value="{$sOArefresh}">
 					</td>
 				</tr>
 				<tr>
-					<td>{t}Retry{/t}
+					<td>{t}Retry{/t}{$must}
 					</td>
 					<td><input type="text" name="sOAretry" value="{$sOAretry}">
 					</td>
 				</tr>
 				<tr>
-					<td>{t}Expire{/t}
+					<td>{t}Expire{/t}{$must}
 					</td>
 					<td><input type="text" name="sOAexpire" value="{$sOAexpire}">
 					</td>
 				</tr>
 				<tr>
-					<td>{t}TTL{/t}
+					<td>{t}TTL{/t}{$must}
 					</td>
 					<td><input type="text" name="sOAttl" value="{$sOAttl}">
 					</td>
