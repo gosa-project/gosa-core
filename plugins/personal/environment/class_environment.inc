@@ -877,7 +877,6 @@ $ldap->modify ($this->attrs);
       /* Save changes */
       $ldap->cd($attr['dn']);
       unset($attr['dn']);
-      $this->cleanup();
 $ldap->modify ($attr); 
 
       if($ldap->get_error()!="Success"){
@@ -949,7 +948,6 @@ $ldap->modify ($attr);
 
       $ldap->cd($attrs['dn']);
       unset($attrs['dn']);
-      $this->cleanup();
 $ldap->modify ($attrs); 
 
       if($ldap->get_error()!="Success"){
@@ -980,7 +978,7 @@ $ldap->modify ($attrs);
     }
 
 
-    $saveThis = array("gotoProfileQuota","gotoXResolution","gotoProfileServer");
+    $saveThis = array("gotoProfileQuota","gotoXResolution","gotoProfileServer","gotoKioskProfile");
   
     foreach($saveThis as $tosave){
       if(!empty($this->$tosave)){
