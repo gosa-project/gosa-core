@@ -363,13 +363,6 @@ class plugin
         }
       }
     }
-
-    #######################################
-    ; if (count($this->attrs)!=0){        ;
-    ;   echo "--- DEBUG: changes ---<br>" ;
-    ;   print_a ($this->attrs)            ;
-    ; }                                   ;
-    #######################################
   }
 
   /* Check formular input */
