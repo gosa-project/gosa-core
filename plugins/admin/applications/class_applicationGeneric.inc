@@ -147,7 +147,7 @@ class application extends plugin
 			$smarty->assign("$val", "");
 		}
 	}
-	$smarty->assign("gotoLogonScript",htmlentities($this->gotoLogonScript));
+	$smarty->assign("gotoLogonScript",htmlentities($this->gotoLogonScript, ENT_COMPAT, 'UTF-8'));
 	$smarty->assign("base_select", $this->base);
 	$smarty->assign("gosaApplicationFlagsACL", chkacl($this->acl, "gosaApplicationFlags"));
 	/* Show main page */
