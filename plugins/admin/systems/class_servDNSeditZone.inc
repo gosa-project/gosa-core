@@ -158,7 +158,7 @@ class servdnseditZone extends plugin
     }
 
     if(!preg_match("/\.$/",$this->sOAmail)){
-      $message[] = _("Your soecified mail address must end with '.' to be a valid record.");
+      $message[] = _("Your specified mail address must end with '.' to be a valid record.");
     }
 
     if(preg_match("/@/",$this->sOAmail)){
