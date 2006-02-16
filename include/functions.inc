@@ -1845,5 +1845,25 @@ function search_config($arr, $name, $return)
   return ("");
 }
 
+
+function array_differs($src, $dst)
+{
+  /* If the count is differing, the arrays differ */
+  if (count ($src) != count ($dst)){
+    return (TRUE);
+  }
+
+  /* So the count is the same - lets check the contents */
+  $differs= FALSE;
+  foreach($src as $value){
+    if (!in_array($value, $dst)){
+      $differs= TRUE;
+    }
+  }
+
+  return ($differs);
+}
+
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

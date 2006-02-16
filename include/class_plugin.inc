@@ -317,26 +317,47 @@ class plugin
 
   }
 
+
   function cleanup()
   {
     foreach ($this->attrs as $index => $value){
 
+      /* Convert arrays with one element to non arrays, if the saved
+         attributes are no array, too */
+      if (is_array($this->attrs[$index]) && 
+          count ($this->attrs[$index]) == 1 &&
+          isset($this->saved_attributes[$index]) &&
+          !is_array($this->saved_attributes[$index])){
+          
+        $tmp= $this->attrs[$index][0];
+        $this->attrs[$index]= $tmp;
+      }
+
       /* Remove emtpy arrays if they do not differ */
-      if (is_array($this->attrs[$index]) && count($this->attrs[$index]) == 0 && !isset($this->saved_attributes[$index])){
+      if (is_array($this->attrs[$index]) &&
+          count($this->attrs[$index]) == 0 &&
+          !isset($this->saved_attributes[$index])){
+          
         unset ($this->attrs[$index]);
         continue;
       }
 
       /* Remove single attributes that do not differ */
-      if (!is_array($this->attrs[$index]) && isset($this->saved_attributes[$index])
-          && !is_array($this->saved_attributes[$index]) && $value == $this->saved_attributes[$index]){
+      if (!is_array($this->attrs[$index]) &&
+          isset($this->saved_attributes[$index]) &&
+          !is_array($this->saved_attributes[$index]) &&
+          $this->attrs[$index] == $this->saved_attributes[$index]){
+
         unset ($this->attrs[$index]);
         continue;
       }
 
       /* Remove arrays that do not differ */
-      if (is_array($this->attrs[$index]) && isset($this->saved_attributes[$index]) && is_array($this->saved_attributes[$index])){
-        if (count(array_diff($this->attrs[$index],$this->saved_attributes[$index]))==0 ){
+      if (is_array($this->attrs[$index]) && 
+          isset($this->saved_attributes[$index]) &&
+          is_array($this->saved_attributes[$index])){
+          
+        if (!array_differs($this->attrs[$index],$this->saved_attributes[$index])){
           unset ($this->attrs[$index]);
           continue;
         }
