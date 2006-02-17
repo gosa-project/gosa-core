@@ -47,7 +47,7 @@ if (isset($_SESSION['config'])){
 
 }else{
   /* Language setup */
-  if ($config->data['MAIN']['LANG'] == ""){
+  if ((!isset($config))||(empty($config->data['MAIN']['LANG']))){
     $lang= get_browser_language();
   } else {
     $lang= $config->data['MAIN']['LANG'];
