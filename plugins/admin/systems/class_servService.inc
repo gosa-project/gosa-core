@@ -226,10 +226,11 @@ class servservice extends plugin
   function save_object()
   {
     if (isset($_POST['servicetab'])){
-      plugin::save_object();
-
+      $tmp = $this->goTimeSource;
+    
       /* Save checkbox state */
       foreach ($this->additionaloc as $oc => $dummy){
+        if($oc == "goNtpServer") continue;
         if (chkacl($this->acl, $oc) == ""){
           if (isset($_POST[$oc]) && $_POST[$oc] == '1'){
             $this->objectclasses[$oc]= $oc;
@@ -252,6 +253,8 @@ class servservice extends plugin
       } else {
         $this->goShareServer = false;
       }
+      $this->goTimeSource = array();
+      $this->goTimeSource = $tmp;
     }
   }
 
