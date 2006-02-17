@@ -565,7 +565,7 @@ class workstartup extends plugin
     $this->gotoKernelParameters= "root=/dev/nfs nfsroot=".
       $this->gotoTerminalPath.
       ",ro,hard,nolock,fg,rsize=8192 ".
-      "ip=::::::dhcp LDAP=".$this->gotoLdapServer;
+      "ip=::::::dhcp ldap=".base64_encode($this->gotoLdapServer);
 
     switch ($this->bootmode){
       case "D":
