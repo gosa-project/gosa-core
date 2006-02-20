@@ -24,7 +24,7 @@ class workstartup extends plugin
 
 
   /* attribute list for save action */
-  var $attributes     = array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters", "FAIclass", "FAIstatus", "gotoShare","FAIdebianMirror");
+  var $attributes     = array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters", "FAIclass", "FAIstatus", "gotoShare","FAIdebianMirror", "FAIrelease");
   var $objectclasses  = array("GOhard", "FAIobject");
 
   /* Share */
@@ -38,6 +38,8 @@ class workstartup extends plugin
   var $orig_dn            = "";
   var $ignore_account     = TRUE;
   var $FAIdebianMirrors   = array();
+  var $FAIrelease         = "";
+  var $FAIreleases        = array();
 
   function workstartup ($config, $dn= NULL)
   {
@@ -47,12 +49,15 @@ class workstartup extends plugin
      * none will not be saved to ldap.
      */
     $this->FAIdebianMirrors   = array();
+    $this->FAIreleases        = array();
+
     $ldap   = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
     $ldap->search("(objectClass=FAIrepositoryServer)",array("FAIrepository"));
     
     /* attach all attributes with "index => cn" to avoid multiple entries */
     $ret = array();
+    $rels = array();
     while($attr = $ldap->fetch()){
       if(isset($attr['FAIrepository'])){
         
@@ -65,12 +70,20 @@ class workstartup extends plugin
             $sections = split(",",$tmp[3]);
             $str = $tmp[0];
             $ret[$str]=$sections;
+            if( array_key_exists( $str, $rels ) ) {
+              if( "" == $this->FAIrelease )
+                $this->FAIrelease = $tmp[2];
+              array_push( $rels[$str], $tmp[2] );
+            }
+            else $rels[$str] = array( $tmp[2] );
           }
         }
       }
     }
     ksort($ret);
+    ksort($rels);
     $this->FAIdebianMirrors = $ret;
+    $this->FAIreleases = $rels;
 
     /* Get arrays */
     foreach (array("gotoModules", "gotoAutoFs", "gotoFilesystem") as $val){
@@ -179,7 +192,11 @@ class workstartup extends plugin
       $tmp2 =array();  
     
       foreach($tmp as $class){
-        $tmp2[$class] = $class;
+        if( ":" == $class[0] ) {
+          $this->FAIrelease = substr( $class, 1 );
+        }
+        else
+          $tmp2[$class] = $class;
       }
       $this->FAIclass = $tmp2;
     }
@@ -220,8 +237,8 @@ class workstartup extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+  	/* Call parent execute */
+  	plugin::execute();
 
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
@@ -331,7 +348,6 @@ class workstartup extends plugin
         $this->FAIclass = $tmp2; 
       }
   
-
       if(preg_match("/fai_remove/i",$name)){
         $value = base64_decode(preg_replace("/_.*$/i","",preg_replace("/fai_remove_/i","",$name)));
         unset($this->FAIclass[$value]);
@@ -390,7 +406,7 @@ class workstartup extends plugin
     }
 
     /* Values */
-    foreach(array("gotoBootKernel", "customParameters", "gotoShare","FAIclasses","FAIclass","FAIdebianMirror") as $val){
+    foreach(array("gotoBootKernel", "customParameters", "gotoShare","FAIclasses","FAIclass","FAIdebianMirror","FAIrelease") as $val){
       $smarty->assign($val, $this->$val);
       $smarty->assign($val."ACL", chkacl($this->acl, $val));
     }
@@ -417,13 +433,15 @@ class workstartup extends plugin
       $i ++ ; 
     
       $div->AddEntry(array(
-                            array("string"=>$class),
-                            array("string"=>preg_replace("/\%s/",base64_encode($class),$str),"attach"=>"style='width:50px;border-right:none;'")
-                          ));
+                       array("string"=>$class),
+                       array("string"=>preg_replace("/\%s/",base64_encode($class),$str),"attach"=>"style='width:50px;border-right:none;'")
+                    ));
     }  
 
     $smarty->assign("FAIScriptlist",$div->DrawList()); 
     $smarty->assign("FAIdebianMirrors",$this->getFAIdebianMirrors());
+    $smarty->assign("FAIreleases",$this->getFAIreleases());
+    $smarty->assign("FAIrelease",$this->FAIrelease);
     $smarty->assign("FAIclasses",$this->selectFriendlyClasses());
     $smarty->assign("FAIclassesKeys",array_flip($this->selectFriendlyClasses()));
     $smarty->assign("FAIclassKeys",$this->FAIclass);
@@ -489,6 +507,21 @@ class workstartup extends plugin
         }
         if($allok){
           $ret[$mirr]=$mirr;
+        }
+      }
+    }
+    return($ret);
+  }
+
+  function getFAIreleases() 
+  {
+    $ret = array();
+    if(is_array($this->FAIreleases)) {
+      foreach($this->FAIreleases as $mirr=>$releases){
+        if( $this->FAIdebianMirror == $mirr ) {
+          foreach ($releases as $release) 
+            $ret[$release] = $release;
+          return($ret);
         }
       }
     }
@@ -580,11 +613,14 @@ class workstartup extends plugin
     }
 
     plugin::save();
+
+    unset( $this->attrs['FAIrelease'] );
     
     $str = "";
     foreach($this->FAIclass as $class){
       $str .= $class." ";
     }
+    $str .= ":" . $this->FAIrelease;
     $this->attrs['FAIclass']= "";
     $this->attrs['FAIclass']= trim($str);
 

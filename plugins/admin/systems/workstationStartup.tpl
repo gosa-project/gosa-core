@@ -32,13 +32,25 @@
   </td>
   
   <td style="vertical-align:top;">
-	<h2><img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;{t}FAI server{/t}</h2>
+     <table><tr>
+     <td>
+	<h2><img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;{t}FAI server{/t}</h2></td>
+     <td>
+     	<h2><img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;{t}Release{/t}</h2></td>
+     </tr><tr>
+     <td>
 		<!--<select name="FAIdebianMirror" {$FAIdebianMirrorACL} onchange="document.mainform.submit();">-->
-		<select name="FAIdebianMirror" {$FAIdebianMirrorACL}>
+		<select name="FAIdebianMirror" {$FAIdebianMirrorACL} onchange='document.mainform.submit()'>
         {html_options options=$FAIdebianMirrors output=$FAIdebianMirrors selected=$FAIdebianMirror}
         <option disabled>&nbsp;</option>
 		</select>
 		<!--<input type="submit" value="{t}set{/t}" name="refresh">-->
+     </td><td>
+	    <select name="FAIrelease" >
+		{html_options options=$FAIreleases output=$FAIreleases selected=$FAIrelease}
+		</select>
+	</td>
+     </tr></table>
 	<h2><img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;{t}Assigned FAI classes{/t}</h2>
 		{$FAIScriptlist}	
 

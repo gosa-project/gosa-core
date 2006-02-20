@@ -20,7 +20,7 @@ class acl extends plugin
   var $current_acl= "";
   var $selfflag= FALSE;
 
-	var $gosaSubtreeACL;
+  var $gosaSubtreeACL;
 
   /* attribute list for save action */
   var $attributes= array("gosaSubtreeACL");
@@ -96,7 +96,7 @@ class acl extends plugin
 	$ldap= $this->config->get_ldap_link();
 	$ldap->cd($this->dn);
 	$this->cleanup();
-$ldap->modify ($this->attrs); 
+	$ldap->modify ($this->attrs); 
 
 	show_ldap_error($ldap->get_error());
   }
@@ -115,7 +115,7 @@ $ldap->modify ($this->attrs);
 	if ($this->object == "all"){
 		$this->current_acl= preg_replace ( "/[,]?all[,]?/", "", $this->current_acl);
 	}
-	$this->current_acl= preg_replace ( "/[^a-z0-9A-Z]$this->object#[^,]*[,]?/", "", $this->current_acl);
+	$this->current_acl= preg_replace ( "/(^|[^a-z0-9A-Z])$this->object#[^,]*[,]?/", "", $this->current_acl);
 
 	/* assemble new attributes */
 	$attrs= "";
@@ -136,12 +136,12 @@ $ldap->modify ($this->attrs);
 	}
 
 	/* append information */
-	if ($this->current_acl != "" && $attrs != ""){
-		$this->current_acl.= ",";
-	}
 	if ($attrs != ""){
 		$tmp= $this->object;
 		$attrs= $tmp.$attrs;
+	}
+	if ($this->current_acl != "" && $attrs != ""){
+		$this->current_acl.= ",";
 	}
 	$this->current_acl.= $attrs;
 	if (preg_match("/all#all/", $this->current_acl)){
@@ -160,7 +160,6 @@ $ldap->modify ($this->attrs);
 	} else {
 		$this->selfflag= FALSE;
 	}
-
   }
 
 
@@ -193,7 +192,7 @@ $ldap->modify ($this->attrs);
 	/* Modify class */
 	$ldap->cd($this->dn);
 	$this->cleanup();
-$ldap->modify ($this->attrs); 
+	$ldap->modify ($this->attrs); 
 
 	show_ldap_error($ldap->get_error());
   }
