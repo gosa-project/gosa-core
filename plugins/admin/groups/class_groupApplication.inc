@@ -649,19 +649,18 @@ $ldap->modify ($this->attrs);
     /* Copy members */
     $this->Categories[""]=""; 
     $this->attrs["gosaMemberApplication"]= array();
-    $cats = array();
     foreach($this->Categories as $name => $cats){
-      $cats[$name] =0;
+      $i =0;
       if(isset($this->gosaMemberApplication[$name])){
         foreach($this->gosaMemberApplication[$name] as $entry){
           if(!preg_match("/__SEPARATOR__/",$entry['App'])){
-            $this->attrs["gosaMemberApplication"][]= $entry['App']."|".$name."|".$cats[$name];
+            $this->attrs["gosaMemberApplication"][]= $entry['App']."|".$name."|".$i;
           }
-          $cats[$name] = $cats[$name] + 1;
+          $i ++;
         }
       }
-      if(($cats[$name]==0)&&(!empty($name))){
-        $this->attrs["gosaMemberApplication"][]= "|".$name."|".$cats[$name];
+      if(($i==0)&&(!empty($name))){
+        $this->attrs["gosaMemberApplication"][]= "|".$name."|".$i;
       }
     }
 
