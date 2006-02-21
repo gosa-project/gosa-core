@@ -4,12 +4,7 @@ Target for 2.4.1:
 * Create a status-bar/-display for FAI installations 
 	(Use notes from 0.5.12.2005)
 
-* Create backend for glpi object documentation.
-	(Use notes from 0.5.12.2005)
-
 * Add online help (english/german)
-
-* Group mail is not initially add-able?
 
 * Check virenschleuder/Winstations in Admin->Systems 
 	LDAP-Fehler: Cannot modify object class (structural object class modification from 'person' to 'inetOrgPerson' not allowed)
@@ -17,8 +12,6 @@ Target for 2.4.1:
 * Add glpi pictures (Monitor/HDD ...)
 
 * Test DNS plugin. Add some more checks 
-
-* LabeledURI fix 
 
 * Phone account is not removable if the mysql database is not reachable.
   This is no real problem, but I'd like to see the hint message for it.
@@ -31,7 +24,6 @@ Target for 2.4.1:
 
 * Update the french manual ( OpenSides )
 
-* Fix Hoplug -> exeisting -> department selection ... wrong format
 
 Target for 2.5:
 ===============
