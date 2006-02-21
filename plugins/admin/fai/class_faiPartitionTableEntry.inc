@@ -379,6 +379,16 @@ class faiPartitionTableEntry extends plugin
       }      
     }
 
+    $cnt = 0;
+    foreach($this->partitions as $key => $part){
+      if($part['FAIpartitionType'] == "primary"){
+        $cnt ++ ; 
+      }
+    }
+    if($cnt > 3){
+      $message[] = _("You have more than 3 primary partition table entries in your configuration, please check your configuration twice.");
+    }
+
     return ($message);
   }
  
