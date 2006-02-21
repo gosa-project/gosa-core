@@ -1026,6 +1026,11 @@ class faiManagement extends plugin
     if(empty($name)){
       return(false);
     }
+    
+    if(in_array($name,array("fai","disk","packages","scripts","templates","hooks","variables","profiles"))){
+      return(false);
+    }
+  
     return(true);
   }
 
