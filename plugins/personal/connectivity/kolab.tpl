@@ -7,7 +7,7 @@
 <table summary="" style="width:100%">
  <tr>
   <td style="width:50%; vertical-align:top;">
-   <b><LABEL for="delegate_list">{t}Delegations{/t}"</LABEL></b><br>
+   <b><LABEL for="delegate_list">{t}Delegations{/t}</LABEL></b><br>
    <select id="delegate_list" style="width:350px; height:100px;" name="delegate_list[]" size=15 multiple>
     {html_options values=$kolabDelegate output=$kolabDelegate}
 	<option disabled>&nbsp;</option>
