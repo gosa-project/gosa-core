@@ -376,6 +376,21 @@ class posixAccount extends plugin
     /* Manage group add dialog */
     if ($this->group_dialog){
 
+      /* Get global filter config */
+      if (!is_global("groupfilter")){
+        $base= get_base_from_people($ui->dn);
+        $groupfilter= array("primarygroups" => "checked",
+            "mailgroups" => "checked",
+            "sambagroups" => "checked",
+            "appgroups" => "checked",
+            "functionalgroups" => "checked",
+            "guser" => "*",
+            "subsearch" => "",
+            "depselect" => $base,
+            "regex" => "*");
+        register_global("groupfilter", $groupfilter);
+      }
+
       /* Save data */
       $groupfilter= get_global("groupfilter");
       foreach( array("depselect", "guser", "regex") as $type){
