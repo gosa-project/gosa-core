@@ -145,7 +145,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
   }
 
   /* Check for schema file presence */
-  if(preg_match("/true/i",$config->data['MAIN']['SCHEMA_CHECK'])){
+  if( ((isset($config->data['MAIN']['SCHEMA_CHECK']))&&(preg_match("/true/i",$config->data['MAIN']['SCHEMA_CHECK'])))
+      ||  
+      (!isset($config->data['MAIN']['SCHEMA_CHECK']))){
     require_once("functions_setup.inc");
     if(!is_schema_readable($config->current['SERVER'],$config->current['ADMIN'],$config->current['PASSWORD'])){
       print_red(_("GOsa cannot retrieve information about the installed schema files. Please make sure, that this is possible."));
