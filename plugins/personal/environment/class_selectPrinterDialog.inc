@@ -42,7 +42,7 @@ class selectPrinterDialog extends plugin
       $this->regex=preg_replace("/\*\*/","*",$this->regex);
     }
 
-    $this->deplist=array_flip($this->config->departments);
+    $this->deplist=$this->config->idepartments;
 
     $smarty->assign("regexPrinter"    ,$this->regex);
     $smarty->assign("deplistPrinter"  ,$this->deplist);
