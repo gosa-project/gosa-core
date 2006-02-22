@@ -94,6 +94,8 @@ class faiManagement extends plugin
 	/* Call parent execute */
 	plugin::execute();
 
+    $_SESSION['LOCK_VARS_TO_USE'] = array("/^edit_entry$/","/^id$/","/^entry_edit_/","/^entry_delete_/");
+
 		$display 	= "";
 		$smarty 	= get_smarty();
 		$smarty->assign("BranchName","");
