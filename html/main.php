@@ -288,7 +288,6 @@ $smarty->assign ("plug", "$plug");
 
 $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
 
-
 /* React on clicks */
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
@@ -296,6 +295,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
      lock at this point globally. Plugins do not need to remove it. */
   if (isset($_POST['delete_lock']) && isset($_SESSION['dn'])){
     del_lock ($_SESSION['dn']);
+
+    /* Set old Post data */
+    if(isset($_SESSION['LOCK_VARS_USED'])){
+      foreach($_SESSION['LOCK_VARS_USED'] as $name => $value){
+        $_GET[$name]  = $value;
+        $_POST[$name] = $value;
+      } 
+    }
     sess_del ('dn');
   }
 
