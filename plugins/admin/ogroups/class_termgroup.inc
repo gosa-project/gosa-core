@@ -16,17 +16,19 @@ class termgroup extends plugin
     
     /* We're only interested in the terminal members here, evaluate
        these... */
-    for ($i= 0; $i<$this->attrs['member']['count']; $i++){
-      $member= $this->attrs['member'][$i];
-      $ldap->cat($member);
-      if (preg_match("/success/i", $ldap->error)){
-        $attrs = $ldap->fetch();
-        if (in_array("gotoTerminal", $attrs['objectClass']) ||
-            in_array("gotoWorkstation", $attrs['objectClass'])){
-          if (isset($attrs['macAddress'])){
-            $this->members[$attrs['cn'][0]]= $attrs['macAddress'][0];
-          } else {
-            $this->members[$attrs['cn'][0]]= "";
+    if(isset($this->attrs['member'])){
+      for ($i= 0; $i<$this->attrs['member']['count']; $i++){
+        $member= $this->attrs['member'][$i];
+        $ldap->cat($member);
+        if (preg_match("/success/i", $ldap->error)){
+          $attrs = $ldap->fetch();
+          if (in_array("gotoTerminal", $attrs['objectClass']) ||
+              in_array("gotoWorkstation", $attrs['objectClass'])){
+            if (isset($attrs['macAddress'])){
+              $this->members[$attrs['cn'][0]]= $attrs['macAddress'][0];
+            } else {
+              $this->members[$attrs['cn'][0]]= "";
+            }
           }
         }
       }

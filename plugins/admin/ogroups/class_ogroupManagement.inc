@@ -109,28 +109,34 @@ class ogroupManagement extends plugin
     /* Test Posts */
     foreach($_POST as $key => $val){
       // Post for delete
-      if(preg_match("/group_del.*/",$key)){
+      if(preg_match("/^group_del.*/",$key)){
         $s_action = "del";
-        $s_entry  = preg_replace("/group_".$s_action."_/i","",$key);
+        $s_entry  = preg_replace("/^group_".$s_action."_/i","",$key);
         // Post for edit
-      }elseif(preg_match("/group_edit_.*/",$key)){
+      }elseif(preg_match("/^group_edit_.*/",$key)){
         $s_action="edit";
-        $s_entry  = preg_replace("/group_".$s_action."_/i","",$key);
+        $s_entry  = preg_replace("/^group_".$s_action."_/i","",$key);
         // Post for new
-      }elseif(preg_match("/dep_back.*/i",$key)){
+      }elseif(preg_match("/^dep_back.*/i",$key)){
         $s_action="back";
-      }elseif(preg_match("/group_new.*/",$key)){
+      }elseif(preg_match("/^group_new.*/",$key)){
         $s_action="new";
-      }elseif(preg_match("/dep_home.*/i",$key)){
+      }elseif(preg_match("/^dep_home.*/i",$key)){
         $s_action="home";
-      }elseif(preg_match("/group_tplnew.*/i",$key)){
+      }elseif(preg_match("/^group_tplnew.*/i",$key)){
         $s_action="new_tpl";
-      }elseif(preg_match("/group_chgpw.*/i",$key)){
+      }elseif(preg_match("/^group_chgpw.*/i",$key)){
         $s_action="change_pw";
         $s_entry  = preg_replace("/group_chgpw_/i","",$key);
-      }elseif(preg_match("/dep_root.*/i",$key)){
+      }elseif(preg_match("/^dep_root.*/i",$key)){
         $s_action="root";
+      }elseif(preg_match("/_group_edit_/",$key)){
+        $type = preg_replace("/_group_edit_.*$/","",$key);
+        $s_action="edit";
+        $s_entry  = preg_replace("/".$type."_group_edit_/i","",$key);
+        $_POST['arg'] = $type;
       }
+
     }
     $s_entry  = preg_replace("/_.$/","",$s_entry);
 
@@ -441,7 +447,7 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
       }
       $field1 = array("string" => "<img src='images/list_ogroup.png' alt='"._("Object group")."' ".$title.">", "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)), "attach" => "style='' ".$title);
-      $field3 = array("string" => $this->convert_list($val)."&nbsp;".$mail, "attach" => "style='width:136px;'");
+      $field3 = array("string" => preg_replace("/%KEY/", $key, $this->convert_list($val))."&nbsp;".$mail, "attach" => "style='width:136px;'");
       $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:60px;border-right:0px;text-align:right;'");
 
       $divlist->AddEntry(array($field1,$field2,$field3,$field4));
@@ -480,15 +486,15 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
 
 
     $conv= array(   
-        "U" => array("select_user.png",_("User")),
-        "G" => array("select_groups.png",_("Group")),
-        "A" => array("select_application.png",_("Application")),
-        "D" => array("select_department.png",_("Department")),
-        "S" => array("select_server.png",_("Server")),
-        "F" => array("select_phone.png",_("Phone")),
-        "W" => array("select_workstation.png",_("Workstation")),
-        "T" => array("select_terminal.png",_("Terminal")),
-        "P" => array("select_printer.png",_("Printer")));
+        "U" => array("select_user.png"        ,_("User")        , "ogroup"),
+        "G" => array("select_groups.png"      ,_("Group")       , "ogroup"),
+        "A" => array("select_application.png" ,_("Application") , "ogroup"),
+        "D" => array("select_department.png"  ,_("Department")  , "ogroup"),
+        "S" => array("select_server.png"      ,_("Server")      , "ogroup"),
+        "F" => array("select_phone.png"       ,_("Phone")       , "phonequeue"),
+        "W" => array("select_workstation.png" ,_("Workstation") , "workstartup"),
+        "T" => array("select_terminal.png"    ,_("Terminal")    , "termgroup"),
+        "P" => array("select_printer.png"     ,_("Printer")     , "ogroup"));
 
     /* Assemble picture */
     $type= $input['gosaGroupObjects'][0];
@@ -497,22 +503,29 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
       $p1['pic']= $conv[$type[0]][0];
       $p1['tit']= $conv[$type[0]][1];
       $p1['alt']= $type[0];
+      $p1['lnk']= $conv[$type[0]][2];
     } else {
       $p1['pic']= "empty.png";
       $p1['tit']= "";
       $p1['alt']= "";
+      $p1['lnk']= "";//$conv[$type[0]][2];
     }
+
     if (isset($type[1])){
       $p2['pic']= $conv[$type[1]][0];
       $p2['alt']= $type[1];
       $p2['tit']= $conv[$type[1]][1];
+      $p2['lnk']= $conv[$type[1]][2];
     } else {
       $p2['pic']= "empty.png";
       $p2['alt']= "";
       $p2['tit']= "";
+      $p2['lnk']= ""; //$conv[$type[0]][2];
     }
-    $temp = "<img class='center' src='images/".$p1['pic']."' alt='".$p1['alt']."' title='".$p1['tit']."'>";
-    $temp.= "<img class='center' src='images/".$p2['pic']."' alt='".$p2['alt']."' title='".$p2['tit']."'>";
+    $temp = "<input type='image' name='".$p1['lnk']."_group_edit_%KEY' class='center' 
+              src='images/".$p1['pic']."' alt='".$p1['alt']."' title='".$p1['tit']."'>";
+    $temp.= "<input type='image' name='".$p2['lnk']."_group_edit_%KEY'class='center' 
+              src='images/".$p2['pic']."' alt='".$p2['alt']."' title='".$p2['tit']."'>";
     return ($temp);
   }
 
