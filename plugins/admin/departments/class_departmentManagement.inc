@@ -59,6 +59,8 @@ class departmentManagement extends plugin
 	/* Call parent execute */
 	plugin::execute();
 
+	$_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^dep_edit_.*/","/^dep_del_.*/");
+
 		/* Reload departments */
 		$this->config->departments	= get_departments();
 		$smarty						= get_smarty();
@@ -151,7 +153,6 @@ class departmentManagement extends plugin
 		 * The entry which will be edited is defined in $s_entry
 		 */
 		if ($s_action=="edit"){
-
 			$this->dn= $this->config->departments[trim($s_entry)];
 
 			if (($user= get_lock($this->dn)) != ""){
@@ -243,7 +244,7 @@ class departmentManagement extends plugin
          * Cancel dialog 
          */
 		if (isset($_POST['edit_cancel']) || isset($_POST['delete_cancel']) ||
-				isset($_POST['delete_department_confirm']) || isset($_POST['delete_lock'])){
+				isset($_POST['delete_department_confirm'])){
 
 			del_lock ($this->dn);
 			unset($this->depdabs);
