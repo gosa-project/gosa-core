@@ -70,8 +70,10 @@ class ogroupManagement extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+	  /* Call parent execute */
+	  plugin::execute();
+
+    $_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/");
 
     /* Prepare template */
     $smarty= get_smarty();

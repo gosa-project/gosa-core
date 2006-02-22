@@ -200,6 +200,8 @@ class plugin
   {
     # This one is empty currently. Fabian - please fill in the docu code
     $_SESSION['current_class_for_help'] = get_class($this);
+    /* Reset Lock message POST/GET check array, to prevent perg_match errors*/
+    $_SESSION['LOCK_VARS_TO_USE'] =array();
   }
 
   /* remove object from parent */

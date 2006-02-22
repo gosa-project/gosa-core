@@ -40,6 +40,7 @@ class userManagement extends plugin
     $this->config= $config;
     $this->ui= $ui;
 
+
     /* Get global filter config */
     if (!isset($_SESSION["userfilter"])){
       $base= get_base_from_people($ui->dn);
@@ -59,8 +60,12 @@ class userManagement extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
+
+    /* LOCK  MESSAGE Vars */
+    $_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^user_edit_/","/^user_del_/");
+
 
     $smarty       = get_smarty();             // Smarty instance
     $userfilter   = get_global("userfilter"); // contains Filter Settings

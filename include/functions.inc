@@ -1009,7 +1009,8 @@ function gen_locked_message($user, $dn)
     $_SESSION['LOCK_VARS_USED']  =array();
     foreach($_SESSION['LOCK_VARS_TO_USE'] as $name){
 
-      foreach($_POST as $Pname => $Pvalue){
+      if(empty($name)) continue;
+       foreach($_POST as $Pname => $Pvalue){
         if(preg_match($name,$Pname)){
           $_SESSION['LOCK_VARS_USED'][$Pname] = $_POST[$Pname];
         }
