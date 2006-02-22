@@ -115,8 +115,16 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
       if ($args == ""){
         $args= "-";
       }
-      $file= $ct['file'];
-      $line= $ct['line'];
+      if(isset($ct['file'])) {
+        $file= $ct['file'];
+      }else{
+        $file="";
+      }
+      if(isset($ct['line'])) {
+        $line= $ct['line'];
+      }else{
+        $line="";
+      }
       $color= ($index&1)?'#404040':'606060';
       $error_collector.= "<tr style='background-color:$color'><td style='padding-left:20px' width=\"30%\">"._("Trace")."[$index]: $loc</td>";
       $error_collector.= "<td>"._("File").": $file ("._('Line')." $line)</td><td width=\"10%\">"._("Type").": $type</td></tr>";
