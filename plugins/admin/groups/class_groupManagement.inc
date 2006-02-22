@@ -121,7 +121,6 @@ class groupManagement extends plugin
         $s_action="root";
       }elseif(preg_match("/_group_edit_/",$key)){
         $type = preg_replace("/_group_edit_.*$/","",$key);
-        echo $type;
         $s_action="edit";
         $s_entry  = preg_replace("/".$type."_group_edit_/i","",$key); 
         $_POST['arg'] = $type;
