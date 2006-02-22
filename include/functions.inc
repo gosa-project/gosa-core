@@ -1002,6 +1002,28 @@ function gen_locked_message($user, $dn)
   $attrs= $ldap->fetch();
   $uid= $attrs["uid"][0];
 
+//  print_a($_POST);
+//  print_a($_GET);
+
+  if((isset($_SESSION['LOCK_VARS_TO_USE']))&&(count($_SESSION['LOCK_VARS_TO_USE']))){
+    $_SESSION['LOCK_VARS_USED']  =array();
+    foreach($_SESSION['LOCK_VARS_TO_USE'] as $name){
+
+      foreach($_POST as $Pname => $Pvalue){
+        if(preg_match($name,$Pname)){
+          $_SESSION['LOCK_VARS_USED'][$Pname] = $_POST[$Pname];
+        }
+      }
+      
+      foreach($_GET as $Pname => $Pvalue){
+        if(preg_match($name,$Pname)){
+          $_SESSION['LOCK_VARS_USED'][$Pname] = $_GET[$Pname];
+        }
+      }
+    }
+    $_SESSION['LOCK_VARS_TO_USE'] =array();
+  }
+
   /* Prepare and show template */
   $smarty= get_smarty();
   $smarty->assign ("dn", $dn);
