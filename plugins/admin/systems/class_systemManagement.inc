@@ -68,6 +68,8 @@ class systems extends plugin
     /* Call parent execute */
     plugin::execute();
 
+    $_SESSION['LOCK_VARS_TO_USE'] = array("/^user_edit_/i","/^user_del_/","/^act/","/^id/");
+
     /********************
       Filter handling, check posted filter options and store them in our Session obejct
      ********************/
