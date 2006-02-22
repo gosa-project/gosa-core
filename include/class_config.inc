@@ -412,8 +412,10 @@ class config  {
 	$ldap->cd ($this->current['BASE']);
 	$ldap->search ("(objectClass=goLdapServer)");
 	while ($attrs= $ldap->fetch()){
-		for ($i= 0; $i<$attrs["goLdapBase"]["count"]; $i++){
-			$this->data['SERVERS']['LDAP'][]= $attrs["cn"][0].":".$attrs["goLdapBase"][$i];
+		if (isset($attrs["goLdapBase"])){
+			for ($i= 0; $i<$attrs["goLdapBase"]["count"]; $i++){
+				$this->data['SERVERS']['LDAP'][]= $attrs["cn"][0].":".$attrs["goLdapBase"][$i];
+			}
 		}
 	}
 
