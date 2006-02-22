@@ -98,27 +98,33 @@ class groupManagement extends plugin
     /* Test Posts */
     foreach($_POST as $key => $val){
       // Post for delete
-      if(preg_match("/group_del.*/",$key)){
+      if(preg_match("/^group_del.*/",$key)){
         $s_action = "del";
         $s_entry  = preg_replace("/group_".$s_action."_/i","",$key);
         // Post for edit
-      }elseif(preg_match("/group_edit_.*/",$key)){
+      }elseif(preg_match("/^group_edit_.*/",$key)){
         $s_action="edit";
         $s_entry  = preg_replace("/group_".$s_action."_/i","",$key);
         // Post for new
-      }elseif(preg_match("/dep_back.*/i",$key)){
+      }elseif(preg_match("/^dep_back.*/i",$key)){
         $s_action="back";
-      }elseif(preg_match("/group_new.*/",$key)){
+      }elseif(preg_match("/^group_new.*/",$key)){
         $s_action="new";
-      }elseif(preg_match("/dep_home.*/i",$key)){
+      }elseif(preg_match("/^dep_home.*/i",$key)){
         $s_action="home";
-      }elseif(preg_match("/group_tplnew.*/i",$key)){
+      }elseif(preg_match("/^group_tplnew.*/i",$key)){
         $s_action="new_tpl";
-      }elseif(preg_match("/group_chgpw.*/i",$key)){
+      }elseif(preg_match("/^group_chgpw.*/i",$key)){
         $s_action="change_pw";
         $s_entry  = preg_replace("/group_chgpw_/i","",$key);
-      }elseif(preg_match("/dep_root.*/i",$key)){
+      }elseif(preg_match("/^dep_root.*/i",$key)){
         $s_action="root";
+      }elseif(preg_match("/_group_edit_/",$key)){
+        $type = preg_replace("/_group_edit_.*$/","",$key);
+        echo $type;
+        $s_action="edit";
+        $s_entry  = preg_replace("/".$type."_group_edit_/i","",$key); 
+        $_POST['arg'] = $type;
       }
     }
     $s_entry  = preg_replace("/_.$/","",$s_entry); 
@@ -376,13 +382,37 @@ class groupManagement extends plugin
     $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
     $userimg  = "<img class='center' src='images/select_groups.png' alt='User'    title='%s'>";
 
-    // Extension images 
-    $posiximg = "<img class='center' src='images/select_groups.png'        alt='P'  title='"._("Posix")  ."'>";
-    $mailimg  = "<img class='center' src='images/mailto.png'             alt='M'  title='"._("Mail")   ."'>";
-    $sambaimg = "<img class='center' src='images/select_winstation.png'  alt='S'  title='"._("Samba")  ."'>";
-    $applimg  = "<img class='center' src='images/select_application.png' alt='A'  title='"._("Application")."'>"; 
-    $phoneimg = "<img class='center' src='images/select_phone.png'      alt='Ph' title='"._("Phone")  ."'>"; 
-    $envimg   = "<img class='center' src='images/smallenv.png'      alt='E' title='"._("Environment")  ."'>"; 
+    $actions = "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
+
+
+    /* Extension images 
+        group
+        environment
+        appgroup
+        mailgroup
+        acl
+        reference
+
+     */
+    $posiximg = "<input type='image' class='center' src='images/select_groups.png' 
+                 name='group_group_edit_%KEY%' 
+                 alt='P'  title='"._("Posix")  ."'>";
+    $mailimg  = "<input type='image' class='center' src='images/mailto.png'            
+                 name='mailgroup_group_edit_%KEY%' 
+                  alt='M'  title='"._("Mail")   ."'>";
+    $sambaimg = "<input type='image'  class='center' src='images/select_winstation.png'  
+                 name='group_group_edit_%KEY%' 
+                  alt='S'  title='"._("Samba")  ."'>";
+    $applimg  = "<input type='image'  class='center' src='images/select_application.png' 
+                 name='appgroup_group_edit_%KEY%' 
+                  alt='A'  title='"._("Application")."'>"; 
+    $phoneimg = "<input type='image'  class='center' src='images/select_phone.png'      
+                 name='group_group_edit_%KEY%' 
+                  alt='Ph' title='"._("Phone")  ."'>"; 
+    $envimg   = "<input type='image'  class='center' src='images/smallenv.png'      
+                 name='environment_group_edit_%KEY%' 
+                  alt='E' title='"._("Environment")  ."'>"; 
+
     // Space
     $empty    = "<img class='center' src='images/empty.png' style='width:16px;height:16px;' alt=''>";
 
@@ -443,7 +473,7 @@ class groupManagement extends plugin
       }      
       $field1 = array("string" => sprintf($userimg,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)), "attach" => "style='' ".$title);
-      $field3 = array("string" => $posix."&nbsp;".$enviro."&nbsp;".$mail."&nbsp;".$samba."&nbsp;".$appl."&nbsp;".$phone, "attach" => "style='width:136px;'");  
+      $field3 = array("string" => preg_replace("/%KEY%/", $key, $posix."&nbsp;".$enviro."&nbsp;".$mail."&nbsp;".$samba."&nbsp;".$appl."&nbsp;".$phone), "attach" => "style='width:136px;'");  
       $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:60px;border-right:0px;text-align:right;'");
       
       $divlist->AddEntry(array($field1,$field2,$field3,$field4));    
