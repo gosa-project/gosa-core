@@ -51,6 +51,10 @@ class applicationManagement extends plugin
 	/* Call parent execute */
 	plugin::execute();
 
+//   print_a($_POST);
+//   print_a($_GET);
+  $_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^appl_edit_/","/^appl_del_/");
+
 	  /* Save data */
 	  $appfilter    = get_global("appfilter");
 	  $smarty       = get_smarty();             // Smarty instance
