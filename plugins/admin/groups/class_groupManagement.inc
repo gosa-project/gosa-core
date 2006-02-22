@@ -59,6 +59,8 @@ class groupManagement extends plugin
   	/* Call parent execute */
   	plugin::execute();
 
+    $_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/");
+
     /* Save data */
     $groupfilter= get_global("groupfilter");
     $s_action   = "";
