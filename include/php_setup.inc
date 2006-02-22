@@ -80,7 +80,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
     $trace= debug_backtrace();
 
     /* Generate trace history */
-    for ($index= 1; $index<count($trace); $index++){
+    for ($index= 0; $index<count($trace); $index++){
       $ct= $trace[$index];
       $loc= "";
       if (isset($ct['class'])){

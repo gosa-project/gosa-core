@@ -436,13 +436,14 @@ class LDAP{
                   $attr[$key] = $attr[$key][0];
                 }
               }
-              
+
               if(isset($attr[$key]['count'])){
                 if(is_array($attr[$key])){
                   unset($attr[$key]['count']);
                 }
               }
             }
+            
             unset($attr['count']);
             unset($attr['dn']);
 
@@ -456,6 +457,13 @@ class LDAP{
         }else{
         /* If this is no department */
           foreach($attr as $key => $value){
+            $sr= ldap_read($this->cid, $this->fix($sourcedn), "(objectClass=*)", array($key));
+            $ei= ldap_first_entry($this->cid, $sr);
+            $tmp = (@ldap_get_values_len($this->cid, $ei,$key));
+            if(is_array($tmp)){
+              $attr[$key] = $tmp;
+            }
+
             if(is_numeric($key)) unset($attr[$key]);
             if(isset($attr[$key]['count'])){
               if(($attr[$key]['count']==1)&&($key!="objectClass")){
@@ -470,6 +478,7 @@ class LDAP{
           }
           unset($attr['count']);
           unset($attr['dn']);
+
  
           if($type=="branch"){
             $attr['FAIstate'] ="branch";
