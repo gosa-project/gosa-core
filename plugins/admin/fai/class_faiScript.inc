@@ -205,13 +205,21 @@ class faiScript extends plugin
     $divlist = new divSelectBox("FAIscripts");
     $img_edit = "<input type='image' src='images/edit.png'      name='editscript_%s'    title='"._("edit")."' alt='"._("edit")."'>";
     $img_remo = "<input type='image' src='images/edittrash.png' name='deletescript_%s'  title='"._("delete")."' alt='"._("delete")."'>";
+
     foreach($this->getList(true) as $key => $name){
+      
+      if(($this->SubObjects[$key]['status'] == "new") || ($this->SubObjects[$key]['dn'] == "new")){
+        $down =_("New object");
+      }else{
+        $down = "<a href='getFAIscript.php?id=".base64_encode($name['dn'])."' target='_blank'>"._("download")."</a>"; 
+      } 
+
       $divlist->AddEntry(array( array("string"=>$name['name']),
-                                array("string"=>"<a href='getFAIscript.php?id=".base64_encode($name['dn'])."' target='_blank'>download</a>"),
-                                array("string"=>str_replace("%s",base64_encode($key),$img_edit.$img_remo),"attach"=>"style='border-right: 0px;width:40px;'")));
+                                array("string"=>$down),
+                                array("string"=>str_replace("%s",base64_encode($key),$img_edit.$img_remo),
+                                      "attach"=>"style='border-right: 0px;width:40px;'")));
     }
     $smarty->assign("Entry_divlist",$divlist->DrawList());
-
     /* Divlist creation complete
      */
 
