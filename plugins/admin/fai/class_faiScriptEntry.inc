@@ -33,7 +33,7 @@ class faiScriptEntry extends plugin
         $this->$oname=$value;
       }
     }else{
-      if(count($object)){
+      if(is_array($object)&&count($object)){
         $this->orig_cn= $object['cn'];
         $this->dn=$object['dn'];
         foreach($object as $name=>$value){
