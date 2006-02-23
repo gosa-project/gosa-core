@@ -119,7 +119,7 @@ class servrepository extends plugin
       if((preg_match("/^delete_/",$name))&&(!$once)){
 
         $value = preg_replace("/delete_/","",$name);
-        $value = preg_replace("/_.$/","",$value);
+        $value = base64_decode(preg_replace("/_.*$/","",$value));
 
         if(isset($this->repositories[$value])){
           $once = true;
@@ -129,7 +129,7 @@ class servrepository extends plugin
 
       if((preg_match("/^edit_/",$name))&&(!$once)){
         $value = preg_replace("/edit_/","",$name);
-        $value = preg_replace("/_.$/","",$value);
+        $value = base64_decode(preg_replace("/_.$/","",$value));
         if(isset($this->repositories[$value])){
           $once = true;
           $obj = $this->repositories[$value];
@@ -143,7 +143,7 @@ class servrepository extends plugin
     }
 
     if((isset($_GET['act']))&&($_GET['act']=="open")&&(isset($_GET['id']))){
-      $obj = $this->repositories[$_GET['id']];
+      $obj = $this->repositories[base64_decode($_GET['id'])];
       $obj['initialy_was'] = $obj['Release'];
       $this->dialog = new servRepositorySetup($this->config,$this->dn,$obj);
       $this->dialog->acl = $this->acl;
@@ -214,9 +214,9 @@ class servrepository extends plugin
       }    
   
       $divlist->AddEntry(array(
-                              array("string"=>preg_replace("/%s/",$name,$link),"attach"=>"style='width:80px;'"),
+                              array("string"=>preg_replace("/%s/",($name),$link),"attach"=>"style='width:80px;'"),
                               array("string"=>sprintf($link,$name,_("Sections")." :".$str)),
-                              array("string"=>preg_replace("/%s/",$name,$edit.$delete),"attach"=>"style='border-right:0px;width:55px;text-align:right;'")
+                              array("string"=>preg_replace("/%s/",base64_encode($name),$edit.$delete),"attach"=>"style='border-right:0px;width:55px;text-align:right;'")
                               ));
       }
     }

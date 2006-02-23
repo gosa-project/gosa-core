@@ -559,7 +559,7 @@ class workstartup extends plugin
     }elseif(isset($this->parent->by_object['workgeneric'])){
       $this->objectclasses = array("GOhard", "FAIobject");
     }else{
-      print "unknown";
+      print "Object Type Configuration : unknown";
       exit();
     }
 
