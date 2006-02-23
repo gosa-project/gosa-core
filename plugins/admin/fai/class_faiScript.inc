@@ -209,15 +209,17 @@ class faiScript extends plugin
     foreach($this->getList(true) as $key => $name){
       
       if(($this->SubObjects[$key]['status'] == "new") || ($this->SubObjects[$key]['dn'] == "new")){
-        $down =_("New object");
+        $down = "";
       }else{
-        $down = "<a href='getFAIscript.php?id=".base64_encode($name['dn'])."' target='_blank'>"._("download")."</a>"; 
+        $down = "<a href='getFAIscript.php?id=".base64_encode($name['dn'])."' target='_blank'>
+                      <img src='images/save.png' alt='"._("Download")."' title='"._("Download")."' border=0>
+                 </a>"; 
       } 
 
       $divlist->AddEntry(array( array("string"=>$name['name']),
-                                array("string"=>$down),
+                                array("string"=>$down , "attach" => "style='width:20px;'"),
                                 array("string"=>str_replace("%s",base64_encode($key),$img_edit.$img_remo),
-                                      "attach"=>"style='border-right: 0px;width:40px;'")));
+                                      "attach"=>"style='border-right: 0px;width:50px;text-align:right;'")));
     }
     $smarty->assign("Entry_divlist",$divlist->DrawList());
     /* Divlist creation complete
