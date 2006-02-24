@@ -178,8 +178,8 @@ class faiManagement extends plugin
 		}
 
 		if($s_action=="home"){
-			$faifilter['base']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
-			$faifilter['base']=(preg_replace("/^[^,]+,/","",$faifilter['base']));
+			$faifilter['base']= get_base_from_people($this->ui->dn);
+			//$faifilter['base']=(preg_replace("/^[^,]+,/","",$faifilter['base']));
 		}
 
 		if($s_action=="back"){
