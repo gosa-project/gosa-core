@@ -227,7 +227,11 @@ class servservice extends plugin
   {
     if (isset($_POST['servicetab'])){
       $tmp = $this->goTimeSource;
-    
+  
+      if(isset($_POST['goLdapBase'])){
+        $this->goLdapBase = $_POST['goLdapBase'];
+       }
+  
       /* Save checkbox state */
       foreach ($this->additionaloc as $oc => $dummy){
         if($oc == "goNtpServer") continue;
