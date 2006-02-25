@@ -256,7 +256,7 @@ class glpiAttachmentPool extends plugin
 
     $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
       "   <input class='center' type='image' 
-      src='images/new.png' align='middle' title='"._("Create new attachment")."' 
+      src='images/fai_new_template.png' align='middle' title='"._("Create new attachment")."' 
       name='new_attach' alt='"._("New Attachment"). "'>&nbsp;".
       "</div>";
 

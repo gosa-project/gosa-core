@@ -1,3 +1,4 @@
+<h2>{t}Add/Edit manufacturer{/t}</h2>
 <table summary="" width="100%">
 	<tr>
 		<td width="50%">

@@ -193,10 +193,10 @@ class glpiPrinterAccount extends plugin
 
     /* Show tab dialog headers */
     if ($this->is_account){
-      $display= $this->show_header(_("Remove inventory service"),
+      $display= $this->show_header(_("Remove inventory"),
           _("This server has inventory features enabled. You can disable them by clicking below."));
     } else {
-      $display= $this->show_header(_("Add inventory service"),
+      $display= $this->show_header(_("Add inventory"),
           _("This server has inventory features disabled. You can enable them by clicking below."));
       return ($display);
     }

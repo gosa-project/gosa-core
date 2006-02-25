@@ -1,4 +1,4 @@
-<br>
+<h2>{t}Manage System-types{/t}</h2>
      <select name="select_type" size="12" style="width:100%">
                             {html_options values=$SystemTypeKeys output=$SystemTypes}
      </select><br>

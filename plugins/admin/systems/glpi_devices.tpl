@@ -1,5 +1,7 @@
 {if $device_type=="monitor"}
-	<h2>{t}Monitor{/t}</h2>
+	<h2><img alt="" align="middle" src="images/monitor.png" class="center">&nbsp;{t}Add/Edit monitor{/t}</h2>
+	<p class="seperator">&nbsp;</p>
+	<br>
 	<table summary="" width="100%">
 		<tr>
 			<td width="50%" style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;">
@@ -92,7 +94,9 @@
 
 {elseif $device_type=="pci"}
 
-	<h2>{t}Other devices{/t}</h2>
+        <h2><img alt="" align="middle" src="images/fai_template.png" class="center">&nbsp;{t}Add/Edit other device{/t}</h2>
+        <p class="seperator">&nbsp;</p>
+        <br>
 	<table summary="" width="100%">
 		<tr>
 			<td width="50%" style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;">
@@ -131,7 +135,9 @@
 
 {elseif $device_type=="power"}
 
-	<h2>{t}Power supply{/t}</h2>
+        <h2><img alt="" align="middle" src="images/power.png" class="center">&nbsp;{t}Add/Edit power supply{/t}</h2>
+        <p class="seperator">&nbsp;</p>
+        <br>
 	<table summary="" width="100%">
 		<tr>
 			<td width="50%" style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;">
@@ -184,7 +190,9 @@
 	</table>
 {elseif $device_type=="gfxcard"}
 
-	<h2>{t}Gfxcard{/t}</h2>
+        <h2><img alt="" align="middle" src="images/gfx_hardware.png" class="center">&nbsp;{t}Add/Edit graphic card{/t}</h2>
+        <p class="seperator">&nbsp;</p>
+        <br>
 	<table summary="" width="100%">
 		<tr>
 			<td width="50%" style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;">
@@ -238,7 +246,9 @@
 	</table>
 {elseif $device_type=="control"}
 
-	<h2>{t}Controllers{/t}</h2>
+        <h2><img alt="" align="middle" src="images/hardware.png" class="center">&nbsp;{t}Add/Edit controller{/t}</h2>
+        <p class="seperator">&nbsp;</p>
+        <br>
 	<table summary="" width="100%">
 		<tr>
 			<td width="50%" style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;">
@@ -294,7 +304,9 @@
 
 {elseif $device_type=="drive"}
 
-	<h2>{t}Drive{/t}</h2>
+        <h2><img alt="" align="middle" src="images/drives.png" class="center">&nbsp;{t}Add/Edit drive{/t}</h2>
+        <p class="seperator">&nbsp;</p>
+        <br>
 	<table summary="" width="100%">
 		<tr>
 			<td width="50%" style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;">
@@ -356,7 +368,9 @@
 	</table>
 
 {elseif $device_type=="hdd"}
-	<h2>{t}Hdd{/t}</h2>
+        <h2><img alt="" align="middle" src="images/fai_partitionTable.png" class="center">&nbsp;{t}Add/Edit harddisk{/t}</h2>
+        <p class="seperator">&nbsp;</p>
+        <br>
 	<table summary="" width="100%">
 		<tr>
 			<td width="50%" style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;">
@@ -426,7 +440,9 @@
 
 {elseif $device_type=="ram"}
 
-	<h2>{t}RAM{/t}</h2>
+        <h2><img alt="" align="middle" src="images/memory.png" class="center">&nbsp;{t}Add/Edit memory{/t}</h2>
+        <p class="seperator">&nbsp;</p>
+        <br>
 	<table summary="" width="100%">
 		<tr>
 			<td width="50%" style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;">
@@ -488,7 +504,9 @@
 	</table>
 
 {elseif $device_type=="sndcard"}
-	<h2>{t}Soundcard{/t}</h2>
+        <h2><img alt="" align="middle" src="images/snd_hardware.png" class="center">&nbsp;{t}Add/Edit sound card{/t}</h2>
+        <p class="seperator">&nbsp;</p>
+        <br>
 	<table summary="" width="100%">
 		<tr>
 			<td width="50%" style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;">
@@ -532,7 +550,10 @@
 		</tr>
 	</table>
 {elseif $device_type=="iface"}
- <h2>{t}Network interface{/t}</h2>
+    <h2><img alt="" align="middle" src="images/net_hardware.png" class="center">&nbsp;{t}Add/Edit network interface{/t}</h2>
+    <p class="seperator">&nbsp;</p>
+    <br>
+
     <table summary="" width="100%">
         <tr>
             <td width="50%" style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;">
@@ -583,7 +604,9 @@
         </tr>
     </table>
 {elseif $device_type=="processor"}
- <h2>{t}Processor{/t}</h2>
+    <h2><img alt="" align="middle" src="images/processor.png" class="center">&nbsp;{t}Add/Edit processor{/t}</h2>
+    <p class="seperator">&nbsp;</p>
+    <br>
     <table summary="" width="100%">
         <tr>
             <td width="50%" style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;">
@@ -635,7 +658,9 @@
     </table>
 
 {elseif $device_type=="moboard"}
-	<h2>{t}Motherboard{/t}</h2>
+        <h2><img alt="" align="middle" src="images/mainboard.png" class="center">&nbsp;{t}Add/Edit motherboard{/t}</h2>
+        <p class="seperator">&nbsp;</p>
+        <br>
 	<table summary="" width="100%">
 		<tr>
 			<td width="50%" style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;">
@@ -679,7 +704,9 @@
 		</tr>
 	</table>
 {elseif $device_type=="case"}
-	<h2>{t}Computer case{/t}</h2>
+        <h2><img alt="" align="middle" src="images/server.png" class="center">&nbsp;{t}Add/Edit computer case{/t}</h2>
+        <p class="seperator">&nbsp;</p>
+        <br>
 	<table summary="" width="100%">
 		<tr>
 			<td width="50%" style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;">

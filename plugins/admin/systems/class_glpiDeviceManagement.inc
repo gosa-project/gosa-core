@@ -184,8 +184,8 @@ class glpiDeviceManagement extends plugin
     $divlist->SetEntriesPerPage(0);
     $divlist->SetHeader(array(
           array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
-          array("string" => _("devices")." / "._("Departments"), "attach" => "style=''"),
-          array("string" => _("Use"), "attach" => "style='width:60px;border-right:0px;text-align:right;'" )));
+          array("string" => _("devices"), "attach" => "style=''"),
+          array("string" => _("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'" )));
 
     $edit = "<a href='?plug=".$_GET['plug']."&amp;act=edit_device&amp;id=%s'>%s</a>";
     $editdel = "<a href='?plug=".$_GET['plug']."&amp;act=edit_device&amp;id=%s'><img src='images/edit.png' alt='"._("Edit")."' border=0></a>";
@@ -208,7 +208,7 @@ class glpiDeviceManagement extends plugin
       }
 
       /* Dawn databse struckture ....*/
-      if(empty($user['comment'])) {
+      if(empty($user['comment']) && isset($user['comments'])) {
         $user['comment'] = $user['comments'];
       }
 
@@ -224,29 +224,29 @@ class glpiDeviceManagement extends plugin
       " <input class='center' type='image' align='middle' 
       src='images/monitor.png'  title='"._("New monitor")."' alt='"._("M")."' name='new_monitor'>&nbsp;".
       " <input class='center' type='image' align='middle' 
-      src='images/keyboard.png' title='"._("New mainbord")."' alt='"._("MB")."' name='new_moboard'>&nbsp;".
+      src='images/mainboard.png' title='"._("New mainbord")."' alt='"._("MB")."' name='new_moboard'>&nbsp;".
       " <input class='center' type='image' align='middle' 
-      src='mages/list_back.png' title='"._("New processor")."' alt='"._("P")."' name='new_processor'>&nbsp;".
+      src='images/processor.png' title='"._("New processor")."' alt='"._("P")."' name='new_processor'>&nbsp;".
       " <input class='center' type='image' align='middle' 
-      src='mages/list_back.png' title='"._("New case")."' alt='"._("C")."' name='new_case'>&nbsp;".
+      src='images/server.png' title='"._("New case")."' alt='"._("C")."' name='new_case'>&nbsp;".
       " <input class='center' type='image' align='middle' 
-      src='mages/list_back.png' title='"._("New network interface")."' alt='"._("NI")."' name='new_iface'>&nbsp;".
+      src='images/net_hardware.png' title='"._("New network interface")."' alt='"._("NI")."' name='new_iface'>&nbsp;".
       " <input class='center' type='image' align='middle' 
-      src='mages/list_back.png' title='"._("New ram")."' alt='"._("R")."' name='new_ram'>&nbsp;".
+      src='images/memory.png' title='"._("New ram")."' alt='"._("R")."' name='new_ram'>&nbsp;".
       " <input class='center' type='image' align='middle' 
-      src='mages/list_back.png' title='"._("New hard disk")."' alt='"._("HDD")."' name='new_hdd'>&nbsp;".
+      src='images/fai_partitionTable.png' title='"._("New hard disk")."' alt='"._("HDD")."' name='new_hdd'>&nbsp;".
       " <input class='center' type='image' align='middle' 
-      src='mages/list_back.png' title='"._("New drive")."' alt='"._("D")."' name='new_drive'>&nbsp;".
+      src='images/drives.png' title='"._("New drive")."' alt='"._("D")."' name='new_drive'>&nbsp;".
       " <input class='center' type='image' align='middle' 
-      src='mages/list_back.png' title='"._("New controller")."' alt='"._("CS")."' name='new_control'>&nbsp;".
+      src='images/hardware.png' title='"._("New controller")."' alt='"._("CS")."' name='new_control'>&nbsp;".
       " <input class='center' type='image' align='middle' 
-      src='mages/list_back.png' title='"._("New graphics card")."' alt='"._("GC")."' name='new_gfxcard'>&nbsp;".
+      src='images/gfx_hardware.png' title='"._("New graphics card")."' alt='"._("GC")."' name='new_gfxcard'>&nbsp;".
       " <input class='center' type='image' align='middle' 
-      src='mages/list_back.png' title='"._("New sound card")."' alt='"._("SC")."' name='new_sndcard'>&nbsp;".
+      src='images/snd_hardware.png' title='"._("New sound card")."' alt='"._("SC")."' name='new_sndcard'>&nbsp;".
       " <input class='center' type='image' align='middle' 
-      src='mages/list_back.png' title='"._("New power supply")."' alt='"._("PS")."' name='new_power'>&nbsp;".
+      src='images/power.png' title='"._("New power supply")."' alt='"._("PS")."' name='new_power'>&nbsp;".
       " <input class='center' type='image' align='middle' 
-      src='mages/list_back.png' title='"._("New misc device")."' alt='"._("OC")."' name='new_pci'>&nbsp;".
+      src='images/fai_template.png' title='"._("New misc device")."' alt='"._("OC")."' name='new_pci'>&nbsp;".
       "</div>";
     
     $filter= $_SESSION['glpiDeviceRegex'];

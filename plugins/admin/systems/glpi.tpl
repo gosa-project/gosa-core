@@ -60,11 +60,11 @@
 		</td>
 		<td style="border-left: 1px solid rgb(160, 160, 160); vertical-align: top; padding-right: 5px;">
 			<!--Upper right-->
-			<h2>{t}Comments{/t}</h2>
+			<h2>{t}Comment{/t}</h2>
 			<table summary="" width="100%">
 				<tr>
 					<td valign="top" colspan="2">
-						<textarea name="comments" style="width:100%;height:140px;" {$commentsACL}>{$comments}</textarea>
+						<textarea name="comments" style="width:100%;height:180px;" {$commentsACL}>{$comments}</textarea>
 					</td>
 				</tr>
 			</table>
