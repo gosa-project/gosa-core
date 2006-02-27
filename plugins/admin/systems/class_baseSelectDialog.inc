@@ -15,7 +15,7 @@ class baseSelectDialog extends MultiSelectWindow
     $this->selected_base = $config->current['BASE'];
   
     $this->SetTitle("Base");
-    $this->SetSummary(_("Please choose your prefered base"));
+    $this->SetSummary(_("Choose a base"));
     $this->SetListHeader("<div style='background:#F0F0F9;padding:5px;'>".
         " <input class='center' type='image' align='middle' src='images/list_back.png'
         title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
@@ -25,7 +25,7 @@ class baseSelectDialog extends MultiSelectWindow
         title='"._("Go to users department")."' alt='"._("Home")."' name='dep_home'>&nbsp;".
         "</div>");
 
-    $this->SetInformation(_("Step in the prefered tree and click save to use the subtree as base for the currently edited user. Or click the image on the end of each entry."));
+    $this->SetInformation(_("Step in the prefered tree and click save to use the current subtree as base. Or click the image at the end of each entry."));
 
     $this->EnableAplhabet   (true);
     $this->EnableCloseButton(true);
