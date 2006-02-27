@@ -13,3 +13,9 @@
 <input name="close_edit_type_cartridge" value="{t}Close{/t}" type="submit">
 </p>
 </div>
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+  document.mainform.cartridge_type_string.focus();
+  -->
+</script>
+

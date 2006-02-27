@@ -13,3 +13,9 @@
 <input name="close_edit_type" value="{t}Close{/t}" type="submit">
 </p>
 </div>
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+  document.mainform.type_string.focus();
+  -->
+</script>
+

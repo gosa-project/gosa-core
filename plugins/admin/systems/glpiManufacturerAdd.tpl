@@ -81,3 +81,9 @@
 	<input name="close_manufacturer" value="{t}Close{/t}" type="submit">
 </p>
 </div>
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+  document.mainform.name.focus();
+  -->
+</script>
+

@@ -106,3 +106,8 @@
 	</tr>
 </table>
 <input type="hidden" name="glpi_tpl_posted" value="1">
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+  document.mainform.type.focus();
+  -->
+</script></td></tr></table><p style="text-align:right">

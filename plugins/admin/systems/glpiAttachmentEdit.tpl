@@ -70,3 +70,9 @@
 		<input type="submit" name="CancelAttachment" 	value="{t}Cancel{/t}">
 	</p>
 </div>
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+  document.mainform.name.focus();
+  -->
+</script>
+

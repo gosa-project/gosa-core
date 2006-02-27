@@ -75,3 +75,9 @@
 		<input type="submit" name="CancelCartridge" value="{t}Cancel{/t}"><br>
 	</p>
 </div>
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+  document.mainform.name.focus();
+  -->
+</script>
+
