@@ -272,9 +272,13 @@ class user extends plugin
     }
 
     /* Base select dialog */
-    if(isset($_POST['chooseBase'])){
-      $this->dialog = new baseSelectDialog($this->config,$this->allowedBasesToMoveTo());
-      $this->dialog->setCurrentBase($this->base);
+    $once = true;
+    foreach($_POST as $name => $value){
+      if(preg_match("/^chooseBase/",$name) && $once){
+        $once = false;
+        $this->dialog = new baseSelectDialog($this->config,$this->allowedBasesToMoveTo());
+        $this->dialog->setCurrentBase($this->base);
+      }
     }
 
     /* Dialog handling */
@@ -465,7 +469,7 @@ class user extends plugin
     /* Show us the edit screen */
     @$smarty->assign("bases", $this->allowedBasesToMoveTo());
 #  $smarty->assign("bases", $this->config->idepartments);
-    $smarty->assign("base_select",      trim($this->config->idepartments[$this->base]));
+    $smarty->assign("base_select",      $this->base);
     $smarty->assign("selectmode",       chkacl($this->acl, "create"));
     $smarty->assign("certificatesACL",  chkacl($this->acl, "certificates"));
     $smarty->assign("jpegPhotoACL",     chkacl($this->acl, "jpegPhoto"));

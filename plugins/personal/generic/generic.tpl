@@ -110,13 +110,10 @@
      </td>
      <td>
       <div style="height:10px;"></div>
-		<!--
       <select id="base" size="1" name="base" {$selectmode} title="{t}Choose subtree to place user in{/t}">
        {html_options options=$bases selected=$base_select}
       </select>
-		-->
-	   {$base_select}
-	   <input type="submit" name="chooseBase" value="{t}Edit{/t}">
+	   <input type="image" name="chooseBase" src="images/folder.png">
      </td>
     </tr>
    </table>
