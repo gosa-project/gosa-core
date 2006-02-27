@@ -12,34 +12,29 @@ class servdhcp extends plugin
   var $attributes= array();
   var $objectclasses= array("whatever");
 
+  var $dialog ;
+
   function servdhcp ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
+    $this->dialog = new baseSelectDialog($config);
   }
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
-
     /* Fill templating stuff */
     $smarty= get_smarty();
     $display= "";
 
-    /* Do we need to flip is_account state? */
-    if (isset($_POST['modify_state'])){
-      $this->is_account= !$this->is_account;
+    $this->dialog->save_object(); 
+    if($this->dialog->isSelected()){
+      $base = $this->dialog->isSelected();
+    }  
+    if($this->dialog->isClosed()){
+      echo "blub";
     }
-
-    /* Show tab dialog headers */
-    if ($this->is_account){
-      $display= $this->show_header(_("Remove DHCP service"),
-          _("This server has DHCP features enabled. You can disable them by clicking below."));
-    } else {
-      $display= $this->show_header(_("Add DHCP service"),
-          _("This server has DHCP features disabled. You can enable them by clicking below."));
-      return ($display);
-    }
+    echo $base;
+    return($this->dialog->execute());
 
     $display.= $smarty->fetch(get_template_path('servdhcp.tpl', TRUE));
     return($display);

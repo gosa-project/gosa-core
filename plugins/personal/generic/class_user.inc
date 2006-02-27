@@ -76,6 +76,8 @@ class user extends plugin
   var $role= "";
   var $publicVisible= "";
 
+  var $dialog;
+
   /* variables to trigger password changes */
   var $pw_storage= "crypt";
   var $last_pw_storage= "unset";
@@ -206,8 +208,8 @@ class user extends plugin
   /* execute generates the html output for this node */
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     $smarty= get_smarty();
 
@@ -267,6 +269,27 @@ class user extends plugin
       echo "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
         _("This account has no valid GOsa extensions.")."</b>";
       return;
+    }
+
+    /* Base select dialog */
+    if(isset($_POST['chooseBase'])){
+      $this->dialog = new baseSelectDialog($this->config);
+      $this->dialog->setCurrentBase($this->base);
+    }
+
+    /* Dialog handling */
+    if(is_object($this->dialog)){
+      /* Must be called before save_object */
+      $this->dialog->save_object();
+   
+      if($this->dialog->isClosed()){
+        $this->dialog = false;
+      }elseif($this->dialog->isSelected()){
+        $this->base = $this->dialog->isSelected();
+        $this->dialog= false;
+      }else{
+        return($this->dialog->execute());
+      }
     }
 
     /* Want picture edit dialog? */
@@ -442,7 +465,7 @@ class user extends plugin
     /* Show us the edit screen */
     @$smarty->assign("bases", $this->allowedBasesToMoveTo());
 #  $smarty->assign("bases", $this->config->idepartments);
-    $smarty->assign("base_select", $this->base);
+    $smarty->assign("base_select",      trim($this->config->idepartments[$this->base]));
     $smarty->assign("selectmode",       chkacl($this->acl, "create"));
     $smarty->assign("certificatesACL",  chkacl($this->acl, "certificates"));
     $smarty->assign("jpegPhotoACL",     chkacl($this->acl, "jpegPhoto"));
