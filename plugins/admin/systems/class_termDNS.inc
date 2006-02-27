@@ -33,6 +33,8 @@ class termDNS extends plugin
   var $IPisMust = false;
   var $MACisMust= false;
 
+  var $found = false;
+
   function termDNS ($config, $dn,$objectClasses,$IPisMust = false)
   {
     /* We need to know which objectClasses are used, to store the ip/mac*/
@@ -42,6 +44,21 @@ class termDNS extends plugin
     $this->orig_dn= $dn;
  
     $this->IPisMust = $IPisMust;
+
+    /* Hide all dns specific code, if dns is not available 
+     */
+    $found = false;
+    foreach($this->config->data['TABS']['SERVTABS'] as $tab){
+      if(preg_match("/^servdns$/",$tab['CLASS'])){
+        $found = true;
+      }
+    }
+    $this->found = $found;
+    if(!$this->found){
+      $this->DNS_is_account = false;
+      return;
+    }
+
  
     /* All types with required attrs */
     $this->RecordTypes['aRecord']       = "aRecord";           // ok
@@ -135,7 +152,25 @@ class termDNS extends plugin
 	  /* Call parent execute */
     $smarty= get_smarty();
     $display= "";
+  
+    /* There is no dns available 
+     */
+    if($this->found == false){
+        
+      $smarty->assign("DNS_is_account",false);  
+      $smarty->assign("IPisMust",(($this->IPisMust)||($this->DNS_is_account)));
+    
+      /* Assign smarty all non DNs attributes */
+      foreach($this->attributes as $attr){
+        $smarty->assign($attr,$this->$attr);
+      }
 
+      $display.= $smarty->fetch(get_template_path('network.tpl', TRUE));
+      return($display);
+    }else{
+      $smarty->assign("DNS_is_account",true); 
+    }
+ 
     /* Add new empty array with status new, to our record list */
     if(isset($_POST['AddNewRecord'])){
       $this->types[]  =array("type"=>"aRecord","value"=>"","status"=>"new");

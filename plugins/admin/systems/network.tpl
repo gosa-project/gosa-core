@@ -14,6 +14,7 @@
 				</tr>
       </table> 
     </td>
+    {if $DNS_is_account==true}
 		<td	style="width:50%">
       <input type="checkbox" name="enableDNS" value="1" 
         {if $DNSAccount==true}checked{/if}
@@ -47,6 +48,7 @@
 				</tr>
 			</table>
 		</td>
+    {/if}
 	</tr>
 </table>
 <input type="hidden" name="network_tpl_posted" value="1">
