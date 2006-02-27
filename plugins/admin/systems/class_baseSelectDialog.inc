@@ -7,13 +7,18 @@ class baseSelectDialog extends MultiSelectWindow
 //  var $Doesnothing          = ""; // Checkbox which does nothing 
 
   var $selectedBase         = false;  // used to specify the selected base, 
-                                      // false if none is selected 
-  function baseSelectDialog ($config)
+                                      // false if none is selected
+
+  var $allowedBases         = array();
+ 
+  function baseSelectDialog ($config,$onlyAllowThisBases = array())
   {
     MultiSelectWindow::MultiSelectWindow($config);
     
     $this->selected_base = $config->current['BASE'];
   
+    $this->allowedBases  = $onlyAllowThisBases;
+
     $this->SetTitle("Base");
     $this->SetSummary(_("Choose a base"));
     $this->SetListHeader("<div style='background:#F0F0F9;padding:5px;'>".
@@ -67,9 +72,16 @@ class baseSelectDialog extends MultiSelectWindow
     /* Add departments, to be able to switch into them
      */
     while($attrs = $ldap->fetch()){
-  
+ 
       $key = $attrs['dn']  ;
       $val = $attrs['ou'][0];
+    
+      if(count($this->allowedBases) != 0){
+        if(!isset($this->allowedBases[$key])){
+          continue;
+          break;
+        }
+      }
  
       /* Append description */ 
       if(isset($attrs['description'][0])){

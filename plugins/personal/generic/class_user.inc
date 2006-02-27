@@ -273,7 +273,7 @@ class user extends plugin
 
     /* Base select dialog */
     if(isset($_POST['chooseBase'])){
-      $this->dialog = new baseSelectDialog($this->config);
+      $this->dialog = new baseSelectDialog($this->config,$this->allowedBasesToMoveTo());
       $this->dialog->setCurrentBase($this->base);
     }
 
@@ -1188,13 +1188,17 @@ class user extends plugin
       $ldap->search("(&(objectClass=posixGroup)(memberUid=".$_SESSION['ui']->username."))",array("gosaSubtreeACL"));
        
       while($attrs = $ldap->fetch()){
-        foreach($attrs['gosaSubtreeACL'] as $attr){
-          if((preg_match("/:user#/",$attr))||(preg_match("/:all/",$attr))){
-            $s =  preg_replace("/^.*ou=groups,/","",$attrs['dn']);
+    
+        if(isset($attrs['gosaSubtreeACL'])){
+        
+          foreach($attrs['gosaSubtreeACL'] as $attr){
+            if((preg_match("/:user#/",$attr))||(preg_match("/:all/",$attr))){
+              $s =  preg_replace("/^.*ou=groups,/","",$attrs['dn']);
 
-            foreach($this->config->idepartments as $key => $dep) {
-              if(preg_match("/".$s."/i",$key)){
-                $allowed[$key] = $dep;
+              foreach($this->config->idepartments as $key => $dep) {
+                if(preg_match("/".$s."/i",$key)){
+                  $allowed[$key] = $dep;
+                }
               }
             }
           }
