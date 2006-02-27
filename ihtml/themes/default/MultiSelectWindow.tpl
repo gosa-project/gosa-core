@@ -17,18 +17,18 @@
   			</div>
   		</td>
   		<td style="vertical-align:top;">
-   			<div class="contentboxh" style="border-bottom:1px solid #B0B0B0;height:22px;">
+   			<div class="contentboxh" style="border-bottom:1px solid #B0B0B0;height:20px;">
     			<p class="contentboxh">
-					<img src="{$infoimage}" align="right" alt="[i]">{t}Information{/t}
+					<img src="{$infoimage}" align="right" alt="[i]"><font style='font-size:13px;'>{t}Information{/t}</font>
 				</p>
    			</div>
    			<div class="contentboxb" style="padding:5px;">
 				{$Information}
    			</div>
    			<br>
-   			<div class="contentboxh" style="height:22px;">
+   			<div class="contentboxh" style="height:20px;">
     			<p class="contentboxh">
-					<img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}
+					<img src="{$launchimage}" align="right" alt="[F]"><font style='font-size:13px;'>{t}Filters{/t}</font>
 				</p>
    			</div>
 			<div class="contentboxb">
