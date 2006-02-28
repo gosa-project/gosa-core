@@ -111,7 +111,7 @@ class baseSelectDialog extends MultiSelectWindow
       $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", 
                       "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($link,base64_encode($key),$val), "attach" => "style=''");
-      $field3 = array("string" => sprintf("&nbsp;<input type='image' img src='images/save.png' name='usebase_%s'>",base64_encode($key)), 
+      $field3 = array("string" => sprintf("&nbsp;<input title='"._("Select this base")."' type='image' img src='images/save.png' name='usebase_%s'>",base64_encode($key)), 
                       "attach" => "style='width:50px;border-right:0px;text-align:right;'");
       $this->AddElement(array($field1,$field2,$field3));
     }
