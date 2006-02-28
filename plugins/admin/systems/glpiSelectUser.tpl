@@ -19,10 +19,8 @@
    <div class="contentboxh" style="border-bottom:1px solid #B0B0B0;height:20px;">
     <p class="contentboxh" style="font-size:12px;"><img src="{$infoimage}" align="right" alt="[i]">{t}Information{/t}</p>
    </div>
-   <div class="contentboxb">
-   <p class="contentboxb">
+   <div class="contentboxb" style="padding:5px;">
     {t}This dialog allows you to select a user as technical responsible person.{/t}
-   </p>
    </div>
    <br>
    <div class="contentboxh" style="height:20px;">

@@ -19,10 +19,8 @@
    <div class="contentboxh" style="border-bottom:1px solid #B0B0B0;height:20px;" >
     <p class="contentboxh" style="font-size:12px;"><img src="{$infoimage}" align="right" alt="[i]">{t}Information{/t}</p>
    </div>
-   <div class="contentboxb">
-   <p class="contentboxb">
+   <div class="contentboxb" style="padding:5px;">
     {t}This dialog allows you to create new types of cartridges, and select one or more types for your printer. Cartridge types depends on the printer type you have selected. For each selected cartridge type there will be a new cartridge created, this allows you to select the same cartridge type for more then one printer.{/t}
-   </p>
    </div>
    <br>
    <div class="contentboxh" style="height:20px;">
