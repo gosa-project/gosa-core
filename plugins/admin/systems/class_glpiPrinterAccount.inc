@@ -39,6 +39,9 @@ class glpiPrinterAccount extends plugin
   var $contact            = "";    // Empty
   var $deleted            = "N";   // Deleted entries should have this set to Y
 
+  var $rename             = false;
+  var $select_type        ;
+
   var $editManufacturer   = false;
 
   /* Not necessary, cause we use mysql databse */
@@ -207,6 +210,29 @@ class glpiPrinterAccount extends plugin
      *  Dialog 
      */
 
+    /* Rename was requested */
+    if(isset($_POST['Rename_PType_OK'])){
+      $tmp = $this->handle->getPrinterTypes();
+      $allok = true;
+      foreach($tmp as $id => $name){
+        if(trim($name) == trim($_POST['string'])){
+          $allok = false;
+        }
+      }
+      if($allok){
+        $this->handle->updatePrinterType($_POST['string'],$this->select_type);
+        $this->rename = false;
+      }else{
+        print_red(sprintf(_("Can't rename given printer type to '%s', because this type name already exists."),$_POST['string']));
+      }
+    }
+
+    /* abort rename 
+     */
+    if(isset($_POST['Rename_Cancel'])){
+      $this->rename = false;
+    }
+
     /* Printer type management
      */
     if(isset($_POST['edit_type'])){
@@ -257,25 +283,30 @@ class glpiPrinterAccount extends plugin
 
     /* Rename selected printer type to given string
      */
-    if((isset($_POST['rename_type']))&&(!empty($_POST['select_type']))&&(!empty($_POST['type_string']))){
+    if((isset($_POST['rename_type']))&&(!empty($_POST['select_type']))||($this->rename)){
+      $this->rename = true;
+
+      $smarty->assign("Method","rename");
+
       $tmp = $this->handle->getPrinterTypes();
-      $allok = true;
-      foreach($tmp as $id => $name){
-        if(trim($name) == trim($_POST['type_string'])){
-          $allok = false;
-        }
+
+      if(isset($_POST['select_type'])){
+        $this->select_type = $_POST['select_type'];
+      }  
+      $smarty->assign("string",$tmp[$this->select_type]);
+      if(isset($_POST['string'])){
+        $smarty->assign("string",$_POST['string']);
       }
-      if($allok){
-        $this->handle->updatePrinterType($_POST['type_string'],$_POST['select_type']);
-      }else{
-        print_red(sprintf(_("Can't rename given printer type to '%s', because this type name already exists."),$_POST['type_string']));
-      }
-    }
+
+      $display= $smarty->fetch(get_template_path('glpi_edit_printer_type.tpl', TRUE));
+      return($display);
+    }  
 
     /* Someone wants to edit the printer types ... 
        So, lets open a new dialog which provides some buttons to edit the types
      */
     if($this->edit_type){
+      $smarty->assign("Method","edit");
       $smarty->assign("PrinterTypes",            $this->handle->getPrinterTypes());
       $smarty->assign("PrinterTypeKeys",         array_flip($this->handle->getPrinterTypes()));
       $display= $smarty->fetch(get_template_path('glpi_edit_printer_type.tpl', TRUE));
