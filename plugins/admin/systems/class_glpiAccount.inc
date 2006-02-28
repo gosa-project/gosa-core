@@ -36,6 +36,10 @@ class glpiAccount extends plugin
   var $FK_glpi_enterprise = 0;     // Manufacturer id
   var $deleted            = "N";   // Deleted entries should have this set to Y
 
+  var $renameTypeDialog   = false;
+  var $renameOSDialog     = false;
+  var $select_type        ;
+  
   /* Not necessary, cause we use mysql databse */
   var $objectclasses= array("whatever");
 
@@ -275,6 +279,11 @@ class glpiAccount extends plugin
       $this->dialog = false;
     }
 
+    if(isset($_POST['Rename_Cancel'])){
+      $this->renameTypeDialog = false;
+      $this->renameOSDialog = false;
+    }
+
     /* This appends a new system to our sytem types
      */
     if((isset($_POST['add_type']))&&(!empty($_POST['type_string']))){
@@ -308,19 +317,40 @@ class glpiAccount extends plugin
 
     /* Rename selected system type to given string
      */
-    if((isset($_POST['rename_type']))&&(!empty($_POST['select_type']))&&(!empty($_POST['type_string']))){
+    if(isset($_POST['Rename_type_OK'])){
       $attr = $this->handle->getSystemTypes();
-      if(in_array(trim($_POST['type_string']),$attr)){
+      if(in_array(trim($_POST['string']),$attr)){
         print_red(_("Rename failed, this system type name is already used.")) ;
       }else{
-        $this->handle->updateSystemType($_POST['type_string'],trim($_POST['select_type']));
+        $this->renameTypeDialog = false;
+        $this->handle->updateSystemType($_POST['string'],trim($this->select_type));
       }
     }
+    
+  
+    if((isset($_POST['rename_type'])&&(!empty($_POST['select_type'])))||($this->renameTypeDialog)){
+      if(isset($_POST['select_type'])){
+        $this->select_type = $_POST['select_type'];
+      }
+      $this->renameTypeDialog = true;
+      $tmp = $this->handle->getSystemTypes();
+       
+      $smarty->assign("string",$tmp[$this->select_type]);
+      if(isset($_POST['string'])){
+        $smarty->assign("string",$_POST['string']);
+      }
+      $smarty->assign("Method","rename");
+      $display= $smarty->fetch(get_template_path('glpi_edit_type.tpl', TRUE));
+      return($display);
+    }
+
+    
 
     /* Someone wants to edit the system types ... 
        So, lets open a new dialog which provides some buttons to edit the types
      */
     if($this->edit_type){
+      $smarty->assign("Method","edit");
       $smarty->assign("SystemTypes",            $this->handle->getSystemTypes());
       $smarty->assign("SystemTypeKeys",         array_flip($this->handle->getSystemTypes()));
       $display= $smarty->fetch(get_template_path('glpi_edit_type.tpl', TRUE));
@@ -377,23 +407,42 @@ class glpiAccount extends plugin
 
     /* Rename selected os to given string
      */
-    if((isset($_POST['rename_os']))&&(!empty($_POST['select_os']))&&(!empty($_POST['is_string']))){
+    if(isset($_POST['Rename_os_OK'])){
       $attr = $this->handle->getOSTypes();
-      if(in_array(trim($_POST['is_string']),$attr)){
+      if(in_array(trim($_POST['string']),$attr)){
         print_red(_("Updating operating system failed, specifed name is already used.")) ;
       }else{
-        $this->handle->updateOS($_POST['is_string'],$_POST['select_os']);
+        $this->handle->updateOS($_POST['string'],$this->select_type);
+        $this->renameOSDialog = false;
       }
+    }
+    if((isset($_POST['rename_os'])&&(!empty($_POST['select_os'])))||($this->renameOSDialog)){
+      if(isset($_POST['select_os'])){
+        $this->select_type = $_POST['select_os'];
+      }
+      $this->renameOSDialog = true;
+      $tmp = $this->handle->getOSTypes();
+       
+      $smarty->assign("string",$tmp[$this->select_type]);
+      if(isset($_POST['string'])){
+        $smarty->assign("string",$_POST['string']);
+      }
+      $smarty->assign("Method","rename");
+      $display= $smarty->fetch(get_template_path('glpi_edit_os.tpl', TRUE));
+      return($display);
     }
 
     /* Open dialog to edit os types 
      */
     if($this->edit_os){
-      $smarty->assign("OSKeys",                 array_flip($this->handle->getOSTypes()));
-      $smarty->assign("OSs",                    $this->handle->getOSTypes());
+      $smarty->assign("Method","edit");
+      $smarty->assign("OSs",            $this->handle->getOSTypes());
+      $smarty->assign("OSKeys",         array_flip($this->handle->getOSTypes()));
       $display= $smarty->fetch(get_template_path('glpi_edit_os.tpl', TRUE));
       return($display);
     }
+
+
 
     /* Show dialog to select a new contact person
      * Select a contact person
