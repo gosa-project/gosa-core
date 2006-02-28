@@ -22,7 +22,7 @@
 			   <select size="1" name="base" title="{t}Choose subtree to place terminal in{/t}">
 				{html_options options=$bases selected=$base_select}
 			   </select>
-				<input type="image" name="chooseBase" src="images/folder.png" class="center">
+				<input type="image" name="chooseBase" src="images/folder.png" class="center" title="{t}Select a base{/t}">
 			  </tr>
 			</table>
 		</td>
