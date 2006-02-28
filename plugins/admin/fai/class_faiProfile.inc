@@ -52,7 +52,7 @@ class faiProfile extends plugin
       }
     }
 
-    $categories = array("FAIscript","FAItemplate","FAIhook","FAIvariable","FAIpartitionTable","FAIpackage");
+    $categories = array("FAIscript","FAItemplate","FAIhook","FAIvariable","FAIpartitionTable","FAIpackageList");
 
     /* Build filter */
     $filter= "";
@@ -276,7 +276,7 @@ class faiProfile extends plugin
     $objTypes['FAItemplate']        = "<img src='images/fai_template.png' title='"._("Template bundle")."' alt=''>";
     $objTypes['FAIscript']          = "<img src='images/fai_script.png' title='"._("Script bundle")."' alt=''>";
     $objTypes['FAIvariable']        = "<img src='images/fai_variable.png' title='"._("Variable bundle")."' alt=''>";
-    $objTypes['FAIpackages']        = "<img src='images/fai_packages.png' title='"._("Packages bundle")."' alt=''>";
+    $objTypes['FAIpackageList']        = "<img src='images/fai_packages.png' title='"._("Packages bundle")."' alt=''>";
     $objTypes['FAIpartitionTable']  = "<img src='images/fai_partitionTable.png' title='"._("Partition table")."' alt=''>";
 
     /* Delete button */
