@@ -88,7 +88,9 @@ function keyPress(DnEvents) {
 }
 
 function changeState(myField) {
-  document.getElementById(myField).disabled=(document.getElementById(myField).disabled)?false:true;
+	if(document.getElementById(myField) != null){
+	  document.getElementById(myField).disabled=(document.getElementById(myField).disabled)?false:true;
+	}
 }
 
 function setHidden(str) {

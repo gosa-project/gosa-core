@@ -15,7 +15,7 @@
       </table> 
     </td>
     {if $DNS_is_account==true}
-		<td	style="width:50%">
+		<td	style="width:50%;vertical-align:top;" valign="top">
       <input type="checkbox" name="enableDNS" value="1" 
         {if $DNSAccount==true}checked{/if}
         onClick="
