@@ -61,6 +61,7 @@
 <div>
 	<input type="file" name="ImportFile">&nbsp;
 	<input type="submit" name="ImportUpload" value="{t}Import script{/t}">
+	{$DownMe}
 </div>
 <br>
 <div style="align:right;" align="right">

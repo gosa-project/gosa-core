@@ -37,12 +37,15 @@
 				<table width="100%" summary=''>
 				<tr>
 					<td>
+						{$Entry_divlist}
+						<!--
 						<select name="SubObject[]" title="{t}Choose a hook to delete or edit{/t}" style="width:100%" size="20" id="SubObject" multiple>
 							{html_options values=$SubObjectKeys output=$SubObjects}
 						</select><br>
-						<input type="submit" name="AddSubObject"     value="{t}Add{/t}"		title="{t}Add{/t}">
 						<input type="submit" name="EditSubObject"    value="{t}Edit{/t}"    title="{t}Edit{/t}">
 						<input type="submit" name="DelSubObject"     value="{t}Delete{/t}"  title="{t}Delete{/t}">
+						-->
+						<input type="submit" name="AddSubObject"     value="{t}Add{/t}"		title="{t}Add{/t}">
 					</td>
 				</tr>
 				</table>

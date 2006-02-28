@@ -100,6 +100,32 @@ class faiHook extends plugin
     $smarty= get_smarty();
     $display= "";
 
+    /* New Listhandling
+     */
+    $once = true;
+    foreach($_POST as $name => $value){
+      if(preg_match("/^editscript_/",$name)&&($once)){
+        $once = false;
+        $entry = preg_replace("/^editscript_/","",$name);
+        $entry = base64_decode(preg_replace("/_.*/","",$entry));
+        $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$entry]);
+        $_SESSION['objectinfo'] = $this->SubObjects[$entry]['dn'];
+        $this->dialog->parent = &$this;
+        $this->is_dialog=true;
+      }
+      if(preg_match("/^deletescript_/",$name)&&($once)){
+        $once = false;
+        $entry = preg_replace("/^deletescript_/","",$name);
+        $entry = base64_decode(preg_replace("/_.*/","",$entry));
+        if($this->SubObjects[$entry]['status'] == "edited"){
+          $this->SubObjects[$entry]['status']= "delete";
+        }else{
+          unset($this->SubObjects[$entry]);
+        }
+      }
+    }
+    ///// Ende new list handling
+
     /* Add new sub object */
     if(isset($_POST['AddSubObject'])){
       $this->dialog= new $this->subClassName($this->config,"new");
@@ -194,6 +220,37 @@ class faiHook extends plugin
       return($display);
     }
 
+
+    
+    /* Divlist            added 28.02.2006
+       Containing FAIscripts
+     */
+    $divlist = new divSelectBox("FAIhooks");
+    $img_edit = "<input type='image' src='images/edit.png'      name='editscript_%s'    title='"._("edit")."' alt='"._("edit")."'>";
+    $img_remo = "<input type='image' src='images/edittrash.png' name='deletescript_%s'  title='"._("delete")."' alt='"._("delete")."'>";
+
+    foreach($this->getList(true) as $key => $name){
+
+      if(($this->SubObjects[$key]['status'] == "new") || ($this->SubObjects[$key]['dn'] == "new")){
+        $down = "";
+      }else{
+        $down = "<a href='getFAIscript.php?id=".base64_encode($name['dn'])."' target='_blank'>
+                      <img src='images/save.png' alt='"._("Download")."' title='"._("Download")."' border=0>
+                 </a>";
+      }
+
+      $divlist->AddEntry(array( array("string"=>$name['name']),
+                                array("string"=>$down , "attach" => "style='width:20px;'"),
+                                array("string"=>str_replace("%s",base64_encode($key),$img_edit.$img_remo),
+                                      "attach"=>"style='border-right: 0px;width:50px;text-align:right;'")));
+    }
+    $smarty->assign("Entry_divlist",$divlist->DrawList());
+    /* Divlist creation complete
+     */
+
+
+
+
     $smarty->assign("SubObjects",$this->getList());
     $smarty->assign("SubObjectKeys",array_flip($this->getList()));
 
@@ -214,19 +271,29 @@ class faiHook extends plugin
 
   /* Generate listbox friendly SubObject list
   */
-  function getList(){
+  function getList($use_dns=false){
     $a_return=array();
     foreach($this->SubObjects as $obj){
       if($obj['status'] != "delete"){
-        if((isset($obj['description']))&&(!empty($obj['description']))){
-          $a_return[$obj['cn']]= $obj['cn']." [".$obj['description']."]";
+        if($use_dns){
+          if((isset($obj['description']))&&(!empty($obj['description']))){
+            $a_return[$obj['cn']]['name']= $obj['cn']." [".$obj['description']."]";
+          }else{
+            $a_return[$obj['cn']]['name']= $obj['cn'];
+          }
+          $a_return[$obj['cn']]['dn']= $obj['dn'];
         }else{
-          $a_return[$obj['cn']]= $obj['cn'];
+          if((isset($obj['description']))&&(!empty($obj['description']))){
+            $a_return[$obj['cn']]= $obj['cn']." [".$obj['description']."]";
+          }else{
+            $a_return[$obj['cn']]= $obj['cn'];
+          }
         }
       }
     }
     return($a_return);
   }
+
 
   /* Delete me, and all my subtrees
    */

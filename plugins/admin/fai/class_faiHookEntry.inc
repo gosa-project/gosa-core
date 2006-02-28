@@ -71,6 +71,15 @@ class faiHookEntry extends plugin
       }
     }
 
+    /* Create download button*/
+    if($this->dn != "new"){
+      $smarty->assign("DownMe","<a href='getFAIscript.php?id=".base64_encode($this->dn)."' target='_blank'>
+        <input type='button' value='"._("Download")."'>
+        </a>");
+    }else{
+      $smarty->assign("DownMe","");  
+    }
+
     $used_tasks = $this->parent->getUsedFAItask($this->cn);
     $tasks = $this->tasks;
     foreach($this->tasks as $id => $task){
