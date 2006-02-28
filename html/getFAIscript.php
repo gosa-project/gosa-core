@@ -28,6 +28,12 @@ restore_error_handler();
   $ei= ldap_first_entry($ldap->cid, $sr);
   $tmp = ldap_get_values_len($ldap->cid, $ei,"FAIscript");
   $tmp2 = $ldap->fetch();
+
+  if(in_array("FAIhookEntry",$tmp2['objectClass'])){
+    $suff = ".FAIhook";
+  }else{
+    $suff = ".FAIscript";
+  }
   $name= $tmp2['cn'][0];
 
   if(isset($tmp[0])){
@@ -37,7 +43,7 @@ restore_error_handler();
     header("Pragma: no-cache");
     header("Cache-Control: post-check=0, pre-check=0");
     header("Content-type: application/octet-stream");
-    header("Content-Disposition: attachment; filename=".$name.".FAIscript");
+    header("Content-Disposition: attachment; filename=".$name.$suff);
     echo $tmp[0];
   }else{
     echo sprintf("Can't query for this item '%s'",$id);
