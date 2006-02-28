@@ -34,7 +34,7 @@ class group extends plugin
   var $group_dialog= FALSE;
   var $nagios_group =FALSE;
   var $sambaGroupType;
-
+  var $dialog;
 
   /* attribute list for save action */
   var $attributes= array("cn", "description", "gidNumber","memberUid","sambaGroupType","sambaSID");
@@ -201,7 +201,32 @@ class group extends plugin
       $this->reload();
     }
 
-    /* Assign templating stuff */
+    /* Base select dialog */
+    $once = true;
+    foreach($_POST as $name => $value){
+      if(preg_match("/^chooseBase/",$name) && $once){
+        $once = false;
+        $this->dialog = new baseSelectDialog($this->config);
+        $this->dialog->setCurrentBase($this->base);
+      }
+    }
+
+    /* Dialog handling */
+    if(is_object($this->dialog)){
+      /* Must be called before save_object */
+      $this->dialog->save_object();
+
+      if($this->dialog->isClosed()){
+        $this->dialog = false;
+      }elseif($this->dialog->isSelected()){
+        $this->base = $this->dialog->isSelected();
+        $this->dialog= false;
+      }else{
+        return($this->dialog->execute());
+      }
+    }
+
+   /* Assign templating stuff */
     $smarty= get_smarty();
     if ($this->samba3){
       $smarty->assign("samba3", "true");
