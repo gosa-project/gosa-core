@@ -40,8 +40,8 @@ class baseSelectDialog extends MultiSelectWindow
     $this->SetCloseButtonString(_("Cancel"));
 
     $this->AddHeader(array("string"=>"&nbsp;","attach"=>"style='width:20px;'"));
-    $this->AddHeader(array("string"=>"Base"));
-    $this->AddHeader(array("string"=>"Option","attach"=>"style='width:50px;border-right:0px;'"));
+    $this->AddHeader(array("string"=>_("Base")));
+    $this->AddHeader(array("string"=>_("Action"),"attach"=>"style='width:50px;border-right:0px;'"));
 
     /*                  Text        ,Value    ,Name         ,Is selected */
 //  $this->AddCheckBox("Doesnothing","servers","Doesnothing",true);
