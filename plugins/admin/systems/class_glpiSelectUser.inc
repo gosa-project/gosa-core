@@ -39,6 +39,10 @@ class glpiSelectUser extends plugin
     /* Call parent execute */
     plugin::execute();
 
+    if(isset($_POST['depselect'])){
+      $_SESSION['glpi_user_filter']['base'] = $_POST['depselect'];
+    }
+
     $filter = $_SESSION['glpi_user_filter'];
 
     /* Filter settings, remove double* */
@@ -139,6 +143,18 @@ class glpiSelectUser extends plugin
       
     }
 
+     /* Prepare departments,
+       which are shown in the listbox on top of the listbox
+     */
+    $options= "";
+    foreach ($this->config->idepartments as $key => $value){
+      if ($_SESSION['glpi_user_filter']['base'] == $key){
+        $options.= "<option selected='selected' value='$key'>$value</option>";
+      } else {
+        $options.= "<option value='$key'>$value</option>";
+      }
+    }
+
     $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
       " <input class='center' type='image' align='middle' 
       src='images/list_back.png' title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
@@ -146,6 +162,10 @@ class glpiSelectUser extends plugin
       align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
       " <input class='center' type='image' align='middle' 
       src='images/list_home.png' title='"._("Go to users department")."' alt='"._("Home")."' name='dep_home'>&nbsp;".
+" <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;"._("Base")."&nbsp;".
+    " <select name='depselect' onChange='mainform.submit()' class='center'>$options</select>".
+    " <input class='center' type='image' src='images/list_submit.png' align='middle'
+        title='"._("Submit department")."' name='submit_department' alt='".           _("Submit")."'>&nbsp;".
       "</div>";
 
 
