@@ -27,7 +27,7 @@
                 ">
       {t}Enable DNS for this device{/t}
       <input type="submit" name="reloadThisDNSStuff" value="{t}Refresh{/t}">
-    
+      <div style="padding-left:20px;">  
 			<table	summary="" id="test2">
 				<tr>
 					<td><LABEL	for="zoneName">{t}Zone{/t}</LABEL></td>
@@ -49,6 +49,7 @@
             </td>
 				</tr>
 			</table>
+      </div>
 		</td>
        {if $DNSAccount != true}
         <script language="javascript">
