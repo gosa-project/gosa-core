@@ -28,7 +28,7 @@ class environment extends plugin
   var $gotoProfileFlags   = "";     // Flags enabled  ? only used to set ACL and save 
   var $gotoProfileFlag_C  = "";     // Flag is set to C if we have the profile caching fucntion enabled 
   
-  var $gotoXResolution    = "1024x768";     // The selected resolution eg: 1024x768
+  var $gotoXResolution    = "auto";     // The selected resolution eg: 1024x768
   var $gotoXResolutions   = array();// Contains all available resolutions for this account
   var $gotoProfileFlag_L  = "";     // Flag is set to L to enable runtime resolution change 
   var $gotoProfileQuota   = "";     // User Quota Settings
@@ -376,9 +376,16 @@ class environment extends plugin
       $smarty->assign("gotoProfileFlag_CCHK"," checked ");
     }
 
-    $this->gotoXResolutions = array("640x480","800x600","1024x768","1280x768","1280x1024");
+    $this->gotoXResolutions = array("auto"=>_("auto"),
+                                    "640x480"   =>  "640x480",
+                                    "800x600"   =>  "800x600",
+                                    "1024x768"  =>  "1024x768",
+                                    "1280x768"  =>  "1280x768",
+                                    "1280x1024" =>  "1280x1024");
 
-    $smarty->assign("gotoXResolutions",$this->gotoXResolutions);
+    $smarty->assign("gotoXResolutions"    , $this->gotoXResolutions);
+    $smarty->assign("gotoXResolutionKeys" , array_flip($this->gotoXResolutions));
+
     $smarty->assign("gotoProfileServers",$this->gotoProfileServers);
     if(!is_array($this->gotoProfileServers)){
       $this->gotoProfileServers =array();
@@ -676,8 +683,8 @@ class environment extends plugin
     plugin::remove_from_parent();
 
     /* Don't save our template variables */
-    $skip = array("uid",
-                  "gotoLogonScripts","gotoPrinter","gotoShares","gotoKioskProfiles","gotoHotplugDevices" );
+    $skip = array("uid","gotoLogonScripts","gotoPrinter","gotoShares","gotoKioskProfiles","gotoHotplugDevices" );
+
     /* Skip all these attributes */
     foreach($skip as $del){
       unset($this->attrs[$del]);
@@ -687,7 +694,7 @@ class environment extends plugin
 
     $ldap->cd($this->dn);
     $this->cleanup();
-$ldap->modify ($this->attrs); 
+    $ldap->modify ($this->attrs); 
 
 
     show_ldap_error($ldap->get_error());
@@ -978,8 +985,9 @@ $ldap->modify ($attrs);
     }
 
 
+    if($this->gotoXResolution == "auto") $this->gotoXResolution ="";
     $saveThis = array("gotoProfileQuota","gotoXResolution","gotoProfileServer","gotoKioskProfile");
-  
+     
     foreach($saveThis as $tosave){
       if(!empty($this->$tosave)){
         $this->attrs[$tosave]=$this->$tosave;

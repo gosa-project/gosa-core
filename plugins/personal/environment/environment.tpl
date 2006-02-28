@@ -87,7 +87,7 @@
 					</td>
 					<td>
 						<select name="gotoXResolution" {$gotoXResolutionACL} id="gotoXResolution">
-                        	{html_options values=$gotoXResolutions output=$gotoXResolutions selected=$gotoXResolution}
+                        	{html_options values=$gotoXResolutionKeys output=$gotoXResolutions selected=$gotoXResolution}
                             <option disabled>&nbsp;</option>
                     	</select>
 					</td>
