@@ -14,6 +14,12 @@
 			<input name="close_edit_type" value="{t}Close{/t}" type="submit">
 		</p>
 	</div>
+	<script language="JavaScript" type="text/javascript">
+	  <!-- // First input field on page
+	  document.mainform.type_string.focus();
+	  -->
+	</script>
+
 {else}
 
 	{t}Please enter a new name{/t}&nbsp;<input name="string" value="{$string}">
@@ -24,11 +30,11 @@
             <input type="submit" name="Rename_Cancel"   value="{t}Cancel{/t}" >
         </div>
     </p>
-{/if}
+	<script language="JavaScript" type="text/javascript">
+	  <!-- // First input field on page
+	  document.mainform.string.focus();
+	  -->
+	</script>
 
-<script language="JavaScript" type="text/javascript">
-  <!-- // First input field on page
-  document.mainform.type_string.focus();
-  -->
-</script>
+{/if}
 
