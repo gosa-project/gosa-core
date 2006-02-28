@@ -93,9 +93,10 @@ class servRepositorySetup  extends plugin
       $smarty->assign($attr       ,$this->$attr);
       $smarty->assign($attr."ACL" ,chkacl($this->acl,$attr));
     }
-
-    $smarty->assign("ParentServers"   ,$this->getParentServers());
-    $smarty->assign("ParentServerKeys",array_flip($this->getParentServers()));
+  
+    $tmp = $this->getParentServers();
+    $smarty->assign("ParentServers"   ,$tmp);
+    $smarty->assign("ParentServerKeys",array_flip($tmp));
 
     return($smarty->fetch(get_template_path('servRepositorySetup.tpl', TRUE)));
   }
@@ -144,7 +145,32 @@ class servRepositorySetup  extends plugin
     while($attr = $ldap->fetch()){
       $ret[$attr['cn'][0]]= $attr['cn'][0];   
     }
+
+    $ret = array_merge($ret,$this->GetHookElements());
+    
     $ret['none']= "&nbsp;";
+    return($ret);
+  }
+
+  /* this funtions calls a defined hook 
+      and parses all additional serverdata 
+   */
+  function GetHookElements()
+  {
+    $ret = array();
+    $cmd= search_config($this->config->data['TABS'], "servrepository", "EXTERNAL_HOOK");
+    if(!empty($cmd)){
+      $res = shell_exec($cmd);
+      $tmp = split("\n",$res);
+      foreach($tmp as $hook){
+
+        /* skip empty */
+        if((empty($hook)) || (!preg_match("/:/",$hook))) continue;
+
+        $hookinfo = split(":",$hook);
+        $ret[$hookinfo[1]] = $hookinfo[0];
+      }
+    }
     return($ret);
   }
 

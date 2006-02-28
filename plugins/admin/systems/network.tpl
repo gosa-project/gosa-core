@@ -25,7 +25,7 @@
           changeState('AddNewRecord');
           {$changeStateForRecords}
                 ">
-      {t}Enable DNS for this device.{/t}
+      {t}Enable DNS for this device{/t}
       <input type="submit" name="reloadThisDNSStuff" value="{t}Refresh{/t}">
     
 			<table	summary="" id="test2">
