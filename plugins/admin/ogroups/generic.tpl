@@ -23,6 +23,7 @@
       <select size="1" id="base" name="base" {$baseACL} title="{t}Choose subtree to place group in{/t}">
        {html_options options=$bases selected=$base_select}
       </select>
+		<input type="image" name="chooseBase" src="images/folder.png" class="center">
      </td>
     </tr>
    </table>
