@@ -76,14 +76,16 @@ class systems extends plugin
   
     /* Save posted filter data */
     $terminalfilter= get_global("terminalfilter");
-    foreach( array("depselect", "user", "regex") as $type){
-      if (isset($_POST[$type])){
-        $terminalfilter[$type]= $_POST[$type];
+    if(isset($_POST['SystemHeadpagePosted'])){
+      foreach( array("depselect", "user", "regex") as $type){
+        if (isset($_POST[$type])){
+          $terminalfilter[$type]= $_POST[$type];
+        }
       }
-    }
+    } 
 
     /* Check if filter checkboxes are selected */
-    if (isset($_POST['depselect'])){
+    if (isset($_POST['SystemHeadpagePosted'])){
       foreach( array("workstations", "thins", "winstations", "printers", "phones", "servers", "netdev") as $type){
         if (isset($_POST[$type])) {
           $terminalfilter[$type]= "checked";
