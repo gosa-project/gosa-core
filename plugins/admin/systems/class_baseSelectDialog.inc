@@ -36,6 +36,9 @@ class baseSelectDialog extends MultiSelectWindow
     $this->EnableCloseButton(true);
     $this->EnableSaveButton (true);
 
+    $this->SetSaveButtonString(_("Use"));
+    $this->SetCloseButtonString(_("Cancel"));
+
     $this->AddHeader(array("string"=>"&nbsp;","attach"=>"style='width:20px;'"));
     $this->AddHeader(array("string"=>"Base"));
     $this->AddHeader(array("string"=>"Option","attach"=>"style='width:50px;border-right:0px;'"));

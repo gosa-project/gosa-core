@@ -8,6 +8,7 @@ class MultiSelectWindow{
 
 	var $SaveButtonString		= "";
 	var $CloseButtonString		= "";
+
 	var $string_Title			= "";
 	var $string_ListHeader		= "";
 	var $string_Summary			= "";
