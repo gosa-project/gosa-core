@@ -14,6 +14,7 @@ for (iln = 0; iln < len; iln++){
 }
 netscape= (ver.charAt(iln+1).toUpperCase() != "C");
 
+
 function keyPress(DnEvents) {
   // determines whether Netscape or Internet Explorer
   k = (netscape) ? DnEvents.keyCode : window.event.keyCode;
@@ -90,6 +91,14 @@ function changeState(myField) {
   document.getElementById(myField).disabled=(document.getElementById(myField).disabled)?false:true;
 }
 
+function setHidden(str) {
+	type = document.getElementById(str).style.display;
+	if((type=='')||(type=='block')) {
+		document.getElementById(str).style.display='none';
+	}else{
+		document.getElementById(str).style.display='block';
+	}
+}
 function changeSelectState(triggerField, myField) {
   if (document.getElementById(triggerField).value != 2){
 	  document.getElementById(myField).disabled= true;

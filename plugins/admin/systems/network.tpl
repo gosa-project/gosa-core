@@ -19,6 +19,7 @@
       <input type="checkbox" name="enableDNS" value="1" 
         {if $DNSAccount==true}checked{/if}
         onClick="
+          setHidden('test2');
           changeState('zoneName');
           changeState('dNSTTL');
           changeState('AddNewRecord');
@@ -26,7 +27,8 @@
                 ">
       {t}Enable DNS for this device.{/t}
       <input type="submit" name="reloadThisDNSStuff" value="{t}Refresh{/t}">
-			<table	summary="">
+    
+			<table	summary="" id="test2">
 				<tr>
 					<td><LABEL	for="zoneName">{t}Zone{/t}</LABEL></td>
 					<td>
@@ -48,10 +50,19 @@
 				</tr>
 			</table>
 		</td>
+       {if $DNSAccount != true}
+        <script language="javascript">
+        <!--
+          document.getElementById('test2').style.display='none';
+        -->
+        </script>
+       {/if}
     {/if}
+    
 	</tr>
 </table>
 <input type="hidden" name="network_tpl_posted" value="1">
+
 <!--
 vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 -->
