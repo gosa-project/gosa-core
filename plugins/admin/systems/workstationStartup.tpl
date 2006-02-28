@@ -54,7 +54,6 @@
 	<h2><img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;{t}Assigned FAI classes{/t}</h2>
 		{$FAIScriptlist}	
 
-    <br>
 		<select name="FAIclassesSel" {$FAIclassACL}>
         {html_options values=$FAIclassesKeys output=$FAIclasses}
         <option disabled>&nbsp;</option>
