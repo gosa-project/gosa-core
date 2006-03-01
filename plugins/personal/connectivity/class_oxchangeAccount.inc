@@ -782,6 +782,7 @@ $ldap->modify ($this->attrs);
     if (trim($uid) == "") {
       print_red(_("The Open-Xchange accountname is empty and thus invalid! Check to make sure that ".
                   "you are not using any strange characters in the loginname."));
+      return;
     }
 	
     if ($istemplate) $needupdate=TRUE;
