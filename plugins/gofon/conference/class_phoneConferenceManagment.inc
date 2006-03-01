@@ -201,7 +201,7 @@ class phoneConferenceManagment extends plugin
     /* Edit Entry if Posted action (s_action) == edit
      * The entry which will be edited is defined in $s_entry
      */
-    if ($s_action=="edit"){
+    if (($s_action=="edit") && (!isset($this->conftab->config))){
 
       $this->dn= $this->conferences[$s_entry]['dn'];
 
@@ -227,7 +227,7 @@ class phoneConferenceManagment extends plugin
     }
 
     /* Edit finished, check and save changes */
-    if (isset($_POST['edit_finish'])){
+    if ((isset($_POST['edit_finish'])) && (isset($this->conftab->config))){
       /* Check tabs, will feed message array */
       $this->conftab->last= $this->conftab->current;
       $this->conftab->save_object();
@@ -257,7 +257,7 @@ class phoneConferenceManagment extends plugin
     }
 
     /* if edit or new, show dialog */
-    if($this->conftab){
+    if(($this->conftab) && (isset($this->conftab->config))){
       $display= $this->conftab->execute();
 
       /* Don't show buttons if tab dialog requests this */
