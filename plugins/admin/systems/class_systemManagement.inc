@@ -334,7 +334,8 @@ class systems extends plugin
      ********************/
 
     /* User wants to edit data? */
-    if ($s_action == "edit"){
+//    if ($s_action == "edit"){
+    if (($s_action == "edit") && (!isset($this->systab->config))){
 
       $this->dn= $this->terminals[$s_entry]['dn'];
 
@@ -615,7 +616,7 @@ class systems extends plugin
     /* Finish user edit is triggered by the tabulator dialog, so
        the user wants to save edited data. Check and save at this
        point. */
-    if (isset($_POST['edit_finish'])){
+    if ((isset($_POST['edit_finish'])) && (isset($this->systab->config))){
 
       /* Check tabs, will feed message array */
       $message= $this->systab->check();
@@ -709,7 +710,7 @@ class systems extends plugin
      ********************/
 
     /* Show tab dialog if object is present */
-    if ($this->systab){
+    if (isset($this->systab->config)){
       $display= $this->systab->execute();
 
       
