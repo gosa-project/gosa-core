@@ -1,5 +1,6 @@
 <h2><img	class="center"	alt=""	align="middle"	src="images/network.png">	{t}Network	settings{/t}</h2>
 
+
 <table	summary=""	width="100%" cellspacing=0 cellpadding=0>
 	<tr>
 		<td	style="border-right:1px	solid	#b0b0b0;	width:50%; vertical-align: top;">

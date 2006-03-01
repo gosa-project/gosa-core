@@ -152,7 +152,9 @@ class termDNS extends plugin
 	  /* Call parent execute */
     $smarty= get_smarty();
     $display= "";
-  
+
+    $smarty->assign("staticAddress", ""); 
+ 
     /* There is no dns available 
      */
     if($this->found == false){
@@ -164,7 +166,7 @@ class termDNS extends plugin
       foreach($this->attributes as $attr){
         $smarty->assign($attr,$this->$attr);
       }
-
+      $smarty->assign("staticAddress", "");
       $display.= $smarty->fetch(get_template_path('network.tpl', TRUE));
       return($display);
     }else{
