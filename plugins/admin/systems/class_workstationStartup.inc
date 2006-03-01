@@ -143,6 +143,7 @@ class workstartup extends plugin
      */
     while($attr = $ldap->fetch()){
       $cn = $attr['cn'][0];
+      $tmp2[$cn]['REST'] = $attr;
       if(in_array('FAIpackageList',$attr['objectClass'])){
         $tmp2[$cn]['FAIpackageList']['obj']   = 'FAIpackageList'; 
         $tmp2[$cn]['FAIpackageList']['kzl']   = 'Pl';
@@ -211,13 +212,26 @@ class workstartup extends plugin
   /* Create array to display available classes/profiles in a selectbox */
   function selectFriendlyClasses(){
     $tmp=array();
+
+    $tmp2 = $this->getFAIreleases();
+    if(!in_array($this->FAIrelease, $tmp2)){  
+      $this->FAIrelease = key($tmp2);
+    }
+
+
     foreach($this->FAIclasses as $class){
+      
+      if(($this->FAIdebianMirror != "auto") && (!preg_match("/ou=".$this->FAIrelease."/",$this->FAIclassInfo[$class]['REST']['dn']))){
+        continue;
+      }
       $str    = "";
       $skip = false;
 
       if(isset($this->FAIclassInfo[$class])){
         foreach($this->FAIclassInfo[$class] as $objs){
-          $str .= $objs['kzl']." "; 
+          if (isset($objs['kzl'])){
+            $str .= $objs['kzl']." "; 
+          }
         }
       }
       $tmp[$class] = $class."&nbsp; [".$str."]";
@@ -276,8 +290,10 @@ class workstartup extends plugin
       foreach($this->FAIclass as $name){
         if(isset($this->FAIclassInfo[$name])){
           foreach($this->FAIclassInfo[$name] as $atr){
-            if($atr['obj'] == "FAIpartitionTable"){
-              $found ++ ; 
+            if(isset($atr['obj'])){
+              if($atr['obj'] == "FAIpartitionTable"){
+                $found ++ ; 
+              }
             }
           }
         }
@@ -497,12 +513,18 @@ class workstartup extends plugin
         }
       }
     }
+
     if(is_array($this->FAIdebianMirrors)){
       foreach($this->FAIdebianMirrors as $mirr=>$sections){
         $allok = true;
         foreach($secs as $sec){
           if(!in_array($sec,$sections)){
             $allok = false;
+          }
+        }
+        if(count($this->FAIclass)){
+          if(!in_array($this->FAIrelease,$this->FAIreleases[$mirr])){
+            $allok = false; 
           }
         }
         if($allok){
