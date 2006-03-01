@@ -34,7 +34,7 @@ class workservice extends plugin
   var $XDrivers= array("unknown", "ati", "atimisc", "chips", "cirrus", "cyrix", "fbdev",
       "i128", "i740", "i810", "imstt", "mga", "neomagic", "newport", "nsc",  "nv",
       "r128", "radeon", "rendition", "s3", "s3virge", "savage", "siliconmotion",
-      "sis", "tdfx", "tga", "trident", "tseng", "vesa", "vga");
+      "sis", "tdfx", "tga", "trident", "tseng", "vesa", "vga", "vmware");
   var $XResolutions= array("default", "640x480", "800x600", "1024x768", "1152x864", "1280x1024",
       "1400x1050", "1600x1200");
   var $XColordepths= array("default", "8", "15", "16", "24");
