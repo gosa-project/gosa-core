@@ -70,6 +70,15 @@ class blocklist extends plugin
       $this->reload();
     }
 
+    /* Cancel dialog */
+    if (isset($_POST['edit_cancel']) || isset($_POST['delete_blocklist_cancel']) ||
+        isset($_POST['delete_blocklist_confirm']) || isset($_POST['delete_lock'])){
+
+      del_lock ($this->dn);
+      $this->clear_fields();
+      unset($_SESSION['objectinfo']);
+    }
+
     /* Test Posts */
     foreach($_POST as $key => $val){
       // Post for delete
@@ -173,24 +182,37 @@ class blocklist extends plugin
     }
 
     /* Edit selected blocklist? */
-    if ($s_action=="edit"){
+    if (($s_action=="edit") && (empty($this->dn))){
       $this->clear_fields();
       $this->dn=$this->blocklists[$s_entry]['dn']; 
-      plugin::plugin ($this->config, $this->dn);
+      if (($user= get_lock($this->dn)) != ""){
+        $_SESSION['dn']= $this->dn;
+        //$this->dn ="";
+        return(gen_locked_message($user, $this->dn));
+      } else {
+# Lock this dn for editing
+        add_lock ($this->dn, $this->ui->dn);
 
-      /* Load missing lists */
-      if (isset($this->attrs["goFaxSBlocklist"])){
-        for ($i= 0; $i<$this->attrs["goFaxSBlocklist"]["count"]; $i++){
-          $this->goFaxBlocklist[]= $this->attrs["goFaxSBlocklist"][$i];
+        plugin::plugin ($this->config, $this->dn);
+
+        /* Load missing lists */
+        if (in_array("goFaxSBlock",$this->attrs['objectClass'])){
+          if(isset($this->attrs["goFaxSBlocklist"])){
+            for ($i= 0; $i<$this->attrs["goFaxSBlocklist"]["count"]; $i++){
+              $this->goFaxBlocklist[]= $this->attrs["goFaxSBlocklist"][$i];
+            }
+          }
+          $this->type= 0;
+        } elseif (in_array("goFaxRBlock",$this->attrs['objectClass'])){
+          if(isset($this->attrs["goFaxRBlocklist"])){
+            for ($i= 0; $i<$this->attrs["goFaxRBlocklist"]["count"]; $i++){
+              $this->goFaxBlocklist[]= $this->attrs["goFaxRBlocklist"][$i];
+            }
+          }
+          $this->type= 1;
         }
-        $this->type= 0;
-      } elseif (isset($this->attrs["goFaxRBlocklist"])){
-        for ($i= 0; $i<$this->attrs["goFaxRBlocklist"]["count"]; $i++){
-          $this->goFaxBlocklist[]= $this->attrs["goFaxRBlocklist"][$i];
-        }
-        $this->type= 1;
+        $_SESSION['objectinfo']= trim($this->dn);
       }
-      $_SESSION['objectinfo']= trim($this->dn);
     }
 
     /* Delete blocklist requested */
@@ -220,14 +242,6 @@ class blocklist extends plugin
       }
     }
 
-    /* Cancel dialog */
-    if (isset($_POST['edit_cancel']) || isset($_POST['delete_blocklist_cancel']) ||
-        isset($_POST['delete_blocklist_confirm']) || isset($_POST['delete_lock'])){
-
-      del_lock ($this->dn);
-      $this->clear_fields();
-      unset($_SESSION['objectinfo']);
-    }
 
     /* Handle interactions: add */
     if (isset($_POST['add_number']) && $_POST['number'] != ""){
@@ -244,8 +258,9 @@ class blocklist extends plugin
     }
 
     /* What about finish? */
-    if (isset($_POST['edit_finish'])){
+    if ((isset($_POST['edit_finish'])) && (!empty($this->dn))){
       $message= $this->check();
+      $this->remove_lock();
 
       /* No errors, save object */
       if (count ($message) == 0){
@@ -254,7 +269,7 @@ class blocklist extends plugin
         if ($this->dn == "new"){
           $this->dn= "cn=$this->cn,ou=gofax,ou=systems,".$this->base;
         }
-
+        
         $this->save ();
         gosa_log ("Blocklist object'".$this->dn."' has been saved");
         $this->dn= "";
