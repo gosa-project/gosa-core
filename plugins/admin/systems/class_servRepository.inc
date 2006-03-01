@@ -214,7 +214,7 @@ class servrepository extends plugin
       }    
   
       $divlist->AddEntry(array(
-                              array("string"=>preg_replace("/%s/",($name),$link),"attach"=>"style='width:80px;'"),
+                              array("string"=>sprintf($link,base64_encode($name),$name),"attach"=>"style='width:80px;'"),
                               array("string"=>sprintf($link,$name,_("Sections")." :".$str)),
                               array("string"=>preg_replace("/%s/",base64_encode($name),$edit.$delete),"attach"=>"style='border-right:0px;width:55px;text-align:right;'")
                               ));
