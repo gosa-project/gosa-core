@@ -152,7 +152,7 @@ class departmentManagement extends plugin
 		/* Edit Entry if Posted action (s_action) == edit 
 		 * The entry which will be edited is defined in $s_entry
 		 */
-		if ($s_action=="edit"){
+		if (( $s_action=="edit") && (!isset($this->deptabs->config))){
 			$this->dn= $this->config->departments[trim($s_entry)];
 
 			if (($user= get_lock($this->dn)) != ""){
@@ -207,7 +207,7 @@ class departmentManagement extends plugin
 		/* Edit Complete ...
 		 * Finish request 
          */
-		if (isset($_POST['edit_finish'])){
+		if ((isset($_POST['edit_finish'])) && (isset($this->deptabs->config) ) ){
 
 			/* Check tabs, will feed message array */
 			$message= $this->deptabs->check();
@@ -251,7 +251,6 @@ class departmentManagement extends plugin
 			$this->deptabs= NULL;
 			unset ($_SESSION['objectinfo']);
 		}
-
 
 		/* Headpage or normal plugin screen? */
 		if ($this->deptabs == NULL){
