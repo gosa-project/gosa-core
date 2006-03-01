@@ -183,7 +183,9 @@ class userManagement extends plugin
     if (($_SERVER["REQUEST_METHOD"] == "POST")||($_SERVER["REQUEST_METHOD"]== "GET")){
 
       /* User wants to edit data? */
-      if ($s_action=="edit"){
+      
+      /* Check for config to ensure that there is currently no user open */
+      if (($s_action=="edit") && (!isset($this->usertab->config))){
 
         /* Get 'dn' from posted 'uid', must be unique */
 
@@ -410,7 +412,7 @@ class userManagement extends plugin
     /* Finish user edit is triggered by the tabulator dialog, so
        the user wants to save edited data. Check and save at this
        point. */
-    if (isset($_POST['edit_finish'])){
+    if ((isset($_POST['edit_finish'])) && (isset($this->usertab->config))){
 
       /* Check tabs, will feed message array */
       $this->usertab->last= $this->usertab->current;
@@ -629,7 +631,7 @@ class userManagement extends plugin
     }
 
     /* Show tab dialog if object is present */
-    if ($this->usertab){
+    if(isset($this->usertab->config)){
       $display= $this->usertab->execute();
 
       /* Don't show buttons if tab dialog requests this */
