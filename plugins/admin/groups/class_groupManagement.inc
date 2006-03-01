@@ -381,8 +381,6 @@ class groupManagement extends plugin
     $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
     $userimg  = "<img class='center' src='images/select_groups.png' alt='User'    title='%s'>";
 
-    $actions = "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
-
 
     /* Extension images 
         group
