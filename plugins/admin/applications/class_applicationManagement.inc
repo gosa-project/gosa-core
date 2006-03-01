@@ -171,7 +171,7 @@ class applicationManagement extends plugin
     /* Finish apps edit is triggered by the tabulator dialog, so
        the user wants to save edited data. Check and save at this
        point. */
-    if (isset($_POST['edit_finish'])){
+    if ((isset($_POST['edit_finish'])) && (isset($this->apptabs->config))){
 
       /* Check tabs, will feed message array */
       $this->apptabs->last= $this->apptabs->current;
@@ -205,7 +205,7 @@ class applicationManagement extends plugin
 	}
 
 	/* User wants to edit data? */
-	if ($s_action=="edit"){
+	if (($s_action=="edit") && (!isset($this->apptabs->config))){
 
 		/* Get 'dn' from posted 'applist', must be unique */
 		$this->dn= $this->applications[$s_entry]['dn'];
@@ -299,7 +299,7 @@ class applicationManagement extends plugin
 	}
 
         /* Show tab dialog if object is present */
-        if ($this->apptabs){
+        if (($this->apptabs) && (isset($this->apptabs->config))){
                 $display= $this->apptabs->execute();
 
                 /* Don't show buttons if tab dialog requests this */
