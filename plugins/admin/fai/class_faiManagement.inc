@@ -279,7 +279,8 @@ class faiManagement extends plugin
 		}
 
 		/* Edit Entry */
-		if($s_action == "edit"){
+		//if($s_action == "edit"){
+		if(($s_action == "edit") && (!isset($this->dialog->config))){
 			$entry  = $this->objects[$s_entry];
 
 			$a_setup = ($this->get_type($entry));
@@ -563,7 +564,7 @@ class faiManagement extends plugin
 		 * If it was possible to save it, remove dialog object. 
 		 * If it wasn't possible, show errors and keep dialog.
 		 */
-		if(isset($_POST['edit_finish'])){
+		if((isset($_POST['edit_finish'])) && (isset($this->dialog->config))){
 			$this->dialog->save_object();
 			if(count($this->dialog->check())!=0){
 				foreach($this->dialog->check() as $msg){
@@ -585,7 +586,7 @@ class faiManagement extends plugin
 		 *  Here we need both, save and cancel
 		 */ 
 
-		if($this->dialog != NULL){
+		if(($this->dialog != NULL) && (isset($this->dialog->config))){
 			$display .= $this->dialog->execute();
 			/* Don't show buttons if tab dialog requests this */
 			if (((isset($this->dialog->current))&&($this->dialog->by_object[$this->dialog->current]->is_dialog))){
