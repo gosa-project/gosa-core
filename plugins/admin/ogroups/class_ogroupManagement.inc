@@ -270,7 +270,7 @@ class ogroupManagement extends plugin
       unset($_SESSION['objectinfo']);
     }
 
-    if ($s_action=="edit"){
+    if (($s_action=="edit") && (! isset($this->ogroup->config)) ){
 
       /* Get 'dn' from posted 'uid', must be unique */
       $this->dn= $this->ogrouplist[$s_entry]['dn'];
@@ -296,7 +296,7 @@ class ogroupManagement extends plugin
     }
 
     /* Finish button has been pressed */
-    if (isset($_POST['edit_finish'])){
+    if ((isset($_POST['edit_finish'])) && (isset($this->ogroup->config)) ){
 
       /* Check tabs, will feed message array */
       $message= $this->ogroup->check();
@@ -337,7 +337,7 @@ class ogroupManagement extends plugin
     }
 
     /* Show dialog if object is present */
-    if ($this->ogroup){
+    if (isset($this->ogroup->config)){
       $display= $this->ogroup->execute();
 
       /* Don't show buttons if tab dialog requests this */
