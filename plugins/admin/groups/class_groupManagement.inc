@@ -205,7 +205,7 @@ class groupManagement extends plugin
     /* Finish group edit is triggered by the tabulator dialog, so
        the user wants to save edited data. Check and save at this
        point. */
-    if (isset($_POST['edit_finish'])){
+    if ((isset($_POST['edit_finish'])) && (isset($this->grouptab->config)) ){
 
       /* Check tabs, will feed message array */
       $message= $this->grouptab->check();
@@ -238,7 +238,7 @@ class groupManagement extends plugin
     }
 
     /* User wants to edit data? */
-    if ($s_action=="edit"){
+    if (($s_action=="edit") && (!isset($this->grouptab-> config))){
 
       /* Get 'dn' from posted 'uid', must be unique */
       $this->dn= $this->grouplist[trim($s_entry)]['dn'];
@@ -334,7 +334,7 @@ class groupManagement extends plugin
     }
 
     /* Show tab dialog if object is present */
-    if ($this->grouptab){
+    if (isset($this->grouptab->config)){
       $display= $this->grouptab->execute();
 
       /* Don't show buttons if tab dialog requests this */
