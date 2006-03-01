@@ -170,7 +170,7 @@ class gofonMacro extends plugin
     /* Finish mac edit is triggered by the tabulator dialog, so
        the user wants to save edited data. Check and save at this
        point. */
-    if (isset($_POST['edit_finish'])){
+    if ((isset($_POST['edit_finish'])) && (isset($this->macrotabs->config))){
 
       /* Check tabs, will feed message array */
       $this->macrotabs->last= $this->macrotabs->current;
@@ -204,7 +204,7 @@ class gofonMacro extends plugin
     }
 
     /* User wants to edit data? */
-    if ($s_action=="edit"){
+    if (($s_action=="edit") && (!isset($this->macrotabs->config))){
 
       /* Get 'dn' from posted 'macrolists', must be unique */
       $this->dn= $this->macros[$s_entry]['dn']; 
@@ -291,7 +291,7 @@ class gofonMacro extends plugin
     }
 
     /* Show tab dialog if object is present */
-    if ($this->macrotabs){
+    if (($this->macrotabs) && (isset($this->macrotabs->config))){
       $display= $this->macrotabs->execute();
 
       /* Don't show buttons if tab dialog requests this */
