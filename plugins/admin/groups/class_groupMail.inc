@@ -269,6 +269,11 @@ class mailgroup extends plugin
       }
     }
 
+    /* Load Mailserver  
+     */
+    if(isset($this->attrs['gosaMailServer'][0])){
+      $this->gosaMailServer =  $this->attrs['gosaMailServer'][0];
+    }
     /* Fill translations */
     $this->perms["lrs"]= _("read");
     $this->perms["lrsp"]= _("post");
@@ -569,7 +574,6 @@ class mailgroup extends plugin
      */
     if(isset($this->config->current['MAILMETHOD'])&&preg_match("/kolab/i",$this->config->current['MAILMETHOD'])){
       $this->attributes[]="acl";
-      $this->attributes[]="kolabHomeServer";
       $this->objectclasses[] = "kolabSharedFolder";
     }
     /* include global link_info */
@@ -583,24 +587,24 @@ class mailgroup extends plugin
     $this->attrs['gosaMailForwardingAddress']= array();
     $this->attrs['gosaSharedFolderTarget']= array();
 
-    /* Keep uid */
-    unset ($this->attrs['uid']);
-    $ldap->cd($this->dn);
-    $this->cleanup();
-    $ldap->modify ($this->attrs); 
-
-    show_ldap_error($ldap->get_error());
-
     /* Connect to IMAP server for account deletion */
-    if ($this->is_account){
+    if ($this->initially_was_account){
       $method= new $this->method($this->config);
-      if ($method->connect($this->attrs["gosaMailServer"][0])){
+      if ($method->connect($this->gosaMailServer)){
         /* Remove account from IMAP server */
         $method->deleteMailbox($this->uid);
         $method->disconnect();
       }
       $method->fixAttributesOnRemove($this);
     }
+    /* Keep uid */
+    unset ($this->attrs['uid']);
+
+
+    $ldap->cd($this->dn);
+    $ldap->modify ($this->attrs); 
+
+    show_ldap_error($ldap->get_error());
 
     /* Optionally execute a command after we're done */
     $this->handle_post_events("remove");

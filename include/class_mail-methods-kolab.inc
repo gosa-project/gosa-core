@@ -181,8 +181,10 @@ class mailMethodKolab extends mailMethodCyrus
   {
     /* Add attribute for object deletion and remove GOsa specific
        values from entry. */
-    unset ($mailObject->attrs['mail']);
-    $mailObject->attrs['kolabDeleteFlag']= preg_replace('%imap://%', '', $mailObject->gosaMailServer);
+    foreach($this->attribute_map as $kolabAttr){
+      $mailObject->attrs[$kolabAttr] = array();
+    }  
+    //$mailObject->attrs['kolabDeleteFlag']= preg_replace('%imap://%', '', $mailObject->gosaMailServer);
   }
 
 }
