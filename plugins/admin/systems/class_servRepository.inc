@@ -292,7 +292,7 @@ $ldap->modify ($this->attrs);
     if($ldap->count()){
       $ldap->cd($this->dn);
       $this->cleanup();
-$ldap->modify ($this->attrs);       
+      $ldap->modify ($this->attrs);       
 
       $this->handle_post_events("modify");
     }else{
