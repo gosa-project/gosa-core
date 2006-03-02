@@ -102,6 +102,7 @@ class mailAccount extends plugin
 
       /* Only do IMAP actions if gosaMailServer attribute is set */
       if (isset ($this->attrs["gosaMailServer"][0])){
+
         $method= new $this->method($this->config);
         $id= $method->uattrib;
         if ($method->connect($this->attrs["gosaMailServer"][0])){
@@ -152,6 +153,10 @@ class mailAccount extends plugin
           "muser"            => "",
           "regex"           => "*");
       register_global("mailfilter", $mailfilter);
+    }
+
+    if(is_array($this->gosaMailServer) && isset($this->gosaMailServer[0])){
+      $this->gosaMailServer = $this->gosaMailServer[0];
     }
 
     /* Save initial account state */
@@ -664,6 +669,7 @@ $ldap->modify ($this->attrs);
 
     /* Only do IMAP actions if we are not a template */
     if (!$this->is_template){
+
       if ($method->connect($this->gosaMailServer)){
         $method->updateMailbox($this->folder_prefix.$this->$id);
         $method->setQuota($this->folder_prefix.$this->$id, $this->gosaMailQuota);
