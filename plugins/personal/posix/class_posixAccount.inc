@@ -853,29 +853,17 @@ $ldap->modify ($this->attrs);
 
     /* Take care about groupMembership values: add to groups */
     foreach ($this->groupMembership as $key => $value){
-      $g= new group($this->config, $key);
-      $g->addUser ($this->uid);
+      $g= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $key);
+      $g->by_object['group']->addUser ($this->uid);
       $g->save();
-
-      /* May need to save the mail part, too */
-      if ($g->has_mailAccount){
-        $m= new mailgroup($this->config, $key);
-        $m->save();
-      }
     }
 
     /* Remove from groups not listed in groupMembership */
     foreach ($this->savedGroupMembership as $key => $value){
       if (!array_key_exists ($key, $this->groupMembership)){
-        $g= new group($this->config, $key);
-        $g->removeUser ($this->uid);
+        $g= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $key);
+        $g->by_object['group']->removeUser ($this->uid);
         $g->save();
-
-        /* May need to save the mail part, too */
-        if ($g->has_mailAccount){
-          $m= new mailgroup($this->config, $key);
-          $m->save();
-        }
       }
     }
 
