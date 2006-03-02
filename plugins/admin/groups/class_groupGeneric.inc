@@ -400,14 +400,13 @@ class group extends plugin
     $ldap= $this->config->get_ldap_link();
     $gufilter= get_global("gufilter");
 
-    $ldap->cd ($gufilter['dselect']);
-    $ldap->ls ("(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(!(uid=*$)))",get_people_ou().$gufilter['dselect'],array("uid", "sn", "givenName"));
+    $ldap->cd ($this->config->current['BASE']);
+    $ldap->search ("(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(!(uid=*$)))",array("uid", "sn", "givenName"));
     $this->allusers= array();
     while ($attrs= $ldap->fetch()){
       if (isset($attrs["givenName"][0]) && isset($attrs["sn"][0])){
         $this->allusers[$attrs["uid"][0]]= $attrs["sn"][0].", ".
-          $attrs["givenName"][0].
-          " [".$attrs["uid"][0]."]";
+          $attrs["givenName"][0]." [".$attrs["uid"][0]."]";
       } else {
         $this->allusers[$attrs["uid"][0]]= $attrs['uid'][0];
       }
