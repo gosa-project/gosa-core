@@ -3,7 +3,7 @@
 
 <table	summary=""	width="100%" cellspacing=0 cellpadding=0>
 	<tr>
-		<td	style="border-right:1px	solid	#b0b0b0;	width:50%; vertical-align: top;">
+		<td	style="width:50%; vertical-align: top;">
 			<table	summary="">
 				<tr>
 					<td><LABEL	for="ipHostNumber">{t}IP-address{/t}{if $IPisMust}{$staticAddress}{/if}</LABEL></td>
@@ -16,7 +16,7 @@
       </table> 
     </td>
     {if $DNS_is_account==true}
-		<td	style="width:50%;vertical-align:top;" valign="top">
+		<td	style="width:50%;vertical-align:top;border-left:1px solid #b0b0b0;" valign="top">
       <input type="checkbox" name="enableDNS" value="1" 
         {if $DNSAccount==true}checked{/if}
         onClick="

@@ -149,6 +149,7 @@ class servRepositorySetup  extends plugin
     $ret = array_merge($ret,$this->GetHookElements());
     
     $ret['none']= "&nbsp;";
+    asort($ret);
     return($ret);
   }
 
