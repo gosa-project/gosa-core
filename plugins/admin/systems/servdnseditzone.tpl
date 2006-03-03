@@ -1,4 +1,4 @@
-<h2>{t}Zone settings{/t}</h2>
+<h2>{t}Generic{/t}</h2>
 <table summary="" width="100%">
 	<tr>
 		<td style="width:50%;vertical-align:top;border-right:1px	solid	#b0b0b0;">
@@ -14,7 +14,7 @@
 		<td style="vertical-align:top;">
 			<table summary="">
 				<tr>
-					<td>{t}Subnet{/t}
+					<td>{t}Network address{/t}
 					</td>
 					<td><input type="text" name="ReverseZone" value="{$ReverseZone}">
 					</td>
@@ -24,7 +24,7 @@
 	</tr>
 </table>
 <p class="seperator">&nbsp;</p>
-<h2>{t}SOA record for this zone{/t}</h2>
+<h2>{t}SOA record{/t}</h2>
 <table summary="" width="100%">
 	<tr>
 		<td style="vertical-align:top;width:50%;border-right:1px	solid	#b0b0b0;">
@@ -104,7 +104,7 @@
 			</table>
 		</td>
 		<td style="vertical-align:top;">
-			<h2>{t}Records{/t}</h2>
+			<h2>{t}Zone records{/t}</h2>
 			<table summary="">
 			  {$records}
 			</table>
