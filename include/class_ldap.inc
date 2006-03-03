@@ -396,18 +396,30 @@ class LDAP{
   }
 
   /* Copy given attributes and sub-dns with attributes to destination dn 
-      
   */
-  function copy_FAI_resource_recursive($sourcedn,$destinationdn,$type="branch",$is_first = false)
+  function copy_FAI_resource_recursive($sourcedn,$destinationdn,$type="branch",$is_first = true,$depth=0)
   {
     error_reporting(E_ALL);
+   
+ 
+    if($is_first){
+      echo "<font style='font-size:11px;'><b>".
+              sprintf(_("Creating duplicate of '%s' in '%s':<br>"),$sourcedn,$destinationdn)."</b>";
+    }else{
+      if($depth == 1 ){
+        echo "<br>"._("creating")." : ".preg_replace("/,.*$/","",$destinationdn);
+      }else{
+        echo ". ";
+      }
+    }
+    
     if($this->hascon){
       if ($this->reconnect) $this->connect();
 
       /* Save base dn */
       $basedn= $this->basedn;
       $delarray= array();
-      
+     
       /* Check if destination entry already exists */
       if($this->count($this->fetch($this->cat($destinationdn)))){
         return;
@@ -507,16 +519,21 @@ class LDAP{
       asort ($delarray);
       reset ($delarray);
 
+       $depth ++;
       foreach($delarray as $dn => $bla){
         if($dn != $destinationdn){
           $this->cd($basedn);
           $item = $this->fetch($this->cat($dn));
           if(!in_array("FAIbranch",$item['objectClass'])){
-            $this->copy_FAI_resource_recursive($dn,str_replace($sourcedn,$destinationdn,$dn),$type);
+            $this->copy_FAI_resource_recursive($dn,str_replace($sourcedn,$destinationdn,$dn),$type,false,$depth);
           } 
         }
       }
     }
+    if($is_first){
+      echo "<br><br><b>"._("Successfully finished")."</b></font>";
+    }
+
   }
 
   function modify($attrs)

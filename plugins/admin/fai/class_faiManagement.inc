@@ -303,71 +303,15 @@ class faiManagement extends plugin
         09.01.2006
     */
 
-    /* Create new branch */
-    if((isset($_POST['UseBranchName']))&&($this->dispNewBranch)){
-     
-      /* Check branch name */
-      $name = $_POST['BranchName'];
-      $is_ok = true;
-
-      $smarty->assign("BranchName",$name);
-		  $base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
-      
-      /* Check used characters */
-      if(preg_match("/[^0-9a-z \ö\ä\ü\.-_:,]/i",$name)){
-        print_red(_("Specified branch name is invalid."));
-        $is_ok = false;
-      }
-   
-      /* Check if this name is already in use */
-      if(!$this->CheckNewBranchName($_POST['BranchName'],$faifilter['branch'])){
-        print_red(_("This name is already in use."));
-        $is_ok = false;
-      }
-     
-      if($is_ok){
-        /* Create it know */
-        $ldap = $this->config->get_ldap_link();
-
-        $baseToUse = $base;
-        if($_SESSION['faifilter']['branch']!="main"){
-          $baseToUse = $_SESSION['faifilter']['branch'];
-        }
-
-        $ldap->cd($this->config->current['BASE']);
-        $ldap->create_missing_trees($baseToUse);
-        $ldap->cd ("ou=".$name.",".$baseToUse);
-        $ldap->recursive_remove();
-        
-        $ldap->cd ($this->config->current['BASE']);
-        $ldap->copy_FAI_resource_recursive($baseToUse,"ou=".$name.",".$baseToUse,"branch",true);
-
-        /* Postcreate */ 
-
-        /* Assign possible attributes */
-        $this->lock_type  = "branch"; 
-        $this->lock_name  = $name; 
-        $this->lock_dn    = $baseToUse; 
-        $this->postcreate();
-        $this->dispNewBranch = false; 
-      }
-    }
-
-    /* Abort creating new branch */
+    /* Abort creating new branch 
+     */
     if(isset($_POST['CancelBranchName'])){
       $this->dispNewBranch = false;
       $this->dispNewFreeze = false;
     }
-
-    /* Open dialog to insert new branch name */
-    if(($s_action == "branch_branch")||($this->dispNewBranch)){
-      $this->dispNewBranch=true;
-		  $base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
-		  $display 	.= $smarty->fetch(get_template_path('faiNewBranch.tpl', TRUE, dirname(__FILE__)));
-      return($display);
-    }
-
-    /* Remove branch */
+    
+    /* Remove branch 
+     */
     if($s_action == "remove_branch"){
       $base= $faifilter['branch'];
       /* Load permissions for selected 'dn' and check if
@@ -382,7 +326,8 @@ class faiManagement extends plugin
       }
     }
 
-    /* Delete this entry */
+    /* Delete this entry 
+     */
     if(isset($_POST['delete_branch_confirm'])){
       $bb =  $faifilter['branch'];
       if(!isset($ldap)){
@@ -401,7 +346,7 @@ class faiManagement extends plugin
 
         /* Post remove */
                 
-//        $this->lock_type is set from this->reload
+        //  $this->lock_type is set from this->reload
         $this->lock_name   = $name;
         $this->lock_dn     = $bb;
 
@@ -409,57 +354,97 @@ class faiManagement extends plugin
       }
     }
 
+    /* Open dialog to insert new branch name 
+     */
 
-    if((isset($_POST['UseBranchName']))&&($this->dispNewFreeze)){
+    if((isset($_POST['UseBranchName']))&&(($this->dispNewBranch)||($this->dispNewFreeze))){
+      $_SESSION['LASTPOST'] = $_POST;
+
+      if($this->dispNewBranch){
+        $type = "branch";
+      }else{
+        $type = "freeze";
+      }
+
       /* Check branch name */
       $name = $_POST['BranchName'];
       $is_ok = true;
 
       $smarty->assign("BranchName",$name);
 
-		  $base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
-      
+      $base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
+
       /* Check used characters */
       if(preg_match("/[^0-9a-z \ö\ä\ü\.-_:,]/i",$name)){
-        print_red(_("Specified branch name is invalid."));
+        if($type == "branch"){
+          print_red(_("Specified branch name is invalid."));
+        }else{
+          print_red(_("Specified freeze name is invalid."));
+        }
         $is_ok = false;
       }
-   
+
       /* Check if this name is already in use */
       if(!$this->CheckNewBranchName($_POST['BranchName'],$faifilter['branch'])){
         print_red(_("This name is already in use."));
         $is_ok = false;
       }
-     
+
       if($is_ok){
-        /* Create it know */
-        $ldap = $this->config->get_ldap_link();
-
-        $baseToUse = $base;
-        if($_SESSION['faifilter']['branch']!="main"){
-          $baseToUse = $_SESSION['faifilter']['branch'];
-        }
-        
-        $ldap->cd ("ou=".$name.",".$baseToUse);
-        $ldap->recursive_remove();
-        
-        $ldap->cd ($this->config->current['BASE']);
-        $ldap->copy_FAI_resource_recursive($baseToUse,"ou=".$name.",".$baseToUse,"freeze",true);
-        
-        $this->dispNewFreeze = false; 
-        
-        /* Postcreate */ 
-
-        /* Assign possible attributes */
-        $this->lock_type  = "branch"; 
-        $this->lock_name  = $name; 
-        $this->lock_dn    = $baseToUse;
-        $this->postcreate();
+        $_SESSION['LASTPOST']['base'] = $base;
+        $_SESSION['LASTPOST']['type'] = $type;
+        $smarty->assign("iframe", true);
+        $smarty->assign("plugID", $_GET['plug']);
+        $display 	= $smarty->fetch(get_template_path('faiNewBranch.tpl', TRUE, dirname(__FILE__)));
+        return($display);
       }
+    }
+
+    if(isset($_GET['PerformBranch'])){
+      /* Create it know */
+      $this->dispNewBranch = false;
+      $this->dispNewFreeze = false;
+      $base = $_SESSION['LASTPOST']['base'];
+      $_POST = $_SESSION['LASTPOST'];      
+      $name = $_POST['BranchName'];
+
+      $type = $_SESSION['LASTPOST']['type'];
+
+      $ldap = $this->config->get_ldap_link();
+
+      $baseToUse = $base;
+      if($_SESSION['faifilter']['branch']!="main"){
+        $baseToUse = $_SESSION['faifilter']['branch'];
+      }
+
+      $ldap->cd ("ou=".$name.",".$baseToUse);
+      $ldap->recursive_remove();
+
+      $ldap->cd ($this->config->current['BASE']);
+      $ldap->copy_FAI_resource_recursive($baseToUse,"ou=".$name.",".$baseToUse,$type,true);
+
+      $this->dispNewFreeze = false; 
+
+      /* Postcreate */ 
+
+      /* Assign possible attributes */
+      $this->lock_type  = $type; 
+      $this->lock_name  = $name; 
+      $this->lock_dn    = $baseToUse;
+      $this->postcreate();
+      exit();
+    }
+
+    if(($s_action == "branch_branch")||($this->dispNewBranch)){
+      $this->dispNewBranch=true;
+      $smarty->assign("iframe",false);
+		  $display 	.= $smarty->fetch(get_template_path('faiNewBranch.tpl', TRUE, dirname(__FILE__)));
+      return($display);
     }
     
     if(($s_action == "freeze_branch")||($this->dispNewFreeze)){
       $this->dispNewFreeze = true;
+      $smarty->assign("iframe",false);
 		  $display 	.= $smarty->fetch(get_template_path('faiNewBranch.tpl', TRUE, dirname(__FILE__)));
       return($display);
     }
@@ -468,71 +453,71 @@ class faiManagement extends plugin
      */
 
     /* Dialog handling */
-		if($s_action == "new_partition"){
-			$this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIpartitionTable");
-		}
+    if($s_action == "new_partition"){
+      $this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIpartitionTable");
+    }
 
-		/* Dialog handling */
-		if($s_action == "new_script"){
-			$this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIscript");
-		}
+    /* Dialog handling */
+    if($s_action == "new_script"){
+      $this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIscript");
+    }
 
-		/* Dialog handling */
-		if($s_action == "new_hook"){
-			$this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIhook");
-		}
+    /* Dialog handling */
+    if($s_action == "new_hook"){
+      $this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIhook");
+    }
 
-		/* Dialog handling */
-		if($s_action == "new_variable"){
-			$this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIvariable");
-		}
+    /* Dialog handling */
+    if($s_action == "new_variable"){
+      $this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIvariable");
+    }
 
-		/* Dialog handling */
-		if($s_action == "new_template"){
-			$this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAItemplate");
-		}
+    /* Dialog handling */
+    if($s_action == "new_template"){
+      $this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAItemplate");
+    }
 
-		/* Dialog handling */
-		if($s_action == "new_package"){
-			$this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIpackageList");
-		}
+    /* Dialog handling */
+    if($s_action == "new_package"){
+      $this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIpackageList");
+    }
 
-		/* New Profile */
-		if($s_action == "new_profile"){
-			$this->dn = "new" ;
-			$a_setup= $this->get_type(array("objectClass"=>array("FAIprofile")));
+    /* New Profile */
+    if($s_action == "new_profile"){
+      $this->dn = "new" ;
+      $a_setup= $this->get_type(array("objectClass"=>array("FAIprofile")));
 
-			$this->dialog = new $a_setup[0]($this->config,
-					$this->config->data['TABS'][$a_setup[2]],$this->dn);
-			$this->is_dialog = true;
+      $this->dialog = new $a_setup[0]($this->config,
+          $this->config->data['TABS'][$a_setup[2]],$this->dn);
+      $this->is_dialog = true;
 
-		}
+    }
 
-		if($s_action == "select_class_name_finished"){
-			$this->dialog->save_object();
-			if(count($this->dialog->check())!=0){
-				foreach($this->dialog->check() as $msg){
-					print_red($msg);
-				}		
-			}else{
-				$this->dn = "new" ;
-				$a_setup= $this->get_type(array("objectClass"=>array($this->dialog->objectClass)));
-				$name = $this->dialog->save();
+    if($s_action == "select_class_name_finished"){
+      $this->dialog->save_object();
+      if(count($this->dialog->check())!=0){
+        foreach($this->dialog->check() as $msg){
+          print_red($msg);
+        }		
+      }else{
+        $this->dn = "new" ;
+        $a_setup= $this->get_type(array("objectClass"=>array($this->dialog->objectClass)));
+        $name = $this->dialog->save();
 
-				$this->dialog = new $a_setup[0]($this->config,
-						$this->config->data['TABS'][$a_setup[2]],$this->dn,$name);
-				$this->dialog->by_object[$a_setup[1]]->cn = $name;
-				$this->is_dialog = true;
-			}		
-		}	
+        $this->dialog = new $a_setup[0]($this->config,
+            $this->config->data['TABS'][$a_setup[2]],$this->dn,$name);
+        $this->dialog->by_object[$a_setup[1]]->cn = $name;
+        $this->is_dialog = true;
+      }		
+    }	
 
-		/* Search is set */
-		if(isset($_GET['search'])){
-			$faifilter['regex']=$_GET['search']."*";
-		}
+    /* Search is set */
+    if(isset($_GET['search'])){
+      $faifilter['regex']=$_GET['search']."*";
+    }
 
-		/* Department select */
-		if((isset($_POST['base']))&&($s_action=="")){
+    /* Department select */
+    if((isset($_POST['base']))&&($s_action=="")){
 			$faifilter['base']=$_POST['base'];
 		}
 
@@ -1018,10 +1003,14 @@ class faiManagement extends plugin
   function CheckNewBranchName($name,$base){
     $f = $_SESSION['faifilter']['branch'];
 
+    if(empty($name)){
+      return(false);
+    }
+
     if($f == "main"){
       $f = $_SESSION['faifilter']['base'];
     } 
-    
+  
     if(in_array($name,$this->getBranches($f))) {
       return(false);
     }
