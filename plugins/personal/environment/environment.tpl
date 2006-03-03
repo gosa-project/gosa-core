@@ -123,7 +123,7 @@
 		</tr>
 	</table>
    </td>
-   <td>
+   <td style="vertical-align:top">
 	<h2><img class="center" alt="" src="images/fai_script.png" align="middle" />&nbsp;<label for="gotoLogonScript">{t}Logon scripts{/t}</label></h2>
 	<table summary="{t}Logon script management{/t}" style="width:100%">
 		<tr>
