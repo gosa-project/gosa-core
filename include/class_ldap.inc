@@ -403,13 +403,26 @@ class LDAP{
    
  
     if($is_first){
-      echo "<font style='font-size:11px;'><b>".
-              sprintf(_("Creating duplicate of '%s' in '%s':<br>"),$sourcedn,$destinationdn)."</b>";
+      echo "<font style='font-size:11px;'><h4>".
+              sprintf(_("Creating duplicate of %s in %s"),"<br><i>".$sourcedn."</i><br>","<br><i>".$destinationdn."</i><br>")."</h4>";
     }else{
       if($depth == 1 ){
-        echo "<br>"._("creating")." : ".preg_replace("/,.*$/","",$destinationdn);
+        echo "<br><h3>"._("Processing")." : ".preg_replace("/,.*$/","",$destinationdn)."</h3>";
       }else{
-        echo ". ";
+        $tmp = split(",",$sourcedn);
+        echo "<b>Current object : ";
+        for($i = 0; $i < ($depth -1 ) ; $i ++) {
+          echo preg_replace("/^.*=/","",$tmp[$i])." ";
+        }
+        echo "</b>";
+        echo ": <br>";
+
+        $deststr = $destinationdn;
+        if(strlen($deststr) > 96){
+          $deststr = substr($deststr,0,96)."...";
+        }
+
+        echo "".$deststr."</br>";
       }
     }
     
