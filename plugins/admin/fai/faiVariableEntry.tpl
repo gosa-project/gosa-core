@@ -9,7 +9,7 @@
 							{t}Name{/t}{$must}&nbsp;
 						</td>
 						<td>
-							<input value="{$cn}" size="45" maxlength="80" name="cn">
+							<input value="{$cn}" size="45" maxlength="80" name="cn" {$cnACL}>
 						</td>
 					</tr>
 					<tr>
@@ -17,7 +17,7 @@
 							{t}Description{/t}&nbsp;
 						</td>
 						<td>
-							<input value="{$description}" size="45" maxlength="80" name="description">
+							<input value="{$description}" size="45" maxlength="80" name="description" {$descriptionACL}>
 						</td>
 					</tr>
 				</table>
@@ -35,7 +35,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<input type="text" name="FAIvariableContent" value="{$FAIvariableContent}" id="Content" style="width:250px;">
+							<input type="text" name="FAIvariableContent" value="{$FAIvariableContent}" id="Content" style="width:250px;" {$FAIvariableContentACL}>
 						</td>
 					</tr>
 				</table>
@@ -45,7 +45,7 @@
 <p class="seperator">&nbsp;</p>
 <br>
 <div style="align:right;" align="right">
-	<input type="submit" value="{t}Apply{/t}" 	name="SaveSubObject">&nbsp;
+	<input type="submit" value="{t}Apply{/t}" 	name="SaveSubObject" {$cnACL}>&nbsp;
 	<input type="submit" value="{t}Cancel{/t}" 	name="CancelSubObject">
 </div>
 

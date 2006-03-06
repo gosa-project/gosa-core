@@ -20,7 +20,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<input size="45" maxlength="80" value="{$description}" {$description} name="description" id="description">
+							<input size="45" maxlength="80" value="{$description}" {$description} name="description" id="description" {$descriptionACL}>
 						</td>
 					</tr>
 				</table>
@@ -45,14 +45,14 @@
 						<input type="submit" name="EditSubObject"    value="{t}Edit{/t}"    title="{t}Edit{/t}">
 						<input type="submit" name="DelSubObject"     value="{t}Delete{/t}"  title="{t}Delete{/t}">
 						-->
-						<input type="submit" name="AddSubObject"     value="{t}Add{/t}"		title="{t}Add{/t}">
+						<input type="submit" name="AddSubObject"     value="{t}Add{/t}"		title="{t}Add{/t}" {$cnACL}>
 					</td>
 				</tr>
 				</table>
 		</td>
 	</tr>
 </table>
-<input type="hidden" value="1" name="FAIscript_posted">
+<input type="hidden" value="1" name="FAIscript_posted" >
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page

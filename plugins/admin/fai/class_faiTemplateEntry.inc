@@ -25,6 +25,8 @@ class faiTemplateEntry extends plugin
   var $user          = "root";
   var $group         = "root";
   var $binary        = false;
+
+  var $FAIstate      = "";
   
   function faiTemplateEntry ($config, $dn= NULL,$object=false)
   {
@@ -36,6 +38,11 @@ class faiTemplateEntry extends plugin
         $oname = $name;
         $this->$oname=$value;
       }
+
+      if(isset($this->attrs['FAIstate'][0])){
+        $this->FAIstate = $this->attrs['FAIstate'][0];
+      }
+
     }else{
       $this->status = "new";
       $this->orig_cn       = false;
@@ -106,6 +113,14 @@ class faiTemplateEntry extends plugin
 
     $smarty->assign("FAItemplateFile","");
 
+    foreach($this->attributes as $attr){
+      if(($this->FAIstate == "freeze") || (chkacl($this->acl,$attr)!= "")){
+        $smarty->assign($attr."ACL"," disabled ");
+      }else{
+        $smarty->assign($attr."ACL","  ");
+      }
+    }
+
     $display.= $smarty->fetch(get_template_path('faiTemplateEntry.tpl', TRUE));
     return($display);
   }
@@ -116,7 +131,7 @@ class faiTemplateEntry extends plugin
     if (!isset($_POST['FAItemplatePath'])){
       return;
     }
-    if(isset($_POST['SubObjectFormSubmitted'])){
+    if((isset($_POST['SubObjectFormSubmitted'])) && ($this->FAIstate != "freeze")){
       foreach($this->attributes as $attrs){
         if($attrs == "FAItemplateFile") 
           continue;
@@ -130,22 +145,21 @@ class faiTemplateEntry extends plugin
           $this->$attrs = "";
         }
       }
-    }
-
-    /* Save mode */
-    $tmode= "";
-    foreach (array("s", "u", "g", "o") as $type){
-      $nr= 1;
-      $dest= 0;
-      while ($nr < 5){
-        if (isset($_POST["$type$nr"])){
-          $dest+= $nr;
+      /* Save mode */
+      $tmode= "";
+      foreach (array("s", "u", "g", "o") as $type){
+        $nr= 1;
+        $dest= 0;
+        while ($nr < 5){
+          if (isset($_POST["$type$nr"])){
+            $dest+= $nr;
+          }
+          $nr+= $nr;
         }
-        $nr+= $nr;
+        $tmode= $tmode.$dest;
       }
-      $tmode= $tmode.$dest;
+      $this->FAImode= $tmode;
     }
-    $this->FAImode= $tmode;
   }
 
   /* Check supplied data */

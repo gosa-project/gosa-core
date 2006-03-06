@@ -54,10 +54,14 @@ class faiPackage extends plugin
   var $strID            ="";
   var $newDialogShown   =false;
 
+  var $FAIstate         = "";
+
   function faiPackage ($config, $dn= NULL)
   {
     /* Load Attributes */
     plugin::plugin ($config, $dn);
+
+    $this->acl ="#all#";
 
     /* If "dn==new" we try to create a new entry
      * Else we must read all objects from ldap which belong to this entry.
@@ -65,6 +69,19 @@ class faiPackage extends plugin
      */
     if($dn != "new"){
       $this->dn =$dn;
+
+      /* Set acls
+       */
+      $ui   = get_userinfo();
+      $acl  = get_permissions ($this->dn, $ui->subtreeACL);
+      $acli = get_module_permission($acl, "FAIclass", $this->dn);
+      $this->acl=$acli;
+
+      /* Get FAIstate
+       */
+      if(isset($this->attrs['FAIstate'][0])){
+        $this->FAIstate = $this->attrs['FAIstate'][0];
+      }
     }
 
     if(isset($this->attrs['FAIpackage'])){
@@ -179,9 +196,11 @@ class faiPackage extends plugin
 
     /* Delte selected package */ 
     if(isset($_POST['Delpkg'])){
-      foreach($_POST['usedPackages'] as $del){
-        if(isset($this->usedPackages[$del])){
-          unset($this->usedPackages[$del]);
+      if($this->FAIstate != "freeze"){
+        foreach($_POST['usedPackages'] as $del){
+          if(isset($this->usedPackages[$del])){
+            unset($this->usedPackages[$del]);
+          }
         }
       }
     }
@@ -194,17 +213,22 @@ class faiPackage extends plugin
 
     /* attach new packages */
     if(isset($_POST['SaveSubObject'])) {
-      $this->dialog->save_object();
-      if(count($this->dialog->check())){
-        foreach($this->dialog->check() as $msgs){
-        print_red($msgs);
+      if($this->FAIstate != "freeze"){
+        $this->dialog->save_object();
+        if(count($this->dialog->check())){
+          foreach($this->dialog->check() as $msgs){
+            print_red($msgs);
+          }
+        }else{
+          $use = $this->dialog->save();
+          $this->usedPackages = $use;
+          $this->dialog = false;
+          $this->is_dialog=false;
+          ksort($this->usedPackages);
         }
       }else{
-        $use = $this->dialog->save();
-        $this->usedPackages = $use;
         $this->dialog = false;
         $this->is_dialog=false;
-        ksort($this->usedPackages);
       }
     }
 
@@ -219,12 +243,15 @@ class faiPackage extends plugin
       }
   
       $this->dialog = new faiPackageConfiguration($this->config, $this->dn,$pkg, $path, $pkg_config);
+      $this->dialog ->acl = $this->acl;
       $this->is_dialog =true;
     }
   
     /* Save Configuration */
     if(isset($_POST['SaveObjectConfig'])){
-      $this->ConfiguredPackages= array_merge($this->ConfiguredPackages,$this->dialog->save());
+      if($this->FAIstate != "freeze"){
+        $this->ConfiguredPackages= array_merge($this->ConfiguredPackages,$this->dialog->save());
+      }
       $this->dialog = false;
       $this->is_dialog=false;
     }
@@ -244,6 +271,10 @@ class faiPackage extends plugin
     $strsec = "";
     foreach($this->FAIdebianSection as $sec){
        $strsec .= $sec." ";
+    }
+
+    foreach($this->attributes as $attr){
+      $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
     }
 
     $smarty->assign("OptionsACL","");
@@ -272,8 +303,11 @@ class faiPackage extends plugin
    */
   function save_object()
   {
-    
+  
+    if($this->FAIstate == "freeze") return;  
     plugin::save_object();
+  
+
     foreach($this->attributes as $attrs){
       if(isset($_POST[$attrs])){
         $this->$attrs = $_POST[$attrs];

@@ -19,10 +19,14 @@ class faiPartitionTable extends plugin
   var $is_dialog        = false;    // specifies which buttons will be shown to save or abort
   var $dialog           = NULL;     // a dialog, e.g. new disk dialog
 
+  var $FAIstate         = "";
+
   function faiPartitionTable ($config, $dn= NULL)
   {
     /* Load Attributes */
     plugin::plugin ($config, $dn);
+
+    $this->acl ="#all#";
 
     /* If "dn==new" we try to create a new entry
      * Else we must read all objects from ldap which belong to this entry.
@@ -30,6 +34,19 @@ class faiPartitionTable extends plugin
      */
     if($dn != "new"){
       $this->dn =$dn;
+
+      /* Set acls
+       */
+      $ui   = get_userinfo();
+      $acl  = get_permissions ($this->dn, $ui->subtreeACL);
+      $acli = get_module_permission($acl, "FAIclass", $this->dn);
+      $this->acl=$acli;
+
+      /* Get FAIstate
+       */
+      if(isset($this->attrs['FAIstate'][0])){
+        $this->FAIstate = $this->attrs['FAIstate'][0];
+      }
 
       /* Read all disks from ldap taht are defined fot this partition table 
        */
@@ -94,6 +111,8 @@ class faiPartitionTable extends plugin
         $usedDiskNames[]= $key;
       }
       $this->dialog = new faiPartitionTableEntry($this->config,$this->dn,$usedDiskNames); 
+      $this->dialog->acl = $this->acl;
+      $this->dialog->FAIstate = $this->FAIstate;
       $this->is_dialog = true;
     }
 
@@ -116,6 +135,8 @@ class faiPartitionTable extends plugin
         }
       }
       $this->dialog = new faiPartitionTableEntry($this->config,$this->dn,$usedDiskNames,$this->disks[$Udisk]); 
+      $this->dialog->acl = $this->acl;
+      $this->dialog->FAIstate = $this->FAIstate;
       $_SESSION['objectinfo'] = $this->disks[$Udisk]['dn'];
       $this->is_dialog = true;
     }
@@ -127,40 +148,46 @@ class faiPartitionTable extends plugin
       $this->dialog = NULL;
       $this->is_dialog=false;
     }
-  
+
     /* Dialog saved
      * Save given data from Dialog, if no error is occured
      */
     if(isset($_POST['SaveDisk'])){
-      $this->dialog->save_object();
-      if(count($this->dialog->check())){
-        foreach($this->dialog->check() as $msg){
-          print_red($msg);
-        }
-      }else{
-        $disk = $this->dialog->save();
-        if(isset($disk['rename'])){
-          if($this->disks[$disk['rename']['from']]['status']=="edited"){
-            $this->disks[$disk['rename']['from']]['status']="delete";
-          }else{
-            unset($this->disks[$disk['rename']['from']]);
+
+      if($this->FAIstate != "freeze"){
+        $this->dialog->save_object();
+        if(count($this->dialog->check())){
+          foreach($this->dialog->check() as $msg){
+            print_red($msg);
           }
-  
-          foreach($disk['partitions'] as $key => $val){
-            if($disk['partitions'][$key]['status']!="delete"){
-              $disk['partitions'][$key]['status']= "new";
+        }else{
+          $disk = $this->dialog->save();
+          if(isset($disk['rename'])){
+            if($this->disks[$disk['rename']['from']]['status']=="edited"){
+              $this->disks[$disk['rename']['from']]['status']="delete";
+            }else{
+              unset($this->disks[$disk['rename']['from']]);
             }
+
+            foreach($disk['partitions'] as $key => $val){
+              if($disk['partitions'][$key]['status']!="delete"){
+                $disk['partitions'][$key]['status']= "new";
+              }
+            }
+
+            $disk['status']="new";
+            $disk['cn']= $disk['rename']['to'];
           }
 
-          $disk['status']="new";
-          $disk['cn']= $disk['rename']['to'];
+          $this->disks[$disk['cn']]=$disk; 
+          unset($this->dialog);
+          $this->dialog = NULL;
+          $this->is_dialog=false;
+          ksort($this->disks);
         }
-      
-        $this->disks[$disk['cn']]=$disk; 
-        unset($this->dialog);
+      }else{
         $this->dialog = NULL;
         $this->is_dialog=false;
-        ksort($this->disks);
       }
     }
 
@@ -168,22 +195,23 @@ class faiPartitionTable extends plugin
      * Assign delete status for all its partitions      
      */
     if((isset($_POST['DelDisk']))&&(!empty($_POST['disks']))){
-
-      foreach($_POST['disks'] as $disk) {
-        if($this->disks[$disk]['status']=="edited"){
-          $this->disks[$disk."-delete"]=$this->disks[$disk];
-          unset($this->disks[$disk]);
-          $disk = $disk."-delete";        
-          $this->disks[$disk]['status']="delete";
-          foreach($this->disks[$disk]['partitions'] as $name => $value ){
-            if($value['status']=="edited"){
-              $this->disks[$disk]['partitions'][$name]['status']="delete"; 
-            }else{
-              unset($this->disks[$disk]['partitions'][$name]);
+      if($this->FAIstate != "freeze"){
+        foreach($_POST['disks'] as $disk) {
+          if($this->disks[$disk]['status']=="edited"){
+            $this->disks[$disk."-delete"]=$this->disks[$disk];
+            unset($this->disks[$disk]);
+            $disk = $disk."-delete";        
+            $this->disks[$disk]['status']="delete";
+            foreach($this->disks[$disk]['partitions'] as $name => $value ){
+              if($value['status']=="edited"){
+                $this->disks[$disk]['partitions'][$name]['status']="delete"; 
+              }else{
+                unset($this->disks[$disk]['partitions'][$name]);
+              }
             }
+          }else{
+            unset($this->disks[$disk]);
           }
-        }else{
-          unset($this->disks[$disk]);
         }
       }
     }
@@ -205,7 +233,11 @@ class faiPartitionTable extends plugin
         $smarty->assign($attrs."CHK"," disabled ");
       }
     }
-    
+   
+    foreach($this->attributes as $attr){
+      $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
+    }
+
     $disks = $this->getDisks();
     $smarty->assign("disks"   ,$disks);
     $smarty->assign("diskKeys",array_flip($disks));
@@ -262,6 +294,7 @@ class faiPartitionTable extends plugin
    */
   function save_object()
   {
+    if($this->FAIstate == "freeze") return;
     plugin::save_object();
     foreach($this->attributes as $attrs){
       if(isset($_POST[$attrs])){

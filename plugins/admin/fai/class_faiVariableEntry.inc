@@ -18,6 +18,8 @@ class faiVariableEntry extends plugin
   var $FAIvariableContent   = "";
   var $description   = "";
   var $status        = "new";
+
+  var $FAIstate      = "";
   
   function faiVariableEntry ($config, $dn= NULL,$object=false)
   {
@@ -29,6 +31,11 @@ class faiVariableEntry extends plugin
         $oname = $name;
         $this->$oname=addslashes($value);
       }
+
+      if(isset($this->attrs['FAIstate'][0])){
+        $this->FAIstate = $this->attrs['FAIstate'][0];
+      }
+
     }else{
       $this->status = "new";
       $this->orig_cn       = false;
@@ -55,6 +62,14 @@ class faiVariableEntry extends plugin
       }
     }
 
+    foreach($this->attributes as $attr){
+      if(($this->FAIstate == "freeze") || (chkacl($this->acl,$attr)!= "")){
+        $smarty->assign($attr."ACL"," disabled ");
+      }else{
+        $smarty->assign($attr."ACL","  ");
+      }
+    }
+
     $display.= $smarty->fetch(get_template_path('faiVariableEntry.tpl', TRUE));
     return($display);
   }
@@ -62,7 +77,7 @@ class faiVariableEntry extends plugin
   /* Save data to object */
   function save_object()
   {
-    if(isset($_POST['SubObjectFormSubmitted'])){
+    if((isset($_POST['SubObjectFormSubmitted'])) && ($this->FAIstate != "freeze")){
       foreach($this->attributes as $attrs){
         if(isset($_POST[$attrs])){
           $this->$attrs = $_POST[$attrs];

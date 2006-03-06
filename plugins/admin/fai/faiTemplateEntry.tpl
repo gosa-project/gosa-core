@@ -5,11 +5,11 @@
 <tr>
 	<td width="50%">
 		{t}Name{/t}{$must}&nbsp;
-		<input value="{$cn}" name="cn" size="45" maxlength="80">&nbsp;&nbsp;
+		<input value="{$cn}" name="cn" size="45" maxlength="80" {$cnACL}>&nbsp;&nbsp;
 	</td>
 	<td>
 		{t}Description{/t}&nbsp;
-		<input size="45" maxlength="80" value="{$description}" name="description">
+		<input size="45" maxlength="80" value="{$description}" name="description" {$descriptionACL}>
 	</td>
 </tr>
 </table>
@@ -36,8 +36,8 @@
 			{/if}
 			<br>
 			<br>
-			<input type="file" name="FAItemplateFile" value="{$FAItemplateFile}" id="FAItemplateFile">
-			&nbsp;<input type="submit" value="{t}Upload{/t}" name="TmpFileUpload">
+			<input type="file" name="FAItemplateFile" value="{$FAItemplateFile}" id="FAItemplateFile" {$FAItemplateFileACL}>
+			&nbsp;<input type="submit" value="{t}Upload{/t}" name="TmpFileUpload" {$FAItemplateFileACL}>
 			<br>
 			<br>
 			</td>
@@ -48,7 +48,7 @@
 				</LABEL>
 				</td>
 			<td>
-				<input type="text" name="FAItemplatePath" value="{$FAItemplatePath}" id="FAItemplatePath" size="45">
+				<input type="text" name="FAItemplatePath" value="{$FAItemplatePath}" id="FAItemplatePath" size="45" {$FAItemplatePathACL}>
 				</td>
 		</tr>
 		</table>
@@ -63,7 +63,7 @@
 			</LABEL>
 			</td>
 		<td>
-			<input type="text" name="user" value="{$user}" id="user" size="15">
+			<input type="text" name="user" value="{$user}" id="user" size="15" {$userACL}>
 			</td>
 	</tr><tr>
 		<td style="vertical-align:top">
@@ -72,7 +72,7 @@
 			</LABEL>
 			</td>
 		<td>
-			<input type="text" name="group" value="{$group}" id="group" size="15">
+			<input type="text" name="group" value="{$group}" id="group" size="15" {$groupACL}>
 			<br>
 			<br>
 			</td>
@@ -92,29 +92,29 @@
 			<th>&nbsp;</th>
 		</tr>
 		<tr><td>{t}User{/t}</td>
-			<td align="center"><input type="checkbox" name="u4" value="4" {$u4}></td>
-			<td align="center"><input type="checkbox" name="u2" value="2" {$u2}></td>
-			<td align="center"><input type="checkbox" name="u1" value="1" {$u1}></td>
+			<td align="center"><input type="checkbox" name="u4" value="4" {$u4} {$userACL}></td>
+			<td align="center"><input type="checkbox" name="u2" value="2" {$u2} {$userACL}></td>
+			<td align="center"><input type="checkbox" name="u1" value="1" {$u1} {$userACL}></td>
 			<td>&nbsp;</td>
-			<td align="center"><input type="checkbox" name="s4" value="4" {$s4}></td>
+			<td align="center"><input type="checkbox" name="s4" value="4" {$s4} {$userACL}></td>
 			<td>({t}SUID{/t})</td>
 			</tr>
 
 		<tr><td>{t}Group{/t}</td>
-			<td align="center"><input type="checkbox" name="g4" value="4" {$g4}></td>
-			<td align="center"><input type="checkbox" name="g2" value="2" {$g2}></td>
-			<td align="center"><input type="checkbox" name="g1" value="1" {$g1}></td>
+			<td align="center"><input type="checkbox" name="g4" value="4" {$g4} {$userACL}></td>
+			<td align="center"><input type="checkbox" name="g2" value="2" {$g2} {$userACL}></td>
+			<td align="center"><input type="checkbox" name="g1" value="1" {$g1} {$userACL}></td>
 			<td>&nbsp;</td>
-			<td align="center"><input type="checkbox" name="s2" value="2" {$s2}></td>
+			<td align="center"><input type="checkbox" name="s2" value="2" {$s2} {$userACL}></td>
 			<td>({t}SGID{/t})</td>
 			</tr>
 
 		<tr><td>{t}Others{/t}</td>
-			<td align="center"><input type="checkbox" name="o4" value="4" {$o4}></td>
-			<td align="center"><input type="checkbox" name="o2" value="2" {$o2}></td>
-			<td align="center"><input type="checkbox" name="o1" value="1" {$o1}></td>
+			<td align="center"><input type="checkbox" name="o4" value="4" {$o4} {$userACL}></td>
+			<td align="center"><input type="checkbox" name="o2" value="2" {$o2} {$userACL}></td>
+			<td align="center"><input type="checkbox" name="o1" value="1" {$o1} {$userACL}></td>
 			<td>&nbsp;</td>
-			<td align="center"><input type="checkbox" name="s1" value="1" {$s1}></td>
+			<td align="center"><input type="checkbox" name="s1" value="1" {$s1} {$userACL}></td>
 			<td>({t}sticky{/t})</td>
 	</tr></table>
 	

@@ -9,7 +9,7 @@
 							{t}Name{/t}{$must}&nbsp;
 						</td>
 						<td>
-							<input value="{$cn}" size="45" maxlength="80" name="cn">
+							<input value="{$cn}" size="45" maxlength="80" name="cn"  {$cnACL}>
 						</td>
 					</tr>
 					<tr>
@@ -17,7 +17,7 @@
 							{t}Description{/t}&nbsp;
 						</td>
 						<td>
-							<input size="45" maxlength="80" value="{$description}" name="description">
+							<input size="45" maxlength="80" value="{$description}" name="description" {$descriptionACL}>
 						</td>
 					</tr>
 				</table>
@@ -35,7 +35,7 @@
 							</LABEL>
 						</td>
 						<td>
-						    <select name="FAIpriority" title="{t}Choose a priority{/t}">
+						    <select name="FAIpriority" title="{t}Choose a priority{/t}" {$FAIpriorityACL}>
                 				{html_options values=$FAIprioritys output=$FAIprioritys selected=$FAIpriority}
             				</select>
 						</td>
@@ -53,19 +53,19 @@
 <table summary="" width="99%">
     <tr>
         <td>
-            <textarea name="FAIscript" style="width:100%;height:300px;" id="FAIscript">{$FAIscript}</textarea>
+            <textarea name="FAIscript" style="width:100%;height:300px;" id="FAIscript"  >{$FAIscript}</textarea>
         </td>
     </tr>
 </table>
 <br>
 <div>
-	<input type="file" name="ImportFile">&nbsp;
-	<input type="submit" name="ImportUpload" value="{t}Import script{/t}">
+	<input type="file" name="ImportFile"  {$FAIscriptACL}>&nbsp;
+	<input type="submit" name="ImportUpload" value="{t}Import script{/t}" {$FAIscriptACL}>
 	{$DownMe}
 </div>
 <br>
 <div style="align:right;" align="right">
-	<input type="submit" value="{t}Apply{/t}" 	name="SaveSubObject">&nbsp;
+	<input type="submit" value="{t}Apply{/t}" 	name="SaveSubObject" {$cnACL}>&nbsp;
 	<input type="submit" value="{t}Cancel{/t}" 	name="CancelSubObject">
 </div>
 <!-- Place cursor -->

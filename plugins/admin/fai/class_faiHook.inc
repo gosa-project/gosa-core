@@ -34,16 +34,33 @@ class faiHook extends plugin
   var $dialog           = NULL;     // a dialog, e.g. new disk dialog
   var $SubObjects       = array();  // All leafobjects of this object
 
+  var $FAIstate         = "";  
+
   function faiHook ($config, $dn= NULL)
   {
     /* Load Attributes */
     plugin::plugin ($config, $dn);
+
+    $this->acl ="#all#";
 
     /* If "dn==new" we try to create a new entry
      * Else we must read all objects from ldap which belong to this entry.
      */
     if($dn != "new"){
       $this->dn =$dn;
+    
+      /* Set acls 
+       */
+      $ui   = get_userinfo();
+      $acl  = get_permissions ($this->dn, $ui->subtreeACL);
+      $acli = get_module_permission($acl, "FAIclass", $this->dn);
+      $this->acl=$acli;
+
+      /* Get FAIstate
+       */
+      if(isset($this->attrs['FAIstate'][0])){
+        $this->FAIstate = $this->attrs['FAIstate'][0];
+      }
 
       /* Read all leaf objects of this object (For FAIscript this would be FAIscriptEntry)
        */
@@ -53,7 +70,7 @@ class faiHook extends plugin
 
       while($object = $ldap->fetch()){
         /* Set status for save management */
-  
+
         foreach($this->subAttributes as $attrs){
           if(!isset($object[$attrs][0])){
             $this->SubObjects[$object['cn'][0]][$attrs]="";
@@ -61,7 +78,7 @@ class faiHook extends plugin
             $this->SubObjects[$object['cn'][0]][$attrs]=$object[$attrs][0];
           }
         }
-     
+
         $this->SubObjects[$object['cn'][0]]['status']      = "edited";
         $this->SubObjects[$object['cn'][0]]['dn']          = $object['dn'];
 
@@ -93,8 +110,8 @@ class faiHook extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     /* Fill templating stuff */
     $smarty= get_smarty();
@@ -109,6 +126,7 @@ class faiHook extends plugin
         $entry = preg_replace("/^editscript_/","",$name);
         $entry = base64_decode(preg_replace("/_.*/","",$entry));
         $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$entry]);
+        $this->dialog->acl = $this->acl;
         $_SESSION['objectinfo'] = $this->SubObjects[$entry]['dn'];
         $this->dialog->parent = &$this;
         $this->is_dialog=true;
@@ -129,23 +147,25 @@ class faiHook extends plugin
     /* Add new sub object */
     if(isset($_POST['AddSubObject'])){
       $this->dialog= new $this->subClassName($this->config,"new");
+      $this->dialog->acl = $this->acl;
       $this->dialog->parent = &$this;
       $this->is_dialog=true;
     }
-  
+
     if($this->dn != "new"){
       $_SESSION['objectinfo']= $this->dn;
     }
     /* Edit selected Sub Object */
     if((isset($_POST['EditSubObject']))&&(isset($_POST['SubObject']))){
       $hook = $_POST['SubObject'][0];
-    
+
       $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$hook]);
+      $this->dialog->acl = $this->acl;
       $this->dialog->parent = &$this;
       $_SESSION['objectinfo'] = $this->SubObjects[$hook]['dn'];
       $this->is_dialog=true;
     }
-    
+
     /* Remove Sub object */
     if((isset($_POST['DelSubObject']))&&(isset($_POST['SubObject']))){
       foreach($_POST['SubObject'] as $hook){
@@ -221,13 +241,19 @@ class faiHook extends plugin
     }
 
 
-    
+
     /* Divlist            added 28.02.2006
        Containing FAIscripts
      */
+
     $divlist = new divSelectBox("FAIhooks");
-    $img_edit = "<input type='image' src='images/edit.png'      name='editscript_%s'    title='"._("edit")."' alt='"._("edit")."'>";
-    $img_remo = "<input type='image' src='images/edittrash.png' name='deletescript_%s'  title='"._("delete")."' alt='"._("delete")."'>";
+    if((chkacl($this->acl,"cn")!="") || ($this->FAIstate == "freeze")){
+      $img_edit = "<input type='image' src='images/edit.png'      name='editscript_%s'    title='"._("edit")."' alt='"._("edit")."'>";
+      $img_remo = ""; 
+    }else{
+      $img_edit = "<input type='image' src='images/edit.png'      name='editscript_%s'    title='"._("edit")."' alt='"._("edit")."'>";
+      $img_remo = "<input type='image' src='images/edittrash.png' name='deletescript_%s'  title='"._("delete")."' alt='"._("delete")."'>";
+    }
 
     foreach($this->getList(true) as $key => $name){
 
@@ -235,26 +261,23 @@ class faiHook extends plugin
         $down = "";
       }else{
         $down = "<a href='getFAIscript.php?id=".base64_encode($name['dn'])."' target='_blank'>
-                      <img src='images/save.png' alt='"._("Download")."' title='"._("Download")."' border=0>
-                 </a>";
+          <img src='images/save.png' alt='"._("Download")."' title='"._("Download")."' border=0>
+          </a>";
       }
 
       $divlist->AddEntry(array( array("string"=>$name['name']),
-                                array("string"=>$down , "attach" => "style='width:20px;'"),
-                                array("string"=>str_replace("%s",base64_encode($key),$img_edit.$img_remo),
-                                      "attach"=>"style='border-right: 0px;width:50px;text-align:right;'")));
+            array("string"=>$down , "attach" => "style='width:20px;'"),
+            array("string"=>str_replace("%s",base64_encode($key),$img_edit.$img_remo),
+              "attach"=>"style='border-right: 0px;width:50px;text-align:right;'")));
     }
     $smarty->assign("Entry_divlist",$divlist->DrawList());
     /* Divlist creation complete
      */
 
-
-
-
     $smarty->assign("SubObjects",$this->getList());
     $smarty->assign("SubObjectKeys",array_flip($this->getList()));
 
-     /* Magic quotes GPC, escapes every ' " \, to solve some security risks
+    /* Magic quotes GPC, escapes every ' " \, to solve some security risks
      * If we post the escaped strings they will be escaped again
      */
     foreach($this->attributes as $attrs){
@@ -265,12 +288,16 @@ class faiHook extends plugin
       }
     }
 
+    foreach($this->attributes as $attr){
+      $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
+    }
+
     $display.= $smarty->fetch(get_template_path('faiHook.tpl', TRUE));
     return($display);
   }
 
   /* Generate listbox friendly SubObject list
-  */
+   */
   function getList($use_dns=false){
     $a_return=array();
     foreach($this->SubObjects as $obj){
@@ -310,7 +337,7 @@ class faiHook extends plugin
    */
   function save_object()
   {
-    if(isset($_POST['FAIhook_posted'])){
+    if((isset($_POST['FAIhook_posted'])) && ($this->FAIstate != "freeze")){
       plugin::save_object();
       foreach($this->attributes as $attrs){
         if(isset($_POST[$attrs])){
@@ -333,7 +360,7 @@ class faiHook extends plugin
   function save()
   {
     plugin::save();
- 
+
     $ldap = $this->config->get_ldap_link();
 
     $ldap->cat($this->dn);
@@ -341,7 +368,7 @@ class faiHook extends plugin
       /* Write FAIscript to ldap*/ 
       $ldap->cd($this->dn);
       $this->cleanup();
-$ldap->modify ($this->attrs); 
+      $ldap->modify ($this->attrs); 
 
     }else{
       /* Write FAIscript to ldap*/ 
@@ -351,7 +378,7 @@ $ldap->modify ($this->attrs);
       $ldap->add($this->attrs);
     }
     show_ldap_error($ldap->get_error()); 
- 
+
     /* Prepare FAIscriptEntry to write it to ldap
      * First sort array.
      *  Because we must delete old entries first.
@@ -397,7 +424,7 @@ $ldap->modify ($this->attrs);
           $obj['status']="modify";
         }
       }
- 
+
       if($obj['status'] == "delete"){
         $ldap->cd($sub_dn);
         $ldap->rmdir_recursive($sub_dn);
@@ -405,7 +432,7 @@ $ldap->modify ($this->attrs);
       }elseif($obj['status'] == "edited"){
         $ldap->cd($sub_dn);
         $this->cleanup();
-$ldap->modify ($tmp); 
+        $ldap->modify ($tmp); 
 
         $this->handle_post_events("modify");
       }elseif($obj['status']=="new"){
@@ -421,7 +448,7 @@ $ldap->modify ($tmp);
       show_ldap_error($ldap->get_error()); 
     }
   }
-  
+
   function readBinary($attr,$dn){
     $Data  ="";
     $ds= ldap_connect($this->config->current['SERVER']);

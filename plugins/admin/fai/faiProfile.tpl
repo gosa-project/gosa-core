@@ -10,7 +10,7 @@
 						</LABEL>
 					</td>
 					<td>
-						<input value="{$cn}" size="45" maxlength="80" id="cn" name="cn">
+						<input value="{$cn}" size="45" maxlength="80" id="cn" name="cn" {$cnACL}>
 					</td>
 				</tr>
 				<tr>
@@ -20,7 +20,7 @@
 						</LABEL>
 					</td>
 					<td>
-						<input value="{$description}" size="45" maxlength="80" name="description" id="description">
+						<input value="{$description}" size="45" maxlength="80" name="description" id="description" {$descriptionACL}>
 					</td>
 				</tr>
 			</table>
@@ -35,7 +35,7 @@
 						</select>-->
 						{$divlist}
 						<br>
-						<input type="submit" name="AddClass" value="{t}Add{/t}">
+						<input type="submit" name="AddClass" value="{t}Add{/t}" {$cnACL}>
 						<input type="hidden" name="edit_helper">
 					</td>
 				</tr>

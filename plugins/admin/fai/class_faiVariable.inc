@@ -34,17 +34,35 @@ class faiVariable extends plugin
   var $dialog           = NULL;     // a dialog, e.g. new disk dialog
   var $SubObjects       = array();  // All leafobjects of this object
 
+  var $FAIstate         = "";
+
   function faiVariable ($config, $dn= NULL)
   {
     /* Load Attributes */
     plugin::plugin ($config, $dn);
 
+    $this->acl ="#all#";
+
     /* If "dn==new" we try to create a new entry
      * Else we must read all objects from ldap which belong to this entry.
      * First read SubObjects from ldap ... and then the partition definitions for the SubObjects.
      */
+
     if($dn != "new"){
       $this->dn =$dn;
+
+      /* Set acls
+       */
+      $ui   = get_userinfo();
+      $acl  = get_permissions ($this->dn, $ui->subtreeACL);
+      $acli = get_module_permission($acl, "FAIclass", $this->dn);
+      $this->acl=$acli;
+
+      /* Get FAIstate
+       */
+      if(isset($this->attrs['FAIstate'][0])){
+        $this->FAIstate = $this->attrs['FAIstate'][0];
+      }
 
       /* Read all leaf objects of this object (For FAIscript this would be FAIscriptEntry)
        */
@@ -85,6 +103,7 @@ class faiVariable extends plugin
     /* Add new sub object */
     if(isset($_POST['AddSubObject'])){
       $this->dialog= new $this->subClassName($this->config,"new");
+      $this->dialog->acl = $this->acl;
       $this->is_dialog=true;
     }
 
@@ -99,6 +118,7 @@ class faiVariable extends plugin
       $var = $_POST['SubObject'][0];
     
       $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$var]);
+      $this->dialog->acl = $this->acl;
       $_SESSION['objectinfo'] = $this->SubObjects[$var]['dn'];
       $this->is_dialog=true;
     }
@@ -182,6 +202,11 @@ class faiVariable extends plugin
       }
     }
 
+      foreach($this->attributes as $attr){
+      $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
+    }
+
+
     $display.= $smarty->fetch(get_template_path('faiVariable.tpl', TRUE));
     return($display);
   }
@@ -226,7 +251,7 @@ class faiVariable extends plugin
    */
   function save_object()
   {
-    if(isset($_POST['FAIvariable_posted'])){
+    if((isset($_POST['FAIvariable_posted'])) && ($this->FAIstate != "freeze") ){
       plugin::save_object();
       foreach($this->attributes as $attrs){
         if(isset($_POST[$attrs])){

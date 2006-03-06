@@ -30,11 +30,24 @@ class faiProfile extends plugin
   var $FAIclasses       = array();  // Contains classname seperated in an array
   var $FAIAllclasses    = array();  // Contains all possible Classnames
 
+  var $FAIstate      = "";
+
   function faiProfile($config, $dn= NULL)
   {
     /* Load Attributes */
     plugin::plugin ($config, $dn);
     $ldap=$this->config->get_ldap_link();
+
+    $this->acl = "#all#";
+
+    if($this->dn != "new"){
+      /* Set acls
+       */
+      $ui   = get_userinfo();
+      $acl  = get_permissions ($this->dn, $ui->subtreeACL);
+      $acli = get_module_permission($acl, "FAIclass", $this->dn);
+      $this->acl=$acli;
+    }
 
     /* Parse ldap attribute to get all assigned classes */
     $tmp = split(" ",$this->FAIclass);
@@ -44,7 +57,11 @@ class faiProfile extends plugin
         $tmp2[trim($class)] = trim($class);
       }
     }
-   
+
+    if(isset($this->attrs['FAIstate'][0])){
+      $this->FAIstate = $this->attrs['FAIstate'][0];
+    }
+
     /* Sort assigned classes */ 
     if(is_array($tmp2)){
       foreach($tmp2 as $class){
@@ -298,7 +315,13 @@ class faiProfile extends plugin
   
       $field1 = array("string"=> $usedClass,"attach"=>"");
       $field2 = array("string"=> $str,"attach"=>"");
-      $field3 = array("string"=> preg_replace("/%KEY%/",base64_encode($usedClass),$actions).preg_replace("/%s/",base64_encode($usedClass),$linkupdown),"attach"=>"style='border-right:none;'");
+      if($this->FAIstate != "freeze"){
+        $field3 = array("string"=> preg_replace("/%KEY%/",base64_encode($usedClass),$actions).
+            preg_replace("/%s/",base64_encode($usedClass),$linkupdown),
+            "attach"=>"style='border-right:none;'");
+      }else{
+        $field3 = array("string"=>"&nbsp;", "attach"=>"style='border-right:none;'");
+      }
       $divlist->AddEntry(array($field1,$field2,$field3));
     }
 
@@ -316,6 +339,13 @@ class faiProfile extends plugin
       }
     }
 
+    foreach($this->attributes as $attr){
+      if(($this->FAIstate == "freeze") || (chkacl($this->acl,$attr)!= "")){
+        $smarty->assign($attr."ACL"," disabled ");
+      }else{
+        $smarty->assign($attr."ACL","  ");
+      }
+    }
 
     $display.= $smarty->fetch(get_template_path('faiProfile.tpl', TRUE));
     return($display);

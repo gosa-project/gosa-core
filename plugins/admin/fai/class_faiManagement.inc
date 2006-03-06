@@ -295,9 +295,11 @@ class faiManagement extends plugin
 			$this->dialog= new $a_setup[0]($this->config,
 					$this->config->data['TABS'][$a_setup[2]],$this->dn);
 			$this->is_dialog = true;
+      if($entry['FAIstate'] == "freeze"){
+        $this->dialog->set_acl(array("*none*"))  ;
+      }
 			$_SESSION['objectinfo'] = $this->dn;
 		}
-
 
     /*  Branch handling 
         09.01.2006
@@ -768,9 +770,15 @@ class faiManagement extends plugin
 					}
 
           if($value['FAIstate'] == "freeze"){
-            $acti = "";
-            $edi  = "%NAME%";
+            $action  = "<input class='center' type='image' src='images/edit.png' 	alt='"._("edit")."'   
+              name='entry_edit_%KEY%' title='"._("Edit class")."'>";
+            $edi = $editlink;
+            $acti = $action;
           }else{
+            $action  = "<input class='center' type='image' src='images/edit.png' 	alt='"._("edit")."'   
+              name='entry_edit_%KEY%' title='"._("Edit class")."'>";
+            $action .= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."' 
+              name='entry_delete_%KEY%' title='"._("Delete class")."'>";
             $acti = $action;
             $edi = $editlink;
           }

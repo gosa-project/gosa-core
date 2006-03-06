@@ -21,6 +21,7 @@ class faiScriptEntry extends plugin
   var $description   = "";
   var $status        = "new";
 
+  var $FAIstate      = "";
   
   function faiScriptEntry ($config, $dn= NULL,$object=false)
   {
@@ -32,6 +33,11 @@ class faiScriptEntry extends plugin
         $oname = $name;
         $this->$oname=$value;
       }
+
+      if(isset($this->attrs['FAIstate'][0])){
+        $this->FAIstate = $this->attrs['FAIstate'][0];
+      }
+
     }else{
       if(is_array($object)&&count($object)){
         $this->orig_cn= $object['cn'];
@@ -89,6 +95,15 @@ class faiScriptEntry extends plugin
     for($i =0 ; $i < 100 ; $i++){
       $FAIprioritys[$i]=$i;
     }
+
+    foreach($this->attributes as $attr){
+      if(($this->FAIstate == "freeze") || (chkacl($this->acl,$attr)!= "")){
+        $smarty->assign($attr."ACL"," disabled ");
+      }else{
+        $smarty->assign($attr."ACL","  ");
+      }
+    }
+
     $smarty->assign("FAIprioritys",$FAIprioritys);
     $display.= $smarty->fetch(get_template_path('faiScriptEntry.tpl', TRUE));
     return($display);
@@ -97,7 +112,7 @@ class faiScriptEntry extends plugin
   /* Save data to object */
   function save_object()
   {
-    if(isset($_POST['SubObjectFormSubmitted'])){
+    if((isset($_POST['SubObjectFormSubmitted'])) && ($this->FAIstate != "freeze")){
       foreach($this->attributes as $attrs){
         if(isset($_POST[$attrs])){
           $this->$attrs = $_POST[$attrs];

@@ -22,6 +22,8 @@ class faiPartitionTableEntry extends plugin
   var $status               = "new";
   var $deletePartitions     = array();
 
+  var $FAIstate             = "";
+
   function faiPartitionTableEntry ($config, $dn= NULL,$usedDiskNames=array(),$disk=false)
   {
     plugin::plugin ($config, $dn);
@@ -151,6 +153,15 @@ class faiPartitionTableEntry extends plugin
       $smarty->assign($attr,$this->$attr);
     }
 
+    foreach($this->UsedAttrs as $attr){
+      if(($this->FAIstate == "freeze") || (chkacl($this->acl,$attr)!= "")){
+        $smarty->assign($attr."ACL"," disabled ");
+      }else{
+        $smarty->assign($attr."ACL","  ");
+      }
+    }
+
+
     /* The user can't change a diskname 
      *  if we are currently in edit mode for the specified disk 
      */
@@ -159,6 +170,8 @@ class faiPartitionTableEntry extends plugin
 //    }else{
       $smarty->assign("DISK_cnACL","");
 //    }
+
+  
 
     /* Fetch template and show the result
      */
@@ -199,10 +212,15 @@ class faiPartitionTableEntry extends plugin
         $dis = " disabled ";
       }
 
+      $disableALL = "";
+      if($this->FAIstate =="freeze"){
+        $disableALL = " disabled ";
+      }
+
       if($part['status']!="delete"){
         /* Generate Partition select box  
          */
-        $PartitionType = "<select name='FAIpartitionType_".$key."' id='FAIpartitionType_".$key."' >";
+        $PartitionType = "<select name='FAIpartitionType_".$key."' id='FAIpartitionType_".$key."' ".$disableALL.">";
         foreach($PartitionTypes as $type){
           if($part['FAIpartitionType'] == $type){
             $PartitionType .="<option value='".$type."' selected >".$type."</option>";
@@ -215,7 +233,7 @@ class faiPartitionTableEntry extends plugin
 
         /* Generate fsType select box  
          */
-        $FAIfsType= "<select name='FAIfsType_".$key."' id='FAIfsType_".$key."' ".$dis.">";
+        $FAIfsType= "<select name='FAIfsType_".$key."' id='FAIfsType_".$key."' ".$dis." ".$disableALL.">";
         foreach($FAIfsTypes as $type){
           if($part['FAIfsType'] == $type){
             $FAIfsType  .="<option value='".$type."' selected >".$type."</option>";
@@ -228,10 +246,10 @@ class faiPartitionTableEntry extends plugin
         $str .= "\n<tr>";
         $str .= "\n<td>".$PartitionType."</td>";
         $str .= "\n<td>".$FAIfsType."</td>";
-        $str .= "\n<td><input name='FAImountPoint_".$key."'    ".$dis."  value='".$part['FAImountPoint']."'    id='FAImountPoint_".$key."'></td>";
-        $str .= "\n<td><input name='FAIpartitionSize_".$key."'  ".$dis." value='".$part['FAIpartitionSize']."' id='FAIpartitionSize_".$key."' size=12></td>";
-        $str .= "\n<td><input name='FAImountOptions_".$key."'  ".$dis."  value='".$part['FAImountOptions']."'  id='FAImountOptions_".$key."' style='width:100px;'></td>";
-        $str .= "\n<td><input name='FAIfsOptions_".$key."'     ".$dis."  value='".$part['FAIfsOptions']."'     id='FAIfsOptions_".$key."' style='width:100px;'></td>";
+        $str .= "\n<td><input name='FAImountPoint_".$key."'  ".$disableALL."  ".$dis."  value='".$part['FAImountPoint']."'    id='FAImountPoint_".$key."'></td>";
+        $str .= "\n<td><input name='FAIpartitionSize_".$key."' ".$disableALL." ".$dis." value='".$part['FAIpartitionSize']."' id='FAIpartitionSize_".$key."' size=12></td>";
+        $str .= "\n<td><input name='FAImountOptions_".$key."' ".$disableALL."  ".$dis."  value='".$part['FAImountOptions']."'  id='FAImountOptions_".$key."' style='width:100px;'></td>";
+        $str .= "\n<td><input name='FAIfsOptions_".$key."'   ".$disableALL."  ".$dis."  value='".$part['FAIfsOptions']."'     id='FAIfsOptions_".$key."' style='width:100px;'></td>";
 
         $changeState = "onClick=\"changeState('FAImountPoint_".$key."') ; ".
                                  "changeState('FAIpartitionSize_".$key."') ; ".
@@ -241,11 +259,11 @@ class faiPartitionTableEntry extends plugin
   
 
         if($part['FAIpartitionFlags']!=false){
-          $str .= "\n<td><input type='checkbox' name='FAIpartitionFlags_".$key."' value='preserve' checked ".$changeState."></td>";
+          $str .= "\n<td><input type='checkbox' name='FAIpartitionFlags_".$key."' value='preserve' checked ".$changeState." ".$disableALL."></td>";
         }else{
-          $str .= "\n<td><input type='checkbox' name='FAIpartitionFlags_".$key."' value='preserve' ".$changeState."></td>";
+          $str .= "\n<td><input type='checkbox' name='FAIpartitionFlags_".$key."' value='preserve' ".$changeState." ".$disableALL."></td>";
         }
-        $str .= "\n<td><input type='submit' name='Delete_".$key."' value='"._("Remove")."'></td>";
+        $str .= "\n<td><input type='submit' name='Delete_".$key."' value='"._("Remove")."' ".$disableALL."></td>";
         $str .= "\n</tr>";    
       }
     }
@@ -286,7 +304,7 @@ class faiPartitionTableEntry extends plugin
   /* Save data to object */
   function save_object()
   {
-    if(isset($_POST['TableEntryFrameSubmitted'])){
+    if((isset($_POST['TableEntryFrameSubmitted'])) && ($this->FAIstate != "freeze") ){
       plugin::save_object();
 
       /* Check base attributes */

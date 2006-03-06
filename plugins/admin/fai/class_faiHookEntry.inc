@@ -22,6 +22,8 @@ class faiHookEntry extends plugin
   var $FAIscript     = "";
   var $description   = "";
   var $status        = "new";
+
+  var $FAIstate      = "";
   
   function faiHookEntry ($config, $dn= NULL,$object=false)
   {
@@ -33,6 +35,11 @@ class faiHookEntry extends plugin
         $oname = $name;
         $this->$oname=$value;
       }
+
+      if(isset($this->attrs['FAIstate'][0])){
+        $this->FAIstate = $this->attrs['FAIstate'][0];
+      }
+
     }elseif(is_array($object)){
       if(count($object)){
         $this->orig_cn= $object['cn'];
@@ -100,6 +107,14 @@ class faiHookEntry extends plugin
       }
     }
 
+    foreach($this->attributes as $attr){
+      if(($this->FAIstate == "freeze") || (chkacl($this->acl,$attr)!= "")){
+        $smarty->assign($attr."ACL"," disabled ");
+      }else{
+        $smarty->assign($attr."ACL","  ");
+      }
+    }
+
     $display.= $smarty->fetch(get_template_path('faiHookEntry.tpl', TRUE));
     return($display);
   }
@@ -107,7 +122,7 @@ class faiHookEntry extends plugin
   /* Save data to object */
   function save_object()
   {
-    if(isset($_POST['SubObjectFormSubmitted'])){
+    if((isset($_POST['SubObjectFormSubmitted'])) && ($this->FAIstate != "freeze")){
       foreach($this->attributes as $attrs){
         if(isset($_POST[$attrs])){
           $this->$attrs = $_POST[$attrs];

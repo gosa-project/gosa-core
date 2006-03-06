@@ -10,7 +10,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<input value="{$cn}" size="45" maxlength="80" disabled id="cn">
+							<input value="{$cn}" size="45" maxlength="80" disabled id="cn" {$cnACL}>
 						</td>
 					</tr>
 					<tr>
@@ -20,7 +20,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<input value="{$description}" size="45" maxlength="80" {$description} name="description" id="description">
+							<input value="{$description}" size="45" maxlength="80" {$descriptionACL} name="description" id="description">
 						</td>
 					</tr>
 				</table>
@@ -45,7 +45,7 @@
 						<input type="submit" name="EditSubObject"    value="{t}Edit{/t}"    title="{t}Edit{/t}">
 						<input type="submit" name="DelSubObject"     value="{t}Delete{/t}"  title="{t}Delete{/t}">
 						-->
-						<input type="submit" name="AddSubObject"     value="{t}Add{/t}"		title="{t}Add{/t}">
+						<input type="submit" name="AddSubObject"     value="{t}Add{/t}"		title="{t}Add{/t}" {$cnACL}>
 					</td>
 				</tr>
 				</table>

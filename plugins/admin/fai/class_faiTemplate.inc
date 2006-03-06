@@ -34,10 +34,14 @@ class faiTemplate extends plugin
   var $dialog           = NULL;     // a dialog, e.g. new disk dialog
   var $SubObjects       = array();  // All leafobjects of this object
 
+  var $FAIstate         = "";
+
   function faiTemplate ($config, $dn= NULL)
   {
     /* Load Attributes */
     plugin::plugin ($config, $dn);
+
+    $this->acl="#all#";
 
     /* If "dn==new" we try to create a new entry
      * Else we must read all objects from ldap which belong to this entry.
@@ -45,6 +49,19 @@ class faiTemplate extends plugin
      */
     if($dn != "new"){
       $this->dn =$dn;
+
+      /* Set acls
+       */
+      $ui   = get_userinfo();
+      $acl  = get_permissions ($this->dn, $ui->subtreeACL);
+      $acli = get_module_permission($acl, "FAIclass", $this->dn);
+      $this->acl=$acli;
+
+      /* Get FAIstate
+       */
+      if(isset($this->attrs['FAIstate'][0])){
+        $this->FAIstate = $this->attrs['FAIstate'][0];
+      }
 
       /* Read all leaf objects of this object (For FAIscript this would be FAIscriptEntry)
        */
@@ -87,6 +104,7 @@ class faiTemplate extends plugin
     /* Add new sub object */
     if(isset($_POST['AddSubObject'])){
       $this->dialog= new $this->subClassName($this->config,"new");
+      $this->dialog->acl = $this->acl;
       $this->is_dialog=true;
     }
 
@@ -101,6 +119,7 @@ class faiTemplate extends plugin
       $temp = $_POST['SubObject'][0];
     
       $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$temp]);
+      $this->dialog->acl = $this->acl;
       $_SESSION['objectinfo'] = $this->SubObjects[$temp]['dn'];
       $this->is_dialog=true;
     }
@@ -183,6 +202,9 @@ class faiTemplate extends plugin
       }
     }
 
+    foreach($this->attributes as $attr){
+      $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
+    }
 
     $display.= $smarty->fetch(get_template_path('faiTemplate.tpl', TRUE));
     return($display);
@@ -223,7 +245,7 @@ class faiTemplate extends plugin
    */
   function save_object()
   {
-    if(isset($_POST['FAItemplate_posted'])){
+    if((isset($_POST['FAItemplate_posted'])) && ($this->FAIstate != "freeze") ){
       plugin::save_object();
       foreach($this->attributes as $attrs){
         if(isset($_POST[$attrs])){
@@ -246,15 +268,15 @@ class faiTemplate extends plugin
   function save()
   {
     plugin::save();
- 
+
     $ldap = $this->config->get_ldap_link();
-  
+
     $ldap->cat($this->dn);
     if($ldap->count()!=0){
       /* Write FAIscript to ldap*/
       $ldap->cd($this->dn);
       $this->cleanup();
-$ldap->modify ($this->attrs); 
+      $ldap->modify ($this->attrs); 
 
     }else{
       /* Write FAIscript to ldap*/
@@ -264,7 +286,7 @@ $ldap->modify ($this->attrs);
       $ldap->add($this->attrs);
     }
     show_ldap_error($ldap->get_error());
- 
+
     /* Prepare FAIscriptEntry to write it to ldap
      * First sort array.
      *  Because we must delete old entries first.

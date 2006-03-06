@@ -20,7 +20,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<input size="45" maxlength="80" value="{$description}" name="description" id="description">
+							<input size="45" maxlength="80" value="{$description}" name="description" id="description" {$descriptionACL}>
 						</td>
 					</tr>
 				</table>
@@ -37,12 +37,13 @@
 				<table summary="" width="100%">
 				<tr>
 					<td>
-						<select name="SubObject[]" multiple  title="{t}Choose a variable to delete or edit{/t}" style="width:100%;" size="20" id="SubObject">
+						<select name="SubObject[]" multiple  title="{t}Choose a variable to delete or edit{/t}" 
+							style="width:100%;" size="20" id="SubObject">
 							{html_options values=$SubObjectKeys output=$SubObjects}
 						</select><br>
-						<input type="submit" name="AddSubObject"     value="{t}Add{/t}"		title="{t}Add{/t}">
-						<input type="submit" name="EditSubObject"    value="{t}Edit{/t}"    title="{t}Edit{/t}">
-						<input type="submit" name="DelSubObject"     value="{t}Delete{/t}"  title="{t}Delete{/t}">
+						<input type="submit" name="AddSubObject"     value="{t}Add{/t}"		title="{t}Add{/t}" {$cnACL}>
+						<input type="submit" name="EditSubObject"    value="{t}Edit{/t}"    title="{t}Edit{/t}" >
+						<input type="submit" name="DelSubObject"     value="{t}Delete{/t}"  title="{t}Delete{/t}" {$cnACL}>
 					</td>
 				</tr>
 				</table>

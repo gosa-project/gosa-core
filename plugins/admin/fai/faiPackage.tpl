@@ -20,7 +20,7 @@
 							</LABEL>
 						</td>
 						<td>
-							<input value="{$description}" size="45" {$description} name="description" id="description">
+							<input value="{$description}" size="45" {$descriptionACL} name="description" id="description">
 						</td>
 					</tr>
 				</table>
@@ -58,8 +58,8 @@
        			{html_options options=$usedPackages}
       		</select>
 			<br>
-			<input type="submit" name="Addpkg" value="{t}Add{/t}" {$OptionsACL}>
-			<input type="submit" name="Delpkg" value="{t}Remove{/t}"  {$OptionsACL}>
+			<input type="submit" name="Addpkg" value="{t}Add{/t}" {$OptionsACL} {$cnACL}>
+			<input type="submit" name="Delpkg" value="{t}Remove{/t}"  {$OptionsACL} {$cnACL}>
 			<input type="submit" name="Conpkg" value="{t}Configure{/t}"  {$OptionsACL} >
 		</td>
 	</tr>
