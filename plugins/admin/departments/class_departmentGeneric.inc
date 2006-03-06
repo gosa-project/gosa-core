@@ -32,6 +32,15 @@ class department extends plugin
   var $facsimileTelephoneNumber= "";
   var $orig_dn= "";
 
+	var $rec_dst=false;	// Destination for recursive move
+	var $rec_src=false;	// Source for recursive move 
+	var $rec_cpy=false;	// Is recursive move requested ? 
+
+	function am_i_moved()
+	{
+		return $this->rec_cpy;
+	}
+
   /* Headpage attributes */
   var $last_dep_sorting= "invalid";
   var $departments= array();
@@ -236,6 +245,80 @@ $ldap->modify ($this->attrs);
 	/* Optionally execute a command after we're done */
 	$this->postcreate();
   }
+
+  /* Move/Rename complete trees */
+  function recursive_move($src_dn, $dst_dn,$force = false)
+  {
+	  if(! $force){
+
+		  $this->rec_cpy 	= true;
+		  $this->rec_src	= $src_dn;
+		  $this->rec_dst	= $dst_dn;
+
+		  $smarty = get_smarty();
+		
+			$smarty->assign("src","?plug=".$_GET['plug']."&PerformRecMove");
+	
+		  $display =  $smarty->fetch(get_template_path("recursive_moce.tpl",TRUE));
+		  return($display);
+		  exit();
+	  }else{
+		  if(!$this->rec_cpy){ 
+			return;
+
+		  }
+		  $src_dn = $this->rec_src;
+		  $dst_dn = $this->rec_dst;
+		 echo "<font style='font-size:11px;'><h4>".
+              sprintf(_("Moving %s in %s"),"<br><i>".$src_dn."</i><br>","<br><i>".$dst_dn."</i><br>")."</h4>";
+
+
+		  /* Check if the destination entry exists */
+		  $ldap= $this->config->get_ldap_link();
+
+		  /* Check if destination exists - abort */
+		  $ldap->cat($dst_dn);
+		  if ($ldap->fetch()){
+			  trigger_error("recursive_move $dst_dn already exists.",
+					  E_USER_WARNING);
+				echo "recursive_move :$dst_dn already exists.<br>"; 
+			  return (FALSE);
+		  }
+
+		  /* Perform a search for all objects to be moved */
+		  $objects= array();
+		  $ldap->cd($src_dn);
+		  $ldap->search("(objectClass=*)", array("dn"));
+		  while($attrs= $ldap->fetch()){
+			  $dn= $attrs['dn'];
+			  $objects[$dn]= strlen($dn);
+		  }
+
+		  /* Sort objects by indent level */
+		  asort($objects);
+		  reset($objects);
+
+		  /* Copy objects from small to big indent levels by replacing src_dn by dst_dn */
+		  foreach ($objects as $object => $len){
+			  $src= $object;
+			  $dst= preg_replace("/$src_dn$/", "$dst_dn", $object);
+			 	echo "Moving    <b>".$src."</b>  to  <b>".$dst."</b><br>";
+			  if (!$this->copy($src, $dst)){
+				  return (FALSE);
+			  }
+		  }
+
+		  /* Remove src_dn */
+		  $ldap->cd($src_dn);
+		  $ldap->recursive_remove();
+
+		  $this->rec_src = $this->rec_dst = "";
+		  $this->rec_cpy =false;
+			echo "</font>";
+		  return (TRUE);
+	  }
+  }
+
 
 }
 

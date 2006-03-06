@@ -206,7 +206,23 @@ class departmentManagement extends plugin
 
 		/* Edit Complete ...
 		 * Finish request 
-         */
+		 */
+		if((isset($_GET['PerformRecMove'])) &&( $this->deptabs->by_object['department']->am_i_moved())){
+			$this->deptabs->save(true);
+			$this->deptabs->by_object['department']->recursive_move("","",true);
+			$this->reload ();
+			/* Group has been saved successfully, remove lock from
+			   LDAP. */
+			if ($this->dn != "new"){
+				del_lock ($this->dn);
+			}
+
+			unset ($this->deptabs);
+			$this->deptabs= NULL;
+			unset ($_SESSION['objectinfo']);
+			exit();
+		}
+
 		if ((isset($_POST['edit_finish'])) && (isset($this->deptabs->config) ) ){
 
 			/* Check tabs, will feed message array */
@@ -216,22 +232,25 @@ class departmentManagement extends plugin
 			if (count($message) == 0){
 
 				/* Save user data to ldap */
-				$this->deptabs->save();
-				gosa_log ("Department object'".$this->dn."' has been saved");
+				$disp = $this->deptabs->save();
+				if(!$this->deptabs->by_object['department']->am_i_moved()){
+					gosa_log ("Department object'".$this->dn."' has been saved");
 
-				/* Group has been saved successfully, remove lock from
-				   LDAP. */
-				if ($this->dn != "new"){
-					del_lock ($this->dn);
+					/* Group has been saved successfully, remove lock from
+					   LDAP. */
+					if ($this->dn != "new"){
+						del_lock ($this->dn);
+					}
+
+					/* There's no page reload so we have to read new users at
+					   this point. */
+					$this->reload ();
+					unset ($this->deptabs);
+					$this->deptabs= NULL;
+					unset ($_SESSION['objectinfo']);
+				}else{
+					return($disp);
 				}
-
-				/* There's no page reload so we have to read new users at
-				   this point. */
-				$this->reload ();
-				unset ($this->deptabs);
-				$this->deptabs= NULL;
-				unset ($_SESSION['objectinfo']);
-
 			} else {
 				/* Ok. There seem to be errors regarding to the tab data,
 				   show message and continue as usual. */
