@@ -533,8 +533,20 @@ class group extends plugin
 
     /* Add samba group functionality */
     if ($this->samba3 && $this->smbgroup){
-      $this->SID= $this->config->data['SERVERS']['SAMBA'][$this->sambaDomainName]['SID'];
-      $this->ridBase= $this->config->data['SERVERS']['SAMBA'][$this->sambaDomainName]['RIDBASE'];
+  
+      /* Fixed undefined index ... 
+       */ 
+      $this->SID = $this->ridBase = "";
+      if(isset($this->config->data['SERVERS']['SAMBA'][$this->sambaDomainName]['SID'])){
+        $this->SID    = $this->config->data['SERVERS']['SAMBA'][$this->sambaDomainName]['SID'];
+      }else{
+        print_red(sprintf(_("No configured SID found for '%s'."),$this->sambaDomainName));
+      }
+      if(isset($this->config->data['SERVERS']['SAMBA'][$this->sambaDomainName]['RIDBASE'])){
+        $this->ridBase= $this->config->data['SERVERS']['SAMBA'][$this->sambaDomainName]['RIDBASE']; 
+      }else{
+        print_red(sprintf(_("No configured RIDBASE found for '%s'."),$this->sambaDomainName));
+      }
 
       $this->attrs['objectClass'][]= 'sambaGroupMapping';
       $this->attrs['sambaGroupType']= "2";
