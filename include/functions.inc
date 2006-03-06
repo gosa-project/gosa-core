@@ -975,20 +975,56 @@ function print_red()
     $string= preg_replace ("/%s/", $array[$i], $string, 1);
   }
 
+  if((!isset($_SESSION['errorsAlreadyPosted'])) || !is_array($_SESSION['errorsAlreadyPosted'])){
+    $_SESSION['errorsAlreadyPosted'] = array(); 
+  }
+
   /* If DEBUGLEVEL is set, we're in web mode, use textual output in
      the other case... */
+
   if (isset($_SESSION['DEBUGLEVEL'])){
-    $_SESSION['errors'].= "<div align=\"left\" style=\"border-width:5px;".
-      "border-style:solid;border-color:red; background-color:black;".
-      "margin-bottom:10px; padding:8px;\"><table style='width:100%' summary=''><tr><td><img alt=\"\" src=\"".
-      get_template_path('images/warning.png')."\"></td>".
-      "<td width=\"100%\" style=\"text-align:center\"><font color=\"#FFFFFF\">".
-      "<b style='font-size:16px;'>$string</b></font></td><td>".
-      "<img alt=\"\"src=\"".get_template_path('images/warning.png').
-      "\"></td></tr></table></div>\n";
+
+    if($_SESSION['LastError'] == $string){
+
+      if((!isset($_SESSION['errorsAlreadyPosted'][$string]))){
+        $_SESSION['errorsAlreadyPosted'][$string] = 1;
+      }
+      $_SESSION['errorsAlreadyPosted'][$string] ++;
+
+    }else{
+      if((!empty($_SESSION['LastError'])) && ($_SESSION['errorsAlreadyPosted'][$_SESSION['LastError']]>1)){
+        $_SESSION['errors'].= "<div align=\"left\" style=\"border-width:5px;".
+          "border-style:solid;border-color:red; background-color:black;".
+          "margin-bottom:10px; padding:8px;\"><table style='width:100%' summary=''><tr><td><img alt=\"\" src=\"".
+          get_template_path('images/warning.png')."\"></td>".
+          "<td width=\"100%\" style=\"text-align:center\"><font color=\"#FFFFFF\">".
+          "<b style='font-size:16px;'>".sprintf(_("Last message repeated %s times."),$_SESSION['errorsAlreadyPosted'][$_SESSION['LastError']])."</b></font></td><td>".
+          "<img alt=\"\"src=\"".get_template_path('images/warning.png').
+          "\"></td></tr></table></div>\n";
+      }
+
+      if($string != NULL){
+      $_SESSION['errors'].= "<div align=\"left\" style=\"border-width:5px;".
+        "border-style:solid;border-color:red; background-color:black;".
+        "margin-bottom:10px; padding:8px;\"><table style='width:100%' summary=''><tr><td><img alt=\"\" src=\"".
+        get_template_path('images/warning.png')."\"></td>".
+        "<td width=\"100%\" style=\"text-align:center\"><font color=\"#FFFFFF\">".
+        "<b style='font-size:16px;'>$string</b></font></td><td>".
+        "<img alt=\"\"src=\"".get_template_path('images/warning.png').
+        "\"></td></tr></table></div>\n";
+      }else{
+        return;
+      }
+      $_SESSION['errorsAlreadyPosted'] = array();
+      $_SESSION['errorsAlreadyPosted'][$string] = 1;
+      
+    }
+
   } else {
     echo "Error: $string\n";
   }
+  $_SESSION['LastError'] = $string; 
+
 }
 
 

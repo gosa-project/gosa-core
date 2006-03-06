@@ -54,6 +54,8 @@ if (!isset($_SESSION['config'])){
 
 /* Reset errors */
 $_SESSION['errors']= "";
+$_SESSION['errorsAlreadyPosted']= array();
+$_SESSION['LastError']  ="";
 
 /* Check for uniqe ip address */
 $ui= $_SESSION["ui"];
@@ -335,7 +337,13 @@ if (is_file("$plugin_dir/main.inc")){
 }
 
 /* Close div/tables */
+
+/* Print_out last ErrorMessage repeated string.
+ */
+print_red(NULL);
+
 $smarty->assign("contents", $display);
+
 if (isset($_SESSION['errors'])){
   $smarty->assign("errors", $_SESSION['errors']);
 }
