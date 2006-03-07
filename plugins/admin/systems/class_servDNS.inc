@@ -93,11 +93,6 @@ class servdns extends plugin
           }
         }
 
-        /* Set TTL value */
-        if(isset($attrs['dNSTTL'][0])){
-          $types[$attrs['zoneName'][0]]['dNSTTL'] = $attrs['dNSTTL'][0];
-        }
-
         /* Set dns Class*/
         if(isset($attrs['dNSClass'][0])){
           $types[$attrs['zoneName'][0]]['dNSClass'] = $attrs['dNSClass'][0];
@@ -113,8 +108,6 @@ class servdns extends plugin
 
           /* If there is a record attribute  */
           if(isset($attrs[$name])){
-
-            $types[$attrs['zoneName'][0]]['Records']=array();
 
             /* get all entries */
             for($i = 0 ; $i < $attrs[$value]['count']; $i ++){
@@ -269,7 +262,7 @@ class servdns extends plugin
       $ZoneList->AddEntry(array(
             array("string" => $zone),
             array("string" => _("Reverse zone")." : ".$values['ReverseZone']),
-            array("string" => _("TTL")." : ".$values['dNSTTL']),
+            array("string" => _("TTL")." : ".$values['sOAttl']),
             array("string" => _("Class")." : ".$values['dNSClass']),
             array("string" =>str_replace("%s",base64_encode($zone),$editImg))
             ));
@@ -365,7 +358,7 @@ class servdns extends plugin
         }
       }
     }
-    
+
     /* Check which dns are not used anymore ...*/
     foreach($this->usedDNS as $key => $values){
       $actions['delete'][$key] = $values;
@@ -403,8 +396,7 @@ class servdns extends plugin
   {
     $tmp = array();
     $tmp['objectClass']           = array("top","dNSZone");
-    $tmp['dNSTTL']                = $zone['dNSTTL']; 
-    $tmp['dNSClass']              = $zone['dNSClass']; 
+    $tmp['dNSClass']              = "IN";//$zone['dNSClass']; 
     $tmp['relativeDomainName']    = "@";//$zone['relativeDomainName']; 
 
     $str = "";
@@ -415,7 +407,7 @@ class servdns extends plugin
 
 
     /* Generate Record entries  */
-    $arr = array("SigRecord","KeyRecord","aAAARecord","nSRecord","iaFSDBRecord","mInfoRecord","hInfoRecord","mXRecord","mDRecord","tXTRecord",
+    $arr = array("aRecord","SigRecord","KeyRecord","aAAARecord","nSRecord","iaFSDBRecord","mInfoRecord","hInfoRecord","mXRecord","mDRecord","tXTRecord",
         "LocRecord","nXTRecord","sRVRecord","nAPTRRecord","kXRecord","certRecord","a6Record","dSRecord","sSHFPRecord","rRSIGRecord","nSECRecord");
     $aRecords = array();
     foreach($arr as $ar){
@@ -427,7 +419,6 @@ class servdns extends plugin
         }
       }
     }
-   
     /* Check if there are records removed,
         if there are some removed records, the append an array        
         to ensure that these record types are deleted 
@@ -441,7 +432,7 @@ class servdns extends plugin
         }
       }
     }
-    
+   
     /* generate forward entry */
     $dn = "zoneName=".$zone['zoneName'].",".$this->dn; 
     $tmp2[$dn] = $tmp;

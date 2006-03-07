@@ -4,19 +4,27 @@
 		<td style="width:50%;vertical-align:top;border-right:1px	solid	#b0b0b0;">
 			<table summary="">
 				<tr>
-					<td>{t}Zone name{/t}
+					<td>{t}Zone name{/t}{$must}
 					</td>
 					<td><input type="text" name="zoneName" value="{$zoneName}">
 					</td>
 				</tr>
-			</table>
-		</td>
-		<td style="vertical-align:top;">
-			<table summary="">
 				<tr>
-					<td>{t}Network address{/t}
+					<td>{t}Network address{/t}{$must}
 					</td>
 					<td><input type="text" name="ReverseZone" value="{$ReverseZone}">
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td>
+			<table summary="">
+				<tr>
+					<td>
+						{t}Zone entries{/t}
+					</td>
+					<td>
+						<input type="submit" name="EditZoneEntries" value="{t}Edit{/t}">
 					</td>
 				</tr>
 			</table>
@@ -85,20 +93,13 @@
 <table summary="" width="100%">
 	<tr>
 		<td style="vertical-align:top;width:50%;border-right:1px	solid	#b0b0b0;">
-			<h2>{t}Parameter{/t}</h2>
-			<table summary="">
+			<h2>{t}MxRecords{/t}</h2>
+			<table width="100%">	
 				<tr>
-					<td>{t}DNS TTL{/t}
-					</td>
 					<td>
-						<input type="text" name="dNSTTL" value="{$dNSTTL}">
-					</td>
-				</tr>
-				<tr>
-					<td>{t}DNS Class{/t}
-					</td>
-					<td>
-						<input type="text" name="dNSClass" value="{$dNSClass}">
+						{$Mxrecords}
+						<input type="text" 		name="StrMXRecord" value="">
+						<input type="submit" 	name="AddMXRecord" value="{t}Add{/t}">
 					</td>
 				</tr>
 			</table>
