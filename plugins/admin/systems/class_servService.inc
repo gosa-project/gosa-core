@@ -234,7 +234,7 @@ class servservice extends plugin
   
       /* Save checkbox state */
       foreach ($this->additionaloc as $oc => $dummy){
-        if($oc == "goNtpServer") continue;
+//        if($oc == "goNtpServer") continue;
         if (chkacl($this->acl, $oc) == ""){
           if (isset($_POST[$oc]) && $_POST[$oc] == '1'){
             $this->objectclasses[$oc]= $oc;

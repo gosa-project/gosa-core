@@ -38,14 +38,14 @@
    <table summary="">
     <tr>
      <td>
-        <select style="width:350px;" id="goTimeEntry" name="goTimeSource[]" {$goNtpServerState} {$goTimeSourceACL}  size=4 multiple>
+        <select style="width:350px;" id="goTimeEntry" name="goTimeSource[]" {$goNtpServerState} {$goNtpServerACL}  size=4 multiple>
             {html_options values=$goTimeSource output=$goTimeSource}
 			<option disabled>&nbsp;</option>
         </select>
     <br>
         <input type="text" name="NewNTPExport" {$goNtpServerState} id="NewNTPExportId">
-        <input type="submit"    value="{t}Add{/t}"      name="NewNTPAdd"    {$goNtpServerState} {$goTimeSourceACL} id="NewNTPAddId">
-        <input type="submit"    value="{t}Delete{/t}"   name="DelNTPEnt"    {$goNtpServerState} {$goTimeSourceACL} id="DelNTPEntId">
+        <input type="submit"    value="{t}Add{/t}"      name="NewNTPAdd"    {$goNtpServerState} {$goNtpServerACL} id="NewNTPAddId">
+        <input type="submit"    value="{t}Delete{/t}"   name="DelNTPEnt"    {$goNtpServerState} {$goNtpServerACL} id="DelNTPEntId">
     </td>
 	</tr>
    </table>
