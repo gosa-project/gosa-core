@@ -36,6 +36,8 @@ class servdnseditZone extends plugin
   var $InitiallyReverseZone     = "";
   var $isNew                    = true;
 
+  var $dialog                   = false;
+
   function servdnseditZone ($config, $dn= NULL,$recordtypes,$attrs = array())
   {
     plugin::plugin ($config, $dn);
@@ -162,6 +164,40 @@ class servdnseditZone extends plugin
     $smarty= get_smarty();
     $display= "";
 
+
+    /* Open Zone Entry Edit Dialog
+     */
+    if(isset($_POST['EditZoneEntries'])){
+      $this->dialog= new servDNSeditZoneEntries($this->config,$this->dn);
+    }
+
+    /* Save Zone Entry Edit Dialog
+     */
+    if(isset($_POST['SaveZoneEntryChanges'])){
+      $this->dialog->save_object();
+      if(count($this->dialog->check())){
+        $msgs = $this->dialog->check();
+        foreach($msgs as $msg){
+          print_red($msg);
+        }
+      }else{
+        $this->dialog->save();
+        $this->dialog = false;
+      }
+    }
+
+    /* Cancel Zone Entrie Edit Dialog
+    */
+    if(isset($_POST['CancelZoneEntryChanges'])){
+      $this->dialog = false;
+    }
+
+    /* Display any type of open dialogs 
+     */
+    if($this->dialog){
+      $this->dialog->save_object();
+      return($this->dialog->execute());
+    }
 
     $once =true;
     foreach($_POST as $name => $value){
