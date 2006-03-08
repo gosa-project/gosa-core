@@ -168,7 +168,7 @@ class servdnseditZone extends plugin
     /* Open Zone Entry Edit Dialog
      */
     if(isset($_POST['EditZoneEntries'])){
-      $this->dialog= new servDNSeditZoneEntries($this->config,$this->dn);
+      $this->dialog= new servDNSeditZoneEntries($this->config,$this->dn,$this->zoneName,$this->FlipIp($this->ReverseZone),$this->RecordTypes);
     }
 
     /* Save Zone Entry Edit Dialog
@@ -288,6 +288,13 @@ class servdnseditZone extends plugin
     }
 
     /* Assign records list */
+
+    
+    if($this->dn != "new"){
+      $smarty->assign("NotNew", true);
+    }else{
+      $smarty->assign("NotNew", false);
+    }
 
     $smarty->assign("Mxrecords",  $div->DrawList());
     $smarty->assign("records"  ,  $this->generateRecordsList());

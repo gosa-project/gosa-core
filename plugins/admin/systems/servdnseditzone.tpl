@@ -6,18 +6,18 @@
 				<tr>
 					<td>{t}Zone name{/t}{$must}
 					</td>
-					<td><input type="text" name="zoneName" value="{$zoneName}">
+					<td><input type="text" name="zoneName" value="{$zoneName}" {if $NotNew} disabled {/if}>
 					</td>
 				</tr>
 				<tr>
 					<td>{t}Network address{/t}{$must}
 					</td>
-					<td><input type="text" name="ReverseZone" value="{$ReverseZone}">
+					<td><input type="text" name="ReverseZone" value="{$ReverseZone}" {if $NotNew} disabled {/if}>
 					</td>
 				</tr>
 			</table>
 		</td>
-		<td>
+		<td style="vertical-align:top;">
 			<table summary="">
 				<tr>
 					<td>

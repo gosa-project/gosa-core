@@ -318,6 +318,8 @@ class termDNS extends plugin
     if($this->DNS_is_account){
       foreach($this->types as $name => $values){
 
+        if($values['type'] == "tXTRecord") continue;
+
         /* Check if there is an aRecord defined which uses the same IP as used in IPhostAddress */
         if(($values['type'] == "aRecord")&&($values['value'] == $this->ipHostNumber)&&($values['status']!="deleted")){
           $message[]=sprintf(_("The device IP '%s' is added as 'A Record', this will be done automatically, please remove the record."), 
