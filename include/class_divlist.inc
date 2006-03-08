@@ -8,7 +8,7 @@ class divlist {
 	var $summary;
 	var $cols;
 	var $pageid;
-
+  
 	// Members for page managment
 	var $i_currentPage;
 	var $i_entriesPerPage;
@@ -20,13 +20,12 @@ class divlist {
 		$this->i_entriesPerPage = 10;
     $this->s_height         = "500";
     $this->s_width          = "600";
-		$this->s_summary                = "";
-		$this->a_entries                = array();
-		$this->a_header                 = array();
+		$this->s_summary        = "";
+		$this->a_entries        = array();
+		$this->a_header         = array();
 		$this->b_displayPageNums= true;
-		$this->cols                     = 0;
-		$this->pageid                   = $pageid ;
-
+		$this->cols             = 0;
+		$this->pageid           = $pageid;
 	}
 
 	function __destruct(){
@@ -132,8 +131,7 @@ class divlist {
    
     if($this->i_entriesPerPage == 0) {
       // We need to construct a "body"-table that is width-of-scrollbar thinner than the "head"-table.
-      $s_return .= "\n<tr><td colspan='".$this->cols."' class='scrollbody'><div style='width:".$this->s_width."px;height:".($this->s_height-20)."px;' class='scrollbody'>";
-
+      $s_return .= "\n<tr><td colspan='".$this->cols."' class='scrollbody'><div style='width:".$this->s_width."px;height:".($this->s_height-20)."px;' id='d_scrollbody' class='scrollbody'>";
       $s_return .= "<table summary='' style='height:100%;width:581px;' cellspacing='0'>";
   	}
  

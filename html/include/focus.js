@@ -22,7 +22,7 @@ function keyPress(DnEvents) {
 		if(typeof(nextfield)!='undefined') {
 			if(nextfield == 'login') {
     	  return true; // submit, we finished all fields
-    	} else { // we're not done yet, send focus to next box
+    	} else { // we are not done yet, send focus to next box
       	eval('document.mainform.' + nextfield + '.focus()');
       	return false;
     	}
@@ -195,4 +195,15 @@ function js_check(form) {
 	form.javascript.value = 'true';
 }
 
+window.onload = register;
+window.onresize = register;
+
+function register(e) {
+	if (!e) e=window.event;
+	var px_height= window.innerHeight-220;
+	if(px_height >= 480) {
+		document.getElementById("d_scrollbody").style.height=px_height+"px";
+	}
+	return true;
+}
 // vim:ts=2:syntax
