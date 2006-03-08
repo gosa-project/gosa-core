@@ -241,9 +241,10 @@ $ldap->modify ($attrs);
       $message[] = _("No SMTP privileged networks set.");
     }
 
-    if(empty($this->postfix_relayhost)) {
+    /*if(empty($this->postfix_relayhost)) {
       $message[] = _("No SMTP smarthost/relayhost set.");
     }
+    */
 
     return ($message);
   }

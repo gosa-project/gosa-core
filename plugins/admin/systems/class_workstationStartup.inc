@@ -220,8 +220,8 @@ class workstartup extends plugin
 
 
     foreach($this->FAIclasses as $class){
-      
-      if(($this->FAIdebianMirror != "auto") && (!preg_match("/ou=".$this->FAIrelease."/",$this->FAIclassInfo[$class]['REST']['dn']))){
+      //  (!preg_match("/ou=".$this->FAIrelease."/",$this->FAIclassInfo[$class]['REST']['dn']))
+      if(($this->FAIdebianMirror != "auto") && (stristr($this->FAIclassInfo[$class]['REST']['dn'],"ou=".$this->FAIrelease) == false)){
         continue;
       }
       $str    = "";
