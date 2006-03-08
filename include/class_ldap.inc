@@ -194,13 +194,13 @@ class LDAP{
     }
   }
 
-  function cat($dn)
+  function cat($dn,$attrs= array("*"))
   {
     if($this->hascon){
       if ($this->reconnect) $this->connect();
       $this->clearResult();
       $filter = "(objectclass=*)";
-      $this->sr = @ldap_read($this->cid, $this->fix($dn), $filter);
+      $this->sr = @ldap_read($this->cid, $this->fix($dn), $filter,$attrs);
       $this->error = @ldap_error($this->cid);
       $this->resetResult();
       $this->hasres=true;
