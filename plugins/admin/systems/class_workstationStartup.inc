@@ -693,9 +693,9 @@ class workstartup extends plugin
       return($this->getFAIreleases());
     }elseif((count($ret) == 0 ) && ($this->FAIdebianMirror == "auto")){
 
-      $eClasses = "";
+      $eClasses = " ";
       foreach($errorClasses as $class){
-        $eClasses .= " ".$class;
+        $eClasses .= $class." ";
       }
       
       $this->FAIclass= array();
