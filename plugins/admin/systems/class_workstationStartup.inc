@@ -17,10 +17,6 @@ class workstartup extends plugin
   var $gotoFilesystem       = array();
   var $gotoTerminalPath     = "";
   var $FAIstatus            = "";
-  var $FAIclass             = array();
-  var $FAIclasses           = array();
-  var $FAIclassInfo         = array();
-  var $FAIdebianMirror      = "auto";
 
 
   /* attribute list for save action */
@@ -37,9 +33,16 @@ class workstartup extends plugin
   var $customParameters   = "";
   var $orig_dn            = "";
   var $ignore_account     = TRUE;
-  var $FAIdebianMirrors   = array();
+ 
+  /* FAI class selection */ 
+  var $FAIclass           = array();
+  var $FAIclasses         = array();
+  var $FAIclassInfo       = array();
   var $FAIrelease         = "";
-  var $FAIreleases        = array();
+  var $FAIdebianMirror    = "auto";
+
+  /* Contains all possible server/release/class settings */
+  var $FAIServRepConfig   = array();
 
   function workstartup ($config, $dn= NULL)
   {
@@ -48,9 +51,6 @@ class workstartup extends plugin
     /* Creating a list of valid Mirrors 
      * none will not be saved to ldap.
      */
-    $this->FAIdebianMirrors   = array();
-    $this->FAIreleases        = array();
-
     $ldap   = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
     $ldap->search("(objectClass=FAIrepositoryServer)",array("FAIrepository"));
@@ -58,32 +58,46 @@ class workstartup extends plugin
     /* attach all attributes with "index => cn" to avoid multiple entries */
     $ret = array();
     $rels = array();
+    $_SESSION['getAvailablePakagesForThisRelease_CACHE'] = array();
+    $_SESSION['getAvailablePakagesForThisRelease_CACHED_CLASSES'] = array();
+
+    /* Build up an array like this one :
+        [$url]['SERVER'] = 'srv1-002';
+        [$url]['RELEASE']['siga/rc9.0.2']
+                                           ['SECTIONS'][0] "main";
+                                           ['SECTIONS'][1] "non-free";
+        [$url]['RELEASE']['siga/rc9.0.2']
+                                           ['PACKAGES'][0] "pkg1";
+                                           ['PACKAGES'][1] "postfix";
+     */
+    $test = array();
     while($attr = $ldap->fetch()){
       if(isset($attr['FAIrepository'])){
-        
+
         unset($attr['FAIrepository']['count']);
 
         foreach($attr['FAIrepository'] as $rep){
           $tmp = split("\|",$rep);
-          $str = "";
+
           if(count($tmp)==4){
             $sections = split(",",$tmp[3]);
-            $str = $tmp[0];
-            $ret[$str]=$sections;
-            if( array_key_exists( $str, $rels ) ) {
-              if( "" == $this->FAIrelease )
-                $this->FAIrelease = $tmp[2];
-              array_push( $rels[$str], $tmp[2] );
-            }
-            else $rels[$str] = array( $tmp[2] );
+            $release  = $tmp[2];
+            $server   = $tmp[1];
+            $url      = $tmp[0];
+           
+            $test[$url]['RELEASE'][$release]['SECTIONS'] = $sections;
+            $test[$url]['RELEASE'][$release]['PACKAGES'] = $this->getAvailablePakagesForThisRelease($release);
+            $test[$url]['SERVER'] = $server;
+
+            /* auto gets all releases/classes 
+             */
+            $test['auto']['RELEASE'][$release]['SECTION'] = $sections;
+            $test['auto']['RELEASE'][$release]['PACKAGES'] = $this->getAvailablePakagesForThisRelease($release);
           }
         }
       }
     }
-    ksort($ret);
-    ksort($rels);
-    $this->FAIdebianMirrors = $ret;
-    $this->FAIreleases = $rels;
+    $this->FAIServRepConfig =$test;
 
     /* Get arrays */
     foreach (array("gotoModules", "gotoAutoFs", "gotoFilesystem") as $val){
@@ -207,35 +221,128 @@ class workstartup extends plugin
     }
 
     $this->orig_dn= $this->dn;
+    
   }
 
-  /* Create array to display available classes/profiles in a selectbox */
+  
+  /* This class is called by the contrucktor ONLY.
+   *   It return the available classes for each 
+   *    Server / Release combination ... 
+   *   (Release specifies which classes are available) 
+   */
+  function getAvailablePakagesForThisRelease($release)
+  {
+    /* There could be more than one server providing this release,
+        so use cached result if available
+     */ 
+    if(isset($_SESSION['getAvailablePakagesForThisRelease_CACHE'][$release]))  {
+      return($_SESSION['getAvailablePakagesForThisRelease_CACHE'][$release]);
+    }
+
+    /* Create cache with all classes 
+     */
+    if((!isset($_SESSION['getAvailablePakagesForThisRelease_CACHED_CLASSES'])) ||
+       (!is_array($_SESSION['getAvailablePakagesForThisRelease_CACHED_CLASSES'])) ||
+       (count($_SESSION['getAvailablePakagesForThisRelease_CACHED_CLASSES'] ==0 ))){
+
+      /* Get ldap connection */
+      $ldap   = $this->config->get_ldap_link();
+      $ldap->cd($this->config->current['BASE']);
+
+      /* Get possible classes ... 
+         This would be faste with some kind of caching ... 
+       */
+      $ldap->search("(| (objectClass=FAIpackageList)(objectClass=FAItemplate)
+        (objectClass=FAIvariable)(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)
+        (objectClass=FAIpartitionTable))",array("*"),true);
+      /* Sort all entries, and attach elementtype.
+       * To be able to show the types in the listbox.
+       */
+      while($attr = $ldap->fetch()){
+        $_SESSION['getAvailablePakagesForThisRelease_CACHED_CLASSES'][] = $attr;
+      }  
+    }
+
+    /* Walk through cache and get out what we need.
+     *   
+     *   Function od : "$this->generateDNSyn($release)"
+     *    It returns an array like this one :
+     *       array("ou=packges,ou=rc0.9.2,ou=siga,", 
+     *            "ou=scripts.. " 
+     *             ...);
+     *   This helps us to select the correct classes for each release. 
+     *   It prevents errors like:  'siga' is selected as release, but all classes
+     *     with ou='siga' in their dn are shown, also ou=rc...,ou=siga...  
+     */
+    $tmp2 = $this->generateDNSyn($release)     ; 
+    $test2 = array();
+    foreach($_SESSION['getAvailablePakagesForThisRelease_CACHED_CLASSES'] as $attr){  
+      foreach($tmp2 as $dns){
+        if(preg_match("/".$dns."/",$attr['dn'])){
+          $test2[$attr['cn'][0]] = $attr['cn'][0];
+        }
+      }
+    }
+    $_SESSION['getAvailablePakagesForThisRelease_CACHE'][$release] = $test2;
+    return($test2);
+  }
+
+  /*  Create array to display available classes/profiles in a selectbox 
+   *   This function only displays the available classes.
+   *   If a class is available is defined by these facts : 
+   *     1. Is this class available for the selected release ?
+   *       - if it is available, check if the release is available for the selected server 
+   *         (done by $this->getFAIreleases())
+   *     2. Is this class currently not assigned to $this->FAIclass
+   */
   function selectFriendlyClasses(){
     $tmp=array();
 
+    /* check if the current release exists,
+        else select the first one ..
+     */
     $tmp2 = $this->getFAIreleases();
     if(!in_array($this->FAIrelease, $tmp2)){  
       $this->FAIrelease = key($tmp2);
     }
+ 
+    /* Get all Packages for this server/release combination
+     */
+    if(!isset($this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'][$this->FAIrelease]['PACKAGES'])){
+      $pkgs = array();
+      print_red(_("There are packages in your configuration, which can't be resolved with current server/release settings."));
+    }else{
+      $pkgs = $this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'][$this->FAIrelease]['PACKAGES'];
+    }
 
-
-    foreach($this->FAIclasses as $class){
-      //  (!preg_match("/ou=".$this->FAIrelease."/",$this->FAIclassInfo[$class]['REST']['dn']))
-      if(($this->FAIdebianMirror != "auto") && (stristr($this->FAIclassInfo[$class]['REST']['dn'],"ou=".$this->FAIrelease) == false)){
-        continue;
-      }
-      $str    = "";
-      $skip = false;
-
-      if(isset($this->FAIclassInfo[$class])){
-        foreach($this->FAIclassInfo[$class] as $objs){
-          if (isset($objs['kzl'])){
-            $str .= $objs['kzl']." "; 
+    /* Check each and every single class name 
+     */
+    foreach($pkgs as $pkg){
+  
+      /* Class already assigned to the classes list ?
+       * If not ... go on
+       */
+      if(!in_array($pkg,$this->FAIclass)){
+        
+        /* Create the displayed list entry value
+            HKLMOP [-Pl P V T-] or something like that 
+         */
+        $str = "";
+        foreach($this->FAIclassInfo[$pkg] as $entry){
+          if(isset($entry['kzl'])){
+            $str .= $entry['kzl']." ";
           }
         }
+        
+        /* Append class if everyting was fine
+         */        
+        $tmp[$pkg] = $pkg." [-".trim($str)."-]";
       }
-      $tmp[$class] = $class."&nbsp; [".$str."]";
     }
+    /* Just sort and return new classes list ...
+       ( possibly we should cache the result ... )
+     */
+    natcasesort ($tmp);
     return($tmp);
   }
 
@@ -427,17 +534,21 @@ class workstartup extends plugin
       $smarty->assign($val."ACL", chkacl($this->acl, $val));
     }
 
-    $div = new divSelectBox("WSFAIscriptClasses");
+    $smarty->assign("FAIdebianMirrors",$this->getFAIdebianMirrors());
+    $smarty->assign("FAIreleases",$this->getFAIreleases());
+    $smarty->assign("FAIrelease",$this->FAIrelease);
+    $smarty->assign("FAIclasses",$this->selectFriendlyClasses());
+    $smarty->assign("FAIclassesKeys",array_flip($this->selectFriendlyClasses()));
+    $smarty->assign("FAIclassKeys",$this->FAIclass);
     
+    $div = new divSelectBox("WSFAIscriptClasses");
     $div -> SetHeight("110");
-
     $str_up     = " &nbsp;<input type='image' src='images/sort_up.png'    name='sort_up_%s'    value='%s'>";
     $str_down   = " &nbsp;<input type='image' src='images/sort_down.png'  name='sort_down_%s'  value='%s'>";
     $str_remove = " &nbsp;<input type='image' src='images/edittrash.png'  name='fai_remove_%s' value='%s'>";
     $str_empty  = " &nbsp;<img src='images/empty.png' alt=\"\" width='7'>"; 
 
     $i = 1;
-
     foreach($this->FAIclass as $class){
       if($i==1){
         $str = $str_empty.$str_down.$str_remove;
@@ -447,20 +558,14 @@ class workstartup extends plugin
         $str = $str_up.$str_down.$str_remove;
       }
       $i ++ ; 
-    
+
       $div->AddEntry(array(
-                       array("string"=>$class),
-                       array("string"=>preg_replace("/\%s/",base64_encode($class),$str),"attach"=>"style='width:50px;border-right:none;'")
-                    ));
+            array("string"=>$class),
+            array("string"=>preg_replace("/\%s/",base64_encode($class),$str),"attach"=>"style='width:50px;border-right:none;'")
+            ));
     }  
 
     $smarty->assign("FAIScriptlist",$div->DrawList()); 
-    $smarty->assign("FAIdebianMirrors",$this->getFAIdebianMirrors());
-    $smarty->assign("FAIreleases",$this->getFAIreleases());
-    $smarty->assign("FAIrelease",$this->FAIrelease);
-    $smarty->assign("FAIclasses",$this->selectFriendlyClasses());
-    $smarty->assign("FAIclassesKeys",array_flip($this->selectFriendlyClasses()));
-    $smarty->assign("FAIclassKeys",$this->FAIclass);
 
     /* Radio button group */
     if (preg_match("/G/", $this->bootmode)) {
@@ -493,43 +598,55 @@ class workstartup extends plugin
     $this->handle_post_events("remove");
   }
 
+  function generateDNSyn($release)
+  {
+    $str = "";
+    $tmp = split("\/",$release);
+    $tmp = array_reverse($tmp);
+    
+    $arr = array("scripts","hooks","disk","variables","templates","profiles","packages");
+
+    foreach($tmp as $departmentname){
+      
+      $str .= ",ou=".$departmentname;
+    }
+    $ret = array();
+    foreach($arr as $ar){
+      $ret[] = ",ou=".$ar.$str;
+    }
+    return($ret);
+  }
 
   function getFAIdebianMirrors()
   {
     $ret = array();
     $ret['auto']=_("automatic");
     $secs  = array();
-    if(is_array($this->FAIclass)){
-      foreach($this->FAIclass as $classes){
-        if(isset($this->FAIclassInfo[ $classes]['FAIpackageList']['sec'])){
-          if(isset($this->FAIclassInfo[ $classes]['FAIpackageList']['sec']['count'])){
-            unset($this->FAIclassInfo[ $classes]['FAIpackageList']['sec']['count']);
-          }
-          if(is_array($this->FAIclassInfo[ $classes]['FAIpackageList']['sec'])){
-            foreach($this->FAIclassInfo[ $classes]['FAIpackageList']['sec'] as $sec => $value){
-              $secs[$value]= $value;
-            }
-          }
-        }
-      }
-    }
 
-    if(is_array($this->FAIdebianMirrors)){
-      foreach($this->FAIdebianMirrors as $mirr=>$sections){
-        $allok = true;
-        foreach($secs as $sec){
-          if(!in_array($sec,$sections)){
-            $allok = false;
+    /* Walk through all available servers 
+        and check if they support the currently selected classes
+        if not, dont't add them to our list
+     */
+    foreach($this->FAIServRepConfig as $mirror => $rest){
+
+      $use = false;
+
+      if(count($this->FAIclass) == 0){
+        $use = true;
+      }else{
+        $tmp = $this->getFAIreleases();
+        foreach($tmp as $release){
+          if(isset($rest['RELEASE'][$release])){
+            $use =true;
           }
-        }
-        if(count($this->FAIclass)){
-          if(!in_array($this->FAIrelease,$this->FAIreleases[$mirr])){
-            $allok = false; 
-          }
-        }
-        if($allok){
-          $ret[$mirr]=$mirr;
-        }
+        } 
+      }
+
+      /* If current server, doesn't support this class
+          remove it from list
+       */
+      if($use){
+        $ret[$mirror] = $mirror;
       }
     }
     return($ret);
@@ -538,14 +655,51 @@ class workstartup extends plugin
   function getFAIreleases() 
   {
     $ret = array();
-    if(is_array($this->FAIreleases)) {
-      foreach($this->FAIreleases as $mirr=>$releases){
-        if( $this->FAIdebianMirror == $mirr ) {
-          foreach ($releases as $release) 
-            $ret[$release] = $release;
-          return($ret);
+
+    if(!isset($this->FAIServRepConfig[$this->FAIdebianMirror])){
+      $this->FAIdebianMirror = "auto";
+    }
+
+    $errorClasses = "";  
+  
+    foreach($this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'] as $release => $sections){
+      $use = true;
+      
+      if(!count($this->FAIclass) == 0){
+        foreach($this->FAIclass as $class){
+          if(!in_array($class, $sections['PACKAGES'])){
+            $use = false;
+            $errorClasses[$class] = $class;
+          }else{
+            if(isset($errorClasses[$class])){
+              unset($errorClasses[$class]); 
+            }
+          }
         }
       }
+      if($use){
+        $ret[$release]=$release;
+      }
+    } 
+    if((count($ret) == 0 ) && ($this->FAIdebianMirror != "auto")){
+
+      $eClasses = " ";
+      foreach($errorClasses as $class){
+        $eClasses .= $class." ";
+      }
+
+      print_red(sprintf(_("Can't resolve one or more of the given FAIclass(es) [%s] in FAI server '%s'. Server was reset to 'auto'."),$eClasses, $this->FAIdebianMirror));
+      $this->FAIdebianMirror = "auto";
+      return($this->getFAIreleases());
+    }elseif((count($ret) == 0 ) && ($this->FAIdebianMirror == "auto")){
+
+      $eClasses = "";
+      foreach($errorClasses as $class){
+        $eClasses .= " ".$class;
+      }
+      
+      $this->FAIclass= array();
+      print_red(sprintf(_("Can't resolve the given FAIclass(es) [%s] anyway, please check your FAI configurations, possibly some classes where deleted or renamed. !All classes have been removed from this account, press cancel if you don't want this to be saved."),$eClasses));
     }
     return($ret);
   }
