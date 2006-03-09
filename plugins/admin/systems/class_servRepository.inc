@@ -117,19 +117,65 @@ class servrepository extends plugin
       }
 
       if((preg_match("/^delete_/",$name))&&(!$once)){
-
+        $once = true;
         $value = preg_replace("/delete_/","",$name);
         $value = base64_decode(preg_replace("/_.*$/","",$value));
 
-        if(isset($this->repositories[$value])){
-          $once = true;
-          unset($this->repositories[$value]);
+        $url = $this->repositories[$value]['Url'];
+        $release = $this->repositories[$value]['Release'];
+
+        $ldap = $this->config->get_ldap_link();
+        $ldap->cd ($this->config->current['BASE']);
+        
+        $ldap->search("(&(objectClass=gotoWorkstation)(objectClass=FAIobject)(FAIdebianMirror=".$url."))",array("cn","FAIclass"));
+        
+        $found = false;
+        $found_in = " ";
+        while($attrs = $ldap->fetch()){
+          foreach($attrs['FAIclass'] as $class){
+            if(preg_match("/".str_replace("/","\/",$release)."$/i",$class)){
+              $found = true;  
+              $found_in .= $attrs['cn'][0]." ";
+            }
+          }
+        }
+         
+        if($found){
+          print_red(sprintf(_("You can't delete this release, it is still used by these workstations [%s]. Please solve this dependencies first, to keep data base consistency."),$found_in));
+        }else{
+          if(isset($this->repositories[$value])){
+          //  unset($this->repositories[$value]);
+          }
         }
       }
 
       if((preg_match("/^edit_/",$name))&&(!$once)){
         $value = preg_replace("/edit_/","",$name);
         $value = base64_decode(preg_replace("/_.$/","",$value));
+
+        $ldap = $this->config->get_ldap_link();
+        $ldap->cd ($this->config->current['BASE']);
+        
+        $url = $this->repositories[$value]['Url'];
+        $release = $this->repositories[$value]['Release'];
+
+        $ldap->search("(&(objectClass=gotoWorkstation)(objectClass=FAIobject)(FAIdebianMirror=".$url."))",array("cn","FAIclass"));
+
+        $found = false;
+        $found_in = " ";
+        while($attrs = $ldap->fetch()){
+          foreach($attrs['FAIclass'] as $class){
+            if(preg_match("/".str_replace("/","\/",$release)."$/i",$class)){
+              $found = true;
+              $found_in .= $attrs['cn'][0]." ";
+            }
+          }
+        }
+  
+        if($found){
+          print_red(sprintf(_("Be carefull editing this release, it is still used by these workstations [%s]."),$found_in));
+        } 
+
         if(isset($this->repositories[$value])){
           $once = true;
           $obj = $this->repositories[$value];
