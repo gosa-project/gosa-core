@@ -144,7 +144,7 @@ class servrepository extends plugin
           print_red(sprintf(_("You can't delete this release, it is still used by these workstations [%s]. Please solve this dependencies first, to keep data base consistency."),$found_in));
         }else{
           if(isset($this->repositories[$value])){
-          //  unset($this->repositories[$value]);
+            unset($this->repositories[$value]);
           }
         }
       }
