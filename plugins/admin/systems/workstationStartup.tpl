@@ -46,7 +46,7 @@
 		</select>
 		<!--<input type="submit" value="{t}set{/t}" name="refresh">-->
      </td><td>
-	    <select name="FAIrelease" >
+	    <select name="FAIrelease"  onchange='document.mainform.submit()'>
 		{html_options options=$FAIreleases output=$FAIreleases selected=$FAIrelease}
 		</select>
 	</td>
