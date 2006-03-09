@@ -452,17 +452,22 @@ class group extends plugin
         $ldap->cd($this->config->current['BASE']);
         $ldap->search("(&(objectClass=gosaAccount)(uid=".$value."))",array("uid", "sn","givenName"));
         $attrs = $ldap->fetch();
-
-        if (isset($attrs["givenName"][0]) && isset($attrs["sn"][0])){
-          $this->allusers[$attrs["uid"][0]]= $attrs["sn"][0].", ".
-            $attrs["givenName"][0]." [".$attrs["uid"][0]."]";
-        } else {
-          $this->allusers[$attrs["uid"][0]]= $attrs['uid'][0];
-        }
-        if (isset($this->allusers[$value])){
-          $this->members[$value]= $this->allusers[$value];
-        } else {
-          $this->members[$value] = "[".$value."]";
+    
+        if(!$attrs){
+          $this->members[$value] = _("! unknown id")." [".$value."]"; 
+        }else{
+    
+          if (isset($attrs["givenName"][0]) && isset($attrs["sn"][0])){
+            $this->allusers[$attrs["uid"][0]]= $attrs["sn"][0].", ".
+              $attrs["givenName"][0]." [".$attrs["uid"][0]."]";
+          } else {
+            $this->allusers[$attrs["uid"][0]]= $attrs['uid'][0];
+          }
+          if (isset($this->allusers[$value])){
+            $this->members[$value]= $this->allusers[$value];
+          } else {
+            $this->members[$value] = "[".$value."]";
+          }
         }
       }
     }
