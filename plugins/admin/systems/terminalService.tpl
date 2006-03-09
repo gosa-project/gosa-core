@@ -15,7 +15,7 @@
      <td><LABEL for="gotoXKbLayout">{t}Layout{/t}</LABEL></td>
      <td>
       <select id="gotoXKbLayout" name="gotoXKbLayout" title="{t}Choose keyboard layout{/t}" {$gotoXKbLayoutACL}>
-       {html_options values=$XKbLayouts output=$XKbLayouts selected=$gotoXKbLayout_select}
+       {html_options values=$XKbLayoutKeys output=$XKbLayouts selected=$gotoXKbLayout_select}
       </select>
      </td>
     </tr>

@@ -48,7 +48,7 @@ class termservice extends plugin
       "logiinetnav", "logiinternet", "macintosh", "microsoft",
       "microsoftpro", "omnikey101", "pc101", "pc102", "pc104",
       "pc105", "rapidaccess", "rapidaccess2", "winbook");
-  var $XKbLayouts= array ("default", "de", "intl", "us");
+  var $XKbLayouts= array ("default"=>"default","de"=> "de","intl" =>"intl","us" =>"us");
   var $XKbVariants= array ("default", "nodeadkeys", "basic");
   var $MouseTypes= array("AUTO", "ImPS/2", "PS/2", "Microsoft", "Logitech");
   var $MousePorts= array("AUTO", "/dev/ttyS0", "/dev/ttyS1", "/dev/psaux", "/dev/input/mice");
@@ -70,6 +70,25 @@ class termservice extends plugin
   function termservice ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
+
+    
+    /* try to read additional keyboard layouts
+     */
+    if(file_exists(CONFIG_DIR."/keyboardLayouts")){
+      if(is_readable(CONFIG_DIR."/keyboardLayouts")){
+        $str = file_get_contents(CONFIG_DIR."/keyboardLayouts");
+        $tmp = split("\n",$str);
+        foreach($tmp as $entry){
+          if((!empty($entry)) && (!preg_match("/^#/",$entry))){
+            $entry = trim($entry);
+            $tmp2 = split ("\:",$entry);
+            $la =   trim($tmp2[0]);   // What would be saved to ldap
+            $da =   trim($tmp2[1]);   // This wis displayed in the listbox
+            $this->XKbLayouts [ $la] = $da;
+          }
+        }
+      }
+    }
 
     /* Load scanner models */
     $fcontents = file ($this->config->basedir."/include/scanner.inc");
@@ -145,10 +164,13 @@ class termservice extends plugin
 
     /* Arrays */ 
     foreach(array("XMethods", "XDrivers", "XResolutions", "XColordepths",
-          "gotoScannerModels", "XKbModels", "XKbLayouts", "XKbVariants",
+          "gotoScannerModels", "XKbModels","XKbVariants",
           "MouseTypes", "MousePorts") as $val){
       $smarty->assign("$val", $this->$val);
     }
+    $smarty->assign("XKbLayouts",   $this->XKbLayouts);
+    $smarty->assign("XKbLayoutKeys",array_flip($this->XKbLayouts));
+  
     $smarty->assign("xdmcpservers", $this->config->data['SERVERS']['TERMINAL']);
     $smarty->assign("fontservers", $this->config->data['SERVERS']['FONT']);
     $smarty->assign("nfsservers", $this->config->data['SERVERS']['NFS']);
