@@ -26,6 +26,14 @@
     <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 		<tr>
 			<td>
+				<input type=checkbox name="SubSearchGroup"  value="1" {if $SubSearchGroup == 1} checked {/if} 
+					 onClick="mainform.submit()" title="{t}Select to see servers{/t}">{t}Search within subtree{/t}<br>
+			</td>
+		</tr>	
+	</table>
+    <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
+		<tr>
+			<td>
 				<img alt="" src="{$tree_image}" align=middle title="{t}Display users of department{/t}">
 				&nbsp;
 				<select name="dselect" id="dselect" size=1 onChange="mainform.submit()" 

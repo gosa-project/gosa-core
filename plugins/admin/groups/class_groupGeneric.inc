@@ -35,6 +35,7 @@ class group extends plugin
   var $nagios_group =FALSE;
   var $sambaGroupType;
   var $dialog;
+  var $OnlyShowFirstEntries =200;
 
   /* attribute list for save action */
   var $attributes= array("cn", "description", "gidNumber","memberUid","sambaGroupType","sambaSID");
@@ -136,6 +137,10 @@ class group extends plugin
     }
     $gufilter= get_global('gufilter');
 
+    $gufilter['SubSearchGroup'] = false;
+  
+    register_global('gufilter',$gufilter);
+  
       /* Bases / Departments */
       
     if(isset($_SESSION['groupfilter']['depselect'])){
@@ -148,7 +153,7 @@ class group extends plugin
         $this->base= preg_replace ("/^[^,]+,[^,]+,/", "", $this->dn);
       }
     }
-
+    
 
     /* This is always an account */
     $this->is_account= TRUE;
@@ -256,6 +261,14 @@ class group extends plugin
           $gufilter[$type]= $_POST[$type];
         }
       }
+      if(isset($_POST['regex'])){
+        if(isset($_POST['SubSearchGroup'])){
+          $gufilter['SubSearchGroup'] = true;
+        }else{
+          $gufilter['SubSearchGroup'] = false;
+        }
+      }
+
       if (isset($_GET['search'])){
         $s= mb_substr($_GET['search'], 0, 1, "UTF8")."*";
         if ($s == "**"){
@@ -273,7 +286,7 @@ class group extends plugin
       $smarty->assign("tree_image", get_template_path('images/tree.png'));
       $smarty->assign("deplist", $this->config->idepartments);
       $smarty->assign("alphabet", generate_alphabet());
-      foreach( array("dselect", "regex") as $type){
+      foreach( array("dselect", "regex","SubSearchGroup") as $type){
         $smarty->assign("$type", $gufilter[$type]);
       }
       $smarty->assign("hint", print_sizelimit_warning());
@@ -398,13 +411,23 @@ class group extends plugin
     $this->last_sorting= "invalid";
     $this->users= array();
     $ldap= $this->config->get_ldap_link();
-    $gufilter= get_global("gufilter");
 
+    $MaxUser = $this->OnlyShowFirstEntries;
+
+    $gufilter= get_global("gufilter");
     $ldap->cd ($this->config->current['BASE']);
-    $ldap->cd (get_people_ou().$gufilter['dselect']);
-    $ldap->ls ("(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(!(uid=*$)))",get_people_ou().$gufilter['dselect'],array("uid", "sn", "givenName"));
+    if($gufilter['SubSearchGroup']){
+      $ldap->cd ($gufilter['dselect']);
+      $ldap->search("(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(!(uid=*$)))",array("uid", "sn","givenName"));
+    }else{
+      $ldap->cd (get_people_ou().$gufilter['dselect']);
+      $ldap->ls ("(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(!(uid=*$)))",get_people_ou().$gufilter['dselect'],array("uid", "sn", "givenName"));
+    }
     $this->allusers= array();
-    while ($attrs= $ldap->fetch()){
+    
+    $i = 0 ;
+    while (($attrs= $ldap->fetch()) && ($i < $MaxUser)){
+      $i ++;
       if (isset($attrs["givenName"][0]) && isset($attrs["sn"][0])){
         $this->allusers[$attrs["uid"][0]]= $attrs["sn"][0].", ".
           $attrs["givenName"][0]." [".$attrs["uid"][0]."]";
@@ -412,6 +435,11 @@ class group extends plugin
         $this->allusers[$attrs["uid"][0]]= $attrs['uid'][0];
       }
     }
+  
+    if(($i == $MaxUser)){
+      print_red(sprintf(_("Your search method returned more than '%s' users, only '%s' users are shown.") , $MaxUser,$MaxUser));
+    }
+    
     natcasesort ($this->allusers);
     reset ($this->allusers);
 
@@ -471,6 +499,8 @@ class group extends plugin
   {
     /* Save additional values for possible next step */
     if (isset($_POST['groupedit'])){
+
+      
       plugin::save_object();
 
       $this->force_gid= 0;
