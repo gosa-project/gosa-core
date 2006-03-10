@@ -30,12 +30,15 @@ class group extends plugin
   var $saved_gidNumber= "";
   var $oldgroupType= "";
   var $orig_dn= "";
+  var $orig_cn= "";
   var $has_mailAccount= FALSE;
   var $group_dialog= FALSE;
   var $nagios_group =FALSE;
   var $sambaGroupType;
   var $dialog;
   var $OnlyShowFirstEntries =200;
+
+  var $allowGroupsWithSameNameInOtherSubtrees = true;
 
   /* attribute list for save action */
   var $attributes= array("cn", "description", "gidNumber","memberUid","sambaGroupType","sambaSID");
@@ -48,6 +51,7 @@ class group extends plugin
     /* Load attributes depending on the samba version */
     $this->samba3= ($config->current['SAMBAVERSION'] == 3);
     $this->orig_dn= $dn;
+    $this->orig_cn= $this->cn;
 
     /* Get member list */
     if (isset($this->attrs['memberUid'][0])){
@@ -721,26 +725,42 @@ class group extends plugin
       $message[]= _("The field 'Name' contains invalid characters. Lowercase, numbers and dashes are allowed.");
     }
 
-    /* Check for used 'cn' */
-    $ldap= $this->config->get_ldap_link();
-    $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(&(|(objectClass=gosaGroupOfNames)(objectClass=posixGroup))(cn=$this->cn))",array("cn"));
-    if ($ldap->count() != 0){
 
-      /* New entry? */
-      if ($this->dn == 'new'){
-        $message[]= _("Value specified as 'Name' is already used.");
-      }
-      
-      /* Moved? */
-      elseif ($new_dn != $this->orig_dn){
-        $ldap->fetch();
-        if ($ldap->getDN() != $this->orig_dn){
+    if($this->allowGroupsWithSameNameInOtherSubtrees == true){
+
+      /* Check for used 'cn' */
+      $ldap= $this->config->get_ldap_link();
+      if(($this->cn  != $this->orig_cn) || ($this->orig_dn == "new")){
+        $ldap->cd("ou=groups,".$this->base);
+        $ldap->ls("(&(|(objectClass=gosaGroupOfNames)(objectClass=posixGroup))(cn=$this->cn))","ou=groups,".$this->base,array("cn"));
+        if ($ldap->count() != 0){
           $message[]= _("Value specified as 'Name' is already used.");
         }
       }
-    }
 
+    }else{
+
+      /* Check for used 'cn' */
+      $ldap= $this->config->get_ldap_link();
+      $ldap->cd($this->config->current['BASE']);
+      $ldap->search("(&(|(objectClass=gosaGroupOfNames)(objectClass=posixGroup))(cn=$this->cn))",array("cn"));
+      if ($ldap->count() != 0){
+
+        /* New entry? */
+        if ($this->dn == 'new'){
+          $message[]= _("Value specified as 'Name' is already used.");
+        }
+
+        /* Moved? */
+        elseif ($new_dn != $this->orig_dn){
+          $ldap->fetch();
+          if ($ldap->getDN() != $this->orig_dn){
+            $message[]= _("Value specified as 'Name' is already used.");
+          }
+        }
+      }
+    }
+     
     /* Check ID */
     if ($this->force_gid == "1"){
       if (!is_id($this->gidNumber)){
