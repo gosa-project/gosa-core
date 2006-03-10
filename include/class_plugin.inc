@@ -608,7 +608,7 @@ class plugin
 
     $r=ldap_bind($ds,$this->config->current['ADMIN'], $this->config->current['PASSWORD']);
     error_reporting (0);
-    $sr=ldap_read($ds, $src_dn, "objectClass=*");
+    $sr=ldap_read($ds, $ldap->fix($src_dn), "objectClass=*");
 
     /* Fill data from LDAP */
     $new= array();
