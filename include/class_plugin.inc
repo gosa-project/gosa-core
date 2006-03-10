@@ -638,6 +638,14 @@ class plugin
     $dst_val = preg_replace("/^[^=]+=([^,+]+).*,.*$/", "\\1", $dst_dn);
     $new[$dst_name]= $dst_val;
 
+    /* Check if this is a department.
+     * If it is a dep. && there is a , override in his ou 
+     *  change \2C to , again, else this entry can't be saved ...
+     */
+    if((isset($new['ou'])) &&( preg_match("/\\\\2C/",$new['ou']))){
+      $new['ou'] = preg_replace("/\\\\2C/",",",$new['ou']);
+    }
+
     /* Save copy */
     $ldap->connect();
     $ldap->cd($this->config->current['BASE']);
