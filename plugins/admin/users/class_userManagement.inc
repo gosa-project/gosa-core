@@ -954,9 +954,29 @@ class userManagement extends plugin
       $samba= "sambaAccount";
     }
 
+
+    /* Sometimes not all users were displayed in the users list.
+       The problem was, that we search for an objectClass
+        which isn't used in every ldap-schema configuration.
+       Here we remove this class, if there is no result returned from 
+        our test search.
+    */
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+
+    $ldap->search("(objectClass=goFaxAccount)",array("cn","uid"));
+    if($ldap->fetch()){
+      $useFaxInFilter = true;
+      $FaxFilter = "(objectClass=goFaxAccount)";
+    } else {
+      $useFaxInFilter = false;
+      $FaxFilter = "";
+    }
+   
+ 
     $filter="";
     if ($userfilter['functionalusers'] == "checked"){
-      $filter.= "(&(objectClass=gosaAccount)(!(|(objectClass=posixAccount)(objectClass=gosaMailAccount)(objectClass=$samba)(objectClass=goFaxAccount)(objectClass=gosaProxyAccount))))";
+      $filter.= "(&(objectClass=gosaAccount)(!(|(objectClass=posixAccount)(objectClass=gosaMailAccount)(objectClass=$samba)".$FaxFilter."(objectClass=gosaProxyAccount))))";
     }
     if ($userfilter['unixusers'] == "checked"){
       $filter.= "(objectClass=posixAccount)";
@@ -970,10 +990,9 @@ class userManagement extends plugin
     if ($userfilter['proxyusers'] == "checked"){
       $filter.= "(objectClass=gosaProxyAccount)";
     }
-    if ($userfilter['faxusers'] == "checked"){
+    if (($userfilter['faxusers'] == "checked") && ($useFaxInFilter)){
       $filter.= "(objectClass=goFaxAccount)";
     }
-
     if ($userfilter['templates'] == "checked"){
       $filter= "(|(objectClass=gosaUserTemplate)(&(objectClass=gosaAccount)(|$filter)))";
     } else {
@@ -989,7 +1008,6 @@ class userManagement extends plugin
       $base= get_people_ou().$base;
       $this->list= get_list($this->ui->subtreeACL, "$filter", FALSE, $base, array("uid", "givenName", "sn", "objectClass"), TRUE);
     }
-
 
 
     /* NEW LIST MANAGMENT
