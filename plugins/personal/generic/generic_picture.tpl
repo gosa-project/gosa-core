@@ -11,10 +11,18 @@
  <tr>
 
    <!-- Image container -->
-   <td>
-     <img alt="" class="center" align="bottom" border="1" width="145" height="200" src="getbin.php?rand=$rand">
-   </td>
-
+	 <!-- Image container -->
+  <td>
+   <table>
+    <tr>
+     <td width="147" height="200" bgcolor="gray">
+      <img align="center" valign="center" border="0" width="100%" src="getbin.php?rand={$rand}" alt="{t}Personal picture{/t}">
+     </td>
+    </tr>
+   </table>
+  </td>
+	</tr>
+	<tr>
    <!-- Name, ... -->
    <td style="vertical-align:bottom; width:100%;">
      <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
