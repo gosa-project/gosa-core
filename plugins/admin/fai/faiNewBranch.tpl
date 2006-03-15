@@ -31,7 +31,11 @@
 {else}
 
 <h2>{t}Processing requested operation, the status of this operation will be displayed in an iframe below.{/t}</h2>
-
+{t}As soon as the operation has finished, you can scroll down to end of the page and press the 'Back' button to return to the fai management dialog.{/t}
+<br>
+<br>
+<p class='seperator'>&nbsp;</p>
+<br>
 <div>
 <iframe src="?plug={$plugID}&PerformBranch=1" width="100%" name="status" style="height:450px;background-color:#FFFFFF;">
 
@@ -41,10 +45,12 @@
 	</p>	
 </iframe>
 </div>
+<!--
 <p class="seperator">&nbsp;</p>
 <div style="text-align: right;width:99%;">
 	<p>
 		<input type="submit" name="CancelBranchName" value="{t}Back{/t}">
 	</p>
 </div>
+-->
 {/if}

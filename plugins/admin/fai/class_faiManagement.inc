@@ -425,6 +425,10 @@ class faiManagement extends plugin
       $ldap->cd ($this->config->current['BASE']);
       $ldap->copy_FAI_resource_recursive($baseToUse,"ou=".$name.",".$baseToUse,$type,true);
 
+      echo "<div style='width:100%;text-align:right;'><form name='form' method='post' action='?plug=".$_GET['plug']."' target='_parent'>
+              <input type='submit' name='back' value='"._("Back")."'>
+            </form></div>";
+
       $this->dispNewFreeze = false; 
 
       /* Postcreate */ 
