@@ -244,7 +244,17 @@ class servdns extends plugin
         $tmp = base64_decode(preg_replace("/_.*$/","",$tmp));
   
         $zones =  $this->getUsedZoneNames();
-        $rev = $this->Zones[$tmp]['ReverseZone'];
+    
+        if(isset($this->Zones[$tmp]['InitialreverseZone'])){
+          $rev = $this->FlipIp($this->Zones[$tmp]['InitialreverseZone']);
+        }else{
+          $rev = $this->FlipIp($this->Zones[$tmp]['ReverseZone']);
+        }
+
+        if(isset($this->Zones[$tmp]['InitialzoneName'])){
+          $tmp= $this->Zones[$tmp]['InitialzoneName'];
+        }
+
         $res = array_merge(($zones[$tmp]),($zones[$rev.".in-addr.arpa"]));
         
         if(count($res)){
@@ -259,7 +269,7 @@ class servdns extends plugin
           if(count($res)> 2) $str .=" ... ";
           print_red(sprintf(_("Can't delete the selected zone, because it is still in use by these entry/entries '%s'"),trim($str)));
         }else{
-          unset($this->Zones[$tmp]);
+//          unset($this->Zones[$tmp]);
         }
       }
     }
