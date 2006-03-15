@@ -44,6 +44,16 @@
 							{$section}
 						</td>
 					</tr>
+					<tr>
+					    <td>
+						  {t}Install method{/t} :
+						</td>
+						<td>
+							<select name="FAIinstallMethod" {$cnACL} >
+							  {html_options options=$FAIinstallMethods output=$FAIinstallMethod selected=$FAIinstallMethod}
+							</select>
+						</td>
+					</tr>
 				</table>
 		</td>
 	</tr>

@@ -4,7 +4,7 @@ class debconf
 {
   var $package= "";
   var $language= "";
-  var $has_template= FALSE;
+  var $loaded_template= FALSE;
   var $template_directory= "";
   var $template= array();
 
@@ -19,7 +19,6 @@ class debconf
   function set_package($package)
   {
     $this->package= $package;
-    return ($this->load());
   }
 
 
@@ -43,21 +42,16 @@ class debconf
 
   function load()
   {
-    /* Reject requests, if parameters are not set */
-    if ($this->package == "" || $this->template_directory == ""){
-      return (FALSE);
-    }
-
-    /* Try to load package based template file */
-    $filename= preg_replace("/\/+/", "/", $this->template_directory."/".$this->package.".templates");
-    if (is_file($filename) && is_readable($filename)){
+    if( TRUE === $this->has_template() ) {
+    
+      /* Try to load package based template file */
       $this->template= array();
 
       /* Read template array */
-      $post_name              = 0;
-      $langcode             = $this->language.".UTF-8";
-      $in_description       = FALSE;
-      $got_local_description= FALSE;
+      $post_name             = 0;
+      $langcode              = $this->language.".UTF-8";
+      $in_description        = FALSE;
+      $got_local_description = FALSE;
 
       $fh= fopen($filename, 'r');
 
@@ -144,7 +138,7 @@ class debconf
       }
 
       fclose($fh);
-      $this->has_template= TRUE;
+      $this->loaded_template= TRUE;
       
       $tmp= array();
       foreach($this->template as $post_name => $template){
@@ -156,14 +150,19 @@ class debconf
       return (TRUE);
     }
 
-    $this->has_template= FALSE;
+    $this->loaded_template= FALSE;
     return (FALSE);
   }
 
 
   function has_template()
   {
-    return ($this->has_template);
+    /* Reject requests, if parameters are not set */
+    if ($this->package == "" || $this->template_directory == ""){
+      return (FALSE);
+    }
+    $filename= preg_replace("/\/+/", "/", $this->template_directory."/".$this->package.".templates");
+    return (is_file($filename) && is_readable($filename));
   }
 
 
@@ -209,7 +208,7 @@ class debconf
   /* This funtion sets the defualt value */
   function SetDefault($var,$val)
   {
-    if($this->has_template){
+    if ($this->loaded_template) {
       foreach($this->template as $key => $tmp){
         if($tmp['Name'] == $var ){
           $this->template[$key]['Default'] = $val;
@@ -222,7 +221,7 @@ class debconf
   /* Display all possible options in html*/
   function get_dialog()
   {
-    if ($this->has_template){
+    if ($this->loaded_template) {
       $result= "<table summary=''>";
 
       foreach ($this->template as $post_name => $entry){

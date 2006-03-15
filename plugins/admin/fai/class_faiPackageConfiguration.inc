@@ -24,10 +24,13 @@ class faiPackageConfiguration extends plugin
     $this->Debconf_handle->set_template_directory($path);
     $this->Debconf_handle->set_package($this->obj);
     $this->Debconf_handle->set_language(preg_replace('/_.*$/', '', get_browser_language()));
-    $this->pkg_config = $pkg_config;
 
-    foreach($this->pkg_config as $var){
-      $this->Debconf_handle->SetDefault($var['Name'],$var['Value']);
+    if( $this->Debconf_handle->load() ) {
+      $this->pkg_config = $pkg_config;
+
+      foreach($this->pkg_config as $var){
+        $this->Debconf_handle->SetDefault($var['Name'],$var['Value']);
+      }
     }
   }
 

@@ -56,6 +56,12 @@ class faiPackage extends plugin
 
   var $FAIstate         = "";
 
+  var $FAIinstallMethods  = array( "install", "ninstall", "remove", 
+                                   "dselect-upgrade", "taskinst", "taskrm",
+                                   "hold", "clean", "aptitude", "aptitude-r",
+                                   "pending", "dpkgc" );
+ 
+
   function faiPackage ($config, $dn= NULL)
   {
     /* Load Attributes */
@@ -133,6 +139,13 @@ class faiPackage extends plugin
     }
     $this->confDir = CONFIG_DIR."/fai/";
     $this->FAIpackage = array();
+
+
+    $methods = array();
+    foreach($this->FAIinstallMethods as $method){
+      $methods[$method] = $method;
+    }
+    $this->FAIinstallMethods = $methods;
   }
 
   function execute()
@@ -144,6 +157,8 @@ class faiPackage extends plugin
     /* Fill templating stuff */
     $smarty= get_smarty();
     $display= "";
+
+    $smarty->assign( "FAIinstallMethods", $this->FAIinstallMethods );
 
     /* Check if we exist already - no need to ask for revisions, etc. then */
     if ($this->dn != "new"){
@@ -414,7 +429,7 @@ class faiPackage extends plugin
       $this->attrs['FAIdebianSection'][] = $sec;
     }
 
-    $this->attrs["FAIinstallMethod"]= "aptitude";
+//    $this->attrs["FAIinstallMethod"]= "aptitude";
 
     $ldap->cat($this->dn);
     if($ldap->count()!=0){
