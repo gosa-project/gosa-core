@@ -66,8 +66,8 @@ class servdnseditZone extends plugin
         foreach($this->Records as $key => $rec){
           if($rec['type'] == "mXRecord"){
             $tmp = split(" ",$rec['value']);
-            $rec['value'] = $tmp[0];
-            $tmp2[$tmp[1]] = $rec;
+            $rec['value'] = $tmp[1];
+            $tmp2[$tmp[0]] = $rec;
             unset($this->Records[$key]);
           }
         }
@@ -80,6 +80,7 @@ class servdnseditZone extends plugin
         $this->mXRecords  = array();
         $this->Records    = array();
       }
+
       $str = date("Ymd");
       if(preg_match("/^".$str."/",$this->sOAserial)){
         $this->sOAserial = $this->sOAserial + 1;
@@ -168,7 +169,7 @@ class servdnseditZone extends plugin
     /* Open Zone Entry Edit Dialog
      */
     if(isset($_POST['EditZoneEntries'])){
-      $this->dialog= new servDNSeditZoneEntries($this->config,$this->dn,$this->zoneName,$this->FlipIp($this->ReverseZone),$this->RecordTypes);
+      $this->dialog= new servDNSeditZoneEntries($this->config,$this->dn,$this->InitiallyZoneName,$this->FlipIp($this->InitiallyReverseZone),$this->RecordTypes);
     }
 
     /* Save Zone Entry Edit Dialog
@@ -289,12 +290,7 @@ class servdnseditZone extends plugin
 
     /* Assign records list */
 
-    
-    if($this->dn != "new"){
-      $smarty->assign("NotNew", true);
-    }else{
       $smarty->assign("NotNew", false);
-    }
 
     $smarty->assign("Mxrecords",  $div->DrawList());
     $smarty->assign("records"  ,  $this->generateRecordsList());
@@ -437,8 +433,10 @@ class servdnseditZone extends plugin
       $ret[$name] = $this->$name;
     }
 
+    /* Create mx records 
+     */
     foreach($this->mXRecords as $key => $rec){
-      $rec['value'].= " ".$key;
+      $rec['value']= $key." ".$rec['value'];
       $this->Records [] = $rec;
     }
 

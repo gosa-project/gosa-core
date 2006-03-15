@@ -96,24 +96,30 @@ class termDNS extends plugin
     /* Get all records */
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->dn); 
-    $ldap->search("(&(objectClass=dNSZone)(zoneName=*)(!(relativeDomainName=@)))",array("*"));
+    $ldap->ls("(&(objectClass=dNSZone)(zoneName=*)(!(relativeDomainName=@)))",$this->dn,array("*"));
+
+    $found = false;
 
     while($attrs = $ldap->fetch()){
       /* If relative domainname == cn 
        * Try to read dnsclass / TTl / zone 
        */
+
       if($attrs['relativeDomainName'][0] == $this->cn){
         /* Get class */
         if(isset($attrs['dNSClass'][0])){
           $this->dNSClass = $attrs['dNSClass'][0];
+          $found  = true;
         }
         /* Get Zone*/
         if(isset($attrs['zoneName'][0])){
           $this->zoneName = $attrs['zoneName'][0];
+          $found  = true;
         }
         /* Get ttl */
         if(isset($attrs['dNSTTL'][0])){
           $this->dNSTTL   = $attrs['dNSTTL'][0];
+          $found  = true;
         }
       }
 
@@ -137,7 +143,7 @@ class termDNS extends plugin
 
     /* If there is at least one entry in this -> types, we have DNS enabled */
     $this->types = $types;
-    if(count($this->types) == 0){
+    if((count($this->types) == 0) &&($found == false)){
       $this->DNS_is_account = false;
     }else{
       $this->DNS_is_account = true;
@@ -316,7 +322,25 @@ class termDNS extends plugin
 
     /* only perfrom this checks if this is a valid DNS account */
     if($this->DNS_is_account){
+
+      $checkArray = array();
+      $onlyOnce   = array();
+      $onlyOnce['cNAMERecord'] = 0;
+  
       foreach($this->types as $name => $values){
+
+        if(!isset($checkArray[$values['type']][$values['value']])){
+          $checkArray[$values['type']][$values['value']] = 0;
+        }else{
+          $message[] = sprintf(_("Found duplicate value for record type '%s'."),$values['type']);
+        }
+
+        if(isset($onlyOnce[$values['type']])){
+          $onlyOnce[$values['type']] ++;
+          if($onlyOnce[$values['type']] > 1){
+            $message[] = sprintf(_("Found more than one entry for the uniqe record type '%s'."),$values['type']);
+          }
+        }
 
         if($values['type'] == "tXTRecord") continue;
 
@@ -332,7 +356,6 @@ class termDNS extends plugin
         }
       }
     }
-  
     return ($message);
   }
 
@@ -368,13 +391,12 @@ $ldap->modify ($this->attrs);
     if(!$this->DNS_is_account){
       if($this->DNSinitially_was_account){
         $tmp = array();
-        foreach($this->types as $type){
-          $dn = $type['dn'];
-          if(!isset($tmp[$dn])) {
-            $ldap->cd($dn);
-            $ldap->rmDir($dn);
-          }
-          $tmp[$dn]=$dn;
+
+        $ldap->ls("(&(objectClass=dNSZone)(!(relativeDomainName=@)))",$this->dn,array("relativeDomainName"));
+        while($attrs = $ldap->fetch()){
+          $dn=$attrs['dn'];
+          $ldap->cd($dn);
+          $ldap->rmdir_recursive($dn);
         }
       }
     }else{
@@ -475,9 +497,11 @@ $ldap->modify ($this->attrs);
     
     while($at = $ldap->fetch()){
       if(preg_match("/\.in\-addr\.arpa/",$at['zoneName'][0])){
-        $ret[$at['relativeDomainName'][0]]['addr']= $at['zoneName'][0];
+        $name = preg_replace("/^zoneName=/","",$at['tXTRecord'][0]);
+        $ret[$name]['addr']= $at['zoneName'][0];
       }else{
-        $ret[$at['relativeDomainName'][0]]['name']= $at['zoneName'][0];
+        $name = $at['zoneName'][0];
+        $ret[$name]['name']= $at['zoneName'][0];
       }
     }
 

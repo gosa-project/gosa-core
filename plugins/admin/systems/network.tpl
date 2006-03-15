@@ -34,7 +34,7 @@
 					<td><LABEL	for="zoneName">{t}Zone{/t}</LABEL></td>
 					<td>
               <select name="zoneName" id="zoneName" {if $DNSAccount == false} disabled {/if}>
-                {html_options values=$ZoneKeys output=$Zones}
+                {html_options values=$ZoneKeys output=$Zones selected=$zoneName}
               </select>
           </td>
 				</tr>

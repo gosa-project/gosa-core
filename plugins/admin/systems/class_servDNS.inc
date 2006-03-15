@@ -35,10 +35,9 @@ class servdns extends plugin
     $this->RecordTypes['mDRecord']      = "mDRecord";          // ok
     $this->RecordTypes['mXRecord']      = "mXRecord";          // ok
     $this->RecordTypes['nSRecord']      = "nSRecord";          // ok
-    $this->RecordTypes['pTRRecord']     = "relativeDomainName";// ok
     $this->RecordTypes['hInfoRecord']   = "hInfoRecord";       // ok
     $this->RecordTypes['mInfoRecord']   = "mInfoRecord";       // ok
-    $this->RecordTypes['tXTRecord']     = "tXTRecord";         // ok
+//    $this->RecordTypes['tXTRecord']     = "tXTRecord";         // ok
     $this->RecordTypes['aFSDBRecord']   = "aFSDBRecord";       // ok
     $this->RecordTypes['SigRecord']     = "SigRecord";         // ok
     $this->RecordTypes['KeyRecord']     = "KeyRecord";         // ok
@@ -60,9 +59,10 @@ class servdns extends plugin
     /* Get all records */
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->dn);
-    $ldap->search("(&(objectClass=dNSZone)(relativeDomainName=@))",array("*"));
+    $ldap->ls("(&(objectClass=dNSZone)(relativeDomainName=@))",$dn,array("*"));
 
     while($attrs = $ldap->fetch()){
+
       /* If relative domainname 
        * Try to read dnsclass / TTl / zone
        */
@@ -77,7 +77,8 @@ class servdns extends plugin
         $types[$zoneName]['ReverseDN']    = $attrs['dn']; 
       }else{
 
-        /* Generate SOA entry */
+        /* Generate SOA entry 
+         */
         if(isset($attrs['sOARecord'][0])){
           $tmp = split("\ ",$attrs['sOARecord'][0]) ;
           $tmp2 = array();
@@ -93,23 +94,28 @@ class servdns extends plugin
           }
         }
 
-        /* Set dns Class*/
+        /* Set dns Class
+         */
         if(isset($attrs['dNSClass'][0])){
           $types[$attrs['zoneName'][0]]['dNSClass'] = $attrs['dNSClass'][0];
         }
 
-        /* Set zone Name */
+        /* Set zone Name 
+         */
         if(isset($attrs['zoneName'][0])){
           $types[$attrs['zoneName'][0]]['zoneName'] = $attrs['zoneName'][0];
         }
 
-        /* Create list with all used records */
+        /* Create list with all used records 
+         */
         foreach($this->RecordTypes as $name => $value){
 
-          /* If there is a record attribute  */
+          /* If there is a record attribute  
+           */
           if(isset($attrs[$name])){
 
-            /* get all entries */
+            /* get all entries 
+             */
             for($i = 0 ; $i < $attrs[$value]['count']; $i ++){
               $types[$attrs['zoneName'][0]]['Records'][] =array("type"      =>$name,
                   "inittype"  =>$name,
@@ -122,7 +128,8 @@ class servdns extends plugin
       }
     }
 
-    /* If there is at least one entry in this -> types, we have DNS enabled */
+    /* If there is at least one entry in this -> types, we have DNS enabled 
+     */
     $this->Zones = $types;
     if(count($this->Zones) == 0){
       $this->is_account = false;
@@ -130,7 +137,8 @@ class servdns extends plugin
       $this->is_account = true;
     }
 
-    /* Store initally account settings */
+    /* Store initally account settings 
+     */
     $this->DNSinitially_was_account = $this->is_account;
   }
 
@@ -152,19 +160,23 @@ class servdns extends plugin
 
   function execute()
   {
-    /* Call parent execute */
+    /* Call parent execute 
+     */
     plugin::execute();
 
-    /* Fill templating stuff */
+    /* Fill templating stuff 
+     */
     $smarty= get_smarty();
     $display= "";
 
-    /* Do we need to flip is_account state? */
+    /* Do we need to flip is_account state? 
+     */
     if (isset($_POST['modify_state'])){
       $this->is_account= !$this->is_account;
     }
 
-    /* Show tab dialog headers */
+    /* Show tab dialog headers 
+     */
     if ($this->is_account){
       $display= $this->show_header(_("Remove DNS service"),
           _("This server has DNS features enabled. You can disable them by clicking below."));
@@ -174,40 +186,49 @@ class servdns extends plugin
       return ($display);
     }
 
-    /* Edited or Added zone hould be saved saved */
+    /* Edited or Added zone hould be saved saved 
+     */
     if(isset($_POST['SaveZoneChanges'])){
       $this->dialog->save_object();
 
-      /* Check if noting went wrong */
+      /* Check if noting went wrong 
+       */
       if(count($this->dialog->check())){
         foreach($this->dialog->check() as $msgs){
           print_red($msgs); 
         }
       }else{
       
-        /* add new/edited zone */
+        /* add new/edited zone 
+         */
         $ret = $this->dialog->save();
+        $ret['InitialzoneName']= $this->dialog->InitiallyZoneName;
+        $ret['InitialreverseZone']= $this->dialog->InitiallyReverseZone;
         unset($this->Zones[$this->dialog->InitiallyZoneName]);
         $this->Zones[$ret['zoneName']]                  = $ret;
         $this->dialog = NULL;
       }
     }
 
-    /* Cancel zone edit / new */
+    /* Cancel zone edit / new 
+     */
     if(isset($_POST['CancelZoneChanges'])){
       $this->dialog = NULL;
     }
 
-    /* Add empty new zone */
+    /* Add empty new zone 
+     */
     if(isset($_POST['AddZone'])){
       $this->dialog = new servdnseditZone($this->config,$this->dn,$this->RecordTypes);
     }
 
-    /* Check for edit zone request */
+    /* Check for edit zone request 
+     */
     $once = false;
     foreach( $_POST as $name => $value){
   
-      /* check all post for edit request */
+      /* check all post for edit request 
+       */
       if(preg_match("/^editZone_/",$name)&&!$once){
         $once =true;
         $tmp = preg_replace("/^editZone_/","",$name);
@@ -215,10 +236,9 @@ class servdns extends plugin
         $this->dialog= new servdnseditZone($this->config,$this->dn,$this->RecordTypes,$this->Zones[$tmp]);
       }
 
-      /* check posts for delete zone */
+      /* check posts for delete zone 
+       */
       if(preg_match("/^delZone_/",$name)&&!$once){
-
-
         $once =true;
         $tmp = preg_replace("/^delZone_/","",$name);
         $tmp = base64_decode(preg_replace("/_.*$/","",$tmp));
@@ -244,18 +264,21 @@ class servdns extends plugin
       }
     }
 
-    /* Show dialog */
+    /* Show dialog 
+     */
     if($this->dialog!= NULL){
       $this->dialog->save_object();
       $this->dialog->parent = $this;
       return($this->dialog->execute());
     }
 
-    /* Create Listbox with existing Zones */
+    /* Create Listbox with existing Zones 
+     */
     $ZoneList = new divSelectBox("dNSZones");
     $ZoneList -> SetHeight(254);
 
-    /* Add entries to divlist*/
+    /* Add entries to divlist
+     */
     $editImg = "<input type='image' src='images/edit.png' name='editZone_%s'>
       <input type='image' src='images/edittrash.png' name='delZone_%s'>";
     foreach($this->Zones as $zone => $values ){
@@ -268,14 +291,16 @@ class servdns extends plugin
             ));
     }    
 
-    /* Display tempalte */
+    /* Display tempalte 
+     */
     $smarty->assign("ZoneList",$ZoneList->DrawList());
     $display.= $smarty->fetch(get_template_path('servdns.tpl', TRUE));
     return($display);
   }
 
 
-  /* This funtion returns all used Zonenames */
+  /* This funtion returns all used Zonenames 
+   */
   function getUsedZoneNames()
   {
     $ret = array();
@@ -293,7 +318,8 @@ class servdns extends plugin
   }
 
 
-  /* Remove dns service */
+  /* Remove dns service 
+   */
   function remove_from_parent()
   {
     if(!$this->DNSinitially_was_account){
@@ -337,18 +363,49 @@ class servdns extends plugin
   /* Save to LDAP */
   function save()
   {
-    /* Ldap conenction / var initialization */
+    /* Ldap conenction / var initialization 
+     */
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
     $actions =array("update"=>array(),"add"=>array(),"delete"=>array());
 
-    /* Generate entries for all zones, and check if they must be updated deleted added */
-    foreach($this->Zones as $zone){
+    /* Generate entries for all zones, and check if they must be updated deleted added 
+     */
+    foreach($this->Zones as $key =>  $zone){
+      if(isset($zone['InitialzoneName']) && ($zone['zoneName'] != $zone['InitialzoneName'])){
+        $dst = "zoneName=".$zone['zoneName'].",".$this->dn;
+        $src = "zoneName=".$zone['InitialzoneName'].",".$this->dn;
+        $this->recursive_move($src,$dst);
+
+        $tmp['zoneName'] = $zone['zoneName'];
+        $ldap->search ("(&(objectClass=dNSZone)(zoneName=".$zone['InitialzoneName']."))",array("relativeDomainName"));
+        while($attrs = $ldap->fetch()){
+          $ldap->cd($attrs['dn']);
+          $ldap->modify($tmp);
+          show_ldap_error($ldap->get_error()); 
+        }
+      }
+      if(isset($zone['InitialreverseZone']) &&($zone['InitialreverseZone'] != $zone['ReverseZone'])){
+        $dst = "zoneName=".$zone['ReverseZone'].",".$this->dn;
+        $src = "zoneName=".$zone['InitialreverseZone'].",".$this->dn;
+        $this->recursive_move($src,$dst);
+        
+        $tmp['zoneName'] = $zone['zoneName'];
+        $ldap->search ("(&(objectClass=dNSZone)(zoneName=".$zone['InitialzoneName']."))",array("relativeDomainName"));
+        while($attrs = $ldap->fetch()){
+          $ldap->cd($attrs['dn']);
+          $ldap->modify($tmp);
+          show_ldap_error($ldap->get_error()); 
+        }
+      }  
       
-      /* Get ldap syntax */
+ 
+      /* Get ldap syntax 
+       */
       $tmp = $this->generate_LDAP_entries($zone);
 
-      /* Check if dn is new, or if entry was edited */
+      /* Check if dn is new, or if entry was edited 
+       */
       foreach($tmp as $key => $values){
         if(isset($this->usedDNS[$key])){
           $actions['update'][$key]=$values;
@@ -359,32 +416,35 @@ class servdns extends plugin
       }
     }
 
-    /* Check which dns are not used anymore ...*/
+    /* Check which dns are not used anymore ...
+     */
     foreach($this->usedDNS as $key => $values){
       $actions['delete'][$key] = $values;
     }
 
-    /* Remove deleted zones */
+    /* Remove deleted zones 
+     */
     foreach($actions['delete'] as $dn => $attrs){
       $ldap->cd($dn);
       $ldap->rmdir_recursive($dn);
     }
 
-    /* Add new zones */
+    /* Add new zones 
+     */
     foreach($actions['add'] as $dn => $attrs){
       $ldap->cd($this->config->current['BASE']);
-      //      $ldap->create_missing_trees($dn);
       $ldap->cd($dn);
       $ldap->add($attrs);
     }
 
-    /* Update existing entries */
+    /* Update existing entries 
+     */
     foreach($actions['update'] as $dn => $attrs){
       $ldap->cd($dn);
-      //$this->cleanup();
       $ldap->modify ($attrs); 
 
     }
+
     show_ldap_error($ldap->get_error());
   }
 
@@ -406,7 +466,8 @@ class servdns extends plugin
     $tmp['sOARecord'] = $str;
 
 
-    /* Generate Record entries  */
+    /* Generate Record entries  
+     */
     $arr = array("aRecord","SigRecord","KeyRecord","aAAARecord","nSRecord","iaFSDBRecord","mInfoRecord","hInfoRecord","mXRecord","mDRecord","tXTRecord",
         "LocRecord","nXTRecord","sRVRecord","nAPTRRecord","kXRecord","certRecord","a6Record","dSRecord","sSHFPRecord","rRSIGRecord","nSECRecord");
     $aRecords = array();
@@ -420,7 +481,7 @@ class servdns extends plugin
       }
     }
     /* Check if there are records removed,
-        if there are some removed records, the append an array        
+        if there are some removed records, then append an array        
         to ensure that these record types are deleted 
      */
     if((isset($zone['Records']))&&(is_array($zone['Records']))){
@@ -433,12 +494,14 @@ class servdns extends plugin
       }
     }
    
-    /* generate forward entry */
+    /* generate forward entry 
+     */
     $dn = "zoneName=".$zone['zoneName'].",".$this->dn; 
     $tmp2[$dn] = $tmp;
     $tmp2[$dn]['zoneName'] = $zone['zoneName'];
 
-    /* generate reverse entry */
+    /* generate reverse entry 
+     */
     $dn = "zoneName=".$this->FlipIp($zone['ReverseZone']).".in-addr.arpa,".$this->dn;
     $tmp2[$dn] = $tmp;
     $tmp2[$dn]['tXTRecord'] ="zoneName=".$zone['zoneName'];
@@ -446,10 +509,6 @@ class servdns extends plugin
 
     return($tmp2);
   }
-
-
-
 }
-
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
