@@ -730,6 +730,20 @@ class ogroup extends plugin
     $this->handle_post_events("remove");
   }
 
+  function getCopyDialog()
+  {
+    $str  = "";
+    $str .= _("Group name");
+    $str .= "&nbsp;<input type='text' name='cn' value='".$this->cn."'>";
+    return($str);
+  }
+
+  function saveCopyDialog()
+  {
+    if(isset($_POST['cn'])){
+      $this->cn = $_POST['cn'];
+    }
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

@@ -130,6 +130,22 @@ $ldap->modify ($this->attrs);
     show_ldap_error($ldap->get_error());
   }
 
+
+  function getCopyDialog()
+  {
+    $str  = "";
+    $str .= _("Phone number");
+    $str .= "&nbsp;<input type='text' name='mail' value='".$this->mail."'>";
+    return($str);
+  }
+
+
+  function saveCopyDialog()
+  {
+    if(isset($_POST['mail'])){
+      $this->mail = $_POST['mail'];
+    }
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

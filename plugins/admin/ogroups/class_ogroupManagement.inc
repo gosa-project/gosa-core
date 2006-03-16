@@ -31,11 +31,24 @@ class ogroupManagement extends plugin
   var $obtypes= array();
   var $ogroup;
 
+  var $CopyPasteHandler ;
+
+  var $enableCopyPaste = false;
+
+
   function ogroupManagement ($config, $dn= NULL)
   {
     /* Include config object */
     $this->config= $config;
     $this->ui= get_userinfo();
+
+    /* Copy & Paste enabled ?
+     */
+    if((isset($this->config->data['MAIN']['ENABLECOPYPASTE']))&&(preg_match("/true/i",$this->config->data['MAIN']['ENABLECOPYPASTE'] ))){
+      $this->enableCopyPaste = true;
+    }
+
+    $this->CopyPasteHandler = new CopyPasteHandler($this->config);
 
     /* Fill translation array */
     $this->obtypes= array(	"posixAccount" => _("UNIX accounts"),
@@ -130,16 +143,23 @@ class ogroupManagement extends plugin
         $s_entry  = preg_replace("/group_chgpw_/i","",$key);
       }elseif(preg_match("/^dep_root.*/i",$key)){
         $s_action="root";
+      }elseif(preg_match("/^editPaste.*/i",$key)){
+        $s_action="editPaste";
+      }elseif(preg_match("/^copy_.*/",$key)){
+        $s_action="copy";
+        $s_entry  = preg_replace("/^copy_/i","",$key);
+      }elseif(preg_match("/^cut_.*/",$key)){
+        $s_action="cut";
+        $s_entry  = preg_replace("/^cut_/i","",$key);
       }elseif(preg_match("/_group_edit_/",$key)){
         $type = preg_replace("/_group_edit_.*$/","",$key);
         $s_action="edit";
         $s_entry  = preg_replace("/".$type."_group_edit_/i","",$key);
         $_POST['arg'] = $type;
       }
-
     }
     $s_entry  = preg_replace("/_.$/","",$s_entry);
-
+    
     /* Department changed? */
     if(isset($_POST['depselect']) && $_POST['depselect']){
       $ogroupfilter['depselect']= $_POST['depselect'];
@@ -189,6 +209,40 @@ class ogroupManagement extends plugin
     /* Check for exeeded sizelimit */
     if (($message= check_sizelimit()) != ""){
       return($message);
+    }
+
+    /* Only perform copy / paste if it is enabled
+     */
+    if($this->enableCopyPaste){
+ 
+       /* Paste copied/cutted object in here
+       */
+      if(($s_action == "editPaste") || ($this->CopyPasteHandler->stillOpen())){
+        $this->CopyPasteHandler->save_object();
+        $this->CopyPasteHandler->SetVar("base",$ogroupfilter['depselect']);
+        return($this->CopyPasteHandler->execute());
+      }
+
+
+      /* Copy current object to CopyHandler
+       */
+      if($s_action == "copy"){
+        $this->CopyPasteHandler->Clear();
+        $dn       =   $this->ogrouplist[$s_entry]['dn'];
+        $obj      =   new ogrouptabs($this->config, $this->config->data['TABS']['OGROUPTABS'], $dn);
+        $objNew   =   new ogrouptabs($this->config, $this->config->data['TABS']['OGROUPTABS'], "new");
+        $this->CopyPasteHandler->Copy($obj,$objNew);
+      }
+
+
+      /* Copy current object to CopyHandler
+       */
+      if($s_action == "cut"){
+        $this->CopyPasteHandler->Clear();
+        $dn       =   $this->ogrouplist[$s_entry]['dn'];
+        $obj      =   new ogrouptabs($this->config, $this->config->data['TABS']['OGROUPTABS'], $dn);
+        $this->CopyPasteHandler->Cut($obj);
+      }
     }
 
     /* New group? */
@@ -361,6 +415,28 @@ class ogroupManagement extends plugin
             }
     }
 
+
+    /* Create paste icon 
+     * This icon is only displayed if copy & paste is enabled 
+     */
+    if($this->enableCopyPaste){
+      $Copy_Paste = " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;";
+      if($this->CopyPasteHandler->isCurrentObjectPastAble()){
+        if($this->CopyPasteHandler->isCurrentCutted()){
+          $img = "images/cutpaste.png";
+        }else{
+          $img = "images/copypaste.png";
+        }
+        $Copy_Paste .= "<input type='image' name='editPaste' class='center'
+          src='".$img."' alt='"._("Paste")."' title='".$this->CopyPasteHandler->GetCurrentDn()."'>&nbsp;";
+      }else{
+        $Copy_Paste .= "<img class='center' src='images/cant_editpaste.png' alt='"._("Can't paste")."'>&nbsp;";
+      }
+    }else{
+      $Copy_Paste ="";
+    }
+
+
     // Managment
     $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
       " <input class='center' type='image' align='middle' src='images/list_back.png' title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
@@ -370,14 +446,31 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
  alt='"._("Home")."' name='dep_home'>&nbsp;".
       " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
       " <input class='center' type='image' align='middle' src='images/list_new_ogroup.png' title='"._("Create new object group")."' alt='"._("new")."' name='group_new'>".
+      $Copy_Paste.
       " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
       _("Base")."&nbsp;<select name='depselect' onChange='mainform.submit()' class='center'>$options</select>".
       " <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
       "</div>";
 
 
-    $actions = "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
-    $actions.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
+    /* Add Copy & Paste buttons if copy&paste is enabled 
+     */
+    if($this->enableCopyPaste){
+      $actions = "<input class='center' type='image'
+        src='images/editdelete.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+      $actions.= "<input class='center' type='image'
+        src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
+      $actions.= "<input class='center' type='image' 
+                    src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
+      $actions.= "<input class='center' type='image' 
+                    src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
+    }else{
+      $actions = "<input class='center' type='image' 
+                    src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
+      $actions.= "<input class='center' type='image' 
+                    src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
+    }
+
 
     // Defining Links
     $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
@@ -398,7 +491,7 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
           array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
           array("string" => _("Name of object groups")." / "._("Departments"), "attach" => "style=''"),
           array("string" => _("Properties"), "attach" => "style='width:136px;'"),
-          array("string" => _("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'")
+          array("string" => _("Actions"), "attach" => "style='width:80;border-right:0px;text-align:right;'")
           ));
 
 
@@ -424,7 +517,7 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
       $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='"._("Department")."'>", "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
       $field3 = array("string" => "&nbsp;", "attach" => "style='width:136px;'");
-      $field4 = array("string" => "&nbsp;", "attach" => "style='width:60px;border-right:0px;text-align:right;'");
+      $field4 = array("string" => "&nbsp;", "attach" => "style='width:80;border-right:0px;text-align:right;'");
 
       $divlist->AddEntry(array($field1,$field2,$field3,$field4));
     }
@@ -448,7 +541,7 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
       $field1 = array("string" => "<img src='images/list_ogroup.png' alt='"._("Object group")."' ".$title.">", "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)), "attach" => "style='' ".$title);
       $field3 = array("string" => preg_replace("/%KEY/", $key, $this->convert_list($val))."&nbsp;".$mail, "attach" => "style='width:136px;'");
-      $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:60px;border-right:0px;text-align:right;'");
+      $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:80;border-right:0px;text-align:right;'");
 
       $divlist->AddEntry(array($field1,$field2,$field3,$field4));
     }

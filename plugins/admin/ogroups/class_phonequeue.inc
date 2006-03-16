@@ -683,6 +683,24 @@ $ldap->modify ($this->attrs);
     show_ldap_error($ldap->get_error());
   }
 
+  
+  function getCopyDialog()
+  {
+    $str  = "";
+    $str .= _("Phone number");
+    $str .= "&nbsp;<input type='text' name='telephoneNumber' value='".$this->telephoneNumber."'>";
+    return($str);
+  }
+
+
+  function saveCopyDialog()
+  {
+    if(isset($_POST['telephoneNumber'])){
+      $this->telephoneNumber = $_POST['telephoneNumber'];
+    }
+  }
+
+
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
