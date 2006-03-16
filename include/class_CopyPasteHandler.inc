@@ -42,6 +42,14 @@ class CopyPasteHandler {
   }
 
 
+  /* return current obejct dn
+   */
+  function GetCurrentDn()
+  {
+    return($this->objectdn);
+  }
+
+
   /* Add Object which should be copied
    */
   function Copy($obj,$emptyObj)
@@ -69,6 +77,7 @@ class CopyPasteHandler {
   function Cut($obj){
     $this->cutCurrent = true;
     $this->current 	  = $obj;
+    $this->objectdn    = $obj->dn;
     if($this->isCurrentObjectPastAble()){
       return(true);
     }else{

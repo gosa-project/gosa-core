@@ -385,8 +385,17 @@ class applicationManagement extends plugin
 
         if($this->enableCopyPaste){
           $Copy_Paste = " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;";
+
           if($this->CopyPasteHandler->isCurrentObjectPastAble()){
-            $Copy_Paste .= "<input type='image' name='editPaste' class='center' src='images/editpaste.png' alt='"._("Paste")."'>&nbsp;";
+
+            if($this->CopyPasteHandler->isCurrentCutted()){
+              $img = "images/cutpaste.png";
+            }else{
+              $img = "images/copypaste.png";
+            }
+
+            $Copy_Paste .= "<input type='image' name='editPaste' class='center' 
+                              src='".$img."' alt='"._("Paste")."' title='".$this->CopyPasteHandler->GetCurrentDn()."'>&nbsp;";
           }else{
             $Copy_Paste .= "<img class='center' src='images/cant_editpaste.png' alt='"._("Can't paste")."'>&nbsp;";
           }
