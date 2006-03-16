@@ -185,8 +185,6 @@ class application extends plugin
   function save_object()
   {
 	if (isset($_POST['cn'])){
-	
-		plugin::save_object();
 
 		/* Save application flags */
 		$flag= "";
@@ -366,7 +364,32 @@ $ldap->modify ($this->attrs);
 	}
   }
 
+  function getCopyDialog()
+  {
+    $vars = array("cn");
+  
+    $str =" <table>
+              <tr>
+                <td>".
+                  _("Application name"). 
+                "</td>  
+                <td>
+                   <input id='gosaApplicationName' name='cn' size='35' maxlength='60' 
+                    value='".$this->cn."' 
+                    title='"._("Application name to be displayed (i.e. below icons)")."'>                     
+                </td>
+              </tr>
+            </table>";
 
+    return($str);
+  }
+
+  function saveCopyDialog()
+  {
+    if(isset($_POST['cn'])){
+      $this->cn = $_POST['cn'];
+    }
+  }
 }
-
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

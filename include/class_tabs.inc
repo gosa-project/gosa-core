@@ -245,6 +245,28 @@ class tabs
 	  }
   }
 
+	
+  /* Save attributes posted by copy & paste dialog
+   */
+  function saveCopyDialog()
+  {
+	  foreach ($this->by_object as $key => $obj){
+		  $this->by_object[$key]->saveCopyDialog();
+	  }
+  }
+
+
+  /* return copy & paste dialog
+   */
+  function getCopyDialog()
+  {
+	  $ret = "";
+	  foreach ($this->by_object as $key => $obj){
+		  $ret .=  $this->by_object[$key]->getCopyDialog();
+	  }
+	  return($ret);
+  }
+
 }
 
 ?>

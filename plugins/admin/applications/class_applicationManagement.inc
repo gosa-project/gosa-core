@@ -31,11 +31,26 @@ class applicationManagement extends plugin
   var $ui= NULL;
   var $acl= "";
 
+  var $CopyPasteHandler ;
+
+  var $enableCopyPaste = false;
+
   function applicationManagement ($config, $ui)
   {
 	/* Save configuration for internal use */
 	$this->config= $config;
 	$this->ui= $ui;
+
+
+  if( (isset($this->config->data['MAIN']['ENABLECOPYPASTE'])) 
+     && 
+      (preg_match("/true/i",$this->config->data['MAIN']['ENABLECOPYPASTE'] ))){
+    $this->enableCopyPaste = true;
+  }
+
+
+
+  $this->CopyPasteHandler = new CopyPasteHandler($this->config);
 
 	/* Get global filter config */
         if (!is_global("appfilter")){
@@ -80,14 +95,23 @@ class applicationManagement extends plugin
         $s_action="edit";
         $s_entry  = preg_replace("/appl_".$s_action."_/i","",$key);
         // Post for new
-      }elseif(preg_match("/dep_back.*/i",$key)){
+      }elseif(preg_match("/^copy_.*/",$key)){
+        $s_action="copy";
+        $s_entry  = preg_replace("/^copy_/i","",$key);
+      }elseif(preg_match("/^cut_.*/",$key)){
+        $s_action="cut";
+        $s_entry  = preg_replace("/^cut_/i","",$key);
+        // Post for new
+      }elseif(preg_match("/^dep_back.*/i",$key)){
         $s_action="back";
-      }elseif(preg_match("/appl_new.*/",$key)){
+      }elseif(preg_match("/^appl_new.*/",$key)){
         $s_action="new";
-      }elseif(preg_match("/dep_home.*/i",$key)){
+      }elseif(preg_match("/^dep_home.*/i",$key)){
         $s_action="home";
-      }elseif(preg_match("/dep_root.*/i",$key)){
+      }elseif(preg_match("/^dep_root.*/i",$key)){
         $s_action="root";
+      }elseif(preg_match("/^editPaste.*/i",$key)){
+        $s_action="editPaste";
       }
     }
 
@@ -146,6 +170,40 @@ class applicationManagement extends plugin
       return($message);
     }
 
+
+    /* Only perform copy / paste if it is enabled 
+     */
+    if($this->enableCopyPaste){
+    
+       /* Paste copied/cutted object in here
+       */
+      if(($s_action == "editPaste") || ($this->CopyPasteHandler->stillOpen())){
+        $this->CopyPasteHandler->save_object();
+        $this->CopyPasteHandler->SetVar("base",$appfilter['depselect']);
+        return($this->CopyPasteHandler->execute());
+      }
+
+
+      /* Copy current object to CopyHandler
+       */
+      if($s_action == "copy"){
+        $this->CopyPasteHandler->Clear();
+        $dn = $this->applications[$s_entry]['dn'];
+        $obj    = new apptabs($this->config, $this->config->data['TABS']['APPSTABS'], $dn);
+        $objNew = new apptabs($this->config, $this->config->data['TABS']['APPSTABS'], "new");
+        $this->CopyPasteHandler->Copy($obj,$objNew);
+      }
+
+
+      /* Copy current object to CopyHandler
+       */
+      if($s_action == "cut"){
+        $this->CopyPasteHandler->Clear();
+        $dn = $this->applications[$s_entry]['dn'];
+        $obj = new apptabs($this->config, $this->config->data['TABS']['APPSTABS'], $dn);
+        $this->CopyPasteHandler->Cut($obj);
+      }
+    }
 
     /* New application? */
     if ($s_action=="new"){
@@ -324,6 +382,17 @@ class applicationManagement extends plugin
             $options.= "<option value='$key'>$value</option>";
           }
         }
+
+        if($this->enableCopyPaste){
+          $Copy_Paste = " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;";
+          if($this->CopyPasteHandler->isCurrentObjectPastAble()){
+            $Copy_Paste .= "<input type='image' name='editPaste' class='center' src='images/editpaste.png' alt='"._("Paste")."'>&nbsp;";
+          }else{
+            $Copy_Paste .= "<img class='center' src='images/cant_editpaste.png' alt='"._("Can't paste")."'>&nbsp;";
+          }
+        }else{
+          $Copy_Paste ="";
+        }
 	
         // Managment
         $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
@@ -332,14 +401,31 @@ class applicationManagement extends plugin
           " <input class='center' type='image' align='middle' src='images/list_home.png' title='"._("Go to users department")."' alt='"._("Home")."' name='dep_home'>&nbsp;".
           " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
           " <input class='center' type='image' align='middle' src='images/list_new_app.png' alt='"._("new")."' title='"._("Create new application")."' name='appl_new'>&nbsp;".
+          $Copy_Paste.
           " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
           _("Base")."&nbsp;<select name='depselect' onChange='mainform.submit()' class='center'>$options</select>".
           " <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
           "</div>";
 
 
-        $actions = "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."' name='appl_edit_%KEY%' title='"._("Edit this entry")."'>";
-        $actions.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."' name='appl_del_%KEY%' title='"._("Delete this entry")."'>";
+
+        if($this->enableCopyPaste){
+          $actions = "<input class='center' type='image' 
+            src='images/editdelete.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+          $actions.= "<input class='center' type='image' 
+            src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
+          $actions.= "<input class='center' type='image' 
+            src='images/edit.png' alt='"._("edit")."' name='appl_edit_%KEY%' title='"._("Edit this entry")."'>";
+          $actions.= "<input class='center' type='image' 
+            src='images/edittrash.png' alt='"._("delete")."' name='appl_del_%KEY%' title='"._("Delete this entry")."'>";
+        }else{
+
+          $actions = "<input class='center' type='image' 
+            src='images/edit.png' alt='"._("edit")."' name='appl_edit_%KEY%' title='"._("Edit this entry")."'>";
+          $actions.= "<input class='center' type='image' 
+            src='images/edittrash.png' alt='"._("delete")."' name='appl_del_%KEY%' title='"._("Delete this entry")."'>";
+        }
+
 
         // Defining Links
         $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
@@ -359,7 +445,7 @@ class applicationManagement extends plugin
         $divlist->SetHeader(array(
               array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
               array("string" => _("Application name")." / "._("Department"), "attach" => "style=''"),
-              array("string" => _("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'")
+              array("string" => _("Actions"), "attach" => "style='width:80px;border-right:0px;text-align:right;'")
               ));
 
 
@@ -382,7 +468,7 @@ class applicationManagement extends plugin
 
           $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
           $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
-          $field3 = array("string" => "&nbsp;", "attach" => "style='width:60px;border-right:0px;text-align:right;'");
+          $field3 = array("string" => "&nbsp;", "attach" => "style='width:80px;border-right:0px;text-align:right;'");
 
           $divlist->AddEntry(array($field1,$field2,$field3));
         }
@@ -397,7 +483,7 @@ class applicationManagement extends plugin
           }
           $field1 = array("string" => sprintf($applimg,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
           $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)), "attach" => "style='' ".$title);
-          $field3 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:60px;border-right:0px;text-align:right;'");
+          $field3 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:80px;border-right:0px;text-align:right;'");
 
           $divlist->AddEntry(array($field1,$field2,$field3));
         }
@@ -532,9 +618,9 @@ class applicationManagement extends plugin
 
   function remove_lock()
   {
-	if (isset($this->apptabs->dn)){
-	        del_lock ($this->apptabs->dn);
-	}
+    if (isset($this->apptabs->dn)){
+      del_lock ($this->apptabs->dn);
+    }
   }
 
 }
