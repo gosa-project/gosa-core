@@ -649,7 +649,9 @@ class oxchangeAccount extends plugin
 
     if ($this->parent != NULL){
       $smarty->assign("tabbed", 1);
-    }
+    }else{
+      $smarty->assign("tabbed", 0);
+	}
 
     $display.= $smarty->fetch (get_template_path('oxchange.tpl', TRUE, dirname(__FILE__)));
     return ($display);
