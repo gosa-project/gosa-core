@@ -61,9 +61,12 @@ class CopyPasteHandler {
       foreach($obj->attributes as $attr){
         $this->current->by_object[$name]->$attr = $obj->$attr;
       }
-      foreach(array('is_account') as $attr){
-        $this->current->by_object[$name]->$attr = $obj->$attr;
+      foreach(array('is_account','gotoHotplugDevices','gotoLogonScripts','gotoProfileServers','gotoProfileFlag_C','gotoProfileFlag_L','gotoPrinter','useProfile','OrigCn','Categories') as $attr){
+        if(isset($obj->$attr)){
+          $this->current->by_object[$name]->$attr = $obj->$attr;
+        }
       }
+
     }
     if($this->isCurrentObjectPastAble()){
       return(true);
@@ -202,6 +205,7 @@ class CopyPasteHandler {
 		foreach($this->	current->by_object as $obj){
 			$ret = array_merge($ret , $obj->check());
 		}
+    
 		return($ret);
 	}
 

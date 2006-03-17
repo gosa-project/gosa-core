@@ -53,7 +53,7 @@ class environment extends plugin
   VAR $newKioskProfiles   = array();
 
   /* Hotplug Devices */
-  var $gotoHotplugDevice  = "";     // Selected hotplug
+  var $gotoHotplugDevice  = array();     // Selected hotplug
   var $gotoHotplugDevices = array();// Already configured hotplug devices 
 
 
@@ -68,6 +68,7 @@ class environment extends plugin
                                     "gotoHotplugDevice");
   var $objectclasses      = array("gotoEnvironment"); // Specifies the objectClass which contains the attributes edited here 
   var $cn;
+  var $OrigCn;
 
   function environment ($config, $dn= NULL)
   {
@@ -79,6 +80,7 @@ class environment extends plugin
       $suffix="Group";
       $this->uid          = $this->attrs['cn'][0];
       $this->attrs['uid'] = $this->attrs['cn'][0];
+      $this->OrigCn = $this->attrs['cn'][0];
     }else{
       $suffix="User";
     }
@@ -768,7 +770,8 @@ class environment extends plugin
   /* Save to LDAP */
   function save()
   {
-  
+    /* If group was renamed, all printer settings get lost
+     */ 
     /* only save changed variables ....*/
     if ($this->gotoKioskProfile =="none") $this->gotoKioskProfile ="";
     if((!empty($this->gotoKioskProfile))&&($this->gotoKioskProfile != "none")){
