@@ -61,6 +61,9 @@ class CopyPasteHandler {
       foreach($obj->attributes as $attr){
         $this->current->by_object[$name]->$attr = $obj->$attr;
       }
+      foreach(array('is_account') as $attr){
+        $this->current->by_object[$name]->$attr = $obj->$attr;
+      }
     }
     if($this->isCurrentObjectPastAble()){
       return(true);
