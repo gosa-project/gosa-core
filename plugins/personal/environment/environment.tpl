@@ -115,8 +115,8 @@
 	{html_options values=$gotoShareSelectionKeys output=$gotoShareSelections}
 	<option disabled>&nbsp;</option>
 				</select>
-				<input type="text" size=15 {$gotoShareACL} name="gotoShareMountPoint" value="{t}Mountpoint{/t}">
-				<input type="text" size=15 {$gotoShareACL} name="ShareUser" value="ShareUser">
+				<input type="text" size=15 {$gotoShareACL} name="gotoShareMountPoint" value="%H/Netzlaufwerke/%L/%S">
+				<input type="text" size=15 {$gotoShareACL} name="ShareUser" value="%u">
 				<input type="submit" {$gotoShareACL} name="gotoShareAdd" value="{t}Add{/t}"> 
 				<input type="submit" {$gotoShareACL} name="gotoShareDel" value="{t}Remove{/t}"> 
 			</td>

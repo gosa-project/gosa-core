@@ -512,7 +512,8 @@ class environment extends plugin
         preg_match("/^\$HOME/",$_POST['gotoShareMountPoint']) ||
         preg_match("/^.HOME/",$_POST['gotoShareMountPoint']) ||
         preg_match("/^\$USER/",$_POST['gotoShareMountPoint']) ||
-        preg_match("/^.USER/",$_POST['gotoShareMountPoint'])
+        preg_match("/^.USER/",$_POST['gotoShareMountPoint']) ||
+        preg_match("/^%/",$_POST['gotoShareMountPoint'])
         )
       ){
         print_red(_("You must specify a valid mount point.")); 
