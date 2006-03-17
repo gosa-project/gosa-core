@@ -47,7 +47,7 @@ class mailgroup extends plugin
   var $indexed_user= array();
 
   /* attribute list for save action */
-  var $attributes= array(   "mail",   "gosaMailServer", "gosaMailQuota", "gosaMailMaxSize",
+  var $attributes= array( "mail",   "gosaMailServer", "gosaMailQuota", "gosaMailMaxSize",
       "gosaMailAlternateAddress", "gosaMailForwardingAddress",
       "gosaMailDeliveryMode", "gosaSpamSortLevel", "gosaSpamMailbox",
       "acl","gosaSharedFolderTarget", "gosaVacationMessage");
@@ -808,7 +808,7 @@ I: Only insider delivery */
     if ($ldap->count() != 0){
       $message[]= _("The primary address you've entered is already in use.");
     }
-
+  
     /* Check quota */
     if ($this->gosaMailQuota != '' && chkacl ($this->acl, "gosaMailQuota") == ""){
       if (!is_numeric($this->gosaMailQuota)) {
@@ -946,9 +946,9 @@ I: Only insider delivery */
   {
     if(!$this->is_account) return("");
 
-    $str =" <table>
+    $str =" <table width='100%'>
               <tr>
-                <td>".
+                <td style='width:150px;'>".
                   _("Primary mail address").
                 "</td>
                 <td>
@@ -958,7 +958,6 @@ I: Only insider delivery */
                 </td>
               </tr>
             </table>";
-
     return($str);
   }
 
