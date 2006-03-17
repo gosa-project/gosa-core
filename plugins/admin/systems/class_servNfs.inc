@@ -127,7 +127,7 @@ class servnfs extends plugin
 
     // only 0-9a-z
     if(!$this->is_edit){
-      if(preg_match("/[^a-z0-9.-_]/i",$this->name)){
+      if(preg_match("/[^a-z0-9\.\-_]/i",$this->name)){
         $message[]=_("Please specify a valid name for your setup.");
       }
       if(empty($this->name)){
