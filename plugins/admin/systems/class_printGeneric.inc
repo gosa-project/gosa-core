@@ -39,6 +39,7 @@ class printgeneric extends plugin
   var $dialog           =NULL;
 
   var $netConfigDNS;
+  var $baseSelection    = false;
 
   /* attribute list for save action */
   var $attributes     = array("cn", "description", "l", "labeledURI", "gotoPrinterPPD","gotoUserPrinter");
@@ -253,6 +254,7 @@ class printgeneric extends plugin
         $once = false;
         $this->dialog = new baseSelectDialog($this->config);
         $this->dialog->setCurrentBase($this->base);
+        $this->baseSelection = true;
       }
     }
 
@@ -260,14 +262,17 @@ class printgeneric extends plugin
     if(is_object($this->dialog)){
       /* Must be called before save_object */
       $this->dialog->save_object();
-
-      if($this->dialog->isClosed()){
-        $this->dialog = false;
-      }elseif($this->dialog->isSelected()){
-        $this->base = $this->dialog->isSelected();
-        $this->dialog= false;
-      }else{
-        return($this->dialog->execute());
+      if($this->baseSelection){
+        if($this->dialog->isClosed()){
+          $this->dialog = false;
+          $this->baseSelection = false;
+        }elseif($this->dialog->isSelected()){
+          $this->base = $this->dialog->isSelected();
+          $this->dialog= false;
+          $this->baseSelection = false;
+        }else{
+          return($this->dialog->execute());
+        }
       }
     }
 
