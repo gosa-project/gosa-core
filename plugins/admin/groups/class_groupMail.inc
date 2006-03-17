@@ -942,6 +942,35 @@ I: Only insider delivery */
     return ($name);
   }
 
+  function getCopyDialog()
+  {
+    if(!$this->is_account) return("");
+
+    $str =" <table>
+              <tr>
+                <td>".
+                  _("Primary mail address").
+                "</td>
+                <td>
+                   <input id='mail' name='mail' size='16' maxlength='160'
+                    value='".$this->mail."'
+                    title='"._("Primary mail address for this shared folder")."'>
+                </td>
+              </tr>
+            </table>";
+
+    return($str);
+  }
+
+  function saveCopyDialog()
+  {
+    if(!$this->is_account) return;
+    if(isset($_POST['mail'])){
+      $this->mail = $_POST['mail'];
+    }
+  }
+
+
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

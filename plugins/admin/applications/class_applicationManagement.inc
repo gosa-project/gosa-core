@@ -41,14 +41,11 @@ class applicationManagement extends plugin
 	$this->config= $config;
 	$this->ui= $ui;
 
-
   if( (isset($this->config->data['MAIN']['ENABLECOPYPASTE'])) 
      && 
       (preg_match("/true/i",$this->config->data['MAIN']['ENABLECOPYPASTE'] ))){
     $this->enableCopyPaste = true;
   }
-
-
 
   $this->CopyPasteHandler = new CopyPasteHandler($this->config);
 
