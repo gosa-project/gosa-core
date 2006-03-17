@@ -746,11 +746,6 @@ I: Only insider delivery */
     /* Exchange '%member%' pseudo entry */
     $memberacl= $this->imapacl['%members%'];
 
-    if(empty($memberacl)){
-      print_a($this);
-      exit();
-    }
-
     foreach ($this->members as $user){
       if(preg_match("/kolab/i",$this->mmethod)){
         $ldap->cd($this->config->current['BASE']);
