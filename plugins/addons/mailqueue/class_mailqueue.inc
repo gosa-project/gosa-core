@@ -26,6 +26,11 @@ class mailqueue extends plugin
     if (isset($this->config->current['MAILQUEUESCRIPTPATH'])){
       $this->mailQueueScript  = $this->config->current['MAILQUEUESCRIPTPATH'];    
     }
+
+    if(isset($this->config->data['MAIN']['MAILQUEUESCRIPTPATH'])){
+       $this->mailQueueScript  = $this->config->data['MAIN']['MAILQUEUESCRIPTPATH'];
+    }
+
     $this->Server           = "all";
   }
 
@@ -50,7 +55,7 @@ class mailqueue extends plugin
     $error =false;
 
     if(empty($this->mailQueueScript)){
-      print_red(_("Please check your 'gosa.conf', there is no 'MAILQUEUE_QUERY_COMMAND' specified."));
+      print_red(_("Please check your 'gosa.conf', there is no 'MAILQUEUESCRIPTPATH' specified."));
       $error = true;
     }else{
 
