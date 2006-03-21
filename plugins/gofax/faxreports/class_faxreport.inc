@@ -119,7 +119,7 @@ class faxreport extends plugin
 			print_red(_("Can't connect to fax database, no reports can be shown!"));
 			return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 		}
-		if (! @mysql_select_db("gofaxd")){
+		if (! @mysql_select_db("gofax")){
 			print_red(_("Can't select fax database for report generation!"));
 			return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 		}
