@@ -789,6 +789,9 @@ I: Only insider delivery */
     $ldap= $this->config->get_ldap_link();
 
     $message= array();
+    if(!$this->is_account) return array();
+    
+    //$message[] = $str;      
 
     /* must: mail */
     if ($this->mail == ""){
@@ -941,24 +944,21 @@ I: Only insider delivery */
   {
     if(!$this->is_account) return("");
 
-    $str =" <table width='100%'>
-              <tr>
-                <td style='width:150px;'>".
-                  _("Primary mail address").
-                "</td>
-                <td>
-                   <input id='mail' name='mail' size='16' maxlength='160'
-                    value='".$this->mail."'
-                    title='"._("Primary mail address for this shared folder")."'>
-                </td>
-              </tr>
-            </table>";
-    return($str);
+    $smarty = get_smarty();
+    $smarty->assign("gosaMailAlternateAddress",$this->gosaMailAlternateAddress);
+    $smarty->assign("gosaMailForwardingAddress",$this->gosaMailForwardingAddress);
+    $smarty->assign("mail",$this->mail);
+    $display= $smarty->fetch (get_template_path('paste_mail.tpl', TRUE));
+    return($display);
   }
 
   function saveCopyDialog()
   {
     if(!$this->is_account) return;
+
+    /* Perform ADD / REMOVE ... for mail alternate / mail forwarding addresses 
+    */
+    $this->execute();
     if(isset($_POST['mail'])){
       $this->mail = $_POST['mail'];
     }

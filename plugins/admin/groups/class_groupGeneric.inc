@@ -821,7 +821,8 @@ class group extends plugin
       $dis  = " disabled ";
     }
 
-    $str =" <table width='100%'>
+    $str =" <h2>"._("Group settings")."</h2>
+            <table width='100%'>
               <tr>
                 <td style='width:150px;'>".
                   _("Group name").

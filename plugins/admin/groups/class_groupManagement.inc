@@ -219,8 +219,17 @@ class groupManagement extends plugin
         $objNew = new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], "new");
         $obj->set_acl($acl);
         $objNew->set_acl($acl);
-        
         $this->CopyPasteHandler->Copy($obj,$objNew);
+  
+        foreach($this->CopyPasteHandler->current->by_object as $name => $obj){
+          foreach(array('is_account','gotoHotplugDevices','gotoLogonScripts',
+                'gotoProfileServers','gotoProfileFlag_C','gotoProfileFlag_L',
+                'gotoPrinter','useProfile','OrigCn','Categories') as $attr){
+            if(isset($obj->$attr)){
+              $this->CopyPasteHandler->current->by_object[$name]->$attr = $obj->$attr;
+            }
+          }
+        }
       }
 
 
