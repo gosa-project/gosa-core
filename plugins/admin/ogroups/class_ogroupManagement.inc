@@ -457,7 +457,7 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
      */
     if($this->enableCopyPaste){
       $actions = "<input class='center' type='image'
-        src='images/editdelete.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+        src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
       $actions.= "<input class='center' type='image'
         src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
       $actions.= "<input class='center' type='image' 

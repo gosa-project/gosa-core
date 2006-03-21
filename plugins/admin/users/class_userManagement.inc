@@ -792,7 +792,7 @@ class userManagement extends plugin
     
     if($this->enableCopyPaste){
       $action = "<input class='center' type='image'
-        src='images/editdelete.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+        src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
       $action.= "<input class='center' type='image'
         src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
       $action.= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     

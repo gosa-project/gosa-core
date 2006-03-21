@@ -40,9 +40,10 @@ chmod 770 -R /var/spool/gosa
 
 # Add links for safe mode
 for link in /usr/bin/convert /usr/bin/lpstat; do
+	[ ! -e $link ] && continue
 	target=/usr/share/gosa/bin/${link##*/}
 	[ -L $target ] && continue
-	[ -f $link ] || ln -sf $link $target
+	ln -sf $link $target
 done
 
 # Finally restart servers

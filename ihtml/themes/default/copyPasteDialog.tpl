@@ -1,15 +1,10 @@
 <h2>{t}Copy &amp; paste wizard{/t}</h2>
 
-{t}This dialog assists you with GOsas copy and paste functionality.{/t}<br>
-{t}Some objects require unique attributes, as example the often used attribute cn should be unique within the complete ldap database in order to exclude a confounding.{/t}
-<br><br>
-{t}If a paste requires such unique attributes, the wizard will display them below.{/t}
-<br><br>
+{$message} Some values need to be unique in the complete directory while some combinations make no sense. GOsa shows the relevant attributes. Please maintain the values below to fullfill the policies.
+<br>
+<p class='seperator'>&nbsp;</p>
 <br>
 {if $Complete == false}
-	<div class="pluginfo">
-	{$objectDN}
-	</div>
 	{$AttributesToFix}
 	<p class='seperator'>&nbsp;</p>
 	<br>

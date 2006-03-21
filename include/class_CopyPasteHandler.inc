@@ -169,6 +169,7 @@ class CopyPasteHandler {
       $smarty->assign("Complete",false);
       $smarty->assign("AttributesToFix",$this->generateAttributesToFix());	
       $smarty->assign("objectDN"		 ,$this->objectdn);	
+      $smarty->assign("message", sprintf(_("You are going to copy the entry '%s'."), $this->objectdn));	
       return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
     }
   }
