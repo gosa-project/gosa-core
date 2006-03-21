@@ -224,10 +224,11 @@ class termDNS extends plugin
     $smarty->assign("Zones",$this->Zones);
     $smarty->assign("ZoneKeys",($this->Zones));
     $smarty->assign("IPisMust",(($this->IPisMust)||($this->DNS_is_account)));
-    $changeStateForRecords ="";
-    $smarty->assign("records",$this->generateRecordsList(&$changeStateForRecords));
+  
+    $tmp = $this->generateRecordsList();
+    $changeStateForRecords = $tmp['changeStateForRecords'];
+    $smarty->assign("records",$tmp['str']);
     $smarty->assign("changeStateForRecords",$changeStateForRecords);
-//    $smarty->assign("dNSClasses",array("IN"=>"IN"));
     $smarty->assign("staticAddress","<font class=\"must\">*</font>");
     $display.= $smarty->fetch(get_template_path('network.tpl', TRUE));
     return($display);
@@ -407,7 +408,10 @@ $ldap->modify ($this->attrs);
       /* Generate a list of new ldap entries, 
           & $delete contains all dns which should be deleted 
        */
-      $entries = $this->generate_LDAP_entries(&$delete);
+      $tmp = $this->generate_LDAP_entries();      
+
+      $entries  = $tmp['entries'];
+      $delete   = $tmp['delete'];
 
       /* Delete dns */
       foreach($delete as $dn => $del){
@@ -439,7 +443,7 @@ $ldap->modify ($this->attrs);
 
   /*  Create html table with all used record types
    */
-  function generateRecordsList($changeStateForRecords)
+  function generateRecordsList()
   {
     $changeStateForRecords = "";
     
@@ -469,7 +473,8 @@ $ldap->modify ($this->attrs);
            "    </td>".
            "  </tr>".
            "</table>";
-    return($str);
+     $ret =  array("str" => $str, "changeStateForRecords" => $changeStateForRecords);
+    return($ret);
   }
 
   /* Create a html select box which allows us to select different types of records */
@@ -518,7 +523,7 @@ $ldap->modify ($this->attrs);
   /* this is used to generate ldap friendly output of our 
      dns configuration
   */
-  function generate_LDAP_entries($delete)
+  function generate_LDAP_entries()
   {
     $entries = array();    
     $delete  = array();
@@ -656,7 +661,8 @@ $ldap->modify ($this->attrs);
       }
     }
 
-    return($entries); 
+    $ret = array("entries"=> $entries,"delete"=>$delete);
+    return($ret); 
   }
 }
 
