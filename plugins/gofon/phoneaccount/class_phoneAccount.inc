@@ -433,14 +433,15 @@ class phoneAccount extends plugin
       $SQL[] = "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$newnums[$i_new_key].";"; 
       // Delete old entries
       $b_first_deleted  =false;
-      foreach($oldnums as $s_telenums){
-        $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$s_telenums."';\n";
-        if(!$b_first_deleted){
-          $b_first_deleted=true;
-          $SQL[] = "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$s_telenums.";";
+      if(is_array($oldnums)){
+        foreach($oldnums as $s_telenums){
+          $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$s_telenums."';\n";
+          if(!$b_first_deleted){
+            $b_first_deleted=true;
+            $SQL[] = "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$s_telenums.";";
+          }
         }
       }
-
       if($this->goFonHardware=="automatic"){
         foreach($SQL as $query ){
           mysql_query($query) ;
@@ -1150,6 +1151,13 @@ $ldap->modify ($this->attrs);
       }
     }
   }
+
+  function getSaveDialog()
+  {
+  
+    return("Phone");
+  }
+
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
