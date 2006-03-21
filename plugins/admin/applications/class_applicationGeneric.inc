@@ -368,7 +368,8 @@ $ldap->modify ($this->attrs);
   {
     $vars = array("cn");
   
-    $str =" <table>
+    $str ="<h2>"._("Application settings")."</h2>
+            <table>
               <tr>
                 <td>".
                   _("Application name"). 
