@@ -516,16 +516,19 @@ class ogw{
                          (SELECT company_id FROM team WHERE is_location_team=1));";
 
     $arr = array("company_assignment_id","company_id","sub_company_id","db_status");
-    foreach($this->info['TeamIDis'] as $TeamID){
-      $this->info['company_id']           = $TeamID;
-      $this->info['sub_company_id']       = $ist[0]['company_id'];
-      $this->info['company_assignment_id']= $this->ogo->gen_id();
-      foreach($arr as $attr){
-        $add_company_assignment[$attr]  = $this->info[$attr];
-      }    
-      $QUERY[] = gen_syntax($add_company_assignment,"company_assignment","ADD",false);
-    }
 
+    if(is_array($this->info['TeamIDis'])){
+      foreach($this->info['TeamIDis'] as $TeamID){
+        $this->info['company_id']           = $TeamID;
+        $this->info['sub_company_id']       = $ist[0]['company_id'];
+        $this->info['company_assignment_id']= $this->ogo->gen_id();
+        $add_company_assignment = array();
+        foreach($arr as $attr){
+          $add_company_assignment[$attr]  = $this->info[$attr];
+        }    
+        $QUERY[] = gen_syntax($add_company_assignment,"company_assignment","ADD",false);
+      }
+    }
     $remove_all = false;
 
     foreach($QUERY as $q ){
