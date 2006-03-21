@@ -825,7 +825,8 @@ $ldap->modify ($this->attrs);
     /* Save data to LDAP */
     $ldap->cd($this->dn);
     $this->cleanup();
-$ldap->modify ($this->attrs); 
+    unset($this->attrs['uid']);
+    $ldap->modify ($this->attrs); 
 
     show_ldap_error($ldap->get_error());
 
@@ -1147,6 +1148,97 @@ $ldap->modify ($this->attrs);
     }
     reset ($this->grouplist);
   }
+
+  function getCopyDialog()
+  {
+    if(!$this->is_account) return("");
+    if ($this->force_ids == 1){
+      $force_ids = "checked";
+      if ($_SESSION['js']){
+        $forceMode = "";
+      }
+    } else {
+      if ($_SESSION['js']){
+        if($this->acl != "#none#")
+          $forceMode ="disabled";
+      }
+      $force_ids = "";
+    }
+
+  /*
+    if(isset($_POST['editGroupMembership'])){
+      $this->group_dialog = TRUE;
+    }
+
+    if(isset($_POST['add_groups_finish']) || isset($_POST['add_groups_cancel'])){
+      $this->execute();
+      $this->group_dialog =FALSE;
+    }
+
+    if($this->group_dialog){
+      return($this->execute());
+    }
+  */
+
+    $str ="
+      <table width='100%'>
+        <tr>    
+          <td style='vertical-align:top;'>
+            <h2>"._("Posix settings")."</h2>
+            <table>
+              <tr>
+                <td>
+                  <label for=\"homeDirectory\">"._("Home directory")."</label>
+                </td>
+                <td>
+                  <input id=\"homeDirectory\" name=\"homeDirectory\" size=40 maxlength=120 value=\"".$this->homeDirectory."\">
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input id=\"force_ids\" type=checkbox name=\"force_ids\" value=\"1\" ".$force_ids."} 
+                             onclick=\"changeState('uidNumber');changeState('gidNumber');\">
+                </td>
+                <td>
+                  <label for=\"force_ids\">
+                    "._("Force UID/GID")."
+                  </label>
+                </td>
+                    <td style=\"width:20px;\"></td>
+                    <td>
+                        <label for=\"uidNumber\">"._("UID")."</label>
+                    </td>
+                    <td>
+                        <input id=\"uidNumber\" name=\"uidNumber\" size=5 maxlength=5 {$forceMode} value=\"".$this->uidNumber."\">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan=\"3\"></td>
+                    <td>
+                        <label for=\"gidNumber\">"._("GID")."</label>
+                    </td>
+                    <td>
+                        <input id=\"gidNumber\" name=\"gidNumber\" size=5 maxlength=5 {$forceMode} value=\"".$this->gidNumber."\">
+                    </td>
+                </tr>
+                <!--
+                <tr>
+                    <td>
+                    "._("Group membership")."
+                    </td>
+                    <td>
+                      <input type='submit' name='editGroupMembership' value='"._("Edit")."'>
+                    </td>
+                </tr>
+                -->
+            </table>
+          </td>
+        </tr>
+      </table>
+    ";
+    return($str);
+  }
+
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

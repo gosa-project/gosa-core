@@ -10,6 +10,8 @@ class CopyPasteHandler {
   var $dialogOpen  = false;
   var $objectdn    = false;
 
+  var $lastdn      = "";
+
   var $was_successfull = false;
 
   /* Create CP handler
@@ -35,14 +37,12 @@ class CopyPasteHandler {
 
   /* Clears all copy & paste informations 
    */
-  function Clear($current_too = false)
+  function Clear()
   {
     $this->copyCurrent 	= false;
     $this->cutCurrent  	= false;
     $this->dialogOpen   = false;
-    if($current_too){
-      $this->current 	   	= NULL;
-    }
+    $this->current 	   	= NULL;
   }
 
 
@@ -64,6 +64,11 @@ class CopyPasteHandler {
     foreach($obj->by_object as $name => $obj){
       foreach($obj->attributes as $attr){
         $this->current->by_object[$name]->$attr = $obj->$attr;
+      }
+      foreach(array("is_account") as $attr){
+        if(isset($obj->$attr)){
+          $this->current->by_object[$name]->$attr = $obj->$attr;
+        }
       }
     }
     if($this->isCurrentObjectPastAble()){
@@ -133,6 +138,7 @@ class CopyPasteHandler {
       $this->dialogOpen =false;
       $smarty = get_smarty();
       $smarty->assign("Complete",true);
+      $this->lastdn= $this->current->dn;
       $this->Clear();
       return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
 
@@ -150,6 +156,7 @@ class CopyPasteHandler {
           $this->dialogOpen =false;
           $smarty = get_smarty();	
           $smarty->assign("Complete",true);
+          $this->lastdn = $this->current->dn;
           $this->Clear();
           if($displayMessageOnSuccess){
             return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));

@@ -129,6 +129,16 @@ class usertabs extends tabs
       $this->by_object[$key]->is_template= TRUE;
     }
   }
+  
+  function saveCopyDialog()
+  {
+    tabs::saveCopyDialog();
+    $baseobject= $this->by_object['user'];
+    $uid = $baseobject->uid;
+    foreach($this->by_object as  $name => $obj){
+      $this->by_object[$name]->uid = $uid;
+    }
+  }
 
 }
 

@@ -34,12 +34,20 @@ class userManagement extends plugin
   var $got_uid= false;
   var $departments=array();
 
+  var $CopyPasteHandler ;
+  var $enableCopyPaste = false;
+
   function userManagement ($config, $ui)
   {
     /* Save configuration for internal use */
     $this->config= $config;
     $this->ui= $ui;
 
+    /* Copy & Paste handler */
+    if((isset($this->config->data['MAIN']['ENABLECOPYPASTE']))&&(preg_match("/true/i",$this->config->data['MAIN']['ENABLECOPYPASTE']))){
+      $this->enableCopyPaste = true;
+    }
+    $this->CopyPasteHandler = new CopyPasteHandler($this->config);
 
     /* Get global filter config */
     if (!isset($_SESSION["userfilter"])){
@@ -107,6 +115,14 @@ class userManagement extends plugin
       }elseif(preg_match("/userfrom_tpl.*/i",$key)){
         $s_action="create_user_from_tpl";
         $s_entry  = preg_replace("/userfrom_tpl_/i","",$key);
+      }elseif(preg_match("/^editPaste.*/i",$key)){
+        $s_action="editPaste";
+      }elseif(preg_match("/^copy_.*/",$key)){
+        $s_action="copy";
+        $s_entry  = preg_replace("/^copy_/i","",$key);
+      }elseif(preg_match("/^cut_.*/",$key)){
+        $s_action="cut";
+        $s_entry  = preg_replace("/^cut_/i","",$key);
       }
     }
 
@@ -149,6 +165,70 @@ class userManagement extends plugin
         $userfilter['depselect']= $this->config->departments[trim($base_back)];
       }else{
         $userfilter['depselect']= $this->config->departments["/"];
+      }
+    }
+
+
+    /* Only perform copy / paste if it is enabled
+     */
+    if($this->enableCopyPaste){
+
+      /* Paste copied/cutted object in here
+       */
+      if(($s_action == "editPaste") || ($this->CopyPasteHandler->stillOpen())){
+        $this->CopyPasteHandler->save_object();
+        $this->CopyPasteHandler->SetVar("base",$userfilter['depselect']);
+        $ret    = $this->CopyPasteHandler->execute(false);
+        if($ret) return($ret);
+        $this->reload();
+        $s_action = "change_pw";
+        $dn = $this->CopyPasteHandler->lastdn;
+
+        foreach($this->list as $id => $entry){
+          if($entry['dn'] == $dn){
+            $s_entry = $id;
+          }
+        }
+        $s_action = "change_pw";
+      }
+
+
+      /* Copy current object to CopyHandler
+       */
+      if($s_action == "copy"){
+        $this->CopyPasteHandler->Clear();
+
+        $dn     = $this->list[trim($s_entry)]['dn'];
+        $acl    = get_permissions ($dn, $this->ui->subtreeACL);
+
+        $obj    = new usertabs($this->config, $this->config->data['TABS']['USERTABS'], $dn);
+        $objNew = new usertabs($this->config, $this->config->data['TABS']['USERTABS'], "new");
+
+        $obj->set_acl($acl);
+        $objNew->set_acl($acl);
+
+        foreach($obj->by_object as $name => $tab){
+          foreach(array("photoData","jpegPhoto","is_account") as $attr){
+            if(isset($obj->by_object[$name]->$attr)){
+              $objNew->by_object[$name]->$attr = $obj->by_object[$name]->$attr;
+            }
+          } 
+        }
+        $this->CopyPasteHandler->Copy($obj,$objNew);
+      }
+
+
+      /* Copy current object to CopyHandler
+       */
+      if($s_action == "cut"){
+        $this->CopyPasteHandler->Clear();
+        $dn     = $this->list[trim($s_entry)]['dn'];
+        $acl= get_permissions ($dn, $this->ui->subtreeACL);
+
+        $obj    = new usertabs($this->config, $this->config->data['TABS']['USERTABS'], $dn);
+        $obj->set_acl($acl);
+
+        $this->CopyPasteHandler->Cut($obj);
       }
     }
 
@@ -672,6 +752,27 @@ class userManagement extends plugin
       }
     }
 
+
+    /* Create paste icon
+     */
+    if($this->enableCopyPaste){
+      $Copy_Paste = " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;";
+      if($this->CopyPasteHandler->isCurrentObjectPastAble()){
+        if($this->CopyPasteHandler->isCurrentCutted()){
+          $img = "images/cutpaste.png";
+        }else{
+          $img = "images/copypaste.png";
+        }
+        $Copy_Paste .= "<input type='image' name='editPaste' class='center'
+          src='".$img."' alt='"._("Paste")."' title='".$this->CopyPasteHandler->GetCurrentDn()."'>&nbsp;";
+      }else{
+        $Copy_Paste .= "<img class='center' src='images/cant_editpaste.png' alt='"._("Can't paste")."'>&nbsp;";
+      }
+    }else{
+      $Copy_Paste ="";
+    }
+
+
     /* NEW LIST MANAGMENT */
     $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
       " <input class='center' type='image' align='middle' src='images/list_back.png' title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
@@ -680,14 +781,34 @@ class userManagement extends plugin
       " <img   class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
       " <input class='center' type='image' align='middle' src='images/list_new_user.png' title='"._("Create new user")."' alt='"._("New user")."' name='user_new'>&nbsp;".
       " <input class='center' type='image' align='middle' src='images/list_new.png' title='"._("Create new template")."' alt='"._("New template")."' name='user_tplnew'>&nbsp;".
+      $Copy_Paste.
       " <img   class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
       _("Base")."&nbsp;<select name='depselect' onChange='mainform.submit()' class='center'>$options</select>".
       " <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
       "</div>";
 
-    $action= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit user")."'>";
-    $action.= "<input class='center' type='image' src='images/list_password.png' alt='"._("password")."' name='user_chgpw_%KEY%' title='"._("Change password")."'>";
-    $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete user")."'>";
+
+
+    
+    if($this->enableCopyPaste){
+      $action = "<input class='center' type='image'
+        src='images/editdelete.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+      $action.= "<input class='center' type='image'
+        src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
+      $action.= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     
+        name='user_edit_%KEY%' title='"._("Edit user")."'>";
+      $action.= "<input class='center' type='image' src='images/list_password.png' alt='"._("password")."' 
+        name='user_chgpw_%KEY%' title='"._("Change password")."'>";
+      $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'   
+        name='user_del_%KEY%' title='"._("Delete user")."'>";
+    }else{
+      $action= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     
+        name='user_edit_%KEY%' title='"._("Edit user")."'>";
+      $action.= "<input class='center' type='image' src='images/list_password.png' alt='"._("password")."' 
+        name='user_chgpw_%KEY%' title='"._("Change password")."'>";
+      $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'   
+        name='user_del_%KEY%' title='"._("Delete user")."'>";
+    }
 
 
 
@@ -696,7 +817,7 @@ class userManagement extends plugin
           array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
           array("string" => _("Username")." / "._("Department"), "attach" => "style=''"),
           array("string" => _("Properties"), "attach" => "style='width:152px;'"),
-          array("string" => _("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'")));
+          array("string" => _("Actions"), "attach" => "style='width:90px;border-right:0px;text-align:right;'")));
 
 
     $divlist->SetSummary(_("This table displays all users, in the selected tree."));
@@ -723,7 +844,7 @@ class userManagement extends plugin
       $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
       $field3 = array("string" => "&nbsp;", "attach" => "style='width:152px;'");
-      $field4 = array("string" => "&nbsp;", "attach" => "style='width:60px;border-right:0px;text-align:right;'");
+      $field4 = array("string" => "&nbsp;", "attach" => "style='width:90px;border-right:0px;text-align:right;'");
 
 
       $divlist->AddEntry(array($field1,$field2,$field3,$field4));
@@ -876,7 +997,7 @@ class userManagement extends plugin
       $field1 = array("string" => sprintf($tpl,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($editlink,$key,$display).$ip_port, "attach" => "style='' title='".$val['dn']."'");
       $field3 = array("string" => $usrimg2."&nbsp;".$posix."&nbsp;".$enviro."&nbsp;".$maila."&nbsp;".$fonac."&nbsp;".$faxac."&nbsp;".$samba."&nbsp;".$s_img_create_from_template, "attach" => "style='width:152px;'");
-      $field4 = array("string" => preg_replace("/%KEY%/", "$key", $action),"attach" => "style='width:60px;border-right:0px;text-align:right;'");
+      $field4 = array("string" => preg_replace("/%KEY%/", "$key", $action),"attach" => "style='width:90px;border-right:0px;text-align:right;'");
 
       $add = array($field1,$field2,$field3,$field4);
 
