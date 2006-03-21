@@ -201,7 +201,7 @@ class user extends plugin
     /* Put gender attribute to upper case */
     if (isset ($this->attrs['gender'])){
       $this->gender= strtoupper($this->attrs['gender'][0]);
-    }	
+    }
   }
 
 
@@ -1224,10 +1224,95 @@ class user extends plugin
   } 
 
 
+  function getCopyDialog()
+  {
+    $str = "";
 
+    $_SESSION['binary'] = $this->photoData; 
+    $_SESSION['binarytype']= "image/jpeg";
 
+    /* Get random number for pictures */
+    srand((double)microtime()*1000000); 
+    $rand = rand(0, 10000);
 
+    $str = "
+    <table>
+      <tr>
+        <td style='vertical-align:top;'>
+          <h2>"._("User settings")."</h2>
+          <table> 
+            <tr>
+              <td><label for=\"sn\">"._("Last name")."</label></td>
+              <td><input id=\"sn\" name=\"sn\" size=25 maxlength=60  value=\"".$this->sn."\"></td>
+            </tr>
+            <tr>
+              <td><label for=\"givenName\">"._("First name")."</label></td>
+              <td><input id=\"givenName\" name=\"givenName\" size=25 maxlength=60 value=\"".$this->givenName."\"></td>
+            </tr>
+            <tr>
+              <td><label for=\"uid\">"._("Login")."</label></td>
+              <td><input id=\"uid\" name=\"uid\" size=25 maxlength=60 value=\"".$this->uid."\"></td>
+            </tr>
+            <tr>
+              <!-- Name, ... -->
+              <td style=\"vertical-align:top; width:100%;\">
+                <input type=\"hidden\" name=\"MAX_FILE_SIZE\" value=\"2000000\">
+                 "._("User picture")."
+              </td>
+              <td>
+                <input id=\"picture_file\" name=\"picture_file\" type=\"file\" size=\"20\" maxlength=\"255\" accept=\"image/*.jpg\">
+                &nbsp;
+                <input type=submit name=\"picture_remove\" value=\""._("Remove picture")."\">
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td style=\"vertical-align:top \">
+          <table summary=\"\" style=\"width:100%; vertical-align:top; text-align:left;\" cellpadding=4 border=0>
+            <tr>
+            <!-- Image container -->
+              <td>
+                <table>
+                  <tr>
+                    <td width=\"147\" height=\"200\" bgcolor=\"gray\">
+                      <img align=\"center\" valign=\"center\" border=\"0\" width=\"100%\" src=\"getbin.php?rand=".$rand."\" 
+                          alt=\""._("Personal picture")."\">
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
 
+    ";
+    return($str);
+  }
+
+  function saveCopyDialog()
+  {
+
+    if((isset($_FILES['picture_file']['tmp_name'])) && ($_FILES['picture_file']['size'] > 0)){
+      $this->set_picture($_FILES['picture_file']['tmp_name']);
+      echo "changed";
+    }
+
+    /* Remove picture? */
+    if (isset($_POST['picture_remove'])){
+      $this->jpegPhoto= "*removed*";
+      $this->set_picture ("./images/default.jpg");
+      $this->is_modified= TRUE;
+    }
+
+    $attrs = array("uid","givenName","sn");
+    foreach($attrs as $attr){
+      if(isset($_POST[$attr])){
+        $this->$attr = $_POST[$attr];
+      }
+    } 
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

@@ -1,17 +1,13 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
-
  <!-- Headline container -->
  <tr>
    <td colspan=2>
      <h2><img alt="" class="center" align="middle" src="images/head.png"> {t}Personal picture{/t}</h2>
    </td>
  </tr>
-
  <!-- Base container -->
  <tr>
-
-   <!-- Image container -->
-	 <!-- Image container -->
+ <!-- Image container -->
   <td>
    <table>
     <tr>
