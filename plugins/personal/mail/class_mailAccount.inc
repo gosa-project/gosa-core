@@ -703,6 +703,7 @@ $ldap->modify ($this->attrs);
   /* Check formular input */
   function check()
   {
+    if(!$this->is_account) return(array());
     $ldap= $this->config->get_ldap_link();
 
     $message= array();
@@ -725,6 +726,7 @@ $ldap->modify ($this->attrs);
       }
     }
     $ldap->cd($this->config->current['BASE']);
+    echo "(&(!(objectClass=gosaUserTemplate))(objectClass=gosaMailAccount)(|(mail=".$this->mail.")(gosaMailAlternateAddress=".$this->mail."))(!   (uid=".$this->uid."))(!(cn=".$this->uid.")))";
     $ldap->search ("(&(!(objectClass=gosaUserTemplate))(objectClass=gosaMailAccount)(|(mail=".$this->mail.")(gosaMailAlternateAddress=".$this->mail."))(!(uid=".$this->uid."))(!(cn=".$this->uid.")))", array("uid"));
     if ($ldap->count() != 0){
       $message[]= _("The primary address you've entered is already in use.");
@@ -859,6 +861,28 @@ $ldap->modify ($this->attrs);
     return ($name);
   }
 
+  function getCopyDialog()
+  {
+    if(!$this->is_account) return("");
+    $smarty = get_smarty();
+    $smarty->assign("mail",$this->mail); 
+    $smarty->assign("gosaMailAlternateAddress",$this->gosaMailAlternateAddress);
+    $smarty->assign("gosaMailForwardingAddress",$this->gosaMailForwardingAddress);
+    return($smarty->fetch(get_template_path("copypaste.tpl",TRUE, dirname(__FILE__))));
+  }
+
+  function saveCopyDialog()
+  {
+    if(!$this->is_account) return;  
+
+    /* Execute to save mailAlternateAddress && gosaMailForwardingAddress */
+    $this->execute();
+    
+    if(isset($_POST['mail'])){
+      $this->mail = $_POST['mail'];
+    }
+
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
