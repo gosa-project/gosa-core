@@ -500,6 +500,7 @@ class applicationManagement extends plugin
         $smarty->assign("tree_image", get_template_path('images/tree.png'));
         $smarty->assign("infoimage", get_template_path('images/info.png'));
         $smarty->assign("launchimage", get_template_path('images/launch.png'));
+        $smarty->assign("branchimage"   , get_template_path('images/branch.png'));
         $smarty->assign("deplist", $this->config->idepartments);
         $smarty->assign("regex", $appfilter['regex']);
 
