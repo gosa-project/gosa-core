@@ -364,6 +364,8 @@ class phoneGeneric extends plugin
       $this->attrs['goFonDefaultIP'] = $this->netConfigDNS->ipHostNumber;
     }    
 
+    $this->attrs = $this->netConfigDNS->getVarsForSaving($this->attrs);
+
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
     if ($this->orig_dn == 'new'){

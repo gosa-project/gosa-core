@@ -153,6 +153,16 @@ class termDNS extends plugin
     $this->DNSinitially_was_account = $this->DNS_is_account;
   }
 
+  function getVarsForSaving($attrs) 
+  {
+    foreach($this->attributes as $attr){
+      if(!empty($this->$attr)){
+        $attrs[$attr] = $this->$attr;
+      }
+    }
+    return($attrs); 
+  }
+
   function execute()
   {
 	  /* Call parent execute */
