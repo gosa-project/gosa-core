@@ -660,6 +660,8 @@ $ldap->modify ($this->attrs);
       unset($this->attrs['gosaSpamMailbox']);
     }
 
+    $this->attrs['mail'] = strtolower($this->attrs['mail']); 
+
     /* Save data to LDAP */
     $ldap->cd($this->dn);
     $this->cleanup();
@@ -726,7 +728,6 @@ $ldap->modify ($this->attrs);
       }
     }
     $ldap->cd($this->config->current['BASE']);
-    echo "(&(!(objectClass=gosaUserTemplate))(objectClass=gosaMailAccount)(|(mail=".$this->mail.")(gosaMailAlternateAddress=".$this->mail."))(!   (uid=".$this->uid."))(!(cn=".$this->uid.")))";
     $ldap->search ("(&(!(objectClass=gosaUserTemplate))(objectClass=gosaMailAccount)(|(mail=".$this->mail.")(gosaMailAlternateAddress=".$this->mail."))(!(uid=".$this->uid."))(!(cn=".$this->uid.")))", array("uid"));
     if ($ldap->count() != 0){
       $message[]= _("The primary address you've entered is already in use.");
