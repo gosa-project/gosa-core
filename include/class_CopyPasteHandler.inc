@@ -10,6 +10,8 @@ class CopyPasteHandler {
   var $dialogOpen  = false;
   var $objectdn    = false;
 
+  var $was_successfull = false;
+
   /* Create CP handler
    */
   function CopyPasteHandler($config){
@@ -33,12 +35,14 @@ class CopyPasteHandler {
 
   /* Clears all copy & paste informations 
    */
-  function Clear()
+  function Clear($current_too = false)
   {
     $this->copyCurrent 	= false;
     $this->cutCurrent  	= false;
     $this->dialogOpen   = false;
-    $this->current 	   	= NULL;
+    if($current_too){
+      $this->current 	   	= NULL;
+    }
   }
 
 
@@ -61,12 +65,6 @@ class CopyPasteHandler {
       foreach($obj->attributes as $attr){
         $this->current->by_object[$name]->$attr = $obj->$attr;
       }
-      foreach(array('is_account','gotoHotplugDevices','gotoLogonScripts','gotoProfileServers','gotoProfileFlag_C','gotoProfileFlag_L','gotoPrinter','useProfile','OrigCn','Categories') as $attr){
-        if(isset($obj->$attr)){
-          $this->current->by_object[$name]->$attr = $obj->$attr;
-        }
-      }
-
     }
     if($this->isCurrentObjectPastAble()){
       return(true);
@@ -121,77 +119,81 @@ class CopyPasteHandler {
   }
 
 
-	/* Displays a dialog which allows the user to fix all dependencies of this object.
-	   Create unique names, ids, or what ever
-	 */
-	function execute()
-	{
-		$this->dialogOpen = true;
+  /* Displays a dialog which allows the user to fix all dependencies of this object.
+     Create unique names, ids, or what ever
+   */
+  function execute($displayMessageOnSuccess = true)
+  {
+    $this->dialogOpen = true;
 
-		/* Cut & paste
-         */
-		if($this->cutCurrent){
-			$this->current->save();
-			$this->dialogOpen =false;
-			$smarty = get_smarty();
-			$smarty->assign("Complete",true);
-			$this->Clear();
-			return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
+    /* Cut & paste
+     */
+    if($this->cutCurrent){
+      $this->current->save();
+      $this->dialogOpen =false;
+      $smarty = get_smarty();
+      $smarty->assign("Complete",true);
+      $this->Clear();
+      return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
 
-		/* Copy & paste
-         */
-		}else{
-			if(isset($_POST['PerformCopyPaste'])){
-				$msgs = $this->check();	
-				if(count ($msgs) ){
-					foreach( $msgs as $msg){
-						print_red($msg);
-					}
-				}else{
-					$this->current->save();
-					$this->dialogOpen =false;
-					$smarty = get_smarty();	
-					$smarty->assign("Complete",true);
-					$this->Clear();
-					return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
-				}
-			}
-			$smarty = get_smarty();	
-			$smarty->assign("Complete",false);
-			$smarty->assign("AttributesToFix",$this->generateAttributesToFix());	
-			$smarty->assign("objectDN"		 ,$this->objectdn);	
-			return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
-		}
-	}
+      /* Copy & paste
+       */
+    }else{
+      if(isset($_POST['PerformCopyPaste'])){
+        $msgs = $this->check();	
+        if(count ($msgs) ){
+          foreach( $msgs as $msg){
+            print_red($msg);
+          }
+        }else{
+          $this->current->save();
+          $this->dialogOpen =false;
+          $smarty = get_smarty();	
+          $smarty->assign("Complete",true);
+          $this->Clear();
+          if($displayMessageOnSuccess){
+            return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
+          }else{
+            return( false);
+          }
+        }
+      }
+      $smarty = get_smarty();	
+      $smarty->assign("Complete",false);
+      $smarty->assign("AttributesToFix",$this->generateAttributesToFix());	
+      $smarty->assign("objectDN"		 ,$this->objectdn);	
+      return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
+    }
+  }
 
   /* Create dialog which asks unique attributes values ... 
    *  calls tabs -> getCopyDialog() 
    *    which calls tab -> getCopyDialog()
    */
-	function generateAttributesToFix()
-	{
-		return($this->current->getCopyDialog());
-	}
+  function generateAttributesToFix()
+  {
+    return($this->current->getCopyDialog());
+  }
 
 
   /* Set a single attribute to specified value
    *  example :   ("base", $newBase );
    */
-	function SetVar($name,$value)
-	{
-		foreach($this->	current->by_object as $key => $obj){
-			if(isset($this->current->by_object[$key]->$name)){
-				$this->current->by_object[$key]->$name = $value;
-			}
-		}
-	}
+  function SetVar($name,$value)
+  {
+    foreach($this->	current->by_object as $key => $obj){
+      if(isset($this->current->by_object[$key]->$name)){
+        $this->current->by_object[$key]->$name = $value;
+      }
+    }
+  }
 
 
   /* Save new values posted by copy & paste dialog
-  */
-	function save_object()
-	{
-		/* Assign posted var to all tabs
+   */
+  function save_object()
+  {
+    /* Assign posted var to all tabs
      */
     $this->current->saveCopyDialog();
   }
@@ -199,15 +201,15 @@ class CopyPasteHandler {
 
   /* Returns possible errors returned from all including tabs ..
    */
-	function check()
-	{
-		$ret = array();
-		foreach($this->	current->by_object as $obj){
-			$ret = array_merge($ret , $obj->check());
-		}
-    
-		return($ret);
-	}
+  function check()
+  {
+    $ret = array();
+    foreach($this->	current->by_object as $obj){
+      $ret = array_merge($ret , $obj->check());
+    }
+
+    return($ret);
+  }
 
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
