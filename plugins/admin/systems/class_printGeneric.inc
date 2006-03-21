@@ -30,6 +30,7 @@ class printgeneric extends plugin
   var $AdminMemberKeys  =array();
 
   var $is_terminalBased = false; 
+  var $gotoUserPrinter ;
 
   var $PPDdialogToSave  = NULL;
  
