@@ -128,7 +128,7 @@ class opengwAccount extends plugin
 			$smarty->assign($ar,array());
 		}
 		$smarty->assign("OGWstate"," disabled ");
-		foreach(array("LocationTeam","TemplateUser","is_locked","validTeams","opengwAccount","is_account","OGWPassword") as $ar){
+		foreach(array("LocationTeam","TemplateUser","is_locked","validTeams","opengwAccount","is_account"/*,"OGWPassword"*/) as $ar){
 			$smarty->assign($ar,"");
 			$smarty->assign($ar."CHK","");
 			$smarty->assign($ar."ACL"," disabled ");
@@ -154,7 +154,7 @@ class opengwAccount extends plugin
 
 					/* Show main page */
 					$smarty->assign("OGWstate"," disabled ");
-					foreach(array("LocationTeam","TemplateUser","is_locked","validTeams","opengwAccount","OGWPassword") as $ar){
+					foreach(array("LocationTeam","TemplateUser","is_locked","validTeams","opengwAccount"/*,"OGWPassword"*/) as $ar){
 						$smarty->assign($ar."ACL",chkacl($this->acl,$ar));
 					}
 
@@ -219,6 +219,7 @@ class opengwAccount extends plugin
 
 				} 
 			}
+      /*
       if($this->SetPassword == false){
         if($_SESSION['js'] == 1){
           $smarty->assign("OGWPasswordACL"," disabled ");
@@ -232,6 +233,7 @@ class opengwAccount extends plugin
         $smarty->assign("OGWPassword",$this->OGWPassword);
         $smarty->assign("OGWPasswordCHK"," checked ");
       }
+      */
 		$display.= $smarty->fetch (get_template_path('opengw.tpl', TRUE, dirname(__FILE__)));
 		return ($display);
 	}
@@ -253,6 +255,7 @@ class opengwAccount extends plugin
 		/* get post data */
 		if($this->is_account){
 
+      /*
       if(isset($_POST['SetPassword'])){
         $this->SetPassword =true;
       }else{
@@ -269,6 +272,7 @@ class opengwAccount extends plugin
           unset($this->info['password']);
         }
       }
+      */
 
 			/* Get selected team chkboxes */
 			$this->info['TeamIDis'] = array();

@@ -40,21 +40,6 @@
                            {/if}>
 					</td>
 				</tr>
-				<tr>
-					<td valign="top">
-						<input type="checkbox" name="SetPassword" value="1" {$OGWPasswordCHK} onClick="changeState('OGWPassword');" 
-						   {if $OGWstate!=""}
-                                disabled
-                           {/if}>
-						{t}Set password{/t} &nbsp; 
-					</td>
-					<td valign="top">
-						<input type="text" name="OGWPassword" value="{$OGWPassword}" id="OGWPassword" 
-						   {if $OGWPasswordACL!="" || $OGWstate!=""}
-                                disabled
-                           {/if}>
-					</td>
-				</tr>
 			</table>
 		</td>
 		<td valign="top" style="border-left: 1px solid rgb(160, 160, 160);">
