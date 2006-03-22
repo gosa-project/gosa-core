@@ -99,7 +99,7 @@ class applicationManagement extends plugin
         $str .= "/".$val;
       } 
       if(!empty($str)){
-        $ret[$attrs['dn']]= $str;
+        $ret[$attrs['dn']]= preg_replace("/^\//","",$str);
       }
     }
     return($ret);
