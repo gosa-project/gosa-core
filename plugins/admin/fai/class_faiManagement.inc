@@ -420,14 +420,15 @@ class faiManagement extends plugin
       }
 
 
-      $appsrc = preg_replace("/ou=fai,ou=configs,ou=systems,/","ou=apps,",$baseToUse)."<br>" ; 
-      $appdst = preg_replace("/ou=fai,ou=configs,ou=systems,/","ou=apps,","ou=".$name.",".$baseToUse)."<br>" ; 
+      $appsrc = preg_replace("/ou=fai,ou=configs,ou=systems,/","ou=apps,",$baseToUse); 
+      $appdst = preg_replace("/ou=fai,ou=configs,ou=systems,/","ou=apps,","ou=".$name.",".$baseToUse) ; 
 
       $ldap->cd ("ou=".$name.",".$baseToUse);
       $ldap->recursive_remove();
 
       $ldap->cd ($this->config->current['BASE']);
       $ldap->copy_FAI_resource_recursive($appsrc,$appdst,$type,true);
+
       $ldap->cd ($this->config->current['BASE']);
       $ldap->copy_FAI_resource_recursive($baseToUse,"ou=".$name.",".$baseToUse,$type,true);
 
