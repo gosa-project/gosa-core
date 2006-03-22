@@ -405,7 +405,7 @@ class servDNSeditZoneEntries extends plugin
       /* Checking entry name
        */
       if(!is_uid($device['OBJECT']['cn'][0])){
-        $message[] = sprintf(_("Entry name '%s' contians invalid characters."), $device['OBJECT']['cn'][0]);
+        $message[] = sprintf(_("Entry name '%s' contains invalid characters."), $device['OBJECT']['cn'][0]);
 
       }      
 

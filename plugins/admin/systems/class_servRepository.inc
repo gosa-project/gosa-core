@@ -173,7 +173,7 @@ class servrepository extends plugin
         }
   
         if($found){
-          print_red(sprintf(_("Be carefull editing this release, it is still used by these workstations [%s]."),$found_in));
+          print_red(sprintf(_("Be careful editing this release, it is still used by these workstations [%s]."),$found_in));
         } 
 
         if(isset($this->repositories[$value])){
