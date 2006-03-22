@@ -95,7 +95,7 @@ class applicationManagement extends plugin
       $str = "";
       foreach($tmp as $val){
         $val = trim(preg_replace("/,/","",$val));
-        if($val == "apps") break;
+        if(empty($val)) break;
         $str .= "/".$val;
       }
       $ret[$attrs['dn']]= $str;
