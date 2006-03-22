@@ -1152,10 +1152,20 @@ $ldap->modify ($this->attrs);
     }
   }
 
-  function getSaveDialog()
+  function getCopyDialog()
   {
-  
-    return("Phone");
+    $smarty = get_smarty();
+    if (!count($this->phoneNumbers)){
+      $smarty->assign ("phoneNumbers", array(""));
+    } else {
+      $smarty->assign ("phoneNumbers", $this->phoneNumbers);
+    }
+
+    $smarty->assign("goFonVoicemailPIN",$this->goFonVoicemailPIN);
+    $smarty->assign("goFonPIN",$this->goFonPIN);
+
+    $display= $smarty->fetch(get_template_path('paste_generic.tpl', TRUE, dirname(__FILE__)));
+    return($display);
   }
 
 }
