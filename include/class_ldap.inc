@@ -400,8 +400,7 @@ class LDAP{
   function copy_FAI_resource_recursive($sourcedn,$destinationdn,$type="branch",$is_first = true,$depth=0)
   {
     error_reporting(E_ALL);
-   
- 
+
     if($is_first){
       echo "<font style='font-size:11px;'><h4>".
               sprintf(_("Creating duplicate of %s in %s"),"<br><i>".$sourcedn."</i><br>","<br><i>".$destinationdn."</i><br>")."</h4>";
@@ -434,14 +433,25 @@ class LDAP{
       $delarray= array();
      
       /* Check if destination entry already exists */
-      if($this->count($this->fetch($this->cat($destinationdn)))){
+      $this->cat($destinationdn);
+
+      if($this->count()){
         return;
       }else{
+        
+        $this->clearResult();
 
-        /* Get source entrie */
+        /* Get source entry */
         $this->cd($basedn);
-        $attr = $this->fetch($this->cat($sourcedn));
+        $this->cat($sourcedn);
+        $attr = $this->fetch();
 
+        /* Error while fetching object / attribute abort*/
+        if((!$attr) || (count($attr)) ==0) {
+          echo "error while fetching source dn ..";
+          return;
+        }
+  
         /* check if this is a department */
         if(in_array("organizationalUnit",$attr['objectClass'])){
           $attr['dn'] = $this->convert($destinationdn);
@@ -472,8 +482,9 @@ class LDAP{
             /* Add this entry */
             $this->modify($attr);
           }
-          
+          echo "Department"; 
         }else{
+          echo "Object"; 
         /* If this is no department */
           foreach($attr as $key => $value){
 
@@ -496,15 +507,16 @@ class LDAP{
           unset($attr['count']);
           unset($attr['dn']);
 
- 
-          if($type=="branch"){
-            $attr['FAIstate'] ="branch";
-          }elseif($type=="freeze"){
-            $attr['FAIstate'] ="freeze";
-          }else{
-            print_red(_("Unknown FAIstate %s"),$type);
+          if(!in_array("gosaApplication" , $attr['objectClass'])){
+            if($type=="branch"){
+              $attr['FAIstate'] ="branch";
+            }elseif($type=="freeze"){
+              $attr['FAIstate'] ="freeze";
+            }else{
+              print_red(_("Unknown FAIstate %s"),$type);
+            }
           }
- 
+
           /* Add entry */
           $this->cd($destinationdn);
           $a = $this->fetch($this->cat($destinationdn));
