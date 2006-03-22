@@ -400,15 +400,16 @@ class LDAP{
   function copy_FAI_resource_recursive($sourcedn,$destinationdn,$type="branch",$is_first = true,$depth=0)
   {
     error_reporting(E_ALL);
-
+    
     if($is_first){
       echo "<font style='font-size:11px;'><h4>".
               sprintf(_("Creating duplicate of %s in %s"),"<br><i>".$sourcedn."</i><br>","<br><i>".$destinationdn."</i><br>")."</h4>";
     }else{
-      if($depth == 1 ){
+      if(preg_match("/^ou=/",$sourcedn)){
         echo "<br><h3>"._("Processing")." : ".preg_replace("/,.*$/","",$destinationdn)."</h3>";
       }else{
         $tmp = split(",",$sourcedn);
+        
         echo "<b>Current object : ";
         for($i = 0; $i < ($depth -1 ) ; $i ++) {
           echo preg_replace("/^.*=/","",$tmp[$i])." ";
@@ -482,9 +483,7 @@ class LDAP{
             /* Add this entry */
             $this->modify($attr);
           }
-          echo "Department"; 
         }else{
-          echo "Object"; 
         /* If this is no department */
           foreach($attr as $key => $value){
 
@@ -556,7 +555,7 @@ class LDAP{
       }
     }
     if($is_first){
-      echo "<br><br><b>"._("Successfully finished")."</b></font>";
+      echo "<br><b>"._("Successfully finished")."</b></font><br><br><br>";
     }
 
   }
