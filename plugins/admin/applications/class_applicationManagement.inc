@@ -70,7 +70,7 @@ class applicationManagement extends plugin
 
   function getReleases($base)
   {
-    $dn   = "ou=fai,ou=configs,ou=systems,".$base;
+    $dn   = "ou=apps,".$base;
 
     $ret  = array();
 
@@ -79,7 +79,7 @@ class applicationManagement extends plugin
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($dn);
 
-    $ldap->search("ou=apps",array("ou"));
+    $ldap->search("objectClass=organizationalUnit",array("ou"));
 
     while($attrs = $ldap->fetch()){
       $str = str_replace($dn,"",$attrs['dn']);
