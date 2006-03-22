@@ -229,6 +229,7 @@ $smarty->assign ('directory_img', get_template_path('images/ldapserver.png'));
 if (!isset($message)){
   $message= "";
 }
+
 $smarty->assign ("message", $message);
 
 /* Displasy SSL mode warning? */
@@ -237,6 +238,10 @@ if ($ssl != "" && $config->data['MAIN']['WARNSSL'] == 'true'){
 } else {
   $smarty->assign ("ssl", "");
 }
+
+/* Translation of cookie-warning. Whether to display it, is determined by JavaScript */
+$smarty->assign ("cookies", "<b>"._("Warning").":</b> "._("Your Browser has cookies disabled. Please enable cookies and reload this page once, before you log in."));
+
 
 /* Generate server list */
 $servers= array();
