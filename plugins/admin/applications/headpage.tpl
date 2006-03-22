@@ -26,15 +26,15 @@
    </div>
    <br>
    <div class="contentboxh" style="border-bottom:1px solid #B0B0B0;">
-    <p class="contentboxh"><img src="{$branchimage}" align="right" alt="[F]">{t}Branches{/t}</p>
+    <p class="contentboxh"><img src="{$releaseimage}" align="right" alt="[F]">{t}Releases{/t}</p>
    </div>
    <div class="contentboxb">
         <table summary="" style="width:100%;">
          <tr>
           <td>
         {t}Current release{/t}&nbsp;
-        <select name="select_branch" onChange="document.mainform.submit();">
-                {*{html_options values=$branchKeys output=$branches selected=$select_branch}*}
+        <select name="select_release" onChange="document.mainform.submit();">
+                {html_options values=$releaseKeys output=$releases selected=$select_release}
         </select>
           </td>
          </tr>
