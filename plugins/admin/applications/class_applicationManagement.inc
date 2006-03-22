@@ -36,7 +36,9 @@ class applicationManagement extends plugin
   var $Release  = "";
   var $Releases = array();
 
-  var $enableCopyPaste = false;
+  var $enableCopyPaste         = false;
+  var $enableReleaseManagement = false;
+
 
   function applicationManagement ($config, $ui)
   {
@@ -51,6 +53,12 @@ class applicationManagement extends plugin
     }
 
     $this->CopyPasteHandler = new CopyPasteHandler($this->config);
+
+    /* Check if we should enable the release selection */
+    $tmp = search_config($this->config->data,"faiManagement","CLASS");
+    if(!empty($tmp)){
+      $this->enableReleaseManagement = true;
+    }
 
     /* Get global filter config */
     if (!is_global("appfilter")){
@@ -558,9 +566,13 @@ class applicationManagement extends plugin
     $smarty->assign("deplist", $this->config->idepartments);
     $smarty->assign("regex", $appfilter['regex']);
 
-    $smarty->assign("releases",     $this->Releases );
-    $smarty->assign("releaseKeys",   array_flip($this->Releases));
-    $smarty->assign("select_release",$this->Release);
+    if($this->enableReleaseManagement){
+      $smarty->assign("releases",     $this->Releases );
+      $smarty->assign("releaseKeys",   array_flip($this->Releases));
+      $smarty->assign("select_release",$this->Release);
+    }
+
+    $smarty->assign("enableReleaseManagement",$this->enableReleaseManagement);
 
     /* Extend if we are not using javascript */
     $smarty->assign("apply", apply_filter());

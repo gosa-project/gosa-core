@@ -24,6 +24,7 @@
     {t}This menu allows you to add, edit and remove selected applications. You may want to use the range selector on top of the application listbox, when working with a large number of applications.{/t}
    </p>
    </div>
+	{if $enableReleaseManagement == true}
    <br>
    <div class="contentboxh" style="border-bottom:1px solid #B0B0B0;">
     <p class="contentboxh"><img src="{$releaseimage}" align="right" alt="[F]">{t}Branches{/t}</p>
@@ -40,6 +41,7 @@
          </tr>
         </table>
    </div>
+	{/if}
    <br>
    <div class="contentboxh">
     <p class="contentboxh"><img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}</p>
