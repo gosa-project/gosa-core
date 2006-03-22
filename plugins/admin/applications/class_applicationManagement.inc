@@ -108,7 +108,7 @@ class applicationManagement extends plugin
     $s_action     = "";                       // Contains the action to proceed
     $s_entry      = "";                       // The value for s_action
     $base_back    = "";                       // The Link for Backbutton
-
+    
     /* Start for New List Managment */
     if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
       $s_action="open";
@@ -202,6 +202,14 @@ class applicationManagement extends plugin
       }
       $appfilter['regex']= $s;
     }
+    
+    $this->Releases = $this->getReleases($appfilter['depselect']);
+    if(!isset($this->Releases[$this->Release])){
+      $this->Release = key($this->Releases);
+      $appfilter['release'] = $this->Release;
+      register_global("appfilter",$appfilter);
+    }
+
     register_global("appfilter", $appfilter);
 
     /* Check sorting variable */
@@ -594,11 +602,7 @@ class applicationManagement extends plugin
      */
     $peopleOU = get_people_ou();
 
-    if(empty($peopleOU)){
-      $base2 = $base;
-    }else{
-      $base2 = preg_replace("/".$peopleOU."/i","",$base);    
-    }
+    $base2 = $appfilter['depselect'];
 
     $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
         TRUE, $base2, array("ou", "description"), TRUE);
