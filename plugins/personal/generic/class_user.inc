@@ -1235,59 +1235,14 @@ class user extends plugin
     srand((double)microtime()*1000000); 
     $rand = rand(0, 10000);
 
-    $str = "
-    <table>
-      <tr>
-        <td style='vertical-align:top;'>
-          <h2>"._("User settings")."</h2>
-          <table> 
-            <tr>
-              <td><label for=\"sn\">"._("Last name")."</label></td>
-              <td><input id=\"sn\" name=\"sn\" size=25 maxlength=60  value=\"".$this->sn."\"></td>
-            </tr>
-            <tr>
-              <td><label for=\"givenName\">"._("First name")."</label></td>
-              <td><input id=\"givenName\" name=\"givenName\" size=25 maxlength=60 value=\"".$this->givenName."\"></td>
-            </tr>
-            <tr>
-              <td><label for=\"uid\">"._("Login")."</label></td>
-              <td><input id=\"uid\" name=\"uid\" size=25 maxlength=60 value=\"".$this->uid."\"></td>
-            </tr>
-            <tr>
-              <!-- Name, ... -->
-              <td style=\"vertical-align:top; width:100%;\">
-                <input type=\"hidden\" name=\"MAX_FILE_SIZE\" value=\"2000000\">
-                 "._("User picture")."
-              </td>
-              <td>
-                <input id=\"picture_file\" name=\"picture_file\" type=\"file\" size=\"20\" maxlength=\"255\" accept=\"image/*.jpg\">
-                &nbsp;
-                <input type=submit name=\"picture_remove\" value=\""._("Remove picture")."\">
-              </td>
-            </tr>
-          </table>
-        </td>
-        <td style=\"vertical-align:top \">
-          <table summary=\"\" style=\"width:100%; vertical-align:top; text-align:left;\" cellpadding=4 border=0>
-            <tr>
-            <!-- Image container -->
-              <td>
-                <table>
-                  <tr>
-                    <td width=\"147\" height=\"200\" bgcolor=\"gray\">
-                      <img align=\"center\" valign=\"center\" border=\"0\" width=\"100%\" src=\"getbin.php?rand=".$rand."\" 
-                          alt=\""._("Personal picture")."\">
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
+    $smarty = get_smarty();
 
-    ";
+    $smarty->assign("sn",       $this->sn);
+    $smarty->assign("givenName",$this->givenName);
+    $smarty->assign("uid",      $this->uid);
+    $smarty->assign("rand",     $rand);
+    $str = $smarty->fetch(get_template_path("paste_generic.tpl",TRUE,dirname(__FILE__)));
+  
     return($str);
   }
 
