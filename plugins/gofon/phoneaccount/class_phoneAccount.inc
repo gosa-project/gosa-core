@@ -433,7 +433,7 @@ class phoneAccount extends plugin
       $SQL[] = "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$newnums[$i_new_key].";"; 
       // Delete old entries
       $b_first_deleted  =false;
-      if(is_array($oldnums)){
+      if(isset($oldnums) && is_array($oldnums)){
         foreach($oldnums as $s_telenums){
           $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$s_telenums."';\n";
           if(!$b_first_deleted){
@@ -1168,6 +1168,16 @@ $ldap->modify ($this->attrs);
     return($display);
   }
 
+  function saveCopyDialog()
+  {
+    $this->execute();
+    if(isset($_POST['goFonVoicemailPIN'])) {
+      $this->goFonVoicemailPIN = $_POST['goFonVoicemailPIN'];
+    }
+    if(isset($_POST['goFonPIN'])){
+      $this->goFonPIN = $_POST['goFonPIN'];
+    }
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
