@@ -255,18 +255,18 @@ msgstr "Partities"
 msgid "Script"
 msgstr "Script"
 
-#: contrib/gosa.conf:210 plugins/admin/fai/class_faiManagement.inc:747
-#: plugins/admin/fai/class_faiManagement.inc:748
+#: contrib/gosa.conf:210 plugins/admin/fai/class_faiManagement.inc:759
+#: plugins/admin/fai/class_faiManagement.inc:760
 msgid "Hooks"
 msgstr "Inhakers"
 
-#: contrib/gosa.conf:214 plugins/admin/fai/class_faiManagement.inc:740
-#: plugins/admin/fai/class_faiManagement.inc:741
+#: contrib/gosa.conf:214 plugins/admin/fai/class_faiManagement.inc:752
+#: plugins/admin/fai/class_faiManagement.inc:753
 msgid "Variables"
 msgstr "Variabelen"
 
-#: contrib/gosa.conf:218 plugins/admin/fai/class_faiManagement.inc:761
-#: plugins/admin/fai/class_faiManagement.inc:762
+#: contrib/gosa.conf:218 plugins/admin/fai/class_faiManagement.inc:773
+#: plugins/admin/fai/class_faiManagement.inc:774
 msgid "Templates"
 msgstr "Sjablonen"
 
@@ -400,17 +400,17 @@ msgstr "Geef a.u.b. een geldig E-mail adres voor het 'NagiosMail' veld op."
 #: plugins/personal/connectivity/main.inc:118
 #: plugins/gofax/blocklists/generic.tpl:80
 #: plugins/gofax/faxaccount/main.inc:89
-#: plugins/admin/fai/class_faiManagement.inc:587
+#: plugins/admin/fai/class_faiManagement.inc:599
 #: plugins/admin/groups/class_groupManagement.inc:412
 #: plugins/admin/users/class_userManagement.inc:720
-#: plugins/admin/applications/class_applicationManagement.inc:417
+#: plugins/admin/applications/class_applicationManagement.inc:428
 #: plugins/admin/departments/class_departmentManagement.inc:366
 #: plugins/admin/systems/class_systemManagement.inc:720
 #: plugins/admin/ogroups/class_ogroupManagement.inc:400
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:300
 #: plugins/gofon/phoneaccount/main.inc:105
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:266
-#: ihtml/themes/default/copyPasteDialog.tpl:18
+#: ihtml/themes/default/copyPasteDialog.tpl:20
 msgid "Finish"
 msgstr "Opslaan"
 
@@ -438,8 +438,8 @@ msgstr "Opslaan"
 #: plugins/addons/addressbook/dial.tpl:10
 #: plugins/addons/addressbook/remove.tpl:16
 #: plugins/addons/addressbook/address_edit.tpl:234
-#: plugins/admin/fai/class_faiManagement.inc:589
-#: plugins/admin/fai/class_faiManagement.inc:594
+#: plugins/admin/fai/class_faiManagement.inc:601
+#: plugins/admin/fai/class_faiManagement.inc:606
 #: plugins/admin/fai/faiProfileEntry.tpl:71
 #: plugins/admin/fai/faiPackageConfiguration.tpl:7
 #: plugins/admin/fai/faiScriptEntry.tpl:69
@@ -460,7 +460,7 @@ msgstr "Opslaan"
 #: plugins/admin/users/class_userManagement.inc:722
 #: plugins/admin/users/remove.tpl:16 plugins/admin/users/template.tpl:46
 #: plugins/admin/applications/remove.tpl:15
-#: plugins/admin/applications/class_applicationManagement.inc:419
+#: plugins/admin/applications/class_applicationManagement.inc:430
 #: plugins/admin/departments/remove.tpl:16
 #: plugins/admin/departments/class_departmentManagement.inc:368
 #: plugins/admin/systems/chooser.tpl:18
@@ -510,7 +510,6 @@ msgstr ""
 "veranderen"
 
 #: plugins/personal/nagios/main.inc:115 plugins/personal/mail/main.inc:115
-#: plugins/personal/posix/class_posixAccount.inc:1230
 #: plugins/personal/posix/main.inc:122 plugins/personal/samba/main.inc:115
 #: plugins/personal/environment/environment.tpl:139
 #: plugins/personal/environment/main.inc:115
@@ -892,7 +891,7 @@ msgstr "Selecteer de toe te voegen adressen"
 #: plugins/admin/groups/headpage.tpl:30
 #: plugins/admin/groups/group_objects.tpl:20
 #: plugins/admin/groups/mail_locals.tpl:22 plugins/admin/users/headpage.tpl:29
-#: plugins/admin/applications/headpage.tpl:45
+#: plugins/admin/applications/headpage.tpl:47
 #: plugins/admin/departments/headpage.tpl:29
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:22
 #: plugins/admin/systems/printerPPDSelectionDialog.tpl:18
@@ -1073,7 +1072,7 @@ msgstr "Nagios instellingen"
 #: ihtml/themes/altlinux/setup_useradmin.tpl:30
 #: ihtml/themes/altlinux/login.tpl:35 ihtml/themes/altlinux/login.tpl:39
 #: ihtml/themes/default/setup_useradmin.tpl:30
-#: ihtml/themes/default/login.tpl:35 ihtml/themes/default/login.tpl:39
+#: ihtml/themes/default/login.tpl:37 ihtml/themes/default/login.tpl:41
 msgid "Password"
 msgstr "Wachtwoord"
 
@@ -1144,7 +1143,7 @@ msgstr ""
 #: plugins/addons/ldapmanager/contentimport.tpl:44
 #: plugins/addons/ldapmanager/contentcsv.tpl:114
 #: plugins/addons/ldapmanager/contentexport.tpl:66
-#: plugins/admin/fai/class_faiManagement.inc:429
+#: plugins/admin/fai/class_faiManagement.inc:441
 #: plugins/admin/fai/faiNewBranch.tpl:52
 #: plugins/admin/departments/recursive_moce.tpl:10 include/functions.inc:1382
 #: ihtml/themes/altlinux/setup_useradmin.tpl:40
@@ -1254,7 +1253,7 @@ msgid "Display systems matching"
 msgstr "Toon de overeenkomende systemen"
 
 #: plugins/personal/posix/generic.tpl:7
-#: plugins/personal/posix/class_posixAccount.inc:1191
+#: plugins/personal/posix/paste_generic.tpl:8
 #: plugins/personal/samba/samba3.tpl:13 plugins/personal/samba/samba3.tpl:94
 #: plugins/personal/samba/class_sambaAccount.inc:640
 msgid "Home directory"
@@ -1277,22 +1276,21 @@ msgid "Status"
 msgstr "Status"
 
 #: plugins/personal/posix/generic.tpl:39
-#: plugins/personal/posix/class_posixAccount.inc:1204
+#: plugins/personal/posix/paste_generic.tpl:21
 msgid "Force UID/GID"
 msgstr "Forceer UID/GID"
 
 #: plugins/personal/posix/generic.tpl:43
-#: plugins/personal/posix/class_posixAccount.inc:1209 html/getxls.php:230
+#: plugins/personal/posix/paste_generic.tpl:26 html/getxls.php:230
 msgid "UID"
 msgstr "UID"
 
 #: plugins/personal/posix/generic.tpl:52
-#: plugins/personal/posix/class_posixAccount.inc:1218
+#: plugins/personal/posix/paste_generic.tpl:35
 msgid "GID"
 msgstr "GID"
 
 #: plugins/personal/posix/generic.tpl:64
-#: plugins/personal/posix/class_posixAccount.inc:1227
 msgid "Group membership"
 msgstr "Groep lidmaatschap"
 
@@ -1617,13 +1615,13 @@ msgid "Too many users, can't allocate a free ID!"
 msgstr ""
 "Er zitten te veel gebruikers in de database. Kan geen vrij ID toewijzen!"
 
-#: plugins/personal/posix/class_posixAccount.inc:1187
-#, fuzzy
-msgid "Posix settings"
-msgstr "Unix instellingen"
-
 #: plugins/personal/posix/main.inc:131
 msgid "Unix settings"
+msgstr "Unix instellingen"
+
+#: plugins/personal/posix/paste_generic.tpl:4
+#, fuzzy
+msgid "Posix settings"
 msgstr "Unix instellingen"
 
 #: plugins/personal/samba/samba2.tpl:13
@@ -2309,12 +2307,12 @@ msgstr ""
 #: plugins/personal/generic/generic_picture.tpl:15
 #: plugins/personal/generic/generic.tpl:19
 #: plugins/personal/generic/generic.tpl:32
-#: plugins/personal/generic/class_user.inc:1279
+#: plugins/personal/generic/paste_generic.tpl:41
 msgid "Personal picture"
 msgstr "Persoonlijk plaatje"
 
 #: plugins/personal/generic/generic_picture.tpl:27
-#: plugins/personal/generic/class_user.inc:1265
+#: plugins/personal/generic/paste_generic.tpl:27
 msgid "Remove picture"
 msgstr "Plaatje verwijderen"
 
@@ -2343,7 +2341,7 @@ msgid "Change picture"
 msgstr "Verander plaatje"
 
 #: plugins/personal/generic/generic.tpl:43
-#: plugins/personal/generic/class_user.inc:1245
+#: plugins/personal/generic/paste_generic.tpl:7
 #: plugins/addons/addressbook/address_edit.tpl:33
 #: plugins/admin/users/template.tpl:19
 msgid "Last name"
@@ -2354,14 +2352,14 @@ msgid "Template name"
 msgstr "Sjabloon naam"
 
 #: plugins/personal/generic/generic.tpl:55
-#: plugins/personal/generic/class_user.inc:1249
+#: plugins/personal/generic/paste_generic.tpl:11
 #: plugins/addons/addressbook/address_edit.tpl:30
 #: plugins/admin/users/template.tpl:23
 msgid "First name"
 msgstr "Voornaam"
 
 #: plugins/personal/generic/generic.tpl:59
-#: plugins/personal/generic/class_user.inc:1253
+#: plugins/personal/generic/paste_generic.tpl:15
 #: plugins/admin/users/template.tpl:28
 msgid "Login"
 msgstr "Inlognaam"
@@ -2398,12 +2396,12 @@ msgstr "Voorkeurstaal"
 #: plugins/personal/generic/generic.tpl:127
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:312
 #: plugins/gofax/blocklists/generic.tpl:14
-#: plugins/admin/fai/class_faiManagement.inc:658
+#: plugins/admin/fai/class_faiManagement.inc:670
 #: plugins/admin/groups/class_groupManagement.inc:458
 #: plugins/admin/groups/generic.tpl:21
 #: plugins/admin/users/class_userManagement.inc:786
 #: plugins/admin/applications/generic.tpl:32
-#: plugins/admin/applications/class_applicationManagement.inc:466
+#: plugins/admin/applications/class_applicationManagement.inc:477
 #: plugins/admin/departments/generic.tpl:27
 #: plugins/admin/departments/class_departmentManagement.inc:302
 #: plugins/admin/systems/component.tpl:13 plugins/admin/systems/server.tpl:13
@@ -2494,7 +2492,7 @@ msgstr "Organisatie"
 #: plugins/addons/addressbook/address_edit.tpl:138
 #: plugins/admin/groups/class_groupManagement.inc:523
 #: plugins/admin/users/class_userManagement.inc:818
-#: plugins/admin/applications/class_applicationManagement.inc:507
+#: plugins/admin/applications/class_applicationManagement.inc:518
 #: plugins/admin/systems/class_systemManagement.inc:791
 #: plugins/admin/ogroups/class_ogroupManagement.inc:517
 #: plugins/admin/ogroups/class_ogroupManagement.inc:585
@@ -2753,16 +2751,6 @@ msgstr "Het veld 'Pieper' bevat een ongeldig telefoonnummer."
 msgid "Could not open specified certificate!"
 msgstr "Het opgegeven certificaat kon geopend worden!"
 
-#: plugins/personal/generic/class_user.inc:1242
-#, fuzzy
-msgid "User settings"
-msgstr "Gebruikers E-mail instellingen"
-
-#: plugins/personal/generic/class_user.inc:1260
-#, fuzzy
-msgid "User picture"
-msgstr "Persoonlijk plaatje"
-
 #: plugins/personal/generic/main.inc:107
 msgid "You are not allowed to set your password!"
 msgstr "U heeft geen toestemming om uw wachtwoord te veranderen!"
@@ -2770,6 +2758,16 @@ msgstr "U heeft geen toestemming om uw wachtwoord te veranderen!"
 #: plugins/personal/generic/main.inc:189
 msgid "Generic user information"
 msgstr "Algemene gebruikersinformatie"
+
+#: plugins/personal/generic/paste_generic.tpl:4
+#, fuzzy
+msgid "User settings"
+msgstr "Gebruikers E-mail instellingen"
+
+#: plugins/personal/generic/paste_generic.tpl:22
+#, fuzzy
+msgid "User picture"
+msgstr "Persoonlijk plaatje"
 
 #: plugins/personal/connectivity/proxy.tpl:10
 msgid "Proxy account"
@@ -3216,10 +3214,10 @@ msgid "Please specify a valid phone number."
 msgstr "Geef a.u.b. een geldig telefoonnummer op."
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:307
-#: plugins/admin/fai/class_faiManagement.inc:623
+#: plugins/admin/fai/class_faiManagement.inc:635
 #: plugins/admin/groups/class_groupManagement.inc:451
 #: plugins/admin/users/class_userManagement.inc:778
-#: plugins/admin/applications/class_applicationManagement.inc:459
+#: plugins/admin/applications/class_applicationManagement.inc:470
 #: plugins/admin/departments/class_departmentManagement.inc:296
 #: plugins/admin/systems/class_systemManagement.inc:753
 #: plugins/admin/systems/class_glpiSelectUser.inc:160
@@ -3231,11 +3229,11 @@ msgid "Go up one department"
 msgstr "Ga een afdeling omhoog"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:307
-#: plugins/admin/fai/class_faiManagement.inc:623
+#: plugins/admin/fai/class_faiManagement.inc:635
 #: plugins/admin/fai/class_faiProfile.inc:303
 #: plugins/admin/groups/class_groupManagement.inc:451
 #: plugins/admin/users/class_userManagement.inc:778
-#: plugins/admin/applications/class_applicationManagement.inc:459
+#: plugins/admin/applications/class_applicationManagement.inc:470
 #: plugins/admin/departments/class_departmentManagement.inc:296
 #: plugins/admin/systems/class_systemManagement.inc:753
 #: plugins/admin/systems/class_glpiSelectUser.inc:160
@@ -3249,10 +3247,10 @@ msgid "Up"
 msgstr "Omhoog"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:308
-#: plugins/admin/fai/class_faiManagement.inc:626
+#: plugins/admin/fai/class_faiManagement.inc:638
 #: plugins/admin/groups/class_groupManagement.inc:452
 #: plugins/admin/users/class_userManagement.inc:779
-#: plugins/admin/applications/class_applicationManagement.inc:460
+#: plugins/admin/applications/class_applicationManagement.inc:471
 #: plugins/admin/departments/class_departmentManagement.inc:297
 #: plugins/admin/systems/class_systemManagement.inc:755
 #: plugins/admin/systems/class_glpiSelectUser.inc:162
@@ -3264,10 +3262,10 @@ msgid "Go to root department"
 msgstr "Ga naar basis afdelingen"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:308
-#: plugins/admin/fai/class_faiManagement.inc:626
+#: plugins/admin/fai/class_faiManagement.inc:638
 #: plugins/admin/groups/class_groupManagement.inc:452
 #: plugins/admin/users/class_userManagement.inc:779
-#: plugins/admin/applications/class_applicationManagement.inc:460
+#: plugins/admin/applications/class_applicationManagement.inc:471
 #: plugins/admin/departments/class_departmentManagement.inc:297
 #: plugins/admin/systems/class_systemManagement.inc:755
 #: plugins/admin/systems/class_glpiSelectUser.inc:162
@@ -3281,7 +3279,7 @@ msgstr "Basis"
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:309
 #: plugins/admin/groups/class_groupManagement.inc:453
 #: plugins/admin/users/class_userManagement.inc:780
-#: plugins/admin/applications/class_applicationManagement.inc:461
+#: plugins/admin/applications/class_applicationManagement.inc:472
 #: plugins/admin/systems/class_systemManagement.inc:757
 #: plugins/admin/systems/class_glpiSelectUser.inc:164
 #: plugins/admin/systems/class_baseSelectDialog.inc:30
@@ -3292,10 +3290,10 @@ msgid "Go to users department"
 msgstr "Ga naar gebruikers afdeling"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:309
-#: plugins/admin/fai/class_faiManagement.inc:629
+#: plugins/admin/fai/class_faiManagement.inc:641
 #: plugins/admin/groups/class_groupManagement.inc:453
 #: plugins/admin/users/class_userManagement.inc:780
-#: plugins/admin/applications/class_applicationManagement.inc:461
+#: plugins/admin/applications/class_applicationManagement.inc:472
 #: plugins/admin/departments/class_departmentManagement.inc:298
 #: plugins/admin/systems/class_systemManagement.inc:757
 #: plugins/admin/systems/class_glpiSelectUser.inc:164
@@ -3315,10 +3313,10 @@ msgid "New Blocklist"
 msgstr "Nieuwe Blokkeerlijst"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:313
-#: plugins/admin/fai/class_faiManagement.inc:659
+#: plugins/admin/fai/class_faiManagement.inc:671
 #: plugins/admin/groups/class_groupManagement.inc:459
 #: plugins/admin/users/class_userManagement.inc:787
-#: plugins/admin/applications/class_applicationManagement.inc:467
+#: plugins/admin/applications/class_applicationManagement.inc:478
 #: plugins/admin/departments/class_departmentManagement.inc:303
 #: plugins/admin/systems/class_systemManagement.inc:774
 #: plugins/admin/systems/class_glpiSelectUser.inc:168
@@ -3329,10 +3327,10 @@ msgid "Submit department"
 msgstr "Verwerk afdeling"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:313
-#: plugins/admin/fai/class_faiManagement.inc:659
+#: plugins/admin/fai/class_faiManagement.inc:671
 #: plugins/admin/groups/class_groupManagement.inc:459
 #: plugins/admin/users/class_userManagement.inc:787
-#: plugins/admin/applications/class_applicationManagement.inc:467
+#: plugins/admin/applications/class_applicationManagement.inc:478
 #: plugins/admin/departments/class_departmentManagement.inc:303
 #: plugins/admin/systems/class_systemManagement.inc:774
 #: plugins/admin/systems/class_glpiSelectUser.inc:168
@@ -3345,17 +3343,17 @@ msgstr "Verwerk"
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:316
 #: plugins/admin/fai/class_faiScript.inc:227
 #: plugins/admin/fai/class_faiScript.inc:230
-#: plugins/admin/fai/class_faiManagement.inc:677
-#: plugins/admin/fai/class_faiManagement.inc:777
-#: plugins/admin/fai/class_faiManagement.inc:782
+#: plugins/admin/fai/class_faiManagement.inc:689
+#: plugins/admin/fai/class_faiManagement.inc:789
+#: plugins/admin/fai/class_faiManagement.inc:794
 #: plugins/admin/fai/class_faiHook.inc:251
 #: plugins/admin/fai/class_faiHook.inc:254
 #: plugins/admin/groups/class_groupManagement.inc:469
 #: plugins/admin/groups/class_groupManagement.inc:474
 #: plugins/admin/users/class_userManagement.inc:798
 #: plugins/admin/users/class_userManagement.inc:805
-#: plugins/admin/applications/class_applicationManagement.inc:478
-#: plugins/admin/applications/class_applicationManagement.inc:484
+#: plugins/admin/applications/class_applicationManagement.inc:489
+#: plugins/admin/applications/class_applicationManagement.inc:495
 #: plugins/admin/departments/class_departmentManagement.inc:310
 #: plugins/admin/systems/class_systemManagement.inc:780
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:43
@@ -3380,15 +3378,15 @@ msgstr "Bewerk gebruiker"
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:317
 #: plugins/addons/mailqueue/contents.tpl:93
 #: plugins/admin/fai/class_faiScript.inc:231
-#: plugins/admin/fai/class_faiManagement.inc:678
-#: plugins/admin/fai/class_faiManagement.inc:784
+#: plugins/admin/fai/class_faiManagement.inc:690
+#: plugins/admin/fai/class_faiManagement.inc:796
 #: plugins/admin/fai/class_faiHook.inc:255
 #: plugins/admin/groups/class_groupManagement.inc:471
 #: plugins/admin/groups/class_groupManagement.inc:476
 #: plugins/admin/users/class_userManagement.inc:802
 #: plugins/admin/users/class_userManagement.inc:809
-#: plugins/admin/applications/class_applicationManagement.inc:480
-#: plugins/admin/applications/class_applicationManagement.inc:486
+#: plugins/admin/applications/class_applicationManagement.inc:491
+#: plugins/admin/applications/class_applicationManagement.inc:497
 #: plugins/admin/departments/class_departmentManagement.inc:311
 #: plugins/admin/systems/class_systemManagement.inc:781
 #: plugins/admin/ogroups/class_ogroupManagement.inc:466
@@ -3412,10 +3410,10 @@ msgstr "Blokkeerlijst naam"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:324
 #: plugins/addons/addressbook/contents.tpl:42
-#: plugins/admin/fai/class_faiManagement.inc:674
+#: plugins/admin/fai/class_faiManagement.inc:686
 #: plugins/admin/groups/class_groupManagement.inc:525
 #: plugins/admin/users/class_userManagement.inc:820
-#: plugins/admin/applications/class_applicationManagement.inc:508
+#: plugins/admin/applications/class_applicationManagement.inc:519
 #: plugins/admin/departments/class_departmentManagement.inc:318
 #: plugins/admin/systems/class_systemManagement.inc:792
 #: plugins/admin/systems/class_glpiAttachmentPool.inc:203
@@ -3510,9 +3508,9 @@ msgstr "Nummers kunnen ook wildcards (*?) bevatten."
 #: plugins/admin/departments/remove.tpl:2 plugins/admin/systems/remove.tpl:2
 #: plugins/admin/systems/remove_glpi.tpl:2 plugins/admin/ogroups/remove.tpl:2
 #: plugins/gofon/macro/remove.tpl:2 plugins/gofon/conference/remove.tpl:2
-#: html/index.php:236 html/index.php:296 ihtml/themes/altlinux/conflict.tpl:6
-#: ihtml/themes/altlinux/islocked.tpl:6 ihtml/themes/default/conflict.tpl:6
-#: ihtml/themes/default/islocked.tpl:6
+#: html/index.php:237 html/index.php:243 html/index.php:301
+#: ihtml/themes/altlinux/conflict.tpl:6 ihtml/themes/altlinux/islocked.tpl:6
+#: ihtml/themes/default/conflict.tpl:6 ihtml/themes/default/islocked.tpl:6
 msgid "Warning"
 msgstr "Waarschuwing"
 
@@ -4713,7 +4711,7 @@ msgstr "De opgegeven naam is ongeldig."
 msgid "This name is already in use."
 msgstr "De opgegeven naam wordt al gebruikt."
 
-#: plugins/admin/fai/class_faiManagement.inc:593
+#: plugins/admin/fai/class_faiManagement.inc:605
 #: plugins/admin/fai/faiPackageNew.tpl:44 plugins/admin/users/template.tpl:44
 #: ihtml/themes/altlinux/setup_introduction.tpl:12
 #: ihtml/themes/altlinux/setup_useradmin.tpl:41
@@ -4726,117 +4724,117 @@ msgstr "De opgegeven naam wordt al gebruikt."
 msgid "Continue"
 msgstr "Doorgaan"
 
-#: plugins/admin/fai/class_faiManagement.inc:629
+#: plugins/admin/fai/class_faiManagement.inc:641
 #: plugins/admin/departments/class_departmentManagement.inc:298
 msgid "Go to users home department"
 msgstr "Ga naar de afdeling van de gebruiker"
 
-#: plugins/admin/fai/class_faiManagement.inc:634
+#: plugins/admin/fai/class_faiManagement.inc:646
 msgid "New profile"
 msgstr "Nieuw profiel"
 
-#: plugins/admin/fai/class_faiManagement.inc:634
+#: plugins/admin/fai/class_faiManagement.inc:646
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:229
 msgid "P"
 msgstr "PR"
 
-#: plugins/admin/fai/class_faiManagement.inc:639
+#: plugins/admin/fai/class_faiManagement.inc:651
 msgid "New partition table"
 msgstr "Nieuwe partitietabel"
 
-#: plugins/admin/fai/class_faiManagement.inc:639
+#: plugins/admin/fai/class_faiManagement.inc:651
 msgid "PT"
 msgstr "PT"
 
-#: plugins/admin/fai/class_faiManagement.inc:642
+#: plugins/admin/fai/class_faiManagement.inc:654
 msgid "New scripts"
 msgstr "Nieuwe scripts"
 
-#: plugins/admin/fai/class_faiManagement.inc:642
+#: plugins/admin/fai/class_faiManagement.inc:654
 msgid "S"
 msgstr "SC"
 
-#: plugins/admin/fai/class_faiManagement.inc:645
+#: plugins/admin/fai/class_faiManagement.inc:657
 msgid "New hooks"
 msgstr "Nieuwe inhakers"
 
-#: plugins/admin/fai/class_faiManagement.inc:645
+#: plugins/admin/fai/class_faiManagement.inc:657
 msgid "H"
 msgstr "H"
 
-#: plugins/admin/fai/class_faiManagement.inc:648
+#: plugins/admin/fai/class_faiManagement.inc:660
 msgid "New variables"
 msgstr "Nieuwe variabelen"
 
-#: plugins/admin/fai/class_faiManagement.inc:648
+#: plugins/admin/fai/class_faiManagement.inc:660
 msgid "V"
 msgstr "V"
 
-#: plugins/admin/fai/class_faiManagement.inc:651
+#: plugins/admin/fai/class_faiManagement.inc:663
 msgid "New templates"
 msgstr "Nieuwe sjablonen"
 
-#: plugins/admin/fai/class_faiManagement.inc:651
+#: plugins/admin/fai/class_faiManagement.inc:663
 msgid "T"
 msgstr "SJ"
 
-#: plugins/admin/fai/class_faiManagement.inc:654
+#: plugins/admin/fai/class_faiManagement.inc:666
 msgid "New package list"
 msgstr "Nieuwe pakketlijst"
 
-#: plugins/admin/fai/class_faiManagement.inc:654
+#: plugins/admin/fai/class_faiManagement.inc:666
 msgid "PK"
 msgstr "PK"
 
-#: plugins/admin/fai/class_faiManagement.inc:668
+#: plugins/admin/fai/class_faiManagement.inc:680
 #: plugins/admin/systems/class_systemManagement.inc:787
 msgid "This table displays all systems, in the selected tree."
 msgstr "Deze tabel toont alle systemen in de geselecteerde tree"
 
-#: plugins/admin/fai/class_faiManagement.inc:672
+#: plugins/admin/fai/class_faiManagement.inc:684
 msgid "Name of FAI class"
 msgstr "Naam van de FAI klasse"
 
-#: plugins/admin/fai/class_faiManagement.inc:673
+#: plugins/admin/fai/class_faiManagement.inc:685
 msgid "Class type"
 msgstr "Klasse type"
 
-#: plugins/admin/fai/class_faiManagement.inc:677
-#: plugins/admin/fai/class_faiManagement.inc:778
-#: plugins/admin/fai/class_faiManagement.inc:783
+#: plugins/admin/fai/class_faiManagement.inc:689
+#: plugins/admin/fai/class_faiManagement.inc:790
+#: plugins/admin/fai/class_faiManagement.inc:795
 msgid "Edit class"
 msgstr "Bewerk klasse"
 
-#: plugins/admin/fai/class_faiManagement.inc:678
-#: plugins/admin/fai/class_faiManagement.inc:785
+#: plugins/admin/fai/class_faiManagement.inc:690
+#: plugins/admin/fai/class_faiManagement.inc:797
 msgid "Delete class"
 msgstr "Verwijder klasse"
 
-#: plugins/admin/fai/class_faiManagement.inc:698
+#: plugins/admin/fai/class_faiManagement.inc:710
 #: plugins/admin/groups/class_groupApplication.inc:521
 #: plugins/admin/departments/class_departmentManagement.inc:334
 msgid "department"
 msgstr "afdeling"
 
-#: plugins/admin/fai/class_faiManagement.inc:719
-#: plugins/admin/fai/class_faiManagement.inc:720
+#: plugins/admin/fai/class_faiManagement.inc:731
+#: plugins/admin/fai/class_faiManagement.inc:732
 #: plugins/admin/fai/class_faiProfile.inc:297
 #: plugins/admin/fai/class_faiProfileEntry.inc:124
 msgid "Partition table"
 msgstr "Partitietabel"
 
-#: plugins/admin/fai/class_faiManagement.inc:726
-#: plugins/admin/fai/class_faiManagement.inc:727
+#: plugins/admin/fai/class_faiManagement.inc:738
+#: plugins/admin/fai/class_faiManagement.inc:739
 msgid "Package list"
 msgstr "Pakketlijst"
 
-#: plugins/admin/fai/class_faiManagement.inc:733
-#: plugins/admin/fai/class_faiManagement.inc:734
+#: plugins/admin/fai/class_faiManagement.inc:745
+#: plugins/admin/fai/class_faiManagement.inc:746
 msgid "Scripts"
 msgstr "Scripts"
 
-#: plugins/admin/fai/class_faiManagement.inc:754
-#: plugins/admin/fai/class_faiManagement.inc:755
+#: plugins/admin/fai/class_faiManagement.inc:766
+#: plugins/admin/fai/class_faiManagement.inc:767
 msgid "Profile"
 msgstr "Profiel"
 
@@ -5300,11 +5298,12 @@ msgstr ""
 "verwijderen."
 
 #: plugins/admin/fai/headpage.tpl:29
+#: plugins/admin/applications/headpage.tpl:30
 msgid "Branches"
 msgstr "Aftakkingen"
 
 #: plugins/admin/fai/headpage.tpl:35
-#: plugins/admin/applications/headpage.tpl:35
+#: plugins/admin/applications/headpage.tpl:36
 msgid "Current release"
 msgstr "Huidige uitgave"
 
@@ -5706,7 +5705,7 @@ msgstr "U heeft geen toestemming om deze groep te verwijderen!"
 
 #: plugins/admin/groups/class_groupManagement.inc:441
 #: plugins/admin/users/class_userManagement.inc:767
-#: plugins/admin/applications/class_applicationManagement.inc:449
+#: plugins/admin/applications/class_applicationManagement.inc:460
 #: plugins/admin/ogroups/class_ogroupManagement.inc:431
 #, fuzzy
 msgid "Paste"
@@ -5714,7 +5713,7 @@ msgstr "Pad"
 
 #: plugins/admin/groups/class_groupManagement.inc:443
 #: plugins/admin/users/class_userManagement.inc:769
-#: plugins/admin/applications/class_applicationManagement.inc:451
+#: plugins/admin/applications/class_applicationManagement.inc:462
 #: plugins/admin/ogroups/class_ogroupManagement.inc:433
 #, fuzzy
 msgid "Can't paste"
@@ -5726,7 +5725,7 @@ msgstr "Nieuwe groep aanmaken"
 
 #: plugins/admin/groups/class_groupManagement.inc:465
 #: plugins/admin/users/class_userManagement.inc:795
-#: plugins/admin/applications/class_applicationManagement.inc:474
+#: plugins/admin/applications/class_applicationManagement.inc:485
 #: plugins/admin/ogroups/class_ogroupManagement.inc:460
 #, fuzzy
 msgid "cut"
@@ -5734,7 +5733,7 @@ msgstr "Commando"
 
 #: plugins/admin/groups/class_groupManagement.inc:465
 #: plugins/admin/users/class_userManagement.inc:795
-#: plugins/admin/applications/class_applicationManagement.inc:474
+#: plugins/admin/applications/class_applicationManagement.inc:485
 #: plugins/admin/ogroups/class_ogroupManagement.inc:460
 #, fuzzy
 msgid "Cut this entry"
@@ -5742,14 +5741,14 @@ msgstr "Bewerk deze invoer"
 
 #: plugins/admin/groups/class_groupManagement.inc:467
 #: plugins/admin/users/class_userManagement.inc:797
-#: plugins/admin/applications/class_applicationManagement.inc:476
+#: plugins/admin/applications/class_applicationManagement.inc:487
 #: plugins/admin/ogroups/class_ogroupManagement.inc:462
 msgid "copy"
 msgstr ""
 
 #: plugins/admin/groups/class_groupManagement.inc:467
 #: plugins/admin/users/class_userManagement.inc:797
-#: plugins/admin/applications/class_applicationManagement.inc:476
+#: plugins/admin/applications/class_applicationManagement.inc:487
 #: plugins/admin/ogroups/class_ogroupManagement.inc:462
 #, fuzzy
 msgid "Copy this entry"
@@ -5757,8 +5756,8 @@ msgstr "Bewerk deze invoer"
 
 #: plugins/admin/groups/class_groupManagement.inc:469
 #: plugins/admin/groups/class_groupManagement.inc:474
-#: plugins/admin/applications/class_applicationManagement.inc:478
-#: plugins/admin/applications/class_applicationManagement.inc:484
+#: plugins/admin/applications/class_applicationManagement.inc:489
+#: plugins/admin/applications/class_applicationManagement.inc:495
 #: plugins/admin/departments/class_departmentManagement.inc:310
 #: plugins/admin/ogroups/class_ogroupManagement.inc:464
 #: plugins/admin/ogroups/class_ogroupManagement.inc:469
@@ -5768,8 +5767,8 @@ msgstr "Bewerk deze invoer"
 
 #: plugins/admin/groups/class_groupManagement.inc:471
 #: plugins/admin/groups/class_groupManagement.inc:476
-#: plugins/admin/applications/class_applicationManagement.inc:480
-#: plugins/admin/applications/class_applicationManagement.inc:486
+#: plugins/admin/applications/class_applicationManagement.inc:491
+#: plugins/admin/applications/class_applicationManagement.inc:497
 #: plugins/admin/departments/class_departmentManagement.inc:311
 #: plugins/admin/ogroups/class_ogroupManagement.inc:466
 #: plugins/admin/ogroups/class_ogroupManagement.inc:471
@@ -5784,7 +5783,7 @@ msgid "Posix"
 msgstr "Posix"
 
 #: plugins/admin/groups/class_groupManagement.inc:508
-#: plugins/admin/applications/class_applicationManagement.inc:498
+#: plugins/admin/applications/class_applicationManagement.inc:509
 #: plugins/admin/ogroups/class_ogroupManagement.inc:584
 #: plugins/gofon/fonreports/contents.tpl:34
 #: plugins/generic/references/class_reference.inc:42
@@ -5796,7 +5795,7 @@ msgid "Groupname"
 msgstr "Groepnaam"
 
 #: plugins/admin/groups/class_groupManagement.inc:528
-#: plugins/admin/applications/class_applicationManagement.inc:512
+#: plugins/admin/applications/class_applicationManagement.inc:523
 #: plugins/admin/ogroups/class_ogroupManagement.inc:498
 msgid "This table displays all groups, in the selected tree."
 msgstr "Deze tabel geeft alle groepen binnen de geselecteerde tree weer"
@@ -5871,40 +5870,6 @@ msgstr ""
 #: plugins/admin/groups/class_groupGeneric.inc:759
 msgid "Value specified as 'Name' is already used."
 msgstr "De waarde die opgegeven is voor de naam wordt al gebruikt."
-
-#: plugins/admin/groups/class_groupGeneric.inc:824
-#, fuzzy
-msgid "Group settings"
-msgstr "Quota instellingen"
-
-#: plugins/admin/groups/class_groupGeneric.inc:828
-#: plugins/admin/groups/generic.tpl:7
-#: plugins/admin/ogroups/class_ogroup.inc:736
-#: plugins/admin/ogroups/generic.tpl:7
-msgid "Group name"
-msgstr "Groepnaam"
-
-#: plugins/admin/groups/class_groupGeneric.inc:833
-#: plugins/admin/groups/generic.tpl:9
-msgid "Posix name of the group"
-msgstr "POSIX naam van de groep"
-
-#: plugins/admin/groups/class_groupGeneric.inc:839
-#: plugins/admin/groups/generic.tpl:37
-msgid "Normally IDs are autogenerated, select to specify manually"
-msgstr ""
-"Normaliter worden IDs automatisch gegenereerd. Selecteer om handmatig te "
-"specificeren"
-
-#: plugins/admin/groups/class_groupGeneric.inc:841
-#: plugins/admin/groups/generic.tpl:37
-msgid "Force GID"
-msgstr "Forceer GID"
-
-#: plugins/admin/groups/class_groupGeneric.inc:846
-#: plugins/admin/groups/generic.tpl:39
-msgid "Forced ID number"
-msgstr "Geforceerd ID nummer"
 
 #: plugins/admin/groups/remove.tpl:6
 msgid ""
@@ -6079,6 +6044,16 @@ msgstr "Deze 'dn' bevat geen toegangsbeheer."
 msgid "All fields are writeable"
 msgstr "Alle velden zijn aanpasbaar"
 
+#: plugins/admin/groups/generic.tpl:7 plugins/admin/groups/paste_generic.tpl:5
+#: plugins/admin/ogroups/class_ogroup.inc:736
+#: plugins/admin/ogroups/generic.tpl:7
+msgid "Group name"
+msgstr "Groepnaam"
+
+#: plugins/admin/groups/generic.tpl:9 plugins/admin/groups/paste_generic.tpl:8
+msgid "Posix name of the group"
+msgstr "POSIX naam van de groep"
+
 #: plugins/admin/groups/generic.tpl:14 plugins/admin/ogroups/generic.tpl:14
 msgid "Descriptive text for this group"
 msgstr "Omschrijving voor deze groep"
@@ -6086,6 +6061,23 @@ msgstr "Omschrijving voor deze groep"
 #: plugins/admin/groups/generic.tpl:23 plugins/admin/ogroups/generic.tpl:23
 msgid "Choose subtree to place group in"
 msgstr "Selecteer de subtree waaronder deze groep geplaatst wordt"
+
+#: plugins/admin/groups/generic.tpl:37
+#: plugins/admin/groups/paste_generic.tpl:13
+msgid "Normally IDs are autogenerated, select to specify manually"
+msgstr ""
+"Normaliter worden IDs automatisch gegenereerd. Selecteer om handmatig te "
+"specificeren"
+
+#: plugins/admin/groups/generic.tpl:37
+#: plugins/admin/groups/paste_generic.tpl:15
+msgid "Force GID"
+msgstr "Forceer GID"
+
+#: plugins/admin/groups/generic.tpl:39
+#: plugins/admin/groups/paste_generic.tpl:18
+msgid "Forced ID number"
+msgstr "Geforceerd ID nummer"
 
 #: plugins/admin/groups/generic.tpl:46
 msgid "Select to create a samba conform group"
@@ -6195,6 +6187,11 @@ msgstr "Omlaag verplaatsen"
 msgid "Insert seperator"
 msgstr "Scheidingsteken invoegen"
 
+#: plugins/admin/groups/paste_generic.tpl:1
+#, fuzzy
+msgid "Group settings"
+msgstr "Quota instellingen"
+
 #: plugins/admin/users/password.tpl:2
 msgid ""
 "To change the user password use the fields below. The changes take effect "
@@ -6265,7 +6262,7 @@ msgstr "wachtwoord"
 #: ihtml/themes/altlinux/setup_useradmin.tpl:22
 #: ihtml/themes/altlinux/login.tpl:26 ihtml/themes/altlinux/login.tpl:30
 #: ihtml/themes/default/setup_useradmin.tpl:22
-#: ihtml/themes/default/login.tpl:26 ihtml/themes/default/login.tpl:30
+#: ihtml/themes/default/login.tpl:28 ihtml/themes/default/login.tpl:32
 msgid "Username"
 msgstr "Gebruikersnaam"
 
@@ -6455,8 +6452,8 @@ msgstr "Waarde '%s' die opgegeven is als optienaam is niet geldig."
 
 #: plugins/admin/applications/generic.tpl:7
 #: plugins/admin/applications/generic.tpl:8
-#: plugins/admin/applications/class_applicationGeneric.inc:375
-#: plugins/admin/applications/class_applicationManagement.inc:507
+#: plugins/admin/applications/class_applicationGeneric.inc:379
+#: plugins/admin/applications/class_applicationManagement.inc:518
 msgid "Application name"
 msgstr "Programmanaam"
 
@@ -6466,7 +6463,7 @@ msgid "Display name"
 msgstr "Getoonde naam"
 
 #: plugins/admin/applications/generic.tpl:13
-#: plugins/admin/applications/class_applicationGeneric.inc:380
+#: plugins/admin/applications/class_applicationGeneric.inc:384
 msgid "Application name to be displayed (i.e. below icons)"
 msgstr "Te tonen programma naam (bv. onder iconen)"
 
@@ -6533,16 +6530,11 @@ msgstr ""
 "bewerken of verwijderen. Indien u veel programma's heeft is het aan te raden "
 "de selectie mogelijkheden te gebruiken."
 
-#: plugins/admin/applications/headpage.tpl:29
-#, fuzzy
-msgid "Releases"
-msgstr "Distributie versie"
-
-#: plugins/admin/applications/headpage.tpl:54
+#: plugins/admin/applications/headpage.tpl:56
 msgid "Display applications matching"
 msgstr "Toon overeenkomende programma's"
 
-#: plugins/admin/applications/headpage.tpl:57
+#: plugins/admin/applications/headpage.tpl:59
 msgid "Regular expression for matching application names"
 msgstr "Reguliere expressie voor overeenkomende programma namen"
 
@@ -6559,52 +6551,52 @@ msgstr "geen voorbeeld"
 msgid "This 'dn' is no application."
 msgstr "Deze 'dn' is geen programma."
 
-#: plugins/admin/applications/class_applicationGeneric.inc:213
+#: plugins/admin/applications/class_applicationGeneric.inc:216
 msgid "The specified picture has not been uploaded correctly."
 msgstr "Het opgegeven plaatje is niet correct ge-upload"
 
-#: plugins/admin/applications/class_applicationGeneric.inc:294
+#: plugins/admin/applications/class_applicationGeneric.inc:298
 msgid "You have no permissions to create a application on this 'Base'."
 msgstr ""
 "U heeft geen toestemming een programma aan te maken onder deze 'Basis'."
 
-#: plugins/admin/applications/class_applicationGeneric.inc:299
+#: plugins/admin/applications/class_applicationGeneric.inc:303
 msgid "Required field 'Name' is not filled."
 msgstr "Vereiste veld 'Naam' is leeg."
 
-#: plugins/admin/applications/class_applicationGeneric.inc:303
+#: plugins/admin/applications/class_applicationGeneric.inc:307
 msgid "Invalid character in application name. Only a-z 0-9 are allowed."
 msgstr "Ongeldig karakter in programmanaam. Alleen a-Z 0-9 zijn toegestaan."
 
-#: plugins/admin/applications/class_applicationGeneric.inc:307
+#: plugins/admin/applications/class_applicationGeneric.inc:311
 msgid "Required field 'Execute' is not filled."
 msgstr "Vereist veld 'Uitvoeren' is leeg."
 
-#: plugins/admin/applications/class_applicationGeneric.inc:316
+#: plugins/admin/applications/class_applicationGeneric.inc:320
 msgid "There's already an application with this 'Name'."
 msgstr "Er is al een programma met deze 'Naam'."
 
-#: plugins/admin/applications/class_applicationGeneric.inc:371
+#: plugins/admin/applications/class_applicationGeneric.inc:375
 #, fuzzy
 msgid "Application settings"
 msgstr "Programma opties"
 
-#: plugins/admin/applications/class_applicationManagement.inc:363
+#: plugins/admin/applications/class_applicationManagement.inc:374
 #, php-format
 msgid "You're about to delete the application '%s'."
 msgstr "U staat op het punt de programma '%s' te verwijderen."
 
-#: plugins/admin/applications/class_applicationManagement.inc:369
-#: plugins/admin/applications/class_applicationManagement.inc:395
+#: plugins/admin/applications/class_applicationManagement.inc:380
+#: plugins/admin/applications/class_applicationManagement.inc:406
 msgid "You are not allowed to delete this application!"
 msgstr "U heeft geen toestemming dit programma te verwijderen"
 
-#: plugins/admin/applications/class_applicationManagement.inc:463
+#: plugins/admin/applications/class_applicationManagement.inc:474
 #: plugins/admin/ogroups/class_ogroupManagement.inc:448
 msgid "new"
 msgstr "nieuw"
 
-#: plugins/admin/applications/class_applicationManagement.inc:463
+#: plugins/admin/applications/class_applicationManagement.inc:474
 msgid "Create new application"
 msgstr "Nieuw programma aanmaken"
 
@@ -11749,27 +11741,27 @@ msgstr ""
 msgid "SID and/or RIDBASE missing in your configuration!"
 msgstr "SID en/of RIDBASE ontbreken in uw configuratie!"
 
-#: include/class_ldap.inc:407
+#: include/class_ldap.inc:406
 #, fuzzy, php-format
 msgid "Creating duplicate of %s in %s"
 msgstr "Gebruikerslijst van %s in %s "
 
-#: include/class_ldap.inc:410
+#: include/class_ldap.inc:409
 #, fuzzy
 msgid "Processing"
 msgstr "Processor"
 
-#: include/class_ldap.inc:505
+#: include/class_ldap.inc:515
 #, php-format
 msgid "Unknown FAIstate %s"
 msgstr "Onbekende FAI status %s"
 
-#: include/class_ldap.inc:547
+#: include/class_ldap.inc:558
 #, fuzzy
 msgid "Successfully finished"
 msgstr "Installatie beëindigd"
 
-#: include/class_ldap.inc:624
+#: include/class_ldap.inc:635
 #, php-format
 msgid ""
 "Autocreation of type '%s' is currently not supported. Please report to the "
@@ -11778,7 +11770,7 @@ msgstr ""
 "Automatische aanmaak van object type '%s' wordt momenteel niet ondersteund. "
 "Rapporteer dit a.u.b. aan het GOsa team."
 
-#: include/class_ldap.inc:886
+#: include/class_ldap.inc:897
 #, php-format
 msgid ""
 "This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
@@ -11787,12 +11779,12 @@ msgstr ""
 "Dit is geen geldige DN: '%s'. Een blok dat geïmporteerd wordt, dient te "
 "beginnen met 'dn: ...' op regel %s"
 
-#: include/class_ldap.inc:899
+#: include/class_ldap.inc:910
 #, php-format
 msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
 msgstr "De dn: '%s' (op regel %s) bestaat al in de LDAP database."
 
-#: include/class_ldap.inc:915
+#: include/class_ldap.inc:926
 #, php-format
 msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
 msgstr ""
@@ -12030,13 +12022,19 @@ msgstr "Geef a.u.b. uw wachtwoord op!"
 msgid "Please check the username/password combination."
 msgstr "Controleer a.u.b. de gebruikersnaam/wachtwoord combinatie."
 
-#: html/index.php:236 html/index.php:296
+#: html/index.php:237 html/index.php:301
 msgid "Session will not be encrypted."
 msgstr "De sessie zal niet versleuteld zijn."
 
-#: html/index.php:236 html/index.php:296
+#: html/index.php:237 html/index.php:301
 msgid "Enter SSL session"
 msgstr "Gebruik een SSL sessie"
+
+#: html/index.php:243
+msgid ""
+"Your browser has cookies disabled. Please enable cookies and reload this "
+"page before logging in!"
+msgstr ""
 
 #: html/helpviewer.php:116
 msgid "There is no helpfile specified for this class."
@@ -12199,15 +12197,15 @@ msgid "Please use your <i>username</i> and <i>password</i> to log in"
 msgstr "Voer uw <i>gebruikersnaam</i> en <i>wachtwoord</i> in"
 
 #: ihtml/themes/altlinux/login.tpl:44 ihtml/themes/altlinux/login.tpl:47
-#: ihtml/themes/default/login.tpl:44 ihtml/themes/default/login.tpl:47
+#: ihtml/themes/default/login.tpl:46 ihtml/themes/default/login.tpl:49
 msgid "Directory"
 msgstr "Directory"
 
-#: ihtml/themes/altlinux/login.tpl:55 ihtml/themes/default/login.tpl:55
+#: ihtml/themes/altlinux/login.tpl:55 ihtml/themes/default/login.tpl:57
 msgid "Sign in"
 msgstr "Inloggen"
 
-#: ihtml/themes/altlinux/login.tpl:56 ihtml/themes/default/login.tpl:56
+#: ihtml/themes/altlinux/login.tpl:56 ihtml/themes/default/login.tpl:58
 msgid "Click here to log in"
 msgstr "Klik hier om in te loggen"
 
@@ -12600,10 +12598,21 @@ msgstr "Opnieuw inloggen"
 msgid "Copy &amp; paste wizard"
 msgstr ""
 
-#: ihtml/themes/default/copyPasteDialog.tpl:16
+#: ihtml/themes/default/copyPasteDialog.tpl:4
+msgid ""
+"Some values need to be unique in the complete directory while some "
+"combinations make no sense. GOsa shows the relevant attributes. Please "
+"maintain the values below to fullfill the policies."
+msgstr ""
+
+#: ihtml/themes/default/copyPasteDialog.tpl:18
 #, fuzzy
 msgid "Operation complete"
 msgstr "onvolledig"
+
+#, fuzzy
+#~ msgid "Releases"
+#~ msgstr "Distributie versie"
 
 #~ msgid "No SMTP smarthost/relayhost set."
 #~ msgstr "Er is geen SMTP smarthost/relayhost ingesteld"
