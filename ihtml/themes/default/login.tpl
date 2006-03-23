@@ -20,20 +20,6 @@
 	     <!-- Display SSL warning message on demand -->
     <p class='gosaLoginWarning'> {$ssl} </p>
  
-    <!-- check, if cookies are enabled -->
-    <p class='gosaLoginWarning'>
-     <script language="JavaScript" type="text/javascript">
-        <!--
-            document.cookie = "gosatest=empty;path=/";
-            if (document.cookie.indexOf( "gosatest=") > -1 )
-                document.cookie = "gosatest=empty;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT";
-            else
-                document.write("{$cookies}");
-        -->
-     </script>
-    </p>
-
-
     <!-- Formular data, containing a table to center fields -->
     <form action='index.php' method='post' name='mainform' onSubmit='js_check(this);return true;'>
      <table summary="" style='vertical-align:middle; text-align:left;' cellspacing='7' align='center'>
@@ -78,6 +64,20 @@
 
     <!-- Display error message on demand -->
     <p class='gosaLoginWarning'> {$message} </p>
+    <!-- check, if cookies are enabled -->
+    <p class='gosaLoginWarning'>
+     <script language="JavaScript" type="text/javascript">
+        <!--
+            document.cookie = "gosatest=empty;path=/";
+            if (document.cookie.indexOf( "gosatest=") > -1 )
+                document.cookie = "gosatest=empty;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT";
+            else
+                document.write("{$cookies}");
+        -->
+     </script>
+    </p>
+
+
 
    </div>
   </td>

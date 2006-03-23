@@ -240,7 +240,7 @@ if ($ssl != "" && $config->data['MAIN']['WARNSSL'] == 'true'){
 }
 
 /* Translation of cookie-warning. Whether to display it, is determined by JavaScript */
-$smarty->assign ("cookies", "<b>"._("Warning").":</b> "._("Your Browser has cookies disabled. Please enable cookies and reload this page once, before you log in."));
+$smarty->assign ("cookies", "<b>"._("Warning").":</b> "._("Your browser has cookies disabled. Please enable cookies and reload this page before logging in!"));
 
 
 /* Generate server list */

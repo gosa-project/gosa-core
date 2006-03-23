@@ -9,9 +9,9 @@ Target for 2.4.1:
 * Check virenschleuder/Winstations in Admin->Systems 
 	LDAP-Fehler: Cannot modify object class (structural object class modification from 'person' to 'inetOrgPerson' not allowed)
 
-* Add glpi pictures (Monitor/HDD ...)
-
 * Test DNS plugin. Add some more checks 
+
+* Check application moving with release management (!)
 
 * Phone account is not removable if the mysql database is not reachable.
   This is no real problem, but I'd like to see the hint message for it.
