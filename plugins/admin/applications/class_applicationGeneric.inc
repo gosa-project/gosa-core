@@ -184,139 +184,143 @@ class application extends plugin
   /* Save data to object */
   function save_object()
   {
-	if (isset($_POST['cn'])){
+    if (isset($_POST['cn'])){
 
-		/* Save application flags */
-		$flag= "";
-		if (isset($_POST['exec_for_groupmembers']) && $_POST['exec_for_groupmembers'] == 1){
-			$flag.= "G";
-		}
-		if (isset($_POST['place_on_desktop']) && $_POST['place_on_desktop'] == 1){
-			$flag.= "D";
-		}
-		if (isset($_POST['place_on_kicker']) && $_POST['place_on_kicker'] == 1){
-			$flag.= "L";
-		}
-		if (isset($_POST['place_in_startmenu']) && $_POST['place_in_startmenu'] == 1){
-			$flag.= "M";
-		}
-		if (isset($_POST['overwrite_config']) && $_POST['overwrite_config'] == 1){
-			$flag.= "O";
-		}
-		if (chkacl ($this->acl, "gosaApplicationFlags") ==""){
-			$this->gosaApplicationFlags= "[$flag]";
-		}
+      /* Save attributes */
+      parent::save_object();
 
-		/* Check for picture upload */
-		if (isset($_FILES['picture_file']['name']) && $_FILES['picture_file']['name'] != ""){
-			if (!is_uploaded_file($_FILES['picture_file']['tmp_name'])) {
-				print_red (_("The specified picture has not been uploaded correctly."));
-			}
-	
-			if (!function_exists("imagick_blob2image")){
-				/* Get temporary file name for conversation */
-				$fname = tempnam ("/tmp", "GOsa");
+      /* Save application flags */
+      $flag= "";
+      if (isset($_POST['exec_for_groupmembers']) && $_POST['exec_for_groupmembers'] == 1){
+        $flag.= "G";
+      }
+      if (isset($_POST['place_on_desktop']) && $_POST['place_on_desktop'] == 1){
+        $flag.= "D";
+      }
+      if (isset($_POST['place_on_kicker']) && $_POST['place_on_kicker'] == 1){
+        $flag.= "L";
+      }
+      if (isset($_POST['place_in_startmenu']) && $_POST['place_in_startmenu'] == 1){
+        $flag.= "M";
+      }
+      if (isset($_POST['overwrite_config']) && $_POST['overwrite_config'] == 1){
+        $flag.= "O";
+      }
+      if (chkacl ($this->acl, "gosaApplicationFlags") ==""){
+        $this->gosaApplicationFlags= "[$flag]";
+      }
 
-				/* Open file and write out photoData */
-				$fp = fopen ($fname, "w");
-				fwrite ($fp, $_FILES['picture_file']['tmp_name']);
-				fclose ($fp);
+      /* Check for picture upload */
+      if (isset($_FILES['picture_file']['name']) && $_FILES['picture_file']['name'] != ""){
+        if (!is_uploaded_file($_FILES['picture_file']['tmp_name'])) {
+          print_red (_("The specified picture has not been uploaded correctly."));
+        }
+    
+        if (!function_exists("imagick_blob2image")){
+          /* Get temporary file name for conversation */
+          $fname = tempnam ("/tmp", "GOsa");
 
-				/* Build conversation query. Filename is generated automatically, so
-				   we do not need any special security checks. Exec command and save
-				   output. For PHP safe mode, you'll need a configuration which respects
-				   image magick as executable... */
-				$query= "convert -size 48x48 $fname -resize 48x48 +profile \"*\" -";
-				@DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $query, "Execute");
+          /* Open file and write out photoData */
+          $fp = fopen ($fname, "w");
+          fwrite ($fp, $_FILES['picture_file']['tmp_name']);
+          fclose ($fp);
 
-				/* Read data written by convert */
-				$output= "";
-				$sh= popen($query, 'r');
-				while (!feof($sh)){
-					$output.= fread($sh, 4096);
-				}
-				pclose($sh);
+          /* Build conversation query. Filename is generated automatically, so
+             we do not need any special security checks. Exec command and save
+             output. For PHP safe mode, you'll need a configuration which respects
+             image magick as executable... */
+          $query= "convert -size 48x48 $fname -resize 48x48 +profile \"*\" -";
+          @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $query, "Execute");
 
-				unlink($fname);	
-			} else {
+          /* Read data written by convert */
+          $output= "";
+          $sh= popen($query, 'r');
+          while (!feof($sh)){
+            $output.= fread($sh, 4096);
+          }
+          pclose($sh);
 
-				/* Load the new uploaded Photo */
-				if(!$handle  =  imagick_ReadImage($_FILES['picture_file']['tmp_name'])){
-				  gosa_log("Can't Load image");
-				}
+          unlink($fname);	
+        } else {
 
-				/* Resizing image to 147x200 and blur */
-				if(!imagick_resize($handle,48,48,IMAGICK_FILTER_GAUSSIAN,0)){
-				  gosa_log("imagick_resize failed");
-				}
+          /* Load the new uploaded Photo */
+          if(!$handle  =  imagick_ReadImage($_FILES['picture_file']['tmp_name'])){
+            gosa_log("Can't Load image");
+          }
 
-				/* Converting image to JPEG */
-				if(!imagick_convert($handle,"PNG")) {
-				  gosa_log("Can't Convert to PNG");
-				}
+          /* Resizing image to 147x200 and blur */
+          if(!imagick_resize($handle,48,48,IMAGICK_FILTER_GAUSSIAN,0)){
+            gosa_log("imagick_resize failed");
+          }
 
-				if(imagick_writeimage($handle,$_FILES['picture_file']['tmp_name'])){
-				  gosa_log("can't write to specified folder");
-				}
-				
-				imagick_free($handle);
-			}
+          /* Converting image to JPEG */
+          if(!imagick_convert($handle,"PNG")) {
+            gosa_log("Can't Convert to PNG");
+          }
 
-			/* Activate new picture */
-			$this->set_picture($_FILES['picture_file']['tmp_name']);
-			}	
+          if(imagick_writeimage($handle,$_FILES['picture_file']['tmp_name'])){
+            gosa_log("can't write to specified folder");
+          }
+          
+          imagick_free($handle);
+        }
+
+        /* Activate new picture */
+        $this->set_picture($_FILES['picture_file']['tmp_name']);
+        }	
 
 
-		/* Save base, since this is no LDAP attribute */
-		if (isset($_POST['base']) && chkacl($this->acl, "create") == ""){
-			$this->base= $_POST['base'];
-		}
-	}
+      /* Save base, since this is no LDAP attribute */
+      if (isset($_POST['base']) && chkacl($this->acl, "create") == ""){
+        $this->base= $_POST['base'];
+      }
+    }
+
   }
 
 
   /* Check values */
   function check()
   {
-	$message= array();
+    $message= array();
 
-	/* Permissions for that base? */
-	if ($this->base != ""){
-		$new_dn= "cn=".$this->cn.",ou=apps,".$this->base;
-	} else {
-		$new_dn= $this->dn;
-	}
+    /* Permissions for that base? */
+    if ($this->base != ""){
+      $new_dn= "cn=".$this->cn.",ou=apps,".$this->base;
+    } else {
+      $new_dn= $this->dn;
+    }
 
-	$ui= get_userinfo();
-	$acl= get_permissions ($new_dn, $ui->subtreeACL);
-	$acl= get_module_permission($acl, "application", $new_dn);
-	if (chkacl($acl, "create") != ""){
-		$message[]= _("You have no permissions to create a application on this 'Base'.");
-	}
+    $ui= get_userinfo();
+    $acl= get_permissions ($new_dn, $ui->subtreeACL);
+    $acl= get_module_permission($acl, "application", $new_dn);
+    if (chkacl($acl, "create") != ""){
+      $message[]= _("You have no permissions to create a application on this 'Base'.");
+    }
 
-	/* All required fields are set? */
-	if ($this->cn == ""){
-		$message[]= _("Required field 'Name' is not filled.");
-	}
+    /* All required fields are set? */
+    if ($this->cn == ""){
+      $message[]= _("Required field 'Name' is not filled.");
+    }
 
-	if(preg_match("/[^a-z0-9]/",$this->cn))	{
-		$message[]=_("Invalid character in application name. Only a-z 0-9 are allowed.");
-	}
+    if(preg_match("/[^a-z0-9]/",$this->cn))	{
+      $message[]=_("Invalid character in application name. Only a-z 0-9 are allowed.");
+    }
 
-	if ($this->gosaApplicationExecute == ""){
-		$message[]= _("Required field 'Execute' is not filled.");
-	}
+    if ($this->gosaApplicationExecute == ""){
+      $message[]= _("Required field 'Execute' is not filled.");
+    }
 
-	/* Check for existing application */
-	$ldap= $this->config->get_ldap_link();
-	$ldap->cd($this->config->current["BASE"]);
-	$ldap->search("(&(objectClass=gosaApplication)(cn=$this->cn))",array("cn"));
-	$ldap->fetch();
-	if ($ldap->count() != 0 && $this->dn == "new"){
-		$message[]= _("There's already an application with this 'Name'.");
-	}
+    /* Check for existing application */
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd($this->config->current["BASE"]);
+    $ldap->search("(&(objectClass=gosaApplication)(cn=$this->cn))",array("cn"));
+    $ldap->fetch();
+    if ($ldap->count() != 0 && $this->dn == "new"){
+      $message[]= _("There's already an application with this 'Name'.");
+    }
 
-	return $message;
+    return $message;
   }
 
 

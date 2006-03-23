@@ -301,6 +301,7 @@ class applicationManagement extends plugin
       if (count($message) == 0){
 
         /* Save data data to ldap */
+        $this->apptabs->set_release($this->Release);
         $this->apptabs->save();
         gosa_log ("Application object'".$this->dn."' has been saved");
 
