@@ -1180,62 +1180,13 @@ $ldap->modify ($this->attrs);
     }
   */
 
-    $str ="
-      <table width='100%'>
-        <tr>    
-          <td style='vertical-align:top;'>
-            <h2>"._("Posix settings")."</h2>
-            <table>
-              <tr>
-                <td>
-                  <label for=\"homeDirectory\">"._("Home directory")."</label>
-                </td>
-                <td>
-                  <input id=\"homeDirectory\" name=\"homeDirectory\" size=40 maxlength=120 value=\"".$this->homeDirectory."\">
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <input id=\"force_ids\" type=checkbox name=\"force_ids\" value=\"1\" ".$force_ids."} 
-                             onclick=\"changeState('uidNumber');changeState('gidNumber');\">
-                </td>
-                <td>
-                  <label for=\"force_ids\">
-                    "._("Force UID/GID")."
-                  </label>
-                </td>
-                    <td style=\"width:20px;\"></td>
-                    <td>
-                        <label for=\"uidNumber\">"._("UID")."</label>
-                    </td>
-                    <td>
-                        <input id=\"uidNumber\" name=\"uidNumber\" size=5 maxlength=5 {$forceMode} value=\"".$this->uidNumber."\">
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan=\"3\"></td>
-                    <td>
-                        <label for=\"gidNumber\">"._("GID")."</label>
-                    </td>
-                    <td>
-                        <input id=\"gidNumber\" name=\"gidNumber\" size=5 maxlength=5 {$forceMode} value=\"".$this->gidNumber."\">
-                    </td>
-                </tr>
-                <!--
-                <tr>
-                    <td>
-                    "._("Group membership")."
-                    </td>
-                    <td>
-                      <input type='submit' name='editGroupMembership' value='"._("Edit")."'>
-                    </td>
-                </tr>
-                -->
-            </table>
-          </td>
-        </tr>
-      </table>
-    ";
+    $smarty = get_smarty();
+    $smarty->assign("homeDirectory",$this->homeDirectory);
+    $smarty->assign("uidNumber",$this->uidNumber);
+    $smarty->assign("gidNumber",$this->gidNumber);
+    $smarty->assign("forceMode",$forceMode);
+    $smarty->assign("force_ids",$force_ids);
+    $str = $smarty->fetch(get_template_path("paste_generic.tpl",TRUE,dirname(__FILE__)));
     return($str);
   }
 
