@@ -344,10 +344,11 @@ class faiManagement extends plugin
 
         $ldap->cd($bb);
         $ldap->recursive_remove();
+        $ldap->cd(preg_replace('/,ou=fai,ou=configs,ou=systems,/', ',ou=apps,', $bb));
+        $ldap->recursive_remove();
         $faifilter['branch'] = "main";
 
         /* Post remove */
-                
         //  $this->lock_type is set from this->reload
         $this->lock_name   = $name;
         $this->lock_dn     = $bb;

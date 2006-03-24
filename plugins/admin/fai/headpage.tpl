@@ -44,11 +44,11 @@
 	  <td>
 	<input type="image" align="middle" value="branch" name="branch_branch" src="images/branch_small.png">
 	&nbsp;
-	{t}Create new branch using the current release{/t}
+	{t}Create new branch{/t}
 	<br>
 	<input type="image" align="middle" value="freeze" name="freeze_branch" src="images/closedlock.png">
 	&nbsp;
-	{t}Create a locked version of the current release{/t}
+	{t}Create new locked branch{/t}
 	{if $select_branch != "main"}
 	<br>
 	<input type="image" align="middle" value="delete" name="remove_branch" src="images/edittrash.png"> 
