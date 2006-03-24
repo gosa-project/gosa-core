@@ -43,7 +43,7 @@ class printgeneric extends plugin
   var $baseSelection    = false;
 
   /* attribute list for save action */
-  var $attributes     = array("cn", "description", "l", "labeledURI", "gotoPrinterPPD","gotoUserPrinter");
+  var $attributes     = array("cn", "description", "l", "labeledURI", "gotoPrinterPPD","gotoUserPrinter", "macAddress");
   var $objectclasses  = array("top", "gotoPrinter");
 
   function printgeneric ($config, $dn= NULL)
