@@ -86,8 +86,8 @@ class workgeneric extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
@@ -177,7 +177,7 @@ class workgeneric extends plugin
     $smarty->assign("actionACL", chkacl($this->acl, 'action'));
 
     /* Show main page */
-    $smarty->assign("netconfig", $this->netConfigDNS->execute());
+    #$smarty->assign("netconfig", $this->netConfigDNS->execute());
     return($smarty->fetch (get_template_path('workstation.tpl', TRUE)));
   }
 

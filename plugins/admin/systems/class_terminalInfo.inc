@@ -60,6 +60,7 @@ class terminfo extends plugin
   {
     /* Call parent execute */
     plugin::execute();
+    return;
 
     /* Do we represent a valid terminal? */
     if (!$this->is_account && $this->parent == NULL){
