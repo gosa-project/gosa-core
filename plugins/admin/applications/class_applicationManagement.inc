@@ -73,6 +73,7 @@ class applicationManagement extends plugin
 
     $appfilter = get_global("appfilter");
     $this->Releases = $this->getReleases($appfilter['depselect']);
+    asort($this->Releases);
     $this->Release  = $appfilter['release'];
   }
 
@@ -214,6 +215,7 @@ class applicationManagement extends plugin
     }
     
     $this->Releases = $this->getReleases($appfilter['depselect']);
+    asort($this->Releases);
     if(!isset($this->Releases[$this->Release])){
       $this->Release = key($this->Releases);
       $appfilter['release'] = $this->Release;
