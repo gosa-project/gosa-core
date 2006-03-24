@@ -403,14 +403,14 @@ class LDAP{
     
     if($is_first){
       echo "<font style='font-size:11px;'><h4>".
-              sprintf(_("Creating duplicate of %s in %s"),"<br><i>".$sourcedn."</i><br>","<br><i>".$destinationdn."</i><br>")."</h4>";
+              sprintf(_("Creating copy of %s"),"<i>".$sourcedn."</i>")."</h4>";
     }else{
       if(preg_match("/^ou=/",$sourcedn)){
-        echo "<br><h3>"._("Processing")." : ".preg_replace("/,.*$/","",$destinationdn)."</h3>";
+        echo "<br><h3>"._("Processing")." <i>$destinationdn</i></h3>";
       }else{
         $tmp = split(",",$sourcedn);
         
-        echo "<b>Current object : ";
+        echo "&nbsp;<b>"._("Object").": ";
         for($i = 0; $i < ($depth -1 ) ; $i ++) {
           echo preg_replace("/^.*=/","",$tmp[$i])." ";
         }
@@ -422,7 +422,7 @@ class LDAP{
           $deststr = substr($deststr,0,96)."...";
         }
 
-        echo "".$deststr."</br>";
+        echo $deststr."</br>";
       }
     }
     
@@ -449,7 +449,7 @@ class LDAP{
 
         /* Error while fetching object / attribute abort*/
         if((!$attr) || (count($attr)) ==0) {
-          echo "error while fetching source dn ..";
+          echo _("Error while fetching source dn - aborted!");
           return;
         }
   
@@ -462,7 +462,8 @@ class LDAP{
 
           /* If is first entry, append FAIbranch to department entry */
           if($is_first){
-            $attr= $this->fetch($this->cat($destinationdn));
+            $this->cat($destinationdn);
+            $attr= $this->fetch();
 
             /* Filter unneeded informations */
             foreach($attr as $key => $value){
@@ -484,14 +485,13 @@ class LDAP{
             $this->modify($attr);
           }
         }else{
-        /* If this is no department */
-          foreach($attr as $key => $value){
 
-            if(in_array($key ,array("FAItemplateFile","FAIscript"))){
-              $sr= ldap_read($this->cid, $this->fix($sourcedn), "(objectClass=FAIclass)", array($key));
+          /* If this is no department */
+          foreach($attr as $key => $value){
+            if(in_array($key ,array("FAItemplateFile","FAIscript", "gotoLogonScript", "gosaApplicationIcon"))){
+              $sr= ldap_read($this->cid, $this->fix($sourcedn), "$key=*", array($key));
               $ei= ldap_first_entry($this->cid, $sr);
-              $tmp = (@ldap_get_values_len($this->cid, $ei,$key));
-              if(is_array($tmp)){
+              if ($tmp= @ldap_get_values_len($this->cid, $ei,$key)){
                 $attr[$key] = $tmp;
               }
             }
@@ -518,7 +518,8 @@ class LDAP{
 
           /* Add entry */
           $this->cd($destinationdn);
-          $a = $this->fetch($this->cat($destinationdn));
+          $this->cat($destinationdn);
+          $a = $this->fetch();
           if(!count($a)){
             $this->add($attr);
           }
