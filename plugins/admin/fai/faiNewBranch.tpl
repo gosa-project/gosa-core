@@ -30,13 +30,11 @@
 </script>
 {else}
 
-<h2>{t}Processing requested operation, the status of this operation will be displayed in an iframe below.{/t}</h2>
-{t}As soon as the operation has finished, you can scroll down to end of the page and press the 'Back' button to return to the fai management dialog.{/t}
+<h2>{t}Processing the requested operation{/t}</h2>
+{t}As soon as the copy operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the fai management dialog.{/t}
 <br>
 <br>
-<p class='seperator'>&nbsp;</p>
-<br>
-<div>
+<div style="margin:3px;background-color:white; border:1px solid #A0A0A0">
 <iframe src="?plug={$plugID}&PerformBranch=1" width="100%" name="status" style="height:450px;background-color:#FFFFFF;">
 
 	<p>{t}Your browser doesn't support iframes, please use this link to perform the requested operation.{/t}

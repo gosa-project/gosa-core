@@ -90,9 +90,8 @@ class faiManagement extends plugin
 
 	function execute()
 	{
-
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     $_SESSION['LOCK_VARS_TO_USE'] = array("/^edit_entry$/","/^id$/","/^entry_edit_/","/^entry_delete_/");
 
@@ -420,9 +419,12 @@ class faiManagement extends plugin
         $baseToUse = $_SESSION['faifilter']['branch'];
       }
 
-
       $appsrc = preg_replace("/ou=fai,ou=configs,ou=systems,/","ou=apps,",$baseToUse); 
       $appdst = preg_replace("/ou=fai,ou=configs,ou=systems,/","ou=apps,","ou=".$name.",".$baseToUse) ; 
+
+      /* Print header to have styles included */
+      echo "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
+      echo "<body style='background-image:none;margin:3px;color:black'>";
 
       /* Duplicate applications 
        */
@@ -439,8 +441,11 @@ class faiManagement extends plugin
       $ldap->copy_FAI_resource_recursive($baseToUse,"ou=".$name.",".$baseToUse,$type,true);
 
       echo "<div style='width:100%;text-align:right;'><form name='form' method='post' action='?plug=".$_GET['plug']."' target='_parent'>
-              <input type='submit' name='back' value='"._("Back")."'>
+              <br><input type='submit' name='back' value='"._("Continue")."'>
             </form></div>";
+
+      /* Print footer to have valid html */
+      echo "</body></html>";
 
       $this->dispNewFreeze = false; 
 
@@ -632,14 +637,16 @@ class faiManagement extends plugin
 		$faihead = 
 			"<div style='background:#F0F0F9;padding:5px;'>&nbsp;".
 
-			"<input class='center' type='image' src='images/list_up.png' align='middle' 
-			title='"._("Go up one department")."' name='dep_back' alt='"._("Up"). "'>&nbsp;".
-
 			"<input class='center' type='image' src='images/list_root.png' align='middle' 
 			title='"._("Go to root department")."' name='dep_root' alt='".      _("Root")."'>&nbsp;".
 
+			"<input class='center' type='image' src='images/list_up.png' align='middle' 
+			title='"._("Go up one department")."' name='dep_back' alt='"._("Up"). "'>&nbsp;".
+
 			"<input class='center' type='image' src='images/list_home.png' align='middle' 
 			title='"._("Go to users home department")."' name='dep_home' alt='"._("Home")."'>&nbsp;".
+
+      " <input class='center' type='image' src='images/list_reload.png' align='middle' title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
 
 			"<img class='center' src=\"images/list_seperator.png\" alt=\"\" align=\"middle\" height=\"16\" width=\"1\">&nbsp;".
 			

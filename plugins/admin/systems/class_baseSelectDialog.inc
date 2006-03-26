@@ -22,12 +22,13 @@ class baseSelectDialog extends MultiSelectWindow
     $this->SetTitle("Base");
     $this->SetSummary(_("Choose a base"));
     $this->SetListHeader("<div style='background:#F0F0F9;padding:5px;'>".
-        " <input class='center' type='image' align='middle' src='images/list_back.png'
-        title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
         " <input class='center' type='image' src='images/list_root.png' align='middle'
         title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
+        " <input class='center' type='image' align='middle' src='images/list_back.png'
+        title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
         " <input class='center' type='image' align='middle' src='images/list_home.png'
         title='"._("Go to users department")."' alt='"._("Home")."' name='dep_home'>&nbsp;".
+        " <input class='center' type='image' src='images/list_reload.png' align='middle' title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
         "</div>");
 
     $this->SetInformation(_("Step in the prefered tree and click save to use the current subtree as base. Or click the image at the end of each entry."));

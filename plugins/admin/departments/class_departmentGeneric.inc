@@ -249,7 +249,7 @@ class department extends plugin
 	/* Move/Rename complete trees */
 	function recursive_move($src_dn, $dst_dn,$force = false)
 	{
-		if(! $force){
+		if(!$force){
 
 			$this->rec_cpy 	= true;
 			$this->rec_src	= $src_dn;
@@ -259,7 +259,7 @@ class department extends plugin
 
 			$smarty->assign("src","?plug=".$_GET['plug']."&PerformRecMove");
 
-			$display =  $smarty->fetch(get_template_path("recursive_moce.tpl",TRUE));
+			$display=  $smarty->fetch(get_template_path("recursive_move.tpl",TRUE));
 			return($display);
 			exit();
 		}else{
@@ -270,8 +270,12 @@ class department extends plugin
 			$src_dn = $this->rec_src;
 			$dst_dn = $this->rec_dst;
 
-			echo "<font style='font-size:11px;'><h4>".
-				sprintf(_("Moving %s in %s"),"<br><i>".$src_dn."</i><br>","<br><i>".$dst_dn."</i><br>")."</h4>";
+			/* Print header to have styles included */
+			$smarty= get_smarty();
+			echo "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
+			echo "<body style='background-image:none;margin:3px;color:black'>";
+
+			echo "<h3>".sprintf(_("Moving %s to %s"),"<i>".$src_dn."</i>","<i>".$dst_dn."</i>")."</h3>";
 
 
 			/* Check if the destination entry exists */
@@ -280,9 +284,9 @@ class department extends plugin
 			/* Check if destination exists - abort */
 			$ldap->cat($dst_dn);
 			if ($ldap->fetch()){
-				trigger_error("recursive_move $dst_dn already exists.",
+				trigger_error("Recursive_move $dst_dn already exists.",
 						E_USER_WARNING);
-				echo "recursive_move :$dst_dn already exists.<br>"; 
+				echo "Recursive_move :$dst_dn already exists.<br>"; 
 				return (FALSE);
 			}
 	
@@ -307,23 +311,30 @@ class department extends plugin
 				$dst= preg_replace("/".str_replace("\\","\\\\",$src_dn)."$/", "$dst_dn", $object);
 				$dst= str_replace($src_dn,$dst_dn,$object);
 
-				echo "Moving    <b>".$src."</b>  to  <b>".$dst."</b><br>";
+				echo "<b>"._("Object").":</b> $src<br>";
 				
 				if (!$this->copy($src, $dst)){
 					echo "<font color='#FF0000'><br>".sprintf(_("FAILED to copy %s, aborting operation"),$src)."</font>";
 					return (FALSE);
 				}
+
+				flush();
 			}
 
 			/* Remove src_dn */
 			$ldap->cd($src_dn);
-			
-			echo "<br><b>"._("Complete")."</b>";
-
 			$ldap->recursive_remove();
 			$this->rec_src = $this->rec_dst = "";
 			$this->rec_cpy =false;
-			echo "</font>";
+
+			echo '<p class="seperator">&nbsp;</p>';
+
+			echo "<div style='width:100%;text-align:right;'><form name='form' method='post' action='?plug=".$_GET['plug']."' target='_parent'>
+				<br><input type='submit' name='back' value='"._("Continue")."'>
+				</form></div>";
+
+			echo "</body></html>";
+			
 			return (TRUE);
 		}
 	}

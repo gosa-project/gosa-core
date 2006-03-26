@@ -229,7 +229,7 @@ class servDNSeditZoneEntries extends plugin
     /* Set title 
      */
     if($obj['Type'] == "Free"){   
-      $str = "<h3>".sprintf(_("Settings for free host entry # %s"),($obj_dn +1))." : </h3>";
+      $str = "<h3>".sprintf(_("Settings for host entry #%s"),($obj_dn +1))." : </h3>";
     }else{
       $str = "<h3>".sprintf(_("Settings for '%s'"),$obj_dn)." : </h3>";
     }
@@ -398,7 +398,7 @@ class servDNSeditZoneEntries extends plugin
 
         $ldap->search("(cn=".$cn.")",array("cn"));
         if($ldap->count()){
-          $message[] = sprintf(_("The name '%s' can't be used as free hand entry, the name is already used in this ldap tree."),$cn);
+          $message[] = sprintf(_("The name '%s' can't be used as host entry, the name is already used in this ldap tree."),$cn);
         }
       }
 

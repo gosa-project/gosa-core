@@ -4,16 +4,15 @@ Target for 2.4.1:
 * Speed up workstation loading
 
 * Create a status-bar/-display for FAI installations 
-	(Use notes from 0.5.12.2005)
+  (Use notes from 0.5.12.2005)
 
 * Add online help (english/german)
 
 * Check virenschleuder/Winstations in Admin->Systems 
-	LDAP-Fehler: Cannot modify object class (structural object class modification from 'person' to 'inetOrgPerson' not allowed)
+  LDAP-Error: Cannot modify object class (structural object class modification from 'person' to 'inetOrgPerson' not allowed)
 
 * Test DNS plugin. Add some more checks 
-
-* Check application moving with release management (!)
+  Fix slang! Woha - what are "free hand entries"?
 
 * Phone account is not removable if the mysql database is not reachable.
   This is no real problem, but I'd like to see the hint message for it.

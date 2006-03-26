@@ -402,29 +402,25 @@ class LDAP{
     error_reporting(E_ALL);
     
     if($is_first){
-      echo "<font style='font-size:11px;'><h4>".
-              sprintf(_("Creating copy of %s"),"<i>".$sourcedn."</i>")."</h4>";
+      echo "<h2>".sprintf(_("Creating copy of %s"),"<i>".$sourcedn."</i>")."</h2>";
     }else{
       if(preg_match("/^ou=/",$sourcedn)){
-        echo "<br><h3>"._("Processing")." <i>$destinationdn</i></h3>";
+        echo "<h3>"._("Processing")." <i>$destinationdn</i></h3>";
       }else{
         $tmp = split(",",$sourcedn);
         
-        echo "&nbsp;<b>"._("Object").": ";
-        for($i = 0; $i < ($depth -1 ) ; $i ++) {
-          echo preg_replace("/^.*=/","",$tmp[$i])." ";
-        }
-        echo "</b>";
-        echo ": <br>";
+        echo "&nbsp;<b>"._("Object").":</b> ";
 
         $deststr = $destinationdn;
         if(strlen($deststr) > 96){
           $deststr = substr($deststr,0,96)."...";
         }
 
-        echo $deststr."</br>";
+        echo $deststr."<br>";
       }
     }
+
+    flush();
     
     if($this->hascon){
       if ($this->reconnect) $this->connect();
@@ -556,7 +552,7 @@ class LDAP{
       }
     }
     if($is_first){
-      echo "<br><b>"._("Successfully finished")."</b></font><br><br><br>";
+      echo "<p class='seperator'>&nbsp;</p>";
     }
 
   }

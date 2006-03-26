@@ -84,7 +84,7 @@ if [ $error -eq 0 ]; then
   read -p "Do you want to erase the message.po.orig files? (y/n)" -n1 ans
 
   if [ "$ans" == "y" -o "$ans" == "Y" ]; then
-    find $ORIG -type f -name 'messages.po.orig' -exec rm -f {} \;
+    find $ORIG/ -type f -name 'messages.po.orig' -exec rm -f {} \;
   fi
 
 else
