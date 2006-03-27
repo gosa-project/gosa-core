@@ -39,11 +39,11 @@ chown root.$WEBGROUP -R /var/spool/gosa
 chmod 770 -R /var/spool/gosa
 
 # Add links for safe mode
-for link in /usr/bin/convert /usr/bin/lpstat; do
-	[ ! -e $link ] && continue
-	target=/usr/share/gosa/bin/${link##*/}
-	[ -L $target ] && continue
-	ln -sf $link $target
+for source in /usr/bin/convert /usr/bin/lpstat; do
+	if [ -e $source ]; then
+		target=/usr/share/gosa/bin/${source##*/}
+		[ ! -L $target ] && ln -sf $source $target
+	fi
 done
 
 # Finally restart servers
