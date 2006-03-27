@@ -177,7 +177,7 @@ class workgeneric extends plugin
     $smarty->assign("actionACL", chkacl($this->acl, 'action'));
 
     /* Show main page */
-    #$smarty->assign("netconfig", $this->netConfigDNS->execute());
+    $smarty->assign("netconfig", $this->netConfigDNS->execute());
     return($smarty->fetch (get_template_path('workstation.tpl', TRUE)));
   }
 
