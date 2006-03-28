@@ -692,7 +692,13 @@ I: Only insider delivery */
     $this->attrs['gosaMailForwardingAddress'] = $this->gosaMailForwardingAddress;
 
     /* Save shared folder target */
-    $this->attrs['gosaSharedFolderTarget']= "share+".$this->uid;
+    if(preg_match("/kolab/i",$this->mmethod)){
+      /* Kolab style */
+      $this->attrs['gosaSharedFolderTarget']= "kolab+shared.".$this->uid;
+    }else {
+      /* GOsa style */
+      $this->attrs['gosaSharedFolderTarget']= "share+".$this->uid;
+    }
 
     if(preg_match("/kolab/i",$this->mmethod)){
       /* Save acl's */
