@@ -53,7 +53,7 @@ class workstartup extends plugin
      */
     $ldap   = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(objectClass=FAIrepositoryServer)",array("FAIrepository"));
+    $ldap->search("(&(FAIrepository=*)(objectClass=FAIrepositoryServer))",array("FAIrepository"));
     
     /* attach all attributes with "index => cn" to avoid multiple entries */
     $ret = array();
@@ -86,6 +86,9 @@ class workstartup extends plugin
             $url      = $tmp[0];
            
             $test[$url]['RELEASE'][$release]['SECTIONS'] = $sections;
+    
+            /* Result will be cached
+             */
             $test[$url]['RELEASE'][$release]['PACKAGES'] = $this->getAvailablePakagesForThisRelease($release);
             $test[$url]['SERVER'] = $server;
 
@@ -151,13 +154,13 @@ class workstartup extends plugin
     /* Search all FAI objects */
     $ldap->search("(| (objectClass=FAIpackageList)(objectClass=FAItemplate)
                       (objectClass=FAIvariable)(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)
-                      (objectClass=FAIpartitionTable))",array("*"),true);
+                      (objectClass=FAIpartitionTable))",array("cn","objectClass","FAIdebianSection"),true);
     /* Sort all entries, and attach elementtype.
      * To be able to show the types in the listbox.
      */
     while($attr = $ldap->fetch()){
       $cn = $attr['cn'][0];
-      $tmp2[$cn]['REST'] = $attr;
+//      $tmp2[$cn]['REST'] = $attr;
       if(in_array('FAIpackageList',$attr['objectClass'])){
         $tmp2[$cn]['FAIpackageList']['obj']   = 'FAIpackageList'; 
         $tmp2[$cn]['FAIpackageList']['kzl']   = 'Pl';
@@ -254,7 +257,7 @@ class workstartup extends plugin
        */
       $ldap->search("(| (objectClass=FAIpackageList)(objectClass=FAItemplate)
         (objectClass=FAIvariable)(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)
-        (objectClass=FAIpartitionTable))",array("*"),true);
+        (objectClass=FAIpartitionTable))",array("cn"),true);
       /* Sort all entries, and attach elementtype.
        * To be able to show the types in the listbox.
        */
