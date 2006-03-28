@@ -15,14 +15,11 @@ class servDNSeditZoneEntries extends plugin
   var $Devices      = array();
   var $InitDevices  = array();
 
-  var $FreeHosts    = array();
-  var $InitFreeHosts= array();
-
   var $zoneName       = "";   // ZoneName of currently edited Zone
   var $reverseName    = "";   // ReverseZone of the currently edited Zone
- 
+
   var $RecordTypes= array();  // Possible record type. They will be set in contrucktor
-                              //  and some types will be added later  (cName/Ptr)
+  //  and some types will be added later  (cName/Ptr)
 
   function servDNSeditZoneEntries ($config, $dn= NULL,$zoneName,$reverseName,$RTypes)
   {
@@ -33,13 +30,13 @@ class servDNSeditZoneEntries extends plugin
     $this->zoneName     = $zoneName;
     $this->reverseName  = $reverseName;
     $this->RecordTypes  = $RTypes;
-  
+
     /* Add records types which are not allowed in zones 
      */
     $this->RecordTypes['cNAMERecord']  = "relativeDomainName";
     $this->RecordTypes['pTRRecord']    = "relativeDomainName";
     $this->RecordTypes['tXTRecord']    = "tXTRecord";
- 
+
     /* Get ldap connection 
      */
     $ldap = $this->config->get_ldap_link();
@@ -60,7 +57,7 @@ class servDNSeditZoneEntries extends plugin
         }
       }
     }
-   
+
     /* Add additional informations 
        to all catched objects ( ObjectInformations)
      */
@@ -70,23 +67,23 @@ class servDNSeditZoneEntries extends plugin
       $this->Devices[$dn]['OrigCn'] = $attrs['cn'][0];
     }
 
-    /* Add Free Hand  entries
-     * Free hand entries are entries which are not directly assigned
+    /* Add free entries
+     * Free entries are entries which are not directly assigned
      *  to an existing network object like a WS or a Terminal.
-     * They will be found in a subtree within this zone.
+     * They will be found in a subtrees within a zone.
      * For example : 
-     *  The object name is FreeHand1, 
+     *  The object name is free1, 
      *                                                             zoneName=test.de,cn=server ...
      *                                // ObjectContainer
-     *                                relativeDomainName=FreeHand1,zoneName=....
+     *                                relativeDomainName=Free1,zoneName=....
      * // Dns entry
-     * relativeDomainName=FreeHand1,  relativeDomainName=FreeHand1,zoneName=....
+     * relativeDomainName=Free1,  relativeDomainName=Free1,zoneName=....
      * // cName entry .... 
-     * relativeDomainName=terminal12, relativeDomainName=FreeHand1,zone...
+     * relativeDomainName=terminal12, relativeDomainName=Free1,zone...
      */
     $ldap->cd ("zoneName=".$this->zoneName.",".$this->dn);
     $ldap->ls ("(&(objectClass=dNSZone)(!(relativeDomainName=@)))","zoneName=".$this->zoneName.",".$this->dn,array("*"));
-   
+
     $GetSubInformations = array();
     while($attrs = $ldap->fetch()){
 
@@ -117,16 +114,16 @@ class servDNSeditZoneEntries extends plugin
 
       $GetSubInformations [] = $dn;
     }
-    
+
     /* Get sub informations 
        CName or pTR records are stored in a sub entry.
-    
-        // The base entry with aRecords/tXTrecords/....
-        relativeDomainName=Keks, relativeDomainName=Keks, zoneName=....
 
-        // And the sub entries like this one
-        relativeDomainName=10.2.64.in-addr.arpa, relativeDomainName=Keks, zoneName =...
-        (  They can't be stored in a single entry, so i decided to store them this way  ).
+    // The base entry with aRecords/tXTrecords/....
+    relativeDomainName=Keks, relativeDomainName=Keks, zoneName=....
+
+    // And the sub entries like this one
+    relativeDomainName=10.2.64.in-addr.arpa, relativeDomainName=Keks, zoneName =...
+    (  They can't be stored in a single entry, so i decided to store them this way  ).
      */ 
     foreach($GetSubInformations as $dn){
       $ldap->ls("(&(objectClass=dNSZone)(!(relativeDomainName=@)))",$dn,array("*"));
@@ -139,20 +136,20 @@ class servDNSeditZoneEntries extends plugin
         }
       } 
     }
-    
+
     $this->Devices;
     $this->InitDevices = $this->Devices;
   }
 
   function execute()
   {
-	  plugin::execute();
+    plugin::execute();
 
     /* Check posts for operations ...  
      */
     $once = true;
     foreach($_POST as $name => $value){
-    
+
       /* Add a new Record in given object  
        */
       if((preg_match("/^AddRecord_/",$name)) && ($once)){
@@ -160,14 +157,14 @@ class servDNSeditZoneEntries extends plugin
         $tmp    = preg_replace("/^AddRecord_/","",$name);
         $tmp    = preg_replace("/_.*$/","",$tmp);
         $tmp2   = split("\|",$tmp);
-      
+
         $dn     = base64_decode($tmp2[0]);
         $record = $tmp2[1];
         $numrec = $tmp2[2];        
-     
+
         $this->Devices[$dn]['RECORDS'][$record][] = ""; 
       }
-      
+
       /* Remove record from given dn
        */
       if((preg_match("/^RemoveRecord_/",$name)) && ($once)){
@@ -175,13 +172,13 @@ class servDNSeditZoneEntries extends plugin
         $tmp    = preg_replace("/^RemoveRecord_/","",$name);
         $tmp    = preg_replace("/_.*$/","",$tmp);
         $tmp2   = split("\|",$tmp);
-      
+
         $dn     = base64_decode($tmp2[0]);
         $record = $tmp2[1];
         $numrec = $tmp2[2];        
-     
-         unset($this->Devices[$dn]['RECORDS'][$record][$numrec]); 
-  
+
+        unset($this->Devices[$dn]['RECORDS'][$record][$numrec]); 
+
         if(count($this->Devices[$dn]['RECORDS'][$record]) == 0){
           unset($this->Devices[$dn]['RECORDS'][$record]);
           if(count($this->Devices[$dn]['RECORDS']) ==0){
@@ -190,8 +187,8 @@ class servDNSeditZoneEntries extends plugin
         }
 
       }
-    
-      /* Don't know how i should implement this ...
+
+      /* Add new host entry
        */
       if((preg_match("/^UserRecord_/",$name)) && ($once)){
         $once = false;
@@ -215,7 +212,7 @@ class servDNSeditZoneEntries extends plugin
     $display.= $smarty->fetch(get_template_path('servDNSeditZoneEntries.tpl', TRUE));
     return($display);
   }
-  
+
 
   /* Create html table out of given entry 
    */
@@ -233,7 +230,7 @@ class servDNSeditZoneEntries extends plugin
     }else{
       $str = "<h3>".sprintf(_("Settings for '%s'"),$obj_dn)." : </h3>";
     }
-    
+
     $hostNameOnce = true;
     /* Walk through all defined records 
      */
@@ -250,33 +247,33 @@ class servDNSeditZoneEntries extends plugin
 
         $str .= "<tr>
           <td style='width:80px;'>";
-          
+
         if($hostNameOnce){
           $hostNameOnce = false;  
           $str .="<input type='text' name='RenameHost_".$name."' value='".$objectName."'>";
         }else{
           $str .=$objectName;
         }  
-      
+
         $str .="
           </td>
           <td style='width:80px;'>
-            ".$this->createRecordTypeSelection($id,$name)."
+          ".$this->createRecordTypeSelection($id,$name)."
           </td>
           <td>
-            <input type='text'  value='".$type."' name='ValueSelection_".$name."' style='width:250px;'>
+          <input type='text'  value='".$type."' name='ValueSelection_".$name."' style='width:250px;'>
           </td>
           <td style='width:30px;text-align:right;'>
-            <input type='image' name='AddRecord_".$name."'   src='images/crossref.png' alt='"._("Add")."' title='"._("Add")."'>
+          <input type='image' name='AddRecord_".$name."'   src='images/crossref.png' alt='"._("Add")."' title='"._("Add")."'>
           </td>
           <td style='width:60px;text-align:right;'>
-            <input type='image' name='UserRecord_".$name."'   src='images/select_default.png' alt='"._("New")."' title='"._("New")."'>
-            <input type='image' name='RemoveRecord_".$name."' src='images/edittrash.png'      alt='"._("Remove")."' title='"._("Remove")."'>
+          <input type='image' name='UserRecord_".$name."'   src='images/select_default.png' alt='"._("New")."' title='"._("New")."'>
+          <input type='image' name='RemoveRecord_".$name."' src='images/edittrash.png'      alt='"._("Remove")."' title='"._("Remove")."'>
           </td>
-         </tr>";
+          </tr>";
       }
     }
-      $str .="</table>";
+    $str .="</table>";
     return($str); 
   }
 
@@ -345,7 +342,7 @@ class servDNSeditZoneEntries extends plugin
               $n2 = strtolower($dev['OBJECT']['cn'][0]);
               $tmp[$n2] = $n2;
             }
-    
+
             if(!isset($tmp[strtolower($value)])){
               $this->Devices[$dn]['OBJECT']['cn'][0] = $value;
             }
@@ -384,13 +381,14 @@ class servDNSeditZoneEntries extends plugin
   function check()
   {
     $message= array();
- 
+
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
- 
+
+    $names = array();
     foreach($this->Devices as $devDN => $device){
 
-      /* check: if given name for Free Hand entry is valid.
+      /* check: if given name for host entry is valid.
        * cn exists ? invalid characters ? ...
        */
       if($device['Type'] == "Free"){
@@ -406,7 +404,6 @@ class servDNSeditZoneEntries extends plugin
        */
       if(!is_uid($device['OBJECT']['cn'][0])){
         $message[] = sprintf(_("Entry name '%s' contains invalid characters."), $device['OBJECT']['cn'][0]);
-
       }      
 
       /* Check if we have renamed the server, hich we are currently editing.
@@ -415,7 +412,7 @@ class servDNSeditZoneEntries extends plugin
       if(strcmp($devDN,$this->dn) ==0 ){  
         $new = $device['OBJECT']['cn'][0];
         $old = $this->InitDevices[$devDN]['OBJECT']['cn'][0];
-     
+
         if($new != $old){
           $message[] = sprintf(_("Can't rename the server '%s' to '%s', the server contains this zone."),$old,$new); 
         }
@@ -431,10 +428,24 @@ class servDNSeditZoneEntries extends plugin
         if($ldap->count()){
           $message[] = sprintf(_("Can't rename '%s' to '%s',the destination name already exists."),$device['OrigCn'],$cn);
         }
-    
+
         if(!is_uid($cn)){
           $message[] = sprintf(_("Can't rename '%s' to '%s',the destination name contains invalid characters."),$device['OrigCn'],$cn);
         }      
+      }
+
+      /* Check names 
+       */
+      if(!isset($names[$device['OBJECT']['cn'][0]])){
+        $names[$device['OBJECT']['cn'][0]] = "";
+      }else{
+        $message[] = sprintf(_("The name '%s' is used more than once."),$device['OBJECT']['cn'][0]);
+      }
+
+      /* Names should be written in lowercase
+       */
+      if(strtolower($device['OBJECT']['cn'][0]) != $device['OBJECT']['cn'][0]){
+        $message[] = sprintf(_("The host name '%s' should be written in lowercase."), $device['OBJECT']['cn'][0]);
       }
 
       /* Check records
@@ -443,7 +454,7 @@ class servDNSeditZoneEntries extends plugin
 
       $tmp2 = array();
       foreach($device['RECORDS'] as $type => $entries){
-   
+
         /* Check for multiple use of unique record types
          */
         if((in_array($type,$singleEntries)) && (count($entries) > 1)){
@@ -451,7 +462,7 @@ class servDNSeditZoneEntries extends plugin
         }
 
         /* Check for empty / duplicate entries in record array 
-        */
+         */
         $tmp = array();
         foreach($entries as $entry){
 
@@ -478,7 +489,7 @@ class servDNSeditZoneEntries extends plugin
   {
     /* Set all initial records to array()
        This means they will be removed from the entry
-        if they won't be overwritten
+       if they won't be overwritten
      */
     foreach($this->InitDevices as $dn => $obj){
       $attrs[$dn]= array();
@@ -534,9 +545,9 @@ class servDNSeditZoneEntries extends plugin
         echo $key;
       }
     }
-   
+
     /* Rename entries 
-        !! Terminals / WS / etc will be renamed too
+       !! Terminals / WS / etc will be renamed too
      */
     foreach($tmp['rename'] as $old => $new){
       $ldap->cat($old);
@@ -592,7 +603,7 @@ class servDNSeditZoneEntries extends plugin
       if($obj != NULL){  
 
         /*  Both type must be handled different 
-         *  Free / Exists 
+         *  free / Exists 
          */
         if($obj["Type"] == "Free"){
           $objectName = $obj['OBJECT']['cn'][0];
@@ -600,8 +611,8 @@ class servDNSeditZoneEntries extends plugin
           $objectName = $obj['OrigCn'];
         }
 
-      
-        /* If type is Free, check 
+
+        /* If type is free, check 
          */
         if($obj['Type'] == "Free"){
 
@@ -655,7 +666,7 @@ class servDNSeditZoneEntries extends plugin
             if($obj['Type'] == "Free"){
               $useDn = $dn2;
             }
-             
+
             if(isset($this->InitDevices[$useDn]['RECORDS']['cNAMERecord'])){
               foreach($this->InitDevices[$useDn]['RECORDS']['cNAMERecord'] as $warmal){
                 $delete['relativeDomainName='.$warmal.','.$useDn] = "";
@@ -674,7 +685,7 @@ class servDNSeditZoneEntries extends plugin
           /* Special handling for ptrrecord
            */ 
           if($type == "pTRRecord"){
-          
+
             $useDn = $dn;
             if($obj['Type'] == "Free"){
               $useDn = $dn2;

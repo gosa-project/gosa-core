@@ -12,10 +12,6 @@ Target for 2.4.1:
   LDAP-Error: Cannot modify object class (structural object class modification from 'person' to 'inetOrgPerson' not allowed)
 
 * Test DNS plugin. Add some more checks 
-  Fix slang! Woha - what are "free hand entries"?
-
-* Phone account is not removable if the mysql database is not reachable.
-  This is no real problem, but I'd like to see the hint message for it.
 
 * Enhance the export xls to export the whole three with a maximum of attributes in each sheet ( OpenSides )
 

@@ -1022,7 +1022,8 @@ $ldap->modify ($this->attrs);
 
     if(array_key_exists('config', $_SESSION) &&
        array_key_exists('SERVERS', $_SESSION['config']->data) &&
-       array_key_exists('FON', $_SESSION['config']->data['SERVERS'])) {
+       array_key_exists('FON', $_SESSION['config']->data['SERVERS']) &&
+        is_callable("mysql_pconnect")) {
       // Get Configuration for Mysql database Server
       $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
       $s_parameter  ="";
@@ -1078,6 +1079,9 @@ $ldap->modify ($this->attrs);
           return false;
         }
       }
+    }else{
+      print_red(_("Can't remove phone account, the mysql extension is not present in php configuration."));
+      return false;
     }
 
     /* unset macro attr, it will cause an error */
@@ -1099,6 +1103,7 @@ $ldap->modify ($this->attrs);
       $this->attrs['telephoneNumber']= array();
     }
 
+
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
     $ldap->search("(objectClass=goFonQueue)", array("member"));
@@ -1119,6 +1124,7 @@ $ldap->modify ($this->attrs);
 
     /* Optionally execute a command after we're done */
     @mysql_close($r_con);
+    echo "was successfull";
     $this->handle_post_events('remove');
   }
 

@@ -142,7 +142,7 @@ class group extends plugin
     $gufilter= get_global('gufilter');
 
     $gufilter['SubSearchGroup'] = false;
-    $gufilter['dselect'] = $_SESSION['groupfilter']['depselect'];  
+    $gufilter['dselect'] = $_SESSION['gufilter']['dselect'];  
 
     register_global('gufilter',$gufilter);
   
