@@ -602,7 +602,9 @@ class workstartup extends plugin
     $str = "";
     $tmp = split("\/",$release);
     $tmp = array_reverse($tmp);
-    
+
+    $base = ",ou=fai,";   
+ 
     $arr = array("scripts","hooks","disk","variables","templates","profiles","packages");
 
     foreach($tmp as $departmentname){
@@ -611,7 +613,7 @@ class workstartup extends plugin
     }
     $ret = array();
     foreach($arr as $ar){
-      $ret[] = ",ou=".$ar.$str;
+      $ret[] = ",ou=".$ar.$str.$base;
     }
     return($ret);
   }
