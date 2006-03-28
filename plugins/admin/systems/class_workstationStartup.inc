@@ -53,13 +53,63 @@ class workstartup extends plugin
      */
     $ldap   = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(&(FAIrepository=*)(objectClass=FAIrepositoryServer))",array("FAIrepository"));
     
-    /* attach all attributes with "index => cn" to avoid multiple entries */
-    $ret = array();
-    $rels = array();
     $_SESSION['getAvailableClassesForThisRelease_CACHE'] = array();
     $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'] = array();
+
+    /* Search all FAI objects */
+    $ldap->search("(|(objectClass=FAIpackageList)(objectClass=FAItemplate)(objectClass=FAIvariable)(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)(objectClass=FAIpartitionTable))",array("cn","objectClass","FAIdebianSection"));
+    /* Sort all entries, and attach elementtype.
+     * To be able to show the types in the listbox.
+     */
+    while($attr = $ldap->fetch()){
+      $cn = $attr['cn'][0];
+    
+      $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'][] = $attr;
+ 
+      if(in_array('FAIpackageList',$attr['objectClass'])){
+        $tmp2[$cn]['FAIpackageList']['obj']   = 'FAIpackageList'; 
+        $tmp2[$cn]['FAIpackageList']['kzl']   = 'Pl';
+        $tmp2[$cn]['FAIpackageList']['sec']   = $attr['FAIdebianSection'];
+        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+      }
+      if(in_array('FAItemplate',$attr['objectClass'])){
+        $tmp2[$cn]['FAItemplate']['obj']      = 'FAItemplate'; 
+        $tmp2[$cn]['FAItemplate']['kzl']      = 'T'; 
+        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+      }
+      if(in_array('FAIvariable',$attr['objectClass'])){
+        $tmp2[$cn]['FAIvariable']['obj']      = 'FAIvariable'; 
+        $tmp2[$cn]['FAIvariable']['kzl']      = 'V'; 
+        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+      }
+      if(in_array('FAIscript',$attr['objectClass'])){
+        $tmp2[$cn]['FAIscript']['obj']        = 'FAIscript'; 
+        $tmp2[$cn]['FAIscript']['kzl']        = 'S'; 
+        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+      }
+      if(in_array('FAIhook',$attr['objectClass'])){
+        $tmp2[$cn]['FAIhook']['obj']          = 'FAIhook'; 
+        $tmp2[$cn]['FAIhook']['kzl']          = 'H'; 
+        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+      }
+      if(in_array('FAIpartitionTable',$attr['objectClass'])){
+        $tmp2[$cn]['FAIpartitionTable']['obj']= 'FAIpartitionTable'; 
+        $tmp2[$cn]['FAIpartitionTable']['kzl']= 'Pt'; 
+        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+      }
+      if(in_array('FAIprofile',$attr['objectClass'])){
+        $tmp2[$cn]['FAIprofile']['obj']= 'FAIprofile'; 
+        $tmp2[$cn]['FAIprofile']['kzl']= 'P'; 
+        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+      }
+    }
+    if(is_array($this->FAIclasses)){
+      natcasesort($this->FAIclasses);
+    }
+
+    $this->FAIclassInfo = $tmp2;
+
 
     /* Build up an array like this one :
         [$url]['SERVER'] = 'srv1-002';
@@ -71,6 +121,7 @@ class workstartup extends plugin
                                            ['PACKAGES'][1] "postfix";
      */
 
+    $ldap->search("(&(FAIrepository=*)(objectClass=FAIrepositoryServer))",array("FAIrepository"));
     $test = array();
     while($attr = $ldap->fetch()){
       if(isset($attr['FAIrepository'])){
@@ -149,59 +200,6 @@ class workstartup extends plugin
     $this->gotoAvailableShares= $config->getShareList(false);
     $tmp2 = array();
   
-    $ldap   = $this->config->get_ldap_link();
-    $ldap->cd($this->config->current['BASE']);
-
-    /* Search all FAI objects */
-    $ldap->search("(|(objectClass=FAIpackageList)(objectClass=FAItemplate)(objectClass=FAIvariable)(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)(objectClass=FAIpartitionTable))",array("cn","objectClass","FAIdebianSection"));
-    /* Sort all entries, and attach elementtype.
-     * To be able to show the types in the listbox.
-     */
-    while($attr = $ldap->fetch()){
-      $cn = $attr['cn'][0];
-      if(in_array('FAIpackageList',$attr['objectClass'])){
-        $tmp2[$cn]['FAIpackageList']['obj']   = 'FAIpackageList'; 
-        $tmp2[$cn]['FAIpackageList']['kzl']   = 'Pl';
-        $tmp2[$cn]['FAIpackageList']['sec']   = $attr['FAIdebianSection'];
-        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
-      }
-      if(in_array('FAItemplate',$attr['objectClass'])){
-        $tmp2[$cn]['FAItemplate']['obj']      = 'FAItemplate'; 
-        $tmp2[$cn]['FAItemplate']['kzl']      = 'T'; 
-        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
-      }
-      if(in_array('FAIvariable',$attr['objectClass'])){
-        $tmp2[$cn]['FAIvariable']['obj']      = 'FAIvariable'; 
-        $tmp2[$cn]['FAIvariable']['kzl']      = 'V'; 
-        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
-      }
-      if(in_array('FAIscript',$attr['objectClass'])){
-        $tmp2[$cn]['FAIscript']['obj']        = 'FAIscript'; 
-        $tmp2[$cn]['FAIscript']['kzl']        = 'S'; 
-        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
-      }
-      if(in_array('FAIhook',$attr['objectClass'])){
-        $tmp2[$cn]['FAIhook']['obj']          = 'FAIhook'; 
-        $tmp2[$cn]['FAIhook']['kzl']          = 'H'; 
-        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
-      }
-      if(in_array('FAIpartitionTable',$attr['objectClass'])){
-        $tmp2[$cn]['FAIpartitionTable']['obj']= 'FAIpartitionTable'; 
-        $tmp2[$cn]['FAIpartitionTable']['kzl']= 'Pt'; 
-        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
-      }
-      if(in_array('FAIprofile',$attr['objectClass'])){
-        $tmp2[$cn]['FAIprofile']['obj']= 'FAIprofile'; 
-        $tmp2[$cn]['FAIprofile']['kzl']= 'P'; 
-        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
-      }
-    }
-    if(is_array($this->FAIclasses)){
-      natcasesort($this->FAIclasses);
-    }
-
-    $this->FAIclassInfo = $tmp2;
-
     if((isset($this->FAIclass))&&(!is_array($this->FAIclass))){
       $tmp = array();
       $tmp = split(" ",$this->FAIclass);
