@@ -1124,7 +1124,6 @@ $ldap->modify ($this->attrs);
 
     /* Optionally execute a command after we're done */
     @mysql_close($r_con);
-    echo "was successfull";
     $this->handle_post_events('remove');
   }
 
