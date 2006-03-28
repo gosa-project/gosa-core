@@ -58,8 +58,8 @@ class workstartup extends plugin
     /* attach all attributes with "index => cn" to avoid multiple entries */
     $ret = array();
     $rels = array();
-    $_SESSION['getAvailablePakagesForThisRelease_CACHE'] = array();
-    $_SESSION['getAvailablePakagesForThisRelease_CACHED_CLASSES'] = array();
+    $_SESSION['getAvailableClassesForThisRelease_CACHE'] = array();
+    $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'] = array();
 
     /* Build up an array like this one :
         [$url]['SERVER'] = 'srv1-002';
@@ -70,6 +70,7 @@ class workstartup extends plugin
                                            ['PACKAGES'][0] "pkg1";
                                            ['PACKAGES'][1] "postfix";
      */
+
     $test = array();
     while($attr = $ldap->fetch()){
       if(isset($attr['FAIrepository'])){
@@ -89,13 +90,13 @@ class workstartup extends plugin
     
             /* Result will be cached
              */
-            $test[$url]['RELEASE'][$release]['PACKAGES'] = $this->getAvailablePakagesForThisRelease($release);
+            $test[$url]['RELEASE'][$release]['PACKAGES'] = $this->getAvailableClassesForThisRelease($release);
             $test[$url]['SERVER'] = $server;
 
             /* auto gets all releases/classes 
              */
             $test['auto']['RELEASE'][$release]['SECTION'] = $sections;
-            $test['auto']['RELEASE'][$release]['PACKAGES'] = $this->getAvailablePakagesForThisRelease($release);
+            $test['auto']['RELEASE'][$release]['PACKAGES'] = $this->getAvailableClassesForThisRelease($release);
           }
         }
       }
@@ -152,15 +153,12 @@ class workstartup extends plugin
     $ldap->cd($this->config->current['BASE']);
 
     /* Search all FAI objects */
-    $ldap->search("(| (objectClass=FAIpackageList)(objectClass=FAItemplate)
-                      (objectClass=FAIvariable)(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)
-                      (objectClass=FAIpartitionTable))",array("cn","objectClass","FAIdebianSection"),true);
+    $ldap->search("(|(objectClass=FAIpackageList)(objectClass=FAItemplate)(objectClass=FAIvariable)(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)(objectClass=FAIpartitionTable))",array("cn","objectClass","FAIdebianSection"));
     /* Sort all entries, and attach elementtype.
      * To be able to show the types in the listbox.
      */
     while($attr = $ldap->fetch()){
       $cn = $attr['cn'][0];
-//      $tmp2[$cn]['REST'] = $attr;
       if(in_array('FAIpackageList',$attr['objectClass'])){
         $tmp2[$cn]['FAIpackageList']['obj']   = 'FAIpackageList'; 
         $tmp2[$cn]['FAIpackageList']['kzl']   = 'Pl';
@@ -224,7 +222,6 @@ class workstartup extends plugin
     }
 
     $this->orig_dn= $this->dn;
-    
   }
 
   
@@ -233,20 +230,20 @@ class workstartup extends plugin
    *    Server / Release combination ... 
    *   (Release specifies which classes are available) 
    */
-  function getAvailablePakagesForThisRelease($release)
+  function getAvailableClassesForThisRelease($release)
   {
     /* There could be more than one server providing this release,
         so use cached result if available
      */ 
-    if(isset($_SESSION['getAvailablePakagesForThisRelease_CACHE'][$release]))  {
-      return($_SESSION['getAvailablePakagesForThisRelease_CACHE'][$release]);
+    if(isset($_SESSION['getAvailableClassesForThisRelease_CACHE'][$release]))  {
+      return($_SESSION['getAvailableClassesForThisRelease_CACHE'][$release]);
     }
 
     /* Create cache with all classes 
      */
-    if((!isset($_SESSION['getAvailablePakagesForThisRelease_CACHED_CLASSES'])) ||
-       (!is_array($_SESSION['getAvailablePakagesForThisRelease_CACHED_CLASSES'])) ||
-       (count($_SESSION['getAvailablePakagesForThisRelease_CACHED_CLASSES'] ==0 ))){
+    if((!isset($_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'])) ||
+       (!is_array($_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'])) ||
+       (count($_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES']) ==0 )){
 
       /* Get ldap connection */
       $ldap   = $this->config->get_ldap_link();
@@ -255,14 +252,12 @@ class workstartup extends plugin
       /* Get possible classes ... 
          This would be faste with some kind of caching ... 
        */
-      $ldap->search("(| (objectClass=FAIpackageList)(objectClass=FAItemplate)
-        (objectClass=FAIvariable)(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)
-        (objectClass=FAIpartitionTable))",array("cn"),true);
+      $ldap->search("(|(objectClass=FAIpackageList)(objectClass=FAItemplate)(objectClass=FAIvariable)(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)(objectClass=FAIpartitionTable))",array("cn"),true);
       /* Sort all entries, and attach elementtype.
        * To be able to show the types in the listbox.
        */
       while($attr = $ldap->fetch()){
-        $_SESSION['getAvailablePakagesForThisRelease_CACHED_CLASSES'][] = $attr;
+        $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'][] = $attr;
       }  
     }
 
@@ -279,16 +274,17 @@ class workstartup extends plugin
      */
     $tmp2 = $this->generateDNSyn($release)     ; 
     $test2 = array();
-    foreach($_SESSION['getAvailablePakagesForThisRelease_CACHED_CLASSES'] as $attr){  
+    foreach($_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'] as $attr){  
       foreach($tmp2 as $dns){
         if(preg_match("/".$dns."/",$attr['dn'])){
           $test2[$attr['cn'][0]] = $attr['cn'][0];
         }
       }
     }
-    $_SESSION['getAvailablePakagesForThisRelease_CACHE'][$release] = $test2;
+    $_SESSION['getAvailableClassesForThisRelease_CACHE'][$release] = $test2;
     return($test2);
   }
+
 
   /*  Create array to display available classes/profiles in a selectbox 
    *   This function only displays the available classes.
