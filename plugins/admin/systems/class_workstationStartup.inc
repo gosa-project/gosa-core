@@ -534,9 +534,6 @@ class workstartup extends plugin
 
     $SelectBoxLdapServer = new divSelectBox("LdapServer");
     $SelectBoxLdapServer->SetHeight(80);
-    $tmp[] = "server2:o=testersrv,dc=de";
-    $tmp[] = "server3:o=testersrv2,dc=de";
-    $tmp[] = "server4:o=testersrv2,dc=de";
     foreach($tmp as $server){
 
       $use ="";
