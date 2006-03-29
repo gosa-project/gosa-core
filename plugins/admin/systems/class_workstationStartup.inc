@@ -483,6 +483,7 @@ class workstartup extends plugin
 
     /* Show main page */
     $smarty= get_smarty();
+    $smarty->assign("SelectBoxLdapServer","");
 
     /* In this section server shares will be defined
      * A user can select one of the given shares and a mount point
@@ -518,8 +519,41 @@ class workstartup extends plugin
     $smarty->assign("gotoShareKeys",array_flip($this->printOutAssignedShares()));
 
     /* Arrays */
-    $smarty->assign("ldapservers", $this->config->data['SERVERS']['LDAP']);
+
+    $tmp = $this->config->data['SERVERS']['LDAP'];
+    $smarty->assign("ldapserverKeys", $tmp);
+
+//    foreach($tmp as $key => $server){
+//      if(strlen($server)> 51){
+//        $tmp[$key] = substr($server,0,48)."...";
+//      }
+//    }
+    $smarty->assign("ldapservers", $tmp);
     $smarty->assign("gotoLdapServer_select", $this->gotoLdapServer);
+
+
+    $SelectBoxLdapServer = new divSelectBox("LdapServer");
+    $SelectBoxLdapServer->SetHeight(80);
+    $tmp[] = "server2:o=testersrv,dc=de";
+    $tmp[] = "server3:o=testersrv2,dc=de";
+    $tmp[] = "server4:o=testersrv2,dc=de";
+    foreach($tmp as $server){
+
+      $use ="";
+      if($this->gotoLdapServer == $server) {
+        $use = " checked ";
+      };
+
+      $SelectBoxLdapServer->AddEntry(
+          array(
+            array("string"=>$server),
+            array("string"=>"<input type='radio' name='gotoLdapServer' value='".$server."' ".$use.">",
+                  "attach"=>"style='border-right:0px;'")
+            ));
+    }    
+
+    $smarty->assign("SelectBoxLdapServer",$SelectBoxLdapServer->DrawList());
+
     $smarty->assign("gotoLdapServerACL", chkacl($this->acl, "gotoLdapServer"));
     foreach (array("gotoModules", "gotoAutoFs", "gotoFilesystem") as $val){
       $smarty->assign("$val", $this->$val);
