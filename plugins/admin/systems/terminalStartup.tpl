@@ -5,12 +5,8 @@
 
    <table summary="">
     <tr>
-     <td><LABEL for="gotoLdapServer">{t}LDAP server{/t}</LABEL></td>
-     <td>
-      <select name="gotoLdapServer" id="gotoLdapServer" title="{t}Choose LDAP server to use for accounts and terminal management{/t}" {$gotoLdapServerACL}>
-       {html_options values=$ldapservers output=$ldapservers selected=$gotoLdapServer_select}
-	   <option disabled>&nbsp;</option>
-      </select>
+     <td colspan="2" style='vertical-align:top;padding-top:3px;'><LABEL for="gotoLdapServer">{t}LDAP server{/t}</LABEL>
+		{$SelectBoxLdapServer}
      </td>
     </tr>
     <tr>

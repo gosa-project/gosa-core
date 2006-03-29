@@ -151,12 +151,43 @@ class termstartup extends plugin
     $smarty->assign("gotoShares",$this->printOutAssignedShares());
     $smarty->assign("gotoShareKeys",array_flip($this->printOutAssignedShares()));
 
-
-
     /* Arrays */
-    $smarty->assign("ldapservers", $this->config->data['SERVERS']['LDAP']);
-    $smarty->assign("gotoLdapServer_select", $this->gotoLdapServer);
-    $smarty->assign("gotoLdapServerACL", chkacl($this->acl, "gotoLdapServer"));
+    $tmp = $this->config->data['SERVERS']['LDAP'];
+
+    /* Create divSelectBox for ldap server selection
+     */
+    $SelectBoxLdapServer = new divSelectBox("LdapServer");
+    $SelectBoxLdapServer->SetHeight(80);
+
+    /* Set first entry as selected, if $this->gotoLdapServer is empty
+     *  or given entry is no longer available ...
+     */
+    $found = false;
+    foreach($tmp as $server){
+      if($this->gotoLdapServer==$server){
+        $found = true;
+      }
+    }
+    
+    /* Add Entries
+     */
+    foreach($tmp as $server){
+      $use ="";
+      if(($this->gotoLdapServer == $server) || ($found == false)) {
+        $found = true;
+        $use = " checked ";
+      };
+
+      $SelectBoxLdapServer->AddEntry(
+          array(
+            array("string"=>$server),
+            array("string"=>"<input type='radio' name='gotoLdapServer' value='".$server."' ".$use.">",
+                  "attach"=>"style='border-right:0px;'")
+            ));
+    }
+
+    $smarty->assign("SelectBoxLdapServer",$SelectBoxLdapServer->DrawList());
+
     $smarty->assign("gotoShareACL", chkacl($this->acl, "gotoShareACL"));
     foreach (array("gotoModules" ) as $val){
       $smarty->assign("$val", $this->$val);
