@@ -267,7 +267,7 @@ class phoneAccount extends plugin
 
     $s_ip           = NULL;                   // Contains ip for Sip entry
     $s_host         = NULL;                   // Contains host for Sip entry
-    $s_qualify      = NULL;                   // Qualify entry
+    $s_qualify      = "yes";                  // Qualify entry
     $s_pin          = NULL;                   // Entry for secret
     $s_type         = NULL;                   // Entry for phone type (friend , peer ..)
 
@@ -284,7 +284,7 @@ class phoneAccount extends plugin
     $b_first_deleted= false;  // Only delete first entry, 
     $s_telenums     = "";     // for each value variable
 
-    $i_is_accounted =false;   // Ensure that extension entry, for name to number is only once in table
+    $i_is_accounted = false;  // Ensure that extension entry, for name to number is only once in table
 
 
     // Connect to DB server
