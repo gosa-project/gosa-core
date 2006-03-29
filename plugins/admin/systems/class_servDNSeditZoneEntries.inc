@@ -21,6 +21,9 @@ class servDNSeditZoneEntries extends plugin
   var $RecordTypes= array();  // Possible record type. They will be set in contrucktor
   //  and some types will be added later  (cName/Ptr)
 
+
+  var $disableDialog = false; // Dialog will be disabled, if this zone is new 
+
   function servDNSeditZoneEntries ($config, $dn= NULL,$zoneName,$reverseName,$RTypes)
   {
     plugin::plugin ($config, $dn);
@@ -46,6 +49,7 @@ class servDNSeditZoneEntries extends plugin
      * Workstations / Terminals
      */
     $res = $ldap->search("(&(objectClass=dNSZone)(|(zoneName=".$zoneName.")(zoneName=".$reverseName.".in-addr.arpa))(!(relativeDomainName=@)))");
+    $this->disableDialog = false;
     while($attrs = $ldap->fetch($res)){
       if(preg_match("/zoneName=/",$attrs['dn'])) continue;
       foreach($this->RecordTypes as $atr => $val){
@@ -57,9 +61,18 @@ class servDNSeditZoneEntries extends plugin
         }
       }
     }
+   
+    /* Check if this zone exists 
+     */ 
+    $res = $ldap->search("(&(objectClass=dNSZone)(relativeDomainName=@)(|(zoneName=".$zoneName.")(zoneName=".$reverseName.".in-addr.arpa)))",
+        array("zoneName"));
+    if($ldap->count()){
+    }else{
+      $this->disableDialog = true;
+    }
 
     /* Add additional informations 
-       to all catched objects ( ObjectInformations)
+       to all caught objects ( ObjectInformations)
      */
     foreach($this->Devices as $dn => $Recs){
       $attrs = $ldap->fetch($ldap->cat($dn,array("objectClass","cn")));
@@ -86,8 +99,6 @@ class servDNSeditZoneEntries extends plugin
 
     $GetSubInformations = array();
     while($attrs = $ldap->fetch()){
-
-      unset($attrs[$val]['count']);
 
       $dn = $attrs['dn'];
 
@@ -208,6 +219,8 @@ class servDNSeditZoneEntries extends plugin
       $table .= $this->generateRecordConfigurationRow($key);
     }
 
+
+    $smarty->assign("disableDialog",$this->disableDialog);
     $smarty->assign("table",$table);;
     $display.= $smarty->fetch(get_template_path('servDNSeditZoneEntries.tpl', TRUE));
     return($display);
@@ -263,11 +276,8 @@ class servDNSeditZoneEntries extends plugin
           <td>
           <input type='text'  value='".$type."' name='ValueSelection_".$name."' style='width:250px;'>
           </td>
-          <td style='width:30px;text-align:right;'>
+          <td style='width:50px;text-align:right;'>
           <input type='image' name='AddRecord_".$name."'   src='images/crossref.png' alt='"._("Add")."' title='"._("Add")."'>
-          </td>
-          <td style='width:60px;text-align:right;'>
-          <input type='image' name='UserRecord_".$name."'   src='images/select_default.png' alt='"._("New")."' title='"._("New")."'>
           <input type='image' name='RemoveRecord_".$name."' src='images/edittrash.png'      alt='"._("Remove")."' title='"._("Remove")."'>
           </td>
           </tr>";
@@ -487,6 +497,9 @@ class servDNSeditZoneEntries extends plugin
 
   function save()
   {
+  
+    if($this->disableDialog) return;
+
     /* Set all initial records to array()
        This means they will be removed from the entry
        if they won't be overwritten

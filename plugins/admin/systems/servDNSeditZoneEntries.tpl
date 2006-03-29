@@ -3,8 +3,16 @@
 <br>
 <br>
 <p class="seperator">&nbsp;</p>
-
-{$table}	
+{if $disableDialog}
+	<br><b>
+	{t}This dialog can't be used until the currently edited zone was saved or the zone entry exists in the ldap database.{/t}
+	</b>
+{else}
+	{t}To add a new host entry just click here{/t}
+	<input type='image' name='UserRecord_Free' src='images/select_default.png' alt='{t}New{/t}' title='{t}New{/t}'>
+	<br>
+	{$table}	
+{/if}
 
 <p class="seperator">&nbsp;</p>
 <div style="text-algin:right;" align="right">
