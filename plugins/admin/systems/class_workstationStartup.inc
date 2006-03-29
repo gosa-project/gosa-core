@@ -519,25 +519,29 @@ class workstartup extends plugin
     $smarty->assign("gotoShareKeys",array_flip($this->printOutAssignedShares()));
 
     /* Arrays */
-
     $tmp = $this->config->data['SERVERS']['LDAP'];
-    $smarty->assign("ldapserverKeys", $tmp);
 
-//    foreach($tmp as $key => $server){
-//      if(strlen($server)> 51){
-//        $tmp[$key] = substr($server,0,48)."...";
-//      }
-//    }
-    $smarty->assign("ldapservers", $tmp);
-    $smarty->assign("gotoLdapServer_select", $this->gotoLdapServer);
-
-
+    /* Create divSelectBox for ldap server selection
+     */
     $SelectBoxLdapServer = new divSelectBox("LdapServer");
     $SelectBoxLdapServer->SetHeight(80);
-    foreach($tmp as $server){
 
+    /* Set first entry as selected, if $this->gotoLdapServer is empty
+     *  or given entry is no longer available ... 
+     */
+    $found = false;
+    foreach($tmp as $server){
+      if($this->gotoLdapServer==$server){
+        $found = true;
+      }
+    }
+
+    /* Add Entries 
+     */
+    foreach($tmp as $server){
       $use ="";
-      if($this->gotoLdapServer == $server) {
+      if(($this->gotoLdapServer == $server) || ($found == false)) {
+        $found = true;
         $use = " checked ";
       };
 
