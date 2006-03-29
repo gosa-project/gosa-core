@@ -508,7 +508,7 @@ $ldap->modify ($this->attrs);
     $ret = array();
     $ldap = $this->config->get_ldap_link();
     $ldap-> cd ($this->config->current['BASE']);
-    $ldap->search("(&(objectClass=dNSZone)(sOARecord=*))",array("*"));
+    $ldap->search("(&(objectClass=dNSZone)(sOARecord=*))",array("zoneName","tXTRecord"));
     
     while($at = $ldap->fetch()){
       if(preg_match("/\.in\-addr\.arpa/",$at['zoneName'][0])){
