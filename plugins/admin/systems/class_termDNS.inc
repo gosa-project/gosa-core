@@ -364,10 +364,11 @@ class termDNS extends plugin
     /* Create diff and follow instructions 
      * If Account was disabled, remove account by setting exists to false
      */
-    if((!$this->DNS_is_account)&&($this->DNSinitially_was_account)){
+    if((!$this->DNS_is_account)&&($this->DNSinitially_was_account)){  
       $this->dnsEntry['exists'] = false;
       $tmp = getDNSHostEntriesDiff($this->config,$this->OrigCn,$this->dnsEntry,$this->cn);
     }else{
+      $this->dnsEntry['exists'] = $this->DNS_is_account;
       $tmp = getDNSHostEntriesDiff($this->config,$this->OrigCn,$this->dnsEntry,$this->cn);
     }   
 
@@ -400,7 +401,7 @@ class termDNS extends plugin
     /* Display errors 
      */
     if($ldap->get_error() != "Success"){
-      show_ldap_error($ldap->get_error()); 
+      show_ldap_error("Record:".$ldap->get_error()); 
     }
   }
 

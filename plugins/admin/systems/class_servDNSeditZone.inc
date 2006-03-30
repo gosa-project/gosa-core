@@ -13,13 +13,11 @@ class servdnseditZone extends plugin
       "sOAprimary","sOAmail","sOAserial","sOArefresh","sOAretry","sOAexpire","sOAttl"); 
   var $objectclasses  = array("whatever");
 
-  var $RecordTypes = array();
+  var $RecordTypes              = array();
 
   var $ReverseZone              = "";
-  var $ReverseDN                = "";
   var $zoneName                 = "";
   var $dNSClass                 = "IN";
-  var $status                   = "new";
 
   var $sOAprimary               = "";
   var $sOAmail                  = "";
@@ -32,34 +30,45 @@ class servdnseditZone extends plugin
   var $Records                  = array();
   var $mXRecords                = array();
 
-  var $InitiallyZoneName        = "";
-  var $InitiallyReverseZone     = "";
-  var $isNew                    = true;
+  var $OldZoneName              = ""; // To detect changes made with this edit
+  var $OldReverseZone           = "";
+
+  var $InitialReverseZone       = "";
+  var $InitialzoneName          = "";
 
   var $dialog                   = false;
 
-  function servdnseditZone ($config, $dn= NULL,$recordtypes,$attrs = array())
+  var $isNew                    = true;
+
+  function servdnseditZone ($config, $dn= NULL,$attrs = array())
   {
     plugin::plugin ($config, $dn);
 
     /* All types with required attrs */
-    $this->RecordTypes = $recordtypes; 
+    $this->RecordTypes = getDnsRecordTypes(true); 
 
     if(!count($attrs)){
-      $this->InitiallyZoneName      = "";
-      $this->InitiallyReverseZone   = "";
-      $this->isNew                  = true;
-      $this->sOAserial = date("Ymd")."1";
+      $this->OldZoneName        = "";
+      $this->OldReverseZone     = "";
+      $this->isNew              = true;
+      $this->sOAserial          = date("Ymd")."1";
+      
+      $this->InitialzoneName    = "";//$attrs['InitialzoneName'];
+      $this->InitialReverseZone = "";//$attrs['InitialReverseZone'];
     }else{
-      $this->InitiallyZoneName      = $attrs['zoneName'];
-      $this->InitiallyReverseZone   = $attrs['ReverseZone'];
+      $this->OldZoneName        = $attrs['zoneName'];
+      $this->OldReverseZone     = $attrs['ReverseZone'];
+
+      $this->InitialzoneName    = $attrs['InitialzoneName'];
+      $this->InitialReverseZone = $attrs['InitialReverseZone'];
+
       $this->isNew                  = false;
 
       foreach($this->attributes as $value){
         $this->$value = $attrs[$value];
       }
-      if(isset($attrs['Records'])){
-        $this->Records = $attrs['Records']; 
+      if(isset($attrs['RECORDS'])){
+        $this->Records = $attrs['RECORDS']; 
 
         $tmp2 = array();
         $usedPrio = array();
@@ -169,7 +178,7 @@ class servdnseditZone extends plugin
     /* Open Zone Entry Edit Dialog
      */
     if(isset($_POST['EditZoneEntries'])){
-      $this->dialog= new servDNSeditZoneEntries($this->config,$this->dn,$this->InitiallyZoneName,$this->FlipIp($this->InitiallyReverseZone),$this->RecordTypes);
+      $this->dialog= new servDNSeditZoneEntries($this->config,$this->dn,$this->InitialzoneName,$this->FlipIp($this->InitialReverseZone));
     }
 
     /* Save Zone Entry Edit Dialog
@@ -239,7 +248,7 @@ class servdnseditZone extends plugin
     }
 
     if((isset($_POST['AddMXRecord'])) && (!empty($_POST['StrMXRecord']))){
-      $this->mXRecords[] = array("type"=>"mXRecord","inittype"=>"","value"=>trim($_POST['StrMXRecord']),"status"=>"new");      
+      $this->mXRecords[] = array("type"=>"mXRecord","value"=>trim($_POST['StrMXRecord']));      
     }
 
     /* Handle Post events */
@@ -250,17 +259,13 @@ class servdnseditZone extends plugin
       if((preg_match("/RemoveRecord_/",$name))&&($once)){
         $once = false;
         $id= preg_replace("/RemoveRecord_/","",$name);
-        if($this->Records[$id]['status']!= "new"){
-          $this->Records[$id]['status']= "deleted";
-        }else{
-          unset($this->Records[$id]);
-        }
+        unset($this->Records[$id]);
       }
     }
 
     /* Add new Zonerecord */
     if(isset($_POST['AddNewRecord'])){
-      $this->Records[] = array("type"=>"aRecord","inittype"=>"","value"=>"","status"=>"new");
+      $this->Records[] = array("type"=>"aRecord","value"=>"");
     }
 
     /* Fill in values */
@@ -331,11 +336,11 @@ class servdnseditZone extends plugin
     $message= array();
     /* Check if zoneName is already in use */
     $usedZones = $this->getUsedZoneNames();
-    if(($this->isNew == true)||($this->zoneName  != $this->InitiallyZoneName)||($this->ReverseZone != $this->InitiallyReverseZone)){
-      if((isset($usedZones[$this->zoneName]))&&($this->zoneName  != $this->InitiallyZoneName)){
+    if(($this->isNew == true)||($this->zoneName  != $this->InitialzoneName)||($this->ReverseZone != $this->InitialReverseZone)){
+      if((isset($usedZones[$this->zoneName]))&&($this->zoneName  != $this->InitialzoneName)){
         $message[] =_("This zoneName is already in use");
       }
-      if((in_array($this->ReverseZone,$usedZones))&&($this->ReverseZone != $this->InitiallyReverseZone)){
+      if((in_array($this->ReverseZone,$usedZones))&&($this->ReverseZone != $this->InitialReverseZone)){
         $message[] =_("This reverse zone is already in use");
       }
     }
@@ -440,7 +445,10 @@ class servdnseditZone extends plugin
       $this->Records [] = $rec;
     }
 
-    $ret['Records'] = $this->Records; 
+    $ret['RECORDS'] = $this->Records; 
+
+    $ret['InitialReverseZone']=  $this->InitialReverseZone;
+    $ret['InitialzoneName']   =  $this->InitialzoneName;
 
     return($ret);
   }
@@ -460,8 +468,6 @@ class servdnseditZone extends plugin
 
       if($entry['type'] == "mXRecord") continue;
       
-      if($entry['status'] == "deleted") continue;
-
       $changeStateForRecords.= "changeState('RecordTypeSelectedFor_".$key."');\n";
       $changeStateForRecords.= "changeState('RecordValue_".$key."');\n";
       $changeStateForRecords.= "changeState('RemoveRecord_".$key."');\n";
