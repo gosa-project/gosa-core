@@ -178,7 +178,7 @@ class servdnseditZone extends plugin
     /* Open Zone Entry Edit Dialog
      */
     if(isset($_POST['EditZoneEntries'])){
-      $this->dialog= new servDNSeditZoneEntries($this->config,$this->dn,$this->InitialzoneName,$this->FlipIp($this->InitialReverseZone));
+      $this->dialog= new servDNSeditZoneEntries($this->config,$this->dn,$this->InitialzoneName,FlipIp($this->InitialReverseZone));
     }
 
     /* Save Zone Entry Edit Dialog
@@ -405,7 +405,7 @@ class servdnseditZone extends plugin
       if(preg_match("/in-addr\.arpa/",$attr['zoneName'][0])){
         if(isset($attr['tXTRecord'][0])){
           $zn = preg_replace("/zoneName\=/","",$attr['tXTRecord'][0]);
-          $ret[$zn] = $this->FlipIp(preg_replace("/\.in-addr\.arpa/","",$attr['zoneName'][0]));
+          $ret[$zn] =FlipIp(preg_replace("/\.in-addr\.arpa/","",$attr['zoneName'][0]));
         }
       }else{
         $ret[$attr['zoneName'][0]]="";
@@ -413,22 +413,6 @@ class servdnseditZone extends plugin
     }
     return($ret);
   }
-
-  /* this is used to flip the ip address for example
-      12.3.45  ->  54.3.12
-     Because some entries (like zones) are store like that 54.3.12.in-addr.arpa
-      but we want to display 12.3.45.
-  */
-  function FlipIp($ip)
-  {
-    $tmp = array_reverse(split("\.",$ip));
-    $new = "";
-    foreach($tmp as $section){
-      $new .= $section.".";
-    }
-    return(preg_replace("/.$/","",$new));
-  }
-
 
   /* Save to LDAP */
   function save()
