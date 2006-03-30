@@ -28,18 +28,305 @@ $RecordTypes['sSHFPRecord']   = "sSHFPRecord";
 $RecordTypes['rRSIGRecord']   = "rRSIGRecord";      
 $RecordTypes['nSECRecord']    = "nSECRecord";       
 
-
-function getDnsRecordTypes()
+/* Return all record types 
+ */
+function getDnsRecordTypes($ForZones = false)
 {
   global $RecordTypes;
-  return($RecordTypes);
+  if($ForZones){
+    $tmp = $RecordTypes;
+    unset($tmp['cNAMERecord']);
+    unset($tmp['pTRRecord']);
+    unset($tmp['tXTRecord']);
+    return($tmp);
+  }else{
+    return($RecordTypes);
+  }
 }
 
 
-/* This function returns (if exists) the dns-host eintries for given 
+/* this is used to flip the ip address for example
+   12.3.45  ->  54.3.12
+   Because some entries (like zones) are store like that 54.3.12.in-addr.arpa
+   but we want to display 12.3.45.
+ */
+function FlipIp($ip)
+{
+  $tmp = array_reverse(split("\.",$ip));
+  $new = "";
+  foreach($tmp as $section){
+    $new .= $section.".";
+  }
+  return(preg_replace("/.$/","",$new));
+}
+
+
+/* This function returns the zones specified for given host
+ */
+function getDNSZoneEntries($config,$HostDn,$silent = false)
+{
+
+  global $RecordTypes;
+ 
+  $ldap = $config->get_ldap_link();
+  $ldap->cd($config->current['BASE']); 
+
+  /* Not all records are allowen within a zone entry
+   */  
+  $SkipRecords = array("tXTRecord","cNAMERecord","pTRRecord");
+
+  /* Special sOArecords 
+   */
+  $sOAREcords  = array("0"=>"sOAprimary","1"=>"sOAmail","2"=>"sOAserial","3"=>"sOArefresh","4"=>"sOAretry","5"=>"sOAexpire","6"=>"sOAttl");
+
+  /* Create tempalte for all fetched zone Data 
+   */
+  $ZoneBase = array();
+  $ZoneBase['exists']  = false;
+  $ZoneBase['RECORDS'] = array();
+  $ZoneBase['zoneName'] = array();
+  $ZoneBase['dNSClass'] = array();
+   
+  foreach($sOAREcords as $attr){
+    $ZoneBase[$attr] = "";
+  }
+ 
+  $Zones    = array();
+
+  /* Get & Parse all zone entries 
+   */
+  $ldap->ls("(&(objectClass=dNSZone)(zoneName=*)(relativeDomainName=@))",$HostDn,array("*"));
+  $tmp_res = array();
+  while($attrs = $ldap->fetch()) {
+    $tmp_res[] = $attrs;
+  }
+
+  /* Parse fetched zones 
+   */
+  foreach($tmp_res as $attrs){
+
+    $zoneName                    = $attrs['zoneName'][0];
+    $Zones[$zoneName]           = $ZoneBase;
+    $Zones[$zoneName]['exists'] = true;
+
+    /* Set basic attributes 
+     */
+    foreach(array("zoneName","dNSClass") as $attr){
+      if(isset($attrs[$attr][0])){
+        $Zones[$zoneName][$attr] = $attrs[$attr][0];
+      }
+    }
+
+    /* Set initial zone name, to be able to detect if this entry is renamed 
+     */
+    $Zones[$zoneName]['InitialzoneName'] = $zoneName;
+
+    /* Generate SOA entry
+     */
+    if(isset($attrs['sOARecord'][0])){
+      $tmp = split("\ ",$attrs['sOARecord'][0]) ;
+      $tmp2 = array();
+
+      /* Assign soa vars */
+      foreach($sOAREcords as $key => $name){
+        if(isset($tmp[$key])){
+          $Zones[$zoneName][$name] = $tmp[$key];
+        }else{
+          $Zones[$zoneName][$name] = "";
+        }
+      }
+    } // ENDE SOA Record 
+  
+    /* Get record attributes 
+    */
+    foreach($RecordTypes as $name => $value){
+  
+      /* Skip some attributes 
+       */
+      if(in_array($name,$SkipRecords)) continue;
+
+      /* If there is a record attribute
+       */
+      if(isset($attrs[$name])){
+
+        /* get all entries
+         */
+        for($i = 0 ; $i < $attrs[$value]['count']; $i ++){
+          $Zones[$zoneName]['RECORDS'][] =  array("type"=>$name,"value"=>$attrs[$value][$i]);
+        }
+      }
+    }
+
+    /* Get reverse record ..
+     */
+    $ldap->ls("(&(objectClass=dNSZone)(relativeDomainName=@)(zoneName=*))",$attrs['dn'],array("zoneName"));
+
+    if($ldap->count() == 0){
+      if(!$silent){
+        print_red(sprintf(_("Can't find reverse zone for dns zone '%s'. Aborting parsing this zone."),$zoneName));
+      }
+      unset($Zones[$zoneName]);
+    }elseif($ldap->count()>1){
+      if(!$silent){
+        print_red(sprintf(_("Found more than one reverse zone for dns zone '%s'. Aborting parsing this zone."),$zoneName));
+      }
+      unset($Zones[$zoneName]);
+    }else{
+      $tmp = $ldap->fetch();
+      $Zones[$zoneName]['ReverseZone'] = FlipIp(str_replace(".in-addr.arpa","",$tmp['zoneName'][0]));
+      $Zones[$zoneName]['InitialReverseZone'] = FlipIp(str_replace(".in-addr.arpa","",$tmp['zoneName'][0]));
+    }
+  }
+  return($Zones);
+}
+
+
+/* This function compares two dns zone objects and returns an 
+ *  array with following indexes 
+ *   - delete, for dns which must be deleted (only if dns zone is removed)
+ *   - rename, if a dn must be renamed, for example, the zoneName has changed
+ *   - add,    if there is a new dns account created    
+ */
+function getDNSZoneEntriesDiff($config,$newZones,$HostDn)
+{
+  $oldZones = getDNSZoneEntries($config,$HostDn,true);
+  
+  $sOAattributes =  array("sOAprimary","sOAmail","sOAserial","sOArefresh","sOAretry","sOAexpire","sOAttl");
+
+  $move   = array();
+  $add    = array();
+  $del    = array();
+
+  /* Generate a template for zones with default values
+   */
+  $zoneBase                       = array();
+  $zoneBase['objectClass']        = array("top","dNSZone");
+  $zoneBase['zoneName']           = "";
+  $zoneBase['relativeDomainName'] = "@";
+  $zoneBase['dNSClass']           = "IN";
+  $zoneBase['sOARecord']          = "";
+
+  $PrePareZoneEntries = array();
+  
+  /* Walk through all zones and detect renamed/added/deleted zones ... 
+   */
+  foreach($newZones as $name => $zone){
+    
+    /* This zone was renamed 
+     */
+    if((!empty($zone['InitialzoneName'])) && ($zone['InitialzoneName'] != $zone['zoneName'])){
+      
+      /* Move old zone to new position 
+       */ 
+      $oldDn = "zoneName=".$zone['InitialzoneName'].",".$HostDn;
+      $newDn = "zoneName=".$zone['zoneName'].",".$HostDn;
+      $PrePareZoneEntries[$zone['InitialzoneName']] = $zone['zoneName'];
+      $move [$oldDn] = $newDn;      
+    }
+
+    /* Get old zone if available
+     */
+    $oldZone=array();
+    if(isset($oldZones[$zone['InitialzoneName']])){
+      $oldZone = $oldZones[$zone['InitialzoneName']];
+    }
+
+    /* Create forward zone entry and put it in our add queue
+     */
+    $newDn  = "zoneName=".$zone['zoneName'].",".$HostDn;
+    $obj    =  $zoneBase;
+    $obj['zoneName'] = $zone['zoneName'];
+ 
+    /* Create sOARecord & add it to the obj
+     */ 
+    $soa = "";
+    foreach($sOAattributes as $attr){
+      $soa.=" ".$zone[$attr];
+    }  
+    $obj['sOARecord'] = trim($soa);
+
+    /* If reverse zone was renamed, move entry 
+     */
+    if(!empty($zone['InitialReverseZone'])){
+      if($zone['InitialReverseZone'] != $zone['ReverseZone']){
+        $base = "zoneName=".$zone['zoneName'].",".$HostDn;
+        $oldRDn = "zoneName=". FlipIp($zone['InitialReverseZone']).".in-addr.arpa,".$base; 
+        $newRDn = "zoneName=". FlipIp($zone['ReverseZone']).".in-addr.arpa,".$base;
+        $PrePareZoneEntries[FlipIp($zone['InitialReverseZone']).".in-addr.arpa"] = FlipIp($zone['ReverseZone']).".in-addr.arpa";
+        $move [$oldRDn] = $newRDn;
+      }
+    }
+
+    /* Append record entries 
+     *  Set old value to array, to ensure that 
+     *  they will be deleted if necessary
+     */
+    if(isset($oldZone['RECORDS'])){
+      foreach($oldZone['RECORDS'] as $rec){
+        $obj[$rec['type']] = array();
+      }
+    }
+
+    /* Add new Records 
+     */
+    foreach($zone['RECORDS'] as $rec){
+      $obj[$rec['type']][] = $rec['value'];
+    }
+
+    /* Append udpated Zone Forward Entry to our add queue
+     */    
+    $add[$newDn] = $obj;   
+
+    /* Create Reverse Entry 
+     * And append it to our add queue
+     */
+    $zone['ReverseZone'] = FlipIp($zone['ReverseZone']).".in-addr.arpa";
+    $base = "zoneName=".$zone['zoneName'].",".$HostDn;
+    $newRDn = "zoneName=".$zone['ReverseZone'].",".$base;
+    $rObj = $obj;
+    $rObj['zoneName']= $zone['ReverseZone'];
+    $add[$newRDn] = $rObj;
+ 
+    /* Remove currently managed zone from oldZones.
+     *  this gives us the ability to detect removed zones
+     */
+    if(isset($oldZones[$zone['InitialzoneName']])){
+      unset($oldZones[$zone['InitialzoneName']]); 
+    }
+  }
+ 
+  /* The rest of our oldZones must be deleted
+   *  because they wern't available in newZones anymore.
+   */
+  foreach($oldZones as $zone)  {
+    $oldDn = "zoneName=".$zone['InitialzoneName'].",".$HostDn;
+    $del[$oldDn] = "";
+  }
+
+  /* Check for entries which must be updated 
+   */
+  $zoneUpdates = array();
+  $udpate = array();
+  if(count($PrePareZoneEntries)){
+    $ldap = $config->get_ldap_link();
+    foreach($PrePareZoneEntries as $FromZoneName => $ToZoneName){
+      $ldap->cd($HostDn);
+      $ldap->search("(&(objectClass=dNSZone)(zoneName=".$FromZoneName.")(!(relativeDomainName=@)))",array("zoneName"));
+      while($attrs = $ldap->fetch()){
+        $zoneUpdates[$attrs['dn']] = array("zoneName"=>$ToZoneName);
+      }
+    }
+  }
+
+  $ret = array("del" => $del , "move" => $move , "add" => $add,"zoneUpdates"=>$zoneUpdates);
+  return($ret);
+}
+
+
+/* This function returns the dns-host eintries for given 
  *  name.
  */
-function getDNSHostEntries($config,$name)
+function getDNSHostEntries($config,$name,$silent = false)
 {
   global $RecordTypes;
 
@@ -69,7 +356,7 @@ function getDNSHostEntries($config,$name)
 
   /* Alert if there is more than one zone with an entry named like $name
    */ 
-  if(count($foundIn) > 1) {
+  if((count($foundIn) > 1) && (!$silent)) {
     print_red(sprintf(_("Found more than one dns zone which contains an entry named '%s'. Aborting getting dns informations for this device."),$name));
   }
 
@@ -116,10 +403,11 @@ function getDNSHostEntries($config,$name)
 }  
 
 
+
 /* This function compares two dns settings and returns an 
  *  array with following indexes 
  *   - delete, for dns which must be deleted (only if dns account is removed)
- *   - rename, if a dn must be renamed, for example, the zoneName has changed
+ *   - rename, if a dn must be renamed, for example, the relativeDomainName has changed
  *   - add,    if there is a new dns account created    
  */
 function getDNSHostEntriesDiff($config,$oldName,$newEntry,$newName)
@@ -139,18 +427,28 @@ function getDNSHostEntriesDiff($config,$oldName,$newEntry,$newName)
   $newRecords         = array();  // Used to remember which records are removed 
 
   $zoneName     = $newEntry['zoneName'];
-  $tmp          = array_flip($zones);
-  $reverseName  = $tmp[$zoneName];
-
   $zoneDn       = getDNSZoneDN($config,$zoneName);
-  $reverseDn    = getDNSZoneDN($config,$reverseName);
+  
+  $tmp          = array_flip($zones);
+  
+  if(isset($tmp[$zoneName])){
+    $reverseName  = $tmp[$zoneName];
+    $reverseDn    = getDNSZoneDN($config,$reverseName);
+  }else{
+    $newEntry['exists'] = false;
+  }
 
-
+  /* Don't go further if there is nothing to do
+   */
+  if(($newEntry['exists'] == false )&& ($oldEntry['exists'] == false)){
+    return(array("move"=>$move,"add"=>$add,"del"=>$del));
+  }
+  
   /* If account was edited prepare some
    *  attributes & arrays ... if required add some 
    *  dns to $move 
    */
-  if(($oldEntry['exists'])){
+  if($oldEntry['exists']){
 
     /* Check if the account was removed 
      */
@@ -187,12 +485,14 @@ function getDNSHostEntriesDiff($config,$oldName,$newEntry,$newName)
     }
   }
 
+
   /* There must be at least one record in our entry  
    */
-  if(!count($newEntry['RECORDS'])){
+  if((!count($newEntry['RECORDS'])) || (!$newEntry['exists'])){
     $dn = "relativeDomainName=".$oldName.",".getDNSZoneDN($config,$oldEntry['zoneName']);
     $del[$dn] ="";
-    return(array("move"=>$move,"add"=>$add,"del"=>$del));
+    $ret = array("move"=>$move,"add"=>$add,"del"=>$del);
+    return($ret);
   }
 
   /* Prepare temp obj
@@ -265,7 +565,8 @@ function getDNSHostEntriesDiff($config,$oldName,$newEntry,$newName)
     }
   } // foreach record 
 
-  return(array("move"=>$move,"add"=>$add,"del"=>$del));
+  $ret = array("move"=>$move,"add"=>$add,"del"=>$del);
+  return($ret);
 } 
 
 
@@ -293,27 +594,35 @@ function getAvailableZones($config)
   $ldap = $config->get_ldap_link();
   $ldap->cd ($config->current['BASE']);
 
+  restore_error_handler();
+
   /* Search for zones ...
    */
-  $ldap->search("(&(objectClass=dNSZone)(sOARecord=*))",array("zoneName","tXTRecord"));
+  $ldap->search("(&(objectClass=dNSZone)(sOARecord=*))",array("zoneName"));
+
+  $ForwardZones = array();
+  $ReverseZones = array();
+  $zones = array();
 
   while($at = $ldap->fetch()){
     if(preg_match("/\.in\-addr\.arpa/",$at['zoneName'][0])){
-      $name = preg_replace("/^zoneName=/","",$at['tXTRecord'][0]);
-      $ret[$name]['addr']= $at['zoneName'][0];
+      $ReverseZones[$at['dn']] = $at;
     }else{
-      $name = $at['zoneName'][0];
-      $ret[$name]['name']= $at['zoneName'][0];
+      $ForwardZones[$at['dn']] = $at;
     }
   }
 
-  $tmp  =array();
-  foreach($ret as $name => $entry){
-    if((isset($entry['addr']))&&(isset($entry['name']))){
-      $tmp[$entry['addr']]=$entry['name'];
+  foreach($ForwardZones as $dn => $obj){
+    
+    /* try to find reverse
+     */  
+    foreach($ReverseZones as $Rdn => $Robj ){
+      if(preg_match("/".$dn."/",$Rdn)){
+        $zones[$Robj['zoneName'][0]] =  $obj['zoneName'][0];
+      }
     }
   }
-  return($tmp);
+  return($zones);
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
