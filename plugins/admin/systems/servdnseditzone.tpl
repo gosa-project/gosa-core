@@ -24,7 +24,7 @@
 						{t}Zone entries{/t}
 					</td>
 					<td>
-						<input type="submit" name="EditZoneEntries" value="{t}Edit{/t}">
+						<input type="submit" name="EditZoneEntries" value="{t}Edit{/t}" disabled>
 					</td>
 				</tr>
 			</table>
