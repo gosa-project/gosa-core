@@ -271,7 +271,7 @@ class servdns extends plugin
     /* Get differences 
      */
     $tmp = getDNSZoneEntriesDiff($this->config,$this->Zones,$this->orig_dn);
-    
+
     /* Updated zone entries if reverser or forward name has changed  
      * Must be done before moving entries, else the given dn is invalid
      */

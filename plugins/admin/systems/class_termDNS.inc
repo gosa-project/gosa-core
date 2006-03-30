@@ -247,6 +247,7 @@ class termDNS extends plugin
   {
     $message= array();
 
+
     /* Check if ip must be given
      */  
     if(($this->IPisMust)||($this->DNS_is_account)){
@@ -372,16 +373,16 @@ class termDNS extends plugin
       $tmp = getDNSHostEntriesDiff($this->config,$this->OrigCn,$this->dnsEntry,$this->cn);
     }   
 
-    /* Delete dns */
-    foreach($tmp['del'] as $dn => $del){
-      $ldap->cd($dn);
-      $ldap->rmdir_recursive($dn);
-    }
-
     /* move follwoing entries 
      */
     foreach($tmp['move'] as $src => $dst){
       $this->recursive_move($src,$dst);
+    }
+
+    /* Delete dns */
+    foreach($tmp['del'] as $dn => $del){
+      $ldap->cd($dn);
+      $ldap->rmdir_recursive($dn);
     }
 
     /* Add || Update new DNS entries 
