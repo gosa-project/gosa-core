@@ -37,6 +37,7 @@ require_once ("class_tabs.inc");
 require_once ("class_mail-methods.inc");
 require_once("class_password-methods.inc");
 require_once ("functions_debug.inc");
+require_once ("functions_dns.inc");
 require_once ("class_MultiSelectWindow.inc");
 
 /* Define constants for debugging */
