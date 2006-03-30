@@ -28,6 +28,7 @@ $RecordTypes['sSHFPRecord']   = "sSHFPRecord";
 $RecordTypes['rRSIGRecord']   = "rRSIGRecord";      
 $RecordTypes['nSECRecord']    = "nSECRecord";       
 
+
 /* Return all record types 
  */
 function getDnsRecordTypes($ForZones = false)
@@ -65,13 +66,12 @@ function FlipIp($ip)
  */
 function getDNSZoneEntries($config,$HostDn,$silent = false)
 {
-
   global $RecordTypes;
  
   $ldap = $config->get_ldap_link();
   $ldap->cd($config->current['BASE']); 
 
-  /* Not all records are allowen within a zone entry
+  /* Not all records are allowed within a zone entry
    */  
   $SkipRecords = array("tXTRecord","cNAMERecord","pTRRecord");
 
@@ -105,7 +105,7 @@ function getDNSZoneEntries($config,$HostDn,$silent = false)
    */
   foreach($tmp_res as $attrs){
 
-    $zoneName                    = $attrs['zoneName'][0];
+    $zoneName                   = $attrs['zoneName'][0];
     $Zones[$zoneName]           = $ZoneBase;
     $Zones[$zoneName]['exists'] = true;
 
@@ -117,7 +117,7 @@ function getDNSZoneEntries($config,$HostDn,$silent = false)
       }
     }
 
-    /* Set initial zone name, to be able to detect if this entry is renamed 
+    /* Set initial zone name, to be able to detect if this entry was renamed 
      */
     $Zones[$zoneName]['InitialzoneName'] = $zoneName;
 
@@ -173,7 +173,7 @@ function getDNSZoneEntries($config,$HostDn,$silent = false)
       unset($Zones[$zoneName]);
     }else{
       $tmp = $ldap->fetch();
-      $Zones[$zoneName]['ReverseZone'] = FlipIp(str_replace(".in-addr.arpa","",$tmp['zoneName'][0]));
+      $Zones[$zoneName]['ReverseZone']        = FlipIp(str_replace(".in-addr.arpa","",$tmp['zoneName'][0]));
       $Zones[$zoneName]['InitialReverseZone'] = FlipIp(str_replace(".in-addr.arpa","",$tmp['zoneName'][0]));
     }
   }
@@ -206,6 +206,9 @@ function getDNSZoneEntriesDiff($config,$newZones,$HostDn)
   $zoneBase['dNSClass']           = "IN";
   $zoneBase['sOARecord']          = "";
 
+  /* Contains all renamed zoneNames 
+   * For zone entry udpdates
+   */
   $PrePareZoneEntries = array();
   
   /* Walk through all zones and detect renamed/added/deleted zones ... 
@@ -227,7 +230,7 @@ function getDNSZoneEntriesDiff($config,$newZones,$HostDn)
     /* Get old zone if available
      */
     $oldZone=array();
-    if(isset($oldZones[$zone['InitialzoneName']])){
+    if(!empty($oldZones[$zone['InitialzoneName']])){
       $oldZone = $oldZones[$zone['InitialzoneName']];
     }
 
@@ -296,7 +299,7 @@ function getDNSZoneEntriesDiff($config,$newZones,$HostDn)
   }
  
   /* The rest of our oldZones must be deleted
-   *  because they wern't available in newZones anymore.
+   *  because they are no longer available in newZones anymore.
    */
   foreach($oldZones as $zone)  {
     $oldDn = "zoneName=".$zone['InitialzoneName'].",".$HostDn;
@@ -421,24 +424,27 @@ function getDNSHostEntriesDiff($config,$oldName,$newEntry,$newName)
   $move   = array();
 
   $zones              = getAvailableZones($config);
-
   $specialAttributes  = array("cNAMERecord","pTRRecord");
-
   $newRecords         = array();  // Used to remember which records are removed 
-
-  $zoneName     = $newEntry['zoneName'];
-  $zoneDn       = getDNSZoneDN($config,$zoneName);
-  
-  $tmp          = array_flip($zones);
-  
+  $zoneName           = $newEntry['zoneName'];
+  $zoneDn             = getDNSZoneDN($config,$zoneName);
+  $tmp                = array_flip($zones);
+ 
+  /* If reverseZone can't be resolved ... this 
+   *  can't be a valid entry, so remove this account
+   */ 
   if(isset($tmp[$zoneName])){
     $reverseName  = $tmp[$zoneName];
     $reverseDn    = getDNSZoneDN($config,$reverseName);
+    if(empty($reverseDn)){
+      $newEntry['exists'] = false;
+    }
   }else{
     $newEntry['exists'] = false;
   }
 
   /* Don't go further if there is nothing to do
+   * Is no account / was no account
    */
   if(($newEntry['exists'] == false )&& ($oldEntry['exists'] == false)){
     return(array("move"=>$move,"add"=>$add,"del"=>$del));
@@ -460,36 +466,39 @@ function getDNSHostEntriesDiff($config,$oldName,$newEntry,$newName)
 
     /* Check if zoneName has changed 
      */   
-    if($oldEntry['zoneName'] != $newEntry['zoneName']){
-      $oldzoneDn = getDNSZoneDN($config,$oldEntry['zoneName']);
-      $dn = "relativeDomainName=".$oldName.",".$oldzoneDn;
-      $dn2= "relativeDomainName=".$oldName.",".$zoneDn;
-      $move[$dn]=$dn2;
+    if(count($newEntry['RECORDS'])){
+      if($oldEntry['zoneName'] != $newEntry['zoneName']){
+        $oldzoneDn = getDNSZoneDN($config,$oldEntry['zoneName']);
+        $dn = "relativeDomainName=".$oldName.",".$oldzoneDn;
+        $dn2= "relativeDomainName=".$oldName.",".$zoneDn;
+        $move[$dn]=$dn2;
+      }
+
+      /* Check if host name has changed 
+       */ 
+      if($oldName != $newName){
+        $dn = "relativeDomainName=".$oldName.",".$zoneDn;
+        $dn2= "relativeDomainName=".$newName.",".$zoneDn;
+        $move[$dn]=$dn2;
+        $dn = "relativeDomainName=".$oldName.",".$dn2;
+        $dn2= "relativeDomainName=".$newName.",".$dn2;
+        $move[$dn]=$dn2;
+      }
     }
 
-    /* Check if host name has changed 
-     */ 
-    if($oldName != $newName){
-      $dn = "relativeDomainName=".$oldName.",".$zoneDn;
-      $dn2= "relativeDomainName=".$newName.",".$zoneDn;
-      $move[$dn]=$dn2;
-      $dn = "relativeDomainName=".$oldName.",".$dn2;
-      $dn2= "relativeDomainName=".$newName.",".$dn2;
-      $move[$dn]=$dn2;
-    }
-    
-    /* Prepare record entries 
-    */
+    /* Prepare record entries
+     *  Fill old records with array();
+     *  To ensure that they will be deleted if they stay unused
+     */
     foreach($oldEntry['RECORDS'] as $id => $rec){
       $newRecords[$rec['type']] = array();
     }
   }
 
-
   /* There must be at least one record in our entry  
    */
   if((!count($newEntry['RECORDS'])) || (!$newEntry['exists'])){
-    $dn = "relativeDomainName=".$oldName.",".getDNSZoneDN($config,$oldEntry['zoneName']);
+    $dn = "relativeDomainName=".$newName.",".getDNSZoneDN($config,$oldEntry['zoneName']);
     $del[$dn] ="";
     $ret = array("move"=>$move,"add"=>$add,"del"=>$del);
     return($ret);
