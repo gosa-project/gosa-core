@@ -214,9 +214,15 @@ class servrepository extends plugin
         }
       }else{
         $obj = $this->dialog->save();
+        if($this->dialog->is_new_name()){
+          $oldname = $this->dialog->initialy_was;
+          $this->repositories[$obj['Release']]=$obj;        
+          unset($this->repositories[$oldname]);
+        }else{ 
+          $this->repositories[$obj['Release']]=$obj;        
+        }
         $this->dialog = NULL;
         $this->is_dialog= false;
-        $this->repositories[$obj['Release']]=$obj;        
       }
     }
 
