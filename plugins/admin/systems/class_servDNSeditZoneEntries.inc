@@ -168,8 +168,13 @@ class servDNSeditZoneEntries extends plugin
        */
       if(preg_match("/RenameHost_/",$name)){
         if((isset($this->Devices[$Name])) && ($Name != $value)){
-          $this->Devices[$value] = $this->Devices[$Name];
-          unset($this->Devices[$Name]);
+    
+          if(isset($this->Devices[$value])){
+            print_red(sprintf(_("Can't rename '%s' to '%s' there is already an entry with the same name in our zone editing dialog."),$Name,$value));
+          }else{
+            $this->Devices[$value] = $this->Devices[$Name];
+            unset($this->Devices[$Name]);
+          }
         }
       }
     }
@@ -197,9 +202,16 @@ class servDNSeditZoneEntries extends plugin
       /* Renaming check for existing devices 
        */
       if(isset($device['OrigCn'])  && ($DevName != $device['OrigCn'] )){
-        $ldap->search("(cn=".$DevName.")",array("cn"));
+        $ldap->cd($this->config->current['BASE']);
+        $ldap->search("(relativeDomainName=".$DevName.")",array("relativeDomainName"));
         if($ldap->count()){
-          $message[] = sprintf(_("Can't rename '%s' to '%s',the destination name already exists."),$device['OrigCn'],$DevName);
+          $message[] = sprintf(_("Can not rename '%s' to '%s',the destination name already exists."),$device['OrigCn'],$DevName);
+        }
+      }elseif(!isset($device['OrigCn'])){
+        $ldap->cd($this->config->current['BASE']);
+        $ldap->search("(relativeDomainName=".$DevName.")",array("relativeDomainName"));
+        if($ldap->count()){
+          $message[] = sprintf(_("Can not create '%s',the destination name already exists."),$DevName);
         }
       }
 
