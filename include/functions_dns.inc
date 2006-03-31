@@ -603,8 +603,6 @@ function getAvailableZones($config)
   $ldap = $config->get_ldap_link();
   $ldap->cd ($config->current['BASE']);
 
-  restore_error_handler();
-
   /* Search for zones ...
    */
   $ldap->search("(&(objectClass=dNSZone)(sOARecord=*))",array("zoneName"));
