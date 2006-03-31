@@ -46,9 +46,9 @@ function getDnsRecordTypes($ForZones = false)
 }
 
 
-/* this is used to flip the ip address for example
-   12.3.45  ->  54.3.12
-   Because some entries (like zones) are store like that 54.3.12.in-addr.arpa
+/* This fucntion is used to flip the ip address, for example
+   12.3.45  ->  45.3.12
+   Because some entries (like zones) are store like that 45.3.12.in-addr.arpa
    but we want to display 12.3.45.
  */
 function FlipIp($ip)
