@@ -142,9 +142,9 @@ msgstr "Applicazioni"
 msgid "ACL"
 msgstr "ACL"
 
-#: contrib/gosa.conf:97 plugins/admin/applications/generic.tpl:66
+#: contrib/gosa.conf:97 plugins/admin/applications/generic.tpl:67
 #: plugins/admin/systems/printerPPDDialog.tpl:17
-#: plugins/admin/systems/class_servRepository.inc:244
+#: plugins/admin/systems/class_servRepository.inc:250
 #: plugins/admin/ogroups/phonequeue.tpl:31
 #: plugins/gofon/conference/generic.tpl:87
 msgid "Options"
@@ -233,7 +233,7 @@ msgstr "Esporta in formato Excel"
 #: plugins/addons/ldapmanager/contentimport.tpl:49
 #: plugins/addons/ldapmanager/contentcsv.tpl:109
 #: plugins/addons/ldapmanager/contentcsv.tpl:112
-#: plugins/admin/applications/generic.tpl:94
+#: plugins/admin/applications/generic.tpl:95
 msgid "Import"
 msgstr "Importa"
 
@@ -248,7 +248,7 @@ msgstr "Partizioni"
 #: contrib/gosa.conf:206 plugins/personal/environment/logonManagement.tpl:55
 #: plugins/admin/fai/faiScriptEntry.tpl:50
 #: plugins/admin/fai/faiHookEntry.tpl:50
-#: plugins/admin/applications/generic.tpl:92
+#: plugins/admin/applications/generic.tpl:93
 msgid "Script"
 msgstr "Script"
 
@@ -479,14 +479,14 @@ msgstr "Esegui"
 #: plugins/admin/systems/glpi_edit_os.tpl:29
 #: plugins/admin/systems/glpiPrinterCartridges.tpl:52
 #: plugins/admin/systems/glpiAttachmentPool.tpl:52
-#: plugins/admin/systems/servdnseditzone.tpl:118
+#: plugins/admin/systems/servdnseditzone.tpl:122
 #: plugins/admin/systems/glpiDeviceManagement.tpl:52
 #: plugins/admin/systems/glpi_edit_printer_type.tpl:30
 #: plugins/admin/systems/glpi_devices.tpl:761
 #: plugins/admin/systems/glpiAttachmentEdit.tpl:70
 #: plugins/admin/systems/SelectDeviceType.tpl:45
 #: plugins/admin/systems/class_baseSelectDialog.inc:41
-#: plugins/admin/systems/servDNSeditZoneEntries.tpl:13
+#: plugins/admin/systems/servDNSeditZoneEntries.tpl:21
 #: plugins/admin/ogroups/ogroup_objects.tpl:52
 #: plugins/admin/ogroups/class_ogroupManagement.inc:402
 #: plugins/admin/ogroups/remove.tpl:16
@@ -528,7 +528,7 @@ msgstr ""
 #: plugins/admin/systems/glpiManufacturer.tpl:7
 #: plugins/admin/systems/glpi.tpl:48 plugins/admin/systems/glpi.tpl:56
 #: plugins/admin/systems/glpi.tpl:85
-#: plugins/admin/systems/servdnseditzone.tpl:27
+#: plugins/admin/systems/servdnseditzone.tpl:31
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:191
 #: plugins/admin/systems/glpiPrinter.tpl:73
 #: plugins/admin/systems/glpiPrinter.tpl:82
@@ -553,7 +553,7 @@ msgid "Alias"
 msgstr "Italiano"
 
 #: plugins/personal/nagios/nagios.tpl:12
-#: plugins/admin/systems/servdnseditzone.tpl:47 html/getxls.php:174
+#: plugins/admin/systems/servdnseditzone.tpl:51 html/getxls.php:174
 msgid "Mail address"
 msgstr "Indirizzo principale"
 
@@ -711,28 +711,28 @@ msgstr "Lista degli indirizzi alternativi"
 #: plugins/admin/systems/servservice.tpl:20
 #: plugins/admin/systems/servservice.tpl:47
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:60
-#: plugins/admin/systems/workstationStartup.tpl:61
-#: plugins/admin/systems/workstationStartup.tpl:81
-#: plugins/admin/systems/workstationStartup.tpl:100
+#: plugins/admin/systems/workstationStartup.tpl:57
+#: plugins/admin/systems/workstationStartup.tpl:77
+#: plugins/admin/systems/workstationStartup.tpl:96
 #: plugins/admin/systems/servdns.tpl:6
 #: plugins/admin/systems/phonesettings.tpl:176
 #: plugins/admin/systems/phonesettings.tpl:191
-#: plugins/admin/systems/terminalStartup.tpl:61
-#: plugins/admin/systems/terminalStartup.tpl:80
+#: plugins/admin/systems/terminalStartup.tpl:57
+#: plugins/admin/systems/terminalStartup.tpl:76
 #: plugins/admin/systems/servRepositorySetup.tpl:36
 #: plugins/admin/systems/glpi_edit_type.tpl:8
 #: plugins/admin/systems/glpiManufacturer.tpl:6
 #: plugins/admin/systems/glpi_edit_cartridge_type.tpl:6
 #: plugins/admin/systems/glpi_edit_os.tpl:8
-#: plugins/admin/systems/class_termDNS.inc:461
-#: plugins/admin/systems/class_termDNS.inc:482
+#: plugins/admin/systems/class_termDNS.inc:416
+#: plugins/admin/systems/class_termDNS.inc:436
 #: plugins/admin/systems/glpi.tpl:100
-#: plugins/admin/systems/servdnseditzone.tpl:102
+#: plugins/admin/systems/servdnseditzone.tpl:106
 #: plugins/admin/systems/glpi_edit_printer_type.tpl:7
 #: plugins/admin/systems/glpiPrinter.tpl:93
 #: plugins/admin/systems/glpiPrinter.tpl:121
-#: plugins/admin/systems/class_servDNSeditZone.inc:478
-#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:270
+#: plugins/admin/systems/class_servDNSeditZone.inc:476
+#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:387
 #: plugins/admin/ogroups/ogroup_objects.tpl:50
 #: plugins/admin/ogroups/generic.tpl:39
 #: plugins/admin/ogroups/phonequeue.tpl:24
@@ -768,23 +768,23 @@ msgstr "Aggiungi"
 #: plugins/admin/departments/remove.tpl:14
 #: plugins/admin/systems/servservice.tpl:22
 #: plugins/admin/systems/servservice.tpl:48
-#: plugins/admin/systems/workstationStartup.tpl:62
-#: plugins/admin/systems/workstationStartup.tpl:82
+#: plugins/admin/systems/workstationStartup.tpl:58
+#: plugins/admin/systems/workstationStartup.tpl:78
 #: plugins/admin/systems/printer.tpl:71 plugins/admin/systems/printer.tpl:87
 #: plugins/admin/systems/phonesettings.tpl:177
 #: plugins/admin/systems/phonesettings.tpl:192
 #: plugins/admin/systems/remove.tpl:14
-#: plugins/admin/systems/terminalStartup.tpl:62
+#: plugins/admin/systems/terminalStartup.tpl:58
 #: plugins/admin/systems/glpi_edit_type.tpl:10
 #: plugins/admin/systems/remove_glpi.tpl:14
 #: plugins/admin/systems/glpi_edit_cartridge_type.tpl:8
 #: plugins/admin/systems/glpi_edit_os.tpl:10
-#: plugins/admin/systems/class_termDNS.inc:476
+#: plugins/admin/systems/class_termDNS.inc:430
 #: plugins/admin/systems/glpi_edit_printer_type.tpl:9
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:192
 #: plugins/admin/systems/class_glpiPrinterCartridges.inc:168
-#: plugins/admin/systems/class_servDNSeditZone.inc:279
-#: plugins/admin/systems/class_servDNSeditZone.inc:472
+#: plugins/admin/systems/class_servDNSeditZone.inc:292
+#: plugins/admin/systems/class_servDNSeditZone.inc:470
 #: plugins/admin/ogroups/generic.tpl:40 plugins/admin/ogroups/remove.tpl:14
 #: plugins/admin/ogroups/phonequeue.tpl:25 plugins/gofon/macro/remove.tpl:13
 #: plugins/gofon/phoneaccount/generic.tpl:15
@@ -1026,7 +1026,7 @@ msgid ""
 msgstr ""
 
 #: plugins/personal/mail/class_mailAccount.inc:719
-#: plugins/admin/groups/class_groupMail.inc:798
+#: plugins/admin/groups/class_groupMail.inc:804
 msgid "The required field 'Primary address' is not set."
 msgstr "Il campo 'Indirizzo principale' non è stao inserito"
 
@@ -1039,23 +1039,23 @@ msgstr ""
 "Inserire un indirizzo di posta valido nel campo 'Indirizzo principale'."
 
 #: plugins/personal/mail/class_mailAccount.inc:733
-#: plugins/admin/groups/class_groupMail.inc:807
+#: plugins/admin/groups/class_groupMail.inc:813
 #: plugins/admin/ogroups/class_mailogroup.inc:77
 msgid "The primary address you've entered is already in use."
 msgstr "L'indirizzo principale inserito è già in uso."
 
 #: plugins/personal/mail/class_mailAccount.inc:739
-#: plugins/admin/groups/class_groupMail.inc:813
+#: plugins/admin/groups/class_groupMail.inc:819
 msgid "Value in 'Quota size' is not valid."
 msgstr "Il valore di 'Dimensione quota' non è valido"
 
 #: plugins/personal/mail/class_mailAccount.inc:748
-#: plugins/admin/groups/class_groupMail.inc:822
+#: plugins/admin/groups/class_groupMail.inc:828
 msgid "Please specify a vaild mail size for mails to be rejected."
 msgstr "Specificare una dimenzione valida per le mail da rigettare."
 
 #: plugins/personal/mail/class_mailAccount.inc:758
-#: plugins/admin/groups/class_groupMail.inc:830
+#: plugins/admin/groups/class_groupMail.inc:836
 msgid "You need to set the maximum mail size in order to reject anything."
 msgstr "Devi specificare la dimensione massima delle mail da rigettare."
 
@@ -1148,7 +1148,7 @@ msgstr ""
 #: plugins/addons/ldapmanager/contentcsv.tpl:114
 #: plugins/addons/ldapmanager/contentexport.tpl:66
 #: plugins/admin/fai/faiNewBranch.tpl:50
-#: plugins/admin/departments/recursive_move.tpl:18 include/functions.inc:1382
+#: plugins/admin/departments/recursive_move.tpl:18 include/functions.inc:1383
 #: ihtml/themes/altlinux/setup_useradmin.tpl:40
 #: ihtml/themes/altlinux/setup_step2.tpl:12
 #: ihtml/themes/altlinux/setup_step3.tpl:17
@@ -1326,7 +1326,7 @@ msgstr "non configurata"
 #: plugins/personal/posix/class_posixAccount.inc:195
 #: plugins/admin/systems/class_terminalService.inc:141
 #: plugins/admin/systems/class_workstationService.inc:134
-#: plugins/admin/systems/class_workstationStartup.inc:623
+#: plugins/admin/systems/class_workstationStartup.inc:657
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:211
 msgid "automatic"
 msgstr "automatico"
@@ -1956,7 +1956,7 @@ msgstr "nessuno"
 #: plugins/personal/environment/class_environment.inc:510
 #: plugins/personal/environment/class_environment.inc:521
 #: plugins/admin/systems/class_terminalStartup.inc:134
-#: plugins/admin/systems/class_workstationStartup.inc:503
+#: plugins/admin/systems/class_workstationStartup.inc:501
 #, fuzzy
 msgid "You must specify a valid mount point."
 msgstr "Prego inserire un numero di telefono valido!"
@@ -2077,8 +2077,8 @@ msgstr ""
 
 #: plugins/personal/environment/environment.tpl:105
 #: plugins/admin/systems/servservice.tpl:11
-#: plugins/admin/systems/workstationStartup.tpl:86
-#: plugins/admin/systems/terminalStartup.tpl:66
+#: plugins/admin/systems/workstationStartup.tpl:82
+#: plugins/admin/systems/terminalStartup.tpl:62
 #, fuzzy
 msgid "Shares"
 msgstr "reset"
@@ -2093,12 +2093,12 @@ msgstr "reset"
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:266
 #: plugins/admin/groups/class_groupMail.inc:537
 #: plugins/admin/applications/class_applicationParameters.inc:100
-#: plugins/admin/systems/workstationStartup.tpl:101
+#: plugins/admin/systems/workstationStartup.tpl:97
 #: plugins/admin/systems/printer.tpl:48 plugins/admin/systems/servdns.tpl:8
-#: plugins/admin/systems/terminalStartup.tpl:81
+#: plugins/admin/systems/terminalStartup.tpl:77
 #: plugins/admin/systems/glpiManufacturer.tpl:8
 #: plugins/admin/systems/glpiPrinter.tpl:122
-#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:274
+#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:388
 #: ihtml/themes/altlinux/islocked.tpl:13
 msgid "Remove"
 msgstr "Rimuovi"
@@ -2126,7 +2126,7 @@ msgstr "Dispositivi del client"
 
 #: plugins/personal/environment/environment.tpl:164
 #: plugins/admin/groups/class_groupManagement.inc:456
-#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:273
+#: plugins/admin/systems/servDNSeditZoneEntries.tpl:12
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:329
 msgid "New"
 msgstr "Nuovo"
@@ -2335,10 +2335,10 @@ msgstr "Elimina foto"
 #: plugins/admin/systems/servnfs.tpl:75
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:74
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:80
-#: plugins/admin/systems/servdnseditzone.tpl:117
+#: plugins/admin/systems/servdnseditzone.tpl:121
 #: plugins/admin/systems/glpi_devices.tpl:760
 #: plugins/admin/systems/glpiAttachmentEdit.tpl:69
-#: plugins/admin/systems/servDNSeditZoneEntries.tpl:12
+#: plugins/admin/systems/servDNSeditZoneEntries.tpl:20
 #: include/class_MultiSelectWindow.inc:44
 #: ihtml/themes/default/copyPasteDialog.tpl:12
 msgid "Save"
@@ -3274,7 +3274,7 @@ msgstr "Sali di dipartimento"
 #: plugins/admin/departments/class_departmentManagement.inc:297
 #: plugins/admin/systems/class_systemManagement.inc:755
 #: plugins/admin/systems/class_glpiSelectUser.inc:162
-#: plugins/admin/systems/class_servDNSeditZone.inc:276
+#: plugins/admin/systems/class_servDNSeditZone.inc:289
 #: plugins/admin/systems/class_baseSelectDialog.inc:28
 #: plugins/admin/ogroups/class_ogroupManagement.inc:444
 #: plugins/admin/ogroups/phonequeue.tpl:17
@@ -5045,9 +5045,9 @@ msgid "Package file '%s' does not exist."
 msgstr ""
 
 #: plugins/admin/fai/faiPackage.tpl:33 plugins/admin/fai/faiPackageNew.tpl:24
-#: plugins/admin/systems/workstationStartup.tpl:39
+#: plugins/admin/systems/workstationStartup.tpl:35
 #: plugins/admin/systems/servRepositorySetup.tpl:8
-#: plugins/admin/systems/class_servRepository.inc:242
+#: plugins/admin/systems/class_servRepository.inc:248
 #, fuzzy
 msgid "Release"
 msgstr "Rimuovi"
@@ -5073,7 +5073,7 @@ msgstr "Mostra telefoni"
 msgid "Choosen packages"
 msgstr "Mostra telefoni"
 
-#: plugins/admin/fai/faiPackage.tpl:73 include/functions.inc:596
+#: plugins/admin/fai/faiPackage.tpl:73 include/functions.inc:597
 msgid "Configure"
 msgstr "Configura"
 
@@ -5112,7 +5112,7 @@ msgid "Remove class from profile"
 msgstr ""
 
 #: plugins/admin/fai/class_faiProfile.inc:304
-#: plugins/admin/systems/class_servDNSeditZone.inc:277
+#: plugins/admin/systems/class_servDNSeditZone.inc:290
 #: plugins/admin/ogroups/phonequeue.tpl:18
 #, fuzzy
 msgid "Down"
@@ -5271,7 +5271,7 @@ msgid "Sections for this release"
 msgstr ""
 
 #: plugins/admin/fai/faiPackageNew.tpl:35
-#: plugins/admin/systems/workstationStartup.tpl:47
+#: plugins/admin/systems/workstationStartup.tpl:43
 #, fuzzy
 msgid "set"
 msgstr "reset"
@@ -5589,7 +5589,7 @@ msgid "Save template"
 msgstr "Nuovo template"
 
 #: plugins/admin/fai/faiTemplateEntry.tpl:40
-#: plugins/admin/applications/generic.tpl:95
+#: plugins/admin/applications/generic.tpl:96
 #: plugins/admin/systems/printerPPDDialog.tpl:11
 #: plugins/admin/systems/glpiAttachmentEdit.tpl:33
 msgid "Upload"
@@ -5620,7 +5620,7 @@ msgid "Access"
 msgstr "Indirizzo"
 
 #: plugins/admin/fai/faiTemplateEntry.tpl:86
-#: plugins/admin/systems/class_servDNS.inc:299
+#: plugins/admin/systems/class_servDNS.inc:161
 #, fuzzy
 msgid "Class"
 msgstr "classe"
@@ -6030,17 +6030,17 @@ msgstr "Stai cercando di aggungere un indirizzo di posta non valido"
 msgid "to the list of forwarders."
 msgstr "alla lista degli inoltri"
 
-#: plugins/admin/groups/class_groupMail.inc:801
+#: plugins/admin/groups/class_groupMail.inc:807
 msgid "Please enter a valid email addres in 'Primary address' field."
 msgstr ""
 "Prego inserire un indirizzo email valido nel campo 'Indirizzo principale'"
 
-#: plugins/admin/groups/class_groupMail.inc:834
+#: plugins/admin/groups/class_groupMail.inc:840
 msgid ""
 "Please choose valid permission settings. Default permission can't be emtpy."
 msgstr ""
 
-#: plugins/admin/groups/class_groupMail.inc:838
+#: plugins/admin/groups/class_groupMail.inc:844
 #, fuzzy
 msgid "Please select a valid mail server."
 msgstr "Prego inserire un numero di telefono valido!"
@@ -6514,7 +6514,7 @@ msgstr ""
 
 #: plugins/admin/applications/generic.tpl:7
 #: plugins/admin/applications/generic.tpl:8
-#: plugins/admin/applications/class_applicationGeneric.inc:379
+#: plugins/admin/applications/class_applicationGeneric.inc:416
 #: plugins/admin/applications/class_applicationManagement.inc:521
 msgid "Application name"
 msgstr "Nome applicazione"
@@ -6525,7 +6525,7 @@ msgid "Display name"
 msgstr "Mostra il nome"
 
 #: plugins/admin/applications/generic.tpl:13
-#: plugins/admin/applications/class_applicationGeneric.inc:384
+#: plugins/admin/applications/class_applicationGeneric.inc:421
 msgid "Application name to be displayed (i.e. below icons)"
 msgstr ""
 
@@ -6537,35 +6537,35 @@ msgstr ""
 msgid "Choose subtree to place application in"
 msgstr ""
 
-#: plugins/admin/applications/generic.tpl:48
+#: plugins/admin/applications/generic.tpl:49
 msgid "Icon"
 msgstr "Icna"
 
-#: plugins/admin/applications/generic.tpl:56
+#: plugins/admin/applications/generic.tpl:57
 msgid "Update"
 msgstr "Aggiorna"
 
-#: plugins/admin/applications/generic.tpl:56
+#: plugins/admin/applications/generic.tpl:57
 msgid "Reload picture from LDAP"
 msgstr ""
 
-#: plugins/admin/applications/generic.tpl:70
+#: plugins/admin/applications/generic.tpl:71
 msgid "Only executable for members"
 msgstr ""
 
-#: plugins/admin/applications/generic.tpl:72
+#: plugins/admin/applications/generic.tpl:73
 msgid "Replace user configuration on startup"
 msgstr ""
 
-#: plugins/admin/applications/generic.tpl:76
+#: plugins/admin/applications/generic.tpl:77
 msgid "Place icon on members desktop"
 msgstr ""
 
-#: plugins/admin/applications/generic.tpl:79
+#: plugins/admin/applications/generic.tpl:80
 msgid "Place entry in members startmenu"
 msgstr ""
 
-#: plugins/admin/applications/generic.tpl:82
+#: plugins/admin/applications/generic.tpl:83
 msgid "Place entry in members launch bar"
 msgstr ""
 
@@ -6599,40 +6599,45 @@ msgstr ""
 msgid "Application management"
 msgstr ""
 
-#: plugins/admin/applications/class_applicationGeneric.inc:87
+#: plugins/admin/applications/class_applicationGeneric.inc:96
 #, fuzzy
 msgid "no example"
 msgstr "incompleto"
 
-#: plugins/admin/applications/class_applicationGeneric.inc:107
+#: plugins/admin/applications/class_applicationGeneric.inc:116
 msgid "This 'dn' is no application."
 msgstr ""
 
-#: plugins/admin/applications/class_applicationGeneric.inc:216
+#: plugins/admin/applications/class_applicationGeneric.inc:231
 msgid "The specified picture has not been uploaded correctly."
 msgstr ""
 
-#: plugins/admin/applications/class_applicationGeneric.inc:298
-msgid "You have no permissions to create a application on this 'Base'."
-msgstr ""
-
-#: plugins/admin/applications/class_applicationGeneric.inc:303
-msgid "Required field 'Name' is not filled."
-msgstr ""
-
-#: plugins/admin/applications/class_applicationGeneric.inc:307
-msgid "Invalid character in application name. Only a-z 0-9 are allowed."
-msgstr ""
-
-#: plugins/admin/applications/class_applicationGeneric.inc:311
-msgid "Required field 'Execute' is not filled."
+#: plugins/admin/applications/class_applicationGeneric.inc:306
+msgid "Specified execute path must start with '/'."
 msgstr ""
 
 #: plugins/admin/applications/class_applicationGeneric.inc:320
+msgid "You have no permissions to create a application on this 'Base'."
+msgstr ""
+
+#: plugins/admin/applications/class_applicationGeneric.inc:325
+msgid "Required field 'Name' is not filled."
+msgstr ""
+
+#: plugins/admin/applications/class_applicationGeneric.inc:329
+msgid "Invalid character in application name. Only a-z 0-9 are allowed."
+msgstr ""
+
+#: plugins/admin/applications/class_applicationGeneric.inc:333
+msgid "Required field 'Execute' is not filled."
+msgstr ""
+
+#: plugins/admin/applications/class_applicationGeneric.inc:348
+#: plugins/admin/applications/class_applicationGeneric.inc:356
 msgid "There's already an application with this 'Name'."
 msgstr ""
 
-#: plugins/admin/applications/class_applicationGeneric.inc:375
+#: plugins/admin/applications/class_applicationGeneric.inc:412
 #, fuzzy
 msgid "Application settings"
 msgstr "Opzioni applicazione"
@@ -6818,7 +6823,7 @@ msgstr "presente"
 #: plugins/admin/systems/class_terminalService.inc:158
 #: plugins/admin/systems/class_terminalStartup.inc:99
 #: plugins/admin/systems/class_workstationService.inc:151
-#: plugins/admin/systems/class_workstationStartup.inc:372
+#: plugins/admin/systems/class_workstationStartup.inc:369
 #: plugins/admin/systems/class_terminalGeneric.inc:153
 msgid "This 'dn' has no terminal features."
 msgstr ""
@@ -6870,7 +6875,7 @@ msgid "Enable DNS for this device"
 msgstr ""
 
 #: plugins/admin/systems/network.tpl:30
-#: plugins/admin/systems/servdnseditzone.tpl:63
+#: plugins/admin/systems/servdnseditzone.tpl:67
 #: plugins/gofon/phoneaccount/generic.tpl:67
 #, fuzzy
 msgid "Refresh"
@@ -6882,8 +6887,8 @@ msgid "Zone"
 msgstr "telefoni"
 
 #: plugins/admin/systems/network.tpl:42
-#: plugins/admin/systems/class_servDNS.inc:298
-#: plugins/admin/systems/servdnseditzone.tpl:81
+#: plugins/admin/systems/class_servDNS.inc:160
+#: plugins/admin/systems/servdnseditzone.tpl:85
 msgid "TTL"
 msgstr ""
 
@@ -7317,31 +7322,31 @@ msgstr "Mostra utenti che corrispondono a"
 msgid "Regular expression for matching member names"
 msgstr "Espressioni regolare per selezionare il nome del gruppo"
 
-#: plugins/admin/systems/class_workstationStartup.inc:313
+#: plugins/admin/systems/class_workstationStartup.inc:310
 msgid ""
 "There are packages in your configuration, which can't be resolved with "
 "current server/release settings."
 msgstr ""
 
-#: plugins/admin/systems/class_workstationStartup.inc:354
+#: plugins/admin/systems/class_workstationStartup.inc:351
 #, fuzzy
 msgid "Please select a 'FAI server' or remove the 'FAI classes'."
 msgstr "Prego inserire un numero di telefono valido!"
 
-#: plugins/admin/systems/class_workstationStartup.inc:410
+#: plugins/admin/systems/class_workstationStartup.inc:407
 msgid ""
 "There is already a profile in your selection that contain partition table "
 "configurations."
 msgstr ""
 
-#: plugins/admin/systems/class_workstationStartup.inc:691
+#: plugins/admin/systems/class_workstationStartup.inc:725
 #, php-format
 msgid ""
 "Can't resolve one or more of the given FAIclass(es) [%s] in FAI server '%s'. "
 "Server was reset to 'auto'."
 msgstr ""
 
-#: plugins/admin/systems/class_workstationStartup.inc:702
+#: plugins/admin/systems/class_workstationStartup.inc:736
 #, php-format
 msgid ""
 "Can't resolve the given FAIclass(es) [%s] anyway, please check your FAI "
@@ -7565,55 +7570,50 @@ msgstr ""
 msgid "LDAP server"
 msgstr ""
 
-#: plugins/admin/systems/workstationStartup.tpl:10
-#: plugins/admin/systems/terminalStartup.tpl:10
-msgid "Choose LDAP server to use for accounts and terminal management"
-msgstr ""
-
-#: plugins/admin/systems/workstationStartup.tpl:17
-#: plugins/admin/systems/terminalStartup.tpl:17
+#: plugins/admin/systems/workstationStartup.tpl:13
+#: plugins/admin/systems/terminalStartup.tpl:13
 msgid "Boot kernel"
 msgstr ""
 
-#: plugins/admin/systems/workstationStartup.tpl:19
-#: plugins/admin/systems/terminalStartup.tpl:19
+#: plugins/admin/systems/workstationStartup.tpl:15
+#: plugins/admin/systems/terminalStartup.tpl:15
 msgid "Enter the filename of the kernel to use"
 msgstr ""
 
-#: plugins/admin/systems/workstationStartup.tpl:22
-#: plugins/admin/systems/terminalStartup.tpl:22
+#: plugins/admin/systems/workstationStartup.tpl:18
+#: plugins/admin/systems/terminalStartup.tpl:18
 msgid "Custom options"
 msgstr ""
 
-#: plugins/admin/systems/workstationStartup.tpl:24
-#: plugins/admin/systems/terminalStartup.tpl:24
+#: plugins/admin/systems/workstationStartup.tpl:20
+#: plugins/admin/systems/terminalStartup.tpl:20
 msgid ""
 "Enter any parameters that should be passed to the kernel as append line "
 "during bootup"
 msgstr ""
 
-#: plugins/admin/systems/workstationStartup.tpl:37
+#: plugins/admin/systems/workstationStartup.tpl:33
 #, fuzzy
 msgid "FAI server"
 msgstr "server"
 
-#: plugins/admin/systems/workstationStartup.tpl:54
+#: plugins/admin/systems/workstationStartup.tpl:50
 #, fuzzy
 msgid "Assigned FAI classes"
 msgstr "Scegli il tuo numero di telefono personale"
 
-#: plugins/admin/systems/workstationStartup.tpl:73
-#: plugins/admin/systems/terminalStartup.tpl:53
+#: plugins/admin/systems/workstationStartup.tpl:69
+#: plugins/admin/systems/terminalStartup.tpl:49
 msgid "Kernel modules (format: name parameters)"
 msgstr ""
 
-#: plugins/admin/systems/workstationStartup.tpl:75
-#: plugins/admin/systems/terminalStartup.tpl:55
+#: plugins/admin/systems/workstationStartup.tpl:71
+#: plugins/admin/systems/terminalStartup.tpl:51
 msgid "Add additional modules to load on startup"
 msgstr ""
 
-#: plugins/admin/systems/workstationStartup.tpl:99
-#: plugins/admin/systems/terminalStartup.tpl:79
+#: plugins/admin/systems/workstationStartup.tpl:95
+#: plugins/admin/systems/terminalStartup.tpl:75
 #, fuzzy
 msgid "Mountpoint"
 msgstr "Monitoraggio"
@@ -8091,39 +8091,39 @@ msgstr ""
 msgid "Admins"
 msgstr "DN dell'amministratore"
 
-#: plugins/admin/systems/class_servDNS.inc:181
+#: plugins/admin/systems/class_servDNS.inc:67
 #: plugins/admin/systems/class_inventory.inc:36
 msgid "Remove DNS service"
 msgstr ""
 
-#: plugins/admin/systems/class_servDNS.inc:182
+#: plugins/admin/systems/class_servDNS.inc:68
 #: plugins/admin/systems/class_inventory.inc:37
 msgid ""
 "This server has DNS features enabled. You can disable them by clicking below."
 msgstr ""
 
-#: plugins/admin/systems/class_servDNS.inc:184
+#: plugins/admin/systems/class_servDNS.inc:70
 #: plugins/admin/systems/class_inventory.inc:39
 msgid "Add DNS service"
 msgstr ""
 
-#: plugins/admin/systems/class_servDNS.inc:185
+#: plugins/admin/systems/class_servDNS.inc:71
 #: plugins/admin/systems/class_inventory.inc:40
 msgid ""
 "This server has DNS features disabled. You can enable them by clicking below."
 msgstr ""
 
-#: plugins/admin/systems/class_servDNS.inc:270
+#: plugins/admin/systems/class_servDNS.inc:159
+#, fuzzy
+msgid "Reverse zone"
+msgstr "Riferimenti"
+
+#: plugins/admin/systems/class_servDNS.inc:223
 #, php-format
 msgid ""
 "Can't delete the selected zone, because it is still in use by these entry/"
 "entries '%s'"
 msgstr ""
-
-#: plugins/admin/systems/class_servDNS.inc:297
-#, fuzzy
-msgid "Reverse zone"
-msgstr "Riferimenti"
 
 #: plugins/admin/systems/class_servDB.inc:135
 #: plugins/admin/systems/class_servDB.inc:144
@@ -8745,27 +8745,27 @@ msgstr ""
 msgid "The required field 'Component name' is not set."
 msgstr "Il campo necessario 'Home directory' non è vuoto"
 
-#: plugins/admin/systems/terminalStartup.tpl:35
+#: plugins/admin/systems/terminalStartup.tpl:31
 msgid "Select if terminal supports graphical startup with progress bar"
 msgstr ""
 
-#: plugins/admin/systems/terminalStartup.tpl:36
+#: plugins/admin/systems/terminalStartup.tpl:32
 msgid "use graphical bootup"
 msgstr ""
 
-#: plugins/admin/systems/terminalStartup.tpl:38
+#: plugins/admin/systems/terminalStartup.tpl:34
 msgid "Select if terminal should boot in text mode"
 msgstr ""
 
-#: plugins/admin/systems/terminalStartup.tpl:39
+#: plugins/admin/systems/terminalStartup.tpl:35
 msgid "use standard linux textual bootup"
 msgstr ""
 
-#: plugins/admin/systems/terminalStartup.tpl:41
+#: plugins/admin/systems/terminalStartup.tpl:37
 msgid "Select to get more verbose output during startup"
 msgstr ""
 
-#: plugins/admin/systems/terminalStartup.tpl:42
+#: plugins/admin/systems/terminalStartup.tpl:38
 msgid "use debug mode for startup"
 msgstr ""
 
@@ -8799,8 +8799,8 @@ msgid "Parent server"
 msgstr "server"
 
 #: plugins/admin/systems/servRepositorySetup.tpl:33
-#: plugins/admin/systems/class_servRepository.inc:243
-#: plugins/admin/systems/class_servRepository.inc:264
+#: plugins/admin/systems/class_servRepository.inc:249
+#: plugins/admin/systems/class_servRepository.inc:270
 #, fuzzy
 msgid "Sections"
 msgstr "Azione"
@@ -8963,45 +8963,45 @@ msgstr ""
 msgid "Manage OS-types"
 msgstr ""
 
-#: plugins/admin/systems/class_termDNS.inc:313
+#: plugins/admin/systems/class_termDNS.inc:258
 #, fuzzy
 msgid "The required field 'IP-address' is not set."
 msgstr "Il campo 'Indirizzo principale' non è stao inserito"
 
-#: plugins/admin/systems/class_termDNS.inc:319
+#: plugins/admin/systems/class_termDNS.inc:265
 msgid "Wrong IP format in field IP-address."
 msgstr ""
 
-#: plugins/admin/systems/class_termDNS.inc:325
+#: plugins/admin/systems/class_termDNS.inc:272
 #, fuzzy
 msgid "The required field 'MAC-address' is not set."
 msgstr "Il campo 'Indirizzo principale' non è stao inserito"
 
-#: plugins/admin/systems/class_termDNS.inc:331
+#: plugins/admin/systems/class_termDNS.inc:279
 msgid ""
 "The given macaddress is invalid. There must be 6 1byte segments seperated by "
 "':'."
 msgstr ""
 
-#: plugins/admin/systems/class_termDNS.inc:346
+#: plugins/admin/systems/class_termDNS.inc:299
 #, php-format
 msgid "Found duplicate value for record type '%s'."
 msgstr ""
 
-#: plugins/admin/systems/class_termDNS.inc:352
+#: plugins/admin/systems/class_termDNS.inc:307
 #, php-format
 msgid "Found more than one entry for the uniqe record type '%s'."
 msgstr ""
 
-#: plugins/admin/systems/class_termDNS.inc:360
+#: plugins/admin/systems/class_termDNS.inc:318
 #, php-format
 msgid ""
 "The device IP '%s' is added as 'A Record', this will be done automatically, "
 "please remove the record."
 msgstr ""
 
-#: plugins/admin/systems/class_termDNS.inc:366
-#: plugins/admin/systems/class_servDNSeditZone.inc:386
+#: plugins/admin/systems/class_termDNS.inc:325
+#: plugins/admin/systems/class_servDNSeditZone.inc:399
 #, php-format
 msgid "Only lowercase is allowed, please check your '%ss'."
 msgstr ""
@@ -9155,37 +9155,41 @@ msgstr "Mostra dispositiva di rete"
 msgid "Zone entries"
 msgstr "Impostazioni Unix"
 
-#: plugins/admin/systems/servdnseditzone.tpl:35
+#: plugins/admin/systems/servdnseditzone.tpl:27
+msgid "Can't be edited because the zone wasn't saved right now."
+msgstr ""
+
+#: plugins/admin/systems/servdnseditzone.tpl:39
 #, fuzzy
 msgid "SOA record"
 msgstr "Directory"
 
-#: plugins/admin/systems/servdnseditzone.tpl:41
+#: plugins/admin/systems/servdnseditzone.tpl:45
 msgid "Primary dns server for this zone"
 msgstr ""
 
-#: plugins/admin/systems/servdnseditzone.tpl:53
+#: plugins/admin/systems/servdnseditzone.tpl:57
 msgid "Serial number (automatically incremented)"
 msgstr ""
 
-#: plugins/admin/systems/servdnseditzone.tpl:69
+#: plugins/admin/systems/servdnseditzone.tpl:73
 #: plugins/admin/ogroups/phonequeue.tpl:54
 #: ihtml/themes/altlinux/setup_finish.tpl:31
 #: ihtml/themes/default/setup_finish.tpl:31
 msgid "Retry"
 msgstr "Riprova"
 
-#: plugins/admin/systems/servdnseditzone.tpl:75
+#: plugins/admin/systems/servdnseditzone.tpl:79
 #, fuzzy
 msgid "Expire"
 msgstr "Esporta"
 
-#: plugins/admin/systems/servdnseditzone.tpl:96
+#: plugins/admin/systems/servdnseditzone.tpl:100
 #, fuzzy
 msgid "MxRecords"
 msgstr "Directory"
 
-#: plugins/admin/systems/servdnseditzone.tpl:108
+#: plugins/admin/systems/servdnseditzone.tpl:112
 #, fuzzy
 msgid "Zone records"
 msgstr "Directory"
@@ -9686,56 +9690,56 @@ msgstr "Cognome"
 msgid "Mime-type"
 msgstr "Tipo"
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:336
+#: plugins/admin/systems/class_servDNSeditZone.inc:349
 #, fuzzy
 msgid "This zoneName is already in use"
 msgstr "L'indirizzo principale inserito è già in uso."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:339
+#: plugins/admin/systems/class_servDNSeditZone.inc:352
 #, fuzzy
 msgid "This reverse zone is already in use"
 msgstr "L'indirizzo principale inserito è già in uso."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:344
+#: plugins/admin/systems/class_servDNSeditZone.inc:357
 msgid "Primary dns server must end with '.' to be a valid entry."
 msgstr ""
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:348
+#: plugins/admin/systems/class_servDNSeditZone.inc:361
 msgid "Your specified mail address must end with '.' to be a valid record."
 msgstr ""
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:352
-#: plugins/admin/systems/class_servDNSeditZone.inc:356
+#: plugins/admin/systems/class_servDNSeditZone.inc:365
+#: plugins/admin/systems/class_servDNSeditZone.inc:369
 msgid ""
 "Your mail address contains '@' replace this with '.' to enable GOsa to "
 "create a valid SOA record."
 msgstr ""
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:360
+#: plugins/admin/systems/class_servDNSeditZone.inc:373
 msgid "Only lowercase strings are allowed as zone name."
 msgstr ""
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:364
+#: plugins/admin/systems/class_servDNSeditZone.inc:377
 #, fuzzy
 msgid "Please specify a numeric value for serial number."
 msgstr "Specificare una dimenzione valida per le mail da rigettare."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:368
+#: plugins/admin/systems/class_servDNSeditZone.inc:381
 #, fuzzy
 msgid "Please specify a numeric value for refresh."
 msgstr "Specificare una dimenzione valida per le mail da rigettare."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:372
+#: plugins/admin/systems/class_servDNSeditZone.inc:385
 #, fuzzy
 msgid "Please specify a numeric value for ttl."
 msgstr "Specificare una dimenzione valida per le mail da rigettare."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:376
+#: plugins/admin/systems/class_servDNSeditZone.inc:389
 #, fuzzy
 msgid "Please specify a numeric value for expire."
 msgstr "Specificare una dimenzione valida per le mail da rigettare."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:380
+#: plugins/admin/systems/class_servDNSeditZone.inc:393
 #, fuzzy
 msgid "Please specify a numeric value for retry."
 msgstr "Specificare una dimenzione valida per le mail da rigettare."
@@ -9766,57 +9770,56 @@ msgstr ""
 msgid "Choose a object group"
 msgstr "Gruppo di oggetti"
 
-#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:232
-#, php-format
-msgid "Settings for host entry #%s"
-msgstr ""
-
-#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:234
-#, php-format
-msgid "Settings for '%s'"
-msgstr ""
-
-#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:401
+#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:173
 #, php-format
 msgid ""
-"The name '%s' can't be used as host entry, the name is already used in this "
-"ldap tree."
+"Can't rename '%s' to '%s' there is already an entry with the same name in "
+"our zone editing dialog."
 msgstr ""
 
-#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:408
+#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:199
 #, fuzzy, php-format
 msgid "Entry name '%s' contains invalid characters."
 msgstr "Il valore specificato come '%s' contiene dei caratteri invalidi!"
 
-#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:420
-#, php-format
-msgid "Can't rename the server '%s' to '%s', the server contains this zone."
-msgstr ""
-
-#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:432
-#, php-format
-msgid "Can't rename '%s' to '%s',the destination name already exists."
-msgstr ""
-
-#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:436
+#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:208
 #, fuzzy, php-format
-msgid ""
-"Can't rename '%s' to '%s',the destination name contains invalid characters."
+msgid "Can not rename '%s' to '%s',the destination name already exists."
 msgstr "Il valore specificato come '%s' contiene dei caratteri invalidi!"
 
-#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:450
+#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:214
+#, fuzzy, php-format
+msgid "Can not create '%s',the destination name already exists."
+msgstr "Il valore specificato come '%s' contiene dei caratteri invalidi!"
+
+#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:223
+#, php-format
+msgid "The name '%s' is used more than once."
+msgstr ""
+
+#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:229
+#, php-format
+msgid "The host name '%s' should be written in lowercase."
+msgstr ""
+
+#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:246
 #, php-format
 msgid "The record type '%s' is a unique type and can't be defined twice."
 msgstr ""
 
-#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:461
+#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:253
 #, php-format
 msgid "There is an empty '%s' for host '%s'."
 msgstr ""
 
-#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:469
+#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:261
 #, php-format
 msgid "There is a duplicate entry in '%s' for '%s'."
+msgstr ""
+
+#: plugins/admin/systems/class_servDNSeditZoneEntries.inc:352
+#, php-format
+msgid "Settings for '%s'"
 msgstr ""
 
 #: plugins/admin/systems/class_servRepository.inc:97
@@ -9885,6 +9888,16 @@ msgstr ""
 msgid ""
 "Be careful editing record types with this dialog. All changes will be saved "
 "immediately when using the save button."
+msgstr ""
+
+#: plugins/admin/systems/servDNSeditZoneEntries.tpl:8
+msgid ""
+"This dialog can't be used until the currently edited zone was saved or the "
+"zone entry exists in the ldap database."
+msgstr ""
+
+#: plugins/admin/systems/servDNSeditZoneEntries.tpl:11
+msgid "To add a new host entry just click here"
 msgstr ""
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:58
@@ -10188,7 +10201,7 @@ msgstr ""
 #: plugins/gofon/macro/class_gofonMacro.inc:216
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:86
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:306
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1046
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1047
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:256
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:372
 #, fuzzy, php-format
@@ -10204,8 +10217,8 @@ msgstr "Impossibile selezionare il database!"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:523
 #: plugins/admin/ogroups/class_phonequeue.inc:525
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1147
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1149
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1152
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1154
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:412
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:414
 #, php-format
@@ -10216,7 +10229,7 @@ msgstr ""
 #: plugins/gofon/macro/class_gofonMacro.inc:205
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:79
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:295
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1035
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1036
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:361
 #, php-format
 msgid ""
@@ -10724,11 +10737,17 @@ msgstr ""
 msgid "You need to specify at least one phone number!"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1077
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1078
 msgid "Stop"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1111
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1083
+msgid ""
+"Can't remove phone account, the mysql extension is not present in php "
+"configuration."
+msgstr ""
+
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1116
 #, php-format
 msgid "Removed user '%s' from phone queue '%s'."
 msgstr ""
@@ -11612,83 +11631,83 @@ msgstr ""
 msgid "Arguments"
 msgstr "Argomenti"
 
-#: include/functions.inc:291
+#: include/functions.inc:292
 #, php-format
 msgid "Error when connecting the LDAP. Server said '%s'."
 msgstr "Errore durante la connessione al server LDAP. Il server dice: '%s'"
 
-#: include/functions.inc:312
+#: include/functions.inc:313
 #, php-format
 msgid "User login failed. LDAP server said '%s'."
 msgstr ""
 
-#: include/functions.inc:331
+#: include/functions.inc:332
 msgid "Username / UID is not unique. Please check your LDAP database."
 msgstr ""
 
-#: include/functions.inc:369
+#: include/functions.inc:370
 msgid ""
 "Error while adding a lock. Parameters are not set correctly, please check "
 "the source!"
 msgstr ""
 
-#: include/functions.inc:379
+#: include/functions.inc:380
 #, php-format
 msgid ""
 "Can't set locking information in LDAP database. Please check the 'config' "
 "entry in gosa.conf! LDAP server says '%s'."
 msgstr ""
 
-#: include/functions.inc:394
+#: include/functions.inc:395
 #, php-format
 msgid "Adding a lock failed. LDAP server says '%s'."
 msgstr ""
 
-#: include/functions.inc:420
+#: include/functions.inc:421
 #, php-format
 msgid "Removing a lock failed. LDAP server says '%s'."
 msgstr ""
 
-#: include/functions.inc:450
+#: include/functions.inc:451
 msgid ""
 "Getting the lock from LDAP failed. Parameters are not set correctly, please "
 "check the source!"
 msgstr ""
 
-#: include/functions.inc:460
+#: include/functions.inc:461
 msgid ""
 "Can't get locking information in LDAP database. Please check the 'config' "
 "entry in gosa.conf!"
 msgstr ""
 
-#: include/functions.inc:468
+#: include/functions.inc:469
 msgid ""
 "Found multiple locks for object to be locked. This should not be possible - "
 "cleaning up multiple references."
 msgstr ""
 
-#: include/functions.inc:582
+#: include/functions.inc:583
 #, php-format
 msgid "The size limit of %d entries is exceed!"
 msgstr ""
 
-#: include/functions.inc:584
+#: include/functions.inc:585
 #, php-format
 msgid ""
 "Set the new size limit to %s and show me this message if the limit still "
 "exceeds"
 msgstr ""
 
-#: include/functions.inc:601
+#: include/functions.inc:602
 msgid "incomplete"
 msgstr "incompleto"
 
-#: include/functions.inc:1002
+#: include/functions.inc:1003
 #, php-format
 msgid "Last message repeated %s times."
 msgstr ""
 
-#: include/functions.inc:1068
+#: include/functions.inc:1069
 #, php-format
 msgid ""
 "You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
@@ -11697,23 +11716,23 @@ msgstr ""
 "Stai per modificare il record LDAP '%s' che sembra essere in uso da '%s'. "
 "Contatta la persona interessata."
 
-#: include/functions.inc:1167
+#: include/functions.inc:1168
 msgid "LDAP error:"
 msgstr "Errore LDAP"
 
-#: include/functions.inc:1345
+#: include/functions.inc:1346
 msgid "Entries per page"
 msgstr ""
 
-#: include/functions.inc:1373
+#: include/functions.inc:1374
 msgid "Apply filter"
 msgstr ""
 
-#: include/functions.inc:1647
+#: include/functions.inc:1648
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr ""
 
-#: include/functions.inc:1690
+#: include/functions.inc:1691
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "versione di sviluppo di GOsa (Rev %s)"
@@ -11856,6 +11875,25 @@ msgstr ""
 #: include/class_CopyPasteHandler.inc:172
 #, php-format
 msgid "You are going to copy the entry '%s'."
+msgstr ""
+
+#: include/functions_dns.inc:166
+#, php-format
+msgid "Can't find reverse zone for dns zone '%s'. Aborting parsing this zone."
+msgstr ""
+
+#: include/functions_dns.inc:171
+#, php-format
+msgid ""
+"Found more than one reverse zone for dns zone '%s'. Aborting parsing this "
+"zone."
+msgstr ""
+
+#: include/functions_dns.inc:363
+#, php-format
+msgid ""
+"Found more than one dns zone which contains an entry named '%s'. Aborting "
+"getting dns informations for this device."
 msgstr ""
 
 #: html/getvcard.php:36
