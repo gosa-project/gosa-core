@@ -23,160 +23,171 @@ class application extends plugin
 
   /* attribute list for save action */
   var $attributes= array("cn", "description", "gosaApplicationExecute", "gosaApplicationName","gosaApplicationIcon",
-			"gosaApplicationFlags","gotoLogonScript");
+      "gosaApplicationFlags","gotoLogonScript");
   var $objectclasses= array("top", "gosaApplication");
+
+  var $isReleaseApplikation = false;
 
   function application ($config, $dn= NULL)
   {
-  	plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn);
 
-	/* Load icon */
-	$ldap= $config->get_ldap_link();
-	if ($dn != 'new'){
-		$this->iconData= $ldap->get_attribute($dn, "gosaApplicationIcon");
-		$this->saved_attributes['gosaApplicationIcon'] = $this->iconData;
-	}
-	if ($this->iconData == ""){
-		$this->set_picture("");
-	}
-	$_SESSION['binary']= $this->iconData;
-	$_SESSION['binarytype']= "image/jpeg";
-	$this->gosaApplicationIcon= $this->iconData;
+    $tmp = search_config($this->config->data,"faiManagement","CLASS");
+    if(!empty($tmp)) {
+      if(!preg_match("/^ou=apps,/",$_SESSION['appfilter']['release'])){
+        $this->isReleaseApplikation = true;  
+      }
+    }
 
-	/* This is always an account */
-	$this->is_account= TRUE;
+    /* Load icon */
+    $ldap= $config->get_ldap_link();
+    if ($dn != 'new'){
+      $this->iconData= $ldap->get_attribute($dn, "gosaApplicationIcon");
+      $this->saved_attributes['gosaApplicationIcon'] = $this->iconData;
+    }
+    if ($this->iconData == ""){
+      $this->set_picture("");
+    }
+    $_SESSION['binary']= $this->iconData;
+    $_SESSION['binarytype']= "image/jpeg";
+    $this->gosaApplicationIcon= $this->iconData;
 
-	if ($this->dn == "new"){
-		if(isset($_SESSION['appfilter']['depselect'])){
-			$this->base=$_SESSION['appfilter']['depselect'];
-		}else{
-			$ui= get_userinfo();
-			$this->base= dn2base($ui->dn);
-		}
-	} else {
-		$this->base= preg_replace ("/^[^,]+,[^,]+,/", "", $this->dn);
-	}
+    /* This is always an account */
+    $this->is_account= TRUE;
+
+    if ($this->dn == "new"){
+      if(isset($_SESSION['appfilter']['depselect'])){
+        $this->base=$_SESSION['appfilter']['depselect'];
+      }else{
+        $ui= get_userinfo();
+        $this->base= dn2base($ui->dn);
+      }
+    } else {
+      $this->base= preg_replace ("/^[^,]+,[^,]+,/", "", $this->dn);
+    }
   }
 
 
   function generateTemplate(){
-	$str= "# This code is part of GOsa (https://gosa.gonicus.de)\n#\n";
+    $str= "# This code is part of GOsa (https://gosa.gonicus.de)\n#\n";
 
-	$values = array();
-	$names 	= array();
-	if($this->parent->by_object['applicationParameters']->is_account){
-		$names = $this->parent->by_object['applicationParameters']->option_name;
-		$values = $this->parent->by_object['applicationParameters']->option_value;
-	}
+    $values = array();
+    $names 	= array();
+    if($this->parent->by_object['applicationParameters']->is_account){
+      $names = $this->parent->by_object['applicationParameters']->option_name;
+      $values = $this->parent->by_object['applicationParameters']->option_value;
+    }
 
-	if (count($names)){
-		$str .="# This plugin handles these environment variables:\n";
-	} else {
-		$str .="# This plugin handles no environment variables.\n";
-	}
+    if (count($names)){
+      $str .="# This plugin handles these environment variables:\n";
+    } else {
+      $str .="# This plugin handles no environment variables.\n";
+    }
 
-	foreach($names as $index => $name){
+    foreach($names as $index => $name){
 
-		// Fix length
-		for($i = strlen($name) ; $i < 30 ; $i++){
-			$name= $name." ";
-		}
-		if((isset($values[$index]))&&(!empty($values[$index]))){
-			$str.= "# ".$name."\t(e.g. '".$values[$index]."')\n";
-		}else{
-			$str.= "# ".$name."\t("._("no example").")\n";
-		}
-	}
-	$str .= "#\n".
-			"# Don't remove the following tag, it is used for header update.\n".
-			"### END HEADER ###";
- 
-	return($str);
+      // Fix length
+      for($i = strlen($name) ; $i < 30 ; $i++){
+        $name= $name." ";
+      }
+      if((isset($values[$index]))&&(!empty($values[$index]))){
+        $str.= "# ".$name."\t(e.g. '".$values[$index]."')\n";
+      }else{
+        $str.= "# ".$name."\t("._("no example").")\n";
+      }
+    }
+    $str .= "#\n".
+      "# Don't remove the following tag, it is used for header update.\n".
+      "### END HEADER ###";
+
+    return($str);
   }
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
-	$smarty= get_smarty();
+    $smarty= get_smarty();
 
- 	/* Do we represent a valid group? */
-	if (!$this->is_account && $this->parent == NULL){
-		 $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
-			 _("This 'dn' is no application.")."</b>";
-		 return ($display);
-	}
+    /* Do we represent a valid group? */
+    if (!$this->is_account && $this->parent == NULL){
+      $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
+        _("This 'dn' is no application.")."</b>";
+      return ($display);
+    }
 
-	$head = $this->generateTemplate();
-	$this->gotoLogonScript= $this->generateTemplate().preg_replace('/.*### END HEADER ###/s', '', $this->gotoLogonScript);
-	
-	if((isset($_POST['upLoad']))&&(isset($_FILES['ScriptFile']))){
-		$str = file_get_contents($_FILES['ScriptFile']['tmp_name']);
-		$this->gotoLogonScript = $str;
-	}
- 
-	/* Fill templating stuff */
-	$smarty->assign("cn", $this->cn);
-	$smarty->assign("bases", $this->config->idepartments);
-	if ($this->dn == "new"){
-		$smarty->assign("selectmode", "");
-		$smarty->assign("namemode", "");
-	} else {
-		$smarty->assign("namemode", "readonly");
-		$smarty->assign("selectmode", "disabled");
-	}
+    $head = $this->generateTemplate();
+    $this->gotoLogonScript= $this->generateTemplate().preg_replace('/.*### END HEADER ###/s', '', $this->gotoLogonScript);
 
-	/* Get random number for pictures */
-	srand((double)microtime()*1000000);
-	$smarty->assign("rand", rand(0, 10000));
+    if((isset($_POST['upLoad']))&&(isset($_FILES['ScriptFile']))){
+      $str = file_get_contents($_FILES['ScriptFile']['tmp_name']);
+      $this->gotoLogonScript = $str;
+    }
 
-	/* Variables */
-	foreach(array("description", "gosaApplicationExecute", "gosaApplicationName","cn") as $val){
-		$smarty->assign($val, $this->$val);
-		$smarty->assign($val."ACL", chkacl($this->acl, $val));
-	}
+    /* Fill templating stuff */
+    $smarty->assign("cn", $this->cn);
+    $smarty->assign("bases", $this->config->idepartments);
+    if ($this->dn == "new"){
+      $smarty->assign("selectmode", "");
+      $smarty->assign("namemode", "");
+    } else {
+      $smarty->assign("namemode", "readonly");
+      $smarty->assign("selectmode", "disabled");
+    }
 
-	/* Checkboxes */
-	foreach (array("G" => "exec_for_groupmembers", "O" => "overwrite_config",
-		        "L" => "place_on_kicker",
-			"D" => "place_on_desktop", "M" => "place_in_startmenu") as $key => $val){
-		if (preg_match("/$key/", $this->gosaApplicationFlags)){
-			$smarty->assign("$val", "checked");
-		} else {
-			$smarty->assign("$val", "");
-		}
-	}
-	$smarty->assign("gotoLogonScript",htmlentities($this->gotoLogonScript, ENT_COMPAT, 'UTF-8'));
-	$smarty->assign("base_select", $this->base);
-	$smarty->assign("gosaApplicationFlagsACL", chkacl($this->acl, "gosaApplicationFlags"));
-	/* Show main page */
-	return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
+    /* Get random number for pictures */
+    srand((double)microtime()*1000000);
+    $smarty->assign("rand", rand(0, 10000));
+
+    /* Variables */
+    foreach(array("description", "gosaApplicationExecute", "gosaApplicationName","cn") as $val){
+      $smarty->assign($val, $this->$val);
+      $smarty->assign($val."ACL", chkacl($this->acl, $val));
+    }
+
+    /* Checkboxes */
+    foreach (array("G" => "exec_for_groupmembers", "O" => "overwrite_config",
+          "L" => "place_on_kicker",
+          "D" => "place_on_desktop", "M" => "place_in_startmenu") as $key => $val){
+      if (preg_match("/$key/", $this->gosaApplicationFlags)){
+        $smarty->assign("$val", "checked");
+      } else {
+        $smarty->assign("$val", "");
+      }
+    }
+
+    $smarty->assign("isReleaseApplikation" , $this->isReleaseApplikation);
+    $smarty->assign("gotoLogonScript",htmlentities($this->gotoLogonScript, ENT_COMPAT, 'UTF-8'));
+    $smarty->assign("base_select", $this->base);
+    $smarty->assign("gosaApplicationFlagsACL", chkacl($this->acl, "gosaApplicationFlags"));
+    /* Show main page */
+    return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }
 
 
   function remove_from_parent()
   {
-	$ldap= $this->config->get_ldap_link();
-	$ldap->rmDir($this->dn);
+    $ldap= $this->config->get_ldap_link();
+    $ldap->rmDir($this->dn);
 
-	/* Optionally execute a command after we're done */
-	$this->handle_post_events("remove");
+    /* Optionally execute a command after we're done */
+    $this->handle_post_events("remove");
 
-	/* Delete references to object groups */
-	$ldap->cd ($this->config->current['BASE']);
-	$ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))", array("cn"));
-	while ($ldap->fetch()){
-		$og= new ogroup($this->config, $ldap->getDN());
-		unset($og->member[$this->dn]);
-		$og->save ();
-	}
-	$ldap->search ("(&(objectClass=posixGroup)(gosaMemberApplication=".$this->cn."))", array("cn"));
-	while ($attrs= $ldap->fetch()){
-		$ag= new appgroup($this->config, $ldap->getDN());
-		$ag->removeApp($this->cn);
-		$ag->save ();
-	}
+    /* Delete references to object groups */
+    $ldap->cd ($this->config->current['BASE']);
+    $ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))", array("cn"));
+    while ($ldap->fetch()){
+      $og= new ogroup($this->config, $ldap->getDN());
+      unset($og->member[$this->dn]);
+      $og->save ();
+    }
+    $ldap->search ("(&(objectClass=posixGroup)(gosaMemberApplication=".$this->cn."))", array("cn"));
+    while ($attrs= $ldap->fetch()){
+      $ag= new appgroup($this->config, $ldap->getDN());
+      $ag->removeApp($this->cn);
+      $ag->save ();
+    }
 
   }
 
@@ -184,6 +195,10 @@ class application extends plugin
   /* Save data to object */
   function save_object()
   {
+    if($this->isReleaseApplikation){
+      $tmpBase = $this->base;
+    } 
+ 
     if (isset($_POST['cn'])){
 
       /* Save attributes */
@@ -215,7 +230,7 @@ class application extends plugin
         if (!is_uploaded_file($_FILES['picture_file']['tmp_name'])) {
           print_red (_("The specified picture has not been uploaded correctly."));
         }
-    
+
         if (!function_exists("imagick_blob2image")){
           /* Get temporary file name for conversation */
           $fname = tempnam ("/tmp", "GOsa");
@@ -261,13 +276,13 @@ class application extends plugin
           if(imagick_writeimage($handle,$_FILES['picture_file']['tmp_name'])){
             gosa_log("can't write to specified folder");
           }
-          
+
           imagick_free($handle);
         }
 
         /* Activate new picture */
         $this->set_picture($_FILES['picture_file']['tmp_name']);
-        }	
+      }	
 
 
       /* Save base, since this is no LDAP attribute */
@@ -276,6 +291,9 @@ class application extends plugin
       }
     }
 
+    if($this->isReleaseApplikation){
+      $this->base = $tmpBase;
+    }
   }
 
 
@@ -285,7 +303,7 @@ class application extends plugin
     $message= array();
 
     if(!preg_match("#^/#",$this->gosaApplicationExecute)){
-      print_red(_("Specified execute path must start with '/'."));
+      $message[]=(_("Specified execute path must start with '/'."));
     }
 
     /* Permissions for that base? */
@@ -318,12 +336,27 @@ class application extends plugin
     /* Check for existing application */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->config->current["BASE"]);
-    $ldap->search("(&(objectClass=gosaApplication)(cn=$this->cn))",array("cn"));
-    $ldap->fetch();
-    if ($ldap->count() != 0 && $this->dn == "new"){
-      $message[]= _("There's already an application with this 'Name'.");
-    }
 
+    $tmp = search_config($this->config->data,"faiManagement","CLASS");
+    if((!empty($tmp)) && (isset($_SESSION['appfilter']['release']))){
+      $baseDn = str_replace($this->config->current['BASE'],$this->base,$_SESSION['appfilter']['release']);
+      $baseDn = preg_replace("/ou=apps,.*/","ou=apps,".$this->base,$_SESSION['appfilter']['release']);
+      $ldap->ls("(&(objectClass=gosaApplication)(cn=".$this->cn."))",$baseDn,array("cn"));
+      if($ldap->count()){
+        $attrs = $ldap->fetch();
+        if($this->dn != $attrs['dn']) {
+          $message[]= _("There's already an application with this 'Name'.");
+        }
+      }
+    }else{
+      $ldap->ls("(&(objectClass=gosaApplication)(cn=".$this->cn."))","ou=apps,".$this->base,array("cn"));
+      if ($ldap->count()){
+        $attrs = $ldap->fetch();
+        if($this->dn != $attrs['dn']) {
+          $message[]= _("There's already an application with this 'Name'.");
+        }
+      }
+    }
     return $message;
   }
 
@@ -331,64 +364,64 @@ class application extends plugin
   /* Save to LDAP */
   function save()
   {
-        plugin::save();
-		$this->attrs["gosaApplicationIcon"]= $this->gosaApplicationIcon;
+    plugin::save();
+    $this->attrs["gosaApplicationIcon"]= $this->gosaApplicationIcon;
 
-        /* Write back to ldap */
-        $ldap= $this->config->get_ldap_link();
-        $ldap->cat($this->dn);
-        $a= $ldap->fetch();
-        if (count($a)){
-        	$ldap->cd($this->dn);
-			$this->cleanup();
-$ldap->modify ($this->attrs); 
+    /* Write back to ldap */
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cat($this->dn);
 
-			$this->handle_post_events("modify");
-        } else {
-			$ldap->cd($this->config->current['BASE']);
-			$ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
-        	$ldap->cd($this->dn);
-			$ldap->add($this->attrs);
-			$this->handle_post_events("add");
-        }
-        show_ldap_error($ldap->get_error());
+    $a= $ldap->fetch();
+    if (count($a)){
+      $ldap->cd($this->dn);
+      $this->cleanup();
+      $ldap->modify ($this->attrs); 
+      $this->handle_post_events("modify");
+    } else {
+      $ldap->cd($this->config->current['BASE']);
+      $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
+      $ldap->cd($this->dn);
+      $ldap->add($this->attrs);
+      $this->handle_post_events("add");
+    }
+    show_ldap_error($ldap->get_error());
   }
 
   function set_picture($filename)
   {
-	if (!is_file($filename)){
-		$filename= "./images/default_icon.png";
-		$this->gosaApplicationIcon= "*removed*";
-	}
+    if (!is_file($filename)){
+      $filename= "./images/default_icon.png";
+      $this->gosaApplicationIcon= "*removed*";
+    }
 
-	if (file_exists($filename)){
-		$fd = fopen ($filename, "rb");
-		$this->iconData= fread ($fd, filesize ($filename));
-		$_SESSION['binary']= $this->iconData;
-		$_SESSION['binarytype']= "image/jpeg";
-		$this->gosaApplicationIcon= $this->iconData;
+    if (file_exists($filename)){
+      $fd = fopen ($filename, "rb");
+      $this->iconData= fread ($fd, filesize ($filename));
+      $_SESSION['binary']= $this->iconData;
+      $_SESSION['binarytype']= "image/jpeg";
+      $this->gosaApplicationIcon= $this->iconData;
 
-		fclose ($fd);
-	}
+      fclose ($fd);
+    }
   }
 
   function getCopyDialog()
   {
     $vars = array("cn");
-  
+
     $str ="<h2>"._("Application settings")."</h2>
-            <table>
-              <tr>
-                <td>".
-                  _("Application name"). 
-                "</td>  
-                <td>
-                   <input id='gosaApplicationName' name='cn' size='35' maxlength='60' 
-                    value='".$this->cn."' 
-                    title='"._("Application name to be displayed (i.e. below icons)")."'>                     
-                </td>
-              </tr>
-            </table>";
+      <table>
+      <tr>
+      <td>".
+      _("Application name"). 
+      "</td>  
+      <td>
+      <input id='gosaApplicationName' name='cn' size='35' maxlength='60' 
+      value='".$this->cn."' 
+      title='"._("Application name to be displayed (i.e. below icons)")."'>                     
+      </td>
+      </tr>
+      </table>";
 
     return($str);
   }

@@ -31,7 +31,8 @@
     <tr>
       <td><LABEL for="base">{t}Base{/t}{$must}</LABEL></td>
       <td>
-       <select size="1" id="base" name="base" title="{t}Choose subtree to place application in{/t}">
+       <select size="1" id="base" name="base" title="{t}Choose subtree to place application in{/t}" 
+        {if $isReleaseApplikation} disabled {/if}>
         {html_options options=$bases selected=$base_select}
        </select>
       </td>
