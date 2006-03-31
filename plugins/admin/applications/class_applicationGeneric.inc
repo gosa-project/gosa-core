@@ -284,6 +284,10 @@ class application extends plugin
   {
     $message= array();
 
+    if(!preg_match("#^/#",$this->gosaApplicationExecute)){
+      print_red(_("Specified execute path must start with '/'."));
+    }
+
     /* Permissions for that base? */
     if ($this->base != ""){
       $new_dn= "cn=".$this->cn.",ou=apps,".$this->base;
