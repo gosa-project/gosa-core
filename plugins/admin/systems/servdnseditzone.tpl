@@ -22,9 +22,13 @@
 				<tr>
 					<td>
 						{t}Zone entries{/t}
+						<br>
+						{if $AllowZoneEdit == false}
+							<i>{t}Can't be edited because the zone wasn't saved right now.{/t}</i>
+						{/if}
 					</td>
 					<td>
-						<input type="submit" name="EditZoneEntries" value="{t}Edit{/t}" disabled>
+						<input type="submit" name="EditZoneEntries" value="{t}Edit{/t}" {if $AllowZoneEdit == false} disabled {/if}> 
 					</td>
 				</tr>
 			</table>

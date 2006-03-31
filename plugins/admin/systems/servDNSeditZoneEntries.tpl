@@ -9,7 +9,7 @@
 	</b>
 {else}
 	{t}To add a new host entry just click here{/t}
-	<input type='image' name='UserRecord_Free' src='images/select_default.png' alt='{t}New{/t}' title='{t}New{/t}'>
+	<input type='image' name='UserRecord' src='images/select_default.png' alt='{t}New{/t}' title='{t}New{/t}'>
 	<br>
 	{$table}	
 {/if}

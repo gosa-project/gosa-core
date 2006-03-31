@@ -40,6 +40,8 @@ class servdnseditZone extends plugin
 
   var $isNew                    = true;
 
+  var $ZoneObject               = array();
+
   function servdnseditZone ($config, $dn= NULL,$attrs = array())
   {
     plugin::plugin ($config, $dn);
@@ -56,6 +58,8 @@ class servdnseditZone extends plugin
       $this->InitialzoneName    = "";//$attrs['InitialzoneName'];
       $this->InitialReverseZone = "";//$attrs['InitialReverseZone'];
     }else{
+      $this->ZoneObject         = $attrs;
+
       $this->OldZoneName        = $attrs['zoneName'];
       $this->OldReverseZone     = $attrs['ReverseZone'];
 
@@ -174,11 +178,15 @@ class servdnseditZone extends plugin
     $smarty= get_smarty();
     $display= "";
 
-
     /* Open Zone Entry Edit Dialog
      */
-    if(isset($_POST['EditZoneEntries'])){
-      $this->dialog= new servDNSeditZoneEntries($this->config,$this->dn,$this->InitialzoneName,FlipIp($this->InitialReverseZone));
+    if(!count($this->ZoneObject)){
+      $smarty->assign("AllowZoneEdit" , false);
+    }else{
+      $smarty->assign("AllowZoneEdit" , true);
+      if(isset($_POST['EditZoneEntries'])){
+        $this->dialog= new servDNSeditZoneEntries($this->config,$this->dn,$this->ZoneObject);
+      }
     }
 
     /* Save Zone Entry Edit Dialog
