@@ -17,7 +17,7 @@
 		</tr>
 		<tr>
 		  <!-- Name, ... -->
-		  <td style="vertical-align:top; width:100%;">
+		  <td style="vertical-align:top;">
 			<input type="hidden" name="MAX_FILE_SIZE" value="2000000">
 			 {t}User picture{/t}
 		  </td>
