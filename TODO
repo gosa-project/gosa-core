@@ -1,7 +1,7 @@
 Target for 2.4.1:
 =================
 
-* Speed up workstation loading
+* Sanity check: verteilserver == self?
 
 * Create a status-bar/-display for FAI installations 
   (Use notes from 0.5.12.2005)
