@@ -3,7 +3,7 @@
   <td style="width:50%; vertical-align:top;">
 <h2><img class="center" alt="" align="middle" src="images/penguin.png"> {t}Boot parameters{/t}</h2>
 
-   <table summary="">
+   <table summary="" style="width:100%">
     <tr>
      <td colspan="2" style='vertical-align:top;padding-top:3px;'><LABEL for="gotoLdapServer">{t}LDAP server{/t}</LABEL><br>
 	  {$SelectBoxLdapServer}	
@@ -11,7 +11,7 @@
     </tr>
     <tr>
      <td><LABEL for="gotoBootKernel">{t}Boot kernel{/t}</LABEL></td>
-     <td><input id="gotoBootKernel" name="gotoBootKernel" size=20 maxlength=60 {$gotoBootKernelACL}
+     <td style="width:70%"><input id="gotoBootKernel" name="gotoBootKernel" size=20 maxlength=60 {$gotoBootKernelACL}
                 value="{$gotoBootKernel}" title="{t}Enter the filename of the kernel to use{/t}"></td>
     </tr>
     <tr>
