@@ -195,15 +195,52 @@ function js_check(form) {
 	form.javascript.value = 'true';
 }
 
-window.onload = register;
-window.onresize = register;
+window.onload = adjust;
+window.onresize = adjust;
 
-function register(e) {
+function adjust(e) {
+	adjust_height(e);
+	adjust_width(e);
+}
+
+// Automatic resize (height) of divlists
+function adjust_height(e) {
 	if (!e) e=window.event;
-	var px_height= window.innerHeight-220;
+	var px_height= window.innerHeight-230;
 	if(px_height >= 480) {
 		document.getElementById("d_scrollbody").style.height=px_height+"px";
 	}
 	return true;
+}
+
+// Automatic resize (width) of divlists
+function adjust_width(e) {
+	if (!e) e=window.event;
+
+	// Resize the div
+	var div_width=parseInt(document.defaultView.getComputedStyle(document.getElementById("t_scrolltable"),"").getPropertyValue('width'));
+	var width= parseInt(window.innerWidth);
+
+	// Resize the body cells
+		var diff= width-div_width-430;
+
+	// window has been upscaled
+	if(div_width+diff>=600) {
+		document.getElementById('d_scrollbody').style.width=div_width+diff+"px";
+		document.getElementById('t_scrollbody').style.width=(div_width-19)+diff+"px";
+	
+		// Resize the Header cells (only the relative-width ones)
+		document.getElementById('t_scrollhead').style.width=div_width+diff+"px";
+
+	// window has been downscaled, we must reset the div to 600px
+	} else if (width < 930) {
+		// Reset layout (set width to 600px)
+		div_width=600;
+		document.getElementById('d_scrollbody').style.width=div_width+"px";
+		document.getElementById('t_scrollbody').style.width=(div_width-19)+"px";
+	
+		// Resize the Header cells (only the relative-width ones)
+		document.getElementById('t_scrollhead').style.width=div_width+"px";
+	}
 }
 // vim:ts=2:syntax

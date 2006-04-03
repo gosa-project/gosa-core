@@ -58,7 +58,7 @@ class divlist {
 	
 	function DrawList(){
 		$s_return = "";
-		$s_return.= "<table summary='".$this->s_summary."' style='width:".$this->s_width."px;height:".$this->s_height."px;' cellspacing='0'>";
+		$s_return.= "<table summary='".$this->s_summary."' style='width:".$this->s_width."px;height:".$this->s_height."px;' cellspacing='0' id='t_scrolltable'>";
 
     $s_return.= $this->_generateHeader();
     $s_return.=$this->_generatePage();
@@ -91,7 +91,7 @@ class divlist {
 		
     // Using scrolltable?
     if($this->i_entriesPerPage == 0) {
-      $s_return .= "\n<tr><td class='scrollhead'><table summary='' style='width:".$this->s_width."px;' cellspacing='0'>";
+      $s_return .= "\n<tr><td class='scrollhead'><table summary='' style='width:".$this->s_width."px;' cellspacing='0' id='t_scrollhead'>";
     }
 
 		$s_return .= "\n<tr>";
@@ -108,7 +108,7 @@ class divlist {
 
 		}
 		
-    // Attach a 18px-wide column (used as scrollbar space in body-table),
+    // Attach a 13px-wide column (used as scrollbar space in body-table),
     // but do this only if we are really using scrolltables.
     if($this->i_entriesPerPage == 0) {
       $s_return .= "\n<td class='listheader' style='width:13px;border-right:0px;'>&nbsp;</td>";
@@ -132,7 +132,7 @@ class divlist {
     if($this->i_entriesPerPage == 0) {
       // We need to construct a "body"-table that is width-of-scrollbar thinner than the "head"-table.
       $s_return .= "\n<tr><td colspan='".$this->cols."' class='scrollbody'><div style='width:".$this->s_width."px;height:".($this->s_height-20)."px;' id='d_scrollbody' class='scrollbody'>";
-      $s_return .= "<table summary='' style='height:100%;width:581px;' cellspacing='0'>";
+      $s_return .= "<table summary='' style='height:100%;width:581px;' cellspacing='0' id='t_scrollbody'>";
   	}
  
     $i_alternate=0;
