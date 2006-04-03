@@ -171,10 +171,14 @@ class servRepositorySetup  extends plugin
         $tmp = split("\n",$res);
         foreach($tmp as $hook){
           /* skip empty */
-          if((empty($hook)) || (!preg_match("/:/",$hook))) continue;
+          if(empty($hook)) continue;
 
-          $hookinfo = split(":",$hook);
-          $ret[$hookinfo[1]] = $hookinfo[0];
+          if(preg_match("/\:/",$hook)){ 
+            $hookinfo = split(":",$hook);
+            $ret[$hookinfo[1]] = $hookinfo[0];
+          }else{
+            $ret[$hook] = $hook;
+          }
         }
       }
     }
