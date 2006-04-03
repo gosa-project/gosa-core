@@ -251,7 +251,9 @@ class tabs
   function saveCopyDialog()
   {
 	  foreach ($this->by_object as $key => $obj){
-		  $this->by_object[$key]->saveCopyDialog();
+		  if($obj->is_account){
+			  $this->by_object[$key]->saveCopyDialog();
+		  }
 	  }
   }
 
@@ -262,7 +264,9 @@ class tabs
   {
 	  $ret = "";
 	  foreach ($this->by_object as $key => $obj){
-		  $ret .=  $this->by_object[$key]->getCopyDialog();
+		  if($obj->is_account){
+			  $ret .=  $this->by_object[$key]->getCopyDialog();
+		  }
 	  }
 	  return($ret);
   }
