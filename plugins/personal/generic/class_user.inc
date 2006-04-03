@@ -1237,6 +1237,12 @@ class user extends plugin
 
     $smarty = get_smarty();
 
+    $smarty->assign("passwordTodo","clear");
+
+    if(isset($_POST['passwordTodo'])){
+      $smarty->assign("passwordTodo",$_POST['passwordTodo']);
+    }
+
     $smarty->assign("sn",       $this->sn);
     $smarty->assign("givenName",$this->givenName);
     $smarty->assign("uid",      $this->uid);
@@ -1251,7 +1257,6 @@ class user extends plugin
 
     if((isset($_FILES['picture_file']['tmp_name'])) && ($_FILES['picture_file']['size'] > 0)){
       $this->set_picture($_FILES['picture_file']['tmp_name']);
-      echo "changed";
     }
 
     /* Remove picture? */

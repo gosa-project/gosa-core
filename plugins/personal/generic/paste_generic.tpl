@@ -27,6 +27,15 @@
 			<input type=submit name="picture_remove" value="{t}Remove picture{/t}">
 		  </td>
 		</tr>
+		<tr>
+			<td style='vertical-align:top;'>
+				{t}Password{/t}
+			</td>
+			<td>
+				<input type="radio" {if $passwordTodo=="clear"} checked{/if} name="passwordTodo" value="clear">{t}Clear password{/t}<br>
+				<input type="radio" {if $passwordTodo=="new"}   checked{/if} name="passwordTodo" value="new">{t}Set new password{/t}
+			</td>
+		</tr>
 	  </table>
 	</td>
 	<td style="vertical-align:top ">

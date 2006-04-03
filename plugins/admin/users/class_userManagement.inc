@@ -181,7 +181,6 @@ class userManagement extends plugin
         $ret    = $this->CopyPasteHandler->execute(false);
         if($ret) return($ret);
         $this->reload();
-        $s_action = "change_pw";
         $dn = $this->CopyPasteHandler->lastdn;
 
         foreach($this->list as $id => $entry){
@@ -189,7 +188,9 @@ class userManagement extends plugin
             $s_entry = $id;
           }
         }
-        $s_action = "change_pw";
+        if($_POST['passwordTodo'] == "new"){
+          $s_action = "change_pw";
+        }
       }
 
 
