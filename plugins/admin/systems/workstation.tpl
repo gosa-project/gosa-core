@@ -91,10 +91,18 @@
  </tr>
 </table>
 
-
+ {if $cn eq 'wdefault'}
 <!-- Place cursor -->
-<script language="JavaScript" type="text/javascript">
-  <!-- // First input field on page
-  document.mainform.cn.focus();
-  -->
-</script>
+		<script language="JavaScript" type="text/javascript">
+		  <!-- // First input field on page
+		  document.mainform.l.focus();
+		  -->
+		</script>
+     {else}
+		<script language="JavaScript" type="text/javascript">
+		  <!-- // First input field on page
+		  document.mainform.cn.focus();
+		  -->
+		</script>
+     {/if}
+
