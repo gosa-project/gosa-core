@@ -162,9 +162,12 @@ class servRepositorySetup  extends plugin
     $cmd= search_config($this->config->data['TABS'], "servrepository", "EXTERNAL_HOOK");
     if(!empty($cmd)){
       $res = shell_exec($cmd);
-      if(!$res){
-        print_red(sprintf(_("Can't execute specified '%s' please check your gosa.conf."),$cmd));
-      }else{
+      $res2 = trim($res);
+      if((!$res)){
+        print_red(sprintf(_("Can't execute specified EXTERNAL_HOOK '%s' please check your gosa.conf."),$cmd));
+      }elseif(empty($res2)){
+        print_red(sprintf(_("The specified EXTERNAL_HOOK '%s', specified in your gosa.conf, returns an empty string."),$cmd));
+      }else{  
         $tmp = split("\n",$res);
         foreach($tmp as $hook){
           /* skip empty */
