@@ -176,7 +176,7 @@ class divlist {
     				
     				if($i_alternate) $i_alternate=0; else $i_alternate=1;
     				
-    				$s_return .= "\n<tr>";
+    				$s_return .= "\n<tr class='rowxp'>";
     				
     				$cnt = 0; 					
     					
@@ -262,7 +262,7 @@ class divlist {
   					  $style = " ".$s_value2['attach']." "	;
   				  }
             
-            $s_return .= "\n<td ".$style." class='".$class."'>";
+            $s_return .= "\n<td ".$style." class='".$class."' onmouseover='highlight(this);' onmouseout='unhighlight(this,\"list".$i_alternate."\");'>";
   				  $s_return .= $s_value2['string'];
   				  $s_return .= "</td>";
   			  }
@@ -275,9 +275,9 @@ class divlist {
         $fill= "";
         for ($i= 1; $i <= $this->cols; $i++){
           if ($i == $this->cols){
-           $fill.= "<td class='list1' style='height:100%;border-right:0px;'>&nbsp;</td>";
+           $fill.= "<td class='list1' onmouseover='highlight;' style='height:100%;border-right:0px;'>&nbsp;</td>";
           } else {
-           $fill.= "<td class='list1' style='height:100%;'>&nbsp;</td>";
+           $fill.= "<td class='list1' onmouseover='highlight;' style='height:100%;'>&nbsp;</td>";
           }
         }
         $s_return.="\n<tr>$fill";

@@ -217,30 +217,56 @@ function adjust_height(e) {
 function adjust_width(e) {
 	if (!e) e=window.event;
 
-	// Resize the div
-	var div_width=parseInt(document.defaultView.getComputedStyle(document.getElementById("t_scrolltable"),"").getPropertyValue('width'));
-	var width= parseInt(window.innerWidth);
+	// Known to not work with IE
+	if(document.defaultView) {
+		// Resize the div
+		var div_width=parseInt(document.defaultView.getComputedStyle(document.getElementById("t_scrolltable"),"").getPropertyValue('width'));
+		var width= parseInt(window.innerWidth);
 
-	// Resize the body cells
+		// Resize the body cells
 		var diff= width-div_width-470;
-
-	// window has been upscaled
-	if(div_width+diff>=600) {
-		document.getElementById('d_scrollbody').style.width=div_width+diff+"px";
-		document.getElementById('t_scrollbody').style.width=(div_width-19)+diff+"px";
+		
+		// window has been upscaled
+		if(div_width+diff>=600) {
+			document.getElementById('d_scrollbody').style.width=div_width+diff+"px";
+			document.getElementById('t_scrollbody').style.width=(div_width-19)+diff+"px";
 	
-		// Resize the Header cells (only the relative-width ones)
-		document.getElementById('t_scrollhead').style.width=div_width+diff+"px";
+			// Resize the Header cells (only the relative-width ones)
+			document.getElementById('t_scrollhead').style.width=div_width+diff+"px";
 
-	// window has been downscaled, we must reset the div to 600px
-	} else if (width < 930) {
-		// Reset layout (set width to 600px)
-		div_width=600;
-		document.getElementById('d_scrollbody').style.width=div_width+"px";
-		document.getElementById('t_scrollbody').style.width=(div_width-19)+"px";
+		// window has been downscaled, we must reset the div to 600px
+		} else if (width < 930) {
+			// Reset layout (set width to 600px)
+			div_width=600;
+			document.getElementById('d_scrollbody').style.width=div_width+"px";
+			document.getElementById('t_scrollbody').style.width=(div_width-19)+"px";
 	
-		// Resize the Header cells (only the relative-width ones)
-		document.getElementById('t_scrollhead').style.width=div_width+"px";
+			// Resize the Header cells (only the relative-width ones)
+			document.getElementById('t_scrollhead').style.width=div_width+"px";
+		}
+	} else {
+		// IE
+
+	}
+}
+
+function highlight(e) {
+	if(e) {
+		for(i=0;i<e.parentNode.getElementsByTagName('td').length;i++) {
+			e.parentNode.getElementsByTagName('td')[i].style.background='#CDF6BD';
+		}
+	}
+}
+
+function unhighlight(e,style) {
+	if(e && style) {
+		for(i=0;i<e.parentNode.getElementsByTagName('td').length;i++) {
+			if(style=='list0') {
+				e.parentNode.getElementsByTagName('td')[i].style.background='#F0F0F0';
+			} else {
+				e.parentNode.getElementsByTagName('td')[i].style.background='#FFFFFF';
+			}
+		}
 	}
 }
 // vim:ts=2:syntax
