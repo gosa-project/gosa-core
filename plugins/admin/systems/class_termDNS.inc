@@ -42,9 +42,10 @@ class termDNS extends plugin
 
     plugin::plugin ($config, $dn);
 
-    $this->OrigCn = $this->attrs['cn'][0];
+    if(isset($this->attrs['cn'][0])){
+      $this->OrigCn = $this->attrs['cn'][0];
+    }
 
- 
     /* Hide all dns specific code, if dns is not available 
      */
     $DNSenabled = false;
