@@ -1158,7 +1158,8 @@ $ldap->modify ($this->attrs);
   }
 
   function getCopyDialog()
-  {
+  { 
+    if(!$this->is_account) return("");
     $smarty = get_smarty();
     if (!count($this->phoneNumbers)){
       $smarty->assign ("phoneNumbers", array(""));
@@ -1175,6 +1176,7 @@ $ldap->modify ($this->attrs);
 
   function saveCopyDialog()
   {
+    if(!$this->is_account) return;
     $this->execute();
     if(isset($_POST['goFonVoicemailPIN'])) {
       $this->goFonVoicemailPIN = $_POST['goFonVoicemailPIN'];
