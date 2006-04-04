@@ -105,6 +105,9 @@ class mailAccount extends plugin
 
         $method= new $this->method($this->config);
         $id= $method->uattrib;
+
+        /* Adapt attributes if needed */
+        $method->fixAttributesOnLoad($this);
         if ($method->connect($this->attrs["gosaMailServer"][0])){
           $quota= $method->getQuota($this->folder_prefix.$this->$id);
 
@@ -120,10 +123,11 @@ class mailAccount extends plugin
               $this->folder_prefix.$this->$id,
               $this->$id);
           $method->disconnect();
+        }else{
+          /* Could not connect to ldap.
+           */
+          $this->gosaMailQuota = $this->attrs['gosaMailQuota'][0];
         }
-
-        /* Adapt attributes if needed */
-        $method->fixAttributesOnLoad($this);
       }
     }
 
