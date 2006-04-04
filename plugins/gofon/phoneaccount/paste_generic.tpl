@@ -1,10 +1,14 @@
 <h2>{t}Phone settings{/t}</h2>
-<table summary="{t}Phone numbers{/t}" style="width:100%">
+<table summary="{t}Phone numbers{/t}" style="width:100%" cellspacing=0>
  <tr>
   <td style="vertical-align:top; border-right:1px solid #A0A0A0; width:50%">
    <h2>
     <img class="center" alt="" align="middle" src="images/banana.png" />&nbsp;{t}Phone numbers{/t}
    </h2>
+  </td>
+ </tr>
+ <tr>
+  <td style="vertical-align:top; border-right:1px solid #A0A0A0; width:50%">
    <select style="width:100%;" name="phonenumber_list[]" size=7 multiple>
     {html_options options=$phoneNumbers}
      <option disabled>&nbsp; </option>
