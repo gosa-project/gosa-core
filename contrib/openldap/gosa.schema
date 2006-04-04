@@ -130,15 +130,15 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.12.20 NAME 'gosaProxyWorkingStop'
 
 attributetype ( 1.3.6.1.4.1.10098.1.1.12.21 NAME 'gosaApplicationName'
         DESC 'Specifies the name of an application to be shown up on users desktop'
-        EQUALITY caseIgnoreIA5Match
-	SUBSTR caseIgnoreIA5SubstringsMatch
-        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+        EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15)
 
 attributetype ( 1.3.6.1.4.1.10098.1.1.12.22 NAME 'gosaApplicationExecute'
         DESC 'Specifies the executable path of an application'
-        EQUALITY caseIgnoreIA5Match
-	SUBSTR caseIgnoreIA5SubstringsMatch
-        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+        EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15)
 
 attributetype ( 1.3.6.1.4.1.10098.1.1.12.23 NAME 'gosaApplicationFlags'
         DESC 'Specifies the application flags G(roup only), D(esktop), M(enu)'
