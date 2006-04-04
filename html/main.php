@@ -39,12 +39,6 @@ session_set_cookie_params(24*60*60);
 /* Remember everything we did after the last click */
 session_start ();
 
-if(file_exists("../../Lab/GosaStuff/TimeTest/TimeTest.php")){
-  require_once("../../Lab/GosaStuff/TimeTest/TimeTest.php");
-  $_SESSION['TT'] = new TimeTest();
-  $_SESSION['TT'] -> AddPoint("Main");
-}
-
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
   @DEBUG (DEBUG_POST, __LINE__, __FUNCTION__, __FILE__, $_POST, "_POST");
@@ -370,11 +364,6 @@ if ((isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->d
   }
 
   tidy_clean_repair($display);
-}
-
-if(isset($_SESSION['TT'])){
-  $_SESSION['TT']->AddPoint("Ende");
-  echo $_SESSION['TT']->Draw();
 }
 
 /* Show page... */
