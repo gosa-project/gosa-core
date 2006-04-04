@@ -150,7 +150,7 @@ class divlist {
     /* If divlist is empty, append a single white entry */
     if(count($this->a_entries)==0){
       $str = $s_return."<tr>";
-      $str.="<td class='list1' colspan='".$this->cols."' style='height:100%;border-right:0px;width:100%;'>&nbsp;</td>";
+      $str.="<td class='list1nohighlight' colspan='".$this->cols."' style='height:100%;border-right:0px;width:100%;'>&nbsp;</td>";
       $str.="</tr>";
       if($this->i_entriesPerPage == 0) {
         $str.="</table></div></td></tr>";
