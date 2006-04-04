@@ -38,7 +38,7 @@ if ($remove_lock){
     $display= print_header(get_template_path('images/group.png'),
                            _("Group administration"), "<img alt=\"\" align=\"middle\" src=\"".
                             get_template_path('images/closedlock.png')."\"> ".
-                            $_SESSION['objectinfo']);
+                            @ldap::fix($_SESSION['objectinfo']));
   } else {
     $display= print_header(get_template_path('images/group.png'), _("Group administration"));
   }
