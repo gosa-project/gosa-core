@@ -869,7 +869,12 @@ $ldap->modify ($this->attrs);
     $smarty->assign("mail",$this->mail); 
     $smarty->assign("gosaMailAlternateAddress",$this->gosaMailAlternateAddress);
     $smarty->assign("gosaMailForwardingAddress",$this->gosaMailForwardingAddress);
-    return($smarty->fetch(get_template_path("copypaste.tpl",TRUE, dirname(__FILE__))));
+    $str = $smarty->fetch(get_template_path("copypaste.tpl",TRUE, dirname(__FILE__)));
+
+    $ret = array();
+    $ret['status'] = "";
+    $ret['string'] = $str;
+    return($ret);
   }
 
   function saveCopyDialog()

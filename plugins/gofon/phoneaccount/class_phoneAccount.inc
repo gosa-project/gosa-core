@@ -1171,7 +1171,10 @@ $ldap->modify ($this->attrs);
     $smarty->assign("goFonPIN",$this->goFonPIN);
 
     $display= $smarty->fetch(get_template_path('paste_generic.tpl', TRUE, dirname(__FILE__)));
-    return($display);
+    $ret =array();
+    $ret['string'] = $display;
+    $ret['status'] = "";
+    return($ret);
   }
 
   function saveCopyDialog()

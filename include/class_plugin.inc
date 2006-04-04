@@ -747,7 +747,7 @@ class plugin
   }
 
   function getCopyDialog(){
-    return("");
+    return(array("string"=>"","status"=>""));
   }
 
 }
