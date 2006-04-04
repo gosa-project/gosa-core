@@ -52,7 +52,7 @@
 	</LABEL>
 	</td>
 	<td>
-	<input id="description" name="description" size=40 maxlength=60 {$descriptionACL} 
+	<input id="description" name="description" size=40 maxlength=80 {$descriptionACL} 
 	value="{$description}" title="{t}Descriptive text for department{/t}">
 	</td>
 	</tr>

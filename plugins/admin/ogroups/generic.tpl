@@ -11,7 +11,7 @@
     </tr>
     <tr>
      <td><LABEL for="description">{t}Description{/t}</LABEL></td>
-     <td><input id="description" name="description" size=40 maxlength=60 {$descriptionACL} value="{$description}" title="{t}Descriptive text for this group{/t}">
+     <td><input id="description" name="description" size=40 maxlength=80 {$descriptionACL} value="{$description}" title="{t}Descriptive text for this group{/t}">
      </td>
     </tr>
     <tr>

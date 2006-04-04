@@ -22,7 +22,7 @@
     <tr>
      <td><LABEL for="description">{t}Description{/t}</LABEL></td>
      <td>
-      <input id="description" name="description" size=35 maxlength=60 {$descriptionACL} value="{$description}">
+      <input id="description" name="description" size=35 maxlength=80 {$descriptionACL} value="{$description}">
      </td>
     </tr>
 

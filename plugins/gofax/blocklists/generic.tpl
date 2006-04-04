@@ -40,7 +40,7 @@
       <tr>
        <td><LABEL for="description">{t}Description{/t}</LABEL></td>
        <td>
-         <input name="description" id="description" size=25 maxlength=60 {$descriptionACL} value="{$description}" title="{t}Descriptive text for this blocklist{/t}">
+         <input name="description" id="description" size=25 maxlength=80 {$descriptionACL} value="{$description}" title="{t}Descriptive text for this blocklist{/t}">
        </td>
       </tr>
     </table>

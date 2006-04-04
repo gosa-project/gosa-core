@@ -35,7 +35,7 @@
     			<tr>
      				<td><LABEL for="description">{t}Description{/t}</LABEL></td>
      				<td>
-      					<input name="description" id="description" size=35 maxlength=60 value="{$description}">
+      					<input name="description" id="description" size=35 maxlength=80 value="{$description}">
      				</td>
     			</tr>
     			<tr>

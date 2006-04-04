@@ -11,13 +11,13 @@
       <tr>
        <td><LABEL for="description">{t}Description{/t}</LABEL>{$must}</td>
        <td>
-        <input id="description" name="description" size=25 maxlength=60 {$descriptionACL} value="{$description}" title="{t}Descriptive text for department{/t}">
+        <input id="description" name="description" size=25 maxlength=80 {$descriptionACL} value="{$description}" title="{t}Descriptive text for department{/t}">
        </td>
       </tr>
       <tr>
        <td><LABEL for="businessCategory">{t}Category{/t}</LABEL></td>
        <td>
-        <input id="businessCategory" name="businessCategory" size=25 maxlength=60 {$businessCategoryACL} value="{$businessCategory}" title="{t}Category for this subtree{/t}">
+        <input id="businessCategory" name="businessCategory" size=25 maxlength=80 {$businessCategoryACL} value="{$businessCategory}" title="{t}Category for this subtree{/t}">
        </td>
       </tr>
       <tr>
