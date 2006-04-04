@@ -35,7 +35,7 @@ class phoneAccount extends plugin
 
   /* attribute list for save action */
   var $CopyPasteVars          = array("phoneNumbers");
-  var $attributes             = array("goFonDeliveryMode", "goFonFormat","uid","cn","mail",
+  var $attributes             = array("goFonDeliveryMode", "goFonFormat","uid","cn",
       "goFonHardware","goFonPIN","goFonVoicemailPIN","telephoneNumber", "goFonMacro","macro");
   var $objectclasses= array("goFonAccount");
 
@@ -1015,7 +1015,7 @@ $ldap->modify ($this->attrs);
   function remove_from_parent()
   {
     foreach($this->attributes as $key=>$val){
-      if(in_array($val,array("uid","cn","mail"))){
+      if(in_array($val,array("uid","cn"))){
         unset($this->attributes[$key]);
         unset($this->$val);
       }

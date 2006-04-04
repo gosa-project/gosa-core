@@ -669,8 +669,8 @@ $ldap->modify ($this->attrs);
     /* Save data to LDAP */
     $ldap->cd($this->dn);
     $this->cleanup();
-$ldap->modify ($this->attrs); 
-
+    $ldap->modify ($this->attrs); 
+  
     show_ldap_error($ldap->get_error());
 
     /* Only do IMAP actions if we are not a template */
