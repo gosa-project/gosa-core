@@ -272,7 +272,7 @@ class tabs
 				  $this->SubDialog = true;
 	              return($tmp['string']);
 	     	  }else{
-                 $ret .= $tmp['string'];
+                 $ret .= "<br>".$tmp['string'];
 			  }
 		  }
 	  }

@@ -11,6 +11,8 @@
 		  <input id="homeDirectory" name="homeDirectory" size=40 maxlength=120 value="{$homeDirectory}">
 		</td>
 	  </tr>
+	</table>
+	<table>
 	  <tr>
 		<td>
 		  <input id="force_ids" type=checkbox name="force_ids" value="1" ".$force_ids."}
@@ -38,9 +40,16 @@
 				<input id="gidNumber" name="gidNumber" size=5 maxlength=5 {$forceMode} value="{$gidNumber}">
 			</td>
 		</tr>
+	</table>
+	<table>
 		<tr>
-			<td style="vertical-align:top;" colspan="3">
+			<td style="vertical-align:top;" colspan="4">
    				<h2><img alt="" class="center" align="middle" src="images/members.png" /> {t}Group membership{/t}</h2>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;" colspan="4">
+				
 				{if $groups eq "too_many_for_nfs"}
 					<b style="color:red">{t}(Warning: more than 16 groups are not supported by NFS!){/t}</b>
 					<br>
