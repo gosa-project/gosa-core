@@ -65,6 +65,11 @@ class CopyPasteHandler {
       foreach($obj->attributes as $attr){
         $this->current->by_object[$name]->$attr = $obj->$attr;
       }
+      if(isset($obj->CopyPasteVars)){
+        foreach($obj->CopyPasteVars as $attr){
+          $this->current->by_object[$name]->$attr = $obj->$attr;
+        }
+      }
       foreach(array("is_account") as $attr){
         if(isset($obj->$attr)){
           $this->current->by_object[$name]->$attr = $obj->$attr;
@@ -168,6 +173,8 @@ class CopyPasteHandler {
       $smarty = get_smarty();	
       $smarty->assign("Complete",false);
       $smarty->assign("AttributesToFix",$this->generateAttributesToFix());	
+      $smarty->assign("SubDialog",$this->current->SubDialog);
+    
       $smarty->assign("objectDN"		 ,$this->objectdn);	
       $smarty->assign("message", sprintf(_("You are going to copy the entry '%s'."), $this->objectdn));	
       return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));

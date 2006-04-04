@@ -7,11 +7,14 @@
 	<br>
 	{$AttributesToFix}
 	<p class='seperator'>&nbsp;</p>
+	{if $SubDialog == false}
 	<br>
+
 	<div style='text-align:right;width:100%;'>
 		<input type='submit' name='PerformCopyPaste' value='{t}Save{/t}'>&nbsp;
 		<input type='submit' name='AbortCopyPaste' value='{t}Cancel{/t}'>
 	</div>
+	{/if}
 {else}
 	<p class='seperator'>&nbsp;</p>
 	<br>

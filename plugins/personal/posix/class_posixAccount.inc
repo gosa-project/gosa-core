@@ -63,7 +63,8 @@ class posixAccount extends plugin
   var $ui         = array();
 
   /* attribute list for save action */
-  var $attributes= array("homeDirectory", "loginShell", "uidNumber", "gidNumber", "gecos",
+  var $CopyPasteVars  = array("grouplist","groupMembership");
+  var $attributes     = array("homeDirectory", "loginShell", "uidNumber", "gidNumber", "gecos",
       "shadowMin", "shadowMax", "shadowWarning", "shadowInactive", "shadowLastChange",
       "shadowExpire", "gosaDefaultPrinter", "gosaDefaultLanguage", "uid","accessTo","trustModel");
   var $objectclasses= array("posixAccount", "shadowAccount");
@@ -211,11 +212,13 @@ class posixAccount extends plugin
 
 
   /* execute generates the html output for this node */
-  function execute()
+  function execute($isCopyPaste = false)
   {
 	/* Call parent execute */
 	plugin::execute();
+  $display= "";
 
+  if(!$isCopyPaste){
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
       $this->is_account= !$this->is_account;
@@ -229,7 +232,6 @@ class posixAccount extends plugin
       return ($display);
     }
 
-    $display= "";
 
     /* Show tab dialog headers */
     if ($this->parent != NULL){
@@ -238,8 +240,8 @@ class posixAccount extends plugin
           $obj= $this->parent->by_object['sambaAccount'];
         }
         if (isset($obj) && $obj->is_account == TRUE &&
-             ((isset($this->parent->by_object['sambaAccount']))&&($this->parent->by_object['sambaAccount']->is_account))
-			||(isset($this->parent->by_object['environment'] ))&&($this->parent->by_object['environment'] ->is_account)){
+            ((isset($this->parent->by_object['sambaAccount']))&&($this->parent->by_object['sambaAccount']->is_account))
+            ||(isset($this->parent->by_object['environment'] ))&&($this->parent->by_object['environment'] ->is_account)){
 
           /* Samba3 dependency on posix accounts are enabled
              in the moment, because I need to rely on unique
@@ -257,23 +259,23 @@ class posixAccount extends plugin
         return($display);
       }
     }
+  }
+  /* Trigger group edit? */
+  if (isset($_POST['edit_groupmembership'])){
+    $this->group_dialog= TRUE;
+    $this->dialog= TRUE;
+  }
 
-    /* Trigger group edit? */
-    if (isset($_POST['edit_groupmembership'])){
-      $this->group_dialog= TRUE;
-      $this->dialog= TRUE;
-    }
+  /* Cancel group edit? */
+  if (isset($_POST['add_groups_cancel']) ||
+      isset($_POST['add_groups_finish'])){
+    $this->group_dialog= FALSE;
+    $this->dialog= FALSE;
+  }
 
-    /* Cancel group edit? */
-    if (isset($_POST['add_groups_cancel']) ||
-        isset($_POST['add_groups_finish'])){
-      $this->group_dialog= FALSE;
-      $this->dialog= FALSE;
-    }
-
-    /* Add selected groups */
-    if (isset($_POST['add_groups_finish']) && isset($_POST['groups']) &&
-        count($_POST['groups'])){
+  /* Add selected groups */
+  if (isset($_POST['add_groups_finish']) && isset($_POST['groups']) &&
+      count($_POST['groups'])){
 
       if (chkacl ($this->acl, "memberUid") == ""){
         $this->addGroup ($_POST['groups']);
@@ -496,7 +498,7 @@ class posixAccount extends plugin
     $smarty->assign("shells", $this->loginShellList);
     $smarty->assign("secondaryGroups", $this->secondaryGroups);
     $smarty->assign("primaryGroup", $this->primaryGroup);
-    if (!count($this->groupMembership)){
+   if (!count($this->groupMembership)){
       $smarty->assign("groupMembership", array("&nbsp;"));
     } else {
       $smarty->assign("groupMembership", $this->groupMembership);
@@ -1164,10 +1166,12 @@ $ldap->modify ($this->attrs);
       }
       $force_ids = "";
     }
-
-  /*
-    if(isset($_POST['editGroupMembership'])){
+   
+    $sta = "";
+ 
+    if(isset($_POST['edit_groupmembership'])){
       $this->group_dialog = TRUE;
+      $sta = "SubDialog";
     }
 
     if(isset($_POST['add_groups_finish']) || isset($_POST['add_groups_cancel'])){
@@ -1176,9 +1180,16 @@ $ldap->modify ($this->attrs);
     }
 
     if($this->group_dialog){
-      return($this->execute());
+      $str = $this->execute(true);
+      $ret = array();
+      $ret['string'] = $str;
+      $ret['status'] = $sta;
+      return($ret);
     }
-  */
+
+    if(isset($_POST['delete_groupmembership'])){
+      $this->execute();
+    }
 
     $smarty = get_smarty();
     $smarty->assign("homeDirectory",$this->homeDirectory);
@@ -1186,8 +1197,22 @@ $ldap->modify ($this->attrs);
     $smarty->assign("gidNumber",$this->gidNumber);
     $smarty->assign("forceMode",$forceMode);
     $smarty->assign("force_ids",$force_ids);
+   if (!count($this->groupMembership)){
+      $smarty->assign("groupMembership", array("&nbsp;"));
+    } else {
+      $smarty->assign("groupMembership", $this->groupMembership);
+    }
+    if (count($this->groupMembership) > 16){
+      $smarty->assign("groups", "too_many_for_nfs");
+    } else {
+      $smarty->assign("groups", "");
+    }
     $str = $smarty->fetch(get_template_path("paste_generic.tpl",TRUE,dirname(__FILE__)));
-    return($str);
+
+    $ret = array();
+    $ret['string'] = $str;
+    $ret['status'] = $sta;
+    return($ret);
   }
 
 }

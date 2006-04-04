@@ -1248,8 +1248,12 @@ class user extends plugin
     $smarty->assign("uid",      $this->uid);
     $smarty->assign("rand",     $rand);
     $str = $smarty->fetch(get_template_path("paste_generic.tpl",TRUE,dirname(__FILE__)));
-  
-    return($str);
+
+
+    $ret = array();
+    $ret['string'] = $str;
+    $ret['status'] = "";  
+    return($ret);
   }
 
   function saveCopyDialog()

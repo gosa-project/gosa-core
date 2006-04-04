@@ -38,16 +38,21 @@
 				<input id="gidNumber" name="gidNumber" size=5 maxlength=5 {$forceMode} value="{$gidNumber}">
 			</td>
 		</tr>
-<!--
 		<tr>
-			<td>
-			"._("Group membership")."
-			</td>
-			<td>
-			  <input type='submit' name='editGroupMembership' value='"._("Edit")."'>
+			<td style="vertical-align:top;" colspan="3">
+   				<h2><img alt="" class="center" align="middle" src="images/members.png" /> {t}Group membership{/t}</h2>
+				{if $groups eq "too_many_for_nfs"}
+					<b style="color:red">{t}(Warning: more than 16 groups are not supported by NFS!){/t}</b>
+					<br>
+				{/if}
+				<select style="width:100%; height:130px;" name="group_list[]" size=16 multiple>
+					{html_options options=$groupMembership}
+				</select>
+				<br>
+				<input type=submit value="{t}Add{/t}" name="edit_groupmembership">&nbsp;
+				<input type=submit value="{t}Delete{/t}" name="delete_groupmembership">
 			</td>
 		</tr>
-		-->
 	</table>
   </td>
 </tr>

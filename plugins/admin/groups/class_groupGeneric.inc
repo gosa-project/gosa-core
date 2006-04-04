@@ -584,11 +584,13 @@ class group extends plugin
      */
     $tmp = search_config($this->config->data,"faiManagement","CLASS");
     if(!empty($tmp)){
-      if(isset($this->parent->by_object['appgroup'])){
-        $baseObj = $this->parent->by_object['appgroup'];
-        if($baseObj->is_account){
-          if(isset($baseObj->Release)){
-            $this->description .= " (".trim($baseObj->Release).")";
+      if(isset($this->parent)){
+        if(isset($this->parent->by_object['appgroup'])){
+          $baseObj = $this->parent->by_object['appgroup'];
+          if($baseObj->is_account){
+            if(isset($baseObj->Release)){
+              $this->description .= " (".trim($baseObj->Release).")";
+            }
           }
         }
       }

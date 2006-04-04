@@ -30,6 +30,7 @@ class tabs
   var $disabled= "";
   var $by_name= array();
   var $by_object= array();
+  var $SubDialog = false;
 
   function tabs($config, $data, $dn)
   {
@@ -263,9 +264,16 @@ class tabs
   function getCopyDialog()
   {
 	  $ret = "";
+	  $this->SubDialog = false;
 	  foreach ($this->by_object as $key => $obj){
 		  if($obj->is_account){
-			  $ret .=  $this->by_object[$key]->getCopyDialog();
+			  $tmp = $this->by_object[$key]->getCopyDialog();
+			  if($tmp['status'] == "SubDialog"){
+				  $this->SubDialog = true;
+	              return($tmp['string']);
+	     	  }else{
+                 $ret .= $tmp['string'];
+			  }
 		  }
 	  }
 	  return($ret);
