@@ -422,8 +422,10 @@ class application extends plugin
       </td>
       </tr>
       </table>";
-
-    return($str);
+    $ret = array();
+    $ret['status'] = "";
+    $ret['string'] = $str;
+    return($ret);
   }
 
   function saveCopyDialog()
