@@ -851,7 +851,11 @@ class group extends plugin
     $smarty->assign("dis" ,$dis);
     $smarty->assign("cn" ,$this->cn);
     $smarty->assign("gidNumber",$this->gidNumber);
-    return($smarty->fetch(get_template_path("paste_generic.tpl",TRUE)));
+    $str = $smarty->fetch(get_template_path("paste_generic.tpl",TRUE));
+    $ret = array();
+    $ret['string'] = $str;
+    $ret['status'] = "";
+    return($ret);
   }
 
   function saveCopyDialog()

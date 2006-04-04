@@ -955,7 +955,10 @@ I: Only insider delivery */
     $smarty->assign("gosaMailForwardingAddress",$this->gosaMailForwardingAddress);
     $smarty->assign("mail",$this->mail);
     $display= $smarty->fetch (get_template_path('paste_mail.tpl', TRUE));
-    return($display);
+    $ret = array();
+    $ret['string'] = $display;
+    $ret['status'] = "";
+    return($ret);
   }
 
   function saveCopyDialog()
