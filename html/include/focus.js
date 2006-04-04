@@ -253,7 +253,7 @@ function adjust_width(e) {
 function highlight(e) {
 	if(e) {
 		for(i=0;i<e.parentNode.getElementsByTagName('td').length;i++) {
-			e.parentNode.getElementsByTagName('td')[i].style.background='#CDF6BD';
+			e.parentNode.getElementsByTagName('td')[i].style.background='#D8D8D8';
 		}
 	}
 }
