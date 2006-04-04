@@ -130,6 +130,13 @@ td.list1 {
 	height:22px;
 }
 
+td.list1nohighlight {
+	background:white;
+	border-right:1px solid #C0C0C0;
+	padding:3px;
+	height:22px;
+}
+
 td.list1:hover {
 	background:#CDF6BD;
 }
