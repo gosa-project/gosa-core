@@ -6,6 +6,12 @@ class grouptabs extends tabs
 	function grouptabs($config, $data, $dn)
 	{
 		tabs::tabs($config, $data, $dn);
+		$baseobject= $this->by_object['group'];
+		foreach ($this->by_object as $name => $obj){
+			if(isset($obj->parent)){
+				$this->by_object[$name]->parent  = $this;
+			}
+		}
 	}
 
 	function save_object($save_current= FALSE)

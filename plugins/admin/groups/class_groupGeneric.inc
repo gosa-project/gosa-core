@@ -48,6 +48,13 @@ class group extends plugin
   {
     plugin::plugin ($config, $dn);
 
+    /* remove Release Tag if we have release management enabled 
+     */
+    $tmp = search_config($config->data,"faiManagement","CLASS");
+    if(!empty($tmp)){
+      $this->description = preg_replace("/\(.*\)$/","",$this->description);
+    }
+  
     /* Load attributes depending on the samba version */
     $this->samba3= ($config->current['SAMBAVERSION'] == 3);
     $this->orig_dn= $dn;
@@ -510,7 +517,6 @@ class group extends plugin
     /* Save additional values for possible next step */
     if (isset($_POST['groupedit'])){
 
-      
       plugin::save_object();
 
       $this->force_gid= 0;
@@ -551,6 +557,7 @@ class group extends plugin
   /* Save to LDAP */
   function save()
   {
+
     /* ID handling */
     if ($this->force_gid == 0){
       if ($this->saved_gidNumber != ""){
@@ -568,6 +575,22 @@ class group extends plugin
         }
         add_lock ("uidnumber", "gosa");
         $this->gidNumber= $this->get_next_id("gidNumber");
+      }
+    }
+  
+    /* If release management is enabled .... 
+        Append release name to description tag ..
+       #FIXME release name within description is a very bad solution, use ldap attribute instead
+     */
+    $tmp = search_config($this->config->data,"faiManagement","CLASS");
+    if(!empty($tmp)){
+      if(isset($this->parent->by_object['appgroup'])){
+        $baseObj = $this->parent->by_object['appgroup'];
+        if($baseObj->is_account){
+          if(isset($baseObj->Release)){
+            $this->description .= " (".trim($baseObj->Release).")";
+          }
+        }
       }
     }
 

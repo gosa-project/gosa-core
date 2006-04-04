@@ -14,18 +14,21 @@ class appgroup extends plugin
   var $apps               = array();  // All available applications
   var $used_apps          = array();  // Specifies which applications are currently assigned 
 
-  var $option_name  = array();
-  var $option_value = array();
-  var $appoption    = array();
+  var $option_name          = array();
+  var $option_value         = array();
+  var $appoption            = array();
 
-  var $table          = "";
-  var $curbase        = "";
-  var $curCatDir      ;
-  var $curCatDepth    =0;         //
+  var $table                  = "";
+  var $curbase                = "";
+  var $curCatDir                  ;
+  var $curCatDepth              =0;         //
 
   /* attribute list for save action */
-  var $attributes= array("gosaMemberApplication");
-  var $objectclasses= array("gosaApplicationGroup");
+  var $attributes               = array("gosaMemberApplication");
+  var $objectclasses            = array("gosaApplicationGroup");
+
+  var $Release                  = "/";
+  var $enableReleaseManagement  = false;
 
 
   function appgroup ($config, $dn= NULL)
@@ -109,6 +112,14 @@ class appgroup extends plugin
     }
     $this->gosaMemberApplication = $tmp;
     $this->curbase = $this->config->current['BASE'];
+    
+    /* Check if we should enable the release selection 
+     */
+    $tmp = search_config($config->data,"faiManagement","CLASS");
+    if(!empty($tmp)){
+      $this->enableReleaseManagement = true;
+      $this->Release = $this->getReleaseName();
+    }
   }
 
 
@@ -385,10 +396,32 @@ class appgroup extends plugin
         $appname = $value;
         $appname = preg_replace("/EdiApp_/","",$name);  
         $appname = preg_replace("/_.*$/","",$appname);
-        /* We've got the appname, get parameters from ldap */
+
+        /* We've got the appname, get parameters from ldap 
+         */
         $ldap= $this->config->get_ldap_link();
-        $ldap->cd($this->config->current['BASE']);
-        $ldap->search("(&(objectClass=gosaApplication)(cn=$appname))",array("gosaApplicationParameter"));
+
+        $tmp = search_config($this->config->data,"faiManagement","CLASS");
+        if(!empty($tmp)){
+          $tmp  = array_flip($this->getReleases());
+          $base = $tmp[$this->Release];
+
+          $ldap->cd($this->config->current['BASE']);
+          $ldap->search("(&(objectClass=gosaApplication)(cn=$appname))",array("gosaApplicationParameter"));
+          $found = "";
+          while($attrs = $ldap->fetch()) {
+            if(preg_match("/cn=".$appname.",".$base."/",$attrs['dn'])){
+              $found = $attrs['dn'];
+            }
+          }
+          $ldap->cat($found);
+        }else{
+          $ldap->cd($this->config->current['BASE']);
+          $ldap->search("(&(objectClass=gosaApplication)(cn=$appname))",array("gosaApplicationParameter"));
+
+        }
+
+
         if ($ldap->count() != 1){
           print_red (_("The selected application name is not uniq. Please check your LDAP."));
         } else {
@@ -611,6 +644,22 @@ class appgroup extends plugin
     $smarty->assign("UsedApps", $div2->DrawList());
     $smarty->assign("List", $div->DrawList());
     $smarty->assign("apps", $apps);
+   
+    $smarty->assign("enableReleaseManagement",$this->enableReleaseManagement);
+ 
+    if($this->enableReleaseManagement){
+      $smarty->assign("Release", $this->Release);
+
+      $tmp = $this->getReleases();
+
+      $smarty->assign("Releases",   $tmp);
+
+      if(count($this->used_apps)){
+        $smarty->assign("ReleaseSelectAble", false);
+      }else{
+        $smarty->assign("ReleaseSelectAble", true);
+      }
+    }
 
     /* Show main page */
     if ($this->dialog){
@@ -622,6 +671,48 @@ class appgroup extends plugin
     return ($display);
   }
 
+  function getReleases()
+  {
+  
+    if(isset($this->base)){
+      $base = $this->base;
+    }else{
+      $base = $this->parent->by_object['group']->base;
+    }
+
+    $dn   = "ou=apps,".$base;
+    $ret  = array();
+
+    $ret ["ou=apps,".$base] = "/";
+
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($dn);
+
+    $ldap->search("objectClass=organizationalUnit",array("ou"));
+
+    while($attrs = $ldap->fetch()){
+      $str = str_replace($dn,"",$attrs['dn']);
+      $tmp = array_reverse( split("ou=",$str));
+      $str = "";
+      foreach($tmp as $val){
+        $val = trim(preg_replace("/,/","",$val));
+        if(empty($val)) break;
+        $str .= "/".$val;
+      }
+      if(!empty($str)){
+        $ret[$attrs['dn']]= preg_replace("/^\//","",$str);
+      }
+    }
+    return($ret);
+  }
+ 
+  function save_object()
+  {
+    if(isset($_POST ['Release'])){
+      $this->Release = $_POST['Release'];
+    }
+  }
+ 
 
   function remove_from_parent()
   {
@@ -702,10 +793,27 @@ $ldap->modify ($this->attrs);
   {
     /* Generate applist */
     $this->apps= array();
-    $ldap= $this->config->get_ldap_link();
-    $ldap->cd ("ou=apps,".$this->curbase);
 
-    $ldap->ls ("(objectClass=gosaApplication)","ou=apps,".$this->curbase);
+    /* Special handling for release managed apps 
+     */
+    $tmp = search_config($this->config->data,"faiManagement","CLASS");
+    if(!empty($tmp)){
+      $this->enableReleaseManagement = true;
+
+      $tmp = array_flip($this->getReleases());
+      $base =  $tmp[$this->Release];
+
+      $base = preg_replace("/ou=apps,.*$/","ou=apps,".$this->curbase,$base);
+    
+      $ldap   = $this->config->get_ldap_link();
+      $ldap->cd ($base);
+      $ldap->ls ("(objectClass=gosaApplication)",$base);
+    }else{
+      $ldap   = $this->config->get_ldap_link();
+      $ldap->cd ("ou=apps,".$this->curbase);
+      $ldap->ls ("(objectClass=gosaApplication)","ou=apps,".$this->curbase);
+    }
+    
     while ($attrs= $ldap->fetch()){
       if (isset($attrs["description"][0])){    
         $this->apps[$attrs["cn"][0]]=
@@ -781,6 +889,33 @@ $ldap->modify ($this->attrs);
   return($ret);
   }
 
+
+  /* Get selected release name.
+   *  it is written in the description tag 
+   *  within ... (.*)$
+   */
+  function getReleaseName()
+  {
+  
+    if(isset($this->parent)){
+      $base = $this->parent->by_object['group'];
+    }else{
+      $base = $this;
+    }
+
+    if(isset($base->attrs['description'][0])){
+      $desc = $base->attrs['description'][0];
+    }else{
+      $desc = "";
+    }
+ 
+    if(preg_match("/\(.*\)$/",$desc)){
+      $str = preg_replace("/^.*\((.*)\)$/","\\1",$desc);
+    }else{
+      $str = "/";
+    }
+    return($str);  
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
