@@ -275,9 +275,9 @@ class divlist {
         $fill= "";
         for ($i= 1; $i <= $this->cols; $i++){
           if ($i == $this->cols){
-           $fill.= "<td class='list1' onmouseover='highlight;' style='height:100%;border-right:0px;'>&nbsp;</td>";
+           $fill.= "<td class='list1nohighlight' style='height:100%;border-right:0px;'>&nbsp;</td>";
           } else {
-           $fill.= "<td class='list1' onmouseover='highlight;' style='height:100%;'>&nbsp;</td>";
+           $fill.= "<td class='list1nohighlight' style='height:100%;'>&nbsp;</td>";
           }
         }
         $s_return.="\n<tr>$fill";
