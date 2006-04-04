@@ -1,7 +1,7 @@
 <table summary="" style="table-layout:fixed; width:100%; vertical-align:top; text-align:left; table-layout:auto;" cellpadding="4">
 <tr>
   <td style="vertical-align:top;">
-   <table summary="" style="width:100%; vertical-align:top; text-align:left; border:1px solid #B0B0B0;"  cellpadding="4" cellspacing="0" border="0" rules="cols">
+   <table summary="" style="width:100%; vertical-align:top; text-align:left; border:1px solid #B0B0B0;"  cellpadding="4" cellspacing="0" rules="cols">
     <colgroup>
         <col width="32%">
         <col width="14%">

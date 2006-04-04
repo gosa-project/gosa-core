@@ -1,5 +1,6 @@
 {if $enableReleaseManagement == true}
-	{t}Release{/t}
+	<br>
+	<b>{t}Release focus{/t}:</b>
 	{if $ReleaseSelectAble}
 		<select name="Release" title="{t}Select release name{/t}" onChange="javascript: document.mainform.submit();">
 			{html_options output=$Releases values=$Releases selected=$Release}

@@ -1,4 +1,7 @@
+<br>
 <b>{t}Application options{/t}</b>
+<br>
+<br>
 
 {$table}
 
