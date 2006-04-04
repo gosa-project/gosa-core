@@ -65,7 +65,8 @@ class divSelectBox {
 	
     /* If divlist is empty, append a single white entry */
     if(count($this->a_entries)==0){
-      $str.="<tr><td class='list1' style='height:100%;'>&nbsp;</td></tr>";
+      $str.="<tr class='rowxp'
+                ><td class='list1nohighlight' style='height:100%;'>&nbsp;</td></tr>";
       return($str);
     }
 
@@ -99,7 +100,7 @@ class divSelectBox {
           $style = " ".$s_value2['attach']." "	;
         }
 
-        $s_return .= "\n<td ".$style." class='".$class."'>";
+        $s_return .= "\n<td ".$style." class='".$class."' onmouseover='highlight(this);' onmouseout='unhighlight(this,\"list".$i_alternate."\");'>";
         $s_return .= $s_value2['string'];
         $s_return .= "</td>";
       }
@@ -108,9 +109,9 @@ class divSelectBox {
     $s_return.="\n<tr>";
     for($i = 0 ; $i < ($this->cols) ; $i ++){
       if($i >= ($this->cols-1)){
-        $s_return .= "<td class='list1' style='height:100%;border:0px;'></td>";
+        $s_return .= "<td class='list1nohighlight' style='height:100%;border:0px;'>&nbsp;</td>";
       }else{
-        $s_return .= "<td class='list1' style='height:100%;' height='100%'></td>";
+        $s_return .= "<td class='list1nohighlight' style='height:100%;'>&nbsp;</td>";
       }
       
     }
