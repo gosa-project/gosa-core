@@ -551,15 +551,15 @@ class appgroup extends plugin
     }
     foreach($departments as $key => $app){
       $div->AddEntry(array(
-            array("string"=>"<img src='images/folder.png' alt='"._("department")."'>&nbsp;".sprintf($linkopen,base64_encode($key),$app),
+            array("string"=>"<img class='center' src='images/folder.png' alt='"._("department")."'>&nbsp;".sprintf($linkopen,base64_encode($key),$app),
               "attach"=>"style='border:0px;'")
             ));
     }
 
     foreach($apps as $key => $app){
       $div->AddEntry(array(
-            array("string"=>sprintf("<input type='checkbox' value='1' name='AddApp_%s'>",$key).
-              "<img src='images/select_application.png' alt='"._("application")."'>&nbsp;".sprintf($linkadd,$key,$app),
+            array("string"=>sprintf("<input class='center' type='checkbox' value='1' name='AddApp_%s'>",$key).
+              "<img class='center' src='images/select_application.png' alt='"._("application")."'>&nbsp;".sprintf($linkadd,$key,$app),
               "attach"=>"style='border:0px;'")
             ));
     }
@@ -589,9 +589,9 @@ class appgroup extends plugin
     $div2 = new DivSelectBox("appgroup");
     $div2->SetHeight(400);
 
-    $linkopen       = "<img src='images/folder.png' alt=\"\">&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=open&amp;id=%s'>%s</a>";
+    $linkopen       = "<img class='center' src='images/folder.png' alt=\"\">&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=open&amp;id=%s'>%s</a>";
     $catremove      = "&nbsp;<input type='image' src='images/edittrash.png' title='"._("Delete entry")."' name='DelCat_%s' value='%s'>";
-    $app            = "<img src='images/select_application.png' alt=\"\">&nbsp;%s";
+    $app            = "<img class='center' src='images/select_application.png' alt=\"\">&nbsp;%s";
     
     $catupdown        = "<a href='?plug=".$_GET['plug']."&amp;act=cat_up&amp;id=%s'>
                        <img align='top' alt=\"\" src='images/sort_up.png' border=0 title='"._("Move up")."'></a>&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=cat_down&amp;id=%s'> 
@@ -801,7 +801,17 @@ $ldap->modify ($this->attrs);
       $this->enableReleaseManagement = true;
 
       $tmp = array_flip($this->getReleases());
-      $base =  $tmp[$this->Release];
+      if(isset($tmp[$this->Release])){
+        $base =  $tmp[$this->Release];
+      }else{
+
+        $k = key($tmp);
+        $r = $tmp[$k];
+    
+        print_red(sprintf(_("Can't resolve the release name '%s', setting release name to '%s'. "),$this->Release,$k));
+        $this->Release = $k;
+        $base = $r; 
+      }
 
       $base = preg_replace("/ou=apps,.*$/","ou=apps,".$this->curbase,$base);
     
