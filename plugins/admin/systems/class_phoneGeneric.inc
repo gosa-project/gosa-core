@@ -193,6 +193,7 @@ class phoneGeneric extends plugin
     /* Fill templating stuff */
     $smarty= get_smarty();
     $smarty->assign("bases", $this->config->idepartments);
+    $smarty->assign("staticAddress","<font class=\"must\">*</font>");// $this->config->idepartments);
 
     /* Create Arrays for samrty select boxes */
     $smarty->assign("categories",     array("SIP","IAX","CAPI"));
