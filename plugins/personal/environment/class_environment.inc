@@ -59,6 +59,9 @@ class environment extends plugin
 
   /* general settings */
   // Sets the attributes which will kept on page reload, which will be saved, ...
+
+  var $CopyPasteVars      = array("gotoHotplugDevices","newKioskProfiles","gotoAvailableShares","gotoShareSelections","gotoPrinterSel","gotoProfileFlag_L","gotoXResolutions","gotoProfileFlag_C","gotoProfileServers","useProfile","is_group","in_dialog");
+
   var $attributes         = array("uid","gotoProfileServer","gotoProfileFlags",
                                     "gotoXResolution","gotoProfileQuota",
                                     "gotoLogonScripts","gotoLogonScript",
@@ -74,7 +77,6 @@ class environment extends plugin
   {
     plugin::plugin ($config, $dn);
 
-   
     /* Check : Are we currently editing a group or user dialog */
     if((isset($this->attrs['cn'][0]))&&(!isset($this->attrs['uid'][0]))){
       $suffix="Group";
