@@ -750,6 +750,17 @@ class plugin
     return(array("string"=>"","status"=>""));
   }
 
+  function PrepareForCopyPaste($source){
+    $todo = $this->attributes;
+    if(isset($this->CopyPasteVars)){
+      $todo = array_merge($todo,$this->CopyPasteVars);
+    }
+
+    foreach($todo as $var){
+      $this->$var = $source->$var;
+    }
+  }
+
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

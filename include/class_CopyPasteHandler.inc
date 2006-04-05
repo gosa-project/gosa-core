@@ -62,14 +62,9 @@ class CopyPasteHandler {
     $this->objectdn    = $obj->dn;
     $this->current = $emptyObj;
     foreach($obj->by_object as $name => $obj){
-      foreach($obj->attributes as $attr){
-        $this->current->by_object[$name]->$attr = $obj->$attr;
-      }
-      if(isset($obj->CopyPasteVars)){
-        foreach($obj->CopyPasteVars as $attr){
-          $this->current->by_object[$name]->$attr = $obj->$attr;
-        }
-      }
+      
+      $this->current->by_object[$name]->PrepareForCopyPaste($obj);
+  
       foreach(array("is_account") as $attr){
         if(isset($obj->$attr)){
           $this->current->by_object[$name]->$attr = $obj->$attr;
