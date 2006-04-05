@@ -42,6 +42,8 @@ class printgeneric extends plugin
   var $netConfigDNS;
   var $baseSelection    = false;
 
+  var $macAddress       = "";
+
   /* attribute list for save action */
   var $attributes     = array("cn", "description", "l", "labeledURI", "gotoPrinterPPD","gotoUserPrinter", "macAddress");
   var $objectclasses  = array("top", "gotoPrinter");
