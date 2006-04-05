@@ -138,6 +138,8 @@ class ppdManager
 			print_red(sprintf(_("Specified ppd file '%s' can't be opened for reading."),$ppdFile));
 		}elseif(!is_writeable(preg_replace("#(^.*/).*$#","\\1",$ppdFile.".tmp"))){
 			print_red(sprintf(_("The required tmp file file '%s' can't be opened for writing."),$ppdFile.".tmp"));
+		}elseif(!is_writeable($ppdFile.".tmp")){
+			print_red(sprintf(_("The required tmp file file '%s' can't be opened for writing."),$ppdFile.".tmp"));
 		}else{
 			foreach ($properties as $name => $section){
 				foreach ($section as $attribute => $value){
