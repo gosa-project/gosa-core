@@ -712,7 +712,8 @@ $ldap->modify ($this->attrs);
     if(!$this->is_account) return(array());
     $ldap= $this->config->get_ldap_link();
 
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
     if(empty($this->gosaMailServer)){
       $message[]= _("There is no valid mailserver specified, please add one in the system setup.");

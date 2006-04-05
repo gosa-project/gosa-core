@@ -307,8 +307,9 @@ class faiPartitionTable extends plugin
   /* Check supplied data */
   function check()
   {
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
-    $message= array();
     return ($message);
   }
 

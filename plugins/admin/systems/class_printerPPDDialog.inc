@@ -238,9 +238,9 @@ class printerPPDDialog extends plugin
   }
 
   function check(){
-    /* Check the given data
-     */
-    $message=array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
+
     return $message;
   }
 

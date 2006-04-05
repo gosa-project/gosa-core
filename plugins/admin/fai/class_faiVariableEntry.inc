@@ -91,7 +91,8 @@ class faiVariableEntry extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
     
     if(empty($this->FAIvariableContent)) {
       $message[]=_("Please specify a value for the attribute 'content'."); 

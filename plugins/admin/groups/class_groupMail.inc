@@ -794,7 +794,9 @@ I: Only insider delivery */
   {
     $ldap= $this->config->get_ldap_link();
 
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
+
     if(!$this->is_account) return array();
     
     //$message[] = $str;      

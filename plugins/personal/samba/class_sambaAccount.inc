@@ -634,7 +634,8 @@ $ldap->modify ($this->attrs);
   /* Check for input problems */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
     if ($this->samba3){
 

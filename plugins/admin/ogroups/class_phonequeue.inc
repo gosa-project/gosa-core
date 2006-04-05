@@ -186,7 +186,9 @@ class phonequeue extends plugin
   /* Check formular input */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
+
     if($this->is_number_used()){
       $message[] = $this->is_number_used();
     }

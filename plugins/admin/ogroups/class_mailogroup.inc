@@ -60,7 +60,8 @@ class mailogroup extends plugin
   /* Check formular input */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
     if ($this->is_account){
       $ldap= $this->config->get_ldap_link();

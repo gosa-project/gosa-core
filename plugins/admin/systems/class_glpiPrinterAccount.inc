@@ -675,7 +675,8 @@ class glpiPrinterAccount extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
     //    if($this->TechnicalResponsible == ""){
     //      $message[] = _("Please select a technical responsible person for this entry.");

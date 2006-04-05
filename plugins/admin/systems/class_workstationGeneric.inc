@@ -218,7 +218,9 @@ class workgeneric extends plugin
   /* Check supplied data */
   function check()
   {
-    $message=$this->netConfigDNS->check();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
+    $message= array_merge($message, $this->netConfigDNS->check());
 
     $ui= get_userinfo();
     $this->dn= "cn=".$this->cn.",ou=workstations,ou=systems,".$this->base;

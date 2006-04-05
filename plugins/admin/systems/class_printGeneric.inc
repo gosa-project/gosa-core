@@ -495,7 +495,9 @@ class printgeneric extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= $this->netConfigDNS->check();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
+    $message= array_merge($message, $this->netConfigDNS->check());
 
     if(isset($this->parent->by_name['workgeneric'])){
       if($this->parent->by_object['workgeneric']->cn == "wdefault"){

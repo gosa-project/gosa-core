@@ -300,7 +300,8 @@ class application extends plugin
   /* Check values */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
     if(!preg_match("#^/#",$this->gosaApplicationExecute)){
       $message[]=(_("Specified execute path must start with '/'."));

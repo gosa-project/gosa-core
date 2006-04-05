@@ -177,7 +177,8 @@ class department extends plugin
 	/* Check values */
 	function check()
 	{
-		$message= array();
+		/* Call common method to give check the hook */
+		$message= plugin::check();
 
 		/* Permissions for that base? */
 		//	$this->dn= "ou=$this->ou,".$this->base;

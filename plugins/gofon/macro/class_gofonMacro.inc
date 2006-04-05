@@ -344,8 +344,9 @@ class macro extends plugin
   */
   function check()
   {
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
-    $message = array();
     if(!$this->generate_mysql_entension_entries()){
       $message[] = $this->generate_error;
     }

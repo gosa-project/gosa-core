@@ -250,7 +250,8 @@ class workservice extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
     /* Default entries can use blank hsync/vsync entries */
     if ($this->dn != "" && $this->cn != "default" && $this->cn != "wdefault"){

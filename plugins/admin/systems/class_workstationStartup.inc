@@ -346,10 +346,15 @@ class workstartup extends plugin
   function check()
   {
     $messages = array();
+    
+    /* Call common method to give check the hook */
+    $messages= plugin::check();
+
     /* If there are packages selected, but no mirror show error */   
     if(($this->FAIdebianMirror == "none")&&(count($this->FAIclass)>0)){
       $messages[]=_("Please select a 'FAI server' or remove the 'FAI classes'.");
     }
+
     return($messages);
   }
 

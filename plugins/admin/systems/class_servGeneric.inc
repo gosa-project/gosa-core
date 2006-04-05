@@ -183,7 +183,9 @@ class servgeneric extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= $this->netConfigDNS->check();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
+    $message= array_merge($message, $this->netConfigDNS->check());
     $this->dn= "cn=".$this->cn.",ou=servers,ou=systems,".$this->base;
 
     /* must: cn */

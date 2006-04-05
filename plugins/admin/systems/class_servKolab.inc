@@ -222,7 +222,9 @@ $ldap->modify ($attrs);
 
   function check() 
   {
-    $message = array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
+
     if(($this->kolabFreeBusyFuture==""))    {
       $message[] = _("Future days in Free/Busy settings must be set.");
     }elseif(!is_uid($this->kolabFreeBusyFuture) || $this->kolabFreeBusyFuture < 0){

@@ -375,7 +375,8 @@ class faiProfile extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
     if(count($this->FAIclasses) == 0){
       $message[]=_("Please assign at least one class to this  profile.");

@@ -330,7 +330,8 @@ class faiPartitionTableEntry extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
    
     /* check every partition.
      * if there is an invalid value defined, append an errorstr to message

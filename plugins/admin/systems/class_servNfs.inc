@@ -118,7 +118,8 @@ class servnfs extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
     // fixme : a check for the path ?  ? 
     if(empty($this->path)){

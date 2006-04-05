@@ -881,8 +881,8 @@ class phoneAccount extends plugin
 
   function check()
   {
-    /* Reset message array */
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
     if((strlen($this->goFonVoicemailPIN)==0)||(strlen($this->goFonVoicemailPIN)>4)){
       $message[]=(_("Voicemail PIN must be between 1-4 characters."));

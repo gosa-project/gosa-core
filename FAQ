@@ -283,3 +283,16 @@ A: Yes, add
 
    to the main section of GOsa and the folders are created in unix style.
 
+
+Q: I'd like to do special checks for several plugin parameters. How can I modify
+   GOsa to take care of these checks?
+
+A: No need to modify anything. Just add a hook the the plugin you'd like to
+   check:
+
+   check="/your/command/binary"
+
+   This binary will get an ldif to STDIN for analysis and may write an error message
+   to STDOUT. Note, that the supplied ldif may NOT be the original target ldif due
+   to technical reasons.
+   

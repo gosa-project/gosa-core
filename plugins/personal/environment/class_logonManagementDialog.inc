@@ -90,17 +90,18 @@ class logonManagementDialog extends plugin
 
   function check()
   {
-  $message = array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
   
-  if(preg_match("/[^a-z]/",$this->LogonName)){
-    $message[] = _("Specified name is invalid.");
-  } 
-  
-  if(preg_match("/[^a-z0-9,\.-;:_\(\)!\? ]/i",$this->LogonDescription)){
-    $message[] = _("Specified description contains invalid characters.");
-  }
- 
-  return $message;
+    if(preg_match("/[^a-z]/",$this->LogonName)){
+      $message[] = _("Specified name is invalid.");
+    } 
+
+    if(preg_match("/[^a-z0-9,\.-;:_\(\)!\? ]/i",$this->LogonDescription)){
+      $message[] = _("Specified description contains invalid characters.");
+    }
+
+    return $message;
   }
 
 

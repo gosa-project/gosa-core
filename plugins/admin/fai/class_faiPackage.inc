@@ -334,7 +334,8 @@ class faiPackage extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
   
     if(count($this->usedPackages)==0){
       $message[]=_("Please select a least one Package.");

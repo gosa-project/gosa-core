@@ -185,7 +185,8 @@ class servDNSeditZoneEntries extends plugin
    */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
     
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);

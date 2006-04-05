@@ -105,7 +105,7 @@ class connectivity extends plugin
 
   function check()
   {
-    $message= array();
+    $message= plugin::check();
 
     foreach ($this->plugin_name as $name){
       $tmp= $this->plugin[$name]->check();

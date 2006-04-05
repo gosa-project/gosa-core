@@ -752,7 +752,8 @@ class environment extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
   
     if(preg_match("/[^0-9]/",$this->gotoProfileQuota)) {
       $message[]=_("Please set a valid profile quota size.");

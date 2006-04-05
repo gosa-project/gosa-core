@@ -127,7 +127,8 @@ class servdb extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
     if(in_array("goGlpiServer",$this->objectclasses)){
       foreach(array("goGlpiAdmin","goGlpiDatabase") as $attr){

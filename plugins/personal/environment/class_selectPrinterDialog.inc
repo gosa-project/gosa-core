@@ -62,7 +62,9 @@ class selectPrinterDialog extends plugin
   }
 
   function check(){
-    $message=array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
+
     if(empty($_POST['gotoPrinter'])){
       $message[] = _("Please select a printer or press cancel.");
     }

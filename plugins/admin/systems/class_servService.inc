@@ -266,7 +266,8 @@ class servservice extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
   
     if((isset($_POST['goTerminalServer']))&&(empty($this->goFontPath))){
       $message[]=_("Terminal server, must have fontpath specified.");

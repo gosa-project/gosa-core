@@ -295,7 +295,8 @@ class glpiPrinterCartridgesEdit extends plugin
 
   /* Check given values */
   function check(){
-    $message=array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
   
     /* Avoid choosing an already used name */
     $types = $this->parent->handle->getCartridgeTypeInformations();

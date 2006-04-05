@@ -335,7 +335,8 @@ class glpiDeviceManagement extends plugin
    */
   function check($attr)
   {
-    $message = array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
     if(isset($attr['designation'])){
       $str2 = "designation";

@@ -136,7 +136,9 @@ class faiHookEntry extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
+
     if(empty($this->FAIscript)) {
       $message[]=_("Please enter a value for script.");
     }

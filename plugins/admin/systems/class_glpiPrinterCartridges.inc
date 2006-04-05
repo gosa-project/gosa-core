@@ -279,7 +279,9 @@ class glpiPrinterCartridges extends plugin
    */
   function check($attr)
   {
-    $message = array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
+
     return($message);
   }
 

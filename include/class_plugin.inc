@@ -371,6 +371,70 @@ class plugin
   function check()
   {
     $message= array();
+
+    /* Skip if we've no config object */
+    if (!isset($this->config)){
+      return $message;
+    }
+
+    /* Find hooks entries for this class */
+    $command= search_config($this->config->data['MENU'], get_class($this), "CHECK");
+    if ($command == "" && isset($this->config->data['TABS'])){
+      $command= search_config($this->config->data['TABS'], get_class($this), "CHECK");
+    }
+
+    if ($command != ""){
+
+      if (!check_command($command)){
+        $message[]= sprintf(_("Command '%s', specified as CHECK hook for plugin '%s' doesn't seem to exist."), $command,
+                            get_class($this));
+      } else {
+
+        /* Generate "ldif" for check hook */
+        $ldif= "dn: $this->dn\n";
+        
+        /* ... objectClasses */
+        foreach ($this->objectclasses as $oc){
+          $ldif.= "objectClass: $oc\n";
+        }
+        
+        /* ... attributes */
+        foreach ($this->attributes as $attr){
+          if ($this->$attr == ""){
+            continue;
+          }
+          if (is_array($this->$attr)){
+            foreach ($this->$attr as $val){
+              $ldif.= "$attr: $val\n";
+            }
+          } else {
+              $ldif.= "$attr: ".$this->$attr."\n";
+          }
+        }
+
+        /* Append empty line */
+        $ldif.= "\n";
+
+        /* Feed "ldif" into hook and retrieve result*/
+        $descriptorspec = array( 0 => array("pipe", "r"), 1 => array("pipe", "w"), 2 => array("pipe", "w"));
+        $fh= proc_open($command, $descriptorspec, $pipes);
+        if (is_resource($fh)) {
+          fwrite ($pipes[0], $ldif);
+          fclose($pipes[0]);
+          
+          $result= stream_get_contents($pipes[1]);
+          if ($result != ""){
+            $message[]= $result;
+          }
+          
+          fclose($pipes[1]);
+          fclose($pipes[2]);
+          proc_close($fh);
+        }
+      }
+
+    }
+
     return ($message);
   }
 

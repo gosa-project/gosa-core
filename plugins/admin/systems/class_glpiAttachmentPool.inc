@@ -326,7 +326,9 @@ class glpiAttachmentPool extends plugin
   /* Simple check */
   function check()
   {
-    $message = array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
+
     if($this->edit){
     
       /* check if given name is already in use */

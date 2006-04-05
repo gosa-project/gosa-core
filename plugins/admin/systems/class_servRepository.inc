@@ -310,7 +310,9 @@ $ldap->modify ($this->attrs);
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
+        
     return ($message);
   }
 

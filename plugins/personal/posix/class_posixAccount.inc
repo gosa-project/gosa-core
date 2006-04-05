@@ -901,8 +901,8 @@ $ldap->modify ($this->attrs);
     /* Include global link_info */
     $ldap= $this->config->get_ldap_link();
 
-    /* Reset message array */
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
     /* must: homeDirectory */
     if ($this->homeDirectory == ""){

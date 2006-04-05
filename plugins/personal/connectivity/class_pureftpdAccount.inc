@@ -129,7 +129,8 @@ $ldap->modify ($this->attrs);
   /* Check values */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
     /* Check for positive integer values */
     if ($this->is_account){

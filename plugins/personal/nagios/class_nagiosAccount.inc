@@ -158,7 +158,9 @@ $ldap->modify ($this->attrs);
 
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
+
     $ldap= $this->config->get_ldap_link();
     /* must: mail */
     if ($this->NagiosAlias == ""){

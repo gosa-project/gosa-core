@@ -181,7 +181,9 @@ $CHKS = "<input type='hidden' value='chkchange' name='chkchange'><table summary=
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
+        
     return ($message);
   }
 

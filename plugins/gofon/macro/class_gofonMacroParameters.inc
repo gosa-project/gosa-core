@@ -320,7 +320,8 @@ class macroParameter extends plugin
   */
   function check()
   {
-    $message = array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
     foreach($this->attributes as $attr){
       if(chkacl($this->acl,"edit")){

@@ -631,8 +631,8 @@ $ldap->modify ($this->attrs);
   /* Check formular input */
   function check()
   {
-    /* Reset message array */
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
     /* must: facsimileTelephoneNumber */
     if ($this->facsimileTelephoneNumber == ""){

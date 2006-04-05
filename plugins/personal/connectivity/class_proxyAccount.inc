@@ -162,7 +162,8 @@ $ldap->modify ($this->attrs);
   /* Check values */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
     
     /* We've got only one value to check for positive integer or emtpy field */
     if ($this->is_account){

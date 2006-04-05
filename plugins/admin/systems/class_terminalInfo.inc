@@ -234,7 +234,6 @@ class terminfo extends plugin
   }
 
 
-
   /* Save to LDAP */
   function save()
   {

@@ -180,7 +180,8 @@ class conference extends plugin
   /* Check values */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
     if($this->is_number_used()){
       $message[] =  $this->is_number_used();

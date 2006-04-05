@@ -165,7 +165,9 @@ class faiTemplateEntry extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
+
     if(empty($this->FAItemplateFile)){
       $message[]=_("Please specify a value for attribute 'file'.");
     } 

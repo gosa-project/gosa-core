@@ -538,7 +538,8 @@ class addressbook extends plugin
 
 	function check()
 	{
-		$message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
 		/* must: sn, givenName */
 		if ($this->sn == ""){

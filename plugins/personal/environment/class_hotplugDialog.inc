@@ -105,7 +105,9 @@ class hotplugDialog extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
+
     if(!$this->use_existing){
       if((empty($this->HOT_name))||(preg_match("/[^a-z0-9 ]/i",$this->HOT_name))){
         $message[]=_("Please specify a valid name. Only 0-9 a-Z is allowed.");

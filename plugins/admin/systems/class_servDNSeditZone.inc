@@ -341,7 +341,9 @@ class servdnseditZone extends plugin
   /* Check supplied data */
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
+        
     /* Check if zoneName is already in use */
     $usedZones = $this->getUsedZoneNames();
     if(($this->isNew == true)||($this->zoneName  != $this->InitialzoneName)||($this->ReverseZone != $this->InitialReverseZone)){

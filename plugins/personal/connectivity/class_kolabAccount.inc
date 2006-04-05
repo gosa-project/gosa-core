@@ -225,7 +225,8 @@ class kolabAccount extends plugin
 
   function check()
   {
-    $message= array();
+    /* Call common method to give check the hook */
+    $message= plugin::check();
 
     /* FBFuture is in days... */
     if ($this->kolabFreeBusyFuture != "" && !preg_match('/^[0-9]+$/', $this->kolabFreeBusyFuture)){

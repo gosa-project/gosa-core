@@ -150,7 +150,8 @@ $ldap->modify ($this->attrs);
   /* Check values */
   function check()
   {
-	$message= array();
+	/* Call common method to give check the hook */
+	$message= plugin::check();
 
 	/* Check for valid option names */
 	for ($i= 0; $i<count($this->option_name); $i++){
