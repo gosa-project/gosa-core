@@ -22,6 +22,8 @@ class connectivity extends plugin
   var $ignore_account= TRUE;
   var $plugin= array();
   var $plugin_name= array();
+  var $CopyPasteVars = array("plugin","plugin_name");
+
 
   function connectivity ($config, $dn= NULL)
   {

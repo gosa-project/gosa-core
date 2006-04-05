@@ -87,6 +87,8 @@ class sambaAccount extends plugin
   var $attributes= array();
   var $objectclasses= array();
 
+  var $CopyPasteVars = array("kickoff_time_set","logoff_time_set","logon_time_set","mungedObject","orig_sambaDomainName");
+
   function sambaAccount ($config, $dn= NULL)
   {
     /* Load attributes depending on the samba version */
