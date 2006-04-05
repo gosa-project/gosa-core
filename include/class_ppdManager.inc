@@ -54,8 +54,10 @@ class ppdManager
 		$section= preg_replace('/^\*/', '', $section);
 		$attribute= preg_replace('/^\*/', '', $attribute);
 
-		$rp= fopen($file, "r");
-		$wp= fopen("$file.tmp", "w");
+		$rp= @fopen($file, "r");
+		$wp= @fopen("$file.tmp", "w");
+
+		
 
 		while (!feof($rp)){
 			$lines[]= fgets($rp, 1024);
@@ -132,10 +134,17 @@ class ppdManager
 
 	function saveProperties($ppdFile, $properties)
 	{
-		foreach ($properties as $name => $section){
-			foreach ($section as $attribute => $value){
-				if (is_array($value)){
-					$this->updateAttribute($ppdFile, $name, $attribute, $value['_default']);
+		if(!is_readable($ppdFile)){
+			print_red(sprintf(_("Specified ppd file '%s' can't be opened for reading."),$ppdFile));
+		}elseif(is_writeable($ppdFile.".tmp")){
+			print_red(sprintf(_("The required tmp file file '%s' can't be opened for writing."),$ppdFile.".tmp"));
+		}else{
+
+			foreach ($properties as $name => $section){
+				foreach ($section as $attribute => $value){
+					if (is_array($value)){
+						$this->updateAttribute($ppdFile, $name, $attribute, $value['_default']);
+					}
 				}
 			}
 		}
