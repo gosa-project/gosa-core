@@ -46,7 +46,7 @@ class ppdManager
 		return ($list);
 	}
 
-	
+
 	function updateAttribute($file, $section, $attribute, $value)
 	{
 		$fsection= false;
@@ -58,42 +58,70 @@ class ppdManager
 		$wp= fopen("$file.tmp", "w");
 
 		while (!feof($rp)){
-			$line= fgets($rp, 1024);
+			$lines[]= fgets($rp, 1024);
+		}
 
+		$ret = "";
+		$done =false;
+		foreach($lines as $nr => $line){
+	
 			if (preg_match("/\*OpenGroup:*\s+\**$section\/*/", $line)){
-				$fsection= true;
-				fwrite ($wp, $line);
-				continue;
-			}
+                $fsection= true;
+				$ret .=$line; 
+                continue;
+            }
 
-			if ($fsection){
+			if (($fsection) && ($section != "NO_SECTION")){
 				if (preg_match("/^\*CloseGroup:*\s+\**$section\/*/", $line)){
 					$fsection= false;
-					fwrite ($wp, $line);
+					$ret .=$line; 
 					continue;
 				}
 
+
 				if (preg_match("/^\*OpenUI:*\s+\**$attribute\/*/", $line)){
 					$fattribute= true;
-					fwrite ($wp, $line);
+					$ret .= $line; 
 					continue;
 				}
 
 				if ($fattribute){
 					if (preg_match("/^\*CloseUI:*\s+\**$attribute\/*/", $line)){
 						$fattribute= false;
-						fwrite ($wp, $line);
+						$ret .= $line; 
 						continue;
 					}
 
 					if (preg_match("/^\*Default$attribute:*\s+/", $line)){
 						$line= "*Default$attribute: $value\n";
+						$done =true;
+					}
+				}
+			}else{
+				if (preg_match("/^\*OpenUI:*\s+\**$attribute\/*/", $line)){
+					$fattribute= true;
+					$ret .= $line; 
+					continue;
+				}
+
+				if ($fattribute){
+					if (preg_match("/^\*CloseUI:*\s+\**$attribute\/*/", $line)){
+						$fattribute= false;
+						$ret .= $line; 
+						continue;
+					}
+
+					if (preg_match("/^\*Default$attribute:*\s+/", $line)){
+						$line= "*Default$attribute: $value\n";
+						$done =true;
 					}
 				}
 			}
-			fwrite ($wp, $line);
+			$ret .=$line; 
 		}
 
+		fwrite($wp,$ret);
+		
 		fclose($wp);
 		fclose($rp);
 
@@ -112,14 +140,13 @@ class ppdManager
 			}
 		}
 	}
-	
-	
+
 	function loadProperties($ppdFile)
 	{
 		$group= "";
 		$option= "";
 		$properties= array();
-		
+
 		$fh= fopen ($ppdFile, 'r');
 		while (!feof($fh)) {
 
@@ -141,7 +168,7 @@ class ppdManager
 					trigger_error(_('Group name not unique!'), E_USER_WARNING);
 					continue;
 				}
-				
+
 				// TODO: Symbol values are not supported yet!
 				if (preg_match('/\^/', $line)){
 					trigger_error(_('Symbol values are not supported yet!'), E_USER_WARNING);
@@ -171,7 +198,7 @@ class ppdManager
 					trigger_error(_('Nested options are not supported!'), E_USER_WARNING);
 					continue;
 				}
-				
+
 				// TODO: Symbol values are not supported yet!
 				if (preg_match('/\^/', $line)){
 					trigger_error(_('Symbol values are not supported yet!'), E_USER_WARNING);
@@ -190,13 +217,16 @@ class ppdManager
 				$type= trim(preg_replace('/^[^:]+:\s+/', '', $line));
 				$name= preg_replace('/:.*$/', '', $name);
 				$option= preg_replace('/:.*$/', '', $option);
-				
+
 				// TODO: PickMany is not supported yet!
 				if (preg_match('/PickMany/i', $type)){
 					trigger_error(_('PickMany is not supported yet!'), E_USER_WARNING);
 				}
-				
-				$properties[$group][$option]= array('_name' => $name, '_type' => $type);
+				if(empty($group)){
+					$properties["NO_SECTION"][$option]= array('_name' => $name, '_type' => $type);
+				}else{
+					$properties[$group][$option]= array('_name' => $name, '_type' => $type);
+				}
 				continue;
 			}
 			/* Show interest for option parsing */
@@ -213,31 +243,37 @@ class ppdManager
 				/* Default value? */
 				if (preg_match("@^\*Default$eoption:@", $line)){
 					$c= preg_replace("@^\*Default$eoption:\s+@", "", $line);
-					$properties[$group][$option]['_default']= trim(trim($c, '"'));
+					if(empty($group)){
+						$properties["NO_SECTION"][$option]['_default']= trim(trim($c, '"'));
+					}else{
+						$properties[$group][$option]['_default']= trim(trim($c, '"'));
+					}
 					continue;
 				}
 
 				/* Possible value? */
 				if (preg_match("@^\*$eoption\s+@", $line)){
-				#*PageSize Letter/US Letter: "<>setpagedevice"
+#*PageSize Letter/US Letter: "<>setpagedevice"
 					$c= preg_replace("@^\*$eoption\s+([^/]+).*$@", "$1", $line);
 					$d= preg_replace("@^\*$eoption\s+[^/]+/([^:]+).*$@", "$1", $line);
-					$properties[$group][$option][trim($c)]= trim($d);
+					if(empty($group)){
+						$properties["NO_SECTION"][$option][trim($c)]= trim($d);
+					}else{
+						$properties[$group][$option][trim($c)]= trim($d);
+					}
 					continue;
 				}
 			}
-
 		}
 		fclose ($fh);
-
 		return ($properties);
 	}
-	
+
 	function loadDescription($ppdFile)
 	{
 		$model= "";
 		$manufacturer= "";
-		
+
 		$fh= fopen ($ppdFile, 'r');
 		while ((!feof($fh))&&($fh)) {
 
@@ -246,7 +282,7 @@ class ppdManager
 			if (strlen($line) >= 256){
 				trigger_error(_('Parsing PPD file %s failed - line too long. Trailing characters have been ignored'), E_USER_WARNING);
 			}
-			
+
 			/* Extract interesting informations */
 			if (preg_match('/^\*Manufacturer:/i', $line)){
 				$manufacturer= preg_replace('/^\*Manufacturer:\s+"?([^"]+)"?.*$/i', '\1', $line);
@@ -288,7 +324,7 @@ class ppdManager
 
 		return ($this->cachedList);
 	}
-	
+
 }
 
 ?>
