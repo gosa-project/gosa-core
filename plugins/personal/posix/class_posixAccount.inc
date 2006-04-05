@@ -63,7 +63,7 @@ class posixAccount extends plugin
   var $ui         = array();
 
   /* attribute list for save action */
-  var $CopyPasteVars  = array("grouplist","groupMembership");
+  var $CopyPasteVars  = array("grouplist","groupMembership","use_shadowMin","use_shadowMax","use_shadowWarning","use_shadowInactive","use_shadowExpire","must_change_password","force_ids","printerList","grouplist","savedGidNumber","savedUidNumber","savedGroupMembership");
   var $attributes     = array("homeDirectory", "loginShell", "uidNumber", "gidNumber", "gecos",
       "shadowMin", "shadowMax", "shadowWarning", "shadowInactive", "shadowLastChange",
       "shadowExpire", "gosaDefaultPrinter", "gosaDefaultLanguage", "uid","accessTo","trustModel");
