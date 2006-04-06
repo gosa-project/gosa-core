@@ -3,16 +3,20 @@
  <tr>
   <td style="width:50%; vertical-align:top;">
 
-   <table summary="">
+   <table summary="" style="width:100%">
     <tr>
-     <td colspan="2" style='vertical-align:top;padding-top:3px;'><LABEL for="gotoLdapServer">{t}LDAP server{/t}</LABEL>
+     <td colspan="2" style='vertical-align:top;padding-top:3px;width:100%'><LABEL for="gotoLdapServer">{t}LDAP server{/t}</LABEL>
 		{$SelectBoxLdapServer}
      </td>
     </tr>
     <tr>
-     <td><LABEL for="gotoBootKernel">{t}Boot kernel{/t}</LABEL></td>
-     <td><input id="gotoBootKernel" name="gotoBootKernel" size=20 maxlength=60 {$gotoBootKernelACL}
-                value="{$gotoBootKernel}" title="{t}Enter the filename of the kernel to use{/t}"></td>
+     <td style="width:30%"><LABEL for="gotoBootKernel">{t}Boot kernel{/t}</LABEL></td>
+     <td>
+	<select id="gotoBootKernel" name="gotoBootKernel" {$gotoBootKernelACL} onchange='document.mainform.submit()'>
+	{html_options options=$gotoBootKernels selected=$gotoBootKernel}
+	<option disabled>&nbsp;</option>
+	</select>
+     </td>
     </tr>
     <tr>
      <td><LABEL for="customParameters">{t}Custom options{/t}</LABEL></td>

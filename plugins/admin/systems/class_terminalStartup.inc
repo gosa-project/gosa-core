@@ -9,11 +9,12 @@ class termstartup extends plugin
   /* Generic terminal attributes */
   var $bootmode= "G";
   var $goLdapServerList= array("default");
-  var $gotoBootKernel= "default";
+  var $gotoBootKernel= "";
   var $gotoKernelParameters= "";
   var $gotoLdapServer= "";
   var $gotoModules= array();
   var $gotoTerminalPath= "";
+  var $gotoBootKernels= array("default");
 
   /* Share */
   var $gotoShares         = array();// Currently Share Option
@@ -81,6 +82,26 @@ class termstartup extends plugin
     $this->gotoAvailableShares= $config->getShareList(false);
 
     $this->orig_dn= $this->dn;
+
+    /* Get list of boot kernels */
+    if (isset($this->config->data['TABS'])){
+      $command= search_config($this->config->data['TABS'], get_class($this), "KERNELS");
+
+      if (!check_command($command)){
+        $message[]= sprintf(_("Command '%s', specified as KERNELS hook for plugin '%s' doesn't seem to exist."), $command,
+            get_class($this));
+      } else {
+        $fh= popen($command, "r");
+        while (!feof($fh)) {
+          $buffer= fgets($fh, 256);
+          $this->gotoBootKernels[]= $buffer;
+        }
+        pclose($fh);
+        sort($this->gotoBootKernels);
+      }
+
+    }
+
   }
 
   function execute()
@@ -124,6 +145,7 @@ class termstartup extends plugin
      */
     $smarty->assign("gotoShareSelections",    $this->gotoShareSelections);
     $smarty->assign("gotoShareSelectionKeys", array_flip($this->gotoShareSelections));
+    $smarty->assign("gotoBootKernels",$this->gotoBootKernels);
 
     /* if $_POST['gotoShareAdd'] is set, we will try to add a new entry
      * This entry will be, a combination of mountPoint and sharedefinitions

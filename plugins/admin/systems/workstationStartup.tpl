@@ -11,8 +11,12 @@
     </tr>
     <tr>
      <td><LABEL for="gotoBootKernel">{t}Boot kernel{/t}</LABEL></td>
-     <td style="width:70%"><input id="gotoBootKernel" name="gotoBootKernel" size=20 maxlength=60 {$gotoBootKernelACL}
-                value="{$gotoBootKernel}" title="{t}Enter the filename of the kernel to use{/t}"></td>
+     <td style="width:70%">
+        <select id="gotoBootKernel" name="gotoBootKernel" {$gotoBootKernelACL} onchange='document.mainform.submit()'>
+         {html_options options=$gotoBootKernels selected=$gotoBootKernel}
+         <option disabled>&nbsp;</option>
+	</select>
+      </td>
     </tr>
     <tr>
      <td><LABEL for="customParameters">{t}Custom options{/t}</LABEL></td>

@@ -9,7 +9,7 @@ class workstartup extends plugin
   /* Generic terminal attributes */
   var $bootmode             = "G";
   var $goLdapServerList     = array("default");
-  var $gotoBootKernel       = "default";
+  var $gotoBootKernel       = "";
   var $gotoKernelParameters = "";
   var $gotoLdapServer       = "";
   var $gotoModules          = array();
@@ -17,7 +17,7 @@ class workstartup extends plugin
   var $gotoFilesystem       = array();
   var $gotoTerminalPath     = "";
   var $FAIstatus            = "";
-
+  var $gotoBootKernels      = array("default");
 
   /* attribute list for save action */
   var $attributes     = array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters", "FAIclass", "FAIstatus", "gotoShare","FAIdebianMirror", "FAIrelease");
@@ -220,6 +220,25 @@ class workstartup extends plugin
     }
 
     $this->orig_dn= $this->dn;
+
+    /* Get list of boot kernels */
+    if (isset($this->config->data['TABS'])){
+      $command= search_config($this->config->data['TABS'], get_class($this), "KERNELS");
+
+      if (!check_command($command)){
+        $message[]= sprintf(_("Command '%s', specified as KERNELS hook for plugin '%s' doesn't seem to exist."), $command,
+            get_class($this));
+      } else {
+        $fh= popen($command, "r");
+        while (!feof($fh)) {
+          $buffer= fgets($fh, 256);
+          $this->gotoBootKernels[]= $buffer;
+        }
+        pclose($fh);
+        sort($this->gotoBootKernels);
+      }
+      
+    }
   }
 
   
@@ -360,6 +379,7 @@ class workstartup extends plugin
 
   function execute()
   {
+
   	/* Call parent execute */
   	plugin::execute();
 
@@ -522,6 +542,7 @@ class workstartup extends plugin
 
     $smarty->assign("gotoShares",$this->printOutAssignedShares());
     $smarty->assign("gotoShareKeys",array_flip($this->printOutAssignedShares()));
+    $smarty->assign("gotoBootKernels",$this->gotoBootKernels);
 
     /* Arrays */
     $tmp = $this->config->data['SERVERS']['LDAP'];
@@ -810,10 +831,7 @@ class workstartup extends plugin
 
     /* Add semi automatic values */
     // FIXME: LDAP Server may not be set here...
-    $this->gotoKernelParameters= "root=/dev/nfs nfsroot=".
-      $this->gotoTerminalPath.
-      ",ro,hard,nolock,fg,rsize=8192 ".
-      "ip=::::::dhcp ldap=".base64_encode($this->gotoLdapServer);
+    $this->gotoKernelParameters= "ldap=".base64_encode($this->gotoLdapServer);
 
     switch ($this->bootmode){
       case "D":
