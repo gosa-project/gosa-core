@@ -59,34 +59,38 @@ class termDNS extends plugin
       return;
     }
 
-    /* Get Zones  
-     */
-    $this->Zones        = getAvailableZones($config);
+    if($this->DNSenabled){
 
-    /* Get Entry 
-     */
-    $this->dnsEntry     = getDNSHostEntries($config,$this->OrigCn);
+      /* Get Zones  
+       */
+      $this->Zones        = getAvailableZones($config);
 
-    /* Remove A record which equals $this->ipHostNumber
-     */
-    foreach($this->dnsEntry['RECORDS'] as $key => $rec){
-      if(($rec['type'] == "aRecord") && ($rec['value'] == $this->ipHostNumber)){
-        unset($this->dnsEntry['RECORDS'][$key]);
+      /* Get Entry 
+       */
+      $this->dnsEntry     = getDNSHostEntries($config,$this->OrigCn);
+
+      /* Remove A record which equals $this->ipHostNumber
+       */
+      foreach($this->dnsEntry['RECORDS'] as $key => $rec){
+        if(($rec['type'] == "aRecord") && ($rec['value'] == $this->ipHostNumber)){
+          unset($this->dnsEntry['RECORDS'][$key]);
+        }
       }
-    }
 
-    /* Get Record types 
-     */
-    $this->RecordTypes  = getDnsRecordTypes();
+      /* Get Record types 
+       */
+      $this->RecordTypes  = getDnsRecordTypes();
 
-    /* If there is at least one entry in this -> types, we have DNS enabled 
-     */
-    if($this->dnsEntry['exists']){
-      $this->DNS_is_account = true;
-    }else{
-      $this->DNS_is_account = false;
+      /* If there is at least one entry in this -> types, we have DNS enabled 
+       */
+      if($this->dnsEntry['exists']){
+        $this->DNS_is_account = true;
+      }else{
+        $this->DNS_is_account = false;
+      }
+   
     }
-    
+ 
     /* Store initally account settings 
      */
     $this->DNSinitially_was_account = $this->DNS_is_account;
@@ -211,7 +215,7 @@ class termDNS extends plugin
     }
 
     /* Get dns attributes */
-    if(isset($_POST['network_tpl_posted'])){
+    if(($this->DNSenabled) && (isset($_POST['network_tpl_posted']))){
 
       /* Check for posted record changes */
       if(is_array($this->dnsEntry['RECORDS'])){
@@ -359,52 +363,56 @@ class termDNS extends plugin
     /* If isn't DNS account but initially was DNS account 
        remove all DNS entries 
      */ 
-
-    /* Add ipHostNumber to aRecords
-     */
-    $this->dnsEntry['RECORDS'][] = array("type"=>"aRecord","value"=>$this->ipHostNumber);
-
-    /* Create diff and follow instructions 
-     * If Account was disabled, remove account by setting exists to false
-     */
-    if((!$this->DNS_is_account)&&($this->DNSinitially_was_account)){  
-      $this->dnsEntry['exists'] = false;
-      $tmp = getDNSHostEntriesDiff($this->config,$this->OrigCn,$this->dnsEntry,$this->cn);
+    if(!$this->DNSenabled){
+      return;
     }else{
-      $this->dnsEntry['exists'] = $this->DNS_is_account;
-      $tmp = getDNSHostEntriesDiff($this->config,$this->OrigCn,$this->dnsEntry,$this->cn);
-    }   
 
-    /* move follwoing entries 
-     */
-    foreach($tmp['move'] as $src => $dst){
-      $this->recursive_move($src,$dst);
-    }
+      /* Add ipHostNumber to aRecords
+       */
+      $this->dnsEntry['RECORDS'][] = array("type"=>"aRecord","value"=>$this->ipHostNumber);
 
-    /* Delete dns */
-    foreach($tmp['del'] as $dn => $del){
-      $ldap->cd($dn);
-      $ldap->rmdir_recursive($dn);
-    }
-
-    /* Add || Update new DNS entries 
-     */
-    foreach($tmp['add'] as $dn => $attrs){
-      $ldap->cd($dn);
-      $ldap->cat($dn);
-      if(count($ldap->fetch())){
-        $ldap->cd($dn);
-        $ldap->modify ($attrs); 
+      /* Create diff and follow instructions 
+       * If Account was disabled, remove account by setting exists to false
+       */
+      if((!$this->DNS_is_account)&&($this->DNSinitially_was_account)){  
+        $this->dnsEntry['exists'] = false;
+        $tmp = getDNSHostEntriesDiff($this->config,$this->OrigCn,$this->dnsEntry,$this->cn);
       }else{
-        $ldap->cd($dn);
-        $ldap->add($attrs);
+        $this->dnsEntry['exists'] = $this->DNS_is_account;
+        $tmp = getDNSHostEntriesDiff($this->config,$this->OrigCn,$this->dnsEntry,$this->cn);
+      }   
+
+      /* move follwoing entries 
+       */
+      foreach($tmp['move'] as $src => $dst){
+        $this->recursive_move($src,$dst);
       }
-    }
-    
-    /* Display errors 
-     */
-    if($ldap->get_error() != "Success"){
-      show_ldap_error("Record:".$ldap->get_error()); 
+
+      /* Delete dns */
+      foreach($tmp['del'] as $dn => $del){
+        $ldap->cd($dn);
+        $ldap->rmdir_recursive($dn);
+      }
+
+      /* Add || Update new DNS entries 
+       */
+      foreach($tmp['add'] as $dn => $attrs){
+        $ldap->cd($dn);
+        $ldap->cat($dn);
+        if(count($ldap->fetch())){
+          $ldap->cd($dn);
+          $ldap->modify ($attrs); 
+        }else{
+          $ldap->cd($dn);
+          $ldap->add($attrs);
+        }
+      }
+
+      /* Display errors 
+       */
+      if($ldap->get_error() != "Success"){
+        show_ldap_error("Record:".$ldap->get_error()); 
+      }
     }
   }
 
