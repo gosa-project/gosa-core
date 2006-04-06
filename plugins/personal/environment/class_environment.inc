@@ -50,7 +50,7 @@ class environment extends plugin
   /* Kiosk profile */
   var $gotoKioskProfile   = "none";     // The selected Kiosk Profile
   var $gotoKioskProfiles  = array();// All available Kiosk profiles
-  VAR $newKioskProfiles   = array();
+  var $newKioskProfiles   = array();
 
   /* Hotplug Devices */
   var $gotoHotplugDevice  = array();     // Selected hotplug
@@ -416,6 +416,11 @@ class environment extends plugin
     $list['none']=_("None");
 
     $list = array_reverse($list);
+
+    if(!isset($list[$this->gotoKioskProfile])){
+      print_red(sprintf(_("The selected kiosk profile '%s' is no longer available, setting current profile to 'none'."),$this->gotoKioskProfile));
+      $this->gotoKioskProfile = 'none';
+    }
 
     /* Reassign help class */
     $_SESSION['current_class_for_help'] = get_class($this);
