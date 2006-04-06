@@ -635,24 +635,34 @@ class appgroup extends plugin
       foreach($this->gosaMemberApplication[$this->curCatDir] as $cat => $entry){
 
         
-
         if(preg_match("/__SEPARATOR__/",$entry['App'])){
           $div2 ->AddEntry(array(array("string"=>$separator),
                 array("string"=>preg_replace("/\%s/",htmlentities($entry['App']),$upudown),"attach"=>"align='right' style='border-right:0px;'")));
         }else{
 
-          $broken = "";
+          $image = "";
+          /* Check if application was available within selected release
+           *  or application list if release management is not active
+           */
           if(!in_array($entry['App'],$this->AllAppsForRelease)){
+
+            /*  release managent is active
+             */
             if(!$this->enableReleaseManagement){
-              $broken = "<img src='images/false.png' title='"._("This application is no longer available.")."'>&nbsp;";
+              $image = "<img class='center' src='images/select_invalid_application.png' 
+                          title='"._("This application is no longer available.")."'>&nbsp;";
             }else{
-              $broken = "<img src='images/false.png' title='".sprintf(_("This application is not available in any release named %s."),$this->Release)."'>&nbsp;";
+              $image = "<img class='center' src='images/select_invalid_application.png' 
+                          title='".sprintf(_("This application is not available in any release named %s."),$this->Release)."'>&nbsp;";
             }
+      
+          }else{
+            $image = "<img class='center' src='images/select_application.png' alt=\"\">&nbsp;"; 
           }
           
-          $div2 ->AddEntry(array(array("string"=>sprintf($app,$entry['App'])),
-                                 array("string"=>$broken,"attach"=>"style='width:28px;'"),
-                array("string"=>preg_replace("/\%s/",htmlentities($entry['App']),$sep.$edit.$upudown),"attach"=>"align='right' style='width:100px;border-right:0px;'")));
+          $div2 ->AddEntry(array(array("string"=>sprintf($image."%s",$entry['App'])),
+                array("string"=>preg_replace("/\%s/",htmlentities($entry['App']),$sep.$edit.$upudown),
+                      "attach"=>"align='right' style='width:100px;border-right:0px;'")));
         }
       }
     }
