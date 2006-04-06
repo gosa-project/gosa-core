@@ -64,9 +64,15 @@ class printerPPDSelectionDialog extends plugin
         }
       }
     }
-  
+ 
     if((isset($_GET['act']))&&($_GET['act']=="open"))  {
-      $this->Vendor = $_GET['id'];
+      
+      if((!empty($_GET['id'])) && (!isset( $this->header[base64_decode($_GET['id'])]))){
+        print_red(sprintf(_("Selected vendor '%s' does not exists in our list of ppds."),base64_decode($_GET['id'])));      
+        $this->Vendor = ""; 
+      }else{
+        $this->Vendor = base64_decode($_GET['id']);
+      }
     }
 
     $div = new divSelectBox("printerPPDSelectionDialog");
@@ -80,7 +86,7 @@ class printerPPDSelectionDialog extends plugin
     if(empty($this->Vendor)){
       foreach($this-> header as $key => $entry){
         $div ->AddEntry (array(
-              array("string"=>sprintf($linkopen,$key,$key),"attach"=>"style='border-right:0px;'")
+              array("string"=>sprintf($linkopen,base64_encode($key),$key),"attach"=>"style='border-right:0px;'")
               ));
       }
     }else{
@@ -90,7 +96,7 @@ class printerPPDSelectionDialog extends plugin
       foreach($list as $key => $ppd){
         if(preg_match("/^".$this->Vendor."/",$ppd['ppd'])){
           $div ->AddEntry (array(
-                array("string"=>sprintf($uselink,$key,$ppd['ppd']),"attach"=>"style='border-right:0px;'")
+                array("string"=>sprintf($uselink,base64_encode($key),$ppd['ppd']),"attach"=>"style='border-right:0px;'")
                 ));
         }
       }

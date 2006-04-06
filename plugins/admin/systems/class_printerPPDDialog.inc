@@ -201,13 +201,13 @@ class printerPPDDialog extends plugin
         $hit = false;
         foreach($this->ppdList as $vendor => $ppds ){
           foreach($ppds as $name => $ppd){
-            if($ppd['link']==$_GET['id']){
+            if($ppd['link']==base64_decode($_GET['id'])){
               $hit = true;
             }
           }
         }
         if($hit == true){
-          $this->selectedPPD['link'] = str_replace($this->pathToPPD,"",$_GET['id']);
+          $this->selectedPPD['link'] = str_replace($this->pathToPPD,"",base64_decode($_GET['id']));
           $this->ppdConfig   = false;
         }
         unset($this->dialog);
