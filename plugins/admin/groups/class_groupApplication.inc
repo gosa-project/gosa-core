@@ -403,7 +403,7 @@ class appgroup extends plugin
 
         $tmp = search_config($this->config->data,"faiManagement","CLASS");
         if(!empty($tmp)){
-          $tmp  = array_flip($this->getReleases());
+          $tmp  = array_flip($this->getReleases($this->parent->by_object['group']->base));
           $base = $tmp[$this->Release];
 
           $ldap->cd($this->config->current['BASE']);
@@ -648,11 +648,9 @@ class appgroup extends plugin
     $smarty->assign("enableReleaseManagement",$this->enableReleaseManagement);
  
     if($this->enableReleaseManagement){
-      $smarty->assign("Release", $this->Release);
-
-      $tmp = $this->getReleases();
-
-      $smarty->assign("Releases",   $tmp);
+      $smarty->assign("Release",  $this->Release);
+      $tmp = $this->getReleases($this->parent->by_object['group']->base);
+      $smarty->assign("Releases", $tmp);
 
       if(count($this->used_apps)){
         $smarty->assign("ReleaseSelectAble", false);
@@ -671,16 +669,11 @@ class appgroup extends plugin
     return ($display);
   }
 
-  function getReleases()
-  {
-  
-    if(isset($this->base)){
-      $base = $this->base;
-    }else{
-      $base = $this->parent->by_object['group']->base;
-    }
 
+  function getReleases($base)
+  {
     $dn   = "ou=apps,".$base;
+
     $ret  = array();
 
     $ret ["ou=apps,".$base] = "/";
@@ -698,14 +691,14 @@ class appgroup extends plugin
         $val = trim(preg_replace("/,/","",$val));
         if(empty($val)) break;
         $str .= "/".$val;
-      }
+      } 
       if(!empty($str)){
         $ret[$attrs['dn']]= preg_replace("/^\//","",$str);
       }
     }
     return($ret);
   }
- 
+
   function save_object()
   {
     if(isset($_POST ['Release'])){
@@ -802,17 +795,16 @@ $ldap->modify ($this->attrs);
     if(!empty($tmp)){
       $this->enableReleaseManagement = true;
 
-      $tmp = array_flip($this->getReleases());
+      $tmp = array_flip($this->getReleases($this->parent->by_object['group']->base));
       if(isset($tmp[$this->Release])){
         $base =  $tmp[$this->Release];
       }else{
-
         $k = key($tmp);
         $r = $tmp[$k];
-    
-        print_red(sprintf(_("Can't resolve the release name '%s', setting release name to '%s'. "),$this->Release,$k));
         $this->Release = $k;
         $base = $r; 
+    
+        print_red(sprintf(_("Can't resolve the release name '%s', setting release name to '%s'. Possibly the objects base has changed."),$this->Release,$k));
       }
 
       $base = preg_replace("/ou=apps,.*$/","ou=apps,".$this->curbase,$base);
