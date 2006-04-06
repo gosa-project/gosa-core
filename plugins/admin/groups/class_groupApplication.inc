@@ -31,6 +31,7 @@ class appgroup extends plugin
   var $Releases                 = array();
   var $enableReleaseManagement  = false;
 
+  var $AllAppsForRelease        = array();
 
   function appgroup ($config, $dn= NULL)
   {
@@ -632,12 +633,26 @@ class appgroup extends plugin
 
     if(isset($this->gosaMemberApplication[$this->curCatDir])){
       foreach($this->gosaMemberApplication[$this->curCatDir] as $cat => $entry){
+
+        
+
         if(preg_match("/__SEPARATOR__/",$entry['App'])){
           $div2 ->AddEntry(array(array("string"=>$separator),
                 array("string"=>preg_replace("/\%s/",htmlentities($entry['App']),$upudown),"attach"=>"align='right' style='border-right:0px;'")));
         }else{
+
+          $broken = "";
+          if(!in_array($entry['App'],$this->AllAppsForRelease)){
+            if(!$this->enableReleaseManagement){
+              $broken = "<img src='images/false.png' title='"._("This application is no longer available.")."'>&nbsp;";
+            }else{
+              $broken = "<img src='images/false.png' title='".sprintf(_("This application is not available in any release named %s."),$this->Release)."'>&nbsp;";
+            }
+          }
+          
           $div2 ->AddEntry(array(array("string"=>sprintf($app,$entry['App'])),
-                array("string"=>preg_replace("/\%s/",htmlentities($entry['App']),$sep.$edit.$upudown),"attach"=>"align='right' style='border-right:0px;'")));
+                                 array("string"=>$broken,"attach"=>"style='width:28px;'"),
+                array("string"=>preg_replace("/\%s/",htmlentities($entry['App']),$sep.$edit.$upudown),"attach"=>"align='right' style='width:100px;border-right:0px;'")));
         }
       }
     }
@@ -658,6 +673,7 @@ class appgroup extends plugin
         $smarty->assign("ReleaseSelectAble", true);
       }
     }
+        $smarty->assign("ReleaseSelectAble", true);
 
     /* Show main page */
     if ($this->dialog){
@@ -828,6 +844,30 @@ $ldap->modify ($this->attrs);
           $attrs["cn"][0];
       }
     }
+
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("objectClass=gosaApplication",array("cn"));
+    $tmp = search_config($this->config->data,"faiManagement","CLASS");
+    $this->AllAppsForRelease = array();
+    if(!empty($tmp)){
+
+      $tmp = array_flip($this->Releases);
+
+      while($attrs = $ldap->fetch()){
+        $testdn = preg_replace("/ou=apps,.*$/","ou=apps",$attrs['dn']);
+        $testdn = preg_replace("/^[^,]+/","",$testdn);
+        $testdn = preg_replace("/^,/","",$testdn);
+
+        if($testdn == preg_replace("/ou=apps,.*$/","ou=apps",$tmp[$this->Release])){
+          $this->AllAppsForRelease[$attrs['dn']] = $attrs['cn'][0];
+        }
+      }
+    }else{
+      while($attrs = $ldap->fetch()){
+        $this->AllAppsForRelease[$attrs['dn']] = $attrs['cn'][0];
+      }
+    }
+
     natcasesort ($this->apps);
     reset ($this->apps);
 
