@@ -28,6 +28,7 @@ class appgroup extends plugin
   var $objectclasses            = array("gosaApplicationGroup");
 
   var $Release                  = "/";
+  var $Releases                 = array();
   var $enableReleaseManagement  = false;
 
 
@@ -119,6 +120,7 @@ class appgroup extends plugin
     if(!empty($tmp)){
       $this->enableReleaseManagement = true;
       $this->Release = $this->getReleaseName();
+      $this->Releases= $this->getReleases();
     }
   }
 
@@ -403,8 +405,7 @@ class appgroup extends plugin
 
         $tmp = search_config($this->config->data,"faiManagement","CLASS");
         if(!empty($tmp)){
-          $tmp  = array_flip($this->getReleases($this->parent->by_object['group']->base));
-          $base = $tmp[$this->Release];
+          $base = $this->Releases[$this->Release];
 
           $ldap->cd($this->config->current['BASE']);
           $ldap->search("(&(objectClass=gosaApplication)(cn=$appname))",array("gosaApplicationParameter"));
@@ -649,8 +650,7 @@ class appgroup extends plugin
  
     if($this->enableReleaseManagement){
       $smarty->assign("Release",  $this->Release);
-      $tmp = $this->getReleases($this->parent->by_object['group']->base);
-      $smarty->assign("Releases", $tmp);
+      $smarty->assign("Releases", $this->Releases);
 
       if(count($this->used_apps)){
         $smarty->assign("ReleaseSelectAble", false);
@@ -670,30 +670,30 @@ class appgroup extends plugin
   }
 
 
-  function getReleases($base)
+  function getReleases()
   {
-    $dn   = "ou=apps,".$base;
-
-    $ret  = array();
-
-    $ret ["ou=apps,".$base] = "/";
-
+    $dn   = "ou=apps,".$this->config->current['BASE'];
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($dn);
-
     $ldap->search("objectClass=organizationalUnit",array("ou"));
-
+    $ret =array();
     while($attrs = $ldap->fetch()){
-      $str = str_replace($dn,"",$attrs['dn']);
-      $tmp = array_reverse( split("ou=",$str));
-      $str = "";
-      foreach($tmp as $val){
-        $val = trim(preg_replace("/,/","",$val));
-        if(empty($val)) break;
-        $str .= "/".$val;
-      } 
-      if(!empty($str)){
-        $ret[$attrs['dn']]= preg_replace("/^\//","",$str);
+      if(preg_match("/ou=apps,/",$attrs['dn'])){
+        $bb = preg_replace("/ou=apps,.*/","",$attrs['dn']);
+        $parts = array_reverse(split("ou=",$bb));
+
+        $str ="";
+        foreach($parts as $part){
+          if(empty($part)) {
+            continue;
+          }
+          $str .= str_replace(",","",$part)."/";
+        }    
+        $name = preg_replace("/\/$/","",$str);
+        if(empty($name)) {
+          $name ="/";
+        }
+        $ret[$attrs['dn']] = $name;
       }
     }
     return($ret);
@@ -795,7 +795,7 @@ $ldap->modify ($this->attrs);
     if(!empty($tmp)){
       $this->enableReleaseManagement = true;
 
-      $tmp = array_flip($this->getReleases($this->parent->by_object['group']->base));
+      $tmp = array_flip($this->Releases);
       if(isset($tmp[$this->Release])){
         $base =  $tmp[$this->Release];
       }else{
