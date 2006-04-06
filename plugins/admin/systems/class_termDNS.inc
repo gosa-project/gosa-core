@@ -214,18 +214,19 @@ class termDNS extends plugin
     if(isset($_POST['network_tpl_posted'])){
 
       /* Check for posted record changes */
-      foreach($this->dnsEntry['RECORDS'] as $key => $value){
-      
-        /* Check if type has changed */
-        if(isset($_POST['RecordTypeSelectedFor_'.$key])){
-          $this->dnsEntry['RECORDS'][$key]['type'] = $_POST['RecordTypeSelectedFor_'.$key];
-        }
-        /* Check if value has changed */
-        if(isset($_POST['RecordValue_'.$key])){
-          $this->dnsEntry['RECORDS'][$key]['value'] = $_POST['RecordValue_'.$key];
+      if(is_array($this->dnsEntry['RECORDS'])){
+        foreach($this->dnsEntry['RECORDS'] as $key => $value){
+
+          /* Check if type has changed */
+          if(isset($_POST['RecordTypeSelectedFor_'.$key])){
+            $this->dnsEntry['RECORDS'][$key]['type'] = $_POST['RecordTypeSelectedFor_'.$key];
+          }
+          /* Check if value has changed */
+          if(isset($_POST['RecordValue_'.$key])){
+            $this->dnsEntry['RECORDS'][$key]['value'] = $_POST['RecordValue_'.$key];
+          }
         }
       }
-      
       /* Get all basic DNS attributes (TTL, Clas ..)*/
       foreach($this->DNSattributes as $attr){
         if(isset($_POST[$attr])){
