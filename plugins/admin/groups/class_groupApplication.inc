@@ -28,10 +28,12 @@ class appgroup extends plugin
   var $objectclasses            = array("gosaApplicationGroup");
 
   var $Release                  = "/";
+  var $InitialRelease           = "/";
   var $Releases                 = array();
   var $enableReleaseManagement  = false;
 
   var $AllAppsForRelease        = array();
+  var $AllAppsForReleaseParameter = array();
 
   function appgroup ($config, $dn= NULL)
   {
@@ -58,10 +60,10 @@ class appgroup extends plugin
     }
 
     /* Parse MemberApplication*/
-    $tmp = array();
-    $tmp2 = array();
-    $prios = array();
-    $cats = array();
+    $tmp    = array();
+    $tmp2   = array();
+    $prios  = array();
+    $cats   = array();
 
     foreach($this->gosaMemberApplication as $memberApp){
       if(preg_match("/\|/i",$memberApp)){
@@ -120,8 +122,9 @@ class appgroup extends plugin
     $tmp = search_config($config->data,"faiManagement","CLASS");
     if(!empty($tmp)){
       $this->enableReleaseManagement = true;
-      $this->Release = $this->getReleaseName();
-      $this->Releases= $this->getReleases();
+      $this->Release        = $this->getReleaseName();
+      $this->InitialRelease = $this->Release;
+      $this->Releases       = $this->getReleases();
     }
   }
 
@@ -157,6 +160,45 @@ class appgroup extends plugin
     return(-1);
   }
 
+  function diffAppsInReleases()
+  {
+    /* Only diff if it is required 
+     */
+    $ret =array();
+    if($this->Release != $this->InitialRelease){
+      foreach($this->gosaMemberApplication[$this->curCatDir] as $entry){
+        if(in_array($entry['App'],$this->AllAppsForRelease)){ 
+          $old = $this->AllAppsForReleaseParameter[$this->InitialRelease][$entry['App']];
+          $new = $this->AllAppsForReleaseParameter[$this->Release][$entry['App']];
+
+          /*  Both (old & new) have no gosaApplicationParameter
+           */
+          if((!isset($old['gosaApplicationParameter'])) && (!isset($new['gosaApplicationParameter']))){
+            $ret[$entry['App']] = false; 
+
+            /* Both got gosaApplicationParameter
+             */
+          }elseif((isset($old['gosaApplicationParameter'])) && (isset($new['gosaApplicationParameter'])))
+          if(array_differs($old['gosaApplicationParameter'],$new['gosaApplicationParameter'])){
+            $ret[$entry['App']]  = true;
+          }else{
+            $ret[$entry['App']]  = false;
+          }
+
+          /* Initialy had gosaApplicationParameter bot in new release not 
+           */
+        }elseif((isset($old['gosaApplicationParameter'])) && (!isset($new['gosaApplicationParameter']))){
+          $ret[$entry['App']]  = true;
+
+          /* Old release had no gosaApplicationParameter but new got some
+           */
+        }elseif((!isset($old['gosaApplicationParameter'])) && (isset($new['gosaApplicationParameter']))){
+          $ret[$entry['App']]  = true;
+        }
+      }
+    }
+    return($ret);
+  }
 
   /* TRansports the geiven Arraykey one position up*/
   function ArrayUp($atr,$attrs)
@@ -206,12 +248,12 @@ class appgroup extends plugin
     }
   }
 
-  
+
   function catDown($id)
   {
-   /* Get all cats depinding on current dir */
+    /* Get all cats depinding on current dir */
     $cats = $this->GetSubdirs($this->curCatDir);
-     
+
     $newcats =$this->ArrayDown($id,$cats);
 
     foreach($newcats as $cat => $name){
@@ -232,7 +274,7 @@ class appgroup extends plugin
     foreach ($apps as $appkey => $name){
       $appsA[$name['App']] =$name['App'];
     }
- 
+
     $result = $this->ArrayUp($appl,$appsA);
 
     $ret = array();
@@ -262,8 +304,8 @@ class appgroup extends plugin
     $this->gosaMemberApplication[$cat] = $ret;
   } 
 
-   
-  
+
+
   function AddSeperator($id)
   {
     $found  = false;
@@ -284,8 +326,9 @@ class appgroup extends plugin
 
   function execute()
   {
-	  /* Call parent execute */
-   	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
+
 
     if((isset($_GET['act']))&&($_GET['act']=="depopen")){
       $dep = base64_decode($_GET['depid']);  
@@ -325,8 +368,8 @@ class appgroup extends plugin
 
 
     /* Add Categorie */ 
-  
-    
+
+
     if((isset($_POST['AddCat']))&&(isset($_POST['CatName']))&&(!empty($_POST['CatName']))){
 
       if(preg_match("/[\\\\\/]/i",$_POST['CatName'])){
@@ -344,6 +387,8 @@ class appgroup extends plugin
 
 
     $this->reload();
+
+    $this->diffAppsInReleases();
     $only_once = false;
     foreach($_POST as $name => $value){
       
@@ -406,7 +451,8 @@ class appgroup extends plugin
 
         $tmp = search_config($this->config->data,"faiManagement","CLASS");
         if(!empty($tmp)){
-          $base = $this->Releases[$this->Release];
+          $tmp = array_flip($this->Releases);
+          $base = $tmp[$this->Release];
 
           $ldap->cd($this->config->current['BASE']);
           $ldap->search("(&(objectClass=gosaApplication)(cn=$appname))",array("gosaApplicationParameter"));
@@ -631,6 +677,8 @@ class appgroup extends plugin
       "&nbsp;<input type='image' src='images/edittrash.png' title='"._("Delete entry")."' name='DelApp_%s' value='%s' alt='{t}delete{/t}' >";
     $edit=      "&nbsp;<input type='image' src='images/edit.png' title='"._("Edit entry")."' name='EdiApp_%s' value='%s' alt='{t}edit{/t}' >";
 
+    $Differences = $this->diffAppsInReleases();
+
     if(isset($this->gosaMemberApplication[$this->curCatDir])){
       foreach($this->gosaMemberApplication[$this->curCatDir] as $cat => $entry){
 
@@ -656,6 +704,10 @@ class appgroup extends plugin
                           title='".sprintf(_("This application is not available in any release named %s."),$this->Release)."'>&nbsp;";
             }
       
+          }elseif(isset($Differences[$entry['App']]) && ($Differences[$entry['App']] == true)) {
+            $entry['App'].=" <i>["._("Check parameter")."]</i>";
+              $image = "<img class='center' src='images/select_invalid_application.png' 
+                          title='"._("This application has changed parameters.")."'>&nbsp;";
           }else{
             $image = "<img class='center' src='images/select_application.png' alt=\"\">&nbsp;"; 
           }
@@ -856,7 +908,7 @@ $ldap->modify ($this->attrs);
     }
 
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search("objectClass=gosaApplication",array("cn"));
+    $ldap->search("objectClass=gosaApplication",array("gosaApplicationParameter","cn"));
     $tmp = search_config($this->config->data,"faiManagement","CLASS");
     $this->AllAppsForRelease = array();
     if(!empty($tmp)){
@@ -864,12 +916,14 @@ $ldap->modify ($this->attrs);
       $tmp = array_flip($this->Releases);
 
       while($attrs = $ldap->fetch()){
+        
         $testdn = preg_replace("/ou=apps,.*$/","ou=apps",$attrs['dn']);
         $testdn = preg_replace("/^[^,]+/","",$testdn);
         $testdn = preg_replace("/^,/","",$testdn);
 
         if($testdn == preg_replace("/ou=apps,.*$/","ou=apps",$tmp[$this->Release])){
           $this->AllAppsForRelease[$attrs['dn']] = $attrs['cn'][0];
+          $this->AllAppsForReleaseParameter[$this->Release][$attrs['cn'][0]] = $attrs;
         }
       }
     }else{
