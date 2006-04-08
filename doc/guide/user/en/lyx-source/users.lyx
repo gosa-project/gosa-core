@@ -55,40 +55,42 @@
 
 
 \series bold 
-ADMINISTRATION DES UTILISATEURS
+USERS ADMINISTRATION
 \layout Section
 
-Utilisateurs
+List of users
 \layout Standard
 
-L'administrateur peut créer ou modifier un compte ou accéder aux informations
- sur un compte en cliquant sur le bouton 
+The administrator can create, modify or access the account informations
+ when clicking on the 
 \series bold 
 \color blue
-utilisateurs
+users
 \series default 
 \color default
- de la partie 
+ button in the 
 \series bold 
 Administration
 \series default 
- dans le menu à gauche.
- La page
+ menu on the left.
+ The
 \family sans 
 \color black
- Administration des utilisateurs
+ Users Administration
 \family default 
 \color default
- s'affiche, elle est divisée en trois colonnes.
- Au fur et à mesure que les utilisateurs sont configurés ils apparaîtront
- dans la première colonne, classés selon leur département.
+ page is displayed, she is divided on three columns.
+ Each time an user is created it will appear in the first column sorted
+ by department.
  
 \layout Standard
 
-Les deux dernières colonnes comportent des icônes qui sont des raccourcis
- vers les propriétés de chaque utilisateur et les actions à exécuter sur
- l'utilisateur.
- Les flèches en entête ( 
+The two first columns contains icons which are shortcuts to the settings
+ of each user and the actions you can execute on them.
+ 
+\layout Standard
+
+Those icons ( 
 \begin_inset Graphics
 	filename images/list_back.png
 
@@ -106,24 +108,18 @@ Les deux dernières colonnes comportent des icônes qui sont des raccourcis
 
 \end_inset 
 
- ) servent à modifier l'affichage selon le département, elles prédominent
- sur toutes autres sélections d'affichage.
+ ) are used to modify the display according to the department, the icons
+ predominate other selections of display.
 \layout Standard
 
-C'est à partir de la page 
-\family sans 
-\color black
-Administration des utilisateurs
-\family default 
-\color default
- que l'administrateur système aura une vue globale et pourra gérer la liste
- des utilisateurs.
+It's from the Users Administration page that the system administrator will
+ get a global view of all the users in his system.
  
 \layout Standard
 
 
 \color black
-Dans la partie droite de la page se trouve un tableau intitulé Filtres 
+In the right part of the page you will find a table called Filters 
 \begin_inset Graphics
 	filename images/rocket.png
 
@@ -135,91 +131,75 @@ Dans la partie droite de la page se trouve un tableau intitulé Filtres
 
 
 \color black
-Ce tableau sert à modifier l'affichage de la liste des utilisateurs :
+This table purpose is to change the display of the users :
 \begin_deeper 
 \layout Standard
 
 
 \color black
-- Cliquer sur une lettre pour que s'affichent tous les utilisateurs dont
- le nom commence par la lettre sélectionnée;
+- Click on a letter to show all the users starting with this letter;
 \layout Standard
 
 
 \color black
-- Cliquez sur l'astérisque et tous les noms d'utilisateurs apparaîtront
- classés alphabétiquement.
+- Click on the asterisk and the list of users will be ordoned alphabetically
 \end_deeper 
 \layout Itemize
 
-Plus bas d'autres possibilités d'affichage sont possibles :
+You can also :
 \begin_deeper 
 \layout Standard
 
-- Cochez une ou plusieurs propositions pour un affichage ciblé;
+- Check one or more options to get a restricted selection;
 \layout Standard
 
-- Insérez soit une lettre soit un numéro tous deux suivis de l'astérisque
- soit un nom d'utilisateur dans le champ précédé d'une loupe 
+- Insert a letter or a number followed by an asterisk or a user name in
+ the filed preceded by a this icon 
 \begin_inset Graphics
 	filename images/search.png
 
 \end_inset 
 
-, cette icône symbolise la recherche d'un item.
- Cliquez sur le bouton Appliquer pour faire apparaître le(s) utilisateur(s)
- recherché(s).
+.
+ Click on the 
+\emph on 
+submit
+\emph default 
+ button to get the result of your selection.
 \end_deeper 
 \layout Standard
 
-Pour créer un compte cliquez sur 
+To create an account click on 
 \begin_inset Graphics
 	filename images/list_new_user.png
 
 \end_inset 
 
 .
- Si le compte est déjà créé cliquez sur le compte lui-même.
+ If the account is already created click on the account himself.
 \layout Standard
 
-Apparaît alors l'espace de configuration munie d'onglets qui représentent
- chacun un espace de configuration.
- Ces onglets sont des extensions apportées à GOsa.
- L'administrateur configure ces extensions pour chaque utilisateur.
+You will see tabs, each of them is a part of the user account configuration.
+ Each of those tabs is an extension that GOsa can manage.
 \layout Standard
 \added_space_bottom medskip 
-Pour terminer la configuration, cliquez sur le bouton Terminé en bas à droite.
- Pour revenir à 
-\color black
-la liste des utilisateurs
-\color default
- cliquez sur le bouton Annuler.
- 
+To finish the creation of the user, click on the finish button on the right
+ bottom of the page.
+ To cancel your change click on the cancel button.
 \newline 
 
 \layout Standard
 
-Tous les champs précédés d'une astérisque doivent être remplis obligatoirement.
+All the fields followed by an red asterisk must be filled.
 \layout Standard
 
-Dans le haut à droite vous avez à la fois l'identitée de l'utilisateur sur
- lequel vous travaillez mais aussi sa place dans l'arbre LDAP.
-\layout Standard
-
-L'image 
-\begin_inset Graphics
-	filename images/closedlock.png
-
-\end_inset 
-
- signale que l'utilisateur est en mode verrouillé.
- Ce mode pemet d'éviter les modifications simultanées.
+In the upper right corner you have the full dn of the user currently edited.
 \layout Subsection
 \pagebreak_top 
-Informations générales
+Generic
 \layout Subsubsection
 
-Informations personnelles
+Personal information
 \layout Standard
 \added_space_bottom medskip 
 
@@ -234,7 +214,9 @@ Informations personnelles
 
 \layout Standard
 
-Nom
+Last 
+\color black
+name
 \color red
 *
 \end_inset 
@@ -244,7 +226,7 @@ Nom
 
 \layout Standard
 
-Introduisez le nom de l'utilisateur 
+Insert the last name
 \end_inset 
 </cell>
 </row>
@@ -254,7 +236,9 @@ Introduisez le nom de l'utilisateur
 
 \layout Standard
 
-Prénom
+
+\color black
+First name
 \color red
 *
 \end_inset 
@@ -264,7 +248,7 @@ Prénom
 
 \layout Standard
 
-Introduisez le prénom de l'utilisateur
+Insert the first name
 \end_inset 
 </cell>
 </row>
@@ -274,7 +258,9 @@ Introduisez le prénom de l'utilisateur
 
 \layout Standard
 
-Identifiant
+
+\color black
+Login
 \color red
 *
 \end_inset 
@@ -284,7 +270,7 @@ Identifiant
 
 \layout Standard
 
-Introduisez l'identificateur de l'utilisateur
+Insert the login name
 \end_inset 
 </cell>
 </row>
@@ -294,7 +280,7 @@ Introduisez l'identificateur de l'utilisateur
 
 \layout Standard
 
-Titre personnel
+Personnal title
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -302,10 +288,7 @@ Titre personnel
 
 \layout Standard
 
-Introduisez le titre (Madame, Mademoiselle ou Monsieur) de l'utilisateur
- 
-\color red
-?
+Insert the personnal (Mister, Miss, Madam)
 \end_inset 
 </cell>
 </row>
@@ -315,7 +298,7 @@ Introduisez le titre (Madame, Mademoiselle ou Monsieur) de l'utilisateur
 
 \layout Standard
 
-Titre Universitaire
+Academic title
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -323,7 +306,7 @@ Titre Universitaire
 
 \layout Standard
 
-Introduisez le diplome obtenu
+Insert the academic title
 \end_inset 
 </cell>
 </row>
@@ -333,7 +316,7 @@ Introduisez le diplome obtenu
 
 \layout Standard
 
-Date de naissance
+Date of birth
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -341,15 +324,11 @@ Date de naissance
 
 \layout Standard
 
-Cliquez sur le bouton 
-\begin_inset Quotes erd
-\end_inset 
-
- Remplir
-\begin_inset Quotes erd
-\end_inset 
-
- pour voir apparaître une liste déroulante
+Click on the 
+\emph on 
+set
+\emph default 
+ button to make a scroll list appear
 \end_inset 
 </cell>
 </row>
@@ -359,7 +338,7 @@ Cliquez sur le bouton
 
 \layout Standard
 
-Sexe 
+Sex
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -367,7 +346,7 @@ Sexe
 
 \layout Standard
 
-Faites votre séléction dans la liste déroulante
+Make your choice on the scroll list
 \end_inset 
 </cell>
 </row>
@@ -377,7 +356,7 @@ Faites votre séléction dans la liste déroulante
 
 \layout Standard
 
-Langue
+Preferred Language
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -385,7 +364,7 @@ Langue
 
 \layout Standard
 
-Faites votre séléction dans la liste déroulante
+Make your choice on the scroll list
 \end_inset 
 </cell>
 </row>
@@ -403,22 +382,14 @@ Base
 
 \layout Standard
 
-Choix du département.
- (la création de départements se fait à partir du bouton 
+Choice of the deparment.
+ (the creation of the department is made with the 
 \series bold 
 \color blue
-département
+department
 \series default 
 \color default
- dans le menu de g
-\color black
-auche
-\color default
- dans la partie 
-\series bold 
-Administration
-\series default 
-).
+ button on the left menu in the administration part.).
 \end_inset 
 </cell>
 </row>
@@ -428,7 +399,7 @@ Administration
 
 \layout Standard
 
-Adresse
+Address
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -436,7 +407,7 @@ Adresse
 
 \layout Standard
 
-Introduisez l'adresse personnelle de l'utilisateur
+Insert the personnal address of the user
 \end_inset 
 </cell>
 </row>
@@ -446,7 +417,7 @@ Introduisez l'adresse personnelle de l'utilisateur
 
 \layout Standard
 
-Numéro de téléphone privé 
+Private phone
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -454,8 +425,8 @@ Numéro de téléphone privé
 
 \layout Standard
 
-Introduisez le numéro privé selon la nomenclature nationale ou internationale.
- (veillez à garder la même nomenclature pour tous les utilisateurs)
+Insert the private number in the national or international way.
+ (keep in mind to make the same for all users)
 \end_inset 
 </cell>
 </row>
@@ -465,7 +436,7 @@ Introduisez le numéro privé selon la nomenclature nationale ou internationale.
 
 \layout Standard
 
-Page d'accueil
+Homepage
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -473,7 +444,7 @@ Page d'accueil
 
 \layout Standard
 
-Introduisez l'url de la page personnelle de l'utilisateur
+Insert the url of the user homepage
 \end_inset 
 </cell>
 </row>
@@ -483,7 +454,7 @@ Introduisez l'url de la page personnelle de l'utilisateur
 
 \layout Standard
 
-Format de stockage des mots de passe 
+Password storage
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -491,7 +462,7 @@ Format de stockage des mots de passe
 
 \layout Standard
 
-Faites votre séléction dans la liste déroulante
+Make your choice on the scroll list
 \end_inset 
 </cell>
 </row>
@@ -501,7 +472,7 @@ Faites votre séléction dans la liste déroulante
 
 \layout Standard
 
-Certificats
+Certificates
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -511,26 +482,15 @@ Certificats
 
 
 \color black
-Cliquez sur le bouton
-\begin_inset Quotes erd
-\end_inset 
-
- Modification des certificats
-\begin_inset Quotes erd
-\end_inset 
-
+Click on the button 
+\emph on 
+Edits certificates
+\emph default 
 .
- GOsa vous propose trois types de certificats à rechercher dans l' arborescence
- de votre ordinateur.
- Pour enregistrer cliquez sur le bouton
-\begin_inset Quotes erd
-\end_inset 
-
- Terminé
-\begin_inset Quotes erd
-\end_inset 
-
-.
+ GOsa will let you import three type of certificates.
+ To save click on 
+\emph on 
+finish
 \end_inset 
 </cell>
 </row>
@@ -550,18 +510,11 @@ Kerberos
 
 
 \color black
-Cliquez sur le bouton
-\begin_inset Quotes erd
-\end_inset 
-
- Modifier les propriétés
-\begin_inset Quotes erd
-\end_inset 
-
+Click on the button 
+\emph on 
+Edit properties
+\emph default 
 .
- 
-\color red
-?
 \end_inset 
 </cell>
 </row>
@@ -572,17 +525,16 @@ Cliquez sur le bouton
 
 \layout Standard
 
-Vous pouvez aussi si vous le désirez agrémenter d'une photo le profil de
- l'utilisateur en cliquant sur le bouton 
+You can if you wisch add a picture of the user by clicking on the button
+ 
 \shape italic 
 changer la photo
 \shape default 
 .
- Vous parcourez alors l'arborescence de votre ordinateur pour aller chercher
- l'image.
+ 
 \layout Subsubsection
 \added_space_top medskip 
-Informations sur l'entreprise
+Organizational information
 \layout Standard
 
 
@@ -597,7 +549,7 @@ Informations sur l'entreprise
 
 \layout Standard
 
-Entreprise
+Organization
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -605,7 +557,7 @@ Entreprise
 
 \layout Standard
 
-Introduisez le nom de la société
+Insert the organization's name 
 \end_inset 
 </cell>
 </row>
@@ -615,7 +567,7 @@ Introduisez le nom de la société
 
 \layout Standard
 
-Département
+Departement
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -623,7 +575,7 @@ Département
 
 \layout Standard
 
-Introduisez le nom du département auquel appartient l'utilisateur 
+Insert the departement's name that the user is attached 
 \end_inset 
 </cell>
 </row>
@@ -633,7 +585,7 @@ Introduisez le nom du département auquel appartient l'utilisateur
 
 \layout Standard
 
-N° du département
+Departement's number
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -641,7 +593,7 @@ N° du département
 
 \layout Standard
 
-Introduisez le numéro du département
+Insert the departement's number
 \end_inset 
 </cell>
 </row>
@@ -651,7 +603,7 @@ Introduisez le numéro du département
 
 \layout Standard
 
-N° de l'employé
+Employee's number
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -659,7 +611,7 @@ N° de l'employé
 
 \layout Standard
 
-Introduisez le numéro attribué à l'utilisateur
+Insert the employee's number
 \end_inset 
 </cell>
 </row>
@@ -669,7 +621,7 @@ Introduisez le numéro attribué à l'utilisateur
 
 \layout Standard
 
-Type de l'employé
+Employee's type
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -677,7 +629,7 @@ Type de l'employé
 
 \layout Standard
 
-Précisez son statut dans la société
+Insert his range in the organization
 \end_inset 
 </cell>
 </row>
@@ -687,7 +639,7 @@ Précisez son statut dans la société
 
 \layout Standard
 
-N° du bureau
+Room's number
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -695,7 +647,7 @@ N° du bureau
 
 \layout Standard
 
-Introduisez le numéro du bureau dans lequel travaille l'utilisateur
+Insert the room's number of the employee
 \end_inset 
 </cell>
 </row>
@@ -705,7 +657,6 @@ Introduisez le numéro du bureau dans lequel travaille l'utilisateur
 
 \layout Standard
 
-Téléphone
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -713,7 +664,7 @@ Téléphone
 
 \layout Standard
 
-Introduisez le numéro de téléphone de l'utilisateur
+Insert the phone number of the user
 \end_inset 
 </cell>
 </row>
@@ -723,7 +674,7 @@ Introduisez le numéro de téléphone de l'utilisateur
 
 \layout Standard
 
-Portable
+Mobile
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -731,7 +682,7 @@ Portable
 
 \layout Standard
 
-Introduisez le numéro du mobile ou GSM de l'utilisateur
+Insert the mobile's number of the employee
 \end_inset 
 </cell>
 </row>
@@ -741,7 +692,7 @@ Introduisez le numéro du mobile ou GSM de l'utilisateur
 
 \layout Standard
 
-Bip
+Pager
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -749,7 +700,7 @@ Bip
 
 \layout Standard
 
-Introduisez le numéro du bipeur de l'utilisateur
+Insert the page number of the employee
 \end_inset 
 </cell>
 </row>
@@ -767,7 +718,7 @@ Fax
 
 \layout Standard
 
-Introduisez le numéro de Fax de l'utilisateur
+Insert the fax number of the employee
 \end_inset 
 </cell>
 </row>
@@ -777,7 +728,7 @@ Introduisez le numéro de Fax de l'utilisateur
 
 \layout Standard
 
-Lieu 
+Location
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -785,8 +736,7 @@ Lieu
 
 \layout Standard
 
-Introduisez la localisation du bureau de l'utilisateur si la société possède
- des succursales
+Insert the localisation of employee's office
 \end_inset 
 </cell>
 </row>
@@ -796,7 +746,7 @@ Introduisez la localisation du bureau de l'utilisateur si la société possède
 
 \layout Standard
 
-Département 
+State
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -804,9 +754,7 @@ Département
 
 \layout Standard
 
-Introduisez le nom de la région où la société est localisée 
-\color red
-?
+Insert the name of the state where the organization is located
 \end_inset 
 </cell>
 </row>
@@ -816,7 +764,7 @@ Introduisez le nom de la région où la société est localisée
 
 \layout Standard
 
-Adresse
+Address
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -824,7 +772,7 @@ Adresse
 
 \layout Standard
 
-Introduisez l'adresse de l'entreprise
+Insert the address of the organization
 \end_inset 
 </cell>
 </row>
@@ -838,12 +786,13 @@ Introduisez l'adresse de l'entreprise
 Unix
 \layout Standard
 
-Pour activer le compte Unix pour un utilisateur cliquez sur le bouton 
+To activate an Unix account for one user, you have to click on the button
+ 
 \shape italic 
-créer un compte unix.
+add a posix account.
 \layout Subsubsection
 
-Informations générales
+Generic
 \layout Standard
 
 
@@ -858,7 +807,9 @@ Informations générales
 
 \layout Standard
 
-Répertoire home
+Home directory
+\color red
+*
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -866,7 +817,7 @@ Répertoire home
 
 \layout Standard
 
-Introduisez le chemin vers le répertoire de l'utilisateur
+Insert the path to the home directory of the user
 \end_inset 
 </cell>
 </row>
@@ -884,7 +835,7 @@ Shell
 
 \layout Standard
 
-Choisir dans la liste déroulante le type de shell (console) utilisé
+Make the choice on the scroll list of the kind of shell used
 \end_inset 
 </cell>
 </row>
@@ -894,7 +845,7 @@ Choisir dans la liste déroulante le type de shell (console) utilisé
 
 \layout Standard
 
-Groupe principal
+Primary group
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -902,17 +853,19 @@ Groupe principal
 
 \layout Standard
 
-Indiquez le groupe principal auquel appartient l'utilisateur.
- (Pour la création de groupe allez au bouton 
-\series bold 
-\color blue
-Groupes
-\series default 
-\color default
- dans le menu de gauche dans la partie 
+Mention the primary group wich one the user is attached.
+ (For the creation of a group, go to the 
 \series bold 
 Administration
 \series default 
+ part 
+\color black
+and click on the button
+\series bold 
+\color blue
+ Groups
+\series default 
+\color default
 )
 \end_inset 
 </cell>
@@ -923,7 +876,7 @@ Administration
 
 \layout Standard
 
-Statut
+Status
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -931,7 +884,7 @@ Statut
 
 \layout Standard
 
-Indique si le compte est activé ou non
+Mention if the account is activated or not
 \end_inset 
 </cell>
 </row>
@@ -941,7 +894,7 @@ Indique si le compte est activé ou non
 
 \layout Standard
 
-Forcer l'UID/GID
+Force UID/GID
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -949,8 +902,7 @@ Forcer l'UID/GID
 
 \layout Standard
 
-Cochez si vous désirez forcer l'uid/gid de l'utilisateur à une certaine
- valeur
+Check if you want to force UID/GID of the user to a certain value
 \end_inset 
 </cell>
 </row>
@@ -961,79 +913,81 @@ Cochez si vous désirez forcer l'uid/gid de l'utilisateur à une certaine
 
 \layout Subsubsection
 \added_space_top medskip 
-Appartient aux groupes
+Group membership
 \layout Standard
 
-Utilisez les boutons 
+Use the buttons 
 \emph on 
-Ajouter
+Add
 \emph default 
- et 
+ and 
 \emph on 
-Supprimer
+Delete
 \emph default 
- pour insérer ou effacer les groupes dans le champ vide.
- Le bouton 
+ to insert or to remove groups in the empty area.
+ The button 
 \emph on 
-Ajouter
+Add
 \emph default 
- renvoie à la liste des groupes crées par l'administrateur.
- L'utilisateur peut appartenir à un ou plusieurs groupes.
+ give the group list created by the administrator.
+ The user could be attached at one or many groups.
 \layout Subsubsection
 \added_space_top medskip 
-Compte
+Account
 \layout Standard
 
-Il s'agit de la gestion du mot de passe de l'utilisateur.
- Différentes propositions peuvent être cochées à la fois mais l'administrateur
- doit veiller à rester cohérent pour éviter les conflits dans l'application
- de ses choix.
+It's about the management of the user's password.
+ Many proposals could be checked but the administrator should avoid conflicting
+ options.
 \layout Subsubsection
 \added_space_top medskip 
-Système de confiance
+System trust
 \layout Standard
 
-Le système de confiance sert à gèrer l'accès de l'utilisateur aux différents
- systèmes, phériphériques, etc...
- .
- Le système de confiance peut être en mode :
+The trust system is used to control access by the user at differents systems,
+ devices, ...
+ 
+\layout Standard
+
+The trust system can :
 \layout Itemize
 
-désactivé, 
+be deactivated, 
 \layout Itemize
 
-accès complet : l'utilisateur à l'accès complet aux systèmes,
+allow full access,
 \layout Itemize
 
-permettre l'accès à ces hôtes : 
+allow the access to hosts : 
 \begin_deeper 
 \layout Standard
 
-- Utilisez le bouton 
+- Use the button 
 \emph on 
-Ajouter
+Add
 \emph default 
- pour faire apparaître la liste des hôtes auxquels l'utilisateur pourrait
- avoir accès, 
+ to select the hosts, 
 \layout Standard
 
-- Utilisez le bouton 
+- Use the button 
 \emph on 
-Supprimer
+Delete
 \emph default 
- pour effacer les hôtes auxquels l'utilisateur n'a plus accès.
+ to remove hosts.
 \end_deeper 
 \layout Subsection
 \added_space_top bigskip 
-Environnement
+Environment
 \layout Standard
 
-Cliquez sur le bouton 
+Click on the button 
 \shape italic 
-ajouter une extension environnemental
+add an environment extension 
+\emph on 
+to
 \shape default 
- pour voir apparaître les différents points destinés à la configuration
- environnementale de l'utilisateur.
+\emph default 
+ activate the configuration space.
 \layout Subsubsection
 
 Profiles
@@ -1051,21 +1005,21 @@ Attach share
 Hotplug devices
 \layout Subsubsection
 \added_space_top medskip 
-Imprimante
+Printer
 \layout Subsection
 \added_space_top bigskip 
 Mail
 \layout Standard
 
-Le compte émail est lié au serveur de messagerie.
- Pour activer le compte de messagerie d'un utilisateur cliquez sur 
+The mail account is linked to the mail server.
+ To activate the mail account click on the button 
 \shape italic 
-Créer un compte émail
+Create mail account
 \shape default 
 .
 \layout Subsubsection
 
-Informations générales
+Generic
 \layout Standard
 
 
@@ -1080,7 +1034,9 @@ Informations générales
 
 \layout Standard
 
-Adresse principale
+
+\color black
+Primary address
 \color red
 *
 \end_inset 
@@ -1090,7 +1046,7 @@ Adresse principale
 
 \layout Standard
 
-Introduisez l'adresse de messagerie de l'utilisateur 
+Insert the mail address of the user 
 \end_inset 
 </cell>
 </row>
@@ -1100,7 +1056,7 @@ Introduisez l'adresse de messagerie de l'utilisateur
 
 \layout Standard
 
-Serveur
+Server
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1108,7 +1064,7 @@ Serveur
 
 \layout Standard
 
-Sélectionnez le serveur ou est stockée le compte de messagerie de l'utilisateur
+Choose the server where the mail account of the user is stored
 \end_inset 
 </cell>
 </row>
@@ -1118,7 +1074,7 @@ Sélectionnez le serveur ou est stockée le compte de messagerie de l'utilisateur
 
 \layout Standard
 
-Utilisation des quota
+Quota usage
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1126,8 +1082,7 @@ Utilisation des quota
 
 \layout Standard
 
-Précisez si vous désirez appliquer un quota au niveau du compte de messagerie
- de l'utilisateur
+Mention if you apply a quota to the mail account of the user
 \end_inset 
 </cell>
 </row>
@@ -1137,7 +1092,7 @@ Précisez si vous désirez appliquer un quota au niveau du compte de messagerie
 
 \layout Standard
 
-Tailles du quota
+Quota size
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1145,7 +1100,7 @@ Tailles du quota
 
 \layout Standard
 
-Précisez en KB la taille du quota
+Mention in KB the quota size
 \end_inset 
 </cell>
 </row>
@@ -1159,128 +1114,132 @@ Précisez en KB la taille du quota
 Alternative addresses
 \layout Standard
 
-L'utilisateur peut être en possession d'alias.
- Ces alias sont à insérer dans le champ adresses alternatives.
+The user can own one or many aliases.
+ Those aliases must be inserted in the alternatives addresses area.
  
 \layout Standard
 
-Utilisez le bouton 
+Use the button 
 \emph on 
-Ajouter
+Add
 \emph default 
- pour insérer les alias.
- L'alias doit être introduit dans le champ vide précédant le bouton 
+ to insert the aliases.
+ The alias must be inserted in the empty area followed by the button 
 \emph on 
-Ajouter
+Add
 \emph default 
 .
- Utilisez le bouton 
+ Use the button 
 \emph on 
-Supprimer
+Delete
 \emph default 
- pour effacer les alias.
+ to remove aliases.
 \layout Subsubsection
 \added_space_top medskip 
-Options du compte de messagerie
+Mail options
 \layout Standard
 
-Gestion des options du compte de messagerie de l'utilisateur :
+Management of the mail options of the user :
 \layout Itemize
 
-Aucune distribution des messages dans la boite de l'utilisateur : envoie
- une copie à l'adresse mentionnée dans 
+No delivery to own mailbox : send all mail for this address to a mail address
+ mentionned in the area 
 \emph on 
-transférer les messages vers
-\emph default 
- , sans en mettre une copie dans la messagerie de l'utilisateur.
+Forward messages to.
 \layout Itemize
 
-Activer la notification d'absence : envoie le message écrit dans 
+Activate vacation message : send the message wroten in the area 
+\shape italic 
+\color black
+Vacation message
+\shape default 
+\color default
+ to the sender.
+\layout Itemize
+
+Move mails tagged with spam level greater than (a) to folder (b) : send
+ mails that spam level is higher than (a) in the folder (b).
+\layout Itemize
+
+Reject mails bigger than (c) MB : reject mails higher than (c) MB.
+\layout Itemize
+
+Use the 
 \emph on 
-message d'absence
-\emph default 
-.
-\layout Itemize
-
-Déplacer les messages ayant un niveau de spam supérieur à (a) vers le répertoire
- (b) : envoie les messages ayant un score supérieur à (a) dans le répertoire
- (b).
-\layout Itemize
-
-Rejeter les messages plus gros que (c) MB : ne pas accepter les messages
- plus gros que (c) MB.
-\layout Itemize
-
-Utilisez les boutons 
-\emph on 
-Ajouter
+Add
 \emph default 
  ou 
 \emph on 
-Ajouter en local
+Add local
 \emph default 
 \color black
- pour la gestion des adresses : 
+ buttons to manage addresses : 
 \begin_deeper 
 \layout Standard
 
 
 \color black
-- Le bouton 
+- The 
 \emph on 
-Ajouter en local
+Add local
 \emph default 
- permet de sélectionner parmis la liste des adresses locales.
+ button is used to choose among the local list addresses.
  
 \layout Standard
 
 
 \color black
-- Le bouton 
+- The 
 \emph on 
-Ajouter
+Add
 \emph default 
- permet l'ajout d'adresses extérieures au système.
+ button allow external addresses.
 \layout Standard
 
 
 \color black
-- Utilisez le bouton 
+- Use the 
 \emph on 
-Supprimer
+Delete
 \emph default 
- pour effacer les adresses de messagerie.
+ button to remove the mails addresses.
 \end_deeper 
 \layout Subsubsection
 \added_space_top medskip 
-Options de messagerie avancées
+Advanced mail options
 \layout Itemize
 
-Les utilisateurs ne sont autorisés qu'a envoyé et recevoir des emails locaux
- : l'administrateur peut forcer l'envoi et la reception des messages en
- local uniquement.
+User is only allowed to send and receive local mails : the administrator
+ can force sending and receiving local mails only.
 \layout Itemize
 
-Utiliser des scripts sieve personnalisés : l'administrateur peut écrire
- des scripts sieve qui établissent les règles de gestion de la messagerie.
+Use custom sieve script : The administrator can write sieve script to establish
+ rules for managing mail box.
  
 \emph on 
-Attention ! cela désactive toutes les options de messagerie
+Attention ! 
+\shape italic 
 \emph default 
+This will disable all mail options
+\shape default 
 .
 \layout Subsection
 \added_space_top bigskip 
 Samba
 \layout Standard
 
-Pour créer un compte samba pour un utilisateur cliquez sur le bouton 
+To create a samba account for an user click on the button 
 \shape italic 
-Créer un compte samba
+Create a samba
+\shape default 
+ 
+\shape italic 
+account
 \shape default 
 .
 \layout Subsubsection
 
-Informations générales
+Generic
 \layout Standard
 
 
@@ -1295,7 +1254,7 @@ Informations générales
 
 \layout Standard
 
-Répertoire Home
+Home directory
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1303,8 +1262,7 @@ Répertoire Home
 
 \layout Standard
 
-Indiquez le chemin du répertoire personnel de l'utilisateur en notation
- UNC ex: 
+Mention the path of the user's home directory in UNC notation ex: 
 \backslash 
 
 \backslash 
@@ -1312,9 +1270,8 @@ SERVER
 \backslash 
 homes
 \backslash 
-utilisateur.
- Choisissez dans la liste déroulante la lettre associée au répertoire personnel
- de l'utilisateur.
+user.
+ Choose on the scroll list the letter associated to the user's home directory.
 \end_inset 
 </cell>
 </row>
@@ -1324,7 +1281,7 @@ utilisateur.
 
 \layout Standard
 
-Domaine
+Domain
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1332,7 +1289,7 @@ Domaine
 
 \layout Standard
 
-Séléctionnez le domaine dans lequel se trouve la machine de l'utilisateur
+Select the domain where the user's desktop exists
 \end_inset 
 </cell>
 </row>
@@ -1342,7 +1299,7 @@ Séléctionnez le domaine dans lequel se trouve la machine de l'utilisateur
 
 \layout Standard
 
-Chemin du Script
+Script path
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1350,7 +1307,7 @@ Chemin du Script
 
 \layout Standard
 
-Indiquez le script de démarrage de l'utilisateur
+Mention the user's logon script 
 \end_inset 
 </cell>
 </row>
@@ -1360,7 +1317,7 @@ Indiquez le script de démarrage de l'utilisateur
 
 \layout Standard
 
-Chemin du Profile
+Profile path
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1368,7 +1325,7 @@ Chemin du Profile
 
 \layout Standard
 
-Indiquez le chemin pour accéder au profile de l'utilisateur
+Mention the path to the user profile
 \end_inset 
 </cell>
 </row>
@@ -1379,10 +1336,10 @@ Indiquez le chemin pour accéder au profile de l'utilisateur
 
 \layout Subsubsection
 \added_space_top medskip 
-Serveur de terminal
+Terminal Server
 \layout Itemize
 
-Permet la connexion sur un serveur de terminal
+Allow login on the terminal server
 \layout Standard
 
 
@@ -1397,7 +1354,7 @@ Permet la connexion sur un serveur de terminal
 
 \layout Standard
 
-Répertoire Home
+Home directory
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1405,8 +1362,7 @@ Répertoire Home
 
 \layout Standard
 
-Indiquez le chemin du répertoire personnel de l'utilisateur en notation
- UNC ex: 
+Mention the path of the user's home directory in notation UNC ex: 
 \backslash 
 
 \backslash 
@@ -1414,9 +1370,8 @@ SERVER
 \backslash 
 homes
 \backslash 
-utilisateur.
- Choisissez dans la liste déroulante la lettre associée au répertoire personnel
- de l'utilisateur.
+user.
+ Choose on the scroll list the letter associated to the user's home directory.
 \end_inset 
 </cell>
 </row>
@@ -1426,7 +1381,7 @@ utilisateur.
 
 \layout Standard
 
-Chemin du Profile
+Profile path
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1434,7 +1389,7 @@ Chemin du Profile
 
 \layout Standard
 
-Indiquez le chemin pour accéder au profile de l'utilisateur
+Mention the path to the user profile
 \end_inset 
 </cell>
 </row>
@@ -1445,7 +1400,7 @@ Indiquez le chemin pour accéder au profile de l'utilisateur
 
 \layout Itemize
 
-Hérite de la configuration du client
+Inherit client config
 \layout Standard
 
 
@@ -1460,7 +1415,7 @@ Hérite de la configuration du client
 
 \layout Standard
 
-Programme initial
+Initial program
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1468,7 +1423,7 @@ Programme initial
 
 \layout Standard
 
-Indiquez le chemin vers l'application par défaut
+Mention the path to the default application
 \end_inset 
 </cell>
 </row>
@@ -1478,7 +1433,7 @@ Indiquez le chemin vers l'application par défaut
 
 \layout Standard
 
-Répertoire Home
+Working directory
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1486,9 +1441,7 @@ Répertoire Home
 
 \layout Standard
 
-Indiquez le chemin pour accéder au repertoire de base de l'application 
-\color red
-?
+Mention the working directory of the initial program
 \end_inset 
 </cell>
 </row>
@@ -1499,7 +1452,7 @@ Indiquez le chemin pour accéder au repertoire de base de l'application
  
 \layout Itemize
 
-Configuration du temps d'attente (en minutes) :
+Timeout settings (in minutes) :
 \layout Standard
 
 
@@ -1514,7 +1467,7 @@ Configuration du temps d'attente (en minutes) :
 
 \layout Standard
 
-Connexion
+Connection
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1522,7 +1475,7 @@ Connexion
 
 \layout Standard
 
-Cochez afin d'indiquer le temps d'attente maximum lors d'une connexion
+Put the maximum time waiting for a login
 \end_inset 
 </cell>
 </row>
@@ -1532,7 +1485,7 @@ Cochez afin d'indiquer le temps d'attente maximum lors d'une connexion
 
 \layout Standard
 
-Déconnexion
+Disconnection
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1540,7 +1493,7 @@ Déconnexion
 
 \layout Standard
 
-Cochez afin d'indiquer le temps d'attente maximum lors d'une déconnexion
+Put the maximum time waiting to disconnect
 \end_inset 
 </cell>
 </row>
@@ -1550,7 +1503,7 @@ Cochez afin d'indiquer le temps d'attente maximum lors d'une déconnexion
 
 \layout Standard
 
-En attente
+IDLE
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1558,7 +1511,7 @@ En attente
 
 \layout Standard
 
-Cochez afin d'indiquer le temps d'attente maximum lors d'une requête
+Put the maximum time waiting for a query
 \end_inset 
 </cell>
 </row>
@@ -1569,7 +1522,7 @@ Cochez afin d'indiquer le temps d'attente maximum lors d'une requête
 
 \layout Itemize
 
-Périphériques clients :
+Client devices :
 \layout Standard
 
 
@@ -1584,7 +1537,7 @@ Périphériques clients :
 
 \layout Standard
 
-Connecter les lecteurs clients à l'identification
+Connect client drives at logon 
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1592,7 +1545,7 @@ Connecter les lecteurs clients à l'identification
 
 \layout Standard
 
-Cochez afin de connecter les lecteurs de l'utilisateur lors de l'identification
+Check to connect client drives at logon
 \end_inset 
 </cell>
 </row>
@@ -1602,7 +1555,7 @@ Cochez afin de connecter les lecteurs de l'utilisateur lors de l'identification
 
 \layout Standard
 
-Connecter les imprimantes clients à l'identification
+Connect client printers at logon
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1610,8 +1563,7 @@ Connecter les imprimantes clients à l'identification
 
 \layout Standard
 
-Cochez afin de connecter les imprimantes de l'utilisateur lors de l'identificati
-on
+Check to connect client printers at logon
 \end_inset 
 </cell>
 </row>
@@ -1621,7 +1573,7 @@ on
 
 \layout Standard
 
-Imprimante par défaut
+Default to main client printer
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1629,8 +1581,7 @@ Imprimante par défaut
 
 \layout Standard
 
-Cochez afin de définir l'imprimante par défaut de l'utilisateur lors de
- l'identification
+Check to define the client default printer at logon
 \end_inset 
 </cell>
 </row>
@@ -1641,134 +1592,126 @@ Cochez afin de définir l'imprimante par défaut de l'utilisateur lors de
 
 \layout Itemize
 
-Divers :
+Miscellaneous :
 \begin_deeper 
 \layout Standard
 
-- Masquer : 
+- Shadowing : 
 \color red
 ?
 \layout Standard
 
-- Sur interrompu ou temps d'attente dépassé : permet de choisir si il faut
- déconnecter le client ou faire une remise à zéro.
+- On broken or timed out : choose if you want disconect or reset the client.
 \layout Standard
 
-- Reconnexion si déconnecté : permet de choisir si la reconnexion doit être
- faite depuis le même client, ou si elle peut être effectuée depuis un autre
- client.
+- Reconnect if disconnected : choose if the reconnection must be done from
+ the same client, or if it can be done from an other client.
 \end_deeper 
 \layout Subsubsection
 \added_space_top medskip 
-Options d'accès
+Access options
 \layout Itemize
 
-Il s'agit de la gestion du mot de passe de l'utilisateur.
- Différentes propositions peuvent être cochées à la fois mais l'administrateur
- doit veiller à rester cohérent pour éviter les conflits dans l'application
- de ses choix.
+It's about the management of the user's password.
+ Once or many proposal can be checked in but the administrator must take
+ care to avoid conflicts.
 \layout Itemize
 
-Le champ à droite doit être rempli par les noms de stations à partir desquelles
- l'utilisateur peut se connecter.
- L'administrateur doit utiliser les boutons 
+The area on the right must be filled by the names of clients on which the
+ user can logon.
+ The administrator must use the button 
 \emph on 
-Ajouter
+Add
 \emph default 
- pour y insérer les noms de stations.
- Le bouton 
+ to insert the clients names.
+ The button 
 \emph on 
-Ajouter
+Add
 \emph default 
- renvoie à la liste des stations.
- Utilisez le bouton 
+ give the clients list.
+ Use the button 
 \emph on 
-Supprimer
+Delete
 \emph default 
- pour effacer des stations.
+ to remove clients.
 \layout Subsection
 \added_space_top bigskip 
-Connectivité
+Connectivity
 \layout Standard
 
-L'administrateur peut affiner la gestion du compte de l'utilisateur en configura
-nt les services supplémentaires auquel il peut se connecter.
+The administrator can choose more services where the user could be connected.
 \layout Subparagraph*
 
-Compte Proxy
+Proxy account
 \layout Standard
 
-Si vous activez l'option Proxy pour l'utilisateur vous pouvez filtrer sur
- le contenu, limité l'accès à certaines heures et restreindre le téléchargement.
+If you activated the Proxy option for a user you can filter the content,
+ limit access hours and restrict download/upload.
 \layout Subparagraph
 \added_space_top smallskip 
-Compte FTP
+FTP account
 \layout Standard
 
-Si vous activez l'option FTP, vous pouvez régler la bande passante montante
- et descendante, le ratio des données et le quota à ne pas dépasser pour
- le transfert de fichiers .
- Vous pouvez aussi à partir de cet endroit désactiver le compte FTP.
+If you activated the FTP option, you can fix the upload and downlaod bandwidth,
+ the data ratio and the quota allowed.
+ You can also deactivate the FTP account.
 \layout Subparagraph
 \added_space_top smallskip 
-Compte WebDAV
+WebDAV account
 \layout Standard
 
-Si vous activez l'option WebDav, l'utilisateur aura accès au serveur WebDAV
+If you activated the WebDAV option, the user will be granted access to the
+ WebDAV server.
  
 \layout Subparagraph
 \added_space_top smallskip 
-Compte PHPGroupware
+PHPGroupware account
 \layout Standard
 
-Si vous activez l'option PHPGroupware, l'utilisateur aura accès au logiciel
- PHPGroupware
+If you activated the PHPGroupware option, the user will be granted access
+ to the PHPGroupware software.
 \layout Subparagraph
 \added_space_top smallskip 
-Compte Intranet 
+Intranet account
 \layout Standard
 \added_space_bottom smallskip 
-Si vous activez l'option Intranet, l'utilisateur aura accès au serveur Intranet
+If you activated the Intranet option, the user will access Intranet server.
 \layout Standard
 
 
 \series bold 
-Compte PPTP
+PPTP account
 \layout Standard
 \added_space_bottom smallskip 
-Si vous activez l'option PPTP, l'utilisateur aura accès au serveur PPTP
+If you activated the PPTP option, the user will access server PPTP.
 \layout Standard
 
 
 \series bold 
-Compte PHPScheduleIt
-\series default 
- 
+PHPScheduleit account
 \layout Standard
 \added_space_bottom smallskip 
-Si vous activez l'option PHPScheduleIt, l'utilisateur aura accès au logiciel
- PHPScheduleIt
+If you activated the PHPScheduleit option, the user will access PHPScheduleIt
+ software.
 \layout Standard
 
 
 \series bold 
-Compte GLPI
-\series default 
- 
+GLPI account
 \layout Standard
 
-Si vous activez l'option GLPI, l'utilisateur aura accès au logiciel GLPI
+If you activated the GLPI option, the user will access GLPI software.
 \layout Subsection
 \added_space_top bigskip 
 Fax
 \layout Standard
 
-Pour créer un compte Fax pour un utilisateur cliquez sur le bouton
+To create a fax account for an user click on the button
 \shape italic 
- Créer un compte Fax.
+ Create a Fax account.
 \layout Subsubsection
 
-Informations générales
+Generic
 \layout Standard
 
 
@@ -1793,7 +1736,7 @@ Fax
 
 \layout Standard
 
-Insérez le numéro de fax de l'utilisateur
+Insert the fax number of the user
 \end_inset 
 </cell>
 </row>
@@ -1803,7 +1746,7 @@ Insérez le numéro de fax de l'utilisateur
 
 \layout Standard
 
-Langue
+Language
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1811,7 +1754,7 @@ Langue
 
 \layout Standard
 
-Faites votre sélection dans la liste déroulante
+Make your choice on the scroll list
 \end_inset 
 </cell>
 </row>
@@ -1821,7 +1764,7 @@ Faites votre sélection dans la liste déroulante
 
 \layout Standard
 
-Format de distribution
+Delivery format 
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1829,7 +1772,7 @@ Format de distribution
 
 \layout Standard
 
-Faites votre sélection dans la liste déroulante
+Make your choice on the scroll list
 \end_inset 
 </cell>
 </row>
@@ -1840,104 +1783,114 @@ Faites votre sélection dans la liste déroulante
 
 \layout Subsubsection
 \added_space_top medskip 
-Méthodes de distribution
+Delivery methods
 \layout Itemize
 
-Desactiver temporairement l'utilisation du fax : interdit l'utilisation
- du fax par cet utilisateur.
+Temporary disable fax usage : forbid the use of the fax for an user.
 \layout Itemize
 
-Délivrer les fax comme des mails : envoie les fax sous le format de distribution
- défini dans la messagerie de l'utilisateur
+Deliver fax as mail to : send fax on mail distribution format to the user's
+ mailbox.
 \layout Itemize
 
-Imprimer directement les fax : permet de sélectionner l'imprimante à laquelle
- envoyer les fax reçus par cet utilisateur
+Deliver fax to printer : send fax to a printer.
 \layout Subsubsection
 \added_space_top medskip 
-Numéros de fax alternatif
+Alternate fax numbers
 \layout Standard
 
-L'administrateur peut compléter la configuration du fax par une série d'autres
- numéros de fax utilisés dans la société.
- Utilisez les boutons Ajouter, Ajouter en local pour remplir le champ.
+The administrator can complete the fax configuration with more than one
+ fax number.
+ Use the buttons 
+\shape italic 
+Add
+\shape default 
+, 
+\shape italic 
+Add local
+\shape default 
+ to fill the area.
 \layout Itemize
 
-Le bouton 
+The 
 \emph on 
-Ajouter en local
+Add local
 \emph default 
- renvoie à la liste des numéros de fax.
+ button is used to choose among the local fax.
  
 \layout Itemize
 
-Le bouton 
+The 
 \emph on 
-Ajouter
+Add
 \emph default 
- permet d'insérer des numéros de fax autres que ceux de la liste.
+ button allow external fax numbers.
  
 \layout Standard
 
-Utilisez le bouton 
+Use the button 
 \emph on 
-Supprimer
+Delete
 \emph default 
- pour effacer des numéros de fax.
+ to remove fax numbers.
 \layout Subsubsection
 \added_space_top medskip 
-Listes rouges
+Blocklists
 \layout Standard
 
-Le fax est aujourd'hui fréquemment utilisé pour distribuer des messages
- publicitaires.
- Certains peuvent être apparentés à des spams.
- Pour éviter que les utilisateurs soient submergés par ces messages, l'administr
-ateur peut instaurer une liste rouge reprenant les numéros de fax indésirables
- qu'ils soient entrant ou sortant.
+The fax is today frequently use to deliver advertising messages.
+ Many of them are spams.
+ To avoid those messages, the administrator can create a blocklist for incoming
+ and outgoing fax.
 \layout Standard
 
-En cliquant sur le bouton 
+When clicking on the button 
 \emph on 
 Edit
 \emph default 
- vous faites apparaître une page comprenant deux listes, du côté gauche
- on trouve les numéros refusés pour cet utilisateur, du côte droit on retrouve
- les listes rouges prédefinies par l'administrateur.
+ at the left side appear the blocked numbers/lists linked to the user and
+ at the right side the predefined blocklist.
 \layout Standard
 
-Selectionnez la ou les listes que vous désirez utiliser dans la liste de
- droite et cliquer sur 
+Select one or many lists at the right side and click on 
+\shape italic 
+Add the list to the blocklists
+\shape default 
+ use at vous désirez utiliser dans la liste de droite et cliquer sur 
 \emph on 
 Ajouter à la liste rouge
 \emph default 
  pour l'activer.
+ 
+\color red
+???
 \layout Subsection
 \added_space_top bigskip 
-Téléphone
+Phone
 \layout Standard
 
-Pour activer le compte téléphone pour un utilisateur cliquez sur le bouton
- 
+To activate the phone account for an user click on the button 
 \shape italic 
-Créer un compte téléphone
+Create a phone account
 \shape default 
 .
 \layout Subsubsection
 
-Numéros de téléphone
+Phone numbers
 \layout Standard
 
-Insérez le ou les numéro(s) de téléphone de l'utilisateur en utilisant le
- bouton 
+Insert one or many phone numbers for the user by clicking on the button
 \emph on 
-Ajouter
+ A
+\shape italic 
 \emph default 
+dd
+\shape default 
 .
  
 \layout Subsubsection
 \added_space_top medskip 
-Matériel téléphonique
+Telephone hardware
 \layout Standard
 
 
@@ -1952,7 +1905,7 @@ Matériel téléphonique
 
 \layout Standard
 
-Téléphone
+Telephone
 \end_inset 
 </cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
@@ -1960,7 +1913,7 @@ Téléphone
 
 \layout Standard
 
-Faites votre sélection dans la liste déroulante
+Make your choice on the scroll list
 \end_inset 
 </cell>
 </row>
@@ -1982,11 +1935,7 @@ VoicemailPIN
 
 
 \color black
-Introduisez le code PIN utilisé par l'utilisateur pour atteindre sa boîte
- vocale.
-
-\color red
- 
+Insert the PIN code of the user to reach his voicemail
 \end_inset 
 </cell>
 </row>
@@ -2008,8 +1957,7 @@ Phone PIN
 
 
 \color black
-Introduisez le code PIN utilisé par l'utilisateur pour déverouiller son
- téléphone.
+Insert the PIN code of the user to unlock his phone
 \end_inset 
 </cell>
 </row>
@@ -2023,13 +1971,12 @@ Introduisez le code PIN utilisé par l'utilisateur pour déverouiller son
 Phone macro
 \layout Standard
 
-Permet de séléctionner une macro à mettre dans le téléphone de l'utilisateur.
+Selection of phone macro for the user's telephone.
 \layout Subsection
 \added_space_top bigskip 
-Références
+References
 \layout Standard
 
-Les références présentent les propriétés de l'utilisateur.
- Cela permet à l'administrateur d'avoir une information rapide sur la situation
- de l'utilisateur dans la société.
+The references present the user's properties.
+ It gives the administrator a short summary of the user's properties.
 \the_end
