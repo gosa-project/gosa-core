@@ -74,15 +74,19 @@ td.listheader#scrollbar {
 	border-right:0px;
 }
 
+tr.rowxp0 {
+	background:white;
+}
+
+tr.rowxp0:hover {
+	background:#d2f6c2;
+}
+
 td.list0 {
-	background:#F0F0F0;
+	background:transparent;
 	border-right:1px solid #C0C0C0;
 	padding:3px;
 	height:22px;
-}
-
-td.list0:hover {
-	background:#D8D8D8;
 }
 
 td.list0#icon {
@@ -123,8 +127,16 @@ td.list0#actions {
 	text-align:right;
 }
 
+tr.rowxp1 {
+	background:#F0F0F0;
+}
+
+tr.rowxp1:hover {
+	background:#d2f6c2;
+}
+
 td.list1 {
-	background:white;
+	background:transparent;
 	border-right:1px solid #C0C0C0;
 	padding:3px;
 	height:22px;
@@ -135,10 +147,6 @@ td.list1nohighlight {
 	border-right:1px solid #C0C0C0;
 	padding:3px;
 	height:22px;
-}
-
-td.list1:hover {
-	background:#D8D8D8;
 }
 
 td.list1#fill {

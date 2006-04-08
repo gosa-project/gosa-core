@@ -250,23 +250,4 @@ function adjust_width(e) {
 	}
 }
 
-function highlight(e) {
-	if(e) {
-		for(i=0;i<e.parentNode.getElementsByTagName('td').length;i++) {
-			e.parentNode.getElementsByTagName('td')[i].style.background='#D8D8D8';
-		}
-	}
-}
-
-function unhighlight(e,style) {
-	if(e && style) {
-		for(i=0;i<e.parentNode.getElementsByTagName('td').length;i++) {
-			if(style=='list0') {
-				e.parentNode.getElementsByTagName('td')[i].style.background='#F0F0F0';
-			} else {
-				e.parentNode.getElementsByTagName('td')[i].style.background='#FFFFFF';
-			}
-		}
-	}
-}
 // vim:ts=2:syntax

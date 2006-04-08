@@ -176,7 +176,7 @@ class divlist {
     				
     				if($i_alternate) $i_alternate=0; else $i_alternate=1;
     				
-    				$s_return .= "\n<tr class='rowxp'>";
+    				$s_return .= "\n<tr>";
     				
     				$cnt = 0; 					
     					
@@ -241,7 +241,7 @@ class divlist {
             $i_alternate=1;
           }
   		  
-          $s_return .= "\n<tr>";
+          $s_return .= "\n<tr class='rowxp".$i_alternate."'>";
   				  
   		    $cnt = 0; 					
   					  
@@ -262,7 +262,7 @@ class divlist {
   					  $style = " ".$s_value2['attach']." "	;
   				  }
             
-            $s_return .= "\n<td ".$style." class='".$class."' onmouseover='highlight(this);' onmouseout='unhighlight(this,\"list".$i_alternate."\");'>";
+            $s_return .= "\n<td ".$style." class='".$class."'>";
   				  $s_return .= $s_value2['string'];
   				  $s_return .= "</td>";
   			  }
