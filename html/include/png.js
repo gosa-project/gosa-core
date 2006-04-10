@@ -68,7 +68,7 @@ function pngLoad(img,src)
 	function pngOnLoadSwap()
 	{
 		event.srcElement.detachEvent("onload",pngOnLoadSwap);
-		pngSwap(event.srcElement)
+		pngSwap(event.srcElement);
 	}
 
 	// Swaps img and background //private
@@ -78,7 +78,7 @@ function pngLoad(img,src)
 		{
 			style.width = width + "px";
 			style.height = height + "px";
-			style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + src + "', sizingMethod='scale') "
+			style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + src + "', sizingMethod='scale') ";
 			src = "images/null.gif";
 		}
 	}

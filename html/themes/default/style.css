@@ -7,6 +7,13 @@ tr.listrow {
 	background:#EAEAEA;
 }
 
+tr.rowxp {
+}
+
+tr.rowxp:hover {
+	background-color:#D8D8D8;
+}
+
 td.listheader {
 	background:#E5E5E5;
 	font-weight:bold;
@@ -79,7 +86,7 @@ tr.rowxp0 {
 }
 
 tr.rowxp0:hover {
-	background:#d2f6c2;
+	background-color:#D8D8D8;
 }
 
 td.list0 {
@@ -132,7 +139,7 @@ tr.rowxp1 {
 }
 
 tr.rowxp1:hover {
-	background:#d2f6c2;
+	background-color:#D8D8D8;
 }
 
 td.list1 {
