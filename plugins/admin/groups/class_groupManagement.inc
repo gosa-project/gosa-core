@@ -56,9 +56,12 @@ class groupManagement extends plugin
           "functionalgroups" => "checked",
           "guser" => "*",
           "subsearch" => "",
-          "depselect" => $base,
           "regex" => "*");
       register_global("groupfilter", $groupfilter);
+    }
+    if(!isset($_SESSION['CurrentMainBase'])){
+      $base = get_base_from_people($ui->dn);
+      $_SESSION['CurrentMainBase'] = $base; 
     }
   }
 
@@ -75,10 +78,13 @@ class groupManagement extends plugin
     $s_entry    = "";
 
     if (!isset($this->grouptab)){
-      foreach( array("depselect", "guser", "regex") as $type){
+      foreach( array( "guser", "regex") as $type){
         if (isset($_POST[$type])){
           $groupfilter[$type]= $_POST[$type];
         } 
+      }
+      if(isset($_POST['CurrentMainBase'])){
+        $_SESSION['CurrentMainBase'] = $_POST['CurrentMainBase'];
       }
       if (isset($_POST['regex'])){
         foreach( array("primarygroups", "sambagroups", "mailgroups", "appgroups",
@@ -147,7 +153,7 @@ class groupManagement extends plugin
     if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
       $s_action="open";
       $s_entry = base64_decode($_GET['dep_id']);
-      $groupfilter['depselect']= "".$this->config->departments[trim($s_entry)];
+      $_SESSION['CurrentMainBase']= "".$this->config->departments[trim($s_entry)];
     }
 
     // Edit if
@@ -157,29 +163,29 @@ class groupManagement extends plugin
     }
 
     /* Department changed? */
-    if(isset($_POST['depselect']) && $_POST['depselect']){
-      $groupfilter['depselect']= $_POST['depselect'];
+    if(isset($_POST['CurrentMainBase']) && $_POST['CurrentMainBase']){
+      $_SESSION['CurrentMainBase']= $_POST['CurrentMainBase'];
     }
 
     /* Homebutton is posted */
     if($s_action=="home"){
-      $groupfilter['depselect']= (preg_replace("/^[^,]+,/","",$this->ui->dn));
-      $groupfilter['depselect']= (preg_replace("/^[^,]+,/","",$groupfilter['depselect']));
+      $_SESSION['CurrentMainBase']= (preg_replace("/^[^,]+,/","",$this->ui->dn));
+      $_SESSION['CurrentMainBase']= (preg_replace("/^[^,]+,/","",$_SESSION['CurrentMainBase']));
     }
 
     if($s_action=="root"){
-      $groupfilter['depselect']=($this->config->current['BASE']);
+      $_SESSION['CurrentMainBase']=($this->config->current['BASE']);
     }
 
     /* If Backbutton is Posted */
     if($s_action == "back"){
-      $base_back= preg_replace("/^[^,]+,/","",$groupfilter['depselect']);
+      $base_back= preg_replace("/^[^,]+,/","",$_SESSION['CurrentMainBase']);
       $base_back= convert_department_dn($base_back);
 
       if(isset($this->config->departments[trim($base_back)])){
-        $groupfilter['depselect']= $this->config->departments[trim($base_back)];
+        $_SESSION['CurrentMainBase']= $this->config->departments[trim($base_back)];
       }else{
-        $groupfilter['depselect']= $this->config->departments["/"];
+        $_SESSION['CurrentMainBase']= $this->config->departments["/"];
       }
     }
     register_global("groupfilter", $groupfilter);
@@ -202,7 +208,7 @@ class groupManagement extends plugin
        */
       if(($s_action == "editPaste") || ($this->CopyPasteHandler->stillOpen())){
         $this->CopyPasteHandler->save_object();
-        $this->CopyPasteHandler->SetVar("base",$groupfilter['depselect']);
+        $this->CopyPasteHandler->SetVar("base",$_SESSION['CurrentMainBase']);
         return($this->CopyPasteHandler->execute());
       }
 
@@ -259,7 +265,7 @@ class groupManagement extends plugin
       $this->grouptab= new grouptabs($this->config,
           $this->config->data['TABS']['GROUPTABS'], $this->dn);
       /* Set up the users ACL's for this 'dn' */
-      $acl= get_permissions ($groupfilter['depselect'], $this->ui->subtreeACL);
+      $acl= get_permissions ($_SESSION['CurrentMainBase'], $this->ui->subtreeACL);
       $this->grouptab->set_acl($acl);
     }
 
@@ -420,7 +426,7 @@ class groupManagement extends plugin
     /* Prepare departments */
     $options= "";
     foreach ($this->config->idepartments as $key => $value){
-            if ($groupfilter['depselect'] == $key){
+            if ($_SESSION['CurrentMainBase'] == $key){
                     $options.= "<option selected value='$key'>$value</option>";
             } else {
                     $options.= "<option value='$key'>$value</option>";
@@ -456,7 +462,7 @@ class groupManagement extends plugin
       " <input type='image' class='center' src='images/list_new_group.png' title='"._("Create new group")."' alt='"._("New")."' name='group_new'>&nbsp;".
       $Copy_Paste.
       " <img class='center' src='images/list_seperator.png' alt='' height='16' width='1'>&nbsp;".
-      _("Base")."&nbsp;<select name='depselect' onChange='mainform.submit()' class='center'>$options</select>".
+      _("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
        " <input type='image' class='center' src='images/list_submit.png' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
       "</div>";
 
@@ -589,7 +595,7 @@ class groupManagement extends plugin
     $smarty->assign("infoimage", get_template_path('images/info.png'));
     $smarty->assign("launchimage", get_template_path('images/launch.png'));
     $smarty->assign("deplist", $this->config->idepartments);
-    foreach( array("depselect", "guser", "regex", "primarygroups", "mailgroups","appgroups", "sambagroups", "functionalgroups", "subsearch") as $type){
+    foreach( array("guser", "regex", "primarygroups", "mailgroups","appgroups", "sambagroups", "functionalgroups", "subsearch") as $type){
       $smarty->assign("$type", $groupfilter[$type]);
     }
 
@@ -612,7 +618,7 @@ class groupManagement extends plugin
     $groupfilter= get_global('groupfilter');
 
     /* Set base for all searches */
-    $base= $groupfilter['depselect'];
+    $base= $_SESSION['CurrentMainBase'];
 
     /* Regex filter? */
     if ($groupfilter['regex'] != ""){

@@ -155,8 +155,8 @@ class group extends plugin
   
       /* Bases / Departments */
       
-    if(isset($_SESSION['groupfilter']['depselect'])){
-      $this->base = $_SESSION['groupfilter']['depselect'];
+    if(isset($_SESSION['CurrentMainBase'])){
+      $this->base = $_SESSION['CurrentMainBase'];
     }else{
       if ($this->dn == "new"){
         $ui= get_userinfo();

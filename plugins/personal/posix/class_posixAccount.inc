@@ -388,7 +388,7 @@ class posixAccount extends plugin
             "functionalgroups" => "checked",
             "guser" => "*",
             "subsearch" => "",
-            "depselect" => $base,
+            "depselect" => $_SESSION['CurrentMainBase'],
             "regex" => "*");
         register_global("groupfilter", $groupfilter);
       }
