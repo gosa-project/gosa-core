@@ -75,9 +75,13 @@ class ogroupManagement extends plugin
           "prtgroups" => "checked",
           "tcgroups" => "checked",
           "fongroups" => "checked",
-          "depselect" => $base,
           "regex" => "*");
       register_global("ogroupfilter", $ogroupfilter);
+    }
+    if(!isset($_SESSION['CurrentMainBase'])){
+      $ui= get_userinfo();
+      $base= get_base_from_people($ui->dn);
+      $_SESSION['CurrentMainBase'] = $base;
     }
   }
 
@@ -95,11 +99,15 @@ class ogroupManagement extends plugin
     $s_action   = "";
     $s_entry    = "";
 
-    foreach( array("depselect", "regex") as $type){
+    foreach( array("regex") as $type){
       if (isset($_POST[$type])){
         $ogroupfilter[$type]= $_POST[$type];
       }
     }
+    if(isset($_POST['CurrentMainBase'])){
+      $_SESSION['CurrentMainBase'] = $_POST['CurrentMainBase'];
+    }
+
     if (isset($_POST['Ogroup_dialog_posted'])){
       foreach( array("usergroups", "groupgroups", "appgroups", "depgroups",
             "servergroups", "wsgroups", "prtgroups", "tcgroups", "fongroups") as $type){
@@ -161,39 +169,39 @@ class ogroupManagement extends plugin
     $s_entry  = preg_replace("/_.$/","",$s_entry);
     
     /* Department changed? */
-    if(isset($_POST['depselect']) && $_POST['depselect']){
-      $ogroupfilter['depselect']= $_POST['depselect'];
+    if(isset($_POST['CurrentMainBase']) && $_POST['CurrentMainBase']){
+      $_SESSION['CurrentMainBase'] = $_POST['CurrentMainBase'];
     }
 
     /* Start for New List Managment */
     if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
       $s_action="open";
       $s_entry = base64_decode($_GET['dep_id']);
-      $ogroupfilter['depselect']= "".$this->config->departments[trim($s_entry)];
+      $_SESSION['CurrentMainBase'] = "".$this->config->departments[trim($s_entry)];
     }
 
     /* If Backbutton is Posted */
     if($s_action=="back"){
-      $base_back          = preg_replace("/^[^,]+,/","",$ogroupfilter['depselect']);
+      $base_back          = preg_replace("/^[^,]+,/","", $_SESSION['CurrentMainBase']);
       $base_back          = convert_department_dn($base_back);
 
       if(isset($this->config->departments[trim($base_back)])){
-        $ogroupfilter['depselect']= $this->config->departments[trim($base_back)];
+        $_SESSION['CurrentMainBase']= $this->config->departments[trim($base_back)];
       }else{
-        $ogroupfilter['depselect']= $this->config->departments["/"];
+        $_SESSION['CurrentMainBase']= $this->config->departments["/"];
       }
       register_global("ogroupfilter", $ogroupfilter);
     }
 
     /* Homebutton is posted */
     if($s_action=="home"){
-      $ogroupfilter['depselect']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
-      $ogroupfilter['depselect']=(preg_replace("/^[^,]+,/","",$ogroupfilter['depselect']));
+      $_SESSION['CurrentMainBase']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
+      $_SESSION['CurrentMainBase']=(preg_replace("/^[^,]+,/","", $_SESSION['CurrentMainBase']));
     }
 
     /* root posted */ 
     if($s_action=="root"){
-      $ogroupfilter['depselect']=($this->config->current['BASE']);
+      $_SESSION['CurrentMainBase']=($this->config->current['BASE']);
     }
 
     // Edit if
@@ -219,7 +227,7 @@ class ogroupManagement extends plugin
        */
       if(($s_action == "editPaste") || ($this->CopyPasteHandler->stillOpen())){
         $this->CopyPasteHandler->save_object();
-        $this->CopyPasteHandler->SetVar("base",$ogroupfilter['depselect']);
+        $this->CopyPasteHandler->SetVar("base", $_SESSION['CurrentMainBase']);
         return($this->CopyPasteHandler->execute());
       }
 
@@ -408,7 +416,7 @@ class ogroupManagement extends plugin
     /* Prepare departments */
     $options= "";
     foreach ($this->config->idepartments as $key => $value){
-            if ($ogroupfilter['depselect'] == $key){
+            if ($_SESSION['CurrentMainBase'] == $key){
                     $options.= "<option selected value='$key'>$value</option>";
             } else {
                     $options.= "<option value='$key'>$value</option>";
@@ -449,7 +457,7 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
       " <input class='center' type='image' align='middle' src='images/list_new_ogroup.png' title='"._("Create new object group")."' alt='"._("new")."' name='group_new'>".
       $Copy_Paste.
       " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-      _("Base")."&nbsp;<select name='depselect' onChange='mainform.submit()' class='center'>$options</select>".
+      _("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
       " <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
       "</div>";
 
@@ -563,10 +571,10 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
     $smarty->assign("groups", $divlist->DrawList());
 
     foreach( array("usergroups", "groupgroups", "appgroups", "depgroups",
-          "servergroups", "wsgroups", "prtgroups", "tcgroups", "fongroups", "regex", "depselect") as $type){
+          "servergroups", "wsgroups", "prtgroups", "tcgroups", "fongroups", "regex" ) as $type){
       $smarty->assign("$type", $ogroupfilter[$type]);
     }
-
+    $smarty->assign("CurrentMainBase" , $_SESSION['CurrentMainBase']);
     $smarty->assign("hint", print_sizelimit_warning());
     $smarty->assign("apply", apply_filter());
     $smarty->assign("alphabet", generate_alphabet());
@@ -630,7 +638,7 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
     $ogroupfilter= get_global('ogroupfilter');
 
     /* Set base for all searches */
-    $base= $ogroupfilter['depselect'];
+    $base= $_SESSION['CurrentMainBase'];
 
     /* Regex filter? */
     if ($ogroupfilter['regex'] != ""){

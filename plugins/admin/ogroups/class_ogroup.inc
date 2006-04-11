@@ -81,8 +81,8 @@ class ogroup extends plugin
     }
     register_global("ogfilter", $ogfilter);
   
-    if(isset($_SESSION['ogroupfilter']['depselect'])){
-     $this->base = $_SESSION['ogroupfilter']['depselect'];
+    if(isset($_SESSION['CurrentMainBase'])){
+     $this->base = $_SESSION['CurrentMainBase'];
     }
 
      /* set permissions */
