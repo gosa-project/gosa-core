@@ -137,7 +137,7 @@ class kioskManagementDialog extends plugin
     }else{
       $a_return = array();
       while($file = readdir($dir)){
-        if(!(($file==".")||($file==".."))){
+        if(!preg_match("/^\./", $file)){
           $name = $file;
           $a_return[$name] = $name;
         }
