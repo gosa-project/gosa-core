@@ -63,8 +63,8 @@ class department extends plugin
 		/* Set base */
 		if ($this->dn == "new"){
 			$ui= get_userinfo();
-			if(isset($_SESSION['depfilter']['depselect'])){
-				$this->base = $_SESSION['depfilter']['depselect'];
+			if(isset($_SESSION['CurrentMainBase'])){
+				$this->base = $_SESSION['CurrentMainBase'];
 			}else{
 				$this->base= dn2base($ui->dn);
 			}

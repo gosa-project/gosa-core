@@ -47,11 +47,11 @@ class departmentManagement extends plugin
 
 		/* Get global filter config */
 		if (!is_global("depfilter")){
-			$base= get_base_from_people($ui->dn);
-			$depfilter= array("depselect" => $base,
-					"regex" => "*");
+			$depfilter= array("regex" => "*");
 			register_global("depfilter", $depfilter);
 		}
+		$base= get_base_from_people($ui->dn);
+		$_SESSION['CurrentMainBase'] = $_SESSION['CurrentMainBase'];
 	}
 
 	function execute()
@@ -102,34 +102,34 @@ class departmentManagement extends plugin
 		
 		}
 
-		if(isset($_POST['depselect']) && $_POST['depselect']){
-			$depfilter['depselect']= $_POST['depselect'];
+		if(isset($_POST['CurrentMainBase']) && $_POST['CurrentMainBase']){
+			$_SESSION['CurrentMainBase'] = $_POST['CurrentMainBase'];
 		}
 		
 		if($s_action=="root"){
-			$depfilter['depselect']=($this->config->current['BASE']);
+			 $_SESSION['CurrentMainBase'] = ($this->config->current['BASE']);
 		}
 
 		if($s_action=="home"){
-			$depfilter['depselect']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
-			$depfilter['depselect']=(preg_replace("/^[^,]+,/","",$depfilter['depselect']));
+			$_SESSION['CurrentMainBase'] =(preg_replace("/^[^,]+,/","",$this->ui->dn));
+			$_SESSION['CurrentMainBase'] =(preg_replace("/^[^,]+,/","",  $_SESSION['CurrentMainBase'] ));
 		}
 
 		if($s_action=="back"){
-			$base_back 			= preg_replace("/^[^,]+,/","",$depfilter['depselect']);
+			$base_back 			= preg_replace("/^[^,]+,/","",  $_SESSION['CurrentMainBase']);
 			$base_back          = convert_department_dn($base_back);
             
 			if(isset($this->config->departments[trim($base_back)])){
-				$depfilter['depselect']= $this->config->departments[trim($base_back)];
+		 		$_SESSION['CurrentMainBase'] = $this->config->departments[trim($base_back)];
 			}else{
-				$depfilter['depselect']= $this->config->departments["/"];
+				$_SESSION['CurrentMainBase'] = $this->config->departments["/"];
 			}
 		}
 
 		if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
 			$s_action="open";
 			$s_entry = base64_decode($_GET['dep_id']);
-			$depfilter['depselect']= $this->config->departments[trim($s_entry)];
+			$_SESSION['CurrentMainBase'] = $this->config->departments[trim($s_entry)];
 		}
 
 		if (isset($_GET['search'])){
@@ -284,7 +284,7 @@ class departmentManagement extends plugin
 			/* Prepare departments */
 			$options= "";
 			foreach ($this->config->idepartments as $key => $value){
-				if ($depfilter['depselect'] == $key){
+				if ($_SESSION['CurrentMainBase'] == $key){
 					$options.= "<option selected value='$key'>$value</option>";
 				} else {
 					$options.= "<option value='$key'>$value</option>";
@@ -300,7 +300,7 @@ class departmentManagement extends plugin
 						" <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
 						" <input class='center' type='image' src='images/list_new_department.png' align='middle' alt='"._("Create new department")."' name='dep_new'>&nbsp;".
 						" <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-						_("Base")."&nbsp;<select name='depselect' onChange='mainform.submit()' class='center'>$options</select>".
+						_("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
 						" <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
 						"</div>";
 
@@ -347,10 +347,12 @@ class departmentManagement extends plugin
 			$smarty->assign("launchimage", get_template_path('images/launch.png'));
 			$smarty->assign("deplist", $this->config->idepartments);
 
-			foreach( array("depselect", "regex") as $type){
+			foreach( array("regex") as $type){
 				$smarty->assign("$type", $depfilter[$type]);
 			}
 
+			$smarty->assign("CurrentMainBase", $_SESSION['CurrentMainBase']);
+			
 			/* Extend if we are not using javascript */
 			$smarty->assign("apply", apply_filter());
 			$smarty->assign("alphabet", generate_alphabet());
@@ -381,12 +383,12 @@ class departmentManagement extends plugin
 
 		if(isset($_POST['deplist'])){
 			$depfilter= get_global("depfilter");
-			$depfilter['depselect']= $this->config->departments[trim($_POST['deplist'])];
+			$_SESSION['CurrentMainBase']= $this->config->departments[trim($_POST['deplist'])];
 			register_global("depfilter", $depfilter);
 		}
 
 		/* Set base for all searches */
-		$base= $depfilter['depselect'];
+		$base= $_SESSION['CurrentMainBase'];
 
 		/* Regex filter? */
 		if ($depfilter['regex'] != ""){
