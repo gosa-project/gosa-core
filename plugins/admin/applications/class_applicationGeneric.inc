@@ -56,8 +56,8 @@ class application extends plugin
     $this->is_account= TRUE;
 
     if ($this->dn == "new"){
-      if(isset($_SESSION['appfilter']['depselect'])){
-        $this->base=$_SESSION['appfilter']['depselect'];
+      if(isset($_SESSION['CurrentMainBase'])){
+        $this->base= $_SESSION['CurrentMainBase'];
       }else{
         $ui= get_userinfo();
         $this->base= dn2base($ui->dn);

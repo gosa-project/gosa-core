@@ -64,15 +64,17 @@ class applicationManagement extends plugin
     if (!is_global("appfilter")){
       $base= get_base_from_people($ui->dn);
 
-      $appfilter= array("depselect" => $base,
-                        "regex" => "*" ,
+      $appfilter= array("regex" => "*" ,
                         "release" => "ou=apps,".$base);
-
       register_global("appfilter", $appfilter);
     }
 
     $appfilter = get_global("appfilter");
-    $this->Releases = $this->getReleases($appfilter['depselect']);
+    if(!isset($_SESSION['CurrentMainBase'])){
+      $_SESSION['CurrentMainBase'] = get_base_from_people($ui->dn);
+    }
+
+    $this->Releases = $this->getReleases($_SESSION['CurrentMainBase']);
     asort($this->Releases);
     $this->Release  = $appfilter['release'];
   }
@@ -124,7 +126,7 @@ class applicationManagement extends plugin
     if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
       $s_action="open";
       $s_entry = base64_decode($_GET['dep_id']);
-      $appfilter['depselect']= "".$this->config->departments[trim($s_entry)];
+      $_SESSION['CurrentMainBase']= "".$this->config->departments[trim($s_entry)];
     }
 
     /* Get posted release */
@@ -177,29 +179,29 @@ class applicationManagement extends plugin
     $s_entry  = preg_replace("/_.$/","",$s_entry);
 
     /* Department changed? */
-    if(isset($_POST['depselect']) && $_POST['depselect']){
-      $appfilter['depselect']= $_POST['depselect'];
+    if(isset($_POST['CurrentMainBase']) && $_POST['CurrentMainBase']){
+      $_SESSION['CurrentMainBase']= $_POST['CurrentMainBase'];
     }
 
     /* Homebutton is posted */
     if($s_action=="home"){
-      $appfilter['depselect']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
-      $appfilter['depselect']=(preg_replace("/^[^,]+,/","",$appfilter['depselect']));
+      $_SESSION['CurrentMainBase']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
+      $_SESSION['CurrentMainBase']=(preg_replace("/^[^,]+,/","",$_SESSION['CurrentMainBase']));
     }
 
     if($s_action=="root"){
-      $appfilter['depselect']=($this->config->current['BASE']);
+      $_SESSION['CurrentMainBase']=($this->config->current['BASE']);
     }
 
     /* If Backbutton is Posted */
     if($s_action=="back"){
-      $base_back          = preg_replace("/^[^,]+,/","",$appfilter['depselect']);
+      $base_back          = preg_replace("/^[^,]+,/","",$_SESSION['CurrentMainBase']);
       $base_back          = convert_department_dn($base_back);
 
       if(isset($this->config->departments[trim($base_back)])){
-        $appfilter['depselect']= $this->config->departments[trim($base_back)];
+        $_SESSION['CurrentMainBase']= $this->config->departments[trim($base_back)];
       }else{
-        $appfilter['depselect']= $this->config->departments["/"];
+        $_SESSION['CurrentMainBase']= $this->config->departments["/"];
       }
     }
 
@@ -214,7 +216,7 @@ class applicationManagement extends plugin
       $appfilter['regex']= $s;
     }
     
-    $this->Releases = $this->getReleases($appfilter['depselect']);
+    $this->Releases = $this->getReleases($_SESSION['CurrentMainBase']);
     asort($this->Releases);
     if(!isset($this->Releases[$this->Release])){
       $this->Release = key($this->Releases);
@@ -242,7 +244,8 @@ class applicationManagement extends plugin
        */
       if(($s_action == "editPaste") || ($this->CopyPasteHandler->stillOpen())){
         $this->CopyPasteHandler->save_object();
-        $this->CopyPasteHandler->SetVar("base",$appfilter['depselect']);
+        $this->CopyPasteHandler->SetVar("base", $_SESSION['CurrentMainBase']);
+
         return($this->CopyPasteHandler->execute());
       }
 
@@ -440,7 +443,7 @@ class applicationManagement extends plugin
     /* Prepare departments */
     $options= "";
     foreach ($this->config->idepartments as $key => $value){
-      if ($appfilter['depselect'] == $key){
+      if ($_SESSION['CurrentMainBase']== $key){
         $options.= "<option selected='selected' value='$key'>$value</option>";
       } else {
         $options.= "<option value='$key'>$value</option>";
@@ -477,7 +480,7 @@ class applicationManagement extends plugin
       " <input class='center' type='image' align='middle' src='images/list_new_app.png' alt='"._("new")."' title='"._("Create new application")."' name='appl_new'>&nbsp;".
       $Copy_Paste.
       " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-      _("Base")."&nbsp;<select name='depselect' onChange='mainform.submit()' class='center'>$options</select>".
+      _("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
       " <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
       "</div>";
 
@@ -620,7 +623,7 @@ class applicationManagement extends plugin
      */
     $peopleOU = get_people_ou();
 
-    $base2 = $appfilter['depselect'];
+    $base2 = $_SESSION['CurrentMainBase'];
 
     $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
         TRUE, $base2, array("ou", "description"), TRUE);
