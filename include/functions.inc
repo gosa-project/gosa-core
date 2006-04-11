@@ -791,7 +791,6 @@ function convert_department_dn($dn)
 function convert_department_dn2($dn)
 {
   $dep= "";
-
   /* Build a sub-directory style list of the tree level
      specified in $dn */
   $deps = array_flip($_SESSION['config']->idepartments);
@@ -800,7 +799,11 @@ function convert_department_dn2($dn)
     $dn= $deps[$dn];
     $dep = preg_replace("/^.*=/","",$dn);
   }else{
-    $dep= preg_replace("%^.*/([^/]+)$%", "\\1", $dn);
+    if(preg_match("/=/",$dn)){
+      $dep= preg_replace("%^.*\/([^\/]+)$%", "\\1", $dn);
+    }else{
+      $dep = $dn;
+    }
   }
 
   /* Return and remove accidently trailing slashes */
