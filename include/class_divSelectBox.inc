@@ -65,8 +65,8 @@ class divSelectBox {
 	
     /* If divlist is empty, append a single white entry */
     if(count($this->a_entries)==0){
-      $str.="<tr class='rowxp'
-                ><td class='list1nohighlight' style='height:100%;'>&nbsp;</td></tr>";
+      $str.="<tr class='rowxp1'
+                ><td class='list1nohighlight' style='height:100%; border-right:0px;'>&nbsp;</td></tr>";
       return($str);
     }
 
@@ -80,7 +80,7 @@ class divSelectBox {
         $i_alternate=1;
       }
 
-      $s_return .= "\n<tr>";
+      $s_return .= "\n<tr class='rowxp".($i_alternate)."'>";
 
       $cnt = 0; 					
     
