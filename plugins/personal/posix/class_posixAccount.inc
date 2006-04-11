@@ -380,6 +380,7 @@ class posixAccount extends plugin
 
       /* Get global filter config */
       if (!is_global("groupfilter")){
+        $ui= get_userinfo();
         $base= get_base_from_people($ui->dn);
         $groupfilter= array("primarygroups" => "checked",
             "mailgroups" => "checked",
