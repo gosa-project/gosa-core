@@ -74,8 +74,7 @@ class faiManagement extends plugin
 
 		/* Get global filter config */
 		if (!is_global("faifilter")){
-			$base	= get_base_from_people($ui->dn);
-			$faifilter= array("base" => $base,
+			$faifilter= array(
 					"regex" => "*","branch" => "main");
 			$faifilter['ShowProfiles'] 	= true;
 			$faifilter['ShowTemplates'] = true;
@@ -173,29 +172,28 @@ class faiManagement extends plugin
     }
 
 		if($s_action=="root"){
-			$faifilter['base']=($this->config->current['BASE']);
+			$_SESSION['CurrentMainBase']=($this->config->current['BASE']);
 		}
 
 		if($s_action=="home"){
-			$faifilter['base']= get_base_from_people($this->ui->dn);
-			//$faifilter['base']=(preg_replace("/^[^,]+,/","",$faifilter['base']));
+			$_SESSION['CurrentMainBase']= get_base_from_people($this->ui->dn);
 		}
 
 		if($s_action=="back"){
-			$base_back          = preg_replace("/^[^,]+,/","",$faifilter['base']);
+			$base_back          = preg_replace("/^[^,]+,/","",$_SESSION['CurrentMainBase']);
 			$base_back          = convert_department_dn($base_back);
 
 			if(isset($this->config->departments[trim($base_back)])){
-				$faifilter['base']= $this->config->departments[trim($base_back)];
+				$_SESSION['CurrentMainBase']= $this->config->departments[trim($base_back)];
 			}else{
-				$faifilter['base']= $this->config->departments["/"];
+				$_SESSION['CurrentMainBase']= $this->config->departments["/"];
 			}
 		}
 
 		if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
             $s_action="open";
             $s_entry = base64_decode($_GET['dep_id']);
-            $faifilter['base']= $this->config->departments[trim($s_entry)];
+            $_SESSION['CurrentMainBase']= $this->config->departments[trim($s_entry)];
         }
 
 		if(isset($_GET['edit_entry'])){
@@ -317,7 +315,7 @@ class faiManagement extends plugin
       $base= $faifilter['branch'];
       /* Load permissions for selected 'dn' and check if
          we're allowed to remove this 'dn' */
-      $acl= get_permissions ($faifilter['base'], $this->ui->subtreeACL);
+      $acl= get_permissions ($_SESSION['CurrentMainBase'], $this->ui->subtreeACL);
       $this->acl= get_module_permission($acl, "FAIclass", $base);
       if (chkacl($this->acl, "delete") == ""){
         $smarty->assign("info", sprintf(_("You're about to delete a fai branch / freeze  '%s'."), $faifilter['branch']));
@@ -374,7 +372,7 @@ class faiManagement extends plugin
 
       $smarty->assign("BranchName",$name);
 
-      $base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
+      $base= "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
 
       /* Check used characters */
       if(preg_match("/[^0-9a-z \ö\ä\ü\.-_:,]/i",$name)){
@@ -542,10 +540,10 @@ class faiManagement extends plugin
 
     /* Department select */
     if((isset($_POST['base']))&&($s_action=="")){
-			$faifilter['base']=$_POST['base'];
+			$_SESSION['CurrentMainBase']=$_POST['base'];
 		}
 
-    $base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
+    $base= "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
 
     $br = $this->getBranches($base);
     if(!isset($br[$faifilter['branch']])){
@@ -624,7 +622,7 @@ class faiManagement extends plugin
 		/* Prepare departments */
 		$options= "";
 		foreach ($this->config->idepartments as $key => $value){
-			if ($faifilter['base'] == $key){
+			if ($_SESSION['CurrentMainBase'] == $key){
 				$options.= "<option selected='selected' value='$key'>$value</option>";
 			} else {
 				$options.= "<option value='$key'>$value</option>";
@@ -857,7 +855,7 @@ class faiManagement extends plugin
 
 
     if(!$base){
-  		$base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
+  		$base= "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
     }
     $ldap->cd($base);
     $ldap->ls("(objectClass=FAIbranch)",$base);
@@ -882,7 +880,7 @@ class faiManagement extends plugin
 		// Added for dirlist function...
 
 		/* Set base for all searches */
-		$base= "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
+		$base= "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
 
     if($faifilter['branch'] !="main"){
       $base = $faifilter['branch'];
@@ -899,7 +897,7 @@ class faiManagement extends plugin
 		 * We also need to search for the departments
 		 * So we are able to navigate like in konquerer
 		 */
-		$base2 = $faifilter['base'];
+		$base2 = $_SESSION['CurrentMainBase'];
 
 		$res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
 				TRUE, $base2, array("ou", "description"), TRUE);
@@ -1040,7 +1038,7 @@ class faiManagement extends plugin
     }
 
     if($f == "main"){
-      $f = $_SESSION['faifilter']['base'];
+      $f = $_SESSION['CurrentMainBase'];
     } 
   
     if(in_array($name,$this->getBranches($f))) {

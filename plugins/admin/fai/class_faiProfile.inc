@@ -78,7 +78,7 @@ class faiProfile extends plugin
     }
     
     /* Get ldap connection */ 
-    $base = $_SESSION['faifilter']['base'];
+    $base = $_SESSION['CurrentMainBase'];
     $ldap->cd($base);
     $sort = array();
 
@@ -387,7 +387,7 @@ class faiProfile extends plugin
     }
 
     $ldap = $this->config->get_ldap_link();
-    $ldap->cd($_SESSION['faifilter']['base']);
+    $ldap->cd($_SESSION['CurrentMainBase']);
     $ldap->search("(&(objectClass=FAIprofile)(cn=".$this->cn.")(!cn=".$this->old_cn."))",array("*"));
 
     if($ldap->count()){

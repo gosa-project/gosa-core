@@ -20,7 +20,7 @@ class faiProfileEntry extends plugin
     plugin::plugin ($config, $dn);
 
     /* Search only in fai tree */
-    $base = "ou=fai,ou=configs,ou=systems,".$_SESSION['faifilter']['base'];
+    $base = "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
 
     /* Create array with categories to be able to sort different types of objects */
     $categories = array("FAIscript","FAItemplate","FAIhook","FAIvariable","FAIpartitionTable","FAIpackageList");
@@ -61,7 +61,7 @@ class faiProfileEntry extends plugin
 
     /* If no search filter is set, create one */
     if (!is_global("SUBfaifilter")){
-      $SUBfaifilter= array("base" => "ou=fai,ou=configs,ou=systems,".$base, "Sregex" => "*");
+      $SUBfaifilter= array("base" => "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'], "Sregex" => "*");
       $SUBfaifilter['SShowTemplates'] = true;
       $SUBfaifilter['SShowScripts']   = true;
       $SUBfaifilter['SShowHooks']     = true;

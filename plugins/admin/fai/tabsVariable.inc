@@ -19,7 +19,7 @@ class tabsVariable extends tabs
   {
   	$baseobject= $this->by_object['faiVariable'];
 
-	$new_dn= 'cn='.$baseobject->cn.",ou=variables,ou=fai,ou=configs,ou=systems,".$_SESSION['faifilter']['base'];
+	$new_dn= 'cn='.$baseobject->cn.",ou=variables,ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
 	
 	if($_SESSION['faifilter']['branch']!="main"){
 		$new_dn ='cn='.$baseobject->cn.",ou=variables,".$_SESSION['faifilter']['branch'];

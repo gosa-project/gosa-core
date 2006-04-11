@@ -57,10 +57,10 @@ class faiPackage extends plugin
   var $FAIstate         = "";
 
   var $FAIinstallMethods  = array( "install", "ninstall", "remove", 
-                                   "dselect-upgrade", "taskinst", "taskrm",
-                                   "hold", "clean", "aptitude", "aptitude-r",
-                                   "pending", "dpkgc" );
- 
+      "dselect-upgrade", "taskinst", "taskrm",
+      "hold", "clean", "aptitude", "aptitude-r",
+      "pending", "dpkgc" );
+
 
   function faiPackage ($config, $dn= NULL)
   {
@@ -99,12 +99,12 @@ class faiPackage extends plugin
     }else{
       $this->usedPackages = array();
     }  
-  
+
     $ldap = $this->config->get_ldap_link();
     foreach($this->usedPackages as $name){
       $ldap->search("(&(objectClass=FAIdebconfInfo)(FAIpackage=".$name."))",array("FAIvariable","FAIvariableType","FAIvariableContent","FAIpackage","FAIdebianSection",""));
       while($attr = $ldap->fetch()){
-     
+
         $tmp =array(); 
         $tmp['Name']  = $attr['FAIvariable'][0];
         $tmp['Type']  = $attr['FAIvariableType'][0];
@@ -146,13 +146,18 @@ class faiPackage extends plugin
       $methods[$method] = $method;
     }
     $this->FAIinstallMethods = $methods;
+    /* Check if we exist already - no need to ask for revisions, etc. then */
+    if ($this->dn != "new"){
+      $this->newDialogShown= true;
+    }
+
   }
 
   function execute()
   {
-	/* Call parent execute */
+    /* Call parent execute */
 
-	plugin::execute();
+    plugin::execute();
 
     /* Fill templating stuff */
     $smarty= get_smarty();
@@ -160,13 +165,8 @@ class faiPackage extends plugin
 
     $smarty->assign( "FAIinstallMethods", $this->FAIinstallMethods );
 
-    /* Check if we exist already - no need to ask for revisions, etc. then */
-    if ($this->dn != "new"){
-        $this->newDialogShown= true;
-    }
-
     if((!$this->is_account)&&(!$this->newDialogShown)){
-      
+
       if($this->dialog==NULL){
         $this->dialog = new faiPackageNew($this->config, $this->dn,$this->mirrors,$this->servers,$this->sections,$this->releases);
         $this->is_dialog =true;
@@ -178,14 +178,15 @@ class faiPackage extends plugin
       /* Assign Repository settings*/ 
       if(isset($_POST['SaveObjectNew'])){
         $obj = $this->dialog->save();
-      
+
         $this->FAIdebianSection = $obj['FAIdebianSection'];
         $this->FAIdebianRelease = $obj['FAIdebianRelease'];
-    
+
         unset($this->dialog);
-        $this->dialog = false;
-        $this->is_dialog=false;
+        $this->dialog         = false;
+        $this->is_dialog      = false;
         $this->newDialogShown = true;
+        $this->is_account     = true;
       }
 
       /* Draw dialog */
@@ -199,7 +200,7 @@ class faiPackage extends plugin
     foreach($this->attributes as $attrs){
       $smarty->assign($attrs,$this->$attrs);
     }
-  
+
     /* Generate package list */
     $this->list=$this->genPkgs();
 
@@ -252,16 +253,16 @@ class faiPackage extends plugin
       $path = "/etc/gosa/fai/".$this->FAIdebianRelease."/debconf.d";
       $pkg_config = array();
       $pkg = $_POST['usedPackages'][0];
-      
+
       if(isset($this->ConfiguredPackages[$pkg])){
         $pkg_config = $this->ConfiguredPackages[$pkg];
       }
-  
+
       $this->dialog = new faiPackageConfiguration($this->config, $this->dn,$pkg, $path, $pkg_config);
       $this->dialog ->acl = $this->acl;
       $this->is_dialog =true;
     }
-  
+
     /* Save Configuration */
     if(isset($_POST['SaveObjectConfig'])){
       if($this->FAIstate != "freeze"){
@@ -285,7 +286,7 @@ class faiPackage extends plugin
     /* Assign section to smarty */
     $strsec = "";
     foreach($this->FAIdebianSection as $sec){
-       $strsec .= $sec." ";
+      $strsec .= $sec." ";
     }
 
     foreach($this->attributes as $attr){
@@ -318,10 +319,10 @@ class faiPackage extends plugin
    */
   function save_object()
   {
-  
+
     if($this->FAIstate == "freeze") return;  
     plugin::save_object();
-  
+
 
     foreach($this->attributes as $attrs){
       if(isset($_POST[$attrs])){
@@ -336,11 +337,11 @@ class faiPackage extends plugin
   {
     /* Call common method to give check the hook */
     $message= plugin::check();
-  
+
     if(count($this->usedPackages)==0){
       $message[]=_("Please select a least one Package.");
     }
-  
+
     if((empty($this->FAIdebianRelease))||(empty($this->FAIdebianSection))){
       $message[]=_("Please choose a valid combination for your repository setup.");
     }
@@ -352,20 +353,20 @@ class faiPackage extends plugin
     $a_ret=array(); 
     if(is_array($this->usedPackages)) {
       foreach($this->usedPackages as $usedName){
-      
+
         $config = 0;
-   
+
         foreach($this->ConfiguredPackages as $name => $value){
           if($name == $usedName){
             $config ++;
           }
         }
-      
+
         $c_str ="";
         if($config){
           $c_str = " - "._("package is configured");
         }
-     
+
         if(isset($this->list[$usedName][1])){
           $a_ret[$usedName] = $usedName." [".$this->list[$usedName][1]."]".$c_str;
         }else{
@@ -376,7 +377,7 @@ class faiPackage extends plugin
     return($a_ret);
   }
 
-   function genPkgs(){
+  function genPkgs(){
     /* Generate a list off available packages for this mirror, section and release
      */
     /* Only read this file if it wasn't read before */
@@ -385,7 +386,7 @@ class faiPackage extends plugin
       $a_ret = array();
       foreach($this->FAIdebianSection as $sec){
         $strID= "/etc/gosa/fai/".$this->FAIdebianRelease."/".$sec;
-        
+
         if(!is_file($strID)){
           print_red(sprintf(_("Package file '%s' does not exist."),$strID));
           unset($this->buffer);
@@ -402,7 +403,7 @@ class faiPackage extends plugin
           }
         }
         fclose($fp);
-          /* Save our Data, to avoid reading it again */
+        /* Save our Data, to avoid reading it again */
       }
       $this->buffer = $a_ret;
       ksort($a_ret);
@@ -417,27 +418,27 @@ class faiPackage extends plugin
   function save()
   {
     plugin::save();
- 
+
     $ldap = $this->config->get_ldap_link();
 
     $this->attrs['FAIpackage'] = array();
     foreach($this->usedPackages as $pkg => $obj){
       $this->attrs['FAIpackage'][] = $pkg;
     } 
-  
+
     $this->attrs['FAIdebianSection'] = array();
     foreach($this->FAIdebianSection as $sec){
       $this->attrs['FAIdebianSection'][] = $sec;
     }
 
-//    $this->attrs["FAIinstallMethod"]= "aptitude";
+    //    $this->attrs["FAIinstallMethod"]= "aptitude";
 
     $ldap->cat($this->dn);
     if($ldap->count()!=0){
       /* Write FAIscript to ldap*/
       $ldap->cd($this->dn);
       $this->cleanup();
-$ldap->modify ($this->attrs); 
+      $ldap->modify ($this->attrs); 
 
     }else{
       /* Write FAIscript to ldap*/
@@ -448,7 +449,7 @@ $ldap->modify ($this->attrs);
     }
     show_ldap_error($ldap->get_error());
 
-      /* Save Package configurations */
+    /* Save Package configurations */
     foreach($this->ConfiguredPackages as $pkgname => $attrs){
       foreach($attrs as $name => $attr){
 
@@ -469,7 +470,7 @@ $ldap->modify ($this->attrs);
         if($ldap->count()!=0){
           $ldap->cd($pkgdn);
           $this->cleanup();
-$ldap->modify ($pkgattrs); 
+          $ldap->modify ($pkgattrs); 
 
         }else{
           $ldap->cd($this->config->current['BASE']);
@@ -482,7 +483,7 @@ $ldap->modify ($pkgattrs);
     }
 
 
-    
+
 
   }
 }

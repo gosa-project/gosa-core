@@ -19,7 +19,7 @@ class tabsPartition extends tabs
   {
   	$baseobject= $this->by_object['faiPartitionTable'];
 
-	$new_dn= 'cn='.$baseobject->cn.",ou=disk,ou=fai,ou=configs,ou=systems,".$_SESSION['faifilter']['base'];
+	$new_dn= 'cn='.$baseobject->cn.",ou=disk,ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
 	
 	if($_SESSION['faifilter']['branch']!="main"){
 		$new_dn ='cn='.$baseobject->cn.",ou=disk,".$_SESSION['faifilter']['branch'];

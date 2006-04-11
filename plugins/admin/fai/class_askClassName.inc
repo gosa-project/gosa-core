@@ -22,6 +22,9 @@ class askClassName extends plugin
     $this->ui = $ui;
     $this->objectClass = $objectClass;
     plugin::plugin ($config, $dn);
+    if(!isset($_SESSION['CurrentMainBase'])){
+      $_SESSION['CurrentMainBase'] = $this->config->current['BASE'];
+    }
   }
 
   function execute()
@@ -42,7 +45,7 @@ class askClassName extends plugin
      * With a second search detect all object that belong to the different ous. 
      */
 
-    $base = "ou=fai,ou=configs,ou=systems,".$faifilter['base'];
+    $base = "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
     if($faifilter['branch'] != "main"){
       $base = $faifilter['branch'];
     }
