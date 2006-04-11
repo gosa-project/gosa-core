@@ -798,8 +798,13 @@ function convert_department_dn2($dn)
   if(isset($deps[$dn])){
     $dn= $deps[$dn];
     $dep = preg_replace("/^.*=/","",$dn);
-  }else{
-    if(preg_match("/=/",$dn)){
+  }else{  
+    global $config;
+    $base = "ou=";
+    if(isset($config->current['BASE'])){
+      $base =  $config->current['BASE'];  
+    }
+    if(preg_match("%".$base."%",$dn)){
       $dep= preg_replace("%^.*\/([^\/]+)$%", "\\1", $dn);
     }else{
       $dep = $dn;
