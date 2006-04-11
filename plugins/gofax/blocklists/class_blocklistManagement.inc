@@ -30,6 +30,12 @@ class blocklist extends plugin
     $this->dn= "";
     $this->config= $config;
 
+    if(!isset($_SESSION['CurrentMainBase'])){
+      $_SESSION['CurrentMainBase'] = $this->base;
+    }else{
+      $this->base = $_SESSION['CurrentMainBase'];
+    }
+
     /* Get global filter config */
     if (!is_global("blockfilter")){
       $ui= get_userinfo();
@@ -37,12 +43,10 @@ class blocklist extends plugin
       $blockfilter= array("sendlists" => "checked",
           "receivelists" => "checked",
           "entry" => "*",
-          "depselect" => $this->base,
           "regex" => "*");
       register_global("blockfilter", $blockfilter);
     }else{
       $blockfilter = $_SESSION["blockfilter"];
-      $this->base = $blockfilter['depselect'];
     }
 
     $ui= get_userinfo();
@@ -66,7 +70,7 @@ class blocklist extends plugin
     if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
       $s_action="open";
       $s_entry = base64_decode($_GET['dep_id']);
-      $blockfilter['depselect']= "".$this->config->departments[trim($s_entry)];
+      $_SESSION['CurrentMainBase']= $this->config->departments[trim($s_entry)];
       $this->reload();
     }
 
@@ -74,8 +78,10 @@ class blocklist extends plugin
     if (isset($_POST['edit_cancel']) || isset($_POST['delete_blocklist_cancel']) ||
         isset($_POST['delete_blocklist_confirm']) || isset($_POST['delete_lock'])){
 
+      if(!isset($_POST['delete_blocklist_confirm'])){
+        $this->clear_fields();
+      }
       del_lock ($this->dn);
-      $this->clear_fields();
       unset($_SESSION['objectinfo']);
     }
 
@@ -116,32 +122,32 @@ class blocklist extends plugin
     $s_entry  = preg_replace("/_.$/","",$s_entry);
 
     /* Department changed? */
-    if(isset($_POST['depselect']) && $_POST['depselect']){
-      $blockfilter['depselect']= $_POST['depselect'];
+    if(isset($_POST['CurrentMainBase']) && $_POST['CurrentMainBase']){
+      $_SESSION['CurrentMainBase'] = $_POST['CurrentMainBase'];
       $this->reload();
     }
 
     /* Homebutton is posted */
     if($s_action=="home"){
-      $blockfilter['depselect']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
-      $blockfilter['depselect']=(preg_replace("/^[^,]+,/","",$blockfilter['depselect']));
+      $_SESSION['CurrentMainBase'] =preg_replace("/^[^,]+,/","",$this->ui->dn);
+      $_SESSION['CurrentMainBase'] =preg_replace("/^[^,]+,/","",$_SESSION['CurrentMainBase']);
       $this->reload();
     }
 
     if($s_action=="root"){
-      $blockfilter['depselect']=($this->config->current['BASE']);
+      $_SESSION['CurrentMainBase'] =$this->config->current['BASE'];
       $this->reload();
     }
     
     /* If Backbutton is Posted */
     if($s_action=="back"){
-      $base_back          = preg_replace("/^[^,]+,/","",$blockfilter['depselect']);
+      $base_back          = preg_replace("/^[^,]+,/","", $_SESSION['CurrentMainBase']);
       $base_back          = convert_department_dn($base_back);
 
       if(isset($this->config->departments[trim($base_back)])){
-        $blockfilter['depselect']= $this->config->departments[trim($base_back)];
+        $_SESSION['CurrentMainBase'] = $this->config->departments[trim($base_back)];
       }else{
-        $blockfilter['depselect']= $this->config->departments["/"];
+        $_SESSION['CurrentMainBase'] = $this->config->departments["/"];
       }
       $this->reload();
     }
@@ -155,7 +161,7 @@ class blocklist extends plugin
         $blockfilter[$type]= $_POST[$type];
       }
     }
-    if (isset($_POST['depselect'])){
+    if (isset($_POST['CurrentMainBase'])){
       foreach( array("sendlists", "receivelists") as $type){
 
         if (isset($_POST[$type])) {
@@ -293,7 +299,7 @@ class blocklist extends plugin
 
    $options= "";
     foreach ($this->config->idepartments as $key => $value){
-            if ($blockfilter['depselect'] == $key){
+            if ($_SESSION['CurrentMainBase'] == $key){
                     $options.= "<option selected value='$key'>$value</option>";
             } else {
                     $options.= "<option value='$key'>$value</option>";
@@ -310,7 +316,7 @@ class blocklist extends plugin
         " <input class='center' type='image' src='images/list_reload.png' align='middle' title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
         " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
         " <input class='center' type='image' align='middle' src='images/list_new_blocklist.png' title='"._("Create new blocklist")."' alt='"._("New Blocklist")."' name='user_new'>&nbsp;".
-        " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;"._("Base")."&nbsp;<select name='depselect' onChange='mainform.submit()' class='center'>$options</select>".
+        " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;"._("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
         " <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
         "</div>";
 
@@ -370,13 +376,13 @@ class blocklist extends plugin
       $smarty->assign("infoimage", get_template_path('images/info.png'));
       $smarty->assign("launchimage", get_template_path('images/launch.png'));
       $smarty->assign("apply", apply_filter());
-      foreach( array("depselect", "entry", "regex", "sendlists", "receivelists") as $type){
+      foreach( array( "entry", "regex", "sendlists", "receivelists") as $type){
         $smarty->assign("$type", $blockfilter[$type]);
       }
       $smarty->assign("deplist", $this->config->idepartments);
       $smarty->assign("alphabet", generate_alphabet());
       $smarty->assign("hint", print_sizelimit_warning());
-
+      $smarty->assign("CurrentMainBase",$_SESSION['CurrentMainBase']);
       return($smarty->fetch(get_template_path('headpage.tpl', TRUE)));
     }
 
@@ -420,7 +426,7 @@ class blocklist extends plugin
     $this->dn= "";
     $this->description= "";
     $this->cn= "";
-    $this->base= $_SESSION['blockfilter']['depselect'];
+    $this->base= $_SESSION['CurrentMainBase'];
     $this->goFaxBlocklist= array();
   }
 
@@ -430,7 +436,7 @@ class blocklist extends plugin
     $blockfilter= get_global('blockfilter');
 
     /* Set base for all searches */
-    $base= $blockfilter['depselect'];
+    $base= $_SESSION['CurrentMainBase'];
     $filter= "";
 
     /* Regex filter? */
@@ -507,6 +513,7 @@ class blocklist extends plugin
   {
     $ldap= $this->config->get_ldap_link();
     $ldap->rmDir($this->dn);
+    $this->clear_fields();
     $this->handle_post_events("remove");
   }
 
