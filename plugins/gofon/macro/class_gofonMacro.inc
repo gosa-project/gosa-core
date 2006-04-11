@@ -64,8 +64,8 @@ class macro extends plugin
 
     /* Edit or new one ?*/
     if ($this->dn == "new"){
-      if(isset($_SESSION['macrofilter']['depselect'])){
-        $this->base = $_SESSION['macrofilter']['depselect'];
+      if(isset($_SESSION['CurrentMainBase'])){
+        $this->base = $_SESSION['CurrentMainBase'];
         $this->is_new = true;
       }else{
         $this->is_new = true;
@@ -75,7 +75,7 @@ class macro extends plugin
     } else {
       $this->is_new = false;
       $this->orig_cn=$this->cn;
-      $this->base= dn2base($this->dn);
+      $this->base= preg_replace("/ou=macros,ou=asterisk,ou=configs,ou=systems,/","",dn2base($this->dn));
     }
     $ui= get_userinfo();
     $acl= get_permissions ($ui->dn, $ui->subtreeACL);
