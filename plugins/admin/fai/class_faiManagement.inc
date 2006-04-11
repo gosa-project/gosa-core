@@ -85,6 +85,9 @@ class faiManagement extends plugin
 			$faifilter['ShowPartitions']=true;
 			register_global("faifilter", $faifilter);
 		}
+    if(!isset($_SESSION['CurrentMainBase'])){
+      $_SESSION['CurrentMainBase'] = $this->config->current['BASE'];
+    }
 	}
 
 	function execute()
