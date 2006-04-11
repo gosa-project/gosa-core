@@ -60,9 +60,12 @@ class userManagement extends plugin
           "sambausers"      => "checked",
           "faxusers"        => "checked",
           "functionalusers" => "checked",
-          "depselect"       => $base,
           "regex"           => "*");
       $_SESSION["userfilter"] = $userfilter;
+    }
+    if(!isset($_SESSION['CurrentMainBase']))  {
+      $base= get_base_from_people($ui->dn);
+      $_SESSION['CurrentMainBase'] = $base;
     }
   }
 
@@ -85,7 +88,7 @@ class userManagement extends plugin
     if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
       $s_action="open";
       $s_entry = base64_decode($_GET['dep_id']);
-      $userfilter['depselect']= "".$this->config->departments[trim($s_entry)];
+      $_SESSION['CurrentMainBase']= $this->config->departments[trim($s_entry)];
     }
 
     /* Test Posts */  
@@ -141,30 +144,30 @@ class userManagement extends plugin
     };
 
     /* Department changed? */
-    if(isset($_POST['depselect']) && $_POST['depselect']){
-      $userfilter['depselect']= $_POST['depselect'];
+    if(isset($_POST['CurrentMainBase']) && $_POST['CurrentMainBase']){
+      $_SESSION['CurrentMainBase']= $_POST['CurrentMainBase'];
     }
 
     /* Homebutton is posted */
     if($s_action=="home"){
-      $userfilter['depselect']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
-      $userfilter['depselect']=(preg_replace("/^[^,]+,/","",$userfilter['depselect']));
+      $_SESSION['CurrentMainBase']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
+      $_SESSION['CurrentMainBase']=(preg_replace("/^[^,]+,/","",$_SESSION['CurrentMainBase']));
     }
 
     if($s_action=="root"){
-      $userfilter['depselect']=($this->config->current['BASE']);
+      $_SESSION['CurrentMainBase']=($this->config->current['BASE']);
     }
 
 
     /* If Backbutton is Posted */
     if($s_action=="back"){
-      $base_back          = preg_replace("/^[^,]+,/","",$userfilter['depselect']);
+      $base_back          = preg_replace("/^[^,]+,/","", $_SESSION['CurrentMainBase']);
       $base_back          = convert_department_dn($base_back);
 
       if(isset($this->config->departments[trim($base_back)])){
-        $userfilter['depselect']= $this->config->departments[trim($base_back)];
+        $_SESSION['CurrentMainBase']= $this->config->departments[trim($base_back)];
       }else{
-        $userfilter['depselect']= $this->config->departments["/"];
+        $_SESSION['CurrentMainBase']= $this->config->departments["/"];
       }
     }
 
@@ -177,7 +180,7 @@ class userManagement extends plugin
        */
       if(($s_action == "editPaste") || ($this->CopyPasteHandler->stillOpen())){
         $this->CopyPasteHandler->save_object();
-        $this->CopyPasteHandler->SetVar("base",$userfilter['depselect']);
+        $this->CopyPasteHandler->SetVar("base",$_SESSION['CurrentMainBase']);
         $ret    = $this->CopyPasteHandler->execute(false);
         if($ret) return($ret);
         $this->reload();
@@ -598,7 +601,7 @@ class userManagement extends plugin
       $this->usertab= new usertabs($this->config,
           $this->config->data['TABS']['USERTABS'], $this->dn);
       $this->usertab->set_acl(array(':all'));
-      $this->usertab->by_object['user']->base= $userfilter['depselect'];
+      $this->usertab->by_object['user']->base= $_SESSION['CurrentMainBase'];
 
       /* Take care about templates */
       if ($s_action=="new_tpl"){
@@ -708,7 +711,7 @@ class userManagement extends plugin
     }
     
     if (isset($_POST['template_continue']) && ($_POST['template'] == 'none')){
-      $this->usertab->by_object['user']->base= $userfilter['depselect'];
+      $this->usertab->by_object['user']->base= $_SESSION['CurrentMainBase'];
     }
 
     /* Show tab dialog if object is present */
@@ -746,7 +749,7 @@ class userManagement extends plugin
     /* Prepare departments */
     $options= "";
     foreach ($this->config->idepartments as $key => $value){
-      if ($userfilter['depselect'] == $key){
+      if ($_SESSION['CurrentMainBase'] == $key){
         $options.= "<option selected value='$key'>$value</option>";
       } else {
         $options.= "<option value='$key'>$value</option>";
@@ -785,7 +788,7 @@ class userManagement extends plugin
       " <input class='center' type='image' align='middle' src='images/list_new.png' title='"._("Create new template")."' alt='"._("New template")."' name='user_tplnew'>&nbsp;".
       $Copy_Paste.
       " <img   class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-      _("Base")."&nbsp;<select name='depselect' onChange='mainform.submit()' class='center'>$options</select>".
+      _("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
       " <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
       "</div>";
 
@@ -1035,12 +1038,13 @@ class userManagement extends plugin
     $smarty->assign("infoimage", get_template_path('images/info.png'));
     $smarty->assign("launchimage", get_template_path('images/launch.png'));
     $smarty->assign("deplist", $this->config->idepartments);
-    foreach( array("depselect",  "functionalusers", "unixusers",
+    foreach( array("functionalusers", "unixusers",
           "mailusers", "sambausers", "proxyusers", 
           "faxusers", "templates", "subsearch") as $type){
 
       $smarty->assign("$type", $userfilter[$type]);
     }
+    $smarty->assign("CurrentMainBase",$_SESSION['CurrentMainBase']);
 
     $smarty->assign("regex", $userfilter["regex"]);
     /* Extend if we are not using javascript */
@@ -1061,7 +1065,7 @@ class userManagement extends plugin
     $userfilter= get_global('userfilter');
 
     /* Set base for all searches */
-    $base= $userfilter['depselect'];
+    $base= $_SESSION['CurrentMainBase'];
 
     /* Regex filter? */
     if ($userfilter['regex'] != ""){
