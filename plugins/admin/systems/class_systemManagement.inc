@@ -47,7 +47,6 @@ class systems extends plugin
 
     /* Get global filter config */
     if (!is_global("terminalfilter")){
-      $ui   = get_userinfo();
       $base = get_base_from_people($ui->dn);
       $terminalfilter= array("workstations" => "checked",
           "thins" => "checked",
@@ -57,9 +56,12 @@ class systems extends plugin
           "phones" => "checked",
           "netdev" => "checked",
           "user" => "*",
-          "depselect" => $base,
           "regex" => "*");
       register_global("terminalfilter", $terminalfilter);
+    }
+    if(!isset($_SESSION['CurrentMainBase'])){
+      $ui   = get_userinfo();
+      $_SESSION['CurrentMainBase'] = get_base_from_people($ui->dn);
     }
   }
 
@@ -77,12 +79,16 @@ class systems extends plugin
     /* Save posted filter data */
     $terminalfilter= get_global("terminalfilter");
     if(isset($_POST['SystemHeadpagePosted'])){
-      foreach( array("depselect", "user", "regex") as $type){
+      foreach( array("user", "regex") as $type){
         if (isset($_POST[$type])){
           $terminalfilter[$type]= $_POST[$type];
         }
       }
     } 
+
+    if(isset($_POST['CurrentMainBase'])){
+      $_SESSION['CurrentMainBase'] = $_POST['CurrentMainBase']; 
+    }
 
     /* Check if filter checkboxes are selected */
     if (isset($_POST['SystemHeadpagePosted'])){
@@ -117,7 +123,7 @@ class systems extends plugin
     if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
             $s_action="open";
             $s_entry = base64_decode($_GET['dep_id']);
-            $terminalfilter['depselect']= "".$this->config->departments[trim($s_entry)];
+            $_SESSION['CurrentMainBase']= $this->config->departments[trim($s_entry)];
             $this->reload();
     }
 
@@ -171,30 +177,30 @@ class systems extends plugin
     }
 
     /* Department changed? */
-    if(isset($_POST['depselect']) && $_POST['depselect']){
-      $terminalfilter['depselect']= $_POST['depselect'];
+    if(isset($_POST['CurrentMainBase']) && $_POST['CurrentMainBase']){
+      $_SESSION['CurrentMainBase']= $_POST['CurrentMainBase'];
     }
 
     /* Homebutton is posted */
     if($s_action=="home"){
-      $terminalfilter['depselect']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
-      $terminalfilter['depselect']=(preg_replace("/^[^,]+,/","",$terminalfilter['depselect']));
+      $_SESSION['CurrentMainBase']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
+      $_SESSION['CurrentMainBase']=(preg_replace("/^[^,]+,/","",$_SESSION['CurrentMainBase']));
     }
 
     /* back to the roots ^^ */
     if($s_action=="root"){
-      $terminalfilter['depselect']=($this->config->current['BASE']);
+      $_SESSION['CurrentMainBase']=($this->config->current['BASE']);
     }
 
     /* If Backbutton is Posted */
     if($s_action=="back"){
-      $base_back          = preg_replace("/^[^,]+,/","",$terminalfilter['depselect']);
+      $base_back          = preg_replace("/^[^,]+,/","", $_SESSION['CurrentMainBase']);
       $base_back          = convert_department_dn($base_back);
 
       if(isset($this->config->departments[trim($base_back)])){
-        $terminalfilter['depselect']= $this->config->departments[trim($base_back)];
+        $_SESSION['CurrentMainBase']= $this->config->departments[trim($base_back)];
       }else{
-        $terminalfilter['depselect']= $this->config->departments["/"];
+        $_SESSION['CurrentMainBase']= $this->config->departments["/"];
       }
     }
 
@@ -246,7 +252,7 @@ class systems extends plugin
           $this->systab->set_acl ($this->acl);
           $this->systab->by_object['termgeneric']->cn= "default";
           $this->systab->by_object['termservice']->cn= "default";
-          $this->systab->by_object['termgeneric']->base = $_SESSION['terminalfilter']['depselect'];  
+          $this->systab->by_object['termgeneric']->base = $_SESSION['CurrentMainBase'];  
           break;
 
         case 'workstation':
@@ -255,35 +261,35 @@ class systems extends plugin
           $this->systab->set_acl ($this->acl);
           $this->systab->by_object['workgeneric']->cn= "wdefault";
           $this->systab->by_object['workservice']->cn= "default";
-          $this->systab->by_object['workgeneric']->base = $_SESSION['terminalfilter']['depselect'];  
+          $this->systab->by_object['workgeneric']->base = $_SESSION['CurrentMainBase'];  
           break;
 
         case 'server':
           $this->systab= new servtabs($this->config,
               $this->config->data['TABS']['SERVTABS'], $this->dn);
           $this->systab->set_acl ($this->acl);
-          $this->systab->by_object['servgeneric']->base = $_SESSION['terminalfilter']['depselect'];  
+          $this->systab->by_object['servgeneric']->base = $_SESSION['CurrentMainBase'];  
           break;
 
         case 'printer':
           $this->systab= new printtabs($this->config,
               $this->config->data['TABS']['PRINTTABS'], $this->dn);
           $this->systab->set_acl ($this->acl);
-          $this->systab->by_object['printgeneric']->base = $_SESSION['terminalfilter']['depselect'];  
+          $this->systab->by_object['printgeneric']->base = $_SESSION['CurrentMainBase'];  
           break;
 
         case 'phone':
           $this->systab= new phonetabs($this->config,
               $this->config->data['TABS']['PHONETABS'], $this->dn);
           $this->systab->set_acl ($this->acl);
-          $this->systab->by_object['phonegeneric']->base = $_SESSION['terminalfilter']['depselect'];  
+          $this->systab->by_object['phonegeneric']->base = $_SESSION['CurrentMainBase'];  
           break;
 
         case 'component':
           $this->systab= new componenttabs($this->config,
               $this->config->data['TABS']['COMPONENTTABS'], $this->dn);
           $this->systab->set_acl ($this->acl);
-          $this->systab->by_object['componentgeneric']->base = $_SESSION['terminalfilter']['depselect'];  
+          $this->systab->by_object['componentgeneric']->base = $_SESSION['CurrentMainBase'];  
           break;
       }
      
@@ -325,7 +331,7 @@ class systems extends plugin
       }
   
       /* set base ... of current divlist position */
-      $this->systab->base = $_SESSION['terminalfilter']['depselect'];  
+      $this->systab->base = $_SESSION['CurrentMainBase'];  
     }
 
 
@@ -736,7 +742,7 @@ class systems extends plugin
      */
     $options= "";
     foreach ($this->config->idepartments as $key => $value){
-      if ($terminalfilter['depselect'] == $key){
+      if ($_SESSION['CurrentMainBase'] == $key){
         $options.= "<option selected='selected' value='$key'>$value</option>";
       } else {
         $options.= "<option value='$key'>$value</option>";
@@ -770,7 +776,7 @@ class systems extends plugin
     " <input class='center' type='image' align='middle' src='images/select_new_component.png'  name='newsystem_component'   alt='"._("New Component")."' 
         title='"._("New Component")."'>".
     " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;"._("Base")."&nbsp;".
-    " <select name='depselect' onChange='mainform.submit()' class='center'>$options</select>".
+    " <select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
     " <input class='center' type='image' src='images/list_submit.png' align='middle' 
         title='"._("Submit department")."' name='submit_department' alt='".           _("Submit")."'>&nbsp;".
     "</div>";
@@ -875,7 +881,7 @@ class systems extends plugin
       }
 
       if(isset($val['message'])){
-        $display.= "  (".$val['message']." '".$this->config->idepartments[$terminalfilter['depselect']]."'  )";
+        $display.= "  (".$val['message']." '".$this->config->idepartments[$_SESSION['CurrentMainBase']]."'  )";
       }
 
       $img=$this->convert_list($val);
@@ -894,12 +900,13 @@ class systems extends plugin
     $smarty->assign("tree_image", get_template_path('images/tree.png'));
     $smarty->assign("infoimage", get_template_path('images/info.png'));
     $smarty->assign("launchimage", get_template_path('images/launch.png'));
-    foreach( array("depselect", "user", "regex", "workstations", "thins", "servers",
+    foreach( array( "user", "regex", "workstations", "thins", "servers",
           "winstations", "printers", "phones", "netdev") as $type){
 
       $smarty->assign("$type", $terminalfilter[$type]);
     }
     $smarty->assign("deplist", $this->config->idepartments);
+    $smarty->assign("CurrentMainBase", $_SESSION['CurrentMainBase']);
 
     /* Extend if we are not using javascript */
     $smarty->assign("apply", apply_filter());
@@ -990,7 +997,7 @@ class systems extends plugin
     $filter= "";
 
     /* Set base for all searches */
-    $base= $terminalfilter['depselect'];
+    $base= $_SESSION['CurrentMainBase'];
 
     /* Regex filter? */
     if ($terminalfilter['regex'] != ""){
