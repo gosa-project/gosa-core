@@ -54,7 +54,6 @@ class phoneConferenceManagment extends plugin
     if (!isset($_SESSION["conferencefilter"])){
       $base= get_base_from_people($ui->dn);
       $conferencefilter= array(
-          "depselect"       => $base,
           "regex"           => "*");
       $_SESSION["conferencefilter"] = $conferencefilter;
     }
@@ -93,7 +92,7 @@ class phoneConferenceManagment extends plugin
     if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
       $s_action="open";
       $s_entry = base64_decode($_GET['dep_id']);
-      $conferencefilter['depselect']= "".$this->config->departments[trim($s_entry)];
+      $_SESSION['CurrentMainBase']= $this->config->departments[trim($s_entry)];
     }
 
     foreach($_POST as $key => $post){
@@ -125,30 +124,30 @@ class phoneConferenceManagment extends plugin
     }
 
     /* Department changed? */
-    if(isset($_POST['depselect']) && $_POST['depselect']){
-      $conferencefilter['depselect']= $_POST['depselect'];
+    if(isset($_POST['CurrentMainBase']) && $_POST['CurrentMainBase']){
+      $_SESSION['CurrentMainBase']= $_POST['CurrentMainBase'];
     }
 
     /* Homebutton is posted */
     if($s_action=="home"){
-      $conferencefilter['depselect']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
-      $conferencefilter['depselect']=(preg_replace("/^[^,]+,/","",$conferencefilter['depselect']));
+      $_SESSION['CurrentMainBase'] =preg_replace("/^[^,]+,/","",$this->ui->dn);
+      $_SESSION['CurrentMainBase'] =preg_replace("/^[^,]+,/","",$_SESSION['CurrentMainBase']);
     }
     
     /* back to root */
     if($s_action=="root"){
-      $conferencefilter['depselect']=($this->config->current['BASE']);
+      $_SESSION['CurrentMainBase']=($this->config->current['BASE']);
     }
 
     /* If Backbutton is Posted */
     if($s_action=="back"){
-      $base_back          = preg_replace("/^[^,]+,/","",$conferencefilter['depselect']);
+      $base_back          = preg_replace("/^[^,]+,/","",$_SESSION['CurrentMainBase']);
       $base_back          = convert_department_dn($base_back);
 
       if(isset($this->config->departments[trim($base_back)])){
-        $conferencefilter['depselect']= $this->config->departments[trim($base_back)];
+        $_SESSION['CurrentMainBase']= $this->config->departments[trim($base_back)];
       }else{
-        $conferencefilter['depselect']= $this->config->departments["/"];
+        $_SESSION['CurrentMainBase']= $this->config->departments["/"];
       }
     }
 
@@ -274,7 +273,7 @@ class phoneConferenceManagment extends plugin
     /* Header + Departmentlist*/
     $options= "";
     foreach ($this->config->idepartments as $key => $value){
-      if ($conferencefilter['depselect'] == $key){
+      if ($_SESSION['CurrentMainBase'] == $key){
         $options.= "<option selected='selected' value='$key'>$value</option>";
       } else {
         $options.= "<option value='$key'>$value</option>";
@@ -289,7 +288,7 @@ class phoneConferenceManagment extends plugin
       " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
       " <input class='center' type='image' align='middle' src='images/list_new_conference.png' title='"._("Create new conference")."' alt='"._("New conference")."' name='user_new'>&nbsp;".
       " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-      _("Base")."&nbsp;<select name='depselect' onChange='mainform.submit()' class='center'>$options</select>".
+      _("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
       " <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit").     "'>&nbsp;".
       "</div>";
 
@@ -408,7 +407,7 @@ class phoneConferenceManagment extends plugin
   function reload()
   {
     $conferencefilter = $_SESSION["conferencefilter"];
-    $base             = $conferencefilter['depselect'];
+    $base             = $_SESSION['CurrentMainBase'];
     $regex            = $conferencefilter['regex'];
 
     $this->conferences=get_list($this->ui->subtreeACL, "(&(|(cn=$regex)(description=$regex))(objectClass=goFonConference))",FALSE, $base, array("*"), TRUE);

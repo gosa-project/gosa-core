@@ -73,8 +73,8 @@ class conference extends plugin
     /* Set base */
     if ($this->dn == "new"){
       $ui= get_userinfo();
-      if(isset($_SESSION['conferencefilter']['depselect'])){
-        $this->base = $_SESSION['conferencefilter']['depselect'];
+      if(isset($_SESSION['CurrentMainBase'])){
+        $this->base = $_SESSION['CurrentMainBase'];
       }else{
         $this->base= dn2base($ui->dn);
       }
