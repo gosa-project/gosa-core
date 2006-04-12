@@ -514,10 +514,7 @@ function get_list2($subtreeACL, $filter, $subsearch= TRUE, $base="", $attrs= arr
     $dn= $ldap->getDN();
     foreach ($subtreeACL as $key => $value){
       if (preg_match("/$key/", $dn)){
-        $dnAlias = preg_replace("/^ou=/","",$dn);
-        $dnAlias = preg_replace("/,o.*$/","",$dnAlias);
-        $dnAlias = preg_replace('/###GOSAREPLACED###/', ',', $dnAlias);
-        $attrs["dn"]=$dnAlias; 
+        $attrs["dn"]= convert_department_dn($dn);
         $result[]= $attrs;
         break;
       }
@@ -793,16 +790,8 @@ function convert_department_dn($dn)
 
 function convert_department_dn2($dn)
 {
-
-/*
-  
-  I think this no longer used  ...
-  Check this, and remove this function 
-
-  
-*/
-
   $dep= "";
+
   /* Build a sub-directory style list of the tree level
      specified in $dn */
   $deps = array_flip($_SESSION['config']->idepartments);
@@ -810,17 +799,8 @@ function convert_department_dn2($dn)
   if(isset($deps[$dn])){
     $dn= $deps[$dn];
     $dep = preg_replace("/^.*=/","",$dn);
-  }else{  
-    global $config;
-    $base = "ou=";
-    if(isset($config->current['BASE'])){
-      $base =  $config->current['BASE'];  
-    }
-    if(preg_match("%".$base."%",$dn)){
-      $dep= preg_replace("%^.*\/([^\/]+)$%", "\\1", $dn);
-    }else{
-      $dep = $dn;
-    }
+  }else{
+    $dep= preg_replace("%^.*/([^/]+)$%", "\\1", $dn);
   }
 
   /* Return and remove accidently trailing slashes */
