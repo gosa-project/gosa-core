@@ -819,7 +819,7 @@ class plugin
     if(isset($this->CopyPasteVars)){
       $todo = array_merge($todo,$this->CopyPasteVars);
     }
-
+    $todo[] = "is_account";
     foreach($todo as $var){
       $this->$var = $source->$var;
     }

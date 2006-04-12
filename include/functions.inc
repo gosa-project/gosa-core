@@ -790,6 +790,15 @@ function convert_department_dn($dn)
 
 function convert_department_dn2($dn)
 {
+
+/*
+  
+  I think this no longer used  ...
+  Check this, and remove this function 
+
+  
+*/
+
   $dep= "";
   /* Build a sub-directory style list of the tree level
      specified in $dn */

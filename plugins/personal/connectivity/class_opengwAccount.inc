@@ -326,6 +326,11 @@ class opengwAccount extends plugin
 		}
 	}
 
+  
+  function PrepareForCopyPaste($src){
+    // Nothing to do, because this object can't be copied ... yet
+  }
+
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

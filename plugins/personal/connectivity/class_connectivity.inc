@@ -152,6 +152,19 @@ class connectivity extends plugin
     }
   }
 
+  /* Prepare the connectivity obj 
+   */
+  function PrepareForCopyPaste($obj)
+  { 
+    $tmp = $this->plugin;
+    plugin::PrepareForCopyPaste($obj);
+    $this->plugin = $tmp;
+    foreach($obj->plugin as $key => $plug){
+      $this->plugin[$key]->PrepareForCopyPaste($plug);
+    }
+  }
+  
+
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
