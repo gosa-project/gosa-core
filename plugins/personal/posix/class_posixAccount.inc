@@ -437,10 +437,11 @@ class posixAccount extends plugin
       $smarty->assign("tree_image", get_template_path('images/tree.png'));
       $smarty->assign("deplist", $this->config->idepartments);
       $smarty->assign("alphabet", generate_alphabet());
-      foreach( array("depselect", "guser", "regex", "primarygroups", "mailgroups",
+      foreach( array("guser", "regex", "primarygroups", "mailgroups",
             "appgroups", "sambagroups", "functionalgroups") as $type){
         $smarty->assign("$type", $groupfilter[$type]);
       }
+      $smarty->assign("depselect",$_SESSION['CurrentMainBase']);
       $smarty->assign("hint", print_sizelimit_warning());
 
       $smarty->assign("apply", apply_filter());
@@ -1108,7 +1109,7 @@ $ldap->modify ($this->attrs);
     $groupfilter= get_global('groupfilter');
 
     /* Set base for all searches */
-    $base= $groupfilter['depselect'];
+    $base= $_SESSION['CurrentMainBase'];
 
     /* Regex filter? */
     if ($groupfilter['regex'] != ""){
