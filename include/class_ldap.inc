@@ -48,6 +48,10 @@ class LDAP{
     if (COLON_OVERRIDE == TRUE){
       $res= preg_replace("/\\\\,/", '###GOSAREPLACED###', $dn);
       $res= preg_replace("/\\\\2C/", '###GOSAREPLACED###', $res);
+      $res= preg_replace("/\(/", '###OPENBRACE###', $res);
+      $res= preg_replace("/\)/", '###CLOSEBRACE###', $res);
+      $res= preg_replace("/\//", '###SLASH###', $res);
+
       #if ($dn != $res){
       #  echo "Conversation from '$dn' to '$res'<br>";
       #}
@@ -62,6 +66,10 @@ class LDAP{
   {
     if (COLON_OVERRIDE == TRUE){
       $res= preg_replace("/###GOSAREPLACED###/", '\,', $dn);
+      $res= preg_replace("/###OPENBRACE###/", '(', $res);
+      $res= preg_replace("/###CLOSEBRACE###/", ')', $res);
+      $res= preg_replace("/###SLASH###/", '/', $res);
+
       #if ($dn != $res){
       #  echo "Fix from '$dn' to '$res'<br>";
       #}
@@ -592,6 +600,7 @@ class LDAP{
     if ($target == $this->basedn){
      return;
     }
+echo "FIXME";
     $l= array_reverse(explode(",", preg_replace("/,".$this->basedn."/", "", $target)));
     $cdn= $this->basedn;
     foreach ($l as $part){

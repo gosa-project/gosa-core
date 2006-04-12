@@ -781,9 +781,6 @@ function convert_department_dn($dn)
     }
   }
 
-  /* Fix name, if it contains a replace tag */
-  $dep= preg_replace('/###GOSAREPLACED###/', ',', $dep);
-
   /* Return and remove accidently trailing slashes */
   return rtrim($dep, "/");
 }
@@ -805,7 +802,7 @@ function convert_department_dn2($dn)
 
   /* Return and remove accidently trailing slashes */
   $tmp = rtrim($dep, "/");
-  return $tmp;
+  return @ldap::fix($tmp);
 }
 
 

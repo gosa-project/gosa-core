@@ -529,7 +529,7 @@ class config  {
 			}
 
 			/* Fix name, if it contains a replace tag */
-                        $name= preg_replace('/###GOSAREPLACED###/', ',', $name);
+                        $name= @ldap::fix($name);
 
 			/* Check if current name is too long, then cut it */
 			if(strlen($name)> $max_size){
