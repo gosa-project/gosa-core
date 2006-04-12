@@ -514,7 +514,10 @@ function get_list2($subtreeACL, $filter, $subsearch= TRUE, $base="", $attrs= arr
     $dn= $ldap->getDN();
     foreach ($subtreeACL as $key => $value){
       if (preg_match("/$key/", $dn)){
-        $attrs["dn"]= convert_department_dn($dn);
+        $dnAlias = preg_replace("/^ou=/","",$dn);
+        $dnAlias = preg_replace("/,o.*$/","",$dnAlias);
+        $dnAlias = preg_replace('/###GOSAREPLACED###/', ',', $dnAlias);
+        $attrs["dn"]=$dnAlias; 
         $result[]= $attrs;
         break;
       }
