@@ -21,7 +21,7 @@ msgstr ""
 
 #: contrib/gosa.conf:4
 msgid "My account"
-msgstr "Mein Kontot"
+msgstr "Mein Konto"
 
 #: contrib/gosa.conf:28
 msgid "Administration"
