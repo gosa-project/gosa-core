@@ -721,9 +721,9 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
     ksort($tmp);
     foreach($tmp as $value){
       if(isset($value["description"][0])){
-        $this->departments[$value['dn']]=$value['dn']." - [".$value["description"][0]."]";
+        $this->departments[$value['dn']]= convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
       }else{
-        $this->departments[$value['dn']]=$value['dn'];//$value["description"][0];
+        $this->departments[$value['dn']]= convert_department_dn2($value['dn']);//$value["description"][0];
       }
     }
     /* END NEW LIST MANAGMENT

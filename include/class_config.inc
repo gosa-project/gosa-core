@@ -512,8 +512,7 @@ class config  {
 	$this->idepartments= $this->generateDepartmentArray($ret,-1,$max_size);
   }
 
-	/* Creates display friendly output from make_idepartments
-     */
+	/* Creates display friendly output from make_idepartments */
 	function generateDepartmentArray($arr,$depth = -1,$max_size){
 		$ret = array();
 		$depth ++;
@@ -522,8 +521,7 @@ class config  {
 		foreach($arr as $name => $entries){
 
 			/* If this department is the last in the current tree position 
-             * remove it, to avoid generating output for it 
-             */
+			 * remove it, to avoid generating output for it */
 			if(count($entries['SUB'])==0){
 				unset($entries['SUB']);
 			}
