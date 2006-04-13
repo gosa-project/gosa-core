@@ -600,9 +600,12 @@ class LDAP{
     if ($target == $this->basedn){
      return;
     }
-echo "FIXME";
-    $l= array_reverse(explode(",", preg_replace("/,".$this->basedn."/", "", $target)));
+
+    $real_path= substr($target, 0, strlen($target) - strlen($this->basedn) -1 );
+    $l= array_reverse(ldap_explode_dn($real_path,0));
+    unset($l['count']);
     $cdn= $this->basedn;
+
     foreach ($l as $part){
       $cdn= "$part,$cdn";
 

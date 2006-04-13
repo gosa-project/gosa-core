@@ -468,8 +468,7 @@ class config  {
 	
   	$this->idepartments= array();
 
-	/* Create multidimensional array, with all departments.
-     */
+	/* Create multidimensional array, with all departments. */
 	foreach ($this->departments as $key => $val){
 
 		/* remove base from dn */
@@ -512,59 +511,59 @@ class config  {
 	$this->idepartments= $this->generateDepartmentArray($ret,-1,$max_size);
   }
 
-	/* Creates display friendly output from make_idepartments */
-	function generateDepartmentArray($arr,$depth = -1,$max_size){
-		$ret = array();
-		$depth ++;
-	
-		/* Walk through array */	
-		foreach($arr as $name => $entries){
+  /* Creates display friendly output from make_idepartments */
+  function generateDepartmentArray($arr,$depth = -1,$max_size){
+	  $ret = array();
+	  $depth ++;
 
-			/* If this department is the last in the current tree position 
-			 * remove it, to avoid generating output for it */
-			if(count($entries['SUB'])==0){
-				unset($entries['SUB']);
-			}
+	  /* Walk through array */	
+	  foreach($arr as $name => $entries){
 
-			/* Fix name, if it contains a replace tag */
-                        $name= @ldap::fix($name);
+		  /* If this department is the last in the current tree position 
+		   * remove it, to avoid generating output for it */
+		  if(count($entries['SUB'])==0){
+			  unset($entries['SUB']);
+		  }
 
-			/* Check if current name is too long, then cut it */
-			if(strlen($name)> $max_size){
-				$name = substr($name,0,($max_size-3))." ...";
-			}
+		  /* Fix name, if it contains a replace tag */
+		  $name= @ldap::fix($name);
 
-			/* Append the name to the list */	
-			if(isset($entries['ENTRY'])){
-				$a = "";
-				for($i = 0 ; $i < $depth ; $i ++){
-					$a.="&nbsp;";
-				}
-				$ret[$entries['ENTRY']]=$a."&nbsp;".$name;
-			}	
-			/* For debugging 	
-			if(isset($entries['ENTRY'])){
-				$a = "";
-				for($i = 0 ; $i < $depth ; $i ++){
-					$a.="&nbsp;|";
-				}
-			
-				if(!isset($entries['SUB'])){
-					$ret[$entries['ENTRY']]=$a."-&nbsp;".$name;
-				}else{
-					$ret[$entries['ENTRY']]=$a."#"."&nbsp;".$name;
-				}
-			}	
-			*/
+		  /* Check if current name is too long, then cut it */
+		  if(mb_strlen($name, 'UTF-8')> $max_size){
+			  $name = mb_substr($name,0,($max_size-3), 'UTF-8')." ...";
+		  }
 
-			/* recursive add of subdepartments */
-			if(isset($entries['SUB'])){
-				$ret = array_merge($ret,$this->generateDepartmentArray($entries['SUB'],$depth,$max_size));
-			}
-		}
-		
-		return($ret);
-	}
+		  /* Append the name to the list */	
+		  if(isset($entries['ENTRY'])){
+			  $a = "";
+			  for($i = 0 ; $i < $depth ; $i ++){
+				  $a.="&nbsp;";
+			  }
+			  $ret[$entries['ENTRY']]=$a."&nbsp;".$name;
+		  }	
+		  /* For debugging 	
+		     if(isset($entries['ENTRY'])){
+		     $a = "";
+		     for($i = 0 ; $i < $depth ; $i ++){
+		     $a.="&nbsp;|";
+		     }
+
+		     if(!isset($entries['SUB'])){
+		     $ret[$entries['ENTRY']]=$a."-&nbsp;".$name;
+		     }else{
+		     $ret[$entries['ENTRY']]=$a."#"."&nbsp;".$name;
+		     }
+		     }	
+		   */
+
+		  /* recursive add of subdepartments */
+		  if(isset($entries['SUB'])){
+			  $ret = array_merge($ret,$this->generateDepartmentArray($entries['SUB'],$depth,$max_size));
+		  }
+	  }
+
+	  return($ret);
+  }
 
   /* This function returns all available Shares defined in this ldap
   * There are two ways to call this function, if listboxEntry is true
