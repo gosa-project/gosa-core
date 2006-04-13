@@ -782,7 +782,7 @@ function convert_department_dn($dn)
   }
 
   /* Return and remove accidently trailing slashes */
-  return @ldap::fix(rtrim($dep, "/"));
+  return rtrim($dep, "/");
 }
 
 function convert_department_dn2($dn)
