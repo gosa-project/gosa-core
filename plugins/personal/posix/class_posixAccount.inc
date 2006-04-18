@@ -347,7 +347,6 @@ class posixAccount extends plugin
         $sysfilter['regex']= $s;
       }
       register_global("sysfilter", $sysfilter);
-      print_a($sysfilter);
 
       /* Get workstation list */
       $exclude= "";
