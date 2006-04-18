@@ -276,6 +276,9 @@ class config  {
       $this->current['BASE']= key($bases);
     }
 
+    /* Convert BASE to have escaped special characters */
+    $this->current['BASE']= @LDAP::fix($this->current['BASE']);
+
     /* Parse LDAP referral informations */
     if (!isset($this->current['ADMIN']) || !isset($this->current['PASSWORD'])){
       $url= $this->current['SERVER'];

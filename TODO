@@ -42,8 +42,6 @@ Target for 2.4.1:
 
 * template is not found in LDAP anymore - even if present
 
-* groups -> user -> directory -> does not show all users
-
 
 Target for 2.5:
 ===============
