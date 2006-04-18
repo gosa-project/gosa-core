@@ -3,8 +3,6 @@ Target for 2.4.1:
 
 * Sanity check for workstations/servers: repository server == self?
 
-* Can't rename server objects
-
 * Can't remove phoneAccounts...
 
 * Explaination of several FIXME's. Group removal, etc.
@@ -44,7 +42,7 @@ Target for 2.4.1:
 
 * template is not found in LDAP anymore - even if present
 
-* Base in User -> Posix -> Group add is dropped
+* groups -> user -> directory -> does not show all users
 
 
 Target for 2.5:

@@ -153,19 +153,16 @@ class group extends plugin
 
     register_global('gufilter',$gufilter);
   
-      /* Bases / Departments */
-      
-    if(isset($_SESSION['CurrentMainBase'])){
-      $this->base = $_SESSION['CurrentMainBase'];
-    }else{
-      if ($this->dn == "new"){
+    if ($this->dn == "new"){
+      if(isset($_SESSION['CurrentMainBase'])){
+        $this->base= $_SESSION['CurrentMainBase'];
+      }else{
         $ui= get_userinfo();
         $this->base= dn2base($ui->dn);
-      } else {
-        $this->base= preg_replace ("/^[^,]+,[^,]+,/", "", $this->dn);
       }
+    } else {
+      $this->base= preg_replace ("/^[^,]+,[^,]+,/", "", $this->dn);
     }
-    
 
     /* This is always an account */
     $this->is_account= TRUE;
@@ -427,6 +424,7 @@ class group extends plugin
     $MaxUser = $this->OnlyShowFirstEntries;
 
     $gufilter= get_global("gufilter");
+    //FIXME: Why these multiple cd's? They are senseless.
     $ldap->cd ($this->config->current['BASE']);
     if($gufilter['SubSearchGroup']){
       $ldap->cd ($gufilter['dselect']);
@@ -759,6 +757,7 @@ class group extends plugin
       $ldap= $this->config->get_ldap_link();
       if(($this->cn  != $this->orig_cn) || ($this->orig_dn == "new")){
         $ldap->cd("ou=groups,".$this->base);
+        //FIXME: hardcoded ou=groups,
         $ldap->ls("(&(|(objectClass=gosaGroupOfNames)(objectClass=posixGroup))(cn=$this->cn))","ou=groups,".$this->base,array("cn"));
         if ($ldap->count() != 0){
           $message[]= _("Value specified as 'Name' is already used.");

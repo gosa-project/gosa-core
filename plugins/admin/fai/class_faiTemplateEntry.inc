@@ -31,6 +31,7 @@ class faiTemplateEntry extends plugin
   function faiTemplateEntry ($config, $dn= NULL,$object=false)
   {
     plugin::plugin ($config, $dn);
+
     if($dn != "new"){
       $this->orig_cn= $object['cn'];
       $this->dn=$object['dn'];
@@ -47,6 +48,7 @@ class faiTemplateEntry extends plugin
       $this->status = "new";
       $this->orig_cn       = false;
     }
+
     $this->user = explode( '.', $this->FAIowner );
     $this->group = $this->user[1];
     $this->user = $this->user[0];
@@ -56,6 +58,7 @@ class faiTemplateEntry extends plugin
     
     $this->FAImode= sprintf("%0.4s", $this->FAImode)." ";
   }
+
 
   function execute()
   {
