@@ -742,7 +742,7 @@ function convert_department_dn($dn)
 
   /* Build a sub-directory style list of the tree level
      specified in $dn */
-  foreach (ldap_explode_dn($dn, false) as $rdn){
+  foreach (split(',', $dn) as $rdn){
 
     /* We're only interested in organizational units... */
     if (substr($rdn,0,3) == 'ou='){

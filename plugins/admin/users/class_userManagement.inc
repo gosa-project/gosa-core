@@ -818,8 +818,9 @@ class userManagement extends plugin
       }
 
       $non_empty="";
+      $nkey= normalizePreg($key);
       foreach($this->config->departments as $keyd => $vald ){
-        if(preg_match("/".normalizePreg($key)."\/.*/", $keyd)){
+        if(preg_match("/$nkey\/.*/", $keyd)){
           $non_empty="full";
         }
       }

@@ -3,6 +3,8 @@ Target for 2.4.1:
 
 * Sanity check for workstations/servers: repository server == self?
 
+* Can't rename server objects
+
 * Can't remove phoneAccounts...
 
 * Explaination of several FIXME's. Group removal, etc.

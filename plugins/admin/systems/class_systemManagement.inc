@@ -812,9 +812,9 @@ class systems extends plugin
          Display different image in this case 
        */ 
       $non_empty="";
-      $keys= str_replace("/","\/",$key);
+      $nkey= normalizePreg($key);
       foreach($this->config->departments as $keyd=>$vald ){
-        if(preg_match("/".$keys."\/.*/",$keyd)){
+        if(preg_match("/$nkey\/.*/",$keyd)){
           $non_empty="full";
         }
       }
