@@ -31,7 +31,7 @@
 			</td>
 		<td style="vertical-align:top">
 			{$status}
-			{if $FAItemplatePath}
+			{if $bStatus}
 			  <a href="getbin.php?rand={$rand}"><img class="middle" alt="{t}Save template{/t}..." title="{t}Save template{/t}..." src="images/save.png" border="0" /></a>
 			{/if}
 			<br>

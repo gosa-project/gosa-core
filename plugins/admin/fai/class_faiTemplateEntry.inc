@@ -75,17 +75,26 @@ class faiTemplateEntry extends plugin
         $this->FAItemplateFile = $str;
 
         /* If we don't have a filename set it from upload filename. */
-        if( 0 == strlen( $this->FAItemplatePath ) )
+        if( 0 == strlen( $this->FAItemplatePath )){
           $this->FAItemplatePath = $_FILES['FAItemplateFile']['name'];
+        }
+
+        $_SESSION['binary']     = $this->FAItemplateFile;
+        $_SESSION['binarytype'] = 'octet-stream';
+        $_SESSION['binaryfile'] = basename( $this->FAItemplatePath );
       }
-    
     }
     
     $status= _("no file uploaded yet");
+
+    $bStatus = false; // Hide download icon on default 
+    
     if(strlen($this->FAItemplateFile)){
       $status= sprintf(_("exists in database (size: %s bytes)"),strlen($this->FAItemplateFile));
+      $bStatus = true;  // Display download icon 
     }
     $smarty->assign("status",$status);
+    $smarty->assign("bStatus",$bStatus);
 
     /* Magic quotes GPC, escapes every ' " \, to solve some security risks 
      * If we post the escaped strings they will be escaped again
