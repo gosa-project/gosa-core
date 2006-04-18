@@ -836,7 +836,11 @@ function get_departments($ignore_dn= "")
     if ($dn == $ignore_dn){
       continue;
     }
-    $result[convert_department_dn($dn)]= $dn;
+
+    /* Only assign non-root departments */
+    if ($dn != $result['/']){
+      $result[convert_department_dn($dn)]= $dn;
+    }
   }
 
   return ($result);
