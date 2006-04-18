@@ -1150,6 +1150,7 @@ class systems extends plugin
       if ($tmp == ""){
         $tmp= $value["dn"];
       }
+      $add= "";
       if (preg_match ("/,ou=incoming,/i", $tmp)){
          if (in_array('gotoTerminal', $value['objectClass'])){
           $add= "- "._("New terminal");
@@ -1158,9 +1159,7 @@ class systems extends plugin
         }elseif (in_array('GOhard', $value['objectClass'])){
           $add= "- "._("New Device");
         }
-      } else {
-        $add= "";
-      }
+      } 
 
       $terminal = array();
   
