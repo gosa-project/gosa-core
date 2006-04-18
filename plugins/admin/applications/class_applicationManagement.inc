@@ -376,7 +376,7 @@ class applicationManagement extends plugin
         /* Lock the current entry, so nobody will edit it during deletion */
         add_lock ($this->dn, $this->ui->dn);
         $smarty= get_smarty();
-        $smarty->assign("intro", sprintf(_("You're about to delete the application '%s'."), LDAP::fix($this->dn)));
+        $smarty->assign("intro", sprintf(_("You're about to delete the application '%s'."), @LDAP::fix($this->dn)));
         return($smarty->fetch (get_template_path('remove.tpl', TRUE)));
       } else {
 
@@ -430,7 +430,7 @@ class applicationManagement extends plugin
       /* Don't show buttons if tab dialog requests this */
       if (!$this->apptabs->by_object[$this->apptabs->current]->dialog){
         $display.= "<p style=\"text-align:right\">\n";
-        $display.= "<input type=\"submit\" name=\"edit_finish\" value=\""._("Finish")."\">\n";
+        $display.= "<input type=\"submit\" name=\"edit_finish\" value=\""._("Save")."\">\n";
         $display.= "&nbsp;\n";
         $display.= "<input type=\"submit\" name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
         $display.= "</p>";
@@ -551,7 +551,7 @@ class applicationManagement extends plugin
     }
 
     foreach($this->applications as $key => $val){
-      $title = "title='dn : ".$val['dn']."'";
+      $title = "title='dn:&nbsp;".@LDAP::fix($val['dn'])."'";
 
       if(!isset($val['description'][0])){
         $desc = "";
@@ -608,7 +608,9 @@ class applicationManagement extends plugin
     }
 
     /* Generate application list */
-    $res= get_list($this->ui->subtreeACL, "(&(cn=$regex)(objectClass=gosaApplication))", FALSE, $base, array("*"), FALSE);
+    //FIXME: No GL_SIZELIMIT?
+    $res= get_list("(&(cn=$regex)(objectClass=gosaApplication))", $this->ui->subtreeACL,
+                   $base, array("*"), GL_NONE);
     $this->applications= array();
     foreach ($res as $value){
       $this->applications[]= $value;
@@ -624,9 +626,8 @@ class applicationManagement extends plugin
     $peopleOU = get_people_ou();
 
     $base2 = $_SESSION['CurrentMainBase'];
-
-    $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
-        TRUE, $base2, array("ou", "description"), TRUE);
+    $res3= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))", $this->ui->subtreeACL,
+                    $base2, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
 
     $this->departments= array();
     $tmp = array();
@@ -636,9 +637,9 @@ class applicationManagement extends plugin
     ksort($tmp);
     foreach($tmp as $value){
       if(isset($value["description"][0])){
-        $this->departments[$value['dn']]= convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
+        $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
       }else{
-        $this->departments[$value['dn']]= convert_department_dn2($value['dn']);//$value["description"][0];
+        $this->departments[$value['dn']]= get_sub_department($value['dn']);//$value["description"][0];
       }
     }
 

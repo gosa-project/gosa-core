@@ -169,6 +169,8 @@ class groupManagement extends plugin
 
     /* Homebutton is posted */
     if($s_action=="home"){
+      //FIXME: This will not work if we've no subdirs (like i.e. ou=people)? See
+      //       class_userManagement.inc for a fix.
       $_SESSION['CurrentMainBase']= (preg_replace("/^[^,]+,/","",$this->ui->dn));
       $_SESSION['CurrentMainBase']= (preg_replace("/^[^,]+,/","",$_SESSION['CurrentMainBase']));
     }
@@ -360,7 +362,7 @@ class groupManagement extends plugin
 
         /* Lock the current entry, so nobody will edit it during deletion */
         add_lock ($this->dn, $this->ui->dn);
-        $smarty->assign("info", sprintf(_("You're about to delete the group '%s'."), LDAP::fix($this->dn)));
+        $smarty->assign("info", sprintf(_("You're about to delete the group '%s'."), @LDAP::fix($this->dn)));
         return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
       } else {
 
@@ -415,7 +417,7 @@ class groupManagement extends plugin
       /* Don't show buttons if tab dialog requests this */
       if (!$this->grouptab->by_object[$this->grouptab->current]->dialog){
         $display.= "<p style=\"text-align:right\">\n";
-        $display.= "<input type=submit name=\"edit_finish\" value=\""._("Finish")."\">\n";
+        $display.= "<input type=submit name=\"edit_finish\" value=\""._("Save")."\">\n";
         $display.= "&nbsp;\n";
         $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
         $display.= "</p>";
@@ -571,7 +573,7 @@ class groupManagement extends plugin
         $posix=$mail=$samba=$appl=$phone=$empty;
       }
 
-      $title = "title='gid : ".$key." - dn : ".$val['dn']."'";
+      $title = "title='dn:&nbsp;".@LDAP::fix($val['dn'])."'";
 
       if(!isset($val['description'][0])){
         $desc = "";
@@ -677,8 +679,8 @@ class groupManagement extends plugin
      * So we are able to navigate like in konquerer
      */
 
-      $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
-          FALSE, $base, array("ou", "description"), TRUE);
+      $res3= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
+                      $this->ui->subtreeACL, $base, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
       $this->departments= array();
       $tmp = array();
       foreach ($res3 as $value){
@@ -687,9 +689,9 @@ class groupManagement extends plugin
       ksort($tmp);
       foreach($tmp as $value){
         if(isset($value["description"][0])){
-          $this->departments[$value['dn']]= convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
+          $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
         }else{
-          $this->departments[$value['dn']]= convert_department_dn2($value['dn']);//$value["description"][0];
+          $this->departments[$value['dn']]= get_sub_department($value['dn']);//$value["description"][0];
         }
       }
     /*  Ende department generation
@@ -706,10 +708,12 @@ class groupManagement extends plugin
     /* Depending on $CreatePosixsList we have to create different lists */
 
     if ($groupfilter['subsearch'] == "checked"){
-      $res= get_list($this->ui->subtreeACL, "$filter", FALSE, $base, array("cn", "description", "gidNumber"), TRUE);
+      $res= get_list($filter, $this->ui->subtreeACL, $base, array("cn", "description", "gidNumber"),
+                     GL_SIZELIMIT);
     } else {
       $base= get_groups_ou().$base;
-      $res= get_list($this->ui->subtreeACL, "$filter", FALSE, $base, array("cn", "description", "gidNumber"), TRUE);
+      $res= get_list($filter, $this->ui->subtreeACL, $base, array("cn", "description", "gidNumber"),
+                     GL_SIZELIMIT);
     }
     if (preg_match("/size limit/i", $error) || preg_match("/size limit/i", $error2)){
       $_SESSION['limit_exceeded']= TRUE;

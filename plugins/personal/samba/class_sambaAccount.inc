@@ -322,7 +322,7 @@ class sambaAccount extends plugin
       $acl= array($this->config->current['BASE'] => ":all");
       $regex= $sambafilter['regex'];
       $filter= "(&(objectClass=sambaSAMAccount)$exclude(uid=*$)(|(uid=$regex)(cn=$regex)))";
-      $res= get_list($acl, "$filter", TRUE, $sambafilter['depselect'], array("uid"), TRUE);
+      $res= get_list($filter, $acl, $sambafilter['depselect'], array("uid"), GL_SUBSEARCH | GL_SIZELIMIT);
       $wslist= array();
       foreach ($res as $attrs){
         $wslist[]= preg_replace('/\$/', '', $attrs['uid'][0]);

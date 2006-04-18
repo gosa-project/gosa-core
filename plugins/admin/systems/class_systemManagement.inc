@@ -723,7 +723,7 @@ class systems extends plugin
       /* Don't show buttons if tab dialog requests this */
       if ((isset($this->systab->by_object))&&(!$this->systab->by_object[$this->systab->current]->dialog)){
         $display.= "<p style=\"text-align:right\">\n";
-        $display.= "<input type=\"submit\" name=\"edit_finish\" value=\""._("Finish")."\">\n";
+        $display.= "<input type=\"submit\" name=\"edit_finish\" value=\""._("Save")."\">\n";
         $display.= "&nbsp;\n";
         $display.= "<input type=\"submit\" name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
         $display.= "</p>";
@@ -887,7 +887,7 @@ class systems extends plugin
       $img=$this->convert_list($val);
 
       $field1 = array("string" => sprintf($img['img'],$val['dn']), "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='".$val['dn']."'");
+      $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='".@LDAP::fix($val['dn'])."'");
       $field3 = array("string" => preg_replace("/%KEY%/", "$key", $action2.$action), "attach" => "style='width:60px;border-right:0px;text-align:right;'");
       $divlist->AddEntry( array($field1,$field2,$field3));
     }
@@ -1056,35 +1056,37 @@ class systems extends plugin
     /* Get all gotoTerminal's */
     $this->terminals= array();
 
-    $res= get_list($this->ui->subtreeACL, "(|$termfilter)", FALSE, "ou=terminals,ou=systems,".$base, 
-        array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE);
-
-    $res= array_merge($res,get_list($this->ui->subtreeACL, "(|$termfilter)", FALSE, "ou=incoming,".$base, 
-        array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE));
+    //FIXME: All get_list calls are called without GL_SIZELIMIT? All contain sambaDomainName???
+    $res= get_list("(|$termfilter)", $this->ui->subtreeACL, "ou=terminals,ou=systems,".$base,
+                   array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE);
 
     $res= array_merge($res,
-          get_list($this->ui->subtreeACL, "(|$serverfilter)", FALSE, "ou=servers,ou=systems,".$base, 
-        array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE));
+          get_list("(|$termfilter)", $this->ui->subtreeACL, "ou=incoming,".$base,
+                   array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE));
 
     $res= array_merge($res,
-          get_list($this->ui->subtreeACL, "(|$phonefilter)", FALSE, "ou=phones,ou=systems,".$base, 
-        array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE));
+          get_list("(|$serverfilter)", $this->ui->subtreeACL, "ou=servers,ou=systems,".$base,
+                   array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE));
 
     $res= array_merge($res,
-          get_list($this->ui->subtreeACL, "(|$netfilter)", FALSE, "ou=netdevices,ou=systems,".$base, 
-        array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE));
+          get_list("(|$phonefilter)", $this->ui->subtreeACL, "ou=phones,ou=systems,".$base,
+                    array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE));
 
     $res= array_merge($res,
-          get_list($this->ui->subtreeACL, "(|$printfilter)", FALSE, "ou=printers,ou=systems,".$base, 
-        array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE));
+          get_list("(|$netfilter)", $this->ui->subtreeACL, "ou=netdevices,ou=systems,".$base,
+                   array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE));
 
     $res= array_merge($res,
-          get_list($this->ui->subtreeACL, "(|$workfilter)", FALSE, "ou=workstations,ou=systems,".$base, 
-        array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE));
+          get_list("(|$printfilter)", $this->ui->subtreeACL, "ou=printers,ou=systems,".$base,
+                   array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE));
 
     $res= array_merge($res,
-          get_list($this->ui->subtreeACL, "(|$winfilter)", FALSE, "ou=winstations,ou=systems,".$base, 
-        array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), FALSE));
+          get_list("(|$workfilter)", $this->ui->subtreeACL, "ou=workstations,ou=systems,".$base,
+                   array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE));
+
+    $res= array_merge($res,
+          get_list("(|$winfilter)", $this->ui->subtreeACL, "ou=winstations,ou=systems,".$base,
+                   array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE));
 
 /* NEW LIST MANAGMENT
      * We also need to search for the departments
@@ -1099,9 +1101,8 @@ class systems extends plugin
       $base2 = preg_replace("/".$peopleOU."/i","",$base);
     }
 
-
-    $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
-                              TRUE, $base2, array("ou", "description"), TRUE);
+    $res3= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))", $this->ui->subtreeACL, 
+                    $base2, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
 
     $this->departments= array();
     $tmp = array();
@@ -1111,9 +1112,9 @@ class systems extends plugin
     ksort($tmp);
     foreach($tmp as $value){
       if(isset($value["description"][0])){
-        $this->departments[$value['dn']]= convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
+        $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
       }else{
-        $this->departments[$value['dn']]= convert_department_dn2($value['dn']);//$value["description"][0];
+        $this->departments[$value['dn']]= get_sub_department($value['dn']);//$value["description"][0];
       }
     }
 

@@ -284,7 +284,7 @@ class ogroupManagement extends plugin
 
         /* Lock the current entry, so nobody will edit it during deletion */
         add_lock ($this->dn, $this->ui->dn);
-        $smarty->assign("info", sprintf(_("You're about to delete the object group '%s'."), LDAP::fix($this->dn)));
+        $smarty->assign("info", sprintf(_("You're about to delete the object group '%s'."), @LDAP::fix($this->dn)));
         return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
       } else {
 
@@ -405,7 +405,7 @@ class ogroupManagement extends plugin
       /* Don't show buttons if tab dialog requests this */
       if (!$this->ogroup->by_object[$this->ogroup->current]->dialog){
         $display.= "<p style=\"text-align:right\">\n";
-        $display.= "<input type=submit name=\"edit_finish\" value=\""._("Finish")."\">\n";
+        $display.= "<input type=submit name=\"edit_finish\" value=\""._("Save")."\">\n";
         $display.= "&nbsp;\n";
         $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
         $display.= "</p>";
@@ -540,7 +540,7 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
         $mail = $empty;
       }
 
-      $title = "title='dn : ".$val['dn']."'";
+      $title = "title='dn:&nbsp;".@LDAP::fix($val['dn'])."'";
 
       if(!isset($val['description'][0])){
         $desc = "";
@@ -688,9 +688,7 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
       $filter= "(&(cn=$regex)(objectClass=gosaGroupOfNames))";
     }
     
-   $groups = ($this->config->current['GROUPS']);
-
-    $res= get_list($this->ui->subtreeACL, "$filter",FALSE, $groups.",".$base, array("*"), TRUE);
+    $res= get_list($filter, $this->ui->subtreeACL, get_groups_ou().$base, array("*"), GL_SIZELIMIT );
     $this->ogrouplist= $res;
     ksort ($this->ogrouplist);
     reset ($this->ogrouplist);
@@ -708,10 +706,8 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
       $base2 = preg_replace("/".$peopleOU."/i","",$base);
     }
 
-    $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
-                              TRUE, $base2, array("ou", "description"), TRUE);
-
-   
+    $res3= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
+                    $this->ui->subtreeACL, $base2, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
 
     $this->departments= array();
     $tmp = array();
@@ -721,9 +717,9 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
     ksort($tmp);
     foreach($tmp as $value){
       if(isset($value["description"][0])){
-        $this->departments[$value['dn']]= convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
+        $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
       }else{
-        $this->departments[$value['dn']]= convert_department_dn2($value['dn']);//$value["description"][0];
+        $this->departments[$value['dn']]= get_sub_department($value['dn']);//$value["description"][0];
       }
     }
     /* END NEW LIST MANAGMENT

@@ -302,7 +302,7 @@ class gofonMacro extends plugin
       /* Don't show buttons if tab dialog requests this */
       if (!$this->macrotabs->by_object[$this->macrotabs->current]->dialog){
         $display.= "<p style=\"text-align:right\">\n";
-        $display.= "<input type=\"submit\" name=\"edit_finish\" value=\""._("Finish")."\">\n";
+        $display.= "<input type=\"submit\" name=\"edit_finish\" value=\""._("Save")."\">\n";
         $display.= "&nbsp;\n";
         $display.= "<input type=\"submit\" name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
         $display.= "</p>";
@@ -401,7 +401,7 @@ class gofonMacro extends plugin
       }
 
       $field1 = array("string" => sprintf($macroimg,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='".$val['dn']."'");
+      $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='dn:&nbsp;".@LDAP::fix($val['dn'])."'");
       $field3 = array("string" => $pic1, "attach" => "style='width:50px;'");
       $field4 = array("string" => preg_replace("/%KEY%/", "$key", $action), "attach" => "style='width:60px;border-right:0px;text-align:right;'");
 
@@ -447,7 +447,8 @@ class gofonMacro extends plugin
     }
 
     /* Generate macro list */
-    $res= get_list($this->ui->subtreeACL, "(&(cn=$regex)(objectClass=goFonMacro))", FALSE, "ou=macros,ou=asterisk,ou=configs,ou=systems,".$base, array("*"), TRUE);
+    $res= get_list("(&(cn=$regex)(objectClass=goFonMacro))", $this->ui->subtreeACL,
+                   "ou=macros,ou=asterisk,ou=configs,ou=systems,".$base, array("*"), GL_SIZELIMIT);
     $this->macros= $res;
 
     /* NEW LIST MANAGMENT
@@ -462,8 +463,8 @@ class gofonMacro extends plugin
       $base2 = preg_replace("/".$peopleOU."/i","",$base);
     }
 
-    $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
-        TRUE, $base2, array("ou", "description"), TRUE);
+    $res3= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
+                    $this->ui->subtreeACL, $base2, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
 
     $this->departments= array();
     $tmp = array();
@@ -473,9 +474,9 @@ class gofonMacro extends plugin
     ksort($tmp);
     foreach($tmp as $value){
       if(isset($value["description"][0])){
-        $this->departments[$value['dn']]= convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
+        $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
       }else{
-        $this->departments[$value['dn']]= convert_department_dn2($value['dn']);//$value["description"][0];
+        $this->departments[$value['dn']]= get_sub_department($value['dn']);//$value["description"][0];
       }
     }
 

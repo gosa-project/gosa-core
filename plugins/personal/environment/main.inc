@@ -101,7 +101,7 @@ if (!$remove_lock){
 
     /* Are we in edit mode? */
     if ((isset($_SESSION['edit']))&&($environment->dialog==NULL)){
-      $display.= "<input type=submit name=\"edit_finish\" value=\""._("Finish")."\">\n";
+      $display.= "<input type=submit name=\"edit_finish\" value=\""._("Save")."\">\n";
       $display.= "&nbsp;";
       $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
       $info= "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png').

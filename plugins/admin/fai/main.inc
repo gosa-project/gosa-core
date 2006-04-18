@@ -35,7 +35,7 @@ if ($remove_lock){
 
 	/* Page header*/
 	if (isset($_SESSION['objectinfo'])){
-		$display= print_header(get_template_path('images/fai.png'), _("Fully Automatic Installation"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".@ldap::fix($_SESSION['objectinfo']));
+		$display= print_header(get_template_path('images/fai.png'), _("Fully Automatic Installation"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".@LDAP::fix($_SESSION['objectinfo']));
 	} else {
 		$display= print_header(get_template_path('images/fai.png'), _("Fully Automatic Installation"));
 	}

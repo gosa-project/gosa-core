@@ -603,7 +603,7 @@ class faiManagement extends plugin
 				
 			}elseif(((isset($this->dialog->current))&&(!$this->dialog->by_object[$this->dialog->current]->is_dialog))){
 				$display.= "<p style=\"text-align:right\">\n";
-				$display.= "<input type=\"submit\" name=\"edit_finish\" value=\""._("Finish")."\">\n";
+				$display.= "<input type=\"submit\" name=\"edit_finish\" value=\""._("Save")."\">\n";
 				$display.= "&nbsp;\n";
 				$display.= "<input type=\"submit\" name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
 				$display.= "</p>";
@@ -902,8 +902,8 @@ class faiManagement extends plugin
 		 */
 		$base2 = $_SESSION['CurrentMainBase'];
 
-		$res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
-				TRUE, $base2, array("ou", "description"), TRUE);
+    $res3= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
+                    $this->ui->subtreeACL, $base2, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
 
 		$this->departments= array();
 		$tmp = array();
@@ -913,9 +913,9 @@ class faiManagement extends plugin
 		ksort($tmp);
 		foreach($tmp as $value){
 			if(isset($value["description"][0])){
-				$this->departments[$value['dn']]= convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
+				$this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
 			}else{
-				$this->departments[$value['dn']]= convert_department_dn2($value['dn']);//$value["description"][0];
+				$this->departments[$value['dn']]= get_sub_department($value['dn']);//$value["description"][0];
 			}
 		}
 
@@ -923,14 +923,14 @@ class faiManagement extends plugin
 		 */
 
 	
-		$res= get_list($this->ui->subtreeACL, "(objectClass=organizationalUnit)", 
-				FALSE, $base, array("cn","description","objectClass"),TRUE);
+    $res= get_list("(objectClass=organizationalUnit)", $this->ui->subtreeACL, $base,
+                   array("cn","description","objectClass"), GL_SIZELIMIT);
 
     $str = "";
 
 		foreach($res as $objecttypes){
-			$res2 = get_list($this->ui->subtreeACL, "(&(objectClass=*)(cn=".$regex."))",
-					FALSE, $objecttypes['dn'], array("cn","description","objectClass","FAIclass","FAIstate"),TRUE);
+      $res2= get_list("(&(objectClass=*)(cn=$regex))", $this->ui->subtreeACL, $objecttypes['dn'],
+                      array("cn","description","objectClass","FAIclass","FAIstate"), GL_SIZELIMIT);
 			foreach($res2 as $object){
 				$type= "";	
 				unset($object['objectClass']['count']);

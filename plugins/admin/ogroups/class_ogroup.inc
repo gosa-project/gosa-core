@@ -505,7 +505,7 @@ class ogroup extends plugin
 
         /* It has failed, add entry with type flag I (Invalid)*/
         if ($ldap->error != "success"){
-          $this->memberList[$dn]= array('text' => _("Non existing dn: ")."$dn","type" => "I");
+          $this->memberList[$dn]= array('text' => _("Non existing dn:")." ".@LDAP::fix($dn),"type" => "I");
 
         } else {
           

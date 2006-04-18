@@ -2,7 +2,7 @@
 /*****************************************************************************
   newldap.inc - version 1.0
   Copyright (C) 2003 Alejandro Escanero Blanco <alex@ofmin.com>
-  Copyright (C) 2004 Cajus Pollmeier <pollmeier@gonicus.de>
+  Copyright (C) 2004-2006 Cajus Pollmeier <pollmeier@gonicus.de>
 
   Based in code of ldap.inc of
   Copyright (C) 1998  Eric Kilfoil <eric@ipass.net>
@@ -12,7 +12,7 @@ define("ALREADY_EXISTING_ENTRY",-10001);
 define("UNKNOWN_TOKEN_IN_LDIF_FILE",-10002);
 define("NO_FILE_UPLOADED",10003);
 define("INSERT_OK",10000);
-define("COLON_OVERRIDE", TRUE);
+define("SPECIALS_OVERRIDE", TRUE);
 
 class LDAP{
 
@@ -31,6 +31,7 @@ class LDAP{
   var $follow_referral = FALSE;
   var $referrals= array();
 
+
   function LDAP($binddn,$bindpw, $hostname, $follow_referral= FALSE, $tls= FALSE)
   {
     $this->follow_referral= $follow_referral;
@@ -43,37 +44,38 @@ class LDAP{
   }
 
 
+  /* Function to replace all problematic characters inside a DN by \001XX, where
+     \001 is decoded to chr(1) [ctrl+a]. It is not impossible, but very unlikely
+     that this character is inside a DN.
+     
+     Currently used codes:
+      ,   => CO
+      \2C => CO
+      (   => OB
+      )   => CB
+      /   => SL                                                                  */
   function convert($dn)
   {
-    if (COLON_OVERRIDE == TRUE){
-      $res= preg_replace("/\\\\,/", '###GOSAREPLACED###', $dn);
-      $res= preg_replace("/\\\\2C/", '###GOSAREPLACED###', $res);
-      $res= preg_replace("/\(/", '###OPENBRACE###', $res);
-      $res= preg_replace("/\)/", '###CLOSEBRACE###', $res);
-      $res= preg_replace("/\//", '###SLASH###', $res);
-
-      #if ($dn != $res){
-      #  echo "Conversation from '$dn' to '$res'<br>";
-      #}
-      return ($res);
+    if (SPECIALS_OVERRIDE == TRUE){
+      return (preg_replace(array("/\\\\,/", "/\\\\2C/", "/\(/", "/\)/", "/\//"),
+                           array("\001CO", "\001CO", "\001OB", "\001CB", "\001SL"),
+                           $dn));
     } else {
       return ($dn);
     }
   }
 
 
+  /* Function to fix all problematic characters inside a DN by replacing \001XX
+     codes to their original values. See "convert" for mor information. 
+     ',' characters are always expanded to \, (not \2C), since all tested LDAP
+     servers seem to take it the correct way.                                  */
   function fix($dn)
   {
-    if (COLON_OVERRIDE == TRUE){
-      $res= preg_replace("/###GOSAREPLACED###/", '\,', $dn);
-      $res= preg_replace("/###OPENBRACE###/", '(', $res);
-      $res= preg_replace("/###CLOSEBRACE###/", ')', $res);
-      $res= preg_replace("/###SLASH###/", '/', $res);
-
-      #if ($dn != $res){
-      #  echo "Fix from '$dn' to '$res'<br>";
-      #}
-      return ($res);
+    if (SPECIALS_OVERRIDE == TRUE){
+      return (preg_replace(array("/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/"),
+                           array("\,", "(", ")", "/"),
+                           $dn));
     } else {
       return ($dn);
     }

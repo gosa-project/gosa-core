@@ -2290,7 +2290,7 @@ msgstr "Geräte ID"
 
 #: plugins/personal/environment/hotplugDialogNew.tpl:38
 msgid "save"
-msgstr "Sichern"
+msgstr "Speichern"
 
 #: plugins/personal/environment/kioskManagement.tpl:1
 #: plugins/personal/environment/kioskManagement.tpl:5
@@ -2356,7 +2356,7 @@ msgstr "Bild entfernen"
 #: include/class_MultiSelectWindow.inc:44
 #: ihtml/themes/default/copyPasteDialog.tpl:14
 msgid "Save"
-msgstr "Sichern"
+msgstr "Speichern"
 
 #: plugins/personal/generic/generic.tpl:6
 msgid "Personal information"

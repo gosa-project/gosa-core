@@ -354,7 +354,7 @@ class posixAccount extends plugin
       $acl= array($this->config->current['BASE'] => ":all");
       $regex= $sysfilter['regex'];
       $filter= "(&(|(objectClass=goServer)(objectClass=gotoWorkstation)(objectClass=gotoTerminal))$exclude(cn=*)(cn=$regex))";
-      $res= get_list($acl, "$filter", TRUE, $sysfilter['depselect'], array("cn"), TRUE);
+      $res= get_list($filter, $acl, $sysfilter['depselect'], array("cn"), GL_SUBSEARCH | GL_SIZELIMIT);
       $wslist= array();
       foreach ($res as $attrs){
         $wslist[]= preg_replace('/\$/', '', $attrs['cn'][0]);
@@ -858,32 +858,17 @@ $ldap->modify ($this->attrs);
  
     /* Take care about groupMembership values: add to groups */
     foreach ($this->groupMembership as $key => $value){
-      $g= new group($this->config, $key);
-      $g->addUser ($this->uid);
+      $g= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $key);
+      $g->by_object['group']->addUser($this->uid);
       $g->save();
-
-      /* May need to save the mail part, too */
-      if ($g->has_mailAccount){
-        $g= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $key);
-        $g->by_object['group']->removeUser ($this->uid);
-        $g->save();
-      }
     }
     
     /* Remove from groups not listed in groupMembership */
     foreach ($this->savedGroupMembership as $key => $value){
       if (!isset($this->groupMembership[$key])){
-        
-        $g= new group($this->config, $key);
-        $g->removeUser ($this->uid);
+        $g= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $key);
+        $g->by_object['group']->removeUser ($this->uid);
         $g->save();
-
-        /* May need to save the mail part, too */
-        if ($g->has_mailAccount){
-          $g= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $key);
-          $g->by_object['group']->removeUser ($this->uid);
-          $g->save();
-        }
       }
     }
 
@@ -1122,7 +1107,8 @@ $ldap->modify ($this->attrs);
     $ldap = $this->config->get_ldap_link();    
 
     $base= get_groups_ou().$base;
-    $res= get_list($this->ui->subtreeACL, "(objectClass=posixGroup)", FALSE, $base, array("cn", "description", "gidNumber"), TRUE);
+    $res= get_list("(objectClass=posixGroup)", $this->ui->subtreeACL, $base,
+                   array("cn", "description", "gidNumber"), GL_SIZELIMIT);
     if (preg_match("/size limit/i", $error)){
       $_SESSION['limit_exceeded']= TRUE;
     }

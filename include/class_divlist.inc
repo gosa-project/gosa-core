@@ -5,9 +5,12 @@ class divlist {
 	var $a_entries;
 	var $a_header;
 	var $b_displayPageNums; 	
-	var $summary;
+	var $s_summary;
 	var $cols;
 	var $pageid;
+  //FIXME: Ignoring the fact, that they were missing - height and width are numeric...
+  var $s_height;
+  var $s_width;
   
 	// Members for page managment
 	var $i_currentPage;
@@ -18,7 +21,7 @@ class divlist {
 
 		$this->i_currentPage    = 0;
 		$this->i_entriesPerPage = 10;
-    $this->s_height         = "500";
+    $this->s_height         = "450";
     $this->s_width          = "600";
 		$this->s_summary        = "";
 		$this->a_entries        = array();
@@ -58,7 +61,9 @@ class divlist {
 	
 	function DrawList(){
 		$s_return = "";
-		$s_return.= "<table summary='".$this->s_summary."' style='width:".$this->s_width."px;height:".$this->s_height."px;' cellspacing='0' id='t_scrolltable'>";
+		$s_return.= "<table summary='".$this->s_summary."' style='width:".
+                $this->s_width."px;height:".$this->s_height.
+                "px;' cellspacing='0' id='t_scrolltable'>";
 
     $s_return.= $this->_generateHeader();
     $s_return.=$this->_generatePage();
@@ -71,30 +76,29 @@ class divlist {
 	function _numpages(){
 		$cnt = count($this->a_entries);
 		
-		$tmp 	= $cnt % $this->i_entriesPerPage;
 		$pages 	= (int) ($cnt / $this->i_entriesPerPage);
-		if($tmp) $pages ++;
+		if($cnt % $this->i_entriesPerPage){
+      $pages++;
+    }
 		
 		return $pages;
 	}
 	
 	function _numentries(){
-		$cnt = count($this->a_entries);
-		return $cnt;
+		return count($this->a_entries);
 	}
 	
 	function _generateHeader(){
-		
 		$s_return = "";
 		$s_value 	= "";
 		$s_key 		= "";
 		
     // Using scrolltable?
     if($this->i_entriesPerPage == 0) {
-      $s_return .= "\n<tr><td class='scrollhead'><table summary='' style='width:".$this->s_width."px;' cellspacing='0' id='t_scrollhead'>";
+      $s_return.= "\n<tr><td class='scrollhead'><table summary='' style='width:".$this->s_width."px;' cellspacing='0' id='t_scrollhead'>";
     }
 
-		$s_return .= "\n<tr>";
+		$s_return.= "\n<tr>";
 
 		foreach($this->a_header[0] as $s_key => $s_value ){
 			if(!isset($s_value['attach'])){
@@ -111,11 +115,11 @@ class divlist {
     // Attach a 13px-wide column (used as scrollbar space in body-table),
     // but do this only if we are really using scrolltables.
     if($this->i_entriesPerPage == 0) {
-      $s_return .= "\n<td class='listheader' style='width:13px;border-right:0px;'>&nbsp;</td>";
-      $s_return .= "\n</table></td>";
+      $s_return.= "\n<td class='listheader' style='width:13px;border-right:0px;'>&nbsp;</td>";
+      $s_return.= "\n</table></td>";
     }
 
-  	$s_return .= "\n</tr>";
+  	$s_return.= "\n</tr>";
 		return $s_return;
 	}
 	
@@ -158,6 +162,7 @@ class divlist {
       return($str);
     } else {
     
+      //FIXME: Ahrg. I'd like to read this code without wasting my time.
       if ($this->i_entriesPerPage > 0) {
     		while($start > $this->_numentries()){
     			$start = $start - $this->i_entriesPerPage;
@@ -271,6 +276,7 @@ class divlist {
       }
   
       // if fewer than 22 Entries (list not full), print row to fill empty space
+      //FIXME: Why 22? Isn't the size dynamic
       if($this->_numEntries()<=22){
         $fill= "";
         for ($i= 1; $i <= $this->cols; $i++){
@@ -290,5 +296,6 @@ class divlist {
     }
   }
 }
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

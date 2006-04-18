@@ -465,7 +465,8 @@ class mailgroup extends plugin
       }
 
       $acl= array($this->config->current['BASE'] => ":all");
-      $res= get_list($acl, "(&(objectClass=gosaMailAccount)$filter)", TRUE, $gmailfilter['depselect'], array("sn", "mail", "givenName"), TRUE);
+      $res= get_list("(&(objectClass=gosaMailAccount)$filter)", $acl, $gmailfilter['depselect'],
+                     array("sn", "mail", "givenName"), GL_SUBSEARCH | GL_SIZELIMIT);
       $ldap->cd($gmailfilter['depselect']);
       $ldap->search ("(&(objectClass=gosaMailAccount)$filter)", array("sn", "mail", "givenName"));
       error_reporting (0);

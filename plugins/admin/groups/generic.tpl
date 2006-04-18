@@ -96,7 +96,7 @@
      <td style="vertical-align:top; width:50%">
       <b><LABEL for="members">{t}Group members{/t}</LABEL></b>
       <br>
-      <select style="width:100%; height:450px;" id="members" name="members[]" size=15 multiple>
+      <select style="width:100%; height:380px;" id="members" name="members[]" size=15 multiple>
        {html_options options=$members}
 		<option disabled>&nbsp;</option>
       </select>

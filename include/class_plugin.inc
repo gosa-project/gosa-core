@@ -807,12 +807,15 @@ class plugin
     }
   }
 
+
   function saveCopyDialog(){
   }
+
 
   function getCopyDialog(){
     return(array("string"=>"","status"=>""));
   }
+
 
   function PrepareForCopyPaste($source){
     $todo = $this->attributes;

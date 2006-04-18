@@ -3,8 +3,12 @@
 </div>
 
 <p>
-  {t}Creating a new user can be assisted by using templates. Many database records will be filled automatically. Choose 'none' to skip the usage of templates.{/t}
+ {t}Creating a new user can be assisted by using templates. Many database records will be filled automatically. Choose 'none' to skip the usage of templates.{/t}
 </p>
+
+<p class="seperator">&nbsp;</p>
+
+<br>
 
 <table summary="" style="vertical-align:top; text-align:left;" cellpadding=4 border=0>
   <tr>

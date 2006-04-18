@@ -23,6 +23,12 @@ define ("CONFIG_DIR", "/etc/gosa");
 define ("CONFIG_TEMPLATE_DIR", "../contrib/");
 define ("HELP_BASEDIR", "/var/www/doc/");
 
+/* Define get_list flags */
+define("GL_NONE",      0);
+define("GL_SUBSEARCH", 1);
+define("GL_SIZELIMIT", 2);
+define("GL_CONVERT"  , 4);
+
 /* Define globals for revision comparing */
 $svn_path = '$HeadURL$';
 $svn_revision = '$Revision$';
@@ -484,12 +490,14 @@ function get_lock ($object)
 }
 
 
-function get_list2($subtreeACL, $filter, $subsearch= TRUE, $base="", $attrs= array(), $flag= FALSE)
+function get_list($filter, $subtreeACL, $base= "", $attributes= array(), $flags= GL_SUBSEARCH)
 {
   global $config;
 
-  /* Base the search on default base if not set */
-  $ldap= $config->get_ldap_link($flag);
+  /* Get LDAP link */
+  $ldap= $config->get_ldap_link($flags & GL_SIZELIMIT);
+
+  /* Set search base to configured base if $base is empty */
   if ($base == ""){
     $ldap->cd ($config->current['BASE']);
   } else {
@@ -497,50 +505,8 @@ function get_list2($subtreeACL, $filter, $subsearch= TRUE, $base="", $attrs= arr
   }
 
   /* Perform ONE or SUB scope searches? */
-  $ldap->ls ($filter);
-
-  /* Check for size limit exceeded messages for GUI feedback */
-  if (preg_match("/size limit/i", $ldap->error)){
-    $_SESSION['limit_exceeded']= TRUE;
-  } else {
-    $_SESSION['limit_exceeded']= FALSE;
-  }
-  $result= array();
-
-
-  /* Crawl through reslut entries and perform the migration to the
-     result array */
-  while($attrs = $ldap->fetch()) {
-    $dn= $ldap->getDN();
-    foreach ($subtreeACL as $key => $value){
-      if (preg_match("/$key/", $dn)){
-        $attrs["dn"]= convert_department_dn($dn);
-        $result[]= $attrs;
-        break;
-      }
-    }
-  }
-
-
-  return ($result);
-
-}
-
-function get_list($subtreeACL, $filter, $subsearch= TRUE, $base="", $attrs= array(), $flag= FALSE)
-{
-  global $config;
-
-  /* Base the search on default base if not set */
-  $ldap= $config->get_ldap_link($flag);
-  if ($base == ""){
-    $ldap->cd ($config->current['BASE']);
-  } else {
-    $ldap->cd ($base);
-  }
-
-  /* Perform ONE or SUB scope searches? */
-  if ($subsearch) {
-    $ldap->search ($filter, $attrs);
+  if ($flags & GL_SUBSEARCH) {
+    $ldap->search ($filter, $attributes);
   } else {
     $ldap->ls ($filter);
   }
@@ -557,9 +523,17 @@ function get_list($subtreeACL, $filter, $subsearch= TRUE, $base="", $attrs= arra
   $result= array();
   while($attrs = $ldap->fetch()) {
     $dn= $ldap->getDN();
+
     foreach ($subtreeACL as $key => $value){
       if (preg_match("/$key/", $dn)){
-        $attrs["dn"]= $dn;
+
+        if ($flags & GL_CONVERT){
+          $attrs["dn"]= convert_department_dn($dn);
+        } else {
+          $attrs["dn"]= $dn;
+        }
+
+        /* We found what we were looking for, break speeds things up */
         $result[]= $attrs;
         break;
       }
@@ -768,16 +742,16 @@ function convert_department_dn($dn)
 
   /* Build a sub-directory style list of the tree level
      specified in $dn */
-  foreach (split (',', $dn) as $val){
+  foreach (ldap_explode_dn($dn, false) as $rdn){
 
     /* We're only interested in organizational units... */
-    if (preg_match ("/ou=/", $val)){
-      $dep= substr($val,3)."/$dep";
+    if (substr($rdn,0,3) == 'ou='){
+      $dep= substr($rdn,3)."/$dep";
     }
 
     /* ... and location objects */
-    if (preg_match ("/l=/", $val)){
-      $dep= substr($val,2)."/$dep";
+    if (substr($rdn,0,2) == 'l='){
+      $dep= substr($rdn,2)."/$dep";
     }
   }
 
@@ -785,24 +759,12 @@ function convert_department_dn($dn)
   return rtrim($dep, "/");
 }
 
-function convert_department_dn2($dn)
+
+/* Strip off the last sub department part of a '/level1/level2/.../'
+ * style value. It removes the trailing '/', too. */
+function get_sub_department($value)
 {
-  $dep= "";
-
-  /* Build a sub-directory style list of the tree level
-     specified in $dn */
-  $deps = array_flip($_SESSION['config']->idepartments);
-
-  if(isset($deps[$dn])){
-    $dn= $deps[$dn];
-    $dep = preg_replace("/^.*=/","",$dn);
-  }else{
-    $dep= preg_replace("%^.*/([^/]+)$%", "\\1", $dn);
-  }
-
-  /* Return and remove accidently trailing slashes */
-  $tmp = rtrim($dep, "/");
-  return @ldap::fix($tmp);
+  return (@LDAP::fix(preg_replace("%^.*/([^/]+)/?$%", "\\1", $value)));
 }
 
 
@@ -813,9 +775,9 @@ function get_ou($name)
   $ou= $config->current[$name];
   if ($ou != ""){
     if (!preg_match('/^[^=]+=[^=]+/', $ou)){
-      return "ou=$ou,";
+      return @LDAP::convert("ou=$ou,");
     } else {
-      return "$ou,";
+      return @LDAP::convert("$ou,");
     }
   } else {
     return "";
@@ -1941,6 +1903,47 @@ function array_differs($src, $dst)
   }
 
   return ($differs);
+}
+
+
+function saveFilter($a_filter, $values)
+{
+  if (isset($_POST['regexit'])){
+    $a_filter["regex"]= $_POST['regexit'];
+
+    foreach($values as $type){
+      if (isset($_POST[$type])) {
+        $a_filter[$type]= "checked";
+      } else {
+        $a_filter[$type]= "";
+      }
+    }
+  }
+
+  /* React on alphabet links if needed */
+  if (isset($_GET['search'])){
+    $s= mb_substr(validate($_GET['search']), 0, 1, "UTF8")."*";
+    if ($s == "**"){
+      $s= "*";
+    }
+    $a_filter['regex']= $s;
+  }
+
+  return ($a_filter);
+}
+
+
+/* Escape all preg_* relevant characters */
+function normalizePreg($input)
+{
+  return (addcslashes($input, '[]()|/.*+-'));
+}
+
+
+/* Escape all LDAP filter relevant characters */
+function normalizeLdap($input)
+{
+  return (addcslashes($input, '()|'));
 }
 
 

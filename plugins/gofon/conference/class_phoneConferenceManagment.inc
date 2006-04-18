@@ -262,7 +262,7 @@ class phoneConferenceManagment extends plugin
       /* Don't show buttons if tab dialog requests this */
       if (!$this->conftab->by_object[$this->conftab->current]->dialog){
         $display.= "<p style=\"text-align:right\">\n";
-        $display.= "<input type=\"submit\" name=\"edit_finish\" value=\""._("Finish")."\">\n";
+        $display.= "<input type=\"submit\" name=\"edit_finish\" value=\""._("Save")."\">\n";
         $display.= "&nbsp;\n";
         $display.= "<input type=\"submit\" name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
         $display.= "</p>";
@@ -410,8 +410,10 @@ class phoneConferenceManagment extends plugin
     $base             = $_SESSION['CurrentMainBase'];
     $regex            = $conferencefilter['regex'];
 
-    $this->conferences=get_list($this->ui->subtreeACL, "(&(|(cn=$regex)(description=$regex))(objectClass=goFonConference))",FALSE, $base, array("*"), TRUE);
-    $res3=get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",TRUE, $base, array("ou", "description"), TRUE);
+    $this->confgerences= get_list("(&(|(cn=$regex)(description=$regex))(objectClass=goFonConference))",
+                                  $this->ui->subtreeACL, $base, array("*"), GL_SIZELIMIT);
+    $res3= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))", $this->ui->subtreeACL,
+                    $base, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
 
     $this->departments= array();
 
@@ -422,9 +424,9 @@ class phoneConferenceManagment extends plugin
     ksort($tmp);
     foreach($tmp as $value){
       if(isset($value["description"][0])){
-        $this->departments[$value['dn']]= convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
+        $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
       }else{
-        $this->departments[$value['dn']]= convert_department_dn2($value['dn']);//$value["description"][0];
+        $this->departments[$value['dn']]= get_sub_department($value['dn']);//$value["description"][0];
       }
     }
   }

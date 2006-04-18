@@ -512,7 +512,9 @@ class appgroup extends plugin
         }
       }
     }
+
     $this->reload();
+
     /* Add group with post */
     if((isset($_GET['act']))&&($_GET['act']=="add")){
       $this->used_apps[$_GET['id']]= $_GET['id'];
@@ -560,13 +562,14 @@ class appgroup extends plugin
 
     $div = new DivSelectBox("appgroup");    
 
-    $div->SetHeight(400);
+    $div->SetHeight(300);
 
     /* NEW LIST MANAGMENT
      * We also need to search for the departments
      * So we are able to navigate like in konquerer
      */
 
+    //FIXME: Why do we not use get_list here? It's the same code all over the time...
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->curbase) ;
     $ldap->ls("(objectClass=gosaDepartment)"); 
@@ -577,10 +580,11 @@ class appgroup extends plugin
     }
     ksort($tmp);
     foreach($tmp as $value){
+      $fdn= @LDAP::fix($value['dn']);
       if($value["description"][0]!=".."){
-        $departments[$value['dn']]=convert_department_dn($value['dn'])." - [".$value["description"][0]."]";
+        $departments[$value['dn']]= convert_department_dn($fdn)." - [".$value["description"][0]."]";
       }else{
-        $departments[$value['dn']]=convert_department_dn($value['dn']);
+        $departments[$value['dn']]=convert_department_dn($fdn);
       }
     }
 
@@ -635,7 +639,7 @@ class appgroup extends plugin
     }
 
     $div2 = new DivSelectBox("appgroup");
-    $div2->SetHeight(400);
+    $div2->SetHeight(300);
 
     $linkopen       = "<img class='center' src='images/folder.png' alt=\"\">&nbsp;<a href='?plug=".$_GET['plug']."&amp;act=open&amp;id=%s'>%s</a>";
     $catremove      = "&nbsp;<input type='image' src='images/edittrash.png' title='"._("Delete entry")."' name='DelCat_%s' value='%s'>";
@@ -712,7 +716,7 @@ class appgroup extends plugin
             $image = "<img class='center' src='images/select_application.png' alt=\"\">&nbsp;"; 
           }
           
-          $div2 ->AddEntry(array(array("string"=>sprintf($image."%s",$entry['App'])),
+          $div2->AddEntry(array(array("string"=>sprintf($image."%s",$entry['App'])),
                 array("string"=>preg_replace("/\%s/",htmlentities($entry['App']),$sep.$edit.$upudown),
                       "attach"=>"align='right' style='width:100px;border-right:0px;'")));
         }

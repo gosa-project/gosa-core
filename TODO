@@ -1,7 +1,20 @@
 Target for 2.4.1:
 =================
 
-* Sanity check: verteilserver == self?
+* Sanity check for workstations/servers: repository server == self?
+
+* Can't remove phoneAccounts...
+
+* Explaination of several FIXME's. Group removal, etc.
+
+* peopleou, groupou, fai, etc. as department? Please check!
+  Check during login/setup?
+
+* saveFilter added, please use!
+
+* Added functions normalizePreg and normalizeLdap. Please use where needed!
+
+* generatePasteIcon added, please use!
 
 * Create a status-bar/-display for FAI installations 
   (Use notes from 0.5.12.2005)
@@ -20,6 +33,10 @@ Target for 2.4.1:
 * Add support for nagios in the system part ( OpenSides )
 
 * Update the french manual ( OpenSides )
+
+* Pimp 1024x768 screen resolutions, it should be the minimum usable resoultion
+
+* Auto-Resize for subdialogs
 
 
 Target for 2.5:

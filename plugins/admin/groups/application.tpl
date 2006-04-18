@@ -15,7 +15,7 @@
   <td style="width:48%; vertical-align:top;">
    <b><LABEL for="used_apps">{t}Used applications{/t}</LABEL></b>
   	{$UsedApps} 
-	<input type="text" value="" size="35" name='CatName'>
+	<input type="text" value="" size="30" name='CatName'>
 	<input type="submit" value="{t}Add category{/t}" name='AddCat'>
   </td>
   <td>&nbsp;

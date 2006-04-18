@@ -363,7 +363,7 @@ class blocklist extends plugin
         // Generate Array to Add
         $display= "[".$val["cn"][0]."]";
         $field1 = array("string" => sprintf($blockimg,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
-        $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='".$val['dn']."'");
+        $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='dn:&nbsp;".@LDAP::fix($val['dn'])."'");
         $field3 = array("string" => preg_replace("/%KEY%/", "$key", $action), "attach" => "style='width:60px;border-right:0px;text-align:right;'");
         $divlist->AddEntry( array($field1,$field2,$field3));
       }
@@ -463,7 +463,9 @@ class blocklist extends plugin
     }
 
     /* Generate blocklists */
-    $res= get_list($this->ui->subtreeACL, "(&(cn=$regex)$filter)", FALSE, "ou=gofax,ou=systems,".$base, array("*"));
+    //FIXME: No GL_SIZELIMIT?
+    $res= get_list("(&(cn=$regex)$filter)", $this->ui->subtreeACL, "ou=gofax,ou=systems,".$base, 
+                   array("*"), GL_NONE);
 
     $this->blocklists=$res;
 
@@ -478,8 +480,8 @@ class blocklist extends plugin
       $base2 = preg_replace("/".$peopleBase.",/i","",$base);
     }
    
-    $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
-        TRUE, $base2, array("ou", "description"), TRUE);
+    $res3= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))", $this->ui->subtreeACL,
+                    $base2, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
 
     $this->departments= array();
     $tmp = array();
@@ -489,9 +491,9 @@ class blocklist extends plugin
     ksort($tmp);
     foreach($tmp as $value){
       if(isset($value["description"][0])){
-        $this->departments[$value['dn']]= convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
+        $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
       }else{
-        $this->departments[$value['dn']]= convert_department_dn2($value['dn']);//$value["description"][0];
+        $this->departments[$value['dn']]= get_sub_department($value['dn']);//$value["description"][0];
       }
     }
 

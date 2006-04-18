@@ -208,8 +208,8 @@ class glpiSelectUser extends plugin
      * So we are able to navigate like in konquerer
      */
 
-    $res3 =  get_list2($this->ui->subtreeACL, "(&(|(ou=*)(description=*))(objectClass=gosaDepartment))",
-        TRUE, $base, array("ou", "description"), TRUE);
+    $res3= get_list("(&(|(ou=*)(description=*))(objectClass=gosaDepartment))",
+                    $this->ui->subtreeACL, $base, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
 
     $this->departments= array();
     $tmp = array();
@@ -219,17 +219,18 @@ class glpiSelectUser extends plugin
     ksort($tmp);
     foreach($tmp as $value){
       if(isset($value["description"][0])){
-        $this->departments[$value['dn']]= convert_department_dn2($value['dn'])." - [".$value["description"][0]."]";
+        $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
       }else{
-        $this->departments[$value['dn']]= convert_department_dn2($value['dn']);//$value["description"][0];
+        $this->departments[$value['dn']]= get_sub_department($value['dn']);//$value["description"][0];
       }
     }
 
     /* END NEW LIST MANAGMENT
      */
     $ou = get_people_ou();
-    $res2 = get_list($this->ui->subtreeACL, "(&(|(cn=$regex)(sn=$regex))(objectClass=person))",
-        TRUE,$ou.$base, array("cn","sn","uid","givenName", "description"), TRUE);
+    $res2= get_list("(&(|(cn=$regex)(sn=$regex))(objectClass=person))", $this->ui->subtreeACL,
+                    $ou.$base, array("cn", "sn", "uid", "givenName", "description"),
+                    GL_SUBSEARCH | GL_SIZELIMIT);
 
     $tmp = array();
 

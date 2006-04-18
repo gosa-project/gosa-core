@@ -77,7 +77,7 @@
 
 
 <p class="plugbottom">
-  <input type=submit name="edit_finish" value="{t}Finish{/t}">
+  <input type=submit name="edit_finish" value="{t}Save{/t}">
   &nbsp;
   <input type=submit name="edit_cancel" value="{t}Cancel{/t}">
 </p>

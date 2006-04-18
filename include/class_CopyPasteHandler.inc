@@ -1,4 +1,5 @@
 <?php
+//FIXME: Comments are somewhat off the normal comment usage
 
 class CopyPasteHandler {
 
@@ -161,6 +162,7 @@ class CopyPasteHandler {
           if($displayMessageOnSuccess){
             return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
           }else{
+            //FIXME: Types!!! Either use strings, or use bool. But don't mix it!
             return( false);
           }
         }
@@ -221,6 +223,25 @@ class CopyPasteHandler {
     }
 
     return($ret);
+  }
+
+  
+  function generatePasteIcon()
+  {
+    $Copy_Paste= "&nbsp;<img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;";
+    if($this->isCurrentObjectPastAble()){
+      if($this->isCurrentCutted()){
+        $img= "images/cutpaste.png";
+      }else{
+        $img= "images/copypaste.png";
+      }
+      $Copy_Paste.= "<input type='image' name='editPaste' class='center'
+        src='".$img."' alt='"._("Paste")."' title='".$this->GetCurrentDn()."'>&nbsp;";
+    }else{
+      $Copy_Paste.= "<img class='center' src='images/cant_editpaste.png' alt='"._("Can't paste")."'>&nbsp;";
+    }
+
+    return ($Copy_Paste);
   }
 
 }

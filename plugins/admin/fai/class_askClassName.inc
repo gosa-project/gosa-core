@@ -29,8 +29,8 @@ class askClassName extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     /* Fill templating stuff */
     $smarty = get_smarty();
@@ -50,13 +50,14 @@ class askClassName extends plugin
       $base = $faifilter['branch'];
     }
     $ldap = $this->config->get_ldap_link();
-    $res  = get_list($this->ui->subtreeACL, "(objectClass=organizationalUnit)",FALSE, $base, array("cn","description","objectClass"),TRUE);
+    $res= get_list("(objectClass=organizationalUnit)", $this->ui->subtreeACL, $base,
+                   array("cn","description","objectClass"), GL_SIZELIMIT);
     $used = array();
 
     $delete = array();
     foreach($res as $objecttypes){
-      $res2 = get_list2($this->ui->subtreeACL, "(objectClass=*)",
-          FALSE, $objecttypes['dn'], array("cn","description","objectClass","FAIclass"),TRUE);
+      $res2= get_list("(objectClass=*)", $this->ui->subtreeACL, $objecttypes['dn'],
+                      array("cn","description","objectClass","FAIclass"), GL_SIZELIMIT | GL_CONVERT);
 
       foreach($res2 as $object){
         /* skip class names with this name */ 

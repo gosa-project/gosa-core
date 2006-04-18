@@ -35,7 +35,7 @@
 </table>
 	<p class="seperator">&nbsp;</p>
 	<p align="right">
-	<input type="submit" name="HotPlugSave" 	value="{t}save{/t}">
+	<input type="submit" name="HotPlugSave" 	value="{t}Save{/t}">
 	<input type="submit" name="HotPlugCancel" 	value="{t}Cancel{/t}">
 	</p>
 <script language="JavaScript" type="text/javascript">
