@@ -218,6 +218,11 @@ class posixAccount extends plugin
 	plugin::execute();
   $display= "";
 
+  /* Department has changed? */
+  if(isset($_POST['depselect'])){
+    $_SESSION['CurrentMainBase']= validate($_POST['depselect']);
+  }
+
   if(!$isCopyPaste){
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
@@ -342,6 +347,7 @@ class posixAccount extends plugin
         $sysfilter['regex']= $s;
       }
       register_global("sysfilter", $sysfilter);
+      print_a($sysfilter);
 
       /* Get workstation list */
       $exclude= "";
@@ -396,7 +402,7 @@ class posixAccount extends plugin
 
       /* Save data */
       $groupfilter= get_global("groupfilter");
-      foreach( array("depselect", "guser", "regex") as $type){
+      foreach( array("guser", "regex") as $type){
         if (isset($_POST[$type])){
           $groupfilter[$type]= $_POST[$type];
         }
