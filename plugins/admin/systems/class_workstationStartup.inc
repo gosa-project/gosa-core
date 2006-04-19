@@ -231,8 +231,11 @@ class workstartup extends plugin
       } else {
         $fh= popen($command, "r");
         while (!feof($fh)) {
-          $buffer= fgets($fh, 256);
-          $this->gotoBootKernels[]= $buffer;
+          $buffer= trim(fgets($fh, 256));
+          
+          if ($buffer != ""){
+            $this->gotoBootKernels[preg_replace('/:.*$/', '', $buffer)]= $buffer;
+          }
         }
         pclose($fh);
         sort($this->gotoBootKernels);
