@@ -38,10 +38,6 @@ Target for 2.4.1:
 
 * Auto-Resize for subdialogs
 
-* template is not uploaded but downloadable
-
-* template is not found in LDAP anymore - even if present
-
 
 Target for 2.5:
 ===============
