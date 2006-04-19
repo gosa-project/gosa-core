@@ -1080,7 +1080,7 @@ class userManagement extends plugin
     } else {
       $filter= "(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(|$filter))";
     }
-    $filter= "(&(|(uid=".normalizePreg($regex).")(sn=".normalizePreg($regex).")(givenName=".normalizePreg($regex)."))$filter)";
+    $filter= "(&(|(uid=".$regex.")(sn=".$regex.")(givenName=".$regex."))$filter)";
 
     /* Generate userlist */
     $ldap= $this->config->get_ldap_link(TRUE);
