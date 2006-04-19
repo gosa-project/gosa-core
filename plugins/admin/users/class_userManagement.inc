@@ -124,9 +124,7 @@ class userManagement extends plugin
       
     } /* ...Test POST */
 
-    //FIXME: Remove trailing _what_? There seems to be something encoded in
-    //       the string right now, but it would be helpful to have informations
-    //       about it. I'd like to see quick code reading by other developers.
+    /* Remove coordinate prefix from POST, required by some browsers */
     $s_entry= preg_replace("/_.$/", "", $s_entry);
 
     /* Seperate possibly encoded tab and entry, default to tab "user" */
@@ -1082,8 +1080,7 @@ class userManagement extends plugin
     } else {
       $filter= "(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(|$filter))";
     }
-    //FIXME: Search filter will fail, if 'regex' contains filter special characters.
-    $filter= "(&(|(uid=$regex)(sn=$regex)(givenName=$regex))$filter)";
+    $filter= "(&(|(uid=".normalizePreg($regex).")(sn=".normalizePreg($regex).")(givenName=".normalizePreg($regex)."))$filter)";
 
     /* Generate userlist */
     $ldap= $this->config->get_ldap_link(TRUE);
@@ -1095,17 +1092,8 @@ class userManagement extends plugin
       $this->list= get_list($filter, $this->ui->subtreeACL, $base, 
                             array("uid", "givenName", "sn", "objectClass"), GL_SIZELIMIT);
     }
-
-    /* NEW LIST MANAGMENT
-     * We also need to search for the departments
-     * So we are able to navigate like in konquerer */
-     //FIXME: Same here - who cares? We need comments that make code reading
-     //       more easy. No prosa for things that are not important - or even
-     //       not readable below.
-     //FIXME: Repeatedly I see things like res1, res3, base2, etc. This is no
-     //       good coding style at all.
-
-    /* Create base to search in */
+    
+    /* Create base for department search */
     if(get_people_ou() == ""){
       $dep_base= $base;
     }else{
@@ -1115,25 +1103,12 @@ class userManagement extends plugin
     /* Get all departments within this subtree */
     $deps= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))", $this->ui->subtreeACL,
                     $dep_base, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
-
-    /* Create array with results */
-    //FIXME: Sure. Interesting. What the heck is happening here? Why do we
-    //       need so many loops to perform one action? $tmp is used below
-    //       maybe this is integratable? Why are lowercase and normal variants
-    //       perpended? Concepts other than "Create array with results"?
-    $tmp= array();
-    foreach ($deps as $value){
-      $tmp[strtolower($value['dn']).$value['dn']]= $value;
-    }
-
-    /* Sort array */
-    //FIXME: Which is implied by ksort, I guess.
-    ksort($tmp);
-
-    /* Create result array */
-    //FIXME: Didn't we do that above?
-    $this->departments= array();
-    foreach($tmp as $value){
+                    
+    /* sort deparmtents */
+    natcasesort($deps);
+    
+    /* Append deparments to class var and if available add description */
+    foreach($deps as $value){
       if(isset($value['description'][0])){
         $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
       }else{
