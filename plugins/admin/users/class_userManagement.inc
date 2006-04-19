@@ -1104,9 +1104,6 @@ class userManagement extends plugin
     $deps= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))", $this->ui->subtreeACL,
                     $dep_base, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
                     
-    /* sort deparmtents */
-    natcasesort($deps);
-    
     /* Append deparments to class var and if available add description */
     foreach($deps as $value){
       if(isset($value['description'][0])){
@@ -1116,6 +1113,7 @@ class userManagement extends plugin
       }
     }
 
+    natcasesort($this->departments);
   }
 
 
