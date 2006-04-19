@@ -100,27 +100,37 @@ class faiPackage extends plugin
       $this->usedPackages = array();
     }  
 
-    $ldap = $this->config->get_ldap_link();
+
+    /* Create one filter with all package names, 
+       instead of calling $ldap->search for every single package 
+     */
+    $PackageFilter = "";
     foreach($this->usedPackages as $name){
-      $ldap->search("(&(objectClass=FAIdebconfInfo)(FAIpackage=".$name."))",array("FAIvariable","FAIvariableType","FAIvariableContent","FAIpackage","FAIdebianSection",""));
-      while($attr = $ldap->fetch()){
+      $PackageFilter .= "(FAIpackage=".$name.")";
+    }
+    $PackageFilter = "(&(objectClass=FAIdebconfInfo)(|".$PackageFilter."))";
+    
+    /* Search for configuration objects */ 
+    $ldap = $this->config->get_ldap_link();
+    $ldap->search($PackageFilter,array("FAIvariable","FAIvariableType","FAIvariableContent","FAIpackage","FAIdebianSection"));
 
-        $tmp =array(); 
-        $tmp['Name']  = $attr['FAIvariable'][0];
-        $tmp['Type']  = $attr['FAIvariableType'][0];
+    /* Walk through configurations and append them to our list of ConfiguredPackages */
+    while($attr = $ldap->fetch()){
+      $tmp =array(); 
+      $tmp['Name']  = $attr['FAIvariable'][0];
+      $tmp['Type']  = $attr['FAIvariableType'][0];
 
-        if (isset($attr['FAIvariableContent'][0])){
-          if(!in_array($attr['FAIvariableType'],array("multiselect"))){
-            $tmp['Value'] = $attr['FAIvariableContent'][0];
-          }else{
-            $content = array();        
-            unset($attr['FAIvariableContent']['count']);
-            foreach($attr['FAIvariableContent'] as $attr){
-              $tmp['Value'][] = $attr;
-            }
+      if (isset($attr['FAIvariableContent'][0])){
+        if(!in_array($attr['FAIvariableType'],array("multiselect"))){
+          $tmp['Value'] = $attr['FAIvariableContent'][0];
+        }else{
+          $content = array();        
+          unset($attr['FAIvariableContent']['count']);
+          foreach($attr['FAIvariableContent'] as $attr){
+            $tmp['Value'][] = $attr;
           }
-          $this->ConfiguredPackages[$attr['FAIpackage'][0]][$attr['FAIvariable'][0]]=$tmp;
         }
+        $this->ConfiguredPackages[$attr['FAIpackage'][0]][$attr['FAIvariable'][0]]=$tmp;
       }
     }
 
