@@ -865,7 +865,7 @@ function is_phone_nr($nr)
     return (TRUE);
   }
 
-  return preg_match ("/^[0-9 ()+*-]+$/", $nr);
+  return preg_match ("/^[\/0-9 ()+*-]+$/", $nr);
 }
 
 
