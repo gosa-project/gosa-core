@@ -237,7 +237,7 @@ class workgeneric extends plugin
     if ($this->orig_dn != $this->dn){
       $ldap= $this->config->get_ldap_link();
       $ldap->cd ($this->base);
-      $ldap->search ("(cn=".$this->cn.")", array("cn"));
+      $ldap->search ("(&(cn=".$this->cn.")(objectClass=gotoWorkstation))", array("cn"));
       if ($ldap->count() != 0){
         while ($attrs= $ldap->fetch()){
           if (preg_match ("/,ou=incoming,/", $ldap->getDN())){
