@@ -1103,28 +1103,15 @@ class userManagement extends plugin
     /* Get all departments within this subtree */
     $deps= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))", $this->ui->subtreeACL,
                     $dep_base, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
-                    
-    /* Append deparments to class var and if available add description */
-    $tmp= array();
-    foreach ($deps as $value){
-      $tmp[strtolower($value['dn']).$value['dn']]= $value;
-    }
-
-    /* Sort array */
-    //FIXME: Which is implied by ksort, I guess.
-    ksort($tmp);
-
-    /* Create result array */
-    //FIXME: Didn't we do that above?
-    $this->departments= array();
-    foreach($tmp as $value){
+                 
+    $this->departments = array();
+    foreach($deps as $value){
       if(isset($value['description'][0])){
         $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
       }else{
         $this->departments[$value['dn']]= get_sub_department($value['dn']);
       }
     }
-
     natcasesort($this->departments);
   }
 
