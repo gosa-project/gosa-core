@@ -91,7 +91,7 @@ class printgeneric extends plugin
       $this->base= dn2base($ui->dn);
       $this->cn= "";
     } else {
-      $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,/", "", $this->dn);
+      $this->base= dn2base($this->dn);
     }
 
     /* Extract selected ppd */
@@ -582,7 +582,7 @@ class printgeneric extends plugin
       }
     }
 
-    $this->dn= "cn=".$this->cn.",ou=printers,ou=systems,".$this->base;
+    $dn= "cn=".$this->cn.",ou=printers,ou=systems,".$this->base;
 
     /* must: cn */
     if(($this->BelongsTo == "Printer") && (empty($this->cn))){
@@ -590,7 +590,7 @@ class printgeneric extends plugin
     }
 
     /* Check if there is already an entry with this cn*/
-    if (($this->orig_dn != $this->dn)&&($this->BelongsTo == "Printer")){
+    if (($this->orig_dn != $dn)&&($this->BelongsTo == "Printer")){
       $ldap= $this->config->get_ldap_link();
       $ldap->cd ($this->base);
       $ldap->ls("(cn=".$this->cn.")","ou=printers,ou=systems,".$this->base, array("cn"));
