@@ -594,7 +594,9 @@ class config  {
     $a_res = $ldap->search("(objectClass=goShareServer)",array("goExportEntry","cn"));
     $return= array();
     while($entry = $ldap->fetch($a_res)){
-      unset($entry['goExportEntry']['count']);
+      if(isset($entry['goExportEntry']['count'])){
+        unset($entry['goExportEntry']['count']);
+      }
       foreach($entry['goExportEntry'] as $share){
         $a_share = split("\|",$share);
         $sharename = $a_share[0];
