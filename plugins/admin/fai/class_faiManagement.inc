@@ -902,27 +902,22 @@ class faiManagement extends plugin
 		 */
 		$base2 = $_SESSION['CurrentMainBase'];
 
-    $res3= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
-                    $this->ui->subtreeACL, $base2, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
+    /* Get all departments within this subtree */
+    $deps= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))", $this->ui->subtreeACL,
+        $base2, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
 
-		$this->departments= array();
-		$tmp = array();
-		foreach ($res3 as $value){
-			$tmp[strtolower($value['dn']).$value['dn']]=$value;
-		}
-		ksort($tmp);
-		foreach($tmp as $value){
-			if(isset($value["description"][0])){
-				$this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
-			}else{
-				$this->departments[$value['dn']]= get_sub_department($value['dn']);//$value["description"][0];
-			}
-		}
-
-		/* END NEW LIST MANAGMENT
+    $this->departments = array();
+    foreach($deps as $value){
+      if(isset($value['description'][0])){
+        $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
+      }else{
+        $this->departments[$value['dn']]= get_sub_department($value['dn']);
+      }
+    }
+    natcasesort($this->departments);
+		
+    /* END NEW LIST MANAGMENT
 		 */
-
-	
     $res= get_list("(objectClass=organizationalUnit)", $this->ui->subtreeACL, $base,
                    array("cn","description","objectClass"), GL_SIZELIMIT);
 

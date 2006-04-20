@@ -706,24 +706,19 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
       $base2 = preg_replace("/".$peopleOU."/i","",$base);
     }
 
-    $res3= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
-                    $this->ui->subtreeACL, $base2, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
+    /* Get all departments within this subtree */
+    $deps= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))", $this->ui->subtreeACL,
+        $base2, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
 
-    $this->departments= array();
-    $tmp = array();
-    foreach ($res3 as $value){
-      $tmp[strtolower($value['dn']).$value['dn']]=$value;
-    }
-    ksort($tmp);
-    foreach($tmp as $value){
-      if(isset($value["description"][0])){
+    $this->departments = array();
+    foreach($deps as $value){
+      if(isset($value['description'][0])){
         $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
       }else{
-        $this->departments[$value['dn']]= get_sub_department($value['dn']);//$value["description"][0];
+        $this->departments[$value['dn']]= get_sub_department($value['dn']);
       }
     }
-    /* END NEW LIST MANAGMENT
-     */
+    natcasesort($this->departments);
 
     $tmp=array();
     foreach($this->ogrouplist as $tkey => $val ){
@@ -735,11 +730,7 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
       $this->ogrouplist[]=$val;
     }
     reset ($this->ogrouplist);
-
-
-
   }
-
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
