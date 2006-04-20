@@ -17,7 +17,7 @@ class workstartup extends plugin
   var $gotoFilesystem       = array();
   var $gotoTerminalPath     = "";
   var $FAIstatus            = "";
-  var $gotoBootKernels      = array("default" => "default");
+  var $gotoBootKernels      = array();
 
   /* attribute list for save action */
   var $attributes     = array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters", "FAIclass", "FAIstatus", "gotoShare","FAIdebianMirror", "FAIrelease");
@@ -220,6 +220,9 @@ class workstartup extends plugin
     }
 
     $this->orig_dn= $this->dn;
+
+    /* Handle inheritance value "default" */
+    $this->gotoBootKernels= array("%default%" => '['._("inherited").']');
 
     /* Get list of boot kernels */
     if (isset($this->config->data['TABS'])){
@@ -875,7 +878,10 @@ class workstartup extends plugin
     }
     /* Strip out 'default' values */
     if ($this->attrs['gotoLdapServer'] == "default"){
-      unset ($this->attrs['gotoLdapServer']);
+      $this->attrs['gotoLdapServer']= array();
+    }
+    if ($this->attrs['gotoBootKernel'] == "%default%"){
+      $this->attrs['gotoBootKernel']= array();
     }
 
     /* if mirror == none stop saving this attribute */
