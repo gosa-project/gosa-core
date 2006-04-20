@@ -51,6 +51,9 @@ class departmentManagement extends plugin
 			register_global("depfilter", $depfilter);
 		}
 		$base= get_base_from_people($ui->dn);
+		if(!isset($_SESSION['CurrentMainBase'])){
+			$_SESSION['CurrentMainBase'] = $this->config->current['BASE'];
+		}
 		$_SESSION['CurrentMainBase'] = $_SESSION['CurrentMainBase'];
 	}
 
