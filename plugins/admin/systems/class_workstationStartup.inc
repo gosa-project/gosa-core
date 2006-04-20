@@ -17,7 +17,7 @@ class workstartup extends plugin
   var $gotoFilesystem       = array();
   var $gotoTerminalPath     = "";
   var $FAIstatus            = "";
-  var $gotoBootKernels      = array("default");
+  var $gotoBootKernels      = array("default" => "default");
 
   /* attribute list for save action */
   var $attributes     = array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters", "FAIclass", "FAIstatus", "gotoShare","FAIdebianMirror", "FAIrelease");
@@ -238,10 +238,11 @@ class workstartup extends plugin
           }
         }
         pclose($fh);
-        sort($this->gotoBootKernels);
+        ksort($this->gotoBootKernels);
       }
       
     }
+
   }
 
   
