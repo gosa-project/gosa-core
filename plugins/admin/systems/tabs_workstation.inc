@@ -5,7 +5,25 @@ class worktabs extends tabs
 
   function worktabs($config, $data, $dn)
   {
-    tabs::tabs($config, $data, $dn);
+    /* Save dn */
+    $this->dn= $dn;
+    $this->config= $config;
+
+    foreach ($data as $tab){
+      if($tab['CLASS'] == "printgeneric"){
+        $this->by_name[$tab['CLASS']]= $tab['NAME'];
+        $this->by_object[$tab['CLASS']]= new $tab['CLASS']($this->config, $this->dn,$this);
+        $this->by_object[$tab['CLASS']]->parent= &$this;
+      }else{
+        $this->by_name[$tab['CLASS']]= $tab['NAME'];
+        $this->by_object[$tab['CLASS']]= new $tab['CLASS']($this->config, $this->dn);
+        $this->by_object[$tab['CLASS']]->parent= &$this;
+      }
+      /* Initialize current */
+      if ($this->current == ""){
+        $this->current= $tab['CLASS'];
+      }
+    }
   }
 
   function save_object($save_current= FALSE)

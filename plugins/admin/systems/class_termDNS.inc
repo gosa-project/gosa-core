@@ -282,7 +282,7 @@ class termDNS extends plugin
      */
     $tr = count(split(":",$this->macAddress));
     if($tr!=6){
-      $message[]=(_("The given macaddress is invalid. There must be 6 1byte segments seperated by ':'."));
+      $message[]=(_("The given macaddress is invalid. There must be 6 2byte segments seperated by ':'."));
     }
 
     /* only perfrom this checks if this is a valid DNS account */

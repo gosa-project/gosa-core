@@ -19,110 +19,91 @@ class printgeneric extends plugin
   var $labeledURI       = "";
   var $gotoPrinterPPD   = "";
   var $orig_dn          = "";
-  var $is_terminal      = false;
 
   var $UserMember       ="";
   var $UserMembers      =array();
   var $UserMemberKeys   =array();
-  
+
   var $AdminMember      ="";
   var $AdminMembers     =array();
   var $AdminMemberKeys  =array();
 
-  var $is_terminalBased = false; 
   var $gotoUserPrinter ;
-
   var $PPDdialogToSave  = NULL;
- 
+  var $BelongsTo        = "unknown"; //  Specifies if this is a standalone printer, or belongs to a terminal / WS
+
   var $member           =array();
   var $strings          = "";
-  var $type             = "";
   var $dialog           =NULL;
 
   var $netConfigDNS;
   var $baseSelection    = false;
-
   var $macAddress       = "";
 
   /* attribute list for save action */
   var $attributes     = array("cn", "description", "l", "labeledURI", "gotoPrinterPPD","gotoUserPrinter", "macAddress");
   var $objectclasses  = array("top", "gotoPrinter");
 
-  function printgeneric ($config, $dn= NULL)
+  function printgeneric ($config, $dn= NULL,$parent = NULL)
   {
-    plugin::plugin ($config, $dn);
-    $ldap= $this->config->get_ldap_link();
+    $this->config = $config;
+    $this->dn = $dn; 
     
-    $this->netConfigDNS = new termDNS($this->config, $this->dn,$this->objectclasses);
+    /* If parent was posted(the tabs object) we can detect the printer type. */
+    if($parent){
+      $this->parent = $parent;
+      $this->getTypeOfPrinter();
+    }else{
+      $this->BelongsTo = "unknown";
+      return;
+    }
 
+    /* Update dn, to ensure storing as printer instead of WS / terminal */
+    if($this->BelongsTo == "Terminal"){
+      $this->dn= preg_replace("/ou=terminals,/","ou=printers,",$this->dn);
+    }
+
+    if($this->BelongsTo == "Workstation"){
+      $this->dn= preg_replace("/ou=workstations,/","ou=printers,",$this->dn);
+    }
+
+    $this->orig_dn = $this->dn;
+
+    /* Get printer settings, possibly dn has changed */
+    plugin::plugin ($config, $this->dn);
+
+    /* Get is_account initially_was_account status */
+    $this->getTypeOfPrinter(true);
+
+    /* set orig dn to new if object is new */
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cat($this->dn);
+    if(!$ldap->count()){
+      $this->orig_dn = "new";
+    }
+    
+    /* create dns object */
+    $this->netConfigDNS = new termDNS($this->config, $this->dn,$this->objectclasses);
 
     /* Set base */
     if ($this->dn == "new"){
       $ui= get_userinfo();
       $this->base= dn2base($ui->dn);
       $this->cn= "";
-      $this->is_terminal = true;
     } else {
       $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,/", "", $this->dn);
     }
 
+    /* Extract selected ppd */
     if(isset($this->gotoPrinterPPD)){
       $this->gotoPrinterPPD = preg_replace("/^http.*ppd\//i","",$this->gotoPrinterPPD);
     }
 
-    /* In case of gotoWorkstation this tab is calles from workstation plugin
-     * in case of gotoTerminal it is called from a terminal tab
-     * else it is a standalone printer
-     */
-    if((isset($this->attrs['objectClass']))&&(in_array("gotoWorkstation",$this->attrs['objectClass']))){
-      /* Fix for new Workstations */
-      if(preg_match("/ou=incoming/",$this->dn)){    
-        $this->is_terminal = "true";   
-        $this->dn   = preg_replace("/ou=incoming/","ou=printers",$this->dn);
-        $this->type = "station";
-      }else{
-        $this->is_terminal = "true";   
-        $this->dn   = preg_replace("/ou=workstations/","ou=printers",$this->dn);
-        $this->type = "station";
-      }
-    }elseif((isset($this->attrs['objectClass']))&&(in_array("gotoTerminal",$this->attrs['objectClass']))){
-      if(preg_match("/ou=incoming/",$this->dn)){    
-        $this->is_terminal = "true";   
-        $this->dn   = preg_replace("/ou=incoming/","ou=printers",$this->dn);
-        $this->type = "terminal";
-      }else{
-        $this->type = "terminal";
-        $this->is_terminal = "true";
-        $this->dn   = preg_replace("/ou=terminals/","ou=printers",$this->dn);
-      }
-    }else{
-      /* Save dn for later references */
-      $this->orig_dn= $this->dn;
-    }
-
-    /* If it is no standalone printer 
-     */
-    if($this->is_terminal){
-      // Reload plugin with new dn... (ou=printers instead of ou=terminals)
-      plugin::plugin ($this->config, $this->dn);
-      $ldap->cat($this->dn);
-      if(count($ldap->fetch())>0){
-        $this->orig_dn= $this->dn;
-        $this->is_account=true;
-        $this->initially_was_account = true;
-      }else{
-        $this->orig_dn = "new";
-        $this->is_account=false;
-        $this->initially_was_account = false;
-      }
-    }
-
-    /* Prepare different member types 
-     */ 
+    /* Prepare different member types */ 
     foreach(array("AddUser"       =>"gotoUserPrinter",
-                  "AddGroup"      =>"gotoGroupPrinter",
-                  "AddAdminUser"  =>"gotoUserAdminPrinter",
-                  "AddAdminGroup" =>"gotoGroupAdminPrinter") as $type => $attr){
+          "AddGroup"      =>"gotoGroupPrinter",
+          "AddAdminUser"  =>"gotoUserAdminPrinter",
+          "AddAdminGroup" =>"gotoGroupAdminPrinter") as $type => $attr){
 
       /* $this->members contains all members */
       $this->member[$type]=array();
@@ -149,64 +130,130 @@ class printgeneric extends plugin
         }
       }
     }
-  
-    $ldap->search("(&(cn=".$this->cn.")(|(objectClass=gotoTerminal)(objectClass=gotoWorkstation)))",array("cn","objectClass"));
-    if($attrs = $ldap->fetch()){
-      if(in_array("gotoTerminal",$attrs['objectClass'])){
-        $this->is_terminalBased = "Terminal";
+  }
+
+
+  /* Detect type of printer.
+   * Printer can be stand alone, belong to a workstation or belong to a terminal. 
+   * We can detect the type printer type when comparing the tabs objects
+   */
+  function getTypeOfPrinter($UpdateAccountStatus = false)
+  {
+    /* Disable account as default
+     */  
+    $this->is_account = $this->initially_was_account = false;
+
+    /* Detect type of printer via parent tabs.
+     */
+    if(isset($this->parent->by_name['workgeneric'])){
+
+      /* Exclude templates 
+       */
+      $this->cn = $this->parent->by_name['workgeneric']->cn;
+      if($this->parent->by_object['workgeneric']->cn == "wdefault"){
+        $this->BelongsTo = "WorkstationTemplate";
       }else{
-        $this->is_terminalBased = "Workstation";
+        $this->BelongsTo = "Workstation";
       }
+    }elseif(isset($this->parent->by_name['termgeneric'])){
+
+      /* Exclude templates 
+       */
+      $this->cn = $this->parent->by_name['termgeneric']->cn;
+      if($this->parent->by_object['termgeneric']->cn == "default"){
+        $this->BelongsTo = "TerminalTemplate";  
+      }else{
+        $this->BelongsTo = "Terminal";
+      }
+    }elseif(isset($this->parent->by_name['printgeneric'])){
+      $this->BelongsTo  = "Printer";
     }
 
-    /* A printer was only saved if the printer belongs to a workstation. 
-     * If there was a new single printer created, it was never saved.
-     * -This allows new printers to be saved.
-     */
-    if(($this->dn == "new")&&(!$this->is_terminal)){
-      $this->is_account = true;
+    if($UpdateAccountStatus){
+
+      /* Set is_account / was account 
+       */
+      if($this->dn == "new"){
+        $this->initially_was_account = false;
+      }
+
+      /* If is printer it must be a true account.
+       */
+      if($this->BelongsTo == "Printer"){
+        $this->is_account = true;
+      }
+
+      /* Update dn, to ensure storing as printer instead of WS / terminal
+       */
+      if($this->BelongsTo == "Terminal"){
+        $this->dn= preg_replace("/ou=terminals,/","ou=printers,",$this->dn);
+      }
+
+      if($this->BelongsTo == "Workstation"){
+        $this->dn= preg_replace("/ou=workstations,/","ou=printers,",$this->dn);
+      }
+
+      /* Detect if this is a valid printer account;
+       */
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cd($this->config->current['BASE']);
+      $ldap->cat($this->dn);
+
+      if($ldap->count()){
+        $attrs = $ldap->fetch();
+        if(in_array("gotoPrinter",$attrs['objectClass'])){
+          $this->initially_was_account = true;
+          $this->is_account             = true;
+        }else{
+          $this->is_account = false;
+        }
+      }
     }
   }
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
-    if(isset($this->parent->by_name['workgeneric'])){
-//      echo "workstation";
-      if($this->parent->by_object['workgeneric']->cn == "wdefault"){
-        $display= $this->show_header(_("Add printer extension"),
-            _("This is a workstation template, printer tab is disabled."),TRUE,TRUE);
-        $this->is_account= false;
-        return $display;
-      }
-    }elseif(isset($this->parent->by_name['termgeneric'])){
-      if($this->parent->by_object['termgeneric']->cn == "default"){
-        $display= $this->show_header(_("Add printer extension"),
-            _("This is a terminal template, printer tab is disabled."),TRUE,TRUE);
-        $this->is_account= false;
-        return $display;
-      }
-    }elseif(isset($this->parent->by_name['printgeneric'])){
-//      echo "printer";
+    /* If type of printer couldn't be detected (because of missing parent object in construcktion) 
+     * hide this tab.
+     */
+    if($this->BelongsTo == "unknown"){
+      $display= $this->show_header(_("Add printer extension"),
+          _("Could not intialise printer tab, parameter parent was missing while construcktion."),TRUE,TRUE);
+      return($display);
     }
 
+    /* Templates can't have printer extensions 
+     */
+    if($this->BelongsTo == "WorkstationTemplate"){
+      $display= $this->show_header(_("Add printer extension"),
+          _("This is a workstation template, printer tab is disabled."),TRUE,TRUE);
+      return($display);
+    }
+    if($this->BelongsTo == "TerminalTemplate"){
+      $display= $this->show_header(_("Add printer extension"),
+          _("This is a terminal template, printer tab is disabled."),TRUE,TRUE);
+      return($display);
+    }
+
+    /* Get cn from base object */
+    if($this->BelongsTo == "Workstation"){
+      $this->cn = $this->parent->by_object['workgeneric']->cn;
+    }
+    if($this->BelongsTo == "Terminal"){
+      $this->cn = $this->parent->by_object['termgeneric']->cn;
+    }
 
     $smarty= get_smarty();
     $display="";
-    /* Template management.
-     * There are two ways to call this tab.
-     * 1. From a printer Dialog, here we will see the full template, without a toggle state button
-     * 2. As a terminal tab, here we hide the top (name,base,description) of the template. 
-     *    Toggle Account state will be shown in this case, to disable or enable this tab.
-     *
-     * $this->is_terminal indecates this two different types.
-     */
-    if($this->is_terminal){    
-      $smarty->assign("is_terminal","true");
+
+    /* Tell smarty if this is a standalone object or a terminal / WS depending printer */
+    if($this->BelongsTo == "Printer"){    
+      $smarty->assign("StandAlone",true);
     }else{
-      $smarty->assign("is_terminal","false");
+      $smarty->assign("StandAlone",false);
     }
 
     /* Do we need to flip is_account state? */
@@ -215,38 +262,39 @@ class printgeneric extends plugin
       $this->is_account= !$this->is_account;
     }
 
-    if($this->is_terminal){
-      if(empty($this->cn)){
-        if(!in_array("gotoPrinter",$this->objectclasses)){
-          $display= $this->show_header(_("Add printer extension"),
-              _("This workstation has printer extension disabled. You can't enable it while 'cn' is not present in entry. Possibly you are currently creating a new terminal template"),TRUE,TRUE);
-          $this->is_account= false;
-          return $display;
-        }else{
-          $smarty->assign("is_terminal","false");
-          $skip = true;
-        }
+    /* Do we represent a valid printer? */
+    if (!$this->is_account && $this->parent == NULL){
+      $display= "<img alt=\"\" src=\"images/stop.png\" align=middle>&nbsp;<b>".
+        _("This 'dn' has no printer features.")."</b>";
+      return($display);
+    }
+
+    /* If this is a WS / Terminal depending printer, display account state button */
+    if($this->BelongsTo != "Printer"){
+      if((empty($this->cn)) && ($this->dn != "new")){
+        $display= $this->show_header(_("Add printer extension"),
+            _("This obejct has printer extension disabled. You can't enable it while 'cn' is not present in entry. Possibly you are currently creating a new terminal template"),TRUE,TRUE);
+        $this->is_account= false;
+        return $display;
       }
 
-      if(!isset($skip)){
-        if (($this->is_account)){
-          if($this->type=="station"){
-            $display= $this->show_header(_("Remove printer extension"),
-                _("This workstation has printer extension enabled.You can disable it by clicking below."));
-          }else{
-            $display= $this->show_header(_("Remove printer extension"),
-                _("This terminal has printer extension enabled. You can disable it by clicking below."));
-          }
-        }else{
-          if($this->type=="station"){
-            $display= $this->show_header(_("Add printer extension"),
-                _("This workstation has printer extension disabled. You can enable it by clicking below."));
-          }else{
-            $display= $this->show_header(_("Add printer extension"),
-                _("This terminal has printer extension disabled. You can enable it by clicking below."));
-          }  
-          return ($display);
+      if (($this->is_account)){
+        if($this->BelongsTo=="Workstation"){
+          $display= $this->show_header(_("Remove printer extension"),
+              _("This workstation has printer extension enabled.You can disable it by clicking below."));
+        }elseif($this->BelongsTo=="Terminal"){
+          $display= $this->show_header(_("Remove printer extension"),
+              _("This terminal has printer extension enabled. You can disable it by clicking below."));
         }
+      }else{
+        if($this->BelongsTo=="Workstation"){
+          $display= $this->show_header(_("Add printer extension"),
+              _("This workstation has printer extension disabled. You can enable it by clicking below."));
+        }elseif($this->BelongsTo=="Terminal"){
+          $display= $this->show_header(_("Add printer extension"),
+              _("This terminal has printer extension disabled. You can enable it by clicking below."));
+        }  
+        return ($display);
       }
     }
 
@@ -261,9 +309,10 @@ class printgeneric extends plugin
       }
     }
 
-    /* Dialog handling */
+    /* Dialog handling for base select dialog
+     * Check if base was selected, dialog aborted etc */
     if(is_object($this->dialog)){
-      /* Must be called before save_object */
+
       $this->dialog->save_object();
       if($this->baseSelection){
         if($this->dialog->isClosed()){
@@ -277,13 +326,6 @@ class printgeneric extends plugin
           return($this->dialog->execute());
         }
       }
-    }
-
-    /* Do we represent a valid printer? */
-    if (!$this->is_account && $this->parent == NULL){
-      $display= "<img alt=\"\" src=\"images/stop.png\" align=middle>&nbsp;<b>".
-        _("This 'dn' has no printer features.")."</b>";
-      return($display);
     }
 
     /* Fill templating stuff */
@@ -309,6 +351,7 @@ class printgeneric extends plugin
       $this->dialog = new selectUserToPrinterDialog($this->config, get_userinfo(),"AddAdminGroup");
     }
 
+    /* Display ppd configure/select dialog      */
     if(isset($_POST['EditDriver'])){
       if($this->PPDdialogToSave){
         $this->dialog = $this->PPDdialogToSave;
@@ -317,16 +360,19 @@ class printgeneric extends plugin
       }
     }
 
-    if(isset($_POST['PrinterCancel'])){
-      unset($this->dialog);
-      $this->dialog= NULL;
-    }
-    
+    /* remove ppd */
     if(isset($_POST['RemoveDriver'])){
       $this->gotoPrinterPPD = array();
       $this->PPDdialogToSave = NULL;
     }
 
+    /* Close ppd dialog */
+    if(isset($_POST['ClosePPD'])){
+      unset($this->dialog);
+      $this->dialog=NULL;
+    }
+
+    /* Save selected ppd */
     if(isset($_POST['SavePPD'])){
       $this->dialog->save_object();
       if(count($this->dialog->check())){
@@ -335,22 +381,14 @@ class printgeneric extends plugin
         }
       }else{
         $this->gotoPrinterPPD = array();
-        
         $this->gotoPrinterPPD = $this->dialog->save();
         $this->PPDdialogToSave = $this->dialog;
         unset($this->dialog);
         $this->dialog=NULL;
       }
-
     }
 
-    if(isset($_POST['ClosePPD'])){
-      unset($this->dialog);
-      $this->dialog=NULL;
-    }
-
-  
-
+    /* Member management, delete user / group / admin ..*/
     if((isset($_POST['DelUser']))&&(isset($_POST['UserMember']))){
       if(isset($this->member['AddUser'][$_POST['UserMember']])){
         unset($this->member['AddUser'][$_POST['UserMember']]);
@@ -375,6 +413,13 @@ class printgeneric extends plugin
       }
     }
 
+    /* Abort user / group adding dialog */
+    if(isset($_POST['PrinterCancel'])){
+      unset($this->dialog);
+      $this->dialog= NULL;
+    }
+
+    /* Save selected users / groups */
     if(isset($_POST['PrinterSave'])){
       $this->dialog->save_object();
       if(count($this->dialog->check())){
@@ -400,14 +445,15 @@ class printgeneric extends plugin
       }
     }
 
+    /* Display dialog, if there is currently one open*/
     if($this->dialog != NULL){
       $this->dialog->save_object();
       $display = $this->dialog->execute();
       return $display;
     }
 
+    /* Parse selected ppd file */
     require_once ("class_ppdManager.inc");
-
     if((isset($_SESSION['config']->data['MAIN']['PPD_PATH']))&&(is_dir($_SESSION['config']->data['MAIN']['PPD_PATH']))){
 
       $path = $_SESSION['config']->data['MAIN']['PPD_PATH'];
@@ -429,15 +475,16 @@ class printgeneric extends plugin
       $smarty->assign("driverInfo",_("can't get ppd informations."));
     }
 
-
+    /* Create user & admin user list */
     $list=$this->generateList();
     $userlist   = array_merge($list['AddUser'],$list['AddGroup']);
     $adminlist  = array_merge($list['AddAdminUser'],$list['AddAdminGroup']);
 
     asort($userlist);
     asort($adminlist);
-    if($this->is_terminalBased){
-      if($this->is_terminalBased == "Terminal"){
+
+    if($this->BelongsTo != "Printer"){
+      if($this->BelongsTo == "Terminal"){
         $smarty->assign("desc"    ,sprintf(_("This printer belongs to terminal %s. You can't rename this printer."),"<b>".$this->cn."</b>"));
       }else{
         $smarty->assign("desc"    ,sprintf(_("This printer belongs to workstation %s. You can't rename this printer."),"<b>".$this->cn."</b>"));
@@ -460,27 +507,52 @@ class printgeneric extends plugin
 
   function remove_from_parent()
   {
+    /* Only remove if there was initially an account */
     if($this->initially_was_account){
+
+      /* Update dn, to ensure storing as printer instead of WS / terminal
+       */
+      if($this->BelongsTo == "Terminal"){
+        $this->dn= preg_replace("/ou=terminals,/","ou=printers,",$this->dn);
+      }
+
+      if($this->BelongsTo == "Workstation"){
+        $this->dn= preg_replace("/ou=workstations,/","ou=printers,",$this->dn);
+      }
+
+      /* Check if this dn points to a printer, to avoid deleting something else */
       $ldap= $this->config->get_ldap_link();
       $ldap->cat($this->dn);
-      if(count($ldap->fetch()) ){
+      if(!$ldap->count()){
+        print_red("Trying to remove printer obejct which isn't a printer. Aborted to avoid data loss.");
+        return;
+      }
 
-        $this->netConfigDNS->remove_from_parent();
-        $ldap->rmdir($this->dn);
-        show_ldap_error($ldap->get_error());
-        $this->handle_post_events("remove");
+      /* Check if obejct is a printer */
+      $CheckPrinter = $ldap->fetch();
+      if(!in_array("gotoPrinter",$CheckPrinter['objectClass'])){
+        print_red("Trying to remove printer obejct which isn't a printer. Aborted to avoid data loss.");
+        return;
+      }
 
-        /* Delete references to object groups */
-        $ldap->cd ($this->config->current['BASE']);
-        $ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))", array("cn"));
-        while ($ldap->fetch()){
-          $og= new ogroup($this->config, $ldap->getDN());
-          unset($og->member[$this->dn]);
-          $og->save ();
-        }
+      /* Remove account & dns extension */ 
+      $this->netConfigDNS->remove_from_parent();
+      $ldap->rmdir($this->dn);
+      show_ldap_error($ldap->get_error());
+      $this->handle_post_events("remove");
+
+      /* Delete references to object groups */
+      $ldap->cd ($this->config->current['BASE']);
+      $ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))", array("cn"));
+      while ($ldap->fetch()){
+        $og= new ogroup($this->config, $ldap->getDN());
+        unset($og->member[$this->dn]);
+        $og->save ();
       }
     }
   }
+
+
   /* Save data to object */
   function save_object()
   {
@@ -499,6 +571,7 @@ class printgeneric extends plugin
     $message= plugin::check();
     $message= array_merge($message, $this->netConfigDNS->check());
 
+    /* Don't display check messages if this is a template object */
     if(isset($this->parent->by_name['workgeneric'])){
       if($this->parent->by_object['workgeneric']->cn == "wdefault"){
         return $message;
@@ -512,21 +585,15 @@ class printgeneric extends plugin
     $this->dn= "cn=".$this->cn.",ou=printers,ou=systems,".$this->base;
 
     /* must: cn */
-    if ($this->cn == "" && chkacl ($this->acl, "cn") == ""){
+    if(($this->BelongsTo == "Printer") && (empty($this->cn))){
       $message[]= "The required field 'Printer name' is not set.";
     }
 
-    $ui= get_userinfo();
-    $acl= get_permissions ($this->dn, $ui->subtreeACL);
-    $acl= get_module_permission($acl, "printer", $this->dn);
-    if (chkacl($acl, "create") != ""){
-      $message[]= _("You have no permissions to create a printer on this 'Base'.");
-    }
-
-    if (($this->orig_dn != $this->dn)&&(!$this->is_terminal)){
+    /* Check if there is already an entry with this cn*/
+    if (($this->orig_dn != $this->dn)&&($this->BelongsTo == "Printer")){
       $ldap= $this->config->get_ldap_link();
       $ldap->cd ($this->base);
-      $ldap->search ("(cn=".$this->cn.")", array("cn"));
+      $ldap->ls("(cn=".$this->cn.")","ou=printers,ou=systems,".$this->base, array("cn"));
       if ($ldap->count() != 0){
         while ($attrs= $ldap->fetch()){
           if ($attrs['dn'] != $this->orig_dn){
@@ -544,9 +611,17 @@ class printgeneric extends plugin
   /* Save to LDAP */
   function save()
   {
-    if (!$this->is_account){
-      return;
+    /* Update dn, to ensure storing as printer instead of WS / terminal
+     */
+    if($this->BelongsTo == "Terminal"){
+      $this->dn= preg_replace("/ou=terminals,/","ou=printers,",$this->dn);
     }
+
+    if($this->BelongsTo == "Workstation"){
+      $this->dn= preg_replace("/ou=workstations,/","ou=printers,",$this->dn);
+    }
+    
+    if(!$this->is_account) return;
     if(isset($this->parent->by_name['workgeneric'])){
       if($this->parent->by_object['workgeneric']->cn == "wdefault"){
         return;
@@ -557,36 +632,22 @@ class printgeneric extends plugin
       }
     }
 
+    /* If type is still unknown, the initialisation of this printer failed, abort. */
+    if($this->BelongsTo == "unknown"){
+      return;
+    }
+
+    /* save ppd configuration */
     if($this->PPDdialogToSave){
       $this->PPDdialogToSave->save_ppd();
     }
+
     $dn= $this->dn;
     plugin::save();
     $ldap= $this->config->get_ldap_link();
-   
-    if((in_array("gotoTerminal",$this->attrs['objectClass']))){
-      $this->dn= preg_replace("/ou=terminals,/","ou=printers,",$this->dn);
-    }
-    
-    if((in_array("gotoWorkstation",$this->attrs['objectClass']))){
-      $this->dn= preg_replace("/ou=workstations,/","ou=printers,",$this->dn);
-    }
 
-    /* We are currently editing a Terminal, so we want to save a seperate printer which cn is the terminla cn 
-    */
-    if($this->is_terminal){
-      
-      /* reduce objectClasses to minimun */
-      $this->attrs['objectClass']= $this->objectclasses;
-
-      /* If a printer with the given dn exists, modify else create new one */
-      $ldap->cat($this->dn);
-      if($ldap->fetch()){
-        $this->orig_dn= $this->dn;
-      }else{
-        $this->orig_dn = "new";
-      }
-    }
+    /* reduce objectClasses to minimun */
+    $this->attrs['objectClass']= $this->objectclasses;
 
     /* Remove all empty values */
     if ($this->orig_dn == 'new'){
@@ -606,15 +667,12 @@ class printgeneric extends plugin
       $method="http://";
     }
   
-    if(!is_array($this->attrs['gotoPrinterPPD'])) {
-      $this->attrs['gotoPrinterPPD'] = $this->attrs['gotoPrinterPPD'];
-      $this->attrs['gotoPrinterPPD'] = $method.str_replace("//","/",$_SERVER['SERVER_NAME']."/ppd/".$this->attrs['gotoPrinterPPD']);
-    }
+    $this->attrs['gotoPrinterPPD'] = $method.str_replace("//","/",$_SERVER['SERVER_NAME']."/ppd/".$this->gotoPrinterPPD);
 
     /* Append printer user 
      */
-    if(is_string( $this->attrs['gotoUserPrinter'])){
-       $this->attrs['gotoUserPrinter']=array();
+    if((isset($this->attrs['gotoUserPrinter'])) && (is_string($this->attrs['gotoUserPrinter']))){
+      $this->attrs['gotoUserPrinter']=array();
     }
     foreach($this->member['AddUser'] as $mem){
       $this->attrs['gotoUserPrinter'][]=$mem['uid'][0];
@@ -631,7 +689,7 @@ class printgeneric extends plugin
     foreach($this->member['AddAdminUser'] as $mem){
       $this->attrs['gotoUserAdminPrinter'][]=$mem['uid'][0];
     }
-    
+
     /* Append printer admin group 
      */
     foreach($this->member['AddAdminGroup'] as $mem){
@@ -653,13 +711,14 @@ class printgeneric extends plugin
 
       $ldap->cd($this->dn);
       $this->cleanup();
-$ldap->modify ($this->attrs); 
+      $ldap->modify ($this->attrs); 
 
       $this->handle_post_events("modify");
     }
     show_ldap_error($ldap->get_error());
 
     $this->netConfigDNS->cn = $this->cn;
+    $this->netConfigDNS->dn = $this->dn;
     $this->netConfigDNS->save($this->dn);
 
     /* Optionally execute a command after we're done */

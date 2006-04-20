@@ -2,7 +2,7 @@
 <table summary="" width="100%">
 	<tr>
 		<td style="vertical-align:top; width:50%; border-right:1px solid #B0B0B0">
-{if $is_terminal ne 'true'}
+{if $StandAlone }
 			<h2>{t}General{/t}</h2>
 			<table summary="">
 			 <tr>
