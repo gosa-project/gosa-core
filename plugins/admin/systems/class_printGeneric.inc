@@ -145,27 +145,27 @@ class printgeneric extends plugin
 
     /* Detect type of printer via parent tabs.
      */
-    if(isset($this->parent->by_name['workgeneric'])){
+    if(isset($this->parent->by_object['workgeneric'])){
 
       /* Exclude templates 
        */
-      $this->cn = $this->parent->by_name['workgeneric']->cn;
+      $this->cn = $this->parent->by_object['workgeneric']->cn;
       if($this->parent->by_object['workgeneric']->cn == "wdefault"){
         $this->BelongsTo = "WorkstationTemplate";
       }else{
         $this->BelongsTo = "Workstation";
       }
-    }elseif(isset($this->parent->by_name['termgeneric'])){
+    }elseif(isset($this->parent->by_object['termgeneric'])){
 
       /* Exclude templates 
        */
-      $this->cn = $this->parent->by_name['termgeneric']->cn;
+      $this->cn = $this->parent->by_object['termgeneric']->cn;
       if($this->parent->by_object['termgeneric']->cn == "default"){
         $this->BelongsTo = "TerminalTemplate";  
       }else{
         $this->BelongsTo = "Terminal";
       }
-    }elseif(isset($this->parent->by_name['printgeneric'])){
+    }elseif(isset($this->parent->by_object['printgeneric'])){
       $this->BelongsTo  = "Printer";
     }
 
@@ -572,11 +572,11 @@ class printgeneric extends plugin
     $message= array_merge($message, $this->netConfigDNS->check());
 
     /* Don't display check messages if this is a template object */
-    if(isset($this->parent->by_name['workgeneric'])){
+    if(isset($this->parent->by_object['workgeneric'])){
       if($this->parent->by_object['workgeneric']->cn == "wdefault"){
         return $message;
       }
-    }elseif(isset($this->parent->by_name['termgeneric'])){
+    }elseif(isset($this->parent->by_object['termgeneric'])){
       if($this->parent->by_object['termgeneric']->cn == "default"){
         return $message;
       }
@@ -622,11 +622,11 @@ class printgeneric extends plugin
     }
     
     if(!$this->is_account) return;
-    if(isset($this->parent->by_name['workgeneric'])){
+    if(isset($this->parent->by_object['workgeneric'])){
       if($this->parent->by_object['workgeneric']->cn == "wdefault"){
         return;
       }
-    }elseif(isset($this->parent->by_name['termgeneric'])){
+    }elseif(isset($this->parent->by_object['termgeneric'])){
       if($this->parent->by_object['termgeneric']->cn == "default"){
         return;
       }
