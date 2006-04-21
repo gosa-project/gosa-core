@@ -103,15 +103,15 @@ if ($_SERVER["REQUEST_METHOD"] != "POST"){
 
 /* Check for SSL connection */
 $ssl= "";
-if (!isset($HTTP_SERVER_VARS['HTTPS']) ||
-    !stristr($HTTP_SERVER_VARS['HTTPS'], "on")) {
+if (!isset($_SERVER['HTTPS']) ||
+    !stristr($_SERVER['HTTPS'], "on")) {
 
-  if (empty($HTTP_SERVER_VARS['REQUEST_URI'])) {
-    $ssl= "https://".$HTTP_SERVER_VARS['HTTP_HOST'].
-      $HTTP_SERVER_VARS['PATH_INFO'];
+  if (empty($_SERVER['REQUEST_URI'])) {
+    $ssl= "https://".$_SERVER['HTTP_HOST'].
+      $_SERVER['PATH_INFO'];
   } else {
-    $ssl= "https://".$HTTP_SERVER_VARS['HTTP_HOST'].
-      $HTTP_SERVER_VARS['REQUEST_URI'];
+    $ssl= "https://".$_SERVER['HTTP_HOST'].
+      $_SERVER['REQUEST_URI'];
   }
 }
 
