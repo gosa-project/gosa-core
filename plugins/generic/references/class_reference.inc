@@ -154,11 +154,13 @@ class reference extends plugin
   function createContentString($classes)
   {
 	$result= "";
-  	foreach ($classes as $class){
-		if (isset($this->obtypes[$class])){
-			$result.= "<a><img alt=\"\" border=0 src='images/".$this->obtypes[$class]['image']."'>&nbsp;".$this->obtypes[$class]['text']."</a> ";
+  	if(!is_null($classes)) {
+		foreach ($classes as $class){
+			if (isset($this->obtypes[$class])){
+				$result.= "<a><img alt=\"\" border=0 src='images/".$this->obtypes[$class]['image']."'>&nbsp;".$this->obtypes[$class]['text']."</a> ";
+			}
 		}
-	}	
+	}
 	return (preg_replace('/ $/', '', $result));
   }
   
