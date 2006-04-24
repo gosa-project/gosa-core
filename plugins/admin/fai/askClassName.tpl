@@ -52,7 +52,7 @@
      <td>&nbsp;</td>
      <td>
       {t}Class name{/t}&nbsp;<select name="SelectedClass" title="{t}Choose class name{/t}" style="width:120px;" {$ClassNamesAvailable}>
-       {html_options values=$ClassNameKeys output=$ClassNames}
+       {html_options options=$ClassNames}
       </select>
      </td>
     </tr>

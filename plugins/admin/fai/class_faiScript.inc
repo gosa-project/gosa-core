@@ -247,11 +247,6 @@ class faiScript extends plugin
               "attach"=>"style='border-right: 0px;width:50px;text-align:right;'")));
     }
     $smarty->assign("Entry_divlist",$divlist->DrawList());
-    /* Divlist creation complete
-     */
-
-    $smarty->assign("SubObjects",$this->getList());
-    $smarty->assign("SubObjectKeys",array_flip($this->getList()));
 
     /* Magic quotes GPC, escapes every ' " \, to solve some security risks
      * If we post the escaped strings they will be escaped again

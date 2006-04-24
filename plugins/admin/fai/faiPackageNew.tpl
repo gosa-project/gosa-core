@@ -22,7 +22,7 @@
 	</td>
 	<td>
 		<select name="FAIdebianReleaseS" title="{t}Release{/t}">
-			{html_options options=$releases values=$releaseKeys selected=$release}
+			{html_options options=$releases selected=$release}
 		</select>
 	</td>
 </tr>

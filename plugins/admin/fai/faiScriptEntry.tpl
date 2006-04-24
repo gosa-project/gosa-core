@@ -36,7 +36,7 @@
 						</td>
 						<td>
 						    <select name="FAIpriority" title="{t}Choose a priority{/t}" {$FAIpriorityACL}>
-                				{html_options values=$FAIprioritys output=$FAIprioritys selected=$FAIpriority}
+                				{html_options options=$FAIprioritys selected=$FAIpriority}
             				</select>
 						</td>
 					</tr>

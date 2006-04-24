@@ -116,7 +116,6 @@ class faiVariable extends plugin
     if((isset($_POST['EditSubObject']))&&(isset($_POST['SubObject']))){
 
       $var = $_POST['SubObject'][0];
-    
       $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$var]);
       $this->dialog->acl = $this->acl;
       $_SESSION['objectinfo'] = $this->SubObjects[$var]['dn'];
@@ -188,7 +187,6 @@ class faiVariable extends plugin
     }
 
     $smarty->assign("SubObjects",$this->getList());
-    $smarty->assign("SubObjectKeys",array_flip($this->getList()));
 
       /* Magic quotes GPC, escapes every ' " \, to solve some security risks
      * If we post the escaped strings they will be escaped again

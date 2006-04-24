@@ -24,7 +24,7 @@ class faiVariableEntry extends plugin
   function faiVariableEntry ($config, $dn= NULL,$object=false)
   {
     plugin::plugin ($config, $dn);
-    if($dn != "new"){
+    if((isset($object['cn'])) && (!empty($object['cn']))){
       $this->orig_cn= $object['cn'];
       $this->dn=$object['dn'];
       foreach($object as $name=>$value){

@@ -829,7 +829,6 @@ class faiManagement extends plugin
 
     $branches = $this->getBranches();
     asort($branches);
-    $smarty->assign("branchKeys",array_flip($branches));
     $smarty->assign("branches",$branches);
     
 		$smarty->assign("faihead"		, $faihead);	

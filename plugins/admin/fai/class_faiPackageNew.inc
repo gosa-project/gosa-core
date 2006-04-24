@@ -49,7 +49,6 @@ class faiPackageNew extends plugin
     }
 
     $smarty->assign("releases"    ,$releases);
-    $smarty->assign("releaseKeys" ,array_flip($releases));
     $smarty->assign("release" ,$this->FAIdebianRelease);
     $smarty->assign("sections",$this->generateSections($sections));
 

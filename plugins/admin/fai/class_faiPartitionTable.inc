@@ -137,7 +137,14 @@ class faiPartitionTable extends plugin
       $this->dialog = new faiPartitionTableEntry($this->config,$this->dn,$usedDiskNames,$this->disks[$Udisk]); 
       $this->dialog->acl = $this->acl;
       $this->dialog->FAIstate = $this->FAIstate;
-      $_SESSION['objectinfo'] = $this->disks[$Udisk]['dn'];
+     
+      /* Set object info string, which will be displayed in plugin info line */ 
+      if(isset($this->disks[$Udisk]['dn'])){
+        $_SESSION['objectinfo'] = $this->disks[$Udisk]['dn'];
+      }else{
+        $_SESSION['objectinfo'] = "";
+      }
+    
       $this->is_dialog = true;
     }
 
@@ -240,7 +247,6 @@ class faiPartitionTable extends plugin
 
     $disks = $this->getDisks();
     $smarty->assign("disks"   ,$disks);
-    $smarty->assign("diskKeys",array_flip($disks));
     $display.= $smarty->fetch(get_template_path('faiPartitionTable.tpl', TRUE));
     return($display);
   }

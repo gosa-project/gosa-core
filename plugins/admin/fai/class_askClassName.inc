@@ -110,7 +110,6 @@ class askClassName extends plugin
       $smarty->assign("grey", "");
     }
     $smarty->assign("ClassNames", $used);
-    $smarty->assign("ClassNameKeys", $used);
     $display.= $smarty->fetch(get_template_path('askClassName.tpl', TRUE));
     return($display);
   }

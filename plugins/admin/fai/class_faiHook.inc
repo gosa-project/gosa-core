@@ -275,7 +275,6 @@ class faiHook extends plugin
      */
 
     $smarty->assign("SubObjects",$this->getList());
-    $smarty->assign("SubObjectKeys",array_flip($this->getList()));
 
     /* Magic quotes GPC, escapes every ' " \, to solve some security risks
      * If we post the escaped strings they will be escaped again

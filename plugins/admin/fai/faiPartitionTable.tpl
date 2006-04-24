@@ -38,7 +38,7 @@
 				<tr>
 					<td>
 						<select name="disks[]" title="{t}Choose a disk to delete or edit{/t}" style="width:100%" size="20" id="SubObject" multiple>
-							{html_options values=$diskKeys output=$disks}
+							{html_options options=$disks}
 						</select><br>
 						<input type="submit" name="AddDisk"     value="{t}Add{/t}"		title="{t}Add{/t}" {$cnACL}>
 						<input type="submit" name="EditDisk"    value="{t}Edit{/t}"    title="{t}Edit{/t}" >

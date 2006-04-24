@@ -34,7 +34,7 @@
 	  <td>
    	{t}Current release{/t}&nbsp;
 	<select name="select_branch" onChange="document.mainform.submit();">
-		{html_options values=$branchKeys output=$branches selected=$select_branch}
+		{html_options options=$branches selected=$select_branch}
 	</select>
 	  </td>
 	 </tr>
