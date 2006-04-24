@@ -569,18 +569,20 @@ class config  {
       if(isset($entry['goExportEntry']['count'])){
         unset($entry['goExportEntry']['count']);
       }
-      foreach($entry['goExportEntry'] as $export){
-        $shareAttrs = split("\|",$export);
-        if($listboxEntry) {
-          $return[$shareAttrs[0]."|".$entry['cn'][0]] = $shareAttrs[0]." - ".$entry['cn'][0];
-        }else{
-          $return[$shareAttrs[0]."|".$entry['cn'][0]]['server']       = $entry['cn'][0];
-          $return[$shareAttrs[0]."|".$entry['cn'][0]]['name']         = $shareAttrs[0];
-          $return[$shareAttrs[0]."|".$entry['cn'][0]]['description']  = $shareAttrs[1];
-          $return[$shareAttrs[0]."|".$entry['cn'][0]]['type']         = $shareAttrs[2];
-          $return[$shareAttrs[0]."|".$entry['cn'][0]]['charset']      = $shareAttrs[3];
-          $return[$shareAttrs[0]."|".$entry['cn'][0]]['path']         = $shareAttrs[4];
-          $return[$shareAttrs[0]."|".$entry['cn'][0]]['option']       = $shareAttrs[5];
+      if(isset($entry['goExportEntry'])){
+        foreach($entry['goExportEntry'] as $export){
+          $shareAttrs = split("\|",$export);
+          if($listboxEntry) {
+            $return[$shareAttrs[0]."|".$entry['cn'][0]] = $shareAttrs[0]." - ".$entry['cn'][0];
+          }else{
+            $return[$shareAttrs[0]."|".$entry['cn'][0]]['server']       = $entry['cn'][0];
+            $return[$shareAttrs[0]."|".$entry['cn'][0]]['name']         = $shareAttrs[0];
+            $return[$shareAttrs[0]."|".$entry['cn'][0]]['description']  = $shareAttrs[1];
+            $return[$shareAttrs[0]."|".$entry['cn'][0]]['type']         = $shareAttrs[2];
+            $return[$shareAttrs[0]."|".$entry['cn'][0]]['charset']      = $shareAttrs[3];
+            $return[$shareAttrs[0]."|".$entry['cn'][0]]['path']         = $shareAttrs[4];
+            $return[$shareAttrs[0]."|".$entry['cn'][0]]['option']       = $shareAttrs[5];
+          }
         }
       }
     }
