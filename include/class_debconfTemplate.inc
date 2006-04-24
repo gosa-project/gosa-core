@@ -53,9 +53,19 @@ class debconf
       $in_description        = FALSE;
       $got_local_description = FALSE;
 
+      /* get filename */
+      $filename= preg_replace("/\/+/", "/", $this->template_directory."/".$this->package.".templates");
+
+      /* Check if file is readable */
+      if (!is_file($filename) || !is_readable($filename)){
+        return(FALSE);
+      }
+
+      /* Open file and read content line by line */
       $fh= fopen($filename, 'r');
 
-      while (!feof($fh)){
+      /* While the file handle is valid && there is still data to read -> parse configuration file */
+      while ($fh && !feof($fh)){
         $line= fgets($fh, 1024);
 
         /* Reset description flag */
