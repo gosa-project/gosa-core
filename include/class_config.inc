@@ -593,7 +593,7 @@ class config  {
   function getShareServerList()
   {
     $ldap= $this->get_ldap_link();
-    $a_res = $ldap->search("(objectClass=goShareServer)",array("goExportEntry","cn"));
+    $a_res = $ldap->search("(&(objectClass=goShareServer)(goExportEntry=*))",array("goExportEntry","cn"));
     $return= array();
     while($entry = $ldap->fetch($a_res)){
       if(isset($entry['goExportEntry']['count'])){
