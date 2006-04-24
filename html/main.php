@@ -53,9 +53,9 @@ if (!isset($_SESSION['config'])){
 } 
 
 /* Reset errors */
-$_SESSION['errors']= "";
+$_SESSION['errors']             = "";
 $_SESSION['errorsAlreadyPosted']= array();
-$_SESSION['LastError']  ="";
+$_SESSION['LastError']          = "";
 
 /* Check for uniqe ip address */
 $ui= $_SESSION["ui"];

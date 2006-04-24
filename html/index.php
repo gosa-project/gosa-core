@@ -28,6 +28,11 @@ header("Content-type: text/html; charset=UTF-8");
 session_start ();
 $username= "";
 
+/* Reset errors */
+$_SESSION['errors']             = "";
+$_SESSION['errorsAlreadyPosted']= array();
+$_SESSION['LastError']          = "";
+
 /* Check if we need to run setup */
 if (!file_exists(CONFIG_DIR."/gosa.conf")){
   header("location:setup.php");
