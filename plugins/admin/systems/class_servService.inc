@@ -24,9 +24,9 @@ class servservice extends plugin
   /* attribute list for save action */
   var $ignore_account= TRUE;
   var $attributes       = array("goLdapBase","goXdmcpIsEnabled","goFontPath","goExportEntry","goTimeSource");
-  var $possible_objectclasses= array( "goShareServer", "goNtpServer", "goServer", "goLdapServer",
+  var $possible_objectclasses= array( "goShareServer", "goNtpServer", "goServer", "GOhard", "goLdapServer",
                                       "goTerminalServer", "goSyslogServer", "goCupsServer","goMailServer");
-  var $objectclasses    = array( "top","goServer"); 
+  var $objectclasses    = array( "top","goServer", "GOhard"); 
   var $additionaloc     = array( "goShareServer"     => array("goExportEntry"),
                                  "goNtpServer"     => array("goTimeSource"),
                                  "goLdapServer"    => array("goLdapBase"),

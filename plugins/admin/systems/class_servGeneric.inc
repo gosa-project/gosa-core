@@ -20,7 +20,7 @@ class servgeneric extends plugin
 
   /* attribute list for save action */
   var $attributes= array("cn", "description");
-  var $objectclasses= array("top", "goServer");
+  var $objectclasses= array("top", "GOhard", "goServer");
 
   var $netConfigDNS;
 
