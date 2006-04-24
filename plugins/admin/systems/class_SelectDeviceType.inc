@@ -31,7 +31,7 @@ class SelectDeviceType extends plugin
       $this->ObjectGroups[$attrs['dn']]= $attrs['cn'][0];
     }
 
-    $this->SystemTypes =array("server"=>_("Server"),"workstation"=>_("Workstation"),"terminal"=>_("Terminal"));
+    $this->SystemTypes =array("workstation"=>_("Workstation"), "terminal"=>_("Terminal"), "server"=>_("Server"));
   }
 
   function execute()
