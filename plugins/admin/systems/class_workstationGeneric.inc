@@ -49,13 +49,6 @@ class workgeneric extends plugin
   {
     plugin::plugin ($config, $dn);
     $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
-    /* Load available modes */
-    $ldap= $this->config->get_ldap_link();
-    $ldap->cd ($this->config->current['BASE']);
-    $ldap->search ("(objectClass=gotoInstallProfile)",array("cn"));
-    while ($attrs= $ldap->fetch()){
-      $this->modes[]= $attrs["cn"][0];
-    }
 
     /* Read arrays */
     foreach (array("ghNetNic", "ghIdeDev", "ghScsiDev") as $val){
