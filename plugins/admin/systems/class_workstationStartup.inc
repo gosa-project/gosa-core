@@ -798,7 +798,7 @@ class workstartup extends plugin
      * if we are currently editing from ogroup menu we use (array("gotWorkstationTemplate","GOhard", "FAIobject"))
      */
     if(isset($this->parent->by_object['ogroup'])){
-      $this->objectclasses = array("gotoWorkstationTemplate","GOhard", "FAIobject");
+      $this->objectclasses = array("gotoWorkstationTemplate", "FAIobject");
     }elseif(isset($this->parent->by_object['workgeneric'])){
       $this->objectclasses = array("GOhard", "FAIobject");
     }else{
@@ -913,7 +913,7 @@ class workstartup extends plugin
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
     $this->cleanup();
-$ldap->modify ($this->attrs); 
+    $ldap->modify ($this->attrs); 
 
     show_ldap_error($ldap->get_error());
     $this->handle_post_events("modify");

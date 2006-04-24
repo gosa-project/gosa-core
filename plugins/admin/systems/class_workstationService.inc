@@ -62,7 +62,6 @@ class workservice extends plugin
       "gotoXMouseType", "gotoXMouseport", "goFonHardware");
   var $objectclasses= array("GOhard");
 
-
   function workservice ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
@@ -293,6 +292,11 @@ class workservice extends plugin
   /* Save to LDAP */
   function save()
   {
+    /* remove objectclass GOhard if this is an ogroup tab */
+    if(isset($this->parent->by_object['ogroup'])){
+      $this->objectclasses = array();
+    }
+
     plugin::save();
 
     /* Strip out 'default' values */
