@@ -221,7 +221,7 @@ class printgeneric extends plugin
      */
     if($this->BelongsTo == "unknown"){
       $display= $this->show_header(_("Add printer extension"),
-          _("Could not intialise printer tab, parameter parent was missing while construcktion."),TRUE,TRUE);
+          _("Could not intialize printer tab, parameter parent was missing while construcktion."),TRUE,TRUE);
       return($display);
     }
 
@@ -273,7 +273,7 @@ class printgeneric extends plugin
     if($this->BelongsTo != "Printer"){
       if((empty($this->cn)) && ($this->dn != "new")){
         $display= $this->show_header(_("Add printer extension"),
-            _("This obejct has printer extension disabled. You can't enable it while 'cn' is not present in entry. Possibly you are currently creating a new terminal template"),TRUE,TRUE);
+            _("This object has printer extension disabled. You can't enable it while 'cn' is not present in entry. Possibly you are currently creating a new terminal template"),TRUE,TRUE);
         $this->is_account= false;
         return $display;
       }
