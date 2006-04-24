@@ -287,6 +287,7 @@ class group extends plugin
       }
       $regex= preg_replace('/[*]/', ".*", $gufilter['regex']);
       register_global("gufilter", $gufilter);
+
       $this->reload();
 
       /* Show dialog */
@@ -424,17 +425,25 @@ class group extends plugin
     $MaxUser = $this->OnlyShowFirstEntries;
 
     $gufilter= get_global("gufilter");
-    //FIXME: Why these multiple cd's? They are senseless.
-    $ldap->cd ($this->config->current['BASE']);
+   
+    /* Fix regex string */ 
+    $regex = normalizeLdap($gufilter['regex']);
+
+    /* Create filter */
+    $filter = "(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(!(uid=*$))(|(uid=".$regex.")(givenName=".$regex.")(sn=".$regex.")))";
+
     if($gufilter['SubSearchGroup']){
+      /* search in subtrees */
       $ldap->cd ($gufilter['dselect']);
-      $ldap->search("(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(!(uid=*$)))",array("uid", "sn","givenName"));
+      $ldap->search($filter, array("uid", "sn","givenName"));
     }else{
+      /* search in currently selected tree only */
       $ldap->cd (get_people_ou().$gufilter['dselect']);
-      $ldap->ls ("(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(!(uid=*$)))",get_people_ou().$gufilter['dselect'],array("uid", "sn", "givenName"));
+      $ldap->ls ($filter, get_people_ou().$gufilter['dselect'],array("uid", "sn", "givenName"));
     }
+   
+    /* create result array with givenName / sn and sort it  */ 
     $this->allusers= array();
-    
     $i = 0 ;
     while (($attrs= $ldap->fetch()) && ($i < $MaxUser)){
       $i ++;
@@ -445,13 +454,12 @@ class group extends plugin
         $this->allusers[$attrs["uid"][0]]= $attrs['uid'][0];
       }
     }
-  
+    natcasesort ($this->allusers);
+    reset ($this->allusers);
+
     if(($i == $MaxUser)){
       print_red(sprintf(_("Your search method returned more than '%s' users, only '%s' users are shown.") , $MaxUser,$MaxUser));
     }
-    
-    natcasesort ($this->allusers);
-    reset ($this->allusers);
 
     /* Fill memberlist */
     $this->members= array();
