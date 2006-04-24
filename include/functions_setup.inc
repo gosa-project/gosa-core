@@ -78,8 +78,8 @@ function schema_check($server, $admin, $password, $aff=0,$CalledByIndexPhP=false
       "gosaApplication"       => array("version" => "2.4", "class" => "appgroup","file" => "gosa.schema"),
       "gosaApplicationGroup"  => array("version" => "2.4", "class" => "appgroup","file" => "gosa.schema"),
 
-      "GOhard"                => array("version" => "2.4", "class" => "terminals","file" => "goto.schema"),
-      "gotoTerminal"          => array("version" => "2.0", "class" => "terminals","file" => "goto.schema"),
+      "GOhard"                => array("version" => "2.5", "class" => "terminals","file" => "goto.schema"),
+      "gotoTerminal"          => array("version" => "2.5", "class" => "terminals","file" => "goto.schema"),
       "goServer"              => array("version" => "2.4","class" => "server","file" => "goserver.schema"),
       "goTerminalServer"      => array("version" => "2.4", "class" => "terminals","file" => "goto.schema"),
       "goShareServer"           => array("version" => "2.4", "class" => "terminals","file" => "goto.schema"),
