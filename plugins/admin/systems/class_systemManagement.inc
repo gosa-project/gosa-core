@@ -233,16 +233,16 @@ class systems extends plugin
        */ 
       if($s_action == "SelectedSystemType") {
         $sw         = $s_entry;
-        $dn_backup  = $this->dn;
       }else{
         if(isset($_POST['system'])){
           $sw = $_POST['system'];
         }else{
           $sw = $s_entry;
         }
+        
+        $this->dn= "new";
       }
 
-      $this->dn= "new";
       $this->acl= array(":all");
 
       switch ($sw){
@@ -250,8 +250,6 @@ class systems extends plugin
           $this->systab= new termtabs($this->config,
               $this->config->data['TABS']['TERMTABS'], $this->dn);
           $this->systab->set_acl ($this->acl);
-          $this->systab->by_object['termgeneric']->cn= "default";
-          $this->systab->by_object['termservice']->cn= "default";
           $this->systab->by_object['termgeneric']->base = $_SESSION['CurrentMainBase'];  
           break;
 
@@ -259,8 +257,6 @@ class systems extends plugin
           $this->systab= new worktabs($this->config,
               $this->config->data['TABS']['WORKTABS'], $this->dn);
           $this->systab->set_acl ($this->acl);
-          $this->systab->by_object['workgeneric']->cn= "wdefault";
-          $this->systab->by_object['workservice']->cn= "default";
           $this->systab->by_object['workgeneric']->base = $_SESSION['CurrentMainBase'];  
           break;
 
@@ -293,43 +289,6 @@ class systems extends plugin
           break;
       }
      
-      /* 09.02.2006 ; New incoming handling ; hickert.
-       * We must create a NEW object of given system type (Posted from SelectDeviceType).
-       * But we have to use the same attributes as used in incoming object, thats
-       * what we do here. 
-       */ 
-      if($s_action == "SelectedSystemType"){
-    
-        /* Store some informations, to be able to add this object to 
-         * To specified objectgroup and delete incoming object
-         */
-        $_SESSION['SelectedSystemType']['dn']     = $this->dn;
-        $_SESSION['SelectedSystemType']['server'] = $s_entry;
-        $_SESSION['SelectedSystemType']['ogroup'] = $_POST['ObjectGroup'];
-        
-        /* restore dn */
-        $this->dn = $dn_backup;
-
-        /* Get properties from incoming object */
-        $ldap = $this->config->get_ldap_link();
-        $ldap->cd($this->dn);
-        $ldap->cat($this->dn);
-        $res = $ldap->fetch();
-      
-        /* Unset not needed attributes */
-        unset($res['dn']);
-        unset($res['objectClass']);
-    
-        /* Walk through all tabs and set attributes if available */
-        foreach($this->systab->by_object as $name => $value){
-          foreach($this->systab->by_object[$name]->attributes as $atr){
-            if((isset($value))&&(isset($res[$atr]))){
-              $this->systab->by_object[$name]->$atr = $res[$atr][0];
-            }
-          }
-        }
-      }
-  
       /* set base ... of current divlist position */
       $this->systab->base = $_SESSION['CurrentMainBase'];  
     }
@@ -340,7 +299,6 @@ class systems extends plugin
      ********************/
 
     /* User wants to edit data? */
-//    if ($s_action == "edit"){
     if (($s_action == "edit") && (!isset($this->systab->config))){
 
       $this->dn= $this->terminals[$s_entry]['dn'];
