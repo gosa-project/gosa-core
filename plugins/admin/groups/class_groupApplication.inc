@@ -165,11 +165,27 @@ class appgroup extends plugin
     /* Only diff if it is required 
      */
     $ret =array();
+  
+    /* If current release has changed */
     if($this->Release != $this->InitialRelease){
+  
+      /* Walk through all apps which are currently displayed */
       foreach($this->gosaMemberApplication[$this->curCatDir] as $entry){
+
+        /* If application is also available in new release, check if parameter differs */
         if(in_array($entry['App'],$this->AllAppsForRelease)){ 
-          $old = $this->AllAppsForReleaseParameter[$this->InitialRelease][$entry['App']];
-          $new = $this->AllAppsForReleaseParameter[$this->Release][$entry['App']];
+
+          $old = array();   // Old application parameter
+          $new = array();   // New parameters 
+
+          /* There are possibly no parameters specified */
+          if(isset($this->AllAppsForReleaseParameter[$this->InitialRelease][$entry['App']])){
+            $old = $this->AllAppsForReleaseParameter[$this->InitialRelease][$entry['App']];
+          }
+
+          if(isset($this->AllAppsForReleaseParameter[$this->Release][$entry['App']])){
+            $new = $this->AllAppsForReleaseParameter[$this->Release][$entry['App']];
+          }
 
           /*  Both (old & new) have no gosaApplicationParameter
            */
@@ -178,13 +194,13 @@ class appgroup extends plugin
 
             /* Both got gosaApplicationParameter
              */
-          }elseif((isset($old['gosaApplicationParameter'])) && (isset($new['gosaApplicationParameter'])))
-          if(array_differs($old['gosaApplicationParameter'],$new['gosaApplicationParameter'])){
-            $ret[$entry['App']]  = true;
-          }else{
-            $ret[$entry['App']]  = false;
+          }elseif((isset($old['gosaApplicationParameter'])) && (isset($new['gosaApplicationParameter']))){
+            if(array_differs($old['gosaApplicationParameter'],$new['gosaApplicationParameter'])){
+              $ret[$entry['App']]  = true;
+            }else{
+              $ret[$entry['App']]  = false;
+            }
           }
-
           /* Initialy had gosaApplicationParameter bot in new release not 
            */
         }elseif((isset($old['gosaApplicationParameter'])) && (!isset($new['gosaApplicationParameter']))){
