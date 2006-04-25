@@ -433,7 +433,13 @@ class group extends plugin
         $this->allusers[$attrs['uid'][0]]= $this->createResultName($attrs);
       } 
     }
-    
+  
+    /* check if all uids are resolved */
+    foreach ($this->memberUid as $value){
+      if(!isset($this->members[$value])){
+        $this->members[$value] =  _("! unknown id")." [".$value."]"; 
+      }
+    }  
 
     /* Create display list of users matching regex & filter 
      */
