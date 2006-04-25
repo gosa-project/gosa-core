@@ -211,7 +211,11 @@ class groupManagement extends plugin
       if(($s_action == "editPaste") || ($this->CopyPasteHandler->stillOpen())){
         $this->CopyPasteHandler->save_object();
         $this->CopyPasteHandler->SetVar("base",$_SESSION['CurrentMainBase']);
-        return($this->CopyPasteHandler->execute());
+        if($str = $this->CopyPasteHandler->execute()){
+          return( $str);
+        };
+        /* Ensure that the new object is shown in the list now */
+        $this->relaod();
       }
 
 
@@ -228,16 +232,6 @@ class groupManagement extends plugin
         $obj->set_acl($acl);
         $objNew->set_acl($acl);
         $this->CopyPasteHandler->Copy($obj,$objNew);
-  
-        foreach($this->CopyPasteHandler->current->by_object as $name => $obj){
-          foreach(array('is_account','gotoHotplugDevices','gotoLogonScripts',
-                'gotoProfileServers','gotoProfileFlag_C','gotoProfileFlag_L',
-                'gotoPrinter','useProfile','OrigCn','Categories') as $attr){
-            if(isset($obj->$attr)){
-              $this->CopyPasteHandler->current->by_object[$name]->$attr = $obj->$attr;
-            }
-          }
-        }
       }
 
 

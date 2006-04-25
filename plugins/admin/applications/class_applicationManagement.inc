@@ -246,7 +246,9 @@ class applicationManagement extends plugin
         $this->CopyPasteHandler->save_object();
         $this->CopyPasteHandler->SetVar("base", $_SESSION['CurrentMainBase']);
 
-        return($this->CopyPasteHandler->execute());
+        if($str = $this->CopyPasteHandler->execute()) {
+          return($str);
+        }
       }
 
 

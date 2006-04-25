@@ -35,6 +35,9 @@ class appgroup extends plugin
   var $AllAppsForRelease        = array();
   var $AllAppsForReleaseParameter = array();
 
+  var $CopyPasteVars            = array("Categories");
+
+
   function appgroup ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
