@@ -145,9 +145,15 @@ class servgeneric extends plugin
 
     /* Offline */
     if ($retval == 0){
-      $smarty->assign("actions", array("halt" => _("Switch off"), "reboot" => _("Reboot")));
+      $smarty->assign("actions", array("halt" => _("Switch off"), "reboot" => _("Reboot"),
+                                       "instant_update" => _("Instant update"),
+                                       "update" => _("Scheduled update"),
+                                       "reinstall" => _("Reinstall"),
+                                       "rescan" => _("Rescan hardware")));
     } else {
-      $smarty->assign("actions", array("wake" => _("Wake up")));
+      $smarty->assign("actions", array("wake" => _("Wake up"),
+                                       "reinstall" => _("Reinstall"),
+                                       "update" => _("Scheduled update")));
     }
 
     /* Show main page */
