@@ -6,9 +6,14 @@
 	  <td><LABEL for="cn">{t}Server name{/t}</LABEL>{$must}</td>
 	  <td><input name="cn" id="cn" size=20 maxlength=60 value="{$cn}"></td>
 	 </tr>
+	 <tr>
+	  <td><LABEL for="description">{t}Description{/t}</LABEL></td>
+	  <td><input name="description" id="description" size=25 maxlength=80 value="{$description}"></td>
+	 </tr>
  	 <tr>
-	  <td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
+	  <td><br><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
 	  <td>
+	   <br>
 	   <select size="1" name="base" id="base" title="{t}Choose subtree to place terminal in{/t}">
 	    {html_options options=$bases selected=$base_select}
 	   </select>
@@ -26,11 +31,6 @@
       </select>
      </td>
     </tr>
- 
-	 <tr>
-	  <td><LABEL for="description">{t}Description{/t}</LABEL></td>
-	  <td><input name="description" id="description" size=25 maxlength=80 value="{$description}"></td>
-	 </tr>
 	</table>
   </td>
  </tr>
