@@ -285,9 +285,7 @@ class group extends plugin
         }
         $gufilter['regex']= $s;
       }
-      $regex= preg_replace('/[*]/', ".*", $gufilter['regex']);
       register_global("gufilter", $gufilter);
-
       $this->reload();
 
       /* Show dialog */
@@ -300,16 +298,7 @@ class group extends plugin
         $smarty->assign("$type", $gufilter[$type]);
       }
       $smarty->assign("hint", print_sizelimit_warning());
-
-      $users= array();
-      foreach ($this->allusers as $key => $value){
-        if (!array_key_exists($key, $this->members)){
-          if (preg_match("/^$regex/i", $key)){
-            $users[$key]= $value;
-          }
-        }
-      }
-      $smarty->assign("users", $users);
+      $smarty->assign("users", $this->displayUsers);
       $smarty->assign("apply", apply_filter());
       $display= $smarty->fetch (get_template_path('group_objects.tpl', TRUE, dirname(__FILE__)));
       return ($display);
@@ -417,82 +406,84 @@ class group extends plugin
   /* Reload data */
   function reload()
   {
-    /* Generate userlists */
-    $this->last_sorting= "invalid";
-    $this->users= array();
+    /* Fix regex string */
+    $gufilter = get_global("gufilter");
+    $regex    = normalizeLdap($gufilter['regex']);
+    $MaxUser  = $this->OnlyShowFirstEntries;
+
+    /* Prepare ldap link */
     $ldap= $this->config->get_ldap_link();
+    $ldap->cd($gufilter['dselect']);
 
-    $MaxUser = $this->OnlyShowFirstEntries;
 
-    $gufilter= get_global("gufilter");
-   
-    /* Fix regex string */ 
-    $regex = normalizeLdap($gufilter['regex']);
-
-    /* Create filter */
-    $filter = "(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(!(uid=*$))(|(uid=".$regex.")(givenName=".$regex.")(sn=".$regex.")))";
-
-    if($gufilter['SubSearchGroup']){
-      /* search in subtrees */
-      $ldap->cd ($gufilter['dselect']);
-      $ldap->search($filter, array("uid", "sn","givenName"));
-    }else{
-      /* search in currently selected tree only */
-      $ldap->cd (get_people_ou().$gufilter['dselect']);
-      $ldap->ls ($filter, get_people_ou().$gufilter['dselect'],array("uid", "sn", "givenName"));
-    }
-   
-    /* create result array with givenName / sn and sort it  */ 
-    $this->allusers= array();
-    $i = 0 ;
-    while (($attrs= $ldap->fetch()) && ($i < $MaxUser)){
-      $i ++;
-      if (isset($attrs["givenName"][0]) && isset($attrs["sn"][0])){
-        $this->allusers[$attrs["uid"][0]]= $attrs["sn"][0].", ".
-          $attrs["givenName"][0]." [".$attrs["uid"][0]."]";
-      } else {
-        $this->allusers[$attrs["uid"][0]]= $attrs['uid'][0];
+    /* Resolve still unresolved memberuids to fill the list with sn/giveName attributes 
+        (Store gathered sn/givenName informations in $this->allusers too, 
+         to be prepared when adding/deleting users)
+     */    
+    $filter = "";
+    foreach ($this->memberUid as $value){
+      if(!isset($this->members[$value])){
+        $filter .= "(uid=".normalizeLdap($value).")";
       }
     }
-    natcasesort ($this->allusers);
-    reset ($this->allusers);
+    if(!empty($filter)){    
+      $ldap->search("(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(|".$filter."))",array("uid","sn","givenName"));
+      while($attrs = $ldap->fetch()){
+        $this->members[$attrs['uid'][0]] = $this->createResultName($attrs);
+        $this->allusers[$attrs['uid'][0]]= $this->createResultName($attrs);
+      } 
+    }
+    
 
+    /* Create display list of users matching regex & filter 
+     */
+    $this->displayUsers = array();
+    $filter = "(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(!(uid=*$))(|(uid=".$regex.")(sn=".$regex.")(givenName=".$regex.")))";
+
+    /* Search in current tree or within subtrees depending on the checkbox from filter section */
+    if($gufilter['SubSearchGroup']){
+      $ldap->search($filter, array("uid", "sn","givenName"));
+    }else{
+      $ldap->ls ($filter, get_people_ou().$gufilter['dselect'],array("uid", "sn", "givenName"));
+    }
+    $i = 0;
+    
+    /* Fetch all users and skip already used users */
+    while($attrs = $ldap->fetch()){
+      if(in_array($attrs['uid'][0], $this->memberUid)) {
+        continue;
+      }
+      $i ++;
+      if($i > $MaxUser) {
+        break;
+      }
+      $this->allusers[$attrs['uid'][0]]     = $this->createResultName($attrs);
+      $this->displayUsers[$attrs['uid'][0]] = $this->createResultName($attrs);
+    }
+  
+    /* If more than max users are found, display a message to warn the user */
     if(($i == $MaxUser)){
       print_red(sprintf(_("Your search method returned more than '%s' users, only '%s' users are shown.") , $MaxUser,$MaxUser));
     }
-
-    /* Fill memberlist */
-    $this->members= array();
-    foreach ($this->memberUid as $value){
-      if (isset($this->allusers[$value])){
-        $this->members[$value]= $this->allusers[$value];
-      } else {
-        $ldap->cd($this->config->current['BASE']);
-        $ldap->search("(&(objectClass=gosaAccount)(uid=".$value."))",array("uid", "sn","givenName"));
-        $attrs = $ldap->fetch();
     
-        if(!$attrs){
-          $this->members[$value] = _("! unknown id")." [".$value."]"; 
-        }else{
-    
-          if (isset($attrs["givenName"][0]) && isset($attrs["sn"][0])){
-            $this->allusers[$attrs["uid"][0]]= $attrs["sn"][0].", ".
-              $attrs["givenName"][0]." [".$attrs["uid"][0]."]";
-          } else {
-            $this->allusers[$attrs["uid"][0]]= $attrs['uid'][0];
-          }
-          if (isset($this->allusers[$value])){
-            $this->members[$value]= $this->allusers[$value];
-          } else {
-            $this->members[$value] = "[".$value."]";
-          }
-        }
-      }
-    }
-    asort($this->members);
+    /* Sort lists */
+    natcasesort($this->members);
     reset($this->members);
+    natcasesort ($this->displayUsers);
+    reset ($this->displayUsers);
   }
 
+
+  /* Create display name, this was used so often that it is excluded into a seperate function */
+  function createResultName($attrs)
+  {
+    if (isset($attrs["givenName"][0]) && isset($attrs["sn"][0])){
+      $ret =  $attrs["sn"][0].", ".$attrs["givenName"][0]." [".$attrs["uid"][0]."]";
+    } else {
+      $ret= $attrs['uid'][0];
+    }
+    return($ret);
+  }
 
 
   function remove_from_parent()
