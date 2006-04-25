@@ -6,9 +6,6 @@
 	  <td><LABEL for="cn">{t}Server name{/t}</LABEL>{$must}</td>
 	  <td><input name="cn" id="cn" size=20 maxlength=60 value="{$cn}"></td>
 	 </tr>
-	 <tr>
-          <td colspan=2>&nbsp;</td>
-	 </tr>
  	 <tr>
 	  <td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
 	  <td>
@@ -21,6 +18,15 @@
   </td>
   <td style="vertical-align:top">
 	<table summary="">
+   	<tr>
+     <td>{t}Mode{/t}</td>
+     <td>
+      <select name="gotoMode" title="{t}Select terminal mode{/t}" {$gotoModeACL}>
+       {html_options options=$modes selected=$gotoMode}
+      </select>
+     </td>
+    </tr>
+ 
 	 <tr>
 	  <td><LABEL for="description">{t}Description{/t}</LABEL></td>
 	  <td><input name="description" id="description" size=25 maxlength=80 value="{$description}"></td>

@@ -19,14 +19,22 @@ class servgeneric extends plugin
   var $orig_dn= "";
 
   /* attribute list for save action */
-  var $attributes= array("cn", "description");
+  var $attributes= array("cn", "description","gotoMode");
   var $objectclasses= array("top", "GOhard", "goServer");
 
+  var $gotoMode= "locked";
+
   var $netConfigDNS;
+  var $modes = array();
 
   function servgeneric ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
+
+    $this->modes["active"]= _("Activated");
+    $this->modes["locked"]= _("Locked");
+    $this->modes["memcheck"]= _("Memory test");
+    $this->modes["sysinfo"]= _("System analysis");
 
     /* Set base */
     if ($this->dn == "new"){
@@ -142,9 +150,9 @@ class servgeneric extends plugin
       $smarty->assign("actions", array("wake" => _("Wake up")));
     }
 
-
     /* Show main page */
     $smarty->assign("netconfig", $this->netConfigDNS->execute());
+    $smarty->assign("modes", $this->modes);
 
     return($smarty->fetch (get_template_path('server.tpl', TRUE)));
   }
