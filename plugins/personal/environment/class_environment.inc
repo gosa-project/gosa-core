@@ -60,7 +60,7 @@ class environment extends plugin
   /* general settings */
   // Sets the attributes which will kept on page reload, which will be saved, ...
 
-  var $CopyPasteVars      = array("gotoHotplugDevices","newKioskProfiles","gotoAvailableShares","gotoShareSelections","gotoPrinterSel","gotoProfileFlag_L","gotoXResolutions","gotoProfileFlag_C","gotoProfileServers","useProfile","is_group","in_dialog");
+  var $CopyPasteVars      = array("gotoHotplugDevices","newKioskProfiles","gotoAvailableShares","gotoShareSelections","gotoPrinterSel","gotoProfileFlag_L","gotoXResolutions","gotoProfileFlag_C","gotoProfileServers","useProfile","is_group","in_dialog","OrigCn");
 
   var $attributes         = array("uid","gotoProfileServer","gotoProfileFlags",
                                     "gotoXResolution","gotoProfileQuota",
