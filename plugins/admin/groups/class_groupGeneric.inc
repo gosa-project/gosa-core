@@ -762,8 +762,7 @@ class group extends plugin
       $ldap= $this->config->get_ldap_link();
       if(($this->cn  != $this->orig_cn) || ($this->orig_dn == "new")){
         $ldap->cd("ou=groups,".$this->base);
-        //FIXME: hardcoded ou=groups,
-        $ldap->ls("(&(|(objectClass=gosaGroupOfNames)(objectClass=posixGroup))(cn=$this->cn))","ou=groups,".$this->base,array("cn"));
+        $ldap->ls("(&(|(objectClass=gosaGroupOfNames)(objectClass=posixGroup))(cn=$this->cn))",get_groups_ou().$this->base,array("cn"));
         if ($ldap->count() != 0){
           $message[]= _("Value specified as 'Name' is already used.");
         }
