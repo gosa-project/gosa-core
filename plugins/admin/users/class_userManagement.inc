@@ -35,8 +35,8 @@ class userManagement extends plugin
   var $templates= array();
   var $got_uid= false;
   var $departments= array();
-  var $CopyPasteHandler= NULL;
-
+  var $CopyPasteHandler   = NULL;
+  var $CPPasswordChange   = ""; // Contains the entry id which should get a new password
 
   function userManagement($config, $ui)
   {
@@ -112,7 +112,7 @@ class userManagement extends plugin
                     "back"      => "dep_back",    "new"       => "user_new",
                     "home"      => "dep_home",    "new_tpl"   => "user_tplnew",
                     "change_pw" => "user_chgpw",  "root"      => "dep_root",
-                    "editpaste" => "editpaste",   "copy"      => "copy",
+                    "editPaste" => "editPaste",   "copy"      => "copy",
                     "cut"       => "cut") as $act => $name){
 
         if (preg_match("/".$name.".*/", $key)){
@@ -168,87 +168,10 @@ class userManagement extends plugin
       }
     }
 
-# |||| ----------------------- copy and paste - move it into a seperate function
-//FIXME: I've mostly skipped reviewing this. Just a few comments have been
-//       added. Fact is, that we've an execute() function with more than 800
-//       lines. I personally tend to make this shorter. Even the complete new
-//       list management is a huge copy'n paste factor which can be sourced out
-//       to another function.
-
-    /* Only perform copy/paste if it is enabled */
-    if($this->CopyPasteHandler){
-
-      /* Paste copied/cutted object in here */
-      //FIXME: Sure? Does this comment describe what happens below?
-      if( $s_action == "editPaste" || $this->CopyPasteHandler->stillOpen()){
-        $this->CopyPasteHandler->save_object();
-        $this->CopyPasteHandler->SetVar("base", $_SESSION['CurrentMainBase']);
-
-        /* Execute copy and paste without showing message on success. */
-        //FIXME: It is not clear what really happens, or why we're stopping
-        //       to process data here. See the FIXME in class_CopyAndPasteHandler.
-        //       Normally we don't have something in $ret, because we've fired
-        //       up with (false) <=> which seems to mean "no messages".
-        if( ($ret= $this->CopyPasteHandler->execute(false))){
-          return ($ret);
-        }
-
-        /* Reload to have freshly copied entries in the list */
-        $this->reload();
-        
-        /* Use the last dn to search for it's ID in the newly generated list. */
-        $dn= $this->CopyPasteHandler->lastdn;
-        foreach($this->list as $id => $entry){
-          if($entry['dn'] == $dn){
-            $s_entry= $id;
-            break;
-          }
-        }
-       
-        /* Change action to "change_pw" if user has requested to do so. */
-        if($_POST['passwordTodo'] == "new"){
-          $s_action= "change_pw";
-        }
-      }
-
-      /* Copy current object to CopyHandler */
-      if($s_action == "copy"){
-        $this->CopyPasteHandler->Clear();
-
-        $dn= $this->list[trim($s_entry)]['dn'];
-        $acl= get_permissions ($dn, $this->ui->subtreeACL);
-
-        $obj= new usertabs($this->config, $this->config->data['TABS']['USERTABS'], $dn);
-        $objNew= new usertabs($this->config, $this->config->data['TABS']['USERTABS'], "new");
-
-        $obj->set_acl($acl);
-        $objNew->set_acl($acl);
-
-        foreach($obj->by_object as $name => $tab){
-          foreach(array("photoData","jpegPhoto","is_account") as $attr){
-            if(isset($obj->by_object[$name]->$attr)){
-              $objNew->by_object[$name]->$attr = $obj->by_object[$name]->$attr;
-            }
-          } 
-        }
-        $this->CopyPasteHandler->Copy($obj,$objNew);
-      }
-
-      /* Copy current object to CopyHandler */
-      //FIXME: Again? This is cut. Hopefully it works without touching the special
-      //       attributes from above.
-      if($s_action == "cut"){
-        $this->CopyPasteHandler->Clear();
-        $dn= $this->list[trim($s_entry)]['dn'];
-        $acl= get_permissions ($dn, $this->ui->subtreeACL);
-
-        $obj= new usertabs($this->config, $this->config->data['TABS']['USERTABS'], $dn);
-        $obj->set_acl($acl);
-
-        $this->CopyPasteHandler->Cut($obj);
-      }
+    $ret = $this->copyPasteHandling($s_action,$s_entry);
+    if($ret){
+      return($ret);
     }
-# ^^^^^ ----------------------- copy and paste - move it into a seperate function
 
     /* Save filter data if we are in the headpage */
     if(!isset($this->usertab)){
@@ -308,7 +231,12 @@ class userManagement extends plugin
     }
 
     /* Password change requested */
-    if ($s_action == "change_pw"){
+    if (($s_action == "change_pw") || (!empty($this->CPPasswordChange))){
+
+      if(!empty($this->CPPasswordChange)){
+        $s_entry = $this->CPPasswordChange;
+        $this->CPPasswordChange = "";
+      }
 
       /* Get 'dn' from posted 'uid' */
       $this->dn= $this->list[trim($s_entry)]['dn'];
@@ -1121,6 +1049,73 @@ class userManagement extends plugin
     /* Remove user lock if a DN is marked as "currently edited" */
     if (isset($this->usertab->dn)){
       del_lock ($this->usertab->dn);
+    }
+  }
+
+ 
+  /* Perform copy & paste requests
+      If copy&paste is in progress this returns a dialog to fix required attributes 
+   */ 
+  function copyPasteHandling($s_action,$s_entry)
+  {
+    /* Only perform copy/paste if it is enabled */
+    if($this->CopyPasteHandler){
+
+      /* Prepare current object to be pasted */
+      if( $s_action == "editPaste" || $this->CopyPasteHandler->stillOpen()){
+
+        $this->CopyPasteHandler->save_object();
+        $this->CopyPasteHandler->SetVar("base", $_SESSION['CurrentMainBase']);
+
+        /* Execute copy & paste dialog and display returned data, normaly a dialog which allows 
+            us to solve all attribute mismatches for this object.
+            If nothing is returned, copy & paste was succesfully or aborted */
+        if(($ret= $this->CopyPasteHandler->execute())){
+          return ($ret);
+        }
+
+        /* Reload to have freshly copied entries in the list */
+        $this->reload();
+        
+        /* Use the last dn to search for it's ID in the newly generated list. */
+        $dn= $this->CopyPasteHandler->lastdn;
+        foreach($this->list as $id => $entry){
+          if($entry['dn'] == $dn){
+            $s_entry= $id;
+            break;
+          }
+        }
+       
+        /* Set CPPasswordChange to s_entry which indicates that this entry requires a new password. */
+        if(isset($_POST['passwordTodo']) && ($_POST['passwordTodo'] == "new")){
+          $this->CPPasswordChange = $s_entry;
+        }
+      }
+
+      /* Copy selected object 
+          Create a new empty object and the current selected object. 
+          Send both to copy&paste class*/
+      if($s_action == "copy"){
+        $this->CopyPasteHandler->Clear();
+        $dn= $this->list[trim($s_entry)]['dn'];
+        $acl= get_permissions ($dn, $this->ui->subtreeACL);
+        $obj    = new usertabs($this->config, $this->config->data['TABS']['USERTABS'], $dn);
+        $objNew = new usertabs($this->config, $this->config->data['TABS']['USERTABS'], "new");
+        $obj->    set_acl($acl);
+        $objNew-> set_acl($acl);
+        $this->CopyPasteHandler->Copy($obj,$objNew);
+      }
+
+      /* Cut selected object. 
+          Open user object and send it to the copy & paste handler */
+      if($s_action == "cut"){
+        $this->CopyPasteHandler->Clear();
+        $dn= $this->list[trim($s_entry)]['dn'];
+        $acl= get_permissions ($dn, $this->ui->subtreeACL);
+        $obj= new usertabs($this->config, $this->config->data['TABS']['USERTABS'], $dn);
+        $obj->set_acl($acl);
+        $this->CopyPasteHandler->Cut($obj);
+      }
     }
   }
 

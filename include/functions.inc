@@ -1951,5 +1951,19 @@ function normalizeLdap($input)
 }
 
 
+/* Resturns the difference between to microtime() results in float  */
+function get_MicroTimeDiff($start , $stop)
+{
+  $a = split("\ ",$start);
+  $b = split("\ ",$stop);
+
+  $secs = $b[1] - $a[1];
+  $msecs= $b[0] - $a[0]; 
+
+  $ret = (float) ($secs+ $msecs);
+  return($ret);
+}
+
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

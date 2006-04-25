@@ -868,6 +868,8 @@ $ldap->modify ($this->attrs);
     return ($name);
   }
 
+  
+  /* Create the mail part for the copy & paste dialog */
   function getCopyDialog()
   {
     if(!$this->is_account) return("");

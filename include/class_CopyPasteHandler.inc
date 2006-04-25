@@ -1,5 +1,4 @@
 <?php
-//FIXME: Comments are somewhat off the normal comment usage
 
 class CopyPasteHandler {
 
@@ -15,20 +14,17 @@ class CopyPasteHandler {
 
   var $was_successfull = false;
 
-  /* Create CP handler
-   */
+  /* Create CP handler  */
   function CopyPasteHandler($config){
     $this->config = $config;	
     $this->current= NULL;
   }
 
 
-  /* Returns wether the current object can be pasted 
-   */	
+  /* Returns wether the current object can be pasted */	
   function isCurrentObjectPastAble(){
 
-    /* Check if we got a valid object 
-     */
+    /* Check if we got a valid object */
     if($this->current == NULL){
       return(false);
     }
@@ -36,8 +32,7 @@ class CopyPasteHandler {
   }	
 
 
-  /* Clears all copy & paste informations 
-   */
+  /* Clears all copy & paste informations */
   function Clear()
   {
     $this->copyCurrent 	= false;
@@ -47,25 +42,25 @@ class CopyPasteHandler {
   }
 
 
-  /* return current obejct dn
-   */
+  /* return current obejct dn */
   function GetCurrentDn()
   {
     return($this->objectdn);
   }
 
 
-  /* Add Object which should be copied
-   */
+  /* Add Object which should be copied  */
   function Copy($obj,$emptyObj)
   {
     $this->copyCurrent = true;
     $this->objectdn    = $obj->dn;
     $this->current = $emptyObj;
     foreach($obj->by_object as $name => $obj){
-      
+    
+      /* Prepare every single class, to be copied  */
       $this->current->by_object[$name]->PrepareForCopyPaste($obj);
-  
+ 
+      /* handle some special vars */ 
       foreach(array("is_account") as $attr){
         if(isset($obj->$attr)){
           $this->current->by_object[$name]->$attr = $obj->$attr;
@@ -82,8 +77,7 @@ class CopyPasteHandler {
   }
 
 
-  /* Add Object which should be cutted
-   */
+  /* Add Object which should be cutted  */
   function Cut($obj){
     $this->cutCurrent = true;
     $this->current 	  = $obj;
@@ -99,36 +93,31 @@ class CopyPasteHandler {
 
 
   /* Returns true if current object 
-   *  is cutted. And awaits to be pasted anywhere
-   */
+   *  is cutted. And awaits to be pasted anywhere  */
   function isCurrentCutted(){
     return($this->cutCurrent);
   }
 
 
   /* Returns true if current object  
-   *  was copied, and awaits to be pasted again
-   */
+   *  was copied, and awaits to be pasted again  */
   function isCurrentCopied(){
     return($this->copyCurrent);
   }
 
 
-  /* stillOpen
-   */
+  /* Returns true if the copy$paste dialog is still open  */
   function stillOpen(){	
     if(isset($_POST['AbortCopyPaste'])){
       $this->dialogOpen = false;
     }
-
     return($this->dialogOpen);
   }
 
 
   /* Displays a dialog which allows the user to fix all dependencies of this object.
-     Create unique names, ids, or what ever
-   */
-  function execute($displayMessageOnSuccess = true)
+     Create unique names, ids, or what ever */
+  function execute()
   {
     $this->dialogOpen = true;
 
@@ -137,11 +126,7 @@ class CopyPasteHandler {
     if($this->cutCurrent){
       $this->current->save();
       $this->dialogOpen =false;
-      $smarty = get_smarty();
-      $smarty->assign("Complete",true);
-      $this->lastdn= $this->current->dn;
       $this->Clear();
-      return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
 
       /* Copy & paste
        */
@@ -155,42 +140,34 @@ class CopyPasteHandler {
         }else{
           $this->current->save();
           $this->dialogOpen =false;
-          $smarty = get_smarty();	
-          $smarty->assign("Complete",true);
-          $this->lastdn = $this->current->dn;
           $this->Clear();
-          if($displayMessageOnSuccess){
-            return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
-          }else{
-            //FIXME: Types!!! Either use strings, or use bool. But don't mix it!
-            return( false);
-          }
         }
       }
-      $smarty = get_smarty();	
-      $smarty->assign("Complete",false);
-      $smarty->assign("AttributesToFix",$this->generateAttributesToFix());	
-      $smarty->assign("SubDialog",$this->current->SubDialog);
-    
-      $smarty->assign("objectDN"		 ,$this->objectdn);	
-      $smarty->assign("message", sprintf(_("You are going to copy the entry '%s'."), $this->objectdn));	
-      return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
+      if($this->current){
+        $smarty = get_smarty();	
+        $smarty->assign("Complete",false);
+        $smarty->assign("AttributesToFix",$this->generateAttributesToFix());	
+        $smarty->assign("SubDialog",$this->current->SubDialog);
+        $smarty->assign("objectDN"		 ,$this->objectdn);	
+        $smarty->assign("message", sprintf(_("You are going to copy the entry '%s'."), $this->objectdn));	
+        return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
+      }
     }
   }
 
-  /* Create dialog which asks unique attributes values ... 
-   *  calls tabs -> getCopyDialog() 
-   *    which calls tab -> getCopyDialog()
-   */
+  /* Create dialog which asks unique attributes/values ... 
+   *  call tabs -> getCopyDialog() 
+   *    which calls tab -> getCopyDialog()  */
   function generateAttributesToFix()
   {
-    return($this->current->getCopyDialog());
+    if($this->current){
+      return($this->current->getCopyDialog());  
+    }
   }
 
 
   /* Set a single attribute to specified value
-   *  example :   ("base", $newBase );
-   */
+   *  example :   ("base", $newBase );    */
   function SetVar($name,$value)
   {
     foreach($this->	current->by_object as $key => $obj){
@@ -201,18 +178,18 @@ class CopyPasteHandler {
   }
 
 
-  /* Save new values posted by copy & paste dialog
-   */
+  /* Save new values posted by copy & paste dialog */
   function save_object()
   {
     /* Assign posted var to all tabs
      */
-    $this->current->saveCopyDialog();
+    if($this->current){
+      $this->current->saveCopyDialog();
+    }
   }
 
 
-  /* Returns possible errors returned from all including tabs ..
-   */
+  /* Returns errors from including tabs. */
   function check()
   {
     $ret = array();
@@ -221,11 +198,11 @@ class CopyPasteHandler {
         $ret = array_merge($ret , $obj->check());
       }
     }
-
     return($ret);
   }
 
   
+  /* returns the paste icon for headpages */ 
   function generatePasteIcon()
   {
     $Copy_Paste= "&nbsp;<img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;";

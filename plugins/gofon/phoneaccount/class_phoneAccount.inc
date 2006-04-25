@@ -1157,6 +1157,8 @@ $ldap->modify ($this->attrs);
     }
   }
 
+
+  /* Create phoneAccount part of copy & paste dialog */
   function getCopyDialog()
   { 
     if(!$this->is_account) return("");
@@ -1177,6 +1179,7 @@ $ldap->modify ($this->attrs);
     return($ret);
   }
 
+  /* Save posts from copy & paste dialog dialog  */
   function saveCopyDialog()
   {
     if(!$this->is_account) return;

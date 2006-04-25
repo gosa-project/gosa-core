@@ -1144,8 +1144,11 @@ $ldap->modify ($this->attrs);
     reset ($this->grouplist);
   }
 
+
+  /* Create the posix dialog part for copy & paste */
   function getCopyDialog()
   {
+    /* Skip dialog creation if this is not a valid account*/
     if(!$this->is_account) return("");
     if ($this->force_ids == 1){
       $force_ids = "checked";
@@ -1162,11 +1165,14 @@ $ldap->modify ($this->attrs);
    
     $sta = "";
  
+    /* Open group add dialog */
     if(isset($_POST['edit_groupmembership'])){
       $this->group_dialog = TRUE;
       $sta = "SubDialog";
     }
 
+    /* If the group-add dialog is closed, call execute 
+        to ensure that the membership is updatd */
     if(isset($_POST['add_groups_finish']) || isset($_POST['add_groups_cancel'])){
       $this->execute();
       $this->group_dialog =FALSE;
@@ -1180,21 +1186,25 @@ $ldap->modify ($this->attrs);
       return($ret);
     }
 
+    /* If a group member should be deleted, simply call execute */
     if(isset($_POST['delete_groupmembership'])){
       $this->execute();
     }
 
+    /* Assigned informations to smarty */
     $smarty = get_smarty();
     $smarty->assign("homeDirectory",$this->homeDirectory);
     $smarty->assign("uidNumber",$this->uidNumber);
     $smarty->assign("gidNumber",$this->gidNumber);
     $smarty->assign("forceMode",$forceMode);
     $smarty->assign("force_ids",$force_ids);
-   if (!count($this->groupMembership)){
+    if (!count($this->groupMembership)){
       $smarty->assign("groupMembership", array("&nbsp;"));
     } else {
       $smarty->assign("groupMembership", $this->groupMembership);
     }
+
+    /* Display wars message if there are more than 16 group members */
     if (count($this->groupMembership) > 16){
       $smarty->assign("groups", "too_many_for_nfs");
     } else {
