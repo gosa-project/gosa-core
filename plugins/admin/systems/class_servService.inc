@@ -170,6 +170,7 @@ class servservice extends plugin
     }
     
     $tellSmarty=array();
+    ksort($this->goExportEntry);
     foreach($this->goExportEntry as $name=>$values){
        $tmp = split("\|",$values);
        $tellSmarty[$name] = $tmp[0]." ".$tmp[4];

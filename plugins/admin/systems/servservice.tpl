@@ -9,10 +9,10 @@
 			changeState('NewNfsAddId');"> 
 
 		<b>{t}Shares{/t}</b>
-   <table summary="">
+   <table summary="" style="width:100%">
     <tr>
      <td>
-		<select style="width:350px;" id="goExportEntry" name="goExportEntry" {$goExportEntryACL} {$goShareServerState} size=4 multiple >
+		<select style="width:100%" id="goExportEntry" name="goExportEntry" {$goExportEntryACL} {$goShareServerState} size=12 multiple >
     		{html_options values=$goExportEntry output=$goExportEntryKeys}
 			<option disabled>&nbsp;</option>
 	    </select>
@@ -35,10 +35,10 @@
             changeState('NewNTPAddId');">
 
         <b>{t}Time Service{/t}</b>
-   <table summary="">
+   <table summary="" stlye="width:100%">
     <tr>
      <td>
-        <select style="width:350px;" id="goTimeEntry" name="goTimeSource[]" {$goNtpServerState} {$goNtpServerACL}  size=4 multiple>
+        <select style="width:100%;" id="goTimeEntry" name="goTimeSource[]" {$goNtpServerState} {$goNtpServerACL}  size=4 multiple>
             {html_options values=$goTimeSource output=$goTimeSource}
 			<option disabled>&nbsp;</option>
         </select>
@@ -53,14 +53,12 @@
 
 
   </td>
-  <td width="50%">
+  <td style="width:50%;vertical-align:top">
 
   <input type=checkbox name="goLdapServer" value="1" {$goLdapServer} {$goLdapServerACL}
             onchange="changeState('goLdapBaseId');">
 
-     <b>{t}LDAP Service{/t}</b>
-
-		<input type="text"      value="{$goLdapBase}"     {$goLdapBaseACL}    name="goLdapBase" {$goLdapServerState} id="goLdapBaseId">
+     <b>{t}LDAP Service{/t}</b>&nbsp;<input type="text" style="width:70%" value="{$goLdapBase}"     {$goLdapBaseACL}    name="goLdapBase" {$goLdapServerState} id="goLdapBaseId">
 
 	<p class="seperator">&nbsp;</p>
     <br>
