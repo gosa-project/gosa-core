@@ -165,7 +165,7 @@ class printgeneric extends plugin
       }else{
         $this->BelongsTo = "Terminal";
       }
-    }else{
+    }elseif(isset($this->parent->by_name['printgeneric'])){
       $this->BelongsTo  = "Printer";
     }
 
