@@ -31,12 +31,11 @@ class applicationManagement extends plugin
   var $ui= NULL;
   var $acl= "";
 
-  var $CopyPasteHandler ;
+  var $CopyPasteHandler = NULL;
 
   var $Release  = "";
   var $Releases = array();
 
-  var $enableCopyPaste         = false;
   var $enableReleaseManagement = false;
 
 
@@ -46,13 +45,11 @@ class applicationManagement extends plugin
     $this->config= $config;
     $this->ui= $ui;
 
-    if( (isset($this->config->data['MAIN']['ENABLECOPYPASTE'])) 
+    if((isset($this->config->data['MAIN']['ENABLECOPYPASTE'])) 
         && 
         (preg_match("/true/i",$this->config->data['MAIN']['ENABLECOPYPASTE'] ))){
-      $this->enableCopyPaste = true;
+      $this->CopyPasteHandler = new CopyPasteHandler($this->config);
     }
-
-    $this->CopyPasteHandler = new CopyPasteHandler($this->config);
 
     /* Check if we should enable the release selection */
     $tmp = search_config($this->config->data,"faiManagement","CLASS");
@@ -238,39 +235,10 @@ class applicationManagement extends plugin
 
     /* Only perform copy / paste if it is enabled 
      */
-    if($this->enableCopyPaste){
-
-      /* Paste copied/cutted object in here
-       */
-      if(($s_action == "editPaste") || ($this->CopyPasteHandler->stillOpen())){
-        $this->CopyPasteHandler->save_object();
-        $this->CopyPasteHandler->SetVar("base", $_SESSION['CurrentMainBase']);
-
-        if($str = $this->CopyPasteHandler->execute()) {
-          return($str);
-        }
-      }
-
-
-      /* Copy current object to CopyHandler
-       */
-      if($s_action == "copy"){
-        $this->CopyPasteHandler->Clear();
-        $dn = $this->applications[$s_entry]['dn'];
-        $obj    = new apptabs($this->config, $this->config->data['TABS']['APPSTABS'], $dn);
-        $objNew = new apptabs($this->config, $this->config->data['TABS']['APPSTABS'], "new");
-        $this->CopyPasteHandler->Copy($obj,$objNew);
-      }
-
-
-      /* Copy current object to CopyHandler
-       */
-      if($s_action == "cut"){
-        $this->CopyPasteHandler->Clear();
-        $dn = $this->applications[$s_entry]['dn'];
-        $obj = new apptabs($this->config, $this->config->data['TABS']['APPSTABS'], $dn);
-        $this->CopyPasteHandler->Cut($obj);
-      }
+    if($this->CopyPasteHandler){
+      if($str = $this->copyPasteHandling($s_action,$s_entry)){
+       return($str);
+      };
     }
 
     /* New application? */
@@ -452,7 +420,7 @@ class applicationManagement extends plugin
       }
     }
 
-    if($this->enableCopyPaste){
+    if($this->CopyPasteHandler){
       $Copy_Paste = " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;";
 
       if($this->CopyPasteHandler->isCurrentObjectPastAble()){
@@ -488,7 +456,7 @@ class applicationManagement extends plugin
 
 
 
-    if($this->enableCopyPaste){
+    if($this->CopyPasteHandler){
       $actions = "<input class='center' type='image' 
         src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
       $actions.= "<input class='center' type='image' 
@@ -664,6 +632,40 @@ class applicationManagement extends plugin
     $this->postremove();
   }
 
+
+  function copyPasteHandling($s_action,$s_entry)
+  {
+    /* Paste copied/cutted object in here
+     */
+    echo "jo";
+    if(($s_action == "editPaste") || ($this->CopyPasteHandler->stillOpen())){
+      $this->CopyPasteHandler->save_object();
+      $this->CopyPasteHandler->SetVar("base", $_SESSION['CurrentMainBase']);
+
+      if($str = $this->CopyPasteHandler->execute()) {
+        return($str);
+      }
+    }
+
+    /* Copy current object to CopyHandler
+     */
+    if($s_action == "copy"){
+      $this->CopyPasteHandler->Clear();
+      $dn = $this->applications[$s_entry]['dn'];
+      $obj    = new apptabs($this->config, $this->config->data['TABS']['APPSTABS'], $dn);
+      $objNew = new apptabs($this->config, $this->config->data['TABS']['APPSTABS'], "new");
+      $this->CopyPasteHandler->Copy($obj,$objNew);
+    }
+
+    /* Copy current object to CopyHandler
+     */
+    if($s_action == "cut"){
+      $this->CopyPasteHandler->Clear();
+      $dn = $this->applications[$s_entry]['dn'];
+      $obj = new apptabs($this->config, $this->config->data['TABS']['APPSTABS'], $dn);
+      $this->CopyPasteHandler->Cut($obj);
+    }
+  }
 
   /* Save data to object */
   function save_object()

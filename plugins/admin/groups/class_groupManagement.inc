@@ -32,8 +32,7 @@ class groupManagement extends plugin
   var $ui= NULL;
   var $acl= "";
 
-  var $CopyPasteHandler ;
-  var $enableCopyPaste = false;
+  var $CopyPasteHandler  = NULL;
 
   function groupManagement ($config, $ui)
   {
@@ -42,9 +41,8 @@ class groupManagement extends plugin
     $this->ui= $ui;
 
     if((isset($this->config->data['MAIN']['ENABLECOPYPASTE']))&&(preg_match("/true/i",$this->config->data['MAIN']['ENABLECOPYPASTE']))){
-      $this->enableCopyPaste = true;
+      $this->CopyPasteHandler = new CopyPasteHandler($this->config);
     }
-    $this->CopyPasteHandler = new CopyPasteHandler($this->config);
 
     /* Get global filter config */
     if (!is_global("groupfilter")){
@@ -202,53 +200,13 @@ class groupManagement extends plugin
       return($message);
     }
 
-    /* Only perform copy / paste if it is enabled
+    /* Only perform copy&paste requests if it is enabled
      */
-    if($this->enableCopyPaste){
-
-      /* Paste copied/cutted object in here
-       */
-      if(($s_action == "editPaste") || ($this->CopyPasteHandler->stillOpen())){
-        $this->CopyPasteHandler->save_object();
-        $this->CopyPasteHandler->SetVar("base",$_SESSION['CurrentMainBase']);
-        if($str = $this->CopyPasteHandler->execute()){
-          return( $str);
-        };
-        /* Ensure that the new object is shown in the list now */
-        $this->relaod();
-      }
-
-
-      /* Copy current object to CopyHandler
-       */
-      if($s_action == "copy"){
-        $this->CopyPasteHandler->Clear();
-        
-        $dn     = $this->grouplist[trim($s_entry)]['dn'];
-        $acl    = get_permissions ($dn, $this->ui->subtreeACL);
-
-        $obj    = new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $dn);
-        $objNew = new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], "new");
-        $obj->set_acl($acl);
-        $objNew->set_acl($acl);
-        $this->CopyPasteHandler->Copy($obj,$objNew);
-      }
-
-
-      /* Copy current object to CopyHandler
-       */
-      if($s_action == "cut"){
-        $this->CopyPasteHandler->Clear();
-        $dn = $this->grouplist[trim($s_entry)]['dn'];
-        $acl= get_permissions ($dn, $this->ui->subtreeACL);
-
-        $obj= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $dn);
-        $obj->set_acl($acl);
-
-        $this->CopyPasteHandler->Cut($obj);
+    if($this->CopyPasteHandler){
+      if($str = $this->copyPasteHandling($s_action,$s_entry)){
+        echo $str;
       }
     }
-
 
     /* New group? */
     if ($s_action=="new"){
@@ -431,7 +389,7 @@ class groupManagement extends plugin
 
     /* Create paste icon 
      */
-    if($this->enableCopyPaste){
+    if($this->CopyPasteHandler){
       $Copy_Paste = " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;";
       if($this->CopyPasteHandler->isCurrentObjectPastAble()){
         if($this->CopyPasteHandler->isCurrentCutted()){
@@ -463,7 +421,7 @@ class groupManagement extends plugin
       "</div>";
 
     
-    if($this->enableCopyPaste){
+    if($this->CopyPasteHandler){
       $actions = "<input class='center' type='image'
         src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
       $actions.= "<input class='center' type='image'
@@ -744,6 +702,56 @@ class groupManagement extends plugin
     $this->postremove();
   }
 
+
+
+
+  /* Perform copy & paste requests
+     If copy&paste is in progress this returns a dialog to fix required attributes 
+   */ 
+  function copyPasteHandling($s_action,$s_entry)
+  {
+    /* Paste copied/cutted object in here
+     */
+    if(($s_action == "editPaste") || ($this->CopyPasteHandler->stillOpen())){
+      $this->CopyPasteHandler->save_object();
+      $this->CopyPasteHandler->SetVar("base",$_SESSION['CurrentMainBase']);
+      if($str = $this->CopyPasteHandler->execute()){
+        return( $str);
+      };
+      /* Ensure that the new object is shown in the list now */
+      $this->relaod();
+    }
+
+
+    /* Copy current object to CopyHandler
+     */
+    if($s_action == "copy"){
+      $this->CopyPasteHandler->Clear();
+
+      $dn     = $this->grouplist[trim($s_entry)]['dn'];
+      $acl    = get_permissions ($dn, $this->ui->subtreeACL);
+
+      $obj    = new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $dn);
+      $objNew = new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], "new");
+      $obj->set_acl($acl);
+      $objNew->set_acl($acl);
+      $this->CopyPasteHandler->Copy($obj,$objNew);
+    }
+
+
+    /* Copy current object to CopyHandler
+     */
+    if($s_action == "cut"){
+      $this->CopyPasteHandler->Clear();
+      $dn = $this->grouplist[trim($s_entry)]['dn'];
+      $acl= get_permissions ($dn, $this->ui->subtreeACL);
+
+      $obj= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $dn);
+      $obj->set_acl($acl);
+
+      $this->CopyPasteHandler->Cut($obj);
+    }
+  }
 
   /* Save data to object */
   function save_object()
