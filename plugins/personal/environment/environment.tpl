@@ -174,7 +174,7 @@
     <table style="width:100%" summary="{t}Printer settings{/t}">
 	<tr>
 	    <td>
-		<select style="width:100%;" name="gotoPrinterSel" multiple size=5 {$gotoPrinterACL} id="gotoPrinter">
+		<select style="width:100%;" name="gotoPrinterSel[]" multiple size=5 {$gotoPrinterACL} id="gotoPrinter">
 		{html_options values=$gotoPrinterKeys output=$gotoPrinter}
 		<option disabled>&nbsp;</option>
 		</select>

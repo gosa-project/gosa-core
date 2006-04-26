@@ -630,8 +630,12 @@ class environment extends plugin
         $this->dialog->save_object();
         $tmp = $this->dialog->save();
         $tmp2= $this->dialog->getPrinter(true);
-        $this->gotoPrinter[$tmp]=$tmp2[$tmp];
-        $this->gotoPrinter[$tmp]['mode']="user";
+  
+        foreach($tmp as $pname){
+          $this->gotoPrinter[$pname]=$tmp2[$pname];
+          $this->gotoPrinter[$pname]['mode']="user";
+        }
+  
         $this->is_dialog=false;
         unset($this->dialog);
         $this->dialog   =NULL;
@@ -640,7 +644,9 @@ class environment extends plugin
   
     if((isset($_POST['gotoPrinterDel']))&&(isset($_POST['gotoPrinterSel']))&&(!empty($_POST['gotoPrinterSel']))){
       $printer = $_POST['gotoPrinterSel'];
-      unset($this->gotoPrinter[$printer]);
+      foreach($printer as $pname){
+        unset($this->gotoPrinter[$pname]);
+      }
     }
 
     if((isset($_POST['gotoPrinterEdit']))&&(isset($_POST['gotoPrinterSel']))&&(!empty($_POST['gotoPrinterSel']))){
