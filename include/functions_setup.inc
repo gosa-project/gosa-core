@@ -625,11 +625,10 @@ function parse_contrib_conf()
       $str = str_replace("mailMethod=\"{MAILMETHOD}\"","",$str);
     }
 
-
     /* Remove all unused plugins */
-    foreach($possible_plugins as $key=> $plugin) {
-      foreach($plugin as $key=>$val) {
-        if(in_array($plugin,$classes)) {
+    foreach(array_keys($possible_plugins) as $akey) {
+      if(array_key_exists($akey,$classes)) {
+        foreach($possible_plugins[$akey] as $key=>$val) {
           $str = preg_replace($val,"\n",$str);
         }
       }
