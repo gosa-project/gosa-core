@@ -504,7 +504,7 @@ class plugin
     return($display);
   }
 
-  function postcreate()
+  function postcreate($add_attrs= array())
   {
     /* Find postcreate entries for this class */
     $command= search_config($this->config->data['MENU'], get_class($this), "POSTCREATE");
@@ -520,6 +520,12 @@ class plugin
         }
       }
       $command= preg_replace("/%dn/", $this->dn, $command);
+
+      /* Additional attributes */
+      foreach ($add_attrs as $name => $value){
+        $command= preg_replace("/%$name/", $value, $command);
+      }
+
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
             $command, "Execute");
@@ -532,7 +538,7 @@ class plugin
     }
   }
 
-  function postmodify()
+  function postmodify($add_attrs= array())
   {
     /* Find postcreate entries for this class */
     $command= search_config($this->config->data['MENU'], get_class($this), "POSTMODIFY");
@@ -548,6 +554,12 @@ class plugin
         }
       }
       $command= preg_replace("/%dn/", $this->dn, $command);
+
+      /* Additional attributes */
+      foreach ($add_attrs as $name => $value){
+        $command= preg_replace("/%$name/", $value, $command);
+      }
+
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
             $command, "Execute");
@@ -560,7 +572,7 @@ class plugin
     }
   }
 
-  function postremove()
+  function postremove($add_attrs= array())
   {
     /* Find postremove entries for this class */
     $command= search_config($this->config->data['MENU'], get_class($this), "POSTREMOVE");
@@ -576,6 +588,12 @@ class plugin
         }
       }
       $command= preg_replace("/%dn/", $this->dn, $command);
+
+      /* Additional attributes */
+      foreach ($add_attrs as $name => $value){
+        $command= preg_replace("/%$name/", $value, $command);
+      }
+
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
             $command, "Execute");
@@ -790,19 +808,19 @@ class plugin
   }
 
 
-  function handle_post_events($mode)
+  function handle_post_events($mode, $add_attrs= array())
   {
     switch ($mode){
       case "add":
-        $this->postcreate();
+        $this->postcreate($add_attrs);
       break;
 
       case "modify":
-        $this->postmodify();
+        $this->postmodify($add_attrs);
       break;
 
       case "remove":
-        $this->postremove();
+        $this->postremove($add_attrs);
       break;
     }
   }

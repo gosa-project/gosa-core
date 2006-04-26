@@ -182,7 +182,7 @@ class workgeneric extends plugin
     show_ldap_error($ldap->get_error());
 
     /* Optionally execute a command after we're done */
-    $this->handle_post_events("remove");
+    $this->handle_post_events("remove", array("macAddress", $this->netConfigDNS->macAddress));
 
     /* Delete references to object groups */
     $ldap->cd ($this->config->current['BASE']);

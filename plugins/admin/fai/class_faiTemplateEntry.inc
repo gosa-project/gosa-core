@@ -46,7 +46,7 @@ class faiTemplateEntry extends plugin
 
     }else{
       $this->status = "new";
-      $this->orig_cn       = false;
+      $this->orig_cn= false;
     }
 
     $this->user = explode( '.', $this->FAIowner );
@@ -62,8 +62,8 @@ class faiTemplateEntry extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     /* Fill templating stuff */
     $smarty     = get_smarty();
