@@ -16,6 +16,42 @@
     			<input type=hidden name="edit_helper">
   			</div>
   		</td>
+		{if $is_headpage}
+  		<td style="vertical-align:top;">
+   			<div class="contentboxh" style="border-bottom:1px solid #B0B0B0;">
+    			<p class="contentboxh">
+					<img src="{$infoimage}" align="right" alt="[i]">{t}Information{/t}
+				</p>
+   			</div>
+   			<div class="contentboxb" style="padding:5px;">
+				{$Information}
+   			</div>
+   			<br>
+   			<div class="contentboxh">
+    			<p class="contentboxh">
+					<img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}
+				</p>
+   			</div>
+			<div class="contentboxb">
+				{if $Display_alphabet}
+			 	<table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
+			  		{$alphabet}
+			 	</table>
+				{/if}
+				{ if $CheckBoxes != ""}
+				<table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
+					<tr>
+						<td>
+							{$CheckBoxes}
+						</td>
+					</tr>
+				</table>   
+				{/if}
+			{$regexes}
+			{$apply}
+   			</div>
+  		</td>
+		{else}
   		<td style="vertical-align:top;">
    			<div class="contentboxh" style="border-bottom:1px solid #B0B0B0;height:20px;">
     			<p class="contentboxh">
@@ -50,8 +86,11 @@
 			{$apply}
    			</div>
   		</td>
+
+		{/if}
 	</tr>
 </table>
+{if $Display_Save | $Display_Close}
 <p class="seperator">&nbsp;
 </p>
 <div style="text-align:right;" align="right">
@@ -64,7 +103,7 @@
 		{/if}
 	</p>
 </div>
+{/if}
 
 <input type="hidden" name="ignore">
-<input type="hidden" name="MultiSelectWindow" value="1">
-
+<input type="hidden" name="MultiSelectWindow{$filterName}" value="1">
