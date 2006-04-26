@@ -468,7 +468,6 @@ class groupManagement extends plugin
     // Space
     $empty    = "<img class='center' src='images/empty.png' style='width:16px;height:16px;' alt=''>";
 
-
     $divlist = new divlist("groupstab");
     $divlist->SetHeader(array(
           array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
@@ -508,12 +507,12 @@ class groupManagement extends plugin
       $posix=$mail=$samba=$appl=$phone=$enviro=$empty;
 
       if(isset($val['objectClass'])){
-        if(in_array("posixGroup",           $val['objectClass']))   $posix = $posiximg;   else $posix   = $empty;
-        if(in_array("gosaMailAccount",      $val['objectClass']))   $mail  = $mailimg;    else $mail    = $empty;
-        if(in_array("sambaGroupMapping",    $val['objectClass']))   $samba = $sambaimg;   else $samba   = $empty;
-        if(in_array("gosaApplicationGroup", $val['objectClass']))   $appl  = $applimg;    else $appl    = $empty;
-        if(in_array("goFonPickupGroup",     $val['objectClass']))   $phone = $phoneimg;   else $phone   = $empty;
-        if(in_array("gotoEnvironment",      $val['objectClass']))   $enviro= $envimg;     else $enviro  = $empty;
+        if(in_array("posixGroup",           $val['objectClass']))   $posix = $posiximg;
+        if(in_array("gosaMailAccount",      $val['objectClass']))   $mail  = $mailimg;
+        if(in_array("sambaGroupMapping",    $val['objectClass']))   $samba = $sambaimg;
+        if(in_array("gosaApplicationGroup", $val['objectClass']))   $appl  = $applimg;
+        if(in_array("goFonPickupGroup",     $val['objectClass']))   $phone = $phoneimg;
+        if(in_array("gotoEnvironment",      $val['objectClass']))   $enviro= $envimg;
       }
 
       $title = "title='dn:&nbsp;".@LDAP::fix($val['dn'])."'";
