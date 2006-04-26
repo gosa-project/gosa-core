@@ -774,6 +774,8 @@ class userManagement extends plugin
                     name='user_edit_%KEY%-gofaxAccount' title='"._("Edit fax properies")."'>";
     $sambaimg = "<input class='center' type='image' src='images/select_winstation.png' alt='"._("Samba")."'     
                     name='user_edit_%KEY%-sambaAccount' title='"._("Edit samba properties")."'>"; 
+    $netatalkimg = "<input class='center' type='image' src='images/select_netatalk.png' alt='"._("Netatalk")."'
+                    name='user_edit_%KEY%-netatalk' title='"._("Edit netatalk properties")."'>";
     $tplcreateuserimg  = "<input type='image' class='center' src='images/list_new.png' alt='"._("Create user from template")."'
                     name='userfrom_tpl_%KEY%' title='"._("Create user with this template")."'>";   
 
@@ -885,6 +887,12 @@ class userManagement extends plugin
         $samba=$empty;
       } 
 
+      if(in_array("apple-user" ,$val['objectClass'])){
+        $netatalk = preg_replace("/%KEY%/", "$key", $netatalkimg);
+      }else{
+        $netatalk=$empty;
+      }
+
       if(in_array("gosaUserTemplate",$val['objectClass'])){ 
         $tpl                          = preg_replace("/%KEY%/", "$key", $tplimg);   
         $s_img_create_from_template   = preg_replace("/%KEY%/", "$key", $tplcreateuserimg);
@@ -905,7 +913,7 @@ class userManagement extends plugin
       /* Create each field */
       $field1 = array("string" => sprintf($tpl,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($editlink,$key,$display).$ip_port, "attach" => "style='' title='dn:&nbsp;".@LDAP::fix($val['dn'])."'");
-      $field3 = array("string" => $usrimg2."&nbsp;".$posix."&nbsp;".$enviro."&nbsp;".$maila."&nbsp;".$fonac."&nbsp;".$faxac."&nbsp;".$samba, "attach" => "style='width:152px;'");
+      $field3 = array("string" => $usrimg2."&nbsp;".$posix."&nbsp;".$enviro."&nbsp;".$maila."&nbsp;".$fonac."&nbsp;".$faxac."&nbsp;".$samba."&nbsp".$netatalk, "attach" => "style='width:152px;'");
       $field4 = array("string" => $s_img_create_from_template.preg_replace("/%KEY%/", "$key", $action),"attach" => "style='width:102px;border-right:0px;text-align:right;'");
 
       $add = array($field1,$field2,$field3,$field4);

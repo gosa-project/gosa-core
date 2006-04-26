@@ -211,6 +211,10 @@ $ACLD['samba']=
 				
 						) ;
 
+$ACLD['netatalk']=	array(
+			"netatalkShare",
+			"netatalkUserHomepath");
+
 
 $ACLD['proxyAccount']=      array(
 			"proxyAccount",
@@ -259,7 +263,8 @@ $ACLD['gotoEnvironment']=array(
 					"gotoLogonScript",
 					"gotoKioskProfile",
 					"gotoProfileQuota",
-					"gotoHotplugDevice"
+					"gotoHotplugDevice",
+					"gotoShareAppleMounts"
 					);
 
 $ACLD['phpgwAccount']			=array("phpgwAccount" 			);

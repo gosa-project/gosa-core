@@ -247,6 +247,16 @@ function schema_check($server, $admin, $password, $aff=0,$CalledByIndexPhP=false
     $affich['nagioscontact']['status']= true;
   }
   
+  if ((!isset($objectclasses['apple-user'])) || (!isset($objectclasses['mount'])) ){
+    $messages['netatalk']['msg']= _("Support for netatalk disabled, no schema seems to be installed");
+    $affich['netatalk']['msg']= $messages['netatalk']['msg']."<td class=\"check\">apple.schema</td>";
+    $messages['netatalk']['status']= FALSE;
+    $affich['netatalk']['status']= FALSE;
+  }else{
+    $affich['netatalk']['msg']= _("Support for netatalk enabled")."<td class=\"check\">apple.schema</td>";
+    $affich['netatalk']['status']= true;
+  }
+  
   /* Fix for PHP Fehler "Undefined index: ldapconf"
    * Ablaufverfolgung[1]: Funktion schema_check	Datei: /home/hickert/gosa/include/functions_setup.inc (Zeile 230)
    */
@@ -553,6 +563,8 @@ function parse_contrib_conf()
   $possible_plugins['pureftp'][]     = "'\n.*<tab.*pureftp.*>.*\n'i";
   $possible_plugins['webdav'][]      = "'\n.*<tab.*webdav.*>.*\n'i";
   $possible_plugins['phpgroupware'][]= "'\n.*<tab.*phpgroupware.*>.*\n'i";
+  $possible_plugins['netatalk'][0]    = "'\n.*<plugin.*netatalk+.*\n.*>.*\n'i";
+  $possible_plugins['netatalk'][1]    = "'\n.*<tab.*netatalk.*>.*\n'i";
 
   /*Header information
      Needed to send the generated gosa.conf to the browser */

@@ -1039,6 +1039,35 @@ function gen_xls ($dn, $filter= "(objectClass=*)", $attributes= array('*'), $rec
     }
 
   }
+  
+  function get_objectclasses()
+  {
+  	  $objectclasses = array();
+  	
+	  # Get base to look for schema 
+	  $sr = @ldap_read ($this->cid, NULL, "objectClass=*", array("subschemaSubentry"));
+	  $attr = @ldap_get_entries($this->cid,$sr);
+	  if (!isset($attr[0]['subschemasubentry'][0])){
+	    return array();
+	  }
+	
+	  # Get list of objectclasses
+	  $nb= $attr[0]['subschemasubentry'][0];
+	  $objectclasses= array();
+	  $sr= ldap_read ($this->cid, $nb, "objectClass=*", array("objectclasses"));
+	  $attrs= ldap_get_entries($this->cid,$sr);
+	  if (!isset($attrs[0])){
+	    return array();
+	  }
+	  foreach ($attrs[0]['objectclasses'] as $val){
+	    $name= preg_replace("/^.* NAME\s+\(*\s*'([^']+)'\s*\)*.*$/", '\\1', $val);
+	    if ($name != $val){
+	      $objectclasses[$name]= $val;
+	    }
+	  }
+	  
+	  return $objectclasses;
+  }
 
 }
 

@@ -1,7 +1,7 @@
 <h2><img class="center" alt="" src="images/fai_partitionTable.png" align="middle">&nbsp;{t}Edit share{/t}</h2>
 <table summary="{t}NFS setup{/t}" width="100%">
 	<tr>
-		<td width="45%">
+		<td width="45%" style="vertical-align:top">
 		<!--Table left-top-->
 			<table summary="">
 				<tr>
@@ -22,7 +22,7 @@
 				</tr>
 				<tr>
 					<td>
-						{t}Path{/t}
+						{t}Path{/t} {$must}
 					</td>
 					<td>
 						<input type="text" size="40" name="path" value="{$path}">
@@ -35,13 +35,35 @@
 		<!--Table right-top-->
 			<table summary="">
 				<tr>
-					<td>
+					<td style="vertical-align:top">
 						{t}Type{/t}
 					</td>
 					<td>
-						<select size="1" name="type">
-   							{html_options options=$types selected=$type}
-						</select>	
+						<select size="1" name="type" id="sharetype">
+		   					{html_options options=$types selected=$type}
+						</select>
+						{if $allow_mounts == TRUE}
+							<br><br><input type="checkbox" name="netatalk_mount" id="netatalk_mount" {$mount_checked} {$appleMountsACL}/><label for="netatalk_mount">{t}Make share visible for Apple systems{/t}</label>
+							{if $appleMountsACLset == FALSE}
+								{literal}
+									<script language="JavaScript">
+										document.getElementById('sharetype').onchange=function() {
+											var foobar=this[this.selectedIndex].value;
+											var box=document.getElementById('netatalk_mount');
+											if(foobar=="NFS"||foobar=="netatalk")
+												box.disabled=false;
+											else {
+												box.disabled=true;
+												box.checked=false;
+											}
+										};
+									 	document.getElementById('sharetype').onchange();
+									</script>
+								{/literal}
+							{/if}
+							<br>
+							<br>
+						{/if}
 					</td>
 				</tr>
 				<tr>

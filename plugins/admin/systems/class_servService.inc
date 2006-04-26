@@ -35,9 +35,21 @@ class servservice extends plugin
                                  "goMailServer"    => array(),
                                  "goCupsServer"    => array());
 
+  var $allow_mounts = false; //do we allow mount entries?
+  var $mounts_to_add = array();
+  var $mounts_to_remove = array();
+  var $oldone = NULL; //temp dave for old mount entry
+
   function servservice ($config, $dn= NULL)
   {
+    
     plugin::plugin ($config, $dn);
+    
+    $ldap = $this->config->get_ldap_link();
+    $avl_objectclasses = @$ldap->get_objectclasses();
+    if (isset($avl_objectclasses["mount"])) {
+        $this->allow_mounts = true;
+    }
     
     /* Assemble final object class list */
     foreach ($this->additionaloc as $oc => $dummy){
@@ -90,30 +102,52 @@ class servservice extends plugin
   function deleteFromList($id){
     unset($this->goExportEntry[$id]);
   }
-
+  
+  function addToMountList($entry) {
+    $key =  key($entry);
+    $type = $this->get_share_type($entry[$key]);
+    if (($type == "netatalk") || ($type == "NFS")) {
+        $this->mounts_to_add[$entry[$key]] = $entry[$key];
+      unset($this->mounts_to_remove[$entry[$key]]);
+    }
+  }
+  
+  function deleteFromMountList($entry) {
+    $type = $this->get_share_type($entry);
+    if (($type == "netatalk") || ($type == "NFS")) {
+      $this->mounts_to_remove[$entry] = $entry;
+      unset($this->mounts_to_add[$entry]);
+    }
+  }
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+  /* Call parent execute */
+  plugin::execute();
 
     /* Fill templating stuff */
     $smarty= get_smarty();
 
     $smarty->assign("staticAddress", "");
-
+  
     if((isset($_POST['DelNfsEnt']))&&(isset($_POST['goExportEntry']))){
+      if($this->allow_mounts){
+        $this->deleteFromMountList($this->goExportEntry[$_POST['goExportEntry']]);
+      }
       $this->deleteFromList($_POST['goExportEntry']);
     }
 
     if(isset($_POST['NewNfsAdd'])){
-      $this->o_subWindow = new servnfs($this->config, $this->dn);
+      $this->oldone = NULL;
+      $this->o_subWindow = new servnfs($this->config,$this->acl, $this->allow_mounts, $this->dn);
       $this->dialog = true;
     }
 
     if((isset($_POST['NewNfsEdit']))&&(isset($_POST['goExportEntry']))){
       $entry = $this->goExportEntry[$_POST['goExportEntry']];
-      $this->o_subWindow = new servnfs($this->config, $this->dn,$entry);
+      $add_mount=isset($this->mounts_to_add[$entry]);
+      $this->oldone=$entry;
+      $this->o_subWindow = new servnfs($this->config,$this->acl,$this->allow_mounts,$this->dn,$entry,$add_mount);
       $this->dialog = true;
     }
 
@@ -130,7 +164,15 @@ class servservice extends plugin
       }else{
         $this->o_subWindow->save_object();
         $newone = $this->o_subWindow->save();
-        $this->addToList($newone) ;
+        $this->addToList($newone);
+        if($this->allow_mounts){
+          if($this->oldone) {
+              $this->deleteFromMountList($this->oldone);
+          }
+          if ($this->o_subWindow->should_create_mount()) {
+              $this->addToMountList($newone);
+          }
+        }
         unset($this->o_subWindow);
         $this->dialog = false;
       }
@@ -138,6 +180,7 @@ class servservice extends plugin
     
     /* Cancel NFS setup */
     if(isset($_POST['NFScancel'])){
+      $this->oldone = NULL;
       unset($this->o_subWindow);
       $this->dialog = false;
     }
@@ -173,7 +216,7 @@ class servservice extends plugin
     ksort($this->goExportEntry);
     foreach($this->goExportEntry as $name=>$values){
        $tmp = split("\|",$values);
-       $tellSmarty[$name] = $tmp[0]." ".$tmp[4];
+       $tellSmarty[$name] = $tmp[0]." ".$tmp[4]." (".$tmp[2].")";
     }
     $smarty->assign("goExportEntry",array_keys($tellSmarty));
     $smarty->assign("goExportEntryKeys",($tellSmarty));
@@ -309,6 +352,11 @@ class servservice extends plugin
         $this->attrs[$name][]= $element;
       }
     }
+    
+    /* Process netatalk mounts */
+    if($this->allow_mounts) {
+      $this->process_mounts();
+    }
  
     /* Remove illegal attributes */
     foreach ($this->additionaloc as $oc => $attrs){
@@ -323,7 +371,7 @@ class servservice extends plugin
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
     $this->cleanup();
-$ldap->modify ($this->attrs); 
+    $ldap->modify ($this->attrs); 
 
     show_ldap_error($ldap->get_error());
     
@@ -336,8 +384,103 @@ $ldap->modify ($this->attrs);
       $this->handle_post_events("add");
     }
   }
+  
+  function process_mounts() {
+    
+    $clip = "cn=" . $this->cn . ",ou=servers,ou=systems,";
+    $mountsdn = "cn=mounts," . substr($this->dn, strlen($clip));
+    
+    $mounts = array(
+      "objectClass" => "container",
+      "cn" => "mounts"
+    );
+    
+    # load data from mounts container
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cat($mountsdn);
+    $attrs = $ldap->fetch();
+    
+    # mounts container not present yet, so we create it
+    if (count($attrs) == 0) {
+        $ldap->cd($mountsdn);
+        $ldap->add($mounts);
+        show_ldap_error($ldap->get_error());
+        gosa_log("Mount container '$mountsdn' has been created");
+    }
+
+  # remove deleted mounts from the container
+  foreach ($this->mounts_to_remove as $entry) {
+    $mount=$this->returnMountEntry($entry);
+      $mountdn = "cn=".$mount["cn"].","."$mountsdn";
+        
+    $ldap->cat($mountdn);
+        $attrs = $ldap->fetch();
+        
+        if (count($attrs) != 0) {
+      $ldap->rmdir($mountdn);
+      show_ldap_error($ldap->get_error());
+      gosa_log("Mount object '".$mountdn."' has been removed");
+        }
+  }
+
+      # add new mounts to the container
+  foreach ($this->mounts_to_add as $entry) {
+        
+      $mount=$this->returnMountEntry($entry);
+      $mountdn = "cn=".$mount["cn"].","."$mountsdn";  
+        $ldap->cd($mountdn);
+        $ldap->add($mount);
+        show_ldap_error($ldap->get_error());
+        gosa_log("Mount object '".$mountdn."' has been added");
+  }
+  }
+  
+  function get_share_type($share) {
+    $tmp = split("\|", $share);
+    return $tmp[2];
+  }
+
+
+  function returnMountEntry($entry) {
+  $item = split("\|", $entry);
+    $name = $item[0];
+    $description = $item[1];
+    $type = $item[2];
+    $charset = $item[3];
+    $path = $item[4];
+    $options = $item[5];
+    
+    switch ($type) {
+      case "netatalk" : {
+            $mount = array(
+            "mountDirectory" => "/Network/Servers/",
+            "mountOption" => array(
+              "net",
+              "url==afp://;AUTH=NO%20USER%20AUTHENT@".$this->cn."/$name/"
+            ),
+            "mountType" => "url",
+            "objectClass" => "mount",
+              "cn" => $this->cn .":/".$name
+          );
+          break;
+      }
+      case "NFS" : {
+        $mount = array(
+            "mountDirectory" => "/Network/Servers/",
+            "mountOption" => "net",
+            "mountType" => "nfs",
+            "objectClass" => "mount",
+              "cn" => $this->cn .":".$path
+          );
+          break;
+      }        
+      default : {
+        continue;
+      }
+    }
+  return $mount;
+  }
 
 }
-
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
