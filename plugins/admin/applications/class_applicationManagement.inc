@@ -637,7 +637,6 @@ class applicationManagement extends plugin
   {
     /* Paste copied/cutted object in here
      */
-    echo "jo";
     if(($s_action == "editPaste") || ($this->CopyPasteHandler->stillOpen())){
       $this->CopyPasteHandler->save_object();
       $this->CopyPasteHandler->SetVar("base", $_SESSION['CurrentMainBase']);
