@@ -180,6 +180,13 @@ class componentGeneric extends plugin
       $this->attrs= $attrs;
     }
 
+    /* If this is a new Object IP & Mac aren't set.
+         IP & Mac are msut attributes, so we set this values by here. */
+    if($this->orig_dn == 'new'){
+      $this->attrs['ipHostNumber'] = $this->netConfigDNS->ipHostNumber;
+      $this->attrs['macAddress']  = $this->netConfigDNS->macAddress;
+    }
+
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
     if ($this->orig_dn == 'new'){
@@ -195,7 +202,7 @@ class componentGeneric extends plugin
 
       $ldap->cd($this->dn);
       $this->cleanup();
-$ldap->modify ($this->attrs); 
+      $ldap->modify ($this->attrs); 
 
       $this->handle_post_events("modify");
     }
