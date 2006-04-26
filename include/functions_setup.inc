@@ -250,20 +250,20 @@ function schema_check($server, $admin, $password, $aff=0,$CalledByIndexPhP=false
   /* Fix for PHP Fehler "Undefined index: ldapconf"
    * Ablaufverfolgung[1]: Funktion schema_check	Datei: /home/hickert/gosa/include/functions_setup.inc (Zeile 230)
    */
-  if(isset($_SESSION['ldapconf']['mail_methods'])){
-    if(($_SESSION['ldapconf']['mail_methods'][$_SESSION['ldapconf']['mail']] == "kolab")&&(!$CalledByIndexPhP)){
-      if(!isset($objectclasses['kolabInetOrgPerson']))  {
-        $messages['kolab']['msg']= _("Support for Kolab disabled, no schema seems to be installed, setting mail-method to cyrus");
-        $affich['kolab']['msg']=$messages['kolab']['msg']."<td class=\"check\">kolab2.schema</td>";
-        $tmp= array_flip($_SESSION['ldapconf']['mail_methods']);
-        $_SESSION['ldapconf']['mail']=$tmp['cyrus'];
-        $messages['kolab']['status']= FALSE;
-        $affich['kolab']['status']= FALSE;
-      }else{
-        $affich['kolab']['msg']=_("Support for Kolab enabled")."<td class=\"check\">gofon.schema</td>";
-        $affich['kolab']['status']= TRUE;
-      }
-    }
+  if((isset($_SESSION['ldapconf']['mail_methods']))&&(isset($_SESSION['ldapconf']))){
+	if(($_SESSION['ldapconf']['mail_methods'][$_SESSION['ldapconf']['mail']] == "kolab")&&(!$CalledByIndexPhP)){
+	  if(!isset($objectclasses['kolabInetOrgPerson']))  {
+	    $messages['kolab']['msg']= _("Support for Kolab disabled, no schema seems to be installed, setting mail-method to cyrus");
+	    $affich['kolab']['msg']=$messages['kolab']['msg']."<td class=\"check\">kolab2.schema</td>";
+	    $tmp= array_flip($_SESSION['ldapconf']['mail_methods']);
+	    $_SESSION['ldapconf']['mail']=$tmp['cyrus'];
+	    $messages['kolab']['status']= FALSE;
+	    $affich['kolab']['status']= FALSE;
+	  }else{
+	    $affich['kolab']['msg']=_("Support for Kolab enabled")."<td class=\"check\">gofon.schema</td>";
+	    $affich['kolab']['status']= TRUE;
+	  }
+	}
   }
   if($aff==0){
     return ($messages);
