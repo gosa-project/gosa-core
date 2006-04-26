@@ -102,7 +102,7 @@ class MultiSelectWindow{
 	}
 
 	/* With this function you can change the text of the information box */
-	function SetInformation($str)i
+	function SetInformation($str)
 	{
 		$this->string_Information = $str;
 	}
