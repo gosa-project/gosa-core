@@ -445,16 +445,7 @@ class groupManagement extends plugin
     $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
     $userimg  = "<img class='center' src='images/select_groups.png' alt='User'    title='%s'>";
 
-
-    /* Extension images 
-        group
-        environment
-        appgroup
-        mailgroup
-        acl
-        reference
-
-     */
+    /* Assign extension images */
     $posiximg = "<input type='image' class='center' src='images/select_groups.png' 
                  name='group_group_edit_%KEY%' 
                  alt='P'  title='"._("Posix")  ."'>";
@@ -514,6 +505,8 @@ class groupManagement extends plugin
 
     foreach($this->grouplist as $key => $val){
 
+      $posix=$mail=$samba=$appl=$phone=$enviro=$empty;
+
       if(isset($val['objectClass'])){
         if(in_array("posixGroup",           $val['objectClass']))   $posix = $posiximg;   else $posix   = $empty;
         if(in_array("gosaMailAccount",      $val['objectClass']))   $mail  = $mailimg;    else $mail    = $empty;
@@ -521,8 +514,6 @@ class groupManagement extends plugin
         if(in_array("gosaApplicationGroup", $val['objectClass']))   $appl  = $applimg;    else $appl    = $empty;
         if(in_array("goFonPickupGroup",     $val['objectClass']))   $phone = $phoneimg;   else $phone   = $empty;
         if(in_array("gotoEnvironment",      $val['objectClass']))   $enviro= $envimg;     else $enviro  = $empty;
-      }else{
-        $posix=$mail=$samba=$appl=$phone=$empty;
       }
 
       $title = "title='dn:&nbsp;".@LDAP::fix($val['dn'])."'";
@@ -658,11 +649,11 @@ class groupManagement extends plugin
     /* Depending on $CreatePosixsList we have to create different lists */
 
     if ($groupfilter['subsearch'] == "checked"){
-      $res= get_list($filter, $this->ui->subtreeACL, $base, array("cn", "description", "gidNumber"),
+      $res= get_list($filter, $this->ui->subtreeACL, $base, array("cn", "description", "gidNumber", "objectClass"),
                      GL_SIZELIMIT);
     } else {
       $base= get_groups_ou().$base;
-      $res= get_list($filter, $this->ui->subtreeACL, $base, array("cn", "description", "gidNumber"),
+      $res= get_list($filter, $this->ui->subtreeACL, $base, array("cn", "description", "gidNumber", "objectClass"),
                      GL_SIZELIMIT);
     }
     if (preg_match("/size limit/i", $error) || preg_match("/size limit/i", $error2)){
