@@ -508,7 +508,7 @@ function get_list($filter, $subtreeACL, $base= "", $attributes= array(), $flags=
   if ($flags & GL_SUBSEARCH) {
     $ldap->search ($filter, $attributes);
   } else {
-    $ldap->ls ($filter);
+    $ldap->ls ($filter,$base,$attributes);
   }
 
   /* Check for size limit exceeded messages for GUI feedback */
