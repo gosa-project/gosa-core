@@ -13,7 +13,7 @@ class baseSelectDialog extends MultiSelectWindow
  
   function baseSelectDialog ($config,$onlyAllowThisBases = array())
   {
-    MultiSelectWindow::MultiSelectWindow($config);
+    MultiSelectWindow::MultiSelectWindow($config,"BASEselectWindow");
     
     $this->selected_base = $config->current['BASE'];
   
