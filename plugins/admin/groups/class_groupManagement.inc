@@ -204,7 +204,7 @@ class groupManagement extends plugin
      */
     if($this->CopyPasteHandler){
       if($str = $this->copyPasteHandling($s_action,$s_entry)){
-        echo $str;
+        return $str;
       }
     }
 
