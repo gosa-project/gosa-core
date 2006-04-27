@@ -27,8 +27,8 @@ class appgroup extends plugin
   var $attributes               = array("gosaMemberApplication");
   var $objectclasses            = array("gosaApplicationGroup");
 
-  var $Release                  = "/";
-  var $InitialRelease           = "/";
+  var $FAIrelease               = "/";
+  var $InitialFAIrelease           = "/";
   var $Releases                 = array();
   var $enableReleaseManagement  = false;
 
@@ -40,7 +40,30 @@ class appgroup extends plugin
 
   function appgroup ($config, $dn= NULL)
   {
+   
+    /* prepare group app for release management */ 
+    $tmp = search_config($config->data,"faiManagement","CLASS");
+    if(!empty($tmp)){
+      $this->enableReleaseManagement = true;
+      $this->objectclasses [] = "FAIreleaseTag";
+      $this->attributes[] =  "FAIrelease";
+    }
+
     plugin::plugin ($config, $dn);
+
+    /* In some case of old applikations with old release tag saving, we 
+        must reassign is_account state.
+       (Or if release management wasn't activated before creating this app) */
+    if($this->enableReleaseManagement){
+  
+      /* Release management is activated && this is a valid group app account,
+          but no release class was found, so activate is_account flag  */
+      if(( in_array("gosaApplicationGroup",$this->attrs['objectClass'])) && 
+         (!in_array("FAIreleaseTag",$this->attrs['objectClass']))){
+        $this->is_account =true;
+      }
+    }
+    
 
     /* Load member applications */
     if (isset ($this->attrs["gosaMemberApplication"][0])){
@@ -120,13 +143,9 @@ class appgroup extends plugin
     $this->gosaMemberApplication = $tmp;
     $this->curbase = $this->config->current['BASE'];
     
-    /* Check if we should enable the release selection 
-     */
-    $tmp = search_config($config->data,"faiManagement","CLASS");
-    if(!empty($tmp)){
-      $this->enableReleaseManagement = true;
-      $this->Release        = $this->getReleaseName();
-      $this->InitialRelease = $this->Release;
+    /* Get required release informations */
+    if($this->enableReleaseManagement){
+      $this->InitialFAIrelease = $this->FAIrelease;
       $this->Releases       = $this->getReleases();
     }
   }
@@ -170,7 +189,7 @@ class appgroup extends plugin
     $ret =array();
   
     /* If current release has changed */
-    if($this->Release != $this->InitialRelease){
+    if($this->FAIrelease != $this->InitialFAIrelease){
   
       /* Walk through all apps which are currently displayed */
       foreach($this->gosaMemberApplication[$this->curCatDir] as $entry){
@@ -182,12 +201,12 @@ class appgroup extends plugin
           $new = array();   // New parameters 
 
           /* There are possibly no parameters specified */
-          if(isset($this->AllAppsForReleaseParameter[$this->InitialRelease][$entry['App']])){
-            $old = $this->AllAppsForReleaseParameter[$this->InitialRelease][$entry['App']];
+          if(isset($this->AllAppsForReleaseParameter[$this->InitialFAIrelease][$entry['App']])){
+            $old = $this->AllAppsForReleaseParameter[$this->InitialFAIrelease][$entry['App']];
           }
 
-          if(isset($this->AllAppsForReleaseParameter[$this->Release][$entry['App']])){
-            $new = $this->AllAppsForReleaseParameter[$this->Release][$entry['App']];
+          if(isset($this->AllAppsForReleaseParameter[$this->FAIrelease][$entry['App']])){
+            $new = $this->AllAppsForReleaseParameter[$this->FAIrelease][$entry['App']];
           }
 
           /*  Both (old & new) have no gosaApplicationParameter
@@ -471,7 +490,7 @@ class appgroup extends plugin
         $tmp = search_config($this->config->data,"faiManagement","CLASS");
         if(!empty($tmp)){
           $tmp = array_flip($this->Releases);
-          $base = $tmp[$this->Release];
+          $base = $tmp[$this->FAIrelease];
 
           $ldap->cd($this->config->current['BASE']);
           $ldap->search("(&(objectClass=gosaApplication)(cn=$appname))",array("gosaApplicationParameter"));
@@ -724,7 +743,7 @@ class appgroup extends plugin
                           title='"._("This application is no longer available.")."'>&nbsp;";
             }else{
               $image = "<img class='center' src='images/select_invalid_application.png' 
-                          title='".sprintf(_("This application is not available in any release named %s."),$this->Release)."'>&nbsp;";
+                          title='".sprintf(_("This application is not available in any release named %s."),$this->FAIrelease)."'>&nbsp;";
             }
       
           }elseif(isset($Differences[$entry['App']]) && ($Differences[$entry['App']] == true)) {
@@ -749,7 +768,7 @@ class appgroup extends plugin
     $smarty->assign("enableReleaseManagement",$this->enableReleaseManagement);
  
     if($this->enableReleaseManagement){
-      $smarty->assign("Release",  $this->Release);
+      $smarty->assign("FAIrelease",  $this->FAIrelease);
       $smarty->assign("Releases", $this->Releases);
 
       if(count($this->used_apps)){
@@ -802,9 +821,7 @@ class appgroup extends plugin
 
   function save_object()
   {
-    if(isset($_POST ['Release'])){
-      $this->Release = $_POST['Release'];
-    }
+    plugin::save_object();
   }
  
 
@@ -861,7 +878,7 @@ $ldap->modify ($this->attrs);
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
     $this->cleanup();
-$ldap->modify ($this->attrs); 
+    $ldap->modify ($this->attrs); 
 
     show_ldap_error($ldap->get_error());
 
@@ -897,15 +914,15 @@ $ldap->modify ($this->attrs);
       $this->enableReleaseManagement = true;
 
       $tmp = array_flip($this->Releases);
-      if(isset($tmp[$this->Release])){
-        $base =  $tmp[$this->Release];
+      if(isset($tmp[$this->FAIrelease])){
+        $base =  $tmp[$this->FAIrelease];
       }else{
         $k = key($tmp);
         $r = $tmp[$k];
-        $this->Release = $k;
+        $this->FAIrelease = $k;
         $base = $r; 
     
-        print_red(sprintf(_("Can't resolve the release name '%s', setting release name to '%s'. Possibly the objects base has changed."),$this->Release,$k));
+        print_red(sprintf(_("Can't resolve the release name '%s', setting release name to '%s'. Possibly the objects base has changed."),$this->FAIrelease,$k));
       }
 
       $base = preg_replace("/ou=apps,.*$/","ou=apps,".$this->curbase,$base);
@@ -944,9 +961,9 @@ $ldap->modify ($this->attrs);
         $testdn = preg_replace("/^[^,]+/","",$testdn);
         $testdn = preg_replace("/^,/","",$testdn);
 
-        if($testdn == preg_replace("/ou=apps,.*$/","ou=apps",$tmp[$this->Release])){
+        if($testdn == preg_replace("/ou=apps,.*$/","ou=apps",$tmp[$this->FAIrelease])){
           $this->AllAppsForRelease[$attrs['dn']] = $attrs['cn'][0];
-          $this->AllAppsForReleaseParameter[$this->Release][$attrs['cn'][0]] = $attrs;
+          $this->AllAppsForReleaseParameter[$this->FAIrelease][$attrs['cn'][0]] = $attrs;
         }
       }
     }else{
@@ -1018,34 +1035,6 @@ $ldap->modify ($this->attrs);
       } 
     }
   return($ret);
-  }
-
-
-  /* Get selected release name.
-   *  it is written in the description tag 
-   *  within ... (.*)$
-   */
-  function getReleaseName()
-  {
-  
-    if(isset($this->parent)){
-      $base = $this->parent->by_object['group'];
-    }else{
-      $base = $this;
-    }
-
-    if(isset($base->attrs['description'][0])){
-      $desc = $base->attrs['description'][0];
-    }else{
-      $desc = "";
-    }
- 
-    if(preg_match("/\(.*\)$/",$desc)){
-      $str = preg_replace("/^.*\((.*)\)$/","\\1",$desc);
-    }else{
-      $str = "/";
-    }
-    return($str);  
   }
 }
 
