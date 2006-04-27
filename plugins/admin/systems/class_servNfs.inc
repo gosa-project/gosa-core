@@ -218,10 +218,12 @@ class servnfs extends plugin
     while($test = $ldap->fetch()){
       if($test['dn']==$this->dn)
         continue;
-      foreach($test['goExportEntry'] as $entry){
-        $tmp = split("\|",$entry);
-        if($tmp[0] == $this->name){
-          $message[]="Name already in use";
+      if(isset($test['goExportEntry'])){
+        foreach($test['goExportEntry'] as $entry){
+          $tmp = split("\|",$entry);
+          if($tmp[0] == $this->name){
+            $message[]="Name already in use";
+          }
         }
       }
     }
