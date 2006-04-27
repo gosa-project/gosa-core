@@ -187,51 +187,54 @@ class appgroup extends plugin
     /* Only diff if it is required 
      */
     $ret =array();
-  
+
     /* If current release has changed */
     if($this->FAIrelease != $this->InitialFAIrelease){
-  
+
       /* Walk through all apps which are currently displayed */
-      foreach($this->gosaMemberApplication[$this->curCatDir] as $entry){
+      if(isset($this->gosaMemberApplication[$this->curCatDir])){
 
-        /* If application is also available in new release, check if parameter differs */
-        if(in_array($entry['App'],$this->AllAppsForRelease)){ 
+        foreach($this->gosaMemberApplication[$this->curCatDir] as $entry){
 
-          $old = array();   // Old application parameter
-          $new = array();   // New parameters 
+          /* If application is also available in new release, check if parameter differs */
+          if(in_array($entry['App'],$this->AllAppsForRelease)){ 
 
-          /* There are possibly no parameters specified */
-          if(isset($this->AllAppsForReleaseParameter[$this->InitialFAIrelease][$entry['App']])){
-            $old = $this->AllAppsForReleaseParameter[$this->InitialFAIrelease][$entry['App']];
-          }
+            $old = array();   // Old application parameter
+            $new = array();   // New parameters 
 
-          if(isset($this->AllAppsForReleaseParameter[$this->FAIrelease][$entry['App']])){
-            $new = $this->AllAppsForReleaseParameter[$this->FAIrelease][$entry['App']];
-          }
-
-          /*  Both (old & new) have no gosaApplicationParameter
-           */
-          if((!isset($old['gosaApplicationParameter'])) && (!isset($new['gosaApplicationParameter']))){
-            $ret[$entry['App']] = false; 
-
-            /* Both got gosaApplicationParameter
-             */
-          }elseif((isset($old['gosaApplicationParameter'])) && (isset($new['gosaApplicationParameter']))){
-            if(array_differs($old['gosaApplicationParameter'],$new['gosaApplicationParameter'])){
-              $ret[$entry['App']]  = true;
-            }else{
-              $ret[$entry['App']]  = false;
+            /* There are possibly no parameters specified */
+            if(isset($this->AllAppsForReleaseParameter[$this->InitialFAIrelease][$entry['App']])){
+              $old = $this->AllAppsForReleaseParameter[$this->InitialFAIrelease][$entry['App']];
             }
-          }
-          /* Initialy had gosaApplicationParameter bot in new release not 
-           */
-        }elseif((isset($old['gosaApplicationParameter'])) && (!isset($new['gosaApplicationParameter']))){
-          $ret[$entry['App']]  = true;
 
-          /* Old release had no gosaApplicationParameter but new got some
-           */
-        }elseif((!isset($old['gosaApplicationParameter'])) && (isset($new['gosaApplicationParameter']))){
-          $ret[$entry['App']]  = true;
+            if(isset($this->AllAppsForReleaseParameter[$this->FAIrelease][$entry['App']])){
+              $new = $this->AllAppsForReleaseParameter[$this->FAIrelease][$entry['App']];
+            }
+
+            /*  Both (old & new) have no gosaApplicationParameter
+             */
+            if((!isset($old['gosaApplicationParameter'])) && (!isset($new['gosaApplicationParameter']))){
+              $ret[$entry['App']] = false; 
+
+              /* Both got gosaApplicationParameter
+               */
+            }elseif((isset($old['gosaApplicationParameter'])) && (isset($new['gosaApplicationParameter']))){
+              if(array_differs($old['gosaApplicationParameter'],$new['gosaApplicationParameter'])){
+                $ret[$entry['App']]  = true;
+              }else{
+                $ret[$entry['App']]  = false;
+              }
+            }
+            /* Initialy had gosaApplicationParameter bot in new release not 
+             */
+          }elseif((isset($old['gosaApplicationParameter'])) && (!isset($new['gosaApplicationParameter']))){
+            $ret[$entry['App']]  = true;
+
+            /* Old release had no gosaApplicationParameter but new got some
+             */
+          }elseif((!isset($old['gosaApplicationParameter'])) && (isset($new['gosaApplicationParameter']))){
+            $ret[$entry['App']]  = true;
+          }
         }
       }
     }
