@@ -91,7 +91,13 @@ class printgeneric extends plugin
       $this->base= dn2base($ui->dn);
       $this->cn= "";
     } else {
-      $this->base= dn2base($this->dn);
+    
+      /* Set base and check if the extracted base exists */
+      $this->base= preg_replace("/ou=printers,ou=systems,/","",dn2base($this->dn));
+      if(!isset($this->config->idepartments[$this->base])){
+        print_red(_("Can't extract a valid base out of object dn, setting base to '%s'."),$_SESSION['CurrentMainBase']);
+        $this->base = $_SESSION['CurrentMainBase'];
+      }
     }
 
     /* Extract selected ppd */
@@ -588,7 +594,7 @@ class printgeneric extends plugin
     if(($this->BelongsTo == "Printer") && (empty($this->cn))){
       $message[]= "The required field 'Printer name' is not set.";
     }
-
+    
     /* Check if there is already an entry with this cn*/
     if (($this->orig_dn != $dn)&&($this->BelongsTo == "Printer")){
       $ldap= $this->config->get_ldap_link();
