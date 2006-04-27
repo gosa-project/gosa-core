@@ -27,7 +27,8 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.14.3 NAME 'gotoMimeApplication'
         SUBSTR caseIgnoreIA5SubstringsMatch
         SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
 
-# Coded application and priority seperated by |. i.e. /usr/bin/gimp|1
+# Coded application and priority seperated by |.
+# i.e. cn=gimp,ou=apps,dc=gonicus,dc=de|1
 attributetype ( 1.3.6.1.4.1.10098.1.1.14.4 NAME 'gotoMimeEmbeddedApplication'
         DESC 'Assigned application and priority for embedded applications'
         EQUALITY caseIgnoreIA5Match
