@@ -2,7 +2,6 @@
 <table summary="" style="width:100%;">
  <tr>
   <td style="width:50%; vertical-align:top;">
-
    <table summary="">
     <tr>
      {if $cn eq 'default'}
@@ -23,15 +22,8 @@
 		<input type="image" name="chooseBase" src="images/folder.png" class="center" title="{t}Select a base{/t}">
     </tr>
    </table>
-
   </td>
-
-  <td rowspan=2 style="border-left:1px solid #A0A0A0">
-   &nbsp;
-  </td>
-
-  <td style="vertical-align:top;">
-
+  <td style="vertical-align:top;border-left:1px solid #A0A0A0;" >
    <table summary="">
     <tr>
      <td><LABEL for="gotoMode">{t}Mode{/t}</LABEL></td>
@@ -41,14 +33,23 @@
       </select>
      </td>
     </tr>
-   </table>
-
+    <tr>
+     <td><LABEL for="gotoSyslogServer">{t}Syslog server{/t}</LABEL></td>
+     <td>
+      <select name="gotoSyslogServer" id="gotoSyslogServer" title="{t}Choose server to use for logging{/t}" {$gotoSyslogServerACL}>
+       {html_options values=$syslogservers output=$syslogservers selected=$gotoSyslogServer_select}
+      </select>
+     </td>
+    </tr>
+	</table>
   </td>
  </tr>
+</table>
+<p class="seperator" style="margin:0px; padding:0px;">&nbsp;</p>
+<table style="width:100%;">
  <tr>
-  <td style="width:50%;">
+  <td style="width:50%;vertical-align:top;">
    <table summary="">
-    <tr><td colspan=2><div style="height:15px;"></div></td></tr>
     <tr>
      <td><LABEL for="gotoTerminalPath">{t}Root server{/t}</LABEL></td>
      <td>
@@ -67,24 +68,20 @@
     </tr>
    </table>
   </td>
-  <td style="vertical-align:top;">
-
-   <table summary="">
-    <tr><td colspan=2><div style="height:15px;"></div></td></tr>
+  <td style="border-left:1px solid #A0A0A0;">
+	<table width="100%">
     <tr>
-     <td><LABEL for="gotoSyslogServer">{t}Syslog server{/t}</LABEL></td>
-     <td>
-      <select name="gotoSyslogServer" id="gotoSyslogServer" title="{t}Choose server to use for logging{/t}" {$gotoSyslogServerACL}>
-       {html_options values=$syslogservers output=$syslogservers selected=$gotoSyslogServer_select}
+     <td colspan="2"><LABEL for="gotoNtpServerSelected">{t}NTP server{/t}</LABEL><br>
+      <select name="gotoNtpServerSelected[]" id="gotoNtpServerSelected" multiple size=5 style="width:100%;"
+			title="{t}Choose server to use for synchronizing time{/t}" {$gotoNtpServerACL}>
+       {html_options options=$gotoNtpServer_select}
       </select>
-     </td>
-    </tr>
-    <tr>
-     <td><LABEL for="gotoNtpServer">{t}NTP server{/t}</LABEL></td>
-     <td>
-      <select name="gotoNtpServer" id="gotoNtpServer" title="{t}Choose server to use for synchronizing time{/t}" {$gotoNtpServerACL}>
-       {html_options values=$ntpservers output=$ntpservers selected=$gotoNtpServer_select}
+	 <br>
+      <select name="gotoNtpServers" id="gotoNtpServers" {$gotoNtpServerACL}>
+       {html_options values=$ntpservers output=$ntpservers }
       </select>
+		<input type="submit" name="addNtpServer" value="{t}Add{/t}">
+		<input type="submit" name="delNtpServer" value="{t}Delete{/t}">
      </td>
     </tr>
    </table>

@@ -12,7 +12,7 @@ class termgeneric extends plugin
   var $gotoTerminalPath= "";
   var $gotoSwapServer= "";
   var $gotoSyslogServer= "";
-  var $gotoNtpServer= "";
+  var $gotoNtpServer= array();
   var $gotoSndModule= "";
   var $gotoFloppyEnable= "";
   var $gotoCdromEnable= "";
@@ -57,6 +57,15 @@ class termgeneric extends plugin
       }
     }
 
+    /* Create used ntp server array */
+    $this->gotoNtpServer= array();
+    if(isset($this->attrs['gotoNtpServer'])){
+      unset($this->attrs['gotoNtpServer']['count']);
+      foreach($this->attrs['gotoNtpServer'] as $server){
+        $this->gotoNtpServer[$server] = $server;
+      }
+    }
+
     $this->modes["disabled"]= _("disabled");
     $this->modes["text"]= _("text");
     $this->modes["graphic"]= _("graphic");
@@ -74,8 +83,8 @@ class termgeneric extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
@@ -153,6 +162,20 @@ class termgeneric extends plugin
         _("This 'dn' has no terminal features.")."</b>";
       return($display);
     }
+
+    if((isset($_POST['addNtpServer'])) && (isset($_POST['gotoNtpServers']))){
+      $this->gotoNtpServer[$_POST['gotoNtpServers']] = $_POST['gotoNtpServers'];
+    }
+
+    if((isset($_POST['delNtpServer'])) && (isset($_POST['gotoNtpServerSelected']))){
+      foreach($_POST['gotoNtpServerSelected'] as $name){
+        unset($this->gotoNtpServer[$name]);
+      } 
+      if(count($this->gotoNtpServer) == 0){
+        $this->gotoNtpServer['default'] = "default";
+      }
+    }
+
 
     /* Fill templating stuff */
     $smarty= get_smarty();
