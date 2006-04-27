@@ -11,14 +11,14 @@ class selectPrinterDialog extends plugin
   var $ignore_account       = TRUE;
   var $attributes           = array();
   var $objectclasses        = array("whatever");
-  var $use_existing         = false;  
+  var $AlreadyAssigned      = array();  
   var $regex                = "*";
   var $depselect            = "/";
   var $deplist              = "/";
 
-  function selectPrinterDialog ($config, $dn= NULL,$use_existing=false )
+  function selectPrinterDialog ($config, $dn= NULL,$alreadyused=array() )
   {
-    $this->use_existing = $use_existing;
+    $this->AlreadyAssigned = $alreadyused;
     plugin::plugin ($config, $dn);
     $this->depselect = $this->config->current['BASE'];
   }
@@ -87,6 +87,9 @@ class selectPrinterDialog extends plugin
     $ldap->cd($this->depselect);
     $ldap->search("(&(objectClass=gotoPrinter)(cn=".$this->regex."))",array("*"));
     while($printer = $ldap->fetch()){
+
+      if(isset($this->AlreadyAssigned[$printer['cn'][0]])) continue;
+
       if($detailed ==true){
         $a_return[$printer['cn'][0]] = $printer;
       }else{

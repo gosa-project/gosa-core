@@ -611,7 +611,7 @@ class environment extends plugin
     /* First handle Add Post. Open a dialog that allows us to select a printer or two */ 
     if(isset($_POST['gotoPrinterAdd'])){
       $this->is_dialog=true;
-      $this->dialog = new selectPrinterDialog($this->config,$this->dn);
+      $this->dialog = new selectPrinterDialog($this->config,$this->dn,$this->gotoPrinter);
     }
 
     if(isset($_POST['PrinterCancel'])){
