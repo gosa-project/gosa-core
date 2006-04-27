@@ -24,6 +24,8 @@ For example to use the apple.schema from osx 10.4 you'll have to
     - smbHome
     - rid
     - primaryGroupID
+- uncomment the apple-user-homeDirectory attribute
+- add the apple-user-homeDirectory attribute to the apple-user objectclass
 
 YMMV depending on the version of the apple.schema. As far as I can remember the
 apple.schema from 10.2 does not include all neccessary attributes and object-
