@@ -127,7 +127,7 @@ class termDNS extends plugin
       foreach($this->attributes as $attr){
         $smarty->assign($attr,$this->$attr);
       }
-      $smarty->assign("staticAddress", "");
+      $smarty->assign("staticAddress","<font class=\"must\">*</font>");
       $display.= $smarty->fetch(get_template_path('network.tpl', TRUE));
       return($display);
     }else{
