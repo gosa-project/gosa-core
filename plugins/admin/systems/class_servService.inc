@@ -46,7 +46,7 @@ class servservice extends plugin
     plugin::plugin ($config, $dn);
     
     $ldap = $this->config->get_ldap_link();
-    $avl_objectclasses = @$ldap->get_objectclasses();
+    $avl_objectclasses = $ldap->get_objectclasses();
     if (isset($avl_objectclasses["mount"])) {
         $this->allow_mounts = true;
     }
