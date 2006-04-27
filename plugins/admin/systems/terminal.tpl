@@ -74,7 +74,11 @@
 	 <td colspan="2">
 		<input type="checkbox" value="1" name="inheritTimeServer"
 			{if $inheritTimeServer } checked {/if} 
-			onClick="javascript: document.mainform.submit();">{t}Inherit time server attributes{/t}
+			onClick="javascript:
+					changeState('gotoNtpServerSelected');
+					changeState('gotoNtpServers');
+					changeState('addNtpServer');
+					changeState('delNtpServer');">{t}Inherit time server attributes{/t}
 	 </td>
 	</tr>
 	<tr>
