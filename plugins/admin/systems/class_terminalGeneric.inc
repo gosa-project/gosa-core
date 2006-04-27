@@ -58,7 +58,7 @@ class termgeneric extends plugin
     }
 
     /* Create used ntp server array */
-    $this->gotoNtpServer= array();
+    $this->gotoNtpServer= array("default"=>"default");
     if(isset($this->attrs['gotoNtpServer'])){
       unset($this->attrs['gotoNtpServer']['count']);
       foreach($this->attrs['gotoNtpServer'] as $server){
@@ -163,14 +163,18 @@ class termgeneric extends plugin
       return($display);
     }
 
+    /* Add new ntp Server to our list */
     if((isset($_POST['addNtpServer'])) && (isset($_POST['gotoNtpServers']))){
       $this->gotoNtpServer[$_POST['gotoNtpServers']] = $_POST['gotoNtpServers'];
     }
 
+    /* Delete selected NtpServer for list of used servers  */
     if((isset($_POST['delNtpServer'])) && (isset($_POST['gotoNtpServerSelected']))){
       foreach($_POST['gotoNtpServerSelected'] as $name){
         unset($this->gotoNtpServer[$name]);
       } 
+    
+      /* if nothing is selected, add default */
       if(count($this->gotoNtpServer) == 0){
         $this->gotoNtpServer['default'] = "default";
       }
@@ -350,6 +354,12 @@ class termgeneric extends plugin
         $attrs[$key]= $val;
       }
       $this->attrs= $attrs;
+    }
+
+    /* Set ntpServers */
+    $this->attrs['gotoNtpServer'] = array();
+    foreach($this->gotoNtpServer as $server){
+      $this->attrs['gotoNtpServer'][] = $server;
     }
 
     /* Write back to ldap */
