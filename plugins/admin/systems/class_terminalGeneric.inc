@@ -13,6 +13,7 @@ class termgeneric extends plugin
   var $gotoSwapServer= "";
   var $gotoSyslogServer= "";
   var $gotoNtpServer= array();
+  var $gotoNtpServers= array();
   var $gotoSndModule= "";
   var $gotoFloppyEnable= "";
   var $gotoCdromEnable= "";
@@ -30,6 +31,8 @@ class termgeneric extends plugin
   var $base= "";
   var $cn= "";
   var $orig_dn= "";
+
+  var $inheritTimeServer = true;
 
   /* Plugin side filled */
   var $modes= array();
@@ -58,11 +61,26 @@ class termgeneric extends plugin
     }
 
     /* Create used ntp server array */
-    $this->gotoNtpServer= array("default"=>"default");
+    $this->gotoNtpServer= array();
     if(isset($this->attrs['gotoNtpServer'])){
+      $this->inheritTimeServer = false;
       unset($this->attrs['gotoNtpServer']['count']);
       foreach($this->attrs['gotoNtpServer'] as $server){
         $this->gotoNtpServer[$server] = $server;
+      }
+    }
+
+    /* Set inherit checkbox state */
+    if(in_array("default",$this->gotoNtpServer)){
+      $this->inheritTimeServer = true;
+      $this->gotoNtpServer=array();
+    }
+
+    /* Create available ntp options */
+    $this->gotoNtpServers = $this->config->data['SERVERS']['NTP'];
+    foreach($this->gotoNtpServers as $key => $server){
+      if($server == "default"){
+        unset($this->gotoNtpServers[$key]);
       }
     }
 
@@ -173,13 +191,7 @@ class termgeneric extends plugin
       foreach($_POST['gotoNtpServerSelected'] as $name){
         unset($this->gotoNtpServer[$name]);
       } 
-    
-      /* if nothing is selected, add default */
-      if(count($this->gotoNtpServer) == 0){
-        $this->gotoNtpServer['default'] = "default";
-      }
     }
-
 
     /* Fill templating stuff */
     $smarty= get_smarty();
@@ -187,6 +199,9 @@ class termgeneric extends plugin
     $smarty->assign("staticAddress", "");
 
     $smarty->assign("bases", $this->config->idepartments);
+
+    /* tell smarty the inherit checkbox state */
+    $smarty->assign("inheritTimeServer",$this->inheritTimeServer);
 
     /* Check if terminal is online */
     $query= "fping -q -r 1 -t 500 ".$this->cn;
@@ -221,9 +236,9 @@ class termgeneric extends plugin
       }
     }
   
-    $smarty->assign("nfsservers", $tmp2);
-    $smarty->assign("syslogservers", $this->config->data['SERVERS']['SYSLOG']);
-    $smarty->assign("ntpservers", $this->config->data['SERVERS']['NTP']);
+    $smarty->assign("nfsservers",     $tmp2);
+    $smarty->assign("syslogservers",  $this->config->data['SERVERS']['SYSLOG']);
+    $smarty->assign("ntpservers",     $this->gotoNtpServers);
 
     /* Variables */
     foreach(array("base", "gotoMode", "gotoTerminalPath", "gotoSwapServer",
@@ -278,6 +293,14 @@ class termgeneric extends plugin
     /* Save terminal path to parent since it is used by termstartup, too */
     $this->parent->by_object['termstartup']->gotoTerminalPath=
       $this->gotoTerminalPath;
+  
+    if(isset($_POST['cn'])){
+      if(isset($_POST["inheritTimeServer"])){
+        $this->inheritTimeServer = true;
+      }else{
+        $this->inheritTimeServer = false;
+      }
+    }  
   }
 
 
@@ -320,6 +343,11 @@ class termgeneric extends plugin
       }
     }
 
+    /* Check for valid ntpServer selection */
+    if((!$this->inheritTimeServer) && (!count($this->gotoNtpServer))){
+      $message[]= _("There must be at least one NTP server selected, or the inherit mode activated.");
+    }
+
     return ($message);
   }
 
@@ -356,10 +384,14 @@ class termgeneric extends plugin
       $this->attrs= $attrs;
     }
 
-    /* Set ntpServers */
-    $this->attrs['gotoNtpServer'] = array();
-    foreach($this->gotoNtpServer as $server){
-      $this->attrs['gotoNtpServer'][] = $server;
+    if($this->inheritTimeServer){
+      $this->attrs['gotoNtpServer'] = "default";
+    }else{  
+      /* Set ntpServers */
+      $this->attrs['gotoNtpServer'] = array();
+      foreach($this->gotoNtpServer as $server){
+        $this->attrs['gotoNtpServer'][] = $server;
+      }
     }
 
     /* Write back to ldap */

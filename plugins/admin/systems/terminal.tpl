@@ -71,17 +71,26 @@
   <td style="border-left:1px solid #A0A0A0;">
 	<table width="100%">
     <tr>
-     <td colspan="2"><LABEL for="gotoNtpServerSelected">{t}NTP server{/t}</LABEL><br>
+	 <td colspan="2">
+		<input type="checkbox" value="1" name="inheritTimeServer"
+			{if $inheritTimeServer } checked {/if} 
+			onClick="javascript: document.mainform.submit();">{t}Inherit time server attributes{/t}
+	 </td>
+	</tr>
+	<tr>
+     <td colspan="2" style='padding-left:14px;padding-top:5px;'><LABEL for="gotoNtpServerSelected">{t}NTP server{/t}</LABEL><br>
       <select name="gotoNtpServerSelected[]" id="gotoNtpServerSelected" multiple size=5 style="width:100%;"
-			title="{t}Choose server to use for synchronizing time{/t}" {$gotoNtpServerACL}>
+			title="{t}Choose server to use for synchronizing time{/t}" {$gotoNtpServerACL} {if $inheritTimeServer} disabled {/if}>
        {html_options options=$gotoNtpServer_select}
       </select>
 	 <br>
-      <select name="gotoNtpServers" id="gotoNtpServers" {$gotoNtpServerACL}>
+      <select name="gotoNtpServers" id="gotoNtpServers" {$gotoNtpServerACL} {if $inheritTimeServer} disabled {/if} >
        {html_options values=$ntpservers output=$ntpservers }
       </select>
-		<input type="submit" name="addNtpServer" value="{t}Add{/t}">
-		<input type="submit" name="delNtpServer" value="{t}Delete{/t}">
+		<input type="submit" name="addNtpServer" value="{t}Add{/t}"		id="addNtpServer" {$gotoNtpServerACL}
+		 {if $inheritTimeServer} disabled {/if}>
+		<input type="submit" name="delNtpServer" value="{t}Delete{/t}"	id="delNtpServer" {$gotoNtpServerACL}
+		 {if $inheritTimeServer} disabled {/if}>
      </td>
     </tr>
    </table>
