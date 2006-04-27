@@ -122,7 +122,7 @@
  </tr>
 </table>
 
-
+<input type="hidden" name="termgeneric_posted" value="1">
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page

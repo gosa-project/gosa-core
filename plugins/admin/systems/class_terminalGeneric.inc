@@ -294,7 +294,7 @@ class termgeneric extends plugin
     $this->parent->by_object['termstartup']->gotoTerminalPath=
       $this->gotoTerminalPath;
   
-    if(isset($_POST['cn'])){
+    if(isset($_POST['termgeneric_posted'])){
       if(isset($_POST["inheritTimeServer"])){
         $this->inheritTimeServer = true;
       }else{
