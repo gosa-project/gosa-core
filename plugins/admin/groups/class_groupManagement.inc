@@ -521,7 +521,13 @@ class groupManagement extends plugin
         $desc = "";
       }else{
         $desc = " - [ ".$val['description'][0]." ]";
-      }      
+      } 
+    
+      /* FAIrelease tag from groupApplications */    
+      if(isset($val['FAIrelease'][0])){
+        $desc .= " (".$val['FAIrelease'][0].")";
+      }
+ 
       $field1 = array("string" => sprintf($userimg,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)), "attach" => "style='' ".$title);
       $field3 = array("string" => preg_replace("/%KEY%/", $key, $posix."&nbsp;".$enviro."&nbsp;".$mail."&nbsp;".$samba."&nbsp;".$appl."&nbsp;".$phone), "attach" => "style='width:136px;'");  
@@ -645,14 +651,20 @@ class groupManagement extends plugin
       }
     }
 
-    /* Depending on $CreatePosixsList we have to create different lists */
+
+    /* Create attribute array, if releasemanagement is activated we search for FAIrelease too */
+    $attrs = array("cn", "description", "gidNumber", "objectClass");
+    $tmp = search_config($this->config->data,"faiManagement","CLASS");
+    if($tmp){
+      $attrs[] = "FAIrelease";
+    }
 
     if ($groupfilter['subsearch'] == "checked"){
-      $res= get_list($filter, $this->ui->subtreeACL, $base, array("cn", "description", "gidNumber", "objectClass"),
+      $res= get_list($filter, $this->ui->subtreeACL, $base, array("cn", "description", "gidNumber", "objectClass","FAIrelease"),
                      GL_SIZELIMIT);
     } else {
       $base= get_groups_ou().$base;
-      $res= get_list($filter, $this->ui->subtreeACL, $base, array("cn", "description", "gidNumber", "objectClass"),
+      $res= get_list($filter, $this->ui->subtreeACL, $base, array("cn", "description", "gidNumber", "objectClass","FAIrelease"),
                      GL_SIZELIMIT);
     }
     if (preg_match("/size limit/i", $error) || preg_match("/size limit/i", $error2)){
