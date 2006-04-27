@@ -557,7 +557,7 @@ class workstartup extends plugin
     /* Create divSelectBox for ldap server selection
      */
     $SelectBoxLdapServer = new divSelectBox("LdapServer");
-    $SelectBoxLdapServer->SetHeight(80);
+    $SelectBoxLdapServer->SetHeight(130);
 
     /* Set first entry as selected, if $this->gotoLdapServer is empty
      *  or given entry is no longer available ... 

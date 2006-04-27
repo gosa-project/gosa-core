@@ -73,6 +73,11 @@ class workgeneric extends plugin
       $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,/", "", $this->dn);
     }
 
+    /* Workaround for not single-value attribute gotoNtpServer */
+    if (isset($this->attrs['gotoNtpServer'][0])){
+      $this->gotoNtpServer= $this->attrs['gotoNtpServer'][0];
+    }
+
     /* Save 'dn' for later referal */
     $this->orig_dn= $this->dn;
   }

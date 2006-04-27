@@ -5,11 +5,6 @@
 
    <table summary="" style="width:100%">
     <tr>
-     <td colspan="2" style='vertical-align:top;padding-top:3px;'><LABEL for="gotoLdapServer">{t}LDAP server{/t}</LABEL><br>
-	  {$SelectBoxLdapServer}	
-     </td>
-    </tr>
-    <tr>
      <td><LABEL for="gotoBootKernel">{t}Boot kernel{/t}</LABEL></td>
      <td style="width:70%">
         <select id="gotoBootKernel" name="gotoBootKernel" {$gotoBootKernelACL}>
@@ -20,8 +15,13 @@
     </tr>
     <tr>
      <td><LABEL for="customParameters">{t}Custom options{/t}</LABEL></td>
-     <td><input name="customParameters" id="customParameters"  size=25 maxlength=500 {$gotoKernelParametersACL}
+     <td><input name="customParameters" id="customParameters" size=25 maxlength=500 {$gotoKernelParametersACL}
                 value="{$customParameters}" title="{t}Enter any parameters that should be passed to the kernel as append line during bootup{/t}"></td>
+    </tr>
+    <tr>
+     <td colspan="2" style='vertical-align:top;padding-top:3px;'><LABEL for="gotoLdapServer">{t}LDAP server{/t}</LABEL><br>
+	  {$SelectBoxLdapServer}	
+     </td>
     </tr>
    </table>
 
