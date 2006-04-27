@@ -269,6 +269,7 @@ class servservice extends plugin
   /* Save data to object */
   function save_object()
   {
+    plugin::save_object();
     if (isset($_POST['servicetab'])){
       $tmp = $this->goTimeSource;
   
