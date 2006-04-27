@@ -35,7 +35,7 @@
             changeState('NewNTPAddId');">
 
         <b>{t}Time Service{/t}</b>
-   <table summary="" stlye="width:100%">
+   <table summary="" style="width:100%">
     <tr>
      <td>
         <select style="width:100%;" id="goTimeEntry" name="goTimeSource[]" {$goNtpServerState} {$goNtpServerACL}  size=4 multiple>
