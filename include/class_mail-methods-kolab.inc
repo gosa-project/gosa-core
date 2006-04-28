@@ -44,41 +44,6 @@ class mailMethodKolab extends mailMethodCyrus
     return (TRUE);
   }
 
-  function getQuota($folder)
-  {
-    $result= array('quotaUsage' => '', 'gosaMailQuota' => '');
-
-    /* Load quota settings */
-    $folder = $folder;
-
-    /* try to read quota with style of users
-       user/name@server.de
-     */
-    $quota_value = @imap_get_quota($this->mbox, str_replace("user.","user/",$folder));
-
-    /* If obove method failed, try to read quota with style of users
-       user.name@server.de
-     */
-    if(!is_array($quota_value)){
-      $quota_value = @imap_get_quota($this->mbox, $folder);
-    }
-
-    if(is_array($quota_value)) {
-      if (isset($quota_value["STORAGE"]) && is_array($quota_value["STORAGE"])){
-        /* use for PHP >= 4.3 */
-        $result['quotaUsage']=    ($quota_value["STORAGE"]['usage'] / 1024);
-        $result['gosaMailQuota']= ($quota_value["STORAGE"]['limit'] / 1024);
-      } else {
-        /* backward icompatible */
-        $result['quotaUsage']=    ($quota_value['usage'] / 1024);
-        $result['gosaMailQuota']= ($quota_value['limit'] / 1024);
-      }
-    }
-    return ($result);
-  }
-
-
-
   function deleteMailbox($folder)
   {
     return (TRUE);
@@ -218,7 +183,7 @@ class mailMethodKolab extends mailMethodCyrus
     foreach($this->attribute_map as $kolabAttr){
       $mailObject->attrs[$kolabAttr] = array();
     }  
-    //$mailObject->attrs['kolabDeleteFlag']= preg_replace('%imap://%', '', $mailObject->gosaMailServer);
+    $mailObject->attrs['kolabDeleteFlag']= preg_replace('%imap://%', '', $mailObject->gosaMailServer);
   }
 
 }
