@@ -45,6 +45,7 @@ class config  {
   /* Keep a copy of the current deparment list */
   var $departments= array();
   var $idepartments= array();
+  var $adepartments= array();
 
   function config($filename, $basedir= "")
   {
@@ -469,14 +470,22 @@ class config  {
 
     /* Initialize result hash */
     $result= array();
+    $administrative= array();
     $result['/']= $this->current['BASE'];
 
     /* Get list of department objects */
     $ldap= $this->get_ldap_link();
     $ldap->cd ($this->current['BASE']);
-    $ldap->search ("(objectClass=gosaDepartment)", array("ou"));
+    $ldap->search ("(objectClass=gosaDepartment)", array("ou", "objectClass", "gosaUnitTag"));
     while ($attrs= $ldap->fetch()){
       $dn= $ldap->getDN();
+
+      /* Save administrative departments */
+      if (in_array_ics("gosaAdministrativeUnit", $attrs['objectClass']) &&
+          isset($attrs['gosaUnitTag'][0])){
+        $administrative[$dn]= $attrs['gosaUnitTag'];
+      }
+    
       if ($dn == $ignore_dn){
         continue;
       }
@@ -487,6 +496,7 @@ class config  {
       }
     }
 
+    $this->adepartments= $administrative;
     $this->departments= $result;
   }
 
