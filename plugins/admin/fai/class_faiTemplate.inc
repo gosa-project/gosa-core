@@ -191,9 +191,7 @@ class faiTemplate extends plugin
       return($display);
     }
 
-     /* Divlist            added 28.02.2006
-       Containing FAIscripts
-     */
+     /* Divlist Containing FAItemplates */
     $divlist = new divSelectBox("FAItemplates");
     $divlist->setHeight(400);
     if((chkacl($this->acl,"cn")!="") || ($this->FAIstate == "freeze")){
