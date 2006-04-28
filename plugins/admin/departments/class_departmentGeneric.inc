@@ -87,7 +87,6 @@ class department extends plugin
 		$this->config->make_idepartments();
 		$smarty= get_smarty();
 
-
 		/* Base select dialog */
 		$once = true;
 		foreach($_POST as $name => $value){
