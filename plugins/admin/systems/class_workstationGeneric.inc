@@ -10,7 +10,8 @@ class workgeneric extends plugin
   /* Generic terminal attributes */
   var $gotoMode= "locked";
   var $gotoSyslogServer= "";
-  var $gotoNtpServer= "";
+  var $gotoNtpServer= array();
+  var $gotoNtpServers= array();
   var $gotoSndModule= "";
   var $gotoFloppyEnable= "";
   var $gotoCdromEnable= "";
@@ -37,6 +38,8 @@ class workgeneric extends plugin
 
   var $netConfigDNS;
 
+  var $inheritTimeServer = true;
+
   /* attribute list for save action */
   var $ignore_account= TRUE;
   var $attributes= array("gotoMode", "gotoSyslogServer", "gotoNtpServer",
@@ -60,6 +63,30 @@ class workgeneric extends plugin
       }
     }
 
+    /* Create used ntp server array */
+    $this->gotoNtpServer= array();
+    if(isset($this->attrs['gotoNtpServer'])){
+      $this->inheritTimeServer = false;
+      unset($this->attrs['gotoNtpServer']['count']);
+      foreach($this->attrs['gotoNtpServer'] as $server){
+        $this->gotoNtpServer[$server] = $server;
+      }
+    }
+
+    /* Set inherit checkbox state */
+    if(in_array("default",$this->gotoNtpServer)){
+      $this->inheritTimeServer = true;
+      $this->gotoNtpServer=array();
+    }
+
+    /* Create available ntp options */
+    $this->gotoNtpServers = $this->config->data['SERVERS']['NTP'];
+    foreach($this->gotoNtpServers as $key => $server){
+      if($server == "default"){
+        unset($this->gotoNtpServers[$key]);
+      }
+    }
+
     $this->modes["active"]= _("Activated");
     $this->modes["locked"]= _("Locked");
     $this->modes["memcheck"]= _("Memory test");
@@ -71,11 +98,6 @@ class workgeneric extends plugin
       $this->base= dn2base($ui->dn);
     } else {
       $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,/", "", $this->dn);
-    }
-
-    /* Workaround for not single-value attribute gotoNtpServer */
-    if (isset($this->attrs['gotoNtpServer'][0])){
-      $this->gotoNtpServer= $this->attrs['gotoNtpServer'][0];
     }
 
     /* Save 'dn' for later referal */
@@ -138,12 +160,25 @@ class workgeneric extends plugin
       }
     }
 
+    /* Add new ntp Server to our list */ 
+    if((isset($_POST['addNtpServer'])) && (isset($_POST['gotoNtpServers']))){
+      $this->gotoNtpServer[$_POST['gotoNtpServers']] = $_POST['gotoNtpServers'];
+    }
+
+    /* Delete selected NtpServer for list of used servers  */
+    if((isset($_POST['delNtpServer'])) && (isset($_POST['gotoNtpServerSelected']))){
+      foreach($_POST['gotoNtpServerSelected'] as $name){
+        unset($this->gotoNtpServer[$name]);
+      }
+    }
+
     /* Fill templating stuff */
     $smarty= get_smarty();
     $smarty->assign("cn", $this->cn);
     $smarty->assign("l", $this->l);
     $smarty->assign("bases", $this->config->idepartments);
     $smarty->assign("staticAddress", "");
+    $smarty->assign("gotoNtpServers",$this->gotoNtpServers);
         
     /* Check if workstation is online */
     $query= "fping -q -r 1 -t 500 ".$this->cn;
@@ -173,6 +208,9 @@ class workgeneric extends plugin
       $smarty->assign($val."ACL", chkacl($this->acl, $val));
     }
     $smarty->assign("actionACL", chkacl($this->acl, 'action'));
+
+    /* tell smarty the inherit checkbox state */
+    $smarty->assign("inheritTimeServer",$this->inheritTimeServer);
 
     /* Show main page */
     $smarty->assign("netconfig", $this->netConfigDNS->execute());
@@ -210,6 +248,16 @@ class workgeneric extends plugin
       $this->base= $_POST['base'];
     }
     $this->netConfigDNS->save_object();
+
+    /* Set inherit mode */
+    if(isset($_POST['workgeneric_posted'])){
+      if(isset($_POST["inheritTimeServer"])){
+        $this->inheritTimeServer = true;
+      }else{
+        $this->inheritTimeServer = false;
+      }
+    }
+
   }
 
 
@@ -249,6 +297,11 @@ class workgeneric extends plugin
         }
       }
     }
+    
+    /* Check for valid ntpServer selection */
+    if((!$this->inheritTimeServer) && (!count($this->gotoNtpServer))){
+      $message[]= _("There must be at least one NTP server selected, or the inherit mode activated.");
+    }
 
     return ($message);
   }
@@ -284,6 +337,17 @@ class workgeneric extends plugin
         $attrs[$key]= $val;
       }
       $this->attrs= $attrs;
+    }
+
+    /* Update ntp server settings */
+    if($this->inheritTimeServer){
+      $this->attrs['gotoNtpServer'] = "default";
+    }else{
+      /* Set ntpServers */
+      $this->attrs['gotoNtpServer'] = array();
+      foreach($this->gotoNtpServer as $server){
+        $this->attrs['gotoNtpServer'][] = $server;
+      }
     }
 
     /* Write back to ldap */
