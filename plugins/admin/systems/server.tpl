@@ -21,7 +21,7 @@
 	  </tr>
 	</table>
   </td>
-  <td style="vertical-align:top">
+  <td  style="vertical-align:top;border-left:1px solid #A0A0A0;">
 	<table summary="">
    	<tr>
      <td>{t}Mode{/t}</td>
