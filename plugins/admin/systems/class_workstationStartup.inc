@@ -890,8 +890,9 @@ class workstartup extends plugin
     if($this->FAIdebianMirror == "none"){
       $this->FAIdebianMirror = "";
     }
-    
-    if((count($this->attrs['FAIclass'])==0)&&(empty($this->FAIdebianMirror))){
+   
+    /* Remove FAI objects if no FAI class is selected */ 
+    if(count($this->FAIclass)==0){
       $tmp = array();
       foreach($this->attrs['objectClass'] as $class){
         if($class != "FAIobject"){
