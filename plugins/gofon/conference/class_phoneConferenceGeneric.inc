@@ -111,11 +111,9 @@ class conference extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
-    $this->config->departments    = get_departments($this->dn);
-    $this->config->make_idepartments();
     $smarty= get_smarty();
 
     $smarty->assign("bases" ,$this->config->idepartments);

@@ -67,7 +67,6 @@ class phoneConferenceManagment extends plugin
 	plugin::execute();
 
     /* Reload departments */
-    $this->config->departments	= get_departments();
     $smarty						          = get_smarty();
     $display 					          = "";
     $s_action 					        = "";  // Will contain an action, like del or edit
