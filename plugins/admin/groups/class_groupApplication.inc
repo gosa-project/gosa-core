@@ -58,7 +58,7 @@ class appgroup extends plugin
   
       /* Release management is activated && this is a valid group app account,
           but no release class was found, so activate is_account flag  */
-      if(( in_array("gosaApplicationGroup",$this->attrs['objectClass'])) && 
+      if($dn != "new" && ( in_array("gosaApplicationGroup",$this->attrs['objectClass'])) && 
          (!in_array("FAIreleaseTag",$this->attrs['objectClass']))){
         $this->is_account =true;
       }
