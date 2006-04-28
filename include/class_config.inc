@@ -462,6 +462,35 @@ class config  {
     }
   }
 
+
+  function get_departments($ignore_dn= "")
+  {
+    global $config;
+
+    /* Initialize result hash */
+    $result= array();
+    $result['/']= $this->current['BASE'];
+
+    /* Get list of department objects */
+    $ldap= $this->get_ldap_link();
+    $ldap->cd ($this->current['BASE']);
+    $ldap->search ("(objectClass=gosaDepartment)", array("ou"));
+    while ($attrs= $ldap->fetch()){
+      $dn= $ldap->getDN();
+      if ($dn == $ignore_dn){
+        continue;
+      }
+
+      /* Only assign non-root departments */
+      if ($dn != $result['/']){
+        $result[convert_department_dn($dn)]= $dn;
+      }
+    }
+
+    $this->departments= $result;
+  }
+
+
   function make_idepartments($max_size= 28)
   {
     global $config;

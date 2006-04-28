@@ -65,7 +65,7 @@ class departmentManagement extends plugin
 	$_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^dep_edit_.*/","/^dep_del_.*/");
 
 		/* Reload departments */
-		$this->config->departments	= get_departments();
+		$this->config->get_departments();
 		$smarty						= get_smarty();
 		$display 					= "";
 		$depfilter					= get_global("depfilter");

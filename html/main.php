@@ -232,9 +232,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
    compromise between speed and beeing up to date */
 if (isset($_GET['reset'])){
   if (!isset($_SESSION['cached_departments'])){
-    $_SESSION['cached_departments']= get_departments();
+    $config->get_departments();
+    $_SESSION['cached_departments']= $config->departments;
+  } else {
+    $config->departments= $_SESSION['cached_departments'];
   }
-  $config->departments= $_SESSION['cached_departments'];
   $config->make_idepartments ();
   if (isset($_SESSION['objectinfo'])){
     unset ($_SESSION['objectinfo']);

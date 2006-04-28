@@ -819,34 +819,6 @@ function get_base_from_people($dn)
 }
 
 
-function get_departments($ignore_dn= "")
-{
-  global $config;
-
-  /* Initialize result hash */
-  $result= array();
-  $result['/']= $config->current['BASE'];
-
-  /* Get list of department objects */
-  $ldap= $config->get_ldap_link();
-  $ldap->cd ($config->current['BASE']);
-  $ldap->search ("(objectClass=gosaDepartment)", array("ou"));
-  while ($attrs= $ldap->fetch()){
-    $dn= $ldap->getDN();
-    if ($dn == $ignore_dn){
-      continue;
-    }
-
-    /* Only assign non-root departments */
-    if ($dn != $result['/']){
-      $result[convert_department_dn($dn)]= $dn;
-    }
-  }
-
-  return ($result);
-}
-
-
 function chkacl($acl, $name)
 {
   /* Look for attribute in ACL */

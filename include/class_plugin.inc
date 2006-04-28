@@ -204,7 +204,9 @@ class plugin
     $_SESSION['LOCK_VARS_TO_USE'] =array();
   }
 
-  /* remove object from parent */
+  /*! \brief execute plugin
+     Removes object from parent
+   */
   function remove_from_parent()
   {
     /* include global link_info */
@@ -844,6 +846,23 @@ class plugin
     foreach($todo as $var){
       $this->$var = $source->$var;
     }
+  }
+
+
+  function handle_object_tagging()
+  {
+    /* Watch out for an administrative unit below own base */
+    echo "<b>handle_object_tagging()</b><br><pre>";
+    echo "DN  : ".$this->dn."\n";
+    echo "Base: ".$this->config->current['BASE']."\n";
+    echo "</pre>";
+
+    /* Make a base search on every department */
+    //FIXME: evaluate if these informations should be cached, too
+    #$parts= split(',', preg_replace("/,".normalizePreg($this->config->current['BASE'])."$/", '', $this->dn));
+
+    /* Set objectclass and attribute */
+    
   }
 
 }

@@ -31,15 +31,12 @@ class department extends plugin
 	var $telephoneNumber= "";
 	var $facsimileTelephoneNumber= "";
 	var $orig_dn= "";
+	var $is_administrational_unit= false;
+	var $gosaUnitTag= "";
 
 	var $rec_dst=false;	// Destination for recursive move
 	var $rec_src=false;	// Source for recursive move 
 	var $rec_cpy=false;	// Is recursive move requested ? 
-
-	function am_i_moved()
-	{
-		return $this->rec_cpy;
-	}
 
 	/* Headpage attributes */
 	var $last_dep_sorting= "invalid";
@@ -71,10 +68,16 @@ class department extends plugin
 		} else {
 			$this->base= preg_replace ("/^[^,]+,/", "", $this->dn);
 		}
+
 		/* set permissions */
 		$ui= get_userinfo();
 		$acl= get_permissions ($ui->dn, $ui->subtreeACL);
 		$this->acl= get_module_permission($acl, "department", $ui->dn);
+
+		/* Is administrational Unit? */
+		if ($dn != "new" && in_array_ics('gosaAdministrationalUnit', $this->attrs['objectClass'])){
+			$this->is_administrational_unit= true;
+		}
 	}
 
 	function execute()
@@ -83,7 +86,7 @@ class department extends plugin
 		plugin::execute();
 
 		/* Reload departments */
-		$this->config->departments= get_departments($this->dn);
+		$this->config->get_departments($this->dn);
 		$this->config->make_idepartments();
 		$smarty= get_smarty();
 
@@ -133,6 +136,15 @@ class department extends plugin
 			$smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
 		}
 		$smarty->assign("base_select", $this->base);
+
+		/* Set admin unit flag */
+		if ($this->is_administrational_unit) {
+			$smarty->assign("unitTag", "checked");
+		} else {
+			$smarty->assign("unitTag", "");
+		}
+		$smarty->assign("unitTag"."ACL", chkacl($this->acl, "unitTag"));
+		
 		return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
 	}
 
@@ -168,6 +180,15 @@ class department extends plugin
 			/* Save base, since this is no LDAP attribute */
 			if (chkacl($this->acl, "create") == ""){
 				$this->base= $_POST['base'];
+			}
+
+			/* Save tagging flag */
+			if (chkacl($this->acl, "unitTag") == ""){
+				if (isset($_POST['unitTag'])){
+					$this->is_administrational_unit= true;
+				} else {
+					$this->is_administrational_unit= false;
+				}
 			}
 		}
 	}
@@ -224,6 +245,14 @@ class department extends plugin
 	/* Save to LDAP */
 	function save()
 	{
+		/* Add tag objects if needed */
+		if ($this->is_administrational_unit){
+			$this->objectclasses[]= "gosaAdministrationalUnit";
+			$this->attributes[]= "gosaUnitTag";
+		} else {
+			plugin::handle_object_tagging();
+		}
+
 		plugin::save();
 
 		/* Write back to ldap */
@@ -231,6 +260,7 @@ class department extends plugin
 		$ldap->cat($this->dn);
 		$a= $ldap->fetch();
 		$ldap->cd($this->dn);
+		
 		if (count($a)){
 			$this->cleanup();
 			$ldap->modify ($this->attrs); 
@@ -242,8 +272,27 @@ class department extends plugin
 		}
 		show_ldap_error($ldap->get_error());
 
+		if ($this->is_administrational_unit){
+			$this->tag_objects();
+		} else {
+			$this->untag_objects();
+		}
+
 		/* Optionally execute a command after we're done */
 		$this->postcreate();
+	}
+
+
+	/* Tag objects to have the gosaAdministrationalUnitTag */
+	function tag_objects()
+	{
+		echo "Tag";
+	}
+
+	/* Remove the gosaAdministrationalUnitTag from objects */
+	function untag_objects()
+	{
+		echo "Untag";
 	}
 
 	/* Move/Rename complete trees */
@@ -339,6 +388,10 @@ class department extends plugin
 		}
 	}
 
+	function am_i_moved()
+	{
+		return $this->rec_cpy;
+	}
 
 }
 
