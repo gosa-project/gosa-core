@@ -44,7 +44,7 @@ class department extends plugin
 
 	/* attribute list for save action */
 	var $attributes= array("ou", "description", "businessCategory", "st", "l", "postalAddress",
-			"telephoneNumber", "facsimileTelephoneNumber");
+			"telephoneNumber", "facsimileTelephoneNumber", "gosaUnitTag");
 	var $objectclasses= array("top", "gosaDepartment", "organizationalUnit");
 
 	function department ($config, $dn)
@@ -75,7 +75,7 @@ class department extends plugin
 		$this->acl= get_module_permission($acl, "department", $ui->dn);
 
 		/* Is administrational Unit? */
-		if ($dn != "new" && in_array_ics('gosaAdministrationalUnit', $this->attrs['objectClass'])){
+		if ($dn != "new" && in_array_ics('gosaAdministrativeUnit', $this->attrs['objectClass'])){
 			$this->is_administrational_unit= true;
 		}
 	}
@@ -245,16 +245,51 @@ class department extends plugin
 	/* Save to LDAP */
 	function save()
 	{
+		$ldap= $this->config->get_ldap_link();
+
 		/* Add tag objects if needed */
 		if ($this->is_administrational_unit){
-			$this->objectclasses[]= "gosaAdministrationalUnit";
-			$this->attributes[]= "gosaUnitTag";
-		} else {
-			plugin::handle_object_tagging();
+			$this->objectclasses[]= "gosaAdministrativeUnit";
+			if ($this->gosaUnitTag == ""){
+
+				/* It's unlikely, but check if already used... */
+				$try= 5;
+				$ldap->cd($this->config->current['BASE']);
+				while ($try--){
+
+					/* Generate microtime stamp as tag */
+					list($usec, $sec)= explode(" ", microtime());
+					$time_stamp= preg_replace("/\./", "", $sec.$usec);
+
+					$ldap->search("(&(objectClass=gosaAdministrativeUnit)(gosaUnitTag=$time_stamp))",array("gosaUnitTag"));
+					if ($ldap->count() == 0){
+						break;
+					}
+				}
+				if($try == 0) {
+					print_red(_("Fatal error: Can't find an unused tag to mark the administrative unit!"));
+					return;
+				}
+				$this->gosaUnitTag= preg_replace("/\./", "", $sec.$usec);
+			}
 		}
 
 		plugin::save();
 
+		/* Remove tag information if needed */
+		if (!$this->is_administrational_unit){
+			$tmp= array();
+
+			/* Remove gosaAdministrativeUnit from this plugin */
+			foreach($this->attrs['objectClass'] as $oc){
+				if (!preg_match("/^gosaAdministrativeUnit$/i", $oc)){
+					$tmp[]= $oc;
+				}
+			}
+			$this->attrs['objectClass']= $tmp;
+			$this->attrs['gosaUnitTag']= array();
+		}
+		
 		/* Write back to ldap */
 		$ldap= $this->config->get_ldap_link();
 		$ldap->cat($this->dn);
@@ -283,16 +318,26 @@ class department extends plugin
 	}
 
 
-	/* Tag objects to have the gosaAdministrationalUnitTag */
+	/* Tag objects to have the gosaAdministrativeUnitTag */
 	function tag_objects()
 	{
-		echo "Tag";
+		echo "<pre>Performing Tag:";
+		$ldap= $this->config->get_ldap_link();
+		$ldap->cd($this->dn);
+		$ldap->search('(!(&(objectClass=gosaAdministrativeUnitTag)(gosaUnitTag='.
+				$this->gosaUnitTag.')))', array('dn'));
+		while ($attrs= $ldap->fetch()){
+			//FIXME: check if this is below another administrative
+			//       unit
+			echo "Fix: ".$attrs['dn']."\n";
+		}
+		echo "</pre>";
 	}
 
-	/* Remove the gosaAdministrationalUnitTag from objects */
+	/* Remove the gosaAdministrativeUnitTag from objects */
 	function untag_objects()
 	{
-		echo "Untag";
+		echo "Performing Untag:";
 	}
 
 	/* Move/Rename complete trees */

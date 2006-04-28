@@ -20,7 +20,8 @@ class deptabs extends tabs
   {
 	if(!$justsave){
 		$baseobject= $this->by_object['department'];
-		$new_dn= 'ou='.preg_replace('/,/', '\\\\2C', $baseobject->ou).','.$baseobject->base;
+		$ou= preg_replace('/,/', '\,', $baseobject->ou);
+		$new_dn= @LDAP::convert('ou='.$ou.','.$baseobject->base);
 		$disp ="";
 		if ($this->dn != $new_dn && $this->dn != "new"){
 			
