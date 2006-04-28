@@ -30,16 +30,24 @@ class LDAP{
   var $hostname = "";
   var $follow_referral = FALSE;
   var $referrals= array();
-
+  var $max_ldap_query_time = 0;   // 0, empty or negative values will disable this check 
 
   function LDAP($binddn,$bindpw, $hostname, $follow_referral= FALSE, $tls= FALSE)
   {
+    global $config;
     $this->follow_referral= $follow_referral;
     $this->tls=$tls;
     $this->binddn=$this->convert($binddn);
 
     $this->bindpw=$bindpw;
     $this->hostname=$hostname;
+
+    /* Check if MAX_LDAP_QUERY_TIME is defined */ 
+    if(isset($config->data['MAIN']['MAX_LDAP_QUERY_TIME'])){
+      $str = $config->data['MAIN']['MAX_LDAP_QUERY_TIME'];
+      $this->max_ldap_query_time = (float)($str);
+    }
+
     $this->connect();
   }
 
@@ -171,12 +179,23 @@ class LDAP{
   {
     if($this->hascon){
       if ($this->reconnect) $this->connect();
+
+      $start = microtime();
+   
       $this->clearResult();
       $this->sr = @ldap_search($this->cid, $this->fix($this->basedn), $filter, $attrs);
       $this->error = @ldap_error($this->cid);
       $this->resetResult();
       $this->hasres=true;
-  
+   
+      /* Check if query took longer as specified in max_ldap_query_time */
+      if($this->max_ldap_query_time){
+        $diff = get_MicroTimeDiff($start,microtime());
+        if($diff > $this->max_ldap_query_time){
+          print_red(sprintf(_("The ldapserver is answering very slow (%.2f), this may be responsible for performance breakdowns."),$diff)) ;
+        }
+      }
+
       return($this->sr);
     }else{
       $this->error = "Could not connect to LDAP server";
@@ -193,10 +212,22 @@ class LDAP{
         $basedn = $this->basedn;
       else
         $basedn= $this->convert($basedn);
+  
+      $start = microtime();
+
       $this->sr = @ldap_list($this->cid, $this->fix($basedn), $filter,$attrs);
       $this->error = @ldap_error($this->cid);
       $this->resetResult();
       $this->hasres=true;
+
+       /* Check if query took longer as specified in max_ldap_query_time */
+      if($this->max_ldap_query_time){
+        $diff = get_MicroTimeDiff($start,microtime());
+        if($diff > $this->max_ldap_query_time){
+          print_red(sprintf(_("The ldapserver is answering very slow (%.2f), this may be responsible for performance breakdowns."),$diff)) ;
+        }
+      }
+
       return($this->sr);
     }else{
       $this->error = "Could not connect to LDAP server";
