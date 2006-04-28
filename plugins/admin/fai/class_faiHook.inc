@@ -247,6 +247,7 @@ class faiHook extends plugin
      */
 
     $divlist = new divSelectBox("FAIhooks");
+    $divlist->setHeight(400);
     if((chkacl($this->acl,"cn")!="") || ($this->FAIstate == "freeze")){
       $img_edit = "<input type='image' src='images/edit.png'      name='editscript_%s'    title='"._("edit")."' alt='"._("edit")."'>";
       $img_remo = ""; 
