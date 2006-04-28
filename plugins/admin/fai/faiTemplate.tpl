@@ -31,19 +31,8 @@
 						{t}List of template files{/t}
 					</LABEL>
 				</h2>
-				<table summary="" width="100%">
-				<tr>
-					<td>
-						<select name="SubObject[]" multiple} 
-							title="{t}Choose a template to delete or edit{/t}" style="width:100%;" size="20" id="SubObject">
-							{html_options options=$SubObjects}
-						</select><br>
-						<input type="submit" name="AddSubObject"     value="{t}Add{/t}"		title="{t}Add{/t}" {$cnACL}>
-						<input type="submit" name="EditSubObject"    value="{t}Edit{/t}"    title="{t}Edit{/t}">
-						<input type="submit" name="DelSubObject"     value="{t}Delete{/t}"  title="{t}Delete{/t}" {$cnACL}>
-					</td>
-				</tr>
-				</table>
+			{$Entry_divlist}
+				<input type="submit" name="AddSubObject"     value="{t}Add{/t}"		title="{t}Add{/t}" {$cnACL}>
 		</td>
 	</tr>
 </table>

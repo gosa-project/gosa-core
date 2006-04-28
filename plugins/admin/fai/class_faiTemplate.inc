@@ -101,6 +101,32 @@ class faiTemplate extends plugin
     $smarty= get_smarty();
     $display= "";
 
+    /* New Listhandling
+     */
+    $once = true;
+    foreach($_POST as $name => $value){
+      if(preg_match("/^editscript_/",$name)&&($once)){
+        $once = false;
+        $entry = preg_replace("/^editscript_/","",$name);
+        $entry = base64_decode(preg_replace("/_.*/","",$entry));
+        $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$entry]);
+        $this->dialog->acl = $this->acl;
+        $_SESSION['objectinfo'] = $this->SubObjects[$entry]['dn'];
+        $this->dialog->parent = &$this;
+        $this->is_dialog=true;
+      }
+      if(preg_match("/^deletescript_/",$name)&&($once)){
+        $once = false;
+        $entry = preg_replace("/^deletescript_/","",$name);
+        $entry = base64_decode(preg_replace("/_.*/","",$entry));
+        if($this->SubObjects[$entry]['status'] == "edited"){
+          $this->SubObjects[$entry]['status']= "delete";
+        }else{
+          unset($this->SubObjects[$entry]);
+        }
+      }
+    }
+
     /* Add new sub object */
     if(isset($_POST['AddSubObject'])){
       $this->dialog= new $this->subClassName($this->config,"new");
@@ -110,29 +136,6 @@ class faiTemplate extends plugin
 
     if($this->dn != "new"){
       $_SESSION['objectinfo']= $this->dn;
-    }
-
-
-    /* Edit selected Sub Object */
-    if((isset($_POST['EditSubObject']))&&(isset($_POST['SubObject']))){
-
-      $temp = $_POST['SubObject'][0];
-    
-      $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$temp]);
-      $this->dialog->acl = $this->acl;
-      $_SESSION['objectinfo'] = $this->SubObjects[$temp]['dn'];
-      $this->is_dialog=true;
-    }
-    
-    /* Remove Sub object */
-    if((isset($_POST['DelSubObject']))&&(isset($_POST['SubObject']))){
-      foreach($_POST['SubObject'] as $temp){
-        if($this->SubObjects[$temp]['status'] == "edited"){
-          $this->SubObjects[$temp]['status']= "delete";
-        }else{
-          unset($this->SubObjects[$temp]);
-        }
-      }
     }
 
     /* Save Dialog */
@@ -187,6 +190,40 @@ class faiTemplate extends plugin
       $display = $this->dialog->execute();
       return($display);
     }
+
+     /* Divlist            added 28.02.2006
+       Containing FAIscripts
+     */
+    $divlist = new divSelectBox("FAItemplates");
+    if((chkacl($this->acl,"cn")!="") || ($this->FAIstate == "freeze")){
+      $img_edit = "<input type='image' src='images/edit.png'      name='editscript_%s'    title='"._("edit")."' alt='"._("edit")."'>";
+      $img_remo = "";
+    }else{
+      $img_edit = "<input type='image' src='images/edit.png'      name='editscript_%s'    title='"._("edit")."' alt='"._("edit")."'>";
+      $img_remo = "<input type='image' src='images/edittrash.png' name='deletescript_%s'  title='"._("delete")."' alt='"._("delete")."'>";
+    }
+
+    foreach($this->getList(true) as $key => $name){
+
+      if(($this->SubObjects[$key]['status'] == "new") || ($this->SubObjects[$key]['dn'] == "new")){
+        $down = "";
+      }else{
+  
+        $dn = $this->SubObjects[$key]['dn'];       
+ 
+        $down = "<a href='getFAIscript.php?is_template&id=".base64_encode($dn)."' target='_blank'>
+          <img src='images/save.png' alt='"._("Download")."' title='"._("Download")."' border=0>
+          </a>";
+      }
+
+      $divlist->AddEntry(array( array("string"=>$name),
+            array("string"=>$down , "attach" => "style='width:20px;'"),
+            array("string"=>str_replace("%s",base64_encode($key),$img_edit.$img_remo),
+              "attach"=>"style='border-right: 0px;width:50px;text-align:right;'")));
+    }
+    $smarty->assign("Entry_divlist",$divlist->DrawList());
+    /* Divlist creation complete
+     */
 
     $smarty->assign("SubObjects",$this->getList());
 
