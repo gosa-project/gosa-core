@@ -19,6 +19,14 @@
       <input name="l" id="l" size=18 maxlength=60 value="{$l}">
      </td>
     </tr>
+    <tr>
+     <td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
+     <td>
+      <select size="1" id="base" name="base" title="{t}Choose subtree to place terminal in{/t}">
+       {html_options options=$bases selected=$base_select}
+      </select>
+		<input type="image" name="chooseBase" src="images/folder.png" class="center" title="{t}Select a base{/t}">
+    </tr>
    </table>
   </td>
   <td  style="vertical-align:top;border-left:1px solid #A0A0A0;">
@@ -40,25 +48,7 @@
      </td>
     </tr>
    </table>
-  </td>
- </tr>
-</table>
 <p class="seperator">&nbsp;</p>
-<table summary="" style="width:100%;">
- <tr>
-  <td style="width:50%; vertical-align:top;">
-   <table width="100%">
-    <tr>
-     <td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
-     <td>
-      <select size="1" id="base" name="base" title="{t}Choose subtree to place terminal in{/t}">
-       {html_options options=$bases selected=$base_select}
-      </select>
-		<input type="image" name="chooseBase" src="images/folder.png" class="center" title="{t}Select a base{/t}">
-    </tr>
-   </table>
-  </td>
-  <td  style="vertical-align:top;border-left:1px solid #A0A0A0;">
    <table width="100%">
     <tr>
      <td colspan="2">
