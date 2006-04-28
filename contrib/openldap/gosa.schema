@@ -301,12 +301,12 @@ objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.14 NAME 'gosaIntranetAccount'
        MUST ( cn $ uid )
        MAY ( gosaDefaultLanguage ))
 
-objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.15 NAME 'gosaAdministrationalUnit'
+objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.15 NAME 'gosaAdministrativeUnit'
        DESC 'Marker for administrational units (v2.5)'
 	   SUP top AUXILIARY
        MUST ( gosaUnitTag ))
 
-objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.16 NAME 'gosaAdministrationalUnitTag'
+objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.16 NAME 'gosaAdministrativeUnitTag'
        DESC 'Marker for objects below administrational units (v2.5)'
 	   SUP top AUXILIARY
        MUST ( gosaUnitTag ))

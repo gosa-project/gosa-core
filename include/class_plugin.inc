@@ -319,6 +319,7 @@ class plugin
       }
     }
 
+    $this->handle_object_tagging();
   }
 
 
@@ -851,11 +852,12 @@ class plugin
 
   function handle_object_tagging()
   {
+    echo "Handle tagging<br>";
     /* Watch out for an administrative unit below own base */
-    echo "<b>handle_object_tagging()</b><br><pre>";
-    echo "DN  : ".$this->dn."\n";
-    echo "Base: ".$this->config->current['BASE']."\n";
-    echo "</pre>";
+    #echo "<b>handle_object_tagging()</b><br><pre>";
+    #echo "DN  : ".$this->dn."\n";
+    #echo "Base: ".$this->config->current['BASE']."\n";
+    #echo "</pre>";
 
     /* Make a base search on every department */
     //FIXME: evaluate if these informations should be cached, too
