@@ -1,8 +1,6 @@
 ##
 ## Needed attributes for GOsa (GONICUS System Administrator)
 ##
-## Version 030303
-##
 ## Maintainer:	Cajus Pollmeier (pollmeier@GONICUS.de)
 ##
 
@@ -198,6 +196,12 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.12.32 NAME 'gosaApplicationMimeType'
         SUBSTR caseIgnoreIA5SubstringsMatch
         SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE)
 
+attributetype ( 1.3.6.1.4.1.10098.1.1.12.33 NAME 'gosaUnitTag'
+        DESC 'Takes a list of relevant mime-type|priority settings'
+        EQUALITY caseIgnoreIA5Match
+        SUBSTR caseIgnoreIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE)
+
 attributetype ( 1.3.6.1.4.1.10098.1.1.6.2 NAME 'academicTitle'
         DESC 'Field to represent the academic title'
 	EQUALITY caseIgnoreMatch
@@ -292,8 +296,18 @@ objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.13 NAME 'gosaWebdavAccount'
         MUST ( cn $ uid ))
 
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.14 NAME 'gosaIntranetAccount'
-       DESC 'GOsa Inatrent enabling account (v2.4)'
+       DESC 'GOsa Intarent enabling account (v2.4)'
 	   SUP top AUXILIARY
        MUST ( cn $ uid )
        MAY ( gosaDefaultLanguage ))
+
+objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.15 NAME 'gosaAdministrationalUnit'
+       DESC 'Marker for administrational units (v2.5)'
+	   SUP top AUXILIARY
+       MUST ( gosaUnitTag ))
+
+objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.16 NAME 'gosaAdministrationalUnitTag'
+       DESC 'Marker for objects below administrational units (v2.5)'
+	   SUP top AUXILIARY
+       MUST ( gosaUnitTag ))
 
