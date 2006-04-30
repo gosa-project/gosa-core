@@ -59,10 +59,11 @@ documentation and additional help.
 
 * Jan Wenzel <jan.wenzel@gonicus.de>
   Implementation and research for samba munged dial support,
-  fixing of "Fiptehlers"(TM) in the german translations.i
+  fixing of "Fiptehlers"(TM) in the german translations.
 
 * Leila El Hitori <leila.elhitori@opensides.be>
   French online documentation
+  English online documentation
   
 * Vincent Seynhaeve
   Xls export plugin <vincent.seynhaeve@opensides.be>
