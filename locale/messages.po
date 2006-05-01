@@ -3125,6 +3125,26 @@ msgstr ""
 msgid "UNIX"
 msgstr ""
 
+#: plugins/personal/posix/class_posixAccount.inc:118
+msgid "expired"
+msgstr ""
+
+#: plugins/personal/posix/class_posixAccount.inc:120
+msgid ", grace time active"
+msgstr ""
+
+#: plugins/personal/posix/class_posixAccount.inc:123
+msgid "active, password not changable"
+msgstr ""
+
+#: plugins/personal/posix/class_posixAccount.inc:125
+msgid "active, password expired"
+msgstr ""
+
+#: plugins/personal/posix/class_posixAccount.inc:127
+msgid "active"
+msgstr ""
+
 #: plugins/personal/posix/class_posixAccount.inc:138
 #: plugins/personal/posix/class_posixAccount.inc:987
 msgid "Group of user"

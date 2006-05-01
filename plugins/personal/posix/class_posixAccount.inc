@@ -115,16 +115,16 @@ class posixAccount extends plugin
       /* Generate status text */
       $current= date("U");
       if (($current >= $this->shadowExpire) && $this->shadowExpire){
-        $this->status= "expired";
+        $this->status= _("expired");
         if (($this->shadowExpire - $current) < $this->shadowInactive){
-          $this->status.= ", grace time active";
+          $this->status.= _(", grace time active");
         }
       } elseif (($this->shadowLastChange + $this->shadowMin) >= $current){
-        $this->status= "active, password not changable";
+        $this->status= _("active, password not changable");
       } elseif (($this->shadowLastChange + $this->shadowMax) >= $current){
-        $this->status= "active, password expired";
+        $this->status= _("active, password expired");
       } else {
-        $this->status= "active";
+        $this->status= _("active");
       }
 
       /* Get group membership */

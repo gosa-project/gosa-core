@@ -32,7 +32,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
-"PO-Revision-Date: 2006-04-30 11:34+0200\n"
+"PO-Revision-Date: 2006-05-01 13:32+0200\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team: Français <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2523,7 +2523,9 @@ msgstr "SID et/ou RIDBASE absents du fichier de configuration!"
 msgid ""
 "The ldapserver is answering very slow (%.2f), this may be responsible for "
 "performance breakdowns."
-msgstr "Le serveur ldap répond très lentement (%.2f), ceci peut être responsable des problèmes de performances."
+msgstr ""
+"Le serveur ldap répond très lentement (%.2f), ceci peut être responsable des "
+"problèmes de performances."
 
 #: include/class_ldap.inc:446
 #, php-format
@@ -3466,6 +3468,26 @@ msgstr "Paramètres unix"
 msgid "UNIX"
 msgstr "UNIX"
 
+#: plugins/personal/posix/class_posixAccount.inc:118
+msgid "expired"
+msgstr "expire"
+
+#: plugins/personal/posix/class_posixAccount.inc:120
+msgid ", grace time active"
+msgstr ", temps de grâce activé"
+
+#: plugins/personal/posix/class_posixAccount.inc:123
+msgid "active, password not changable"
+msgstr "actif, impossible de changer le mot de passe"
+
+#: plugins/personal/posix/class_posixAccount.inc:125
+msgid "active, password expired"
+msgstr "actif, mot de passe expiré"
+
+#: plugins/personal/posix/class_posixAccount.inc:127
+msgid "active"
+msgstr "actif"
+
 #: plugins/personal/posix/class_posixAccount.inc:138
 #: plugins/personal/posix/class_posixAccount.inc:987
 msgid "Group of user"
@@ -3715,49 +3737,61 @@ msgid "Value specified as 'GID' is too small."
 msgstr "La valeur spécifiée comme 'GID' est trop petite."
 
 #: plugins/personal/posix/class_posixAccount.inc:930
-#, fuzzy
 msgid "Value specified as 'shadowMin' is not valid."
-msgstr "La valeur de 'shadowMin' spécifiée n'est pas valide."
+msgstr ""
+"La valeur de 'Les mots de passe ne peuvent être changé qu'après x jours à "
+"compter de la dernière modification de celui-ci' n'est pas valide."
 
 #: plugins/personal/posix/class_posixAccount.inc:935
-#, fuzzy
 msgid "Value specified as 'shadowMax' is not valid."
-msgstr "La valeur de 'shadowMax' spécifiée n'est pas valide."
+msgstr "La valeur ' Le mot de passe doit être changé après x jours' n'est pas valide."
 
 #: plugins/personal/posix/class_posixAccount.inc:940
-#, fuzzy
 msgid "Value specified as 'shadowWarning' is not valid."
-msgstr "La valeur de 'shadowWarning' spécifiée n'est pas valide."
+msgstr ""
+"La valeur 'avertissement de l'utilisateur x jours avant le changement de mot "
+"de passe' spécifiée n'est pas valide."
 
 #: plugins/personal/posix/class_posixAccount.inc:943
-#, fuzzy
 msgid "'shadowWarning' without 'shadowMax' makes no sense."
-msgstr "'shadowWarning' sans 'shadowMax' n'a pas de sens."
+msgstr ""
+"La valeur 'Avertir l'utilisateur x jours avant l'expiration de son mot de "
+"passe' sans la valeur 'Le mot de passe doit être changé après x jours' n'a "
+"pas de sens."
 
 #: plugins/personal/posix/class_posixAccount.inc:946
-#, fuzzy
 msgid "Value specified as 'shadowWarning' should be smaller than 'shadowMax'."
-msgstr "La valeur de 'shadowWarning' doit être inférieure à celle de 'shadowMax'."
+msgstr ""
+"La valeur de 'Avertir l'utilisateur x jours avant l'expiration de son mot de "
+"passe' doit être inférieure à celle de ' Le mot de passe doit être changé "
+"après 64 jours '."
 
 #: plugins/personal/posix/class_posixAccount.inc:949
-#, fuzzy
 msgid "Value specified as 'shadowWarning' should be greater than 'shadowMin'."
-msgstr "La valeur de 'shadowWarning' doit être supérieure à celle de 'shadowMin'."
+msgstr ""
+"La valeur de 'Avertir l'utilisateur x jours avant l'expiration de son mot de "
+"passe' doit être supérieure à celle de 'Les mots de passe ne peuvent être "
+"changé qu'après x jours à compter de la dernière modification de celui-ci '."
 
 #: plugins/personal/posix/class_posixAccount.inc:954
-#, fuzzy
 msgid "Value specified as 'shadowInactive' is not valid."
-msgstr "La valeur de 'shadowInactive' spécifiée n'est pas valide."
+msgstr ""
+"La valeur de 'Désactiver le compte après x jours d'inactivité après "
+"l'expiration du mot de passe ' n'est pas valide."
 
 #: plugins/personal/posix/class_posixAccount.inc:957
-#, fuzzy
 msgid "'shadowInactive' without 'shadowMax' makes no sense."
-msgstr "'shadowInactive' sans 'shadowMax' n'a pas de sens."
+msgstr ""
+"'Désactiver le compte après x jours d'inactivité après l'expiration du mot "
+"de passe ' sans 'Le mot de passe doit être changé après x jours ' n'a pas de "
+"sens."
 
 #: plugins/personal/posix/class_posixAccount.inc:962
-#, fuzzy
 msgid "Value specified as 'shadowMin' should be smaller than 'shadowMax'."
-msgstr "La valeur pour 'shadowMin' doit être inférieure à celle de 'shadowMax'."
+msgstr ""
+"La valeur pour 'Les mots de passe ne peuvent être changé qu'après x jours à "
+"compter de la dernière modification de celui-ci ' doit être inférieure à "
+"celle de 'Le mot de passe doit être changé après x jours '."
 
 #: plugins/personal/posix/class_posixAccount.inc:1089
 #: plugins/admin/groups/class_groupGeneric.inc:811
@@ -5259,8 +5293,8 @@ msgid ""
 "This account has netatalk features enabled. You can disable them by clicking "
 "below."
 msgstr ""
-"L'extension netatalk est activée pour ce compte, vous pouvez la "
-"désactiver en cliquant sur le bouton ci-dessous."
+"L'extension netatalk est activée pour ce compte, vous pouvez la désactiver "
+"en cliquant sur le bouton ci-dessous."
 
 #: plugins/personal/netatalk/class_netatalk.inc:144
 #: plugins/personal/netatalk/class_netatalk.inc:146
@@ -5272,8 +5306,8 @@ msgid ""
 "This account has netatalk features disabled. You can enable them by clicking "
 "below."
 msgstr ""
-"L'extension netatalk est désactivée pour ce compte, vous pouvez "
-"l'activer en cliquant sur le bouton ci-dessous."
+"L'extension netatalk est désactivée pour ce compte, vous pouvez l'activer en "
+"cliquant sur le bouton ci-dessous."
 
 #: plugins/personal/netatalk/class_netatalk.inc:202
 msgid "You must select a share to use."
@@ -8760,7 +8794,9 @@ msgstr " Veuillez choisir un autre nom."
 
 #: plugins/admin/departments/class_departmentGeneric.inc:270
 msgid "Fatal error: Can't find an unused tag to mark the administrative unit!"
-msgstr "Erreur fatale: Impossible de trouver un marqueur libre pour marquer l'entité administrative!"
+msgstr ""
+"Erreur fatale: Impossible de trouver un marqueur libre pour marquer l'entité "
+"administrative!"
 
 #: plugins/admin/departments/class_departmentGeneric.inc:372
 #, php-format
@@ -9797,7 +9833,9 @@ msgstr "Une entrée '%s' existe déjà dans la base sélectionnée"
 msgid ""
 "There must be at least one NTP server selected, or the inherit mode "
 "activated."
-msgstr "Il doit y avoir au moins un serveur NTP sélectionné, ou le mode d'héritage activé."
+msgstr ""
+"Il doit y avoir au moins un serveur NTP sélectionné, ou le mode d'héritage "
+"activé."
 
 #: plugins/admin/systems/servdns.tpl:1
 msgid "Zones"
@@ -11006,7 +11044,9 @@ msgstr "Base de données"
 #: plugins/admin/systems/class_printGeneric.inc:98
 #, php-format
 msgid "Can't extract a valid base out of object dn, setting base to '%s'."
-msgstr "Impossible d'obtenir un base valide depuis le dn de l'objet, je met la base à '%s'. "
+msgstr ""
+"Impossible d'obtenir un base valide depuis le dn de l'objet, je met la base "
+"à '%s'. "
 
 #: plugins/admin/systems/class_printGeneric.inc:229
 #: plugins/admin/systems/class_printGeneric.inc:237
@@ -11021,7 +11061,9 @@ msgstr "Ajouter une extension d'imprimante"
 msgid ""
 "Could not intialize printer tab, parameter parent was missing while "
 "construcktion."
-msgstr "Impossible d'initialiser l'onglet imprimante, le paramètre parent était manquant pendant la construction."
+msgstr ""
+"Impossible d'initialiser l'onglet imprimante, le paramètre parent était "
+"manquant pendant la construction."
 
 #: plugins/admin/systems/class_printGeneric.inc:238
 msgid "This is a workstation template, printer tab is disabled."
@@ -11713,7 +11755,6 @@ msgid "Zone records"
 msgstr "Enregistrement de zone"
 
 #: plugins/admin/systems/SelectDeviceType.tpl:3
-#, fuzzy
 msgid ""
 "This is a new system which currently has no system type defined. Please "
 "choose a system type for this entry and press the 'continue' button. If this "
@@ -11721,13 +11762,16 @@ msgid ""
 "object group below."
 msgstr ""
 "Ceci est un nouveau système qui n'as pas encore de type défini. Veuillez "
-"choisir un type de système pour cette entrée et cliquez sur 'continuer'. Si ce système doit être ajouté à un "
+"choisir un type de système pour cette entrée et cliquez sur 'continuer'. Si "
+"ce système doit être ajouté à un un un groupe de systèmes, veuillez choisir le groupe d'objet ce dessous."
 
 #: plugins/admin/systems/SelectDeviceType.tpl:9
 msgid ""
 "Please select a system type and an optional bundle of predefined settings to "
 "be inherited."
-msgstr "Veuillez sélectionner un type de système et éventuellement d'un ensemble de paramètres à hériter."
+msgstr ""
+"Veuillez sélectionner un type de système et éventuellement d'un ensemble de "
+"paramètres à hériter."
 
 #: plugins/admin/systems/SelectDeviceType.tpl:21
 msgid "Choose a system type"

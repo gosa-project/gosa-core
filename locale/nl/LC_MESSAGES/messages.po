@@ -3450,6 +3450,29 @@ msgstr "Unix instellingen"
 msgid "UNIX"
 msgstr "Unix"
 
+#: plugins/personal/posix/class_posixAccount.inc:118
+#, fuzzy
+msgid "expired"
+msgstr "Vervaltijd"
+
+#: plugins/personal/posix/class_posixAccount.inc:120
+msgid ", grace time active"
+msgstr ""
+
+#: plugins/personal/posix/class_posixAccount.inc:123
+msgid "active, password not changable"
+msgstr ""
+
+#: plugins/personal/posix/class_posixAccount.inc:125
+#, fuzzy
+msgid "active, password expired"
+msgstr "Wachtwoord verloopt op"
+
+#: plugins/personal/posix/class_posixAccount.inc:127
+#, fuzzy
+msgid "active"
+msgstr "Actief"
+
 #: plugins/personal/posix/class_posixAccount.inc:138
 #: plugins/personal/posix/class_posixAccount.inc:987
 msgid "Group of user"

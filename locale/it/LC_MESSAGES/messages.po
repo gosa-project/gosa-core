@@ -3281,6 +3281,30 @@ msgstr "Impostazioni Unix"
 msgid "UNIX"
 msgstr "Unix"
 
+#: plugins/personal/posix/class_posixAccount.inc:118
+#, fuzzy
+msgid "expired"
+msgstr "Esporta"
+
+#: plugins/personal/posix/class_posixAccount.inc:120
+msgid ", grace time active"
+msgstr ""
+
+#: plugins/personal/posix/class_posixAccount.inc:123
+#, fuzzy
+msgid "active, password not changable"
+msgstr "Nuova password"
+
+#: plugins/personal/posix/class_posixAccount.inc:125
+#, fuzzy
+msgid "active, password expired"
+msgstr "La password spira il"
+
+#: plugins/personal/posix/class_posixAccount.inc:127
+#, fuzzy
+msgid "active"
+msgstr "Privato"
+
 #: plugins/personal/posix/class_posixAccount.inc:138
 #: plugins/personal/posix/class_posixAccount.inc:987
 msgid "Group of user"
@@ -13036,10 +13060,6 @@ msgstr "Benvenuto %s!"
 #~ msgstr "Cambia la password"
 
 #, fuzzy
-#~ msgid "Password expiry"
-#~ msgstr "La password spira il"
-
-#, fuzzy
 #~ msgid "Home path"
 #~ msgstr "Telefono privato"
 
@@ -13050,10 +13070,6 @@ msgstr "Benvenuto %s!"
 #, fuzzy
 #~ msgid "Samba domain name"
 #~ msgstr "Home di Samba"
-
-#, fuzzy
-#~ msgid "Allow password change"
-#~ msgstr "Nuova password"
 
 #, fuzzy
 #~ msgid "Lock account"

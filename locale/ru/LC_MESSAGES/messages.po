@@ -3405,6 +3405,30 @@ msgstr "Атрибуты UNIX"
 msgid "UNIX"
 msgstr "Unix"
 
+#: plugins/personal/posix/class_posixAccount.inc:118
+#, fuzzy
+msgid "expired"
+msgstr "Экспорт"
+
+#: plugins/personal/posix/class_posixAccount.inc:120
+msgid ", grace time active"
+msgstr ""
+
+#: plugins/personal/posix/class_posixAccount.inc:123
+#, fuzzy
+msgid "active, password not changable"
+msgstr "Новый пароль"
+
+#: plugins/personal/posix/class_posixAccount.inc:125
+#, fuzzy
+msgid "active, password expired"
+msgstr "Срок действия пароля истекает"
+
+#: plugins/personal/posix/class_posixAccount.inc:127
+#, fuzzy
+msgid "active"
+msgstr "Личный"
+
 #: plugins/personal/posix/class_posixAccount.inc:138
 #: plugins/personal/posix/class_posixAccount.inc:987
 msgid "Group of user"
@@ -13626,10 +13650,6 @@ msgstr "Добро пожаловать %s!"
 #~ msgstr "Сменить пароль"
 
 #, fuzzy
-#~ msgid "Password expiry"
-#~ msgstr "Срок действия пароля истекает"
-
-#, fuzzy
 #~ msgid "Home path"
 #~ msgstr "Домашний телефон"
 
@@ -13640,10 +13660,6 @@ msgstr "Добро пожаловать %s!"
 #, fuzzy
 #~ msgid "Samba domain name"
 #~ msgstr "Домашний каталог Samba"
-
-#, fuzzy
-#~ msgid "Allow password change"
-#~ msgstr "Новый пароль"
 
 #, fuzzy
 #~ msgid "Lock account"
