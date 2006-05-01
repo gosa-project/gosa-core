@@ -32,7 +32,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
-"PO-Revision-Date: 2006-05-01 13:32+0200\n"
+"PO-Revision-Date: 2006-05-01 19:51+0200\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team: Français <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -909,6 +909,8 @@ msgstr "Nom d'utilisateur"
 #: ihtml/themes/altlinux/setup_useradmin.tpl:30
 #: ihtml/themes/default/login.tpl:37 ihtml/themes/default/login.tpl:41
 #: ihtml/themes/default/setup_useradmin.tpl:30
+#: ihtml/themes/default/accountexpired.tpl:23
+#: ihtml/themes/default/accountexpired.tpl:27
 #: plugins/personal/password/class_password.inc:5
 #: plugins/personal/generic/paste_generic.tpl:32
 #: plugins/admin/systems/class_systemManagement.inc:836
@@ -1315,7 +1317,7 @@ msgstr "Méthode de messagerie"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:91
 #: ihtml/themes/default/setup_step4.tpl:91
-#: plugins/personal/posix/class_posixAccount.inc:578
+#: plugins/personal/posix/class_posixAccount.inc:581
 #: plugins/personal/samba/class_sambaAccount.inc:455
 #: plugins/admin/systems/class_terminalGeneric.inc:87
 msgid "disabled"
@@ -1587,6 +1589,23 @@ msgstr "Opération réalisée"
 #: plugins/personal/netatalk/main.inc:104
 msgid "Finish"
 msgstr "Terminé"
+
+#: ihtml/themes/default/accountexpired.tpl:15
+msgid "Your password has expired, insert your new password twice"
+msgstr "Votre mot de passe à expiré, veuillez introduire votre mot de passe deux fois"
+
+#: ihtml/themes/default/accountexpired.tpl:32
+#: ihtml/themes/default/accountexpired.tpl:36
+msgid "Verify Password"
+msgstr "Vérifier le mot de passe"
+
+#: ihtml/themes/default/accountexpired.tpl:42
+msgid "Change Password"
+msgstr "Modifier le mot de passe"
+
+#: ihtml/themes/default/accountexpired.tpl:43
+msgid "Click here to Change your password"
+msgstr "Cliquer ici pour changer votre mot de passe"
 
 #: include/class_mail-methods-cyrus.inc:39
 msgid ""
@@ -3468,36 +3487,36 @@ msgstr "Paramètres unix"
 msgid "UNIX"
 msgstr "UNIX"
 
-#: plugins/personal/posix/class_posixAccount.inc:118
+#: plugins/personal/posix/class_posixAccount.inc:121
 msgid "expired"
 msgstr "expire"
 
-#: plugins/personal/posix/class_posixAccount.inc:120
+#: plugins/personal/posix/class_posixAccount.inc:123
 msgid ", grace time active"
 msgstr ", temps de grâce activé"
 
-#: plugins/personal/posix/class_posixAccount.inc:123
+#: plugins/personal/posix/class_posixAccount.inc:126
 msgid "active, password not changable"
 msgstr "actif, impossible de changer le mot de passe"
 
-#: plugins/personal/posix/class_posixAccount.inc:125
+#: plugins/personal/posix/class_posixAccount.inc:128
 msgid "active, password expired"
 msgstr "actif, mot de passe expiré"
 
-#: plugins/personal/posix/class_posixAccount.inc:127
+#: plugins/personal/posix/class_posixAccount.inc:130
 msgid "active"
 msgstr "actif"
 
-#: plugins/personal/posix/class_posixAccount.inc:138
-#: plugins/personal/posix/class_posixAccount.inc:987
+#: plugins/personal/posix/class_posixAccount.inc:141
+#: plugins/personal/posix/class_posixAccount.inc:990
 msgid "Group of user"
 msgstr "Groupe d'utilisateurs"
 
-#: plugins/personal/posix/class_posixAccount.inc:178
+#: plugins/personal/posix/class_posixAccount.inc:181
 msgid "unconfigured"
 msgstr "non configuré"
 
-#: plugins/personal/posix/class_posixAccount.inc:196
+#: plugins/personal/posix/class_posixAccount.inc:199
 #: plugins/admin/systems/class_workstationService.inc:133
 #: plugins/admin/systems/class_workstationStartup.inc:690
 #: plugins/admin/systems/class_terminalService.inc:141
@@ -3505,16 +3524,16 @@ msgstr "non configuré"
 msgid "automatic"
 msgstr "automatique"
 
-#: plugins/personal/posix/class_posixAccount.inc:235
+#: plugins/personal/posix/class_posixAccount.inc:238
 msgid "This account has no unix extensions."
 msgstr "Ce compte n'a pas d'extension unix."
 
-#: plugins/personal/posix/class_posixAccount.inc:255
 #: plugins/personal/posix/class_posixAccount.inc:258
+#: plugins/personal/posix/class_posixAccount.inc:261
 msgid "Remove posix account"
 msgstr "Supprimer le compte posix"
 
-#: plugins/personal/posix/class_posixAccount.inc:256
+#: plugins/personal/posix/class_posixAccount.inc:259
 msgid ""
 "This account has unix features enabled. To disable them, you'll need to "
 "remove the samba / environment account first."
@@ -3522,7 +3541,7 @@ msgstr ""
 "Ce compte possède l'extension unix. Pour le désactiver vous devez au "
 "préalable supprimer le(s) compte samba / environnement."
 
-#: plugins/personal/posix/class_posixAccount.inc:259
+#: plugins/personal/posix/class_posixAccount.inc:262
 msgid ""
 "This account has posix features enabled. You can disable them by clicking "
 "below."
@@ -3530,11 +3549,11 @@ msgstr ""
 "Ce compte possède l'extension posix. Vous pouvez le supprimer en cliquant "
 "sur le bouton ci-dessous."
 
-#: plugins/personal/posix/class_posixAccount.inc:262
+#: plugins/personal/posix/class_posixAccount.inc:265
 msgid "Create posix account"
 msgstr "Créer un compte posix"
 
-#: plugins/personal/posix/class_posixAccount.inc:263
+#: plugins/personal/posix/class_posixAccount.inc:266
 msgid ""
 "This account has posix features disabled. You can enable them by clicking "
 "below."
@@ -3542,31 +3561,31 @@ msgstr ""
 "Aucune extension posix n'existe pour ce compte. Vous pouvez en créer une en "
 "cliquant sur le bouton ci-dessous."
 
-#: plugins/personal/posix/class_posixAccount.inc:464
+#: plugins/personal/posix/class_posixAccount.inc:467
 #, php-format
 msgid "Password can't be changed up to %s days after last change"
 msgstr ""
 "Les mots de passe ne peuvent être changé qu'après %s jours à compter de la "
 "dernière modification de celui-ci"
 
-#: plugins/personal/posix/class_posixAccount.inc:466
+#: plugins/personal/posix/class_posixAccount.inc:469
 #, php-format
 msgid "Password must be changed after %s days"
 msgstr "Le mot de passe doit être changé après %s jours"
 
-#: plugins/personal/posix/class_posixAccount.inc:468
+#: plugins/personal/posix/class_posixAccount.inc:471
 #, php-format
 msgid "Disable account after %s days of inactivity after password expiery"
 msgstr ""
 "Désactiver le compte après %s jours d'inactivité après l'expiration du mot "
 "de passe"
 
-#: plugins/personal/posix/class_posixAccount.inc:470
+#: plugins/personal/posix/class_posixAccount.inc:473
 #, php-format
 msgid "Warn user %s days before password expiery"
 msgstr "Avertir l'utilisateur %s jours avant l'expiration de son mot de passe"
 
-#: plugins/personal/posix/class_posixAccount.inc:494
+#: plugins/personal/posix/class_posixAccount.inc:497
 #: plugins/personal/samba/class_sambaAccount.inc:357
 #: plugins/personal/samba/class_sambaAccount.inc:375
 #: plugins/personal/samba/class_sambaAccount.inc:393
@@ -3577,7 +3596,7 @@ msgstr "Avertir l'utilisateur %s jours avant l'expiration de son mot de passe"
 msgid "January"
 msgstr "Janvier"
 
-#: plugins/personal/posix/class_posixAccount.inc:494
+#: plugins/personal/posix/class_posixAccount.inc:497
 #: plugins/personal/samba/class_sambaAccount.inc:357
 #: plugins/personal/samba/class_sambaAccount.inc:375
 #: plugins/personal/samba/class_sambaAccount.inc:393
@@ -3588,7 +3607,7 @@ msgstr "Janvier"
 msgid "February"
 msgstr "Février"
 
-#: plugins/personal/posix/class_posixAccount.inc:494
+#: plugins/personal/posix/class_posixAccount.inc:497
 #: plugins/personal/samba/class_sambaAccount.inc:357
 #: plugins/personal/samba/class_sambaAccount.inc:375
 #: plugins/personal/samba/class_sambaAccount.inc:393
@@ -3599,7 +3618,7 @@ msgstr "Février"
 msgid "March"
 msgstr "Mars"
 
-#: plugins/personal/posix/class_posixAccount.inc:494
+#: plugins/personal/posix/class_posixAccount.inc:497
 #: plugins/personal/samba/class_sambaAccount.inc:357
 #: plugins/personal/samba/class_sambaAccount.inc:375
 #: plugins/personal/samba/class_sambaAccount.inc:393
@@ -3610,7 +3629,7 @@ msgstr "Mars"
 msgid "April"
 msgstr "Avril"
 
-#: plugins/personal/posix/class_posixAccount.inc:495
+#: plugins/personal/posix/class_posixAccount.inc:498
 #: plugins/personal/samba/class_sambaAccount.inc:358
 #: plugins/personal/samba/class_sambaAccount.inc:376
 #: plugins/personal/samba/class_sambaAccount.inc:394
@@ -3621,7 +3640,7 @@ msgstr "Avril"
 msgid "May"
 msgstr "Mai"
 
-#: plugins/personal/posix/class_posixAccount.inc:495
+#: plugins/personal/posix/class_posixAccount.inc:498
 #: plugins/personal/samba/class_sambaAccount.inc:358
 #: plugins/personal/samba/class_sambaAccount.inc:376
 #: plugins/personal/samba/class_sambaAccount.inc:394
@@ -3632,7 +3651,7 @@ msgstr "Mai"
 msgid "June"
 msgstr "Juin"
 
-#: plugins/personal/posix/class_posixAccount.inc:495
+#: plugins/personal/posix/class_posixAccount.inc:498
 #: plugins/personal/samba/class_sambaAccount.inc:358
 #: plugins/personal/samba/class_sambaAccount.inc:376
 #: plugins/personal/samba/class_sambaAccount.inc:394
@@ -3643,7 +3662,7 @@ msgstr "Juin"
 msgid "July"
 msgstr "Juillet"
 
-#: plugins/personal/posix/class_posixAccount.inc:495
+#: plugins/personal/posix/class_posixAccount.inc:498
 #: plugins/personal/samba/class_sambaAccount.inc:358
 #: plugins/personal/samba/class_sambaAccount.inc:376
 #: plugins/personal/samba/class_sambaAccount.inc:394
@@ -3654,7 +3673,7 @@ msgstr "Juillet"
 msgid "August"
 msgstr "Aôut"
 
-#: plugins/personal/posix/class_posixAccount.inc:495
+#: plugins/personal/posix/class_posixAccount.inc:498
 #: plugins/personal/samba/class_sambaAccount.inc:358
 #: plugins/personal/samba/class_sambaAccount.inc:376
 #: plugins/personal/samba/class_sambaAccount.inc:394
@@ -3665,7 +3684,7 @@ msgstr "Aôut"
 msgid "September"
 msgstr "Septembre"
 
-#: plugins/personal/posix/class_posixAccount.inc:496
+#: plugins/personal/posix/class_posixAccount.inc:499
 #: plugins/personal/samba/class_sambaAccount.inc:359
 #: plugins/personal/samba/class_sambaAccount.inc:377
 #: plugins/personal/samba/class_sambaAccount.inc:395
@@ -3676,7 +3695,7 @@ msgstr "Septembre"
 msgid "October"
 msgstr "Octobre"
 
-#: plugins/personal/posix/class_posixAccount.inc:496
+#: plugins/personal/posix/class_posixAccount.inc:499
 #: plugins/personal/samba/class_sambaAccount.inc:359
 #: plugins/personal/samba/class_sambaAccount.inc:377
 #: plugins/personal/samba/class_sambaAccount.inc:395
@@ -3687,7 +3706,7 @@ msgstr "Octobre"
 msgid "November"
 msgstr "Novembre"
 
-#: plugins/personal/posix/class_posixAccount.inc:496
+#: plugins/personal/posix/class_posixAccount.inc:499
 #: plugins/personal/samba/class_sambaAccount.inc:359
 #: plugins/personal/samba/class_sambaAccount.inc:377
 #: plugins/personal/samba/class_sambaAccount.inc:395
@@ -3698,102 +3717,102 @@ msgstr "Novembre"
 msgid "December"
 msgstr "Décembre"
 
-#: plugins/personal/posix/class_posixAccount.inc:578
+#: plugins/personal/posix/class_posixAccount.inc:581
 msgid "full access"
 msgstr "accès complet"
 
-#: plugins/personal/posix/class_posixAccount.inc:579
+#: plugins/personal/posix/class_posixAccount.inc:582
 msgid "allow access to these hosts"
 msgstr "permettre l'accès a ces hôtes"
 
-#: plugins/personal/posix/class_posixAccount.inc:751
+#: plugins/personal/posix/class_posixAccount.inc:754
 msgid "Failed: overriding lock"
 msgstr "Échoué: réécriture du verrou"
 
-#: plugins/personal/posix/class_posixAccount.inc:901
+#: plugins/personal/posix/class_posixAccount.inc:904
 msgid "The required field 'Home directory' is not set."
 msgstr "Le champ obligatoire 'Répertoire Home' n'est pas renseigné."
 
-#: plugins/personal/posix/class_posixAccount.inc:904
+#: plugins/personal/posix/class_posixAccount.inc:907
 msgid "Please enter a valid path in 'Home directory' field."
 msgstr "Veuillez indiquer un chemin d'accès valide dans le champ 'Répertoire Home'."
 
-#: plugins/personal/posix/class_posixAccount.inc:912
+#: plugins/personal/posix/class_posixAccount.inc:915
 msgid "Value specified as 'UID' is not valid."
 msgstr "La valeur de l''UID' spécifiée n'est pas valide."
 
-#: plugins/personal/posix/class_posixAccount.inc:915
+#: plugins/personal/posix/class_posixAccount.inc:918
 msgid "Value specified as 'UID' is too small."
 msgstr "La valeur de l''UID' spécifiée est trop petite."
 
-#: plugins/personal/posix/class_posixAccount.inc:919
+#: plugins/personal/posix/class_posixAccount.inc:922
 #: plugins/admin/groups/class_groupGeneric.inc:772
 msgid "Value specified as 'GID' is not valid."
 msgstr "La valeur du 'GID' n'est pas valide."
 
-#: plugins/personal/posix/class_posixAccount.inc:922
+#: plugins/personal/posix/class_posixAccount.inc:925
 #: plugins/admin/groups/class_groupGeneric.inc:775
 msgid "Value specified as 'GID' is too small."
 msgstr "La valeur spécifiée comme 'GID' est trop petite."
 
-#: plugins/personal/posix/class_posixAccount.inc:930
+#: plugins/personal/posix/class_posixAccount.inc:933
 msgid "Value specified as 'shadowMin' is not valid."
 msgstr ""
 "La valeur de 'Les mots de passe ne peuvent être changé qu'après x jours à "
 "compter de la dernière modification de celui-ci' n'est pas valide."
 
-#: plugins/personal/posix/class_posixAccount.inc:935
+#: plugins/personal/posix/class_posixAccount.inc:938
 msgid "Value specified as 'shadowMax' is not valid."
 msgstr "La valeur ' Le mot de passe doit être changé après x jours' n'est pas valide."
 
-#: plugins/personal/posix/class_posixAccount.inc:940
+#: plugins/personal/posix/class_posixAccount.inc:943
 msgid "Value specified as 'shadowWarning' is not valid."
 msgstr ""
 "La valeur 'avertissement de l'utilisateur x jours avant le changement de mot "
 "de passe' spécifiée n'est pas valide."
 
-#: plugins/personal/posix/class_posixAccount.inc:943
+#: plugins/personal/posix/class_posixAccount.inc:946
 msgid "'shadowWarning' without 'shadowMax' makes no sense."
 msgstr ""
 "La valeur 'Avertir l'utilisateur x jours avant l'expiration de son mot de "
 "passe' sans la valeur 'Le mot de passe doit être changé après x jours' n'a "
 "pas de sens."
 
-#: plugins/personal/posix/class_posixAccount.inc:946
+#: plugins/personal/posix/class_posixAccount.inc:949
 msgid "Value specified as 'shadowWarning' should be smaller than 'shadowMax'."
 msgstr ""
 "La valeur de 'Avertir l'utilisateur x jours avant l'expiration de son mot de "
 "passe' doit être inférieure à celle de ' Le mot de passe doit être changé "
 "après 64 jours '."
 
-#: plugins/personal/posix/class_posixAccount.inc:949
+#: plugins/personal/posix/class_posixAccount.inc:952
 msgid "Value specified as 'shadowWarning' should be greater than 'shadowMin'."
 msgstr ""
 "La valeur de 'Avertir l'utilisateur x jours avant l'expiration de son mot de "
 "passe' doit être supérieure à celle de 'Les mots de passe ne peuvent être "
 "changé qu'après x jours à compter de la dernière modification de celui-ci '."
 
-#: plugins/personal/posix/class_posixAccount.inc:954
+#: plugins/personal/posix/class_posixAccount.inc:957
 msgid "Value specified as 'shadowInactive' is not valid."
 msgstr ""
 "La valeur de 'Désactiver le compte après x jours d'inactivité après "
 "l'expiration du mot de passe ' n'est pas valide."
 
-#: plugins/personal/posix/class_posixAccount.inc:957
+#: plugins/personal/posix/class_posixAccount.inc:960
 msgid "'shadowInactive' without 'shadowMax' makes no sense."
 msgstr ""
 "'Désactiver le compte après x jours d'inactivité après l'expiration du mot "
 "de passe ' sans 'Le mot de passe doit être changé après x jours ' n'a pas de "
 "sens."
 
-#: plugins/personal/posix/class_posixAccount.inc:962
+#: plugins/personal/posix/class_posixAccount.inc:965
 msgid "Value specified as 'shadowMin' should be smaller than 'shadowMax'."
 msgstr ""
 "La valeur pour 'Les mots de passe ne peuvent être changé qu'après x jours à "
 "compter de la dernière modification de celui-ci ' doit être inférieure à "
 "celle de 'Le mot de passe doit être changé après x jours '."
 
-#: plugins/personal/posix/class_posixAccount.inc:1089
+#: plugins/personal/posix/class_posixAccount.inc:1092
 #: plugins/admin/groups/class_groupGeneric.inc:811
 msgid "Too many users, can't allocate a free ID!"
 msgstr "Trop d'utilisateurs, impossible d'assigner un ID libre!"
@@ -11763,7 +11782,8 @@ msgid ""
 msgstr ""
 "Ceci est un nouveau système qui n'as pas encore de type défini. Veuillez "
 "choisir un type de système pour cette entrée et cliquez sur 'continuer'. Si "
-"ce système doit être ajouté à un un un groupe de systèmes, veuillez choisir le groupe d'objet ce dessous."
+"ce système doit être ajouté à un un un groupe de systèmes, veuillez choisir "
+"le groupe d'objet ce dessous."
 
 #: plugins/admin/systems/SelectDeviceType.tpl:9
 msgid ""
