@@ -114,9 +114,12 @@ class posixAccount extends plugin
 
       /* Generate status text */
       $current= date("U");
+
+      $current= floor($current / 60 /60 / 24);
+
       if (($current >= $this->shadowExpire) && $this->shadowExpire){
         $this->status= _("expired");
-        if (($this->shadowExpire - $current) < $this->shadowInactive){
+        if (($current - $this->shadowExpire) < $this->shadowInactive){
           $this->status.= _(", grace time active");
         }
       } elseif (($this->shadowLastChange + $this->shadowMin) >= $current){
