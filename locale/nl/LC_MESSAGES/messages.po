@@ -1347,7 +1347,7 @@ msgid "expired"
 msgstr "Vervaltijd"
 
 #: plugins/personal/posix/class_posixAccount.inc:123
-msgid ", grace time active"
+msgid "grace time active"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:126
@@ -9980,7 +9980,7 @@ msgstr "Voeg printer extensie toe"
 #: plugins/admin/systems/class_printGeneric.inc:230
 msgid ""
 "Could not intialize printer tab, parameter parent was missing while "
-"construcktion."
+"construction."
 msgstr ""
 
 #: plugins/admin/systems/class_printGeneric.inc:238
@@ -12113,7 +12113,14 @@ msgstr ""
 msgid "SID and/or RIDBASE missing in your configuration!"
 msgstr "SID en/of RIDBASE ontbreken in uw configuratie!"
 
-#: include/class_ldap.inc:195 include/class_ldap.inc:227
+#: include/class_ldap.inc:195
+#, php-format
+msgid ""
+"The LDAP server is slow (%.2fs for the last query). This may be responsible "
+"for performance breakdowns."
+msgstr ""
+
+#: include/class_ldap.inc:227
 #, php-format
 msgid ""
 "The ldapserver is answering very slow (%.2f), this may be responsible for "

@@ -1382,7 +1382,8 @@ msgid "expired"
 msgstr "expire"
 
 #: plugins/personal/posix/class_posixAccount.inc:123
-msgid ", grace time active"
+#, fuzzy
+msgid "grace time active"
 msgstr ", temps de grâce activé"
 
 #: plugins/personal/posix/class_posixAccount.inc:126
@@ -10074,9 +10075,10 @@ msgid "Add printer extension"
 msgstr "Ajouter une extension d'imprimante"
 
 #: plugins/admin/systems/class_printGeneric.inc:230
+#, fuzzy
 msgid ""
 "Could not intialize printer tab, parameter parent was missing while "
-"construcktion."
+"construction."
 msgstr ""
 "Impossible d'initialiser l'onglet imprimante, le paramètre parent était "
 "manquant pendant la construction."
@@ -12212,7 +12214,16 @@ msgstr ""
 msgid "SID and/or RIDBASE missing in your configuration!"
 msgstr "SID et/ou RIDBASE absents du fichier de configuration!"
 
-#: include/class_ldap.inc:195 include/class_ldap.inc:227
+#: include/class_ldap.inc:195
+#, fuzzy, php-format
+msgid ""
+"The LDAP server is slow (%.2fs for the last query). This may be responsible "
+"for performance breakdowns."
+msgstr ""
+"Le serveur ldap répond très lentement (%.2f), ceci peut être responsable des "
+"problèmes de performances."
+
+#: include/class_ldap.inc:227
 #, php-format
 msgid ""
 "The ldapserver is answering very slow (%.2f), this may be responsible for "
