@@ -319,7 +319,6 @@ class plugin
       }
     }
 
-    $this->handle_object_tagging();
   }
 
 
@@ -850,20 +849,59 @@ class plugin
   }
 
 
-  function handle_object_tagging()
+  function handle_object_tagging($dn= "", $tag= "")
   {
-    echo "Handle tagging<br>";
-    /* Watch out for an administrative unit below own base */
-    #echo "<b>handle_object_tagging()</b><br><pre>";
-    #echo "DN  : ".$this->dn."\n";
-    #echo "Base: ".$this->config->current['BASE']."\n";
-    #echo "</pre>";
+    /* No dn? Self-operation... */
+    if ($dn == ""){
+      $dn= $this->dn;
+    }
+    
+    /* No tag? Find it yourself... */
+    #....
 
-    /* Make a base search on every department */
-    //FIXME: evaluate if these informations should be cached, too
-    #$parts= split(',', preg_replace("/,".normalizePreg($this->config->current['BASE'])."$/", '', $this->dn));
+    /* Set tag? */
+    if ($tag != ""){
+      #echo "Add tagging ($tag) to $dn.<br>";
 
-    /* Set objectclass and attribute */
+      /* Set objectclass and attribute */
+      $ldap= $this->config->get_ldap_link();
+      $ldap->cat($dn);
+      $attrs= $ldap->fetch();
+      $nattrs= array("gosaUnitTag" => $this->gosaUnitTag);
+      $nattrs['objectClass']= array();
+      for ($i= 0; $i<$attrs['objectClass']['count']; $i++){
+        $oc= $attrs['objectClass'][$i];
+        if ($oc != "gosaAdministrativeUnitTag"){
+          $nattrs['objectClass'][]= $oc;
+        }
+      }
+      $nattrs['objectClass'][]= "gosaAdministrativeUnitTag";
+      $ldap->cd($dn);
+      $ldap->modify($nattrs);
+      if ($ldap->error != "Success"){
+        print_red($ldap->get_error());
+      }
+    } else {
+      #echo "Remove tagging from $dn.<br>";
+
+      /* Remove objectclass and attribute */
+      $ldap= $this->config->get_ldap_link();
+      $ldap->cat($dn);
+      $attrs= $ldap->fetch();
+      $nattrs= array("gosaUnitTag" => array());
+      $nattrs['objectClass']= array();
+      for ($i= 0; $i<$attrs['objectClass']['count']; $i++){
+        $oc= $attrs['objectClass'][$i];
+        if ($oc != "gosaAdministrativeUnitTag"){
+          $nattrs['objectClass'][]= $oc;
+        }
+      }
+      $ldap->cd($dn);
+      $ldap->modify($nattrs);
+      if ($ldap->error != "Success"){
+        print_red($ldap->get_error());
+      }
+    }
     
   }
 

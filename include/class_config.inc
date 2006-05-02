@@ -483,7 +483,7 @@ class config  {
       /* Save administrative departments */
       if (in_array_ics("gosaAdministrativeUnit", $attrs['objectClass']) &&
           isset($attrs['gosaUnitTag'][0])){
-        $administrative[$dn]= $attrs['gosaUnitTag'];
+        $administrative[$dn]= $attrs['gosaUnitTag'][0];
       }
     
       if ($dn == $ignore_dn){

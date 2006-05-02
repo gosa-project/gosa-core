@@ -76,7 +76,7 @@
    <td style="vertical-align:top; width:100%">
      <h2><img class="center" alt="" align="middle" src="images/closedlock.png"> {t}Administrative settings{/t}</h2>
 
-     <input id="unitTag" type=checkbox name="unitTag" value="1" {$unitTag} {$unitTagACL}><label for="unitTag">{t}Tag department as an independent administrational unit{/t}</label>
+     <input id="unitTag" type=checkbox name="unitTag" value="1" {$unitTag} {$unitTagACL}><label for="unitTag">{t}Tag department as an independent administrative unit{/t}</label>
    </td>
   </tr>
 </table>

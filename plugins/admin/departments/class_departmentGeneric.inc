@@ -272,6 +272,8 @@ class department extends plugin
 				}
 				$this->gosaUnitTag= preg_replace("/\./", "", $sec.$usec);
 			}
+		} else {
+				$this->gosaUnitTag= "";
 		}
 
 		plugin::save();
@@ -287,7 +289,9 @@ class department extends plugin
 				}
 			}
 			$this->attrs['objectClass']= $tmp;
-			$this->attrs['gosaUnitTag']= array();
+			if(isset($this->attrs['gosaUnitTag'])){
+				$this->attrs['gosaUnitTag']= array();
+			}
 		}
 		
 		/* Write back to ldap */
@@ -306,12 +310,7 @@ class department extends plugin
 			$this->handle_post_events('add');
 		}
 		show_ldap_error($ldap->get_error());
-
-		if ($this->is_administrational_unit){
-			$this->tag_objects();
-		} else {
-			$this->untag_objects();
-		}
+		$this->tag_objects();
 
 		/* Optionally execute a command after we're done */
 		$this->postcreate();
@@ -321,24 +320,47 @@ class department extends plugin
 	/* Tag objects to have the gosaAdministrativeUnitTag */
 	function tag_objects()
 	{
-		echo "<pre>Performing Tag:";
+		$add= $this->is_administrational_unit;
+		$len= strlen($this->dn);
 		$ldap= $this->config->get_ldap_link();
 		$ldap->cd($this->dn);
-		$ldap->search('(!(&(objectClass=gosaAdministrativeUnitTag)(gosaUnitTag='.
-				$this->gosaUnitTag.')))', array('dn'));
-		while ($attrs= $ldap->fetch()){
-			//FIXME: check if this is below another administrative
-			//       unit
-			echo "Fix: ".$attrs['dn']."\n";
+		if ($add){
+			$ldap->search('(!(&(objectClass=gosaAdministrativeUnitTag)(gosaUnitTag='.
+					$this->gosaUnitTag.')))', array('dn'));
+		} else {
+			$ldap->search('objectClass=gosaAdministrativeUnitTag', array('dn'));
 		}
-		echo "</pre>";
+		while ($attrs= $ldap->fetch()){
+
+			/* Skip self */
+			if ($attrs['dn'] == $this->dn){
+				continue;
+			}
+
+			/* Check for confilicting administrative units */
+			$fix= true;
+			foreach ($this->config->adepartments as $key => $tag){
+				/* This one is shorter than our dn, its not relevant... */
+				if ($len >= strlen($key)){
+					continue;
+				}
+
+				/* This one matches with the latter part. Break and don't fix this entry */
+				if (preg_match('/(^|,)'.normalizePreg($key).'$/', $attrs['dn'])){
+					$fix= false;
+					break;
+				}
+			}
+			
+			/* Fix entry if needed */
+			if ($fix){
+				$this->handle_object_tagging($attrs['dn'], $this->gosaUnitTag);
+			} else {
+				echo "Don't touch: ".$attrs['dn']."<br>";
+			}
+		}
 	}
 
-	/* Remove the gosaAdministrativeUnitTag from objects */
-	function untag_objects()
-	{
-		echo "Performing Untag:";
-	}
 
 	/* Move/Rename complete trees */
 	function recursive_move($src_dn, $dst_dn,$force = false)
