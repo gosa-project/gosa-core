@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2006-05-02 11:41+0200\n"
+"PO-Revision-Date: 2006-05-02 14:45+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -3013,7 +3013,7 @@ msgid "GB"
 msgstr "GB"
 
 #: plugins/personal/connectivity/class_proxyAccount.inc:80
-#: plugins/addons/mailqueue/class_mailqueue.inc:304
+#: plugins/addons/mailqueue/class_mailqueue.inc:314
 msgid "hour"
 msgstr "Stunde"
 
@@ -4259,8 +4259,8 @@ msgstr "Erzeugen eines neuen Eintrags in"
 #: plugins/addons/addressbook/class_addressbook.inc:513
 #: plugins/addons/logview/class_logview.inc:94
 #: plugins/addons/logview/class_logview.inc:111
-#: plugins/addons/mailqueue/class_mailqueue.inc:286
-#: plugins/addons/mailqueue/class_mailqueue.inc:351
+#: plugins/addons/mailqueue/class_mailqueue.inc:296
+#: plugins/addons/mailqueue/class_mailqueue.inc:361
 msgid "All"
 msgstr "Alle"
 
@@ -4673,47 +4673,51 @@ msgstr ""
 "Bitte überprüfen Sie Ihre 'gosa.conf' - der Eintrag 'MAILQUEUESCRIPTPATH' "
 "wurde nicht gefunden."
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:85
-#: plugins/addons/mailqueue/class_mailqueue.inc:93
-#: plugins/addons/mailqueue/class_mailqueue.inc:112
-#: plugins/addons/mailqueue/class_mailqueue.inc:121
-#: plugins/addons/mailqueue/class_mailqueue.inc:176
-#: plugins/addons/mailqueue/class_mailqueue.inc:203
+#: plugins/addons/mailqueue/class_mailqueue.inc:86
+#: plugins/addons/mailqueue/class_mailqueue.inc:94
+#: plugins/addons/mailqueue/class_mailqueue.inc:113
+#: plugins/addons/mailqueue/class_mailqueue.inc:122
+#: plugins/addons/mailqueue/class_mailqueue.inc:177
+#: plugins/addons/mailqueue/class_mailqueue.inc:204
 #, php-format
 msgid "Please check your 'gosa.conf' the given '%s' can't be executed."
 msgstr ""
 "Bitte überprüfen Sie Ihre 'gosa.conf' - '%s' kann nicht ausgeführt werden."
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:256
+#: plugins/addons/mailqueue/class_mailqueue.inc:216
+msgid "There are no mail server specified."
+msgstr "Es wurden keine Mail-Server angegeben."
+
+#: plugins/addons/mailqueue/class_mailqueue.inc:266
 msgid "up"
 msgstr "auf"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:258
+#: plugins/addons/mailqueue/class_mailqueue.inc:268
 msgid "down"
 msgstr "ab"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:301
+#: plugins/addons/mailqueue/class_mailqueue.inc:311
 msgid "no limit"
 msgstr "keine Beschränkung"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:306
+#: plugins/addons/mailqueue/class_mailqueue.inc:316
 msgid "hours"
 msgstr "Stunden"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:352
+#: plugins/addons/mailqueue/class_mailqueue.inc:362
 msgid "Hold"
 msgstr "Vorhalten"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:353
+#: plugins/addons/mailqueue/class_mailqueue.inc:363
 msgid "Un hold"
 msgstr "Vorhalten aufheben"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:354
+#: plugins/addons/mailqueue/class_mailqueue.inc:364
 #: plugins/addons/mailqueue/contents.tpl:76
 msgid "Active"
 msgstr "Aktiv"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:355
+#: plugins/addons/mailqueue/class_mailqueue.inc:365
 msgid "Not active"
 msgstr "inaktiv"
 
@@ -10017,7 +10021,8 @@ msgstr "Drucker-Erweiterung hinzufügen"
 msgid ""
 "Could not intialize printer tab, parameter parent was missing while "
 "construction."
-msgstr "Konnte den 'Druck'-Reiter nicht erstellen, der Parameter 'parent' fehlt"
+msgstr ""
+"Konnte den 'Druck'-Reiter nicht erstellen, der Parameter 'parent' fehlt"
 
 #: plugins/admin/systems/class_printGeneric.inc:238
 msgid "This is a workstation template, printer tab is disabled."
@@ -12165,8 +12170,8 @@ msgid ""
 "The LDAP server is slow (%.2fs for the last query). This may be responsible "
 "for performance breakdowns."
 msgstr ""
-"Der LDAP-Server antwortet sehr langsam (%.2fs für die letzte Anfrage), dies könnte die Ursache für "
-"Leistungseinbrüche sein."
+"Der LDAP-Server antwortet sehr langsam (%.2fs für die letzte Anfrage), dies "
+"könnte die Ursache für Leistungseinbrüche sein."
 
 #: include/class_ldap.inc:227
 #, php-format
@@ -13108,3 +13113,4 @@ msgstr "Passwort ändern"
 #: ihtml/themes/default/accountexpired.tpl:52
 msgid "Click here to Change your password"
 msgstr "Hier klicken, um Ihr Passwort zu ändern"
+

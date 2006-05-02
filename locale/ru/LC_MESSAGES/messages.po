@@ -3077,7 +3077,7 @@ msgid "GB"
 msgstr "Gb"
 
 #: plugins/personal/connectivity/class_proxyAccount.inc:80
-#: plugins/addons/mailqueue/class_mailqueue.inc:304
+#: plugins/addons/mailqueue/class_mailqueue.inc:314
 msgid "hour"
 msgstr "час"
 
@@ -4348,8 +4348,8 @@ msgstr "Создание нового объекта в"
 #: plugins/addons/addressbook/class_addressbook.inc:513
 #: plugins/addons/logview/class_logview.inc:94
 #: plugins/addons/logview/class_logview.inc:111
-#: plugins/addons/mailqueue/class_mailqueue.inc:286
-#: plugins/addons/mailqueue/class_mailqueue.inc:351
+#: plugins/addons/mailqueue/class_mailqueue.inc:296
+#: plugins/addons/mailqueue/class_mailqueue.inc:361
 msgid "All"
 msgstr "Все"
 
@@ -4765,49 +4765,53 @@ msgid ""
 "Please check your 'gosa.conf', there is no 'MAILQUEUESCRIPTPATH' specified."
 msgstr ""
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:85
-#: plugins/addons/mailqueue/class_mailqueue.inc:93
-#: plugins/addons/mailqueue/class_mailqueue.inc:112
-#: plugins/addons/mailqueue/class_mailqueue.inc:121
-#: plugins/addons/mailqueue/class_mailqueue.inc:176
-#: plugins/addons/mailqueue/class_mailqueue.inc:203
+#: plugins/addons/mailqueue/class_mailqueue.inc:86
+#: plugins/addons/mailqueue/class_mailqueue.inc:94
+#: plugins/addons/mailqueue/class_mailqueue.inc:113
+#: plugins/addons/mailqueue/class_mailqueue.inc:122
+#: plugins/addons/mailqueue/class_mailqueue.inc:177
+#: plugins/addons/mailqueue/class_mailqueue.inc:204
 #, php-format
 msgid "Please check your 'gosa.conf' the given '%s' can't be executed."
 msgstr ""
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:256
+#: plugins/addons/mailqueue/class_mailqueue.inc:216
+msgid "There are no mail server specified."
+msgstr ""
+
+#: plugins/addons/mailqueue/class_mailqueue.inc:266
 msgid "up"
 msgstr ""
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:258
+#: plugins/addons/mailqueue/class_mailqueue.inc:268
 #, fuzzy
 msgid "down"
 msgstr "Домен"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:301
+#: plugins/addons/mailqueue/class_mailqueue.inc:311
 msgid "no limit"
 msgstr ""
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:306
+#: plugins/addons/mailqueue/class_mailqueue.inc:316
 #, fuzzy
 msgid "hours"
 msgstr "час"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:352
+#: plugins/addons/mailqueue/class_mailqueue.inc:362
 msgid "Hold"
 msgstr ""
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:353
+#: plugins/addons/mailqueue/class_mailqueue.inc:363
 msgid "Un hold"
 msgstr ""
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:354
+#: plugins/addons/mailqueue/class_mailqueue.inc:364
 #: plugins/addons/mailqueue/contents.tpl:76
 #, fuzzy
 msgid "Active"
 msgstr "Личный"
 
-#: plugins/addons/mailqueue/class_mailqueue.inc:355
+#: plugins/addons/mailqueue/class_mailqueue.inc:365
 msgid "Not active"
 msgstr ""
 
