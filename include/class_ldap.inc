@@ -192,7 +192,7 @@ class LDAP{
       if($this->max_ldap_query_time){
         $diff = get_MicroTimeDiff($start,microtime());
         if($diff > $this->max_ldap_query_time){
-          print_red(sprintf(_("The ldapserver is answering very slow (%.2f), this may be responsible for performance breakdowns."),$diff)) ;
+          print_red(sprintf(_("The LDAP server is slow (%.2fs for the last query). This may be responsible for performance breakdowns."),$diff)) ;
         }
       }
 
