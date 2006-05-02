@@ -222,12 +222,12 @@ class printgeneric extends plugin
     /* Call parent execute */
     plugin::execute();
 
-    /* If type of printer couldn't be detected (because of missing parent object in construcktion) 
+    /* If type of printer couldn't be detected (because of missing parent object in construction) 
      * hide this tab.
      */
     if($this->BelongsTo == "unknown"){
       $display= $this->show_header(_("Add printer extension"),
-          _("Could not intialize printer tab, parameter parent was missing while construcktion."),TRUE,TRUE);
+          _("Could not intialize printer tab, parameter parent was missing while construction."),TRUE,TRUE);
       return($display);
     }
 
