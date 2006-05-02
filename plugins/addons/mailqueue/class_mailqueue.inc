@@ -64,6 +64,7 @@ class mailqueue extends plugin
        */ 
       if($this->Server=="all"){
         $se = $this->getServer();
+
         unset($se['all']);
         $se_str = "";
         foreach($se as $server) {
@@ -206,6 +207,15 @@ class mailqueue extends plugin
         }
 
       }     
+
+      /* Check for existing servers 
+          objectClass=goMailServer is required at least for one server. 
+         Else display error   */
+      $server = $this->getServer();
+      if((count($server) == 1 ) && (isset($server['all']))){
+        print_red(_("There are no mail server specified."));
+        $error = true;
+      }
 
       if(!$error){
 
