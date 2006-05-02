@@ -120,7 +120,7 @@ class posixAccount extends plugin
       if (($current >= $this->shadowExpire) && $this->shadowExpire){
         $this->status= _("expired");
         if (($current - $this->shadowExpire) < $this->shadowInactive){
-          $this->status.= _(", grace time active");
+          $this->status.= ", "._("grace time active");
         }
       } elseif (($this->shadowLastChange + $this->shadowMin) >= $current){
         $this->status= _("active, password not changable");
