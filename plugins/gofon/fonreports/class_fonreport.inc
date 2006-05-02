@@ -275,6 +275,10 @@ class fonreport extends plugin
         }
 	$smarty->assign("mode".$this->sort, "<img alt=\"\" src=\"images/sort_".$this->sort_direction.
 			".png\" border=0 align=middle>");
+	$smarty->assign("month_select"	, $this->month);
+	$smarty->assign("years"			, $years);
+	$smarty->assign("year_select"	, $this->year);
+	$smarty->assign("search_result"	, "");
 	return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
   }
 
