@@ -52,20 +52,36 @@ class faiSummaryTab extends plugin{
 
     $_SESSION['faiSummaryTab']['UniqueID'] = 0; 
 
-    /* Get Releases */
-    $ldap = $config->get_ldap_link();
-    $ldap->cd($config->current['BASE']);
-    $ldap->search("(&(objectClass=organizationalUnit)(objectClass=FAIbranch))",array("ou"));
-    while($attrs = $ldap->fetch()){
-      if(preg_match("/,ou=systems,/i",$attrs['dn'])){
-        $this->Releases [ $attrs['ou'][0]]    = $attrs['dn'];
+    $this->Releases = array_flip($this->getBranches());
+
+    if(count($this->Classes) && (!empty($this->Release))){
+      foreach($this->Classes as $class){
+        $this->Result[$class] = $this->resolveObject($class);
       }
     }
-
-    foreach($this->Classes as $class){
-      $this->Result[$class] = $this->resolveObject($class);
-    }
   }
+
+  /* returns an array with all possibly release types */
+  function getBranches($base = false,$prefix = "")
+  {
+    $ret = array("main"=>"/");
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $faifilter = $_SESSION['faifilter'];
+    if(!$base){
+      $base= "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
+    }
+    $ldap->cd($base);
+    $ldap->ls("(objectClass=FAIbranch)",$base);
+    while($attrs = $ldap->fetch()){
+      if((isset($attrs['ou']))&&($attrs['dn']!=$base)){
+        $ret[$attrs['dn']]= $prefix.$attrs['ou'][0];
+        $ret = array_merge($ret,$this->getBranches($attrs['dn'],"".$prefix.$attrs['ou'][0]."/"));
+      }
+    }
+    return($ret);
+  }
+
 
   function execute() 
   {
@@ -80,9 +96,17 @@ class faiSummaryTab extends plugin{
   /* Create output of our resolved objects */
   function createSummary($data)
   {
+ 
+    /* Don't generate any output, if there is no result */ 
     $str ="<table style='width:100%;background:#F5F5F5;'> ";
+    if(!count($this->Result)){
+      $str.="<tr><td>"; 
+      $str.= (_("This object has no FAI classes assigned."));
+      $str.= "</tr></td></table>";
+      return($str);
+    }
 
-    /* walkt throigh all classes */	
+    /* walk through all classes */	
     foreach($data as $key => $entry){
 
       /* Check every kind of object type */
