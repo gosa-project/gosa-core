@@ -652,9 +652,16 @@ class glpiAccount extends plugin
 
   function remove_from_parent()
   {
-    $this->handle = new glpiDB($this->data['SERVER'],$this->data['LOGIN'],$this->data['PASSWORD'],$this->data['DB']);
-    if($this->initialy_was_account){
-      $this->handle->removeComputerInformations($this->dn); 
+    if(!$this->initialy_was_account){
+      return;
+    }
+    if(function_exists("mysql_pconnect")){
+      $this->handle = new glpiDB($this->data['SERVER'],$this->data['LOGIN'],$this->data['PASSWORD'],$this->data['DB']);
+      if($this->initialy_was_account){
+        $this->handle->removeComputerInformations($this->dn); 
+      }
+    }else{
+      print_red(_("Can't remove glpi account, while mysql extension is missing."));
     }
   
   }
