@@ -67,7 +67,6 @@ class faiSummaryTab extends plugin{
     $ret = array("main"=>"/");
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-    $faifilter = $_SESSION['faifilter'];
     if(!$base){
       $base= "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
     }
