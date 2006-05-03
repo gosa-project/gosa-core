@@ -1,4 +1,22 @@
 <?php
+/*
+   This code is part of GOsa (https://gosa.gonicus.de)
+   Copyright (C) Fabian Hickert 
+
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 class faiSummaryTab extends plugin{
 
@@ -20,6 +38,7 @@ class faiSummaryTab extends plugin{
   {
     plugin::plugin($config,$dn);
 
+    /* Base object configuration */
     $this->objs = array(	"FAIscript" 		=> array(	"Image"	=>"images/fai_script.png",
           "Tree"	=>"ou=scripts,") ,
         "FAIhook" 			=> array(	"Image"	=>"images/fai_hook.png" ,
@@ -36,23 +55,33 @@ class faiSummaryTab extends plugin{
           "Tree"	=>"ou=profiles,"));
   }
 
+  /* Init the fai tree with objects.
+     If this method is called, all assigned classes and the release name 
+      will be read from parent object.
+    */
   function init()
   {
     $this->InitCalled = true;
     $this->Result = array();
     $_SESSION['faiSummaryTab']['UniqueID'] = 0; 
+    $tmp = $this->getBranches();
     
     /* Get classes & release name 
        There are 2 different tabs which use the summary tab
        faiProfile / Workstations */
-    $tmp = $this->getBranches();
+    
+    /* Check if given parent object is fai profile tabs */
     if(isset($this->parent->by_name['faiProfile'])){
+      
+      /* Get Classes and release */
       $this->Classes = $this->parent->by_object['faiProfile']->FAIclasses;
       $str = preg_replace("/^.*ou=profiles,/","",$this->dn);
       if(isset($tmp[$str])){
         $this->Release = $tmp[$str];
       }
-    }elseif(isset($this->parent->by_name['workgeneric'])){
+  
+    /* Check if parent tab is work tab */
+    }elseif(isset($this->parent->by_name['workstartup'])){
       $this->Classes = $this->parent->by_object['workstartup']->FAIclass;
       $this->Release = $this->parent->by_object['workstartup']->FAIrelease;
       $tmp = array_flip($tmp);
@@ -61,8 +90,10 @@ class faiSummaryTab extends plugin{
       }
     }
 
+    /* Set all available releases */
     $this->Releases = array_flip($this->getBranches());
 
+    /* Check the configuration */
     if(count($this->Classes) && (!empty($this->Release))){
       foreach($this->Classes as $class){
         $this->Result[$class] = $this->resolveObject($class);
@@ -90,25 +121,24 @@ class faiSummaryTab extends plugin{
     return($ret);
   }
 
-
+  /* Thsi function calls all nescessary functions to generate the fai class summary tree */
   function execute() 
   {
+    /* Check if we must (re)init the this tab */
     if(!$this->InitCalled){
       $this->init();
     }
 
-    $display = "";	
+    /* Get smarty class & assign created summary results */
     $smarty = get_smarty();
     $this->ObjectList = $this->createSummary($this->Result);
     $smarty->assign("objectList",$this->ObjectList);
-    $display.= $smarty->fetch (get_template_path('faiSummary.tpl', TRUE, dirname(__FILE__)));
-    return($display);
+    return($smarty->fetch (get_template_path('faiSummary.tpl', TRUE, dirname(__FILE__))));
   }
 
-  /* Create output of our resolved objects */
+  /* Create output of from resolved fai objects */
   function createSummary($data)
   {
- 
     /* Don't generate any output, if there is no result */ 
     $str ="<table style='width:100%;background:#F5F5F5;'> ";
     if(!count($this->Result)){
@@ -155,17 +185,18 @@ class faiSummaryTab extends plugin{
     return($str);
   }
 
-  /* resolve specified object to append it to our object tree
-     calls prepare_"FAIclass"
-   */
+  /* resolve specified object to append it to our object tree */
   function resolveObject($class)
   {
     $ldap 	= $this->config->get_ldap_link();
-    $dn 	= $this->Releases [$this->Release];
-
-    $res = array();
-
+    $dn 	  = $this->Releases [$this->Release];
+    $res    = array();
+  
+    /* Try to fetch all types of fai objects with the given cn  */
     foreach($this->objs as $key =>  $obj){
+      
+      /* Check for objects with cn=$class 
+          and add them to our list */
       $ldap->ls("(&(objectClass=".$key.")(cn=".$class."))",$obj['Tree'].$dn,array("*"));
       while($attrs = $ldap->fetch()){
         switch($key){
