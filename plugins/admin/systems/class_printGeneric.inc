@@ -93,7 +93,12 @@ class printgeneric extends plugin
     } else {
     
       /* Set base and check if the extracted base exists */
-      $this->base= preg_replace("/ou=printers,ou=systems,/","",dn2base($this->dn));
+      if(preg_match("/ou=incoming,/",$this->dn)){
+        $this->base= preg_replace("/ou=incoming,/","",dn2base($this->dn));
+      }else{
+        $this->base= preg_replace("/ou=printers,ou=systems,/","",dn2base($this->dn));
+      }
+
       if(!isset($this->config->idepartments[$this->base])){
         print_red(_("Can't extract a valid base out of object dn, setting base to '%s'."),$_SESSION['CurrentMainBase']);
         $this->base = $_SESSION['CurrentMainBase'];
