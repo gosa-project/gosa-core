@@ -1014,6 +1014,8 @@ $ldap->modify ($this->attrs);
 
   function remove_from_parent()
   {
+    if(!$this->initially_was_account) return;
+
     foreach($this->attributes as $key=>$val){
       if(in_array($val,array("uid","cn"))){
         unset($this->attributes[$key]);
