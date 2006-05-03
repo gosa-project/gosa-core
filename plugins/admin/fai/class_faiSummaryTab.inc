@@ -12,6 +12,10 @@ class faiSummaryTab extends plugin{
   var $FAIclass;
   var $attributes = array("FAIclass");
 
+  var $is_dialog = false;
+
+  var $InitCalled = false;
+  
   function faiSummaryTab($config,$dn)
   {
     plugin::plugin($config,$dn);
@@ -30,27 +34,32 @@ class faiSummaryTab extends plugin{
           "Tree"	=>"ou=packages,") ,
         "FAIprofile" 		=> array(	"Image"	=>"images/fai_profile.png",
           "Tree"	=>"ou=profiles,"));
+  }
 
-    if(count($this->FAIclass)){
-
-
-      /* Set Release */
-      if(preg_match("/:/",$this->FAIclass)){
-        if(preg_match("/:/",$this->FAIclass)){
-          $this->Release =trim( preg_replace("/^.*:/","",$this->FAIclass));
-        }
+  function init()
+  {
+    $this->InitCalled = true;
+    $this->Result = array();
+    $_SESSION['faiSummaryTab']['UniqueID'] = 0; 
+    
+    /* Get classes & release name 
+       There are 2 different tabs which use the summary tab
+       faiProfile / Workstations */
+    $tmp = $this->getBranches();
+    if(isset($this->parent->by_name['faiProfile'])){
+      $this->Classes = $this->parent->by_object['faiProfile']->FAIclasses;
+      $str = preg_replace("/^.*ou=profiles,/","",$this->dn);
+      if(isset($tmp[$str])){
+        $this->Release = $tmp[$str];
       }
-
-      /* Get classes */
-      $tmp = split("\ ", preg_replace("/:.*$/","",$this->FAIclass));
-      foreach($tmp as $class){
-        if(!empty($class)){
-          $this->Classes[]= trim($class);
-        }
+    }elseif(isset($this->parent->by_name['workgeneric'])){
+      $this->Classes = $this->parent->by_object['workstartup']->FAIclass;
+      $this->Release = $this->parent->by_object['workstartup']->FAIrelease;
+      $tmp = array_flip($tmp);
+      if(!isset($tmp[$this->Release])) {
+        $this->Release = "";
       }
     }
-
-    $_SESSION['faiSummaryTab']['UniqueID'] = 0; 
 
     $this->Releases = array_flip($this->getBranches());
 
@@ -84,6 +93,10 @@ class faiSummaryTab extends plugin{
 
   function execute() 
   {
+    if(!$this->InitCalled){
+      $this->init();
+    }
+
     $display = "";	
     $smarty = get_smarty();
     $this->ObjectList = $this->createSummary($this->Result);
@@ -564,6 +577,9 @@ class faiSummaryTab extends plugin{
         $value = preg_replace("/^close_/","",$name);
         $value = preg_replace("/_.*$/","",$value); 
         $this->Result = $this->closeTag($this->Result,$value);
+      }
+      if(preg_match("/^reloadList/",$name)){
+        $this->InitCalled = false;
       }
     }
   }
