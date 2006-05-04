@@ -149,6 +149,21 @@ class faiSummaryTab extends plugin{
       $this->init();
     }
 
+    if(isset($_GET['show'])){
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cat(base64_decode($_GET['id']));
+      $attrs = $ldap->fetch();
+      if($_GET['type'] == "FAIscript"){
+        $str = $attrs['FAIscript'][0];
+      }elseif($_GET['type'] == "FAIhook"){
+        $str = $attrs['FAIscript'][0];
+      }elseif($_GET['type'] == "FAItemplate"){
+        $str = $attrs['FAItemplateFile'][0];
+      }
+      echo nl2br($str);
+      exit();
+    }
+
     /* Get smarty class & assign created summary results */
     $smarty = get_smarty();
     $this->ObjectList = $this->createSummary($this->Result);
@@ -201,7 +216,7 @@ class faiSummaryTab extends plugin{
 
           foreach($entry['Entries'] as $cn => $data){
             $str .="<td></tr><tr><td style='padding-left:20px;'>";
-            $str .= "<a href='?plug=".$_GET['plug']."&show".$key."&id=".base64_encode($data['dn'])."'>";
+            $str .= "<a target='_blank'href='?plug=".$_GET['plug']."&show&type=".$key."&id=".base64_encode($data['dn'])."'>";
             $str .= $image."&nbsp;".$data['cn'][0];
             if(isset($data['description'][0])){
               $str .= " [".$data['description'][0]."]";
@@ -288,10 +303,6 @@ class faiSummaryTab extends plugin{
     $dn 	  = $this->Releases [$this->Release];
     $res    = array();
  
-    if(in_array($class,$this->usedClasses)) return;
-  
-    $this->usedClasses[] = $class;
- 
     /* Try to fetch all types of fai objects with the given cn  */
     foreach($this->objs as $key =>  $obj){
       
@@ -299,14 +310,18 @@ class faiSummaryTab extends plugin{
           and add them to our list */
       $ldap->ls("(&(objectClass=".$key.")(cn=".$class."))",$obj['Tree'].$dn,array("*"));
       while($attrs = $ldap->fetch()){
-        switch($key){
-          case "FAIprofile": 		        $this->prepare_FAIprofile($attrs);break;
-          case "FAIscript": 		        $this->prepare_FAIscript($attrs);break;
-          case "FAIhook": 		          $this->prepare_FAIhook($attrs);break;
-          case "FAIvariable":		        $this->prepare_FAIvariable($attrs);break;
-          case "FAItemplate":		        $this->prepare_FAItemplate($attrs);break;
-          case "FAIpackageList":	      $this->prepare_FAIpackageList($attrs);break;
-          case "FAIpartitionTable":	    $this->prepare_FAIpartitionTable($attrs);break;
+
+        if(!isset($this->usedClasses[$key][$class])){
+          $this->usedClasses[$key][$class] = true;
+          switch($key){
+            case "FAIprofile": 		        $this->prepare_FAIprofile($attrs);break;
+            case "FAIscript": 		        $this->prepare_FAIscript($attrs);break;
+            case "FAIhook": 		          $this->prepare_FAIhook($attrs);break;
+            case "FAIvariable":		        $this->prepare_FAIvariable($attrs);break;
+            case "FAItemplate":		        $this->prepare_FAItemplate($attrs);break;
+            case "FAIpackageList":	      $this->prepare_FAIpackageList($attrs);break;
+            case "FAIpartitionTable":	    $this->prepare_FAIpartitionTable($attrs);break;
+          }
         }
       }
     }
