@@ -33,12 +33,23 @@ $domain = 'messages';
 bindtextdomain($domain, "$BASE_DIR/locale");
 textdomain($domain);
 
-/* Set cookie lifetime to one day */
+/* Set cookie lifetime to one day (The parameter is in seconds ) */
 session_set_cookie_params(24*60*60);
+
+/* Set cache limter to one day (parameter is minutes !!)*/
+session_cache_expire(60*24);  // default is 180
+
+/* Set session max lifetime, to prevent the garbage collector to delete session before timeout.
+    !! The garbage collector is a cron job on debian systems, the cronjob will fetch the timeout from 
+    the php.ini, so if you use debian, you must hardcode session.gc_maxlifetime in your php.ini */
+ini_set("session.gc_maxlifetime",24*60*60);
 
 /* Remember everything we did after the last click */
 session_start ();
 
+if(ini_get("session.gc_maxlifetime")){
+  
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
   @DEBUG (DEBUG_POST, __LINE__, __FUNCTION__, __FILE__, $_POST, "_POST");

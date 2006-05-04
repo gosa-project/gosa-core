@@ -23,35 +23,45 @@ require_once ("../include/php_setup.inc");
 require_once ("functions.inc");
 header("Content-type: text/html; charset=UTF-8");
 get_dir_list("$BASE_DIR/plugins");
+
+/* try to start session, so we can remove userlocks, 
+  if the old session is still available */
 @session_start();
-/* Do logout-logging and destroy session */
-
-if(isset($_SESSION['logout_was_posted_several_times'])){
-  header ("Location: index.php");
-}
-
-if (isset($_SESSION['config'])){
+if(isset($_SESSION['ui'])){
+  
+  /* Get config & ui informations */
   $ui= $_SESSION["ui"];
+  
+  /* config used for del_user_locks & some lines below to detect the language */  
   $config= $_SESSION["config"];
 
   /* Remove all locks of this user */
   del_user_locks($ui->dn);
+  
+  /* Write something to log */  
+  gosa_log ("User \"".$ui->username."\" logged out");
+}
 
+/* If GET request is posted, the logout was forced by pressing the link */
+if (isset($_GET['request'])){
+  
+  /* destroy old session */
   @session_unset ();
   @session_destroy ();
-  @session_start();
-  $_SESSION['logout_was_posted_several_times'] = 1;
-  gosa_log ("User \"".$ui->username."\" logged out".$_SESSION['logout_was_posted_several_times']);
+  
   /* Go back to the base via header */
   header ("Location: index.php");
+  exit();
 
-}else{
+}else{  // The logout wasn't forced, so the session is invalid 
+  
   /* Language setup */
   if ((!isset($config))||(empty($config->data['MAIN']['LANG']))){
     $lang= get_browser_language();
   } else {
     $lang= $config->data['MAIN']['LANG'];
   }
+
   $lang.=".UTF-8";
   putenv("LANGUAGE=");
   putenv("LANG=$lang");
@@ -64,7 +74,7 @@ if (isset($_SESSION['config'])){
   bindtextdomain($domain, "$BASE_DIR/locale");
   textdomain($domain);
     
-  /* Set template compile directory */
+  /* Create smarty & Set template compile directory */
   $smarty= new smarty();
   if (isset ($config->data['MAIN']['COMPILE'])){
     $smarty->compile_dir= $config->data['MAIN']['COMPILE'];
@@ -73,8 +83,6 @@ if (isset($_SESSION['config'])){
   }
   $smarty->display (get_template_path('headers.tpl'));
   $smarty->display (get_template_path('logout.tpl'));
-  @session_destroy ();
-  @session_unset ();
   exit;
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

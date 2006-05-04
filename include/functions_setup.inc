@@ -311,6 +311,7 @@ function perform_php_checks(&$faults)
   $msg= "";
 
   $msg.= "<h1>"._("PHP setup inspection")."</h1>";
+
   $msg.= check (	$faults, _("Checking for PHP version (>=4.1.0)"),
       _("PHP must be of version 4.1.0 or above for some functions and known bugs in PHP language."),
       version_compare(phpversion(), "4.1.0")>=0);
@@ -318,6 +319,10 @@ function perform_php_checks(&$faults)
   $msg.= check (	$faults, _("Checking if register_globals is set to 'off'"),
       _("register_globals is a PHP mechanism to register all global varibales to be accessible from scripts without changing the scope. This may be a security risk. GOsa will run in both modes."),
       $check_globals == 0, FALSE);
+  
+  $msg.= check (  $faults, _("PHP session.gc_maxlifetime (>= 86400 seconds)."),
+      _("PHP uses this value for the garbage collector to delete old sessions, setting this value to one day will prevent loosing session and cookie  before they really timeout."),
+      ini_get("session.gc_maxlifetime") >= 86400,FALSE);
 
   $msg.= check (	$faults, _("Checking for ldap module"),
       _("This is the main module used by GOsa and therefore really required."),

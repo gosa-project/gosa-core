@@ -21,7 +21,7 @@
          </a>
 	</td>
 	<td>
-	 <a class="maintitlebar" href='logout.php' onClick='return question("{t}You are currently editing a database entry. Do you want to dismiss the changes?{/t}", "logout.php");' style="margin-left:35px;">
+	 <a class="maintitlebar" href='logout.php?request' onClick='return question("{t}You are currently editing a database entry. Do you want to dismiss the changes?{/t}", "logout.php");' style="margin-left:35px;">
           <img src='{$go_out}' class='center' border="0" alt="GOSA2">&nbsp;{t}Sign out{/t}
          </a>
 	</td>
