@@ -20,45 +20,35 @@
 
 class faiSummaryTab extends plugin{
 
-  var $Classes = array();
-  var $Release = "";
-  var $Releases= array();
-  var $Result  = array();
-  var $objs	 = array();
-  var $ObjectList = "";
-
-  var $FAIclass;
-  var $attributes = array("FAIclass");
-
-  var $is_dialog = false;
-
-  var $InitCalled = false;
+  var $Classes        = array();
+  var $Release        = "";
+  var $Releases       = array();
+  var $Result         = array();
+  var $objs	          = array();
+  var $ObjectList     = "";
+  var $is_dialog      = false;
+  var $InitCalled     = false;
+  var $usedClasses    = array();
   
   function faiSummaryTab($config,$dn)
   {
     plugin::plugin($config,$dn);
 
     /* Base object configuration */
-    $this->objs = array(	"FAIscript" 		=> array(	"Image"	=>"images/fai_script.png",
-          "Tree"	=>"ou=scripts,") ,
-        "FAIhook" 			=> array(	"Image"	=>"images/fai_hook.png" ,
-          "Tree"	=>"ou=hooks,"),
-        "FAIvariable" 		=> array(	"Image"	=>"images/fai_variable.png",
-          "Tree"	=>"ou=variables,") ,
-        "FAItemplate" 		=> array(	"Image"	=>"images/fai_template.png",
-          "Tree"	=>"ou=templates,") ,
-        "FAIpartitionTable" => array(	"Image"	=>"images/fai_partitionTable.png",
-          "Tree"	=>"ou=disk,") ,
-        "FAIpackageList" 	=> array(	"Image" =>"images/fai_packages.png",
-          "Tree"	=>"ou=packages,") ,
-        "FAIprofile" 		=> array(	"Image"	=>"images/fai_profile.png",
-          "Tree"	=>"ou=profiles,"));
+    $this->objs = array(	
+        "FAIscript" 		    => array(	"Image"	=>"images/fai_script.png",        "Name"=>_("Scripts")      ,"Tree"	=>"ou=scripts,") ,
+        "FAIhook" 			    => array(	"Image"	=>"images/fai_hook.png" ,         "Name"=>_("Hooks")        ,"Tree"	=>"ou=hooks,"),
+        "FAIvariable" 		  => array(	"Image"	=>"images/fai_variable.png",      "Name"=>_("Variables")    ,"Tree"	=>"ou=variables,") ,
+        "FAItemplate" 		  => array(	"Image"	=>"images/fai_template.png",      "Name"=>_("Templates")    ,"Tree"	=>"ou=templates,") ,
+        "FAIpartitionTable" => array(	"Image"	=>"images/fai_partitionTable.png","Name"=>_("Partition table")  ,"Tree"	=>"ou=disk,") ,
+        "FAIpackageList" 	  => array(	"Image" =>"images/fai_packages.png",      "Name"=>_("Package list") ,"Tree"	=>"ou=packages,") ,
+        "FAIprofile" 		    => array(	"Image"	=>"images/fai_profile.png",       "Name"=>_("Profiles")     ,"Tree"	=>"ou=profiles,"));
   }
+
 
   /* Init the fai tree with objects.
      If this method is called, all assigned classes and the release name 
-      will be read from parent object.
-    */
+      will be read from parent object. */
   function init()
   {
     $this->InitCalled = true;
@@ -92,14 +82,43 @@ class faiSummaryTab extends plugin{
 
     /* Set all available releases */
     $this->Releases = array_flip($this->getBranches());
+    $this->usedClasses = array();
 
     /* Check the configuration */
     if(count($this->Classes) && (!empty($this->Release))){
       foreach($this->Classes as $class){
-        $this->Result[$class] = $this->resolveObject($class);
+        $this->resolveObject($class);
       }
     }
   }
+
+
+  /* Capture posts, and call opnen close tag */
+  function save_object()
+  {
+    $once = true;
+    foreach($_POST as $name => $value ){
+
+      /* check for open tag request */
+      if(preg_match("/^open_/",$name) && $once){
+        $once  = false;
+        $value = preg_replace("/^open_/","",$name);
+        $value = preg_replace("/_.*$/","",$value); 
+        $this->Result[$value]['Open'] =true  ;
+      }
+      /* Check for close tag request */
+      if(preg_match("/^close_/",$name) && $once){
+        $once  = false;
+        $value = preg_replace("/^close_/","",$name);
+        $value = preg_replace("/_.*$/","",$value); 
+        unset($this->Result[$value]['Open']);
+      }
+      if(preg_match("/^reloadList/",$name)){
+        $this->InitCalled = false;
+      }
+    }
+  }
+
 
   /* returns an array with all possibly release types */
   function getBranches($base = false,$prefix = "")
@@ -121,7 +140,8 @@ class faiSummaryTab extends plugin{
     return($ret);
   }
 
-  /* Thsi function calls all nescessary functions to generate the fai class summary tree */
+
+  /* This function calls all nescessary functions to generate the fai class summary tree */
   function execute() 
   {
     /* Check if we must (re)init the this tab */
@@ -135,6 +155,7 @@ class faiSummaryTab extends plugin{
     $smarty->assign("objectList",$this->ObjectList);
     return($smarty->fetch (get_template_path('faiSummary.tpl', TRUE, dirname(__FILE__))));
   }
+
 
   /* Create output of from resolved fai objects */
   function createSummary($data)
@@ -150,40 +171,115 @@ class faiSummaryTab extends plugin{
 
     /* walk through all classes */	
     foreach($data as $key => $entry){
+      
+      $image = "<img src='".$this->objs[$key]['Image']."' class='center' alt='".$this->objs[$key]['Name']."' border=0>";
 
-      /* Check every kind of object type */
-      foreach($this->objs as $ok => $obj){
+      $str.="<tr><td>";
+      if(!isset($entry['Open'])){
+        $str .= "<input type='image' class='center' src='images/expand.png' name='open_".$key."'>&nbsp;";
+        $str .= $image."&nbsp;";
+        $str .= "<b>".$this->objs[$key]['Name']."</b>";
+      }else{
+        $str .= "<input type='image' class='center' src='images/sort_down.png' name='close_".$key."'>&nbsp;";
+        $str .= $image."&nbsp;";
+        $str .= "<b>".$this->objs[$key]['Name']."</b>";
+   
+        /* Display FAItemplate FAIhook FAIscript entries */ 
+        if(in_array($key,array("FAItemplate","FAIhook","FAIscript"))){
 
-        /* check of objectType is used */
-        if(isset($entry[$ok])){
-          $str.="<tr><td style='padding-left:10px;'>";
-
-          /* Show open or close icon */	
-          if( ! $entry[$ok]['Open'] ){
-            $str .= "<input type='image' class='center' src='images/expand.png' name='open_".$entry[$ok]['id']."'>&nbsp;";
-            $str .="<img src='".$obj['Image']."'>&nbsp;";
-            $str .= "<b>".$entry[$ok]['Name']."</b>";
-            $str .= "&nbsp;".$entry[$ok]['String1'];
-          }else{
-            $str .= "<input type='image' class='center' src='images/sort_down.png' name='close_".$entry[$ok]['id']."'>&nbsp;";
-            $str .="<img src='".$obj['Image']."'>&nbsp;";
-            $str .= "<b>".$entry[$ok]['Name']."</b>";
-            $str .= "&nbsp;".$entry[$ok]['String1'];
-            if(!empty($entry[$ok]['String2'])){
-              $str .= "</td></tr><tr><td style='padding-left:50px;'>".$entry[$ok]['String2'];
+          if($key == "FAIscript"){
+            krsort($entry['Entries']);
+            foreach($entry['Entries'] as $scripts){
+              ksort($scripts);
+              foreach($scripts as $script){
+                $script['cn'][0] = "(".$script['FAIpriority'][0].") ".$script['cn'][0];
+                $tmp[$script['cn'][0]] = $script;
+              }
             }
-
-            if(isset($data[$key][$ok]['data'])){
-              $str.=$this->createSummary($data[$key][$ok]['data']);
-            }
+            $entry['Entries'] = $tmp;
           }
-          $str .="</td></tr>";
+
+          foreach($entry['Entries'] as $cn => $data){
+            $str .="<td></tr><tr><td style='padding-left:20px;'>";
+            $str .= "<a href='?plug=".$_GET['plug']."&show".$key."&id=".base64_encode($data['dn'])."'>";
+            $str .= $image."&nbsp;".$data['cn'][0];
+            if(isset($data['description'][0])){
+              $str .= " [".$data['description'][0]."]";
+            }
+            $str .="</a>";
+          }
+        }
+
+        /* Create variable entries */
+        if(in_array($key,array("FAIvariable"))) {
+          foreach($entry['Entries'] as $cn => $data){
+            $str .="<td></tr><tr><td style='padding-left:20px;'>";
+            $str .= $image."&nbsp;".$data['cn'][0];
+            if(isset($data['description'][0])){
+              $str .= " [".$data['description'][0]."] ";
+            }
+            $str .=" = '".$data['FAIvariableContent'][0]."'";
+          }
+        }
+
+        /* Create packagelist entries */ 
+        if(in_array($key,array("FAIpackageList"))) {
+          ksort($entry['Entries']);
+          foreach($entry['Entries'] as $cn => $data){
+            $str .="<td></tr><tr><td style='padding-left:20px;'>";
+            $str .= $image."&nbsp;".$data;
+          }
+        }
+
+        /* Create partition table entries */
+        if(in_array($key,array("FAIpartitionTable"))) {
+          foreach($entry['Entries'] as $cn => $data){
+            $str .="<td></tr><tr><td style='padding-left:20px;'>";
+            $str .= $image."&nbsp;".$data['name'];
+            ksort($data['partitions']);
+            $str .= "<table cellspacing=1 style='background:#FFFFFF;'>
+                      <tr style='background-color:#BBBBBB;'>
+                       <td>"._("No.")."</td>
+                       <td>"._("Name")."</td>
+                       <td>"._("FS options")."</td>
+                       <td>"._("Mount options")."</td>
+                       <td>"._("Size in MB")."</td>
+                       <td>"._("Mount point")."</td>
+                       <td>"._("Type")."</td>
+                      </tr>";
+
+            $i = 0;
+            foreach($data['partitions'] as $key => $part){
+              $i ++;
+
+              if($i%2 == 1){
+                $c = " class='rowxp1'";
+                $d = " class='list1' style='border:0px;'";
+              }else{
+                $c = " class='rowxp0'";
+                $d = " class='list0' style='border:0px;'";
+              }
+
+              $str.="<tr $c style='height:10px;'>
+                      <td $d>".$i."</td> 
+                      <td $d>".$part['cn'][0]."</td> 
+                      <td $d>".$part['FAIfsType'][0]."</td> 
+                      <td $d>".$part['FAIfsOptions'][0]."</td> 
+                      <td $d>".$part['FAIpartitionSize'][0]."</td> 
+                      <td $d>".$part['FAImountPoint'][0]."</td> 
+                      <td $d>".$part['FAIpartitionType'][0]."</td> 
+                    </tr>";
+            }
+            $str .="</table>";
+          }
         }
       }
+      $str.="</td></tr>"  ;
     }
     $str .="</table>";	
     return($str);
   }
+
 
   /* resolve specified object to append it to our object tree */
   function resolveObject($class)
@@ -191,7 +287,11 @@ class faiSummaryTab extends plugin{
     $ldap 	= $this->config->get_ldap_link();
     $dn 	  = $this->Releases [$this->Release];
     $res    = array();
+ 
+    if(in_array($class,$this->usedClasses)) return;
   
+    $this->usedClasses[] = $class;
+ 
     /* Try to fetch all types of fai objects with the given cn  */
     foreach($this->objs as $key =>  $obj){
       
@@ -200,85 +300,48 @@ class faiSummaryTab extends plugin{
       $ldap->ls("(&(objectClass=".$key.")(cn=".$class."))",$obj['Tree'].$dn,array("*"));
       while($attrs = $ldap->fetch()){
         switch($key){
-          case "FAIprofile": 		$tmp = $this->prepare_FAIprofile($attrs);break;
-          case "FAIscript": 		$tmp = $this->prepare_FAIscript($attrs);break;
-          case "FAIhook": 		$tmp = $this->prepare_FAIhook($attrs);break;
-          case "FAIvariable":		$tmp = $this->prepare_FAIvariable($attrs);break;
-          case "FAItemplate":		$tmp = $this->prepare_FAItemplate($attrs);break;
-          case "FAIpackageList":	$tmp = $this->prepare_FAIpackageList($attrs);break;
-          case "FAIpartitionTable":	$tmp = $this->prepare_FAIpartitionTable($attrs);break;
-          default : $tmp = array(); print_red(sprintf(_("Undefined FAI object '%s'."),$key));
-        }
-        if(isset($tmp['Name'])){
-          $res[$key] = $tmp 	;
+          case "FAIprofile": 		        $this->prepare_FAIprofile($attrs);break;
+          case "FAIscript": 		        $this->prepare_FAIscript($attrs);break;
+          case "FAIhook": 		          $this->prepare_FAIhook($attrs);break;
+          case "FAIvariable":		        $this->prepare_FAIvariable($attrs);break;
+          case "FAItemplate":		        $this->prepare_FAItemplate($attrs);break;
+          case "FAIpackageList":	      $this->prepare_FAIpackageList($attrs);break;
+          case "FAIpartitionTable":	    $this->prepare_FAIpartitionTable($attrs);break;
         }
       }
     }
     return($res);
   }
+
 
   /* Prepare fai script */
   function prepare_FAIscript($data)
   {
-    /* Set basic attributes */
-    $res['Name']	= $data['cn'][0];
-    if(isset($data['description'][0])){
-      $res['String1'] = $data['description'][0];
+    if(isset($this->Result['FAIscript']['Entries'])){
+      $current = $this->Result['FAIscript']['Entries'];
     }else{
-      $res['String1'] = "";
+      $current = array();
     }
-    $res['Open'] 	= false;
-    $res['id']		= ($_SESSION['faiSummaryTab']['UniqueID'] ++);
-    $res['Resolved']= true;
-    $res['String2'] = "";
-
-    /* get subentries */	
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($data['dn']);
-    $ldap->search("(&(objectClass=FAIscriptEntry)(FAIpriority=*))",array("cn","description","FAIpriority"));
-    $scripts  = array();
-
-    /* Create an array which is sortable by priority */
+    $ldap->search("(objectClass=FAIscriptEntry)",array("cn","description","FAIpriority"));
     while($attrs = $ldap->fetch()){
-      $scripts[$attrs['FAIpriority'][0]][] = $attrs;	
+      $current[$attrs['FAIpriority'][0]][$attrs['cn'][0]] = $attrs;
     }
-
-    /* Sort by priority */
-    ksort($scripts);
-
-    /* append them to our list */	
-    $image = "<image class='center' border=0 src='".$this->objs['FAIscript']['Image']."'>&nbsp;";
-
-    foreach($scripts as $prio => $script){
-      foreach($script as $attrs){
-        $res['String2'] .="<a href='?plug=".$_GET['plug']."&display=FAIscript&id=".base64_encode($attrs['dn'])."'>";
-        if(isset($attrs['description'][0])){
-          $res['String2'] .= $image.$attrs['FAIpriority'][0]."&nbsp;-&nbsp;".$attrs['cn'][0]." [".$attrs['description'][0]."]<br>";			
-        }else{
-          $res['String2'] .= $image.$attrs['FAIpriority'][0]."&nbsp;-&nbsp;".$attrs['cn'][0]."<br>";			
-        }
-        $res['String2'] .="</a>";
-      }
-    }
-    return($res);
+    $this->Result['FAIscript']['Entries'] = $current ;
   }
+
 
   /* Prepare fai script */
   function prepare_FAIpartitionTable($data)
   {
-    /* Set basic attributes */
-    $res['Name']	= $data['cn'][0];
-    if(isset($data['description'][0])){
-      $res['String1'] = $data['description'][0];
+    if(isset($this->Result['FAIpartitionTable']['Entries'])){
+      $current = $this->Result['FAIpartitionTable']['Entries'];
     }else{
-      $res['String1'] = "";
+      $current = array();
     }
-    $res['Open'] 	= false;
-    $res['id']		= ($_SESSION['faiSummaryTab']['UniqueID'] ++);
-    $res['Resolved']= true;
-    $res['String2'] = "";
 
-    /* get subentries */	
+    /* get subentries */
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($data['dn']);
     $ldap->search("(objectClass=FAIpartitionDisk)",array("cn","description"));
@@ -286,8 +349,13 @@ class faiSummaryTab extends plugin{
 
     /* Create an array which is sortable by priority */
     while($attrs = $ldap->fetch()){
-      $disks[$attrs['cn'][0]] = $attrs;	
-      $disks[$attrs['cn'][0]]['partitions'] = array();	
+      if(isset($attrs['description'][0])){
+        $disks[$attrs['cn'][0]]['name'] = $attrs['cn'][0]." [".$attrs['description'][0]."]";
+      }else{
+        $disks[$attrs['cn'][0]]['name'] = $attrs['cn'][0];
+      }
+      $disks[$attrs['cn'][0]]['dn'] = $attrs['dn'];
+      $disks[$attrs['cn'][0]]['partitions'] = array();
     }
 
     /* Sort by priority */
@@ -301,317 +369,85 @@ class faiSummaryTab extends plugin{
         $disks[$key]['partitions'][$attrs['cn'][0]] = $attrs;
       }
     }
-
-    
-    $image = "<image class='center' border=0 src='".$this->objs['FAIpartitionTable']['Image']."'>&nbsp;";
-    foreach($disks as $disk){
-      $res['String2'] .= "<div 'width:100%;padding-left:10px'>";
-      $res['String2'] .= $image."<b>".$disk['cn'][0] ."</b>";
-      
-      if(isset($disk['description'][0])){
-        $res['String2'] .= "&nbsp;[".$disk['description'][0]."]" ;
-      }
-      $res['String2'] .= "</div>";
-  
-      $res['String2'] .= "<table cellspacing=1 style='background:#FFFFFF;'>";
-      $res['String2'] .= "<tr style='background-color:#BBBBBB;'>";
-      $res['String2'] .= "<td>"._("No.")."</td><td>"._("Name")."</td><td>"._("FS options")."</td>";
-      $res['String2'] .= "<td>"._("Mount options")."</td><td>"._("Size in MB")."</td>";
-      $res['String2'] .= "<td>"._("Mount point")."</td><td>"._("Type")."</td>";
-      $res['String2'] .= "</tr>";
-      $i = 0;
-      foreach($disk['partitions'] as $partition){
-        $i = !$i;
-        if($i){
-          $c = " class='rowxp1'";
-          $d = " class='list1' style='border:0px;'";
-        }else{
-          $c = " class='rowxp0'";
-          $d = " class='list0' style='border:0px;'";
-        }
-
-        $res['String2'] .= "<tr $c style='height:10px;'>";
-        $res['String2'] .= "<td $d>".$partition['FAIpartitionNr'][0]."</td><td $d>".$partition['cn'][0]."</td><td $d>".$partition['FAIfsType'][0]."</td>";
-        $res['String2'] .= "<td $d>".$partition['FAIfsOptions'][0]."</td><td $d>".$partition['FAIpartitionSize'][0]."</td>";
-        $res['String2'] .= "<td $d>".$partition['FAImountPoint'][0]."</td><td $d>".$partition['FAIpartitionType'][0]."</td>";
-        $res['String2'] .= "</tr>";
-      }
-      $res['String2'] .= "</table>";
-    }
-
-    return($res);
+    $this->Result['FAIpartitionTable']['Entries'] = $disks;
   }
 
 
   /* Create template entry */	
   function prepare_FAItemplate($data)
   {
-    /* Set basic attributes */
-    $res['Name']	= $data['cn'][0];
-    if(isset($data['description'][0])){
-      $res['String1'] = $data['description'][0];
-    }else{
-      $res['String1'] = "";
+    $current = array();
+    if(isset($this->Result['FAItemplate']['Entries'])){
+      $current = $this->Result['FAItemplate']['Entries'];
     }
-    $res['Open'] 	= false;
-    $res['id']		= ($_SESSION['faiSummaryTab']['UniqueID'] ++);
-    $res['Resolved']= true;
-    $res['String2'] = "";
 
-    /* get subentries */	
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($data['dn']);
     $ldap->search("(objectClass=FAItemplateEntry)",array("cn","description"));
-    $scripts  = array();
-
-    /* append them to our list */	
-    $image = "<image class='center' border=0 src='".$this->objs['FAItemplate']['Image']."'>&nbsp;";
-
-    /* Create an array which is sortable by priority */
     while($attrs = $ldap->fetch()){
-      $res['String2'] .="<a href='?plug=".$_GET['plug']."&display=FAItemplate&id=".base64_encode($attrs['dn'])."'>";
-      if(isset($attrs['description'][0])){
-        $res['String2'] .= $image.$attrs['cn'][0]." [".$attrs['description'][0]."]";			
-      }else{
-        $res['String2'] .= $image.$attrs['cn'][0];			
-      }
-      $res['String2'] .="</a><br>";
+      $current[$attrs['cn'][0]] = $attrs;
     }
-    return($res);
+    $this->Result['FAItemplate']['Entries'] = $current ;
   }
 
 
   /* Create a package list  */	
   function prepare_FAIpackageList($data)
   {
-    /* Set basic attributes */
-    $res['Name']	= $data['cn'][0];
-    if(isset($data['description'][0])){
-      $res['String1'] = $data['description'][0];
-    }else{
-      $res['String1'] = "";
+    $current = array();
+    if(isset($this->Result['FAIpackageList']['Entries'])){
+      $current = $this->Result['FAIpackageList']['Entries'];
     }
-    $res['Open'] 	= false;
-    $res['id']		= ($_SESSION['faiSummaryTab']['UniqueID'] ++);
-    $res['Resolved']= true;
-    $res['String2'] = "";
-
-    /* append them to our list */	
-    $image = "<image class='center' border=0 src='".$this->objs['FAIpackageList']['Image']."'>&nbsp;";
-
-    /* add selected packages to our list */		
-    if(isset($data['FAIpackage']['count'])) {	
+    if(isset($data['FAIpackage'])){
       unset($data['FAIpackage']['count']);
-      foreach($data['FAIpackage'] as $entry){
-        $res['String2'].= $image.$entry." <br>";
-      }	
+      foreach($data['FAIpackage'] as $pkg){
+        $current[$pkg] = $pkg;
+      }
     }
-    return($res);
+    $this->Result['FAIpackageList']['Entries'] = $current ;
   }
 
 
   /* Create a variable entry */	
   function prepare_FAIvariable($data)
   {
-    /* Set basic attributes */
-    $res['Name']	= $data['cn'][0];
-    if(isset($data['description'][0])){
-      $res['String1'] = $data['description'][0];
-    }else{
-      $res['String1'] = "";
+    $current = array();
+    if(isset($this->Result['FAIvariable']['Entries'])){
+      $current = $this->Result['FAIvariable']['Entries'];
     }
-    $res['Open'] 	= false;
-    $res['id']		= ($_SESSION['faiSummaryTab']['UniqueID'] ++);
-    $res['Resolved']= true;
-    $res['String2'] = "";
-
-    /* get subentries */	
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($data['dn']);
     $ldap->search("(objectClass=FAIvariableEntry)",array("cn","description","FAIvariableContent"));
-    $scripts  = array();
-
-    /* append them to our list */	
-    $image = "<image class='center' border=0 src='".$this->objs['FAIvariable']['Image']."'>&nbsp;";
-
-    /* Create an array which is sortable by priority */
     while($attrs = $ldap->fetch()){
-      if(isset($attrs['description'][0])){
-        $res['String2'] .= $image.$attrs['cn'][0]." [".$attrs['description'][0]."]";			
-      }else{
-        $res['String2'] .= $image.$attrs['cn'][0];			
-      }
-      if(isset($attrs['FAIvariableContent'][0])){
-        $res['String2'] .= " \"".$attrs['FAIvariableContent'][0]."\" ";
-      }
-      $res['String2'] .= "<br>";
-
+      $current[$attrs['cn'][0]] = $attrs;
     }
-    return($res);
+    $this->Result['FAIvariable']['Entries'] = $current ;
   }
 
   /* Create a hook entry */	
   function prepare_FAIhook($data)
   {
-    /* Set basic attributes */
-    $res['Name']	= $data['cn'][0];
-    if(isset($data['description'][0])){
-      $res['String1'] = $data['description'][0];
-    }else{
-      $res['String1'] = "";
+    $current = array();
+    if(isset($this->Result['FAIhook']['Entries'])){
+      $current = $this->Result['FAIhook']['Entries'];
     }
-    $res['Open'] 	= false;
-    $res['id']		= ($_SESSION['faiSummaryTab']['UniqueID'] ++);
-    $res['Resolved']= true;
-    $res['String2'] = "";
-
-    /* get subentries */	
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($data['dn']);
     $ldap->search("(objectClass=FAIhookEntry)",array("cn","description"));
-    $scripts  = array();
-
-    /* append them to our list */	
-    $image = "<image class='center' border=0 src='".$this->objs['FAIhook']['Image']."'>&nbsp;";
-
-    /* Create an array which is sortable by priority */
     while($attrs = $ldap->fetch()){
-      $res['String2'] .="<a href='?plug=".$_GET['plug']."&display=FAIhook&id=".base64_encode($attrs['dn'])."'>";
-      if(isset($attrs['description'][0])){
-        $res['String2'] .= $image.$attrs['cn'][0]." [".$attrs['description'][0]."]<br>";			
-      }else{
-        $res['String2'] .= $image.$attrs['cn'][0]."<br>";			
-      }
-      $res['String2'] .="</a>";
+      $current[$attrs['cn'][0]] = $attrs;
     }
-    return($res);
+    $this->Result['FAIhook']['Entries'] = $current ;
   }
+
 
   /* Create a new Profile entry */
   function prepare_FAIprofile($data)
   {
-    /* initialise basics */
-    $res = array();
-    $res['Name']	= $data['cn'][0];
-    if(isset($data['description'][0])){
-      $res['String1'] = $data['description'][0];
-    }else{
-      $res['String1'] = "";
-    }
-    $res['Open'] 	= false;
-    $res['id']		= ($_SESSION['faiSummaryTab']['UniqueID'] ++);
-    $res['Resolved']= true;
-    $res['String2'] = "";
-
-    /* Append empty data objects named by member classes */
-    $res['data'] = array();
-    if(isset($data['FAIclass'][0])){
-      $tmp = split("\ ",$data['FAIclass'][0]);
-      foreach($tmp as $class){
-        $res['data'][trim($class)] = array();
-      }
-    }
-    return($res);
-  }
-
-
-
-  /* Open the tag with the given id .. 
-     so the entries of this tag will be shown */
-  function openTag($data, $id)
-  {
-    /* Walk through objects */
-    if(!count($data)) return(array());
-    foreach($data as $key => $dat){
-
-      /* Check all types of objects (FAIhook, FAIscript ..)*/
-      foreach($this->objs as $ok => $obj){
-
-        /* If this type of object is assigned */
-        if(isset($dat[$ok])){
-
-          /* check given id */
-          if($dat[$ok]['id'] == $id ){
-
-            /* Id was $id so set this leaf to open */
-            $data[$key][$ok]['Open'] = true;
-
-            /* Check if the sub leafs are already readed 
-               if not, resolve the classes and append them to our tree */
-            if(isset($dat[$ok]['data'])){
-
-              foreach($data[$key][$ok]['data'] as $key1 => $dat1){
-                if(!count($dat1)){
-                  $tmp = $this->resolveObject($key1);
-                  foreach($tmp as $r => $e)
-                    $data[$key][$ok]['data'][$key1][$r] = $e;
-                }
-              }
-            }
-          }
-          /* Search sub tags for given id $id */
-          if(isset($data[$key][$ok]['data'])){
-            $data[$key][$ok]['data'] = $this->openTag($data[$key][$ok]['data'],$id);	
-          }
-        }
-      }
-    }
-    return($data);
-  }
-
-  /* Walk through all tags and close tag with id = $id*/
-  function closeTag($data, $id)
-  {
-    $found = false;
-
-    /* The parameter data is given as specified */
-    // ClassName ['FAIprofile']['data']  
-
-    /* Walk through all given classes */
-    foreach($data as $key => $dat){
-
-      /* Walk through all possible objectClasses */
-      foreach($this->objs as $ok => $obj){
-
-        /* If class is set, check if id matches */
-        if(isset($dat[$ok])){
-          if($dat[$ok]['id'] == $id ){
-            $data[$key][$ok]['Open'] = false;
-          }
-
-          /* Check subobjects for $id */
-          if(isset($dat[$ok]['data'])){
-            $data[$key][$ok]['data'] = $this->closeTag( $data[$key][$ok]['data'], $id);
-          }
-        }
-      }
-    }
-    return($data);
-  }
-
-  /* Capture posts, and call opnen close tag */
-  function save_object()
-  {
-    $once = true;
-    foreach($_POST as $name => $value ){
-
-      /* check for open tag request */
-      if(preg_match("/^open_/",$name) && $once){
-        $once  = false;
-        $value = preg_replace("/^open_/","",$name);
-        $value = preg_replace("/_.*$/","",$value); 
-        $this->Result = $this->openTag($this->Result,$value);
-      }
-      /* Check for close tag request */
-      if(preg_match("/^close_/",$name) && $once){
-        $once  = false;
-        $value = preg_replace("/^close_/","",$name);
-        $value = preg_replace("/_.*$/","",$value); 
-        $this->Result = $this->closeTag($this->Result,$value);
-      }
-      if(preg_match("/^reloadList/",$name)){
-        $this->InitCalled = false;
-      }
+    $classes = split("\ ",$data['FAIclass'][0]);
+    foreach($classes as $class){
+      $class = trim($class);
+      $this->resolveObject($class);
     }
   }
 }
