@@ -9,16 +9,17 @@ class servRepositorySetup  extends plugin
 
   /* attribute list for save action */
   var $ignore_account   = TRUE;
-  var $attributes       = array("Release","ParentServer","Url");
+  var $attributes       = array("Release","ParentServer","Url","cn");
   var $objectclasses    = array("whatever");
 
   /* Attributes */
-  var $Release          ="";
-  var $ParentServer     ="";
-  var $Url              ="";   
-  var $Sections         =array();
-  var $ParentServers    ="";
-  var $initialy_was=false;
+  var $Release          = "";
+  var $ParentServer     = "";
+  var $Url              = "";   
+  var $Sections         = array();
+  var $ParentServers    = "";
+  var $initialy_was     = false;
+  var $cn               = "";
 
   function servRepositorySetup ($config, $dn= NULL,$data = false)
   {
@@ -144,6 +145,7 @@ class servRepositorySetup  extends plugin
     $ldap->cd($this->config->current['BASE']);
     $ldap->search("(objectClass=FAIrepositoryServer)",array("*"));
     while($attr = $ldap->fetch()){
+      if($attr['cn'][0] == $this->cn) continue;
       $ret[$attr['cn'][0]]= $attr['cn'][0];   
     }
 
