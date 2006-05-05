@@ -65,7 +65,12 @@ class grouptabs extends tabs
 			$this->dn= $new_dn;
 		}
 
-		return tabs::save();
+		$ret= tabs::save();
+
+		/* Fix tagging if needed */
+		$baseobject->handle_object_tagging();
+
+		return $ret;
 	}
 
 	function saveCopyDialog()

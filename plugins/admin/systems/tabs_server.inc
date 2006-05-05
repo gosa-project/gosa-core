@@ -32,6 +32,9 @@ class servtabs extends tabs
     $config= $_SESSION['config'];
     $config->load_servers();
     $_SESSION['config']= $config;
+
+    /* Fix tagging if needed */
+    $baseobject->handle_object_tagging();
   }
 
 }

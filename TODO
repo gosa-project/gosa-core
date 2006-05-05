@@ -1,14 +1,7 @@
 Target for 2.4.1:
 =================
 
-* Sanity check for workstations/servers: repository server == self?
-
-* Can't remove phoneAccounts...
-
 * Explaination of several FIXME's. Group removal, etc.
-
-* peopleou, groupou, fai, etc. as department? Please check!
-  Check during login/setup?
 
 * saveFilter added, please use!
 
@@ -17,14 +10,11 @@ Target for 2.4.1:
 * generatePasteIcon added, please use!
 
 * Create a status-bar/-display for FAI installations 
-  (Use notes from 0.5.12.2005)
 
 * Add online help (english/german)
+  Document how to generate it, generate it and check it in
 
-* Check virenschleuder/Winstations in Admin->Systems 
-  LDAP-Error: Cannot modify object class (structural object class modification from 'person' to 'inetOrgPerson' not allowed)
-
-* Test DNS plugin. Add some more checks 
+* Fix DNS plugin. Add some more checks 
 
 * Enhance the export xls to export the whole three with a maximum of attributes in each sheet ( OpenSides )
 
@@ -37,6 +27,14 @@ Target for 2.4.1:
 * Pimp 1024x768 screen resolutions, it should be the minimum usable resoultion
 
 * Auto-Resize for subdialogs
+
+* Fix create_missing_trees to gererate tags if needed, too
+
+* Fix fai objects to generate tags if needed (sub objects, phone me...)
+
+* Fix Phone book to generate tags if needed
+
+* Remove the refresh button from faiPackageNew (the second one)
 
 
 Target for 2.5:

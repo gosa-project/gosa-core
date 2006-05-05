@@ -921,6 +921,9 @@ class user extends plugin
       $this->handle_post_events("modify");
     }
 
+    /* Fix tagging if needed */
+    $this->handle_object_tagging();
+
     return (0);
   }
 

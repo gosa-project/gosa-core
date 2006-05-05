@@ -26,6 +26,9 @@ class wintabs extends tabs
     }
 
     tabs::save(TRUE);
+
+    /* Fix tagging if needed */
+    $baseobject->handle_object_tagging();
   }
 
 }
