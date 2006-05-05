@@ -851,6 +851,11 @@ class plugin
 
   function handle_object_tagging($dn= "", $tag= "")
   {
+    /* Skip if nothing has changed */
+    if (!$this->is_modified){
+      return;
+    }
+  
     /* No dn? Self-operation... */
     if ($dn == ""){
       $dn= $this->dn;
