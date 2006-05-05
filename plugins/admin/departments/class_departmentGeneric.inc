@@ -224,10 +224,17 @@ class department extends plugin
 		}
 
 		/* Validate and modify - or: spaghetti rules! */
-		if ($this->ou == "incoming"){
-			$message[]= _("The field 'Name' contains the reserved word 'incoming'.".
-					" Please choose another name.");
+		$SkipNames = array(	"incoming","apps","systems","fai","config",	
+							preg_replace("/ou=(.*),/","\\1",get_people_ou()),
+							preg_replace("/ou=(.*),/","\\1",get_groups_ou())
+							);	
+		foreach($SkipNames as $name){
+			if ($this->ou == $name){
+				$message[]= sprintf(_("The field 'Name' contains the reserved word '%s'. Please choose another name."),$name);
+			}
 		}
+
+
 		if (preg_match ('/[#+:=>\\\\\/]/', $this->ou)){
 			$message[]= _("The field 'Name' contains invalid characters.");
 		}
