@@ -32,28 +32,13 @@ function view_schema_check($table)
 
 function is_schema_readable($server, $admin, $password)
 {
-  $ds= ldap_connect ($server);
-  if (!$ds) {
-    return (false);
-  }
-  ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
-  $r= ldap_bind ($ds, $admin, $password);
+  $ldap = new LDAP($admin,$password,$server);
+  $tmp = $ldap->get_objectclasses();
 
-  /* Get base to look for schema */
-  $sr  = @ldap_read ($ds, NULL, "objectClass=*", array("subschemaSubentry"));
-  $attr= @ldap_get_entries($ds,$sr);
-  if (!isset($attr[0]['subschemasubentry'][0])){
-    return (false);
+  if(count($tmp)){
+    return(true);
   }
-
-  $nb= $attr[0]['subschemasubentry'][0];
-  $objectclasses= array();
-  $sr= ldap_read ($ds, $nb, "objectClass=*", array("objectclasses"));
-  $attrs= ldap_get_entries($ds,$sr);
-  if (!isset($attrs[0])){
-    return (false);
-  }
-  return(true);
+  return(false);
 } 
 
 function schema_check($server, $admin, $password, $aff=0,$CalledByIndexPhP=false)
