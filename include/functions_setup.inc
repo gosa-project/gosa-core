@@ -92,35 +92,13 @@ function schema_check($server, $admin, $password, $aff=0,$CalledByIndexPhP=false
       "goFaxServer"           => array("version" => "2.4", "class" => "gofaxAccount","file" => "gofax.schema"),
       );
 
-  /* Build LDAP connection */
-  $ds= ldap_connect ($server);
-  if (!$ds) {
-    return (array(array("msg" => _("Can't bind to LDAP. No schema check possible!"), "status" => FALSE)));
-  }
-  ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
-  $r= ldap_bind ($ds, $admin, $password);
-
-  /* Get base to look for schema */
-  $sr  = @ldap_read ($ds, NULL, "objectClass=*", array("subschemaSubentry"));
-  $attr= @ldap_get_entries($ds,$sr);
-  if (!isset($attr[0]['subschemasubentry'][0])){
+  /* Get objectclasses */
+  $ldap = new LDAP($admin,$password, $server);
+  $objectclasses = $ldap->get_objectclasses(); 
+  if(count($objectclasses) == 0){
     return (array(array("msg" => _("Can't get schema information from server. No schema check possible!"), "status" => FALSE)));
   }
 
-  /* Get list of objectclasses */
-  $nb= $attr[0]['subschemasubentry'][0];
-  $objectclasses= array();
-  $sr= ldap_read ($ds, $nb, "objectClass=*", array("objectclasses"));
-  $attrs= ldap_get_entries($ds,$sr);
-  if (!isset($attrs[0])){
-    return (array(array("msg" => _("Can't get schema information from server. No schema check possible!"), "status" => FALSE)));
-  }
-  foreach ($attrs[0]['objectclasses'] as $val){
-    $name= preg_replace("/^.* NAME\s+\(*\s*'([^']+)'\s*\)*.*$/", '\\1', $val);
-    if ($name != $val){
-      $objectclasses[$name]= $val;
-    }
-  }
   /* Walk through objectclasses and check if they are needed or not */
   foreach ($required_classes as $key => $value){
     if (isset($value['class'])){
