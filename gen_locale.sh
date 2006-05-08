@@ -22,7 +22,7 @@ for template in $(find -name '*.tpl'); do
 done
 
 for class in $(find -name 'class_*.inc'); do
-  echo -en "\rConverting .tpl files: $(basename $template)                 \r"
+  echo -en "\rConverting class_*.inc files: $(basename $template)                 \r"
   sed -e 's/\($pl[DH][^=]*\)= *"\([^"]*\)";$/\1= _("\2");/g' $class > $class.new
   mv $class.new $class
 done

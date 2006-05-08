@@ -42,11 +42,8 @@ if ($config->data['MAIN']['LANG'] == ""){
   $lang= $config->data['MAIN']['LANG'];
 }
 
-if(isset($_SESSION['ui']->language)){
-  $lang = $_SESSION['ui']->language;
-}
-
 $lang.=".UTF-8";
+
 putenv("LANGUAGE=");
 putenv("LANG=$lang");
 setlocale(LC_ALL, $lang);
