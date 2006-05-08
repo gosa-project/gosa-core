@@ -2,7 +2,7 @@
 <body>
 {$php_errors}
 <form action='main.php{$plug}' name='mainform' method='post' enctype='multipart/form-data'>
-<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#CDF6BD" summary="" >
+<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#6781A8" summary="" >
   <tr>
     <td style="height:36px; width:140px; vertical-align:bottom; text-align:center">
      <a href="main.php" style="vertical-align:bottom;"><img src='{$go_logo}' border="0" alt="GOSA2" style='vertical-align:bottom;'></a>
@@ -12,17 +12,17 @@
        <tr>
         <td style="vertical-align:middle;">
 	 <a class="maintitlebar" href='main.php?reset=1' onClick='return question("{t}You are currently editing a database entry. Do you want to dismiss the changes?{/t}", "main.php?reset=1");' >
-	  <img src='{$go_home}' class='center' border="0" alt="GOSA2">&nbsp;{t}Main{/t}
+	  <img src='{$go_home}' class='center' border="0" alt="Main">&nbsp;{t}Main{/t}
 	 </a>
 	</td>
         <td>
 	 <a class="maintitlebar" style="margin-left:35px" {$help_method}>
-          <img src='{$go_help}' class='center' border="0" alt="GOSA2">&nbsp;{t}Help{/t}
+          <img src='{$go_help}' class='center' border="0" alt="Help">&nbsp;{t}Help{/t}
          </a>
 	</td>
 	<td>
 	 <a class="maintitlebar" href='logout.php?request' onClick='return question("{t}You are currently editing a database entry. Do you want to dismiss the changes?{/t}", "logout.php");' style="margin-left:35px;">
-          <img src='{$go_out}' class='center' border="0" alt="GOSA2">&nbsp;{t}Sign out{/t}
+          <img src='{$go_out}' class='center' border="0" alt="Sign out">&nbsp;{t}Sign out{/t}
          </a>
 	</td>
        </tr>
@@ -38,7 +38,7 @@
   <tr style="vertical-align:top;">
     <!-- Menu -->
     <td style="background-color:#EEFFE6; vertical-align:top;" >
-      <div style="background-color:#CDF6BD; height:12px; width:100%;">&nbsp;</div>
+      <div style="height:12px; width:100%;">&nbsp;</div>
       {$menu}
 	  <br />
 	  <div style="height:1px; width:140px;"></div>
