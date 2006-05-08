@@ -73,6 +73,12 @@ class ppdManager
                 continue;
             }
 
+			/* Change model name .. */
+			if ((preg_match("/^\*".$attribute.":*\s+/",$line)) && ($attribute == "ModelName")){
+				$line= "*$attribute: \"$value\"\n";
+				$done =true;
+			}
+
 			if (($fsection) && ($section != "NO_SECTION")){
 				if (preg_match("/^\*CloseGroup:*\s+\**$section\/*/", $line)){
 					$fsection= false;
