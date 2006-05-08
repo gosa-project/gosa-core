@@ -203,21 +203,19 @@ class faiSummaryTab extends plugin{
           $nums = array();          
 
           if($key == "FAIscript"){
-      
-            krsort($entry['Entries']);
             foreach($entry['Entries'] as $scripts){
-              ksort($scripts);
               foreach($scripts as $script){
                 
-//                $script['cn'][0] = "(".$script['FAIpriority'][0].") ".$script['cn'][0];
                 if(!isset($nums[$script['cn'][0]])){
                   $nums[$script['cn'][0]]= 0;
                 } 
                 $nums[$script['cn'][0]] ++;
             
-                $tmp[] = $script;
+                $tmp[$script['FAIpriority'][0].$script['cn'][0].$script['CLASS']] = $script;
               }
             }
+            krsort($tmp);;
+            
             $entry['Entries'] = $tmp;
           }else{
             foreach($entry['Entries'] as $script){
