@@ -862,7 +862,24 @@ class plugin
     }
     
     /* No tag? Find it yourself... */
-    #....
+    if ($tag == ""){
+      $len= strlen($this->dn);
+      $fix= true;
+      foreach ($this->config->adepartments as $key => $tag){
+        /* This one is shorter than our dn, its not relevant... */
+        if ($len >= strlen($key)){
+          continue;
+        }
+
+        /* This one matches with the latter part. Break and don't fix this entry */
+        if (preg_match('/(^|,)'.normalizePreg($key).'$/', $dn)){
+          $fix= false;
+          break;
+        }
+      }
+      $this->gosaUnitTag= $tag;
+    }
+ 
 
     /* Set tag? */
     if ($tag != ""){
