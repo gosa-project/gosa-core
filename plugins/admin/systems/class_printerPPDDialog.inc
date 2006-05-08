@@ -9,7 +9,7 @@ class printerPPDDialog extends plugin
 
   /* attribute list for save action */
   var $ignore_account       = TRUE;
-  var $attributes           = array();
+  var $attributes           = array("cn");
   var $objectclasses        = array("whatever");
 
   var $ppdList              = array();  // Contains all Printer models
@@ -22,6 +22,7 @@ class printerPPDDialog extends plugin
   var $ppdConfig            = false;    // $this->ppdManager->loadProperties($this->selectedPPD['link']);
 
   var $pathToPPD            = "";
+  var $cn;
 
   function printerPPDDialog ($config, $dn= NULL,$ppdfile=NULL )
   {
@@ -139,9 +140,10 @@ class printerPPDDialog extends plugin
                 }
               }// Foreach
               if(!$found){
-                $ppdname = $vendor."/".$vendor."-".preg_replace("/^[^ ]/","",str_replace("-","",$model)).".ppd";
-                $filename = $this->pathToPPD.$vendor."/".$vendor."-".preg_replace("/^[^ ]/","",str_replace("-","",$model)).".ppd";
-                $fp = @fopen($filename,"w+");
+                $printerName  = $this->cn."-".$vendor."-".preg_replace("/^[^ ]/","",str_replace("-","",$model)); 
+                $ppdname      = $vendor."/".$printerName.".ppd";
+                $filename     = $this->pathToPPD.$ppdname;
+                $fp = fopen($filename,"w+");
                 if(!$fp){
                   print_red(sprintf(_("Can't save file '%s'."),$filename));
                 }else{
@@ -149,8 +151,10 @@ class printerPPDDialog extends plugin
                   fputs($fp,$str);
                   @fclose($fp);
 
+                  $this->ppdManager->updateAttribute($filename,"NO_SECTION","ModelName",$printerName);
+
                   $tmp2= split("\n", $res);
-                  $tmp3['name']   =preg_replace("/^ -/","",$tmp2[1]);
+                  $tmp3['name']   =preg_replace("/ */","",preg_replace("/^ -/","",$tmp2[1]));
                   $tmp3['link']   =$ppdname;
                   $tmp3['ppd']    =$res;
 
@@ -352,12 +356,12 @@ class printerPPDDialog extends plugin
           if(($type == "PickOne")||(($type=="Boolean")&&(count($values)>1))){
 
             $str  .=  "<select name='".base64_encode($name)."'>\n";
-            foreach($values as $value){
+            foreach($values as $optionKey => $value){
               $selected = "";
               if($value == $default){
                 $selected = " selected ";
               }
-              $str  .=  "<option value='".$value."' ".$selected.">".$value."</option>\n";
+              $str  .=  "<option value='".$optionKey."' ".$selected.">".$value."</option>\n";
             }
             $str  .=  "</select>\n";
 
