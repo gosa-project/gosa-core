@@ -188,70 +188,108 @@ class faiSummaryTab extends plugin{
     foreach($data as $key => $entry){
       
       $image = "<img src='".$this->objs[$key]['Image']."' class='center' alt='".$this->objs[$key]['Name']."' border=0>";
-
-      $str.="<tr><td>";
       if(!isset($entry['Open'])){
-        $str .= "<input type='image' class='center' src='images/expand.png' name='open_".$key."'>&nbsp;";
+        $str .= "<tr><td colspan=2><input type='image' class='center' src='images/expand.png' name='open_".$key."'>&nbsp;";
         $str .= $image."&nbsp;";
-        $str .= "<b>".$this->objs[$key]['Name']."</b>";
+        $str .= "<b>".$this->objs[$key]['Name']."</b></td></tr>";
       }else{
-        $str .= "<input type='image' class='center' src='images/sort_down.png' name='close_".$key."'>&nbsp;";
+        $str .= "<tr><td colspan=2><input type='image' class='center' src='images/sort_down.png' name='close_".$key."'>&nbsp;";
         $str .= $image."&nbsp;";
-        $str .= "<b>".$this->objs[$key]['Name']."</b>";
+        $str .= "<b>".$this->objs[$key]['Name']."</b></td></tr>";
    
         /* Display FAItemplate FAIhook FAIscript entries */ 
         if(in_array($key,array("FAItemplate","FAIhook","FAIscript"))){
 
+          $nums = array();          
+
           if($key == "FAIscript"){
+      
             krsort($entry['Entries']);
             foreach($entry['Entries'] as $scripts){
               ksort($scripts);
               foreach($scripts as $script){
-                $script['cn'][0] = "(".$script['FAIpriority'][0].") ".$script['cn'][0];
-                $tmp[$script['cn'][0]] = $script;
+                
+//                $script['cn'][0] = "(".$script['FAIpriority'][0].") ".$script['cn'][0];
+                if(!isset($nums[$script['cn'][0]])){
+                  $nums[$script['cn'][0]]= 0;
+                } 
+                $nums[$script['cn'][0]] ++;
+            
+                $tmp[] = $script;
               }
             }
             $entry['Entries'] = $tmp;
+          }else{
+            foreach($entry['Entries'] as $script){
+              if(!isset($nums[$script['cn'][0]])){
+                $nums[$script['cn'][0]]= 0;
+              } 
+              $nums[$script['cn'][0]] ++;
+            }
           }
 
           foreach($entry['Entries'] as $cn => $data){
-            $str .="<td></tr><tr><td style='padding-left:20px;'>";
+
+            if(isset($nums[$data['cn'][0]]) && ($nums[$data['cn'][0]] > 1)){
+              $str .="<tr style='background: #EE3434;'><td style='padding-left:20px;'>";
+            }else{
+              $str .="<tr><td style='padding-left:20px;'>";
+            }
+
             $str .= "<a target='_blank'href='?plug=".$_GET['plug']."&show&type=".$key."&id=".base64_encode($data['dn'])."'>";
-            $str .= $image."&nbsp;".$data['cn'][0];
+            $str .= $image."&nbsp;";
+            if(isset($data['FAIpriority'][0])){
+              $str .= "(".$data['FAIpriority'][0].")";
+            }
+
+            $str .= "&nbsp;".$data['cn'][0];
             if(isset($data['description'][0])){
               $str .= " [".$data['description'][0]."]";
             }
-            $str .="</a>";
+            $str .= "</a>";
+            $str .= "</td><td><i>".$data['CLASS']."</i>";
+            $str .= "</td></tr>";
           }
         }
 
         /* Create variable entries */
         if(in_array($key,array("FAIvariable"))) {
           foreach($entry['Entries'] as $cn => $data){
-            $str .="<td></tr><tr><td style='padding-left:20px;'>";
+            $str .="<tr><td style='padding-left:20px;'>";
             $str .= $image."&nbsp;".$data['cn'][0];
             if(isset($data['description'][0])){
               $str .= " [".$data['description'][0]."] ";
             }
             $str .=" = '".$data['FAIvariableContent'][0]."'";
+
+            $str .= "</td><td><i>".$data['CLASS']."</i>";
+            
+
+            $str .="</td></tr>";
           }
         }
 
         /* Create packagelist entries */ 
         if(in_array($key,array("FAIpackageList"))) {
-          ksort($entry['Entries']);
-          foreach($entry['Entries'] as $cn => $data){
-            $str .="<td></tr><tr><td style='padding-left:20px;'>";
-            $str .= $image."&nbsp;".$data;
+//          ksort($entry['Entries']);
+          foreach($entry['Entries'] as $data){
+            $str .="<tr><td style='padding-left:20px;'>";
+            $str .= $image."&nbsp;".$data['cn'][0];
+            $str .= "</td><td><i>".$data['CLASS']."</i>";
+            $str .= "</td></tr>";;
           }
         }
 
         /* Create partition table entries */
         if(in_array($key,array("FAIpartitionTable"))) {
           foreach($entry['Entries'] as $cn => $data){
-            $str .="<td></tr><tr><td style='padding-left:20px;'>";
+            $str .= "<tr><td style='padding-left:20px;'>";
             $str .= $image."&nbsp;".$data['name'];
+            $str .= "</td><td><i>".$data['CLASS']."</i>";
+            $str .= "</td></tr>";
             ksort($data['partitions']);
+
+            $str .= "<tr><td colspan=2  style='padding-left:20px;'>";
             $str .= "<table cellspacing=1 style='background:#FFFFFF;'>
                       <tr style='background-color:#BBBBBB;'>
                        <td>"._("No.")."</td>
@@ -289,7 +327,6 @@ class faiSummaryTab extends plugin{
           }
         }
       }
-      $str.="</td></tr>"  ;
     }
     $str .="</table>";	
     return($str);
@@ -341,7 +378,8 @@ class faiSummaryTab extends plugin{
     $ldap->cd($data['dn']);
     $ldap->search("(objectClass=FAIscriptEntry)",array("cn","description","FAIpriority"));
     while($attrs = $ldap->fetch()){
-      $current[$attrs['FAIpriority'][0]][$attrs['cn'][0]] = $attrs;
+      $attrs['CLASS'] = $data['cn'][0];
+      $current[$attrs['FAIpriority'][0]][] = $attrs;
     }
     $this->Result['FAIscript']['Entries'] = $current ;
   }
@@ -364,6 +402,8 @@ class faiSummaryTab extends plugin{
 
     /* Create an array which is sortable by priority */
     while($attrs = $ldap->fetch()){
+      $attrs['CLASS'] = $data['cn'][0];
+      $disks[$attrs['cn'][0]]= $attrs;
       if(isset($attrs['description'][0])){
         $disks[$attrs['cn'][0]]['name'] = $attrs['cn'][0]." [".$attrs['description'][0]."]";
       }else{
@@ -381,6 +421,7 @@ class faiSummaryTab extends plugin{
         if(!isset($attrs['FAIfsOptions'][0])){
           $attrs['FAIfsOptions'][0] = "";
         }
+        $attrs['CLASS'] = $data['cn'][0];
         $disks[$key]['partitions'][$attrs['cn'][0]] = $attrs;
       }
     }
@@ -400,7 +441,8 @@ class faiSummaryTab extends plugin{
     $ldap->cd($data['dn']);
     $ldap->search("(objectClass=FAItemplateEntry)",array("cn","description"));
     while($attrs = $ldap->fetch()){
-      $current[$attrs['cn'][0]] = $attrs;
+      $attrs['CLASS'] = $data['cn'][0];
+      $current[] = $attrs;
     }
     $this->Result['FAItemplate']['Entries'] = $current ;
   }
@@ -416,7 +458,9 @@ class faiSummaryTab extends plugin{
     if(isset($data['FAIpackage'])){
       unset($data['FAIpackage']['count']);
       foreach($data['FAIpackage'] as $pkg){
-        $current[$pkg] = $pkg;
+        $attrs['CLASS'] = $data['cn'][0];
+        $attrs['cn'][0] = $pkg;
+        $current[$pkg] = $attrs;
       }
     }
     $this->Result['FAIpackageList']['Entries'] = $current ;
@@ -434,7 +478,8 @@ class faiSummaryTab extends plugin{
     $ldap->cd($data['dn']);
     $ldap->search("(objectClass=FAIvariableEntry)",array("cn","description","FAIvariableContent"));
     while($attrs = $ldap->fetch()){
-      $current[$attrs['cn'][0]] = $attrs;
+      $attrs['CLASS'] = $data['cn'][0];
+      $current[] = $attrs;
     }
     $this->Result['FAIvariable']['Entries'] = $current ;
   }
@@ -450,6 +495,7 @@ class faiSummaryTab extends plugin{
     $ldap->cd($data['dn']);
     $ldap->search("(objectClass=FAIhookEntry)",array("cn","description"));
     while($attrs = $ldap->fetch()){
+      $attrs['CLASS'] = $data['cn'][0];
       $current[$attrs['cn'][0]] = $attrs;
     }
     $this->Result['FAIhook']['Entries'] = $current ;
