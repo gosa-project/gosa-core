@@ -638,6 +638,7 @@ class LDAP{
     $l= array_reverse(ldap_explode_dn($real_path,0));
     unset($l['count']);
     $cdn= $this->basedn;
+    $tag= "";
 
     foreach ($l as $part){
       $cdn= "$part,$cdn";
@@ -659,18 +660,35 @@ class LDAP{
       $attrs= $this->fetch();
 
       /* Create missing entry? */
-      if (!count ($attrs)){
+      if (count ($attrs)){
+      
+        /* Catch the tag - if present */
+        if (isset($attrs['gosaUnitTag'][0])){
+          $tag= $attrs['gosaUnitTag'][0];
+        }
+
+      } else {
         $type= preg_replace('/^([^=]+)=.*$/', '\\1', $cdn);
         $param= preg_replace('/^[^=]+=([^,]+),.*$/', '\\1', $cdn);
 
         $na= array();
         switch ($type){
           case 'ou':
-            $na["objectClass"]= "organizationalUnit";
+            if ($tag != ""){
+              $na["objectClass"]= array("organizationalUnit", "gosaAdministrativeUnitTag");
+              $na["gosaUnitTag"]= $tag;
+            } else {
+              $na["objectClass"]= "organizationalUnit";
+            }
             $na["ou"]= $param;
             break;
           case 'dc':
-            $na["objectClass"]= array("dcObject", "top", "locality");
+            if ($tag != ""){
+              $na["objectClass"]= array("dcObject", "top", "locality", "gosaAdministrativeUnitTag");
+              $na["gosaUnitTag"]= $tag;
+            } else {
+              $na["objectClass"]= array("dcObject", "top", "locality");
+            }
             $na["dc"]= $param;
             break;
           default:

@@ -28,8 +28,6 @@ Target for 2.4.1:
 
 * Auto-Resize for subdialogs
 
-* Fix create_missing_trees to gererate tags if needed, too
-
 * Fix fai objects to generate tags if needed (sub objects, phone me...)
 
 * Fix Phone book to generate tags if needed
