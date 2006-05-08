@@ -218,12 +218,16 @@ class faiSummaryTab extends plugin{
             
             $entry['Entries'] = $tmp;
           }else{
+            $tmp = array();
             foreach($entry['Entries'] as $script){
+              $tmp[$script['cn'][0].$script['CLASS']] = $script;
               if(!isset($nums[$script['cn'][0]])){
                 $nums[$script['cn'][0]]= 0;
               } 
               $nums[$script['cn'][0]] ++;
             }
+             ksort($tmp);
+            $entry['Entries'] = $tmp;
           }
 
           foreach($entry['Entries'] as $cn => $data){
@@ -259,17 +263,14 @@ class faiSummaryTab extends plugin{
               $str .= " [".$data['description'][0]."] ";
             }
             $str .=" = '".$data['FAIvariableContent'][0]."'";
-
             $str .= "</td><td><i>".$data['CLASS']."</i>";
-            
-
             $str .="</td></tr>";
           }
         }
 
         /* Create packagelist entries */ 
         if(in_array($key,array("FAIpackageList"))) {
-//          ksort($entry['Entries']);
+          ksort($entry['Entries']);
           foreach($entry['Entries'] as $data){
             $str .="<tr><td style='padding-left:20px;'>";
             $str .= $image."&nbsp;".$data['cn'][0];
