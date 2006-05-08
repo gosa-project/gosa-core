@@ -30,8 +30,6 @@ Target for 2.4.1:
 
 * Fix fai objects to generate tags if needed (sub objects, phone me...)
 
-* Fix Phone book to generate tags if needed
-
 * Remove the refresh button from faiPackageNew (the second one)
 
 
