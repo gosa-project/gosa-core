@@ -62,12 +62,11 @@ class faiPackageNew extends plugin
     if(is_array($secs)){
       sort($secs);
       $secs= array_unique($secs);
-      $rel  = " onClick='document.mainform.submit();' ";
       foreach($secs as $section){
         if(in_array($section,$this->FAIdebianSection)){
-          $str .= "<input ".$rel." type='checkbox' value='".$section."' name='section_".$section."' checked>".$section."<br>";
+          $str .= "<input type='checkbox' value='".$section."' name='section_".$section."' checked>".$section."<br>";
         }else{
-          $str .= "<input ".$rel." type='checkbox' value='".$section."' name='section_".$section."'>".$section."<br>";
+          $str .= "<input type='checkbox' value='".$section."' name='section_".$section."'>".$section."<br>";
         }
         $str .="<input type='hidden' name='wasOnPage_".$section."'>";
       }

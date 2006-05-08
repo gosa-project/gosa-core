@@ -18,12 +18,14 @@
 <table summary="">
 <tr>
 	<td height="30">
-		<b><LABEL for="release">{t}Following releases are available{/t}</LABEL></b>
+		<b><LABEL for="release">{t}Release{/t}</LABEL></b>
 	</td>
 	<td>
-		<select name="FAIdebianReleaseS" title="{t}Release{/t}">
+		<select name="FAIdebianReleaseS" title="{t}Release{/t}" onChange='document.mainform.submit();'>
 			{html_options options=$releases selected=$release}
 		</select>
+		&nbsp;
+		<input type="submit" value="{t}Refresh{/t}" name="SetRepository">
 	</td>
 </tr>
 <tr>
@@ -32,12 +34,11 @@
 	</td>
 	<td>
 		{$sections} 
-		<input type="submit" value="{t}set{/t}" name="SetRepository">
 	</td>
 </tr>
 </table>
 <input type="hidden" name="YesItIsPostedPackages" value="1">
-<p class="seperator">&nbsp;
+<p class="seperator" style="margin-bottom:5px">&nbsp;
 </p>
 
 <div align="right" style="align:right;">
