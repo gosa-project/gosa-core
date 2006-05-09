@@ -66,7 +66,7 @@ class divListSystem extends MultiSelectWindow
 
     /*                  Name                 ,Text                              ,Default  , Connect with alphabet  */
     $this->AddRegex   ("Regex",     _("Display systems matching"),"*" , true);
-    $this->AddRegex   ("UserRegex", _("Display systems of user"), "*" , false);
+    $this->AddRegex   ("UserRegex", _("Display systems of user"), "*" , false, "images/search_user.png");
   }
 
   function GenHeader()

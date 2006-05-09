@@ -38,6 +38,7 @@ class systems extends plugin
   var $terminals= array();
   var $ui= NULL;
   var $acl= "";
+  var $DivListSystem;
 
   function systems ($config, $ui)
   {
@@ -45,24 +46,8 @@ class systems extends plugin
     $this->config= $config;
     $this->ui= $ui;
 
-    /* Get global filter config */
-    if (!is_global("terminalfilter")){
-      $base = get_base_from_people($ui->dn);
-      $terminalfilter= array("workstations" => "checked",
-          "thins" => "checked",
-          "winstations" => "checked",
-          "servers" => "checked",
-          "printers" => "checked",
-          "phones" => "checked",
-          "netdev" => "checked",
-          "user" => "*",
-          "regex" => "*");
-      register_global("terminalfilter", $terminalfilter);
-    }
-    if(!isset($_SESSION['CurrentMainBase'])){
-      $ui   = get_userinfo();
-      $_SESSION['CurrentMainBase'] = get_base_from_people($ui->dn);
-    }
+    /* Creat dialog object */
+    $this->DivListSystem = new divListSystem($this->config,$this);
   }
 
   function execute()
@@ -73,59 +58,12 @@ class systems extends plugin
     $_SESSION['LOCK_VARS_TO_USE'] = array("/^user_edit_/i","/^user_del_/","/^act/","/^id/");
 
     /********************
-      Filter handling, check posted filter options and store them in our Session obejct
-     ********************/
-  
-    /* Save posted filter data */
-    $terminalfilter= get_global("terminalfilter");
-    if(isset($_POST['SystemHeadpagePosted'])){
-      foreach( array("user", "regex") as $type){
-        if (isset($_POST[$type])){
-          $terminalfilter[$type]= $_POST[$type];
-        }
-      }
-    } 
-
-    if(isset($_POST['CurrentMainBase'])){
-      $_SESSION['CurrentMainBase'] = $_POST['CurrentMainBase']; 
-    }
-
-    /* Check if filter checkboxes are selected */
-    if (isset($_POST['SystemHeadpagePosted'])){
-      foreach( array("workstations", "thins", "winstations", "printers", "phones", "servers", "netdev") as $type){
-        if (isset($_POST[$type])) {
-          $terminalfilter[$type]= "checked";
-        } else {
-          $terminalfilter[$type]= "";
-        }
-      }
-    }
-
-    /* Check for search post */
-    if (isset($_GET['search'])){
-      $s= mb_substr($_GET['search'], 0, 1, "UTF8")."*";
-      if ($s == "**"){
-        $s= "*";
-      }
-      $terminalfilter['regex']= $s;
-    }
-
-
-    /********************
       Check for functional posts, edit|delete|add|... system devices 
      ********************/
     $s_action     = "";                       // Contains the action to proceed
     $s_entry      = "";                       // The value for s_action
     $base_back    = "";                       // The Link for Backbutton
     $smarty       = get_smarty();
-
-    /* check if base was changed */
-    if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
-            $s_action="open";
-            $s_entry = base64_decode($_GET['dep_id']);
-            $_SESSION['CurrentMainBase']= $this->config->departments[trim($s_entry)];
-            $this->reload();
-    }
 
     /* Test Posts */
     foreach($_POST as $key => $val){
@@ -138,26 +76,20 @@ class systems extends plugin
         $s_action="edit";
         $s_entry  = preg_replace("/user_".$s_action."_/i","",$key);
         // Post for new
-      }elseif(preg_match("/dep_back.*/i",$key)){
-        $s_action="back";
       }elseif(preg_match("/user_new.*/",$key)){
         $s_action="new";
-      }elseif(preg_match("/dep_home.*/i",$key)){
-        $s_action="home";
       }elseif(preg_match("/user_tplnew.*/i",$key)){
         $s_action="new_tpl";
       }elseif(preg_match("/user_setpwd_.*/i",$key)){
         $s_action="change_pw";
         $s_entry  = preg_replace("/user_setpwd_/i","",$key);
-      }elseif(preg_match("/dep_root.*/i",$key)){
-        $s_action="root";
       }elseif(preg_match("/newsystem_.*/i",$key)){
         $s_action="newsystem";
         $s_entry  = preg_replace("/newsystem_/i","",$key);
       }
     }
 
-    /* 09.02.2006 : New incoming handling ; hickert
+    /* Incoming handling  
      * If someone made a systemtype and ogroup selection 
      * Display the new requested entry type ... servtab  in case of server and so on.
      */
@@ -176,38 +108,9 @@ class systems extends plugin
       $s_entry  = $_GET['id'];
     }
 
-    /* Department changed? */
-    if(isset($_POST['CurrentMainBase']) && $_POST['CurrentMainBase']){
-      $_SESSION['CurrentMainBase']= $_POST['CurrentMainBase'];
-    }
-
-    /* Homebutton is posted */
-    if($s_action=="home"){
-      $_SESSION['CurrentMainBase']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
-      $_SESSION['CurrentMainBase']=(preg_replace("/^[^,]+,/","",$_SESSION['CurrentMainBase']));
-    }
-
-    /* back to the roots ^^ */
-    if($s_action=="root"){
-      $_SESSION['CurrentMainBase']=($this->config->current['BASE']);
-    }
-
-    /* If Backbutton is Posted */
-    if($s_action=="back"){
-      $base_back          = preg_replace("/^[^,]+,/","", $_SESSION['CurrentMainBase']);
-      $base_back          = convert_department_dn($base_back);
-
-      if(isset($this->config->departments[trim($base_back)])){
-        $_SESSION['CurrentMainBase']= $this->config->departments[trim($base_back)];
-      }else{
-        $_SESSION['CurrentMainBase']= $this->config->departments["/"];
-      }
-    }
-
     /* Save Termfilter .... */
-    register_global("terminalfilter", $terminalfilter);
     $this->reload();
-    
+
     /* Check for exeeded sizelimit */
     if (($message= check_sizelimit()) != ""){
       return($message);
@@ -219,11 +122,9 @@ class systems extends plugin
     }
 
     /********************
-     Create new system ...   
+      Create new system ...   
      ********************/
     /* Create new default terminal 
-     *
-     * 09.02.2006 ; New incoming handling ; hickert
      * Or create specified object of selected system type, from given incoming object  
      */
     if (isset($_POST['create_system'])||$s_action=="newsystem"||$s_action == "SelectedSystemType") {
@@ -239,63 +140,30 @@ class systems extends plugin
         }else{
           $sw = $s_entry;
         }
-        
         $this->dn= "new";
       }
-
       $this->acl= array(":all");
+      $tabs = array(
+          "terminal"    => array("CLASS"=>"TERMTABS",     "TABNAME"=>"termgeneric",     "TABCLASS" =>"termtabs"),
+          "workstation" => array("CLASS"=>"WORKTABS",     "TABNAME"=>"workgeneric",     "TABCLASS" =>"worktabs"),
+          "server"      => array("CLASS"=>"SERVTABS",     "TABNAME"=>"servgeneric",     "TABCLASS" =>"servtabs"),
+          "printer"     => array("CLASS"=>"PRINTTABS",    "TABNAME"=>"printgeneric",    "TABCLASS" =>"printtabs"),
+          "phone"       => array("CLASS"=>"PHONETABS",    "TABNAME"=>"phonegeneric",    "TABCLASS" =>"phonetabs"),
+          "component"   => array("CLASS"=>"COMPONENTTABS","TABNAME"=>"componentgeneric","TABCLASS" =>"componenttabs"));
 
-      switch ($sw){
-        case 'terminal':
-          $this->systab= new termtabs($this->config,
-              $this->config->data['TABS']['TERMTABS'], $this->dn);
-          $this->systab->set_acl ($this->acl);
-          $this->systab->by_object['termgeneric']->base = $_SESSION['CurrentMainBase'];  
-          break;
-
-        case 'workstation':
-          $this->systab= new worktabs($this->config,
-              $this->config->data['TABS']['WORKTABS'], $this->dn);
-          $this->systab->set_acl ($this->acl);
-          $this->systab->by_object['workgeneric']->base = $_SESSION['CurrentMainBase'];  
-          break;
-
-        case 'server':
-          $this->systab= new servtabs($this->config,
-              $this->config->data['TABS']['SERVTABS'], $this->dn);
-          $this->systab->set_acl ($this->acl);
-          $this->systab->by_object['servgeneric']->base = $_SESSION['CurrentMainBase'];  
-          break;
-
-        case 'printer':
-          $this->systab= new printtabs($this->config,
-              $this->config->data['TABS']['PRINTTABS'], $this->dn);
-          $this->systab->set_acl ($this->acl);
-          $this->systab->by_object['printgeneric']->base = $_SESSION['CurrentMainBase'];  
-          break;
-
-        case 'phone':
-          $this->systab= new phonetabs($this->config,
-              $this->config->data['TABS']['PHONETABS'], $this->dn);
-          $this->systab->set_acl ($this->acl);
-          $this->systab->by_object['phonegeneric']->base = $_SESSION['CurrentMainBase'];  
-          break;
-
-        case 'component':
-          $this->systab= new componenttabs($this->config,
-              $this->config->data['TABS']['COMPONENTTABS'], $this->dn);
-          $this->systab->set_acl ($this->acl);
-          $this->systab->by_object['componentgeneric']->base = $_SESSION['CurrentMainBase'];  
-          break;
+      if(isset($tabs[$sw])){
+        $class    = $tabs[$sw]["CLASS"];
+        $tabname  = $tabs[$sw]["TABNAME"];
+        $tabclass = $tabs[$sw]["TABCLASS"];
+        $this->systab= new $tabclass($this->config, $this->config->data['TABS'][$class], $this->dn);
+        $this->systab->set_acl ($this->acl);
+        $this->systab->by_object[$tabname]->base = $this->DivListSystem->selectedBase;
+        $this->systab->base = $this->DivListSystem->selectedBase;
       }
-     
-      /* set base ... of current divlist position */
-      $this->systab->base = $_SESSION['CurrentMainBase'];  
     }
 
-
     /********************
-     Edit system ...   
+      Edit system ...   
      ********************/
 
     /* User wants to edit data? */
@@ -320,85 +188,36 @@ class systems extends plugin
 
       /* Lock the current entry, so everyone will get the
          above dialog */
+      $tabs = array(
+          "terminal"    => array("CLASS"=>"TERMTABS",     "TABCLASS" =>"termtabs"),
+          "workstation" => array("CLASS"=>"WORKTABS",     "TABCLASS" =>"worktabs"),
+          "server"      => array("CLASS"=>"SERVTABS",     "TABCLASS" =>"servtabs"),
+          "printer"     => array("CLASS"=>"PRINTTABS",    "TABCLASS" =>"printtabs"),
+          "phone"       => array("CLASS"=>"PHONETABS",    "TABCLASS" =>"phonetabs"),
+          "winstation"  => array("CLASS"=>"WINTABS",      "TABCLASS" =>"wintabs"),
+          "component"   => array("CLASS"=>"COMPONENTTABS","TABCLASS" =>"componenttabs"));
 
-      switch ($type){
-        case "NewDevice" :
-          $this->systab = new SelectDeviceType($this->config,$this->dn) ;
-        break;
-        case "terminal":
-          /* Register systab to trigger edit dialog */
-          $this->systab= new termtabs($this->config,
-              $this->config->data['TABS']['TERMTABS'], $this->dn);
+
+      if($type == "NewDevice"){
+        $this->systab = new SelectDeviceType($this->config,$this->dn) ;
+      }elseif(isset($tabs[$type])){
+
+        $class    = $tabs[$type]["CLASS"];
+        $tabclass = $tabs[$type]["TABCLASS"];
+
+        $this->systab= new $tabclass($this->config, $this->config->data['TABS'][$class], $this->dn);
         $this->systab->set_acl($acl);
         $_SESSION['objectinfo']= $this->dn;
         add_lock ($this->dn, $this->ui->dn);
-        break;
-
-        case "server":
-
-          /* Register systab to trigger edit dialog */
-          $this->systab= new servtabs($this->config,$this->config->data['TABS']['SERVTABS'], $this->dn);
-        $this->systab->set_acl($acl);
-        $_SESSION['objectinfo']= $this->dn;
-        add_lock ($this->dn, $this->ui->dn);
-        break;
-
-        case "workstation":
-          /* Register systab to trigger edit dialog */
-          $this->systab= new worktabs($this->config,
-              $this->config->data['TABS']['WORKTABS'], $this->dn);
-        $this->systab->set_acl($acl);
-        $_SESSION['objectinfo']= $this->dn;
-        add_lock ($this->dn, $this->ui->dn);
-        break;
-
-        case "printer":
-          /* Register systab to trigger edit dialog */
-          $this->systab= new printtabs($this->config,
-              $this->config->data['TABS']['PRINTTABS'], $this->dn);
-        $this->systab->set_acl($acl);
-        $_SESSION['objectinfo']= $this->dn;
-        add_lock ($this->dn, $this->ui->dn);
-        break;
-
-        case "phone":
-          /* Register systab to trigger edit dialog */
-          $this->systab= new phonetabs($this->config,
-              $this->config->data['TABS']['PHONETABS'], $this->dn);
-        $this->systab->set_acl($acl);
-        $_SESSION['objectinfo']= $this->dn;
-        add_lock ($this->dn, $this->ui->dn);
-        break;
-
-        case "component":
-          /* Register systab to trigger edit dialog */
-          $this->systab= new componenttabs($this->config,
-              $this->config->data['TABS']['COMPONENTTABS'], $this->dn);
-        $this->systab->set_acl($acl);
-        $_SESSION['objectinfo']= $this->dn;
-        add_lock ($this->dn, $this->ui->dn);
-        break;
-
-        case "winstation":
-          /* Register systab to trigger edit dialog */
-          $this->systab= new wintabs($this->config,
-              $this->config->data['TABS']['WINTABS'], $this->dn);
-        $this->systab->set_acl($acl);
-        $_SESSION['objectinfo']= $this->dn;
-        add_lock ($this->dn, $this->ui->dn);
-        break;
-
-
-        default:
+      }else{ 
         print_red (_("You can't edit this object type yet!"));
         del_lock($this->dn);
-        break;
       }
     }
-    
+
 
     /********************
-     Change password ...   
+      Change password ...   
      ********************/
 
     /* Set terminals root password */
@@ -497,7 +316,7 @@ class systems extends plugin
       }
     }
 
-  
+
     /********************
       Delete system, confirmed
      ********************/
@@ -514,45 +333,35 @@ class systems extends plugin
         $attrs= $ldap->fetch();
         $type= $this->get_system_type($attrs['objectClass']);
 
-        switch ($type){
-          case "terminal":
-            $tabtype  = "termtabs";
-            $tabobj   = "TERMTABS";
-          break;
+        $tabs = array(
+            "terminal"    => array("CLASS"=>"TERMTABS",     "TABCLASS" =>"termtabs"),
+            "workstation" => array("CLASS"=>"WORKTABS",     "TABCLASS" =>"worktabs"),
+            "server"      => array("CLASS"=>"SERVTABS",     "TABCLASS" =>"servtabs"),
+            "printer"     => array("CLASS"=>"PRINTTABS",    "TABCLASS" =>"printtabs"),
+            "phone"       => array("CLASS"=>"PHONETABS",    "TABCLASS" =>"phonetabs"),
+            "winstation"  => array("CLASS"=>"WINTABS",      "TABCLASS" =>"wintabs"),
+            "component"   => array("CLASS"=>"COMPONENTTABS","TABCLASS" =>"componenttabs"));
 
-          case "workstation":
-            $tabtype  = "worktabs";
-            $tabobj   = "WORKTABS";
-          break;
-
-          case "phone":
-            $tabtype  = "phonetabs";
-            $tabobj   = "PHONETABS";
-          break;
-
-          case "server":
-            $tabtype  = "servtabs";
-            $tabobj   = "SERVTABS";
-          break;
-
-          default:
-            $tabtype  = "termtabs";
-            $tabobj   = "TERMTABS";
-          break;
+        /* get object type */
+        $tabtype  = "termtabs";
+        $tabobj   = "TERMTABS";
+        if(isset($tabs[$type])){
+          $tabtype = $tabs[$type]['TABCLASS'];
+          $tabobj  = $tabs[$type]['CLASS'];
         }
 
         /* Delete request is permitted, perform LDAP action */
         if($tabtype=="phonetabs"){
           $this->systab= new $tabtype($this->config,
-             $this->config->data['TABS'][$tabobj], $this->dn);
+              $this->config->data['TABS'][$tabobj], $this->dn);
           $this->systab->set_acl(array($this->acl));
           $this->systab->by_object['phonegeneric']->remove_from_parent ();
         }else{  
           $this->systab= new $tabtype($this->config,
-             $this->config->data['TABS'][$tabobj], $this->dn);
+              $this->config->data['TABS'][$tabobj], $this->dn);
           $this->systab->set_acl(array($this->acl));
           $this->systab->delete();
-          #$this->systab->by_object['termgeneric']->remove_from_parent ();
+#$this->systab->by_object['termgeneric']->remove_from_parent ();
         }
         unset ($this->systab);
         gosa_log ("System object'".$this->dn."' has been removed");
@@ -592,18 +401,12 @@ class systems extends plugin
         gosa_log ("System object'".$this->dn."' has been saved");
         $this->systab->save();
 
-        /* Terminal has been saved successfully, remove lock from
-           LDAP. */
-
-        /* 09.02.2006 Hickert 
-         * New System incoming behavior; you can select a system type and an ogroup membership. 
+        /* Incoming behavior; you can select a system type and an ogroup membership. 
          * If this object is an Incoming object, $_SESSION['SelectedSystemType'] isset.
          * Check if we must add the new object to an object group.
-         * !! Don't forget to unset the $_SESSION['SelectedSystemType']... else all edited objects 
-         * !! will be added to  the object group.
          * 
          * If this is done, delete the old incoming entry... it is still there, because this is a new 
-         * entry and not an edited one.
+         * entry and not an edited one, so we will delete it.
          */
         if(isset($_SESSION['SelectedSystemType'])){
           $SelectedSystemType= $_SESSION['SelectedSystemType'];
@@ -627,6 +430,8 @@ class systems extends plugin
           $ldap->cd($this->config->current['BASE']);
         }
 
+        /* Terminal has been saved successfully, remove lock from
+           LDAP. */
         if ($this->dn != "new"){
           del_lock ($this->dn);
         }
@@ -637,15 +442,12 @@ class systems extends plugin
         unset ($this->systab);
         $this->systab= NULL;
         unset($_SESSION['objectinfo']);
-
       } else {
         /* Ok. There seem to be errors regarding to the tab data,
            show message and continue as usual. */
         show_errors($message);
       }
-
     }
-
 
     /********************
       Edit system was canceled 
@@ -659,25 +461,20 @@ class systems extends plugin
       $this->systab= NULL;
       unset($_SESSION['objectinfo']);
 
-      /* 09.02.2006 ; New incoming handling ; hickert 
-       * remove session object which stores our ogroup selection 
-       * for the new incoming handling
-       */
+      /* Remove ogroup selection, which was set while editing a new incoming entry */
       if(isset($_SESSION['SelectedSystemType'])){
         unset($_SESSION['SelectedSystemType']);
       }
     }
 
-
     /********************
-      Display edit dialog, or some other  
+      Display edit dialog, or some other
      ********************/
 
     /* Show tab dialog if object is present */
     if (isset($this->systab->config)){
       $display= $this->systab->execute();
 
-      
       /* Don't show buttons if tab dialog requests this */
       if ((isset($this->systab->by_object))&&(!$this->systab->by_object[$this->systab->current]->dialog)){
         $display.= "<p style=\"text-align:right\">\n";
@@ -689,219 +486,13 @@ class systems extends plugin
       return ($display);
     }
 
-
-    /********************
-      Entry handling finished (edit delete ... )
-      Now the list generation is the next part of this script.
-     ********************/
-    
-    /* Prepare departments, 
-       which are shown in the listbox on top of the listbox 
-     */
-    $options= "";
-    foreach ($this->config->idepartments as $key => $value){
-      if ($_SESSION['CurrentMainBase'] == $key){
-        $options.= "<option selected='selected' value='$key'>$value</option>";
-      } else {
-        $options.= "<option value='$key'>$value</option>";
-      }
-    }
-
-
-    /* NEW LIST MANAGMENT */
-
-    /* Create list header
-     */
-    $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
-    " <input class='center' type='image' src='images/list_root.png' align='middle' 
-        title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
-    " <input class='center' type='image' align='middle' src='images/list_back.png' 
-        title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
-    " <input class='center' type='image' align='middle' src='images/list_home.png' 
-        title='"._("Go to users department")."' alt='"._("Home")."'                     name='dep_home'>&nbsp;".
-    " <input class='center' type='image' src='images/list_reload.png' align='middle' title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-    " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-    " <input class='center' type='image' align='middle' src='images/select_new_terminal.png'   
-        name='newsystem_terminal'    alt='"._("New Terminal template")."' title='"._("New Terminal")."'>".
-    " <input class='center' type='image' align='middle' src='images/select_new_workstation.png' 
-        name='newsystem_workstation' alt='"._("New Workstation template")."' title='"._("New Workstation")."'>".
-    " <input class='center' type='image' align='middle' src='images/select_new_server.png'     name='newsystem_server'      alt='"._("New Server")."' 
-        title='"._("New Server")."'>".
-    " <input class='center' type='image' align='middle' src='images/select_new_printer.png'    name='newsystem_printer'     alt='"._("New Printer")."' 
-        title='"._("New Printer")."'>".
-    " <input class='center' type='image' align='middle' src='images/select_new_phone.png'      name='newsystem_phone'       alt='"._("New Phone")."' 
-        title='"._("New Phone")."'>".
-    " <input class='center' type='image' align='middle' src='images/select_new_component.png'  name='newsystem_component'   alt='"._("New Component")."' 
-        title='"._("New Component")."'>".
-    " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;"._("Base")."&nbsp;".
-    " <select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
-    " <input class='center' type='image' src='images/list_submit.png' align='middle' 
-        title='"._("Submit department")."' name='submit_department' alt='".           _("Submit")."'>&nbsp;".
-    "</div>";
-
-
-    /* Edit delete link for system types 
-     */
-    $action= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit system")."'>";
-    $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete system")."'>";
-    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
-
-    /* Create new divlist, and add the header elements 
-     */
-    $divlist = new divlist("systemstab");
-    $divlist->SetSummary(_("This table displays all systems, in the selected tree."));
-    $divlist->SetEntriesPerPage(0);
-    $divlist->SetHeader(array(
-          array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
-          array("string" => _("System")." / "._("Department"), "attach" => "style=''"),
-          array("string" => _("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'" )));
-
-
-    /* Add departments, to be able to switch into them
-     */
-    foreach($this->departments as $key=> $val){
-      
-      /* Add missing entries ... */
-      if(!isset($this->config->departments[trim($key)])){
-        $this->config->departments[trim($key)]="";
-      }
-
-      /* check if this department contains sub-departments 
-         Display different image in this case 
-       */ 
-      $non_empty="";
-      $nkey= normalizePreg($key);
-      foreach($this->config->departments as $keyd=>$vald ){
-        if(preg_match("/$nkey\/.*/",$keyd)){
-          $non_empty="full";
-        }
-      }
-
-      /* Add to divlist */
-      $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
-      $field3 = array("string" => "&nbsp;", "attach" => "style='width:60px;border-right:0px;text-align:right;'");
-      $divlist->AddEntry(array($field1,$field2,$field3));
-    }
-
-    // Iamge spacer 
-    $empty    ="&nbsp;";
-
-    // User and Template  Images
-    $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
-
-    // Pictures for Extensions
-    $img1  = "<img class='center' src='images/printer.png'            alt='C' title='"._("Cups Server")  ."'>";
-    $img2  = "<img class='center' src='images/scanner.png'            alt='L' title='"._("Log Db") ."'>";
-    $img3  = "<img class='center' src='images/select_terminal.png'    alt='L' title='"._("Syslog Server") ."'>";
-    $img4  = "<img class='center' src='images/mailto.png'             alt='M' title='"._("Mail Server")  ."'>";
-    $img5  = "<img class='center' src='images/select_phone.png'       alt='I' title='"._("Imap Server") ."'>";
-    $img6  = "<img class='center' src='images/fax_small.png'          alt='F' title='"._("Nfs Server")   ."'>";
-    $img7  = "<img class='center' src='images/select_winstation.png'  alt='K' title='"._("Kerberos Server") ."'>";
-    $img8  = "<img class='center' src='images/select_phone.png'       alt='A' title='"._("Asterisk Server") ."'>";
-    $img9  = "<img class='center' src='images/fax_small.png'          alt='F' title='"._("Fax Server") ."'>";
-    $img10 = "<img class='center' src='images/save.png'               alt='L' title='"._("Ldap Server") ."'>";
-
-    // Test Every Entry and generate divlist Array
-    foreach($this->terminals as $key => $val){
-      // Specify Pics for Extensions
-      if(in_array("goLdapServer"    ,$val['objectClass'])){
-        
-      }
-
-      /* Generate picture list, which is currently disabled */     
-      if(in_array("goCupsServer"    ,$val['objectClass'])) $cups    = $img1;   else $cups  =$empty;
-      if(in_array("goLogDBServer"   ,$val['objectClass'])) $logdb   = $img2;   else $logdb =$empty;
-      if(in_array("goSyslogServer"  ,$val['objectClass'])) $syslog  = $img3;   else $syslog=$empty;
-      if(in_array("goImapServer"    ,$val['objectClass'])) $imap    = $img4;   else $imap  =$empty;
-      if(in_array("sambaSamAccount" ,$val['objectClass'])) $samba   = $img5;   else $samba =$empty;
-      if(in_array("goShareServer"   ,$val['objectClass'])) $nfs     = $img6;   else $nfs   =$empty;
-      if(in_array("goKrbServer"     ,$val['objectClass'])) $krb     = $img7;   else $krb   =$empty;
-      if(in_array("goFonServer"     ,$val['objectClass'])) $fon     = $img8;   else $fon   =$empty;
-      if(in_array("goFaxServer"     ,$val['objectClass'])) $fax     = $img9;   else $fax   =$empty;
-      if(in_array("goLdapServer"    ,$val['objectClass'])) $ldap     = $img10;   else $ldap   =$empty;
-      $pics = $cups.$logdb.$syslog.$imap.$samba.$nfs.$krb.$fon.$fax.$ldap;
-      $pics = "";
-    
-      $val['cn'][0]= preg_replace('/\$$/', '', $val['cn'][0]);
-
-      // Generate Array to Add
-      if((isset($val['is_new']))&&(!empty($val['is_new']))){
-        $display= "".$val["cn"][0]." ".$val['is_new'];
-      }else{
-        $display= "".$val["cn"][0]."";
-      }
-
-      if((in_array("gotoTerminal",$val['objectClass']))||(in_array("gotoWorkstation",$val['objectClass']))){
-        $action2 = "<input class='center' type='image' src='images/certs.png' alt='"._("Password")."'   name='user_setpwd_%KEY%' title='"._("Set root password")."'>";
-      }else{
-        $action2 = "";
-      }
-
-      if(isset($val['message'])){
-        $display.= "  (".$val['message']." '".$this->config->idepartments[$_SESSION['CurrentMainBase']]."'  )";
-      }
-
-      $img=$this->convert_list($val);
-
-      $field1 = array("string" => sprintf($img['img'],$val['dn']), "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='".@LDAP::fix($val['dn'])."'");
-      $field3 = array("string" => preg_replace("/%KEY%/", "$key", $action2.$action), "attach" => "style='width:60px;border-right:0px;text-align:right;'");
-      $divlist->AddEntry( array($field1,$field2,$field3));
-    }
-
-    /* Show main page */
-    $smarty->assign("terminalshead", $listhead);
-    $smarty->assign("terminals", $divlist->DrawList());
-    $smarty->assign("search_image", get_template_path('images/search.png'));
-    $smarty->assign("searchu_image", get_template_path('images/search_user.png'));
-    $smarty->assign("tree_image", get_template_path('images/tree.png'));
-    $smarty->assign("infoimage", get_template_path('images/info.png'));
-    $smarty->assign("launchimage", get_template_path('images/launch.png'));
-    foreach( array( "user", "regex", "workstations", "thins", "servers",
-          "winstations", "printers", "phones", "netdev") as $type){
-
-      $smarty->assign("$type", $terminalfilter[$type]);
-    }
-    $smarty->assign("deplist", $this->config->idepartments);
-    $smarty->assign("CurrentMainBase", $_SESSION['CurrentMainBase']);
-
-    /* Extend if we are not using javascript */
-    $smarty->assign("apply", apply_filter());
-    $smarty->assign("alphabet", generate_alphabet());
-    $smarty->assign("hint", print_sizelimit_warning());
-
-    return($smarty->fetch(get_template_path('headpage.tpl', TRUE)));
+    /* Display dialog with system list */
+    $this->DivListSystem->execute();
+    $this->DivListSystem->setEntries($this->terminals);
+    return($this->DivListSystem->Draw());
   }
 
 
-  function convert_list($input)
-  {
-    $temp= "";
-    $conv= array(	
-        "NQ" => array("select_newsystem.png",_("New System from incoming")),
-        "D" => array("select_default.png",_("Template")),
-        "T" => array("select_terminal.png",_("Terminal")),
-        "L" => array("select_workstation.png",_("Workstation")),
-        "F" => array("select_phone.png",_("Phone")),
-        "S" => array("select_server.png",_("Server")),
-        "W" => array("select_winstation.png",_("Winstation")),
-        "C" => array("select_component.png",_("Network Device")),
-        "NT"=> array("select_new_terminal.png",_("New Terminal")),
-        "NL"=> array("select_new_workstation.png",_("New Workstation")),
-        "P" => array("select_printer.png",_("Printer")));
-
-   if((isset($input['is_new']))&&(!empty($input['is_new']))){
-     $input['type']="N".$input['type'];
-   }
-   foreach ($conv  as $key => $value){
-      if($input['type']==$key){
-        $tmp['img'] ="<img class='center' src='images/".$value[0]."' alt='".$key."' title='".$value['1']."'>";
-        $tmp['class']=$key;
-        return $tmp;
-      }
-    }
-  }
 
   function remove_from_parent()
   {
@@ -913,6 +504,7 @@ class systems extends plugin
   /* Save data to object */
   function save_object()
   {
+    $this->DivListSystem->save_object();
   }
 
 
@@ -935,10 +527,6 @@ class systems extends plugin
   {
   }
 
-  function show_header($button_text, $text, $disabled= FALSE)
-  {
-  }
-
   function reload()
   {
     /* Load terminal shortcuts */
@@ -950,164 +538,72 @@ class systems extends plugin
       }
     }
 
-    /* Get config */
-    $terminalfilter= get_global('terminalfilter');
-    $filter= "";
+    /* some var init */
+    $res              = array();
+    $this->terminals  = array();
+    $userregex        = "";
 
     /* Set base for all searches */
-    $base= $_SESSION['CurrentMainBase'];
+    $base=  $this->DivListSystem->selectedBase;
 
-    /* Regex filter? */
-    if ($terminalfilter['regex'] != ""){
-      $regex= $terminalfilter['regex'];
-    } else {
-      $regex= "*";
-    }
-
-    /* Get list of terminals to be shown */
-    if ($terminalfilter['thins'] == "checked"){
-      $termfilter= "(&(objectClass=goHard)(cn=$regex))";
-    } else {
-      $termfilter= "";
-    }
-    if ($terminalfilter['workstations'] == "checked"){
-      $workfilter= "(&(objectClass=gotoWorkstation)(cn=$regex))";
-    } else {
-      $workfilter= "";
-    }
-    if ($terminalfilter['winstations'] == "checked"){
+    /* Prepare samba class name */
+    $samba  ="";
+    if ($this->DivListSystem->ShowWinWorkstations){
       if ($this->config->current['SAMBAVERSION'] == "3"){
         $samba= "sambaSamAccount";
       } else {
         $samba= "sambaAccount";
       }
-      $winfilter= "(&(objectClass=$samba)(cn=$regex\$))";
-    } else {
-      $winfilter= "";
-    }
-    if ($terminalfilter['printers'] == "checked"){
-      $printfilter= "(&(objectClass=gotoPrinter)(cn=$regex))";
-    } else {
-      $printfilter= "";
-    }
-    if ($terminalfilter['phones'] == "checked"){
-      $phonefilter= "(&(objectClass=goFonHardware)(cn=$regex))";
-    } else {
-      $phonefilter= "";
-    }
-    if ($terminalfilter['netdev'] == "checked"){
-      $netfilter= "(&(objectClass=ieee802Device)(cn=$regex))";
-    } else {
-      $netfilter= "";
-    }
-    if ($terminalfilter['servers'] == "checked"){
-      $serverfilter= "(&(objectClass=goServer)(cn=$regex))";
-    } else {
-      $serverfilter= "";
     }
 
-    /* User filter? */
-    if ($terminalfilter['user'] != "" && $terminalfilter['user'] != "*"){
-      $filter.= "(gotoLastUser=".$terminalfilter['user'].")";
+    /* This array represents the combination between checkboxes and search filters */
+    $objs = array( "ShowServers"        => array("CLASS" => "goServer"        ,"TREE" => "ou=servers,ou=systems," ),
+        "ShowTerminals"      => array("CLASS" => "goHard"          ,"TREE" => "ou=terminals,ou=systems,"), 
+        "ShowPrinters"       => array("CLASS" => "gotoPrinter"     ,"TREE" => "ou=printers,ou=systems," ),
+        "ShowDevices"        => array("CLASS" => "ieee802Device"   ,"TREE" => "ou=netdevices,ou=systems," ),
+        "ShowPhones"         => array("CLASS" => "goFonHardware"   ,"TREE" => "ou=phones,ou=systems," ),
+        "ShowWorkstations"   => array("CLASS" => "gotoWorkstation" ,"TREE" => "ou=workstations,ou=systems," ),
+        "ShowWinWorkstations"=> array("CLASS" => $samba            ,"TREE" => get_winstations_ou() ));
+
+    /* Include the 'Display Systems of user' attribute */ 
+    if ((!empty($this->DivListSystem->UserRegex)) && ($this->DivListSystem->UserRegex!= "*")){
+      $userregex = "(gotoLastUser=".$this->DivListSystem->UserRegex.")";
     }
+
+    /* Walk through all possible search combinations, and search for some objects if the checkbox is enabled  */
+    foreach($objs as $checkBox => $oc){
+
+      if($this->DivListSystem->$checkBox){
+        /* User filter? */
+        if($oc['CLASS'] != ""){
+          $filter = "(|(&".$userregex."(objectClass=".$oc['CLASS'].")(cn=".$this->DivListSystem->Regex.")))";
+          $res = array_merge($res,get_list($filter,$this->ui->subtreeACL, $oc['TREE'].$base,
+                array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE));
+        }
+      } 
+    }
+
+    /* Search for incoming objects */ 
+    $filter = "(|(&".$userregex."(objectClass=goHard)(cn=".$this->DivListSystem->Regex.")))";
+    $res = array_merge($res,get_list($filter,$this->ui->subtreeACL, "ou=incoming,".$base,
+          array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE));
 
     /* Get all gotoTerminal's */
-    $this->terminals= array();
-
-    //FIXME: All get_list calls are called without GL_SIZELIMIT? All contain sambaDomainName???
-    $res= get_list("(|$termfilter)", $this->ui->subtreeACL, "ou=terminals,ou=systems,".$base,
-                   array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE);
-
-    $res= array_merge($res,
-          get_list("(|$termfilter)", $this->ui->subtreeACL, "ou=incoming,".$base,
-                   array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE));
-
-    $res= array_merge($res,
-          get_list("(|$serverfilter)", $this->ui->subtreeACL, "ou=servers,ou=systems,".$base,
-                   array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE));
-
-    $res= array_merge($res,
-          get_list("(|$phonefilter)", $this->ui->subtreeACL, "ou=phones,ou=systems,".$base,
-                    array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE));
-
-    $res= array_merge($res,
-          get_list("(|$netfilter)", $this->ui->subtreeACL, "ou=netdevices,ou=systems,".$base,
-                   array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE));
-
-    $res= array_merge($res,
-          get_list("(|$printfilter)", $this->ui->subtreeACL, "ou=printers,ou=systems,".$base,
-                   array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE));
-
-    $res= array_merge($res,
-          get_list("(|$workfilter)", $this->ui->subtreeACL, "ou=workstations,ou=systems,".$base,
-                   array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE));
-
-    $res= array_merge($res,
-          get_list("(|$winfilter)", $this->ui->subtreeACL, "ou=winstations,ou=systems,".$base,
-                   array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE));
-
-/* NEW LIST MANAGMENT
-     * We also need to search for the departments
-     * So we are able to navigate like in konquerer
-     */
-
-    $peopleOU = get_people_ou();
-
-    if(empty($peopleOU)){
-      $base2 = $base;
-    }else{
-      $base2 = preg_replace("/".$peopleOU."/i","",$base);
-    }
-
-    /* Get all departments within this subtree */
-    $deps= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))", $this->ui->subtreeACL,
-        $base2, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
-
-    $this->departments = array();
-    foreach($deps as $value){
-      if(isset($value['description'][0])){
-        $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
-      }else{
-        $this->departments[$value['dn']]= get_sub_department($value['dn']);
-      }
-    }
-    natcasesort($this->departments);
-
-    /* END NEW LIST MANAGMENT
-     */
-
-
     foreach ($res as $value){
 
-      /* Look for new terminals and mark them with '+' */
-      $tmp= "";
-      if (preg_match('/,ou=terminals,ou=systems,/i', $value["dn"])){
-        $tmp= preg_replace("/^[^,]+,[^o]*ou=terminals,ou=systems,/i", "", $value["dn"]);
-      }
-      if (preg_match('/,ou=workstations,ou=systems,/i', $value["dn"])){
-        $tmp= preg_replace("/^[^,]+,[^o]*ou=workstations,ou=systems,/i", "", $value["dn"]);
-      }
-      if (preg_match('/,ou=servers,ou=systems,/i', $value["dn"])){
-        $tmp= preg_replace("/^[^,]+,[^o]*ou=servers,ou=systems,/i", "", $value["dn"]);
-      }
-      if (preg_match('/,'.get_winstations_ou().'/i', $value["dn"])){
-        $tmp= preg_replace("/^[^,]+,[^o]*".get_winstations_ou()."/i", "", $value["dn"]);
-      }
-      if (preg_match('/,ou=printers,ou=systems,/i', $value["dn"])){
-        $tmp= preg_replace("/^[^,]+,[^o]*ou=printers,ou=systems,/i", "", $value["dn"]);
-      }
-      if (preg_match('/,ou=phones,ou=systems,/i', $value["dn"])){
-        $tmp= preg_replace("/^[^,]+,[^o]*ou=phones,ou=systems,/i", "", $value["dn"]);
-      }
-      if (preg_match('/,ou=netdevices,ou=systems,/i', $value["dn"])){
-        $tmp= preg_replace("/^[^,]+,[^o]*ou=netdevices,ou=systems,/i", "", $value["dn"]);
-      }
-      if ($tmp == ""){
-        $tmp= $value["dn"];
-      }
+      $tmp= $value['dn'];
       $add= "";
+
+      /* Extract base */
+      foreach($objs as $obj){
+        if(preg_match("/,".$obj['TREE']."/i",$value['dn'])){
+          $tmp = trim( preg_replace("/^[^,]+,[^o]*".$obj['TREE']."/i","",$value['dn']));
+        }
+      }
+
+      /* check if current object is a new one */
       if (preg_match ("/,ou=incoming,/i", $tmp)){
-         if (in_array('gotoTerminal', $value['objectClass'])){
+        if (in_array('gotoTerminal', $value['objectClass'])){
           $add= "- "._("New terminal");
         }elseif (in_array('gotoWorkstation', $value['objectClass'])){
           $add= "- "._("New workstation");
@@ -1116,9 +612,9 @@ class systems extends plugin
         }
       } 
 
+      /* Detect type of object and create an entry for $this->terminals */
       $terminal = array();
-  
-      if (in_array ($tmp, $responsible) || $add != ""){
+      if ((in_array ($tmp, $responsible)) || ($add != "")){
         if (in_array('gotoTerminal', $value["objectClass"])){
           if (isset($value["macAddress"][0]) && $value["macAddress"][0] != "-"){
             $terminal             = $value;
@@ -1142,21 +638,21 @@ class systems extends plugin
             $terminal['message']  = _("Workstation template for");
           }
         } elseif (in_array('gotoPrinter', $value["objectClass"])){
-            $terminal             = $value;
-            $terminal['type']     = "P";
+          $terminal             = $value;
+          $terminal['type']     = "P";
         } elseif (in_array('goServer', $value["objectClass"])){
-            $terminal             = $value;
-            $terminal['type']     = "S";
+          $terminal             = $value;
+          $terminal['type']     = "S";
         } elseif (in_array('goFonHardware', $value["objectClass"])){
-            $terminal             = $value;
-            $terminal['type']     = "F";
+          $terminal             = $value;
+          $terminal['type']     = "F";
         }elseif (in_array("GOhard",$value['objectClass'])){
           $terminal = $value;
           $terminal['type']   = "Q";
           $terminal['is_new'] = $add;
         } elseif (in_array('ieee802Device', $value["objectClass"])){
-            $terminal             = $value;
-            $terminal['type']     = "C";
+          $terminal             = $value;
+          $terminal['type']     = "C";
         } else{
           $name= preg_replace('/\$$/', '', $value['cn'][0]);
           if (isset($value['sambaDomainName'])){
@@ -1195,34 +691,54 @@ class systems extends plugin
   function get_system_type($classes)
   {
     $type= "";
-
     if (in_array('ieee802Device', $classes)){
       $type= "component";
-    }else
-    if (in_array('gotoTerminal', $classes)){
+    }elseif (in_array('gotoTerminal', $classes)){
       $type= "terminal";
-    }else
-    if (in_array('gotoWorkstation', $classes)){
+    }elseif (in_array('gotoWorkstation', $classes)){
       $type= "workstation";
-    }else
-    if (in_array('gotoPrinter', $classes)){
+    }elseif (in_array('gotoPrinter', $classes)){
       $type= "printer";
-    }else
-    if (in_array('goFonHardware', $classes)){
+    }elseif (in_array('goFonHardware', $classes)){
       $type= "phone";
-    }else
-    if (in_array('goServer', $classes)){
+    }elseif (in_array('goServer', $classes)){
       $type= "server";
-    }else
-    if (in_array('GOhard', $classes)){
+    }elseif (in_array('GOhard', $classes)){
       $type= "NewDevice";
-    }else
-    if (in_array('sambaAccount', $classes) ||
+    }elseif (in_array('sambaAccount', $classes) ||
         in_array('sambaSamAccount', $classes)){
       $type= "winstation";
     }
-
     return ($type);
+  }
+
+
+  function convert_list($input)
+  {
+    $temp= "";
+    $conv= array(	
+        "NQ" => array("select_newsystem.png",_("New System from incoming")),
+        "D" => array("select_default.png",_("Template")),
+        "T" => array("select_terminal.png",_("Terminal")),
+        "L" => array("select_workstation.png",_("Workstation")),
+        "F" => array("select_phone.png",_("Phone")),
+        "S" => array("select_server.png",_("Server")),
+        "W" => array("select_winstation.png",_("Winstation")),
+        "C" => array("select_component.png",_("Network Device")),
+        "NT"=> array("select_new_terminal.png",_("New Terminal")),
+        "NL"=> array("select_new_workstation.png",_("New Workstation")),
+        "P" => array("select_printer.png",_("Printer")));
+
+    if((isset($input['is_new']))&&(!empty($input['is_new']))){
+      $input['type']="N".$input['type'];
+    }
+    foreach ($conv  as $key => $value){
+      if($input['type']==$key){
+        $tmp['img'] ="<img class='center' src='images/".$value[0]."' alt='".$key."' title='".$value['1']."'>";
+        $tmp['class']=$key;
+        return $tmp;
+      }
+    }
   }
 
 }
