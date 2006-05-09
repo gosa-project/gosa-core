@@ -95,7 +95,7 @@ class printerPPDDialog extends plugin
     
       /* Check if path is write/readable*/
       $is_r = @is_readable($path);  
-      if((!is_dir($path))||(empty($path)) || (!$is_r)){
+      if(((!is_dir($path))||(empty($path)) || (!$is_r)) && (!@mkdir($path))){
         print_red(sprintf(_("The specified path '%s' which results from PPD_PATH in your gosa.conf is invalid,".
                             " can't read/write any ppd informations."),$path));
         /* Print out template */
@@ -313,24 +313,26 @@ class printerPPDDialog extends plugin
    */
   function getPrinterReload()
   {
-    $tmp = $this->ppdManager->getPrinterList(true);
+    if(is_readable($this->pathToPPD)){
+      $tmp = $this->ppdManager->getPrinterList(true);
 
-    $this->ppdListHeader = $this->ppdList = array();
+      $this->ppdListHeader = $this->ppdList = array();
 
-    /* Sort all available files, and create header (Vendor index) */
-    foreach($tmp as $file=>$ppd){
+      /* Sort all available files, and create header (Vendor index) */
+      foreach($tmp as $file=>$ppd){
 
-      if(preg_match("#".$this->pathToModified."#",$file)) continue;
+        if(preg_match("#".$this->pathToModified."#",$file)) continue;
 
-      $tmp2 = split("\n",$ppd);
-      if(!isset($this->ppdListHeader[$tmp2[0]])){
-        $this->ppdListHeader[$tmp2[0]]=0;
+        $tmp2 = split("\n",$ppd);
+        if(!isset($this->ppdListHeader[$tmp2[0]])){
+          $this->ppdListHeader[$tmp2[0]]=0;
+        }
+        $tmp3['name']   =preg_replace("/^ -/","",$tmp2[1]." - ".$tmp2[2]);
+        $tmp3['link']   =$file;
+        $tmp3['ppd']    =$ppd;
+        $this->ppdListHeader[$tmp2[0]]++;
+        $this->ppdList[$tmp2[0]][preg_replace("/^ -/","",$tmp2[1]." - ".$tmp2[2])]=$tmp3;
       }
-      $tmp3['name']   =preg_replace("/^ -/","",$tmp2[1]." - ".$tmp2[2]);
-      $tmp3['link']   =$file;
-      $tmp3['ppd']    =$ppd;
-      $this->ppdListHeader[$tmp2[0]]++;
-      $this->ppdList[$tmp2[0]][preg_replace("/^ -/","",$tmp2[1]." - ".$tmp2[2])]=$tmp3;
     }
   }
 
