@@ -209,7 +209,7 @@ class MultiSelectWindow{
 				<tr>
 				<td>
 				<label for=\"".$regex['name']."\">
-				<img alt=\"".$regex['string']."\" src=\"images/search.png\" align=middle>
+				<img alt=\"".$regex['string']."\" src=\"".$regex['image']."\" align=middle>
 				</label>
 				</td>
 				<td width=\"99%\">
