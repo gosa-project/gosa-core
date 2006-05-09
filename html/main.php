@@ -47,10 +47,6 @@ ini_set("session.gc_maxlifetime",24*60*60);
 /* Remember everything we did after the last click */
 session_start ();
 
-if(ini_get("session.gc_maxlifetime")){
-  
-}
-
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
   @DEBUG (DEBUG_POST, __LINE__, __FUNCTION__, __FILE__, $_POST, "_POST");
 }
