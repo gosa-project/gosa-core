@@ -326,11 +326,8 @@ class MultiSelectWindow{
 	}
 
 	/* this function adds the sub-departments of the current tree to the list */
-	function AddDepartments($base = false)
+	function AddDepartments($base = false,$numtabs = 3)
 	{
-		
-		#FIXME the num of header cols must match the num of entry cols .	
-	
 		/* check for a valid base */
 		if(!$base){
 			if(!isset($_SESSION['CurrentMainBase'])){
@@ -383,11 +380,20 @@ class MultiSelectWindow{
 				}
 			}
 
+			
 			/* Add to divlist */
-			$field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
-			$field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
-			$field3 = array("string" => "&nbsp;", "attach" => "style='width:60px;border-right:0px;text-align:right;'");
-			$this->AddElement(array($field1,$field2,$field3));
+			$row = array();
+			$row[] = $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
+			$row[] = $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
+			$row[] = $field3 = array("string" => "&nbsp;", "attach" => "style='width:60px;border-right:0px;text-align:right;'");
+
+			if($numtabs > 3){	
+				for($i = 3 ; $i <= $numtabs;$i++){
+					$row[] = array("string"=>"&nbsp;");
+				}
+			}
+
+			$this->AddElement($row);
 		}
 	}
 }
