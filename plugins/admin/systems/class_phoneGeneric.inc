@@ -56,7 +56,7 @@ class phoneGeneric extends plugin
   function phonegeneric ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
-    $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
+    $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses, true);
 
     /* Set base */
     if ($this->dn == "new"){

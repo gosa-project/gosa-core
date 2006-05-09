@@ -28,7 +28,7 @@ Target for 2.4.1:
 
 * Auto-Resize for subdialogs
 
-* Fix fai objects to generate tags if needed (sub objects, phone me...)
+* Fix fai objects to generate tags if needed (sub objects)
 
 * Add macAddress replacement for tc's and servers, too
 

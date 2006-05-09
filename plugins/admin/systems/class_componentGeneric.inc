@@ -34,7 +34,7 @@ class componentGeneric extends plugin
     } else {
       $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,/", "", $this->dn);
     }
-    $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
+    $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses, true);
     /* Save dn for later references */
     $this->orig_dn= $this->dn;
   }
