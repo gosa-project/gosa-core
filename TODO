@@ -30,6 +30,10 @@ Target for 2.4.1:
 
 * Fix fai objects to generate tags if needed (sub objects, phone me...)
 
+* Add macAddress replacement for tc's and servers, too
+
+* What about unitTag's when moving objects?
+
 
 Target for 2.5:
 ===============

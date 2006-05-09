@@ -279,20 +279,13 @@ class phoneGeneric extends plugin
     $this->dn= "cn=".$this->cn.",ou=phones,ou=systems,".$this->base;
 
     /* To check for valid ip*/
-    $num="(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])";
-
-//    if(in_array("goFonDefaultIP",$this->usedattrs[$this->selected_categorie])){
-//      if (!preg_match("/^$num\\.$num\\.$num\\.$num$/", $this->goFonDefaultIP)){
-//       $message[]= _("Wrong IP format in field goFonDefaultIP.");
-//      }
-//    }
-    
-//    /* Check for valid number */
-//    if(in_array("goFonDefaultIP",$this->usedattrs[$this->selected_categorie])){
-//      if((strlen($this->goFonQualify))!=(strlen((int)($this->goFonQualify)))){
-//        $message[]= _("The given value for 'Response timeout' is not a valid number.");
-//      } 
-//    }
+    if($this->netConfigDNS->ipHostNumber == ""){
+       $message[]= _("The required field IP address is empty.");
+    } else {
+      if (!is_ip($this->netConfigDNS->ipHostNumber)){
+        $message[]= _("The field IP address contains an invalid address.");
+      }
+    }
 
     if ($this->cn == "" && chkacl ($this->acl, "cn") == ""){
       $message[]= _("The required field 'Phone name' is not set.");
@@ -385,7 +378,7 @@ class phoneGeneric extends plugin
 
       $ldap->cd($this->dn);
       $this->cleanup();
-$ldap->modify ($this->attrs); 
+      $ldap->modify ($this->attrs); 
 
       // $user_phone_reload   
       $ldap->cd ($this->config->current['BASE']); 

@@ -138,6 +138,15 @@ class componentGeneric extends plugin
       $message[]= _("The required field 'Component name' is not set.");
     }
 
+    /* To check for valid ip*/
+    if($this->netConfigDNS->ipHostNumber == ""){
+       $message[]= _("The required field IP address is empty.");
+    } else {
+      if (!is_ip($this->netConfigDNS->ipHostNumber)){
+        $message[]= _("The field IP address contains an invalid address.");
+      }
+    }
+
     $ui= get_userinfo();
     $acl= get_permissions ($this->dn, $ui->subtreeACL);
     $acl= get_module_permission($acl, "component", $this->dn);
