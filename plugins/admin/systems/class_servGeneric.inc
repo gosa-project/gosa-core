@@ -178,7 +178,7 @@ class servgeneric extends plugin
       unset($og->member[$this->dn]);
       $og->save ();
     }
-    $this->handle_post_events("remove");
+    $this->handle_post_events("remove", array("macAddress" => $this->netConfigDNS->macAddress));
   }
 
 

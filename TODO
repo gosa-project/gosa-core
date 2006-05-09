@@ -5,11 +5,9 @@ Target for 2.4.1:
 
 * saveFilter added, please use!
 
-* Added functions normalizePreg and normalizeLdap. Please use where needed!
-
 * generatePasteIcon added, please use!
 
-* Create a status-bar/-display for FAI installations 
+* Added functions normalizePreg and normalizeLdap. Please use where needed!
 
 * Add online help (english/german)
   Document how to generate it, generate it and check it in
@@ -28,9 +26,10 @@ Target for 2.4.1:
 
 * Auto-Resize for subdialogs
 
-* Fix fai objects to generate tags if needed (sub objects)
 
-* Add macAddress replacement for tc's and servers, too
+* Create a status-bar/-display for FAI installations 
+
+* Fix fai objects to generate tags if needed (sub objects)
 
 * What about unitTag's when moving objects?
 
