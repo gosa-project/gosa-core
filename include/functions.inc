@@ -1001,6 +1001,8 @@ function gen_locked_message($user, $dn)
   $ldap->cat ($user);
   $attrs= $ldap->fetch();
   $uid= $attrs["uid"][0];
+  $cn= $attrs["cn"][0];
+  $remove= false;
 
   //  print_a($_POST);
   //  print_a($_GET);
@@ -1028,7 +1030,12 @@ function gen_locked_message($user, $dn)
   /* Prepare and show template */
   $smarty= get_smarty();
   $smarty->assign ("dn", $dn);
-  $smarty->assign ("message", sprintf(_("You're going to edit the LDAP entry '%s' which appears to be used by '%s'. Please contact the person in order to clarify proceedings."), $dn, "<a href=\"main.php?plug=0&amp;viewid=$uid\">$uid</a>"));
+  if ($remove){
+    $smarty->assign ("action", _("Continue anyway"));
+  } else {
+    $smarty->assign ("action", _("Edit anyway"));
+  }
+  $smarty->assign ("message", sprintf(_("You're going to edit the LDAP entry '%s' which appears to be used by '%s'. Please contact the person in order to clarify proceedings."), "<b>".$dn."</b>", "<b><a href=\"main.php?plug=0&amp;viewid=$uid\">$cn</a></b>"));
 
   return ($smarty->fetch (get_template_path('islocked.tpl')));
 }

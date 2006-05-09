@@ -10,7 +10,7 @@
 </p>
 
 <p class="plugbottom">
-  <input type="submit" name="delete_lock" value="{t}Edit anyway{/t}">
+  <input type="submit" name="delete_lock" value="{$action}">
   &nbsp;
   <input type="submit" name="cancel_lock" value="{t}Cancel{/t}">
 </p>

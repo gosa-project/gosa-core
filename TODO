@@ -27,8 +27,6 @@ Target for 2.4.1:
 * Auto-Resize for subdialogs
 
 
-* Create a status-bar/-display for FAI installations 
-
 * Fix fai objects to generate tags if needed (sub objects)
 
 * What about unitTag's when moving objects?
@@ -40,15 +38,9 @@ Target for 2.5:
 * Asterisk : Create entry like this #309,1,PickupChan(SIP/rainer), 
 			 to allow others to pickup the phone by pressing # and number of the phone.
 
-* Rework group->application assignment.
-
 * Evaluate patches for certificate generation
 
 * Bug submitter
-
-* Fix translation mode
-
-* Gofon -Asterisk-database name should be defined in database tab, currently this setting is hard coded in class_config.inc
 
 * Complete PHP5 compliance and optimization
 
@@ -98,6 +90,4 @@ Target for 2.5:
 * Make IMAP namespace configurable
 
 * Try RDN style for unique names
-
-* Object Groups should have member tabs depending of the grouped object types
 

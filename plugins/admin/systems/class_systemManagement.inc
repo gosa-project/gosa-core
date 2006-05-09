@@ -580,7 +580,7 @@ class systems extends plugin
         if($oc['CLASS'] != ""){
           $filter = "(|(&".$userregex."(objectClass=".$oc['CLASS'].")(cn=".$this->DivListSystem->Regex.")))";
           $res = array_merge($res,get_list($filter,$this->ui->subtreeACL, $oc['TREE'].$base,
-                array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE));
+                array("cn", "description", "macAddress", "objectClass", "sambaDomainName", "FAIstate"), GL_NONE));
         }
       } 
     }
@@ -639,12 +639,18 @@ class systems extends plugin
             $terminal['location'] = array_search($tmp, $this->config->departments);
             $terminal['message']  = _("Workstation template for");
           }
+          if (isset($value["FAIstate"][0])){
+            $terminal['type']= $this->getState($terminal['type'], $value["FAIstate"][0]);
+          }
         } elseif (in_array('gotoPrinter', $value["objectClass"])){
           $terminal             = $value;
           $terminal['type']     = "P";
         } elseif (in_array('goServer', $value["objectClass"])){
           $terminal             = $value;
           $terminal['type']     = "S";
+          if (isset($value["FAIstate"][0])){
+            $terminal['type']= $this->getState($terminal['type'], $value["FAIstate"][0]);
+          }
         } elseif (in_array('goFonHardware', $value["objectClass"])){
           $terminal             = $value;
           $terminal['type']     = "F";
@@ -723,8 +729,14 @@ class systems extends plugin
         "D" => array("select_default.png",_("Template")),
         "T" => array("select_terminal.png",_("Terminal")),
         "L" => array("select_workstation.png",_("Workstation")),
+        "GL" => array("select_workstation_green.png",_("Workstation is installing")),
+        "YL" => array("select_workstation_yellow.png",_("Workstation is waiting for action")),
+        "RL" => array("select_workstation_red.png",_("Workstation installation failed")),
         "F" => array("select_phone.png",_("Phone")),
         "S" => array("select_server.png",_("Server")),
+        "GS" => array("select_server_green.png",_("Server is installing")),
+        "YS" => array("select_server_yellow.png",_("Server is waiting for action")),
+        "RS" => array("select_server_red.png",_("Server installation failed")),
         "W" => array("select_winstation.png",_("Winstation")),
         "C" => array("select_component.png",_("Network Device")),
         "NT"=> array("select_new_terminal.png",_("New Terminal")),
@@ -741,6 +753,31 @@ class systems extends plugin
         return $tmp;
       }
     }
+  }
+
+  
+  function getState($type, $state)
+  {
+    switch (preg_replace('/:.*$/', '', $state)) {
+      case 'installing':
+                $type= 'G'.$type;
+                break;
+      case 'error':
+                $type= 'R'.$type;
+                break;
+      case 'install':
+                $type= 'Y'.$type;
+                break;
+      case 'sysinfo':
+                $type= 'Y'.$type;
+                break;
+      case 'softupdate':
+                $type= 'Y'.$type;
+                break;
+    }
+
+
+    return ($type);
   }
 
 }
