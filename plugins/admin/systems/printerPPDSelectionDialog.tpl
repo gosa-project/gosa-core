@@ -41,8 +41,6 @@
 </table>
 
 <p class="plugbottom">
-<input type="submit" name="SavePPDSelection" value="{t}Select{/t}">
-  &nbsp;
 <input type="submit" name="ClosePPDSelection" value="{t}Close{/t}">
 </p>
 <!--

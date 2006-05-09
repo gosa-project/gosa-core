@@ -76,7 +76,6 @@ class printerPPDDialog extends plugin
   }
 
 
-
   function execute()
   {
     /* Call parent execute */
@@ -105,6 +104,8 @@ class printerPPDDialog extends plugin
       }
     }
 
+    // PPD selection / upload / dialog handling 
+
     /* Is there a new PPD file uploaded ? */
     if((isset($_FILES['NewPPDFile']))&&(isset($_POST['SubmitNewPPDFile']))){
       $file = ($_FILES['NewPPDFile']);
@@ -117,31 +118,15 @@ class printerPPDDialog extends plugin
       }
     }
 
-
-    /* Open a dialog that allow us to select different PPDs
-     */
+    /* Open a dialog that allow us to select different PPDs */
     if(isset($_POST['SelectPPD'])){
       $this->dialog= new printerPPDSelectionDialog($this->config,$this->dn,$this->ppdList,$this->ppdListHeader,$this->selectedPPD);
     }
 
-    /* The selection dialog fpr PPDs is canceled
-     */
+    /* The selection dialog fpr PPDs is canceled */
     if(isset($_POST['ClosePPDSelection'])){
       unset($this->dialog);
       $this->dialog=NULL;
-    }
-
-    /* A new PPDs was selected in the PPDs selection Dialog
-     * Perform a Check. If everything is fine, use the new PPD.
-     */
-    if(isset($_POST['SavePPDSelection'])){
-      if(!isset($_POST['PPDselection'])){
-        print_red(_("Please select a valid ppd."));
-      }else{
-        $this->SelectPPD($_POST['PPDselection']);
-        unset($this->dialog);
-        $this->dialog=NULL;
-      }
     }
 
     /* Div Selection */ 
@@ -152,12 +137,13 @@ class printerPPDDialog extends plugin
 
     }
 
-    /* if a dialog is open, print the dialog instead of this class
-     */
+    /* if a dialog is open, print the dialog instead of this class */
     if($this->dialog!=NULL){
       $display = $this->dialog->execute();
       return($display);
     }
+
+    // ENDE  PPD selection / upload / dialog handling 
 
     /* Give smarty the information it needs */
     $smarty->assign("ppdString" ,$this->getPPDInformation());
@@ -373,12 +359,14 @@ class printerPPDDialog extends plugin
     }
   }
 
+
   /* Return selected ppd path, if none is selected then false */
   function save()
   {
     /* return the selected PPD, and in future the selected options too */
     return($this->pathToModified.$this->selectedPPD['link']);
   }
+
 
   /* Get Information for a single PPD entry 
    * This will be shown on top of template
@@ -391,6 +379,7 @@ class printerPPDDialog extends plugin
     }
     return($str) ; 
   }
+
 
   /* Display all options from the selected ppd file */
   function generateProperties()
@@ -425,7 +414,6 @@ class printerPPDDialog extends plugin
 
         /* Add attributes of the current category */
         foreach($obj as $attr => $settings){
-
 
           /* Skip all entries beginning with _ */
           if($attr[0] == "_") continue;  
