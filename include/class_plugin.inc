@@ -852,38 +852,51 @@ class plugin
   function handle_object_tagging($dn= "", $tag= "")
   {
     /* Skip if nothing has changed */
-    if (!$this->is_modified){
+    if ($dn == "" && !$this->is_modified){
       return;
     }
   
     /* No dn? Self-operation... */
     if ($dn == ""){
       $dn= $this->dn;
-    }
     
-    /* No tag? Find it yourself... */
-    if ($tag == ""){
-      $len= strlen($this->dn);
-      $fix= true;
-      foreach ($this->config->adepartments as $key => $tag){
-        /* This one is shorter than our dn, its not relevant... */
-        if ($len >= strlen($key)){
-          continue;
+      /* No tag? Find it yourself... */
+      if ($tag == ""){
+        $len= strlen($dn);
+
+        echo "No tag for $dn - looking for one...<br>";
+        $relevant= array();
+        foreach ($this->config->adepartments as $key => $ntag){
+
+          /* This one is bigger than our dn, its not relevant... */
+          if ($len <= strlen($key)){
+            continue;
+          }
+
+          /* This one matches with the latter part. Break and don't fix this entry */
+          if (preg_match('/(^|,)'.normalizePreg($key).'$/', $dn)){
+            echo "Possibly relevant: $key<br>";
+            $relevant[strlen($key)]= $ntag;
+            continue;
+          }
+
         }
 
-        /* This one matches with the latter part. Break and don't fix this entry */
-        if (preg_match('/(^|,)'.normalizePreg($key).'$/', $dn)){
-          $fix= false;
-          break;
+        /* If we've some relevant tags to set, just get the longest one */
+        if (count($relevant)){
+          ksort($relevant);
+          $tmp= array_keys($relevant);
+          $idx= end($tmp);
+          $tag= $relevant[$idx];
+          $this->gosaUnitTag= $tag;
         }
       }
-      $this->gosaUnitTag= $tag;
     }
  
 
     /* Set tag? */
     if ($tag != ""){
-      #echo "Add tagging ($tag) to $dn.<br>";
+      echo "Add tagging ($tag) to $dn.<br>";
 
       /* Set objectclass and attribute */
       $ldap= $this->config->get_ldap_link();
@@ -904,7 +917,7 @@ class plugin
         print_red($ldap->get_error());
       }
     } else {
-      #echo "Remove tagging from $dn.<br>";
+      echo "Remove tagging from $dn.<br>";
 
       /* Remove objectclass and attribute */
       $ldap= $this->config->get_ldap_link();
