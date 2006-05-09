@@ -96,6 +96,7 @@ class systems extends plugin
     if(isset($_POST['SystemTypeChoosen'])){
       $s_action = "SelectedSystemType";
       $s_entry  = $_POST['SystemType'];
+      $_SESSION['SelectedSystemType']['ogroup'] = $_POST['ObjectGroup'];
       $this->systab = NULL;
     }
 
@@ -408,6 +409,7 @@ class systems extends plugin
          * If this is done, delete the old incoming entry... it is still there, because this is a new 
          * entry and not an edited one, so we will delete it.
          */
+
         if(isset($_SESSION['SelectedSystemType'])){
           $SelectedSystemType= $_SESSION['SelectedSystemType'];
           unset($_SESSION['SelectedSystemType']);
@@ -415,8 +417,8 @@ class systems extends plugin
             $og = new ogroup($this->config,$SelectedSystemType['ogroup']);
             if($og){
               $og->AddDelMembership($this->systab->dn);
+              $og->save();
             }
-            $og->save();
           }
           if(!isset($ldap)){
             $ldap = $this->config->get_ldap_link();
