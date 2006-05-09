@@ -49,20 +49,7 @@ class printerPPDDialog extends plugin
       /* Load all available PPD files and sort them into an array */
       require_once ("class_ppdManager.inc");
       $this->ppdManager= new ppdManager($this->pathToPPD);
-      $tmp = $this->ppdManager->getPrinterList();
-
-      /* Sort all available files, and create header (Vendor index) */
-      foreach($tmp as $file=>$ppd){
-        $tmp2 = split("\n",$ppd);
-        if(!isset($this->ppdListHeader[$tmp2[0]])){
-          $this->ppdListHeader[$tmp2[0]]=0;
-        }
-        $tmp3['name']   =preg_replace("/^ -/","",$tmp2[1]." - ".$tmp2[2]);
-        $tmp3['link']   =preg_replace("/".str_replace("/","\/",$this->pathToPPD)."/i","",$file);
-        $tmp3['ppd']    =$ppd;
-        $this->ppdListHeader[$tmp2[0]]++;
-        $this->ppdList[$tmp2[0]][preg_replace("/^ -/","",$tmp2[1]." - ".$tmp2[2])]=$tmp3;
-      }
+      $this->getPrinterReload ();
 
       /* The user has already a valid PPD assigned
        * Get some informations about this PPD
