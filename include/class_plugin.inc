@@ -935,18 +935,22 @@ class plugin
         echo "DEBUG: $dn is not tagged<br>";
         return;
       }
-      echo "DEBUG: Remove tagging from $dn.<br>";
-      $nattrs= array("gosaUnitTag" => array());
-      $nattrs['objectClass']= array();
-      for ($i= 0; $i<$attrs['objectClass']['count']; $i++){
-        $oc= $attrs['objectClass'][$i];
-        if ($oc != "gosaAdministrativeUnitTag"){
-          $nattrs['objectClass'][]= $oc;
+      if (count($attrs)){
+        echo "DEBUG: Remove tagging from $dn.<br>";
+        $nattrs= array("gosaUnitTag" => array());
+        $nattrs['objectClass']= array();
+        for ($i= 0; $i<$attrs['objectClass']['count']; $i++){
+          $oc= $attrs['objectClass'][$i];
+          if ($oc != "gosaAdministrativeUnitTag"){
+            $nattrs['objectClass'][]= $oc;
+          }
         }
+        $ldap->cd($dn);
+        $ldap->modify($nattrs);
+        show_ldap_error($ldap->get_error());
+      } else {
+        echo "DEBUG: not removing tag ($tag) $dn - seems to have moved away<br>";
       }
-      $ldap->cd($dn);
-      $ldap->modify($nattrs);
-      show_ldap_error($ldap->get_error());
     }
     
   }
