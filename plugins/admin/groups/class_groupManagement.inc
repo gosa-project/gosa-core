@@ -24,7 +24,6 @@ class groupManagement extends plugin
   /* Definitions */
   var $plHeadline= "Groups";
   var $plDescription= "This does something";
-  var $departments = array();
 
   /* Dialog attributes */
   var $grouptab= NULL;
@@ -33,6 +32,9 @@ class groupManagement extends plugin
   var $acl= "";
 
   var $CopyPasteHandler  = NULL;
+  var $DivListGroup      = NULL;
+
+  var $ShowPrimaryCheckBox = false; 
 
   function groupManagement ($config, $ui)
   {
@@ -40,27 +42,21 @@ class groupManagement extends plugin
     $this->config= $config;
     $this->ui= $ui;
 
+    /* Copy & Paste enabled ?*/
     if((isset($this->config->data['MAIN']['ENABLECOPYPASTE']))&&(preg_match("/true/i",$this->config->data['MAIN']['ENABLECOPYPASTE']))){
       $this->CopyPasteHandler = new CopyPasteHandler($this->config);
     }
 
-    /* Get global filter config */
-    if (!is_global("groupfilter")){
-      $base= get_base_from_people($ui->dn);
-      $groupfilter= array("primarygroups" => "checked",
-          "mailgroups" => "checked",
-          "sambagroups" => "checked",
-          "appgroups" => "checked",
-          "functionalgroups" => "checked",
-          "guser" => "*",
-          "subsearch" => "",
-          "regex" => "*");
-      register_global("groupfilter", $groupfilter);
+    /* Detect if we have to display the primary group checkbox */
+    if (isset($this->config->data['MAIN']['NOPRIMARYGROUP'])){
+      $this->ShowPrimaryCheckBox = false;
+    } else {
+      $this->ShowPrimaryCheckBox = true;
     }
-    if(!isset($_SESSION['CurrentMainBase'])){
-      $base = get_base_from_people($ui->dn);
-      $_SESSION['CurrentMainBase'] = $base; 
-    }
+
+    /* Create dialog object */
+    $this->DivListGroup = new divListGroup($this->config,$this);
+    $this->DivListGroup->DisableCheckBox("ShowPrimaryGroups",$this->ShowPrimaryCheckBox);
   }
 
   function execute()
@@ -68,43 +64,12 @@ class groupManagement extends plugin
   	/* Call parent execute */
   	plugin::execute();
 
+    /* Store these posts if the current object is locked (used by somebody else)*/
     $_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/");
 
     /* Save data */
-    $groupfilter= get_global("groupfilter");
     $s_action   = "";
     $s_entry    = "";
-
-    if (!isset($this->grouptab)){
-      foreach( array( "guser", "regex") as $type){
-        if (isset($_POST[$type])){
-          $groupfilter[$type]= $_POST[$type];
-        } 
-      }
-      if(isset($_POST['CurrentMainBase'])){
-        $_SESSION['CurrentMainBase'] = $_POST['CurrentMainBase'];
-      }
-      if (isset($_POST['regex'])){
-        foreach( array("primarygroups", "sambagroups", "mailgroups", "appgroups",
-              "functionalgroups", "subsearch") as $type){
-
-          if (isset($_POST[$type])) {
-            $groupfilter[$type]= "checked";
-          } else {
-            $groupfilter[$type]= "";
-          }
-        }
-      }
-      if (isset($_GET['search'])){
-        $s= mb_substr($_GET['search'], 0, 1, "UTF8")."*";
-        if ($s == "**"){
-          $s= "*";
-        }
-        $groupfilter['regex']= $s;
-      }
-      register_global("groupfilter", $groupfilter);
-    }
-
 
     /* Test Posts */
     foreach($_POST as $key => $val){
@@ -117,8 +82,6 @@ class groupManagement extends plugin
         $s_action="edit";
         $s_entry  = preg_replace("/group_".$s_action."_/i","",$key);
         // Post for new
-      }elseif(preg_match("/^dep_back.*/i",$key)){
-        $s_action="back";
       }elseif(preg_match("/^group_new.*/",$key)){
         $s_action="new";
       }elseif(preg_match("/^dep_home.*/i",$key)){
@@ -128,8 +91,6 @@ class groupManagement extends plugin
       }elseif(preg_match("/^group_chgpw.*/i",$key)){
         $s_action="change_pw";
         $s_entry  = preg_replace("/group_chgpw_/i","",$key);
-      }elseif(preg_match("/^dep_root.*/i",$key)){
-        $s_action="root";
       }elseif(preg_match("/_group_edit_/",$key)){
         $type = preg_replace("/_group_edit_.*$/","",$key);
         $s_action="edit";
@@ -147,58 +108,17 @@ class groupManagement extends plugin
     }
     $s_entry  = preg_replace("/_.$/","",$s_entry); 
 
-    /* Start for New List Managment */
-    if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
-      $s_action="open";
-      $s_entry = base64_decode($_GET['dep_id']);
-      $_SESSION['CurrentMainBase']= "".$this->config->departments[trim($s_entry)];
+    /* Check for posted gets */
+    if((isset($_GET['act'])) && ($_GET['act'] == "edit_entry")){
+      $s_entry    = $_GET['id'];
+      $s_action = "edit";
     }
-
-    // Edit if
-    if((isset($_GET['act']))&&($_GET['act']=="edit_entry")){
-      $s_action ="edit";
-      $s_entry  = $_GET['id'];
-    }
-
-    /* Department changed? */
-    if(isset($_POST['CurrentMainBase']) && $_POST['CurrentMainBase']){
-      $_SESSION['CurrentMainBase']= $_POST['CurrentMainBase'];
-    }
-
-    /* Homebutton is posted */
-    if($s_action=="home"){
-      //FIXME: This will not work if we've no subdirs (like i.e. ou=people)? See
-      //       class_userManagement.inc for a fix.
-      $_SESSION['CurrentMainBase']= (preg_replace("/^[^,]+,/","",$this->ui->dn));
-      $_SESSION['CurrentMainBase']= (preg_replace("/^[^,]+,/","",$_SESSION['CurrentMainBase']));
-    }
-
-    if($s_action=="root"){
-      $_SESSION['CurrentMainBase']=($this->config->current['BASE']);
-    }
-
-    /* If Backbutton is Posted */
-    if($s_action == "back"){
-      $base_back= preg_replace("/^[^,]+,/","",$_SESSION['CurrentMainBase']);
-      $base_back= convert_department_dn($base_back);
-
-      if(isset($this->config->departments[trim($base_back)])){
-        $_SESSION['CurrentMainBase']= $this->config->departments[trim($base_back)];
-      }else{
-        $_SESSION['CurrentMainBase']= $this->config->departments["/"];
-      }
-    }
-    register_global("groupfilter", $groupfilter);
 
     $smarty= get_smarty();
 
-    /* Prepare formular */
-    $this->reload();
-
-    /* Check for exeeded sizelimit */
-    if (($message= check_sizelimit()) != ""){
-      return($message);
-    }
+    /********************
+      Copy & Paste Handling  ...
+     ********************/
 
     /* Only perform copy&paste requests if it is enabled
      */
@@ -208,6 +128,11 @@ class groupManagement extends plugin
       }
     }
 
+
+    /********************
+      Create a new group  ...
+     ********************/
+
     /* New group? */
     if ($s_action=="new"){
 
@@ -216,45 +141,39 @@ class groupManagement extends plugin
       $this->dn= "new";
 
       /* Create new usertab object */
-      $this->grouptab= new grouptabs($this->config,
-          $this->config->data['TABS']['GROUPTABS'], $this->dn);
+      $this->grouptab= new grouptabs($this->config, $this->config->data['TABS']['GROUPTABS'], $this->dn);
+
       /* Set up the users ACL's for this 'dn' */
-      $acl= get_permissions ($_SESSION['CurrentMainBase'], $this->ui->subtreeACL);
+      $acl= get_permissions ($this->DivListGroup->selectedBase, $this->ui->subtreeACL);
       $this->grouptab->set_acl($acl);
     }
 
-    /* Cancel dialogs */
-    if (isset($_POST['edit_cancel']) || isset($_POST['password_cancel'])){
-      del_lock ($this->grouptab->dn);
-      unset ($this->grouptab);
-      $this->grouptab= NULL;
-      unset($_SESSION['objectinfo']);
-    }
+
+    /********************
+      Save Group Tab/Object Changes
+     ********************/
 
     /* Finish group edit is triggered by the tabulator dialog, so
        the user wants to save edited data. Check and save at this
        point. */
     if ((isset($_POST['edit_finish'])) && (isset($this->grouptab->config)) ){
 
-      /* Check tabs, will feed message array */
+      /* Check tabs, will feed message array 
+         Save, or display error message? */
       $message= $this->grouptab->check();
-
-      /* Save, or display error message? */
       if (count($message) == 0){
 
         /* Save user data to ldap */
         $this->grouptab->save();
         gosa_log ("Group object'".$this->dn."' has been saved");
 
-        /* Group has been saved successfully, remove lock from
-           LDAP. */
+        /* Group has been saved successfully, remove lock from LDAP. */
         if ($this->dn != "new"){
           del_lock ($this->dn);
         }
 
-        /* There's no page reload so we have to read new users at
-           this point. */
-        $this->reload ();
+        /* There's no page reload so we have to read new users at this point. */
+        //$this->reload ();
         unset ($this->grouptab);
         $this->grouptab= NULL;
         unset ($_SESSION['objectinfo']);
@@ -266,37 +185,41 @@ class groupManagement extends plugin
       }
     }
 
+
+    /********************
+      Edit existing group 
+     ********************/
+
     /* User wants to edit data? */
     if (($s_action=="edit") && (!isset($this->grouptab-> config))){
 
       /* Get 'dn' from posted 'uid', must be unique */
       $this->dn= $this->grouplist[trim($s_entry)]['dn'];
 
-      /* Check locking, save current plugin in 'back_plugin', so
-         the dialog knows where to return. */
-
+      /* Check locking & lock entry if required */
       $user = get_lock($this->dn);
-
       if ($user != ""){
         return(gen_locked_message ($user, $this->dn));
       }
-
-      /* Lock the current entry, so everyone will get the
-         above dialog */
       add_lock ($this->dn, $this->ui->dn);
 
       /* Set up the users ACL's for this 'dn' */
       $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
 
       /* Register grouptab to trigger edit dialog */
-      $this->grouptab= new grouptabs($this->config,
-          $this->config->data['TABS']['GROUPTABS'], $this->dn);
+      $this->grouptab= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $this->dn);
       $this->grouptab->set_acl($acl);
       $_SESSION['objectinfo']= $this->dn;
     }
 
-    /* Remove user was requested */
+
+    /********************
+      Delete group 
+     ********************/
+
+    /* Remove group was requested */
     if ($s_action=="del"){
+
       /* Get 'dn' from posted 'uid' */
       $this->dn= $this->grouplist[trim($s_entry)]['dn'];
 
@@ -316,13 +239,18 @@ class groupManagement extends plugin
         add_lock ($this->dn, $this->ui->dn);
         $smarty->assign("info", sprintf(_("You're about to delete the group '%s'."), @LDAP::fix($this->dn)));
         return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
-      } else {
 
-        /* Obviously the user isn't allowed to delete. Show message and
-           clean session. */
+      } else {
+        
+        /* Obviously the user isn't allowed to delete. Show message and clean session. */
         print_red (_("You are not allowed to delete this group!"));
       }
     }
+
+
+    /********************
+      Delete group confirmed  
+     ********************/
 
     /* Confirmation for deletion has been passed. Group should be deleted. */
     if (isset($_POST['delete_group_confirm'])){
@@ -332,8 +260,7 @@ class groupManagement extends plugin
       if (chkacl($this->acl, "delete") == ""){
 
         /* Delete request is permitted, perform LDAP action */
-        $this->grouptab= new grouptabs($this->config,
-            $this->config->data['TABS']['GROUPTABS'], $this->dn);
+        $this->grouptab= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $this->dn);
         $this->grouptab->set_acl(array($this->acl));
         $this->grouptab->delete ();
         gosa_log ("Group object'".$this->dn."' has been removed");
@@ -341,7 +268,8 @@ class groupManagement extends plugin
         $this->grouptab= NULL;
 
         /* Group list has changed, reload it. */
-        $this->reload ();
+        //$this->reload ();
+
       } else {
 
         /* Normally this shouldn't be reached, send some extra
@@ -356,11 +284,33 @@ class groupManagement extends plugin
     }
 
 
+    /********************
+      Delete group canceled  
+     ********************/
+
     /* Delete group canceled? */
     if (isset($_POST['delete_cancel'])){
       del_lock ($this->dn);
       unset($_SESSION['objectinfo']);
     }
+    
+
+    /********************
+      A dialog was canceled  
+     ********************/
+
+    /* Cancel dialogs */
+    if (isset($_POST['edit_cancel']) || isset($_POST['password_cancel'])){
+      del_lock ($this->grouptab->dn);
+      unset ($this->grouptab);
+      $this->grouptab= NULL;
+      unset($_SESSION['objectinfo']);
+    }
+
+
+    /********************
+      If there is currently a dialog open, display it
+     ********************/
 
     /* Show tab dialog if object is present */
     if (isset($this->grouptab->config)){
@@ -377,333 +327,140 @@ class groupManagement extends plugin
       return ($display);
     }
 
-    /* Prepare departments */
-    $options= "";
-    foreach ($this->config->idepartments as $key => $value){
-            if ($_SESSION['CurrentMainBase'] == $key){
-                    $options.= "<option selected value='$key'>$value</option>";
-            } else {
-                    $options.= "<option value='$key'>$value</option>";
-            }
+    /* Display dialog with group list */
+    $this->DivListGroup->execute();
+
+    /* Add departments if subsearch is disabled */
+    if(!$this->DivListGroup->SubSearch){
+      $this->DivListGroup->AddDepartments($this->DivListGroup->selectedBase,4);
     }
-
-    /* Create paste icon 
-     */
-    if($this->CopyPasteHandler){
-      $Copy_Paste = " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;";
-      if($this->CopyPasteHandler->isCurrentObjectPastAble()){
-        if($this->CopyPasteHandler->isCurrentCutted()){
-          $img = "images/cutpaste.png";
-        }else{
-          $img = "images/copypaste.png";
-        }
-        $Copy_Paste .= "<input type='image' name='editPaste' class='center'
-          src='".$img."' alt='"._("Paste")."' title='".$this->CopyPasteHandler->GetCurrentDn()."'>&nbsp;";
-      }else{
-        $Copy_Paste .= "<img class='center' src='images/cant_editpaste.png' alt='"._("Can't paste")."'>&nbsp;";
-      }
-    }else{
-      $Copy_Paste ="";
-    }
-
-    // Managment
-    $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
-      " <input type='image' class='center' src='images/list_root.png' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
-      " <input type='image' class='center' src='images/list_back.png' title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
-      " <input type='image' class='center' src='images/list_home.png' title='"._("Go to users department")."' alt='"._("Home")."' name='dep_home'>&nbsp;".
-      " <input class='center' type='image' src='images/list_reload.png' align='middle' title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-      " <img class='center' src='images/list_seperator.png' alt='' height='16' width='1'>&nbsp;".
-      " <input type='image' class='center' src='images/list_new_group.png' title='"._("Create new group")."' alt='"._("New")."' name='group_new'>&nbsp;".
-      $Copy_Paste.
-      " <img class='center' src='images/list_seperator.png' alt='' height='16' width='1'>&nbsp;".
-      _("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
-       " <input type='image' class='center' src='images/list_submit.png' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-      "</div>";
-
-    
-    if($this->CopyPasteHandler){
-      $actions = "<input class='center' type='image'
-        src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
-      $actions.= "<input class='center' type='image'
-        src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
-      $actions.= "<input class='center' type='image' 
-        src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
-      $actions.= "<input class='center' type='image' 
-        src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
-    }else{
-      $actions = "<input class='center' type='image' 
-        src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
-      $actions.= "<input class='center' type='image' 
-        src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
-    }
-
-
-    // Defining Links
-    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
-
-    // image Buttons 
-    $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
-    $userimg  = "<img class='center' src='images/select_groups.png' alt='User'    title='%s'>";
-
-    /* Assign extension images */
-    $posiximg = "<input type='image' class='center' src='images/select_groups.png' 
-                 name='group_group_edit_%KEY%' 
-                 alt='P'  title='"._("Posix")  ."'>";
-    $mailimg  = "<input type='image' class='center' src='images/mailto.png'            
-                 name='mailgroup_group_edit_%KEY%' 
-                  alt='M'  title='"._("Mail")   ."'>";
-    $sambaimg = "<input type='image'  class='center' src='images/select_winstation.png'  
-                 name='group_group_edit_%KEY%' 
-                  alt='S'  title='"._("Samba")  ."'>";
-    $applimg  = "<input type='image'  class='center' src='images/select_application.png' 
-                 name='appgroup_group_edit_%KEY%' 
-                  alt='A'  title='"._("Application")."'>"; 
-    $phoneimg = "<input type='image'  class='center' src='images/select_phone.png'      
-                 name='group_group_edit_%KEY%' 
-                  alt='Ph' title='"._("Phone")  ."'>"; 
-    $envimg   = "<input type='image'  class='center' src='images/smallenv.png'      
-                 name='environment_group_edit_%KEY%' 
-                  alt='E' title='"._("Environment")  ."'>"; 
-
-    // Space
-    $empty    = "<img class='center' src='images/empty.png' style='width:16px;height:16px;' alt=''>";
-
-    $divlist = new divlist("groupstab");
-    $divlist->SetHeader(array(
-          array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
-          array("string" => _("Groupname")." / "._("Department"), "attach" => "style=''"),
-          array("string" => _("Properties"), "attach" => "style='width:136px;'"),
-          array("string" => _("Actions"), "attach" => "style='width:80px;border-right:0px;text-align:right;'")
-          ));
-
-    $divlist->SetSummary(_("This table displays all groups, in the selected tree."));
-    $divlist->SetEntriesPerPage(0);
-
-    foreach($this->departments as $key=> $val){
-
-      if(!isset($this->config->departments[trim($key)])){
-        $this->config->departments[trim($key)]="";
-      }
-
-      $non_empty="";
-      $keys= str_replace("/","\/",$key);
-      foreach($this->config->departments as $keyd=>$vald ){
-        if(preg_match("/".$keys."\/.*/",$keyd)){
-          $non_empty="full";
-        }
-      }
-
-
-      $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
-      $field3 = array("string" => "&nbsp;", "attach" => "style='width:136px;'");
-      $field4 = array("string" => "&nbsp;", "attach" => "style='width:80px;border-right:0px;text-align:right;'");
-
-      $divlist->AddEntry(array($field1,$field2,$field3,$field4));
-    }
-
-    foreach($this->grouplist as $key => $val){
-
-      $posix=$mail=$samba=$appl=$phone=$enviro=$empty;
-
-      if(isset($val['objectClass'])){
-        if(in_array("posixGroup",           $val['objectClass']))   $posix = $posiximg;
-        if(in_array("gosaMailAccount",      $val['objectClass']))   $mail  = $mailimg;
-        if(in_array("sambaGroupMapping",    $val['objectClass']))   $samba = $sambaimg;
-        if(in_array("gosaApplicationGroup", $val['objectClass']))   $appl  = $applimg;
-        if(in_array("goFonPickupGroup",     $val['objectClass']))   $phone = $phoneimg;
-        if(in_array("gotoEnvironment",      $val['objectClass']))   $enviro= $envimg;
-      }
-
-      $title = "title='dn:&nbsp;".@LDAP::fix($val['dn'])."'";
-
-      if(!isset($val['description'][0])){
-        $desc = "";
-      }else{
-        $desc = " - [ ".$val['description'][0]." ]";
-      } 
-    
-      /* FAIrelease tag from groupApplications */    
-      if(isset($val['FAIrelease'][0])){
-        $desc .= " (".$val['FAIrelease'][0].")";
-      }
- 
-      $field1 = array("string" => sprintf($userimg,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)), "attach" => "style='' ".$title);
-      $field3 = array("string" => preg_replace("/%KEY%/", $key, $posix."&nbsp;".$enviro."&nbsp;".$mail."&nbsp;".$samba."&nbsp;".$appl."&nbsp;".$phone), "attach" => "style='width:136px;'");  
-      $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:80px;border-right:0px;text-align:right;'");
-      
-      $divlist->AddEntry(array($field1,$field2,$field3,$field4));    
-    }
-
-    /* Show main page */
-    $smarty->assign("grouplisthead", $listhead);
-    $smarty->assign("grouplist", $divlist->DrawList());
-    $smarty->assign("search_image", get_template_path('images/search.png'));
-    $smarty->assign("searchu_image", get_template_path('images/search_user.png'));
-    $smarty->assign("tree_image", get_template_path('images/tree.png'));
-    $smarty->assign("infoimage", get_template_path('images/info.png'));
-    $smarty->assign("launchimage", get_template_path('images/launch.png'));
-    $smarty->assign("deplist", $this->config->idepartments);
-    foreach( array("guser", "regex", "primarygroups", "mailgroups","appgroups", "sambagroups", "functionalgroups", "subsearch") as $type){
-      $smarty->assign("$type", $groupfilter[$type]);
-    }
-
-    /* Extend if we are not using javascript */
-    $smarty->assign("apply", apply_filter());
-    $smarty->assign("alphabet", generate_alphabet());
-    $smarty->assign("hint", print_sizelimit_warning());
-    if (isset($this->config->data['MAIN']['NOPRIMARYGROUP'])){
-      $smarty->assign("showprimary", "");
-    } else {
-      $smarty->assign("showprimary", "true");
-    }
-
-    return($smarty->fetch(get_template_path('headpage.tpl', TRUE)));
+    $this->reload ();
+    $this->DivListGroup->setEntries($this->grouplist);
+    return($this->DivListGroup->Draw());
   }
 
   function reload($CreatePosixsList=false)
   {
-    /* Get config */
-    $groupfilter= get_global('groupfilter');
+    $this->grouplist        = array();
+    $primaries              = array();
+    $functional             = array();
+    $error= $error2         = "";
+    $filter                 = "(objectclass=posixGroup)";
 
-    /* Set base for all searches */
-    $base= $_SESSION['CurrentMainBase'];
+    $base                   = $this->DivListGroup->selectedBase;
+    $Regex                  = $this->DivListGroup->Regex;
+    $UserRegex              = $this->DivListGroup->UserRegex;
+    $SubSearch              = $this->DivListGroup->SubSearch;
+    $ShowPrimaryGroups      = $this->DivListGroup->ShowPrimaryGroups;
+    $ShowSambaGroups        = $this->DivListGroup->ShowSambaGroups;
+    $ShowApplicationGroups  = $this->DivListGroup->ShowApplicationGroups;
+    $ShowMailGroups         = $this->DivListGroup->ShowMailGroups;
+    $ShowFunctionalGroups   = $this->DivListGroup->ShowFunctionalGroups;
 
-    /* Regex filter? */
-    if ($groupfilter['regex'] != ""){
-      $regex= $groupfilter['regex'];
-    } else {
-      $regex= "*";
+    /* Prepare ldap class */
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd($base);
+
+
+    /********************
+      Create filter depending on selected checkboxes 
+     ********************/
+
+    /* Add Mail Groups */
+    if ($ShowMailGroups){
+      $filter.= "(objectClass=gosaMailAccount)";
     }
 
-    /* User filter? */
-    $filter= "(objectclass=posixGroup)";
-    $error= "";
-    $error2= "";
-    $this->grouplist= array();
+    /* Add application groups */
+    if ($ShowApplicationGroups){
+      $filter.= "(objectClass=gosaApplicationGroup)";
+    }
 
-    /* What are primary groups? */
-    $primaries= array();
-    $ldap= $this->config->get_ldap_link();
-    if (!isset($this->config->data['MAIN']['NOPRIMARYGROUP'])){
-      $ldap->cd($base);
-      $ldap->search("(&(uid=$regex)(!(uid=*$))(objectClass=posixAccount)(gidNumber=*))", array("gidNumber", "cn"));
+    /*
+       #FIXME Why is "sfilter" or "filter" set ?
+        Please verify && add comment 
+     */
+    $sfilter= "";
+    if ($this->config->current['SAMBAVERSION'] == 3){
+      if (!$ShowPrimaryGroups){
+        $sfilter= "(objectClass=sambaGroupMapping)";
+      } elseif ($ShowSambaGroups){
+        $filter.= "(objectClass=sambaGroupMapping)";
+      }
+    }
+
+    /* Prepare filter for given Regex && UserRegex */
+    if ($filter != ""){
+      $filter= "(&(cn=$Regex)(objectClass=posixGroup)(|$filter))";
+      if ($UserRegex != ""){
+        $filter= "(&(|(memberUID=".$UserRegex.")(cn=".$UserRegex."))$filter)";
+      }
+    }
+
+
+    /********************
+      Collect some groupids to be able to skip primary & functional groups 
+     ********************/
+
+    /* Collect primary groupIDs to show primary groups 
+        if this option is enabled in gosa conf && the checkbox is checked */  
+    if(($this->ShowPrimaryCheckBox) && ($ShowPrimaryGroups)){
+      $ldap->search("(&(uid=$Regex)(!(uid=*$))(objectClass=posixAccount)(gidNumber=*))", array("gidNumber", "cn"));
       show_ldap_error($ldap->get_error());
       while ($attrs= $ldap->fetch()){
         $primaries[$attrs['gidNumber'][0]]= $attrs['cn'][0];
       }
     }
-
-    /* Set filter depending on selection */
-    $sfilter= "";
-    if ($groupfilter['appgroups'] == "checked"){
-      $filter.= "(objectClass=gosaApplicationGroup)";
-    }
-    if ($this->config->current['SAMBAVERSION'] == 3){
-      if ($groupfilter['primarygroups'] != "checked"){
-        $sfilter= "(objectClass=sambaGroupMapping)";
-      } elseif ($groupfilter['sambagroups'] == "checked"){
-        $filter.= "(objectClass=sambaGroupMapping)";
-      }
-    }
-
-    if ($groupfilter['mailgroups'] == "checked"){
-      $filter.= "(objectClass=gosaMailAccount)";
-    }
-    $functional= array();
-    $ldap->cd(get_groups_ou().$base);
-    $ldap->set_size_limit($_SESSION['size_limit']);
-    $ldap->search("(&(cn=$regex)(objectClass=posixGroup)(!(|(objectClass=gosaMailAccount)(objectClass=gosaApplicationGroup)$sfilter)))", array("cn", "gidNumber", "description"));
-    $error2= $ldap->error;
-    while ($attrs= $ldap->fetch()){
-      if (!isset($primaries[$attrs['gidNumber'][0]])){
-        $functional[$attrs['gidNumber'][0]]= $attrs['gidNumber'][0];
-      }
-    }
-
-    /*
-     * We also need to search for the departments
-     * So we are able to navigate like in konquerer
-     */
-
-    /* Get all departments within this subtree */
-    $deps= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))", $this->ui->subtreeACL,
-        $base, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
-
-    $this->departments = array();
-    foreach($deps as $value){
-      if(isset($value['description'][0])){
-        $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
-      }else{
-        $this->departments[$value['dn']]= get_sub_department($value['dn']);
-      }
-    }
-    natcasesort($this->departments);
-    /*  Ende department generation
-     */
-
-    /* Generate grouplist */
-    if ($filter != ""){
-      $filter= "(&(cn=$regex)(objectClass=posixGroup)(|$filter))";
-      if ($groupfilter['guser'] != ""){
-        $filter= "(&(|(memberUID=" . $groupfilter['guser'] . ")(cn=" . $groupfilter['guser'] . "))$filter)";
-      }
-    }
-
-
-    /* Create attribute array, if releasemanagement is activated we search for FAIrelease too */
-    $attrs = array("cn", "description", "gidNumber", "objectClass");
-    $tmp = search_config($this->config->data,"faiManagement","CLASS");
-    if($tmp){
-      $attrs[] = "FAIrelease";
-    }
-
-    if ($groupfilter['subsearch'] == "checked"){
-      $res= get_list($filter, $this->ui->subtreeACL, $base, array("cn", "description", "gidNumber", "objectClass","FAIrelease"),
-                     GL_SIZELIMIT);
-    } else {
-      $base= get_groups_ou().$base;
-      $res= get_list($filter, $this->ui->subtreeACL, $base, array("cn", "description", "gidNumber", "objectClass","FAIrelease"),
-                     GL_SIZELIMIT);
-    }
-    if (preg_match("/size limit/i", $error) || preg_match("/size limit/i", $error2)){
-      $_SESSION['limit_exceeded']= TRUE;
-    }
-
-    foreach ($res as $value){
-      if ($groupfilter['functionalgroups'] != "checked" && isset($functional[$value['gidNumber'][0]])){
-        continue;
-      }
-      if ($groupfilter['primarygroups'] == "checked"){
-        $this->grouplist[$value['gidNumber'][0]]= $value;
-      } else {
-        if (!isset($primaries[$value['gidNumber'][0]])){
-          $this->grouplist[$value['gidNumber'][0]]= $value;
+  
+    /* Collect all GroupIDs from those groups which are functional.
+        Only perfrom this search if  ShowFunctionalGroups  is unchecked, else leave arre empty  */ 
+    if(!$ShowFunctionalGroups){ 
+      $ldap->cd(get_groups_ou().$base);
+      $ldap->set_size_limit($_SESSION['size_limit']);
+      $ldap->search("(&(cn=$Regex)(objectClass=posixGroup)(!(|(objectClass=gosaMailAccount)(objectClass=gosaApplicationGroup)$sfilter)))", array("cn", "gidNumber", "description"));
+      $error2= $ldap->error;
+      while ($attrs= $ldap->fetch()){
+        if (!isset($primaries[$attrs['gidNumber'][0]])){
+          $functional[$attrs['gidNumber'][0]]= $attrs['gidNumber'][0];
         }
       }
     }
+    
 
-    $tmp=array();
+    /********************
+      Search for the prepared filter 
+     ********************/
+    
+    /* If subsearch is activated search for subobjects too */
+    $attrs = array("cn", "description", "gidNumber", "objectClass");
 
-    /* Create result for group management listbox*/
-    foreach($this->grouplist as $tkey => $val ){
-      $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
+    if ($SubSearch){
+      $res= get_list($filter, $this->ui->subtreeACL, $base, $attrs, GL_SIZELIMIT| GL_SUBSEARCH);
+    } else {
+      $res= get_list($filter, $this->ui->subtreeACL, get_groups_ou().$base, $attrs, GL_SIZELIMIT);
     }
-    ksort($tmp);
-    $this->grouplist=array();
-    foreach($tmp as $val){
-      $this->grouplist[]=$val;
+
+    /* Sort values into grouplist*/
+    $tmp = $tmp2 = array();
+    foreach ($res as $value){
+
+      /* Skip functional groups if checkbox isn't checked */
+      if (!$ShowFunctionalGroups && isset($functional[$value['gidNumber'][0]])){
+        continue;
+      }
+      
+      /* If gidNumber is in $primaries skip this entry */
+      if (!isset($primaries[$value['gidNumber'][0]])){
+        $tmp2[$value['cn'][0]] = $value;
+        $tmp [$value['cn'][0]] = $value['cn'][0];
+      }
+    }
+    natcasesort($tmp);
+    foreach($tmp as $name){
+      $this->grouplist[] = $tmp2[$name]; 
     }
     reset ($this->grouplist);
   }
-
-  function remove_from_parent()
-  {
-    /* Optionally execute a command after we're done */
-    $this->postremove();
-  }
-
 
 
 
@@ -716,7 +473,7 @@ class groupManagement extends plugin
      */
     if(($s_action == "editPaste") || ($this->CopyPasteHandler->stillOpen())){
       $this->CopyPasteHandler->save_object();
-      $this->CopyPasteHandler->SetVar("base",$_SESSION['CurrentMainBase']);
+      $this->CopyPasteHandler->SetVar("base",$this->DivListGroup->selectedBase);
       if($str = $this->CopyPasteHandler->execute()){
         return( $str);
       };
@@ -758,12 +515,22 @@ class groupManagement extends plugin
   /* Save data to object */
   function save_object()
   {
+    $this->DivListGroup->save_object();
   }
 
 
-  /* Check values */
-  function check()
+  function remove_lock()
   {
+    if (isset($this->grouptab->dn)){
+      del_lock ($this->grouptab->dn);
+    }
+  }
+
+
+  function remove_from_parent()
+  {
+    /* Optionally execute a command after we're done */
+    $this->postremove();
   }
 
 
@@ -774,26 +541,11 @@ class groupManagement extends plugin
     $this->postcreate();
   }
 
-  function adapt_from_template($dn)
-  {
-  }
-
-  function password_change_needed()
-  {
-  }
-
-  function show_header($button_text, $text, $disabled= FALSE)
-  {
-  }
-
-  function remove_lock()
-  {
-    if (isset($this->grouptab->dn)){
-      del_lock ($this->grouptab->dn);
-    }
-  }
-
+  /* Unused functions  */
+  function check()  { }
+  function adapt_from_template($dn) { }
+  function password_change_needed()  { }
+  function show_header($button_text, $text, $disabled= FALSE)  { }
 }
-
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

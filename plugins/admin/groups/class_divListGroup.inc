@@ -18,6 +18,7 @@ class divListGroup extends MultiSelectWindow
   var $ShowMailGroups         = true;
   var $ShowFunctionalGroups   = true;
 
+  /* Subsearch checkbox */
   var $SubSearch              = false;
 
   var $parent             ;
