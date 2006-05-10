@@ -109,9 +109,6 @@ class systems extends plugin
       $s_entry  = $_GET['id'];
     }
 
-    /* Save Termfilter .... */
-    $this->reload();
-
     /* Check for exeeded sizelimit */
     if (($message= check_sizelimit()) != ""){
       return($message);
@@ -369,7 +366,6 @@ class systems extends plugin
         $this->systab= NULL;
 
         /* Terminal list has changed, reload it. */
-        $this->reload ();
       } else {
 
         /* Normally this shouldn't be reached, send some extra
@@ -438,9 +434,6 @@ class systems extends plugin
           del_lock ($this->dn);
         }
 
-        /* There's no page reload so we have to read new terminals at
-           this point. */
-        $this->reload ();
         unset ($this->systab);
         $this->systab= NULL;
         unset($_SESSION['objectinfo']);
@@ -490,6 +483,12 @@ class systems extends plugin
 
     /* Display dialog with system list */
     $this->DivListSystem->execute();
+
+    /* Add departments if subsearch is disabled */
+    if(!$this->DivListSystem->SubSearch){
+      $this->DivListSystem->AddDepartments($this->DivListSystem->selectedBase);
+    }
+    $this->reload();
     $this->DivListSystem->setEntries($this->terminals);
     return($this->DivListSystem->Draw());
   }
@@ -574,13 +573,20 @@ class systems extends plugin
 
     /* Walk through all possible search combinations, and search for some objects if the checkbox is enabled  */
     foreach($objs as $checkBox => $oc){
-
       if($this->DivListSystem->$checkBox){
-        /* User filter? */
-        if($oc['CLASS'] != ""){
-          $filter = "(|(&".$userregex."(objectClass=".$oc['CLASS'].")(cn=".$this->DivListSystem->Regex.")))";
-          $res = array_merge($res,get_list($filter,$this->ui->subtreeACL, $oc['TREE'].$base,
-                array("cn", "description", "macAddress", "objectClass", "sambaDomainName", "FAIstate"), GL_NONE));
+        if($this->DivListSystem->SubSearch){
+          if($oc['CLASS'] != ""){
+            $filter = "(|(&".$userregex."(objectClass=".$oc['CLASS'].")(cn=".$this->DivListSystem->Regex.")))";
+            $res = array_merge($res,get_list($filter,$this->ui->subtreeACL, $base,
+                  array("cn", "description", "macAddress", "objectClass", "sambaDomainName", "FAIstate"), GL_NONE | GL_SUBSEARCH));
+          }
+        }else{
+          /* User filter? */
+          if($oc['CLASS'] != ""){
+            $filter = "(|(&".$userregex."(objectClass=".$oc['CLASS'].")(cn=".$this->DivListSystem->Regex.")))";
+            $res = array_merge($res,get_list($filter,$this->ui->subtreeACL, $oc['TREE'].$base,
+                  array("cn", "description", "macAddress", "objectClass", "sambaDomainName", "FAIstate"), GL_NONE));
+          }
         }
       } 
     }
