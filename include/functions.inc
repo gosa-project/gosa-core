@@ -770,7 +770,13 @@ function get_ou($name)
 {
   global $config;
 
-  $ou= $config->current[$name];
+  /* Preset ou... */
+  if (isset($config->current[$name])){
+    $ou= $config->current[$name];
+  } else {
+    return "";
+  }
+  
   if ($ou != ""){
     if (!preg_match('/^[^=]+=[^=]+/', $ou)){
       return @LDAP::convert("ou=$ou,");

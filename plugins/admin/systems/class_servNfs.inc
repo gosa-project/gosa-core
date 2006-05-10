@@ -9,7 +9,7 @@ class servnfs extends plugin
 
   /* attribute list for save action */
   var $ignore_account   = TRUE;
-  var $attributes       = array("description","type","charset","path","option");
+  var $attributes       = array("description","type","charset","path","option", "volume");
   var $objectclasses    = array("whatever");
   var $is_account       = true;
 
@@ -21,6 +21,7 @@ class servnfs extends plugin
   var $types         =array();  // Array Types NFS/Samba/NCP/netatalk
   var $charsets      =array();  // Array with charsets
   var $path          ="";  // Path
+  var $volume        ="";  // Volume
   var $option        ="";  // Options
   var $is_edit           =false;
   var $allow_mounts = false; //do we allow mount entries?
@@ -67,13 +68,8 @@ class servnfs extends plugin
     }
 
     if($entry){
-      $tmp = split("\|",$entry);
-      $this->name          = $tmp[0];  // Name of NFS
-      $this->description   = $tmp[1];  // description
-      $this->type          = $tmp[2];  // Type NFS/Samba/NCP/netatalk
-      $this->charset       = $tmp[3];  // charset
-      $this->path          = $tmp[4];  // Path
-      $this->option        = $tmp[5];  // Options
+      list($this->name, $this->description, $this->type, $this->charset,
+           $this->path, $this->option, $this->volume)= split("\|",$entry);
       $this->is_edit          = true;
       
     }else{
@@ -196,6 +192,10 @@ class servnfs extends plugin
     if(preg_match("/\|/",$this->description)){
       $message[]=_("Description contains invalid characters.");
     }
+
+    if(preg_match("/\|/",$this->volume)){
+      $message[]=_("Volume contains invalid characters.");
+    }
   
     if(preg_match("/\|/",$this->path)){
       $message[]=_("Path contains invalid characters.");
@@ -245,7 +245,8 @@ class servnfs extends plugin
     $s_return.= $this->type."|";     
     $s_return.= $this->charset."|";     
     $s_return.= $this->path."|";     
-    $s_return.= $this->option;     
+    $s_return.= $this->option."|";     
+    $s_return.= $this->volume;     
 
     return(array($this->name=>$s_return));
   }

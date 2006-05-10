@@ -28,6 +28,14 @@
 						<input type="text" size="40" name="path" value="{$path}">
 					</td>
 				</tr>
+				<tr>
+					<td>
+						<div id="vlabel">{t}Volume{/t} {$must}</div>
+					</td>
+					<td>
+						<input type="text" id="volume" size="40" name="volume" value="{$volume}">
+					</td>
+				</tr>
 			</table>
 		</td>
 		<td style="border-left:1px solid #A0A0A0">
@@ -50,11 +58,20 @@
 										document.getElementById('sharetype').onchange=function() {
 											var foobar=this[this.selectedIndex].value;
 											var box=document.getElementById('netatalk_mount');
-											if(foobar=="NFS"||foobar=="netatalk")
+											var volume=document.getElementById('volume');
+											var vlabel=document.getElementById('vlabel');
+											if(foobar=="NFS"||foobar=="netatalk"){
 												box.disabled=false;
-											else {
+											} else {
 												box.disabled=true;
 												box.checked=false;
+											}
+											if(foobar=="NCP"){
+												volume.style.visibility="visible";
+												vlabel.style.visibility="visible";
+											} else {
+												volume.style.visibility="hidden";
+												vlabel.style.visibility="hidden";
 											}
 										};
 									 	document.getElementById('sharetype').onchange();
