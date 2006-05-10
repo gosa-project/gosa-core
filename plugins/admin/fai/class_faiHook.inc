@@ -365,7 +365,7 @@ class faiHook extends plugin
 
     $ldap = $this->config->get_ldap_link();
 
-    $ldap->cat($this->dn);
+    $ldap->cat($this->dn,array("objectClass"));
     if($ldap->count()!=0){     
       /* Write FAIscript to ldap*/ 
       $ldap->cd($this->dn);
@@ -427,9 +427,20 @@ class faiHook extends plugin
       $sub_dn = "cn=".$obj['cn'].",".$this->dn;
 
       if($obj['status']=="new"){
-        $ldap->cat($sub_dn);
+        $ldap->cat($sub_dn,array("objectClass"));
         if($ldap->count()){
           $obj['status']="modify";
+        }
+      }
+
+      /* Check if gosaAdministrativeUnitTag is required as object class */
+      if($obj['status'] == "modify"){
+        $ldap->cat($sub_dn,array("objectClass"));
+        $attrs = $ldap->fetch();
+        if(isset($attrs['objectClass'])){
+          if(in_array_ics("gosaAdministrativeUnitTag",$attrs['objectClass'])){
+            $tmp['objectClass'][] = "gosaAdministrativeUnitTag";
+          }
         }
       }
 
@@ -441,7 +452,6 @@ class faiHook extends plugin
         $ldap->cd($sub_dn);
         $this->cleanup();
         $ldap->modify ($tmp); 
-
         $this->handle_post_events("modify");
       }elseif($obj['status']=="new"){
         if($tmp['description']==array()){
