@@ -31,6 +31,7 @@ if ($remove_lock){
     $_SESSION['groupManagement']= new groupManagement ($config, $_SESSION['ui']);
   }
   $groupManagement= $_SESSION['groupManagement'];
+  $groupManagement->save_object();
   $output= $groupManagement->execute();
 
   /* Page header*/
