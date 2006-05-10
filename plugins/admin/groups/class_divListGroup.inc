@@ -88,18 +88,7 @@ class divListGroup extends MultiSelectWindow
     }
 
     if($this->parent->CopyPasteHandler){
-      $Copy_Paste = " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;";
-      if($this->parent->CopyPasteHandler->isCurrentObjectPastAble()){
-        if($this->parent->CopyPasteHandler->isCurrentCutted()){
-          $img = "images/cutpaste.png";
-        }else{
-          $img = "images/copypaste.png";
-        }
-        $Copy_Paste .= "<input type='image' name='editPaste' class='center'
-          src='".$img."' alt='"._("Paste")."' title='".$this->parent->CopyPasteHandler->GetCurrentDn()."'>&nbsp;";
-      }else{
-        $Copy_Paste .= "<img class='center' src='images/cant_editpaste.png' alt='"._("Can't paste")."'>&nbsp;";
-      }
+      $Copy_Paste = $this->parent->CopyPasteHandler->generatePasteIcon();
     }else{
       $Copy_Paste ="";
     }
@@ -155,21 +144,19 @@ class divListGroup extends MultiSelectWindow
     // Space
     $empty    = "<img class='center' src='images/empty.png' style='width:16px;height:16px;' alt=''>";
 
-     if($this->parent->CopyPasteHandler){
-      $actions = "<input class='center' type='image'
+    /* Create action icons - copy & paste icons */
+    $actions = "";
+    if($this->parent->CopyPasteHandler){
+      $actions.= "<input class='center' type='image'
         src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
       $actions.= "<input class='center' type='image'
         src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
-      $actions.= "<input class='center' type='image'
-        src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
-      $actions.= "<input class='center' type='image'
-        src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
-    }else{
-      $actions = "<input class='center' type='image'
-        src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
-      $actions.= "<input class='center' type='image'
-        src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
     }
+    $actions.= "<input class='center' type='image'
+      src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
+    $actions.= "<input class='center' type='image'
+      src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
+
 
     // User and Template  Images
     $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
