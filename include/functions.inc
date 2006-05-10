@@ -514,8 +514,6 @@ function get_list($filter, $subtreeACL, $base= "", $attributes= array(), $flags=
   /* Check for size limit exceeded messages for GUI feedback */
   if (preg_match("/size limit/i", $ldap->error)){
     $_SESSION['limit_exceeded']= TRUE;
-  } else {
-    $_SESSION['limit_exceeded']= FALSE;
   }
 
   /* Crawl through reslut entries and perform the migration to the
