@@ -33,7 +33,6 @@ class MultiSelectWindow{
 	function ClearElementsList()
 	{
 		$this->array_Elements = array();
-		#FIXME  print_sizelimit_warning() ? still missing
 	}
 
 
