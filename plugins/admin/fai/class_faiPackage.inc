@@ -467,13 +467,16 @@ class faiPackage extends plugin
     /* Save Package configurations */
     foreach($this->ConfiguredPackages as $pkgname => $attrs){
       foreach($attrs as $name => $attr){
+      
+        $pkgattrs = array();
 
         foreach($attr as $n=>$v){
           if(empty($v)) $v = array();
         }
 
         /* Set attributes */
-        $pkgattrs['objectClass']          = "FAIdebconfInfo";
+        $pkgattrs['objectClass'][]        = "FAIdebconfInfo";
+
         $pkgattrs['FAIpackage']           = $pkgname;
         $pkgattrs['FAIvariable']          = $name;
         $pkgattrs['FAIvariableType']      = $attr['Type'];
@@ -481,7 +484,14 @@ class faiPackage extends plugin
         $pkgdn =  "FAIvariable=".$name.",".$this->dn;
 
         /* cehck if object already exists */
-        $ldap->cat($pkgdn);
+        $ldap->cat($pkgdn,array("objectClass"));
+
+        /* Workaround for missing "gosaAdministrativeUnitTag" */
+        $attrs = $ldap->fetch();
+        if((isset($attrs['objectClass'])) && (in_array_ics("gosaAdministrativeUnitTag",$attrs['objectClass']))){
+          $pkgattrs['objectClass'][] = "gosaAdministrativeUnitTag";
+        }
+    
         if($ldap->count()!=0){
           $ldap->cd($pkgdn);
           $this->cleanup();
