@@ -422,16 +422,9 @@ class faiHook extends plugin
         }
       }    
 
-      
-      $sub_dn = "cn=".$obj['cn'].",".$this->dn;
-      plugin::plugin($this->config,$sub_dn);
-      $tmp['objectClass'] = $this->attrs['objectClass'];
+      $tmp['objectClass'] = $this->subClasses;
 
-      foreach($this->subClasses as $class){
-        if(!in_array($class,$tmp['objectClass'])){
-          $tmp['objectClass'][] = $class;
-        }
-      }
+      $sub_dn = "cn=".$obj['cn'].",".$this->dn;
 
       if($obj['status']=="new"){
         $ldap->cat($sub_dn);
