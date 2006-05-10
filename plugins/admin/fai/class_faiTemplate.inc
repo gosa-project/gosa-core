@@ -324,6 +324,10 @@ class faiTemplate extends plugin
     }
     show_ldap_error($ldap->get_error());
 
+    /* Do object tagging */
+    $this->handle_object_tagging();
+    show_ldap_error($ldap->get_error());
+
     /* Prepare FAIscriptEntry to write it to ldap
      * First sort array.
      *  Because we must delete old entries first.
@@ -372,7 +376,7 @@ class faiTemplate extends plugin
       }elseif($obj['status'] == "edited"){
         $ldap->cd($sub_dn);
         $this->cleanup();
-$ldap->modify ($tmp); 
+        $ldap->modify ($tmp); 
 
         $this->handle_post_events("modify");
       }elseif($obj['status']=="new"){
@@ -386,6 +390,9 @@ $ldap->modify ($tmp);
         $ldap->add($tmp); 
         $this->handle_post_events("add");
       }
+      show_ldap_error($ldap->get_error()); 
+
+      $this->handle_object_tagging($sub_dn, $this->gosaUnitTag);
       show_ldap_error($ldap->get_error()); 
     }
   }

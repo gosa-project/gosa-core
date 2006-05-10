@@ -427,6 +427,10 @@ $ldap->modify ($this->attrs);
       $ldap->add($this->attrs);
     }
     show_ldap_error($ldap->get_error());
+
+    /* Do object tagging */
+    $this->handle_object_tagging();
+    show_ldap_error($ldap->get_error());
   }
 }
 

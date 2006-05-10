@@ -381,6 +381,12 @@ class faiHook extends plugin
     }
     show_ldap_error($ldap->get_error()); 
 
+    /* Do object tagging */
+    $this->handle_object_tagging();
+    show_ldap_error($ldap->get_error()); 
+
+    $ldap->cd($this->dn);
+
     /* Prepare FAIscriptEntry to write it to ldap
      * First sort array.
      *  Because we must delete old entries first.
@@ -447,6 +453,7 @@ class faiHook extends plugin
         $ldap->add($tmp); 
         $this->handle_post_events("add");
       }
+      $this->handle_object_tagging($sub_dn, $this->gosaUnitTag);
       show_ldap_error($ldap->get_error()); 
     }
   }

@@ -349,6 +349,9 @@ $ldap->modify ($this->attrs);
       show_ldap_error($ldap->get_error());
     }
   
+    /* Do object tagging */
+    $this->handle_object_tagging();
+    show_ldap_error($ldap->get_error());
   
     /* Sort entries, because we must delete entries with status="delete" first */
     $order = array();
@@ -386,7 +389,7 @@ $ldap->modify ($this->attrs);
         }
         $ldap->cd($disk_dn);
         $this->cleanup();
-$ldap->modify ($disk_attrs); 
+        $ldap->modify ($disk_attrs); 
 
       }elseif($disk['status']== "new"){
         if(empty($disk_attrs['description'])){
@@ -401,6 +404,9 @@ $ldap->modify ($disk_attrs);
       }
 
       show_ldap_error($ldap->get_error());
+      $this->handle_object_tagging($disk_dn, $this->gosaUnitTag);
+      show_ldap_error($ldap->get_error());
+
       if($disk['status']!="delete")
       /* Add all partitions */
       foreach($disk['partitions'] as $key => $partition){
@@ -452,7 +458,10 @@ $ldap->modify ($disk_attrs);
 $ldap->modify ($partition_attrs); 
 
         } 
-      show_ldap_error($ldap->get_error());
+        show_ldap_error($ldap->get_error());
+
+        $this->handle_object_tagging($partition_dn, $this->gosaUnitTag);
+        show_ldap_error($ldap->get_error());
       }
     }
     $this->handle_post_events("add");

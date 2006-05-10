@@ -459,6 +459,11 @@ class faiPackage extends plugin
     }
     show_ldap_error($ldap->get_error());
 
+    /* Do object tagging */
+    $this->handle_object_tagging();
+    show_ldap_error($ldap->get_error());
+    $ldap->cd($this->dn);
+
     /* Save Package configurations */
     foreach($this->ConfiguredPackages as $pkgname => $attrs){
       foreach($attrs as $name => $attr){
@@ -489,6 +494,9 @@ class faiPackage extends plugin
           $ldap->add($pkgattrs);
         }
         show_ldap_error($ldap->get_error());
+
+        /* Handle tagging */
+        $this->handle_object_tagging($pkgdn, $this->gosaUnitTag);
       }
     }
 

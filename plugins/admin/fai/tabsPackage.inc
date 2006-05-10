@@ -38,9 +38,6 @@ class tabsPackage extends tabs
 	$this->dn= $new_dn;
 
 	tabs::save(TRUE);
-
-	/* Fix tagging if needed */
-	$baseobject->handle_object_tagging();
   }
 
 }

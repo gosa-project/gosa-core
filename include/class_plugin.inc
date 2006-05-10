@@ -83,6 +83,8 @@ class plugin
    */
   var $attrs= array();
 
+  /* Save unit tags */
+  var $gosaUnitTag= "";
 
   /*!
     \brief Used standard values
@@ -130,11 +132,15 @@ class plugin
 
       /* Copy needed attributes */
       foreach ($this->attributes as $val){
-        #if (isset($this->attrs["$val"][0])){
         $found= array_key_ics($val, $this->attrs);
         if ($found != ""){
           $this->$val= $this->attrs["$found"][0];
         }
+      }
+
+      /* gosaUnitTag loading... */
+      if (isset($this->attrs['gosaUnitTag'][0])){
+        $this->gosaUnitTag= $this->attrs['gosaUnitTag'][0];
       }
 
       /* Set the template flag according to the existence of objectClass
@@ -851,10 +857,9 @@ class plugin
 
   function handle_object_tagging($dn= "", $tag= "")
   {
-    /* Skip if nothing has changed */
-    if ($dn == "" && !$this->is_modified){
-      return;
-    }
+    //FIXME: How to optimize this? We have at least two
+    //       LDAP accesses per object. It would be a good
+    //       idea to have it integrated.
   
     /* No dn? Self-operation... */
     if ($dn == ""){
@@ -864,7 +869,7 @@ class plugin
       if ($tag == ""){
         $len= strlen($dn);
 
-        echo "No tag for $dn - looking for one...<br>";
+        echo "DEBUG: No tag for $dn - looking for one...<br>";
         $relevant= array();
         foreach ($this->config->adepartments as $key => $ntag){
 
@@ -875,7 +880,7 @@ class plugin
 
           /* This one matches with the latter part. Break and don't fix this entry */
           if (preg_match('/(^|,)'.normalizePreg($key).'$/', $dn)){
-            echo "Possibly relevant: $key<br>";
+            echo "DEBUG: Possibly relevant: $key<br>";
             $relevant[strlen($key)]= $ntag;
             continue;
           }
@@ -896,12 +901,15 @@ class plugin
 
     /* Set tag? */
     if ($tag != ""){
-      echo "Add tagging ($tag) to $dn.<br>";
-
       /* Set objectclass and attribute */
       $ldap= $this->config->get_ldap_link();
       $ldap->cat($dn);
       $attrs= $ldap->fetch();
+      if(isset($attrs['gosaUnitTag'][0]) && $attrs['gosaUnitTag'][0] == $tag){
+        echo "DEBUG: $dn is already tagged<br>";
+        return;
+      }
+      echo "DEBUG: Add tagging ($tag) to $dn.<br>";
       $nattrs= array("gosaUnitTag" => $this->gosaUnitTag);
       $nattrs['objectClass']= array();
       for ($i= 0; $i<$attrs['objectClass']['count']; $i++){
@@ -913,16 +921,17 @@ class plugin
       $nattrs['objectClass'][]= "gosaAdministrativeUnitTag";
       $ldap->cd($dn);
       $ldap->modify($nattrs);
-      if ($ldap->error != "Success"){
-        print_red($ldap->get_error());
-      }
+      
     } else {
-      echo "Remove tagging from $dn.<br>";
-
       /* Remove objectclass and attribute */
       $ldap= $this->config->get_ldap_link();
       $ldap->cat($dn);
       $attrs= $ldap->fetch();
+      if (!in_array_ics("gosaAdministrativeUnitTag", $attrs['objectClass'])){
+        echo "DEBUG: $dn is not tagged<br>";
+        return;
+      }
+      echo "DEBUG: Remove tagging from $dn.<br>";
       $nattrs= array("gosaUnitTag" => array());
       $nattrs['objectClass']= array();
       for ($i= 0; $i<$attrs['objectClass']['count']; $i++){
@@ -933,9 +942,7 @@ class plugin
       }
       $ldap->cd($dn);
       $ldap->modify($nattrs);
-      if ($ldap->error != "Success"){
-        print_red($ldap->get_error());
-      }
+      show_ldap_error($ldap->get_error());
     }
     
   }
