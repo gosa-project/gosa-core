@@ -336,7 +336,7 @@ class faiScript extends plugin
 
     $ldap = $this->config->get_ldap_link();
 
-    $ldap->cat($this->dn);
+    $ldap->cat($this->dn,array("objectClass"));
     if($ldap->count()!=0){
       /* Write FAIscript to ldap*/
       $ldap->cd($this->dn);
@@ -396,14 +396,25 @@ class faiScript extends plugin
       $sub_dn = "cn=".$obj['cn'].",".$this->dn;
 
       if($obj['status']=="new"){
-        $ldap->cat($sub_dn);
+        $ldap->cat($sub_dn,array("objectClass"));
         if($ldap->count()){
-          $obj['status']="modify";
+          $obj['status']="edited";
         }
       }
 
       if(empty($tmp['FAIpriority'])){
         $tmp['FAIpriority']  ="0";
+      }
+
+      /* Check if gosaAdministrativeUnitTag is required as object class */
+      if($obj['status'] == "edited"){
+        $ldap->cat($sub_dn,array("objectClass"));
+        $attrs = $ldap->fetch();
+        if(isset($attrs['objectClass'])){
+          if(in_array_ics("gosaAdministrativeUnitTag",$attrs['objectClass'])){
+            $tmp['objectClass'][] = "gosaAdministrativeUnitTag";
+          }
+        }
       }
 
       if($obj['status'] == "delete"){

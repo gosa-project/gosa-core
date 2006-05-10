@@ -429,12 +429,12 @@ class faiHook extends plugin
       if($obj['status']=="new"){
         $ldap->cat($sub_dn,array("objectClass"));
         if($ldap->count()){
-          $obj['status']="modify";
+          $obj['status']="edited";
         }
       }
 
       /* Check if gosaAdministrativeUnitTag is required as object class */
-      if($obj['status'] == "modify"){
+      if($obj['status'] == "edited"){
         $ldap->cat($sub_dn,array("objectClass"));
         $attrs = $ldap->fetch();
         if(isset($attrs['objectClass'])){
