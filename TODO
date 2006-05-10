@@ -33,6 +33,7 @@ Now:
   will have to other plugins
 * Enhance show_ldap_error() with an additional programmer supplied message
 * Change FAIstate when triggering actions
+* Changing LDAP-Servers -> start tab!
 
 
 Target for 2.5:

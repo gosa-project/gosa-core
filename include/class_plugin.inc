@@ -930,7 +930,7 @@ class plugin
       $ldap= $this->config->get_ldap_link();
       $ldap->cat($dn, array('gosaUnitTag', 'objectClass'));
       $attrs= $ldap->fetch();
-      if (!in_array_ics("gosaAdministrativeUnitTag", $attrs['objectClass'])){
+      if (isset($attrs['objectClass']) && !in_array_ics("gosaAdministrativeUnitTag", $attrs['objectClass'])){
         echo "DEBUG: $dn is not tagged<br>";
         return;
       }
