@@ -186,6 +186,12 @@ class MultiSelectWindow{
 	/* Draw the list with all list elements and filters */
 	function Draw()
 	{
+
+		/* Check for exeeded sizelimit */
+		if (($message= check_sizelimit()) != ""){
+			return($message);
+		}
+
 		$smarty = get_smarty();
 
 		$divlist = new divlist($this->string_Title);
