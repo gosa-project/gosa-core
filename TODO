@@ -34,7 +34,6 @@ Now:
   - single object moving has to be checked
 * Check several ldap->cat() for needed attributes
 * Enhance show_ldap_error() with an additional programmer supplied message
-* New FAI package lists have a problem
 
 
 Target for 2.5:

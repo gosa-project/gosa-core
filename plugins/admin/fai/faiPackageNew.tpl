@@ -22,27 +22,32 @@
 	</td>
 	<td>
 		<select name="FAIdebianReleaseS" title="{t}Release{/t}" onChange='document.mainform.submit();'>
+			{if $sections eq ""}
+			<option value="">{t}please choose a release...{/t}</option>
+			{/if}
 			{html_options options=$releases selected=$release}
 		</select>
 		&nbsp;
 		<input type="submit" value="{t}Refresh{/t}" name="SetRepository">
 	</td>
 </tr>
+{if $sections ne ""}
 <tr>
-	<td height="30" style="vertical-align:top">
+	<td style="vertical-align:top">
         <b>{t}Sections for this release{/t}</b>
 	</td>
-	<td>
+	<td style="vertical-align:top">
 		{$sections} 
 	</td>
 </tr>
+{/if}
 </table>
 <input type="hidden" name="YesItIsPostedPackages" value="1">
 <p class="seperator" style="margin-bottom:5px">&nbsp;
 </p>
 
 <div align="right" style="align:right;">
-    <input name="SaveObjectNew" value="{t}Continue{/t}" type="submit" {$goon}>
+    <input name="SaveObjectNew" value="{t}Continue{/t}" type="submit" {if $sections eq ""}disabled{/if}>
     <input name="edit_cancel" value="{t}Cancel{/t}" type="submit">
 </div>
 
