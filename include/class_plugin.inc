@@ -909,18 +909,22 @@ class plugin
         echo "DEBUG: $dn is already tagged<br>";
         return;
       }
-      echo "DEBUG: Add tagging ($tag) to $dn.<br>";
-      $nattrs= array("gosaUnitTag" => $this->gosaUnitTag);
-      $nattrs['objectClass']= array();
-      for ($i= 0; $i<$attrs['objectClass']['count']; $i++){
-        $oc= $attrs['objectClass'][$i];
-        if ($oc != "gosaAdministrativeUnitTag"){
-          $nattrs['objectClass'][]= $oc;
+      if (count($attrs)){
+        echo "DEBUG: Add tagging ($tag) to $dn.<br>";
+        $nattrs= array("gosaUnitTag" => $this->gosaUnitTag);
+        $nattrs['objectClass']= array();
+        for ($i= 0; $i<$attrs['objectClass']['count']; $i++){
+          $oc= $attrs['objectClass'][$i];
+          if ($oc != "gosaAdministrativeUnitTag"){
+            $nattrs['objectClass'][]= $oc;
+          }
         }
+        $nattrs['objectClass'][]= "gosaAdministrativeUnitTag";
+        $ldap->cd($dn);
+        $ldap->modify($nattrs);
+      } else {
+        echo "DEBUG: not tagging ($tag) $dn - seems to have moved away<br>";
       }
-      $nattrs['objectClass'][]= "gosaAdministrativeUnitTag";
-      $ldap->cd($dn);
-      $ldap->modify($nattrs);
       
     } else {
       /* Remove objectclass and attribute */
