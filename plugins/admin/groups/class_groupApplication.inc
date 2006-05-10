@@ -24,7 +24,7 @@ class appgroup extends plugin
   var $curCatDepth              =0;         //
 
   /* attribute list for save action */
-  var $attributes               = array("gosaMemberApplication");
+  var $attributes               = array("gosaMemberApplication","gosaApplicationParameter");
   var $objectclasses            = array("gosaApplicationGroup");
 
   var $FAIrelease               = "/";
@@ -36,6 +36,7 @@ class appgroup extends plugin
   var $AllAppsForReleaseParameter = array();
 
   var $CopyPasteVars            = array("Categories");
+  var $gosaApplicationParameter ;
 
 
   function appgroup ($config, $dn= NULL)
@@ -832,12 +833,11 @@ class appgroup extends plugin
   {
     plugin::remove_from_parent();
 
-    $this->attrs["gosaMemberApplication"]= array();
-
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
     $this->cleanup();
-$ldap->modify ($this->attrs); 
+    
+    $ldap->modify ($this->attrs); 
 
     show_ldap_error($ldap->get_error());
 
