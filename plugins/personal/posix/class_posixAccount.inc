@@ -62,6 +62,9 @@ class posixAccount extends plugin
   var $grouplist  = array();
   var $ui         = array();
 
+  var $GroupRegex       = "*";
+  var $GroupUserRegex   = "*";
+
   /* attribute list for save action */
   var $CopyPasteVars  = array("grouplist","groupMembership","use_shadowMin","use_shadowMax","use_shadowWarning","use_shadowInactive","use_shadowExpire","must_change_password","force_ids","printerList","grouplist","savedGidNumber","savedUidNumber","savedGroupMembership");
   var $attributes     = array("homeDirectory", "loginShell", "uidNumber", "gidNumber", "gecos",
@@ -386,52 +389,20 @@ class posixAccount extends plugin
     /* Manage group add dialog */
     if ($this->group_dialog){
 
+      /* Get Posts */ 
+      if(isset($_POST['depselect'])){
+        if(isset($_POST['regex'])){
+          $this->GroupRegex = $_POST['regex'];
+        }  
+        if(isset($_POST['guser'])){
+          $this->GroupUserRegex = $_POST['guser'];
+        }  
+      }
+
       /* Get global filter config */
-      if (!is_global("groupfilter")){
-        $ui= get_userinfo();
-        $base= get_base_from_people($ui->dn);
-        $groupfilter= array("primarygroups" => "checked",
-            "mailgroups" => "checked",
-            "sambagroups" => "checked",
-            "appgroups" => "checked",
-            "functionalgroups" => "checked",
-            "guser" => "*",
-            "subsearch" => "",
-            "depselect" => $_SESSION['CurrentMainBase'],
-            "regex" => "*");
-        register_global("groupfilter", $groupfilter);
-      }
-
-      /* Save data */
-      $groupfilter= get_global("groupfilter");
-      foreach( array("guser", "regex") as $type){
-        if (isset($_POST[$type])){
-          $groupfilter[$type]= $_POST[$type];
-        }
-      }
-      if (isset($_POST['depselect'])){
-        foreach( array("primarygroups", "sambagroups", "mailgroups", "appgroups",
-              "functionalgroups") as $type){
-
-          if (isset($_POST[$type])) {
-            $groupfilter[$type]= "checked";
-          } else {
-            $groupfilter[$type]= "";
-          }
-        }
-      }
-      if (isset($_GET['search'])){
-        $s= mb_substr($_GET['search'], 0, 1, "UTF8")."*";
-        if ($s == "**"){
-          $s= "*";
-        }
-        $groupfilter['regex']= $s;
-      }
-      register_global("groupfilter", $groupfilter);
-
-      /* Calculate actual groups */
-		
       $this->reload();
+
+      /* remove already assigned groups */
       $glist= array();
       foreach ($this->grouplist as $key => $value){
         if (!isset($this->groupMembership[$key])){
@@ -439,16 +410,14 @@ class posixAccount extends plugin
         }
       }
 
+      $smarty->assign("regex",$this->GroupRegex);
+      $smarty->assign("guser",$this->GroupUserRegex);
       $smarty->assign("groups", $glist);
       $smarty->assign("search_image", get_template_path('images/search.png'));
       $smarty->assign("launchimage", get_template_path('images/small_filter.png'));
       $smarty->assign("tree_image", get_template_path('images/tree.png'));
       $smarty->assign("deplist", $this->config->idepartments);
       $smarty->assign("alphabet", generate_alphabet());
-      foreach( array("guser", "regex", "primarygroups", "mailgroups",
-            "appgroups", "sambagroups", "functionalgroups") as $type){
-        $smarty->assign("$type", $groupfilter[$type]);
-      }
       $smarty->assign("depselect",$_SESSION['CurrentMainBase']);
       $smarty->assign("hint", print_sizelimit_warning());
 
@@ -1098,30 +1067,23 @@ $ldap->modify ($this->attrs);
  function reload()
   {
 
-    /* Get config */
-    $groupfilter= get_global('groupfilter');
-
     /* Set base for all searches */
-    $base= $_SESSION['CurrentMainBase'];
+    $base     = $_SESSION['CurrentMainBase'];
+    $base     = get_groups_ou().$base;
+    $ldap     = $this->config->get_ldap_link();    
+    $attrs    =  array("cn", "description", "gidNumber");
 
-    /* Regex filter? */
-    if ($groupfilter['regex'] != ""){
-      $regex= $groupfilter['regex'];
-    } else {
-      $regex= "*";
-    }
+    /* Get groups */
+    $filter = 
+    $res= get_list("(&(objectClass=posixGroup)(cn=".$this->GroupRegex.")(memberUid=".$this->GroupUserRegex."))", 
+          $this->ui->subtreeACL, $base,$attrs, GL_SIZELIMIT);
 
-    $error = "";
-    $ldap = $this->config->get_ldap_link();    
-
-    $base= get_groups_ou().$base;
-    $res= get_list("(objectClass=posixGroup)", $this->ui->subtreeACL, $base,
-                   array("cn", "description", "gidNumber"), GL_SIZELIMIT);
-    if (preg_match("/size limit/i", $error)){
+    /* check sizelimit */
+    if (preg_match("/size limit/i", $ldap->error)){
       $_SESSION['limit_exceeded']= TRUE;
     }
 
-    $error = $ldap->error;
+    /* Create a list of users */
     $this->grouplist = array();
     foreach ($res as $value){
         $this->grouplist[$value['gidNumber'][0]]= $value;
