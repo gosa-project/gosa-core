@@ -360,6 +360,7 @@ class groupManagement extends plugin
     /* Prepare ldap class */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($base);
+    $ldap->set_size_limit($_SESSION['size_limit']);
 
 
     /********************
@@ -416,7 +417,6 @@ class groupManagement extends plugin
         Only perfrom this search if  ShowFunctionalGroups  is unchecked, else leave arre empty  */ 
     if(!$ShowFunctionalGroups){ 
       $ldap->cd(get_groups_ou().$base);
-      $ldap->set_size_limit($_SESSION['size_limit']);
       $ldap->search("(&(cn=$Regex)(objectClass=posixGroup)(!(|(objectClass=gosaMailAccount)(objectClass=gosaApplicationGroup)$sfilter)))", array("cn", "gidNumber", "description"));
       $error2= $ldap->error;
       while ($attrs= $ldap->fetch()){
