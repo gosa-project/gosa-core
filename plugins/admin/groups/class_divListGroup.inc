@@ -26,7 +26,7 @@ class divListGroup extends MultiSelectWindow
 
   function divListGroup ($config,$parent)
   {
-    MultiSelectWindow::MultiSelectWindow($config,"System");
+    MultiSelectWindow::MultiSelectWindow($config,"Groups");
     
     $this->parent       = $parent;
     $this->ui           = get_userinfo();

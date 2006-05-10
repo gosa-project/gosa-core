@@ -407,7 +407,6 @@ class groupManagement extends plugin
         if this option is enabled in gosa conf && the checkbox is checked */  
     if(($this->ShowPrimaryCheckBox) && ($ShowPrimaryGroups)){
       $ldap->search("(&(uid=$Regex)(!(uid=*$))(objectClass=posixAccount)(gidNumber=*))", array("gidNumber", "cn"));
-      show_ldap_error($ldap->get_error());
       while ($attrs= $ldap->fetch()){
         $primaries[$attrs['gidNumber'][0]]= $attrs['cn'][0];
       }
