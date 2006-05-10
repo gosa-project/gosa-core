@@ -3,7 +3,7 @@
   		<td style="vertical-align:top; width:50%;">
 			<div class="contentboxh">
 				<p class="contentboxh">
-				 	{$Summary} 
+				 	{$Summary} {$hint} 
 				</p>
 			</div>
   			<div class="contentboxb">

@@ -1,5 +1,7 @@
 <?php
 
+define ("SEPERATOR", 1002);
+
 class MultiSelectWindow{
 
 	var $bool_DisplayAlpahabet	= false;
@@ -31,7 +33,9 @@ class MultiSelectWindow{
 	function ClearElementsList()
 	{
 		$this->array_Elements = array();
+		#FIXME  print_sizelimit_warning() ? still missing
 	}
+
 
 	/* Adds a regex input field to the current dialog */
 	function AddRegex($name,$string,$value,$conn,$image="images/search.png")
@@ -127,24 +131,40 @@ class MultiSelectWindow{
 
 	/* Add a checkbox to the filter element,
     	the name specifies an existing class var to store the 'selection' */
-	function AddCheckBox($name,$value,$string,$default)
+	function AddCheckBox($name,$value="Unset",$string="Unset",$default=false)
 	{
 		$arr = array();
 	
-		/* Check if there was already a variable 
-			for this dialog which we should use instead of the default*/
-		if(isset($_SESSION['MultiDialogFilters'][$this->filterName][$name])){
-			$arr['default']	= $_SESSION['MultiDialogFilters'][$this->filterName][$name];
-			$this->$name = $arr['default'];
+		if($name == SEPERATOR){
+			$arr['name'] = SEPERATOR;
 		}else{
-			$arr['default']	= $default;
+			/* Check if there was already a variable 
+			   for this dialog which we should use instead of the default*/
+			if(isset($_SESSION['MultiDialogFilters'][$this->filterName][$name])){
+				$arr['default']	= $_SESSION['MultiDialogFilters'][$this->filterName][$name];
+				$this->$name = $arr['default'];
+			}else{
+				$arr['default']	= $default;
+			}
+			$arr['name'] 	= $name;
+			$arr['string']	= $string;
+			$arr['value']	= $value;
+			$arr['enabled']	= true;
 		}
-
-		$arr['name'] 	= $name;
-		$arr['string']	= $string;
-		$arr['value']	= $value;
 		$this->array_Checkboxes[] = $arr;
 	}
+
+	/* Hides or unhides the checkbox with the given name */
+	function DisableCheckBox($name,$HideShow = false)
+	{
+		foreach($this->array_Checkboxes as $key => $chkbox){
+			if($chkbox['name'] == $name){
+				$this->array_Checkboxes[$key]['enabled'] = $HideShow;
+			}
+		}
+	}
+
+	
 
 	/* Returns true if the close button was pressed */
 	function isClosed()
@@ -193,6 +213,16 @@ class MultiSelectWindow{
 		$boxes = "";
 		$boxClick = " onClick='document.mainform.submit();' ";
 		foreach($this->array_Checkboxes as $box){
+
+			if($box['name'] == SEPERATOR){
+				$boxes .= "</td></tr></table><table style='width:100%;border-top:1px solid #B0B0B0;'><tr><td>";
+				continue;
+			}
+
+			/* Skip disabled boxes */
+			if(!$box['enabled']) continue;
+
+			/* Check if box is checked */
 			if($box['default'] == true){
 				$boxes .="<input type='checkbox' name='".$box['name']."' value='1' title='".$box['value']."' checked ".$boxClick.">&nbsp;".$box['string']."<br>";
 			}else{
@@ -225,12 +255,13 @@ class MultiSelectWindow{
          */	
 		$smarty->assign("Display_alphabet",	$this->bool_DisplayAlpahabet);
 		$smarty->assign("alphabet", 		generate_alphabet());
-
 		$smarty->assign("Header"			, $this->string_ListHeader );
 		$smarty->assign("Summary"			, $this->string_Summary);
 		$smarty->assign("Title"				, $this->string_Title);
 		$smarty->assign("Information"		, $this->string_Information);
-
+		
+		/* Check for exeeded sizelimit */
+		$smarty->assign("hint"				, print_sizelimit_warning());
 		$smarty->assign("DivList"			, $divlist->DrawList());
 
 
@@ -385,11 +416,14 @@ class MultiSelectWindow{
 			$row = array();
 			$row[] = $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
 			$row[] = $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
-			$row[] = $field3 = array("string" => "&nbsp;", "attach" => "style='width:60px;border-right:0px;text-align:right;'");
 
-			if($numtabs > 3){	
-				for($i = 3 ; $i <= $numtabs;$i++){
-					$row[] = array("string"=>"&nbsp;");
+			if($numtabs > 2){	
+				for($i = 2 ; $i <$numtabs;$i++){
+					if($i ==($numtabs-1)){
+						$row[] = array("string"=>"&nbsp;","attach" => "style='width:60px;border-right:0px;text-align:right;'");
+					}else{
+						$row[] = array("string"=>"&nbsp;");
+					}
 				}
 			}
 
