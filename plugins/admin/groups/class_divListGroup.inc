@@ -66,7 +66,7 @@ class divListGroup extends MultiSelectWindow
     $this->AddCheckBox(SEPERATOR);
 
     /* Add SubSearch checkbox */    
-    $this->AddCheckBox("SubSearch",  _("Select to search search within subtres"), _("Subsearch"), true);
+    $this->AddCheckBox("SubSearch",  _("Select to search within subtrees"), _("Ignore subtrees"), true);
 
     /*                  Name                 ,Text                              ,Default  , Connect with alphabet  */
     $this->AddRegex   ("Regex",     _("Regular expression for matching group names"), "*" , true);
