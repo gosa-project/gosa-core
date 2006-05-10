@@ -34,7 +34,7 @@
 							{t}Task{/t}&nbsp;
 							</LABEL>
 							<select name="FAItask" title="{t}Choose an existing FAI task{/t}" {$FAItaskACL}>
-								{html_options options=$tasks selected=$FAItask}
+								{html_options values=$tasks output=$tasks selected=$FAItask}
 							</select>
 						</td>
 					</tr>
