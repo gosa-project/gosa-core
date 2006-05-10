@@ -151,7 +151,7 @@ class faiSummaryTab extends plugin{
 
     if(isset($_GET['show'])){
       $ldap = $this->config->get_ldap_link();
-      $ldap->cat(base64_decode($_GET['id']));
+      $ldap->cat(base64_decode($_GET['id']), array('FAIscript', 'FAIhook', 'FAItemplate'));
       $attrs = $ldap->fetch();
       if($_GET['type'] == "FAIscript"){
         $str = $attrs['FAIscript'][0];

@@ -357,8 +357,8 @@ class phoneConferenceManagment extends plugin
       }
 
       $ldap= $this->config->get_ldap_link();
-      $ldap->cd ($conference['goFonConferenceOwner'][0]);
-      $data = $ldap->fetch($ldap->cat($conference['goFonConferenceOwner'][0]));
+      $ldap->cat($conference['goFonConferenceOwner'][0], array('cn'));
+      $data = $ldap->fetch();
       $cn = $data['cn'][0];
  
       $a_field1 = array("string"=>sprintf($userimg,_("Conference")), "attach" => "style='text-align:center;width:20px;'");

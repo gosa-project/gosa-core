@@ -251,7 +251,7 @@ class faiManagement extends plugin
 
 				/* Find out more about the object type */
 				$ldap	= $this->config->get_ldap_link();
-				$ldap->cat($this->dn);
+				$ldap->cat($this->dn, array('objectClass'));
 				$attrs	= $ldap->fetch();
 
 				$type	= $this->get_type($attrs);			

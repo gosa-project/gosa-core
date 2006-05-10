@@ -289,7 +289,7 @@ class termstartup extends plugin
         $tmp= preg_replace ("/^[^,]+,/", "", $tmp);
 
         $ldap->cat("cn=default,ou=terminals,ou=systems,$tmp".
-            $this->config->current['BASE']);
+            $this->config->current['BASE'], array('gotoTerminalPath'));
         $attrs= $ldap->fetch();
         if (isset($attrs['gotoTerminalPath'])){
           $this->gotoTerminalPath= $attrs['gotoTerminalPath'][0];

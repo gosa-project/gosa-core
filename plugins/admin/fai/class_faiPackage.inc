@@ -443,7 +443,7 @@ class faiPackage extends plugin
 
     //    $this->attrs["FAIinstallMethod"]= "aptitude";
 
-    $ldap->cat($this->dn);
+    $ldap->cat($this->dn, array('dn'));
     if($ldap->count()!=0){
       /* Write FAIscript to ldap*/
       $ldap->cd($this->dn);

@@ -285,12 +285,12 @@ class servrepository extends plugin
     $ldap= $this->config->get_ldap_link();
     $ldap->cd ($this->config->current['BASE']);
     
-    $ldap->cat($this->dn);
+    $ldap->cat($this->dn, array('dn'));
     
     if($ldap->count()){
       $ldap->cd($this->dn);
       $this->cleanup();
-$ldap->modify ($this->attrs);       
+      $ldap->modify ($this->attrs); 
 
       $this->handle_post_events("modify");
     }
@@ -341,7 +341,7 @@ $ldap->modify ($this->attrs);
     $ldap= $this->config->get_ldap_link();
     $ldap->cd ($this->config->current['BASE']);
     
-    $ldap->cat($this->dn);
+    $ldap->cat($this->dn, array('dn'));
     
     if($ldap->count()){
       $ldap->cd($this->dn);

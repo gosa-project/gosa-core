@@ -259,7 +259,7 @@ class termgeneric extends plugin
     
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
-    $ldap->cat($this->dn);
+    $ldap->cat($this->dn, array('dn'));
     if($ldap->count()){
       $this->netConfigDNS->remove_from_parent();
       $ldap->rmDir($this->dn);

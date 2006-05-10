@@ -292,9 +292,11 @@ class userManagement extends plugin
         $config= $this->config;
         $ldap_ui= $this->config->get_ldap_link();
         if(isset($this->usertab->dn)){
-          $user = ($ldap_ui->fetch($ldap_ui->cat($this->usertab->dn)));
+          $ldap_ui->cat($this->usertab->dn, array('uid'));
+          $user = $ldap_ui->fetch();
         }else{
-          $user = ($ldap_ui->fetch($ldap_ui->cat($this->dn)));
+          $ldap_ui->cat($this->dn, array('uid'));
+          $user = $ldap_ui->fetch();
         }
         if((is_array($user))&&(isset($user['uid']))){
           $username= $user['uid'][0];

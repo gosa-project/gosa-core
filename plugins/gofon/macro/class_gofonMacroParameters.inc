@@ -374,7 +374,7 @@ class macroParameter extends plugin
 
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
-    $ldap->cat($this->dn);
+    $ldap->cat($this->dn, array('dn'));
     $a= $ldap->fetch();
 
     if (count($a)){

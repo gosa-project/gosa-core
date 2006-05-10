@@ -950,7 +950,7 @@ $ldap->modify ($this->attrs);
     /* Walk through groups and add the descriptive entry if not exists */
     foreach ($groups as $value){
       if (!array_key_exists($value, $this->groupMembership)){
-        $ldap->cat($value);
+        $ldap->cat($value, array('cn', 'description', 'dn'));
         $attrs= $ldap->fetch();
         error_reporting (0);
         if (!isset($attrs['description'][0])){
@@ -960,7 +960,7 @@ $ldap->modify ($this->attrs);
           $entry= $attrs["cn"][0]." [$dsc]";
         }
         error_reporting (E_ALL);
-        $this->groupMembership[$ldap->getDN()]= $entry;
+        $this->groupMembership[$attrs['dn']]= $entry;
       }
     }
 

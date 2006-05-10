@@ -915,7 +915,6 @@ $ldap->modify ($attr);
      *  to the new configured printers.
      */
     foreach($this->gotoPrinter as $printer) {
-      $ldap->cd($printer['dn']);
       $ldap->cat($printer['dn']);
       $attrs= $ldap->fetch();
       $attrs_used = array(); 
@@ -1034,7 +1033,7 @@ $ldap->modify ($attrs);
       }
     }
 
-    $ldap->cat ($this->dn);
+    $ldap->cat ($this->dn, array('dn'));
     if ($ldap->fetch()){
       $mode= "modify";
     } else {

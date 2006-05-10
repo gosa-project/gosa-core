@@ -504,11 +504,10 @@ class appgroup extends plugin
               $found = $attrs['dn'];
             }
           }
-          $ldap->cat($found);
+          $ldap->cat($found, array("gosaApplicationParameter"));
         }else{
           $ldap->cd($this->config->current['BASE']);
           $ldap->search("(&(objectClass=gosaApplication)(cn=$appname))",array("gosaApplicationParameter"));
-
         }
 
 

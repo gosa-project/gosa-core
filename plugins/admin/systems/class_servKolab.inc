@@ -289,7 +289,7 @@ $ldap->modify ($attrs);
     plugin::save();
 
     /* Save or modify? */
-    $ldap->cat($this->dn);
+    $ldap->cat($this->dn, array('dn'));
     if (!$ldap->fetch()){
       $mode= "add"; 
     } else {

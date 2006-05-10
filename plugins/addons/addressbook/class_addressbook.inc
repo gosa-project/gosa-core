@@ -125,7 +125,7 @@ class addressbook extends plugin
 
 				/* Get target */
 				$ldap= $this->config->get_ldap_link();
-				$ldap->cat(base64_decode($_GET['target']));
+				$ldap->cat(base64_decode($_GET['target']), array('telephoneNumber', 'mobile', 'homePhone'));
 				$attrs= $ldap->fetch();
 				if (isset($attrs["$dialmode"])){
 					$target= $attrs[$dialmode][0];
@@ -135,7 +135,7 @@ class addressbook extends plugin
 
 				/* Get source */
 				$ui= get_userinfo();
-				$ldap->cat($ui->dn);
+				$ldap->cat($ui->dn, array('telephoneNumber'));
 				$attrs= $ldap->fetch();
 				if (isset($attrs["telephoneNumber"])){
 					$source= $attrs['telephoneNumber'][0];
@@ -439,7 +439,7 @@ class addressbook extends plugin
 
 			/* Fill variables from LDAP */
 			if ($_SESSION['show_info'] != "ADD"){
-				$ldap->cat($_SESSION['show_info']);
+				$ldap->cat($_SESSION['show_info'], $this->attributes);
 				$info= $ldap->fetch();
 			}
 			foreach ($this->attributes as $name){
@@ -634,7 +634,7 @@ class addressbook extends plugin
 		/* Save data. Using 'modify' implies that the entry is already present, use 'add' for
 		   new entries. So do a check first... */
 		$ldap= $this->config->get_ldap_link();
-		$ldap->cat ($this->dn);
+		$ldap->cat ($this->dn,array('dn'));
 		if ($ldap->fetch()){
 			$mode= "modify";
 		} else {

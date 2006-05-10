@@ -642,7 +642,7 @@ class ogroup extends plugin
 
     $ldap = $this->config->get_ldap_link();
     if($this->dn != $new_dn){
-      $ldap->cat ($new_dn);
+      $ldap->cat ($new_dn, array('dn'));
     }
     
     if($ldap->count() !=0){
@@ -690,7 +690,7 @@ class ogroup extends plugin
 
     /* Save data. Using 'modify' implies that the entry is already present, use 'add' for
        new entries. So do a check first... */
-    $ldap->cat ($this->dn);
+    $ldap->cat ($this->dn, array('dn'));
     if ($ldap->fetch()){
       /* Modify needs array() to remove values :-( */
       if (!count ($this->member)){

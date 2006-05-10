@@ -267,6 +267,7 @@ class LDAP{
 
   function fetch()
   {
+    $att= array();
     if($this->hascon){
       if($this->hasres){
         if ($this->start == 0)

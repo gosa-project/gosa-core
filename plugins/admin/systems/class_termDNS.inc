@@ -398,7 +398,7 @@ class termDNS extends plugin
        */
       foreach($tmp['add'] as $dn => $attrs){
         $ldap->cd($dn);
-        $ldap->cat($dn);
+        $ldap->cat($dn, array('dn'));
         if(count($ldap->fetch())){
           $ldap->cd($dn);
           $ldap->modify ($attrs); 

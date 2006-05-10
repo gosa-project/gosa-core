@@ -136,7 +136,7 @@ class servnfs extends plugin
             }
           }
         $ldap = $this->config->get_ldap_link();
-      $ldap->cat($mountdn);
+        $ldap->cat($mountdn, array('dn'));
         $attrs = $ldap->fetch();
         if (count($attrs) > 0) {
             $smarty->assign("mount_checked", "checked");

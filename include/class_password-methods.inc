@@ -102,7 +102,7 @@ function change_password ($dn, $password, $mode=0, $hash= "")
 
   // read current password entry for $dn, to detect the encryption Method
   $ldap       = $config->get_ldap_link();
-  $ldap->cat ($dn);
+  $ldap->cat ($dn, array("shadowLastChange", "userPassword"));
   $attrs      = $ldap->fetch ();
 
   // Set encryption type to clear if required 

@@ -824,7 +824,7 @@ $ldap->modify ($this->attrs);
   {
     /* Load uid and gid of this 'dn' */
     $ldap= $this->config->get_ldap_link();
-    $ldap->cat($this->dn);
+    $ldap->cat($this->dn, array('uidNumber', 'gidNumber'));
     $tmp= $ldap->fetch();
     $this->uidNumber= $tmp['uidNumber'][0];
     $this->gidNumber= $tmp['gidNumber'][0];

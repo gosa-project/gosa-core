@@ -24,7 +24,7 @@ restore_error_handler();
   $ldap = $_SESSION['config']->get_ldap_link();
   $ldap->cd($_SESSION['config']->current['BASE']);
 
-  $sr= $ldap->cat($id);
+  $sr= $ldap->cat($id, array("FAItemplateFile", "FAIscript", "cn", "objectClass"));
   $ei= ldap_first_entry($ldap->cid, $sr);
   if(isset($_GET['is_template'])){
     $tmp = ldap_get_values_len($ldap->cid, $ei,"FAItemplateFile");

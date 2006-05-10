@@ -603,7 +603,7 @@ class blocklist extends plugin
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->base);
     $ldap->search("cn=$this->cn",array("cn"));
-    $ldap->cat($this->dn);
+    $ldap->cat($this->dn, array('dn'));
     $a= $ldap->fetch();
     
     if (count($a)){

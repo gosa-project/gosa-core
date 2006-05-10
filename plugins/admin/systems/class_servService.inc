@@ -398,7 +398,7 @@ class servservice extends plugin
     
     # load data from mounts container
     $ldap = $this->config->get_ldap_link();
-    $ldap->cat($mountsdn);
+    $ldap->cat($mountsdn, array('dn'));
     $attrs = $ldap->fetch();
     
     # mounts container not present yet, so we create it
@@ -409,31 +409,31 @@ class servservice extends plugin
         gosa_log("Mount container '$mountsdn' has been created");
     }
 
-  # remove deleted mounts from the container
-  foreach ($this->mounts_to_remove as $entry) {
-    $mount=$this->returnMountEntry($entry);
+    # remove deleted mounts from the container
+    foreach ($this->mounts_to_remove as $entry) {
+      $mount=$this->returnMountEntry($entry);
       $mountdn = "cn=".$mount["cn"].","."$mountsdn";
-        
-    $ldap->cat($mountdn);
-        $attrs = $ldap->fetch();
-        
-        if (count($attrs) != 0) {
-      $ldap->rmdir($mountdn);
-      show_ldap_error($ldap->get_error());
-      gosa_log("Mount object '".$mountdn."' has been removed");
-        }
-  }
 
-      # add new mounts to the container
-  foreach ($this->mounts_to_add as $entry) {
-        
+      $ldap->cat($mountdn, array('dn'));
+      $attrs = $ldap->fetch();
+
+      if (count($attrs) != 0) {
+        $ldap->rmdir($mountdn);
+        show_ldap_error($ldap->get_error());
+        gosa_log("Mount object '".$mountdn."' has been removed");
+      }
+    }
+
+    # add new mounts to the container
+    foreach ($this->mounts_to_add as $entry) {
+
       $mount=$this->returnMountEntry($entry);
       $mountdn = "cn=".$mount["cn"].","."$mountsdn";  
-        $ldap->cd($mountdn);
-        $ldap->add($mount);
-        show_ldap_error($ldap->get_error());
-        gosa_log("Mount object '".$mountdn."' has been added");
-  }
+      $ldap->cd($mountdn);
+      $ldap->add($mount);
+      show_ldap_error($ldap->get_error());
+      gosa_log("Mount object '".$mountdn."' has been added");
+    }
   }
   
   function get_share_type($share) {

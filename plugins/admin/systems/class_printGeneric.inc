@@ -77,7 +77,7 @@ class printgeneric extends plugin
 
     /* set orig dn to new if object is new */
     $ldap= $this->config->get_ldap_link();
-    $ldap->cat($this->dn);
+    $ldap->cat($this->dn, array('dn'));
     if(!$ldap->count()){
       $this->orig_dn = "new";
     }
@@ -206,9 +206,9 @@ class printgeneric extends plugin
 
       /* Detect if this is a valid printer account;
        */
+      //FIXME: do we need to do this? we've already everything we need in $this->attrs...
       $ldap = $this->config->get_ldap_link();
-      $ldap->cd($this->config->current['BASE']);
-      $ldap->cat($this->dn);
+      $ldap->cat($this->dn, array('objectClass'));
 
       if($ldap->count()){
         $attrs = $ldap->fetch();
@@ -533,7 +533,7 @@ class printgeneric extends plugin
 
       /* Check if this dn points to a printer, to avoid deleting something else */
       $ldap= $this->config->get_ldap_link();
-      $ldap->cat($this->dn);
+      $ldap->cat($this->dn, array('dn'));
       if(!$ldap->count()){
         print_red("Trying to remove printer obejct which isn't a printer. Aborted to avoid data loss.");
         return;

@@ -467,12 +467,12 @@ class conference extends plugin
 
     $ldap= $this->config->get_ldap_link();
 
-    $ldap->cat($this->dn);
+    $ldap->cat($this->dn, array('dn'));
     $a= $ldap->fetch();
     $ldap->cd($this->dn);
     if (count($a)){
       $this->cleanup();
-$ldap->modify ($this->attrs); 
+      $ldap->modify ($this->attrs); 
 
       $this->handle_post_events('modify');
     } else {

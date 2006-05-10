@@ -808,7 +808,7 @@ class user extends plugin
 
     /* Save data. Using 'modify' implies that the entry is already present, use 'add' for
        new entries. So do a check first... */
-    $ldap->cat ($this->dn);
+    $ldap->cat ($this->dn, array('dn'));
     if ($ldap->fetch()){
       $mode= "modify";
     } else {

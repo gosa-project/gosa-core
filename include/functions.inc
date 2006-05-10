@@ -996,14 +996,11 @@ function gen_locked_message($user, $dn)
 
   $_SESSION['dn']= $dn;
   $ldap= $config->get_ldap_link();
-  $ldap->cat ($user);
+  $ldap->cat ($user, array('uid', 'cn'));
   $attrs= $ldap->fetch();
   $uid= $attrs["uid"][0];
   $cn= $attrs["cn"][0];
   $remove= false;
-
-  //  print_a($_POST);
-  //  print_a($_GET);
 
   if((isset($_SESSION['LOCK_VARS_TO_USE']))&&(count($_SESSION['LOCK_VARS_TO_USE']))){
     $_SESSION['LOCK_VARS_USED']  =array();
@@ -1129,10 +1126,14 @@ function show_errors($message)
 }
 
 
-function show_ldap_error($message)
+function show_ldap_error($message, $addon= "")
 {
   if (!preg_match("/Success/i", $message)){
-    print_red (_("LDAP error:")." $message");
+    if ($addon == ""){
+      print_red (_("LDAP error:")." $message");
+    } else {
+      print_red ("$addon (LDAP error: $message)");
+    }
     return TRUE;
   } else {
     return FALSE;

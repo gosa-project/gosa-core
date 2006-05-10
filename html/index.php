@@ -172,7 +172,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
     }
   }
   /* Check for locking area */
-  $ldap->cat($config->current['CONFIG']);
+  $ldap->cat($config->current['CONFIG'], array("dn"));
   $attrs= $ldap->fetch();
   if (!count ($attrs)){
     $ldap->cd($config->current['BASE']);

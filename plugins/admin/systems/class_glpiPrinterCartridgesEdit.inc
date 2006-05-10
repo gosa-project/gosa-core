@@ -180,7 +180,8 @@ class glpiPrinterCartridgesEdit extends plugin
       if(!in_array($id,$users)){
 
         /* If this user doesn't exists in glpi db, we must create him */
-        $atr = $ldap->fetch($ldap->cat($id));
+        $ldap->cat($id, array('cn', 'mail', 'telephoneNumber'));
+        $atr = $ldap->fetch();
         $tmp = array();
         $use = array( "cn"              =>"name",
             "mail"            =>"email",
@@ -278,7 +279,8 @@ class glpiPrinterCartridgesEdit extends plugin
        Assign name ... to smarty, if set
      */
     if(isset($users[$this->tech_num])){
-      $tr = $ldap->fetch($ldap->cat($users[$this->tech_num]));
+      $ldap->cat($users[$this->tech_num], array('givenName', 'sn', 'uid'));
+      $tr = $ldap->fetch();
       $str = "";
       if(isset($tr['givenName'][0])){   $str .= $tr['givenName'][0]." ";      }
       if(isset($tr['sn'][0])) {         $str .= $tr['sn'][0]." ";             }

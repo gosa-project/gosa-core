@@ -622,7 +622,7 @@ class plugin
 
     /* Try to use plain entry first */
     $dn= "$attribute=".$this->$attribute.",$base";
-    $ldap->cat ($dn);
+    $ldap->cat ($dn, array('dn'));
     if (!$ldap->fetch()){
       return ($dn);
     }
@@ -634,7 +634,7 @@ class plugin
       }
 
       $dn= "$attribute=".$this->$attribute."+$attr=".$this->$attr.",$base";
-      $ldap->cat ($dn);
+      $ldap->cat ($dn, array('dn'));
       if (!$ldap->fetch()){
         return ($dn);
       }
@@ -681,7 +681,6 @@ class plugin
     }
 
     $ldap->cat($src_dn);
-    $attrs= array();
     $attrs= $ldap->fetch();
     if (!count($attrs)){
       trigger_error("Trying to move $src_dn, which does not seem to exist.",
@@ -780,7 +779,7 @@ class plugin
     $ldap= $this->config->get_ldap_link();
 
     /* Check if destination exists - abort */
-    $ldap->cat($dst_dn);
+    $ldap->cat($dst_dn, array('dn'));
     if ($ldap->fetch()){
       trigger_error("recursive_move $dst_dn already exists.",
           E_USER_WARNING);
@@ -903,7 +902,7 @@ class plugin
     if ($tag != ""){
       /* Set objectclass and attribute */
       $ldap= $this->config->get_ldap_link();
-      $ldap->cat($dn);
+      $ldap->cat($dn, array('gosaUnitTag', 'objectClass'));
       $attrs= $ldap->fetch();
       if(isset($attrs['gosaUnitTag'][0]) && $attrs['gosaUnitTag'][0] == $tag){
         echo "DEBUG: $dn is already tagged<br>";
@@ -929,7 +928,7 @@ class plugin
     } else {
       /* Remove objectclass and attribute */
       $ldap= $this->config->get_ldap_link();
-      $ldap->cat($dn);
+      $ldap->cat($dn, array('gosaUnitTag', 'objectClass'));
       $attrs= $ldap->fetch();
       if (!in_array_ics("gosaAdministrativeUnitTag", $attrs['objectClass'])){
         echo "DEBUG: $dn is not tagged<br>";

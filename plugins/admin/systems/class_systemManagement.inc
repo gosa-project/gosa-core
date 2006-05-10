@@ -180,7 +180,7 @@ class systems extends plugin
 
       /* Find out more about the object type */
       $ldap= $this->config->get_ldap_link();
-      $ldap->cat($this->dn);
+      $ldap->cat($this->dn, array('objectClass'));
       $attrs= $ldap->fetch();
       $type= $this->get_system_type($attrs['objectClass']);
 
@@ -327,7 +327,7 @@ class systems extends plugin
 
         /* Find out more about the object type */
         $ldap= $this->config->get_ldap_link();
-        $ldap->cat($this->dn);
+        $ldap->cat($this->dn, array('objectClass'));
         $attrs= $ldap->fetch();
         $type= $this->get_system_type($attrs['objectClass']);
 
@@ -420,7 +420,7 @@ class systems extends plugin
             $ldap = $this->config->get_ldap_link();
           }
           $ldap->cd ($this->dn);
-          $ldap->cat($this->dn);  
+          $ldap->cat($this->dn, array('dn'));  
           if(count($ldap->fetch())){
             $ldap->cd($this->dn);
             $ldap->rmDir($this->dn);

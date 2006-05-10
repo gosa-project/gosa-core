@@ -208,7 +208,7 @@ class department extends plugin
 
 		/* Check for presence of this department */
 		$ldap= $this->config->get_ldap_link();
-		$attrs= $ldap->cat ($this->dn);
+		$attrs= $ldap->cat ($this->dn, array('dn'));
 		if ($this->orig_dn == "new" && !($attrs === FALSE)){
 			$message[]= _("Department with that 'Name' already exists.");
 		} elseif ($this->orig_dn != $this->dn && !($attrs === FALSE)){
@@ -303,7 +303,7 @@ class department extends plugin
 		
 		/* Write back to ldap */
 		$ldap= $this->config->get_ldap_link();
-		$ldap->cat($this->dn);
+		$ldap->cat($this->dn, array('dn'));
 		$a= $ldap->fetch();
 		$ldap->cd($this->dn);
 		
@@ -405,7 +405,7 @@ class department extends plugin
 			$ldap= $this->config->get_ldap_link();
 
 			/* Check if destination exists - abort */
-			$ldap->cat($dst_dn);
+			$ldap->cat($dst_dn, array('dn'));
 			if ($ldap->fetch()){
 				trigger_error("Recursive_move $dst_dn already exists.",
 						E_USER_WARNING);

@@ -34,7 +34,7 @@ class userinfo
   function userinfo($config, $userdn){
     $this->config= $config;
     $ldap= $this->config->get_ldap_link();
-    $ldap->cat($userdn);
+    $ldap->cat($userdn,array('sn', 'givenName', 'uid', 'gidNumber', 'preferredLanguage'));
     $attrs= $ldap->fetch();
 
     if (isset($attrs['givenName'][0]) && isset($attrs['sn'][0])){
