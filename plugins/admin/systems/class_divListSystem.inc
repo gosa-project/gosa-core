@@ -20,6 +20,9 @@ class divListSystem extends MultiSelectWindow
   var $ShowDevices        = true;
   var $ShowPhones         = true;
 
+  /* Subsearch checkbox */
+  var $SubSearch              = false;
+
   var $parent             ;
   var $ui                 ;
 
@@ -63,6 +66,10 @@ class divListSystem extends MultiSelectWindow
     $this->AddCheckBox("ShowPrinters",        _("Select to see network printers"),    _("Show network printers") ,true);
     $this->AddCheckBox("ShowPhones",          _("Select to see VOIP phones"),         _("Show phones") ,          true);
     $this->AddCheckBox("ShowDevices",         _("Select to see network devices"),     _("Show network devices"),  true);
+
+    /* Add SubSearch checkbox */
+    $this->AddCheckBox(SEPERATOR);
+    $this->AddCheckBox("SubSearch",  _("Select to search search within subtres"), _("Subsearch"), false);
 
     /*                  Name                 ,Text                              ,Default  , Connect with alphabet  */
     $this->AddRegex   ("Regex",     _("Display systems matching"),"*" , true);
@@ -115,7 +122,6 @@ class divListSystem extends MultiSelectWindow
   {
     $this->ClearElementsList();
     $this->GenHeader();
-    $this->AddDepartments($this->selectedBase);
   }
 
   function setEntries($terminals)
