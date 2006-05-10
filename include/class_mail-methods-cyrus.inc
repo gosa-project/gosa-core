@@ -148,8 +148,10 @@ class mailMethodCyrus extends mailMethod
 
         /* Remove all acl's for this folder */
         $users= @imap_getacl ($this->mbox, $subfolder);
-        foreach ($users as $userid => $perms){
-          imap_setacl ($this->mbox, $subfolder, $userid, "");
+        if(is_array($users)){
+          foreach ($users as $userid => $perms){
+            imap_setacl ($this->mbox, $subfolder, $userid, "");
+          }
         }
       } else {
         print_red (_("Warning: imap_getacl is not implemented, can't remove acl informations."));
