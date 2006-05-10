@@ -412,13 +412,12 @@ class faiProfile extends plugin
 
     $this->attrs['FAIclass']=trim($this->FAIclass);
 
-    $ldap->cat($this->dn);
+    $ldap->cat($this->dn,array("objectClass"));
     if($ldap->count()!=0){
       /* Write FAIscript to ldap*/
       $ldap->cd($this->dn);
       $this->cleanup();
-$ldap->modify ($this->attrs); 
-
+      $ldap->modify ($this->attrs); 
     }else{
       /* Write FAIscript to ldap*/
       $ldap->cd($this->config->current['BASE']);

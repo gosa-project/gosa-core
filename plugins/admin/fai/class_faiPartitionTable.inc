@@ -344,8 +344,7 @@ class faiPartitionTable extends plugin
        */
       $ldap->cd($this->dn);
       $this->cleanup();
-$ldap->modify ($this->attrs); 
-
+      $ldap->modify ($this->attrs); 
       show_ldap_error($ldap->get_error());
     }
   
@@ -374,10 +373,17 @@ $ldap->modify ($this->attrs);
       $disk_attrs['objectClass']  =  array("top","FAIclass","FAIpartitionDisk");
 
       if($disk['status']=="new"){
-        $ldap->cat($disk_dn);
+        $ldap->cat($disk_dn,array("objectClass"));
         if($ldap->count()){
           $disk['status']="edited";
         }
+      }
+
+      /* Fix problem with missing objectClass "gosaAdministrativeUnitTag" for disks */
+      $ldap->cat($disk_dn,array("objectClass"));
+      $attrs = $ldap->fetch();
+      if(isset($attrs['objectClass']) && in_array_ics("gosaAdministrativeUnitTag",$attrs['objectClass'])){
+        $disk_attrs['objectClass'][] = "gosaAdministrativeUnitTag";
       }
  
       if($disk['status'] == "delete"){
@@ -390,7 +396,6 @@ $ldap->modify ($this->attrs);
         $ldap->cd($disk_dn);
         $this->cleanup();
         $ldap->modify ($disk_attrs); 
-
       }elseif($disk['status']== "new"){
         if(empty($disk_attrs['description'])){
           unset($disk_attrs['description']);
@@ -428,7 +433,7 @@ $ldap->modify ($this->attrs);
         unset($partition_attrs['old_cn']);
 
         if($partition['status']=="new"){
-          $ldap->cat($partition_dn);
+          $ldap->cat($partition_dn,array("objectClass"));
           if($ldap->count()){
             $partition['status']="edited";
           }
@@ -436,6 +441,13 @@ $ldap->modify ($this->attrs);
 
         if((!isset($partition['FAImountPoint']))||(empty($partition['FAImountPoint']))){
           $partition_attrs['FAImountPoint']="swap";
+        }
+
+        /* Fix problem with missing objectClass "gosaAdministrativeUnitTag" for partitions */
+        $ldap->cat($partition_dn,array("objectClass"));
+        $attrs = $ldap->fetch();
+        if(isset($attrs['objectClass']) && in_array_ics("gosaAdministrativeUnitTag",$attrs['objectClass'])){
+          $partition_attrs['objectClass'][] = "gosaAdministrativeUnitTag";
         }
 
         if(($partition['status'] == "delete")&&($disk['status']!="new")){
