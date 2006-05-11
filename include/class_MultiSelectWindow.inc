@@ -33,6 +33,7 @@ class MultiSelectWindow{
 	var $DepartmentsAdded		= false;
 	var $selectedBase       	= "";
 
+
 	function ClearElementsList()
 	{
 		$this->array_Elements = array();
@@ -154,10 +155,12 @@ class MultiSelectWindow{
 			}else{
 				$arr['default']	= $default;
 			}
-			$arr['name'] 	= $name;
-			$arr['string']	= $string;
-			$arr['value']	= $value;
-			$arr['enabled']	= true;
+			$arr['name'] 	      = $name;
+			$arr['string']	    = $string;
+			$arr['value']	      = $value;
+			$arr['enabled']	    = true;
+
+      $this->$name = $default;
 		}
 		$this->array_Checkboxes[] = $arr;
 	}
@@ -376,6 +379,7 @@ class MultiSelectWindow{
 				}
 			}
 		}
+
 		if(isset($_POST['MultiSelectWindow'.$this->filterName])){
 
 			/* Check posts from checkboxes 
@@ -503,5 +507,5 @@ class MultiSelectWindow{
 		}
 	}
 }
-
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
