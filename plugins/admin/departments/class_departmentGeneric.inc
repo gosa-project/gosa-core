@@ -407,7 +407,7 @@ class department extends plugin
 			if ($ldap->fetch()){
 				trigger_error("Recursive_move $dst_dn already exists.",
 						E_USER_WARNING);
-				echo sprintf_("Recursive_move: '%s' already exists.")."<br>", $dst_dn); 
+				echo sprintf_("Recursive_move: '%s' already exists", $dst_dn)."<br>"; 
 				return (FALSE);
 			}
 	
