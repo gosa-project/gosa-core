@@ -156,7 +156,7 @@ class divListUsers extends MultiSelectWindow
     /* Possilbe objectClass image combinations */  
     $possibleAccounts = array(
             "posixAccount"    => array("VAR"=>"posix"     ,"IMG"=>"posiximg"),
-            "gotoEnvironment" => array("VAR"=>"enviro"    ,"IMG"=>"enviro"),
+            "gotoEnvironment" => array("VAR"=>"enviro"    ,"IMG"=>"eviroimg"),
             "gosaMailAccount" => array("VAR"=>"maila"     ,"IMG"=>"mailimg"),
             "goFaxAccount"    => array("VAR"=>"faxac"     ,"IMG"=>"faximg"),
             "sambaSamAccount" => array("VAR"=>"samba"     ,"IMG"=>"sambaimg"),
