@@ -322,18 +322,19 @@ class department extends plugin
 
 		
     /* Optionally execute a command after we're done */
-		$this->postcreate();
-
     $this->must_be_tagged =true;
-    $smarty = get_smarty();
-    $smarty->assign("src","?plug=".$_GET['plug']."&Tag");
-    $display=  $smarty->fetch(get_template_path("iframe.tpl",TRUE));
-    return($display);
-    exit();
- 
-
+		$this->postcreate();
+    return(true);
 	}
 
+
+  function ShowTagFrame()
+  {
+    $smarty = get_smarty();
+    $smarty->assign("src","?plug=".$_GET['plug']."&TagDepartment");
+    $display=  $smarty->fetch(get_template_path("recursive_move.tpl",TRUE));
+    return($display);
+  }
 
 	/* Tag objects to have the gosaAdministrativeUnitTag */
 	function tag_objects()
@@ -372,10 +373,16 @@ class department extends plugin
 
 			/* Fix entry if needed */
 			if ($fix){
-
+        echo "asdfasdfasdfasdf";
 				$this->handle_object_tagging($attrs['dn'], $this->gosaUnitTag);
 			}
 		}
+			echo '<p class="seperator">&nbsp;</p>';
+
+			echo "<div style='width:100%;text-align:right;'><form name='form' method='post' action='?plug=".$_GET['plug']."' target='_parent'>
+				<br><input type='submit' name='back' value='"._("Continue")."'>
+				</form></div>";
+
 	}
 
 

@@ -211,7 +211,7 @@ class departmentManagement extends plugin
 
 		/* This department must be tagged 
          */
-		if((isset($_GET['Tag'])) && ($this->deptabs->by_object['department']->must_be_tagged())){
+		if((isset($_GET['TagDepartment'])) && ($this->deptabs->by_object['department']->must_be_tagged())){
 			$this->deptabs->by_object['department']->tag_objects();
 			if ($this->dn != "new"){
 				del_lock ($this->dn);
@@ -251,7 +251,12 @@ class departmentManagement extends plugin
 
 				/* Save user data to ldap */
 				$disp = $this->deptabs->save();
-				if(!($this->deptabs->by_object['department']->am_i_moved() || ($this->deptabs->by_object['department']->must_be_tagged())) ){
+				if($this->deptabs->by_object['department']->must_be_tagged()) {
+					$disp.= $this->deptabs->by_object['department']->ShowTagFrame();
+					return($disp);
+				}	
+					
+				if(!($this->deptabs->by_object['department']->am_i_moved()) ){
 					gosa_log ("Department object'".$this->dn."' has been saved");
 
 					/* Group has been saved successfully, remove lock from
