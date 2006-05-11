@@ -1004,8 +1004,16 @@ function gen_locked_message($user, $dn)
   $ldap= $config->get_ldap_link();
   $ldap->cat ($user, array('uid', 'cn'));
   $attrs= $ldap->fetch();
-  $uid= $attrs["uid"][0];
-  $cn= $attrs["cn"][0];
+
+  /* Stop if we have no user here... */
+  if (count($attrs)){
+    $uid= $attrs["uid"][0];
+    $cn= $attrs["cn"][0];
+  } else {
+    $uid= $attrs["uid"][0];
+    $cn= $attrs["cn"][0];
+  }
+  
   $remove= false;
 
   if((isset($_SESSION['LOCK_VARS_TO_USE']))&&(count($_SESSION['LOCK_VARS_TO_USE']))){

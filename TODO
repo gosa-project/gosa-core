@@ -26,13 +26,15 @@ Target for 2.4.1:
 
 * Auto-Resize for subdialogs
 
+* Change FAIstate when triggering actions
+  (install, sysinfo, softupdate)
+
 
 Now:
 * Add iframe progress for departments when handling tagging
-* check class_plugin.inc and what effects a ldap->cat(..., $this->attributes)
-  will have to other plugins
+* evaluate what effects a ldap->cat(..., $this->attributes)
+  will have to other plugins in class_plugin.inc
 * Enhance show_ldap_error() with an additional programmer supplied message
-* Change FAIstate when triggering actions
 * Changing LDAP-Servers -> start tab!
 
 
