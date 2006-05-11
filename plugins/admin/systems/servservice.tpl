@@ -12,7 +12,7 @@
    <table summary="" style="width:100%">
     <tr>
      <td>
-		<select style="width:100%" id="goExportEntry" name="goExportEntry[]" {$goExportEntryACL} {$goShareServerState} size=12 multiple >
+		<select style="width:100%" id="goExportEntry" name="goExportEntryList[]" {$goExportEntryACL} {$goShareServerState} size=12 multiple >
     		{html_options values=$goExportEntry output=$goExportEntryKeys}
 			<option disabled>&nbsp;</option>
 	    </select>

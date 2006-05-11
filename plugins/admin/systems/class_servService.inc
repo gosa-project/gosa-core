@@ -8,6 +8,7 @@ class servservice extends plugin
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   var $goExportEntry    = array();
+  var $goExportEntryList= array();
   var $goTimeSource     = array();
   var $goLdapBase       = "";
   var $goXdmcpIsEnabled = "";
@@ -69,18 +70,17 @@ class servservice extends plugin
       $this->$name= $tmp;
     }
 
-
     $tmp =array();
     $tmp2=array();
     if(isset($this->attrs['goExportEntry'])){
       if(isset($this->attrs['goExportEntry']['count'])){
         for($i= 0; $i<$this->attrs['goExportEntry']['count']; $i++){
           $entry= $this->attrs['goExportEntry'][$i];
-          $tmp[preg_replace('/|.*$/', '', $entry)]= $entry;
+          $tmp[preg_replace('/\|.*$/', '', $entry)]= $entry;
         }
       }
     }
-    $this->goExportEntry = $tmp;
+    $this->goExportEntryList = $tmp;
 
     /* Always is account... */
     $this->is_account= TRUE;
@@ -95,11 +95,11 @@ class servservice extends plugin
 
   function addToList($entry){
     $key =  key($entry);
-    $this->goExportEntry[$key]=$entry[$key];
+    $this->goExportEntryList[$key]=$entry[$key];
   }
 
   function deleteFromList($id){
-    unset($this->goExportEntry[$id]);
+    unset($this->goExportEntryList[$id]);
   }
   
   function addToMountList($entry) {
@@ -128,11 +128,15 @@ class servservice extends plugin
     $smarty= get_smarty();
     $smarty->assign("staticAddress", "");
 
-    if((isset($_POST['DelNfsEnt']))&&(isset($_POST['goExportEntry']))){
+    if((isset($_POST['DelNfsEnt']))&&(isset($_POST['goExportEntryList']))){
       if($this->allow_mounts){
-        $this->deleteFromMountList($this->goExportEntry[$_POST['goExportEntry']]);
+        foreach($_POST['goExportEntryList'] as $entry){
+          $this->deleteFromMountList($this->goExportEntryList[$entry]);
+        }
       }
-      $this->deleteFromList($_POST['goExportEntry']);
+      foreach($_POST['goExportEntryList'] as $entry){
+        $this->deleteFromList($entry);
+      }
     }
 
     if(isset($_POST['NewNfsAdd'])){
@@ -141,8 +145,8 @@ class servservice extends plugin
       $this->dialog = true;
     }
 
-    if((isset($_POST['NewNfsEdit']))&&(isset($_POST['goExportEntry']))){
-      $entry = $this->goExportEntry[$_POST['goExportEntry'][0]];
+    if((isset($_POST['NewNfsEdit']))&&(isset($_POST['goExportEntryList']))){
+      $entry = $this->goExportEntryList[$_POST['goExportEntryList'][0]];
       $add_mount=isset($this->mounts_to_add[$entry]);
       $this->oldone=$entry;
       $this->o_subWindow = new servnfs($this->config,$this->acl,$this->allow_mounts,$this->dn,$entry,$add_mount);
@@ -211,8 +215,8 @@ class servservice extends plugin
     }
     
     $tellSmarty=array();
-    ksort($this->goExportEntry);
-    foreach($this->goExportEntry as $name=>$values){
+    ksort($this->goExportEntryList);
+    foreach($this->goExportEntryList as $name=>$values){
        $tmp = split("\|",$values);
        $tellSmarty[$name] = $tmp[0]." ".$tmp[4]." (".$tmp[2].")";
     }
@@ -345,10 +349,10 @@ class servservice extends plugin
     $this->attrs['objectClass']= $tmp;
 
     /* Arrays */
-    foreach (array("goTimeSource", "goExportEntry") as $name){
-      $this->attrs[$name]= array();
-      foreach ($this->$name as $element){
-        $this->attrs[$name][]= $element;
+    foreach (array("goTimeSource"=>"goTimeSource", "goExportEntryList"=>"goExportEntry") as $source => $destination){
+      $this->attrs[$destination]= array();
+      foreach ($this->$source as $element){
+        $this->attrs[$destination][]= $element;
       }
     }
     
