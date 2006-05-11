@@ -854,7 +854,7 @@ class plugin
   }
 
 
-  function handle_object_tagging($dn= "", $tag= "")
+  function handle_object_tagging($dn= "", $tag= "", $show= false)
   {
     //FIXME: How to optimize this? We have at least two
     //       LDAP accesses per object. It would be a good
@@ -905,13 +905,17 @@ class plugin
       $ldap->cat($dn, array('gosaUnitTag', 'objectClass'));
       $attrs= $ldap->fetch();
       if(isset($attrs['gosaUnitTag'][0]) && $attrs['gosaUnitTag'][0] == $tag){
-        echo sprintf(_("Processing: Object '%s' is already tagged"), $dn);
-        flush();
+        if ($show) {
+          echo sprintf(_("Processing: Object '%s' is already tagged"), $dn);
+          flush();
+        }
         return;
       }
       if (count($attrs)){
-        echo sprintf(_("Processing: Adding tag (%s) to object '%s'"), $dn);
-        flush();
+        if ($show){
+          echo sprintf(_("Processing: Adding tag (%s) to object '%s'"), $dn);
+          flush();
+        }
         $nattrs= array("gosaUnitTag" => $this->gosaUnitTag);
         $nattrs['objectClass']= array();
         for ($i= 0; $i<$attrs['objectClass']['count']; $i++){
@@ -937,8 +941,10 @@ class plugin
         return;
       }
       if (count($attrs)){
-        echo sprintf(_("Processing: Removing tag from object '%s'"), $dn);
-        flush();
+        if ($show){
+          echo sprintf(_("Processing: Removing tag from object '%s'"), $dn);
+          flush();
+        }
         $nattrs= array("gosaUnitTag" => array());
         $nattrs['objectClass']= array();
         for ($i= 0; $i<$attrs['objectClass']['count']; $i++){

@@ -34,6 +34,7 @@ Now:
 * evaluate what effects a ldap->cat(..., $this->attributes)
   will have to other plugins in class_plugin.inc
 * Changing LDAP-Servers -> start tab! Actions?
+* Can't rename servers!
 
 
 Target for 2.5:
