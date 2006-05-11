@@ -713,8 +713,7 @@ class environment extends plugin
     $this->cleanup();
     $ldap->modify ($this->attrs); 
 
-
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Removing environment information failed"));
 
     /* Optionally execute a command after we're done */
     $this->handle_post_events("remove");
@@ -1045,9 +1044,7 @@ $ldap->modify ($attrs);
     $ldap->cd($this->dn);
     $this->cleanup();
     $ldap->$mode($this->attrs);
-    if($ldap->get_error()!="Success"){
-      print_red($ldap->get_error());
-    }
+    show_ldap_error($ldap->get_error(), _("Adding environment information failed"));
     $this->handle_post_events($mode);
   }
 

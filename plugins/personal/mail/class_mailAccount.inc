@@ -567,9 +567,9 @@ class mailAccount extends plugin
         $this->attributes, "Save");
     $ldap->cd($this->dn);
     $this->cleanup();
-$ldap->modify ($this->attrs); 
+    $ldap->modify ($this->attrs); 
 
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Removing mail account failed"));
 
     /* Connect to IMAP server for account deletion */
     if ($this->gosaMailServer != ""){
@@ -672,7 +672,7 @@ $ldap->modify ($this->attrs);
     $this->cleanup();
     $ldap->modify ($this->attrs); 
   
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Saving mail account failed"));
 
     /* Only do IMAP actions if we are not a template */
     if (!$this->is_template){

@@ -622,9 +622,9 @@ class sambaAccount extends plugin
         $this->attributes, "Save");
     $ldap->cd($this->dn);
     $this->cleanup();
-$ldap->modify ($this->attrs); 
+    $ldap->modify ($this->attrs); 
 
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Removing Samba account failed"));
 
     /* Optionally execute a command after we're done */
     $this->handle_post_events("remove");
@@ -969,9 +969,9 @@ $ldap->modify ($this->attrs);
     /* Write back to ldap */
     $ldap->cd($this->dn);
     $this->cleanup();
-$ldap->modify ($this->attrs); 
+    $ldap->modify ($this->attrs); 
 
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Saving Samba account failed"));
 
     /* Optionally execute a command after we're done */
     if ($this->initially_was_account == $this->is_account){

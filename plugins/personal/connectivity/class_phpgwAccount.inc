@@ -67,9 +67,9 @@ class phpgwAccount extends plugin
       @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
           $this->attributes, "Save");
       $this->cleanup();
-$ldap->modify ($this->attrs); 
+      $ldap->modify ($this->attrs); 
 
-      show_ldap_error($ldap->get_error());
+      show_ldap_error($ldap->get_error(), _("Removing PHPgw account failed"));
 
       /* Optionally execute a command after we're done */
       $this->handle_post_events('remove');
@@ -110,9 +110,9 @@ $ldap->modify ($this->attrs);
       $ldap= $this->config->get_ldap_link();
       $ldap->cd($this->dn);
       $this->cleanup();
-$ldap->modify ($this->attrs); 
+      $ldap->modify ($this->attrs); 
 
-      show_ldap_error($ldap->get_error());
+      show_ldap_error($ldap->get_error(), _("Saving PHPgw account failed"));
 
       /* Optionally execute a command after we're done */
       if ($this->initially_was_account == $this->is_account){

@@ -592,9 +592,9 @@ class posixAccount extends plugin
         $this->attributes, "Save");
     $ldap->cd($this->dn);
     $this->cleanup();
-$ldap->modify ($this->attrs); 
+    $ldap->modify ($this->attrs); 
 
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Removing UNIX account failed"));
 
     /* Delete group only if cn is uid and there are no other
        members inside */
@@ -809,7 +809,7 @@ $ldap->modify ($this->attrs);
     unset($this->attrs['uid']);
     $ldap->modify ($this->attrs); 
 
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Saving UNIX account failed"));
 
     /* Remove lock needed for unique id generation */
     del_lock ("uidnumber");
