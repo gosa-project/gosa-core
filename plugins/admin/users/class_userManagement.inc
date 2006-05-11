@@ -29,18 +29,17 @@ class userManagement extends plugin
   var $plDescription= "This does something";
 
   /* Dialog attributes */
-  var $usertab= NULL;
-  var $ui= NULL;
-  var $acl= "";
-  var $templates= array();
-  var $got_uid= false;
-  var $departments= array();
-  var $CopyPasteHandler   = NULL;
-  var $CPPasswordChange   = ""; // Contains the entry id which should get a new password
+  var $usertab              = NULL;
+  var $ui                   = NULL;
+  var $acl                  = "";
+  var $templates            = array();
+  var $got_uid              = false;
+  var $CopyPasteHandler     = NULL;
+  var $CPPasswordChange     = ""; // Contains the entry id which should get a new password
+  var $DivListUsers;
 
   function userManagement($config, $ui)
   {
-  
     /* Save configuration for internal use */
     $this->config= $config;
     $this->ui= $ui;
@@ -50,26 +49,8 @@ class userManagement extends plugin
       $this->CopyPasteHandler= new CopyPasteHandler($this->config);
     }
 
-    /* Get global filter config */
-    if (!isset($_SESSION["userfilter"])){
-      $base= get_base_from_people($ui->dn);
-      $userfilter= array( "mailusers"       => "checked",
-                          "unixusers"       => "checked",
-                          "templates"       => "",
-                          "subsearch"       => "",
-                          "proxyusers"      => "checked",
-                          "sambausers"      => "checked",
-                          "faxusers"        => "checked",
-                          "functionalusers" => "checked",
-                          "regex"           => "*");
-      $_SESSION["userfilter"]= $userfilter;
-    }
-    
-    /* Transfer global base to dialogs people base */
-    if(!isset($_SESSION['CurrentMainBase'])){
-      $base= get_base_from_people($ui->dn);
-      $_SESSION['CurrentMainBase']= $base;
-    }
+    /* Creat dialog object */
+    $this->DivListUsers = new divListUsers($this->config,$this);
 
     /* LOCK MESSAGE Vars */
     $_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^user_edit_/","/^user_del_/");
@@ -78,25 +59,12 @@ class userManagement extends plugin
 
   function execute()
   {
-    //FIXME: This function lacks structure! It's dammn spaghetti code.
-  
     /* Call parent execute */
     plugin::execute();
 
-    $smarty= get_smarty();                  // Smarty instance
-    $userfilter= get_global("userfilter");  // contains Filter Settings
-    $s_action= "";                          // Contains the action to be taken
-    $s_entry= "";                           // The value for s_action
-    $base_back= "";                         // The Link for Backbutton
-
-    /* Department folder change requested? */
-    if( isset($_GET['act']) && $_GET['act'] == "dep_open" ){
-      $s_action= "open";
-      $s_entry= base64_decode($_GET['dep_id']);
-
-      /* Set current main base to the requested department DN */
-      $_SESSION['CurrentMainBase']= $this->config->departments[trim($s_entry)];
-    }
+    $smarty       = get_smarty();                 // Smarty instance
+    $s_action     = "";                           // Contains the action to be taken
+    $s_entry      = "";                           // The value for s_action
 
     /* Edit entry button pressed? */
     if( isset($_GET['act']) && $_GET['act'] == "edit_entry" ){
@@ -109,9 +77,9 @@ class userManagement extends plugin
 
       /* Get every possible POST combination and set s_action/s_entry accordingly */
       foreach(array("del"       => "user_del",    "edit"      => "user_edit",
-                    "back"      => "dep_back",    "new"       => "user_new",
-                    "home"      => "dep_home",    "new_tpl"   => "user_tplnew",
-                    "change_pw" => "user_chgpw",  "root"      => "dep_root",
+                    "new"       => "user_new",
+                    "new_tpl"   => "user_tplnew",
+                    "change_pw" => "user_chgpw", 
                     "editPaste" => "editPaste",   "copy"      => "copy",
                     "cut"       => "cut") as $act => $name){
 
@@ -135,86 +103,52 @@ class userManagement extends plugin
       $s_tab= "user";
     }
 
-    /* Department has changed? */
-    if(isset($_POST['CurrentMainBase'])){
-      $_SESSION['CurrentMainBase']= validate($_POST['CurrentMainBase']);
-    }
-
-    /* Home-button is pressed, move to users home DN */
-    if($s_action == "home"){
-      $_SESSION['CurrentMainBase']= preg_replace('/^[^,]+,'.normalizePreg(get_people_ou()).'/', "", $this->ui->dn);
-    }
-
-    /* Root-button is pressed, move to root DN */
-    if($s_action == "root"){
-      $_SESSION['CurrentMainBase']= $this->config->current['BASE'];
-    }
-
-    /* If Back-button is pressed, move back one step in DN */
-    if($s_action == "back"){
-      //FIXME: This is not 100% correct. We'll only display ou's, but there may be
-      //       a step between. You'll stumble in a "hidden" department in this case.
-      $base_back= preg_replace("/^[^,]+,/", "", $_SESSION['CurrentMainBase']);
-
-      /* The department array keeps non DN entries as index. We need to convert
-         it before checking the existance. */
-      $base_back= trim(convert_department_dn($base_back));
-
-      /* Check if the department exists, otherwise revert to the configure base DN */
-      if(isset($this->config->departments[$base_back])){
-        $_SESSION['CurrentMainBase']= $this->config->departments[$base_back];
-      }else{
-        $_SESSION['CurrentMainBase']= $this->config->departments['/'];
-      }
-    }
-
+    /* Display the copy & paste dialog, if it is currently open */
     $ret = $this->copyPasteHandling($s_action,$s_entry);
     if($ret){
       return($ret);
     }
 
-    /* Save filter data if we are in the headpage */
-    if(!isset($this->usertab)){
-      $values= array("functionalusers", "unixusers", "mailusers", "sambausers",
-                     "proxyusers", "faxusers", "templates", "subsearch");
-      $userfilter= saveFilter($userfilter, $values);
-      register_global("userfilter", $userfilter);
-    }
 
-    /* React on user interaction here */
-    if (($_SERVER["REQUEST_METHOD"] == "POST")||($_SERVER["REQUEST_METHOD"]== "GET")){
+    /********************
+      Edit existing entry 
+     ********************/
 
-      /* User wants to edit data? */
-      if (($s_action=="edit") && (!isset($this->usertab->config))){
+    /* User wants to edit data? */
+    if (($s_action=="edit") && (!isset($this->usertab->config))){
 
-        /* Get 'dn' from posted 'uid', must be unique */
-        $this->dn= $this->list[trim($s_entry)]['dn'];
+      /* Get 'dn' from posted 'uid', must be unique */
+      $this->dn= $this->list[trim($s_entry)]['dn'];
 
-        /* Check locking, save current plugin in 'back_plugin', so
-           the dialog knows where to return. */
-        if (($user= get_lock($this->dn)) != ""){
-          return(gen_locked_message ($user, $this->dn));
-        }
-
-        /* Lock the current entry, so everyone will get the
-           above dialog */
-        add_lock ($this->dn, $this->ui->dn);
-
-        /* Set up the users ACL's for this 'dn' */
-        $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
-
-        /* Register usertab to trigger edit dialog */
-        $this->usertab= new usertabs($this->config, 
-                                     $this->config->data['TABS']['USERTABS'], $this->dn);
-
-        /* Switch tab, in case that was requested by the user */
-        $this->usertab->current = $s_tab;
-        
-        /* Set ACL and move DN to the headline */
-        $this->usertab->set_acl($acl);
-        $_SESSION['objectinfo']= $this->dn;
+      /* Check locking, save current plugin in 'back_plugin', so
+         the dialog knows where to return. */
+      if (($user= get_lock($this->dn)) != ""){
+        return(gen_locked_message ($user, $this->dn));
       }
+
+      /* Lock the current entry, so everyone will get the
+         above dialog */
+      add_lock ($this->dn, $this->ui->dn);
+
+      /* Set up the users ACL's for this 'dn' */
+      $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
+
+      /* Register usertab to trigger edit dialog */
+      $this->usertab= new usertabs($this->config, 
+          $this->config->data['TABS']['USERTABS'], $this->dn);
+
+      /* Switch tab, if it was requested by the user */
+      $this->usertab->current = $s_tab;
+
+      /* Set ACL and move DN to the headline */
+      $this->usertab->set_acl($acl);
+      $_SESSION['objectinfo']= $this->dn;
     }
+
+
+    /********************
+      Edit canceled 
+     ********************/
 
     /* Reset all relevant data, if we get a _cancel request */
     if (isset($_POST['edit_cancel']) || isset($_POST['password_cancel'])){
@@ -229,6 +163,11 @@ class userManagement extends plugin
       $this->uid= "";
       unset ($_SESSION['objectinfo']);
     }
+
+
+    /********************
+      Change password requested  
+     ********************/
 
     /* Password change requested */
     if (($s_action == "change_pw") || (!empty($this->CPPasswordChange))){
@@ -258,6 +197,11 @@ class userManagement extends plugin
         print_red (_("You are not allowed to set this users password!"));
       }
     }
+
+
+    /********************
+      Change password confirmed
+     ********************/
 
     /* Perform password change */
     if (isset($_POST['password_finish'])){
@@ -292,10 +236,10 @@ class userManagement extends plugin
         $config= $this->config;
         $ldap_ui= $this->config->get_ldap_link();
         if(isset($this->usertab->dn)){
-          $ldap_ui->cat($this->usertab->dn, array('uid'));
+          $ldap_ui->cat($this->usertab->dn,array("uid"));
           $user = $ldap_ui->fetch();
         }else{
-          $ldap_ui->cat($this->dn, array('uid'));
+          $ldap_ui->cat($this->dn,array("uid"));
           $user = $ldap_ui->fetch();
         }
         if((is_array($user))&&(isset($user['uid']))){
@@ -306,8 +250,7 @@ class userManagement extends plugin
         if ($this->usertab){
           if ($this->usertab->password_change_needed()){
             $obj= $this->usertab->by_object['user'];
-            change_password ($this->usertab->dn, $_POST['new_password'],
-                0, $obj->pw_storage);
+            change_password ($this->usertab->dn, $_POST['new_password'],0, $obj->pw_storage);
             if (isset($config->data['MAIN']['EXTERNALPWDHOOK'])){
               exec($config->data['MAIN']['EXTERNALPWDHOOK']." ".$username." ".$_POST['new_password'], $resarr);
             }
@@ -332,7 +275,6 @@ class userManagement extends plugin
 
       /* Clean session, delete lock */
       del_lock ($this->dn);
-      $this->reload();
       unset ($this->usertab);
       $this->usertab= NULL;
       $this->lognames= array();;
@@ -341,6 +283,11 @@ class userManagement extends plugin
       $this->uid= "";
       unset ($_SESSION['objectinfo']);
     }
+
+
+    /********************
+      Delete entry requested, display confirm dialog
+     ********************/
 
     /* Remove user was requested */
     if ($s_action=="del"){
@@ -372,6 +319,11 @@ class userManagement extends plugin
       }
     }
 
+
+    /********************
+      Delete entry confirmed 
+     ********************/
+
     /* Confirmation for deletion has been passed. User should be deleted. */
     if (isset($_POST['delete_user_confirm'])){
 
@@ -380,16 +332,12 @@ class userManagement extends plugin
       if (chkacl($this->acl, "delete") == ""){
 
         /* Delete request is permitted, perform LDAP action */
-        $this->usertab= new usertabs($this->config, $this->config->data['TABS']['USERTABS'],
-            $this->dn);
+        $this->usertab= new usertabs($this->config, $this->config->data['TABS']['USERTABS'],$this->dn);
         $this->usertab->set_acl(array($this->acl));
         $this->usertab->delete ();
         gosa_log ("User object '".$this->dn."' has been removed");
         unset ($this->usertab);
         $this->usertab= NULL;
-
-        /* User list has changed, reload it. */
-        $this->reload ();
       } else {
 
         /* Normally this shouldn't be reached, send some extra
@@ -405,12 +353,20 @@ class userManagement extends plugin
       del_lock ($this->dn);
     }
 
+    
+    /********************
+      Delete entry Canceled 
+     ********************/
 
     /* Delete user canceled? */
     if (isset($_POST['delete_cancel'])){
       del_lock ($this->dn);
     }
 
+
+    /********************
+      Edit entry finished (Save) 
+     ********************/
 
     /* Finish user edit is triggered by the tabulator dialog, so
        the user wants to save edited data. Check and save at this
@@ -441,26 +397,19 @@ class userManagement extends plugin
         }
         gosa_log ("User object '".$this->dn."' has been saved");
 
-        /* User has been saved successfully, remove lock from
-           LDAP. */
+        /* User has been saved successfully, remove lock from LDAP. */
         if ($this->dn != "new"){
           del_lock ($this->dn);
         }
 
-        /* In case of new users, ask for a password */
-        if (($set_pass || $this->usertab->password_change_needed()) &&
-            !$this->is_template){
-
+        /* In case of new users, ask for a password, skip this for templates */
+        if (($set_pass || $this->usertab->password_change_needed()) && !$this->is_template){
           return($smarty->fetch(get_template_path('password.tpl', TRUE)));
         }
 
-        /* There's no page reload so we have to read new users at
-           this point. */
-        $this->reload ();
         unset ($this->usertab);
         $this->usertab= NULL;
         unset ($_SESSION['objectinfo']);
-
       } else {
         /* Ok. There seem to be errors regarding to the tab data,
            show message and continue as usual. */
@@ -468,14 +417,18 @@ class userManagement extends plugin
       }
     }
 
+
+    /********************
+      We want to create a new user, so fetch all available user templates 
+     ********************/
+
     /* Generate template list */
     if (($s_action=="new")||($s_action=="create_user_from_tpl")){
 
       $this->templates= array();
-
       $ldap= $this->config->get_ldap_link();
 
-      /* Create list of tempaltes */
+      /* Create list of templates */
       foreach ($this->config->departments as $key => $value){
     
         /* Get acls from different ou's */
@@ -505,6 +458,11 @@ class userManagement extends plugin
       reset ($this->templates);
     }
 
+
+    /********************
+      Create a new user,template, user from template 
+     ********************/
+
     /* New user/template request */
     if (($s_action=="create_user_from_tpl")||($s_action=="new") || ($s_action=="new_tpl")){
       /* By default we set 'dn' to 'new', all relevant plugins will
@@ -517,10 +475,9 @@ class userManagement extends plugin
       }
 
       /* Create new usertab object */
-      $this->usertab= new usertabs($this->config,
-          $this->config->data['TABS']['USERTABS'], $this->dn);
+      $this->usertab= new usertabs($this->config,$this->config->data['TABS']['USERTABS'], $this->dn);
       $this->usertab->set_acl(array(':all'));
-      $this->usertab->by_object['user']->base= $_SESSION['CurrentMainBase'];
+      $this->usertab->by_object['user']->base= $this->DivListUsers->selectedBase;
 
       /* Take care about templates */
       if ($s_action=="new_tpl"){
@@ -545,10 +502,14 @@ class userManagement extends plugin
       }
     }
 
+    /********************
+      Template selected continue edit
+     ********************/
+
     /* Continue template editing */
     if ((isset($_POST['template_continue']) && $_POST['template'] != 'none' && !isset($_POST['uid']))){
-      $this->sn= $_POST['sn'];
-      $this->givenName= $_POST['givenName'];
+      $this->sn             = $_POST['sn'];
+      $this->givenName      = $_POST['givenName'];
 
       /* Check for requred values */
       $message= array();
@@ -597,6 +558,11 @@ class userManagement extends plugin
       return($smarty->fetch(get_template_path('template.tpl', TRUE)));
     }
 
+
+    /********************
+      No template selected continue edit
+     ********************/
+
     /* No template. Ok. Lets fill data into the normal user dialog */
     if (isset($_POST['template_continue']) && $_POST['template'] == 'none'){
       foreach(array("sn", "givenName", "uid") as $attr){
@@ -605,6 +571,11 @@ class userManagement extends plugin
         }
       }
     }
+
+
+    /********************
+      Template selected continue edit
+     ********************/
 
     /* Finish template preamble */
     if (isset($_POST['template_continue']) && $_POST['template'] != 'none' && (isset($_POST['uid']))){
@@ -627,10 +598,20 @@ class userManagement extends plugin
       $acl= get_permissions ($template_base, $this->ui->subtreeACL);
       $this->usertab->set_acl($acl);
     }
-    
+   
+ 
+    /********************
+      If no template was selected set base
+     ********************/
+
     if (isset($_POST['template_continue']) && ($_POST['template'] == 'none')){
-      $this->usertab->by_object['user']->base= $_SESSION['CurrentMainBase'];
+      $this->usertab->by_object['user']->base= $this->DivListUsers->selectedBase;
     }
+
+
+    /********************
+      Display subdialog 
+     ********************/
 
     /* Show tab dialog if object is present */
     if(isset($this->usertab->config)){
@@ -646,348 +627,36 @@ class userManagement extends plugin
       }
       return ($display);
     }
-
-    /* Reload if we need a reload... */
-    if (!isset($this->usertab) &&
-        !isset($_POST['new_user']) &&
-        !isset($_POST['new_template']) &&
-        !isset($_POST['delete_user']) &&
-        !isset($_POST['setpass_user']) &&
-        !isset($_POST['select_user'])){
-      $this->reload();
-    }
-
-    /* Check for exeeded sizelimit */
-    if (($message= check_sizelimit()) != ""){
-      return($message);
-    }
-
-    /* Prepare departments */
-    $options= "";
-    foreach ($this->config->idepartments as $key => $value){
-      if ($_SESSION['CurrentMainBase'] == $key){
-        $options.= "<option selected value='$key'>$value</option>";
-      } else {
-        $options.= "<option value='$key'>$value</option>";
-      }
-    }
-
-    /* Choose correct paste icon */
-    if($this->CopyPasteHandler){
-      $Copy_Paste= $this->CopyPasteHandler->generatePasteIcon();
-    }else{
-      $Copy_Paste= "";
-    }
-
-#------------------------------------------------------------------------ Review mark
-    //FIXME: Hmm. I spent some hours in the past to get rid of HTML inside the
-    //       PHP code. The section from here until the end of the execute() function
-    //       is not what I'd call a good solution. It works, but its somewhat ugly.
-    //       Currently I've no idea to make it better. HERE docs can help to make
-    //       the code more readable. Smarty templates would be the best solution.
-    //       Just not sure how to do it right now.
-
-    /* NEW LIST MANAGMENT */
-    //FIXME: Who cares? The old one is not present, and the big letters don't
-    //       make clear that it's still spaghetti code...
-    //FIXME: Variable naming - field1....
-    $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
-      " <input class='center' type='image' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
-      " <input class='center' type='image' align='middle' src='images/list_back.png' title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
-      " <input class='center' type='image' align='middle' src='images/list_home.png' title='"._("Go to users department")."' alt='"._("Home")."' name='dep_home'>&nbsp;".
-      " <input class='center' type='image' src='images/list_reload.png' align='middle' title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-      " <img   class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-      " <input class='center' type='image' align='middle' src='images/list_new_user.png' title='"._("Create new user")."' alt='"._("New user")."' name='user_new'>&nbsp;".
-      " <input class='center' type='image' align='middle' src='images/list_new.png' title='"._("Create new template")."' alt='"._("New template")."' name='user_tplnew'>&nbsp;".
-      $Copy_Paste.
-      " <img   class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-      _("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
-      " <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-      "</div>";
-    
-    if($this->CopyPasteHandler){
-      $action = "<input class='center' type='image'
-        src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
-      $action.= "<input class='center' type='image'
-        src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
-      $action.= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     
-        name='user_edit_%KEY%' title='"._("Edit user")."'>";
-      $action.= "<input class='center' type='image' src='images/list_password.png' alt='"._("password")."' 
-        name='user_chgpw_%KEY%' title='"._("Change password")."'>";
-      $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'   
-        name='user_del_%KEY%' title='"._("Delete user")."'>";
-    }else{
-      $action= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     
-        name='user_edit_%KEY%' title='"._("Edit user")."'>";
-      $action.= "<input class='center' type='image' src='images/list_password.png' alt='"._("password")."' 
-        name='user_chgpw_%KEY%' title='"._("Change password")."'>";
-      $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'   
-        name='user_del_%KEY%' title='"._("Delete user")."'>";
-    }
-
-    $divlist = new divlist("userstab");
-    $divlist->SetHeader(array(
-          array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
-          array("string" => _("Username")." / "._("Department"), "attach" => "style=''"),
-          array("string" => _("Properties"), "attach" => "style='width:152px;'"),
-          array("string" => _("Actions"), "attach" => "style='width:102px;border-right:0px;text-align:right;'")));
-
-    $divlist->SetSummary(_("This table displays all users, in the selected tree."));
-    $divlist->SetEntriesPerPage(0);
-
-    /* Defining Links */
-    $linkopen = "<a href='?plug=".validate($_GET['plug'])."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
-
-    /* Insert departments in divlist*/
-    foreach($this->departments as $key => $val){
-
-      if(!isset($this->config->departments[trim($key)])){
-        $this->config->departments[trim($key)]="";
-      }
-
-      $non_empty="";
-      $nkey= normalizePreg($key);
-      foreach($this->config->departments as $keyd => $vald ){
-        if(preg_match("/$nkey\/.*/", $keyd)){
-          $non_empty="full";
-        }
-      }
-
-      $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
-      $field3 = array("string" => "&nbsp;", "attach" => "style='width:152px;'");
-      $field4 = array("string" => "&nbsp;", "attach" => "style='width:90px;border-right:0px;text-align:right;'");
-
-      $divlist->AddEntry(array($field1,$field2,$field3,$field4));
-    }
-
-    /* Pictures for Extensions */
-    $usrimg   ="<input class='center' type='image' src='images/penguin.png' alt='"._("GOsa")."'   
-                    name='user_edit_%KEY%-user' title='"._("Edit generic properties")."'>";
-    $posiximg = "<input class='center' type='image' src='images/select_user.png' alt='"._("Posix")."'  
-                    name='user_edit_%KEY%-posixAccount' title='"._("Edit UNIX properties")."'>";
-    $eviroimg = "<input class='center' type='image' src='images/smallenv.png' alt='"._("Environment")."'  
-                    name='user_edit_%KEY%-environment' title='"._("Edit environment properties")."'>";
-    $mailimg  = "<input class='center' type='image' src='images/mailto.png' alt='"._("Mail")."'     
-                    name='user_edit_%KEY%-mailAccount' title='"._("Edit mail properties")."'>";
-    $fonimg   = "<input class='center' type='image' src='images/%image%' alt='"._("Phone")."'     
-                    name='user_edit_%KEY%-phoneAccount' title='"._("Edit phone properties")."%title%'>";
-    $faximg   = "<input class='center' type='image' src='images/fax_small.png' alt='"._("Fax")."'     
-                    name='user_edit_%KEY%-gofaxAccount' title='"._("Edit fax properies")."'>";
-    $sambaimg = "<input class='center' type='image' src='images/select_winstation.png' alt='"._("Samba")."'     
-                    name='user_edit_%KEY%-sambaAccount' title='"._("Edit samba properties")."'>"; 
-    $netatalkimg = "<input class='center' type='image' src='images/select_netatalk.png' alt='"._("Netatalk")."'
-                    name='user_edit_%KEY%-netatalk' title='"._("Edit netatalk properties")."'>";
-    $tplcreateuserimg  = "<input type='image' class='center' src='images/list_new.png' alt='"._("Create user from template")."'
-                    name='userfrom_tpl_%KEY%' title='"._("Create user with this template")."'>";   
-
-    $empty    = "<img class='center' src='images/empty.png' style='width:16px;height:16px;' alt=''>"; 
-
-    // User and Template  Images  
-    $userimg  = "<img class='center' src='images/select_user.png' alt='User' title='%s'>";   
-    $tplimg   = "<img class='center' src='images/select_template.png' alt='Template' title='%s'>";   
-    $editlink = "<a href='?plug=".validate($_GET['plug'])."&amp;id=%s&amp;act=edit_entry'>%s</a>";
-
-    // Defines Arrays to save User and Templates
-    $tpls = array();
-    $users= array();
-
-    /* Get Configuration for goFon DB (if it is set), to connect to the asterisk tables.
-     * Read Sip Table for specified account (for each user with phoneAccount).
-     * Check the attributes ip port and regseconds.
-     * If regseconds is set and >0 , the phone is logged in.
-     * Else the phone is currently not logged.
-     * If we can't read any Data from the DB or there is no goFon DB specified
-     * show old style without status icons.
-     */
-    $r_db   =false;
-    $r_con  =false;
-    if (isset($_SESSION['config']->data['SERVERS']['FON'])){
-      $a_SETUP= $_SESSION['config']->data['SERVERS']['FON'];
-      // Connect to DB server
-  
-      /* 
-        If you want to disable the status pictures, just comment out the next line
-      */
-      $r_con = false;
-      $r_db  = false;
-      if(is_callable("mysql_pconnect")){
-        $r_con= @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
-        // Check if we are  connected correctly
-        if($r_con){
-          $r_db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
-        }
-      }
-    }
-
-    // Test Every Entry and generate divlist Array  
-    foreach($this->list as $key => $val){
-      $connected  = ""; // This string represents timestamp or offline status 
-      $ip_port    = ""; // String that will represent ip : port of the connected phone
-      if((in_array("goFonAccount"    ,$val['objectClass']))){
-  
-        /* Set defaults */
-        $fonac = preg_replace("/%image%/", "select_phone.png", $fonimg);
-        $fonac = preg_replace("/%KEY%/", "$key", $fonac);
-        $fonac = preg_replace("/%title%/", "", $fonac);
-
-        /* Database connection is ok ?*/
-        if(($r_db)&&(is_callable("mysql_query"))){
-          $res= @mysql_query("SELECT regseconds,name,port,ipaddr FROM ".$a_SETUP['SIP_TABLE']." WHERE (name='".$val['uid'][0]."')");
-          $mysql_entry = @mysql_fetch_row($res);
-          if(is_array($mysql_entry)){
-            if((isset($mysql_entry[0]))&&($mysql_entry[0]>1)){
-              $connected = " | "._("Online")." : ".gmdate("d.m.Y H:i:s",($mysql_entry[0]+(60*60)));
-              $fonac = preg_replace("/%image%/", "select_phone_connected.png", $fonimg);
-              $fonac = preg_replace("/%KEY%/", "$key", $fonac);
-              $fonac = preg_replace("/%title%/", $connected, $fonac);
-              $ip_port= " - ".$mysql_entry[3].":".$mysql_entry[2];
-            }
-            if((isset($mysql_entry[0]))&&($mysql_entry[0]==0)){
-              $connected = " | "._("Offline");
-              $fonac = preg_replace("/%image%/", "select_phone.png", $fonimg);
-              $fonac = preg_replace("/%KEY%/", "$key", $fonac);
-              $fonac = preg_replace("/%title%/", $connected, $fonac);
-            }
-          }
-        }
-      }else{
-        $fonac=$empty;
-      }
-
-    
-
-      /* Specify Pics for Extensions */ 
-      //FIXME: Spaghetti code. Please replace by a simple loop.
-      if(in_array("posixAccount"    ,$val['objectClass'])){ 
-        $posix = preg_replace("/%KEY%/", "$key", $posiximg);
-      }else{ 
-        $posix=$empty;
-      }
       
-      if(in_array("gotoEnvironment"    ,$val['objectClass'])){ 
-        $enviro = preg_replace("/%KEY%/", "$key", $eviroimg);
-      }else{ 
-        $enviro =$empty;
-      }
-   
-      if(in_array("gosaMailAccount" ,$val['objectClass'])){ 
-        $maila = preg_replace("/%KEY%/", "$key", $mailimg);   
-      }else{ 
-        $maila=$empty;
-      } 
-  
-      if(in_array("goFaxAccount"    ,$val['objectClass'])){ 
-        $faxac = preg_replace("/%KEY%/", "$key", $faximg);    
-      }else{ 
-        $faxac=$empty;
-      } 
-
-      if(in_array("sambaSamAccount" ,$val['objectClass'])){ 
-        $samba = preg_replace("/%KEY%/", "$key", $sambaimg);  
-      }else{ 
-        $samba=$empty;
-      } 
-
-      if(in_array("apple-user" ,$val['objectClass'])){
-        $netatalk = preg_replace("/%KEY%/", "$key", $netatalkimg);
-      }else{
-        $netatalk=$empty;
-      }
-
-      if(in_array("gosaUserTemplate",$val['objectClass'])){ 
-        $tpl                          = preg_replace("/%KEY%/", "$key", $tplimg);   
-        $s_img_create_from_template   = preg_replace("/%KEY%/", "$key", $tplcreateuserimg);
-      }else{ 
-        $s_img_create_from_template   = "";
-        $tpl=$userimg;
-      }
-
-      $usrimg2 = preg_replace("/%KEY%/", "$key", $usrimg);
-
-      // Generate caption for rows
-      if (isset($val["sn"]) && isset($val["givenName"])){
-        $display= $val["sn"][0].", ".$val["givenName"][0]." [".$val["uid"][0]."]";
-      } else {
-        $display= "[".$val["uid"][0]."]";
-      }
-
-      /* Create each field */
-      $field1 = array("string" => sprintf($tpl,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($editlink,$key,$display).$ip_port, "attach" => "style='' title='dn:&nbsp;".@LDAP::fix($val['dn'])."'");
-      $field3 = array("string" => $usrimg2."&nbsp;".$posix."&nbsp;".$enviro."&nbsp;".$maila."&nbsp;".$fonac."&nbsp;".$faxac."&nbsp;".$samba."&nbsp".$netatalk, "attach" => "style='width:152px;'");
-      $field4 = array("string" => $s_img_create_from_template.preg_replace("/%KEY%/", "$key", $action),"attach" => "style='width:102px;border-right:0px;text-align:right;'");
-
-      $add = array($field1,$field2,$field3,$field4);
-
-      // Template or User
-      if(in_array("gosaUserTemplate",$val['objectClass'])){
-        $tpls[strtolower( $val['sn']['0'].$val['uid']['0'])]=$add;
-      }else{
-        $users[strtolower( $val['sn']['0'].$val['uid']['0'])]=$add;
-      }
-    }
-
-    // Sort Entries 
-    ksort($users);
-    ksort($tpls);
-
-    // Append Templates
-    foreach($tpls as $key => $val){
-      $divlist->AddEntry( $val, array(""));
-    }
-    // Append Users 
-    foreach($users as $key => $val){
-      $divlist->AddEntry( $val, array(""));
-    }
-    $smarty->assign("userlist",   $divlist->DrawList());
-    $smarty->assign("userlisthead", $listhead);
-    
-    $smarty->assign("search_image", get_template_path('images/search.png'));
-    $smarty->assign("tree_image", get_template_path('images/tree.png'));
-    $smarty->assign("infoimage", get_template_path('images/info.png'));
-    $smarty->assign("launchimage", get_template_path('images/launch.png'));
-    $smarty->assign("deplist", $this->config->idepartments);
-
-    foreach( array("functionalusers", "unixusers",
-          "mailusers", "sambausers", "proxyusers", 
-          "faxusers", "templates", "subsearch") as $type){
-
-      $smarty->assign("$type", $userfilter[$type]);
-    }
-
-    $smarty->assign("CurrentMainBase",$_SESSION['CurrentMainBase']);
-    $smarty->assign("regex", $userfilter["regex"]);
-
-    /* Extend if we are not using javascript */
-    $smarty->assign("apply", apply_filter());
-    $smarty->assign("alphabet", generate_alphabet());
-    $smarty->assign("hint", print_sizelimit_warning());
-
-    if((is_callable("mysql_close"))&&($r_con)){
-      @mysql_close($r_con);
-    }
-
     /* Return rendered main page */
-    return ($smarty->fetch(get_template_path('headpage.tpl', TRUE)));
+        /* Display dialog with system list */
+    $this->DivListUsers->execute();
+
+    /* Add departments if subsearch is disabled */
+    if(!$this->DivListUsers->SubSearch){
+      $this->DivListUsers->AddDepartments($this->DivListUsers->selectedBase,4);
+    }
+    $this->reload();
+    $this->DivListUsers->setEntries($this->list);
+    return($this->DivListUsers->Draw());
   }
-#----------------------------------------------------------------- Reviewed after this mark
 
 
   function reload()
   {
-    /* Get config */
-    $userfilter= get_global('userfilter');
-
     /* Set base for all searches */
-    $base= $_SESSION['CurrentMainBase'];
+    $base= $this->DivListUsers->selectedBase;
+    $this->list =array();
 
-    /* Regex filter? */
-    if ($userfilter['regex'] != ""){
-      $regex= $userfilter['regex'];
-    } else {
-      $regex= "*";
-    }
+    /* Get filter configuration */
+    $Regex                = $this->DivListUsers->Regex;
+    $SubSearch            = $this->DivListUsers->SubSearch;
+    $ShowTemplates        = $this->DivListUsers->ShowTemplates;
+    $ShowFunctionalUsers  = $this->DivListUsers->ShowFunctionalUsers;
+    $ShowUnixUsers        = $this->DivListUsers->ShowUnixUsers;
+    $ShowMailUsers        = $this->DivListUsers->ShowMailUsers;
+    $ShowSambaUsers       = $this->DivListUsers->ShowSambaUsers;
+    $ShowProxyUsers       = $this->DivListUsers->ShowProxyUsers;
 
     /* Setup filter depending on selection */
     $filter="";
@@ -996,63 +665,58 @@ class userManagement extends plugin
     } else {
       $samba= "sambaAccount";
     }
-    if ($userfilter['functionalusers'] == "checked"){
+
+    if ($ShowFunctionalUsers){
       $filter.= "(&(objectClass=gosaAccount)(!(|(objectClass=posixAccount)".
                 "(objectClass=gosaMailAccount)(objectClass=$samba)".
                 "(objectClass=gosaProxyAccount))))";
     }
-    if ($userfilter['unixusers'] == "checked"){
+    if ($ShowUnixUsers){
       $filter.= "(objectClass=posixAccount)";
     }
-    if ($userfilter['mailusers'] == "checked"){
+    if ($ShowMailUsers){
       $filter.= "(objectClass=gosaMailAccount)";
     }
-    if ($userfilter['sambausers'] == "checked"){
+    if ($ShowSambaUsers){
       $filter.= "(objectClass=$samba)";
     }
-    if ($userfilter['proxyusers'] == "checked"){
+    if ($ShowProxyUsers){
       $filter.= "(objectClass=gosaProxyAccount)";
     }
-    if ($userfilter['templates'] == "checked"){
+    if ($ShowTemplates){
       $filter= "(|(objectClass=gosaUserTemplate)(&(objectClass=gosaAccount)(|$filter)))";
     } else {
       $filter= "(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(|$filter))";
     }
-    $filter= "(&(|(uid=".normalizeLdap($regex).")(sn=".normalizeLdap($regex).")(givenName=".normalizeLdap($regex)."))$filter)";
+    $filter= "(&(|(uid=".normalizeLdap($Regex).")(sn=".normalizeLdap($Regex).")(givenName=".normalizeLdap($Regex)."))$filter)";
 
     /* Generate userlist */
     $ldap= $this->config->get_ldap_link(TRUE);
-    if ($userfilter['subsearch'] == "checked"){
-      $this->list= get_list($filter, $this->ui->subtreeACL, $base,
+    if ($SubSearch){
+      $ListTemp =  get_list($filter, $this->ui->subtreeACL, $base,
                             array("uid", "givenName", "sn", "objectClass"), GL_SUBSEARCH | GL_SIZELIMIT);
     } else {
       $base= get_people_ou().$base;
-      $this->list= get_list($filter, $this->ui->subtreeACL, $base, 
+      $ListTemp = get_list($filter, $this->ui->subtreeACL, $base, 
                             array("uid", "givenName", "sn", "objectClass"), GL_SIZELIMIT);
     }
-    
-    /* Create base for department search */
-    if(get_people_ou() == ""){
-      $dep_base= $base;
-    }else{
-      $dep_base= preg_replace("/".normalizePreg(get_people_ou())."/i", "", $base);
-    }
-
-    /* Get all departments within this subtree */
-    $deps= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))", $this->ui->subtreeACL,
-                    $dep_base, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
-                 
-    $this->departments = array();
-    foreach($deps as $value){
-      if(isset($value['description'][0])){
-        $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
-      }else{
-        $this->departments[$value['dn']]= get_sub_department($value['dn']);
+    $SortTemp = array();
+    foreach($ListTemp as $Key => $Entry){
+       // Generate caption for rows
+      if (isset($Entry["sn"]) && isset($Entry["givenName"])){
+        $display= $Entry["sn"][0].", ".$Entry["givenName"][0]." [".$Entry["uid"][0]."]";
+      } else {
+        $display= "[".$Entry["uid"][0]."]";
       }
-    }
-    natcasesort($this->departments);
-  }
 
+      $SortTemp[$Key] = $display;
+    }
+    natcasesort($SortTemp);
+    reset($SortTemp);
+    foreach($SortTemp as $Key => $Value){
+      $this->list[] = $ListTemp[$Key];
+    }
+  }
 
   function remove_lock()
   {
@@ -1075,7 +739,7 @@ class userManagement extends plugin
       if( $s_action == "editPaste" || $this->CopyPasteHandler->stillOpen()){
 
         $this->CopyPasteHandler->save_object();
-        $this->CopyPasteHandler->SetVar("base", $_SESSION['CurrentMainBase']);
+        $this->CopyPasteHandler->SetVar("base", $this->DivListUsers->selectedBase);
 
         /* Execute copy & paste dialog and display returned data, normaly a dialog which allows 
             us to solve all attribute mismatches for this object.
@@ -1084,9 +748,6 @@ class userManagement extends plugin
           return ($ret);
         }
 
-        /* Reload to have freshly copied entries in the list */
-        $this->reload();
-        
         /* Use the last dn to search for it's ID in the newly generated list. */
         $dn= $this->CopyPasteHandler->lastdn;
         foreach($this->list as $id => $entry){
@@ -1129,6 +790,11 @@ class userManagement extends plugin
     }
   }
 
+  function save_object()
+  {
+    /* Handle divlist filter && department selection*/
+    $this->DivListUsers->save_object();
+  }
 
   /* A set of disabled and therefore overloaded functions. They are
      not needed in this class. */
@@ -1140,7 +806,5 @@ class userManagement extends plugin
   function show_header($button_text, $text, $disabled= FALSE) { }
 
 } /* ... class userManagement */
-
-
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
