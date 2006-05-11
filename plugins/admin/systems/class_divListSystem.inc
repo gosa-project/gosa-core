@@ -33,12 +33,6 @@ class divListSystem extends MultiSelectWindow
     $this->parent       = $parent;
     $this->ui           = get_userinfo();
 
-    /* Set default base */
-    if(!isset($_SESSION['CurrentMainBase'])){
-      $_SESSION['CurrentMainBase'] = $this->config->current['BASE'];
-    }
-    $this->selectedBase = $_SESSION['CurrentMainBase'];
-
     /* Set list strings */
     $this->SetTitle(_("List of systems"));
     $this->SetSummary(_("List of systems"));
@@ -198,55 +192,7 @@ class divListSystem extends MultiSelectWindow
   function save_object()
   {
     /* Save automatic created POSTs like regex, checkboxes */
-    MultiSelectWindow::save_object();   
-
-    $s_action ="";
-    foreach($_POST as $key => $value){
-      if(preg_match("/^dep_back.*/i",$key)){
-        $s_action="back";
-      }elseif(preg_match("/^dep_root.*/",$key)){
-        $s_action="root";
-      }elseif(preg_match("/^dep_home.*/i",$key)){
-        $s_action="home";
-      }
-    }
-   
-    /* Save base selection from headpage selectbox*/ 
-    if(isset($_POST['CurrentMainBase'])){
-      $this->selectedBase = $_POST['CurrentMainBase'];
-    }
-
-    /* Homebutton is posted */
-    if($s_action=="home"){
-      $ui= get_userinfo();
-      $this->selectedBase=(preg_replace("/^[^,]+,/","",$ui->dn));
-      $this->selectedBase=(preg_replace("/^[^,]+,/","",$this->selectedBase));
-    }
-
-    /* Open selected department 
-       this is posted by the parent class MultiSelectWindow */
-    if(isset($_GET['act'])&& ($_GET['act'] == "dep_open")){
-      $s_entry = base64_decode($_GET['dep_id']);
-      $this->selectedBase = $this->config->departments[trim($s_entry)];
-    }
-
-    /* back to the roots ^^ */
-    if($s_action=="root"){
-      $this->selectedBase=($this->config->current['BASE']);
-    }
-
-    /* If Backbutton is Posted */
-    if($s_action=="back"){
-      $base_back          = preg_replace("/^[^,]+,/","",$this->selectedBase);
-      $base_back          = convert_department_dn($base_back);
-      if(isset($this->config->departments[trim($base_back)])){
-        $this->selectedBase= $this->config->departments[trim($base_back)];
-      }else{
-        $this->selectedBase= $this->config->departments["/"];
-      }
-    }
-
-    $_SESSION['CurrentMainBase']  = $this->selectedBase;
+    MultiSelectWindow :: save_object();   
   }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

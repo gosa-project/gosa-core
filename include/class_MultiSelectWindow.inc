@@ -30,6 +30,9 @@ class MultiSelectWindow{
 
 	var $filterName				= "Liste";
 
+	var $DepartmentsAdded		= false;
+	var $selectedBase       	= "";
+
 	function ClearElementsList()
 	{
 		$this->array_Elements = array();
@@ -40,9 +43,9 @@ class MultiSelectWindow{
 	function AddRegex($name,$string,$value,$conn,$image="images/search.png")
 	{
 		$arr = array();
-	
+
 		/* Check if the given input field name was already used 
-            for this type of dialog */	
+		   for this type of dialog */	
 		if(isset($_SESSION['MultiDialogFilters'][$this->filterName][$name])){
 			$arr['value']	= $_SESSION['MultiDialogFilters'][$this->filterName][$name];
 			$this->$name = $arr['value'];
@@ -64,6 +67,12 @@ class MultiSelectWindow{
 		$this->SaveButtonString		= _("Save");
 		$this->CloseButtonString	= _("Close");
 		$this->filterName			= $filterName;
+
+		/* Set default base */
+		if(!isset($_SESSION['CurrentMainBase'])){
+			$_SESSION['CurrentMainBase'] = $this->config->current['BASE'];
+		}
+		$this->selectedBase = $_SESSION['CurrentMainBase'];
 	}
 
 	/* Enables the headpage mode, which changes the list look */
@@ -73,8 +82,8 @@ class MultiSelectWindow{
 	}
 
 	/* Sets the List internal name (not displayed anywhere) 
-       it is used to identify every single list
-     */	
+	   it is used to identify every single list
+	 */	
 	function SetTitle($str)
 	{
 		$this->string_Title = $str;
@@ -129,11 +138,11 @@ class MultiSelectWindow{
 	}
 
 	/* Add a checkbox to the filter element,
-    	the name specifies an existing class var to store the 'selection' */
+	   the name specifies an existing class var to store the 'selection' */
 	function AddCheckBox($name,$value="Unset",$string="Unset",$default=false)
 	{
 		$arr = array();
-	
+
 		if($name == SEPERATOR){
 			$arr['name'] = SEPERATOR;
 		}else{
@@ -163,7 +172,7 @@ class MultiSelectWindow{
 		}
 	}
 
-	
+
 
 	/* Returns true if the close button was pressed */
 	function isClosed()
@@ -255,16 +264,16 @@ class MultiSelectWindow{
 				</table>";
 		}
 		$smarty->assign("regexes"			, $regexes );
-		
+
 		/* Assign alphabet and display it 
-         */	
+		 */	
 		$smarty->assign("Display_alphabet",	$this->bool_DisplayAlpahabet);
 		$smarty->assign("alphabet", 		generate_alphabet());
 		$smarty->assign("Header"			, $this->string_ListHeader );
 		$smarty->assign("Summary"			, $this->string_Summary);
 		$smarty->assign("Title"				, $this->string_Title);
 		$smarty->assign("Information"		, $this->string_Information);
-		
+
 		/* Check for exeeded sizelimit */
 		$smarty->assign("hint"				, print_sizelimit_warning());
 		$smarty->assign("DivList"			, $divlist->DrawList());
@@ -285,13 +294,13 @@ class MultiSelectWindow{
 		/* Button handling */
 		$smarty->assign("SaveButtonString" ,$this->SaveButtonString);
 		$smarty->assign("CloseButtonString",$this->CloseButtonString);
-	
+
 		$smarty->assign("Display_Close",	$this->bool_DisplayCloseButton);
 		$smarty->assign("Display_Save" ,	$this->bool_DisplaySaveButton);
 
 		$smarty->assign("filterName"	,	$this->filterName);
 		$smarty->assign("is_headpage"	,	$this->is_headpage);
-			
+
 		$display = $smarty->fetch(get_template_path("MultiSelectWindow.tpl"));
 		return($display);
 	}
@@ -308,13 +317,69 @@ class MultiSelectWindow{
 	}
 
 	/* Store all checkboxes/ regexes ... 
-        Store data also into a session var, to keep the checkboxes check after reload  */
+	   Store data also into a session var, to keep the checkboxes check after reload  */
 	function save_object()
 	{
+		/* Update current base */
+		if($this->DepartmentsAdded){
+			$s_action ="";
+			foreach($_POST as $key => $value){
+				if(preg_match("/^dep_back.*/i",$key)){
+					$s_action="back";
+				}elseif(preg_match("/^dep_root.*/",$key)){
+					$s_action="root";
+				}elseif(preg_match("/^dep_home.*/i",$key)){
+					$s_action="home";
+				}
+			}
+
+			/* Save base selection from headpage selectbox*/
+			if(isset($_POST['CurrentMainBase'])){
+				$this->selectedBase = $_POST['CurrentMainBase'];
+			}
+
+			/* Homebutton is posted */
+			if($s_action=="home"){
+				$ui= get_userinfo();
+				$this->selectedBase=(preg_replace("/^[^,]+,/","",$ui->dn));
+				$this->selectedBase=(preg_replace("/^[^,]+,/","",$this->selectedBase));
+			}
+
+			/* Open selected department
+			   this is posted by the parent class MultiSelectWindow */
+			if(isset($_GET['act'])&& ($_GET['act'] == "dep_open")){
+				$s_entry = base64_decode($_GET['dep_id']);
+				$this->selectedBase = $this->config->departments[trim($s_entry)];
+			}
+
+			/* back to the roots ^^ */
+			if($s_action=="root"){
+				$this->selectedBase=($this->config->current['BASE']);
+			}
+
+
+			/* If Back-button is pressed, move back one step in DN */
+			if($s_action == "back"){
+				//FIXME: This is not 100% correct. We'll only display ou's, but there may be
+				//       a step between. You'll stumble in a "hidden" department in this case.
+				$base_back= preg_replace("/^[^,]+,/", "", $_SESSION['CurrentMainBase']);
+
+				/* The department array keeps non DN entries as index. We need to convert
+				   it before checking the existance. */
+				$base_back= trim(convert_department_dn($base_back));
+
+				/* Check if the department exists, otherwise revert to the configure base DN */
+				if(isset($this->config->departments[$base_back])){
+					$_SESSION['CurrentMainBase']= $this->config->departments[$base_back];
+				}else{
+					$_SESSION['CurrentMainBase']= $this->config->departments['/'];
+				}
+			}
+		}
 		if(isset($_POST['MultiSelectWindow'.$this->filterName])){
 
 			/* Check posts from checkboxes 
-             */
+			 */
 			foreach($this->array_Checkboxes as $key => $box){
 				if(isset($_POST[$box['name']])){
 					$this->array_Checkboxes[$key]['default'] = true;
@@ -338,15 +403,15 @@ class MultiSelectWindow{
 			if(isset($_POST['CloseMultiSelectWindow'])){
 				$this->Close();
 			}
-			
+
 			if(isset($_POST['SaveMultiSelectWindow'])){
 				$this->Save();
 			}
 		}
 
 		/* check for alphabet selection
-           Check which regexes are connected to the alphabet 
-         */	
+		   Check which regexes are connected to the alphabet 
+		 */	
 		if(isset($_GET['search'])){
 			foreach($this->array_Regexes as $key => $box){
 				/* check if this regex is connected to the alphabet selection */
@@ -364,6 +429,8 @@ class MultiSelectWindow{
 	/* this function adds the sub-departments of the current tree to the list */
 	function AddDepartments($base = false,$numtabs = 3)
 	{
+		$this->DepartmentsAdded = true;
+
 		/* check for a valid base */
 		if(!$base){
 			if(!isset($_SESSION['CurrentMainBase'])){
@@ -416,7 +483,7 @@ class MultiSelectWindow{
 				}
 			}
 
-			
+
 			/* Add to divlist */
 			$row = array();
 			$row[] = $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
