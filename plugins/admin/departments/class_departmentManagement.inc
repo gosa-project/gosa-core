@@ -66,14 +66,13 @@ class departmentManagement extends plugin
 
 		/* Reload departments */
 		$this->config->get_departments();
-		$this->config->make_idepartments();
-		$_SESSION['config']= $this->config;
-
 		$smarty						= get_smarty();
 		$display 					= "";
 		$depfilter					= get_global("depfilter");
 		$s_action 					= "";  // Will contain an action, like del or edit
 		$s_entry  					= "";  // The entry name for edit delete -...
+
+		$this->config->make_idepartments();
 
 		if (isset($_POST['regex'])){
 			$depfilter['regex']= $_POST['regex'];
@@ -208,6 +207,21 @@ class departmentManagement extends plugin
 			}
 		}
 
+
+		/* This department must be tagged 
+         */
+		if((isset($_GET['Tag'])) && ($this->deptabs->by_object['department']->must_be_tagged())){
+			$this->deptabs->by_object['department']->tag_objects();
+			if ($this->dn != "new"){
+				del_lock ($this->dn);
+			}
+			unset ($this->deptabs);
+			$this->deptabs= NULL;
+			unset ($_SESSION['objectinfo']);
+			exit();
+		}
+	
+
 		/* Edit Complete ...
 		 * Finish request 
 		 */
@@ -215,8 +229,8 @@ class departmentManagement extends plugin
 			$this->deptabs->save(true);
 			$this->deptabs->by_object['department']->recursive_move("","",true);
 			$this->reload ();
-
-			/* Group has been saved successfully, remove lock from LDAP. */
+			/* Group has been saved successfully, remove lock from
+			   LDAP. */
 			if ($this->dn != "new"){
 				del_lock ($this->dn);
 			}
@@ -237,7 +251,7 @@ class departmentManagement extends plugin
 
 				/* Save user data to ldap */
 				$disp = $this->deptabs->save();
-				if(!$this->deptabs->by_object['department']->am_i_moved()){
+				if(!($this->deptabs->by_object['department']->am_i_moved() || ($this->deptabs->by_object['department']->must_be_tagged())) ){
 					gosa_log ("Department object'".$this->dn."' has been saved");
 
 					/* Group has been saved successfully, remove lock from
@@ -261,7 +275,6 @@ class departmentManagement extends plugin
 				show_errors($message);
 			}
 		}
-
 
 		/* User cancelt edit oder delete
          * Cancel dialog 
@@ -432,6 +445,9 @@ class departmentManagement extends plugin
 		}
 		natcasesort ($this->departments);
 		reset ($this->departments);
+
+		/* Unset global department list */
+		unset($_SESSION['cached_departments']);
 	}
 
 	function remove_from_parent()
