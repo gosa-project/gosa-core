@@ -11,12 +11,12 @@ class divListGroup extends MultiSelectWindow
   var $Regex              = "*";
   var $UserRegex          = "*";
 
-  /* CheckBoxes */
-  var $ShowPrimaryGroups      = true;
-  var $ShowSambaGroups        = true;  
-  var $ShowApplicationGroups  = true;
-  var $ShowMailGroups         = true;
-  var $ShowFunctionalGroups   = true;
+  /* CheckBoxes, to change default values modify $this->AddCheckBox */
+  var $ShowPrimaryGroups;
+  var $ShowSambaGroups;  
+  var $ShowApplicationGroups; 
+  var $ShowMailGroups;
+  var $ShowFunctionalGroups;
 
   /* Subsearch checkbox */
   var $SubSearch              = false;

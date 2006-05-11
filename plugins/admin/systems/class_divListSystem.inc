@@ -11,17 +11,17 @@ class divListSystem extends MultiSelectWindow
   var $Regex              = "*";
   var $UserRegex          = "*";
 
-  /* CheckBoxes */
-  var $ShowServers        = true;
-  var $ShowTerminals      = true;
-  var $ShowWorkstations   = true;
-  var $ShowWinWorkstations= true;
-  var $ShowPrinters       = true;
-  var $ShowDevices        = true;
-  var $ShowPhones         = true;
+  /* CheckBoxes, to change default values modify $this->AddCheckBox */
+  var $ShowServers;
+  var $ShowTerminals;
+  var $ShowWorkstations;
+  var $ShowWinWorkstations;
+  var $ShowPrinters;
+  var $ShowDevices;
+  var $ShowPhones;
 
   /* Subsearch checkbox */
-  var $SubSearch              = false;
+  var $SubSearch;
 
   var $parent             ;
   var $ui                 ;
