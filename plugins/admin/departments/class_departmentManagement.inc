@@ -68,7 +68,7 @@ class departmentManagement extends plugin
 		$this->config->get_departments();
 		$this->config->make_idepartments();
 		$_SESSION['config']= $this->config;
-		
+
 		$smarty						= get_smarty();
 		$display 					= "";
 		$depfilter					= get_global("depfilter");
@@ -87,7 +87,7 @@ class departmentManagement extends plugin
 				$s_entry  = preg_replace("/dep_".$s_action."_/i","",$key);
 				$s_entry  = preg_replace("/_.*$/","",$s_entry);
 				$s_entry  = base64_decode($s_entry);
-			// Post for edit
+				// Post for edit
 			}elseif(preg_match("/dep_edit_.*/",$key)){
 				$s_action="edit";
 				$s_entry  = preg_replace("/dep_".$s_action."_/i","",$key);
@@ -103,15 +103,15 @@ class departmentManagement extends plugin
 			}elseif(preg_match("/dep_root.*/i",$key)){
 				$s_action="root";
 			}
-		
+
 		}
 
 		if(isset($_POST['CurrentMainBase']) && $_POST['CurrentMainBase']){
 			$_SESSION['CurrentMainBase'] = $_POST['CurrentMainBase'];
 		}
-		
+
 		if($s_action=="root"){
-			 $_SESSION['CurrentMainBase'] = ($this->config->current['BASE']);
+			$_SESSION['CurrentMainBase'] = ($this->config->current['BASE']);
 		}
 
 		if($s_action=="home"){
@@ -122,9 +122,9 @@ class departmentManagement extends plugin
 		if($s_action=="back"){
 			$base_back 			= preg_replace("/^[^,]+,/","",  $_SESSION['CurrentMainBase']);
 			$base_back          = convert_department_dn($base_back);
-            
+
 			if(isset($this->config->departments[trim($base_back)])){
-		 		$_SESSION['CurrentMainBase'] = $this->config->departments[trim($base_back)];
+				$_SESSION['CurrentMainBase'] = $this->config->departments[trim($base_back)];
 			}else{
 				$_SESSION['CurrentMainBase'] = $this->config->departments["/"];
 			}
@@ -176,7 +176,7 @@ class departmentManagement extends plugin
 		}
 
 		/* Delete Entry if Posted action (s_action) == del 
-         * The entry which will be deleted is defined in $s_entry
+		 * The entry which will be deleted is defined in $s_entry
 		 */
 		if ($s_action =="del"){
 			$this->dn= $this->config->departments[trim($s_entry)];
@@ -209,19 +209,16 @@ class departmentManagement extends plugin
 		}
 
 
+		/* If this var ist true, the object will be unset after the next two operations */	
+		$UnsetAfterTaggingMoving = false;
+
 		/* This department must be tagged 
-         */
+		 */
 		if((isset($_GET['TagDepartment'])) && ($this->deptabs->by_object['department']->must_be_tagged())){
 			$this->deptabs->by_object['department']->tag_objects();
-			if ($this->dn != "new"){
-				del_lock ($this->dn);
-			}
-			unset ($this->deptabs);
-			$this->deptabs= NULL;
-			unset ($_SESSION['objectinfo']);
-			exit();
+			$UnsetAfterTaggingMoving = true;
+      	
 		}
-	
 
 		/* Edit Complete ...
 		 * Finish request 
@@ -229,17 +226,21 @@ class departmentManagement extends plugin
 		if((isset($_GET['PerformRecMove'])) &&( $this->deptabs->by_object['department']->am_i_moved())){
 			$this->deptabs->save(true);
 			$this->deptabs->by_object['department']->recursive_move("","",true);
-			$this->reload ();
-			/* Group has been saved successfully, remove lock from LDAP. */
-			if ($this->dn != "new"){
-				del_lock ($this->dn);
-			}
+			$UnsetAfterTaggingMoving = true;	
+		}
 
+		/* Unset current object / all operations are done */
+		if($UnsetAfterTaggingMoving){
+			/* There's no page reload so we have to read new users at
+			   this point. */
+			del_lock ($this->dn);
+			$this->reload ();
 			unset ($this->deptabs);
 			$this->deptabs= NULL;
 			unset ($_SESSION['objectinfo']);
-			exit();
+      exit();
 		}
+
 
 		if ((isset($_POST['edit_finish'])) && (isset($this->deptabs->config) ) ){
 
@@ -249,14 +250,21 @@ class departmentManagement extends plugin
 			/* Save, or display error message? */
 			if (count($message) == 0){
 
-				/* Save user data to ldap */
-				$disp = $this->deptabs->save();
-				if($this->deptabs->by_object['department']->must_be_tagged()) {
-					$disp.= $this->deptabs->by_object['department']->ShowTagFrame();
-					return($disp);
-				}	
-					
-				if(!($this->deptabs->by_object['department']->am_i_moved()) ){
+				$res = $this->deptabs->save(true);
+				$display  = "";
+    
+        /* Get tagging frame */
+				if($this->deptabs->by_object['department']->must_be_tagged()){
+					$display .= $this->deptabs->by_object['department']->ShowTagFrame();	
+				}		
+
+        /* Get recursive move frame */
+				if($this->deptabs->by_object['department']->am_i_moved()){	
+					$display .= $res;
+				}		
+
+        /* If no frame is returned, unset this obejct, else display those frames */
+				if(empty($display)){
 					gosa_log ("Department object'".$this->dn."' has been saved");
 
 					/* Group has been saved successfully, remove lock from
@@ -272,7 +280,7 @@ class departmentManagement extends plugin
 					$this->deptabs= NULL;
 					unset ($_SESSION['objectinfo']);
 				}else{
-					return($disp);
+					return($display);
 				}
 			} else {
 				/* Ok. There seem to be errors regarding to the tab data,
@@ -281,9 +289,10 @@ class departmentManagement extends plugin
 			}
 		}
 
+
 		/* User cancelt edit oder delete
-         * Cancel dialog 
-         */
+		 * Cancel dialog 
+		 */
 		if (isset($_POST['edit_cancel']) || isset($_POST['delete_cancel']) ||
 				isset($_POST['delete_department_confirm'])){
 
@@ -315,16 +324,16 @@ class departmentManagement extends plugin
 
 			/* Generate list head */
 			$listhead = "<div style='background:#F0F0F9;padding:5px;'>".
-						" <input type='image' class='center' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
-						" <input type='image' class='center' src='images/list_up.png' align='middle' title='"._("Go up one department")."' name='dep_back' alt='"._("Up")."'>&nbsp;".
-						" <input type='image' class='center' src='images/list_home.png' align='middle' title='"._("Go to users home department")."' name='dep_home' alt='"._("Home")."'>&nbsp;".
-					        " <input class='center' type='image' src='images/list_reload.png' align='middle' title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-						" <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-						" <input class='center' type='image' src='images/list_new_department.png' align='middle' alt='"._("Create new department")."' name='dep_new'>&nbsp;".
-						" <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-						_("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
-						" <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-						"</div>";
+				" <input type='image' class='center' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
+				" <input type='image' class='center' src='images/list_up.png' align='middle' title='"._("Go up one department")."' name='dep_back' alt='"._("Up")."'>&nbsp;".
+				" <input type='image' class='center' src='images/list_home.png' align='middle' title='"._("Go to users home department")."' name='dep_home' alt='"._("Home")."'>&nbsp;".
+				" <input class='center' type='image' src='images/list_reload.png' align='middle' title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
+				" <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
+				" <input class='center' type='image' src='images/list_new_department.png' align='middle' alt='"._("Create new department")."' name='dep_new'>&nbsp;".
+				" <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
+				_("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
+				" <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
+				"</div>";
 
 			/* Show main page */
 			$divlist = new divlist("departmenttabs");
@@ -344,7 +353,7 @@ class departmentManagement extends plugin
 				if(!isset($this->config->departments[trim($key)])){
 					$this->config->departments[trim($key)]="";
 				}
-				
+
 				$non_empty="";	
 				$keys= str_replace("/","\/",$key);
 				foreach($this->config->departments as $keyd=>$vald ){
@@ -352,7 +361,7 @@ class departmentManagement extends plugin
 						$non_empty="full";
 					}	
 				}
-	
+
 				$title = $this->config->departments[$key];
 				$field0 = array("string" => "<img src='images/".$non_empty."folder.png' title='"._("department")."' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
 				$field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style='' title='".$title."'");
@@ -374,7 +383,7 @@ class departmentManagement extends plugin
 			}
 
 			$smarty->assign("CurrentMainBase", $_SESSION['CurrentMainBase']);
-			
+
 			/* Extend if we are not using javascript */
 			$smarty->assign("apply", apply_filter());
 			$smarty->assign("alphabet", generate_alphabet());
@@ -438,7 +447,7 @@ class departmentManagement extends plugin
 		}
 
 		$res= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
-			       $this->ui->subtreeACL, $base, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
+				$this->ui->subtreeACL, $base, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
 
 		$this->departments= array();
 		foreach ($res as $value){
@@ -479,6 +488,6 @@ class departmentManagement extends plugin
 		}
 	}
 
-	}
-
-	?>
+}
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+?>

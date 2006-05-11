@@ -37,8 +37,7 @@ class deptabs extends tabs
 		}
 		$this->dn= $new_dn;
 	}
-	tabs::save(TRUE);
-	return($disp);
+	return(tabs::save(TRUE));
   }
 
 }
