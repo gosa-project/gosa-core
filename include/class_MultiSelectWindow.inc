@@ -359,7 +359,7 @@ class MultiSelectWindow{
 
 
 			/* If Back-button is pressed, move back one step in DN */
-			if($s_action == "back"){
+			if($s_action=="back"){
 				//FIXME: This is not 100% correct. We'll only display ou's, but there may be
 				//       a step between. You'll stumble in a "hidden" department in this case.
 				$base_back= preg_replace("/^[^,]+,/", "", $_SESSION['CurrentMainBase']);
@@ -370,9 +370,9 @@ class MultiSelectWindow{
 
 				/* Check if the department exists, otherwise revert to the configure base DN */
 				if(isset($this->config->departments[$base_back])){
-					$_SESSION['CurrentMainBase']= $this->config->departments[$base_back];
+					$this->selectedBase= $this->config->departments[$base_back];
 				}else{
-					$_SESSION['CurrentMainBase']= $this->config->departments['/'];
+					$this->selectedBase= $this->config->departments['/'];
 				}
 			}
 		}
