@@ -59,10 +59,10 @@ class departmentManagement extends plugin
 
 	function execute()
 	{
-	/* Call parent execute */
-	plugin::execute();
+		/* Call parent execute */
+		plugin::execute();
 
-	$_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^dep_edit_.*/","/^dep_del_.*/");
+		$_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^dep_edit_.*/","/^dep_del_.*/");
 
 		/* Reload departments */
 		$this->config->get_departments();

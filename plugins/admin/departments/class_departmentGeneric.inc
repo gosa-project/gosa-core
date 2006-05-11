@@ -362,8 +362,6 @@ class department extends plugin
 			/* Fix entry if needed */
 			if ($fix){
 				$this->handle_object_tagging($attrs['dn'], $this->gosaUnitTag);
-			} else {
-				echo "Don't touch: ".$attrs['dn']."<br>";
 			}
 		}
 	}
@@ -398,7 +396,7 @@ class department extends plugin
 			echo "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
 			echo "<body style='background-image:none;margin:3px;color:black'>";
 
-			echo "<h3>".sprintf(_("Moving %s to %s"),"<i>".$src_dn."</i>","<i>".$dst_dn."</i>")."</h3>";
+			echo "<h3>".sprintf(_("Moving '%s' to '%s'"),"<i>".$src_dn."</i>","<i>".$dst_dn."</i>")."</h3>";
 
 
 			/* Check if the destination entry exists */
@@ -409,7 +407,7 @@ class department extends plugin
 			if ($ldap->fetch()){
 				trigger_error("Recursive_move $dst_dn already exists.",
 						E_USER_WARNING);
-				echo "Recursive_move :$dst_dn already exists.<br>"; 
+				echo sprintf_("Recursive_move: '%s' already exists.")."<br>", $dst_dn); 
 				return (FALSE);
 			}
 	
