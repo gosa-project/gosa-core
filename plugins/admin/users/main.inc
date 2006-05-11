@@ -32,6 +32,7 @@ if ($remove_lock){
     $_SESSION['userManagement']= new userManagement ($config, $_SESSION['ui']);
   }
   $userManagement= $_SESSION['userManagement'];
+  $userManagement->save_object();
   $output= $userManagement->execute();
 
   /* Page header*/
