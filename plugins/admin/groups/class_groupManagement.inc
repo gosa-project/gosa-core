@@ -46,9 +46,13 @@ class groupManagement extends plugin
     if((isset($this->config->data['MAIN']['ENABLECOPYPASTE']))&&(preg_match("/true/i",$this->config->data['MAIN']['ENABLECOPYPASTE']))){
       $this->CopyPasteHandler = new CopyPasteHandler($this->config);
     }
-
+    
     /* Detect if we have to display the primary group checkbox */
+    $tmp = "";
     if (isset($this->config->data['MAIN']['NOPRIMARYGROUP'])){
+      $tmp = $this->config->data['MAIN']['NOPRIMARYGROUP'];
+    }
+    if(preg_match("/true/i",$tmp)|| (preg_match("/yes/",$tmp))){ 
       $this->ShowPrimaryCheckBox = false;
     } else {
       $this->ShowPrimaryCheckBox = true;
@@ -367,14 +371,14 @@ class groupManagement extends plugin
       Create filter depending on selected checkboxes 
      ********************/
 
-    /* Add Mail Groups */
-    if ($ShowMailGroups){
-      $filter.= "(objectClass=gosaMailAccount)";
-    }
-
     /* Add application groups */
     if ($ShowApplicationGroups){
       $filter.= "(objectClass=gosaApplicationGroup)";
+    }
+    
+    /* Add Mail Groups */
+    if ($ShowMailGroups){
+      $filter.= "(objectClass=gosaMailAccount)";
     }
 
     /*
@@ -404,34 +408,32 @@ class groupManagement extends plugin
      ********************/
 
     /* Collect primary groupIDs to show primary groups 
-        if this option is enabled in gosa conf && the checkbox is checked */  
-    if(($this->ShowPrimaryCheckBox) && ($ShowPrimaryGroups)){
-      $ldap->search("(&(uid=$Regex)(!(uid=*$))(objectClass=posixAccount)(gidNumber=*))", array("gidNumber", "cn"));
-      while ($attrs= $ldap->fetch()){
+       if this option is enabled in gosa conf && the checkbox is checked */  
+    if ($this->ShowPrimaryCheckBox){
+      $res = get_list("(&(uid=$Regex)(!(uid=*$))(objectClass=posixAccount)(gidNumber=*))", $this->ui->subtreeACL,
+          $base,array("gidNumber", "cn"),  GL_SUBSEARCH);
+      foreach ($res as $attrs){
         $primaries[$attrs['gidNumber'][0]]= $attrs['cn'][0];
       }
     }
-  
+
     /* Collect all GroupIDs from those groups which are functional.
-        Only perfrom this search if  ShowFunctionalGroups  is unchecked, else leave arre empty  */ 
-    if(!$ShowFunctionalGroups){ 
-      $ldap->cd(get_groups_ou().$base);
-      $ldap->search("(&(cn=$Regex)(objectClass=posixGroup)(!(|(objectClass=gosaMailAccount)(objectClass=gosaApplicationGroup)$sfilter)))", array("cn", "gidNumber", "description"));
-      $error2= $ldap->error;
-      while ($attrs= $ldap->fetch()){
-        if (!isset($primaries[$attrs['gidNumber'][0]])){
-          $functional[$attrs['gidNumber'][0]]= $attrs['gidNumber'][0];
-        }
+       Only perfrom this search if  ShowFunctionalGroups  is unchecked, else leave arre empty  */ 
+    $ff = "(&(cn=$Regex)(objectClass=posixGroup)(!(|(objectClass=gosaMailAccount)(objectClass=gosaApplicationGroup)$sfilter)))";
+    $res = get_list($ff,$this->ui->subtreeACL,$base,array("gidNumber", "cn", "description"), GL_SUBSEARCH);
+    foreach($res as $attrs){
+      if (!isset($primaries[$attrs['gidNumber'][0]])){
+        $functional[$attrs['gidNumber'][0]]= $attrs['gidNumber'][0];
       }
     }
-    
+   
 
     /********************
       Search for the prepared filter 
      ********************/
-    
+   
     /* If subsearch is activated search for subobjects too */
-    $attrs = array("cn", "description", "gidNumber", "objectClass");
+    $attrs = array("cn", "description", "gidNumber", "objectClass","FAIrelease");
 
     if ($SubSearch){
       $res= get_list($filter, $this->ui->subtreeACL, $base, $attrs, GL_SIZELIMIT| GL_SUBSEARCH);
@@ -442,14 +444,13 @@ class groupManagement extends plugin
     /* Sort values into grouplist*/
     $tmp = $tmp2 = array();
     foreach ($res as $value){
-
       /* Skip functional groups if checkbox isn't checked */
       if (!$ShowFunctionalGroups && isset($functional[$value['gidNumber'][0]])){
         continue;
       }
       
       /* If gidNumber is in $primaries skip this entry */
-      if (!isset($primaries[$value['gidNumber'][0]])){
+      if (($ShowPrimaryGroups)   ||   (!$ShowPrimaryGroups && !isset($primaries[$value['gidNumber'][0]]))){
         $tmp2[$value['cn'][0]] = $value;
         $tmp [$value['cn'][0]] = $value['cn'][0];
       }
