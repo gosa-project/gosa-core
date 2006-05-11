@@ -240,12 +240,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 /* Load department list when plugin has changed. That is some kind of
    compromise between speed and beeing up to date */
 if (isset($_GET['reset'])){
-  if (!isset($_SESSION['cached_departments'])){
-    $config->get_departments();
-    $_SESSION['cached_departments']= $config->departments;
-  } else {
-    $config->departments= $_SESSION['cached_departments'];
-  }
+  $config->get_departments();
   $config->make_idepartments ();
   if (isset($_SESSION['objectinfo'])){
     unset ($_SESSION['objectinfo']);
@@ -380,8 +375,9 @@ if ((isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->d
 /* Show page... */
 echo $display;
 
-/* Save plist */
+/* Save plist and config */
 $_SESSION['plist']= $plist;
+$_SESSION['config']= $config;
 
 /* Echo compilation time * /
 $r = split(" ",$start);

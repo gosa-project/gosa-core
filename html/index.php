@@ -213,6 +213,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
 
       /* Let GOsa trigger a new connection for each POST, save
          config to session. */
+      $config->get_departments();
+      $config->make_idepartments();
       $_SESSION['config']= $config;
 
       /* Go to main page */

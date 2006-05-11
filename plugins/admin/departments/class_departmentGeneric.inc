@@ -382,7 +382,7 @@ class department extends plugin
 
 			$display=  $smarty->fetch(get_template_path("recursive_move.tpl",TRUE));
 			return($display);
-			exit();
+
 		}else{
 			if(!$this->rec_cpy){ 
 				return;

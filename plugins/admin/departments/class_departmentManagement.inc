@@ -66,13 +66,14 @@ class departmentManagement extends plugin
 
 		/* Reload departments */
 		$this->config->get_departments();
+		$this->config->make_idepartments();
+		$_SESSION['config']= $this->config;
+
 		$smarty						= get_smarty();
 		$display 					= "";
 		$depfilter					= get_global("depfilter");
 		$s_action 					= "";  // Will contain an action, like del or edit
 		$s_entry  					= "";  // The entry name for edit delete -...
-
-		$this->config->make_idepartments();
 
 		if (isset($_POST['regex'])){
 			$depfilter['regex']= $_POST['regex'];
@@ -214,8 +215,8 @@ class departmentManagement extends plugin
 			$this->deptabs->save(true);
 			$this->deptabs->by_object['department']->recursive_move("","",true);
 			$this->reload ();
-			/* Group has been saved successfully, remove lock from
-			   LDAP. */
+
+			/* Group has been saved successfully, remove lock from LDAP. */
 			if ($this->dn != "new"){
 				del_lock ($this->dn);
 			}
@@ -431,9 +432,6 @@ class departmentManagement extends plugin
 		}
 		natcasesort ($this->departments);
 		reset ($this->departments);
-
-		/* Unset global department list */
-		unset($_SESSION['cached_departments']);
 	}
 
 	function remove_from_parent()
