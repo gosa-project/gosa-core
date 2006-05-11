@@ -905,11 +905,12 @@ class plugin
       $ldap->cat($dn, array('gosaUnitTag', 'objectClass'));
       $attrs= $ldap->fetch();
       if(isset($attrs['gosaUnitTag'][0]) && $attrs['gosaUnitTag'][0] == $tag){
-        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "$dn is already tagged", "Tagging");
+        echo sprintf(_("Processing: Object '%s' is already tagged"), $dn);
+        flush()
         return;
       }
       if (count($attrs)){
-        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "Add tagging ($tag) to $dn", "Tagging");
+        echo sprintf(_("Processing: Adding tag (%s) to object '%s'"), $dn);
         $nattrs= array("gosaUnitTag" => $this->gosaUnitTag);
         $nattrs['objectClass']= array();
         for ($i= 0; $i<$attrs['objectClass']['count']; $i++){
@@ -935,7 +936,7 @@ class plugin
         return;
       }
       if (count($attrs)){
-        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "Remove tagging from $dn", "Tagging");
+        echo sprintf(_("Processing: Removing tag from object '%s'"), $dn);
         $nattrs= array("gosaUnitTag" => array());
         $nattrs['objectClass']= array();
         for ($i= 0; $i<$attrs['objectClass']['count']; $i++){

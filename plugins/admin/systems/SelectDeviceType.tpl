@@ -29,7 +29,7 @@
    <table summary="">
     <tr>
      <td> 
-      {t}Inherit settings from this object group{/t}&nbsp;
+      {t}Choose a template group{/t}&nbsp;
 	  <select name="ObjectGroup" title="{t}Choose an object group{/t}" style="width:120px;">
        {html_options values=$ObjectGroupKeys output=$ObjectGroups selected=$ObjectGroup}
       </select>
