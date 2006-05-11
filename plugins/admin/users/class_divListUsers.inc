@@ -11,12 +11,12 @@ class divListUsers extends MultiSelectWindow
   var $Regex              = "*";
 
   /* CheckBoxes */
-  var $ShowTemplates= 0;
-  var $ShowFunctionalUsers= 1;
-  var $ShowUnixUsers= 1;
-  var $ShowMailUsers= 1;
-  var $ShowSambaUsers= 1;
-  var $ShowProxyUsers= 1;
+  var $ShowTemplates ;
+  var $ShowFunctionalUsers;
+  var $ShowUnixUsers;
+  var $ShowMailUsers;
+  var $ShowSambaUsers;
+  var $ShowProxyUsers;
 
   /* Subsearch checkbox */
   var $SubSearch              = false;
@@ -57,12 +57,12 @@ class divListUsers extends MultiSelectWindow
     $this->AddHeader(array("string"=>_("Properties"),   "attach" => "style='width:152px;'"));
     $this->AddHeader(array("string"=>_("Actions"),      "attach" => "style='width:102px;border-right:0px;text-align:right;'"));
     
-    $this->AddCheckBox("ShowTemplates"      ,_("Select to see template pseudo users")               ,_("Show templates")        ,true);
-    $this->AddCheckBox("ShowFunctionalUsers",_("Select to see users that   have only a GOsa object"),_("Show functional users") ,true);
-    $this->AddCheckBox("ShowUnixUsers"      ,_("Select to see users that have posix settings")      ,_("Show unix users")       ,true);
-    $this->AddCheckBox("ShowMailUsers"      ,_("Select to see users that have mail settings")       ,_("Show mail users")       ,true);
-    $this->AddCheckBox("ShowSambaUsers"     ,_("Select to see users that have samba settings")      ,_("Show samba users")      ,true);
-    $this->AddCheckBox("ShowProxyUsers"     ,_("Select to see users that have proxy settings")      ,_("Show proxy users")      ,true);
+    $this->AddCheckBox("ShowTemplates"      ,_("Select to see template pseudo users")               ,_("Show templates")        , false);
+    $this->AddCheckBox("ShowFunctionalUsers",_("Select to see users that   have only a GOsa object"),_("Show functional users") , true);
+    $this->AddCheckBox("ShowUnixUsers"      ,_("Select to see users that have posix settings")      ,_("Show unix users")       , true);
+    $this->AddCheckBox("ShowMailUsers"      ,_("Select to see users that have mail settings")       ,_("Show mail users")       , true);
+    $this->AddCheckBox("ShowSambaUsers"     ,_("Select to see users that have samba settings")      ,_("Show samba users")      , true);
+    $this->AddCheckBox("ShowProxyUsers"     ,_("Select to see users that have proxy settings")      ,_("Show proxy users")      , true);
 
     /* Add SubSearch checkbox */
     $this->AddCheckBox(SEPERATOR);
