@@ -868,7 +868,7 @@ class plugin
       if ($tag == ""){
         $len= strlen($dn);
 
-        echo "DEBUG: No tag for $dn - looking for one...<br>";
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "No tag for $dn - looking for one...", "Tagging");
         $relevant= array();
         foreach ($this->config->adepartments as $key => $ntag){
 
@@ -879,7 +879,7 @@ class plugin
 
           /* This one matches with the latter part. Break and don't fix this entry */
           if (preg_match('/(^|,)'.normalizePreg($key).'$/', $dn)){
-            echo "DEBUG: Possibly relevant: $key<br>";
+            @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "DEBUG: Possibly relevant: $key", "Tagging");
             $relevant[strlen($key)]= $ntag;
             continue;
           }
@@ -905,11 +905,11 @@ class plugin
       $ldap->cat($dn, array('gosaUnitTag', 'objectClass'));
       $attrs= $ldap->fetch();
       if(isset($attrs['gosaUnitTag'][0]) && $attrs['gosaUnitTag'][0] == $tag){
-        echo "DEBUG: $dn is already tagged<br>";
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "$dn is already tagged", "Tagging");
         return;
       }
       if (count($attrs)){
-        echo "DEBUG: Add tagging ($tag) to $dn.<br>";
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "Add tagging ($tag) to $dn", "Tagging");
         $nattrs= array("gosaUnitTag" => $this->gosaUnitTag);
         $nattrs['objectClass']= array();
         for ($i= 0; $i<$attrs['objectClass']['count']; $i++){
@@ -922,7 +922,7 @@ class plugin
         $ldap->cd($dn);
         $ldap->modify($nattrs);
       } else {
-        echo "DEBUG: not tagging ($tag) $dn - seems to have moved away<br>";
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "Not tagging ($tag) $dn - seems to have moved away", "Tagging");
       }
       
     } else {
@@ -931,11 +931,11 @@ class plugin
       $ldap->cat($dn, array('gosaUnitTag', 'objectClass'));
       $attrs= $ldap->fetch();
       if (isset($attrs['objectClass']) && !in_array_ics("gosaAdministrativeUnitTag", $attrs['objectClass'])){
-        echo "DEBUG: $dn is not tagged<br>";
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "$dn is not tagged", "Tagging");
         return;
       }
       if (count($attrs)){
-        echo "DEBUG: Remove tagging from $dn.<br>";
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "Remove tagging from $dn", "Tagging");
         $nattrs= array("gosaUnitTag" => array());
         $nattrs['objectClass']= array();
         for ($i= 0; $i<$attrs['objectClass']['count']; $i++){
@@ -948,7 +948,7 @@ class plugin
         $ldap->modify($nattrs);
         show_ldap_error($ldap->get_error());
       } else {
-        echo "DEBUG: not removing tag ($tag) $dn - seems to have moved away<br>";
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "Not removing tag ($tag) $dn - seems to have moved away", "Tagging");
       }
     }
     
