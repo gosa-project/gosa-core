@@ -11,12 +11,12 @@ class divListUsers extends MultiSelectWindow
   var $Regex              = "*";
 
   /* CheckBoxes */
-  var $ShowTemplates        ;
-  var $ShowFunctionalUsers  ;
-  var $ShowUnixUsers        ;
-  var $ShowMailUsers        ;
-  var $ShowSambaUsers       ;
-  var $ShowProxyUsers       ;
+  var $ShowTemplates= 0;
+  var $ShowFunctionalUsers= 1;
+  var $ShowUnixUsers= 1;
+  var $ShowMailUsers= 1;
+  var $ShowSambaUsers= 1;
+  var $ShowProxyUsers= 1;
 
   /* Subsearch checkbox */
   var $SubSearch              = false;
