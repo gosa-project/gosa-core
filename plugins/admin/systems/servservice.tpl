@@ -58,7 +58,7 @@
   <input type=checkbox name="goLdapServer" value="1" {$goLdapServer} {$goLdapServerACL}
             onchange="changeState('goLdapBaseId');">
 
-     <b>{t}LDAP Service{/t}</b>&nbsp;<input type="text" style="width:70%" value="{$goLdapBase}"     {$goLdapBaseACL}    name="goLdapBase" {$goLdapServerState} id="goLdapBaseId">
+     <b>{t}LDAP Service{/t}</b><br>&nbsp;&nbsp;{t}Base{/t}&nbsp;<input type="text" style="width:70%" value="{$goLdapBase}"     {$goLdapBaseACL}    name="goLdapBase" {$goLdapServerState} id="goLdapBaseId">
 
 	<p class="seperator">&nbsp;</p>
     <br>

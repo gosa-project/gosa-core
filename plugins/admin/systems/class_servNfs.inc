@@ -69,7 +69,7 @@ class servnfs extends plugin
 
     if($entry){
       list($this->name, $this->description, $this->type, $this->charset,
-           $this->path, $this->option, $this->volume)= split("\|",$entry);
+           $this->path, $this->option, $this->volume)= split("\|",$entry."|");
       $this->is_edit          = true;
       
     }else{
@@ -182,11 +182,16 @@ class servnfs extends plugin
     // only 0-9a-z
     if(!$this->is_edit){
       if(preg_match("/[^a-z0-9\.\-_]/i",$this->name)){
-        $message[]=_("Please specify a valid name for your setup.");
+        $message[]=_("Please specify a valid name for your share.");
       }
       if(empty($this->name)){
-        $message[]=_("Please specify a name for your setup.");
+        $message[]=_("Please specify a name for your share.");
       }
+    }
+
+    /* If we've NCP, we need a volume */
+    if($this->type == "NCP" && empty($this->volume)){
+      $message[]=_("Please specify a valid volume name for your share.");
     }
 
     if(preg_match("/\|/",$this->description)){
