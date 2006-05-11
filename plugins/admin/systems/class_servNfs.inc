@@ -189,11 +189,6 @@ class servnfs extends plugin
       }
     }
 
-    /* If we've NCP, we need a volume */
-    if($this->type == "NCP" && empty($this->volume)){
-      $message[]=_("Please specify a valid volume name for your share.");
-    }
-
     if(preg_match("/\|/",$this->description)){
       $message[]=_("Description contains invalid characters.");
     }

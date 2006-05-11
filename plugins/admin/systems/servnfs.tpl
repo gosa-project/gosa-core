@@ -22,7 +22,7 @@
 				</tr>
 				<tr>
 					<td>
-						{t}Path{/t} {$must}
+						{t}Path{/t}
 					</td>
 					<td>
 						<input type="text" size="40" name="path" value="{$path}">
@@ -30,7 +30,7 @@
 				</tr>
 				<tr>
 					<td>
-						<div id="vlabel">{t}Volume{/t} {$must}</div>
+						<div id="vlabel">{t}Volume{/t}</div>
 					</td>
 					<td>
 						<input type="text" id="volume" size="40" name="volume" value="{$volume}">
