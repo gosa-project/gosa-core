@@ -39,9 +39,11 @@ class departmentManagement extends plugin
 	var $attributes= array();
 	var $objectclasses= array();
 
-  var $ObjectInSaveMode         = false;
-  var $RecursiveRemoveRequested = false;
-  var $ObjectTaggingRequested   = false;
+  /* Vars to handle operations after saving the department 
+      Recursive move && tagging   */
+  var $ObjectInSaveMode         = false;    // Is true, if current object wasn't saved right now
+  var $ObjectTaggingRequested   = false;    // Object must be tagged, an iframe will be shown. 
+  var $RecursiveRemoveRequested = false;    // Is true, if this object must be moved, an iframe will be displayed in this case
 
 	function departmentManagement ($config, $ui)
 	{
@@ -223,16 +225,19 @@ class departmentManagement extends plugin
 				$this->deptabs->save(true);
         $this->deptabs->by_object['department']->save();     
  
-        /* Get tagging frame */
-				if($this->deptabs->by_object['department']->must_be_tagged()){
+				/* This object must be tagged, so set ObjectTaggingRequested to true */
+        if($this->deptabs->by_object['department']->must_be_tagged()){
           $this->ObjectTaggingRequested   = true; 
         }		
 
-        /* Get recursive move frame */
+        /* Get recursive move is required, set RecursiveRemoveRequested to true */
 				if($this->deptabs->by_object['department']->am_i_moved()){	
           $this->RecursiveRemoveRequested = true;
 				}		
+
+        /* This var indicated that there is an object which isn't saved right now. */
         $this->ObjectInSaveMode = true;
+
 			} else {
 				/* Ok. There seem to be errors regarding to the tab data,
 				   show message and continue as usual. */
@@ -240,18 +245,20 @@ class departmentManagement extends plugin
 			}
 		}
 
-		/* This department must be tagged */
+		/* This department must be tagged (Is called from iframe, generates output)*/
     if(isset($_GET['TagDepartment'])){
 			$this->deptabs->by_object['department']->tag_objects();
       exit();  
 		}
 
-    /* initiate recursive remove*/
+    /* initiate recursive remove  (Is called from iframe, generates output)*/
 		if(isset($_GET['PerformRecMove'])){
 			$this->deptabs->by_object['department']->recursive_move("","",true);
 		  exit();
     }
 
+    /* While one of these vars below isset, we must return an iframe, 
+        to perform requested operation */
     if($this->ObjectTaggingRequested){
       $this->ObjectTaggingRequested = false;
       return($this->deptabs->by_object['department']->ShowTagFrame());
@@ -261,7 +268,8 @@ class departmentManagement extends plugin
       return($this->deptabs->by_object['department']->ShowMoveFrame());
     }
 
-		/* Unset current object / all operations are done */
+		/* If there is an unsaved object and all operations are done
+        remove locks & save object tab & unset current object */
 		if($this->ObjectInSaveMode && (!$this->RecursiveRemoveRequested) && (!$this->ObjectTaggingRequested)){
       $this->deptabs->save();
       $this->ObjectInSaveMode = false;
