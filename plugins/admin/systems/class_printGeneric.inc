@@ -533,16 +533,16 @@ class printgeneric extends plugin
 
       /* Check if this dn points to a printer, to avoid deleting something else */
       $ldap= $this->config->get_ldap_link();
-      $ldap->cat($this->dn, array('dn'));
+      $ldap->cat($this->dn, array('dn',"objectClass"));
       if(!$ldap->count()){
-        print_red("Trying to remove printer obejct which isn't a printer. Aborted to avoid data loss.");
+        print_red("Trying to remove printer object which isn't a printer. Aborted to avoid data loss.");
         return;
       }
 
       /* Check if obejct is a printer */
       $CheckPrinter = $ldap->fetch();
       if(!in_array("gotoPrinter",$CheckPrinter['objectClass'])){
-        print_red("Trying to remove printer obejct which isn't a printer. Aborted to avoid data loss.");
+        print_red("Trying to remove printer object which isn't a printer. Aborted to avoid data loss.");
         return;
       }
 
