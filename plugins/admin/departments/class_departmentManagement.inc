@@ -212,7 +212,7 @@ class departmentManagement extends plugin
 			}
 		}
 
-		if ((isset($_POST['edit_finish'])) && (isset($this->deptabs->config) ) ){
+		if ((isset($_POST['edit_finish'])) && (isset($this->deptabs->config))){
 
 			/* Check tabs, will feed message array */
 			$message= $this->deptabs->check();
@@ -241,22 +241,23 @@ class departmentManagement extends plugin
 		}
 
 		/* This department must be tagged */
-		if((isset($_GET['TagDepartment'])) && ($this->ObjectTaggingRequested)){
+    if(isset($_GET['TagDepartment'])){
 			$this->deptabs->by_object['department']->tag_objects();
-      $this->ObjectTaggingRequested = false;
-      exit();	
-		}
-    /* initiate recursive remove*/
-		if((isset($_GET['PerformRecMove'])) &&($this->RecursiveRemoveRequested)){
-			$this->deptabs->by_object['department']->recursive_move("","",true);
-      $this->RecursiveRemoveRequested = false;
-      exit();
+      exit();  
 		}
 
+    /* initiate recursive remove*/
+		if(isset($_GET['PerformRecMove'])){
+			$this->deptabs->by_object['department']->recursive_move("","",true);
+		  exit();
+    }
+
     if($this->ObjectTaggingRequested){
+      $this->ObjectTaggingRequested = false;
       return($this->deptabs->by_object['department']->ShowTagFrame());
     }
     if($this->RecursiveRemoveRequested){
+      $this->RecursiveRemoveRequested = false;
       return($this->deptabs->by_object['department']->ShowMoveFrame());
     }
 
