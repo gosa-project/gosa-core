@@ -39,6 +39,10 @@ class departmentManagement extends plugin
 	var $attributes= array();
 	var $objectclasses= array();
 
+  var $ObjectInSaveMode         = false;
+  var $RecursiveRemoveRequested = false;
+  var $ObjectTaggingRequested   = false;
+
 	function departmentManagement ($config, $ui)
 	{
 		$this->ui= $ui;
@@ -208,40 +212,6 @@ class departmentManagement extends plugin
 			}
 		}
 
-
-		/* If this var ist true, the object will be unset after the next two operations */	
-		$UnsetAfterTaggingMoving = false;
-
-		/* This department must be tagged 
-		 */
-		if((isset($_GET['TagDepartment'])) && ($this->deptabs->by_object['department']->must_be_tagged())){
-			$this->deptabs->by_object['department']->tag_objects();
-			$UnsetAfterTaggingMoving = true;
-      	
-		}
-
-		/* Edit Complete ...
-		 * Finish request 
-		 */
-		if((isset($_GET['PerformRecMove'])) &&( $this->deptabs->by_object['department']->am_i_moved())){
-			$this->deptabs->save(true);
-			$this->deptabs->by_object['department']->recursive_move("","",true);
-			$UnsetAfterTaggingMoving = true;	
-		}
-
-		/* Unset current object / all operations are done */
-		if($UnsetAfterTaggingMoving){
-			/* There's no page reload so we have to read new users at
-			   this point. */
-			del_lock ($this->dn);
-			$this->reload ();
-			unset ($this->deptabs);
-			$this->deptabs= NULL;
-			unset ($_SESSION['objectinfo']);
-      exit();
-		}
-
-
 		if ((isset($_POST['edit_finish'])) && (isset($this->deptabs->config) ) ){
 
 			/* Check tabs, will feed message array */
@@ -250,38 +220,19 @@ class departmentManagement extends plugin
 			/* Save, or display error message? */
 			if (count($message) == 0){
 
-				$res = $this->deptabs->save(true);
-				$display  = "";
-    
+				$this->deptabs->save(true);
+        $this->deptabs->by_object['department']->save();     
+ 
         /* Get tagging frame */
 				if($this->deptabs->by_object['department']->must_be_tagged()){
-					$display .= $this->deptabs->by_object['department']->ShowTagFrame();	
-				}		
+          $this->ObjectTaggingRequested   = true; 
+        }		
 
         /* Get recursive move frame */
 				if($this->deptabs->by_object['department']->am_i_moved()){	
-					$display .= $res;
+          $this->RecursiveRemoveRequested = true;
 				}		
-
-        /* If no frame is returned, unset this obejct, else display those frames */
-				if(empty($display)){
-					gosa_log ("Department object'".$this->dn."' has been saved");
-
-					/* Group has been saved successfully, remove lock from
-					   LDAP. */
-					if ($this->dn != "new"){
-						del_lock ($this->dn);
-					}
-
-					/* There's no page reload so we have to read new users at
-					   this point. */
-					$this->reload ();
-					unset ($this->deptabs);
-					$this->deptabs= NULL;
-					unset ($_SESSION['objectinfo']);
-				}else{
-					return($display);
-				}
+        $this->ObjectInSaveMode = true;
 			} else {
 				/* Ok. There seem to be errors regarding to the tab data,
 				   show message and continue as usual. */
@@ -289,6 +240,39 @@ class departmentManagement extends plugin
 			}
 		}
 
+		/* This department must be tagged */
+		if((isset($_GET['TagDepartment'])) && ($this->ObjectTaggingRequested)){
+			$this->deptabs->by_object['department']->tag_objects();
+      $this->ObjectTaggingRequested = false;
+      exit();	
+		}
+    /* initiate recursive remove*/
+		if((isset($_GET['PerformRecMove'])) &&($this->RecursiveRemoveRequested)){
+			$this->deptabs->by_object['department']->recursive_move("","",true);
+      $this->RecursiveRemoveRequested = false;
+      exit();
+		}
+
+    if($this->ObjectTaggingRequested){
+      return($this->deptabs->by_object['department']->ShowTagFrame());
+    }
+    if($this->RecursiveRemoveRequested){
+      return($this->deptabs->by_object['department']->ShowMoveFrame());
+    }
+
+		/* Unset current object / all operations are done */
+		if($this->ObjectInSaveMode && (!$this->RecursiveRemoveRequested) && (!$this->ObjectTaggingRequested)){
+      $this->deptabs->save();
+      $this->ObjectInSaveMode = false;
+      if ($this->dn != "new"){
+        del_lock ($this->dn);
+      }
+  		gosa_log ("Department object'".$this->dn."' has been saved");
+			$this->reload ();
+			unset ($this->deptabs);
+			$this->deptabs= NULL;
+			unset ($_SESSION['objectinfo']);
+		}
 
 		/* User cancelt edit oder delete
 		 * Cancel dialog 

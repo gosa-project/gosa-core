@@ -161,7 +161,6 @@ class department extends plugin
 		}
 	}
 
-
 	function remove_from_parent()
 	{
 		$ldap= $this->config->get_ldap_link();
@@ -170,6 +169,16 @@ class department extends plugin
 
 		/* Optionally execute a command after we're done */
 		$this->handle_post_events('remove');
+	}
+
+	function must_be_tagged()
+	{
+		return $this->must_be_tagged;
+	}
+
+	function am_i_moved()
+	{
+		return $this->rec_cpy;
 	}
 
 
@@ -258,7 +267,9 @@ class department extends plugin
 
 		/* Add tag objects if needed */
 		if ($this->is_administrational_unit){
-			$this->objectclasses[]= "gosaAdministrativeUnit";
+      if(!in_array_ics("gosaAdministrativeUnit",$this->objectclasses)){
+  			$this->objectclasses[]= "gosaAdministrativeUnit";
+      }
 			if ($this->gosaUnitTag == ""){
 
 				/* It's unlikely, but check if already used... */
@@ -320,13 +331,23 @@ class department extends plugin
 		}
 		show_ldap_error($ldap->get_error());
 
-		
+    /* The parameter forces only to set must_be_tagged, and don't touch any objects 
+        This will be done later */
+    $this->tag_objects(true);
+    
     /* Optionally execute a command after we're done */
-    $this->must_be_tagged =true;
 		$this->postcreate();
     return(true);
 	}
 
+
+  function ShowMoveFrame()
+  {
+    $smarty = get_smarty();
+    $smarty->assign("src","?plug=".$_GET['plug']."&PerformRecMove");
+    $display=  $smarty->fetch(get_template_path("recursive_move.tpl",TRUE));
+    return($display);
+  }
 
   function ShowTagFrame()
   {
@@ -337,7 +358,7 @@ class department extends plugin
   }
 
 	/* Tag objects to have the gosaAdministrativeUnitTag */
-	function tag_objects()
+	function tag_objects($OnlySetTagFlag = false)
 	{
 		$add= $this->is_administrational_unit;
 		$len= strlen($this->dn);
@@ -371,38 +392,36 @@ class department extends plugin
 				}
 			}
 
-			/* Fix entry if needed */
-			if ($fix){
-        echo "asdfasdfasdfasdf";
-				$this->handle_object_tagging($attrs['dn'], $this->gosaUnitTag, true);
+      /* Fix entry if needed */
+      if ($fix){
+        if($OnlySetTagFlag){
+          $this->must_be_tagged =true;
+          return;
+        }
+				$this->handle_object_tagging($attrs['dn'], $this->gosaUnitTag, TRUE );
 			}
 		}
-			echo '<p class="seperator">&nbsp;</p>';
-
-			echo "<div style='width:100%;text-align:right;'><form name='form' method='post' action='?plug=".$_GET['plug']."' target='_parent'>
-				<br><input type='submit' name='back' value='"._("Continue")."'>
-				</form></div>";
-
+    if(!$OnlySetTagFlag){
+      echo '<p class="seperator">&nbsp;</p>';
+      echo "<div style='width:100%;text-align:right;'><form name='form' method='post' action='?plug=".$_GET['plug']."' target='_parent'>
+        <br><input type='submit' name='back' value='"._("Continue")."'>
+        </form></div>";
+    }
 	}
 
 
 	/* Move/Rename complete trees */
 	function recursive_move($src_dn, $dst_dn,$force = false)
 	{
+    /* If force == false prepare to recursive move this object from src to dst 
+        on the next call. */
 		if(!$force){
-
 			$this->rec_cpy 	= true;
 			$this->rec_src	= $src_dn;
 			$this->rec_dst	= $dst_dn;
-
-			$smarty = get_smarty();
-
-			$smarty->assign("src","?plug=".$_GET['plug']."&PerformRecMove");
-
-			$display=  $smarty->fetch(get_template_path("recursive_move.tpl",TRUE));
-			return($display);
-
 		}else{
+
+      /* If this is called, but not wanted, abort */
 			if(!$this->rec_cpy){ 
 				return;
 			}
@@ -426,7 +445,7 @@ class department extends plugin
 			if ($ldap->fetch()){
 				trigger_error("Recursive_move $dst_dn already exists.",
 						E_USER_WARNING);
-				echo sprintf_("Recursive_move: '%s' already exists", $dst_dn)."<br>"; 
+				echo sprintf("Recursive_move: '%s' already exists", $dst_dn)."<br>"; 
 				return (FALSE);
 			}
 
@@ -478,17 +497,6 @@ class department extends plugin
 			return (TRUE);
 		}
 	}
-
-	function must_be_tagged()
-	{
-		return $this->must_be_tagged;
-	}
-
-	function am_i_moved()
-	{
-		return $this->rec_cpy;
-	}
-
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
