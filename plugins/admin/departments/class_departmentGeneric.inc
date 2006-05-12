@@ -360,6 +360,13 @@ class department extends plugin
 	/* Tag objects to have the gosaAdministrativeUnitTag */
 	function tag_objects($OnlySetTagFlag = false)
 	{
+    if(!$OnlySetTagFlag){
+      $smarty= get_smarty();
+      echo "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
+      echo "<body style='background-image:none;margin:3px;color:black'>";
+      echo "<h3>".sprintf(_("Tagging '%s'."),"<i>".$this->dn."</i>")."</h3>";
+    }
+
 		$add= $this->is_administrational_unit;
 		$len= strlen($this->dn);
 		$ldap= $this->config->get_ldap_link();
