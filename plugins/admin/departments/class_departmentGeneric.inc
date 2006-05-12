@@ -346,7 +346,7 @@ class department extends plugin
     $smarty = get_smarty();
     $smarty->assign("src","?plug=".$_GET['plug']."&PerformRecMove");
     $smarty->assign("message","As soon as the move operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the department management dialog.");
-    $display=  $smarty->fetch(get_template_path("recursive_move.tpl",TRUE));
+    $display=  $smarty->fetch(get_template_path("dep_iframe.tpl",TRUE));
     return($display);
   }
 
@@ -355,7 +355,7 @@ class department extends plugin
     $smarty = get_smarty();
     $smarty->assign("src","?plug=".$_GET['plug']."&TagDepartment");
     $smarty->assign("message","As soon as the tag operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the department management dialog.");
-    $display=  $smarty->fetch(get_template_path("recursive_move.tpl",TRUE));
+    $display=  $smarty->fetch(get_template_path("dep_iframe.tpl",TRUE));
     return($display);
   }
 
