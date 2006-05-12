@@ -39,6 +39,7 @@ chown root.$WEBGROUP -R /var/spool/gosa
 chmod 770 -R /var/spool/gosa
 
 # Add links for safe mode
+[ ! -d /usr/share/gosa/bin ] && mkdir -p /usr/share/gosa/bin
 for source in /usr/bin/convert /usr/bin/lpstat; do
 	if [ -e $source ]; then
 		target=/usr/share/gosa/bin/${source##*/}
