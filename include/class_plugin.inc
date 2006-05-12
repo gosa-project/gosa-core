@@ -914,14 +914,14 @@ class plugin
       $attrs= $ldap->fetch();
       if(isset($attrs['gosaUnitTag'][0]) && $attrs['gosaUnitTag'][0] == $tag){
         if ($show) {
-          echo sprintf(_("Processing: Object '%s' is already tagged"), $dn)."<br>";
+          echo sprintf(_("Object '%s' is already tagged"), @LDAP::fix($dn))."<br>";
           flush();
         }
         return;
       }
       if (count($attrs)){
         if ($show){
-          echo sprintf(_("Processing: Adding tag (%s) to object '%s'"), $tag,$dn)."<br>";
+          echo sprintf(_("Adding tag (%s) to object '%s'"), $tag, @LDAP::fix($dn))."<br>";
           flush();
         }
         $nattrs= array("gosaUnitTag" => $this->gosaUnitTag);
@@ -950,7 +950,7 @@ class plugin
       }
       if (count($attrs)){
         if ($show){
-          echo sprintf(_("Processing: Removing tag from object '%s'"), $dn)."<br>";
+          echo sprintf(_("Removing tag from object '%s'"), @LDAP::fix($dn))."<br>";
           flush();
         }
         $nattrs= array("gosaUnitTag" => array());
