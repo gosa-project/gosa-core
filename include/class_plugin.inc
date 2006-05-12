@@ -738,7 +738,15 @@ class plugin
     /* Save copy */
     $ldap->connect();
     $ldap->cd($this->config->current['BASE']);
+    
     $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $dst_dn));
+
+    /* FAIvariable=.../..., cn=.. 
+        could not be saved, because the attribute FAIvariable was different to 
+        the dn FAIvariable=..., cn=... */
+    if(in_array_ics("FAIdebconfInfo",$new['objectClass'])){
+      $new['FAIvariable'] = $ldap->fix($new['FAIvariable']);
+    }
     $ldap->cd($dst_dn);
     $ldap->add($new);
 
