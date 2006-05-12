@@ -724,8 +724,12 @@ class glpiAccount extends plugin
       $attrs['name'] = $this->dn;
       unset($attrs['ID']);
       $this->handle = new glpiDB($this->data['SERVER'],$this->data['LOGIN'],$this->data['PASSWORD'],$this->data['DB']);
+
+      print_a($attrs);
+
+      /* check if we have to update, add */
       if($this->initialy_was_account&&$this->is_account){
-        $this->handle->updateComputerInformations($attrs,$this->dn);
+        $this->handle->updateComputerInformations($attrs,$this->orig_dn);
       }elseif($this->is_account){
         $this->handle->addComputerInformations($attrs,$this->dn);
       }
