@@ -705,22 +705,22 @@ class systems extends plugin
   function get_system_type($classes)
   {
     $type= "";
-    if (in_array('ieee802Device', $classes)){
+    if (in_array_ics('ieee802Device', $classes)){
       $type= "component";
-    }elseif (in_array('gotoTerminal', $classes)){
+    }elseif (in_array_ics('gotoTerminal', $classes)){
       $type= "terminal";
-    }elseif (in_array('gotoWorkstation', $classes)){
+    }elseif (in_array_ics('gotoWorkstation', $classes)){
       $type= "workstation";
-    }elseif (in_array('gotoPrinter', $classes)){
+    }elseif (in_array_ics('gotoPrinter', $classes)){
       $type= "printer";
-    }elseif (in_array('goFonHardware', $classes)){
+    }elseif (in_array_ics('goFonHardware', $classes)){
       $type= "phone";
-    }elseif (in_array('goServer', $classes)){
+    }elseif (in_array_ics('goServer', $classes)){
       $type= "server";
-    }elseif (in_array('GOhard', $classes)){
+    }elseif (in_array_ics('GOhard', $classes)){
       $type= "NewDevice";
-    }elseif (in_array('sambaAccount', $classes) ||
-        in_array('sambaSamAccount', $classes)){
+    }elseif (in_array_ics('sambaAccount', $classes) ||
+        in_array_ics('sambaSamAccount', $classes)){
       $type= "winstation";
     }
     return ($type);
