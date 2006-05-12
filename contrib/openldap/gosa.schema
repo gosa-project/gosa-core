@@ -241,7 +241,7 @@ attributetype ( 1.3.6.1.4.1.19414.2.1.651
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256} )
 
 # Objectclasses
-objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.1 NAME 'gosaObject' AUXILIARY
+objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.1 NAME 'gosaObject' SUP top AUXILIARY
         DESC 'Objectclass for GOsa settings (v2.4)'
         MUST ( gosaSubtreeACL ))
 
@@ -282,7 +282,7 @@ objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.8 NAME 'gosaProxyAccount' SUP top AUXIL
         MAY ( gosaProxyID $ gosaProxyWorkingStart $ gosaProxyWorkingStop $ gosaProxyQuota $
               gosaProxyQuotaPeriod ))
 
-objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.9 NAME 'gosaApplication'
+objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.9 NAME 'gosaApplication' SUP top STRUCTURAL
         DESC 'Objectclass for GOsa applications (v2.4)'
         MUST ( cn $ gosaApplicationExecute )
         MAY ( gosaApplicationName $ gosaApplicationIcon $ gosaApplicationFlags $ gosaApplicationMimeType $
