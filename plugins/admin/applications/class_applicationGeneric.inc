@@ -170,6 +170,7 @@ class application extends plugin
   {
     $ldap= $this->config->get_ldap_link();
     $ldap->rmDir($this->dn);
+    show_ldap_error($ldap->get_error(), _("Removing application failed"));
 
     /* Optionally execute a command after we're done */
     $this->handle_post_events("remove");
@@ -181,12 +182,14 @@ class application extends plugin
       $og= new ogroup($this->config, $ldap->getDN());
       unset($og->member[$this->dn]);
       $og->save ();
+      show_ldap_error($ldap->get_error(), sprintf(_("Removing application from objectgroup '%s' failed"), $og->dn));
     }
     $ldap->search ("(&(objectClass=posixGroup)(gosaMemberApplication=".$this->cn."))", array("cn"));
     while ($attrs= $ldap->fetch()){
       $ag= new appgroup($this->config, $ldap->getDN());
       $ag->removeApp($this->cn);
       $ag->save ();
+      show_ldap_error($ldap->get_error(), sprintf(_("Removing application from group '%s' failed"), $ag->dn));
     }
 
   }
@@ -385,7 +388,7 @@ class application extends plugin
       $ldap->add($this->attrs);
       $this->handle_post_events("add");
     }
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Saving application failed"));
   }
 
   function set_picture($filename)

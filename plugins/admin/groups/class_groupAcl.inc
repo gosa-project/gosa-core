@@ -97,8 +97,7 @@ class acl extends plugin
 	$ldap->cd($this->dn);
 	$this->cleanup();
 	$ldap->modify ($this->attrs); 
-
-	show_ldap_error($ldap->get_error());
+	show_ldap_error($ldap->get_error(), _("Removing ACL information failed"));
   }
 
 
@@ -194,7 +193,7 @@ class acl extends plugin
 	$this->cleanup();
 	$ldap->modify ($this->attrs); 
 
-	show_ldap_error($ldap->get_error());
+	show_ldap_error($ldap->get_error(), _("Saving ACL information failed"));
   }
 
 

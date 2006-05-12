@@ -838,7 +838,7 @@ class appgroup extends plugin
     
     $ldap->modify ($this->attrs); 
 
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Removing application information failed"));
 
     /* Optionally execute a command after we're done */
     $this->handle_post_events("remove");
@@ -882,7 +882,7 @@ class appgroup extends plugin
     $this->cleanup();
     $ldap->modify ($this->attrs); 
 
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Saving application information failed"));
 
     /* Optionally execute a command after we're done */
     if ($this->initially_was_account == $this->is_account){

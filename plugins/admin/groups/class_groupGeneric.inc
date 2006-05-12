@@ -1,4 +1,5 @@
 <?php
+
 class group extends plugin
 {
   /* CLI vars */
@@ -491,7 +492,7 @@ class group extends plugin
 
     $ldap= $this->config->get_ldap_link();
     $ldap->rmdir($this->dn);
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Removing group failed"));
 
     /* Delete references to object groups */
     $ldap->cd ($this->config->current['BASE']);
@@ -688,7 +689,7 @@ class group extends plugin
     $ldap->$mode($this->attrs);
 
     $ret= 0;
-    if (show_ldap_error($ldap->get_error())){
+    if (show_ldap_error($ldap->get_error(), _("Saving group failed"))){
       $ret= 1;
     }
 
