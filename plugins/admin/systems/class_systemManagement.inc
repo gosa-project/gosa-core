@@ -611,11 +611,11 @@ class systems extends plugin
 
       /* check if current object is a new one */
       if (preg_match ("/,ou=incoming,/i", $tmp)){
-        if (in_array('gotoTerminal', $value['objectClass'])){
+        if (in_array_ics('gotoTerminal', $value['objectClass'])){
           $add= "- "._("New terminal");
-        }elseif (in_array('gotoWorkstation', $value['objectClass'])){
+        }elseif (in_array_ics('gotoWorkstation', $value['objectClass'])){
           $add= "- "._("New workstation");
-        }elseif (in_array('GOhard', $value['objectClass'])){
+        }elseif (in_array_ics('GOhard', $value['objectClass'])){
           $add= "- "._("New Device");
         }
       } 
@@ -623,7 +623,7 @@ class systems extends plugin
       /* Detect type of object and create an entry for $this->terminals */
       $terminal = array();
       if ((in_array ($tmp, $responsible)) || ($add != "")){
-        if (in_array('gotoTerminal', $value["objectClass"])){
+        if (in_array_ics('gotoTerminal', $value["objectClass"])){
           if (isset($value["macAddress"][0]) && $value["macAddress"][0] != "-"){
             $terminal             = $value;
             $terminal['type']     = "T";
@@ -634,7 +634,7 @@ class systems extends plugin
             $terminal['message']  = _("Terminal template for");
             $terminal['location'] = array_search($tmp, $this->config->departments); 
           }
-        } elseif (in_array('gotoWorkstation', $value["objectClass"])){
+        } elseif (in_array_ics('gotoWorkstation', $value["objectClass"])){
           if (isset($value["macAddress"][0]) &&  $value["macAddress"][0] != "-"){
             $terminal             = $value;
             $terminal['type']     = "L";
@@ -648,23 +648,23 @@ class systems extends plugin
           if (isset($value["FAIstate"][0])){
             $terminal['type']= $this->getState($terminal['type'], $value["FAIstate"][0]);
           }
-        } elseif (in_array('gotoPrinter', $value["objectClass"])){
+        } elseif (in_array_ics('gotoPrinter', $value["objectClass"])){
           $terminal             = $value;
           $terminal['type']     = "P";
-        } elseif (in_array('goServer', $value["objectClass"])){
+        } elseif (in_array_ics('goServer', $value["objectClass"])){
           $terminal             = $value;
           $terminal['type']     = "S";
           if (isset($value["FAIstate"][0])){
             $terminal['type']= $this->getState($terminal['type'], $value["FAIstate"][0]);
           }
-        } elseif (in_array('goFonHardware', $value["objectClass"])){
+        } elseif (in_array_ics('goFonHardware', $value["objectClass"])){
           $terminal             = $value;
           $terminal['type']     = "F";
-        }elseif (in_array("GOhard",$value['objectClass'])){
+        }elseif (in_array_ics("GOhard",$value['objectClass'])){
           $terminal = $value;
           $terminal['type']   = "Q";
           $terminal['is_new'] = $add;
-        } elseif (in_array('ieee802Device', $value["objectClass"])){
+        } elseif (in_array_ics('ieee802Device', $value["objectClass"])){
           $terminal             = $value;
           $terminal['type']     = "C";
         } else{
