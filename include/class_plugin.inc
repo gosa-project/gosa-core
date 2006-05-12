@@ -935,6 +935,7 @@ class plugin
         $nattrs['objectClass'][]= "gosaAdministrativeUnitTag";
         $ldap->cd($dn);
         $ldap->modify($nattrs);
+        show_ldap_error($ldap->get_error(), _("Handle object tagging failed"));
       } else {
         @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "Not tagging ($tag) $dn - seems to have moved away", "Tagging");
       }

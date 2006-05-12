@@ -177,6 +177,7 @@ class addressbook extends plugin
 				/* Delete request is permitted, perform LDAP action */
 				$ldap= $this->config->get_ldap_link();
 				$ldap->rmdir ($this->dn);
+        show_ldap_error($ldap->get_error(), _("Removing addressbook entry failed"));
 				gosa_log ("Address book object'".$this->dn."' has been removed");
 
 			} else {
@@ -647,7 +648,7 @@ class addressbook extends plugin
 		$ldap->cd ($this->dn);
     $this->cleanup();
 		$ldap->$mode ($this->attrs);
-		if (show_ldap_error($ldap->get_error())){
+		if (show_ldap_error($ldap->get_error(), _("Saving addressbook entry failed"))){
 			return (1);
 		}
 	}

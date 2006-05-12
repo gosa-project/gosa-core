@@ -148,7 +148,7 @@ class dfsManagment extends plugin {
       $ldap = $this->config->get_ldap_link();
       $ldap->cd($this->basedn);
       $ldap->rmdir($this->basedn);
-      show_ldap_error($ldap->get_error());
+      show_ldap_error($ldap->get_error(), _("Removing DFS share failed"));
       
       del_lock ($_SESSION['objectinfo']);
       unset ($this->dfstab);

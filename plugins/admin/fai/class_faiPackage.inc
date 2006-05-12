@@ -321,6 +321,7 @@ class faiPackage extends plugin
     $ldap = $this->config->get_ldap_link();
     $ldap->cd ($this->dn);
     $ldap->rmdir_recursive($this->dn);
+    show_ldap_error($ldap->get_error(), _("Removing FAI package base failed"));
     $this->handle_post_events("remove");    
   }
 
@@ -457,11 +458,10 @@ class faiPackage extends plugin
       $ldap->cd($this->dn);
       $ldap->add($this->attrs);
     }
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Saving FAI package base failed"));
 
     /* Do object tagging */
     $this->handle_object_tagging();
-    show_ldap_error($ldap->get_error());
     $ldap->cd($this->dn);
 
     /* Save Package configurations */
@@ -503,7 +503,7 @@ class faiPackage extends plugin
           $ldap->cd($pkgdn);
           $ldap->add($pkgattrs);
         }
-        show_ldap_error($ldap->get_error());
+        show_ldap_error($ldap->get_error(), _("Saving FAI package entry failed"));
 
         /* Handle tagging */
         $this->handle_object_tagging($pkgdn, $this->gosaUnitTag);

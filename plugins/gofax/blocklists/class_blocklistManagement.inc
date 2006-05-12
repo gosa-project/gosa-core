@@ -515,6 +515,7 @@ class blocklist extends plugin
   {
     $ldap= $this->config->get_ldap_link();
     $ldap->rmDir($this->dn);
+    show_ldap_error($ldap->get_error(), _("Removing blocklist object failed"));
     $this->clear_fields();
     $this->handle_post_events("remove");
   }
@@ -621,7 +622,7 @@ class blocklist extends plugin
       $ldap->add($this->attrs);
       $this->handle_post_events("add");
     }
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Saving blocklist object failed"));
   }
 
 

@@ -322,11 +322,10 @@ class faiTemplate extends plugin
       $ldap->cd($this->dn);
       $ldap->add($this->attrs);
     }
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Saving FAI template base failed"));
 
     /* Do object tagging */
     $this->handle_object_tagging();
-    show_ldap_error($ldap->get_error());
 
     /* Prepare FAIscriptEntry to write it to ldap
      * First sort array.
@@ -384,10 +383,12 @@ class faiTemplate extends plugin
         $ldap->cd($sub_dn);
         $ldap->rmdir_recursive($sub_dn);
         $this->handle_post_events("remove");
+        show_ldap_error($ldap->get_error(), _("Removing FAI template base failed")); 
       }elseif($obj['status'] == "edited"){
         $ldap->cd($sub_dn);
         $this->cleanup();
         $ldap->modify ($tmp); 
+        show_ldap_error($ldap->get_error(), _("Saving FAI template failed")); 
 
         $this->handle_post_events("modify");
       }elseif($obj['status']=="new"){
@@ -400,11 +401,10 @@ class faiTemplate extends plugin
         $ldap->cd($sub_dn);
         $ldap->add($tmp); 
         $this->handle_post_events("add");
+        show_ldap_error($ldap->get_error(), _("Saving FAI template failed")); 
       }
-      show_ldap_error($ldap->get_error()); 
 
       $this->handle_object_tagging($sub_dn, $this->gosaUnitTag);
-      show_ldap_error($ldap->get_error()); 
     }
   }
 }
