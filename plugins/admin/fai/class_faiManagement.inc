@@ -307,7 +307,7 @@ class faiManagement extends plugin
 
     /* Abort creating new branch 
      */
-    if(isset($_POST['CancelBranchName'])){
+    if((isset($_POST['CancelBranchName'])) || (isset($_POST['CloseIFrame']))){
       $this->dispNewBranch = false;
       $this->dispNewFreeze = false;
     }
@@ -442,7 +442,7 @@ class faiManagement extends plugin
       $ldap->copy_FAI_resource_recursive($baseToUse,"ou=".$name.",".$baseToUse,$type,true);
 
       echo "<div style='width:100%;text-align:right;'><form name='form' method='post' action='?plug=".$_GET['plug']."' target='_parent'>
-              <br><input type='submit' name='back' value='"._("Continue")."'>
+              <br><input type='submit' name='CloseIFrame' value='"._("Continue")."'>
             </form></div>";
 
       /* Print footer to have valid html */
