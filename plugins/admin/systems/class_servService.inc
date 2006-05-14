@@ -376,7 +376,7 @@ class servservice extends plugin
     $this->cleanup();
     $ldap->modify ($this->attrs); 
 
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Saving server service object failed"));
     
     /* Optionally execute a command after we're done */
     if ($this->initially_was_account == $this->is_account){
@@ -407,7 +407,7 @@ class servservice extends plugin
     if (count($attrs) == 0) {
         $ldap->cd($mountsdn);
         $ldap->add($mounts);
-        show_ldap_error($ldap->get_error());
+        show_ldap_error($ldap->get_error(), _("Creating mount container failed"));
         gosa_log("Mount container '$mountsdn' has been created");
     }
 
@@ -421,7 +421,7 @@ class servservice extends plugin
 
       if (count($attrs) != 0) {
         $ldap->rmdir($mountdn);
-        show_ldap_error($ldap->get_error());
+        show_ldap_error($ldap->get_error(), _("Removing mount container failed"));
         gosa_log("Mount object '".$mountdn."' has been removed");
       }
     }
@@ -433,7 +433,7 @@ class servservice extends plugin
       $mountdn = "cn=".$mount["cn"].","."$mountsdn";  
       $ldap->cd($mountdn);
       $ldap->add($mount);
-      show_ldap_error($ldap->get_error());
+      show_ldap_error($ldap->get_error(), _("Saving mount container failed"));
       gosa_log("Mount object '".$mountdn."' has been added");
     }
   }

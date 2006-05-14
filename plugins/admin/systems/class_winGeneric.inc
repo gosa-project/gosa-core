@@ -123,7 +123,7 @@ class wingeneric extends plugin
     $this->netConfigDNS->remove_from_parent();
     $ldap= $this->config->get_ldap_link();
     $ldap->rmdir($this->dn);
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Removing Samba workstation failed"));
     $this->handle_post_events("remove");
 
     /* Delete references to object groups */
@@ -214,14 +214,14 @@ class wingeneric extends plugin
 
       $ldap->cd($this->dn);
       $this->cleanup();
-$ldap->modify ($this->attrs); 
+      $ldap->modify ($this->attrs); 
 
       $this->handle_post_events("modify");
     }
 
     $this->netConfigDNS->cn = $this->cn;
     $this->netConfigDNS->save($this->dn);
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Saving Samba workstation failed"));
 
     /* Optionally execute a command after we're done */
     $this->postcreate();

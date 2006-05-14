@@ -258,7 +258,7 @@ class servdns extends plugin
       $ldap->cd($attr['dn']);
       $ldap->rmDir($attr['dn']);
     }
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Removing DNS service failed"));
   }
 
 
@@ -279,7 +279,7 @@ class servdns extends plugin
       foreach($tmp['zoneUpdates'] as $dn => $attrs){
         $ldap->cd($dn);
         $ldap->modify($attrs);
-        show_ldap_error("Zone:".$ldap->get_error());
+        show_ldap_error("Zone:".$ldap->get_error(), _("Updating DNS service failed"));
       }
     }
 
@@ -288,7 +288,7 @@ class servdns extends plugin
     foreach($tmp['del'] as $dn => $del){
       $ldap->cd($dn);
       $ldap->rmdir_recursive($dn);
-      show_ldap_error("Zone:".$ldap->get_error());
+      show_ldap_error($ldap->get_error(), _("Removing DNS entries failed"));
     }
 
     /* move follwoing entries
@@ -309,6 +309,7 @@ class servdns extends plugin
         $ldap->cd($dn);
         $ldap->add($attrs);
       }
+      show_ldap_error($ldap->get_error(), _("Saving DNS entries failed"));
     }
   }
 }

@@ -197,6 +197,7 @@ class termDNS extends plugin
     while($attr = $ldap->fetch()){  
       $ldap->cd($attr['dn']);
       $ldap->rmDir($attr['dn']);
+      show_ldap_error("Record:".$ldap->get_error(), _("Removing terminal from DNS object failed")); 
     }
     */
   }
@@ -411,7 +412,7 @@ class termDNS extends plugin
       /* Display errors 
        */
       if($ldap->get_error() != "Success"){
-        show_ldap_error("Record:".$ldap->get_error()); 
+        show_ldap_error("Record:".$ldap->get_error(), _("Saving terminal to DNS object failed")); 
       }
     }
   }

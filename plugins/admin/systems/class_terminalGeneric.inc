@@ -263,7 +263,7 @@ class termgeneric extends plugin
     if($ldap->count()){
       $this->netConfigDNS->remove_from_parent();
       $ldap->rmDir($this->dn);
-      show_ldap_error($ldap->get_error());
+      show_ldap_error($ldap->get_error(), _("Removing terminal failed"));
 
       /* Optionally execute a command after we're done */
       $this->handle_post_events("remove", array("macAddress" => $this->netConfigDNS->macAddress));
@@ -408,13 +408,13 @@ class termgeneric extends plugin
       }
       $ldap->cd($this->dn);
       $this->cleanup();
-$ldap->modify ($this->attrs); 
+      $ldap->modify ($this->attrs); 
 
       $this->handle_post_events("modify");
     }
     $this->netConfigDNS->cn = $this->cn;
     $this->netConfigDNS->save($this->dn);
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Saving terminal failed"));
 
     /* Optionally execute a command after we're done */
     $this->postcreate();

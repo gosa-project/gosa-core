@@ -243,7 +243,7 @@ class phoneGeneric extends plugin
 
     $this->netConfigDNS->remove_from_parent();
     $ldap->rmdir($this->dn);
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Removing phone failed"));
     $this->handle_post_events("remove");
 
     /* Delete references to object groups */
@@ -393,8 +393,8 @@ class phoneGeneric extends plugin
     }
     $this->netConfigDNS->cn = $this->cn;    
     $this->netConfigDNS->save($this->dn);
+    show_ldap_error($ldap->get_error(), _("Saving phone failed"));
 
-    show_ldap_error($ldap->get_error());
     /* Optionally execute a command after we're done */
     $this->postcreate();
   }

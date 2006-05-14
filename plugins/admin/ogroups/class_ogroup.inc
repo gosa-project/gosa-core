@@ -712,7 +712,7 @@ class ogroup extends plugin
     $this->handle_post_events($mode);
 
     $ret= 0;
-    if (show_ldap_error($ldap->get_error())){
+    if (show_ldap_error($ldap->get_error(), _("Saving object group failed"))){
       $ret= 1;
     }
 
@@ -725,7 +725,7 @@ class ogroup extends plugin
 
     $ldap= $this->config->get_ldap_link();
     $ldap->rmdir($this->dn);
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Removing object group failed"));
 
     /* Trigger remove signal */
     $this->handle_post_events("remove");

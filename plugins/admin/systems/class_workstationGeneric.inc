@@ -223,7 +223,7 @@ class workgeneric extends plugin
     $this->netConfigDNS->remove_from_parent();
     $ldap= $this->config->get_ldap_link();
     $ldap->rmdir($this->dn);
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Removing workstation failed"));
 
     /* Optionally execute a command after we're done */
     $this->handle_post_events("remove", array("macAddress" => $this->netConfigDNS->macAddress));
@@ -367,7 +367,7 @@ class workgeneric extends plugin
       }
       $ldap->cd($this->dn);
       $this->cleanup();
-$ldap->modify ($this->attrs); 
+      $ldap->modify ($this->attrs); 
 
       if(!$this->didAction){
         $this->handle_post_events("modify");
@@ -375,7 +375,7 @@ $ldap->modify ($this->attrs);
     }
     $this->netConfigDNS->cn = $this->cn;
     $this->netConfigDNS->save($this->dn);
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Saving workstation failed"));
   }
 
 }

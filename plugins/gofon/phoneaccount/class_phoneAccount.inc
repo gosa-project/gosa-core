@@ -959,9 +959,9 @@ class phoneAccount extends plugin
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
     $this->cleanup();
-$ldap->modify ($this->attrs); 
+    $ldap->modify ($this->attrs); 
 
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Saving phone account failed"));
 
     /* Optionally execute a command after we're done */
 
@@ -1120,9 +1120,9 @@ $ldap->modify ($this->attrs);
     }
     $ldap->cd($this->dn);
     $this->cleanup();
-$ldap->modify ($this->attrs); 
+    $ldap->modify ($this->attrs); 
 
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Removing phone account failed"));
 
     /* Optionally execute a command after we're done */
     @mysql_close($r_con);

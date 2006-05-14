@@ -171,7 +171,7 @@ class servkolab extends plugin {
 
       /* Remove complete entry */
       $ldap->rmdir ($this->dn);
-      show_ldap_error($ldap->get_error());
+      show_ldap_error($ldap->get_error(), _("Removing kolab host entry failed"));
       
     } else {
 
@@ -186,9 +186,9 @@ class servkolab extends plugin {
       $attrs= array('kolabHost' => $hosts);
       $ldap->cd($this->dn);
       $this->cleanup();
-$ldap->modify ($attrs); 
+      $ldap->modify ($attrs); 
 
-      show_ldap_error($ldap->get_error());
+      show_ldap_error($ldap->get_error(), _("Removing server from kolab object failed"));
     }
 
     /* Optionally execute a command after we're done */
@@ -317,7 +317,7 @@ $ldap->modify ($attrs);
     $ldap->cd($this->dn);
     $this->cleanup();;
     $ldap->$mode($this->attrs);
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Saving server to kolab object failed"));
     
     /* Optionally execute a command after we're done */
     if ($this->initially_was_account == $this->is_account) {

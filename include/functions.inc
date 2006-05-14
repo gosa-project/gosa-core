@@ -988,6 +988,16 @@ function print_red()
 
     }
 
+#Test
+if (!preg_match('/[.!?]$/', $string)){
+  $string.= ".";
+}
+$_SESSION['errors'].= "<div style='background-color:white;padding:5px;border:2px solid #706060;width:60%'>".
+"<table style='width:100%' summary='' border=0><tr><td style='vertical-align:top;padding:10px'><img alt='' src='".get_template_path('images/warning.png')."'></td>".
+"<td style='width:100%'><h1>"._("An error occured while checking the formular input")."</h1>".
+"<b>$string</b> "._("Please check your input and fix the contents of the highlighted field. Pess 'OK' to close this message box.")."</td>".
+"</tr><tr><td colspan='2' align='center'><br><input id='edit_ok' type='submit' name='error_ok' style='width:80px' value='"._("OK")."'></td></tr></table></div>";
+
   } else {
     echo "Error: $string\n";
   }

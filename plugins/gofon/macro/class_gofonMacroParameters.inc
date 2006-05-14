@@ -380,7 +380,7 @@ class macroParameter extends plugin
     if (count($a)){
       $ldap->cd($this->dn);
       $this->cleanup();
-$ldap->modify ($this->attrs); 
+      $ldap->modify ($this->attrs); 
 
       $this->handle_post_events("modify");
     } else {
@@ -393,7 +393,7 @@ $ldap->modify ($this->attrs);
       $ldap->add($this->attrs);
       $this->handle_post_events("add");
     }
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Saving phone macro parameters failed"));
   }
 
 }

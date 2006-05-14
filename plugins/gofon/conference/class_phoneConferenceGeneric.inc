@@ -479,7 +479,7 @@ class conference extends plugin
       $ldap->add($this->attrs);
       $this->handle_post_events('add');
     }
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Saving phone conference failed"));
 
     /* Optionally execute a command after we're done */
     $this->postcreate();

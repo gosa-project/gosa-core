@@ -97,7 +97,7 @@ class componentGeneric extends plugin
     $ldap= $this->config->get_ldap_link();
     $this->netConfigDNS->remove_from_parent();
     $ldap->rmdir($this->dn);
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Removing generic component failed"));
     $this->handle_post_events("remove");
 
     /* Delete references to object groups */
@@ -219,7 +219,7 @@ class componentGeneric extends plugin
     $this->netConfigDNS->cn = $this->cn;
     $this->netConfigDNS->save($this->dn);
 
-    show_ldap_error($ldap->get_error());
+    show_ldap_error($ldap->get_error(), _("Saving generic component failed"));
 
     /* Optionally execute a command after we're done */
     $this->postcreate();

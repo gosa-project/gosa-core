@@ -163,6 +163,7 @@ class macro extends plugin
     }
   
     $ldap->rmDir($this->dn); 
+    show_ldap_error($ldap->get_error(), _("Removing phone macro failed"));
     if(isset($this->orig_cn)){
       $this->generate_mysql_entension_entries(false,true,$this->orig_cn);
     }else{
@@ -176,6 +177,7 @@ class macro extends plugin
         $og= new ogroup($this->config, $ldap->getDN());
         unset($og->member[$this->dn]);
         $og->save ();
+        show_ldap_error($ldap->get_error(), _("Removing phone macro reverences failed"));
     }
   }
 
@@ -413,7 +415,7 @@ class macro extends plugin
       if (count($a)){
         $ldap->cd($this->dn);
         $this->cleanup();
-$ldap->modify ($this->attrs); 
+        $ldap->modify ($this->attrs); 
 
         $this->handle_post_events("modify");
       } else {
@@ -423,8 +425,8 @@ $ldap->modify ($this->attrs);
         $ldap->add($this->attrs);
         $this->handle_post_events("add");
       }
+      show_ldap_error($ldap->get_error(), _("Saving phone macro failed"));
     }
-    show_ldap_error($ldap->get_error());
   }
 
 }
