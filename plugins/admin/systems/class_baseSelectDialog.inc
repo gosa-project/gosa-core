@@ -2,11 +2,11 @@
 
 class baseSelectDialog extends MultiSelectWindow
 {
-  var $selected_base        = ""; // Used for navigation 
+  var $selectedBase        = ""; // Used for navigation 
   var $base_selection_regex = "*"; // Used regex ... 
 //  var $Doesnothing          = ""; // Checkbox which does nothing 
 
-  var $selectedBase         = false;  // used to specify the selected base, 
+  var $BaseToUse         = false;  // used to specify the selected base, 
                                       // false if none is selected
 
   var $allowedBases         = array();
@@ -15,7 +15,7 @@ class baseSelectDialog extends MultiSelectWindow
   {
     MultiSelectWindow::MultiSelectWindow($config,"BASEselectWindow");
     
-    $this->selected_base = $config->current['BASE'];
+    $this->selectedBase = $config->current['BASE'];
   
     $this->allowedBases  = $onlyAllowThisBases;
 
@@ -61,16 +61,16 @@ class baseSelectDialog extends MultiSelectWindow
   {
     $this->ClearElementsList();
     $ldap = $this->config->get_ldap_link();
-    $ldap->cd($this->selected_base);
+    $ldap->cd($this->selectedBase);
     $ldap->ls("(&(objectClass=gosaDepartment)
                  (|(ou=".$this->base_selection_regex.")
                    (cn=".$this->base_selection_regex.")
                    (description=".$this->base_selection_regex.")))",
-              $this->selected_base,array("ou","description","cn"));
+              $this->selectedBase,array("ou","description","cn"));
 
     $link = "<a href='?plug=".$_GET['plug']."&open_dep=%s'>%s</a>";
 
-    $base_back          = preg_replace("/^[^,]+,/","",$this->selected_base);
+    $base_back          = preg_replace("/^[^,]+,/","",$this->selectedBase);
     $base_back          = convert_department_dn($base_back);
   
     /* Add departments, to be able to switch into them
@@ -121,17 +121,17 @@ class baseSelectDialog extends MultiSelectWindow
   function Save()
   {
     MultiSelectWindow :: Save();  
-    $this->selectedBase = $this->selected_base;
+    $this->BaseToUse = $this->selectedBase;
   }
 
   function isSelected() 
   {
-    return($this->selectedBase);
+    return($this->BaseToUse);
   }
 
   function setCurrentBase($base)
   {
-    $this->selected_base = $base;
+    $this->selectedBase = $base;
   }
 
   function save_object()
@@ -140,7 +140,7 @@ class baseSelectDialog extends MultiSelectWindow
     MultiSelectWindow::save_object();   
     
     if(isset($_GET['open_dep'])){
-      $this->selected_base = base64_decode($_GET['open_dep']);
+      $this->selectedBase = base64_decode($_GET['open_dep']);
     } 
 
     $s_action ="";
@@ -155,31 +155,31 @@ class baseSelectDialog extends MultiSelectWindow
         $tmp = preg_replace("/^usebase_/","",$key);
         $tmp = preg_replace("/_.*$/","",$tmp);
         $tmp = base64_decode($tmp);
-        $this->selectedBase = $tmp;
+        $this->BaseToUse = $tmp;
       }
     }
 
     $ui= get_userinfo();
     /* Homebutton is posted */
     if($s_action=="home"){
-      $this->selected_base=(preg_replace("/^[^,]+,/","",$ui->dn));
-      $this->selected_base=(preg_replace("/^[^,]+,/","",$this->selected_base));
+      $this->selectedBase=(preg_replace("/^[^,]+,/","",$ui->dn));
+      $this->selectedBase=(preg_replace("/^[^,]+,/","",$this->selectedBase));
     }
 
     /* back to the roots ^^ */
     if($s_action=="root"){
-      $this->selected_base=($this->config->current['BASE']);
+      $this->selectedBase=($this->config->current['BASE']);
     }
 
     /* If Backbutton is Posted */
     if($s_action=="back"){
-      $base_back          = preg_replace("/^[^,]+,/","",$this->selected_base);
+      $base_back          = preg_replace("/^[^,]+,/","",$this->selectedBase);
       $base_back          = convert_department_dn($base_back);
 
       if(isset($this->config->departments[trim($base_back)])){
-        $this->selected_base= $this->config->departments[trim($base_back)];
+        $this->selectedBase= $this->config->departments[trim($base_back)];
       }else{
-        $this->selected_base= $this->config->departments["/"];
+        $this->selectedBase= $this->config->departments["/"];
       }
     }
   }
