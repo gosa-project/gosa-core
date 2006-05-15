@@ -26,6 +26,7 @@ if (!$remove_lock){
   $ogroup= $_SESSION['ogroup'];
 
   /* Execute formular */
+  $ogroup->save_object();
   $output= $ogroup->execute ();
 
   /* Page header*/
