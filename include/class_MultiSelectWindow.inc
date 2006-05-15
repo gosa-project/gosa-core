@@ -195,6 +195,15 @@ class MultiSelectWindow{
 		$this->bool_DisplaySaveButton = $bool;
 	}
 
+  /* Add a list specific filter object to position 
+      1 on top of Information 
+      2 Between Information && Filter
+      3 Below the Filter Part */
+  function AddUserBoxToFilter($position)
+  {
+    return("");
+  }
+
 	/* Draw the list with all list elements and filters */
 	function Draw()
 	{
@@ -205,6 +214,9 @@ class MultiSelectWindow{
 		}
 
 		$smarty = get_smarty();
+		$smarty->assign("UserBox1",$this->AddUserBoxToFilter(1));
+		$smarty->assign("UserBox2",$this->AddUserBoxToFilter(2));
+		$smarty->assign("UserBox3",$this->AddUserBoxToFilter(3));
 
 		$divlist = new divlist($this->string_Title);
 		$divlist->SetSummary($this->string_Summary);
@@ -378,6 +390,7 @@ class MultiSelectWindow{
 					$this->selectedBase= $this->config->departments['/'];
 				}
 			}
+      $_SESSION['CurrentMainBase'] = $this->selectedBase;
 		}
 
 		if(isset($_POST['MultiSelectWindow'.$this->filterName])){
