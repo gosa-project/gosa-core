@@ -953,11 +953,11 @@ function print_red()
   if (isset($_SESSION['DEBUGLEVEL'])){
 
     if($_SESSION['LastError'] == $string){
-
+    
       if((!isset($_SESSION['errorsAlreadyPosted'][$string]))){
         $_SESSION['errorsAlreadyPosted'][$string] = 1;
       }
-      $_SESSION['errorsAlreadyPosted'][$string] ++;
+      $_SESSION['errorsAlreadyPosted'][$string]++;
 
     }else{
 #      if((!empty($_SESSION['LastError'])) && ($_SESSION['errorsAlreadyPosted'][$_SESSION['LastError']]>1)){
@@ -986,17 +986,19 @@ function print_red()
           $string.= ".";
         }
         $string= preg_replace('/<br>/', ' ', $string);
-        $_SESSION['errors'].= "<div style='margin-left:15%;margin-top:100px;background-color:white;padding:5px;border:5px solid red;width:60%;position:absolute' id='e_layer'>".
-        "<table style='width:100%' summary='' border=0><tr><td style='vertical-align:top;padding:10px'><img alt='' src='".get_template_path('images/warning.png')."'></td>".
-        "<td style='width:100%'><h1>"._("An error occured while processing your request")."</h1>".
-        "<b>$string</b> "._("Please check your input and fix the contents of the highlighted field. Pess 'OK' to close this message box.")."</td>".
-        "</tr><tr><td colspan='2' align='center'><br><button style='width:80px' onClick='toggle(\"e_layer\")'>"._("OK")."</button></td></tr></table></div>";
+      
+        if(isset($_SESSION['errors']) && strlen($_SESSION['errors'])==0) {
+          $_SESSION['errors'].= "<div style='margin-left:15%;margin-top:100px;background-color:white;padding:5px;border:5px solid red;width:60%;position:absolute' id='e_layer'>".
+          "<table style='width:100%' summary='' border=0><tr><td style='vertical-align:top;padding:10px'><img alt='' src='".get_template_path('images/warning.png')."'></td>".
+          "<td style='width:100%'><h1>"._("An error occured while processing your request")."</h1>".
+          "<b>$string</b> "._("Please check your input and fix the contents of the highlighted field. Press 'OK' to close this message box.")."</td>".
+          "</tr><tr><td colspan='2' align='center'><br><button ".(($_SESSION['js']==FALSE)?"type='submit'":"type='button'")." style='width:80px' onClick='hide(\"e_layer\")'>"._("OK")."</button></td></tr></table></div>";
+        }
   #########################
-
       }else{
         return;
       }
-      $_SESSION['errorsAlreadyPosted'] = array();
+      #$_SESSION['errorsAlreadyPosted'] = array();
       $_SESSION['errorsAlreadyPosted'][$string] = 1;
 
     }
@@ -1005,7 +1007,6 @@ function print_red()
     echo "Error: $string\n";
   }
   $_SESSION['LastError'] = $string; 
-
 }
 
 

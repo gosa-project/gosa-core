@@ -152,7 +152,7 @@ function hide(element) {
      document.poppedLayer = document.all[element];
   else
      document.poppedLayer = document.layers[element];
-  document.poppedLayer.style.visibility = "hidden";
+ 	document.poppedLayer.style.visibility = "hidden";
 }
 
 function show(element) {
@@ -173,11 +173,11 @@ function toggle(element) {
   else
      document.poppedLayer = document.layers[element];
 
-  if (document.poppedLayer.style.visibility == "visible")
+  if (document.poppedLayer.style.visibility == "visible") {
 	  hide (element);
-  else
+	} else {
 	  show (element);
-
+	}
 }
 
 function popup(target, name) {
@@ -207,6 +207,9 @@ function adjust(e) {
 function adjust_height(e) {
 	if (!e) e=window.event;
 	var px_height= window.innerHeight-230;
+	if(document.defaultView) {
+		var div_width=parseInt(document.defaultView.getComputedStyle(document.getElementById("t_scrolltable"),"").getPropertyValue('height'));
+	}
 	if(px_height >= 480) {
 		document.getElementById("d_scrollbody").style.height=px_height+"px";
 	}
