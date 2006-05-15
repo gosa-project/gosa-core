@@ -960,41 +960,44 @@ function print_red()
       $_SESSION['errorsAlreadyPosted'][$string] ++;
 
     }else{
-      if((!empty($_SESSION['LastError'])) && ($_SESSION['errorsAlreadyPosted'][$_SESSION['LastError']]>1)){
-        $_SESSION['errors'].= "<div align=\"left\" style=\"border-width:5px;".
-          "border-style:solid;border-color:red; background-color:black;".
-          "margin-bottom:10px; padding:8px;\"><table style='width:100%' summary=''><tr><td><img alt=\"\" src=\"".
-          get_template_path('images/warning.png')."\"></td>".
-          "<td width=\"100%\" style=\"text-align:center\"><font color=\"#FFFFFF\">".
-          "<b style='font-size:16px;'>".sprintf(_("Last message repeated %s times."),$_SESSION['errorsAlreadyPosted'][$_SESSION['LastError']])."</b></font></td><td>".
-          "<img alt=\"\"src=\"".get_template_path('images/warning.png').
-          "\"></td></tr></table></div>\n";
-      }
+#      if((!empty($_SESSION['LastError'])) && ($_SESSION['errorsAlreadyPosted'][$_SESSION['LastError']]>1)){
+#        $_SESSION['errors'].= "<div align=\"left\" style=\"border-width:5px;".
+#          "border-style:solid;border-color:red; background-color:black;".
+#          "margin-bottom:10px; padding:8px;\"><table style='width:100%' summary=''><tr><td><img alt=\"\" src=\"".
+#          get_template_path('images/warning.png')."\"></td>".
+#          "<td width=\"100%\" style=\"text-align:center\"><font color=\"#FFFFFF\">".
+#          "<b style='font-size:16px;'>".sprintf(_("Last message repeated %s times."),$_SESSION['errorsAlreadyPosted'][$_SESSION['LastError']])."</b></font></td><td>".
+#          "<img alt=\"\"src=\"".get_template_path('images/warning.png').
+#          "\"></td></tr></table></div>\n";
+#      }
 
+#      if($string != NULL){
+#        $_SESSION['errors'].= "<div align=\"left\" style=\"border-width:5px;".
+#          "border-style:solid;border-color:red; background-color:black;".
+#          "margin-bottom:10px; padding:8px;\"><table style='width:100%' summary=''><tr><td><img alt=\"\" src=\"".
+#          get_template_path('images/warning.png')."\"></td>".
+#          "<td width=\"100%\" style=\"text-align:center\"><font color=\"#FFFFFF\">".
+#          "<b style='font-size:16px;'>$string</b></font></td><td>".
+#          "<img alt=\"\"src=\"".get_template_path('images/warning.png').
+#          "\"></td></tr></table></div>\n";
+######### Test #########
       if($string != NULL){
-        $_SESSION['errors'].= "<div align=\"left\" style=\"border-width:5px;".
-          "border-style:solid;border-color:red; background-color:black;".
-          "margin-bottom:10px; padding:8px;\"><table style='width:100%' summary=''><tr><td><img alt=\"\" src=\"".
-          get_template_path('images/warning.png')."\"></td>".
-          "<td width=\"100%\" style=\"text-align:center\"><font color=\"#FFFFFF\">".
-          "<b style='font-size:16px;'>$string</b></font></td><td>".
-          "<img alt=\"\"src=\"".get_template_path('images/warning.png').
-          "\"></td></tr></table></div>\n";
+        if (!preg_match('/[.!?]$/', $string)){
+          $string.= ".";
+        }
+        $string= preg_replace('/<br>/', ' ', $string);
+        $_SESSION['errors'].= "<div style='margin-left:15%;margin-top:100px;background-color:white;padding:5px;border:3px solid red;width:60%;position:absolute'>".
+        "<table style='width:100%' summary='' border=0><tr><td style='vertical-align:top;padding:10px'><img alt='' src='".get_template_path('images/warning.png')."'></td>".
+        "<td style='width:100%'><h1>"._("An error occured while checking the formular input")."</h1>".
+        "<b>$string</b> "._("Please check your input and fix the contents of the highlighted field. Pess 'OK' to close this message box.")."</td>".
+        "</tr><tr><td colspan='2' align='center'><br><input id='edit_ok' type='submit' name='error_ok' style='width:80px' value='"._("OK")."'></td></tr></table></div>";
+  #########################
+
       }else{
         return;
       }
       $_SESSION['errorsAlreadyPosted'] = array();
       $_SESSION['errorsAlreadyPosted'][$string] = 1;
-
-#Test
-if (!preg_match('/[.!?]$/', $string)){
-  $string.= ".";
-}
-$_SESSION['errors'].= "<div style='background-color:white;padding:5px;border:2px solid #706060;width:60%'>".
-"<table style='width:100%' summary='' border=0><tr><td style='vertical-align:top;padding:10px'><img alt='' src='".get_template_path('images/warning.png')."'></td>".
-"<td style='width:100%'><h1>"._("An error occured while checking the formular input")."</h1>".
-"<b>$string</b> "._("Please check your input and fix the contents of the highlighted field. Pess 'OK' to close this message box.")."</td>".
-"</tr><tr><td colspan='2' align='center'><br><input id='edit_ok' type='submit' name='error_ok' style='width:80px' value='"._("OK")."'></td></tr></table></div>";
 
     }
 
@@ -1226,6 +1229,9 @@ function print_header($image, $headline, $info= "")
     $display.= "<div style=\"height:5px;\">\n";
     $display.= "&nbsp;";
     $display.= "</div>\n";
+  }
+  if (isset($_SESSION['errors'])){
+    $display.= $_SESSION['errors'];
   }
 
   return ($display);

@@ -48,7 +48,6 @@
       <table style="vertical-align:top; text-align:justify; background-color: #F8F8F8; margin-top:7px; margin-left:7px; margin-right:7px; width:99%" summary="">
        <tr>
         <td>
-	 {$errors}
 	 {$contents}
        </td>
       </tr>
