@@ -516,19 +516,18 @@ class MultiSelectWindow{
 				}
 			}
 
-
 			/* Add to divlist */
 			$row = array();
-			$row[] = $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
-			$row[] = $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
+			$row[]=$field1=array("string"=>"<img src='images/".$non_empty."folder.png' alt='department'>","attach"=>"style='text-align:center;width:20px;'");
+			$row[]=$field2=array("string"=>sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
 
 			if($numtabs > 2){	
 				for($i = 2 ; $i <$numtabs;$i++){
-					if($i ==($numtabs-1)){
-						$row[] = array("string"=>"&nbsp;","attach" => "style='width:60px;border-right:0px;text-align:right;'");
-					}else{
-						$row[] = array("string"=>"&nbsp;");
-					}
+          if(isset( $this->array_Header[$i]['attach'])){
+            $row[] = array("string"=>"&nbsp;","attach" => $this->array_Header[$i]['attach']);
+          }else{
+            $row[] = array("string"=>"&nbsp;");
+          }
 				}
 			}
 
