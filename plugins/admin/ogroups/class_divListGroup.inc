@@ -52,7 +52,7 @@ class divListOGroup extends MultiSelectWindow
     $this->AddHeader(array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"));
     $this->AddHeader(array("string" => _("Name of object groups")." / "._("Departments"), "attach" => "style=''"));
     $this->AddHeader(array("string" => _("Properties"), "attach" => "style='width:136px;'"));
-    $this->AddHeader(array("string" => _("Actions"), "attach" => "style='width:80;border-right:0px;text-align:right;'"));
+    $this->AddHeader(array("string" => _("Actions"), "attach" => "style='width:107px;border-right:0px;text-align:right;'"));
 
     /*                  Text        ,Value    ,Name         ,Is selected */
     $this->AddCheckBox("UserGroups" ,       _("") , _("Show groups containing users"), true);

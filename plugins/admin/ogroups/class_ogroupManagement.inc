@@ -31,10 +31,8 @@ class ogroupManagement extends plugin
   var $obtypes= array();
   var $ogroup;
 
-  var $CopyPasteHandler ;
-
-  var $enableCopyPaste = false;
-
+  var $CopyPasteHandler = NULL;
+  var $DivListOGroup    = NULL;
 
   function ogroupManagement ($config, $dn= NULL)
   {
@@ -45,87 +43,27 @@ class ogroupManagement extends plugin
     /* Copy & Paste enabled ?
      */
     if((isset($this->config->data['MAIN']['ENABLECOPYPASTE']))&&(preg_match("/true/i",$this->config->data['MAIN']['ENABLECOPYPASTE'] ))){
-      $this->enableCopyPaste = true;
+      $this->CopyPasteHandler = new CopyPasteHandler($this->config);
     }
 
-    $this->CopyPasteHandler = new CopyPasteHandler($this->config);
-
-    /* Fill translation array */
-    $this->obtypes= array(	"posixAccount" => _("UNIX accounts"),
-        "posixGroup" => _("Groups"),
-        "gosaDepartment" => _("Departments"),
-        "gosaApplication" => _("Applications"),
-        "goServer" => _("Servers"),
-        "gotoTerminal" => _("Thin Clients"),
-        "gotoWorkstation" => _("Workstations"),
-        "goFonHardware" => _("Phone"),
-        "gotoPrinter" => _("Printer"));
-    asort($this->obtypes);
-
-    /* Get global filter config */
-    if (!is_global("ogroupfilter")){
-      $ui= get_userinfo();
-      $base= get_base_from_people($ui->dn);
-      $ogroupfilter= array(	"usergroups" => "checked",
-          "groupgroups" => "checked",
-          "appgroups" => "checked",
-          "depgroups" => "checked",
-          "servergroups" => "checked",
-          "wsgroups" => "checked",
-          "prtgroups" => "checked",
-          "tcgroups" => "checked",
-          "fongroups" => "checked",
-          "regex" => "*");
-      register_global("ogroupfilter", $ogroupfilter);
-    }
-    if(!isset($_SESSION['CurrentMainBase'])){
-      $ui= get_userinfo();
-      $base= get_base_from_people($ui->dn);
-      $_SESSION['CurrentMainBase'] = $base;
-    }
+    /* Div lsit management */
+    $this->DivListOGroup = new divListOGroup($this->config,$this);
   }
 
   function execute()
   {
-	  /* Call parent execute */
-	  plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
+
+    /****************
+      Variable intialisation && Check posts for commands  
+     ****************/
 
     $_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/");
 
-    /* Prepare template */
-    $smarty= get_smarty();
-
-    $ogroupfilter= get_global("ogroupfilter");
+    $smarty     = get_smarty();
     $s_action   = "";
     $s_entry    = "";
-
-    foreach( array("regex") as $type){
-      if (isset($_POST[$type])){
-        $ogroupfilter[$type]= $_POST[$type];
-      }
-    }
-    if(isset($_POST['CurrentMainBase'])){
-      $_SESSION['CurrentMainBase'] = $_POST['CurrentMainBase'];
-    }
-
-    if (isset($_POST['Ogroup_dialog_posted'])){
-      foreach( array("usergroups", "groupgroups", "appgroups", "depgroups",
-            "servergroups", "wsgroups", "prtgroups", "tcgroups", "fongroups") as $type){
-
-        if (isset($_POST[$type])) {
-          $ogroupfilter[$type]= "checked";
-        } else {
-          $ogroupfilter[$type]= "";
-        }
-      }
-    }
-    if (isset($_GET['search'])){
-      $s= mb_substr($_GET['search'], 0, 1, "UTF8")."*";
-      if ($s == "**"){
-        $s= "*";
-      }
-      $ogroupfilter['regex']= $s;
-    }
 
     /* Test Posts */
     foreach($_POST as $key => $val){
@@ -138,19 +76,13 @@ class ogroupManagement extends plugin
         $s_action="edit";
         $s_entry  = preg_replace("/^group_".$s_action."_/i","",$key);
         // Post for new
-      }elseif(preg_match("/^dep_back.*/i",$key)){
-        $s_action="back";
       }elseif(preg_match("/^group_new.*/",$key)){
         $s_action="new";
-      }elseif(preg_match("/^dep_home.*/i",$key)){
-        $s_action="home";
       }elseif(preg_match("/^group_tplnew.*/i",$key)){
         $s_action="new_tpl";
       }elseif(preg_match("/^group_chgpw.*/i",$key)){
         $s_action="change_pw";
         $s_entry  = preg_replace("/group_chgpw_/i","",$key);
-      }elseif(preg_match("/^dep_root.*/i",$key)){
-        $s_action="root";
       }elseif(preg_match("/^editPaste.*/i",$key)){
         $s_action="editPaste";
       }elseif(preg_match("/^copy_.*/",$key)){
@@ -167,42 +99,6 @@ class ogroupManagement extends plugin
       }
     }
     $s_entry  = preg_replace("/_.$/","",$s_entry);
-    
-    /* Department changed? */
-    if(isset($_POST['CurrentMainBase']) && $_POST['CurrentMainBase']){
-      $_SESSION['CurrentMainBase'] = $_POST['CurrentMainBase'];
-    }
-
-    /* Start for New List Managment */
-    if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
-      $s_action="open";
-      $s_entry = base64_decode($_GET['dep_id']);
-      $_SESSION['CurrentMainBase'] = "".$this->config->departments[trim($s_entry)];
-    }
-
-    /* If Backbutton is Posted */
-    if($s_action=="back"){
-      $base_back          = preg_replace("/^[^,]+,/","", $_SESSION['CurrentMainBase']);
-      $base_back          = convert_department_dn($base_back);
-
-      if(isset($this->config->departments[trim($base_back)])){
-        $_SESSION['CurrentMainBase']= $this->config->departments[trim($base_back)];
-      }else{
-        $_SESSION['CurrentMainBase']= $this->config->departments["/"];
-      }
-      register_global("ogroupfilter", $ogroupfilter);
-    }
-
-    /* Homebutton is posted */
-    if($s_action=="home"){
-      $_SESSION['CurrentMainBase']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
-      $_SESSION['CurrentMainBase']=(preg_replace("/^[^,]+,/","", $_SESSION['CurrentMainBase']));
-    }
-
-    /* root posted */ 
-    if($s_action=="root"){
-      $_SESSION['CurrentMainBase']=($this->config->current['BASE']);
-    }
 
     // Edit if
     if((isset($_GET['act']))&&($_GET['act']=="edit_entry")){
@@ -210,27 +106,22 @@ class ogroupManagement extends plugin
       $s_entry  = $_GET['id'];
     }
 
-    register_global("ogroupfilter", $ogroupfilter);
 
-    $this->reload();
-
-    /* Check for exeeded sizelimit */
-    if (($message= check_sizelimit()) != ""){
-      return($message);
-    }
+    /****************
+      Copy & Paste handling 
+     ****************/
 
     /* Only perform copy / paste if it is enabled
      */
-    if($this->enableCopyPaste){
- 
-       /* Paste copied/cutted object in here
+    if($this->CopyPasteHandler){
+
+      /* Paste copied/cutted object in here
        */
       if(($s_action == "editPaste") || ($this->CopyPasteHandler->stillOpen())){
         $this->CopyPasteHandler->save_object();
-        $this->CopyPasteHandler->SetVar("base", $_SESSION['CurrentMainBase']);
+        $this->CopyPasteHandler->SetVar("base", $this->DivListOGroup->selectedBase);
         return($this->CopyPasteHandler->execute());
       }
-
 
       /* Copy current object to CopyHandler
        */
@@ -242,7 +133,6 @@ class ogroupManagement extends plugin
         $this->CopyPasteHandler->Copy($obj,$objNew);
       }
 
-
       /* Copy current object to CopyHandler
        */
       if($s_action == "cut"){
@@ -253,6 +143,11 @@ class ogroupManagement extends plugin
       }
     }
 
+
+    /****************
+      Create a new object group 
+     ****************/
+
     /* New group? */
     if ($s_action=="new"){
 
@@ -262,8 +157,13 @@ class ogroupManagement extends plugin
 
       /* Create new usertab object */
       $this->ogroup= new ogrouptabs($this->config,
-      $this->config->data['TABS']['OGROUPTABS'], $this->dn);
+          $this->config->data['TABS']['OGROUPTABS'], $this->dn);
     }
+
+
+    /****************
+      Delete object group
+     ****************/
 
     if ($s_action=="del"){
 
@@ -294,6 +194,11 @@ class ogroupManagement extends plugin
       }
     }
 
+
+    /****************
+      Delete confirmed 
+     ****************/
+
     /* Confirmation for deletion has been passed. Group should be deleted. */
     if (isset($_POST['delete_group_confirm'])){
 
@@ -303,15 +208,12 @@ class ogroupManagement extends plugin
 
         /* Delete request is permitted, perform LDAP action */
         $this->ogroup= new ogrouptabs($this->config,
-        $this->config->data['TABS']['OGROUPTABS'], $this->dn);
+            $this->config->data['TABS']['OGROUPTABS'], $this->dn);
         $this->ogroup->set_acl(array($this->acl));
         $this->ogroup->delete ();
         gosa_log ("Object group'".$this->dn."' has been removed");
         unset ($this->ogroup);
         $this->ogroup= NULL;
-
-        /* Group list has changed, reload it. */
-        $this->reload ();
       } else {
 
         /* Normally this shouldn't be reached, send some extra
@@ -326,11 +228,20 @@ class ogroupManagement extends plugin
     }
 
 
+    /****************
+      Delete object group Canceled
+     ****************/
+
     /* Delete group canceled? */
     if (isset($_POST['delete_cancel'])){
       del_lock ($this->dn);
       unset($_SESSION['objectinfo']);
     }
+
+
+    /****************
+      Edit group
+     ****************/
 
     if (($s_action=="edit") && (! isset($this->ogroup->config)) ){
 
@@ -357,6 +268,11 @@ class ogroupManagement extends plugin
       $_SESSION['objectinfo']= $this->dn;
     }
 
+
+    /****************
+      Edit finished save 
+     ****************/
+
     /* Finish button has been pressed */
     if ((isset($_POST['edit_finish'])) && (isset($this->ogroup->config)) ){
 
@@ -376,9 +292,6 @@ class ogroupManagement extends plugin
           del_lock ($this->dn);
         }
 
-        /* There's no page reload so we have to read new users at
-           this point. */
-        $this->reload ();
         unset ($this->ogroup);
         $this->ogroup= NULL;
         unset ($_SESSION['objectinfo']);
@@ -390,6 +303,11 @@ class ogroupManagement extends plugin
       }
     }
 
+
+    /****************
+      Cancel edit object group
+     ****************/
+
     /* Cancel dialogs */
     if (isset($_POST['edit_cancel'])){
       del_lock ($this->ogroup->dn);
@@ -397,6 +315,11 @@ class ogroupManagement extends plugin
       $this->ogroup= NULL;
       unset($_SESSION['objectinfo']);
     }
+
+
+    /****************
+      Display open dialogs 
+     ****************/
 
     /* Show dialog if object is present */
     if (isset($this->ogroup->config)){
@@ -413,179 +336,27 @@ class ogroupManagement extends plugin
       return ($display);
     }
 
-    /* Prepare departments */
-    $options= "";
-    foreach ($this->config->idepartments as $key => $value){
-            if ($_SESSION['CurrentMainBase'] == $key){
-                    $options.= "<option selected value='$key'>$value</option>";
-            } else {
-                    $options.= "<option value='$key'>$value</option>";
-            }
+
+    /****************
+      Display list 
+     ****************/
+
+    /* Display dialog with group list */
+    $this->DivListOGroup->execute();
+
+    /* Add departments if subsearch is disabled */
+    if(!$this->DivListOGroup->SubSearch){
+      $this->DivListOGroup->AddDepartments($this->DivListOGroup->selectedBase,4);
     }
-
-
-    /* Create paste icon 
-     * This icon is only displayed if copy & paste is enabled 
-     */
-    if($this->enableCopyPaste){
-      $Copy_Paste = " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;";
-      if($this->CopyPasteHandler->isCurrentObjectPastAble()){
-        if($this->CopyPasteHandler->isCurrentCutted()){
-          $img = "images/cutpaste.png";
-        }else{
-          $img = "images/copypaste.png";
-        }
-        $Copy_Paste .= "<input type='image' name='editPaste' class='center'
-          src='".$img."' alt='"._("Paste")."' title='".$this->CopyPasteHandler->GetCurrentDn()."'>&nbsp;";
-      }else{
-        $Copy_Paste .= "<img class='center' src='images/cant_editpaste.png' alt='"._("Can't paste")."'>&nbsp;";
-      }
-    }else{
-      $Copy_Paste ="";
-    }
-
-
-    // Managment
-    $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
-      " <input class='center' type='image' src='images/list_root.png' align='middle' title='"._("Go to root department")."'
-name='dep_root' alt='"._("Root")."'>&nbsp;".
-      " <input class='center' type='image' align='middle' src='images/list_back.png' title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
-      " <input class='center' type='image' align='middle' src='images/list_home.png' title='"._("Go to users department")."'
- alt='"._("Home")."' name='dep_home'>&nbsp;".
-       " <input class='center' type='image' src='images/list_reload.png' align='middle' title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-      " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-      " <input class='center' type='image' align='middle' src='images/list_new_ogroup.png' title='"._("Create new object group")."' alt='"._("new")."' name='group_new'>".
-      $Copy_Paste.
-      " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-      _("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
-      " <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-      "</div>";
-
-
-    /* Add Copy & Paste buttons if copy&paste is enabled 
-     */
-    if($this->enableCopyPaste){
-      $actions = "<input class='center' type='image'
-        src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
-      $actions.= "<input class='center' type='image'
-        src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
-      $actions.= "<input class='center' type='image' 
-                    src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
-      $actions.= "<input class='center' type='image' 
-                    src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
-    }else{
-      $actions = "<input class='center' type='image' 
-                    src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
-      $actions.= "<input class='center' type='image' 
-                    src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
-    }
-
-
-    // Defining Links
-    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
-
-    // image Buttons
-    $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
-    $userimg  = "<img class='center' src='images/select_groups.png' alt='User'    title='%s'>";
-
-    // Extension images
-    $mailimg  = "<img class='center' src='images/mailto.png'             alt='M'  title='"._("Mail")   ."'>";
-
-    // Space
-    $empty    = "<img class='center' src='images/empty.png' style='width:16px;height:16px;' alt=''>";
-
-    // List Setup
-    $divlist = new divlist("ogroubstab");
-    $divlist->SetHeader(array(
-          array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
-          array("string" => _("Name of object groups")." / "._("Departments"), "attach" => "style=''"),
-          array("string" => _("Properties"), "attach" => "style='width:136px;'"),
-          array("string" => _("Actions"), "attach" => "style='width:80;border-right:0px;text-align:right;'")
-          ));
-
-
-    $divlist->SetSummary(_("This table displays all groups, in the selected tree."));
-    $divlist->SetEntriesPerPage(0);
-
-    foreach($this->departments as $key=> $val){
-
-      if(!isset($this->config->departments[trim($key)])){
-        $this->config->departments[trim($key)]="";
-      }
-
-      $non_empty="";
-      $keys= str_replace("/","\/",$key);
-      foreach($this->config->departments as $keyd=>$vald ){
-        if(preg_match("/".$keys."\/.*/",$keyd)){
-          $non_empty="full";
-        }
-      }
-
-
-
-      $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='"._("Department")."'>", "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
-      $field3 = array("string" => "&nbsp;", "attach" => "style='width:136px;'");
-      $field4 = array("string" => "&nbsp;", "attach" => "style='width:80;border-right:0px;text-align:right;'");
-
-      $divlist->AddEntry(array($field1,$field2,$field3,$field4));
-    }
-
-    // Assigning ogroups 
-    foreach($this->ogrouplist as $key => $val){
-
-      if(isset($val['mail'])){
-        $mail = $mailimg;
-      }else{
-        $mail = $empty;
-      }
-
-      $title = "title='dn:&nbsp;".@LDAP::fix($val['dn'])."'";
-
-      if(!isset($val['description'][0])){
-        $desc = "";
-      }else{
-        $desc = " - [ ".$val['description'][0]." ]";
-      }
-      $field1 = array("string" => "<img src='images/list_ogroup.png' alt='"._("Object group")."' ".$title.">", "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)), "attach" => "style='' ".$title);
-      $field3 = array("string" => preg_replace("/%KEY/", $key, $this->convert_list($val))."&nbsp;".$mail, "attach" => "style='width:136px;'");
-      $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:80;border-right:0px;text-align:right;'");
-
-      $divlist->AddEntry(array($field1,$field2,$field3,$field4));
-    }
-
-
-
-
-
-
-    /* Show main page */
-    $smarty->assign("search_image", get_template_path('images/search.png'));
-    $smarty->assign("tree_image", get_template_path('images/tree.png'));
-    $smarty->assign("infoimage", get_template_path('images/info.png'));
-    $smarty->assign("launchimage", get_template_path('images/launch.png'));
-    $smarty->assign("deplist", $this->config->idepartments);
-
-    $smarty->assign("groupshead", $listhead);
-    $smarty->assign("groups", $divlist->DrawList());
-
-    foreach( array("usergroups", "groupgroups", "appgroups", "depgroups",
-          "servergroups", "wsgroups", "prtgroups", "tcgroups", "fongroups", "regex" ) as $type){
-      $smarty->assign("$type", $ogroupfilter[$type]);
-    }
-    $smarty->assign("CurrentMainBase" , $_SESSION['CurrentMainBase']);
-    $smarty->assign("hint", print_sizelimit_warning());
-    $smarty->assign("apply", apply_filter());
-    $smarty->assign("alphabet", generate_alphabet());
-    return ($smarty->fetch (get_template_path('headpage.tpl', TRUE)));
+    $this->reload ();
+    $this->DivListOGroup->setEntries($this->ogrouplist);
+    return($this->DivListOGroup->Draw());
   }
 
 
   function convert_list($input)
   {
     $temp= "";
-
 
     $conv= array(   
         "U" => array("select_user.png"        ,_("User")        , "ogroup"),
@@ -625,101 +396,48 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
       $p2['lnk']= ""; //$conv[$type[0]][2];
     }
     $temp = "<input type='image' name='".$p1['lnk']."_group_edit_%KEY' class='center' 
-              src='images/".$p1['pic']."' alt='".$p1['alt']."' title='".$p1['tit']."'>";
+      src='images/".$p1['pic']."' alt='".$p1['alt']."' title='".$p1['tit']."'>";
     $temp.= "<input type='image' name='".$p2['lnk']."_group_edit_%KEY'class='center' 
-              src='images/".$p2['pic']."' alt='".$p2['alt']."' title='".$p2['tit']."'>";
+      src='images/".$p2['pic']."' alt='".$p2['alt']."' title='".$p2['tit']."'>";
     return ($temp);
   }
 
 
   function reload()
   {
-    /* Get config */
-    $ogroupfilter= get_global('ogroupfilter');
-
-    /* Set base for all searches */
-    $base= $_SESSION['CurrentMainBase'];
-
-    /* Regex filter? */
-    if ($ogroupfilter['regex'] != ""){
-      $regex= $ogroupfilter['regex'];
-    } else {
-      $regex= "*";
-    }
-
-    /* User filter? */
+    /* Set base for all searches && initialise some vars */
     $this->oogrouplist= array();
+    $base     = $this->DivListOGroup->selectedBase;
+    $filter   = "(gosaGroupObjects=[])";
+    $Regex    = $this->DivListOGroup->Regex;
 
-    /* Generate oogrouplist filter */
-    $filter= "";
+    $chk = array(
+        "UserGroups"          => "(gosaGroupObjects=*U*)" ,
+        "GroupGroups"         => "(gosaGroupObjects=*G*)" ,
+        "ApplicationGroups"   => "(gosaGroupObjects=*A*)" ,
+        "DepartmentGroups"    => "(gosaGroupObjects=*D*)" ,
+        "ServerGroups"        => "(gosaGroupObjects=*S*)" ,
+        "WorkstationGroups"   => "(gosaGroupObjects=*W*)" ,
+        "TerminalGroups"      => "(gosaGroupObjects=*T*)" ,
+        "PrinterGroups"       => "(gosaGroupObjects=*P*)" ,
+        "PhoneGroups"         => "(gosaGroupObjects=*F*)" );
+    /* Create filter */ 
+    foreach($chk as $chkBox => $FilterPart){
+      if($this->DivListOGroup->$chkBox){
+        $filter .=  $FilterPart;
+      }
+    }
+    $filter= "(&(cn=$Regex)(objectClass=gosaGroupOfNames)(|$filter))";
 
-    if ($ogroupfilter['usergroups'] == "checked"){
-      $filter.= "(gosaGroupObjects=*U*)";
+    if($this->DivListOGroup->SubSearch){
+      $res= get_list($filter, $this->ui->subtreeACL, $base, array("cn","objectClass","gosaGroupObjects"), GL_SIZELIMIT | GL_SUBSEARCH);
+    }else{
+      $res= get_list($filter, $this->ui->subtreeACL, get_groups_ou().$base, array("cn","objectClass","gosaGroupObjects"), GL_SIZELIMIT );
     }
-    if ($ogroupfilter['groupgroups'] == "checked"){
-      $filter.= "(gosaGroupObjects=*G*)";
-    }
-    if ($ogroupfilter['appgroups'] == "checked"){
-      $filter.= "(gosaGroupObjects=*A*)";
-    }
-    if ($ogroupfilter['depgroups'] == "checked"){
-      $filter.= "(gosaGroupObjects=*D*)";
-    }
-    if ($ogroupfilter['servergroups'] == "checked"){
-      $filter.= "(gosaGroupObjects=*S*)";
-    }
-    if ($ogroupfilter['wsgroups'] == "checked"){
-      $filter.= "(gosaGroupObjects=*W*)";
-    }
-    if ($ogroupfilter['prtgroups'] == "checked"){
-      $filter.= "(gosaGroupObjects=*P*)";
-    }
-    if ($ogroupfilter['tcgroups'] == "checked"){
-      $filter.= "(gosaGroupObjects=*T*)";
-    }
-    if ($ogroupfilter['fongroups'] == "checked"){
-      $filter.= "(gosaGroupObjects=*F*)";
-    }
-    $filter.= "(gosaGroupObjects=[])";
 
-    if ($filter != ""){
-      $filter= "(&(cn=$regex)(objectClass=gosaGroupOfNames)(|$filter))";
-    } else {
-      $filter= "(&(cn=$regex)(objectClass=gosaGroupOfNames))";
-    }
-    
-    $res= get_list($filter, $this->ui->subtreeACL, get_groups_ou().$base, array("*"), GL_SIZELIMIT );
     $this->ogrouplist= $res;
     ksort ($this->ogrouplist);
     reset ($this->ogrouplist);
-
-
-    /* NEW LIST MANAGMENT
-     * We also need to search for the departments
-     * So we are able to navigate like in konquerer
-     */
-    $peopleOU = get_people_ou();
-
-    if(empty($peopleOU)){
-      $base2 = $base;
-    }else{
-      $base2 = preg_replace("/".$peopleOU."/i","",$base);
-    }
-
-    /* Get all departments within this subtree */
-    $deps= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))", $this->ui->subtreeACL,
-        $base2, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
-
-    $this->departments = array();
-    foreach($deps as $value){
-      if(isset($value['description'][0])){
-        $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
-      }else{
-        $this->departments[$value['dn']]= get_sub_department($value['dn']);
-      }
-    }
-    natcasesort($this->departments);
-
     $tmp=array();
     foreach($this->ogrouplist as $tkey => $val ){
       $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
@@ -731,6 +449,12 @@ name='dep_root' alt='"._("Root")."'>&nbsp;".
     }
     reset ($this->ogrouplist);
   }
+
+  function save_object()
+  {
+    $this->DivListOGroup->save_object();
+  }
+
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
