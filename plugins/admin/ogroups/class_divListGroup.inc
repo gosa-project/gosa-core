@@ -1,0 +1,185 @@
+<?php
+
+class divListOGroup extends MultiSelectWindow
+{
+
+  /* Current base */
+  var $selectedBase       = "";
+  var $departments        = array();
+
+  /* Regex */
+  var $Regex              = "*";
+
+  /* CheckBoxes, to change default values modify $this->AddCheckBox */
+  var $UserGroups         ;
+  var $GroupGroups        ;
+  var $ApplicationGroups  ;
+  var $DepartmentGroups   ; 
+  var $ServerGroups       ;
+  var $WorkstationGroups  ;
+  var $TerminalGroups     ;
+  var $PrinterGroups      ;
+  var $PhoneGroups        ;
+  
+
+  /* Subsearch checkbox */
+  var $SubSearch          ;
+  var $parent             ;
+  var $ui                 ;
+
+  function divListOGroup ($config,$parent)
+  {
+    MultiSelectWindow::MultiSelectWindow($config,"OGroups");
+    
+    $this->parent       = $parent;
+    $this->ui           = get_userinfo();
+
+    /* Set list strings */
+    $this->SetTitle(_("List of object groups"));
+    $this->SetSummary(_("List of object groups"));
+    $this->EnableAplhabet(true);
+
+    /* Result page will look like a headpage */
+    $this->SetHeadpageMode();
+    $this->SetInformation(_("This menu allows you to add, edit or remove selected groups. ".
+                            "You may want to use the range selector on top of the group listbox, when working with  a large number of groups."));
+  
+    /* Disable buttonsm */
+    $this->EnableCloseButton(false);
+    $this->EnableSaveButton (false);
+
+    /* set Page header */
+    $this->AddHeader(array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"));
+    $this->AddHeader(array("string" => _("Name of object groups")." / "._("Departments"), "attach" => "style=''"));
+    $this->AddHeader(array("string" => _("Properties"), "attach" => "style='width:136px;'"));
+    $this->AddHeader(array("string" => _("Actions"), "attach" => "style='width:80;border-right:0px;text-align:right;'"));
+
+    /*                  Text        ,Value    ,Name         ,Is selected */
+    $this->AddCheckBox("UserGroups" ,       _("") , _("Show groups containing users"), true);
+    $this->AddCheckBox("GroupGroups" ,      _("") , _("Show groups containing groups"), true);
+    $this->AddCheckBox("ApplicationGroups", _("") , _("Show groups containing applications"), true);
+    $this->AddCheckBox("DepartmentGroups" , _("") , _("Show groups containing departments"), true);
+    $this->AddCheckBox("ServerGroups" ,     _("") , _("Show groups containing servers"), true);
+    $this->AddCheckBox("WorkstationGroups", _("") , _("Show groups containing workstations"), true);
+    $this->AddCheckBox("TerminalGroups" ,   _("") , _("Show groups containing terminals"), true);
+    $this->AddCheckBox("PrinterGroups" ,    _("") , _("Show groups containing printer"), true);
+    $this->AddCheckBox("PhoneGroups" ,      _("") , _("Show groups containing phones"), true);
+
+    /* Add SubSearch checkbox */    
+    $this->AddCheckBox(SEPERATOR);
+    $this->AddCheckBox("SubSearch",  _("Select to search within subtrees"), _("Ignore subtrees"), false);
+
+    /*                  Name                 ,Text                              ,Default  , Connect with alphabet  */
+    $this->AddRegex   ("Regex",     _("Regular expression for matching group names"), "*" , true);
+  }
+
+
+  function GenHeader()
+  {
+    /* Prepare departments,
+       which are shown in the listbox on top of the listbox
+     */
+    $options= "";
+    foreach ($this->config->idepartments as $key => $value){
+      if ($this->selectedBase == $key){
+        $options.= "<option selected='selected' value='$key'>$value</option>";
+      } else {
+        $options.= "<option value='$key'>$value</option>";
+      }
+    }
+
+    if($this->parent->CopyPasteHandler){
+      $Copy_Paste = $this->parent->CopyPasteHandler->generatePasteIcon();
+    }else{
+      $Copy_Paste ="";
+    }
+
+    // Managment
+    $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
+      " <input class='center' type='image' src='images/list_root.png' align='middle' 
+          title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
+      " <input class='center' type='image' align='middle' src='images/list_back.png' 
+          title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
+      " <input class='center' type='image' align='middle' src='images/list_home.png' 
+          title='"._("Go to users department")."' alt='"._("Home")."' name='dep_home'>&nbsp;".
+       " <input class='center' type='image' src='images/list_reload.png' align='middle' 
+          title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
+      " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
+      " <input class='center' type='image' align='middle' src='images/list_new_ogroup.png' 
+          title='"._("Create new object group")."' alt='"._("new")."' name='group_new'>".
+      $Copy_Paste.
+      " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
+      _("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
+      " <input class='center' type='image' src='images/list_submit.png' align='middle' 
+          title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
+      "</div>";
+  
+    $this->SetListHeader($listhead);
+  }
+
+  function execute()
+  {
+    $this->ClearElementsList();
+    $this->GenHeader();
+  }
+
+  function setEntries($list)
+  {
+    /* Add Copy & Paste buttons if copy&paste is enabled
+     */
+    /* Create action icons */
+    $actions = "";
+    if($this->parent->CopyPasteHandler){
+      $actions.= "<input class='center' type='image'
+        src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+      $actions.= "<input class='center' type='image'
+        src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
+    }
+    $actions.= "<input class='center' type='image'
+      src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
+    $actions.= "<input class='center' type='image'
+      src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
+
+    // Defining Links
+    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
+    $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
+    $userimg  = "<img class='center' src='images/select_groups.png' alt='User'    title='%s'>";
+    $mailimg  = "<img class='center' src='images/mailto.png'             alt='M'  title='"._("Mail")   ."'>";
+    $empty    = "<img class='center' src='images/empty.png' style='width:16px;height:16px;' alt=''>";
+
+    // Assigning ogroups
+    foreach($list as $key => $val){
+
+      if(isset($val['mail'])){
+        $mail = $mailimg;
+      }else{
+        $mail = $empty;
+      }
+      $title = "title='dn:&nbsp;".@LDAP::fix($val['dn'])."'";
+      if(!isset($val['description'][0])){
+        $desc = "";
+      }else{
+        $desc = " - [ ".$val['description'][0]." ]";
+      }
+      $field1 = array("string" => "<img src='images/list_ogroup.png' alt='"._("Object group")."' ".$title.">", "attach" => "style='text-align:center;width: 20px;'");
+      $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)), "attach" => "style='' ".$title);
+      $field3 = array("string" => preg_replace("/%KEY/", $key, $this->parent->convert_list($val))."&nbsp;".$mail, "attach" => "style='width:136px;'");
+      $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:107px;border-right:0px;text-align:right;'");
+
+      $this->AddElement(array($field1,$field2,$field3,$field4));
+    }
+  }
+
+  function Save()
+  {
+    MultiSelectWindow :: Save();  
+  }
+
+  function save_object()
+  {
+    /* Save automatic created POSTs like regex, checkboxes */
+    MultiSelectWindow::save_object();   
+  }
+}
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+?>
