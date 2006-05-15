@@ -9,29 +9,27 @@ class MultiSelectWindow{
 	var $bool_DisplaySaveButton = true;	
 
 	var $SaveButtonString		= "";
-	var $CloseButtonString		= "";
+	var $CloseButtonString	= "";
 
-	var $string_Title			= "";
-	var $string_ListHeader		= "";
+	var $string_Title			  = "";
+	var $string_ListHeader	= "";
 	var $string_Summary			= "";
-	var $string_Information		= "";
+	var $string_Information	= "";
 
-	var $array_Header			= array();
+	var $array_Header			  = array();
 	var $array_Elements			= array();	
 	var $array_Checkboxes		= array();	
 	var $array_Regexes			= array();	
 
-	var $config					= array("");
-
-	var $is_closed				= false;
-	var $is_saved				= false;
-
-	var $is_headpage			= false;	// if true the design changes
-
-	var $filterName				= "Liste";
-
+	var $config					    = array("");
+	var $is_closed				  = false;
+	var $is_saved				    = false;
+	var $is_headpage			  = false;	// if true the design changes
+	var $filterName				  = "Liste";
 	var $DepartmentsAdded		= false;
-	var $selectedBase       	= "";
+	var $selectedBase       = "";
+
+  var $SaveAdditionalVars = array();  // Additional Post vars to store 
 
 
 	function ClearElementsList()
@@ -74,6 +72,14 @@ class MultiSelectWindow{
 			$_SESSION['CurrentMainBase'] = $this->config->current['BASE'];
 		}
 		$this->selectedBase = $_SESSION['CurrentMainBase'];
+
+    /* Check default values for SaveAdditionalVars */
+    foreach($this->SaveAdditionalVars as $name){
+      if(isset($_SESSION['MultiDialogFilters'][$this->filterName][$name])){
+        $this->$name = $_SESSION['MultiDialogFilters'][$this->filterName][$name];
+      }
+    }
+    
 	}
 
 	/* Enables the headpage mode, which changes the list look */
@@ -153,17 +159,18 @@ class MultiSelectWindow{
 				$arr['default']	= $_SESSION['MultiDialogFilters'][$this->filterName][$name];
 				$this->$name = $arr['default'];
 			}else{
-				$arr['default']	= $default;
+				$arr['default']	= $default; 
+        $this->$name = $default;
 			}
 			$arr['name'] 	      = $name;
 			$arr['string']	    = $string;
 			$arr['value']	      = $value;
 			$arr['enabled']	    = true;
 
-      $this->$name = $default;
 		}
 		$this->array_Checkboxes[] = $arr;
 	}
+
 
 	/* Hides or unhides the checkbox with the given name */
 	function DisableCheckBox($name,$HideShow = false)
@@ -174,7 +181,6 @@ class MultiSelectWindow{
 			}
 		}
 	}
-
 
 
 	/* Returns true if the close button was pressed */
@@ -394,6 +400,16 @@ class MultiSelectWindow{
 		}
 
 		if(isset($_POST['MultiSelectWindow'.$this->filterName])){
+
+      /* Save some additional vars */
+      foreach($this->SaveAdditionalVars as $name){
+        if(isset($_POST[$name])){
+          if(isset($this->$name)){
+            $this->$name = $_POST[$name];
+            $_SESSION['MultiDialogFilters'][$this->filterName][$name] = $_POST[$name];
+          }
+        }
+      }
 
 			/* Check posts from checkboxes 
 			 */

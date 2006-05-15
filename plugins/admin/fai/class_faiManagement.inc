@@ -33,22 +33,19 @@ class faiManagement extends plugin
 	var $plDescription		= "Fully Automatic Installation - management";
 
 	/* CLI vars */
-	var $cli_summary		= "Handling of FAI entries";
+	var $cli_summary		  = "Handling of FAI entries";
 	var $cli_description	= "This plugin represents a management tool\n
 		which allows us to manage all needed attributes for fully automatic installations (FAI)";
 	var $cli_parameters		= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
 	/* Headpage attributes */
-	var $departments= array();
-	var $deptabs= NULL;
   var $lock_type    = "";    // should be branch/freeze
   var $lock_name    = "";
   var $lock_dn      = "";  
 
 	/* attribute list for save action */
-	var $attributes			= array("lock_type","lock_name","lock_dn"); 	// 	Attributes Managed by this plugin, none, 
-	//	because this is only an overview over all objects already defined in FAI.
-	var $objectclasses		= array();	// 	ObjectClasses which the attributes are related to
+	var $attributes		= array("lock_type","lock_name","lock_dn"); 	// 	Attributes Managed by this plugin 
+	var $objectclasses= array();	// 	ObjectClasses which the attributes are related to
 	var $dialog				= array();	// 	This object contains every dialog we have currently opened
 
 	var $objects			= array();	// 	This array contains all available objects shown in divlist
@@ -57,37 +54,19 @@ class faiManagement extends plugin
   var $dispNewBranch= false;
   var $dispNewFreeze= false;
 
+  var $DivListFai;
+
 	/* construction/reconstruction 
-	 * The Filter ($faifilter stored in $_SESSION['faifilter']) defines the last 
-	 *  selected department and filter options
-	 * If it is not defined already we create a new fresh faifilter.
 	 */
 	function faiManagement ($config, $ui)
 	{
-		$this->ui			= $ui;	
-
-		/* Set current dn to "", */
+		/* Set defaults */
 		$this->dn			= "";
-
-		/* Assign config */
-		$this->config		= $config;
-
-		/* Get global filter config */
-		if (!is_global("faifilter")){
-			$faifilter= array(
-					"regex" => "*","branch" => "main");
-			$faifilter['ShowProfiles'] 	= true;
-			$faifilter['ShowTemplates'] = true;
-			$faifilter['ShowScripts'] 	= true;
-			$faifilter['ShowHooks'] 	= true;
-			$faifilter['ShowVariables']	= true;
-			$faifilter['ShowPackages'] 	= true;
-			$faifilter['ShowPartitions']=true;
-			register_global("faifilter", $faifilter);
-		}
-    if(!isset($_SESSION['CurrentMainBase'])){
-      $_SESSION['CurrentMainBase'] = $this->config->current['BASE'];
-    }
+		$this->config	= $config;
+		$this->ui			= $ui;	
+    
+    /* Creat dialog object */
+    $this->DivListFai = new divListFai($this->config,$this);
 	}
 
 	function execute()
@@ -95,118 +74,64 @@ class faiManagement extends plugin
     /* Call parent execute */
     plugin::execute();
 
-    $_SESSION['LOCK_VARS_TO_USE'] = array("/^edit_entry$/","/^id$/","/^entry_edit_/","/^entry_delete_/");
-
-		$display 	= "";
+    /* Initialise vars and smarty */
 		$smarty 	= get_smarty();
 		$smarty->assign("BranchName","");
+    
+		$display 	= "";
     $s_action	= "";
 		$s_entry 	= "";
-		/* filter management 
-		 * Filter will be changed if POST['regex'] or $_GET['search'] isset
-		 * New Filter will be stored in session and is used to generate list contents
-		 */	
-		$faifilter = $_SESSION['faifilter'];
     
-    if((isset($_POST['select_branch']))&&(!empty($_POST['select_branch']))){
-      $faifilter['branch'] = $_POST['select_branch'];
-    }
+    /* If an entry was locked, these vars will be stored in a session to allow direct edit */
+    $_SESSION['LOCK_VARS_TO_USE'] = array("/^edit_entry$/","/^id$/","/^entry_edit_/","/^entry_delete_/");
 
-		/* Filter is posted by apply button 
-		 * Check every single chkbox 
-		 */
-		if(isset($_POST['regex'])){
-			$faifilter['regex'] = $_POST['regex']."*";
-			foreach(array("ShowPartitions","ShowProfiles","ShowTemplates","ShowScripts","ShowHooks","ShowVariables","ShowPackages") as $attrs){
-				if(isset($_POST[$attrs])){
-					$faifilter[$attrs] = true;
-				}else{
-					$faifilter[$attrs] = false;
-				}
-			}
-		}
 
+    /****************
+      Handle posts 
+     ****************/
 
 		/* Check ImageButton posts
 		 * Create new tab ich new_xx is posted
 		 */
-		foreach($_POST as $key => $val){
-      if(preg_match("/remove_branch/",$key)){
-        $s_action = "remove_branch";
-      }elseif(preg_match("/branch_branch/",$key)){
-        $s_action = "branch_branch";
-      }elseif(preg_match("/freeze_branch/",$key)){
-        $s_action = "freeze_branch";
-			}elseif(preg_match("/create_partition/i",$key)){
-				$s_action = "new_partition";
-			}elseif(preg_match("/create_script/i",$key)){
-				$s_action = "new_script";
-			}elseif(preg_match("/create_hook/i",$key)){
-				$s_action = "new_hook";
-			}elseif(preg_match("/create_variable/i",$key)){
-				$s_action = "new_variable";
-			}elseif(preg_match("/create_template/i",$key)){
-				$s_action = "new_template";
-			}elseif(preg_match("/create_package/i",$key)){
-				$s_action = "new_package";
-			}elseif(preg_match("/create_profile/i",$key)){
-				$s_action = "new_profile";
-			}elseif(preg_match("/edit_continue/",$key)){
-				$s_action = "select_class_name_finished";
-			}elseif(preg_match("/^entry_edit_.*/",$key)){
-				$s_entry = preg_replace("/^entry_edit_/","",$key);
+    $posts = array( "/remove_branch/"=>"remove_branch",    "/branch_branch/"=>"branch_branch",
+                    "/freeze_branch/"=>"freeze_branch",    "/create_partition/i"=>"new_partition",
+                    "/create_script/i"=>"new_script",      "/create_hook/i"=>"new_hook",
+                    "/create_variable/i"=>"new_variable",  "/create_template/i"=>"new_template",
+                    "/create_package/i"=>"new_package",    "/create_profile/i"=>"new_profile",
+                    "/edit_continue/"=>"select_class_name_finished");
+
+		foreach($_POST as $name => $value){
+      foreach($posts as $reg => $act ){
+        if(preg_match($reg,$name)){
+          $s_action = $act;
+        }
+      }
+			if(preg_match("/^entry_edit_.*/",$name)){
+				$s_entry = preg_replace("/^entry_edit_/","",$name);
 				$s_entry = preg_replace("/_.*$/","",$s_entry);
 				$s_action = "edit";
-			}elseif(preg_match("/^entry_delete_.*/",$key)){
-				$s_entry = preg_replace("/^entry_delete_/","",$key);
+			}elseif(preg_match("/^entry_delete_.*/",$name)){
+				$s_entry = preg_replace("/^entry_delete_/","",$name);
 				$s_entry = preg_replace("/_.*$/","",$s_entry);
         $s_action = "delete";
-      }elseif(preg_match("/dep_back.*/i",$key)){
-        $faifilter['branch'] = "main";
-        $s_action="back";
-      }elseif(preg_match("/dep_home.*/i",$key)){
-        $faifilter['branch'] = "main";
-        $s_action="home";
-      }elseif(preg_match("/dep_root.*/i",$key)){
-        $faifilter['branch'] = "main";
-        $s_action="root";
       }
-
     }
-
-		if($s_action=="root"){
-			$_SESSION['CurrentMainBase']=($this->config->current['BASE']);
-		}
-
-		if($s_action=="home"){
-			$_SESSION['CurrentMainBase']= get_base_from_people($this->ui->dn);
-		}
-
-		if($s_action=="back"){
-			$base_back          = preg_replace("/^[^,]+,/","",$_SESSION['CurrentMainBase']);
-			$base_back          = convert_department_dn($base_back);
-
-			if(isset($this->config->departments[trim($base_back)])){
-				$_SESSION['CurrentMainBase']= $this->config->departments[trim($base_back)];
-			}else{
-				$_SESSION['CurrentMainBase']= $this->config->departments["/"];
-			}
-		}
-
-		if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
-            $s_action="open";
-            $s_entry = base64_decode($_GET['dep_id']);
-            $_SESSION['CurrentMainBase']= $this->config->departments[trim($s_entry)];
-        }
 
 		if(isset($_GET['edit_entry'])){
 			$s_entry = $_GET['edit_entry'];
 			$s_action = "edit";
 		}
+    
+    if((isset($_POST['CancelBranchName'])) || (isset($_POST['CloseIFrame']))){
+      $this->dispNewBranch = false;
+      $this->dispNewFreeze = false;
+    }
 
-		/* Confirm dialog 
-		 * Delte object 
-         */
+
+    /****************
+      Delete confirme dialog 
+     ****************/
+
 		if ($s_action=="delete"){
 
 			/* Get 'dn' from posted termlinst */
@@ -214,7 +139,7 @@ class faiManagement extends plugin
 
 			/* Load permissions for selected 'dn' and check if
 			   we're allowed to remove this 'dn' */
-			$acl= 		get_permissions ($this->dn, $this->ui->subtreeACL);
+			$acl= get_permissions ($this->dn, $this->ui->subtreeACL);
 			$this->acl= get_module_permission($acl, "FAIclass", $this->dn);
 			if (chkacl($this->acl, "delete") == ""){
 
@@ -235,11 +160,20 @@ class faiManagement extends plugin
 			}
 		}
 
+
+    /****************
+      Delete aborted  
+     ****************/
+
 		/* Delete canceled? */
 		if (isset($_POST['delete_cancel'])){
 			del_lock ($this->dn);
 		}
 
+
+    /****************
+      Delete confirmed 
+     ****************/
 
 		/* Deltetion was confirmed, so delete this entry
 		 */
@@ -250,21 +184,17 @@ class faiManagement extends plugin
 			if (chkacl($this->acl, "delete") == ""){
 
 				/* Find out more about the object type */
-				$ldap	= $this->config->get_ldap_link();
+				$ldap	  = $this->config->get_ldap_link();
 				$ldap->cat($this->dn, array('objectClass'));
 				$attrs	= $ldap->fetch();
-
-				$type	= $this->get_type($attrs);			
-
-				$this->dialog= new $type[0]($this->config,	$this->config->data['TABS'][$type[2]], $this->dn);
+				$type	  = $this->get_type($attrs);			
+				$this->dialog = new $type[0]($this->config,	$this->config->data['TABS'][$type[2]], $this->dn);
 				$this->dialog->set_acl(array($this->acl));
 
 				$this->dialog->by_object[$type[1]]->remove_from_parent ();
 				unset ($this->dialog);
 				gosa_log ("FAI class '".$this->dn."' has been removed");
 				$this->dialog= NULL;
-
-				/* Terminal list has changed, reload it. */
 			} else {
 
 				/* Normally this shouldn't be reached, send some extra
@@ -278,60 +208,64 @@ class faiManagement extends plugin
 			del_lock ($this->dn);
 		}
 
-		/* Edit Entry */
-		//if($s_action == "edit"){
-		if(($s_action == "edit") && (!isset($this->dialog->config))){
-			$entry  = $this->objects[$s_entry];
 
-			$a_setup = ($this->get_type($entry));
-		
+    /****************
+      Edit entry 
+     ****************/
+
+		if(($s_action == "edit") && (!isset($this->dialog->config))){
+			$entry    = $this->objects[$s_entry];
+			$a_setup  = $this->get_type($entry);
 			$this->dn = $entry['dn'];
+
 			/* Check locking, save current plugin in 'back_plugin', so the dialog knows where to return. */
 			if (($user= get_lock($this->dn)) != ""){
 				return(gen_locked_message ($user, $this->dn));
 			}
 			add_lock ($this->dn, $this->ui->dn);
 
-			$this->dialog= new $a_setup[0]($this->config,
-					$this->config->data['TABS'][$a_setup[2]],$this->dn);
-			$this->is_dialog = true;
+			$this->dialog     = new $a_setup[0]($this->config,$this->config->data['TABS'][$a_setup[2]],$this->dn);
+			$this->is_dialog  = true;
+
       if($entry['FAIstate'] == "freeze"){
         $this->dialog->set_acl(array("*none*"))  ;
       }
 			$_SESSION['objectinfo'] = $this->dn;
 		}
 
+
     /*  Branch handling 
         09.01.2006
     */
 
-    /* Abort creating new branch 
-     */
-    if((isset($_POST['CancelBranchName'])) || (isset($_POST['CloseIFrame']))){
-      $this->dispNewBranch = false;
-      $this->dispNewFreeze = false;
-    }
-    
+    /****************
+      Remove branch
+     ****************/
+
     /* Remove branch 
      */
     if($s_action == "remove_branch"){
-      $base= $faifilter['branch'];
+      $base= $this->DivListFai->selectedBranch;
+
       /* Load permissions for selected 'dn' and check if
          we're allowed to remove this 'dn' */
-      $acl= get_permissions ($_SESSION['CurrentMainBase'], $this->ui->subtreeACL);
+      $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
       $this->acl= get_module_permission($acl, "FAIclass", $base);
       if (chkacl($this->acl, "delete") == ""){
-        $smarty->assign("info", sprintf(_("You're about to delete a fai branch / freeze  '%s'."), $faifilter['branch']));
+        $smarty->assign("info", sprintf(_("You're about to delete a fai branch / freeze  '%s'."), $this->DivListFai->selectedBranch));
         return($smarty->fetch(get_template_path('remove_branch.tpl',TRUE)));
       } else {
         print_red (_("You are not allowed to delete this release!"));
       }
     }
 
-    /* Delete this entry 
-     */
+    
+    /****************
+      Remove branch confirmed
+     ****************/
+
     if(isset($_POST['delete_branch_confirm'])){
-      $bb =  $faifilter['branch'];
+      $bb =  $this->DivListFai->selectedBranch;
       if(!isset($ldap)){
         $ldap = $this->config->get_ldap_link();
       }
@@ -339,26 +273,24 @@ class faiManagement extends plugin
       $br = $this->getBranches();
 
       if(isset($br[$bb])){
-
         $name = $br[$bb];
-
         $ldap->cd($bb);
         $ldap->recursive_remove();
         $ldap->cd(preg_replace('/,ou=fai,ou=configs,ou=systems,/', ',ou=apps,', $bb));
         $ldap->recursive_remove();
-        $faifilter['branch'] = "main";
+        $this->DivListFai->selectedBranch = "main";
 
         /* Post remove */
-        //  $this->lock_type is set from this->reload
         $this->lock_name   = $name;
         $this->lock_dn     = $bb;
-
         $this->postremove();
       }
     }
 
-    /* Open dialog to insert new branch name 
-     */
+
+    /****************
+      Create a new branch "insert Name"
+     ****************/
 
     if((isset($_POST['UseBranchName']))&&(($this->dispNewBranch)||($this->dispNewFreeze))){
       $_SESSION['LASTPOST'] = $_POST;
@@ -372,10 +304,8 @@ class faiManagement extends plugin
       /* Check branch name */
       $name = $_POST['BranchName'];
       $is_ok = true;
-
       $smarty->assign("BranchName",$name);
-
-      $base= "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
+      $base= "ou=fai,ou=configs,ou=systems,".$this->DivListFai->selectedBase;
 
       /* Check used characters */
       if(preg_match("/[^0-9a-z \ö\ä\ü\.-_:,]/i",$name)){
@@ -388,7 +318,7 @@ class faiManagement extends plugin
       }
 
       /* Check if this name is already in use */
-      if(!$this->CheckNewBranchName($_POST['BranchName'],$faifilter['branch'])){
+      if(!$this->CheckNewBranchName($_POST['BranchName'],$this->DivListFai->selectedBranch)){
         print_red(_("This name is already in use."));
         $is_ok = false;
       }
@@ -403,6 +333,11 @@ class faiManagement extends plugin
       }
     }
 
+
+    /****************
+      Create a new branch 
+     ****************/
+
     if(isset($_GET['PerformBranch'])){
       /* Create it know */
       $this->dispNewBranch = false;
@@ -412,12 +347,11 @@ class faiManagement extends plugin
       $name = $_POST['BranchName'];
 
       $type = $_SESSION['LASTPOST']['type'];
-
       $ldap = $this->config->get_ldap_link();
 
       $baseToUse = $base;
-      if($_SESSION['faifilter']['branch']!="main"){
-        $baseToUse = $_SESSION['faifilter']['branch'];
+      if($this->DivListFai->selectedBranch != "main" ){
+        $baseToUse = $this->DivListFai->selectedBranch;
       }
 
       $appsrc = preg_replace("/ou=fai,ou=configs,ou=systems,/","ou=apps,",$baseToUse); 
@@ -460,13 +394,23 @@ class faiManagement extends plugin
       exit();
     }
 
+
+    /****************
+      Display dialog to enter new Branch name
+     ****************/
+
     if(($s_action == "branch_branch")||($this->dispNewBranch)){
       $this->dispNewBranch=true;
       $smarty->assign("iframe",false);
 		  $display 	.= $smarty->fetch(get_template_path('faiNewBranch.tpl', TRUE, dirname(__FILE__)));
       return($display);
     }
-    
+   
+ 
+    /****************
+      Display dialog to enter new Freeze name
+     ****************/
+
     if(($s_action == "freeze_branch")||($this->dispNewFreeze)){
       $this->dispNewFreeze = true;
       $smarty->assign("iframe",false);
@@ -474,37 +418,20 @@ class faiManagement extends plugin
       return($display);
     }
 
-    /* ENDE Branch handling 
-     */
 
-    /* Dialog handling */
-    if($s_action == "new_partition"){
-      $this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIpartitionTable");
-    }
+    /****************
+      Create a new object 
+     ****************/
 
-    /* Dialog handling */
-    if($s_action == "new_script"){
-      $this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIscript");
-    }
+    $types = array( "new_partition"     =>  "FAIpartitionTable",
+                    "new_script"        =>  "FAIscript",
+                    "new_hook"          =>  "FAIhook",
+                    "new_variable"      =>  "FAIvariable",
+                    "new_template"      =>  "FAItemplate",
+                    "new_package"       =>  "FAIpackageList");
 
-    /* Dialog handling */
-    if($s_action == "new_hook"){
-      $this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIhook");
-    }
-
-    /* Dialog handling */
-    if($s_action == "new_variable"){
-      $this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIvariable");
-    }
-
-    /* Dialog handling */
-    if($s_action == "new_template"){
-      $this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAItemplate");
-    }
-
-    /* Dialog handling */
-    if($s_action == "new_package"){
-      $this->dialog = new askClassName($this->config,$this->dn,$this->ui,"FAIpackageList");
+    if(isset($types[$s_action])){
+      $this->dialog = new askClassName($this->config,$this->dn,$this->ui,$types[$s_action]);
     }
 
     /* New Profile */
@@ -515,8 +442,12 @@ class faiManagement extends plugin
       $this->dialog = new $a_setup[0]($this->config,
           $this->config->data['TABS'][$a_setup[2]],$this->dn);
       $this->is_dialog = true;
-
     }
+
+
+    /****************
+      Get from ask class name dialog 
+     ****************/
 
     if($s_action == "select_class_name_finished"){
       $this->dialog->save_object();
@@ -536,32 +467,11 @@ class faiManagement extends plugin
       }		
     }	
 
-    /* Search is set */
-    if(isset($_GET['search'])){
-      $faifilter['regex']=$_GET['search']."*";
-    }
 
-    /* Department select */
-    if((isset($_POST['base']))&&($s_action=="")){
-			$_SESSION['CurrentMainBase']=$_POST['base'];
-		}
+    /****************
+     Cancel dialogs 
+     ****************/
 
-    $base= "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
-
-    $br = $this->getBranches($base);
-    if(!isset($br[$faifilter['branch']])){
-      $faifilter['branch'] = "main";
-    }
-   
-    $smarty->assign("select_branch",$faifilter['branch']);
-
-		/* remove double asterisks and save new filter */
-		$faifilter['regex'] = preg_replace("/\*\*/","*",$faifilter['regex']);
-		$_SESSION['faifilter']= $faifilter;
-
-		/* Edit dialog was canceled 
-		 * Remove dialog an show management dialog
-		 */
 		if(isset($_POST['edit_cancel'])){
 			unset($this->dialog);
 			$this->dialog=NULL;
@@ -569,6 +479,11 @@ class faiManagement extends plugin
 			unset($_SESSION['objectinfo']);
 			del_lock ($this->dn);
 		}
+
+
+    /****************
+      Save sub dialogs 
+     ****************/
 
 		/* This check if the given tab could be saved 
 		 * If it was possible to save it, remove dialog object. 
@@ -589,6 +504,11 @@ class faiManagement extends plugin
 				unset($_SESSION['objectinfo']);
 			}
 		}
+
+
+    /****************
+      Display currently open dialog 
+     ****************/
 
 		/* If dialog is set, but $this->is_dialog==false, then 
 		 *  only the "abort" button is shown, this are dialogs that must not be saved.  
@@ -615,255 +535,37 @@ class faiManagement extends plugin
 			}
 			return($display);
 		}
+		
 
-		/* Show Management template
-		 * The following code will only be reached if no dialog (tabs or dialogs)
-		 *  are currently opened.
-		 * Assign all reguired vars to template engine
-		 */
+    /****************
+      Dialog display
+     ****************/
 
-		/* Prepare departments */
-		$options= "";
-		foreach ($this->config->idepartments as $key => $value){
-			if ($_SESSION['CurrentMainBase'] == $key){
-				$options.= "<option selected='selected' value='$key'>$value</option>";
-			} else {
-				$options.= "<option value='$key'>$value</option>";
-			}
-		}
+    /* Display dialog with system list */
+    $this->DivListFai->execute();
 
-		/* Create listhead, it will be shown on top of the divlist. 
-		 * It provides general navigation and object creation
-		 */
-		$faihead = 
-			"<div style='background:#F0F0F9;padding:5px;'>&nbsp;".
-
-			"<input class='center' type='image' src='images/list_root.png' align='middle' 
-			title='"._("Go to root department")."' name='dep_root' alt='".      _("Root")."'>&nbsp;".
-
-			"<input class='center' type='image' src='images/list_up.png' align='middle' 
-			title='"._("Go up one department")."' name='dep_back' alt='"._("Up"). "'>&nbsp;".
-
-			"<input class='center' type='image' src='images/list_home.png' align='middle' 
-			title='"._("Go to users home department")."' name='dep_home' alt='"._("Home")."'>&nbsp;".
-
-      " <input class='center' type='image' src='images/list_reload.png' align='middle' title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-
-			"<img class='center' src=\"images/list_seperator.png\" alt=\"\" align=\"middle\" height=\"16\" width=\"1\">&nbsp;".
-			
-			" <input class='center' type='image' src='images/fai_new_profile.png' align='middle' 
-			title='"._("New profile")."' name='Create_profile' alt='"._("P")."'>&nbsp;".
-			
-			"<img class='center' src=\"images/list_seperator.png\" alt=\"\" align=\"middle\" height=\"16\" width=\"1\">&nbsp;".
-				
-			" <input class='center' type='image' src='images/fai_new_partitionTable.png' align='middle' 
-			title='"._("New partition table")."' name='Create_partition' alt='"._("PT")."'>&nbsp;".
-
-			" <input class='center' type='image' src='images/fai_new_script.png' align='middle' 
-			title='"._("New scripts")."' name='Create_script' alt='"._("S")."'>&nbsp;".
-
-			" <input class='center' type='image' src='images/fai_new_hook.png' align='middle' 
-			title='"._("New hooks")."' name='Create_hook' alt='"._("H")."'>&nbsp;".
-
-			" <input class='center' type='image' src='images/fai_new_variable.png' align='middle' 
-			title='"._("New variables")."' name='Create_variable' alt='"._("V")."'>&nbsp;".
-			
-			" <input class='center' type='image' src='images/fai_new_template.png' align='middle' 
-			title='"._("New templates")."' name='Create_template' alt='"._("T")."'>&nbsp;".
-
-			" <input class='center' type='image' src='images/fai_new_packages.png' align='middle' 
-			title='"._("New package list")."' name='Create_package' alt='"._("PK")."'>&nbsp;".
-
-			" <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-
-			_("Base")."&nbsp;<select name='base' onChange='mainform.submit()' class='center'>$options</select>".
-			" <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-			
-			"</div>";
-
-		$this->reload();
-
-		/* Create list with objects */
-		$divlist = new divlist("faiManagement"); 
-		$divlist->SetEntriesPerPage(0);
-		$divlist->SetSummary(_("This table displays all systems, in the selected tree."));
-
-		$divlist->SetHeader(array(
-					array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
-					array("string" => _("Name of FAI class"), "attach" => "style=''"),
-					array("string" => _("Class type"), "attach" => "style='width:200px;'"),
-					array("string" => _("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'")));
-
-
-		$action  = "<input class='center' type='image' src='images/edit.png' 	alt='"._("edit")."'   name='entry_edit_%KEY%' title='"._("Edit class")."'>";
-		$action .= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."' name='entry_delete_%KEY%' title='"._("Delete class")."'>";
-
-		$editlink ="<a href='?plug=".$_GET['plug']."&amp;edit_entry=%KEY%'>%NAME%</a>"; 		
-		$linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
-
-		foreach($this->departments as $key => $val) {
-			if(!isset($this->config->departments[trim($key)])){
-				$this->config->departments[trim($key)]="";
-			}
-
-			$non_empty="";
-			$keys= str_replace("/","\/",$key);
-			foreach($this->config->departments as $keyd=>$vald ){
-				if(preg_match("/".$keys."\/.*/",$keyd)){
-					$non_empty="full";
-				}
-			}
-
-
-			$title = $this->config->departments[$key];
-			$field0 = array("string" => "<img src='images/".$non_empty."folder.png' title='"._("department")."' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
-			$field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style='' title='".$title."'");
-			$field2 = array("string" => "&nbsp;", "attach" => "style='width:200px;'");
-			$field3 = array("string" => "&nbsp;", "attach" => "style='width:60px;border-right:0px;text-align:right;'");
-
-			$divlist->AddEntry( array($field0,$field1,$field2,$field3));
-
-		}
-    
-		/* Attach objects */
-		foreach($this->objects as $key => $value){
-				$info= "";
-				$img = "";
-				$type = $value['type'];
-				$abort=false;
-
-				switch($type) {
-					case "FAIpartitionTable" 	: 
-						if(!$faifilter['ShowPartitions']){ 
-							$abort = true;
-						}
-					$img="<img class='center' src='images/fai_partitionTable.png' title='"._("Partition table")."' alt='PT'>";
-					$info = _("Partition table");
-					break;
-					case "FAIpackageList"		: 
-						if(!$faifilter['ShowPackages']){ 
-							$abort = true;
-						}
-					$img="<img class='center' src='images/fai_packages.png' title='"._("Package list")."' alt='PL'>";
-					$info = _("Package list");
-					break;
-					case "FAIscript"			: 
-						if(!$faifilter['ShowScripts']){ 
-							$abort = true;
-						}
-					$img="<img class='center' src='images/fai_script.png' title='"._("Scripts")."' alt='S'>";
-					$info = _("Scripts");
-					break;
-					case "FAIvariable"			: 
-						if(!$faifilter['ShowVariables']){ 
-							$abort = true;
-						}
-					$img="<img class='center' src='images/fai_variable.png' title='"._("Variables")."' alt='V'>";
-					$info = _("Variables");
-					break;
-					case "FAIhook"				:
-						if(!$faifilter['ShowHooks']){ 
-							$abort = true;
-						}
-					$img="<img class='center' src='images/fai_hook.png' title='"._("Hooks")."' alt='H'>";
-					$info = _("Hooks");
-					break;
-					case "FAIprofile"			: 
-						if(!$faifilter['ShowProfiles']){ 
-							$abort = true;
-						}
-					$img="<img class='center' src='images/fai_profile.png' title='"._("Profile")."' alt='P'>";
-					$info = _("Profile");
-					break;
-					case "FAItemplate"			: 
-						if(!$faifilter['ShowTemplates']){ 
-							$abort = true;
-						}
-					$img="<img class='center' src='images/fai_template.png' title='"._("Templates")."' alt='T'>";
-					$info = _("Templates");
-					break;
-					default 					: 
-					$img="<img class='center' src='images/empty.png' alt=''>";$info = "";break;
-
-				}
-				
-				if(!$abort)	{
-					if((isset($value['description']))&&(!empty($value['description']))){
-						$desc= " [".$value['description']."]";
-					}else{
-						$desc= "";
-					}
-
-          if($value['FAIstate'] == "freeze"){
-            $action  = "<input class='center' type='image' src='images/edit.png' 	alt='"._("edit")."'   
-              name='entry_edit_%KEY%' title='"._("Edit class")."'>";
-            $edi = $editlink;
-            $acti = $action;
-          }else{
-            $action  = "<input class='center' type='image' src='images/edit.png' 	alt='"._("edit")."'   
-              name='entry_edit_%KEY%' title='"._("Edit class")."'>";
-            $action .= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."' 
-              name='entry_delete_%KEY%' title='"._("Delete class")."'>";
-            $acti = $action;
-            $edi = $editlink;
-          }
-
-					$field1 = array("string" => $img , "attach" => "style='text-align:center;width:20px;'");
-					$field2 = array("string" => preg_replace(array("/%KEY%/","/%NAME%/"),array($key,$value['cn'].$desc),$edi) , "attach" => "style=''");
-					$field3 = array("string" => $info, "attach" => "style='width:200px;'");
-					$field4 = array("string" => preg_replace("/%KEY%/",$key,$acti) , "attach" => "style='width:60px;border-right:0px;text-align:right;'");
-					$divlist->AddEntry(array($field1,$field2,$field3,$field4));
-
-			}
-		}
-
-		foreach($faifilter as $attrs => $value){
-			if($value){
-				$smarty->assign($attrs."CHK", " checked ");
-			}else{
-				$smarty->assign($attrs."CHK", " ");
-			}
-		}
-
-		/* Assign all reguired vars to template engine */
-
-    $branches = $this->getBranches();
-    asort($branches);
-    $smarty->assign("branches",$branches);
-    
-		$smarty->assign("faihead"		, $faihead);	
-		$smarty->assign("failist"		, $divlist->DrawList());
-		$smarty->assign("regex"			, $faifilter['regex']);	
-		$smarty->assign("infoimage"		, get_template_path('images/info.png'));
-		$smarty->assign("branchimage"		, get_template_path('images/branch.png'));
-		$smarty->assign("launchimage"	, get_template_path('images/launch.png'));
-		$smarty->assign("alphabet"		, generate_alphabet());
-		$smarty->assign("apply"			, apply_filter());
-		$smarty->assign("search_image"	, get_template_path('images/search.png'));
-		$smarty->assign("hint", print_sizelimit_warning());
-
-		$display 	= $smarty->fetch(get_template_path('headpage.tpl', TRUE, dirname(__FILE__)));
-		return ($display);
+    /* Add departments if subsearch is disabled */
+    if(!$this->DivListFai->SubSearch){
+      $this->DivListFai->AddDepartments($this->DivListFai->selectedBase,4);
+    }
+    $this->reload();
+    $this->DivListFai->setEntries($this->objects);
+    return($this->DivListFai->Draw());
 	}
 
+
+  /* Get available branches for current base */
   function getBranches($base = false,$prefix = "")
   {
     $ret = array("main"=>"/");
     $ldap = $this->config->get_ldap_link();
-  
     $ldap->cd($this->config->current['BASE']);
-
-    $faifilter = $_SESSION['faifilter'];
-
-
     if(!$base){
-  		$base= "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
+  		$base= "ou=fai,ou=configs,ou=systems,".$this->DivListFai->selectedBase;
     }
     $ldap->cd($base);
     $ldap->ls("(objectClass=FAIbranch)",$base);
-
     while($attrs = $ldap->fetch()){
-      
       if((isset($attrs['ou']))&&($attrs['dn']!=$base)){
         $ret[$attrs['dn']]= $prefix.$attrs['ou'][0];
         $ret = array_merge($ret,$this->getBranches($attrs['dn'],"".$prefix.$attrs['ou'][0]."/"));
@@ -872,108 +574,86 @@ class faiManagement extends plugin
     return($ret);
   }
 
+  
+  /* reload list of objects */
 	function reload()
 	{
-		/* Create a new list of FAI object 
-		 * Object list depends on faifilter['regex']
-		 * Generate List of Partitions,Hooks,Scripts,Templates,Profiles ... 
-		 */
-		$faifilter= get_global('faifilter');
-		// Added for dirlist function...
+    /* Create a new list of FAI object 
+     * Generate List of Partitions,Hooks,Scripts,Templates,Profiles ... 
+     */
+    $ObjectTypes = array(
+        "FAIpartitionTable"  => array("OU"=>"ou=disks,"       , "CHKBOX"=>"ShowPartitions"),
+        "FAIpackageList"     => array("OU"=>"ou=packages,"    , "CHKBOX"=>"ShowPackages"),
+        "FAIscript"          => array("OU"=>"ou=scripts,"     , "CHKBOX"=>"ShowScripts"),
+        "FAIvariable"        => array("OU"=>"ou=variables,"   , "CHKBOX"=>"ShowVariables"),
+        "FAIhook"            => array("OU"=>"ou=hooks,"       , "CHKBOX"=>"ShowHooks"),
+        "FAIprofile"         => array("OU"=>"ou=profiles,"    , "CHKBOX"=>"ShowProfiles"),
+        "FAItemplate"        => array("OU"=>"ou=templates,"   , "CHKBOX"=>"ShowTemplates"));
 
-		/* Set base for all searches */
-		$base= "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
-
-    if($faifilter['branch'] !="main"){
-      $base = $faifilter['branch'];
-    }
-   
-		$regex = $faifilter['regex'];	
-
-		/* Array to save objects */
-		$objects = array();
-	
-		$this->objects=array();
-
-		/* NEW LIST MANAGMENT
-		 * We also need to search for the departments
-		 * So we are able to navigate like in konquerer
-		 */
-		$base2 = $_SESSION['CurrentMainBase'];
-
-    /* Get all departments within this subtree */
-    $deps= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))", $this->ui->subtreeACL,
-        $base2, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
-
-    $this->departments = array();
-    foreach($deps as $value){
-      if(isset($value['description'][0])){
-        $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
+    /* Set base for all searches */
+    $base           = "ou=fai,ou=configs,ou=systems,".$this->DivListFai->selectedBase;
+    if($this->DivListFai->selectedBranch != "main"){
+      $br = $this->getBranches();
+      if(isset($br[$this->DivListFai->selectedBranch])){
+        $base = $this->DivListFai->selectedBranch;
       }else{
-        $this->departments[$value['dn']]= get_sub_department($value['dn']);
+        $base = "ou=fai,ou=configs,ou=systems,".$this->DivListFai->selectedBase;
       }
     }
-    natcasesort($this->departments);
-		
-    /* END NEW LIST MANAGMENT
-		 */
-    $res= get_list("(objectClass=organizationalUnit)", $this->ui->subtreeACL, $base,
-                   array("cn","description","objectClass"), GL_SIZELIMIT);
 
-    $str = "";
+    $Regex          = $this->DivListFai->Regex;
+    $str            = "";
+    $objects        = array();
+    $this->objects  = array();
 
-		foreach($res as $objecttypes){
-      $res2= get_list("(&(objectClass=*)(cn=$regex))", $this->ui->subtreeACL, $objecttypes['dn'],
-                      array("cn","description","objectClass","FAIclass","FAIstate"), GL_SIZELIMIT);
-			foreach($res2 as $object){
-				$type= "";	
+    /* Walk through possible sub departments and fetch all FAI objects */
+		foreach($ObjectTypes as $type => $obj){
+
+      /* Skip all unchecked types */
+      if(! $this->DivListFai->$obj['CHKBOX']){
+        continue;
+      }
+
+      /* Fetch objects from fai sub department */
+      if($this->DivListFai->SubSearch){
+        $res= get_list("(&(objectClass=".$type.")(cn=$Regex))", $this->ui->subtreeACL, preg_replace("/^.*ou=fai,ou=configs,ou=systems,/","",$base),
+            array("cn","description","objectClass","FAIclass","FAIstate"), GL_SIZELIMIT | GL_SUBSEARCH);
+      }else{
+        $res= get_list("(&(objectClass=".$type.")(cn=$Regex))", $this->ui->subtreeACL, $obj['OU'].$base,
+            array("cn","description","objectClass","FAIclass","FAIstate"), GL_SIZELIMIT);
+      }
+
+      /* Walk through objects */
+			foreach($res as $object){
+
+        /* Prepare object */
 				unset($object['objectClass']['count']);
 				if(!isset($object['description'][0])){
 					$object['description'][0]="";
 				}
 				
 				/* Clean up object informations */
-				$obj['cn'] 			= $object['cn'][0];
-				$obj['dn'] 			= $object['dn'];
-				$obj['description'] = $object['description'][0];
-				$obj['objectClass'] = $object['objectClass'];
+				$obj['cn'] 			      = $object['cn'][0];
+				$obj['dn'] 			      = $object['dn'];
+				$obj['description']   = $object['description'][0];
+				$obj['objectClass']   = $object['objectClass'];
 
+        /* Append type to this string, to be able to check if the selected 
+         * entry is of type 'freeze' or 'branch'
+         */
         if(isset($object['FAIstate'])){
           $obj['FAIstate'] = $object['FAIstate'][0];
-
-          /* Append type to this string, to be able to check if the selected 
-           * entry is of type 'freeze' or 'branch'
-           */
           $str.="|".$obj['FAIstate'];
         }else{
           $obj['FAIstate'] ="";
         }
-
-				if(in_array("FAIpartitionTable",$obj['objectClass'])){
-					$type = "FAIpartitionTable";
-				}elseif(in_array("FAIpackageList",$obj['objectClass'])){
-					$type = "FAIpackageList";
-				}elseif(in_array("FAIscript",$obj['objectClass'])){
-					$type = "FAIscript";
-				}elseif(in_array("FAIvariable",$obj['objectClass'])){
-					$type = "FAIvariable";
-				}elseif(in_array("FAIhook",$obj['objectClass'])){
-					$type = "FAIhook";
-				}elseif(in_array("FAIprofile",$obj['objectClass'])){
-					$obj['FAIclass'] 	= $object['FAIclass'][0];
-					$type = "FAIprofile";
-				}elseif(in_array("FAItemplate",$obj['objectClass'])){
-					$type = "FAItemplate";
-				}
 				$this->objects[strtolower($obj['cn']).$obj['cn'].$type] = $obj;
 				$this->objects[strtolower($obj['cn']).$obj['cn'].$type]['type']=$type;
- 
 			}
 		}
 
     /* Tell class what we have currently opened 
-        'main' has type '' 
-     */
+        'main' has type '' */
     if(preg_match("/freeze/",$str)){
       $this->lock_type = "freeze";
     }elseif(preg_match("/branch/",$str)){
@@ -992,7 +672,6 @@ class faiManagement extends plugin
 		}
 		$this->objects = array();
 		$this->objects = $tmp0;
-
 	}
 
 	function remove_lock()
@@ -1027,30 +706,24 @@ class faiManagement extends plugin
 		}
 	}
 
-  function CheckNewBranchName($name,$base){
-    $f = $_SESSION['faifilter']['branch'];
-
+  function CheckNewBranchName($name,$base)
+  {
+    $f = $this->DivListFai->selectedBranch;
     if(empty($name)){
       return(false);
-    }
-
-    if($f == "main"){
-      $f = $_SESSION['CurrentMainBase'];
-    } 
-  
-    if(in_array($name,$this->getBranches($f))) {
+    }elseif(in_array($name,$this->getBranches($f))) {
+      return(false);
+    }elseif(empty($name)){
+      return(false);
+    }elseif(in_array($name,array("fai","disk","packages","scripts","templates","hooks","variables","profiles","apps"))){
       return(false);
     }
-
-    if(empty($name)){
-      return(false);
-    }
-    
-    if(in_array($name,array("fai","disk","packages","scripts","templates","hooks","variables","profiles","apps"))){
-      return(false);
-    }
-  
     return(true);
+  }
+
+  function save_object()
+  {
+    $this->DivListFai->save_object();
   }
 
 }
