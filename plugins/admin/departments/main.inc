@@ -31,6 +31,7 @@ if ($remove_lock){
 		$_SESSION['department']= new departmentManagement($config, $ui);
 	}
 	$department= $_SESSION['department'];
+	$department->save_object();
 	$output= $department->execute();
 
 	/* Page header*/
