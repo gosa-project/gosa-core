@@ -543,11 +543,7 @@ class faiManagement extends plugin
 
     /* Display dialog with system list */
     $this->DivListFai->execute();
-
-    /* Add departments if subsearch is disabled */
-    if(!$this->DivListFai->SubSearch){
-      $this->DivListFai->AddDepartments($this->DivListFai->selectedBase,4);
-    }
+    $this->DivListFai->AddDepartments($this->DivListFai->selectedBase,4);
     $this->reload();
     $this->DivListFai->setEntries($this->objects);
     return($this->DivListFai->Draw());
@@ -615,13 +611,8 @@ class faiManagement extends plugin
       }
 
       /* Fetch objects from fai sub department */
-      if($this->DivListFai->SubSearch){
-        $res= get_list("(&(objectClass=".$type.")(cn=$Regex))", $this->ui->subtreeACL, preg_replace("/^.*ou=fai,ou=configs,ou=systems,/","",$base),
-            array("cn","description","objectClass","FAIclass","FAIstate"), GL_SIZELIMIT | GL_SUBSEARCH);
-      }else{
-        $res= get_list("(&(objectClass=".$type.")(cn=$Regex))", $this->ui->subtreeACL, $obj['OU'].$base,
+      $res= get_list("(&(objectClass=".$type.")(cn=$Regex))", $this->ui->subtreeACL, $obj['OU'].$base,
             array("cn","description","objectClass","FAIclass","FAIstate"), GL_SIZELIMIT);
-      }
 
       /* Walk through objects */
 			foreach($res as $object){
