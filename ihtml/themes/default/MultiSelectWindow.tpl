@@ -18,6 +18,7 @@
   		</td>
 		{if $is_headpage}
   		<td style="vertical-align:top;">
+			{$UserBox1}
    			<div class="contentboxh" style="border-bottom:1px solid #B0B0B0;">
     			<p class="contentboxh">
 					<img src="{$infoimage}" align="right" alt="[i]">{t}Information{/t}
@@ -26,6 +27,7 @@
    			<div class="contentboxb" style="padding:5px;">
 				{$Information}
    			</div>
+			{$UserBox2}
    			<br>
    			<div class="contentboxh">
     			<p class="contentboxh">
@@ -50,6 +52,7 @@
 			{$regexes}
 			{$apply}
    			</div>
+			{$UserBox3}
   		</td>
 		{else}
   		<td style="vertical-align:top;">
