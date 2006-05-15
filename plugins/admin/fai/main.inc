@@ -31,6 +31,7 @@ if ($remove_lock){
 		$_SESSION['FAI']= new faiManagement($config, $ui);
 	}
 	$FAI= $_SESSION['FAI'];
+	$FAI->save_object();
 	$output= $FAI->execute();
 
 	/* Page header*/
