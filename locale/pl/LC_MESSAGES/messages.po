@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polski\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2006-05-16 02:03+0100\n"
+"PO-Revision-Date: 2006-05-16 15:24+0100\n"
 "Last-Translator: Piotr Rybicki <meritus@innervision.pl>\n"
 "Language-Team: Piotr Rybicki <meritus@innervision.pl>\n"
 "MIME-Version: 1.0\n"
@@ -1303,7 +1303,7 @@ msgstr "UNIX"
 
 #: plugins/personal/posix/class_posixAccount.inc:124
 msgid "expired"
-msgstr ""
+msgstr "wygasło"
 
 #: plugins/personal/posix/class_posixAccount.inc:126
 #, fuzzy
@@ -4488,7 +4488,7 @@ msgstr "Podany plik jest pusty."
 
 #: plugins/addons/ldapmanager/class_csvimport.inc:490
 msgid "The selected file does not contain any CSV Data..."
-msgstr ""
+msgstr "Wybrany plik nie zawiera żadnych danych CSV..."
 
 #: plugins/addons/ldapmanager/contentimport.tpl:3
 msgid "The LDIF import plugin provides methods to upload a set of entries to your running LDAP directory as ldif. You may use this to add new or modify existing entries. Remember that GOsa will not check your ldifs for GOsa conformance."
