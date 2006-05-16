@@ -36,7 +36,7 @@ class mailMethodCyrus extends mailMethod
     /* Connect to IMAP server. I don't want to see these warning here... */
     $this->gosaMailServer= $gosaMailServer;
     if (!isset($this->config[$gosaMailServer])){
-      print_red(_("Warning: Account has an invalid mailserver string! Please check the mail server settings in the mail tab."));
+      print_red(_("Warning: Account has an invalid mailserver string!"));
     } else {
       $cfg= $this->config[$gosaMailServer];
     }

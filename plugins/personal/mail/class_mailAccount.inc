@@ -126,7 +126,9 @@ class mailAccount extends plugin
         }else{
           /* Could not connect to ldap.
            */
-          $this->gosaMailQuota = $this->attrs['gosaMailQuota'][0];
+          if (isset($this->attrs['gosaMailQuota'][0])){
+            $this->gosaMailQuota = $this->attrs['gosaMailQuota'][0];
+          }
         }
       }
     }

@@ -55,9 +55,10 @@ class departmentManagement extends plugin
 
   function execute()
   {
+    global $config;
+  
     /* Call parent execute */
     plugin::execute();
-
 
     /***************
       Var init 
@@ -68,7 +69,7 @@ class departmentManagement extends plugin
     /* Reload departments */
     $this->config->get_departments();
     $this->config->make_idepartments();
-    $_SESSION['config']= $this->config;
+    $config= $this->config;
 
     $smarty						= get_smarty();
     $display 					= "";

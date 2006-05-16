@@ -370,7 +370,11 @@ class MultiSelectWindow{
 			   this is posted by the parent class MultiSelectWindow */
 			if(isset($_GET['act'])&& ($_GET['act'] == "dep_open")){
 				$s_entry = base64_decode($_GET['dep_id']);
-				$this->selectedBase = $this->config->departments[trim($s_entry)];
+        if (!isset($this->config->departments[$s_entry])){
+          print_red(_("Error: The requested subtree has an inconsistent DN encoding, check your LDAP!"));
+        } else {
+  				$this->selectedBase = $this->config->departments[$s_entry];
+        }
 			}
 
 			/* back to the roots ^^ */
