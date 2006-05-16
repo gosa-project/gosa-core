@@ -72,7 +72,6 @@ class departmentManagement extends plugin
 
     $smarty						= get_smarty();
     $display 					= "";
-    $depfilter					= get_global("depfilter");
     $s_action 					= "";  // Will contain an action, like del or edit
     $s_entry  					= "";  // The entry name for edit delete -...
 
@@ -340,18 +339,27 @@ class departmentManagement extends plugin
 
     if($this->DivListDepartment->SubSearch){
       $res= get_list("(&(|(ou=$Regex)(description=$Regex))(objectClass=gosaDepartment))",
-          $this->ui->subtreeACL, $base, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT | GL_SUBSEARCH);
+          $this->ui->subtreeACL, $base, array("ou", "description"), GL_SIZELIMIT | GL_SUBSEARCH);
     }else{
       $res= get_list("(&(|(ou=$Regex)(description=$Regex))(objectClass=gosaDepartment))",
-          $this->ui->subtreeACL, $base, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
+          $this->ui->subtreeACL, $base, array("ou", "description"), GL_SIZELIMIT );
     }
 
     $this->departments= array();
-    foreach ($res as $value){
+    foreach ($res as $key => $value){
+
+      /* Don't display base as entry on subsearch */
+      if(($value['dn'] == $base) && ($this->DivListDepartment->SubSearch)){
+        continue;
+      }
+
+      $cdn= convert_department_dn($value['dn']);
+
+      /* Append to dep list */
       if(isset($value["description"][0])){
-        $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
+        $this->departments[$cdn]= get_sub_department($cdn)." - [".$value["description"][0]."]";
       }else{
-        $this->departments[$value['dn']]= get_sub_department($value['dn']);//$value["description"][0];
+        $this->departments[$cdn]= get_sub_department($cdn);//$value["description"][0];
       }
     }
     natcasesort ($this->departments);
