@@ -22,71 +22,50 @@ require "tabs_application.inc";
 class applicationManagement extends plugin
 {
   /* Definitions */
-  var $plHeadline= "Applications";
-  var $plDescription= "This does something";
+  var $plHeadline     = "Applications";
+  var $plDescription  = "This does something";
 
   /* Dialog attributes */
-  var $apptabs= NULL;
-  var $applications= array();
-  var $ui= NULL;
-  var $acl= "";
-
-  var $CopyPasteHandler = NULL;
-
-  var $Release  = "";
-  var $Releases = array();
-
-  var $enableReleaseManagement = false;
-
+  var $apptabs                  = NULL;
+  var $ui                       = NULL;
+  var $CopyPasteHandler         = NULL;
+  var $DivListApplication       = NULL;
+  var $applications             = array();
+  var $acl                      = "";
+  var $enableReleaseManagement  = false;
 
   function applicationManagement ($config, $ui)
   {
     /* Save configuration for internal use */
-    $this->config= $config;
-    $this->ui= $ui;
+    $this->config   = $config;
+    $this->ui       = $ui;
 
-    if((isset($this->config->data['MAIN']['ENABLECOPYPASTE'])) 
-        && 
-        (preg_match("/true/i",$this->config->data['MAIN']['ENABLECOPYPASTE'] ))){
+    /* Check if copy & paste is activated */
+    if($this->config->boolValueIsTrue("MAIN","ENABLECOPYPASTE")){
       $this->CopyPasteHandler = new CopyPasteHandler($this->config);
     }
+
+    /* Creat dialog object */
+    $this->DivListApplication = new divListApplication($this->config,$this);
 
     /* Check if we should enable the release selection */
     $tmp = search_config($this->config->data,"faiManagement","CLASS");
     if(!empty($tmp)){
       $this->enableReleaseManagement = true;
+
+      /* Hide SubSearch checkbox */
+      $this->DivListApplication->DisableCheckBox("SubSearch");
     }
-
-    /* Get global filter config */
-    if (!is_global("appfilter")){
-      $base= get_base_from_people($ui->dn);
-
-      $appfilter= array("regex" => "*" ,
-                        "release" => "ou=apps,".$base);
-      register_global("appfilter", $appfilter);
-    }
-
-    $appfilter = get_global("appfilter");
-    if(!isset($_SESSION['CurrentMainBase'])){
-      $_SESSION['CurrentMainBase'] = get_base_from_people($ui->dn);
-    }
-
-    $this->Releases = $this->getReleases($_SESSION['CurrentMainBase']);
-    asort($this->Releases);
-    $this->Release  = $appfilter['release'];
   }
 
   function getReleases($base)
   {
-    $dn   = "ou=apps,".$base;
+    $ldap                   = $this->config->get_ldap_link();
+    $dn                     = "ou=apps,".$base;
+    $ret                    = array();
+    $ret [$base] = "/";
 
-    $ret  = array();
-
-    $ret ["ou=apps,".$base] = "/";
-
-    $ldap = $this->config->get_ldap_link();
     $ldap->cd($dn);
-
     $ldap->search("objectClass=organizationalUnit",array("ou"));
 
     while($attrs = $ldap->fetch()){
@@ -102,6 +81,7 @@ class applicationManagement extends plugin
         $ret[$attrs['dn']]= preg_replace("/^\//","",$str);
       }
     }
+    asort($ret);
     return($ret);
   }
 
@@ -110,33 +90,20 @@ class applicationManagement extends plugin
     /* Call parent execute */
     plugin::execute();
 
+
+    /**************** 
+      Variable init 
+     ****************/
+
+    /* These vars will be stored if you try to open a locked app, 
+        to be able to perform your last requests after showing a warning message */
     $_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^appl_edit_/","/^appl_del_/");
 
-    /* Save data */
-    $appfilter    = get_global("appfilter");
     $smarty       = get_smarty();             // Smarty instance
     $s_action     = "";                       // Contains the action to proceed
     $s_entry      = "";                       // The value for s_action
     $base_back    = "";                       // The Link for Backbutton
     
-    /* Start for New List Managment */
-    if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
-      $s_action="open";
-      $s_entry = base64_decode($_GET['dep_id']);
-      $_SESSION['CurrentMainBase']= "".$this->config->departments[trim($s_entry)];
-    }
-
-    /* Get posted release */
-    if(isset($_POST['select_release'])){
-      $r = $_POST['select_release'];
-      if((isset($this->Releases[$r])) && ($this->Release != $r)){
-        $this->Release = $r;
-        $appfilter = get_global("appfilter");
-        $appfilter['release'] = $r;
-        register_global("appfilter",$appfilter);      
-      }
-    }
-
     /* Test Posts */
     foreach($_POST as $key => $val){
       // Post for delete
@@ -155,14 +122,8 @@ class applicationManagement extends plugin
         $s_action="cut";
         $s_entry  = preg_replace("/^cut_/i","",$key);
         // Post for new
-      }elseif(preg_match("/^dep_back.*/i",$key)){
-        $s_action="back";
       }elseif(preg_match("/^appl_new.*/",$key)){
         $s_action="new";
-      }elseif(preg_match("/^dep_home.*/i",$key)){
-        $s_action="home";
-      }elseif(preg_match("/^dep_root.*/i",$key)){
-        $s_action="root";
       }elseif(preg_match("/^editPaste.*/i",$key)){
         $s_action="editPaste";
       }
@@ -175,63 +136,10 @@ class applicationManagement extends plugin
 
     $s_entry  = preg_replace("/_.$/","",$s_entry);
 
-    /* Department changed? */
-    if(isset($_POST['CurrentMainBase']) && $_POST['CurrentMainBase']){
-      $_SESSION['CurrentMainBase']= $_POST['CurrentMainBase'];
-    }
 
-    /* Homebutton is posted */
-    if($s_action=="home"){
-      $_SESSION['CurrentMainBase']=(preg_replace("/^[^,]+,/","",$this->ui->dn));
-      $_SESSION['CurrentMainBase']=(preg_replace("/^[^,]+,/","",$_SESSION['CurrentMainBase']));
-    }
-
-    if($s_action=="root"){
-      $_SESSION['CurrentMainBase']=($this->config->current['BASE']);
-    }
-
-    /* If Backbutton is Posted */
-    if($s_action=="back"){
-      $base_back          = preg_replace("/^[^,]+,/","",$_SESSION['CurrentMainBase']);
-      $base_back          = convert_department_dn($base_back);
-
-      if(isset($this->config->departments[trim($base_back)])){
-        $_SESSION['CurrentMainBase']= $this->config->departments[trim($base_back)];
-      }else{
-        $_SESSION['CurrentMainBase']= $this->config->departments["/"];
-      }
-    }
-
-    if (isset($_POST['regex'])){
-      $appfilter['regex']= $_POST['regex'];
-    }
-    if (isset($_GET['search'])){
-      $s= mb_substr($_GET['search'], 0, 1, "UTF8")."*";
-      if ($s == "**"){
-        $s= "*";
-      }
-      $appfilter['regex']= $s;
-    }
-    
-    $this->Releases = $this->getReleases($_SESSION['CurrentMainBase']);
-    asort($this->Releases);
-    if(!isset($this->Releases[$this->Release])){
-      $this->Release = key($this->Releases);
-      $appfilter['release'] = $this->Release;
-      register_global("appfilter",$appfilter);
-    }
-
-    register_global("appfilter", $appfilter);
-
-    /* Check sorting variable */
-    $this->reload();
-    $smarty= get_smarty();
-
-    /* Check for exeeded sizelimit */
-    if (($message= check_sizelimit()) != ""){
-      return($message);
-    }
-
+    /**************** 
+      Copy & Paste handling  
+     ****************/
 
     /* Only perform copy / paste if it is enabled 
      */
@@ -240,6 +148,11 @@ class applicationManagement extends plugin
        return($str);
       };
     }
+
+
+    /**************** 
+      Create a new app 
+     ****************/
 
     /* New application? */
     if ($s_action=="new"){
@@ -254,6 +167,11 @@ class applicationManagement extends plugin
       $this->apptabs->set_acl(array(':all'));
     }
 
+
+    /**************** 
+      Edit entry canceled 
+     ****************/
+
     /* Cancel dialogs */
     if (isset($_POST['edit_cancel']) || isset($_POST['password_cancel'])){
       del_lock ($this->apptabs->dn);
@@ -261,6 +179,11 @@ class applicationManagement extends plugin
       $this->apptabs= NULL;
       unset ($_SESSION['objectinfo']);
     }
+
+
+    /**************** 
+      Edit entry finished 
+     ****************/
 
     /* Finish apps edit is triggered by the tabulator dialog, so
        the user wants to save edited data. Check and save at this
@@ -276,7 +199,7 @@ class applicationManagement extends plugin
       if (count($message) == 0){
 
         /* Save data data to ldap */
-        $this->apptabs->set_release($this->Release);
+        $this->apptabs->set_release($this->DivListApplication->selectedRelease);
         $this->apptabs->save();
         gosa_log ("Application object'".$this->dn."' has been saved");
 
@@ -285,10 +208,6 @@ class applicationManagement extends plugin
         if ($this->dn != "new"){
           del_lock ($this->dn);
         }
-
-        /* There's no page reload so we have to read new apps at
-           this point. */
-        $this->reload ();
         unset ($this->apptabs);
         $this->apptabs= NULL;
         unset ($_SESSION['objectinfo']);
@@ -298,6 +217,11 @@ class applicationManagement extends plugin
         show_errors($message);
       }
     }
+
+
+    /**************** 
+      Edit entry  
+     ****************/
 
     /* User wants to edit data? */
     if (($s_action=="edit") && (!isset($this->apptabs->config))){
@@ -324,6 +248,11 @@ class applicationManagement extends plugin
       $this->apptabs->set_acl($acl);
       $_SESSION['objectinfo']= $this->dn;
     }
+
+
+    /**************** 
+      Delete app 
+     ****************/
 
     /* Remove user was requested */
     if ($s_action == "del"){
@@ -356,6 +285,11 @@ class applicationManagement extends plugin
       }
     }
 
+
+    /**************** 
+      Delete app confirmed 
+     ****************/
+
     /* Confirmation for deletion has been passed. Group should be deleted. */
     if (isset($_POST['delete_app_confirm'])){
 
@@ -372,8 +306,6 @@ class applicationManagement extends plugin
         unset ($this->apptabs);
         $this->apptabs= NULL;
 
-        /* Group list has changed, reload it. */
-        $this->reload ();
       } else {
 
         /* Normally this shouldn't be reached, send some extra
@@ -386,6 +318,10 @@ class applicationManagement extends plugin
       del_lock ($this->dn);
     }
 
+
+    /**************** 
+      Delete app canceled 
+     ****************/
 
     /* Delete application canceled? */
     if (isset($_POST['delete_cancel'])){
@@ -408,222 +344,59 @@ class applicationManagement extends plugin
       return ($display);
     }
 
-    /* Show main page */
 
-    /* Prepare departments */
-    $options= "";
-    foreach ($this->config->idepartments as $key => $value){
-      if ($_SESSION['CurrentMainBase']== $key){
-        $options.= "<option selected='selected' value='$key'>$value</option>";
-      } else {
-        $options.= "<option value='$key'>$value</option>";
-      }
-    }
+    /****************
+      Dialog display
+     ****************/
 
-    if($this->CopyPasteHandler){
-      $Copy_Paste = " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;";
-
-      if($this->CopyPasteHandler->isCurrentObjectPastAble()){
-
-        if($this->CopyPasteHandler->isCurrentCutted()){
-          $img = "images/cutpaste.png";
-        }else{
-          $img = "images/copypaste.png";
-        }
-
-        $Copy_Paste .= "<input type='image' name='editPaste' class='center' 
-          src='".$img."' alt='"._("Paste")."' title='".$this->CopyPasteHandler->GetCurrentDn()."'>&nbsp;";
-      }else{
-        $Copy_Paste .= "<img class='center' src='images/cant_editpaste.png' alt='"._("Can't paste")."'>&nbsp;";
-      }
-    }else{
-      $Copy_Paste ="";
-    }
-
-    // Managment
-    $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
-      " <input class='center' type='image' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
-      " <input class='center' type='image' align='middle' src='images/list_back.png' title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
-      " <input class='center' type='image' align='middle' src='images/list_home.png' title='"._("Go to users department")."' alt='"._("Home")."' name='dep_home'>&nbsp;".
-      " <input class='center' type='image' src='images/list_reload.png' align='middle' title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-      " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-      " <input class='center' type='image' align='middle' src='images/list_new_app.png' alt='"._("new")."' title='"._("Create new application")."' name='appl_new'>&nbsp;".
-      $Copy_Paste.
-      " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-      _("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
-      " <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-      "</div>";
-
-
-
-    if($this->CopyPasteHandler){
-      $actions = "<input class='center' type='image' 
-        src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
-      $actions.= "<input class='center' type='image' 
-        src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
-      $actions.= "<input class='center' type='image' 
-        src='images/edit.png' alt='"._("edit")."' name='appl_edit_%KEY%' title='"._("Edit this entry")."'>";
-      $actions.= "<input class='center' type='image' 
-        src='images/edittrash.png' alt='"._("delete")."' name='appl_del_%KEY%' title='"._("Delete this entry")."'>";
-    }else{
-
-      $actions = "<input class='center' type='image' 
-        src='images/edit.png' alt='"._("edit")."' name='appl_edit_%KEY%' title='"._("Edit this entry")."'>";
-      $actions.= "<input class='center' type='image' 
-        src='images/edittrash.png' alt='"._("delete")."' name='appl_del_%KEY%' title='"._("Delete this entry")."'>";
-    }
-
-
-    // Defining Links
-    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
-
-    // image Buttons
-    $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
-    $userimg  = "<img class='center' src='images/select_groups.png' alt='User'    title='%s'>";
-
-    // Extension images
-    $applimg  = "<img class='center' src='images/select_application.png' alt='A'  title='"._("Application")."'>";
-
-    // Space
-    $empty    = "<img class='center' src='images/empty.png' style='width:16px;height:16px;' alt=''>";
-
-
-    $divlist = new divlist("applicationtabs");
-    $divlist->SetHeader(array(
-          array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
-          array("string" => _("Application name")." / "._("Department"), "attach" => "style=''"),
-          array("string" => _("Actions"), "attach" => "style='width:80px;border-right:0px;text-align:right;'")
-          ));
-
-
-    $divlist->SetSummary(_("This table displays all groups, in the selected tree."));
-    $divlist->SetEntriesPerPage(0);
-
-    foreach($this->departments as $key=> $val){
-
-      if(!isset($this->config->departments[trim($key)])){
-        $this->config->departments[trim($key)]="";
-      }
-
-      $non_empty="";
-      $keys= str_replace("/","\/",$key);
-      foreach($this->config->departments as $keyd=>$vald ){
-        if(preg_match("/".$keys."\/.*/",$keyd)){
-          $non_empty="full";
-        }
-      }
-
-      $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
-      $field3 = array("string" => "&nbsp;", "attach" => "style='width:80px;border-right:0px;text-align:right;'");
-
-      $divlist->AddEntry(array($field1,$field2,$field3));
-    }
-
-    foreach($this->applications as $key => $val){
-      $title = "title='dn:&nbsp;".@LDAP::fix($val['dn'])."'";
-
-      if(!isset($val['description'][0])){
-        $desc = "";
-      }else{
-        $desc = " - [ ".$val['description'][0]." ]";
-      }
-      $field1 = array("string" => sprintf($applimg,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)), "attach" => "style='' ".$title);
-      $field3 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:80px;border-right:0px;text-align:right;'");
-
-      $divlist->AddEntry(array($field1,$field2,$field3));
-    }
-
-    $smarty->assign("applicationshead", $listhead);
-    $smarty->assign("applications", $divlist->DrawList());
-    $smarty->assign("search_image", get_template_path('images/search.png'));
-    $smarty->assign("tree_image", get_template_path('images/tree.png'));
-    $smarty->assign("infoimage", get_template_path('images/info.png'));
-    $smarty->assign("launchimage", get_template_path('images/launch.png'));
-    $smarty->assign("releaseimage"   , get_template_path('images/branch.png'));
-    $smarty->assign("deplist", $this->config->idepartments);
-    $smarty->assign("regex", $appfilter['regex']);
-
-    if($this->enableReleaseManagement){
-      $smarty->assign("releases",     $this->Releases );
-      $smarty->assign("releaseKeys",   array_flip($this->Releases));
-      $smarty->assign("select_release",$this->Release);
-    }
-
-    $smarty->assign("enableReleaseManagement",$this->enableReleaseManagement);
-
-    /* Extend if we are not using javascript */
-    $smarty->assign("apply", apply_filter());
-    $smarty->assign("alphabet", generate_alphabet());
-    $smarty->assign("hint", print_sizelimit_warning());
-
-    return($smarty->fetch(get_template_path('headpage.tpl', TRUE)));
+    /* Display dialog with system list */
+    $this->DivListApplication->execute();
+    $this->DivListApplication->AddDepartments($this->DivListApplication->selectedBase);
+    $this->reload();
+    $this->DivListApplication->setEntries($this->applications);
+    return($this->DivListApplication->Draw());
   }
 
 
   function reload()
   {
-    /* Get config */
-    $appfilter= get_global('appfilter');
+    $this->applications= array();
 
     /* Set base for all searches */
-    $base= $this->Release;
-    
-    /* Regex filter? */
-    if ($appfilter['regex'] != ""){
-      $regex= $appfilter['regex'];
-    } else {
-      $regex= "*";
-    }
+    $base       = $this->DivListApplication->selectedBase;
+    $release    = $this->DivListApplication->selectedRelease;
+    $Regex      = $this->DivListApplication->Regex;
+    $SubSearch  = $this->DivListApplication->SubSearch; 
+    $Flags      =  GL_NONE | GL_SIZELIMIT;
+    $Filter     = "(&(cn=".$Regex.")(objectClass=gosaApplication))";
+    $tmp        = array();
+    $Releases   = $this->getReleases($base);
 
-    /* Generate application list */
-    //FIXME: No GL_SIZELIMIT?
-    $res= get_list("(&(cn=$regex)(objectClass=gosaApplication))", $this->ui->subtreeACL,
-                   $base, array("*"), GL_NONE);
-    $this->applications= array();
-    foreach ($res as $value){
-      $this->applications[]= $value;
-    }
-    reset ($this->applications);
-
-
-
-    /* NEW LIST MANAGMENT
-     * We also need to search for the departments
-     * So we are able to navigate like in konquerer
-     */
-    $peopleOU = get_people_ou();
-    $base2 = $_SESSION['CurrentMainBase'];
-
-    /* Get all departments within this subtree */
-    $deps= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))", $this->ui->subtreeACL,
-        $base2, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
-
-    $this->departments = array();
-    foreach($deps as $value){
-      if(isset($value['description'][0])){
-        $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
+    if(!$this->enableReleaseManagement){
+      $use_base = $base;
+    }else{
+      if(isset($Releases[$release])){
+        $use_base  = $release;
       }else{
-        $this->departments[$value['dn']]= get_sub_department($value['dn']);
+        $use_base  = $base;
       }
     }
-    natcasesort($this->departments);
-    /* END NEW LIST MANAGMENT
-     */
 
-    $tmp=array();
-    foreach($this->applications as $tkey => $val ){
+    if($SubSearch){
+      $Flags    |= GL_SUBSEARCH;  
+    }
+   
+    $res= get_list($Filter, $this->ui->subtreeACL,$use_base, array("cn","description","dn","objectClass"), $Flags);
+    foreach ($res as $val){
       $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
     }
+
     ksort($tmp);
     $this->applications=array();
     foreach($tmp as $val){
       $this->applications[]=$val;
     }
     reset ($this->applications);
-
-
   }
 
   function remove_from_parent()
@@ -639,7 +412,7 @@ class applicationManagement extends plugin
      */
     if(($s_action == "editPaste") || ($this->CopyPasteHandler->stillOpen())){
       $this->CopyPasteHandler->save_object();
-      $this->CopyPasteHandler->SetVar("base", $_SESSION['CurrentMainBase']);
+      $this->CopyPasteHandler->SetVar("base", $this->DivListApplication->selectedBase);
 
       if($str = $this->CopyPasteHandler->execute()) {
         return($str);
@@ -666,35 +439,11 @@ class applicationManagement extends plugin
     }
   }
 
-  /* Save data to object */
-  function save_object()
-  {
-  }
-
-
-  /* Check values */
-  function check()
-  {
-  }
-
-
   /* Save to LDAP */
   function save()
   {
     /* Optionally execute a command after we're done */
     $this->postcreate();
-  }
-
-  function adapt_from_template($dn)
-  {
-  }
-
-  function password_change_needed()
-  {
-  }
-
-  function show_header($button_text, $text, $disabled= FALSE)
-  {
   }
 
   function remove_lock()
@@ -704,6 +453,14 @@ class applicationManagement extends plugin
     }
   }
 
+  function save_object() {
+    $this->DivListApplication->save_object();
+  }
+
+  function check() {}
+  function adapt_from_template($dn) {}
+  function password_change_needed() {}
+  function show_header($button_text, $text, $disabled= FALSE) {}
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

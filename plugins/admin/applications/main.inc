@@ -31,6 +31,7 @@ if ($remove_lock){
 		$_SESSION['applicationManagement']= new applicationManagement ($config, $_SESSION['ui']);
 	}
 	$applicationManagement= $_SESSION['applicationManagement'];
+	$applicationManagement->save_object();
 	$output= $applicationManagement->execute();
 
 	/* Page header*/
