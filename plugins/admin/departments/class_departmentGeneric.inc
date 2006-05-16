@@ -367,7 +367,7 @@ class department extends plugin
       $smarty= get_smarty();
       echo "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
       echo "<body style='background-image:none;margin:3px;color:black'>";
-      echo "<h3>".sprintf(_("Tagging '%s'."),"<i>".$this->dn."</i>")."</h3>";
+      echo "<h3>".sprintf(_("Tagging '%s'."),"<i>".@LDAP::fix($this->dn)."</i>")."</h3>";
     }
 
 		$add= $this->is_administrational_unit;
