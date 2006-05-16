@@ -991,7 +991,7 @@ function print_red()
           $_SESSION['errors'].= "<div style='margin-left:15%;margin-top:100px;background-color:white;padding:5px;border:5px solid red;width:60%;position:absolute' id='e_layer'>".
           "<table style='width:100%' summary='' border=0><tr><td style='vertical-align:top;padding:10px'><img alt='' src='".get_template_path('images/warning.png')."'></td>".
           "<td style='width:100%'><h1>"._("An error occured while processing your request")."</h1>".
-          "<b>$string</b> "._("Please check your input and fix the contents of the highlighted field. Press 'OK' to close this message box.")."</td>".
+          "<b>$string</b> "._("Please check your input and fix the error. Press 'OK' to close this message box.")."</td>".
           "</tr><tr><td colspan='2' align='center'><br><button ".(($_SESSION['js']==FALSE)?"type='submit'":"type='button'")." style='width:80px' onClick='hide(\"e_layer\")'>"._("OK")."</button></td></tr></table></div>";
         }
   #########################
