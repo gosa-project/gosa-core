@@ -960,45 +960,35 @@ function print_red()
       $_SESSION['errorsAlreadyPosted'][$string]++;
 
     }else{
-#      if((!empty($_SESSION['LastError'])) && ($_SESSION['errorsAlreadyPosted'][$_SESSION['LastError']]>1)){
-#        $_SESSION['errors'].= "<div align=\"left\" style=\"border-width:5px;".
-#          "border-style:solid;border-color:red; background-color:black;".
-#          "margin-bottom:10px; padding:8px;\"><table style='width:100%' summary=''><tr><td><img alt=\"\" src=\"".
-#          get_template_path('images/warning.png')."\"></td>".
-#          "<td width=\"100%\" style=\"text-align:center\"><font color=\"#FFFFFF\">".
-#          "<b style='font-size:16px;'>".sprintf(_("Last message repeated %s times."),$_SESSION['errorsAlreadyPosted'][$_SESSION['LastError']])."</b></font></td><td>".
-#          "<img alt=\"\"src=\"".get_template_path('images/warning.png').
-#          "\"></td></tr></table></div>\n";
-#      }
-
-#      if($string != NULL){
-#        $_SESSION['errors'].= "<div align=\"left\" style=\"border-width:5px;".
-#          "border-style:solid;border-color:red; background-color:black;".
-#          "margin-bottom:10px; padding:8px;\"><table style='width:100%' summary=''><tr><td><img alt=\"\" src=\"".
-#          get_template_path('images/warning.png')."\"></td>".
-#          "<td width=\"100%\" style=\"text-align:center\"><font color=\"#FFFFFF\">".
-#          "<b style='font-size:16px;'>$string</b></font></td><td>".
-#          "<img alt=\"\"src=\"".get_template_path('images/warning.png').
-#          "\"></td></tr></table></div>\n";
-######### Test #########
       if($string != NULL){
-        if (!preg_match('/[.!?]$/', $string)){
-          $string.= ".";
+        if (preg_match("/"._("LDAP error:")."/", $string)){
+          $addmsg= _("Problems with the LDAP server mean that you probably lost the last changes. Please check your LDAP setup for possible errors and try again.");
+          $img= "images/error.png";
+        } else {
+          if (!preg_match('/[.!?]$/', $string)){
+            $string.= ".";
+          }
+          $string= preg_replace('/<br>/', ' ', $string);
+          $img= "images/warning.png";
+          $addmsg= _("Please check your input and fix the error. Press 'OK' to close this message box.");
         }
-        $string= preg_replace('/<br>/', ' ', $string);
       
         if(isset($_SESSION['errors']) && strlen($_SESSION['errors'])==0) {
-          $_SESSION['errors'].= "<div style='margin-left:15%;margin-top:100px;background-color:white;padding:5px;border:5px solid red;width:60%;position:absolute' id='e_layer'>".
-          "<table style='width:100%' summary='' border=0><tr><td style='vertical-align:top;padding:10px'><img alt='' src='".get_template_path('images/warning.png')."'></td>".
-          "<td style='width:100%'><h1>"._("An error occured while processing your request")."</h1>".
-          "<b>$string</b> "._("Please check your input and fix the error. Press 'OK' to close this message box.")."</td>".
-          "</tr><tr><td colspan='2' align='center'><br><button ".(($_SESSION['js']==FALSE)?"type='submit'":"type='button'")." style='width:80px' onClick='hide(\"e_layer\")'>"._("OK")."</button></td></tr></table></div>";
+          $_SESSION['errors'].= "<div style='margin-left:15%;margin-top:100px;".
+            "background-color:white;padding:5px;border:5px solid red;width:55%;".
+            "position:absolute' id='e_layer'><table style='width:100%' summary='' border=0>".
+            "<tr><td style='vertical-align:top;padding:10px'><img alt='' src='".
+            get_template_path($img)."'></td>".
+            "<td style='width:100%'><h1>"._("An error occured while processing your request").
+            "</h1><b>$string</b><br><br>$addmsg</td></tr><tr><td colspan='2' align='center'><br><button ".
+            (($_SESSION['js']==FALSE)?"type='submit'":"type='button'").
+            " style='width:80px' onClick='hide(\"e_layer\")'>".
+            _("OK")."</button></td></tr></table></div>";
         }
-  #########################
+
       }else{
         return;
       }
-      #$_SESSION['errorsAlreadyPosted'] = array();
       $_SESSION['errorsAlreadyPosted'][$string] = 1;
 
     }
@@ -1158,9 +1148,9 @@ function show_ldap_error($message, $addon= "")
 {
   if (!preg_match("/Success/i", $message)){
     if ($addon == ""){
-      print_red (_("LDAP error:")." $message");
+      print_red (_("LDAP error: $message"));
     } else {
-      print_red ("$addon (LDAP error: $message)");
+      print_red ("$addon<br><br><b>"._("LDAP error:")."</b> $message");
     }
     return TRUE;
   } else {
