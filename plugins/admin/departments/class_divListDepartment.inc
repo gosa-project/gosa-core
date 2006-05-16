@@ -38,10 +38,10 @@ class divListDepartment extends MultiSelectWindow
     $this->EnableSaveButton (false);
 
     /* set Page header */
-    $this->AddHeader(array("string" => "&nbsp;","attach"=>"style='width:20px;'"));
-    $this->AddHeader(array("string" => _("Groupname / Department")));
-    $this->AddHeader(array("string" => _("Properties"),"attach"=>"style='width:136px;'"));
-    $this->AddHeader(array("string" => _("Actions"),"attach"=>"style='width:80px;border-right:0px;'"));
+    $this->AddHeader(array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"));
+    $this->AddHeader(array("string"=>_("Department name"), "attach" => "style=''"));
+    $this->AddHeader(array("string" =>_("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'"));
+
 
     /* Add SubSearch checkbox */    
     $this->AddCheckBox("SubSearch",  _("Select to search within subtrees"), _("Ignore subtrees"), false);
