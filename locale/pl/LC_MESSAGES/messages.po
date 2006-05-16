@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polski\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2006-05-16 16:41+0100\n"
+"PO-Revision-Date: 2006-05-16 23:19+0100\n"
 "Last-Translator: Piotr Rybicki <meritus@innervision.pl>\n"
 "Language-Team: Piotr Rybicki <meritus@innervision.pl>\n"
 "MIME-Version: 1.0\n"
@@ -4191,7 +4191,7 @@ msgstr "Kontakt"
 
 #: plugins/addons/addressbook/contents.tpl:37
 msgid "The telephone list plugin provides list and search facilities for the people in your site. You may want to specify the asterisk [*] like in 'Go*us' to find 'Gonicus'. Use the filters below to narrow down your search."
-msgstr ""
+msgstr "Dodatek lista telefonów udostępnia listę oraz mechanizmy wyszukiwania dla ludzi w firmie. Mozna podawać gwiazdkę [*] np. 'Go*us' aby znależć 'Gonicus'. Użyj filtrów poniżej aby zawęzić wyniki wyszukiwania."
 
 #: plugins/addons/addressbook/contents.tpl:47
 msgid "Add entry"
@@ -9534,19 +9534,16 @@ msgid "Mail distribution list"
 msgstr "Pocztowa lista dystrybucyjna"
 
 #: plugins/admin/ogroups/mail.tpl:11
-#, fuzzy
 msgid "Primary mail address for this distribution list"
-msgstr "Adres podstawowy dla tego współdzielonego folderu"
+msgstr "Adres podstawowy dla tej listy dystrybucyjnej"
 
 #: plugins/admin/ogroups/class_mailogroup.inc:41
-#, fuzzy
 msgid "This group has mail features enabled. You can disable them by clicking below."
-msgstr "To konto posiada rozszerzenia poczty. Można je wyłączyć klikając poniżej."
+msgstr "Ta grupa posiada rozszerzenia poczty. Można je wyłączyć klikając poniżej."
 
 #: plugins/admin/ogroups/class_mailogroup.inc:43
-#, fuzzy
 msgid "This group has mail features disabled. You can enable them by clicking below."
-msgstr "To konto nie posiada rozszerzenia poczty. Można je włączyć klikając poniżej."
+msgstr "Ta grupa nie posiada rozszerzenia poczty. Można je włączyć klikając poniżej."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:79
 #, fuzzy
@@ -11149,7 +11146,7 @@ msgstr "Zastosuj filtr"
 
 #: include/functions.inc:1630
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-msgstr ""
+msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 #: include/functions.inc:1673
 #, php-format
@@ -11224,7 +11221,7 @@ msgstr "Tworzenie kopii %s"
 
 #: include/class_ldap.inc:450
 msgid "Processing"
-msgstr ""
+msgstr "Przetwarzanie"
 
 #: include/class_ldap.inc:490
 msgid "Error while fetching source dn - aborted!"
@@ -11277,9 +11274,9 @@ msgid "Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exi
 msgstr ""
 
 #: include/class_plugin.inc:917
-#, fuzzy, php-format
+#, php-format
 msgid "Object '%s' is already tagged"
-msgstr "Podana nazwa jest już używana."
+msgstr "Obiekt '%s' jest już zaznaczony"
 
 #: include/class_plugin.inc:924
 #, fuzzy, php-format
@@ -11311,7 +11308,7 @@ msgstr ""
 #: ihtml/themes/default/framework.tpl:14
 #: ihtml/themes/default/framework.tpl:24
 msgid "You are currently editing a database entry. Do you want to dismiss the changes?"
-msgstr ""
+msgstr "Obecnie edytujesz bazę danych. Czy chcesz porzucić zmiany?"
 
 #: include/class_password-methods.inc:165
 #, php-format
@@ -11566,7 +11563,7 @@ msgstr "register_globals jest mechanizmem PHP umożliwiającym takie ustawienie 
 
 #: include/functions_setup.inc:286
 msgid "PHP session.gc_maxlifetime (>= 86400 seconds)."
-msgstr ""
+msgstr "PHP session.gc_maxlifetime (>= 86400 seconds)."
 
 #: include/functions_setup.inc:287
 msgid "PHP uses this value for the garbage collector to delete old sessions, setting this value to one day will prevent loosing session and cookie  before they really timeout."
@@ -11823,9 +11820,9 @@ msgid "%s results for your search with the keyword %s interpreted as %s"
 msgstr ""
 
 #: include/functions_helpviewer.inc:462
-#, fuzzy, php-format
+#, php-format
 msgid "%s%% hit rate in file %s"
-msgstr "%s%% hit rate in file %s"
+msgstr "%s%% trafień w pliku %s"
 
 #: include/class_debconfTemplate.inc:260
 msgid "This package has no debconf options."
@@ -11834,7 +11831,7 @@ msgstr "Ten pakiet nie ma opcji debconf."
 #: include/functions_dns.inc:166
 #, php-format
 msgid "Can't find reverse zone for dns zone '%s'. Aborting parsing this zone."
-msgstr ""
+msgstr "Nie można znaleźć stefy odwrotnej dla strefy '%s'. Przerywam analizę tej strefy."
 
 #: include/functions_dns.inc:171
 #, php-format
