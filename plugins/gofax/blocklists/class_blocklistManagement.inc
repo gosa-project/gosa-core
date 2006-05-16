@@ -11,79 +11,50 @@ class blocklist extends plugin
   var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* blocklist attributes */
-  var $cn= "";
-  var $description= "";
-  var $type= "";
-  var $goFaxBlocklist= array();
-  var $base= "";
+  var $cn               = "";
+  var $description      = "";
+  var $type             = "";
+  var $base             = "";
 
-  /* Headpage attributes */
-  var $blocklists= array();
-
-  /* attribute list for save action */
-  var $attributes= array("cn", "description");
-  var $objectclasses= array();
+  var $goFaxBlocklist   = array();
+  var $blocklists       = array();
+  var $attributes       = array("cn", "description");
+  var $objectclasses    = array();
+  var $DivListBlocklist = NULL;
 
   function blocklist ($config, $ui)
   {
-    $this->ui= $ui;
-    $this->dn= "";
-    $this->config= $config;
+    /* Init class */
+    $this->ui     = $ui;
+    $this->dn     = "";
+    $this->config = $config;
 
-    if(!isset($_SESSION['CurrentMainBase'])){
-      $_SESSION['CurrentMainBase'] = $this->base;
-    }else{
-      $this->base = $_SESSION['CurrentMainBase'];
-    }
+    $ui           = get_userinfo();
+    $acl          = get_permissions ($ui->dn, $ui->subtreeACL);
+    $this->acl    = get_module_permission($acl, "blocklists", $ui->dn);
 
-    /* Get global filter config */
-    if (!is_global("blockfilter")){
-      $ui= get_userinfo();
-      $this->base= get_base_from_people($ui->dn);
-      $blockfilter= array("sendlists" => "checked",
-          "receivelists" => "checked",
-          "entry" => "*",
-          "regex" => "*");
-      register_global("blockfilter", $blockfilter);
-    }else{
-      $blockfilter = $_SESSION["blockfilter"];
-    }
-
-    $ui= get_userinfo();
-    $acl= get_permissions ($ui->dn, $ui->subtreeACL);
-    $this->acl= get_module_permission($acl, "blocklists", $ui->dn);
+    $this->DivListBlocklist = new divListBlocklist($this->config,$this);
   }
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
+
+    /***************
+      Init vars 
+     ***************/
 
     /* Get global smarty instance */
-    $smarty= get_smarty();
-    $blockfilter   = get_global("blockfilter"); // contains Filter Settings
+    $smarty       = get_smarty();
     $s_action     = "";                       // Contains the action to proceed
     $s_entry      = "";                       // The value for s_action
     $base_back    = "";                       // The Link for Backbutton
 
-    /* Start for New List Managment */
-    if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
-      $s_action="open";
-      $s_entry = base64_decode($_GET['dep_id']);
-      $_SESSION['CurrentMainBase']= $this->config->departments[trim($s_entry)];
-      $this->reload();
-    }
 
-    /* Cancel dialog */
-    if (isset($_POST['edit_cancel']) || isset($_POST['delete_blocklist_cancel']) ||
-        isset($_POST['delete_blocklist_confirm']) || isset($_POST['delete_lock'])){
-
-      if(!isset($_POST['delete_blocklist_confirm'])){
-        $this->clear_fields();
-      }
-      del_lock ($this->dn);
-      unset($_SESSION['objectinfo']);
-    }
+    /***************
+      Fetch posts 
+     ***************/
 
     /* Test Posts */
     foreach($_POST as $key => $val){
@@ -96,23 +67,15 @@ class blocklist extends plugin
         $s_action="edit";
         $s_entry  = preg_replace("/user_".$s_action."_/i","",$key);
         // Post for new
-      }elseif(preg_match("/dep_back.*/i",$key)){
-        $s_action="back";
       }elseif(preg_match("/user_new.*/",$key)){
         $s_action="new";
-      }elseif(preg_match("/dep_home.*/i",$key)){
-        $s_action="home";
       }elseif(preg_match("/user_tplnew.*/i",$key)){
         $s_action="new_tpl";
       }elseif(preg_match("/user_chgpw.*/i",$key)){
         $s_action="change_pw";
         $s_entry  = preg_replace("/user_chgpw_/i","",$key);
-      }elseif(preg_match("/dep_root.*/i",$key)){
-        $s_action="root";
       }
     }
-
-
 
     if((isset($_GET['act']))&&($_GET['act']=="edit_entry")){
       $s_action ="edit";
@@ -121,64 +84,28 @@ class blocklist extends plugin
 
     $s_entry  = preg_replace("/_.$/","",$s_entry);
 
-    /* Department changed? */
-    if(isset($_POST['CurrentMainBase']) && $_POST['CurrentMainBase']){
-      $_SESSION['CurrentMainBase'] = $_POST['CurrentMainBase'];
-      $this->reload();
-    }
 
-    /* Homebutton is posted */
-    if($s_action=="home"){
-      $_SESSION['CurrentMainBase'] =preg_replace("/^[^,]+,/","",$this->ui->dn);
-      $_SESSION['CurrentMainBase'] =preg_replace("/^[^,]+,/","",$_SESSION['CurrentMainBase']);
-      $this->reload();
-    }
+    /***************
+      Cancel some dialogs  
+     ***************/
 
-    if($s_action=="root"){
-      $_SESSION['CurrentMainBase'] =$this->config->current['BASE'];
-      $this->reload();
-    }
-    
-    /* If Backbutton is Posted */
-    if($s_action=="back"){
-      $base_back          = preg_replace("/^[^,]+,/","", $_SESSION['CurrentMainBase']);
-      $base_back          = convert_department_dn($base_back);
+    /* Cancel dialog */
+    if (isset($_POST['edit_cancel']) || 
+        isset($_POST['delete_blocklist_cancel']) ||
+        isset($_POST['delete_blocklist_confirm']) || 
+        isset($_POST['delete_lock'])){
 
-      if(isset($this->config->departments[trim($base_back)])){
-        $_SESSION['CurrentMainBase'] = $this->config->departments[trim($base_back)];
-      }else{
-        $_SESSION['CurrentMainBase'] = $this->config->departments["/"];
+      if(!isset($_POST['delete_blocklist_confirm'])){
+        $this->clear_fields();
       }
-      $this->reload();
+      del_lock ($this->dn);
+      unset($_SESSION['objectinfo']);
     }
 
-    register_global("blockfilter", $blockfilter);
 
-    /* Save data */
-    $blockfilter= get_global("blockfilter");
-    foreach( array( "entry", "regex") as $type){
-      if (isset($_POST[$type])){
-        $blockfilter[$type]= $_POST[$type];
-      }
-    }
-    if (isset($_POST['CurrentMainBase'])){
-      foreach( array("sendlists", "receivelists") as $type){
-
-        if (isset($_POST[$type])) {
-          $blockfilter[$type]= "checked";
-        } else {
-          $blockfilter[$type]= "";
-        }
-      }
-    }
-    if (isset($_GET['search'])){
-      $s= mb_substr($_GET['search'], 0, 1, "UTF8")."*";
-      if ($s == "**"){
-        $s= "*";
-      }
-      $blockfilter['regex']= $s;
-    }
-    register_global("blockfilter", $blockfilter);
+    /***************
+      Cancel some dialogs  
+     ***************/
 
     /* Create new blocklist? */
     if ($s_action=="new"){
@@ -186,6 +113,11 @@ class blocklist extends plugin
       $this->dn= "new";
       plugin::plugin ($this->config, $this->dn);
     }
+
+
+    /***************
+      Edit blocklist 
+     ***************/
 
     /* Edit selected blocklist? */
     if (($s_action=="edit") && (empty($this->dn))){
@@ -221,6 +153,11 @@ class blocklist extends plugin
       }
     }
 
+
+    /***************
+      Remove blocklist
+     ***************/
+
     /* Delete blocklist requested */
     if ($s_action=="del"){
       $this->dn=$this->blocklists[$s_entry]['dn'];
@@ -237,6 +174,11 @@ class blocklist extends plugin
       }
     }
 
+
+    /***************
+      Remove blocklist confirmed
+     ***************/
+
     /* Finally delete blocklist */
     if (isset($_POST['delete_blocklist_confirm'])){
       if (chkacl($this->acl, "delete") == ""){
@@ -249,6 +191,11 @@ class blocklist extends plugin
     }
 
 
+    /***************
+      Add numer to blocklist
+     ***************/
+
+
     /* Handle interactions: add */
     if (isset($_POST['add_number']) && $_POST['number'] != ""){
       if (is_phone_nr($_POST['number'])){
@@ -258,10 +205,20 @@ class blocklist extends plugin
       }
     }
 
+
+    /***************
+      Delete number from list
+     ***************/
+
     /* Handle interactions: delete */
     if (isset($_POST['delete_number']) && count($_POST['numbers']) > 0){
       $this->delNumber ($_POST['numbers']);
     }
+
+
+    /***************
+      Edit finished
+     ***************/
 
     /* What about finish? */
     if ((isset($_POST['edit_finish'])) && (!empty($this->dn))){
@@ -275,7 +232,7 @@ class blocklist extends plugin
         if ($this->dn == "new"){
           $this->dn= "cn=$this->cn,ou=gofax,ou=systems,".$this->base;
         }
-        
+
         $this->save ();
         gosa_log ("Blocklist object'".$this->dn."' has been saved");
         $this->dn= "";
@@ -287,140 +244,68 @@ class blocklist extends plugin
       }
     }
 
-    /* Headpage or normal plugin screen? */
-    if ($this->dn == ""){
-      /* Check sorting variable */
-      $this->reload();
 
-      /* Check for exeeded sizelimit */
-      if (($message= check_sizelimit()) != ""){
-        return($message);
+    /***************
+      Object currently in edit  
+     ***************/
+
+    if($this->dn){
+
+      /* Set base */
+      if ($this->base == ""){
+        if ($this->dn == "new"){
+          $ui= get_userinfo();
+          $this->base= dn2base($ui->dn);
+        } else {
+          $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,/", "", $this->dn);
+        }
       }
 
-   $options= "";
-    foreach ($this->config->idepartments as $key => $value){
-            if ($_SESSION['CurrentMainBase'] == $key){
-                    $options.= "<option selected value='$key'>$value</option>";
-            } else {
-                    $options.= "<option value='$key'>$value</option>";
-            }
-    }
-
-
-
-      /* NEW LIST MANAGMENT */
-      $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
-        " <input class='center' type='image' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
-        " <input class='center' type='image' align='middle' src='images/list_back.png' title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
-        " <input class='center' type='image' align='middle' src='images/list_home.png' title='"._("Go to users department")."' alt='"._("Home")."' name='dep_home'>&nbsp;".
-        " <input class='center' type='image' src='images/list_reload.png' align='middle' title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-        " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-        " <input class='center' type='image' align='middle' src='images/list_new_blocklist.png' title='"._("Create new blocklist")."' alt='"._("New Blocklist")."' name='user_new'>&nbsp;".
-        " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;"._("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
-        " <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-        "</div>";
-
-      $action= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit user")."'>";
-      $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete user")."'>";
-
-
-      $divlist = new divlist("faxtabs");
-      $divlist->SetHeader(array(
-            array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
-            array("string" => _("Blocklist name")." / "._("Department"), "attach" => "style=''"),
-            array("string" => _("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'" )));
-
-
-      $divlist->SetSummary(_("This table displays faxblocklists for the selected tree."));
-      $divlist->SetEntriesPerPage(0);
-
-      // Defining Links
-      $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
-      foreach($this->departments as $key=> $val){
-        if(!isset($this->config->departments[trim($key)])){
-          $this->config->departments[trim($key)]="";
-        }
-
-        $non_empty="";
-        $keys= str_replace("/","\/",$key);
-        foreach($this->config->departments as $keyd=>$vald ){
-          if(preg_match("/".$keys."\/.*/",$keyd)){
-            $non_empty="full";
-          }
-        }
-
-        $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
-        $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
-        $field3 = array("string" => "&nbsp;", "attach" => "style='width:60px;border-right:0px;text-align:right;'");
-        $divlist->AddEntry(array($field1,$field2,$field3));
+      /* Fill templating stuff */
+      $smarty->assign("bases", $this->config->idepartments);
+      $smarty->assign("base_select", $this->base);
+      $smarty->assign("types", array(0 => _("send"), 1 => _("receive")));
+      if ($this->dn == "new" || preg_match ("/,ou=incoming,/", $this->dn)){
+        $smarty->assign("selectmode", "");
+        $smarty->assign("mode", "");
+      } else {
+        $smarty->assign("selectmode", "disabled");
+        $smarty->assign("mode", "readonly");
+      }
+      foreach(array("cn", "description", "type", "goFaxBlocklist") as $val){
+        $smarty->assign("$val", $this->$val);
+        $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
       }
 
-      // User and Template  Images
-      $blockimg = "<img class='center' src='images/list_blocklist.png' alt='User' title='%s'>";
-      $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
-
-      foreach($this->blocklists as $key => $val){
-        // Generate Array to Add
-        $display= "[".$val["cn"][0]."]";
-        $field1 = array("string" => sprintf($blockimg,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
-        $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='dn:&nbsp;".@LDAP::fix($val['dn'])."'");
-        $field3 = array("string" => preg_replace("/%KEY%/", "$key", $action), "attach" => "style='width:60px;border-right:0px;text-align:right;'");
-        $divlist->AddEntry( array($field1,$field2,$field3));
+      /* Lock blocklist type for non new entries */
+      if ($this->dn != "new"){
+        $smarty->assign('typeACL', "disabled");
       }
 
       /* Show main page */
-      $smarty->assign("blocklistshead", $listhead);
-      $smarty->assign("blocklists", $divlist->DrawList());
-      $smarty->assign("search_image", get_template_path('images/search.png'));
-      $smarty->assign("tree_image", get_template_path('images/tree.png'));
-      $smarty->assign("infoimage", get_template_path('images/info.png'));
-      $smarty->assign("launchimage", get_template_path('images/launch.png'));
-      $smarty->assign("apply", apply_filter());
-      foreach( array( "entry", "regex", "sendlists", "receivelists") as $type){
-        $smarty->assign("$type", $blockfilter[$type]);
+      return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
+
+    }else{
+
+      /***************
+        Divlist dialog 
+       ***************/
+
+      /* Display dialog with system list */
+      $this->DivListBlocklist->execute();
+
+      /* Add departments if subsearch is disabled */
+      if(!$this->DivListBlocklist->SubSearch){
+        $this->DivListBlocklist->AddDepartments($this->DivListBlocklist->selectedBase);
       }
-      $smarty->assign("deplist", $this->config->idepartments);
-      $smarty->assign("alphabet", generate_alphabet());
-      $smarty->assign("hint", print_sizelimit_warning());
-      $smarty->assign("CurrentMainBase",$_SESSION['CurrentMainBase']);
-      return($smarty->fetch(get_template_path('headpage.tpl', TRUE)));
+      $this->reload();
+      $this->DivListBlocklist->setEntries($this->blocklists);
+      return($this->DivListBlocklist->Draw());
     }
-
-    /* Set base */
-    if ($this->base == ""){
-      if ($this->dn == "new"){
-        $ui= get_userinfo();
-        $this->base= dn2base($ui->dn);
-      } else {
-        $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,/", "", $this->dn);
-      }
-    }
-
-    /* Fill templating stuff */
-    $smarty->assign("bases", $this->config->idepartments);
-    $smarty->assign("base_select", $this->base);
-    $smarty->assign("types", array(0 => _("send"), 1 => _("receive")));
-    if ($this->dn == "new" || preg_match ("/,ou=incoming,/", $this->dn)){
-      $smarty->assign("selectmode", "");
-      $smarty->assign("mode", "");
-    } else {
-      $smarty->assign("selectmode", "disabled");
-      $smarty->assign("mode", "readonly");
-    }
-    foreach(array("cn", "description", "type", "goFaxBlocklist") as $val){
-      $smarty->assign("$val", $this->$val);
-      $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
-    }
-
-    /* Lock blocklist type for non new entries */
-    if ($this->dn != "new"){
-      $smarty->assign('typeACL', "disabled");
-    }
-
-    /* Show main page */
-    return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }
 
+
+  /* Clear garbage from edited lists */
   function clear_fields()
   {
     $this->dn= "";
@@ -430,75 +315,40 @@ class blocklist extends plugin
     $this->goFaxBlocklist= array();
   }
 
+
+  /* Reload the list of known blocklists */
   function reload()
   {
-    /* Get config */
-    $blockfilter= get_global('blockfilter');
+    /* Init some vars */
+    $filter = $filter2      = "";
+    $base                   = $this->DivListBlocklist->selectedBase;
+    $Regex                  = $this->DivListBlocklist->Regex;
+    $SubSearch              = $this->DivListBlocklist->SubSearch;
+    $ShowSendBocklists      = $this->DivListBlocklist->ShowSendBocklists;
+    $ShowReceiveBlocklists  = $this->DivListBlocklist->ShowReceiveBlocklists;
+    $Flags                  = GL_SIZELIMIT;
+    $res = $res2            = array();
 
-    /* Set base for all searches */
-    $base= $_SESSION['CurrentMainBase'];
-    $filter= "";
-
-    /* Regex filter? */
-    if ($blockfilter['regex'] != ""){
-      $regex= $blockfilter['regex'];
-    } else {
-      $regex= "*";
-    }
-
-    /* Entry filter? */
-    /* Get list of blocklists to be shown */
-    if ($blockfilter['sendlists'] == "checked"){
-      $filter.= "(objectClass=goFaxSBlock)";
-    }
-    if ($blockfilter['receivelists'] == "checked"){
-      $filter.= "(objectClass=goFaxRBlock)";
-    }
-    if ($filter != ""){
-      $filter= "(|$filter)";
-    }
-
-    if ($blockfilter['entry'] != "" && $blockfilter['entry'] != "*"){
-      $filter.= "(|(goFaxSBlocklist=".$blockfilter['entry'].")(goFaxRBlocklist=".$blockfilter['entry']."))";
-    }
-
-    /* Generate blocklists */
-    //FIXME: No GL_SIZELIMIT?
-    $res= get_list("(&(cn=$regex)$filter)", $this->ui->subtreeACL, "ou=gofax,ou=systems,".$base, 
-                   array("*"), GL_NONE);
-
-    $this->blocklists=$res;
-
-    /* NEW LIST MANAGMENT
-     * We also need to search for the departments
-     * So we are able to navigate like in konquerer
-     */
-    $peopleBase = get_people_ou();
-    if(empty($peopleBase)){
-      $base2 = $base;
+    /* Append subsearch to Flags */
+    if($SubSearch){
+      $Flags |= GL_SUBSEARCH;
     }else{
-      $base2 = preg_replace("/".$peopleBase.",/i","",$base);
+      $base = "ou=gofax,ou=systems,".$base;
+    }  
+
+    /* Create filter */
+    if ($ShowSendBocklists){
+      $filter = "(&(objectClass=goFaxSBlock)(|(cn=".$Regex.")(goFaxSBlocklist=".$Regex.")))";
+      $res= get_list($filter, $this->ui->subtreeACL, $base,array("*"), $Flags);
+    }
+    if ($ShowReceiveBlocklists){
+      $filter2= "(&(objectClass=goFaxRBlock)(|(cn=".$Regex.")(goFaxRBlocklist=".$Regex.")))";
+      $res2= get_list($filter2, $this->ui->subtreeACL, $base,array("*"), $Flags);
     }
    
-    $res3= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))", $this->ui->subtreeACL,
-                    $base2, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
+    $this->blocklists = array_merge($res,$res2);
 
-    $this->departments= array();
-    $tmp = array();
-    foreach ($res3 as $value){
-      $tmp[strtolower($value['dn']).$value['dn']]=$value;
-    }
-    ksort($tmp);
-    foreach($tmp as $value){
-      if(isset($value["description"][0])){
-        $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
-      }else{
-        $this->departments[$value['dn']]= get_sub_department($value['dn']);//$value["description"][0];
-      }
-    }
-
-    /* END NEW LIST MANAGMENT
-     */
+    /* appen && sort */
     $tmp=array();
     foreach($this->blocklists as $tkey => $val ){
       $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
@@ -510,6 +360,7 @@ class blocklist extends plugin
     }
     reset ($this->blocklists);
   }
+
 
   function remove_from_parent()
   {
@@ -524,18 +375,19 @@ class blocklist extends plugin
   /* Save data to object */
   function save_object()
   {
+    $this->DivListBlocklist->save_object();
     plugin::save_object();
 
     if(isset($_POST['base'])){
       $this->base = $_POST['base'];
     }
- 
     foreach($this->attributes as $attr){
       if(isset($_POST[$attr])){
         $this->$attr = $_POST[$attr];
       }
     }
   }
+
 
   /* Check values */
   function check()
@@ -585,7 +437,7 @@ class blocklist extends plugin
   function save()
   {
     plugin::save();
-    
+
 
     /* Type selection */
     if ($this->type == 0){
@@ -606,7 +458,7 @@ class blocklist extends plugin
     $ldap->search("cn=$this->cn",array("cn"));
     $ldap->cat($this->dn, array('dn'));
     $a= $ldap->fetch();
-    
+
     if (count($a)){
       if (!isset($this->attrs["$type"."list"])){
         $this->attrs["$type"."list"]= array();
@@ -626,6 +478,7 @@ class blocklist extends plugin
   }
 
 
+  /* Add number */
   function addNumber($number)
   {
     if (!in_array($number, $this->goFaxBlocklist)){
@@ -634,6 +487,8 @@ class blocklist extends plugin
     }
   }
 
+
+  /* Remove number from list */
   function delNumber($numbers)
   {
     $tmp= array();
@@ -645,6 +500,8 @@ class blocklist extends plugin
     $this->goFaxBlocklist= $tmp;
   }
 
+
+  /* Delete lock */
   function remove_lock()
   {
     if (isset($this->dn)){
