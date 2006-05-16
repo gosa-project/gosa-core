@@ -122,7 +122,7 @@ class divListDepartment extends MultiSelectWindow
 
   function Save()
   {
-    MultiSelectWindow :: Save();  
+    MultiSelectWindow::Save();
   }
 
   function save_object()

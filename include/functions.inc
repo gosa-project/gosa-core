@@ -975,7 +975,7 @@ function print_red()
       
         if(isset($_SESSION['errors']) && strlen($_SESSION['errors'])==0) {
           $_SESSION['errors'].= "<div style='margin-left:15%;margin-top:100px;".
-            "background-color:white;padding:5px;border:5px solid red;width:55%;".
+            "background-color:white;padding:5px;border:5px solid red;width:55%;z-index:150;".
             "position:absolute' id='e_layer'><table style='width:100%' summary='' border=0>".
             "<tr><td style='vertical-align:top;padding:10px'><img alt='' src='".
             get_template_path($img)."'></td>".
