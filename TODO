@@ -1,6 +1,9 @@
 Target for 2.4.1:
 =================
 
+
+* Phone reports && Fax reports : very strange behavior, search string doesn't effect results ...    
+
 * Explaination of several FIXME's. Group removal, etc.
 
 * Add online help (english/german)
