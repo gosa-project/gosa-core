@@ -31,7 +31,7 @@ class ogrouptabs extends tabs
     }
     
     /* Remove terminal group, if theres no terminal left in the object list */
-    if((!preg_match("/T/",$objects))&&(isset($this->by_object['termgroup']))){
+    if(((!preg_match("/T/",$objects)) && (!preg_match("/W/",$objects)))&&(isset($this->by_object['termgroup']))){
       $this->by_object['termgroup']->remove_from_parent();
       unset($this->by_object['termgroup']);
       unset($this->by_name['termgroup']);
@@ -77,10 +77,10 @@ class ogrouptabs extends tabs
     }
 
     /* Add Terminal tab */
-    if((preg_match("/T/",$objects))&&(!isset($this->by_object['termgroup']))){
+    if(((preg_match("/T/",$objects)) || (preg_match("/W/",$objects)))&&(!isset($this->by_object['termgroup']))){
       require_once("class_termgroup.inc");
       if(!isset($this->by_object['termgroup'])){
-        $this->by_name['termgroup']= _("Terminals");
+        $this->by_name['termgroup']= _("Common settings");
         $this->by_object['termgroup']= new termgroup($this->config, $this->dn);
         $this->by_object['termgroup']->parent= &$this;
       }
