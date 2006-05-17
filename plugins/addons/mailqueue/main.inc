@@ -19,9 +19,6 @@
 */
 
 if (!$remove_lock){
-	/* Page header*/
-	$display= print_header(get_template_path('images/mailqueue.png'), _("Mail queue"));
-
 	/* Create mailqueue object on demand */
 	if (!isset($_SESSION['mailqueue']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$_SESSION['mailqueue']= new mailqueue ($config);
@@ -34,8 +31,11 @@ if (!$remove_lock){
 
 	/* Execute formular */
 	$mailqueue->save_object();
-	$display.= $mailqueue->execute ();
+	$display= $mailqueue->execute ();
 	$display.= "<input type=\"hidden\" name=\"ignore\">\n";
+
+	/* Page header*/
+	$display= print_header(get_template_path('images/mailqueue.png'), _("Mail queue")).$display;
 
 	/* Store changes  in session */
 	$_SESSION['mailqueue']= $mailqueue;

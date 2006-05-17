@@ -15,21 +15,20 @@ if ($remove_lock){
 	$blocklist->save_object();
 	$output= $blocklist->execute();
 
-	/* Page header*/
-	if (isset($_SESSION['objectinfo'])){
-	        $display= print_header(get_template_path('images/blocklists.png'), _("Blocklist management"), "<img alt=\"\"align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".@LDAP::fix($_SESSION['objectinfo']));
-	} else {
-	        $display= print_header(get_template_path('images/blocklists.png'), _("Blocklist management"));
-	}
-
 	/* Reset requested? */
 	if (isset($_GET['reset']) && $_GET['reset'] == 1){
 		del_lock ($ui->dn);
 		sess_del ('blocklist');
 	}
 
-	/* Show and save dialog */
+	/* Page header*/
+	if (isset($_SESSION['objectinfo'])){
+	        $display= print_header(get_template_path('images/blocklists.png'), _("Blocklist management"), "<img alt=\"\"align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".@LDAP::fix($_SESSION['objectinfo']));
+	} else {
+	        $display= print_header(get_template_path('images/blocklists.png'), _("Blocklist management"));
+	}
 	$display.= $output;
+
 	$_SESSION['blocklist']= $blocklist;
 }
 ?>

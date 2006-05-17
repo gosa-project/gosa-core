@@ -34,13 +34,6 @@ if ($remove_lock){
 	$FAI->save_object();
 	$output= $FAI->execute();
 
-	/* Page header*/
-	if (isset($_SESSION['objectinfo'])){
-		$display= print_header(get_template_path('images/fai.png'), _("Fully Automatic Installation"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".@LDAP::fix($_SESSION['objectinfo']));
-	} else {
-		$display= print_header(get_template_path('images/fai.png'), _("Fully Automatic Installation"));
-	}
-
 	/* Reset requested? */
 	if (isset($_GET['reset']) && $_GET['reset'] == 1){
 		del_lock ($ui->dn);
@@ -49,7 +42,15 @@ if ($remove_lock){
 
 	/* Show and save dialog */
 	$FAI->save_object();
+
+	/* Page header*/
+	if (isset($_SESSION['objectinfo'])){
+		$display= print_header(get_template_path('images/fai.png'), _("Fully Automatic Installation"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".@LDAP::fix($_SESSION['objectinfo']));
+	} else {
+		$display= print_header(get_template_path('images/fai.png'), _("Fully Automatic Installation"));
+	}
 	$display.= $output;
+
 	$_SESSION['FAI']= $FAI;
 }
 

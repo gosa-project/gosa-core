@@ -15,6 +15,12 @@
      $dfsManagment = $_SESSION['dfsManagment'];
      $output = $dfsManagment->execute();
 
+     # do we have to reset
+     if (isset($_GET['reset']) && $_GET['reset'] == 1) {
+       del_lock ($ui->dn);
+       sess_del('dfsManagment');
+     }
+ 
      # create page header
      if (isset($_SESSION['objectinfo'])) {
        $display = print_header(get_template_path('images/dfs.png'), 
@@ -26,16 +32,9 @@
        $display = print_header(get_template_path('images/dfs.png'),
                                 _("Distributed File System Administration"));
      }
+
+     $display.= $output;
     
-     # create the page
-     $display .= $output;
-     
-     # do we have to reset
-     if (isset($_GET['reset']) && $_GET['reset'] == 1) {
-       del_lock ($ui->dn);
-       sess_del('dfsManagment');
-     }
- 
      # show page
      $_SESSION['dfsManagment'] = $dfsManagment;
   }

@@ -19,9 +19,6 @@
 */
 
 if (!$remove_lock){
-	/* Page header*/
-	$display= print_header(get_template_path('images/ldif.png'), _("LDAP manager"));
-
 	/* Create phonelist object on demand */
 	if (!isset($_SESSION['ldif']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$_SESSION['ldif']= new ldif ($config);
@@ -35,9 +32,12 @@ if (!$remove_lock){
     $ldif->acl= get_module_permission($acl, "ldapmanager", $ui->dn);
 	
 	/* Execute formular */
-	$display.= $ldif->execute ();
+	$display= $ldif->execute ();
 
 	$display.= "<input type=\"hidden\" name=\"ignore\">\n";
+
+	/* Page header*/
+	$display= print_header(get_template_path('images/ldif.png'), _("LDAP manager")).$display;
 
 	/* Store changes  in session */
 	$_SESSION['ldif']= $ldif;

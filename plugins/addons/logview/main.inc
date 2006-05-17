@@ -19,9 +19,6 @@
 */
 
 if (!$remove_lock){
-	/* Page header*/
-	$display= print_header(get_template_path('images/logview.png'), _("System log view"));
-
 	/* Create logview object on demand */
 	if (!isset($_SESSION['logview']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$_SESSION['logview']= new logview ($config);
@@ -29,8 +26,11 @@ if (!$remove_lock){
 	$logview= $_SESSION['logview'];
 
 	/* Execute formular */
-	$display.= $logview->execute ();
+	$display= $logview->execute ();
 	$display.= "<input type=\"hidden\" name=\"ignore\">\n";
+
+	/* Page header*/
+	$display= print_header(get_template_path('images/logview.png'), _("System log view")).$display;
 
 	/* Store changes  in session */
 	$_SESSION['logview']= $logview;

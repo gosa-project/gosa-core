@@ -19,9 +19,6 @@
 */
 
 if (!$remove_lock){
-	/* Page header*/
-	$display= print_header(get_template_path('images/addressbook.png'), _("Address book"));
-
 	/* Create phonelist object on demand */
 	if (!isset($_SESSION['addressbook']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$_SESSION['addressbook']= new addressbook ($config);
@@ -33,8 +30,11 @@ if (!$remove_lock){
     $addressbook->acl= get_module_permission($acl, "addressbook", $ui->dn);
 	
 	/* Execute formular */
-	$display.= $addressbook->execute ();
+	$display= $addressbook->execute ();
 	$display.= "<input type=\"hidden\" name=\"ignore\">\n";
+
+	/* Page header*/
+	$display= print_header(get_template_path('images/addressbook.png'), _("Address book")).$display;
 
 	/* Store changes  in session */
 	$_SESSION['addressbook']= $addressbook;
