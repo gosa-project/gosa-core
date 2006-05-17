@@ -96,8 +96,7 @@ class printerPPDDialog extends plugin
       /* Check if path is write/readable*/
       $is_r = @is_readable($path);  
       if(((!is_dir($path))||(empty($path)) || (!$is_r)) && (!@mkdir($path))){
-        print_red(sprintf(_("The specified path '%s' which results from PPD_PATH in your gosa.conf is invalid,".
-                            " can't read/write any ppd informations."),$path));
+        print_red(sprintf(_("The specified path '%s' which results from PPD_PATH in your gosa.conf is invalid, can't read/write any ppd informations."),$path));
         /* Print out template */
         $display.= $smarty->fetch(get_template_path('printerPPDDialog.tpl', TRUE,dirname(__FILE__)));
         return($display);
