@@ -17,7 +17,7 @@ if (!$remove_lock){
 	$display.= "<input type=\"hidden\" name=\"ignore\">\n";
 
 	/* Page header*/
-	$display= print_header(get_template_path('images/phonereport.png'), _("Phone reports").$display);
+	$display= print_header(get_template_path('images/phonereport.png'), _("Phone reports")).$display;
 
 	/* Store changes  in session */
 	$_SESSION['fonreport']= $fonreport;
