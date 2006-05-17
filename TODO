@@ -3,12 +3,6 @@ Target for 2.4.1:
 
 * Explaination of several FIXME's. Group removal, etc.
 
-* saveFilter added, please use!
-
-* generatePasteIcon added, please use!
-
-* Added functions normalizePreg and normalizeLdap. Please use where needed!
-
 * Add online help (english/german)
   Document how to generate it, generate it and check it in
 
@@ -27,12 +21,12 @@ Target for 2.4.1:
 * Change FAIstate when triggering actions
   (install, sysinfo, softupdate)
 
+* Add another tab to ogroups when workstations are included
+  (generic settings include ntp, syslog, mode and action)
 
-Now:
-* evaluate what effects a ldap->cat(..., $this->attributes)
-  will have to other plugins in class_plugin.inc
-* Changing NTP-Servers -> start tab! Actions?
-* Fix DNS plugin. Add some more checks 
+* Fix DNS plugin
+
+* Move from "default" to translated "inherited" (TC, WS and Servers)
 
 
 Target for 2.5:

@@ -4,7 +4,7 @@
 <table summary="">
  <tr>
   <td>
-   <select size="1" name="saction" {$actionACL} title="{t}Select action to execute for this   group of terminals{/t}">
+   <select size="1" name="saction" {$actionACL} title="{t}Select action to execute for this group of terminals{/t}">
     <option></option>
     {html_options options=$actions}
    </select>
