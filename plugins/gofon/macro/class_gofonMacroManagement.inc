@@ -22,14 +22,15 @@ require "tabs_macros.inc";
 class gofonMacro extends plugin
 {
   /* Definitions */
-  var $plHeadline		= "Phone macros";
-  var $plDescription	= "This does something";
+  var $plHeadline		    = "Phone macros";
+  var $plDescription	  = "This does something";
 
   /* Dialog attributes */
-  var $macrotabs		= NULL;
-  var $macros		= array();
-  var $ui				= NULL;
-  var $acl				= "";
+  var $macrotabs		    = NULL;
+  var $macros		        = array();
+  var $ui				        = NULL;
+  var $acl				      = "";
+  var $DivListMacro     = NULL;
 
   function gofonMacro($config, $ui)
   {
@@ -37,52 +38,30 @@ class gofonMacro extends plugin
     $this->config= $config;
     $this->ui= $ui;
 
-    /* Get global filter config */
-    if (!is_global("macrofilter")){
-      $base= get_base_from_people($ui->dn);
-      $macrofilter= array("regex" => "*");
-      register_global("macrofilter", $macrofilter);
-    }
-
-    if(!isset($_SESSION['CurrentMainBase'])){
-      $_SESSION['CurrentMainBase'] = $base= get_base_from_people($ui->dn);
-    }
-
     $acl= get_permissions ($ui->dn, $ui->subtreeACL);
     $this->acl= get_module_permission($acl, "goFonMacro", $ui->dn);
+
+    $this->DivListMacro = new divListMacro($this->config,$this);
   }
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
-    /* Save data */
-    $macrofilter= get_global("macrofilter");
-    foreach( array("regex") as $type){
-      if (isset($_POST[$type])){
-        $macrofilter[$type]= $_POST[$type];
-      }
-    }
-    if (isset($_GET['search'])){
-      $s= mb_substr($_GET['search'], 0, 1, "UTF8")."*";
-      if ($s == "**"){
-        $s= "*";
-      }
-      $macrofilter['regex']= $s;
-    }
+    /*****************
+      Variable initialisation
+     *****************/
 
     $s_action     = "";                       // Contains the action to proceed
     $s_entry      = "";                       // The value for s_action
     $base_back    = "";                       // The Link for Backbutton
+    $smarty= get_smarty();
 
-    /* Start for New List Managment */
-    if(isset($_GET['act'])&&($_GET['act']=="dep_open")){
-            $s_action="open";
-            $s_entry = base64_decode($_GET['dep_id']);
-             $_SESSION['CurrentMainBase'] = $this->config->departments[trim($s_entry)];
 
-    }
+    /*****************
+      Check Posts 
+     *****************/
 
     /* Test Posts */
     foreach($_POST as $key => $val){
@@ -95,63 +74,23 @@ class gofonMacro extends plugin
         $s_action="edit";
         $s_entry  = preg_replace("/user_".$s_action."_/i","",$key);
         // Post for new
-      }elseif(preg_match("/dep_back.*/i",$key)){
-        $s_action="back";
       }elseif(preg_match("/user_new.*/",$key)){
         $s_action="new";
-      }elseif(preg_match("/dep_home.*/i",$key)){
-        $s_action="home";
       }elseif(preg_match("/user_chgpw.*/i",$key)){
         $s_action="change_pw";
         $s_entry  = preg_replace("/user_chgpw_/i","",$key);
-      }elseif(preg_match("/dep_root.*/i",$key)){
-        $s_action="root";
       }
     }
-  if((isset($_GET['act']))&&($_GET['act']=="edit_entry")){
+    if((isset($_GET['act']))&&($_GET['act']=="edit_entry")){
       $s_action ="edit";
       $s_entry  = $_GET['id'];
     }
-
     $s_entry  = preg_replace("/_.$/","",$s_entry);
 
-    /* Department changed? */
-    if(isset($_POST['CurrentMainBase']) && $_POST['CurrentMainBase']){
-      $_SESSION['CurrentMainBase']= $_POST['CurrentMainBase'];
-    }
 
-    /* Homebutton is posted */
-    if($s_action=="home"){
-      $_SESSION['CurrentMainBase'] = preg_replace("/^[^,]+,/","",$this->ui->dn);
-      $_SESSION['CurrentMainBase'] = preg_replace("/^[^,]+,/","", $_SESSION['CurrentMainBase']);
-    }
-
-    if($s_action=="root"){
-      $_SESSION['CurrentMainBase'] = $this->config->current['BASE'] ;
-    }
-
-
-    /* If Backbutton is Posted */
-    if($s_action=="back"){
-      $base_back          = preg_replace("/^[^,]+,/","", $_SESSION['CurrentMainBase']);
-      $base_back          = convert_department_dn($base_back);
-
-      if(isset($this->config->departments[trim($base_back)])){
-        $_SESSION['CurrentMainBase'] = $this->config->departments[trim($base_back)];
-      }else{
-        $_SESSION['CurrentMainBase'] = $this->config->departments["/"];
-      }
-    }
-
-    register_global("macrofilter", $macrofilter);
-    $this->reload();
-    
-    $smarty= get_smarty();
-
-    /* Check for exeeded sizelimit */
-    if (($message= check_sizelimit()) != ""){
-      return($message);
-    }
+    /*****************
+      Create a new Macro 
+     *****************/
 
     /* New macro? */
     if ($s_action=="new"){
@@ -164,13 +103,23 @@ class gofonMacro extends plugin
       $this->macrotabs= new macrotabs($this->config,$this->config->data['TABS']['MACROTABS'], $this->dn);
     }
 
+
+    /*****************
+      Edit || Password canceled  
+     *****************/
+
     /* Cancel dialogs */
-    if (isset($_POST['edit_cancel']) || isset($_POST['password_cancel'])){
+    if (isset($_POST['edit_cancel']) || isset($_POST['delete_cancel'])){
       del_lock ($this->macrotabs->dn);
       unset ($this->macrotabs);
       $this->macrotabs= NULL;
       unset ($_SESSION['objectinfo']);
     }
+
+
+    /*****************
+      Edit finised
+     *****************/
 
     /* Finish mac edit is triggered by the tabulator dialog, so
        the user wants to save edited data. Check and save at this
@@ -195,9 +144,6 @@ class gofonMacro extends plugin
           del_lock ($this->dn);
         }
 
-        /* There's no page reload so we have to read new mac at
-           this point. */
-        $this->reload ();
         unset ($this->macrotabs);
         $this->macrotabs= NULL;
         unset ($_SESSION['objectinfo']);
@@ -208,7 +154,12 @@ class gofonMacro extends plugin
       }
     }
 
-    /* User wants to edit data? */
+
+    /*****************
+      Edit macro 
+     *****************/
+
+    /* User wants to edit data */
     if (($s_action=="edit") && (!isset($this->macrotabs->config))){
 
       /* Get 'dn' from posted 'macrolists', must be unique */
@@ -225,9 +176,14 @@ class gofonMacro extends plugin
       add_lock ($this->dn, $this->ui->dn);
       /* Register macrotabs to trigger edit dialog */
       $this->macrotabs= new macrotabs($this->config,
-      $this->config->data['TABS']['MACROTABS'], $this->dn);
+          $this->config->data['TABS']['MACROTABS'], $this->dn);
       $_SESSION['objectinfo']= $this->dn;
     }
+
+
+    /*****************
+      Remove marco
+     *****************/
 
     /* Remove user was requested */
     if ($s_action=="del"){
@@ -260,24 +216,26 @@ class gofonMacro extends plugin
       }
     }
 
-    /* Confirmation for deletion has been passed. Group should be deleted. */
+
+    /*****************
+      Remove macro
+     *****************/
+
+    /* Confirmation for deletion has been passed. Macro should be deleted. */
     if (isset($_POST['delete_macro_confirm'])){
 
       /* Some nice guy may send this as POST, so we've to check
          for the permissions again. */
       if (chkacl($this->acl, "delete") == ""){
-      
+
         /* Delete request is permitted, perform LDAP action */
         $this->macrotabs= new macrotabs($this->config,$this->config->data['TABS']['MACROTABS'], $this->dn);
         $this->macrotabs->set_acl(array($this->acl));
-      
+
         $this->macrotabs->delete ();
         gosa_log ("macro object'".$this->dn."' has been removed");
         unset ($this->macrotabs);
         $this->macrotabs= NULL;
-
-        /* Group list has changed, reload it. */
-        $this->reload ();
       } else {
         /* Normally this shouldn't be reached, send some extra
            logs to notify the administrator */
@@ -289,11 +247,9 @@ class gofonMacro extends plugin
     }
 
 
-    /* Delete macro canceled? */
-    if (isset($_POST['delete_cancel'])){
-      del_lock ($this->dn);
-      unset($_SESSION['objectinfo']);
-    }
+    /*****************
+      Display open dialogs  
+     *****************/
 
     /* Show tab dialog if object is present */
     if (($this->macrotabs) && (isset($this->macrotabs->config))){
@@ -311,180 +267,46 @@ class gofonMacro extends plugin
     }
 
 
+    /*****************
+      Display entry list 
+     *****************/
 
+    /* Return rendered main page */
+    /* Display dialog with system list */
+    $this->DivListMacro->execute();
 
-    /* Prepare departments */
-    $options= "";
-    foreach ($this->config->idepartments as $key => $value){
-            if ($_SESSION['CurrentMainBase'] == $key){
-                    $options.= "<option selected='selected' value='$key'>$value</option>";
-            } else {
-                    $options.= "<option value='$key'>$value</option>";
-            }
+    /* Add departments if subsearch is disabled */
+    if(!$this->DivListMacro->SubSearch){
+      $this->DivListMacro->AddDepartments($this->DivListMacro->selectedBase,4);
     }
-
-
-   /* NEW LIST MANAGMENT */
-    $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
-            " <input class='center' type='image' src='images/list_root.png' align='middle' title='"._("Go to root department")."' name='dep_root' alt='"._("Root").        "'>&nbsp;".
-            " <input class='center' type='image' align='middle' src='images/list_back.png' title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
-            " <input class='center' type='image' align='middle' src='images/list_home.png' title='"._("Go to users department")."' alt='"._("Home")."'                     name='dep_home'>&nbsp;".
-            " <input class='center' type='image' src='images/list_reload.png' align='middle' title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-            " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-            " <input class='center' type='image' align='middle' src='images/list_new_macro.png' title='"._("Create new phone macro")."' alt='"._("New")."' name='user_new'>&nbsp;".
-            " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
-            _("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
-            " <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-            "</div>";
-
-
-    /* Options */
-    $action= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit user")."'>";
-    $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete user")."'>";
-
-    $divlist = new divlist("macrotabs");
-    $divlist->SetHeader(array(
-                              array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
-                              array("string" => _("Username")." / "._("Department"), "attach" => "style=''"),
-                              array("string" => _("Visible"), "attach" => "style='width:50px;'"),
-                              array("string" => _("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'" )));
-
-
-    $divlist->SetSummary(_("This table displays all phone macros, in the selected tree."));
-    $divlist->SetEntriesPerPage(0);
-
-    // Defining Links
-    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
-
-    foreach($this->departments as $key=> $val){
-      
-      if(!isset($this->config->departments[trim($key)])){
-        $this->config->departments[trim($key)]="";
-      }
-
-      $non_empty="";
-      $keys= str_replace("/","\/",$key);
-      foreach($this->config->departments as $keyd=>$vald ){
-        if(preg_match("/".$keys."\/.*/",$keyd)){
-          $non_empty="full";
-        }
-      }
-
-      $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
-      $field3 = array("string" => "&nbsp;", "attach" => "style='width:50px;'");
-      $field4 = array("string" => "&nbsp;", "attach" => "style='width:60px;border-right:0px;text-align:right;'");
-      $divlist->AddEntry(array($field1,$field2,$field3,$field4));
-    }
-
-    // Pictures for Extensions
-    $empty    = "<img class='center' src='images/nothing.png' style='width:16px;height:16px;' alt=''>";
-
-    // User and Template  Images
-    $macroimg   = "<img class='center' src='images/list_macro.png' alt='"._("Macro")."' title='%s'>";
-    $visible    = "<img class='center' src='images/true.png' alt='"._("yes")."' title='"._("visible")."'>";
-    $invisible  = "<img class='center' src='images/false.png' alt='"._("no")."'title='"._("invisible")."'>";
-
-    // Link for edit
-    $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
-  
-    // Test Every Entry and generate divlist Array
-    foreach($this->macros as $key => $val){
-      // Generate Array to Add
-      $display= $val["displayName"][0];
-    
-      
-      if(isset($val['goFonMacroVisible']['0'])&&($val['goFonMacroVisible']['0'] == "1")){
-        $pic1 = $visible;
-      }else{
-        $pic1 = $invisible;
-      }
-
-      $field1 = array("string" => sprintf($macroimg,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='dn:&nbsp;".@LDAP::fix($val['dn'])."'");
-      $field3 = array("string" => $pic1, "attach" => "style='width:50px;'");
-      $field4 = array("string" => preg_replace("/%KEY%/", "$key", $action), "attach" => "style='width:60px;border-right:0px;text-align:right;'");
-
-      $divlist->AddEntry(array($field1,$field2,$field3,$field4));
-    }
-
-    /* Show main page */
-    $smarty->assign("macroshead", $listhead);
-    $smarty->assign("macros", $divlist->DrawList());
-    $smarty->assign("search_image", get_template_path('images/search.png'));
-    $smarty->assign("tree_image", get_template_path('images/tree.png'));
-    $smarty->assign("infoimage", get_template_path('images/info.png'));
-    $smarty->assign("launchimage", get_template_path('images/launch.png'));
-    $smarty->assign("deplist", $this->config->idepartments);
-    foreach( array("regex") as $type){
-      $smarty->assign("$type", $macrofilter[$type]);
-    }
-
-    $smarty->assign("CurrentMainBase" , $_SESSION['CurrentMainBase']);
-
-    /* Extend if we are not using javascript */
-    $smarty->assign("apply", apply_filter());
-    $smarty->assign("alphabet", generate_alphabet());
-    $smarty->assign("hint", print_sizelimit_warning());
-
-    return($smarty->fetch(get_template_path('headpage.tpl', TRUE)));
+    $this->reload();
+    $this->DivListMacro->setEntries($this->macros);
+    return($this->DivListMacro->Draw());
   }
 
 
   function reload()
   {
-    /* Get config */
-    $macrofilter= get_global('macrofilter');
-
     /* Set base for all searches */
-    $base= $_SESSION['CurrentMainBase'];
+    $base       = $this->DivListMacro->selectedBase;
+    $SubSearch  = $this->DivListMacro->SubSearch;
+    $Regex      = $this->DivListMacro->Regex;
+    $Filter     = "(&(cn=".$Regex.")(objectClass=goFonMacro))";
+    $Flags      = GL_SIZELIMIT;
+    $Attrs      = array("cn","description","displayName");
 
-    /* Regex filter? */
-    if ($macrofilter['regex'] != ""){
-      $regex= $macrofilter['regex'];
-    } else {
-      $regex= "*";
+    /* Prepare for ls or search*/        
+    if($SubSearch){
+      $Flags |= GL_SUBSEARCH;
+    }else{
+      $base = "ou=macros,ou=asterisk,ou=configs,ou=systems,".$base;
     }
 
     /* Generate macro list */
-    $res= get_list("(&(cn=$regex)(objectClass=goFonMacro))", $this->ui->subtreeACL,
-                   "ou=macros,ou=asterisk,ou=configs,ou=systems,".$base, array("*"), GL_SIZELIMIT);
-    $this->macros= $res;
+    $res= get_list($Filter, $this->ui->subtreeACL,$base, $Attrs, $Flags);
 
-    /* NEW LIST MANAGMENT
-     * We also need to search for the departments
-     * So we are able to navigate like in konquerer
-     */
-    $peopleOU = get_people_ou();
-
-    if(empty($peopleOU)){
-      $base2 = $base;
-    }else{
-      $base2 = preg_replace("/".$peopleOU."/i","",$base);
-    }
-
-    $res3= get_list("(&(|(ou=$regex)(description=$regex))(objectClass=gosaDepartment))",
-                    $this->ui->subtreeACL, $base2, array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
-
-    $this->departments= array();
-    $tmp = array();
-    foreach ($res3 as $value){
-      $tmp[strtolower($value['dn']).$value['dn']]=$value;
-    }
-    ksort($tmp);
-    foreach($tmp as $value){
-      if(isset($value["description"][0])){
-        $this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
-      }else{
-        $this->departments[$value['dn']]= get_sub_department($value['dn']);//$value["description"][0];
-      }
-    }
-
-    /* END NEW LIST MANAGMENT
-     */
-
-   $tmp=array();
-    foreach($this->macros as $tkey => $val ){
+    $tmp=array();
+    foreach($res as $tkey => $val ){
       $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
     }
     ksort($tmp);
@@ -496,51 +318,16 @@ class gofonMacro extends plugin
     reset ($this->macros);
   }
 
-  function remove_from_parent()
-  {
-    /* Optionally execute a command after we're done */
-    $this->postremove();
-  }
-
 
   /* Save data to object */
   function save_object()
   {
+    $this->DivListMacro->save_object();
   }
 
 
-  /* Check values */
-  function check()
-  {
-  }
-
-
-  /* Save to LDAP */
-  function save()
-  {
-    /* Optionally execute a command after we're done */
-    $this->postcreate();
-  }
-
-  function adapt_from_template($dn)
-  {
-  }
-
-  function password_change_needed()
-  {
-  }
-
-  function show_header($button_text, $text, $disabled= FALSE)
-  {
-  }
-
-  function remove_lock()
-  {
-    if (isset($this->macrotabs->dn)){
-      del_lock ($this->macrotabs->dn);
-    }
-  }
-
+  function adapt_from_template($dn)  { }
+  function check() { }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

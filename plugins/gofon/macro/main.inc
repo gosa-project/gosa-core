@@ -26,16 +26,23 @@ if ($remove_lock){
     sess_del ('macroManagment');
   }
 } else {
+
   /* Create macroManagment object on demand */
   if (!isset($_SESSION['macroManagment']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
     $_SESSION['macroManagment']= new goFonMacro ($config, $_SESSION['ui']);
   }
+
+  /* Get object */
   $macroManagment= $_SESSION['macroManagment'];
+  $macroManagment->save_object();
   $output= $macroManagment->execute();
 
   /* Page header*/
   if (isset($_SESSION['objectinfo'])){
-    $display= print_header(get_template_path('images/macros.png'), _("Phone macro management"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".@LDAP::fix($_SESSION['objectinfo']));
+    $display= print_header( get_template_path('images/macros.png'), 
+                            _("Phone macro management"), 
+                            "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> 
+                            ".@LDAP::fix($_SESSION['objectinfo']));
   } else {
     $display= print_header(get_template_path('images/macros.png'), _("Phone macro management"));
   }
