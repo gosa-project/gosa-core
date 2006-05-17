@@ -37,7 +37,7 @@ class divListApplication extends MultiSelectWindow
 
     /* Result page will look like a headpage */
     $this->SetHeadpageMode();
-    $this->SetInformation(_("This menu allows you to add, edit and remove selected applications. "You may want to use the range selector on top of the application listbox, when working with a large number of applications."));
+    $this->SetInformation(_("This menu allows you to add, edit and remove selected applications. You may want to use the range selector on top of the application listbox, when working with a large number of applications."));
 
     $this->EnableAplhabet(true);
   
