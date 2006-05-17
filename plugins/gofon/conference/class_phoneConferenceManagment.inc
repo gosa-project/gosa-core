@@ -68,7 +68,6 @@ class phoneConferenceManagment extends plugin
     $display 					          = "";
     $s_action 					        = "";  // Will contain an action, like del or edit
     $s_entry  					        = "";  // The entry name for edit delete -...
-    $conferencefilter           = $_SESSION["conferencefilter"]; 
 
 
     /***************
