@@ -381,10 +381,6 @@ class groupManagement extends plugin
       $filter.= "(objectClass=gosaMailAccount)";
     }
 
-    /*
-       #FIXME Why is "sfilter" or "filter" set ?
-        Please verify && add comment 
-     */
     $sfilter= "";
     if ($this->config->current['SAMBAVERSION'] == 3){
       if (!$ShowPrimaryGroups){

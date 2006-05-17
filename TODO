@@ -24,9 +24,6 @@ Target for 2.4.1:
 * Change FAIstate when triggering actions
   (install, sysinfo, softupdate)
 
-* Add another tab to ogroups when workstations are included
-  (generic settings include ntp, syslog, mode and action)
-
 * Fix DNS plugin
 
 * Move from "default" to translated "inherited" (TC, WS and Servers)
