@@ -159,7 +159,7 @@ class fonreport extends plugin
 				  "(|(uid=$s)(l=$s)(homePhone=$s)".
 				  "(telephoneNumber=$s)(facsimileTelephoneNumber=$s)(mobile=$s)".
 				  "(pager=$s)(cn=$s)(givenName=$s)(sn=$s)(personalTitle=$s)".
-				  "(title=$s)))");
+				  "(title=$s)))" ,array("uid"));
 
 		  $fon_users= array();
 		  while ($attrs= $ldap->fetch()){
@@ -167,7 +167,7 @@ class fonreport extends plugin
 			  $acl= get_module_permission($acl, "fax", $ldap->getDN());
 
 			  if (chkacl ($acl, "faxReport") == ""){
-				  $fax_users[]= $attrs["uid"][0];
+				  $fon_users[]= $attrs["uid"][0];
 			  }
 		  }
 
@@ -213,6 +213,7 @@ class fonreport extends plugin
 		return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
 	}
 	$report_list= array();
+	
 	while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
 		$append_str = "";
 		$hour=  substr($line["calldate"], 11, 2);
@@ -278,7 +279,6 @@ class fonreport extends plugin
 	$smarty->assign("month_select"	, $this->month);
 	$smarty->assign("years"			, $years);
 	$smarty->assign("year_select"	, $this->year);
-	$smarty->assign("search_result"	, "");
 	return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
   }
 

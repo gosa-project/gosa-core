@@ -24,7 +24,7 @@
 
 <br>
 
-{if $search_result ne ""}
+{if $search_result }
  <table style="width:100%; vertical-align:top; text-align:left; border:1px solid #B0B0B0;" cellpadding=2 cellspacing=1 border=0 rules="cols" summary="">
   <tr style="background-color: #E8E8E8; height:26px; font-weight:bold">
    <td><a href="main.php{$plug}&amp;sort=0">{t}Date{/t} {$mode0}</a></td>
