@@ -33,9 +33,7 @@ class divListConference extends MultiSelectWindow
 
     /* Result page will look like a headpage */
     $this->SetHeadpageMode();
-    $this->SetInformation(_("This menu allows you to create, delete and edit selected phone conferences. ".
-                            "Having a large number of phone conferences, you might prefer the range ".
-                            "selectors on top of the conferences list."));
+    $this->SetInformation(_("This menu allows you to create, delete and edit selected phone conferences. Having a large number of phone conferences, you might prefer the range selectors on top of the conferences list."));
 
     $this->EnableAplhabet(true);
   

@@ -33,8 +33,7 @@ class divListBlocklist extends MultiSelectWindow
 
     /* Result page will look like a headpage */
     $this->SetHeadpageMode();
-    $this->SetInformation(_("This menu allows you to create, delete and edit selected blocklists. ".
-                            "Having a large size of lists, you might prefer the range selectors on top of the select box."));
+    $this->SetInformation(_("This menu allows you to create, delete and edit selected blocklists. Having a large size of lists, you might prefer the range selectors on top of the select box."));
 
     $this->EnableAplhabet   (true);
   
