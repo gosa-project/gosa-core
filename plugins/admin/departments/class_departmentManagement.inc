@@ -67,10 +67,6 @@ class departmentManagement extends plugin
     $_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^dep_edit_.*/","/^dep_del_.*/");
 
     /* Reload departments */
-    $this->config->get_departments();
-    $this->config->make_idepartments();
-    $config= $this->config;
-
     $smarty						= get_smarty();
     $display 					= "";
     $s_action 					= "";  // Will contain an action, like del or edit
@@ -396,6 +392,11 @@ class departmentManagement extends plugin
 
   function save_object()
   {
+    /* reload department */
+    $this->config->get_departments();
+    $config = $this->config;
+
+    $this->config->make_idepartments();
     $this->DivListDepartment->save_object();
   }
   
