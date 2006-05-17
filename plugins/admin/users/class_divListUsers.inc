@@ -58,7 +58,7 @@ class divListUsers extends MultiSelectWindow
     $this->AddHeader(array("string"=>_("Actions"),      "attach" => "style='width:102px;border-right:0px;text-align:right;'"));
     
     $this->AddCheckBox("ShowTemplates"      ,_("Select to see template pseudo users")               ,_("Show templates")        , false);
-    $this->AddCheckBox("ShowFunctionalUsers",_("Select to see users that   have only a GOsa object"),_("Show functional users") , true);
+    $this->AddCheckBox("ShowFunctionalUsers",_("Select to see users that have only a GOsa object"),_("Show functional users") , true);
     $this->AddCheckBox("ShowUnixUsers"      ,_("Select to see users that have posix settings")      ,_("Show unix users")       , true);
     $this->AddCheckBox("ShowMailUsers"      ,_("Select to see users that have mail settings")       ,_("Show mail users")       , true);
     $this->AddCheckBox("ShowSambaUsers"     ,_("Select to see users that have samba settings")      ,_("Show samba users")      , true);

@@ -32,7 +32,7 @@ class divListApplication extends MultiSelectWindow
     $this->selectedBase = $_SESSION['CurrentMainBase'];
 
     /* Set list strings */
-    $this->SetTitle(_("List of Application"));
+    $this->SetTitle(_("List of Applications"));
     $this->SetSummary(_("This table displays all applications in the selected tree."));
 
     /* Result page will look like a headpage */
