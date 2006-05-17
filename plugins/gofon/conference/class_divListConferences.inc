@@ -81,7 +81,7 @@ class divListConference extends MultiSelectWindow
       title='"._("Reload list")."' name='submit_department' alt='".        _("Submit")."'>&nbsp;".
       " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
       " <input class='center' type='image' align='middle' src='images/list_new_conference.png' 
-      title='"._("Create new conference")."' alt='"._("New         conference")."' name='user_new'>&nbsp;".
+      title='"._("Create new conference")."' alt='"._("New conference")."' name='user_new'>&nbsp;".
       " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
       _("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
       " <input class='center' type='image' src='images/list_submit.png' align='middle' 

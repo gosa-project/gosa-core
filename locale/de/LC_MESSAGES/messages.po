@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2006-05-17 13:58+0200\n"
+"PO-Revision-Date: 2006-05-17 14:05+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: Deutsch <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -5414,7 +5414,7 @@ msgid "Release"
 msgstr "Release"
 
 #: plugins/admin/fai/faiPackage.tpl:41
-#: plugins/admin/systems/class_printerPPDDialog.inc:414
+#: plugins/admin/systems/class_printerPPDDialog.inc:413
 msgid "Section"
 msgstr "Section"
 
@@ -6383,8 +6383,8 @@ msgid ""
 "large number of groups."
 msgstr ""
 "Dieses Menü erlaubt es Ihnen Gruppen hinzuzufügen, zu bearbeiten oder zu "
-"entfernen. Bei einer großen Anzahl von Gruppen bietet sich die Verwendung der "
-"Bereichsauswahl an."
+"entfernen. Bei einer großen Anzahl von Gruppen bietet sich die Verwendung "
+"der Bereichsauswahl an."
 
 #: plugins/admin/groups/class_divListGroup.inc:49
 msgid "Groupname / Department"
@@ -7394,7 +7394,8 @@ msgid ""
 "of the department list."
 msgstr ""
 "Dieses Menü erlaubt es Ihnen, Abteilungen hinzuzufügen, zu bearbeiten oder "
-"zu entfernen. Bei einer Vielzahl von Abteilungen bietet sich die Verwendung der Bereichswahl an."
+"zu entfernen. Bei einer Vielzahl von Abteilungen bietet sich die Verwendung "
+"der Bereichswahl an."
 
 #: plugins/admin/departments/class_divListDepartment.inc:41
 msgid "Department name"
@@ -7980,78 +7981,73 @@ msgid "Can't get ppd informations."
 msgstr "Kann PPD-Information nicht lesen"
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:99
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "The specified path '%s' which results from PPD_PATH in your gosa.conf is "
-"invalid,"
-msgstr ""
-"Der in Ihrer 'gosa.conf' angegebene PPD-Pfad (PPD_PATH) '%s' ist ungültig - "
-"kann daher keine ppd-Informationen lesen."
+"invalid, can't read/write any ppd informations."
+msgstr "Der in Ihrer 'gosa.conf' angegebene PPD-Pfad (PPD_PATH) '%s' ist ungültig - kann daher keine ppd-Informationen lesen."
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:100
-#, fuzzy, php-format
-msgid " can't read/write any ppd informations."
-msgstr "keine PPD-Informationen verfügbar"
-
-#: plugins/admin/systems/class_printerPPDDialog.inc:117
+#: plugins/admin/systems/class_printerPPDDialog.inc:116
 msgid "Please specify a valid ppd file."
 msgstr "Bitte geben Sie eine gültige PPD-Datei an."
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:187
+#: plugins/admin/systems/class_printerPPDDialog.inc:186
 #, php-format
 msgid "Can't select PPD file '%s', the file is not readable"
 msgstr "Kann Datei '%s' nicht öffnen, möglicherweise existiert sie nicht"
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:204
-#: plugins/admin/systems/class_printerPPDDialog.inc:276
+#: plugins/admin/systems/class_printerPPDDialog.inc:203
+#: plugins/admin/systems/class_printerPPDDialog.inc:275
 #, php-format
 msgid "Can't create folder '%s' for the uploaded ppd file."
 msgstr "Kann Verzeichnis '%s' für hochgeladene PPD-Datei nicht anlegen."
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:212
+#: plugins/admin/systems/class_printerPPDDialog.inc:211
 #, php-format
 msgid "Can't create file '%s' to store modifed ppd informations."
 msgstr "Kann Datei '%s' zur Speicherung der PPD-Informationen nicht anlegen."
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:236
+#: plugins/admin/systems/class_printerPPDDialog.inc:235
 #, php-format
 msgid "Can't add new ppd file, the source file '%s' is not accessible."
 msgstr ""
 "Kann neue PPD-Datei nicht hinzufügen, auf die Quelldatei '%s' konnte nicht "
 "zugegriffen werden."
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:254
+#: plugins/admin/systems/class_printerPPDDialog.inc:253
 #, php-format
 msgid ""
 "The given ppd file '%s' seams to be invalid, can't get any modell or vendor "
 "informations."
-msgstr "Die angegebene PPD-Datei '%s' scheint ungültig zu sein. Es lassen sich keine Modell- oder Hersteller-Informationen extrahieren."
+msgstr ""
+"Die angegebene PPD-Datei '%s' scheint ungültig zu sein. Es lassen sich keine "
+"Modell- oder Hersteller-Informationen extrahieren."
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:268
+#: plugins/admin/systems/class_printerPPDDialog.inc:267
 #, php-format
 msgid "There is already a ppd file for this kind of printer."
 msgstr "Der von Ihnen gewählte Drucker-Typ verfügt bereits über eine PPD-Datei."
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:289
+#: plugins/admin/systems/class_printerPPDDialog.inc:288
 #, php-format
 msgid "Can't save file '%s'."
 msgstr "Kann Datei '%s' nicht speichern."
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:293
+#: plugins/admin/systems/class_printerPPDDialog.inc:292
 msgid "Uploaded ppd file is empty, can't create new ppd file."
 msgstr "Die hochgeladene PPD-Datei ist leer, kann daher keine neue PPD-Datei anlegen."
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:463
-#: plugins/admin/systems/class_printerPPDDialog.inc:466
+#: plugins/admin/systems/class_printerPPDDialog.inc:462
+#: plugins/admin/systems/class_printerPPDDialog.inc:465
 msgid "True"
 msgstr "wahr"
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:464
-#: plugins/admin/systems/class_printerPPDDialog.inc:467
+#: plugins/admin/systems/class_printerPPDDialog.inc:463
+#: plugins/admin/systems/class_printerPPDDialog.inc:466
 msgid "False"
 msgstr "falsch"
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:472
+#: plugins/admin/systems/class_printerPPDDialog.inc:471
 #, php-format
 msgid "Unsupported ppd type '%s' used for '%s' "
 msgstr "Nicht unterstützter PPD-Typ '%s' (verwendet von '%s') "
@@ -11784,7 +11780,7 @@ msgid "Create new conference"
 msgstr "Neue Konferenz erstellen"
 
 #: plugins/gofon/conference/class_divListConferences.inc:84
-msgid "New         conference"
+msgid "New conference"
 msgstr "Neue Konferenz"
 
 #: plugins/gofon/conference/class_divListConferences.inc:133
@@ -12534,7 +12530,9 @@ msgstr ""
 msgid ""
 "Error: The requested subtree has an inconsistent DN encoding, check your "
 "LDAP!"
-msgstr "Fehler: Der angeforderte Unterbaum besitzt eine Inkonsistenz in der DN-Kodierung. Prüfen Sie den LDAP!"
+msgstr ""
+"Fehler: Der angeforderte Unterbaum besitzt eine Inkonsistenz in der DN-"
+"Kodierung. Prüfen Sie den LDAP!"
 
 #: include/class_certificate.inc:35
 msgid "Can't open specified file, check accessibility and or existence"
@@ -12700,13 +12698,18 @@ msgstr "LDAP-Fehler:"
 msgid ""
 "Problems with the LDAP server mean that you probably lost the last changes. "
 "Please check your LDAP setup for possible errors and try again."
-msgstr "Probleme mit dem LDAP-Server bedeuten meist, dass ihre letzten Änderungen verloren gegangen sind. Bitte prüfen Sie die LDAP-Konfiguration um eventuelle Fehler aufzudecken und wiederholen Sie die Aktion."
+msgstr ""
+"Probleme mit dem LDAP-Server bedeuten meist, dass ihre letzten Änderungen "
+"verloren gegangen sind. Bitte prüfen Sie die LDAP-Konfiguration um "
+"eventuelle Fehler aufzudecken und wiederholen Sie die Aktion."
 
 #: include/functions.inc:973
 msgid ""
 "Please check your input and fix the error. Press 'OK' to close this message "
 "box."
-msgstr "Bitte prüfen Sie ihre Eingaben und beheben Sie den Fehler. Drücken Sie den 'OK'-Knopf um dieses Meldungsfenster zu schließen."
+msgstr ""
+"Bitte prüfen Sie ihre Eingaben und beheben Sie den Fehler. Drücken Sie den "
+"'OK'-Knopf um dieses Meldungsfenster zu schließen."
 
 #: include/functions.inc:982
 msgid "An error occured while processing your request"
