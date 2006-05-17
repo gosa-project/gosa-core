@@ -31,6 +31,7 @@ if ($remove_lock){
 		$_SESSION['conference']= new phoneConferenceManagment($config, $ui);
 	}
 	$conference= $_SESSION['conference'];
+	$conference->save_object();
 	$output= $conference->execute();
 
 	/* Page header*/
