@@ -289,15 +289,15 @@ class faiSummaryTab extends plugin{
             ksort($data['partitions']);
 
             $str .= "<tr><td colspan=2  style='padding-left:20px;'>";
-            $str .= "<table cellspacing=1 style='background:#FFFFFF;'>
-                      <tr style='background-color:#BBBBBB;'>
-                       <td>"._("No.")."</td>
-                       <td>"._("Name")."</td>
-                       <td>"._("FS options")."</td>
-                       <td>"._("Mount options")."</td>
-                       <td>"._("Size in MB")."</td>
-                       <td>"._("Mount point")."</td>
-                       <td>"._("Type")."</td>
+            $str .= "<table cellspacing=0 cellpadding=2 style='background:#FFFFFF;border:1px solid #B0B0B0'>
+                      <tr style='background-color:#DBDBDB;'>
+                       <td class='tbhead'>"._("No.")."</td>
+                       <td class='tbhead'>"._("Name")."</td>
+                       <td class='tbhead'>"._("FS options")."</td>
+                       <td class='tbhead'>"._("Mount options")."</td>
+                       <td class='tbhead'>"._("Size in MB")."</td>
+                       <td class='tbhead'>"._("Mount point")."</td>
+                       <td class='tbrhead'>"._("Type")."</td>
                       </tr>";
 
             $i = 0;
@@ -306,10 +306,10 @@ class faiSummaryTab extends plugin{
 
               if($i%2 == 1){
                 $c = " class='rowxp1'";
-                $d = " class='list1' style='border:0px;'";
+                $d = " class='list1'";
               }else{
                 $c = " class='rowxp0'";
-                $d = " class='list0' style='border:0px;'";
+                $d = " class='list0'";
               }
 
               $str.="<tr $c style='height:10px;'>
@@ -319,7 +319,7 @@ class faiSummaryTab extends plugin{
                       <td $d>".$part['FAIfsOptions'][0]."</td> 
                       <td $d>".$part['FAIpartitionSize'][0]."</td> 
                       <td $d>".$part['FAImountPoint'][0]."</td> 
-                      <td $d>".$part['FAIpartitionType'][0]."</td> 
+                      <td $d style='border:none'>".$part['FAIpartitionType'][0]."</td> 
                     </tr>";
             }
             $str .="</table>";
