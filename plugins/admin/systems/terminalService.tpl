@@ -7,7 +7,7 @@
      <td><LABEL for="gotoXKbModel">{t}Model{/t}</LABEL></td>
      <td>
       <select id="gotoXKbModel" name="gotoXKbModel" title="{t}Choose keyboard model{/t}" {$gotoXKbModelACL}>
-       {html_options values=$XKbModels output=$XKbModels selected=$gotoXKbModel_select}
+       {html_options options=$XKbModels selected=$gotoXKbModel_select}
       </select>
      </td>
     </tr>
@@ -15,7 +15,7 @@
      <td><LABEL for="gotoXKbLayout">{t}Layout{/t}</LABEL></td>
      <td>
       <select id="gotoXKbLayout" name="gotoXKbLayout" title="{t}Choose keyboard layout{/t}" {$gotoXKbLayoutACL}>
-       {html_options values=$XKbLayoutKeys output=$XKbLayouts selected=$gotoXKbLayout_select}
+       {html_options options=$XKbLayouts selected=$gotoXKbLayout_select}
       </select>
      </td>
     </tr>
@@ -23,7 +23,7 @@
      <td><LABEL for="gotoXKbVariant">{t}Variant{/t}</LABEL></td>
      <td>
       <select id="gotoXKbVariant" name="gotoXKbVariant" title="{t}Choose keyboard variant{/t}" {$gotoXKbVariantACL}>
-       {html_options values=$XKbVariants output=$XKbVariants selected=$gotoXKbVariant_select}
+       {html_options options=$XKbVariants selected=$gotoXKbVariant_select}
       </select>
      </td>
     </tr>
@@ -94,7 +94,7 @@
      <td><LABEL for="gotoXResolution">{t}Resolution{/t}</LABEL></td>
      <td>
       <select id="gotoXResolution" name="gotoXResolution" title="{t}Choose screen resolution used in graphic mode{/t}" {$gotoXResolutionACL}>
-       {html_options values=$XResolutions output=$XResolutions selected=$gotoXResolution_select}
+       {html_options options=$XResolutions selected=$gotoXResolution_select}
       </select>
      </td>
     </tr>
@@ -102,7 +102,7 @@
      <td><LABEL for="gotoXColordepth">{t}Color depth{/t}</LABEL></td>
      <td>
       <select id="gotoXColordepth" name="gotoXColordepth" title="{t}Choose colordepth used in graphic mode{/t}" {$gotoXColordepthACL}>
-       {html_options values=$XColordepths output=$XColordepths selected=$gotoXColordepth_select}
+       {html_options options=$XColordepths selected=$gotoXColordepth_select}
       </select>
      </td>
     </tr>
