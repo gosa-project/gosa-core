@@ -279,7 +279,10 @@ class faiSummaryTab extends plugin{
             if(isset($data['description'][0])){
               $str .= " [".$data['description'][0]."] ";
             }
-            $str .=" = '".$data['FAIvariableContent'][0]."'";
+            /* Only display FAIvariableContent if description dosn't contain [*] */ 
+            if(isset($data['description'][0]) && !preg_match("#\[\*\]#",$data['description'][0])){
+              $str .=" = '".$data['FAIvariableContent'][0]."'";
+            }
             $str .= "</td><td><i>".$data['CLASS']."</i>";
             $str .="</td></tr>";
           }
