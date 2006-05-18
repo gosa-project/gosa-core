@@ -289,8 +289,6 @@ table.menuitem:hover {
 
 td.phonelist:hover {
 	background-color:#d2d2d2;
-	border-right:1px solid #B0B0B0;
-	border-bottom:1px solid #B0B0B0;
 }
 
 td.phonelist {
