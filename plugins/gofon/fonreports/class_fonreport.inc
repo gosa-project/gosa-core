@@ -86,8 +86,8 @@ class fonreport extends plugin
     }
 
     /* remove unwanted tags */
-    $this->search_for = stripslashes(preg_replace("/[^0-9a-z\*]/i","",$this->search_for));
-    
+    $this->search_for = stripslashes(preg_replace("/[^0-9a-z\*\+ \-]/i","",$this->search_for));
+  
     foreach($this->attributes_SO as $name){
       $fonfilter[$name] = $this->$name;
     }
