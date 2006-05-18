@@ -69,7 +69,7 @@
       </select>
      <br>
       <select name="gotoNtpServers" id="gotoNtpServers" {$gotoNtpServerACL} {if $inheritTimeServer} disabled {/if} >
-       {html_options output=$gotoNtpServers values=$gotoNtpServers}
+       {html_options options=$gotoNtpServers}
       </select>
         <input type="submit" name="addNtpServer" value="{t}Add{/t}"     id="addNtpServer" {$gotoNtpServerACL}
          {if $inheritTimeServer} disabled {/if}>

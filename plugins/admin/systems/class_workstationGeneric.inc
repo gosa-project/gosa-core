@@ -75,17 +75,17 @@ class workgeneric extends plugin
     }
 
     /* Set inherit checkbox state */
-    if(in_array("default",$this->gotoNtpServer)){
+    if((in_array("default",$this->gotoNtpServer)) || (count($this->gotoNtpServer) == 0)){
       $this->inheritTimeServer = true;
       $this->gotoNtpServer=array();
     }
 
     /* Create available ntp options */
-    $this->gotoNtpServers = $this->config->data['SERVERS']['NTP'];
-    foreach($this->gotoNtpServers as $key => $server){
-      if($server == "default"){
-        unset($this->gotoNtpServers[$key]);
-      }
+    $tmp = $this->config->data['SERVERS']['NTP'];
+    $this->gotoNtpServers = array();
+    foreach($tmp as $key => $server){
+      if($server == "default") continue;
+      $this->gotoNtpServers[$server] = $server;
     }
 
     $this->modes["active"]= _("Activated");
@@ -342,7 +342,7 @@ class workgeneric extends plugin
 
     /* Update ntp server settings */
     if($this->inheritTimeServer){
-      $this->attrs['gotoNtpServer'] = "default";
+      $this->attrs['gotoNtpServer'] = array();
     }else{
       /* Set ntpServers */
       $this->attrs['gotoNtpServer'] = array();
