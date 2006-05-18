@@ -1,8 +1,6 @@
 Target for 2.4.1:
 =================
 
-* Explaination of several FIXME's. Group removal, etc.
-
 * Add online help (english/german)
   Document how to generate it, generate it and check it in
 
@@ -22,8 +20,6 @@ Target for 2.4.1:
   (install, sysinfo, softupdate)
 
 * Fix DNS plugin
-
-* Move from "default" to translated "inherited" (TC, WS and Servers)
 
 
 Target for 2.5:
