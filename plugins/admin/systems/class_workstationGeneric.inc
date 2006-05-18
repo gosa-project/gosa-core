@@ -10,6 +10,7 @@ class workgeneric extends plugin
   /* Generic terminal attributes */
   var $gotoMode= "locked";
   var $gotoSyslogServer= "";
+  var $gotoSyslogServers= array();
   var $gotoNtpServer= array();
   var $gotoNtpServers= array();
   var $gotoSndModule= "";
@@ -99,6 +100,16 @@ class workgeneric extends plugin
       $this->base= dn2base($ui->dn);
     } else {
       $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,/", "", $this->dn);
+    }
+
+    /* Create an array of all Syslog servers */
+    $tmp = $this->config->data['SERVERS']['SYSLOG'];
+    foreach($tmp as $server){
+      $visible = $server;
+      if($server == "default") {
+        $visible = "["._("inherited")."]";
+      }
+      $this->gotoSyslogServers[$server] = $visible;
     }
 
     /* Save 'dn' for later referal */
@@ -200,7 +211,7 @@ class workgeneric extends plugin
     /* Arrays */
     $smarty->assign("modes", $this->modes);
     $smarty->assign("nfsservers", $this->config->data['SERVERS']['NFS']);
-    $smarty->assign("syslogservers", $this->config->data['SERVERS']['SYSLOG']);
+    $smarty->assign("syslogservers", $this->gotoSyslogServers);
     $smarty->assign("ntpservers", $this->config->data['SERVERS']['NTP']);
 
     /* Variables */

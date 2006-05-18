@@ -43,7 +43,7 @@
      <td><LABEL for="gotoSyslogServer">{t}Syslog server{/t}</LABEL></td>
      <td>
       <select id="gotoSyslogServer" name="gotoSyslogServer" title="{t}Choose server to use for logging{/t}" {$gotoSyslogServerACL}>
-       {html_options values=$syslogservers output=$syslogservers selected=$gotoSyslogServer_select}
+       {html_options options=$syslogservers selected=$gotoSyslogServer_select}
       </select>
      </td>
     </tr>

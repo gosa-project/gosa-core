@@ -12,6 +12,7 @@ class termgeneric extends plugin
   var $gotoTerminalPath= "";
   var $gotoSwapServer= "";
   var $gotoSyslogServer= "";
+  var $gotoSyslogServers = array();
   var $gotoNtpServer= array();
   var $gotoNtpServers= array();
   var $gotoSndModule= "";
@@ -71,7 +72,7 @@ class termgeneric extends plugin
     }
 
     /* Set inherit checkbox state */
-    if(in_array("default",$this->gotoNtpServer)){
+    if((in_array("default",$this->gotoNtpServer)) || (count($this->gotoNtpServer)==0)){
       $this->inheritTimeServer = true;
       $this->gotoNtpServer=array();
     }
@@ -94,6 +95,16 @@ class termgeneric extends plugin
       $this->base= dn2base($ui->dn);
     } else {
       $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,/", "", $this->dn);
+    }
+
+    /* Create an array of all Syslog servers */
+    $tmp = $this->config->data['SERVERS']['SYSLOG'];
+    foreach($tmp as $server){
+      $visible = $server;
+      if($server == "default") {
+        $visible = "["._("inherited")."]";
+      }
+      $this->gotoSyslogServers[$server] = $visible;
     }
 
     $this->orig_dn= $this->dn;
@@ -237,7 +248,10 @@ class termgeneric extends plugin
     }
   
     $smarty->assign("nfsservers",     $tmp2);
-    $smarty->assign("syslogservers",  $this->config->data['SERVERS']['SYSLOG']);
+
+    
+
+    $smarty->assign("syslogservers",  $this->gotoSyslogServers);
     $smarty->assign("ntpservers",     $this->gotoNtpServers);
 
     /* Variables */
@@ -385,7 +399,7 @@ class termgeneric extends plugin
     }
 
     if($this->inheritTimeServer){
-      $this->attrs['gotoNtpServer'] = "default";
+      $this->attrs['gotoNtpServer'] = array();
     }else{  
       /* Set ntpServers */
       $this->attrs['gotoNtpServer'] = array();
