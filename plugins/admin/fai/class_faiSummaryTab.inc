@@ -55,7 +55,8 @@ class faiSummaryTab extends plugin{
     $this->Result = array();
     $_SESSION['faiSummaryTab']['UniqueID'] = 0; 
     $tmp = $this->getBranches();
-    
+   
+ 
     /* Get classes & release name 
        There are 2 different tabs which use the summary tab
        faiProfile / Workstations */
@@ -74,11 +75,19 @@ class faiSummaryTab extends plugin{
     }elseif(isset($this->parent->by_name['workstartup'])){
       $this->Classes = $this->parent->by_object['workstartup']->FAIclass;
       $this->Release = $this->parent->by_object['workstartup']->FAIrelease;
+
+      /* Append workstation class && LAST */
+      if(isset($this->parent->by_object['workgeneric']->cn)){
+        $this->Classes[] = $this->parent->by_object['workgeneric']->cn;
+      }
+  
       $tmp = array_flip($tmp);
       if(!isset($tmp[$this->Release])) {
         $this->Release = "";
       }
     }
+
+    $this->Classes[] = "LAST";
 
     /* Set all available releases */
     $this->Releases = array_flip($this->getBranches());
