@@ -13,6 +13,7 @@ if (!$remove_lock){
 
 
 	/* Execute formular */
+	$fonreport->save_object();
 	$display= $fonreport->execute ();
 	$display.= "<input type=\"hidden\" name=\"ignore\">\n";
 
