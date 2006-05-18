@@ -1074,9 +1074,12 @@ class posixAccount extends plugin
     $attrs    =  array("cn", "description", "gidNumber");
 
     /* Get groups */
-    $filter = 
-    $res= get_list("(&(objectClass=posixGroup)(cn=".$this->GroupRegex.")(memberUid=".$this->GroupUserRegex."))", 
-          $this->ui->subtreeACL, $base,$attrs, GL_SIZELIMIT);
+    if ($this->GroupUserRegex == '*'){
+      $filter = "(objectClass=posixGroup)";
+    } else {
+      $filter= "(&(objectClass=posixGroup)(cn=".$this->GroupRegex.")(memberUid=".$this->GroupUserRegex."))";
+    }
+    $res= get_list($filter, $this->ui->subtreeACL, $base,$attrs, GL_SIZELIMIT);
 
     /* check sizelimit */
     if (preg_match("/size limit/i", $ldap->error)){
