@@ -601,7 +601,8 @@ class oxchangeAccount extends plugin
 	//plugin::execute();
 
 
-    /* Show tab dialog headers */
+	$display="";
+    /* Show tab dialog headers  * /
     $display="";
     if ($this->parent != NULL){
       if ($this->is_account){
@@ -620,7 +621,7 @@ class oxchangeAccount extends plugin
         }
       }
     }
-
+*/
     /* Show main page */
     $smarty= get_smarty();
 
@@ -651,6 +652,20 @@ class oxchangeAccount extends plugin
       $smarty->assign("tabbed", 1);
     }else{
       $smarty->assign("tabbed", 0);
+	}
+
+	/* Trying to open a Postgresql Database Server */
+	if (function_exists("pg_connect")){
+		if(isset($this->oxconf["PGUSER"]) and isset($this->oxconf["PGHOST"]) and isset($this->oxconf["PGDBNAME"]) and isset($this->oxconf["PGPASSWD"])){
+			$pgcon =  @pg_connect("host=".$this->oxconf["PGHOST"]." user=".$this->oxconf["PGUSER"]." password=".$this->oxconf["PGPASSWD"]." dbname=".$this->oxconf["PGDBNAME"]);
+			if (! $pgcon){
+				$smarty->assign("pg", false);
+			}
+		}else{
+			$smarty->assign("pg", false);
+		}
+	}else{
+		$smarty->assign("pg", false);
 	}
 
     $display.= $smarty->fetch (get_template_path('oxchange.tpl', TRUE, dirname(__FILE__)));
@@ -695,8 +710,11 @@ class oxchangeAccount extends plugin
 
     /* Trying to open a Postgresql Database Server */
     if (function_exists("pg_connect")){
-      if(isset($this->oxconf["PGUSER"]) and isset($this->oxconf["PGHOST"]) and isset($this->oxconf["PGDBNAME"]) and isset($this->oxconf["PGPASSWD"])){
-        $pgcon = pg_connect("host=".$this->oxconf["PGHOST"]." user=".$this->oxconf["PGUSER"]." password=".$this->oxconf["PGPASSWD"]." dbname=".$this->oxconf["PGDBNAME"]);
+      if(isset($this->oxconf["PGUSER"]) and 
+		 isset($this->oxconf["PGHOST"]) and 
+	     isset($this->oxconf["PGDBNAME"]) and 
+         isset($this->oxconf["PGPASSWD"])){
+        $pgcon = @pg_connect("host=".$this->oxconf["PGHOST"]." user=".$this->oxconf["PGUSER"]." password=".$this->oxconf["PGPASSWD"]." dbname=".$this->oxconf["PGDBNAME"]);
         if (! $pgcon){
           print_red(_("Couldn't connect to postgresql database!"));
           return;
@@ -793,7 +811,7 @@ class oxchangeAccount extends plugin
       /* Trying to open a Postgresql Database Server */
       if (function_exists("pg_connect")){
         if(isset($this->oxconf["PGUSER"]) and isset($this->oxconf["PGHOST"]) and isset($this->oxconf["PGDBNAME"]) and isset($this->oxconf["PGPASSWD"])){
-          $pgcon = pg_connect("host=".$this->oxconf["PGHOST"]." user=".$this->oxconf["PGUSER"]." password=".$this->oxconf["PGPASSWD"]." dbname=".$this->oxconf["PGDBNAME"]);
+          $pgcon =  @pg_connect("host=".$this->oxconf["PGHOST"]." user=".$this->oxconf["PGUSER"]." password=".$this->oxconf["PGPASSWD"]." dbname=".$this->oxconf["PGDBNAME"]);
           if (! $pgcon){
             print_red(_("Couldn't connect to postgresql database!"));
             return;

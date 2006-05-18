@@ -1,7 +1,15 @@
-{ if !$pg }
-<h2>{t}Open-Xchange Account{/t} - {t}disabled, no Postgresql support detected{/t}</h2>
+{if !$pg}
+<h2>{t}Open-Xchange Account{/t} - {t}disabled, no Postgresql support detected. Or the specified database can't be reached{/t}</h2>
 {else}
-<h2>{if $tabbed eq 1}<input type="checkbox" name="oxchange" value="B" {$oxchangeState} {$oxchangeAccountACL} onCLick="changeState('OXAppointmentDays');changeState('OXTaskDays');changeState('OXTimeZone');" >{/if}{t}Open-Xchange account{/t}</h2>
+
+<input type="checkbox" name="oxchange" value="B" 
+	{$oxchangeState} {$oxchangeAccountACL} 
+	onCLick="	changeState('OXAppointmentDays');
+				changeState('OXTaskDays');
+				changeState('OXTimeZone');" >
+<h2>{t}Open-Xchange account{/t}</h2>
+
+
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
 
  <!-- Headline container -->
