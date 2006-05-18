@@ -97,6 +97,19 @@ class faiSummaryTab extends plugin{
   function save_object()
   {
     $once = true;
+
+    if(isset($_GET['expand']) && isset($_GET['id'])){
+      if(isset($this->Result[$_GET['id']])){
+        $this->Result[$_GET['id']]['Open'] =true  ;
+      }
+    }
+
+    if(isset($_GET['compress']) && isset($_GET['id'])){
+      if(isset($this->Result[$_GET['id']])){
+        unset($this->Result[$_GET['id']]['Open']);
+      }
+    }
+
     foreach($_POST as $name => $value ){
 
       /* check for open tag request */
@@ -189,13 +202,17 @@ class faiSummaryTab extends plugin{
       
       $image = "<img src='".$this->objs[$key]['Image']."' class='center' alt='".$this->objs[$key]['Name']."' border=0>";
       if(!isset($entry['Open'])){
-        $str .= "<tr><td colspan=2><input type='image' class='center' src='images/expand.png' name='open_".$key."'>&nbsp;";
+        $str .= "<tr><td colspan=2>
+                    <a href='?plug=".$_GET['plug']."&expand&id=".$key."'>
+                  <img border=0 class='center' src='images/expand.png' alt='"._("Open")."'>&nbsp;";
         $str .= $image."&nbsp;";
-        $str .= "<b>".$this->objs[$key]['Name']."</b></td></tr>";
+        $str .= "<b>".$this->objs[$key]['Name']."</b></b></td></tr>";
       }else{
-        $str .= "<tr><td colspan=2><input type='image' class='center' src='images/sort_down.png' name='close_".$key."'>&nbsp;";
+        $str .= "<tr><td colspan=2>
+                    <a href='?plug=".$_GET['plug']."&compress&id=".$key."'>
+                   <img border=0 class='center' src='images/sort_down.png' alt='"._("Close")."'>&nbsp;";
         $str .= $image."&nbsp;";
-        $str .= "<b>".$this->objs[$key]['Name']."</b></td></tr>";
+        $str .= "<b>".$this->objs[$key]['Name']."</b></a></td></tr>";
    
         /* Display FAItemplate FAIhook FAIscript entries */ 
         if(in_array($key,array("FAItemplate","FAIhook","FAIscript"))){
@@ -238,7 +255,7 @@ class faiSummaryTab extends plugin{
               $str .="<tr><td style='padding-left:20px;'>";
             }
 
-            $str .= "<a target='_blank'href='?plug=".$_GET['plug']."&show&type=".$key."&id=".base64_encode($data['dn'])."'>";
+            $str .= "<a target='_blank' href='?plug=".$_GET['plug']."&show&type=".$key."&id=".base64_encode($data['dn'])."'>";
             $str .= $image."&nbsp;";
             if(isset($data['FAIpriority'][0])){
               $str .= "(".$data['FAIpriority'][0].")";
