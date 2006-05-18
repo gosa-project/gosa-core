@@ -180,6 +180,34 @@ class environment extends plugin
       $this->is_group = true;
     }
 
+    /* Set resolutions */
+    $this->gotoXResolutions = array("auto"=>_("auto"),
+                                    "640x480"   =>  "640x480",
+                                    "800x600"   =>  "800x600",
+                                    "1024x768"  =>  "1024x768",
+                                    "1154x864"  =>  "1154x864",
+                                    "1280x768"  =>  "1280x768",
+                                    "1280x1024" =>  "1280x1024");
+
+    if(isset($this->config->data['MAIN']['RESOLUTION_HOOK'])){
+      $file = $this->config->data['MAIN']['RESOLUTION_HOOK'];
+  
+      if(is_readable($file)){
+        $str = file_get_contents($file);
+        $lines = split("\n",$str);
+        foreach($lines as $line){
+          $line = trim($line);
+          if(!empty($line)){
+            $this->gotoXResolutions[$line]=$line;
+          }
+        }
+        //natcasesort($this->gotoXResolutions);
+      }else{
+        print_red(sprintf(_("You have specified an external resolution hook which can't be read, please check the permission of the file '%s'."),$file));
+      }
+    }
+
+ 
     $this->gotoProfileServers= $config->getShareServerList() ;
     $this->gotoShareSelections= $config->getShareList(true);
     $this->gotoAvailableShares= $config->getShareList(false);  
@@ -380,13 +408,6 @@ class environment extends plugin
       $smarty->assign("gotoProfileFlag_CCHK"," checked ");
     }
 
-    $this->gotoXResolutions = array("auto"=>_("auto"),
-                                    "640x480"   =>  "640x480",
-                                    "800x600"   =>  "800x600",
-                                    "1024x768"  =>  "1024x768",
-                                    "1154x864"  =>  "1154x864",
-                                    "1280x768"  =>  "1280x768",
-                                    "1280x1024" =>  "1280x1024");
 
     $smarty->assign("gotoXResolutions"    , $this->gotoXResolutions);
     $smarty->assign("gotoXResolutionKeys" , array_flip($this->gotoXResolutions));
