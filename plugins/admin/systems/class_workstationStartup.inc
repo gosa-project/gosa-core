@@ -54,7 +54,7 @@ class workstartup extends plugin
     $ldap   = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
    
-    $this->goLdapServerList = array("default" =>_("inherited"));
+    $this->goLdapServerList = array("default" =>"["._("inherited")."]");
    
     $_SESSION['getAvailableClassesForThisRelease_CACHE'] = array();
     $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'] = array();
@@ -581,7 +581,7 @@ class workstartup extends plugin
       };
 
       if($server == "default"){
-        $display = _("inherited");
+        $display = "["._("inherited")."]";
       }else{
         $display = $server;
       }
