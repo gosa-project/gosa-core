@@ -218,16 +218,18 @@ class fonreport extends plugin
     $this->report_list= $report_list;
     @mysql_close($link);
 
-    /* Generate output */
-    $mod= 0;
-
 
     /*****************
       Create list of results  
      *****************/
 
-    $output= "";
-    foreach ($this->report_list as $val){
+    /* Generate output */
+    $mod      = 0;
+    $output   = "";
+    if(count($this->report_list) < $this->start){
+      $this->start = 0;
+    }
+    foreach($this->report_list as $val){
       if ($mod < $this->start) {
         $mod++;
         continue;
@@ -243,7 +245,6 @@ class fonreport extends plugin
       }
       $output.= "<tr style=\"height:22px; $col\">$val</tr>";
     }
-
 
     /*****************
       Tell smarty what we have found  
@@ -302,7 +303,11 @@ class fonreport extends plugin
         }
       }
     }
-    $str .= " dst like '".$s2."' OR src like '".$s2."' OR lastapp like '".$s2."')"; 
+    $str .= " channel     like '%".$s."%' OR  
+              dstchannel  like '%".$s."%' OR  
+              dst         like '".$s2."' OR 
+              src         like '".$s2."' OR 
+              lastapp     like '".$s2."')"; 
     return($str);
   }
 
