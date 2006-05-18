@@ -36,7 +36,7 @@ class termservice extends plugin
   var $cn= "";
   var $orig_dn= "";
   var $XMethods= array();
-  var $XDrivers= array("unknown", "ati", "atimisc", "chips", "cirrus", "cyrix", "fbdev",
+  var $XDrivers= array("ati", "atimisc", "chips", "cirrus", "cyrix", "fbdev",
       "i128", "i740", "i810", "imstt", "mga", "neomagic", "newport", "nsc",  "nv",
       "r128", "radeon", "rendition", "s3", "s3virge", "savage", "siliconmotion",
       "sis", "tdfx", "tga", "trident", "tseng", "vesa", "vga", "vmware");
@@ -65,6 +65,8 @@ class termservice extends plugin
   function termservice ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
+    
+    array_unshift($this->XDrivers, "["._("unknown")."]");
     
     $this->XResolutions= array(
         "default"   =>  _("inherited")  ,
