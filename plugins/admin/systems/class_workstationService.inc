@@ -35,18 +35,9 @@ class workservice extends plugin
       "i128", "i740", "i810", "imstt", "mga", "neomagic", "newport", "nsc",  "nv",
       "r128", "radeon", "rendition", "s3", "s3virge", "savage", "siliconmotion",
       "sis", "tdfx", "tga", "trident", "tseng", "vesa", "vga", "vmware");
-  var $XResolutions= array("default", "640x480", "800x600", "1024x768", "1152x864", "1280x1024",
-      "1400x1050", "1600x1200");
-  var $XColordepths= array("default", "8", "15", "16", "24");
-  var $XKbModels= array ("default", "btc9000", "chicony", "compaq", "dell", "dell101", "everex",
-      "flexpro", "geniuscomfy", "hp", "itouch", "jp106", "logicordless",
-      "logiinetnav", "logiinternet", "macintosh", "microsoft",
-      "microsoftpro", "omnikey101", "pc101", "pc102", "pc104",
-      "pc105", "rapidaccess", "rapidaccess2", "winbook");
 
-                    /* Additional values will be extracted from /etc/gosa/keyboardLayouts */
-  var $XKbLayouts= array ("default"=>"default","de"=> "de","intl" =>"intl","us" =>"us");
-  var $XKbVariants= array ("default", "nodeadkeys", "basic");
+  var $XResolutions = array();
+
   var $MouseTypes= array("AUTO", "ImPS/2", "PS/2", "Microsoft", "Logitech");
   var $MousePorts= array("AUTO", "/dev/ttyS0", "/dev/ttyS1", "/dev/psaux", "/dev/input/mice");
   var $hardware_list= array();
@@ -62,9 +53,44 @@ class workservice extends plugin
       "gotoXMouseType", "gotoXMouseport", "goFonHardware");
   var $objectclasses= array("GOhard");
 
+  var $XColordepths     =array();
+  var $XKbModels        =array();
+  var $XKbLayouts       =array();
+  var $XKbVariants      =array();
+
   function workservice ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
+
+    $this->XResolutions= array( 
+        "default"   =>  _("inherited")  ,
+        "640x480"   =>  "640x480",
+        "800x600"   =>  "800x600",
+        "1024x768"  =>  "1024x768",
+        "1152x864"  =>  "1152x864", 
+        "1280x1024" =>  "1280x1024",
+        "1400x1050" =>  "1400x1050", 
+        "1600x1200" =>  "1600x1200");
+
+    $this->XColordepths= array( 
+        "default"  => _("inherited"), 
+        "8"        => "8 " ._("bit"), 
+        "15"       => "15 "._("bit"),      
+        "16"       => "16 "._("bit"),   
+        "24"       => "24 "._("bit"));
+
+    $this->XKbModels['default']= _("inherited"); 
+    foreach(array ("btc9000", "chicony", "compaq", "dell", "dell101", "everex",
+          "flexpro", "geniuscomfy", "hp", "itouch", "jp106", "logicordless",
+          "logiinetnav", "logiinternet", "macintosh", "microsoft",
+          "microsoftpro", "omnikey101", "pc101", "pc102", "pc104",
+          "pc105", "rapidaccess", "rapidaccess2", "winbook") as $type){
+      $this->XKbModels[$type] = $type;
+    }
+
+    /* Additional values will be extracted from /etc/gosa/keyboardLayouts */
+    $this->XKbLayouts= array ("default"=>_("inherited"),"de"=> "de","intl" =>"intl","us" =>"us");
+    $this->XKbVariants= array ("default"=>_("inherited"), "nodeadkeys"=>"nodeadkeys", "basic"=>"basic");
 
     /* try to read additional keyboard layouts 
      */
@@ -83,7 +109,7 @@ class workservice extends plugin
         }
       }
     }
-    
+
     /* Initialize methods */
     $this->XMethods["default"]= _("default");
     $this->XMethods["indirect"]= _("show chooser");
@@ -136,8 +162,8 @@ class workservice extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
@@ -197,8 +223,8 @@ class workservice extends plugin
     /* Phone stuff */
     $smarty->assign ("goFonHardware", $this->goFonHardware);
     $hl= "<select size=\"1\" name=\"goFonHardware\" title=\"".
-         _("Choose the phone located at the current terminal")."\" ".
-         chkacl($this->acl, "goFonHardware").">\n";
+      _("Choose the phone located at the current terminal")."\" ".
+      chkacl($this->acl, "goFonHardware").">\n";
     foreach ($this->hardware_list as $cn => $description){
       if ($cn == $this->goFonHardware){
         $selected= "selected";
@@ -229,7 +255,7 @@ class workservice extends plugin
 
   function remove_from_parent()
   {
-      $this->handle_post_events("remove");
+    $this->handle_post_events("remove");
   }
 
   /* Save data to object */
