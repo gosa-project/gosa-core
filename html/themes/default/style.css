@@ -289,6 +289,12 @@ table.menuitem:hover {
 
 td.phonelist:hover {
 	background-color:#d2d2d2;
+	border-right:1px solid #B0B0B0;
+	border-bottom:1px solid #B0B0B0;
+}
+
+td.phonelist {
+	border-right:1px solid #B0B0B0;
 }
 
 h1.menuheader {
@@ -757,4 +763,13 @@ input.menubar{
 	height:19px;
 	padding:0px;
 	width:100%;
+}
+
+td.tbhead {
+	border-right:1px solid #B0B0B0;
+	border-bottom:1px solid #B0B0B0;
+}
+
+td.tbrhead {
+	border-bottom:1px solid #B0B0B0;
 }

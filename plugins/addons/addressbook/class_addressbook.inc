@@ -336,7 +336,6 @@ class addressbook extends plugin
 			/* Walk through LDAP results */
 			while ($attrs= $ldap->fetch()){
 
-#! hickert  
 				/* prevent empty vaiables */
 				foreach($this->attributes as $atr)          {
 					if(!isset($attrs[$atr][0])) {
@@ -358,18 +357,18 @@ class addressbook extends plugin
 						"<td class=\"phonelist\" title=\"".$attrs['sn'][0].", ".$attrs['givenName'][0]."\" onClick='location.href=\"main.php?plug=".validate($_GET['plug'])."&amp;start=".validate($_GET['start'])."&amp;show=".base64_encode($attrs['dn'])."\"'><a style='vertical-align:middle;' href=\"main.php?plug=".validate($_GET['plug'])."&amp;start=".validate($_GET['start'])."&amp;show=".base64_encode($attrs['dn'])."\">".$attrs['sn'][0].", ".$attrs['givenName'][0].
 						"</a>
 						</td>
-						<td title=\""._("Dial")." ".$attrs['telephoneNumber'][0]."\">
+						<td class=\"phonelist\" title=\""._("Dial")." ".$attrs['telephoneNumber'][0]."\">
 						<a style='vertical-align:middle;' href=\"main.php?plug=".validate($_GET['plug'])."&amp;dial=telephoneNumber&amp;start=".validate($_GET['start'])."&amp;target=".base64_encode($attrs['dn'])."\">".$attrs['telephoneNumber'][0]."
 						</a>
 						</td>
-						<td title=\"".$attrs['facsimileTelephoneNumber'][0]."\">
+						<td class=\"phonelist\" title=\"".$attrs['facsimileTelephoneNumber'][0]."\">
 						".$attrs['facsimileTelephoneNumber'][0]."
 						</td>
-						<td title=\""._("Dial")." ".$attrs['mobile'][0]."\">
+						<td class=\"phonelist\" title=\""._("Dial")." ".$attrs['mobile'][0]."\">
 						<a style='vertical-align:middle;' href=\"main.php?plug=".validate($_GET['plug'])."&amp;dial=mobile&amp;start=".validate($_GET['start'])."&amp;target=".base64_encode($attrs['dn'])."\">".$attrs['mobile'][0]."
 						</a>
 						</td>
-						<td title=\""._("Dial")." ".$attrs['homePhone'][0]."\">
+						<td class=\"phonelist\" title=\""._("Dial")." ".$attrs['homePhone'][0]."\">
 						<a style='vertical-align:middle;' href=\"main.php?plug=".validate($_GET['plug'])."&amp;dial=homePhone&amp;start=".validate($_GET['start'])."&amp;target=".base64_encode($attrs['dn'])."\">".$attrs['homePhone'][0]."
 						</a>
 						</td>

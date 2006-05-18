@@ -108,7 +108,7 @@ class termgroup extends plugin
 
     /* Check for valid ntpServer selection */
     if((!$this->inheritTimeServer) && (!count($this->gotoNtpServer))){
-      $message[]= _("There must be at least one NTP server selected, or the inherit mode activated.");
+      $message[]= _("There must be at least one NTP server selected.");
     }
     return($message);
   }

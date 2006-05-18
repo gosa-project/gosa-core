@@ -1,7 +1,7 @@
-<table summary="" style="table-layout:fixed; width:100%; vertical-align:top; text-align:left; table-layout:auto;" cellpadding="4">
+<table summary="" style="table-layout:fixed; width:100%; vertical-align:top; text-align:left; table-layout:auto;" cellpadding="4" border="0">
 <tr>
   <td style="vertical-align:top;">
-   <table summary="" style="width:100%; vertical-align:top; text-align:left; border:1px solid #B0B0B0;"  cellpadding="4" cellspacing="0" rules="cols">
+   <table summary="" style="border:1px solid #B0B0B0; width:100%; vertical-align:top; text-align:left;"  cellpadding="4" cellspacing="0">
     <colgroup>
         <col width="32%">
         <col width="14%">
@@ -11,8 +11,8 @@
         <col width="8%">
     </colgroup>
     <tr style="background-color: #E8E8E8; height:26px;font-weight:bold;">
-     <td>{t}Name{/t}</td><td>{t}Phone{/t}</td><td>{t}Fax{/t}</td>
-     <td>{t}Mobile{/t}</td><td>{t}Private{/t}</td><td>{t}Contact{/t}</td>
+     <td class="tbhead">{t}Name{/t}</td><td class="tbhead">{t}Phone{/t}</td><td class="tbhead">{t}Fax{/t}</td>
+     <td class="tbhead">{t}Mobile{/t}</td><td class="tbhead">{t}Private{/t}</td><td class="tbrhead">{t}Contact{/t}</td>
     </tr>
     {$search_result}
    </table>
