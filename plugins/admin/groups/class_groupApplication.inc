@@ -605,22 +605,11 @@ class appgroup extends plugin
 
     $div->SetHeight(300);
 
-    /* NEW LIST MANAGMENT
-     * We also need to search for the departments
-     * So we are able to navigate like in konquerer
-     */
-
-    //FIXME: Why do we not use get_list here? It's the same code all over the time...
-    $ldap = $this->config->get_ldap_link();
-    $ldap->cd($this->curbase) ;
-    $ldap->ls("(objectClass=gosaDepartment)"); 
-    $departments= array();
-    $tmp = array();
-    while ($value = $ldap->fetch()){
-      $tmp[strtolower($value['dn']).$value['dn']]=$value;
-    }
-    ksort($tmp);
-    foreach($tmp as $value){
+    /* get departments */  
+    $ui = get_userinfo();
+    $departments = array();
+    $res = get_list("(objectClass=gosaDepartment)",$ui->subtreeACL,$this->curbase,array("description","cn","ou"),GL_SIZELIMIT);
+    foreach($res as $value){
       $fdn= @LDAP::fix($value['dn']);
       if($value["description"][0]!=".."){
         $departments[$value['dn']]= convert_department_dn($fdn)." - [".$value["description"][0]."]";
@@ -628,9 +617,6 @@ class appgroup extends plugin
         $departments[$value['dn']]=convert_department_dn($fdn);
       }
     }
-
-    /* END NEW LIST MANAGMENT
-     */
 
     $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=depopen&amp;depid=%s'>%s</a>";
     $linkadd  = "<a href='?plug=".$_GET['plug']."&amp;act=add&amp;id=%s'>%s</a>";
