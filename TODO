@@ -12,14 +12,18 @@ Target for 2.4.1:
 
 * Update the french manual ( OpenSides )
 
-* Pimp 1024x768 screen resolutions, it should be the minimum usable resoultion
-
 * Auto-Resize for subdialogs
 
 * Change FAIstate when triggering actions
   (install, sysinfo, softupdate)
 
 * Fix DNS plugin
+  * Zones are not creatable, currently
+  * Error messages are partly wrong
+
+* Posix -> Groups has no subsearch checkbox
+
+* Download of hooks/scripts opens an additional window
 
 
 Target for 2.5:
