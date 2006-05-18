@@ -890,7 +890,7 @@ class workstartup extends plugin
     if ($this->attrs['gotoLdapServer'] == "default"){
       $this->attrs['gotoLdapServer']= array();
     }
-    if ($this->attrs['gotoBootKernel'] == "%default%"){
+    if ($this->attrs['gotoBootKernel'] == "%default%" || $this->attrs['gotoBootKernel'] == "default"){
       $this->attrs['gotoBootKernel']= array();
     }
 

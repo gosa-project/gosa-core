@@ -38,8 +38,8 @@ class workservice extends plugin
 
   var $XResolutions = array();
 
-  var $MouseTypes= array("AUTO", "ImPS/2", "PS/2", "Microsoft", "Logitech");
-  var $MousePorts= array("AUTO", "/dev/ttyS0", "/dev/ttyS1", "/dev/psaux", "/dev/input/mice");
+  var $MouseTypes= array();
+  var $MousePorts= array();
   var $hardware_list= array();
   var $used_hardware= array();
 
@@ -63,7 +63,7 @@ class workservice extends plugin
     plugin::plugin ($config, $dn);
 
     $this->XResolutions= array( 
-        "default"   =>  _("inherited")  ,
+        "default"   =>  "["._("inherited")."]",
         "640x480"   =>  "640x480",
         "800x600"   =>  "800x600",
         "1024x768"  =>  "1024x768",
@@ -75,13 +75,13 @@ class workservice extends plugin
     array_unshift($this->XDrivers, "["._("unknown")."]");
   
     $this->XColordepths= array( 
-        "default"  => _("inherited"), 
+        "default"  => "["._("inherited")."]", 
         "8"        => "8 " ._("bit"), 
         "15"       => "15 "._("bit"),      
         "16"       => "16 "._("bit"),   
         "24"       => "24 "._("bit"));
 
-    $this->XKbModels['default']= _("inherited"); 
+    $this->XKbModels['default']= "["._("inherited")."]"; 
     foreach(array ("btc9000", "chicony", "compaq", "dell", "dell101", "everex",
           "flexpro", "geniuscomfy", "hp", "itouch", "jp106", "logicordless",
           "logiinetnav", "logiinternet", "macintosh", "microsoft",
@@ -90,9 +90,17 @@ class workservice extends plugin
       $this->XKbModels[$type] = $type;
     }
 
+    $this->MouseTypes= array("AUTO"     => "["._("inherited")."]", "ImPS/2"      =>"ImPS/2", 
+                             "PS/2"     => "PS/2",                "Microsoft"   =>"Microsoft", 
+                              "Logitech"=>"Microsoft");
+
+    $this->MousePorts= array("AUTO"             => "["._("inherited")."]", "/dev/ttyS0"  =>"/dev/ttyS0", 
+                             "/dev/ttyS1"       => "/dev/ttyS1",          "/dev/psaux"  =>"/dev/psaux", 
+                             "/dev/input/mice"  => "/dev/input/mice");
+
     /* Additional values will be extracted from /etc/gosa/keyboardLayouts */
-    $this->XKbLayouts= array ("default"=>_("inherited"),"de"=> "de","intl" =>"intl","us" =>"us");
-    $this->XKbVariants= array ("default"=>_("inherited"), "nodeadkeys"=>"nodeadkeys", "basic"=>"basic");
+    $this->XKbLayouts= array ("default"=>"["._("inherited")."]","de"=> "de","intl" =>"intl","us" =>"us");
+    $this->XKbVariants= array ("default"=>"["._("inherited")."]", "nodeadkeys"=>"nodeadkeys", "basic"=>"basic");
 
     /* try to read additional keyboard layouts 
      */

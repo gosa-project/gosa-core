@@ -243,7 +243,7 @@ class termgeneric extends plugin
 
         $tmp2[$servername.":".$path]= $servername.":".$path; 
       }else{
-        $tmp2[$server]=$server;
+        $tmp2[$server]="["._("inherited")."]";
       }
     }
   

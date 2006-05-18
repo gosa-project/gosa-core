@@ -42,7 +42,7 @@
      <td><LABEL for="gotoXMouseType">{t}Type{/t}</LABEL></td>
      <td>
       <select name="gotoXMouseType" id="gotoXMouseType" title="{t}Choose mouse type{/t}" {$gotoXMouseTypeACL}>
-       {html_options values=$MouseTypes output=$MouseTypes selected=$gotoXMouseType_select}
+       {html_options options=$MouseTypes selected=$gotoXMouseType_select}
       </select>
      </td>
     </tr>
@@ -50,7 +50,7 @@
      <td><LABEL for="gotoXMouseport">{t}Port{/t}</LABEL></td>
      <td>
       <select id="gotoXMouseport" name="gotoXMouseport" title="{t}Choose mouse port{/t}" {$gotoXMouseportACL}>
-       {html_options values=$MousePorts output=$MousePorts selected=$gotoXMouseport_select}
+       {html_options options=$MousePorts selected=$gotoXMouseport_select}
       </select>
      </td>
     </tr>

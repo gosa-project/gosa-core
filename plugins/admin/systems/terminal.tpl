@@ -54,7 +54,7 @@
      <td><LABEL for="gotoTerminalPath">{t}Root server{/t}</LABEL></td>
      <td>
       <select name="gotoTerminalPath" id="gotoTerminalPath" title="{t}Select NFS root filesystem to use{/t}" {$gotoTerminalPathACL}>
-       {html_options values=$nfsservers output=$nfsservers selected=$gotoTerminalPath_select}
+       {html_options options=$nfsservers selected=$gotoTerminalPath_select}
       </select>
      </td>
     </tr>
@@ -62,7 +62,7 @@
      <td><LABEL for="gotoSwapServer">{t}Swap server{/t}</LABEL></td>
      <td>
       <select name="gotoSwapServer" id="gotoSwapServer" title="{t}Choose NFS filesystem to place swap files on{/t}" {$gotoSwapServerACL}>
-       {html_options values=$nfsservers output=$nfsservers selected=$gotoSwapServer_select}
+       {html_options options=$nfsservers selected=$gotoSwapServer_select}
       </select>
      </td>
     </tr>

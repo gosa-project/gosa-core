@@ -8,13 +8,13 @@ class termstartup extends plugin
 
   /* Generic terminal attributes */
   var $bootmode= "G";
-  var $goLdapServerList= array("default");
+  var $goLdapServerList= array();
   var $gotoBootKernel= "";
   var $gotoKernelParameters= "";
   var $gotoLdapServer= "";
   var $gotoModules= array();
   var $gotoTerminalPath= "";
-  var $gotoBootKernels= array("default");
+  var $gotoBootKernels= array();
 
   /* Share */
   var $gotoShares         = array();// Currently Share Option
@@ -35,6 +35,8 @@ class termstartup extends plugin
   function termstartup ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
+
+    $this->gotoBootKernels = array("default"=>"["._("inherited")."]");
 
     /* Get arrays */
     foreach (array("gotoModules") as $val){
@@ -101,7 +103,14 @@ class termstartup extends plugin
       }
 
     }
-
+    $tmp = $this->config->data['SERVERS']['LDAP'];  
+    foreach($tmp as $server){
+      $visible = $server;
+      if($server == "default"){
+        $visible = "["._("inherited")."]";
+      }
+      $this->goLdapServerList[$server] = $visible;
+    }
   }
 
   function execute()
@@ -173,9 +182,6 @@ class termstartup extends plugin
     $smarty->assign("gotoShares",$this->printOutAssignedShares());
     $smarty->assign("gotoShareKeys",array_flip($this->printOutAssignedShares()));
 
-    /* Arrays */
-    $tmp = $this->config->data['SERVERS']['LDAP'];
-
     /* Create divSelectBox for ldap server selection
      */
     $SelectBoxLdapServer = new divSelectBox("LdapServer");
@@ -185,7 +191,7 @@ class termstartup extends plugin
      *  or given entry is no longer available ...
      */
     $found = false;
-    foreach($tmp as $server){
+    foreach($this->goLdapServerList as $server => $name){
       if($this->gotoLdapServer==$server){
         $found = true;
       }
@@ -193,7 +199,7 @@ class termstartup extends plugin
     
     /* Add Entries
      */
-    foreach($tmp as $server){
+    foreach($this->goLdapServerList as $server => $visible){
       $use ="";
       if(($this->gotoLdapServer == $server) || ($found == false)) {
         $found = true;
@@ -202,7 +208,7 @@ class termstartup extends plugin
 
       $SelectBoxLdapServer->AddEntry(
           array(
-            array("string"=>$server),
+            array("string"=>$visible),
             array("string"=>"<input type='radio' name='gotoLdapServer' value='".$server."' ".$use.">",
                   "attach"=>"style='border-right:0px;'")
             ));
@@ -334,8 +340,10 @@ class termstartup extends plugin
     }
 
     /* Strip out 'default' values */
-    if ($this->attrs['gotoLdapServer'] == "default"){
-      unset ($this->attrs['gotoLdapServer']);
+    foreach(array("gotoBootKernel","gotoLdapServer") as $value){
+      if ($this->attrs[$value] == "default"){
+        $this->attrs[$value] = array();
+      } 
     }
 
      /* prepare share settings */
