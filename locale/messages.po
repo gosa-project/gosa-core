@@ -385,7 +385,7 @@ msgstr ""
 #: plugins/admin/groups/class_groupManagement.inc:326
 #: plugins/admin/users/class_userManagement.inc:623
 #: plugins/admin/applications/class_applicationManagement.inc:339
-#: plugins/admin/departments/class_departmentManagement.inc:302
+#: plugins/admin/departments/class_departmentManagement.inc:298
 #: plugins/admin/systems/servnfs.tpl:114
 #: plugins/admin/systems/glpiAttachmentEdit.tpl:69
 #: plugins/admin/systems/servdnseditzone.tpl:121
@@ -452,7 +452,7 @@ msgstr ""
 #: plugins/admin/users/remove.tpl:16 plugins/admin/applications/remove.tpl:15
 #: plugins/admin/applications/class_applicationManagement.inc:341
 #: plugins/admin/departments/remove.tpl:16
-#: plugins/admin/departments/class_departmentManagement.inc:304
+#: plugins/admin/departments/class_departmentManagement.inc:300
 #: plugins/admin/systems/glpi_edit_type.tpl:29
 #: plugins/admin/systems/glpi_edit_printer_type.tpl:30
 #: plugins/admin/systems/glpiDeviceManagement.tpl:52
@@ -808,7 +808,7 @@ msgstr ""
 #: plugins/admin/systems/phonesettings.tpl:191
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:60
 #: plugins/admin/ogroups/ogroup_objects.tpl:50
-#: plugins/admin/ogroups/generic.tpl:39
+#: plugins/admin/ogroups/termgroup.tpl:70 plugins/admin/ogroups/generic.tpl:39
 #: plugins/admin/ogroups/phonequeue.tpl:24
 #: plugins/gofon/phoneaccount/paste_generic.tpl:18
 #: plugins/gofon/phoneaccount/generic.tpl:13
@@ -867,8 +867,9 @@ msgstr ""
 #: plugins/admin/systems/class_servDNSeditZone.inc:472
 #: plugins/admin/systems/phonesettings.tpl:177
 #: plugins/admin/systems/phonesettings.tpl:192
-#: plugins/admin/ogroups/generic.tpl:40 plugins/admin/ogroups/remove.tpl:14
-#: plugins/admin/ogroups/phonequeue.tpl:25 plugins/gofon/macro/remove.tpl:13
+#: plugins/admin/ogroups/termgroup.tpl:72 plugins/admin/ogroups/generic.tpl:40
+#: plugins/admin/ogroups/remove.tpl:14 plugins/admin/ogroups/phonequeue.tpl:25
+#: plugins/gofon/macro/remove.tpl:13
 #: plugins/gofon/phoneaccount/paste_generic.tpl:19
 #: plugins/gofon/phoneaccount/generic.tpl:15
 #: plugins/gofon/conference/remove.tpl:14
@@ -1363,8 +1364,6 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/generic/class_user.inc:245
-#: plugins/gofax/faxreports/class_faxreport.inc:76
-#: plugins/gofon/fonreports/class_fonreport.inc:71
 msgid "January"
 msgstr ""
 
@@ -1374,8 +1373,6 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/generic/class_user.inc:245
-#: plugins/gofax/faxreports/class_faxreport.inc:76
-#: plugins/gofon/fonreports/class_fonreport.inc:71
 msgid "February"
 msgstr ""
 
@@ -1385,8 +1382,6 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/generic/class_user.inc:245
-#: plugins/gofax/faxreports/class_faxreport.inc:76
-#: plugins/gofon/fonreports/class_fonreport.inc:71
 msgid "March"
 msgstr ""
 
@@ -1396,8 +1391,6 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/generic/class_user.inc:245
-#: plugins/gofax/faxreports/class_faxreport.inc:76
-#: plugins/gofon/fonreports/class_fonreport.inc:71
 msgid "April"
 msgstr ""
 
@@ -1407,8 +1400,6 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/generic/class_user.inc:246
-#: plugins/gofax/faxreports/class_faxreport.inc:77
-#: plugins/gofon/fonreports/class_fonreport.inc:72
 msgid "May"
 msgstr ""
 
@@ -1418,8 +1409,6 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/generic/class_user.inc:246
-#: plugins/gofax/faxreports/class_faxreport.inc:77
-#: plugins/gofon/fonreports/class_fonreport.inc:72
 msgid "June"
 msgstr ""
 
@@ -1429,8 +1418,6 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/generic/class_user.inc:246
-#: plugins/gofax/faxreports/class_faxreport.inc:77
-#: plugins/gofon/fonreports/class_fonreport.inc:72
 msgid "July"
 msgstr ""
 
@@ -1440,8 +1427,6 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/generic/class_user.inc:246
-#: plugins/gofax/faxreports/class_faxreport.inc:77
-#: plugins/gofon/fonreports/class_fonreport.inc:72
 msgid "August"
 msgstr ""
 
@@ -1451,8 +1436,6 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/generic/class_user.inc:246
-#: plugins/gofax/faxreports/class_faxreport.inc:78
-#: plugins/gofon/fonreports/class_fonreport.inc:73
 msgid "September"
 msgstr ""
 
@@ -1462,8 +1445,6 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:395
 #: plugins/personal/samba/class_sambaAccount.inc:413
 #: plugins/personal/generic/class_user.inc:247
-#: plugins/gofax/faxreports/class_faxreport.inc:78
-#: plugins/gofon/fonreports/class_fonreport.inc:73
 msgid "October"
 msgstr ""
 
@@ -1473,8 +1454,6 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:395
 #: plugins/personal/samba/class_sambaAccount.inc:413
 #: plugins/personal/generic/class_user.inc:247
-#: plugins/gofax/faxreports/class_faxreport.inc:78
-#: plugins/gofon/fonreports/class_fonreport.inc:73
 msgid "November"
 msgstr ""
 
@@ -1484,8 +1463,6 @@ msgstr ""
 #: plugins/personal/samba/class_sambaAccount.inc:395
 #: plugins/personal/samba/class_sambaAccount.inc:413
 #: plugins/personal/generic/class_user.inc:247
-#: plugins/gofax/faxreports/class_faxreport.inc:78
-#: plugins/gofon/fonreports/class_fonreport.inc:73
 msgid "December"
 msgstr ""
 
@@ -1971,6 +1948,7 @@ msgstr ""
 #: plugins/admin/fai/class_divListFai.inc:75
 #: plugins/admin/groups/group_objects.tpl:46
 #: plugins/admin/users/class_divListUsers.inc:72
+#: plugins/admin/applications/class_divListApplication.inc:57
 #: plugins/admin/systems/glpiSelectUser.tpl:35
 #: plugins/gofon/conference/headpage.tpl:35
 msgid "Display users matching"
@@ -2037,37 +2015,37 @@ msgstr ""
 msgid "You must specify a valid mount point."
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:716
+#: plugins/personal/environment/class_environment.inc:721
 msgid "Removing environment information failed"
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:769
+#: plugins/personal/environment/class_environment.inc:774
 msgid "Please set a valid profile quota size."
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:776
+#: plugins/personal/environment/class_environment.inc:781
 msgid ""
 "You need to setup a valid posix extension in order to enable evironment "
 "features."
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:814
+#: plugins/personal/environment/class_environment.inc:819
 msgid "Can't save new kiosk profiles, possibly permission denied for folder"
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:908
+#: plugins/personal/environment/class_environment.inc:913
 msgid "Error while writing printer"
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:978
+#: plugins/personal/environment/class_environment.inc:983
 msgid "Error while writing printer settings"
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:1047
+#: plugins/personal/environment/class_environment.inc:1052
 msgid "Adding environment information failed"
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:1090
+#: plugins/personal/environment/class_environment.inc:1095
 msgid "Admin"
 msgstr ""
 
@@ -2580,6 +2558,7 @@ msgstr ""
 #: plugins/admin/groups/class_divListGroup.inc:101
 #: plugins/admin/users/class_divListUsers.inc:113
 #: plugins/admin/applications/generic.tpl:32
+#: plugins/admin/applications/class_divListApplication.inc:110
 #: plugins/admin/departments/generic.tpl:27
 #: plugins/admin/departments/class_divListDepartment.inc:76
 #: plugins/admin/systems/server.tpl:14 plugins/admin/systems/terminal.tpl:17
@@ -2668,6 +2647,7 @@ msgstr ""
 #: plugins/addons/addressbook/address_edit.tpl:138
 #: plugins/addons/addressbook/address_info.tpl:64
 #: plugins/admin/users/class_divListUsers.inc:56
+#: plugins/admin/applications/class_divListApplication.inc:50
 #: plugins/admin/ogroups/class_ogroupManagement.inc:365
 #: plugins/gofon/macro/class_divListMacros.inc:46
 #: plugins/generic/references/class_reference.inc:38
@@ -3005,6 +2985,7 @@ msgstr ""
 #: plugins/personal/connectivity/opengw.tpl:34
 #: plugins/admin/systems/class_workstationGeneric.inc:92
 #: plugins/admin/systems/class_servGeneric.inc:35
+#: plugins/admin/ogroups/class_termgroup.inc:39
 msgid "Locked"
 msgstr ""
 
@@ -3425,7 +3406,7 @@ msgstr ""
 msgid "So - if you're sure - press 'Delete' to continue or 'Cancel' to abort."
 msgstr ""
 
-#: plugins/gofax/blocklists/main.inc:20 plugins/gofax/blocklists/main.inc:22
+#: plugins/gofax/blocklists/main.inc:26 plugins/gofax/blocklists/main.inc:28
 msgid "Blocklist management"
 msgstr ""
 
@@ -3450,6 +3431,7 @@ msgstr ""
 #: plugins/admin/fai/class_divListFai.inc:60
 #: plugins/admin/groups/class_divListGroup.inc:51
 #: plugins/admin/users/class_divListUsers.inc:58
+#: plugins/admin/applications/class_divListApplication.inc:51
 #: plugins/admin/departments/class_divListDepartment.inc:42
 #: plugins/admin/systems/class_divListSystem.inc:53
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:188
@@ -3479,6 +3461,7 @@ msgstr ""
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:54
 #: plugins/admin/groups/class_divListGroup.inc:62
 #: plugins/admin/users/class_divListUsers.inc:69
+#: plugins/admin/applications/class_divListApplication.inc:54
 #: plugins/admin/departments/class_divListDepartment.inc:46
 #: plugins/admin/systems/class_divListSystem.inc:66
 #: plugins/admin/ogroups/class_divListOGroup.inc:69
@@ -3490,6 +3473,7 @@ msgstr ""
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:54
 #: plugins/admin/groups/class_divListGroup.inc:62
 #: plugins/admin/users/class_divListUsers.inc:69
+#: plugins/admin/applications/class_divListApplication.inc:54
 #: plugins/admin/departments/class_divListDepartment.inc:46
 #: plugins/admin/systems/class_divListSystem.inc:66
 #: plugins/admin/ogroups/class_divListOGroup.inc:69
@@ -3506,6 +3490,7 @@ msgstr ""
 #: plugins/admin/fai/class_divListFai.inc:111
 #: plugins/admin/groups/class_divListGroup.inc:93
 #: plugins/admin/users/class_divListUsers.inc:99
+#: plugins/admin/applications/class_divListApplication.inc:98
 #: plugins/admin/departments/class_divListDepartment.inc:69
 #: plugins/admin/systems/class_divListSystem.inc:88
 #: plugins/admin/systems/class_glpiSelectUser.inc:160
@@ -3521,6 +3506,7 @@ msgstr ""
 #: plugins/admin/fai/class_divListFai.inc:111
 #: plugins/admin/groups/class_divListGroup.inc:93
 #: plugins/admin/users/class_divListUsers.inc:99
+#: plugins/admin/applications/class_divListApplication.inc:98
 #: plugins/admin/departments/class_divListDepartment.inc:69
 #: plugins/admin/systems/class_divListSystem.inc:88
 #: plugins/admin/systems/class_glpiSelectUser.inc:160
@@ -3535,6 +3521,7 @@ msgstr ""
 #: plugins/admin/fai/class_divListFai.inc:114
 #: plugins/admin/groups/class_divListGroup.inc:94
 #: plugins/admin/users/class_divListUsers.inc:101
+#: plugins/admin/applications/class_divListApplication.inc:100
 #: plugins/admin/departments/class_divListDepartment.inc:70
 #: plugins/admin/systems/class_divListSystem.inc:90
 #: plugins/admin/systems/class_glpiSelectUser.inc:162
@@ -3551,6 +3538,7 @@ msgstr ""
 #: plugins/admin/fai/class_divListFai.inc:114
 #: plugins/admin/groups/class_divListGroup.inc:94
 #: plugins/admin/users/class_divListUsers.inc:101
+#: plugins/admin/applications/class_divListApplication.inc:100
 #: plugins/admin/departments/class_divListDepartment.inc:70
 #: plugins/admin/systems/class_divListSystem.inc:90
 #: plugins/admin/systems/class_glpiSelectUser.inc:162
@@ -3566,6 +3554,7 @@ msgstr ""
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:81
 #: plugins/admin/groups/class_divListGroup.inc:95
 #: plugins/admin/users/class_divListUsers.inc:103
+#: plugins/admin/applications/class_divListApplication.inc:102
 #: plugins/admin/systems/class_divListSystem.inc:92
 #: plugins/admin/systems/class_glpiSelectUser.inc:164
 #: plugins/admin/systems/class_baseSelectDialog.inc:30
@@ -3579,6 +3568,7 @@ msgstr ""
 #: plugins/admin/fai/class_divListFai.inc:117
 #: plugins/admin/groups/class_divListGroup.inc:95
 #: plugins/admin/users/class_divListUsers.inc:103
+#: plugins/admin/applications/class_divListApplication.inc:102
 #: plugins/admin/departments/class_divListDepartment.inc:71
 #: plugins/admin/systems/class_divListSystem.inc:92
 #: plugins/admin/systems/class_glpiSelectUser.inc:164
@@ -3593,6 +3583,7 @@ msgstr ""
 #: plugins/admin/fai/class_divListFai.inc:119
 #: plugins/admin/groups/class_divListGroup.inc:96
 #: plugins/admin/users/class_divListUsers.inc:105
+#: plugins/admin/applications/class_divListApplication.inc:104
 #: plugins/admin/departments/class_divListDepartment.inc:72
 #: plugins/admin/systems/class_divListSystem.inc:93
 #: plugins/admin/systems/class_glpiSelectUser.inc:165
@@ -3612,6 +3603,8 @@ msgstr ""
 #: plugins/admin/groups/class_divListGroup.inc:102
 #: plugins/admin/users/class_divListUsers.inc:105
 #: plugins/admin/users/class_divListUsers.inc:115
+#: plugins/admin/applications/class_divListApplication.inc:104
+#: plugins/admin/applications/class_divListApplication.inc:112
 #: plugins/admin/departments/class_divListDepartment.inc:72
 #: plugins/admin/departments/class_divListDepartment.inc:77
 #: plugins/admin/systems/class_divListSystem.inc:93
@@ -3641,6 +3634,7 @@ msgstr ""
 #: plugins/admin/fai/class_divListFai.inc:150
 #: plugins/admin/groups/class_divListGroup.inc:102
 #: plugins/admin/users/class_divListUsers.inc:115
+#: plugins/admin/applications/class_divListApplication.inc:112
 #: plugins/admin/departments/class_divListDepartment.inc:77
 #: plugins/admin/systems/class_divListSystem.inc:110
 #: plugins/admin/systems/class_glpiSelectUser.inc:169
@@ -3661,6 +3655,7 @@ msgstr ""
 #: plugins/admin/fai/class_divListFai.inc:214
 #: plugins/admin/groups/class_divListGroup.inc:150
 #: plugins/admin/users/class_divListUsers.inc:149
+#: plugins/admin/applications/class_divListApplication.inc:149
 #: plugins/admin/departments/class_divListDepartment.inc:92
 #: plugins/admin/systems/glpi.tpl:15 plugins/admin/systems/glpi.tpl:25
 #: plugins/admin/systems/glpi.tpl:35 plugins/admin/systems/glpiPrinter.tpl:15
@@ -3688,6 +3683,7 @@ msgstr ""
 #: plugins/admin/fai/class_divListFai.inc:216
 #: plugins/admin/groups/class_divListGroup.inc:152
 #: plugins/admin/users/class_divListUsers.inc:153
+#: plugins/admin/applications/class_divListApplication.inc:151
 #: plugins/admin/departments/class_divListDepartment.inc:94
 #: plugins/admin/systems/class_divListSystem.inc:136
 #: plugins/admin/ogroups/class_divListOGroup.inc:140
@@ -3997,42 +3993,38 @@ msgstr ""
 msgid "FAX Reports"
 msgstr ""
 
-#: plugins/gofax/faxreports/class_faxreport.inc:109
-#: plugins/gofax/faxreports/class_faxreport.inc:119
-#: plugins/gofax/faxreports/class_faxreport.inc:165
-#: plugins/gofax/faxreports/class_faxreport.inc:274
+#: plugins/gofax/faxreports/class_faxreport.inc:106
+#: plugins/gofax/faxreports/class_faxreport.inc:116
 msgid "Can't connect to fax database, no reports can be shown!"
 msgstr ""
 
-#: plugins/gofax/faxreports/class_faxreport.inc:112
+#: plugins/gofax/faxreports/class_faxreport.inc:109
 #: plugins/addons/logview/class_logview.inc:66
-#: plugins/gofon/fonreports/class_fonreport.inc:99
+#: plugins/gofon/fonreports/class_fonreport.inc:160
 msgid "There is no mysql extension available, please check your php setup."
 msgstr ""
 
-#: plugins/gofax/faxreports/class_faxreport.inc:123
-#: plugins/gofax/faxreports/class_faxreport.inc:128
-#: plugins/gofax/faxreports/class_faxreport.inc:169
-#: plugins/gofax/faxreports/class_faxreport.inc:278
+#: plugins/gofax/faxreports/class_faxreport.inc:120
+#: plugins/gofax/faxreports/class_faxreport.inc:125
 msgid "Can't select fax database for report generation!"
 msgstr ""
 
-#: plugins/gofax/faxreports/class_faxreport.inc:177
-#: plugins/gofax/faxreports/class_faxreport.inc:286
+#: plugins/gofax/faxreports/class_faxreport.inc:148
+#: plugins/gofax/faxreports/class_faxreport.inc:263
 msgid "Query for fax database failed!"
 msgstr ""
 
-#: plugins/gofax/faxreports/class_faxreport.inc:185
+#: plugins/gofax/faxreports/class_faxreport.inc:157
 msgid "You have no permission to retrieve informations about this fax id!"
 msgstr ""
 
-#: plugins/gofax/faxreports/class_faxreport.inc:205
-#: plugins/gofax/faxreports/class_faxreport.inc:294
-#: plugins/gofon/fonreports/class_fonreport.inc:220
+#: plugins/gofax/faxreports/class_faxreport.inc:177
+#: plugins/gofax/faxreports/class_faxreport.inc:271
+#: plugins/gofon/fonreports/class_fonreport.inc:202
 msgid "Y-M-D"
 msgstr ""
 
-#: plugins/gofax/faxreports/main.inc:5
+#: plugins/gofax/faxreports/main.inc:18
 msgid "FAX reports"
 msgstr ""
 
@@ -4193,7 +4185,7 @@ msgid ""
 "back."
 msgstr ""
 
-#: plugins/addons/addressbook/main.inc:23
+#: plugins/addons/addressbook/main.inc:37
 msgid "Address book"
 msgstr ""
 
@@ -4298,7 +4290,7 @@ msgstr ""
 msgid "Saving addressbook entry failed"
 msgstr ""
 
-#: plugins/addons/mailqueue/main.inc:23
+#: plugins/addons/mailqueue/main.inc:38
 #: plugins/addons/mailqueue/class_mailqueue.inc:6
 msgid "Mail queue"
 msgstr ""
@@ -4653,7 +4645,7 @@ msgid "Click here to save the LDAP Export "
 msgstr ""
 
 #: plugins/addons/ldapmanager/class_ldif.inc:7
-#: plugins/addons/ldapmanager/main.inc:23
+#: plugins/addons/ldapmanager/main.inc:40
 msgid "LDAP manager"
 msgstr ""
 
@@ -4748,7 +4740,7 @@ msgstr ""
 msgid "Message"
 msgstr ""
 
-#: plugins/addons/logview/main.inc:23
+#: plugins/addons/logview/main.inc:33
 msgid "System log view"
 msgstr ""
 
@@ -4840,7 +4832,7 @@ msgstr ""
 msgid "DFS Location"
 msgstr ""
 
-#: plugins/addons/godfs/main.inc:21 plugins/addons/godfs/main.inc:27
+#: plugins/addons/godfs/main.inc:27 plugins/addons/godfs/main.inc:33
 msgid "Distributed File System Administration"
 msgstr ""
 
@@ -4981,7 +4973,7 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
-#: plugins/admin/fai/main.inc:39 plugins/admin/fai/main.inc:41
+#: plugins/admin/fai/main.inc:48 plugins/admin/fai/main.inc:50
 msgid "Fully Automatic Installation"
 msgstr ""
 
@@ -5733,7 +5725,7 @@ msgstr ""
 #: plugins/admin/applications/generic.tpl:17
 #: plugins/admin/systems/server.tpl:55 plugins/admin/systems/terminal.tpl:120
 #: plugins/admin/systems/workstation.tpl:99
-#: plugins/admin/ogroups/termgroup.tpl:13
+#: plugins/admin/ogroups/termgroup.tpl:32
 msgid "Execute"
 msgstr ""
 
@@ -6154,6 +6146,7 @@ msgid "Posix"
 msgstr ""
 
 #: plugins/admin/groups/class_divListGroup.inc:132
+#: plugins/admin/applications/class_divListApplication.inc:136
 #: plugins/admin/ogroups/class_ogroupManagement.inc:364
 #: plugins/gofon/fonreports/contents.tpl:34
 #: plugins/generic/references/class_reference.inc:42
@@ -6162,29 +6155,34 @@ msgstr ""
 
 #: plugins/admin/groups/class_divListGroup.inc:145
 #: plugins/admin/users/class_divListUsers.inc:145
+#: plugins/admin/applications/class_divListApplication.inc:144
 #: plugins/admin/ogroups/class_divListOGroup.inc:133
 msgid "cut"
 msgstr ""
 
 #: plugins/admin/groups/class_divListGroup.inc:145
 #: plugins/admin/users/class_divListUsers.inc:145
+#: plugins/admin/applications/class_divListApplication.inc:144
 #: plugins/admin/ogroups/class_divListOGroup.inc:133
 msgid "Cut this entry"
 msgstr ""
 
 #: plugins/admin/groups/class_divListGroup.inc:147
 #: plugins/admin/users/class_divListUsers.inc:147
+#: plugins/admin/applications/class_divListApplication.inc:146
 #: plugins/admin/ogroups/class_divListOGroup.inc:135
 msgid "copy"
 msgstr ""
 
 #: plugins/admin/groups/class_divListGroup.inc:147
 #: plugins/admin/users/class_divListUsers.inc:147
+#: plugins/admin/applications/class_divListApplication.inc:146
 #: plugins/admin/ogroups/class_divListOGroup.inc:135
 msgid "Copy this entry"
 msgstr ""
 
 #: plugins/admin/groups/class_divListGroup.inc:150
+#: plugins/admin/applications/class_divListApplication.inc:149
 #: plugins/admin/departments/class_divListDepartment.inc:92
 #: plugins/admin/ogroups/class_divListOGroup.inc:138
 #: plugins/gofon/conference/class_divListConferences.inc:103
@@ -6192,6 +6190,7 @@ msgid "Edit this entry"
 msgstr ""
 
 #: plugins/admin/groups/class_divListGroup.inc:152
+#: plugins/admin/applications/class_divListApplication.inc:151
 #: plugins/admin/departments/class_divListDepartment.inc:94
 #: plugins/admin/ogroups/class_divListOGroup.inc:140
 #: plugins/gofon/conference/class_divListConferences.inc:105
@@ -6679,6 +6678,7 @@ msgstr ""
 #: plugins/admin/applications/generic.tpl:7
 #: plugins/admin/applications/generic.tpl:8
 #: plugins/admin/applications/class_applicationGeneric.inc:420
+#: plugins/admin/applications/class_divListApplication.inc:50
 msgid "Application name"
 msgstr ""
 
@@ -6786,6 +6786,7 @@ msgid "List of applications"
 msgstr ""
 
 #: plugins/admin/applications/headpage.tpl:24
+#: plugins/admin/applications/class_divListApplication.inc:40
 msgid ""
 "This menu allows you to add, edit and remove selected applications. You may "
 "want to use the range selector on top of the application listbox, when "
@@ -6882,8 +6883,13 @@ msgstr ""
 msgid "This table displays all applications in the selected tree."
 msgstr ""
 
-#: plugins/admin/applications/class_divListApplication.inc:40
-msgid "This menu allows you to add, edit and remove selected applications. "
+#: plugins/admin/applications/class_divListApplication.inc:106
+#: plugins/admin/ogroups/class_divListOGroup.inc:108
+msgid "new"
+msgstr ""
+
+#: plugins/admin/applications/class_divListApplication.inc:107
+msgid "Create new application"
 msgstr ""
 
 #: plugins/admin/departments/generic.tpl:8
@@ -6979,18 +6985,18 @@ msgstr ""
 msgid "Departments"
 msgstr ""
 
-#: plugins/admin/departments/class_departmentManagement.inc:162
+#: plugins/admin/departments/class_departmentManagement.inc:158
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:133
 #, php-format
 msgid "You're about to delete the whole LDAP subtree placed under '%s'."
 msgstr ""
 
-#: plugins/admin/departments/class_departmentManagement.inc:183
+#: plugins/admin/departments/class_departmentManagement.inc:179
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:152
 msgid "You have no permission to remove this department."
 msgstr ""
 
-#: plugins/admin/departments/class_departmentManagement.inc:337
+#: plugins/admin/departments/class_departmentManagement.inc:333
 msgid ".."
 msgstr ""
 
@@ -7703,11 +7709,13 @@ msgstr ""
 #: plugins/admin/systems/server.tpl:27 plugins/admin/systems/terminal.tpl:29
 #: plugins/admin/systems/workstation.tpl:35
 #: plugins/admin/systems/phonesettings.tpl:21
+#: plugins/admin/ogroups/termgroup.tpl:11
 msgid "Mode"
 msgstr ""
 
 #: plugins/admin/systems/server.tpl:29 plugins/admin/systems/terminal.tpl:31
 #: plugins/admin/systems/workstation.tpl:37
+#: plugins/admin/ogroups/termgroup.tpl:13
 msgid "Select terminal mode"
 msgstr ""
 
@@ -7866,11 +7874,13 @@ msgstr ""
 
 #: plugins/admin/systems/terminal.tpl:37
 #: plugins/admin/systems/workstation.tpl:43
+#: plugins/admin/ogroups/termgroup.tpl:84
 msgid "Syslog server"
 msgstr ""
 
 #: plugins/admin/systems/terminal.tpl:39
 #: plugins/admin/systems/workstation.tpl:45
+#: plugins/admin/ogroups/termgroup.tpl:86
 msgid "Choose server to use for logging"
 msgstr ""
 
@@ -7892,21 +7902,25 @@ msgstr ""
 
 #: plugins/admin/systems/terminal.tpl:81
 #: plugins/admin/systems/workstation.tpl:61
+#: plugins/admin/ogroups/termgroup.tpl:57
 msgid "Inherit time server attributes"
 msgstr ""
 
 #: plugins/admin/systems/terminal.tpl:85
 #: plugins/admin/systems/workstation.tpl:65
+#: plugins/admin/ogroups/termgroup.tpl:61
 msgid "NTP server"
 msgstr ""
 
 #: plugins/admin/systems/terminal.tpl:87
 #: plugins/admin/systems/workstation.tpl:67
+#: plugins/admin/ogroups/termgroup.tpl:63
 msgid "Choose server to use for synchronizing time"
 msgstr ""
 
 #: plugins/admin/systems/terminal.tpl:114
 #: plugins/admin/systems/workstation.tpl:93
+#: plugins/admin/ogroups/termgroup.tpl:26
 msgid "Select action to execute for this terminal"
 msgstr ""
 
@@ -7971,20 +7985,24 @@ msgstr ""
 
 #: plugins/admin/systems/class_workstationGeneric.inc:91
 #: plugins/admin/systems/class_servGeneric.inc:34
+#: plugins/admin/ogroups/class_termgroup.inc:38
 msgid "Activated"
 msgstr ""
 
 #: plugins/admin/systems/class_workstationGeneric.inc:93
 #: plugins/admin/systems/class_servGeneric.inc:36
+#: plugins/admin/ogroups/class_termgroup.inc:40
 msgid "Memory test"
 msgstr ""
 
 #: plugins/admin/systems/class_workstationGeneric.inc:94
 #: plugins/admin/systems/class_servGeneric.inc:37
+#: plugins/admin/ogroups/class_termgroup.inc:41
 msgid "System analysis"
 msgstr ""
 
 #: plugins/admin/systems/class_workstationGeneric.inc:121
+#: plugins/admin/ogroups/class_termgroup.inc:154
 msgid "No ACTIONCMD definition found in your gosa.conf"
 msgstr ""
 
@@ -7995,9 +8013,7 @@ msgstr ""
 #: plugins/admin/systems/class_servGeneric.inc:74
 #: plugins/admin/systems/class_servGeneric.inc:86
 #: plugins/admin/systems/class_servGeneric.inc:98
-#: plugins/admin/ogroups/class_termgroup.inc:68
-#: plugins/admin/ogroups/class_termgroup.inc:80
-#: plugins/admin/ogroups/class_termgroup.inc:92
+#: plugins/admin/ogroups/class_termgroup.inc:158
 #, php-format
 msgid "Execution of '%s' failed!"
 msgstr ""
@@ -8009,19 +8025,22 @@ msgstr ""
 #: plugins/admin/systems/class_workstationGeneric.inc:190
 #: plugins/admin/systems/class_terminalGeneric.inc:212
 #: plugins/admin/systems/class_servGeneric.inc:148
-#: plugins/admin/ogroups/class_termgroup.inc:104
+#: plugins/admin/ogroups/class_termgroup.inc:204
+#: plugins/admin/ogroups/class_termgroup.inc:213
 msgid "Switch off"
 msgstr ""
 
 #: plugins/admin/systems/class_workstationGeneric.inc:190
 #: plugins/admin/systems/class_terminalGeneric.inc:212
 #: plugins/admin/systems/class_servGeneric.inc:148
-#: plugins/admin/ogroups/class_termgroup.inc:104
+#: plugins/admin/ogroups/class_termgroup.inc:205
+#: plugins/admin/ogroups/class_termgroup.inc:213
 msgid "Reboot"
 msgstr ""
 
 #: plugins/admin/systems/class_workstationGeneric.inc:191
 #: plugins/admin/systems/class_servGeneric.inc:149
+#: plugins/admin/ogroups/class_termgroup.inc:206
 msgid "Instant update"
 msgstr ""
 
@@ -8029,6 +8048,7 @@ msgstr ""
 #: plugins/admin/systems/class_workstationGeneric.inc:198
 #: plugins/admin/systems/class_servGeneric.inc:150
 #: plugins/admin/systems/class_servGeneric.inc:156
+#: plugins/admin/ogroups/class_termgroup.inc:207
 msgid "Scheduled update"
 msgstr ""
 
@@ -8036,18 +8056,20 @@ msgstr ""
 #: plugins/admin/systems/class_workstationGeneric.inc:197
 #: plugins/admin/systems/class_servGeneric.inc:151
 #: plugins/admin/systems/class_servGeneric.inc:155
+#: plugins/admin/ogroups/class_termgroup.inc:208
 msgid "Reinstall"
 msgstr ""
 
 #: plugins/admin/systems/class_workstationGeneric.inc:194
 #: plugins/admin/systems/class_servGeneric.inc:152
+#: plugins/admin/ogroups/class_termgroup.inc:209
 msgid "Rescan hardware"
 msgstr ""
 
 #: plugins/admin/systems/class_workstationGeneric.inc:196
 #: plugins/admin/systems/class_terminalGeneric.inc:214
 #: plugins/admin/systems/class_servGeneric.inc:154
-#: plugins/admin/ogroups/class_termgroup.inc:104
+#: plugins/admin/ogroups/class_termgroup.inc:213
 msgid "Wake up"
 msgstr ""
 
@@ -8056,6 +8078,7 @@ msgid "Removing workstation failed"
 msgstr ""
 
 #: plugins/admin/systems/class_workstationGeneric.inc:277
+#: plugins/admin/ogroups/class_termgroup.inc:106
 msgid "You have no permissions to create a workstation on this 'Base'."
 msgstr ""
 
@@ -8076,12 +8099,14 @@ msgstr ""
 
 #: plugins/admin/systems/class_workstationGeneric.inc:304
 #: plugins/admin/systems/class_terminalGeneric.inc:348
+#: plugins/admin/ogroups/class_termgroup.inc:111
 msgid ""
 "There must be at least one NTP server selected, or the inherit mode "
 "activated."
 msgstr ""
 
 #: plugins/admin/systems/class_workstationGeneric.inc:378
+#: plugins/admin/ogroups/class_termgroup.inc:290
 msgid "Saving workstation failed"
 msgstr ""
 
@@ -9151,19 +9176,16 @@ msgstr ""
 
 #: plugins/admin/systems/class_terminalGeneric.inc:117
 #: plugins/admin/systems/class_servGeneric.inc:70
-#: plugins/admin/ogroups/class_termgroup.inc:64
 msgid "No WAKECMD definition found in your gosa.conf"
 msgstr ""
 
 #: plugins/admin/systems/class_terminalGeneric.inc:129
 #: plugins/admin/systems/class_servGeneric.inc:82
-#: plugins/admin/ogroups/class_termgroup.inc:76
 msgid "No REBOOTCMD definition found in your gosa.conf"
 msgstr ""
 
 #: plugins/admin/systems/class_terminalGeneric.inc:141
 #: plugins/admin/systems/class_servGeneric.inc:94
-#: plugins/admin/ogroups/class_termgroup.inc:88
 msgid "No HALTCMD definition found in your gosa.conf"
 msgstr ""
 
@@ -10175,6 +10197,9 @@ msgid "Phone queue"
 msgstr ""
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:83
+msgid "Common settings"
+msgstr ""
+
 #: plugins/admin/ogroups/tabs_ogroups.inc:130
 msgid "Terminals"
 msgstr ""
@@ -10255,10 +10280,6 @@ msgstr ""
 msgid "Create new object group"
 msgstr ""
 
-#: plugins/admin/ogroups/class_divListOGroup.inc:108
-msgid "new"
-msgstr ""
-
 #: plugins/admin/ogroups/class_divListOGroup.inc:163
 #: plugins/generic/references/class_reference.inc:50
 msgid "Object group"
@@ -10325,10 +10346,6 @@ msgid ""
 "All actions you choose here influence <b>all</b> machines in this object "
 "group. Be aware that rebooting machines may not make people happy who are "
 "currently working at these machines."
-msgstr ""
-
-#: plugins/admin/ogroups/termgroup.tpl:7
-msgid "Select action to execute for this   group of terminals"
 msgstr ""
 
 #: plugins/admin/ogroups/class_ogroup.inc:144
@@ -10692,16 +10709,16 @@ msgstr ""
 msgid "Phone Reports"
 msgstr ""
 
-#: plugins/gofon/fonreports/class_fonreport.inc:96
-#: plugins/gofon/fonreports/class_fonreport.inc:106
+#: plugins/gofon/fonreports/class_fonreport.inc:157
+#: plugins/gofon/fonreports/class_fonreport.inc:167
 msgid "Can't connect to phone database, no reports can be shown!"
 msgstr ""
 
-#: plugins/gofon/fonreports/class_fonreport.inc:110
+#: plugins/gofon/fonreports/class_fonreport.inc:171
 msgid "Can't select phone database for report generation!"
 msgstr ""
 
-#: plugins/gofon/fonreports/class_fonreport.inc:212
+#: plugins/gofon/fonreports/class_fonreport.inc:189
 msgid "Query for phone database failed!"
 msgstr ""
 
@@ -10721,7 +10738,7 @@ msgstr ""
 msgid "Duration"
 msgstr ""
 
-#: plugins/gofon/fonreports/main.inc:5
+#: plugins/gofon/fonreports/main.inc:21
 msgid "Phone reports"
 msgstr ""
 
