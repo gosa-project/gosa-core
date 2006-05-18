@@ -3580,7 +3580,7 @@ msgstr ""
 #: plugins/admin/ogroups/remove.tpl:10 plugins/gofon/macro/remove.tpl:9
 msgid "So - if you're sure - press 'Delete' to continue or 'Cancel' to abort."
 msgstr ""
-"Wenn Sie sicher sind, drücken Sie <i>Löschen</i> um fortzufahren oder "
+"Wenn Sie sicher sind, drücken Sie <i>Entfernen</i> um fortzufahren oder "
 "<i>Abbrechen</i> zum Abbruch."
 
 #: plugins/gofax/blocklists/main.inc:26 plugins/gofax/blocklists/main.inc:28
@@ -5332,7 +5332,7 @@ msgstr "Diesem Objekt sind keine FAI-Klassen zugeordnet."
 
 #: plugins/admin/fai/class_faiSummaryTab.inc:294
 msgid "No."
-msgstr "Nein."
+msgstr "Nr."
 
 #: plugins/admin/fai/class_faiSummaryTab.inc:296
 msgid "FS options"
