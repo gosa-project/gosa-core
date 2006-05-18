@@ -558,7 +558,7 @@ class faiManagement extends plugin
     if(!$base){
       $base= "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
     }
-    ldap->ls("(objectClass=FAIbranch)",$base);
+    $ldap->ls("(objectClass=FAIbranch)",$base);
     while($attrs = $ldap->fetch()){
       if((isset($attrs['ou']))&&($attrs['dn']!=$base)){
         $ret[$attrs['dn']]= $prefix.$attrs['ou'][0];
