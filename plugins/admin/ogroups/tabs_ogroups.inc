@@ -80,7 +80,7 @@ class ogrouptabs extends tabs
     if(((preg_match("/T/",$objects)) || (preg_match("/W/",$objects)))&&(!isset($this->by_object['termgroup']))){
       require_once("class_termgroup.inc");
       if(!isset($this->by_object['termgroup'])){
-        $this->by_name['termgroup']= _("Common settings");
+        $this->by_name['termgroup']= _("System");
         $this->by_object['termgroup']= new termgroup($this->config, $this->dn);
         $this->by_object['termgroup']->parent= &$this;
       }
