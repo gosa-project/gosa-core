@@ -8,7 +8,7 @@ class workstartup extends plugin
 
   /* Generic terminal attributes */
   var $bootmode             = "G";
-  var $goLdapServerList     = array("default");
+  var $goLdapServerList     = array();
   var $gotoBootKernel       = "";
   var $gotoKernelParameters = "";
   var $gotoLdapServer       = "";
@@ -53,7 +53,9 @@ class workstartup extends plugin
      */
     $ldap   = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-    
+   
+    $this->goLdapServerList = array("default" =>_("inherited"));
+   
     $_SESSION['getAvailableClassesForThisRelease_CACHE'] = array();
     $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'] = array();
 
@@ -578,9 +580,15 @@ class workstartup extends plugin
         $use = " checked ";
       };
 
+      if($server == "default"){
+        $display = _("inherited");
+      }else{
+        $display = $server;
+      }
+
       $SelectBoxLdapServer->AddEntry(
           array(
-            array("string"=>$server),
+            array("string"=>$display),
             array("string"=>"<input type='radio' name='gotoLdapServer' value='".$server."' ".$use.">",
                   "attach"=>"style='border-right:0px;'")
             ));
