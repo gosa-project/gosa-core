@@ -189,7 +189,7 @@ class faiSummaryTab extends plugin{
   function createSummary($data)
   {
     /* Don't generate any output, if there is no result */ 
-    $str ="<table style='width:100%;background:#F5F5F5;'> ";
+    $str ="<table cellspacing=0 cellpadding=2 style='width:100%;background:#F5F5F5;'> ";
     if(!count($this->Result)){
       $str.="<tr><td>"; 
       $str.= (_("This object has no FAI classes assigned."));
