@@ -566,6 +566,9 @@ class faiManagement extends plugin
       }
     }
 
+    return ($ret);
+  }
+
   
   /* reload list of objects */
 	function reload()
