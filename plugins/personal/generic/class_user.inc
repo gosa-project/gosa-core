@@ -228,23 +228,16 @@ class user extends plugin
     for($d= 1; $d<32; $d++){
       $days[$d]= $d;
     }
-    $years= array();
-
-    if(($date['year']-100)<1901){
-      $start = 1901;
-    }else{
-      $start = $date['year']-100;
-    }
-
-    $end = $start +100;
+    $years  = array();
+    $start  = date("Y") - 100;
+    $end    = $start +100;
     
     for($y= $start; $y<=$end; $y++){
       $years[]= $y;
     }
-    $years['-']= "-&nbsp;";
     $months= array(_("January"), _("February"), _("March"), _("April"),
         _("May"), _("June"), _("July"), _("August"), _("September"),
-        _("October"), _("November"), _("December"), '-' => '-&nbsp;');
+        _("October"), _("November"), _("December"));
     $smarty->assign("day", $date["mday"]);
     $smarty->assign("days", $days);
     $smarty->assign("months", $months);
