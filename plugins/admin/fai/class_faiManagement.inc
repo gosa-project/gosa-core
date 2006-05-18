@@ -555,20 +555,16 @@ class faiManagement extends plugin
   {
     $ret = array("main"=>"/");
     $ldap = $this->config->get_ldap_link();
-    $ldap->cd($this->config->current['BASE']);
     if(!$base){
-  		$base= "ou=fai,ou=configs,ou=systems,".$this->DivListFai->selectedBase;
+      $base= "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
     }
-    $ldap->cd($base);
-    $ldap->ls("(objectClass=FAIbranch)",$base);
+    ldap->ls("(objectClass=FAIbranch)",$base);
     while($attrs = $ldap->fetch()){
       if((isset($attrs['ou']))&&($attrs['dn']!=$base)){
         $ret[$attrs['dn']]= $prefix.$attrs['ou'][0];
         $ret = array_merge($ret,$this->getBranches($attrs['dn'],"".$prefix.$attrs['ou'][0]."/"));
       }
     }
-    return($ret);
-  }
 
   
   /* reload list of objects */
