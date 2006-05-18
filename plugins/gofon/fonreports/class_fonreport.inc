@@ -84,6 +84,9 @@ class fonreport extends plugin
         $this->sort= 0;
       }
     }
+
+    /* remove unwanted tags */
+    $this->search_for = stripslashes(preg_replace("/[^0-9a-z]/i","",$this->search_for));
     
     foreach($this->attributes_SO as $name){
       $fonfilter[$name] = $this->$name;
@@ -257,8 +260,8 @@ class fonreport extends plugin
     for($i= 0; $i<7; $i++){
       $smarty->assign("mode$i", "");
     }
-    $smarty->assign("mode".$this->sort, "<img alt=\"\" src=\"images/sort_".$this->sort_direction.
-        ".png\" border=0 align=middle>");
+    $smarty->assign("mode".$this->sort, "<img alt=\"\" src=\"images/sort_".$this->sort_direction.".png\" border=0 align=middle>");
+
     return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
   }
 
@@ -281,6 +284,7 @@ class fonreport extends plugin
     $ldap       = $this->config->get_ldap_link();
     $ldap->cd     ($this->search_base);
     $s          = $this->search_for;
+
     $s          = preg_replace("/\%/","",$s);  
     $s2         = preg_replace("/\*/","%",$s);  
 
