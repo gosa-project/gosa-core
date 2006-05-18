@@ -78,6 +78,24 @@ class termservice extends plugin
         "1400x1050" =>  "1400x1050",
         "1600x1200" =>  "1600x1200");
 
+    if(isset($this->config->data['MAIN']['RESOLUTION_HOOK'])){
+      $file = $this->config->data['MAIN']['RESOLUTION_HOOK'];
+
+      if(is_readable($file)){
+        $str = file_get_contents($file);
+        $lines = split("\n",$str);
+        foreach($lines as $line){
+          $line = trim($line);
+          if(!empty($line)){
+            $this->XResolutions[$line]=$line;
+          }
+        }
+        //natcasesort($this->gotoXResolutions);
+      }else{
+        print_red(sprintf(_("You have specified an external resolution hook which can't be read, please check the permission of the file '%s'."),$file));
+      }
+    }
+
     $this->XColordepths= array(
         "default"  => "["._("inherited")."]",
         "8"        => "8 " ._("bit"),
