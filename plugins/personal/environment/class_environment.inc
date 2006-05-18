@@ -650,11 +650,16 @@ class environment extends plugin
     }
 
     if((isset($_POST['gotoPrinterEdit']))&&(isset($_POST['gotoPrinterSel']))&&(!empty($_POST['gotoPrinterSel']))){
-      $printer = $_POST['gotoPrinterSel'];
-      if($this->gotoPrinter[$printer]['mode']=="user"){
-        $this->gotoPrinter[$printer]['mode']="admin";
-      }else{
-        $this->gotoPrinter[$printer]['mode']="user";
+
+
+      $printers = $_POST['gotoPrinterSel'];
+
+      foreach($printers as $printer){
+        if($this->gotoPrinter[$printer]['mode']=="user"){
+          $this->gotoPrinter[$printer]['mode']="admin";
+        }else{
+          $this->gotoPrinter[$printer]['mode']="user";
+        }
       }
     }
 
