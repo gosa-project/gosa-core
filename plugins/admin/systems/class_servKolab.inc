@@ -38,8 +38,8 @@ class servkolab extends plugin {
   function servkolab($config, $dn = NULL) 
   {
     /* Setting the hostname and tell this Plugin that we are the kolab extension*/
-    $this->hostname= preg_replace('/^cn=([^,]+),.*$/', '\1', $dn);
-    $this->dn = "k=kolab,".$config->current['BASE'];
+    $this->hostname = preg_replace('/^cn=([^,]+),.*$/', '\1', $dn);
+    $this->dn       = "k=kolab,".$config->current['BASE'];
     
     /* Load variables, if given*/
     plugin::plugin($config, $this->dn);
@@ -53,22 +53,23 @@ class servkolab extends plugin {
     }
   
     /* Toggle relayhost */
-    $this->postfix_mxrelayenabled= preg_match('/^\[/', $this->postfix_relayhost);
-    $this->postfix_relayhost = preg_replace("/[\[\]]/","",$this->postfix_relayhost);
+    $this->postfix_mxrelayenabled = preg_match('/^\[/', $this->postfix_relayhost);
+    $this->postfix_relayhost      = preg_replace("/[\[\]]/","",$this->postfix_relayhost);
 
     /* Is this Server a member of the Kolab extension or not ?*/ 
     if(isset($this->attrs['kolabHost'])) {
       $this->kolabHost= $this->attrs['kolabHost'];
       unset($this->kolabHost['count']);
     }
-  
 
-    $this->is_in_there=false;
-    $this->is_account=false;
+    $this->is_in_there           = false;
+    $this->is_account            = false;
+    $this->initially_was_account = false;
     foreach($this->kolabHost as $host){
       if(preg_match("/".$this->hostname.".*/i",$host)){
-        $this->is_account=true;
-        $this->is_in_there=true;
+        $this->is_account            = true;
+        $this->is_in_there           = true;
+        $this->initially_was_account = true;
       }
     } 
   
@@ -159,27 +160,52 @@ class servkolab extends plugin {
 
   function remove_from_parent() 
   {
-    $ldap= $this->config->get_ldap_link();
-    $this->dn = "k=kolab,".$this->config->current['BASE'];
-
-    if (count($this->kolabHost) == 0){
+    /* Only walk through following code, if this host 
+        was a member of the kolab hosts, else skip this */
+    if(!$this->initially_was_account){
       return;
     }
 
-    /* Are we alone? Remove complete entry... */
-    if (count($this->kolabHost) == 1){
+    $ldap     = $this->config->get_ldap_link();
+    $this->dn = "k=kolab,".$this->config->current['BASE'];
 
+    
+    /* We can't simply remove the whole entry, it is possible that there are 
+        some other hosts assigned to this object. 
+       So, first of all check if we are the last host entry within the host 
+        : Remove k=kolab entry 
+       if we aren't alone, only remove host name from hosts entry and save */
+    /* Are we alone? Remove complete entry... */
+
+    /* Check if we are definitly in kolabHosts */
+    if(!in_array_ics($this->cn,$this->kolabHost)) {
+      return;
+    }
+
+    /* Integration check, not translatet because they can't pop up at all, only for debug */ 
+    if(count($this->kolabHost) == 0){
+      print_red("Server - Kolab tab : This is not possible, we can't remove an account which doesn't exists.");
+      return;
+    }
+    if(!isset($this->cn) || (empty($this->cn))){
+      print_red("The required attribute cn seams to empty.");
+    }
+
+    /* Our hostname is in kolabHosts and there is a only one entry 
+        = we are the last host entry, delete k=kolab entry  */
+    if (count($this->kolabHost) == 1){
+    
       /* Remove complete entry */
       $ldap->rmdir ($this->dn);
       show_ldap_error($ldap->get_error(), _("Removing kolab host entry failed"));
-      
+      gosa_log("k=kolab entry removed, ".$this->cn." was the last kolabHost entry.");
+
     } else {
 
       /* Only modify kolabHost */
       $hosts= array();
       foreach ($this->kolabHost as $host){
-        
-        if (isset($this->cn)&&($host != $this->cn)){
+        if($host != $this->cn){
           $hosts[]= $host;
         }
       }
@@ -187,8 +213,8 @@ class servkolab extends plugin {
       $ldap->cd($this->dn);
       $this->cleanup();
       $ldap->modify ($attrs); 
-
       show_ldap_error($ldap->get_error(), _("Removing server from kolab object failed"));
+      gosa_log("Removing ".$this->cn." from list of kolabHosts");
     }
 
     /* Optionally execute a command after we're done */
