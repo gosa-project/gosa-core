@@ -53,7 +53,6 @@ class divListApplication extends MultiSelectWindow
 
   function AddUserBoxToFilter($position){
     $str = "";
-    print_a($this->parent);
     if(($position  == 2) && ($this->parent->IsReleaseManagementActivated($this->config))){
       $smarty = get_smarty();
       $smarty->assign("selectedRelease",$this->selectedRelease);
