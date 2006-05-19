@@ -25,6 +25,7 @@
      			<table summary="" style="width:100%;">
       				{$alphabet}
      			</table>
+
 				<table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 					<tr>
 						<td width="50%">
@@ -37,6 +38,15 @@
 						</td>
 					</tr>
 				</table>
+				<table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
+                    <tr>
+						<td>
+							<input type="checkbox" name="SubSearch" value="1" {$SubSearchCHK}
+								onClick="mainform.submit();">
+							{t}Ignore subtrees{/t}
+						</td>
+					</tr>
+                </table>
 				<table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 					<tr>
 						<td width="50%">
@@ -64,7 +74,7 @@
   		</td>
 	</tr>
 </table>
-
+<input type="hidden" value="1" name="PosixGroupDialogPosted">
 <p class="plugbottom">
   <input type=submit name="add_groups_finish" value="{t}Add{/t}">
   &nbsp;

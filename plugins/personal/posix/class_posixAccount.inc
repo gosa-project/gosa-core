@@ -64,6 +64,7 @@ class posixAccount extends plugin
 
   var $GroupRegex       = "*";
   var $GroupUserRegex   = "*";
+  var $SubSearch        = false;
 
   /* attribute list for save action */
   var $CopyPasteVars  = array("grouplist","groupMembership","use_shadowMin","use_shadowMax","use_shadowWarning","use_shadowInactive","use_shadowExpire","must_change_password","force_ids","printerList","grouplist","savedGidNumber","savedUidNumber","savedGroupMembership");
@@ -410,6 +411,12 @@ class posixAccount extends plugin
         }
       }
 
+      if($this->SubSearch){
+        $smarty->assign("SubSearchCHK"," checked ");
+      }else{
+        $smarty->assign("SubSearchCHK","");
+      }
+
       $smarty->assign("regex",$this->GroupRegex);
       $smarty->assign("guser",$this->GroupUserRegex);
       $smarty->assign("groups", $glist);
@@ -672,6 +679,13 @@ class posixAccount extends plugin
         if ($this->trustModel != $saved){
           $this->is_modified= TRUE;
         }
+      }
+    }
+    if(isset($_POST["PosixGroupDialogPosted"])){
+      if(isset($_POST['SubSearch']) && ($_POST['SubSearch'])){
+        $this->SubSearch = true;
+      }else{
+        $this->SubSearch = false;
       }
     }
   }
@@ -1069,9 +1083,10 @@ class posixAccount extends plugin
 
     /* Set base for all searches */
     $base     = $_SESSION['CurrentMainBase'];
-    $base     = get_groups_ou().$base;
+    $base     = $base;
     $ldap     = $this->config->get_ldap_link();    
     $attrs    =  array("cn", "description", "gidNumber");
+    $Flags    = GL_SIZELIMIT;
 
     /* Get groups */
     if ($this->GroupUserRegex == '*'){
@@ -1079,7 +1094,14 @@ class posixAccount extends plugin
     } else {
       $filter= "(&(objectClass=posixGroup)(cn=".$this->GroupRegex.")(memberUid=".$this->GroupUserRegex."))";
     }
-    $res= get_list($filter, $this->ui->subtreeACL, $base,$attrs, GL_SIZELIMIT);
+    if($this->SubSearch){
+      $Flags |= GL_SUBSEARCH;
+    }else{
+      $base = get_groups_ou().$base;
+    }
+
+
+    $res= get_list($filter, $this->ui->subtreeACL, $base,$attrs, $Flags);
 
     /* check sizelimit */
     if (preg_match("/size limit/i", $ldap->error)){
