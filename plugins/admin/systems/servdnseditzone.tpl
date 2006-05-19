@@ -21,7 +21,7 @@
 			<table summary="">
 				<tr>
 					<td>
-						{t}Zone entries{/t}
+						{t}Zone records{/t}
 						<br>
 						{if $AllowZoneEdit == false}
 							<i>{t}Can't be edited because the zone wasn't saved right now.{/t}</i>
@@ -109,7 +109,7 @@
 			</table>
 		</td>
 		<td style="vertical-align:top;">
-			<h2>{t}Zone records{/t}</h2>
+			<h2>{t}Global zone records{/t}</h2>
 			<table summary="">
 			  {$records}
 			</table>

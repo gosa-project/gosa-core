@@ -350,7 +350,7 @@ class servDNSeditZoneEntries extends plugin
 
     /* Set title 
      */
-    $str = "<h3>".sprintf(_("Settings for '%s'"),$objKey)." : </h3>";
+    $str= "<br>";
 
     $hostNameOnce = true;
 
@@ -363,22 +363,20 @@ class servDNSeditZoneEntries extends plugin
        */
       $name = base64_encode($objKey)."|".$id;
 
-      $str .= "<tr><td style='width:80px;'>\n";
+      $str .= "<tr><td style='width:170px;'>\n";
 
       /* Only first host entry name should be editable
        */
       if($hostNameOnce){
         $hostNameOnce = false;  
         $str .="<input type='text' name='RenameHost_".$name."' value='".$objectName."'>\n";
-      }else{
-        $str .=$objectName;
-      }  
+      }
 
       /* Create rest. Selectbox, icons ...
        */
       $str .="
         </td>
-        <td style='width:80px;'>
+        <td style='width:90px;'>
           ".$this->createRecordTypeSelection($record['type'],$name)."
         </td>
         <td>

@@ -8,10 +8,10 @@
 	{t}This dialog can't be used until the currently edited zone was saved or the zone entry exists in the ldap database.{/t}
 	</b>
 {else}
-	{t}To add a new host entry just click here{/t}
-	<input type='image' name='UserRecord' src='images/select_default.png' alt='{t}New{/t}' title='{t}New{/t}'>
 	<br>
-	{$table}	
+	{$table}
+	<br>
+	<input type='submit' name='UserRecord' value='{t}New entry{/t}' title='{t}Create a new DNS zone entry{/t}'>
 {/if}
 
 <p class="seperator">&nbsp;</p>
