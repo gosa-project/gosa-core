@@ -110,9 +110,7 @@
 		</td>
 		<td style="vertical-align:top;">
 			<h2>{t}Global zone records{/t}</h2>
-			<table summary="">
 			  {$records}
-			</table>
 		</td>
 	</tr>
 </table>
