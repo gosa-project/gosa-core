@@ -1,7 +1,26 @@
 <table summary="" style="width:100%">
  <tr>
   <td style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;" width="50%">
-
+   <table summary="">
+    <tr>
+	 <td colspan="2"><b>{t}Generic{/t}</b></td>
+	</tr>
+	<tr>
+		<td>{t}Postfix mydomain{/t}
+		</td>
+		<td>
+			<input type="text" name="postfix_mydomain" value="{$postfix_mydomain}" {$postfix_mydomainACL}>
+		</td>
+	</tr>
+	<tr>
+		<td>{t}Postfix mydestination{/t}
+		</td>
+		<td>
+			<input type="text" name="postfix_mydestination" value="{$postfix_mydestination}" {$postfix_mydestinationACL}>
+		</td>
+	</tr>
+   </table>	
+   <p class="seperator" >&nbsp;</p>
    <table summary="">
     <tr>
 	 <td colspan="2"><b>{t}Services{/t}</b></td>
