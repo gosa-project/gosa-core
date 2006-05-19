@@ -21,8 +21,6 @@ Target for 2.4.1:
   * Zones are not creatable, currently
   * Error messages are partly wrong
 
-* Posix -> Groups has no subsearch checkbox
-
 * Download of hooks/scripts opens an additional window
 
 
