@@ -29,10 +29,10 @@ class servkolab extends plugin {
   var $is_in_there                      = false;
   var $exactName                        = false;
   var $attributes =  array("postfix_mydomain", "postfix_mydestination", "proftpd_ftp", "k",
-        "postfix_mynetworks", "postfix_enable_virus_scan", "postfix_relayhost", "apache_http",
-        "postfix_allow_unauthenticated", "cyrus_admins", "cyrus_imap","kolabFreeBusyFuture",
-        "cyrus_pop3", "cyrus_imaps", "cyrus_pop3s", "cyrus_sieve", "apache_allow_unauthenticated_fb",
-        "cyrus_quotawarn");
+      "postfix_mynetworks", "postfix_enable_virus_scan", "postfix_relayhost", "apache_http",
+      "postfix_allow_unauthenticated", "cyrus_admins", "cyrus_imap","kolabFreeBusyFuture",
+      "cyrus_pop3", "cyrus_imaps", "cyrus_pop3s", "cyrus_sieve", "apache_allow_unauthenticated_fb",
+      "cyrus_quotawarn");
   var $objectclasses = array("top", "kolab");
 
   function servkolab($config, $dn = NULL) 
@@ -40,7 +40,7 @@ class servkolab extends plugin {
     /* Setting the hostname and tell this Plugin that we are the kolab extension*/
     $this->hostname = preg_replace('/^cn=([^,]+),.*$/', '\1', $dn);
     $this->dn       = "k=kolab,".$config->current['BASE'];
-    
+
     /* Load variables, if given*/
     plugin::plugin($config, $this->dn);
 
@@ -51,7 +51,7 @@ class servkolab extends plugin {
         $this->$val = $this->attrs["$name"][0];
       }
     }
-  
+
     /* Toggle relayhost */
     $this->postfix_mxrelayenabled = preg_match('/^\[/', $this->postfix_relayhost);
     $this->postfix_relayhost      = preg_replace("/[\[\]]/","",$this->postfix_relayhost);
@@ -61,7 +61,6 @@ class servkolab extends plugin {
       $this->kolabHost= $this->attrs['kolabHost'];
       unset($this->kolabHost['count']);
     }
-
     $this->is_in_there           = false;
     $this->is_account            = false;
     $this->initially_was_account = false;
@@ -72,12 +71,16 @@ class servkolab extends plugin {
         $this->initially_was_account = true;
       }
     } 
-  
+
+
+    /* Mhh */ 
     if(in_array($this->hostname, $this->kolabHost)) {
       $this->exactName=true;
     } else {   
       $this->exactName=false;    
     } 
+
+    /* Parse mynetworks */
     if(isset($this->attrs['postfix-mynetworks'])){
       if(is_array($this->attrs['postfix-mynetworks'])){  
         unset($this->attrs['postfix-mynetworks']['count']);
@@ -95,8 +98,8 @@ class servkolab extends plugin {
 
   function execute() 
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     /* Fill templating stuff */
     $smarty = get_smarty();
@@ -126,7 +129,7 @@ class servkolab extends plugin {
     } else {
       $smarty->assign("RelayMxSupportCheck","");
     }
-    
+
     /* Initialize all attributes, that were submitted */
     foreach($this->attributes as $val) 
     {
@@ -143,13 +146,13 @@ class servkolab extends plugin {
 
     /* Assemble free/busy string */
     $edit= sprintf('<input name="kolabFreeBusyFuture" value="%s" %s type="text" maxlength="3" size="4">',
-            $this->kolabFreeBusyFuture, chkacl($this->acl, 'kolabFreeBusyFuture'));
+        $this->kolabFreeBusyFuture, chkacl($this->acl, 'kolabFreeBusyFuture'));
     $fbfuture= sprintf(_("Include data from %s days in the past when creating free/busy lists"), $edit);
     $smarty->assign("fbfuture", $fbfuture);
 
     /* Assemble quota string */
     $edit= sprintf('<input name="cyrus_quotawarn" value="%s" type="text" maxlength="3" size="4" %s>',
-          $this->cyrus_quotawarn, chkacl($this->acl, 'cyrus_quotawarn'));
+        $this->cyrus_quotawarn, chkacl($this->acl, 'cyrus_quotawarn'));
     $quotastr= sprintf(_("Warn users when using more than %s%% of their mail quota"), $edit);
     $smarty->assign("quotastr", $quotastr);
 
@@ -161,7 +164,7 @@ class servkolab extends plugin {
   function remove_from_parent() 
   {
     /* Only walk through following code, if this host 
-        was a member of the kolab hosts, else skip this */
+       was a member of the kolab hosts, else skip this */
     if(!$this->initially_was_account){
       return;
     }
@@ -169,11 +172,11 @@ class servkolab extends plugin {
     $ldap     = $this->config->get_ldap_link();
     $this->dn = "k=kolab,".$this->config->current['BASE'];
 
-    
+
     /* We can't simply remove the whole entry, it is possible that there are 
-        some other hosts assigned to this object. 
+       some other hosts assigned to this object. 
        So, first of all check if we are the last host entry within the host 
-        : Remove k=kolab entry 
+       : Remove k=kolab entry 
        if we aren't alone, only remove host name from hosts entry and save */
     /* Are we alone? Remove complete entry... */
 
@@ -192,9 +195,9 @@ class servkolab extends plugin {
     }
 
     /* Our hostname is in kolabHosts and there is a only one entry 
-        = we are the last host entry, delete k=kolab entry  */
+       = we are the last host entry, delete k=kolab entry  */
     if (count($this->kolabHost) == 1){
-    
+
       /* Remove complete entry */
       $ldap->rmdir ($this->dn);
       show_ldap_error($ldap->get_error(), _("Removing kolab host entry failed"));
@@ -229,9 +232,9 @@ class servkolab extends plugin {
 
       /* Save checkboxes */
       foreach (array( "postfix_enable_virus_scan", "postfix_allow_unauthenticated",
-                      "cyrus_admins", "cyrus_imap", "cyrus_pop3", "cyrus_imaps",
-                      "cyrus_pop3s", "cyrus_sieve", "apache_allow_unauthenticated_fb",
-                      "proftpd_ftp", "apache_http") as $cb){
+            "cyrus_admins", "cyrus_imap", "cyrus_pop3", "cyrus_imaps",
+            "cyrus_pop3s", "cyrus_sieve", "apache_allow_unauthenticated_fb",
+            "proftpd_ftp", "apache_http") as $cb){
         if (isset($_POST[$cb])){
           $this->$cb= "TRUE";
         } else {
@@ -271,8 +274,8 @@ class servkolab extends plugin {
 
     /*if(empty($this->postfix_relayhost)) {
       $message[] = _("No SMTP smarthost/relayhost set.");
-    }
-    */
+      }
+     */
 
     return ($message);
   }
@@ -283,10 +286,10 @@ class servkolab extends plugin {
   {
     /* Set ldap connection */
     $ldap = $this->config->get_ldap_link();
-    
+
     /* Open current dn*/
     $this->dn = "k=kolab,".$this->config->current['BASE'];
-  
+
     /* Adapt relayhost */
     $this->postfix_relayhost= preg_replace('/[\[\]]/', '', $this->postfix_relayhost);
     if (!$this->postfix_mxrelayenabled && $this->postfix_relayhost != ""){
@@ -297,9 +300,9 @@ class servkolab extends plugin {
     if ((!$this->is_in_there)){
       $this->kolabHost[]= $this->cn;
     }
-    
- 
-  
+
+
+
     $tmp = split(";",$this->postfix_mynetworks);
     $this->postfix_mynetworks = array();
     foreach($tmp as $tm){
@@ -308,7 +311,7 @@ class servkolab extends plugin {
         $this->postfix_mynetworks[]=$tm;
       }
     }
-  
+
     $this->attrs['postfix_mynetworks']=$this->postfix_mynetworks;
 
     /* Call parents save to prepare $this->attrs */
@@ -334,7 +337,7 @@ class servkolab extends plugin {
 
     /* Add kolab hosts */
     $this->attrs['kolabHost']= $this->kolabHost;
-  
+
     if(($this->is_in_there)&&(!$this->exactName)){
       unset($this->attrs['kolabHost']);
     }
@@ -344,7 +347,7 @@ class servkolab extends plugin {
     $this->cleanup();;
     $ldap->$mode($this->attrs);
     show_ldap_error($ldap->get_error(), _("Saving server to kolab object failed"));
-    
+
     /* Optionally execute a command after we're done */
     if ($this->initially_was_account == $this->is_account) {
       if ($this->is_modified) {
