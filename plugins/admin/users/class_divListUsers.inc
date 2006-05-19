@@ -31,12 +31,6 @@ class divListUsers extends MultiSelectWindow
     $this->parent       = $parent;
     $this->ui           = get_userinfo();
 
-    /* Set default base */
-    if(!isset($_SESSION['CurrentMainBase'])){
-      $_SESSION['CurrentMainBase'] = $this->config->current['BASE'];
-    }
-    $this->selectedBase = $_SESSION['CurrentMainBase'];
-
     /* Set list strings */
     $this->SetTitle(_("List of users"));
     $this->SetSummary(_("List of users"));

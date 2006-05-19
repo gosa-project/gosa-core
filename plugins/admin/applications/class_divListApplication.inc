@@ -25,12 +25,6 @@ class divListApplication extends MultiSelectWindow
     $this->parent       = $parent;
     $this->ui           = get_userinfo();
 
-    /* Set default base */
-    if(!isset($_SESSION['CurrentMainBase'])){
-      $_SESSION['CurrentMainBase'] = $this->config->current['BASE'];
-    }
-    $this->selectedBase = $_SESSION['CurrentMainBase'];
-
     /* Set list strings */
     $this->SetTitle(_("List of Applications"));
     $this->SetSummary(_("This table displays all applications in the selected tree."));
