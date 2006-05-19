@@ -28,6 +28,9 @@ class servkolab extends plugin {
   var $kolabHost                        = array();
   var $is_in_there                      = false;
   var $exactName                        = false;
+
+  var $orig_cn                          = "";
+
   var $attributes =  array("postfix_mydomain", "postfix_mydestination", "proftpd_ftp", "k",
       "postfix_mynetworks", "postfix_enable_virus_scan", "postfix_relayhost", "apache_http",
       "postfix_allow_unauthenticated", "cyrus_admins", "cyrus_imap","kolabFreeBusyFuture",
@@ -101,13 +104,32 @@ class servkolab extends plugin {
     /* Call parent execute */
     plugin::execute();
 
-    /* Fill templating stuff */
-    $smarty = get_smarty();
-    $display = "";
+    /***************  
+      Variable initialisation
+     ***************/  
+    
+    $smarty     = get_smarty();
+    $display    = "";
+    $ldap       = $this->config->get_ldap_link();
 
-    /* The Ldap link is needed to ask ldap some questions */
-    $ldap = $this->config->get_ldap_link();
 
+    /* Assemble free/busy string */
+    $edit       = sprintf('<input name="kolabFreeBusyFuture" value="%s" %s type="text" maxlength="3" size="4">',
+                    $this->kolabFreeBusyFuture, 
+                    chkacl($this->acl, 'kolabFreeBusyFuture'));
+    $fbfuture   = sprintf(_("Include data from %s days in the past when creating free/busy lists"), $edit);
+
+    /* Assemble quota string */
+    $edit       = sprintf('<input name="cyrus_quotawarn" value="%s" type="text" maxlength="3" size="4" %s>',
+                    $this->cyrus_quotawarn, 
+                    chkacl($this->acl, 'cyrus_quotawarn'));
+    $quotastr   = sprintf(_("Warn users when using more than %s%% of their mail quota"), $edit);
+
+
+    /***************  
+      Handle Account is_account state
+     ***************/  
+  
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])) {
       $this->is_account = !$this->is_account;
@@ -122,6 +144,11 @@ class servkolab extends plugin {
       $display = $this->show_header(_("Add Kolab service"), _("This server has kolab features disabled. You can enable them by clicking below."));
       return ($display);
     }
+
+
+    /***************
+      Assign informations to smarty 
+     ***************/
 
     /* Set relayhost and if we have MX lookup enabled*/
     if($this->postfix_mxrelayenabled) {
@@ -144,16 +171,7 @@ class servkolab extends plugin {
       }
     }
 
-    /* Assemble free/busy string */
-    $edit= sprintf('<input name="kolabFreeBusyFuture" value="%s" %s type="text" maxlength="3" size="4">',
-        $this->kolabFreeBusyFuture, chkacl($this->acl, 'kolabFreeBusyFuture'));
-    $fbfuture= sprintf(_("Include data from %s days in the past when creating free/busy lists"), $edit);
     $smarty->assign("fbfuture", $fbfuture);
-
-    /* Assemble quota string */
-    $edit= sprintf('<input name="cyrus_quotawarn" value="%s" type="text" maxlength="3" size="4" %s>',
-        $this->cyrus_quotawarn, chkacl($this->acl, 'cyrus_quotawarn'));
-    $quotastr= sprintf(_("Warn users when using more than %s%% of their mail quota"), $edit);
     $smarty->assign("quotastr", $quotastr);
 
     /* Load Template */
@@ -169,9 +187,13 @@ class servkolab extends plugin {
       return;
     }
 
+    /* !!! Don't use "cn" in this function 
+       hostname -> the initial name of the host
+       cn       -> is the new name of the host, in case that it was renamed.
+     */
+
     $ldap     = $this->config->get_ldap_link();
     $this->dn = "k=kolab,".$this->config->current['BASE'];
-
 
     /* We can't simply remove the whole entry, it is possible that there are 
        some other hosts assigned to this object. 
@@ -181,7 +203,7 @@ class servkolab extends plugin {
     /* Are we alone? Remove complete entry... */
 
     /* Check if we are definitly in kolabHosts */
-    if(!in_array_ics($this->cn,$this->kolabHost)) {
+    if(!in_array_ics($this->hostname,$this->kolabHost)) {
       return;
     }
 
@@ -190,8 +212,8 @@ class servkolab extends plugin {
       print_red("Server - Kolab tab : This is not possible, we can't remove an account which doesn't exists.");
       return;
     }
-    if(!isset($this->cn) || (empty($this->cn))){
-      print_red("The required attribute cn seams to empty.");
+    if(!isset($this->hostname) || (empty($this->hostname))){
+      print_red("The required attribute hostname seams to empty.");
     }
 
     /* Our hostname is in kolabHosts and there is a only one entry 
@@ -201,14 +223,14 @@ class servkolab extends plugin {
       /* Remove complete entry */
       $ldap->rmdir ($this->dn);
       show_ldap_error($ldap->get_error(), _("Removing kolab host entry failed"));
-      gosa_log("k=kolab entry removed, ".$this->cn." was the last kolabHost entry.");
+      gosa_log("k=kolab entry removed, ".$this->hostname." was the last kolabHost entry.");
 
     } else {
 
       /* Only modify kolabHost */
       $hosts= array();
       foreach ($this->kolabHost as $host){
-        if($host != $this->cn){
+        if($host != $this->hostname){
           $hosts[]= $host;
         }
       }
@@ -217,7 +239,7 @@ class servkolab extends plugin {
       $this->cleanup();
       $ldap->modify ($attrs); 
       show_ldap_error($ldap->get_error(), _("Removing server from kolab object failed"));
-      gosa_log("Removing ".$this->cn." from list of kolabHosts");
+      gosa_log("Removing ".$this->hostname." from list of kolabHosts");
     }
 
     /* Optionally execute a command after we're done */
@@ -285,10 +307,10 @@ class servkolab extends plugin {
   function save() 
   {
     /* Set ldap connection */
-    $ldap = $this->config->get_ldap_link();
+    $ldap       = $this->config->get_ldap_link();
 
     /* Open current dn*/
-    $this->dn = "k=kolab,".$this->config->current['BASE'];
+    $this->dn   = "k=kolab,".$this->config->current['BASE'];
 
     /* Adapt relayhost */
     $this->postfix_relayhost= preg_replace('/[\[\]]/', '', $this->postfix_relayhost);
@@ -296,13 +318,25 @@ class servkolab extends plugin {
       $this->postfix_relayhost= "[".$this->postfix_relayhost."]";
     }
 
+    /* Check if this server was renamed, in this case we have to remove old cn first*/
+    if($this->hostname != $this->cn){
+      $tmp = array();
+      if(in_array_ics($this->hostname,$this->kolabHost)){
+        foreach($this->kolabHost as $host){
+          if($host != $this->hostname){
+            $tmp[] = $host;
+          }
+        }
+      }
+      $this->kolabHost = $tmp;
+    }
+    
     /* Add ourselves to the list of kolabHost's if needed */
-    if ((!$this->is_in_there)){
+    if (!in_array($this->cn,$this->kolabHost)){
       $this->kolabHost[]= $this->cn;
     }
 
-
-
+    /* Create mynetworks array by splitting the string with ; */
     $tmp = split(";",$this->postfix_mynetworks);
     $this->postfix_mynetworks = array();
     foreach($tmp as $tm){
@@ -311,7 +345,6 @@ class servkolab extends plugin {
         $this->postfix_mynetworks[]=$tm;
       }
     }
-
     $this->attrs['postfix_mynetworks']=$this->postfix_mynetworks;
 
     /* Call parents save to prepare $this->attrs */
@@ -334,7 +367,6 @@ class servkolab extends plugin {
         unset($this->attrs[$old_key]);
       }
     }
-
     /* Add kolab hosts */
     $this->attrs['kolabHost']= $this->kolabHost;
 
@@ -356,9 +388,7 @@ class servkolab extends plugin {
     } else {
       $this->handle_post_events("add");
     }
-
   }
-
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
