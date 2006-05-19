@@ -424,7 +424,7 @@ class termDNS extends plugin
     $changeStateForRecords = "";
     
     if(!$this->DNS_is_account) {
-      $str = "<input type='submit' value='"._("Add")."' name='AddNewRecord' id='AddNewRecord' disabled>";
+      $str = "<input type='submit' value='"._("Add")."' name='AddNewRecord' id='AddNewRecord' disabled='disabled'>";
       return $str;
     }
  
