@@ -53,7 +53,8 @@ class divListApplication extends MultiSelectWindow
 
   function AddUserBoxToFilter($position){
     $str = "";
-    if(($position  == 2) && ($this->parent->enableReleaseManagement)){
+    print_a($this->parent);
+    if(($position  == 2) && ($this->parent->IsReleaseManagementActivated($this->config))){
       $smarty = get_smarty();
       $smarty->assign("selectedRelease",$this->selectedRelease);
       $smarty->assign("branchimage","images/branch.png");
@@ -175,6 +176,7 @@ class divListApplication extends MultiSelectWindow
     MultiSelectWindow::save_object(); 
     $_SESSION['appfilter']['release']  = $this->selectedRelease;
   }
+
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
