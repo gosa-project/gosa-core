@@ -355,6 +355,14 @@ class servdnseditZone extends plugin
       }
     }
 
+    if(empty($this->zoneName)){
+      $message[] =sprintf(_("Please choose a valid zone name."));
+    }
+
+    if(empty($this->ReverseZone)){
+      $message[] =sprintf(_("Please choose a valid reverse zone name."));
+    }
+
     if(!preg_match("/\.$/",$this->sOAprimary)){
       $message[] = _("Primary dns server must end with '.' to be a valid entry.");
     }
