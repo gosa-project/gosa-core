@@ -492,7 +492,7 @@ function get_lock ($object)
 
 function get_list($filter, $subtreeACL, $base= "", $attributes= array(), $flags= GL_SUBSEARCH)
 {
-  global $config;
+  global $config, $ui;
 
   /* Get LDAP link */
   $ldap= $config->get_ldap_link($flags & GL_SIZELIMIT);
@@ -502,6 +502,12 @@ function get_list($filter, $subtreeACL, $base= "", $attributes= array(), $flags=
     $ldap->cd ($config->current['BASE']);
   } else {
     $ldap->cd ($base);
+  }
+
+  /* Strict filter for administrative units? */
+  if ($ui->gosaUnitTag != "" && isset($config->current['STRICT_UNITS']) &&
+      preg_match('/TRUE/i', $config->current['STRICT_UNITS'])){
+    $filter= "(&(gosaUnitTag=".$ui->gosaUnitTag.")$filter)";
   }
 
   /* Perform ONE or SUB scope searches? */

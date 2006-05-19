@@ -27,6 +27,7 @@ class userinfo
   var $gidNumber= -1;
   var $language= "";
   var $config;
+  var $gosaUnitTag= "";
   var $subtreeACL= array();
 
   /* get acl's an put them into the userinfo object
@@ -34,7 +35,7 @@ class userinfo
   function userinfo($config, $userdn){
     $this->config= $config;
     $ldap= $this->config->get_ldap_link();
-    $ldap->cat($userdn,array('sn', 'givenName', 'uid', 'gidNumber', 'preferredLanguage'));
+    $ldap->cat($userdn,array('sn', 'givenName', 'uid', 'gidNumber', 'preferredLanguage', 'gosaUnitTag'));
     $attrs= $ldap->fetch();
 
     if (isset($attrs['givenName'][0]) && isset($attrs['sn'][0])){
@@ -49,6 +50,10 @@ class userinfo
     /* Assign user language */
     if (isset($attrs['preferredLanguage'][0])){
       $this->language= $attrs['preferredLanguage'][0];
+    }
+
+    if (isset($attrs['gosaUnitTag'][0])){
+      $this->gosaUnitTag= $attrs['gosaUnitTag'][0];
     }
 
     $this->dn= $userdn;

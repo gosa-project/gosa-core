@@ -296,3 +296,7 @@ A: No need to modify anything. Just add a hook the the plugin you'd like to
    to STDOUT. Note, that the supplied ldif may NOT be the original target ldif due
    to technical reasons.
    
+
+Q: Is there a way to use ACL independet filtering when using administrative units?
+
+A: Yes. Set STRICT_UNITS to TRUE in your gosa.conf's main section.
