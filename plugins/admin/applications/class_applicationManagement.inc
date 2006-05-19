@@ -58,7 +58,7 @@ class applicationManagement extends plugin
     /* Creat dialog object */
     $this->DivListApplication = new divListApplication($this->config,$this);
 
-    if($this->IsReleaseManagementActivated()){
+    if($this->IsReleaseManagementActivated($this->config)){
     /* Check if we should enable the release selection */
       $this->enableReleaseManagement = true;
 
