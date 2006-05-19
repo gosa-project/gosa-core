@@ -36,7 +36,7 @@
   </tr>
   <tr style="vertical-align:top;">
     <!-- Menu -->
-    <td style="background-color:#5353ad; vertical-align:top;">
+    <td style="background-color:#5353ad; vertical-align:top;" id="menucell">
       <div style="background-color:#5353ad; height:12px; width:100%;">&nbsp;</div>
       {$menu}
 	  <br>

@@ -206,12 +206,27 @@ function adjust(e) {
 // Automatic resize (height) of divlists
 function adjust_height(e) {
 	if (!e) e=window.event;
-	var px_height= window.innerHeight-230;
-	if(document.defaultView) {
-		var div_width=parseInt(document.defaultView.getComputedStyle(document.getElementById("t_scrolltable"),"").getPropertyValue('height'));
-	}
-	if(px_height >= 480) {
-		document.getElementById("d_scrollbody").style.height=px_height+"px";
+	if (document.getElementById("menucell") && document.getElementById("d_scrollbody")) {
+		var inner_height= window.innerHeight;
+		var min_height= 450;
+		var px_height= min_height;
+		var suggested= px_height;
+	
+		// document.defaultView allows access to the rendered size of elements and should be supported by modern browsers
+		if(document.defaultView) {
+			var menu_height=parseInt(document.defaultView.getComputedStyle(document.getElementById("menucell"),"").getPropertyValue('height'));
+	
+			// Minimum height for divlist should be the bottom edge of the menu
+			min_height= menu_height-197;
+			suggested= min_height;
+			if((inner_height-230)-suggested>0) {
+				suggested= inner_height-230;
+			}
+	
+		} else if(px_height >= 450) {
+				suggested= px_height-230;
+		}
+		document.getElementById("d_scrollbody").style.height=suggested+"px";
 	}
 	return true;
 }
@@ -221,7 +236,7 @@ function adjust_width(e) {
 	if (!e) e=window.event;
 
 	// Known to not work with IE
-	if(document.defaultView) {
+	if(document.defaultView && document.getElementById("t_scrolltable")) {
 		// Resize the div
 		var div_width=parseInt(document.defaultView.getComputedStyle(document.getElementById("t_scrolltable"),"").getPropertyValue('width'));
 		var width= parseInt(window.innerWidth);
