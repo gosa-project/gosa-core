@@ -20,13 +20,12 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2006-05-17 14:05+0200\n"
+"PO-Revision-Date: 2006-05-19 14:35+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
-"Language-Team: Deutsch <de@li.org>\n"
+"Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: contrib/gosa.conf:4
 msgid "My account"
@@ -4977,113 +4976,95 @@ msgid "System log view"
 msgstr "Systemprotokolle"
 
 #: plugins/addons/godfs/class_dfsManagment.inc:10
-#, fuzzy
 msgid "DFS Managment"
-msgstr "Verwaltung"
+msgstr "DFS-Verwaltung"
 
 #: plugins/addons/godfs/class_dfsManagment.inc:151
-#, fuzzy
 msgid "Removing DFS share failed"
-msgstr "DNS-Dienst entfernen"
+msgstr "Entfernen der DFS-Freigabe fehlgeschlagen"
 
 #: plugins/addons/godfs/class_dfsManagment.inc:170
 msgid "No DFS entries found"
 msgstr "Keine DFS-Einträge gefunden"
 
 #: plugins/addons/godfs/class_dfsManagment.inc:213
-#, fuzzy
 msgid "Go up one dfsshare"
-msgstr "Eine Abteilung nach oben"
+msgstr "Eine DFS-Freigabe nach oben"
 
 #: plugins/addons/godfs/class_dfsManagment.inc:214
 msgid "Go to dfs root"
 msgstr "Gehe zur DFS-Wurzel"
 
 #: plugins/addons/godfs/class_dfsManagment.inc:215
-#, fuzzy
 msgid "Create new dfsshare"
-msgstr "Neuen Benutzer erstellen"
+msgstr "Neue DFS-Freigabe erstellen"
 
 #: plugins/addons/godfs/class_dfsgeneric.inc:102
 #: plugins/addons/godfs/class_dfsgeneric.inc:104
-#, fuzzy
 msgid "Dfs share already exists."
-msgstr "Die angegebene Kategorie existiert bereits."
+msgstr "Diese DFS-Freigabe existiert bereits."
 
 #: plugins/addons/godfs/class_dfsgeneric.inc:117
-#, fuzzy
 msgid "Required Field \"Name of dfs Share\" is not set."
-msgstr "Das benötigte Feld 'Name' ist nicht ausgefüllt."
+msgstr "Das benötigte Feld 'Name der DFS-Freigabe' ist nicht ausgefüllt."
 
 #: plugins/addons/godfs/class_dfsgeneric.inc:120
-#, fuzzy
 msgid "Required Field \"Description\" is not set."
 msgstr "Das benötigte Feld 'Beschreibung' ist nicht gesetzt."
 
 #: plugins/addons/godfs/class_dfsgeneric.inc:123
-#, fuzzy
 msgid "Required Field \"Fileserver\" is not set."
-msgstr "Das benötigte Feld 'Name' ist nicht ausgefüllt."
+msgstr "Das benötigte Feld 'Dateiserver' ist nicht ausgefüllt."
 
 #: plugins/addons/godfs/class_dfsgeneric.inc:126
-#, fuzzy
 msgid "Required Field \"Share on fileserver\" is not set."
-msgstr "Das benötigte Feld 'Name' ist nicht ausgefüllt."
+msgstr "Das benötigte Feld 'Freigabe auf Dateiserver' ist nicht ausgefüllt."
 
 #: plugins/addons/godfs/class_dfsgeneric.inc:129
-#, fuzzy
 msgid "Required Field \"Location\" is not set."
-msgstr "Das benötigte Feld 'Beschreibung' ist nicht gesetzt."
+msgstr "Das benötigte Feld 'Pfad' ist nicht gesetzt."
 
 #: plugins/addons/godfs/contents.tpl:8
 msgid "DFS Shares"
 msgstr "DFS-Freigaben"
 
 #: plugins/addons/godfs/contents.tpl:26
-#, fuzzy
 msgid ""
 "This menu allows you to create, delete and edit selected dfs shares. Having "
 "a large numbers of dfs shares, you might prefer the range selectors on top "
 "of the dfs share list."
 msgstr ""
-"Dieses Menü erlaubt es Ihnen, Abteilungen hinzuzufügen, zu bearbeiten oder "
-"zu entfernen. Bei einer Vielzahl von Abteilungen bietet sich die Verwendung "
+"Dieses Menü erlaubt es Ihnen, DFS-Freigaben hinzuzufügen, zu bearbeiten oder "
+"zu entfernen. Bei einer Vielzahl von DFS-Freigaben bietet sich die Verwendung "
 "der Bereichswahl an."
 
 #: plugins/addons/godfs/contents.tpl:40
-#, fuzzy
 msgid "Display dfs shares matching"
-msgstr "Zeige die Adressen, auf die das Folgende passt"
+msgstr "Zeige die DFS-Freigaben, auf die das Folgende passt"
 
 #: plugins/addons/godfs/contents.tpl:44
-#, fuzzy
 msgid "Regular expression for matching dfs share names"
-msgstr "Regulärer Ausdruck zum Erkennen von System-Namen"
+msgstr "Regulärer Ausdruck zum Erkennen von DFS-Freigaben"
 
 #: plugins/addons/godfs/generic.tpl:4
-#, fuzzy
 msgid "DFS Properties"
-msgstr "Eigenschaften"
+msgstr "DFS-Eigenschaften"
 
 #: plugins/addons/godfs/generic.tpl:8
-#, fuzzy
 msgid "Name of dfs Share"
-msgstr "Name der Abteilung"
+msgstr "Name der DFS-Freigabe"
 
 #: plugins/addons/godfs/generic.tpl:16
-#, fuzzy
 msgid "Fileserver"
-msgstr "Mail-Server"
+msgstr "Dateiserver"
 
 #: plugins/addons/godfs/generic.tpl:20
-#, fuzzy
 msgid "Share on Fileserver"
-msgstr "Parent-Server"
+msgstr "Freigabe auf Dateiserver"
 
 #: plugins/addons/godfs/generic.tpl:30
-#, fuzzy
 msgid "DFS Location"
-msgstr "Ort"
+msgstr "DFS-Pfad"
 
 #: plugins/addons/godfs/main.inc:27 plugins/addons/godfs/main.inc:33
 msgid "Distributed File System Administration"
@@ -7966,7 +7947,7 @@ msgstr "Speichern der Arbeitsstations-Dienste ist fehlgeschlagen"
 
 #: plugins/admin/systems/class_workstationStartup.inc:225
 msgid "inherited"
-msgstr "ererbt"
+msgstr "geerbt"
 
 #: plugins/admin/systems/class_workstationStartup.inc:232
 #: plugins/admin/systems/class_terminalStartup.inc:91
@@ -10800,9 +10781,8 @@ msgid "Phone queue"
 msgstr "Warteschlange"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:83
-#, fuzzy
 msgid "Common settings"
-msgstr "Telefon-Einstellungen"
+msgstr "Allgemeine Einstellungen"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:130
 msgid "Terminals"
