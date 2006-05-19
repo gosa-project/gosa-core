@@ -383,7 +383,7 @@ class servDNSeditZoneEntries extends plugin
           <input type='text'  value='".$record['value']."' name='ValueSelection_".$name."' style='width:250px;'>
         </td>
         <td style='width:50px;text-align:right;'>
-          <input type='image' name='AddRecord_".$name."'   src='images/crossref.png' alt='"._("Add")."' title='"._("Add")."'>
+          <input type='image' name='AddRecord_".$name."'   src='images/list_new.png' alt='"._("Add")."' title='"._("Add")."'>
           <input type='image' name='RemoveRecord_".$name."' src='images/edittrash.png'      alt='"._("Remove")."' title='"._("Remove")."'>
         </td>
       </tr>";
