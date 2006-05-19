@@ -26,9 +26,6 @@ class servkolab extends plugin {
   var $proftpd_ftp                      = "TRUE";
   var $apache_http                      = "TRUE";
   var $kolabHost                        = array();
-  var $is_in_there                      = false;
-  var $exactName                        = false;
-
   var $orig_cn                          = "";
 
   var $attributes =  array("postfix_mydomain", "postfix_mydestination", "proftpd_ftp", "k",
@@ -64,23 +61,13 @@ class servkolab extends plugin {
       $this->kolabHost= $this->attrs['kolabHost'];
       unset($this->kolabHost['count']);
     }
-    $this->is_in_there           = false;
     $this->is_account            = false;
     $this->initially_was_account = false;
     foreach($this->kolabHost as $host){
-      if(preg_match("/".$this->hostname.".*/i",$host)){
+      if($this->hostname == $host){
         $this->is_account            = true;
-        $this->is_in_there           = true;
         $this->initially_was_account = true;
       }
-    } 
-
-
-    /* Mhh */ 
-    if(in_array($this->hostname, $this->kolabHost)) {
-      $this->exactName=true;
-    } else {   
-      $this->exactName=false;    
     } 
 
     /* Parse mynetworks */
@@ -327,12 +314,12 @@ class servkolab extends plugin {
             $tmp[] = $host;
           }
         }
+        $this->kolabHost = $tmp;
       }
-      $this->kolabHost = $tmp;
     }
-    
+
     /* Add ourselves to the list of kolabHost's if needed */
-    if (!in_array($this->cn,$this->kolabHost)){
+    if (!in_array_ics($this->cn,$this->kolabHost)){
       $this->kolabHost[]= $this->cn;
     }
 
@@ -369,10 +356,6 @@ class servkolab extends plugin {
     }
     /* Add kolab hosts */
     $this->attrs['kolabHost']= $this->kolabHost;
-
-    if(($this->is_in_there)&&(!$this->exactName)){
-      unset($this->attrs['kolabHost']);
-    }
 
     /* Perform LDAP action */
     $ldap->cd($this->dn);
