@@ -251,6 +251,7 @@ class phoneConferenceManagment extends plugin
 
     /* Return rendered main page */
     /* Display dialog with system list */
+    $this->DivListConference->parent = $this;
     $this->DivListConference->execute();
 
     /* Add departments if subsearch is disabled */

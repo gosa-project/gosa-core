@@ -542,6 +542,7 @@ class faiManagement extends plugin
      ****************/
 
     /* Display dialog with system list */
+    $this->DivListFai->parent = $this;
     $this->DivListFai->execute();
     $this->DivListFai->AddDepartments($this->DivListFai->selectedBase,4);
     $this->reload();

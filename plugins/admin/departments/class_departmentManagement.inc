@@ -303,6 +303,7 @@ class departmentManagement extends plugin
       return ($display);
     }else{
       /* Display dialog with group list */
+      $this->DivListDepartment->parent = $this;
       $this->DivListDepartment->execute();
       $this->reload();
       $this->DivListDepartment->DepartmentsAdded = true;

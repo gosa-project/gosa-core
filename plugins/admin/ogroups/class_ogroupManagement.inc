@@ -342,6 +342,7 @@ class ogroupManagement extends plugin
      ****************/
 
     /* Display dialog with group list */
+    $this->DivListOGroup->parent = $this;
     $this->DivListOGroup->execute();
 
     /* Add departments if subsearch is disabled */

@@ -273,6 +273,7 @@ class gofonMacro extends plugin
 
     /* Return rendered main page */
     /* Display dialog with system list */
+    $this->DivListMacro->parent = $this;
     $this->DivListMacro->execute();
 
     /* Add departments if subsearch is disabled */

@@ -332,6 +332,7 @@ class groupManagement extends plugin
     }
 
     /* Display dialog with group list */
+    $this->DivListGroup->parent = $this;
     $this->DivListGroup->execute();
 
     /* Add departments if subsearch is disabled */

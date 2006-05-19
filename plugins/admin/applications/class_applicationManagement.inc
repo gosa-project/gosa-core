@@ -359,6 +359,7 @@ class applicationManagement extends plugin
      ****************/
 
     /* Display dialog with system list */
+    $this->DivListApplication->parent = $this;
     $this->DivListApplication->execute();
     $this->DivListApplication->AddDepartments($this->DivListApplication->selectedBase);
     $this->reload();

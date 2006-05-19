@@ -482,6 +482,7 @@ class systems extends plugin
     }
 
     /* Display dialog with system list */
+    $this->DivListSystem->parent = $this;
     $this->DivListSystem->execute();
 
     /* Add departments if subsearch is disabled */

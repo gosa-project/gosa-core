@@ -630,6 +630,7 @@ class userManagement extends plugin
       
     /* Return rendered main page */
         /* Display dialog with system list */
+    $this->DivListUsers->parent = $this;
     $this->DivListUsers->execute();
 
     /* Add departments if subsearch is disabled */

@@ -292,6 +292,7 @@ class blocklist extends plugin
        ***************/
 
       /* Display dialog with system list */
+      $this->DivListBlocklist->parent = $this;
       $this->DivListBlocklist->execute();
 
       /* Add departments if subsearch is disabled */
