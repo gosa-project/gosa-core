@@ -39,10 +39,6 @@ if ($remove_lock){
 		del_lock ($ui->dn);
 		sess_del ('FAI');
 	}
-
-	/* Show and save dialog */
-	$FAI->save_object();
-
 	/* Page header*/
 	if (isset($_SESSION['objectinfo'])){
 		$display= print_header(get_template_path('images/fai.png'), _("Fully Automatic Installation"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".@LDAP::fix($_SESSION['objectinfo']));
