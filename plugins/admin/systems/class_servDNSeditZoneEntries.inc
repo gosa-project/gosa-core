@@ -69,13 +69,13 @@ class servDNSeditZoneEntries extends plugin
 
       /* Add new host entry
        */
-      if((preg_match("/^UserRecord_/",$name)) && ($once)){
+      if((preg_match("/^UserRecord_?/",$name)) && ($once)){
         $once = false;
         $entry = getDNSHostEntries($this->config,"",true);     
         $entry['exists']    = true;
         $entry['zoneName']  = $this->zoneName; 
         $entry['RECORDS'][] = array("type" => "aRecord" , "value"=>"");
-        $this->Devices['New Entry'] = $entry;
+        $this->Devices[_("New Entry")] = $entry;
       }
 
       if(count($tmp2) != 2) continue;
