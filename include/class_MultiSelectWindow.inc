@@ -71,7 +71,7 @@ class MultiSelectWindow{
     $ui   = get_userinfo();
     $base = get_base_from_people($ui->dn);
 		if(!isset($_SESSION['CurrentMainBase'])){
-			$_SESSION['CurrentMainBase'] = base;
+			$_SESSION['CurrentMainBase'] = $base;
 		}
 		$this->selectedBase = $_SESSION['CurrentMainBase'];
 
