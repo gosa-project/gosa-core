@@ -34,6 +34,16 @@ class applicationManagement extends plugin
   var $acl                      = "";
   var $enableReleaseManagement  = false;
 
+  function IsReleaseManagementActivated($config)
+  {
+    /* Check if we should enable the release selection */
+    $tmp = search_config($this->config->data,"faiManagement","CLASS");
+    if(!empty($tmp)){
+      return(true);
+    }
+    return(false);
+  }
+
   function applicationManagement ($config, $ui)
   {
     /* Save configuration for internal use */
@@ -48,9 +58,8 @@ class applicationManagement extends plugin
     /* Creat dialog object */
     $this->DivListApplication = new divListApplication($this->config,$this);
 
+    if($this->IsReleaseManagementActivated()){
     /* Check if we should enable the release selection */
-    $tmp = search_config($this->config->data,"faiManagement","CLASS");
-    if(!empty($tmp)){
       $this->enableReleaseManagement = true;
 
       /* Hide SubSearch checkbox */
