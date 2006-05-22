@@ -444,16 +444,16 @@ class LDAP{
     error_reporting(E_ALL);
     
     if($is_first){
-      echo "<h2>".sprintf(_("Creating copy of %s"),"<i>".$sourcedn."</i>")."</h2>";
+      echo "<h2>".sprintf(_("Creating copy of %s"),"<i>".@LDAP::fix($sourcedn)."</i>")."</h2>";
     }else{
       if(preg_match("/^ou=/",$sourcedn)){
-        echo "<h3>"._("Processing")." <i>$destinationdn</i></h3>";
+        echo "<h3>"._("Processing")." <i>".@LDAP::fix($destinationdn)."</i></h3>";
       }else{
         $tmp = split(",",$sourcedn);
         
         echo "&nbsp;<b>"._("Object").":</b> ";
 
-        $deststr = $destinationdn;
+        $deststr = @LDAP::fix($destinationdn);
         if(strlen($deststr) > 96){
           $deststr = substr($deststr,0,96)."...";
         }
