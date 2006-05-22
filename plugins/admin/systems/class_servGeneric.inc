@@ -17,6 +17,7 @@ class servgeneric extends plugin
   var $l= "";
   var $description= "";
   var $orig_dn= "";
+  var $didAction= FALSE;
 
   /* attribute list for save action */
   var $attributes= array("cn", "description","gotoMode");
@@ -51,8 +52,8 @@ class servgeneric extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     /* Do we represent a valid server? */
     if (!$this->is_account && $this->parent == NULL){
@@ -63,42 +64,16 @@ class servgeneric extends plugin
 
     /* Check for action */
     if (isset($_POST['action'])){
-      switch($_POST['action']){
-        case 'wake':
-          $cmd= search_config($this->config->data['TABS'], "servgeneric", "WAKECMD");
-          if ($cmd == ""){
-            print_red(_("No WAKECMD definition found in your gosa.conf"));
-          } else {
-            exec ($cmd." ".$this->netConfigDNS->macAddress, $dummy, $retval);
-            if ($retval != 0){
-              print_red(sprintf(_("Execution of '%s' failed!"), $cmd));
-            }
-          }
-          break;
-
-        case 'reboot':
-          $cmd= search_config($this->config->data['TABS'], "servgeneric", "REBOOTCMD");
-          if ($cmd == ""){
-            print_red(_("No REBOOTCMD definition found in your gosa.conf"));
-          } else {
-            exec ($cmd." ".$this->cn, $dummy, $retval);
-            if ($retval != 0){
-              print_red(sprintf(_("Execution of '%s' failed!"), $cmd));
-            }
-          }
-          break;
-
-        case 'halt':
-          $cmd= search_config($this->config->data['TABS'], "servgeneric", "HALTCMD");
-          if ($cmd == ""){
-            print_red(_("No HALTCMD definition found in your gosa.conf"));
-          } else {
-            exec ($cmd." ".$this->cn, $dummy, $retval);
-            if ($retval != 0){
-              print_red(sprintf(_("Execution of '%s' failed!"), $cmd));
-            }
-          }
-          break;
+      $cmd= search_config($this->config->data['TABS'], "workgeneric", "ACTIONCMD");
+      if ($cmd == ""){
+        print_red(_("No ACTIONCMD definition found in your gosa.conf"));
+      } else {
+        exec ($cmd." ".$this->netConfigDNS->macAddress." ".escapeshellarg($_POST['saction']), $dummy, $retval);
+        if ($retval != 0){
+          print_red(sprintf(_("Execution of '%s' failed!"), $cmd));
+        } else {
+          $this->didAction= TRUE;
+        }
       }
     }
 
@@ -287,7 +262,9 @@ class servgeneric extends plugin
     show_ldap_error($ldap->get_error(), _("Saving server failed"));
 
     /* Optionally execute a command after we're done */
-    $this->handle_post_events($mode);
+    if(!$this->didAction){
+      $this->handle_post_events($mode);
+    }
   }
 
 }
