@@ -54,15 +54,15 @@ class divListOGroup extends MultiSelectWindow
     $this->AddHeader(array("string" => _("Actions"), "attach" => "style='width:107px;border-right:0px;text-align:right;'"));
 
     /*                  Text        ,Value    ,Name         ,Is selected */
-    $this->AddCheckBox("UserGroups" ,       _(" ") , _("Show groups containing users"), true);
-    $this->AddCheckBox("GroupGroups" ,      _(" ") , _("Show groups containing groups"), true);
-    $this->AddCheckBox("ApplicationGroups", _(" ") , _("Show groups containing applications"), true);
-    $this->AddCheckBox("DepartmentGroups" , _(" ") , _("Show groups containing departments"), true);
-    $this->AddCheckBox("ServerGroups" ,     _(" ") , _("Show groups containing servers"), true);
-    $this->AddCheckBox("WorkstationGroups", _(" ") , _("Show groups containing workstations"), true);
-    $this->AddCheckBox("TerminalGroups" ,   _(" ") , _("Show groups containing terminals"), true);
-    $this->AddCheckBox("PrinterGroups" ,    _(" ") , _("Show groups containing printer"), true);
-    $this->AddCheckBox("PhoneGroups" ,      _(" ") , _("Show groups containing phones"), true);
+    $this->AddCheckBox("UserGroups" ,       _("Select to see groups containing users")       , _("Show groups containing users"), true);
+    $this->AddCheckBox("GroupGroups" ,      _("Select to see groups containing groups")      , _("Show groups containing groups"), true);
+    $this->AddCheckBox("ApplicationGroups", _("Select to see groups containing applications"), _("Show groups containing applications"), true);
+    $this->AddCheckBox("DepartmentGroups" , _("Select to see groups containing departments") , _("Show groups containing departments"), true);
+    $this->AddCheckBox("ServerGroups" ,     _("Select to see groups containing servers")     , _("Show groups containing servers"), true);
+    $this->AddCheckBox("WorkstationGroups", _("Select to see groups containing workstations"), _("Show groups containing workstations"), true);
+    $this->AddCheckBox("TerminalGroups" ,   _("Select to see groups containing terminals")   , _("Show groups containing terminals"), true);
+    $this->AddCheckBox("PrinterGroups" ,    _("Select to see groups containing printer")     , _("Show groups containing printer"), true);
+    $this->AddCheckBox("PhoneGroups" ,      _("Select to see groups containing phones")      , _("Show groups containing phones"), true);
 
     /* Add SubSearch checkbox */    
     $this->AddCheckBox(SEPERATOR);
