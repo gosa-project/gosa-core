@@ -378,6 +378,7 @@ class workgeneric extends plugin
       }
       $ldap->cd($this->dn);
       $this->cleanup();
+      $this->attrs['gosaUnitTag']= array();
       $ldap->modify ($this->attrs); 
 
       if(!$this->didAction){
