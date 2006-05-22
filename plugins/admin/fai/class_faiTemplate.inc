@@ -210,7 +210,7 @@ class faiTemplate extends plugin
   
         $dn = $this->SubObjects[$key]['dn'];       
  
-        $down = "<a href='getFAIscript.php?is_template&id=".base64_encode($dn)."' target='_blank'>
+        $down = "<a href='getFAIscript.php?is_template&id=".base64_encode($dn)."'>
           <img src='images/save.png' alt='"._("Download")."' title='"._("Download")."' border=0>
           </a>";
       }

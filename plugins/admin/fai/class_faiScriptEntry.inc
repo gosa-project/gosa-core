@@ -85,7 +85,7 @@ class faiScriptEntry extends plugin
 
      /* Create download button*/
     if($this->dn != "new"){
-      $smarty->assign("DownMe","<a href='getFAIscript.php?id=".base64_encode($this->dn)."' target='_blank'>
+      $smarty->assign("DownMe","<a href='getFAIscript.php?id=".base64_encode($this->dn)."'>
         <input type='button' value='"._("Download")."'>
         </a>");
     }else{

@@ -261,7 +261,7 @@ class faiHook extends plugin
       if(($this->SubObjects[$key]['status'] == "new") || ($this->SubObjects[$key]['dn'] == "new")){
         $down = "";
       }else{
-        $down = "<a href='getFAIscript.php?id=".base64_encode($name['dn'])."' target='_blank'>
+        $down = "<a href='getFAIscript.php?id=".base64_encode($name['dn'])."'>
           <img src='images/save.png' alt='"._("Download")."' title='"._("Download")."' border=0>
           </a>";
       }
