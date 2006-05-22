@@ -54,6 +54,8 @@ class conference extends plugin
   var $last_dep_sorting= "invalid";
   var $departments= array();
 
+  var $dialog ;
+
   /* attribute list for save action */
   var $attributes= array("cn","base", "description", "goFonPIN","goFonConferenceOption_P","goFonConferenceOption_r",
       "goFonConferenceOption_M","goFonConferenceOption_s","goFonConferenceOption_i","goFonConferenceOption_c",
@@ -118,6 +120,30 @@ class conference extends plugin
 
     $smarty->assign("bases" ,$this->config->idepartments);
     $smarty->assign("base"  ,$this->base);
+
+    $once = true; 
+    foreach($_POST as $name => $value){
+      if(preg_match("/^chooseBase/",$name) && $once){
+        $once = false;
+        $this->dialog = new baseSelectDialog($this->config);
+        $this->dialog->setCurrentBase($this->base);
+      }
+    }
+
+    /* Dialog handling */
+    if(is_object($this->dialog)){
+      /* Must be called before save_object */
+      $this->dialog->save_object();
+
+      if($this->dialog->isClosed()){
+        $this->dialog = false;
+      }elseif($this->dialog->isSelected()){
+        $this->base = $this->dialog->isSelected();
+        $this->dialog= false;
+      }else{
+        return($this->dialog->execute());
+      }
+    }
 
     $smarty->assign("goFonConferenceOptions",		    array("D"=>"Conference ","d"=>"Conference without PIN"));
     $smarty->assign("goFonConferenceOptionFormats",	array("WAV"=>"Wave","GSM"=>"GSM","WAV49"=>"Wave49"));
