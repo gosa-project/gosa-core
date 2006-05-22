@@ -220,6 +220,7 @@ class phoneGeneric extends plugin
       $smarty->assign($attr."ACL", chkacl($this->acl, $attr));
     }
     $smarty->assign("base_select", $this->base);
+    $smarty->assign("baseACL", chkacl($this->acl,"base"));
    
     $smarty->assign("goFonDefaultIPs",array("dynamic"=>_("dynamic"),"network"=>_("Networksettings")));
  

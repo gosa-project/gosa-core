@@ -136,6 +136,8 @@ class servgeneric extends plugin
       $smarty->assign($attr."ACL", chkacl($this->acl, $attr));
       $smarty->assign("$attr", $this->$attr);
     }
+    $smarty->assign("baseACL", chkacl($this->acl, "base"));
+
     $smarty->assign("staticAddress", "");
     $smarty->assign("base_select", $this->base);
 

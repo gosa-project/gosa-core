@@ -349,6 +349,8 @@ class printgeneric extends plugin
       $smarty->assign("$attr", $this->$attr);
     }
 
+    $smarty->assign("baseACL", chkacl($this->acl,"base"));
+
     if(isset($_POST['AddUser'])){
       $this->dialog = new selectUserToPrinterDialog($this->config, get_userinfo(),"AddUser");
     }

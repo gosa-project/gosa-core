@@ -86,6 +86,7 @@ class componentGeneric extends plugin
       $smarty->assign("$attr", $this->$attr);
     }
     $smarty->assign("base_select", $this->base);
+    $smarty->assign("baseACL", chkacl($this->acl,"base"));
 
     /* Show main page */
     $smarty->assign("netconfig", $this->netConfigDNS->execute());
