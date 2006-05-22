@@ -25,7 +25,9 @@
 
 error_reporting(0);
 header("Content-type: text/html; charset=UTF-8");
+
 session_start();
+$ui= $_SESSION["ui"];
 $config= $_SESSION['config'];
 
 /* If no config object is found in the session, abort help */
