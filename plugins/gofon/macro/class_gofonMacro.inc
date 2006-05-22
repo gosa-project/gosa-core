@@ -103,6 +103,33 @@ class macro extends plugin
         _("This 'dn' is no phone macro.")."</b>";
       return ($display);
     }
+    
+    /* Base select dialog */
+    $once = true;
+    foreach($_POST as $name => $value){
+      if(preg_match("/^chooseBase/",$name) && $once){
+        $once = false;
+        $this->dialog = new baseSelectDialog($this->config,$this->allowedBasesToMoveTo());
+        $this->dialog->setCurrentBase($this->base);
+      }
+    }
+
+    /* Dialog handling */
+    if(is_object($this->dialog)){
+      /* Must be called before save_object */
+      $this->dialog->save_object();
+
+      if($this->dialog->isClosed()){
+        $this->dialog = false;
+      }elseif($this->dialog->isSelected()){
+        $this->base = $this->dialog->isSelected();
+        $this->dialog= false;
+      }else{
+        return($this->dialog->execute());
+      }
+    }
+
+
 
     /* Fill templating stuff */
     $smarty= get_smarty();
@@ -111,6 +138,7 @@ class macro extends plugin
     /* Assign all vars to Smarty */
     foreach($this->attributes as $ar){
       $smarty->assign($ar, $this->$ar);
+      $smarty->assign($ar."ACL", chkacl($this->acl,$ar));
     }
     /* Checkboxes */
     $smarty->assign("base_select", $this->base);
