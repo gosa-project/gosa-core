@@ -17,6 +17,11 @@
         {html_options options=$bases selected=$base_select}
 		<option disabled>&nbsp;</option>
        </select>
+        {if $selectmode == ""}
+            <input type="image" name="chooseBase" src="images/folder.png" class="center" title="{t}Select a base{/t}">
+        {else}
+            <img src="images/folder_gray.png" class="center" title="{t}Select a base{/t}">
+        {/if}
       </td>
      </tr>
     </table>
