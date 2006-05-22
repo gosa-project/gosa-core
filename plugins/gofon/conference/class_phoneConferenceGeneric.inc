@@ -466,16 +466,17 @@ class conference extends plugin
     }
 
     $ldap= $this->config->get_ldap_link();
-
+    $ldap->cd($this->config->current['BASE']);
     $ldap->cat($this->dn, array('dn'));
-    $a= $ldap->fetch();
-    $ldap->cd($this->dn);
-    if (count($a)){
+
+    if ($ldap->count()){
+      $ldap->cd($this->dn);
       $this->cleanup();
       $ldap->modify ($this->attrs); 
-
       $this->handle_post_events('modify');
     } else {
+      $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
+      $ldap->cd($this->dn);
       $ldap->add($this->attrs);
       $this->handle_post_events('add');
     }

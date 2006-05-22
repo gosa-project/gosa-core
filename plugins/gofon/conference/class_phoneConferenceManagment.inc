@@ -269,7 +269,7 @@ class phoneConferenceManagment extends plugin
    */
   function reload()
   {
-    $Base             = $this->DivListConference->selectedBase;
+    $Base             = "ou=conferences,ou=asterisk,ou=configs,ou=systems,".$this->DivListConference->selectedBase;
     $SubSearch        = $this->DivListConference->SubSearch;
     $Regex            = $this->DivListConference->Regex;
     $Flags            = GL_SIZELIMIT ; 

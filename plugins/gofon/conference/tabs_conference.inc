@@ -19,7 +19,7 @@ class conferencetabs extends tabs
   function save()
   {
   	$baseobject= $this->by_object['conference'];
-	$new_dn= 'cn='.$baseobject->cn.','.$baseobject->base;
+	$new_dn= 'cn='.$baseobject->cn.',ou=conferences,ou=asterisk,ou=configs,ou=systems,'.$baseobject->base;
 
 	if(strtolower($this->dn)==strtolower($new_dn)){
 		$this->dn=$new_dn;
