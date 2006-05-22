@@ -137,6 +137,7 @@ class department extends plugin
 			$smarty->assign("$val", $this->$val);
 			$smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
 		}
+    $smarty->assign("baseACL", chkacl($this->acl,"base"));
 		$smarty->assign("base_select", $this->base);
 
 		/* Set admin unit flag */

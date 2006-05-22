@@ -30,7 +30,11 @@
          <select id="base" size="1" name="base" title="{t}Choose subtree to place department in{/t}"> 
           {html_options options=$bases selected=$base_select}
          </select>
-		<input type="image" name="chooseBase" src="images/folder.png" class="center" title="{t}Select a base{/t}">
+		{if $baseACL == ""}
+            <input type="image" name="chooseBase" src="images/folder.png" class="center" title="{t}Select a base{/t}">
+        {else}
+            <img src="images/folder_gray.png" class="center" title="{t}Select a base{/t}">
+        {/if}
 	</td>
        </tr>
      </table>
