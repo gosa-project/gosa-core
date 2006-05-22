@@ -99,6 +99,13 @@ class ogrouptabs extends tabs
         $this->by_object['workservice']->parent= &$this;
       }
     }
+  
+    /* Move reference tab to last position*/
+    if(isset($this->by_name['reference'])){
+      $tmp = $this->by_name['reference'];
+      unset($this->by_name['reference']);
+      $this->by_name['reference'] = $tmp;
+    }
   }
 
   function execute(){
