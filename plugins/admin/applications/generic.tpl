@@ -32,9 +32,15 @@
       <td><LABEL for="base">{t}Base{/t}{$must}</LABEL></td>
       <td>
        <select size="1" id="base" name="base" title="{t}Choose subtree to place application in{/t}" 
-        {if $isReleaseApplikation} disabled {/if}>
+        {if $isReleaseApplikation} disabled {/if} {$baseACL}>
         {html_options options=$bases selected=$base_select}
        </select>
+		{if $baseACL == "" && !$isReleaseApplikation}
+            <input type="image" name="chooseBase" src="images/folder.png" class="center" title="{t}Select a base{/t}">
+        {else}
+            <img src="images/folder_gray.png" class="center" title="{t}Select a base{/t}">
+        {/if}
+
       </td>
      </tr>
    </table>
