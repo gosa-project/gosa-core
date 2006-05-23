@@ -9,9 +9,9 @@ class workstartup extends plugin
   /* Generic terminal attributes */
   var $bootmode             = "G";
   var $goLdapServerList     = array();
-  var $gotoBootKernel       = "";
+  var $gotoBootKernel       = "default";
   var $gotoKernelParameters = "";
-  var $gotoLdapServer       = "";
+  var $gotoLdapServer       = "default";
   var $gotoModules          = array();
   var $gotoAutoFs           = array();
   var $gotoFilesystem       = array();
@@ -890,6 +890,7 @@ class workstartup extends plugin
     if ($this->attrs['gotoLdapServer'] == "default"){
       $this->attrs['gotoLdapServer']= array();
     }
+
     if ($this->attrs['gotoBootKernel'] == "%default%" || $this->attrs['gotoBootKernel'] == "default"){
       $this->attrs['gotoBootKernel']= array();
     }

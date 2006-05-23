@@ -353,7 +353,13 @@ class workgeneric extends plugin
 
     /* Update ntp server settings */
     if($this->inheritTimeServer){
-      $this->attrs['gotoNtpServer'] = array();
+      if($this->new){
+        if(isset($this->attrs['gotoNtpServer'])){
+          unset($this->attrs['gotoNtpServer']);
+        }
+      }else{
+        $this->attrs['gotoNtpServer'] = array();
+      }
     }else{
       /* Set ntpServers */
       $this->attrs['gotoNtpServer'] = array();
@@ -369,6 +375,7 @@ class workgeneric extends plugin
       $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
       $ldap->cd($this->dn);
       $ldap->add($this->attrs);
+      show_ldap_error($ldap->get_error(), _("Saving workstation failed"));
       if(!$this->didAction){
         $this->handle_post_events("add");
       }
@@ -378,7 +385,7 @@ class workgeneric extends plugin
       }
       $ldap->cd($this->dn);
       $this->cleanup();
-      $this->attrs['gosaUnitTag']= array();
+//      $this->attrs['gosaUnitTag']= array();
       $ldap->modify ($this->attrs); 
 
       if(!$this->didAction){
