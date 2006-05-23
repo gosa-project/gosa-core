@@ -108,9 +108,8 @@ class divListDepartment extends MultiSelectWindow
         }
       }
 
-      $title = $this->config->departments[$key];
-      $field0 = array("string" => "<img src='images/".$non_empty."folder.png' title='"._("department")."' alt='department'>", "attach" => "style='text-
-          align:center;width:20px;'");
+      $title = preg_replace('/ /', '&nbsp;', @LDAP::fix($this->config->departments[$key]));
+      $field0 = array("string" => "<img src='images/".$non_empty."folder.png' title='"._("department")."' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
       $field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style='' title='".$title."'");
       $field2 = array("string" => preg_replace("/%KEY%/", base64_encode($key), $actions), "attach" => "style='width:60px;border-right:0px;text-align:
           right;'");
