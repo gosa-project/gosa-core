@@ -706,7 +706,7 @@ class faiManagement extends plugin
       return(false);
     }elseif(empty($name)){
       return(false);
-    }elseif(in_array($name,array("fai","disk","packages","scripts","templates","hooks","variables","profiles","apps"))){
+    }elseif(is_department_name_reserved($name,$base)){
       return(false);
     }
     return(true);

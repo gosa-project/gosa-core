@@ -1982,8 +1982,7 @@ function is_department_name_reserved($name,$base)
   $reservedName = array("systems","apps","incomming","internal","accounts","fax","addressbook",
                           preg_replace("/ou=(.*),/","\\1",get_people_ou()),
                           preg_replace("/ou=(.*),/","\\1",get_groups_ou()));
-
-  $follwedNames['/ou=fai,ou=configs,ou=systems,/'] = array("fai","hooks","templates","scripts","disks","packages","variables","profiles");
+  $follwedNames['/ou=fai,ou=configs,ou=systems,/'] = array("fai","hooks","templates","scripts","disk","packages","variables","profiles");
 
   /* Check if name is one of the reserved names */
   if(in_array_ics($name,$reservedName)) {
