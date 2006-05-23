@@ -75,7 +75,7 @@ class servDNSeditZoneEntries extends plugin
         $entry['exists']    = true;
         $entry['zoneName']  = $this->zoneName; 
         $entry['RECORDS'][] = array("type" => "aRecord" , "value"=>"");
-        $this->Devices[_("New Entry")] = $entry;
+        $this->Devices[_("New entry")] = $entry;
       }
 
       if(count($tmp2) != 2) continue;
