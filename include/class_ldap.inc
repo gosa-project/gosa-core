@@ -762,7 +762,7 @@ class LDAP{
     } else {
       $adderror= $this->get_additional_error();
       if ($adderror != ""){
-        $error= $this->error." (".$this->get_additional_error().", ".sprintf(_("while operating on '%s' using LDAP server '%s'"), $this->base, $this->hostname).")";
+        $error= $this->error." (".$this->get_additional_error().", ".sprintf(_("while operating on '%s' using LDAP server '%s'"), $this->basedn, $this->hostname).")";
       } else {
         $error= $this->error." (".sprintf(_("while operating on LDAP server %s"), $this->hostname).")";
       }
