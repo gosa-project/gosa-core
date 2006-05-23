@@ -5,19 +5,19 @@
 		<td width="50%" valign="top" style="border-right:1px solid #A0A0A0">
 			<table summary=''>
 				<tr>
-					<td>{t}Release{/t}
-					</td>
-					<td>
-						<input type="text" value="{$Release}" name="Release" {$ReleaseACL}>
-					</td>
-				</tr>
-				<tr>
 					<td>{t}Parent server{/t}
 					</td>
 					<td>
 						<select name="ParentServer" {$ParentServerACL}>
 							{html_options options=$ParentServers values=$ParentServerKeys selected=$ParentServer} 
 						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>{t}Release{/t}
+					</td>
+					<td>
+						<input type="text" value="{$Release}" name="Release" {$ReleaseACL}>
 					</td>
 				</tr>
 				<tr>

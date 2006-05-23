@@ -154,7 +154,35 @@ class workstartup extends plugin
         }
       }
     }
-    $this->FAIServRepConfig =$test;
+    
+    /* Add possible elements from hook */
+    $lines= $this->GetHookElements();
+    foreach ($lines as $hline){
+      $entries= split(";", $hline);
+      if (isset($entries[1]) && !isset($test[$entries[1]])){
+        $test[$entries[1]]['RELEASE']= array();
+
+        /* Split releases */
+        if (isset($entries[2])){
+          $releases= split(",", $entries[2]);
+
+          foreach ($releases as $release){
+            $rname= preg_replace('/:.*$/', '', $release);
+            $sections= split(':', preg_replace('/^[^:]+:([^|]+)|.*$/', '\1', $release));
+            $classes= split('\|', preg_replace('/^[^|]+\|(.*)$/', '\1', $release));
+            $test[$entries[1]]['RELEASE'][$rname]= array();
+            $test[$entries[1]]['RELEASE'][$rname]['SECTION']= $sections;
+            foreach ($classes as $class){
+              if ($class != ""){
+                $test[$entries[1]]['RELEASE'][$rname]['PACKAGES'][$class]= $class;
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    $this->FAIServRepConfig= $test;
 
     /* Get arrays */
     foreach (array("gotoModules", "gotoAutoFs", "gotoFilesystem") as $val){
@@ -966,6 +994,29 @@ class workstartup extends plugin
       }
     }
     return($a_return);
+  }
+
+
+  function GetHookElements()
+  {
+    $ret = array();
+    $cmd= search_config($this->config->data['TABS'], "servrepository", "REPOSITORY_HOOK");
+    if(!empty($cmd)){
+      $res = shell_exec($cmd);
+      $res2 = trim($res);
+      if((!$res)){
+        print_red(sprintf(_("Can't execute specified REPOSITORY_HOOK '%s' please check your gosa.conf."),$cmd));
+      }elseif(empty($res2)){
+        print_red(sprintf(_("The specified REPOSITORY_HOOK '%s', specified in your gosa.conf, returns an empty string."),$cmd));
+      }else{
+        $tmp = split("\n",$res);
+        foreach($tmp as $line){
+          if(empty($line)) continue;
+          $ret[]= $line;
+        }
+      }
+    }
+    return($ret);
   }
 
 }

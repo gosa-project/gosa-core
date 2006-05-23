@@ -39,7 +39,6 @@
      	<h2><img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;{t}Release{/t}</h2></td>
      </tr><tr>
      <td>
-		<!--<select name="FAIdebianMirror" {$FAIdebianMirrorACL} onchange="document.mainform.submit();">-->
 		<select name="FAIdebianMirror" {$FAIdebianMirrorACL} onchange='document.mainform.submit()'>
         {html_options options=$FAIdebianMirrors output=$FAIdebianMirrors selected=$FAIdebianMirror}
         <option disabled>&nbsp;</option>

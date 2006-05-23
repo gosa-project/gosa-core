@@ -162,23 +162,23 @@ class servRepositorySetup  extends plugin
   function GetHookElements()
   {
     $ret = array();
-    $cmd= search_config($this->config->data['TABS'], "servrepository", "EXTERNAL_HOOK");
+    $cmd= search_config($this->config->data['TABS'], "servrepository", "REPOSITORY_HOOK");
     if(!empty($cmd)){
       $res = shell_exec($cmd);
       $res2 = trim($res);
       if((!$res)){
-        print_red(sprintf(_("Can't execute specified EXTERNAL_HOOK '%s' please check your gosa.conf."),$cmd));
+        print_red(sprintf(_("Can't execute specified REPOSITORY_HOOK '%s' please check your gosa.conf."),$cmd));
       }elseif(empty($res2)){
-        print_red(sprintf(_("The specified EXTERNAL_HOOK '%s', specified in your gosa.conf, returns an empty string."),$cmd));
+        print_red(sprintf(_("The specified REPOSITORY_HOOK '%s', specified in your gosa.conf, returns an empty string."),$cmd));
       }else{  
         $tmp = split("\n",$res);
         foreach($tmp as $hook){
           /* skip empty */
           if(empty($hook)) continue;
 
-          if(preg_match("/\:/",$hook)){ 
-            $hookinfo = split(":",$hook);
-            $ret[$hookinfo[1]] = $hookinfo[0];
+          if(preg_match("/;/",$hook)){ 
+            $hookinfo = split(";",$hook);
+            $ret[$hookinfo[0]] = $hookinfo[0];
           }else{
             $ret[$hook] = $hook;
           }
