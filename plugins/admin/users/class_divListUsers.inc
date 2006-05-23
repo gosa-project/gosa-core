@@ -278,7 +278,7 @@ class divListUsers extends MultiSelectWindow
 
       /* Create each field */
       $field1 = array("string" => sprintf($tpl,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($editlink,$key,$display).$ip_port, "attach" => "style='' title='dn:&nbsp;".@LDAP::fix($val['dn'])."'");
+      $field2 = array("string" => sprintf($editlink,$key,$display).$ip_port, "attach" => "style='' title='".preg_replace('/ /', '&nbsp;', @LDAP::fix($val['dn']))."'");
       $field3 = array("string" => $UseImg, "attach" => "style='width:152px;'");
       $field4 = array("string" => $s_img_create_from_template.preg_replace("/%KEY%/", "$key", $action),
                       "attach" => "style='width:102px;border-right:0px;    text-align:right;'");

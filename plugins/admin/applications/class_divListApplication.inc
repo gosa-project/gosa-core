@@ -150,7 +150,7 @@ class divListApplication extends MultiSelectWindow
      ********************/
 
     foreach($list as $key => $val){
-      $title = "title='dn:&nbsp;".@LDAP::fix($val['dn'])."'";
+      $title = "title='".preg_replace('/ /', '&nbsp;', @LDAP::fix($val['dn']))."'";
 
       if(!isset($val['description'][0])){
         $desc = "";

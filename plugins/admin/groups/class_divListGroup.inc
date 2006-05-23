@@ -169,7 +169,7 @@ class divListGroup extends MultiSelectWindow
         if(in_array("gotoEnvironment",      $val['objectClass']))   $enviro= $envimg;
       }
 
-      $title = "title='dn:&nbsp;".@LDAP::fix($val['dn'])."'";
+      $title = "title='".preg_replace('/ /', '&nbsp;', @LDAP::fix($val['dn']))."'";
 
       if(!isset($val['description'][0])){
         $desc = "";

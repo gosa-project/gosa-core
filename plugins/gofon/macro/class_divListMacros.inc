@@ -120,7 +120,7 @@ class divListMacro extends MultiSelectWindow
       }
 
       $field1 = array("string" => sprintf($macroimg,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='dn:&nbsp;".@LDAP::fix($val['dn'])."'");
+      $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='".preg_replace('/ /', '&nbsp;', @LDAP::fix($val['dn']))."'");
       $field3 = array("string" => $pic1, "attach" => "style='width:50px;'");
       $field4 = array("string" => preg_replace("/%KEY%/", "$key", $action), "attach" => "style='width:60px;border-right:0px;text-align:right;'");
 

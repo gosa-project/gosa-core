@@ -177,7 +177,7 @@ class divListSystem extends MultiSelectWindow
 
       $img    = $this->parent->convert_list($val);
       $field1 = array("string" => sprintf($img['img'],$val['dn']), "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='".@LDAP::fix($val['dn'])."'");
+      $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='".preg_replace('/ /', '&nbsp;', @LDAP::fix($val['dn']))."'");
       $field3 = array("string" => preg_replace("/%KEY%/", "$key", $action2.$action), "attach" => "style='width:60px;border-right:0px;text-align:right;'");
       $this->AddElement( array($field1,$field2,$field3));
     }

@@ -220,7 +220,7 @@ _("Submit")."'>&nbsp;".
        }
 
        $field1 = array("string" => $img , "attach" => "style='text-align:center;width:20px;'");
-       $field2 = array("string" => preg_replace(array("/%KEY%/","/%NAME%/","/%TITLE%/"),array($key,$value['cn'].$desc,$value['dn']),$edi) , "attach" => "style=''");
+       $field2 = array("string" => preg_replace(array("/%KEY%/","/%NAME%/","/%TITLE%/"),array($key,$value['cn'].$desc,preg_replace('/ /', '&nbsp;', @LDAP::fix($value['dn']))),$edi) , "attach" => "style=''");
        $field3 = array("string" => $info, "attach" => "style='width:200px;'");
        $field4 = array("string" => preg_replace("/%KEY%/",$key,$acti) , "attach" => "style='width:60px;border-right:0px;text-align:right;'");
        $this->AddElement(array($field1,$field2,$field3,$field4));
