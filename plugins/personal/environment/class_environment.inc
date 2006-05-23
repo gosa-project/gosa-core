@@ -40,6 +40,7 @@ class environment extends plugin
   /* Printer */
   var $gotoPrinter        = array();// All available Printer, with their configurations
   var $gotoPrinterSel     = "";     //  The selected Printer
+  var $gosaDefaultPrinter = "";     // Default printer
 
   /* Share */
   var $gotoShares         = array();// Current Share Options
@@ -65,7 +66,7 @@ class environment extends plugin
   var $attributes         = array("uid","gotoProfileServer","gotoProfileFlags",
                                     "gotoXResolution","gotoProfileQuota",
                                     "gotoLogonScripts","gotoLogonScript",
-                                    "gotoPrinter",
+                                    "gotoPrinter", "gosaDefaultPrinter",
                                     "gotoShares","gotoShare",
                                     "gotoKioskProfile","gotoKioskProfiles",
                                     "gotoHotplugDevice");
@@ -684,6 +685,14 @@ class environment extends plugin
       }
     }
 
+    if((isset($_POST['gotoPrinterDefault']))&&(isset($_POST['gotoPrinterSel']))&&(!empty($_POST['gotoPrinterSel']))){
+      if ($this->gosaDefaultPrinter == $_POST['gotoPrinterSel'][0]){
+        $this->gosaDefaultPrinter= "";
+      } else {
+        $this->gosaDefaultPrinter= $_POST['gotoPrinterSel'][0];
+      }
+    }
+
     $smarty->assign("gotoPrinter",$this->printOutPrinterDevices());
     $smarty->assign("gotoPrinterKeys",array_flip($this->printOutPrinterDevices()));
  
@@ -752,8 +761,6 @@ class environment extends plugin
     /* Get all Posted vars 
      * Setup checkboxes 
      */
-   
-    
  
     if(isset($_POST['iamposted'])){
       if(isset($_POST['useProfile'])){
@@ -772,6 +779,7 @@ class environment extends plugin
         $this->gotoProfileFlag_L = false;
       }
 
+      $tmp= $this->gosaDefaultPrinter;
       plugin::save_object();
       foreach($this->attributes as $s_attr){
         if(in_array($s_attr,array("gotoShares","gotoHotplugDevices","gotoPrinter","gotoLogonScripts","uid"))) continue;
@@ -781,6 +789,7 @@ class environment extends plugin
           $this->$s_attr = false;
         }
       }
+      $this->gosaDefaultPrinter= $tmp;
     }
   }
 
@@ -1113,9 +1122,12 @@ function printOutHotPlugDevices()
     if(is_array($this->gotoPrinter)){
       foreach($this->gotoPrinter as $printer){
         if($printer['mode'] == "admin"){
-          $a_return[$printer['cn'][0]]= $printer['cn'][0]." - "._("Admin");
+          $a_return[$printer['cn'][0]]= $printer['cn'][0]." - "._("Administrator");
         }else{
           $a_return[$printer['cn'][0]]= $printer['cn'][0]; 
+        }
+        if ($printer['cn'][0] == $this->gosaDefaultPrinter){
+          $a_return[$printer['cn'][0]].=" - "._("Default printer");
         }
       }
     }
