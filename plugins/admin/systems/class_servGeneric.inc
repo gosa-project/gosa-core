@@ -257,9 +257,9 @@ class servgeneric extends plugin
 
       $mode= "modify";
     }
+    show_ldap_error($ldap->get_error(), _("Saving server failed"));
     $this->netConfigDNS->cn = $this->cn;
     $this->netConfigDNS->save($this->dn);
-    show_ldap_error($ldap->get_error(), _("Saving server failed"));
 
     /* Optionally execute a command after we're done */
     if(!$this->didAction){
