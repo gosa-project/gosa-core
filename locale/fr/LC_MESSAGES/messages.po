@@ -836,9 +836,9 @@ msgstr "Adresses alternatives"
 #: plugins/admin/systems/glpiPrinter.tpl:121
 #: plugins/admin/systems/glpi_edit_type.tpl:8
 #: plugins/admin/systems/glpi_edit_printer_type.tpl:7
-#: plugins/admin/systems/workstationStartup.tpl:61
-#: plugins/admin/systems/workstationStartup.tpl:81
-#: plugins/admin/systems/workstationStartup.tpl:100
+#: plugins/admin/systems/workstationStartup.tpl:60
+#: plugins/admin/systems/workstationStartup.tpl:80
+#: plugins/admin/systems/workstationStartup.tpl:99
 #: plugins/admin/systems/terminal.tpl:99 plugins/admin/systems/servdns.tpl:6
 #: plugins/admin/systems/workstation.tpl:78
 #: plugins/admin/systems/terminalStartup.tpl:61
@@ -898,8 +898,8 @@ msgstr "Ajouter en local"
 #: plugins/admin/departments/remove.tpl:14
 #: plugins/admin/systems/glpi_edit_type.tpl:10
 #: plugins/admin/systems/glpi_edit_printer_type.tpl:9
-#: plugins/admin/systems/workstationStartup.tpl:62
-#: plugins/admin/systems/workstationStartup.tpl:82
+#: plugins/admin/systems/workstationStartup.tpl:61
+#: plugins/admin/systems/workstationStartup.tpl:81
 #: plugins/admin/systems/terminal.tpl:101
 #: plugins/admin/systems/class_glpiPrinterCartridges.inc:168
 #: plugins/admin/systems/workstation.tpl:80
@@ -1391,7 +1391,7 @@ msgstr "non configuré"
 
 #: plugins/personal/posix/class_posixAccount.inc:203
 #: plugins/admin/systems/class_workstationService.inc:188
-#: plugins/admin/systems/class_workstationStartup.inc:698
+#: plugins/admin/systems/class_workstationStartup.inc:726
 #: plugins/admin/systems/class_terminalService.inc:194
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:212
 msgid "automatic"
@@ -2178,7 +2178,7 @@ msgstr ""
 
 #: plugins/personal/environment/class_environment.inc:539
 #: plugins/personal/environment/class_environment.inc:550
-#: plugins/admin/systems/class_workstationStartup.inc:535
+#: plugins/admin/systems/class_workstationStartup.inc:563
 #: plugins/admin/systems/class_terminalStartup.inc:165
 msgid "You must specify a valid mount point."
 msgstr "Veuillez indiquer un point de montage valide."
@@ -2304,7 +2304,7 @@ msgid "Resolution"
 msgstr "Résolution"
 
 #: plugins/personal/environment/environment.tpl:106
-#: plugins/admin/systems/workstationStartup.tpl:86
+#: plugins/admin/systems/workstationStartup.tpl:85
 #: plugins/admin/systems/terminalStartup.tpl:66
 #: plugins/admin/systems/servservice.tpl:11
 msgid "Shares"
@@ -2321,7 +2321,7 @@ msgstr "Partages"
 #: plugins/admin/groups/class_groupMail.inc:538
 #: plugins/admin/applications/class_applicationParameters.inc:100
 #: plugins/admin/systems/glpiPrinter.tpl:122
-#: plugins/admin/systems/workstationStartup.tpl:101
+#: plugins/admin/systems/workstationStartup.tpl:100
 #: plugins/admin/systems/servdns.tpl:8
 #: plugins/admin/systems/terminalStartup.tpl:81
 #: plugins/admin/systems/glpiManufacturer.tpl:8
@@ -5473,7 +5473,7 @@ msgstr "La suppression de l'entrée du paquet FAI à échoué"
 #: plugins/admin/fai/faiPackageNew.tpl:24
 #: plugins/admin/systems/workstationStartup.tpl:39
 #: plugins/admin/systems/class_servRepository.inc:248
-#: plugins/admin/systems/servRepositorySetup.tpl:8
+#: plugins/admin/systems/servRepositorySetup.tpl:17
 msgid "Release"
 msgstr "Version"
 
@@ -7499,7 +7499,7 @@ msgstr "présent"
 
 #: plugins/admin/systems/class_terminalInfo.inc:68
 #: plugins/admin/systems/class_workstationService.inc:205
-#: plugins/admin/systems/class_workstationStartup.inc:403
+#: plugins/admin/systems/class_workstationStartup.inc:431
 #: plugins/admin/systems/class_terminalService.inc:211
 #: plugins/admin/systems/class_terminalStartup.inc:129
 #: plugins/admin/systems/class_terminalGeneric.inc:191
@@ -7953,8 +7953,8 @@ msgstr "Sélectionnez les objets à ajouter"
 #: plugins/admin/systems/class_workstationService.inc:121
 #: plugins/admin/systems/class_workstationService.inc:122
 #: plugins/admin/systems/class_workstationStartup.inc:57
-#: plugins/admin/systems/class_workstationStartup.inc:227
-#: plugins/admin/systems/class_workstationStartup.inc:584
+#: plugins/admin/systems/class_workstationStartup.inc:255
+#: plugins/admin/systems/class_workstationStartup.inc:612
 #: plugins/admin/systems/class_workstationGeneric.inc:110
 #: plugins/admin/systems/class_terminalService.inc:72
 #: plugins/admin/systems/class_terminalService.inc:100
@@ -8038,7 +8038,7 @@ msgstr ""
 msgid "Saving workstation services failed"
 msgstr "La sauvegarde des services de la station de travail à échoué"
 
-#: plugins/admin/systems/class_workstationStartup.inc:234
+#: plugins/admin/systems/class_workstationStartup.inc:262
 #: plugins/admin/systems/class_terminalStartup.inc:93
 #, fuzzy, php-format
 msgid ""
@@ -8048,7 +8048,7 @@ msgstr ""
 "La commande '%s', spécifié comme KERNELS hook de l'extension '%s' n'existe "
 "pas."
 
-#: plugins/admin/systems/class_workstationStartup.inc:338
+#: plugins/admin/systems/class_workstationStartup.inc:366
 msgid ""
 "There are packages in your configuration, which can't be resolved with "
 "current server/release settings."
@@ -8056,11 +8056,11 @@ msgstr ""
 "Il y à des paquets dans votre configuration, qui ne peuvent pas être trouvés "
 "avec les paramètres de serveur/version actuels."
 
-#: plugins/admin/systems/class_workstationStartup.inc:383
+#: plugins/admin/systems/class_workstationStartup.inc:411
 msgid "Please select a 'FAI server' or remove the 'FAI classes'."
 msgstr "Veuillez sélectionner un 'serveur FAI' ou effacer les 'Classes FAI'."
 
-#: plugins/admin/systems/class_workstationStartup.inc:441
+#: plugins/admin/systems/class_workstationStartup.inc:469
 msgid ""
 "There is already a profile in your selection that contain partition table "
 "configurations."
@@ -8068,7 +8068,7 @@ msgstr ""
 "Il y a déjà un profil dans votre sélection qui contient des configurations "
 "de table de partitions."
 
-#: plugins/admin/systems/class_workstationStartup.inc:766
+#: plugins/admin/systems/class_workstationStartup.inc:794
 #, php-format
 msgid ""
 "Can't resolve one or more of the given FAIclass(es) [%s] in FAI server '%s'. "
@@ -8077,7 +8077,7 @@ msgstr ""
 "Impossible de trouver une ou plusieurs des classes FAI [%s] dans le serveur "
 "FAI '%s'. le serveur à été remis en 'auto'."
 
-#: plugins/admin/systems/class_workstationStartup.inc:777
+#: plugins/admin/systems/class_workstationStartup.inc:805
 #, php-format
 msgid ""
 "Can't resolve the given FAIclass(es) [%s] anyway, please check your FAI "
@@ -8090,10 +8090,29 @@ msgstr ""
 "Toutes les classes on été enlevées de ce compte, cliquez sur annuler si vous "
 "ne voulez pas sauver ceci."
 
-#: plugins/admin/systems/class_workstationStartup.inc:930
+#: plugins/admin/systems/class_workstationStartup.inc:958
 msgid "Saving workstation startup settings failed"
 msgstr ""
 "La sauvegarde des paramètres de démarrage pour la station de travail à échoué"
+
+#: plugins/admin/systems/class_workstationStartup.inc:1008
+#: plugins/admin/systems/class_servRepositorySetup.inc:170
+#, fuzzy, php-format
+msgid ""
+"Can't execute specified REPOSITORY_HOOK '%s' please check your gosa.conf."
+msgstr ""
+"Impossible d'exécuter la commande externe '%s' veuillez vérifier votre gosa."
+"conf."
+
+#: plugins/admin/systems/class_workstationStartup.inc:1010
+#: plugins/admin/systems/class_servRepositorySetup.inc:172
+#, fuzzy, php-format
+msgid ""
+"The specified REPOSITORY_HOOK '%s', specified in your gosa.conf, returns an "
+"empty string."
+msgstr ""
+"La commande externe '%s', spécifié dans votre gosa.conf, retourne une chaîne "
+"vide"
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:62
 #, php-format
@@ -8253,25 +8272,25 @@ msgstr "Serveur LDAP"
 msgid "FAI server"
 msgstr "Serveur FAI"
 
-#: plugins/admin/systems/workstationStartup.tpl:47
+#: plugins/admin/systems/workstationStartup.tpl:46
 msgid "set"
 msgstr "activé"
 
-#: plugins/admin/systems/workstationStartup.tpl:54
+#: plugins/admin/systems/workstationStartup.tpl:53
 msgid "Assigned FAI classes"
 msgstr "Liste des classes FAI utilisées"
 
-#: plugins/admin/systems/workstationStartup.tpl:73
+#: plugins/admin/systems/workstationStartup.tpl:72
 #: plugins/admin/systems/terminalStartup.tpl:53
 msgid "Kernel modules (format: name parameters)"
 msgstr "Modules du kernel (format : nom paramètre)"
 
-#: plugins/admin/systems/workstationStartup.tpl:75
+#: plugins/admin/systems/workstationStartup.tpl:74
 #: plugins/admin/systems/terminalStartup.tpl:55
 msgid "Add additional modules to load on startup"
 msgstr "Ajouter des modules à charger au démarrage"
 
-#: plugins/admin/systems/workstationStartup.tpl:99
+#: plugins/admin/systems/workstationStartup.tpl:98
 #: plugins/admin/systems/terminalStartup.tpl:79
 msgid "Mountpoint"
 msgstr "Point de montage"
@@ -9671,7 +9690,7 @@ msgstr "La suppression du conteneur pour les points de montage à échoué"
 msgid "Saving mount container failed"
 msgstr "La sauvegarde du conteneur pour les points de montage à échoué"
 
-#: plugins/admin/systems/servRepositorySetup.tpl:15
+#: plugins/admin/systems/servRepositorySetup.tpl:8
 msgid "Parent server"
 msgstr "Serveur Père"
 
@@ -10755,22 +10774,6 @@ msgstr "Veuillez entrer une valeur pour 'la version'"
 #: plugins/admin/systems/class_servRepositorySetup.inc:123
 msgid "Please specify a valid value for 'url'."
 msgstr "Veuillez spécifier un nom valide pour 'url'."
-
-#: plugins/admin/systems/class_servRepositorySetup.inc:170
-#, php-format
-msgid "Can't execute specified EXTERNAL_HOOK '%s' please check your gosa.conf."
-msgstr ""
-"Impossible d'exécuter la commande externe '%s' veuillez vérifier votre gosa."
-"conf."
-
-#: plugins/admin/systems/class_servRepositorySetup.inc:172
-#, php-format
-msgid ""
-"The specified EXTERNAL_HOOK '%s', specified in your gosa.conf, returns an "
-"empty string."
-msgstr ""
-"La commande externe '%s', spécifié dans votre gosa.conf, retourne une chaîne "
-"vide"
 
 #: plugins/admin/systems/class_glpiManufacturer.inc:58
 #, php-format
@@ -12009,7 +12012,7 @@ msgstr "Création d'une nouvelle conférence"
 msgid "New conference"
 msgstr "Nouvelle conférence"
 
-#: plugins/gofon/conference/class_divListConferences.inc:133
+#: plugins/gofon/conference/class_divListConferences.inc:135
 msgid "Conference"
 msgstr "Conférence"
 
