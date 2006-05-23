@@ -368,6 +368,10 @@ class workgeneric extends plugin
       }
     }
 
+    if(($this->gosaUnitTag) && (!in_array_ics("gosaAdministrativeUnitTag",$this->attrs['objectClass']))){
+      $this->attrs['objectClass'][] = "gosaAdministrativeUnitTag";
+    }
+
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
     if ($this->orig_dn == 'new'){
@@ -385,7 +389,6 @@ class workgeneric extends plugin
       }
       $ldap->cd($this->dn);
       $this->cleanup();
-//      $this->attrs['gosaUnitTag']= array();
       $ldap->modify ($this->attrs); 
 
       if(!$this->didAction){
