@@ -130,22 +130,24 @@ class divListConference extends MultiSelectWindow
       $data = $ldap->fetch();
       $cn = $data['cn'][0];
 
-      $a_field1 = array("string"=>sprintf($userimg,_("Conference")), "attach" => "style='text-align:center;width:20px;'");
+      $title = " title='".preg_replace("/ /","&nbsp;",@LDAP::fix($data['dn']))."' ";
+
+      $a_field1 = array("string"=>sprintf($userimg,_("Conference")), "attach" => $title." style='text-align:center;width:20px;'");
 
       if(($this->parent->acl=="#all#")||(($this->parent->ui->dn==$conference['goFonConferenceOwner'][0])&&(chkacl($this->parent->acl,"goFonConferenceOwner")==""))){
-        $a_field2 = array("string"=>sprintf($editlink,$conferencekey,$conference['cn'][0].$number), "attach" => "style=''");
+        $a_field2 = array("string"=>sprintf($editlink,$conferencekey,$conference['cn'][0].$number), "attach" => $title." style=''");
       }else{
-        $a_field2 = array("string"=>$conference['cn'][0].$number, "attach" => "style=''");
+        $a_field2 = array("string"=>$conference['cn'][0].$number, "attach" => $title." style=''");
       }
-      $a_field3 = array("string"=> $cn, "attach" => "style='width:200px;'");
-      $a_field4 = array("string"=> $pin, "attach" => "style='width:50px;'");
+      $a_field3 = array("string"=> $cn, "attach" =>  $title." style='width:200px;'");
+      $a_field4 = array("string"=> $pin, "attach" =>  $title." style='width:50px;'");
 
       if(($this->parent->ui->dn==$conference['goFonConferenceOwner'][0])&&(chkacl($this->parent->acl,"goFonConferenceOwner")=="")){
-        $a_field5 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions), "attach" => "style='width:60px;border-right:0px;text-align:right;'");
+        $a_field5 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions), "attach" =>  $title."style='width:60px;border-right:0px;text-align:right;'");
       }elseif(chkacl($this->acl,"goFonConferenceOwner")==""){
-        $a_field5 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions2), "attach" => "style='width:52px;border-right:0px;text-align:right;'");
+        $a_field5 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions2), "attach" =>  $title."style='width:52px;border-right:0px;text-align:right;'");
       }else{
-        $a_field5 = array("string"=>"&nbsp;", "attach" => "style='width:52px;border-right:0px;text-align:right;'");
+        $a_field5 = array("string"=>"&nbsp;", "attach" =>  $title."style='width:52px;border-right:0px;text-align:right;'");
       }
 
       $this->AddElement(array($a_field1,$a_field2,$a_field3,$a_field4,$a_field5));
