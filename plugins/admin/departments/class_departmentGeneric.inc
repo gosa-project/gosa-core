@@ -236,17 +236,9 @@ class department extends plugin
 			$message[]= _("Required field 'Description' is not set.");
 		}
 
-		/* Validate and modify - or: spaghetti rules! */
-		$SkipNames = array(	"incoming","apps","systems","fai","config",	
-				preg_replace("/ou=(.*),/","\\1",get_people_ou()),
-				preg_replace("/ou=(.*),/","\\1",get_groups_ou())
-				);	
-		foreach($SkipNames as $name){
-			if ($this->ou == $name){
-				$message[]= sprintf(_("The field 'Name' contains the reserved word '%s'. Please choose another name."),$name);
-			}
-		}
-
+    if(is_department_name_reserved($this->ou,$this->base)){
+      $message[]= sprintf(_("The field 'Name' contains the reserved word '%s'. Please choose another name."),$this->ou);
+    }
 
 		if (preg_match ('/[#+:=>\\\\\/]/', $this->ou)){
 			$message[]= _("The field 'Name' contains invalid characters.");

@@ -1976,5 +1976,29 @@ function get_MicroTimeDiff($start , $stop)
 }
 
 
+/* Check if the given department name is valid */
+function is_department_name_reserved($name,$base)
+{
+  $reservedName = array("systems","apps","incomming","internal","accounts","fax","addressbook",
+                          preg_replace("/ou=(.*),/","\\1",get_people_ou()),
+                          preg_replace("/ou=(.*),/","\\1",get_groups_ou()));
+
+  $follwedNames['/ou=fai,ou=configs,ou=systems,/'] = array("fai","hooks","templates","scripts","disks","packages","variables","profiles");
+
+  /* Check if name is one of the reserved names */
+  if(in_array_ics($name,$reservedName)) {
+    return(true);
+  }
+
+  /* Check all follow combinations if name is in array && parent base == array_key, return false*/
+  foreach($follwedNames as $key => $names){
+    if((in_array_ics($name,$names)) && (preg_match($key,$base))){
+      return(true);
+    }
+  }
+  return(false);
+}
+
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
