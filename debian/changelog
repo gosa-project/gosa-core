@@ -1,7 +1,10 @@
-gosa (2.4.1-1) unstable; urgency=low
+gosa (2.5-1) unstable; urgency=low
 
   * New upstream release
-  * Fixed install script to create symlinks only if they're missing
+  * Removed unnessesary dependecies (Closes: #365563)
+  * Added cookie warnings (Closes: #356811)
+  * Fixed problem with X/P switches for samba password expiery
+    (Closes: #284716)
 
  -- Cajus Pollmeier <cajus@debian.org>  Thu,  5 Jan 2006 14:20:39 +0100
 
