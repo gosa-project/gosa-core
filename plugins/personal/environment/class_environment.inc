@@ -1038,7 +1038,7 @@ $ldap->modify ($attrs);
 
 
     if($this->gotoXResolution == "auto") $this->gotoXResolution ="";
-    $saveThis = array("gotoProfileQuota","gotoXResolution","gotoProfileServer","gotoKioskProfile");
+    $saveThis = array("gotoProfileQuota","gotoXResolution","gotoProfileServer","gotoKioskProfile","gosaDefaultPrinter");
      
     foreach($saveThis as $tosave){
       if(!empty($this->$tosave)){
