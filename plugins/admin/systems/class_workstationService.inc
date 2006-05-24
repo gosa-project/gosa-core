@@ -63,7 +63,6 @@ class workservice extends plugin
     plugin::plugin ($config, $dn);
 
     $this->XResolutions= array( 
-        "default"   =>  "["._("inherited")."]",
         "640x480"   =>  "640x480",
         "800x600"   =>  "800x600",
         "1024x768"  =>  "1024x768",
@@ -90,17 +89,14 @@ class workservice extends plugin
       }
     }
 
-
     array_unshift($this->XDrivers, "["._("unknown")."]");
-  
+ 
     $this->XColordepths= array( 
-        "default"  => "["._("inherited")."]", 
         "8"        => "8 " ._("bit"), 
         "15"       => "15 "._("bit"),      
         "16"       => "16 "._("bit"),   
         "24"       => "24 "._("bit"));
 
-    $this->XKbModels['default']= "["._("inherited")."]"; 
     foreach(array ("btc9000", "chicony", "compaq", "dell", "dell101", "everex",
           "flexpro", "geniuscomfy", "hp", "itouch", "jp106", "logicordless",
           "logiinetnav", "logiinternet", "macintosh", "microsoft",
@@ -109,17 +105,16 @@ class workservice extends plugin
       $this->XKbModels[$type] = $type;
     }
 
-    $this->MouseTypes= array("AUTO"     => "["._("inherited")."]", "ImPS/2"      =>"ImPS/2", 
-                             "PS/2"     => "PS/2",                "Microsoft"   =>"Microsoft", 
-                              "Logitech"=>"Microsoft");
+    $this->MouseTypes= array("ImPS/2" => "ImPS/2", "PS/2" => "PS/2", "Microsoft" => "Microsoft", 
+                              "Logitech" => "Microsoft");
 
-    $this->MousePorts= array("AUTO"             => "["._("inherited")."]", "/dev/ttyS0"  =>"/dev/ttyS0", 
+    $this->MousePorts= array("/dev/ttyS0"  =>"/dev/ttyS0", 
                              "/dev/ttyS1"       => "/dev/ttyS1",          "/dev/psaux"  =>"/dev/psaux", 
                              "/dev/input/mice"  => "/dev/input/mice");
 
     /* Additional values will be extracted from /etc/gosa/keyboardLayouts */
-    $this->XKbLayouts= array ("default"=>"["._("inherited")."]","de"=> "de","intl" =>"intl","us" =>"us");
-    $this->XKbVariants= array ("default"=>"["._("inherited")."]", "nodeadkeys"=>"nodeadkeys", "basic"=>"basic");
+    $this->XKbLayouts= array ("de"=> "de","intl" =>"intl","us" =>"us");
+    $this->XKbVariants= array ("nodeadkeys"=>"nodeadkeys", "basic"=>"basic");
 
     /* try to read additional keyboard layouts 
      */
@@ -140,14 +135,13 @@ class workservice extends plugin
     }
 
     /* Initialize methods */
-    $this->XMethods["default"]= _("default");
     $this->XMethods["indirect"]= _("show chooser");
     $this->XMethods["query"]= _("direct");
-#$this->XMethods["squery"]= _("direct via ssh");
-#$this->XMethods["nquery"]= _("direct via nx");
+    #$this->XMethods["squery"]= _("direct via ssh");
+    #$this->XMethods["nquery"]= _("direct via nx");
     $this->XMethods["load"]= _("load balanced");
-#$this->XMethods["sload"]= _("load balanced via ssh");
-#$this->XMethods["nload"]= _("load balanced via nx");
+    #$this->XMethods["sload"]= _("load balanced via ssh");
+    #$this->XMethods["nload"]= _("load balanced via nx");
     $this->XMethods["rdp"]= _("Windows RDP");
     $this->XMethods["citrix"]= _("ICA client");
 
@@ -187,6 +181,48 @@ class workservice extends plugin
 
     $this->hardware_list["automatic"]= _("automatic");
     ksort($this->hardware_list);
+
+    /* Load hardware list */
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".$this->dn."))");
+    if ($ldap->count() == 1){
+      $map= array("gotoXResolution", "gotoXColordepth", "gotoXKbModel", "gotoXKbLayout",
+                  "gotoXKbVariant", "gotoMouseType", "gotoMousePort");
+      $attrs= $ldap->fetch();
+
+      foreach ($map as $name){
+        if (!isset($attrs[$name][0])){
+          continue;
+        }
+        
+        switch ($name){
+          case 'gotoXResolution':
+            $this->XResolutions= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']' ), $this->XResolutions);
+            break;
+          case 'gotoXColordepth':
+            $this->XColordepths= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].' '._('Bit').']'), $this->XColordepths);
+            break;
+          case 'gotoXKbModel':
+            $this->XKbModels= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']'), $this->XKbModels);
+            break;
+          case 'gotoXKbLayout':
+            $this->XKbLayouts= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']' ), $this->XKbLayouts);
+            break;
+          case 'gotoXKbVariant':
+            $this->XKBvariants= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']' ), $this->XKbVariants);
+            break;
+          case 'gotoMouseType':
+            $this->XMouseTypes= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']' ), $this->XMouseTypes);
+            break;
+          case 'gotoMousePort':
+            $this->XMousePorts= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']' ), $this->XMousePorts);
+            break;
+        }
+
+      }
+
+    }
   }
 
   function execute()
