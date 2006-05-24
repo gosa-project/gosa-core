@@ -1,6 +1,26 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.5beta1
+  - Improved FAI support
+    * Server and workstations are treated the same way
+    * Destination selector for new devices
+    * Summary tab introduced
+  - Improved robustness while operating whith the LDAP
+  - Several Kolab related fixes
+  - Tagging of departments introduced
+  - Global check hooks allow user defined testing
+    of single plugins
+  - Major speedups with large databases
+  - Added english and french online help
+  - Unified plugin "head" selectors, (re-)added subtree
+    support
+  - Fixed PPD parsing for several commercial PPD's
+  - Tune LDAP error messages
+  - Moved from "guru mediation style" to div-popups
+  - Several css fixes
+  - Fixed series of bugs that lead to not shown groups
+
 * gosa 2.4
   - Updated layout to work cleanly with IE6+, Firefox 1.0.4+, khtml 3.4+
   - Added FAI (Fully Automatted Installation) support
