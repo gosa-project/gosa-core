@@ -342,6 +342,18 @@ if (is_file("$plugin_dir/main.inc")){
 
 /* Close div/tables */
 
+  /* check if we are using account expiration */
+
+  if((isset($config->data['MAIN']['ACCOUNTEXPIRED'])) && $config->data['MAIN']['ACCOUNTEXPIRED'] == "1"){
+    
+      $expired= ldap_expired_account($config, $ui->dn, $ui->username);
+
+      if ($expired == 2){
+        gosa_log ("password for user \"$ui->username\" is about to expire");
+        print_red(_("Your password is about to expire, please change your password"));
+      }
+  }
+  
 /* Print_out last ErrorMessage repeated string.
  */
 print_red(NULL);
@@ -376,6 +388,7 @@ echo $display;
 /* Save plist and config */
 $_SESSION['plist']= $plist;
 $_SESSION['config']= $config;
+
 
 /* Echo compilation time * /
 $r = split(" ",$start);

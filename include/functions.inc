@@ -367,6 +367,100 @@ function ldap_login_user ($username, $password)
 }
 
 
+function ldap_expired_account($config, $userdn, $username)
+{
+    $this->config= $config;
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cat($userdn);
+    $attrs= $ldap->fetch();
+    
+    /* default value no errors */
+    $expired = 0;
+    
+    $sExpire = 0;
+    $sLastChange = 0;
+    $sMax = 0;
+    $sMin = 0;
+    $sInactive = 0;
+    $sWarning = 0;
+    
+    $current= date("U");
+    
+    $current= floor($current /60 /60 /24);
+    
+    /* special case of the admin, should never been locked */
+    /* FIXME should allow any name as user admin */
+    if($username != "admin")
+    {
+
+      if(isset($attrs['shadowExpire'][0])){
+        $sExpire= $attrs['shadowExpire'][0];
+      } else {
+        $sExpire = 0;
+      }
+      
+      if(isset($attrs['shadowLastChange'][0])){
+        $sLastChange= $attrs['shadowLastChange'][0];
+      } else {
+        $sLastChange = 0;
+      }
+      
+      if(isset($attrs['shadowMax'][0])){
+        $sMax= $attrs['shadowMax'][0];
+      } else {
+        $smax = 0;
+      }
+
+      if(isset($attrs['shadowMin'][0])){
+        $sMin= $attrs['shadowMin'][0];
+      } else {
+        $sMin = 0;
+      }
+      
+      if(isset($attrs['shadowInactive'][0])){
+        $sInactive= $attrs['shadowInactive'][0];
+      } else {
+        $sInactive = 0;
+      }
+      
+      if(isset($attrs['shadowWarning'][0])){
+        $sWarning= $attrs['shadowWarning'][0];
+      } else {
+        $sWarning = 0;
+      }
+      
+      /* is the account locked */
+      /* shadowExpire + shadowInactive (option) */
+      if($sExpire >0){
+        if($current >= ($sExpire+$sInactive)){
+          return(1);
+        }
+      }
+    
+      /* the user should be warned to change is password */
+      if((($sExpire >0) && ($sWarning >0)) && ($sExpire >= $current)){
+        if (($sExpire - $current) < $sWarning){
+          return(2);
+        }
+      }
+      
+      /* force user to change password */
+      if(($sLastChange >0) && ($sMax) >0){
+        if($current >= ($sLastChange+$sMax)){
+          return(3);
+        }
+      }
+      
+      /* the user should not be able to change is password */
+      if(($sLastChange >0) && ($sMin >0)){
+        if (($sLastChange + $sMin) >= $current){
+          return(4);
+        }
+      }
+    }
+   return($expired);
+}
+
 function add_lock ($object, $user)
 {
   global $config;
