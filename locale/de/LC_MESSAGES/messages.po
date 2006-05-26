@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: Alfred Schroeder <schroeder@gonicus.de>\n"
 "POT-Creation-Date: 2003-09-19 13:41+0200\n"
-"PO-Revision-Date: 2006-05-26 15:17+0200\n"
+"PO-Revision-Date: 2006-05-26 16:18+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6239,7 +6239,7 @@ msgstr "Klasse entfernen"
 
 #: plugins/admin/groups/mail.tpl:11 plugins/admin/groups/paste_mail.tpl:12
 msgid "Primary mail address for this shared folder"
-msgstr "Primäre Mail-Adresse dieses Austausch-Ordners"
+msgstr "Primäre Mail-Adresse dieses geteilten Ordners"
 
 #: plugins/admin/groups/mail.tpl:16
 msgid "Select mail server to place user on"
@@ -6247,7 +6247,7 @@ msgstr "Wählen Sie den Mail-Server, auf dem der Benutzer angelegt werden soll"
 
 #: plugins/admin/groups/mail.tpl:63
 msgid "IMAP shared folders"
-msgstr "IMAP Austausch-Ordner"
+msgstr "Geteilter Ordner"
 
 #: plugins/admin/groups/mail.tpl:67
 msgid "Default permission"
@@ -12333,7 +12333,7 @@ msgid ""
 "IMAP module is not capable of reading acl's. You need a recend PHP version "
 "for this feature."
 msgstr ""
-"Diese Funktion wird benötigt um Zugriffsrechte von Shared-Foldern zu "
+"Diese Funktion wird benötigt um Zugriffsrechte von Geteilten Ordnern zu "
 "verwalten. Das normale IMAP-Modul unterstützt das Auslesen dieser "
 "Zugriffsregeln nicht. Sie benötigen entweder ein angepasstes oder ein recht "
 "aktuelles PHP um diese Funktion nutzen zu können."
