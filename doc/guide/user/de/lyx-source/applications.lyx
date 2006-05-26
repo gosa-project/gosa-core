@@ -98,13 +98,13 @@ ben durchzuführen (Ausschneiden, Kopieren, Bearbeiten, Entfernen)
 
 Die Knöpfe (
 \begin_inset Graphics
-	filename images/list_back.png
+	filename images/list_root.png
 
 \end_inset 
 
 , 
 \begin_inset Graphics
-	filename images/list_root.png
+	filename images/list_back.png
 
 \end_inset 
 
@@ -125,20 +125,20 @@ Die Knöpfe (
 
 
 \begin_inset Graphics
-	filename images/list_back.png
-
-\end_inset 
-
- Eine Abteilung nach oben
-\layout Itemize
-
-
-\begin_inset Graphics
 	filename images/list_root.png
 
 \end_inset 
 
  Zur Wurzel
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/list_back.png
+
+\end_inset 
+
+ Eine Abteilung nach oben
 \layout Itemize
 
 
