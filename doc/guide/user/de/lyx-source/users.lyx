@@ -510,7 +510,7 @@ Filter
 Filter anwenden
 \emph default 
 .
-\layout Paragraph
+\layout Subsection*
 
 Benutzerkonto anlegen
 \layout Standard
@@ -525,7 +525,7 @@ Um ein neues Benutzerkonto anzulegen klicken Sie auf den Knopf
  Befolgen Sie dann die nachfolgende Beschreibung für die Bearbeitung bestehender
  Benutzerkonten.
  Sie müssen zusätzlich am Ende des Vorgangs ein Passwort vergeben.
-\layout Paragraph
+\layout Subsubsection*
 
 Ein bestehendes Benutzerkonto bearbeiten
 \layout Standard
@@ -535,7 +535,7 @@ Klicken Sie in der Liste der Benutzer auf den Benutzernamen des gewünschten
  Die Seite, die nun geladen wird, verfügt über Reiter, die jeweils für eine
  Erweiterung stehen (aktuell sind dies u.a.
  Allgemein, Unix, Umgebung, usw.).
-\layout Subparagraph
+\layout Subsubsection*
 
 Generelle Informationen
 \layout Itemize
