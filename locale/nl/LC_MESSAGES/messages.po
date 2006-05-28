@@ -4846,23 +4846,23 @@ msgstr "De E-mail methode '%s' opgegeven in uw gosa.conf is niet beschikbaar."
 
 #: plugins/admin/groups/class_groupMail.inc:278
 msgid "read"
-msgstr "lezen"
+msgstr "alleen lezen"
 
 #: plugins/admin/groups/class_groupMail.inc:279
 msgid "post"
-msgstr "plaatsen"
+msgstr "afleveren & lezen"
 
 #: plugins/admin/groups/class_groupMail.inc:280
 msgid "external post"
-msgstr "extern plaatsen"
+msgstr "alleen afleveren"
 
 #: plugins/admin/groups/class_groupMail.inc:281
 msgid "append"
-msgstr "toevoegen"
+msgstr "afleveren, lezen & kopieren"
 
 #: plugins/admin/groups/class_groupMail.inc:282
 msgid "write"
-msgstr "schrijven"
+msgstr "afleveren, lezen & schrijven"
 
 #: plugins/admin/groups/class_groupMail.inc:306
 msgid "This 'dn' has no valid mail extensions."
@@ -11188,7 +11188,7 @@ msgstr "Persoonlijk"
 #: plugins/addons/addressbook/address_info.tpl:22
 #: plugins/personal/generic/generic.tpl:67
 msgid "Personal title"
-msgstr "Persoonlijke titel"
+msgstr "Aanhef"
 
 #: plugins/addons/addressbook/address_edit.tpl:66
 #: plugins/addons/addressbook/address_info.tpl:29
