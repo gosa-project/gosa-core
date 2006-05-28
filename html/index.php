@@ -215,10 +215,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
       $config->make_idepartments();
       $_SESSION['config']= $config;
 
-      /* Go to main page */
-      gosa_log ("User \"$username\" logged in successfully");
-      header ("Location: main.php?global_check=1");
-      exit;
+      /* are we using accountexpiration */
+      if((isset($config->data['MAIN']['ACCOUNTEXPIRED'])) && $config->data['MAIN']['ACCOUNTEXPIRED'] == "1"){
+      
+        $expired= ldap_expired_account($config, $ui->dn, $ui->username);
+
+        if ($expired == 1){
+          $message= _("Account Locked");
+          $smarty->assign ('nextfield', 'password');
+          gosa_log ("Account for user \"$username\" has expired");
+        } elseif ($expired == 3){
+            $plist= new pluglist($config, $ui);
+            foreach ($plist->dirlist as $key => $value){
+              if (preg_match("/\bpassword\b/i",$value)){
+                $plug=$key;
+                gosa_log ("User \"$username\" password forced to change");
+                header ("Location: main.php?plug=$plug&reset=1");
+                exit;
+              }
+            }
+          }
+
+        /* Not account expired or password forced change go to main page */
+        gosa_log ("User \"$username\" logged in successfully");
+        header ("Location: main.php?global_check=1");
+        exit;
+        
+      } else {
+        /* Go to main page */
+        gosa_log ("User \"$username\" logged in successfully");
+        header ("Location: main.php?global_check=1");
+        exit;
+      }
     }
   }
 }
