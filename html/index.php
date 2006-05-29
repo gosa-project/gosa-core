@@ -216,12 +216,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
       $_SESSION['config']= $config;
 
       /* are we using accountexpiration */
-      if((isset($config->data['MAIN']['ACCOUNTEXPIRED'])) && $config->data['MAIN']['ACCOUNTEXPIRED'] == "1"){
+      if((isset($config->data['MAIN']['ACCOUNTEXPIRED'])) && 
+          preg_match('/true/i', $config->data['MAIN']['ACCOUNTEXPIRED'])){
       
         $expired= ldap_expired_account($config, $ui->dn, $ui->username);
 
         if ($expired == 1){
-          $message= _("Account Locked");
+          $message= _("Account locked. Please contact your system administrator.");
           $smarty->assign ('nextfield', 'password');
           gosa_log ("Account for user \"$username\" has expired");
         } elseif ($expired == 3){

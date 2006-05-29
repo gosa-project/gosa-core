@@ -299,9 +299,10 @@ A: No need to modify anything. Just add a hook the the plugin you'd like to
 
 Q: Is there a way to use ACL independet filtering when using administrative units?
 
-A: Yes. Set STRICT_UNITS to TRUE in your gosa.conf's location section.
+A: Yes. Set STRICT_UNITS to "true" in your gosa.conf's location section.
 
-Q: how can i active the account expiration code for the gosa interface
 
-A: just add accountexpired="1" in you main section
+Q: How can i active the account expiration code for the gosa interface?
+
+A: Yes. Just set "accountexpired" to "true" in your gosa.conf's main section.
 
