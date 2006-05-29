@@ -193,6 +193,47 @@ class termservice extends plugin
 
     $this->hardware_list["automatic"]= _("automatic");
     ksort($this->hardware_list);
+
+
+      /* Load hardware list */
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".$this->dn."))");
+    if ($ldap->count() == 1){
+      $map= array("gotoXResolution", "gotoXColordepth", "gotoXKbModel", "gotoXKbLayout",
+                  "gotoXKbVariant", "gotoXMouseType", "gotoXMouseport");
+      $attrs= $ldap->fetch();
+
+      foreach ($map as $name){
+        if (!isset($attrs[$name][0])){
+          continue;
+        }
+
+        switch ($name){
+          case 'gotoXResolution':
+            $this->XResolutions['default'] = _("inherited").' ['.$attrs[$name][0].']' ;
+            break;
+          case 'gotoXColordepth':
+            $this->XColordepths['default'] =  _("inherited").' ['.$attrs[$name][0].' '._('Bit').']';
+            break;
+          case 'gotoXKbModel':
+            $this->XKbModels['default'] =  _("inherited").' ['.$attrs[$name][0].']';
+            break;
+          case 'gotoXKbLayout':
+            $this->XKbLayouts['default'] =  _("inherited").' ['.$attrs[$name][0].']';
+            break;
+          case 'gotoXKbVariant':
+            $this->XKbVariants['default'] = _("inherited").' ['.$attrs[$name][0].']' ;
+            break;
+          case 'gotoXMouseType':
+            $this->MouseTypes['AUTO'] = _("inherited").' ['.$attrs[$name][0].']' ;
+            break;
+          case 'gotoXMouseport':
+            $this->MousePorts['AUTO'] = _("inherited").' ['.$attrs[$name][0].']' ;
+            break;
+        }
+      }
+    }
   }
 
   function execute()
