@@ -32,35 +32,91 @@
   </td>
   
   <td style="vertical-align:top;">
-     <table><tr>
-     <td>
-	<h2><img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;{t}FAI server{/t}</h2></td>
-     <td>
-     	<h2><img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;{t}Release{/t}</h2></td>
-     </tr><tr>
-     <td>
-		<select name="FAIdebianMirror" {$FAIdebianMirrorACL} onchange='document.mainform.submit()'>
-        {html_options options=$FAIdebianMirrors output=$FAIdebianMirrors selected=$FAIdebianMirror}
-        <option disabled>&nbsp;</option>
-		</select>
-		<!--<input type="submit" value="{t}set{/t}" name="refresh">-->
-     </td><td>
-	    <select name="FAIrelease"  onchange='document.mainform.submit()'>
-		{html_options options=$FAIreleases output=$FAIreleases selected=$FAIrelease}
-		</select>
-	</td>
-     </tr></table>
-	<h2><img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;{t}Assigned FAI classes{/t}</h2>
+
+	{if $FAIinherit == true}
+
+		<table>
+			<tr>
+				<td>
+				<input type="checkbox" value="1" name="FAIinherit" {if $FAIinherit == true}  checked {/if}
+				  onClick="mainform.submit();">{t}Inherit FAI settings{/t}
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h2><img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;{t}FAI server{/t}
+					</h2>
+				</td>
+				<td>
+					<h2><img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;{t}Release{/t}
+					</h2>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<select name="FAIdebianMirror" disabled>
+						{html_options options=$InheritedFAIdebianMirror output=$InheritedFAIdebianMirror selected=$InheritedFAIdebianMirror}
+					</select>
+				</td>
+				<td>
+					<select name="FAIrelease"  disabled>
+					{html_options options=$InheritedFAIrelease output=$InheritedFAIrelease selected=$InheritedFAIrelease}
+					</select>
+				</td>
+			</tr>
+		</table>
+		<h2>
+			<img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;{t}Assigned FAI classes{/t}
+		</h2>
+		{$FAIScriptlist}	
+	{else}
+
+		<table>
+			<tr>
+				<td>
+				<input type="checkbox" value="1" name="FAIinherit" {if $FAIinherit == true}  checked {/if}
+				  onClick="mainform.submit();">{t}Inherit FAI settings{/t}
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h2><img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;{t}FAI server{/t}
+					</h2>
+				</td>
+				<td>
+					<h2><img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;{t}Release{/t}
+					</h2>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<select name="FAIdebianMirror" {$FAIdebianMirrorACL} onchange='document.mainform.submit()'>
+						{html_options options=$FAIdebianMirrors output=$FAIdebianMirrors selected=$FAIdebianMirror}
+						<option disabled>&nbsp;</option>
+					</select>
+				<!--<input type="submit" value="{t}set{/t}" name="refresh">-->
+				</td>
+				<td>
+					<select name="FAIrelease"  onchange='document.mainform.submit()'>
+					{html_options options=$FAIreleases output=$FAIreleases selected=$FAIrelease}
+					</select>
+				</td>
+			</tr>
+		</table>
+		<h2>
+			<img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;{t}Assigned FAI classes{/t}
+		</h2>
 		{$FAIScriptlist}	
 
 		<select name="FAIclassesSel" {$FAIclassACL}>
-        {html_options values=$FAIclassesKeys output=$FAIclasses}
-        <option disabled>&nbsp;</option>
+			{html_options values=$FAIclassesKeys output=$FAIclasses}
+			<option disabled>&nbsp;</option>
 		</select>	
-   		<input name="AddClass" value="{t}Add{/t}" type="submit"> 
-   		<input name="DelClass" value="{t}Delete{/t}" type="submit"> 
-  </td>
- </tr>
+		<input name="AddClass" value="{t}Add{/t}" type="submit"> 
+		<input name="DelClass" value="{t}Delete{/t}" type="submit"> 
+	{/if}
+  		</td>
+	</tr>
 </table>
 
 <table summary="" style="width:100%;">
@@ -104,10 +160,9 @@
   </td>
  </tr>
 </table>
-
+<input name="WorkstationStarttabPosted" type="hidden" value="1">
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
   document.mainform.gotoLdapServer.focus();
   -->
-</script>

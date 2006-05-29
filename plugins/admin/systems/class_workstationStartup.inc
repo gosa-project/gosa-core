@@ -41,6 +41,13 @@ class workstartup extends plugin
   var $FAIrelease         = "";
   var $FAIdebianMirror    = "auto";
 
+  
+  /* FAI class selection */
+  var $FAIinherit                  = false; 
+  var $InheritedFAIclass           = array();
+  var $InheritedFAIrelease         = "";
+  var $InheritedFAIdebianMirror    = "auto";
+
   /* Contains all possible server/release/class settings */
   var $FAIServRepConfig   = array();
 
@@ -262,7 +269,7 @@ class workstartup extends plugin
     $ldap->cd($this->config->current['BASE']);
     $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".$this->dn."))");
     if ($ldap->count() == 1){
-      $map= array("gotoLdapServer","gotoBootKernel");
+      $map= array("gotoLdapServer","gotoBootKernel","FAIclass","FAIdebianMirror");
       $attrs= $ldap->fetch();
 
       foreach ($map as $name){
@@ -279,9 +286,19 @@ class workstartup extends plugin
             $this->gotoBootKernels['%default%']=  _("inherited").' ['.$attrs[$name][0].']' ;
             break;
 
+          case 'FAIclass':
+            $str = split(":",$attrs[$name][0]);
+            $this->InheritedFAIclass    = split("\ ",trim($str[0]));
+            $this->InheritedFAIrelease  = trim($str[1]);
+            break;
+
+          case 'FAIdebianMirror':
+            $this->InheritedFAIdebianMirror = $attrs[$name][0];
+            break;
         }
       }
     }
+
     /* Get list of boot kernels */
     if (isset($this->config->data['TABS'])){
       $command= search_config($this->config->data['TABS'], get_class($this), "KERNELS");
@@ -302,7 +319,9 @@ class workstartup extends plugin
       }
     }
 
-
+    if(count($this->FAIclass)==0 && $this->FAIrelease == ""){
+      $this->FAIinherit =true;
+    }
   }
 
   
@@ -658,12 +677,15 @@ class workstartup extends plugin
       $smarty->assign($val."ACL", chkacl($this->acl, $val));
     }
 
+    $smarty->assign("FAIinherit",$this->FAIinherit);
     $smarty->assign("FAIdebianMirrors",$this->getFAIdebianMirrors());
     $smarty->assign("FAIreleases",$this->getFAIreleases());
     $smarty->assign("FAIrelease",$this->FAIrelease);
     $smarty->assign("FAIclasses",$this->selectFriendlyClasses());
     $smarty->assign("FAIclassesKeys",array_flip($this->selectFriendlyClasses()));
     $smarty->assign("FAIclassKeys",$this->FAIclass);
+    $smarty->assign("InheritedFAIdebianMirror",$this->InheritedFAIdebianMirror);
+    $smarty->assign("InheritedFAIrelease",$this->InheritedFAIrelease);
     
     $div = new divSelectBox("WSFAIscriptClasses");
     $div -> SetHeight("110");
@@ -673,13 +695,25 @@ class workstartup extends plugin
     $str_empty  = " &nbsp;<img src='images/empty.png' alt=\"\" width='7'>"; 
 
     $i = 1;
-    foreach($this->FAIclass as $class){
-      if($i==1){
-        $str = $str_empty.$str_down.$str_remove;
-      }elseif($i == count($this->FAIclass)){
-        $str = $str_up.$str_empty.$str_remove;
+
+    if($this->FAIinherit){
+      $tmp = $this->InheritedFAIclass;
+    }else{
+      $tmp = $this->FAIclass;
+    }
+
+    foreach($tmp as $class){
+
+      if($this->FAIinherit){
+        $str = "";
       }else{
-        $str = $str_up.$str_down.$str_remove;
+        if($i==1){
+          $str = $str_empty.$str_down.$str_remove;
+        }elseif($i == count($this->FAIclass)){
+          $str = $str_up.$str_empty.$str_remove;
+        }else{
+          $str = $str_up.$str_down.$str_remove;
+        }
       }
       $i ++ ; 
 
@@ -844,6 +878,14 @@ class workstartup extends plugin
     if (chkacl ($this->acl, "gotoKernelParameters") == "" && isset($_POST["customParameters"])){
       $this->customParameters= $_POST["customParameters"];
     }
+
+    if(isset($_POST['WorkstationStarttabPosted'])){
+      if(isset($_POST['FAIinherit'])){
+        $this->FAIinherit = true;
+      }else{
+        $this->FAIinherit = false;
+      }
+    }
   }
 
 
@@ -918,15 +960,23 @@ class workstartup extends plugin
     unset( $this->attrs['FAIrelease'] );
     
     $str = "";
-    foreach($this->FAIclass as $class){
-      $str .= $class." ";
-    }
-    $str .= ":" . $this->FAIrelease;
-    $this->attrs['FAIclass']= "";
-    $this->attrs['FAIclass']= trim($str);
 
-    if(empty($this->attrs['FAIclass'])){
-      $this->attrs['FAIclass'] = array();
+    if($this->FAIinherit){
+  
+      $this->attrs['FAIclass'] = $this->attrs['FAIrelease'] =  $this->attrs['FAIdebianMirror'] = array(); 
+
+    }else{
+
+      foreach($this->FAIclass as $class){
+        $str .= $class." ";
+      }
+      $str .= ":" . $this->FAIrelease;
+      $this->attrs['FAIclass']= "";
+      $this->attrs['FAIclass']= trim($str);
+
+      if(empty($this->attrs['FAIclass'])){
+        $this->attrs['FAIclass'] = array();
+      }
     }
 
     /* Add missing arrays */
