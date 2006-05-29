@@ -131,17 +131,17 @@
                 <tr>
                         <td>
                         <select style="width:100%;height:150px;" name="gotoShare" multiple size=4 {$gotoShareACL} id="gotoShare">
-        {html_options values=$gotoShareKeys output=$gotoShares}
-        <option disabled>&nbsp;</option>
+   					     {html_options values=$gotoShareKeys output=$gotoShares}
+								<option disabled>&nbsp;</option>
                                 </select>
                                 <br>
                         <select name="gotoShareSelection" {$gotoShareACL}>
-        {html_options values=$gotoShareSelectionKeys output=$gotoShareSelections}
-        <option disabled>&nbsp;</option>
+    						    {html_options values=$gotoShareSelectionKeys output=$gotoShareSelections}
+						        <option disabled>&nbsp;</option>
                                 </select>
                                 <input type="text" size=15 {$gotoShareACL} name="gotoShareMountPoint" value="{t}Mountpoint{/t}">
                                 <input type="submit" {$gotoShareACL} name="gotoShareAdd" value="{t}Add{/t}">
-                                <input type="submit" {$gotoShareACL} name="gotoShareDel" value="{t}Remove{/t}">
+                                <input type="submit" {$gotoShareACL} name="gotoShareDel" value="{t}Remove{/t}" {if $gotoSharesCount == 0} disabled {/if}>
                         </td>
                 </tr>
         </table>

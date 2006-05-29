@@ -609,11 +609,13 @@ class workstartup extends plugin
       if((!isset($_POST['gotoShareMountPoint']))||(empty($_POST['gotoShareMountPoint']))||(preg_match("/[\|]/i",$_POST['gotoShareMountPoint']))){
         print_red(_("You must specify a valid mount point."));
       }else{
-        $a_share = $this->gotoAvailableShares[$_POST['gotoShareSelection']];
-        $s_mount = $_POST['gotoShareMountPoint'];
-        /* Preparing the new assignment */
-        $this->gotoShares[$a_share['name']."|".$a_share['server']]=$a_share;
-        $this->gotoShares[$a_share['name']."|".$a_share['server']]['mountPoint']=$s_mount;
+        if(count($this->gotoAvailableShares)){
+          $a_share = $this->gotoAvailableShares[$_POST['gotoShareSelection']];
+          $s_mount = $_POST['gotoShareMountPoint'];
+          /* Preparing the new assignment */
+          $this->gotoShares[$a_share['name']."|".$a_share['server']]=$a_share;
+          $this->gotoShares[$a_share['name']."|".$a_share['server']]['mountPoint']=$s_mount;
+        }
       }
     }
 
@@ -625,6 +627,7 @@ class workstartup extends plugin
     }
 
     $smarty->assign("gotoShares",$this->printOutAssignedShares());
+    $smarty->assign("gotoSharesCount",count($this->printOutAssignedShares()));
     $smarty->assign("gotoShareKeys",array_flip($this->printOutAssignedShares()));
     $smarty->assign("gotoBootKernels",$this->gotoBootKernels);
 
