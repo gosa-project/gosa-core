@@ -71,6 +71,7 @@ class ogrouptabs extends tabs
           require_once("class_mailogroup.inc");
           $this->by_name['mailogroup']= _("Mail");
           $this->by_object['mailogroup']= new mailogroup($this->config, $this->dn);
+          $this->by_object['mailogroup']->acl = "#all#";
           $this->by_object['mailogroup']->parent= &$this;
         }
       }
@@ -82,6 +83,8 @@ class ogrouptabs extends tabs
       if(!isset($this->by_object['termgroup'])){
         $this->by_name['termgroup']= _("System");
         $this->by_object['termgroup']= new termgroup($this->config, $this->dn);
+        $this->by_object['termgroup']->acl = "#all#";
+        $this->by_object['termgroup']->inheritTimeServer = false;
         $this->by_object['termgroup']->parent= &$this;
       }
     }
@@ -96,6 +99,7 @@ class ogrouptabs extends tabs
         $this->by_name['workservice']= _("Devices");
         $this->by_object['workservice']= new workservice($this->config, $this->dn);
         $this->by_object['workservice']->acl = "#all#";
+        $this->by_object['workservice']->inheritTimeServer = false;
         $this->by_object['workservice']->parent= &$this;
       }
     }
