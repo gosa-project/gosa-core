@@ -702,6 +702,7 @@ class userManagement extends plugin
                             array("uid", "givenName", "sn", "objectClass"), GL_SIZELIMIT);
     }
     $SortTemp = array();
+    $List = array();
     foreach($ListTemp as $Key => $Entry){
        // Generate caption for rows
       if (isset($Entry["sn"]) && isset($Entry["givenName"])){
@@ -710,12 +711,16 @@ class userManagement extends plugin
         $display= "[".$Entry["uid"][0]."]";
       }
 
-      $SortTemp[$Key] = $display;
+      $display = strtolower($display);
+      $List[$display] = $Entry;
+      $SortTemp[$display] = $display;
     }
-    natcasesort($SortTemp);
+    sort($SortTemp);
     reset($SortTemp);
-    foreach($SortTemp as $Key => $Value){
-      $this->list[] = $ListTemp[$Key];
+
+    $this->list = array();
+    foreach($SortTemp as $Key){
+      $this->list[] = $List[$Key];
     }
   }
 
