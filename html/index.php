@@ -216,8 +216,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
       $_SESSION['config']= $config;
 
       /* are we using accountexpiration */
-      if((isset($config->data['MAIN']['ACCOUNTEXPIRED'])) && 
-          preg_match('/true/i', $config->data['MAIN']['ACCOUNTEXPIRED'])){
+      if((isset($config->data['MAIN']['ACCOUNT_EXPIRATION'])) && 
+          preg_match('/true/i', $config->data['MAIN']['ACCOUNT_EXPIRATION'])){
       
         $expired= ldap_expired_account($config, $ui->dn, $ui->username);
 

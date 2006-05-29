@@ -304,5 +304,5 @@ A: Yes. Set STRICT_UNITS to "true" in your gosa.conf's location section.
 
 Q: How can i active the account expiration code for the gosa interface?
 
-A: Yes. Just set "accountexpired" to "true" in your gosa.conf's main section.
+A: Yes. Just set "account_expiration" to "true" in your gosa.conf's main section.
 
