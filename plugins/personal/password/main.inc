@@ -100,7 +100,8 @@ if (!$remove_lock){
   }
 
   if ($display == ""){
-    if((isset($config->data['MAIN']['ACCOUNTEXPIRED'])) && $config->data['MAIN']['ACCOUNTEXPIRED'] == "0"){
+    if((isset($config->data['MAIN']['ACCOUNT_EXPIRATION'])) &&
+      !preg_match('/true/i', $config->data['MAIN']['ACCOUNT_EXPIRATION'])){
       $display= $smarty->fetch(get_template_path("password.tpl", TRUE));
     }else{
       $expired= ldap_expired_account($config, $ui->dn, $ui->username);

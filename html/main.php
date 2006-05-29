@@ -344,7 +344,8 @@ if (is_file("$plugin_dir/main.inc")){
 
   /* check if we are using account expiration */
 
-  if((isset($config->data['MAIN']['ACCOUNTEXPIRED'])) && $config->data['MAIN']['ACCOUNTEXPIRED'] == "1"){
+  if((isset($config->data['MAIN']['ACCOUNT_EXPIRATION'])) &&
+      preg_match('/true/i', $config->data['MAIN']['ACCOUNT_EXPIRATION'])){
     
       $expired= ldap_expired_account($config, $ui->dn, $ui->username);
 
