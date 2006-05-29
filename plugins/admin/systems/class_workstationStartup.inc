@@ -268,7 +268,7 @@ class workstartup extends plugin
     $ldap->cd($this->config->current['BASE']);
     $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".$this->dn."))");
     if ($ldap->count() == 1){
-      $map= array("gotoLdapServer","gotoBootKernel","FAIclass","FAIdebianMirror");
+      $map= array("gotoLdapServer","FAIclass","FAIdebianMirror");
       $attrs= $ldap->fetch();
 
       foreach ($map as $name){
