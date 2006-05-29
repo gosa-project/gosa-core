@@ -54,7 +54,9 @@ class workstartup extends plugin
     $ldap   = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
 
-    $this->goLdapServerList= $this->config->data['SERVERS']['LDAP'];
+    foreach($this->config->data['SERVERS']['LDAP'] as $server) {
+      $this->goLdapServerList[$server]= $server; // $this->config->data['SERVERS']['LDAP'];
+    }
    
     $_SESSION['getAvailableClassesForThisRelease_CACHE'] = array();
     $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'] = array();
@@ -254,6 +256,32 @@ class workstartup extends plugin
     /* Handle inheritance value "default" */
     $this->gotoBootKernels= array("%default%" => '['._("inherited").']');
 
+
+    /* Load hardware list */
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".$this->dn."))");
+    if ($ldap->count() == 1){
+      $map= array("gotoLdapServer","gotoBootKernel");
+      $attrs= $ldap->fetch();
+
+      foreach ($map as $name){
+        if (!isset($attrs[$name][0])){
+          continue;
+        }
+
+        switch ($name){
+          case 'gotoLdapServer':
+            $this->goLdapServerList= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']' ), $this->goLdapServerList);
+            break;
+
+          case 'gotoBootKernel':
+            $this->gotoBootKernels['%default%']=  _("inherited").' ['.$attrs[$name][0].']' ;
+            break;
+
+        }
+      }
+    }
     /* Get list of boot kernels */
     if (isset($this->config->data['TABS'])){
       $command= search_config($this->config->data['TABS'], get_class($this), "KERNELS");
@@ -262,59 +290,18 @@ class workstartup extends plugin
         $message[]= sprintf(_("Command '%s', specified as KERNELS hook for plugin '%s' doesn't seem to exist."), $command,
             get_class($this));
       } else {
+        
         $fh= popen($command, "r");
         while (!feof($fh)) {
           $buffer= trim(fgets($fh, 256));
-          
           if ($buffer != ""){
             $this->gotoBootKernels[preg_replace('/:.*$/', '', $buffer)]= $buffer;
           }
         }
         pclose($fh);
-        ksort($this->gotoBootKernels);
-      }
-      
-    }
-
-    /* Load hardware list */
-    $ldap= $this->config->get_ldap_link();
-    $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".$this->dn."))");
-    if ($ldap->count() == 1){
-      $map= array("gotoLdapServer");
-      $attrs= $ldap->fetch();
-
-      foreach ($map as $name){
-        if (!isset($attrs[$name][0])){
-          continue;
-        }
-
-print_a($attrs);
-        switch ($name){
-          case 'gotoLdapServer':
-            $this->goLdapServerList= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']' ), $this->goLdapServerList);
-            break;
-#          case 'gotoXColordepth':
-#            $this->XColordepths= array_merge(array('default' => $attrs[$name][0].' ['._("inherited").']' ), $this->XColordepths);
-#            break;
-#          case 'gotoXKbModel':
-#            $this->XKbModels= array_merge(array('default' => $attrs[$name][0].' ['._("inherited").']' ), $this->XKbModels);
-#            break;
-#          case 'gotoXKbLayout':
-#            $this->XKbLayouts= array_merge(array('default' => $attrs[$name][0].' ['._("inherited").']' ), $this->XKbLayouts);
-#            break;
-#          case 'gotoXKbVariant':
-#            $this->XKBvariants= array_merge(array('default' => $attrs[$name][0].' ['._("inherited").']' ), $this->XKbVariants);
-#            break;
-#          case 'gotoMouseType':
-#            $this->XMouseTypes= array_merge(array('default' => $attrs[$name][0].' ['._("inherited").']' ), $this->XMouseTypes);
-#            break;
-#          case 'gotoMousePort':
-#            $this->XMousePorts= array_merge(array('default' => $attrs[$name][0].' ['._("inherited").']' ), $this->XMousePorts);
-#            break;
-        }
       }
     }
+
 
   }
 
@@ -641,7 +628,7 @@ print_a($attrs);
 
     /* Add Entries 
      */
-    foreach($tmp as $server){
+    foreach($tmp as $key => $server){
       $use ="";
       if(($this->gotoLdapServer == $server) || ($found == false)) {
         $found = true;
@@ -653,7 +640,7 @@ print_a($attrs);
       $SelectBoxLdapServer->AddEntry(
           array(
             array("string"=>$display),
-            array("string"=>"<input type='radio' name='gotoLdapServer' value='".$server."' ".$use.">",
+            array("string"=>"<input type='radio' name='gotoLdapServer' value='".$key."' ".$use.">",
                   "attach"=>"style='border-right:0px;'")
             ));
     }    
@@ -883,7 +870,7 @@ print_a($attrs);
     /* Find proper terminal path for tftp configuration
        FIXME: This is suboptimal when the default has changed to
        another location! */
-    if ($this->gotoTerminalPath == "default"){
+    if (($this->gotoTerminalPath == "default")){
       $ldap= $this->config->get_ldap_link();
 
       /* Strip relevant part from dn, keep trailing ',' */
@@ -950,12 +937,13 @@ print_a($attrs);
       }
       if(!isset($this->attrs["$val"])) $this->attrs["$val"]=array();
     }
+
     /* Strip out 'default' values */
     if ($this->attrs['gotoLdapServer'] == "default"){
       $this->attrs['gotoLdapServer']= array();
     }
 
-    if ($this->attrs['gotoBootKernel'] == "%default%" || $this->attrs['gotoBootKernel'] == "default"){
+    if (($this->attrs['gotoBootKernel'] == "default") || ($this->attrs['gotoBootKernel'] == "%default%")){
       $this->attrs['gotoBootKernel']= array();
     }
 
