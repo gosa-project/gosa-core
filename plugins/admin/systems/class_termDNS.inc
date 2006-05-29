@@ -8,7 +8,8 @@ class termDNS extends plugin
   var $cli_parameters   = array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* attribute list for save action */
-  var $ignore_account = TRUE;
+  var $ignore_account = true;
+  var $autonet        = false;
 
   /* Basic informations 
    */
@@ -44,6 +45,12 @@ class termDNS extends plugin
 
     if(isset($this->attrs['cn'][0])){
       $this->OrigCn = $this->attrs['cn'][0];
+      $this->cn = $this->attrs['cn'][0];
+    }
+
+    /* Do we have autonet support? */
+    if (isset($this->config->data['MAIN']['AUTO_NETWORK_HOOK'])){
+      $this->autonet= true;
     }
 
     /* Hide all dns specific code, if dns is not available 
@@ -115,6 +122,25 @@ class termDNS extends plugin
 
     $smarty->assign("staticAddress", ""); 
  
+    /* Check for autonet button */
+    if ($this->autonet && isset($_POST['autonet'])){
+      $cmd= $this->config->data['MAIN']['AUTO_NETWORK_HOOK'];
+      if(!empty($cmd) && $this->cn != ""){
+        $res = shell_exec($cmd." ".$this->cn);
+        if(!$res){
+          print_red(sprintf(_("Can't execute specified AUTO_NETWORK_HOOK '%s'. Please check your gosa.conf."),$cmd));
+        } else {
+          $res= split(';', trim($res));
+          if (isset($res[0]) && $res[0] != ""){
+            $this->ipHostNumber= $res[0];
+          }
+          if (isset($res[1]) && $res[1] != ""){
+            $this->macAddress= $res[1];
+          }
+        }
+      }
+    }
+
     /* There is no dns available 
      */
     if($this->DNSenabled == false){
@@ -128,6 +154,12 @@ class termDNS extends plugin
         $smarty->assign($attr,$this->$attr);
       }
       $smarty->assign("staticAddress","<font class=\"must\">*</font>");
+
+      if ($this->autonet){
+        $smarty->assign("autonet", "true");
+      } else {
+        $smarty->assign("autonet", "");
+      }
       $display.= $smarty->fetch(get_template_path('network.tpl', TRUE));
       return($display);
     }else{

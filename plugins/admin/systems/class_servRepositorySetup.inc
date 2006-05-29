@@ -166,8 +166,8 @@ class servRepositorySetup  extends plugin
     if(!empty($cmd)){
       $res = shell_exec($cmd);
       $res2 = trim($res);
-      if((!$res)){
-        print_red(sprintf(_("Can't execute specified REPOSITORY_HOOK '%s' please check your gosa.conf."),$cmd));
+      if(!$res){
+        print_red(sprintf(_("Can't execute specified REPOSITORY_HOOK '%s'. Please check your gosa.conf."),$cmd));
       }elseif(empty($res2)){
         print_red(sprintf(_("The specified REPOSITORY_HOOK '%s', specified in your gosa.conf, returns an empty string."),$cmd));
       }else{  
