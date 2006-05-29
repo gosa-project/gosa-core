@@ -96,10 +96,11 @@ class termstartup extends plugin
         $fh= popen($command, "r");
         while (!feof($fh)) {
           $buffer= fgets($fh, 256);
-          $this->gotoBootKernels[]= $buffer;
+          if(!empty($buffer)){
+            $this->gotoBootKernels[]= $buffer;
+          }
         }
         pclose($fh);
-        sort($this->gotoBootKernels);
       }
 
     }
@@ -110,6 +111,27 @@ class termstartup extends plugin
         $visible = "["._("inherited")."]";
       }
       $this->goLdapServerList[$server] = $visible;
+    }
+
+     /* Load hardware list */
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".$this->dn."))");
+    if ($ldap->count() == 1){
+      $map= array("gotoLdapServer");
+      $attrs= $ldap->fetch();
+
+      foreach ($map as $name){
+        if (!isset($attrs[$name][0])){
+          continue;
+        }
+
+        switch ($name){
+          case 'gotoLdapServer':
+            $this->goLdapServerList= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']' ), $this->goLdapServerList);
+            break;
+        }
+      }
     }
   }
 
