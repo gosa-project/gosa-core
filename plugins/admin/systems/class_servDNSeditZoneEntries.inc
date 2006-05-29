@@ -46,8 +46,11 @@ class servDNSeditZoneEntries extends plugin
       $this->Devices[$attrs['relativeDomainName'][0]]['OrigCn'] = $attrs['relativeDomainName'][0];
     }
 
-    if(!count($this->Devices)){
-      $this->disableDialog = true;
+    $ldap->cat($this->dn,array("objectClass"));
+
+    $this->disableDialog = true;
+    if(count($this->Devices)|| $ldap->count()){
+      $this->disableDialog = false;
     }
   }
 
