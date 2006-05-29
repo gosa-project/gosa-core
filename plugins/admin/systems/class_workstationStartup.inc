@@ -43,7 +43,6 @@ class workstartup extends plugin
 
   
   /* FAI class selection */
-  var $FAIinherit                  = false; 
   var $InheritedFAIclass           = array();
   var $InheritedFAIrelease         = "";
   var $InheritedFAIdebianMirror    = "auto";
@@ -320,7 +319,7 @@ class workstartup extends plugin
     }
 
     if(count($this->FAIclass)==0 && $this->FAIrelease == ""){
-      $this->FAIinherit =true;
+      $this->FAIdebianMirror = "inherited";
     }
   }
 
@@ -396,6 +395,8 @@ class workstartup extends plugin
    */
   function selectFriendlyClasses(){
     $tmp=array();
+
+    if($this->FAIdebianMirror == "inherited") return($tmp);
 
     /* check if the current release exists,
         else select the first one ..
@@ -677,14 +678,12 @@ class workstartup extends plugin
       $smarty->assign($val."ACL", chkacl($this->acl, $val));
     }
 
-    $smarty->assign("FAIinherit",$this->FAIinherit);
     $smarty->assign("FAIdebianMirrors",$this->getFAIdebianMirrors());
     $smarty->assign("FAIreleases",$this->getFAIreleases());
     $smarty->assign("FAIrelease",$this->FAIrelease);
     $smarty->assign("FAIclasses",$this->selectFriendlyClasses());
     $smarty->assign("FAIclassesKeys",array_flip($this->selectFriendlyClasses()));
     $smarty->assign("FAIclassKeys",$this->FAIclass);
-    $smarty->assign("InheritedFAIdebianMirror",$this->InheritedFAIdebianMirror);
     $smarty->assign("InheritedFAIrelease",$this->InheritedFAIrelease);
     
     $div = new divSelectBox("WSFAIscriptClasses");
@@ -696,7 +695,7 @@ class workstartup extends plugin
 
     $i = 1;
 
-    if($this->FAIinherit){
+    if($this->FAIdebianMirror == "inherited"){
       $tmp = $this->InheritedFAIclass;
     }else{
       $tmp = $this->FAIclass;
@@ -704,7 +703,7 @@ class workstartup extends plugin
 
     foreach($tmp as $class){
 
-      if($this->FAIinherit){
+      if($this->FAIdebianMirror == "inherited"){
         $str = "";
       }else{
         if($i==1){
@@ -780,6 +779,7 @@ class workstartup extends plugin
   function getFAIdebianMirrors()
   {
     $ret = array();
+    $ret['inherited']="["._("inherited")."]";
     $ret['auto']=_("automatic");
     $secs  = array();
 
@@ -815,6 +815,8 @@ class workstartup extends plugin
   function getFAIreleases() 
   {
     $ret = array();
+
+    if($this->FAIdebianMirror == "inherited") return(array());
 
     if(!isset($this->FAIServRepConfig[$this->FAIdebianMirror])){
       $this->FAIdebianMirror = "auto";
@@ -879,13 +881,6 @@ class workstartup extends plugin
       $this->customParameters= $_POST["customParameters"];
     }
 
-    if(isset($_POST['WorkstationStarttabPosted'])){
-      if(isset($_POST['FAIinherit'])){
-        $this->FAIinherit = true;
-      }else{
-        $this->FAIinherit = false;
-      }
-    }
   }
 
 
@@ -961,7 +956,7 @@ class workstartup extends plugin
     
     $str = "";
 
-    if($this->FAIinherit){
+    if($this->FAIdebianMirror == "inherited"){
   
       $this->attrs['FAIclass'] = $this->attrs['FAIrelease'] =  $this->attrs['FAIdebianMirror'] = array(); 
 

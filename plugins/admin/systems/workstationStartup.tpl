@@ -33,15 +33,9 @@
   
   <td style="vertical-align:top;">
 
-	{if $FAIinherit == true}
+	{if $FAIdebianMirror == "inherited"}
 
 		<table>
-			<tr>
-				<td>
-				<input type="checkbox" value="1" name="FAIinherit" {if $FAIinherit == true}  checked {/if}
-				  onClick="mainform.submit();">{t}Inherit FAI settings{/t}
-				</td>
-			</tr>
 			<tr>
 				<td>
 					<h2><img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;{t}FAI server{/t}
@@ -54,8 +48,8 @@
 			</tr>
 			<tr>
 				<td>
-					<select name="FAIdebianMirror" disabled>
-						{html_options options=$InheritedFAIdebianMirror output=$InheritedFAIdebianMirror selected=$InheritedFAIdebianMirror}
+					<select name="FAIdebianMirror"   onchange='document.mainform.submit()'>
+						{html_options options=$FAIdebianMirrors output=$FAIdebianMirrors selected=$FAIdebianMirror}
 					</select>
 				</td>
 				<td>
@@ -72,12 +66,6 @@
 	{else}
 
 		<table>
-			<tr>
-				<td>
-				<input type="checkbox" value="1" name="FAIinherit" {if $FAIinherit == true}  checked {/if}
-				  onClick="mainform.submit();">{t}Inherit FAI settings{/t}
-				</td>
-			</tr>
 			<tr>
 				<td>
 					<h2><img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;{t}FAI server{/t}
