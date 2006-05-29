@@ -188,7 +188,7 @@ class workservice extends plugin
     $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".$this->dn."))");
     if ($ldap->count() == 1){
       $map= array("gotoXResolution", "gotoXColordepth", "gotoXKbModel", "gotoXKbLayout",
-                  "gotoXKbVariant", "gotoMouseType", "gotoMousePort");
+                  "gotoXKbVariant", "gotoXMouseType", "gotoXMouseport");
       $attrs= $ldap->fetch();
 
       foreach ($map as $name){
@@ -210,13 +210,13 @@ class workservice extends plugin
             $this->XKbLayouts= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']' ), $this->XKbLayouts);
             break;
           case 'gotoXKbVariant':
-            $this->XKBvariants= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']' ), $this->XKbVariants);
+            $this->XKbVariants= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']' ), $this->XKbVariants);
             break;
-          case 'gotoMouseType':
-            $this->XMouseTypes= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']' ), $this->XMouseTypes);
+          case 'gotoXMouseType':
+            $this->MouseTypes= array_merge(array('AUTO' => _("inherited").' ['.$attrs[$name][0].']' ), $this->MouseTypes);
             break;
-          case 'gotoMousePort':
-            $this->XMousePorts= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']' ), $this->XMousePorts);
+          case 'gotoXMouseport':
+            $this->MousePorts= array_merge(array('AUTO' => _("inherited").' ['.$attrs[$name][0].']' ), $this->MousePorts);
             break;
         }
 
