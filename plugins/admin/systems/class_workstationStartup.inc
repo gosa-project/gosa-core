@@ -53,8 +53,8 @@ class workstartup extends plugin
      */
     $ldap   = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-   
-    $this->goLdapServerList = array("default" =>"["._("inherited")."]");
+
+    $this->goLdapServerList= $this->config->data['SERVERS']['LDAP'];
    
     $_SESSION['getAvailableClassesForThisRelease_CACHE'] = array();
     $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'] = array();
@@ -274,6 +274,46 @@ class workstartup extends plugin
         ksort($this->gotoBootKernels);
       }
       
+    }
+
+    /* Load hardware list */
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".$this->dn."))");
+    if ($ldap->count() == 1){
+      $map= array("gotoLdapServer");
+      $attrs= $ldap->fetch();
+
+      foreach ($map as $name){
+        if (!isset($attrs[$name][0])){
+          continue;
+        }
+
+print_a($attrs);
+        switch ($name){
+          case 'gotoLdapServer':
+            $this->goLdapServerList= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']' ), $this->goLdapServerList);
+            break;
+#          case 'gotoXColordepth':
+#            $this->XColordepths= array_merge(array('default' => $attrs[$name][0].' ['._("inherited").']' ), $this->XColordepths);
+#            break;
+#          case 'gotoXKbModel':
+#            $this->XKbModels= array_merge(array('default' => $attrs[$name][0].' ['._("inherited").']' ), $this->XKbModels);
+#            break;
+#          case 'gotoXKbLayout':
+#            $this->XKbLayouts= array_merge(array('default' => $attrs[$name][0].' ['._("inherited").']' ), $this->XKbLayouts);
+#            break;
+#          case 'gotoXKbVariant':
+#            $this->XKBvariants= array_merge(array('default' => $attrs[$name][0].' ['._("inherited").']' ), $this->XKbVariants);
+#            break;
+#          case 'gotoMouseType':
+#            $this->XMouseTypes= array_merge(array('default' => $attrs[$name][0].' ['._("inherited").']' ), $this->XMouseTypes);
+#            break;
+#          case 'gotoMousePort':
+#            $this->XMousePorts= array_merge(array('default' => $attrs[$name][0].' ['._("inherited").']' ), $this->XMousePorts);
+#            break;
+        }
+      }
     }
 
   }
@@ -582,7 +622,7 @@ class workstartup extends plugin
     $smarty->assign("gotoBootKernels",$this->gotoBootKernels);
 
     /* Arrays */
-    $tmp = $this->config->data['SERVERS']['LDAP'];
+    $tmp = $this->goLdapServerList;
 
     /* Create divSelectBox for ldap server selection
      */
@@ -608,11 +648,7 @@ class workstartup extends plugin
         $use = " checked ";
       };
 
-      if($server == "default"){
-        $display = "["._("inherited")."]";
-      }else{
-        $display = $server;
-      }
+      $display = $server;
 
       $SelectBoxLdapServer->AddEntry(
           array(

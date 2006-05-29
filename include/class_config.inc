@@ -412,7 +412,7 @@ class config  {
     }
 
     /* Ldap Server */
-    $this->data['SERVERS']['LDAP']= array("default");
+    $this->data['SERVERS']['LDAP']= array();
     $ldap->cd ($this->current['BASE']);
     $ldap->search ("(objectClass=goLdapServer)");
     while ($attrs= $ldap->fetch()){
