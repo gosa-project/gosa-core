@@ -432,17 +432,6 @@ class environment extends plugin
       $this->dialog=NULL;
       $this->is_dialog = false;
     }
-    $tmp = new kioskManagementDialog($this->config,$this->dn);
-    $list = $tmp->getKioskProfiles($this->newKioskProfiles);
-
-    $list['none']=_("None");
-
-    $list = array_reverse($list);
-
-    if(!isset($list[$this->gotoKioskProfile])){
-      print_red(sprintf(_("The selected kiosk profile '%s' is no longer available, setting current profile to 'none'."),$this->gotoKioskProfile));
-      $this->gotoKioskProfile = 'none';
-    }
 
     /* Reassign help class */
     $_SESSION['current_class_for_help'] = get_class($this);
@@ -454,7 +443,10 @@ class environment extends plugin
       $this->dialog->acl = $this->acl;
       $this->is_dialog = true;
     }
-
+    $tmp = new kioskManagementDialog($this->config,$this->dn);
+    $list = $tmp->getKioskProfiles($this->newKioskProfiles);
+    $list['none']=_("None");
+    $list = array_reverse($list);
     $smarty->assign("gotoKioskProfiles",$list);
     $smarty->assign("gotoKioskProfileKeys",array_flip($list));
 
@@ -699,7 +691,17 @@ class environment extends plugin
     /* General behavior */
     if((isset($this->dialog))&&($this->dialog!=NULL)&&(!empty($this->dialog))){
       $this->dialog->save_object();
-      return ($this->dialog->execute());
+      $disp =$this->dialog->execute();
+
+      $tmp = new kioskManagementDialog($this->config,$this->dn);
+      $list = $tmp->getKioskProfiles($this->newKioskProfiles);
+      $list['none']=_("None");
+      $list = array_reverse($list);
+      if(!isset($list[$this->gotoKioskProfile])){
+        print_red(sprintf(_("The selected kiosk profile '%s' is no longer available, setting current profile to 'none'."),$this->gotoKioskProfile));
+        $this->gotoKioskProfile = 'none';
+      }
+      return($disp);
     }
     if($this->acl != "#none#"){
       $smarty->assign("useProfileACL","");
