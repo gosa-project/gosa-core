@@ -314,7 +314,7 @@ function search($arr,$word)
           /* Filter in Tag results*/
           if(count($matches[0])){
             foreach($matches[0] as $num=>$hit){
-              if(isset($arr[$key]['content']) && (is_in_tag($arr[$key]['content'],$hit[1]))){
+              if(isset($arr[$keys][$key]['content']) && (is_in_tag($arr[$keys][$key]['content'],$hit[1]))){
                 unset($matches[0][$num]);    
               }    
             }
