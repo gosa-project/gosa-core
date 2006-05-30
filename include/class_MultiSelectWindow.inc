@@ -363,9 +363,9 @@ class MultiSelectWindow{
 
 			/* Homebutton is posted */
 			if($s_action=="home"){
-				$ui= get_userinfo();
-				$this->selectedBase=(preg_replace("/^[^,]+,/","",$ui->dn));
-				$this->selectedBase=(preg_replace("/^[^,]+,/","",$this->selectedBase));
+        $ui= get_userinfo();
+        $base = get_base_from_people($ui->dn);
+				$this->selectedBase= $base;
 			}
 
 			/* Open selected department
