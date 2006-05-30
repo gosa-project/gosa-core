@@ -157,9 +157,9 @@ class divListUsers extends MultiSelectWindow
             "apple-user"      => array("VAR"=>"netatalk"  ,"IMG"=>"netatalkimg"));
 
      /* Pictures for Extensions */
-    $usrimg   ="<input class='center' type='image' src='images/penguin.png' alt='"._("GOsa")."'
+    $usrimg   ="<input class='center' type='image' src='images/select_user.png' alt='"._("GOsa")."'
                     name='user_edit_%KEY%-user' title='"._("Edit generic properties")."'>";
-    $posiximg = "<input class='center' type='image' src='images/select_user.png' alt='"._("Posix")."'
+    $posiximg = "<input class='center' type='image' src='images/penguin.png' alt='"._("Posix")."'
                     name='user_edit_%KEY%-posixAccount' title='"._("Edit UNIX properties")."'>";
     $eviroimg = "<input class='center' type='image' src='images/smallenv.png' alt='"._("Environment")."'
                     name='user_edit_%KEY%-environment' title='"._("Edit environment properties")."'>";
