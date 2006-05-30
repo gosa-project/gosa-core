@@ -57,11 +57,12 @@ class parseXml
 
 
 /* This function genereates the Index */
-function genIndex($arr)
+function genIndex()
 {
   global $helpobject;
   $str = "";
   $test = new pluglist($_SESSION['config'],NULL);
+  $current_hl = "";
   foreach($_SESSION['helpobject']['helpconf'] as $id => $attrs){
     $path = $test -> get_path($id);
     $exists = true;
@@ -76,7 +77,7 @@ function genIndex($arr)
     }
     $name = $attrs['NAME'];
     $file = "index.html";
-    $path = $plug;
+    //$path = $plug;
     if($exists){
       $str .= "<p style='padding-left:20px;'><a href='?plug=".$id."'><b>"._($name)."</b></a></p>";
     }else{
@@ -254,7 +255,7 @@ function linkwrapper($str,$link)
 {
   $str = preg_replace("/HREF=\"http/i","target=\"_blank\" href=\"http",$str);
   $str = preg_replace("/HREF=\"/","href=\"".$link."?pg=",$str);
-//  $str=str_replace("HREF=\"","href=\"".$link."?pg=",$str);  
+  $str=str_replace("HREF=\"","href=\"".$link."?pg=",$str);  
   return($str);
 }
 

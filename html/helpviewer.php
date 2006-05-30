@@ -23,7 +23,8 @@
 @require_once ("functions.inc");
 @require_once ("functions_helpviewer.inc");
 
-error_reporting(0);
+error_reporting(E_ALL);
+restore_error_handler();
 header("Content-type: text/html; charset=UTF-8");
 
 session_start();
@@ -92,6 +93,7 @@ $allowed_chars_in_searchword  = "'[^a-z0-9 %_-]'i";                 // Remove al
 $backward =$defaultpage;
 $index    =$defaultpage;
 $forward  ="node1.html";
+
 
 /* Every class which is called within a tab, stores its name in the Session.
  * If $_SESSION['current_class_for_help'] isset, 
@@ -179,6 +181,42 @@ $_SESSION['helpobject'] = $helpobject;
  * Display management 
  */
 
+$files = array();
+$f = opendir($helpdir);
+while($file = readdir($f)){
+  $files[$file]=$file;
+}
+
+/* Some replacements */
+$backwardlink  = "<a href=\"?pg=%s\"  class=\"maintitlebar\">
+                  <img src='images/back.png' align=\"middle\" alt=\""._("previous")."\" border=\"0\">
+                 </a>";
+
+$forwardlink   = "<a href=\"?pg=%s\"  class=\"maintitlebar\">
+                  <img src='images/forward.png' align=\"middle\" alt=\""._("next")."\" border=\"0\">
+                 </a>";
+
+
+$back = $for  ="";
+if($helpobject['file'] == "index.html"){
+  $back = "&nbsp;";
+  $for  = sprintf($forwardlink,   $prefix."1".$suffix);
+}else{
+  $current = preg_replace("/^".$prefix."/","",$helpobject['file']);
+  $current = preg_replace("/\.html$/","",$current);
+ 
+  if(isset($files[$prefix.($current+1).$suffix])) {
+    $for  = sprintf($forwardlink,    $prefix.($current+1).$suffix);
+  }
+  if(isset($files[$prefix.($current-1).$suffix])) {
+    $back = sprintf($backwardlink,   $prefix.($current-1).$suffix);
+  }
+  if(($current-1) == 0){
+    $back = sprintf($backwardlink,   "index.html");
+  }
+}
+
+
 /* If there is no helpdir or file defined, display the index */
 if(isset($_POST['search'])){
   $helpdir = "../doc/guide/user/".$helpobject['lang']."/html/";
@@ -216,6 +254,8 @@ if(isset($_POST['search'])){
   $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
   
   /* I don't know why, but we must use utf8_encode to avoid dispplay errors */
+  $smarty->assign("backward",$back);
+  $smarty->assign("forward" ,$for);
   $display= utf8_encode(  $header.$smarty->fetch(get_template_path('help.tpl')));
   echo $display;
 
