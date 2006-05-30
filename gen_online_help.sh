@@ -25,7 +25,7 @@ for lang in *; do
 	[ ! -d "$lang" ] && continue
 
 	pushd . &> /dev/null
-	echo -n "Processing language $lang..."
+	echo "Processing language $lang..."
 	cd $lang/lyx-source
 
 	for source in *.lyx; do
@@ -38,5 +38,5 @@ for lang in *; do
 done
 
 popd &> /dev/null
-
+echo
 exit 0
