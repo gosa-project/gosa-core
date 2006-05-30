@@ -781,10 +781,10 @@ class appgroup extends plugin
 
   function getReleases()
   {
-    $dn   = "ou=apps,".$this->config->current['BASE'];
+    $dn   = $this->config->current['BASE'];
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($dn);
-    $ldap->search("objectClass=organizationalUnit",array("ou"));
+    $ldap->search("(&(objectClass=organizationalUnit)(objectClass=FAIbranch))",array("ou"));
     $ret =array();
     while($attrs = $ldap->fetch()){
       if(preg_match("/ou=apps,/",$attrs['dn'])){
@@ -839,6 +839,7 @@ class appgroup extends plugin
     /* Copy members */
     $this->Categories[""]=""; 
     $this->attrs["gosaMemberApplication"]= array();
+    $this->attrs["gosaApplicationParameter"]= array();
     foreach($this->Categories as $name => $cats){
       $i =0;
       if(isset($this->gosaMemberApplication[$name])){
