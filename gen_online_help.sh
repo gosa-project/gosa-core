@@ -30,7 +30,7 @@ for lang in *; do
 
 	for source in *.lyx; do
 		$LYX -e latex $source; d=../html/${source%%\.*}/ > /dev/null
-		[ -d $d ] || mkdir -p $d && rm -r $d/*
+		[ -d $d ] || mkdir -p $d && rm -r $d/* &> /dev/null
 		$CNV -no_navigation -dir $d ${source%%\.*}.tex > /dev/null
 	done
 

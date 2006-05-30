@@ -1,7 +1,7 @@
 {$header}
 
 <p>
-  {t}This is the GOsa main screen. You can select your tasks from the menu on the left, or by choosing one of the pictograms below. All changes apply directly to your companies LDAP server.{/t}
+  {t}This is the GOsa main menu. You can select your tasks from the menu on the left, or by choosing one of the pictograms below. All changes apply directly to your companies LDAP server.{/t}
 </p>
 
 <p>

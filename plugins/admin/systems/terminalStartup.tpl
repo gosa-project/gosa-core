@@ -5,11 +5,6 @@
 
    <table summary="" style="width:100%">
     <tr>
-     <td colspan="2" style='vertical-align:top;padding-top:3px;width:100%'><LABEL for="gotoLdapServer">{t}LDAP server{/t}</LABEL>
-		{$SelectBoxLdapServer}
-     </td>
-    </tr>
-    <tr>
      <td style="width:30%"><LABEL for="gotoBootKernel">{t}Boot kernel{/t}</LABEL></td>
      <td>
 	<select id="gotoBootKernel" name="gotoBootKernel" {$gotoBootKernelACL} onchange='document.mainform.submit()'>
@@ -22,6 +17,11 @@
      <td><LABEL for="customParameters">{t}Custom options{/t}</LABEL></td>
      <td><input name="customParameters" id="customParameters"  size=25 maxlength=500 {$gotoKernelParametersACL}
                 value="{$customParameters}" title="{t}Enter any parameters that should be passed to the kernel as append line during bootup{/t}"></td>
+    </tr>
+    <tr>
+     <td colspan="2" style='vertical-align:top;padding-top:3px;width:100%'><LABEL for="gotoLdapServer">{t}LDAP server{/t}</LABEL>
+		{$SelectBoxLdapServer}
+     </td>
     </tr>
    </table>
 

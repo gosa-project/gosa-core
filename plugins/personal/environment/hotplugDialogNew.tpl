@@ -7,14 +7,14 @@
   <td width="50%">
 	<table summary="{t}Create new hotplug device{/t}" style="border-right:1px solid #B0B0B0;width:100%">
 		<tr>
-			<td><LABEL for="HOT_name">{t}Device name{/t}</LABEL>
+			<td><LABEL for="HOT_name">{t}Device name{/t}</LABEL>{$must}
 			</td>
 			<td>	
 				<input type="text" size=40 value="{$HOT_name}" name="HOT_name" id="HOT_name">
 			</td>
 		</tr>
 		<tr>
-			<td><LABEL for="HOT_description">{t}Description{/t}</LABEL>
+			<td><LABEL for="HOT_description">{t}Description{/t}</LABEL>{$must}
 			</td>
 			<td>
 				<input type="text" size=40 value="{$HOT_description}" name="HOT_description" id="HOT_description">
@@ -25,7 +25,7 @@
    <td style="vertical-align:top">
 	<table summary="">
 		<tr>
-			<td><LABEL for="HOT_id">{t}Device ID{/t}</LABEL>
+			<td><LABEL for="HOT_id">{t}Device ID{/t}</LABEL>{$must}
 			</td>
 			<td>
 				<input type="text" value="{$HOT_id}" name="HOT_id" id="HOT_id">

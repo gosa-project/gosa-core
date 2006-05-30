@@ -662,9 +662,9 @@ class workstartup extends plugin
 
       $SelectBoxLdapServer->AddEntry(
           array(
-            array("string"=>$display),
             array("string"=>"<input type='radio' name='gotoLdapServer' value='".$key."' ".$use.">",
-                  "attach"=>"style='border-right:0px;'")
+                  "attach"=>"style='border-left:0px;'"),
+            array("string"=>$display)
             ));
     }    
 

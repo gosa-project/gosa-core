@@ -1,5 +1,5 @@
-Target for 2.4.1:
-=================
+Target for 2.5:
+===============
 
 * Add online help (english/german)
   Document how to generate it, generate it and check it in
@@ -17,6 +17,8 @@ Target for 2.4.1:
 * Change FAIstate when triggering actions
   (install, sysinfo, softupdate)
 
+* Fix hotplug device adding -> multi[] select
+
 * Fix error messages on login
 
 * Fix DNS plugin
@@ -24,7 +26,7 @@ Target for 2.4.1:
   * Error messages are partly wrong
 
 
-Target for 2.5:
+Target for 2.6:
 ===============
 
 * Asterisk : Create entry like this #309,1,PickupChan(SIP/rainer), 

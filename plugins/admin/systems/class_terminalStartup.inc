@@ -230,9 +230,9 @@ class termstartup extends plugin
 
       $SelectBoxLdapServer->AddEntry(
           array(
-            array("string"=>$visible),
             array("string"=>"<input type='radio' name='gotoLdapServer' value='".$server."' ".$use.">",
-                  "attach"=>"style='border-right:0px;'")
+                  "attach"=>"style='border-left:0px;'"),
+            array("string"=>$visible)
             ));
     }
 
