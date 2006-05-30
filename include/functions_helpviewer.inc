@@ -49,7 +49,7 @@ class parseXml
   }
   function tag_open($parser,$tag,$attrs)
   {
-    $this->entries[$attrs['NAME']]=$attrs;
+    @$this->entries[$attrs['NAME']]=$attrs;
   }
   function tag_close(){; }
 
@@ -314,7 +314,7 @@ function search($arr,$word)
           /* Filter in Tag results*/
           if(count($matches[0])){
             foreach($matches[0] as $num=>$hit){
-              if(is_in_tag($arr[$key]['content'],$hit[1]))  {
+              if(isset($arr[$key]['content']) && (is_in_tag($arr[$key]['content'],$hit[1]))){
                 unset($matches[0][$num]);    
               }    
             }
@@ -382,9 +382,8 @@ function searchlist($arr,$res,$maxresults)
 
   /* appending footer message for resultlist */
   $ret.= "<br>
-              ".sprintf(_("%s results for your search with the keyword %s interpreted as %s"), 
+              ".sprintf(_("%s results for your search with the keyword %s"), 
                             "<b>".count($topten)."</b>", 
-                            "<b>".($_SESSION['search_string'])."</b>", 
                             "<b>".$_SESSION['parsed_search_keyword']."</b>");
   $ret.="<br>
         <br>";
@@ -473,9 +472,13 @@ function createResultEntry($entry,$res,$name,$max)
 /*Simple function to detect if we prepare to change a tag or visible text */
 function is_in_tag($string,$pos)
 {
-  $pos1 = strpos($string,"<",$pos);
-  $pos2 = strpos($string,">",$pos);
-
+  $pos1 = $pos2 = 0;
+  if(preg_match("/</",$string)){
+    $pos1 = strpos($string,"<",$pos);
+  }
+  if(preg_match("/>/",$string)){
+    $pos2 = strpos($string,">",$pos);
+  }
   if ($pos1 > $pos2)  {
     return(true);
   }else{

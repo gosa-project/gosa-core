@@ -94,7 +94,7 @@ $backward =$defaultpage;
 $index    =$defaultpage;
 $forward  ="node1.html";
 
-
+$helpdir ="";
 /* Every class which is called within a tab, stores its name in the Session.
  * If $_SESSION['current_class_for_help'] isset, 
  *  get the helpfile specified in the xml file and display it.
@@ -109,7 +109,7 @@ if(isset($_SESSION['current_class_for_help'])){
   $str = $xml->parse();
 
   /* __LANG__ is used as placeholder for the used language*/
-  $helpdir= preg_replace("/__LANG__/i",$lang,$str[($_SESSION['current_class_for_help'])]['PATH']);
+  $helpdir= @preg_replace("/__LANG__/i",$lang,$str[($_SESSION['current_class_for_help'])]['PATH']);
 
   /* If there is no entry in the xml file for this class, display an error message */
   if($helpdir == ""){
@@ -171,7 +171,6 @@ if(isset($_GET['pg'])){
     }
   }
 }
-
 $helpdir.="/";
 
 /* Save current settings */
