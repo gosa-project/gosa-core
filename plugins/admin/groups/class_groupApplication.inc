@@ -371,7 +371,6 @@ class appgroup extends plugin
     /* Call parent execute */
     plugin::execute();
 
-
     if((isset($_GET['act']))&&($_GET['act']=="depopen")){
       $dep = base64_decode($_GET['depid']);  
       if(isset($this->config->idepartments[$dep])){
@@ -455,9 +454,15 @@ class appgroup extends plugin
 
         foreach($this->gosaMemberApplication as $key =>  $cat){
           foreach($cat as $key2 => $app){
+            
             if($app['App'] == $val){
               unset($this->gosaMemberApplication[$key][$key2]);
               if(isset($this->used_apps[$val])){
+                foreach($this->getParameters($val) as $para){
+                  if(isset($this->appoption[$para])){
+                    unset($this->appoption[$para]);
+                  }
+                }
                 unset($this->used_apps[$val]);
               }
             }
@@ -997,6 +1002,27 @@ class appgroup extends plugin
     }
     $this->gosaMemberApplication= $temp;
     $this->is_modified= TRUE;
+  }
+
+  function getParameters($app)
+  {
+    $tmp = $this->getReleases();
+    $ret = array();
+    if(in_array($this->FAIrelease,$tmp)){
+      $tmp2 = array_flip($tmp);
+      $base = $tmp2[$this->FAIrelease];
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cd($this->config->current['BASE']);
+      $ldap->search("(&(objectClass=gosaApplication)(cn=".$app.")(gosaApplicationParameter=*))",array("gosaApplicationParameter"));
+      if($ldap->count()){
+        $attrs = $ldap->fetch();
+        for($i = 0 ; $i < $attrs['gosaApplicationParameter']['count'] ; $i ++ ){
+          $name = preg_replace("/:.*$/","",$attrs['gosaApplicationParameter'][$i]);
+          $ret[$name] = $name;
+        } 
+      }
+    }
+    return($ret);
   }
 
   function GetSubdirs($dir)
