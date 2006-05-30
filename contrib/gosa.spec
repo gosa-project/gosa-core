@@ -1,4 +1,4 @@
-# Some sort auf "detection" of suse
+# Some sort of "detection" of suse
 %{?suse_version:%define suse 1}
 %{!?suse_version:%define suse 0}
 
@@ -11,10 +11,10 @@
 #
 Summary: 		Web Based LDAP Administration Program 
 Name:			gosa
-Version: 		2.4
-Release:		2
+Version: 		2.5
+Release:		1
 License: 		GPL
-Source: 		ftp://oss.GONICUS.de/pub/gosa/beta/%{sourcename}.tar.bz2
+Source: 		ftp://oss.GONICUS.de/pub/gosa/%{sourcename}.tar.bz2
 URL: 			http://oss.GONICUS.de/project/?group_id=6
 Group: 			System/Administration
 Vendor:			GONICUS GmbH
@@ -23,7 +23,7 @@ Buildarch: 		noarch
 %if %{suse}
 Requires:		apache2,apache2-mod_php5,php5,php5-gd,php5-ldap,php5-mcrypt,php5-mysql,php5-imap,php5-iconv,php5-mbstring,php5-gettext,php5-posix,ImageMagick,perl-Crypt-SmbHash
 %else
-Requires: 		httpd,php,php-ldap,php-imap,perl-Crypt-SmbHash >= 0.02,ImageMagick
+Requires: 		httpd,php,php-ldap,php-imap,php-snmp,php-mysql,php-mbstring,perl-Crypt-SmbHash >= 0.02,ImageMagick
 %endif
 BuildRoot: 		%{_tmppath}/%{name}-%{version}-root
 BuildArch:		noarch
@@ -137,6 +137,11 @@ rm -rf %{buildroot}
 /etc/openldap/schema/gosa
 
 %changelog
+* Tue May 30 2006 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5
+- Updated RedHat dependencies
+- New upstream version
+- Spelling errors fixed ;)
+
 * Mon Dec 19 2005 Lars Scheiter <lars.scheiter@GONICUS.de> 2.4-2
 - Updated SuSE dependencies to php5
 
