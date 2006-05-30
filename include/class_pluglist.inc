@@ -120,9 +120,16 @@ class pluglist {
 					$plHeadline= $vars['plHeadline'];
 					$plDescription= $vars['plDescription'];
 
+
 					$index= $this->get_index($info['PATH']);
 					$image= get_template_path('images/'.$info['ICON']);
 					$href= "main.php?plug=$index&amp;reset=1";
+
+					if(!$vars){
+						$plHeadline 	= _("Unknown");
+						$plDescription 	= _("Unknown");
+						$href= "main.php?reset=1";
+					}
 
 					if ($this->check_access($info['ACL'])){
 
@@ -214,6 +221,17 @@ class pluglist {
 
 					$index= $this->get_index($info['PATH']);
 
+					$href = "main.php?plug=".$index."&amp;reset=1";
+
+					/* Check if class is available. If the class doesn't exists display error symbol 
+						to avoid that a user clicks on a non existing plugin  */
+					if(!$vars){
+						$plHeadline = $plDescription = _("Unknown");
+						$info['ICON'] = "error.png";
+						$href="main.php?reset=1";
+					}
+
+
 					if ($this->check_access($info['ACL'])){
 
 						/* Hm this looks doubled */
@@ -222,8 +240,8 @@ class pluglist {
 							$entries= $entries."</tr><tr>";
 							$col = 1;
 						}
-						$entries= $entries."<td class=\"iconmenu\" style=\"width:20%;\" onClick='location.href=\"main.php?plug=$index&amp;reset=1\"'".
-							"><a class=\"iconmenu\" href=\"main.php?plug=$index&amp;reset=1\">".
+						$entries= $entries."<td class=\"iconmenu\" style=\"width:20%;\" onClick='location.href=\"".$href."\"'".
+							"><a class=\"iconmenu\" href=\"".$href."\">".
 							"<img $isize border=0 align=middle src=\"$image".
 							"\" alt=\"*\">&nbsp;".
 							_($plHeadline)."</a></td>\n";
