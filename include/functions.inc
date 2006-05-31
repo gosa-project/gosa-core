@@ -295,7 +295,7 @@ function ldap_init ($server, $base, $binddn='', $pass='')
 
   /* Sadly we've no proper return values here. Use the error message instead. */
   if (!preg_match("/Success/i", $ldap->error)){
-    echo sprintf(_("FATAL: Error when connecting the LDAP. Server said '%s'."), $ldap->get_error()));
+    echo sprintf(_("FATAL: Error when connecting the LDAP. Server said '%s'."), $ldap->get_error());
     exit();
   }
 
