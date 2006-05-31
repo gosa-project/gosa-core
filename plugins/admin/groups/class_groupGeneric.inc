@@ -421,6 +421,7 @@ class group extends plugin
       }
     }
     if(!empty($filter)){    
+      $ldap->cd($this->config->current['BASE']);
       $ldap->search("(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(|".$filter."))",array("uid","sn","givenName"));
       while($attrs = $ldap->fetch()){
         $this->members[$attrs['uid'][0]] = $this->createResultName($attrs);
