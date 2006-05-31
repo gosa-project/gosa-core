@@ -35,7 +35,7 @@
     </tr>
     <tr>
      <td>{t}Quota size{/t}</td>
-     <td><input id="gosaMailQuota" name="gosaMailQuota" size="6" align=middle maxlength="30" {$gosaMailQuotaACL} value="{$gosaMailQuota}"> KB</td>
+     <td><input id="gosaMailQuota" name="gosaMailQuota" size="6" align=middle maxlength="30" {$gosaMailQuotaACL} value="{$gosaMailQuota}"> MB</td>
     </tr>
    </table>
      
