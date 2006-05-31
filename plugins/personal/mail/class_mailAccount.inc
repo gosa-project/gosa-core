@@ -949,6 +949,24 @@ class mailAccount extends plugin
     }
 
   }
+
+  function allow_remove()
+  {
+    if (isset($this->config->current['MAILMETHOD'])){
+      $method= $this->config->current['MAILMETHOD'];
+      if(preg_match("/kolab/i",$method)){
+        $ldap = $this->config->get_ldap_link();
+        $ldap->cd($this->config->current['BASE']);
+        $ldap->cat($this->dn);
+        if($ldap->count()){
+          $attrs = $ldap->fetch();
+          if((isset($attrs['kolabDeleteFlag'])) || (in_array("gosaMailAccount",$attrs['objectClass']))){
+            return("Waiting for kolabd to remove mail properties");
+          }
+        }
+      }
+    }
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
