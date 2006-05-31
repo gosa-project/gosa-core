@@ -273,6 +273,22 @@ class faiPackage extends plugin
       $this->is_dialog =true;
     }
 
+    /* Configuration dialog open*/
+    if((isset($_POST['Markpkg']))&&(isset($_POST['usedPackages']))&&(!empty($_POST['usedPackages']))){
+      foreach($_POST['usedPackages'] as $pkg){
+        if (isset($this->usedPackages[$pkg])){
+          unset($this->usedPackages[$pkg]);
+          if (preg_match('/^-/', $pkg)){
+            $pkg= preg_replace('/^-/', '', $pkg);
+          } else {
+            $pkg= preg_replace('/^/', '-', $pkg);
+          }
+          $this->usedPackages[$pkg]= $pkg;
+        }
+      }
+      print_a($this->usedPackages);
+    }
+
     /* Save Configuration */
     if(isset($_POST['SaveObjectConfig'])){
       if($this->FAIstate != "freeze"){
@@ -378,10 +394,17 @@ class faiPackage extends plugin
           $c_str = " - "._("package is configured");
         }
 
+        /* Adapt used name if we're marked for removal */
+        $dsc= "";
+        if (preg_match('/^-/', $usedName)){
+          $dsc= " - "._("Package marked for removal");
+          $usedName= preg_replace('/^-/', '! ', $usedName);
+        }
+
         if(isset($this->list[$usedName][1])){
-          $a_ret[$usedName] = $usedName." [".$this->list[$usedName][1]."]".$c_str;
+          $a_ret[$usedName] = $usedName." [".$this->list[$usedName][1]."]".$c_str.$dsc;
         }else{
-          $a_ret[$usedName] = $usedName.$c_str;
+          $a_ret[$usedName] = $usedName.$c_str.$dsc;
         }
       }
     }
