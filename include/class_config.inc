@@ -193,9 +193,11 @@ class config  {
 
     /* Check for connection */
     if (is_null($this->ldap) || (is_int($this->ldap) && $this->ldap == 0)){
+      $smarty= get_smarty();
       print_red (_("Can't bind to LDAP. Please contact the system administrator."));
-      echo $_SESSION['errors'];
-      exit;
+      $smarty->display (get_template_path('headers.tpl'));
+      echo '<body style="background-image:none">'.$_SESSION['errors'].'</body></html>';
+      exit();
     }
 
     if (!isset($_SESSION['size_limit'])){

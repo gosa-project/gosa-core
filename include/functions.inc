@@ -295,12 +295,8 @@ function ldap_init ($server, $base, $binddn='', $pass='')
 
   /* Sadly we've no proper return values here. Use the error message instead. */
   if (!preg_match("/Success/i", $ldap->error)){
-    print_red(sprintf(_("Error when connecting the LDAP. Server said '%s'."),
-          $ldap->get_error()));
-    echo $_SESSION['errors'];
-
-    /* Hard error. We'd like to use the LDAP, anyway... */
-    exit;
+    echo sprintf(_("FATAL: Error when connecting the LDAP. Server said '%s'."), $ldap->get_error()));
+    exit();
   }
 
   /* Preset connection base to $base and return to caller */
@@ -317,8 +313,10 @@ function ldap_login_user ($username, $password)
   $ldap = $config->get_ldap_link();
   if (!preg_match("/Success/i", $ldap->error)){
     print_red(sprintf(_("User login failed. LDAP server said '%s'."), $ldap->get_error()));
-    echo $_SESSION['errors'];
-    exit;
+    $smarty= get_smarty();
+    $smarty->display(get_template_path('headers.tpl'));
+    echo "<body>".$_SESSION['errors']."</body></html>";
+    exit();
   }
   $ldap->cd($config->current['BASE']);
   $ldap->search("(&(uid=$username)(objectClass=gosaAccount))", array("uid"));

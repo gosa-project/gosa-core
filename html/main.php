@@ -100,7 +100,6 @@ if(empty($_SESSION['_LAST_PAGE_REQUEST'])){
     header ("Location: logout.php");
     exit;
   }
-//  echo "Session was ".$request_time." s inactive";
   $_SESSION['_LAST_PAGE_REQUEST'] = time();
 }
 
@@ -157,8 +156,7 @@ $plist= $_SESSION['plist'];
 
 /* Check for register globals */
 if (isset($global_check) && $config->data['MAIN']['FORCEGLOBALS'] == 'true'){
-  print_red (_("Register globals is on. GOsa will refuse to login unless this is fixed by an administrator."));
-  echo $_SESSION['errors'];
+  echo _("FATAL: Register globals is on. GOsa will refuse to login unless this is fixed by an administrator.");
   gosa_log ("Register globals is on. For security reasons, this should be turned off.");
   session_destroy ();
   exit ();
@@ -335,8 +333,7 @@ if (isset ($_SESSION['post_cnt'])){
 if (is_file("$plugin_dir/main.inc")){
   require_once ("$plugin_dir/main.inc");
 } else {
-  print_red(sprintf(_("Can't find any plugin definitions for plugin '%s'!"), $plug));
-  echo $_SESSION['errors'];
+  echo sprintf(_("FATAL: Can't find any plugin definitions for plugin '%s'!"), $plug);
   exit();
 }
 
@@ -355,8 +352,7 @@ if (is_file("$plugin_dir/main.inc")){
       }
   }
   
-/* Print_out last ErrorMessage repeated string.
- */
+/* Print_out last ErrorMessage repeated string. */
 print_red(NULL);
 
 $smarty->assign("contents", $display);

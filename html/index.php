@@ -23,6 +23,65 @@ require_once ("../include/php_setup.inc");
 require_once ("functions.inc");
 header("Content-type: text/html; charset=UTF-8");
 
+function displayLogin()
+{
+  global $smarty,$message,$config,$ssl,$error_collector;
+  error_reporting(E_ALL);
+    /* Fill template with required values */
+    $username = "";
+    if(isset($_POST["username"])){
+      $username= $_POST["username"];
+    }
+    $smarty->assign ('date', gmdate("D, d M Y H:i:s"));
+    $smarty->assign ('username', $username);
+    $smarty->assign ('personal_img', get_template_path('images/personal.png'));
+    $smarty->assign ('password_img', get_template_path('images/password.png'));
+    $smarty->assign ('directory_img', get_template_path('images/ldapserver.png'));
+
+    /* Some error to display? */
+    if (!isset($message)){
+      $message= "";
+    }
+    $smarty->assign ("message", $message);
+
+    /* Displasy SSL mode warning? */
+    if ($ssl != "" && $config->data['MAIN']['WARNSSL'] == 'true'){
+      $smarty->assign ("ssl", "<b>"._("Warning").":</b> "._("Session will not be encrypted.")." <a style=\"color:red;\" href=\"$ssl\"><b>"._("Enter SSL session")."</b></a>!");
+    } else {
+      $smarty->assign ("ssl", "");
+    }
+
+    /* Generate server list */
+    $servers= array();
+    if (isset($_POST['server'])){
+      $selected= validate($_POST['server']);
+    } else {
+      $selected= $config->data['MAIN']['DEFAULT'];
+    }
+    foreach ($config->data['LOCATIONS'] as $key => $ignored){
+      $servers[$key]= $key;
+    }
+    $smarty->assign ("server_options", $servers);
+    $smarty->assign ("server_id", $selected);
+
+    /* show login screen */
+    $smarty->assign ("PHPSESSID", session_id());
+    if (isset($_SESSION['errors'])){
+      $smarty->assign("errors", $_SESSION['errors']);
+    }
+    if ($error_collector != ""){
+      $smarty->assign("php_errors", $error_collector."</div>");
+    } else {
+      $smarty->assign("php_errors", "");
+    }
+
+    $smarty->display (get_template_path('headers.tpl'));
+    $smarty->display(get_template_path('login.tpl'));
+    exit();
+}
+
+
+
 /* Set error handler to own one, initialize time calculation
    and start session. */
 session_start ();
@@ -142,8 +201,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
   $ldap = $config->get_ldap_link();
   if (is_null($ldap) || (is_int($ldap) && $ldap == 0)){
     print_red (_("Can't bind to LDAP. Please contact the system administrator."));
-    echo $_SESSION['errors'];
-    $smarty->display(get_template_path('login.tpl'));
+    displayLogin();
     exit();
   }
 
@@ -155,7 +213,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
     require_once("functions_setup.inc");
     if(!is_schema_readable($config->current['SERVER'],$config->current['ADMIN'],$config->current['PASSWORD'])){
       print_red(_("GOsa cannot retrieve information about the installed schema files. Please make sure, that this is possible."));
-      echo $_SESSION['errors'];
+      $smarty->display(get_template_path('headers.tpl'));
+      echo "<body>".$_SESSION['errors']."</body></html>";
       exit();
     }else{
       $str = (schema_check($config->current['SERVER'],$config->current['ADMIN'],$config->current['PASSWORD'],0,TRUE));
@@ -163,7 +222,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
       foreach($str as $tr){
         if(isset($tr['needonstartup'])){
           print_red($tr['msg']."<br>"._("Your ldap setup contains old schema definitions. Please re-run the setup."));
-          print $_SESSION['errors'];
+          $smarty->display(get_template_path('headers.tpl'));
+          echo "<body>".$_SESSION['errors']."</body></html>";
           exit();
         }
       }
@@ -301,71 +361,7 @@ if ($error_collector != ""){
 } else {
   $smarty->assign("php_errors", "");
 }
-$smarty->display (get_template_path('login.tpl'));
-
-
-
-
-
-
-
-function displayLogin()
-{
-  global $smarty,$message,$config,$ssl,$error_collector;
-  error_reporting(E_ALL);
-    /* Fill template with required values */
-    $username = "";
-    if(isset($_POST["username"])){
-      $username= $_POST["username"];
-    }
-    $smarty->assign ('date', gmdate("D, d M Y H:i:s"));
-    $smarty->assign ('username', $username);
-    $smarty->assign ('personal_img', get_template_path('images/personal.png'));
-    $smarty->assign ('password_img', get_template_path('images/password.png'));
-    $smarty->assign ('directory_img', get_template_path('images/ldapserver.png'));
-
-    /* Some error to display? */
-    if (!isset($message)){
-      $message= "";
-    }
-    $smarty->assign ("message", $message);
-
-    /* Displasy SSL mode warning? */
-    if ($ssl != "" && $config->data['MAIN']['WARNSSL'] == 'true'){
-      $smarty->assign ("ssl", "<b>"._("Warning").":</b> "._("Session will not be encrypted.")." <a style=\"color:red;\" href=\"$ssl\"><b>"._("Enter SSL session")."</b></a>!");
-    } else {
-      $smarty->assign ("ssl", "");
-    }
-
-    /* Generate server list */
-    $servers= array();
-    if (isset($_POST['server'])){
-      $selected= validate($_POST['server']);
-    } else {
-      $selected= $config->data['MAIN']['DEFAULT'];
-    }
-    foreach ($config->data['LOCATIONS'] as $key => $ignored){
-      $servers[$key]= $key;
-    }
-    $smarty->assign ("server_options", $servers);
-    $smarty->assign ("server_id", $selected);
-
-    /* show login screen */
-    $smarty->display (get_template_path('headers.tpl'));
-    $smarty->assign ("PHPSESSID", session_id());
-    if (isset($_SESSION['errors'])){
-      $smarty->assign("errors", $_SESSION['errors']);
-    }
-    if ($error_collector != ""){
-      $smarty->assign("php_errors", $error_collector."</div>");
-    } else {
-      $smarty->assign("php_errors", "");
-    }
-
-    $smarty->display(get_template_path('login.tpl'));
-    exit();
-}
-
+displayLogin();
 
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
