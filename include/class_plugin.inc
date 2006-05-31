@@ -972,6 +972,14 @@ class plugin
     
   }
 
+
+  /* Add possibility to stop remove process */
+  function allow_remove()
+  {
+    $reason= "";
+    return $reason;
+  }
+
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

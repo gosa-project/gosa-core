@@ -175,6 +175,15 @@ class tabs
 
   function delete()
   {
+	/* Check if all plugins will ACK for deletion */
+	foreach (array_reverse($this->by_object) as $key => $obj){
+		$reason= $obj->allow_remove();
+		if ($reason != ""){
+			print_red(sprintf(_("Delete process has been canceled by plugin '%s': %s"), $key, $reason));
+			return;
+		}
+	}
+
 	/* Delete for all plugins */
 	foreach (array_reverse($this->by_object) as $key => $obj){
 		$obj->remove_from_parent();
