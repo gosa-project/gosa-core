@@ -59,7 +59,7 @@ class mailAccount extends plugin
   /* attribute list for save action */
   var $attributes= array("mail", "gosaMailServer", "gosaMailQuota", "gosaMailMaxSize","gosaMailForwardingAddress",
       "gosaMailDeliveryMode", "gosaSpamSortLevel", "gosaSpamMailbox","gosaMailAlternateAddress",
-      "gosaVacationMessage", "uid", "gosaMailAlternateAddress", "gosaMailForwardingAddress");
+      "gosaVacationMessage", "gosaMailAlternateAddress", "gosaMailForwardingAddress");
   var $objectclasses= array("gosaMailAccount");
 
 
@@ -70,11 +70,11 @@ class mailAccount extends plugin
     /* Load bases attributes */
     plugin::plugin($config, $dn);
 
-    
-    /**********************
-      Set mailMethod to the one defined in gosa.conf 
-     **********************/
-
+    if(isset($this->attrs['uid'])){
+      $this->uid = $this->attrs['uid'];
+    }
+ 
+    /*  Set mailMethod to the one defined in gosa.conf */
     if (isset($this->config->current['MAILMETHOD'])){
       $method= $this->config->current['MAILMETHOD'];
       if (class_exists("mailMethod$method")){
@@ -85,9 +85,7 @@ class mailAccount extends plugin
     }
 
     
-    /**********************
-      Create the account prefix  user. user/ 
-     **********************/
+    /* Create the account prefix  user. user/ */
 
     /* Preset folder prefix. Will change it later to respect
        altnamespace. */
@@ -98,9 +96,7 @@ class mailAccount extends plugin
     }
 
     
-    /**********************
-      This is not a new account, parse additional attributes 
-     **********************/
+    /* This is not a new account, parse additional attributes */
 
     #FIXME i think is_account would be enough
     if (($dn != NULL) && ($dn != "new") && $this->is_account){
@@ -123,9 +119,7 @@ class mailAccount extends plugin
       $this->initially_was_account= $this->is_account;
 
 
-      /********************** 
-        If there is a server defined, connect and get some more infos 
-       **********************/
+      /* If there is a server defined, connect and get some more infos */
 
       /* Only do IMAP actions if gosaMailServer attribute is set */
       if (isset ($this->attrs["gosaMailServer"][0])){
@@ -141,7 +135,6 @@ class mailAccount extends plugin
           $quota= $method->getQuota($this->folder_prefix.$this->$id);
           
           if($quota){
-
             if ($quota['gosaMailQuota'] == 2147483647){
               $this->quotaUsage     = "";
               $this->gosaMailQuota  = "";
@@ -152,7 +145,6 @@ class mailAccount extends plugin
           }else{
             print_red(sprintf(_("Can't get quota for for '%s'."),$this->folder_prefix.$this->$id));
           }
-          
 
           /* Get mailboxes / folder like INBOX ..*/
           $this->mailboxList= $method->getMailboxList($this->folder_prefix.$this->$id,$this->$id);
@@ -169,9 +161,7 @@ class mailAccount extends plugin
     }
 
 
-    /********************** 
-      Get vacation message 
-     **********************/
+    /* Get vacation message */
 
     /* Fill vacation array */
     $this->vacation= array();
@@ -192,9 +182,7 @@ class mailAccount extends plugin
     }
 
 
-  /********************** 
-    Create filter  
-   **********************/
+  /* Create filter */
 
     /* Get global filter config */
     if (!is_global("mailfilter")){
@@ -231,27 +219,26 @@ class mailAccount extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
+
+    /* Initialise vars */
 
     /* Load templating engine */
     $smarty= get_smarty();
     $display= "";
 
+    /* Get available mailserver */
     $mailserver= array();
     foreach ($this->config->data['SERVERS']['IMAP'] as $key => $val){
       $mailserver[]= $key;
     }
+
+    /* Handle account state */
 
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
       $this->is_account= !$this->is_account;
-    }
-
-    /* Show main page */
-    $mailserver= array();
-    foreach ($this->config->data['SERVERS']['IMAP'] as $key => $val){
-      $mailserver[]= $key;
     }
 
     /* Do we represent a valid account? */
@@ -273,6 +260,9 @@ class mailAccount extends plugin
         return ($display);
       }
     }
+
+
+    /* Forwarder  subdialog */
 
     /* Trigger forward add dialog? */
     if (isset($_POST['add_local_forwarder'])){
@@ -349,6 +339,9 @@ class mailAccount extends plugin
       }
     }
 
+    
+    /* Alternate address handling */
+
     /* Add alternate email addresses */
     if (isset($_POST['add_alternate'])){
       if ($_POST['alternate_address'] != "" &&
@@ -388,6 +381,9 @@ class mailAccount extends plugin
       }
     }
 
+  
+    /* Vocation message */
+  
     /* Import vacation message? */
     if (isset($_POST["import_vacation"]) && isset($this->vacation[$_POST["vacation_template"]])){
       $contents= "";
@@ -408,6 +404,9 @@ class mailAccount extends plugin
       /* Save message */
       $this->gosaVacationMessage= htmlspecialchars($contents);
     }
+
+  
+    /* Display forward dialog if requested above */
 
     /* Show forward add dialog */
     if ($this->forward_dialog){
@@ -492,6 +491,8 @@ class mailAccount extends plugin
       return ($display);
     }
 
+    /* Display mail account tab */
+
     $smarty->assign("mailServers", $mailserver);
     foreach(array("gosaMailServer", "gosaMailQuota", "perms", "mail",
           "gosaMailAlternateAddress", "gosaMailForwardingAddress",
@@ -515,12 +516,29 @@ class mailAccount extends plugin
       $smarty->assign("mailACL", "disabled");
     }
 
-    /* Fill checkboxes */
+
     if (!preg_match("/L/", $this->gosaMailDeliveryMode)) {
       $smarty->assign("drop_own_mails", "checked");
     } else {
       $smarty->assign("drop_own_mails", "");
     }
+
+    $types = array(
+          "V"=>"use_vacation",
+          "S"=>"use_spam_filter",
+          "R"=>"use_mailsize_limit",
+          "I"=>"only_local",
+          "C"=>"own_script");
+
+    /* Fill checkboxes */
+    foreach($types as $option => $varname){
+      if (preg_match("/".$option."/", $this->gosaMailDeliveryMode)) {
+        $smarty->assign($varname, "checked");
+      } else {
+        $smarty->assign($varname, "");
+      }
+    }
+    
     if (preg_match("/V/", $this->gosaMailDeliveryMode)) {
       $smarty->assign("use_vacation", "checked");
     } else {
@@ -596,15 +614,7 @@ class mailAccount extends plugin
     $method= new $this->method($this->config);
     $method->fixAttributesOnRemove($this);
 
-    /* Mailmethod wants us to remove the entry from LDAP. Keep uid! */
-    #fixme: || kolab || is differs here, you can't delete all attrs specified in this plugin .... 
-    #fixme: there are some attributes we have to keep, i think.
-    unset ($this->attrs['uid']);
-
-
-
-    @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
-        $this->attributes, "Save");
+    @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,$this->attributes, "Save");
     $ldap->cd($this->dn);
     $this->cleanup();
     $ldap->modify ($this->attrs); 
@@ -711,7 +721,7 @@ class mailAccount extends plugin
     $ldap->cd($this->dn);
     $this->cleanup();
     $ldap->modify ($this->attrs); 
-      
+
     show_ldap_error($ldap->get_error(), _("Saving mail account failed"));
 
     /* Only do IMAP actions if we are not a template */
