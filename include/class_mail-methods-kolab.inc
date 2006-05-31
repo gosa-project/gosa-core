@@ -50,12 +50,14 @@ class mailMethodKolab extends mailMethodCyrus
   }
 
 
-  /* Get quota and divide it by 1024, because in gosa we display in Kb
-      but we get bytes */
+  /* Get quota and divide it by 1024, because in gosa we display in MB
+      but we get Kb */
   function getQuota($folder)
   {
     $result= array('quotaUsage' => '', 'gosaMailQuota' => '');
-
+        
+    error_reporting(0);  
+  
     /* Load quota settings */
     $quota_value = @imap_get_quota($this->mbox, $folder);
     if(is_array($quota_value)) {
@@ -72,6 +74,8 @@ class mailMethodKolab extends mailMethodCyrus
       return(false);
     }
 
+    error_reporting(E_ALL); 
+ 
     return ($result);
   }
 
@@ -109,6 +113,12 @@ class mailMethodKolab extends mailMethodCyrus
   function fixAttributesOnStore(&$mailObject)
   {
     global $config;
+  
+    /* If quota is empty, remove quota restrictions by setting quota to 0 */
+    if(isset($mailObject->gosaMailQuota) && (empty($mailObject->gosaMailQuota))){
+      $mailObject->attrs['gosaMailQuota'] = 0;
+    }
+
     /* Convert attributes and objectClasses */
     foreach ($this->attribute_map as $source => $dest){
       if (isset($mailObject->attrs[$source])){

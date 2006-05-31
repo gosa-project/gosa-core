@@ -128,7 +128,7 @@ class mailAccount extends plugin
 
           /* Update quota values */
           $quota= $method->getQuota($this->folder_prefix.$this->$id);
-          
+         
           if($quota){
             if ($quota['gosaMailQuota'] == 2147483647){
               $this->quotaUsage     = "";
@@ -138,6 +138,8 @@ class mailAccount extends plugin
               $this->gosaMailQuota  = $quota['gosaMailQuota'];
             }
           }else{
+            $this->quotaUsage     = "";
+            $this->gosaMailQuota  = "";
             print_red(sprintf(_("Can't get quota for for '%s'."),$this->folder_prefix.$this->$id));
           }
 
@@ -699,11 +701,12 @@ class mailAccount extends plugin
     /* Adapt attributes if needed */
     $method= new $this->method($this->config);
     $id= $method->uattrib;
+
     $method->fixAttributesOnStore($this);
 
-    /* Remove Mailquota if = "" */
-    if((isset($this->attrs['gosaMailQuota']))&&($this->attrs['gosaMailQuota']=="")) {
-      $this->attrs['gosaMailQuota']=array();
+    /* Remove Mailquota if = "" or "0"  */
+    if((isset($this->attrs['gosaMailQuota']))&&(!$this->attrs['gosaMailQuota'])) {
+      $this->attrs['gosaMailQuota']=0;
     }
 
     if(empty($this->attrs['gosaSpamMailbox'])){
