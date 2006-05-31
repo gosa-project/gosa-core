@@ -1,9 +1,6 @@
 Target for 2.5:
 ===============
 
-* Add online help (english/german)
-  Document how to generate it, generate it and check it in
-
 * Enhance the export xls to export the whole three with a maximum of attributes in each sheet ( OpenSides )
 
 * Enhance the pptp plugin (OpenSides ) 
