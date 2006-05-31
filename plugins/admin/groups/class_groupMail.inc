@@ -112,10 +112,7 @@ class mailgroup extends plugin
         $method= new $this->method($this->config);
 
         if ($method->connect($this->attrs["gosaMailServer"][0])){
-
-          /*  get Quota
-           */
-          $quota= $method->getQuota($this->uid);
+        
 
           /* Maybe the entry is not saved in new style, get
              permissions from IMAP and convert them to acl attributes */
@@ -154,20 +151,29 @@ class mailgroup extends plugin
             }
 
           } // ENDE ! isset ($this->attrs['acl'])
+          
+          /* Adapt attributes if needed */
+          $method->fixAttributesOnLoad($this);
+          
+          /*  get Quota */
+          $quota= $method->getQuota($this->uid);
 
           /* Update quota values */
-          if ($quota['gosaMailQuota'] == 2147483647){
-            $this->quotaUsage= "";
-            $this->gosaMailQuota= "";
-          } else {
-            $this->quotaUsage= $quota['quotaUsage'];
-            $this->gosaMailQuota= $quota['gosaMailQuota'];
+          if(is_array($quota)){
+            if ($quota['gosaMailQuota'] == 2147483647){
+              $this->quotaUsage= "";
+              $this->gosaMailQuota= "";
+            } else {
+              $this->quotaUsage= $quota['quotaUsage'];
+              $this->gosaMailQuota= $quota['gosaMailQuota'];
+            }
+          }else{
+            $this->quotaUsage     = "";
+            $this->gosaMailQuota  = "";
+            print_red(sprintf(_("Can't get quota for for '%s'."),$this->uid));
           }
           $method->disconnect();
         }   // ENDE $method->connect($this->attrs["gosaMailServer"][0])){
-
-        /* Adapt attributes if needed */
-        $method->fixAttributesOnLoad($this);
 
       }   // ENDE gosaMailServer
 
@@ -690,15 +696,7 @@ I: Only insider delivery */
     /* Save arrays */
     $this->attrs['gosaMailAlternateAddress']  = $this->gosaMailAlternateAddress;
     $this->attrs['gosaMailForwardingAddress'] = $this->gosaMailForwardingAddress;
-
-    /* Save shared folder target */
-    if(preg_match("/kolab/i",$this->mmethod)){
-      /* Kolab style */
-      $this->attrs['gosaSharedFolderTarget']= "kolab+shared.".$this->uid;
-    }else {
-      /* GOsa style */
-      $this->attrs['gosaSharedFolderTarget']= "share+".$this->uid;
-    }
+    $this->attrs['gosaSharedFolderTarget']    = "share+".$this->uid;
 
     if(preg_match("/kolab/i",$this->mmethod)){
       /* Save acl's */

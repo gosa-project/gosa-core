@@ -55,7 +55,7 @@ class mailMethodKolab extends mailMethodCyrus
   function getQuota($folder)
   {
     $result= array('quotaUsage' => '', 'gosaMailQuota' => '');
-        
+
     error_reporting(0);  
   
     /* Load quota settings */
@@ -82,6 +82,11 @@ class mailMethodKolab extends mailMethodCyrus
 
   function fixAttributesOnLoad(&$mailObject)
   {
+    /* Kolab shared folder names are like ' shared.uid@server.de ' 
+        So overwrite uid to match these folder names. Else we can't read quota settings etc. 
+        #FIXME is there a better way to detect if it is 'shared.' or 'shared+' or 'kolab+shared.' or what ever ?*/
+    $mailObject->uid = "shared.".$mailObject->uid."@".preg_replace("/^.*@/","",$mailObject->mail);
+
     /* Convert attributes and objectClasses */
     foreach ($this->attribute_map as $dest => $source){
       /* Hickert 11.11.05 : Alternate email addresses were saved, but not displayed again.
@@ -196,6 +201,14 @@ class mailMethodKolab extends mailMethodCyrus
           }
         }
       }
+ 
+      /* Save shared folder target */
+      $mailObject->attrs['gosaSharedFolderTarget']= "kolab+shared.".$mailObject->uid;
+
+      /* Kolab shared folder names are like ' shared.uid@server.de ' 
+        So overwrite uid to match these folder names. Else we can't read quota settings etc. 
+        #FIXME is there a better way to detect if it is 'shared.' or 'shared+' or 'kolab+shared.' or what ever ?*/
+      $mailObject->uid = "shared.".$mailObject->uid."@".preg_replace("/^.*@/","",$mailObject->mail);
   
       /* Assign new acls */
       $mailObject->attrs['acl']= array();
