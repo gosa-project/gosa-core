@@ -70,12 +70,12 @@ class mailMethodCyrus extends mailMethod
     if(is_array($quota_value)) {
       if (isset($quota_value["STORAGE"]) && is_array($quota_value["STORAGE"])){
         /* use for PHP >= 4.3 */
-        $result['quotaUsage']=    $quota_value["STORAGE"]['usage'];
-        $result['gosaMailQuota']= $quota_value["STORAGE"]['limit'];
+        $result['quotaUsage']=    (int) ($quota_value["STORAGE"]['usage'] / 1024);
+        $result['gosaMailQuota']= (int) ($quota_value["STORAGE"]['limit'] / 1024);
       } else {
         /* backward icompatible */
-        $result['quotaUsage']=    $quota_value['usage'];
-        $result['gosaMailQuota']= $quota_value['limit'];
+        $result['quotaUsage']=    (int) ($quota_value['usage'] / 1024);
+        $result['gosaMailQuota']= (int) ($quota_value['limit'] / 1024);
       }
     }elseif(!$quota_value){
       return(false);
@@ -126,8 +126,11 @@ class mailMethodCyrus extends mailMethod
     /* Workaround for the php imap extension */
     if ($gosaMailQuota == ""){
       $gosaMailQuota= "2147483647";
+    }elseif($gosaMailQuota > 0){
+      $gosaMailQuota = $gosaMailQuota *1024;
     }
-
+    
+    
     /* Write mail quota */
     if (!imap_set_quota($this->mbox, $folder, $gosaMailQuota)){
       print_red(sprintf(_("Can't write IMAP quota. Server says '%s'."), imap_last_error()));
