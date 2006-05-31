@@ -19,39 +19,42 @@ get_dir_list("$BASE_DIR/include");
 class mailAccount extends plugin
 {
   /* Definitions */
-  var $plHeadline= "Mail";
-  var $plDescription= "This does something";
-  var $method= "mailMethod";
+  var $plHeadline         = "Mail";
+  var $plDescription      = "This does something";
+  var $method             = "mailMethod";
 
   /* CLI vars */
-  var $cli_summary= "Manage users mail account";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
+  var $cli_summary        = "Manage users mail account";
+  var $cli_description    = "Some longer text\nfor help";
+  var $cli_parameters     = array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* plugin specific values */
-  var $mail= "";
-  var $uid= "";
-  var $gosaMailAlternateAddress= array();
-  var $gosaMailForwardingAddress= array();
-  var $gosaMailDeliveryMode= "[L        ]";
-  var $gosaMailServer= "";
-  var $gosaMailQuota= "";
-  var $gosaMailMaxSize= "";
-  var $gosaVacationMessage= "";
-  var $gosaSpamSortLevel= "";
-  var $gosaSpamMailbox= "";
+  var $mail                               = "";
+  var $uid                                = "";
+  var $gosaMailAlternateAddress           = array();
+  var $gosaMailForwardingAddress          = array();
+  var $gosaMailDeliveryMode               = "[L        ]";
+  var $gosaMailServer                     = "";
+  var $gosaMailQuota                      = "";
+  var $gosaMailMaxSize                    = "";
+  var $gosaVacationMessage                = "";
+  var $gosaSpamSortLevel                  = "";
+  var $gosaSpamMailbox                    = "";
 
-  var $quotaUsage= 0;
-  var $forward_dialog= FALSE;
-  var $folder_prefix= "";
-  var $mailboxList= array();
-  var $default_permissions= "none";
-  var $member_permissions= "post";
-  var $members= array();
-  var $admins= array();
-  var $vacations= array();
-  var $perms= array( "lrs" => "read", "lrsp" => "post", "lrsip" => "append",
-      "lrswipcd" => "write", "lrswipcda" => "all" );
+  var $quotaUsage                         = 0;
+  var $forward_dialog                     = FALSE;
+  var $folder_prefix                      = "";
+  var $mailboxList                        = array();
+  var $default_permissions                = "none";
+  var $member_permissions                 = "post";
+  var $members                            = array();
+  var $admins                             = array();
+  var $vacations                          = array();
+  var $perms                              = array(  "lrs"       => "read", 
+                                                    "lrsp"      => "post", 
+                                                    "lrsip"     => "append",
+                                                    "lrswipcd"  => "write", 
+                                                    "lrswipcda" => "all" );
 
   /* attribute list for save action */
   var $attributes= array("mail", "gosaMailServer", "gosaMailQuota", "gosaMailMaxSize","gosaMailForwardingAddress",
@@ -64,13 +67,14 @@ class mailAccount extends plugin
      'dn' from LDAP */
   function mailAccount ($config, $dn= NULL)
   {
-    /* Configuration is fine, allways */
-    $this->config= $config;
-
     /* Load bases attributes */
     plugin::plugin($config, $dn);
 
-    /* Set mailMethod to the one defined in gosa.conf */
+    
+    /**********************
+      Set mailMethod to the one defined in gosa.conf 
+     **********************/
+
     if (isset($this->config->current['MAILMETHOD'])){
       $method= $this->config->current['MAILMETHOD'];
       if (class_exists("mailMethod$method")){
@@ -80,6 +84,11 @@ class mailAccount extends plugin
       }
     }
 
+    
+    /**********************
+      Create the account prefix  user. user/ 
+     **********************/
+
     /* Preset folder prefix. Will change it later to respect
        altnamespace. */
     if (isset($this->config->current['CYRUSUNIXSTYLE']) && $this->config->current['CYRUSUNIXSTYLE'] == "true"){
@@ -88,7 +97,13 @@ class mailAccount extends plugin
       $this->folder_prefix= "user.";
     }
 
-    if ($dn != NULL){
+    
+    /**********************
+      This is not a new account, parse additional attributes 
+     **********************/
+
+    #FIXME i think is_account would be enough
+    if (($dn != NULL) && ($dn != "new") && $this->is_account){
 
       /* Load attributes containing arrays */
       foreach (array("gosaMailAlternateAddress", "gosaMailForwardingAddress") as $val){
@@ -100,28 +115,48 @@ class mailAccount extends plugin
         }
       }
 
+      if(is_array($this->gosaMailServer) && isset($this->gosaMailServer[0])){
+        $this->gosaMailServer = $this->gosaMailServer[0];
+      }
+
+      /* Save initial account state */
+      $this->initially_was_account= $this->is_account;
+
+
+      /********************** 
+        If there is a server defined, connect and get some more infos 
+       **********************/
+
       /* Only do IMAP actions if gosaMailServer attribute is set */
       if (isset ($this->attrs["gosaMailServer"][0])){
 
-        $method= new $this->method($this->config);
-        $id= $method->uattrib;
+        $method = new $this->method($this->config);
+        $id     = $method->uattrib;
 
         /* Adapt attributes if needed */
         $method->fixAttributesOnLoad($this);
         if ($method->connect($this->attrs["gosaMailServer"][0])){
-          $quota= $method->getQuota($this->folder_prefix.$this->$id);
 
           /* Update quota values */
-          if ($quota['gosaMailQuota'] == 2147483647){
-            $this->quotaUsage= "";
-            $this->gosaMailQuota= "";
-          } else {
-            $this->quotaUsage= $quota['quotaUsage'];
-            $this->gosaMailQuota= $quota['gosaMailQuota'];
+          $quota= $method->getQuota($this->folder_prefix.$this->$id);
+          
+          if($quota){
+
+            if ($quota['gosaMailQuota'] == 2147483647){
+              $this->quotaUsage     = "";
+              $this->gosaMailQuota  = "";
+            } else {
+              $this->quotaUsage     = $quota['quotaUsage'];
+              $this->gosaMailQuota  = $quota['gosaMailQuota'];
+            }
+          }else{
+            print_red(sprintf(_("Can't get quota for for '%s'."),$this->folder_prefix.$this->$id));
           }
-          $this->mailboxList= $method->getMailboxList(
-              $this->folder_prefix.$this->$id,
-              $this->$id);
+          
+
+          /* Get mailboxes / folder like INBOX ..*/
+          $this->mailboxList= $method->getMailboxList($this->folder_prefix.$this->$id,$this->$id);
+          
           $method->disconnect();
         }else{
           /* Could not connect to ldap.
@@ -132,6 +167,11 @@ class mailAccount extends plugin
         }
       }
     }
+
+
+    /********************** 
+      Get vacation message 
+     **********************/
 
     /* Fill vacation array */
     $this->vacation= array();
@@ -151,6 +191,11 @@ class mailAccount extends plugin
       }
     }
 
+
+  /********************** 
+    Create filter  
+   **********************/
+
     /* Get global filter config */
     if (!is_global("mailfilter")){
       $ui= get_userinfo();
@@ -160,13 +205,6 @@ class mailAccount extends plugin
           "regex"           => "*");
       register_global("mailfilter", $mailfilter);
     }
-
-    if(is_array($this->gosaMailServer) && isset($this->gosaMailServer[0])){
-      $this->gosaMailServer = $this->gosaMailServer[0];
-    }
-
-    /* Save initial account state */
-    $this->initially_was_account= $this->is_account;
   }
 
 
@@ -673,7 +711,7 @@ class mailAccount extends plugin
     $ldap->cd($this->dn);
     $this->cleanup();
     $ldap->modify ($this->attrs); 
-  
+      
     show_ldap_error($ldap->get_error(), _("Saving mail account failed"));
 
     /* Only do IMAP actions if we are not a template */

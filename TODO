@@ -17,8 +17,6 @@ Target for 2.5:
 * Change FAIstate when triggering actions
   (install, sysinfo, softupdate)
 
-* Fix hotplug device adding -> multi[] select
-
 * Fix error messages on login
 
 * Fix DNS plugin

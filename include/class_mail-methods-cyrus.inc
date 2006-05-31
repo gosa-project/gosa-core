@@ -77,9 +77,11 @@ class mailMethodCyrus extends mailMethod
         $result['quotaUsage']=    $quota_value['usage'];
         $result['gosaMailQuota']= $quota_value['limit'];
       }
+    }elseif(!$quota_value){
+      return(false);
     }
+ 
     error_reporting (E_ALL);
-
     return ($result);
   }
 
