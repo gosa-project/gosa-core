@@ -52,7 +52,6 @@
 						</select>
 						{if $allow_mounts == TRUE}
 							<br><br><input type="checkbox" name="netatalk_mount" id="netatalk_mount" {$mount_checked} {$appleMountsACL}/><label for="netatalk_mount">{t}Auto-mount share on Apple systems{/t}</label>
-							{if $appleMountsACLset == FALSE}
 								{literal}
 									<script language="JavaScript">
 										document.getElementById('sharetype').onchange=function() {
@@ -77,7 +76,6 @@
 									 	document.getElementById('sharetype').onchange();
 									</script>
 								{/literal}
-							{/if}
 							<br>
 							<br>
 						{/if}
