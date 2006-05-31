@@ -70,12 +70,22 @@ class mailMethodCyrus extends mailMethod
     if(is_array($quota_value)) {
       if (isset($quota_value["STORAGE"]) && is_array($quota_value["STORAGE"])){
         /* use for PHP >= 4.3 */
-        $result['quotaUsage']=    (int) ($quota_value["STORAGE"]['usage'] / 1024);
-        $result['gosaMailQuota']= (int) ($quota_value["STORAGE"]['limit'] / 1024);
+        if($quota_value["STORAGE"]['limit'] == 2147483647){
+          $result['quotaUsage']=    (int) ($quota_value["STORAGE"]['usage'] / 1024);
+          $result['gosaMailQuota']= (int) ($quota_value["STORAGE"]['limit'] );
+        }else{
+          $result['quotaUsage']=    (int) ($quota_value["STORAGE"]['usage'] / 1024);
+          $result['gosaMailQuota']= (int) ($quota_value["STORAGE"]['limit'] / 1024);
+        }
       } else {
         /* backward icompatible */
-        $result['quotaUsage']=    (int) ($quota_value['usage'] / 1024);
-        $result['gosaMailQuota']= (int) ($quota_value['limit'] / 1024);
+        if($quota_value['usage'] == 2147483647){
+          $result['quotaUsage']=    (int) ($quota_value['usage'] / 1024);
+          $result['gosaMailQuota']= (int) ($quota_value['limit'] );
+        }else{
+          $result['quotaUsage']=    (int) ($quota_value['usage'] / 1024);
+          $result['gosaMailQuota']= (int) ($quota_value['limit'] / 1024);
+        }
       }
     }elseif(!$quota_value){
       return(false);
@@ -124,7 +134,7 @@ class mailMethodCyrus extends mailMethod
   function setQuota($folder, $gosaMailQuota)
   {
     /* Workaround for the php imap extension */
-    if ($gosaMailQuota == ""){
+    if (($gosaMailQuota == "") || ($gosaMailQuota== "2147483647")){
       $gosaMailQuota= "2147483647";
     }elseif($gosaMailQuota > 0){
       $gosaMailQuota = $gosaMailQuota *1024;
