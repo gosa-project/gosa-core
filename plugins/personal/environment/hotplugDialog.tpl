@@ -12,8 +12,8 @@
    				</div>
    				<div class="contentboxb">
     				<p class="contentboxb" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-						<select style="width:600px;height:450px" size=20 name="hotplugName" id="hotplugName">
-						{html_options values=$hotplugDeviceKeys output=$hotplugDevices}
+						<select style="width:600px;height:450px" size=20 name="hotplugName[]" id="hotplugName" multiple>
+							{html_options values=$hotplugDeviceKeys output=$hotplugDevices}
 						<option disabled>&nbsp;</option>
 						</select><br>
 					</p>

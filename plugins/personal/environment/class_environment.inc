@@ -603,8 +603,11 @@ class environment extends plugin
       }else{
         $this->dialog->save_object();
         $a_tmp = $this->dialog->save();
+       
         if(is_array($a_tmp)){
-          $this->gotoHotplugDevices[$a_tmp['name']]= $a_tmp; 
+          foreach($a_tmp as $name => $hotplug){
+            $this->gotoHotplugDevices[$name]= $hotplug; 
+          }
         }
         unset($this->dialog);
         $this->dialog= NULL;

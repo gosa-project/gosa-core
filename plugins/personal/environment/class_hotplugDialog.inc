@@ -141,14 +141,16 @@ class hotplugDialog extends plugin
     /* return generated entry from input fields*/
     if(!$this->use_existing){
       $a_return=array();
-      $a_return['name']= $this->HOT_name; 
-      $a_return['description']= $this->HOT_description; 
-      $a_return['id']= $this->HOT_id;
+      $a_return[$this->HOT_name]['name']= $this->HOT_name; 
+      $a_return[$this->HOT_name]['description']= $this->HOT_description; 
+      $a_return[$this->HOT_name]['id']= $this->HOT_id;
       return($a_return); 
     }else{
-      //return selected entry from select box
-      $entry = $this->hotplugDeviceList[$_POST['hotplugName']];
-      return $entry;
+      $entries = array();
+      foreach($_POST['hotplugName'] as $name){
+        $entries[$name] = $this->hotplugDeviceList[$name];
+      }
+      return $entries;
     }
   }
 
