@@ -109,7 +109,7 @@ class hotplugDialog extends plugin
     $message= plugin::check();
 
     if(!$this->use_existing){
-      if((empty($this->HOT_name))||(preg_match("/[^a-z0-9 ]/i",$this->HOT_name))){
+      if((empty($this->HOT_name))||(preg_match("/[^a-z0-9]/i",$this->HOT_name))){
         $message[]=_("Please specify a valid name. Only 0-9 a-Z is allowed.");
       }
       if((empty($this->HOT_description))||(preg_match("/[^a-z0-9!\"?.,;:-_\(\) ]/i",$this->HOT_description))){
