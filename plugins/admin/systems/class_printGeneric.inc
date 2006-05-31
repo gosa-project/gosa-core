@@ -602,6 +602,11 @@ class printgeneric extends plugin
       $message[]= "The required field 'Printer name' is not set.";
     }
     
+    /* must: labeledURI */
+    if(empty($this->labeledURI)){
+      $message[]= "The required field 'Printer URL' is not set.";
+    }
+    
     /* Check if there is already an entry with this cn*/
     if (($this->orig_dn != $dn)&&($this->BelongsTo == "Printer")){
       $ldap= $this->config->get_ldap_link();

@@ -40,7 +40,7 @@
 			  		<td><input id="l" name="l" size=25 maxlength=80 value="{$l}"></td>
 			 	</tr>
 			 	<tr>
-			  		<td><LABEL for="labeledURI">{t}Printer URL{/t}</LABEL></td>
+			  		<td><LABEL for="labeledURI">{t}Printer URL{/t}</LABEL>{$must}</td>
 			  		<td><input id="labeledURI" name="labeledURI" size=25 maxlength=80 value="{$labeledURI}"></td>
 			 	</tr>
 			</table>

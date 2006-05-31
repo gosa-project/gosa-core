@@ -159,10 +159,14 @@ class divListSystem extends MultiSelectWindow
       $val['cn'][0]= preg_replace('/\$$/', '', $val['cn'][0]);
 
       // Generate Array to Add
+      $dsc= "";
+      if (isset($val['description'][0])){
+        $dsc= " [".$val['description'][0]."]";
+      }
       if((isset($val['is_new']))&&(!empty($val['is_new']))){
-        $display= "".$val["cn"][0]." ".$val['is_new'];
+        $display= $val["cn"][0]." ".$val['is_new'].$dsc;
       }else{
-        $display= "".$val["cn"][0]."";
+        $display= $val["cn"][0].$dsc;
       }
 
       if((in_array("gotoTerminal",$val['objectClass']))||(in_array("gotoWorkstation",$val['objectClass']))){
