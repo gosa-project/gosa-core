@@ -154,9 +154,9 @@
 	<table style="width:100%" summary="{t}Hotplug device settings{/t}">
 		<tr>
 			<td>
-				<select name="gotoHotplugDevice" {$gotoHotplugDeviceACL} size=5  style="width:100%;" id="gotoHotplugDevice">
-	{html_options values=$gotoHotplugDeviceKeys output=$gotoHotplugDevices}
-	<option disabled>&nbsp;</option>
+				<select name="gotoHotplugDevice[]" {$gotoHotplugDeviceACL} size=5  style="width:100%;" id="gotoHotplugDevice" multiple>
+					{html_options values=$gotoHotplugDeviceKeys output=$gotoHotplugDevices}
+					<option disabled>&nbsp;</option>
 				</select>
 			</td>
 		</tr>

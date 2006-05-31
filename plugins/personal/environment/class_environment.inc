@@ -68,8 +68,8 @@ class environment extends plugin
                                     "gotoLogonScripts","gotoLogonScript",
                                     "gotoPrinter", "gosaDefaultPrinter",
                                     "gotoShares","gotoShare",
-                                    "gotoKioskProfile","gotoKioskProfiles",
-                                    "gotoHotplugDevice");
+                                    "gotoKioskProfile","gotoKioskProfiles"
+                                    );
   var $objectclasses      = array("gotoEnvironment"); // Specifies the objectClass which contains the attributes edited here 
   var $cn;
   var $OrigCn;
@@ -577,7 +577,9 @@ class environment extends plugin
 
     /* We have to delete the selected hotplug from the list*/
     if((isset($_POST['gotoHotplugDeviceDel']))&&(isset($_POST['gotoHotplugDevice']))){
-      unset($this->gotoHotplugDevices[$_POST['gotoHotplugDevice']]);
+      foreach($_POST['gotoHotplugDevice'] as $name){
+        unset($this->gotoHotplugDevices[$name]);
+      }
     }
 
     /* There are already defined hotplugs from other users we could use */
