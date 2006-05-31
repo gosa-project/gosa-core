@@ -71,9 +71,16 @@ class mailAccount extends plugin
     plugin::plugin($config, $dn);
 
     if(isset($this->attrs['uid'])){
-      $this->uid = $this->attrs['uid'];
+      $this->uid = $this->attrs['uid'][0];
     }
  
+    if(is_array($this->gosaMailServer) && isset($this->gosaMailServer[0])){
+      $this->gosaMailServer = $this->gosaMailServer[0];
+    }
+
+    /* Save initial account state */
+    $this->initially_was_account= $this->is_account;
+
     /*  Set mailMethod to the one defined in gosa.conf */
     if (isset($this->config->current['MAILMETHOD'])){
       $method= $this->config->current['MAILMETHOD'];
@@ -85,9 +92,8 @@ class mailAccount extends plugin
     }
 
     
-    /* Create the account prefix  user. user/ */
-
-    /* Preset folder prefix. Will change it later to respect
+    /* Create the account prefix  user. user/ 
+       Preset folder prefix. Will change it later to respect
        altnamespace. */
     if (isset($this->config->current['CYRUSUNIXSTYLE']) && $this->config->current['CYRUSUNIXSTYLE'] == "true"){
       $this->folder_prefix= "user/";
@@ -97,8 +103,6 @@ class mailAccount extends plugin
 
     
     /* This is not a new account, parse additional attributes */
-
-    #FIXME i think is_account would be enough
     if (($dn != NULL) && ($dn != "new") && $this->is_account){
 
       /* Load attributes containing arrays */
@@ -111,15 +115,6 @@ class mailAccount extends plugin
         }
       }
 
-      if(is_array($this->gosaMailServer) && isset($this->gosaMailServer[0])){
-        $this->gosaMailServer = $this->gosaMailServer[0];
-      }
-
-      /* Save initial account state */
-      $this->initially_was_account= $this->is_account;
-
-
-      /* If there is a server defined, connect and get some more infos */
 
       /* Only do IMAP actions if gosaMailServer attribute is set */
       if (isset ($this->attrs["gosaMailServer"][0])){
@@ -729,6 +724,7 @@ class mailAccount extends plugin
 
       if ($method->connect($this->gosaMailServer)){
         $method->updateMailbox($this->folder_prefix.$this->$id);
+        
         $method->setQuota($this->folder_prefix.$this->$id, $this->gosaMailQuota);
         $method->disconnect();
 
@@ -757,10 +753,12 @@ class mailAccount extends plugin
 
   }
 
+
   /* Check formular input */
   function check()
   {
     if(!$this->is_account) return(array());
+
     $ldap= $this->config->get_ldap_link();
 
     /* Call common method to give check the hook */
@@ -821,6 +819,7 @@ class mailAccount extends plugin
     return ($message);
   }
 
+
   /* Adapt from template, using 'dn' */
   function adapt_from_template($dn)
   {
@@ -843,16 +842,17 @@ class mailAccount extends plugin
     $this->mail= strtolower(rewrite($this->mail));
   }
 
+
   /* Add entry to forwarder list */
   function addForwarder($address)
   {
     $this->gosaMailForwardingAddress[]= $address;
     $this->gosaMailForwardingAddress= array_unique ($this->gosaMailForwardingAddress);
-
     sort ($this->gosaMailForwardingAddress);
     reset ($this->gosaMailForwardingAddress);
     $this->is_modified= TRUE;
   }
+
 
   /* Remove list of addresses from forwarder list */
   function delForwarder($addresses)
@@ -862,13 +862,13 @@ class mailAccount extends plugin
   }
 
 
-
+  /* Add given mail address to the list of alternate adresses , 
+      check if this mal address is used, skip adding in this case */
   function addAlternate($address)
   {
     $ldap= $this->config->get_ldap_link();
-
     $address= strtolower($address);
-
+      
     /* Is this address already assigned in LDAP? */
     $ldap->cd ($this->config->current['BASE']);
     $ldap->search ("(&(objectClass=gosaMailAccount)(|(mail=$address)"."(gosaMailAlternateAddress=$address)))", array("uid"));
@@ -886,7 +886,6 @@ class mailAccount extends plugin
 
     sort ($this->gosaMailAlternateAddress);
     reset ($this->gosaMailAlternateAddress);
-
     return ("");
   }
 
