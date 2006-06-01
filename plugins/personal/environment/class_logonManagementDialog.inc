@@ -97,6 +97,10 @@ class logonManagementDialog extends plugin
       $message[] = _("Specified name is invalid.");
     } 
 
+    if(empty($this->LogonName)){
+      $message[] = _("Please specify a valid script name.");
+    }
+
     if(preg_match("/[^a-z0-9,\.-;:_\(\)!\? ]/i",$this->LogonDescription)){
       $message[] = _("Specified description contains invalid characters.");
     }
