@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polski\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2006-06-01 15:38+0100\n"
+"PO-Revision-Date: 2006-06-02 00:32+0100\n"
 "Last-Translator: Piotr Rybicki <meritus@innervision.pl>\n"
 "Language-Team: Piotr Rybicki <meritus@innervision.pl>\n"
 "MIME-Version: 1.0\n"
@@ -6772,7 +6772,7 @@ msgstr "Ta tabela wyświetla wszystkie aplikacje w wybranym drzewie."
 
 #: plugins/admin/applications/class_divListApplication.inc:34
 msgid "This menu allows you to add, edit and remove selected applications. You may want to use the range selector on top of the application listbox, when working with a large number of applications."
-msgstr ""
+msgstr "To menu umożliwia tworzenie, usuwanie oraz edycję wybranych aplikacji. Posiadając dużą liczbę aplikacji, może okazać się wygodniejsze korzystanie z selektorów zakresu na górze."
 
 #: plugins/admin/applications/class_divListApplication.inc:44
 #: plugins/admin/applications/generic.tpl:7
@@ -7046,7 +7046,7 @@ msgstr "Operacja odnosi sie do 'wszystkich' kont, systemów, etc w tym poddrzewi
 
 #: plugins/admin/departments/headpage.tpl:24
 msgid "This menu allows you to create, delete and edit selected departments. Having a large size of departments, you might prefer the range selectors on top of the department list."
-msgstr ""
+msgstr "To menu umożliwia tworzenie, usuwanie oraz edycję wybranych departamentów. Posiadając dużą liczbę departamentów, może okazać się wygodniejsze korzystanie z selektorów zakresu na górze."
 
 #: plugins/admin/departments/headpage.tpl:38
 msgid "Display departments matching"
@@ -7447,7 +7447,7 @@ msgstr "Ten dialog umożliwia konfigurachę wszystkich elementów tej strefy DNS
 
 #: plugins/admin/systems/servDNSeditZoneEntries.tpl:2
 msgid "Be careful editing record types with this dialog. All changes will be saved immediately when using the save button."
-msgstr ""
+msgstr "Proszę uważać podczas edycji typów rekordu w tym dialogu. Wszystkie zmiany zostaną zapisane natychmiast po naciśnięciu przycisku zachowaj."
 
 #: plugins/admin/systems/servDNSeditZoneEntries.tpl:8
 msgid "This dialog can't be used until the currently edited zone was saved or the zone entry exists in the ldap database."
@@ -7927,7 +7927,7 @@ msgstr "Nie można pobrać informacji ppd."
 #: plugins/admin/systems/class_printerPPDDialog.inc:99
 #, php-format
 msgid "The specified path '%s' which results from PPD_PATH in your gosa.conf is invalid, can't read/write any ppd informations."
-msgstr ""
+msgstr "Ścieżka '%s' z parametru PPD_PATH w pliku gosa.conf jest nieprawidłowa. Nie można czytać/zapisywać informacji ppd."
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:116
 msgid "Please specify a valid ppd file."
@@ -7936,28 +7936,28 @@ msgstr "Proszę podać prawidłowy plik ppd."
 #: plugins/admin/systems/class_printerPPDDialog.inc:186
 #, php-format
 msgid "Can't select PPD file '%s', the file is not readable"
-msgstr ""
+msgstr "Nie można wybrać pliku ppd '%s'. Nie można czytać pliku"
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:203
 #: plugins/admin/systems/class_printerPPDDialog.inc:275
 #, php-format
 msgid "Can't create folder '%s' for the uploaded ppd file."
-msgstr ""
+msgstr "Nie można utworzyć katalogu '%s' dla wgrywanych plików ppd."
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:211
 #, php-format
 msgid "Can't create file '%s' to store modifed ppd informations."
-msgstr ""
+msgstr "Nie można utworzyć pliku '%s' do przechowywania zmodyfikowanych informacji ppd."
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:235
 #, php-format
 msgid "Can't add new ppd file, the source file '%s' is not accessible."
-msgstr ""
+msgstr "Nie można dodać nowego pliku ppd, plik źródłowy '%s' jest nieosiągalny."
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:253
 #, php-format
 msgid "The given ppd file '%s' seams to be invalid, can't get any modell or vendor informations."
-msgstr ""
+msgstr "Podany plik ppd '%s' jest nieprawidłowy. Nie można pobrać żadnych informacji o modelu lub dostawcy."
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:267
 #, php-format
@@ -7971,7 +7971,7 @@ msgstr "Nie można zapisać pliku '%s'."
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:292
 msgid "Uploaded ppd file is empty, can't create new ppd file."
-msgstr ""
+msgstr "Wgrany plik ppd jest pusty, nie można utworzyć nowego pliku ppd."
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:462
 #: plugins/admin/systems/class_printerPPDDialog.inc:465
@@ -7986,7 +7986,7 @@ msgstr "Nie"
 #: plugins/admin/systems/class_printerPPDDialog.inc:471
 #, php-format
 msgid "Unsupported ppd type '%s' used for '%s' "
-msgstr ""
+msgstr "Niewspierany typ ppd '%s' użyty dla '%s'"
 
 #: plugins/admin/systems/server.tpl:6
 #: html/getxls.php:146
@@ -8049,7 +8049,7 @@ msgstr "Dodatkowe opcje"
 #: plugins/admin/systems/workstationStartup.tpl:19
 #: plugins/admin/systems/terminalStartup.tpl:19
 msgid "Enter any parameters that should be passed to the kernel as append line during bootup"
-msgstr ""
+msgstr "Podaj wszystkie parametry które powinny zostać przekazane do jądra podczas uruchamiania"
 
 #: plugins/admin/systems/workstationStartup.tpl:22
 #: plugins/admin/systems/terminalStartup.tpl:22
@@ -8112,7 +8112,7 @@ msgstr "Strefa odwrotna"
 #: plugins/admin/systems/class_servDNS.inc:223
 #, php-format
 msgid "Can't delete the selected zone, because it is still in use by these entry/entries '%s'"
-msgstr ""
+msgstr "Nie można usunąć wybranej strefy ponieważ jest używana przez te(n) element(y) '%s'"
 
 #: plugins/admin/systems/class_servDNS.inc:261
 msgid "Removing DNS service failed"
@@ -8174,12 +8174,12 @@ msgstr "Brak serwera z poprawną usługą bazy glpi."
 #: plugins/admin/systems/class_glpiPrinterAccount.inc:166
 #: plugins/admin/systems/class_glpiAccount.inc:154
 msgid "Can't connect to glpi database, the php-mysql extension is missing."
-msgstr ""
+msgstr "Nie można połączyć się z bazą danych glpi, brak rozszerzenia php-mysql."
 
 #: plugins/admin/systems/class_glpiPrinterAccount.inc:176
 #: plugins/admin/systems/class_glpiAccount.inc:164
 msgid "Can't connect to glpi database, check configuration twice."
-msgstr ""
+msgstr "Nie można połączyć się z bazą danych glpi, proszę sprawdzić konfigurację."
 
 #: plugins/admin/systems/class_glpiPrinterAccount.inc:199
 #: plugins/admin/systems/class_glpiAccount.inc:565
@@ -8203,12 +8203,12 @@ msgstr "Ten serwer nie posiada cech inwentarza. Można je włączyć klikając p
 #: plugins/admin/systems/class_glpiPrinterAccount.inc:264
 #, php-format
 msgid "Can't rename given printer type to '%s', because this type name already exists."
-msgstr ""
+msgstr "Nie można zmienić nazwy typu drukarki na '%s' ponieważ ta nazwa typu jest już używana."
 
 #: plugins/admin/systems/class_glpiPrinterAccount.inc:278
 #, php-format
 msgid "Can't delete printer type, it is still in use by '%s'."
-msgstr ""
+msgstr "Nie można usunąć typu drukarki, jest wciąż w użyciu przez '%s'."
 
 #: plugins/admin/systems/class_glpiPrinterAccount.inc:611
 #: plugins/admin/systems/class_glpiPrinterAccount.inc:626
@@ -8261,7 +8261,7 @@ msgstr "Proszę wybrać system plików NFS dla plików swap"
 #: plugins/admin/systems/terminal.tpl:86
 #: plugins/admin/systems/workstation.tpl:65
 msgid "Inherit time server attributes"
-msgstr ""
+msgstr "Dziedzicz atrybuty serwera czasu"
 
 #: plugins/admin/systems/terminal.tpl:90
 #: plugins/admin/systems/workstation.tpl:69
@@ -8416,7 +8416,7 @@ msgstr "Już istnieje wpis '%s' w wybranym elemencie"
 #: plugins/admin/systems/class_workstationGeneric.inc:315
 #: plugins/admin/systems/class_terminalGeneric.inc:362
 msgid "There must be at least one NTP server selected, or the inherit mode activated."
-msgstr ""
+msgstr "Musi być zaznaczony co najmniej jeden serwer NTP lub zaznaczony tryb dziedziczenia."
 
 #: plugins/admin/systems/class_workstationGeneric.inc:382
 #: plugins/admin/systems/class_workstationGeneric.inc:400
@@ -8437,7 +8437,7 @@ msgstr "Atrybut '%s' jest pusty lub zawiera nieprawidłowe znaki."
 #: plugins/admin/systems/class_servDB.inc:152
 #, php-format
 msgid "The imap connect string needs to be in the form '%s'."
-msgstr ""
+msgstr "Parametr URI połączenia imap musi byc w formacie '%s'."
 
 #: plugins/admin/systems/class_servDB.inc:156
 msgid "The sieve port needs to be numeric."
@@ -8451,7 +8451,7 @@ msgstr "Podane hasło kerberos jest puste."
 #: plugins/admin/systems/class_servDB.inc:191
 #, php-format
 msgid "The imap name string needs to be a hostname or an IP-address."
-msgstr ""
+msgstr "Nazwa imap musi być nazwą hosta lub adresem IP."
 
 #: plugins/admin/systems/class_servDB.inc:245
 msgid "Saving server db settings failed"
@@ -8471,7 +8471,7 @@ msgstr "Nazwa stacji roboczej"
 
 #: plugins/admin/systems/class_servNfs.inc:46
 msgid "The file '/etc/gosa/encodings' does not exist, can't get supported charsets."
-msgstr ""
+msgstr "Plik '/etc/gosa/encodings' nie istnieje. Nie można pobrać wspieranych zestawów znaków."
 
 #: plugins/admin/systems/class_servNfs.inc:49
 msgid "Can't read '/etc/gosa/encodings', please check permissions."
@@ -8479,11 +8479,11 @@ msgstr "Nie można czytać '/etc/gosa/encodings', proszę sprawdzić uprawnienia
 
 #: plugins/admin/systems/class_servNfs.inc:179
 msgid "Please specify a valid path for your setup."
-msgstr ""
+msgstr "Proszę podać prawidłową ścieżkę dla ustawień."
 
 #: plugins/admin/systems/class_servNfs.inc:185
 msgid "Please specify a valid name for your share."
-msgstr ""
+msgstr "Proszę podać prawidłową nazwę doa udziału."
 
 #: plugins/admin/systems/class_servNfs.inc:188
 msgid "Please specify a name for your share."
@@ -8534,7 +8534,7 @@ msgstr "Podany adres pocztowy musi kończyć sie '.' aby był prawidłowy."
 #: plugins/admin/systems/class_servDNSeditZone.inc:375
 #: plugins/admin/systems/class_servDNSeditZone.inc:379
 msgid "Your mail address contains '@' replace this with '.' to enable GOsa to create a valid SOA record."
-msgstr ""
+msgstr "Adres email zawiera '@'. Zamień to na '.' aby umożliwić GOsa stworzenie poprawnego rekordu SOA"
 
 #: plugins/admin/systems/class_servDNSeditZone.inc:383
 msgid "Only lowercase strings are allowed as zone name."
@@ -8569,7 +8569,7 @@ msgstr "Tylko małe litery są dozwolone, proszę sprawdzić '%s'."
 #: plugins/admin/systems/class_servKolab.inc:94
 #, php-format
 msgid "Include data from %s days in the past when creating free/busy lists"
-msgstr ""
+msgstr "Dołącz dane sprzed %s dni podczas tworzenia listy free/busy"
 
 #: plugins/admin/systems/class_servKolab.inc:100
 #, php-format
@@ -8622,7 +8622,7 @@ msgstr "Przyszłe dni muszą być liczbą."
 
 #: plugins/admin/systems/class_servKolab.inc:268
 msgid "No SMTP privileged networks set."
-msgstr ""
+msgstr "Nie ustawiono uprawnionych sieci SMTP"
 
 #: plugins/admin/systems/class_servKolab.inc:340
 msgid "Saving server to kolab object failed"
@@ -8732,7 +8732,7 @@ msgstr "Urządzenie drukujące"
 
 #: plugins/admin/systems/terminalService.tpl:182
 msgid "Select to start IPP based printing service on terminal"
-msgstr ""
+msgstr "Wybierz aby rozpocząć usługę drukowania IPP na terminalu"
 
 #: plugins/admin/systems/terminalService.tpl:183
 msgid "Provide print services"
@@ -8844,15 +8844,15 @@ msgstr "Usługa Sieve"
 
 #: plugins/admin/systems/servkolab.tpl:73
 msgid "FTP FreeBusy service (legacy, not interoperable with Kolab2 FreeBusy)"
-msgstr ""
+msgstr "Usługa FTP FreeBusy (przestarzała, nie działa z FreeBusy w Kolab2)"
 
 #: plugins/admin/systems/servkolab.tpl:81
 msgid "HTTP FreeBusy service (legacy)"
-msgstr ""
+msgstr "Usługa HTTP FreeBusy (przestarzała)"
 
 #: plugins/admin/systems/servkolab.tpl:89
 msgid "Amavis email scanning (virus/spam)"
-msgstr ""
+msgstr "Skanowanie poczty (wirus/spam)"
 
 #: plugins/admin/systems/servkolab.tpl:100
 msgid "Quota settings"
@@ -8864,15 +8864,15 @@ msgstr "Ustawienia wolny / zajęty"
 
 #: plugins/admin/systems/servkolab.tpl:121
 msgid "Allow unauthenticated downloading of Free/Busy information"
-msgstr ""
+msgstr "Zezwól na nieautoryzowane pobieranie informacji Free/Busy"
 
 #: plugins/admin/systems/servkolab.tpl:136
 msgid "SMTP privileged networks"
-msgstr ""
+msgstr "uprzywilejowane sieci SMTP"
 
 #: plugins/admin/systems/servkolab.tpl:141
 msgid "Hosts/networks allowed to relay"
-msgstr ""
+msgstr "Hosty/sieci uprawnione do przekazywania"
 
 #: plugins/admin/systems/servkolab.tpl:144
 msgid "Enter multiple values, seperated with"
@@ -8880,15 +8880,15 @@ msgstr "Wprowadź kilka wartości oddzielonych"
 
 #: plugins/admin/systems/servkolab.tpl:157
 msgid "SMTP smarthost/relayhost"
-msgstr ""
+msgstr "SMTP smarthost/relayhost"
 
 #: plugins/admin/systems/servkolab.tpl:163
 msgid "Enable MX lookup for relayhost"
-msgstr ""
+msgstr "Włącz sprawdzanie MX dla relayhosta"
 
 #: plugins/admin/systems/servkolab.tpl:168
 msgid "Host used to relay mails"
-msgstr ""
+msgstr "Host użyty do przekazywania poczty"
 
 #: plugins/admin/systems/servkolab.tpl:182
 msgid "Accept Internet Mail"
@@ -8896,7 +8896,7 @@ msgstr "Zezwalaj na pocztę z internetu"
 
 #: plugins/admin/systems/servkolab.tpl:188
 msgid "Accept mail from other domains over non-authenticated SMTP"
-msgstr ""
+msgstr "Akceptuj pocztę z innych domen przez nie-autentykowane SMTP"
 
 #: plugins/admin/systems/SelectDeviceType.tpl:3
 msgid "This is a new system which currently has no system type defined. Please choose a system type for this entry and press the 'continue' button. If this system should be added to a group of system settings, specify the preferred object group below."
@@ -8904,7 +8904,7 @@ msgstr ""
 
 #: plugins/admin/systems/SelectDeviceType.tpl:9
 msgid "Please select a system type and an optional bundle of predefined settings to be inherited."
-msgstr ""
+msgstr "Proszę wybrać typ systemu i opcjonalny zestaw predefiniowanych ustawień do dziedziczenia."
 
 #: plugins/admin/systems/SelectDeviceType.tpl:21
 msgid "Choose a system type"
@@ -8925,7 +8925,7 @@ msgstr "Zarządzaj typami systemów operacyjnych"
 #: plugins/admin/systems/class_glpiPrinterCartridges.inc:97
 #, php-format
 msgid "You're about to delete the glpi cartridge type '%s'."
-msgstr ""
+msgstr "Zamierzasz usunąć kartridż glpi typu '%s'."
 
 #: plugins/admin/systems/class_glpiPrinterCartridges.inc:116
 #, php-format
@@ -9049,7 +9049,7 @@ msgstr ""
 
 #: plugins/admin/systems/phonesettings.tpl:106
 msgid "Authtype"
-msgstr ""
+msgstr "Typ autoryzacji"
 
 #: plugins/admin/systems/phonesettings.tpl:116
 msgid "Secret"
@@ -9168,11 +9168,11 @@ msgstr "Nie można usunąć tego załącznika, jest wciąż używany przez syste
 #: plugins/admin/systems/class_glpiAttachmentPool.inc:124
 #: plugins/admin/systems/class_glpiAttachmentPool.inc:128
 msgid "There is no valid file uploaded."
-msgstr ""
+msgstr "Brak wgranego poprawnego pliku."
 
 #: plugins/admin/systems/class_glpiAttachmentPool.inc:131
 msgid "Upload wasn't successfull."
-msgstr ""
+msgstr "Wgrywanie nieudane."
 
 #: plugins/admin/systems/class_glpiAttachmentPool.inc:134
 msgid "Missing directory '/etc/gosa/glpi/' to store glpi uploads."
@@ -9382,7 +9382,7 @@ msgstr ""
 
 #: plugins/admin/systems/password.tpl:5
 msgid "Leave fields blank for password inheritance from default entries."
-msgstr ""
+msgstr "Pozostaw pola puste aby dziedziczyć hasło z wpisów domyślnych."
 
 #: plugins/admin/systems/password.tpl:9
 msgid "Changing the password impinges on authentification only."
@@ -9798,7 +9798,7 @@ msgstr "Ustawienia NFS"
 
 #: plugins/admin/systems/servnfs.tpl:33
 msgid "Volume"
-msgstr ""
+msgstr "Głośność"
 
 #: plugins/admin/systems/servnfs.tpl:54
 msgid "Auto-mount share on Apple systems"
@@ -10848,7 +10848,7 @@ msgstr "Ten 'dn' nie jest makrem telefonu."
 
 #: plugins/gofon/macro/class_gofonMacro.inc:187
 msgid "This macro ist still in use. To delete this Macro ensure that nobody has selected this Macro."
-msgstr ""
+msgstr "To makro jest wciąż używane. Aby je usunąć upewnij się że nikt nie zaznaczył tego Makra."
 
 #: plugins/gofon/macro/class_gofonMacro.inc:194
 msgid "Removing phone macro failed"
@@ -10860,7 +10860,7 @@ msgstr "Usuwanie referencji makra telefonicznego nieudane"
 
 #: plugins/gofon/macro/class_gofonMacro.inc:221
 msgid "There is no mysql extension available in your php setup, can't save any changes to asterisk db."
-msgstr ""
+msgstr "Brak wsparcia dla mysql w ustawieniach php. Nie można zapisać żadnych zmian w bazie asterisk."
 
 #: plugins/gofon/macro/class_gofonMacro.inc:291
 #, php-format
@@ -10969,7 +10969,7 @@ msgstr "Parametr %s posiada nieprawidłową wartość dla typu logicznego."
 #: plugins/gofon/macro/class_gofonMacroParameters.inc:370
 #, php-format
 msgid "Parameter count of the macro changed, you must update each user which are using this macro '%s'."
-msgstr ""
+msgstr "Liczba parametrów tego makra została zmieniona. Należy powiadomić wszustkich użytkowników tego makra '%s'."
 
 #: plugins/gofon/macro/class_gofonMacroParameters.inc:396
 msgid "Saving phone macro parameters failed"
@@ -11006,7 +11006,7 @@ msgstr "niezdefiniowany"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:257
 msgid "Can't save any changes to asterisk database, there is no mysql extension available."
-msgstr ""
+msgstr "Nie można zapisać zmian w bazie asterisk. Brak wsparcia dla mysql w ustawieniach php."
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:561
 msgid "Error while performing query:"
@@ -11081,7 +11081,7 @@ msgstr "Zatrzymaj"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1085
 msgid "Can't remove phone account, the mysql extension is not present in php configuration."
-msgstr ""
+msgstr "Nie można usunąć konta telefonicznego. Brak wsparcia dla mysql w ustawieniach php."
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1118
 #, php-format
