@@ -80,7 +80,9 @@ class faiSummaryTab extends plugin{
       if(isset($this->parent->by_object['workgeneric']->cn)){
         $this->Classes[] = $this->parent->by_object['workgeneric']->cn;
       }
-  
+ 
+      print_a($tmp);
+   
       $tmp = array_flip($tmp);
       if(!isset($tmp[$this->Release])) {
         $this->Release = "";
@@ -148,15 +150,12 @@ class faiSummaryTab extends plugin{
     $ret = array("main"=>"/");
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-    if(!$base){
-      $base= "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
-    }
-    $ldap->cd($base);
-    $ldap->ls("(objectClass=FAIbranch)",$base);
+    $ldap->search("(objectClass=FAIbranch)",array("dn","cn","ou"));
     while($attrs = $ldap->fetch()){
       if((isset($attrs['ou']))&&($attrs['dn']!=$base)){
-        $ret[$attrs['dn']]= $prefix.$attrs['ou'][0];
-        $ret = array_merge($ret,$this->getBranches($attrs['dn'],"".$prefix.$attrs['ou'][0]."/"));
+        $name = convert_department_dn(preg_replace("/,ou=fai,.*$/","",$attrs['dn']));
+        $ret[$attrs['dn']] = $name;
+        $ret = array_merge($ret,$this->getBranches($attrs['dn'],$prefix.$attrs['ou'][0]."/"));
       }
     }
     return($ret);
