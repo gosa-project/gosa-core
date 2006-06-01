@@ -107,19 +107,17 @@
 	<table summary="" style="width:100%">
 		<tr>
 			<td>
-			<select style="width:100%;" name="gotoShare" multiple size=5 {$gotoShareACL} id="gotoShare">
-	{html_options values=$gotoShareKeys output=$gotoShares}
-	<option disabled>&nbsp;</option>
+				{$divlistShares}
+				<input type="text" size=15 {$gotoShareACL} name="ShareUser" value="%u" title="{t}User used to connect to the share{/t}">@
+				<select name="gotoShareSelection" {$gotoShareACL} title="{t}Select a share{/t}">
+					{html_options values=$gotoShareSelectionKeys output=$gotoShareSelections}
+					<option disabled>&nbsp;</option>
 				</select>
-				<br>
-			<select name="gotoShareSelection" {$gotoShareACL}>
-	{html_options values=$gotoShareSelectionKeys output=$gotoShareSelections}
-	<option disabled>&nbsp;</option>
-				</select>
-				<input type="text" size=15 {$gotoShareACL} name="gotoShareMountPoint" value="%H/Netzlaufwerke/%L/%S">
-				<input type="text" size=15 {$gotoShareACL} name="ShareUser" value="%u">
+				:
+				<input type="text" size=15 {$gotoShareACL} name="gotoShareMountPoint" value="%H/Netzlaufwerke/%L/%S"
+                  title="{t}Mount path{/t}">
 				<input type="submit" {$gotoShareACL} name="gotoShareAdd" value="{t}Add{/t}"> 
-				<input type="submit" {$gotoShareACL} name="gotoShareDel" value="{t}Remove{/t}"> 
+	<!--			<input type="submit" {$gotoShareACL} name="gotoShareDel" value="{t}Remove{/t}"> -->
 			</td>
 		</tr>
 	</table>

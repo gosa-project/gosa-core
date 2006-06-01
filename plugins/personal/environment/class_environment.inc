@@ -151,9 +151,9 @@ class environment extends plugin
         $tmp2['name']        =$tmp[1];
         $tmp2['mountPoint']  =$tmp[2];
         if(isset($tmp[3])){
-          $tmp2['OtherStuff']  =$tmp[3];
+          $tmp2['PwdHash']  =$tmp[3];
         }else{
-          $tmp2['OtherStuff']  ="";
+          $tmp2['PwdHash']  ="";
         }
         if(isset($tmp[4])){
           $tmp2['Username']  =$tmp[4];
@@ -547,7 +547,7 @@ class environment extends plugin
         /* Preparing the new assignment */ 
         $this->gotoShares[$a_share['name']."|".$a_share['server']]=$a_share;
         $this->gotoShares[$a_share['name']."|".$a_share['server']]['Username']=$s_user;
-        $this->gotoShares[$a_share['name']."|".$a_share['server']]['OtherStuff']="";
+        $this->gotoShares[$a_share['name']."|".$a_share['server']]['PwdHash']="";
         $this->gotoShares[$a_share['name']."|".$a_share['server']]['mountPoint']=$s_mount;
       }
     }  
@@ -555,12 +555,41 @@ class environment extends plugin
     /* if the Post  gotoShareDel is set, someone asked GOsa to delete the selected entry (if there is one selected)
      * If there is no defined share selected, we will abort the deletion without any message 
      */
-    if((isset($_POST['gotoShareDel']))&&(isset($_POST['gotoShare']))){
-      unset($this->gotoShares[$_POST['gotoShare']]);
+    $once = true;
+    foreach($_POST as $name => $value){
+      if((preg_match("/^gotoShareDel_/",$name)) && ($once)){
+        $once = false;  
+        $key  = preg_replace("/^gotoShareDel_/","",$name);
+        $key  = preg_replace("/_+[xy]$/","",$key);
+        if(isset($this->gotoShares[$key])) {
+          unset($this->gotoShares[$key]);
+        }
+      }
+      if((preg_match("/^gotoShareResetPwd_/",$name)) && ($once)){
+        $once = false;
+        $key  = preg_replace("/^gotoShareResetPwd_/","",$name);
+        $key  = preg_replace("/_+[xy]$/","",$key);
+        $this->gotoShares[$key]['PwdHash'] = "";
+      }
     }
 
-    $smarty->assign("gotoShares",$this->printOutAssignedShares());
-    $smarty->assign("gotoShareKeys",array_flip($this->printOutAssignedShares()));
+    $divlistShares = new divSelectBox("gotoShares");
+    $divlistShares->SetHeight(100);
+    $tmp = $this->printOutAssignedShares();
+    
+    foreach($tmp as $key => $value){
+    
+      $img = "<input type='image' name='gotoShareResetPwd_".$key." 'src='images/list_reset_password.png' alt='"._("Reset password hash")."' 
+                title='"._("Reset password hash")."'>";
+      $img.= "&nbsp;";
+      $img.= "<input type='image' name='gotoShareDel_".$key." 'src='images/edittrash.png' alt='"._("Delete")."' 
+                title='"._("Delete share entry")."'>";
+
+      $field1 = array("string" => $value);
+      $field2 = array("string" => $img   , "attach" => "style='border-right:0px;'");
+      $divlistShares->AddEntry(array($field1,$field2));
+    }
+    $smarty->assign("divlistShares",$divlistShares->DrawList());
 
     /* Hotplug devices will be handled here 
      * There are 3 possible methods for this feature
@@ -1040,7 +1069,7 @@ $ldap->modify ($attrs);
     /* Prepare Shares */
     $this->attrs['gotoShare']=array();
     foreach($this->gotoShares as $name => $share){
-      $this->attrs['gotoShare'][] =$share['server']."|".$share['name']."|".$share['mountPoint']."|".$share['OtherStuff']."|".$share['Username'];
+      $this->attrs['gotoShare'][] =$share['server']."|".$share['name']."|".$share['mountPoint']."|".$share['PwdHash']."|".$share['Username'];
     }
 
 
