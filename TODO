@@ -1,12 +1,6 @@
 Target for 2.5:
 ===============
 
-* Enhance the export xls to export the whole three with a maximum of attributes in each sheet ( OpenSides )
-
-* Enhance the pptp plugin (OpenSides ) 
-
-* Add support for nagios in the system part ( OpenSides )
-
 * Update the french manual ( OpenSides )
 
 * Auto-Resize for subdialogs
@@ -21,6 +15,12 @@ Target for 2.5:
 
 Target for 2.6:
 ===============
+
+* Enhance the export xls to export the whole three with a maximum of attributes in each sheet ( OpenSides )
+
+* Enhance the pptp plugin (OpenSides )
+
+* Add support for nagios in the system part ( OpenSides )
 
 * Asterisk : Create entry like this #309,1,PickupChan(SIP/rainer), 
 			 to allow others to pickup the phone by pressing # and number of the phone.
