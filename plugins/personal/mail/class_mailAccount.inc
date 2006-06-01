@@ -140,7 +140,7 @@ class mailAccount extends plugin
           }else{
             $this->quotaUsage     = "";
             $this->gosaMailQuota  = "";
-            print_red(sprintf(_("Can't get quota for for '%s'."),$this->folder_prefix.$this->$id));
+            print_red(sprintf(_("Can't get quota information for '%s'."),$this->folder_prefix.$this->$id));
           }
 
           /* Get mailboxes / folder like INBOX ..*/

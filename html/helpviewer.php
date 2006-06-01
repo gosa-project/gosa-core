@@ -64,6 +64,7 @@ if (isset ($config->data['MAIN']['COMPILE'])){
 } else {
   $smarty->compile_dir= '/var/spool/gosa/';
 }
+$smarty->assign("title", "GOsa - "._("Help browser"));
 
 /* HELP management starts here ...
  */

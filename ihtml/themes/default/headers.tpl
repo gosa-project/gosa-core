@@ -3,7 +3,7 @@
 <html>
 
 <head>
-  <title>GOsa</title>
+  <title>{if isset($title)}{$title}{else}GOsa{/if}</title>
 
   <meta name="generator" content="my hands">
   <meta name="description" content="GOsa - Login">
