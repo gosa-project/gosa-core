@@ -70,19 +70,6 @@ class servkolab extends plugin {
       }
     } 
 
-    /* Parse mynetworks */
-    if(isset($this->attrs['postfix-mynetworks'])){
-      if(is_array($this->attrs['postfix-mynetworks'])){  
-        unset($this->attrs['postfix-mynetworks']['count']);
-        $tmp="";
-        foreach($this->attrs['postfix-mynetworks'] as $tm){
-          $tmp.=$tm.";";
-        }
-        $this->postfix_mynetworks = $tmp;
-      }
-    }else{
-      $this->postfix_mynetworks="";
-    }
   }
 
 
@@ -322,17 +309,6 @@ class servkolab extends plugin {
     if (!in_array_ics($this->cn,$this->kolabHost)){
       $this->kolabHost[]= $this->cn;
     }
-
-    /* Create mynetworks array by splitting the string with ; */
-    $tmp = split(";",$this->postfix_mynetworks);
-    $this->postfix_mynetworks = array();
-    foreach($tmp as $tm){
-      trim($tm);
-      if(!empty($tm)){
-        $this->postfix_mynetworks[]=$tm;
-      }
-    }
-    $this->attrs['postfix_mynetworks']=$this->postfix_mynetworks;
 
     /* Call parents save to prepare $this->attrs */
     plugin::save();

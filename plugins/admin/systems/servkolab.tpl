@@ -141,7 +141,7 @@
 	    <LABEL for="postfix_mynetworks">{t}Hosts/networks allowed to relay{/t}</LABEL><br>
         <input id="postfix_mynetworks" name="postfix_mynetworks" size="60" maxlength="220" value="{$postfix_mynetworks}" {$postfix_mynetworksACL} type="text">
 		<br>
-		( {t}Enter multiple values, seperated with{/t} ; )
+		( {t}Enter multiple values, seperated with{/t} , )
 	</td>
      </tr>
    </table>
