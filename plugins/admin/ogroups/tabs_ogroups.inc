@@ -45,6 +45,9 @@ class ogrouptabs extends tabs
       $this->by_object['workstartup']->remove_from_parent();
       unset($this->by_object['workstartup']);
       unset($this->by_name['workstartup']);
+      $this->by_object['faiSummary']->remove_from_parent();
+      unset($this->by_object['faiSummary']);
+      unset($this->by_name['faiSummary']);
     }
   
     /* Create goPhoneAccount if theres an user with goPhoneAccount
@@ -101,6 +104,10 @@ class ogrouptabs extends tabs
         $this->by_object['workservice']->acl = "#all#";
         $this->by_object['workservice']->inheritTimeServer = false;
         $this->by_object['workservice']->parent= &$this;
+        $this->by_name['faiSummary']= _("Summary");
+        $this->by_object['faiSummary']= new faiSummaryTab($this->config, $this->dn);
+        $this->by_object['faiSummary']->acl = "#all#";
+        $this->by_object['faiSummary']->parent= &$this;
       }
     }
   
