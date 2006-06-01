@@ -51,7 +51,7 @@
 <table summary="">
  <tr>
   <td>
-   <select size="1" name="action" title="{t}Select action to execute for this server{/t}">
+   <select size="1" name="saction" title="{t}Select action to execute for this server{/t}">
     <option disabled>&nbsp;</option>
     {html_options options=$actions}
    </select>
