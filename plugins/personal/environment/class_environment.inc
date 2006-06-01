@@ -578,19 +578,34 @@ class environment extends plugin
     $tmp = $this->printOutAssignedShares();
     
     foreach($tmp as $key => $value){
-    
       $img = "";
+   
+      /* Check if entry starts with an ! */
+      if(preg_match("/^!/",$this->gotoShares[$key]['server'])){
 
-      if($this->gotoShares[$key]['PwdHash'] != ""){
-      $img.= "<input type='image' name='gotoShareResetPwd_".$key." 'src='images/list_reset_password.png' alt='"._("Reset password hash")."' 
-                title='"._("Reset password hash")."'>";
+        /* If we are currently editing groups environment, skip those ! entries */ 
+        if($this->is_group) continue;
+    
+        /* Create pwd reset images */
+        if($this->gotoShares[$key]['PwdHash'] != ""){
+          $img.= "<input type='image' name='gotoShareResetPwd_".$key." 'src='images/list_reset_password.png' alt='"._("Reset password hash")."' 
+            title='"._("Reset password hash")."'>";
+        }
+        $field1 = array("string" => "<font style=\"color:#C0C0C0\">".$value."</font>" );
+        $field2 = array("string" => $img   , "attach" => "style='border-right:0px;'");
+      }else{
+
+        /* Create pwd reset img && delete image */
+        if($this->gotoShares[$key]['PwdHash'] != ""){
+          $img.= "<input type='image' name='gotoShareResetPwd_".$key." 'src='images/list_reset_password.png' alt='"._("Reset password hash")."' 
+            title='"._("Reset password hash")."'>";
+          $img.= "&nbsp;";
+        }
+        $img.= "<input type='image' name='gotoShareDel_".$key." 'src='images/edittrash.png' alt='"._("Delete")."' 
+          title='"._("Delete share entry")."'>";
+        $field1 = array("string" => $value);
+        $field2 = array("string" => $img   , "attach" => "style='border-right:0px;'");
       }
-      $img.= "&nbsp;";
-      $img.= "<input type='image' name='gotoShareDel_".$key." 'src='images/edittrash.png' alt='"._("Delete")."' 
-                title='"._("Delete share entry")."'>";
-
-      $field1 = array("string" => $value);
-      $field2 = array("string" => $img   , "attach" => "style='border-right:0px;'");
       $divlistShares->AddEntry(array($field1,$field2));
     }
     $smarty->assign("divlistShares",$divlistShares->DrawList());
@@ -1131,9 +1146,7 @@ $ldap->modify ($attrs);
     $a_return = array();
     if(is_array($this->gotoShares)){
       foreach($this->gotoShares as $share){
-        if (!preg_match('/^!/', $share['server'])){
-          $a_return[$share['name']."|".$share['server']]= $share['server']."://".$share['name']." on ".$share['mountPoint']." as ".$share['Username'];
-        }
+        $a_return[$share['name']."|".$share['server']]= preg_replace("/^!/","",$share['server'])."://".$share['name']." on ".$share['mountPoint']." as ".$share['Username'];
       }
     }
     return($a_return);
