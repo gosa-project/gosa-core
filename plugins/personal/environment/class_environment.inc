@@ -579,8 +579,12 @@ class environment extends plugin
     
     foreach($tmp as $key => $value){
     
-      $img = "<input type='image' name='gotoShareResetPwd_".$key." 'src='images/list_reset_password.png' alt='"._("Reset password hash")."' 
+      $img = "";
+
+      if($this->gotoShares[$key]['PwdHash'] != ""){
+      $img.= "<input type='image' name='gotoShareResetPwd_".$key." 'src='images/list_reset_password.png' alt='"._("Reset password hash")."' 
                 title='"._("Reset password hash")."'>";
+      }
       $img.= "&nbsp;";
       $img.= "<input type='image' name='gotoShareDel_".$key." 'src='images/edittrash.png' alt='"._("Delete")."' 
                 title='"._("Delete share entry")."'>";
