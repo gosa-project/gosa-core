@@ -353,6 +353,19 @@ class faiManagement extends plugin
       if($this->DivListFai->selectedBranch != "main" ){
         $baseToUse = $this->DivListFai->selectedBranch;
       }
+  
+      /* Create new Release name to be able to set faidebianRelease for FAIpackageList */
+      
+      $CurrentReleases  = $this->getBranches();
+      $NewReleaseName   = $name;
+      if(isset($CurrentReleases[$this->DivListFai->selectedBranch])) {
+        if($this->DivListFai->selectedBranch != "main"){
+          $NewReleaseName = $CurrentReleases[$this->DivListFai->selectedBranch]."/".$name;
+          $NewReleaseName = preg_replace("#\/#","/",$NewReleaseName); 
+        }else{
+          $NewReleaseName   = $name;
+        }
+      }
 
       $appsrc = preg_replace("/ou=fai,ou=configs,ou=systems,/","ou=apps,",$baseToUse); 
       $appdst = preg_replace("/ou=fai,ou=configs,ou=systems,/","ou=apps,","ou=".$name.",".$baseToUse) ; 
@@ -366,14 +379,14 @@ class faiManagement extends plugin
       $ldap->cd ($appdst);
       $ldap->recursive_remove();
       $ldap->cd ($this->config->current['BASE']);
-      $ldap->copy_FAI_resource_recursive($appsrc,$appdst,$type,true);
+      $ldap->copy_FAI_resource_recursive($appsrc,$appdst,$NewReleaseName,$type,true);
 
       /* Duplicate fai objects 
        */
       $ldap->cd ("ou=".$name.",".$baseToUse);
       $ldap->recursive_remove();
       $ldap->cd ($this->config->current['BASE']);
-      $ldap->copy_FAI_resource_recursive($baseToUse,"ou=".$name.",".$baseToUse,$type,true);
+      $ldap->copy_FAI_resource_recursive($baseToUse,"ou=".$name.",".$baseToUse,$NewReleaseName,$type,true);
 
       echo "<div style='width:100%;text-align:right;'><form name='form' method='post' action='?plug=".$_GET['plug']."' target='_parent'>
               <br><input type='submit' name='CloseIFrame' value='"._("Continue")."'>

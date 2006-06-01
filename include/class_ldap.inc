@@ -439,7 +439,7 @@ class LDAP{
 
   /* Copy given attributes and sub-dns with attributes to destination dn 
   */
-  function copy_FAI_resource_recursive($sourcedn,$destinationdn,$type="branch",$is_first = true,$depth=0)
+  function copy_FAI_resource_recursive($sourcedn,$destinationdn,$destinationName,$type="branch",$is_first = true,$depth=0)
   {
     error_reporting(E_ALL);
     
@@ -554,6 +554,11 @@ class LDAP{
             }
           }
 
+          /* Replace FAIdebianRelease with new release name */
+          if(in_array("FAIpackageList" , $attr['objectClass'])){
+            $attr['FAIdebianRelease'] = $destinationName; 
+          }
+
           /* Add entry */
           $this->cd($destinationdn);
           $this->cat($destinationdn);
@@ -588,7 +593,7 @@ class LDAP{
           $this->cd($basedn);
           $item = $this->fetch($this->cat($dn));
           if(!in_array("FAIbranch",$item['objectClass'])){
-            $this->copy_FAI_resource_recursive($dn,str_replace($sourcedn,$destinationdn,$dn),$type,false,$depth);
+            $this->copy_FAI_resource_recursive($dn,str_replace($sourcedn,$destinationdn,$dn),$destinationName,$type,false,$depth);
           } 
         }
       }
