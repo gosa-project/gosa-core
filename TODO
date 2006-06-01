@@ -3,8 +3,6 @@ Target for 2.5:
 
 * Update the french manual ( OpenSides )
 
-* Auto-Resize for subdialogs
-
 * Change FAIstate when triggering actions
   (install, sysinfo, softupdate)
 
@@ -15,6 +13,8 @@ Target for 2.5:
 
 Target for 2.6:
 ===============
+
+* Auto-Resize for subdialogs
 
 * Enhance the export xls to export the whole three with a maximum of attributes in each sheet ( OpenSides )
 
