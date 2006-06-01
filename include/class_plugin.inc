@@ -83,6 +83,9 @@ class plugin
    */
   var $attrs= array();
 
+  /* Keep set of conflicting plugins */
+  var $conflicts= array();
+
   /* Save unit tags */
   var $gosaUnitTag= "";
 
