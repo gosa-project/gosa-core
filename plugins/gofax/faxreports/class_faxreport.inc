@@ -211,8 +211,11 @@ class faxreport extends plugin
 
       $fax_users= array();
       while ($attrs= $ldap->fetch()){
-
-        if (chkacl ($this->acl, "faxreport") == ""){
+        $ui = get_userinfo();
+        $acl= get_permissions ($ui->dn, $ui->subtreeACL);
+        $acl2= get_module_permission($acl, "faxreport", $attrs['dn']);
+        
+        if (chkacl ($acl2, "faxreport") == ""){
           $fax_users[]= $attrs["uid"][0];
         }
       }
