@@ -1146,7 +1146,11 @@ $ldap->modify ($attrs);
     $a_return = array();
     if(is_array($this->gotoShares)){
       foreach($this->gotoShares as $share){
-        $a_return[$share['name']."|".$share['server']]= preg_replace("/^!/","",$share['server'])."://".$share['name']." on ".$share['mountPoint']." as ".$share['Username'];
+        if(preg_match("/^!/",$share['server'])){
+          $a_return[$share['name']."|".$share['server']]= preg_replace("/^!/","",$share['server'])."://".$share['name']." - "._("group share"); 
+        }else{
+          $a_return[$share['name']."|".$share['server']]= $share['server']."://".$share['name']." on ".$share['mountPoint']." as ".$share['Username'];
+        }
       }
     }
     return($a_return);
