@@ -52,6 +52,10 @@
 						</select>
 						{if $allow_mounts == TRUE}
 							<br><br><input type="checkbox" name="netatalk_mount" id="netatalk_mount" {$mount_checked} {$appleMountsACL}/><label for="netatalk_mount">{t}Auto-mount share on Apple systems{/t}</label>
+							<br>
+							<br>
+						{/if}
+
 								{literal}
 									<script language="JavaScript">
 										document.getElementById('sharetype').onchange=function() {
@@ -59,12 +63,19 @@
 											var box=document.getElementById('netatalk_mount');
 											var volume=document.getElementById('volume');
 											var vlabel=document.getElementById('vlabel');
+								{/literal}
+									<!-- Only add checkbox enable/disable js part if checkbox is available --> 
+									{if $allow_mounts == TRUE}
+										{literal}
 											if(foobar=="NFS"||foobar=="netatalk"){
 												box.disabled=false;
 											} else {
 												box.disabled=true;
 												box.checked=false;
 											}
+										{/literal}
+									{/if}
+								{literal}
 											if(foobar=="NCP"){
 												volume.style.visibility="visible";
 												vlabel.style.visibility="visible";
@@ -76,9 +87,6 @@
 									 	document.getElementById('sharetype').onchange();
 									</script>
 								{/literal}
-							<br>
-							<br>
-						{/if}
 					</td>
 				</tr>
 				<tr>
