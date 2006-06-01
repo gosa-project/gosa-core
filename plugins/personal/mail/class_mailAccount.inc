@@ -961,9 +961,9 @@ class mailAccount extends plugin
         if($ldap->count()){
           $attrs = $ldap->fetch();
           if(isset($attrs['kolabDeleteFlag'])){ 
-            return(_("Waiting for kolabd to remove mail properties."));
+            return(_("Waiting for kolab to remove mail properties."));
           }elseif(in_array("gosaMailAccount",$attrs['objectClass'])){
-            return(_("Please remove the mail account first, to allow kolabd to call its remove methods."));
+            return(_("Please remove the mail account first, to allow kolab to call its remove methods."));
           }
         }
       }
