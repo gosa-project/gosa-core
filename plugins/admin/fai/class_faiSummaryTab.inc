@@ -81,8 +81,6 @@ class faiSummaryTab extends plugin{
         $this->Classes[] = $this->parent->by_object['workgeneric']->cn;
       }
  
-      print_a($tmp);
-   
       $tmp = array_flip($tmp);
       if(!isset($tmp[$this->Release])) {
         $this->Release = "";
