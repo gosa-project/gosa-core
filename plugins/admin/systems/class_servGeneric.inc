@@ -28,14 +28,20 @@ class servgeneric extends plugin
   var $netConfigDNS;
   var $modes = array();
 
+  var $mapActions   = array("reboot"          => "",
+                            "instant_update"  => "softupdate",
+                            "update"          => "sceduledupdate",
+                            "reinstall"       => "install",
+                            "rescan"          => "",
+                            "memcheck"        => "memcheck",
+                            "sysinfo"         => "sysinfo");
+
   function servgeneric ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
 
     $this->modes["active"]= _("Activated");
     $this->modes["locked"]= _("Locked");
-    $this->modes["memcheck"]= _("Memory test");
-    $this->modes["sysinfo"]= _("System analysis");
 
     /* Set base */
     if ($this->dn == "new"){
@@ -65,14 +71,45 @@ class servgeneric extends plugin
     /* Check for action */
     if (isset($_POST['action'])){
       $cmd= search_config($this->config->data['TABS'], "workgeneric", "ACTIONCMD");
+      $cmd= "/bin/echo";
       if ($cmd == ""){
         print_red(_("No ACTIONCMD definition found in your gosa.conf"));
       } else {
+
         exec ($cmd." ".$this->netConfigDNS->macAddress." ".escapeshellarg($_POST['saction']), $dummy, $retval);
         if ($retval != 0){
           print_red(sprintf(_("Execution of '%s' failed!"), $cmd));
         } else {
           $this->didAction= TRUE;
+
+          /* Set FAIstate */
+          $ldap = $this->config->get_ldap_link();
+          $ldap->cd($this->config->current['BASE']);
+          $ldap->cat($this->dn,array("objectClass"));
+          $res = $ldap->fetch();
+          
+          $attrs = array();
+          $attrs['FAIstate'] = "";
+          if(isset($this->mapActions[$_POST['saction']])){
+            $attrs['FAIstate'] = $this->mapActions[$_POST ['saction']];
+          }
+
+          for($i = 0; $i < $res['objectClass']['count'] ; $i ++){
+            if(($attrs['FAIstate'] == "") && ($res['objectClass'][$i] == "FAIobject")) continue;
+            $attrs['objectClass'][] = $res['objectClass'][$i];
+          }
+
+          if(($attrs['FAIstate'] != "") && (!in_array("FAIobject",$attrs['objectClass']))){
+            $attrs['objectClass'][] = "FAIobject";
+          }
+
+          if($attrs['FAIstate'] == ""){
+            $attrs['FAIstate'] = array();
+          }
+     
+          $ldap->cd($this->dn);
+          $ldap->modify($attrs);
+          show_ldap_error($ldap->get_error());
         }
       }
     }
@@ -126,11 +163,15 @@ class servgeneric extends plugin
                                        "instant_update" => _("Instant update"),
                                        "update" => _("Scheduled update"),
                                        "reinstall" => _("Reinstall"),
-                                       "rescan" => _("Rescan hardware")));
+                                       "rescan" => _("Rescan hardware"),
+                                       "memcheck" => _("Memory test"),
+                                       "sysinfo"  => _("System analysis")));
     } else {
       $smarty->assign("actions", array("wake" => _("Wake up"),
                                        "reinstall" => _("Reinstall"),
-                                       "update" => _("Scheduled update")));
+                                       "update" => _("Scheduled update"),
+                                       "memcheck" => _("Memory test"),
+                                       "sysinfo"  => _("System analysis")));
     }
 
     /* Show main page */
