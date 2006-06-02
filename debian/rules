@@ -58,7 +58,7 @@ install-stamp:
 	-mv debian/gosa/usr/share/gosa/bin/* debian/gosa/usr/bin
 	-rm -rf debian/gosa/usr/share/gosa/bin
 	-rm -rf debian/gosa/usr/share/doc/gosa/marketing
-	-find debian/gosa -type f -exec chmod -x {} \;
+	-find debian/gosa -type f -exec chmod -x {} \; &> /dev/null
 	-chmod +x debian/gosa/usr/bin/mkntpasswd
 	-rm -rf debian/gosa/usr/share/gosa/doc/guide/user/*/lyx-source
 	-rm -rf debian/gosa/usr/share/gosa/doc/guide/admin
@@ -68,7 +68,6 @@ install-stamp:
 	-cp -R debian/gosa/usr/share/gosa/doc/* debian/gosa/usr/share/doc/gosa
 	-rm -rf debian/gosa/usr/share/gosa/contrib
 	-rm -rf debian/gosa/usr/share/gosa/locale/en
-	-chmod +x debian/gosa/usr/lib/gosa/*
 	-rm -rf debian/gosa/usr/share/gosa/gen_locale.sh
 	-rm -rf debian/gosa/usr/share/gosa/gen_function_list.php
 	-rm -rf debian/gosa/usr/share/gosa/update.sh
