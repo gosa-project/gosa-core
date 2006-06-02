@@ -94,7 +94,6 @@ class servgeneric extends plugin
           }
 
           for($i = 0; $i < $res['objectClass']['count'] ; $i ++){
-            if(($attrs['FAIstate'] == "") && ($res['objectClass'][$i] == "FAIobject")) continue;
             $attrs['objectClass'][] = $res['objectClass'][$i];
           }
 
@@ -103,9 +102,10 @@ class servgeneric extends plugin
           }
 
           if($attrs['FAIstate'] == ""){
+            #FIXME we should check if FAIobject is used anymore
             $attrs['FAIstate'] = array();
           }
-     
+ 
           $ldap->cd($this->dn);
           $ldap->modify($attrs);
           show_ldap_error($ldap->get_error());
