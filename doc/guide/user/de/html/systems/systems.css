@@ -1,0 +1,80 @@
+/* Century Schoolbook font is very similar to Computer Modern Math: cmmi */
+.MATH    { font-family: "Century Schoolbook", serif; }
+.MATH I  { font-family: "Century Schoolbook", serif; font-style: italic }
+.BOLDMATH { font-family: "Century Schoolbook", serif; font-weight: bold }
+
+/* implement both fixed-size and relative sizes */
+SMALL.XTINY		{ font-size : xx-small }
+SMALL.TINY		{ font-size : x-small  }
+SMALL.SCRIPTSIZE	{ font-size : smaller  }
+SMALL.FOOTNOTESIZE	{ font-size : small    }
+SMALL.SMALL		{  }
+BIG.LARGE		{  }
+BIG.XLARGE		{ font-size : large    }
+BIG.XXLARGE		{ font-size : x-large  }
+BIG.HUGE		{ font-size : larger   }
+BIG.XHUGE		{ font-size : xx-large }
+
+/* heading styles */
+H1		{  }
+H2		{  }
+H3		{  }
+H4		{  }
+H5		{  }
+
+/* mathematics styles */
+DIV.displaymath		{ }	/* math displays */
+TD.eqno			{ }	/* equation-number cells */
+
+
+/* document-specific styles come next */
+DIV.navigation		{   }
+SPAN.textit		{ font-style: italic  }
+SPAN.arabic		{   }
+SPAN.textbf		{ font-weight: bold  }
+#hue111		{ color: #ff0000;  }
+#hue22		{ color: #0000ff;  }
+#hue237		{ color: #ff0000;  }
+#hue261		{ color: #ff0000;  }
+#hue265		{ color: #ff0000;  }
+#hue313		{ color: #ff0000;  }
+#hue347		{ color: #ff0000;  }
+#hue352		{ color: #ff0000;  }
+#hue357		{ color: #ff0000;  }
+#hue365		{ color: #ff0000;  }
+#hue367		{ color: #ff0000;  }
+#hue373		{ color: #ff0000;  }
+#hue378		{ color: #ff0000;  }
+#hue384		{ color: #ff0000;  }
+#hue40		{ color: #000000;  }
+#hue427		{ color: #000000;  }
+#hue457		{ color: #ff0000;  }
+#hue460		{ color: #ff0000;  }
+#hue462		{ color: #ff0000;  }
+#hue464		{ color: #ff0000;  }
+#hue466		{ color: #ff0000;  }
+#hue468		{ color: #ff0000;  }
+#hue470		{ color: #ff0000;  }
+#hue484		{ color: #000000;  }
+#hue488		{ color: #000000;  }
+#hue510		{ color: #000000;  }
+#hue514		{ color: #000000;  }
+#hue525		{ color: #ff0000;  }
+#hue536		{ color: #ff0000;  }
+#hue537		{ color: #ff0000;  }
+#hue541		{ color: #ff0000;  }
+#hue552		{ color: #ff0000;  }
+#hue553		{ color: #ff0000;  }
+#hue562		{ color: #ff0000;  }
+#hue563		{ color: #ff0000;  }
+#hue567		{ color: #ff0000;  }
+#hue568		{ color: #ff0000;  }
+#hue570		{ color: #ff0000;  }
+#hue572		{ color: #ff0000;  }
+#hue574		{ color: #ff0000;  }
+#hue577		{ color: #ff0000;  }
+#hue578		{ color: #ff0000;  }
+#hue580		{ color: #ff0000;  }
+#hue581		{ color: #ff0000;  }
+#hue583		{ color: #ff0000;  }
+#hue584		{ color: #ff0000;  }
