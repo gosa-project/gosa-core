@@ -1,6 +1,6 @@
-<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
+	<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
 	<tr>
-  		<td style="vertical-align:top; width:50%;">
+	 		<td style="vertical-align:top; width:50%;">
 			<div class="contentboxh">
 				<p class="contentboxh">
 				 	{$Summary} {$hint} 
@@ -11,7 +11,7 @@
   			</div>
   			<div style='height:4px;'>
 			</div>
-  			<div class="contentboxb" style="border-top:1px solid #B0B0B0;">
+  				<div class="contentboxb" style="border-top:1px solid #B0B0B0;">
       			{$DivList}
     			<input type=hidden name="edit_helper">
   			</div>
@@ -29,6 +29,7 @@
    			</div>
 			{$UserBox2}
    			<br>
+			{if !$Skip_Filter_Part }
    			<div class="contentboxh">
     			<p class="contentboxh">
 					<img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}
@@ -53,6 +54,7 @@
 			{$apply}
    			</div>
 			{$UserBox3}
+			{/if}
   		</td>
 		{else}
   		<td style="vertical-align:top;">

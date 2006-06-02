@@ -29,6 +29,10 @@ class MultiSelectWindow{
 	var $DepartmentsAdded		= false;
 	var $selectedBase       = "";
 
+  var $DivHeight          = "";
+
+  var $HideFilterPart     = false;
+
   var $SaveAdditionalVars = array();  // Additional Post vars to store 
 
 
@@ -37,6 +41,16 @@ class MultiSelectWindow{
 		$this->array_Elements = array();
 	}
 
+  function ForceMaximumDivHeight($height = "")
+  {
+    $this->DivHeight = $height;
+  }
+
+
+  function HideFilterPart($bool = true)
+  {
+    $this->HideFilterPart = $bool;
+  }
 
 	/* Adds a regex input field to the current dialog */
 	function AddRegex($name,$string,$value,$conn,$image="images/search.png")
@@ -229,6 +243,10 @@ class MultiSelectWindow{
 		$divlist = new divlist($this->string_Title);
 		$divlist->SetSummary($this->string_Summary);
 		$divlist->SetEntriesPerPage(0); // 0 for scrollable list 
+  
+    if($this->DivHeight != ""){
+      $divlist->SetHeight($this->DivHeight);
+    }
 
 		/* set Header informations 
 		 */
@@ -287,6 +305,13 @@ class MultiSelectWindow{
 				</table>";
 		}
 		$smarty->assign("regexes"			, $regexes );
+
+    /* Hide Filter Part if Requested or empty */
+    if((empty($boxes)) && (empty($regexes)) || ($this->HideFilterPart)){
+		  $smarty->assign("Skip_Filter_Part",	true);
+    }else{ 
+		  $smarty->assign("Skip_Filter_Part",	false);
+    }
 
 		/* Assign alphabet and display it 
 		 */	

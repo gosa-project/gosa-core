@@ -16,6 +16,8 @@ class divlist {
 	var $i_currentPage;
 	var $i_entriesPerPage;
 
+  var $height_forced  = false;
+
 	// Added php 4 constructor
 	function divlist($pageid){
 
@@ -49,6 +51,7 @@ class divlist {
 	
   function SetHeight($s_height) {
 		$this->s_height= $s_height;
+    $this->height_forced =true;
 	}
   
   function SetWidth($s_width) {
