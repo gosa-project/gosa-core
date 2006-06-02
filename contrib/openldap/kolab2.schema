@@ -491,9 +491,10 @@ objectclass ( 1.3.6.1.4.1.19414.2.2.1
 objectclass ( 1.3.6.1.4.1.19414.2.2.9 
   NAME 'kolabSharedFolder'
   DESC 'Kolab public shared folder'
-  SUP posixGroup STRUCTURAL
+  SUP top AUXILIARY
   MUST cn
   MAY ( acl $
+  	alias $
         cyrus-userquota $
         kolabHomeServer $
         kolabDeleteflag ) )
