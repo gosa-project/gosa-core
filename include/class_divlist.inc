@@ -152,7 +152,7 @@ class divlist {
         $s_return .= "\n<tr><td colspan='".$this->cols."' class='scrollbody'><div style='width:".$this->s_width."px;height:".($this->s_height-20)."px;' id='d_scrollbody' class='scrollbody'>";
         $s_return .= "<table summary='' style='height:100%;width:581px;' cellspacing='0' id='t_scrollbody'>";
       } else {
-        $s_return .= "\n<tr><td colspan='".$this->cols."' class='scrollbody'><div style='width:".$this->s_width."px;height:".($this->s_height-20)."px;' id='d_scrollbody' class='scrollbody_onlywidth'>";
+        $s_return .= "\n<tr><td colspan='".$this->cols."' class='scrollbody'><div style='width:".$this->s_width."px;height:".($this->s_height-20)."px;' id='d_scrollbody_onlywidth' class='scrollbody'>";
         $s_return .= "<table summary='' style='height:100%;width:581px;' cellspacing='0' id='t_scrollbody_onlywidth'>";
       }
   	}

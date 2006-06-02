@@ -45,6 +45,11 @@ class MultiSelectWindow{
     $this->HideFilterPart = $bool;
   }
 
+  function SetHeight($height)
+  { 
+    $this->DivHeight=$height;
+  }
+
 	/* Adds a regex input field to the current dialog */
 	function AddRegex($name,$string,$value,$conn,$image="images/search.png")
 	{
