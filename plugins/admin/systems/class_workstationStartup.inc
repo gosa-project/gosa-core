@@ -1000,8 +1000,14 @@ class workstartup extends plugin
       $this->FAIdebianMirror = "";
     }
    
+    /* Get FAIstate from object, the generic tab could have changed it during execute */
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd($this->dn);
+    $ldap->cat($this->dn,array("FAIstate"));
+    $checkFAIstate = $ldap->fetch();
+
     /* Remove FAI objects if no FAI class is selected */ 
-    if(count($this->FAIclass)==0){
+    if((count($this->FAIclass)==0) && (!isset($checkFAIstate['FAIstate']))){
       $tmp = array();
       foreach($this->attrs['objectClass'] as $class){
         if($class != "FAIobject"){
@@ -1022,8 +1028,6 @@ class workstartup extends plugin
     }
     $this->attrs['gotoShare']=$tmp;
 
-    $ldap= $this->config->get_ldap_link();
-    $ldap->cd($this->dn);
     $this->cleanup();
     $ldap->modify ($this->attrs); 
 
