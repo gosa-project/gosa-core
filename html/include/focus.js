@@ -195,10 +195,13 @@ function js_check(form) {
 	form.javascript.value = 'true';
 }
 
-window.onload = adjust_width;
-window.onresize = adjust_width;
-window.onload = adjust_height;
-window.onresize = adjust_height;
+window.onload = adjust;
+window.onresize = adjust;
+
+function adjust (e) {
+	adjust_height(e);
+	adjust_width(e);
+}
 
 // Automatic resize (height) of divlists
 function adjust_height(e) {
@@ -258,6 +261,32 @@ function adjust_width(e) {
 	
 			// Resize the Header cells (only the relative-width ones)
 			document.getElementById('t_scrollhead').style.width=div_width+"px";
+		}
+	} else if(document.defaultView && document.getElementById("t_scrolltable_onlywidth")) {
+		// Resize the div
+		var div_width=parseInt(document.defaultView.getComputedStyle(document.getElementById("t_scrolltable_onlywidth"),"").getPropertyValue('width'));
+		var width= parseInt(window.innerWidth);
+
+		// Resize the body cells
+		var diff= width-div_width-470;
+		
+		// window has been upscaled
+		if(div_width+diff>=600) {
+			document.getElementById('d_scrollbody_onlywidth').style.width=div_width+diff+"px";
+			document.getElementById('t_scrollbody_onlywidth').style.width=(div_width-19)+diff+"px";
+	
+			// Resize the Header cells (only the relative-width ones)
+			document.getElementById('t_scrollhead_onlywidth').style.width=div_width+diff+"px";
+
+		// window has been downscaled, we must reset the div to 600px
+		} else if (width < 930) {
+			// Reset layout (set width to 600px)
+			div_width=600;
+			document.getElementById('d_scrollbody_onlywidth').style.width=div_width+"px";
+			document.getElementById('t_scrollbody_onlywidth').style.width=(div_width-19)+"px";
+	
+			// Resize the Header cells (only the relative-width ones)
+			document.getElementById('t_scrollhead_onlywidth').style.width=div_width+"px";
 		}
 	} else {
 		// IE

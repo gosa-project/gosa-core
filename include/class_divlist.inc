@@ -16,6 +16,8 @@ class divlist {
 	var $i_currentPage;
 	var $i_entriesPerPage;
 
+  var $force_height = false;
+  
 	// Added php 4 constructor
 	function divlist($pageid){
 
@@ -49,6 +51,7 @@ class divlist {
 	
   function SetHeight($s_height) {
 		$this->s_height= $s_height;
+    $this->force_height = true;
 	}
   
   function SetWidth($s_width) {
@@ -61,9 +64,15 @@ class divlist {
 	
 	function DrawList(){
 		$s_return = "";
-		$s_return.= "<table summary='".$this->s_summary."' style='width:".
-                $this->s_width."px;height:".$this->s_height.
-                "px;' cellspacing='0' id='t_scrolltable'>";
+    if(!$this->force_height){
+		  $s_return.= "<table summary='".$this->s_summary."' style='width:".
+                  $this->s_width."px;height:".$this->s_height.
+                  "px;' cellspacing='0' id='t_scrolltable'>";
+    } else {
+		  $s_return.= "<table summary='".$this->s_summary."' style='width:".
+                  $this->s_width."px;height:".$this->s_height.
+                  "px;' cellspacing='0' id='t_scrolltable_onlywidth'>";
+    }
 
     $s_return.= $this->_generateHeader();
     $s_return.=$this->_generatePage();
@@ -95,7 +104,11 @@ class divlist {
 		
     // Using scrolltable?
     if($this->i_entriesPerPage == 0) {
-      $s_return.= "\n<tr><td class='scrollhead'><table summary='' style='width:".$this->s_width."px;' cellspacing='0' id='t_scrollhead'>";
+      if(!$this->force_height) {
+        $s_return.= "\n<tr><td class='scrollhead'><table summary='' style='width:".$this->s_width."px;' cellspacing='0' id='t_scrollhead'>";
+      } else {
+        $s_return.= "\n<tr><td class='scrollhead'><table summary='' style='width:".$this->s_width."px;' cellspacing='0' id='t_scrollhead_onlywidth'>";
+      }
     }
 
 		$s_return.= "\n<tr>";
@@ -135,8 +148,13 @@ class divlist {
    
     if($this->i_entriesPerPage == 0) {
       // We need to construct a "body"-table that is width-of-scrollbar thinner than the "head"-table.
-      $s_return .= "\n<tr><td colspan='".$this->cols."' class='scrollbody'><div style='width:".$this->s_width."px;height:".($this->s_height-20)."px;' id='d_scrollbody' class='scrollbody'>";
-      $s_return .= "<table summary='' style='height:100%;width:581px;' cellspacing='0' id='t_scrollbody'>";
+      if(!$this->force_height) {
+        $s_return .= "\n<tr><td colspan='".$this->cols."' class='scrollbody'><div style='width:".$this->s_width."px;height:".($this->s_height-20)."px;' id='d_scrollbody' class='scrollbody'>";
+        $s_return .= "<table summary='' style='height:100%;width:581px;' cellspacing='0' id='t_scrollbody'>";
+      } else {
+        $s_return .= "\n<tr><td colspan='".$this->cols."' class='scrollbody'><div style='width:".$this->s_width."px;height:".($this->s_height-20)."px;' id='d_scrollbody' class='scrollbody_onlywidth'>";
+        $s_return .= "<table summary='' style='height:100%;width:581px;' cellspacing='0' id='t_scrollbody_onlywidth'>";
+      }
   	}
  
     $i_alternate=0;
