@@ -30,8 +30,6 @@ install-stamp:
 	-find debian/gosa -type d -name ".svn" -exec rm -rf {} \; &> /dev/null || /bin/true
 	-cp -R debian/gosa/usr/share/gosa/contrib/* debian/gosa/usr/share/doc/gosa/contrib/
 	-cp debian/gosa/usr/share/gosa/contrib/openldap/go*.schema debian/gosa-schema/etc/ldap/schema
-	-mkdir debian/gosa/usr/share/doc/gosa
-	-mkdir debian/gosa/usr/share/gosa/bin
 	-mkdir -p debian/gosa-schema/usr/share/doc/gosa-schema
 	-cp -R INSTALL debian/gosa/usr/share/doc/gosa/README.INSTALL
 	-gzip -c9 debian/changelog > debian/gosa/usr/share/doc/gosa/changelog.Debian.gz
