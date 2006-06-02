@@ -43,16 +43,5 @@ uses the NT/LM attributes to pre-generate samba password hashes -
 to allow easy switching of account properties without asking for
 passwords after adding samba accounts.
 
-
-* A note to PHP5 errors and smarty
-
-When using PHP5 and the debian packaged version of smarty, you
-may get a set of error messages about call by reference for non
-variables. This is no GOsa problem. Please modify your php.ini
-to have error reporting set to this:
-
-error_reporting  =  E_ALL & ~E_NOTICE & ~E_STRICT
-
-
 ----
 Cajus Pollmeier <cajus@debian.org>  Fri 02 Jun 2006 16:23:50 +0200

@@ -1,18 +1,11 @@
-Target for 2.5:
+Target for 2.6:
 ===============
 
-* Update the french manual ( OpenSides )
-
-* Change FAIstate when triggering actions
-  (install, sysinfo, softupdate)
+* Add new smarty gettext plugin
 
 * Fix DNS plugin
   * Zones are not creatable, currently
   * Error messages are partly wrong
-
-
-Target for 2.6:
-===============
 
 * Auto-Resize for subdialogs
 

@@ -5,7 +5,7 @@
 {assign_debug_info}
 
 {if isset($_smarty_debug_output) and $_smarty_debug_output eq "html"}
-	<table summary="" border=0 width="100%">
+	<table border=0 width=100%>
 	<tr bgcolor=#cccccc><th colspan=2>Smarty Debug Console</th></tr>
 	<tr bgcolor=#cccccc><td colspan=2><b>included templates & config files (load time in seconds):</b></td></tr>
 	{section name=templates loop=$_debug_tpls}
@@ -37,7 +37,7 @@
 	{rdelim}
 	_smarty_console = window.open("",title.value,"width=680,height=600,resizable,scrollbars=yes");
 	_smarty_console.document.write("<HTML><HEAD><TITLE>Smarty Debug Console_"+self.name+"</TITLE></HEAD><BODY bgcolor=#ffffff>");
-	_smarty_console.document.write("<table summary="" border=0 width='100%'>");
+	_smarty_console.document.write("<table border=0 width=100%>");
 	_smarty_console.document.write("<tr bgcolor=#cccccc><th colspan=2>Smarty Debug Console</th></tr>");
 	_smarty_console.document.write("<tr bgcolor=#cccccc><td colspan=2><b>included templates & config files (load time in seconds):</b></td></tr>");
 	{section name=templates loop=$_debug_tpls}
