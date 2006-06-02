@@ -475,7 +475,7 @@ class groupManagement extends plugin
         return( $str);
       };
       /* Ensure that the new object is shown in the list now */
-      $this->relaod();
+      $this->reload();
     }
 
 
