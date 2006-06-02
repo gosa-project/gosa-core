@@ -1,5 +1,7 @@
-README.Debian for GOsa 2.4
+README.Debian for GOsa 2.5
 --------------------------
+
+* Generic informations
 
 Getting GOsa running itself is not very complicated. Problems normally
 arise when integrating it in various services.
@@ -12,22 +14,24 @@ LDAP-servers slapd.conf:
 Samba 2:
 include         /etc/ldap/schema/samba.schema
 include         /etc/ldap/schema/trust.schema
-include         /etc/ldap/schema/gohard.schema
+include         /etc/ldap/schema/gosystem.schema
 include         /etc/ldap/schema/gofon.schema
 include         /etc/ldap/schema/goto.schema
 include         /etc/ldap/schema/gosa.schema
 include         /etc/ldap/schema/gofax.schema
 include         /etc/ldap/schema/goserver.schema
+include         /etc/ldap/schema/goto-mime.schema
 
 Samba 3:
 include         /etc/ldap/schema/samba3.schema
 include         /etc/ldap/schema/trust.schema
-include         /etc/ldap/schema/gohard.schema
+include         /etc/ldap/schema/gosystem.schema
 include         /etc/ldap/schema/gofon.schema
 include         /etc/ldap/schema/goto.schema
 include         /etc/ldap/schema/gosa+samba3.schema
 include         /etc/ldap/schema/gofax.schema
 include         /etc/ldap/schema/goserver.schema
+include         /etc/ldap/schema/goto-mime.schema
 
 Schema files for samba and trust accounts are not part of the
 gosa-schema package, but are included in:
@@ -39,5 +43,16 @@ uses the NT/LM attributes to pre-generate samba password hashes -
 to allow easy switching of account properties without asking for
 passwords after adding samba accounts.
 
+
+* A note to PHP5 errors and smarty
+
+When using PHP5 and the debian packaged version of smarty, you
+may get a set of error messages about call by reference for non
+variables. This is no GOsa problem. Please modify your php.ini
+to have error reporting set to this:
+
+error_reporting  =  E_ALL & ~E_NOTICE & ~E_STRICT
+
+
 ----
-Cajus Pollmeier <cajus@debian.org>  Fri 16 May 2003 11:26:51 +0200
+Cajus Pollmeier <cajus@debian.org>  Fri 02 Jun 2006 16:23:50 +0200
