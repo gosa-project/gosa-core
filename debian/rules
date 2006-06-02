@@ -78,6 +78,7 @@ install-stamp:
 	-rm -rf debian/gosa/usr/share/gosa/gen_online_help.sh
 	-rm -rf debian/gosa/usr/share/gosa/gen_function_list.php
 	-rm -rf debian/gosa/usr/share/gosa/update.sh
+	-rm -rf debian/gosa/usr/share/doc/gosa/guide*
 	-mkdir -p debian/gosa/usr/share/php/smarty/libs/plugins
 	-cp include/smarty/plugins/block.t.php debian/gosa/usr/share/php/smarty/libs/plugins
 	-rm -rf debian/gosa/usr/share/gosa/include/smarty
@@ -93,11 +94,10 @@ binary-indep: install
 	dh_installdocs 
 	dh_installcron
 	dh_installexamples
-#	dh_undocumented  
-	dh_installman
+	dh_installman debian/mkntpasswd.1
 	dh_link
 	dh_strip
-#	dh_compress
+	dh_compress
 	dh_fixperms 
 	dh_perl
 	dh_installdeb
