@@ -47,6 +47,15 @@ class termgeneric extends plugin
       "ghGfxAdapter", "ghSoundAdapter", "gotoLastUser");
   var $objectclasses= array("top", "gotoTerminal", "GOhard");
 
+  var $mapActions   = array("reboot"          => "",
+                            "instant_update"  => "softupdate",
+                            "update"          => "sceduledupdate",
+                            "reinstall"       => "install",
+                            "rescan"          => "",
+                            "memcheck"        => "memcheck",
+                            "sysinfo"         => "sysinfo");
+
+
   function termgeneric ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
@@ -121,6 +130,36 @@ class termgeneric extends plugin
     }
 
     if (isset($_POST['action'])){
+
+      /* Set FAIstate */
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cd($this->config->current['BASE']);
+      $ldap->cat($this->dn,array("objectClass"));
+      $res = $ldap->fetch();
+
+      $attrs = array();
+      $attrs['FAIstate'] = "";
+      if(isset($this->mapActions[$_POST['saction']])){
+        $attrs['FAIstate'] = $this->mapActions[$_POST ['saction']];
+      }
+
+      for($i = 0; $i < $res['objectClass']['count'] ; $i ++){
+        $attrs['objectClass'][] = $res['objectClass'][$i];
+      }
+
+      if(($attrs['FAIstate'] != "") && (!in_array("FAIobject",$attrs['objectClass']))){
+        $attrs['objectClass'][] = "FAIobject";
+      }
+
+      if($attrs['FAIstate'] == ""){
+      #FIXME we should check if FAIobject is used anymore
+        $attrs['FAIstate'] = array();
+      }
+
+      $ldap->cd($this->dn);
+      $ldap->modify($attrs);
+      show_ldap_error($ldap->get_error());
+
       switch($_POST['saction']){
         case 'wake':
           $cmd= search_config($this->config->data['TABS'], "termgeneric", "WAKECMD");
@@ -220,10 +259,16 @@ class termgeneric extends plugin
 
     /* Offline */
     if ($retval == 0){
-      $smarty->assign("actions", array("halt" => _("Switch off"), "reboot" => _("Reboot")));
+      $smarty->assign("actions", array( "halt" => _("Switch off"), 
+                                        "reboot" => _("Reboot"),
+                                        "memcheck" => _("Memory test"),
+                                        "sysinfo"  => _("System analysis")));
     } else {
-      $smarty->assign("actions", array("wake" => _("Wake up")));
+      $smarty->assign("actions", array("wake" => _("Wake up"),
+                                       "memcheck" => _("Memory test"),
+                                       "sysinfo"  => _("System analysis")));
     }
+
     /* Arrays */
     $smarty->assign("modes", $this->modes);
 
