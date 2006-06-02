@@ -195,13 +195,8 @@ function js_check(form) {
 	form.javascript.value = 'true';
 }
 
-window.onload = adjust;
-window.onresize = adjust;
-
-function adjust(e) {
-	adjust_height(e);
-	adjust_width(e);
-}
+window.onload = adjust_width;
+window.onresize = adjust_width;
 
 // Automatic resize (height) of divlists
 function adjust_height(e) {

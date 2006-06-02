@@ -1,4 +1,12 @@
 <!-- Headline -->
+<!--
+{if !$force_height}
+<script language="javascript">
+  window.onload = adjust_height;
+  window.onresize = adjust_height;
+</script>
+{/if}
+-->
 <body>
 {$php_errors}
 <form action='main.php{$plug}' name='mainform' method='post' enctype='multipart/form-data'>
