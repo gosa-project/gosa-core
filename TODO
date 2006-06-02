@@ -1,7 +1,8 @@
 Target for 2.6:
 ===============
 
-* Add new smarty gettext plugin
+* Add new smarty gettext plugin -> requires fixing of <b> and <i> tags in
+  translations
 
 * Fix DNS plugin
   * Zones are not creatable, currently
