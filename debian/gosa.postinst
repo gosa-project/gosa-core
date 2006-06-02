@@ -49,7 +49,11 @@ done
 
 # Finally restart servers
 for server in $servers; do
-	/etc/init.d/$server reload || /bin/true
+	if [ -x /usr/sbin/invoke-rc.d ]; then
+		invoke-rc.d $server restart
+	else
+		/etc/init.d/$server restart
+	fi
 done
 
 exit 0
