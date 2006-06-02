@@ -30,10 +30,9 @@ install-stamp:
 	-find debian/gosa -type d -name ".svn" -exec rm -rf {} \; &> /dev/null || /bin/true
 	-cp -R debian/gosa/usr/share/gosa/contrib/* debian/gosa/usr/share/doc/gosa/contrib/
 	-cp debian/gosa/usr/share/gosa/contrib/openldap/go*.schema debian/gosa-schema/etc/ldap/schema
-	-mkdir debian/gosa/usr/share/doc/gosa/manual
+	-mkdir debian/gosa/usr/share/doc/gosa
 	-mkdir debian/gosa/usr/share/gosa/bin
 	-mkdir -p debian/gosa-schema/usr/share/doc/gosa-schema
-	-cp -R debian/gosa/usr/share/gosa/doc/* debian/gosa/usr/share/doc/gosa/manual
 	-cp -R INSTALL debian/gosa/usr/share/doc/gosa/README.INSTALL
 	-gzip -c9 debian/changelog > debian/gosa/usr/share/doc/gosa/changelog.Debian.gz
 	-gzip -c9 debian/changelog > debian/gosa-schema/usr/share/doc/gosa-schema/changelog.Debian.gz
@@ -54,8 +53,6 @@ install-stamp:
 	-cp -R contrib/encodings debian/gosa/etc/gosa/encodings
 	-cp -R plugins/personal/mail/sieve-*.txt debian/gosa/etc/gosa
 	-cp contrib/shells debian/gosa/etc/gosa
-	-rm -rf debian/gosa/usr/share/gosa/contrib
-	-rm -rf debian/gosa/usr/share/gosa/doc
 	-rm debian/gosa/usr/share/gosa/bin/gosa
 	-mkdir -p debian/gosa/usr/lib/gosa
 	-mv debian/gosa/usr/share/gosa/bin/* debian/gosa/usr/bin
@@ -63,6 +60,15 @@ install-stamp:
 	-rm -rf debian/gosa/usr/share/doc/gosa/marketing
 	-find debian/gosa -type f -exec chmod -x {} \;
 	-chmod +x debian/gosa/usr/bin/mkntpasswd
+	-rm -rf debian/gosa/usr/share/gosa/doc/guide/user/*/lyx-source
+	-rm -rf debian/gosa/usr/share/gosa/doc/guide/admin
+	-rm -rf debian/gosa/usr/share/gosa/doc/guide/devel
+	-for lang in de en fr nl; do mkdir -p debian/gosa-help-$$lang/usr/share/gosa/doc/guide/user/$$lang; done
+	-for lang in de en fr nl; do mv debian/gosa/usr/share/gosa/doc/guide/user/$$lang/* debian/gosa-help-$$lang/usr/share/gosa/doc/guide/user/$$lang/; done
+	-cp -R debian/gosa/usr/share/gosa/doc/* debian/gosa/usr/share/doc/gosa
+	-rm -rf debian/gosa/usr/share/gosa/contrib
+	-rm -rf debian/gosa/usr/share/gosa/doc
+	-rm -rf debian/gosa/usr/share/gosa/locale/en
 	-chmod +x debian/gosa/usr/lib/gosa/*
 	-rm -rf debian/gosa/usr/share/gosa/gen_locale.sh
 	-rm -rf debian/gosa/usr/share/gosa/gen_function_list.php
