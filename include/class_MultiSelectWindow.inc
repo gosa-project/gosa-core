@@ -35,8 +35,6 @@ class MultiSelectWindow{
 
   var $SaveAdditionalVars = array();  // Additional Post vars to store 
 
-  var $force_height       = false;
-
 	function ClearElementsList()
 	{
 		$this->array_Elements = array();
@@ -46,18 +44,6 @@ class MultiSelectWindow{
   {
     $this->HideFilterPart = $bool;
   }
-
-  function ForceMaximumDivHeight($height = "")
-  {
-    $this->DivHeight    = $height;
-    if(!empty($height)){
-      $this->force_height = true;
-    }else{
-      $this->force_height = false;
-    }
-  }
-
-
 
 	/* Adds a regex input field to the current dialog */
 	function AddRegex($name,$string,$value,$conn,$image="images/search.png")
@@ -355,8 +341,6 @@ class MultiSelectWindow{
 
 		$smarty->assign("filterName"	,	$this->filterName);
 		$smarty->assign("is_headpage"	,	$this->is_headpage);
-
-    $smarty->assign("force_height",$this->force_height);
 
 		$display = $smarty->fetch(get_template_path("MultiSelectWindow.tpl"));
 		return($display);
