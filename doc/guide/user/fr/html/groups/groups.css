@@ -33,13 +33,12 @@ SPAN.textit		{ font-style: italic  }
 SPAN.arabic		{   }
 SPAN.textbf		{ font-weight: bold  }
 SPAN.textsf		{ font-style: italic  }
-#hue100		{ color: #ff0000;  }
-#hue102		{ color: #000000;  }
-#hue104		{ color: #000000;  }
-#hue131		{ color: #000000;  }
-#hue134		{ color: #ff0000;  }
+#hue101		{ color: #000000;  }
+#hue103		{ color: #000000;  }
+#hue129		{ color: #000000;  }
+#hue132		{ color: #ff0000;  }
+#hue133		{ color: #ff0000;  }
 #hue135		{ color: #ff0000;  }
-#hue137		{ color: #ff0000;  }
 #hue25		{ color: #0000ff;  }
 #hue28		{ color: #000000;  }
 #hue30		{ color: #000000;  }
@@ -47,7 +46,8 @@ SPAN.textsf		{ font-style: italic  }
 #hue34		{ color: #000000;  }
 #hue36		{ color: #000000;  }
 #hue43		{ color: #000000;  }
-#hue92		{ color: #000000;  }
-#hue94		{ color: #ff0000;  }
-#hue96		{ color: #000000;  }
-#hue98		{ color: #000000;  }
+#hue91		{ color: #000000;  }
+#hue93		{ color: #ff0000;  }
+#hue95		{ color: #000000;  }
+#hue97		{ color: #000000;  }
+#hue99		{ color: #ff0000;  }
