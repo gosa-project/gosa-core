@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polski\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2006-06-02 15:28+0100\n"
+"PO-Revision-Date: 2006-06-06 02:56+0100\n"
 "Last-Translator: Piotr Rybicki <meritus@innervision.pl>\n"
 "Language-Team: Piotr Rybicki <meritus@innervision.pl>\n"
 "MIME-Version: 1.0\n"
@@ -7101,7 +7101,7 @@ msgstr "Pole 'Nazwa' zawiera zarezerwowane słow '%s'. Proszę wybrać inną naz
 
 #: plugins/admin/departments/class_departmentGeneric.inc:284
 msgid "Fatal error: Can't find an unused tag to mark the administrative unit!"
-msgstr ""
+msgstr "Błąd krytyczny: Nie można znaleźć nieużywnego znacznika dla jednostki administracyjnej!"
 
 #: plugins/admin/departments/class_departmentGeneric.inc:326
 msgid "Saving department failed"
@@ -8026,7 +8026,7 @@ msgstr "Ten serwer nie posiada cech repozytorium FAI. Można je włączyć klika
 #: plugins/admin/systems/class_servRepository.inc:144
 #, php-format
 msgid "You can't delete this release, it is still used by these workstations [%s]. Please solve this dependencies first, to keep data base consistency."
-msgstr ""
+msgstr "Nie można usunąć tego wydania, jest wciąż używane przez te stacje robocze [%s]. Proszę poprawić te zależności aby zachować spójność danych."
 
 #: plugins/admin/systems/class_servRepository.inc:176
 #, php-format
@@ -8399,7 +8399,7 @@ msgstr "Przekroczony limit czasu odpowiedzi"
 
 #: plugins/admin/systems/phonesettings.tpl:75
 msgid "Modus"
-msgstr ""
+msgstr "Modus"
 
 #: plugins/admin/systems/phonesettings.tpl:106
 msgid "Authtype"
@@ -8443,7 +8443,7 @@ msgstr "Nazwa maszyny"
 
 #: plugins/admin/systems/remove.tpl:6
 msgid "This includes <b>all</b> system and setup informations. Please double check if your really want to do this since there is no way for GOsa to get your data back."
-msgstr ""
+msgstr "To zawiera <b>cały</b> system i informacje instalacyjne. Proszę upewnić się, że faktycznie chcesz wykonać tą operację. Nie ma możliwości odwrócenia tego procesu."
 
 #: plugins/admin/systems/class_glpiSelectUser.inc:140
 msgid "use"
@@ -8451,7 +8451,7 @@ msgstr "użyj"
 
 #: plugins/admin/systems/password.tpl:2
 msgid "To change the terminal root password use the fields below. The changes take effect during the next reboot. Please memorize the new password, because you wouldn't be able to log in."
-msgstr ""
+msgstr "Aby zmienić hasło root'a dla terminala użyj pól poniżej. Zmiany wchodzą po następnym uruchomieniu. Proszę zapamiętać nowe hasło, gdyż bez niego logowanie będzie niemożliwe"
 
 #: plugins/admin/systems/password.tpl:5
 msgid "Leave fields blank for password inheritance from default entries."
@@ -8459,7 +8459,7 @@ msgstr "Pozostaw pola puste aby dziedziczyć hasło z wpisów domyślnych."
 
 #: plugins/admin/systems/password.tpl:9
 msgid "Changing the password impinges on authentification only."
-msgstr ""
+msgstr "Zmiana hasła wpływa tylko na autentykację."
 
 #: plugins/admin/systems/class_terminalInfo.inc:54
 #: plugins/admin/systems/class_terminalInfo.inc:199
@@ -8960,7 +8960,7 @@ msgstr "Szablon stacji roboczej dla"
 
 #: plugins/admin/systems/class_systemManagement.inc:735
 msgid "New System from incoming"
-msgstr ""
+msgstr "Nowy system dla nadchodzących"
 
 #: plugins/admin/systems/class_systemManagement.inc:739
 msgid "Workstation is installing"
@@ -9262,7 +9262,7 @@ msgstr "Zintegrowane głośniki"
 
 #: plugins/admin/systems/glpi_devices.tpl:60
 msgid "Sub-D"
-msgstr ""
+msgstr "Pod-D"
 
 #: plugins/admin/systems/glpi_devices.tpl:68
 msgid "BNC"
@@ -9497,7 +9497,7 @@ msgstr "Typ-Mime"
 
 #: plugins/admin/systems/remove_glpi.tpl:10
 msgid "Best thing to do before performing this action would be to save the current contents of your MySql database in a file. So - if you've done so - press 'Delete' to continue or 'Cancel' to abort."
-msgstr ""
+msgstr "Przed wykonaniem tej operacji zaleca się wykonanie kopii bezpieczeństwa bazy MySQL. Naciśnij 'Usuń' aby kontynuować, lub 'Anuluj' aby przerwać."
 
 #: plugins/admin/systems/class_workstationGeneric.inc:184
 msgid "This 'dn' has no workstation features."
@@ -9915,7 +9915,7 @@ msgstr "Inne"
 
 #: plugins/admin/systems/class_workstationStartup.inc:413
 msgid "There are packages in your configuration, which can't be resolved with current server/release settings."
-msgstr ""
+msgstr "Istnieją pakiety w twojej konfiguracji które nie mogą zostać przeanalizowane przy obecnych ustawieniach serwera/wydania."
 
 #: plugins/admin/systems/class_workstationStartup.inc:458
 msgid "Please select a 'FAI server' or remove the 'FAI classes'."
@@ -9923,17 +9923,17 @@ msgstr "Proszę wybrać 'serwer FAI' lub usunąć 'klasy FAI'."
 
 #: plugins/admin/systems/class_workstationStartup.inc:516
 msgid "There is already a profile in your selection that contain partition table configurations."
-msgstr ""
+msgstr "Już istnieje profil w twoim wyborze który zawiera konfiguracje tablicy partycji."
 
 #: plugins/admin/systems/class_workstationStartup.inc:856
 #, php-format
 msgid "Can't resolve one or more of the given FAIclass(es) [%s] in FAI server '%s'. Server was reset to 'auto'."
-msgstr ""
+msgstr "Nie można przetłumaczyć jednej lub więcej klas FAI [%s] na serwerze FAI '%s'. Serwer zresetowano na 'auto'."
 
 #: plugins/admin/systems/class_workstationStartup.inc:867
 #, php-format
 msgid "Can't resolve the given FAIclass(es) [%s] anyway, please check your FAI configurations, possibly some classes where deleted or renamed. !All classes have been removed from this account, press cancel if you don't want this to be saved."
-msgstr ""
+msgstr "Nie można przetłumaczyć klas(y) FAI [%s]. Proszę sprawdzić konfigurację FAI, prawdopodobnie jakieś klasy zostały usunięte lub przemianowane. !Wszystkie klasy zostały usunięte z tego konta, naciśnij anuluj jeśli nie chcesz tego zachować."
 
 #: plugins/admin/systems/class_workstationStartup.inc:1034
 msgid "Saving workstation startup settings failed"
@@ -9987,7 +9987,7 @@ msgstr "Zapisywanie terminala do obiektu DNS nieudane"
 #: plugins/admin/systems/class_printGeneric.inc:103
 #, php-format
 msgid "Can't extract a valid base out of object dn, setting base to '%s'."
-msgstr ""
+msgstr "Nie można wydobyć poprawnej podstawy z obiektu dn, ustawiam podstawę na '%s'."
 
 #: plugins/admin/systems/class_printGeneric.inc:234
 #: plugins/admin/systems/class_printGeneric.inc:242
@@ -10000,7 +10000,7 @@ msgstr "Dodaj rozszerzenie drukarki"
 
 #: plugins/admin/systems/class_printGeneric.inc:235
 msgid "Could not intialize printer tab, parameter parent was missing while construction."
-msgstr ""
+msgstr "Nie można zainicjalizować zakładki drukarek, brak parametru parent podzczas tworzenia."
 
 #: plugins/admin/systems/class_printGeneric.inc:243
 msgid "This is a workstation template, printer tab is disabled."
@@ -10068,7 +10068,7 @@ msgstr "Zapisywanie drukarki nieudane"
 
 #: plugins/admin/systems/SelectDeviceType.tpl:3
 msgid "This is a new system which currently has no system type defined. Please choose a system type for this entry and press the 'continue' button. If this system should be added to a group of system settings, specify the preferred object group below."
-msgstr ""
+msgstr "To jest nowy system który obecnie nie ma zdefiniowanego typu systemu. Proszę wybrać typ systemu dla tego elementu oraz nacisnąć przycisk 'kontynuuj'. Jeśli ten system powinien być dodany do ustawień grupy systemów, podaj preferowaną grupę obiektów poniżej."
 
 #: plugins/admin/systems/SelectDeviceType.tpl:9
 msgid "Please select a system type and an optional bundle of predefined settings to be inherited."
@@ -10344,7 +10344,7 @@ msgstr "Wyświetl obiekty departamentu"
 
 #: plugins/admin/ogroups/termgroup.tpl:2
 msgid "Actions you choose here influence all systems in this object group. Additionally, all values editable here can be inherited by the clients assigned to this object group."
-msgstr ""
+msgstr "Akcje wybrane tutaj wpływają na wszystkie systemy w tej grupie obiektów. Dodatkowo wszystkie wartości edytowalne tutaj mogą być odziedziczone przez klientów przypisanych do tych grup obiektów."
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:25
 #: plugins/admin/ogroups/main.inc:35
@@ -10618,7 +10618,7 @@ msgstr "Ustawienia dźwięku kolejki"
 
 #: plugins/admin/ogroups/phonequeue.tpl:99
 msgid "Use music on hold instead of ringing"
-msgstr ""
+msgstr "Użyj muzyki zamiast dzwonienia podczas oczenikwania"
 
 #: plugins/admin/ogroups/phonequeue.tpl:108
 msgid "Music on hold"
@@ -10634,7 +10634,7 @@ msgstr "Komunikat zapowiadający"
 
 #: plugins/admin/ogroups/phonequeue.tpl:132
 msgid "Sound file for 'You are next ...'"
-msgstr ""
+msgstr "Plik dźwiękowy 'Jesteś następny ...'"
 
 #: plugins/admin/ogroups/phonequeue.tpl:140
 msgid "'There are ...'"
@@ -10661,9 +10661,8 @@ msgid "Hold sound file"
 msgstr "Plik dźwiękowy podtrzymania"
 
 #: plugins/admin/ogroups/phonequeue.tpl:188
-#, fuzzy
 msgid "Less Than sound file"
-msgstr "Plik z dźwiękiem '%s' jest w formacie, który nie jest wspierany."
+msgstr "Plik dźwiękowy 'mniej niż'"
 
 #: plugins/admin/ogroups/phonequeue.tpl:204
 msgid "Phone attributes "
@@ -10806,7 +10805,7 @@ msgstr "Brak uprawnień do usunięcia  tego makro!"
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:646
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:249
 msgid "There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). Your settings can't be saved to asterisk database."
-msgstr ""
+msgstr "Brak zdefiniowanego serwera asterisk. Prawdopodobnie prakuje serwera który obsługuje zarządzanie asterisk (goFonServer). Ustawienia nie mogą być zapisane do bazy asterisk."
 
 #: plugins/gofon/macro/class_gofonMacro.inc:103
 #: plugins/gofon/macro/class_gofonMacroParameters.inc:197
@@ -11175,7 +11174,7 @@ msgstr "Zlicz użytkowników"
 
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:215
 msgid "You have specified a conference 'without PIN' ... please leave the PIN fields empty."
-msgstr ""
+msgstr "Wybrano konferencję 'bez PINu'... proszę pozostawić pola PIN puste."
 
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:219
 msgid "Please enter a PIN."
@@ -11196,7 +11195,7 @@ msgstr "Tylko liczby są dozwolone w okresie życia"
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:261
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:371
 msgid "Can't save any changes to asterisk database, there is currently no mysql extension available in your php setup."
-msgstr ""
+msgstr "Nie można zapisać zmian do bazy asterisk. Brak funkcjonalnosci mysql w ustawieniach php."
 
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:509
 msgid "Saving phone conference failed"
@@ -11345,9 +11344,8 @@ msgstr "Dodawanie znacznika (%s) do obiektu '%s'"
 
 #: include/class_plugin.inc:941
 #: include/class_plugin.inc:970
-#, fuzzy
 msgid "Handle object tagging failed"
-msgstr "Nie udało się zamknąć pliku."
+msgstr "Znakowanie obiektu nieudane"
 
 #: include/class_plugin.inc:957
 #, php-format
@@ -11356,17 +11354,17 @@ msgstr "Usuwanie znacznika z obiektu '%s'"
 
 #: include/functions_setup.inc:84
 msgid "Can't get schema information from server. No schema check possible!"
-msgstr ""
+msgstr "Nie można pobrać informacji o schematach z serwera. Sprawdzenie schematów niemożliwe!"
 
 #: include/functions_setup.inc:99
 #, php-format
 msgid "Optional objectclass '%s' required by plugin '%s' is not present in LDAP setup"
-msgstr ""
+msgstr "Opcjonalna klasa obiektów '%s' wymagana przez dodatek '%s' nie istnieje w konfiguracji LDAP"
 
 #: include/functions_setup.inc:103
 #, php-format
 msgid "Optional objectclass '%s' required by plugin '%s' does not have version %s"
-msgstr ""
+msgstr "Opcjonalna klasa obiektów '%s' wymagana przez dodatek '%s' nie jest w wersji %s"
 
 #: include/functions_setup.inc:108
 #, php-format
@@ -11502,7 +11500,7 @@ msgstr "PHP session.gc_maxlifetime (>= 86400 seconds)."
 
 #: include/functions_setup.inc:287
 msgid "PHP uses this value for the garbage collector to delete old sessions, setting this value to one day will prevent loosing session and cookie  before they really timeout."
-msgstr ""
+msgstr "PHP używa tej wartości dla garbage collector'a do usuwania starych sesji. Ustawienie tej wartości na jeden dzień zapobiegnie ustraceniu sesji oraz cookie zanim faktycznie wygasną."
 
 #: include/functions_setup.inc:290
 msgid "Checking for ldap module"
@@ -11534,7 +11532,7 @@ msgstr "Sprawdzam wsparcie dla iconv"
 
 #: include/functions_setup.inc:303
 msgid "This module is used by GOsa to convert samba munged dial informations and is therefore required."
-msgstr ""
+msgstr "Ten moduł jest używany przez GOsa do konwersji _MUNGED_DIAL_INFORMATIONS? i dlatego jest wymagany."
 
 #: include/functions_setup.inc:306
 msgid "Checking for mhash module"
@@ -11707,7 +11705,7 @@ msgstr "Nie można spiąć się z podanym serwerem LDAP! Proszę sprawdzić czy 
 
 #: include/functions_setup.inc:823
 msgid "Bind to server successful, but the server seems to be completly empty, please check all information twice"
-msgstr ""
+msgstr "Połączenie z serwerem udane, lecz serwer wydaje się być całkowicie pusty, proszę dokładnie sprawdzić wszystkie informacje"
 
 #: include/functions_setup.inc:879
 #, php-format
@@ -11716,7 +11714,7 @@ msgstr "Brak wymaganego atrybutu '%s' w formularzu. Proszę uzupełnić!"
 
 #: include/functions_setup.inc:910
 msgid "Can't read schema informations, GOsa needs to know your schema setup. Please verify that it is readable for GOsa"
-msgstr ""
+msgstr "Nie można czytać informacji w schematach, GOsa musi znać ustawienia schematów. Proszę sprawdzić czy GOsa może czytać ustawienia schematów"
 
 #: include/functions_setup.inc:919
 #, php-format
@@ -11839,15 +11837,15 @@ msgstr "Nie można otworzyć podanego pliku. Sprawdź istnienie i uprawnienia"
 
 #: include/class_certificate.inc:53
 msgid "Can't read specified certificate / or empty string given"
-msgstr ""
+msgstr "Nie można czytać certyfkatu / lub podano pusty ciąg znaków"
 
 #: include/class_certificate.inc:80
 msgid "Can't load certificate, possibly unsupported format (use PEM/DER) "
-msgstr ""
+msgstr "Nie można załadować certyfikatu, prawdopodobnie niewspierany format (użyj PEM/DER)"
 
 #: include/class_certificate.inc:95
 msgid "The Format must be PEM, to output certificate informations"
-msgstr ""
+msgstr "Format musi być PEM, aby wyświetlić informacje certyfikatu"
 
 #: include/class_certificate.inc:192
 msgid "Can't create/open File"
@@ -11914,12 +11912,12 @@ msgstr "Użytkownik /UID nie są unikalne. Proszę sprawdzić bazę LDAP."
 
 #: include/functions.inc:468
 msgid "Error while adding a lock. Parameters are not set correctly, please check the source!"
-msgstr ""
+msgstr "Błąd podczas dodawania blokady. Parametry nie są ustawione prawidłowo, proszę sprawdzić źródło!"
 
 #: include/functions.inc:478
 #, php-format
 msgid "Can't set locking information in LDAP database. Please check the 'config' entry in gosa.conf! LDAP server says '%s'."
-msgstr ""
+msgstr "Nie można ustawić informacji o blokadzie w bazie LDAP. Proszę sprawdzić wpis 'config' w gosa.conf! Odpowiedź serwera LDAP '%s'."
 
 #: include/functions.inc:493
 #, php-format
@@ -11933,15 +11931,15 @@ msgstr "Usuwanie blokady nieudane, odpowiedź serwera LDAP '%s'."
 
 #: include/functions.inc:549
 msgid "Getting the lock from LDAP failed. Parameters are not set correctly, please check the source!"
-msgstr ""
+msgstr "Pobieranie blokady z LDAP nieudane. Parametry nie są ustawione prawidłowo, proszę sprawdzić źródło!"
 
 #: include/functions.inc:559
 msgid "Can't get locking information in LDAP database. Please check the 'config' entry in gosa.conf!"
-msgstr ""
+msgstr "Nie można pobrać informacji o blokadach w bazie LDAP. Proszę sprawdzić wpis 'config' w gosa.conf!"
 
 #: include/functions.inc:567
 msgid "Found multiple locks for object to be locked. This should not be possible - cleaning up multiple references."
-msgstr ""
+msgstr "Znaleziono wiele blokad dla obiektu do zablokowania. Taka sytuacja nie powinna się wydażyć - czyszczę wiele odwołań."
 
 #: include/functions.inc:653
 #, php-format
@@ -11964,7 +11962,7 @@ msgstr "błąd LDAP:"
 
 #: include/functions.inc:1063
 msgid "Problems with the LDAP server mean that you probably lost the last changes. Please check your LDAP setup for possible errors and try again."
-msgstr ""
+msgstr "Problemy z serwerem LDAP oznaczają, że prawdopodobnie utracono ostatnie zmiany. Proszę sprawdzić konfiguracje LDAP w poszukiwaniu możliwych błędów i spróbować ponownie."
 
 #: include/functions.inc:1071
 msgid "Please check your input and fix the error. Press 'OK' to close this message box."
@@ -11985,7 +11983,7 @@ msgstr "Edytuj mimo wszystko"
 #: include/functions.inc:1149
 #, php-format
 msgid "You're going to edit the LDAP entry '%s' which appears to be used by '%s'. Please contact the person in order to clarify proceedings."
-msgstr ""
+msgstr "Zamierzasz edytować wpis LDAP '%s' który wydaje się być używany przez '%s'. Proszę skontaktować się z osobą aby wyjaśnić postępowanie."
 
 #: include/functions.inc:1433
 msgid "Entries per page"
@@ -12048,12 +12046,12 @@ msgstr "Brak parametru SID lub/i RIDBASE w konfiguracji!"
 #: include/class_ldap.inc:195
 #, php-format
 msgid "The LDAP server is slow (%.2fs for the last query). This may be responsible for performance breakdowns."
-msgstr ""
+msgstr "Serwer LDAP odpowiada bardzo wolno (%.2f dla ostatniego zapytania). To może być przyczyną słabej wydajności."
 
 #: include/class_ldap.inc:227
 #, php-format
 msgid "The ldapserver is answering very slow (%.2f), this may be responsible for performance breakdowns."
-msgstr ""
+msgstr "Serwer LDAP odpowiada bardzo wolno (%.2f), to może być przyczyną słabej wydajności."
 
 #: include/class_ldap.inc:447
 #, php-format
@@ -12453,7 +12451,7 @@ msgstr "Wykryto konflikt sesji"
 #: ihtml/themes/altlinux/conflict.tpl:6
 #: ihtml/themes/default/conflict.tpl:6
 msgid "Probably there's another active instance of your session. Multiple window operation is technical not possible and heavily depends on the browser you're using. Usage of different browsers at a time (i.e. IE and Mozilla) is possible. Pressing the <b>Logout</b> button will close this session."
-msgstr ""
+msgstr "Prawdopodobnie istnieje inna aktywna instacja sesji. Operowanie na kilku oknach nie jest technicznie możliwe i mocno zależy od używanej przeglądarki. Użycie różnych przeglądarek (np. IP i Mozilla) jest możliwe. Naciśnięcie <b>Wyloguj</b> zamknie tą sesję."
 
 #: ihtml/themes/altlinux/conflict.tpl:10
 #: ihtml/themes/default/conflict.tpl:10
@@ -12482,7 +12480,7 @@ msgstr "Konto administracyjne oraz grupa już istnieją"
 #: ihtml/themes/altlinux/setup_useradmin.tpl:10
 #: ihtml/themes/default/setup_useradmin.tpl:10
 msgid "To provide full administrative access to GOsa, you need to create a special group which contains the administrative user. The setup program can assist you with this task. Enter the desired username and the password below to create the missing entries."
-msgstr ""
+msgstr "Aby zapewnić pełny dostęp administracyjny do GOsa, należy utworzyć specjalną grupę która zawiera użytkownika administracyjnego. Program instalacyjny może pomóc w tym zadaniu. Wprowadź poniżej wybraną nazwę użytkownika i hasło aby utworzyć brakujące elementy."
 
 #: ihtml/themes/altlinux/login.tpl:15
 #: ihtml/themes/default/login.tpl:14
@@ -12509,7 +12507,7 @@ msgstr "Kliknij tutaj aby się zalogować"
 #: ihtml/themes/altlinux/sizelimit.tpl:3
 #: ihtml/themes/default/sizelimit.tpl:3
 msgid "The size limit option makes LDAP operations faster and saves the LDAP server from getting too much load. The easiest way to handle big databases without long timeouts would be to limit your search to smaller values and use filters to get the entries you are looking for."
-msgstr ""
+msgstr "Limit rozmiaru powoduje szybsze operacje LDAP i zapobiega nadmiernemu obciążeniu serwera LDAP. Najprostrzym sposobem działania na dużych bazach bez opóźnień jest ograniczanie wyszukiwań do mniejszej ilości wyników oraz użycie filtrów dla otrzymania poszukiwanych elementów."
 
 #: ihtml/themes/altlinux/sizelimit.tpl:6
 #: ihtml/themes/default/sizelimit.tpl:6
@@ -12524,7 +12522,7 @@ msgstr "Ignoruj ten błąd i pokaż wszystkie elementy które zwraca serwer LDAP
 #: ihtml/themes/altlinux/sizelimit.tpl:10
 #: ihtml/themes/default/sizelimit.tpl:10
 msgid "ignore this error and show all entries that fit into the defined sizelimit and let me use filters instead"
-msgstr ""
+msgstr "ignoruj ten błąd i pokaż wszystkie elementy które zmieszczą się w zdefiniowanych limicie rozmiaru i pozwól mi użyć filtrów"
 
 #: ihtml/themes/altlinux/framework.tpl:15
 #: ihtml/themes/default/framework.tpl:15
@@ -12567,12 +12565,12 @@ msgstr "Ustawienia trwają..."
 #: ihtml/themes/altlinux/setup_step2.tpl:4
 #: ihtml/themes/default/setup_step2.tpl:4
 msgid "Step two looks for a set of helper programms and checks if they have the correct minimum version."
-msgstr ""
+msgstr "Krok drugi szuka programó pomocniczych i sprawdza czy są w minimalnej wymaganej wersji."
 
 #: ihtml/themes/altlinux/setup_step3.tpl:4
 #: ihtml/themes/default/setup_step3.tpl:4
 msgid "Now we're going include your LDAP server and create an initial configuration. After you've entered the server URI below, a quick check is performed if required LDAP schemas are in place. Samba versions are autodetected by the installed objectclasses. Details on how your LDAP tree is organized will be asked later on."
-msgstr ""
+msgstr "Teraz dodamy serwer LDAP oraz utworzymy wyjściową konfigurację. Po podaniu URI serwera poniżej, wykonane zostanie szybkie sprawdzenie czy wymagane schematy LDAP są na miejscu. Wersje Samba są automatycznie wykryte przez zainstalowane klasy obiektów. Szczegóły dotyczące organizacji drzewa LDAP zostaną skonfigurowane później."
 
 #: ihtml/themes/altlinux/setup_step3.tpl:10
 #: ihtml/themes/default/setup_step3.tpl:10
@@ -12764,7 +12762,7 @@ msgstr "Kreator Copy &amp; paste"
 
 #: ihtml/themes/default/copyPasteDialog.tpl:4
 msgid "Some values need to be unique in the complete directory while some combinations make no sense. GOsa shows the relevant attributes. Please maintain the values below to fullfill the policies."
-msgstr ""
+msgstr "Niektóre wartości muszą być unikalne w całym katalogu, podczas gdy niektóre kombinacje nie mają sensu. GOsa pokazuje dotyczące atrybuty. Proszę poprawić wartości poniżej aby utrzymać zgodność z regułami."
 
 #: ihtml/themes/default/copyPasteDialog.tpl:21
 msgid "Operation complete"
