@@ -65,9 +65,10 @@ class LDAP{
   function convert($dn)
   {
     if (SPECIALS_OVERRIDE == TRUE){
-      return (preg_replace(array("/\\\\,/", "/\\\\2C/", "/\(/", "/\)/", "/\//"),
+      $tmp= preg_replace(array("/\\\\,/", "/\\\\2C/", "/\(/", "/\)/", "/\//"),
                            array("\001CO", "\001CO", "\001OB", "\001CB", "\001SL"),
-                           $dn));
+                           $dn);
+      return (preg_replace('/,\s+/', ',', $tmp));
     } else {
       return ($dn);
     }
