@@ -244,6 +244,7 @@ class ogrouptabs extends tabs
     tabs::save();
 
     /* Fix tagging if needed */
+		$baseobject->dn= $new_dn;
     $baseobject->handle_object_tagging();
   }
 
