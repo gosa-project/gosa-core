@@ -275,18 +275,7 @@ class termgeneric extends plugin
     $tmp2 = array(); 
     foreach($this->config->data['SERVERS']['NFS'] as $server){
       if($server != "default"){
-        $tmp = split("\|",$server);
-        $tmp3= split(":",$tmp[0]);
-
-        $servername = $tmp3[0];
-        $nfsname    = $tmp3[1];  
-
-        $path ="";
-        if(isset($tmp[4])){
-          $path       = $tmp[4];  
-        }
-
-        $tmp2[$servername.":".$path]= $servername.":".$path; 
+        $tmp2[$server]= $server;
       }else{
         $tmp2[$server]="["._("inherited")."]";
       }
@@ -443,11 +432,9 @@ class termgeneric extends plugin
       $this->attrs= $attrs;
     }
 
-    if($this->inheritTimeServer){
-      $this->attrs['gotoNtpServer'] = array();
-    }else{  
-      /* Set ntpServers */
-      $this->attrs['gotoNtpServer'] = array();
+    /* Set ntpServers */
+    $this->attrs['gotoNtpServer'] = array();
+    if(!$this->inheritTimeServer){
       foreach($this->gotoNtpServer as $server){
         $this->attrs['gotoNtpServer'][] = $server;
       }
@@ -464,6 +451,9 @@ class termgeneric extends plugin
       $ldap->cd($this->config->current['BASE']);
       $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
       $ldap->cd($this->dn);
+      if (!count($this->attrs['gotoNtpServer'])){
+        unset($this->attrs['gotoNtpServer']);
+      }
       $ldap->add($this->attrs);
       $this->handle_post_events("add");
     } else {

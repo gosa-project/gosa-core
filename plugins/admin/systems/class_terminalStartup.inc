@@ -363,7 +363,7 @@ class termstartup extends plugin
 
     /* Strip out 'default' values */
     foreach(array("gotoBootKernel","gotoLdapServer") as $value){
-      if ($this->attrs[$value] == "default"){
+      if (!isset($this->attrs[$value]) || $this->attrs[$value] == "default"){
         $this->attrs[$value] = array();
       } 
     }
