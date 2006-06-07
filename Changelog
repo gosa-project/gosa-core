@@ -1,7 +1,10 @@
 GOsa2 changelog
 ===============
 
-* gosa 2.5beta1
+* gosa 2.5.1
+  - Fixed problems with NFS shares and terminals
+
+* gosa 2.5
   - Improved FAI support
     * Server and workstations are treated the same way
     * Destination selector for new devices
