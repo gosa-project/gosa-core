@@ -118,8 +118,11 @@ class workstartup extends plugin
       natcasesort($this->FAIclasses);
     }
 
-    $this->FAIclassInfo = $tmp2;
-
+    if(isset($tmp2)){
+      $this->FAIclassInfo = $tmp2;
+    } else {
+      $this->FAIclassInfo = array();
+    }
 
     /* Build up an array like this one :
         [$url]['SERVER'] = 'srv1-002';
