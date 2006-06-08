@@ -4,6 +4,7 @@ GOsa2 changelog
 * gosa 2.5.1
   - Fixed problems with NFS shares and terminals
   - Finalized polish translations
+  - Fixed problem with compressed gosa.conf in the debian package
 
 * gosa 2.5
   - Improved FAI support
