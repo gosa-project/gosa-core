@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polski\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2006-06-06 02:56+0100\n"
+"PO-Revision-Date: 2006-06-08 02:33+0100\n"
 "Last-Translator: Piotr Rybicki <meritus@innervision.pl>\n"
 "Language-Team: Piotr Rybicki <meritus@innervision.pl>\n"
 "MIME-Version: 1.0\n"
@@ -2035,7 +2035,7 @@ msgstr "automatycznie"
 #: plugins/admin/systems/class_workstationService.inc:88
 #, php-format
 msgid "You have specified an external resolution hook which can't be read, please check the permission of the file '%s'."
-msgstr ""
+msgstr "Podano zewnętrzny zaczep rozdzielczości którego nie można czytać, proszę sprawdzić uprawnienia pliku '%s'."
 
 #: plugins/personal/environment/class_environment.inc:284
 #: plugins/personal/environment/class_environment.inc:321
@@ -4528,7 +4528,7 @@ msgstr "Import powiódł się"
 
 #: plugins/addons/ldapmanager/contentcsv.tpl:2
 msgid "The CSV import plugin provides methods to generate user accounts from a file containing Comma Seperated Values. The administrator can decide which columns should be transfered to which attribute. Note that you must have at least the UID, GIVENNAME and SURENAME set."
-msgstr ""
+msgstr "Dodatek imoprt CSV zapewnia metody do wygenerowania kont użytkowników z pliku zawierającego wartości oddzielone przecinkami. Administrator może zdecydować które kolumny powinny być zmapowane na jakie atrybuty. Proszę zauważyć że trzeba zmapować conajmniej zestaw UID, GIVENNAME i SURENAME."
 
 #: plugins/addons/ldapmanager/contentcsv.tpl:10
 msgid "Select CSV file to import"
@@ -4564,7 +4564,7 @@ msgstr "Nieznany błąd"
 
 #: plugins/addons/ldapmanager/contentexport.tpl:3
 msgid "The LDIF export plugin provides methods to download a complete snapshot of the running LDAP directory as ldif. You may save these files for backup purpose or when initializing a new server."
-msgstr ""
+msgstr "Dodatek eksport LDIF zapewnia metody do sciągnięcia pełnego obrazu działającego katalogu LDAP jako ldif. Można zapisać te pliki dla celów bezpieczeństwa lub podczas inicjalizacji nowego serwera."
 
 #: plugins/addons/ldapmanager/contentexport.tpl:10
 #: plugins/addons/ldapmanager/contentexportxls.tpl:10
@@ -5782,7 +5782,7 @@ msgstr "Aby dodawać pakiety do listy pakietów należy wcześniej skonfigurowa�
 
 #: plugins/admin/fai/faiPackageNew.tpl:5
 msgid "Packages are usually stored on different servers called mirrors. These mirrors have different types of releases (for example woody/sarge/etch), which finally contain packages sorted by section."
-msgstr ""
+msgstr "Pakiety są przeważnie przechowywane na różnych serwerach zwanych mirrorami. Te serwery zawierają różne typy wydań (np. woody/sarge/etch), które zawierają pakiety posortowane po sekcjach."
 
 #: plugins/admin/fai/faiPackageNew.tpl:8
 msgid "Section and release can't be changed in future dialogs, but the mirror can be changed by editing the entry."
@@ -5809,7 +5809,7 @@ msgstr "Ustawienia dla tego wydania"
 
 #: plugins/admin/fai/faiNewBranch.tpl:5
 msgid "You are now going to create a branch or locked branch. This action clones the existing release to another release name. Branches can be modified as usual. FAI classes of locked branches cannot be modified, just additional classes are possible. Branch names should be alphanumeric, excluding the reserved names 'scripts', 'hooks', 'partitions', 'variables', 'templates' and 'fai'."
-msgstr ""
+msgstr "Zamierzasz utworzyć gałąź lub zablokowaną gałąź. Ta akcja klonuje istniejące wydanie do innej nazwy wydania. Gałęzie mogą być zwyczajnie modyfikowane. Klasy FAI zablokowanych gałęzi nie mogą być modyfikowane, można tylko dodawać klasy. Nazwy gałęzi powinny składać się ze znaków alfanumerycznych i nie zawierać zarezerwowanych nazw 'scripts', 'hooks', 'partitions', 'variables', 'templates', oraz 'fai'."
 
 #: plugins/admin/fai/faiNewBranch.tpl:11
 msgid "Please enter a name for the branch"
@@ -5822,7 +5822,7 @@ msgstr "Przetwarzam zadaną operację"
 
 #: plugins/admin/fai/faiNewBranch.tpl:34
 msgid "As soon as the copy operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the fai management dialog."
-msgstr ""
+msgstr "Jak tylko operacja kopiowania zakończy się, można przewinąć stronę na dół i nacisnąć przycisk 'Kontynuuj' aby przejść do dialogu zarządzania FAI."
 
 #: plugins/admin/fai/faiNewBranch.tpl:40
 #: plugins/admin/departments/dep_iframe.tpl:8
@@ -7023,7 +7023,7 @@ msgstr "Wybierz poddrzewo do umieszczenia departamentu"
 
 #: plugins/admin/departments/generic.tpl:52
 msgid "State where this subtree is located"
-msgstr ""
+msgstr "Stan w którym jest umieszczone to poddrzewo"
 
 #: plugins/admin/departments/generic.tpl:56
 msgid "Location of this subtree"
@@ -7145,7 +7145,7 @@ msgstr ".."
 
 #: plugins/admin/departments/dep_iframe.tpl:3
 msgid "As soon as the move operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the department management dialog."
-msgstr ""
+msgstr "Jak tylko operacja przenoszenia zakończy się, można przewinąć stronę na dół i nacisnąć przycisk 'Kontynuuj' aby przejść do dialogu zarządzania departamentami."
 
 #: plugins/admin/departments/class_divListDepartment.inc:33
 msgid "This menu allows you to create, delete and edit selected departments. Having a large size of departments, you might prefer the range selectors on   top of the department list."
@@ -7165,7 +7165,7 @@ msgstr "Wybierz bazę"
 
 #: plugins/admin/systems/class_baseSelectDialog.inc:34
 msgid "Step in the prefered tree and click save to use the current subtree as base. Or click the image at the end of each entry."
-msgstr ""
+msgstr "Przejdź do preferowanego drzewa i kliknij zapisz aby użyć obecnego poddrzewa jako podstawy. Można też kliknąc obrazek na końcu każdego  elementu."
 
 #: plugins/admin/systems/class_baseSelectDialog.inc:45
 #: plugins/admin/systems/server.tpl:50
@@ -7666,7 +7666,7 @@ msgstr "Proszę uważać podczas edycji typów rekordu w tym dialogu. Wszystkie 
 
 #: plugins/admin/systems/servDNSeditZoneEntries.tpl:8
 msgid "This dialog can't be used until the currently edited zone was saved or the zone entry exists in the ldap database."
-msgstr ""
+msgstr "Ten dialog nie może zostać użyty dopóki edytowana strefa zostanie zapisana lub ta strefa będzie istniała w bazie LDAP."
 
 #: plugins/admin/systems/servDNSeditZoneEntries.tpl:14
 #: plugins/admin/systems/class_servDNSeditZoneEntries.inc:81
