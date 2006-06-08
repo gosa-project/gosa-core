@@ -148,6 +148,11 @@ bindtextdomain($domain, "$BASE_DIR/locale");
 textdomain($domain);
 @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
 
+/* Preset current main base */
+if(!isset($_SESSION['CurrentMainBase'])){
+  $_SESSION['CurrentMainBase']= get_base_from_people($ui->dn);
+}
+
 /* Prepare plugin list */
 if (!isset($_SESSION['plist'])){
   $_SESSION['plist']= new pluglist($config, $ui);

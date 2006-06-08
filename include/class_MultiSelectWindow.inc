@@ -80,11 +80,6 @@ class MultiSelectWindow{
 		$this->filterName			= $filterName;
 
 		/* Set default base, to users base  */
-    $ui   = get_userinfo();
-    $base = get_base_from_people($ui->dn);
-		if(!isset($_SESSION['CurrentMainBase'])){
-			$_SESSION['CurrentMainBase'] = $base;
-		}
 		$this->selectedBase = $_SESSION['CurrentMainBase'];
 
     /* Check default values for SaveAdditionalVars */
