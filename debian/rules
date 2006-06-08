@@ -97,7 +97,7 @@ binary-indep: install
 	dh_installman debian/mkntpasswd.1
 	dh_link
 	dh_strip
-	dh_compress
+	dh_compress --exclude=gosa.conf
 	dh_fixperms 
 	dh_perl
 	dh_installdeb
