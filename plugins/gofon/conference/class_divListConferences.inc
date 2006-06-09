@@ -128,7 +128,12 @@ class divListConference extends MultiSelectWindow
       $ldap= $this->parent->config->get_ldap_link();
       $ldap->cat($conference['goFonConferenceOwner'][0], array('cn'));
       $data = $ldap->fetch();
-      $cn = $data['cn'][0];
+      if(isset($data['cn'][0])){
+        $cn = $data['cn'][0];
+      }else{
+        $cn ="";
+      }
+
 
       $title = " title='".preg_replace("/ /","&nbsp;",@LDAP::fix($data['dn']))."' ";
 
@@ -144,7 +149,7 @@ class divListConference extends MultiSelectWindow
 
       if(($this->parent->ui->dn==$conference['goFonConferenceOwner'][0])&&(chkacl($this->parent->acl,"goFonConferenceOwner")=="")){
         $a_field5 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions), "attach" =>  $title."style='width:60px;border-right:0px;text-align:right;'");
-      }elseif(chkacl($this->acl,"goFonConferenceOwner")==""){
+      }elseif(chkacl($this->parent->acl,"goFonConferenceOwner")==""){
         $a_field5 = array("string"=>preg_replace("/%KEY%/",$conferencekey,$actions2), "attach" =>  $title."style='width:52px;border-right:0px;text-align:right;'");
       }else{
         $a_field5 = array("string"=>"&nbsp;", "attach" =>  $title."style='width:52px;border-right:0px;text-align:right;'");
