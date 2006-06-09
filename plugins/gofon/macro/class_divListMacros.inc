@@ -43,7 +43,7 @@ class divListMacro extends MultiSelectWindow
 
     /* set Page header */
     $this->AddHeader(array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"));
-    $this->AddHeader(array("string" => _("Username")." / "._("Department"), "attach" => "style=''"));
+    $this->AddHeader(array("string" => _("macro name")." / "._("Department"), "attach" => "style=''"));
     $this->AddHeader(array("string" => _("Visible"), "attach" => "style='width:50px;'"));
     $this->AddHeader(array("string" => _("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'" ));
 
@@ -100,9 +100,9 @@ class divListMacro extends MultiSelectWindow
   {
   
     $action     = "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     
-                    name='user_edit_%KEY%' title='"._("Edit user")."'>";
+                    name='user_edit_%KEY%' title='"._("Edit macro")."'>";
     $action    .= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'   
-                    name='user_del_%KEY%' title='"._("Delete user")."'>";
+                    name='user_del_%KEY%' title='"._("Delete macro")."'>";
   
     $empty      = "<img class='center' src='images/nothing.png' style='width:16px;height:16px;' alt=''>";
     $macroimg   = "<img class='center' src='images/list_macro.png' alt='"._("Macro")."' title='%s'>";

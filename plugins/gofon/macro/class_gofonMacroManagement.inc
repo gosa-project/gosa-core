@@ -124,7 +124,7 @@ class gofonMacro extends plugin
     /* Finish mac edit is triggered by the tabulator dialog, so
        the user wants to save edited data. Check and save at this
        point. */
-    if ((isset($_POST['edit_finish'])) && (isset($this->macrotabs->config))){
+    if ((isset($_POST['edit_finish']) || isset($_POST['edit_apply'])) && (isset($this->macrotabs->config))){
 
       /* Check tabs, will feed message array */
       $this->macrotabs->last= $this->macrotabs->current;
@@ -138,15 +138,17 @@ class gofonMacro extends plugin
         $this->macrotabs->save();
         gosa_log ("Macro object'".$this->dn."' has been saved");
 
-        /* macro has been saved successfully, remove lock from
-           LDAP. */
-        if ($this->dn != "new"){
-          del_lock ($this->dn);
-        }
+        if (!isset($_POST['edit_apply'])){
+          /* macro has been saved successfully, remove lock from
+             LDAP. */
+          if ($this->dn != "new"){
+            del_lock ($this->dn);
+          }
 
-        unset ($this->macrotabs);
-        $this->macrotabs= NULL;
-        unset ($_SESSION['objectinfo']);
+          unset ($this->macrotabs);
+          $this->macrotabs= NULL;
+          unset ($_SESSION['objectinfo']);
+        }
       } else {
         /* Ok. There seem to be errors regarding to the tab data,
            show message and continue as usual. */
@@ -258,8 +260,12 @@ class gofonMacro extends plugin
       /* Don't show buttons if tab dialog requests this */
       if (!$this->macrotabs->by_object[$this->macrotabs->current]->dialog){
         $display.= "<p style=\"text-align:right\">\n";
-        $display.= "<input type=\"submit\" name=\"edit_finish\" value=\""._("Save")."\">\n";
+        $display.= "<input type=\"submit\" name=\"edit_finish\" style=\"width:80px\" value=\""._("Ok")."\">\n";
         $display.= "&nbsp;\n";
+        if ($this->dn != "new"){
+          $display.= "<input type=submit name=\"edit_apply\" value=\""._("Apply")."\">\n";
+          $display.= "&nbsp;\n";
+        }
         $display.= "<input type=\"submit\" name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
         $display.= "</p>";
       }
@@ -294,7 +300,7 @@ class gofonMacro extends plugin
     $Regex      = $this->DivListMacro->Regex;
     $Filter     = "(&(cn=".$Regex.")(objectClass=goFonMacro))";
     $Flags      = GL_SIZELIMIT;
-    $Attrs      = array("cn","description","displayName");
+    $Attrs      = array("cn","description","displayName","goFonMacroVisible");
 
     /* Prepare for ls or search*/        
     if($SubSearch){
