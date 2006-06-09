@@ -89,7 +89,13 @@ A: Yes. Just go to the locale directory and copy the messages.po file somewhere
    You may need to restart apache, depending on your setup. On Debian, be sure
    to have your locale generated (dpkg-reconfigure locales) before.
 
+Q: The online help doesn't exist in my language, can i translate it to my language?
 
+A: Yes. Just go to the doc/guide/user/en directory and copy the lyx-source directory
+   to a new directory in doc/guide/user/<your language>. You have to use the lyx
+   program create the online help in your language. When you have finish just run
+   ./gen_online_help from the gosa root directory to generate the online docs.
+   
 Q: Can I specify some kind of password policies?
 
 A: You can place the keywords "pwminlen" and "pwdiffer" in the main section of your
