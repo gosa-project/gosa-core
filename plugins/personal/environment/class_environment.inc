@@ -561,6 +561,7 @@ class environment extends plugin
         $once = false;  
         $key  = preg_replace("/^gotoShareDel_/","",$name);
         $key  = preg_replace("/_+[xy]$/","",$key);
+        $key  = preg_replace("/_/", ".", $key);
         if(isset($this->gotoShares[$key])) {
           unset($this->gotoShares[$key]);
         }
@@ -569,6 +570,7 @@ class environment extends plugin
         $once = false;
         $key  = preg_replace("/^gotoShareResetPwd_/","",$name);
         $key  = preg_replace("/_+[xy]$/","",$key);
+        $key  = preg_replace("/_/", ".", $key);
         $this->gotoShares[$key]['PwdHash'] = "";
       }
     }
