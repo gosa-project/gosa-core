@@ -4,6 +4,9 @@ GOsa2 changelog
 * gosa 2.5.2
   - Fixed current main base not beeing set when editing non tabbed
     plugins
+  - Fixed filtering for divlists
+  - Updated french online help
+  - Updated german online help
 
 * gosa 2.5.1
   - Fixed problems with NFS shares and terminals
