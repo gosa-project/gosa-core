@@ -477,6 +477,7 @@ class MultiSelectWindow{
 					$val = preg_replace("/\*\**/","*",$val);
 					$this->array_Regexes[$key]['value'] = $val;
 					$this->$box['name'] = $val;
+          $_SESSION['MultiDialogFilters'][$this->filterName][$box['name']] =  $val;
 				}
 			}
 		}

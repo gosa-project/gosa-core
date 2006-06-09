@@ -1,6 +1,10 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.5.2
+  - Fixed current main base not beeing set when editing non tabbed
+    plugins
+
 * gosa 2.5.1
   - Fixed problems with NFS shares and terminals
   - Finalized polish translations
