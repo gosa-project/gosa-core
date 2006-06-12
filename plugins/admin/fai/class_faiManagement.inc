@@ -591,7 +591,7 @@ class faiManagement extends plugin
      * Generate List of Partitions,Hooks,Scripts,Templates,Profiles ... 
      */
     $ObjectTypes = array(
-        "FAIpartitionTable"  => array("OU"=>"ou=disks,"       , "CHKBOX"=>"ShowPartitions"),
+        "FAIpartitionTable"  => array("OU"=>"ou=disk,"       , "CHKBOX"=>"ShowPartitions"),
         "FAIpackageList"     => array("OU"=>"ou=packages,"    , "CHKBOX"=>"ShowPackages"),
         "FAIscript"          => array("OU"=>"ou=scripts,"     , "CHKBOX"=>"ShowScripts"),
         "FAIvariable"        => array("OU"=>"ou=variables,"   , "CHKBOX"=>"ShowVariables"),
