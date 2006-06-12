@@ -8,6 +8,7 @@ GOsa2 changelog
   - Fixed deletion of shares in environment tabs
   - Updated french online help
   - Updated german online help
+  - Fixed display of FAI partitions
 
 * gosa 2.5.1
   - Fixed problems with NFS shares and terminals
