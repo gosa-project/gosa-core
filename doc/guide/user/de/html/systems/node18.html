@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>Kernel Module (Format: Name Parameter)</TITLE>
-<META NAME="description" CONTENT="Kernel Module (Format: Name Parameter)">
+<TITLE>Boot-Parameter</TITLE>
+<META NAME="description" CONTENT="Boot-Parameter">
 <META NAME="keywords" CONTENT="systems">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -23,24 +23,44 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <BODY >
 
-<H3><A NAME="SECTION000111600000000000000">
-Kernel Module (Format: Name Parameter)</A>
-</H3>
+<H5><A NAME="SECTION00011131000000000000">
+Boot-Parameter</A>
+</H5>
 
 <P>
-In der Liste werden Kernel-Module aufgef&#252;hrt, die automatisch beim
-Startvorgang geladen werden (Dies umfasst nur die Hardware, die nicht
-automatisch erkannt wird).
+<TABLE CELLPADDING=3 BORDER="1">
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>LDAP server</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=283>W&#228;hlen Sie den LDAP-Server aus der Liste, auf dem das Terminal konfiguriert
+ist</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>Boot-Kernel</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=283>Der Kernel, der gestartet werden soll</TD>
+</TR>
+<TR><TD ALIGN="LEFT" VALIGN="TOP" WIDTH=142>Angepasste Optionen</TD>
+<TD ALIGN="LEFT" VALIGN="TOP" WIDTH=283>Hier k&#246;nnen Sie Terminal-spezifische Kerneloptionen eintragen, die
+dem Kernel beim Start &#252;bergeben werden.</TD>
+</TR>
+</TABLE>
 
 <P>
 
-<P>
-<BR>
+<UL>
+<LI>Grafisches Booten nutzen: bei Auswahl wird das Terminal mit der grafischen
+Variante gebootet, die weniger Meldungen anzeigt
+</LI>
+<LI>Standard Textmodus nutzen: bei Auswahl wird das Terminal mit der textbasierten
+Variante gebootet
+</LI>
+<LI>benutze Fehlersuch-Modus: bei Auswahl wird das Terminal beim n&#228;chsten
+Start in einem Modus gestartet, dass die Fehlersuche vereinfacht
+</LI>
+</UL>
 
+<P>
 <BR><HR>
 <ADDRESS>
 Jan Wenzel
-2006-06-02
+2006-06-12
 </ADDRESS>
 </BODY>
 </HTML>

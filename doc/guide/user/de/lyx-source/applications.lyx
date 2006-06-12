@@ -1,6 +1,6 @@
 #LyX 1.3 created this file. For more info see http://www.lyx.org/
 \lyxformat 221
-\textclass scrartcl
+\textclass article
 \language ngerman
 \inputencoding auto
 \fontscheme default
@@ -10,7 +10,7 @@
 \papersize a4paper
 \paperpackage a4
 \use_geometry 1
-\use_amsmath 0
+\use_amsmath 1
 \use_natbib 0
 \use_numerical_citations 0
 \paperorientation portrait
@@ -30,26 +30,6 @@
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
-\bullet 0
-	1
-	20
-	-1
-\end_bullet
-\bullet 1
-	1
-	20
-	-1
-\end_bullet
-\bullet 2
-	1
-	20
-	-1
-\end_bullet
-\bullet 3
-	1
-	20
-	4
-\end_bullet
 
 \layout Title
 
@@ -96,7 +76,7 @@ Die zweite Spalte enthält Knöpfe für die möglichen Aktionen, um Verwaltungsaufga
 ben durchzuführen (Ausschneiden, Kopieren, Bearbeiten, Entfernen)
 \layout Standard
 
-Die Knöpfe (
+Die vier Knöpfe 
 \begin_inset Graphics
 	filename images/list_root.png
 
@@ -114,13 +94,13 @@ Die Knöpfe (
 
 \end_inset 
 
-, 
+, und 
 \begin_inset Graphics
 	filename images/list_reload.png
 
 \end_inset 
 
-) dienen zur Navigation innerhalb der Abteilungshierarchie:
+ oberhalb der Liste dienen zur Navigation innerhalb der Abteilungshierarchie:
 \layout Itemize
 
 
@@ -129,7 +109,7 @@ Die Knöpfe (
 
 \end_inset 
 
- Zur Wurzel
+: Zur Wurzel
 \layout Itemize
 
 
@@ -138,7 +118,7 @@ Die Knöpfe (
 
 \end_inset 
 
- Eine Abteilung nach oben
+: Eine Abteilung nach oben
 \layout Itemize
 
 
@@ -147,7 +127,7 @@ Die Knöpfe (
 
 \end_inset 
 
- Zur Basis des Benutzers
+: Zur Basis des angemeldeten Benutzers
 \layout Itemize
 
 
@@ -156,7 +136,7 @@ Die Knöpfe (
 
 \end_inset 
 
- Aktuelle Abteilung neu laden
+: Aktuelle Abteilung neu laden
 \layout Standard
 \noindent 
 Es ist weiterhin möglich, die Anzeige der Anwendungen mithilfe von Filtern
@@ -211,8 +191,8 @@ Schnellsuche
 Filter anwenden
 \emph default 
 .
-\layout Paragraph
-\added_space_top medskip 
+\layout Subsection*
+
 Eine Anwendung hinzufügen / Eine bestehende Anwendung bearbeiten
 \layout Standard
 

@@ -1,6 +1,6 @@
 #LyX 1.3 created this file. For more info see http://www.lyx.org/
 \lyxformat 221
-\textclass scrartcl
+\textclass article
 \language ngerman
 \inputencoding auto
 \fontscheme default
@@ -9,8 +9,8 @@
 \spacing single 
 \papersize a4paper
 \paperpackage a4
-\use_geometry 1
-\use_amsmath 0
+\use_geometry 0
+\use_amsmath 1
 \use_natbib 0
 \use_numerical_citations 0
 \paperorientation portrait
@@ -30,26 +30,6 @@
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
-\bullet 0
-	1
-	20
-	-1
-\end_bullet
-\bullet 1
-	1
-	20
-	-1
-\end_bullet
-\bullet 2
-	1
-	20
-	-1
-\end_bullet
-\bullet 3
-	1
-	20
-	4
-\end_bullet
 
 \layout Title
 
@@ -455,7 +435,7 @@ In der rechten, oberen Ecke findet sich der komplette dn der aktuell geöffneten
 \layout Subsection
 \pagebreak_top 
 Allgemein
-\layout Itemize
+\layout Standard
 
 
 \begin_inset  Tabular
@@ -725,7 +705,7 @@ Freigaben
 Anmelde-Skripte
 \layout Subsubsection
 \added_space_top medskip 
-Hotplug-Geräate
+Hotplug-Geräte
 \layout Subsubsection
 \added_space_top medskip 
 Drucker
