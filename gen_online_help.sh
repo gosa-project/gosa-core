@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Defaults for Debian
-CNV=latex2html
+CNV=`pwd`/contrib/latex2html
 LYX=lyx-qt
 
 # Sanity checks

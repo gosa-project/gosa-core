@@ -50,9 +50,9 @@ specified for this class below.
 	<ENTRY NAME="selectPrinterDialog" 			VALUE="" PATH="" FILE="" />
 	<ENTRY NAME="logonManagementDialog" 		VALUE="Logon scripts"		PATH="../doc/guide/user/__LANG__/html/users" FILE="node13.html" />
 	<ENTRY NAME="nagiosAccount" 				VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="blocklist" 					VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="faxreport" 					VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="addressbook" 					VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="blocklist" 					VALUE="Fax Blocklists" PATH="../doc/guide/user/__LANG__/html/faxreports" FILE="index.html" />
+	<ENTRY NAME="faxreport" 					VALUE="Fax Reports" PATH="../doc/guide/user/__LANG__/html/faxreports" FILE="node1.html" />
+	<ENTRY NAME="addressbook" 					VALUE="Addressbook" PATH="../doc/guide/user/__LANG__/html/addressbook" FILE="index.html" />
 
 	<ENTRY NAME="csvimport" 					VALUE="CSV import" 			PATH="../doc/guide/user/__LANG__/html/ldapmanager" FILE="index.html" />
 	<ENTRY NAME="ldifimport" 					VALUE="Ldif import" 		PATH="../doc/guide/user/__LANG__/html/ldapmanager" FILE="index.html" />
@@ -78,6 +78,7 @@ specified for this class below.
 	<ENTRY NAME="termgroup" 					VALUE="Terminal group" 		PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
 	<ENTRY NAME="termstartup" 					VALUE="Terminal startup" 	PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
 
+	<ENTRY NAME="systemManagment" 					VALUE="System" 			PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
 	<ENTRY NAME="servservice" 					VALUE="Service" 			PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
 	<ENTRY NAME="servdb" 						VALUE="Datebases"		 	PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
 	<ENTRY NAME="servgeneric" 					VALUE="Generic" 			PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
@@ -96,6 +97,7 @@ specified for this class below.
 	<ENTRY NAME="phonequeue" 					VALUE="Phone queue" 		PATH="../doc/guide/user/__LANG__/html/ogroups" FILE="index.html" />
 	<ENTRY NAME="conference" 					VALUE="Phone conference" 	PATH="../doc/guide/user/__LANG__/html/conference" FILE="index.html" />
 	<ENTRY NAME="phoneConferenceManagment" 		VALUE="Phone conference" 	PATH="../doc/guide/user/__LANG__/html/conference" FILE="index.html" />
+	<ENTRY NAME="mailqueue" 					VALUE="Mail queue" 		PATH="../doc/guide/user/__LANG__/html/mailqueue" FILE="node1.html" />
 
 	<ENTRY NAME="gofonMacro" 					VALUE="Phone macro" 		PATH="../doc/guide/user/__LANG__/html/macro" FILE="index.html" />
 	<ENTRY NAME="macro" 						VALUE="Phone macro" 		PATH="../doc/guide/user/__LANG__/html/macro" FILE="index.html" />
@@ -111,7 +113,7 @@ specified for this class below.
 
 	<ENTRY NAME="printgeneric" 					VALUE="" PATH="" FILE="" />
 	<ENTRY NAME="componentGeneric" 				VALUE="" PATH="" FILE="" />
-	<ENTRY NAME="fonreport" 					VALUE="" PATH="" FILE="" />
+	<ENTRY NAME="fonreport" 					VALUE="Phone Reports" PATH="../doc/guide/user/__LANG__/html/fonreports" FILE="node1.html" />
 	<ENTRY NAME="reference" 					VALUE="" PATH="" FILE="" />
 	<ENTRY NAME="certificate" 					VALUE="" PATH="" FILE="" />
 	<ENTRY NAME="config" 						VALUE="" PATH="" FILE="" />
