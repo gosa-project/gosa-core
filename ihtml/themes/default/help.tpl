@@ -23,7 +23,7 @@
    </tr>
   </table>
 </div>
-<div style="height:100%;width:100%;padding:5px;margin:0px;background-color:#F1F1F1;">
+<div style="height:100%;width:98%;padding:5px;margin:0px;background-color:#F1F1F1;">
 {$help_contents}
 </div>
 
