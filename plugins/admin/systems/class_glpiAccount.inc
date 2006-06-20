@@ -693,7 +693,7 @@ class glpiAccount extends plugin
     plugin::save_object();
     foreach($this->attributes as $attrs){
       if(isset($_POST[$attrs])){
-        $this->$attrs = $_POST[$attrs];
+        $this->$attrs = stripslashes ($_POST[$attrs]);
       }
     }
   }
