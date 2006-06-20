@@ -82,8 +82,7 @@ class mailqueue extends plugin
           if((preg_match("/".$attr."/",$name))&&($only_once)){
             if(chkacl($this->acl,$attr)!=""){
               $only_once = false;
-              #FIXME Please choose a better error msg, if release is released
-              print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$attr));
+              print_red(sprintf(_("You do not have permission to execute the command '%s' on the mailqueue."),$attr));
             }else{
               $only_once = false;
               $act = preg_replace("/_.*$/i","",$attr);
@@ -110,7 +109,7 @@ class mailqueue extends plugin
           $only_once = false;
 
           if(chkacl($this->acl,$opt)!=""){
-              print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$opt));
+              print_red(sprintf(_("You do not have permission to execute the command '%s' on the mailqueue."),$opt));
           }else{
             /* Create cmd */
             $r_cmd = preg_replace("/%action/" , $opt            ,$this->mailQueueScript);
@@ -168,20 +167,25 @@ class mailqueue extends plugin
         $q_cmd = preg_replace("/%server/" ,$this->Server,$q_cmd);
         $q_cmd = preg_replace("/%id/"     ,"all"        ,$q_cmd);
 
-        /* Only display this if the query cmd is executeable */
-        if($str = @$this->pass_cmd ($q_cmd)){
-          /* Parse returned data */
-          $mailQueueParser = new parseMailQueue($str,$this->Server);
+        if(chkacl($this->acl,"query")!=""){
+          print_red(sprintf(_("You do not have permission to execute the command '%s' on the mailqueue."),"query"));
+          $mailQueueParser = new parseMailQueue("",$this->Server);
         }else{
-          /* On error/ no return value / false return value */
-          print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$q_cmd));
-          $error = true;
-        }
 
+          /* Only display this if the query cmd is executeable */
+          if($str = @$this->pass_cmd ($q_cmd)){
+            /* Parse returned data */
+            $mailQueueParser = new parseMailQueue($str,$this->Server);
+          }else{
+            /* On error/ no return value / false return value */
+            print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$q_cmd));
+            $error = true;
+          }
+        }
       }else{
         $mailQueueParser = NULL;
         foreach($this->getServer() as $ServerID=>$ServerName){
-  
+
           /* Don't query the server named all :) */
           if($ServerID == "all") continue;
 
@@ -190,22 +194,27 @@ class mailqueue extends plugin
           $q_cmd = preg_replace("/%server/" ,$ServerName  ,$q_cmd);
           $q_cmd = preg_replace("/%id/"     ,"ALL"           ,$q_cmd);
 
-          /* Shell exec this cmd */
-          if($str = @$this->pass_cmd ($q_cmd)){
-    
-            /* If there is no parser available, create one  */
-            if($mailQueueParser == NULL){
-              $mailQueueParser = new parseMailQueue($str,$ServerID);
-            }else{
-              $mailQueueParser->parseAdditionalQueue($str,$ServerID);
-            }
-          /* On error/ no return value / false return value */
+          if(chkacl($this->acl,"query")!=""){
+            print_red(sprintf(_("You do not have permission to execute the command '%s' on the mailqueue."),"query"));
+            $mailQueueParser = new parseMailQueue("",$this->Server);
           }else{
-            print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$q_cmd));
-            $error = true;
+
+            /* Shell exec this cmd */
+            if($str = @$this->pass_cmd ($q_cmd)){
+
+              /* If there is no parser available, create one  */
+              if($mailQueueParser == NULL){
+                $mailQueueParser = new parseMailQueue($str,$ServerID);
+              }else{
+                $mailQueueParser->parseAdditionalQueue($str,$ServerID);
+              }
+              /* On error/ no return value / false return value */
+            }else{
+              print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$q_cmd));
+              $error = true;
+            }
           }
         }
-
       }     
 
       /* Check for existing servers 
