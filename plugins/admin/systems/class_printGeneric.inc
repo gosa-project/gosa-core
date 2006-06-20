@@ -352,16 +352,16 @@ class printgeneric extends plugin
     $smarty->assign("baseACL", chkacl($this->acl,"base"));
 
     if(isset($_POST['AddUser'])){
-      $this->dialog = new selectUserToPrinterDialog($this->config, get_userinfo(),"AddUser");
+      $this->dialog = new selectUserToPrinterDialog($this->config, NULL,"AddUser");
     }
     if(isset($_POST['AddGroup'])){
-      $this->dialog = new selectUserToPrinterDialog($this->config, get_userinfo(),"AddGroup");
+      $this->dialog = new selectUserToPrinterDialog($this->config, NULL,"AddGroup");
     }
     if(isset($_POST['AddAdminUser'])){
-      $this->dialog = new selectUserToPrinterDialog($this->config, get_userinfo(),"AddAdminUser");
+      $this->dialog = new selectUserToPrinterDialog($this->config, NULL,"AddAdminUser");
     }
     if(isset($_POST['AddAdminGroup'])){
-      $this->dialog = new selectUserToPrinterDialog($this->config, get_userinfo(),"AddAdminGroup");
+      $this->dialog = new selectUserToPrinterDialog($this->config, NULL,"AddAdminGroup");
     }
 
     /* Display ppd configure/select dialog      */
