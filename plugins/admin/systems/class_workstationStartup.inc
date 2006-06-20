@@ -586,13 +586,6 @@ class workstartup extends plugin
       }
     }
 
-    /* Delete selected class from our list */
-    if((isset($_POST['DelClass']))&&(isset($_POST['FAIclassSel']))){
-      if(isset($this->FAIclass[$_POST['FAIclassSel']])){
-        unset($this->FAIclass[$_POST['FAIclassSel']]);
-      }
-    }
-
     /* Show main page */
     $smarty= get_smarty();
     $smarty->assign("SelectBoxLdapServer","");

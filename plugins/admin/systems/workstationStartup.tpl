@@ -101,7 +101,7 @@
 			<option disabled>&nbsp;</option>
 		</select>	
 		<input name="AddClass" value="{t}Add{/t}" type="submit"> 
-		<input name="DelClass" value="{t}Delete{/t}" type="submit"> 
+<!--		<input name="DelClass" value="{t}Delete{/t}" type="submit"> -->
 	{/if}
   		</td>
 	</tr>
