@@ -88,7 +88,8 @@ class mailMethodCyrus extends mailMethod
         }
       }
     }elseif(!$quota_value){
-      return(false);
+      /* If there is no quota defined for this account, the function imap_get_quota returns false. */
+      return(array());
     }
  
     error_reporting (E_ALL);
