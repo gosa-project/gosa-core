@@ -9,6 +9,7 @@ GOsa2 changelog
   - Updated french online help
   - Updated german online help
   - Fixed display of FAI partitions
+  - Removed Quota warnings for existing accounts without quota limits.
 
 * gosa 2.5.1
   - Fixed problems with NFS shares and terminals
