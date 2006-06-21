@@ -89,7 +89,7 @@ class mailMethodCyrus extends mailMethod
       }
     }elseif(!$quota_value){
       /* If there is no quota defined for this account, the function imap_get_quota returns false. */
-      return(array());
+      return(array("quotaUsage"=>"","gosaMailQuota"=>""));
     }
  
     error_reporting (E_ALL);
