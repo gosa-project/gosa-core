@@ -32,11 +32,14 @@ class deptabs extends tabs
         }else{
           /* Prepare to be moved */
           $baseobject->recursive_move($this->dn, $new_dn);			
+          $this->by_object['department'] = $baseobject;
           return;
         }
       }
     }
     $this->dn= $new_dn;
+    $baseobject->dn= $this->dn;
+    $this->by_object['department']= $baseobject;
     return(tabs::save(TRUE));
   }
 
