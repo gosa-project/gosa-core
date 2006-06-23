@@ -304,7 +304,7 @@ class systems extends plugin
 
         /* Lock the current entry, so nobody will edit it during deletion */
         add_lock ($this->dn, $this->ui->dn);
-        $smarty->assign("warning", sprintf(_("You're about to delete all information about the component at '%s'."), LDAP::fix($this->dn)));
+        $smarty->assign("warning", sprintf(_("You're about to delete all information about the component at '%s'."), @LDAP::fix($this->dn)));
         return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
       } else {
 
