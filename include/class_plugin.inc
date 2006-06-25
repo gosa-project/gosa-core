@@ -666,7 +666,7 @@ class plugin
   {
     /* Rename dn in possible object groups */
     $ldap= $this->config->get_ldap_link();
-    $ldap->search('(&(objectClass=gosaGroupOfNames)(member='.$src_dn.'))',
+    $ldap->search('(&(objectClass=gosaGroupOfNames)(member='.@LDAP::fix($src_dn).'))',
         array('cn'));
     while ($attrs= $ldap->fetch()){
       $og= new ogroup($this->config, $ldap->getDN());
@@ -678,7 +678,7 @@ class plugin
     $ldap->cat($dst_dn);
     $attrs= $ldap->fetch();
     if (count($attrs)){
-      trigger_error("Trying to overwrite $dst_dn, which already exists.",
+      trigger_error("Trying to overwrite ".@LDAP::fix($dst_dn).", which already exists.",
           E_USER_WARNING);
       return (FALSE);
     }
@@ -686,7 +686,7 @@ class plugin
     $ldap->cat($src_dn);
     $attrs= $ldap->fetch();
     if (!count($attrs)){
-      trigger_error("Trying to move $src_dn, which does not seem to exist.",
+      trigger_error("Trying to move ".@LDAP::fix($src_dn).", which does not seem to exist.",
           E_USER_WARNING);
       return (FALSE);
     }
@@ -700,7 +700,7 @@ class plugin
 
     $r=ldap_bind($ds,$this->config->current['ADMIN'], $this->config->current['PASSWORD']);
     error_reporting (0);
-    $sr=ldap_read($ds, $ldap->fix($src_dn), "objectClass=*");
+    $sr=ldap_read($ds, @LDAP::fix($src_dn), "objectClass=*");
 
     /* Fill data from LDAP */
     $new= array();
@@ -728,14 +728,14 @@ class plugin
     /* Adapt naming attribute */
     $dst_name= preg_replace("/^([^=]+)=.*$/", "\\1", $dst_dn);
     $dst_val = preg_replace("/^[^=]+=([^,+]+).*,.*$/", "\\1", $dst_dn);
-    $new[$dst_name]= $dst_val;
+    $new[$dst_name]= @LDAP::fix($dst_val);
 
     /* Check if this is a department.
      * If it is a dep. && there is a , override in his ou 
      *  change \2C to , again, else this entry can't be saved ...
      */
-    if((isset($new['ou'])) &&( preg_match("/\\\\2C/",$new['ou']))){
-      $new['ou'] = preg_replace("/\\\\2C/",",",$new['ou']);
+    if((isset($new['ou'])) &&( preg_match("/\\,/",$new['ou']))){
+      $new['ou'] = preg_replace("/\\\\,/",",",$new['ou']);
     }
 
     /* Save copy */

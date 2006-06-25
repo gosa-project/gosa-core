@@ -373,6 +373,7 @@ class department extends plugin
 		} else {
 			$ldap->search('objectClass=gosaAdministrativeUnitTag', array('dn'));
 		}
+
 		while ($attrs= $ldap->fetch()){
 
 			/* Skip self */
@@ -437,7 +438,7 @@ class department extends plugin
 			echo "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
 			echo "<body style='background-image:none;margin:3px;color:black'>";
 
-			echo "<h3>".sprintf(_("Moving '%s' to '%s'"),"<i>".$src_dn."</i>","<i>".$dst_dn."</i>")."</h3>";
+			echo "<h3>".sprintf(_("Moving '%s' to '%s'"),"<i>".@LDAP::fix($src_dn)."</i>","<i>".@LDAP::fix($dst_dn)."</i>")."</h3>";
 
 
 			/* Check if the destination entry exists */
@@ -446,9 +447,9 @@ class department extends plugin
 			/* Check if destination exists - abort */
 			$ldap->cat($dst_dn, array('dn'));
 			if ($ldap->fetch()){
-				trigger_error("Recursive_move $dst_dn already exists.",
+				trigger_error("Recursive_move ".@LDAP::fix($dst_dn)." already exists.",
 						E_USER_WARNING);
-				echo sprintf("Recursive_move: '%s' already exists", $dst_dn)."<br>"; 
+				echo sprintf("Recursive_move: '%s' already exists", @LDAP::fix($dst_dn))."<br>"; 
 				return (FALSE);
 			}
 
@@ -473,10 +474,10 @@ class department extends plugin
 				$dst= preg_replace("/".str_replace("\\","\\\\",$src_dn)."$/", "$dst_dn", $object);
 				$dst= str_replace($src_dn,$dst_dn,$object);
 
-				echo "<b>"._("Object").":</b> $src<br>";
+				echo "<b>"._("Object").":</b> ".@LDAP::fix($src)."<br>";
 
 				if (!$this->copy($src, $dst)){
-					echo "<font color='#FF0000'><br>".sprintf(_("FAILED to copy %s, aborting operation"),$src)."</font>";
+					echo "<font color='#FF0000'><br>".sprintf(_("FAILED to copy %s, aborting operation"),@LDAP::fix($src))."</font>";
 					return (FALSE);
 				}
 
