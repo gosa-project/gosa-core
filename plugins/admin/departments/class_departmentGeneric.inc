@@ -288,8 +288,6 @@ class department extends plugin
 				}
 				$this->gosaUnitTag= preg_replace("/\./", "", $sec.$usec);
 			}
-		} else {
-			$this->gosaUnitTag= "";
 		}
 
 		plugin::save();
