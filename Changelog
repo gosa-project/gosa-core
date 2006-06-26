@@ -14,6 +14,7 @@ GOsa2 changelog
   - Fixed problems when moving around departments including a comma
   - Unified bool values in gosa.conf. true/yes and false/no are valid
     now in upper and lower case.
+  - Avoid the try of creating already existing ou's
 
 * gosa 2.5.1
   - Fixed problems with NFS shares and terminals

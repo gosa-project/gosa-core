@@ -221,8 +221,8 @@ class department extends plugin
 
 		/* Check for presence of this department */
 		$ldap= $this->config->get_ldap_link();
-		$attrs= $ldap->cat ($this->dn, array('dn'));
-		if ($this->orig_dn == "new" && !($attrs === FALSE)){
+    $ldap->ls ("(&(ou=".$this->ou.")(objectClass=organizationalUnit))", $this->base, array('dn'));
+    if ($this->orig_dn == "new" && $ldap->count()){
 			$message[]= _("Department with that 'Name' already exists.");
 		} elseif ($this->orig_dn != $this->dn && !($attrs === FALSE)){
 			$message[]= _("Department with that 'Name' already exists.");
