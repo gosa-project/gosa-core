@@ -12,6 +12,8 @@ GOsa2 changelog
   - Removed Quota warnings for existing accounts without quota limits
   - Worked around PHP4 session problems when creating new departments
   - Fixed problems when moving around departments including a comma
+  - Unified bool values in gosa.conf. true/yes and false/no are valid
+    now in upper and lower case.
 
 * gosa 2.5.1
   - Fixed problems with NFS shares and terminals
