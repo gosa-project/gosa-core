@@ -328,6 +328,11 @@ class department extends plugin
     /* The parameter forces only to set must_be_tagged, and don't touch any objects 
         This will be done later */
     $this->tag_objects(true);
+
+    /* Fix tagging if needed */
+    if (!$this->is_administrational_unit){
+      $this->handle_object_tagging();
+    }
     
     /* Optionally execute a command after we're done */
 		$this->postcreate();
