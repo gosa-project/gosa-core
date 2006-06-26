@@ -7,7 +7,7 @@
 <p class="seperator">&nbsp;</p>
 <br>
 
-{t}Please enter the server URI to allow the setup to connect your LDAP server <i>(Example: ldap://your.server:389).</i>{/t}
+{t}Please enter the server URI to allow the setup to connect your LDAP server (Example: ldap://your.server:389).{/t}
 <br>
 <br>
 URI&nbsp;<input type='text' name='uri' maxlength='80' size='40' value='{$uri}'>

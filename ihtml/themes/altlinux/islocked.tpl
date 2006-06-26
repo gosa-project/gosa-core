@@ -6,7 +6,7 @@
   <b>{t}Warning{/t}:</b> {$message}
 </p>
 <p>
-  {t}If this lock detection is false, the other person has obviously closed the webbrowser during the edit operation. You may delete the lockfile in this case by pressing the <i>Remove</i> button.{/t}
+  {t}If this lock detection is false, the other person has obviously closed the webbrowser during the edit operation. You may delete the lockfile in this case by pressing the 'Remove' button.{/t}
 </p>
 
 <p class="plugbottom">

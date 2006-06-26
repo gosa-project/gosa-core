@@ -11,7 +11,7 @@
    <div class='gosaLoginBack'>
        
     <p class='gosaLoginHeader'>
-	{t}Please use your <i>username</i> and <i>password</i> to log in{/t}
+	{t}Please use your username and password to log in{/t}
     </p>
   
     <!-- Display SSL warning message on demand -->

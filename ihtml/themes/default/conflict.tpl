@@ -3,7 +3,7 @@
 </div>
 
 <p>
- <b>{t}Warning{/t}:</b> {t}Probably there's another active instance of your session. Multiple window operation is technical not possible and heavily depends on the browser you're using. Usage of different browsers at a time (i.e. IE and Mozilla) is possible. Pressing the <b>Logout</b> button will close this session.{/t}
+ <b>{t}Warning{/t}:</b> {t}Probably there's another active instance of your session. Multiple window operation is technical not possible and heavily depends on the browser you're using. Usage of different browsers at a time (i.e. IE and Mozilla) is possible. Pressing the 'Logout'button will close this session.{/t}
 </p>
 
 <p>
