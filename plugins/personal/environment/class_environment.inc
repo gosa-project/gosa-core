@@ -565,6 +565,14 @@ class environment extends plugin
         if(isset($this->gotoShares[$key])) {
           unset($this->gotoShares[$key]);
         }
+
+        /* Remove corresponding password entry, too. This is a workaround
+           to get rid of old-style entries. */
+        $key= preg_replace("/\|/", "|!", $key);
+        if(isset($this->gotoShares[$key])) {
+          unset($this->gotoShares[$key]);
+        }
+
       }
       if((preg_match("/^gotoShareResetPwd_/",$name)) && ($once)){
         $once = false;
