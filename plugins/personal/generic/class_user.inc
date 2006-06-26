@@ -481,7 +481,7 @@ class user extends plugin
       $this->pw_storage= $this->config->current['HASH'];
     }
 
-    $temp   = passwordMethod::get_available_methods();
+    $temp   = @passwordMethod::get_available_methods();
     $hashes = $temp['name'];
     
     $smarty->assign("pwmode", $hashes);
