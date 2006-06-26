@@ -263,7 +263,9 @@ class department extends plugin
 		if ($this->is_administrational_unit){
       if(!in_array_ics("gosaAdministrativeUnit",$this->objectclasses)){
   			$this->objectclasses[]= "gosaAdministrativeUnit";
+			  $this->gosaUnitTag= "";
       }
+
 			if ($this->gosaUnitTag == ""){
 
 				/* It's unlikely, but check if already used... */
@@ -297,13 +299,18 @@ class department extends plugin
 			$tmp= array();
 
 			/* Remove gosaAdministrativeUnit from this plugin */
+      $has_unit_tag= false;
 			foreach($this->attrs['objectClass'] as $oc){
 				if (!preg_match("/^gosaAdministrativeUnit$/i", $oc)){
 					$tmp[]= $oc;
 				}
+				if (preg_match("/^gosaAdministrativeUnitTag$/i", $oc)){
+					$has_unit_tag= true;
+				}
 			}
 			$this->attrs['objectClass']= $tmp;
-			if(isset($this->attrs['gosaUnitTag'])){
+
+			if(!$has_unit_tag && isset($this->attrs['gosaUnitTag'])){
 				$this->attrs['gosaUnitTag']= array();
 			}
 		}
