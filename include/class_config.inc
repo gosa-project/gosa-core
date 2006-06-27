@@ -537,7 +537,7 @@ class config  {
     foreach ($this->departments as $key => $val){
 
       /* When using strict_units, filter non relevant parts */
-      if (preg_match('/true/i', $config->current['STRICT_UNITS'])){
+      if (isset($config->current['STRICT_UNITS']) && preg_match('/true/i', $config->current['STRICT_UNITS'])){
         if ($ui->gosaUnitTag != "" && isset($this->tdepartments[$val]) &&
             $this->tdepartments[$val] != $ui->gosaUnitTag){
           continue;
