@@ -147,7 +147,7 @@
 
 <table summary="{t}Environment managment settings{/t}" width="100%">
   <tr>
-   <td style="border-right:1px solid #B0B0B0; width:50%">
+   <td style="border-right:1px solid #B0B0B0; width:50%; vertical-align:top">
 	<h2><img alt="" src="images/hotplug.png" align="middle" class="center" />&nbsp;<label for="gotoHotplugDevice">{t}Hotplug devices{/t}</label></h2>	
 	<table style="width:100%" summary="{t}Hotplug device settings{/t}">
 		<tr>
