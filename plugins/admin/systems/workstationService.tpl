@@ -121,19 +121,17 @@
      <td>{if $gotoXMonitor==""}{t}unknown{/t}{/if}{$gotoXMonitor}</td>
     </tr>
     <tr>
-    	<td><input type="checkbox" name="AutoSync" value="1" {$AutoSyncACL} {$AutoSyncCHK}>
-	</td>
-	<td>{t}Automatic modelines{/t}
-	</td>
+    	<td><input type="checkbox" name="AutoSync" value="1" {$AutoSyncACL} {$AutoSyncCHK} onChange="changeState('gotoXHsync');changeState('gotoXVsync');"></td>
+	<td>{t}Use DDC for automatic detection{/t}</td>
     </tr>
     <tr>
      <td><LABEL for="gotoXHsync">{t}HSync{/t}</LABEL></td>
-     <td><input id="gotoXHsync" name="gotoXHsync" size=10 maxlength=60 {$gotoXHsyncACL}
+     <td><input id="gotoXHsync" name="gotoXHsync" size=10 maxlength=60 {$gotoXHsyncACL} {$hiddenState}
                 value="{$gotoXHsync}" title="{t}Horizontal refresh frequency for installed monitor{/t}"> kHz</td>
     </tr>
     <tr>
      <td><LABEL for="gotoXVsync">{t}VSync{/t}</LABEL></td>
-     <td><input id="gotoXVsync"  name="gotoXVsync" size=10 maxlength=60 {$gotoXVsyncACL}
+     <td><input id="gotoXVsync"  name="gotoXVsync" size=10 maxlength=60 {$gotoXVsyncACL} {$hiddenState}
                 value="{$gotoXVsync}" title="{t}Vertical refresh frequency for installed monitor{/t}"> Hz</td>
     </tr>
    </table>

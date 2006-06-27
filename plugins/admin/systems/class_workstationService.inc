@@ -310,8 +310,10 @@ class workservice extends plugin
 
     if($this->AutoSync){
       $smarty->assign("AutoSyncCHK"," checked ");
+      $smarty->assign("hiddenState"," disabled ");
     }else{
       $smarty->assign("AutoSyncCHK"," ");
+      $smarty->assign("hiddenState","");
     }
 
     /* Show main page */
@@ -328,7 +330,7 @@ class workservice extends plugin
   {
     plugin::save_object();
 
-    if(isset($_POST['gotoXHsync'])){
+    if(isset($_POST['gotoXDriver'])){
       if(isset($_POST['AutoSync'])){
         $this->AutoSync = true;
       }else{
@@ -346,36 +348,41 @@ class workservice extends plugin
     /* Default entries can use blank hsync/vsync entries */
     if ($this->dn != "" && $this->cn != "default" && $this->cn != "wdefault"){
 
-      /* Check vsync for correct usage */
-      $val= preg_replace ("/\s/", "", $this->gotoXVsync);
-      if (!preg_match ("/^\d+(\.\d+)?([-]\d+(\.\d+)?)?$/", $val)
-          && chkacl ($this->acl, "gotoXVsync") == ""){
+      /* But only if no auto sync is enabled... */
+      if (!$this->AutoSync){
 
-        $message[]= _("Please specify a valid VSync range.");
-      } elseif (chkacl ($this->acl, "gotoXVsync") == ""){
-        list($v1,$v2)= preg_split ("/[-+]/", $val);
-        if ($v2 != ""){
-          if ($v1 > $v2){
-            $message[]= _("Please specify a valid VSync range.");
+        /* Check vsync for correct usage */
+        $val= preg_replace ("/\s/", "", $this->gotoXVsync);
+        if (!preg_match ("/^\d+(\.\d+)?([-]\d+(\.\d+)?)?$/", $val)
+            && chkacl ($this->acl, "gotoXVsync") == ""){
+
+          $message[]= _("Please specify a valid VSync range.");
+        } elseif (chkacl ($this->acl, "gotoXVsync") == ""){
+          list($v1,$v2)= preg_split ("/[-+]/", $val);
+          if ($v2 != ""){
+            if ($v1 > $v2){
+              $message[]= _("Please specify a valid VSync range.");
+            }
           }
         }
-      }
 
-      /* Check hsync for correct usage */
-      $val= preg_replace ("/\s/", "", $this->gotoXHsync);
-      if (!preg_match ("/^\d+(\.\d+)?([-]\d+(\.\d+)?)?$/", $val)
-          && chkacl ($this->acl, "gotoXHsync") == ""){
+        /* Check hsync for correct usage */
+        $val= preg_replace ("/\s/", "", $this->gotoXHsync);
+        if (!preg_match ("/^\d+(\.\d+)?([-]\d+(\.\d+)?)?$/", $val)
+            && chkacl ($this->acl, "gotoXHsync") == ""){
 
-        $message[]= _("Please specify a valid HSync range.");
-      } elseif (chkacl ($this->acl, "gotoXHsync") == ""){
-        list($v1,$v2)= preg_split ("/[-+]/", $val);
-        if ($v2 != ""){
-          if ($v1 > $v2){
-            $message[]= _("Please specify a valid HSync range.");
+          $message[]= _("Please specify a valid HSync range.");
+        } elseif (chkacl ($this->acl, "gotoXHsync") == ""){
+          list($v1,$v2)= preg_split ("/[-+]/", $val);
+          if ($v2 != ""){
+            if ($v1 > $v2){
+              $message[]= _("Please specify a valid HSync range.");
+            }
           }
         }
       }
     }
+
     return ($message);
   }
 
@@ -402,8 +409,8 @@ class workservice extends plugin
     }
 
     if($this->AutoSync){
-      $this->attrs['gotoXHsync'] = preg_replace("/-/","+",$this->attrs['gotoXHsync']) ;
-      $this->attrs['gotoXVsync'] = preg_replace("/-/","+",$this->attrs['gotoXVsync']) ;
+      $this->attrs['gotoXHsync'] = "30+55";
+      $this->attrs['gotoXVsync'] = "50+70";
     }
 
     /* Write back to ldap */
