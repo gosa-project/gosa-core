@@ -46,6 +46,7 @@ class config  {
   var $departments= array();
   var $idepartments= array();
   var $adepartments= array();
+  var $tdepartments= array();
 
   function config($filename, $basedir= "")
   {
@@ -486,6 +487,7 @@ class config  {
     $result= array();
     $administrative= array();
     $result['/']= $this->current['BASE'];
+    $this->tdepartments= array();
 
     /* Get list of department objects */
     $ldap= $this->get_ldap_link();
@@ -493,11 +495,18 @@ class config  {
     $ldap->search ("(objectClass=gosaDepartment)", array("ou", "objectClass", "gosaUnitTag"));
     while ($attrs= $ldap->fetch()){
       $dn= $ldap->getDN();
+      $this->tdepartments[$dn]= "";
 
       /* Save administrative departments */
       if (in_array_ics("gosaAdministrativeUnit", $attrs['objectClass']) &&
           isset($attrs['gosaUnitTag'][0])){
         $administrative[$dn]= $attrs['gosaUnitTag'][0];
+        $this->tdepartments[$dn]= $attrs['gosaUnitTag'][0];
+      }
+
+      if (in_array_ics("gosaAdministrativeUnitTag", $attrs['objectClass']) &&
+          isset($attrs['gosaUnitTag'][0])){
+        $this->tdepartments[$dn]= $attrs['gosaUnitTag'][0];
       }
     
       if ($dn == $ignore_dn){
@@ -520,12 +529,20 @@ class config  {
     global $config;
     $base = $config->current['BASE'];
 
-    $arr = array();
-
+    $arr= array();
+    $ui= get_userinfo();
     $this->idepartments= array();
 
     /* Create multidimensional array, with all departments. */
     foreach ($this->departments as $key => $val){
+
+      /* When using strict_units, filter non relevant parts */
+      if (preg_match('/true/i', $config->current['STRICT_UNITS'])){
+        if ($ui->gosaUnitTag != "" && isset($this->tdepartments[$val]) &&
+            $this->tdepartments[$val] != $ui->gosaUnitTag){
+          continue;
+        }
+      }
 
       /* remove base from dn */
       $val2 = str_replace($base,"",$val);
