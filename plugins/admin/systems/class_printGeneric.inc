@@ -128,9 +128,7 @@ class printgeneric extends plugin
           if(preg_match("/Group/",$type)){
             $ldap->search("(&(objectClass=posixGroup)(cn=".$mem."))",array("cn","description"));
             $entry = $ldap->fetch();
-            if(isset($entry['description'])){
-              $this->member[$type][$entry['cn'][0]]=$entry;
-            }
+            $this->member[$type][$entry['cn'][0]]=$entry;
           }else{
             $ldap->search("(&(objectClass=person)(objectClass=inetOrgPerson)(uid=".$mem."))",array("cn","uid"));
             $entry = $ldap->fetch();
