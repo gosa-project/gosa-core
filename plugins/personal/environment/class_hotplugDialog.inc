@@ -92,7 +92,7 @@ class hotplugDialog extends plugin
     if(isset($_POST['dialogissubmitted'])){
       foreach($this->attributes as $s_attr){
         if(isset($_POST[$s_attr])){
-          $this->$s_attr = $_POST[$s_attr];
+          $this->$s_attr = stripslashes($_POST[$s_attr]);
         }else{
           $this->$s_attr = false;
         }
