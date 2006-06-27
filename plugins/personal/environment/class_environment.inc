@@ -782,7 +782,6 @@ class environment extends plugin
 
     /* Als smarty vars are set. Get smarty template and generate output */
     $display.= $smarty->fetch(get_template_path('environment.tpl', TRUE,dirname(__FILE__)));
-    
     return($display);
   }
 
@@ -961,7 +960,13 @@ class environment extends plugin
           if($this->uid==$user){
             unset($attr['goto'.$s_suffix.'Printer'][$key]);
           }
-        }    
+        }
+        $tmp = array();
+        foreach($attr['goto'.$s_suffix.'Printer'] as $user){
+          $tmp[] = $user;
+        }
+        $attr['goto'.$s_suffix.'Printer'] = array();  
+        $attr['goto'.$s_suffix.'Printer'] = $tmp;
       }
 
       /* Remove administrational entries (Admin)*/
@@ -971,6 +976,12 @@ class environment extends plugin
             unset($attr['goto'.$s_suffix.'AdminPrinter'][$key]);
           }
         }    
+        $tmp = array();
+        foreach($attr['goto'.$s_suffix.'AdminPrinter'] as $user){
+          $tmp[] = $user;
+        }
+        $attr['goto'.$s_suffix.'AdminPrinter'] = array();  
+        $attr['goto'.$s_suffix.'AdminPrinter'] = $tmp;
       }
 
       /* Extract useable tags, to be able to save all changes 
