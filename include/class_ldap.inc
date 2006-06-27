@@ -281,7 +281,7 @@ class LDAP{
         if ($this->re)
         {
           $att= @ldap_get_attributes($this->cid, $this->re);
-          $att['dn']= $this->convert(@ldap_get_dn($this->cid, $this->re));
+          $att['dn']= trim($this->convert(@ldap_get_dn($this->cid, $this->re)));
         }
         $this->error = @ldap_error($this->cid);
         if (!isset($att)){
@@ -325,7 +325,7 @@ class LDAP{
           $rv = @ldap_get_dn($this->cid, $this->re);
         
           $this->error = @ldap_error($this->cid);
-          return($this->convert($rv));
+          return(trim($this->convert($rv)));
            }
       }else{
         $this->error = "Perform a Fetch with no Search";
