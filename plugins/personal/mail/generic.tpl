@@ -107,8 +107,7 @@
    {if $show_templates eq "true"}
    <select name="vacation_template">
         	{html_options options=$vacationtemplates selected=$template}
-			<option disabled>&nbsp;</option>
-	{html_options options=$vacationtemplates selected=$template}
+		<option disabled>&nbsp;</option>
    </select>
    <input type="submit" value="{t}Import{/t}" name="import_vacation"
 	{$gosaVacationMessageACL}>
