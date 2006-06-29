@@ -3,6 +3,11 @@ GOsa2 changelog
 
 * gosa 2.5.3
   - Fixed typos
+  - Fixed upper/lowcase ou's for groups/people when using an
+    unclean LDAP database
+  - Fixed ACL handling to *not* show the admin user dialog
+    when configured for self modify only
+  - Fixed problem when changing passwords via "My account"
 
 * gosa 2.5.2
   - Fixed current main base not beeing set when editing non tabbed
