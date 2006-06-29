@@ -367,8 +367,8 @@ function ldap_login_user ($username, $password)
 
 function ldap_expired_account($config, $userdn, $username)
 {
-    $this->config= $config;
-    $ldap= $this->config->get_ldap_link();
+    //$this->config= $config;
+    $ldap= config->get_ldap_link();
     $ldap->cat($userdn);
     $attrs= $ldap->fetch();
     
