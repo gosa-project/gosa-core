@@ -909,7 +909,7 @@ function get_base_from_people($dn)
 {
   global $config;
 
-  $pattern= "/^[^,]+,".preg_quote(get_people_ou())."/";
+  $pattern= "/^[^,]+,".preg_quote(get_people_ou())."/i";
   $base= preg_replace($pattern, '', $dn);
 
   /* Set to base, if we're not on a correct subtree */
@@ -1274,10 +1274,10 @@ function dn2base($dn)
   global $config;
 
   if (get_people_ou() != ""){
-    $dn= preg_replace('/,'.get_people_ou().'/' , ',', $dn);
+    $dn= preg_replace('/,'.get_people_ou().'/i' , ',', $dn);
   }
   if (get_groups_ou() != ""){
-    $dn= preg_replace('/,'.get_groups_ou().'/' , ',', $dn);
+    $dn= preg_replace('/,'.get_groups_ou().'/i' , ',', $dn);
   }
   $base= preg_replace ('/^[^,]+,/i', '', $dn);
 
