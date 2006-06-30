@@ -121,9 +121,6 @@ class ogrouptabs extends tabs
 
   function execute(){
     $str = "";
-	/* Call parent execute */
-	plugin::execute();
-
     $this->by_object['ogroup']->AddDelMembership();
     $this->reload($this->by_object['ogroup']->gosaGroupObjects);
     $str .= tabs::execute();
