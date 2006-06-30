@@ -10,6 +10,9 @@ GOsa2 changelog
   - Fixed problem when changing passwords via "My account"
 
 * gosa 2.5.2
+  - Fixed user membership for gotoPrinter, if membership was edited 
+		via user environemnt, some numeric values were stored too
+  - Fixed mail account, mail server string possibly was an array
   - Fixed current main base not beeing set when editing non tabbed
     plugins
   - Fixed filtering for divlists
