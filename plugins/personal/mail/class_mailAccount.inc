@@ -124,6 +124,13 @@ class mailAccount extends plugin
 
         /* Adapt attributes if needed */
         $method->fixAttributesOnLoad($this);
+
+        /* FixAttributesOnLoad possibly creates an array out of gosaMailServer.
+            If the mail tab wasn't opened once before saving, the account can't be saved */
+        if(is_array($this->gosaMailServer)){
+          $this->gosaMailServer = $this->gosaMailServer[0];
+        }
+
         if ($method->connect($this->attrs["gosaMailServer"][0])){
 
           /* Update quota values */
