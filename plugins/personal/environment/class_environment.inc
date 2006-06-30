@@ -956,6 +956,10 @@ class environment extends plugin
 
       /* Remove normal entries (User)*/
       if(isset($attr['goto'.$s_suffix.'Printer'])) {
+
+        /* Avoid saving count=>0 as member */
+        unset($attr['goto'.$s_suffix.'Printer']['count']);
+
         foreach($attr['goto'.$s_suffix.'Printer'] as $key => $user){
           if($this->uid==$user){
             unset($attr['goto'.$s_suffix.'Printer'][$key]);
@@ -971,6 +975,10 @@ class environment extends plugin
 
       /* Remove administrational entries (Admin)*/
       if(isset($attr['goto'.$s_suffix.'AdminPrinter'])){
+
+        /* Avoid saving count=>0 as member */
+        unset($attr['goto'.$s_suffix.'AdminPrinter']['count']);
+
         foreach($attr['goto'.$s_suffix.'AdminPrinter'] as $key => $user){
           if($this->uid==$user){
             unset($attr['goto'.$s_suffix.'AdminPrinter'][$key]);
