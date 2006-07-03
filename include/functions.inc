@@ -1194,7 +1194,7 @@ function get_printer_list($cups_server)
     $ar = false;
     exec("lpstat -p", $ar);
     foreach($ar as $val){
-      list($dummy, $printer, $rest)= split(' ', $val, 3);
+      @list($dummy, $printer, $rest)= split(' ', $val, 3);
       if (preg_match('/^[^@]+$/', $printer)){
         $res[$printer]= "$printer";
       }

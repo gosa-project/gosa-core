@@ -2,6 +2,7 @@ GOsa2 changelog
 ===============
 
 * gosa 2.5.3
+  - Fixed get_printer_list undefined index warnings while editing a user.
   - Fixed ogroup non-static method error
   - Fixed user membership for gotoPrinter, if membership was edited 
     via user environemnt, some numeric values were stored too
