@@ -8,6 +8,17 @@ $ACLD['application']=array("cn" => "LDAP name",
 			"gosaApplicationExecute" => "Execute",
 			"gosaApplicationFlags" => "Modify flags",
 			"gosaApplicationName" => "Visible name");
+$ACLD['mimetype']=array("cn" 				=> "LDAP name",
+			"create" 						=> "Create",
+			"delete" 						=> "Delete",
+			"description" 					=> "Description",
+			"gotoMimeIcon" 					=> "Icon",
+			"gotoMimeApplication" 			=> "Modify flags",
+			"gotoMimeEmbeddedApplication" 	=> "Embedded applications",
+			"gotoMimeLeftClickAction" 		=> "Left click actions",
+			"gotoMimeFilePattern" 			=> "File patterns",
+			"gotoMimeGroup" 				=> "Mime group",
+			"description"	 				=> "Description");
 $ACLD['department']= array(
 			"businessCategory",
 			"description",
@@ -314,5 +325,6 @@ $ACLD['FAIclass']	= 	array(
 								// Allow displaying of FAI menu element
 								"FAIclass"	=> "FAI management enabled");
 $ACLD['goFonMacro']	=array("goFonMacro","edit","delete");
+$ACLD['kolabAccount']	=array("kolabAccount","kolabFreeBusyFuture", "unrestrictedMailSize", "calFBURL","kolabDelegate");
 
 ?>

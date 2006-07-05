@@ -2,27 +2,28 @@
 class kolabAccount extends plugin
 {
   /* Definitions */
-  var $plHeadline= "Kolab";
-  var $plDescription= "This does something";
+  var $plHeadline       = "Kolab";
+  var $plDescription    = "This does something";
 
   /* CLI vars */
-  var $cli_summary= "Manage users Kolab account";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
+  var $cli_summary      = "Manage users Kolab account";
+  var $cli_description  = "Some longer text\nfor help";
+  var $cli_parameters   = array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* Kolab attributes */
-  var $kolabInvitationPolicy= array();
-  var $kolabFreeBusyFuture= 60;
-  var $unrestrictedMailSize= 0;
-  var $calFBURL= "";
-  var $kolabDelegate= array();
+  var $kolabInvitationPolicy  = array();
+  var $kolabFreeBusyFuture    = 60;
+  var $unrestrictedMailSize   = 0;
+  var $calFBURL               = "";
+  var $kolabDelegate          = array();
 
   /* attribute list for save action */
-  var $attributes= array( "kolabFreeBusyFuture", "unrestrictedMailSize", "calFBURL");
-  var $objectclasses= array("kolab");
+  var $attributes     = array("kolabFreeBusyFuture", "unrestrictedMailSize", "calFBURL","kolabDelegate");
+  var $objectclasses  = array("kolabInetOrgPerson");
 
   /* Helper */
   var $imapping= array();
+
 
   function kolabAccount ($config, $dn= NULL)
   {
@@ -31,9 +32,11 @@ class kolabAccount extends plugin
     /* Pull arrays */
     foreach(array("kolabDelegate", "kolabInvitationPolicy") as $attr){
       if (isset($this->attrs["$attr"]["count"])){
+        $tmp = array();
         for ($i= 0; $i<$this->attrs["$attr"]["count"]; $i++){
-          array_push($this->$attr, $this->attrs["$attr"][$i]);
+          $tmp[]=$this->attrs["$attr"][$i];
         }
+        $this->$attr = $tmp;
       }
     }
 
@@ -42,12 +45,23 @@ class kolabAccount extends plugin
        $this->kolabInvitationPolicy= array("ACT_MANUAL");
     }
 
+    /* Check is account state */
+    $this->is_account = false;
+    if(count($this->kolabDelegate)){
+      $this->is_account = true;
+    }
+    foreach(array("calFBURL","unrestrictedMailSize") as $attr){
+      if(!empty($this->$attr)){
+        $this->is_account = true;
+      }
+    } 
   }
+
 
   function execute()
   {
 	/* Call parent execute */
-//	plugin::execute();
+  	plugin::execute();
 
     /* Show tab dialog headers */
     $display= "";
@@ -60,6 +74,7 @@ class kolabAccount extends plugin
       $smarty->assign("$val", $this->$val);
       $smarty->assign($val."ACL", chkacl($this->acl, "$val"));
     }
+    $smarty->assign("kolabAccountACL", chkacl($this->acl, "kolabAccountACL"));
 
     /* Check for invitation action */
     $nr= 0;
@@ -82,9 +97,6 @@ class kolabAccount extends plugin
     /* Unify addresses */
     $new= array();
     foreach($this->kolabInvitationPolicy as $value){
-      if (preg_match('/^:/', $value)){
-        continue;
-      }
       $address= preg_replace('/^([^:]+:).*$/', '\1', $value);
       $new[$address]= $value;
     }
@@ -153,9 +165,11 @@ class kolabAccount extends plugin
 
     /* Transfer account states for this union */
     if (isset($this->parent) && $this->parent->by_object['mailAccount']->is_account){
-      $smarty->assign('is_account', 'true');
-    } else {
-      $smarty->assign('is_account', '');
+      $smarty->assign('mail_account', 'true');
+    } elseif($this-> initially_was_account && (isset($this->attrs['objectClass']) && (in_array("kolabInetOrgPerson",$this->attrs['objectClass'])))){
+      $smarty->assign('mail_account', 'true');
+    }else{
+      $smarty->assign('mail_account', '');
     }
 
     /* Transfer delegation list */
@@ -172,8 +186,19 @@ class kolabAccount extends plugin
     $this->imapping= array();
     $nr= 0;
     $acl= chkacl($this->acl, "kolabInvitationPolicy");
+    $changeState = "";
     foreach ($this->kolabInvitationPolicy as $entry){
+
+      $changeState .= "changeState('address".$nr."'); \n changeState('policy".$nr."'); \n
+                         changeState('add".$nr."'); \n changeState('remove".$nr."'); \n";
+
       $invitation.= "<tr><td>";
+      if($this->is_account){
+        $dis = " ";
+      }else{
+        $dis = " disabled ";
+      }
+    
 
       /* The default entry does not have colons... */
       if (!preg_match('/:/', $entry)){
@@ -183,12 +208,12 @@ class kolabAccount extends plugin
       } else {
         $name= preg_replace('/:.*$/', '', $entry);
         $mode= preg_replace('/^[^:]*: */', '', $entry);
-        $invitation.= "<input name=\"address$nr\" size=16 maxlength=60 $acl value=\"$name\">";
+        $invitation.= "<input name=\"address$nr\" size=16 maxlength=60 $acl value=\"$name\" id='address".$nr."' ".$dis.">";
       }
       $invitation.= "</td>";
 
       /* Add mode switch */
-      $invitation.= "<td><select size=\"1\" name=\"policy$nr\" $acl>";
+      $invitation.= "<td><select size=\"1\" name=\"policy$nr\" $acl  id='policy".$nr."' ".$dis.">";
       foreach($policies as $key => $value){
         if ($key == $mode){
           $invitation.= "<option value=\"$key\" selected>$value</option>";
@@ -200,10 +225,10 @@ class kolabAccount extends plugin
       /* Assign buttons */
       $button= "";
       if ($nr == count($this->kolabInvitationPolicy)-1){
-        $button= "<input type=submit name=\"add$nr\" value=\""._("Add")."\">";
+        $button= "<input type=submit name=\"add$nr\" value=\""._("Add")."\" id='add".$nr."' ".$dis.">";
       }
       if ($nr != 0) {
-        $button.= "<input type=submit name=\"remove$nr\" value=\""._("Remove")."\">";
+        $button.= "<input type=submit name=\"remove$nr\" value=\""._("Remove")."\" id='remove".$nr."' ".$dis.">";
       }
       
       $invitation.= "</select>&nbsp;$button</td></tr>\n";
@@ -211,15 +236,30 @@ class kolabAccount extends plugin
       $nr++;
     }
     $smarty->assign("invitation", $invitation);
-
+    $smarty->assign("changeState", $changeState);
+    $smarty->assign("kolabState",$this->is_account);
     $display.= $smarty->fetch (get_template_path('kolab.tpl', TRUE, dirname(__FILE__)));
+
+
     return ($display);
   }
 
   function remove_from_parent()
   {
     /* Optionally execute a command after we're done */
+    plugin::remove_from_parent();
+    
+    if(!in_array("kolabInetOrgPerson",$this->attrs['objectClass'])){
+      $this->attrs['objectClass'][] = "kolabInetOrgPerson";
+    }
+
+    $ldap = $this->config->get_ldap_linK(); 
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->cd ($this->dn);
+    $ldap->modify($this->attrs);
+
     $this->handle_post_events('remove');
+    show_ldap_error($ldap->get_error(), sprintf(_("Removing of user/kolab account with dn '%s' failed."),$this->dn));
   }
 
 
@@ -272,6 +312,13 @@ class kolabAccount extends plugin
   {
     /* Do we need to flip is_account state? */
     if (isset($_POST['connectivityTab'])){
+
+      if(isset($_POST["kolabState"])){
+        $this->is_account = true;
+      }else{
+        $this->is_account = false;
+      }
+
       if (chkacl('unrestrictedMailSize', $this->acl == "")){
         if (isset($_POST['unrestrictedMailSize']) && $_POST['unrestrictedMailSize'] == 1){
           $this->unrestrictedMailSize= 1;
@@ -316,13 +363,20 @@ class kolabAccount extends plugin
     $this->attrs['kolabDelegate']= $this->kolabDelegate;
     $this->attrs['kolabInvitationPolicy']= $this->kolabInvitationPolicy;
 
+    /* unrestrictedMailSize is boolean */
+    if($this->attrs['unrestrictedMailSize']){
+      $this->attrs['unrestrictedMailSize'] = "TRUE";
+    }else{
+      $this->attrs['unrestrictedMailSize'] = "FALSE";
+    }
+  
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
     $this->cleanup();
     $ldap->modify ($this->attrs); 
 
-    show_ldap_error($ldap->get_error(), _("Saving Kolab account failed"));
+    show_ldap_error($ldap->get_error(), sprintf(_("Saving of user/kolab account with dn '%s' failed."),$this->dn));
 
     /* Optionally execute a command after we're done */
     if ($this->initially_was_account == $this->is_account){
