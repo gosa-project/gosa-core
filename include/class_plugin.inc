@@ -927,7 +927,7 @@ class plugin
           echo sprintf(_("Adding tag (%s) to object '%s'"), $tag, @LDAP::fix($dn))."<br>";
           flush();
         }
-        $nattrs= array("gosaUnitTag" => $this->gosaUnitTag);
+        $nattrs= array("gosaUnitTag" => $tag);
         $nattrs['objectClass']= array();
         for ($i= 0; $i<$attrs['objectClass']['count']; $i++){
           $oc= $attrs['objectClass'][$i];
