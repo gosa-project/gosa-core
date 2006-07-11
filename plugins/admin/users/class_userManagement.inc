@@ -799,7 +799,9 @@ class userManagement extends plugin
   function save_object()
   {
     /* Handle divlist filter && department selection*/
-    $this->DivListUsers->save_object();
+    if(!is_object($this->usertab)){
+      $this->DivListUsers->save_object();
+    }
   }
 
   /* A set of disabled and therefore overloaded functions. They are
