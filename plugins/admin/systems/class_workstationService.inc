@@ -198,25 +198,25 @@ class workservice extends plugin
         
         switch ($name){
           case 'gotoXResolution':
-            $this->XResolutions= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']' ), $this->XResolutions);
+            $this->XResolutions= array('default' => _("inherited").' ['.$attrs[$name][0].']' ) + $this->XResolutions;
             break;
           case 'gotoXColordepth':
-            $this->XColordepths= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].' '._('Bit').']'), $this->XColordepths);
+            $this->XColordepths= array('default' => _("inherited").' ['.$attrs[$name][0].' '._('Bit').']') + $this->XColordepths;
             break;
           case 'gotoXKbModel':
-            $this->XKbModels= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']'), $this->XKbModels);
+            $this->XKbModels= array('default' => _("inherited").' ['.$attrs[$name][0].']') + $this->XKbModels;
             break;
           case 'gotoXKbLayout':
-            $this->XKbLayouts= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']' ), $this->XKbLayouts);
+            $this->XKbLayouts= array('default' => _("inherited").' ['.$attrs[$name][0].']' ) + $this->XKbLayouts;
             break;
           case 'gotoXKbVariant':
-            $this->XKbVariants= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']' ), $this->XKbVariants);
+            $this->XKbVariants= array('default' => _("inherited").' ['.$attrs[$name][0].']' ) + $this->XKbVariants;
             break;
           case 'gotoXMouseType':
-            $this->MouseTypes= array_merge(array('AUTO' => _("inherited").' ['.$attrs[$name][0].']' ), $this->MouseTypes);
+            $this->MouseTypes= array('AUTO' => _("inherited").' ['.$attrs[$name][0].']' ) + $this->MouseTypes;
             break;
           case 'gotoXMouseport':
-            $this->MousePorts= array_merge(array('AUTO' => _("inherited").' ['.$attrs[$name][0].']' ), $this->MousePorts);
+            $this->MousePorts= array('AUTO' => _("inherited").' ['.$attrs[$name][0].']' ) + $this->MousePorts;
             break;
         }
 
