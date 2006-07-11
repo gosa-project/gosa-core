@@ -34,7 +34,7 @@ mv contrib/gosa.conf.new contrib/gosa.conf
 
 echo "Extracting languages..."
 rm locale/messages.po
-(echo contrib/gosa.conf; find . -name '*.[ctpi][ophn][nlpc]') | xgettext -f - --omit-header --keyword=must -d Domain -L PHP -n -o locale/messages.po
+(echo contrib/gosa.conf; find . -name '*.[ctpi][ophn][nlpc]') | xgettext -f - --keyword=must -d Domain -L PHP -n -o locale/messages.po
 
 echo "Merging po files with existing ones:"
 error=0
