@@ -2,6 +2,7 @@ GOsa2 changelog
 ===============
 
 * gosa 2.5.3
+  - Fixed posix group add dialog, filter wasn't working.
   - Fixed get_printer_list undefined index warnings while editing a user.
   - Fixed ogroup non-static method error
   - Fixed user membership for gotoPrinter, if membership was edited 
