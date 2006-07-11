@@ -32,6 +32,7 @@ class faiPackageNew extends plugin
     $display = "";
     $smarty = get_smarty(); 
     $atr = $this->getServerInfos(); 
+    $releases= array();
     foreach($atr as $release => $sections){
       $releases[$release]=$release;
     }
