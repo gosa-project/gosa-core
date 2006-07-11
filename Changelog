@@ -2,6 +2,7 @@ GOsa2 changelog
 ===============
 
 * gosa 2.5.3
+  - Fixed saving of inherited workstation settings
   - Removed error when no FAI repositories were present
   - Fixed posix group add dialog, filter wasn't working.
   - Fixed get_printer_list undefined index warnings while editing a user.
