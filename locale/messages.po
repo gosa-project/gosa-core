@@ -55,7 +55,7 @@ msgstr ""
 #: plugins/admin/groups/class_divListGroup.inc:128
 #: plugins/admin/users/class_divListUsers.inc:166
 #: plugins/admin/ogroups/tabs_ogroups.inc:75
-#: plugins/admin/ogroups/tabs_ogroups.inc:178
+#: plugins/admin/ogroups/tabs_ogroups.inc:175
 #: plugins/admin/ogroups/class_divListOGroup.inc:146
 #: plugins/generic/references/class_reference.inc:24
 msgid "Mail"
@@ -169,7 +169,6 @@ msgstr ""
 #: plugins/addons/godfs/contents.tpl:22
 #: plugins/admin/fai/faiProfileEntry.tpl:21
 #: plugins/admin/fai/faiPackageEntry.tpl:22
-#: plugins/admin/departments/headpage.tpl:20
 #: plugins/admin/systems/glpiPrinter.tpl:104
 #: plugins/admin/systems/glpiDeviceManagement.tpl:20
 #: plugins/admin/systems/servRepository.tpl:24
@@ -216,7 +215,7 @@ msgstr ""
 msgid "Excel Export"
 msgstr ""
 
-#: contrib/gosa.conf:201 plugins/personal/mail/generic.tpl:113
+#: contrib/gosa.conf:201 plugins/personal/mail/generic.tpl:112
 #: plugins/personal/environment/logonManagement.tpl:65
 #: plugins/addons/ldapmanager/contentimport.tpl:49
 #: plugins/addons/ldapmanager/contentcsv.tpl:109
@@ -662,7 +661,7 @@ msgstr ""
 msgid "Directory '%s' specified as compile directory is not accessible!"
 msgstr ""
 
-#: html/index.php:203 include/class_config.inc:206
+#: html/index.php:203 include/class_config.inc:207
 msgid "Can't bind to LDAP. Please contact the system administrator."
 msgstr ""
 
@@ -914,7 +913,6 @@ msgstr ""
 #: plugins/admin/fai/faiPackageEntry.tpl:32
 #: plugins/admin/groups/group_objects.tpl:20
 #: plugins/admin/groups/mail_locals.tpl:22
-#: plugins/admin/departments/headpage.tpl:29
 #: plugins/admin/systems/printerPPDSelectionDialog.tpl:18
 #: plugins/admin/systems/glpiDeviceManagement.tpl:27
 #: plugins/admin/systems/servRepository.tpl:36
@@ -955,6 +953,7 @@ msgstr ""
 #: plugins/personal/password/changed.tpl:12
 #: plugins/personal/generic/main.inc:169
 #: plugins/gofax/faxreports/detail.tpl:67
+#: plugins/addons/mailqueue/header.tpl:5
 #: plugins/addons/ldapmanager/contentexportxls.tpl:69
 #: plugins/addons/ldapmanager/contentimport.tpl:44
 #: plugins/addons/ldapmanager/contentcsv.tpl:114
@@ -1026,7 +1025,7 @@ msgstr ""
 #: plugins/personal/generic/generic_certs.tpl:17
 #: plugins/personal/generic/generic_certs.tpl:37
 #: plugins/personal/generic/generic_certs.tpl:57
-#: plugins/personal/connectivity/class_kolabAccount.inc:206
+#: plugins/personal/connectivity/class_kolabAccount.inc:231
 #: plugins/admin/fai/faiPackage.tpl:72
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:266
 #: plugins/admin/groups/class_groupMail.inc:544
@@ -1238,7 +1237,7 @@ msgstr ""
 
 #: ihtml/themes/altlinux/setup_step4.tpl:91
 #: ihtml/themes/default/setup_step4.tpl:91
-#: plugins/personal/posix/class_posixAccount.inc:557
+#: plugins/personal/posix/class_posixAccount.inc:547
 #: plugins/personal/samba/class_sambaAccount.inc:455
 #: plugins/admin/systems/class_terminalGeneric.inc:97
 msgid "disabled"
@@ -2374,12 +2373,12 @@ msgstr ""
 msgid "Can't paste"
 msgstr ""
 
-#: include/class_config.inc:70
+#: include/class_config.inc:71
 #, php-format
 msgid "XML error in gosa.conf: %s at line %d"
 msgstr ""
 
-#: include/class_config.inc:468
+#: include/class_config.inc:469
 msgid "SID and/or RIDBASE missing in your configuration!"
 msgstr ""
 
@@ -2652,124 +2651,124 @@ msgstr ""
 msgid "There is no mail method '%s' specified in your gosa.conf available."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:143
+#: plugins/personal/mail/class_mailAccount.inc:150
 #: plugins/admin/groups/class_groupMail.inc:173
 #, php-format
 msgid "Can't get quota information for '%s'."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:205
+#: plugins/personal/mail/class_mailAccount.inc:212
 msgid "No DESC tag in vacation file:"
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:244
+#: plugins/personal/mail/class_mailAccount.inc:251
 msgid "This account has no mail extensions."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:253
+#: plugins/personal/mail/class_mailAccount.inc:260
 #: plugins/admin/groups/class_groupMail.inc:320
 #: plugins/admin/ogroups/class_mailogroup.inc:40
 msgid "Remove mail account"
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:254
+#: plugins/personal/mail/class_mailAccount.inc:261
 #: plugins/admin/groups/class_groupMail.inc:321
 msgid ""
 "This account has mail features enabled. You can disable them by clicking "
 "below."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:256
+#: plugins/personal/mail/class_mailAccount.inc:263
 #: plugins/admin/groups/class_groupMail.inc:323
 #: plugins/admin/ogroups/class_mailogroup.inc:43
 msgid "Create mail account"
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:256
+#: plugins/personal/mail/class_mailAccount.inc:263
 #: plugins/admin/groups/class_groupMail.inc:324
 msgid ""
 "This account has mail features disabled. You can enable them by clicking "
 "below."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:307
+#: plugins/personal/mail/class_mailAccount.inc:314
 msgid ""
 "You're trying to add an invalid email address to the list of forwarders."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:313
+#: plugins/personal/mail/class_mailAccount.inc:320
 #: plugins/admin/groups/class_groupMail.inc:383
 msgid "Adding your one of your own addresses to the forwarders makes no sense."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:351
-#: plugins/personal/mail/class_mailAccount.inc:356
+#: plugins/personal/mail/class_mailAccount.inc:358
+#: plugins/personal/mail/class_mailAccount.inc:363
 #: plugins/admin/groups/class_groupMail.inc:411
 msgid ""
 "You're trying to add an invalid email address to the list of alternate "
 "addresses."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:366
+#: plugins/personal/mail/class_mailAccount.inc:373
 #: plugins/admin/groups/class_groupMail.inc:416
 msgid "The address you're trying to add is already used by user"
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:619
+#: plugins/personal/mail/class_mailAccount.inc:626
 msgid "Removing mail account failed"
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:723
+#: plugins/personal/mail/class_mailAccount.inc:730
 msgid "Saving mail account failed"
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:771
+#: plugins/personal/mail/class_mailAccount.inc:778
 msgid ""
 "There is no valid mailserver specified, please add one in the system setup."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:776
+#: plugins/personal/mail/class_mailAccount.inc:783
 #: plugins/admin/groups/class_groupMail.inc:803
 msgid "The required field 'Primary address' is not set."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:780
-#: plugins/personal/mail/class_mailAccount.inc:784
+#: plugins/personal/mail/class_mailAccount.inc:787
+#: plugins/personal/mail/class_mailAccount.inc:791
 #: plugins/addons/addressbook/class_addressbook.inc:589
 #: plugins/admin/ogroups/class_mailogroup.inc:71
 msgid "Please enter a valid email address in 'Primary address' field."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:790
+#: plugins/personal/mail/class_mailAccount.inc:797
 #: plugins/admin/groups/class_groupMail.inc:812
 #: plugins/admin/ogroups/class_mailogroup.inc:78
 msgid "The primary address you've entered is already in use."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:796
+#: plugins/personal/mail/class_mailAccount.inc:803
 #: plugins/admin/groups/class_groupMail.inc:818
 msgid "Value in 'Quota size' is not valid."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:805
+#: plugins/personal/mail/class_mailAccount.inc:812
 #: plugins/admin/groups/class_groupMail.inc:827
 msgid "Please specify a vaild mail size for mails to be rejected."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:815
+#: plugins/personal/mail/class_mailAccount.inc:822
 #: plugins/admin/groups/class_groupMail.inc:835
 msgid "You need to set the maximum mail size in order to reject anything."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:819
+#: plugins/personal/mail/class_mailAccount.inc:826
 msgid "You specified Spam settings, but there is no Folder specified."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:964
+#: plugins/personal/mail/class_mailAccount.inc:971
 msgid "Waiting for kolab to remove mail properties."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:966
+#: plugins/personal/mail/class_mailAccount.inc:973
 msgid ""
 "Please remove the mail account first, to allow kolab to call its remove "
 "methods."
@@ -2786,7 +2785,7 @@ msgid "Primary address"
 msgstr ""
 
 #: plugins/personal/mail/copypaste.tpl:13
-#: plugins/personal/mail/generic.tpl:119
+#: plugins/personal/mail/generic.tpl:118
 msgid "Forward messages to"
 msgstr ""
 
@@ -2797,7 +2796,7 @@ msgstr ""
 
 #: plugins/personal/mail/copypaste.tpl:43
 #: plugins/personal/mail/copypaste.tpl:61 plugins/personal/mail/generic.tpl:57
-#: plugins/personal/mail/generic.tpl:128
+#: plugins/personal/mail/generic.tpl:127
 #: plugins/personal/mail/mail_locals.tpl:41
 #: plugins/personal/posix/paste_generic.tpl:61
 #: plugins/personal/posix/posix_groups.tpl:79
@@ -2812,8 +2811,8 @@ msgstr ""
 #: plugins/personal/environment/environment.tpl:136
 #: plugins/personal/environment/environment.tpl:180
 #: plugins/personal/environment/kioskManagement.tpl:14
-#: plugins/personal/connectivity/kolab.tpl:18
-#: plugins/personal/connectivity/class_kolabAccount.inc:203
+#: plugins/personal/connectivity/kolab.tpl:33
+#: plugins/personal/connectivity/class_kolabAccount.inc:228
 #: plugins/gofax/blocklists/generic.tpl:68
 #: plugins/gofax/faxaccount/generic.tpl:76
 #: plugins/gofax/faxaccount/locals.tpl:60
@@ -2863,7 +2862,7 @@ msgid "Add"
 msgstr ""
 
 #: plugins/personal/mail/copypaste.tpl:44
-#: plugins/personal/mail/generic.tpl:130
+#: plugins/personal/mail/generic.tpl:129
 #: plugins/gofax/faxaccount/generic.tpl:77 plugins/admin/groups/mail.tpl:96
 #: plugins/admin/groups/paste_mail.tpl:42
 msgid "Add local"
@@ -2871,7 +2870,7 @@ msgstr ""
 
 #: plugins/personal/mail/copypaste.tpl:45
 #: plugins/personal/mail/copypaste.tpl:62 plugins/personal/mail/generic.tpl:59
-#: plugins/personal/mail/generic.tpl:132
+#: plugins/personal/mail/generic.tpl:131
 #: plugins/personal/posix/paste_generic.tpl:62
 #: plugins/personal/posix/generic.tpl:74
 #: plugins/personal/posix/generic.tpl:104
@@ -2880,7 +2879,7 @@ msgstr ""
 #: plugins/personal/environment/environment.tpl:137
 #: plugins/personal/environment/environment.tpl:165
 #: plugins/personal/environment/environment.tpl:181
-#: plugins/personal/connectivity/kolab.tpl:20
+#: plugins/personal/connectivity/kolab.tpl:35
 #: plugins/gofax/blocklists/generic.tpl:69
 #: plugins/gofax/blocklists/remove.tpl:14
 #: plugins/gofax/faxaccount/generic.tpl:78
@@ -2949,7 +2948,7 @@ msgstr ""
 
 #: plugins/personal/mail/generic.tpl:30 plugins/admin/groups/mail.tpl:32
 #: plugins/admin/systems/class_terminalInfo.inc:169
-#: plugins/admin/systems/class_printGeneric.inc:485
+#: plugins/admin/systems/class_printGeneric.inc:483
 msgid "not defined"
 msgstr ""
 
@@ -3010,23 +3009,23 @@ msgstr ""
 msgid "Vacation message"
 msgstr ""
 
-#: plugins/personal/mail/generic.tpl:140
+#: plugins/personal/mail/generic.tpl:139
 msgid "Advanced mail options"
 msgstr ""
 
-#: plugins/personal/mail/generic.tpl:145
+#: plugins/personal/mail/generic.tpl:144
 msgid "Select if user can only send and receive inside his own domain"
 msgstr ""
 
-#: plugins/personal/mail/generic.tpl:146
+#: plugins/personal/mail/generic.tpl:145
 msgid "User is only allowed to send and receive local mails"
 msgstr ""
 
-#: plugins/personal/mail/generic.tpl:153
+#: plugins/personal/mail/generic.tpl:152
 msgid "Use custom sieve script"
 msgstr ""
 
-#: plugins/personal/mail/generic.tpl:153
+#: plugins/personal/mail/generic.tpl:152
 msgid "disables all Mail options!"
 msgstr ""
 
@@ -3275,7 +3274,7 @@ msgid "active"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:145
-#: plugins/personal/posix/class_posixAccount.inc:973
+#: plugins/personal/posix/class_posixAccount.inc:979
 msgid "Group of user"
 msgstr ""
 
@@ -3322,27 +3321,27 @@ msgid ""
 "below."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:443
+#: plugins/personal/posix/class_posixAccount.inc:433
 #, php-format
 msgid "Password can't be changed up to %s days after last change"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:445
+#: plugins/personal/posix/class_posixAccount.inc:435
 #, php-format
 msgid "Password must be changed after %s days"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:447
+#: plugins/personal/posix/class_posixAccount.inc:437
 #, php-format
 msgid "Disable account after %s days of inactivity after password expiery"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:449
+#: plugins/personal/posix/class_posixAccount.inc:439
 #, php-format
 msgid "Warn user %s days before password expiery"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:473
+#: plugins/personal/posix/class_posixAccount.inc:463
 #: plugins/personal/samba/class_sambaAccount.inc:357
 #: plugins/personal/samba/class_sambaAccount.inc:375
 #: plugins/personal/samba/class_sambaAccount.inc:393
@@ -3351,7 +3350,7 @@ msgstr ""
 msgid "January"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:473
+#: plugins/personal/posix/class_posixAccount.inc:463
 #: plugins/personal/samba/class_sambaAccount.inc:357
 #: plugins/personal/samba/class_sambaAccount.inc:375
 #: plugins/personal/samba/class_sambaAccount.inc:393
@@ -3360,7 +3359,7 @@ msgstr ""
 msgid "February"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:473
+#: plugins/personal/posix/class_posixAccount.inc:463
 #: plugins/personal/samba/class_sambaAccount.inc:357
 #: plugins/personal/samba/class_sambaAccount.inc:375
 #: plugins/personal/samba/class_sambaAccount.inc:393
@@ -3369,7 +3368,7 @@ msgstr ""
 msgid "March"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:473
+#: plugins/personal/posix/class_posixAccount.inc:463
 #: plugins/personal/samba/class_sambaAccount.inc:357
 #: plugins/personal/samba/class_sambaAccount.inc:375
 #: plugins/personal/samba/class_sambaAccount.inc:393
@@ -3378,7 +3377,7 @@ msgstr ""
 msgid "April"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:474
+#: plugins/personal/posix/class_posixAccount.inc:464
 #: plugins/personal/samba/class_sambaAccount.inc:358
 #: plugins/personal/samba/class_sambaAccount.inc:376
 #: plugins/personal/samba/class_sambaAccount.inc:394
@@ -3387,7 +3386,7 @@ msgstr ""
 msgid "May"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:474
+#: plugins/personal/posix/class_posixAccount.inc:464
 #: plugins/personal/samba/class_sambaAccount.inc:358
 #: plugins/personal/samba/class_sambaAccount.inc:376
 #: plugins/personal/samba/class_sambaAccount.inc:394
@@ -3396,7 +3395,7 @@ msgstr ""
 msgid "June"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:474
+#: plugins/personal/posix/class_posixAccount.inc:464
 #: plugins/personal/samba/class_sambaAccount.inc:358
 #: plugins/personal/samba/class_sambaAccount.inc:376
 #: plugins/personal/samba/class_sambaAccount.inc:394
@@ -3405,7 +3404,7 @@ msgstr ""
 msgid "July"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:474
+#: plugins/personal/posix/class_posixAccount.inc:464
 #: plugins/personal/samba/class_sambaAccount.inc:358
 #: plugins/personal/samba/class_sambaAccount.inc:376
 #: plugins/personal/samba/class_sambaAccount.inc:394
@@ -3414,7 +3413,7 @@ msgstr ""
 msgid "August"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:474
+#: plugins/personal/posix/class_posixAccount.inc:464
 #: plugins/personal/samba/class_sambaAccount.inc:358
 #: plugins/personal/samba/class_sambaAccount.inc:376
 #: plugins/personal/samba/class_sambaAccount.inc:394
@@ -3423,7 +3422,7 @@ msgstr ""
 msgid "September"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:475
+#: plugins/personal/posix/class_posixAccount.inc:465
 #: plugins/personal/samba/class_sambaAccount.inc:359
 #: plugins/personal/samba/class_sambaAccount.inc:377
 #: plugins/personal/samba/class_sambaAccount.inc:395
@@ -3432,7 +3431,7 @@ msgstr ""
 msgid "October"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:475
+#: plugins/personal/posix/class_posixAccount.inc:465
 #: plugins/personal/samba/class_sambaAccount.inc:359
 #: plugins/personal/samba/class_sambaAccount.inc:377
 #: plugins/personal/samba/class_sambaAccount.inc:395
@@ -3441,7 +3440,7 @@ msgstr ""
 msgid "November"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:475
+#: plugins/personal/posix/class_posixAccount.inc:465
 #: plugins/personal/samba/class_sambaAccount.inc:359
 #: plugins/personal/samba/class_sambaAccount.inc:377
 #: plugins/personal/samba/class_sambaAccount.inc:395
@@ -3450,89 +3449,89 @@ msgstr ""
 msgid "December"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:557
+#: plugins/personal/posix/class_posixAccount.inc:547
 msgid "full access"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:558
+#: plugins/personal/posix/class_posixAccount.inc:548
 msgid "allow access to these hosts"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:604
+#: plugins/personal/posix/class_posixAccount.inc:594
 msgid "Removing UNIX account failed"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:737
+#: plugins/personal/posix/class_posixAccount.inc:743
 msgid "Failed: overriding lock"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:826
+#: plugins/personal/posix/class_posixAccount.inc:832
 msgid "Saving UNIX account failed"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:887
+#: plugins/personal/posix/class_posixAccount.inc:893
 msgid "The required field 'Home directory' is not set."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:890
+#: plugins/personal/posix/class_posixAccount.inc:896
 msgid "Please enter a valid path in 'Home directory' field."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:898
+#: plugins/personal/posix/class_posixAccount.inc:904
 msgid "Value specified as 'UID' is not valid."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:901
+#: plugins/personal/posix/class_posixAccount.inc:907
 msgid "Value specified as 'UID' is too small."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:905
+#: plugins/personal/posix/class_posixAccount.inc:911
 #: plugins/admin/groups/class_groupGeneric.inc:774
 msgid "Value specified as 'GID' is not valid."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:908
+#: plugins/personal/posix/class_posixAccount.inc:914
 #: plugins/admin/groups/class_groupGeneric.inc:777
 msgid "Value specified as 'GID' is too small."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:916
+#: plugins/personal/posix/class_posixAccount.inc:922
 msgid "Value specified as 'shadowMin' is not valid."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:921
+#: plugins/personal/posix/class_posixAccount.inc:927
 msgid "Value specified as 'shadowMax' is not valid."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:926
+#: plugins/personal/posix/class_posixAccount.inc:932
 msgid "Value specified as 'shadowWarning' is not valid."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:929
+#: plugins/personal/posix/class_posixAccount.inc:935
 msgid "'shadowWarning' without 'shadowMax' makes no sense."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:932
+#: plugins/personal/posix/class_posixAccount.inc:938
 msgid "Value specified as 'shadowWarning' should be smaller than 'shadowMax'."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:935
+#: plugins/personal/posix/class_posixAccount.inc:941
 msgid "Value specified as 'shadowWarning' should be greater than 'shadowMin'."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:940
+#: plugins/personal/posix/class_posixAccount.inc:946
 msgid "Value specified as 'shadowInactive' is not valid."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:943
+#: plugins/personal/posix/class_posixAccount.inc:949
 msgid "'shadowInactive' without 'shadowMax' makes no sense."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:948
+#: plugins/personal/posix/class_posixAccount.inc:954
 msgid "Value specified as 'shadowMin' should be smaller than 'shadowMax'."
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:1075
+#: plugins/personal/posix/class_posixAccount.inc:1081
 #: plugins/admin/groups/class_groupGeneric.inc:813
 msgid "Too many users, can't allocate a free ID!"
 msgstr ""
@@ -4006,45 +4005,45 @@ msgid ""
 "profile to 'none'."
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:816
+#: plugins/personal/environment/class_environment.inc:815
 msgid "Removing environment information failed"
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:869
+#: plugins/personal/environment/class_environment.inc:868
 msgid "Please set a valid profile quota size."
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:876
+#: plugins/personal/environment/class_environment.inc:875
 msgid ""
 "You need to setup a valid posix extension in order to enable evironment "
 "features."
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:914
+#: plugins/personal/environment/class_environment.inc:913
 msgid "Can't save new kiosk profiles, possibly permission denied for folder"
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:1008
+#: plugins/personal/environment/class_environment.inc:1027
 msgid "Error while writing printer"
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:1078
+#: plugins/personal/environment/class_environment.inc:1097
 msgid "Error while writing printer settings"
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:1147
+#: plugins/personal/environment/class_environment.inc:1166
 msgid "Adding environment information failed"
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:1160
+#: plugins/personal/environment/class_environment.inc:1179
 msgid "group share"
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:1192
+#: plugins/personal/environment/class_environment.inc:1211
 msgid "Administrator"
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:1197
+#: plugins/personal/environment/class_environment.inc:1216
 msgid "Default printer"
 msgstr ""
 
@@ -4761,7 +4760,8 @@ msgstr ""
 msgid "Saving webDAV account failed"
 msgstr ""
 
-#: plugins/personal/connectivity/kolab.tpl:1
+#: plugins/personal/connectivity/kolab.tpl:3
+#: plugins/personal/connectivity/kolab.tpl:19
 msgid "Kolab account"
 msgstr ""
 
@@ -4771,38 +4771,38 @@ msgid ""
 "you add a mail account."
 msgstr ""
 
-#: plugins/personal/connectivity/kolab.tpl:10
+#: plugins/personal/connectivity/kolab.tpl:25
 msgid "Delegations"
 msgstr ""
 
-#: plugins/personal/connectivity/kolab.tpl:23
+#: plugins/personal/connectivity/kolab.tpl:38
 msgid "Mail size"
 msgstr ""
 
-#: plugins/personal/connectivity/kolab.tpl:24
+#: plugins/personal/connectivity/kolab.tpl:40
 msgid "No mail size restriction for this account"
 msgstr ""
 
-#: plugins/personal/connectivity/kolab.tpl:32
+#: plugins/personal/connectivity/kolab.tpl:48
 msgid "Free Busy information"
 msgstr ""
 
-#: plugins/personal/connectivity/kolab.tpl:35
+#: plugins/personal/connectivity/kolab.tpl:51
 #: plugins/admin/systems/servRepositorySetup.tpl:24
 msgid "URL"
 msgstr ""
 
-#: plugins/personal/connectivity/kolab.tpl:39
+#: plugins/personal/connectivity/kolab.tpl:55
 msgid "Future"
 msgstr ""
 
-#: plugins/personal/connectivity/kolab.tpl:40
+#: plugins/personal/connectivity/kolab.tpl:56
 #: plugins/personal/connectivity/oxchange.tpl:26
 #: plugins/personal/connectivity/oxchange.tpl:30
 msgid "days"
 msgstr ""
 
-#: plugins/personal/connectivity/kolab.tpl:45
+#: plugins/personal/connectivity/kolab.tpl:61
 msgid "Invitation policy"
 msgstr ""
 
@@ -5040,61 +5040,67 @@ msgstr ""
 msgid "Kolab"
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:105
+#: plugins/personal/connectivity/class_kolabAccount.inc:117
 msgid ""
 "You're trying to add an invalid email address to the list of delegations."
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:113
+#: plugins/personal/connectivity/class_kolabAccount.inc:125
 msgid ""
 "The mail address you're trying to add is no primary mail address of an "
 "existing user."
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:140
+#: plugins/personal/connectivity/class_kolabAccount.inc:152
 msgid "Always accept"
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:141
+#: plugins/personal/connectivity/class_kolabAccount.inc:153
 msgid "Always reject"
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:142
+#: plugins/personal/connectivity/class_kolabAccount.inc:154
 msgid "Reject if conflicts"
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:143
+#: plugins/personal/connectivity/class_kolabAccount.inc:155
 msgid "Manual if conflicts"
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:144
+#: plugins/personal/connectivity/class_kolabAccount.inc:156
 msgid "Manual"
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:180
+#: plugins/personal/connectivity/class_kolabAccount.inc:205
 msgid "Anonymous"
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:233
+#: plugins/personal/connectivity/class_kolabAccount.inc:262
+#, php-format
+msgid "Removing of user/kolab account with dn '%s' failed."
+msgstr ""
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:273
 msgid "The value specified as Free Busy future needs to be an integer."
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:238
+#: plugins/personal/connectivity/class_kolabAccount.inc:278
 msgid "The value specified as Free Busy Information URL is invalid."
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:252
+#: plugins/personal/connectivity/class_kolabAccount.inc:292
 #, php-format
 msgid "The invitation policy entry for address '%s' is not valid."
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:260
+#: plugins/personal/connectivity/class_kolabAccount.inc:300
 #, php-format
 msgid "There's no mail user with address '%s' for your invitation policy!"
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:325
-msgid "Saving Kolab account failed"
+#: plugins/personal/connectivity/class_kolabAccount.inc:379
+#, php-format
+msgid "Saving of user/kolab account with dn '%s' failed."
 msgstr ""
 
 #: plugins/personal/connectivity/webdav.tpl:3
@@ -5597,7 +5603,6 @@ msgstr ""
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:431
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:513
-#: plugins/addons/mailqueue/header.tpl:5
 #: plugins/admin/groups/class_groupApplication.inc:632
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:94
 msgid "back"
@@ -5741,7 +5746,7 @@ msgstr ""
 #: plugins/gofax/faxreports/detail.tpl:21
 #: plugins/gofax/faxreports/contents.tpl:30
 #: plugins/admin/fai/faiTemplateEntry.tpl:94
-#: plugins/admin/systems/class_printGeneric.inc:758
+#: plugins/admin/systems/class_printGeneric.inc:760
 #: plugins/admin/ogroups/class_ogroupManagement.inc:363
 msgid "User"
 msgstr ""
@@ -7647,8 +7652,8 @@ msgstr ""
 
 #: plugins/admin/fai/faiTemplateEntry.tpl:71
 #: plugins/admin/fai/faiTemplateEntry.tpl:103
-#: plugins/admin/systems/class_printGeneric.inc:753
 #: plugins/admin/systems/class_printGeneric.inc:755
+#: plugins/admin/systems/class_printGeneric.inc:757
 #: plugins/admin/ogroups/class_ogroupManagement.inc:364
 #: plugins/generic/references/class_reference.inc:36
 msgid "Group"
@@ -8631,7 +8636,6 @@ msgstr ""
 
 #: plugins/admin/departments/class_divListDepartment.inc:27
 #: plugins/admin/departments/class_divListDepartment.inc:28
-#: plugins/admin/departments/headpage.tpl:6
 msgid "List of departments"
 msgstr ""
 
@@ -8717,21 +8721,6 @@ msgid ""
 "This includes 'all' accounts, systems, etc. in this subtree. Please double "
 "check if your really want to do this since there is no way for GOsa to get "
 "your data back."
-msgstr ""
-
-#: plugins/admin/departments/headpage.tpl:24
-msgid ""
-"This menu allows you to create, delete and edit selected departments. Having "
-"a large size of departments, you might prefer the range selectors on top of "
-"the department list."
-msgstr ""
-
-#: plugins/admin/departments/headpage.tpl:38
-msgid "Display departments matching"
-msgstr ""
-
-#: plugins/admin/departments/headpage.tpl:42
-msgid "Regular expression for matching department names"
 msgstr ""
 
 #: plugins/admin/departments/class_departmentManagement.inc:25
@@ -8993,41 +8982,41 @@ msgstr ""
 msgid "unknown"
 msgstr ""
 
-#: plugins/admin/systems/workstationService.tpl:126
-msgid "Automatic modelines"
+#: plugins/admin/systems/workstationService.tpl:125
+msgid "Use DDC for automatic detection"
 msgstr ""
 
-#: plugins/admin/systems/workstationService.tpl:130
+#: plugins/admin/systems/workstationService.tpl:128
 #: plugins/admin/systems/terminalService.tpl:124
 msgid "HSync"
 msgstr ""
 
-#: plugins/admin/systems/workstationService.tpl:132
+#: plugins/admin/systems/workstationService.tpl:130
 #: plugins/admin/systems/terminalService.tpl:126
 msgid "Horizontal refresh frequency for installed monitor"
 msgstr ""
 
-#: plugins/admin/systems/workstationService.tpl:135
+#: plugins/admin/systems/workstationService.tpl:133
 #: plugins/admin/systems/terminalService.tpl:129
 msgid "VSync"
 msgstr ""
 
-#: plugins/admin/systems/workstationService.tpl:137
+#: plugins/admin/systems/workstationService.tpl:135
 #: plugins/admin/systems/terminalService.tpl:131
 msgid "Vertical refresh frequency for installed monitor"
 msgstr ""
 
-#: plugins/admin/systems/workstationService.tpl:149
+#: plugins/admin/systems/workstationService.tpl:147
 #: plugins/admin/systems/terminalService.tpl:203
 msgid "Scan device"
 msgstr ""
 
-#: plugins/admin/systems/workstationService.tpl:150
+#: plugins/admin/systems/workstationService.tpl:148
 #: plugins/admin/systems/terminalService.tpl:204
 msgid "Select to start SANE scan service on terminal"
 msgstr ""
 
-#: plugins/admin/systems/workstationService.tpl:151
+#: plugins/admin/systems/workstationService.tpl:149
 #: plugins/admin/systems/terminalService.tpl:205
 msgid "Provide scan services"
 msgstr ""
@@ -9335,21 +9324,21 @@ msgstr ""
 msgid "Choose the phone located at the current terminal"
 msgstr ""
 
-#: plugins/admin/systems/class_workstationService.inc:354
 #: plugins/admin/systems/class_workstationService.inc:359
+#: plugins/admin/systems/class_workstationService.inc:364
 #: plugins/admin/systems/class_terminalService.inc:365
 #: plugins/admin/systems/class_terminalService.inc:370
 msgid "Please specify a valid VSync range."
 msgstr ""
 
-#: plugins/admin/systems/class_workstationService.inc:369
 #: plugins/admin/systems/class_workstationService.inc:374
+#: plugins/admin/systems/class_workstationService.inc:379
 #: plugins/admin/systems/class_terminalService.inc:380
 #: plugins/admin/systems/class_terminalService.inc:385
 msgid "Please specify a valid HSync range."
 msgstr ""
 
-#: plugins/admin/systems/class_workstationService.inc:415
+#: plugins/admin/systems/class_workstationService.inc:422
 msgid "Saving workstation services failed"
 msgstr ""
 
@@ -9889,7 +9878,7 @@ msgstr ""
 #: plugins/admin/systems/class_winGeneric.inc:174
 #: plugins/admin/systems/class_terminalGeneric.inc:386
 #: plugins/admin/systems/class_servGeneric.inc:242
-#: plugins/admin/systems/class_printGeneric.inc:618
+#: plugins/admin/systems/class_printGeneric.inc:616
 #: plugins/admin/systems/class_phoneGeneric.inc:312
 #, php-format
 msgid "There is already an entry '%s' in the base choosen by you"
@@ -11563,93 +11552,93 @@ msgstr ""
 msgid "Can't extract a valid base out of object dn, setting base to '%s'."
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:234
-#: plugins/admin/systems/class_printGeneric.inc:242
-#: plugins/admin/systems/class_printGeneric.inc:247
-#: plugins/admin/systems/class_printGeneric.inc:286
-#: plugins/admin/systems/class_printGeneric.inc:302
-#: plugins/admin/systems/class_printGeneric.inc:305
+#: plugins/admin/systems/class_printGeneric.inc:232
+#: plugins/admin/systems/class_printGeneric.inc:240
+#: plugins/admin/systems/class_printGeneric.inc:245
+#: plugins/admin/systems/class_printGeneric.inc:284
+#: plugins/admin/systems/class_printGeneric.inc:300
+#: plugins/admin/systems/class_printGeneric.inc:303
 msgid "Add printer extension"
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:235
+#: plugins/admin/systems/class_printGeneric.inc:233
 msgid ""
 "Could not intialize printer tab, parameter parent was missing while "
 "construction."
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:243
+#: plugins/admin/systems/class_printGeneric.inc:241
 msgid "This is a workstation template, printer tab is disabled."
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:248
+#: plugins/admin/systems/class_printGeneric.inc:246
 msgid "This is a terminal template, printer tab is disabled."
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:279
+#: plugins/admin/systems/class_printGeneric.inc:277
 msgid "This 'dn' has no printer features."
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:287
+#: plugins/admin/systems/class_printGeneric.inc:285
 msgid ""
 "This object has printer extension disabled. You can't enable it while 'cn' "
 "is not present in entry. Possibly you are currently creating a new terminal "
 "template"
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:294
-#: plugins/admin/systems/class_printGeneric.inc:297
+#: plugins/admin/systems/class_printGeneric.inc:292
+#: plugins/admin/systems/class_printGeneric.inc:295
 msgid "Remove printer extension"
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:295
+#: plugins/admin/systems/class_printGeneric.inc:293
 msgid ""
 "This workstation has printer extension enabled.You can disable it by "
 "clicking below."
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:298
+#: plugins/admin/systems/class_printGeneric.inc:296
 msgid ""
 "This terminal has printer extension enabled. You can disable it by clicking "
 "below."
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:303
+#: plugins/admin/systems/class_printGeneric.inc:301
 msgid ""
 "This workstation has printer extension disabled. You can enable it by "
 "clicking below."
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:306
+#: plugins/admin/systems/class_printGeneric.inc:304
 msgid ""
 "This terminal has printer extension disabled. You can enable it by clicking "
 "below."
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:480
+#: plugins/admin/systems/class_printGeneric.inc:478
 #, php-format
 msgid "Your currently selected PPD file '%s' doesn't exist."
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:488
+#: plugins/admin/systems/class_printGeneric.inc:486
 msgid "can't get ppd informations."
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:501
+#: plugins/admin/systems/class_printGeneric.inc:499
 #, php-format
 msgid "This printer belongs to terminal %s. You can't rename this printer."
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:503
+#: plugins/admin/systems/class_printGeneric.inc:501
 #, php-format
 msgid "This printer belongs to workstation %s. You can't rename this printer."
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:554
+#: plugins/admin/systems/class_printGeneric.inc:552
 msgid "Removing printer failed"
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:736
+#: plugins/admin/systems/class_printGeneric.inc:738
 msgid "Saving printer failed"
 msgstr ""
 
@@ -11998,7 +11987,7 @@ msgid "There must be at least one NTP server selected."
 msgstr ""
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:61
-#: plugins/admin/ogroups/tabs_ogroups.inc:168
+#: plugins/admin/ogroups/tabs_ogroups.inc:165
 msgid "Phone queue"
 msgstr ""
 
@@ -12006,7 +11995,7 @@ msgstr ""
 msgid "System"
 msgstr ""
 
-#: plugins/admin/ogroups/tabs_ogroups.inc:148
+#: plugins/admin/ogroups/tabs_ogroups.inc:145
 msgid "Terminals"
 msgstr ""
 

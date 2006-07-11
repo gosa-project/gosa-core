@@ -76,7 +76,7 @@ msgstr "Omgeving"
 #: plugins/admin/groups/class_divListGroup.inc:128
 #: plugins/admin/users/class_divListUsers.inc:166
 #: plugins/admin/ogroups/tabs_ogroups.inc:75
-#: plugins/admin/ogroups/tabs_ogroups.inc:178
+#: plugins/admin/ogroups/tabs_ogroups.inc:175
 #: plugins/admin/ogroups/class_divListOGroup.inc:146
 #: plugins/generic/references/class_reference.inc:24
 msgid "Mail"
@@ -190,7 +190,6 @@ msgstr "Printer"
 #: plugins/addons/godfs/contents.tpl:22
 #: plugins/admin/fai/faiProfileEntry.tpl:21
 #: plugins/admin/fai/faiPackageEntry.tpl:22
-#: plugins/admin/departments/headpage.tpl:20
 #: plugins/admin/systems/glpiPrinter.tpl:104
 #: plugins/admin/systems/glpiDeviceManagement.tpl:20
 #: plugins/admin/systems/servRepository.tpl:24
@@ -237,7 +236,7 @@ msgstr "Exporteer"
 msgid "Excel Export"
 msgstr "Excel Export"
 
-#: contrib/gosa.conf:201 plugins/personal/mail/generic.tpl:113
+#: contrib/gosa.conf:201 plugins/personal/mail/generic.tpl:112
 #: plugins/personal/environment/logonManagement.tpl:65
 #: plugins/addons/ldapmanager/contentimport.tpl:49
 #: plugins/addons/ldapmanager/contentcsv.tpl:109
@@ -690,7 +689,7 @@ msgid "Directory '%s' specified as compile directory is not accessible!"
 msgstr ""
 "Directory '%s' die opgegeven is als compileer directory is niet toegankelijk!"
 
-#: html/index.php:203 include/class_config.inc:206
+#: html/index.php:203 include/class_config.inc:207
 msgid "Can't bind to LDAP. Please contact the system administrator."
 msgstr ""
 "Kan niet verbinden met de LDAP server. Neem a.u.b. contact op met de "
@@ -988,7 +987,6 @@ msgstr "Doorgaan"
 #: plugins/admin/fai/faiPackageEntry.tpl:32
 #: plugins/admin/groups/group_objects.tpl:20
 #: plugins/admin/groups/mail_locals.tpl:22
-#: plugins/admin/departments/headpage.tpl:29
 #: plugins/admin/systems/printerPPDSelectionDialog.tpl:18
 #: plugins/admin/systems/glpiDeviceManagement.tpl:27
 #: plugins/admin/systems/servRepository.tpl:36
@@ -1033,6 +1031,7 @@ msgstr ""
 #: plugins/personal/password/changed.tpl:12
 #: plugins/personal/generic/main.inc:169
 #: plugins/gofax/faxreports/detail.tpl:67
+#: plugins/addons/mailqueue/header.tpl:5
 #: plugins/addons/ldapmanager/contentexportxls.tpl:69
 #: plugins/addons/ldapmanager/contentimport.tpl:44
 #: plugins/addons/ldapmanager/contentcsv.tpl:114
@@ -1112,7 +1111,7 @@ msgstr ""
 #: plugins/personal/generic/generic_certs.tpl:17
 #: plugins/personal/generic/generic_certs.tpl:37
 #: plugins/personal/generic/generic_certs.tpl:57
-#: plugins/personal/connectivity/class_kolabAccount.inc:206
+#: plugins/personal/connectivity/class_kolabAccount.inc:231
 #: plugins/admin/fai/faiPackage.tpl:72
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:266
 #: plugins/admin/groups/class_groupMail.inc:544
@@ -1351,7 +1350,7 @@ msgstr "E-mail methode"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:91
 #: ihtml/themes/default/setup_step4.tpl:91
-#: plugins/personal/posix/class_posixAccount.inc:557
+#: plugins/personal/posix/class_posixAccount.inc:547
 #: plugins/personal/samba/class_sambaAccount.inc:455
 #: plugins/admin/systems/class_terminalGeneric.inc:97
 msgid "disabled"
@@ -2679,12 +2678,12 @@ msgstr "Plakken"
 msgid "Can't paste"
 msgstr "Plakken onmogelijk"
 
-#: include/class_config.inc:70
+#: include/class_config.inc:71
 #, php-format
 msgid "XML error in gosa.conf: %s at line %d"
 msgstr "XML fout in gosa.conf: %s op regel %d"
 
-#: include/class_config.inc:468
+#: include/class_config.inc:469
 msgid "SID and/or RIDBASE missing in your configuration!"
 msgstr "SID en/of RIDBASE ontbreken in uw configuratie!"
 
@@ -2973,27 +2972,27 @@ msgstr "Het verwijderen van het Nagios account is mislukt"
 msgid "There is no mail method '%s' specified in your gosa.conf available."
 msgstr "De E-mail methode '%s' opgegeven in uw gosa.conf is niet beschikbaar."
 
-#: plugins/personal/mail/class_mailAccount.inc:143
+#: plugins/personal/mail/class_mailAccount.inc:150
 #: plugins/admin/groups/class_groupMail.inc:173
 #, php-format
 msgid "Can't get quota information for '%s'."
 msgstr "Kan quota informatie niet ophaleven voor '%s'."
 
-#: plugins/personal/mail/class_mailAccount.inc:205
+#: plugins/personal/mail/class_mailAccount.inc:212
 msgid "No DESC tag in vacation file:"
 msgstr "Er is geen DESC variabele aanwezig in het afwezigheidsbestand:"
 
-#: plugins/personal/mail/class_mailAccount.inc:244
+#: plugins/personal/mail/class_mailAccount.inc:251
 msgid "This account has no mail extensions."
 msgstr "Dit account heeft E-mail mogelijkheden uitgeschakeld."
 
-#: plugins/personal/mail/class_mailAccount.inc:253
+#: plugins/personal/mail/class_mailAccount.inc:260
 #: plugins/admin/groups/class_groupMail.inc:320
 #: plugins/admin/ogroups/class_mailogroup.inc:40
 msgid "Remove mail account"
 msgstr "E-mail account verwijderen"
 
-#: plugins/personal/mail/class_mailAccount.inc:254
+#: plugins/personal/mail/class_mailAccount.inc:261
 #: plugins/admin/groups/class_groupMail.inc:321
 msgid ""
 "This account has mail features enabled. You can disable them by clicking "
@@ -3002,13 +3001,13 @@ msgstr ""
 "Dit account heeft E-mail mogelijkheden ingeschakeld. U kunt deze "
 "uitschakelen door de knop hieronder te gebruiken."
 
-#: plugins/personal/mail/class_mailAccount.inc:256
+#: plugins/personal/mail/class_mailAccount.inc:263
 #: plugins/admin/groups/class_groupMail.inc:323
 #: plugins/admin/ogroups/class_mailogroup.inc:43
 msgid "Create mail account"
 msgstr "E-mail account aanmaken"
 
-#: plugins/personal/mail/class_mailAccount.inc:256
+#: plugins/personal/mail/class_mailAccount.inc:263
 #: plugins/admin/groups/class_groupMail.inc:324
 msgid ""
 "This account has mail features disabled. You can enable them by clicking "
@@ -3017,21 +3016,21 @@ msgstr ""
 "Dit account heeft geen E-mail mogelijkheden. U kunt deze inschakelen door de "
 "knop hieronder te gebruiken."
 
-#: plugins/personal/mail/class_mailAccount.inc:307
+#: plugins/personal/mail/class_mailAccount.inc:314
 msgid ""
 "You're trying to add an invalid email address to the list of forwarders."
 msgstr ""
 "U probeert een ongeldig email adres toe te voegen aan de doorstuurlijst."
 
-#: plugins/personal/mail/class_mailAccount.inc:313
+#: plugins/personal/mail/class_mailAccount.inc:320
 #: plugins/admin/groups/class_groupMail.inc:383
 msgid "Adding your one of your own addresses to the forwarders makes no sense."
 msgstr ""
 "Het toevoegen van een van uw eigen adressen aan de lijst met doorstuur "
 "adressen is niet logisch."
 
-#: plugins/personal/mail/class_mailAccount.inc:351
-#: plugins/personal/mail/class_mailAccount.inc:356
+#: plugins/personal/mail/class_mailAccount.inc:358
+#: plugins/personal/mail/class_mailAccount.inc:363
 #: plugins/admin/groups/class_groupMail.inc:411
 msgid ""
 "You're trying to add an invalid email address to the list of alternate "
@@ -3040,72 +3039,72 @@ msgstr ""
 "U probeert een ongeldig E-mail adres toe te voegen aan de lijst met "
 "alternatieve adressen."
 
-#: plugins/personal/mail/class_mailAccount.inc:366
+#: plugins/personal/mail/class_mailAccount.inc:373
 #: plugins/admin/groups/class_groupMail.inc:416
 msgid "The address you're trying to add is already used by user"
 msgstr ""
 "Het adres dat u probeert toe te voegen wordt al gebruikt door gebruiker"
 
-#: plugins/personal/mail/class_mailAccount.inc:619
+#: plugins/personal/mail/class_mailAccount.inc:626
 msgid "Removing mail account failed"
 msgstr "Het verwijderen van het E-mail account is mislukt"
 
-#: plugins/personal/mail/class_mailAccount.inc:723
+#: plugins/personal/mail/class_mailAccount.inc:730
 msgid "Saving mail account failed"
 msgstr "Het opslaan van het E-mail account is mislukt"
 
-#: plugins/personal/mail/class_mailAccount.inc:771
+#: plugins/personal/mail/class_mailAccount.inc:778
 msgid ""
 "There is no valid mailserver specified, please add one in the system setup."
 msgstr ""
 "Er is geen geldige mailserver gespecificeerd. Voeg er a.u.b. een toe in de "
 "systeem instellingen."
 
-#: plugins/personal/mail/class_mailAccount.inc:776
+#: plugins/personal/mail/class_mailAccount.inc:783
 #: plugins/admin/groups/class_groupMail.inc:803
 msgid "The required field 'Primary address' is not set."
 msgstr "Het vereiste veld 'Primair adres' is leeg."
 
-#: plugins/personal/mail/class_mailAccount.inc:780
-#: plugins/personal/mail/class_mailAccount.inc:784
+#: plugins/personal/mail/class_mailAccount.inc:787
+#: plugins/personal/mail/class_mailAccount.inc:791
 #: plugins/addons/addressbook/class_addressbook.inc:589
 #: plugins/admin/ogroups/class_mailogroup.inc:71
 msgid "Please enter a valid email address in 'Primary address' field."
 msgstr "Geef a.u.b. een geldig E-mail adres voor het 'Primair adres' op."
 
-#: plugins/personal/mail/class_mailAccount.inc:790
+#: plugins/personal/mail/class_mailAccount.inc:797
 #: plugins/admin/groups/class_groupMail.inc:812
 #: plugins/admin/ogroups/class_mailogroup.inc:78
 msgid "The primary address you've entered is already in use."
 msgstr "Het primaire adres dat u opgegeven heeft wordt al gebruikt."
 
-#: plugins/personal/mail/class_mailAccount.inc:796
+#: plugins/personal/mail/class_mailAccount.inc:803
 #: plugins/admin/groups/class_groupMail.inc:818
 msgid "Value in 'Quota size' is not valid."
 msgstr "De waarde opgegeven bij 'Quota grootte' is niet geldig."
 
-#: plugins/personal/mail/class_mailAccount.inc:805
+#: plugins/personal/mail/class_mailAccount.inc:812
 #: plugins/admin/groups/class_groupMail.inc:827
 msgid "Please specify a vaild mail size for mails to be rejected."
 msgstr "Geef a.u.b. een geldige E-mail grootte op voor af te wijzen E-mails."
 
-#: plugins/personal/mail/class_mailAccount.inc:815
+#: plugins/personal/mail/class_mailAccount.inc:822
 #: plugins/admin/groups/class_groupMail.inc:835
 msgid "You need to set the maximum mail size in order to reject anything."
 msgstr ""
 "U moet de maximale E-mail grootte instellen om uberhaupt iets af te kunnen "
 "afwijzen."
 
-#: plugins/personal/mail/class_mailAccount.inc:819
+#: plugins/personal/mail/class_mailAccount.inc:826
 msgid "You specified Spam settings, but there is no Folder specified."
 msgstr "U heeft Spam instellingen opgegeven, maar geen mailfolder opgegeven."
 
-#: plugins/personal/mail/class_mailAccount.inc:964
+#: plugins/personal/mail/class_mailAccount.inc:971
 msgid "Waiting for kolab to remove mail properties."
 msgstr ""
 "Bezig met wachten op het verwijderen van alle mail eigenschappen door Kolab"
 
-#: plugins/personal/mail/class_mailAccount.inc:966
+#: plugins/personal/mail/class_mailAccount.inc:973
 msgid ""
 "Please remove the mail account first, to allow kolab to call its remove "
 "methods."
@@ -3124,7 +3123,7 @@ msgid "Primary address"
 msgstr "Primair adres"
 
 #: plugins/personal/mail/copypaste.tpl:13
-#: plugins/personal/mail/generic.tpl:119
+#: plugins/personal/mail/generic.tpl:118
 msgid "Forward messages to"
 msgstr "Stuur berichten door naar"
 
@@ -3135,7 +3134,7 @@ msgstr "Alternatieve adressen"
 
 #: plugins/personal/mail/copypaste.tpl:43
 #: plugins/personal/mail/copypaste.tpl:61 plugins/personal/mail/generic.tpl:57
-#: plugins/personal/mail/generic.tpl:128
+#: plugins/personal/mail/generic.tpl:127
 #: plugins/personal/mail/mail_locals.tpl:41
 #: plugins/personal/posix/paste_generic.tpl:61
 #: plugins/personal/posix/posix_groups.tpl:79
@@ -3150,8 +3149,8 @@ msgstr "Alternatieve adressen"
 #: plugins/personal/environment/environment.tpl:136
 #: plugins/personal/environment/environment.tpl:180
 #: plugins/personal/environment/kioskManagement.tpl:14
-#: plugins/personal/connectivity/kolab.tpl:18
-#: plugins/personal/connectivity/class_kolabAccount.inc:203
+#: plugins/personal/connectivity/kolab.tpl:33
+#: plugins/personal/connectivity/class_kolabAccount.inc:228
 #: plugins/gofax/blocklists/generic.tpl:68
 #: plugins/gofax/faxaccount/generic.tpl:76
 #: plugins/gofax/faxaccount/locals.tpl:60
@@ -3201,7 +3200,7 @@ msgid "Add"
 msgstr "Toevoegen"
 
 #: plugins/personal/mail/copypaste.tpl:44
-#: plugins/personal/mail/generic.tpl:130
+#: plugins/personal/mail/generic.tpl:129
 #: plugins/gofax/faxaccount/generic.tpl:77 plugins/admin/groups/mail.tpl:96
 #: plugins/admin/groups/paste_mail.tpl:42
 msgid "Add local"
@@ -3209,7 +3208,7 @@ msgstr "Lokaal toevoegen"
 
 #: plugins/personal/mail/copypaste.tpl:45
 #: plugins/personal/mail/copypaste.tpl:62 plugins/personal/mail/generic.tpl:59
-#: plugins/personal/mail/generic.tpl:132
+#: plugins/personal/mail/generic.tpl:131
 #: plugins/personal/posix/paste_generic.tpl:62
 #: plugins/personal/posix/generic.tpl:74
 #: plugins/personal/posix/generic.tpl:104
@@ -3218,7 +3217,7 @@ msgstr "Lokaal toevoegen"
 #: plugins/personal/environment/environment.tpl:137
 #: plugins/personal/environment/environment.tpl:165
 #: plugins/personal/environment/environment.tpl:181
-#: plugins/personal/connectivity/kolab.tpl:20
+#: plugins/personal/connectivity/kolab.tpl:35
 #: plugins/gofax/blocklists/generic.tpl:69
 #: plugins/gofax/blocklists/remove.tpl:14
 #: plugins/gofax/faxaccount/generic.tpl:78
@@ -3287,7 +3286,7 @@ msgstr "Quota gebruik"
 
 #: plugins/personal/mail/generic.tpl:30 plugins/admin/groups/mail.tpl:32
 #: plugins/admin/systems/class_terminalInfo.inc:169
-#: plugins/admin/systems/class_printGeneric.inc:485
+#: plugins/admin/systems/class_printGeneric.inc:483
 msgid "not defined"
 msgstr "niet gedefiniëerd"
 
@@ -3350,25 +3349,25 @@ msgstr "MB"
 msgid "Vacation message"
 msgstr "Afwezigheidsbericht"
 
-#: plugins/personal/mail/generic.tpl:140
+#: plugins/personal/mail/generic.tpl:139
 msgid "Advanced mail options"
 msgstr "Geavanceerde E-mail opties"
 
-#: plugins/personal/mail/generic.tpl:145
+#: plugins/personal/mail/generic.tpl:144
 msgid "Select if user can only send and receive inside his own domain"
 msgstr ""
 "Selecteer om alleen binnen het eigen domein E-mail te laten ontvangen en "
 "versturen"
 
-#: plugins/personal/mail/generic.tpl:146
+#: plugins/personal/mail/generic.tpl:145
 msgid "User is only allowed to send and receive local mails"
 msgstr "De gebruiker mag alleen lokale E-mails versturen en ontvangen"
 
-#: plugins/personal/mail/generic.tpl:153
+#: plugins/personal/mail/generic.tpl:152
 msgid "Use custom sieve script"
 msgstr "Gebruik een eigen sieve script"
 
-#: plugins/personal/mail/generic.tpl:153
+#: plugins/personal/mail/generic.tpl:152
 msgid "disables all Mail options!"
 msgstr "schakelt alle E-mail opties uit!"
 
@@ -3629,7 +3628,7 @@ msgid "active"
 msgstr "actief"
 
 #: plugins/personal/posix/class_posixAccount.inc:145
-#: plugins/personal/posix/class_posixAccount.inc:973
+#: plugins/personal/posix/class_posixAccount.inc:979
 msgid "Group of user"
 msgstr "Gebruikersgroep"
 
@@ -3682,30 +3681,30 @@ msgstr ""
 "Dit account heeft POSIX mogelijkheden uitgeschakeld. U kunt deze inschakelen "
 "door de knop hieronder te gebruiken."
 
-#: plugins/personal/posix/class_posixAccount.inc:443
+#: plugins/personal/posix/class_posixAccount.inc:433
 #, php-format
 msgid "Password can't be changed up to %s days after last change"
 msgstr ""
 "Het wachtwoord kan pas %s dag(en) na de laatste wijziging gewijzigd worden"
 
-#: plugins/personal/posix/class_posixAccount.inc:445
+#: plugins/personal/posix/class_posixAccount.inc:435
 #, php-format
 msgid "Password must be changed after %s days"
 msgstr "Het wachtwoord moet na %s dag(en) gewijzigd worden"
 
-#: plugins/personal/posix/class_posixAccount.inc:447
+#: plugins/personal/posix/class_posixAccount.inc:437
 #, php-format
 msgid "Disable account after %s days of inactivity after password expiery"
 msgstr ""
 "Blokkeer het account na %s dag(en) inactiviteit nadat het wachtwoord "
 "verlopen is"
 
-#: plugins/personal/posix/class_posixAccount.inc:449
+#: plugins/personal/posix/class_posixAccount.inc:439
 #, php-format
 msgid "Warn user %s days before password expiery"
 msgstr "Waarschuw de gebruiker %s dagen voordat het wachtwoord verloopt"
 
-#: plugins/personal/posix/class_posixAccount.inc:473
+#: plugins/personal/posix/class_posixAccount.inc:463
 #: plugins/personal/samba/class_sambaAccount.inc:357
 #: plugins/personal/samba/class_sambaAccount.inc:375
 #: plugins/personal/samba/class_sambaAccount.inc:393
@@ -3714,7 +3713,7 @@ msgstr "Waarschuw de gebruiker %s dagen voordat het wachtwoord verloopt"
 msgid "January"
 msgstr "Januari"
 
-#: plugins/personal/posix/class_posixAccount.inc:473
+#: plugins/personal/posix/class_posixAccount.inc:463
 #: plugins/personal/samba/class_sambaAccount.inc:357
 #: plugins/personal/samba/class_sambaAccount.inc:375
 #: plugins/personal/samba/class_sambaAccount.inc:393
@@ -3723,7 +3722,7 @@ msgstr "Januari"
 msgid "February"
 msgstr "Februari"
 
-#: plugins/personal/posix/class_posixAccount.inc:473
+#: plugins/personal/posix/class_posixAccount.inc:463
 #: plugins/personal/samba/class_sambaAccount.inc:357
 #: plugins/personal/samba/class_sambaAccount.inc:375
 #: plugins/personal/samba/class_sambaAccount.inc:393
@@ -3732,7 +3731,7 @@ msgstr "Februari"
 msgid "March"
 msgstr "Maart"
 
-#: plugins/personal/posix/class_posixAccount.inc:473
+#: plugins/personal/posix/class_posixAccount.inc:463
 #: plugins/personal/samba/class_sambaAccount.inc:357
 #: plugins/personal/samba/class_sambaAccount.inc:375
 #: plugins/personal/samba/class_sambaAccount.inc:393
@@ -3741,7 +3740,7 @@ msgstr "Maart"
 msgid "April"
 msgstr "April"
 
-#: plugins/personal/posix/class_posixAccount.inc:474
+#: plugins/personal/posix/class_posixAccount.inc:464
 #: plugins/personal/samba/class_sambaAccount.inc:358
 #: plugins/personal/samba/class_sambaAccount.inc:376
 #: plugins/personal/samba/class_sambaAccount.inc:394
@@ -3750,7 +3749,7 @@ msgstr "April"
 msgid "May"
 msgstr "Mei"
 
-#: plugins/personal/posix/class_posixAccount.inc:474
+#: plugins/personal/posix/class_posixAccount.inc:464
 #: plugins/personal/samba/class_sambaAccount.inc:358
 #: plugins/personal/samba/class_sambaAccount.inc:376
 #: plugins/personal/samba/class_sambaAccount.inc:394
@@ -3759,7 +3758,7 @@ msgstr "Mei"
 msgid "June"
 msgstr "Juni"
 
-#: plugins/personal/posix/class_posixAccount.inc:474
+#: plugins/personal/posix/class_posixAccount.inc:464
 #: plugins/personal/samba/class_sambaAccount.inc:358
 #: plugins/personal/samba/class_sambaAccount.inc:376
 #: plugins/personal/samba/class_sambaAccount.inc:394
@@ -3768,7 +3767,7 @@ msgstr "Juni"
 msgid "July"
 msgstr "Juli"
 
-#: plugins/personal/posix/class_posixAccount.inc:474
+#: plugins/personal/posix/class_posixAccount.inc:464
 #: plugins/personal/samba/class_sambaAccount.inc:358
 #: plugins/personal/samba/class_sambaAccount.inc:376
 #: plugins/personal/samba/class_sambaAccount.inc:394
@@ -3777,7 +3776,7 @@ msgstr "Juli"
 msgid "August"
 msgstr "Augustus"
 
-#: plugins/personal/posix/class_posixAccount.inc:474
+#: plugins/personal/posix/class_posixAccount.inc:464
 #: plugins/personal/samba/class_sambaAccount.inc:358
 #: plugins/personal/samba/class_sambaAccount.inc:376
 #: plugins/personal/samba/class_sambaAccount.inc:394
@@ -3786,7 +3785,7 @@ msgstr "Augustus"
 msgid "September"
 msgstr "September"
 
-#: plugins/personal/posix/class_posixAccount.inc:475
+#: plugins/personal/posix/class_posixAccount.inc:465
 #: plugins/personal/samba/class_sambaAccount.inc:359
 #: plugins/personal/samba/class_sambaAccount.inc:377
 #: plugins/personal/samba/class_sambaAccount.inc:395
@@ -3795,7 +3794,7 @@ msgstr "September"
 msgid "October"
 msgstr "Oktober"
 
-#: plugins/personal/posix/class_posixAccount.inc:475
+#: plugins/personal/posix/class_posixAccount.inc:465
 #: plugins/personal/samba/class_sambaAccount.inc:359
 #: plugins/personal/samba/class_sambaAccount.inc:377
 #: plugins/personal/samba/class_sambaAccount.inc:395
@@ -3804,7 +3803,7 @@ msgstr "Oktober"
 msgid "November"
 msgstr "November"
 
-#: plugins/personal/posix/class_posixAccount.inc:475
+#: plugins/personal/posix/class_posixAccount.inc:465
 #: plugins/personal/samba/class_sambaAccount.inc:359
 #: plugins/personal/samba/class_sambaAccount.inc:377
 #: plugins/personal/samba/class_sambaAccount.inc:395
@@ -3813,92 +3812,92 @@ msgstr "November"
 msgid "December"
 msgstr "December"
 
-#: plugins/personal/posix/class_posixAccount.inc:557
+#: plugins/personal/posix/class_posixAccount.inc:547
 msgid "full access"
 msgstr "volledige toegang"
 
-#: plugins/personal/posix/class_posixAccount.inc:558
+#: plugins/personal/posix/class_posixAccount.inc:548
 msgid "allow access to these hosts"
 msgstr "sta toegang op deze computers toe"
 
-#: plugins/personal/posix/class_posixAccount.inc:604
+#: plugins/personal/posix/class_posixAccount.inc:594
 msgid "Removing UNIX account failed"
 msgstr "Het verwijderen van het UNIX account is mislukt"
 
-#: plugins/personal/posix/class_posixAccount.inc:737
+#: plugins/personal/posix/class_posixAccount.inc:743
 msgid "Failed: overriding lock"
 msgstr "Mislukt: Blokkering wordt overschreven"
 
-#: plugins/personal/posix/class_posixAccount.inc:826
+#: plugins/personal/posix/class_posixAccount.inc:832
 msgid "Saving UNIX account failed"
 msgstr "Het opslaan van het UNIX account is mislukt"
 
-#: plugins/personal/posix/class_posixAccount.inc:887
+#: plugins/personal/posix/class_posixAccount.inc:893
 msgid "The required field 'Home directory' is not set."
 msgstr "Het vereiste veld 'Persoonlijke map' is leeg."
 
-#: plugins/personal/posix/class_posixAccount.inc:890
+#: plugins/personal/posix/class_posixAccount.inc:896
 msgid "Please enter a valid path in 'Home directory' field."
 msgstr "Geef a.u.b. een geldige map op in het 'Persoonlijke map' veld."
 
-#: plugins/personal/posix/class_posixAccount.inc:898
+#: plugins/personal/posix/class_posixAccount.inc:904
 msgid "Value specified as 'UID' is not valid."
 msgstr "De opgegeven 'UID' waarde is niet correct."
 
-#: plugins/personal/posix/class_posixAccount.inc:901
+#: plugins/personal/posix/class_posixAccount.inc:907
 msgid "Value specified as 'UID' is too small."
 msgstr "De opgegeven 'UID' waarde is te klein."
 
-#: plugins/personal/posix/class_posixAccount.inc:905
+#: plugins/personal/posix/class_posixAccount.inc:911
 #: plugins/admin/groups/class_groupGeneric.inc:774
 msgid "Value specified as 'GID' is not valid."
 msgstr "De opgegeven 'GID' waarde is niet geldig."
 
-#: plugins/personal/posix/class_posixAccount.inc:908
+#: plugins/personal/posix/class_posixAccount.inc:914
 #: plugins/admin/groups/class_groupGeneric.inc:777
 msgid "Value specified as 'GID' is too small."
 msgstr "De opgegeven 'GID' waarde is te klein."
 
-#: plugins/personal/posix/class_posixAccount.inc:916
+#: plugins/personal/posix/class_posixAccount.inc:922
 msgid "Value specified as 'shadowMin' is not valid."
 msgstr "De opgegeven 'shadowMin' waarde is niet geldig."
 
-#: plugins/personal/posix/class_posixAccount.inc:921
+#: plugins/personal/posix/class_posixAccount.inc:927
 msgid "Value specified as 'shadowMax' is not valid."
 msgstr "De opgegeven 'shadowMax' waarde is niet geldig."
 
-#: plugins/personal/posix/class_posixAccount.inc:926
+#: plugins/personal/posix/class_posixAccount.inc:932
 msgid "Value specified as 'shadowWarning' is not valid."
 msgstr "De opgegeven 'shadowWarning' waarde is niet geldig."
 
-#: plugins/personal/posix/class_posixAccount.inc:929
+#: plugins/personal/posix/class_posixAccount.inc:935
 msgid "'shadowWarning' without 'shadowMax' makes no sense."
 msgstr "'shadowWarning' zonder 'shadowMax' is niet logisch."
 
-#: plugins/personal/posix/class_posixAccount.inc:932
+#: plugins/personal/posix/class_posixAccount.inc:938
 msgid "Value specified as 'shadowWarning' should be smaller than 'shadowMax'."
 msgstr ""
 "De waarde opgegeven voor 'shadowWarning' moet kleiner zijn dan 'shadowMax'."
 
-#: plugins/personal/posix/class_posixAccount.inc:935
+#: plugins/personal/posix/class_posixAccount.inc:941
 msgid "Value specified as 'shadowWarning' should be greater than 'shadowMin'."
 msgstr ""
 "De waarde opgegeven voor 'shadowWarning' moet groter dan 'shadowMin' zijn."
 
-#: plugins/personal/posix/class_posixAccount.inc:940
+#: plugins/personal/posix/class_posixAccount.inc:946
 msgid "Value specified as 'shadowInactive' is not valid."
 msgstr "De waarde opgegeven voor 'shadowInactive' is niet geldig."
 
-#: plugins/personal/posix/class_posixAccount.inc:943
+#: plugins/personal/posix/class_posixAccount.inc:949
 msgid "'shadowInactive' without 'shadowMax' makes no sense."
 msgstr "'shadowInactive' zonder 'shadowMax' is niet logisch."
 
-#: plugins/personal/posix/class_posixAccount.inc:948
+#: plugins/personal/posix/class_posixAccount.inc:954
 msgid "Value specified as 'shadowMin' should be smaller than 'shadowMax'."
 msgstr ""
 "De waarde opgegeven voor 'shadowMin' moet kleiner zijn dan 'shadowMax'."
 
-#: plugins/personal/posix/class_posixAccount.inc:1075
+#: plugins/personal/posix/class_posixAccount.inc:1081
 #: plugins/admin/groups/class_groupGeneric.inc:813
 msgid "Too many users, can't allocate a free ID!"
 msgstr ""
@@ -4401,15 +4400,15 @@ msgstr ""
 "Het geselecteerde kiosk profiel '%s' is niet meer beschikbaar. Het huidige "
 "profiel wordt op 'geen' ingesteld."
 
-#: plugins/personal/environment/class_environment.inc:816
+#: plugins/personal/environment/class_environment.inc:815
 msgid "Removing environment information failed"
 msgstr "Het verwijderen van omgevings informatie is mislukt"
 
-#: plugins/personal/environment/class_environment.inc:869
+#: plugins/personal/environment/class_environment.inc:868
 msgid "Please set a valid profile quota size."
 msgstr "Geef a.u.b. een geldige profiel quota grootte op."
 
-#: plugins/personal/environment/class_environment.inc:876
+#: plugins/personal/environment/class_environment.inc:875
 msgid ""
 "You need to setup a valid posix extension in order to enable evironment "
 "features."
@@ -4417,33 +4416,33 @@ msgstr ""
 "U dient posix mogelijkheden in te schakelen om omgevingsmogelijkheden in te "
 "kunnen schakelen."
 
-#: plugins/personal/environment/class_environment.inc:914
+#: plugins/personal/environment/class_environment.inc:913
 msgid "Can't save new kiosk profiles, possibly permission denied for folder"
 msgstr ""
 "Kan de nieuwe kios profielen niet opslaan. Mogelijk is de toegang geweigerd "
 "tot de directory"
 
-#: plugins/personal/environment/class_environment.inc:1008
+#: plugins/personal/environment/class_environment.inc:1027
 msgid "Error while writing printer"
 msgstr "Fout bij het schrijven van de printer"
 
-#: plugins/personal/environment/class_environment.inc:1078
+#: plugins/personal/environment/class_environment.inc:1097
 msgid "Error while writing printer settings"
 msgstr "Fout bij het schrijven van de printer instellingen"
 
-#: plugins/personal/environment/class_environment.inc:1147
+#: plugins/personal/environment/class_environment.inc:1166
 msgid "Adding environment information failed"
 msgstr "Het toevoegen van omgevings informatie is mislukt"
 
-#: plugins/personal/environment/class_environment.inc:1160
+#: plugins/personal/environment/class_environment.inc:1179
 msgid "group share"
 msgstr "groepsshare"
 
-#: plugins/personal/environment/class_environment.inc:1192
+#: plugins/personal/environment/class_environment.inc:1211
 msgid "Administrator"
 msgstr "Beheerder"
 
-#: plugins/personal/environment/class_environment.inc:1197
+#: plugins/personal/environment/class_environment.inc:1216
 msgid "Default printer"
 msgstr "Standaard printer"
 
@@ -5175,7 +5174,8 @@ msgstr "Het verwijderen van het webDAV account is mislukt"
 msgid "Saving webDAV account failed"
 msgstr "Het opslaan van het webDAV account is mislukt"
 
-#: plugins/personal/connectivity/kolab.tpl:1
+#: plugins/personal/connectivity/kolab.tpl:3
+#: plugins/personal/connectivity/kolab.tpl:19
 msgid "Kolab account"
 msgstr "Kolab account"
 
@@ -5187,38 +5187,38 @@ msgstr ""
 "Het kolab account is uitgeschakeld. U kunt opties aanpassen indien u een e-"
 "mail account toevoegd."
 
-#: plugins/personal/connectivity/kolab.tpl:10
+#: plugins/personal/connectivity/kolab.tpl:25
 msgid "Delegations"
 msgstr "Delegaties"
 
-#: plugins/personal/connectivity/kolab.tpl:23
+#: plugins/personal/connectivity/kolab.tpl:38
 msgid "Mail size"
 msgstr "E-mail grootte"
 
-#: plugins/personal/connectivity/kolab.tpl:24
+#: plugins/personal/connectivity/kolab.tpl:40
 msgid "No mail size restriction for this account"
 msgstr "Geen E-mail grootte restrictie voor dit account"
 
-#: plugins/personal/connectivity/kolab.tpl:32
+#: plugins/personal/connectivity/kolab.tpl:48
 msgid "Free Busy information"
 msgstr "Free Busy informatie"
 
-#: plugins/personal/connectivity/kolab.tpl:35
+#: plugins/personal/connectivity/kolab.tpl:51
 #: plugins/admin/systems/servRepositorySetup.tpl:24
 msgid "URL"
 msgstr "URL"
 
-#: plugins/personal/connectivity/kolab.tpl:39
+#: plugins/personal/connectivity/kolab.tpl:55
 msgid "Future"
 msgstr "Toekomstig"
 
-#: plugins/personal/connectivity/kolab.tpl:40
+#: plugins/personal/connectivity/kolab.tpl:56
 #: plugins/personal/connectivity/oxchange.tpl:26
 #: plugins/personal/connectivity/oxchange.tpl:30
 msgid "days"
 msgstr "dagen"
 
-#: plugins/personal/connectivity/kolab.tpl:45
+#: plugins/personal/connectivity/kolab.tpl:61
 msgid "Invitation policy"
 msgstr "Uitnodigingsbeleid"
 
@@ -5458,13 +5458,13 @@ msgstr "PHPScheduleIt account"
 msgid "Kolab"
 msgstr "Kolab"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:105
+#: plugins/personal/connectivity/class_kolabAccount.inc:117
 msgid ""
 "You're trying to add an invalid email address to the list of delegations."
 msgstr ""
 "U probeert een ongeldig email adres toe te voegen aan de delegatielijst."
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:113
+#: plugins/personal/connectivity/class_kolabAccount.inc:125
 msgid ""
 "The mail address you're trying to add is no primary mail address of an "
 "existing user."
@@ -5472,50 +5472,56 @@ msgstr ""
 "Het E-mail adres dat u probeert toe te voegen is geen primair E-mail adres "
 "van een bestaande gebruiker."
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:140
+#: plugins/personal/connectivity/class_kolabAccount.inc:152
 msgid "Always accept"
 msgstr "Altijd accepteren"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:141
+#: plugins/personal/connectivity/class_kolabAccount.inc:153
 msgid "Always reject"
 msgstr "Altijd afwijzen"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:142
+#: plugins/personal/connectivity/class_kolabAccount.inc:154
 msgid "Reject if conflicts"
 msgstr "Afwijzen bij conflicten"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:143
+#: plugins/personal/connectivity/class_kolabAccount.inc:155
 msgid "Manual if conflicts"
 msgstr "Handmatig bij conflicten"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:144
+#: plugins/personal/connectivity/class_kolabAccount.inc:156
 msgid "Manual"
 msgstr "Handmatig"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:180
+#: plugins/personal/connectivity/class_kolabAccount.inc:205
 msgid "Anonymous"
 msgstr "Anoniem"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:233
+#: plugins/personal/connectivity/class_kolabAccount.inc:262
+#, fuzzy, php-format
+msgid "Removing of user/kolab account with dn '%s' failed."
+msgstr "Het verwijderen van het algemene gebruikers account is mislukt"
+
+#: plugins/personal/connectivity/class_kolabAccount.inc:273
 msgid "The value specified as Free Busy future needs to be an integer."
 msgstr "De waarde opgegeven als Free Busy toekomst dient een integer te zijn"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:238
+#: plugins/personal/connectivity/class_kolabAccount.inc:278
 msgid "The value specified as Free Busy Information URL is invalid."
 msgstr "De opgegeven waarde voor de Free Busy informatie URL is niet geldig."
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:252
+#: plugins/personal/connectivity/class_kolabAccount.inc:292
 #, php-format
 msgid "The invitation policy entry for address '%s' is not valid."
 msgstr "Het uitnodigingsbeleid invoer voor adres '%s' is niet geldig"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:260
+#: plugins/personal/connectivity/class_kolabAccount.inc:300
 #, php-format
 msgid "There's no mail user with address '%s' for your invitation policy!"
 msgstr "Er is geen E-mail gebruiker met adres '%s' voor uw uitwisselingsbeleid"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:325
-msgid "Saving Kolab account failed"
+#: plugins/personal/connectivity/class_kolabAccount.inc:379
+#, fuzzy, php-format
+msgid "Saving of user/kolab account with dn '%s' failed."
 msgstr "Het opslaan van het Kolab account is mislukt"
 
 #: plugins/personal/connectivity/webdav.tpl:3
@@ -6037,7 +6043,6 @@ msgstr "U probeert een ongeldig telefoonnummer toe te voegen."
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:431
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:513
-#: plugins/addons/mailqueue/header.tpl:5
 #: plugins/admin/groups/class_groupApplication.inc:632
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:94
 msgid "back"
@@ -6183,7 +6188,7 @@ msgstr "Fax ID"
 #: plugins/gofax/faxreports/detail.tpl:21
 #: plugins/gofax/faxreports/contents.tpl:30
 #: plugins/admin/fai/faiTemplateEntry.tpl:94
-#: plugins/admin/systems/class_printGeneric.inc:758
+#: plugins/admin/systems/class_printGeneric.inc:760
 #: plugins/admin/ogroups/class_ogroupManagement.inc:363
 msgid "User"
 msgstr "Gebruiker"
@@ -8194,8 +8199,8 @@ msgstr "Eigenaar"
 
 #: plugins/admin/fai/faiTemplateEntry.tpl:71
 #: plugins/admin/fai/faiTemplateEntry.tpl:103
-#: plugins/admin/systems/class_printGeneric.inc:753
 #: plugins/admin/systems/class_printGeneric.inc:755
+#: plugins/admin/systems/class_printGeneric.inc:757
 #: plugins/admin/ogroups/class_ogroupManagement.inc:364
 #: plugins/generic/references/class_reference.inc:36
 msgid "Group"
@@ -9226,7 +9231,6 @@ msgstr "Afdeling beheer"
 
 #: plugins/admin/departments/class_divListDepartment.inc:27
 #: plugins/admin/departments/class_divListDepartment.inc:28
-#: plugins/admin/departments/headpage.tpl:6
 msgid "List of departments"
 msgstr "Lijst met afdelingen"
 
@@ -9322,24 +9326,6 @@ msgstr ""
 "Dit omvat 'alle' accounts, systemen etc. in deze subtree. Verzeker uzelf er "
 "van dat dit is wat u wilt, aangezien er geen mogelijkheid voor GOsa is om "
 "deze gegevens terug te halen."
-
-#: plugins/admin/departments/headpage.tpl:24
-msgid ""
-"This menu allows you to create, delete and edit selected departments. Having "
-"a large size of departments, you might prefer the range selectors on top of "
-"the department list."
-msgstr ""
-"Dit menu maakt het mogelijk om geselecteerde afdelingen toe te voegen, "
-"bewerken of verwijderen. Indien u veel afdelingen heeft is het aan te raden "
-"de selectie mogelijkheden te gebruiken."
-
-#: plugins/admin/departments/headpage.tpl:38
-msgid "Display departments matching"
-msgstr "Toon overeenkomende afdelingen"
-
-#: plugins/admin/departments/headpage.tpl:42
-msgid "Regular expression for matching department names"
-msgstr "Reguliere expressie voor overeenkomende afdelingen"
 
 #: plugins/admin/departments/class_departmentManagement.inc:25
 #: plugins/admin/systems/class_glpiSelectUser.inc:112
@@ -9610,41 +9596,41 @@ msgstr "Scherm"
 msgid "unknown"
 msgstr "onbekend"
 
-#: plugins/admin/systems/workstationService.tpl:126
-msgid "Automatic modelines"
-msgstr "Automatische modusregels"
+#: plugins/admin/systems/workstationService.tpl:125
+msgid "Use DDC for automatic detection"
+msgstr ""
 
-#: plugins/admin/systems/workstationService.tpl:130
+#: plugins/admin/systems/workstationService.tpl:128
 #: plugins/admin/systems/terminalService.tpl:124
 msgid "HSync"
 msgstr "HSync"
 
-#: plugins/admin/systems/workstationService.tpl:132
+#: plugins/admin/systems/workstationService.tpl:130
 #: plugins/admin/systems/terminalService.tpl:126
 msgid "Horizontal refresh frequency for installed monitor"
 msgstr "Horizontale ververs frequentie voor de geïnstalleerde monitor"
 
-#: plugins/admin/systems/workstationService.tpl:135
+#: plugins/admin/systems/workstationService.tpl:133
 #: plugins/admin/systems/terminalService.tpl:129
 msgid "VSync"
 msgstr "VSync"
 
-#: plugins/admin/systems/workstationService.tpl:137
+#: plugins/admin/systems/workstationService.tpl:135
 #: plugins/admin/systems/terminalService.tpl:131
 msgid "Vertical refresh frequency for installed monitor"
 msgstr "Verticale ververs frequentie voor de geïnstalleerde monitor"
 
-#: plugins/admin/systems/workstationService.tpl:149
+#: plugins/admin/systems/workstationService.tpl:147
 #: plugins/admin/systems/terminalService.tpl:203
 msgid "Scan device"
 msgstr "Scanner"
 
-#: plugins/admin/systems/workstationService.tpl:150
+#: plugins/admin/systems/workstationService.tpl:148
 #: plugins/admin/systems/terminalService.tpl:204
 msgid "Select to start SANE scan service on terminal"
 msgstr "Selecteer om de SANE scan service te starten op de terminal"
 
-#: plugins/admin/systems/workstationService.tpl:151
+#: plugins/admin/systems/workstationService.tpl:149
 #: plugins/admin/systems/terminalService.tpl:205
 msgid "Provide scan services"
 msgstr "Lever scan diensten"
@@ -9952,21 +9938,21 @@ msgstr "Bit"
 msgid "Choose the phone located at the current terminal"
 msgstr "Selecteer de telefoon die zich bij de huidige terminal bevindt."
 
-#: plugins/admin/systems/class_workstationService.inc:354
 #: plugins/admin/systems/class_workstationService.inc:359
+#: plugins/admin/systems/class_workstationService.inc:364
 #: plugins/admin/systems/class_terminalService.inc:365
 #: plugins/admin/systems/class_terminalService.inc:370
 msgid "Please specify a valid VSync range."
 msgstr "Geef a.u.b. een geldig VSync bereik op."
 
-#: plugins/admin/systems/class_workstationService.inc:369
 #: plugins/admin/systems/class_workstationService.inc:374
+#: plugins/admin/systems/class_workstationService.inc:379
 #: plugins/admin/systems/class_terminalService.inc:380
 #: plugins/admin/systems/class_terminalService.inc:385
 msgid "Please specify a valid HSync range."
 msgstr "Geef a.u.b. een geldig HSync bereik op."
 
-#: plugins/admin/systems/class_workstationService.inc:415
+#: plugins/admin/systems/class_workstationService.inc:422
 msgid "Saving workstation services failed"
 msgstr "Het opslaan van werkstations services is mislukt"
 
@@ -10549,7 +10535,7 @@ msgstr "Het vereiste veld 'Werkstation naam' is leeg."
 #: plugins/admin/systems/class_winGeneric.inc:174
 #: plugins/admin/systems/class_terminalGeneric.inc:386
 #: plugins/admin/systems/class_servGeneric.inc:242
-#: plugins/admin/systems/class_printGeneric.inc:618
+#: plugins/admin/systems/class_printGeneric.inc:616
 #: plugins/admin/systems/class_phoneGeneric.inc:312
 #, php-format
 msgid "There is already an entry '%s' in the base choosen by you"
@@ -12332,35 +12318,35 @@ msgstr ""
 "Kon geen geldige basis ophalen uit de dn van het object. Basis is ingesteld "
 "op '%s'."
 
-#: plugins/admin/systems/class_printGeneric.inc:234
-#: plugins/admin/systems/class_printGeneric.inc:242
-#: plugins/admin/systems/class_printGeneric.inc:247
-#: plugins/admin/systems/class_printGeneric.inc:286
-#: plugins/admin/systems/class_printGeneric.inc:302
-#: plugins/admin/systems/class_printGeneric.inc:305
+#: plugins/admin/systems/class_printGeneric.inc:232
+#: plugins/admin/systems/class_printGeneric.inc:240
+#: plugins/admin/systems/class_printGeneric.inc:245
+#: plugins/admin/systems/class_printGeneric.inc:284
+#: plugins/admin/systems/class_printGeneric.inc:300
+#: plugins/admin/systems/class_printGeneric.inc:303
 msgid "Add printer extension"
 msgstr "Voeg printer extensie toe"
 
-#: plugins/admin/systems/class_printGeneric.inc:235
+#: plugins/admin/systems/class_printGeneric.inc:233
 msgid ""
 "Could not intialize printer tab, parameter parent was missing while "
 "construction."
 msgstr ""
 "Kon de printertab niet initialiseren. Parameter parent ontbrak bij aanmaak."
 
-#: plugins/admin/systems/class_printGeneric.inc:243
+#: plugins/admin/systems/class_printGeneric.inc:241
 msgid "This is a workstation template, printer tab is disabled."
 msgstr "Dit is een werkstationsjabloon. Het printer tabblad is uitgeschakeld."
 
-#: plugins/admin/systems/class_printGeneric.inc:248
+#: plugins/admin/systems/class_printGeneric.inc:246
 msgid "This is a terminal template, printer tab is disabled."
 msgstr "Dit is een terminalsjabloon. Het printer tabblad is uitgeschakeld."
 
-#: plugins/admin/systems/class_printGeneric.inc:279
+#: plugins/admin/systems/class_printGeneric.inc:277
 msgid "This 'dn' has no printer features."
 msgstr "Deze 'dn' heeft geen printer mogelijkheden."
 
-#: plugins/admin/systems/class_printGeneric.inc:287
+#: plugins/admin/systems/class_printGeneric.inc:285
 msgid ""
 "This object has printer extension disabled. You can't enable it while 'cn' "
 "is not present in entry. Possibly you are currently creating a new terminal "
@@ -12370,12 +12356,12 @@ msgstr ""
 "inschakelen zolang 'cn' niet aanwezig is in de invoer. Het kan mogelijk zijn "
 "dat u een nieuwe terminal sjabloon aan het maken bent."
 
-#: plugins/admin/systems/class_printGeneric.inc:294
-#: plugins/admin/systems/class_printGeneric.inc:297
+#: plugins/admin/systems/class_printGeneric.inc:292
+#: plugins/admin/systems/class_printGeneric.inc:295
 msgid "Remove printer extension"
 msgstr "Verwijder printer mogelijkheden"
 
-#: plugins/admin/systems/class_printGeneric.inc:295
+#: plugins/admin/systems/class_printGeneric.inc:293
 msgid ""
 "This workstation has printer extension enabled.You can disable it by "
 "clicking below."
@@ -12383,7 +12369,7 @@ msgstr ""
 "Dit werkstation heeft printer mogelijkheden ingeschakeld. U kunt deze "
 "uitschakelen door de knop hieronder te gebruiken."
 
-#: plugins/admin/systems/class_printGeneric.inc:298
+#: plugins/admin/systems/class_printGeneric.inc:296
 msgid ""
 "This terminal has printer extension enabled. You can disable it by clicking "
 "below."
@@ -12391,7 +12377,7 @@ msgstr ""
 "Deze terminal heeft printer mogelijkheden ingeschakeld. U kunt deze "
 "uitschakelen door de knop hieronder te gebruiken."
 
-#: plugins/admin/systems/class_printGeneric.inc:303
+#: plugins/admin/systems/class_printGeneric.inc:301
 msgid ""
 "This workstation has printer extension disabled. You can enable it by "
 "clicking below."
@@ -12399,7 +12385,7 @@ msgstr ""
 "Dit werkstation heeft printer mogelijkheden uitgeschakeld. U kunt deze "
 "inschakelen door de knop hieronder te gebruiken."
 
-#: plugins/admin/systems/class_printGeneric.inc:306
+#: plugins/admin/systems/class_printGeneric.inc:304
 msgid ""
 "This terminal has printer extension disabled. You can enable it by clicking "
 "below."
@@ -12407,32 +12393,32 @@ msgstr ""
 "Deze terminal heeft printer mogelijkheden uitgeschakeld. U kunt deze "
 "inschakelen door de knop hieronder te gebruiken."
 
-#: plugins/admin/systems/class_printGeneric.inc:480
+#: plugins/admin/systems/class_printGeneric.inc:478
 #, php-format
 msgid "Your currently selected PPD file '%s' doesn't exist."
 msgstr "Uw huidig geselecteerde PPD bestand '%s' bestaat niet."
 
-#: plugins/admin/systems/class_printGeneric.inc:488
+#: plugins/admin/systems/class_printGeneric.inc:486
 msgid "can't get ppd informations."
 msgstr "kan de PPD informatie niet ophalen"
 
-#: plugins/admin/systems/class_printGeneric.inc:501
+#: plugins/admin/systems/class_printGeneric.inc:499
 #, php-format
 msgid "This printer belongs to terminal %s. You can't rename this printer."
 msgstr ""
 "Deze printer behoort bij terminal %s. U kunt deze printer niet hernoemen."
 
-#: plugins/admin/systems/class_printGeneric.inc:503
+#: plugins/admin/systems/class_printGeneric.inc:501
 #, php-format
 msgid "This printer belongs to workstation %s. You can't rename this printer."
 msgstr ""
 "Deze printer behoort bij werkstation %s. U kunt deze printer niet hernoemen."
 
-#: plugins/admin/systems/class_printGeneric.inc:554
+#: plugins/admin/systems/class_printGeneric.inc:552
 msgid "Removing printer failed"
 msgstr "Het verwijderen van de printer is mislukt"
 
-#: plugins/admin/systems/class_printGeneric.inc:736
+#: plugins/admin/systems/class_printGeneric.inc:738
 msgid "Saving printer failed"
 msgstr "Het opslaan van de printer is mislukt"
 
@@ -12809,7 +12795,7 @@ msgid "There must be at least one NTP server selected."
 msgstr "Er moet tenminste een NTP server geselecteerd zijn."
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:61
-#: plugins/admin/ogroups/tabs_ogroups.inc:168
+#: plugins/admin/ogroups/tabs_ogroups.inc:165
 msgid "Phone queue"
 msgstr "Telefoonwachtrij"
 
@@ -12817,7 +12803,7 @@ msgstr "Telefoonwachtrij"
 msgid "System"
 msgstr "Systeem"
 
-#: plugins/admin/ogroups/tabs_ogroups.inc:148
+#: plugins/admin/ogroups/tabs_ogroups.inc:145
 msgid "Terminals"
 msgstr "Terminals"
 
@@ -13997,6 +13983,24 @@ msgstr "Het GOsa team"
 #, php-format
 msgid "Welcome %s!"
 msgstr "Welkom %s!"
+
+#~ msgid ""
+#~ "This menu allows you to create, delete and edit selected departments. "
+#~ "Having a large size of departments, you might prefer the range selectors "
+#~ "on top of the department list."
+#~ msgstr ""
+#~ "Dit menu maakt het mogelijk om geselecteerde afdelingen toe te voegen, "
+#~ "bewerken of verwijderen. Indien u veel afdelingen heeft is het aan te "
+#~ "raden de selectie mogelijkheden te gebruiken."
+
+#~ msgid "Display departments matching"
+#~ msgstr "Toon overeenkomende afdelingen"
+
+#~ msgid "Regular expression for matching department names"
+#~ msgstr "Reguliere expressie voor overeenkomende afdelingen"
+
+#~ msgid "Automatic modelines"
+#~ msgstr "Automatische modusregels"
 
 #~ msgid ""
 #~ "Please enter the server URI to allow the setup to connect your LDAP "
