@@ -390,16 +390,6 @@ class posixAccount extends plugin
     /* Manage group add dialog */
     if ($this->group_dialog){
 
-      /* Get Posts */ 
-      if(isset($_POST['depselect'])){
-        if(isset($_POST['regex'])){
-          $this->GroupRegex = $_POST['regex'];
-        }  
-        if(isset($_POST['guser'])){
-          $this->GroupUserRegex = $_POST['guser'];
-        }  
-      }
-
       /* Get global filter config */
       $this->reload();
 
@@ -681,13 +671,29 @@ class posixAccount extends plugin
         }
       }
     }
+
+    /* Get regex from alphabet */
+    if(isset($_GET['search'])){
+      $this->GroupRegex = $_GET['search']."*";
+    }
+
+    /* Check checkboxes and regexes */
     if(isset($_POST["PosixGroupDialogPosted"])){
       if(isset($_POST['SubSearch']) && ($_POST['SubSearch'])){
         $this->SubSearch = true;
       }else{
         $this->SubSearch = false;
       }
+    
+      if(isset($_POST['guser'])){
+        $this->GroupUserRegex = $_POST['guser'];
+      }
+      if(isset($_POST['regex'])){
+        $this->GroupRegex = $_POST['regex'];
+      }
     }
+    $this->GroupRegex = preg_replace("/\*\**/","*",$this->GroupRegex);
+    $this->GroupUserRegex = preg_replace("/\*\**/","*",$this->GroupUserRegex);
   }
 
 
@@ -1090,7 +1096,7 @@ class posixAccount extends plugin
 
     /* Get groups */
     if ($this->GroupUserRegex == '*'){
-      $filter = "(objectClass=posixGroup)";
+      $filter = "(&(objectClass=posixGroup)(cn=".$this->GroupRegex."))";
     } else {
       $filter= "(&(objectClass=posixGroup)(cn=".$this->GroupRegex.")(memberUid=".$this->GroupUserRegex."))";
     }
