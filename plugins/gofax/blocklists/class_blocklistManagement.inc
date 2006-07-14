@@ -412,6 +412,10 @@ class blocklist extends plugin
         $this->$attr = $_POST[$attr];
       }
     }
+    if(isset($_POST['type'])){
+      $this->type = $_POST['type'];
+    }
+
   }
 
 
