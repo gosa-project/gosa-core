@@ -1,0 +1,23 @@
+#
+## schema file for OpenLDAP 2.x
+## Schema for storing PHPscheduleit User Configuration in LDAP
+## OIDs are owned by OpenSides
+##
+## number from 1 to 50 are for objectclasses
+## attributeype start at 50
+#
+# $Id: phpscheduleit.schema,v 1.1 2005/11/02 16:48:16 guiguidoc Exp $
+#
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.3.1 NAME 'phpscheduleitAccountLogin'
+        DESC 'PHPscheduleit Account Login'
+        EQUALITY caseIgnoreIA5Match
+        SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+#
+# all objectclass 
+#
+
+objectclass ( 1.3.6.1.4.1.22262.1.1.2.3.1 NAME 'phpscheduleitAccount' SUP top AUXILIARY
+ DESC 'PHPscheduleit Account'
+ MAY (	phpscheduleitAccountLogin  ))
