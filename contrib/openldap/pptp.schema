@@ -1,0 +1,42 @@
+#
+## schema file for OpenLDAP 2.x
+## Schema for storing PPTP User Configuration in LDAP
+## OIDs are owned by OpenSides
+##
+## number from 1 to 50 are for objectclasses
+## attributeype start at 50
+#
+# $Id: pptp.schema,v 1.5 2005/11/02 16:47:22 guiguidoc Exp $
+#
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.2.1 NAME 'pptpAccount'
+        DESC 'PPTP Server Account'
+        EQUALITY caseIgnoreIA5Match
+        SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.2.2 NAME 'pptpAccountLogin'
+        DESC 'PPTP Server Account Login'
+        EQUALITY caseIgnoreIA5Match
+        SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.2.3 NAME 'pptpAccountPassword'
+        DESC 'PPTP Server Account Password'
+        EQUALITY caseIgnoreIA5Match
+        SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.2.4 NAME 'pptpAccountServerIP'
+        DESC 'PPTP Server Account Server IP'
+        EQUALITY caseIgnoreIA5Match
+        SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+
+#
+# all objectclass 
+#
+
+objectclass ( 1.3.6.1.4.1.22262.1.1.2.2.1 NAME 'pptpServerAccount' SUP top AUXILIARY
+ DESC 'PPTP Server Account'
+ MAY (	pptpAccount  ))
+
