@@ -691,7 +691,7 @@ class printgeneric extends plugin
 
     /* Append printer group 
      */
-    $this->attrs['gotoGroupPrinter'][] = array();
+    $this->attrs['gotoGroupPrinter'] = array();
     foreach($this->member['AddGroup'] as $mem){
       $this->attrs['gotoGroupPrinter'][]=$mem['cn'][0];
     }
