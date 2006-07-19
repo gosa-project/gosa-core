@@ -2,6 +2,7 @@ GOsa2 changelog
 ===============
 
 * gosa 2.5.3
+  - Fixed gotoPrinter membership problem.
   - Fixed environment shares, only available shares will be displayed (gosaUnitTag was ignored)
   - Fixed saving of inherited workstation settings
   - Removed error when no FAI repositories were present

@@ -68,7 +68,7 @@
 				<tr>
 					<td>
 						{t}Users which are allowed to use this printer{/t}<br>
-		     				<select size="1" name="UserMember" title="{t}Users{/t}" style="width:100%;height:120px;"  multiple>
+		     				<select size="1" name="UserMember[]" title="{t}Users{/t}" style="width:100%;height:120px;"  multiple>
                 				{html_options options=$UserMembers values=$UserMemberKeys}
                				</select><br>
 							<input type="submit" value="{t}Add user{/t}"  name="AddUser">
@@ -84,7 +84,7 @@
 				<tr>
 					<td>
 						{t}Users which are allowed to administrate this printer{/t}<br>
-		     				<select size="1" name="AdminMember" title="{t}Admins{/t}" style="width:100%;height:120px;"  multiple>
+		     				<select size="1" name="AdminMember[]" title="{t}Admins{/t}" style="width:100%;height:120px;"  multiple>
                 				{html_options options=$AdminMembers values=$AdminMemberKeys}
                				</select><br>
 							<input type="submit" value="{t}Add user{/t}"  name="AddAdminUser">

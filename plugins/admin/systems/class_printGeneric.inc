@@ -28,7 +28,6 @@ class printgeneric extends plugin
   var $AdminMembers     =array();
   var $AdminMemberKeys  =array();
 
-  var $gotoUserPrinter ;
   var $PPDdialogToSave  = NULL;
   var $BelongsTo        = "unknown"; //  Specifies if this is a standalone printer, or belongs to a terminal / WS
 
@@ -41,8 +40,14 @@ class printgeneric extends plugin
   var $macAddress       = "";
 
   /* attribute list for save action */
-  var $attributes     = array("cn", "description", "l", "labeledURI", "gotoPrinterPPD","gotoUserPrinter", "macAddress");
+  var $attributes     = array("cn", "description", "l", "labeledURI", "gotoPrinterPPD","gotoUserPrinter", "macAddress",
+                                "gotoUserAdminPrinter","gotoGroupAdminPrinter","gotoUserPrinter","gotoGroupPrinter");
   var $objectclasses  = array("top", "gotoPrinter");
+
+    var $gotoUserAdminPrinter;
+  var $gotoGroupAdminPrinter ;
+  var $gotoGroupPrinter;
+  var $gotoUserPrinter ;
 
   function printgeneric ($config, $dn= NULL,$parent = NULL)
   {
@@ -401,26 +406,26 @@ class printgeneric extends plugin
 
     /* Member management, delete user / group / admin ..*/
     if((isset($_POST['DelUser']))&&(isset($_POST['UserMember']))){
-      if(isset($this->member['AddUser'][$_POST['UserMember']])){
-        unset($this->member['AddUser'][$_POST['UserMember']]);
+      foreach($_POST['UserMember'] as $mem){
+        $this->DelMember('AddUser',$mem);
       }
     }
 
     if((isset($_POST['DelUser']))&&(isset($_POST['UserMember']))){
-      if(isset($this->member['AddGroup'][$_POST['UserMember']])){
-        unset($this->member['AddGroup'][$_POST['UserMember']]);
+      foreach($_POST['UserMember'] as $mem){
+        $this->DelMember('AddGroup',$mem);
       }
     }
 
     if((isset($_POST['DelAdmin']))&&(isset($_POST['AdminMember']))){
-      if(isset($this->member['AddAdminUser'][$_POST['AdminMember']])){
-        unset($this->member['AddAdminUser'][$_POST['AdminMember']]);
+      foreach($_POST['AdminMember'] as $mem){
+        $this->DelMember('AddAdminUser',$mem);
       }
     }
 
     if((isset($_POST['DelAdmin']))&&(isset($_POST['AdminMember']))){
-      if(isset($this->member['AddAdminGroup'][$_POST['AdminMember']])){
-        unset($this->member['AddAdminGroup'][$_POST['AdminMember']]);
+      foreach($_POST['AdminMember'] as $mem){
+        $this->DelMember('AddAdminGroup',$mem);
       }
     }
 
@@ -438,18 +443,10 @@ class printgeneric extends plugin
           print_red($msg);
         }
       }else{
-        $new = $this->dialog->save();
-        $data = $new;
+        $data= $new = $this->dialog->save();
         unset($data['type']);
-
-        if(preg_match("/User/",$new['type'])){
-          $use = "uid";
-        }else{
-          $use = "cn";
-        }
-
-        foreach($data as $mem){
-          $this->member[$new['type']][$mem[$use][0]]=$mem;    
+        foreach($data as $mem){  
+          $this->AddMember($new['type'], $mem['dn']);    
         }
         unset($this->dialog);
         $this->dialog=NULL; 
@@ -687,27 +684,28 @@ class printgeneric extends plugin
 
     /* Append printer user 
      */
-    if((isset($this->attrs['gotoUserPrinter'])) && (is_string($this->attrs['gotoUserPrinter']))){
-      $this->attrs['gotoUserPrinter']=array();
-    }
+    $this->attrs['gotoUserPrinter']=array();
     foreach($this->member['AddUser'] as $mem){
       $this->attrs['gotoUserPrinter'][]=$mem['uid'][0];
     }
 
     /* Append printer group 
      */
+    $this->attrs['gotoGroupPrinter'][] = array();
     foreach($this->member['AddGroup'] as $mem){
       $this->attrs['gotoGroupPrinter'][]=$mem['cn'][0];
     }
 
     /* Append printer admin user 
      */
+    $this->attrs['gotoUserAdminPrinter'] =array();
     foreach($this->member['AddAdminUser'] as $mem){
       $this->attrs['gotoUserAdminPrinter'][]=$mem['uid'][0];
     }
 
     /* Append printer admin group 
      */
+    $this->attrs['gotoGroupAdminPrinter'] = array();
     foreach($this->member['AddAdminGroup'] as $mem){
       $this->attrs['gotoGroupAdminPrinter'][]=$mem['cn'][0];
     }
@@ -763,9 +761,54 @@ class printgeneric extends plugin
     }
     return($a_return);
   }
+
+  /* Delete member */
+  function DelMember($type,$id)
+  {
+    if(isset($this->member[$type][$id])){
+      unset($this->member[$type][$id]);
+    }
+  }
+
+  /* Add given obejct to members */
+  function AddMember($type,$dn)
+  {
+    $types = array("AddUser","AddGroup","AddAdminUser","AddAdminGroup");
+    if(!in_array_ics($type, $types)){
+      print_red(sprintf(_("Illegal printer type while adding '%s' to the list of '%s' printers,"),$dn,$type));
+      return;
+    }
+
+    /* Get name of index attributes */
+    if(preg_match("/user/i",$type)){
+      $var = "uid";
+    }else{
+      $var = "cn";
+    }
+
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($dn);
+    $ldap->cat($dn,array("cn","uid"));
+    if($ldap->count()){
+
+      $attrs = $ldap->fetch();
+      $name = $attrs[$var][0];
+
+      /* Check if this uid/cn is already assigned to any permission */
+      foreach($types as $ctype){
+        if(isset(  $this->member[$ctype][$name])){
+          print_red(sprintf(_("Can't add '%s' to the list of members, it is already used."),$attrs[$var][0]));
+          return;
+        }
+      }
+
+      /* Everything is fine. So add the given object to members */
+      $this->member[$type][$attrs[$var][0]] = $attrs ;
+    }else{
+      print_red(sprintf(_("Can't add '%s' to list of members, it is not reachable."),$dn));
+    }
+  }
 }
-
-
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
