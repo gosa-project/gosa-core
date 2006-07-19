@@ -149,7 +149,14 @@ class environment extends plugin
         $tmp = split("\|",$share);
         $tmp2['server']      =$tmp[0];
         $tmp2['name']        =$tmp[1];
-        $tmp2['mountPoint']  =$tmp[2];
+        
+        /* Decode base64 if needed */
+        if (!preg_match('%/%', $tmp[2])){
+          $tmp2['mountPoint']  =base64_decode($tmp[2]);
+        } else {
+          $tmp2['mountPoint']  =$tmp[2];
+        }
+
         if(isset($tmp[3])){
           $tmp2['PwdHash']  =$tmp[3];
         }else{
@@ -1004,7 +1011,11 @@ class environment extends plugin
     /* Prepare Shares */
     $this->attrs['gotoShare']=array();
     foreach($this->gotoShares as $name => $share){
-      $this->attrs['gotoShare'][] =$share['server']."|".$share['name']."|".$share['mountPoint']."|".$share['PwdHash']."|".$share['Username'];
+      $mntp= $share['mountPoint'];
+      if (!preg_match('=^[a-z0-9+_/%-]+$=i', $mntp)){
+        $mntp= base64_encode($mntp);
+      }
+      $this->attrs['gotoShare'][] =$share['server']."|".$share['name']."|".$mntp."|".$share['PwdHash']."|".$share['Username'];
     }
 
 

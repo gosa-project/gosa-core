@@ -32,7 +32,7 @@ class servnfs extends plugin
   {
     plugin::plugin ($config, $dn);
     
-    $this->types   = array("NFS"=>"NFS","samba"=>"samba","netatalk"=>"netatalk","NCP"=>"NCP");
+    $this->types   = array("CIFS" => "CIFS", "NFS"=>"NFS","samba"=>"samba","netatalk"=>"netatalk","NCP"=>"NCP");
     if($dn){
       $this->host = substr($dn, 3, strpos($dn, ',')-3);
     }
@@ -71,10 +71,16 @@ class servnfs extends plugin
       list($this->name, $this->description, $this->type, $this->charset,
            $this->path, $this->option, $this->volume)= split("\|",$entry."|");
       $this->is_edit          = true;
+
+      /* Decode if path is base64 */
+      if (!preg_match('%/%', $this->path)){
+        $this->path= base64_decode($this->path);
+      }
       
     }else{
       $this->attributes[] = "name";
     }
+
     
     $this->create_mount_init = $mount;
   }
@@ -181,7 +187,7 @@ class servnfs extends plugin
 
     // only 0-9a-z
     if(!$this->is_edit){
-      if(preg_match("/[^a-z0-9\.\-_]/i",$this->name)){
+      if(!preg_match("/^[a-z0-9\.\-_]+$/i",$this->name)){
         $message[]=_("Please specify a valid name for your share.");
       }
       if(empty($this->name)){
@@ -189,11 +195,11 @@ class servnfs extends plugin
       }
     }
 
-    if(preg_match("/\|/",$this->description)){
+    if(preg_match("/[^a-z0-9._+ \|-]+/i",$this->description)){
       $message[]=_("Description contains invalid characters.");
     }
 
-    if(preg_match("/\|/",$this->volume)){
+    if(preg_match("/[^a-z0-9._+ |-]/i",$this->volume)){
       $message[]=_("Volume contains invalid characters.");
     }
   
@@ -201,7 +207,11 @@ class servnfs extends plugin
       $message[]=_("Path contains invalid characters.");
     }
 
-    if(preg_match("/\|/",$this->option)){
+    if(!preg_match("%/%",$this->path)){
+      $message[]=_("Path must contain at least one slash.");
+    }
+
+    if(preg_match("/[^a-z0-9._+ \|-]/i",$this->option)){
       $message[]=_("Option contains invalid characters.");
     }
 
@@ -244,7 +254,14 @@ class servnfs extends plugin
     $s_return.= $this->description."|";     
     $s_return.= $this->type."|";     
     $s_return.= $this->charset."|";     
-    $s_return.= $this->path."|";     
+
+    /* Encode path if it contains non ascii letters */
+    $path= $this->path;
+    if (!preg_match('=^[a-z0-9+_/%-]+$=i', $path)){
+      $path= base64_encode($this->path);
+    }
+
+    $s_return.= $path."|";     
     $s_return.= $this->option."|";     
     $s_return.= $this->volume;     
 
