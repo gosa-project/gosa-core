@@ -72,11 +72,6 @@ class servnfs extends plugin
            $this->path, $this->option, $this->volume)= split("\|",$entry."|");
       $this->is_edit          = true;
 
-      /* Decode if path is base64 */
-      if (!preg_match('%/%', $this->path)){
-        $this->path= base64_decode($this->path);
-      }
-      
     }else{
       $this->attributes[] = "name";
     }
@@ -207,10 +202,6 @@ class servnfs extends plugin
       $message[]=_("Path contains invalid characters.");
     }
 
-    if(!preg_match("%/%",$this->path)){
-      $message[]=_("Path must contain at least one slash.");
-    }
-
     if(preg_match("/[^a-z0-9._+ \|-]/i",$this->option)){
       $message[]=_("Option contains invalid characters.");
     }
@@ -254,14 +245,7 @@ class servnfs extends plugin
     $s_return.= $this->description."|";     
     $s_return.= $this->type."|";     
     $s_return.= $this->charset."|";     
-
-    /* Encode path if it contains non ascii letters */
-    $path= $this->path;
-    if (!preg_match('=^[a-z0-9+_/%-]+$=i', $path)){
-      $path= base64_encode($this->path);
-    }
-
-    $s_return.= $path."|";     
+    $s_return.= $this->path."|";     
     $s_return.= $this->option."|";     
     $s_return.= $this->volume;     
 
