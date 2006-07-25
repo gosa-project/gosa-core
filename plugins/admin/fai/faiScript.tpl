@@ -25,9 +25,11 @@
 					</tr>
 				</table>
 		</td>
-		<td style="border-left: 1px solid rgb(160, 160, 160);">
-		   &nbsp;
-	 	</td>
+	</tr>
+</table>
+<p class="seperator">&nbsp;</p>
+<table width="100%" summary="">
+	<tr>
 		<td>
 				<h2><img class="center" alt="" src="images/fai_script.png" align="middle" title="{t}Objects{/t}">&nbsp;
 					<LABEL for="SubObject">
