@@ -85,7 +85,9 @@ class mailMethodKolab extends mailMethodCyrus
     /* Kolab shared folder names are like ' shared.uid@server.de ' 
         So overwrite uid to match these folder names. Else we can't read quota settings etc. 
         #FIXME is there a better way to detect if it is 'shared.' or 'shared+' or 'kolab+shared.' or what ever ?*/
-    $mailObject->uid = "shared.".$mailObject->uid."@".preg_replace("/^.*@/","",$mailObject->mail);
+    if(get_class($mailObject) == "mailgroup"){
+     $mailObject->uid = "shared.".$mailObject->uid."@".preg_replace("/^.*@/","",$mailObject->mail);
+    }
 
     /* Convert attributes and objectClasses */
     foreach ($this->attribute_map as $dest => $source){
