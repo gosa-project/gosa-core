@@ -714,6 +714,14 @@ class printgeneric extends plugin
       $this->attrs['objectClass'][] = "gosaAdministrativeUnitTag";
     }
 
+    if($this->orig_dn == 'new'){
+      foreach(array("gotoGroupPrinter","gotoUserAdminPrinter","gotoGroupAdminPrinter","gotoUserPrinter") as $checkVar){
+        if(count($this->attrs[$checkVar])  == 0 || empty($this->attrs[$checkVar])){
+          unset($this->attrs[$checkVar]);
+        }
+      }
+    }
+
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
     if ($this->orig_dn == 'new'){
