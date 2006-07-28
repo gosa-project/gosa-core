@@ -51,6 +51,7 @@ if ($remove_lock){
 
 	$display.= $output;
 	$_SESSION['department']= $department;
+	$config = $department->config;
 }
 
 ?>

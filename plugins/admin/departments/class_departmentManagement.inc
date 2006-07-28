@@ -208,6 +208,11 @@ class departmentManagement extends plugin
 
         /* This var indicated that there is an object which isn't saved right now. */
         $this->ObjectInSaveMode = true;
+      
+        $this->config->get_departments($this->dn);
+        $this->config->make_idepartments();
+
+        $this->DivListDepartment->config=$this->config;
 
       } else {
         /* Ok. There seem to be errors regarding to the tab data,
