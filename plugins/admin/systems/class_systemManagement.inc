@@ -395,8 +395,19 @@ class systems extends plugin
       if (count($message) == 0){
 
         /* Save terminal data to ldap */
-        gosa_log ("System object'".$this->dn."' has been saved");
+        if(isset($_SESSION['SelectedSystemType']['ogroup'])){
+          foreach (array("workservice", "termservice") as $cls){
+            if (isset($this->systab->by_object[$cls])){
+              $this->systab->by_object[$cls]->gotoXMouseport= "";
+              $this->systab->by_object[$cls]->gotoXMouseType= "";
+              $this->systab->by_object[$cls]->gotoXResolution= "";
+              $this->systab->by_object[$cls]->gotoXColordepth= "";
+            }
+          }
+        }
+
         $this->systab->save();
+        gosa_log ("System object'".$this->dn."' has been saved");
 
         /* Incoming behavior; you can select a system type and an ogroup membership. 
          * If this object is an Incoming object, $_SESSION['SelectedSystemType'] isset.
