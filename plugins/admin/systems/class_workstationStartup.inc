@@ -67,12 +67,18 @@ class workstartup extends plugin
     $_SESSION['getAvailableClassesForThisRelease_CACHE'] = array();
     $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'] = array();
 
-    /* Search all FAI objects */
-    $ldap->search("(|(objectClass=FAIpackageList)(objectClass=FAItemplate)(objectClass=FAIvariable)(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)(objectClass=FAIpartitionTable))",array("cn","objectClass","FAIdebianSection"));
-    /* Sort all entries, and attach elementtype.
-     * To be able to show the types in the listbox.
-     */
-    while($attr = $ldap->fetch()){
+    $ui = get_userinfo();
+    $res = get_list(          "(|(objectClass=FAIpackageList)".
+        "(objectClass=FAItemplate)".
+        "(objectClass=FAIvariable)".
+        "(objectClass=FAIscript)".
+        "(objectClass=FAIhook)".
+        "(objectClass=FAIprofile)".
+        "(objectClass=FAIpartitionTable))",
+        $ui->subtreeACL,$this->config->current['BASE'],
+        array("cn","objectClass","FAIdebianSection"));
+    
+    foreach($res as $attr){
       $cn = $attr['cn'][0];
     
       $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'][] = $attr;
@@ -339,28 +345,6 @@ class workstartup extends plugin
      */ 
     if(isset($_SESSION['getAvailableClassesForThisRelease_CACHE'][$release]))  {
       return($_SESSION['getAvailableClassesForThisRelease_CACHE'][$release]);
-    }
-
-    /* Create cache with all classes 
-     */
-    if((!isset($_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'])) ||
-       (!is_array($_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'])) ||
-       (count($_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES']) ==0 )){
-
-      /* Get ldap connection */
-      $ldap   = $this->config->get_ldap_link();
-      $ldap->cd($this->config->current['BASE']);
-
-      /* Get possible classes ... 
-         This would be faste with some kind of caching ... 
-       */
-      $ldap->search("(|(objectClass=FAIpackageList)(objectClass=FAItemplate)(objectClass=FAIvariable)(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)(objectClass=FAIpartitionTable))",array("cn"),true);
-      /* Sort all entries, and attach elementtype.
-       * To be able to show the types in the listbox.
-       */
-      while($attr = $ldap->fetch()){
-        $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'][] = $attr;
-      }  
     }
 
     /* Walk through cache and get out what we need.
