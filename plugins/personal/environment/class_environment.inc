@@ -587,6 +587,9 @@ class environment extends plugin
         $key  = preg_replace("/_+[xy]$/","",$key);
         $key  = base64_decode($key);
         $this->gotoShares[$key]['PwdHash'] = "";
+        if(preg_match("/^!/",$this->gotoShares[$key]['server'])){
+          unset($this->gotoShares[$key]);
+        }
       }
     }
 
