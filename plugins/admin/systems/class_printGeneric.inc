@@ -508,7 +508,11 @@ class printgeneric extends plugin
     $smarty->assign("AdminMember"    ,$this->AdminMember);
     $smarty->assign("AdminMembers"   ,$adminlist);
     $smarty->assign("AdminMemberKeys",array_flip($adminlist));
-    $smarty->assign("netconfig", $this->netConfigDNS->execute());
+    if($this->BelongsTo == "Printer"){
+      $smarty->assign("netconfig", $this->netConfigDNS->execute());
+    } else {
+      $smarty->assign("netconfig", "");
+    }
 
     return($display.$smarty->fetch (get_template_path('printer.tpl', TRUE)));
   }
@@ -577,7 +581,9 @@ class printgeneric extends plugin
   {
     /* Call common method to give check the hook */
     $message= plugin::check();
-    $message= array_merge($message, $this->netConfigDNS->check());
+    if ($this->BelongsTo == 'printer'){
+      $message= array_merge($message, $this->netConfigDNS->check());
+    }
 
     /* Don't display check messages if this is a template object */
     if(isset($this->parent->by_object['workgeneric'])){
