@@ -22,7 +22,7 @@
    </table>
 
   </td>
-  <td><h2>Trusted networks</h2>
+  <td style="vertical-align:top;border-left:1px solid #A0A0A0;"><h2>Trusted networks</h2>
 
    <table width='100%'>
     <tr>
@@ -40,7 +40,13 @@
   </td>
  </tr>
  <tr>
-  <td><h2>Flags</h2>
+  <td colspan=2>
+   <p class='seperator'>&nbsp;</p>
+  </td>
+ </tr>
+ <tr>
+  <td>
+	<h2>Flags</h2>
 	
    <table>
     <tr>
@@ -52,7 +58,7 @@
     </tr>
    </table>
   </td>
-  <td style='vertical-align:bottom;'>
+  <td style="vertical-align:bottom;border-left:1px solid #A0A0A0;">
    <table>
     <tr>
      <td>
@@ -63,6 +69,11 @@
     </tr>
    </table>
 
+  </td>
+ </tr>
+ <tr>
+  <td colspan=2>
+   <p class='seperator'>&nbsp;</p>
   </td>
  </tr>
  <tr>

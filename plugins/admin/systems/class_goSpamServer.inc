@@ -147,7 +147,6 @@ class goSpamServer extends plugin{
         }
       }else{
         $ret = $this->dialog->save();
-        print_a($ret);
         if((!empty($ret['orig_name'])) && isset($this->Rules[$ret['orig_name']])){
           unset($this->Rules[$ret['orig_name']]);
         }
@@ -301,9 +300,6 @@ class goSpamServer extends plugin{
   {
     if(isset($_POST['goSpamServer'])){
       plugin::save_object();
-
-      print_a($_POST);
-
       foreach($this->Flags as $flag){
         $var = "saFlags".$flag;
         if(isset($_POST[$var])){
